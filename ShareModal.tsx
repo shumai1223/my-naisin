@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Copy, Download, Share2, X, Loader2, CheckCircle, Image as ImageIcon } from 'lucide-react';
+import { Download, Share2, X, Loader2, CheckCircle, Image as ImageIcon } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import html2canvas from 'html2canvas';
 
@@ -67,15 +67,6 @@ export function ShareModal({ open, onClose, result, scores, shareUrl }: ShareMod
     setToast(message);
     window.setTimeout(() => setToast(null), 2200);
   }, []);
-
-  const onCopy = React.useCallback(async () => {
-    try {
-      await navigator.clipboard.writeText(shareText);
-      showToast('テキストをコピーした');
-    } catch {
-      showToast('コピーできなかった…ブラウザ設定を確認してね');
-    }
-  }, [shareText, showToast]);
 
   const generatePngWithHtml2Canvas = React.useCallback(async () => {
     if (!captureRef.current) return null;
@@ -258,13 +249,6 @@ export function ShareModal({ open, onClose, result, scores, shareUrl }: ShareMod
                         {saveStatus === 'generating' ? '生成中...' : saveStatus === 'success' ? '保存完了！' : '画像を保存'}
                       </Button>
                       <Button
-                        variant="secondary"
-                        onClick={onCopy}
-                        leftIcon={<Copy className="h-4 w-4" />}
-                      >
-                        テキストをコピー
-                      </Button>
-                      <Button
                         variant="ghost"
                         onClick={onNativeShare}
                         leftIcon={<Share2 className="h-4 w-4" />}
@@ -273,7 +257,6 @@ export function ShareModal({ open, onClose, result, scores, shareUrl }: ShareMod
                         共有（対応端末）
                       </Button>
                     </div>
-
                   </div>
                 </div>
 
