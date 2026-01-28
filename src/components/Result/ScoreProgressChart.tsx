@@ -25,7 +25,7 @@ interface ChartDataPoint {
 
 export function ScoreProgressChart({ currentTotal, currentMax, currentMode }: ScoreProgressChartProps) {
   const [history, setHistory] = React.useState<SavedHistoryEntry[]>([]);
-  const [expanded, setExpanded] = React.useState(true);
+  const [expanded, setExpanded] = React.useState(false);
 
   React.useEffect(() => {
     const entries = readHistory();

@@ -36,7 +36,6 @@ import { ScoreGauge } from '@/components/Result/ScoreGauge';
 import { ShareModal } from '@/components/Result/ShareModal';
 import { StudyAdvice } from '@/components/Result/StudyAdvice';
 import { ScoreProgressChart } from '@/components/Result/ScoreProgressChart';
-import { StudyStreakCard } from '@/components/Result/StudyStreakCard';
 import { SubjectImprovementCard } from '@/components/Result/SubjectImprovementCard';
 import { PersonalGoalCard } from '@/components/Result/PersonalGoalCard';
 import { QuickStudyTimer } from '@/components/Result/QuickStudyTimer';
@@ -327,6 +326,13 @@ export default function Page() {
                   </div>
                 </Card>
 
+                {/* 成績推移グラフ */}
+                <ScoreProgressChart 
+                  currentTotal={result.total} 
+                  currentMax={result.max} 
+                  currentMode={mode} 
+                />
+
                 <ComparisonCard result={result} scores={scores} saveEnabled={saveEnabled} lastSavedId={lastSaved?.id} />
 
                 <ReasoningCard result={result} scores={scores} />
@@ -342,18 +348,8 @@ export default function Page() {
                 {/* レーダーチャート */}
                 <RadarChart scores={scores} mode={mode} />
 
-                {/* 学習ストリーク */}
-                <StudyStreakCard />
-
                 {/* 達成バッジ */}
                 <AchievementBadges scores={scores} result={result} />
-
-                {/* 成績推移グラフ */}
-                <ScoreProgressChart 
-                  currentTotal={result.total} 
-                  currentMax={result.max} 
-                  currentMode={mode} 
-                />
 
                 {/* 教科別変化 */}
                 <SubjectImprovementCard currentScores={scores} />
