@@ -117,11 +117,22 @@ export function MotivationCard({ result }: MotivationCardProps) {
   // Safely calculate percent (truncate decimals)
   const displayPercent = Math.floor(result?.percent || 0);
 
-  // Random tip from the tips array
+  // Cycling tips
   const [tipIndex, setTipIndex] = React.useState(0);
+  const [showAllTips, setShowAllTips] = React.useState(false);
+  
   React.useEffect(() => {
     setTipIndex(Math.floor(Math.random() * config.tips.length));
   }, [config.tips.length]);
+
+  // Auto-cycle tips every 5 seconds
+  React.useEffect(() => {
+    if (showAllTips) return;
+    const interval = setInterval(() => {
+      setTipIndex((prev) => (prev + 1) % config.tips.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [config.tips.length, showAllTips]);
 
   return (
     <motion.div
@@ -207,10 +218,49 @@ export function MotivationCard({ result }: MotivationCardProps) {
               <Sparkles className="h-4 w-4 text-white" />
             </div>
             <div className="flex-1 min-w-0">
-              <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400">今日のアドバイス</div>
-              <p className={`mt-1 text-sm font-medium ${config.textColor}`}>{config.tips[tipIndex]}</p>
+              <div className="flex items-center justify-between">
+                <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400">今日のアドバイス</div>
+                <button
+                  onClick={() => setShowAllTips(!showAllTips)}
+                  className="text-[10px] text-slate-400 hover:text-slate-600"
+                >
+                  {showAllTips ? '閉じる' : 'すべて見る'}
+                </button>
+              </div>
+              {showAllTips ? (
+                <ul className="mt-2 space-y-2">
+                  {config.tips.map((tip, i) => (
+                    <li key={i} className={`text-xs ${config.textColor} flex items-start gap-2`}>
+                      <span className={`shrink-0 grid h-4 w-4 place-items-center rounded-full text-[10px] font-bold text-white bg-gradient-to-br ${config.gradient}`}>
+                        {i + 1}
+                      </span>
+                      {tip}
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <motion.p
+                  key={tipIndex}
+                  initial={{ opacity: 0, y: 5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className={`mt-1 text-sm font-medium ${config.textColor}`}
+                >
+                  {config.tips[tipIndex]}
+                </motion.p>
+              )}
             </div>
           </div>
+          {!showAllTips && (
+            <div className="flex justify-center gap-1 mt-3">
+              {config.tips.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setTipIndex(i)}
+                  className={`w-1.5 h-1.5 rounded-full transition-all ${i === tipIndex ? `bg-gradient-to-r ${config.gradient}` : 'bg-slate-300'}`}
+                />
+              ))}
+            </div>
+          )}
         </motion.div>
 
         {/* Sub message */}

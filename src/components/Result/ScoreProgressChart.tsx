@@ -66,10 +66,10 @@ export function ScoreProgressChart({ currentTotal, currentMax, currentMode }: Sc
     return { direction: 'neutral' as const, change };
   }, [chartData]);
 
-  // Calculate chart dimensions
+  // Calculate chart dimensions - fixed aspect ratio
   const chartWidth = 100;
-  const chartHeight = 60;
-  const padding = { top: 10, right: 10, bottom: 20, left: 10 };
+  const chartHeight = 50;
+  const padding = { top: 8, right: 8, bottom: 12, left: 16 };
   const innerWidth = chartWidth - padding.left - padding.right;
   const innerHeight = chartHeight - padding.top - padding.bottom;
 
@@ -195,13 +195,14 @@ export function ScoreProgressChart({ currentTotal, currentMax, currentMode }: Sc
           <div className="relative mb-4">
             <svg
               viewBox={`0 0 ${chartWidth} ${chartHeight}`}
-              className="w-full h-40"
-              preserveAspectRatio="none"
+              className="w-full"
+              style={{ aspectRatio: '2 / 1' }}
+              preserveAspectRatio="xMidYMid meet"
             >
-              {/* Grid lines */}
+              {/* Grid lines with Y-axis labels */}
               {[0, 25, 50, 75, 100].map((pct) => {
                 const y = padding.top + innerHeight - ((pct - yMin) / (yMax - yMin)) * innerHeight;
-                if (y < padding.top || y > padding.top + innerHeight) return null;
+                if (y < padding.top - 2 || y > padding.top + innerHeight + 2) return null;
                 return (
                   <g key={pct}>
                     <line
@@ -210,9 +211,18 @@ export function ScoreProgressChart({ currentTotal, currentMax, currentMode }: Sc
                       x2={padding.left + innerWidth}
                       y2={y}
                       stroke="#e2e8f0"
-                      strokeWidth="0.3"
-                      strokeDasharray="2,2"
+                      strokeWidth="0.2"
+                      strokeDasharray="1,1"
                     />
+                    <text
+                      x={padding.left - 2}
+                      y={y + 1}
+                      textAnchor="end"
+                      className="fill-slate-400"
+                      style={{ fontSize: '2.5px' }}
+                    >
+                      {pct}%
+                    </text>
                   </g>
                 );
               })}
@@ -267,19 +277,40 @@ export function ScoreProgressChart({ currentTotal, currentMax, currentMode }: Sc
               {/* X-axis labels */}
               {chartData.map((d, i) => {
                 const x = padding.left + (i / Math.max(chartData.length - 1, 1)) * innerWidth;
+                // Only show some labels if too many points
+                if (chartData.length > 6 && i % 2 !== 0 && i !== chartData.length - 1) return null;
                 return (
                   <text
                     key={i}
                     x={x}
-                    y={chartHeight - 2}
+                    y={chartHeight - 1}
                     textAnchor="middle"
                     className="fill-slate-400"
-                    style={{ fontSize: '3px' }}
+                    style={{ fontSize: '2.5px' }}
                   >
                     {d.dateLabel}
                   </text>
                 );
               })}
+
+              {/* Y-axis line */}
+              <line
+                x1={padding.left}
+                y1={padding.top}
+                x2={padding.left}
+                y2={padding.top + innerHeight}
+                stroke="#cbd5e1"
+                strokeWidth="0.3"
+              />
+              {/* X-axis line */}
+              <line
+                x1={padding.left}
+                y1={padding.top + innerHeight}
+                x2={padding.left + innerWidth}
+                y2={padding.top + innerHeight}
+                stroke="#cbd5e1"
+                strokeWidth="0.3"
+              />
             </svg>
           </div>
 

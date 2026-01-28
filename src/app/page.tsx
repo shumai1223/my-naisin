@@ -36,6 +36,11 @@ import { ScoreGauge } from '@/components/Result/ScoreGauge';
 import { ShareModal } from '@/components/Result/ShareModal';
 import { StudyAdvice } from '@/components/Result/StudyAdvice';
 import { ScoreProgressChart } from '@/components/Result/ScoreProgressChart';
+import { StudyStreakCard } from '@/components/Result/StudyStreakCard';
+import { SubjectImprovementCard } from '@/components/Result/SubjectImprovementCard';
+import { PersonalGoalCard } from '@/components/Result/PersonalGoalCard';
+import { QuickStudyTimer } from '@/components/Result/QuickStudyTimer';
+import { DailyQuoteCard } from '@/components/Result/DailyQuoteCard';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { Switch } from '@/components/ui/Switch';
@@ -328,11 +333,17 @@ export default function Page() {
 
                 <RankCard result={result} />
 
+                {/* 今日の名言 */}
+                <DailyQuoteCard />
+
                 {/* 動機付けメッセージ */}
                 <MotivationCard result={result} />
 
                 {/* レーダーチャート */}
                 <RadarChart scores={scores} mode={mode} />
+
+                {/* 学習ストリーク */}
+                <StudyStreakCard />
 
                 {/* 達成バッジ */}
                 <AchievementBadges scores={scores} result={result} />
@@ -344,8 +355,17 @@ export default function Page() {
                   currentMode={mode} 
                 />
 
+                {/* 教科別変化 */}
+                <SubjectImprovementCard currentScores={scores} />
+
                 {/* 勉強アドバイス */}
                 <StudyAdvice scores={scores} result={result} />
+
+                {/* マイ目標 */}
+                <PersonalGoalCard />
+
+                {/* クイック勉強タイマー */}
+                <QuickStudyTimer />
 
                 {/* 教科別分析 */}
                 <SubjectBreakdown scores={scores} mode={mode} />
