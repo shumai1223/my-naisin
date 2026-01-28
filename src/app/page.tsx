@@ -40,6 +40,7 @@ import { Card } from '@/components/ui/Card';
 import { Switch } from '@/components/ui/Switch';
 import { HistoryPanel } from '@/components/HistoryPanel';
 import { PrintButton } from '@/components/PrintButton';
+import { BlogSection } from '@/components/BlogSection';
 
 function popConfetti() {
   confetti({
@@ -349,6 +350,9 @@ export default function Page() {
 
               </section>
             )}
+
+          {/* 📚 ブログセクション - 目立つ位置に配置 */}
+          <BlogSection />
 
           {/* 計算履歴 */}
           <HistoryPanel onLoadEntry={onLoadHistory} />

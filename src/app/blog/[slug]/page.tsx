@@ -90,33 +90,17 @@ export default async function BlogPostPage({ params }: PageProps) {
         </header>
 
         {/* Article Content */}
-        <article className="prose prose-slate prose-lg max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-h2:text-xl prose-h2:mt-8 prose-h2:mb-4 prose-h3:text-lg prose-h3:mt-6 prose-h3:mb-3 prose-h4:text-base prose-p:leading-relaxed prose-li:leading-relaxed prose-strong:text-slate-800 prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline">
+        <article className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
           <div
-            className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:p-8"
+            className="blog-content"
             dangerouslySetInnerHTML={{
               __html: post.content
-                .replace(/^## /gm, '<h2>')
-                .replace(/^### /gm, '<h3>')
-                .replace(/^#### /gm, '<h4>')
-                .replace(/^##### /gm, '<h5>')
-                .replace(/\n\n/g, '</p><p>')
-                .replace(/<h2>/g, '</p><h2>')
-                .replace(/<h3>/g, '</p><h3>')
-                .replace(/<h4>/g, '</p><h4>')
-                .replace(/<h5>/g, '</p><h5>')
-                .replace(/<\/h2>\n/g, '</h2><p>')
-                .replace(/<\/h3>\n/g, '</h3><p>')
-                .replace(/<\/h4>\n/g, '</h4><p>')
-                .replace(/<\/h5>\n/g, '</h5><p>')
+                .replace(/## /g, '<h2>')
+                .replace(/### /g, '<h3>')
+                .replace(/#### /g, '<h4>')
+                .replace(/---/g, '<hr>')
                 .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
-                .replace(/^\- /gm, '<li>')
-                .replace(/<li>(.+)/gm, '<li>$1</li>')
-                .replace(/\n<li>/g, '<ul><li>')
-                .replace(/<\/li>\n(?!<li>)/g, '</li></ul>')
-                .replace(/\|(.+)\|/g, (match) => {
-                  const cells = match.split('|').filter(Boolean);
-                  return `<tr>${cells.map(cell => `<td class="border border-slate-200 px-3 py-2">${cell.trim()}</td>`).join('')}</tr>`;
-                })
+                .replace(/<!-- AD_PLACEHOLDER -->/g, '<div class="ad-placeholder">📢 広告スペース</div>')
             }}
           />
         </article>
