@@ -1,0 +1,504 @@
+'use client';
+
+import { Shield, ArrowLeft, Cookie, Eye, BarChart3, ExternalLink, Users, Database, Lock, Mail, Bell, FileCheck } from 'lucide-react';
+import Link from 'next/link';
+
+import { APP_NAME } from '@/lib/constants';
+
+export default function PrivacyPage() {
+  const lastUpdated = '2026年1月28日';
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="mx-auto max-w-3xl px-4 py-12">
+        {/* Back link */}
+        <Link 
+          href="/" 
+          className="mb-8 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-medium text-slate-600 shadow-sm transition-all hover:bg-slate-50 hover:shadow"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          トップに戻る
+        </Link>
+
+        {/* Header */}
+        <div className="mb-8 flex items-center gap-4">
+          <div className="grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 shadow-lg shadow-emerald-200">
+            <Shield className="h-7 w-7 text-white" />
+          </div>
+          <div>
+            <h1 className="text-2xl font-bold text-slate-800">プライバシーポリシー</h1>
+            <p className="text-sm text-slate-500">Privacy Policy</p>
+          </div>
+        </div>
+
+        {/* Summary Box */}
+        <div className="mb-8 rounded-2xl border-2 border-emerald-200 bg-gradient-to-br from-emerald-50 to-teal-50 p-6">
+          <h3 className="mb-3 flex items-center gap-2 text-base font-bold text-emerald-800">
+            <FileCheck className="h-5 w-5" />
+            プライバシーポリシーの要約
+          </h3>
+          <ul className="space-y-2 text-sm text-emerald-700">
+            <li className="flex gap-2">
+              <span className="text-emerald-500">✓</span>
+              <span>当サイトは個人を特定できる情報を直接収集しません</span>
+            </li>
+            <li className="flex gap-2">
+              <span className="text-emerald-500">✓</span>
+              <span>入力データはお使いの端末内のみに保存され、サーバーには送信されません</span>
+            </li>
+            <li className="flex gap-2">
+              <span className="text-emerald-500">✓</span>
+              <span>広告配信・アクセス解析のためにCookieを使用します</span>
+            </li>
+            <li className="flex gap-2">
+              <span className="text-emerald-500">✓</span>
+              <span>18歳未満の方は保護者の同意を得てからご利用ください</span>
+            </li>
+          </ul>
+        </div>
+
+        {/* Content */}
+        <div className="space-y-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
+          
+          {/* はじめに */}
+          <section>
+            <h2 className="mb-3 text-lg font-bold text-slate-800">1. はじめに</h2>
+            <p className="text-sm leading-relaxed text-slate-600">
+              {APP_NAME}（以下「当サイト」）は、ユーザーのプライバシーを最大限に尊重し、
+              個人情報の保護に全力で努めています。本プライバシーポリシーでは、当サイトが取得する情報、
+              その取り扱い方法、ユーザーの権利、およびデータ保護に関する当サイトの取り組みについて
+              詳細に説明いたします。
+            </p>
+            <p className="mt-3 text-sm leading-relaxed text-slate-600">
+              当サイトをご利用になる前に、本プライバシーポリシーを注意深くお読みください。
+              当サイトを利用された場合は、本ポリシーに記載されたすべての条項に同意いただいたものとみなされます。
+              本ポリシーに同意いただけない場合は、当サイトのご利用をお控えください。
+            </p>
+            <p className="mt-3 text-sm leading-relaxed text-slate-600">
+              当サイトは、日本国内の法令および国際的なプライバシー保護の基準に準拠し、
+              透明性のある情報管理を行うことをお約束いたします。
+            </p>
+          </section>
+
+          {/* 収集する情報 */}
+          <section>
+            <div className="mb-3 flex items-center gap-2">
+              <Database className="h-5 w-5 text-emerald-500" />
+              <h2 className="text-lg font-bold text-slate-800">2. 収集する情報</h2>
+            </div>
+            <div className="rounded-xl bg-emerald-50 p-4">
+              <p className="text-sm font-medium text-emerald-700">
+                ✓ 当サイトは個人を特定できる情報を直接収集しません
+              </p>
+            </div>
+            <p className="mt-3 text-sm leading-relaxed text-slate-600">
+              当サイトは、ユーザーのプライバシーを最優先に考え、個人を特定できる情報（氏名、住所、電話番号、
+              メールアドレス等）を直接収集することはありません。入力された成績データは、お使いのブラウザの
+              ローカルストレージにのみ保存され、当サイトのサーバーに送信されることは一切ありません。
+            </p>
+            <p className="mt-3 text-sm leading-relaxed text-slate-600">
+              ユーザーが「記録を保存」機能をONにした場合、成績の履歴（保存日時・任意のメモ）も
+              同様にお使いの端末内にのみ保存されます。この履歴データは最大30件まで保存され、
+              古いデータから自動的に削除されます。
+            </p>
+            
+            <h3 className="mb-2 mt-4 text-sm font-bold text-slate-700">2.1 自動的に収集される情報</h3>
+            <p className="text-sm leading-relaxed text-slate-600">
+              当サイトでは、サービス向上のために以下の情報を自動的に収集する場合があります：
+            </p>
+            <ul className="mt-2 space-y-1 text-sm leading-relaxed text-slate-600">
+              <li className="flex gap-2">
+                <span className="text-emerald-500">•</span>
+                ブラウザの種類およびバージョン
+              </li>
+              <li className="flex gap-2">
+                <span className="text-emerald-500">•</span>
+                オペレーティングシステムの種類
+              </li>
+              <li className="flex gap-2">
+                <span className="text-emerald-500">•</span>
+                アクセス日時およびページ閲覧履歴
+              </li>
+              <li className="flex gap-2">
+                <span className="text-emerald-500">•</span>
+                リファラー（参照元URL）
+              </li>
+              <li className="flex gap-2">
+                <span className="text-emerald-500">•</span>
+                IPアドレス（匿名化処理を行います）
+              </li>
+            </ul>
+            <p className="mt-3 text-sm leading-relaxed text-slate-600">
+              これらの情報は、アクセス解析ツール（Google Analytics等）を通じて収集され、
+              サイトの改善およびユーザー体験の向上のためにのみ使用されます。
+              個人を特定するために使用されることはありません。
+            </p>
+          </section>
+
+          {/* ローカルストレージ */}
+          <section>
+            <div className="mb-3 flex items-center gap-2">
+              <Lock className="h-5 w-5 text-blue-500" />
+              <h2 className="text-lg font-bold text-slate-800">3. ローカルストレージの使用</h2>
+            </div>
+            <p className="mb-3 text-sm leading-relaxed text-slate-600">
+              当サイトでは、ユーザーの利便性向上のためにブラウザのローカルストレージ機能を使用しています。
+              ローカルストレージとは、お使いのブラウザにデータを保存する技術であり、
+              保存されたデータは当サイトのサーバーに送信されることはありません。
+            </p>
+            
+            <h3 className="mb-2 mt-4 text-sm font-bold text-slate-700">3.1 保存される情報の種類</h3>
+            <ul className="space-y-2 text-sm leading-relaxed text-slate-600">
+              <li className="flex gap-2">
+                <span className="text-blue-500">•</span>
+                <strong>成績データ：</strong>入力した各教科の評定値（ページを閉じても復元可能）
+              </li>
+              <li className="flex gap-2">
+                <span className="text-blue-500">•</span>
+                <strong>計算モード：</strong>選択した計算方式（標準方式/東京都方式）
+              </li>
+              <li className="flex gap-2">
+                <span className="text-blue-500">•</span>
+                <strong>成績履歴：</strong>保存機能ONの場合、過去の計算結果（保存日時・任意のメモを含む、最大30件）
+              </li>
+              <li className="flex gap-2">
+                <span className="text-blue-500">•</span>
+                <strong>Cookie同意状態：</strong>Cookie使用への同意有無
+              </li>
+              <li className="flex gap-2">
+                <span className="text-blue-500">•</span>
+                <strong>保存機能の設定：</strong>記録保存機能のON/OFF状態
+              </li>
+            </ul>
+            
+            <h3 className="mb-2 mt-4 text-sm font-bold text-slate-700">3.2 データの保持期間</h3>
+            <p className="text-sm leading-relaxed text-slate-600">
+              ローカルストレージに保存されたデータは、ユーザーがブラウザのデータを削除するか、
+              当サイトの設定からデータを削除するまで保持されます。成績履歴は最大30件まで保存され、
+              それを超える場合は古いデータから自動的に削除されます。
+            </p>
+            
+            <h3 className="mb-2 mt-4 text-sm font-bold text-slate-700">3.3 データの削除方法</h3>
+            <p className="text-sm leading-relaxed text-slate-600">
+              ローカルストレージに保存されたデータは、以下の方法で削除できます：
+            </p>
+            <ul className="mt-2 space-y-1 text-sm leading-relaxed text-slate-600">
+              <li className="flex gap-2">
+                <span className="text-blue-500">•</span>
+                ブラウザの設定から「閲覧履歴データの削除」を実行
+              </li>
+              <li className="flex gap-2">
+                <span className="text-blue-500">•</span>
+                ブラウザの開発者ツールからローカルストレージを手動で削除
+              </li>
+              <li className="flex gap-2">
+                <span className="text-blue-500">•</span>
+                当サイトの「記録を保存」機能をOFFにする（履歴のみ削除対象外）
+              </li>
+            </ul>
+            <div className="mt-4 rounded-xl border border-amber-200 bg-amber-50 p-4">
+              <p className="text-sm leading-relaxed text-amber-800">
+                <strong>ご注意：</strong>ブラウザの設定変更、キャッシュのクリア、プライベートブラウジングモードの使用、
+                または端末の変更により、保存されたデータが消失する場合があります。
+                重要なデータは別途記録しておくことをお勧めいたします。
+              </p>
+            </div>
+          </section>
+
+          {/* Cookieの使用 */}
+          <section>
+            <div className="mb-3 flex items-center gap-2">
+              <Cookie className="h-5 w-5 text-amber-500" />
+              <h2 className="text-lg font-bold text-slate-800">4. Cookie（クッキー）の使用について</h2>
+            </div>
+            <p className="text-sm leading-relaxed text-slate-600">
+              Cookie（クッキー）とは、ウェブサイトがお使いのブラウザに保存する小さなテキストファイルです。
+              当サイトでは、サービスの提供・改善のために複数の種類のCookieを使用しています。
+            </p>
+            
+            <h3 className="mb-2 mt-4 text-sm font-bold text-slate-700">4.1 使用するCookieの種類</h3>
+            
+            <div className="mt-3 space-y-3">
+              <div className="rounded-xl border border-blue-200 bg-blue-50 p-4">
+                <h4 className="flex items-center gap-2 text-sm font-bold text-blue-800">
+                  <span className="rounded bg-blue-500 px-1.5 py-0.5 text-[10px] text-white">必須</span>
+                  必須Cookie（ファーストパーティ）
+                </h4>
+                <p className="mt-2 text-xs leading-relaxed text-blue-700">
+                  サイトの基本機能に必要なCookieです。Cookie同意の設定状態や、記録保存機能のON/OFF状態を
+                  記憶するために使用します。これらのCookieを無効にすると、サイトが正常に動作しない場合があります。
+                </p>
+              </div>
+              
+              <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+                <h4 className="flex items-center gap-2 text-sm font-bold text-slate-700">
+                  <span className="rounded bg-slate-400 px-1.5 py-0.5 text-[10px] text-white">任意</span>
+                  分析Cookie（サードパーティ）
+                </h4>
+                <p className="mt-2 text-xs leading-relaxed text-slate-600">
+                  Google Analytics等のアクセス解析ツールが使用するCookieです。サイトの利用状況を匿名で収集し、
+                  サービス改善に役立てます。収集されるデータには、ページビュー数、滞在時間、参照元などが含まれます。
+                </p>
+              </div>
+              
+              <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+                <h4 className="flex items-center gap-2 text-sm font-bold text-slate-700">
+                  <span className="rounded bg-slate-400 px-1.5 py-0.5 text-[10px] text-white">任意</span>
+                  広告Cookie（サードパーティ）
+                </h4>
+                <p className="mt-2 text-xs leading-relaxed text-slate-600">
+                  Google AdSense等の広告配信サービスが使用するCookieです。ユーザーの興味・関心に基づいた
+                  広告を表示するために使用されます。これらのCookieはGoogleおよび広告パートナーによって管理されます。
+                </p>
+              </div>
+            </div>
+            
+            <h3 className="mb-2 mt-4 text-sm font-bold text-slate-700">4.2 Cookieの管理方法</h3>
+            <p className="text-sm leading-relaxed text-slate-600">
+              ユーザーは以下の方法でCookieを管理できます：
+            </p>
+            <ul className="mt-2 space-y-1 text-sm leading-relaxed text-slate-600">
+              <li className="flex gap-2">
+                <span className="text-amber-500">•</span>
+                <strong>当サイトのCookie設定：</strong>サイト初回訪問時に表示されるCookie同意画面で設定を選択
+              </li>
+              <li className="flex gap-2">
+                <span className="text-amber-500">•</span>
+                <strong>ブラウザ設定：</strong>各ブラウザの設定画面からCookieの受け入れ・拒否を設定
+              </li>
+              <li className="flex gap-2">
+                <span className="text-amber-500">•</span>
+                <strong>オプトアウト：</strong>各サービス提供元のオプトアウトページを利用
+              </li>
+            </ul>
+            <div className="mt-4 rounded-xl border border-amber-200 bg-amber-50 p-4">
+              <p className="text-sm leading-relaxed text-amber-800">
+                <strong>ご注意：</strong>必須Cookie以外を無効にしても、当サイトの基本機能はご利用いただけます。
+                ただし、一部の機能や広告の表示が制限される場合があります。
+              </p>
+            </div>
+          </section>
+
+          {/* Google AdSense */}
+          <section>
+            <div className="mb-3 flex items-center gap-2">
+              <Eye className="h-5 w-5 text-blue-500" />
+              <h2 className="text-lg font-bold text-slate-800">5. Google AdSenseについて</h2>
+            </div>
+            <div className="rounded-xl border border-blue-200 bg-blue-50 p-4">
+              <p className="text-sm leading-relaxed text-blue-800">
+                当サイトでは、Googleが提供する広告配信サービス「Google AdSense」を利用して広告を配信しています。
+              </p>
+            </div>
+            <div className="mt-4 space-y-3 text-sm leading-relaxed text-slate-600">
+              <p>
+                Googleなどの第三者配信事業者は、Cookieを使用して、ユーザーが当サイトや
+                他のサイトにアクセスした際の情報に基づいて広告を配信します。
+              </p>
+              <p>
+                Googleが広告のCookieを使用することにより、ユーザーが当サイトや
+                他のサイトにアクセスした際の情報に基づいて、Googleやそのパートナーが
+                適切な広告をユーザーに表示できます。
+              </p>
+              <p>
+                パーソナライズド広告を無効にしたい場合は、
+                <a 
+                  href="https://www.google.com/settings/ads" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-blue-600 underline hover:text-blue-700"
+                >
+                  Googleの広告設定
+                  <ExternalLink className="h-3 w-3" />
+                </a>
+                からオプトアウトできます。
+              </p>
+              <p>
+                また、
+                <a 
+                  href="https://www.aboutads.info/choices/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-blue-600 underline hover:text-blue-700"
+                >
+                  www.aboutads.info
+                  <ExternalLink className="h-3 w-3" />
+                </a>
+                にアクセスすることで、第三者配信事業者がパーソナライズド広告の掌載に
+                使用するCookieを無効にすることもできます。
+              </p>
+            </div>
+          </section>
+
+          {/* Amazonアソシエイト */}
+          <section>
+            <div className="mb-3 flex items-center gap-2">
+              <BarChart3 className="h-5 w-5 text-orange-500" />
+              <h2 className="text-lg font-bold text-slate-800">6. Amazonアソシエイトプログラムについて</h2>
+            </div>
+            <div className="rounded-xl border border-orange-200 bg-orange-50 p-4">
+              <p className="text-sm leading-relaxed text-orange-800">
+                当サイトは、Amazon.co.jpを宣伝しリンクすることによってサイトが紹介料を獲得できる手段を
+                提供することを目的に設定されたアフィリエイトプログラムである、
+                <strong>Amazonアソシエイトプログラム</strong>の参加者です。
+              </p>
+            </div>
+            <p className="mt-3 text-sm leading-relaxed text-slate-600">
+              当サイトにおいてAmazonの商品（参考書、学習教材等）を紹介する場合があり、
+              リンクを経由して購入された場合、当サイトに紹介料が支払われることがあります。
+              これによりユーザーの購入価格が変わることはありません。
+            </p>
+            <p className="mt-2 text-sm leading-relaxed text-slate-600">
+              Amazonアソシエイトプログラムの詳細については、
+              <a 
+                href="https://affiliate.amazon.co.jp/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-blue-600 underline hover:text-blue-700"
+              >
+                Amazon アソシエイト・プログラム
+                <ExternalLink className="h-3 w-3" />
+              </a>
+              をご参照ください。
+            </p>
+          </section>
+
+          {/* アクセス解析 */}
+          <section>
+            <h2 className="mb-3 text-lg font-bold text-slate-800">7. アクセス解析ツールについて</h2>
+            <p className="text-sm leading-relaxed text-slate-600">
+              当サイトでは、サービス向上およびユーザー体験の改善を目的として、
+              Googleアナリティクス等のアクセス解析ツールを使用しています。
+              これらのツールはトラフィックデータを収集するためにCookieを使用しますが、
+              このデータは匿名で収集され、個人を特定するものではありません。
+            </p>
+            <p className="mt-3 text-sm leading-relaxed text-slate-600">
+              収集される情報には、ページビュー数、セッション時間、使用デバイス、地理的位置（国・地域レベル）、
+              参照元URLなどが含まれます。これらの情報は、サイトのコンテンツ改善、
+              ユーザビリティの向上、およびサービス品質の維持に活用されます。
+            </p>
+            <p className="mt-3 text-sm leading-relaxed text-slate-600">
+              Googleアナリティクスのデータ収集を無効にするには、
+              <a 
+                href="https://tools.google.com/dlpage/gaoptout" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-blue-600 underline hover:text-blue-700"
+              >
+                Googleアナリティクス オプトアウト アドオン
+                <ExternalLink className="h-3 w-3" />
+              </a>
+              をブラウザにインストールしてください。
+            </p>
+          </section>
+
+          {/* 未成年者のプライバシー */}
+          <section>
+            <div className="mb-3 flex items-center gap-2">
+              <Users className="h-5 w-5 text-purple-500" />
+              <h2 className="text-lg font-bold text-slate-800">8. 未成年者のプライバシーについて</h2>
+            </div>
+            <div className="rounded-xl border border-purple-200 bg-purple-50 p-4">
+              <p className="text-sm font-medium leading-relaxed text-purple-800">
+                当サイトは主に中学生・高校生を対象としたサービスです。
+                18歳未満の方は、保護者の同意を得た上でご利用ください。
+              </p>
+            </div>
+            <p className="mt-3 text-sm leading-relaxed text-slate-600">
+              当サイトは、未成年者のプライバシー保護を特に重視しています。
+              13歳未満のお子様から意図的に個人情報を収集することはありません。
+              当サイトは個人を特定できる情報を直接収集しませんが、広告配信やアクセス解析において
+              Cookieが使用される場合があります。
+            </p>
+            <p className="mt-3 text-sm leading-relaxed text-slate-600">
+              保護者の方へ：お子様が当サイトを利用する際は、本プライバシーポリシーの内容を
+              ご確認いただき、Cookieの使用や広告配信について適切にご判断ください。
+              ご不明な点やご懸念がございましたら、お問い合わせページよりご連絡ください。
+            </p>
+            <p className="mt-3 text-sm leading-relaxed text-slate-600">
+              未成年者に対するパーソナライズド広告を制限したい場合は、ブラウザのCookie設定を
+              調整するか、Google広告設定からオプトアウトすることをお勧めいたします。
+            </p>
+          </section>
+
+          {/* ユーザーの権利 */}
+          <section>
+            <div className="mb-3 flex items-center gap-2">
+              <Bell className="h-5 w-5 text-indigo-500" />
+              <h2 className="text-lg font-bold text-slate-800">9. ユーザーの権利</h2>
+            </div>
+            <p className="text-sm leading-relaxed text-slate-600">
+              ユーザーは、ご自身のデータに関して以下の権利を有しています：
+            </p>
+            <ul className="mt-3 space-y-2 text-sm leading-relaxed text-slate-600">
+              <li className="flex gap-2">
+                <span className="text-indigo-500">•</span>
+                <strong>アクセス権：</strong>お使いの端末に保存されているデータを確認する権利
+              </li>
+              <li className="flex gap-2">
+                <span className="text-indigo-500">•</span>
+                <strong>削除権：</strong>ブラウザ設定からローカルストレージのデータを削除する権利
+              </li>
+              <li className="flex gap-2">
+                <span className="text-indigo-500">•</span>
+                <strong>オプトアウト権：</strong>Cookie同意画面で「必須のみ許可」を選択し、分析・広告Cookieを拒否する権利
+              </li>
+              <li className="flex gap-2">
+                <span className="text-indigo-500">•</span>
+                <strong>情報提供を受ける権利：</strong>データの取り扱いについて説明を求める権利
+              </li>
+            </ul>
+            <p className="mt-3 text-sm leading-relaxed text-slate-600">
+              これらの権利の行使に関するご質問は、お問い合わせページよりご連絡ください。
+            </p>
+          </section>
+
+          {/* プライバシーポリシーの変更 */}
+          <section>
+            <h2 className="mb-3 text-lg font-bold text-slate-800">10. プライバシーポリシーの変更について</h2>
+            <p className="text-sm leading-relaxed text-slate-600">
+              当サイトは、法令の改正、サービス内容の変更、その他の理由により、
+              必要に応じて本プライバシーポリシーを変更することがあります。
+              変更後のポリシーは、本ページに掲載した時点より効力を生じるものとします。
+            </p>
+            <p className="mt-3 text-sm leading-relaxed text-slate-600">
+              重要な変更がある場合は、サイト上での告知等により、ユーザーにお知らせするよう努めます。
+              定期的に本ページをご確認いただくことをお勧めいたします。
+            </p>
+          </section>
+
+          {/* お問い合わせ */}
+          <section>
+            <div className="mb-3 flex items-center gap-2">
+              <Mail className="h-5 w-5 text-teal-500" />
+              <h2 className="text-lg font-bold text-slate-800">11. お問い合わせ</h2>
+            </div>
+            <p className="text-sm leading-relaxed text-slate-600">
+              本プライバシーポリシーに関するご質問、ご意見、苦情、またはデータに関するリクエストは、
+              以下の方法でお問い合わせください：
+            </p>
+            <div className="mt-4 rounded-xl border border-teal-200 bg-teal-50 p-4">
+              <p className="text-sm leading-relaxed text-teal-800">
+                <strong>お問い合わせフォーム：</strong>
+                <Link href="/contact" className="ml-1 text-teal-700 underline hover:text-teal-900">
+                  お問い合わせページ
+                </Link>
+              </p>
+              <p className="mt-2 text-xs text-teal-700">
+                ※ お問い合わせへの回答には、通常3〜5営業日程度お時間をいただく場合がございます。
+              </p>
+            </div>
+            <p className="mt-4 text-sm leading-relaxed text-slate-600">
+              プライバシーに関するお問い合わせの際は、具体的な内容と、可能であれば関連する状況を
+              詳しくお知らせください。迅速かつ適切に対応させていただきます。
+            </p>
+          </section>
+
+          <div className="rounded-xl bg-slate-50 p-4 text-center text-xs text-slate-500">
+            最終更新日: {lastUpdated}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

@@ -1,0 +1,72 @@
+import { clsx, type ClassValue } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+
+import { MODE_CONFIG, RANK_DEFINITIONS, SUBJECTS } from './constants';
+import type { RankDefinition, ScoreMode, Scores, SubjectCategory, SubjectKey } from './types';
+
+ const RANK_DEFINITIONS_DESC = [...RANK_DEFINITIONS].sort((a, b) => b.minPercent - a.minPercent);
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
+
+export function clamp(value: number, min: number, max: number) {
+  return Math.min(max, Math.max(min, value));
+}
+
+export function roundInt(value: number) {
+  return Math.round(value);
+}
+
+ export function toIntPercent(value: number) {
+   return Math.floor(clamp(value, 0, 100));
+ }
+
+export function calculateTotalScore(scores: Scores, mode: ScoreMode) {
+  const weights = MODE_CONFIG[mode].weights;
+  return SUBJECTS.reduce((sum, subject) => {
+    const raw = scores[subject.key];
+    const safe = clamp(roundInt(raw), 1, 5);
+    const weight = subject.category === 'core' ? weights.core : weights.practical;
+    return sum + safe * weight;
+  }, 0);
+}
+
+export function calculateMaxScore(mode: ScoreMode) {
+  return MODE_CONFIG[mode].max;
+}
+
+export function calculatePercent(total: number, max: number) {
+  if (max <= 0) return 0;
+  return toIntPercent((total / max) * 100);
+}
+
+export function getRankForPercent(percent: number): RankDefinition {
+  const p = clamp(percent, 0, 100);
+  return RANK_DEFINITIONS_DESC.find((r) => p >= r.minPercent) ?? RANK_DEFINITIONS_DESC[RANK_DEFINITIONS_DESC.length - 1];
+}
+
+export function getSubjectWeight(mode: ScoreMode, category: SubjectCategory) {
+  const weights = MODE_CONFIG[mode].weights;
+  return category === 'core' ? weights.core : weights.practical;
+}
+
+export function updateScoreValue(scores: Scores, key: SubjectKey, nextValue: number): Scores {
+  return {
+    ...scores,
+    [key]: clamp(roundInt(nextValue), 1, 5)
+  };
+}
+
+export function buildShareText(params: {
+  appName: string;
+  rankCode: string;
+  title: string;
+  total: number;
+  max: number;
+  percent: number;
+  url: string;
+}) {
+  const percentText = `${toIntPercent(params.percent)}%`;
+  return `${params.appName}で内申点チェック！\n${params.rankCode}：${params.title}\n${params.total}/${params.max}（${percentText}）\n${params.url}`;
+}
