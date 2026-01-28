@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Heart, FileText, Shield, Mail, AlertTriangle, Sparkles, Twitter, Github, ExternalLink } from 'lucide-react';
+import { Heart, FileText, Shield, Mail, AlertTriangle, Sparkles, Twitter, Github, BookOpen } from 'lucide-react';
 
 import { APP_NAME } from '@/lib/constants';
 
@@ -77,6 +77,13 @@ export function Footer() {
           <div>
             <div className="text-xs font-bold uppercase tracking-wider text-slate-400">リンク</div>
             <div className="mt-3 flex flex-wrap gap-2">
+              <Link 
+                href="/blog" 
+                className="flex items-center gap-1.5 rounded-full bg-blue-100 px-3 py-1.5 text-xs font-medium text-blue-700 transition-all hover:bg-blue-200"
+              >
+                <BookOpen className="h-3 w-3" />
+                内申点コラム
+              </Link>
               <Link 
                 href="/terms" 
                 className="flex items-center gap-1.5 rounded-full bg-slate-100 px-3 py-1.5 text-xs text-slate-600 transition-all hover:bg-blue-100 hover:text-blue-700"

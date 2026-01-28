@@ -1,7 +1,6 @@
 'use client';
 
 import * as React from 'react';
-import { motion } from 'framer-motion';
 import { Target, ChevronRight, Award, TrendingUp, BookOpen } from 'lucide-react';
 
 import { Card } from '@/components/ui/Card';
@@ -50,13 +49,10 @@ export function GoalSection({ currentScore, maxScore }: GoalSectionProps) {
       <div className="p-5">
         <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
           {adjustedGoals.map((goal, i) => (
-            <motion.button
+            <button
               key={goal.label}
               type="button"
               onClick={() => setSelectedGoal(i)}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.05 }}
               className={`group relative rounded-xl border-2 p-4 text-left transition-all ${
                 selectedGoal === i
                   ? `${goal.color} ring-2 ring-offset-1 ring-indigo-300`
@@ -70,23 +66,16 @@ export function GoalSection({ currentScore, maxScore }: GoalSectionProps) {
               <div className="mt-1 text-xs font-semibold text-slate-700">{goal.label}</div>
               <div className="mt-0.5 text-[10px] text-slate-500">{goal.desc}</div>
               {selectedGoal === i && (
-                <motion.div
-                  layoutId="goal-check"
-                  className="absolute -right-1 -top-1 grid h-5 w-5 place-items-center rounded-full bg-indigo-500 text-white shadow-sm"
-                >
+                <div className="absolute -right-1 -top-1 grid h-5 w-5 place-items-center rounded-full bg-indigo-500 text-white shadow-sm">
                   <ChevronRight className="h-3 w-3" />
-                </motion.div>
+                </div>
               )}
-            </motion.button>
+            </button>
           ))}
         </div>
 
         {selectedGoal !== null && (
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mt-5 rounded-xl bg-gradient-to-r from-indigo-500 to-violet-500 p-4 text-white shadow-md"
-          >
+          <div className="mt-5 rounded-xl bg-gradient-to-r from-indigo-500 to-violet-500 p-4 text-white shadow-md">
             <div className="flex items-center justify-between gap-4">
               <div>
                 <div className="text-sm font-medium text-white/80">現在の内申点</div>
@@ -97,14 +86,14 @@ export function GoalSection({ currentScore, maxScore }: GoalSectionProps) {
                 <div className="text-sm font-medium text-white/80">目標</div>
                 <div className="text-2xl font-bold">{adjustedGoals[selectedGoal].score}<span className="text-base font-medium text-white/70">点</span></div>
               </div>
-              <div className="rounded-xl bg-white/20 px-4 py-2 backdrop-blur-sm">
+              <div className="rounded-xl bg-white/20 px-4 py-2">
                 <div className="text-xs text-white/80">あと</div>
                 <div className="text-xl font-bold">
                   {gap !== null && gap > 0 ? `+${gap}` : gap === 0 ? '達成！' : '達成済み'}
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
         )}
       </div>
     </Card>

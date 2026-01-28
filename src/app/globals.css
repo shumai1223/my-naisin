@@ -137,3 +137,23 @@ body {
   border-radius: 9999px;
   background: #3b82f6;
 }
+
+/* Print styles */
+@media print {
+  body {
+    background: white !important;
+  }
+  
+  .print\\:hidden {
+    display: none !important;
+  }
+  
+  aside {
+    display: none !important;
+  }
+  
+  header button,
+  footer {
+    display: none !important;
+  }
+}

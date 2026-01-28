@@ -10,7 +10,6 @@ import {
   ResponsiveContainer,
   Tooltip,
 } from 'recharts';
-import { motion } from 'framer-motion';
 import { Hexagon } from 'lucide-react';
 
 import type { Scores, ScoreMode } from '@/lib/types';
@@ -61,17 +60,7 @@ export function RadarChart({ scores, mode }: RadarChartProps) {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.5, ease: 'easeOut' }}
-      className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"
-    >
-      {/* Decorative background */}
-      <div className="absolute inset-0">
-        <div className="absolute -left-20 -top-20 h-40 w-40 rounded-full bg-gradient-to-br from-blue-100 to-indigo-100 opacity-50 blur-3xl" />
-        <div className="absolute -bottom-20 -right-20 h-40 w-40 rounded-full bg-gradient-to-br from-violet-100 to-purple-100 opacity-50 blur-3xl" />
-      </div>
+    <div className="rounded-2xl border border-slate-200 bg-white shadow-sm">
 
       {/* Header */}
       <div className="relative border-b border-slate-100 bg-gradient-to-r from-indigo-50 via-blue-50 to-violet-50 px-5 py-4">
@@ -171,6 +160,6 @@ export function RadarChart({ scores, mode }: RadarChartProps) {
           📊 バランスの取れた成績を目指しましょう！苦手科目を克服すると内申点が大きく伸びます
         </p>
       </div>
-    </motion.div>
+    </div>
   );
 }

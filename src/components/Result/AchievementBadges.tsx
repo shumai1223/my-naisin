@@ -1,7 +1,6 @@
 'use client';
 
 import * as React from 'react';
-import { motion } from 'framer-motion';
 import { 
   Trophy, 
   Star, 
@@ -18,18 +17,15 @@ import {
   Globe,
   Beaker,
   PenTool,
-  Heart,
   Sparkles,
   Award,
   Medal,
   GraduationCap,
-  Brain,
   Rocket,
   Shield,
   Gem,
   Coffee,
-  Sun,
-  Moon
+  Sun
 } from 'lucide-react';
 
 import type { Scores, ResultData } from '@/lib/types';
@@ -334,12 +330,7 @@ export function AchievementBadges({ scores, result }: AchievementBadgesProps) {
   const completionPercent = Math.floor((earnedBadges.length / BADGES.length) * 100);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: 0.3 }}
-      className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
-    >
+    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
@@ -356,11 +347,9 @@ export function AchievementBadges({ scores, result }: AchievementBadgesProps) {
         {/* Progress bar */}
         <div className="hidden sm:block w-24">
           <div className="h-2 rounded-full bg-slate-100 overflow-hidden">
-            <motion.div
-              initial={{ width: 0 }}
-              animate={{ width: `${completionPercent}%` }}
-              transition={{ duration: 1, delay: 0.5 }}
-              className="h-full rounded-full bg-gradient-to-r from-amber-400 to-orange-500"
+            <div
+              style={{ width: `${completionPercent}%` }}
+              className="h-full rounded-full bg-gradient-to-r from-amber-400 to-orange-500 transition-all duration-500"
             />
           </div>
         </div>
@@ -393,33 +382,21 @@ export function AchievementBadges({ scores, result }: AchievementBadgesProps) {
                     {config.label}級 ({badges.length})
                   </div>
                   <div className="flex flex-wrap gap-2">
-                    {badges.map((badge, index) => {
+                    {badges.map((badge) => {
                       const Icon = badge.icon;
                       return (
-                        <motion.div
-                          key={badge.id}
-                          initial={{ scale: 0, rotate: -180 }}
-                          animate={{ scale: 1, rotate: 0 }}
-                          transition={{ 
-                            type: 'spring', 
-                            delay: 0.05 * index,
-                            stiffness: 200
-                          }}
-                          className="group relative"
-                        >
+                        <div key={badge.id} className="group relative">
                           <div className={`grid h-12 w-12 place-items-center rounded-xl bg-gradient-to-br ${badge.gradient} shadow-md ring-2 ${config.border} transition-transform hover:scale-110`}>
-                            <Icon className="h-6 w-6 text-white drop-shadow" />
+                            <Icon className="h-6 w-6 text-white" />
                           </div>
-                          {/* Tooltip */}
                           <div className="pointer-events-none absolute bottom-full left-1/2 z-20 mb-2 -translate-x-1/2 whitespace-nowrap rounded-lg bg-slate-800 px-3 py-2 text-xs text-white opacity-0 shadow-lg transition-opacity group-hover:opacity-100">
                             <div className="flex items-center gap-2">
                               <span className="font-bold">{badge.name}</span>
                               <span className={`rounded px-1.5 py-0.5 text-[10px] ${config.bg} ${config.color}`}>{config.label}</span>
                             </div>
                             <div className="text-slate-300">{badge.description}</div>
-                            <div className="absolute left-1/2 top-full -translate-x-1/2 border-4 border-transparent border-t-slate-800" />
                           </div>
-                        </motion.div>
+                        </div>
                       );
                     })}
                   </div>
@@ -482,6 +459,6 @@ export function AchievementBadges({ scores, result }: AchievementBadgesProps) {
           </div>
         </div>
       )}
-    </motion.div>
+    </div>
   );
 }

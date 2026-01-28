@@ -1,7 +1,6 @@
 'use client';
 
 import * as React from 'react';
-import { motion } from 'framer-motion';
 import { Minus, Plus } from 'lucide-react';
 
 import type { ScoreMode, Subject } from '@/lib/types';
@@ -26,10 +25,8 @@ export function SubjectSlider({ subject, mode, value, onChange }: SubjectSliderP
   );
 
   return (
-    <motion.div
-      whileHover={{ scale: 1.005 }}
-      transition={{ type: 'spring', stiffness: 350, damping: 30 }}
-      className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm"
+    <div
+      className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition-shadow hover:shadow-md"
     >
       <div className="flex items-start justify-between gap-3">
         <div>
@@ -97,6 +94,6 @@ export function SubjectSlider({ subject, mode, value, onChange }: SubjectSliderP
           </button>
         ))}
       </div>
-    </motion.div>
+    </div>
   );
 }

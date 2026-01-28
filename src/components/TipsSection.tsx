@@ -1,7 +1,6 @@
 'use client';
 
 import * as React from 'react';
-import { motion } from 'framer-motion';
 import { Lightbulb, Target, TrendingUp, BookOpen, ChevronDown } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
@@ -65,14 +64,8 @@ export function TipsSection() {
           </div>
         </div>
         <div className="divide-y divide-slate-100">
-          {TIPS.map((tip, i) => (
-            <motion.div
-              key={tip.title}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.1 }}
-              className="flex gap-4 p-5"
-            >
+          {TIPS.map((tip) => (
+            <div key={tip.title} className="flex gap-4 p-5">
               <div className={cn('grid h-10 w-10 shrink-0 place-items-center rounded-xl', tip.bg)}>
                 <tip.icon className={cn('h-5 w-5', tip.color)} />
               </div>
@@ -80,7 +73,7 @@ export function TipsSection() {
                 <div className="font-semibold text-slate-800">{tip.title}</div>
                 <div className="mt-1 text-sm leading-relaxed text-slate-600">{tip.content}</div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </Card>
@@ -105,14 +98,9 @@ export function TipsSection() {
                   )}
                 />
               </button>
-              <motion.div
-                initial={false}
-                animate={{ height: openFaq === i ? 'auto' : 0, opacity: openFaq === i ? 1 : 0 }}
-                transition={{ duration: 0.2 }}
-                className="overflow-hidden"
-              >
+              {openFaq === i && (
                 <div className="pb-4 text-sm leading-relaxed text-slate-600">{item.a}</div>
-              </motion.div>
+              )}
             </div>
           ))}
         </div>

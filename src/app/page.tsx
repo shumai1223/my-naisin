@@ -1,7 +1,6 @@
 'use client';
 
 import * as React from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import { ArrowRight, RotateCcw, Share2 } from 'lucide-react';
 
@@ -39,6 +38,8 @@ import { StudyAdvice } from '@/components/Result/StudyAdvice';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { Switch } from '@/components/ui/Switch';
+import { HistoryPanel } from '@/components/HistoryPanel';
+import { PrintButton } from '@/components/PrintButton';
 
 function popConfetti() {
   confetti({
@@ -166,6 +167,15 @@ export default function Page() {
     }, 80);
   }, []);
 
+  const onLoadHistory = React.useCallback((entry: SavedHistoryEntry) => {
+    setMode(entry.mode);
+    setScores(entry.scores);
+    setShowResult(true);
+    window.setTimeout(() => {
+      document.getElementById('result')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 80);
+  }, []);
+
   const modeInfo = MODE_CONFIG[mode];
 
   return (
@@ -184,7 +194,7 @@ export default function Page() {
 
           {/* Main Content */}
           <div className="min-w-0">
-            <div className="overflow-hidden rounded-[2rem] border border-white/60 bg-white/90 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1),0_0_0_1px_rgba(255,255,255,0.8)_inset] backdrop-blur-xl">
+            <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl">
               <Header />
 
               {/* Stats Bar */}
@@ -238,14 +248,9 @@ export default function Page() {
             </div>
           </Card>
 
-          <AnimatePresence>
-            {showResult ? (
-              <motion.section
+          {showResult && (
+              <section
                 id="result"
-                initial={{ opacity: 0, y: 18 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 18 }}
-                transition={{ duration: 0.35, ease: 'easeOut' }}
                 className="space-y-4"
               >
                 <Card className="overflow-hidden" variant="elevated">
@@ -265,7 +270,7 @@ export default function Page() {
                         </div>
                       </div>
 
-                      <div className="w-full md:w-auto">
+                      <div className="flex w-full flex-col gap-2 md:w-auto md:flex-row">
                         <Button
                           onClick={() => setShareOpen(true)}
                           leftIcon={<Share2 className="h-4 w-4" />}
@@ -273,6 +278,7 @@ export default function Page() {
                         >
                           シェア画像を作る
                         </Button>
+                        <PrintButton />
                       </div>
                     </div>
                   </div>
@@ -341,9 +347,11 @@ export default function Page() {
                 {/* 広告（結果後） */}
                 <AdPlaceholder />
 
-              </motion.section>
-            ) : null}
-          </AnimatePresence>
+              </section>
+            )}
+
+          {/* 計算履歴 */}
+          <HistoryPanel onLoadEntry={onLoadHistory} />
 
           {/* ヒント・FAQ セクション */}
           <TipsSection />
