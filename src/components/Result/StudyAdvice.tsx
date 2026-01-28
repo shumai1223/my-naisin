@@ -48,6 +48,13 @@ const STUDY_TIPS = {
     { icon: Coffee, title: '朝型学習のすすめ', desc: '朝は集中力が高く、暗記に最適な時間帯' },
     { icon: MessageCircle, title: '教えることで学ぶ', desc: '友達に説明すると理解が深まります' },
     { icon: BookOpen, title: '復習のゴールデンタイム', desc: '学んだその日のうちに復習すると記憶定着率UP' },
+    { icon: Target, title: 'ミニゴール設定', desc: '「英単語20個」など小さな目標で達成感を積み上げよう' },
+    { icon: Brain, title: 'アウトプット学習', desc: '問題を解く→説明するを繰り返すと理解が一気に深まる' },
+    { icon: Sparkles, title: 'ごほうびルール', desc: '目標達成後に小さなごほうびを設定してやる気を維持' },
+    { icon: Sun, title: '1日の作戦タイム', desc: '朝5分で「今日やること3つ」を決めると迷いが減る' },
+    { icon: Flame, title: '毎日5分の積み上げ', desc: '短くても毎日続けると記憶が定着しやすい' },
+    { icon: Heart, title: 'できたことメモ', desc: '達成できたことを1行記録すると自己肯定感が上がる' },
+    { icon: BookOpen, title: '教科書の言い換え', desc: '用語を自分の言葉で説明できると理解度が上がる' },
   ],
   motivation: [
     '小さな目標を立てて、達成する喜びを積み重ねよう',
@@ -55,6 +62,15 @@ const STUDY_TIPS = {
     '比べるのは昨日の自分だけ。少しずつ前に進もう',
     '失敗は成功のもと。間違いから学ぶことが大切',
     '休憩も勉強の一部。メリハリをつけて頑張ろう',
+    '今日の1%の努力が半年後の大きな差になる',
+    'やる気は行動のあとにやってくる。まず5分始めよう',
+    'できたことリストを増やすと自信は伸びる',
+    '焦らず昨日より1問多く解ければ十分',
+    '習慣は才能を超える。続けた人だけが伸びる',
+    'ミスは伸びるサイン。気づいた時点で前進している',
+    '完璧を狙うより「続ける」ことが最強',
+    '短い時間でも積み重ねれば大きな力になる',
+    '自分のペースで進めばいい。止まらなければ必ず伸びる',
   ],
 };
 
@@ -123,10 +139,9 @@ export function StudyAdvice({ scores, result }: StudyAdviceProps) {
     scores[s.key] < scores[min.key] ? s : min
   , SUBJECTS[0]);
 
-  // Find best improvable subject (highest score that's not 5)
-  const bestImprovable = SUBJECTS
-    .filter(s => scores[s.key] < 5)
-    .sort((a, b) => scores[b.key] - scores[a.key])[0];
+  const improvableTargets = [...improvableSubjects].sort((a, b) => scores[b.key] - scores[a.key]);
+  const bestImprovable = improvableTargets[0];
+  const secondImprovable = improvableTargets[1];
 
   const generateAdvice = (): AdviceItem[] => {
     const advice: AdviceItem[] = [];
@@ -155,15 +170,25 @@ export function StudyAdvice({ scores, result }: StudyAdviceProps) {
       });
     }
 
-    // Medium priority: Subjects that can reach 5
-    if (bestImprovable && scores[bestImprovable.key] >= 4) {
-      advice.push({
-        icon: Star,
-        title: `${bestImprovable.label}で満点を狙う！`,
-        description: 'あと1点で5！最も効率よく点数を伸ばせます',
-        detail: SUBJECT_ADVICE[bestImprovable.key]?.improve || '応用問題にチャレンジしましょう',
-        priority: 'medium',
-      });
+    // Medium priority: Subjects that can reach 5 or move from 3 to 4
+    if (bestImprovable) {
+      if (scores[bestImprovable.key] >= 4) {
+        advice.push({
+          icon: Star,
+          title: `${bestImprovable.label}で満点を狙う！`,
+          description: 'あと1点で5！最も効率よく点数を伸ばせます',
+          detail: SUBJECT_ADVICE[bestImprovable.key]?.improve || '応用問題にチャレンジしましょう',
+          priority: 'medium',
+        });
+      } else if (scores[bestImprovable.key] === 3) {
+        advice.push({
+          icon: TrendingUp,
+          title: `${bestImprovable.label}を4へ引き上げる`,
+          description: '基礎が固まっているので、あと一歩で評定UP',
+          detail: SUBJECT_ADVICE[bestImprovable.key]?.improve || '解き直しと原因分析で伸びます',
+          priority: 'medium',
+        });
+      }
     }
 
     // Advice based on overall performance
@@ -212,6 +237,24 @@ export function StudyAdvice({ scores, result }: StudyAdviceProps) {
       });
     }
 
+    if (secondImprovable && secondImprovable.key !== bestImprovable?.key && secondImprovable.key !== weakSubjects[0]?.key) {
+      advice.push({
+        icon: ArrowUpRight,
+        title: `${secondImprovable.label}を次の得点源に`,
+        description: '安定して4を取れる科目を増やすと内申点が伸びやすい',
+        detail: SUBJECT_ADVICE[secondImprovable.key]?.improve || '基本問題の取りこぼしを減らそう',
+        priority: 'low',
+      });
+    }
+
+    advice.push({
+      icon: Brain,
+      title: '1週間の学習ルーティンを作る',
+      description: '曜日ごとに教科を固定すると迷わず続けられます',
+      detail: '例：月・木は英語、火・金は数学、水は理社の整理',
+      priority: 'tip',
+    });
+
     // Random study tip
     const randomTip = STUDY_TIPS.general[Math.floor(Math.random() * STUDY_TIPS.general.length)];
     advice.push({
@@ -221,7 +264,7 @@ export function StudyAdvice({ scores, result }: StudyAdviceProps) {
       priority: 'tip',
     });
 
-    return advice.slice(0, 5);
+    return advice.slice(0, 7);
   };
 
   const advice = generateAdvice();

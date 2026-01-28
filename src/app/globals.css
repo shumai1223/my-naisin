@@ -291,6 +291,71 @@ body {
   border: 1px solid #fde68a;
 }
 
+.blog-content .step-box {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.blog-content .step-box h4 {
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+  color: #1e293b;
+}
+
+.blog-content .step-box ol {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.blog-content .step-box li {
+  margin-bottom: 0.5rem;
+  color: #475569;
+}
+
+.blog-content .formula-box {
+  background: linear-gradient(135deg, #eef2ff 0%, #eff6ff 100%);
+  border: 1px solid #c7d2fe;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.blog-content .formula-box h4 {
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+}
+
+.blog-content .formula-box .formula {
+  font-weight: 700;
+  color: #1e40af;
+  letter-spacing: 0.02em;
+}
+
+.blog-content .example-box {
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.blog-content .example-box h4 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  color: #9a3412;
+}
+
+.blog-content .example-box p {
+  margin: 0.35rem 0;
+  color: #7c2d12;
+}
+
 .blog-content .summary-box {
   background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
   padding: 1.5rem;
@@ -334,6 +399,7 @@ body {
   padding: 1.25rem;
   border-radius: 0.75rem;
   border: 1px solid #e2e8f0;
+  box-shadow: 0 10px 20px -16px rgba(15, 23, 42, 0.3);
 }
 
 .blog-content .card h4 {
@@ -383,6 +449,7 @@ body {
   padding: 1.25rem;
   border-radius: 0.75rem;
   border: 1px solid #e2e8f0;
+  box-shadow: 0 10px 20px -16px rgba(15, 23, 42, 0.3);
 }
 
 .blog-content .subject-card h4 {
@@ -441,6 +508,44 @@ body {
   margin: 2rem 0;
   color: #94a3b8;
   font-size: 0.875rem;
+}
+
+.blog-content .table-container {
+  margin: 1.5rem 0;
+  border-radius: 0.75rem;
+  border: 1px solid #e2e8f0;
+  overflow-x: auto;
+  background: #ffffff;
+  box-shadow: 0 12px 24px -18px rgba(15, 23, 42, 0.25);
+}
+
+.blog-content .calc-table {
+  width: 100%;
+  min-width: 420px;
+  border-collapse: collapse;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.blog-content .calc-table th,
+.blog-content .calc-table td {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.blog-content .calc-table th {
+  background: #f1f5f9;
+  color: #1e293b;
+  font-weight: 700;
+}
+
+.blog-content .calc-table tbody tr:nth-child(even) td {
+  background: #f8fafc;
+}
+
+.blog-content .calc-table tr.highlight td {
+  background: #fef3c7;
+  font-weight: 600;
 }
 
 /* Print styles */
