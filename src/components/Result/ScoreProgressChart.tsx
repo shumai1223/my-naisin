@@ -150,11 +150,8 @@ export function ScoreProgressChart({ currentTotal, currentMax, currentMode }: Sc
       className="rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden"
     >
       {/* Header */}
-      <button
-        onClick={() => setExpanded(!expanded)}
-        className="w-full bg-gradient-to-r from-cyan-500 via-teal-500 to-emerald-500 p-5 text-white text-left"
-      >
-        <div className="flex items-center justify-between">
+      <div className="w-full bg-gradient-to-r from-cyan-500 via-teal-500 to-emerald-500 p-5 text-white">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-3">
             <div className="grid h-12 w-12 place-items-center rounded-xl bg-white/20 backdrop-blur-sm">
               <History className="h-6 w-6 text-white" />
@@ -173,6 +170,12 @@ export function ScoreProgressChart({ currentTotal, currentMax, currentMode }: Sc
                 {trend.direction === 'neutral' && '安定'}
               </div>
             </div>
+            <button
+              onClick={() => setExpanded(!expanded)}
+              className="rounded-full bg-white/20 px-4 py-2 text-sm font-bold shadow-sm backdrop-blur-sm transition hover:bg-white/30"
+            >
+              {expanded ? '閉じる' : '見る'}
+            </button>
             {expanded ? (
               <ChevronUp className="h-5 w-5 text-white/60" />
             ) : (
@@ -180,7 +183,7 @@ export function ScoreProgressChart({ currentTotal, currentMax, currentMode }: Sc
             )}
           </div>
         </div>
-      </button>
+      </div>
 
       {expanded && (
         <div className="p-5">
