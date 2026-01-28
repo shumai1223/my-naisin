@@ -44,6 +44,7 @@ import { Switch } from '@/components/ui/Switch';
 import { HistoryPanel } from '@/components/HistoryPanel';
 import { PrintButton } from '@/components/PrintButton';
 import { BlogSection } from '@/components/BlogSection';
+import { NaishinGuideSection } from '@/components/NaishinGuideSection';
 
 function popConfetti() {
   confetti({
@@ -373,6 +374,11 @@ export default function Page() {
           <TipsSection />
         </div>
       </main>
+
+      {/* 内申点ガイドセクション - SEO対策用コンテンツ */}
+      <div className="mx-auto max-w-4xl px-4 pb-8">
+        <NaishinGuideSection />
+      </div>
 
       <Footer />
             </div>
