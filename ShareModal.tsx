@@ -12,7 +12,7 @@ import { buildShareText, cn } from '@/lib/utils';
 
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
-import { ShareCard } from './ShareCard';
+import { ShareCard } from '@/components/Result/ShareCard';
 
 export interface ShareModalProps {
   open: boolean;
