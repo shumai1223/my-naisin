@@ -138,8 +138,6 @@ export const BLOG_POSTS: BlogPost[] = [
 </ul>
 </div>
 
-<!-- AD_PLACEHOLDER -->
-
 ---
 
 ## 🏯 大阪府の内申点計算方法
@@ -369,8 +367,6 @@ export const BLOG_POSTS: BlogPost[] = [
 </ul>
 </div>
 
-<!-- AD_PLACEHOLDER -->
-
 ---
 
 ## 🏫 【授業態度編】先生目線で好印象を与える5つの方法
@@ -510,6 +506,572 @@ export const BLOG_POSTS: BlogPost[] = [
 <div class="cta-box">
 <h3>🎯 目標の内申点を設定しよう！</h3>
 <p>My naisinで現在の内申点を計算し、目標との差を確認しましょう。具体的な数字があると、モチベーションが上がります！</p>
+</div>
+    `
+  },
+  {
+    slug: 'naishin-evaluation-criteria-3-points',
+    title: '内申点は3観点で決まる！通知表の評価基準をわかりやすく整理',
+    description: '「知識・技能」「思考・判断・表現」「主体的に学習に取り組む態度」の3観点を理解して、内申点の伸ばし方を具体化しよう。',
+    date: '2025-01-20',
+    category: '内申点の基礎',
+    readTime: '12分',
+    tags: ['内申点', '評価基準', '通知表'],
+    content: `
+<div class="lead">
+内申点はテストの点数だけで決まるわけではありません。現在の評価は<strong>3つの観点</strong>を総合して判断されるため、日々の取り組みを変えるだけでも評価を伸ばせます。
+</div>
+
+<div class="toc">
+<h3>📋 この記事でわかること</h3>
+<ul>
+<li>内申点を決める3観点の意味</li>
+<li>観点別評価から評定が決まる流れ</li>
+<li>今日からできる改善ポイント</li>
+</ul>
+</div>
+
+---
+
+## 📘 内申点は「3観点」で決まる
+
+学習指導要領では、評価の軸が次の3つに整理されています。どれか1つが高くても、他が弱いと評定が上がりにくくなるのでバランスが重要です。
+
+<div class="card-grid">
+<div class="card">
+<h4>知識・技能</h4>
+<p>定期テスト、小テスト、基礎知識の定着度。丸暗記だけでなく理解も見られます。</p>
+</div>
+<div class="card">
+<h4>思考・判断・表現</h4>
+<p>説明できる力、記述や発表、レポートなどで評価。理由づけが大切です。</p>
+</div>
+<div class="card">
+<h4>主体的に学習に取り組む態度</h4>
+<p>提出物、授業態度、振り返りなど日々の行動。最も改善しやすい領域です。</p>
+</div>
+</div>
+
+<!-- AD_PLACEHOLDER -->
+
+---
+
+## 🔍 観点別評価から評定が決まる流れ
+
+<div class="step-box">
+<h4>評価の流れ</h4>
+<ol>
+<li>日々のテスト・提出物・授業態度を記録</li>
+<li>3観点それぞれでA/B/Cの評価がつく</li>
+<li>3観点の結果を総合して評定1〜5が決定</li>
+</ol>
+</div>
+
+<div class="point-box blue">
+<h4>💡 ここがポイント</h4>
+<p>学校ごとに総合方法は異なりますが、<strong>観点評価の積み重ね</strong>が評定の土台です。通知表の所見欄や提出物のコメントも評価材料になります。</p>
+</div>
+
+---
+
+## ✅ 観点別に点を伸ばす具体策
+
+<div class="tips-list">
+<div class="tip">
+<span class="tip-num">1</span>
+<div>
+<h4>知識・技能</h4>
+<p>小テスト満点を狙い、テスト範囲ワークは最低2周。間違い直しまで提出。</p>
+</div>
+</div>
+<div class="tip">
+<span class="tip-num">2</span>
+<div>
+<h4>思考・判断・表現</h4>
+<p>授業ノートに理由や根拠を書く。記述問題は「なぜ？」を言葉にする。</p>
+</div>
+</div>
+<div class="tip">
+<span class="tip-num">3</span>
+<div>
+<h4>主体的に学習に取り組む態度</h4>
+<p>期限厳守、質問、振り返りの一言コメントを徹底。授業前の準備も評価対象。</p>
+</div>
+</div>
+</div>
+
+---
+
+## 🧭 通知表で確認すべきチェックポイント
+
+<ul>
+<li>所見欄に「積極的」「丁寧」などの言葉があるか</li>
+<li>提出物の評価コメントが安定して良いか</li>
+<li>観点別評価のバランスが崩れていないか</li>
+</ul>
+
+---
+
+## まとめ
+
+<div class="summary-box">
+<h3>📌 この記事のまとめ</h3>
+<ul>
+<li>内申点は3観点の総合評価で決まる</li>
+<li>日々の提出物・授業態度が評定に直結する</li>
+<li>バランスよく取り組むことが最短ルート</li>
+</ul>
+</div>
+
+<div class="cta-box">
+<h3>🎯 観点別の改善ポイントを決めよう</h3>
+<p>My naisinで現在の内申点を確認し、どの観点を伸ばすべきか整理しましょう。</p>
+</div>
+    `
+  },
+  {
+    slug: 'tokyo-naishin-calculation-guide',
+    title: '東京都の内申点計算を完全攻略｜素内申・換算内申・調査書点',
+    description: '東京都の内申点は「5教科＋実技4教科×2」で65点満点。換算内申と調査書点の計算手順を具体例つきで解説。',
+    date: '2025-01-18',
+    category: '都道府県別対策',
+    readTime: '13分',
+    tags: ['東京都', '内申点', '計算方法'],
+    content: `
+<div class="lead">
+東京都の内申点は、実技4教科が<strong>2倍</strong>になるのが最大の特徴です。素内申・換算内申・調査書点の違いを理解すると、戦略が立てやすくなります。
+</div>
+
+<div class="toc">
+<h3>📋 この記事の内容</h3>
+<ul>
+<li>素内申と換算内申の違い</li>
+<li>換算内申65点の計算方法</li>
+<li>調査書点300点への換算</li>
+<li>内申点で差がつくポイント</li>
+</ul>
+</div>
+
+---
+
+## 🧮 素内申と換算内申の違い
+
+<div class="formula-box">
+<h4>内申点の流れ</h4>
+<p class="formula"><strong>素内申（45点） → 換算内申（65点） → 調査書点（300点）</strong></p>
+</div>
+
+<div class="table-container">
+<table class="calc-table">
+<thead>
+<tr><th>区分</th><th>計算</th><th>満点</th></tr>
+</thead>
+<tbody>
+<tr><td>素内申</td><td>9教科の評定合計</td><td>45点</td></tr>
+<tr class="highlight"><td>換算内申</td><td>5教科 + 実技4教科×2</td><td>65点</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- AD_PLACEHOLDER -->
+
+---
+
+## 🧾 調査書点300点への換算
+
+都立一般入試では、換算内申65点を<strong>300点満点</strong>に換算します。
+
+<div class="formula-box">
+<p class="formula"><strong>調査書点 ＝ 換算内申 ÷ 65 × 300</strong></p>
+</div>
+
+<div class="example-box">
+<h4>計算例</h4>
+<p>換算内申が52点の場合：</p>
+<p><strong>52 ÷ 65 × 300 ＝ 240点</strong></p>
+</div>
+
+---
+
+## 🎯 内申点で差がつくポイント
+
+<div class="tips-list">
+<div class="tip">
+<span class="tip-num">1</span>
+<div>
+<h4>実技4教科は2倍</h4>
+<p>体育・美術・音楽・技術家庭の評定を1上げると、主要5教科の2倍の効果。</p>
+</div>
+</div>
+<div class="tip">
+<span class="tip-num">2</span>
+<div>
+<h4>提出物は減点しない</h4>
+<p>期限・丁寧さ・コメントで「主体性」をアピールできる教科が多い。</p>
+</div>
+</div>
+<div class="tip">
+<span class="tip-num">3</span>
+<div>
+<h4>定期テストの取りこぼしを減らす</h4>
+<p>知識・技能の観点はテスト点が土台。ワークの反復が必須。</p>
+</div>
+</div>
+</div>
+
+---
+
+## まとめ
+
+<div class="summary-box">
+<h3>📌 この記事のまとめ</h3>
+<ul>
+<li>東京都の換算内申は65点満点</li>
+<li>実技4教科が2倍で計算される</li>
+<li>調査書点は換算内申を300点に換算</li>
+</ul>
+</div>
+
+<div class="cta-box">
+<h3>🎯 自分の内申点を試算しよう</h3>
+<p>My naisinなら、9教科の評定を入力するだけで東京都式の内申点がわかります。</p>
+</div>
+    `
+  },
+  {
+    slug: 'kanagawa-naishin-calculation-guide',
+    title: '神奈川県の内申点は中2＋中3で135点満点！計算方法と攻略ポイント',
+    description: '神奈川県の内申点は中学2年＋中学3年（2倍）の合計で135点満点。入試のA値の考え方と対策を整理。',
+    date: '2025-01-17',
+    category: '都道府県別対策',
+    readTime: '12分',
+    tags: ['神奈川県', '内申点', '計算方法'],
+    content: `
+<div class="lead">
+神奈川県の内申点は<strong>中学2年＋中学3年（2倍）</strong>の成績で決まります。中3の比重が大きいため、早めに戦略を立てることが重要です。
+</div>
+
+<div class="toc">
+<h3>📋 この記事の内容</h3>
+<ul>
+<li>神奈川県の内申点（A値）の計算方法</li>
+<li>具体例で理解する計算手順</li>
+<li>入試の評価項目と対策</li>
+</ul>
+</div>
+
+---
+
+## 🧮 神奈川県の内申点計算方法
+
+<div class="table-container">
+<table class="calc-table">
+<thead>
+<tr><th>学年</th><th>計算</th><th>満点</th></tr>
+</thead>
+<tbody>
+<tr><td>中学2年</td><td>9教科×5段階</td><td>45点</td></tr>
+<tr class="highlight"><td>中学3年</td><td>9教科×5段階×2倍</td><td>90点</td></tr>
+</tbody>
+<tfoot>
+<tr><td colspan="2"><strong>合計</strong></td><td><strong>135点</strong></td></tr>
+</tfoot>
+</table>
+</div>
+
+<div class="point-box red">
+<h4>⚠️ 中3が2倍</h4>
+<p>中3の評定を1上げると<strong>2点分</strong>動きます。中2から基礎固めを進めつつ、中3で一気に伸ばすのが定番戦略です。</p>
+</div>
+
+<!-- AD_PLACEHOLDER -->
+
+---
+
+## ✍️ 計算例でイメージをつかむ
+
+<div class="example-box">
+<h4>例：中2がオール3、中3がオール4の場合</h4>
+<p>中2：3×9＝27点</p>
+<p>中3：4×9×2＝72点</p>
+<p><strong>合計：99点（135点満点）</strong></p>
+</div>
+
+---
+
+## 🎯 入試評価の考え方と対策
+
+神奈川県は「内申点（A値）」に加えて、学力検査（B値）や主体性（C値）が組み合わされるケースがあります。学校によって比率は異なるため、以下の3点を意識しましょう。
+
+<div class="tips-list">
+<div class="tip">
+<span class="tip-num">1</span>
+<div>
+<h4>中3の評定を最優先</h4>
+<p>副教科も含めて評定を上げる。提出物と授業態度で取りこぼさない。</p>
+</div>
+</div>
+<div class="tip">
+<span class="tip-num">2</span>
+<div>
+<h4>学力検査は5教科の安定が鍵</h4>
+<p>教科ごとのムラを減らし、平均点を底上げする。</p>
+</div>
+</div>
+<div class="tip">
+<span class="tip-num">3</span>
+<div>
+<h4>主体性の評価も意識</h4>
+<p>ノート・振り返り・提出物の丁寧さが評価材料になる。</p>
+</div>
+</div>
+</div>
+
+---
+
+## まとめ
+
+<div class="summary-box">
+<h3>📌 この記事のまとめ</h3>
+<ul>
+<li>神奈川県の内申点は中2＋中3（2倍）で135点満点</li>
+<li>中3の評定が合否を大きく左右する</li>
+<li>提出物と授業態度で「主体性」を積み上げる</li>
+</ul>
+</div>
+
+<div class="cta-box">
+<h3>🎯 目標点を逆算しよう</h3>
+<p>My naisinで現在の内申点を確認し、志望校までの差を逆算してみましょう。</p>
+</div>
+    `
+  },
+  {
+    slug: 'chiba-naishin-calculation-guide',
+    title: '千葉県の内申点は3年間で決まる！K値の仕組みと計算手順',
+    description: '千葉県は中1〜中3の9教科合計（135点満点）をK値で換算。調査書点の考え方を整理します。',
+    date: '2025-01-16',
+    category: '都道府県別対策',
+    readTime: '11分',
+    tags: ['千葉県', '内申点', 'K値'],
+    content: `
+<div class="lead">
+千葉県の内申点は<strong>中1〜中3の3年間</strong>すべてが対象です。さらに高校ごとに設定される<strong>K値</strong>で換算されるため、早期の積み上げが重要になります。
+</div>
+
+<div class="toc">
+<h3>📋 この記事の内容</h3>
+<ul>
+<li>千葉県の内申点の計算方法</li>
+<li>K値とは何か</li>
+<li>具体例と対策ポイント</li>
+</ul>
+</div>
+
+---
+
+## 🧮 千葉県の内申点の基本
+
+<div class="formula-box">
+<p class="formula"><strong>9教科の評定合計（3年分）× K値</strong></p>
+</div>
+
+<ul>
+<li>中1〜中3の評定（9教科×5段階）を合計</li>
+<li>合計は135点満点（45点×3年）</li>
+<li>K値は<strong>0.5〜2</strong>の範囲で高校が設定</li>
+</ul>
+
+<!-- AD_PLACEHOLDER -->
+
+---
+
+## 📘 計算例で理解する
+
+<div class="example-box">
+<h4>例：3年間オール4の場合</h4>
+<p>4点×9教科×3年＝108点</p>
+<p>もしK値が1.0なら<strong>108点</strong>、K値が1.5なら<strong>162点</strong>として換算されます。</p>
+</div>
+
+<div class="point-box blue">
+<h4>💡 K値の意味</h4>
+<p>高校ごとに内申点の重みを調整する係数です。志望校のK値を必ずチェックしましょう。</p>
+</div>
+
+---
+
+## 🎯 千葉県で内申点を伸ばすコツ
+
+<div class="tips-list">
+<div class="tip">
+<span class="tip-num">1</span>
+<div>
+<h4>中1から積み上げる</h4>
+<p>3年間の評定が使われるため、早期の積み上げが最も重要。</p>
+</div>
+</div>
+<div class="tip">
+<span class="tip-num">2</span>
+<div>
+<h4>副教科も同じ重み</h4>
+<p>実技4教科も5教科と同じ1点。油断せず丁寧に取り組む。</p>
+</div>
+</div>
+<div class="tip">
+<span class="tip-num">3</span>
+<div>
+<h4>提出物と振り返りを徹底</h4>
+<p>観点別評価の「主体性」を上げると評定が伸びやすい。</p>
+</div>
+</div>
+</div>
+
+---
+
+## まとめ
+
+<div class="summary-box">
+<h3>📌 この記事のまとめ</h3>
+<ul>
+<li>千葉県は中1〜中3の成績を合計して評価</li>
+<li>K値によって内申点の重みが変わる</li>
+<li>副教科含めた総合力が重要</li>
+</ul>
+</div>
+
+<div class="cta-box">
+<h3>🎯 志望校のK値を調べよう</h3>
+<p>内申点を試算し、志望校のK値に合わせて戦略を立てましょう。</p>
+</div>
+    `
+  },
+  {
+    slug: 'practical-subjects-naishin-strategy',
+    title: '実技4教科で内申点を伸ばすコツ｜体育・美術・音楽・技術家庭の攻略法',
+    description: '実技教科は才能より「取り組み方」で評価が変わる。体育・美術・音楽・技術家庭の評価ポイントと対策を整理。',
+    date: '2025-01-14',
+    category: '副教科対策',
+    readTime: '14分',
+    tags: ['実技4教科', '内申点', '対策'],
+    content: `
+<div class="lead">
+実技4教科は「得意・不得意」で決まると思われがちですが、実際は<strong>授業への取り組み方</strong>が評価に大きく影響します。点数アップのポイントを科目別に整理します。
+</div>
+
+<div class="toc">
+<h3>📋 この記事の内容</h3>
+<ul>
+<li>実技教科で評価される観点</li>
+<li>科目別の具体的な対策</li>
+<li>内申点につながる行動チェック</li>
+</ul>
+</div>
+
+---
+
+## 📌 実技教科で見られるポイント
+
+<div class="card-grid">
+<div class="card">
+<h4>主体性・協調性</h4>
+<p>準備や片付け、チームへの声掛けなど「姿勢」が高評価に。</p>
+</div>
+<div class="card">
+<h4>思考・表現</h4>
+<p>作品の意図や工夫、振り返りの言語化が評価されやすい。</p>
+</div>
+<div class="card">
+<h4>知識・技能</h4>
+<p>基本技術の定着と改善の努力が重視される。</p>
+</div>
+</div>
+
+<!-- AD_PLACEHOLDER -->
+
+---
+
+## 🎨 科目別の攻略ポイント
+
+<div class="subject-grid">
+<div class="subject-card">
+<h4>体育</h4>
+<ul>
+<li>準備運動・片付けは誰よりも早く</li>
+<li>苦手競技でも改善ポイントを記録する</li>
+<li>チームへの声掛けで主体性を示す</li>
+</ul>
+</div>
+<div class="subject-card">
+<h4>美術</h4>
+<ul>
+<li>「なぜその表現か」をメモする</li>
+<li>制作過程の試行錯誤を残す</li>
+<li>提出物の仕上げを丁寧に</li>
+</ul>
+</div>
+<div class="subject-card">
+<h4>音楽</h4>
+<ul>
+<li>鑑賞で感じた特徴を言葉にする</li>
+<li>合唱や合奏は協調的な姿勢を見せる</li>
+<li>演奏は練習記録を残して努力を可視化</li>
+</ul>
+</div>
+<div class="subject-card">
+<h4>技術家庭</h4>
+<ul>
+<li>作業手順を正確に守る</li>
+<li>失敗したときの改善点を記録する</li>
+<li>生活への活用アイデアを書き足す</li>
+</ul>
+</div>
+</div>
+
+---
+
+## ✅ 内申点につながる行動チェック
+
+<div class="tips-list">
+<div class="tip">
+<span class="tip-num">1</span>
+<div>
+<h4>授業の準備は必ず先に行う</h4>
+<p>教具の準備・片付けが早いと評価が上がりやすい。</p>
+</div>
+</div>
+<div class="tip">
+<span class="tip-num">2</span>
+<div>
+<h4>振り返りコメントを丁寧に</h4>
+<p>「どこが難しかったか」「次にどうするか」を言語化。</p>
+</div>
+</div>
+<div class="tip">
+<span class="tip-num">3</span>
+<div>
+<h4>提出物は期限より早く</h4>
+<p>主体性と計画性をアピールできる最大のチャンス。</p>
+</div>
+</div>
+</div>
+
+---
+
+## まとめ
+
+<div class="summary-box">
+<h3>📌 この記事のまとめ</h3>
+<ul>
+<li>実技教科は「取り組み方」で評価が変わる</li>
+<li>過程や工夫を言葉で残すことが重要</li>
+<li>主体性と協調性を見える形で示す</li>
+</ul>
+</div>
+
+<div class="cta-box">
+<h3>🎯 副教科の点数を試算しよう</h3>
+<p>My naisinで9教科を入力し、副教科を上げたときの変化を確認してみましょう。</p>
 </div>
     `
   }
