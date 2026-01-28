@@ -77,39 +77,32 @@ export function ScoreProgressChart({ currentTotal, currentMax, currentMode }: Sc
   const yMin = Math.max(0, Math.min(...chartData.map(d => d.percent), calculatePercent(currentTotal, currentMax)) - 10);
   const yMax = Math.min(100, Math.max(...chartData.map(d => d.percent), calculatePercent(currentTotal, currentMax)) + 10);
 
-  // Generate SVG path
+  // Generate SVG path (直線バージョン：確実に点を通ります)
   const generatePath = React.useCallback(() => {
     if (chartData.length === 0) return '';
-    
+
     const points = chartData.map((d, i) => {
       const x = padding.left + (i / Math.max(chartData.length - 1, 1)) * innerWidth;
       const y = padding.top + innerHeight - ((d.percent - yMin) / (yMax - yMin)) * innerHeight;
       return { x, y };
     });
 
-    // Create smooth curve using quadratic bezier
     let path = `M ${points[0].x} ${points[0].y}`;
     for (let i = 1; i < points.length; i++) {
-      const prev = points[i - 1];
-      const curr = points[i];
-      const cpx = (prev.x + curr.x) / 2;
-      path += ` Q ${prev.x + (curr.x - prev.x) * 0.5} ${prev.y} ${cpx} ${(prev.y + curr.y) / 2}`;
-      if (i === points.length - 1) {
-        path += ` Q ${cpx + (curr.x - cpx) * 0.5} ${curr.y} ${curr.x} ${curr.y}`;
-      }
+      path += ` L ${points[i].x} ${points[i].y}`;
     }
     return path;
   }, [chartData, innerWidth, innerHeight, padding, yMin, yMax]);
 
-  // Generate area fill path
+  // Generate area fill path (直線版)
   const generateAreaPath = React.useCallback(() => {
     if (chartData.length === 0) return '';
-    
+
     const linePath = generatePath();
     const lastX = padding.left + innerWidth;
     const firstX = padding.left;
     const bottomY = padding.top + innerHeight;
-    
+
     return `${linePath} L ${lastX} ${bottomY} L ${firstX} ${bottomY} Z`;
   }, [chartData, generatePath, innerWidth, innerHeight, padding]);
 
@@ -227,26 +220,32 @@ export function ScoreProgressChart({ currentTotal, currentMax, currentMode }: Sc
                 );
               })}
 
-              {/* Area fill */}
+              {/* Area fill - ふわっと表示 */}
               <defs>
                 <linearGradient id="areaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
                   <stop offset="0%" stopColor="#14b8a6" stopOpacity="0.3" />
                   <stop offset="100%" stopColor="#14b8a6" stopOpacity="0.05" />
                 </linearGradient>
               </defs>
-              <path
+              <motion.path
                 d={generateAreaPath()}
                 fill="url(#areaGradient)"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.5 }}
               />
 
-              {/* Line */}
-              <path
+              {/* Line - 左から右へ描くアニメーション */}
+              <motion.path
                 d={generatePath()}
                 fill="none"
                 stroke="url(#lineGradient)"
                 strokeWidth="0.8"
                 strokeLinecap="round"
                 strokeLinejoin="round"
+                initial={{ pathLength: 0 }}
+                animate={{ pathLength: 1 }}
+                transition={{ duration: 1.5, ease: 'easeInOut', delay: 0.5 }}
               />
               <defs>
                 <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -256,12 +255,17 @@ export function ScoreProgressChart({ currentTotal, currentMax, currentMode }: Sc
                 </linearGradient>
               </defs>
 
-              {/* Data points */}
+              {/* Data points - 左から順に表示 */}
               {chartData.map((d, i) => {
                 const x = padding.left + (i / Math.max(chartData.length - 1, 1)) * innerWidth;
                 const y = padding.top + innerHeight - ((d.percent - yMin) / (yMax - yMin)) * innerHeight;
                 return (
-                  <g key={i}>
+                  <motion.g
+                    key={i}
+                    initial={{ scale: 0, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ delay: 0.5 + i * 0.15 }}
+                  >
                     <circle
                       cx={x}
                       cy={y}
@@ -270,7 +274,7 @@ export function ScoreProgressChart({ currentTotal, currentMax, currentMode }: Sc
                       stroke="#14b8a6"
                       strokeWidth="0.6"
                     />
-                  </g>
+                  </motion.g>
                 );
               })}
 
