@@ -100,7 +100,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                 .replace(/#### /g, '<h4>')
                 .replace(/---/g, '<hr>')
                 .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
-                .replace(/<!-- AD_PLACEHOLDER -->/g, '<div class="ad-placeholder">📢 広告スペース</div>')
+                .replace(/<!-- AD_PLACEHOLDER -->/g, '')
             }}
           />
         </article>

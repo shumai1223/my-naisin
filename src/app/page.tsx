@@ -17,7 +17,6 @@ import {
 
 import { Footer } from '@/components/Footer';
 import { Header } from '@/components/Header';
-import { AdPlaceholder } from '@/components/AdPlaceholder';
 import { TipsSection } from '@/components/TipsSection';
 import { StatsBar } from '@/components/StatsBar';
 import { GoalSection } from '@/components/GoalSection';
@@ -45,11 +44,6 @@ import { Switch } from '@/components/ui/Switch';
 import { HistoryPanel } from '@/components/HistoryPanel';
 import { PrintButton } from '@/components/PrintButton';
 import { BlogSection } from '@/components/BlogSection';
-
-export const metadata = {
-  title: '内申点シミュレーター | 成績可視化と学習アドバイス',
-  description: '内申点の計算・可視化ツール。成績推移グラフ、教科別アドバイス、目標設定、勉強タイマー、学習記事をワンストップで提供します。',
-};
 
 function popConfetti() {
   confetti({
@@ -194,25 +188,11 @@ export default function Page() {
       <WelcomeBack />
       
       <div className="mx-auto max-w-7xl px-4 py-6 lg:px-8">
-        <div className="grid gap-6 lg:grid-cols-[200px_1fr_200px]">
+        <div className="mx-auto max-w-4xl">
           {/* Main Content */}
           <div className="min-w-0">
             <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl">
               <Header />
-
-              {/* Static description for crawlers and JS-off users */}
-              <div className="px-4 pt-4 md:px-6" aria-hidden="false">
-                <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-700">
-                  <p>
-                    内申点シミュレーターは9教科の成績を入力するだけで合計点と達成率を自動計算し、グラフやアドバイスで可視化します。東京都モードや通常モードに対応し、学習目標設定、勉強タイマー、成績推移グラフ、教科別フィードバックも提供します。
-                  </p>
-                </div>
-                <noscript>
-                  <div className="mt-2 rounded-xl bg-amber-50 p-3 text-xs text-amber-700">
-                    JavaScriptが無効でも主要な説明と記事テキストは表示されます。計算機能を利用するにはJavaScriptを有効にしてください。
-                  </div>
-                </noscript>
-              </div>
 
               {/* Stats Bar */}
               <div className="px-4 pb-4 md:px-6">
@@ -380,9 +360,6 @@ export default function Page() {
                 {/* 目標設定 */}
                 <GoalSection currentScore={result.total} maxScore={result.max} />
 
-                {/* 広告（結果後） */}
-                <AdPlaceholder />
-
               </section>
             )}
 
@@ -396,11 +373,6 @@ export default function Page() {
           <TipsSection />
         </div>
       </main>
-
-      {/* フッター上広告 */}
-      <div className="px-4 pb-6 md:px-6">
-        <AdPlaceholder />
-      </div>
 
       <Footer />
             </div>
