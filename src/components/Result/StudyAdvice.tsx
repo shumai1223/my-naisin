@@ -55,6 +55,12 @@ const STUDY_TIPS = {
     { icon: Flame, title: '毎日5分の積み上げ', desc: '短くても毎日続けると記憶が定着しやすい' },
     { icon: Heart, title: 'できたことメモ', desc: '達成できたことを1行記録すると自己肯定感が上がる' },
     { icon: BookOpen, title: '教科書の言い換え', desc: '用語を自分の言葉で説明できると理解度が上がる' },
+    { icon: CheckCircle2, title: '間違いノートを作る', desc: '同じミスを繰り返さないために、間違えた問題を記録' },
+    { icon: TrendingUp, title: '週末振り返り', desc: '土日に1週間の学習を振り返ると定着率が上がる' },
+    { icon: Star, title: '得意科目から始める', desc: '得意科目で勢いをつけてから苦手に挑戦' },
+    { icon: Zap, title: '立って音読', desc: '眠い時は立って音読すると目が覚める' },
+    { icon: Trophy, title: '小テスト満点チャレンジ', desc: '小テストを全力で取ると内申点に直結' },
+    { icon: ArrowUpRight, title: '1教科集中週間', desc: '1週間1教科に集中すると効率的に伸びる' },
   ],
   motivation: [
     '小さな目標を立てて、達成する喜びを積み重ねよう',
@@ -71,6 +77,20 @@ const STUDY_TIPS = {
     '完璧を狙うより「続ける」ことが最強',
     '短い時間でも積み重ねれば大きな力になる',
     '自分のペースで進めばいい。止まらなければ必ず伸びる',
+    '今この瞬間が、未来の自分を作っている',
+    '努力は裏切らない。続けた先に結果がある',
+    '苦手は伸びしろ。克服すれば大きな武器になる',
+    '1日1歩でも365日で365歩進める',
+    '諦めなければ、必ず道は開ける',
+    '今日の頑張りが明日の自信になる',
+  ],
+  actionTips: [
+    { title: '提出物チェック', desc: '今週の提出物を確認して、期限2日前に仕上げよう' },
+    { title: '質問リスト作成', desc: '授業で分からなかった点を3つ書き出して先生に質問' },
+    { title: 'ノート見直し', desc: '今日の授業ノートを5分で見直して記憶を定着' },
+    { title: 'ワーク1ページ', desc: '苦手科目のワークを1ページだけ解いてみよう' },
+    { title: '単語10個暗記', desc: '英単語や用語を10個だけ覚えて寝よう' },
+    { title: '計算ドリル5問', desc: '計算力維持のために毎日5問だけ解く習慣を' },
   ],
 };
 
@@ -255,6 +275,38 @@ export function StudyAdvice({ scores, result }: StudyAdviceProps) {
       priority: 'tip',
     });
 
+    // Add action tip
+    const actionTip = STUDY_TIPS.actionTips[Math.floor(Math.random() * STUDY_TIPS.actionTips.length)];
+    advice.push({
+      icon: CheckCircle2,
+      title: `🎯 今日のアクション：${actionTip.title}`,
+      description: actionTip.desc,
+      priority: 'tip',
+    });
+
+    // Add multiple weak subject advice if there are many
+    if (weakSubjects.length >= 2) {
+      const secondWeak = weakSubjects[1];
+      advice.push({
+        icon: AlertCircle,
+        title: `${secondWeak.label}も要注意`,
+        description: '複数の苦手科目がある場合は、1つずつ順番に克服しよう',
+        detail: SUBJECT_ADVICE[secondWeak.key]?.weak || '基礎から丁寧に取り組みましょう',
+        priority: 'high',
+      });
+    }
+
+    // Add strong subject leverage advice
+    if (strongSubjects.length >= 2) {
+      advice.push({
+        icon: Trophy,
+        title: `得意科目が${strongSubjects.length}つ！`,
+        description: '得意科目の勉強法を他教科にも応用してみよう',
+        detail: '同じ学習パターンで苦手科目も攻略できるかも',
+        priority: 'low',
+      });
+    }
+
     // Random study tip
     const randomTip = STUDY_TIPS.general[Math.floor(Math.random() * STUDY_TIPS.general.length)];
     advice.push({
@@ -264,7 +316,18 @@ export function StudyAdvice({ scores, result }: StudyAdviceProps) {
       priority: 'tip',
     });
 
-    return advice.slice(0, 7);
+    // Add second random tip for variety
+    const secondTip = STUDY_TIPS.general[Math.floor(Math.random() * STUDY_TIPS.general.length)];
+    if (secondTip.title !== randomTip.title) {
+      advice.push({
+        icon: secondTip.icon,
+        title: secondTip.title,
+        description: secondTip.desc,
+        priority: 'tip',
+      });
+    }
+
+    return advice.slice(0, 10);
   };
 
   const advice = generateAdvice();

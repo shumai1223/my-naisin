@@ -35,6 +35,7 @@ import { RankCard } from '@/components/Result/RankCard';
 import { ScoreGauge } from '@/components/Result/ScoreGauge';
 import { ShareModal } from '@/components/Result/ShareModal';
 import { StudyAdvice } from '@/components/Result/StudyAdvice';
+import { ScoreProgressChart } from '@/components/Result/ScoreProgressChart';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { Switch } from '@/components/ui/Switch';
@@ -335,6 +336,13 @@ export default function Page() {
 
                 {/* 達成バッジ */}
                 <AchievementBadges scores={scores} result={result} />
+
+                {/* 成績推移グラフ */}
+                <ScoreProgressChart 
+                  currentTotal={result.total} 
+                  currentMax={result.max} 
+                  currentMode={mode} 
+                />
 
                 {/* 勉強アドバイス */}
                 <StudyAdvice scores={scores} result={result} />
