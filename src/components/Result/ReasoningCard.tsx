@@ -142,11 +142,11 @@ export function ReasoningCard({ result, scores }: ReasoningCardProps) {
                   <div className="mt-3 rounded-xl bg-white/80 p-4 font-mono text-sm font-semibold text-slate-800 shadow-sm">
                     {result.mode === 'tokyo' ? (
                       <>
-                        <div>合計 = Σ(5教科 × 1)</div>
-                        <div className="mt-1 pl-8">+ Σ(実技4教科 × 2)</div>
+                        <div>合計 = (5教科 × 1)</div>
+                        <div className="mt-1 pl-8">+ (実技4教科 × 2)</div>
                       </>
                     ) : (
-                      <div>合計 = Σ(9教科 × 1)</div>
+                      <div>合計 = (9教科 × 1)</div>
                     )}
                   </div>
                   <div className="mt-4 space-y-2">

@@ -172,15 +172,15 @@ export function ScoreProgressChart({ currentTotal, currentMax, currentMode }: Sc
             </div>
             <button
               onClick={() => setExpanded(!expanded)}
-              className="rounded-full bg-white/20 px-4 py-2 text-sm font-bold shadow-sm backdrop-blur-sm transition hover:bg-white/30"
+              className="flex items-center gap-2 rounded-full bg-white/90 px-4 py-2 text-sm font-black text-emerald-700 shadow-md transition hover:-translate-y-0.5 hover:shadow-lg"
             >
+              {expanded ? (
+                <ChevronUp className="h-4 w-4" />
+              ) : (
+                <ChevronDown className="h-4 w-4" />
+              )}
               {expanded ? '閉じる' : '見る'}
             </button>
-            {expanded ? (
-              <ChevronUp className="h-5 w-5 text-white/60" />
-            ) : (
-              <ChevronDown className="h-5 w-5 text-white/60" />
-            )}
           </div>
         </div>
       </div>
