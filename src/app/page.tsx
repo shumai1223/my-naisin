@@ -133,12 +133,13 @@ export default function Page() {
 
   const result: ResultData = React.useMemo(
     () => ({
+      prefectureCode,
       total,
       max,
       percent,
       rank
     }),
-    [total, max, percent, rank]
+    [prefectureCode, total, max, percent, rank]
   );
 
   const onScoreChange = React.useCallback((key: SubjectKey, nextValue: number) => {

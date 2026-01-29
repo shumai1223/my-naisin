@@ -4,9 +4,10 @@ import * as React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Calculator, BookOpen, Trophy, ListChecks, ChevronRight, Info } from 'lucide-react';
 
-import { MODE_CONFIG, RANK_DEFINITIONS, SUBJECTS } from '@/lib/constants';
+import { RANK_DEFINITIONS, SUBJECTS } from '@/lib/constants';
+import { getPrefectureByCode } from '@/lib/prefectures';
 import type { ResultData, Scores } from '@/lib/types';
-import { cn } from '@/lib/utils';
+import { cn, getSubjectWeight } from '@/lib/utils';
 
 import { Card } from '@/components/ui/Card';
 
@@ -32,13 +33,15 @@ const TABS: TabConfig[] = [
 
 export function ReasoningCard({ result, scores }: ReasoningCardProps) {
   const [activeTab, setActiveTab] = React.useState<TabId>('formula');
-  const weights = MODE_CONFIG[result.mode].weights;
+  const prefecture = getPrefectureByCode(result.prefectureCode);
+  const coreWeight = getSubjectWeight(result.prefectureCode, 'core');
+  const practicalWeight = getSubjectWeight(result.prefectureCode, 'practical');
 
   const breakdown = React.useMemo(() => {
     return SUBJECTS.map((subject) => {
       const raw = scores[subject.key];
       const safe = Math.min(5, Math.max(1, Math.round(raw)));
-      const weight = subject.category === 'core' ? weights.core : weights.practical;
+      const weight = subject.category === 'core' ? coreWeight : practicalWeight;
       return {
         key: subject.key,
         label: subject.label,
@@ -48,18 +51,18 @@ export function ReasoningCard({ result, scores }: ReasoningCardProps) {
         points: safe * weight
       };
     });
-  }, [scores, weights.core, weights.practical]);
+  }, [scores, coreWeight, practicalWeight]);
 
   const totalComputed = React.useMemo(() => breakdown.reduce((sum, row) => sum + row.points, 0), [breakdown]);
 
   const minPossibleTotal = React.useMemo(() => {
     return SUBJECTS.reduce((sum, subject) => {
-      const weight = subject.category === 'core' ? weights.core : weights.practical;
+      const weight = subject.category === 'core' ? coreWeight : practicalWeight;
       return sum + 1 * weight;
     }, 0);
-  }, [weights.core, weights.practical]);
+  }, [coreWeight, practicalWeight]);
 
-  const modeLabel = result.mode === 'tokyo' ? '東京都方式' : '標準方式';
+  const prefectureLabel = prefecture?.name ?? '都道府県別方式';
 
   return (
     <Card className="overflow-hidden">
@@ -129,7 +132,7 @@ export function ReasoningCard({ result, scores }: ReasoningCardProps) {
               {/* Mode Badge */}
               <div className="mb-5 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 px-4 py-2 text-sm font-bold text-white shadow-md shadow-blue-200">
                 <Calculator className="h-4 w-4" />
-                {modeLabel}
+                {prefectureLabel}
               </div>
 
               <div className="grid gap-4 lg:grid-cols-2">
@@ -140,14 +143,8 @@ export function ReasoningCard({ result, scores }: ReasoningCardProps) {
                     計算式
                   </div>
                   <div className="mt-3 rounded-xl bg-white/80 p-4 font-mono text-sm font-semibold text-slate-800 shadow-sm">
-                    {result.mode === 'tokyo' ? (
-                      <>
-                        <div>合計 = (5教科 × 1)</div>
-                        <div className="mt-1 pl-8">+ (実技4教科 × 2)</div>
-                      </>
-                    ) : (
-                      <div>合計 = (9教科 × 1)</div>
-                    )}
+                    <div>合計 = (5教科 × {coreWeight})</div>
+                    <div className="mt-1 pl-8">+ (実技4教科 × {practicalWeight})</div>
                   </div>
                   <div className="mt-4 space-y-2">
                     <div className="flex items-center justify-between rounded-lg bg-white/60 px-3 py-2">
@@ -156,11 +153,11 @@ export function ReasoningCard({ result, scores }: ReasoningCardProps) {
                     </div>
                     <div className="flex items-center justify-between rounded-lg bg-white/60 px-3 py-2">
                       <span className="text-xs font-medium text-slate-600">5教科の重み</span>
-                      <span className="text-sm font-bold text-slate-800">× {weights.core}</span>
+                      <span className="text-sm font-bold text-slate-800">× {coreWeight}</span>
                     </div>
                     <div className="flex items-center justify-between rounded-lg bg-white/60 px-3 py-2">
                       <span className="text-xs font-medium text-slate-600">実技4教科の重み</span>
-                      <span className="text-sm font-bold text-slate-800">× {weights.practical}</span>
+                      <span className="text-sm font-bold text-slate-800">× {practicalWeight}</span>
                     </div>
                   </div>
                 </div>
@@ -176,7 +173,7 @@ export function ReasoningCard({ result, scores }: ReasoningCardProps) {
                   </div>
                   <div className="mt-4 rounded-xl bg-white/60 p-4">
                     <div className="text-xs font-medium text-slate-600">あなたの計算:</div>
-                    <div className="mt-2 flex items-center gap-2 text-sm">
+                    <div className="mt-3 rounded-xl bg-white/80 p-4 font-mono text-sm font-semibold text-slate-800 shadow-sm">
                       <span className="font-mono font-bold text-slate-800">floor({totalComputed} ÷ {result.max} × 100)</span>
                       <span className="text-slate-400">=</span>
                       <span className="rounded-lg bg-emerald-100 px-3 py-1 font-black text-emerald-700">{result.percent}%</span>

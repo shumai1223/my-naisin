@@ -31,6 +31,7 @@ export interface RankDefinition {
 }
 
 export interface ResultData {
+  prefectureCode: string;
   total: number;
   max: number;
   percent: number;
