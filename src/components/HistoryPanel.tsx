@@ -4,8 +4,8 @@ import * as React from 'react';
 import { History, Trash2, Clock, ChevronDown, ChevronUp } from 'lucide-react';
 
 import { readHistory, clearHistory } from '@/lib/persistence';
+import { DEFAULT_PREFECTURE_CODE } from '@/lib/prefectures';
 import { calculateTotalScore, calculateMaxScore, calculatePercent } from '@/lib/utils';
-import { MODE_CONFIG } from '@/lib/constants';
 import type { SavedHistoryEntry } from '@/lib/types';
 
 interface HistoryPanelProps {
@@ -62,10 +62,10 @@ export function HistoryPanel({ onLoadEntry }: HistoryPanelProps) {
         <div className="border-t border-slate-100 px-5 py-4">
           <div className="space-y-2">
             {history.slice(0, 10).map((entry) => {
-              const total = calculateTotalScore(entry.scores, entry.mode);
-              const max = calculateMaxScore(entry.mode);
+              const prefCode = entry.prefectureCode ?? DEFAULT_PREFECTURE_CODE;
+              const total = calculateTotalScore(entry.scores, prefCode);
+              const max = calculateMaxScore(prefCode);
               const percent = calculatePercent(total, max);
-              const modeLabel = MODE_CONFIG[entry.mode].label;
               const date = new Date(entry.savedAt);
 
               return (
@@ -84,7 +84,7 @@ export function HistoryPanel({ onLoadEntry }: HistoryPanelProps) {
                         {Math.round(percent)}%
                       </div>
                     </div>
-                    <div className="text-xs text-slate-400">{modeLabel}</div>
+                    <div className="text-xs text-slate-400">{prefCode}</div>
                   </div>
                   <div className="mt-1 flex items-center gap-2">
                     <Clock className="h-3 w-3 text-slate-400" />
