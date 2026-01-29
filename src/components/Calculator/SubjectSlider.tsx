@@ -1,8 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Minus, Plus, TrendingUp, Star } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { Minus, Plus } from 'lucide-react';
 
 import type { Subject } from '@/lib/types';
 import { clamp, cn, getSubjectWeight } from '@/lib/utils';
@@ -19,8 +18,6 @@ export interface SubjectSliderProps {
 export function SubjectSlider({ subject, prefectureCode, value, onChange, maxGrade = 5 }: SubjectSliderProps) {
   const weight = getSubjectWeight(prefectureCode, subject.category);
   const isPractical = subject.category === 'practical';
-  const isMaxScore = value === maxGrade;
-  const scorePercent = ((value - 1) / (maxGrade - 1)) * 100;
 
   const setValue = React.useCallback(
     (next: number) => {
@@ -29,113 +26,64 @@ export function SubjectSlider({ subject, prefectureCode, value, onChange, maxGra
     [onChange, maxGrade]
   );
 
-  // 評価に応じた色とラベル
-  const scoreStyle = React.useMemo(() => {
-    if (value === 5) return { color: 'text-emerald-600', bg: 'bg-emerald-500', label: '最高！', gradient: 'from-emerald-400 to-green-500' };
-    if (value === 4) return { color: 'text-blue-600', bg: 'bg-blue-500', label: '良い！', gradient: 'from-blue-400 to-indigo-500' };
-    if (value === 3) return { color: 'text-slate-600', bg: 'bg-slate-400', label: '普通', gradient: 'from-slate-400 to-slate-500' };
-    if (value === 2) return { color: 'text-amber-600', bg: 'bg-amber-500', label: 'もう少し', gradient: 'from-amber-400 to-orange-500' };
-    return { color: 'text-red-500', bg: 'bg-red-500', label: 'がんばれ', gradient: 'from-red-400 to-rose-500' };
-  }, [value]);
-
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      className={cn(
-        'relative overflow-hidden rounded-2xl border-2 bg-white p-4 shadow-sm transition-all hover:shadow-lg',
-        isMaxScore ? 'border-emerald-300 bg-gradient-to-br from-emerald-50/50 to-green-50/50' : 'border-slate-200/80',
-        isPractical && weight > 1 && 'ring-2 ring-blue-100'
-      )}
-    >
-      {/* 背景の装飾 */}
-      {isMaxScore && (
-        <div className="pointer-events-none absolute -right-4 -top-4 h-20 w-20 rounded-full bg-emerald-200/30 blur-2xl" />
-      )}
-
-      <div className="flex items-start justify-between gap-3">
-        <div className="flex-1">
+    <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition-shadow hover:shadow-md">
+      {/* ヘッダー */}
+      <div className="mb-3 flex items-center justify-between gap-3">
+        <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2">
-            {/* 教科アイコン */}
-            <div className={cn(
-              'grid h-8 w-8 place-items-center rounded-lg',
-              isPractical ? 'bg-gradient-to-br from-violet-500 to-purple-600' : 'bg-gradient-to-br from-blue-500 to-indigo-600'
-            )}>
-              {isPractical ? (
-                <Star className="h-4 w-4 text-white" />
-              ) : (
-                <TrendingUp className="h-4 w-4 text-white" />
-              )}
-            </div>
-            <div>
-              <div className="text-sm font-bold text-slate-800">{subject.label}</div>
-              <div className="flex items-center gap-1.5">
-                {weight > 1 && (
-                  <span className="rounded-full bg-gradient-to-r from-blue-500 to-indigo-500 px-2 py-0.5 text-[10px] font-bold text-white shadow-sm">
-                    ×{weight}倍
-                  </span>
-                )}
-                <span className="text-[10px] text-slate-400">
-                  {isPractical ? '実技教科' : '5教科'}
-                </span>
-              </div>
-            </div>
+            <div className="text-sm font-semibold text-slate-700">{subject.label}</div>
+            {weight > 1 && (
+              <span className="rounded bg-blue-100 px-1.5 py-0.5 text-[10px] font-semibold text-blue-600">
+                ×{weight}
+              </span>
+            )}
+          </div>
+          <div className="mt-0.5 text-[11px] text-slate-500">
+            {isPractical ? '実技教科' : '5教科'} • 換算: {value * weight}点
           </div>
         </div>
 
-        {/* スコア表示 */}
-        <div className="flex items-center gap-2">
+        {/* スコア表示と+/-ボタン */}
+        <div className="flex shrink-0 items-center gap-2">
           <button
             type="button"
             onClick={() => setValue(value - 1)}
             disabled={value <= 1}
             className={cn(
-              'grid h-10 w-10 place-items-center rounded-xl border-2 transition-all',
+              'grid h-9 w-9 place-items-center rounded-lg border transition-all',
               value <= 1
-                ? 'border-slate-100 bg-slate-50 text-slate-300 cursor-not-allowed'
-                : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:bg-slate-50 active:scale-95'
+                ? 'border-slate-200 bg-slate-50 text-slate-300 cursor-not-allowed'
+                : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50 active:scale-95'
             )}
             aria-label={`${subject.label}を1下げる`}
           >
-            <Minus className="h-5 w-5" />
+            <Minus className="h-4 w-4" />
           </button>
           
-          <motion.div
-            key={value}
-            initial={{ scale: 0.8 }}
-            animate={{ scale: 1 }}
-            className={cn(
-              'relative grid h-12 w-14 place-items-center rounded-xl text-2xl font-black text-white shadow-lg',
-              `bg-gradient-to-br ${scoreStyle.gradient}`
-            )}
-          >
+          <div className="grid h-10 w-12 place-items-center rounded-lg bg-blue-500 text-xl font-bold text-white shadow-sm">
             {value}
-            {isMaxScore && (
-              <div className="absolute -right-1 -top-1 grid h-5 w-5 place-items-center rounded-full bg-amber-400 shadow-md">
-                <Star className="h-3 w-3 text-amber-900" />
-              </div>
-            )}
-          </motion.div>
+          </div>
           
           <button
             type="button"
             onClick={() => setValue(value + 1)}
             disabled={value >= maxGrade}
             className={cn(
-              'grid h-10 w-10 place-items-center rounded-xl border-2 transition-all',
+              'grid h-9 w-9 place-items-center rounded-lg border transition-all',
               value >= maxGrade
-                ? 'border-slate-100 bg-slate-50 text-slate-300 cursor-not-allowed'
-                : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:bg-slate-50 active:scale-95'
+                ? 'border-slate-200 bg-slate-50 text-slate-300 cursor-not-allowed'
+                : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50 active:scale-95'
             )}
             aria-label={`${subject.label}を1上げる`}
           >
-            <Plus className="h-5 w-5" />
+            <Plus className="h-4 w-4" />
           </button>
         </div>
       </div>
 
       {/* スライダー */}
-      <div className="mt-4">
+      <div className="px-1">
         <input
           className="naishin-range"
           type="range"
@@ -146,16 +94,6 @@ export function SubjectSlider({ subject, prefectureCode, value, onChange, maxGra
           onChange={(e) => setValue(Number(e.target.value))}
           aria-label={`${subject.label}の内申点`}
         />
-        
-        {/* スコアラベル */}
-        <div className="mt-2 flex items-center justify-between">
-          <span className={cn('text-xs font-semibold', scoreStyle.color)}>
-            {scoreStyle.label}
-          </span>
-          <span className="text-[10px] text-slate-400">
-            換算: {value * weight}点
-          </span>
-        </div>
       </div>
 
       {/* モバイル用クイック選択ボタン */}
@@ -167,9 +105,9 @@ export function SubjectSlider({ subject, prefectureCode, value, onChange, maxGra
               type="button"
               onClick={() => setValue(i)}
               className={cn(
-                'h-10 rounded-xl text-sm font-bold transition-all',
+                'h-9 rounded-lg text-sm font-semibold transition-all',
                 i === value
-                  ? `bg-gradient-to-br ${scoreStyle.gradient} text-white shadow-md`
+                  ? 'bg-blue-500 text-white shadow-sm'
                   : 'bg-slate-100 text-slate-600 hover:bg-slate-200 active:scale-95'
               )}
             >
@@ -178,6 +116,6 @@ export function SubjectSlider({ subject, prefectureCode, value, onChange, maxGra
           ))}
         </div>
       )}
-    </motion.div>
+    </div>
   );
 }
