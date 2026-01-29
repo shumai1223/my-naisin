@@ -3,7 +3,8 @@
 import * as React from 'react';
 import { Sparkles, Trophy, TrendingUp } from 'lucide-react';
 
-import { APP_NAME, MODE_CONFIG, SUBJECTS } from '@/lib/constants';
+import { APP_NAME, SUBJECTS } from '@/lib/constants';
+import { getPrefectureByCode } from '@/lib/prefectures';
 import type { ResultData, Scores } from '@/lib/types';
 import { cn } from '@/lib/utils';
 
@@ -14,7 +15,8 @@ export interface ShareCardProps {
 
 export const ShareCard = React.forwardRef<HTMLDivElement, ShareCardProps>(
   function ShareCard({ result, scores }, ref) {
-    const modeLabel = MODE_CONFIG[result.mode].label;
+    const prefecture = getPrefectureByCode(result.prefectureCode);
+    const prefectureLabel = prefecture?.name ?? result.prefectureCode;
 
     const rankVisual: Record<string, { gradient: string; bg: string; text: string; border: string }> = {
       S: { 
@@ -58,7 +60,7 @@ export const ShareCard = React.forwardRef<HTMLDivElement, ShareCardProps>(
             </div>
             <div>
               <div className="text-sm font-bold text-slate-800">{APP_NAME}</div>
-              <div className="text-[10px] text-slate-500">{modeLabel}</div>
+              <div className="text-[10px] text-slate-500">{prefectureLabel}</div>
             </div>
           </div>
           <div className={cn('rounded-full px-3 py-1 text-xs font-bold', visual.bg, visual.text)}>

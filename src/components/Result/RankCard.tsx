@@ -5,7 +5,8 @@ import { motion } from 'framer-motion';
 import { Crown, Sparkles } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
-import { MODE_CONFIG, RANK_DEFINITIONS } from '@/lib/constants';
+import { RANK_DEFINITIONS } from '@/lib/constants';
+import { getPrefectureByCode } from '@/lib/prefectures';
 import type { ResultData } from '@/lib/types';
 import { cn } from '@/lib/utils';
 
@@ -16,7 +17,8 @@ export interface RankCardProps {
 }
 
 export function RankCard({ result }: RankCardProps) {
-  const modeLabel = MODE_CONFIG[result.mode].label;
+  const prefecture = getPrefectureByCode(result.prefectureCode);
+  const prefectureLabel = prefecture?.name ?? result.prefectureCode;
   const isS = result.rank.code === 'S';
 
   React.useEffect(() => {
@@ -86,7 +88,7 @@ export function RankCard({ result }: RankCardProps) {
               </div>
               <div>
                 <div className="text-sm font-bold text-slate-800">ランク判定</div>
-                <div className="text-[11px] text-slate-500">{modeLabel}</div>
+                <div className="text-xs text-slate-500">{prefectureLabel}</div>
               </div>
             </div>
             <div className={cn('rounded-full px-3 py-1 text-xs font-bold', rankVisual.bg, rankVisual.color)}>

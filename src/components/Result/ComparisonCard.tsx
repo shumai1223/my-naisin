@@ -4,10 +4,11 @@ import * as React from 'react';
 import { motion } from 'framer-motion';
 import { BarChart3 } from 'lucide-react';
 
-import { MODE_CONFIG, SUBJECTS } from '@/lib/constants';
+import { SUBJECTS } from '@/lib/constants';
+import { DEFAULT_PREFECTURE_CODE } from '@/lib/prefectures';
 import { readHistory } from '@/lib/persistence';
 import type { ResultData, SavedHistoryEntry, Scores, SubjectKey } from '@/lib/types';
-import { cn } from '@/lib/utils';
+import { cn, calculateTotalScore, calculateMaxScore, calculatePercent } from '@/lib/utils';
 
 import { Card } from '@/components/ui/Card';
 
@@ -85,10 +86,10 @@ export function ComparisonCard({ result, scores, saveEnabled, lastSavedId }: Com
     const first = history[0];
     if (!first) return null;
 
-    const sameAsCurrent = first.mode === result.mode && scoresEqual(first.scores, scores);
+    const sameAsCurrent = (first.prefectureCode ?? DEFAULT_PREFECTURE_CODE) === result.prefectureCode && scoresEqual(first.scores, scores);
     if (sameAsCurrent) return history[1] ?? null;
     return first;
-  }, [history, result.mode, scores]);
+  }, [history, result.prefectureCode, scores]);
 
   const metrics = React.useMemo(() => {
     if (!previous) return null;
@@ -130,8 +131,9 @@ export function ComparisonCard({ result, scores, saveEnabled, lastSavedId }: Com
 
     const lines: string[] = [];
 
-    if (previous.mode !== result.mode) {
-      lines.push(`前回は「${MODE_CONFIG[previous.mode].label}」での記録です（比較は平均/達成率ベース）`);
+    const prevPrefCode = previous.prefectureCode ?? DEFAULT_PREFECTURE_CODE;
+    if (prevPrefCode !== result.prefectureCode) {
+      lines.push(`前回は「${prevPrefCode}」での記録です（比較は平均/達成率ベース）`);
     }
 
     if (metrics.percentDelta > 0) {
@@ -160,7 +162,7 @@ export function ComparisonCard({ result, scores, saveEnabled, lastSavedId }: Com
     }
 
     return lines.slice(0, 3);
-  }, [metrics, previous, result.mode, scores]);
+  }, [metrics, previous, result.prefectureCode, scores]);
 
   return (
     <Card className="overflow-hidden">
@@ -245,16 +247,8 @@ export function ComparisonCard({ result, scores, saveEnabled, lastSavedId }: Com
 }
 
 function previousPercent(entry: SavedHistoryEntry) {
-  const max = MODE_CONFIG[entry.mode].max;
-  if (max <= 0) return 0;
-
-  const weights = MODE_CONFIG[entry.mode].weights;
-  const total = SUBJECTS.reduce((sum, subject) => {
-    const raw = entry.scores[subject.key];
-    const safe = Math.min(5, Math.max(1, Math.round(raw)));
-    const weight = subject.category === 'core' ? weights.core : weights.practical;
-    return sum + safe * weight;
-  }, 0);
-
-  return Math.floor((total / max) * 100);
+  const prefCode = entry.prefectureCode ?? DEFAULT_PREFECTURE_CODE;
+  const total = calculateTotalScore(entry.scores, prefCode);
+  const max = calculateMaxScore(prefCode);
+  return calculatePercent(total, max);
 }
