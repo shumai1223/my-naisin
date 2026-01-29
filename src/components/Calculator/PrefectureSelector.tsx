@@ -72,6 +72,12 @@ export function PrefectureSelector({
         </motion.div>
       )}
 
+      {/* Section Label */}
+      <div className="mb-2">
+        <h3 className="text-sm font-bold text-slate-700">都道府県の選択</h3>
+        <p className="text-xs text-slate-500">お住まいの地域を選んでください</p>
+      </div>
+
       {/* Prefecture Dropdown */}
       <div ref={dropdownRef} className="relative">
         <button

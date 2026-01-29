@@ -134,31 +134,18 @@ export function SubjectSlider({ subject, prefectureCode, value, onChange, maxGra
         </div>
       </div>
 
-      {/* プログレスバーとスライダー */}
+      {/* スライダー */}
       <div className="mt-4">
-        <div className="relative">
-          {/* プログレスバー背景 */}
-          <div className="h-3 w-full overflow-hidden rounded-full bg-slate-200">
-            <motion.div
-              className={cn('h-full rounded-full', `bg-gradient-to-r ${scoreStyle.gradient}`)}
-              initial={{ width: 0 }}
-              animate={{ width: `${scorePercent}%` }}
-              transition={{ duration: 0.3, ease: 'easeOut' }}
-            />
-          </div>
-          
-          {/* スライダー */}
-          <input
-            className={cn('naishin-range', 'absolute inset-0 cursor-pointer opacity-0')}
-            type="range"
-            min={1}
-            max={maxGrade}
-            step={1}
-            value={value}
-            onChange={(e) => setValue(Number(e.target.value))}
-            aria-label={`${subject.label}の内申点`}
-          />
-        </div>
+        <input
+          className="naishin-range"
+          type="range"
+          min={1}
+          max={maxGrade}
+          step={1}
+          value={value}
+          onChange={(e) => setValue(Number(e.target.value))}
+          aria-label={`${subject.label}の内申点`}
+        />
         
         {/* スコアラベル */}
         <div className="mt-2 flex items-center justify-between">
