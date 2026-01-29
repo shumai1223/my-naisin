@@ -2,17 +2,15 @@
 
 import * as React from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Copy, Download, Share2, X, Loader2, CheckCircle, Image as ImageIcon } from 'lucide-react';
+import { Download, Share2, X, Loader2, CheckCircle, Sparkles, Smartphone } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import html2canvas from 'html2canvas';
 
-import { APP_NAME, MODE_CONFIG, SUBJECTS } from '@/lib/constants';
+import { APP_NAME } from '@/lib/constants';
 import type { ResultData, Scores } from '@/lib/types';
-import { buildShareText, cn } from '@/lib/utils';
+import { cn } from '@/lib/utils';
 
-import { Button } from '@/components/ui/Button';
-import { Card } from '@/components/ui/Card';
-import { ShareCard } from './ShareCard';
+import { ShareCard } from '@/components/Result/ShareCard';
 
 export interface ShareModalProps {
   open: boolean;
@@ -34,12 +32,12 @@ function dataUrlToFile(dataUrl: string, filename: string) {
 
 function burstConfetti() {
   confetti({
-    particleCount: 90,
-    spread: 65,
-    startVelocity: 35,
-    ticks: 220,
-    scalar: 0.95,
-    origin: { y: 0.6 }
+    particleCount: 120,
+    spread: 80,
+    startVelocity: 40,
+    ticks: 250,
+    scalar: 1,
+    origin: { y: 0.5 }
   });
 }
 
@@ -51,44 +49,18 @@ export function ShareModal({ open, onClose, result, scores, shareUrl }: ShareMod
   const [saveStatus, setSaveStatus] = React.useState<SaveStatus>('idle');
   const [toast, setToast] = React.useState<string | null>(null);
 
-  const shareText = React.useMemo(() => {
-    return buildShareText({
-      appName: APP_NAME,
-      rankCode: result.rank.code,
-      title: result.rank.title,
-      total: result.total,
-      max: result.max,
-      percent: result.percent,
-      url: shareUrl || 'https://example.com'
-    });
-  }, [result, shareUrl]);
-
   const showToast = React.useCallback((message: string) => {
     setToast(message);
-    window.setTimeout(() => setToast(null), 2200);
+    window.setTimeout(() => setToast(null), 2500);
   }, []);
-
-  const onCopy = React.useCallback(async () => {
-    try {
-      await navigator.clipboard.writeText(shareText);
-      showToast('テキストをコピーした');
-    } catch {
-      showToast('コピーできなかった…ブラウザ設定を確認してね');
-    }
-  }, [shareText, showToast]);
 
   const generatePngWithHtml2Canvas = React.useCallback(async () => {
     if (!captureRef.current) return null;
-    
     try {
-      // Wait for fonts to load
       await document.fonts.ready;
-      
-      // Small delay to ensure rendering is complete
       await new Promise(resolve => setTimeout(resolve, 100));
-      
       const canvas = await html2canvas(captureRef.current, {
-        scale: 2, // High resolution for mobile/SNS
+        scale: 2,
         useCORS: true,
         allowTaint: true,
         backgroundColor: '#ffffff',
@@ -96,7 +68,6 @@ export function ShareModal({ open, onClose, result, scores, shareUrl }: ShareMod
         width: 375,
         height: 667,
       });
-      
       return canvas.toDataURL('image/png', 1.0);
     } catch (error) {
       console.error('html2canvas error:', error);
@@ -112,7 +83,7 @@ export function ShareModal({ open, onClose, result, scores, shareUrl }: ShareMod
       const dataUrl = await generatePngWithHtml2Canvas();
       if (!dataUrl) {
         setSaveStatus('error');
-        showToast('画像生成に失敗…もう一回やってみて');
+        showToast('画像生成に失敗…もう一回試してね');
         return;
       }
       const a = document.createElement('a');
@@ -121,12 +92,11 @@ export function ShareModal({ open, onClose, result, scores, shareUrl }: ShareMod
       a.click();
       burstConfetti();
       setSaveStatus('success');
-      showToast('画像を保存した！');
-      // Reset status after a delay
-      setTimeout(() => setSaveStatus('idle'), 2000);
+      showToast('🎉 画像を保存しました！');
+      setTimeout(() => setSaveStatus('idle'), 2500);
     } catch {
       setSaveStatus('error');
-      showToast('画像生成に失敗…もう一回やってみて');
+      showToast('画像生成に失敗…もう一回試してね');
     } finally {
       setBusy(false);
     }
@@ -134,12 +104,10 @@ export function ShareModal({ open, onClose, result, scores, shareUrl }: ShareMod
 
   const onNativeShare = React.useCallback(async () => {
     if (busy) return;
-
     if (typeof navigator === 'undefined' || !navigator.share) {
-      showToast('この端末では共有が使えないみたい…');
+      showToast('この端末では共有機能が使えません');
       return;
     }
-
     setBusy(true);
     setSaveStatus('generating');
     try {
@@ -148,30 +116,25 @@ export function ShareModal({ open, onClose, result, scores, shareUrl }: ShareMod
         setSaveStatus('error');
         return;
       }
-
       const file = dataUrlToFile(dataUrl, `my-naishin_${result.rank.code}.png`);
       const shareData: ShareData = {
         title: APP_NAME,
-        text: shareText,
         url: shareUrl || undefined
       };
-
       if (navigator.canShare && navigator.canShare({ files: [file] })) {
         shareData.files = [file];
       }
-
       await navigator.share(shareData);
       burstConfetti();
       setSaveStatus('success');
-      showToast('共有した！');
-      setTimeout(() => setSaveStatus('idle'), 2000);
+      showToast('🎉 共有しました！');
+      setTimeout(() => setSaveStatus('idle'), 2500);
     } catch {
       setSaveStatus('idle');
-      showToast('共有がキャンセルされたかも');
     } finally {
       setBusy(false);
     }
-  }, [busy, generatePngWithHtml2Canvas, result.rank.code, shareText, shareUrl, showToast]);
+  }, [busy, generatePngWithHtml2Canvas, result.rank.code, shareUrl, showToast]);
 
   React.useEffect(() => {
     if (!open) return;
@@ -182,6 +145,14 @@ export function ShareModal({ open, onClose, result, scores, shareUrl }: ShareMod
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [open, onClose]);
 
+  const rankColors: Record<string, { gradient: string; glow: string }> = {
+    S: { gradient: 'from-violet-500 via-purple-500 to-fuchsia-500', glow: 'shadow-purple-500/25' },
+    A: { gradient: 'from-blue-500 via-indigo-500 to-violet-500', glow: 'shadow-indigo-500/25' },
+    B: { gradient: 'from-cyan-500 via-blue-500 to-indigo-500', glow: 'shadow-blue-500/25' },
+    C: { gradient: 'from-slate-400 via-slate-500 to-slate-600', glow: 'shadow-slate-500/25' },
+  };
+  const colors = rankColors[result.rank.code] || rankColors.C;
+
   return (
     <AnimatePresence>
       {open ? (
@@ -191,114 +162,161 @@ export function ShareModal({ open, onClose, result, scores, shareUrl }: ShareMod
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
-          <div
-            className="absolute inset-0 bg-black/30 backdrop-blur-sm"
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-br from-slate-900/60 via-slate-800/50 to-slate-900/60 backdrop-blur-md"
             onClick={onClose}
-            role="button"
-            tabIndex={-1}
-            aria-label="閉じる"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
           />
 
-          <div className="relative mx-auto flex min-h-screen w-full max-w-3xl items-end p-4 md:items-center">
+          <div className="relative mx-auto flex min-h-screen w-full max-w-2xl items-center justify-center p-4">
             <motion.div
-              initial={{ opacity: 0, y: 18, scale: 0.98 }}
+              initial={{ opacity: 0, y: 30, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 18, scale: 0.98 }}
-              transition={{ type: 'spring', stiffness: 280, damping: 26 }}
+              exit={{ opacity: 0, y: 30, scale: 0.95 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
               className="w-full"
             >
-              <Card className="p-4 md:p-6">
-                <div className="flex items-start justify-between gap-3">
-                  <div>
-                    <div className="text-base font-bold text-slate-800">シェア用の画像を作る</div>
-                    <div className="mt-1 text-xs text-slate-500">PCでもスマホ縦長(9:16)で保存できる</div>
+              <div className="overflow-hidden rounded-3xl bg-white shadow-2xl">
+                {/* Header with gradient */}
+                <div className={cn('relative bg-gradient-to-r p-6 text-white', colors.gradient)}>
+                  <div className="absolute inset-0 bg-white/5" />
+                  <div className="relative flex items-start justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="grid h-12 w-12 place-items-center rounded-2xl bg-white/20 backdrop-blur-sm">
+                        <Sparkles className="h-6 w-6" />
+                      </div>
+                      <div>
+                        <h2 className="text-lg font-bold">シェア画像を作成</h2>
+                        <p className="mt-0.5 text-sm text-white/80">結果をSNSでシェアしよう</p>
+                      </div>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={onClose}
+                      className="grid h-10 w-10 place-items-center rounded-xl bg-white/10 text-white/80 backdrop-blur-sm transition-all hover:bg-white/20 hover:text-white"
+                      aria-label="閉じる"
+                    >
+                      <X className="h-5 w-5" />
+                    </button>
                   </div>
-                  <button
-                    type="button"
-                    onClick={onClose}
-                    className="grid h-9 w-9 place-items-center rounded-lg border border-slate-200 bg-white text-slate-600 transition hover:bg-slate-50"
-                    aria-label="閉じる"
+                </div>
+
+                {/* Content */}
+                <div className="p-6">
+                  <div className="grid gap-6 md:grid-cols-[200px_1fr] md:items-start">
+                    {/* Preview */}
+                    <div className="mx-auto w-full max-w-[200px]">
+                      <div className={cn(
+                        'aspect-[9/16] w-full overflow-hidden rounded-2xl border-2 border-slate-100 bg-white shadow-xl',
+                        colors.glow
+                      )}>
+                        <div className="h-full w-full origin-top-left scale-[0.533]">
+                          <ShareCard ref={captureRef} result={result} scores={scores} />
+                        </div>
+                      </div>
+                      <div className="mt-3 flex items-center justify-center gap-1.5 text-xs text-slate-400">
+                        <Smartphone className="h-3.5 w-3.5" />
+                        <span>スマホ縦長サイズ (9:16)</span>
+                      </div>
+                    </div>
+
+                    {/* Actions */}
+                    <div className="space-y-4">
+                      {/* Tips */}
+                      <div className="rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 p-4">
+                        <div className="flex items-start gap-3">
+                          <div className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-blue-100">
+                            <Sparkles className="h-4 w-4 text-blue-600" />
+                          </div>
+                          <div>
+                            <div className="text-sm font-semibold text-blue-900">おすすめの使い方</div>
+                            <p className="mt-1 text-xs leading-relaxed text-blue-700">
+                              「画像を保存」してからSNSやLINEに貼り付けるのが一番カンタン！
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Buttons */}
+                      <div className="space-y-2">
+                        <button
+                          type="button"
+                          onClick={onDownload}
+                          disabled={busy}
+                          className={cn(
+                            'group relative w-full overflow-hidden rounded-2xl bg-gradient-to-r py-4 text-white shadow-lg transition-all hover:shadow-xl disabled:opacity-70',
+                            colors.gradient,
+                            colors.glow
+                          )}
+                        >
+                          <div className="absolute inset-0 bg-white/0 transition-all group-hover:bg-white/10" />
+                          <div className="relative flex items-center justify-center gap-2 font-semibold">
+                            {saveStatus === 'generating' ? (
+                              <>
+                                <Loader2 className="h-5 w-5 animate-spin" />
+                                <span>生成中...</span>
+                              </>
+                            ) : saveStatus === 'success' ? (
+                              <>
+                                <CheckCircle className="h-5 w-5" />
+                                <span>保存完了！</span>
+                              </>
+                            ) : (
+                              <>
+                                <Download className="h-5 w-5" />
+                                <span>画像を保存</span>
+                              </>
+                            )}
+                          </div>
+                        </button>
+
+                        <button
+                          type="button"
+                          onClick={onNativeShare}
+                          disabled={busy}
+                          className="group w-full rounded-2xl border-2 border-slate-200 bg-white py-3.5 text-slate-700 transition-all hover:border-slate-300 hover:bg-slate-50 disabled:opacity-70"
+                        >
+                          <div className="flex items-center justify-center gap-2 font-medium">
+                            <Share2 className="h-4 w-4 text-slate-500 transition-colors group-hover:text-slate-600" />
+                            <span>端末の共有機能を使う</span>
+                          </div>
+                        </button>
+                      </div>
+
+                      {/* Hint */}
+                      <p className="text-center text-xs text-slate-400">
+                        ※ 共有機能はスマホ・タブレットで利用できます
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Toast */}
+              <AnimatePresence>
+                {toast && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    className="pointer-events-none absolute inset-x-0 bottom-[-60px] flex justify-center"
                   >
-                    <X className="h-4 w-4" />
-                  </button>
-                </div>
-
-                <div className="mt-5 grid gap-4 md:grid-cols-[240px_1fr] md:items-start">
-                  <div className="mx-auto w-full max-w-[240px]">
-                    <div className="aspect-[9/16] w-full overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
-                      <div className="h-full w-full scale-[0.64] origin-top-left">
-                        <ShareCard ref={captureRef} result={result} scores={scores} />
-                      </div>
-                    </div>
-                    <div className="mt-2 flex items-center justify-center gap-1 text-[11px] text-slate-500">
-                      <ImageIcon className="h-3 w-3" />
-                      プレビュー（縮小表示）
-                    </div>
-                  </div>
-
-                  <div className="space-y-3">
-                    <div className="rounded-xl bg-blue-50 p-4">
-                      <div className="text-xs font-semibold text-blue-700">おすすめ</div>
-                      <div className="mt-1 text-xs leading-relaxed text-blue-600">
-                        まず「画像を保存」→SNS/LINEに貼るのが最速。
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-                      <Button
-                        variant="primary"
-                        loading={busy && saveStatus === 'generating'}
-                        onClick={onDownload}
-                        leftIcon={
-                          saveStatus === 'generating' ? <Loader2 className="h-4 w-4 animate-spin" /> :
-                          saveStatus === 'success' ? <CheckCircle className="h-4 w-4" /> :
-                          <Download className="h-4 w-4" />
-                        }
-                      >
-                        {saveStatus === 'generating' ? '生成中...' : saveStatus === 'success' ? '保存完了！' : '画像を保存'}
-                      </Button>
-                      <Button
-                        variant="secondary"
-                        onClick={onCopy}
-                        leftIcon={<Copy className="h-4 w-4" />}
-                      >
-                        テキストをコピー
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        onClick={onNativeShare}
-                        leftIcon={<Share2 className="h-4 w-4" />}
-                        className="sm:col-span-2"
-                      >
-                        共有（対応端末）
-                      </Button>
-                    </div>
-
-                    <div className="rounded-xl bg-slate-50 p-4 text-xs text-slate-600">
-                      <div className="font-semibold text-slate-700">コピー用テキスト</div>
-                      <pre className="mt-2 max-h-40 whitespace-pre-wrap break-words rounded-lg bg-white border border-slate-200 p-3 text-[11px] leading-relaxed text-slate-600">
-                        {shareText}
-                      </pre>
-                    </div>
-                  </div>
-                </div>
-
-                {toast ? (
-                  <div className="pointer-events-none absolute left-1/2 top-4 -translate-x-1/2">
-                    <div className="rounded-full bg-slate-800 px-4 py-2 text-xs text-white shadow-lg">
+                    <div className="rounded-full bg-slate-900 px-5 py-2.5 text-sm font-medium text-white shadow-xl">
                       {toast}
                     </div>
-                  </div>
-                ) : null}
-
-                {/* Hidden capture element for html2canvas */}
-                <div className="fixed left-[-9999px] top-0 overflow-hidden">
-                  <div className="h-[667px] w-[375px] bg-white">
-                    <ShareCard ref={captureRef} result={result} scores={scores} />
-                  </div>
-                </div>
-              </Card>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </motion.div>
+          </div>
+
+          {/* Hidden capture element */}
+          <div className="fixed left-[-9999px] top-0 overflow-hidden">
+            <div className="h-[667px] w-[375px] bg-white">
+              <ShareCard ref={captureRef} result={result} scores={scores} />
+            </div>
           </div>
         </motion.div>
       ) : null}

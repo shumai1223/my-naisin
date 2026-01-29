@@ -1074,6 +1074,423 @@ export const BLOG_POSTS: BlogPost[] = [
 <p>My naisinで9教科を入力し、副教科を上げたときの変化を確認してみましょう。</p>
 </div>
     `
+  },
+  {
+    slug: 'tokyo-換算内申-guide',
+    title: '【東京都】換算内申の計算方法と都立高校入試の完全ガイド',
+    description: '東京都立高校入試で使われる「換算内申」の仕組みを徹底解説。実技4教科が2倍になる理由と、65点満点の計算方法を具体例で紹介します。',
+    date: '2025-01-18',
+    category: '都道府県別対策',
+    readTime: '10分',
+    tags: ['東京都', '換算内申', '都立高校', '入試'],
+    content: `
+<div class="lead">
+東京都立高校の入試では、一般的な「素内申」ではなく<strong>「換算内申」</strong>という独自の計算方法が使われます。この記事では、換算内申の仕組みと、なぜ実技4教科が重要なのかを詳しく解説します。
+</div>
+
+<div class="toc">
+<h3>📋 この記事の内容</h3>
+<ul>
+<li>換算内申とは何か</li>
+<li>65点満点の計算方法</li>
+<li>実技4教科が2倍になる理由</li>
+<li>内申点と当日点の比率</li>
+<li>換算内申を上げるコツ</li>
+</ul>
+</div>
+
+---
+
+## 🗼 換算内申とは？
+
+**換算内申**とは、東京都立高校入試で使われる内申点の計算方法です。中学3年生の成績のみを使用し、**実技4教科の評定を2倍**にして計算します。
+
+<div class="point-box blue">
+<h4>💡 ポイント</h4>
+<p>東京都では「素内申（45点満点）」ではなく「換算内申（65点満点）」が入試で使われます。これは全国的にも珍しい制度です。</p>
+</div>
+
+---
+
+## 🧮 65点満点の計算方法
+
+<div class="table-container">
+<table class="calc-table">
+<thead>
+<tr><th>教科区分</th><th>教科</th><th>評定</th><th>倍率</th><th>最大点</th></tr>
+</thead>
+<tbody>
+<tr><td rowspan="5">5教科</td><td>国語</td><td>5段階</td><td>×1</td><td>5点</td></tr>
+<tr><td>数学</td><td>5段階</td><td>×1</td><td>5点</td></tr>
+<tr><td>英語</td><td>5段階</td><td>×1</td><td>5点</td></tr>
+<tr><td>理科</td><td>5段階</td><td>×1</td><td>5点</td></tr>
+<tr><td>社会</td><td>5段階</td><td>×1</td><td>5点</td></tr>
+<tr class="highlight"><td rowspan="4">実技4教科</td><td>音楽</td><td>5段階</td><td><strong>×2</strong></td><td>10点</td></tr>
+<tr class="highlight"><td>美術</td><td>5段階</td><td><strong>×2</strong></td><td>10点</td></tr>
+<tr class="highlight"><td>保健体育</td><td>5段階</td><td><strong>×2</strong></td><td>10点</td></tr>
+<tr class="highlight"><td>技術家庭</td><td>5段階</td><td><strong>×2</strong></td><td>10点</td></tr>
+</tbody>
+<tfoot>
+<tr><td colspan="4"><strong>合計</strong></td><td><strong>65点満点</strong></td></tr>
+</tfoot>
+</table>
+</div>
+
+<div class="formula-box">
+<h4>計算式</h4>
+<p class="formula"><strong>5教科の合計 ＋ (実技4教科の合計 × 2) ＝ 換算内申</strong></p>
+</div>
+
+---
+
+## 🎯 なぜ実技4教科が2倍なのか？
+
+東京都教育委員会は、実技教科の重要性を高めるためにこの制度を採用しています。
+
+<div class="card-grid">
+<div class="card">
+<h4>理由① バランスの取れた学力</h4>
+<p>5教科だけでなく、芸術・体育・技術の分野も重視することで、バランスの取れた生徒を育てる狙いがあります。</p>
+</div>
+<div class="card">
+<h4>理由② 努力が反映されやすい</h4>
+<p>実技教科は「主体的な態度」が評価されやすく、努力次第で成績を上げやすい特徴があります。</p>
+</div>
+</div>
+
+<div class="point-box red">
+<h4>⚠️ 実技教科を軽視すると大損！</h4>
+<p>例：音楽を「3→4」に上げると<strong>+2点</strong>、英語を「3→4」に上げても<strong>+1点</strong><br>
+同じ努力なら、実技教科を上げた方が2倍お得です！</p>
+</div>
+
+---
+
+## 📊 内申点と当日点の比率
+
+都立高校の一般入試では、内申点と当日の学力検査を**1000点満点**に換算して合否を判定します。
+
+<div class="table-container">
+<table class="calc-table">
+<thead>
+<tr><th>項目</th><th>満点</th><th>換算後</th><th>比率</th></tr>
+</thead>
+<tbody>
+<tr><td>換算内申</td><td>65点</td><td>300点</td><td>30%</td></tr>
+<tr><td>学力検査</td><td>500点</td><td>700点</td><td>70%</td></tr>
+</tbody>
+<tfoot>
+<tr><td colspan="2"><strong>合計</strong></td><td><strong>1000点</strong></td><td>100%</td></tr>
+</tfoot>
+</table>
+</div>
+
+<div class="point-box green">
+<h4>✅ 内申点300点の価値</h4>
+<ul>
+<li>換算内申1点 ＝ 約4.6点（300÷65）</li>
+<li>学力検査1点 ＝ 1.4点（700÷500）</li>
+<li>つまり内申点1点は、当日点の約3.3点分の価値！</li>
+</ul>
+</div>
+
+---
+
+## 📝 換算内申を上げる5つのコツ
+
+<div class="tips-list">
+<div class="tip">
+<span class="tip-num">1</span>
+<div>
+<h4>実技4教科を最優先で上げる</h4>
+<p>2倍で計算されるため、1点上げるだけで2点分の効果があります。</p>
+</div>
+</div>
+<div class="tip">
+<span class="tip-num">2</span>
+<div>
+<h4>提出物は完璧に仕上げる</h4>
+<p>実技教科の評価で「主体的な態度」は大きなウェイトを占めます。</p>
+</div>
+</div>
+<div class="tip">
+<span class="tip-num">3</span>
+<div>
+<h4>授業態度を見直す</h4>
+<p>準備・片付けを率先して行い、積極的に参加する姿勢を見せましょう。</p>
+</div>
+</div>
+<div class="tip">
+<span class="tip-num">4</span>
+<div>
+<h4>実技テストの対策も忘れずに</h4>
+<p>音楽や美術の筆記テストは勉強すれば点が取れます。</p>
+</div>
+</div>
+<div class="tip">
+<span class="tip-num">5</span>
+<div>
+<h4>中3の1学期から本気で取り組む</h4>
+<p>東京都は中3の成績のみ使用。1学期の成績から気を抜かないこと！</p>
+</div>
+</div>
+</div>
+
+---
+
+## まとめ
+
+<div class="summary-box">
+<h3>📌 この記事のまとめ</h3>
+<ul>
+<li>東京都立高校は「換算内申」65点満点で評価</li>
+<li>実技4教科は2倍で計算される</li>
+<li>内申点1点は当日点約3.3点分の価値</li>
+<li>実技教科を上げることが最も効率的</li>
+</ul>
+</div>
+
+<div class="cta-box">
+<h3>🎯 換算内申を計算してみよう！</h3>
+<p>My naisinの「東京都モード」で、あなたの換算内申をすぐに確認できます。</p>
+</div>
+    `
+  },
+  {
+    slug: 'practical-subjects-tips',
+    title: '【副教科攻略】音楽・美術・体育・技家の内申点を確実に上げる方法',
+    description: '実技が苦手でも内申点は上げられる！副教科4教科の評価ポイントと、先生が見ているところを現役教師が解説します。',
+    date: '2025-01-19',
+    category: '副教科対策',
+    readTime: '12分',
+    tags: ['副教科', '実技教科', '内申点', '音楽', '美術', '体育', '技術家庭'],
+    content: `
+<div class="lead">
+「実技が苦手だから副教科の内申点は上がらない…」と諦めていませんか？実は、副教科の評価は<strong>技術よりも「取り組み方」</strong>が重視されます。この記事では、教科別の具体的な対策を紹介します。
+</div>
+
+<div class="toc">
+<h3>📋 この記事の内容</h3>
+<ul>
+<li>副教科の評価基準を理解する</li>
+<li>音楽の内申点を上げる方法</li>
+<li>美術の内申点を上げる方法</li>
+<li>保健体育の内申点を上げる方法</li>
+<li>技術家庭の内申点を上げる方法</li>
+<li>共通する最強テクニック</li>
+</ul>
+</div>
+
+---
+
+## 🎯 副教科の評価基準を理解しよう
+
+2021年度から、全教科共通で以下の3観点で評価されています。
+
+<div class="three-columns">
+<div class="column">
+<h4>📚 知識・技能</h4>
+<p>基本的な技術や知識の習得度。筆記テストや実技テストで評価。</p>
+</div>
+<div class="column">
+<h4>💭 思考・判断・表現</h4>
+<p>工夫や創意、自分なりの表現。作品やレポートで評価。</p>
+</div>
+<div class="column">
+<h4>🔥 主体的に学習に取り組む態度</h4>
+<p>授業態度、準備、提出物。<strong>ここが最も上げやすい！</strong></p>
+</div>
+</div>
+
+<div class="point-box green">
+<h4>✅ 副教科の特徴</h4>
+<p>副教科は「主体的な態度」の比重が高い！つまり、<strong>実技が苦手でも、態度と提出物で十分カバーできます</strong>。</p>
+</div>
+
+---
+
+## 🎵 音楽の内申点を上げる方法
+
+<div class="subject-detail">
+<h4>評価されるポイント</h4>
+<ul>
+<li>歌唱・器楽の技術と表現</li>
+<li>鑑賞レポートの内容</li>
+<li>授業への参加態度</li>
+<li>筆記テストの点数</li>
+</ul>
+</div>
+
+<div class="tips-list">
+<div class="tip">
+<span class="tip-num">1</span>
+<div>
+<h4>鑑賞レポートは「感想＋分析」で書く</h4>
+<p>「きれいだった」だけでなく、「なぜそう感じたか」「どの楽器が印象的か」など具体的に書く。</p>
+</div>
+</div>
+<div class="tip">
+<span class="tip-num">2</span>
+<div>
+<h4>合唱は大きな声で歌う</h4>
+<p>上手い・下手より、一生懸命歌っているかが評価される。口を大きく開けて！</p>
+</div>
+</div>
+<div class="tip">
+<span class="tip-num">3</span>
+<div>
+<h4>筆記テストは覚えれば取れる</h4>
+<p>音楽記号、作曲家、楽器の名前など、暗記項目は確実に覚える。</p>
+</div>
+</div>
+</div>
+
+---
+
+## 🎨 美術の内申点を上げる方法
+
+<div class="subject-detail">
+<h4>評価されるポイント</h4>
+<ul>
+<li>作品の完成度と工夫</li>
+<li>制作過程（アイデアスケッチ）</li>
+<li>鑑賞レポートの内容</li>
+<li>授業態度と片付け</li>
+</ul>
+</div>
+
+<div class="tips-list">
+<div class="tip">
+<span class="tip-num">1</span>
+<div>
+<h4>アイデアスケッチを丁寧に描く</h4>
+<p>最終作品より、「どう考えたか」のプロセスが重視される。複数案を出すと高評価。</p>
+</div>
+</div>
+<div class="tip">
+<span class="tip-num">2</span>
+<div>
+<h4>作品は必ず「完成」させる</h4>
+<p>未完成は大幅減点。時間内に終わらせることを最優先に。</p>
+</div>
+</div>
+<div class="tip">
+<span class="tip-num">3</span>
+<div>
+<h4>片付けを率先して行う</h4>
+<p>道具の片付け、掃除を積極的にやると「態度」の評価がUP。</p>
+</div>
+</div>
+</div>
+
+---
+
+## 🏃 保健体育の内申点を上げる方法
+
+<div class="subject-detail">
+<h4>評価されるポイント</h4>
+<ul>
+<li>実技テストの記録・技術</li>
+<li>授業への取り組み姿勢</li>
+<li>保健分野の筆記テスト</li>
+<li>チームワーク・協力</li>
+</ul>
+</div>
+
+<div class="tips-list">
+<div class="tip">
+<span class="tip-num">1</span>
+<div>
+<h4>準備運動を誰よりも早く始める</h4>
+<p>チャイムが鳴る前に準備完了。これだけで態度の評価が変わる。</p>
+</div>
+</div>
+<div class="tip">
+<span class="tip-num">2</span>
+<div>
+<h4>苦手競技でも全力で取り組む</h4>
+<p>記録より「一生懸命やっているか」が見られている。諦めない姿勢を見せる。</p>
+</div>
+</div>
+<div class="tip">
+<span class="tip-num">3</span>
+<div>
+<h4>保健の筆記テストで稼ぐ</h4>
+<p>実技が苦手なら、筆記テストで挽回。教科書をしっかり読み込む。</p>
+</div>
+</div>
+</div>
+
+---
+
+## 🔧 技術家庭の内申点を上げる方法
+
+<div class="subject-detail">
+<h4>評価されるポイント</h4>
+<ul>
+<li>作品の完成度</li>
+<li>作業の正確さ・安全性</li>
+<li>レポート・振り返りの内容</li>
+<li>筆記テストの点数</li>
+</ul>
+</div>
+
+<div class="tips-list">
+<div class="tip">
+<span class="tip-num">1</span>
+<div>
+<h4>手順書を必ず確認してから作業</h4>
+<p>失敗を防ぎ、安全に作業することが高評価につながる。</p>
+</div>
+</div>
+<div class="tip">
+<span class="tip-num">2</span>
+<div>
+<h4>振り返りシートは具体的に書く</h4>
+<p>「難しかった」ではなく「〇〇の工程で△△が難しく、□□で解決した」と詳しく。</p>
+</div>
+</div>
+<div class="tip">
+<span class="tip-num">3</span>
+<div>
+<h4>生活への活用を考える</h4>
+<p>「この技術を家でどう使えるか」を書くと、思考・判断の評価が上がる。</p>
+</div>
+</div>
+</div>
+
+---
+
+## ⭐ 全教科共通の最強テクニック
+
+<div class="point-box blue">
+<h4>💡 これだけで評価が変わる3つの行動</h4>
+<ol>
+<li><strong>提出物は期限の1日前に出す</strong> → 主体性のアピール</li>
+<li><strong>授業後に先生に質問する</strong> → 意欲の証明</li>
+<li><strong>振り返りは「次にどうするか」まで書く</strong> → 思考力の証明</li>
+</ol>
+</div>
+
+---
+
+## まとめ
+
+<div class="summary-box">
+<h3>📌 この記事のまとめ</h3>
+<ul>
+<li>副教科は「技術」より「取り組み方」が重視される</li>
+<li>提出物と授業態度で大きく差がつく</li>
+<li>筆記テストは覚えれば点が取れる</li>
+<li>苦手でも「一生懸命さ」を見せることが大切</li>
+</ul>
+</div>
+
+<div class="cta-box">
+<h3>🎯 副教科を上げたときの効果を確認しよう！</h3>
+<p>My naisinで副教科の点数を変えてシミュレーション。東京都モードなら2倍の効果を実感できます。</p>
+</div>
+    `
   }
 ];
 

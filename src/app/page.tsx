@@ -364,14 +364,14 @@ export default function Page() {
               </section>
             )}
 
-          {/* 📚 ブログセクション - 目立つ位置に配置 */}
-          <BlogSection />
-
           {/* 計算履歴 */}
           <HistoryPanel onLoadEntry={onLoadHistory} />
 
           {/* ヒント・FAQ セクション */}
           <TipsSection />
+
+          {/* 📚 ブログセクション */}
+          <BlogSection />
         </div>
       </main>
 
