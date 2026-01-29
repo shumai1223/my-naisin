@@ -12,23 +12,16 @@ import {
 } from 'recharts';
 import { Hexagon } from 'lucide-react';
 
-import type { Scores, ScoreMode } from '@/lib/types';
+import type { Scores } from '@/lib/types';
 import { SUBJECTS } from '@/lib/constants';
 
 export interface RadarChartProps {
   scores: Scores;
-  mode: ScoreMode;
+  prefectureCode: string;
 }
 
-export function RadarChart({ scores, mode }: RadarChartProps) {
-  // Filter subjects based on mode
-  const subjects = React.useMemo(() => {
-    if (mode === 'tokyo') {
-      // Tokyo mode: 5 main subjects get more weight
-      return SUBJECTS;
-    }
-    return SUBJECTS;
-  }, [mode]);
+export function RadarChart({ scores }: RadarChartProps) {
+  const subjects = SUBJECTS;
 
   // Prepare data for radar chart
   const chartData = React.useMemo(() => {

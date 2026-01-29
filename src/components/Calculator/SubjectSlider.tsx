@@ -3,20 +3,20 @@
 import * as React from 'react';
 import { Minus, Plus } from 'lucide-react';
 
-import type { ScoreMode, Subject } from '@/lib/types';
+import type { Subject } from '@/lib/types';
 import { clamp, cn, getSubjectWeight } from '@/lib/utils';
 
 
 export interface SubjectSliderProps {
   subject: Subject;
-  mode: ScoreMode;
+  prefectureCode: string;
   value: number;
   onChange: (nextValue: number) => void;
   maxGrade?: number;
 }
 
-export function SubjectSlider({ subject, mode, value, onChange, maxGrade = 5 }: SubjectSliderProps) {
-  const weight = getSubjectWeight(mode, subject.category);
+export function SubjectSlider({ subject, prefectureCode, value, onChange, maxGrade = 5 }: SubjectSliderProps) {
+  const weight = getSubjectWeight(prefectureCode, subject.category);
 
   const setValue = React.useCallback(
     (next: number) => {

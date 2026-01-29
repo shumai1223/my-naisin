@@ -4,10 +4,10 @@ import * as React from 'react';
 import confetti from 'canvas-confetti';
 import { ArrowRight, RotateCcw, Share2 } from 'lucide-react';
 
-import { DEFAULT_SCORES, MODE_CONFIG } from '@/lib/constants';
+import { DEFAULT_SCORES } from '@/lib/constants';
 import { getPrefectureByCode, DEFAULT_PREFECTURE_CODE } from '@/lib/prefectures';
 import { appendHistoryEntry, getSaveConsent, readHistory, setSaveConsent } from '@/lib/persistence';
-import type { ResultData, SavedHistoryEntry, ScoreMode, Scores, SubjectKey } from '@/lib/types';
+import type { ResultData, SavedHistoryEntry, Scores, SubjectKey } from '@/lib/types';
 import {
   calculateMaxScore,
   calculatePercent,
@@ -25,7 +25,6 @@ import { SubjectBreakdown } from '@/components/SubjectBreakdown';
 import { WelcomeBack } from '@/components/WelcomeBack';
 import { InputForm } from '@/components/Calculator/InputForm';
 import { PrefectureSelector } from '@/components/Calculator/PrefectureSelector';
-import { RegionSwitch } from '@/components/Calculator/RegionSwitch';
 import { AchievementBadges } from '@/components/Result/AchievementBadges';
 import { ComparisonCard } from '@/components/Result/ComparisonCard';
 import { MotivationCard } from '@/components/Result/MotivationCard';
@@ -60,7 +59,6 @@ function popConfetti() {
 }
 
 export default function Page() {
-  const [mode, setMode] = React.useState<ScoreMode>('normal');
   const [prefectureCode, setPrefectureCode] = React.useState<string>(DEFAULT_PREFECTURE_CODE);
   const [use10PointScale, setUse10PointScale] = React.useState(false);
   const [scores, setScores] = React.useState<Scores>(DEFAULT_SCORES);
@@ -72,11 +70,11 @@ export default function Page() {
   const [lastSaved, setLastSaved] = React.useState<SavedHistoryEntry | null>(null);
 
   const selectedPrefecture = React.useMemo(
-    () => mode === 'prefecture' ? getPrefectureByCode(prefectureCode) : null,
-    [mode, prefectureCode]
+    () => getPrefectureByCode(prefectureCode),
+    [prefectureCode]
   );
 
-  const maxGrade = use10PointScale && selectedPrefecture?.supports10PointScale ? 10 : 5;
+  const maxGrade = (use10PointScale && selectedPrefecture?.supports10PointScale) ? 10 : 5;
 
   React.useEffect(() => {
     setShareUrl(window.location.origin);
@@ -91,7 +89,7 @@ export default function Page() {
   React.useEffect(() => {
     try {
       const saved = window.localStorage.getItem('my-naishin:scores');
-      const savedMode = window.localStorage.getItem('my-naishin:mode');
+      const savedPrefecture = window.localStorage.getItem('my-naishin:prefecture');
       if (saved) {
         const parsed = JSON.parse(saved) as Partial<Record<SubjectKey, unknown>>;
         setScores((prev) => {
@@ -105,8 +103,8 @@ export default function Page() {
           return next;
         });
       }
-      if (savedMode === 'normal' || savedMode === 'tokyo') {
-        setMode(savedMode);
+      if (savedPrefecture) {
+        setPrefectureCode(savedPrefecture);
       }
     } catch {
       // ignore
@@ -116,32 +114,31 @@ export default function Page() {
   React.useEffect(() => {
     try {
       window.localStorage.setItem('my-naishin:scores', JSON.stringify(scores));
-      window.localStorage.setItem('my-naishin:mode', mode);
+      window.localStorage.setItem('my-naishin:prefecture', prefectureCode);
     } catch {
       // ignore
     }
-  }, [scores, mode]);
+  }, [scores, prefectureCode]);
 
   const total = React.useMemo(
-    () => calculateTotalScore(scores, mode, prefectureCode, use10PointScale),
-    [scores, mode, prefectureCode, use10PointScale]
+    () => calculateTotalScore(scores, prefectureCode, use10PointScale),
+    [scores, prefectureCode, use10PointScale]
   );
   const max = React.useMemo(
-    () => calculateMaxScore(mode, prefectureCode, use10PointScale),
-    [mode, prefectureCode, use10PointScale]
+    () => calculateMaxScore(prefectureCode, use10PointScale),
+    [prefectureCode, use10PointScale]
   );
   const percent = React.useMemo(() => calculatePercent(total, max), [total, max]);
   const rank = React.useMemo(() => getRankForPercent(percent), [percent]);
 
   const result: ResultData = React.useMemo(
     () => ({
-      mode,
       total,
       max,
       percent,
       rank
     }),
-    [mode, total, max, percent, rank]
+    [total, max, percent, rank]
   );
 
   const onScoreChange = React.useCallback((key: SubjectKey, nextValue: number) => {
@@ -154,24 +151,24 @@ export default function Page() {
       setSaveConsent(checked);
 
       if (checked && showResult) {
-        const entry = appendHistoryEntry({ mode, scores, memo: saveMemo });
+        const entry = appendHistoryEntry({ scores, memo: saveMemo, prefectureCode });
         if (entry) setLastSaved(entry);
       }
     },
-    [mode, saveMemo, scores, showResult]
+    [prefectureCode, saveMemo, scores, showResult]
   );
 
   const onSaveNow = React.useCallback(() => {
     if (!saveEnabled) return;
-    const entry = appendHistoryEntry({ mode, scores, memo: saveMemo });
+    const entry = appendHistoryEntry({ scores, memo: saveMemo, prefectureCode });
     if (entry) setLastSaved(entry);
-  }, [mode, saveEnabled, saveMemo, scores]);
+  }, [prefectureCode, saveEnabled, saveMemo, scores]);
 
   const onReveal = React.useCallback(() => {
     setShowResult(true);
 
     if (saveEnabled) {
-      const entry = appendHistoryEntry({ mode, scores, memo: saveMemo });
+      const entry = appendHistoryEntry({ scores, memo: saveMemo, prefectureCode });
       if (entry) setLastSaved(entry);
     }
 
@@ -179,7 +176,7 @@ export default function Page() {
       popConfetti();
       document.getElementById('result')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 80);
-  }, [mode, saveEnabled, saveMemo, scores]);
+  }, [prefectureCode, saveEnabled, saveMemo, scores]);
 
   const onReset = React.useCallback(() => {
     setScores(DEFAULT_SCORES);
@@ -190,15 +187,15 @@ export default function Page() {
   }, []);
 
   const onLoadHistory = React.useCallback((entry: SavedHistoryEntry) => {
-    setMode(entry.mode);
+    if (entry.prefectureCode) {
+      setPrefectureCode(entry.prefectureCode);
+    }
     setScores(entry.scores);
     setShowResult(true);
     window.setTimeout(() => {
       document.getElementById('result')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 80);
   }, []);
-
-  const modeInfo = MODE_CONFIG[mode];
 
   return (
     <div id="top" className="min-h-screen">
@@ -233,7 +230,7 @@ export default function Page() {
                 </div>
                 <div className="rounded-2xl border border-indigo-200/60 bg-gradient-to-br from-indigo-50/90 via-blue-50/80 to-violet-50/90 px-5 py-3 shadow-sm backdrop-blur-sm">
                   <div className="text-sm font-bold text-indigo-700">
-                    {mode === 'prefecture' && selectedPrefecture ? selectedPrefecture.name : modeInfo.label}
+                    {selectedPrefecture?.name ?? '都道府県を選択'}
                   </div>
                   <div className="mt-0.5 text-xs text-indigo-600/70">満点：{max}点</div>
                 </div>
@@ -242,22 +239,16 @@ export default function Page() {
             <div className="p-5 md:p-6">
 
             <div className="mt-4">
-              <RegionSwitch mode={mode} onChange={setMode} prefectureCode={prefectureCode} />
+              <PrefectureSelector
+                selectedCode={prefectureCode}
+                onChange={setPrefectureCode}
+                use10PointScale={use10PointScale}
+                onScale10Change={setUse10PointScale}
+              />
             </div>
 
-            {mode === 'prefecture' && (
-              <div className="mt-4">
-                <PrefectureSelector
-                  selectedCode={prefectureCode}
-                  onChange={setPrefectureCode}
-                  use10PointScale={use10PointScale}
-                  onScale10Change={setUse10PointScale}
-                />
-              </div>
-            )}
-
             <div className="mt-5">
-              <InputForm mode={mode} scores={scores} onChange={onScoreChange} maxGrade={maxGrade} />
+              <InputForm prefectureCode={prefectureCode} scores={scores} onChange={onScoreChange} maxGrade={maxGrade} />
             </div>
 
             <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
@@ -295,9 +286,7 @@ export default function Page() {
                             <span className="text-xl font-semibold text-slate-400">/{result.max}</span>
                           </div>
                           <div className="mt-2 text-sm text-slate-500">
-                            {mode === 'prefecture' && selectedPrefecture
-                              ? selectedPrefecture.description
-                              : modeInfo.description}
+                            {selectedPrefecture?.description ?? '9教科 × 5点 = 45点満点'}
                           </div>
                         </div>
                       </div>
@@ -356,7 +345,7 @@ export default function Page() {
                 <ScoreProgressChart 
                   currentTotal={result.total} 
                   currentMax={result.max} 
-                  currentMode={mode} 
+                  currentPrefecture={prefectureCode} 
                 />
 
                 <ComparisonCard result={result} scores={scores} saveEnabled={saveEnabled} lastSavedId={lastSaved?.id} />
@@ -372,7 +361,7 @@ export default function Page() {
                 <MotivationCard result={result} />
 
                 {/* レーダーチャート */}
-                <RadarChart scores={scores} mode={mode} />
+                <RadarChart scores={scores} prefectureCode={prefectureCode} />
 
                 {/* 達成バッジ */}
                 <AchievementBadges scores={scores} result={result} />
@@ -390,7 +379,7 @@ export default function Page() {
                 <QuickStudyTimer />
 
                 {/* 教科別分析 */}
-                <SubjectBreakdown scores={scores} mode={mode} />
+                <SubjectBreakdown scores={scores} prefectureCode={prefectureCode} />
 
                 {/* 目標設定 */}
                 <GoalSection currentScore={result.total} maxScore={result.max} />

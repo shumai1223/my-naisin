@@ -5,13 +5,14 @@ import { motion } from 'framer-motion';
 import { TrendingUp, TrendingDown, Minus, Calendar, ChevronDown, ChevronUp, History } from 'lucide-react';
 
 import { readHistory } from '@/lib/persistence';
+import { DEFAULT_PREFECTURE_CODE } from '@/lib/prefectures';
 import { calculateTotalScore, calculateMaxScore, calculatePercent } from '@/lib/utils';
-import type { SavedHistoryEntry, ScoreMode } from '@/lib/types';
+import type { SavedHistoryEntry } from '@/lib/types';
 
 interface ScoreProgressChartProps {
   currentTotal: number;
   currentMax: number;
-  currentMode: ScoreMode;
+  currentPrefecture: string;
 }
 
 interface ChartDataPoint {
@@ -23,7 +24,7 @@ interface ChartDataPoint {
   memo?: string;
 }
 
-export function ScoreProgressChart({ currentTotal, currentMax, currentMode }: ScoreProgressChartProps) {
+export function ScoreProgressChart({ currentTotal, currentMax }: ScoreProgressChartProps) {
   const [history, setHistory] = React.useState<SavedHistoryEntry[]>([]);
   const [expanded, setExpanded] = React.useState(true);
 
@@ -38,8 +39,9 @@ export function ScoreProgressChart({ currentTotal, currentMax, currentMode }: Sc
       .slice(0, 10) // Last 10 entries
       .reverse() // Oldest first
       .map((entry) => {
-        const total = calculateTotalScore(entry.scores, entry.mode);
-        const max = calculateMaxScore(entry.mode);
+        const prefCode = entry.prefectureCode ?? DEFAULT_PREFECTURE_CODE;
+        const total = calculateTotalScore(entry.scores, prefCode);
+        const max = calculateMaxScore(prefCode);
         const percent = calculatePercent(total, max);
         const date = new Date(entry.savedAt);
         return {

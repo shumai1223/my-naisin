@@ -1,5 +1,6 @@
 import { DEFAULT_SCORES } from '@/lib/constants';
-import type { SavedHistoryEntry, ScoreMode, Scores, SubjectKey } from '@/lib/types';
+import { DEFAULT_PREFECTURE_CODE } from '@/lib/prefectures';
+import type { SavedHistoryEntry, Scores, SubjectKey } from '@/lib/types';
 
 const HISTORY_KEY = 'my-naishin:history';
 const SAVE_CONSENT_COOKIE = 'my-naishin-save-consent';
@@ -81,8 +82,11 @@ function sanitizeScores(value: unknown): Scores | null {
   return base;
 }
 
-function isScoreMode(value: unknown): value is ScoreMode {
-  return value === 'normal' || value === 'tokyo';
+function sanitizePrefectureCode(value: unknown): string {
+  if (typeof value === 'string' && value.trim()) {
+    return value.trim();
+  }
+  return DEFAULT_PREFECTURE_CODE;
 }
 
 function sanitizeMemo(value: unknown): string | undefined {
@@ -100,8 +104,8 @@ function generateId() {
   return `${Date.now()}-${Math.random().toString(16).slice(2)}`;
 }
 
-function buildSignature(mode: ScoreMode, scores: Scores) {
-  return `${mode}|${(Object.keys(scores) as SubjectKey[])
+function buildSignature(prefectureCode: string, scores: Scores) {
+  return `${prefectureCode}|${(Object.keys(scores) as SubjectKey[])
     .sort()
     .map((k) => `${k}:${scores[k]}`)
     .join(',')}`;
@@ -114,9 +118,6 @@ function sanitizeHistoryEntry(value: unknown): SavedHistoryEntry | null {
   const id = obj.id;
   if (typeof id !== 'string' || !id.trim()) return null;
 
-  const mode = obj.mode;
-  if (!isScoreMode(mode)) return null;
-
   const savedAt = obj.savedAt;
   if (typeof savedAt !== 'string' || !savedAt.trim()) return null;
   const savedAtMs = Date.parse(savedAt);
@@ -126,12 +127,13 @@ function sanitizeHistoryEntry(value: unknown): SavedHistoryEntry | null {
   if (!scores) return null;
 
   const memo = sanitizeMemo(obj.memo);
+  const prefectureCode = sanitizePrefectureCode(obj.prefectureCode);
 
   const entry: SavedHistoryEntry = {
     id,
     savedAt: new Date(savedAtMs).toISOString(),
-    mode,
-    scores
+    scores,
+    prefectureCode
   };
 
   if (memo) entry.memo = memo;
@@ -190,18 +192,19 @@ export function clearHistory() {
   }
 }
 
-export function appendHistoryEntry(params: { mode: ScoreMode; scores: Scores; memo?: string; now?: Date }) {
+export function appendHistoryEntry(params: { scores: Scores; memo?: string; prefectureCode?: string; now?: Date }) {
   if (typeof window === 'undefined') return null;
   try {
     const now = params.now ?? new Date();
     const memo = sanitizeMemo(params.memo);
     const scores = sanitizeScores(params.scores) ?? { ...DEFAULT_SCORES };
+    const prefectureCode = params.prefectureCode ?? DEFAULT_PREFECTURE_CODE;
     const history = readHistory();
 
-    const signature = buildSignature(params.mode, scores);
+    const signature = buildSignature(prefectureCode, scores);
     const latest = history[0];
     if (latest) {
-      const latestSig = buildSignature(latest.mode, latest.scores);
+      const latestSig = buildSignature(latest.prefectureCode ?? DEFAULT_PREFECTURE_CODE, latest.scores);
       const deltaMs = now.getTime() - Date.parse(latest.savedAt);
 
       if (latestSig === signature && Number.isFinite(deltaMs) && deltaMs >= 0 && deltaMs < DEDUPE_WINDOW_MS) {
@@ -218,8 +221,8 @@ export function appendHistoryEntry(params: { mode: ScoreMode; scores: Scores; me
     const entry: SavedHistoryEntry = {
       id: generateId(),
       savedAt: now.toISOString(),
-      mode: params.mode,
-      scores
+      scores,
+      prefectureCode
     };
     if (memo) entry.memo = memo;
 

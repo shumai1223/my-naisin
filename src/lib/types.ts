@@ -1,5 +1,3 @@
-export type ScoreMode = 'normal' | 'tokyo' | 'prefecture';
-
 export type SubjectCategory = 'core' | 'practical';
 
 export type SubjectKey =
@@ -33,7 +31,6 @@ export interface RankDefinition {
 }
 
 export interface ResultData {
-  mode: ScoreMode;
   total: number;
   max: number;
   percent: number;
@@ -43,15 +40,8 @@ export interface ResultData {
 export interface SavedHistoryEntry {
   id: string;
   savedAt: string;
-  mode: ScoreMode;
   scores: Scores;
   memo?: string;
   prefectureCode?: string;
   use10PointScale?: boolean;
-}
-
-export interface CalculationSettings {
-  mode: ScoreMode;
-  prefectureCode: string;
-  use10PointScale: boolean;
 }

@@ -1,9 +1,9 @@
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
-import { MODE_CONFIG, RANK_DEFINITIONS, SUBJECTS } from './constants';
-import { getPrefectureByCode, type PrefectureConfig } from './prefectures';
-import type { RankDefinition, ScoreMode, Scores, SubjectCategory, SubjectKey } from './types';
+import { RANK_DEFINITIONS, SUBJECTS } from './constants';
+import { getPrefectureByCode } from './prefectures';
+import type { RankDefinition, Scores, SubjectCategory, SubjectKey } from './types';
 
  const RANK_DEFINITIONS_DESC = [...RANK_DEFINITIONS].sort((a, b) => b.minPercent - a.minPercent);
 
@@ -23,28 +23,22 @@ export function roundInt(value: number) {
    return Math.floor(clamp(value, 0, 100));
  }
 
-export function calculateTotalScore(scores: Scores, mode: ScoreMode, prefectureCode?: string, use10PointScale?: boolean) {
-  if (mode === 'prefecture' && prefectureCode) {
-    return calculatePrefectureScore(scores, prefectureCode, use10PointScale);
-  }
-  const weights = MODE_CONFIG[mode].weights;
-  return SUBJECTS.reduce((sum, subject) => {
-    const raw = scores[subject.key];
-    const safe = clamp(roundInt(raw), 1, 5);
-    const weight = subject.category === 'core' ? weights.core : weights.practical;
-    return sum + safe * weight;
-  }, 0);
-}
-
-export function calculatePrefectureScore(scores: Scores, prefectureCode: string, use10PointScale?: boolean): number {
+export function calculateTotalScore(scores: Scores, prefectureCode: string, use10PointScale?: boolean): number {
   const prefecture = getPrefectureByCode(prefectureCode);
-  if (!prefecture) return 0;
+  if (!prefecture) {
+    // デフォルトは通常計算（45点満点）
+    return SUBJECTS.reduce((sum, subject) => {
+      const raw = scores[subject.key];
+      const safe = clamp(roundInt(raw), 1, 5);
+      return sum + safe;
+    }, 0);
+  }
 
   const coreSubjects: SubjectKey[] = ['japanese', 'math', 'english', 'science', 'social'];
   const practicalSubjects: SubjectKey[] = ['music', 'art', 'pe', 'tech'];
   
   let total = 0;
-  const maxGrade = use10PointScale ? 10 : 5;
+  const maxGrade = (use10PointScale && prefecture.supports10PointScale) ? 10 : 5;
   
   // 5教科
   for (const key of coreSubjects) {
@@ -63,18 +57,19 @@ export function calculatePrefectureScore(scores: Scores, prefectureCode: string,
   return Math.round(total);
 }
 
-export function calculateMaxScore(mode: ScoreMode, prefectureCode?: string, use10PointScale?: boolean) {
-  if (mode === 'prefecture' && prefectureCode) {
-    const prefecture = getPrefectureByCode(prefectureCode);
-    if (prefecture) {
-      // 10段階評価の場合は満点を2倍に
-      if (use10PointScale && prefecture.supports10PointScale) {
-        return prefecture.maxScore * 2;
-      }
-      return prefecture.maxScore;
-    }
+export function calculateMaxScore(prefectureCode: string, use10PointScale?: boolean): number {
+  const prefecture = getPrefectureByCode(prefectureCode);
+  if (!prefecture) {
+    return 45; // デフォルト
   }
-  return MODE_CONFIG[mode].max;
+  
+  const maxGrade = (use10PointScale && prefecture.supports10PointScale) ? 10 : 5;
+  
+  // 満点を動的に計算: 5教科 × maxGrade × coreMultiplier + 4教科 × maxGrade × practicalMultiplier
+  const coreMax = 5 * maxGrade * prefecture.coreMultiplier;
+  const practicalMax = 4 * maxGrade * prefecture.practicalMultiplier;
+  
+  return Math.round(coreMax + practicalMax);
 }
 
 export function calculatePercent(total: number, max: number) {
@@ -87,9 +82,10 @@ export function getRankForPercent(percent: number): RankDefinition {
   return RANK_DEFINITIONS_DESC.find((r) => p >= r.minPercent) ?? RANK_DEFINITIONS_DESC[RANK_DEFINITIONS_DESC.length - 1];
 }
 
-export function getSubjectWeight(mode: ScoreMode, category: SubjectCategory) {
-  const weights = MODE_CONFIG[mode].weights;
-  return category === 'core' ? weights.core : weights.practical;
+export function getSubjectWeight(prefectureCode: string, category: SubjectCategory): number {
+  const prefecture = getPrefectureByCode(prefectureCode);
+  if (!prefecture) return 1;
+  return category === 'core' ? prefecture.coreMultiplier : prefecture.practicalMultiplier;
 }
 
 export function updateScoreValue(scores: Scores, key: SubjectKey, nextValue: number): Scores {

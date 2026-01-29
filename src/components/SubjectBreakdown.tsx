@@ -4,20 +4,21 @@ import * as React from 'react';
 import { motion } from 'framer-motion';
 import { BarChart3, ArrowUp, Minus } from 'lucide-react';
 
-import type { Scores, ScoreMode } from '@/lib/types';
+import type { Scores } from '@/lib/types';
 import { SUBJECTS } from '@/lib/constants';
+import { getSubjectWeight } from '@/lib/utils';
 import { Card } from '@/components/ui/Card';
 
 interface SubjectBreakdownProps {
   scores: Scores;
-  mode: ScoreMode;
+  prefectureCode: string;
 }
 
-export function SubjectBreakdown({ scores, mode }: SubjectBreakdownProps) {
+export function SubjectBreakdown({ scores, prefectureCode }: SubjectBreakdownProps) {
   const subjectData = React.useMemo(() => {
     return SUBJECTS.map(subject => {
       const score = scores[subject.key];
-      const multiplier = mode === 'tokyo' && subject.category === 'practical' ? 2 : 1;
+      const multiplier = getSubjectWeight(prefectureCode, subject.category);
       const weighted = score * multiplier;
       const maxWeighted = 5 * multiplier;
       const percent = (weighted / maxWeighted) * 100;
@@ -32,7 +33,7 @@ export function SubjectBreakdown({ scores, mode }: SubjectBreakdownProps) {
         isHigh: score >= 4
       };
     });
-  }, [scores, mode]);
+  }, [scores, prefectureCode]);
 
   const lowSubjects = subjectData.filter(s => s.isLow);
   const highSubjects = subjectData.filter(s => s.isHigh);
@@ -80,8 +81,8 @@ export function SubjectBreakdown({ scores, mode }: SubjectBreakdownProps) {
                 <span className="text-sm font-bold text-slate-700">{subject.score}</span>
                 <span className="text-xs text-slate-400">/5</span>
               </div>
-              {mode === 'tokyo' && subject.category === 'practical' && (
-                <div className="rounded bg-blue-100 px-1.5 py-0.5 text-[10px] font-medium text-blue-600">×2</div>
+              {getSubjectWeight(prefectureCode, subject.category) > 1 && (
+                <div className="rounded bg-blue-100 px-1.5 py-0.5 text-[10px] font-medium text-blue-600">×{getSubjectWeight(prefectureCode, subject.category)}</div>
               )}
             </motion.div>
           ))}

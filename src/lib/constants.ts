@@ -1,4 +1,4 @@
-import type { RankDefinition, ScoreMode, Scores, Subject } from './types';
+import type { RankDefinition, Scores, Subject } from './types';
 
 export const APP_NAME = 'My Naishin';
 export const APP_NAME_JA = 'マイナイシン';
@@ -15,27 +15,6 @@ export const SUBJECTS: ReadonlyArray<Subject> = [
   { key: 'pe', label: '保体', shortLabel: '体', category: 'practical' },
   { key: 'tech', label: '技家', shortLabel: '技', category: 'practical' }
 ];
-
-export const MODE_CONFIG: Record<ScoreMode, { label: string; description: string; max: number; weights: { core: number; practical: number } }> = {
-  normal: {
-    label: '通常モード',
-    description: '9教科 × 5点 = 45点満点',
-    max: 45,
-    weights: { core: 1, practical: 1 }
-  },
-  tokyo: {
-    label: '換算モード(東京方式)',
-    description: '(5教科 × 5) + (実技4教科 × 2 × 5) = 65点満点',
-    max: 65,
-    weights: { core: 1, practical: 2 }
-  },
-  prefecture: {
-    label: '都道府県別',
-    description: '各都道府県の計算方法で算出',
-    max: 0, // 動的に設定
-    weights: { core: 1, practical: 1 } // 動的に設定
-  }
-};
 
 export const RANK_DEFINITIONS: ReadonlyArray<RankDefinition> = [
   {
