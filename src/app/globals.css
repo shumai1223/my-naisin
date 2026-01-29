@@ -57,6 +57,15 @@ body {
   animation: float 4s ease-in-out infinite;
 }
 
+/* Subtle pulse for attention */
+@keyframes pulse-subtle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.85; }
+}
+.animate-pulse-subtle {
+  animation: pulse-subtle 2s ease-in-out infinite;
+}
+
 /* Gradient text */
 .gradient-text {
   background: linear-gradient(135deg, #6366f1, #3b82f6, #8b5cf6);

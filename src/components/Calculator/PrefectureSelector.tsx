@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { ChevronDown, MapPin, Info } from 'lucide-react';
+import { ChevronDown, MapPin, Info, AlertTriangle, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import { PREFECTURES, REGIONS, getPrefecturesByRegion, type PrefectureConfig } from '@/lib/prefectures';
@@ -45,37 +45,92 @@ export function PrefectureSelector({
     setIsOpen(false);
   };
 
+  const isDefaultPrefecture = selectedCode === 'tokyo';
+
   return (
     <div className={cn('space-y-3', className)}>
+      {/* Attention Banner - Show when using default Tokyo */}
+      {isDefaultPrefecture && (
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="relative overflow-hidden rounded-2xl border-2 border-amber-300 bg-gradient-to-r from-amber-50 via-yellow-50 to-orange-50 p-4 shadow-lg shadow-amber-100/50"
+        >
+          <div className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-amber-200/30 blur-2xl" />
+          <div className="relative flex items-start gap-3">
+            <div className="mt-0.5 grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 shadow-md">
+              <AlertTriangle className="h-5 w-5 text-white" />
+            </div>
+            <div className="flex-1">
+              <div className="text-sm font-bold text-amber-800">※ お住まいの都道府県を選択してください！</div>
+              <div className="mt-1 text-xs leading-relaxed text-amber-700">
+                現在「東京都」が選択されています。<span className="font-bold">都道府県によって計算方法が大きく異なります</span>。
+                正しい内申点を計算するため、下のボタンからお住まいの地域を選んでください。
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      )}
+
       {/* Prefecture Dropdown */}
       <div ref={dropdownRef} className="relative">
         <button
           type="button"
           onClick={() => setIsOpen(!isOpen)}
           className={cn(
-            'flex w-full items-center justify-between gap-3 rounded-2xl border bg-white px-4 py-3 text-left transition-all',
-            'border-slate-200/60 shadow-sm hover:border-slate-300 hover:shadow-md',
+            'flex w-full items-center justify-between gap-3 rounded-2xl border-2 bg-white px-4 py-4 text-left transition-all',
+            isDefaultPrefecture
+              ? 'border-amber-400 bg-gradient-to-r from-amber-50/50 to-orange-50/50 shadow-lg shadow-amber-200/40 hover:border-amber-500 animate-pulse-subtle'
+              : 'border-slate-200 shadow-sm hover:border-blue-300 hover:shadow-md',
             'focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400',
             isOpen && 'ring-2 ring-blue-500/20 border-blue-400'
           )}
         >
           <div className="flex items-center gap-3">
-            <div className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-sm">
-              <MapPin className="h-5 w-5" />
+            <div className={cn(
+              'grid h-12 w-12 place-items-center rounded-xl shadow-md transition-all',
+              isDefaultPrefecture
+                ? 'bg-gradient-to-br from-amber-400 to-orange-500'
+                : 'bg-gradient-to-br from-blue-500 to-indigo-600'
+            )}>
+              {isDefaultPrefecture ? (
+                <Sparkles className="h-6 w-6 text-white" />
+              ) : (
+                <MapPin className="h-6 w-6 text-white" />
+              )}
             </div>
             <div>
-              <div className="text-sm font-bold text-slate-800">
-                {selectedPrefecture?.name ?? '都道府県を選択'}
+              <div className="flex items-center gap-2">
+                <div className={cn(
+                  'text-base font-bold',
+                  isDefaultPrefecture ? 'text-amber-700' : 'text-slate-800'
+                )}>
+                  {selectedPrefecture?.name ?? '都道府県を選択'}
+                </div>
+                {isDefaultPrefecture && (
+                  <span className="rounded-full bg-amber-400 px-2 py-0.5 text-[10px] font-bold text-amber-900 animate-bounce">
+                    変更推奨
+                  </span>
+                )}
               </div>
-              <div className="text-xs text-slate-500">
-                {selectedPrefecture?.description ?? '計算方法を選んでください'}
+              <div className={cn(
+                'text-xs',
+                isDefaultPrefecture ? 'text-amber-600' : 'text-slate-500'
+              )}>
+                {isDefaultPrefecture ? 'タップして都道府県を選択 ▼' : selectedPrefecture?.description ?? '計算方法を選んでください'}
               </div>
             </div>
           </div>
-          <ChevronDown className={cn(
-            'h-5 w-5 text-slate-400 transition-transform',
-            isOpen && 'rotate-180'
-          )} />
+          <div className={cn(
+            'rounded-full p-2 transition-colors',
+            isDefaultPrefecture ? 'bg-amber-100' : 'bg-slate-100'
+          )}>
+            <ChevronDown className={cn(
+              'h-5 w-5 transition-transform',
+              isDefaultPrefecture ? 'text-amber-600' : 'text-slate-400',
+              isOpen && 'rotate-180'
+            )} />
+          </div>
         </button>
 
         <AnimatePresence>

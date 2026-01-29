@@ -24,6 +24,7 @@ import { GoalSection } from '@/components/GoalSection';
 import { SubjectBreakdown } from '@/components/SubjectBreakdown';
 import { WelcomeBack } from '@/components/WelcomeBack';
 import { InputForm } from '@/components/Calculator/InputForm';
+import { LiveScorePreview } from '@/components/Calculator/LiveScorePreview';
 import { PrefectureSelector } from '@/components/Calculator/PrefectureSelector';
 import { AchievementBadges } from '@/components/Result/AchievementBadges';
 import { ComparisonCard } from '@/components/Result/ComparisonCard';
@@ -249,6 +250,7 @@ export default function Page() {
             </div>
 
             <div className="mt-5">
+              <LiveScorePreview scores={scores} prefectureCode={prefectureCode} />
               <InputForm prefectureCode={prefectureCode} scores={scores} onChange={onScoreChange} maxGrade={maxGrade} />
             </div>
 
