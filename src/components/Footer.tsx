@@ -7,19 +7,26 @@ import { APP_NAME } from '@/lib/constants';
 
 export function Footer() {
   return (
-    <footer className="border-t border-slate-200/50 bg-gradient-to-b from-slate-50/80 via-slate-100/60 to-slate-200/40 backdrop-blur-sm">
-      <div className="px-4 py-8 md:px-6">
+    <footer className="relative overflow-hidden border-t border-slate-200/30">
+      {/* Background with subtle pattern */}
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-50/90 via-slate-100/70 to-slate-200/50" />
+      <div className="absolute inset-0 opacity-30" style={{ backgroundImage: 'radial-gradient(circle at 25% 25%, rgba(99, 102, 241, 0.05) 0%, transparent 50%), radial-gradient(circle at 75% 75%, rgba(168, 85, 247, 0.04) 0%, transparent 50%)' }} />
+      
+      <div className="relative px-4 py-10 md:px-6">
         {/* Main footer content */}
-        <div className="grid gap-8 md:grid-cols-3">
+        <div className="grid gap-10 md:grid-cols-3">
           {/* About */}
           <div>
             <div className="flex items-center gap-3">
-              <div className="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br from-indigo-500 via-blue-500 to-violet-600 shadow-lg shadow-indigo-300/40">
-                <Sparkles className="h-5 w-5 text-white" />
+              <div className="relative">
+                <div className="grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-indigo-500 via-blue-500 to-violet-600 shadow-lg shadow-indigo-300/40">
+                  <Sparkles className="h-5 w-5 text-white" />
+                </div>
+                <div className="absolute -right-1 -top-1 h-3 w-3 rounded-full bg-emerald-400 ring-2 ring-white" />
               </div>
               <div>
-                <div className="text-sm font-bold text-slate-800">{APP_NAME}</div>
-                <div className="text-[10px] font-medium text-slate-400">2026 Edition</div>
+                <div className="text-base font-bold text-slate-800">{APP_NAME}</div>
+                <div className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">2026 Edition</div>
               </div>
             </div>
             <p className="mt-4 text-xs leading-relaxed text-slate-500">

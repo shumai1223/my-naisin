@@ -18,10 +18,10 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 
 const variantClass: Record<ButtonVariant, string> = {
   primary:
-    'bg-gradient-to-r from-indigo-500 via-blue-500 to-indigo-600 text-white font-bold shadow-lg shadow-indigo-500/25 hover:shadow-xl hover:shadow-indigo-500/30 hover:from-indigo-600 hover:via-blue-600 hover:to-indigo-700 active:from-indigo-700 active:via-blue-700 active:to-indigo-800',
+    'relative overflow-hidden bg-gradient-to-r from-indigo-500 via-blue-500 to-violet-500 text-white font-bold shadow-lg shadow-indigo-500/30 hover:shadow-xl hover:shadow-indigo-500/40 hover:from-indigo-600 hover:via-blue-600 hover:to-violet-600 active:from-indigo-700 active:via-blue-700 active:to-violet-700 before:absolute before:inset-0 before:bg-gradient-to-t before:from-transparent before:to-white/10 before:opacity-0 hover:before:opacity-100 before:transition-opacity',
   secondary:
-    'bg-white/80 backdrop-blur-sm text-slate-700 font-semibold border border-slate-200/80 shadow-sm hover:bg-white hover:border-slate-300 hover:shadow-md active:bg-slate-50',
-  ghost: 'bg-transparent text-slate-600 font-medium hover:bg-slate-100/80 border border-transparent hover:border-slate-200/50'
+    'bg-white/90 backdrop-blur-md text-slate-700 font-semibold border border-slate-200/60 shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:bg-white hover:border-slate-300/80 hover:shadow-[0_4px_16px_rgba(0,0,0,0.08)] active:bg-slate-50',
+  ghost: 'bg-transparent text-slate-600 font-medium hover:bg-slate-100/60 border border-transparent hover:border-slate-200/40 backdrop-blur-sm'
 };
 
 const sizeClass: Record<ButtonSize, string> = {

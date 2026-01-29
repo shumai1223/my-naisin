@@ -36,11 +36,11 @@ export function RankCard({ result }: RankCardProps) {
   }, [isS]);
 
   const rankVisual = React.useMemo(() => {
-    const visuals: Record<string, { color: string; bg: string; gradient: string; border: string; glow: string }> = {
-      S: { color: 'text-indigo-600', bg: 'bg-indigo-50', gradient: 'from-indigo-500 via-violet-500 to-purple-500', border: 'border-indigo-200', glow: 'shadow-indigo-200' },
-      A: { color: 'text-blue-600', bg: 'bg-blue-50', gradient: 'from-blue-500 to-indigo-500', border: 'border-blue-200', glow: 'shadow-blue-200' },
-      B: { color: 'text-sky-600', bg: 'bg-sky-50', gradient: 'from-sky-500 to-blue-500', border: 'border-sky-200', glow: 'shadow-sky-200' },
-      C: { color: 'text-slate-600', bg: 'bg-slate-100', gradient: 'from-slate-400 to-slate-500', border: 'border-slate-200', glow: 'shadow-slate-200' }
+    const visuals: Record<string, { color: string; bg: string; gradient: string; border: string; glow: string; glowClass: string }> = {
+      S: { color: 'text-violet-600', bg: 'bg-gradient-to-br from-violet-50 via-purple-50 to-fuchsia-50', gradient: 'from-violet-500 via-purple-500 to-fuchsia-500', border: 'border-violet-200/60', glow: 'shadow-violet-300/50', glowClass: 'rank-s-glow' },
+      A: { color: 'text-indigo-600', bg: 'bg-gradient-to-br from-indigo-50 via-blue-50 to-violet-50', gradient: 'from-indigo-500 via-blue-500 to-violet-500', border: 'border-indigo-200/60', glow: 'shadow-indigo-300/40', glowClass: 'rank-a-glow' },
+      B: { color: 'text-blue-600', bg: 'bg-gradient-to-br from-blue-50 via-cyan-50 to-sky-50', gradient: 'from-blue-500 via-cyan-500 to-sky-500', border: 'border-blue-200/60', glow: 'shadow-blue-300/40', glowClass: 'rank-b-glow' },
+      C: { color: 'text-slate-600', bg: 'bg-gradient-to-br from-slate-50 via-gray-50 to-slate-100', gradient: 'from-slate-400 via-slate-500 to-slate-600', border: 'border-slate-200/60', glow: 'shadow-slate-300/30', glowClass: '' }
     };
     return visuals[result.rank.code] ?? visuals.C;
   }, [result.rank.code]);
@@ -100,16 +100,18 @@ export function RankCard({ result }: RankCardProps) {
             <div className="flex items-center gap-4">
               <motion.div
                 key={result.rank.code}
-                initial={{ scale: 0.8, rotate: -5 }}
-                animate={{ scale: 1, rotate: 0 }}
+                initial={{ scale: 0.8, rotate: -5, opacity: 0 }}
+                animate={{ scale: 1, rotate: 0, opacity: 1 }}
                 transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                 className={cn(
-                  'grid h-20 w-20 place-items-center rounded-2xl bg-gradient-to-br text-4xl font-black text-white shadow-lg',
+                  'relative grid h-24 w-24 place-items-center rounded-3xl bg-gradient-to-br text-5xl font-black text-white',
                   rankVisual.gradient,
-                  rankVisual.glow
+                  rankVisual.glowClass
                 )}
               >
-                {result.rank.code}
+                {/* Inner shine effect */}
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-t from-transparent via-white/10 to-white/20" />
+                <span className="relative drop-shadow-lg">{result.rank.code}</span>
               </motion.div>
               <div>
                 <div className="text-xl font-bold text-slate-800">
