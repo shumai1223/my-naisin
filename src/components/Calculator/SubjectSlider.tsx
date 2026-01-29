@@ -12,16 +12,17 @@ export interface SubjectSliderProps {
   mode: ScoreMode;
   value: number;
   onChange: (nextValue: number) => void;
+  maxGrade?: number;
 }
 
-export function SubjectSlider({ subject, mode, value, onChange }: SubjectSliderProps) {
+export function SubjectSlider({ subject, mode, value, onChange, maxGrade = 5 }: SubjectSliderProps) {
   const weight = getSubjectWeight(mode, subject.category);
 
   const setValue = React.useCallback(
     (next: number) => {
-      onChange(clamp(Math.round(next), 1, 5));
+      onChange(clamp(Math.round(next), 1, maxGrade));
     },
-    [onChange]
+    [onChange, maxGrade]
   );
 
   return (
@@ -38,7 +39,7 @@ export function SubjectSlider({ subject, mode, value, onChange }: SubjectSliderP
               </span>
             ) : null}
           </div>
-          <div className="mt-1 text-[11px] text-slate-500">1〜5で評価</div>
+          <div className="mt-1 text-[11px] text-slate-500">1〜{maxGrade}で評価</div>
         </div>
 
         <div className="flex items-center gap-2">
@@ -69,7 +70,7 @@ export function SubjectSlider({ subject, mode, value, onChange }: SubjectSliderP
           className={cn('naishin-range', 'cursor-pointer')}
           type="range"
           min={1}
-          max={5}
+          max={maxGrade}
           step={1}
           value={value}
           onChange={(e) => setValue(Number(e.target.value))}
@@ -77,23 +78,25 @@ export function SubjectSlider({ subject, mode, value, onChange }: SubjectSliderP
         />
       </div>
 
-      <div className="mt-3 grid grid-cols-5 gap-1 md:hidden">
-        {[1, 2, 3, 4, 5].map((i) => (
-          <button
-            key={i}
-            type="button"
-            onClick={() => setValue(i)}
-            className={cn(
-              'h-8 rounded-lg text-sm font-semibold transition',
-              i === value
-                ? 'bg-blue-500 text-white'
-                : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-            )}
-          >
-            {i}
-          </button>
-        ))}
-      </div>
+      {maxGrade <= 5 && (
+        <div className="mt-3 grid grid-cols-5 gap-1 md:hidden">
+          {Array.from({ length: maxGrade }, (_, i) => i + 1).map((i) => (
+            <button
+              key={i}
+              type="button"
+              onClick={() => setValue(i)}
+              className={cn(
+                'h-8 rounded-lg text-sm font-semibold transition',
+                i === value
+                  ? 'bg-blue-500 text-white'
+                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+              )}
+            >
+              {i}
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

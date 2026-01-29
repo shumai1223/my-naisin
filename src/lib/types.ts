@@ -1,4 +1,4 @@
-export type ScoreMode = 'normal' | 'tokyo';
+export type ScoreMode = 'normal' | 'tokyo' | 'prefecture';
 
 export type SubjectCategory = 'core' | 'practical';
 
@@ -46,4 +46,12 @@ export interface SavedHistoryEntry {
   mode: ScoreMode;
   scores: Scores;
   memo?: string;
+  prefectureCode?: string;
+  use10PointScale?: boolean;
+}
+
+export interface CalculationSettings {
+  mode: ScoreMode;
+  prefectureCode: string;
+  use10PointScale: boolean;
 }

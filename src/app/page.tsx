@@ -5,6 +5,7 @@ import confetti from 'canvas-confetti';
 import { ArrowRight, RotateCcw, Share2 } from 'lucide-react';
 
 import { DEFAULT_SCORES, MODE_CONFIG } from '@/lib/constants';
+import { getPrefectureByCode, DEFAULT_PREFECTURE_CODE } from '@/lib/prefectures';
 import { appendHistoryEntry, getSaveConsent, readHistory, setSaveConsent } from '@/lib/persistence';
 import type { ResultData, SavedHistoryEntry, ScoreMode, Scores, SubjectKey } from '@/lib/types';
 import {
@@ -23,6 +24,7 @@ import { GoalSection } from '@/components/GoalSection';
 import { SubjectBreakdown } from '@/components/SubjectBreakdown';
 import { WelcomeBack } from '@/components/WelcomeBack';
 import { InputForm } from '@/components/Calculator/InputForm';
+import { PrefectureSelector } from '@/components/Calculator/PrefectureSelector';
 import { RegionSwitch } from '@/components/Calculator/RegionSwitch';
 import { AchievementBadges } from '@/components/Result/AchievementBadges';
 import { ComparisonCard } from '@/components/Result/ComparisonCard';
@@ -59,6 +61,8 @@ function popConfetti() {
 
 export default function Page() {
   const [mode, setMode] = React.useState<ScoreMode>('normal');
+  const [prefectureCode, setPrefectureCode] = React.useState<string>(DEFAULT_PREFECTURE_CODE);
+  const [use10PointScale, setUse10PointScale] = React.useState(false);
   const [scores, setScores] = React.useState<Scores>(DEFAULT_SCORES);
   const [showResult, setShowResult] = React.useState(false);
   const [shareOpen, setShareOpen] = React.useState(false);
@@ -66,6 +70,13 @@ export default function Page() {
   const [saveEnabled, setSaveEnabled] = React.useState(false);
   const [saveMemo, setSaveMemo] = React.useState('');
   const [lastSaved, setLastSaved] = React.useState<SavedHistoryEntry | null>(null);
+
+  const selectedPrefecture = React.useMemo(
+    () => mode === 'prefecture' ? getPrefectureByCode(prefectureCode) : null,
+    [mode, prefectureCode]
+  );
+
+  const maxGrade = use10PointScale && selectedPrefecture?.supports10PointScale ? 10 : 5;
 
   React.useEffect(() => {
     setShareUrl(window.location.origin);
@@ -111,8 +122,14 @@ export default function Page() {
     }
   }, [scores, mode]);
 
-  const total = React.useMemo(() => calculateTotalScore(scores, mode), [scores, mode]);
-  const max = React.useMemo(() => calculateMaxScore(mode), [mode]);
+  const total = React.useMemo(
+    () => calculateTotalScore(scores, mode, prefectureCode, use10PointScale),
+    [scores, mode, prefectureCode, use10PointScale]
+  );
+  const max = React.useMemo(
+    () => calculateMaxScore(mode, prefectureCode, use10PointScale),
+    [mode, prefectureCode, use10PointScale]
+  );
   const percent = React.useMemo(() => calculatePercent(total, max), [total, max]);
   const rank = React.useMemo(() => getRankForPercent(percent), [percent]);
 
@@ -215,19 +232,32 @@ export default function Page() {
                   </div>
                 </div>
                 <div className="rounded-2xl border border-indigo-200/60 bg-gradient-to-br from-indigo-50/90 via-blue-50/80 to-violet-50/90 px-5 py-3 shadow-sm backdrop-blur-sm">
-                  <div className="text-sm font-bold text-indigo-700">{modeInfo.label}</div>
-                  <div className="mt-0.5 text-xs text-indigo-600/70">満点：{modeInfo.max}点</div>
+                  <div className="text-sm font-bold text-indigo-700">
+                    {mode === 'prefecture' && selectedPrefecture ? selectedPrefecture.name : modeInfo.label}
+                  </div>
+                  <div className="mt-0.5 text-xs text-indigo-600/70">満点：{max}点</div>
                 </div>
               </div>
             </div>
             <div className="p-5 md:p-6">
 
             <div className="mt-4">
-              <RegionSwitch mode={mode} onChange={setMode} />
+              <RegionSwitch mode={mode} onChange={setMode} prefectureCode={prefectureCode} />
             </div>
 
+            {mode === 'prefecture' && (
+              <div className="mt-4">
+                <PrefectureSelector
+                  selectedCode={prefectureCode}
+                  onChange={setPrefectureCode}
+                  use10PointScale={use10PointScale}
+                  onScale10Change={setUse10PointScale}
+                />
+              </div>
+            )}
+
             <div className="mt-5">
-              <InputForm mode={mode} scores={scores} onChange={onScoreChange} />
+              <InputForm mode={mode} scores={scores} onChange={onScoreChange} maxGrade={maxGrade} />
             </div>
 
             <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
@@ -264,7 +294,11 @@ export default function Page() {
                             {result.total}
                             <span className="text-xl font-semibold text-slate-400">/{result.max}</span>
                           </div>
-                          <div className="mt-2 text-sm text-slate-500">{modeInfo.description}</div>
+                          <div className="mt-2 text-sm text-slate-500">
+                            {mode === 'prefecture' && selectedPrefecture
+                              ? selectedPrefecture.description
+                              : modeInfo.description}
+                          </div>
                         </div>
                       </div>
 

@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Heart, FileText, Shield, Mail, AlertTriangle, Sparkles, Twitter, Github, BookOpen } from 'lucide-react';
+import { Heart, FileText, Shield, Mail, AlertTriangle, Sparkles, BookOpen } from 'lucide-react';
 
 import { APP_NAME } from '@/lib/constants';
 
@@ -34,23 +34,6 @@ export function Footer() {
               目標設定・教科分析・達成バッジで<br />
               あなたの勉強をサポートします。
             </p>
-            {/* Social links placeholder */}
-            <div className="mt-4 flex items-center gap-2">
-              <a 
-                href="#" 
-                className="grid h-8 w-8 place-items-center rounded-lg bg-slate-100 text-slate-400 transition-all hover:bg-blue-100 hover:text-blue-500"
-                aria-label="Twitter"
-              >
-                <Twitter className="h-4 w-4" />
-              </a>
-              <a 
-                href="#" 
-                className="grid h-8 w-8 place-items-center rounded-lg bg-slate-100 text-slate-400 transition-all hover:bg-slate-800 hover:text-white"
-                aria-label="GitHub"
-              >
-                <Github className="h-4 w-4" />
-              </a>
-            </div>
           </div>
 
           {/* Features */}

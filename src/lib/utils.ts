@@ -2,6 +2,7 @@ import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
 import { MODE_CONFIG, RANK_DEFINITIONS, SUBJECTS } from './constants';
+import { getPrefectureByCode, type PrefectureConfig } from './prefectures';
 import type { RankDefinition, ScoreMode, Scores, SubjectCategory, SubjectKey } from './types';
 
  const RANK_DEFINITIONS_DESC = [...RANK_DEFINITIONS].sort((a, b) => b.minPercent - a.minPercent);
@@ -22,7 +23,10 @@ export function roundInt(value: number) {
    return Math.floor(clamp(value, 0, 100));
  }
 
-export function calculateTotalScore(scores: Scores, mode: ScoreMode) {
+export function calculateTotalScore(scores: Scores, mode: ScoreMode, prefectureCode?: string, use10PointScale?: boolean) {
+  if (mode === 'prefecture' && prefectureCode) {
+    return calculatePrefectureScore(scores, prefectureCode, use10PointScale);
+  }
   const weights = MODE_CONFIG[mode].weights;
   return SUBJECTS.reduce((sum, subject) => {
     const raw = scores[subject.key];
@@ -32,7 +36,44 @@ export function calculateTotalScore(scores: Scores, mode: ScoreMode) {
   }, 0);
 }
 
-export function calculateMaxScore(mode: ScoreMode) {
+export function calculatePrefectureScore(scores: Scores, prefectureCode: string, use10PointScale?: boolean): number {
+  const prefecture = getPrefectureByCode(prefectureCode);
+  if (!prefecture) return 0;
+
+  const coreSubjects: SubjectKey[] = ['japanese', 'math', 'english', 'science', 'social'];
+  const practicalSubjects: SubjectKey[] = ['music', 'art', 'pe', 'tech'];
+  
+  let total = 0;
+  const maxGrade = use10PointScale ? 10 : 5;
+  
+  // 5教科
+  for (const key of coreSubjects) {
+    const raw = scores[key];
+    const safe = clamp(roundInt(raw), 1, maxGrade);
+    total += safe * prefecture.coreMultiplier;
+  }
+  
+  // 実技4教科
+  for (const key of practicalSubjects) {
+    const raw = scores[key];
+    const safe = clamp(roundInt(raw), 1, maxGrade);
+    total += safe * prefecture.practicalMultiplier;
+  }
+  
+  return Math.round(total);
+}
+
+export function calculateMaxScore(mode: ScoreMode, prefectureCode?: string, use10PointScale?: boolean) {
+  if (mode === 'prefecture' && prefectureCode) {
+    const prefecture = getPrefectureByCode(prefectureCode);
+    if (prefecture) {
+      // 10段階評価の場合は満点を2倍に
+      if (use10PointScale && prefecture.supports10PointScale) {
+        return prefecture.maxScore * 2;
+      }
+      return prefecture.maxScore;
+    }
+  }
   return MODE_CONFIG[mode].max;
 }
 

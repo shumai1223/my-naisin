@@ -28,6 +28,12 @@ export const MODE_CONFIG: Record<ScoreMode, { label: string; description: string
     description: '(5教科 × 5) + (実技4教科 × 2 × 5) = 65点満点',
     max: 65,
     weights: { core: 1, practical: 2 }
+  },
+  prefecture: {
+    label: '都道府県別',
+    description: '各都道府県の計算方法で算出',
+    max: 0, // 動的に設定
+    weights: { core: 1, practical: 1 } // 動的に設定
   }
 };
 

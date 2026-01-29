@@ -9,9 +9,10 @@ export interface InputFormProps {
   mode: ScoreMode;
   scores: Scores;
   onChange: (key: SubjectKey, nextValue: number) => void;
+  maxGrade?: number;
 }
 
-export function InputForm({ mode, scores, onChange }: InputFormProps) {
+export function InputForm({ mode, scores, onChange, maxGrade = 5 }: InputFormProps) {
   return (
     <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
       {SUBJECTS.map((subject) => (
@@ -21,6 +22,7 @@ export function InputForm({ mode, scores, onChange }: InputFormProps) {
           mode={mode}
           value={scores[subject.key]}
           onChange={(next) => onChange(subject.key, next)}
+          maxGrade={maxGrade}
         />
       ))}
     </div>
