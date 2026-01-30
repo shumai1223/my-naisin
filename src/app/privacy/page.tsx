@@ -176,7 +176,7 @@ export default function PrivacyPage() {
               </li>
               <li className="flex gap-2">
                 <span className="text-blue-500">•</span>
-                <strong>計算モード：</strong>選択した計算方式（標準方式/東京都方式）
+                <strong>都道府県選択：</strong>選択した都道府県の計算方式（全国47都道府県対応）
               </li>
               <li className="flex gap-2">
                 <span className="text-blue-500">•</span>
