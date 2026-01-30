@@ -4,7 +4,7 @@ import { BookOpen, Calendar, Clock, ChevronRight, Sparkles } from 'lucide-react'
 import { getAllPosts } from '@/lib/blog-data';
 
 export const metadata = {
-  title: '内申点コラム | My naisin - 高校受験ガイド',
+  title: '内申点コラム | My Naishin - 高校受験ガイド',
   description: '内申点の計算方法、成績の上げ方、都道府県別の違いなど、高校受験に役立つ情報を発信しています。',
 };
 

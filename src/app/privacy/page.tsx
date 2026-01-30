@@ -92,7 +92,10 @@ export default function PrivacyPage() {
             </div>
             <div className="rounded-xl bg-emerald-50 p-4">
               <p className="text-sm font-medium text-emerald-700">
-                ✓ 当サイトは個人を特定できる情報を直接収集しません
+                ✓ ツール利用時は個人情報を収集しません（端末内のみ保存）
+              </p>
+              <p className="mt-1 text-xs text-emerald-600">
+                ※ お問い合わせ時のみ、返信のためメールアドレス等を取得します（詳細は2.2参照）
               </p>
             </div>
             <h3 className="mb-2 mt-4 text-sm font-bold text-slate-700">2.1 ツール利用時の情報</h3>

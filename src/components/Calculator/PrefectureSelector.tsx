@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { ChevronDown, MapPin, Info, AlertTriangle, Sparkles } from 'lucide-react';
+import { ChevronDown, MapPin, Info, AlertTriangle, Sparkles, ExternalLink, Calendar } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import { PREFECTURES, REGIONS, getPrefecturesByRegion, type PrefectureConfig } from '@/lib/prefectures';
@@ -198,6 +198,29 @@ export function PrefectureSelector({
                   ※ {selectedPrefecture.note}
                 </div>
               )}
+              <div className="mt-3 rounded-xl border border-white/60 bg-white/80 p-3 text-xs text-slate-600">
+                <div className="flex flex-wrap items-center gap-2">
+                  {selectedPrefecture.sourceUrl ? (
+                    <a
+                      href={selectedPrefecture.sourceUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 rounded-full bg-blue-50 px-3 py-1 font-medium text-blue-700 hover:bg-blue-100"
+                    >
+                      {selectedPrefecture.sourceTitle ?? '公式資料'}
+                      <ExternalLink className="h-3 w-3" />
+                    </a>
+                  ) : (
+                    <span className="inline-flex items-center rounded-full bg-slate-100 px-3 py-1 font-medium text-slate-500">
+                      根拠リンク：確認中
+                    </span>
+                  )}
+                  <span className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1 font-medium text-slate-600 shadow-sm">
+                    <Calendar className="h-3 w-3" />
+                    最終確認日: {selectedPrefecture.lastVerified ?? '未確認'}
+                  </span>
+                </div>
+              </div>
               <div className="mt-2 flex flex-wrap gap-2">
                 <span className="inline-flex items-center rounded-full bg-white px-2.5 py-1 text-xs font-medium text-slate-700 shadow-sm">
                   満点: {selectedPrefecture.maxScore}点

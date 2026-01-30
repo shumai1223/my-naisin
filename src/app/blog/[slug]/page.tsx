@@ -21,27 +21,27 @@ export async function generateMetadata({ params }: PageProps) {
   
   if (!post) {
     return {
-      title: '記事が見つかりません | My naisin',
+      title: '記事が見つかりません | My Naishin',
     };
   }
 
-  const url = `https://my-naisin.com/blog/${post.slug}`;
-  const imageUrl = 'https://my-naisin.com/og-image.png';
+  const url = `https://my-naishin.com/blog/${post.slug}`;
+  const imageUrl = 'https://my-naishin.com/og-image.png';
 
   return {
-    title: `${post.title} | My naisin`,
+    title: `${post.title} | My Naishin`,
     description: post.description,
     keywords: post.tags.join(', '),
-    authors: [{ name: 'My naisin' }],
+    authors: [{ name: 'My Naishin' }],
     openGraph: {
       title: post.title,
       description: post.description,
       url: url,
-      siteName: 'My naisin - 内申点計算ツール',
+      siteName: 'My Naishin - 内申点計算ツール',
       locale: 'ja_JP',
       type: 'article',
       publishedTime: post.date,
-      authors: ['My naisin'],
+      authors: ['My Naishin'],
       tags: post.tags,
       images: [{
         url: imageUrl,
@@ -157,7 +157,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           <meta itemProp="headline" content={post.title} />
           <meta itemProp="description" content={post.description} />
           <meta itemProp="datePublished" content={post.date} />
-          <meta itemProp="author" content="My naisin" />
+          <meta itemProp="author" content="My Naishin" />
           <meta itemProp="keywords" content={post.tags.join(', ')} />
           
           <div
@@ -207,7 +207,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         <div className="mt-10 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 p-6 text-center text-white shadow-lg">
           <h3 className="text-lg font-bold">あなたの内申点を計算してみよう！</h3>
           <p className="mt-2 text-sm text-blue-100">
-            My naisinなら、9教科の成績を入力するだけで内申点がすぐわかります
+            My Naishinなら、9教科の成績を入力するだけで内申点がすぐわかります
           </p>
           <Link
             href="/"

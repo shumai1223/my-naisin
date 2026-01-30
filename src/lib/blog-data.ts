@@ -121,6 +121,8 @@ export const BLOG_POSTS: BlogPost[] = [
 - 内申点（65点満点）→ 300点に換算
 - 当日点（500点満点）→ 700点に換算
 
+さらに、都立一般入試では **ESAT-J（英語スピーキングテスト）** の結果20点を加えて **1020点満点** として扱う説明も一般的です。ESAT-JはA〜Fの6段階評価で、それぞれ20点・16点・12点・8点・4点・0点に換算されます。
+
 ---
 
 ## 🌊 神奈川県の内申点計算方法
@@ -248,7 +250,7 @@ export const BLOG_POSTS: BlogPost[] = [
 
 <div class="cta-box">
 <h3>🎯 今すぐ内申点を計算してみよう！</h3>
-<p>My naisinなら、あなたの地域に合わせた内申点が簡単に計算できます。目標との差も一目でわかる！</p>
+<p>My Naishinなら、あなたの地域に合わせた内申点が簡単に計算できます。目標との差も一目でわかる！</p>
 </div>
     `
   },
@@ -518,7 +520,7 @@ export const BLOG_POSTS: BlogPost[] = [
 
 <div class="cta-box">
 <h3>🎯 目標の内申点を設定しよう！</h3>
-<p>My naisinで現在の内申点を計算し、目標との差を確認しましょう。具体的な数字があると、モチベーションが上がります！</p>
+<p>My Naishinで現在の内申点を計算し、目標との差を確認しましょう。具体的な数字があると、モチベーションが上がります！</p>
 </div>
     `
   },
@@ -638,7 +640,7 @@ export const BLOG_POSTS: BlogPost[] = [
 
 <div class="cta-box">
 <h3>🎯 観点別の改善ポイントを決めよう</h3>
-<p>My naisinで現在の内申点を確認し、どの観点を伸ばすべきか整理しましょう。</p>
+<p>My Naishinで現在の内申点を確認し、どの観点を伸ばすべきか整理しましょう。</p>
 </div>
     `
   },
@@ -747,7 +749,7 @@ export const BLOG_POSTS: BlogPost[] = [
 
 <div class="cta-box">
 <h3>🎯 自分の内申点を試算しよう</h3>
-<p>My naisinなら、9教科の評定を入力するだけで東京都式の内申点がわかります。</p>
+<p>My Naishinなら、9教科の評定を入力するだけで東京都式の内申点がわかります。</p>
 </div>
     `
   },
@@ -855,7 +857,7 @@ export const BLOG_POSTS: BlogPost[] = [
 
 <div class="cta-box">
 <h3>🎯 目標点を逆算しよう</h3>
-<p>My naisinで現在の内申点を確認し、志望校までの差を逆算してみましょう。</p>
+<p>My Naishinで現在の内申点を確認し、志望校までの差を逆算してみましょう。</p>
 </div>
     `
   },
@@ -1084,7 +1086,7 @@ export const BLOG_POSTS: BlogPost[] = [
 
 <div class="cta-box">
 <h3>🎯 副教科の点数を試算しよう</h3>
-<p>My naisinで9教科を入力し、副教科を上げたときの変化を確認してみましょう。</p>
+<p>My Naishinで9教科を入力し、副教科を上げたときの変化を確認してみましょう。</p>
 </div>
     `
   },
@@ -1188,7 +1190,7 @@ export const BLOG_POSTS: BlogPost[] = [
 
 ## 📊 内申点と当日点の比率
 
-都立高校の一般入試では、内申点と当日の学力検査を**1000点満点**に換算して合否を判定します。
+都立高校の一般入試では、内申点と当日の学力検査を**1000点満点**（7:3換算）で判定します。さらに、**ESAT-J（英語スピーキングテスト）** の結果20点を加えて **1020点満点** として扱う説明も一般的です。
 
 <div class="table-container">
 <table class="calc-table">
@@ -1196,11 +1198,12 @@ export const BLOG_POSTS: BlogPost[] = [
 <tr><th>項目</th><th>満点</th><th>換算後</th><th>比率</th></tr>
 </thead>
 <tbody>
-<tr><td>換算内申</td><td>65点</td><td>300点</td><td>30%</td></tr>
-<tr><td>学力検査</td><td>500点</td><td>700点</td><td>70%</td></tr>
+<tr><td>換算内申</td><td>65点</td><td>300点</td><td>約29%</td></tr>
+<tr><td>学力検査</td><td>500点</td><td>700点</td><td>約69%</td></tr>
+<tr><td>ESAT-J</td><td>A〜F</td><td>0〜20点</td><td>約2%</td></tr>
 </tbody>
 <tfoot>
-<tr><td colspan="2"><strong>合計</strong></td><td><strong>1000点</strong></td><td>100%</td></tr>
+<tr><td colspan="2"><strong>合計</strong></td><td><strong>1020点</strong></td><td>100%</td></tr>
 </tfoot>
 </table>
 </div>
@@ -1272,7 +1275,7 @@ export const BLOG_POSTS: BlogPost[] = [
 
 <div class="cta-box">
 <h3>🎯 換算内申を計算してみよう！</h3>
-<p>My naisinの「東京都モード」で、あなたの換算内申をすぐに確認できます。</p>
+<p>My Naishinの「東京都モード」で、あなたの換算内申をすぐに確認できます。</p>
 </div>
     `
   },
@@ -1508,7 +1511,7 @@ export const BLOG_POSTS: BlogPost[] = [
 
 <div class="cta-box">
 <h3>🎯 副教科を上げたときの効果を確認しよう！</h3>
-<p>My naisinで副教科の点数を変えてシミュレーション。東京都モードなら2倍の効果を実感できます。</p>
+<p>My Naishinで副教科の点数を変えてシミュレーション。東京都モードなら2倍の効果を実感できます。</p>
 </div>
     `
   }

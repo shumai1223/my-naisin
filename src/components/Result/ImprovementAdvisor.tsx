@@ -3,14 +3,15 @@
 import * as React from 'react';
 import { TrendingUp, Target, Lightbulb, ChevronUp } from 'lucide-react';
 
-import { SUBJECTS } from '@/lib/constants';
+import { SUBJECTS, RANK_DEFINITIONS } from '@/lib/constants';
 import { getPrefectureByCode } from '@/lib/prefectures';
 import type { Scores, SubjectKey } from '@/lib/types';
-import { cn } from '@/lib/utils';
+import { cn, calculateTotalScore, calculateMaxScore, calculatePercent, getRankForPercent } from '@/lib/utils';
 
 interface ImprovementAdvisorProps {
   scores: Scores;
   prefectureCode: string;
+  targetPercent?: number;
 }
 
 interface SubjectAnalysis {
@@ -24,8 +25,31 @@ interface SubjectAnalysis {
   improvementRoom: number;
 }
 
-export function ImprovementAdvisor({ scores, prefectureCode }: ImprovementAdvisorProps) {
+export function ImprovementAdvisor({ scores, prefectureCode, targetPercent }: ImprovementAdvisorProps) {
   const prefecture = getPrefectureByCode(prefectureCode);
+  
+  // 現在のスコアと達成率を計算
+  const currentTotal = calculateTotalScore(scores, prefectureCode);
+  const maxScore = calculateMaxScore(prefectureCode);
+  const currentPercent = calculatePercent(currentTotal, maxScore);
+  const currentRank = getRankForPercent(currentPercent);
+  
+  // 次のランクまでの計算
+  const nextRankInfo = React.useMemo(() => {
+    const currentRankIndex = RANK_DEFINITIONS.findIndex(r => r.code === currentRank.code);
+    if (currentRankIndex <= 0) return null; // すでに最高ランク
+    
+    const nextRank = RANK_DEFINITIONS[currentRankIndex - 1];
+    const targetPercentForNextRank = nextRank.minPercent;
+    const targetScoreForNextRank = Math.ceil((targetPercentForNextRank / 100) * maxScore);
+    const pointsNeeded = targetScoreForNextRank - currentTotal;
+    
+    return {
+      nextRank,
+      targetScore: targetScoreForNextRank,
+      pointsNeeded: Math.max(0, pointsNeeded),
+    };
+  }, [currentRank, currentTotal, maxScore]);
 
   const analysis = React.useMemo(() => {
     if (!prefecture) return [];
@@ -95,6 +119,29 @@ export function ImprovementAdvisor({ scores, prefectureCode }: ImprovementAdviso
           <p className="text-xs text-slate-500">効率的に内申点を上げるための提案</p>
         </div>
       </div>
+
+      {/* 次のランクまで */}
+      {nextRankInfo && nextRankInfo.pointsNeeded > 0 && (
+        <div className="mb-4 rounded-xl bg-gradient-to-r from-purple-50 to-fuchsia-50 p-4 border border-purple-100">
+          <div className="flex items-center justify-between">
+            <div className="text-sm font-medium text-purple-700">
+              次のランク「{nextRankInfo.nextRank.code}」まで
+            </div>
+            <div className="flex items-baseline gap-1">
+              <span className="text-2xl font-bold text-purple-600">あと{nextRankInfo.pointsNeeded}</span>
+              <span className="text-sm text-purple-500">点</span>
+            </div>
+          </div>
+          {topRecommendations[0] && (
+            <div className="mt-2 text-xs text-purple-600">
+              💡 「{topRecommendations[0].label}」を1点上げれば +{topRecommendations[0].multiplier}点
+              {nextRankInfo.pointsNeeded <= topRecommendations[0].multiplier && (
+                <span className="ml-1 font-bold">→ ランクアップ可能！</span>
+              )}
+            </div>
+          )}
+        </div>
+      )}
 
       {/* 総合ポテンシャル */}
       <div className="mb-4 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 p-4">
