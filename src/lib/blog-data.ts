@@ -1076,7 +1076,7 @@ export const BLOG_POSTS: BlogPost[] = [
     `
   },
   {
-    slug: 'tokyo-換算内申-guide',
+    slug: 'tokyo-kansan-naishin-guide',
     title: '【東京都】換算内申の計算方法と都立高校入試の完全ガイド',
     description: '東京都立高校入試で使われる「換算内申」の仕組みを徹底解説。実技4教科が2倍になる理由と、65点満点の計算方法を具体例で紹介します。',
     date: '2025-01-18',
