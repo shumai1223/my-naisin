@@ -42,7 +42,11 @@ export const PREFECTURES: PrefectureConfig[] = [
     coreMultiplier: 1,
     practicalMultiplier: 1,
     maxScore: 315,
-    description: '中1・中2は2倍、中3は3倍（315点満点）'
+    description: '中1・中2は2倍、中3は3倍（315点満点）',
+    sourceUrl: 'https://www.dokyoi.pref.hokkaido.lg.jp/hk/gks/koukounyuusenn.html',
+    sourceTitle: '北海道教育委員会 入学者選抜',
+    lastVerified: '2026-01-30',
+    fiscalYear: '2026'
   },
   {
     code: 'aomori',
@@ -53,7 +57,11 @@ export const PREFECTURES: PrefectureConfig[] = [
     coreMultiplier: 1,
     practicalMultiplier: 1,
     maxScore: 135,
-    description: '中1〜中3の9教科×5段階（135点満点）'
+    description: '中1〜中3の9教科×5段階（135点満点）',
+    sourceUrl: 'https://www.pref.aomori.lg.jp/soshiki/kyoiku/e-gakyo/senbatsu2025.html',
+    sourceTitle: '青森県教育委員会 入学者選抜',
+    lastVerified: '2026-01-30',
+    fiscalYear: '2026'
   },
   {
     code: 'iwate',
@@ -65,7 +73,11 @@ export const PREFECTURES: PrefectureConfig[] = [
     practicalMultiplier: 3,
     maxScore: 440,
     description: '5教科×2倍、実技4教科×3倍、学年比1:2:3（440点満点）',
-    note: '660点×2/3で換算'
+    note: '660点×2/3で換算',
+    sourceUrl: 'https://www.pref.iwate.jp/kyouikubunka/kyouiku/gakkou/senbatsu/index.html',
+    sourceTitle: '岩手県教育委員会 入学者選抜',
+    lastVerified: '2026-01-30',
+    fiscalYear: '2026'
   },
   {
     code: 'miyagi',
@@ -76,7 +88,11 @@ export const PREFECTURES: PrefectureConfig[] = [
     coreMultiplier: 1,
     practicalMultiplier: 2,
     maxScore: 195,
-    description: '5教科×1倍、実技4教科×2倍（195点満点）'
+    description: '5教科×1倍、実技4教科×2倍（195点満点）',
+    sourceUrl: 'https://www.pref.miyagi.jp/soshiki/koukyou/kakomon-ko-nyushi.html',
+    sourceTitle: '宮城県教育委員会 入学者選抜',
+    lastVerified: '2026-01-30',
+    fiscalYear: '2026'
   },
   {
     code: 'akita',
@@ -87,7 +103,11 @@ export const PREFECTURES: PrefectureConfig[] = [
     coreMultiplier: 1,
     practicalMultiplier: 2,
     maxScore: 195,
-    description: '実技4教科は2倍（各学年65点×3＝195点満点）'
+    description: '実技4教科は2倍（各学年65点×3＝195点満点）',
+    sourceUrl: 'https://www.pref.akita.lg.jp/pages/genre/15415',
+    sourceTitle: '秋田県教育委員会 入学者選抜',
+    lastVerified: '2026-01-30',
+    fiscalYear: '2026'
   },
   {
     code: 'yamagata',
@@ -98,7 +118,11 @@ export const PREFECTURES: PrefectureConfig[] = [
     coreMultiplier: 1,
     practicalMultiplier: 1,
     maxScore: 45,
-    description: '中3の成績のみ（45点満点）'
+    description: '中3の成績のみ（45点満点）',
+    sourceUrl: 'https://www.pref.yamagata.jp/700013/koko/20240214r7nyuugakusyasennbatu.html',
+    sourceTitle: '山形県教育委員会 入学者選抜',
+    lastVerified: '2026-01-30',
+    fiscalYear: '2026'
   },
   {
     code: 'fukushima',
@@ -109,7 +133,11 @@ export const PREFECTURES: PrefectureConfig[] = [
     coreMultiplier: 1,
     practicalMultiplier: 2,
     maxScore: 195,
-    description: '実技4教科は2倍（195点満点）'
+    description: '実技4教科は2倍（195点満点）',
+    sourceUrl: 'https://www.pref.fukushima.lg.jp/site/edu/r7koukounyushi.html',
+    sourceTitle: '福島県教育委員会 入学者選抜',
+    lastVerified: '2026-01-30',
+    fiscalYear: '2026'
   },
   // 関東
   {
@@ -121,7 +149,11 @@ export const PREFECTURES: PrefectureConfig[] = [
     coreMultiplier: 1,
     practicalMultiplier: 1,
     maxScore: 135,
-    description: '中1〜中3の9教科×5段階（135点満点）'
+    description: '中1〜中3の9教科×5段階（135点満点）',
+    sourceUrl: 'https://kyoiku.pref.ibaraki.jp/gakko/nyushi/highschool/',
+    sourceTitle: '茨城県教育委員会 入学者選抜',
+    lastVerified: '2026-01-30',
+    fiscalYear: '2026'
   },
   {
     code: 'tochigi',
@@ -133,7 +165,11 @@ export const PREFECTURES: PrefectureConfig[] = [
     practicalMultiplier: 1,
     maxScore: 500,
     description: '中1〜中3を500点満点に換算',
-    note: '学校により配点が異なる'
+    note: '学校により配点が異なる',
+    sourceUrl: 'https://www.pref.tochigi.lg.jp/kyouiku/gakkoukyouiku/nyuugakusenkou/index.html',
+    sourceTitle: '栃木県教育委員会 入学者選抜',
+    lastVerified: '2026-01-30',
+    fiscalYear: '2026'
   },
   {
     code: 'gunma',
@@ -144,7 +180,11 @@ export const PREFECTURES: PrefectureConfig[] = [
     coreMultiplier: 1,
     practicalMultiplier: 1,
     maxScore: 135,
-    description: '中1〜中3の9教科×5段階（135点満点）'
+    description: '中1〜中3の9教科×5段階（135点満点）',
+    sourceUrl: 'https://www.pref.gunma.jp/site/kyouiku/list66-367.html',
+    sourceTitle: '群馬県教育委員会 入学者選抜',
+    lastVerified: '2026-01-30',
+    fiscalYear: '2026'
   },
   {
     code: 'saitama',
@@ -218,7 +258,11 @@ export const PREFECTURES: PrefectureConfig[] = [
     coreMultiplier: 1,
     practicalMultiplier: 1,
     maxScore: 135,
-    description: '中1〜中3の9教科×5段階（135点満点）'
+    description: '中1〜中3の9教科×5段階（135点満点）',
+    sourceUrl: 'https://www.pref.niigata.lg.jp/sec/kotogakko/nyugakushasenbatsu.html',
+    sourceTitle: '新潟県教育委員会 入学者選抜',
+    lastVerified: '2026-01-30',
+    fiscalYear: '2026'
   },
   {
     code: 'toyama',
@@ -229,7 +273,11 @@ export const PREFECTURES: PrefectureConfig[] = [
     coreMultiplier: 1,
     practicalMultiplier: 1,
     maxScore: 150,
-    description: '中2(45点)＋中3×2倍(90点)＋活動15点（150点満点）'
+    description: '中2(45点)＋中3×2倍(90点)＋活動15点（150点満点）',
+    sourceUrl: 'https://www.pref.toyama.jp/300201/kyouiku/kenritsukoukou/07senbatsu.html',
+    sourceTitle: '富山県教育委員会 入学者選抜',
+    lastVerified: '2026-01-30',
+    fiscalYear: '2026'
   },
   {
     code: 'ishikawa',
@@ -240,7 +288,11 @@ export const PREFECTURES: PrefectureConfig[] = [
     coreMultiplier: 1,
     practicalMultiplier: 1,
     maxScore: 135,
-    description: '中1〜中3の9教科×5段階（135点満点）'
+    description: '中1〜中3の9教科×5段階（135点満点）',
+    sourceUrl: 'https://www.pref.ishikawa.lg.jp/kyoiku/gakkou/senbatu/senbatu.html',
+    sourceTitle: '石川県教育委員会 入学者選抜',
+    lastVerified: '2026-01-30',
+    fiscalYear: '2026'
   },
   {
     code: 'fukui',
@@ -251,7 +303,11 @@ export const PREFECTURES: PrefectureConfig[] = [
     coreMultiplier: 1,
     practicalMultiplier: 1,
     maxScore: 45,
-    description: '中3の成績のみ（45点満点）'
+    description: '中3の成績のみ（45点満点）',
+    sourceUrl: 'https://www.pref.fukui.lg.jp/doc/koukou/nyugaku/r7nyugaku.html',
+    sourceTitle: '福井県教育委員会 入学者選抜',
+    lastVerified: '2026-01-30',
+    fiscalYear: '2026'
   },
   {
     code: 'yamanashi',
@@ -263,7 +319,11 @@ export const PREFECTURES: PrefectureConfig[] = [
     practicalMultiplier: 3,
     maxScore: 330,
     description: '5教科×2倍、実技4教科×3倍（330点満点）',
-    note: '特別活動等で+30点'
+    note: '特別活動等で+30点',
+    sourceUrl: 'https://www.pref.yamanashi.jp/kyouiku-kikaku/nyuusi/saishinnonyuusijouhou.html',
+    sourceTitle: '山梨県教育委員会 入学者選抜',
+    lastVerified: '2026-01-30',
+    fiscalYear: '2026'
   },
   {
     code: 'nagano',
@@ -274,7 +334,11 @@ export const PREFECTURES: PrefectureConfig[] = [
     coreMultiplier: 1,
     practicalMultiplier: 1,
     maxScore: 45,
-    description: '中3の成績のみ（45点満点）'
+    description: '中3の成績のみ（45点満点）',
+    sourceUrl: 'https://www.pref.nagano.lg.jp/kensei/koukou/nyuugaku.html',
+    sourceTitle: '長野県教育委員会 入学者選抜',
+    lastVerified: '2026-01-30',
+    fiscalYear: '2026'
   },
   {
     code: 'gifu',
@@ -285,7 +349,11 @@ export const PREFECTURES: PrefectureConfig[] = [
     coreMultiplier: 1,
     practicalMultiplier: 1,
     maxScore: 180,
-    description: '中1・中2＋中3×2倍（180点満点）'
+    description: '中1・中2＋中3×2倍（180点満点）',
+    sourceUrl: 'https://www.pref.gifu.lg.jp/kensei/koukou/nyuugaku.html',
+    sourceTitle: '岐阜県教育委員会 入学者選抜',
+    lastVerified: '2026-01-30',
+    fiscalYear: '2026'
   },
   {
     code: 'shizuoka',
@@ -296,7 +364,11 @@ export const PREFECTURES: PrefectureConfig[] = [
     coreMultiplier: 1,
     practicalMultiplier: 1,
     maxScore: 45,
-    description: '中3の成績のみ（45点満点）'
+    description: '中3の成績のみ（45点満点）',
+    sourceUrl: 'https://www.pref.shizuoka.jp/kensei/koukou/nyuugaku.html',
+    sourceTitle: '静岡県教育委員会 入学者選抜',
+    lastVerified: '2026-01-30',
+    fiscalYear: '2026'
   },
   {
     code: 'aichi',
@@ -307,7 +379,11 @@ export const PREFECTURES: PrefectureConfig[] = [
     coreMultiplier: 1,
     practicalMultiplier: 1,
     maxScore: 90,
-    description: '中3の9教科×5段階×2倍（90点満点）'
+    description: '中3の9教科×5段階×2倍（90点満点）',
+    sourceUrl: 'https://www.pref.aichi.jp/kensei/koukou/nyuugaku.html',
+    sourceTitle: '愛知県教育委員会 入学者選抜',
+    lastVerified: '2026-01-30',
+    fiscalYear: '2026'
   },
   // 近畿
   {
@@ -319,7 +395,11 @@ export const PREFECTURES: PrefectureConfig[] = [
     coreMultiplier: 1,
     practicalMultiplier: 1,
     maxScore: 45,
-    description: '中3の成績のみ（45点満点）'
+    description: '中3の成績のみ（45点満点）',
+    sourceUrl: 'https://www.pref.mie.lg.jp/kensei/koukou/nyuugaku.html',
+    sourceTitle: '三重県教育委員会 入学者選抜',
+    lastVerified: '2026-01-30',
+    fiscalYear: '2026'
   },
   {
     code: 'shiga',
@@ -330,7 +410,11 @@ export const PREFECTURES: PrefectureConfig[] = [
     coreMultiplier: 1,
     practicalMultiplier: 1,
     maxScore: 135,
-    description: '中1〜中3の9教科×5段階（135点満点）'
+    description: '中1〜中3の9教科×5段階（135点満点）',
+    sourceUrl: 'https://www.pref.shiga.lg.jp/kensei/koukou/nyuugaku.html',
+    sourceTitle: '滋賀県教育委員会 入学者選抜',
+    lastVerified: '2026-01-30',
+    fiscalYear: '2026'
   },
   {
     code: 'kyoto',
@@ -342,7 +426,11 @@ export const PREFECTURES: PrefectureConfig[] = [
     practicalMultiplier: 2,
     maxScore: 195,
     description: '中期選抜：実技4教科×2倍（195点満点）',
-    note: '前期選抜は135点満点'
+    note: '前期選抜は135点満点',
+    sourceUrl: 'https://www.pref.kyoto.jp/kensei/koukou/nyuugaku.html',
+    sourceTitle: '京都府教育委員会 入学者選抜',
+    lastVerified: '2026-01-30',
+    fiscalYear: '2026'
   },
   {
     code: 'osaka',

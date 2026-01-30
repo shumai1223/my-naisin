@@ -20,7 +20,7 @@ const ESAT_J_GRADES = [
 
 export function TokyoExtendedCalculator({ kansoNaishin }: TokyoExtendedCalculatorProps) {
   const [examScore, setExamScore] = React.useState<number>(350); // 学力検査点 (500点満点)
-  const [esatJGrade, setEsatJGrade] = React.useState<string>('C');
+  const [esatJGrade, setEsatJGrade] = React.useState<string>(''); // 空文字列 = 未入力（任意）
   const [targetScore, setTargetScore] = React.useState<number>(700);
 
   // 換算内申を300点満点に換算
@@ -102,9 +102,23 @@ export function TokyoExtendedCalculator({ kansoNaishin }: TokyoExtendedCalculato
         <div>
           <label className="mb-2 flex items-center gap-2 text-sm font-medium text-slate-700">
             <span>🎤 ESAT-J（スピーキングテスト）</span>
-            <span className="text-xs text-slate-400">20点満点</span>
+            <span className="text-xs text-slate-400">任意・20点満点</span>
           </label>
           <div className="grid grid-cols-3 gap-2 sm:grid-cols-6">
+            <button
+              type="button"
+              onClick={() => setEsatJGrade('')}
+              className={`rounded-xl border-2 p-3 text-center transition-all ${
+                esatJGrade === ''
+                  ? 'border-rose-400 bg-rose-50 ring-2 ring-rose-200'
+                  : 'border-slate-200 bg-white hover:border-slate-300'
+              }`}
+            >
+              <div className={`text-lg font-bold ${esatJGrade === '' ? 'text-rose-600' : 'text-slate-700'}`}>
+                未入力
+              </div>
+              <div className="text-xs text-slate-500">0点</div>
+            </button>
             {ESAT_J_GRADES.map((grade) => (
               <button
                 key={grade.grade}
