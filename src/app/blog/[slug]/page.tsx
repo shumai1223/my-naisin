@@ -25,9 +25,40 @@ export async function generateMetadata({ params }: PageProps) {
     };
   }
 
+  const url = `https://my-naisin.com/blog/${post.slug}`;
+  const imageUrl = 'https://my-naisin.com/og-image.png';
+
   return {
     title: `${post.title} | My naisin`,
     description: post.description,
+    keywords: post.tags.join(', '),
+    authors: [{ name: 'My naisin' }],
+    openGraph: {
+      title: post.title,
+      description: post.description,
+      url: url,
+      siteName: 'My naisin - 内申点計算ツール',
+      locale: 'ja_JP',
+      type: 'article',
+      publishedTime: post.date,
+      authors: ['My naisin'],
+      tags: post.tags,
+      images: [{
+        url: imageUrl,
+        width: 1200,
+        height: 630,
+        alt: post.title,
+      }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.description,
+      images: [imageUrl],
+    },
+    alternates: {
+      canonical: url,
+    },
   };
 }
 
@@ -90,9 +121,20 @@ export default async function BlogPostPage({ params }: PageProps) {
         </header>
 
         {/* Article Content */}
-        <article className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
+        <article 
+          className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:p-8"
+          itemScope
+          itemType="https://schema.org/Article"
+        >
+          <meta itemProp="headline" content={post.title} />
+          <meta itemProp="description" content={post.description} />
+          <meta itemProp="datePublished" content={post.date} />
+          <meta itemProp="author" content="My naisin" />
+          <meta itemProp="keywords" content={post.tags.join(', ')} />
+          
           <div
             className="blog-content"
+            itemProp="articleBody"
             dangerouslySetInnerHTML={{
               __html: post.content
                 .replace(/## /g, '<h2>')
