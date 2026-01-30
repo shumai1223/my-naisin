@@ -51,9 +51,14 @@ export function TokyoExtendedCalculator({ kansoNaishin }: TokyoExtendedCalculato
             <Calculator className="h-5 w-5 text-white" />
           </div>
           <div>
-            <div className="text-base font-bold text-slate-800">🗼 東京都 総合得点シミュレーター</div>
-            <div className="text-xs text-slate-500">1020点満点（内申300点＋学力検査700点＋ESAT-J 20点）</div>
+            <div className="text-base font-bold text-slate-800">🗼 東京都専用：1020点満点シミュレーター</div>
+            <div className="text-xs text-slate-500">内申300点＋学力検査700点＋ESAT-J 20点＝1020点</div>
           </div>
+        </div>
+        <div className="mt-3 rounded-lg bg-blue-50 border border-blue-200 p-3">
+          <p className="text-xs text-blue-800 leading-relaxed">
+            <strong>💡 このツールについて：</strong>東京都立高校の入試では、内申点・学力検査・ESAT-Jの3つを合計した1020点満点で合否判定されます。下記で当日点やESAT-Jの成績を入力すると、合計点や目標達成に必要な点数が分かります。
+          </p>
         </div>
       </div>
 
@@ -100,21 +105,24 @@ export function TokyoExtendedCalculator({ kansoNaishin }: TokyoExtendedCalculato
 
         {/* ESAT-J選択 */}
         <div>
-          <label className="mb-2 flex items-center gap-2 text-sm font-medium text-slate-700">
-            <span>🎤 ESAT-J（スピーキングテスト）</span>
-            <span className="text-xs text-slate-400">任意・20点満点</span>
+          <label className="mb-2 flex flex-col gap-1 text-sm font-medium text-slate-700">
+            <span className="flex items-center gap-2">
+              <span>🎤 ESAT-J（スピーキングテスト）の成績</span>
+              <span className="text-xs text-slate-400">任意入力・20点満点</span>
+            </span>
+            <span className="text-xs font-normal text-slate-500">※まだ受験していない場合は「未入力」を選択してください</span>
           </label>
-          <div className="grid grid-cols-3 gap-2 sm:grid-cols-6">
+          <div className="grid grid-cols-3 gap-2 sm:grid-cols-7">
             <button
               type="button"
               onClick={() => setEsatJGrade('')}
               className={`rounded-xl border-2 p-3 text-center transition-all ${
                 esatJGrade === ''
-                  ? 'border-rose-400 bg-rose-50 ring-2 ring-rose-200'
+                  ? 'border-blue-400 bg-blue-50 ring-2 ring-blue-200'
                   : 'border-slate-200 bg-white hover:border-slate-300'
               }`}
             >
-              <div className={`text-lg font-bold ${esatJGrade === '' ? 'text-rose-600' : 'text-slate-700'}`}>
+              <div className={`text-sm font-bold ${esatJGrade === '' ? 'text-blue-600' : 'text-slate-700'}`}>
                 未入力
               </div>
               <div className="text-xs text-slate-500">0点</div>

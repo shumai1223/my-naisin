@@ -271,8 +271,8 @@ export default function Page() {
             </div>
           </Card>
 
-          {/* 東京都専用：ESAT-J入力（結果表示前） */}
-          {prefectureCode === 'tokyo' && !showResult && (
+          {/* 東京都専用：ESAT-J入力（結果表示前・後両方で表示） */}
+          {prefectureCode === 'tokyo' && (
             <TokyoExtendedCalculator kansoNaishin={result.total} />
           )}
 
@@ -398,11 +398,6 @@ export default function Page() {
 
                 {/* 目標設定 */}
                 <GoalSection currentScore={result.total} maxScore={result.max} />
-
-                {/* 東京都専用：1020点シミュレーター */}
-                {prefectureCode === 'tokyo' && (
-                  <TokyoExtendedCalculator kansoNaishin={result.total} />
-                )}
 
               </section>
             )}

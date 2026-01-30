@@ -180,35 +180,6 @@ export default function AboutPage() {
             </div>
           </div>
 
-          {/* 監修について */}
-          <div className="rounded-2xl border border-blue-200 bg-gradient-to-br from-blue-50 to-indigo-50 p-6">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <User className="h-5 w-5 text-blue-500" />
-              コンテンツ監修について
-            </h2>
-            <div className="space-y-3 text-sm leading-relaxed text-slate-600">
-              <p>
-                当サイトの一部コンテンツ（内申点アップのコツ、学習アドバイス等）は、
-                教育現場での指導経験を持つ協力者の監修を受けています。
-              </p>
-              <div className="rounded-xl bg-white/70 p-4">
-                <div className="text-xs font-medium text-slate-700">監修者プロフィール</div>
-                <ul className="mt-2 space-y-1 text-xs text-slate-600">
-                  <li>• 公立中学校での指導経験あり</li>
-                  <li>• 高校受験指導歴10年以上</li>
-                </ul>
-                <p className="mt-2 text-xs text-slate-500">
-                  ※プライバシー保護のため、詳細な個人情報は非公開としています
-                </p>
-              </div>
-              <div className="rounded-xl border border-blue-200 bg-white/50 p-3">
-                <p className="text-xs text-blue-800">
-                  <strong>監修範囲：</strong>学習アドバイス・勉強法に関するコンテンツの内容確認<br />
-                  <strong>免責：</strong>計算ロジックや制度解説は公式資料に基づき運営者が作成
-                </p>
-              </div>
-            </div>
-          </div>
 
           {/* お問い合わせ */}
           <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">

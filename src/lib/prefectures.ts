@@ -580,7 +580,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     practicalMultiplier: 2,
     maxScore: 195,
     description: '実技4教科×2倍（各学年65点×3＝195点満点）',
-    sourceUrl: 'https://nyuushi.tokushima-ec.ed.jp/high_school',
+    sourceUrl: 'https://nyuushi.tokushima-ec.ed.jp',
     sourceTitle: '徳島県教育委員会 入学者選抜',
     lastVerified: '2026-01-31',
     fiscalYear: '2026'
