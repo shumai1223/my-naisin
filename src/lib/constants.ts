@@ -19,31 +19,31 @@ export const SUBJECTS: ReadonlyArray<Subject> = [
 export const RANK_DEFINITIONS: ReadonlyArray<RankDefinition> = [
   {
     code: 'S',
-    minPercent: 80,
+    minPercent: 85,
     maxPercent: 100,
     title: '神（カミ）',
     message: '強すぎ。ゲームなら最初からラスボス側。今すぐスクショ案件。'
   },
   {
     code: 'A',
-    minPercent: 65,
-    maxPercent: 79,
+    minPercent: 70,
+    maxPercent: 84,
     title: 'エース',
     message: '十分強い！あとちょいでS、ここからが一番伸びるゾーン。'
   },
   {
     code: 'B',
-    minPercent: 50,
-    maxPercent: 64,
+    minPercent: 55,
+    maxPercent: 69,
     title: '伸びしろ',
     message: 'ここからが育成タイム。どれか1教科上げると世界変わる。'
   },
   {
     code: 'C',
     minPercent: 0,
-    maxPercent: 49,
+    maxPercent: 54,
     title: 'もっと伸びる',
-    message: '大丈夫。今は“伸びしろ”が最大値。まずはBを目指そう！'
+    message: '大丈夫。今は"伸びしろ"が最大値。まずはBを目指そう！'
   }
 ];
 

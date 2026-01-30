@@ -67,7 +67,7 @@ export default function Page() {
   const [showResult, setShowResult] = React.useState(false);
   const [shareOpen, setShareOpen] = React.useState(false);
   const [shareUrl, setShareUrl] = React.useState('');
-  const [saveEnabled, setSaveEnabled] = React.useState(false);
+  const [saveEnabled, setSaveEnabled] = React.useState(true);
   const [saveMemo, setSaveMemo] = React.useState('');
   const [lastSaved, setLastSaved] = React.useState<SavedHistoryEntry | null>(null);
 
@@ -308,6 +308,8 @@ export default function Page() {
                   </div>
                 </Card>
 
+                <RankCard result={result} />
+
                 <Card className="overflow-hidden">
                   <div className="border-b border-slate-100/80 bg-gradient-to-r from-violet-50/80 via-purple-50/60 to-fuchsia-50/80 px-6 py-5">
                     <div className="flex items-start justify-between gap-4">
@@ -354,8 +356,6 @@ export default function Page() {
                 <ComparisonCard result={result} scores={scores} saveEnabled={saveEnabled} lastSavedId={lastSaved?.id} />
 
                 <ReasoningCard result={result} scores={scores} />
-
-                <RankCard result={result} />
 
                 {/* 今日の名言 */}
                 <DailyQuoteCard />
