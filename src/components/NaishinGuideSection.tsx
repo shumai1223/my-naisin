@@ -1,7 +1,8 @@
 'use client';
 
 import * as React from 'react';
-import { BookOpen, HelpCircle, Calculator, GraduationCap, ChevronRight } from 'lucide-react';
+import Link from 'next/link';
+import { BookOpen, HelpCircle, Calculator, GraduationCap, ChevronRight, MapPin } from 'lucide-react';
 
 const FAQ_ITEMS = [
   {
@@ -115,6 +116,38 @@ export function NaishinGuideSection() {
               </div>
             </details>
           ))}
+        </div>
+      </div>
+
+      {/* Prefecture Links for SEO */}
+      <div className="mt-6 rounded-2xl border border-slate-200 bg-white p-5">
+        <div className="mb-4 flex items-center gap-2">
+          <MapPin className="h-5 w-5 text-blue-500" />
+          <h3 className="font-semibold text-slate-800">都道府県別の内申点計算</h3>
+        </div>
+        <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4">
+          {[
+            { code: 'tokyo', name: '東京都', score: '65点' },
+            { code: 'kanagawa', name: '神奈川県', score: '135点' },
+            { code: 'osaka', name: '大阪府', score: '450点' },
+            { code: 'aichi', name: '愛知県', score: '45点' },
+            { code: 'saitama', name: '埼玉県', score: '180点' },
+            { code: 'chiba', name: '千葉県', score: '135点' },
+            { code: 'hokkaido', name: '北海道', score: '315点' },
+            { code: 'fukuoka', name: '福岡県', score: '135点' },
+          ].map((pref) => (
+            <Link
+              key={pref.code}
+              href={`/${pref.code}/naishin`}
+              className="flex flex-col rounded-lg border border-slate-100 bg-slate-50 p-2 text-center transition-colors hover:border-blue-200 hover:bg-blue-50"
+            >
+              <span className="text-sm font-medium text-slate-700">{pref.name}</span>
+              <span className="text-xs text-slate-500">{pref.score}満点</span>
+            </Link>
+          ))}
+        </div>
+        <div className="mt-3 text-center">
+          <span className="text-xs text-slate-400">その他の都道府県も対応しています</span>
         </div>
       </div>
 
