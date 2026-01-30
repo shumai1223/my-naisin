@@ -26,9 +26,9 @@ interface TabConfig {
 }
 
 const TABS: TabConfig[] = [
-  { id: 'formula', label: '計算式・方式', shortLabel: '計算式', icon: <Calculator className="h-4 w-4" /> },
-  { id: 'rank', label: 'ランク基準', shortLabel: 'ランク', icon: <Trophy className="h-4 w-4" /> },
-  { id: 'breakdown', label: '教科別内訳', shortLabel: '内訳', icon: <ListChecks className="h-4 w-4" /> }
+  { id: 'formula', label: '計算式', shortLabel: '計算式', icon: <Calculator className="h-4 w-4" /> },
+  { id: 'rank', label: 'ランク', shortLabel: 'ランク', icon: <Trophy className="h-4 w-4" /> },
+  { id: 'breakdown', label: '内訳', shortLabel: '内訳', icon: <ListChecks className="h-4 w-4" /> }
 ];
 
 export function ReasoningCard({ result, scores }: ReasoningCardProps) {
@@ -81,7 +81,7 @@ export function ReasoningCard({ result, scores }: ReasoningCardProps) {
 
       {/* Tab Navigation */}
       <div className="border-b border-slate-100 bg-white px-4 sm:px-6">
-        <nav className="-mb-px flex gap-1 overflow-x-auto" aria-label="計算根拠タブ">
+        <nav className="-mb-px flex gap-1" aria-label="計算根拠タブ">
           {TABS.map((tab) => {
             const isActive = activeTab === tab.id;
             return (
@@ -103,8 +103,7 @@ export function ReasoningCard({ result, scores }: ReasoningCardProps) {
                 )}>
                   {tab.icon}
                 </span>
-                <span className="hidden sm:inline">{tab.label}</span>
-                <span className="sm:hidden">{tab.shortLabel}</span>
+                <span>{tab.label}</span>
                 {isActive && (
                   <motion.div
                     layoutId="reasoning-tab-indicator"
