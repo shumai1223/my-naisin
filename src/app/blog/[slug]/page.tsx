@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { Calendar, Clock, ChevronLeft, ChevronRight, BookOpen, Home } from 'lucide-react';
+import { Calendar, Clock, ChevronLeft, ChevronRight, BookOpen, Home, User, FileCheck, ExternalLink, RefreshCw } from 'lucide-react';
 
 import { getPostBySlug, getAllPosts } from '@/lib/blog-data';
 
@@ -104,7 +104,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           <p className="mt-3 text-base text-slate-600">
             {post.description}
           </p>
-          <div className="mt-4 flex items-center gap-4 text-sm text-slate-500">
+          <div className="mt-4 flex flex-wrap items-center gap-4 text-sm text-slate-500">
             <span className="flex items-center gap-1.5">
               <Calendar className="h-4 w-4" />
               {new Date(post.date).toLocaleDateString('ja-JP', {
@@ -113,11 +113,39 @@ export default async function BlogPostPage({ params }: PageProps) {
                 day: 'numeric',
               })}
             </span>
+            {post.lastUpdated && (
+              <span className="flex items-center gap-1.5">
+                <RefreshCw className="h-4 w-4" />
+                更新: {new Date(post.lastUpdated).toLocaleDateString('ja-JP', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                })}
+              </span>
+            )}
             <span className="flex items-center gap-1.5">
               <Clock className="h-4 w-4" />
               読了時間 {post.readTime}
             </span>
           </div>
+
+          {/* 著者・監修者情報 */}
+          {(post.author || post.supervisor) && (
+            <div className="mt-4 flex flex-wrap gap-3 text-sm">
+              {post.author && (
+                <span className="flex items-center gap-1.5 rounded-full bg-slate-100 px-3 py-1 text-slate-600">
+                  <User className="h-3.5 w-3.5" />
+                  執筆: {post.author}
+                </span>
+              )}
+              {post.supervisor && (
+                <span className="flex items-center gap-1.5 rounded-full bg-blue-50 px-3 py-1 text-blue-700">
+                  <FileCheck className="h-3.5 w-3.5" />
+                  監修: {post.supervisor}
+                </span>
+              )}
+            </div>
+          )}
         </header>
 
         {/* Article Content */}
@@ -145,6 +173,34 @@ export default async function BlogPostPage({ params }: PageProps) {
                 .replace(/<!-- AD_PLACEHOLDER -->/g, '')
             }}
           />
+
+          {/* 参考資料・情報源 */}
+          {post.sources && post.sources.length > 0 && (
+            <div className="mt-8 rounded-xl border border-slate-200 bg-slate-50 p-4">
+              <h4 className="mb-3 flex items-center gap-2 text-sm font-bold text-slate-700">
+                <BookOpen className="h-4 w-4" />
+                参考資料・情報源
+              </h4>
+              <ul className="space-y-2">
+                {post.sources.map((source, i) => (
+                  <li key={i}>
+                    <a
+                      href={source.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-sm text-blue-600 hover:text-blue-800 hover:underline"
+                    >
+                      {source.name}
+                      <ExternalLink className="h-3 w-3" />
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-3 text-xs text-slate-500">
+                ※ 制度は年度によって変更される場合があります。最新情報は各教育委員会の公式サイトでご確認ください。
+              </p>
+            </div>
+          )}
         </article>
 
         {/* CTA */}

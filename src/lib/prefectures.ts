@@ -21,6 +21,12 @@ export interface PrefectureConfig {
   note?: string;
   // 10段階評価対応 (高知県など)
   supports10PointScale?: boolean;
+  // 情報源URL（教育委員会等の公式ページ）
+  sourceUrl?: string;
+  // 最終確認日 (YYYY-MM-DD形式)
+  lastVerified?: string;
+  // 対象年度
+  fiscalYear?: string;
 }
 
 export const PREFECTURES: PrefectureConfig[] = [
@@ -148,7 +154,10 @@ export const PREFECTURES: PrefectureConfig[] = [
     practicalMultiplier: 1,
     maxScore: 180,
     description: '学年比1:1:2で換算（180点満点が一般的）',
-    note: '高校により1:1:3、1:2:3などもあり'
+    note: '高校により1:1:3、1:2:3などもあり',
+    sourceUrl: 'https://www.pref.saitama.lg.jp/f2208/nyuushi.html',
+    lastVerified: '2026-01-30',
+    fiscalYear: '2026'
   },
   {
     code: 'chiba',
@@ -160,7 +169,10 @@ export const PREFECTURES: PrefectureConfig[] = [
     practicalMultiplier: 1,
     maxScore: 135,
     description: '中1〜中3の9教科×5段階（135点満点）',
-    note: 'K値（0.5〜2）で換算する高校もあり'
+    note: 'K値（0.5〜2）で換算する高校もあり',
+    sourceUrl: 'https://www.pref.chiba.lg.jp/kyouiku/shidou/nyuushi/index.html',
+    lastVerified: '2026-01-30',
+    fiscalYear: '2026'
   },
   {
     code: 'tokyo',
@@ -171,7 +183,10 @@ export const PREFECTURES: PrefectureConfig[] = [
     coreMultiplier: 1,
     practicalMultiplier: 2,
     maxScore: 65,
-    description: '中3のみ：5教科×1倍＋実技4教科×2倍（65点満点）'
+    description: '中3のみ：5教科×1倍＋実技4教科×2倍（65点満点）',
+    sourceUrl: 'https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/exam/',
+    lastVerified: '2026-01-30',
+    fiscalYear: '2026'
   },
   {
     code: 'kanagawa',
@@ -182,7 +197,10 @@ export const PREFECTURES: PrefectureConfig[] = [
     coreMultiplier: 1,
     practicalMultiplier: 1,
     maxScore: 135,
-    description: '中2＋中3×2倍（135点満点）'
+    description: '中2＋中3×2倍（135点満点）',
+    sourceUrl: 'https://www.pref.kanagawa.jp/docs/dc4/nyusen/nyusen.html',
+    lastVerified: '2026-01-30',
+    fiscalYear: '2026'
   },
   // 中部
   {
@@ -329,7 +347,10 @@ export const PREFECTURES: PrefectureConfig[] = [
     coreMultiplier: 1,
     practicalMultiplier: 1,
     maxScore: 450,
-    description: '学年比1:1:3（450点満点）'
+    description: '学年比1:1:3（450点満点）',
+    sourceUrl: 'https://www.pref.osaka.lg.jp/kotogakko/gakuji-g3/',
+    lastVerified: '2026-01-30',
+    fiscalYear: '2026'
   },
   {
     code: 'hyogo',

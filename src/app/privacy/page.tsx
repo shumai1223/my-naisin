@@ -40,7 +40,11 @@ export default function PrivacyPage() {
           <ul className="space-y-2 text-sm text-emerald-700">
             <li className="flex gap-2">
               <span className="text-emerald-500">✓</span>
-              <span>当サイトは個人を特定できる情報を直接収集しません</span>
+              <span><strong>ツール利用時：</strong>個人情報を収集しません（端末内のみ保存）</span>
+            </li>
+            <li className="flex gap-2">
+              <span className="text-emerald-500">✓</span>
+              <span><strong>お問い合わせ時：</strong>返信のためメールアドレス等を取得します</span>
             </li>
             <li className="flex gap-2">
               <span className="text-emerald-500">✓</span>
@@ -91,18 +95,32 @@ export default function PrivacyPage() {
                 ✓ 当サイトは個人を特定できる情報を直接収集しません
               </p>
             </div>
-            <p className="mt-3 text-sm leading-relaxed text-slate-600">
-              当サイトは、ユーザーのプライバシーを最優先に考え、個人を特定できる情報（氏名、住所、電話番号、
-              メールアドレス等）を直接収集することはありません。入力された成績データは、お使いのブラウザの
+            <h3 className="mb-2 mt-4 text-sm font-bold text-slate-700">2.1 ツール利用時の情報</h3>
+            <p className="text-sm leading-relaxed text-slate-600">
+              内申点計算ツールをご利用の際、入力された成績データはお使いのブラウザの
               ローカルストレージにのみ保存され、当サイトのサーバーに送信されることは一切ありません。
+              個人を特定できる情報（氏名、住所、電話番号等）を収集することはありません。
             </p>
+            
+            <h3 className="mb-2 mt-4 text-sm font-bold text-slate-700">2.2 お問い合わせ時の情報</h3>
+            <div className="rounded-xl border border-amber-200 bg-amber-50 p-4">
+              <p className="text-sm leading-relaxed text-amber-800">
+                <strong>お問い合わせフォームをご利用の場合：</strong>返信のためにメールアドレス等の個人情報を取得します。
+              </p>
+              <ul className="mt-2 space-y-1 text-xs text-amber-700">
+                <li>• <strong>取得項目：</strong>お名前（ニックネーム可）、メールアドレス、お問い合わせ内容</li>
+                <li>• <strong>利用目的：</strong>お問い合わせへの回答・対応のみ</li>
+                <li>• <strong>保管期間：</strong>対応完了後6ヶ月間（法的要請がある場合を除く）</li>
+                <li>• <strong>削除方法：</strong>削除をご希望の場合はお問い合わせください</li>
+              </ul>
+            </div>
             <p className="mt-3 text-sm leading-relaxed text-slate-600">
               ユーザーが「記録を保存」機能をONにした場合、成績の履歴（保存日時・任意のメモ）も
               同様にお使いの端末内にのみ保存されます。この履歴データは最大30件まで保存され、
               古いデータから自動的に削除されます。
             </p>
             
-            <h3 className="mb-2 mt-4 text-sm font-bold text-slate-700">2.1 自動的に収集される情報</h3>
+            <h3 className="mb-2 mt-4 text-sm font-bold text-slate-700">2.3 自動的に収集される情報</h3>
             <p className="text-sm leading-relaxed text-slate-600">
               当サイトでは、サービス向上のために以下の情報を自動的に収集する場合があります：
             </p>

@@ -7,6 +7,11 @@ export interface BlogPost {
   readTime: string;
   tags: string[];
   content: string;
+  // SEO・信頼性向上用メタデータ
+  lastUpdated?: string;
+  author?: string;
+  supervisor?: string;
+  sources?: { name: string; url: string }[];
 }
 
 export const BLOG_POSTS: BlogPost[] = [
@@ -18,6 +23,14 @@ export const BLOG_POSTS: BlogPost[] = [
     category: '内申点の基礎',
     readTime: '15分',
     tags: ['内申点', '計算方法', '都道府県別'],
+    lastUpdated: '2026-01-30',
+    author: 'My Naishin編集部',
+    supervisor: '元公立中学校教員（指導歴10年以上）',
+    sources: [
+      { name: '東京都教育委員会', url: 'https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/exam/' },
+      { name: '神奈川県教育委員会', url: 'https://www.pref.kanagawa.jp/docs/dc4/nyusen/nyusen.html' },
+      { name: '大阪府教育庁', url: 'https://www.pref.osaka.lg.jp/kotogakko/gakuji-g3/' }
+    ],
     content: `
 <div class="lead">
 内申点の計算方法は<strong>都道府県によって全く異なります</strong>。この記事では、東京都・神奈川県・大阪府など主要地域の計算方法を、図や表を使って分かりやすく解説します。
@@ -1083,6 +1096,13 @@ export const BLOG_POSTS: BlogPost[] = [
     category: '都道府県別対策',
     readTime: '10分',
     tags: ['東京都', '換算内申', '都立高校', '入試'],
+    lastUpdated: '2026-01-30',
+    author: 'My Naishin編集部',
+    supervisor: '元公立中学校教員（指導歴10年以上）',
+    sources: [
+      { name: '東京都教育委員会 入学者選抜', url: 'https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/exam/' },
+      { name: '令和8年度入学者選抜実施要綱', url: 'https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/exam/release20240913_01.html' }
+    ],
     content: `
 <div class="lead">
 東京都立高校の入試では、一般的な「素内申」ではなく<strong>「換算内申」</strong>という独自の計算方法が使われます。この記事では、換算内申の仕組みと、なぜ実技4教科が重要なのかを詳しく解説します。

@@ -48,6 +48,7 @@ import { HistoryPanel } from '@/components/HistoryPanel';
 import { PrintButton } from '@/components/PrintButton';
 import { BlogSection } from '@/components/BlogSection';
 import { NaishinGuideSection } from '@/components/NaishinGuideSection';
+import { TokyoExtendedCalculator } from '@/components/Calculator/TokyoExtendedCalculator';
 
 function popConfetti() {
   confetti({
@@ -392,6 +393,11 @@ export default function Page() {
 
                 {/* 目標設定 */}
                 <GoalSection currentScore={result.total} maxScore={result.max} />
+
+                {/* 東京都専用：1020点シミュレーター */}
+                {prefectureCode === 'tokyo' && (
+                  <TokyoExtendedCalculator kansoNaishin={result.total} />
+                )}
 
               </section>
             )}

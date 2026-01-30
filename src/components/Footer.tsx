@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Heart, FileText, Shield, Mail, AlertTriangle, Sparkles, BookOpen } from 'lucide-react';
+import { Heart, FileText, Shield, Mail, AlertTriangle, Sparkles, BookOpen, User } from 'lucide-react';
 
 import { APP_NAME } from '@/lib/constants';
 
@@ -101,6 +101,13 @@ export function Footer() {
               >
                 <Mail className="h-3 w-3" />
                 お問い合わせ
+              </Link>
+              <Link 
+                href="/about" 
+                className="flex items-center gap-1.5 rounded-full bg-slate-100 px-3 py-1.5 text-xs text-slate-600 transition-all hover:bg-indigo-100 hover:text-indigo-700"
+              >
+                <User className="h-3 w-3" />
+                運営者情報
               </Link>
             </div>
           </div>
