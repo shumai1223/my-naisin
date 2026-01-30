@@ -1,8 +1,5 @@
-'use client';
-
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { use } from 'react';
 import { 
   Calculator, 
   ChevronRight, 
@@ -84,8 +81,8 @@ interface PageProps {
   params: Promise<{ code: string }>;
 }
 
-export default function PrefecturePage({ params }: PageProps) {
-  const { code } = use(params);
+export default async function PrefecturePage({ params }: PageProps) {
+  const { code } = await params;
   const prefecture = getPrefectureByCode(code);
 
   if (!prefecture) {
