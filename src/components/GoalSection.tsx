@@ -21,10 +21,12 @@ export function GoalSection({ currentScore, maxScore }: GoalSectionProps) {
   const [selectedGoal, setSelectedGoal] = React.useState<number | null>(null);
 
   const adjustedGoals = React.useMemo(() => {
-    if (maxScore === 65) {
+    // 45点満点を基準として、maxScoreに応じて目標点数を調整
+    const baseMax = 45;
+    if (maxScore !== baseMax) {
       return GOAL_PRESETS.map(g => ({
         ...g,
-        score: Math.round(g.score * (65 / 45))
+        score: Math.round(g.score * (maxScore / baseMax))
       }));
     }
     return GOAL_PRESETS;
