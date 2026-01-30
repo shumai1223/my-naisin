@@ -271,6 +271,11 @@ export default function Page() {
             </div>
           </Card>
 
+          {/* 東京都専用：ESAT-J入力（結果表示前） */}
+          {prefectureCode === 'tokyo' && !showResult && (
+            <TokyoExtendedCalculator kansoNaishin={result.total} />
+          )}
+
           {showResult && (
               <section
                 id="result"
