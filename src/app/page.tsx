@@ -39,6 +39,8 @@ import { SubjectImprovementCard } from '@/components/Result/SubjectImprovementCa
 import { PersonalGoalCard } from '@/components/Result/PersonalGoalCard';
 import { QuickStudyTimer } from '@/components/Result/QuickStudyTimer';
 import { DailyQuoteCard } from '@/components/Result/DailyQuoteCard';
+import { ImprovementAdvisor } from '@/components/Result/ImprovementAdvisor';
+import { PrefectureComparison } from '@/components/Result/PrefectureComparison';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { Switch } from '@/components/ui/Switch';
@@ -369,6 +371,12 @@ export default function Page() {
 
                 {/* 教科別変化 */}
                 <SubjectImprovementCard currentScores={scores} />
+
+                {/* 成績アップ優先度アドバイス */}
+                <ImprovementAdvisor scores={scores} prefectureCode={prefectureCode} />
+
+                {/* 都道府県別スコア比較 */}
+                <PrefectureComparison scores={scores} currentPrefectureCode={prefectureCode} />
 
                 {/* 勉強アドバイス */}
                 <StudyAdvice scores={scores} result={result} />
