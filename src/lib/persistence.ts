@@ -45,6 +45,10 @@ function writeCookie(name: string, value: string, maxAgeSeconds: number) {
 
 export function getSaveConsent() {
   const raw = readCookie(SAVE_CONSENT_COOKIE);
+  if (raw === null) {
+    // デフォルトでtrueを返す（初回訪問時は自動的に保存ON）
+    return true;
+  }
   return raw === '1' || raw === 'true';
 }
 

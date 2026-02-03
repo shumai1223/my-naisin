@@ -81,11 +81,11 @@ export function CookieConsent() {
 
           {/* Modal */}
           <motion.div
-            initial={{ y: -30, opacity: 0, scale: 0.95 }}
+            initial={{ y: 30, opacity: 0, scale: 0.95 }}
             animate={{ y: 0, opacity: 1, scale: 1 }}
-            exit={{ y: -30, opacity: 0, scale: 0.95 }}
+            exit={{ y: 30, opacity: 0, scale: 0.95 }}
             transition={{ type: 'spring', damping: 28, stiffness: 350 }}
-            className="fixed inset-x-4 bottom-auto top-8 z-[70] sm:inset-x-auto sm:left-1/2 sm:top-16 sm:w-full sm:max-w-xl sm:-translate-x-1/2"
+            className="fixed inset-x-4 bottom-4 top-auto z-[70] sm:inset-x-auto sm:left-1/2 sm:bottom-6 sm:w-full sm:max-w-xl sm:-translate-x-1/2"
           >
             <div className="relative overflow-hidden rounded-3xl border border-white/60 bg-white/95 shadow-[0_25px_80px_-12px_rgba(0,0,0,0.25),0_0_0_1px_rgba(255,255,255,0.8)_inset] backdrop-blur-xl">
               {/* Decorative gradients */}

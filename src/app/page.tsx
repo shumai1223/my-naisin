@@ -22,7 +22,6 @@ import { TipsSection } from '@/components/TipsSection';
 import { StatsBar } from '@/components/StatsBar';
 import { GoalSection } from '@/components/GoalSection';
 import { SubjectBreakdown } from '@/components/SubjectBreakdown';
-import { WelcomeBack } from '@/components/WelcomeBack';
 import { InputForm } from '@/components/Calculator/InputForm';
 import { PrefectureSelector } from '@/components/Calculator/PrefectureSelector';
 import { AchievementBadges } from '@/components/Result/AchievementBadges';
@@ -87,6 +86,11 @@ export default function Page() {
     setSaveEnabled(getSaveConsent());
     const history = readHistory();
     setLastSaved(history[0] ?? null);
+    
+    // 履歴がある場合は自動的に結果を表示
+    if (history.length > 0) {
+      setShowResult(true);
+    }
   }, []);
 
   React.useEffect(() => {
@@ -203,9 +207,6 @@ export default function Page() {
 
   return (
     <div id="top" className="min-h-screen">
-      {/* Welcome back notification for returning visitors */}
-      <WelcomeBack />
-      
       <div className="mx-auto max-w-7xl px-4 py-6 lg:px-8">
         <div className="mx-auto max-w-4xl">
           {/* Main Content */}
@@ -327,9 +328,12 @@ export default function Page() {
                     </div>
                   </div>
                   <div className="p-6">
+                    <div className="mb-3 text-sm text-slate-600">
+                      成績は自動的に保存されています。任意で名前を付けることができます。
+                    </div>
                     <div className="grid gap-3 md:grid-cols-[1fr_auto] md:items-end">
                       <div>
-                        <div className="text-xs font-bold text-slate-700">メモ（任意）</div>
+                        <div className="text-xs font-bold text-slate-700">記録に名前を付ける（任意）</div>
                         <input
                           value={saveMemo}
                           onChange={(e) => setSaveMemo(e.target.value)}
@@ -339,7 +343,7 @@ export default function Page() {
                         />
                       </div>
                       <Button variant="secondary" onClick={onSaveNow} disabled={!saveEnabled} className="h-11 w-full md:w-auto">
-                        保存
+                        名前を追加
                       </Button>
                     </div>
                     <div className="mt-3 text-xs text-slate-500">
