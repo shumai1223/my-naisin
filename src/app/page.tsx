@@ -18,12 +18,16 @@ import {
 
 import { Footer } from '@/components/Footer';
 import { Header } from '@/components/Header';
+import { HeroNavigation, NavigationMode } from '@/components/HeroNavigation';
+import { LearnSection } from '@/components/LearnSection';
 import { TipsSection } from '@/components/TipsSection';
 import { StatsBar } from '@/components/StatsBar';
 import { GoalSection } from '@/components/GoalSection';
 import { SubjectBreakdown } from '@/components/SubjectBreakdown';
 import { InputForm } from '@/components/Calculator/InputForm';
 import { PrefectureSelector } from '@/components/Calculator/PrefectureSelector';
+import { ReverseCalculator } from '@/components/Calculator/ReverseCalculator';
+import { CalculationBasis } from '@/components/Result/CalculationBasis';
 import { AchievementBadges } from '@/components/Result/AchievementBadges';
 import { ComparisonCard } from '@/components/Result/ComparisonCard';
 import { MotivationCard } from '@/components/Result/MotivationCard';
@@ -34,6 +38,8 @@ import { ScoreGauge } from '@/components/Result/ScoreGauge';
 import { ShareModal } from '@/components/Result/ShareModal';
 import { StudyAdvice } from '@/components/Result/StudyAdvice';
 import { ScoreProgressChart } from '@/components/Result/ScoreProgressChart';
+import { ScoreImprovementAnalysis } from '@/components/Result/ScoreImprovementAnalysis';
+import { ChangeLogSection } from '@/components/ChangeLogSection';
 import { SubjectImprovementCard } from '@/components/Result/SubjectImprovementCard';
 import { PersonalGoalCard } from '@/components/Result/PersonalGoalCard';
 import { QuickStudyTimer } from '@/components/Result/QuickStudyTimer';
@@ -67,6 +73,7 @@ export default function Page() {
   const [showResult, setShowResult] = React.useState(false);
   const [shareOpen, setShareOpen] = React.useState(false);
   const [shareUrl, setShareUrl] = React.useState('');
+  const [navigationMode, setNavigationMode] = React.useState<NavigationMode>('select');
   const [saveEnabled, setSaveEnabled] = React.useState(true);
   const [saveMemo, setSaveMemo] = React.useState('');
   const [lastSaved, setLastSaved] = React.useState<SavedHistoryEntry | null>(null);
@@ -87,8 +94,9 @@ export default function Page() {
     const history = readHistory();
     setLastSaved(history[0] ?? null);
     
-    // 履歴がある場合は自動的に結果を表示
+    // 履歴がある場合は自動的に計算モードで結果を表示
     if (history.length > 0) {
+      setNavigationMode('calculate');
       setShowResult(true);
     }
   }, []);
@@ -219,8 +227,25 @@ export default function Page() {
                 <StatsBar />
               </div>
 
+              {/* 3導線ナビゲーション */}
+              <HeroNavigation onModeChange={setNavigationMode} currentMode={navigationMode} />
+
               <main className="px-4 pb-10 md:px-6">
                 <div className="space-y-6">
+
+          {/* 逆算モード */}
+          {navigationMode === 'reverse' && (
+            <ReverseCalculator onBack={() => setNavigationMode('select')} />
+          )}
+
+          {/* 制度理解モード */}
+          {navigationMode === 'learn' && (
+            <LearnSection onBack={() => setNavigationMode('select')} />
+          )}
+
+          {/* 計算モード */}
+          {navigationMode === 'calculate' && (
+            <>
           <Card className="overflow-hidden">
             <div className="border-b border-slate-100/80 bg-gradient-to-r from-indigo-50/80 via-blue-50/60 to-violet-50/80 px-5 py-5 md:px-6">
               <div className="flex flex-wrap items-center justify-between gap-4">
@@ -230,14 +255,22 @@ export default function Page() {
                   </div>
                   <div>
                     <div className="text-xl font-bold tracking-tight text-slate-800">内申点を入力</div>
-                    <div className="text-sm text-slate-500">各教科の成績をスライダーで選択</div>
+                    <div className="text-sm text-slate-500">スライダーまたは数値入力で成績を選択</div>
                   </div>
                 </div>
-                <div className="rounded-2xl border border-indigo-200/60 bg-gradient-to-br from-indigo-50/90 via-blue-50/80 to-violet-50/90 px-5 py-3 shadow-sm backdrop-blur-sm">
-                  <div className="text-sm font-bold text-indigo-700">
-                    {selectedPrefecture?.name ?? '都道府県を選択'}
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => setNavigationMode('select')}
+                    className="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-600 transition-colors hover:bg-slate-50"
+                  >
+                    目的を変更
+                  </button>
+                  <div className="rounded-2xl border border-indigo-200/60 bg-gradient-to-br from-indigo-50/90 via-blue-50/80 to-violet-50/90 px-5 py-3 shadow-sm backdrop-blur-sm">
+                    <div className="text-sm font-bold text-indigo-700">
+                      {selectedPrefecture?.name ?? '都道府県を選択'}
+                    </div>
+                    <div className="mt-0.5 text-xs text-indigo-600/70">満点：{max}点</div>
                   </div>
-                  <div className="mt-0.5 text-xs text-indigo-600/70">満点：{max}点</div>
                 </div>
               </div>
             </div>
@@ -317,6 +350,9 @@ export default function Page() {
 
                 <RankCard result={result} />
 
+                {/* 計算根拠表示 */}
+                <CalculationBasis prefectureCode={prefectureCode} total={result.total} max={result.max} />
+
                 <Card className="overflow-hidden">
                   <div className="border-b border-slate-100/80 bg-gradient-to-r from-violet-50/80 via-purple-50/60 to-fuchsia-50/80 px-6 py-5">
                     <div className="flex items-start justify-between gap-4">
@@ -363,6 +399,12 @@ export default function Page() {
                   currentPrefecture={prefectureCode} 
                 />
 
+                {/* 成績分析・改善提案 */}
+                <ScoreImprovementAnalysis 
+                  currentScores={scores} 
+                  prefectureCode={prefectureCode} 
+                />
+
                 <ComparisonCard result={result} scores={scores} saveEnabled={saveEnabled} lastSavedId={lastSaved?.id} />
 
                 <ReasoningCard result={result} scores={scores} />
@@ -405,9 +447,13 @@ export default function Page() {
 
               </section>
             )}
+          </>
+          )}
 
-          {/* 計算履歴 */}
+          {/* 計算履歴 - 計算モードのみ表示 */}
+          {navigationMode === 'calculate' && (
           <HistoryPanel onLoadEntry={onLoadHistory} />
+          )}
 
           {/* ヒント・FAQ セクション */}
           <TipsSection />
@@ -420,6 +466,11 @@ export default function Page() {
       {/* 内申点ガイドセクション - SEO対策用コンテンツ */}
       <div className="mx-auto max-w-4xl px-4 pb-8">
         <NaishinGuideSection />
+      </div>
+
+      {/* 更新履歴 - E-E-A-T対応 */}
+      <div className="mx-auto max-w-4xl px-4 pb-8">
+        <ChangeLogSection limit={5} />
       </div>
 
       <Footer />

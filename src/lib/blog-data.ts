@@ -25,7 +25,6 @@ export const BLOG_POSTS: BlogPost[] = [
     tags: ['内申点', '計算方法', '都道府県別'],
     lastUpdated: '2026-01-30',
     author: 'My Naishin編集部',
-    supervisor: '元公立中学校教員（指導歴10年以上）',
     sources: [
       { name: '東京都教育委員会', url: 'https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/exam/' },
       { name: '神奈川県教育委員会', url: 'https://www.pref.kanagawa.jp/docs/dc4/nyusen/nyusen.html' },
@@ -1100,7 +1099,6 @@ export const BLOG_POSTS: BlogPost[] = [
     tags: ['東京都', '換算内申', '都立高校', '入試'],
     lastUpdated: '2026-01-30',
     author: 'My Naishin編集部',
-    supervisor: '元公立中学校教員（指導歴10年以上）',
     sources: [
       { name: '東京都教育委員会 入学者選抜', url: 'https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/exam/' },
       { name: '令和8年度入学者選抜実施要綱', url: 'https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/exam/release20240913_01.html' }

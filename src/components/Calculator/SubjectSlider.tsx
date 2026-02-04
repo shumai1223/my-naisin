@@ -61,9 +61,23 @@ export function SubjectSlider({ subject, prefectureCode, value, onChange, maxGra
             <Minus className="h-4 w-4" />
           </button>
           
-          <div className="grid h-10 w-12 place-items-center rounded-lg bg-blue-500 text-xl font-bold text-white shadow-sm">
-            {value}
-          </div>
+          <input
+            type="number"
+            min={1}
+            max={maxGrade}
+            value={value}
+            onChange={(e) => {
+              const num = parseInt(e.target.value, 10);
+              if (!isNaN(num)) setValue(num);
+            }}
+            onBlur={(e) => {
+              const num = parseInt(e.target.value, 10);
+              if (isNaN(num) || num < 1) setValue(1);
+              else if (num > maxGrade) setValue(maxGrade);
+            }}
+            className="h-10 w-14 rounded-lg bg-blue-500 text-center text-xl font-bold text-white shadow-sm outline-none focus:ring-2 focus:ring-blue-300 [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+            aria-label={`${subject.label}の内申点を入力`}
+          />
           
           <button
             type="button"
