@@ -135,6 +135,9 @@ export function ScoreProgressChart({ currentTotal, currentMax, currentPrefecture
           <p className="mt-1 text-xs text-slate-400">
             2回以上保存すると成績の推移グラフが表示されます
           </p>
+          <p className="mt-1 text-xs text-slate-400">
+            反映されない場合はページを更新してください
+          </p>
         </div>
       </motion.div>
     );
