@@ -91,7 +91,7 @@ export default function DisclaimerPage() {
             <h3 className="mb-2 mt-4 text-sm font-bold text-slate-700">2.1 計算方式の違いについて</h3>
             <p className="text-sm leading-relaxed text-slate-600">
               日本の公立高校入試における内申点の計算方法は、都道府県ごとに異なります。
-              当サイトでは「標準方式」と「東京都方式」の2つの計算方式を提供していますが、
+              当サイトでは全国47都道府県の計算方式に対応していますが、
               これらはあくまで代表的な計算方法の例示であり、すべての地域・学校に適用されるものではありません。
             </p>
             

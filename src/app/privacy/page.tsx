@@ -52,7 +52,7 @@ export default function PrivacyPage() {
             </li>
             <li className="flex gap-2">
               <span className="text-emerald-500">✓</span>
-              <span>広告配信・アクセス解析のためにCookieを使用します</span>
+              <span>アクセス解析のためにCookieを使用します</span>
             </li>
             <li className="flex gap-2">
               <span className="text-emerald-500">✓</span>
@@ -234,7 +234,7 @@ export default function PrivacyPage() {
             </div>
             <p className="text-sm leading-relaxed text-slate-600">
               Cookie（クッキー）とは、ウェブサイトがお使いのブラウザに保存する小さなテキストファイルです。
-              当サイトでは、サービスの提供・改善のために複数の種類のCookieを使用しています。
+              当サイトでは、サービスの提供・改善のために必要なCookieと、任意の分析Cookieのみを使用しています。
             </p>
             
             <h3 className="mb-2 mt-4 text-sm font-bold text-slate-700">4.1 使用するCookieの種類</h3>
@@ -261,17 +261,6 @@ export default function PrivacyPage() {
                   サービス改善に役立てます。収集されるデータには、ページビュー数、滞在時間、参照元などが含まれます。
                 </p>
               </div>
-              
-              <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-                <h4 className="flex items-center gap-2 text-sm font-bold text-slate-700">
-                  <span className="rounded bg-slate-400 px-1.5 py-0.5 text-[10px] text-white">任意</span>
-                  広告Cookie（サードパーティ）
-                </h4>
-                <p className="mt-2 text-xs leading-relaxed text-slate-600">
-                  Google AdSense等の広告配信サービスが使用するCookieです。ユーザーの興味・関心に基づいた
-                  広告を表示するために使用されます。これらのCookieはGoogleおよび広告パートナーによって管理されます。
-                </p>
-              </div>
             </div>
             
             <h3 className="mb-2 mt-4 text-sm font-bold text-slate-700">4.2 Cookieの管理方法</h3>
@@ -295,98 +284,17 @@ export default function PrivacyPage() {
             <div className="mt-4 rounded-xl border border-amber-200 bg-amber-50 p-4">
               <p className="text-sm leading-relaxed text-amber-800">
                 <strong>ご注意：</strong>必須Cookie以外を無効にしても、当サイトの基本機能はご利用いただけます。
-                ただし、一部の機能や広告の表示が制限される場合があります。
+                ただし、一部の機能や表示が制限される場合があります。
               </p>
             </div>
           </section>
 
-          {/* Google AdSense */}
-          <section>
-            <div className="mb-3 flex items-center gap-2">
-              <Eye className="h-5 w-5 text-blue-500" />
-              <h2 className="text-lg font-bold text-slate-800">5. Google AdSenseについて</h2>
-            </div>
-            <div className="rounded-xl border border-blue-200 bg-blue-50 p-4">
-              <p className="text-sm leading-relaxed text-blue-800">
-                当サイトでは、Googleが提供する広告配信サービス「Google AdSense」を利用して広告を配信しています。
-              </p>
-            </div>
-            <div className="mt-4 space-y-3 text-sm leading-relaxed text-slate-600">
-              <p>
-                Googleなどの第三者配信事業者は、Cookieを使用して、ユーザーが当サイトや
-                他のサイトにアクセスした際の情報に基づいて広告を配信します。
-              </p>
-              <p>
-                Googleが広告のCookieを使用することにより、ユーザーが当サイトや
-                他のサイトにアクセスした際の情報に基づいて、Googleやそのパートナーが
-                適切な広告をユーザーに表示できます。
-              </p>
-              <p>
-                パーソナライズド広告を無効にしたい場合は、
-                <a 
-                  href="https://www.google.com/settings/ads" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-blue-600 underline hover:text-blue-700"
-                >
-                  Googleの広告設定
-                  <ExternalLink className="h-3 w-3" />
-                </a>
-                からオプトアウトできます。
-              </p>
-              <p>
-                また、
-                <a 
-                  href="https://www.aboutads.info/choices/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-blue-600 underline hover:text-blue-700"
-                >
-                  www.aboutads.info
-                  <ExternalLink className="h-3 w-3" />
-                </a>
-                にアクセスすることで、第三者配信事業者がパーソナライズド広告の掌載に
-                使用するCookieを無効にすることもできます。
-              </p>
-            </div>
-          </section>
-
-          {/* Amazonアソシエイト */}
-          <section>
-            <div className="mb-3 flex items-center gap-2">
-              <BarChart3 className="h-5 w-5 text-orange-500" />
-              <h2 className="text-lg font-bold text-slate-800">6. Amazonアソシエイトプログラムについて</h2>
-            </div>
-            <div className="rounded-xl border border-orange-200 bg-orange-50 p-4">
-              <p className="text-sm leading-relaxed text-orange-800">
-                当サイトは、Amazon.co.jpを宣伝しリンクすることによってサイトが紹介料を獲得できる手段を
-                提供することを目的に設定されたアフィリエイトプログラムである、
-                <strong>Amazonアソシエイトプログラム</strong>の参加者です。
-              </p>
-            </div>
-            <p className="mt-3 text-sm leading-relaxed text-slate-600">
-              当サイトにおいてAmazonの商品（参考書、学習教材等）を紹介する場合があり、
-              リンクを経由して購入された場合、当サイトに紹介料が支払われることがあります。
-              これによりユーザーの購入価格が変わることはありません。
-            </p>
-            <p className="mt-2 text-sm leading-relaxed text-slate-600">
-              Amazonアソシエイトプログラムの詳細については、
-              <a 
-                href="https://affiliate.amazon.co.jp/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 text-blue-600 underline hover:text-blue-700"
-              >
-                Amazon アソシエイト・プログラム
-                <ExternalLink className="h-3 w-3" />
-              </a>
-              をご参照ください。
-            </p>
-          </section>
+          {/* TODO: Google AdSense - 審査通過後に有効化 (セクション5) */}
+          {/* TODO: Amazonアソシエイト - 審査通過後に有効化 (セクション6) */}
 
           {/* アクセス解析 */}
           <section>
-            <h2 className="mb-3 text-lg font-bold text-slate-800">7. アクセス解析ツールについて</h2>
+            <h2 className="mb-3 text-lg font-bold text-slate-800">5. アクセス解析ツールについて</h2>
             <p className="text-sm leading-relaxed text-slate-600">
               当サイトでは、サービス向上およびユーザー体験の改善を目的として、
               Googleアナリティクス等のアクセス解析ツールを使用しています。
@@ -417,7 +325,7 @@ export default function PrivacyPage() {
           <section>
             <div className="mb-3 flex items-center gap-2">
               <Users className="h-5 w-5 text-purple-500" />
-              <h2 className="text-lg font-bold text-slate-800">8. 未成年者のプライバシーについて</h2>
+              <h2 className="text-lg font-bold text-slate-800">6. 未成年者のプライバシーについて</h2>
             </div>
             <div className="rounded-xl border border-purple-200 bg-purple-50 p-4">
               <p className="text-sm font-medium leading-relaxed text-purple-800">
@@ -428,17 +336,13 @@ export default function PrivacyPage() {
             <p className="mt-3 text-sm leading-relaxed text-slate-600">
               当サイトは、未成年者のプライバシー保護を特に重視しています。
               13歳未満のお子様から意図的に個人情報を収集することはありません。
-              当サイトは個人を特定できる情報を直接収集しませんが、広告配信やアクセス解析において
+              当サイトは個人を特定できる情報を直接収集しませんが、アクセス解析において
               Cookieが使用される場合があります。
             </p>
             <p className="mt-3 text-sm leading-relaxed text-slate-600">
               保護者の方へ：お子様が当サイトを利用する際は、本プライバシーポリシーの内容を
-              ご確認いただき、Cookieの使用や広告配信について適切にご判断ください。
+              ご確認いただき、Cookieの使用について適切にご判断ください。
               ご不明な点やご懸念がございましたら、お問い合わせページよりご連絡ください。
-            </p>
-            <p className="mt-3 text-sm leading-relaxed text-slate-600">
-              未成年者に対するパーソナライズド広告を制限したい場合は、ブラウザのCookie設定を
-              調整するか、Google広告設定からオプトアウトすることをお勧めいたします。
             </p>
           </section>
 
@@ -446,7 +350,7 @@ export default function PrivacyPage() {
           <section>
             <div className="mb-3 flex items-center gap-2">
               <Bell className="h-5 w-5 text-indigo-500" />
-              <h2 className="text-lg font-bold text-slate-800">9. ユーザーの権利</h2>
+              <h2 className="text-lg font-bold text-slate-800">7. ユーザーの権利</h2>
             </div>
             <p className="text-sm leading-relaxed text-slate-600">
               ユーザーは、ご自身のデータに関して以下の権利を有しています：
@@ -462,7 +366,7 @@ export default function PrivacyPage() {
               </li>
               <li className="flex gap-2">
                 <span className="text-indigo-500">•</span>
-                <strong>オプトアウト権：</strong>Cookie同意画面で「必須のみ許可」を選択し、分析・広告Cookieを拒否する権利
+                <strong>オプトアウト権：</strong>Cookie同意画面で「必須のみ許可」を選択し、分析Cookieを拒否する権利
               </li>
               <li className="flex gap-2">
                 <span className="text-indigo-500">•</span>
@@ -476,7 +380,7 @@ export default function PrivacyPage() {
 
           {/* プライバシーポリシーの変更 */}
           <section>
-            <h2 className="mb-3 text-lg font-bold text-slate-800">10. プライバシーポリシーの変更について</h2>
+            <h2 className="mb-3 text-lg font-bold text-slate-800">8. プライバシーポリシーの変更について</h2>
             <p className="text-sm leading-relaxed text-slate-600">
               当サイトは、法令の改正、サービス内容の変更、その他の理由により、
               必要に応じて本プライバシーポリシーを変更することがあります。
@@ -492,7 +396,7 @@ export default function PrivacyPage() {
           <section>
             <div className="mb-3 flex items-center gap-2">
               <Mail className="h-5 w-5 text-teal-500" />
-              <h2 className="text-lg font-bold text-slate-800">11. お問い合わせ</h2>
+              <h2 className="text-lg font-bold text-slate-800">9. お問い合わせ</h2>
             </div>
             <p className="text-sm leading-relaxed text-slate-600">
               本プライバシーポリシーに関するご質問、ご意見、苦情、またはデータに関するリクエストは、
