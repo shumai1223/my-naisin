@@ -3,6 +3,7 @@
 import * as React from 'react';
 import Link from 'next/link';
 import { BookOpen, HelpCircle, Calculator, GraduationCap, ChevronRight, MapPin } from 'lucide-react';
+import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 
 const FAQ_ITEMS = [
   {
@@ -27,8 +28,8 @@ const GUIDE_CARDS = [
   {
     icon: Calculator,
     title: '内申点の計算方法',
-    summary: '9教科の5段階評価を合計して算出します。東京都では実技4教科が2倍になる換算方式を採用。',
-    detail: '内申点の基本は「9教科×5点＝45点満点」です。ただし東京都立高校の入試では、5教科（国語・数学・英語・理科・社会）はそのまま、実技4教科（音楽・美術・保体・技家）は2倍して計算する「換算内申」方式が使われます。この場合、5教科×5点＋4教科×5点×2＝65点満点となります。'
+    summary: '9教科の5段階評価を合計して算出します。都道府県により倍率や対象学年が異なります。',
+    detail: '例えば東京都では、5教科（国語・数学・英語・理科・社会）はそのまま、実技4教科（音楽・美術・保体・技家）は2倍して計算する「換算内申」方式を採用しており、5教科×5点＋4教科×5点×2＝65点満点となります。神奈川県は中2・中3の成績を使用し135点満点、大阪府は450点満点など、地域により大きく異なります。'
   },
   {
     icon: GraduationCap,
@@ -42,7 +43,9 @@ export function NaishinGuideSection() {
   const [expandedCard, setExpandedCard] = React.useState<number | null>(null);
 
   return (
-    <section className="mt-8 rounded-3xl border border-slate-200 bg-gradient-to-b from-slate-50 to-slate-100/80 p-6 md:p-8">
+    <>
+      <FAQPageSchema faqItems={FAQ_ITEMS} />
+      <section className="mt-8 rounded-3xl border border-slate-200 bg-gradient-to-b from-slate-50 to-slate-100/80 p-6 md:p-8">
       {/* Section Header */}
       <div className="mb-6 flex items-center gap-3">
         <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-100">
@@ -156,5 +159,6 @@ export function NaishinGuideSection() {
         当サイト「My Naishin（内申点シミュレーター）」は、中学生の内申点計算を簡単に行えるWebツールです。全国47都道府県の計算方式に対応しており、9教科の成績を入力するだけで各地域の方式に合わせた内申点を自動計算できます。成績推移グラフ、教科別アドバイス、目標設定機能、勉強タイマーなど、高校受験に向けた学習をサポートする機能を無料で提供しています。
       </p>
     </section>
+    </>
   );
 }

@@ -1,6 +1,7 @@
 'use client';
 
 import * as React from 'react';
+import Link from 'next/link';
 import { Calculator, Target, BookOpen, ChevronRight, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -66,40 +67,46 @@ export function HeroNavigation({ onModeChange, currentMode }: HeroNavigationProp
 
       <div className="grid gap-4 md:grid-cols-3">
         {navigationOptions.map((option, index) => (
-          <motion.button
+          <motion.div
             key={option.id}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1, duration: 0.3 }}
-            onClick={() => onModeChange(option.id)}
-            className={`group relative overflow-hidden rounded-2xl border-2 ${option.borderColor} bg-gradient-to-br ${option.bgGradient} p-5 text-left shadow-sm transition-all duration-300 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98]`}
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-            
-            <div className="relative">
-              <div className={`mb-3 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${option.gradient} shadow-lg`}>
-                <option.icon className="h-6 w-6 text-white" />
-              </div>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                onModeChange(option.id);
+              }}
+              className={`group relative block w-full overflow-hidden rounded-2xl border-2 ${option.borderColor} bg-gradient-to-br ${option.bgGradient} p-5 text-left shadow-sm transition-all duration-300 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98]`}
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+              
+              <div className="relative">
+                <div className={`mb-3 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${option.gradient} shadow-lg`}>
+                  <option.icon className="h-6 w-6 text-white" />
+                </div>
 
-              <div className="mb-2">
-                <span className={`inline-block rounded-full px-2 py-0.5 text-xs font-semibold ${option.badgeColor}`}>
-                  {option.badge}
-                </span>
-              </div>
+                <div className="mb-2">
+                  <span className={`inline-block rounded-full px-2 py-0.5 text-xs font-semibold ${option.badgeColor}`}>
+                    {option.badge}
+                  </span>
+                </div>
 
-              <h3 className="text-lg font-bold text-slate-800 group-hover:text-slate-900">
-                {option.title}
-              </h3>
-              <p className="mt-1 text-sm text-slate-600">
-                {option.description}
-              </p>
+                <h3 className="text-lg font-bold text-slate-800 group-hover:text-slate-900">
+                  {option.title}
+                </h3>
+                <p className="mt-1 text-sm text-slate-600">
+                  {option.description}
+                </p>
 
-              <div className="mt-4 flex items-center gap-1 text-sm font-medium text-slate-500 group-hover:text-slate-700">
-                <span>始める</span>
-                <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                <div className="mt-4 flex items-center gap-1 text-sm font-medium text-slate-500 group-hover:text-slate-700">
+                  <span>始める</span>
+                  <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </div>
               </div>
-            </div>
-          </motion.button>
+            </button>
+          </motion.div>
         ))}
       </div>
     </div>
