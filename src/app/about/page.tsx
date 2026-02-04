@@ -6,8 +6,9 @@ import Link from 'next/link';
 import { APP_NAME } from '@/lib/constants';
 
 export default function AboutPage() {
-  const lastUpdated = '2026年1月30日';
-  const version = 'v2026.1';
+  const dataLastVerified = '2026年1月30日';
+  const featureLastUpdated = '2026年2月4日';
+  const version = 'v2026.1+20260204';
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
@@ -51,12 +52,17 @@ export default function AboutPage() {
                 目標に向かって効率的に学習を進められることを目的として運営しています。
               </p>
             </div>
-            <div className="mt-4 flex items-center gap-4 rounded-xl bg-slate-50 p-3">
+            <div className="mt-4 space-y-2 rounded-xl bg-slate-50 p-3">
               <div className="text-xs text-slate-500">
                 <span className="font-medium">バージョン:</span> {version}
               </div>
-              <div className="text-xs text-slate-500">
-                <span className="font-medium">最終更新:</span> {lastUpdated}
+              <div className="flex flex-wrap gap-3 text-xs text-slate-500">
+                <div>
+                  <span className="font-medium">制度データ最終確認日:</span> {dataLastVerified}
+                </div>
+                <div>
+                  <span className="font-medium">サイト機能最終更新日:</span> {featureLastUpdated}
+                </div>
               </div>
             </div>
           </div>
@@ -220,10 +226,14 @@ export default function AboutPage() {
             </Link>
           </div>
 
-          <div className="rounded-xl bg-slate-50 p-4 text-center text-xs text-slate-500">
-            <div className="flex items-center justify-center gap-2">
+          <div className="rounded-xl bg-slate-50 p-4 text-xs text-slate-500">
+            <div className="mb-2 flex items-center justify-center gap-2 font-medium">
               <Calendar className="h-3.5 w-3.5" />
-              最終更新日: {lastUpdated}
+              最終更新情報
+            </div>
+            <div className="flex flex-wrap justify-center gap-3">
+              <div>制度データ: {dataLastVerified}</div>
+              <div>サイト機能: {featureLastUpdated}</div>
             </div>
           </div>
         </div>
