@@ -24,6 +24,7 @@ import { calculateMaxScore, calculateTotalScore, calculatePercent, getRankForPer
 import { InputForm } from '@/components/Calculator/InputForm';
 import { ScoreGauge } from '@/components/Result/ScoreGauge';
 import { RankCard } from '@/components/Result/RankCard';
+import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import type { Scores, SubjectKey } from '@/lib/types';
 
 // 県別の落とし穴・注意点データ
@@ -426,6 +427,12 @@ export default function PrefectureNaishinPage() {
         id="faq-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <BreadcrumbSchema 
+        items={[
+          { name: 'ホーム', url: 'https://my-naishin.com/' },
+          { name: prefecture.name, url: `https://my-naishin.com/${prefectureCode}/naishin` }
+        ]}
       />
 
       <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">

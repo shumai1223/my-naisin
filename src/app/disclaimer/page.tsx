@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { APP_NAME } from '@/lib/constants';
 
 export default function DisclaimerPage() {
-  const lastUpdated = '2026年1月28日';
+  const lastUpdated = '2026年2月4日';
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
