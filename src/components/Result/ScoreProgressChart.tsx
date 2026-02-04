@@ -24,14 +24,14 @@ interface ChartDataPoint {
   memo?: string;
 }
 
-export function ScoreProgressChart({ currentTotal, currentMax }: ScoreProgressChartProps) {
+export function ScoreProgressChart({ currentTotal, currentMax, currentPrefecture }: ScoreProgressChartProps) {
   const [history, setHistory] = React.useState<SavedHistoryEntry[]>([]);
   const [expanded, setExpanded] = React.useState(true);
 
   React.useEffect(() => {
     const entries = readHistory();
     setHistory(entries);
-  }, []);
+  }, [currentTotal, currentMax, currentPrefecture]);
 
   // Convert history to chart data points
   const chartData: ChartDataPoint[] = React.useMemo(() => {
