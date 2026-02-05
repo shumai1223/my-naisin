@@ -237,7 +237,7 @@ export default function Page() {
               {/* 3導線ナビゲーション */}
               <HeroNavigation onModeChange={setNavigationMode} currentMode={navigationMode} />
 
-              <main className="px-4 pb-10 md:px-6">
+              <main id="calculator" className="px-4 pb-10 md:px-6">
                 <div className="space-y-6">
 
           {/* 逆算モード */}

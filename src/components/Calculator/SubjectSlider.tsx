@@ -40,7 +40,8 @@ export function SubjectSlider({ subject, prefectureCode, value, onChange, maxGra
             )}
           </div>
           <div className="mt-0.5 text-[11px] text-slate-500">
-            {isPractical ? '実技教科' : '5教科'} • 換算: {value * weight}点
+            {isPractical ? '実技教科' : '5教科'} • 評定 {value}
+            {weight > 1 ? `（換算 ${value * weight}点）` : ''}
           </div>
         </div>
 

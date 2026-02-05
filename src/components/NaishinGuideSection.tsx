@@ -75,11 +75,13 @@ export function NaishinGuideSection() {
               <p className="text-sm leading-relaxed text-slate-600">
                 {card.summary}
               </p>
-              <div className={`mt-3 overflow-hidden transition-all duration-300 ${isExpanded ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
-                <p className="border-t border-slate-100 pt-3 text-sm leading-relaxed text-slate-600">
-                  {card.detail}
-                </p>
-              </div>
+              {isExpanded && (
+                <div className="mt-3 overflow-hidden transition-all duration-300">
+                  <p className="border-t border-slate-100 pt-3 text-sm leading-relaxed text-slate-600">
+                    {card.detail}
+                  </p>
+                </div>
+              )}
               <button
                 onClick={() => setExpandedCard(isExpanded ? null : index)}
                 className="mt-3 flex items-center gap-1 text-sm font-medium text-blue-600 hover:text-blue-700"

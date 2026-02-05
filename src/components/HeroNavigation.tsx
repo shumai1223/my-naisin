@@ -73,10 +73,13 @@ export function HeroNavigation({ onModeChange, currentMode }: HeroNavigationProp
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1, duration: 0.3 }}
           >
-            <button
-              onClick={(e) => {
-                e.preventDefault();
+            <Link
+              href="#calculator"
+              onClick={() => {
                 onModeChange(option.id);
+                setTimeout(() => {
+                  document.getElementById('calculator')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 50);
               }}
               className={`group relative block w-full overflow-hidden rounded-2xl border-2 ${option.borderColor} bg-gradient-to-br ${option.bgGradient} p-5 text-left shadow-sm transition-all duration-300 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98]`}
             >
@@ -105,7 +108,7 @@ export function HeroNavigation({ onModeChange, currentMode }: HeroNavigationProp
                   <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </div>
               </div>
-            </button>
+            </Link>
           </motion.div>
         ))}
       </div>
