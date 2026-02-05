@@ -1,14 +1,21 @@
 "use client";
 
 export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+export const fetchCache = 'force-no-store';
 
 import * as React from 'react';
 import Link from 'next/link';
+import nextDynamic from 'next/dynamic';
 import { ChevronLeft, Home } from 'lucide-react';
 
-import { ReverseCalculator } from '@/components/Calculator/ReverseCalculator';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
+
+const ReverseCalculator = nextDynamic(
+  () => import('@/components/Calculator/ReverseCalculator').then((mod) => mod.ReverseCalculator),
+  { ssr: false }
+);
 
 export default function ReversePage() {
   return (
