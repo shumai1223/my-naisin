@@ -255,8 +255,8 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: 'improve-grades-from-all-3',
-    title: '【現役教師が教える】オール3から内申点を上げる方法15選',
-    description: 'オール3から内申点を上げたい中学生必見！現役の先生から聞いた、提出物・授業態度・定期テストの具体的な改善方法を徹底解説します。',
+    title: '【実践ガイド】オール3から内申点を上げる方法15選',
+    description: 'オール3から内申点を上げたい中学生必見！提出物・授業態度・定期テストの具体的な改善方法を徹底解説します。',
     date: '2025-01-10',
     category: '成績アップ術',
     readTime: '18分',
@@ -1280,7 +1280,7 @@ export const BLOG_POSTS: BlogPost[] = [
   {
     slug: 'practical-subjects-tips',
     title: '【副教科攻略】音楽・美術・体育・技家の内申点を確実に上げる方法',
-    description: '実技が苦手でも内申点は上げられる！副教科4教科の評価ポイントと、先生が見ているところを現役教師が解説します。',
+    description: '実技が苦手でも内申点は上げられる！副教科4教科の評価ポイントと、先生が見ているところを詳しく解説します。',
     date: '2025-01-19',
     category: '副教科対策',
     readTime: '12分',

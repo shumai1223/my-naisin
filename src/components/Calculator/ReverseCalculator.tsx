@@ -44,10 +44,10 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
 
   const calculate = React.useCallback(() => {
     const examRatio = 100 - naishinRatio;
-    const naishinContribution = (currentNaishin / naishinMax) * (targetTotalScore * (naishinRatio / 100));
+    const totalMaxScore = (naishinMax * (naishinRatio / 100)) + (examMaxScore * (examRatio / 100));
+    const naishinContribution = currentNaishin * (naishinRatio / 100);
     const requiredFromExam = targetTotalScore - naishinContribution;
-    const examContributionMax = targetTotalScore * (examRatio / 100);
-    const requiredExamScore = Math.round((requiredFromExam / examContributionMax) * examMaxScore);
+    const requiredExamScore = Math.round((requiredFromExam * 100) / examRatio);
     const examPercent = Math.round((requiredExamScore / examMaxScore) * 100);
     const perSubjectScore = Math.round(requiredExamScore / 5);
     const isAchievable = requiredExamScore <= examMaxScore && requiredExamScore >= 0;

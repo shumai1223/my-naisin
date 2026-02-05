@@ -17,7 +17,7 @@ const FEATURED_ARTICLES = [
   {
     slug: 'improve-grades-from-all-3',
     title: '【実践】オール3から内申点を上げる方法15選',
-    description: '現役教師監修！テスト対策から提出物、授業態度まで具体的なテクニックを伝授',
+    description: 'テスト対策から提出物、授業態度まで具体的なテクニックを詳しく解説',
     icon: TrendingUp,
     color: 'from-emerald-500 to-teal-600',
     tag: 'おすすめ',
