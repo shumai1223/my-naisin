@@ -42,6 +42,7 @@ import { ScoreImprovementAnalysis } from '@/components/Result/ScoreImprovementAn
 import { ChangeLogSection } from '@/components/ChangeLogSection';
 import { SubjectImprovementCard } from '@/components/Result/SubjectImprovementCard';
 import { PersonalGoalCard } from '@/components/Result/PersonalGoalCard';
+import { PointValueCard } from '@/components/Result/PointValueCard';
 import { QuickStudyTimer } from '@/components/Result/QuickStudyTimer';
 import { DailyQuoteCard } from '@/components/Result/DailyQuoteCard';
 import { ImprovementAdvisor } from '@/components/Result/ImprovementAdvisor';
@@ -349,6 +350,9 @@ export default function Page() {
                 </Card>
 
                 <RankCard result={result} />
+
+                {/* 1点アップの価値 */}
+                <PointValueCard scores={scores} prefectureCode={prefectureCode} />
 
                 {/* 計算根拠表示 */}
                 <CalculationBasis prefectureCode={prefectureCode} total={result.total} max={result.max} />

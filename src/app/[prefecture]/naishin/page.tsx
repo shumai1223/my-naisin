@@ -21,6 +21,7 @@ import Script from 'next/script';
 import { PREFECTURES, getPrefectureByCode } from '@/lib/prefectures';
 import { DEFAULT_SCORES } from '@/lib/constants';
 import { calculateMaxScore, calculateTotalScore, calculatePercent, getRankForPercent } from '@/lib/utils';
+import { generatePitfalls, generateFAQ } from '@/lib/prefecture-helpers';
 import { InputForm } from '@/components/Calculator/InputForm';
 import { ScoreGauge } from '@/components/Result/ScoreGauge';
 import { RankCard } from '@/components/Result/RankCard';
@@ -365,8 +366,8 @@ export default function PrefectureNaishinPage() {
     );
   }
 
-  const pitfalls = PREFECTURE_PITFALLS[prefectureCode] || DEFAULT_PITFALLS;
-  const faqItems = PREFECTURE_FAQ[prefectureCode] || DEFAULT_FAQ;
+  const pitfalls = generatePitfalls(prefectureCode);
+  const faqItems = generateFAQ(prefectureCode);
 
   const max = calculateMaxScore(prefectureCode);
   const total = calculateTotalScore(scores, prefectureCode);
@@ -586,7 +587,30 @@ export default function PrefectureNaishinPage() {
                     </div>
                   </div>
                   
-                  <div className="mt-6 rounded-xl border-2 border-blue-100 bg-gradient-to-br from-blue-50 to-indigo-50 p-5">
+                  {/* 逆算機能への誘導 */}
+                  <div className="mt-6 rounded-xl border-2 border-violet-200 bg-gradient-to-br from-violet-50 to-purple-50 p-5">
+                    <div className="flex items-start gap-3">
+                      <div className="grid h-10 w-10 flex-shrink-0 place-items-center rounded-lg bg-gradient-to-br from-violet-500 to-purple-600 text-white shadow-md">
+                        🎯
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="mb-2 font-bold text-slate-800">志望校から逆算する</h4>
+                        <p className="mb-3 text-sm leading-relaxed text-slate-600">
+                          「この高校に受かるには内申点が何点必要？」「今の内申点だと本番で何点取ればいい？」
+                          そんな疑問を解決する逆算機能をご利用いただけます。
+                        </p>
+                        <Link
+                          href="/?tab=reverse"
+                          className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-violet-600 to-purple-600 px-5 py-2.5 text-sm font-bold text-white shadow-md transition-all hover:shadow-lg hover:scale-105"
+                        >
+                          🎯 志望校から逆算する
+                          <ChevronRight className="h-4 w-4" />
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mt-4 rounded-xl border-2 border-blue-100 bg-gradient-to-br from-blue-50 to-indigo-50 p-5">
                     <div className="flex items-start gap-3">
                       <Sparkles className="h-6 w-6 flex-shrink-0 text-blue-600 mt-1" />
                       <div className="flex-1">

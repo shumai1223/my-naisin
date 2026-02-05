@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Calendar, Clock, ChevronLeft, ChevronRight, BookOpen, Home, User, FileCheck, ExternalLink, RefreshCw } from 'lucide-react';
 
 import { getPostBySlug, getAllPosts } from '@/lib/blog-data';
+import { BlogCTA } from '@/components/BlogCTA';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -204,18 +205,8 @@ export default async function BlogPostPage({ params }: PageProps) {
         </article>
 
         {/* CTA */}
-        <div className="mt-10 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 p-6 text-center text-white shadow-lg">
-          <h3 className="text-lg font-bold">あなたの内申点を計算してみよう！</h3>
-          <p className="mt-2 text-sm text-blue-100">
-            My Naishinなら、9教科の成績を入力するだけで内申点がすぐわかります
-          </p>
-          <Link
-            href="/"
-            className="mt-4 inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-semibold text-blue-600 shadow-md transition-all hover:shadow-lg"
-          >
-            内申点を計算する
-            <ChevronRight className="h-4 w-4" />
-          </Link>
+        <div className="mt-10">
+          <BlogCTA />
         </div>
 
         {/* Navigation */}
