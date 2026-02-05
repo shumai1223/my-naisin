@@ -95,8 +95,8 @@ export default function PrefecturesPage() {
             <div className="text-sm text-blue-600">都道府県対応</div>
           </div>
           <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-center">
-            <div className="text-3xl font-bold text-emerald-700">2026年度</div>
-            <div className="text-sm text-emerald-600">入試対応</div>
+            <div className="text-3xl font-bold text-emerald-700">2026年度入試対応</div>
+            <div className="text-sm text-emerald-600">（令和8年度入学者選抜）</div>
           </div>
           <div className="rounded-xl border border-violet-200 bg-violet-50 p-4 text-center">
             <div className="text-3xl font-bold text-violet-700">{filteredPrefectures.length}</div>

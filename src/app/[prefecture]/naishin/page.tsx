@@ -247,7 +247,7 @@ const PREFECTURE_FAQ: Record<string, { question: string; answer: string }[]> = {
   aichi: [
     {
       question: '愛知県の内申点は何点満点ですか？',
-      answer: '愛知県の内申点は45点満点です。中学3年生の9教科×5点で計算されます。'
+      answer: '愛知県の内申点は90点満点です。中学3年生の9教科×5点×2倍で計算されます。'
     },
     {
       question: '愛知県はいつの成績が内申点になりますか？',
@@ -301,7 +301,7 @@ const PREFECTURE_FAQ: Record<string, { question: string; answer: string }[]> = {
   fukuoka: [
     {
       question: '福岡県の内申点は何点満点ですか？',
-      answer: '福岡県の内申点は135点満点です。中1〜中3の各学年で9教科×5点＝45点、合計135点となります。'
+      answer: '福岡県の内申点は45点満点です。中学3年生の9教科×5点で計算されます。'
     },
     {
       question: '福岡県はいつの成績が内申点になりますか？',
@@ -456,7 +456,7 @@ export default function PrefectureNaishinPage() {
                   {prefecture.name}の内申点計算ツール
                 </h1>
                 <p className="mt-1 text-sm text-slate-500">
-                  {prefecture.region} | {prefecture.fiscalYear || '2026'}年度入試対応
+                  {prefecture.region} | 2026年度入試対応（令和8年度入学者選抜）
                 </p>
               </div>
             </div>

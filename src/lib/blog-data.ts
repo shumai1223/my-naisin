@@ -1887,12 +1887,12 @@ export const BLOG_POSTS: BlogPost[] = [
 <table>
 <tr><th>都道府県</th><th>計算方式</th><th>満点</th><th>備考</th></tr>
 <tr><td>大阪府</td><td>全教科等倍</td><td>450点</td><td>学年比1:2:6</td></tr>
-<tr><td>愛知県</td><td>全教科等倍</td><td>45点</td><td>中3のみ</td></tr>
+<tr><td>愛知県</td><td>実技含め2倍換算</td><td>90点</td><td>中3のみ（9教科×5点×2倍）</td></tr>
 <tr><td>神奈川県</td><td>全教科等倍</td><td>135点</td><td>中2・中3対象</td></tr>
 <tr><td>埼玉県</td><td>全教科等倍</td><td>180点</td><td>学年比は学校による</td></tr>
 <tr><td>千葉県</td><td>全教科等倍</td><td>135点</td><td>3年間対象</td></tr>
 <tr><td>北海道</td><td>全教科等倍</td><td>315点</td><td>学年比2:2:3</td></tr>
-<tr><td>福岡県</td><td>全教科等倍</td><td>135点</td><td>3年間対象</td></tr>
+<tr><td>福岡県</td><td>全教科等倍</td><td>45点</td><td>中3のみ</td></tr>
 </table>
 </div>
 
