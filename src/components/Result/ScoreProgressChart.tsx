@@ -54,8 +54,17 @@ export function ScoreProgressChart({ currentTotal, currentMax, currentPrefecture
         };
       });
 
+    // Append current session snapshot (latest state) to reflect immediately without reload
+    points.push({
+      date: 'current',
+      dateLabel: 'Now',
+      total: currentTotal,
+      max: currentMax,
+      percent: calculatePercent(currentTotal, currentMax),
+    });
+
     return points;
-  }, [history]);
+  }, [history, currentTotal, currentMax]);
 
   // Calculate trend
   const trend = React.useMemo(() => {
@@ -108,7 +117,7 @@ export function ScoreProgressChart({ currentTotal, currentMax, currentPrefecture
     return `${linePath} L ${lastX} ${bottomY} L ${firstX} ${bottomY} Z`;
   }, [chartData, generatePath, innerWidth, innerHeight, padding]);
 
-  if (history.length < 2) {
+  if (chartData.length === 0) {
     return (
       <motion.div
         initial={{ opacity: 0, y: 20 }}

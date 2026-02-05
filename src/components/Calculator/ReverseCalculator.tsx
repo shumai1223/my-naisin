@@ -1,6 +1,7 @@
 'use client';
 
 import * as React from 'react';
+import { useSearchParams } from 'next/navigation';
 import { Target, Calculator, Info, ArrowLeft, ChevronDown, ExternalLink } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -9,6 +10,7 @@ import { getExamRatioByCode, DEFAULT_EXAM_RATIO } from '@/lib/prefecture-exam-da
 import { calculateMaxScore } from '@/lib/utils';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
+import { TokyoExtendedCalculator } from '@/components/Calculator/TokyoExtendedCalculator';
 
 interface ReverseCalculatorProps {
   onBack: () => void;
@@ -23,13 +25,23 @@ interface ReverseResult {
   message: string;
 }
 
+type ReverseMode = 'general' | 'tokyo' | 'kanagawa';
+
+const KANAGAWA_RATIO_PRESETS = ['3-7', '4-6', '5-5', '6-4', '7-3'];
+
 export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
-  const [prefectureCode, setPrefectureCode] = React.useState('tokyo');
+  const searchParams = useSearchParams();
+  const initialPref = searchParams.get('pref') ?? 'tokyo';
+  const initialRatio = searchParams.get('ratio');
+
+  const [prefectureCode, setPrefectureCode] = React.useState(initialPref);
+  const [mode, setMode] = React.useState<ReverseMode>(initialPref === 'tokyo' ? 'tokyo' : initialPref === 'kanagawa' ? 'kanagawa' : 'general');
   const [targetTotalScore, setTargetTotalScore] = React.useState<number>(700);
   const [currentNaishin, setCurrentNaishin] = React.useState<number>(300);
   const [naishinRatio, setNaishinRatio] = React.useState<number>(30);
   const [examMaxScore, setExamMaxScore] = React.useState<number>(500);
   const [result, setResult] = React.useState<ReverseResult | null>(null);
+  const [tokyoKansoNaishin, setTokyoKansoNaishin] = React.useState<number>(45);
 
   const prefecture = React.useMemo(() => getPrefectureByCode(prefectureCode), [prefectureCode]);
   const naishinMax = React.useMemo(() => calculateMaxScore(prefectureCode), [prefectureCode]);
@@ -41,6 +53,29 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
     setExamMaxScore(config.examMaxScore);
     setTargetTotalScore(Math.round(config.totalMaxScore * 0.7));
   }, [prefectureCode]);
+
+  React.useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const storedTokyo = window.localStorage.getItem('my-naishin:tokyo-kanso');
+    const storedKanagawa = window.localStorage.getItem('my-naishin:kanagawa-A');
+    if (storedTokyo) {
+      const parsed = Number(storedTokyo);
+      if (Number.isFinite(parsed)) setTokyoKansoNaishin(parsed);
+    }
+    if (storedKanagawa) {
+      const parsed = Number(storedKanagawa);
+      if (Number.isFinite(parsed)) setCurrentNaishin(parsed);
+    }
+  }, []);
+
+  React.useEffect(() => {
+    if (!initialRatio) return;
+    const [naishin, exam] = initialRatio.split('-').map((n) => Number(n));
+    if (Number.isFinite(naishin) && Number.isFinite(exam) && naishin + exam > 0) {
+      const ratio = Math.round((naishin / (naishin + exam)) * 100);
+      setNaishinRatio(ratio);
+    }
+  }, [initialRatio]);
 
   const calculate = React.useCallback(() => {
     const examRatio = 100 - naishinRatio;
@@ -98,6 +133,67 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
         </div>
 
         <div className="p-5 md:p-6">
+          <div className="mb-5 flex flex-wrap gap-2">
+            <button
+              type="button"
+              onClick={() => {
+                setMode('general');
+                if (prefectureCode === 'tokyo') setPrefectureCode('tokyo');
+              }}
+              className={`rounded-full px-3 py-1 text-xs font-semibold transition ${mode === 'general' ? 'bg-emerald-500 text-white' : 'bg-slate-100 text-slate-600'}`}
+            >
+              一般モード
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setMode('tokyo');
+                setPrefectureCode('tokyo');
+              }}
+              className={`rounded-full px-3 py-1 text-xs font-semibold transition ${mode === 'tokyo' ? 'bg-rose-500 text-white' : 'bg-slate-100 text-slate-600'}`}
+            >
+              東京都(1020)
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setMode('kanagawa');
+                setPrefectureCode('kanagawa');
+              }}
+              className={`rounded-full px-3 py-1 text-xs font-semibold transition ${mode === 'kanagawa' ? 'bg-indigo-500 text-white' : 'bg-slate-100 text-slate-600'}`}
+            >
+              神奈川(S1/S2)
+            </button>
+          </div>
+
+          {mode === 'tokyo' ? (
+            <div className="space-y-4">
+              <div className="rounded-xl border border-rose-100 bg-rose-50/60 p-4 text-sm text-rose-700">
+                都立一般（1020点満点）を自動設定しています。換算内申・学力検査・ESAT-Jで必要当日点を逆算できます。
+              </div>
+              <div className="rounded-xl border border-slate-200 bg-white p-4">
+                <label className="mb-2 block text-sm font-bold text-slate-700">現在の換算内申</label>
+                <div className="flex items-center gap-2">
+                  <input
+                    type="number"
+                    min={0}
+                    max={65}
+                    value={tokyoKansoNaishin}
+                    onChange={(e) => {
+                      const next = Math.min(65, Math.max(0, Number(e.target.value)));
+                      setTokyoKansoNaishin(next);
+                      if (typeof window !== 'undefined') {
+                        window.localStorage.setItem('my-naishin:tokyo-kanso', String(next));
+                      }
+                    }}
+                    className="h-11 w-32 rounded-xl border border-slate-200 bg-white px-3 text-center text-sm font-bold text-slate-800 shadow-sm outline-none focus:border-rose-500"
+                  />
+                  <span className="text-sm text-slate-500">/65点</span>
+                </div>
+              </div>
+              <TokyoExtendedCalculator kansoNaishin={tokyoKansoNaishin} />
+            </div>
+          ) : (
           <div className="space-y-5">
             <div>
               <label className="mb-2 block text-sm font-bold text-slate-700">都道府県を選択</label>
@@ -147,7 +243,7 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
 
               <div>
                 <label className="mb-2 block text-sm font-bold text-slate-700">
-                  現在の内申点
+                  {prefectureCode === 'kanagawa' ? 'A（評定合計）' : '現在の内申点'}
                   <span className="ml-1 text-xs font-normal text-slate-500">（{naishinMax}点満点）</span>
                 </label>
                 <div className="flex items-center gap-2">
@@ -161,6 +257,11 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
                   />
                   <span className="text-sm text-slate-500">点</span>
                 </div>
+                {prefectureCode === 'kanagawa' && (
+                  <div className="mt-2 text-xs text-slate-500">
+                    a値（100点換算）: {Math.round((currentNaishin / naishinMax) * 100)}点
+                  </div>
+                )}
               </div>
             </div>
 
@@ -169,6 +270,26 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
                 <Info className="h-4 w-4 text-slate-500" />
                 配点設定（学校・入試方式によって異なります）
               </div>
+              {prefectureCode === 'kanagawa' && (
+                <div className="mb-3 flex flex-wrap gap-2">
+                  {KANAGAWA_RATIO_PRESETS.map((ratio) => (
+                    <button
+                      key={ratio}
+                      type="button"
+                      onClick={() => {
+                        const [naishin, exam] = ratio.split('-').map((n) => Number(n));
+                        if (Number.isFinite(naishin) && Number.isFinite(exam) && naishin + exam > 0) {
+                          setNaishinRatio(Math.round((naishin / (naishin + exam)) * 100));
+                        }
+                      }}
+                      className="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold text-slate-700 hover:border-slate-300"
+                    >
+                      {ratio.replace('-', ':')}
+                    </button>
+                  ))}
+                  <span className="text-[11px] text-slate-400">※ f:g は合計10（2以上の整数）</span>
+                </div>
+              )}
               <div className="grid gap-4 md:grid-cols-2">
                 <div>
                   <label className="mb-1 block text-xs font-medium text-slate-600">内申点の比率</label>
@@ -208,6 +329,7 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
               必要な当日点を計算
             </Button>
           </div>
+          )}
         </div>
       </Card>
 

@@ -1,6 +1,7 @@
 'use client';
 
 import * as React from 'react';
+import Link from 'next/link';
 import confetti from 'canvas-confetti';
 import { ArrowRight, RotateCcw, Share2 } from 'lucide-react';
 
@@ -157,6 +158,16 @@ export default function Page() {
     }),
     [prefectureCode, total, max, percent, rank]
   );
+
+  React.useEffect(() => {
+    if (!showResult || typeof window === 'undefined') return;
+    if (prefectureCode === 'tokyo') {
+      window.localStorage.setItem('my-naishin:tokyo-kanso', String(result.total));
+    }
+    if (prefectureCode === 'kanagawa') {
+      window.localStorage.setItem('my-naishin:kanagawa-A', String(result.total));
+    }
+  }, [prefectureCode, result.total, showResult]);
 
   const onScoreChange = React.useCallback((key: SubjectKey, nextValue: number) => {
     setScores((prev) => updateScoreValue(prev, key, nextValue));
@@ -362,6 +373,37 @@ export default function Page() {
 
                 {/* 計算根拠表示 */}
                 <CalculationBasis prefectureCode={prefectureCode} total={result.total} max={result.max} />
+
+                {prefectureCode === 'kanagawa' && (
+                  <Card className="overflow-hidden">
+                    <div className="border-b border-slate-100/80 bg-gradient-to-r from-indigo-50/80 via-blue-50/60 to-sky-50/80 px-6 py-5">
+                      <div className="text-base font-bold text-slate-800">神奈川は学校別比率で決まる</div>
+                      <div className="mt-1 text-sm text-slate-500">
+                        内申:学力の比率は 4:6 / 5:5 / 3:7 など学校ごとに異なります。
+                      </div>
+                    </div>
+                    <div className="p-6">
+                      <div className="flex flex-wrap gap-2">
+                        {['4-6', '5-5', '3-7'].map((ratio) => (
+                          <Link
+                            key={ratio}
+                            href={`/reverse?pref=kanagawa&ratio=${ratio}`}
+                            className="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold text-slate-700 hover:border-slate-300"
+                          >
+                            {ratio.replace('-', ':')}
+                          </Link>
+                        ))}
+                        <Link
+                          href="/reverse?pref=kanagawa"
+                          className="rounded-full bg-indigo-600 px-3 py-1 text-xs font-semibold text-white shadow-sm hover:bg-indigo-700"
+                        >
+                          S1値を計算する
+                        </Link>
+                      </div>
+                      <p className="mt-2 text-xs text-slate-400">比率は合計10、各2以上の整数が基本です。</p>
+                    </div>
+                  </Card>
+                )}
 
                 <Card className="overflow-hidden">
                   <div className="border-b border-slate-100/80 bg-gradient-to-r from-violet-50/80 via-purple-50/60 to-fuchsia-50/80 px-6 py-5">

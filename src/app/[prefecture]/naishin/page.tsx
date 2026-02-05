@@ -383,6 +383,14 @@ export default function PrefectureNaishinPage() {
 
   const handleCalculate = () => {
     setShowResult(true);
+    if (typeof window !== 'undefined') {
+      if (prefectureCode === 'kanagawa') {
+        window.localStorage.setItem('my-naishin:kanagawa-A', String(total));
+      }
+      if (prefectureCode === 'tokyo') {
+        window.localStorage.setItem('my-naishin:tokyo-kanso', String(total));
+      }
+    }
     setTimeout(() => {
       document.getElementById('result')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 100);
@@ -586,6 +594,17 @@ export default function PrefectureNaishinPage() {
                       </div>
                     </div>
                   </div>
+
+                  {prefectureCode === 'kanagawa' && (
+                    <div className="mt-4 rounded-xl border border-indigo-200 bg-indigo-50 p-4">
+                      <div className="text-sm font-bold text-indigo-700">A（評定合計）と a値</div>
+                      <div className="mt-2 flex flex-wrap items-center gap-4 text-sm text-slate-700">
+                        <span>A（評定合計）: <strong>{total}点</strong></span>
+                        <span>a値（100点換算）: <strong>{Math.round((total / max) * 100)}点</strong></span>
+                      </div>
+                      <p className="mt-2 text-xs text-slate-500">a値はAを100点満点に換算した値です。</p>
+                    </div>
+                  )}
                   
                   {/* 逆算機能への誘導 */}
                   <div className="mt-6 rounded-xl border-2 border-violet-200 bg-gradient-to-br from-violet-50 to-purple-50 p-5">
@@ -600,10 +619,10 @@ export default function PrefectureNaishinPage() {
                           そんな疑問を解決する逆算機能をご利用いただけます。
                         </p>
                         <Link
-                          href="/reverse"
+                          href={prefectureCode === 'tokyo' ? '/reverse?pref=tokyo' : prefectureCode === 'kanagawa' ? '/reverse?pref=kanagawa' : '/reverse'}
                           className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-violet-600 to-purple-600 px-5 py-2.5 text-sm font-bold text-white shadow-md transition-all hover:shadow-lg hover:scale-105"
                         >
-                          🎯 志望校から逆算する
+                          {prefectureCode === 'tokyo' ? '🎯 必要当日点を算出する' : '🎯 志望校から逆算する'}
                           <ChevronRight className="h-4 w-4" />
                         </Link>
                       </div>
