@@ -82,6 +82,14 @@ export default function PrivacyPage() {
               当サイトは、日本国内の法令および国際的なプライバシー保護の基準に準拠し、
               透明性のある情報管理を行うことをお約束いたします。
             </p>
+            <div className="mt-4 rounded-xl border border-blue-200 bg-blue-50 p-4">
+              <p className="text-sm font-medium leading-relaxed text-blue-800">
+                <strong>対象：</strong>中学生・高校生（主に13歳以上）
+              </p>
+              <p className="mt-1 text-xs text-blue-700">
+                13歳未満の方は保護者の同意のもとご利用ください。
+              </p>
+            </div>
           </section>
 
           {/* 収集する情報 */}
@@ -289,12 +297,80 @@ export default function PrivacyPage() {
             </div>
           </section>
 
-          {/* TODO: Google AdSense - 審査通過後に有効化 (セクション5) */}
-          {/* TODO: Amazonアソシエイト - 審査通過後に有効化 (セクション6) */}
+          {/* 将来的に導入予定の広告サービス（現在は未使用） */}
+          {/* Google AdSense や Amazonアソシエイト等の広告配信サービスを利用予定 */}
+          {/* 審査通過後に以下のセクションを有効化 */}
+
+          {/* 広告配信と第三者Cookie */}
+          <section>
+            <div className="mb-3 flex items-center gap-2">
+              <BarChart3 className="h-5 w-5 text-orange-500" />
+              <h2 className="text-lg font-bold text-slate-800">5. 広告配信と第三者Cookieについて</h2>
+            </div>
+            <p className="text-sm leading-relaxed text-slate-600">
+              当サイトでは、サービス運営費の一部を補填するため、Google AdSense や Amazon アソシエイト 等の第三者広告配信事業者を通じて広告を掲載する場合があります。
+            </p>
+            <div className="mt-3 rounded-xl border border-orange-200 bg-orange-50 p-4">
+              <h4 className="text-sm font-bold text-orange-800">広告Cookieとパーソナライズ広告</h4>
+              <p className="mt-2 text-xs leading-relaxed text-orange-700">
+                • Google 等の第三者配信事業者が Cookie を利用して、過去のアクセス情報に基づきパーソナライズ広告を配信する場合があります。<br/>
+                • これにより、ユーザーに関連性の高い広告が表示されることがありますが、個人を特定する情報は収集しません。<br/>
+                • 広告配信事業者のプライバシーポリシーおよび利用規約が適用されます。
+              </p>
+            </div>
+            <h3 className="mb-2 mt-4 text-sm font-bold text-slate-700">5.1 広告のオプトアウト（無効化）</h3>
+            <p className="text-sm leading-relaxed text-slate-600">
+              ユーザーは以下の方法でパーソナライズ広告を無効にできます：
+            </p>
+            <ul className="mt-2 space-y-1 text-sm leading-relaxed text-slate-600">
+              <li className="flex gap-2">
+                <span className="text-orange-500">•</span>
+                <a
+                  href="https://myadcenter.google.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 underline hover:text-blue-700"
+                >
+                  Google マイ アド センター (My Ad Center)
+                </a>
+              </li>
+              <li className="flex gap-2">
+                <span className="text-orange-500">•</span>
+                <a
+                  href="https://adssettings.google.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 underline hover:text-blue-700"
+                >
+                  Google 広告設定 (Ads Settings)
+                </a>
+              </li>
+              <li className="flex gap-2">
+                <span className="text-orange-500">•</span>
+                <a
+                  href="https://www.aboutads.info/choices/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 underline hover:text-blue-700"
+                >
+                  Digital Advertising Alliance (aboutads.info)
+                </a>
+              </li>
+              <li className="flex gap-2">
+                <span className="text-orange-500">•</span>
+                ブラウザの設定で「サードパーティCookie」を無効にする
+              </li>
+            </ul>
+            <div className="mt-4 rounded-xl border border-amber-200 bg-amber-50 p-4">
+              <p className="text-xs leading-relaxed text-amber-800">
+                <strong>ご注意：</strong>オプトアウトしても広告は表示されますが、関心に基づかない広告（一般広告）が配信されます。
+              </p>
+            </div>
+          </section>
 
           {/* アクセス解析 */}
           <section>
-            <h2 className="mb-3 text-lg font-bold text-slate-800">5. アクセス解析ツールについて</h2>
+            <h2 className="mb-3 text-lg font-bold text-slate-800">6. アクセス解析ツールについて</h2>
             <p className="text-sm leading-relaxed text-slate-600">
               当サイトでは、サービス向上およびユーザー体験の改善を目的として、
               Googleアナリティクス等のアクセス解析ツールを使用しています。
@@ -319,6 +395,11 @@ export default function PrivacyPage() {
               </a>
               をブラウザにインストールしてください。
             </p>
+            <div className="mt-4 rounded-xl border border-amber-200 bg-amber-50 p-4">
+              <p className="text-xs leading-relaxed text-amber-800">
+                <strong>広告について：</strong>現在、広告は掲載しておりません。将来的に Google AdSense や Amazon アソシエイト 等の広告配信サービスを導入する場合があります。
+              </p>
+            </div>
           </section>
 
           {/* 未成年者のプライバシー */}
