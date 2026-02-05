@@ -4,6 +4,7 @@ import * as React from 'react';
 import Link from 'next/link';
 import { BookOpen, HelpCircle, Calculator, GraduationCap, ChevronRight, MapPin } from 'lucide-react';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
+import { getPrefectureByCode } from '@/lib/prefectures';
 
 const FAQ_ITEMS = [
   {
@@ -130,34 +131,33 @@ export function NaishinGuideSection() {
         </div>
         <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4">
           {[
-            { code: 'tokyo', name: '東京都', score: '65点' },
-            { code: 'kanagawa', name: '神奈川県', score: '135点' },
-            { code: 'osaka', name: '大阪府', score: '450点' },
-            { code: 'aichi', name: '愛知県', score: '45点' },
-            { code: 'saitama', name: '埼玉県', score: '180点' },
-            { code: 'chiba', name: '千葉県', score: '135点' },
-            { code: 'hokkaido', name: '北海道', score: '315点' },
-            { code: 'fukuoka', name: '福岡県', score: '135点' },
-          ].map((pref) => (
-            <Link
-              key={pref.code}
-              href={`/${pref.code}/naishin`}
-              className="flex flex-col rounded-lg border border-slate-100 bg-slate-50 p-2 text-center transition-colors hover:border-blue-200 hover:bg-blue-50"
-            >
-              <span className="text-sm font-medium text-slate-700">{pref.name}</span>
-              <span className="text-xs text-slate-500">{pref.score}満点</span>
-            </Link>
-          ))}
+            'tokyo',
+            'kanagawa',
+            'osaka',
+            'aichi',
+            'saitama',
+            'chiba',
+            'hokkaido',
+            'fukuoka',
+          ].map((code) => {
+            const pref = getPrefectureByCode(code);
+            if (!pref) return null;
+            return (
+              <Link
+                key={code}
+                href={`/${code}/naishin`}
+                className="flex flex-col rounded-lg border border-slate-100 bg-slate-50 p-2 text-center transition-colors hover:border-blue-200 hover:bg-blue-50"
+              >
+                <span className="text-sm font-medium text-slate-700">{pref.name}</span>
+                <span className="text-xs text-slate-500">{pref.maxScore}点満点</span>
+              </Link>
+            );
+          })}
         </div>
         <div className="mt-3 text-center">
           <span className="text-xs text-slate-400">その他の都道府県も対応しています</span>
         </div>
       </div>
-
-      {/* SEO text block - always visible for crawlers */}
-      <p className="mt-6 text-xs leading-relaxed text-slate-400">
-        当サイト「My Naishin（内申点シミュレーター）」は、中学生の内申点計算を簡単に行えるWebツールです。全国47都道府県の計算方式に対応しており、9教科の成績を入力するだけで各地域の方式に合わせた内申点を自動計算できます。成績推移グラフ、教科別アドバイス、目標設定機能、勉強タイマーなど、高校受験に向けた学習をサポートする機能を無料で提供しています。
-      </p>
     </section>
     </>
   );

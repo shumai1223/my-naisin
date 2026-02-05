@@ -456,7 +456,7 @@ export default function PrefectureNaishinPage() {
                   {prefecture.name}の内申点計算ツール
                 </h1>
                 <p className="mt-1 text-sm text-slate-500">
-                  {prefecture.region} | 令和{prefecture.fiscalYear || '7'}年度入試対応
+                  {prefecture.region} | {prefecture.fiscalYear || '2026'}年度入試対応
                 </p>
               </div>
             </div>
@@ -600,7 +600,7 @@ export default function PrefectureNaishinPage() {
                           そんな疑問を解決する逆算機能をご利用いただけます。
                         </p>
                         <Link
-                          href="/?tab=reverse"
+                          href="/reverse"
                           className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-violet-600 to-purple-600 px-5 py-2.5 text-sm font-bold text-white shadow-md transition-all hover:shadow-lg hover:scale-105"
                         >
                           🎯 志望校から逆算する

@@ -118,7 +118,7 @@ export function BlogCTA({ prefectureCode, variant = 'default' }: BlogCTAProps) {
           47都道府県一覧
         </Link>
         <span>|</span>
-        <Link href="/" className="flex items-center gap-1 hover:text-white hover:underline">
+        <Link href="/reverse" className="flex items-center gap-1 hover:text-white hover:underline">
           <Target className="h-3 w-3" />
           志望校から逆算
         </Link>
