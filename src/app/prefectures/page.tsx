@@ -62,6 +62,9 @@ export default function PrefecturesPage() {
           <p className="mt-2 text-slate-600">
             47都道府県すべての内申点計算方法に対応。お住まいの地域を選んで計算できます。
           </p>
+          <div className="mt-2 inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700 ring-1 ring-emerald-100">
+            2026年度入試対応（令和8年度入学者選抜）
+          </div>
         </header>
 
         {/* Search & Filter */}
