@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next';
 import { PREFECTURES } from '@/lib/prefectures';
 import { getAllPosts } from '@/lib/blog-data';
 
-const BASE_URL = 'https://my-naishin.com';
+const BASE_URL = 'https://my-naishin.vercel.app';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date().toISOString();
@@ -22,7 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   // 47都道府県ページ
-  const prefecturePages: MetadataRoute.Sitemap = PREFECTURES.map((pref) => ({
+  const prefecturePages = PREFECTURES.map((pref) => ({
     url: `${BASE_URL}/${pref.code}/naishin`,
     lastModified: pref.lastVerified ?? now,
     changeFrequency: 'monthly' as const,
@@ -31,7 +31,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // ブログ記事
   const posts = getAllPosts();
-  const blogPages: MetadataRoute.Sitemap = posts.map((post) => ({
+  const blogPages = posts.map((post) => ({
     url: `${BASE_URL}/blog/${post.slug}`,
     lastModified: post.lastUpdated ?? post.date,
     changeFrequency: 'monthly' as const,
