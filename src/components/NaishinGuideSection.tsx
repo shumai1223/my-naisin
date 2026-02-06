@@ -9,19 +9,19 @@ import { getPrefectureByCode } from '@/lib/prefectures';
 const FAQ_ITEMS = [
   {
     question: '内申点とは何ですか？',
-    answer: '内申点（調査書点）とは、中学校での各教科の成績を点数化したものです。通知表の5段階評価をもとに計算され、高校入試の合否判定に使用されます。一般的には9教科×5点＝45点満点で計算されますが、都道府県や高校によって計算方法が異なります。'
+    answer: '内申点（調査書点）とは、中学校での各教科の成績を点数化したものです。通知表の5段階評価をもとに計算され、高校入試の合否判定に使用されます。計算方法は地域・方式で大きく異なり、満点も45点〜450点以上まで様々です。詳しくは<a href="https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/exam/index.html" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">東京都教育委員会</a>や<a href="https://www.pref.kanagawa.jp/docs/dc4/nyusen/nyusen.html" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">神奈川県教育委員会</a>の公式要綱でご確認ください。'
   },
   {
     question: '内申点はいつの成績が使われますか？',
-    answer: '都道府県によって異なります。東京都は中学3年生の成績のみ、神奈川県は中学2年と3年の成績、埼玉県は中学1年から3年までの成績が使われます。お住まいの地域の教育委員会のホームページで確認することをおすすめします。'
+    answer: '対象学年は地域・方式で比率が大きく異なります。例：東京都は中学3年生のみ（<a href="https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/exam/index.html" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">公式要綱参照</a>）、神奈川県は中学2・3年、埼玉県は中学1〜3年など。お住まいの地域の教育委員会で最新の要綱をご確認ください。'
   },
   {
     question: '内申点を上げるにはどうすればいいですか？',
-    answer: '内申点を上げるポイントは3つあります。①定期テストで高得点を取る、②提出物を期限内に丁寧に仕上げる、③授業に積極的に参加する。特に「主体的に学習に取り組む態度」の評価は、テストの点数に関係なく改善できる部分です。'
+    answer: '内申点を上げるポイントは3つあります。①定期テストで高得点を取る、②提出物を期限内に丁寧に仕上げる、③授業に積極的に参加する。特に「主体的に学習に取り組む態度」の評価は、テストの点数に関係なく改善できる部分です。評価基準は学校によって異なる場合がありますので、在籍校の先生にご確認ください。'
   },
   {
     question: '実技4教科の内申点は重要ですか？',
-    answer: '非常に重要です。東京都の場合、実技4教科（音楽・美術・保健体育・技術家庭）の評定は2倍で計算されます。つまり実技教科で1点上げると、換算後は2点分の価値があります。実技教科を軽視せず、しっかり取り組みましょう。'
+    answer: '実技4教科の重要性は地域によって大きく異なります。東京都では実技4教科が2倍で計算され（<a href="https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/exam/index.html" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">公式要綱第3章</a>）、1点上げると換算後2点分の価値があります。一方、等倍で計算する地域もあります。お住まいの地域の計算方式を確認し、戦略的に取り組みましょう。'
   }
 ];
 
@@ -29,14 +29,14 @@ const GUIDE_CARDS = [
   {
     icon: Calculator,
     title: '内申点の計算方法',
-    summary: '9教科の5段階評価を合計して算出します。都道府県により倍率や対象学年が異なります。',
-    detail: '例えば東京都では、5教科（国語・数学・英語・理科・社会）はそのまま、実技4教科（音楽・美術・保体・技家）は2倍して計算する「換算内申」方式を採用しており、5教科×5点＋4教科×5点×2＝65点満点となります。神奈川県は中2・中3の成績を使用し135点満点、大阪府は450点満点など、地域により大きく異なります。'
+    summary: '9教科の5段階評価を合計して算出します。地域・方式で比率が大きく異なります。',
+    detail: '計算方式は地域によって大きく異なります。例：東京都は実技4教科が2倍の「換算内申」方式（<a href="https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/exam/index.html" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">公式要綱参照</a>）、神奈川県は中2・3年の成績を使用、大阪府は450点満点など。満点も45点〜450点以上まで様々です。'
   },
   {
     icon: GraduationCap,
     title: '高校受験での活用',
     summary: '入試の合否は「内申点」と「当日の学力検査」の合計で決まります。',
-    detail: '多くの高校では、内申点と当日の試験結果を一定の比率で合算して合否を決定します。例えば東京都立高校では、内申点300点＋学力検査700点＝1000点満点（7:3換算）で判定されます。さらに、ESAT-J（英語スピーキングテスト）の結果20点を加えて1020点満点として扱う説明も一般的です。内申点が高ければ、当日の試験で多少失敗しても挽回できる可能性があります。'
+    detail: '配点比率は地域・高校・入試方式で大きく異なります。例：東京都立高校は内申:学力＝300:700（<a href="https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/exam/index.html" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">公式要綱第4章</a>）、神奈川県はS値方式など。志望校の募集要項で必ず確認してください。'
   }
 ];
 

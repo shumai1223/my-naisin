@@ -132,6 +132,88 @@ export default function AboutPage() {
             </div>
           </div>
 
+          {/* 検証のやり方 */}
+          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
+              <Shield className="h-5 w-5 text-emerald-500" />
+              検証のやり方
+            </h2>
+            
+            <div className="space-y-4">
+              <div>
+                <h3 className="mb-2 text-sm font-bold text-slate-700">参照資料の種類</h3>
+                <ul className="space-y-2 text-sm leading-relaxed text-slate-600">
+                  <li className="flex gap-2">
+                    <span className="text-emerald-500">•</span>
+                    <div>
+                      <strong>入学者選抜実施要綱</strong> - 各都道府県教育委員会が毎年発行
+                      <div className="mt-1 text-xs text-slate-400">例：東京都「令和8年度東京都立高等学校入学者選抜実施要綱」第3章第2節「調査書の取扱い」</div>
+                    </div>
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="text-emerald-500">•</span>
+                    <div>
+                      <strong>配点表・内申点算出方法</strong> - 要綱別表や付録資料
+                      <div className="mt-1 text-xs text-slate-400">例：神奈川県「中学校の評定平均値の算出方法」PDF第2ページ「評定平均値の算出式」</div>
+                    </div>
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="text-emerald-500">•</span>
+                    <div>
+                      <strong>年度情報</strong> - 2026年度入試（令和8年度）対応
+                      <div className="mt-1 text-xs text-slate-400">URL：各県教育委員会公式サイトの入試情報ページ（例：https://www.kyoiku.metro.tokyo.lg.jp/admission/）</div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+
+              <div>
+                <h3 className="mb-2 text-sm font-bold text-slate-700">反映ルール</h3>
+                <ul className="space-y-2 text-sm leading-relaxed text-slate-600">
+                  <li className="flex gap-2">
+                    <span className="text-emerald-500">•</span>
+                    <strong>毎年6〜8月：</strong>47都道府県の要綱を一斉チェック。変更があった県は即座に反映
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="text-emerald-500">•</span>
+                    <strong>随時更新：</strong>教育委員会の公式発表や制度改正があった場合は48時間以内に確認・反映
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="text-emerald-500">•</span>
+                    <strong>バージョン管理：</strong>変更履歴をトップページに記録し、透明性を確保
+                  </li>
+                </ul>
+              </div>
+
+              <div>
+                <h3 className="mb-2 text-sm font-bold text-slate-700">誤り報告→修正のフロー</h3>
+                <div className="rounded-lg border border-blue-200 bg-blue-50 p-3">
+                  <ol className="space-y-2 text-sm leading-relaxed text-blue-800">
+                    <li className="flex gap-2">
+                      <span className="font-bold text-blue-600">1.</span>
+                      <span>ユーザーからお問い合わせフォームで誤り報告（具体的なPDF名・ページ番号・数値を記載）</span>
+                    </li>
+                    <li className="flex gap-2">
+                      <span className="font-bold text-blue-600">2.</span>
+                      <span>運営者が24時間以内に該当公式資料を確認（PDFダウンロード・該当ページ照合）</span>
+                    </li>
+                    <li className="flex gap-2">
+                      <span className="font-bold text-blue-600">3.</span>
+                      <span>誤りが確認された場合、48時間以内にサイトデータを修正</span>
+                    </li>
+                    <li className="flex gap-2">
+                      <span className="font-bold text-blue-600">4.</span>
+                      <span>修正内容をトップページの更新履歴に記録し、報告者に回答</span>
+                    </li>
+                  </ol>
+                </div>
+                <div className="mt-2 text-xs text-slate-500">
+                  具体例：「大阪府の内申点満点が450点ではなく440点になっている」との報告→「令和8年度大阪府立高等学校入学者選抜要綱」第5章別表第2を確認→修正
+                </div>
+              </div>
+            </div>
+          </div>
+
           {/* 参考資料 */}
           <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">

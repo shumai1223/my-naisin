@@ -104,6 +104,70 @@ export default function ReversePage() {
                 </div>
               </section>
 
+              {/* サンプル計算結果（SSR表示） */}
+              <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                <h2 className="mb-4 text-lg font-bold text-slate-800">計算例：東京都立高校を目指す場合</h2>
+                <div className="space-y-4">
+                  <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
+                    <h3 className="mb-3 text-sm font-bold text-slate-700">入力例</h3>
+                    <div className="grid gap-2 text-sm text-slate-600">
+                      <div className="flex justify-between">
+                        <span>都道府県：</span>
+                        <span className="font-medium">東京都</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>現在の内申点：</span>
+                        <span className="font-medium">300点 / 390点</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>配点比率：</span>
+                        <span className="font-medium">内申:学力 = 300:700</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>当日点満点：</span>
+                        <span className="font-medium">700点</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>目標合計点：</span>
+                        <span className="font-medium">720点</span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="rounded-lg border border-emerald-200 bg-emerald-50 p-4">
+                    <h3 className="mb-3 text-sm font-bold text-emerald-700">計算結果</h3>
+                    <div className="space-y-2 text-sm text-emerald-600">
+                      <div className="flex justify-between">
+                        <span>必要な当日点：</span>
+                        <span className="font-bold text-emerald-800">600点 / 700点</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>必要得点率：</span>
+                        <span className="font-bold text-emerald-800">約86%</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>5教科平均：</span>
+                        <span className="font-bold text-emerald-800">約120点 / 140点</span>
+                      </div>
+                    </div>
+                    <div className="mt-3 rounded-lg border border-emerald-300 bg-emerald-100 p-3">
+                      <p className="text-xs text-emerald-700">
+                        <strong>計算式：</strong> (720点 - 300点×0.3) ÷ 0.7 = 600点
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="rounded-lg border border-blue-200 bg-blue-50 p-4">
+                    <h3 className="mb-2 text-sm font-bold text-blue-700">解説</h3>
+                    <p className="text-xs text-blue-600">
+                      東京都立高校の場合、内申点300点は評価の高いレベルです。
+                      当日の学力検査で86%程度の得点率を確保できれば、合格の可能性が高いと判断できます。
+                      各教科140点満点に対し、120点前後の得点が目標となります。
+                    </p>
+                  </div>
+                </div>
+              </section>
+
               <ReverseCalculator 
                 onBack={() => window.location.href = '/'} 
               />
