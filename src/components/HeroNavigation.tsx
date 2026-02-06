@@ -34,6 +34,7 @@ const navigationOptions = [
     borderColor: 'border-emerald-200',
     badge: '目標設定',
     badgeColor: 'bg-emerald-100 text-emerald-700',
+    href: '/reverse',
   },
   {
     id: 'learn' as const,
@@ -45,6 +46,7 @@ const navigationOptions = [
     borderColor: 'border-amber-200',
     badge: '47都道府県対応',
     badgeColor: 'bg-amber-100 text-amber-700',
+    href: '/prefectures',
   },
 ];
 
@@ -74,12 +76,17 @@ export function HeroNavigation({ onModeChange, currentMode }: HeroNavigationProp
             transition={{ delay: index * 0.1, duration: 0.3 }}
           >
             <Link
-              href="#calculator"
-              onClick={() => {
+              href={option.href ?? '#calculator'}
+              onClick={(e) => {
+                if (!option.href) {
+                  e.preventDefault();
+                }
                 onModeChange(option.id);
-                setTimeout(() => {
-                  document.getElementById('calculator')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }, 50);
+                if (!option.href) {
+                  setTimeout(() => {
+                    document.getElementById('calculator')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }, 50);
+                }
               }}
               className={`group relative block w-full overflow-hidden rounded-2xl border-2 ${option.borderColor} bg-gradient-to-br ${option.bgGradient} p-5 text-left shadow-sm transition-all duration-300 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98]`}
             >

@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Heart, FileText, Shield, Mail, AlertTriangle, Sparkles, BookOpen, User } from 'lucide-react';
+import { Heart, FileText, Shield, Mail, AlertTriangle, Sparkles, BookOpen, User, Target, MapPin } from 'lucide-react';
 
 import { APP_NAME } from '@/lib/constants';
 
@@ -67,6 +67,27 @@ export function Footer() {
           <div>
             <div className="text-xs font-bold uppercase tracking-wider text-slate-400">リンク</div>
             <div className="mt-3 flex flex-wrap gap-2">
+              <Link 
+                href="/reverse" 
+                className="flex items-center gap-1.5 rounded-full bg-emerald-100 px-3 py-1.5 text-xs font-medium text-emerald-700 transition-all hover:bg-emerald-200"
+              >
+                <Target className="h-3 w-3" />
+                志望校から逆算
+              </Link>
+              <Link 
+                href="/prefectures" 
+                className="flex items-center gap-1.5 rounded-full bg-indigo-100 px-3 py-1.5 text-xs font-medium text-indigo-700 transition-all hover:bg-indigo-200"
+              >
+                <MapPin className="h-3 w-3" />
+                都道府県一覧
+              </Link>
+              <Link 
+                href="/glossary" 
+                className="flex items-center gap-1.5 rounded-full bg-amber-100 px-3 py-1.5 text-xs font-medium text-amber-700 transition-all hover:bg-amber-200"
+              >
+                <BookOpen className="h-3 w-3" />
+                用語辞典
+              </Link>
               <Link 
                 href="/blog" 
                 className="flex items-center gap-1.5 rounded-full bg-blue-100 px-3 py-1.5 text-xs font-medium text-blue-700 transition-all hover:bg-blue-200"

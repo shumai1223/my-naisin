@@ -733,29 +733,43 @@ export default function PrefectureNaishinPage() {
               </p>
             </section>
 
-            {/* 関連リンク */}
+            {/* 関連リンク（県名入り） */}
             <section className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
-              <h2 className="mb-4 text-lg font-bold text-slate-800">関連コンテンツ</h2>
+              <h2 className="mb-4 text-lg font-bold text-slate-800">{prefecture.name}の関連コンテンツ</h2>
               <div className="grid gap-3 sm:grid-cols-2">
+                <Link
+                  href={`/reverse?pref=${prefectureCode}`}
+                  className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow"
+                >
+                  <span className="text-sm font-medium text-slate-700">{prefecture.name}：内申と当日点の逆算</span>
+                  <ChevronRight className="h-4 w-4 text-slate-400" />
+                </Link>
                 <Link
                   href="/blog/naishinten-calculation-by-prefecture"
                   className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow"
                 >
-                  <span className="text-sm font-medium text-slate-700">都道府県別の計算方法を比較</span>
+                  <span className="text-sm font-medium text-slate-700">{prefecture.name}：他県との計算方法を比較</span>
                   <ChevronRight className="h-4 w-4 text-slate-400" />
                 </Link>
                 <Link
-                  href="/blog/improve-grades-from-all-3"
+                  href="/blog/jitsugi-kyoka-prefecture-comparison"
                   className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow"
                 >
-                  <span className="text-sm font-medium text-slate-700">内申点を上げる方法15選</span>
+                  <span className="text-sm font-medium text-slate-700">{prefecture.name}：副教科{prefecture.practicalMultiplier > 1 ? `は${prefecture.practicalMultiplier}倍で有利` : 'は等倍'}？</span>
                   <ChevronRight className="h-4 w-4 text-slate-400" />
                 </Link>
                 <Link
-                  href="/blog/practical-subjects-naishin-strategy"
+                  href="/glossary"
                   className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow"
                 >
-                  <span className="text-sm font-medium text-slate-700">実技4教科の内申点対策</span>
+                  <span className="text-sm font-medium text-slate-700">用語辞典（素内申・換算内申・K値など）</span>
+                  <ChevronRight className="h-4 w-4 text-slate-400" />
+                </Link>
+                <Link
+                  href="/prefectures"
+                  className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow"
+                >
+                  <span className="text-sm font-medium text-slate-700">他の都道府県の内申点計算を見る</span>
                   <ChevronRight className="h-4 w-4 text-slate-400" />
                 </Link>
                 <Link
