@@ -107,15 +107,19 @@ export default function AboutPage() {
               <ul className="mt-2 space-y-2">
                 <li className="flex gap-2">
                   <span className="text-blue-500">•</span>
-                  <span>各都道府県の教育委員会が公開する入学者選抜実施要綱を参照</span>
+                  <span><strong>毎年6〜8月：</strong>47都道府県の入学者選抜実施要綱を一斉点検し、変更があった県は即座に反映</span>
                 </li>
                 <li className="flex gap-2">
                   <span className="text-blue-500">•</span>
-                  <span>年度切替時（毎年4月頃）に主要都道府県の情報を優先的に確認・更新</span>
+                  <span><strong>随時：</strong>教育委員会の公式発表や制度改正があった場合は都度確認・更新</span>
                 </li>
                 <li className="flex gap-2">
                   <span className="text-blue-500">•</span>
-                  <span>ユーザーからの指摘があった場合は速やかに確認・修正</span>
+                  <span><strong>差分記録：</strong>変更があった県はトップページの更新履歴に記録し、透明性を確保</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-blue-500">•</span>
+                  <span><strong>ユーザー報告：</strong>お問い合わせフォームから情報の誤りをご指摘いただいた場合、原則48時間以内に確認・修正</span>
                 </li>
               </ul>
             </div>

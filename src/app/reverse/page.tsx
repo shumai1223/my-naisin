@@ -7,6 +7,8 @@ import { Home, ChevronRight, Target, HelpCircle, AlertTriangle, CheckCircle } fr
 
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
+import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
+import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 
 const ReverseCalculator = nextDynamic(
   () => import('@/components/Calculator/ReverseCalculator').then((mod) => mod.ReverseCalculator),
@@ -16,6 +18,17 @@ const ReverseCalculator = nextDynamic(
 export default function ReversePage() {
   return (
     <div className="min-h-screen">
+      <WebApplicationSchema
+        name="志望校から逆算｜内申点シミュレーター | My Naishin"
+        description="志望校に合格するには当日何点必要？内申点と配点比率から必要な学力検査点を逆算。東京都1020点・神奈川S値にも対応。"
+        url="https://my-naishin.com/reverse"
+      />
+      <BreadcrumbSchema
+        items={[
+          { name: 'ホーム', url: 'https://my-naishin.com/' },
+          { name: '志望校から逆算', url: 'https://my-naishin.com/reverse' },
+        ]}
+      />
       <div className="mx-auto max-w-7xl px-4 py-6 lg:px-8">
         <div className="mx-auto max-w-4xl">
           <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl">

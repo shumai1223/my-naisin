@@ -4,6 +4,8 @@ import { Calendar, Clock, ChevronLeft, ChevronRight, BookOpen, Home, User, FileC
 
 import { getPostBySlug, getAllPosts } from '@/lib/blog-data';
 import { BlogCTA } from '@/components/BlogCTA';
+import { BlogPostingSchema } from '@/components/StructuredData/BlogPostingSchema';
+import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -78,6 +80,22 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <BlogPostingSchema
+        title={post.title}
+        description={post.description}
+        url={`https://my-naishin.com/blog/${post.slug}`}
+        datePublished={post.date}
+        dateModified={post.lastUpdated}
+        author={post.author ?? 'My Naishin'}
+        tags={post.tags}
+      />
+      <BreadcrumbSchema
+        items={[
+          { name: 'ホーム', url: 'https://my-naishin.com/' },
+          { name: 'コラム', url: 'https://my-naishin.com/blog' },
+          { name: post.title, url: `https://my-naishin.com/blog/${post.slug}` },
+        ]}
+      />
       <div className="mx-auto max-w-3xl px-4 py-8">
         {/* Breadcrumb */}
         <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">

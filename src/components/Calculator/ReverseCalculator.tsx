@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { useSearchParams } from 'next/navigation';
-import { Target, Calculator, Info, ArrowLeft, ChevronDown, ExternalLink } from 'lucide-react';
+import { Target, Calculator, Info, ArrowLeft, ChevronDown, ExternalLink, Copy, Check } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 import { PREFECTURES, getPrefectureByCode } from '@/lib/prefectures';
@@ -42,6 +42,8 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
   const [examMaxScore, setExamMaxScore] = React.useState<number>(500);
   const [result, setResult] = React.useState<ReverseResult | null>(null);
   const [tokyoKansoNaishin, setTokyoKansoNaishin] = React.useState<number>(45);
+  const [copied, setCopied] = React.useState(false);
+  const [validationError, setValidationError] = React.useState<string | null>(null);
 
   const prefecture = React.useMemo(() => getPrefectureByCode(prefectureCode), [prefectureCode]);
   const naishinMax = React.useMemo(() => calculateMaxScore(prefectureCode), [prefectureCode]);
@@ -78,6 +80,25 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
   }, [initialRatio]);
 
   const calculate = React.useCallback(() => {
+    setValidationError(null);
+
+    if (currentNaishin < 0 || currentNaishin > naishinMax) {
+      setValidationError(`内申点は0〜${naishinMax}の範囲で入力してください。`);
+      return;
+    }
+    if (naishinRatio < 0 || naishinRatio > 100) {
+      setValidationError('内申比率は0〜100%の範囲で入力してください。');
+      return;
+    }
+    if (examMaxScore < 1) {
+      setValidationError('当日点の満点は1以上で入力してください。');
+      return;
+    }
+    if (targetTotalScore < 0) {
+      setValidationError('目標合計点は0以上で入力してください。');
+      return;
+    }
+
     const examRatio = 100 - naishinRatio;
     const totalMaxScore = (naishinMax * (naishinRatio / 100)) + (examMaxScore * (examRatio / 100));
     const naishinContribution = currentNaishin * (naishinRatio / 100);
@@ -323,6 +344,12 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
               </div>
             </div>
 
+            {validationError && (
+              <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-2 text-sm font-medium text-red-700">
+                {validationError}
+              </div>
+            )}
+
             <Button
               onClick={calculate}
               leftIcon={<Calculator className="h-4 w-4" />}
@@ -376,7 +403,30 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
                 </p>
               </div>
 
-              <div className="mt-4 text-xs text-slate-500">
+              {/* 計算式（簡易） */}
+              <div className="mt-4 rounded-xl border border-slate-200 bg-slate-50 p-4">
+                <div className="text-xs font-bold text-slate-600">計算式</div>
+                <code className="mt-1 block text-xs leading-relaxed text-slate-500">
+                  目標合計点 {targetTotalScore} − 内申寄与分（{currentNaishin} × {naishinRatio}%）＝ 当日点寄与分 → 必要当日点 {result.requiredExamScore}/{result.examMaxScore}（{result.examPercent}%）
+                </code>
+              </div>
+
+              {/* コピーボタン */}
+              <button
+                onClick={() => {
+                  const text = `必要当日点：${result.requiredExamScore}/${result.examMaxScore}（${result.examPercent}%）／1教科平均：${result.perSubjectScore}点`;
+                  navigator.clipboard.writeText(text).then(() => {
+                    setCopied(true);
+                    setTimeout(() => setCopied(false), 2000);
+                  });
+                }}
+                className="mt-3 inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-medium text-slate-600 shadow-sm hover:bg-slate-50 transition-colors"
+              >
+                {copied ? <Check className="h-3.5 w-3.5 text-emerald-500" /> : <Copy className="h-3.5 w-3.5" />}
+                {copied ? 'コピーしました' : '結果をコピー'}
+              </button>
+
+              <div className="mt-3 text-xs text-slate-500">
                 ※ この計算は目安です。実際の配点は志望校・入試方式によって異なります。
               </div>
             </div>

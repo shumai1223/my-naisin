@@ -56,6 +56,8 @@ import { PrintButton } from '@/components/PrintButton';
 import { BlogSection } from '@/components/BlogSection';
 import { NaishinGuideSection } from '@/components/NaishinGuideSection';
 import { TokyoExtendedCalculator } from '@/components/Calculator/TokyoExtendedCalculator';
+import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
+import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 
 function popConfetti() {
   confetti({
@@ -227,6 +229,12 @@ export default function Page() {
 
   return (
     <div id="top" className="min-h-screen">
+      <WebApplicationSchema
+        name="内申点シミュレーター | My Naishin"
+        description="全国47都道府県の内申点計算に対応。成績を入力するだけで内申点を自動計算。志望校からの逆算機能つき。"
+        url="https://my-naishin.com"
+      />
+      <BreadcrumbSchema items={[{ name: 'ホーム', url: 'https://my-naishin.com/' }]} />
       <div className="mx-auto max-w-7xl px-4 py-6 lg:px-8">
         <div className="mx-auto max-w-4xl">
           {/* Main Content */}

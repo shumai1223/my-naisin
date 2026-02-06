@@ -4,8 +4,26 @@ import { BookOpen, Calendar, Clock, ChevronRight, Sparkles } from 'lucide-react'
 import { getAllPosts } from '@/lib/blog-data';
 
 export const metadata = {
-  title: '内申点コラム | My Naishin - 高校受験ガイド',
-  description: '内申点の計算方法、成績の上げ方、都道府県別の違いなど、高校受験に役立つ情報を発信しています。',
+  title: '内申点コラム（高校受験ガイド）| My Naishin',
+  description:
+    '内申点の計算方法、成績の上げ方、都道府県別の違い、推薦入試と一般入試の比較など、高校受験に役立つ情報を発信。中学生・保護者向け。',
+  openGraph: {
+    title: '内申点コラム（高校受験ガイド）| My Naishin',
+    description:
+      '内申点の計算方法、成績の上げ方、都道府県別の違いなど、高校受験に役立つ情報を発信。',
+    type: 'website' as const,
+    locale: 'ja_JP',
+    siteName: 'My Naishin - 内申点計算ツール',
+  },
+  twitter: {
+    card: 'summary_large_image' as const,
+    title: '内申点コラム（高校受験ガイド）| My Naishin',
+    description:
+      '内申点の計算方法、成績の上げ方、都道府県別の違いなど、高校受験に役立つ情報を発信。',
+  },
+  alternates: {
+    canonical: 'https://my-naishin.com/blog',
+  },
 };
 
 export default function BlogPage() {
