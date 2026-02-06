@@ -248,8 +248,8 @@ export default function DisclaimerPage() {
           <section>
             <h2 className="mb-3 text-lg font-bold text-slate-800">7. 広告について</h2>
             <p className="text-sm leading-relaxed text-slate-600">
-              当サイトでは、運営費用の一部を賄うため、Google AdSenseやAmazonアソシエイト等の
-              広告配信サービスを利用しています。
+              当サイトでは、運営費用の一部を賄うため、将来的にGoogle AdSenseやAmazonアソシエイト等の
+              広告配信サービスを利用する場合があります。
             </p>
             <ul className="mt-3 space-y-2 text-sm leading-relaxed text-slate-600">
               <li className="flex gap-2">
