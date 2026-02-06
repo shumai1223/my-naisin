@@ -24,7 +24,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: '15分',
     tags: ['内申点', '計算方法', '都道府県別'],
     lastUpdated: '2026-01-30',
-    author: 'My Naishin編集部',
+    author: '運営者（My Naishin）',
     sources: [
       { name: '東京都教育委員会', url: 'https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/exam/' },
       { name: '神奈川県教育委員会', url: 'https://www.pref.kanagawa.jp/docs/dc4/nyusen/nyusen.html' },
@@ -1098,7 +1098,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: '10分',
     tags: ['東京都', '換算内申', '都立高校', '入試'],
     lastUpdated: '2026-01-30',
-    author: 'My Naishin編集部',
+    author: '運営者（My Naishin）',
     sources: [
       { name: '東京都教育委員会 入学者選抜', url: 'https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/exam/' },
       { name: '令和8年度入学者選抜実施要綱', url: 'https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/exam/release20240913_01.html' }
@@ -1522,7 +1522,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: '10分',
     tags: ['換算内申', '素内申', '東京都', '計算方法'],
     lastUpdated: '2026-01-30',
-    author: 'My Naishin編集部',
+    author: '運営者（My Naishin）',
     sources: [
       { name: '東京都教育委員会', url: 'https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/exam/' }
     ],
@@ -1664,7 +1664,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: '12分',
     tags: ['推薦入試', '一般入試', '内申点', '入試制度'],
     lastUpdated: '2026-01-30',
-    author: 'My Naishin編集部',
+    author: '運営者（My Naishin）',
     sources: [
       { name: '東京都教育委員会', url: 'https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/exam/' },
       { name: '文部科学省', url: 'https://www.mext.go.jp/' }
@@ -1823,7 +1823,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: '8分',
     tags: ['実技教科', '副教科', '都道府県比較', '傾斜配点'],
     lastUpdated: '2026-01-30',
-    author: 'My Naishin編集部',
+    author: '運営者（My Naishin）',
     sources: [
       { name: '各都道府県教育委員会公式サイト', url: '#' }
     ],

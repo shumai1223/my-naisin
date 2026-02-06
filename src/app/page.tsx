@@ -380,6 +380,10 @@ export default function Page() {
                       <div className="text-base font-bold text-slate-800">神奈川は学校別比率で決まる</div>
                       <div className="mt-1 text-sm text-slate-500">
                         内申:学力の比率は 4:6 / 5:5 / 3:7 など学校ごとに異なります。
+                        <span className="text-xs text-slate-400">（よくある例）</span>
+                      </div>
+                      <div className="mt-1 text-xs text-slate-400">
+                        学校・学科ごとに異なる（2:8〜8:2）。各2以上・合計10、特色検査は最大5。
                       </div>
                     </div>
                     <div className="p-6">

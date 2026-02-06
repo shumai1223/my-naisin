@@ -104,7 +104,7 @@ export default function TermsPage() {
           </section>
 
           <div className="rounded-xl bg-slate-50 p-4 text-center text-xs text-slate-500">
-            最終更新日: 2026年
+            最終更新日: 2026-02-06
           </div>
         </div>
       </div>

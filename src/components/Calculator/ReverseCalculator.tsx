@@ -287,7 +287,9 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
                       {ratio.replace('-', ':')}
                     </button>
                   ))}
-                  <span className="text-[11px] text-slate-400">※ f:g は合計10（2以上の整数）</span>
+                  <div className="w-full text-[11px] text-slate-400">
+                    ※ f:g は合計10（2以上の整数）。学校・学科ごとに異なる（2:8〜8:2）。特色検査は最大5。
+                  </div>
                 </div>
               )}
               <div className="grid gap-4 md:grid-cols-2">
