@@ -663,39 +663,16 @@ export default function PrefectureNaishinPage() {
               {prefectureCode === 'tokyo' && (
                 <div className="space-y-4 text-sm text-slate-700">
                   <div>
-                    <h4 className="mb-2 font-semibold text-slate-800">🎯 東京都の内申で間違えやすいポイント</h4>
-                    <ul className="ml-4 space-y-1 text-slate-600">
-                      <li>• <strong>素内申と換算内申の混同</strong>：素内申（45点）と換算内申（65点）は別物。高校入試で使われるのは換算内申です</li>
-                      <li>• <strong>実技2倍の影響</strong>：音楽・美術・保健体育・技術家庭で1点上げると、主要教科の2点上げと同じ効果があります</li>
-                      <li>• <strong>中3のみが対象</strong>：中1・中2の成績は使われませんが、基礎学力として重要です</li>
-                    </ul>
-                  </div>
-                  
-                  <div>
-                    <h4 className="mb-2 font-semibold text-slate-800">📊 具体例：オール3/オール4の場合</h4>
-                    <div className="rounded-lg bg-slate-50 p-3">
-                      <p>• <strong>オール3</strong>：5教科×3点＝15点、実技4教科×3点×2倍＝24点、<strong>合計39点/65点</strong></p>
-                      <p>• <strong>オール4</strong>：5教科×4点＝20点、実技4教科×4点×2倍＝32点、<strong>合計52点/65点</strong></p>
-                      <p className="mt-1 text-xs text-slate-500">※実技教科の重要性がおわかりいただけると思います</p>
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <h4 className="mb-2 font-semibold text-slate-800">⚖️ 内申点：当日点の一般的な比重</h4>
-                    <div className="rounded-lg bg-blue-50 p-3">
-                      <p><strong>内申点300点＋学力検査700点＋ESAT-J 20点＝1020点満点</strong></p>
-                      <p className="mt-1 text-xs text-slate-600">※高校によって比率が異なる場合があります。必ず志望校の募集要項でご確認ください</p>
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <h4 className="mb-2 font-semibold text-slate-800">📖 公式資料の読み方</h4>
-                    <div className="rounded-lg bg-amber-50 p-3">
-                      <p><strong>東京都教育委員会「都立高等学校入学者選抜要綱」</strong></p>
-                      <p className="mt-1 text-xs text-slate-600">• 第3章：調査書点（内申点）の計算方法</p>
-                      <p className="text-xs text-slate-600">• 第4章：学力検査との配点比率</p>
-                      <p className="text-xs text-slate-600">• 検索キーワード：「換算内申」「実技教科 倍率」</p>
-                    </div>
+                    <h4 className="mb-2 font-semibold text-slate-800">🎯 東京都の内申ポイント</h4>
+                    <p className="text-slate-600">
+                      東京都の内申は、まず「素内申（9教科の合計＝45点満点）」と、一般入試で使う「換算内申」を分けて考えるのがコツです。換算内申は、学力検査を行う教科の評定を1倍、学力検査を行わない教科の評定を2倍として合計します。都立の一般的な5教科入試では満点が65点（＝5教科25点＋実技4教科40点）になり、実技4教科の影響が大きくなります。
+                    </p>
+                    <p className="mt-2 text-slate-600">
+                      例えばオール3なら換算内申は39点、オール4なら52点です（5教科＋実技4教科×2）。また都立高校（全日制の多く）では、学力検査700点＋調査書点300点に加えて、英語スピーキングテスト（ESAT-J）を20点として扱う学校があり、合計の枠組みを知っておくと「逆算」がやりやすくなります。
+                    </p>
+                    <p className="mt-2 text-slate-600">
+                      公式資料を見るときは「調査書点の満点（65など）」と「評定の扱い（1倍/2倍）」の行を最初に探すのがおすすめです。
+                    </p>
                   </div>
                 </div>
               )}
@@ -704,39 +681,16 @@ export default function PrefectureNaishinPage() {
               {prefectureCode === 'kanagawa' && (
                 <div className="space-y-4 text-sm text-slate-700">
                   <div>
-                    <h4 className="mb-2 font-semibold text-slate-800">🎯 神奈川県の内申で間違えやすいポイント</h4>
-                    <ul className="ml-4 space-y-1 text-slate-600">
-                      <li>• <strong>A値とS値の混同</strong>：A値は内申点、S値は学力検査の得点。学校ごとの比率が重要です</li>
-                      <li>• <strong>中3が2倍</strong>：中3の成績を1点上げると2点分の価値があります。中2のうちから準備を</li>
-                      <li>• <strong>特色検査の存在</strong>：一部高校で実施される追加検査。内申点・学力検査に加えて評価されます</li>
-                    </ul>
-                  </div>
-                  
-                  <div>
-                    <h4 className="mb-2 font-semibold text-slate-800">📊 具体例：中2オール3・中3オール4の場合</h4>
-                    <div className="rounded-lg bg-slate-50 p-3">
-                      <p>• <strong>中2</strong>：9教科×3点＝27点</p>
-                      <p>• <strong>中3</strong>：9教科×4点×2倍＝72点</p>
-                      <p>• <strong>合計99点/135点</strong>（達成率73%）</p>
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <h4 className="mb-2 font-semibold text-slate-800">⚖️ 内申点：当日点の一般的な比重</h4>
-                    <div className="rounded-lg bg-blue-50 p-3">
-                      <p><strong>学校ごとに異なる</strong>：S値:A値＝6:4、5:5、4:6など</p>
-                      <p className="mt-1 text-xs text-slate-600">※全日制普通科では5:5が多いですが、進学校では学力重視の傾向があります</p>
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <h4 className="mb-2 font-semibold text-slate-800">📖 公式資料の読み方</h4>
-                    <div className="rounded-lg bg-amber-50 p-3">
-                      <p><strong>神奈川県教育委員会「公立高等学校入学者選抜実施要綱」</strong></p>
-                      <p className="mt-1 text-xs text-slate-600">• 第2章：選抜方法の基本方針</p>
-                      <p className="text-xs text-slate-600">• 各高校の募集要項：S値A値の比率確認</p>
-                      <p className="text-xs text-slate-600">• 検索キーワード：「S値 A値 比率」「特色検査 実施校」</p>
-                    </div>
+                    <h4 className="mb-2 font-semibold text-slate-800">🎯 神奈川県の内申ポイント</h4>
+                    <p className="text-slate-600">
+                      神奈川県は「中3が2倍」と覚えると一気に整理できます。公式の計算では、学習の記録（評定）は 中2の9教科合計＋中3の9教科合計×2（135点満点）をまず作り、これを100点満点に換算した値を使います。さらに学力検査（合計点を100点満点に換算）や、学校によっては特色検査（100点満点に換算）が加わり、学校ごとの比率で合計値S1（一次選考）を出します。
+                    </p>
+                    <p className="mt-2 text-slate-600">
+                      また二次選考では「主体的に学習に取り組む態度」の評価も使われ、A=3点/B=2点/C=1点として合計（27点満点）を100点に換算します。
+                    </p>
+                    <p className="mt-2 text-slate-600">
+                      よくネットで言う「A値・S値」は、この公式計算（a,b,c,d,S1/S2）を分かりやすく呼び替えた表現だと思ってOKです。自分の志望校が特色検査を実施するか、比率（内申:当日点:特色）が何かを、県の「選考基準」PDFで確認するのが最短ルートです。
+                    </p>
                   </div>
                 </div>
               )}
@@ -745,41 +699,19 @@ export default function PrefectureNaishinPage() {
               {prefectureCode === 'osaka' && (
                 <div className="space-y-4 text-sm text-slate-700">
                   <div>
-                    <h4 className="mb-2 font-semibold text-slate-800">🎯 大阪府の内申で間違えやすいポイント</h4>
-                    <ul className="ml-4 space-y-1 text-slate-600">
-                      <li>• <strong>学年比率1:2:6</strong>：中3の成績が6倍で計算され、合計450点満点になります</li>
-                      <li>• <strong>チャレンジテストの影響</strong>：府独自の統一テスト結果が評定に影響する可能性があります</li>
-                      <li>• <strong>中1・中2の重要性</strong>：40%を占めるため、早めからの対策が不可欠です</li>
-                    </ul>
-                  </div>
-                  
-                  <div>
-                    <h4 className="mb-2 font-semibold text-slate-800">📊 具体例：各学年オール4の場合</h4>
-                    <div className="rounded-lg bg-slate-50 p-3">
-                      <p>• <strong>中1</strong>：9教科×4点×1倍＝36点</p>
-                      <p>• <strong>中2</strong>：9教科×4点×2倍＝72点</p>
-                      <p>• <strong>中3</strong>：9教科×4点×6倍＝216点</p>
-                      <p>• <strong>合計324点/450点</strong>（達成率72%）</p>
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <h4 className="mb-2 font-semibold text-slate-800">⚖️ 内申点：当日点の一般的な比重</h4>
-                    <div className="rounded-lg bg-blue-50 p-3">
-                      <p><strong>文理学科</strong>：内申:当日＝5:5が多い</p>
-                      <p><strong>普通科</strong>：7:3〜6:4の範囲が一般的</p>
-                      <p className="mt-1 text-xs text-slate-600">※学科によって大きく異なるため、志望校の確認が必須です</p>
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <h4 className="mb-2 font-semibold text-slate-800">📖 公式資料の読み方</h4>
-                    <div className="rounded-lg bg-amber-50 p-3">
-                      <p><strong>大阪府教育庁「府立高等学校入学者選抜要項」</strong></p>
-                      <p className="mt-1 text-xs text-slate-600">• 第3章：調査書（内申点）の取扱い</p>
-                      <p className="text-xs text-slate-600">• チャレンジテスト実施要綱：評価方法の確認</p>
-                      <p className="text-xs text-slate-600">• 検索キーワード：「学年比率 1:2:6」「チャレンジテスト 評価」</p>
-                    </div>
+                    <h4 className="mb-2 font-semibold text-slate-800">🎯 大阪府の内申ポイント</h4>
+                    <p className="text-slate-600">
+                      大阪府の内申（調査書の評定）は「中3が一番重い」方式です。代表的な形だと、各教科の評定を（中3×3＋中2×1＋中1×1）で合計して25点満点にします（＝学年の重みは実質1:1:3）。
+                    </p>
+                    <p className="mt-2 text-slate-600">
+                      さらに入試の総合点は「学力検査の合計点」と「調査書評定の合計点」に対して、高校が選び教育委員会が決めた倍率（タイプ）をそれぞれ掛けて合計する、という考え方が基本です。
+                    </p>
+                    <p className="mt-2 text-slate-600">
+                      そしてチャレンジテストは「個人の内申を点数で決めるもの」ではなく、学校間で評定のつけ方に差が出すぎないように、府内統一ルールの検証に使われます（評定平均の範囲など）。ここを誤解されやすいので、県別ページでハッキリ書くと信頼が上がります。
+                    </p>
+                    <p className="mt-2 text-slate-600">
+                      文理学科か普通科かで対策の重点は変わりますが、まずは「自分の志望校の倍率タイプ」と「調査書評定の作り方」を公式PDFで確認するのが最短です。
+                    </p>
                   </div>
                 </div>
               )}
@@ -789,33 +721,12 @@ export default function PrefectureNaishinPage() {
                 <div className="space-y-4 text-sm text-slate-700">
                   <div>
                     <h4 className="mb-2 font-semibold text-slate-800">🎯 {prefecture.name}の内申ポイント</h4>
-                    <ul className="ml-4 space-y-1 text-slate-600">
-                      <li>• <strong>対象学年</strong>：中{prefecture.targetGrades.join('・')}の成績が対象です</li>
-                      <li>• <strong>実技教科の扱い</strong>：{prefecture.practicalMultiplier > 1 ? `${prefecture.practicalMultiplier}倍` : '等倍'}で計算されます</li>
-                      <li>• <strong>満点</strong>：{prefecture.maxScore}点満点での計算です</li>
-                    </ul>
-                  </div>
-                  
-                  <div>
-                    <h4 className="mb-2 font-semibold text-slate-800">📊 具体例：オール4の場合</h4>
-                    <div className="rounded-lg bg-slate-50 p-3">
-                      {prefecture.targetGrades.length === 1 && prefecture.targetGrades.includes(3) && (
-                        <p>9教科×4点{prefecture.practicalMultiplier > 1 ? `（実技${prefecture.practicalMultiplier}倍）` : ''}＝<strong>{4 * 9 + (prefecture.practicalMultiplier > 1 ? 4 * 4 * (prefecture.practicalMultiplier - 1) : 0)}点/{prefecture.maxScore}点</strong></p>
-                      )}
-                      {prefecture.targetGrades.length > 1 && (
-                        <p>各学年で9教科×4点を合計し、学年比率を適用して計算されます</p>
-                      )}
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <h4 className="mb-2 font-semibold text-slate-800">📖 公式資料の確認方法</h4>
-                    <div className="rounded-lg bg-amber-50 p-3">
-                      <p><strong>{prefecture.name}教育委員会の公式サイト</strong></p>
-                      <p className="mt-1 text-xs text-slate-600">• 「高等学校入学者選抜」関連のページを確認</p>
-                      <p className="text-xs text-slate-600">• 最新の要項やガイドラインをダウンロード</p>
-                      <p className="text-xs text-slate-600">• 不明点は直接問い合わせるのが確実です</p>
-                    </div>
+                    <p className="text-slate-600">
+                      この県の内申は、①どの学年の評定を使うか（中3だけ／中2も使う など）と、②実技教科の扱い（倍率があるか）、③当日点との比率（何：何）を押さえると迷いません。まずは県教育委員会の公式PDF（募集案内・実施要項など）で、「選考」「比率」「調査書点（内申点）」「換算」の語を探し、満点と計算式を確認します。
+                    </p>
+                    <p className="mt-2 text-slate-600">
+                      公式資料は年度で更新されることがあるため、このページでは参照元リンクと最終確認日もあわせて掲載しています。分からない点があれば、入力例（オール3/4など）で一度計算して、結果が直感とズレないか確認すると安全です。
+                    </p>
                   </div>
                 </div>
               )}

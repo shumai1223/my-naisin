@@ -16,20 +16,13 @@ export interface BlogPost {
 
 export const BLOG_POSTS: BlogPost[] = [
   {
-    slug: 'naishinten-complete-guide',
-    title: '【完全保存版】内申点ガイド：計算方法から上げ方まで徹底解説',
-    description: '内申点の基本から都道府県別の計算方法、成績アップ術まで完全網羅。推薦入試と一般入試の違い、よくある誤解、チェックリストも含めた最終回答。',
+    slug: 'naishin-guide',
+    title: '内申点ガイド｜推薦・一般の違い／都道府県別の計算／逆算／よくある誤解まで全部',
+    description: '内申点の仕組みを全国対応で解説。推薦と一般の違い、都道府県別の計算ルール、換算内申、当日点の逆算、よくある誤解とチェックリストまで1ページで。',
     date: '2025-01-15',
-    category: '内申点の基礎',
-    readTime: '25分',
-    tags: ['内申点', '計算方法', '都道府県別', '成績アップ', '入試制度'],
-    lastUpdated: '2026-01-30',
-    author: '運営者（My Naishin）',
-    sources: [
-      { name: '東京都教育委員会', url: 'https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/exam/' },
-      { name: '神奈川県教育委員会', url: 'https://www.pref.kanagawa.jp/docs/dc4/nyusen/nyusen.html' },
-      { name: '大阪府教育庁', url: 'https://www.pref.osaka.lg.jp/kotogakko/gakuji-g3/' }
-    ],
+    category: 'guide',
+    readTime: '25',
+    tags: ['内申点', '高校入試', '推薦入試', '一般入試', '都道府県別', '計算方法'],
     content: `
 <div class="lead">
 内申点についての<strong>すべての疑問</strong>をこの1記事で解決！計算方法から成績アップ術、推薦入試と一般入試の違い、都道府県別の特徴まで、受験生と保護者が必要とする情報を完全網羅しました。
