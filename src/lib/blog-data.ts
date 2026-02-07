@@ -140,6 +140,139 @@ export const BLOG_POSTS: BlogPost[] = [
 副教科を軽視すると大損します！</p>
 </div>
 
+### 🗺️ 都道府県別詳細ページ
+
+各都道府県の詳細な計算方法と特徴はこちらから確認できます：
+
+<div class="prefecture-grid">
+<div class="prefecture-item">
+<a href="/tokyo/naishin" class="prefecture-link">
+<h4>東京都</h4>
+<p class="max-score">65点満点</p>
+<span class="arrow">→</span>
+</a>
+</div>
+<div class="prefecture-item">
+<a href="/kanagawa/naishin" class="prefecture-link">
+<h4>神奈川県</h4>
+<p class="max-score">135点満点</p>
+<span class="arrow">→</span>
+</a>
+</div>
+<div class="prefecture-item">
+<a href="/osaka/naishin" class="prefecture-link">
+<h4>大阪府</h4>
+<p class="max-score">450点満点</p>
+<span class="arrow">→</span>
+</a>
+</div>
+<div class="prefecture-item">
+<a href="/aichi/naishin" class="prefecture-link">
+<h4>愛知県</h4>
+<p class="max-score">45点満点</p>
+<span class="arrow">→</span>
+</a>
+</div>
+<div class="prefecture-item">
+<a href="/fukuoka/naishin" class="prefecture-link">
+<h4>福岡県</h4>
+<p class="max-score">90点満点</p>
+<span class="arrow">→</span>
+</a>
+</div>
+<div class="prefecture-item">
+<a href="/saitama/naishin" class="prefecture-link">
+<h4>埼玉県</h4>
+<p class="max-score">135点満点</p>
+<span class="arrow">→</span>
+</a>
+</div>
+<div class="prefecture-item">
+<a href="/chiba/naishin" class="prefecture-link">
+<h4>千葉県</h4>
+<p class="max-score">135点満点</p>
+<span class="arrow">→</span>
+</a>
+</div>
+<div class="prefecture-item">
+<a href="/hyogo/naishin" class="prefecture-link">
+<h4>兵庫県</h4>
+<p class="max-score">250点満点</p>
+<span class="arrow">→</span>
+</a>
+</div>
+<div class="prefecture-item">
+<a href="/hokkaido/naishin" class="prefecture-link">
+<h4>北海道</h4>
+<p class="max-score">90点満点</p>
+<span class="arrow">→</span>
+</a>
+</div>
+<div class="prefecture-item">
+<a href="/prefectures" class="prefecture-link">
+<h4>その他全県</h4>
+<p class="max-score">一覧で確認</p>
+<span class="arrow">→</span>
+</a>
+</div>
+</div>
+
+<style>
+.prefecture-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.prefecture-item {
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  transition: all 0.2s;
+}
+
+.prefecture-item:hover {
+  border-color: #3b82f6;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.prefecture-link {
+  display: block;
+  padding: 1rem;
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+}
+
+.prefecture-link h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.prefecture-link .max-score {
+  margin: 0 0 0.5rem 0;
+  font-size: 0.875rem;
+  color: #64748b;
+}
+
+.prefecture-link .arrow {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  color: #3b82f6;
+  font-weight: bold;
+  transition: transform 0.2s;
+}
+
+.prefecture-item:hover .arrow {
+  transform: translateX(2px);
+}
+</style>
+
 ---
 
 ## 📝 【実践編】オール3から内申点を上げる方法
@@ -1993,8 +2126,8 @@ export const BLOG_POSTS: BlogPost[] = [
 </div>
 
 <div class="cta-box">
-<h3>🎯 あなたの県の内申点を計算してみよう！</h3>
-<p>My Naishinなら、都道府県を選ぶだけで対象学年・倍率が自動適用されます。</p>
+<h3>🎯 あなたの県の対象学年を確認！</h3>
+<p>My Naishinなら、都道府県を選ぶだけで対象学年が自動で適用されます。今すぐ試してみましょう！</p>
 </div>
     `
   },
@@ -2033,86 +2166,22 @@ export const BLOG_POSTS: BlogPost[] = [
 
 <h2>実技等倍（傾斜なし）の県</h2>
 <p>5教科も実技4教科も同じ扱いで計算する県です。</p>
-<p><strong>該当する主な都道府県：</strong>神奈川県・埼玉県・千葉県・大阪府・愛知県・北海道・福岡県 など多数</p>
-<p>等倍の県では、9教科すべてが同じ価値を持つため、特定の教科に偏らないバランスの良い成績が重要です。</p>
+<p><strong>該当する主な都道府県：</strong>神奈川県、大阪府、愛知県、福岡県 など</p>
+<p>等倍の県では、教科すべてが同じ価値を持つため、特定の教科に偏らないバランスの良い成績が重要です。</p>
 
 <h2>副教科対策のポイント</h2>
-<div class="summary-box">
+<div class="point-box">
 <ul>
-<li>倍率が高い県 → 実技教科を1点でも上げると大きな差に</li>
-<li>等倍の県 → 9教科バランスよく、苦手教科を作らない</li>
-<li>実技教科の評定アップには「授業態度」「提出物」「実技テスト」の3つが鍵</li>
-<li>自分の県の倍率を必ず確認し、戦略を立てよう</li>
+<li><strong>倍率が高い県</strong>：実技教科を1点でも上げると大きな差に</li>
+<li><strong>等倍の県</strong>：教科バランスよく、苦手教科を作らない</li>
+<li><strong>実技教科の評定アップ</strong>：授業態度・提出物・実技テストの3つが鍵</li>
+<li><strong>自分の県の倍率を必ず確認</strong>：戦略を立てよう</li>
 </ul>
 </div>
 
 <div class="cta-box">
 <h3>🎯 副教科の倍率を自動で計算！</h3>
 <p>My Naishinなら、都道府県を選ぶだけで副教科の傾斜配点が自動適用されます。実技を1点上げたらどうなるか試してみよう！</p>
-</div>
-    `
-  },
-  {
-    slug: 'suisen-ippan-naishin-difference',
-    title: '【徹底解説】推薦入試と一般入試で内申点の扱いはどう違う？',
-    description: '推薦入試と一般入試では内申点の比重が大きく異なります。推薦は内申重視、一般は当日点重視の傾向を都道府県の例とともに解説。',
-    date: '2026-02-06',
-    category: '入試制度',
-    readTime: '12分',
-    tags: ['内申点', '推薦入試', '一般入試', '高校受験', '入試制度'],
-    author: '運営者（My Naishin）',
-    sources: [
-      { name: '東京都教育委員会', url: 'https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/exam/' },
-      { name: '文部科学省', url: 'https://www.mext.go.jp/' },
-    ],
-    content: `
-<h2>推薦入試と一般入試の違い</h2>
-<p>公立高校の入試は、大きく<strong>推薦入試（推薦選抜）</strong>と<strong>一般入試（学力検査）</strong>に分かれます。どちらも内申点は使われますが、その比重が大きく異なります。</p>
-
-<h2>推薦入試での内申点の扱い</h2>
-<p>推薦入試では内申点が合否判定の中心となります。学力検査がない（または比重が小さい）ため、日頃の成績が非常に重要です。</p>
-<h3>東京都の推薦入試の場合</h3>
-<p>都立高校の推薦入試では、調査書点（内申点）＋面接＋小論文（または実技）で判定されます。学校によって配点は異なりますが、内申点の比重は50%前後が一般的です。</p>
-<h3>推薦入試で重視されるポイント</h3>
-<ul>
-<li><strong>評定平均</strong>：多くの高校で出願基準（例：「評定平均3.5以上」）が設けられている</li>
-<li><strong>特別活動</strong>：部活動、生徒会、ボランティアなどの記録</li>
-<li><strong>出欠状況</strong>：欠席日数が多いと不利になる場合がある</li>
-</ul>
-
-<h2>一般入試での内申点の扱い</h2>
-<p>一般入試では内申点と当日の学力検査の合計で合否が決まります。多くの県では当日点の比重が高くなります。</p>
-<h3>東京都の一般入試の場合</h3>
-<p>内申点300点＋学力検査700点＋ESAT-J 20点＝<strong>1020点満点</strong>。内申の比重は約29%です。</p>
-<h3>神奈川県の一般入試の場合</h3>
-<p>内申:学力:面接の比率は学校ごとに異なります（例：4:4:2、3:5:2など）。特色検査を実施する高校ではさらに比率が変わります。</p>
-
-<h2>内申点が特に重要な場面</h2>
-<div class="summary-box">
-<ul>
-<li><strong>推薦入試</strong>：内申点が合否の中心。出願基準を満たすことが大前提</li>
-<li><strong>一般入試のボーダーライン</strong>：当日点が同点の場合、内申点が高い方が有利</li>
-<li><strong>私立高校の併願優遇</strong>：内申点の基準を満たせば合格がほぼ確定する制度</li>
-</ul>
-</div>
-
-<h2>推薦と一般、どちらを目指すべき？</h2>
-<p>推薦入試は内申点が高い生徒に有利ですが、倍率が高い傾向があります。一般入試は当日の実力勝負ができる反面、内申が低いと不利になります。</p>
-<p><strong>おすすめの戦略：</strong>推薦の出願基準を満たすように内申を上げつつ、一般入試の学力もしっかり準備する「両にらみ」が最も安全です。</p>
-
-<h2>都道府県ごとの注意点</h2>
-<p>推薦入試の制度は都道府県によって名称も仕組みも異なります。</p>
-<ul>
-<li>東京都：推薦入試（1月下旬）→ 一般入試（2月下旬）</li>
-<li>神奈川県：共通選抜のみ（推薦制度は廃止済み）</li>
-<li>大阪府：特別選抜（2月）→ 一般選抜（3月）</li>
-<li>埼玉県：前期募集は廃止 → 一般募集のみ</li>
-</ul>
-<p>志望校のある都道府県の制度を必ず確認しましょう。</p>
-
-<div class="cta-box">
-<h3>🎯 あなたの内申点で何点必要？</h3>
-<p>My Naishinの逆算機能なら、現在の内申点から必要な当日点を計算できます。推薦・一般どちらの対策にも役立ちます。</p>
 </div>
     `
   }

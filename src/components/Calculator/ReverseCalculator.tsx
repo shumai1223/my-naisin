@@ -217,7 +217,10 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
           ) : (
           <div className="space-y-5">
             <div>
-              <label className="mb-2 block text-sm font-bold text-slate-700">都道府県を選択</label>
+              <label className="mb-2 block text-sm font-bold text-slate-700">
+                都道府県を選択
+                <span className="ml-1 text-xs font-normal text-amber-500">※必須</span>
+              </label>
               <div className="relative">
                 <select
                   value={prefectureCode}
@@ -231,6 +234,9 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
                   ))}
                 </select>
                 <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" />
+              </div>
+              <div className="mt-1 text-xs text-slate-500">
+                選択すると自動で配点比率が設定されます
               </div>
               {prefecture?.sourceUrl && (
                 <a
@@ -249,6 +255,7 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
               <div>
                 <label className="mb-2 block text-sm font-bold text-slate-700">
                   目標総合点
+                  <span className="ml-1 text-xs font-normal text-amber-500">※必須</span>
                   <span className="ml-1 text-xs font-normal text-slate-500">（内申＋当日点の合計）</span>
                 </label>
                 <div className="flex items-center gap-2">
@@ -257,14 +264,19 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
                     value={targetTotalScore}
                     onChange={(e) => setTargetTotalScore(Number(e.target.value))}
                     className="h-12 w-full rounded-xl border border-slate-200 bg-white px-4 text-lg font-bold text-slate-800 shadow-sm outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20"
+                    placeholder="例: 700"
                   />
                   <span className="text-sm text-slate-500">点</span>
+                </div>
+                <div className="mt-1 text-xs text-slate-500">
+                  合格ラインの目安（例: 東京都なら720点程度）
                 </div>
               </div>
 
               <div>
                 <label className="mb-2 block text-sm font-bold text-slate-700">
                   {prefectureCode === 'kanagawa' ? 'A（評定合計）' : '現在の内申点'}
+                  <span className="ml-1 text-xs font-normal text-amber-500">※必須</span>
                   <span className="ml-1 text-xs font-normal text-slate-500">（{naishinMax}点満点）</span>
                 </label>
                 <div className="flex items-center gap-2">
@@ -275,6 +287,7 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
                     max={naishinMax}
                     min={0}
                     className="h-12 w-full rounded-xl border border-slate-200 bg-white px-4 text-lg font-bold text-slate-800 shadow-sm outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20"
+                    placeholder={`例: ${Math.round(naishinMax * 0.8)}`}
                   />
                   <span className="text-sm text-slate-500">点</span>
                 </div>
@@ -283,6 +296,10 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
                     a値（100点換算）: {Math.round((currentNaishin / naishinMax) * 100)}点
                   </div>
                 )}
+                <div className="mt-1 text-xs text-slate-500">
+                  不明な場合は先に内申点を計算 → 
+                  <a href="/" className="text-blue-600 hover:underline">計算ツール</a>
+                </div>
               </div>
             </div>
 
