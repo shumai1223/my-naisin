@@ -420,6 +420,46 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
                 </p>
               </div>
 
+              {/* 安全圏/標準/挑戦の3ライン表示 */}
+              <div className="mt-4 rounded-xl border border-slate-200 bg-slate-50 p-4">
+                <div className="text-xs font-bold text-slate-600 mb-3">目標ライン別必要点数</div>
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between rounded-lg border border-emerald-200 bg-emerald-50 p-3">
+                    <div className="flex items-center gap-2">
+                      <div className="h-2 w-2 rounded-full bg-emerald-500"></div>
+                      <span className="text-sm font-medium text-emerald-700">安全圏 (+20点)</span>
+                    </div>
+                    <div className="text-sm font-bold text-emerald-800">
+                      {Math.min(result.requiredExamScore + 20, result.examMaxScore)}点
+                      <span className="text-xs text-emerald-600 ml-1">({Math.round(((Math.min(result.requiredExamScore + 20, result.examMaxScore) / result.examMaxScore) * 100))}%)</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between rounded-lg border border-blue-200 bg-blue-50 p-3">
+                    <div className="flex items-center gap-2">
+                      <div className="h-2 w-2 rounded-full bg-blue-500"></div>
+                      <span className="text-sm font-medium text-blue-700">標準</span>
+                    </div>
+                    <div className="text-sm font-bold text-blue-800">
+                      {result.requiredExamScore}点
+                      <span className="text-xs text-blue-600 ml-1">({result.examPercent}%)</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between rounded-lg border border-orange-200 bg-orange-50 p-3">
+                    <div className="flex items-center gap-2">
+                      <div className="h-2 w-2 rounded-full bg-orange-500"></div>
+                      <span className="text-sm font-medium text-orange-700">挑戦 (-20点)</span>
+                    </div>
+                    <div className="text-sm font-bold text-orange-800">
+                      {Math.max(result.requiredExamScore - 20, 0)}点
+                      <span className="text-xs text-orange-600 ml-1">({Math.round(((Math.max(result.requiredExamScore - 20, 0) / result.examMaxScore) * 100))}%)</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-3 text-xs text-slate-500">
+                  ※ 安全圏は余裕を持った目標、挑戦は最低限の目標としてご活用ください
+                </div>
+              </div>
+
               {/* 計算式（簡易） */}
               <div className="mt-4 rounded-xl border border-slate-200 bg-slate-50 p-4">
                 <div className="text-xs font-bold text-slate-600">計算式</div>
