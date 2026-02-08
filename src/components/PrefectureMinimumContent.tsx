@@ -137,14 +137,13 @@ export function PrefectureMinimumContent({ prefectureCode }: PrefectureMinimumCo
         </ul>
       </div>
 
-      {/* 公式資料リンク */}
-      <div className="rounded-2xl border border-blue-200 bg-blue-50 p-6 shadow-sm">
-        <h3 className="mb-4 flex items-center gap-2 text-lg font-bold text-blue-800">
-          <ExternalLink className="h-5 w-5" />
-          公式資料（根拠）
-        </h3>
-        
-        {sources.length > 0 ? (
+      {sources.length > 0 && (
+        <div className="rounded-2xl border border-blue-200 bg-blue-50 p-6 shadow-sm">
+          <h3 className="mb-4 flex items-center gap-2 text-lg font-bold text-blue-800">
+            <ExternalLink className="h-5 w-5" />
+            公式資料（根拠）
+          </h3>
+          
           <div className="space-y-3">
             {sources.map((source, index) => (
               <a
@@ -173,23 +172,8 @@ export function PrefectureMinimumContent({ prefectureCode }: PrefectureMinimumCo
               </a>
             ))}
           </div>
-        ) : (
-          <div className="rounded-lg border border-blue-200 bg-white p-4 text-sm text-blue-700">
-            <p>
-              詳細な根拠PDFは現在確認中です。最新情報は
-              <a 
-                href={officialUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-600 underline-offset-2 hover:underline"
-              >
-                {prefecture.name}教育委員会の公式サイト
-              </a>
-              （最終確認：2026年1月28日）をご覧ください。
-            </p>
-          </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }
