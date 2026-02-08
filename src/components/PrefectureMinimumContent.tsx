@@ -1,6 +1,7 @@
 'use client';
 
 import { AlertTriangle, BookOpen, ExternalLink, Calendar, Calculator, TrendingUp } from 'lucide-react';
+import Script from 'next/script';
 import { getPrefectureByCode } from '@/lib/prefectures';
 import { PREFECTURE_TRAPS, generateDynamicTraps } from '@/lib/prefecture-traps';
 import { PREFECTURE_SOURCES } from '@/lib/prefecture-sources';
@@ -46,7 +47,28 @@ export function PrefectureMinimumContent({ prefectureCode }: PrefectureMinimumCo
   const faq = dynamicFAQ; // 常に動的生成を使用
 
   return (
-    <div className="space-y-6">
+    <>
+      {/* FAQ構造化データ */}
+      <Script
+        id="faq-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": faq.map(f => ({
+              "@type": "Question",
+              "name": f.question,
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": f.answer
+              }
+            }))
+          })
+        }}
+      />
+      
+      <div className="space-y-6">
       {/* 基本情報 */}
       <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
         <h3 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
@@ -65,10 +87,12 @@ export function PrefectureMinimumContent({ prefectureCode }: PrefectureMinimumCo
           </div>
           
           <div className="rounded-lg border border-green-200 bg-green-50 p-4">
-            <h4 className="text-sm font-semibold text-green-800">実技倍率</h4>
+            <h4 className="text-sm font-semibold text-green-800">実技の扱い</h4>
             <p className="mt-1 text-green-700">
-              {prefecture.practicalMultiplier > 1 
-                ? `${prefecture.practicalMultiplier}倍`
+              {prefecture.practicalMultiplier > prefecture.coreMultiplier 
+                ? `傾斜あり（${prefecture.practicalMultiplier}倍）`
+                : prefecture.coreMultiplier === prefecture.practicalMultiplier && prefecture.coreMultiplier > 1
+                ? `全教科×${prefecture.coreMultiplier}倍`
                 : '等倍'}
             </p>
           </div>
@@ -187,6 +211,7 @@ export function PrefectureMinimumContent({ prefectureCode }: PrefectureMinimumCo
         </div>
       )}
     </div>
+    </>
   );
 }
 
