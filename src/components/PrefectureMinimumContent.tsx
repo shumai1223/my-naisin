@@ -2,8 +2,9 @@
 
 import { AlertTriangle, BookOpen, ExternalLink, Calendar, Calculator, TrendingUp } from 'lucide-react';
 import { getPrefectureByCode } from '@/lib/prefectures';
-import { PREFECTURE_TRAPS } from '@/lib/prefecture-traps';
+import { PREFECTURE_TRAPS, generateDynamicTraps } from '@/lib/prefecture-traps';
 import { PREFECTURE_SOURCES } from '@/lib/prefecture-sources';
+import { getPrefectureGuide, generateDynamicFAQ } from '@/lib/prefecture-guides';
 
 interface PrefectureMinimumContentProps {
   prefectureCode: string;
@@ -32,23 +33,17 @@ export function PrefectureMinimumContent({ prefectureCode }: PrefectureMinimumCo
   ];
 
   // 県別の罠（データ駆動）
-  const traps = PREFECTURE_TRAPS[prefectureCode as keyof typeof PREFECTURE_TRAPS] || [
-    {
-      title: '制度は年度によって変更される',
-      description: '最新情報は教育委員会の公式サイトでご確認ください',
-      impact: 'medium' as const,
-      solution: '定期的に公式サイトを確認し、最新情報を入手しましょう'
-    },
-    {
-      title: '私立高校の入試制度',
-      description: '私立高校の入試制度は公立と異なる場合があります',
-      impact: 'low' as const,
-      solution: '私立高校を志望する場合は、各校の入試要項を確認しましょう'
-    }
-  ];
+  const staticTraps = PREFECTURE_TRAPS[prefectureCode as keyof typeof PREFECTURE_TRAPS] || [];
+  const dynamicTraps = generateDynamicTraps(prefecture);
+  const traps = staticTraps.length > 0 ? staticTraps : dynamicTraps;
 
   // 詳細な根拠データ
   const sources = PREFECTURE_SOURCES[prefectureCode as keyof typeof PREFECTURE_SOURCES] || [];
+  
+  // FAQ（動的生成を優先）
+  const guide = getPrefectureGuide(prefectureCode);
+  const dynamicFAQ = generateDynamicFAQ(prefectureCode, prefecture);
+  const faq = dynamicFAQ; // 常に動的生成を使用
 
   return (
     <div className="space-y-6">
@@ -135,6 +130,23 @@ export function PrefectureMinimumContent({ prefectureCode }: PrefectureMinimumCo
             </li>
           ))}
         </ul>
+      </div>
+
+      {/* FAQ */}
+      <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <h3 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
+          <BookOpen className="h-5 w-5 text-blue-500" />
+          よくある質問
+        </h3>
+        
+        <div className="space-y-4">
+          {faq.map((item, index) => (
+            <div key={index} className="rounded-lg border border-slate-200 bg-slate-50 p-4">
+              <h4 className="font-semibold text-slate-800">{item.question}</h4>
+              <p className="mt-2 text-sm text-slate-700">{item.answer}</p>
+            </div>
+          ))}
+        </div>
       </div>
 
       {sources.length > 0 && (

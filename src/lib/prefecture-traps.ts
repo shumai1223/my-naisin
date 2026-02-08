@@ -1,5 +1,7 @@
 // 都道府県別の罠・注意点データ（県固有3〜7個）
 
+import { PrefectureConfig } from './prefectures';
+
 export const PREFECTURE_TRAPS = {
   tokyo: [
     {
@@ -325,6 +327,67 @@ export const PREFECTURE_TRAPS = {
     }
   ]
 };
+
+// 都道府県データから動的に注意点を生成する関数
+export function generateDynamicTraps(prefecture: PrefectureConfig): { title: string; description: string; impact: 'high' | 'medium' | 'low'; solution: string }[] {
+  const traps: { title: string; description: string; impact: 'high' | 'medium' | 'low'; solution: string }[] = [];
+  
+  // 対象学年に関する注意点
+  if (prefecture.targetGrades.length === 1 && prefecture.targetGrades[0] === 3) {
+    traps.push({
+      title: '中3のみが対象',
+      description: '中学3年生の成績のみが内申点として使われます。中1・中2の成績は含まれません。',
+      impact: 'high' as const,
+      solution: '中3の成績が最も重要です。中3から本格的に対策を始めましょう。'
+    });
+  } else if (prefecture.targetGrades.length === 3) {
+    traps.push({
+      title: '3年間が対象',
+      description: '中学1年生から3年生までの3年間の成績が対象です。早期からの対策が有利です。',
+      impact: 'medium' as const,
+      solution: '中1からコツコツと成績を積み上げることが、合格への近道です。'
+    });
+  }
+  
+  // 実技教科の傾斜に関する注意点
+  if (prefecture.practicalMultiplier > prefecture.coreMultiplier) {
+    traps.push({
+      title: '実技教科が傾斜配点',
+      description: `実技4教科は${prefecture.practicalMultiplier}倍で計算され、主要5教科より重要です。`,
+      impact: 'high' as const,
+      solution: '実技教科の評定を4以上に保つことで、大幅な内申点向上が可能です。'
+    });
+  }
+  
+  // 満点に関する注意点
+  if (prefecture.maxScore <= 50) {
+    traps.push({
+      title: '1点差が大きい',
+      description: `満点${prefecture.maxScore}点は比較的低く、1点の差が合否に大きく影響します。`,
+      impact: 'medium' as const,
+      solution: '全教科で安定した評定を目指し、失点を最小限に抑えましょう。'
+    });
+  } else if (prefecture.maxScore >= 400) {
+    traps.push({
+      title: '高得点戦略が必要',
+      description: `満点${prefecture.maxScore}点は比較的高く、効率的な得点アップが重要です。`,
+      impact: 'medium' as const,
+      solution: '得意教科で高評定を取りつつ、苦手教科を減らす戦略が有効です。'
+    });
+  }
+  
+  // 特殊な倍率に関する注意点
+  if (prefecture.coreMultiplier !== 1 || prefecture.practicalMultiplier !== 1) {
+    traps.push({
+      title: '特殊な倍率設定',
+      description: `5教科×${prefecture.coreMultiplier}倍、実技4教科×${prefecture.practicalMultiplier}倍の計算です。`,
+      impact: 'medium' as const,
+      solution: '倍率の仕組みを理解し、戦略的に成績を上げましょう。'
+    });
+  }
+  
+  return traps;
+}
 
 export type PrefectureTrap = {
   title: string;
