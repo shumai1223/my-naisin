@@ -8,6 +8,6 @@ export default function robots(): MetadataRoute.Robots {
         allow: '/',
       },
     ],
-    sitemap: 'https://my-naishin.vercel.app/sitemap.xml',
+    sitemap: 'https://my-naisin.vercel.app/sitemap.xml',
   };
 }

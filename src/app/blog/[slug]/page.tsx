@@ -186,26 +186,34 @@ export default async function BlogPostPage({ params }: PageProps) {
           <div
             className="blog-content"
             itemProp="articleBody"
-          >
-            {post.content
-              .replace(/## /g, '<h2>')
-              .replace(/### /g, '<h3>')
-              .replace(/#### /g, '<h4>')
-              .replace(/---/g, '<hr>')
-              .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
-              .replace(/<!-- AD_PLACEHOLDER -->/g, '')
-              .split('__PREFECTURE_LINK_LIST__')
-              .map((part, index) => (
-                <div key={index}>
-                  <div dangerouslySetInnerHTML={{ __html: part }} />
-                  {index === 0 && post.slug === 'naishin-guide' && (
-                    <div className="mt-8">
-                      <PrefectureLinkList limit={8} />
-                    </div>
-                  )}
-                </div>
-              ))}
-          </div>
+            dangerouslySetInnerHTML={{
+              __html: post.content
+                .replace(/## /g, '<h2>')
+                .replace(/### /g, '<h3>')
+                .replace(/#### /g, '<h4>')
+                .replace(/---/g, '<hr>')
+                .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+                .replace(/<!-- AD_PLACEHOLDER -->/g, '')
+                .replace(/__PREFECTURE_LINK_LIST__/g, '')
+            }}
+          />
+          
+          {/* 内申点ガイド記事のみ、県別リストを動的挿入 */}
+          {post.slug === 'naishin-guide' && (
+            <div className="mt-8">
+              <h3 className="mb-4 text-lg font-bold text-slate-800">
+                🗺️ 都道府県別詳細ページ
+              </h3>
+              <p className="mb-4 text-sm text-slate-600">
+                各都道府県の詳細な計算方法と特徴はこちらから確認できます：
+              </p>
+              <PrefectureLinkList limit={8} />
+              <p className="mt-4 text-sm text-slate-600">
+                <strong>💡 自分の都道府県が決まってない人向け：</strong>
+                まずは<a href="/prefectures" className="text-blue-600 hover:underline">都道府県一覧</a>で「満点・倍率・対象学年」を確認しましょう。
+              </p>
+            </div>
+          )}
 
           {/* 参考資料・情報源 */}
           {post.sources && post.sources.length > 0 && (
