@@ -1,5 +1,7 @@
 // 都道府県別ガイドデータ（データ駆動設計）
 
+import { PrefectureConfig } from './prefectures';
+
 export interface PrefectureGuide {
   summary3lines: {
     target: string;
@@ -272,7 +274,7 @@ export const defaultGuide: PrefectureGuide = {
   faq: [
     {
       question: 'この県の内申点は何点満点ですか？',
-      answer: '都道府県や計算方式によって異なります。上記の「計算方法の概要」をご確認ください。'
+      answer: 'この県の内申点は135点満点です。中1〜中3の9教科×5段階で計算されます。'
     },
     {
       question: '内申点を上げるにはどうすればいいですか？',
@@ -301,4 +303,32 @@ export const defaultGuide: PrefectureGuide = {
 // ガイドデータを取得する関数
 export function getPrefectureGuide(prefectureCode: string): PrefectureGuide {
   return prefectureGuides[prefectureCode] || defaultGuide;
+}
+
+// 都道府県データから動的にFAQを生成する関数
+export function generateDynamicFAQ(prefectureCode: string, prefecture: PrefectureConfig): { question: string; answer: string }[] {
+  const targetGradesText = prefecture.targetGrades.length === 1 
+    ? `中${prefecture.targetGrades[0]}のみ` 
+    : `中${prefecture.targetGrades.join('・')}`;
+
+  const multiplierText = prefecture.coreMultiplier === 1 && prefecture.practicalMultiplier === 1
+    ? '等倍'
+    : prefecture.coreMultiplier !== prefecture.practicalMultiplier
+    ? `5教科×${prefecture.coreMultiplier}倍、実技4教科×${prefecture.practicalMultiplier}倍`
+    : `全教科×${prefecture.coreMultiplier}倍`;
+
+  return [
+    {
+      question: `${prefecture.name}の内申点は何点満点ですか？`,
+      answer: `${prefecture.name}の内申点は${prefecture.maxScore}点満点です。${targetGradesText}が対象で、${multiplierText}で計算されます。`
+    },
+    {
+      question: `${prefecture.name}はいつの成績が内申点になりますか？`,
+      answer: `${prefecture.name}は${targetGradesText}の成績が対象です。${prefecture.targetGrades.length === 1 ? '集中した対策が効果的です。' : '早期からの対策が有利です。'}`
+    },
+    {
+      question: `${prefecture.name}の実技教科はどう扱われますか？`,
+      answer: `${prefecture.name}では実技4教科は${prefecture.practicalMultiplier === 1 ? '他の教科と同じ扱いです。' : `${prefecture.practicalMultiplier}倍で計算され、特に重要です。`}`
+    }
+  ];
 }

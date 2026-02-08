@@ -89,7 +89,7 @@ export const PREFECTURE_SOURCES = {
       lastChecked: '2026年1月31日',
       pageNumber: '11ページ',
       sectionName: '第2章 調査書の取扱い',
-      description: '全教科×2倍の計算方法について'
+      description: '調査書点（内申点）の算出'
     },
     {
       sourceUrl: 'https://www.pref.aichi.jp/documents/14242/r8_jugyousen_youryou.pdf',
