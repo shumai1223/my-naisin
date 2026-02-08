@@ -351,7 +351,6 @@ export default function PrefectureNaishinPage() {
 
   const [scores, setScores] = React.useState<Scores>(DEFAULT_SCORES);
   const [showResult, setShowResult] = React.useState(false);
-  const [openFaq, setOpenFaq] = React.useState<number | null>(null);
 
   if (!prefecture) {
     return (
@@ -721,7 +720,9 @@ export default function PrefectureNaishinPage() {
                           [key]: 3
                         }), {} as Scores);
                         // 実技教科だけ+1
-                        (['music', 'art', 'pe', 'tech'] as SubjectKey[]).forEach(subject => {
+                        const jitsugiSubjects = ['music', 'art', 'pe', 'tech'] as const;
+                        type JitsugiSubject = typeof jitsugiSubjects[number];
+                        jitsugiSubjects.forEach((subject) => {
                           baseScores[subject] = 4;
                         });
                         const total = calculateTotalScore(baseScores, prefectureCode);
@@ -866,25 +867,17 @@ export default function PrefectureNaishinPage() {
               </h2>
               <div className="space-y-2">
                 {faqItems.map((item, index) => (
-                  <div
+                  <details
                     key={index}
                     className="rounded-xl border border-slate-100 bg-slate-50/50 transition-colors"
                   >
-                    <button
-                      onClick={() => setOpenFaq(openFaq === index ? null : index)}
-                      className="flex w-full items-center justify-between px-4 py-3 text-left"
-                    >
-                      <span className="text-sm font-medium text-slate-700">Q. {item.question}</span>
-                      <ChevronDown
-                        className={`h-4 w-4 text-slate-400 transition-transform ${openFaq === index ? 'rotate-180' : ''}`}
-                      />
-                    </button>
-                    {openFaq === index && (
-                      <div className="border-t border-slate-100 px-4 pb-4 pt-2">
-                        <p className="text-sm leading-relaxed text-slate-600">A. {item.answer}</p>
-                      </div>
-                    )}
-                  </div>
+                    <summary className="cursor-pointer px-4 py-3 text-sm font-medium text-slate-700 hover:bg-slate-100 transition-colors">
+                      Q. {item.question}
+                    </summary>
+                    <div className="border-t border-slate-100 px-4 pb-4 pt-2">
+                      <p className="text-sm leading-relaxed text-slate-600">A. {item.answer}</p>
+                    </div>
+                  </details>
                 ))}
               </div>
             </section>

@@ -104,6 +104,32 @@ export default function ReversePage() {
                 </div>
               </section>
 
+              {/* ツールの使い方説明 */}
+              <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                <h2 className="mb-4 text-lg font-bold text-slate-800">🛠️ 逆算ツールの使い方</h2>
+                <div className="space-y-4">
+                  <div className="rounded-lg border border-blue-200 bg-blue-50 p-4">
+                    <h3 className="mb-3 text-sm font-bold text-blue-800">ステップ1：都道府県を選択</h3>
+                    <p className="text-sm text-blue-700">あなたの受験する都道府県を選択します。東京都・神奈川県・大阪府など主要な都道府県に対応しています。</p>
+                  </div>
+                  
+                  <div className="rounded-lg border border-green-200 bg-green-50 p-4">
+                    <h3 className="mb-3 text-sm font-bold text-green-800">ステップ2：現在の内申点を入力</h3>
+                    <p className="text-sm text-green-700">現在の内申点を入力します。東京都の場合は「換算内申（65点満点）」、神奈川県の場合は「評定合計（135点満点）」を入力してください。</p>
+                  </div>
+                  
+                  <div className="rounded-lg border border-purple-200 bg-purple-50 p-4">
+                    <h3 className="mb-3 text-sm font-bold text-purple-800">ステップ3：配点比率を設定</h3>
+                    <p className="text-sm text-purple-700">志望校の内申点と学力検査の配点比率を設定します。よくある比率のプリセットボタンもあるので、参考にしてください。</p>
+                  </div>
+                  
+                  <div className="rounded-lg border border-amber-200 bg-amber-50 p-4">
+                    <h3 className="mb-3 text-sm font-bold text-amber-800">ステップ4：目標点を設定して計算</h3>
+                    <p className="text-sm text-amber-700">志望校の合格ラインや目標点を入力し、「計算する」ボタンをクリック。必要な当日点がすぐにわかります。</p>
+                  </div>
+                </div>
+              </section>
+
               {/* サンプル計算結果（SSR表示） */}
               <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
                 <h2 className="mb-4 text-lg font-bold text-slate-800">計算例：東京都立高校を目指す場合</h2>
@@ -116,12 +142,16 @@ export default function ReversePage() {
                         <span className="font-medium">東京都</span>
                       </div>
                       <div className="flex justify-between">
-                        <span>現在の内申点：</span>
-                        <span className="font-medium">300点 / 390点</span>
+                        <span>換算内申：</span>
+                        <span className="font-medium">50点 / 65点</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>調査書点：</span>
+                        <span className="font-medium">231点 / 300点</span>
                       </div>
                       <div className="flex justify-between">
                         <span>配点比率：</span>
-                        <span className="font-medium">内申:学力 = 300:700</span>
+                        <span className="font-medium">調査書点:学力検査 = 300:700</span>
                       </div>
                       <div className="flex justify-between">
                         <span>当日点満点：</span>
@@ -129,7 +159,7 @@ export default function ReversePage() {
                       </div>
                       <div className="flex justify-between">
                         <span>目標合計点：</span>
-                        <span className="font-medium">720点</span>
+                        <span className="font-medium">931点（ESAT-J込み）</span>
                       </div>
                     </div>
                   </div>
@@ -138,7 +168,7 @@ export default function ReversePage() {
                     <h3 className="mb-3 text-sm font-bold text-emerald-700">計算結果</h3>
                     <div className="space-y-2 text-sm text-emerald-600">
                       <div className="flex justify-between">
-                        <span>必要な当日点：</span>
+                        <span>必要な学力検査点：</span>
                         <span className="font-bold text-emerald-800">600点 / 700点</span>
                       </div>
                       <div className="flex justify-between">
