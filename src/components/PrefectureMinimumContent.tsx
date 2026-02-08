@@ -33,10 +33,10 @@ export function PrefectureMinimumContent({ prefectureCode }: PrefectureMinimumCo
     }
   ];
 
-  // 県別の罠（データ駆動）
+  // 県別の罠（動的生成を優先）
   const staticTraps = PREFECTURE_TRAPS[prefectureCode as keyof typeof PREFECTURE_TRAPS] || [];
   const dynamicTraps = generateDynamicTraps(prefecture);
-  const traps = staticTraps.length > 0 ? staticTraps : dynamicTraps;
+  const traps = dynamicTraps; // 常に動的生成を使用
 
   // 詳細な根拠データ
   const sources = PREFECTURE_SOURCES[prefectureCode as keyof typeof PREFECTURE_SOURCES] || [];

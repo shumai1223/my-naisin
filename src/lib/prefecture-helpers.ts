@@ -126,7 +126,7 @@ export function generatePitfalls(prefectureCode: string): PrefecturePitfall {
 export function generateFAQ(prefectureCode: string): PrefectureFAQ[] {
   const prefecture = getPrefectureByCode(prefectureCode);
   if (!prefecture) {
-    return getDefaultFAQ();
+    return [];
   }
 
   const faqs: PrefectureFAQ[] = [];
@@ -193,16 +193,8 @@ function generateImprovementAdvice(prefecture: PrefectureConfig): string {
 }
 
 function getDefaultFAQ(): PrefectureFAQ[] {
-  return [
-    {
-      question: 'この県の内申点は何点満点ですか？',
-      answer: '都道府県や計算方式によって異なります。上記の「計算方法の概要」をご確認ください。'
-    },
-    {
-      question: '内申点を上げるにはどうすればいいですか？',
-      answer: '定期テストで高得点を取る、提出物を期限内に丁寧に仕上げる、授業に積極的に参加する、の3つが基本です。'
-    }
-  ];
+  // デフォルトFAQは使用せず、動的生成に統一
+  return [];
 }
 
 // 1点アップの価値を計算（P2用）
