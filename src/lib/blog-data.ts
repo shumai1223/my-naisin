@@ -1,3 +1,5 @@
+import { PREFECTURES } from '@/lib/prefectures';
+
 export interface BlogPost {
   slug: string;
   title: string;
@@ -1970,22 +1972,22 @@ export const BLOG_POSTS: BlogPost[] = [
 
 <h2>パターン①：中1〜中3の3年間が対象</h2>
 <p>最も多いパターンです。中1の成績から入試に影響するため、早期からの対策が重要です。</p>
-<p><strong>該当する主な都道府県（例）：</strong>埼玉県・千葉県・北海道・岩手県・宮城県・福島県・茨城県・栃木県・群馬県・新潟県・長野県・静岡県・愛知県・三重県・岡山県・広島県・福岡県 など多数</p>
+<p><strong>該当する主な都道府県：</strong>${PREFECTURES.filter(p => JSON.stringify(p.targetGrades) === JSON.stringify([1,2,3])).map(p => p.name).join('・')}</p>
 <p>ただし、学年ごとの重みが異なる県もあります。例えば北海道は「中1×2、中2×2、中3×3」、埼玉県は高校により「1:1:2」「1:1:3」「1:2:3」など比率が変わります（学校により異なる場合あり）。</p>
 
 <h2>パターン②：中3のみが対象</h2>
 <p>中3の1年間の成績だけが入試に使われるパターンです。中1・中2で出遅れても挽回しやすい反面、中3の成績が非常に重要になります。</p>
-<p><strong>該当する主な都道府県（例）：</strong>東京都・大阪府（ただし中1・中2の評定も参考にする場合あり）</p>
+<p><strong>該当する主な都道府県：</strong>${PREFECTURES.filter(p => JSON.stringify(p.targetGrades) === JSON.stringify([3])).map(p => p.name).join('・')}</p>
 <p>東京都は中3の成績のみで換算内申（65点満点）を算出します（代表例）。大阪府は中1〜中3の成績を使いますが、中3の比率が最も高い「1:1:3」方式です（学校により異なる場合あり）。</p>
 
 <h2>パターン③：中2・中3が対象</h2>
 <p>中1の成績は使わず、中2と中3の2年間が対象となるパターンです。</p>
-<p><strong>該当する主な都道府県（例）：</strong>神奈川県</p>
+<p><strong>該当する主な都道府県：</strong>${PREFECTURES.filter(p => JSON.stringify(p.targetGrades) === JSON.stringify([2,3])).map(p => p.name).join('・')}</p>
 <p>神奈川県は中2と中3の9教科評定を使い、中3は2倍で計算します（135点満点）（代表例）。</p>
 
 <h2>パターン④：学年比重が高校ごとに異なる</h2>
 <p>同じ県内でも、高校によって学年の重みが異なるケースがあります。</p>
-<p><strong>該当する主な都道府県（例）：</strong>埼玉県・愛知県</p>
+<p><strong>該当する主な都道府県：</strong>${PREFECTURES.filter(p => p.note?.includes('高校により')).map(p => p.name).join('・')}</p>
 <p>埼玉県では「1:1:2」「1:1:3」「1:2:3」など高校ごとに比率が設定されています（主な傾向）。志望校の募集要項で確認が必要です。</p>
 
 <h2>まとめ：自分の県の対象学年を確認しよう</h2>
@@ -2024,22 +2026,22 @@ export const BLOG_POSTS: BlogPost[] = [
 
 <h2>実技2倍の県</h2>
 <p>最もメジャーな傾斜配点パターンです。5教科はそのまま、実技4教科を2倍で計算します。</p>
-<p><strong>該当する主な都道府県（例）：</strong>東京都（65点満点）、宮城県、秋田県、福島県、京都府 など</p>
+<p><strong>該当する主な都道府県：</strong>${PREFECTURES.filter(p => p.practicalMultiplier === 2 && p.coreMultiplier === 1).map(p => p.name).join('・')}</p>
 <p>東京都の場合：5教科×5点＝25点 ＋ 4教科×5点×2＝40点 ＝ <strong>65点満点</strong>（代表例）</p>
 <p>実技でオール5を取ると40点分（全体の61.5%）を占めるため、実技の影響力は非常に大きいです。</p>
 
 <h2>実技7.5倍の県</h2>
 <p>全国で最も実技の価値が高いのは兵庫県です。</p>
-<p><strong>該当する都道府県（例）：</strong>兵庫県（250点満点）</p>
+<p><strong>該当する都道府県：</strong>${PREFECTURES.filter(p => p.practicalMultiplier === 7.5).map(p => p.name).join('・')}</p>
 <p>兵庫県：5教科×5点×4倍＋4教科×5点×7.5倍 ＝ 250点満点（代表例）。実技が得意な生徒には非常に有利な制度です。</p>
 
 <h2>実技3倍の県</h2>
-<p><strong>該当する主な都道府県（例）：</strong>岩手県（5教科は2倍、実技は3倍）</p>
+<p><strong>該当する主な都道府県：</strong>${PREFECTURES.filter(p => p.practicalMultiplier === 3).map(p => p.name).join('・')}</p>
 <p>岩手県は5教科にも2倍の傾斜がかかりますが、実技は3倍とさらに高い倍率が設定されています（学校により異なる場合あり）。</p>
 
 <h2>実技等倍（傾斜なし）の県</h2>
 <p>5教科も実技4教科も同じ扱いで計算する県です。</p>
-<p><strong>該当する主な都道府県（例）：</strong>神奈川県、大阪府、愛知県、福岡県 など</p>
+<p><strong>該当する主な都道府県：</strong>${PREFECTURES.filter(p => p.practicalMultiplier === 1 && p.coreMultiplier === 1).map(p => p.name).slice(0, 10).join('・')}など</p>
 <p>等倍の県では、教科すべてが同じ価値を持つため、特定の教科に偏らないバランスの良い成績が重要です（主な傾向）。</p>
 
 <h2>副教科対策のポイント</h2>

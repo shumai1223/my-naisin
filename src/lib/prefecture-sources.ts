@@ -275,6 +275,33 @@ export const PREFECTURE_SOURCES = {
       sectionName: '第1章 総則',
       description: '対象学年と成績の取扱いについて'
     }
+  ],
+
+  kagoshima: [
+    {
+      sourceUrl: 'https://www.pref.kagoshima.jp/kyoiku-bunka/school/koukou/nyushi/r5/documents/koukounyuusi.pdf',
+      pdfTitle: '令和8年度鹿児島県立高等学校入学者選抜実施要綱',
+      lastChecked: '2026年1月31日',
+      pageNumber: '16ページ',
+      sectionName: '第2章 調査書の取扱い',
+      description: '内申点の計算方法と実技教科20倍について'
+    },
+    {
+      sourceUrl: 'https://www.pref.kagoshima.jp/kyoiku-bunka/school/koukou/nyushi/r5/documents/koukounyuusi.pdf',
+      pdfTitle: '令和8年度鹿児島県立高等学校入学者選抜実施要綱',
+      lastChecked: '2026年1月31日',
+      pageNumber: '19ページ',
+      sectionName: '第3章 学力検査',
+      description: '実技教科の配点比重について'
+    },
+    {
+      sourceUrl: 'https://www.pref.kagoshima.jp/kyoiku-bunka/school/koukou/nyushi/r5/documents/koukounyuusi.pdf',
+      pdfTitle: '令和8年度鹿児島県立高等学校入学者選抜実施要綱',
+      lastChecked: '2026年1月31日',
+      pageNumber: '12ページ',
+      sectionName: '第1章 総則',
+      description: '対象学年と成績の取扱いについて'
+    }
   ]
 };
 
