@@ -7,6 +7,8 @@ import { motion } from 'framer-motion';
 
 import { PREFECTURES, getPrefectureByCode } from '@/lib/prefectures';
 import { getExamRatioByCode, DEFAULT_EXAM_RATIO } from '@/lib/prefecture-exam-data';
+import { RATIO_PRESETS } from '@/lib/presets';
+import { SCHOOL_PRESETS } from '@/lib/school-presets';
 import { calculateMaxScore } from '@/lib/utils';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
@@ -230,14 +232,99 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
             </button>
           </div>
 
-          {/* 県別プリセットボタン */}
-          {mode === 'general' && PREFECTURE_RATIO_PRESETS[prefectureCode] && (
-            <div className="mb-4 rounded-xl border border-blue-100 bg-blue-50 p-4">
+          {/* 高校別プリセット */}
+          {mode === 'general' && prefectureCode && SCHOOL_PRESETS[prefectureCode as keyof typeof SCHOOL_PRESETS] && (
+            <div className="mb-4 rounded-xl border border-purple-200 bg-purple-50 p-4">
               <div className="mb-3 flex items-center gap-2">
-                <span className="text-sm font-semibold text-blue-800">よくある配点比率</span>
-                <HelpCircle className="h-4 w-4 text-blue-600" />
+                <span className="text-sm font-semibold text-purple-700">{getPrefectureByCode(prefectureCode)?.name} 上位校の比率</span>
+                <Info className="h-4 w-4 text-purple-500" />
               </div>
-              <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="grid gap-2 max-h-60 overflow-y-auto">
+                {SCHOOL_PRESETS[prefectureCode as keyof typeof SCHOOL_PRESETS].map((school, index) => {
+                  const totalRatio = Object.values(school.ratio).reduce((sum, val) => sum + val, 0);
+                  const naishinRatio = Math.round((school.ratio.naishin / totalRatio) * 100);
+                  const examRatio = Math.round((school.ratio.gakuryoku / totalRatio) * 100);
+                  
+                  return (
+                    <button
+                      key={index}
+                      type="button"
+                      onClick={() => {
+                        setNaishinRatio(naishinRatio);
+                        setExamMaxScore(school.examMax);
+                      }}
+                      className="rounded-lg border border-purple-200 bg-white p-3 text-left hover:bg-purple-50 transition-colors"
+                    >
+                      <div className="flex items-start justify-between gap-2">
+                        <div className="flex-1 min-w-0">
+                          <div className="font-semibold text-purple-800 text-sm">{school.name}</div>
+                          <div className="text-xs text-slate-600 mt-1">{school.description}</div>
+                          <div className="text-xs text-purple-600 mt-1">内申{naishinRatio}%・学力{examRatio}%</div>
+                          <div className="flex flex-wrap gap-1 mt-1">
+                            {school.features.slice(0, 2).map((feature, i) => (
+                              <span key={i} className="inline-block px-1.5 py-0.5 text-xs bg-purple-100 text-purple-700 rounded">
+                                {feature}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                        <div className="flex-shrink-0">
+                          <span className={`inline-block px-2 py-1 text-xs font-medium rounded ${
+                            school.type === '進学校' ? 'bg-red-100 text-red-700' : 'bg-blue-100 text-blue-700'
+                          }`}>
+                            {school.type}
+                          </span>
+                        </div>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* 都道府県別プリセット */}
+          {mode === 'general' && prefectureCode && RATIO_PRESETS[prefectureCode as keyof typeof RATIO_PRESETS] && (
+            <div className="mb-4 rounded-xl border border-slate-200 bg-white p-4">
+              <div className="mb-3 flex items-center gap-2">
+                <span className="text-sm font-semibold text-slate-700">{getPrefectureByCode(prefectureCode)?.name}のよくある比率</span>
+                <Info className="h-4 w-4 text-slate-500" />
+              </div>
+              <div className="grid gap-2">
+                {RATIO_PRESETS[prefectureCode as keyof typeof RATIO_PRESETS].map((preset, index) => {
+                  const totalRatio = Object.values(preset.ratio).reduce((sum, val) => sum + val, 0);
+                  const naishinRatio = Math.round((preset.ratio.naishin / totalRatio) * 100);
+                  const examRatio = Math.round((preset.ratio.gakuryoku / totalRatio) * 100);
+                  
+                  return (
+                    <button
+                      key={index}
+                      type="button"
+                      onClick={() => {
+                        setNaishinRatio(naishinRatio);
+                        setExamMaxScore(500); // デフォルト値
+                      }}
+                      className="rounded-lg border border-blue-200 bg-white p-3 text-left hover:bg-blue-50 transition-colors"
+                    >
+                      <div className="font-semibold text-blue-700 text-sm">{preset.name}</div>
+                      <div className="text-xs text-slate-600 mt-1">{preset.description}</div>
+                      <div className="text-xs text-blue-600 mt-1">内申{naishinRatio}%・学力{examRatio}%</div>
+                      <div className="text-xs text-amber-600 mt-1">{preset.note}</div>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* 従来のプリセット */}
+          {mode === 'general' && prefectureCode && PREFECTURE_RATIO_PRESETS[prefectureCode] && (
+            <div className="mb-4 rounded-xl border border-slate-200 bg-white p-4">
+              <div className="mb-3 flex items-center gap-2">
+                <span className="text-sm font-semibold text-slate-700">従来の比率プリセット</span>
+                <Info className="h-4 w-4 text-slate-500" />
+              </div>
+              <div className="grid gap-2">
                 {PREFECTURE_RATIO_PRESETS[prefectureCode].map((preset, index) => (
                   <button
                     key={index}

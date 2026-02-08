@@ -2,6 +2,8 @@
 
 import { AlertTriangle, BookOpen, ExternalLink, Calendar, Calculator, TrendingUp } from 'lucide-react';
 import { getPrefectureByCode } from '@/lib/prefectures';
+import { PREFECTURE_TRAPS } from '@/lib/prefecture-traps';
+import { PREFECTURE_SOURCES } from '@/lib/prefecture-sources';
 
 interface PrefectureMinimumContentProps {
   prefectureCode: string;
@@ -28,45 +30,24 @@ export function PrefectureMinimumContent({ prefectureCode }: PrefectureMinimumCo
     }
   ];
 
-  // 県別の罠
-  const prefectureTraps = {
-    tokyo: [
-      '実技4教科は評定が2倍で計算される（音楽・美術・保体・技家）',
-      'ESAT-J（英語スピーキングテスト）が20点満点で加算される場合がある',
-      '中3の成績のみが対象（中1・中2は無関係）',
-      '満点が高い（390点）ため、他県との比較には注意が必要'
-    ],
-    kanagawa: [
-      'S値方式で合否判定（内申点と当日点を標準化）',
-      '特色検査がある学校があり、当日点に加算される',
-      '換算内申の計算が複雑（素内申×係数）',
-      '実技教科は等倍だが、配点が高い傾向'
-    ],
-    osaka: [
-      'A方式（内申重視）とB方式（当日重視）の選択がある',
-      '実技教科の配点が比較的高め',
-      '中1・中2・中3の成績が対象（均等配分）',
-      'S値ではなく素点で合否判定'
-    ],
-    aichi: [
-      '実技4教科は2倍で計算される',
-      '中1・中2・中3の成績が対象',
-      '満点が90点と他県より低め',
-      '私立併願者が多く、競争率が高い傾向'
-    ],
-    fukuoka: [
-      '実技4教科は2倍で計算される',
-      '中1・中2・中3の成績が対象',
-      '満点が45点と非常に低い',
-      '当日点の比重が高い傾向'
-    ]
-  };
-
-  const traps = prefectureTraps[prefectureCode as keyof typeof prefectureTraps] || [
-    '制度は年度によって変更される場合があります',
-    '最新情報は教育委員会の公式サイトでご確認ください',
-    '私立高校の入試制度は公立と異なる場合があります'
+  // 県別の罠（データ駆動）
+  const traps = PREFECTURE_TRAPS[prefectureCode as keyof typeof PREFECTURE_TRAPS] || [
+    {
+      title: '制度は年度によって変更される',
+      description: '最新情報は教育委員会の公式サイトでご確認ください',
+      impact: 'medium' as const,
+      solution: '定期的に公式サイトを確認し、最新情報を入手しましょう'
+    },
+    {
+      title: '私立高校の入試制度',
+      description: '私立高校の入試制度は公立と異なる場合があります',
+      impact: 'low' as const,
+      solution: '私立高校を志望する場合は、各校の入試要項を確認しましょう'
+    }
   ];
+
+  // 詳細な根拠データ
+  const sources = PREFECTURE_SOURCES[prefectureCode as keyof typeof PREFECTURE_SOURCES] || [];
 
   return (
     <div className="space-y-6">
@@ -132,11 +113,24 @@ export function PrefectureMinimumContent({ prefectureCode }: PrefectureMinimumCo
           {prefecture.name}の注意点
         </h3>
         
-        <ul className="space-y-2">
+        <ul className="space-y-3">
           {traps.map((trap, index) => (
-            <li key={index} className="flex items-start gap-2">
-              <span className="mt-0.5 text-amber-500">•</span>
-              <span className="text-sm text-amber-700">{trap}</span>
+            <li key={index} className="rounded-lg border border-amber-200 bg-amber-50 p-4">
+              <div className="flex items-start gap-3">
+                <div className={`mt-1 h-2 w-2 rounded-full ${
+                  trap.impact === 'high' ? 'bg-red-500' :
+                  trap.impact === 'medium' ? 'bg-yellow-500' : 'bg-green-500'
+                }`} />
+                <div className="flex-1">
+                  <h4 className="font-semibold text-amber-800">{trap.title}</h4>
+                  <p className="mt-1 text-sm text-amber-700">{trap.description}</p>
+                  <div className="mt-2 rounded-lg border border-amber-300 bg-amber-100 p-2">
+                    <p className="text-xs text-amber-800">
+                      <strong>対策：</strong>{trap.solution}
+                    </p>
+                  </div>
+                </div>
+              </div>
             </li>
           ))}
         </ul>
@@ -146,32 +140,45 @@ export function PrefectureMinimumContent({ prefectureCode }: PrefectureMinimumCo
       <div className="rounded-2xl border border-blue-200 bg-blue-50 p-6 shadow-sm">
         <h3 className="mb-4 flex items-center gap-2 text-lg font-bold text-blue-800">
           <ExternalLink className="h-5 w-5" />
-          公式資料
+          公式資料（根拠）
         </h3>
         
         <div className="space-y-3">
-          <a
-            href={getPrefectureOfficialUrl(prefectureCode)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-between rounded-lg border border-blue-200 bg-white p-3 transition-colors hover:border-blue-300 hover:bg-blue-50"
-          >
-            <div>
-              <h4 className="text-sm font-medium text-blue-800">
-                {prefecture.name}教育委員会 - 入学者選抜要綱
-              </h4>
-              <p className="text-xs text-blue-600">令和8年度入学者選抜の公式要綱</p>
-            </div>
-            <ExternalLink className="h-4 w-4 text-blue-500" />
-          </a>
+          {sources.map((source, index) => (
+            <a
+              key={index}
+              href={source.sourceUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block rounded-lg border border-blue-200 bg-white p-4 transition-colors hover:border-blue-300 hover:bg-blue-50"
+            >
+              <div className="flex items-start gap-3">
+                <ExternalLink className="mt-1 h-4 w-4 flex-shrink-0 text-blue-500" />
+                <div className="min-w-0 flex-1">
+                  <h4 className="text-sm font-medium text-blue-800">{source.pdfTitle}</h4>
+                  <div className="mt-1 space-y-1">
+                    <p className="text-xs text-blue-600">
+                      <strong>該当箇所：</strong>{source.pageNumber}「{source.sectionName}」
+                    </p>
+                    <p className="text-xs text-blue-600">{source.description}</p>
+                  </div>
+                  <div className="mt-2 flex items-center gap-2 text-xs text-blue-500">
+                    <Calendar className="h-3 w-3" />
+                    <span>最終確認: {source.lastChecked}</span>
+                  </div>
+                </div>
+              </div>
+            </a>
+          ))}
         </div>
         
-        <div className="mt-4 flex items-center gap-2 rounded-lg border border-blue-300 bg-blue-100 p-3">
-          <Calendar className="h-4 w-4 text-blue-700" />
-          <p className="text-xs text-blue-700">
-            最終確認: {prefecture.lastVerified || '未確認'}
-          </p>
-        </div>
+        {sources.length === 0 && (
+          <div className="rounded-lg border border-blue-200 bg-white p-4">
+            <p className="text-sm text-blue-600">
+              詳細な根拠情報を準備中です。教育委員会の公式サイトで最新情報をご確認ください。
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );

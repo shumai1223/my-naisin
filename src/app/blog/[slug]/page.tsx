@@ -229,6 +229,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         <div className="mt-6">
           <BlogUpdateInfo 
             lastUpdated={new Date(post.date).toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' })}
+            updateReason="令和8年度入試制度の変更に対応し、最新情報を反映"
             updateContent={[
               '最新の入試制度に基づき内容を更新',
               '根拠リンク（一次情報）を追加',

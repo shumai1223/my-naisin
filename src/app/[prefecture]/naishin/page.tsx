@@ -32,6 +32,7 @@ import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { ErrorReportForm } from '@/components/ErrorReportForm';
 import { PrefectureUniqueElements } from '@/components/PrefectureUniqueElements';
 import { PrefectureMinimumContent } from '@/components/PrefectureMinimumContent';
+import { PrefecturePillarLinks } from '@/components/PrefecturePillarLinks';
 import { Header } from '@/components/Header';
 // import { FAQSchema } from '@/components/StructuredData/FAQSchema';
 import type { Scores, SubjectKey } from '@/lib/types';
@@ -1031,6 +1032,12 @@ export default function PrefectureNaishinPage() {
                 </Link>
               </div>
             </section>
+
+            {/* 制度解説の柱記事 */}
+            <PrefecturePillarLinks 
+              prefectureCode={prefectureCode}
+              prefectureName={prefecture.name}
+            />
 
             {/* SEO用テキスト */}
             <p className="text-xs leading-relaxed text-slate-400">
