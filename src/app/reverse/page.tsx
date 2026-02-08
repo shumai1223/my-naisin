@@ -133,43 +133,45 @@ export default function ReversePage() {
               {/* サンプル計算結果（SSR表示） */}
               <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
                 <h2 className="mb-4 text-lg font-bold text-slate-800">計算例：東京都立高校を目指す場合</h2>
+                
+                {/* 満点の枠組み */}
+                <div className="mb-4 rounded-lg border border-blue-200 bg-blue-50 p-4">
+                  <h3 className="mb-2 text-sm font-bold text-blue-800">満点の枠組み</h3>
+                  <div className="text-sm text-blue-700">
+                    学力検査(700点) + 調査書点(300点) + ESAT-J(20点) = 1020点満点
+                    <div className="text-xs text-blue-600 mt-1">※ESAT-J対象外の学校・コースもあります</div>
+                  </div>
+                </div>
+                
                 <div className="space-y-4">
                   <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
                     <h3 className="mb-3 text-sm font-bold text-slate-700">入力例</h3>
                     <div className="grid gap-2 text-sm text-slate-600">
                       <div className="flex justify-between">
-                        <span>都道府県：</span>
-                        <span className="font-medium">東京都</span>
-                      </div>
-                      <div className="flex justify-between">
                         <span>換算内申：</span>
-                        <span className="font-medium">50点 / 65点</span>
+                        <span className="font-medium">50 / 65</span>
                       </div>
                       <div className="flex justify-between">
-                        <span>調査書点：</span>
-                        <span className="font-medium">231点 / 300点</span>
+                        <span>目標総合点：</span>
+                        <span className="font-medium">931 / 1020</span>
                       </div>
                       <div className="flex justify-between">
-                        <span>配点比率：</span>
-                        <span className="font-medium">調査書点:学力検査 = 300:700</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>当日点満点：</span>
-                        <span className="font-medium">700点</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>目標合計点：</span>
-                        <span className="font-medium">931点（ESAT-J込み）</span>
+                        <span>ESAT-J見込み：</span>
+                        <span className="font-medium">20 / 20</span>
                       </div>
                     </div>
                   </div>
                   
                   <div className="rounded-lg border border-emerald-200 bg-emerald-50 p-4">
-                    <h3 className="mb-3 text-sm font-bold text-emerald-700">計算結果</h3>
+                    <h3 className="mb-3 text-sm font-bold text-emerald-700">計算</h3>
                     <div className="space-y-2 text-sm text-emerald-600">
                       <div className="flex justify-between">
-                        <span>必要な学力検査点：</span>
-                        <span className="font-bold text-emerald-800">680点 / 700点</span>
+                        <span>調査書点（推定）：</span>
+                        <span className="font-bold text-emerald-800">round(50 ÷ 65 × 300) = 231点</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>必要学力検査点：</span>
+                        <span className="font-bold text-emerald-800">931 - 231 - 20 = 680点 / 700点</span>
                       </div>
                       <div className="flex justify-between">
                         <span>必要得点率：</span>
@@ -180,22 +182,14 @@ export default function ReversePage() {
                         <span className="font-bold text-emerald-800">約136点 / 140点</span>
                       </div>
                     </div>
-                    <div className="mt-3 rounded-lg border border-emerald-300 bg-emerald-100 p-3">
-                      <p className="text-xs text-emerald-700">
-                        <strong>計算式：</strong> 931点（目標）- 231点（調査書点）- 20点（ESAT-J）= 680点（必要学力検査点）
-                      </p>
-                      <p className="text-xs text-emerald-700 mt-1">
-                        <strong>内訳：</strong> 換算内申50点 → 調査書点231点（50÷65×300）
-                      </p>
-                    </div>
                   </div>
                   
                   <div className="rounded-lg border border-blue-200 bg-blue-50 p-4">
                     <h3 className="mb-2 text-sm font-bold text-blue-700">解説</h3>
                     <p className="text-xs text-blue-600">
-                      東京都立高校の場合、内申点300点は評価の高いレベルです。
-                      当日の学力検査で86%程度の得点率を確保できれば、合格の可能性が高いと判断できます。
-                      各教科140点満点に対し、120点前後の得点が目標となります。
+                      この計算例では、換算内申50点（65点満点中）が調査書点231点に変換され、
+                      目標総合点931点から調査書点231点とESAT-J 20点を引いた680点が当日の学力検査で必要な点数となります。
+                      これにより「何点取れば合格できるか」が具体的にわかります。
                     </p>
                   </div>
                 </div>
