@@ -22,9 +22,11 @@ export function PrefectureMinimumContent({ prefectureCode }: PrefectureMinimumCo
     let total = 0;
     for (const gradeNum of prefecture.targetGrades) {
       const multiplier = prefecture.gradeMultipliers[gradeNum] || 1;
-      const coreScore = 5 * grade * prefecture.coreMultiplier * multiplier;
-      const practicalScore = 4 * grade * prefecture.practicalMultiplier * multiplier;
-      total += coreScore + practicalScore;
+      // 各学年の素点（9教科 × 評定）
+      const gradeRawScore = 9 * grade;
+      // 学年倍率を適用
+      const gradeWeightedScore = gradeRawScore * multiplier;
+      total += gradeWeightedScore;
     }
     return Math.round(total);
   };
@@ -98,13 +100,20 @@ export function PrefectureMinimumContent({ prefectureCode }: PrefectureMinimumCo
           </div>
           
           <div className="rounded-lg border border-green-200 bg-green-50 p-4">
-            <h4 className="text-sm font-semibold text-green-800">実技の扱い</h4>
+            <h4 className="text-sm font-semibold text-green-800">全教科係数</h4>
             <p className="mt-1 text-green-700">
-              {prefecture.practicalMultiplier > prefecture.coreMultiplier 
-                ? `傾斜あり（${prefecture.practicalMultiplier}倍）`
-                : prefecture.coreMultiplier === prefecture.practicalMultiplier && prefecture.coreMultiplier > 1
-                ? `全教科×${prefecture.coreMultiplier}倍`
+              {prefecture.coreMultiplier > 1 
+                ? `×${prefecture.coreMultiplier}倍`
                 : '等倍'}
+            </p>
+          </div>
+          
+          <div className="rounded-lg border border-orange-200 bg-orange-50 p-4">
+            <h4 className="text-sm font-semibold text-orange-800">実技傾斜</h4>
+            <p className="mt-1 text-orange-700">
+              {prefecture.practicalMultiplier > prefecture.coreMultiplier 
+                ? `あり（${prefecture.practicalMultiplier}倍）`
+                : 'なし'}
             </p>
           </div>
           
