@@ -630,7 +630,7 @@ export default function PrefectureNaishinPage() {
                           そんな疑問を解決する逆算機能をご利用いただけます。
                         </p>
                         <Link
-                          href={prefectureCode === 'tokyo' ? '/reverse?pref=tokyo' : prefectureCode === 'kanagawa' ? '/reverse?pref=kanagawa' : '/reverse'}
+                          href={`/reverse?pref=${prefectureCode}`}
                           className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-violet-600 to-purple-600 px-5 py-2.5 text-sm font-bold text-white shadow-md transition-all hover:shadow-lg hover:scale-105"
                         >
                           {prefectureCode === 'tokyo' ? '🎯 必要当日点を算出する' : '🎯 志望校から逆算する'}
@@ -976,7 +976,7 @@ export default function PrefectureNaishinPage() {
                       <p className="text-sm text-emerald-600">目標点から必要な当日点を計算</p>
                     </div>
                     <Link
-                      href="/reverse"
+                      href={`/reverse?pref=${prefectureCode}`}
                       className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-emerald-700"
                     >
                       <Target className="h-4 w-4" />

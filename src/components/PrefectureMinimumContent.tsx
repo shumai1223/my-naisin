@@ -13,6 +13,7 @@ export function PrefectureMinimumContent({ prefectureCode }: PrefectureMinimumCo
   const prefecture = getPrefectureByCode(prefectureCode);
   
   if (!prefecture) return null;
+  const officialUrl = getPrefectureOfficialUrl(prefectureCode);
 
   // 計算例のパターン
   const calculationExamples = [
@@ -143,39 +144,48 @@ export function PrefectureMinimumContent({ prefectureCode }: PrefectureMinimumCo
           公式資料（根拠）
         </h3>
         
-        <div className="space-y-3">
-          {sources.map((source, index) => (
-            <a
-              key={index}
-              href={source.sourceUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block rounded-lg border border-blue-200 bg-white p-4 transition-colors hover:border-blue-300 hover:bg-blue-50"
-            >
-              <div className="flex items-start gap-3">
-                <ExternalLink className="mt-1 h-4 w-4 flex-shrink-0 text-blue-500" />
-                <div className="min-w-0 flex-1">
-                  <h4 className="text-sm font-medium text-blue-800">{source.pdfTitle}</h4>
-                  <div className="mt-1 space-y-1">
-                    <p className="text-xs text-blue-600">
-                      <strong>該当箇所：</strong>{source.pageNumber}「{source.sectionName}」
-                    </p>
-                    <p className="text-xs text-blue-600">{source.description}</p>
-                  </div>
-                  <div className="mt-2 flex items-center gap-2 text-xs text-blue-500">
-                    <Calendar className="h-3 w-3" />
-                    <span>最終確認: {source.lastChecked}</span>
+        {sources.length > 0 ? (
+          <div className="space-y-3">
+            {sources.map((source, index) => (
+              <a
+                key={index}
+                href={source.sourceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block rounded-lg border border-blue-200 bg-white p-4 transition-colors hover:border-blue-300 hover:bg-blue-50"
+              >
+                <div className="flex items-start gap-3">
+                  <ExternalLink className="mt-1 h-4 w-4 flex-shrink-0 text-blue-500" />
+                  <div className="min-w-0 flex-1">
+                    <h4 className="text-sm font-medium text-blue-800">{source.pdfTitle}</h4>
+                    <div className="mt-1 space-y-1">
+                      <p className="text-xs text-blue-600">
+                        <strong>該当箇所：</strong>{source.pageNumber}「{source.sectionName}」
+                      </p>
+                      <p className="text-xs text-blue-600">{source.description}</p>
+                    </div>
+                    <div className="mt-2 flex items-center gap-2 text-xs text-blue-500">
+                      <Calendar className="h-3 w-3" />
+                      <span>最終確認: {source.lastChecked}</span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </a>
-          ))}
-        </div>
-        
-        {sources.length === 0 && (
-          <div className="rounded-lg border border-blue-200 bg-white p-4">
-            <p className="text-sm text-blue-600">
-              詳細な根拠情報を準備中です。教育委員会の公式サイトで最新情報をご確認ください。
+              </a>
+            ))}
+          </div>
+        ) : (
+          <div className="rounded-lg border border-blue-200 bg-white p-4 text-sm text-blue-700">
+            <p>
+              詳細な根拠PDFは現在確認中です。最新情報は
+              <a 
+                href={officialUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 underline-offset-2 hover:underline"
+              >
+                {prefecture.name}教育委員会の公式サイト
+              </a>
+              （最終確認：2026年1月28日）をご覧ください。
             </p>
           </div>
         )}
