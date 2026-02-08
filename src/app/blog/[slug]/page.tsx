@@ -186,24 +186,26 @@ export default async function BlogPostPage({ params }: PageProps) {
           <div
             className="blog-content"
             itemProp="articleBody"
-            dangerouslySetInnerHTML={{
-              __html: post.content
-                .replace(/## /g, '<h2>')
-                .replace(/### /g, '<h3>')
-                .replace(/#### /g, '<h4>')
-                .replace(/---/g, '<hr>')
-                .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
-                .replace(/<!-- AD_PLACEHOLDER -->/g, '')
-                .replace(/<!-- PREFECTURE_LINK_LIST_PLACEHOLDER -->/g, '<div id="prefecture-link-list-placeholder"></div>')
-            }}
-          />
-          
-          {/* 動的コンポーネントの挿入 */}
-          {post.slug === 'naishin-guide' && (
-            <div className="mt-8">
-              <PrefectureLinkList limit={8} />
-            </div>
-          )}
+          >
+            {post.content
+              .replace(/## /g, '<h2>')
+              .replace(/### /g, '<h3>')
+              .replace(/#### /g, '<h4>')
+              .replace(/---/g, '<hr>')
+              .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+              .replace(/<!-- AD_PLACEHOLDER -->/g, '')
+              .split('__PREFECTURE_LINK_LIST__')
+              .map((part, index) => (
+                <div key={index}>
+                  <div dangerouslySetInnerHTML={{ __html: part }} />
+                  {index === 0 && post.slug === 'naishin-guide' && (
+                    <div className="mt-8">
+                      <PrefectureLinkList limit={8} />
+                    </div>
+                  )}
+                </div>
+              ))}
+          </div>
 
           {/* 参考資料・情報源 */}
           {post.sources && post.sources.length > 0 && (

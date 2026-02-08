@@ -148,7 +148,7 @@ export const BLOG_POSTS: BlogPost[] = [
 各都道府県の詳細な計算方法と特徴はこちらから確認できます：
 
 <nav class="prefecture-grid">
-<!-- PREFECTURE_LINK_LIST_PLACEHOLDER -->
+__PREFECTURE_LINK_LIST__
 </nav>
 
 <p class="mt-4 text-sm text-slate-600"><strong>💡 自分の都道府県が決まってない人向け：</strong>まずは<a href="/prefectures">都道府県一覧</a>で「満点・倍率・対象学年」を確認しましょう。</p>
