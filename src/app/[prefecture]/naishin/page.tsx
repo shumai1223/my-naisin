@@ -28,6 +28,7 @@ import { InputForm } from '@/components/Calculator/InputForm';
 import { ScoreGauge } from '@/components/Result/ScoreGauge';
 import { RankCard } from '@/components/Result/RankCard';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
+import { Header } from '@/components/Header';
 // import { FAQSchema } from '@/components/StructuredData/FAQSchema';
 import type { Scores, SubjectKey } from '@/lib/types';
 
@@ -449,6 +450,8 @@ export default function PrefectureNaishinPage() {
 
       <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
         <div className="mx-auto max-w-4xl px-4 py-8 md:py-12">
+          <Header />
+          
           {/* Breadcrumb */}
           <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
             <Link href="/" className="hover:text-blue-600">ホーム</Link>

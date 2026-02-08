@@ -4,6 +4,7 @@ import { User, ArrowLeft, Shield, RefreshCw, FileText, Mail, ExternalLink, Calen
 import Link from 'next/link';
 
 import { APP_NAME } from '@/lib/constants';
+import { Header } from '@/components/Header';
 
 export default function AboutPage() {
   const dataLastVerified = '2026年1月30日';
@@ -13,6 +14,8 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
       <div className="mx-auto max-w-3xl px-4 py-12">
+        <Header />
+        
         {/* Back link */}
         <Link 
           href="/" 

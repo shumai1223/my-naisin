@@ -34,7 +34,7 @@ export default function ReversePage() {
           <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl">
             <Header />
 
-            <main className="px-4 pb-10 md:px-6">
+            <main className="px-4 pb-10 md:px-6 pt-8">
               {/* Breadcrumb */}
               <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
                 <Link href="/" className="flex items-center gap-1 hover:text-blue-600">
