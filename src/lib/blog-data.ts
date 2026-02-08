@@ -179,14 +179,14 @@ export const BLOG_POSTS: BlogPost[] = [
 <div class="prefecture-item">
 <a href="/fukuoka/naishin" class="prefecture-link">
 <h4>福岡県</h4>
-<p class="max-score">90点満点</p>
+<p class="max-score">45点満点</p>
 <span class="arrow">→</span>
 </a>
 </div>
 <div class="prefecture-item">
 <a href="/saitama/naishin" class="prefecture-link">
 <h4>埼玉県</h4>
-<p class="max-score">135点満点</p>
+<p class="max-score">180点満点</p>
 <span class="arrow">→</span>
 </a>
 </div>
@@ -207,7 +207,7 @@ export const BLOG_POSTS: BlogPost[] = [
 <div class="prefecture-item">
 <a href="/hokkaido/naishin" class="prefecture-link">
 <h4>北海道</h4>
-<p class="max-score">90点満点</p>
+<p class="max-score">315点満点</p>
 <span class="arrow">→</span>
 </a>
 </div>
