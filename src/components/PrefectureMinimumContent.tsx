@@ -23,10 +23,12 @@ export function PrefectureMinimumContent({ prefectureCode }: PrefectureMinimumCo
     let total = 0;
     for (const gradeNum of prefecture.targetGrades) {
       const multiplier = prefecture.gradeMultipliers[gradeNum] || 1;
-      // 各学年の素点（9教科 × 評定）
-      const gradeRawScore = 9 * grade;
+      // 主要5教科の素点
+      const coreRawScore = 5 * grade * prefecture.coreMultiplier;
+      // 実技4教科の素点
+      const practicalRawScore = 4 * grade * prefecture.practicalMultiplier;
       // 学年倍率を適用
-      const gradeWeightedScore = gradeRawScore * multiplier;
+      const gradeWeightedScore = (coreRawScore + practicalRawScore) * multiplier;
       total += gradeWeightedScore;
     }
     return Math.round(total);
