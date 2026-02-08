@@ -148,76 +148,7 @@ export const BLOG_POSTS: BlogPost[] = [
 各都道府県の詳細な計算方法と特徴はこちらから確認できます：
 
 <nav class="prefecture-grid">
-<div class="prefecture-item">
-<a href="/tokyo/naishin" class="prefecture-link">
-<h4>東京都</h4>
-<p class="max-score">65点満点</p>
-<span class="arrow">→</span>
-</a>
-</div>
-<div class="prefecture-item">
-<a href="/kanagawa/naishin" class="prefecture-link">
-<h4>神奈川県</h4>
-<p class="max-score">135点満点</p>
-<span class="arrow">→</span>
-</a>
-</div>
-<div class="prefecture-item">
-<a href="/osaka/naishin" class="prefecture-link">
-<h4>大阪府</h4>
-<p class="max-score">450点満点</p>
-<span class="arrow">→</span>
-</a>
-</div>
-<div class="prefecture-item">
-<a href="/aichi/naishin" class="prefecture-link">
-<h4>愛知県</h4>
-<p class="max-score">90点満点</p>
-<span class="arrow">→</span>
-</a>
-</div>
-<div class="prefecture-item">
-<a href="/fukuoka/naishin" class="prefecture-link">
-<h4>福岡県</h4>
-<p class="max-score">45点満点</p>
-<span class="arrow">→</span>
-</a>
-</div>
-<div class="prefecture-item">
-<a href="/saitama/naishin" class="prefecture-link">
-<h4>埼玉県</h4>
-<p class="max-score">180点満点</p>
-<span class="arrow">→</span>
-</a>
-</div>
-<div class="prefecture-item">
-<a href="/chiba/naishin" class="prefecture-link">
-<h4>千葉県</h4>
-<p class="max-score">135点満点</p>
-<span class="arrow">→</span>
-</a>
-</div>
-<div class="prefecture-item">
-<a href="/hyogo/naishin" class="prefecture-link">
-<h4>兵庫県</h4>
-<p class="max-score">250点満点</p>
-<span class="arrow">→</span>
-</a>
-</div>
-<div class="prefecture-item">
-<a href="/hokkaido/naishin" class="prefecture-link">
-<h4>北海道</h4>
-<p class="max-score">315点満点</p>
-<span class="arrow">→</span>
-</a>
-</div>
-<div class="prefecture-item">
-<a href="/prefectures" class="prefecture-link">
-<h4>その他全県</h4>
-<p class="max-score">一覧で確認</p>
-<span class="arrow">→</span>
-</a>
-</div>
+<!-- PREFECTURE_LINK_LIST_PLACEHOLDER -->
 </nav>
 
 <p class="mt-4 text-sm text-slate-600"><strong>💡 自分の都道府県が決まってない人向け：</strong>まずは<a href="/prefectures">都道府県一覧</a>で「満点・倍率・対象学年」を確認しましょう。</p>

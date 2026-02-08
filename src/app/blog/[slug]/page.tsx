@@ -9,6 +9,7 @@ import { BlogSourceLinks } from '@/components/BlogSourceLinks';
 import { BlogUpdateInfo } from '@/components/BlogUpdateInfo';
 import { BlogPostingSchema } from '@/components/StructuredData/BlogPostingSchema';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
+import { PrefectureLinkList } from '@/components/PrefectureLinkList';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -193,8 +194,16 @@ export default async function BlogPostPage({ params }: PageProps) {
                 .replace(/---/g, '<hr>')
                 .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
                 .replace(/<!-- AD_PLACEHOLDER -->/g, '')
+                .replace(/<!-- PREFECTURE_LINK_LIST_PLACEHOLDER -->/g, '<div id="prefecture-link-list-placeholder"></div>')
             }}
           />
+          
+          {/* 動的コンポーネントの挿入 */}
+          {post.slug === 'naishin-guide' && (
+            <div className="mt-8">
+              <PrefectureLinkList limit={8} />
+            </div>
+          )}
 
           {/* 参考資料・情報源 */}
           {post.sources && post.sources.length > 0 && (
