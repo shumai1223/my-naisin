@@ -7,11 +7,6 @@ interface ArticleSchemaProps {
   dateModified: string;
   author: string;
   imageUrl?: string;
-  url?: string;
-  breadcrumb?: {
-    name: string;
-    url: string;
-  }[];
 }
 
 export function ArticleSchema({
@@ -21,8 +16,6 @@ export function ArticleSchema({
   dateModified,
   author,
   imageUrl,
-  url,
-  breadcrumb,
 }: ArticleSchemaProps) {
   const schema = {
     '@context': 'https://schema.org',
@@ -43,23 +36,17 @@ export function ArticleSchema({
         url: 'https://my-naishin.com/logo.png',
       },
     },
-    ...(url && { url: url }),
-    ...(imageUrl && { image: imageUrl }),
-    ...(breadcrumb && {
-      breadcrumb: {
-        '@type': 'BreadcrumbList',
-        itemListElement: breadcrumb.map((item, index) => ({
-          '@type': 'ListItem',
-          position: index + 1,
-          name: item.name,
-          item: item.url,
-        })),
+    ...(imageUrl && {
+      image: {
+        '@type': 'ImageObject',
+        url: imageUrl,
       },
     }),
   };
 
   return (
-    <script
+    <Script
+      id="article-schema"
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
     />

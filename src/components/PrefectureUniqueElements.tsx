@@ -1,13 +1,13 @@
 'use client';
 
-import { PREFECTURES } from '@/lib/prefectures';
+import { PREFECTURES, getPrefectureByCode } from '@/lib/prefectures';
 
 interface PrefectureUniqueElementsProps {
   prefectureCode: string;
 }
 
 export function PrefectureUniqueElements({ prefectureCode }: PrefectureUniqueElementsProps) {
-  const prefecture = Object.values(PREFECTURES).find(p => p.code === prefectureCode);
+  const prefecture = getPrefectureByCode(prefectureCode);
   
   if (!prefecture) return null;
 

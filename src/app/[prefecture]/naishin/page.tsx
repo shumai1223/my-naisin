@@ -30,11 +30,8 @@ import { ScoreGauge } from '@/components/Result/ScoreGauge';
 import { RankCard } from '@/components/Result/RankCard';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { ErrorReportForm } from '@/components/ErrorReportForm';
-import { ErrorReportLink } from '@/components/ErrorReportLink';
 import { PrefectureUniqueElements } from '@/components/PrefectureUniqueElements';
-import { PrefectureCalculationExamples } from '@/components/PrefectureCalculationExamples';
 import { Header } from '@/components/Header';
-import { WebPageSchema } from '@/components/StructuredData/WebPageSchema';
 // import { FAQSchema } from '@/components/StructuredData/FAQSchema';
 import type { Scores, SubjectKey } from '@/lib/types';
 
@@ -364,16 +361,14 @@ export default function PrefectureNaishinPage() {
 
   if (!prefecture) {
     return (
-      <>
-        <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white flex items-center justify-center">
-          <div className="text-center">
-            <h1 className="text-2xl font-bold text-slate-800">都道府県が見つかりません</h1>
-            <Link href="/" className="mt-4 inline-block text-blue-600 hover:underline">
-              トップページへ戻る
-            </Link>
-          </div>
+      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-slate-800">都道府県が見つかりません</h1>
+          <Link href="/" className="mt-4 inline-block text-blue-600 hover:underline">
+            トップページへ戻る
+          </Link>
         </div>
-      </>
+      </div>
     );
   }
 
@@ -444,18 +439,6 @@ export default function PrefectureNaishinPage() {
 
   return (
     <>
-      {/* JSON-LD構造化データ */}
-      <WebPageSchema
-        title={`${prefecture.name}の内申点計算方法と満点（${prefecture.maxScore}点）｜My Naishin`}
-        description={`${prefecture.name}の高校入試で使われる内申点の計算方法を詳しく解説。満点${prefecture.maxScore}点、対象学年${prefecture.targetGrades.join('・')}、実技${prefecture.practicalMultiplier > 1 ? `${prefecture.practicalMultiplier}倍` : '等倍'}。${prefecture.description}`}
-        url={`https://my-naishin.com/${prefectureCode}/naishin`}
-        lastModified={prefecture.lastVerified}
-        breadcrumb={[
-          { name: 'トップ', url: 'https://my-naishin.com' },
-          { name: prefecture.name, url: `https://my-naishin.com/${prefectureCode}/naishin` }
-        ]}
-      />
-
       <Script
         id="faq-schema"
         type="application/ld+json"
@@ -708,8 +691,61 @@ export default function PrefectureNaishinPage() {
 
               {/* 固定テンプレ：計算例 */}
               <div className="mb-6 rounded-xl bg-gradient-to-r from-green-50 to-emerald-50 p-4 border border-green-200">
-                <PrefectureCalculationExamples prefectureCode={prefectureCode} />
-              </div>
+                <h3 className="mb-3 font-bold text-green-800 flex items-center gap-2">
+                  <span className="text-lg">🧮</span> よくある成績パターンの計算例
+                </h3>
+                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                  <div className="rounded-lg bg-white p-3 border border-green-300">
+                    <div className="font-semibold text-green-700">オール3の場合</div>
+                    <div className="text-sm text-slate-600 mt-1">
+                      {(() => {
+                        const all3Scores = Object.keys(DEFAULT_SCORES).reduce((acc, key) => ({
+                          ...acc,
+                          [key]: 3
+                        }), {} as Scores);
+                        const total = calculateTotalScore(all3Scores, prefectureCode);
+                        return `${total}点 / ${prefecture.maxScore}点満点`;
+                      })()}
+                    </div>
+                  </div>
+                  <div className="rounded-lg bg-white p-3 border border-green-300">
+                    <div className="font-semibold text-green-700">オール4の場合</div>
+                    <div className="text-sm text-slate-600 mt-1">
+                      {(() => {
+                        const all4Scores = Object.keys(DEFAULT_SCORES).reduce((acc, key) => ({
+                          ...acc,
+                          [key]: 4
+                        }), {} as Scores);
+                        const total = calculateTotalScore(all4Scores, prefectureCode);
+                        return `${total}点 / ${prefecture.maxScore}点満点`;
+                      })()}
+                    </div>
+                  </div>
+                  <div className="rounded-lg bg-white p-3 border border-green-300">
+                    <div className="font-semibold text-green-700">実技だけ+1</div>
+                    <div className="text-sm text-slate-600 mt-1">
+                      {(() => {
+                        const baseScores = Object.keys(DEFAULT_SCORES).reduce((acc, key) => ({
+                          ...acc,
+                          [key]: 3
+                        }), {} as Scores);
+                        // 実技教科だけ+1
+                        const jitsugiSubjects = ['music', 'art', 'pe', 'tech'] as const;
+                        type JitsugiSubject = typeof jitsugiSubjects[number];
+                        jitsugiSubjects.forEach((subject) => {
+                          baseScores[subject] = 4;
+                        });
+                        const total = calculateTotalScore(baseScores, prefectureCode);
+                        const baseTotal = calculateTotalScore(Object.keys(DEFAULT_SCORES).reduce((acc, key) => ({
+                          ...acc,
+                          [key]: 3
+                        }), {} as Scores), prefectureCode);
+                        const increase = total - baseTotal;
+                        return `${total}点（+${increase}点）`;
+                      })()}
+                    </div>
+                  </div>
+                </div>
                 {prefecture.practicalMultiplier > 1 && (
                   <div className="mt-3 p-2 bg-green-100 rounded-lg text-xs text-green-700">
                     <strong>ポイント：</strong>実技教科が{prefecture.practicalMultiplier}倍なので、実技で1点上げると通常の{prefecture.practicalMultiplier}倍の効果があります！
@@ -1007,14 +1043,6 @@ export default function PrefectureNaishinPage() {
 
             {/* 都道府県固有要素 */}
             <PrefectureUniqueElements prefectureCode={prefectureCode} />
-
-            {/* 誤り報告リンク */}
-            <ErrorReportLink 
-              prefectureCode={prefectureCode}
-              prefectureName={prefecture.name}
-              lastVerified={prefecture.lastVerified}
-              sourceUrl={prefecture.sourceUrl}
-            />
 
             {/* 誤り報告フォーム */}
             <ErrorReportForm 
