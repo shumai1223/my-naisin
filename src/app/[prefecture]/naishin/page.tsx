@@ -33,6 +33,7 @@ import { PrefectureUniqueElements } from '@/components/PrefectureUniqueElements'
 import { PrefectureMinimumContent } from '@/components/PrefectureMinimumContent';
 import { PrefecturePillarLinks } from '@/components/PrefecturePillarLinks';
 import { Header } from '@/components/Header';
+import { ToolGuide } from '@/components/ToolGuide';
 // import { FAQSchema } from '@/components/StructuredData/FAQSchema';
 import type { Scores, SubjectKey } from '@/lib/types';
 
@@ -221,6 +222,14 @@ export default function PrefectureNaishinPage() {
                 </div>
               )}
             </section>
+
+            {/* ツールガイド */}
+            <ToolGuide 
+              prefectureName={prefecture.name}
+              targetGrades={prefecture.targetGrades}
+              maxScore={prefecture.maxScore}
+              practicalMultiplier={prefecture.practicalMultiplier}
+            />
 
             {/* 計算式 */}
             <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">

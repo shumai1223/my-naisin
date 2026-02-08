@@ -6,6 +6,7 @@ import { getPrefectureByCode } from '@/lib/prefectures';
 import { PREFECTURE_TRAPS, generateDynamicTraps } from '@/lib/prefecture-traps';
 import { PREFECTURE_SOURCES } from '@/lib/prefecture-sources';
 import { getPrefectureGuide, generateDynamicFAQ } from '@/lib/prefecture-guides';
+import { TrustInfo } from '@/components/TrustInfo';
 
 interface PrefectureMinimumContentProps {
   prefectureCode: string;
@@ -234,6 +235,18 @@ export function PrefectureMinimumContent({ prefectureCode }: PrefectureMinimumCo
           </div>
         </div>
       )}
+      
+      {/* 信頼性情報 */}
+      <TrustInfo
+        sources={sources.map(source => ({
+          name: source.pdfTitle || `${prefecture.name}教育委員会`,
+          url: source.sourceUrl,
+          lastVerified: source.lastChecked,
+          description: `${source.pageNumber}「${source.sectionName}」`
+        }))}
+        lastUpdated={new Date().toLocaleDateString('ja-JP')}
+        prefectureName={prefecture.name}
+      />
     </div>
     </>
   );
