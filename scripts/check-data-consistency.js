@@ -41,19 +41,19 @@ function loadPrefectureData() {
   return prefectures;
 }
 
-// ブログデータの満点をチェック
-function checkBlogData(prefectures) {
+// ブログ記事内の県別満点をチェック
+function checkBlogPrefectureScores(prefectures) {
   const blogPath = path.join(__dirname, '..', 'src', 'lib', 'blog-data.ts');
   const content = fs.readFileSync(blogPath, 'utf8');
   
   const issues = [];
   
   for (const prefecture of prefectures) {
-    // ブログ内の表記を検索（複数パターン）
+    // 記事内の表記を検索（複数パターン）
     const patterns = [
-      new RegExp(`<h4>${prefecture.name}</h4>\\s*<p class="max-score">(\\d+)点満点</p>`, 'g'),
-      new RegExp(`${prefecture.name}</h4>[\\s\\S]*?<(\\d+)点満点`, 'g'),
-      new RegExp(`${prefecture.name}.*?(\\d+)点満点`, 'g')
+      new RegExp(`${prefecture.name}.*?(\\d+)点満点`, 'g'),
+      new RegExp(`${prefecture.name}</h4>\\s*<p[^>]*>(\\d+)点満点`, 'g'),
+      new RegExp(`<h4>${prefecture.name}</h4>\\s*<p[^>]*>(\\d+)点満点`, 'g')
     ];
     
     for (const pattern of patterns) {
@@ -65,13 +65,14 @@ function checkBlogData(prefectures) {
             const blogScore = parseInt(scoreMatch[1]);
             if (blogScore !== prefecture.maxScore) {
               issues.push({
-                type: 'blog_score_mismatch',
+                type: 'blog_prefecture_score_mismatch',
                 prefecture: prefecture.name,
                 code: prefecture.code,
                 expected: prefecture.maxScore,
                 actual: blogScore,
                 location: 'blog-data.ts',
-                severity: 'high'
+                severity: 'high',
+                match: match.trim()
               });
             }
           }
@@ -213,7 +214,7 @@ function main() {
     const prefectures = loadPrefectureData();
     console.log(`✅ ${prefectures.length}件の都道府県データを読み込み`);
     
-    const blogIssues = checkBlogData(prefectures);
+    const blogIssues = checkBlogPrefectureScores(prefectures);
     const guideIssues = checkGuideData(prefectures);
     const linkIssues = checkBrokenLinks();
     const statementIssues = checkAssertiveStatements();
