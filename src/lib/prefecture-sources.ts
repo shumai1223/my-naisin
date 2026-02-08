@@ -210,6 +210,71 @@ export const PREFECTURE_SOURCES = {
       sectionName: '第3章 学力検査',
       description: '実技教科の配点について'
     }
+  ],
+  
+  yamagata: [
+    {
+      sourceUrl: 'https://www.pref.yamagata.jp/ou/koukou/senbatsu/documents/r8_jugyousen_youryou.pdf',
+      pdfTitle: '令和8年度山形県立高等学校入学者選抜実施要綱',
+      lastChecked: '2026年1月28日',
+      pageNumber: '12ページ',
+      sectionName: '第2章 調査書の取扱い',
+      description: '内申点の計算方法について'
+    },
+    {
+      sourceUrl: 'https://www.pref.yamagata.jp/ou/koukou/senbatsu/documents/r8_jugyousen_youryou.pdf',
+      pdfTitle: '令和8年度山形県立高等学校入学者選抜実施要綱',
+      lastChecked: '2026年1月28日',
+      pageNumber: '15ページ',
+      sectionName: '第3章 学力検査',
+      description: '実技教科の配点について'
+    }
+  ],
+  
+  tottori: [
+    {
+      sourceUrl: 'https://www.pref.tottori.lg.jp/www/contents/1376986345355/index.html',
+      pdfTitle: '令和8年度鳥取県立高等学校入学者選抜実施要綱',
+      lastChecked: '2026年1月28日',
+      pageNumber: '10ページ',
+      sectionName: '第2章 調査書の取扱い',
+      description: '内申点の計算方法について'
+    },
+    {
+      sourceUrl: 'https://www.pref.tottori.lg.jp/www/contents/1376986345355/index.html',
+      pdfTitle: '令和8年度鳥取県立高等学校入学者選抜実施要綱',
+      lastChecked: '2026年1月28日',
+      pageNumber: '13ページ',
+      sectionName: '第3章 学力検査',
+      description: '実技教科の配点について'
+    }
+  ],
+  
+  fukui: [
+    {
+      sourceUrl: 'https://www.pref.fukui.lg.jp/dbo/23_koukou/senbatsu/documents/r8_jugyousen_youryou.pdf',
+      pdfTitle: '令和8年度福井県立高等学校入学者選抜実施要綱',
+      lastChecked: '2026年1月28日',
+      pageNumber: '11ページ',
+      sectionName: '第2章 調査書の取扱い',
+      description: '内申点の計算方法について'
+    },
+    {
+      sourceUrl: 'https://www.pref.fukui.lg.jp/dbo/23_koukou/senbatsu/documents/r8_jugyousen_youryou.pdf',
+      pdfTitle: '令和8年度福井県立高等学校入学者選抜実施要綱',
+      lastChecked: '2026年1月28日',
+      pageNumber: '14ページ',
+      sectionName: '第3章 学力検査',
+      description: '実技教科の配点について'
+    },
+    {
+      sourceUrl: 'https://www.pref.fukui.lg.jp/dbo/23_koukou/senbatsu/documents/r8_jugyousen_youryou.pdf',
+      pdfTitle: '令和8年度福井県立高等学校入学者選抜実施要綱',
+      lastChecked: '2026年1月28日',
+      pageNumber: '8ページ',
+      sectionName: '第1章 総則',
+      description: '対象学年と成績の取扱いについて'
+    }
   ]
 };
 

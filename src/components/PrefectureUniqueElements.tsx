@@ -29,11 +29,10 @@ export function PrefectureUniqueElements({ prefectureCode }: PrefectureUniqueEle
     kanagawa: {
       gradeRatioChart: {
         title: '神奈川県の学年比率',
-        description: '神奈川県立高校入試では中1・中2・中3の成績が対象',
+        description: '神奈川県立高校入試では中2・中3の成績が対象',
         data: [
-          { grade: '中1', ratio: 33, color: 'bg-green-500' },
           { grade: '中2', ratio: 33, color: 'bg-green-500' },
-          { grade: '中3', ratio: 34, color: 'bg-green-600' },
+          { grade: '中3', ratio: 67, color: 'bg-blue-500' }
         ]
       },
       specialNote: 'S値方式で合否判定。内申点と当日点を標準化して合算します。',

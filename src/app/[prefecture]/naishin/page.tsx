@@ -996,7 +996,7 @@ export default function PrefectureNaishinPage() {
               </h2>
               <div className="space-y-2">
                 <Link
-                  href={`/${prefectureCode}/reverse`}
+                  href={`/reverse?pref=${prefectureCode}`}
                   className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow"
                 >
                   <span className="text-sm font-medium text-slate-700">{prefecture.name}：内申と当日点の逆算</span>
