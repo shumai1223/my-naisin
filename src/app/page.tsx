@@ -3,7 +3,7 @@
 import * as React from 'react';
 import Link from 'next/link';
 import confetti from 'canvas-confetti';
-import { ArrowRight, RotateCcw, Share2 } from 'lucide-react';
+import { ArrowRight, RotateCcw, Share2, BookOpen, ChevronRight } from 'lucide-react';
 
 import { DEFAULT_SCORES } from '@/lib/constants';
 import { getPrefectureByCode, DEFAULT_PREFECTURE_CODE } from '@/lib/prefectures';
@@ -462,6 +462,26 @@ export default function Page() {
                   currentMax={result.max} 
                   currentPrefecture={prefectureCode} 
                 />
+
+                {/* 現在の都道府県への導線 */}
+                <Card className="overflow-hidden">
+                  <div className="border-b border-slate-100/80 bg-gradient-to-r from-blue-50/80 via-indigo-50/60 to-violet-50/80 px-6 py-5">
+                    <div className="flex items-start justify-between gap-4">
+                      <div>
+                        <div className="text-base font-bold text-slate-800">📍 {getPrefectureByCode(prefectureCode)?.name}の詳しい情報</div>
+                        <div className="mt-1 text-sm text-slate-500">計算根拠・FAQ・公式資料</div>
+                      </div>
+                      <Link
+                        href={`/${prefectureCode}/naishin`}
+                        className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-blue-700"
+                      >
+                        <BookOpen className="h-4 w-4" />
+                        計算根拠ページへ
+                        <ChevronRight className="h-4 w-4" />
+                      </Link>
+                    </div>
+                  </div>
+                </Card>
 
                 {/* 成績分析・改善提案 */}
                 <ScoreImprovementAnalysis 

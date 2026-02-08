@@ -4,6 +4,7 @@ import { Calendar, Clock, ChevronLeft, ChevronRight, BookOpen, Home, User, FileC
 
 import { getPostBySlug, getAllPosts } from '@/lib/blog-data';
 import { BlogCTA } from '@/components/BlogCTA';
+import { BlogRelatedLinks } from '@/components/BlogRelatedLinks';
 import { BlogPostingSchema } from '@/components/StructuredData/BlogPostingSchema';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 
@@ -225,6 +226,17 @@ export default async function BlogPostPage({ params }: PageProps) {
         {/* CTA */}
         <div className="mt-10">
           <BlogCTA />
+        </div>
+
+        {/* 関連リンク */}
+        <div className="mt-10">
+          <BlogRelatedLinks 
+            relatedPrefectures={post.tags.includes('東京都') ? ['tokyo'] : 
+                              post.tags.includes('神奈川') ? ['kanagawa'] :
+                              post.tags.includes('大阪') ? ['osaka'] : []}
+            showReverseTool={true}
+            showGlossary={true}
+          />
         </div>
 
         {/* Navigation */}

@@ -15,7 +15,8 @@ import {
   ChevronDown,
   HelpCircle,
   Sparkles,
-  CheckCircle
+  CheckCircle,
+  Target
 } from 'lucide-react';
 import Script from 'next/script';
 
@@ -28,6 +29,8 @@ import { InputForm } from '@/components/Calculator/InputForm';
 import { ScoreGauge } from '@/components/Result/ScoreGauge';
 import { RankCard } from '@/components/Result/RankCard';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
+import { ErrorReportForm } from '@/components/ErrorReportForm';
+import { PrefectureUniqueElements } from '@/components/PrefectureUniqueElements';
 import { Header } from '@/components/Header';
 // import { FAQSchema } from '@/components/StructuredData/FAQSchema';
 import type { Scores, SubjectKey } from '@/lib/types';
@@ -941,12 +944,57 @@ export default function PrefectureNaishinPage() {
               </p>
             </section>
 
-            {/* 関連リンク（県名入り） */}
-            <section className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
-              <h2 className="mb-4 text-lg font-bold text-slate-800">{prefecture.name}の関連コンテンツ</h2>
-              <div className="grid gap-3 sm:grid-cols-2">
+            {/* フル機能版への導線 - 強化 */}
+            <section className="mb-8 rounded-2xl border border-blue-200 bg-gradient-to-br from-blue-50 to-indigo-50 p-6 shadow-sm">
+              <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-blue-800">
+                <Sparkles className="h-5 w-5" />
+                もっと詳しく分析したい方へ
+              </h2>
+              <div className="space-y-3">
+                <div className="rounded-lg border border-blue-200 bg-white p-4">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h3 className="font-semibold text-blue-800">内申点シミュレーター（フル機能版）</h3>
+                      <p className="text-sm text-blue-600">成績推移グラフ・目標設定・バッジ獲得機能</p>
+                    </div>
+                    <Link
+                      href="/"
+                      className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-blue-700"
+                    >
+                      <Calculator className="h-4 w-4" />
+                      フル機能版へ
+                      <ChevronRight className="h-4 w-4" />
+                    </Link>
+                  </div>
+                </div>
+                <div className="rounded-lg border border-emerald-200 bg-white p-4">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h3 className="font-semibold text-emerald-800">志望校から逆算</h3>
+                      <p className="text-sm text-emerald-600">目標点から必要な当日点を計算</p>
+                    </div>
+                    <Link
+                      href="/reverse"
+                      className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-emerald-700"
+                    >
+                      <Target className="h-4 w-4" />
+                      逆算ツールへ
+                      <ChevronRight className="h-4 w-4" />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* 関連リンク */}
+            <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
+                <BookOpen className="h-5 w-5 text-indigo-500" />
+                {prefecture.name}の詳しい情報
+              </h2>
+              <div className="space-y-2">
                 <Link
-                  href={`/reverse?pref=${prefectureCode}`}
+                  href={`/${prefectureCode}/reverse`}
                   className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow"
                 >
                   <span className="text-sm font-medium text-slate-700">{prefecture.name}：内申と当日点の逆算</span>
@@ -980,13 +1028,6 @@ export default function PrefectureNaishinPage() {
                   <span className="text-sm font-medium text-slate-700">他の都道府県の内申点計算を見る</span>
                   <ChevronRight className="h-4 w-4 text-slate-400" />
                 </Link>
-                <Link
-                  href="/"
-                  className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow"
-                >
-                  <span className="text-sm font-medium text-slate-700">内申点シミュレーター（フル機能版）</span>
-                  <ChevronRight className="h-4 w-4 text-slate-400" />
-                </Link>
               </div>
             </section>
 
@@ -999,6 +1040,15 @@ export default function PrefectureNaishinPage() {
               {prefecture.practicalMultiplier > 1 && `実技4教科は${prefecture.practicalMultiplier}倍で計算されます。`}
               最新の入試情報は{prefecture.name}教育委員会の公式サイトでご確認ください。
             </p>
+
+            {/* 都道府県固有要素 */}
+            <PrefectureUniqueElements prefectureCode={prefectureCode} />
+
+            {/* 誤り報告フォーム */}
+            <ErrorReportForm 
+              prefectureCode={prefectureCode}
+              prefectureName={prefecture.name}
+            />
           </div>
         </div>
       </div>

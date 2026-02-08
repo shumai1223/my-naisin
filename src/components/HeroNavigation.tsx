@@ -97,6 +97,46 @@ export function HeroNavigation({ onModeChange, currentMode }: HeroNavigationProp
           </motion.div>
         </div>
 
+        {/* Quick Prefecture Selection - 1クリック化 */}
+        <div className="flex flex-col items-center gap-4">
+          <div className="text-center text-sm text-slate-500">
+            または、都道府県を選んですぐに計算
+          </div>
+          
+          <div className="grid grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-6">
+            {[
+              { code: 'tokyo', name: '東京' },
+              { code: 'kanagawa', name: '神奈川' },
+              { code: 'osaka', name: '大阪' },
+              { code: 'aichi', name: '愛知' },
+              { code: 'saitama', name: '埼玉' },
+              { code: 'chiba', name: '千葉' },
+            ].map((pref, index) => (
+              <motion.div
+                key={pref.code}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 + index * 0.05, duration: 0.3 }}
+              >
+                <Link
+                  href={`/${pref.code}/naishin`}
+                  className="group inline-flex items-center justify-center rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-700 shadow-sm transition-all duration-300 hover:border-blue-300 hover:shadow-md hover:bg-blue-50 hover:text-blue-700"
+                >
+                  <span>{pref.name}</span>
+                  <ChevronRight className="ml-1 h-3 w-3 transition-transform group-hover:translate-x-1" />
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+          
+          <Link
+            href="/prefectures"
+            className="text-xs text-slate-500 hover:text-blue-600"
+          >
+            全47都道府県から選ぶ →
+          </Link>
+        </div>
+
         {/* Secondary navigation - smaller links */}
         <div className="flex flex-col items-center gap-4">
           <div className="text-center text-sm text-slate-500">

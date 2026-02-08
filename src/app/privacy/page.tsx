@@ -298,9 +298,6 @@ export default function PrivacyPage() {
           </section>
 
           {/* 将来的に導入予定の広告サービス（現在は未使用） */}
-          {/* Google AdSense や Amazonアソシエイト等の広告配信サービスを利用予定 */}
-          {/* 審査通過後に以下のセクションを有効化 */}
-
           {/* 広告配信と第三者Cookie */}
           <section>
             <div className="mb-3 flex items-center gap-2">
@@ -318,43 +315,19 @@ export default function PrivacyPage() {
                 • 広告配信事業者のプライバシーポリシーおよび利用規約が適用されます。
               </p>
             </div>
-            <h3 className="mb-2 mt-4 text-sm font-bold text-slate-700">5.1 広告のオプトアウト（無効化）</h3>
+            
+            <h3 className="mb-2 mt-4 text-sm font-bold text-slate-700">5.1 広告Cookieの管理</h3>
             <p className="text-sm leading-relaxed text-slate-600">
-              ユーザーは以下の方法でパーソナライズ広告を無効にできます：
+              広告Cookieを管理する方法：
             </p>
             <ul className="mt-2 space-y-1 text-sm leading-relaxed text-slate-600">
               <li className="flex gap-2">
                 <span className="text-orange-500">•</span>
-                <a
-                  href="https://myadcenter.google.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-600 underline hover:text-blue-700"
-                >
-                  Google マイ アド センター (My Ad Center)
-                </a>
+                <strong>Cookie同意画面：</strong>広告Cookieの使用を拒否することができます
               </li>
               <li className="flex gap-2">
                 <span className="text-orange-500">•</span>
-                <a
-                  href="https://adssettings.google.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-600 underline hover:text-blue-700"
-                >
-                  Google 広告設定 (Ads Settings)
-                </a>
-              </li>
-              <li className="flex gap-2">
-                <span className="text-orange-500">•</span>
-                <a
-                  href="https://www.aboutads.info/choices/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-600 underline hover:text-blue-700"
-                >
-                  Digital Advertising Alliance (aboutads.info)
-                </a>
+                <strong>Google広告設定：</strong><a href="https://adssettings.google.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">https://adssettings.google.com</a>でパーソナライズ広告を管理
               </li>
               <li className="flex gap-2">
                 <span className="text-orange-500">•</span>
@@ -362,8 +335,9 @@ export default function PrivacyPage() {
               </li>
             </ul>
             <div className="mt-4 rounded-xl border border-amber-200 bg-amber-50 p-4">
-              <p className="text-xs leading-relaxed text-amber-800">
-                <strong>ご注意：</strong>オプトアウトしても広告は表示されますが、関心に基づかない広告（一般広告）が配信されます。
+              <p className="text-sm leading-relaxed text-amber-800">
+                <strong>ご注意：</strong>広告Cookieを無効にしても、当サイトの基本機能はご利用いただけます。
+                ただし、広告の関連性が低下する場合があります。
               </p>
             </div>
           </section>
