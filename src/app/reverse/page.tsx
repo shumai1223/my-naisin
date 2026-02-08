@@ -169,20 +169,23 @@ export default function ReversePage() {
                     <div className="space-y-2 text-sm text-emerald-600">
                       <div className="flex justify-between">
                         <span>必要な学力検査点：</span>
-                        <span className="font-bold text-emerald-800">600点 / 700点</span>
+                        <span className="font-bold text-emerald-800">680点 / 700点</span>
                       </div>
                       <div className="flex justify-between">
                         <span>必要得点率：</span>
-                        <span className="font-bold text-emerald-800">約86%</span>
+                        <span className="font-bold text-emerald-800">約97%</span>
                       </div>
                       <div className="flex justify-between">
                         <span>5教科平均：</span>
-                        <span className="font-bold text-emerald-800">約120点 / 140点</span>
+                        <span className="font-bold text-emerald-800">約136点 / 140点</span>
                       </div>
                     </div>
                     <div className="mt-3 rounded-lg border border-emerald-300 bg-emerald-100 p-3">
                       <p className="text-xs text-emerald-700">
-                        <strong>計算式：</strong> (720点 - 300点×0.3) ÷ 0.7 = 600点
+                        <strong>計算式：</strong> 931点（目標）- 231点（調査書点）- 20点（ESAT-J）= 680点（必要学力検査点）
+                      </p>
+                      <p className="text-xs text-emerald-700 mt-1">
+                        <strong>内訳：</strong> 換算内申50点 → 調査書点231点（50÷65×300）
                       </p>
                     </div>
                   </div>

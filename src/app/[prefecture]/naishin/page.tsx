@@ -14,18 +14,21 @@ import {
   Info,
   ChevronDown,
   HelpCircle,
-  Sparkles
+  Sparkles,
+  CheckCircle
 } from 'lucide-react';
 import Script from 'next/script';
 
 import { PREFECTURES, getPrefectureByCode } from '@/lib/prefectures';
 import { DEFAULT_SCORES } from '@/lib/constants';
 import { calculateMaxScore, calculateTotalScore, calculatePercent, getRankForPercent } from '@/lib/utils';
-import { generatePitfalls, generateFAQ } from '@/lib/prefecture-helpers';
+import { generatePitfalls } from '@/lib/prefecture-helpers';
+import { getPrefectureGuide } from '@/lib/prefecture-guides';
 import { InputForm } from '@/components/Calculator/InputForm';
 import { ScoreGauge } from '@/components/Result/ScoreGauge';
 import { RankCard } from '@/components/Result/RankCard';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
+// import { FAQSchema } from '@/components/StructuredData/FAQSchema';
 import type { Scores, SubjectKey } from '@/lib/types';
 
 // 県別の落とし穴・注意点データ
@@ -365,8 +368,9 @@ export default function PrefectureNaishinPage() {
     );
   }
 
-  const pitfalls = generatePitfalls(prefectureCode);
-  const faqItems = generateFAQ(prefectureCode);
+  const pitfalls = generatePitfalls(prefectureCode);// FAQデータをデータ駆動に変更
+  const guide = getPrefectureGuide(prefectureCode);
+  const faqItems = guide.faq;
 
   const max = calculateMaxScore(prefectureCode);
   const total = calculateTotalScore(scores, prefectureCode);
@@ -881,6 +885,26 @@ export default function PrefectureNaishinPage() {
                 ))}
               </div>
             </section>
+
+            {/* FAQ Schema */}
+            <Script
+              id="faq-schema"
+              type="application/ld+json"
+              dangerouslySetInnerHTML={{
+                __html: JSON.stringify({
+                  "@context": "https://schema.org",
+                  "@type": "FAQPage",
+                  "mainEntity": faqItems.map(f => ({
+                    "@type": "Question",
+                    "name": f.question,
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": f.answer
+                    }
+                  }))
+                })
+              }}
+            />
 
             {/* 公式資料リンク */}
             <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
