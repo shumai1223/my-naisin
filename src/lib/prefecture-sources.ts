@@ -86,15 +86,15 @@ export const PREFECTURE_SOURCES = {
     {
       sourceUrl: 'https://www.pref.aichi.jp/documents/14242/r8_jugyousen_youryou.pdf',
       pdfTitle: '令和8年度愛知県立高等学校入学者選抜実施要綱',
-      lastChecked: '2026年1月28日',
+      lastChecked: '2026年1月31日',
       pageNumber: '11ページ',
       sectionName: '第2章 調査書の取扱い',
-      description: '実技教科の2倍計算について'
+      description: '全教科×2倍の計算方法について'
     },
     {
       sourceUrl: 'https://www.pref.aichi.jp/documents/14242/r8_jugyousen_youryou.pdf',
       pdfTitle: '令和8年度愛知県立高等学校入学者選抜実施要綱',
-      lastChecked: '2026年1月28日',
+      lastChecked: '2026年1月31日',
       pageNumber: '13ページ',
       sectionName: '第3章 学力検査',
       description: '満点90点の内訳について'
@@ -102,7 +102,7 @@ export const PREFECTURE_SOURCES = {
     {
       sourceUrl: 'https://www.pref.aichi.jp/documents/14242/r8_jugyousen_youryou.pdf',
       pdfTitle: '令和8年度愛知県立高等学校入学者選抜実施要綱',
-      lastChecked: '2026年1月28日',
+      lastChecked: '2026年1月31日',
       pageNumber: '8ページ',
       sectionName: '第1章 総則',
       description: '対象学年と成績の取扱いについて'
