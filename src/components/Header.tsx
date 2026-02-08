@@ -8,7 +8,7 @@ import { APP_NAME, APP_NAME_JA } from '@/lib/constants';
 export function Header() {
   return (
     <header className="overflow-hidden">
-      <div className="relative bg-gradient-to-br from-indigo-600 via-blue-600 to-violet-700 px-4 py-8 md:px-6 md:py-10">
+      <div className="relative bg-gradient-to-br from-indigo-600 via-blue-600 to-violet-700 px-4 py-8 md:px-6 md:py-10 pb-12">
         <div className="relative flex items-start justify-between gap-4">
           <div className="flex items-center gap-4">
             <div className="relative">
