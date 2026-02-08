@@ -658,6 +658,114 @@ export default function PrefectureNaishinPage() {
                 <BookOpen className="h-5 w-5 text-blue-500" />
                 {prefecture.name}ならではの内申ポイント
               </h2>
+
+              {/* 固定テンプレ：3行要約 */}
+              <div className="mb-6 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 p-4 border border-blue-200">
+                <h3 className="mb-3 font-bold text-blue-800 flex items-center gap-2">
+                  <span className="text-lg">📝</span> {prefecture.name}の内申ポイント3行要約
+                </h3>
+                <div className="space-y-2 text-sm">
+                  <div className="flex items-start gap-2">
+                    <span className="text-blue-600 font-bold">1.</span>
+                    <span><strong>対象学年：</strong>中{prefecture.targetGrades.join('・')}が対象{prefecture.targetGrades.length === 1 ? '（注：集中対策が必要）' : '（早めの対策が有利）'}</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <span className="text-blue-600 font-bold">2.</span>
+                    <span><strong>実技倍率：</strong>{prefecture.practicalMultiplier > 1 ? `${prefecture.practicalMultiplier}倍（実技得意な人有利）` : '等倍（バランス型が有利）'}</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <span className="text-blue-600 font-bold">3.</span>
+                    <span><strong>満点：</strong>{prefecture.maxScore}点{prefecture.maxScore >= 200 ? '（高得点戦略が必要）' : '（効率的な得点アップが可能）'}</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* 固定テンプレ：計算例 */}
+              <div className="mb-6 rounded-xl bg-gradient-to-r from-green-50 to-emerald-50 p-4 border border-green-200">
+                <h3 className="mb-3 font-bold text-green-800 flex items-center gap-2">
+                  <span className="text-lg">🧮</span> よくある成績パターンの計算例
+                </h3>
+                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                  <div className="rounded-lg bg-white p-3 border border-green-300">
+                    <div className="font-semibold text-green-700">オール3の場合</div>
+                    <div className="text-sm text-slate-600 mt-1">
+                      {(() => {
+                        const all3Scores = Object.keys(DEFAULT_SCORES).reduce((acc, key) => ({
+                          ...acc,
+                          [key]: 3
+                        }), {} as Scores);
+                        const total = calculateTotalScore(all3Scores, prefectureCode);
+                        return `${total}点 / ${prefecture.maxScore}点満点`;
+                      })()}
+                    </div>
+                  </div>
+                  <div className="rounded-lg bg-white p-3 border border-green-300">
+                    <div className="font-semibold text-green-700">オール4の場合</div>
+                    <div className="text-sm text-slate-600 mt-1">
+                      {(() => {
+                        const all4Scores = Object.keys(DEFAULT_SCORES).reduce((acc, key) => ({
+                          ...acc,
+                          [key]: 4
+                        }), {} as Scores);
+                        const total = calculateTotalScore(all4Scores, prefectureCode);
+                        return `${total}点 / ${prefecture.maxScore}点満点`;
+                      })()}
+                    </div>
+                  </div>
+                  <div className="rounded-lg bg-white p-3 border border-green-300">
+                    <div className="font-semibold text-green-700">実技だけ+1</div>
+                    <div className="text-sm text-slate-600 mt-1">
+                      {(() => {
+                        const baseScores = Object.keys(DEFAULT_SCORES).reduce((acc, key) => ({
+                          ...acc,
+                          [key]: 3
+                        }), {} as Scores);
+                        // 実技教科だけ+1
+                        (['music', 'art', 'pe', 'tech'] as SubjectKey[]).forEach(subject => {
+                          baseScores[subject] = 4;
+                        });
+                        const total = calculateTotalScore(baseScores, prefectureCode);
+                        const baseTotal = calculateTotalScore(Object.keys(DEFAULT_SCORES).reduce((acc, key) => ({
+                          ...acc,
+                          [key]: 3
+                        }), {} as Scores), prefectureCode);
+                        const increase = total - baseTotal;
+                        return `${total}点（+${increase}点）`;
+                      })()}
+                    </div>
+                  </div>
+                </div>
+                {prefecture.practicalMultiplier > 1 && (
+                  <div className="mt-3 p-2 bg-green-100 rounded-lg text-xs text-green-700">
+                    <strong>ポイント：</strong>実技教科が{prefecture.practicalMultiplier}倍なので、実技で1点上げると通常の{prefecture.practicalMultiplier}倍の効果があります！
+                  </div>
+                )}
+              </div>
+
+              {/* 固定テンプレ：公式資料情報 */}
+              <div className="mb-6 rounded-xl bg-gradient-to-r from-amber-50 to-orange-50 p-4 border border-amber-200">
+                <h3 className="mb-3 font-bold text-amber-800 flex items-center gap-2">
+                  <span className="text-lg">📋</span> 公式資料の確認ポイント
+                </h3>
+                <div className="space-y-2 text-sm text-slate-700">
+                  <div className="flex items-start gap-2">
+                    <span className="text-amber-600">📄</span>
+                    <span><strong>資料名：</strong>{prefecture.name}教育委員会「令和8年度入学者選抜要項」</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <span className="text-amber-600">🔍</span>
+                    <span><strong>確認ページ：</strong>「調査書点の算出方法」または「内申点の取扱い」の項目</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <span className="text-amber-600">✅</span>
+                    <span><strong>チェック項目：</strong>満点数・実技倍率・対象学年・学校ごとの注意事項</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <span className="text-amber-600">⚠️</span>
+                    <span><strong>注意：</strong>学校・コースによって計算方法が異なる場合があります</span>
+                  </div>
+                </div>
+              </div>
               
               {/* 東京都の詳細情報 */}
               {prefectureCode === 'tokyo' && (

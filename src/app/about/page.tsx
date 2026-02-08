@@ -36,6 +36,43 @@ export default function AboutPage() {
         {/* Content */}
         <div className="space-y-6">
           
+          {/* 運営者プロフィール */}
+          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
+              <User className="h-5 w-5 text-blue-500" />
+              運営者プロフィール
+            </h2>
+            <div className="space-y-4 text-sm leading-relaxed text-slate-600">
+              <div className="rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 p-4 border border-blue-200">
+                <h3 className="mb-2 font-bold text-blue-800">👋 私は誰か</h3>
+                <p><strong>ハンドルネーム：</strong>My Naishin運営者（中学生開発者）</p>
+                <p><strong>立場：</strong>現在高校受験を経験した中学生。同じく受験を控える仲間のために、自分が困った経験を活かしてツールを開発。</p>
+                <p><strong>開発動機：</strong>「内申点の計算って県ごとに違うし、何が必要か分かりにくい」という自分の経験から、もっと分かりやすいツールがあればいいのにと思ったのがきっかけ。</p>
+              </div>
+              
+              <div className="rounded-xl bg-gradient-to-r from-green-50 to-emerald-50 p-4 border border-green-200">
+                <h3 className="mb-2 font-bold text-green-800">💪 できること</h3>
+                <ul className="space-y-1">
+                  <li>• <strong>実装・開発：</strong>Webアプリケーションの設計・コーディング</li>
+                  <li>• <strong>データ検証：</strong>各都道府県の公式資料を確認し、計算ロジックを実装</li>
+                  <li>• <strong>情報収集：</strong>教育委員会の最新情報を追跡・反映</li>
+                  <li>• <strong>ユーザーサポート：</strong>不具合報告・質問への対応（48時間以内）</li>
+                </ul>
+              </div>
+              
+              <div className="rounded-xl bg-gradient-to-r from-amber-50 to-orange-50 p-4 border border-amber-200">
+                <h3 className="mb-2 font-bold text-amber-800">⚠️ できないこと（明確化）</h3>
+                <ul className="space-y-1">
+                  <li>• <strong>進路相談：</strong>具体的な志望校選択や合格判定はできません</li>
+                  <li>• <strong>学習指導：</strong>教科の勉強方法や個別指導は行いません</li>
+                  <li>• <strong>公式手続き：</strong>出願手続きや学校への問い合わせ代行はできません</li>
+                  <li>• <strong>保証：</strong>計算結果の絶対的な正確性や合格保証はできません</li>
+                </ul>
+                <p className="mt-2 text-xs text-amber-700"><strong>理由：</strong>私は開発者であり、教育の専門家ではありません。進路に関する最終決定は、保護者の方や学校の先生と相談してください。</p>
+              </div>
+            </div>
+          </div>
+
           {/* サイト概要 */}
           <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">

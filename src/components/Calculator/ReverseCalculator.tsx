@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { useSearchParams } from 'next/navigation';
-import { Target, Calculator, Info, ArrowLeft, ChevronDown, ExternalLink, Copy, Check } from 'lucide-react';
+import { Target, Calculator, Info, ArrowLeft, ChevronDown, ExternalLink, Copy, Check, HelpCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 import { PREFECTURES, getPrefectureByCode } from '@/lib/prefectures';
@@ -28,6 +28,49 @@ interface ReverseResult {
 type ReverseMode = 'general' | 'tokyo' | 'kanagawa';
 
 const KANAGAWA_RATIO_PRESETS = ['3-7', '4-6', '5-5', '6-4', '7-3'];
+
+// 都道府県別のよくある配点比率プリセット
+const PREFECTURE_RATIO_PRESETS: Record<string, { label: string; ratio: number; examMax: number; description: string }[]> = {
+  tokyo: [
+    { label: '都立一般', ratio: 30, examMax: 700, description: '学力検査700点・調査書点300点の標準' },
+    { label: '内申重視', ratio: 40, examMax: 600, description: '内申重視の学校・学科向け' },
+    { label: '学力重視', ratio: 25, examMax: 750, description: '学力検査重視の進学校向け' },
+  ],
+  kanagawa: [
+    { label: 'S値:A値=6:4', ratio: 40, examMax: 500, description: '一般的な比率' },
+    { label: 'S値:A値=7:3', ratio: 30, examMax: 500, description: '学力検査重視' },
+    { label: 'S値:A値=5:5', ratio: 50, examMax: 500, description: '内申重視' },
+  ],
+  osaka: [
+    { label: 'Ⅲ型', ratio: 37.5, examMax: 500, description: '内申:学力=3:5の標準' },
+    { label: 'Ⅱ型', ratio: 40, examMax: 500, description: '内申:学力=4:6' },
+    { label: 'Ⅰ型', ratio: 50, examMax: 500, description: '内申:学力=5:5' },
+  ]
+};
+
+// 用語ヘルプデータ
+const TERM_HELP: Record<string, { title: string; description: string }> = {
+  'S値': {
+    title: 'S値とは',
+    description: '学力検査の得点を100点満点に換算した値です。神奈川県などで使われる用語で、内申点（A値）と合わせて合否判定に使われます。'
+  },
+  'K値': {
+    title: 'K値とは',
+    description: '内申点の重み付け係数で、0.5〜2の範囲で高校ごとに設定されます。K値が高いほど内申点が重視されます。千葉県などで使われます。'
+  },
+  'ESAT-J': {
+    title: 'ESAT-Jとは',
+    description: '東京都立高校入試で導入された英語スピーキングテストです。20点満点で、学力検査700点・調査書点300点に加算されます。'
+  },
+  '換算内申': {
+    title: '換算内申とは',
+    description: '都道府県のルールで計算し直した内申点です。東京都では実技4教科を2倍にして65点満点で計算します。'
+  },
+  '調査書点': {
+    title: '調査書点とは',
+    description: '内申点を入試の配点に換算した点数です。東京都では換算内申を300点満点に換算します。'
+  }
+};
 
 export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
   const searchParams = useSearchParams();
@@ -185,6 +228,60 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
             >
               神奈川(S1/S2)
             </button>
+          </div>
+
+          {/* 県別プリセットボタン */}
+          {mode === 'general' && PREFECTURE_RATIO_PRESETS[prefectureCode] && (
+            <div className="mb-4 rounded-xl border border-blue-100 bg-blue-50 p-4">
+              <div className="mb-3 flex items-center gap-2">
+                <span className="text-sm font-semibold text-blue-800">よくある配点比率</span>
+                <HelpCircle className="h-4 w-4 text-blue-600" />
+              </div>
+              <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+                {PREFECTURE_RATIO_PRESETS[prefectureCode].map((preset, index) => (
+                  <button
+                    key={index}
+                    type="button"
+                    onClick={() => {
+                      setNaishinRatio(preset.ratio);
+                      setExamMaxScore(preset.examMax);
+                    }}
+                    className="rounded-lg border border-blue-200 bg-white p-3 text-left hover:bg-blue-50 transition-colors"
+                  >
+                    <div className="font-semibold text-blue-700 text-sm">{preset.label}</div>
+                    <div className="text-xs text-slate-600 mt-1">{preset.description}</div>
+                    <div className="text-xs text-blue-600 mt-1">内申{preset.ratio}%・学力{100-preset.ratio}%</div>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* 用語ヘルプ */}
+          <div className="mb-4 rounded-xl border border-amber-100 bg-amber-50 p-4">
+            <div className="mb-3 flex items-center gap-2">
+              <span className="text-sm font-semibold text-amber-800">用語ヘルプ</span>
+              <Info className="h-4 w-4 text-amber-600" />
+            </div>
+            <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+              {Object.entries(TERM_HELP).map(([term, help]) => (
+                <div key={term} className="rounded-lg border border-amber-200 bg-white p-3">
+                  <div className="flex items-start gap-2">
+                    <button
+                      type="button"
+                      onClick={() => alert(`${help.title}\n\n${help.description}`)}
+                      className="rounded-full bg-amber-100 p-1 hover:bg-amber-200 transition-colors"
+                    >
+                      <HelpCircle className="h-3 w-3 text-amber-700" />
+                    </button>
+                    <div className="flex-1">
+                      <div className="font-semibold text-amber-700 text-sm">{term}</div>
+                      <div className="text-xs text-slate-600 mt-1 line-clamp-2">{help.description}</div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
 
           {mode === 'tokyo' ? (
