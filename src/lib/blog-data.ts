@@ -172,7 +172,7 @@ export const BLOG_POSTS: BlogPost[] = [
 <div class="prefecture-item">
 <a href="/aichi/naishin" class="prefecture-link">
 <h4>愛知県</h4>
-<p class="max-score">45点満点</p>
+<p class="max-score">90点満点</p>
 <span class="arrow">→</span>
 </a>
 </div>
