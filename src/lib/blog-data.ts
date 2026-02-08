@@ -1775,7 +1775,7 @@ export const BLOG_POSTS: BlogPost[] = [
 
 <div class="faq-item">
 <h4>Q. 換算内申は東京都だけ？</h4>
-<p>A. いいえ。兵庫県（実技2.5倍）など、他の府県でも独自の換算方式があります。都道府県ごとに確認が必要です。</p>
+<p>A. いいえ。兵庫県（実技7.5倍）など、他の府県でも独自の換算方式があります。都道府県ごとに確認が必要です。</p>
 </div>
 
 <div class="faq-item">
@@ -1851,7 +1851,7 @@ export const BLOG_POSTS: BlogPost[] = [
 <div class="table-responsive">
 <table>
 <tr><th>都道府県</th><th>実技の倍率</th><th>満点</th><th>備考</th></tr>
-<tr><td><strong>兵庫県</strong></td><td>2.5倍</td><td>250点</td><td>実技の比重が最も高い</td></tr>
+<tr><td><strong>兵庫県</strong></td><td>7.5倍</td><td>250点</td><td>実技の比重が最も高い</td></tr>
 <tr><td><strong>東京都</strong></td><td>2倍</td><td>65点</td><td>中3のみ対象</td></tr>
 <tr><td><strong>宮城県</strong></td><td>2倍</td><td>195点</td><td>3年間対象</td></tr>
 <tr><td><strong>秋田県</strong></td><td>2倍</td><td>195点</td><td>3年間対象</td></tr>
@@ -1863,7 +1863,7 @@ export const BLOG_POSTS: BlogPost[] = [
 
 <div class="point-box green">
 <h4>🎯 実技が得意な人へ</h4>
-<p>これらの県では、実技教科で5を取ると大きなアドバンテージになります。特に兵庫県は2.5倍なので、実技1点アップ＝5教科2.5点分の価値があります！</p>
+<p>これらの県では、実技教科で5を取ると大きなアドバンテージになります。特に兵庫県は7.5倍なので、実技1点アップ＝5教科約1.9点分の価値があります！</p>
 </div>
 
 ---
@@ -1922,7 +1922,7 @@ export const BLOG_POSTS: BlogPost[] = [
 <div class="comparison-table">
 <table>
 <tr><th>都道府県</th><th>実技1点の価値</th><th>5教科換算</th></tr>
-<tr><td>兵庫県</td><td>2.5点</td><td>5教科2.5点分</td></tr>
+<tr><td>兵庫県</td><td>7.5点</td><td>5教科約1.9点分</td></tr>
 <tr><td>東京都</td><td>2点</td><td>5教科2点分</td></tr>
 <tr><td>岩手県</td><td>3点</td><td>5教科1.5点分</td></tr>
 <tr><td>大阪府</td><td>1点</td><td>5教科1点分</td></tr>
@@ -1939,7 +1939,7 @@ export const BLOG_POSTS: BlogPost[] = [
 <ul>
 <li>実技2倍以上：東京・兵庫・宮城・秋田・福島・京都など</li>
 <li>実技等倍：大阪・愛知・神奈川・埼玉・千葉・北海道など</li>
-<li>兵庫県は2.5倍で実技の価値が最も高い</li>
+<li>兵庫県は7.5倍で実技の価値が最も高い</li>
 <li>自分の得意分野に合った戦略を立てよう</li>
 </ul>
 </div>
@@ -2028,10 +2028,10 @@ export const BLOG_POSTS: BlogPost[] = [
 <p>東京都の場合：5教科×5点＝25点 ＋ 4教科×5点×2＝40点 ＝ <strong>65点満点</strong>（代表例）</p>
 <p>実技でオール5を取ると40点分（全体の61.5%）を占めるため、実技の影響力は非常に大きいです。</p>
 
-<h2>実技2.5倍の県</h2>
+<h2>実技7.5倍の県</h2>
 <p>全国で最も実技の価値が高いのは兵庫県です。</p>
 <p><strong>該当する都道府県（例）：</strong>兵庫県（250点満点）</p>
-<p>兵庫県：5教科×5点×4年分＋4教科×5点×4年分×2.5 ＝ 250点満点（代表例）。実技が得意な生徒には非常に有利な制度です。</p>
+<p>兵庫県：5教科×5点×4倍＋4教科×5点×7.5倍 ＝ 250点満点（代表例）。実技が得意な生徒には非常に有利な制度です。</p>
 
 <h2>実技3倍の県</h2>
 <p><strong>該当する主な都道府県（例）：</strong>岩手県（5教科は2倍、実技は3倍）</p>
