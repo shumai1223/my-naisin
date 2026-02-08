@@ -1718,18 +1718,23 @@ export const BLOG_POSTS: BlogPost[] = [
 
 ### 計算例
 
-| 教科 | 評定 | 換算後 |
-|------|------|--------|
-| 国語 | 4 | 4点 |
-| 数学 | 3 | 3点 |
-| 英語 | 4 | 4点 |
-| 理科 | 4 | 4点 |
-| 社会 | 3 | 3点 |
-| 音楽 | 4 | 8点（×2）|
-| 美術 | 3 | 6点（×2）|
-| 保体 | 5 | 10点（×2）|
-| 技家 | 4 | 8点（×2）|
-| **合計** | - | **50点/65点** |
+<table class="calc-table">
+<thead>
+<tr><th>教科</th><th>評定</th><th>換算後</th></tr>
+</thead>
+<tbody>
+<tr><td>国語</td><td>4</td><td>4点</td></tr>
+<tr><td>数学</td><td>3</td><td>3点</td></tr>
+<tr><td>英語</td><td>4</td><td>4点</td></tr>
+<tr><td>理科</td><td>4</td><td>4点</td></tr>
+<tr><td>社会</td><td>3</td><td>3点</td></tr>
+<tr><td>音楽</td><td>4</td><td>8点（×2）</td></tr>
+<tr><td>美術</td><td>3</td><td>6点（×2）</td></tr>
+<tr><td>保体</td><td>5</td><td>10点（×2）</td></tr>
+<tr><td>技家</td><td>4</td><td>8点（×2）</td></tr>
+<tr class="highlight"><td><strong>合計</strong></td><td>-</td><td><strong>50点/65点</strong></td></tr>
+</tbody>
+</table>
 
 この生徒の場合：
 - 素内申：34点/45点
