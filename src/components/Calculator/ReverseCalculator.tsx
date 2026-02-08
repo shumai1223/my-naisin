@@ -460,6 +460,37 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
                 </div>
               </div>
 
+              {/* 3ラインの説明文（固定表示） */}
+              <div className="mt-4 rounded-xl border border-slate-200 bg-gradient-to-br from-slate-50 to-slate-100 p-4">
+                <div className="text-xs font-bold text-slate-600 mb-3">目標ラインの意味</div>
+                <div className="space-y-2">
+                  <div className="flex items-start gap-2">
+                    <div className="h-2 w-2 rounded-full bg-emerald-500 mt-1.5"></div>
+                    <div>
+                      <span className="text-sm font-medium text-emerald-700">安全圏：</span>
+                      <span className="text-sm text-slate-600">当日のブレを吸収するライン</span>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <div className="h-2 w-2 rounded-full bg-blue-500 mt-1.5"></div>
+                    <div>
+                      <span className="text-sm font-medium text-blue-700">標準：</span>
+                      <span className="text-sm text-slate-600">合格ライン目安</span>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <div className="h-2 w-2 rounded-full bg-orange-500 mt-1.5"></div>
+                    <div>
+                      <span className="text-sm font-medium text-orange-700">挑戦：</span>
+                      <span className="text-sm text-slate-600">最低限ライン（要リスク管理）</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-3 text-xs text-slate-500 border-t border-slate-200 pt-3">
+                  💡 上記の目標ラインを参考に、自分の学力や志望校に合わせた学習計画を立てましょう
+                </div>
+              </div>
+
               {/* 計算式（簡易） */}
               <div className="mt-4 rounded-xl border border-slate-200 bg-slate-50 p-4">
                 <div className="text-xs font-bold text-slate-600">計算式</div>

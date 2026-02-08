@@ -145,7 +145,7 @@ export const BLOG_POSTS: BlogPost[] = [
 
 各都道府県の詳細な計算方法と特徴はこちらから確認できます：
 
-<div class="prefecture-grid">
+<nav class="prefecture-grid">
 <div class="prefecture-item">
 <a href="/tokyo/naishin" class="prefecture-link">
 <h4>東京都</h4>
@@ -216,6 +216,10 @@ export const BLOG_POSTS: BlogPost[] = [
 <span class="arrow">→</span>
 </a>
 </div>
+</nav>
+
+<div class="prefecture-note">
+<p><strong>💡 自分の都道府県が決まってない人向け：</strong>まずは<a href="/prefectures">都道府県一覧</a>で「満点・倍率・対象学年」を確認しましょう。</p>
 </div>
 
 <style>
@@ -271,6 +275,30 @@ export const BLOG_POSTS: BlogPost[] = [
 
 .prefecture-item:hover .arrow {
   transform: translateX(2px);
+}
+
+/* 都道府県注釈スタイル */
+.prefecture-note {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #64748b;
+}
+
+.prefecture-note strong {
+  color: #3b82f6;
+}
+
+.prefecture-note a {
+  color: #3b82f6;
+  text-decoration: underline;
+}
+
+.prefecture-note a:hover {
+  color: #2563eb;
 }
 </style>
 
