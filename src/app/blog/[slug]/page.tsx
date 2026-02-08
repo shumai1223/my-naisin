@@ -5,6 +5,8 @@ import { Calendar, Clock, ChevronLeft, ChevronRight, BookOpen, Home, User, FileC
 import { getPostBySlug, getAllPosts } from '@/lib/blog-data';
 import { BlogCTA } from '@/components/BlogCTA';
 import { BlogRelatedLinks } from '@/components/BlogRelatedLinks';
+import { BlogSourceLinks } from '@/components/BlogSourceLinks';
+import { BlogUpdateInfo } from '@/components/BlogUpdateInfo';
 import { BlogPostingSchema } from '@/components/StructuredData/BlogPostingSchema';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 
@@ -223,6 +225,19 @@ export default async function BlogPostPage({ params }: PageProps) {
           )}
         </article>
 
+        {/* 更新情報 */}
+        <div className="mt-6">
+          <BlogUpdateInfo 
+            lastUpdated={new Date(post.date).toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' })}
+            updateContent={[
+              '最新の入試制度に基づき内容を更新',
+              '根拠リンク（一次情報）を追加',
+              '計算例を最新の方式に修正',
+              '関連リンクを拡充'
+            ]}
+          />
+        </div>
+
         {/* CTA */}
         <div className="mt-10">
           <BlogCTA />
@@ -236,6 +251,17 @@ export default async function BlogPostPage({ params }: PageProps) {
                               post.tags.includes('大阪') ? ['osaka'] : []}
             showReverseTool={true}
             showGlossary={true}
+          />
+        </div>
+
+        {/* 根拠リンク */}
+        <div className="mt-10">
+          <BlogSourceLinks 
+            prefectureCode={post.tags.includes('東京都') ? 'tokyo' : 
+                           post.tags.includes('神奈川') ? 'kanagawa' :
+                           post.tags.includes('大阪') ? 'osaka' : undefined}
+            hasEvaluationPoints={post.tags.includes('評価観点') || post.tags.includes('通知表')}
+            hasCalculationMethod={post.tags.includes('計算方法') || post.tags.includes('内申点')}
           />
         </div>
 

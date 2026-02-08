@@ -31,6 +31,7 @@ import { RankCard } from '@/components/Result/RankCard';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { ErrorReportForm } from '@/components/ErrorReportForm';
 import { PrefectureUniqueElements } from '@/components/PrefectureUniqueElements';
+import { PrefectureMinimumContent } from '@/components/PrefectureMinimumContent';
 import { Header } from '@/components/Header';
 // import { FAQSchema } from '@/components/StructuredData/FAQSchema';
 import type { Scores, SubjectKey } from '@/lib/types';
@@ -1040,6 +1041,9 @@ export default function PrefectureNaishinPage() {
               {prefecture.practicalMultiplier > 1 && `実技4教科は${prefecture.practicalMultiplier}倍で計算されます。`}
               最新の入試情報は{prefecture.name}教育委員会の公式サイトでご確認ください。
             </p>
+
+            {/* 都道府県最低ラインコンテンツ */}
+            <PrefectureMinimumContent prefectureCode={prefectureCode} />
 
             {/* 都道府県固有要素 */}
             <PrefectureUniqueElements prefectureCode={prefectureCode} />
