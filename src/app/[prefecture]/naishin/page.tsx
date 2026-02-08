@@ -23,7 +23,6 @@ import Script from 'next/script';
 import { PREFECTURES, getPrefectureByCode } from '@/lib/prefectures';
 import { DEFAULT_SCORES } from '@/lib/constants';
 import { calculateMaxScore, calculateTotalScore, calculatePercent, getRankForPercent } from '@/lib/utils';
-import { generatePitfalls } from '@/lib/prefecture-helpers';
 import { getPrefectureGuide, generateDynamicFAQ } from '@/lib/prefecture-guides';
 import { InputForm } from '@/components/Calculator/InputForm';
 import { ScoreGauge } from '@/components/Result/ScoreGauge';
@@ -77,7 +76,6 @@ export default function PrefectureNaishinPage() {
     );
   }
 
-  const pitfalls = generatePitfalls(prefectureCode);
   const guide = getPrefectureGuide(prefectureCode);
   // 常に動的FAQを使用して、矛盾をなくす
   const faqItems = generateDynamicFAQ(prefectureCode, prefecture);

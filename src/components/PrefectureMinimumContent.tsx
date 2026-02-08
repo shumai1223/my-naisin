@@ -17,19 +17,30 @@ export function PrefectureMinimumContent({ prefectureCode }: PrefectureMinimumCo
   if (!prefecture) return null;
   const officialUrl = getPrefectureOfficialUrl(prefectureCode);
 
-  // 計算例のパターン
+  // 計算例のパターン（実際の計算ロジックを使用）
+  const calculateExampleScore = (grade: number) => {
+    let total = 0;
+    for (const gradeNum of prefecture.targetGrades) {
+      const multiplier = prefecture.gradeMultipliers[gradeNum] || 1;
+      const coreScore = 5 * grade * prefecture.coreMultiplier * multiplier;
+      const practicalScore = 4 * grade * prefecture.practicalMultiplier * multiplier;
+      total += coreScore + practicalScore;
+    }
+    return Math.round(total);
+  };
+
   const calculationExamples = [
     {
       title: 'オール3の場合',
-      description: '全教科で評定3を取った場合の内申点',
-      scores: { 国語: 3, 数学: 3, 英語: 3, 理科: 3, 社会: 3, 音楽: 3, 美術: 3, 保体: 3, 技家: 3 },
-      improvement: '主要5教科を4に上げることで+5点向上'
+      description: `対象学年すべてが評定3の場合の内申点`,
+      score: calculateExampleScore(3),
+      improvement: '主要5教科を4に上げることで向上'
     },
     {
       title: 'オール4の場合',
-      description: '全教科で評定4を取った場合の内申点',
-      scores: { 国語: 4, 数学: 4, 英語: 4, 理科: 4, 社会: 4, 音楽: 4, 美術: 4, 保体: 4, 技家: 4 },
-      improvement: '主要5教科を5に上げることで+5点向上'
+      description: `対象学年すべてが評定4の場合の内申点`,
+      score: calculateExampleScore(4),
+      improvement: '主要5教科を5に上げることで向上'
     }
   ];
 
@@ -116,6 +127,10 @@ export function PrefectureMinimumContent({ prefectureCode }: PrefectureMinimumCo
             <div key={index} className="rounded-lg border border-slate-200 bg-slate-50 p-4">
               <h4 className="font-semibold text-slate-800">{example.title}</h4>
               <p className="mt-1 text-sm text-slate-600">{example.description}</p>
+              
+              <div className="mt-2 rounded-lg border border-blue-200 bg-blue-50 p-3">
+                <p className="text-lg font-bold text-blue-800">{example.score}点 / {prefecture.maxScore}点満点</p>
+              </div>
               
               <div className="mt-3 flex items-center gap-2">
                 <TrendingUp className="h-4 w-4 text-blue-500" />
