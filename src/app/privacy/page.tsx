@@ -48,15 +48,11 @@ export default function PrivacyPage() {
             </li>
             <li className="flex gap-2">
               <span className="text-emerald-500">✓</span>
-              <span>入力データはお使いの端末内のみに保存され、サーバーには送信されません</span>
+              <span><strong>広告配信：</strong>第三者Cookieを使用してパーソナライズ広告を配信します</span>
             </li>
             <li className="flex gap-2">
               <span className="text-emerald-500">✓</span>
-              <span>アクセス解析のためにCookieを使用します</span>
-            </li>
-            <li className="flex gap-2">
-              <span className="text-emerald-500">✓</span>
-              <span>18歳未満の方は保護者の同意を得てからご利用ください</span>
+              <span><strong>データ利用：</strong>Google等のサービスが利用データを収集・分析します</span>
             </li>
           </ul>
         </div>
