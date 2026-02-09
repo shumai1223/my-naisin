@@ -14,6 +14,20 @@ export interface ChangeLogEntry {
 
 export const CHANGELOG: ChangeLogEntry[] = [
   {
+    date: '2026-02-09',
+    type: 'fix',
+    category: 'content',
+    title: 'E-E-A-T信頼性問題を完全修正',
+    description: '一次情報リンクの404、不適切表現、断定口調を修正し、広告前提のプライバシーポリシーを強化しました。',
+  },
+  {
+    date: '2026-02-09',
+    type: 'add',
+    category: 'feature',
+    title: 'PWA機能を追加',
+    description: 'スマホのホーム画面に追加でき、アプリのように使えるPWA機能を実装しました。',
+  },
+  {
     date: '2026-02-08',
     type: 'fix',
     category: 'data',
