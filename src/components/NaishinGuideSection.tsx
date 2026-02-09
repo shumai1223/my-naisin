@@ -77,9 +77,7 @@ export function NaishinGuideSection() {
               </p>
               {isExpanded && (
                 <div className="mt-3 overflow-hidden transition-all duration-300">
-                  <p className="border-t border-slate-100 pt-3 text-sm leading-relaxed text-slate-600">
-                    {card.detail}
-                  </p>
+                  <p className="border-t border-slate-100 pt-3 text-sm leading-relaxed text-slate-600" dangerouslySetInnerHTML={{ __html: card.detail }} />
                 </div>
               )}
               <button
@@ -111,7 +109,7 @@ export function NaishinGuideSection() {
                 <ChevronRight className="h-4 w-4 text-slate-400 transition-transform group-open:rotate-90" />
               </summary>
               <div className="px-4 pb-4 text-sm leading-relaxed text-slate-600">
-                <p>A. {item.answer}</p>
+                <p dangerouslySetInnerHTML={{ __html: `A. ${item.answer}` }} />
               </div>
             </details>
           ))}
