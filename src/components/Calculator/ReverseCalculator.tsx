@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { useSearchParams } from 'next/navigation';
-import { Target, Calculator, Info, ArrowLeft, ChevronDown, ExternalLink, Copy, Check, HelpCircle } from 'lucide-react';
+import { Target, Calculator, Info, ArrowLeft, ChevronDown, ExternalLink, Copy, Check, HelpCircle, MapPin } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 import { PREFECTURES, getPrefectureByCode } from '@/lib/prefectures';
@@ -44,9 +44,9 @@ const PREFECTURE_RATIO_PRESETS: Record<string, { label: string; ratio: number; e
     { label: 'S値:A値=5:5', ratio: 50, examMax: 500, description: '内申重視' },
   ],
   osaka: [
-    { label: 'Ⅲ型', ratio: 37.5, examMax: 500, description: '内申:学力=3:5の標準' },
-    { label: 'Ⅱ型', ratio: 40, examMax: 500, description: '内申:学力=4:6' },
     { label: 'Ⅰ型', ratio: 50, examMax: 500, description: '内申:学力=5:5' },
+    { label: 'Ⅱ型', ratio: 40, examMax: 500, description: '内申:学力=4:6' },
+    { label: 'Ⅲ型', ratio: 37.5, examMax: 500, description: '内申:学力=3:5の標準' },
     { label: 'Ⅳ型', ratio: 30, examMax: 500, description: '内申:学力=3:7（内申重視）' },
     { label: 'Ⅴ型', ratio: 25, examMax: 500, description: '内申:学力=1:3（内申最重視）' },
   ]
@@ -96,9 +96,21 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
   const [osakaType, setOsakaType] = React.useState<string>('II'); // デフォルトはタイプII
   const [copied, setCopied] = React.useState(false);
   const [validationError, setValidationError] = React.useState<string | null>(null);
+  const [isPrefectureDropdownOpen, setIsPrefectureDropdownOpen] = React.useState(false);
+  const dropdownRef = React.useRef<HTMLDivElement>(null);
 
   const prefecture = React.useMemo(() => getPrefectureByCode(prefectureCode), [prefectureCode]);
   const naishinMax = React.useMemo(() => calculateMaxScore(prefectureCode), [prefectureCode]);
+
+  React.useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsPrefectureDropdownOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   React.useEffect(() => {
     // 都道府県ごとの逆算設定を反映
@@ -532,25 +544,60 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
             </div>
           ) : (
           <div className="space-y-5">
-            <div>
-              <label className="mb-2 block text-sm font-bold text-slate-700">
-                都道府県を選択
-                <span className="ml-1 text-xs font-normal text-amber-500">※必須</span>
-              </label>
-              <div className="relative">
-                <select
-                  value={prefectureCode}
-                  onChange={(e) => setPrefectureCode(e.target.value)}
-                  className="h-12 w-full appearance-none rounded-xl border border-slate-200 bg-white px-4 pr-10 text-sm font-medium text-slate-800 shadow-sm outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20"
-                >
-                  {PREFECTURES.map((pref) => (
-                    <option key={pref.code} value={pref.code}>
-                      {pref.name}
-                    </option>
-                  ))}
-                </select>
-                <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" />
+            <div ref={dropdownRef}>
+              <div className="mb-2">
+                <h3 className="text-sm font-bold text-slate-700">都道府県の選択</h3>
+                <p className="text-xs text-slate-500">お住まいの地域を選んでください</p>
               </div>
+              
+              <div className="relative">
+                <button
+                  type="button"
+                  onClick={() => setIsPrefectureDropdownOpen(!isPrefectureDropdownOpen)}
+                  className="flex w-full items-center justify-between gap-3 rounded-2xl border-2 border-slate-200 bg-white px-4 py-4 text-left transition-all shadow-sm hover:border-blue-300 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="grid h-12 w-12 place-items-center rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 shadow-md">
+                      <MapPin className="h-6 w-6 text-white" />
+                    </div>
+                    <div>
+                      <div className="text-base font-bold text-slate-800">
+                        {prefecture?.name ?? '都道府県を選択'}
+                      </div>
+                      <div className="text-xs text-slate-500">
+                        {prefecture?.description ?? '計算方法を選んでください'}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="rounded-full bg-slate-100 p-2">
+                    <ChevronDown className={`h-5 w-5 text-slate-400 transition-transform ${isPrefectureDropdownOpen ? 'rotate-180' : ''}`} />
+                  </div>
+                </button>
+
+                {isPrefectureDropdownOpen && (
+                  <div className="absolute z-50 mt-2 max-h-80 w-full overflow-auto rounded-2xl border border-slate-200 bg-white shadow-xl">
+                    <div className="max-h-80 overflow-y-auto">
+                      {PREFECTURES.map((pref) => (
+                        <button
+                          key={pref.code}
+                          type="button"
+                          onClick={() => {
+                            setPrefectureCode(pref.code);
+                            setIsPrefectureDropdownOpen(false);
+                          }}
+                          className={`w-full px-4 py-3 text-left transition-colors hover:bg-blue-50 ${
+                            prefectureCode === pref.code ? 'bg-blue-50 border-l-4 border-blue-500' : ''
+                          }`}
+                        >
+                          <div className="font-medium text-slate-800">{pref.name}</div>
+                          <div className="text-xs text-slate-500">{pref.description}</div>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+              
               <div className="mt-1 text-xs text-slate-500">
                 選択すると自動で配点比率が設定されます
               </div>
