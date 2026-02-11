@@ -57,7 +57,7 @@ export function ToolGuide({ prefectureName, targetGrades, maxScore, practicalMul
           </h4>
           <div className="rounded-lg border border-red-200 bg-red-50 p-3">
             <ul className="space-y-1 text-sm text-red-700">
-              <li>• 中間試験の成績を入力する（期末試験のみ対象）</li>
+              <li>• 中間試験の成績を入力する場合があります（学校・地域によります）</li>
               <li>• 5段階評価以外の値を入力する（1〜5で入力）</li>
               <li>• 他の県の計算方式で考える（県ごとに異なります）</li>
               <li>• 提出物や授業態度を考慮しすぎる（評定に含まれている場合が多い）</li>
