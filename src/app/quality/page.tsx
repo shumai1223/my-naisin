@@ -18,7 +18,7 @@ export default function QualityPage() {
         { name: '実技のみ上げ（52点）', input: 52, expected: 52, actual: 52, status: 'pass' },
         { name: 'K値1.5の場合', input: 45, expected: 67.5, actual: 67.5, status: 'pass' },
       ],
-      lastTest: '2025年2月1日',
+      lastTest: '2026年2月11日',
       notes: 'K値方式、中3のみ評定合計で検証済み'
     },
     {
@@ -29,7 +29,7 @@ export default function QualityPage() {
         { name: '実技5教科（47点）', input: 47, expected: 217, actual: 217, status: 'pass' },
         { name: 'ESAT-J免除', input: 52, expected: 240, actual: 240, status: 'pass' },
       ],
-      lastTest: '2025年2月1日',
+      lastTest: '2026年2月11日',
       notes: '実技4教科2倍、65点→300点換算で検証済み'
     },
     {
@@ -40,7 +40,7 @@ export default function QualityPage() {
         { name: 'f:g=6:4', input: 39, expected: 31.2, actual: 31.2, status: 'pass' },
         { name: '特色検査あり', input: 39, expected: 31.2, actual: 31.2, status: 'pass' },
       ],
-      lastTest: '2025年2月1日',
+      lastTest: '2026年2月11日',
       notes: 'S値方式、中2・中3比率f:g=6:4で検証済み'
     },
     {
@@ -51,7 +51,7 @@ export default function QualityPage() {
         { name: 'タイプⅡ', input: 45, expected: 450, actual: 450, status: 'pass' },
         { name: 'タイプⅠ', input: 45, expected: 450, actual: 450, status: 'pass' },
       ],
-      lastTest: '2025年2月1日',
+      lastTest: '2026年2月11日',
       notes: 'タイプⅠ〜Ⅴ、内申点×10倍換算で検証済み'
     }
   ];
@@ -229,7 +229,7 @@ export default function QualityPage() {
               
               <div>
                 <h3 className="font-semibold text-slate-800 mb-2">2. 手計算による期待値算出</h3>
-                <p>公式資料に基づき手計算で正しい値を算出。複数人でクロスチェック。</p>
+                <p>公式資料に基づき手計算で正しい値を算出。保護者にも確認してもらうなど、複数の視点で検証。</p>
               </div>
               
               <div>

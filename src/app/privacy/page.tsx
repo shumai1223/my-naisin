@@ -48,7 +48,7 @@ export default function PrivacyPage() {
             </li>
             <li className="flex gap-2">
               <span className="text-emerald-500">✓</span>
-              <span><strong>広告配信：</strong>第三者Cookieを使用してパーソナライズ広告を配信します</span>
+              <span><strong>広告配信：</strong>将来的に広告を掲載する場合があり、その際は第三者Cookieを使用してパーソナライズ広告を配信します</span>
             </li>
             <li className="flex gap-2">
               <span className="text-emerald-500">✓</span>

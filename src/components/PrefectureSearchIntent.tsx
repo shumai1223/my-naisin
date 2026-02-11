@@ -9,6 +9,15 @@ interface PrefectureSearchIntentProps {
 }
 
 export function PrefectureSearchIntent({ prefectureCode, className = '' }: PrefectureSearchIntentProps) {
+  // 都道府県名のマッピング
+  const prefectureNames: Record<string, string> = {
+    chiba: '千葉県',
+    tokyo: '東京都',
+    kanagawa: '神奈川県',
+    osaka: '大阪府',
+    saitama: '埼玉県'
+  };
+
   // 各都道府県の検索意図データ
   const searchIntents: Record<string, {
     commonMistakes: string[];
@@ -124,7 +133,7 @@ export function PrefectureSearchIntent({ prefectureCode, className = '' }: Prefe
           <div>
             <h3 className="text-lg font-bold text-blue-800 mb-3">この県の検索意図</h3>
             <p className="text-sm text-blue-700">
-              {prefectureCode}の内申点計算に関するよくある検索意図と注意点をまとめました。
+              {prefectureNames[prefectureCode] || 'この都道府県'}の内申点計算に関するよくある検索意図と注意点をまとめました。
             </p>
           </div>
 

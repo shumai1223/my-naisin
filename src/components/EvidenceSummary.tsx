@@ -15,6 +15,8 @@ export function EvidenceSummary({ prefectureCode, className = '' }: EvidenceSumm
     chapter: string;
     pageNumber: string;
     lastConfirmed: string;
+    pageUpdated: string;
+    lastTested: string;
     uniqueFeatures: string[];
     exceptions: string[];
   }> = {
@@ -22,48 +24,60 @@ export function EvidenceSummary({ prefectureCode, className = '' }: EvidenceSumm
       sourceDocument: '令和8年度千葉県公立高等学校入学者選抜実施要綱',
       chapter: '第3章 選抜方法',
       pageNumber: 'p.15-18',
-      lastConfirmed: '2025年2月1日',
+      lastConfirmed: '2026年1月30日',
+      pageUpdated: '2026年2月11日',
+      lastTested: '2026年2月11日',
       uniqueFeatures: ['K値方式（0.5〜2.0）', '中3のみの評定合計', '9教科5段階評価'],
       exceptions: ['特色検査を実施する学校', '専門学科・総合学科', '単位制高校']
     },
     tokyo: {
-      sourceDocument: '令和8年度東京都立高等学校入学者選抜要項',
-      chapter: '第2章 学力検査及び調査書',
+      sourceDocument: '令和8年度東京都立高等学校入学者選抜実施要綱',
+      chapter: '第2章 調査書',
       pageNumber: 'p.8-12',
-      lastConfirmed: '2025年2月1日',
-      uniqueFeatures: ['実技4教科2倍換算', 'ESAT-J（英語スピーキング）', '65点満点→300点満点換算'],
-      exceptions: ['ESAT-Jを免除する場合', '海外帰国生徒特別選抜', '連携型中高一貫校']
+      lastConfirmed: '2026年1月30日',
+      pageUpdated: '2026年2月11日',
+      lastTested: '2026年2月11日',
+      uniqueFeatures: ['実技4教科2倍換算', '65点→300点換算', 'ESAT-J対象'],
+      exceptions: ['海外帰国生徒特別選抜', '連携型中高一貫校', '英語スピーキング免除']
     },
     kanagawa: {
       sourceDocument: '令和8年度神奈川県公立高等学校入学者選抜実施要綱',
-      chapter: '第4章 S値による判定',
-      pageNumber: 'p.20-24',
-      lastConfirmed: '2025年2月1日',
-      uniqueFeatures: ['S値方式', '中2・中3の比率（f:g）', '特色検査（最大5点）'],
-      exceptions: ['特色検査の比重が異なる学校', '専門学科', '単位制普通科']
+      chapter: '第3章 内申点の取扱い',
+      pageNumber: 'p.20-25',
+      lastConfirmed: '2026年1月30日',
+      pageUpdated: '2026年2月11日',
+      lastTested: '2026年2月11日',
+      uniqueFeatures: ['S値方式', '中2・中3比率f:g', '特色検査加点'],
+      exceptions: ['専門学科・総合学科', 'f:g比率が学校ごとに異なる', '特色検査の有無']
     },
     osaka: {
       sourceDocument: '令和8年度大阪府公立高等学校入学者選抜実施要綱',
-      chapter: '第3章 学力検査等の取扱い',
+      chapter: '第4章 調査書の取扱い',
       pageNumber: 'p.12-16',
-      lastConfirmed: '2025年2月1日',
-      uniqueFeatures: ['タイプⅠ〜Ⅴの配点比率', '内申点×10倍換算', '当日点500点満点'],
-      exceptions: ['専門学科・総合学科', '単位制高校', '特色検査を実施する学校']
+      lastConfirmed: '2026年1月30日',
+      pageUpdated: '2026年2月11日',
+      lastTested: '2026年2月11日',
+      uniqueFeatures: ['タイプⅠ〜Ⅴ分類', '内申点×10倍換算', '当日点500点満点'],
+      exceptions: ['専門学科・総合学科', '単位制高校', '学校ごとのタイプ違い']
     },
     saitama: {
       sourceDocument: '令和8年度埼玉県公立高等学校入学者選抜実施要綱',
       chapter: '第3章 選抜方法',
       pageNumber: 'p.10-14',
-      lastConfirmed: '2025年2月1日',
-      uniqueFeatures: ['標準的な内申点計算', '9教科5段階評価', '中3のみ'],
-      exceptions: ['特色検査を実施する学校', '専門学科', '単位制高校']
+      lastConfirmed: '2026年1月30日',
+      pageUpdated: '2026年2月11日',
+      lastTested: '2026年2月11日',
+      uniqueFeatures: ['標準9教科5段階評価', '中3のみ対象', '実技等倍'],
+      exceptions: ['特色検査を実施する学校', '専門学科・総合学科', '単位制高校']
     },
     // デフォルト値（他の都道府県用）
     default: {
       sourceDocument: '令和8年度入学者選抜実施要綱',
       chapter: '選抜方法に関する章',
       pageNumber: '要綱参照',
-      lastConfirmed: '2025年2月1日',
+      lastConfirmed: '2026年1月30日',
+      pageUpdated: '2026年2月11日',
+      lastTested: '2026年2月11日',
       uniqueFeatures: ['標準的な内申点計算', '9教科5段階評価'],
       exceptions: ['学校独自の配点比率', '特色検査', '専門学科・総合学科']
     }
@@ -105,6 +119,14 @@ export function EvidenceSummary({ prefectureCode, className = '' }: EvidenceSumm
                 <Calendar className="h-4 w-4 text-emerald-600" />
                 <span className="font-medium text-emerald-700">最終確認日:</span>
                 <span className="text-slate-700">{data.lastConfirmed}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="font-medium text-emerald-700">ページ更新日:</span>
+                <span className="text-slate-700">{data.pageUpdated}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="font-medium text-emerald-700">テスト実行日:</span>
+                <span className="text-slate-700">{data.lastTested}</span>
               </div>
             </div>
           </div>
