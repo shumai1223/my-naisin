@@ -107,9 +107,16 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
       const config = examData?.generalExam ?? DEFAULT_EXAM_RATIO;
       setNaishinRatio(config.naishinRatio);
       setExamMaxScore(config.examMaxScore);
-      setTargetTotalScore(Math.round(config.totalMaxScore * 0.7));
+      setTargetTotalScore(Math.round((config.examMaxScore + (config as any).naishinMax) * 0.7));
     }
   }, [prefectureCode, prefecture]);
+
+  // 大阪府のタイプが変更されたら再計算
+  React.useEffect(() => {
+    if (prefectureCode === 'osaka' && result) {
+      calculate();
+    }
+  }, [osakaType]);
 
   React.useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -174,7 +181,7 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
           const examContributionNeeded = targetTotalScore - naishinContribution;
           requiredExamScore = Math.round(examContributionNeeded);
           examPercent = Math.round((requiredExamScore / examMaxScore) * 100);
-          perSubjectScore = Math.round(requiredExamScore / 5);
+          perSubjectScore = Math.min(Math.round(requiredExamScore / 5), 100); // 最大100点に制限
           isAchievable = requiredExamScore <= examMaxScore && requiredExamScore >= 0;
           break;
 
@@ -188,7 +195,7 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
             const tokyoExamNeeded = targetTotalScore - tokyoNaishinContribution;
             requiredExamScore = Math.round(tokyoExamNeeded);
             examPercent = Math.round((requiredExamScore / (examMaxScore - tokyoSettings.esatjMaxScore)) * 100);
-            perSubjectScore = Math.round(requiredExamScore / 5);
+            perSubjectScore = Math.min(Math.round(requiredExamScore / 5), 100); // 最大100点に制限
             isAchievable = requiredExamScore <= (examMaxScore - tokyoSettings.esatjMaxScore) && requiredExamScore >= 0;
           } else {
             // 従来の計算（フォールバック）
@@ -196,7 +203,7 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
             const tokyoExamNeeded = targetTotalScore - tokyoNaishinContribution;
             requiredExamScore = Math.round(tokyoExamNeeded);
             examPercent = Math.round((requiredExamScore / examMaxScore) * 100);
-            perSubjectScore = Math.round(requiredExamScore / 5);
+            perSubjectScore = Math.min(Math.round(requiredExamScore / 5), 100); // 最大100点に制限
             isAchievable = requiredExamScore <= examMaxScore && requiredExamScore >= 0;
           }
           break;
@@ -212,7 +219,7 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
             const kanagawaExamNeeded = targetTotalScore - kanagawaNaishinContribution;
             requiredExamScore = Math.round(kanagawaExamNeeded);
             examPercent = Math.round((requiredExamScore / examMaxScore) * 100);
-            perSubjectScore = Math.round(requiredExamScore / 5);
+            perSubjectScore = Math.min(Math.round(requiredExamScore / 5), 100); // 最大100点に制限
             isAchievable = requiredExamScore <= examMaxScore && requiredExamScore >= 0;
           } else {
             // 従来の計算（フォールバック）
@@ -221,7 +228,7 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
             const kanagawaExamNeeded = targetTotalScore - kanagawaNaishinContribution;
             requiredExamScore = Math.round(kanagawaExamNeeded);
             examPercent = Math.round((requiredExamScore / examMaxScore) * 100);
-            perSubjectScore = Math.round(requiredExamScore / 5);
+            perSubjectScore = Math.min(Math.round(requiredExamScore / 5), 100); // 最大100点に制限
             isAchievable = requiredExamScore <= examMaxScore && requiredExamScore >= 0;
           }
           break;
@@ -233,7 +240,7 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
           const chibaExamNeeded = targetTotalScore - chibaNaishinContribution;
           requiredExamScore = Math.round(chibaExamNeeded);
           examPercent = Math.round((requiredExamScore / examMaxScore) * 100);
-          perSubjectScore = Math.round(requiredExamScore / 5);
+          perSubjectScore = Math.min(Math.round(requiredExamScore / 5), 100); // 最大100点に制限
           isAchievable = requiredExamScore <= examMaxScore && requiredExamScore >= 0;
           break;
 
@@ -241,9 +248,9 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
           // 埼玉県: 標準計算
           const saitamaNaishinContribution = currentNaishin * (naishinRatio / 100);
           const saitamaExamNeeded = targetTotalScore - saitamaNaishinContribution;
-          requiredExamScore = Math.round((saitamaExamNeeded * 100) / examRatio);
+          requiredExamScore = Math.round(saitamaExamNeeded);
           examPercent = Math.round((requiredExamScore / examMaxScore) * 100);
-          perSubjectScore = Math.round(requiredExamScore / 5);
+          perSubjectScore = Math.min(Math.round(requiredExamScore / 5), 100); // 最大100点に制限
           isAchievable = requiredExamScore <= examMaxScore && requiredExamScore >= 0;
           break;
 
@@ -251,9 +258,9 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
           // 標準計算
           const standardNaishinContribution = currentNaishin * (naishinRatio / 100);
           const standardExamNeeded = targetTotalScore - standardNaishinContribution;
-          requiredExamScore = Math.round((standardExamNeeded * 100) / examRatio);
+          requiredExamScore = Math.round(standardExamNeeded);
           examPercent = Math.round((requiredExamScore / examMaxScore) * 100);
-          perSubjectScore = Math.round(requiredExamScore / 5);
+          perSubjectScore = Math.min(Math.round(requiredExamScore / 5), 100); // 最大100点に制限
           isAchievable = requiredExamScore <= examMaxScore && requiredExamScore >= 0;
           break;
       }
@@ -261,9 +268,9 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
       // 従来の計算（逆算設定がない都道府県）
       const standardNaishinContribution = currentNaishin * (naishinRatio / 100);
       const standardExamNeeded = targetTotalScore - standardNaishinContribution;
-      requiredExamScore = Math.round((standardExamNeeded * 100) / examRatio);
+      requiredExamScore = Math.round(standardExamNeeded * 100) / examRatio;
       examPercent = Math.round((requiredExamScore / examMaxScore) * 100);
-      perSubjectScore = Math.round(requiredExamScore / 5);
+      perSubjectScore = Math.min(Math.round(requiredExamScore / 5), 100); // 最大100点に制限
       isAchievable = requiredExamScore <= examMaxScore && requiredExamScore >= 0;
     }
 
