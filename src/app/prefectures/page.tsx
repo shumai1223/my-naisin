@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { Search, MapPin, Calculator, ChevronRight, ExternalLink, Calendar } from 'lucide-react';
+import { Search, MapPin, Calculator, ChevronRight, ExternalLink, Calendar, ChevronDown } from 'lucide-react';
 
 import { PREFECTURES, REGIONS, getPrefecturesByRegion } from '@/lib/prefectures';
 import type { RegionName } from '@/lib/prefectures';
@@ -10,6 +10,8 @@ import type { RegionName } from '@/lib/prefectures';
 export default function PrefecturesPage() {
   const [searchQuery, setSearchQuery] = React.useState('');
   const [selectedRegion, setSelectedRegion] = React.useState<RegionName | 'all'>('all');
+  const [isRegionDropdownOpen, setIsRegionDropdownOpen] = React.useState(false);
+  const regionDropdownRef = React.useRef<HTMLDivElement>(null);
 
   const filteredPrefectures = React.useMemo(() => {
     let results = PREFECTURES;
@@ -28,6 +30,16 @@ export default function PrefecturesPage() {
     
     return results;
   }, [searchQuery, selectedRegion]);
+
+  React.useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (regionDropdownRef.current && !regionDropdownRef.current.contains(event.target as Node)) {
+        setIsRegionDropdownOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const groupedByRegion = React.useMemo(() => {
     if (selectedRegion !== 'all') {
@@ -79,16 +91,67 @@ export default function PrefecturesPage() {
               className="h-12 w-full rounded-xl border border-slate-200 bg-white pl-10 pr-4 text-sm shadow-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
             />
           </div>
-          <select
-            value={selectedRegion}
-            onChange={(e) => setSelectedRegion(e.target.value as RegionName | 'all')}
-            className="h-12 rounded-xl border border-slate-200 bg-white px-4 text-sm shadow-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
-          >
-            <option value="all">全地域</option>
-            {REGIONS.map(region => (
-              <option key={region} value={region}>{region}</option>
-            ))}
-          </select>
+          
+          <div ref={regionDropdownRef} className="relative">
+            <button
+              type="button"
+              onClick={() => setIsRegionDropdownOpen(!isRegionDropdownOpen)}
+              className="flex h-12 w-full items-center justify-between gap-3 rounded-2xl border-2 border-slate-200 bg-white px-4 py-4 text-left transition-all shadow-sm hover:border-blue-300 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 sm:w-48"
+            >
+              <div className="flex items-center gap-3">
+                <div className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 shadow-md">
+                  <MapPin className="h-5 w-5 text-white" />
+                </div>
+                <div>
+                  <div className="text-sm font-bold text-slate-800">
+                    {selectedRegion === 'all' ? '全地域' : selectedRegion}
+                  </div>
+                  <div className="text-xs text-slate-500">
+                    {selectedRegion === 'all' ? 'すべての地域' : `${selectedRegion}地域`}
+                  </div>
+                </div>
+              </div>
+              <div className="rounded-full bg-slate-100 p-2">
+                <ChevronDown className={`h-4 w-4 text-slate-400 transition-transform ${isRegionDropdownOpen ? 'rotate-180' : ''}`} />
+              </div>
+            </button>
+
+            {isRegionDropdownOpen && (
+              <div className="absolute z-50 mt-2 w-full overflow-auto rounded-2xl border border-slate-200 bg-white shadow-xl sm:w-48">
+                <div className="max-h-64 overflow-y-auto">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSelectedRegion('all');
+                      setIsRegionDropdownOpen(false);
+                    }}
+                    className={`w-full px-4 py-3 text-left transition-colors hover:bg-blue-50 ${
+                      selectedRegion === 'all' ? 'bg-blue-50 border-l-4 border-blue-500' : ''
+                    }`}
+                  >
+                    <div className="font-medium text-slate-800">全地域</div>
+                    <div className="text-xs text-slate-500">すべての都道府県</div>
+                  </button>
+                  {REGIONS.map(region => (
+                    <button
+                      key={region}
+                      type="button"
+                      onClick={() => {
+                        setSelectedRegion(region);
+                        setIsRegionDropdownOpen(false);
+                      }}
+                      className={`w-full px-4 py-3 text-left transition-colors hover:bg-blue-50 ${
+                        selectedRegion === region ? 'bg-blue-50 border-l-4 border-blue-500' : ''
+                      }`}
+                    >
+                      <div className="font-medium text-slate-800">{region}</div>
+                      <div className="text-xs text-slate-500">{region}地域</div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Stats */}
