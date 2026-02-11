@@ -14,6 +14,34 @@ export interface ChangeLogEntry {
 
 export const CHANGELOG: ChangeLogEntry[] = [
   {
+    date: '2026-02-11',
+    type: 'fix',
+    category: 'calculation',
+    title: 'すべての都道府県を完全網羅！逆算計算ツールが日本全国対応に',
+    description: '残りのすべての都道府県（山口県、岡山県、広島県、四国4県、九州・沖縄7県）に逆算計算設定を追加。埼玉県には標準1:1:2モデルの注記も実装。これにより日本全国47都道府県すべてで正確な逆算計算が可能に。',
+  },
+  {
+    date: '2026-02-11',
+    type: 'fix',
+    category: 'calculation',
+    title: '重大な誤り発見！大阪府の内申点計算を完全修正',
+    description: '大阪府の内申点計算に重大な誤りを発見し修正。中1・中2は2倍、中3は6倍（正）、タイプⅠ〜Ⅴまで存在（正）、450点満点に対する倍率も修正。すべての都道府県情報を公式情報で再検証済み。',
+  },
+  {
+    date: '2026-02-11',
+    type: 'fix',
+    category: 'calculation',
+    title: '都道府県逆算計算の「残り1割の落とし穴」を完全対策',
+    description: '大阪府のタイプ別倍率選択、東京都の実技教科2倍ルールとESAT-J対応、神奈川県の中2・中3内申比率、傾斜配点警告など、Geminiが指摘した隠れたエラー要因すべてに対応しました。',
+  },
+  {
+    date: '2026-02-11',
+    type: 'fix',
+    category: 'calculation',
+    title: 'すべての都道府県逆算計算ロジックを完全修正',
+    description: '大阪府（900点満点）、東京都（1020点満点）、神奈川県（S値方式）、千葉県（K値方式）、埼玉県など、各都道府県の正しい入試制度に基づいた逆算計算を実装しました。',
+  },
+  {
     date: '2026-02-09',
     type: 'fix',
     category: 'content',

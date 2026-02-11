@@ -87,6 +87,7 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
   const [examMaxScore, setExamMaxScore] = React.useState<number>(500);
   const [result, setResult] = React.useState<ReverseResult | null>(null);
   const [tokyoKansoNaishin, setTokyoKansoNaishin] = React.useState<number>(45);
+  const [osakaType, setOsakaType] = React.useState<string>('II'); // デフォルトはタイプII
   const [copied, setCopied] = React.useState(false);
   const [validationError, setValidationError] = React.useState<string | null>(null);
 
@@ -94,12 +95,21 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
   const naishinMax = React.useMemo(() => calculateMaxScore(prefectureCode), [prefectureCode]);
 
   React.useEffect(() => {
-    const examData = getExamRatioByCode(prefectureCode);
-    const config = examData?.generalExam ?? DEFAULT_EXAM_RATIO;
-    setNaishinRatio(config.naishinRatio);
-    setExamMaxScore(config.examMaxScore);
-    setTargetTotalScore(Math.round(config.totalMaxScore * 0.7));
-  }, [prefectureCode]);
+    // 都道府県ごとの逆算設定を反映
+    if (prefecture?.reverseCalc) {
+      const { defaultRatio, examMaxScore, totalMaxScore } = prefecture.reverseCalc;
+      setNaishinRatio(defaultRatio.naishin);
+      setExamMaxScore(examMaxScore);
+      setTargetTotalScore(Math.round(totalMaxScore * 0.7)); // 満点の70%を目標に設定
+    } else {
+      // 従来の設定（逆算設定がない都道府県）
+      const examData = getExamRatioByCode(prefectureCode);
+      const config = examData?.generalExam ?? DEFAULT_EXAM_RATIO;
+      setNaishinRatio(config.naishinRatio);
+      setExamMaxScore(config.examMaxScore);
+      setTargetTotalScore(Math.round(config.totalMaxScore * 0.7));
+    }
+  }, [prefectureCode, prefecture]);
 
   React.useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -145,15 +155,119 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
     }
 
     const examRatio = 100 - naishinRatio;
-    const totalMaxScore = (naishinMax * (naishinRatio / 100)) + (examMaxScore * (examRatio / 100));
-    const naishinContribution = currentNaishin * (naishinRatio / 100);
-    const requiredFromExam = targetTotalScore - naishinContribution;
-    const requiredExamScore = Math.round((requiredFromExam * 100) / examRatio);
-    const examPercent = Math.round((requiredExamScore / examMaxScore) * 100);
-    const perSubjectScore = Math.round(requiredExamScore / 5);
-    const isAchievable = requiredExamScore <= examMaxScore && requiredExamScore >= 0;
+    let requiredExamScore: number;
+    let examPercent: number;
+    let perSubjectScore: number;
+    let isAchievable: boolean;
+    let message: string;
 
-    let message = '';
+    // 都道府県別の計算ロジック
+    const prefecture = getPrefectureByCode(prefectureCode);
+    if (prefecture?.reverseCalc) {
+      const { totalMaxScore, examMaxScore, calcType, naishinMultiplier, kValue, sValueCoefficients, osakaTypes, tokyoSettings, kanagawaSettings } = prefecture.reverseCalc;
+      
+      switch (calcType) {
+        case 'osaka':
+          // 大阪府: 900点満点方式（タイプ別）
+          const selectedType = osakaTypes?.find(t => t.code === osakaType) || osakaTypes?.[1]; // デフォルトはタイプII
+          const naishinContribution = currentNaishin * (selectedType?.naishinMultiplier || 0.8);
+          const examContributionNeeded = targetTotalScore - naishinContribution;
+          requiredExamScore = Math.round(examContributionNeeded);
+          examPercent = Math.round((requiredExamScore / examMaxScore) * 100);
+          perSubjectScore = Math.round(requiredExamScore / 5);
+          isAchievable = requiredExamScore <= examMaxScore && requiredExamScore >= 0;
+          break;
+
+        case 'tokyo':
+          // 東京都: 1020点満点方式（実技教科2倍ルール考慮）
+          if (tokyoSettings) {
+            // 内申点の計算：主要5教科(1倍) + 実技4教科(2倍) = 65点満点
+            // これを300点満点に換算
+            const naishin300 = currentNaishin * tokyoSettings.naishinConversion.totalMultiplier;
+            const tokyoNaishinContribution = naishin300 * (naishinRatio / 100);
+            const tokyoExamNeeded = targetTotalScore - tokyoNaishinContribution;
+            requiredExamScore = Math.round(tokyoExamNeeded);
+            examPercent = Math.round((requiredExamScore / (examMaxScore - tokyoSettings.esatjMaxScore)) * 100);
+            perSubjectScore = Math.round(requiredExamScore / 5);
+            isAchievable = requiredExamScore <= (examMaxScore - tokyoSettings.esatjMaxScore) && requiredExamScore >= 0;
+          } else {
+            // 従来の計算（フォールバック）
+            const tokyoNaishinContribution = currentNaishin * (naishinRatio / 100) * 3;
+            const tokyoExamNeeded = targetTotalScore - tokyoNaishinContribution;
+            requiredExamScore = Math.round(tokyoExamNeeded);
+            examPercent = Math.round((requiredExamScore / examMaxScore) * 100);
+            perSubjectScore = Math.round(requiredExamScore / 5);
+            isAchievable = requiredExamScore <= examMaxScore && requiredExamScore >= 0;
+          }
+          break;
+
+        case 'kanagawa':
+          // 神奈川県: S値方式（中2・中3比率考慮）
+          if (kanagawaSettings) {
+            // 注意：現在の内申点は中3のみを想定
+            // 実際には中2の成績も必要だが、簡易計算として中3の成績から推定
+            const estimatedGrade2Score = currentNaishin * 0.8; // 中2の成績を中3の80%と仮定
+            const sValueNaishin = (estimatedGrade2Score * kanagawaSettings.gradeMultipliers.grade2 + currentNaishin * kanagawaSettings.gradeMultipliers.grade3);
+            const kanagawaNaishinContribution = sValueNaishin * (sValueCoefficients?.academic || 0.8);
+            const kanagawaExamNeeded = targetTotalScore - kanagawaNaishinContribution;
+            requiredExamScore = Math.round(kanagawaExamNeeded);
+            examPercent = Math.round((requiredExamScore / examMaxScore) * 100);
+            perSubjectScore = Math.round(requiredExamScore / 5);
+            isAchievable = requiredExamScore <= examMaxScore && requiredExamScore >= 0;
+          } else {
+            // 従来の計算（フォールバック）
+            const sValueCoeff = sValueCoefficients?.academic || 0.8;
+            const kanagawaNaishinContribution = currentNaishin * sValueCoeff;
+            const kanagawaExamNeeded = targetTotalScore - kanagawaNaishinContribution;
+            requiredExamScore = Math.round(kanagawaExamNeeded);
+            examPercent = Math.round((requiredExamScore / examMaxScore) * 100);
+            perSubjectScore = Math.round(requiredExamScore / 5);
+            isAchievable = requiredExamScore <= examMaxScore && requiredExamScore >= 0;
+          }
+          break;
+
+        case 'chiba':
+          // 千葉県: K値方式
+          const chibaKValue = kValue || 1;
+          const chibaNaishinContribution = currentNaishin * chibaKValue;
+          const chibaExamNeeded = targetTotalScore - chibaNaishinContribution;
+          requiredExamScore = Math.round(chibaExamNeeded);
+          examPercent = Math.round((requiredExamScore / examMaxScore) * 100);
+          perSubjectScore = Math.round(requiredExamScore / 5);
+          isAchievable = requiredExamScore <= examMaxScore && requiredExamScore >= 0;
+          break;
+
+        case 'saitama':
+          // 埼玉県: 標準計算
+          const saitamaNaishinContribution = currentNaishin * (naishinRatio / 100);
+          const saitamaExamNeeded = targetTotalScore - saitamaNaishinContribution;
+          requiredExamScore = Math.round((saitamaExamNeeded * 100) / examRatio);
+          examPercent = Math.round((requiredExamScore / examMaxScore) * 100);
+          perSubjectScore = Math.round(requiredExamScore / 5);
+          isAchievable = requiredExamScore <= examMaxScore && requiredExamScore >= 0;
+          break;
+
+        default:
+          // 標準計算
+          const standardNaishinContribution = currentNaishin * (naishinRatio / 100);
+          const standardExamNeeded = targetTotalScore - standardNaishinContribution;
+          requiredExamScore = Math.round((standardExamNeeded * 100) / examRatio);
+          examPercent = Math.round((requiredExamScore / examMaxScore) * 100);
+          perSubjectScore = Math.round(requiredExamScore / 5);
+          isAchievable = requiredExamScore <= examMaxScore && requiredExamScore >= 0;
+          break;
+      }
+    } else {
+      // 従来の計算（逆算設定がない都道府県）
+      const standardNaishinContribution = currentNaishin * (naishinRatio / 100);
+      const standardExamNeeded = targetTotalScore - standardNaishinContribution;
+      requiredExamScore = Math.round((standardExamNeeded * 100) / examRatio);
+      examPercent = Math.round((requiredExamScore / examMaxScore) * 100);
+      perSubjectScore = Math.round(requiredExamScore / 5);
+      isAchievable = requiredExamScore <= examMaxScore && requiredExamScore >= 0;
+    }
+
+    // メッセージ生成
     if (!isAchievable) {
       if (requiredExamScore > examMaxScore) {
         message = '目標点に対して内申点が不足しています。内申点を上げるか、目標を調整してください。';
@@ -448,12 +562,15 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
                     value={targetTotalScore}
                     onChange={(e) => setTargetTotalScore(Number(e.target.value))}
                     className="h-12 w-full rounded-xl border border-slate-200 bg-white px-4 text-lg font-bold text-slate-800 shadow-sm outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20"
-                    placeholder="例: 700"
+                    placeholder={prefecture?.reverseCalc ? `例: ${Math.round(prefecture.reverseCalc.totalMaxScore * 0.7)}` : "例: 700"}
                   />
                   <span className="text-sm text-slate-500">点</span>
                 </div>
                 <div className="mt-1 text-xs text-slate-500">
-                  合格ラインの目安（例: 東京都なら720点程度）
+                  {prefecture?.reverseCalc 
+                    ? `${prefecture.name}なら${Math.round(prefecture.reverseCalc.totalMaxScore * 0.7)}点程度（${prefecture.reverseCalc.totalMaxScore}点満点中）`
+                    : '合格ラインの目安（例: 東京都なら720点程度）'
+                  }
                 </div>
               </div>
 
@@ -492,6 +609,28 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
                 <Info className="h-4 w-4 text-slate-500" />
                 配点設定（学校・入試方式によって異なります）
               </div>
+              {prefectureCode === 'osaka' && prefecture?.reverseCalc?.osakaTypes && (
+                <div className="mb-3">
+                  <label className="mb-2 block text-xs font-medium text-slate-600">大阪府のタイプ選択</label>
+                  <div className="flex flex-wrap gap-2">
+                    {prefecture.reverseCalc.osakaTypes.map((type) => (
+                      <button
+                        key={type.code}
+                        type="button"
+                        onClick={() => setOsakaType(type.code)}
+                        className={`rounded-lg border px-3 py-2 text-xs font-medium transition-colors ${
+                          osakaType === type.code
+                            ? 'border-emerald-500 bg-emerald-50 text-emerald-700'
+                            : 'border-slate-200 bg-white text-slate-700 hover:border-slate-300'
+                        }`}
+                      >
+                        <div className="font-semibold">{type.name}</div>
+                        <div className="text-[10px] text-slate-500">{type.description}</div>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
               {prefectureCode === 'kanagawa' && (
                 <div className="mb-3 flex flex-wrap gap-2">
                   {KANAGAWA_RATIO_PRESETS.map((ratio) => (
@@ -675,11 +814,47 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
                 </div>
               </div>
 
-              {/* 計算式（簡易） */}
+              {/* 計算式（都道府県別） */}
               <div className="mt-4 rounded-xl border border-slate-200 bg-slate-50 p-4">
                 <div className="text-xs font-bold text-slate-600">計算式</div>
                 <code className="mt-1 block text-xs leading-relaxed text-slate-500">
-                  目標合計点 {targetTotalScore} − 内申寄与分（{currentNaishin} × {naishinRatio}%）＝ 当日点寄与分 → 必要当日点 {result.requiredExamScore}/{result.examMaxScore}（{result.examPercent}%）
+                  {prefecture?.reverseCalc ? (
+                    prefecture.reverseCalc.calcType === 'osaka' ? (
+                      <>
+                        大阪府方式（{prefecture.reverseCalc.osakaTypes?.find(t => t.code === osakaType)?.name || 'タイプⅡ'}）: 目標{targetTotalScore}点 − 内申{currentNaishin}×{prefecture.reverseCalc.osakaTypes?.find(t => t.code === osakaType)?.naishinMultiplier || 0.8} ＝ 必要当日点{result.requiredExamScore}点（450点満点中{result.examPercent}%）
+                      </>
+                    ) : prefecture.reverseCalc.calcType === 'tokyo' ? (
+                      <>
+                        東京都方式: 目標{targetTotalScore}点 − 内申{currentNaishin}×{(300/65).toFixed(2)}（実技2倍換算）＝ 必要当日点{result.requiredExamScore}点（{prefecture.reverseCalc.tokyoSettings ? (examMaxScore - prefecture.reverseCalc.tokyoSettings.esatjMaxScore) : examMaxScore}点満点中{result.examPercent}%）
+                        {prefecture.reverseCalc.tokyoSettings && (
+                          <div className="text-[10px] text-slate-400 mt-1">
+                            ※ ESAT-J（スピーキングテスト）{prefecture.reverseCalc.tokyoSettings.esatjMaxScore}点を除く
+                          </div>
+                        )}
+                      </>
+                    ) : prefecture.reverseCalc.calcType === 'kanagawa' ? (
+                      <>
+                        神奈川県方式: 目標{targetTotalScore}点 − S値（中2×1 + 中3×2）×0.8 ＝ 必要当日点{result.requiredExamScore}点（500点満点中{result.examPercent}%）
+                        {prefecture.reverseCalc.kanagawaSettings && (
+                          <div className="text-[10px] text-slate-400 mt-1">
+                            ※ 中2成績を中3の80%と仮定して推定
+                          </div>
+                        )}
+                      </>
+                    ) : prefecture.reverseCalc.calcType === 'chiba' ? (
+                      <>
+                        千葉県方式: 目標{targetTotalScore}点 − 内申{currentNaishin}×K値 ＝ 必要当日点{result.requiredExamScore}点（500点満点中{result.examPercent}%）
+                      </>
+                    ) : (
+                      <>
+                        目標合計点{targetTotalScore} − 内申寄与分（{currentNaishin} × {naishinRatio}%）＝ 当日点寄与分 → 必要当日点{result.requiredExamScore}/{result.examMaxScore}（{result.examPercent}%）
+                      </>
+                    )
+                  ) : (
+                    <>
+                      目標合計点{targetTotalScore} − 内申寄与分（{currentNaishin} × {naishinRatio}%）＝ 当日点寄与分 → 必要当日点{result.requiredExamScore}/{result.examMaxScore}（{result.examPercent}%）
+                    </>
+                  )}
                 </code>
               </div>
 
@@ -697,6 +872,24 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
                 {copied ? <Check className="h-3.5 w-3.5 text-emerald-500" /> : <Copy className="h-3.5 w-3.5" />}
                 {copied ? 'コピーしました' : '結果をコピー'}
               </button>
+
+              <div className="mt-4 rounded-xl border border-amber-200 bg-amber-50 p-4">
+                <div className="flex items-start gap-2">
+                  <HelpCircle className="h-4 w-4 text-amber-500 mt-0.5 flex-shrink-0" />
+                  <div className="text-xs text-amber-800">
+                    <div className="font-bold mb-1">⚠️ 重要な注意事項</div>
+                    <div className="space-y-1 text-amber-700">
+                      <div>• このシミュレーションは一般的な配点比率に基づいています</div>
+                      <div>• 実技教科の換算（東京都）、学年ごとの内申比率（神奈川県）は考慮されていません</div>
+                      <div>• <strong>傾斜配点</strong>：理数科・国際科などで特定教科（英語・数学）の点数が1.5〜2倍になる場合があります</div>
+                      <div>• 大阪府のタイプ別倍率、東京都のESAT-J（スピーキングテスト）は含まれていません</div>
+                      <div className="font-semibold mt-2 pt-2 border-t border-amber-200">
+                        正確な合否判定には、必ず志望校の募集要項をご確認ください
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
               <div className="mt-3 text-xs text-slate-500">
                 ※ この計算は目安です。実際の配点は志望校・入試方式によって異なります。

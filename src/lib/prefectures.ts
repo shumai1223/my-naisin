@@ -29,6 +29,60 @@ export interface PrefectureConfig {
   lastVerified?: string;
   // 対象年度
   fiscalYear?: string;
+  // 逆算計算設定
+  reverseCalc?: {
+    // 合計満点（内申点換算後＋当日点）
+    totalMaxScore: number;
+    // 当日点満点
+    examMaxScore: number;
+    // デフォルト配点比率
+    defaultRatio: {
+      naishin: number;
+      exam: number;
+    };
+    // 計算タイプ
+    calcType: 'standard' | 'osaka' | 'tokyo' | 'kanagawa' | 'chiba' | 'saitama';
+    // 内申点換算係数（大阪府など）
+    naishinMultiplier?: number;
+    // K値（千葉県など）
+    kValue?: number;
+    // S値係数（神奈川県など）
+    sValueCoefficients?: {
+      academic: number;
+      practical: number;
+    };
+    // 大阪府のタイプ別設定
+    osakaTypes?: Array<{
+      code: string;
+      name: string;
+      ratio: number;
+      description: string;
+      examMultiplier: number;
+      naishinMultiplier: number;
+    }>;
+    // 東京都固有の設定
+    tokyoSettings?: {
+      esatjMaxScore: number; // ESAT-Jスピーキングテストの満点
+      academicSubjects: number; // 主要5教科
+      practicalSubjects: number; // 実技4教科
+      practicalMultiplier: number; // 実技教科の倍率
+      naishinConversion: {
+        academicMultiplier: number; // 主要教科の内申点倍率
+        practicalMultiplier: number; // 実技教科の内申点倍率
+        totalMultiplier: number; // 65点満点→300点満点への換算係数
+      };
+    };
+    // 神奈川県固有の設定
+    kanagawaSettings?: {
+      gradeMultipliers: {
+        grade2: number; // 中2の倍率
+        grade3: number; // 中3の倍率
+      };
+      sValueExplanation: string; // S値の計算式説明
+    };
+    // 注記（ユーザーへの補足情報）
+    note?: string;
+  };
 }
 
 export const PREFECTURES: PrefectureConfig[] = [
@@ -200,7 +254,14 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://www.pref.saitama.lg.jp/f2208/nyuushi.html',
     sourceTitle: '埼玉県教育委員会 入試情報',
     lastVerified: '2026-01-30',
-    fiscalYear: '2026'
+    fiscalYear: '2026',
+    reverseCalc: {
+      totalMaxScore: 1000,
+      examMaxScore: 500,
+      defaultRatio: { naishin: 50, exam: 50 },
+      calcType: 'saitama',
+      note: '標準的な1:1:2モデルを採用。一部進学校では1:1:3など異なる場合あり'
+    }
   },
   {
     code: 'chiba',
@@ -231,7 +292,25 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/exam/',
     sourceTitle: '東京都教育委員会 入学者選抜',
     lastVerified: '2026-01-30',
-    fiscalYear: '2026'
+    fiscalYear: '2026',
+    reverseCalc: {
+      totalMaxScore: 1020,
+      examMaxScore: 1000,
+      defaultRatio: { naishin: 70, exam: 30 },
+      calcType: 'tokyo',
+      // 東京都固有の設定
+      tokyoSettings: {
+        esatjMaxScore: 20, // ESAT-Jスピーキングテストの満点
+        academicSubjects: 5, // 主要5教科
+        practicalSubjects: 4, // 実技4教科
+        practicalMultiplier: 2, // 実技教科の倍率
+        naishinConversion: {
+          academicMultiplier: 1, // 主要教科の内申点倍率
+          practicalMultiplier: 2, // 実技教科の内申点倍率
+          totalMultiplier: 300 / 65 // 65点満点→300点満点への換算係数
+        }
+      }
+    }
   },
   {
     code: 'kanagawa',
@@ -437,15 +516,29 @@ export const PREFECTURES: PrefectureConfig[] = [
     name: '大阪府',
     region: '近畿',
     targetGrades: [1, 2, 3],
-    gradeMultipliers: { 1: 1, 2: 1, 3: 3 },
+    gradeMultipliers: { 1: 2, 2: 2, 3: 6 },
     coreMultiplier: 1,
     practicalMultiplier: 1,
     maxScore: 450,
-    description: '学年比1:1:3（450点満点）',
+    description: '中1・中2は2倍、中3は6倍（450点満点）',
     sourceUrl: 'https://www.pref.osaka.lg.jp/kotogakko/gakuji-g3/',
     sourceTitle: '大阪府教育庁 入試情報',
     lastVerified: '2026-01-30',
-    fiscalYear: '2026'
+    fiscalYear: '2026',
+    reverseCalc: {
+      totalMaxScore: 900,
+      examMaxScore: 450,
+      defaultRatio: { naishin: 50, exam: 50 },
+      calcType: 'osaka',
+      naishinMultiplier: 1, // 450点満点をそのまま使用
+      osakaTypes: [
+        { code: 'I', name: 'タイプⅠ', ratio: 30, description: '学力7：内申点3', examMultiplier: 1.0, naishinMultiplier: 0.6 },
+        { code: 'II', name: 'タイプⅡ', ratio: 40, description: '学力6：内申点4', examMultiplier: 1.0, naishinMultiplier: 0.8 },
+        { code: 'III', name: 'タイプⅢ', ratio: 50, description: '学力5：内申点5', examMultiplier: 1.0, naishinMultiplier: 1.0 },
+        { code: 'IV', name: 'タイプⅣ', ratio: 60, description: '学力4：内申点6', examMultiplier: 1.0, naishinMultiplier: 1.2 },
+        { code: 'V', name: 'タイプⅤ', ratio: 70, description: '学力3：内申点7', examMultiplier: 1.0, naishinMultiplier: 1.4 }
+      ]
+    }
   },
   {
     code: 'hyogo',
@@ -478,6 +571,39 @@ export const PREFECTURES: PrefectureConfig[] = [
     fiscalYear: '2026'
   },
   {
+    code: 'kanagawa',
+    name: '神奈川県',
+    region: '関東',
+    targetGrades: [2, 3],
+    gradeMultipliers: { 1: 0, 2: 1, 3: 2 },
+    coreMultiplier: 1,
+    practicalMultiplier: 1,
+    maxScore: 135,
+    description: '中2(45点)＋中3×2倍(90点)（135点満点）',
+    sourceUrl: 'https://www.pref.kanagawa.jp/docs/ir4/chousasho.html',
+    sourceTitle: '神奈川県教育委員会 入学者選抜',
+    lastVerified: '2026-01-30',
+    fiscalYear: '2026',
+    reverseCalc: {
+      totalMaxScore: 1000,
+      examMaxScore: 500,
+      defaultRatio: { naishin: 50, exam: 50 },
+      calcType: 'kanagawa',
+      sValueCoefficients: {
+        academic: 0.8,
+        practical: 0.5
+      },
+      // 神奈川県固有の設定
+      kanagawaSettings: {
+        gradeMultipliers: {
+          grade2: 1, // 中2の倍率
+          grade3: 2  // 中3の倍率
+        },
+        sValueExplanation: 'S値 = 内申点（中2×1 + 中3×2）×0.8'
+      }
+    }
+  },
+  {
     code: 'wakayama',
     name: '和歌山県',
     region: '近畿',
@@ -490,7 +616,13 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://www.pref.wakayama.lg.jp/prefg/500200/d00219915.html',
     sourceTitle: '和歌山県教育委員会 入学者選抜',
     lastVerified: '2026-01-31',
-    fiscalYear: '2026'
+    fiscalYear: '2026',
+    reverseCalc: {
+      totalMaxScore: 1000,
+      examMaxScore: 500,
+      defaultRatio: { naishin: 40, exam: 60 },
+      calcType: 'standard'
+    }
   },
   // 中国
   {
@@ -507,7 +639,13 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://www.pref.tottori.lg.jp/317825.htm',
     sourceTitle: '鳥取県教育委員会 入学者選抜',
     lastVerified: '2026-01-31',
-    fiscalYear: '2026'
+    fiscalYear: '2026',
+    reverseCalc: {
+      totalMaxScore: 1000,
+      examMaxScore: 500,
+      defaultRatio: { naishin: 40, exam: 60 },
+      calcType: 'standard'
+    }
   },
   {
     code: 'shimane',
@@ -522,7 +660,13 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://www.pref.shimane.lg.jp/education/kyoiku/senbatsu/senbatsu_info/',
     sourceTitle: '島根県教育委員会 入学者選抜',
     lastVerified: '2026-01-31',
-    fiscalYear: '2026'
+    fiscalYear: '2026',
+    reverseCalc: {
+      totalMaxScore: 1000,
+      examMaxScore: 500,
+      defaultRatio: { naishin: 40, exam: 60 },
+      calcType: 'standard'
+    }
   },
   {
     code: 'okayama',
@@ -537,7 +681,13 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://www.pref.okayama.jp/site/16/913706.html',
     sourceTitle: '岡山県教育委員会 入学者選抜',
     lastVerified: '2026-01-31',
-    fiscalYear: '2026'
+    fiscalYear: '2026',
+    reverseCalc: {
+      totalMaxScore: 1000,
+      examMaxScore: 500,
+      defaultRatio: { naishin: 40, exam: 60 },
+      calcType: 'standard'
+    }
   },
   {
     code: 'hiroshima',
@@ -552,7 +702,13 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://www.pref.hiroshima.lg.jp/site/kyouiku/08senior-2nd-r8-nyuushi-r8-kou-r8-kou-mokuji-r8-kou-mokuji.html',
     sourceTitle: '広島県教育委員会 入学者選抜',
     lastVerified: '2026-01-31',
-    fiscalYear: '2026'
+    fiscalYear: '2026',
+    reverseCalc: {
+      totalMaxScore: 1000,
+      examMaxScore: 500,
+      defaultRatio: { naishin: 40, exam: 60 },
+      calcType: 'standard'
+    }
   },
   {
     code: 'yamaguchi',
@@ -567,7 +723,13 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://www.pref.yamaguchi.lg.jp/soshiki/180/',
     sourceTitle: '山口県教育委員会 入学者選抜',
     lastVerified: '2026-01-31',
-    fiscalYear: '2026'
+    fiscalYear: '2026',
+    reverseCalc: {
+      totalMaxScore: 1000,
+      examMaxScore: 500,
+      defaultRatio: { naishin: 40, exam: 60 },
+      calcType: 'standard'
+    }
   },
   // 四国
   {
@@ -583,7 +745,13 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://nyuushi.tokushima-ec.ed.jp',
     sourceTitle: '徳島県教育委員会 入学者選抜',
     lastVerified: '2026-01-31',
-    fiscalYear: '2026'
+    fiscalYear: '2026',
+    reverseCalc: {
+      totalMaxScore: 1000,
+      examMaxScore: 500,
+      defaultRatio: { naishin: 40, exam: 60 },
+      calcType: 'standard'
+    }
   },
   {
     code: 'kagawa',
@@ -599,7 +767,13 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://www.pref.kagawa.lg.jp/kenkyoui/kokokyoiku/nyushi/chugaku-koko/examination02.html',
     sourceTitle: '香川県教育委員会 入学者選抜',
     lastVerified: '2026-01-31',
-    fiscalYear: '2026'
+    fiscalYear: '2026',
+    reverseCalc: {
+      totalMaxScore: 1000,
+      examMaxScore: 500,
+      defaultRatio: { naishin: 40, exam: 60 },
+      calcType: 'standard'
+    }
   },
   {
     code: 'ehime',
@@ -614,7 +788,13 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://ehime-c.esnet.ed.jp/koukou/nyuusi/nyuusi.html',
     sourceTitle: '愛媛県教育委員会 入学者選抜',
     lastVerified: '2026-01-31',
-    fiscalYear: '2026'
+    fiscalYear: '2026',
+    reverseCalc: {
+      totalMaxScore: 1000,
+      examMaxScore: 500,
+      defaultRatio: { naishin: 40, exam: 60 },
+      calcType: 'standard'
+    }
   },
   {
     code: 'kochi',
@@ -631,7 +811,13 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://www.pref.kochi.lg.jp/doc/r8_koukounyushi_main/',
     sourceTitle: '高知県教育委員会 入学者選抜',
     lastVerified: '2026-01-31',
-    fiscalYear: '2026'
+    fiscalYear: '2026',
+    reverseCalc: {
+      totalMaxScore: 1000,
+      examMaxScore: 500,
+      defaultRatio: { naishin: 40, exam: 60 },
+      calcType: 'standard'
+    }
   },
   // 九州・沖縄
   {
@@ -648,7 +834,14 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://www.pref.fukuoka.lg.jp/contents/kennittei.html',
     sourceTitle: '福岡県教育委員会 入学者選抜',
     lastVerified: '2026-01-31',
-    fiscalYear: '2026'
+    fiscalYear: '2026',
+    reverseCalc: {
+      totalMaxScore: 1000,
+      examMaxScore: 500,
+      defaultRatio: { naishin: 40, exam: 60 },
+      calcType: 'standard',
+      note: '一部高校で傾斜配点あり'
+    }
   },
   {
     code: 'saga',
@@ -663,7 +856,13 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://www.pref.saga.lg.jp/kyouiku/kiji003115881/index.html',
     sourceTitle: '佐賀県教育委員会 入学者選抜',
     lastVerified: '2026-01-31',
-    fiscalYear: '2026'
+    fiscalYear: '2026',
+    reverseCalc: {
+      totalMaxScore: 1000,
+      examMaxScore: 500,
+      defaultRatio: { naishin: 40, exam: 60 },
+      calcType: 'standard'
+    }
   },
   {
     code: 'nagasaki',
@@ -678,7 +877,13 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://www.pref.nagasaki.jp/bunrui/kanko-kyoiku-bunka/shochuko/koko-nyushi/',
     sourceTitle: '長崎県教育委員会 入学者選抜',
     lastVerified: '2026-01-31',
-    fiscalYear: '2026'
+    fiscalYear: '2026',
+    reverseCalc: {
+      totalMaxScore: 1000,
+      examMaxScore: 500,
+      defaultRatio: { naishin: 40, exam: 60 },
+      calcType: 'standard'
+    }
   },
   {
     code: 'kumamoto',
@@ -693,7 +898,13 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://www.pref.kumamoto.jp/site/kyouiku/list189-619.html',
     sourceTitle: '熊本県教育委員会 入学者選抜',
     lastVerified: '2026-01-31',
-    fiscalYear: '2026'
+    fiscalYear: '2026',
+    reverseCalc: {
+      totalMaxScore: 1000,
+      examMaxScore: 500,
+      defaultRatio: { naishin: 40, exam: 60 },
+      calcType: 'standard'
+    }
   },
   {
     code: 'oita',
@@ -709,7 +920,13 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://www.pref.oita.jp/site/kyoiku/list21509-25206.html',
     sourceTitle: '大分県教育委員会 入学者選抜',
     lastVerified: '2026-01-31',
-    fiscalYear: '2026'
+    fiscalYear: '2026',
+    reverseCalc: {
+      totalMaxScore: 1000,
+      examMaxScore: 500,
+      defaultRatio: { naishin: 40, exam: 60 },
+      calcType: 'standard'
+    }
   },
   {
     code: 'miyazaki',
@@ -724,7 +941,13 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://www.pref.miyazaki.lg.jp/kokokyoiku/kyoikukosodate/kyoiku/20240612180352.html',
     sourceTitle: '宮崎県教育委員会 入学者選抜',
     lastVerified: '2026-01-31',
-    fiscalYear: '2026'
+    fiscalYear: '2026',
+    reverseCalc: {
+      totalMaxScore: 1000,
+      examMaxScore: 500,
+      defaultRatio: { naishin: 40, exam: 60 },
+      calcType: 'standard'
+    }
   },
   {
     code: 'kagoshima',
@@ -740,7 +963,14 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://www.pref.kagoshima.jp/kyoiku-bunka/school/koukou/nyushi/r5/koukounyuusi.html',
     sourceTitle: '鹿児島県教育委員会 入学者選抜',
     lastVerified: '2026-01-31',
-    fiscalYear: '2026'
+    fiscalYear: '2026',
+    reverseCalc: {
+      totalMaxScore: 1000,
+      examMaxScore: 500,
+      defaultRatio: { naishin: 40, exam: 60 },
+      calcType: 'standard',
+      note: '実技が全体の約9割'
+    }
   },
   {
     code: 'okinawa',
@@ -755,7 +985,13 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://www.pref.okinawa.jp/kyoiku/gakko/1008883/index.html',
     sourceTitle: '沖縄県教育委員会 入学者選抜',
     lastVerified: '2026-01-31',
-    fiscalYear: '2026'
+    fiscalYear: '2026',
+    reverseCalc: {
+      totalMaxScore: 1000,
+      examMaxScore: 500,
+      defaultRatio: { naishin: 40, exam: 60 },
+      calcType: 'standard'
+    }
   }
 ];
 
