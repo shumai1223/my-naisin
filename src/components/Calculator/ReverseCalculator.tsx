@@ -83,6 +83,7 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
   const [mode, setMode] = React.useState<ReverseMode>(initialPref === 'tokyo' ? 'tokyo' : initialPref === 'kanagawa' ? 'kanagawa' : 'general');
   const [targetTotalScore, setTargetTotalScore] = React.useState<number>(700);
   const [currentNaishin, setCurrentNaishin] = React.useState<number>(300);
+  const [naishinInputValue, setNaishinInputValue] = React.useState<string>('300');
   const [naishinRatio, setNaishinRatio] = React.useState<number>(30);
   const [examMaxScore, setExamMaxScore] = React.useState<number>(500);
   const [result, setResult] = React.useState<ReverseResult | null>(null);
@@ -113,10 +114,10 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
 
   // 大阪府のタイプが変更されたら再計算
   React.useEffect(() => {
-    if (prefectureCode === 'osaka' && result) {
+    if (prefectureCode === 'osaka' && currentNaishin > 0 && targetTotalScore > 0) {
       calculate();
     }
-  }, [osakaType, prefectureCode, result]);
+  }, [osakaType, prefectureCode, currentNaishin, targetTotalScore]);
 
   React.useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -128,7 +129,10 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
     }
     if (storedKanagawa) {
       const parsed = Number(storedKanagawa);
-      if (Number.isFinite(parsed)) setCurrentNaishin(parsed);
+      if (Number.isFinite(parsed)) {
+        setCurrentNaishin(parsed);
+        setNaishinInputValue(String(parsed));
+      }
     }
   }, []);
 
@@ -619,9 +623,10 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
                 <div className="flex items-center gap-2">
                   <input
                     type="number"
-                    value={currentNaishin}
+                    value={naishinInputValue}
                     onChange={(e) => {
                     const value = e.target.value;
+                    setNaishinInputValue(value);
                     if (value === '') {
                       setCurrentNaishin(0);
                     } else {
@@ -640,7 +645,7 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
                 </div>
                 {prefectureCode === 'kanagawa' && (
                   <div className="mt-2 text-xs text-slate-500">
-                    a値（100点換算）: {Math.round((currentNaishin / naishinMax) * 100)}点
+                    a値（100点換算）: {currentNaishin > 0 ? Math.round((currentNaishin / naishinMax) * 100) : 0}点
                   </div>
                 )}
                 <div className="mt-1 text-xs text-slate-500">
