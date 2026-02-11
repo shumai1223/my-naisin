@@ -96,28 +96,28 @@ export default function PrefecturesPage() {
             <button
               type="button"
               onClick={() => setIsRegionDropdownOpen(!isRegionDropdownOpen)}
-              className="flex h-12 w-full items-center justify-between gap-3 rounded-2xl border-2 border-slate-200 bg-white px-4 py-4 text-left transition-all shadow-sm hover:border-blue-300 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 sm:w-48"
+              className="flex h-12 w-full items-center justify-between gap-3 rounded-2xl border-2 border-slate-200 bg-white px-4 py-4 text-left transition-all shadow-sm hover:border-blue-300 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 sm:w-56"
             >
               <div className="flex items-center gap-3">
                 <div className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 shadow-md">
                   <MapPin className="h-5 w-5 text-white" />
                 </div>
-                <div>
-                  <div className="text-sm font-bold text-slate-800">
+                <div className="min-w-0 flex-1">
+                  <div className="text-sm font-bold text-slate-800 truncate">
                     {selectedRegion === 'all' ? '全地域' : selectedRegion}
                   </div>
-                  <div className="text-xs text-slate-500">
-                    {selectedRegion === 'all' ? 'すべての地域' : `${selectedRegion}地域`}
+                  <div className="text-xs text-slate-500 truncate">
+                    {selectedRegion === 'all' ? 'すべての都道府県' : `${selectedRegion}地域`}
                   </div>
                 </div>
               </div>
-              <div className="rounded-full bg-slate-100 p-2">
+              <div className="rounded-full bg-slate-100 p-2 flex-shrink-0">
                 <ChevronDown className={`h-4 w-4 text-slate-400 transition-transform ${isRegionDropdownOpen ? 'rotate-180' : ''}`} />
               </div>
             </button>
 
             {isRegionDropdownOpen && (
-              <div className="absolute z-50 mt-2 w-full overflow-auto rounded-2xl border border-slate-200 bg-white shadow-xl sm:w-48">
+              <div className="absolute z-50 mt-2 w-full overflow-auto rounded-2xl border border-slate-200 bg-white shadow-xl sm:w-56">
                 <div className="max-h-64 overflow-y-auto">
                   <button
                     type="button"
