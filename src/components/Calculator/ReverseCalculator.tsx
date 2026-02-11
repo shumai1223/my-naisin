@@ -47,6 +47,8 @@ const PREFECTURE_RATIO_PRESETS: Record<string, { label: string; ratio: number; e
     { label: 'Ⅲ型', ratio: 37.5, examMax: 500, description: '内申:学力=3:5の標準' },
     { label: 'Ⅱ型', ratio: 40, examMax: 500, description: '内申:学力=4:6' },
     { label: 'Ⅰ型', ratio: 50, examMax: 500, description: '内申:学力=5:5' },
+    { label: 'Ⅳ型', ratio: 30, examMax: 500, description: '内申:学力=3:7（内申重視）' },
+    { label: 'Ⅴ型', ratio: 25, examMax: 500, description: '内申:学力=1:3（内申最重視）' },
   ]
 };
 
