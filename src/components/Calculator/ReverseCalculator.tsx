@@ -116,7 +116,7 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
     if (prefectureCode === 'osaka' && result) {
       calculate();
     }
-  }, [osakaType]);
+  }, [osakaType, prefectureCode, result]);
 
   React.useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -181,7 +181,8 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
           const examContributionNeeded = targetTotalScore - naishinContribution;
           requiredExamScore = Math.round(examContributionNeeded);
           examPercent = Math.round((requiredExamScore / examMaxScore) * 100);
-          perSubjectScore = Math.min(Math.round(requiredExamScore / 5), 100); // 最大100点に制限
+          const rawPerSubjectScore = Math.round(requiredExamScore / 5);
+          perSubjectScore = rawPerSubjectScore > 100 ? -1 : rawPerSubjectScore; // 101点以上は-1に設定
           isAchievable = requiredExamScore <= examMaxScore && requiredExamScore >= 0;
           break;
 
@@ -195,7 +196,8 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
             const tokyoExamNeeded = targetTotalScore - tokyoNaishinContribution;
             requiredExamScore = Math.round(tokyoExamNeeded);
             examPercent = Math.round((requiredExamScore / (examMaxScore - tokyoSettings.esatjMaxScore)) * 100);
-            perSubjectScore = Math.min(Math.round(requiredExamScore / 5), 100); // 最大100点に制限
+            const rawPerSubjectScore = Math.round(requiredExamScore / 5);
+            perSubjectScore = rawPerSubjectScore > 100 ? -1 : rawPerSubjectScore; // 101点以上は-1に設定
             isAchievable = requiredExamScore <= (examMaxScore - tokyoSettings.esatjMaxScore) && requiredExamScore >= 0;
           } else {
             // 従来の計算（フォールバック）
@@ -203,7 +205,8 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
             const tokyoExamNeeded = targetTotalScore - tokyoNaishinContribution;
             requiredExamScore = Math.round(tokyoExamNeeded);
             examPercent = Math.round((requiredExamScore / examMaxScore) * 100);
-            perSubjectScore = Math.min(Math.round(requiredExamScore / 5), 100); // 最大100点に制限
+            const rawPerSubjectScore = Math.round(requiredExamScore / 5);
+            perSubjectScore = rawPerSubjectScore > 100 ? -1 : rawPerSubjectScore; // 101点以上は-1に設定
             isAchievable = requiredExamScore <= examMaxScore && requiredExamScore >= 0;
           }
           break;
@@ -219,7 +222,8 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
             const kanagawaExamNeeded = targetTotalScore - kanagawaNaishinContribution;
             requiredExamScore = Math.round(kanagawaExamNeeded);
             examPercent = Math.round((requiredExamScore / examMaxScore) * 100);
-            perSubjectScore = Math.min(Math.round(requiredExamScore / 5), 100); // 最大100点に制限
+            const rawPerSubjectScore = Math.round(requiredExamScore / 5);
+            perSubjectScore = rawPerSubjectScore > 100 ? -1 : rawPerSubjectScore; // 101点以上は-1に設定
             isAchievable = requiredExamScore <= examMaxScore && requiredExamScore >= 0;
           } else {
             // 従来の計算（フォールバック）
@@ -228,7 +232,8 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
             const kanagawaExamNeeded = targetTotalScore - kanagawaNaishinContribution;
             requiredExamScore = Math.round(kanagawaExamNeeded);
             examPercent = Math.round((requiredExamScore / examMaxScore) * 100);
-            perSubjectScore = Math.min(Math.round(requiredExamScore / 5), 100); // 最大100点に制限
+            const rawPerSubjectScore = Math.round(requiredExamScore / 5);
+            perSubjectScore = rawPerSubjectScore > 100 ? -1 : rawPerSubjectScore; // 101点以上は-1に設定
             isAchievable = requiredExamScore <= examMaxScore && requiredExamScore >= 0;
           }
           break;
@@ -240,7 +245,8 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
           const chibaExamNeeded = targetTotalScore - chibaNaishinContribution;
           requiredExamScore = Math.round(chibaExamNeeded);
           examPercent = Math.round((requiredExamScore / examMaxScore) * 100);
-          perSubjectScore = Math.min(Math.round(requiredExamScore / 5), 100); // 最大100点に制限
+          const chibaRawPerSubjectScore = Math.round(requiredExamScore / 5);
+          perSubjectScore = chibaRawPerSubjectScore > 100 ? -1 : chibaRawPerSubjectScore; // 101点以上は-1に設定
           isAchievable = requiredExamScore <= examMaxScore && requiredExamScore >= 0;
           break;
 
@@ -250,7 +256,8 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
           const saitamaExamNeeded = targetTotalScore - saitamaNaishinContribution;
           requiredExamScore = Math.round(saitamaExamNeeded);
           examPercent = Math.round((requiredExamScore / examMaxScore) * 100);
-          perSubjectScore = Math.min(Math.round(requiredExamScore / 5), 100); // 最大100点に制限
+          const saitamaRawPerSubjectScore = Math.round(requiredExamScore / 5);
+          perSubjectScore = saitamaRawPerSubjectScore > 100 ? -1 : saitamaRawPerSubjectScore; // 101点以上は-1に設定
           isAchievable = requiredExamScore <= examMaxScore && requiredExamScore >= 0;
           break;
 
@@ -260,7 +267,8 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
           const standardExamNeeded = targetTotalScore - standardNaishinContribution;
           requiredExamScore = Math.round(standardExamNeeded);
           examPercent = Math.round((requiredExamScore / examMaxScore) * 100);
-          perSubjectScore = Math.min(Math.round(requiredExamScore / 5), 100); // 最大100点に制限
+          const standardRawPerSubjectScore = Math.round(requiredExamScore / 5);
+          perSubjectScore = standardRawPerSubjectScore > 100 ? -1 : standardRawPerSubjectScore; // 101点以上は-1に設定
           isAchievable = requiredExamScore <= examMaxScore && requiredExamScore >= 0;
           break;
       }
@@ -270,7 +278,8 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
       const standardExamNeeded = targetTotalScore - standardNaishinContribution;
       requiredExamScore = Math.round(standardExamNeeded * 100) / examRatio;
       examPercent = Math.round((requiredExamScore / examMaxScore) * 100);
-      perSubjectScore = Math.min(Math.round(requiredExamScore / 5), 100); // 最大100点に制限
+      const legacyRawPerSubjectScore = Math.round(requiredExamScore / 5);
+      perSubjectScore = legacyRawPerSubjectScore > 100 ? -1 : legacyRawPerSubjectScore; // 101点以上は-1に設定
       isAchievable = requiredExamScore <= examMaxScore && requiredExamScore >= 0;
     }
 
@@ -506,10 +515,20 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
                     max={65}
                     value={tokyoKansoNaishin}
                     onChange={(e) => {
-                      const next = Math.min(65, Math.max(0, Number(e.target.value)));
-                      setTokyoKansoNaishin(next);
-                      if (typeof window !== 'undefined') {
-                        window.localStorage.setItem('my-naishin:tokyo-kanso', String(next));
+                      const value = e.target.value;
+                      if (value === '') {
+                        setTokyoKansoNaishin(0);
+                        if (typeof window !== 'undefined') {
+                          window.localStorage.setItem('my-naishin:tokyo-kanso', '0');
+                        }
+                      } else {
+                        const next = Math.min(65, Math.max(0, Number(value)));
+                        if (!isNaN(next)) {
+                          setTokyoKansoNaishin(next);
+                          if (typeof window !== 'undefined') {
+                            window.localStorage.setItem('my-naishin:tokyo-kanso', String(next));
+                          }
+                        }
                       }
                     }}
                     className="h-11 w-32 rounded-xl border border-slate-200 bg-white px-3 text-center text-sm font-bold text-slate-800 shadow-sm outline-none focus:border-rose-500"
@@ -567,7 +586,17 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
                   <input
                     type="number"
                     value={targetTotalScore}
-                    onChange={(e) => setTargetTotalScore(Number(e.target.value))}
+                    onChange={(e) => {
+                    const value = e.target.value;
+                    if (value === '') {
+                      setTargetTotalScore(0);
+                    } else {
+                      const numValue = Number(value);
+                      if (!isNaN(numValue) && numValue >= 0) {
+                        setTargetTotalScore(numValue);
+                      }
+                    }
+                  }}
                     className="h-12 w-full rounded-xl border border-slate-200 bg-white px-4 text-lg font-bold text-slate-800 shadow-sm outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20"
                     placeholder={prefecture?.reverseCalc ? `例: ${Math.round(prefecture.reverseCalc.totalMaxScore * 0.7)}` : "例: 700"}
                   />
@@ -591,7 +620,17 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
                   <input
                     type="number"
                     value={currentNaishin}
-                    onChange={(e) => setCurrentNaishin(Number(e.target.value))}
+                    onChange={(e) => {
+                    const value = e.target.value;
+                    if (value === '') {
+                      setCurrentNaishin(0);
+                    } else {
+                      const numValue = Number(value);
+                      if (!isNaN(numValue) && numValue >= 0) {
+                        setCurrentNaishin(numValue);
+                      }
+                    }
+                  }}
                     max={naishinMax}
                     min={0}
                     className="h-12 w-full rounded-xl border border-slate-200 bg-white px-4 text-lg font-bold text-slate-800 shadow-sm outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20"
@@ -667,7 +706,17 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
                     <input
                       type="number"
                       value={naishinRatio}
-                      onChange={(e) => setNaishinRatio(Number(e.target.value))}
+                      onChange={(e) => {
+                      const value = e.target.value;
+                      if (value === '') {
+                        setNaishinRatio(0);
+                      } else {
+                        const numValue = Number(value);
+                        if (!isNaN(numValue) && numValue >= 0 && numValue <= 100) {
+                          setNaishinRatio(numValue);
+                        }
+                      }
+                    }}
                       min={0}
                       max={100}
                       className="h-10 w-20 rounded-lg border border-slate-200 bg-white px-3 text-center text-sm font-medium text-slate-800 outline-none focus:border-emerald-500"
@@ -681,8 +730,18 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
                     <input
                       type="number"
                       value={examMaxScore}
-                      onChange={(e) => setExamMaxScore(Number(e.target.value))}
-                      min={100}
+                      onChange={(e) => {
+                      const value = e.target.value;
+                      if (value === '') {
+                        setExamMaxScore(0);
+                      } else {
+                        const numValue = Number(value);
+                        if (!isNaN(numValue) && numValue >= 0) {
+                          setExamMaxScore(numValue);
+                        }
+                      }
+                    }}
+                      min={0}
                       className="h-10 w-24 rounded-lg border border-slate-200 bg-white px-3 text-center text-sm font-medium text-slate-800 outline-none focus:border-emerald-500"
                     />
                     <span className="text-sm text-slate-500">点</span>
@@ -738,8 +797,8 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
                 <div className="rounded-xl border border-violet-200 bg-gradient-to-br from-violet-50 to-purple-50 p-4 text-center">
                   <div className="text-sm font-medium text-violet-600">1教科平均</div>
                   <div className="mt-1 text-3xl font-bold text-violet-700">
-                    {result.perSubjectScore}
-                    <span className="text-lg text-violet-500">点</span>
+                    {result.perSubjectScore === -1 ? 'N/A' : result.perSubjectScore}
+                    <span className="text-lg text-violet-500">{result.perSubjectScore === -1 ? '' : '点'}</span>
                   </div>
                 </div>
               </div>
@@ -762,6 +821,9 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
                     <div className="text-sm font-bold text-emerald-800">
                       {Math.min(result.requiredExamScore + 20, result.examMaxScore)}点
                       <span className="text-xs text-emerald-600 ml-1">({Math.round(((Math.min(result.requiredExamScore + 20, result.examMaxScore) / result.examMaxScore) * 100))}%)</span>
+                      {result.perSubjectScore === -1 && (
+                        <span className="text-xs text-red-600 ml-2">1教科平均: N/A</span>
+                      )}
                     </div>
                   </div>
                   <div className="flex items-center justify-between rounded-lg border border-blue-200 bg-blue-50 p-3">
@@ -772,6 +834,9 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
                     <div className="text-sm font-bold text-blue-800">
                       {result.requiredExamScore}点
                       <span className="text-xs text-blue-600 ml-1">({result.examPercent}%)</span>
+                      {result.perSubjectScore === -1 && (
+                        <span className="text-xs text-red-600 ml-2">1教科平均: N/A</span>
+                      )}
                     </div>
                   </div>
                   <div className="flex items-center justify-between rounded-lg border border-orange-200 bg-orange-50 p-3">
@@ -782,6 +847,9 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
                     <div className="text-sm font-bold text-orange-800">
                       {Math.max(result.requiredExamScore - 20, 0)}点
                       <span className="text-xs text-orange-600 ml-1">({Math.round(((Math.max(result.requiredExamScore - 20, 0) / result.examMaxScore) * 100))}%)</span>
+                      {result.perSubjectScore === -1 && (
+                        <span className="text-xs text-red-600 ml-2">1教科平均: N/A</span>
+                      )}
                     </div>
                   </div>
                 </div>
