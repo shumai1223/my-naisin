@@ -57,6 +57,7 @@ import { NaishinGuideSection } from '@/components/NaishinGuideSection';
 import { TokyoExtendedCalculator } from '@/components/Calculator/TokyoExtendedCalculator';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
+import { ThreeStepGuide } from '@/components/ThreeStepGuide';
 
 const LEARN_REGIONS = [
   { name: '北海道・東北', codes: ['hokkaido', 'aomori', 'iwate', 'miyagi', 'akita', 'yamagata', 'fukushima'] },
@@ -397,6 +398,9 @@ export default function Page() {
             <div className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700 ring-1 ring-emerald-100">
               2026年度入試対応（令和8年度入学者選抜）
             </div>
+
+            {/* 3ステップガイド */}
+            <ThreeStepGuide />
           </div>
 
               {/* Stats Bar */}

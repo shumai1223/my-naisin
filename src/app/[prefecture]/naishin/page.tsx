@@ -34,6 +34,10 @@ import { PrefectureMinimumContent } from '@/components/PrefectureMinimumContent'
 import { PrefecturePillarLinks } from '@/components/PrefecturePillarLinks';
 import { Header } from '@/components/Header';
 import { ToolGuide } from '@/components/ToolGuide';
+import { EvidenceSummary } from '@/components/EvidenceSummary';
+import { NextActionButtons } from '@/components/NextActionButtons';
+import { PDFExportButton } from '@/components/PDFExportButton';
+import { PrefectureSearchIntent } from '@/components/PrefectureSearchIntent';
 // import { FAQSchema } from '@/components/StructuredData/FAQSchema';
 import type { Scores, SubjectKey } from '@/lib/types';
 
@@ -223,6 +227,11 @@ export default function PrefectureNaishinPage() {
               )}
             </section>
 
+            {/* 根拠サマリー */}
+            <section className="mb-8">
+              <EvidenceSummary prefectureCode={prefectureCode} />
+            </section>
+
             {/* ツールガイド */}
             <ToolGuide 
               prefectureName={prefecture.name}
@@ -320,19 +329,35 @@ export default function PrefectureNaishinPage() {
                       <div className="flex-1">
                         <h4 className="mb-2 font-bold text-slate-800">志望校から逆算する</h4>
                         <p className="mb-3 text-sm leading-relaxed text-slate-600">
-                          「この高校に受かるには内申点が何点必要？」「今の内申点だと本番で何点取ればいい？」
-                          そんな疑問を解決する逆算機能をご利用いただけます。
+                          目標の合計点から、必要な当日点や内申点を逆算できます。志望校の配点比率を入力して、自分の現在地を把握しましょう。
                         </p>
                         <Link
-                          href={`/reverse?pref=${prefectureCode}`}
+                          href={`/reverse?pref=${prefectureCode}&current=${total}`}
                           className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-violet-600 to-purple-600 px-5 py-2.5 text-sm font-bold text-white shadow-md transition-all hover:shadow-lg hover:scale-105"
                         >
-                          {prefectureCode === 'tokyo' ? '🎯 必要当日点を算出する' : '🎯 志望校から逆算する'}
+                          <Target className="h-4 w-4" />
+                          逆算機能で試す
                           <ChevronRight className="h-4 w-4" />
                         </Link>
                       </div>
                     </div>
                   </div>
+
+                  {/* 次のアクションボタン */}
+                  <NextActionButtons 
+                    prefectureCode={prefectureCode}
+                    scores={scores}
+                    totalScore={total}
+                    maxScore={max}
+                  />
+
+                  {/* PDF出力ボタン */}
+                  <PDFExportButton 
+                    prefectureCode={prefectureCode}
+                    scores={scores}
+                    totalScore={total}
+                    maxScore={max}
+                  />
 
                   <div className="mt-4 rounded-xl border-2 border-blue-100 bg-gradient-to-br from-blue-50 to-indigo-50 p-5">
                     <div className="flex items-start gap-3">
@@ -485,6 +510,9 @@ export default function PrefectureNaishinPage() {
 
             {/* 都道府県最低ラインコンテンツ（注意点・FAQ・根拠を統一） */}
             <PrefectureMinimumContent prefectureCode={prefectureCode} />
+
+            {/* 検索意図コンテンツ */}
+            <PrefectureSearchIntent prefectureCode={prefectureCode} />
 
             {/* 都道府県固有要素 */}
             <PrefectureUniqueElements prefectureCode={prefectureCode} />

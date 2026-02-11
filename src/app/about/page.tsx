@@ -312,6 +312,52 @@ export default function AboutPage() {
             </div>
           </div>
 
+          {/* ソースの読み方 */}
+          <div className="rounded-2xl border border-emerald-200 bg-gradient-to-br from-emerald-50/80 via-teal-50/60 to-cyan-50/80 p-6 shadow-lg shadow-emerald-100/50">
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-emerald-800">
+              <BookOpen className="h-5 w-5 text-emerald-600" />
+              ソースの読み方・優先順位
+            </h2>
+            <div className="space-y-4 text-sm leading-relaxed text-emerald-700">
+              <div className="rounded-xl border border-emerald-200/50 bg-white/60 p-4">
+                <h3 className="mb-2 font-semibold text-emerald-800">📖 要綱PDFのどこを読むか（見出し名）</h3>
+                <ul className="space-y-1 ml-4 list-disc">
+                  <li>「実施要綱」→「選抜方法」→「調査書点の取扱い」の順で確認</li>
+                  <li>特に「配点比率」「換算方法」「満点」に注目</li>
+                  <li>章番号やページ番号を根拠として記録</li>
+                </ul>
+              </div>
+              
+              <div className="rounded-xl border border-emerald-200/50 bg-white/60 p-4">
+                <h3 className="mb-2 font-semibold text-emerald-800">🎯 数値が複数出るときの優先順位</h3>
+                <ol className="space-y-1 ml-4 list-decimal">
+                  <li><strong>実施要綱</strong>：最優先。教育委員会が発行する公式ルール</li>
+                  <li><strong>選考基準</strong>：要綱の補足資料。詳細な配点方法</li>
+                  <li><strong>学校別資料</strong>：学校独自のルール。特色検査など</li>
+                  <li><strong>過去問資料</strong>：参考情報。実際の出題傾向</li>
+                </ol>
+              </div>
+              
+              <div className="rounded-xl border border-amber-200/50 bg-amber-50/60 p-4">
+                <h3 className="mb-2 font-semibold text-amber-800">⚠️ 例外処理の扱い</h3>
+                <ul className="space-y-1 ml-4 list-disc">
+                  <li><strong>特色検査</strong>：実施校のみ。最大5点程度を加算</li>
+                  <li><strong>学校別比率</strong>：専門学科・総合学科で異なる場合</li>
+                  <li><strong>コース別</strong>：普通科でも進学コース等で配点が変わる</li>
+                  <li><strong>単位制</strong>：評定ではなく単位数で評価する場合</li>
+                </ul>
+                <p className="text-xs text-amber-700 mt-2">
+                  ※例外がある場合は、その旨を必ず表示し、公式要項の確認を促します
+                </p>
+              </div>
+              
+              <div className="text-xs text-emerald-600 bg-emerald-100/50 rounded-lg p-3">
+                <strong>運営者の姿勢：</strong>
+                個人運営として、公式資料を直接確認し、複数の情報源をクロスチェックしています。
+                不明点は教育委員会に問い合わせ、常に正確性を最優先しています。
+              </div>
+            </div>
+          </div>
 
           {/* お問い合わせ */}
           <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">

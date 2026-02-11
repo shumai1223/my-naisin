@@ -336,6 +336,38 @@ export default function PrivacyPage() {
                 ただし、広告の関連性が低下する場合があります。
               </p>
             </div>
+
+            {/* 子ども向け扱いに関する注意 */}
+            <div className="mt-6 rounded-xl border border-red-200 bg-red-50 p-4">
+              <h4 className="text-sm font-bold text-red-800 flex items-center gap-2">
+                <Users className="h-4 w-4" />
+                13歳未満のユーザーに関する特別な配慮
+              </h4>
+              <p className="mt-2 text-xs leading-relaxed text-red-700">
+                当サイトは中学生・高校生を主な利用者として想定していますが、Googleのポリシーでは13歳未満のユーザーに対するパーソナライズ広告は特に注意が必要です。
+              </p>
+              <ul className="mt-3 space-y-2 text-xs leading-relaxed text-red-700">
+                <li className="flex gap-2">
+                  <span className="text-red-500">•</span>
+                  <strong>非パーソナライズ広告を基本：</strong>広告を導入する場合、いきなり強いパーソナライズ広告を狙わず、年齢に関わらない一般的な広告を基本とします
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-red-500">•</span>
+                  <strong>年齢を特定する情報を取得しない：</strong>氏名、学校名、学年、生年月日などの個人情報は一切収集しません
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-red-500">•</span>
+                  <strong>保護者同意の注意喚起：</strong>13歳未満のお子様がご利用される場合は、保護者の方の同意と監督をお願いします
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-red-500">•</span>
+                  <strong>Google AdSenseの制限：</strong>Google AdSenseでは13歳未満向けのパーソナライズ広告は禁止されており、技術的に制限されています
+                </li>
+              </ul>
+              <p className="mt-3 text-xs leading-relaxed text-red-600 bg-red-100 rounded p-2">
+                <strong>運営者の姿勢：</strong>個人運営として、子どものプライバシー保護を最優先し、安全性を高く設定して運営します。
+              </p>
+            </div>
           </section>
 
           {/* アクセス解析 */}
@@ -441,6 +473,18 @@ export default function PrivacyPage() {
               重要な変更がある場合は、サイト上での告知等により、ユーザーにお知らせするよう努めます。
               定期的に本ページをご確認いただくことをお勧めいたします。
             </p>
+            
+            {/* 子ども向けポリシーの変更について */}
+            <div className="mt-4 rounded-xl border border-blue-200 bg-blue-50 p-4">
+              <h4 className="text-sm font-bold text-blue-800 flex items-center gap-2">
+                <Users className="h-4 w-4" />
+                子ども向けポリシーの優先的な変更
+              </h4>
+              <p className="mt-2 text-xs leading-relaxed text-blue-700">
+                子どものプライバシー保護に関する法律やガイドラインが変更された場合、
+                その他の変更に優先して本ポリシーを更新し、速やかに告知いたします。
+              </p>
+            </div>
           </section>
 
           {/* お問い合わせ */}
