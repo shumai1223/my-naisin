@@ -1,0 +1,74 @@
+name: Link Monitor
+
+on:
+  schedule:
+    # 毎日午前9時（JST）に実行 = UTC 0時
+    - cron: '0 0 * * *'
+  workflow_dispatch: # 手動実行も可能
+
+jobs:
+  monitor-links:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Run link monitor
+        run: npx tsx src/scripts/link-monitor.ts
+        id: monitor
+        
+      - name: Upload report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: link-monitor-report
+          path: link-monitor-report.json
+          retention-days: 30
+          
+      - name: Create issue for broken links
+        if: steps.monitor.outputs.error_count > 0
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const report = JSON.parse(fs.readFileSync('link-monitor-report.json', 'utf8'));
+            
+            const brokenLinks = report.results.filter(r => r.status === 'error');
+            
+            let body = `# 一次情報リンク監視レポート\n\n`;
+            body += `⚠️ **${brokenLinks.length}件のリンク切れを検出**\n\n`;
+            body += `監視時刻: ${report.checkedAt}\n\n`;
+            body += `## エラー詳細\n\n`;
+            
+            brokenLinks.forEach(link => {
+              body += `### ${link.prefecture} (${link.code})\n`;
+              body += `- **URL**: ${link.url}\n`;
+              body += `- **タイトル**: ${link.title}\n`;
+              body += `- **状態**: ${link.statusCode || 'N/A'}\n`;
+              body += `- **エラー**: ${link.error || 'Unknown'}\n`;
+              body += `- **確認時刻**: ${link.checkedAt}\n\n`;
+            });
+            
+            body += `## 対応方法\n\n`;
+            body += `1. 新しいURLを探して \`src/lib/prefectures.ts\` を更新\n`;
+            body += `2. 更新後、このissueを閉じてください\n\n`;
+            body += `---\n`;
+            body += `このissueは自動的に作成されました。`;
+            
+            github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `一次情報リンク監視: ${brokenLinks.length}件のリンク切れを検出`,
+              body: body,
+              labels: ['bug', 'link-monitor', 'automated']
+            });
