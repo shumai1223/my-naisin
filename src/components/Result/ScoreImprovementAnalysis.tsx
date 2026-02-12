@@ -211,7 +211,7 @@ export function ScoreImprovementAnalysis({ currentScores, prefectureCode, target
                   {topSuggestions[0].weight > 1 && '実技教科は倍率が高いので優先的に取り組みましょう。'}
                 </>
               ) : (
-                'すべての教科で最高評価を達成しています！素晴らしい！'
+                '各教科で最高評価を達成しています！素晴らしい！'
               )}
             </p>
           </div>

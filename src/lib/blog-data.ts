@@ -28,7 +28,7 @@ export const BLOG_POSTS: BlogPost[] = [
     tags: ['内申点', '高校入試', '推薦入試', '一般入試', '都道府県別', '計算方法'],
     content: `
 <div class="lead">
-内申点についての<strong>すべての疑問</strong>をこの1記事で解決！計算方法から成績アップ術、推薦入試と一般入試の違い、都道府県別の特徴まで、受験生と保護者が必要とする情報を完全網羅しました。
+内申点についての<strong>主な疑問</strong>をこの1記事で解決！計算方法から成績アップ術、推薦入試と一般入試の違い、都道府県別の特徴まで、受験生と保護者が必要とする情報を完全網羅しました。
 </div>
 
 <div class="toc">
@@ -61,7 +61,7 @@ export const BLOG_POSTS: BlogPost[] = [
 <div class="card-grid">
 <div class="card">
 <h4>1️⃣ 合否に直結する</h4>
-<p>多くの公立高校で、内申点は合否判定の30〜50%を占めます。内申点が足りないと、当日の試験で高得点を取っても合格できない場合があります。</p>
+<p>多くの公立高校で、内申点は合否判定の30〜50%程度を占めます。内申点が足りないと、当日の試験で高得点を取っても合格できない場合があります。</p>
 </div>
 <div class="card">
 <h4>2️⃣ 出願条件になる</h4>
@@ -99,7 +99,7 @@ export const BLOG_POSTS: BlogPost[] = [
 <h4>✅ 推薦入試で成功するための戦略</h4>
 <ul>
 <li><strong>中1からコツコツ</strong>：内申点は3年間の積み上げが重要</li>
-<li><strong>欠点をなくす</strong>：1でも2でも、すべての教科で安定した評定を</li>
+<li><strong>欠点をなくす</strong>：1でも2でも、各教科で安定した評定を</li>
 <li><strong>主体性をアピール</strong>：提出物・授業態度で差をつける</li>
 </ul>
 </div>
@@ -946,7 +946,7 @@ __PREFECTURE_LINK_LIST__
     tags: ['千葉県', '内申点', 'K値'],
     content: `
 <div class="lead">
-千葉県の内申点は<strong>中1〜中3の3年間</strong>すべてが対象です。さらに高校ごとに設定される<strong>K値</strong>で換算されるため、早期の積み上げが重要になります。
+千葉県の内申点は<strong>中1〜中3の3年間</strong>全体が対象です。さらに高校ごとに設定される<strong>K値</strong>で換算されるため、早期の積み上げが重要になります。
 </div>
 
 <div class="toc">
@@ -1973,7 +1973,7 @@ __PREFECTURE_LINK_LIST__
 <h2>実技等倍（傾斜なし）の県</h2>
 <p>5教科も実技4教科も同じ扱いで計算する県です。</p>
 <p><strong>該当する主な都道府県：</strong>${PREFECTURES.filter(p => p.practicalMultiplier === 1 && p.coreMultiplier === 1).map(p => p.name).slice(0, 10).join('・')}など</p>
-<p>等倍の県では、教科すべてが同じ価値を持つため、特定の教科に偏らないバランスの良い成績が重要です（主な傾向）。</p>
+<p>等倍の県では、各教科が同じ価値を持つため、特定の教科に偏らないバランスの良い成績が重要です（主な傾向）。</p>
 
 <h2>副教科対策のポイント</h2>
 <div class="point-box">
