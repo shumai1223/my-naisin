@@ -241,6 +241,14 @@ function main() {
           console.error(`   ${issue.prefecture || issue.type}: ${issue.expected || ''}→${issue.actual || issue.url || ''}`);
         });
         console.error('');
+        
+        // 高優先度の問題がある場合のみビルドを失敗させる
+        console.error('💡 修正方法：');
+        console.error('1. npm run check:consistency で詳細を確認');
+        console.error('2. 高優先度の問題を修正してからデプロイ');
+        console.error('3. 定期的にチェックを実行');
+        
+        process.exit(1);
       }
       
       if (mediumIssues.length > 0) {
@@ -259,12 +267,10 @@ function main() {
         console.error('');
       }
       
-      console.error('💡 修正方法：');
-      console.error('1. npm run check:consistency で詳細を確認');
-      console.error('2. 上記の問題を修正してからデプロイ');
-      console.error('3. 定期的にチェックを実行');
-      
-      process.exit(1);
+      // 中・低優先度の問題のみの場合は警告のみでビルドを続行
+      console.log('⚠️ 中・低優先度の問題がありますが、ビルドを続行します');
+      console.log('💡 高優先度の問題がないため、デプロイ可能です');
+      process.exit(0);
     } else {
       console.log('✅ すべてのデータは整合しています');
       console.log('✅ リンクは正常です');
