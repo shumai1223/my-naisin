@@ -717,12 +717,20 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
                       key={ratio}
                       type="button"
                       onClick={() => {
+                        console.log('神奈川比率ボタンクリック:', ratio); // デバッグ用
                         const [naishin, exam] = ratio.split('-').map((n) => Number(n));
+                        console.log('解析結果:', { naishin, exam }); // デバッグ用
                         if (Number.isFinite(naishin) && Number.isFinite(exam) && naishin + exam > 0) {
-                          setNaishinRatio(Math.round((naishin / (naishin + exam)) * 100));
+                          const ratioPercent = Math.round((naishin / (naishin + exam)) * 100);
+                          console.log('設定する比率:', ratioPercent); // デバッグ用
+                          setNaishinRatio(ratioPercent);
+                          setNaishinRatioInputValue(String(ratioPercent));
+                          setExamMaxScore(500); // 神奈川の場合は当日点を500点に設定
+                          setExamMaxInputValue('500');
+                          console.log('設定完了'); // デバッグ用
                         }
                       }}
-                      className="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold text-slate-700 hover:border-slate-300"
+                      className="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-colors cursor-pointer"
                     >
                       {ratio.replace('-', ':')}
                     </button>

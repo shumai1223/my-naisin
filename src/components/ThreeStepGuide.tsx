@@ -25,8 +25,8 @@ export function ThreeStepGuide() {
     },
     {
       number: 3,
-      title: '結果を保存/シェア/逆算',
-      description: '計算結果を保存したり、目標点から逆算したり',
+      title: '逆算で目標を設定',
+      description: '志望校の合格点から必要な内申点を計算',
       icon: Share2,
       href: '/reverse',
       color: 'from-purple-500 to-pink-600'
@@ -47,43 +47,49 @@ export function ThreeStepGuide() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
-            className={step.number === 2 ? 'md:transform md:scale-105' : ''}
+            className={step.number === 2 ? 'md:transform md:scale-105' : step.number === 3 ? 'md:transform md:scale-105' : ''}
           >
             <Link href={step.href}>
               <div className={`group relative h-full rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:shadow-lg hover:border-slate-300 ${
-                step.number === 2 ? 'ring-2 ring-emerald-500 ring-opacity-50 bg-gradient-to-br from-emerald-50 to-teal-50' : ''
+                step.number === 2 ? 'ring-2 ring-emerald-500 ring-opacity-50 bg-gradient-to-br from-emerald-50 to-teal-50' : 
+                step.number === 3 ? 'ring-2 ring-purple-500 ring-opacity-50 bg-gradient-to-br from-purple-50 to-pink-50' : ''
               }`}>
                 {/* ステップ番号 */}
                 <div className={`absolute -top-3 -left-3 grid h-8 w-8 place-items-center rounded-full bg-gradient-to-br text-sm font-bold text-white shadow-lg ${
-                  step.number === 2 ? 'from-emerald-500 to-teal-600' : 'from-slate-700 to-slate-900'
+                  step.number === 2 ? 'from-emerald-500 to-teal-600' : 
+                  step.number === 3 ? 'from-purple-500 to-pink-600' : 'from-slate-700 to-slate-900'
                 }`}>
                   {step.number}
                 </div>
                 
                 {/* アイコン */}
                 <div className={`grid h-14 w-14 place-items-center rounded-xl bg-gradient-to-br shadow-lg mb-4 ${
-                  step.number === 2 ? 'from-emerald-500 to-teal-600 scale-110' : step.color
+                  step.number === 2 ? 'from-emerald-500 to-teal-600 scale-110' : 
+                  step.number === 3 ? 'from-purple-500 to-pink-600 scale-110' : step.color
                 }`}>
                   <step.icon className="h-7 w-7 text-white" />
                 </div>
                 
                 {/* コンテンツ */}
                 <h3 className={`font-bold mb-2 group-hover:text-blue-600 transition-colors ${
-                  step.number === 2 ? 'text-xl text-emerald-700' : 'text-lg text-slate-800'
+                  step.number === 2 ? 'text-xl text-emerald-700' : 
+                  step.number === 3 ? 'text-xl text-purple-700' : 'text-lg text-slate-800'
                 }`}>
                   {step.title}
                 </h3>
                 <p className={`mb-4 ${
-                  step.number === 2 ? 'text-base text-emerald-600 font-medium' : 'text-sm text-slate-600'
+                  step.number === 2 ? 'text-base text-emerald-600 font-medium' : 
+                  step.number === 3 ? 'text-base text-purple-600 font-medium' : 'text-sm text-slate-600'
                 }`}>
                   {step.description}
                 </p>
                 
                 {/* 矢印 */}
                 <div className={`flex items-center font-medium transition-colors ${
-                  step.number === 2 ? 'text-emerald-600 group-hover:text-emerald-700 text-base' : 'text-sm text-blue-600 group-hover:text-blue-700'
+                  step.number === 2 ? 'text-emerald-600 group-hover:text-emerald-700 text-base' : 
+                  step.number === 3 ? 'text-purple-600 group-hover:text-purple-700 text-base' : 'text-sm text-blue-600 group-hover:text-blue-700'
                 }`}>
-                  <span>{step.number === 2 ? '👇 メインの計算ツール' : '今すぐ始める'}</span>
+                  <span>{step.number === 2 ? '👇 メインの計算ツール' : step.number === 3 ? '🎯 志望校逆算で目標設定' : '今すぐ始める'}</span>
                   <ArrowRight className="h-4 w-4 ml-1 transition-transform group-hover:translate-x-1" />
                 </div>
               </div>
