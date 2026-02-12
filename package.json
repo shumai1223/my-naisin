@@ -4,13 +4,16 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run check:consistency && npm run check:forbidden && next build",
     "start": "next start",
     "lint": "next lint",
     "test": "jest",
     "test:ci": "jest --ci --coverage",
     "check:links": "node scripts/check-source-links.mjs",
     "check:forbidden": "node scripts/check-forbidden-words.js",
+    "check:consistency": "node scripts/check-data-consistency.js",
+    "check:all": "npm run check:consistency && npm run check:forbidden && npm run check:links",
+    "monitor:links": "npx tsx src/scripts/link-monitor.ts",
     "test:e2e": "playwright test"
   },
   "dependencies": {
@@ -39,6 +42,7 @@
     "postcss": "^8.4.38",
     "tailwindcss": "^3.4.3",
     "ts-jest": "^29.1.2",
+    "tsx": "^4.7.0",
     "typescript": "^5.4.5"
   }
 }
