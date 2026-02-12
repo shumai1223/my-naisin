@@ -333,14 +333,14 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
         </div>
 
         <div className="p-5 md:p-6">
-          <div className="mb-5 flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-3">
             <button
               type="button"
               onClick={() => {
                 setMode('general');
                 if (prefectureCode === 'tokyo') setPrefectureCode('tokyo');
               }}
-              className={`rounded-full px-3 py-1 text-xs font-semibold transition ${mode === 'general' ? 'bg-emerald-500 text-white' : 'bg-slate-100 text-slate-600'}`}
+              className={`rounded-xl px-4 py-2 text-sm font-bold transition-all transform hover:scale-105 shadow-md ${mode === 'general' ? 'bg-emerald-500 text-white shadow-emerald-200' : 'bg-white text-slate-700 border border-slate-200 hover:border-emerald-300'}`}
             >
               一般モード
             </button>
@@ -350,7 +350,7 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
                 setMode('tokyo');
                 setPrefectureCode('tokyo');
               }}
-              className={`rounded-full px-3 py-1 text-xs font-semibold transition ${mode === 'tokyo' ? 'bg-rose-500 text-white' : 'bg-slate-100 text-slate-600'}`}
+              className={`rounded-xl px-4 py-2 text-sm font-bold transition-all transform hover:scale-105 shadow-md ${mode === 'tokyo' ? 'bg-rose-500 text-white shadow-rose-200' : 'bg-white text-slate-700 border border-slate-200 hover:border-rose-300'}`}
             >
               東京都(1020)
             </button>
@@ -360,7 +360,7 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
                 setMode('kanagawa');
                 setPrefectureCode('kanagawa');
               }}
-              className={`rounded-full px-3 py-1 text-xs font-semibold transition ${mode === 'kanagawa' ? 'bg-indigo-500 text-white' : 'bg-slate-100 text-slate-600'}`}
+              className={`rounded-xl px-4 py-2 text-sm font-bold transition-all transform hover:scale-105 shadow-md ${mode === 'kanagawa' ? 'bg-indigo-500 text-white shadow-indigo-200' : 'bg-white text-slate-700 border border-slate-200 hover:border-indigo-300'}`}
             >
               神奈川(S1/S2)
             </button>
