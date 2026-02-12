@@ -296,7 +296,7 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
     }
 
     setResult({
-      requiredExamScore: Math.max(0, Math.min(examMaxScore, requiredExamScore)),
+      requiredExamScore: Math.max(0, Math.min(examMaxScore, Math.round(requiredExamScore))),
       examMaxScore,
       examPercent: Math.max(0, Math.min(100, examPercent)),
       perSubjectScore: Math.max(0, perSubjectScore),
