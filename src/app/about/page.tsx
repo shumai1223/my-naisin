@@ -47,10 +47,10 @@ export default function AboutPage() {
             </h2>
             <div className="space-y-4 text-sm leading-relaxed text-slate-600">
               <div className="rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 p-4 border border-blue-200">
-                <h3 className="mb-2 font-bold text-blue-800">👋 私は誰か</h3>
-                <p><strong>ハンドルネーム：</strong>My Naishin運営者（中学生開発者）</p>
-                <p><strong>立場：</strong>現在高校受験を経験した中学生。同じく受験を控える仲間のために、自分が困った経験を活かしてツールを開発。</p>
-                <p><strong>開発動機：</strong>「内申点の計算って県ごとに違うし、何が必要か分かりにくい」という自分の経験から、もっと分かりやすいツールがあればいいのにと思ったのがきっかけ。</p>
+                <h3 className="mb-2 font-bold text-blue-800">👋 運営者情報</h3>
+                <p><strong>ハンドルネーム：</strong>My Naishin運営者（個人開発）</p>
+                <p><strong>立場：</strong>個人開発者。個人情報保護のため、年齢・学校名などは非公開とさせていただきます。</p>
+                <p><strong>開発動機：</strong>内申点の計算って県ごとに違うし、何が必要か分かりにくい」という課題を感じ、公式資料を参照しながら分かりやすく整理したツールを作りました。</p>
               </div>
               
               <div className="rounded-xl bg-gradient-to-r from-green-50 to-emerald-50 p-4 border border-green-200">
@@ -72,6 +72,19 @@ export default function AboutPage() {
                   <li>• <strong>保証：</strong>計算結果の絶対的な正確性や合格保証はできません</li>
                 </ul>
                 <p className="mt-2 text-xs text-amber-700"><strong>理由：</strong>私は開発者であり、教育の専門家ではありません。進路に関する最終決定は、保護者の方や学校の先生と相談してください。</p>
+              </div>
+              
+              {/* 品質保証と検証プロセス */}
+              <div className="rounded-xl bg-gradient-to-r from-purple-50 to-indigo-50 p-4 border border-purple-200">
+                <h3 className="mb-2 font-bold text-purple-800">🔍 品質保証と検証プロセス</h3>
+                <ul className="space-y-1">
+                  <li>• <strong>根拠資料：</strong>各都道府県の教育委員会・学校案内等の一次情報を参照</li>
+                  <li>• <strong>最終確認日：</strong>各ページに根拠リンクと最終確認日を記載</li>
+                  <li>• <strong>計算例：</strong>具体的な計算例と期待値を公開</li>
+                  <li>• <strong>例外条件：</strong>学校・コースで違う条件がある場合は明記</li>
+                  <li>• <strong>更新履歴：</strong>変更点と日時を透明性高く公開</li>
+                  <li>• <strong>誤り報告：</strong>間違いを見つけた場合は報告フォームで修正対応</li>
+                </ul>
               </div>
             </div>
           </div>

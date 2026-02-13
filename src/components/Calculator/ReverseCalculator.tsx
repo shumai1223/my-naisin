@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import { useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 import { Target, Calculator, Info, ArrowLeft, ChevronDown, ExternalLink, Copy, Check, HelpCircle, MapPin } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -460,19 +461,33 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
               </div>
               <div className="grid gap-2">
                 {PREFECTURE_RATIO_PRESETS[prefectureCode].map((preset, index) => (
-                  <button
-                    key={index}
-                    type="button"
-                    onClick={() => {
-                      setNaishinRatio(preset.ratio);
-                      setExamMaxScore(preset.examMax);
-                    }}
-                    className="rounded-lg border border-blue-200 bg-white p-3 text-left hover:bg-blue-50 transition-colors"
-                  >
-                    <div className="font-semibold text-blue-700 text-sm">{preset.label}</div>
-                    <div className="text-xs text-slate-600 mt-1">{preset.description}</div>
-                    <div className="text-xs text-blue-600 mt-1">内申{preset.ratio}%・学力{100-preset.ratio}%</div>
-                  </button>
+                  <div key={index} className="rounded-lg border border-blue-200 bg-white p-3 hover:bg-blue-50 transition-colors">
+                    <div className="flex items-start justify-between">
+                      <div className="flex-1">
+                        <div className="font-semibold text-blue-700 text-sm">{preset.label}</div>
+                        <div className="text-xs text-slate-600 mt-1">{preset.description}</div>
+                        <div className="text-xs text-blue-600 mt-1">内申{preset.ratio}%・学力{100-preset.ratio}%</div>
+                      </div>
+                      <div className="flex gap-1">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setNaishinRatio(preset.ratio);
+                            setExamMaxScore(preset.examMax);
+                          }}
+                          className="rounded px-2 py-1 text-xs bg-blue-500 text-white hover:bg-blue-600 transition-colors"
+                        >
+                          適用
+                        </button>
+                        <Link
+                          href={`/${prefectureCode}/naishin`}
+                          className="rounded px-2 py-1 text-xs bg-slate-500 text-white hover:bg-slate-600 transition-colors"
+                        >
+                          詳細
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
                 ))}
               </div>
             </div>

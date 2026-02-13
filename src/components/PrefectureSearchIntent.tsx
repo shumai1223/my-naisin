@@ -15,7 +15,8 @@ export function PrefectureSearchIntent({ prefectureCode, className = '' }: Prefe
     tokyo: '東京都',
     kanagawa: '神奈川県',
     osaka: '大阪府',
-    saitama: '埼玉県'
+    saitama: '埼玉県',
+    aichi: '愛知県'
   };
 
   // 各都道府県の検索意図データ
@@ -57,10 +58,14 @@ export function PrefectureSearchIntent({ prefectureCode, className = '' }: Prefe
     },
     kanagawa: {
       commonMistakes: [
-        'S値とA値を混同している',
+        'S値の存在を知らない',
+        '中2と中3の評定倍率が違うのを忘れている',
+        '実技教科が3倍換算なのに気づいていない',
+        'S値1.0が標準だと思い込んでいる',
+        '専門学科と普通科で計算が違うのを知らない',
         '中2・中3の比率f:gを理解していない',
         '特色検査を忘れている',
-        '学校ごとの比率が全て同じだと思っている',
+        '学校ごとの比率が全て同じだと思っていると',
         'S値計算が複雑すぎて諦めている'
       ],
       targetGrades: '中2・中3の評定合計を基準に、比率f:gで重み付けしてS値を計算します。',
@@ -102,6 +107,22 @@ export function PrefectureSearchIntent({ prefectureCode, className = '' }: Prefe
         '専門学科・総合学科で配点が異なる場合があります'
       ],
       specialNotes: ['埼玉県は標準的な計算が多いです', '学校ごとの確認が重要です']
+    },
+    aichi: {
+      commonMistakes: [
+        '実技教科が1.5倍換算なのを知らない',
+        '推薦入試の基準点を誤解している',
+        '専門学科で計算が特殊なのに気づいていない',
+        '名古屋市立と県立で計算が違うのを忘れている',
+        '内申点の上限を間違えている'
+      ],
+      targetGrades: '中3の9教科評定合計が基本で、実技教科は1.5倍換算です。',
+      ratioDifferences: [
+        '推薦入試では内申点の比重が一般入試より高くなります',
+        '名古屋市立高校は独自の計算方法を採用しています',
+        '専門学科では実技教科の比重がさらに高くなる場合があります'
+      ],
+      specialNotes: ['名古屋市立と県立で計算方法が異なる場合があります', '特色検査を実施する学校があります']
     },
     default: {
       commonMistakes: [

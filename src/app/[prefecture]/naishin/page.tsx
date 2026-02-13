@@ -38,6 +38,7 @@ import { EvidenceSummary } from '@/components/EvidenceSummary';
 import { NextActionButtons } from '@/components/NextActionButtons';
 import { PDFExportButton } from '@/components/PDFExportButton';
 import { PrefectureSearchIntent } from '@/components/PrefectureSearchIntent';
+import { PrefectureFAQ } from '@/components/PrefectureFAQ';
 // import { FAQSchema } from '@/components/StructuredData/FAQSchema';
 import type { Scores, SubjectKey } from '@/lib/types';
 
@@ -513,6 +514,9 @@ export default function PrefectureNaishinPage() {
 
             {/* 検索意図コンテンツ */}
             <PrefectureSearchIntent prefectureCode={prefectureCode} />
+
+            {/* 都道府県別FAQ */}
+            <PrefectureFAQ prefectureCode={prefectureCode} />
 
             {/* 都道府県固有要素 */}
             <PrefectureUniqueElements prefectureCode={prefectureCode} />
