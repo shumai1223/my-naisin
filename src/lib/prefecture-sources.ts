@@ -176,20 +176,20 @@ export const PREFECTURE_SOURCES = {
   
   chiba: [
     {
-      sourceUrl: 'https://www.pref.chiba.lg.jp/kyouiku/senbatsu/documents/r8_jugyousen_youryou.pdf',
-      pdfTitle: '令和8年度千葉県立高等学校入学者選抜実施要綱',
-      lastChecked: '2026年1月28日',
-      pageNumber: '13ページ',
-      sectionName: '第2章 調査書の取扱い',
-      description: '内申点の計算方法について'
+      sourceUrl: 'https://www.pref.chiba.lg.jp/kyouiku/shidou/nyuushi/koukou/index.html',
+      pdfTitle: '高等学校入学者選抜情報',
+      lastChecked: '2026年2月13日',
+      pageNumber: '公式サイト',
+      sectionName: '入試情報トップ',
+      description: '千葉県の高等学校入学者選抜に関する公式情報'
     },
     {
-      sourceUrl: 'https://www.pref.chiba.lg.jp/kyouiku/senbatsu/documents/r8_jugyousen_youryou.pdf',
-      pdfTitle: '令和8年度千葉県立高等学校入学者選抜実施要綱',
-      lastChecked: '2026年1月28日',
-      pageNumber: '16ページ',
-      sectionName: '第3章 学力検査',
-      description: '実技教科の配点について'
+      sourceUrl: 'https://www.pref.chiba.lg.jp/kyouiku/shidou/nyuushi/koukou/r8/r8jissiyoko.html',
+      pdfTitle: '令和8年度千葉県公立高等学校入学者選抜実施要項',
+      lastChecked: '2026年2月13日',
+      pageNumber: '公式掲載ページ',
+      sectionName: '実施要項',
+      description: '内申点の計算方法について'
     }
   ],
   

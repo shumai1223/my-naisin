@@ -23,7 +23,7 @@ export function PrefectureFAQ({ prefectureCode, className = '' }: PrefectureFAQP
       commonQuestions: [
         {
           question: 'どの学期の成績が対象になりますか？',
-          answer: '千葉県の場合、中3のみの成績が対象です。中1・中2の成績は直接影響しません。',
+          answer: '千葉県の場合、中1〜中3の3年間の評定合計が対象です。全学年の合計値にK値をかけて調査書点を計算します。',
           icon: <Calendar className="h-4 w-4" />,
           priority: 'high'
         },
@@ -41,7 +41,7 @@ export function PrefectureFAQ({ prefectureCode, className = '' }: PrefectureFAQP
         }
       ],
       specificNotes: [
-        '特色検査を実施する学校では加点があります',
+        '全学年（中1〜中3）の評定合計にK値を乗じて計算します',
         'K値1.5が標準的な学校が多いですが、必ず確認が必要です'
       ]
     },
@@ -87,14 +87,14 @@ export function PrefectureFAQ({ prefectureCode, className = '' }: PrefectureFAQP
         },
         {
           question: '実技教科の倍率は？',
-          answer: '神奈川県では実技教科は3倍換算です。5教科より高い比重があります。',
-          icon: <AlertTriangle className="h-4 w-4" />,
+          answer: '神奈川県では実技教科は等倍が基本ですが、学校によっては重点化（2倍など）を行う場合があります。',
+          icon: <BookOpen className="h-4 w-4" />,
           priority: 'high'
         }
       ],
       specificNotes: [
         'f:gは合計10、各2以上の整数が基本です',
-        '特色検査を実施する学校では加点があります'
+        '学校ごとに実技教科の重点化が異なる場合があります'
       ]
     },
     osaka: {
@@ -173,6 +173,32 @@ export function PrefectureFAQ({ prefectureCode, className = '' }: PrefectureFAQP
       specificNotes: [
         '名古屋市立と県立で計算方法が異なる場合があります',
         '特色検査を実施する学校があります'
+      ]
+    },
+    hokkaido: {
+      commonQuestions: [
+        {
+          question: 'どの学期の成績が対象になりますか？',
+          answer: '北海道の場合、中1〜中3の3年間が対象ですが、学年ごとに重み付けが異なります。中1×2、中2×2、中3×3で計算します。',
+          icon: <Calendar className="h-4 w-4" />,
+          priority: 'high'
+        },
+        {
+          question: '学年ごとの倍率は？',
+          answer: '中1と中2は2倍、中3は3倍の重み付けです。中3の成績が最も重要になります。',
+          icon: <HelpCircle className="h-4 w-4" />,
+          priority: 'high'
+        },
+        {
+          question: '実技教科の倍率は？',
+          answer: '北海道では実技教科も主要5教科と同じ倍率が適用されます。',
+          icon: <BookOpen className="h-4 w-4" />,
+          priority: 'medium'
+        }
+      ],
+      specificNotes: [
+        '学年ごとの重み付けが特徴的（中1×2、中2×2、中3×3）',
+        '合計315点満点の計算になります'
       ]
     },
     default: {

@@ -29,12 +29,12 @@ export function PrefectureSearchIntent({ prefectureCode, className = '' }: Prefe
     chiba: {
       commonMistakes: [
         'K値は学校ごとに違うと思っている',
-        '中1・中2の成績も影響すると勘違い',
+        '中1・中2の成績も影響しないと勘違い',
         '実技教科の倍率を忘れている',
         '内申点と調査書点を混同している',
         'K値1.5が標準だと思い込んでいる'
       ],
-      targetGrades: '中3のみの評定合計が対象です。中1・中2の成績は直接影響しません。',
+      targetGrades: '中1〜中3の3年間の評定合計が対象です。全学年の合計値にK値をかけて調査書点を計算します。',
       ratioDifferences: [
         '推薦入試と一般入試で内申点の比率が異なる場合があります。特に専門学科で注意が必要です。'
       ],

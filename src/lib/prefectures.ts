@@ -274,7 +274,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     maxScore: 135,
     description: '中1〜中3の9教科×5段階（135点満点）',
     note: 'K値（0.5〜2）で換算する高校もあり',
-    sourceUrl: 'https://www.pref.chiba.lg.jp/kyouiku/shidou/nyuushi/index.html',
+    sourceUrl: 'https://www.pref.chiba.lg.jp/kyouiku/shidou/nyuushi/koukou/index.html',
     sourceTitle: '千葉県教育委員会 入試情報',
     lastVerified: '2026-01-30',
     fiscalYear: '2026'
@@ -569,39 +569,6 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceTitle: '奈良県教育委員会 入学者選抜',
     lastVerified: '2026-01-31',
     fiscalYear: '2026'
-  },
-  {
-    code: 'kanagawa',
-    name: '神奈川県',
-    region: '関東',
-    targetGrades: [2, 3],
-    gradeMultipliers: { 1: 0, 2: 1, 3: 2 },
-    coreMultiplier: 1,
-    practicalMultiplier: 1,
-    maxScore: 135,
-    description: '中2(45点)＋中3×2倍(90点)（135点満点）',
-    sourceUrl: 'https://www.pref.kanagawa.jp/docs/ir4/chousasho.html',
-    sourceTitle: '神奈川県教育委員会 入学者選抜',
-    lastVerified: '2026-01-30',
-    fiscalYear: '2026',
-    reverseCalc: {
-      totalMaxScore: 1000,
-      examMaxScore: 500,
-      defaultRatio: { naishin: 50, exam: 50 },
-      calcType: 'kanagawa',
-      sValueCoefficients: {
-        academic: 0.8,
-        practical: 0.5
-      },
-      // 神奈川県固有の設定
-      kanagawaSettings: {
-        gradeMultipliers: {
-          grade2: 1, // 中2の倍率
-          grade3: 2  // 中3の倍率
-        },
-        sValueExplanation: 'S値 = 内申点（中2×1 + 中3×2）×0.8'
-      }
-    }
   },
   {
     code: 'wakayama',

@@ -95,7 +95,7 @@ export const EXAM_RATIO_DATA: ExamRatioConfig[] = [
       note: '2日間入試。調査書点(内申)+学力検査+学校設定検査',
     },
     lastVerified: '2026-01-30',
-    sourceUrl: 'https://www.pref.chiba.lg.jp/kyouiku/shidou/press/2024/koukou/index.html',
+    sourceUrl: 'https://www.pref.chiba.lg.jp/kyouiku/shidou/nyuushi/koukou/index.html',
   },
   {
     prefectureCode: 'aichi',

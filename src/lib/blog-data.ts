@@ -61,7 +61,7 @@ export const BLOG_POSTS: BlogPost[] = [
 <div class="card-grid">
 <div class="card">
 <h4>1️⃣ 合否に直結する</h4>
-<p>多くの公立高校で、内申点は合否判定の30〜50%程度を占めます。内申点が足りないと、当日の試験で高得点を取っても合格できない場合があります。</p>
+<p>多くの公立高校では、内申点が合否判定の30〜50%程度を占める傾向があります。内申点が足りないと、当日の試験で高得点を取っても合格できない場合があります。</p>
 </div>
 <div class="card">
 <h4>2️⃣ 出願条件になる</h4>
@@ -87,7 +87,7 @@ export const BLOG_POSTS: BlogPost[] = [
 <tr><th>項目</th><th>推薦入試</th><th>一般入試</th></tr>
 </thead>
 <tbody>
-<tr><td>内申点の比重</td><td class="highlight"><strong>70〜90%</strong></td><td>30〜50%</td></tr>
+<tr><td>内申点の比重</td><td class="highlight"><strong>70〜90%</strong></td><td>おおよそ30〜50%程度</td></tr>
 <tr><td>当日の試験</td><td>面接・作文が中心</td><td>5教科の学力検査</td></tr>
 <tr><td>出願条件</td><td>内申点基準あり</td><td>原則として全員可</td></tr>
 <tr><td>合格の決め手</td><td>3年間の積み上げ</td><td>当日の実力</td></tr>
