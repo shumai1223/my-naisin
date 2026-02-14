@@ -2,7 +2,8 @@
 
 import * as React from 'react';
 import { useSearchParams } from 'next/navigation';
-import { Target, Calculator, Info, ArrowLeft, ChevronDown, ExternalLink, Copy, Check, HelpCircle } from 'lucide-react';
+import Link from 'next/link';
+import { Target, Calculator, Info, ArrowLeft, ChevronDown, ExternalLink, Copy, Check, HelpCircle, MapPin } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 import { PREFECTURES, getPrefectureByCode } from '@/lib/prefectures';
@@ -44,9 +45,11 @@ const PREFECTURE_RATIO_PRESETS: Record<string, { label: string; ratio: number; e
     { label: 'S値:A値=5:5', ratio: 50, examMax: 500, description: '内申重視' },
   ],
   osaka: [
-    { label: 'Ⅲ型', ratio: 37.5, examMax: 500, description: '内申:学力=3:5の標準' },
-    { label: 'Ⅱ型', ratio: 40, examMax: 500, description: '内申:学力=4:6' },
     { label: 'Ⅰ型', ratio: 50, examMax: 500, description: '内申:学力=5:5' },
+    { label: 'Ⅱ型', ratio: 40, examMax: 500, description: '内申:学力=4:6' },
+    { label: 'Ⅲ型', ratio: 37.5, examMax: 500, description: '内申:学力=3:5の標準' },
+    { label: 'Ⅳ型', ratio: 30, examMax: 500, description: '内申:学力=3:7（内申重視）' },
+    { label: 'Ⅴ型', ratio: 25, examMax: 500, description: '内申:学力=1:3（内申最重視）' },
   ]
 };
 
@@ -87,21 +90,37 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
   const [naishinInputValue, setNaishinInputValue] = React.useState<string>('300');
   const [naishinRatio, setNaishinRatio] = React.useState<number>(30);
   const [examMaxScore, setExamMaxScore] = React.useState<number>(500);
+  const [examMaxInputValue, setExamMaxInputValue] = React.useState<string>('500');
+  const [naishinRatioInputValue, setNaishinRatioInputValue] = React.useState<string>('30');
   const [result, setResult] = React.useState<ReverseResult | null>(null);
   const [tokyoKansoNaishin, setTokyoKansoNaishin] = React.useState<number>(45);
   const [osakaType, setOsakaType] = React.useState<string>('II'); // デフォルトはタイプII
   const [copied, setCopied] = React.useState(false);
   const [validationError, setValidationError] = React.useState<string | null>(null);
+  const [isPrefectureDropdownOpen, setIsPrefectureDropdownOpen] = React.useState(false);
+  const dropdownRef = React.useRef<HTMLDivElement>(null);
 
   const prefecture = React.useMemo(() => getPrefectureByCode(prefectureCode), [prefectureCode]);
   const naishinMax = React.useMemo(() => calculateMaxScore(prefectureCode), [prefectureCode]);
+
+  React.useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsPrefectureDropdownOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   React.useEffect(() => {
     // 都道府県ごとの逆算設定を反映
     if (prefecture?.reverseCalc) {
       const { defaultRatio, examMaxScore, totalMaxScore } = prefecture.reverseCalc;
       setNaishinRatio(defaultRatio.naishin);
+      setNaishinRatioInputValue(String(defaultRatio.naishin));
       setExamMaxScore(examMaxScore);
+      setExamMaxInputValue(String(examMaxScore));
       setTargetTotalScore(Math.round(totalMaxScore * 0.7)); // 満点の70%を目標に設定
       setTargetScoreInputValue(String(Math.round(totalMaxScore * 0.7)));
     } else {
@@ -109,49 +128,21 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
       const examData = getExamRatioByCode(prefectureCode);
       const config = examData?.generalExam ?? DEFAULT_EXAM_RATIO;
       setNaishinRatio(config.naishinRatio);
+      setNaishinRatioInputValue(String(config.naishinRatio));
       setExamMaxScore(config.examMaxScore);
+      setExamMaxInputValue(String(config.examMaxScore));
       setTargetTotalScore(Math.round((config.examMaxScore + (config as any).naishinMax) * 0.7));
       setTargetScoreInputValue(String(Math.round((config.examMaxScore + (config as any).naishinMax) * 0.7)));
     }
   }, [prefectureCode, prefecture]);
 
-  // 大阪府のタイプが変更されたら再計算
-  React.useEffect(() => {
-    if (prefectureCode === 'osaka' && currentNaishin > 0 && targetTotalScore > 0) {
-      calculate();
-    }
-  }, [osakaType, prefectureCode, currentNaishin, targetTotalScore]);
-
-  React.useEffect(() => {
-    if (typeof window === 'undefined') return;
-    const storedTokyo = window.localStorage.getItem('my-naishin:tokyo-kanso');
-    const storedKanagawa = window.localStorage.getItem('my-naishin:kanagawa-A');
-    if (storedTokyo) {
-      const parsed = Number(storedTokyo);
-      if (Number.isFinite(parsed)) setTokyoKansoNaishin(parsed);
-    }
-    if (storedKanagawa) {
-      const parsed = Number(storedKanagawa);
-      if (Number.isFinite(parsed)) {
-        setCurrentNaishin(parsed);
-        setNaishinInputValue(String(parsed));
-      }
-    }
-  }, []);
-
-  React.useEffect(() => {
-    if (!initialRatio) return;
-    const [naishin, exam] = initialRatio.split('-').map((n) => Number(n));
-    if (Number.isFinite(naishin) && Number.isFinite(exam) && naishin + exam > 0) {
-      const ratio = Math.round((naishin / (naishin + exam)) * 100);
-      setNaishinRatio(ratio);
-    }
-  }, [initialRatio]);
-
   const calculate = React.useCallback(() => {
     setValidationError(null);
 
-    if (currentNaishin < 0 || currentNaishin > naishinMax) {
+    const naishinNum = Number(currentNaishin);
+    const targetScoreNum = Number(targetTotalScore);
+
+    if (naishinNum < 0 || naishinNum > naishinMax) {
       setValidationError(`内申点は0〜${naishinMax}の範囲で入力してください。`);
       return;
     }
@@ -163,7 +154,7 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
       setValidationError('当日点の満点は1以上で入力してください。');
       return;
     }
-    if (targetTotalScore < 0) {
+    if (targetScoreNum < 0) {
       setValidationError('目標合計点は0以上で入力してください。');
       return;
     }
@@ -184,8 +175,8 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
         case 'osaka':
           // 大阪府: 900点満点方式（タイプ別）
           const selectedType = osakaTypes?.find(t => t.code === osakaType) || osakaTypes?.[1]; // デフォルトはタイプII
-          const naishinContribution = currentNaishin * (selectedType?.naishinMultiplier || 0.8);
-          const examContributionNeeded = targetTotalScore - naishinContribution;
+          const naishinContribution = naishinNum * (selectedType?.naishinMultiplier || 0.8);
+          const examContributionNeeded = targetScoreNum - naishinContribution;
           requiredExamScore = Math.round(examContributionNeeded / (selectedType?.examMultiplier || 1.2));
           examPercent = Math.round((requiredExamScore / examMaxScore) * 100);
           const osakaRawPerSubjectScore = Math.round(requiredExamScore / 5);
@@ -198,9 +189,9 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
           if (tokyoSettings) {
             // 内申点の計算：主要5教科(1倍) + 実技4教科(2倍) = 65点満点
             // これを300点満点に換算
-            const naishin300 = currentNaishin * tokyoSettings.naishinConversion.totalMultiplier;
+            const naishin300 = naishinNum * tokyoSettings.naishinConversion.totalMultiplier;
             const tokyoNaishinContribution = naishin300 * (naishinRatio / 100);
-            const tokyoExamNeeded = targetTotalScore - tokyoNaishinContribution;
+            const tokyoExamNeeded = targetScoreNum - tokyoNaishinContribution;
             requiredExamScore = Math.round(tokyoExamNeeded);
             examPercent = Math.round((requiredExamScore / (examMaxScore - tokyoSettings.esatjMaxScore)) * 100);
             const rawPerSubjectScore = Math.round(requiredExamScore / 5);
@@ -208,8 +199,8 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
             isAchievable = requiredExamScore <= (examMaxScore - tokyoSettings.esatjMaxScore) && requiredExamScore >= 0;
           } else {
             // 従来の計算（フォールバック）
-            const tokyoNaishinContribution = currentNaishin * (naishinRatio / 100) * 3;
-            const tokyoExamNeeded = targetTotalScore - tokyoNaishinContribution;
+            const tokyoNaishinContribution = naishinNum * (naishinRatio / 100) * 3;
+            const tokyoExamNeeded = targetScoreNum - tokyoNaishinContribution;
             requiredExamScore = Math.round(tokyoExamNeeded);
             examPercent = Math.round((requiredExamScore / examMaxScore) * 100);
             const rawPerSubjectScore = Math.round(requiredExamScore / 5);
@@ -223,10 +214,10 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
           if (kanagawaSettings) {
             // 注意：現在の内申点は中3のみを想定
             // 実際には中2の成績も必要だが、簡易計算として中3の成績から推定
-            const estimatedGrade2Score = currentNaishin * 0.8; // 中2の成績を中3の80%と仮定
-            const sValueNaishin = (estimatedGrade2Score * kanagawaSettings.gradeMultipliers.grade2 + currentNaishin * kanagawaSettings.gradeMultipliers.grade3);
+            const estimatedGrade2Score = naishinNum * 0.8; // 中2の成績を中3の80%と仮定
+            const sValueNaishin = (estimatedGrade2Score * kanagawaSettings.gradeMultipliers.grade2 + naishinNum * kanagawaSettings.gradeMultipliers.grade3);
             const kanagawaNaishinContribution = sValueNaishin * (sValueCoefficients?.academic || 0.8);
-            const kanagawaExamNeeded = targetTotalScore - kanagawaNaishinContribution;
+            const kanagawaExamNeeded = targetScoreNum - kanagawaNaishinContribution;
             requiredExamScore = Math.round(kanagawaExamNeeded);
             examPercent = Math.round((requiredExamScore / examMaxScore) * 100);
             const rawPerSubjectScore = Math.round(requiredExamScore / 5);
@@ -235,8 +226,8 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
           } else {
             // 従来の計算（フォールバック）
             const sValueCoeff = sValueCoefficients?.academic || 0.8;
-            const kanagawaNaishinContribution = currentNaishin * sValueCoeff;
-            const kanagawaExamNeeded = targetTotalScore - kanagawaNaishinContribution;
+            const kanagawaNaishinContribution = naishinNum * sValueCoeff;
+            const kanagawaExamNeeded = targetScoreNum - kanagawaNaishinContribution;
             requiredExamScore = Math.round(kanagawaExamNeeded);
             examPercent = Math.round((requiredExamScore / examMaxScore) * 100);
             const rawPerSubjectScore = Math.round(requiredExamScore / 5);
@@ -248,8 +239,8 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
         case 'chiba':
           // 千葉県: K値方式
           const chibaKValue = kValue || 1;
-          const chibaNaishinContribution = currentNaishin * chibaKValue;
-          const chibaExamNeeded = targetTotalScore - chibaNaishinContribution;
+          const chibaNaishinContribution = naishinNum * chibaKValue;
+          const chibaExamNeeded = targetScoreNum - chibaNaishinContribution;
           requiredExamScore = Math.round(chibaExamNeeded);
           examPercent = Math.round((requiredExamScore / examMaxScore) * 100);
           const chibaRawPerSubjectScore = Math.round(requiredExamScore / 5);
@@ -259,8 +250,8 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
 
         case 'saitama':
           // 埼玉県: 標準計算
-          const saitamaNaishinContribution = currentNaishin * (naishinRatio / 100);
-          const saitamaExamNeeded = targetTotalScore - saitamaNaishinContribution;
+          const saitamaNaishinContribution = naishinNum * (naishinRatio / 100);
+          const saitamaExamNeeded = targetScoreNum - saitamaNaishinContribution;
           requiredExamScore = Math.round(saitamaExamNeeded);
           examPercent = Math.round((requiredExamScore / examMaxScore) * 100);
           const saitamaRawPerSubjectScore = Math.round(requiredExamScore / 5);
@@ -270,8 +261,8 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
 
         default:
           // 標準計算
-          const standardNaishinContribution = currentNaishin * (naishinRatio / 100);
-          const standardExamNeeded = targetTotalScore - standardNaishinContribution;
+          const standardNaishinContribution = naishinNum * (naishinRatio / 100);
+          const standardExamNeeded = targetScoreNum - standardNaishinContribution;
           requiredExamScore = Math.round(standardExamNeeded);
           examPercent = Math.round((requiredExamScore / examMaxScore) * 100);
           const standardRawPerSubjectScore = Math.round(requiredExamScore / 5);
@@ -281,8 +272,8 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
       }
     } else {
       // 従来の計算（逆算設定がない都道府県）
-      const standardNaishinContribution = currentNaishin * (naishinRatio / 100);
-      const standardExamNeeded = targetTotalScore - standardNaishinContribution;
+      const standardNaishinContribution = naishinNum * (naishinRatio / 100);
+      const standardExamNeeded = targetScoreNum - standardNaishinContribution;
       requiredExamScore = Math.round(standardExamNeeded * 100) / examRatio;
       examPercent = Math.round((requiredExamScore / examMaxScore) * 100);
       const legacyRawPerSubjectScore = Math.round(requiredExamScore / 5);
@@ -306,14 +297,21 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
     }
 
     setResult({
-      requiredExamScore: Math.max(0, Math.min(examMaxScore, requiredExamScore)),
+      requiredExamScore: Math.max(0, Math.min(examMaxScore, Math.round(requiredExamScore))),
       examMaxScore,
       examPercent: Math.max(0, Math.min(100, examPercent)),
       perSubjectScore: Math.max(0, perSubjectScore),
       isAchievable,
       message,
     });
-  }, [currentNaishin, naishinMax, targetTotalScore, naishinRatio, examMaxScore]);
+  }, [prefectureCode, currentNaishin, naishinMax, targetTotalScore, naishinRatio, examMaxScore, osakaType]);
+
+  // 大阪府のタイプが変更されたら再計算
+  React.useEffect(() => {
+    if (prefectureCode === 'osaka' && Number(currentNaishin) > 0 && Number(targetTotalScore) > 0) {
+      calculate();
+    }
+  }, [osakaType, prefectureCode, currentNaishin, targetTotalScore, calculate]);
 
   return (
     <div className="space-y-4">
@@ -336,14 +334,14 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
         </div>
 
         <div className="p-5 md:p-6">
-          <div className="mb-5 flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-3">
             <button
               type="button"
               onClick={() => {
                 setMode('general');
                 if (prefectureCode === 'tokyo') setPrefectureCode('tokyo');
               }}
-              className={`rounded-full px-3 py-1 text-xs font-semibold transition ${mode === 'general' ? 'bg-emerald-500 text-white' : 'bg-slate-100 text-slate-600'}`}
+              className={`rounded-xl px-4 py-2 text-sm font-bold transition-all transform hover:scale-105 shadow-md ${mode === 'general' ? 'bg-emerald-500 text-white shadow-emerald-200' : 'bg-white text-slate-700 border border-slate-200 hover:border-emerald-300'}`}
             >
               一般モード
             </button>
@@ -353,7 +351,7 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
                 setMode('tokyo');
                 setPrefectureCode('tokyo');
               }}
-              className={`rounded-full px-3 py-1 text-xs font-semibold transition ${mode === 'tokyo' ? 'bg-rose-500 text-white' : 'bg-slate-100 text-slate-600'}`}
+              className={`rounded-xl px-4 py-2 text-sm font-bold transition-all transform hover:scale-105 shadow-md ${mode === 'tokyo' ? 'bg-rose-500 text-white shadow-rose-200' : 'bg-white text-slate-700 border border-slate-200 hover:border-rose-300'}`}
             >
               東京都(1020)
             </button>
@@ -363,7 +361,7 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
                 setMode('kanagawa');
                 setPrefectureCode('kanagawa');
               }}
-              className={`rounded-full px-3 py-1 text-xs font-semibold transition ${mode === 'kanagawa' ? 'bg-indigo-500 text-white' : 'bg-slate-100 text-slate-600'}`}
+              className={`rounded-xl px-4 py-2 text-sm font-bold transition-all transform hover:scale-105 shadow-md ${mode === 'kanagawa' ? 'bg-indigo-500 text-white shadow-indigo-200' : 'bg-white text-slate-700 border border-slate-200 hover:border-indigo-300'}`}
             >
               神奈川(S1/S2)
             </button>
@@ -463,19 +461,33 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
               </div>
               <div className="grid gap-2">
                 {PREFECTURE_RATIO_PRESETS[prefectureCode].map((preset, index) => (
-                  <button
-                    key={index}
-                    type="button"
-                    onClick={() => {
-                      setNaishinRatio(preset.ratio);
-                      setExamMaxScore(preset.examMax);
-                    }}
-                    className="rounded-lg border border-blue-200 bg-white p-3 text-left hover:bg-blue-50 transition-colors"
-                  >
-                    <div className="font-semibold text-blue-700 text-sm">{preset.label}</div>
-                    <div className="text-xs text-slate-600 mt-1">{preset.description}</div>
-                    <div className="text-xs text-blue-600 mt-1">内申{preset.ratio}%・学力{100-preset.ratio}%</div>
-                  </button>
+                  <div key={index} className="rounded-lg border border-blue-200 bg-white p-3 hover:bg-blue-50 transition-colors">
+                    <div className="flex items-start justify-between">
+                      <div className="flex-1">
+                        <div className="font-semibold text-blue-700 text-sm">{preset.label}</div>
+                        <div className="text-xs text-slate-600 mt-1">{preset.description}</div>
+                        <div className="text-xs text-blue-600 mt-1">内申{preset.ratio}%・学力{100-preset.ratio}%</div>
+                      </div>
+                      <div className="flex gap-1">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setNaishinRatio(preset.ratio);
+                            setExamMaxScore(preset.examMax);
+                          }}
+                          className="rounded px-2 py-1 text-xs bg-blue-500 text-white hover:bg-blue-600 transition-colors"
+                        >
+                          適用
+                        </button>
+                        <Link
+                          href={`/${prefectureCode}/naishin`}
+                          className="rounded px-2 py-1 text-xs bg-slate-500 text-white hover:bg-slate-600 transition-colors"
+                        >
+                          詳細
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
                 ))}
               </div>
             </div>
@@ -547,25 +559,60 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
             </div>
           ) : (
           <div className="space-y-5">
-            <div>
-              <label className="mb-2 block text-sm font-bold text-slate-700">
-                都道府県を選択
-                <span className="ml-1 text-xs font-normal text-amber-500">※必須</span>
-              </label>
-              <div className="relative">
-                <select
-                  value={prefectureCode}
-                  onChange={(e) => setPrefectureCode(e.target.value)}
-                  className="h-12 w-full appearance-none rounded-xl border border-slate-200 bg-white px-4 pr-10 text-sm font-medium text-slate-800 shadow-sm outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20"
-                >
-                  {PREFECTURES.map((pref) => (
-                    <option key={pref.code} value={pref.code}>
-                      {pref.name}
-                    </option>
-                  ))}
-                </select>
-                <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" />
+            <div ref={dropdownRef}>
+              <div className="mb-2">
+                <h3 className="text-sm font-bold text-slate-700">都道府県の選択</h3>
+                <p className="text-xs text-slate-500">お住まいの地域を選んでください</p>
               </div>
+              
+              <div className="relative">
+                <button
+                  type="button"
+                  onClick={() => setIsPrefectureDropdownOpen(!isPrefectureDropdownOpen)}
+                  className="flex w-full items-center justify-between gap-3 rounded-2xl border-2 border-slate-200 bg-white px-4 py-4 text-left transition-all shadow-sm hover:border-blue-300 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="grid h-12 w-12 place-items-center rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 shadow-md">
+                      <MapPin className="h-6 w-6 text-white" />
+                    </div>
+                    <div>
+                      <div className="text-base font-bold text-slate-800">
+                        {prefecture?.name ?? '都道府県を選択'}
+                      </div>
+                      <div className="text-xs text-slate-500">
+                        {prefecture?.description ?? '計算方法を選んでください'}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="rounded-full bg-slate-100 p-2">
+                    <ChevronDown className={`h-5 w-5 text-slate-400 transition-transform ${isPrefectureDropdownOpen ? 'rotate-180' : ''}`} />
+                  </div>
+                </button>
+
+                {isPrefectureDropdownOpen && (
+                  <div className="absolute z-50 mt-2 max-h-80 w-full overflow-auto rounded-2xl border border-slate-200 bg-white shadow-xl">
+                    <div className="max-h-80 overflow-y-auto">
+                      {PREFECTURES.map((pref) => (
+                        <button
+                          key={pref.code}
+                          type="button"
+                          onClick={() => {
+                            setPrefectureCode(pref.code);
+                            setIsPrefectureDropdownOpen(false);
+                          }}
+                          className={`w-full px-4 py-3 text-left transition-colors hover:bg-blue-50 ${
+                            prefectureCode === pref.code ? 'bg-blue-50 border-l-4 border-blue-500' : ''
+                          }`}
+                        >
+                          <div className="font-medium text-slate-800">{pref.name}</div>
+                          <div className="text-xs text-slate-500">{pref.description}</div>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+              
               <div className="mt-1 text-xs text-slate-500">
                 選択すると自動で配点比率が設定されます
               </div>
@@ -591,20 +638,17 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
                 </label>
                 <div className="flex items-center gap-2">
                   <input
-                    type="number"
+                    type="text"
+                    inputMode="numeric"
+                    pattern="[0-9]*"
                     value={targetScoreInputValue}
                     onChange={(e) => {
-                    const value = e.target.value;
-                    setTargetScoreInputValue(value);
-                    if (value === '') {
-                      setTargetTotalScore(0);
-                    } else {
-                      const numValue = Number(value);
-                      if (!isNaN(numValue) && numValue >= 0) {
-                        setTargetTotalScore(numValue);
+                      const value = e.target.value;
+                      if (value === '' || /^[0-9]+$/.test(value)) {
+                        setTargetScoreInputValue(value);
+                        setTargetTotalScore(value === '' ? 0 : Number(value));
                       }
-                    }
-                  }}
+                    }}
                     className="h-12 w-full rounded-xl border border-slate-200 bg-white px-4 text-lg font-bold text-slate-800 shadow-sm outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20"
                     placeholder={prefecture?.reverseCalc ? `例: ${Math.round(prefecture.reverseCalc.totalMaxScore * 0.7)}` : "例: 700"}
                   />
@@ -626,22 +670,17 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
                 </label>
                 <div className="flex items-center gap-2">
                   <input
-                    type="number"
+                    type="text"
+                    inputMode="numeric"
+                    pattern="[0-9]*"
                     value={naishinInputValue}
                     onChange={(e) => {
-                    const value = e.target.value;
-                    setNaishinInputValue(value);
-                    if (value === '') {
-                      setCurrentNaishin(0);
-                    } else {
-                      const numValue = Number(value);
-                      if (!isNaN(numValue) && numValue >= 0) {
-                        setCurrentNaishin(numValue);
+                      const value = e.target.value;
+                      if (value === '' || /^[0-9]+$/.test(value)) {
+                        setNaishinInputValue(value);
+                        setCurrentNaishin(value === '' ? 0 : Number(value));
                       }
-                    }
-                  }}
-                    max={naishinMax}
-                    min={0}
+                    }}
                     className="h-12 w-full rounded-xl border border-slate-200 bg-white px-4 text-lg font-bold text-slate-800 shadow-sm outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20"
                     placeholder={`例: ${Math.round(naishinMax * 0.8)}`}
                   />
@@ -693,12 +732,20 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
                       key={ratio}
                       type="button"
                       onClick={() => {
+                        console.log('神奈川比率ボタンクリック:', ratio); // デバッグ用
                         const [naishin, exam] = ratio.split('-').map((n) => Number(n));
+                        console.log('解析結果:', { naishin, exam }); // デバッグ用
                         if (Number.isFinite(naishin) && Number.isFinite(exam) && naishin + exam > 0) {
-                          setNaishinRatio(Math.round((naishin / (naishin + exam)) * 100));
+                          const ratioPercent = Math.round((naishin / (naishin + exam)) * 100);
+                          console.log('設定する比率:', ratioPercent); // デバッグ用
+                          setNaishinRatio(ratioPercent);
+                          setNaishinRatioInputValue(String(ratioPercent));
+                          setExamMaxScore(500); // 神奈川の場合は当日点を500点に設定
+                          setExamMaxInputValue('500');
+                          console.log('設定完了'); // デバッグ用
                         }
                       }}
-                      className="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold text-slate-700 hover:border-slate-300"
+                      className="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-colors cursor-pointer"
                     >
                       {ratio.replace('-', ':')}
                     </button>
@@ -713,21 +760,20 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
                   <label className="mb-1 block text-xs font-medium text-slate-600">内申点の比率</label>
                   <div className="flex items-center gap-2">
                     <input
-                      type="number"
-                      value={naishinRatio}
+                      type="text"
+                      inputMode="numeric"
+                      pattern="[0-9]*"
+                      value={naishinRatioInputValue}
                       onChange={(e) => {
-                      const value = e.target.value;
-                      if (value === '') {
-                        setNaishinRatio(0);
-                      } else {
-                        const numValue = Number(value);
-                        if (!isNaN(numValue) && numValue >= 0 && numValue <= 100) {
-                          setNaishinRatio(numValue);
+                        const value = e.target.value;
+                        if (value === '' || /^[0-9]+$/.test(value)) {
+                          const num = value === '' ? 0 : Number(value);
+                          if (num <= 100) {
+                            setNaishinRatioInputValue(value);
+                            setNaishinRatio(num);
+                          }
                         }
-                      }
-                    }}
-                      min={0}
-                      max={100}
+                      }}
                       className="h-10 w-20 rounded-lg border border-slate-200 bg-white px-3 text-center text-sm font-medium text-slate-800 outline-none focus:border-emerald-500"
                     />
                     <span className="text-sm text-slate-500">%（当日点 {100 - naishinRatio}%）</span>
@@ -737,20 +783,17 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
                   <label className="mb-1 block text-xs font-medium text-slate-600">当日点の満点</label>
                   <div className="flex items-center gap-2">
                     <input
-                      type="number"
-                      value={examMaxScore}
+                      type="text"
+                      inputMode="numeric"
+                      pattern="[0-9]*"
+                      value={examMaxInputValue}
                       onChange={(e) => {
-                      const value = e.target.value;
-                      if (value === '') {
-                        setExamMaxScore(0);
-                      } else {
-                        const numValue = Number(value);
-                        if (!isNaN(numValue) && numValue >= 0) {
-                          setExamMaxScore(numValue);
+                        const value = e.target.value;
+                        if (value === '' || /^[0-9]+$/.test(value)) {
+                          setExamMaxInputValue(value);
+                          setExamMaxScore(value === '' ? 0 : Number(value));
                         }
-                      }
-                    }}
-                      min={0}
+                      }}
                       className="h-10 w-24 rounded-lg border border-slate-200 bg-white px-3 text-center text-sm font-medium text-slate-800 outline-none focus:border-emerald-500"
                     />
                     <span className="text-sm text-slate-500">点</span>

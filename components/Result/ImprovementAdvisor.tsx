@@ -102,7 +102,7 @@ export function ImprovementAdvisor({ scores, prefectureCode, targetPercent }: Im
         </div>
         <div className="text-lg font-bold text-emerald-800">完璧なスコア！</div>
         <div className="mt-1 text-sm text-emerald-600">
-          すべての教科で満点を達成しています
+          各教科で満点を達成しています
         </div>
       </div>
     );
