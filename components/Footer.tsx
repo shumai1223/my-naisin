@@ -153,14 +153,6 @@ export function Footer() {
             © 2026 {APP_NAME}. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
-            <Link 
-              href="/quality" 
-              className="flex items-center gap-1 text-[11px] text-slate-400 hover:text-blue-500 transition-colors"
-            >
-              <Shield className="h-3 w-3" />
-              品質保証
-            </Link>
-            <div className="h-3 w-px bg-slate-200" />
             <div className="flex items-center gap-1 text-[11px] text-slate-400">
               Made with <Heart className="h-3 w-3 text-rose-400" /> for students
             </div>

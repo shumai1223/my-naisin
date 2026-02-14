@@ -165,7 +165,7 @@ export function HeroNavigation({ onModeChange, currentMode }: HeroNavigationProp
               transition={{ delay: 0.2, duration: 0.3 }}
             >
               <Link
-                href="/guide"
+                href="/blog/naishin-guide"
                 className="group inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-sm transition-all duration-300 hover:border-slate-300 hover:shadow-md hover:bg-slate-50"
               >
                 <BookOpen className="h-4 w-4" />
