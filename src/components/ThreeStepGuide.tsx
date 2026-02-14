@@ -10,7 +10,7 @@ export function ThreeStepGuide() {
     {
       number: 1,
       title: '通知表を入力',
-      description: '9教科の成績を入力して内申点を計算（押しても変化ない、今開いているサイト自体）',
+      description: '9教科の成績を入力して内申点を計算',
       icon: Calculator,
       href: '/',
       color: 'from-emerald-500 to-teal-600'
