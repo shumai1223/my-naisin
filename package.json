@@ -15,8 +15,8 @@
     "check:all": "npm run check:consistency && npm run check:forbidden && npm run check:links",
     "monitor:links": "npx tsx src/scripts/link-monitor.ts",
     "test:e2e": "playwright test",
-    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
-    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy"
+    "preview": "opennextjs-cloudflare build --config ./open-next.config.ts && opennextjs-cloudflare preview --config ./open-next.config.ts",
+    "deploy": "opennextjs-cloudflare build --config ./open-next.config.ts && opennextjs-cloudflare deploy --config ./open-next.config.ts"
   },
   "dependencies": {
     "canvas-confetti": "^1.9.3",
