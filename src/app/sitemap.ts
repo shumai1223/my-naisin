@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next';
 import { PREFECTURES } from '@/lib/prefectures';
 import { getAllPosts } from '@/lib/blog-data';
 
-const BASE_URL = 'https://my-naishin.vercel.app';
+const BASE_URL = 'https://my-naishin.com';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date().toISOString();
@@ -16,6 +16,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/comparison`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
     { url: `${BASE_URL}/glossary`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE_URL}/blog`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
+    { url: `${BASE_URL}/guide`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE_URL}/quality`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${BASE_URL}/about`, lastModified: now, changeFrequency: 'monthly', priority: 0.4 },
     { url: `${BASE_URL}/privacy`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
     { url: `${BASE_URL}/terms`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
@@ -31,6 +33,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
+  // 都道府県リバース計算ページ
+  const prefectureReversePages = PREFECTURES.map((pref) => ({
+    url: `${BASE_URL}/${pref.code}/reverse`,
+    lastModified: pref.lastVerified ?? now,
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }));
+
+  // 都道府県詳細ページ
+  const prefectureDetailPages = PREFECTURES.map((pref) => ({
+    url: `${BASE_URL}/${pref.code}`,
+    lastModified: pref.lastVerified ?? now,
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }));
+
   // ブログ記事
   const posts = getAllPosts();
   const blogPages = posts.map((post) => ({
@@ -40,5 +58,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticPages, ...prefecturePages, ...blogPages];
+  return [...staticPages, ...prefecturePages, ...prefectureReversePages, ...prefectureDetailPages, ...blogPages];
 }
