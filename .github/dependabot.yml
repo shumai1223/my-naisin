@@ -5,6 +5,16 @@ updates:
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 10
+    groups:
+      patch-and-minor:
+        update-types:
+          - "patch"
+          - "minor"
+      react-next:
+        patterns:
+          - "next*"
+          - "react*"
+          - "react-dom*"
     labels:
       - "dependencies"
       - "dependabot"
