@@ -17,6 +17,11 @@ export const metadata: Metadata = {
   description: '全国47都道府県の内申点計算に対応。9教科の成績を入力するだけで各地域の方式に合わせて自動計算。成績推移グラフ、教科別アドバイス、目標設定、勉強タイマー、高校受験に役立つ学習記事をワンストップで提供。',
   keywords: ['内申点', '内申点計算', '高校受験', '成績', '中学生', '内申書', '調査書', '成績管理', '学習アドバイス', '47都道府県'],
   authors: [{ name: 'My Naishin' }],
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+    ],
+  },
   openGraph: {
     title: '内申点シミュレーター | My Naishin - 全国47都道府県対応',
     description: '全国47都道府県の内申点計算に対応。9教科の成績を入力するだけで各地域の方式に合わせて自動計算。',
