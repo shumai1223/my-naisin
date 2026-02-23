@@ -154,6 +154,14 @@ export function Footer() {
           </p>
           <div className="flex items-center gap-4">
             <Link 
+              href="/guide" 
+              className="flex items-center gap-1 text-[11px] text-slate-400 hover:text-blue-500 transition-colors"
+            >
+              <BookOpen className="h-3 w-3" />
+              利用ガイド
+            </Link>
+            <div className="h-3 w-px bg-slate-200" />
+            <Link 
               href="/quality" 
               className="flex items-center gap-1 text-[11px] text-slate-400 hover:text-blue-500 transition-colors"
             >

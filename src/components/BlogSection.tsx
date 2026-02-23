@@ -5,9 +5,9 @@ import { BookOpen, ChevronRight, TrendingUp, Target, GraduationCap, Calculator, 
 
 const FEATURED_ARTICLES = [
   {
-    slug: 'naishinten-calculation-by-prefecture',
-    title: '【完全版】内申点の計算方法を都道府県別に徹底解説',
-    description: '東京都65点、神奈川県135点、埼玉県は中1から！地域ごとの違いを詳しく解説',
+    slug: 'naishin-guide',
+    title: '内申点の基本から都道府県別対策まで完全ガイド',
+    description: '計算方法の基本を理解して、自分の地域に合った対策を立てよう',
     icon: Calculator,
     color: 'from-blue-500 to-indigo-600',
     tag: '人気',
