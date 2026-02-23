@@ -19,16 +19,66 @@ export default function ContactPage() {
     email: ''
   });
 
-  const handleGeneralSubmit = (e: React.FormEvent) => {
+  const handleGeneralSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    const formData = new FormData(e.target as HTMLFormElement);
+    
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          type: 'general',
+          name: formData.get('name'),
+          email: formData.get('email'),
+          subject: formData.get('subject'),
+          message: formData.get('message'),
+        }),
+      });
+
+      const data = await response.json();
+      
+      if (response.ok) {
+        setSubmitted(true);
+      } else {
+        alert(data.error || '送信に失敗しました。時間を置いて再度お試しください。');
+      }
+    } catch (error) {
+      alert('送信に失敗しました。時間を置いて再度お試しください。');
+    }
   };
 
-  const handleBugSubmit = (e: React.FormEvent) => {
+  const handleBugSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // In production, this would send to a backend
-    console.log('Bug report:', bugDetails);
-    setSubmitted(true);
+    
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          type: 'bug',
+          email: bugDetails.email,
+          device: bugDetails.device,
+          browser: bugDetails.browser,
+          description: bugDetails.description,
+          steps: bugDetails.steps,
+        }),
+      });
+
+      const data = await response.json();
+      
+      if (response.ok) {
+        setSubmitted(true);
+      } else {
+        alert(data.error || '送信に失敗しました。時間を置いて再度お試しください。');
+      }
+    } catch (error) {
+      alert('送信に失敗しました。時間を置いて再度お試しください。');
+    }
   };
 
   return (
