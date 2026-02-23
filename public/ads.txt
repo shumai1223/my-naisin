@@ -1,0 +1,5 @@
+# ads.txt for My Naishin
+# Generated: 2026-02-23
+# Purpose: AdSense revenue optimization and long-term stability
+
+google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0

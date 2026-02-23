@@ -1,4 +1,16 @@
 User-agent: *
 Allow: /
+Crawl-delay: 1
 
-Sitemap: https://my-naisin.vercel.app/sitemap.xml
+# Allow important resources
+Allow: /css/
+Allow: /js/
+Allow: /images/
+
+# Block admin/api routes
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_next/
+Disallow: /contact
+
+Sitemap: https://my-naishin.com/sitemap.xml
