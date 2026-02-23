@@ -31,7 +31,7 @@ const GLOSSARY_TERMS: GlossaryTerm[] = [
     note: '素内申はあくまで基本値であり、実際の入試では都道府県ごとの換算方法が適用されます。',
     relatedPrefectures: '全国共通の概念。ただし入試で「素内申のまま使う」県（埼玉・千葉など）と「換算する」県（東京・神奈川など）があります。',
     links: [
-      { label: '都道府県別の計算方法を比較', href: '/blog/naishinten-calculation-by-prefecture' },
+      { label: '都道府県別の計算方法を比較', href: '/blog/naishin-guide' },
       { label: '内申点を計算する', href: '/' },
     ],
   },
@@ -120,7 +120,7 @@ const GLOSSARY_TERMS: GlossaryTerm[] = [
     note: '評定は絶対評価で付けられます（2002年度以降）。以前の相対評価とは異なり、クラスの人数割合に縛られません。',
     relatedPrefectures: '全国共通。高知県など一部は10段階評定を使用する場合もあります。',
     links: [
-      { label: '都道府県別の計算方法を比較', href: '/blog/naishinten-calculation-by-prefecture' },
+      { label: '都道府県別の計算方法を比較', href: '/blog/naishin-guide' },
       { label: '都道府県一覧', href: '/prefectures' },
     ],
   },

@@ -266,7 +266,7 @@ export default async function PrefecturePage({ params }: PageProps) {
             <h2 className="mb-4 text-lg font-bold text-slate-800">関連コンテンツ</h2>
             <div className="grid gap-3 sm:grid-cols-2">
               <Link
-                href="/blog/naishinten-calculation-by-prefecture"
+                href="/blog/naishin-guide"
                 className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow"
               >
                 <span className="text-sm font-medium text-slate-700">都道府県別の計算方法を比較</span>

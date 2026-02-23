@@ -50,7 +50,7 @@ export default function AboutPage() {
                 <h3 className="mb-2 font-bold text-blue-800">👋 運営者情報</h3>
                 <p><strong>ハンドルネーム：</strong>My Naishin運営者（個人開発）</p>
                 <p><strong>立場：</strong>個人開発者。個人情報保護のため、年齢・学校名などは非公開とさせていただきます。</p>
-                <p><strong>開発動機：</strong>内申点の計算って県ごとに違うし、何が必要か分かりにくい」という課題を感じ、公式資料を参照しながら分かりやすく整理したツールを作りました。</p>
+                <p><strong>開発動機：</strong>「内申点の計算って県ごとに違うし、何が必要か分かりにくい」という課題を感じ、多数の一次資料（教育委員会PDF等）を参照し、一般化できる形に整理したツールを作りました。</p>
               </div>
               
               <div className="rounded-xl bg-gradient-to-r from-green-50 to-emerald-50 p-4 border border-green-200">

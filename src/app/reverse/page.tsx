@@ -225,7 +225,7 @@ export default function ReversePage() {
                     <ChevronRight className="h-4 w-4 text-slate-400" />
                   </Link>
                   <Link
-                    href="/blog/naishinten-calculation-by-prefecture"
+                    href="/blog/naishin-guide"
                     className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow"
                   >
                     <span className="text-sm font-medium text-slate-700">都道府県別の計算方法を比較</span>

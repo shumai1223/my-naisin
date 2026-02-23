@@ -70,19 +70,19 @@ const LEARN_REGIONS = [
 
 const LEARN_POPULAR_ARTICLES = [
   {
-    slug: 'naishinten-calculation-by-prefecture',
-    title: '【完全保存版】内申点の計算方法を都道府県別に徹底解説！',
-    category: '内申点の基礎',
+    slug: 'naishin-guide',
+    title: '内申点の基本から都道府県別対策まで完全ガイド',
+    category: '基本を理解して対策を立てよう',
   },
   {
     slug: 'tokyo-kansan-naishin-guide',
     title: '【東京都】換算内申の計算方法と都立高校入試の完全ガイド',
-    category: '都道府県別対策',
+    category: '東京都特有の計算方法を解説',
   },
   {
     slug: 'kansan-naishin-vs-su-naishin',
     title: '【図解】換算内申と素内申の違いとは？',
-    category: '内申点の基礎',
+    category: '違いを理解して活用しよう',
   },
 ];
 

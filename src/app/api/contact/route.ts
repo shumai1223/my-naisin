@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
     console.log('詳細:', description);
     console.log('手順:', steps);
     console.log('日時:', new Date().toLocaleString('ja-JP'));
-    console.log('IP:', request.ip || '不明');
+    console.log('IP:', request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || '不明');
     console.log('========================');
 
     return NextResponse.json({ 
