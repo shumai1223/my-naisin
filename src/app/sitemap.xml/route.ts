@@ -1,7 +1,7 @@
 import { PREFECTURES } from '@/lib/prefectures';
 
 export default function sitemap() {
-  const baseUrl = 'https://my-naisin.vercel.app';
+  const baseUrl = 'https://my-naishin.com';
   
   const staticPages = [
     { url: '', priority: 1.0, changefreq: 'daily' },
