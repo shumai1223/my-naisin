@@ -41,13 +41,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  // 都道府県詳細ページ
-  const prefectureDetailPages = PREFECTURES.map((pref) => ({
-    url: `${BASE_URL}/${pref.code}`,
-    lastModified: pref.lastVerified ?? now,
-    changeFrequency: 'monthly' as const,
-    priority: 0.7,
-  }));
+  // 都道府県詳細ページ（削除 - 404エラーのため）
+  // const prefectureDetailPages = PREFECTURES.map((pref) => ({
+  //   url: `${BASE_URL}/${pref.code}`,
+  //   lastModified: pref.lastVerified ?? now,
+  //   changeFrequency: 'monthly' as const,
+  //   priority: 0.7,
+  // }));
 
   // ブログ記事
   const posts = getAllPosts();
@@ -58,5 +58,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticPages, ...prefecturePages, ...prefectureReversePages, ...prefectureDetailPages, ...blogPages];
+  return [...staticPages, ...prefecturePages, ...prefectureReversePages, ...blogPages];
 }
