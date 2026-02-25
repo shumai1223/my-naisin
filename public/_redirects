@@ -1,2 +1,3 @@
-# HTTPS redirect for Cloudflare Pages
-/* https://my-naishin.com/:splat 301
+# Redirects
+# NOTE: HTTPS強制はCloudflareダッシュボードの「Always Use HTTPS」またはHSTSで行ってください。
+# このファイルでhttps://へのリダイレクトを書くと、httpsアクセス時に無限ループになるため削除しました。
