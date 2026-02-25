@@ -1,0 +1,3 @@
+# HTTPS redirect for Cloudflare Pages
+https://my-naishin.com/* https://my-naishin.com/:splat 301!
+http://my-naishin.com/* https://my-naishin.com/:splat 301!
