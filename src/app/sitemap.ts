@@ -55,7 +55,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${BASE_URL}/blog/${post.slug}`,
     lastModified: post.lastUpdated ?? post.date,
     changeFrequency: 'monthly' as const,
-    priority: 0.7,
+    priority: 0.8,
   }));
 
   return [...staticPages, ...prefecturePages, ...prefectureReversePages, ...blogPages];

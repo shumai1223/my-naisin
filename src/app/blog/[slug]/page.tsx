@@ -1,15 +1,15 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { Calendar, Clock, ChevronLeft, ChevronRight, BookOpen, Home, User, FileCheck, ExternalLink, RefreshCw } from 'lucide-react';
+import { Calendar, Clock, ChevronLeft, ChevronRight, BookOpen, Home, FileCheck, ExternalLink, RefreshCw, Tag, Sparkles } from 'lucide-react';
 
 import { getPostBySlug, getAllPosts } from '@/lib/blog-data';
-import { BlogCTA } from '@/components/BlogCTA';
 import { BlogRelatedLinks } from '@/components/BlogRelatedLinks';
 import { BlogSourceLinks } from '@/components/BlogSourceLinks';
-import { BlogUpdateInfo } from '@/components/BlogUpdateInfo';
 import { BlogPostingSchema } from '@/components/StructuredData/BlogPostingSchema';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
+import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { PrefectureLinkList } from '@/components/PrefectureLinkList';
+import { BlogRelatedArticles } from '@/components/BlogRelatedArticles';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -75,6 +75,7 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   if (!post) {
     notFound();
+    return null;
   }
 
   const allPosts = getAllPosts();
@@ -83,7 +84,7 @@ export default async function BlogPostPage({ params }: PageProps) {
   const nextPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+    <div className="min-h-screen bg-white">
       <BlogPostingSchema
         title={post.title}
         description={post.description}
@@ -100,80 +101,105 @@ export default async function BlogPostPage({ params }: PageProps) {
           { name: post.title, url: `https://my-naishin.com/blog/${post.slug}` },
         ]}
       />
-      <div className="mx-auto max-w-3xl px-4 py-8">
-        {/* Breadcrumb */}
-        <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
-          <Link href="/" className="flex items-center gap-1 hover:text-blue-600">
-            <Home className="h-4 w-4" />
-            ホーム
-          </Link>
-          <ChevronRight className="h-4 w-4" />
-          <Link href="/blog" className="flex items-center gap-1 hover:text-blue-600">
-            <BookOpen className="h-4 w-4" />
-            コラム
-          </Link>
-          <ChevronRight className="h-4 w-4" />
-          <span className="truncate text-slate-700">{post.title}</span>
-        </nav>
+      {post.faqs && post.faqs.length > 0 && (
+        <FAQPageSchema faqItems={post.faqs} />
+      )}
 
-        {/* Article Header */}
-        <header className="mb-8">
-          <div className="mb-3 inline-block rounded-full bg-blue-100 px-3 py-1 text-xs font-medium text-blue-700">
-            {post.category}
+      {/* Hero Header */}
+      <div className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-blue-950 to-indigo-950">
+        <div className="absolute inset-0 opacity-30">
+          <div className="absolute -top-24 -right-24 h-96 w-96 rounded-full bg-blue-500/20 blur-3xl" />
+          <div className="absolute -bottom-24 -left-24 h-96 w-96 rounded-full bg-indigo-500/20 blur-3xl" />
+        </div>
+        <div className="relative mx-auto max-w-3xl px-4 pb-12 pt-8">
+          {/* Breadcrumb */}
+          <nav className="mb-8 flex items-center gap-2 text-sm text-slate-400">
+            <Link href="/" className="flex items-center gap-1 transition-colors hover:text-white">
+              <Home className="h-3.5 w-3.5" />
+              ホーム
+            </Link>
+            <ChevronRight className="h-3.5 w-3.5 text-slate-600" />
+            <Link href="/blog" className="flex items-center gap-1 transition-colors hover:text-white">
+              コラム
+            </Link>
+            <ChevronRight className="h-3.5 w-3.5 text-slate-600" />
+            <span className="truncate text-slate-300">{post.title}</span>
+          </nav>
+
+          {/* Category & Tags */}
+          <div className="mb-4 flex flex-wrap items-center gap-2">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-blue-500/20 px-3.5 py-1 text-xs font-semibold text-blue-300 ring-1 ring-blue-400/30">
+              <Sparkles className="h-3 w-3" />
+              {post.category}
+            </span>
+            {post.tags.slice(0, 3).map((tag) => (
+              <span key={tag} className="inline-flex items-center gap-1 rounded-full bg-white/5 px-3 py-1 text-xs text-slate-400 ring-1 ring-white/10">
+                <Tag className="h-3 w-3" />
+                {tag}
+              </span>
+            ))}
           </div>
-          <h1 className="text-2xl font-bold leading-tight tracking-tight text-slate-900 md:text-3xl">
+
+          {/* Title */}
+          <h1 className="text-3xl font-extrabold leading-tight tracking-tight text-white md:text-4xl lg:text-[2.5rem]">
             {post.title}
           </h1>
-          <p className="mt-3 text-base text-slate-600">
+          <p className="mt-4 text-lg leading-relaxed text-slate-300/90">
             {post.description}
           </p>
-          <div className="mt-4 flex flex-wrap items-center gap-4 text-sm text-slate-500">
-            <span className="flex items-center gap-1.5">
-              <Calendar className="h-4 w-4" />
-              {new Date(post.date).toLocaleDateString('ja-JP', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-              })}
-            </span>
-            {post.lastUpdated && (
+
+          {/* Meta Info */}
+          <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-white/10 pt-5">
+            {/* Author */}
+            {post.author && (
+              <div className="flex items-center gap-2.5">
+                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-blue-400 to-indigo-500 text-sm font-bold text-white shadow-lg">
+                  {post.author.charAt(0)}
+                </div>
+                <div>
+                  <div className="text-sm font-medium text-white">{post.author}</div>
+                  <div className="text-xs text-slate-400">著者</div>
+                </div>
+              </div>
+            )}
+            {post.supervisor && (
+              <div className="flex items-center gap-2">
+                <FileCheck className="h-4 w-4 text-emerald-400" />
+                <span className="text-sm text-slate-300">監修: {post.supervisor}</span>
+              </div>
+            )}
+            <div className="flex items-center gap-4 text-sm text-slate-400">
               <span className="flex items-center gap-1.5">
-                <RefreshCw className="h-4 w-4" />
-                更新: {new Date(post.lastUpdated).toLocaleDateString('ja-JP', {
+                <Calendar className="h-3.5 w-3.5" />
+                {new Date(post.date).toLocaleDateString('ja-JP', {
                   year: 'numeric',
                   month: 'long',
                   day: 'numeric',
                 })}
               </span>
-            )}
-            <span className="flex items-center gap-1.5">
-              <Clock className="h-4 w-4" />
-              読了時間 {post.readTime}
-            </span>
-          </div>
-
-          {/* 著者・監修者情報 */}
-          {(post.author || post.supervisor) && (
-            <div className="mt-4 flex flex-wrap gap-3 text-sm">
-              {post.author && (
-                <span className="flex items-center gap-1.5 rounded-full bg-slate-100 px-3 py-1 text-slate-600">
-                  <User className="h-3.5 w-3.5" />
-                  執筆: {post.author}
+              {post.lastUpdated && (
+                <span className="flex items-center gap-1.5 text-emerald-400">
+                  <RefreshCw className="h-3.5 w-3.5" />
+                  {new Date(post.lastUpdated).toLocaleDateString('ja-JP', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric',
+                  })}更新
                 </span>
               )}
-              {post.supervisor && (
-                <span className="flex items-center gap-1.5 rounded-full bg-blue-50 px-3 py-1 text-blue-700">
-                  <FileCheck className="h-3.5 w-3.5" />
-                  監修: {post.supervisor}
-                </span>
-              )}
+              <span className="flex items-center gap-1.5">
+                <Clock className="h-3.5 w-3.5" />
+                {post.readTime}で読める
+              </span>
             </div>
-          )}
-        </header>
+          </div>
+        </div>
+      </div>
 
-        {/* Article Content */}
+      {/* Article Body */}
+      <div className="mx-auto max-w-3xl px-4">
         <article 
-          className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:p-8"
+          className="relative -mt-4 rounded-t-2xl bg-white pt-10 md:pt-12"
           itemScope
           itemType="https://schema.org/Article"
         >
@@ -200,71 +226,115 @@ export default async function BlogPostPage({ params }: PageProps) {
           
           {/* 内申点ガイド記事のみ、県別リストを動的挿入 */}
           {post.slug === 'naishin-guide' && (
-            <div className="mt-8">
+            <div className="mt-10 rounded-xl border border-slate-200 bg-gradient-to-br from-slate-50 to-blue-50/50 p-6">
               <h3 className="mb-4 text-lg font-bold text-slate-800">
-                🗺️ 都道府県別詳細ページ
+                都道府県別詳細ページ
               </h3>
               <p className="mb-4 text-sm text-slate-600">
                 各都道府県の詳細な計算方法と特徴はこちらから確認できます：
               </p>
               <PrefectureLinkList limit={8} />
               <p className="mt-4 text-sm text-slate-600">
-                <strong>💡 自分の都道府県が決まってない人向け：</strong>
+                <strong>自分の都道府県が決まってない人向け：</strong>
                 まずは<a href="/prefectures" className="text-blue-600 hover:underline">都道府県一覧</a>で「満点・倍率・対象学年」を確認しましょう。
               </p>
             </div>
           )}
 
+          {/* FAQ Section */}
+          {post.faqs && post.faqs.length > 0 && (
+            <div className="mt-12">
+              <h2 className="mb-6 flex items-center gap-2 border-l-4 border-blue-500 pl-3 text-xl font-extrabold text-gray-900">
+                よくある質問
+              </h2>
+              <div className="space-y-3">
+                {post.faqs.map((faq, i) => (
+                  <div key={i} className="overflow-hidden rounded-xl border border-gray-200">
+                    <div className="flex items-start gap-3 bg-gray-50 px-5 py-4">
+                      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-blue-500 text-xs font-extrabold text-white">Q</span>
+                      <span className="pt-0.5 font-bold text-gray-900">{faq.question}</span>
+                    </div>
+                    <div className="flex items-start gap-3 px-5 py-4">
+                      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-red-500 text-xs font-extrabold text-white">A</span>
+                      <span className="pt-0.5 leading-relaxed text-gray-600">{faq.answer}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
           {/* 参考資料・情報源 */}
           {post.sources && post.sources.length > 0 && (
-            <div className="mt-8 rounded-xl border border-slate-200 bg-slate-50 p-4">
-              <h4 className="mb-3 flex items-center gap-2 text-sm font-bold text-slate-700">
-                <BookOpen className="h-4 w-4" />
+            <div className="mt-12 rounded-xl border border-slate-200 bg-gradient-to-br from-slate-50 to-gray-50 p-5">
+              <h4 className="mb-4 flex items-center gap-2 text-sm font-bold text-slate-700">
+                <BookOpen className="h-4 w-4 text-blue-500" />
                 参考資料・情報源
               </h4>
-              <ul className="space-y-2">
+              <ul className="space-y-2.5">
                 {post.sources.map((source, i) => (
-                  <li key={i}>
+                  <li key={i} className="flex items-start gap-2">
+                    <span className="mt-1.5 block h-1.5 w-1.5 shrink-0 rounded-full bg-blue-400" />
                     <a
                       href={source.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-sm text-blue-600 hover:text-blue-800 hover:underline"
+                      className="inline-flex items-center gap-1.5 text-sm text-blue-600 transition-colors hover:text-blue-800"
                     >
                       {source.name}
-                      <ExternalLink className="h-3 w-3" />
+                      <ExternalLink className="h-3 w-3 opacity-50" />
                     </a>
                   </li>
                 ))}
               </ul>
-              <p className="mt-3 text-xs text-slate-500">
+              <p className="mt-4 rounded-lg bg-white/60 p-3 text-xs text-slate-500">
                 ※ 制度は年度によって変更される場合があります。最新情報は各教育委員会の公式サイトでご確認ください。
               </p>
             </div>
           )}
         </article>
 
-        {/* 更新情報 */}
-        <div className="mt-6">
-          <BlogUpdateInfo 
-            lastUpdated={new Date(post.date).toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' })}
-            updateReason="令和8年度入試制度の変更に対応し、最新情報を反映"
-            updateContent={[
-              '最新の入試制度に基づき内容を更新',
-              '根拠リンク（一次情報）を追加',
-              '計算例を最新の方式に修正',
-              '関連リンクを拡充'
-            ]}
+        {/* CTA — Premium */}
+        <div className="mt-12">
+          <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-blue-600 via-indigo-600 to-violet-600 p-8 text-center text-white shadow-xl shadow-blue-500/10 md:p-10">
+            <div className="absolute inset-0 opacity-20">
+              <div className="absolute -top-12 -right-12 h-48 w-48 rounded-full bg-white/20 blur-2xl" />
+              <div className="absolute -bottom-12 -left-12 h-48 w-48 rounded-full bg-white/20 blur-2xl" />
+            </div>
+            <div className="relative">
+              <h3 className="text-2xl font-extrabold tracking-tight">あなたの内申点を今すぐ計算</h3>
+              <p className="mt-3 text-blue-100">47都道府県対応の無料計算ツールで、志望校合格に必要な点数を確認しましょう</p>
+              <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+                <Link
+                  href="/"
+                  className="inline-flex items-center gap-2 rounded-full bg-white px-7 py-3 text-sm font-bold text-indigo-700 shadow-lg transition-all hover:-translate-y-0.5 hover:shadow-xl"
+                >
+                  内申点を計算する
+                  <ChevronRight className="h-4 w-4" />
+                </Link>
+                <Link
+                  href="/reverse"
+                  className="inline-flex items-center gap-2 rounded-full bg-white/10 px-7 py-3 text-sm font-semibold text-white ring-1 ring-white/25 transition-all hover:bg-white/20"
+                >
+                  志望校から逆算
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Related Articles */}
+        <div className="mt-12">
+          <BlogRelatedArticles
+            currentSlug={post.slug}
+            currentTags={post.tags}
+            allPosts={allPosts}
+            maxArticles={5}
           />
         </div>
 
-        {/* CTA */}
-        <div className="mt-10">
-          <BlogCTA />
-        </div>
-
-        {/* 関連リンク */}
-        <div className="mt-10">
+        {/* Related Tools */}
+        <div className="mt-8">
           <BlogRelatedLinks 
             relatedPrefectures={post.tags.includes('東京都') ? ['tokyo'] : 
                               post.tags.includes('神奈川') ? ['kanagawa'] :
@@ -274,8 +344,8 @@ export default async function BlogPostPage({ params }: PageProps) {
           />
         </div>
 
-        {/* 根拠リンク */}
-        <div className="mt-10">
+        {/* Root Links */}
+        <div className="mt-8">
           <BlogSourceLinks 
             prefectureCode={post.tags.includes('東京都') ? 'tokyo' : 
                            post.tags.includes('神奈川') ? 'kanagawa' :
@@ -285,17 +355,19 @@ export default async function BlogPostPage({ params }: PageProps) {
           />
         </div>
 
-        {/* Navigation */}
-        <nav className="mt-10 grid gap-4 md:grid-cols-2">
+        {/* Prev / Next Navigation */}
+        <nav className="mt-12 grid gap-4 md:grid-cols-2">
           {prevPost ? (
             <Link
               href={`/blog/${prevPost.slug}`}
-              className="group flex items-center gap-3 rounded-xl border border-slate-200 bg-white p-4 transition-all hover:border-blue-200 hover:shadow-md"
+              className="group flex items-center gap-4 rounded-2xl border border-gray-200 bg-white p-5 transition-all hover:border-blue-200 hover:shadow-lg"
             >
-              <ChevronLeft className="h-5 w-5 shrink-0 text-slate-400 transition-transform group-hover:-translate-x-1 group-hover:text-blue-500" />
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gray-100 transition-colors group-hover:bg-blue-50">
+                <ChevronLeft className="h-5 w-5 text-gray-400 transition-transform group-hover:-translate-x-0.5 group-hover:text-blue-500" />
+              </div>
               <div className="min-w-0">
-                <div className="text-xs text-slate-400">前の記事</div>
-                <div className="truncate text-sm font-medium text-slate-700 group-hover:text-blue-600">
+                <div className="text-xs font-medium uppercase tracking-wider text-gray-400">前の記事</div>
+                <div className="mt-1 truncate text-sm font-semibold text-gray-800 group-hover:text-blue-600">
                   {prevPost.title}
                 </div>
               </div>
@@ -306,15 +378,17 @@ export default async function BlogPostPage({ params }: PageProps) {
           {nextPost ? (
             <Link
               href={`/blog/${nextPost.slug}`}
-              className="group flex items-center justify-end gap-3 rounded-xl border border-slate-200 bg-white p-4 text-right transition-all hover:border-blue-200 hover:shadow-md"
+              className="group flex items-center justify-end gap-4 rounded-2xl border border-gray-200 bg-white p-5 text-right transition-all hover:border-blue-200 hover:shadow-lg"
             >
               <div className="min-w-0">
-                <div className="text-xs text-slate-400">次の記事</div>
-                <div className="truncate text-sm font-medium text-slate-700 group-hover:text-blue-600">
+                <div className="text-xs font-medium uppercase tracking-wider text-gray-400">次の記事</div>
+                <div className="mt-1 truncate text-sm font-semibold text-gray-800 group-hover:text-blue-600">
                   {nextPost.title}
                 </div>
               </div>
-              <ChevronRight className="h-5 w-5 shrink-0 text-slate-400 transition-transform group-hover:translate-x-1 group-hover:text-blue-500" />
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gray-100 transition-colors group-hover:bg-blue-50">
+                <ChevronRight className="h-5 w-5 text-gray-400 transition-transform group-hover:translate-x-0.5 group-hover:text-blue-500" />
+              </div>
             </Link>
           ) : (
             <div />
@@ -322,10 +396,10 @@ export default async function BlogPostPage({ params }: PageProps) {
         </nav>
 
         {/* Back to Blog */}
-        <div className="mt-8 text-center">
+        <div className="mt-8 pb-16 text-center">
           <Link
             href="/blog"
-            className="inline-flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-blue-600"
+            className="inline-flex items-center gap-2 rounded-full bg-gray-100 px-6 py-2.5 text-sm font-semibold text-gray-600 transition-all hover:bg-gray-200"
           >
             <ChevronLeft className="h-4 w-4" />
             コラム一覧に戻る
