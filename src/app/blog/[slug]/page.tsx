@@ -111,7 +111,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           <div className="absolute -top-24 -right-24 h-96 w-96 rounded-full bg-blue-500/20 blur-3xl" />
           <div className="absolute -bottom-24 -left-24 h-96 w-96 rounded-full bg-indigo-500/20 blur-3xl" />
         </div>
-        <div className="relative mx-auto max-w-3xl px-4 pb-12 pt-8">
+        <div className="relative mx-auto max-w-3xl px-4 pb-12 pt-24">
           {/* Breadcrumb */}
           <nav className="mb-8 flex items-center gap-2 text-sm text-slate-400">
             <Link href="/" className="flex items-center gap-1 transition-colors hover:text-white">
