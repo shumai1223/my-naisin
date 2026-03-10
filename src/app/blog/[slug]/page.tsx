@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { Calendar, Clock, ChevronLeft, ChevronRight, BookOpen, Home, FileCheck, ExternalLink, RefreshCw, Tag, Sparkles } from 'lucide-react';
+import { Calendar, Clock, ChevronLeft, ChevronRight, BookOpen, Home, FileCheck, ExternalLink, RefreshCw, Tag, Sparkles, User, FileText, ArrowRight, CheckCircle } from 'lucide-react';
 
 import { getPostBySlug, getAllPosts } from '@/lib/blog-data';
 import { BlogRelatedLinks } from '@/components/BlogRelatedLinks';
@@ -10,6 +10,8 @@ import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { PrefectureLinkList } from '@/components/PrefectureLinkList';
 import { BlogRelatedArticles } from '@/components/BlogRelatedArticles';
+import { BlogCTA } from '@/components/BlogCTA';
+import { Header } from '@/components/Header';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -85,6 +87,7 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   return (
     <div className="min-h-screen bg-white">
+      <Header />
       <BlogPostingSchema
         title={post.title}
         description={post.description}
@@ -111,7 +114,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           <div className="absolute -top-24 -right-24 h-96 w-96 rounded-full bg-blue-500/20 blur-3xl" />
           <div className="absolute -bottom-24 -left-24 h-96 w-96 rounded-full bg-indigo-500/20 blur-3xl" />
         </div>
-        <div className="relative mx-auto max-w-3xl px-4 pb-12 pt-24">
+        <div className="relative mx-auto max-w-3xl px-4 pb-12 pt-8">
           {/* Breadcrumb */}
           <nav className="mb-8 flex items-center gap-2 text-sm text-slate-400">
             <Link href="/" className="flex items-center gap-1 transition-colors hover:text-white">
