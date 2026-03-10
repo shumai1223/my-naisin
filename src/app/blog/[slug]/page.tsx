@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { Calendar, Clock, ChevronLeft, ChevronRight, BookOpen, Home, FileCheck, ExternalLink, RefreshCw, Tag, Sparkles, User, FileText, ArrowRight, CheckCircle } from 'lucide-react';
+import { Calendar, Clock, ChevronLeft, ChevronRight, BookOpen, Home, FileCheck, ExternalLink, RefreshCw, Tag, Sparkles } from 'lucide-react';
 
 import { getPostBySlug, getAllPosts } from '@/lib/blog-data';
 import { BlogRelatedLinks } from '@/components/BlogRelatedLinks';
@@ -10,8 +10,6 @@ import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { PrefectureLinkList } from '@/components/PrefectureLinkList';
 import { BlogRelatedArticles } from '@/components/BlogRelatedArticles';
-import { BlogCTA } from '@/components/BlogCTA';
-import { Header } from '@/components/Header';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -87,7 +85,6 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   return (
     <div className="min-h-screen bg-white">
-      <Header />
       <BlogPostingSchema
         title={post.title}
         description={post.description}
@@ -202,7 +199,7 @@ export default async function BlogPostPage({ params }: PageProps) {
       {/* Article Body */}
       <div className="mx-auto max-w-3xl px-4">
         <article 
-          className="relative -mt-4 rounded-t-2xl bg-white pt-10 md:pt-12"
+          className="relative mt-6 rounded-t-2xl bg-white pt-10 md:mt-8 md:pt-12"
           itemScope
           itemType="https://schema.org/Article"
         >

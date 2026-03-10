@@ -86,7 +86,7 @@ export default function BlogPage() {
       <div className="mx-auto max-w-5xl px-4">
         {/* Featured Posts */}
         {featuredPosts.length > 0 && (
-          <div className="-mt-8 mb-16">
+          <div className="mt-8 mb-16 md:mt-10">
             <div className="grid gap-4 md:grid-cols-3">
               {featuredPosts.map((post, i) => (
                 <Link
