@@ -375,17 +375,17 @@ export default function PrivacyPage() {
             <h2 className="mb-3 text-lg font-bold text-slate-800">6. アクセス解析ツールについて</h2>
             <p className="text-sm leading-relaxed text-slate-600">
               当サイトでは、サービス向上およびユーザー体験の改善を目的として、
-              Googleアナリティクス等のアクセス解析ツールを使用しています。
-              これらのツールはトラフィックデータを収集するためにCookieを使用しますが、
+              将来的にGoogleアナリティクス等のアクセス解析ツールを導入する予定です。
+              導入された場合、これらのツールはトラフィックデータを収集するためにCookieを使用しますが、
               このデータは匿名で収集され、個人を特定するものではありません。
             </p>
             <p className="mt-3 text-sm leading-relaxed text-slate-600">
-              収集される情報には、ページビュー数、セッション時間、使用デバイス、地理的位置（国・地域レベル）、
+              導入後に収集される情報には、ページビュー数、セッション時間、使用デバイス、地理的位置（国・地域レベル）、
               参照元URLなどが含まれます。これらの情報は、サイトのコンテンツ改善、
               ユーザビリティの向上、およびサービス品質の維持に活用されます。
             </p>
             <p className="mt-3 text-sm leading-relaxed text-slate-600">
-              Googleアナリティクスのデータ収集を無効にするには、
+              Googleアナリティクス導入後、データ収集を無効にするには、
               <a 
                 href="https://tools.google.com/dlpage/gaoptout" 
                 target="_blank" 
@@ -408,7 +408,7 @@ export default function PrivacyPage() {
           <section>
             <div className="mb-3 flex items-center gap-2">
               <Users className="h-5 w-5 text-purple-500" />
-              <h2 className="text-lg font-bold text-slate-800">6. 未成年者のプライバシーについて</h2>
+              <h2 className="text-lg font-bold text-slate-800">7. 未成年者のプライバシーについて</h2>
             </div>
             <div className="rounded-xl border border-purple-200 bg-purple-50 p-4">
               <p className="text-sm font-medium leading-relaxed text-purple-800">
@@ -433,7 +433,7 @@ export default function PrivacyPage() {
           <section>
             <div className="mb-3 flex items-center gap-2">
               <Bell className="h-5 w-5 text-indigo-500" />
-              <h2 className="text-lg font-bold text-slate-800">7. ユーザーの権利</h2>
+              <h2 className="text-lg font-bold text-slate-800">8. ユーザーの権利</h2>
             </div>
             <p className="text-sm leading-relaxed text-slate-600">
               ユーザーは、ご自身のデータに関して以下の権利を有しています：
@@ -463,7 +463,7 @@ export default function PrivacyPage() {
 
           {/* プライバシーポリシーの変更 */}
           <section>
-            <h2 className="mb-3 text-lg font-bold text-slate-800">8. プライバシーポリシーの変更について</h2>
+            <h2 className="mb-3 text-lg font-bold text-slate-800">9. プライバシーポリシーの変更について</h2>
             <p className="text-sm leading-relaxed text-slate-600">
               当サイトは、法令の改正、サービス内容の変更、その他の理由により、
               必要に応じて本プライバシーポリシーを変更することがあります。
@@ -491,7 +491,7 @@ export default function PrivacyPage() {
           <section>
             <div className="mb-3 flex items-center gap-2">
               <Mail className="h-5 w-5 text-teal-500" />
-              <h2 className="text-lg font-bold text-slate-800">9. お問い合わせ</h2>
+              <h2 className="text-lg font-bold text-slate-800">10. お問い合わせ</h2>
             </div>
             <p className="text-sm leading-relaxed text-slate-600">
               本プライバシーポリシーに関するご質問、ご意見、苦情、またはデータに関するリクエストは、

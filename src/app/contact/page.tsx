@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Mail, ArrowLeft, Send, MessageCircle, Twitter, Github, Bug, AlertCircle } from 'lucide-react';
+import { Mail, ArrowLeft, Send, MessageCircle, Github, Bug, AlertCircle } from 'lucide-react';
 import Link from 'next/link';
 
 import { APP_NAME } from '@/lib/constants';
@@ -162,6 +162,7 @@ export default function ContactPage() {
                   </label>
                   <input
                     type="text"
+                    name="name"
                     required
                     className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm transition-colors focus:border-violet-300 focus:bg-white focus:outline-none focus:ring-2 focus:ring-violet-100"
                     placeholder="例: たろう"
@@ -174,6 +175,7 @@ export default function ContactPage() {
                   </label>
                   <input
                     type="email"
+                    name="email"
                     required
                     className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm transition-colors focus:border-violet-300 focus:bg-white focus:outline-none focus:ring-2 focus:ring-violet-100"
                     placeholder="example@email.com"
@@ -185,6 +187,7 @@ export default function ContactPage() {
                     お問い合わせ内容
                   </label>
                   <textarea
+                    name="message"
                     required
                     rows={4}
                     className="w-full resize-none rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm transition-colors focus:border-violet-300 focus:bg-white focus:outline-none focus:ring-2 focus:ring-violet-100"
@@ -311,20 +314,9 @@ export default function ContactPage() {
               
               <div className="space-y-3">
                 <a 
-                  href="#" 
-                  className="flex items-center gap-3 rounded-xl bg-slate-50 p-4 transition-colors hover:bg-slate-100"
-                >
-                  <div className="grid h-10 w-10 place-items-center rounded-lg bg-sky-100">
-                    <Twitter className="h-5 w-5 text-sky-500" />
-                  </div>
-                  <div>
-                    <div className="text-sm font-bold text-slate-700">Twitter / X</div>
-                    <div className="text-xs text-slate-500">DMでもお気軽に</div>
-                  </div>
-                </a>
-
-                <a 
-                  href="#" 
+                  href="https://github.com/shumai1223/my-naisin" 
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex items-center gap-3 rounded-xl bg-slate-50 p-4 transition-colors hover:bg-slate-100"
                 >
                   <div className="grid h-10 w-10 place-items-center rounded-lg bg-slate-200">

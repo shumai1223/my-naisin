@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Noto_Sans_JP } from 'next/font/google';
+import Script from 'next/script';
 import type { ReactNode } from 'react';
 
 import './globals.css';
@@ -27,11 +28,23 @@ export const metadata: Metadata = {
     description: '全国47都道府県の内申点計算に対応。9教科の成績を入力するだけで各地域の方式に合わせて自動計算。',
     type: 'website',
     locale: 'ja_JP',
+    siteName: 'My Naishin - 内申点計算ツール',
+    url: 'https://my-naishin.com',
+    images: [{
+      url: 'https://my-naishin.com/og-image.png',
+      width: 1200,
+      height: 630,
+      alt: '内申点シミュレーター | My Naishin',
+    }],
   },
   twitter: {
     card: 'summary_large_image',
     title: '内申点シミュレーター | My Naishin - 全国47都道府県対応',
     description: '全国47都道府県の内申点計算に対応。9教科の成績を入力するだけで各地域の方式に合わせて自動計算。',
+    images: ['https://my-naishin.com/og-image.png'],
+  },
+  alternates: {
+    canonical: 'https://my-naishin.com',
   },
   robots: {
     index: true,
@@ -42,6 +55,14 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="ja" className="h-full">
+      <head>
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7817682248719138"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
+      </head>
       <body className={`${notoSansJp.className} min-h-screen mesh-gradient text-slate-900 antialiased`}>
         <script
           dangerouslySetInnerHTML={{
