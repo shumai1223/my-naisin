@@ -5,7 +5,7 @@ import Link from 'next/link';
 import nextDynamic from 'next/dynamic';
 import { Home, ChevronRight, Target, HelpCircle, AlertTriangle, CheckCircle } from 'lucide-react';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, Suspense } from 'react';
 
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
@@ -15,7 +15,7 @@ const ReverseCalculator = nextDynamic(
   { ssr: false }
 );
 
-export default function ReversePage() {
+function ReversePageContent() {
   const searchParams = useSearchParams();
   const hasPrefParam = searchParams?.has('pref');
   
