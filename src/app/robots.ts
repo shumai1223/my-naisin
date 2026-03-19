@@ -6,7 +6,10 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/api/', '/admin/'],
+        disallow: [
+          '/api/',
+          '/pref/',
+        ],
       },
     ],
     sitemap: 'https://my-naishin.com/sitemap.xml',

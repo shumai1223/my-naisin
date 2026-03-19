@@ -1,4 +1,4 @@
-import { notFound, redirect } from 'next/navigation';
+import { notFound, permanentRedirect } from 'next/navigation';
 import { getPrefectureByCode } from '@/lib/prefectures';
 
 interface PrefectureIndexPageProps {
@@ -16,5 +16,5 @@ export default async function PrefectureIndexPage({ params }: PrefectureIndexPag
     notFound();
   }
 
-  redirect(`/${code}/naishin`);
+  permanentRedirect(`/${code}/naishin`);
 }

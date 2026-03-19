@@ -23,6 +23,10 @@ export async function generateMetadata({ params }: { params: Promise<{ code: str
     title,
     description,
     keywords: [prefecture.name, '内申点', '計算方法', '高校入試', prefecture.region],
+    robots: {
+      index: false,
+      follow: true,
+    },
     openGraph: {
       title,
       description,
@@ -34,6 +38,9 @@ export async function generateMetadata({ params }: { params: Promise<{ code: str
       card: 'summary_large_image',
       title,
       description,
+    },
+    alternates: {
+      canonical: `https://my-naishin.com/${code}/naishin`,
     },
   };
 }

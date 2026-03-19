@@ -1,5 +1,3 @@
-'use client';
-
 import { AlertTriangle, ArrowLeft, Info, CheckCircle, XCircle, Shield, ExternalLink, Database, Mail } from 'lucide-react';
 import Link from 'next/link';
 

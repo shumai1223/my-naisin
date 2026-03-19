@@ -1,156 +1,72 @@
-'use client';
-
-import * as React from 'react';
+import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { useParams } from 'next/navigation';
 import { 
   Calculator, 
   ChevronRight, 
-  ExternalLink, 
-  Calendar, 
-  AlertTriangle,
   GraduationCap,
   BookOpen,
   Info,
-  ChevronDown,
-  HelpCircle,
   Sparkles,
-  CheckCircle,
-  Target
 } from 'lucide-react';
-import Script from 'next/script';
 
 import { PREFECTURES, getPrefectureByCode } from '@/lib/prefectures';
-import { DEFAULT_SCORES } from '@/lib/constants';
-import { calculateMaxScore, calculateTotalScore, calculatePercent, getRankForPercent } from '@/lib/utils';
 import { getPrefectureGuide, generateDynamicFAQ } from '@/lib/prefecture-guides';
-import { InputForm } from '@/components/Calculator/InputForm';
-import { ScoreGauge } from '@/components/Result/ScoreGauge';
-import { RankCard } from '@/components/Result/RankCard';
+import { InteractiveCalculator } from '@/components/Calculator/InteractiveCalculator';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { ErrorReportForm } from '@/components/ErrorReportForm';
 import { PrefectureUniqueElements } from '@/components/PrefectureUniqueElements';
 import { PrefectureMinimumContent } from '@/components/PrefectureMinimumContent';
-import { PrefecturePillarLinks } from '@/components/PrefecturePillarLinks';
-import { Header } from '@/components/Header';
 import { ToolGuide } from '@/components/ToolGuide';
 import { EvidenceSummary } from '@/components/EvidenceSummary';
-import { NextActionButtons } from '@/components/NextActionButtons';
-import { PDFExportButton } from '@/components/PDFExportButton';
 import { PrefectureSearchIntent } from '@/components/PrefectureSearchIntent';
 import { PrefectureFAQ } from '@/components/PrefectureFAQ';
-// import { FAQSchema } from '@/components/StructuredData/FAQSchema';
-import type { Scores, SubjectKey } from '@/lib/types';
 
-// 県別の落とし穴・注意点データは動的生成に統一（削除）
-// const PREFECTURE_PITFALLS: Record<string, { title: string; items: string[] }> = {};
+interface PageProps {
+  params: Promise<{ prefecture: string }>;
+}
 
-// 県別FAQは動的生成に統一（削除）
-// const PREFECTURE_FAQ: Record<string, { question: string; answer: string }[]> = {};
+function getFormulaExplanation(prefecture: { targetGrades: number[]; gradeMultipliers: Record<number, number>; practicalMultiplier: number; maxScore: number }) {
+  const parts: string[] = [];
+  prefecture.targetGrades.forEach(grade => {
+    const multiplier = prefecture.gradeMultipliers[grade];
+    if (multiplier > 0) {
+      parts.push(`中${grade}${multiplier > 1 ? `×${multiplier}` : ''}`);
+    }
+  });
+  let formula = parts.join(' ＋ ');
+  if (prefecture.practicalMultiplier > 1) {
+    formula += `（実技${prefecture.practicalMultiplier}倍）`;
+  }
+  return formula;
+}
 
-// デフォルトの注意点
-const DEFAULT_PITFALLS = {
-  title: 'この県の注意点',
-  items: [
-    '計算方法や配点は高校によって異なる場合があります',
-    '最新の情報は各都道府県教育委員会の公式サイトでご確認ください',
-    '特色選抜や推薦入試では別の計算方法が使われることがあります'
-  ]
-};
-
-// デフォルトFAQは動的生成に統一（削除）
-// const DEFAULT_FAQ = [];
-
-export default function PrefectureNaishinPage() {
-  const params = useParams();
-  const prefectureCode = params.prefecture as string;
+export default async function PrefectureNaishinPage({ params }: PageProps) {
+  const { prefecture: prefectureCode } = await params;
   const prefecture = getPrefectureByCode(prefectureCode);
 
-  const [scores, setScores] = React.useState<Scores>(DEFAULT_SCORES);
-  const [showResult, setShowResult] = React.useState(false);
-
   if (!prefecture) {
-    return (
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-slate-800">都道府県が見つかりません</h1>
-          <Link href="/" className="mt-4 inline-block text-blue-600 hover:underline">
-            トップページへ戻る
-          </Link>
-        </div>
-      </div>
-    );
+    notFound();
   }
 
-  const guide = getPrefectureGuide(prefectureCode);
-  // 常に動的FAQを使用して、矛盾をなくす
-  const faqItems = generateDynamicFAQ(prefectureCode, prefecture);
-
-  const max = calculateMaxScore(prefectureCode);
-  const total = calculateTotalScore(scores, prefectureCode);
-  const percent = calculatePercent(total, max);
-  const rank = getRankForPercent(percent);
-
-  const handleScoreChange = (subject: SubjectKey, value: number) => {
-    setScores(prev => ({
-      ...prev,
-      [subject]: value
-    }));
-  };
-
-  const handleCalculate = () => {
-    setShowResult(true);
-    if (typeof window !== 'undefined') {
-      if (prefectureCode === 'kanagawa') {
-        window.localStorage.setItem('my-naishin:kanagawa-A', String(total));
-      }
-      if (prefectureCode === 'tokyo') {
-        window.localStorage.setItem('my-naishin:tokyo-kanso', String(total));
-      }
-    }
-    setTimeout(() => {
-      document.getElementById('result')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 100);
-  };
-
-  // 計算式の説明を生成
-  const getFormulaExplanation = () => {
-    const parts: string[] = [];
-    
-    prefecture.targetGrades.forEach(grade => {
-      const multiplier = prefecture.gradeMultipliers[grade];
-      if (multiplier > 0) {
-        parts.push(`中${grade}${multiplier > 1 ? `×${multiplier}` : ''}`);
-      }
-    });
-
-    let formula = parts.join(' ＋ ');
-    
-    if (prefecture.practicalMultiplier > 1) {
-      formula += `（実技${prefecture.practicalMultiplier}倍）`;
-    }
-
-    return formula;
-  };
-
-  // FAQ構造化データはPrefectureMinimumContent内で生成
+  const formulaText = getFormulaExplanation(prefecture);
 
   return (
     <>
       <BreadcrumbSchema 
         items={[
           { name: 'ホーム', url: 'https://my-naishin.com/' },
-          { name: prefecture.name, url: `https://my-naishin.com/${prefectureCode}/naishin` }
+          { name: '都道府県一覧', url: 'https://my-naishin.com/prefectures' },
+          { name: `${prefecture.name}の内申点計算`, url: `https://my-naishin.com/${prefectureCode}/naishin` }
         ]}
       />
 
       <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
         <div className="mx-auto max-w-4xl px-4 py-8 md:py-12">
-          <Header />
-          
           {/* Breadcrumb */}
           <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
             <Link href="/" className="hover:text-blue-600">ホーム</Link>
+            <ChevronRight className="h-4 w-4" />
+            <Link href="/prefectures" className="hover:text-blue-600">都道府県一覧</Link>
             <ChevronRight className="h-4 w-4" />
             <span className="text-slate-700">{prefecture.name}の内申点計算</span>
           </nav>
@@ -241,7 +157,7 @@ export default function PrefectureNaishinPage() {
               practicalMultiplier={prefecture.practicalMultiplier}
             />
 
-            {/* 計算式 */}
+            {/* 計算式（SSR - Googlebotに確実に見える） */}
             <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
               <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
                 <Calculator className="h-5 w-5 text-emerald-500" />
@@ -249,7 +165,7 @@ export default function PrefectureNaishinPage() {
               </h2>
               <div className="rounded-xl bg-slate-50 p-4">
                 <code className="text-lg font-mono font-semibold text-slate-700">
-                  {getFormulaExplanation()} ＝ {prefecture.maxScore}点満点
+                  {formulaText} ＝ {prefecture.maxScore}点満点
                 </code>
               </div>
               
@@ -259,141 +175,24 @@ export default function PrefectureNaishinPage() {
               </div>
             </section>
 
-            {/* 埋め込み計算ツール */}
-            <section className="rounded-2xl border-2 border-blue-200 bg-gradient-to-br from-blue-50 via-indigo-50 to-violet-50 p-6 shadow-lg">
-              <div className="mb-6 flex items-center gap-3">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-lg">
-                  <Sparkles className="h-6 w-6" />
-                </div>
-                <div>
-                  <h2 className="text-xl font-bold text-slate-800">
-                    {prefecture.name}の内申点を計算する
-                  </h2>
-                  <p className="text-sm text-slate-500">
-                    下記に成績を入力すると、{prefecture.maxScore}点満点で計算されます
-                  </p>
-                </div>
-              </div>
+            {/* 埋め込み計算ツール（クライアントコンポーネント） */}
+            <InteractiveCalculator
+              prefectureCode={prefectureCode}
+              prefectureName={prefecture.name}
+              maxScore={prefecture.maxScore}
+            />
 
-              <div className="rounded-xl bg-white p-4 shadow-sm">
-                <InputForm
-                  prefectureCode={prefectureCode}
-                  scores={scores}
-                  onChange={handleScoreChange}
-                  maxGrade={5}
-                />
-                
-                <div className="mt-6 flex justify-center">
-                  <button
-                    onClick={handleCalculate}
-                    className="rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-8 py-3 text-lg font-bold text-white shadow-lg transition-all hover:shadow-xl hover:scale-105"
-                  >
-                    内申点を計算する
-                  </button>
-                </div>
-              </div>
-
-              {/* 計算結果 */}
-              {showResult && (
-                <div id="result" className="mt-6 rounded-xl bg-white p-6 shadow-sm">
-                  <h3 className="mb-4 text-center text-lg font-bold text-slate-800">
-                    🎉 あなたの{prefecture.name}での内申点
-                  </h3>
-                  <div className="flex flex-col items-center gap-6 md:flex-row md:justify-center">
-                    <ScoreGauge percent={percent} total={total} max={max} />
-                    <div className="text-center md:text-left">
-                      <div className="text-4xl font-bold text-blue-600">{total}点</div>
-                      <div className="text-sm text-slate-500">/ {max}点満点（達成率 {percent}%）</div>
-                      <div className="mt-2">
-                        <RankCard result={{ prefectureCode, total, max, percent, rank }} />
-                      </div>
-                    </div>
-                  </div>
-
-                  {prefectureCode === 'kanagawa' && (
-                    <div className="mt-4 rounded-xl border border-indigo-200 bg-indigo-50 p-4">
-                      <div className="text-sm font-bold text-indigo-700">A（評定合計）と a値</div>
-                      <div className="mt-2 flex flex-wrap items-center gap-4 text-sm text-slate-700">
-                        <span>A（評定合計）: <strong>{total}点</strong></span>
-                        <span>a値（100点換算）: <strong>{Math.round((total / max) * 100)}点</strong></span>
-                      </div>
-                      <p className="mt-2 text-xs text-slate-500">a値はAを100点満点に換算した値です。</p>
-                    </div>
-                  )}
-                  
-                  {/* 逆算機能への誘導 */}
-                  <div className="mt-6 rounded-xl border-2 border-violet-200 bg-gradient-to-br from-violet-50 to-purple-50 p-5">
-                    <div className="flex items-start gap-3">
-                      <div className="grid h-10 w-10 flex-shrink-0 place-items-center rounded-lg bg-gradient-to-br from-violet-500 to-purple-600 text-white shadow-md">
-                        🎯
-                      </div>
-                      <div className="flex-1">
-                        <h4 className="mb-2 font-bold text-slate-800">志望校から逆算する</h4>
-                        <p className="mb-3 text-sm leading-relaxed text-slate-600">
-                          目標の合計点から、必要な当日点や内申点を逆算できます。志望校の配点比率を入力して、自分の現在地を把握しましょう。
-                        </p>
-                        <Link
-                          href={`/reverse?pref=${prefectureCode}&current=${total}`}
-                          className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-violet-600 to-purple-600 px-5 py-2.5 text-sm font-bold text-white shadow-md transition-all hover:shadow-lg hover:scale-105"
-                        >
-                          <Target className="h-4 w-4" />
-                          逆算機能で試す
-                          <ChevronRight className="h-4 w-4" />
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* 次のアクションボタン */}
-                  <NextActionButtons 
-                    prefectureCode={prefectureCode}
-                    scores={scores}
-                    totalScore={total}
-                    maxScore={max}
-                  />
-
-                  {/* PDF出力ボタン */}
-                  <PDFExportButton 
-                    prefectureCode={prefectureCode}
-                    scores={scores}
-                    totalScore={total}
-                    maxScore={max}
-                  />
-
-                  <div className="mt-4 rounded-xl border-2 border-blue-100 bg-gradient-to-br from-blue-50 to-indigo-50 p-5">
-                    <div className="flex items-start gap-3">
-                      <Sparkles className="h-6 w-6 flex-shrink-0 text-blue-600 mt-1" />
-                      <div className="flex-1">
-                        <h4 className="mb-2 font-bold text-slate-800">さらに詳しい分析をご希望の方へ</h4>
-                        <p className="mb-3 text-sm leading-relaxed text-slate-600">
-                          メインページでは、成績推移グラフ、教科別の詳細分析、目標設定機能、勉強タイマーなど、より充実した機能をご利用いただけます。
-                        </p>
-                        <Link
-                          href="/"
-                          className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 px-5 py-2.5 text-sm font-bold text-white shadow-md transition-all hover:shadow-lg hover:scale-105"
-                        >
-                          <Calculator className="h-4 w-4" />
-                          詳細な分析・計算はこちら
-                          <ChevronRight className="h-4 w-4" />
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </section>
-
-            {/* その県だけの詳細情報 */}
+            {/* その県だけの詳細情報（SSR - Googlebotに確実に見える） */}
             <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
               <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
                 <BookOpen className="h-5 w-5 text-blue-500" />
                 {prefecture.name}ならではの内申ポイント
               </h2>
 
-              {/* 固定テンプレ：3行要約 */}
+              {/* 3行要約 */}
               <div className="mb-6 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 p-4 border border-blue-200">
                 <h3 className="mb-3 font-bold text-blue-800 flex items-center gap-2">
-                  <span className="text-lg">📝</span> {prefecture.name}の内申ポイント3行要約
+                  {prefecture.name}の内申ポイント3行要約
                 </h3>
                 <div className="space-y-2 text-sm">
                   <div className="flex items-start gap-2">
@@ -411,26 +210,22 @@ export default function PrefectureNaishinPage() {
                 </div>
               </div>
 
-              {/* 固定テンプレ：公式資料情報 */}
+              {/* 公式資料情報 */}
               <div className="mb-6 rounded-xl bg-gradient-to-r from-amber-50 to-orange-50 p-4 border border-amber-200">
                 <h3 className="mb-3 font-bold text-amber-800 flex items-center gap-2">
-                  <span className="text-lg">📋</span> 公式資料の確認ポイント
+                  公式資料の確認ポイント
                 </h3>
                 <div className="space-y-2 text-sm text-slate-700">
                   <div className="flex items-start gap-2">
-                    <span className="text-amber-600">📄</span>
                     <span><strong>資料名：</strong>{prefecture.name}教育委員会「令和8年度入学者選抜要項」</span>
                   </div>
                   <div className="flex items-start gap-2">
-                    <span className="text-amber-600">🔍</span>
                     <span><strong>確認ページ：</strong>「調査書点の算出方法」または「内申点の取扱い」の項目</span>
                   </div>
                   <div className="flex items-start gap-2">
-                    <span className="text-amber-600">✅</span>
                     <span><strong>チェック項目：</strong>満点数・実技倍率・対象学年・学校ごとの注意事項</span>
                   </div>
                   <div className="flex items-start gap-2">
-                    <span className="text-amber-600">⚠️</span>
                     <span><strong>注意：</strong>学校・コースによって計算方法が異なる場合があります</span>
                   </div>
                 </div>
@@ -440,7 +235,7 @@ export default function PrefectureNaishinPage() {
               {prefectureCode === 'tokyo' && (
                 <div className="space-y-4 text-sm text-slate-700">
                   <div>
-                    <h4 className="mb-2 font-semibold text-slate-800">🎯 東京都の内申ポイント</h4>
+                    <h4 className="mb-2 font-semibold text-slate-800">東京都の内申ポイント</h4>
                     <p className="text-slate-600">
                       東京都の内申は、まず「素内申（9教科の合計＝45点満点）」と、一般入試で使う「換算内申」を分けて考えるのがコツです。換算内申は、学力検査を行う教科の評定を1倍、学力検査を行わない教科の評定を2倍として合計します。都立の一般的な5教科入試では満点が65点（＝5教科25点＋実技4教科40点）になり、実技4教科の影響が大きくなります。
                     </p>
@@ -458,7 +253,7 @@ export default function PrefectureNaishinPage() {
               {prefectureCode === 'kanagawa' && (
                 <div className="space-y-4 text-sm text-slate-700">
                   <div>
-                    <h4 className="mb-2 font-semibold text-slate-800">🎯 神奈川県の内申ポイント</h4>
+                    <h4 className="mb-2 font-semibold text-slate-800">神奈川県の内申ポイント</h4>
                     <p className="text-slate-600">
                       神奈川県は「中3が2倍」と覚えると一気に整理できます。公式の計算では、学習の記録（評定）は 中2の9教科合計＋中3の9教科合計×2（135点満点）をまず作り、これを100点満点に換算した値を使います。さらに学力検査（合計点を100点満点に換算）や、学校によっては特色検査（100点満点に換算）が加わり、学校ごとの比率で合計値S1（一次選考）を出します。
                     </p>
@@ -476,7 +271,7 @@ export default function PrefectureNaishinPage() {
               {prefectureCode === 'osaka' && (
                 <div className="space-y-4 text-sm text-slate-700">
                   <div>
-                    <h4 className="mb-2 font-semibold text-slate-800">🎯 大阪府の内申ポイント</h4>
+                    <h4 className="mb-2 font-semibold text-slate-800">大阪府の内申ポイント</h4>
                     <p className="text-slate-600">
                       大阪府の内申（調査書の評定）は「中3が一番重い」方式です。代表的な形だと、各教科の評定を（中3×3＋中2×1＋中1×1）で合計して25点満点にします（＝学年の重みは実質1:1:3）。
                     </p>
@@ -497,9 +292,9 @@ export default function PrefectureNaishinPage() {
               {!['tokyo', 'kanagawa', 'osaka'].includes(prefectureCode) && (
                 <div className="space-y-4 text-sm text-slate-700">
                   <div>
-                    <h4 className="mb-2 font-semibold text-slate-800">🎯 {prefecture.name}の内申ポイント</h4>
+                    <h4 className="mb-2 font-semibold text-slate-800">{prefecture.name}の内申ポイント</h4>
                     <p className="text-slate-600">
-                      この県の内申は、①どの学年の評定を使うか（中3だけ／中2も使う など）と、②実技教科の扱い（倍率があるか）、③当日点との比率（何：何）を押さえると迷いません。まずは県教育委員会の公式PDF（募集案内・実施要項など）で、「選考」「比率」「調査書点（内申点）」「換算」の語を探し、満点と計算式を確認します。
+                      この県の内申は、(1)どの学年の評定を使うか（中3だけ／中2も使う など）と、(2)実技教科の扱い（倍率があるか）、(3)当日点との比率（何：何）を押さえると迷いません。まずは県教育委員会の公式PDF（募集案内・実施要項など）で、「選考」「比率」「調査書点（内申点）」「換算」の語を探し、満点と計算式を確認します。
                     </p>
                     <p className="mt-2 text-slate-600">
                       公式資料は年度で更新されることがあるため、このページでは参照元リンクと最終確認日もあわせて掲載しています。分からない点があれば、入力例（オール3/4など）で一度計算して、結果が直感とズレないか確認すると安全です。
@@ -520,6 +315,60 @@ export default function PrefectureNaishinPage() {
 
             {/* 都道府県固有要素 */}
             <PrefectureUniqueElements prefectureCode={prefectureCode} />
+
+            {/* 関連リンク */}
+            <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <h3 className="mb-4 text-lg font-bold text-slate-800">関連ページ</h3>
+              <div className="grid gap-2 sm:grid-cols-2">
+                <Link
+                  href="/reverse"
+                  className="flex items-center gap-2 rounded-lg border border-slate-100 bg-slate-50 px-4 py-3 text-sm text-slate-700 transition-colors hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700"
+                >
+                  <Calculator className="h-4 w-4 flex-shrink-0" />
+                  志望校逆算ツール
+                </Link>
+                <Link
+                  href="/prefectures"
+                  className="flex items-center gap-2 rounded-lg border border-slate-100 bg-slate-50 px-4 py-3 text-sm text-slate-700 transition-colors hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700"
+                >
+                  <BookOpen className="h-4 w-4 flex-shrink-0" />
+                  都道府県一覧
+                </Link>
+                <Link
+                  href="/guide"
+                  className="flex items-center gap-2 rounded-lg border border-slate-100 bg-slate-50 px-4 py-3 text-sm text-slate-700 transition-colors hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700"
+                >
+                  <Info className="h-4 w-4 flex-shrink-0" />
+                  内申点ガイド
+                </Link>
+                <Link
+                  href="/blog"
+                  className="flex items-center gap-2 rounded-lg border border-slate-100 bg-slate-50 px-4 py-3 text-sm text-slate-700 transition-colors hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700"
+                >
+                  <Sparkles className="h-4 w-4 flex-shrink-0" />
+                  コラム・学習記事
+                </Link>
+              </div>
+
+              {/* 同じ地域の都道府県リンク */}
+              <div className="mt-4 border-t border-slate-100 pt-4">
+                <h4 className="mb-3 text-sm font-semibold text-slate-700">{prefecture.region}の他の都道府県</h4>
+                <div className="flex flex-wrap gap-2">
+                  {PREFECTURES
+                    .filter(p => p.region === prefecture.region && p.code !== prefectureCode)
+                    .slice(0, 8)
+                    .map(p => (
+                      <Link
+                        key={p.code}
+                        href={`/${p.code}/naishin`}
+                        className="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-600 transition-colors hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700"
+                      >
+                        {p.name}
+                      </Link>
+                    ))}
+                </div>
+              </div>
+            </section>
 
             {/* 誤り報告フォーム */}
             <ErrorReportForm 

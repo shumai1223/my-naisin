@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { ArrowUpDown, MapPin, TrendingUp, Info, CheckCircle } from 'lucide-react';
 import Link from 'next/link';
-import { Header } from '@/components/Header';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { PREFECTURES, getPrefectureByCode } from '@/lib/prefectures';
 
@@ -39,9 +38,7 @@ export default function ComparisonPage() {
       />
       
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
-        <Header />
-        
-        <main className="container mx-auto px-4 py-8">
+        <div className="container mx-auto px-4 py-8">
           {/* ヒーローセクション */}
           <section className="mb-8 text-center">
             <h1 className="mb-4 text-4xl font-bold text-slate-800">
@@ -258,7 +255,7 @@ export default function ComparisonPage() {
               </ol>
             </section>
           )}
-        </main>
+        </div>
       </div>
     </>
   );

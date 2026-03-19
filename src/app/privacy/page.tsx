@@ -1,5 +1,3 @@
-'use client';
-
 import { Shield, ArrowLeft, Cookie, Eye, BarChart3, ExternalLink, Users, Database, Lock, Mail, Bell, FileCheck } from 'lucide-react';
 import Link from 'next/link';
 

@@ -5,6 +5,10 @@ export const metadata: Metadata = {
   description:
     '素内申・換算内申・調査書点・K値・S値・観点別評価・傾斜配点・特色検査・ESAT-Jなど、高校入試の内申点に関する重要用語を具体例・注意点・都道府県差とともに解説。',
   keywords: ['内申点 用語', '素内申', '換算内申', 'K値', 'S値', '観点別評価', '調査書点', '内申点 辞典'],
+  robots: {
+    index: false,
+    follow: true,
+  },
   openGraph: {
     title: '内申点 用語辞典（素内申・換算内申・K値・S値…）| My Naishin',
     description:

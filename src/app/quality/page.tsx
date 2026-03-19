@@ -3,8 +3,6 @@
 import * as React from 'react';
 import Link from 'next/link';
 import { CheckCircle, AlertCircle, FileText, Calendar, ExternalLink, Target, Calculator, TrendingUp, Award } from 'lucide-react';
-import { Header } from '@/components/Header';
-import { Footer } from '@/components/Footer';
 import { Button } from '@/components/ui/Button';
 
 export default function QualityPage() {
@@ -120,9 +118,7 @@ export default function QualityPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
-      <Header />
-      
-      <main className="mx-auto max-w-4xl px-4 py-8 md:py-12">
+      <div className="mx-auto max-w-4xl px-4 py-8 md:py-12">
         {/* ヘッダー */}
         <div className="mb-8 text-center">
           <div className="mx-auto mb-4 grid h-16 w-16 place-items-center rounded-2xl bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-600 shadow-lg shadow-emerald-300/40">
@@ -307,9 +303,7 @@ export default function QualityPage() {
             </div>
           </div>
         </div>
-      </main>
-
-      <Footer />
+      </div>
     </div>
   );
 }

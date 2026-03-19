@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { Calculator, BookOpen, Target, TrendingUp, ArrowRight, CheckCircle } from 'lucide-react';
 import Link from 'next/link';
-import { Header } from '@/components/Header';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 
 export default function ToolsPage() {
@@ -70,9 +69,7 @@ export default function ToolsPage() {
       />
       
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
-        <Header />
-        
-        <main className="container mx-auto px-4 py-8">
+        <div className="container mx-auto px-4 py-8">
           {/* ヒーローセクション */}
           <section className="mb-12 text-center">
             <h1 className="mb-4 text-4xl font-bold text-slate-800">
@@ -182,7 +179,7 @@ export default function ToolsPage() {
               </div>
             </div>
           </section>
-        </main>
+        </div>
       </div>
     </>
   );
