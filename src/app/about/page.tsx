@@ -1,7 +1,24 @@
 import { User, ArrowLeft, Shield, RefreshCw, FileText, Mail, ExternalLink, Calendar, BookOpen } from 'lucide-react';
 import Link from 'next/link';
+import { Metadata } from 'next';
 
 import { APP_NAME } from '@/lib/constants';
+
+export const metadata: Metadata = {
+  title: '運営者情報 | My Naishin - 内申点シミュレーター',
+  description: '内申点シミュレーターMy Naishinの運営者情報。サービスの概要、目的、特徴、お問い合わせ方法などを公開しています。',
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
+  alternates: {
+    canonical: 'https://my-naishin.com/about',
+  },
+};
 
 export default function AboutPage() {
   const dataLastVerified = '2026年1月30日';
