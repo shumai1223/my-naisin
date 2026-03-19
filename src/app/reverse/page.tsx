@@ -4,6 +4,8 @@ import * as React from 'react';
 import Link from 'next/link';
 import nextDynamic from 'next/dynamic';
 import { Home, ChevronRight, Target, HelpCircle, AlertTriangle, CheckCircle } from 'lucide-react';
+import { usePathname, useSearchParams } from 'next/navigation';
+import { useEffect } from 'react';
 
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
@@ -14,6 +16,33 @@ const ReverseCalculator = nextDynamic(
 );
 
 export default function ReversePage() {
+  const searchParams = useSearchParams();
+  const hasPrefParam = searchParams?.has('pref');
+  
+  useEffect(() => {
+    // Set canonical URL
+    const canonical = document.createElement('link');
+    canonical.rel = 'canonical';
+    canonical.href = 'https://my-naishin.com/reverse';
+    document.head.appendChild(canonical);
+    
+    if (hasPrefParam) {
+      const meta = document.createElement('meta');
+      meta.name = 'robots';
+      meta.content = 'noindex, nofollow';
+      document.head.appendChild(meta);
+      
+      return () => {
+        document.head.removeChild(meta);
+        document.head.removeChild(canonical);
+      };
+    }
+    
+    return () => {
+      document.head.removeChild(canonical);
+    };
+  }, [hasPrefParam]);
+  
   return (
     <div className="min-h-screen">
       <WebApplicationSchema
