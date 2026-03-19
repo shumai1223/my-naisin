@@ -6,6 +6,7 @@ import { Search, MapPin, Calculator, ChevronRight, ExternalLink, Calendar, Chevr
 
 import { PREFECTURES, REGIONS, getPrefecturesByRegion } from '@/lib/prefectures';
 import type { RegionName } from '@/lib/prefectures';
+import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 
 export default function PrefecturesPage() {
   const [searchQuery, setSearchQuery] = React.useState('');
@@ -57,7 +58,14 @@ export default function PrefecturesPage() {
   }, [filteredPrefectures, selectedRegion]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+    <>
+      <BreadcrumbSchema 
+        items={[
+          { name: 'ホーム', url: 'https://my-naishin.com/' },
+          { name: '都道府県一覧', url: 'https://my-naishin.com/prefectures' }
+        ]}
+      />
+      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
       <div className="mx-auto max-w-6xl px-4 py-8 md:py-12">
         {/* Breadcrumb */}
         <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
@@ -273,6 +281,7 @@ export default function PrefecturesPage() {
           </Link>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 }

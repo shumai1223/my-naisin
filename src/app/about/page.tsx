@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 
 import { APP_NAME } from '@/lib/constants';
+import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 
 export const metadata: Metadata = {
   title: '運営者情報 | My Naishin - 内申点シミュレーター',
@@ -26,8 +27,15 @@ export default function AboutPage() {
   const version = 'v2026.1+20260204';
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
-      <div className="mx-auto max-w-3xl px-4 py-12">
+    <>
+      <BreadcrumbSchema 
+        items={[
+          { name: 'ホーム', url: 'https://my-naishin.com/' },
+          { name: '運営者情報', url: 'https://my-naishin.com/about' }
+        ]}
+      />
+      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+        <div className="mx-auto max-w-3xl px-4 py-12">
         {/* Back link */}
         <Link 
           href="/" 
@@ -435,6 +443,7 @@ export default function AboutPage() {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 }

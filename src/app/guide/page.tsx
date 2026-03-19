@@ -7,6 +7,7 @@ import { BookOpen, MapPin, ArrowLeft, ArrowRight, FileText, ExternalLink } from 
 import { PREFECTURES } from '@/lib/prefectures';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
+import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 
 const REGIONS = [
   { name: '北海道・東北', codes: ['hokkaido', 'aomori', 'iwate', 'miyagi', 'akita', 'yamagata', 'fukushima'] },
@@ -39,7 +40,14 @@ export default function GuidePage() {
   const [selectedRegion, setSelectedRegion] = React.useState<string | null>(null);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
+    <>
+      <BreadcrumbSchema 
+        items={[
+          { name: 'ホーム', url: 'https://my-naishin.com/' },
+          { name: '制度を理解する', url: 'https://my-naishin.com/guide' }
+        ]}
+      />
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="mb-8">
@@ -195,6 +203,7 @@ export default function GuidePage() {
           </Card>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 }

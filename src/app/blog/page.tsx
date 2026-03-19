@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { BookOpen, Calendar, Clock, ChevronRight, Sparkles, Tag, TrendingUp, ArrowRight } from 'lucide-react';
 
 import { getAllPosts } from '@/lib/blog-data';
+import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 
 export const metadata = {
   title: '内申点コラム（高校受験ガイド）| My Naishin',
@@ -29,15 +30,6 @@ export const metadata = {
 export default function BlogPage() {
   const posts = getAllPosts();
 
-  // カテゴリでグループ化
-  const postsByCategory = posts.reduce((acc, post) => {
-    if (!acc[post.category]) {
-      acc[post.category] = [];
-    }
-    acc[post.category].push(post);
-    return acc;
-  }, {} as Record<string, typeof posts>);
-
   const categoryIcons: Record<string, string> = {
     'guide': '📘',
     '基礎知識': '📚',
@@ -51,7 +43,14 @@ export default function BlogPage() {
   const featuredPosts = posts.slice(0, 3);
 
   return (
-    <div className="min-h-screen bg-white">
+    <>
+      <BreadcrumbSchema 
+        items={[
+          { name: 'ホーム', url: 'https://my-naishin.com/' },
+          { name: '内申点コラム', url: 'https://my-naishin.com/blog' }
+        ]}
+      />
+      <div className="min-h-screen bg-white">
       {/* Hero */}
       <div className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-blue-950 to-indigo-950">
         <div className="absolute inset-0 opacity-30">
@@ -204,5 +203,6 @@ export default function BlogPage() {
         </div>
       </div>
     </div>
+    </>
   );
 }

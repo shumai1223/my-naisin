@@ -9,11 +9,13 @@ const SITE_LAST_UPDATED = '2026-03-19';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   // 高品質な固定ページのみ含める
-  // 除外: /comparison, /glossary, /quality, /tools, /pref/ (薄いコンテンツ・重複コンテンツ)
+  // 除外: /glossary, /quality, /pref/ (薄いコンテンツ・重複コンテンツ)
   const staticPages: MetadataRoute.Sitemap = [
     { url: BASE_URL, lastModified: SITE_LAST_UPDATED, changeFrequency: 'weekly', priority: 1.0 },
     { url: `${BASE_URL}/reverse`, lastModified: SITE_LAST_UPDATED, changeFrequency: 'monthly', priority: 0.9 },
     { url: `${BASE_URL}/prefectures`, lastModified: SITE_LAST_UPDATED, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE_URL}/tools`, lastModified: SITE_LAST_UPDATED, changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${BASE_URL}/comparison`, lastModified: SITE_LAST_UPDATED, changeFrequency: 'monthly', priority: 0.6 },
     { url: `${BASE_URL}/blog`, lastModified: SITE_LAST_UPDATED, changeFrequency: 'weekly', priority: 0.8 },
     { url: `${BASE_URL}/guide`, lastModified: SITE_LAST_UPDATED, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${BASE_URL}/about`, lastModified: SITE_LAST_UPDATED, changeFrequency: 'monthly', priority: 0.5 },
