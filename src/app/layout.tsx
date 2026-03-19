@@ -6,7 +6,7 @@ import type { ReactNode } from 'react';
 import './globals.css';
 
 import { CookieConsent } from '@/components/CookieConsent';
-import { Header } from '@/components/Header';
+import { GlobalHeaderBridge } from '@/components/GlobalHeaderBridge';
 import { Footer } from '@/components/Footer';
 
 const notoSansJp = Noto_Sans_JP({
@@ -78,7 +78,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             `,
           }}
         />
-        <Header />
+        <GlobalHeaderBridge />
         <main>{children}</main>
         <Footer />
         <CookieConsent />
