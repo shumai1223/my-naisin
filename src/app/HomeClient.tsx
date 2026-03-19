@@ -17,7 +17,6 @@ import {
   updateScoreValue
 } from '@/lib/utils';
 
-import { Footer } from '@/components/Footer';
 import { Header } from '@/components/Header';
 import { HeroNavigation, NavigationMode } from '@/components/HeroNavigation';
 import { TipsSection } from '@/components/TipsSection';
@@ -393,7 +392,6 @@ export default function HomeClient() {
           <div className="min-w-0">
             <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl">
               <Header />
-
           <div className="px-4 pb-4 md:px-6">
             <div className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700 ring-1 ring-emerald-100">
               2026年度入試対応（令和8年度入学者選抜）
@@ -712,7 +710,6 @@ export default function HomeClient() {
         <ChangeLogSection limit={5} />
       </div>
 
-      <Footer />
             </div>
           </div>
 
