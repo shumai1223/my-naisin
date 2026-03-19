@@ -42,6 +42,16 @@ export default function BlogPage() {
   // 最新3記事をピックアップ
   const featuredPosts = posts.slice(0, 3);
 
+  // カテゴリー別にグループ化
+  const postsByCategory = posts.reduce((acc, post) => {
+    const category = post.category || 'その他';
+    if (!acc[category]) {
+      acc[category] = [];
+    }
+    acc[category].push(post);
+    return acc;
+  }, {} as Record<string, typeof posts>);
+
   return (
     <>
       <BreadcrumbSchema 
