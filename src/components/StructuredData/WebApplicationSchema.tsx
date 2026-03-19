@@ -1,5 +1,3 @@
-import Script from 'next/script';
-
 interface WebApplicationSchemaProps {
   name: string;
   description: string;
@@ -24,8 +22,7 @@ export function WebApplicationSchema({ name, description, url }: WebApplicationS
   };
 
   return (
-    <Script
-      id="webapp-schema"
+    <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
     />

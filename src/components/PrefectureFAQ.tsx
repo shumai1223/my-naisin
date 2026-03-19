@@ -1,7 +1,5 @@
-'use client';
-
-import * as React from 'react';
 import { HelpCircle, AlertTriangle, Calendar, BookOpen, TrendingUp } from 'lucide-react';
+import type { ReactNode } from 'react';
 
 interface PrefectureFAQProps {
   prefectureCode: string;
@@ -14,7 +12,7 @@ export function PrefectureFAQ({ prefectureCode, className = '' }: PrefectureFAQP
     commonQuestions: {
       question: string;
       answer: string;
-      icon: React.ReactNode;
+      icon: ReactNode;
       priority: 'high' | 'medium' | 'low';
     }[];
     specificNotes: string[];

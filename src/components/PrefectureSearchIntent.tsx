@@ -1,6 +1,3 @@
-'use client';
-
-import * as React from 'react';
 import { AlertTriangle, HelpCircle, Calendar, BookOpen, TrendingUp } from 'lucide-react';
 
 interface PrefectureSearchIntentProps {

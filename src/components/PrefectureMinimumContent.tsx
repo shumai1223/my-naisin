@@ -1,7 +1,4 @@
-'use client';
-
 import { AlertTriangle, BookOpen, ExternalLink, Calendar, Calculator, TrendingUp } from 'lucide-react';
-import Script from 'next/script';
 import { getPrefectureByCode } from '@/lib/prefectures';
 import { PREFECTURE_TRAPS, generateDynamicTraps } from '@/lib/prefecture-traps';
 import { PREFECTURE_SOURCES } from '@/lib/prefecture-sources';
@@ -65,8 +62,7 @@ export function PrefectureMinimumContent({ prefectureCode }: PrefectureMinimumCo
   return (
     <>
       {/* FAQ構造化データ */}
-      <Script
-        id="faq-schema"
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
