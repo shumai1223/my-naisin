@@ -26,7 +26,7 @@ const typeLabels = {
   remove: '削除',
 };
 
-const categoryLabels = {
+const categoryLabels: Record<ChangeLogEntry['category'], string> = {
   calculation: '計算',
   data: 'データ',
   feature: '機能',
