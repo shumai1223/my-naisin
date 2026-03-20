@@ -22,9 +22,9 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
-  const dataLastVerified = '2026年1月30日';
-  const featureLastUpdated = '2026年2月4日';
-  const version = 'v2026.1+20260204';
+  const dataLastVerified = '2026年3月20日';
+  const featureLastUpdated = '2026年3月20日';
+  const version = 'v2026.1+20260320';
 
   return (
     <>

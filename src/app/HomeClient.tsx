@@ -159,6 +159,51 @@ function LearnSection({ onBack }: LearnSectionProps) {
           <div className="mb-6 rounded-xl border border-slate-200 bg-gradient-to-br from-slate-50 to-white p-4">
             <h3 className="mb-3 flex items-center gap-2 text-base font-bold text-slate-800">
               <FileText className="h-5 w-5 text-blue-500" />
+              新着コラム
+            </h3>
+            <div className="space-y-2">
+              <Link
+                href="/blog/naishin-guide"
+                className="group flex items-center justify-between rounded-lg bg-white p-3 shadow-sm transition-all hover:bg-blue-50 hover:shadow-md"
+              >
+                <div>
+                  <span className="mb-1 inline-block rounded-full bg-blue-100 px-2 py-0.5 text-xs font-medium text-blue-700">
+                    基礎知識
+                  </span>
+                  <div className="text-sm font-medium text-slate-700 group-hover:text-blue-700">【完全保存版】内申点の計算方法を徹底解説</div>
+                </div>
+                <ChevronRight className="h-4 w-4 text-slate-400 transition-transform group-hover:translate-x-1 group-hover:text-blue-500" />
+              </Link>
+              <Link
+                href="/blog/kansan-naishin-vs-su-naishin"
+                className="group flex items-center justify-between rounded-lg bg-white p-3 shadow-sm transition-all hover:bg-blue-50 hover:shadow-md"
+              >
+                <div>
+                  <span className="mb-1 inline-block rounded-full bg-blue-100 px-2 py-0.5 text-xs font-medium text-blue-700">
+                    基礎知識
+                  </span>
+                  <div className="text-sm font-medium text-slate-700 group-hover:text-blue-700">【図解】換算内申と素内申の違いとは？</div>
+                </div>
+                <ChevronRight className="h-4 w-4 text-slate-400 transition-transform group-hover:translate-x-1 group-hover:text-blue-500" />
+              </Link>
+              <Link
+                href="/blog/tokyo-kansan-naishin-guide"
+                className="group flex items-center justify-between rounded-lg bg-white p-3 shadow-sm transition-all hover:bg-blue-50 hover:shadow-md"
+              >
+                <div>
+                  <span className="mb-1 inline-block rounded-full bg-blue-100 px-2 py-0.5 text-xs font-medium text-blue-700">
+                    都道府県別
+                  </span>
+                  <div className="text-sm font-medium text-slate-700 group-hover:text-blue-700">【東京都】換算内申の計算方法と都立高校入試</div>
+                </div>
+                <ChevronRight className="h-4 w-4 text-slate-400 transition-transform group-hover:translate-x-1 group-hover:text-blue-500" />
+              </Link>
+            </div>
+          </div>
+
+          <div className="mb-6 rounded-xl border border-slate-200 bg-gradient-to-br from-slate-50 to-white p-4">
+            <h3 className="mb-3 flex items-center gap-2 text-base font-bold text-slate-800">
+              <FileText className="h-5 w-5 text-blue-500" />
               人気のコラム
             </h3>
             <div className="space-y-2">
@@ -631,6 +676,59 @@ export default function HomeClient() {
                         <BookOpen className="h-4 w-4" />
                         計算根拠ページへ
                         <ChevronRight className="h-4 w-4" />
+                      </Link>
+                    </div>
+                  </div>
+                </Card>
+
+                {/* 重要ページへの導線 */}
+                <Card className="overflow-hidden">
+                  <div className="border-b border-slate-100/80 bg-gradient-to-r from-emerald-50/80 via-teal-50/60 to-green-50/80 px-6 py-5">
+                    <div className="text-base font-bold text-slate-800 mb-4">🎯 受験対策の完全ガイド</div>
+                    <div className="grid gap-3 sm:grid-cols-2">
+                      <Link
+                        href="/blog"
+                        className="flex items-center gap-3 rounded-lg bg-white p-3 shadow-sm transition-all hover:shadow-md hover:bg-emerald-50"
+                      >
+                        <BookOpen className="h-5 w-5 text-emerald-600" />
+                        <div className="text-left">
+                          <div className="text-sm font-medium text-slate-800">内申点コラム</div>
+                          <div className="text-xs text-slate-500">基礎知識から実践まで</div>
+                        </div>
+                        <ChevronRight className="h-4 w-4 text-slate-400 ml-auto" />
+                      </Link>
+                      <Link
+                        href="/guide"
+                        className="flex items-center gap-3 rounded-lg bg-white p-3 shadow-sm transition-all hover:shadow-md hover:bg-emerald-50"
+                      >
+                        <FileText className="h-5 w-5 text-emerald-600" />
+                        <div className="text-left">
+                          <div className="text-sm font-medium text-slate-800">制度を理解する</div>
+                          <div className="text-xs text-slate-500">都道府県別の違い</div>
+                        </div>
+                        <ChevronRight className="h-4 w-4 text-slate-400 ml-auto" />
+                      </Link>
+                      <Link
+                        href="/tools"
+                        className="flex items-center gap-3 rounded-lg bg-white p-3 shadow-sm transition-all hover:shadow-md hover:bg-emerald-50"
+                      >
+                        <RotateCcw className="h-5 w-5 text-emerald-600" />
+                        <div className="text-left">
+                          <div className="text-sm font-medium text-slate-800">ツール一覧</div>
+                          <div className="text-xs text-slate-500">計算・逆算・比較</div>
+                        </div>
+                        <ChevronRight className="h-4 w-4 text-slate-400 ml-auto" />
+                      </Link>
+                      <Link
+                        href="/about"
+                        className="flex items-center gap-3 rounded-lg bg-white p-3 shadow-sm transition-all hover:shadow-md hover:bg-emerald-50"
+                      >
+                        <ExternalLink className="h-5 w-5 text-emerald-600" />
+                        <div className="text-left">
+                          <div className="text-sm font-medium text-slate-800">運営者情報</div>
+                          <div className="text-xs text-slate-500">信頼性と透明性</div>
+                        </div>
+                        <ChevronRight className="h-4 w-4 text-slate-400 ml-auto" />
                       </Link>
                     </div>
                   </div>

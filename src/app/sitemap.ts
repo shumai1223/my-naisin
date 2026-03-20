@@ -5,7 +5,7 @@ import { getAllPosts } from '@/lib/blog-data';
 const BASE_URL = 'https://my-naishin.com';
 
 // サイト最終更新日（デプロイ時に更新）
-const SITE_LAST_UPDATED = '2026-03-19';
+const SITE_LAST_UPDATED = '2026-03-20';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   // 高品質な固定ページのみ含める
