@@ -26,12 +26,13 @@ const typeLabels = {
   remove: '削除',
 };
 
-const categoryLabels = {
+const categoryLabels: Record<ChangeLogEntry['category'], string> = {
   calculation: '計算',
   data: 'データ',
   feature: '機能',
   ui: 'UI',
   content: 'コンテンツ',
+  seo: 'SEO',
 };
 
 interface ChangeLogSectionProps {
@@ -85,7 +86,7 @@ function ChangeLogItem({ entry }: { entry: ChangeLogEntry }) {
             {typeLabels[entry.type]}
           </span>
           <span className="rounded bg-slate-100 px-1.5 py-0.5 text-[10px] font-medium text-slate-600">
-            {categoryLabels[entry.category]}
+            {categoryLabels[entry.category as keyof typeof categoryLabels]}
           </span>
           {entry.prefectureCode && (
             <span className="rounded bg-indigo-100 px-1.5 py-0.5 text-[10px] font-medium text-indigo-700">
