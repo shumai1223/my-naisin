@@ -5,7 +5,7 @@ export interface ChangeLogEntry {
   date: string; // YYYY-MM-DD
   prefectureCode?: string; // 特定の都道府県に関する変更の場合
   type: 'add' | 'update' | 'fix' | 'remove';
-  category: 'calculation' | 'data' | 'feature' | 'ui' | 'content';
+  category: 'calculation' | 'data' | 'feature' | 'ui' | 'content' | 'seo';
   title: string;
   description: string;
   sourceUrl?: string;
@@ -13,6 +13,27 @@ export interface ChangeLogEntry {
 }
 
 export const CHANGELOG: ChangeLogEntry[] = [
+  {
+    date: '2026-03-20',
+    type: 'update',
+    category: 'feature',
+    title: 'Googlebot巡回最適化と内部リンク強化',
+    description: 'トップページに重要ページへの内部リンクを追加し、新着記事セクションを設置。サイトマップとEEAT情報を更新し、検出-未登録ページのインデックス促進を図る。',
+  },
+  {
+    date: '2026-03-20',
+    type: 'update',
+    category: 'seo',
+    title: '構造化データとメタデータの最適化',
+    description: 'すべての主要ページにパンくずリスト構造化データを追加。robotsメタタグとcanonical URLを設定し、SEO基盤を強化。',
+  },
+  {
+    date: '2026-03-20',
+    type: 'fix',
+    category: 'feature',
+    title: 'Next.jsビルドエラーを修正',
+    description: 'useSearchParams()のSuspense境界の問題を解決し、安定したビルド環境を確保。',
+  },
   {
     date: '2026-03-10',
     type: 'update',

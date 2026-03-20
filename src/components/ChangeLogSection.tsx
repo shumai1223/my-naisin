@@ -32,6 +32,7 @@ const categoryLabels = {
   feature: '機能',
   ui: 'UI',
   content: 'コンテンツ',
+  seo: 'SEO',
 };
 
 interface ChangeLogSectionProps {
