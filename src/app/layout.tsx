@@ -1,4 +1,4 @@
-git add .import type { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { Noto_Sans_JP } from 'next/font/google';
 import Script from 'next/script';
 import type { ReactNode } from 'react';
