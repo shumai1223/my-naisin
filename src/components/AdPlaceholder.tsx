@@ -4,7 +4,7 @@ import * as React from 'react';
 
 import { cn } from '@/lib/utils';
 
-export interface AdPlaceholderProps extends React.HTMLAttributes<HTMLDivElement> {}
+export type AdPlaceholderProps = React.HTMLAttributes<HTMLDivElement>;
 
 export function AdPlaceholder({ className, ...props }: AdPlaceholderProps) {
   return (

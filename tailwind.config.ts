@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss';
+import type { PluginAPI } from 'tailwindcss/types/config';
 
 const config: Config = {
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
@@ -31,7 +32,11 @@ const config: Config = {
       }
     }
   },
-  plugins: []
+  plugins: [
+    function ({ addVariant }: PluginAPI) {
+      addVariant('print', '@media print');
+    }
+  ]
 };
 
 export default config;

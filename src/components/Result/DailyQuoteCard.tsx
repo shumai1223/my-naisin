@@ -101,11 +101,11 @@ export function DailyQuoteCard() {
           animate={{ opacity: 1, y: 0 }}
           className="relative"
         >
-          <div className="absolute -left-1 -top-2 text-4xl text-violet-200 font-serif">"</div>
+          <div className="absolute -left-1 -top-2 text-4xl text-violet-200 font-serif">&quot;</div>
           <p className="text-sm text-slate-700 leading-relaxed pl-4 pr-2 italic">
             {quote.text}
           </p>
-          <div className="absolute -right-1 bottom-0 text-4xl text-violet-200 font-serif rotate-180">"</div>
+          <div className="absolute -right-1 bottom-0 text-4xl text-violet-200 font-serif rotate-180">&quot;</div>
         </motion.div>
 
         <div className="mt-3 text-right">

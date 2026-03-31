@@ -39,19 +39,23 @@ export function calculateTotalScore(scores: Scores, prefectureCode: string, use1
   
   let total = 0;
   const maxGrade = (use10PointScale && prefecture.supports10PointScale) ? 10 : 5;
-  
-  // 5教科
-  for (const key of coreSubjects) {
-    const raw = scores[key];
-    const safe = clamp(roundInt(raw), 1, maxGrade);
-    total += safe * prefecture.coreMultiplier;
-  }
-  
-  // 実技4教科
-  for (const key of practicalSubjects) {
-    const raw = scores[key];
-    const safe = clamp(roundInt(raw), 1, maxGrade);
-    total += safe * prefecture.practicalMultiplier;
+
+  for (const grade of prefecture.targetGrades) {
+    let gradeTotal = 0;
+    // 5教科
+    for (const key of coreSubjects) {
+      const raw = scores[key];
+      const safe = clamp(roundInt(raw), 1, maxGrade);
+      gradeTotal += safe * prefecture.coreMultiplier;
+    }
+    
+    // 実技4教科
+    for (const key of practicalSubjects) {
+      const raw = scores[key];
+      const safe = clamp(roundInt(raw), 1, maxGrade);
+      gradeTotal += safe * prefecture.practicalMultiplier;
+    }
+    total += gradeTotal * (prefecture.gradeMultipliers[grade] || 1);
   }
   
   return Math.round(total);
@@ -65,11 +69,16 @@ export function calculateMaxScore(prefectureCode: string, use10PointScale?: bool
   
   const maxGrade = (use10PointScale && prefecture.supports10PointScale) ? 10 : 5;
   
-  // 満点を動的に計算: 5教科 × maxGrade × coreMultiplier + 4教科 × maxGrade × practicalMultiplier
-  const coreMax = 5 * maxGrade * prefecture.coreMultiplier;
-  const practicalMax = 4 * maxGrade * prefecture.practicalMultiplier;
-  
-  return Math.round(coreMax + practicalMax);
+  let totalMax = 0;
+
+  for (const grade of prefecture.targetGrades) {
+    const coreMax = 5 * maxGrade * prefecture.coreMultiplier;
+    const practicalMax = 4 * maxGrade * prefecture.practicalMultiplier;
+    const gradeMax = coreMax + practicalMax;  
+    totalMax += gradeMax * (prefecture.gradeMultipliers[grade] || 1);
+  }
+
+  return Math.round(totalMax);
 }
 
 export function calculatePercent(total: number, max: number) {

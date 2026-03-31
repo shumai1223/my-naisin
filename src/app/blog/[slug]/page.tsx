@@ -236,7 +236,7 @@ export default async function BlogPostPage({ params }: PageProps) {
               <PrefectureLinkList limit={8} />
               <p className="mt-4 text-sm text-slate-600">
                 <strong>自分の都道府県が決まってない人向け：</strong>
-                まずは<a href="/prefectures" className="text-blue-600 hover:underline">都道府県一覧</a>で「満点・倍率・対象学年」を確認しましょう。
+                まずは<Link href="/prefectures" className="text-blue-600 hover:underline">都道府県一覧</Link>で「満点・倍率・対象学年」を確認しましょう。
               </p>
             </div>
           )}

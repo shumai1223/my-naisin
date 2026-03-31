@@ -57,27 +57,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           crossOrigin="anonymous"
           strategy="afterInteractive"
         />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              // Force scroll behavior for Cloudflare Workers
-              if (typeof window !== 'undefined') {
-                document.body.style.overflowY = 'auto';
-                document.documentElement.style.overflowY = 'auto';
-                document.body.style.touchAction = 'pan-y';
-                
-                // Override any scroll prevention
-                const originalPreventDefault = Event.prototype.preventDefault;
-                Event.prototype.preventDefault = function() {
-                  if (this.type === 'touchmove' || this.type === 'wheel') {
-                    return; // Allow scroll events
-                  }
-                  return originalPreventDefault.call(this);
-                };
-              }
-            `,
-          }}
-        />
         <GlobalHeaderBridge />
         <main>{children}</main>
         <Footer />

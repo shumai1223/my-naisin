@@ -14,14 +14,8 @@ interface CalculationBasisProps {
 export function CalculationBasis({ prefectureCode, total, max }: CalculationBasisProps) {
   const prefecture = React.useMemo(() => getPrefectureByCode(prefectureCode), [prefectureCode]);
 
-  if (!prefecture) return null;
-
-  const targetGrades = prefecture.targetGrades ?? [3];
-  const gradeText = targetGrades.length === 1
-    ? `中学${targetGrades[0]}年のみ`
-    : `中学${targetGrades.join('・')}年`;
-
   const multiplierInfo = React.useMemo(() => {
+    if (!prefecture) return '';
     const { coreMultiplier, practicalMultiplier } = prefecture;
     if (coreMultiplier === 1 && practicalMultiplier === 1) {
       return '全教科同一配点';
@@ -31,6 +25,13 @@ export function CalculationBasis({ prefectureCode, total, max }: CalculationBasi
     }
     return `5教科×${coreMultiplier}、実技4教科×${practicalMultiplier}`;
   }, [prefecture]);
+
+  if (!prefecture) return null;
+
+  const targetGrades = prefecture.targetGrades ?? [3];
+  const gradeText = targetGrades.length === 1
+    ? `中学${targetGrades[0]}年のみ`
+    : `中学${targetGrades.join('・')}年`;
 
   return (
     <div className="rounded-xl border border-slate-200 bg-gradient-to-br from-slate-50 to-white p-4">

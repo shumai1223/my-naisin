@@ -1,6 +1,7 @@
 'use client';
 
 import * as React from 'react';
+import Link from 'next/link';
 import { FileText, Calendar, AlertTriangle, CheckCircle, ExternalLink, BookOpen } from 'lucide-react';
 
 interface EvidenceSummaryProps {
@@ -173,9 +174,9 @@ export function EvidenceSummary({ prefectureCode, className = '' }: EvidenceSumm
             </p>
             <p>
               計算ロジックのテスト結果は{' '}
-              <a href="/quality" className="underline hover:text-emerald-700">
+              <Link href="/quality" className="underline hover:text-emerald-700">
                 品質保証ページ
-              </a>
+              </Link>
               {' '}で公開しています。
             </p>
           </div>

@@ -1,14 +1,16 @@
 'use client';
 
 import * as React from 'react';
-import { motion } from 'framer-motion';
+import { motion, type HTMLMotionProps } from 'framer-motion';
 
 import { cn } from '@/lib/utils';
 
 type ButtonVariant = 'primary' | 'secondary' | 'ghost';
 type ButtonSize = 'sm' | 'md' | 'lg';
 
-export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+// Omit a`children` from HTMLMotionProps and redefine it to avoid type conflicts.
+export interface ButtonProps extends Omit<HTMLMotionProps<'button'>, 'children'> {
+  children: React.ReactNode;
   variant?: ButtonVariant;
   size?: ButtonSize;
   loading?: boolean;
@@ -40,7 +42,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       disabled,
       leftIcon,
       rightIcon,
-      type,
+      type = 'button',
       children,
       ...props
     },
@@ -51,7 +53,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <motion.button
         ref={ref}
-        type={type ?? 'button'}
+        type={type}
         disabled={isDisabled}
         whileTap={{ scale: 0.98 }}
         whileHover={isDisabled ? undefined : { y: -1 }}
@@ -62,7 +64,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           variantClass[variant],
           className
         )}
-        {...(props as any)}
+        {...props}
       >
         {loading ? (
           <span className="inline-flex items-center gap-2">

@@ -11,7 +11,6 @@ import {
 
 import { PREFECTURES, getPrefectureByCode } from '@/lib/prefectures';
 import { getPrefectureGuide, generateDynamicFAQ } from '@/lib/prefecture-guides';
-import { InteractiveCalculator } from '@/components/Calculator/InteractiveCalculator';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { ErrorReportForm } from '@/components/ErrorReportForm';
 import { PrefectureUniqueElements } from '@/components/PrefectureUniqueElements';
@@ -20,6 +19,7 @@ import { ToolGuide } from '@/components/ToolGuide';
 import { EvidenceSummary } from '@/components/EvidenceSummary';
 import { PrefectureSearchIntent } from '@/components/PrefectureSearchIntent';
 import { PrefectureFAQ } from '@/components/PrefectureFAQ';
+import InteractiveCalculator from '@/components/Calculator/InteractiveCalculatorWrapper';
 
 interface PageProps {
   params: Promise<{ prefecture: string }>;
@@ -35,7 +35,7 @@ function getFormulaExplanation(prefecture: { targetGrades: number[]; gradeMultip
   });
   let formula = parts.join(' ＋ ');
   if (prefecture.practicalMultiplier > 1) {
-    formula += `（実技${prefecture.practicalMultiplier}倍）`;
+    formula += `（実技${prefecture.practicalMultiplier > 1 ? '倍' : ''}）`;
   }
   return formula;
 }

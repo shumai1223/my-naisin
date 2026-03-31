@@ -131,10 +131,10 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
       setNaishinRatioInputValue(String(config.naishinRatio));
       setExamMaxScore(config.examMaxScore);
       setExamMaxInputValue(String(config.examMaxScore));
-      setTargetTotalScore(Math.round((config.examMaxScore + (config as any).naishinMax) * 0.7));
-      setTargetScoreInputValue(String(Math.round((config.examMaxScore + (config as any).naishinMax) * 0.7)));
+      setTargetTotalScore(Math.round((config.examMaxScore + naishinMax) * 0.7));
+      setTargetScoreInputValue(String(Math.round((config.examMaxScore + naishinMax) * 0.7)));
     }
-  }, [prefectureCode, prefecture]);
+  }, [prefectureCode, prefecture, naishinMax]);
 
   const calculate = React.useCallback(() => {
     setValidationError(null);
@@ -650,7 +650,7 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
                       }
                     }}
                     className="h-12 w-full rounded-xl border border-slate-200 bg-white px-4 text-lg font-bold text-slate-800 shadow-sm outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20"
-                    placeholder={prefecture?.reverseCalc ? `例: ${Math.round(prefecture.reverseCalc.totalMaxScore * 0.7)}` : "例: 700"}
+                    placeholder={`例: ${prefecture?.reverseCalc ? Math.round(prefecture.reverseCalc.totalMaxScore * 0.7) : "700"}`}
                   />
                   <span className="text-sm text-slate-500">点</span>
                 </div>
@@ -693,7 +693,7 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
                 )}
                 <div className="mt-1 text-xs text-slate-500">
                   不明な場合は先に内申点を計算 → 
-                  <a href="/" className="text-blue-600 hover:underline">計算ツール</a>
+                  <Link href="/" className="text-blue-600 hover:underline">計算ツール</Link>
                 </div>
               </div>
             </div>

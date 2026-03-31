@@ -5,6 +5,14 @@ import Link from 'next/link';
 import { CheckCircle, AlertCircle, FileText, Calendar, ExternalLink, Target, Calculator, TrendingUp, Award } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 
+interface UpdateHistory {
+  date: string;
+  version: string;
+  changes: string[];
+  tests: string;
+  coverage: string;
+}
+
 export default function QualityPage() {
   // テスト結果データ（実際のテスト結果に基づいて更新）
   const testResults = [
@@ -79,7 +87,7 @@ export default function QualityPage() {
   ];
 
   // 全体の更新履歴
-  const globalUpdateHistory = [
+  const globalUpdateHistory: UpdateHistory[] = [
     {
       date: '2026-02-11',
       version: 'v2.1.0',
@@ -225,7 +233,7 @@ export default function QualityPage() {
           </h2>
           
           <div className="space-y-4">
-            {globalUpdateHistory.map((update: any, index: number) => (
+            {globalUpdateHistory.map((update, index: number) => (
               <div key={index} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-3">
@@ -236,7 +244,7 @@ export default function QualityPage() {
                 </div>
                 
                 <ul className="space-y-1 text-sm text-slate-600">
-                  {update.changes.map((change: any, changeIndex: number) => (
+                  {update.changes.map((change, changeIndex: number) => (
                     <li key={changeIndex} className="flex items-center gap-2">
                       <span className="h-1.5 w-1.5 rounded-full bg-slate-400" />
                       {change}

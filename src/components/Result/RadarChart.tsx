@@ -9,7 +9,9 @@ import {
   Radar,
   ResponsiveContainer,
   Tooltip,
+  TooltipProps,
 } from 'recharts';
+import { ValueType, NameType } from 'recharts/types/component/DefaultTooltipContent';
 import { Hexagon } from 'lucide-react';
 
 import type { Scores } from '@/lib/types';
@@ -39,7 +41,7 @@ export function RadarChart({ scores }: RadarChartProps) {
   }, [subjects, scores]);
 
   // Custom tooltip
-  const CustomTooltip = ({ active, payload }: any) => {
+  const CustomTooltip = ({ active, payload }: TooltipProps<ValueType, NameType>) => {
     if (active && payload && payload.length) {
       const data = payload[0].payload;
       return (

@@ -168,9 +168,9 @@ describe('Prefecture Calculation Tests', () => {
       expect(prefecture?.maxScore).toBe(90);
     });
 
-    test('Osaka: 学年比1:1:3で450点満点', () => {
+    test('Osaka: 学年比2:2:6で450点満点', () => {
       const prefecture = getPrefectureByCode('osaka');
-      expect(prefecture?.gradeMultipliers).toEqual({ 1: 1, 2: 1, 3: 3 });
+      expect(prefecture?.gradeMultipliers).toEqual({ 1: 2, 2: 2, 3: 6 });
       expect(prefecture?.maxScore).toBe(450);
     });
   });
@@ -182,7 +182,7 @@ describe('Prefecture Calculation Tests', () => {
         const calculatedMax = calculateMaxScore(code as string);
         // This may differ for prefectures with special calculations
         // but should be documented
-        expect(calculatedMax).toBeDefined();
+        expect(calculatedMax).toBe(declaredMax);
       }
     );
   });

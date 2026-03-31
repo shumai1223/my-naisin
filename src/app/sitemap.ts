@@ -1,43 +1,44 @@
-import type { MetadataRoute } from 'next';
+import { MetadataRoute } from 'next';
 import { PREFECTURES } from '@/lib/prefectures';
-import { getAllPosts } from '@/lib/blog-data';
-
-const BASE_URL = 'https://my-naishin.com';
-
-// サイト最終更新日（デプロイ時に更新）
-const SITE_LAST_UPDATED = '2026-03-20';
+import { BLOG_POSTS } from '@/lib/blog-data';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  // 高品質な固定ページのみ含める
-  // 除外: /glossary, /quality, /pref/ (薄いコンテンツ・重複コンテンツ)
-  const staticPages: MetadataRoute.Sitemap = [
-    { url: BASE_URL, lastModified: SITE_LAST_UPDATED, changeFrequency: 'weekly', priority: 1.0 },
-    { url: `${BASE_URL}/reverse`, lastModified: SITE_LAST_UPDATED, changeFrequency: 'monthly', priority: 0.9 },
-    { url: `${BASE_URL}/prefectures`, lastModified: SITE_LAST_UPDATED, changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${BASE_URL}/tools`, lastModified: SITE_LAST_UPDATED, changeFrequency: 'monthly', priority: 0.7 },
-    { url: `${BASE_URL}/comparison`, lastModified: SITE_LAST_UPDATED, changeFrequency: 'monthly', priority: 0.6 },
-    { url: `${BASE_URL}/blog`, lastModified: SITE_LAST_UPDATED, changeFrequency: 'weekly', priority: 0.8 },
-    { url: `${BASE_URL}/guide`, lastModified: SITE_LAST_UPDATED, changeFrequency: 'monthly', priority: 0.7 },
-    { url: `${BASE_URL}/about`, lastModified: SITE_LAST_UPDATED, changeFrequency: 'monthly', priority: 0.5 },
-    { url: `${BASE_URL}/privacy`, lastModified: '2026-01-28', changeFrequency: 'yearly', priority: 0.3 },
-    { url: `${BASE_URL}/terms`, lastModified: '2026-01-28', changeFrequency: 'yearly', priority: 0.3 },
-  ];
+  const baseUrl = 'https://my-naishin.com';
 
-  // 47都道府県ページ（naishinのみ。/{pref}や/{pref}/reverseはリダイレクトなので含めない）
-  const prefecturePages = PREFECTURES.map((pref) => ({
-    url: `${BASE_URL}/${pref.code}/naishin`,
-    lastModified: pref.lastVerified ?? SITE_LAST_UPDATED,
-    changeFrequency: 'monthly' as const,
+  const staticPages = [
+    { url: '/', priority: 1.0, changeFrequency: 'daily' },
+    { url: '/tools', priority: 0.9, changeFrequency: 'weekly' },
+    { url: '/reverse', priority: 0.9, changeFrequency: 'weekly' },
+    { url: '/prefectures', priority: 0.9, changeFrequency: 'weekly' },
+    { url: '/comparison', priority: 0.8, changeFrequency: 'weekly' },
+    { url: '/glossary', priority: 0.7, changeFrequency: 'monthly' },
+    { url: '/privacy', priority: 0.5, changeFrequency: 'yearly' },
+    { url: '/contact', priority: 0.5, changeFrequency: 'yearly' },
+    { url: '/blog', priority: 0.8, changeFrequency: 'weekly' },
+    { url: '/about', priority: 0.7, changeFrequency: 'monthly' },
+    { url: '/terms', priority: 0.5, changeFrequency: 'yearly' },
+    { url: '/disclaimer', priority: 0.5, changeFrequency: 'yearly' },
+    { url: '/guide', priority: 0.8, changeFrequency: 'monthly' },
+    { url: '/quality', priority: 0.6, changeFrequency: 'monthly' },
+  ].map(page => ({
+    url: `${baseUrl}${page.url}`,
+    lastModified: new Date(),
+    changeFrequency: page.changeFrequency as MetadataRoute.Sitemap[0]['changeFrequency'],
+    priority: page.priority,
+  }));
+
+  const prefecturePages = PREFECTURES.map(prefecture => ({
+    url: `${baseUrl}/${prefecture.code}/naishin`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as MetadataRoute.Sitemap[0]['changeFrequency'],
     priority: 0.8,
   }));
 
-  // ブログ記事
-  const posts = getAllPosts();
-  const blogPages = posts.map((post) => ({
-    url: `${BASE_URL}/blog/${post.slug}`,
-    lastModified: post.lastUpdated ?? post.date,
-    changeFrequency: 'monthly' as const,
-    priority: 0.8,
+  const blogPages = BLOG_POSTS.map(post => ({
+    url: `${baseUrl}/blog/${post.slug}`,
+    lastModified: new Date(post.lastUpdated || post.date),
+    changeFrequency: 'monthly' as MetadataRoute.Sitemap[0]['changeFrequency'],
+    priority: 0.7,
   }));
 
   return [...staticPages, ...prefecturePages, ...blogPages];

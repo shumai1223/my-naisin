@@ -1071,23 +1071,3 @@ body {
 .blog-content .prefecture-item:hover .arrow {
   transform: translateX(2px);
 }
-
-/* Print styles */
-@media print {
-  body {
-    background: white !important;
-  }
-  
-  .print\\:hidden {
-    display: none !important;
-  }
-  
-  aside {
-    display: none !important;
-  }
-  
-  header button,
-  footer {
-    display: none !important;
-  }
-}

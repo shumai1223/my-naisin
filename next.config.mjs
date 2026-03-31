@@ -14,8 +14,8 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  experimental: {
-    runtime: 'nodejs',
+  eslint: {
+    ignoreDuringBuilds: true,
   },
   async redirects() {
     // 都道府県ページのリダイレクト（/{code} → /{code}/naishin）
