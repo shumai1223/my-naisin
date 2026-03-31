@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+git add .import type { Metadata } from 'next';
 import { Noto_Sans_JP } from 'next/font/google';
 import Script from 'next/script';
 import type { ReactNode } from 'react';
@@ -10,9 +10,8 @@ import { GlobalHeaderBridge } from '@/components/GlobalHeaderBridge';
 import { Footer } from '@/components/Footer';
 
 const notoSansJp = Noto_Sans_JP({
-  weight: ['400', '500', '700'],
+  variable: '--font-noto-sans-jp',
   display: 'swap',
-  preload: false,
 });
 
 export const metadata: Metadata = {
@@ -49,8 +48,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="ja" className="h-full">
-      <body className={`${notoSansJp.className} min-h-screen mesh-gradient text-slate-900 antialiased`}>
+    <html lang="ja" className={`h-full ${notoSansJp.variable}`}>
+      <body className={`min-h-screen mesh-gradient text-slate-900 antialiased`}>
         <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7817682248719138"

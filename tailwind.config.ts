@@ -1,42 +1,43 @@
 import type { Config } from 'tailwindcss';
-import type { PluginAPI } from 'tailwindcss/types/config';
 
 const config: Config = {
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
     extend: {
-      opacity: {
-        6: '0.06',
-        7: '0.07',
-        8: '0.08',
-        12: '0.12',
-        14: '0.14',
-        18: '0.18'
+      fontFamily: {
+        sans: ['var(--font-noto-sans-jp)', 'sans-serif'],
       },
       boxShadow: {
-        neon: '0 0 0 1px rgba(255,255,255,0.08), 0 30px 100px rgba(0,0,0,0.55)'
-      },
-      keyframes: {
-        mesh: {
-          '0%, 100%': { transform: 'translate3d(0,0,0) scale(1)' },
-          '50%': { transform: 'translate3d(3%,-2%,0) scale(1.08)' }
-        },
-        float: {
-          '0%, 100%': { transform: 'translate3d(0,0,0)' },
-          '50%': { transform: 'translate3d(0,-8px,0)' }
-        }
+        glow: '0 0 20px rgba(79, 70, 229, 0.3)',
+        'glow-lg': '0 0 40px rgba(79, 70, 229, 0.4)',
       },
       animation: {
-        mesh: 'mesh 18s ease-in-out infinite',
-        float: 'float 6s ease-in-out infinite'
-      }
-    }
+        shimmer: 'shimmer 1.5s infinite linear',
+        float: 'float 3s ease-in-out infinite',
+        'fade-in': 'fade-in 0.5s ease-out forwards',
+        'fade-in-up': 'fade-in-up 0.5s ease-out forwards',
+      },
+      keyframes: {
+        shimmer: {
+          '0%': { backgroundPosition: '-200% 0' },
+          '100%': { backgroundPosition: '200% 0' },
+        },
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-5px)' },
+        },
+        'fade-in': {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        'fade-in-up': {
+          '0%': { opacity: '0', transform: 'translateY(10px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+      },
+    },
   },
-  plugins: [
-    function ({ addVariant }: PluginAPI) {
-      addVariant('print', '@media print');
-    }
-  ]
+  plugins: [],
 };
 
 export default config;
