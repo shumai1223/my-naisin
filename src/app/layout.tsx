@@ -12,6 +12,7 @@ import { Footer } from '@/components/Footer';
 const notoSansJp = Noto_Sans_JP({
   variable: '--font-noto-sans-jp',
   display: 'swap',
+  preload: false,
 });
 
 export const metadata: Metadata = {
