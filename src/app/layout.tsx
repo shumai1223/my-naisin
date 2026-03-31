@@ -10,7 +10,6 @@ import { GlobalHeaderBridge } from '@/components/GlobalHeaderBridge';
 import { Footer } from '@/components/Footer';
 
 const notoSansJp = Noto_Sans_JP({
-  subsets: ['latin'],
   weight: ['400', '500', '700'],
   display: 'swap'
 });
