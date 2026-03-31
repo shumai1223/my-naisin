@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { Calendar, Clock, ChevronLeft, ChevronRight, BookOpen, Home, FileCheck, ExternalLink, RefreshCw, Tag, Sparkles } from 'lucide-react';
 
-import './blog.css';
+import '../blog.css';
 import { getPostBySlug, getAllPosts } from '@/lib/blog-data';
 import { BlogRelatedLinks } from '@/components/BlogRelatedLinks';
 import { BlogSourceLinks } from '@/components/BlogSourceLinks';
