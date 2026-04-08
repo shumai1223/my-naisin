@@ -14,7 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: '/glossary', priority: 0.7, changeFrequency: 'monthly' },
     { url: '/privacy', priority: 0.5, changeFrequency: 'yearly' },
     { url: '/contact', priority: 0.5, changeFrequency: 'yearly' },
-    { url: '/blog', priority: 0.8, changeFrequency: 'weekly' },
+    { url: '/blog', priority: 0.8, changeFrequency: 'daily' },
     { url: '/about', priority: 0.7, changeFrequency: 'monthly' },
     { url: '/terms', priority: 0.5, changeFrequency: 'yearly' },
     { url: '/disclaimer', priority: 0.5, changeFrequency: 'yearly' },
@@ -30,16 +30,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const prefecturePages = PREFECTURES.map(prefecture => ({
     url: `${baseUrl}/${prefecture.code}/naishin`,
     lastModified: new Date(),
-    changeFrequency: 'monthly' as MetadataRoute.Sitemap[0]['changeFrequency'],
+    changeFrequency: 'weekly' as MetadataRoute.Sitemap[0]['changeFrequency'],
     priority: 0.8,
   }));
 
   const blogPages = BLOG_POSTS.map(post => ({
     url: `${baseUrl}/blog/${post.slug}`,
     lastModified: new Date(post.lastUpdated || post.date),
-    changeFrequency: 'monthly' as MetadataRoute.Sitemap[0]['changeFrequency'],
+    changeFrequency: 'weekly' as MetadataRoute.Sitemap[0]['changeFrequency'],
     priority: 0.7,
   }));
 
-  return [...staticPages, ...prefecturePages, ...blogPages];
+  // 都道府県別の逆算ページなども追加（もし存在すれば）
+  const prefectureReversePages = PREFECTURES.map(prefecture => ({
+    url: `${baseUrl}/${prefecture.code}/reverse`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as MetadataRoute.Sitemap[0]['changeFrequency'],
+    priority: 0.6,
+  }));
+
+  return [...staticPages, ...prefecturePages, ...prefectureReversePages, ...blogPages];
 }

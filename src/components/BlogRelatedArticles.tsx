@@ -1,65 +1,80 @@
-'use client';
-
+import { BlogPost } from '@/lib/blog/types';
+import { BLOG_POSTS } from '@/lib/blog/index';
 import Link from 'next/link';
-import { BookOpen, ChevronRight, Clock } from 'lucide-react';
-import { BlogPost } from '@/lib/blog-data';
+import { BookOpen, ChevronRight, Sparkles } from 'lucide-react';
 
 interface BlogRelatedArticlesProps {
-  currentSlug: string;
-  currentTags: string[];
-  allPosts: BlogPost[];
+  currentSlug?: string;
+  currentTags?: string[];
+  allPosts?: BlogPost[];
   maxArticles?: number;
+  prefectureCode?: string;
+  limit?: number;
 }
 
-export function BlogRelatedArticles({
-  currentSlug,
-  currentTags,
-  allPosts,
-  maxArticles = 5,
+export function BlogRelatedArticles({ 
+  currentSlug, 
+  currentTags, 
+  allPosts = BLOG_POSTS, 
+  maxArticles = 3,
+  prefectureCode,
+  limit = 3
 }: BlogRelatedArticlesProps) {
-  const relatedPosts = allPosts
-    .filter((p) => p.slug !== currentSlug)
-    .map((p) => {
-      const sharedTags = p.tags.filter((t) => currentTags.includes(t));
-      return { post: p, score: sharedTags.length };
-    })
-    .filter((item) => item.score > 0)
-    .sort((a, b) => b.score - a.score)
-    .slice(0, maxArticles);
+  
+  const relatedPosts = allPosts.filter(post => {
+    // Exclude current
+    if (currentSlug && post.slug === currentSlug) return false;
+
+    // Use prefecture filter
+    if (prefectureCode) {
+      return post.title.includes(prefectureCode) || post.content.includes(prefectureCode);
+    }
+    
+    // Use tag filter
+    if (currentTags && currentTags.length > 0) {
+      return post.tags.some(tag => currentTags.includes(tag));
+    }
+    
+    return true;
+  }).slice(0, prefectureCode ? limit : maxArticles);
 
   if (relatedPosts.length === 0) return null;
 
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-      <h3 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-        <BookOpen className="h-5 w-5 text-blue-600" />
-        関連記事
-      </h3>
-      <div className="space-y-3">
-        {relatedPosts.map(({ post }) => (
-          <Link
-            key={post.slug}
+    <section className="mt-8 rounded-2xl border border-blue-100 bg-gradient-to-br from-white to-blue-50/30 p-6 shadow-sm">
+      <div className="mb-4 flex items-center justify-between">
+        <h2 className="flex items-center gap-2 text-lg font-bold text-slate-800">
+          <Sparkles className="h-5 w-5 text-blue-500" />
+          あわせて読みたい攻略記事
+        </h2>
+        <Link href="/blog" className="text-sm font-medium text-blue-600 hover:underline flex items-center">
+          記事一覧へ <ChevronRight className="h-4 w-4" />
+        </Link>
+      </div>
+      
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {relatedPosts.map((post) => (
+          <Link 
+            key={post.slug} 
             href={`/blog/${post.slug}`}
-            className="group flex items-start gap-3 rounded-xl border border-slate-100 bg-slate-50 p-3 transition-all hover:border-blue-200 hover:bg-blue-50"
+            className="group flex flex-col rounded-xl border border-slate-200 bg-white p-4 transition-all hover:border-blue-300 hover:shadow-md"
           >
-            <div className="min-w-0 flex-1">
-              <div className="mb-1 flex items-center gap-2">
-                <span className="inline-block rounded-full bg-blue-100 px-2 py-0.5 text-xs font-medium text-blue-700">
-                  {post.category}
-                </span>
-                <span className="flex items-center gap-1 text-xs text-slate-400">
-                  <Clock className="h-3 w-3" />
-                  {post.readTime}
-                </span>
-              </div>
-              <p className="text-sm font-medium leading-snug text-slate-700 group-hover:text-blue-700">
-                {post.title}
-              </p>
+            <div className="mb-2 flex items-center gap-2">
+              <span className="rounded-full bg-blue-100 px-2 py-0.5 text-[10px] font-bold text-blue-700 uppercase">
+                {post.category}
+              </span>
+              <span className="text-[10px] text-slate-400">{post.date}</span>
             </div>
-            <ChevronRight className="mt-2 h-4 w-4 shrink-0 text-slate-300 transition-transform group-hover:translate-x-0.5 group-hover:text-blue-500" />
+            <h3 className="line-clamp-2 flex-1 text-sm font-bold text-slate-800 group-hover:text-blue-600">
+              {post.title}
+            </h3>
+            <div className="mt-3 flex items-center gap-1 text-xs font-medium text-blue-500">
+              <BookOpen className="h-3 w-3" />
+              記事を読む
+            </div>
           </Link>
         ))}
       </div>
-    </div>
+    </section>
   );
 }

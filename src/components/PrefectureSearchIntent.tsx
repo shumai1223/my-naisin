@@ -1,4 +1,4 @@
-import { AlertTriangle, HelpCircle, Calendar, BookOpen, TrendingUp } from 'lucide-react';
+import { AlertTriangle, HelpCircle, Calendar, BookOpen, TrendingUp, Star, Lightbulb, CheckCircle2 } from 'lucide-react';
 
 interface PrefectureSearchIntentProps {
   prefectureCode: string;
@@ -13,210 +13,177 @@ export function PrefectureSearchIntent({ prefectureCode, className = '' }: Prefe
     kanagawa: '神奈川県',
     osaka: '大阪府',
     saitama: '埼玉県',
-    aichi: '愛知県'
+    aichi: '愛知県',
+    fukuoka: '福岡県',
+    hyogo: '兵庫県',
+    hokkaido: '北海道'
   };
 
   // 各都道府県の検索意図データ
   const searchIntents: Record<string, {
     commonMistakes: string[];
     targetGrades: string;
-    ratioDifferences: string[];
+    reversalStrategy: string;
     specialNotes: string[];
   }> = {
-    chiba: {
-      commonMistakes: [
-        'K値は学校ごとに違うと思っている',
-        '中1・中2の成績も影響しないと勘違い',
-        '実技教科の倍率を忘れている',
-        '内申点と調査書点を混同している',
-        'K値1.5が標準だと思い込んでいる'
-      ],
-      targetGrades: '中1〜中3の3年間の評定合計が対象です。全学年の合計値にK値をかけて調査書点を計算します。',
-      ratioDifferences: [
-        '推薦入試と一般入試で内申点の比率が異なる場合があります。特に専門学科で注意が必要です。'
-      ],
-      specialNotes: ['K値は0.5〜2.0の範囲で学校ごとに設定されます', '特色検査を実施する学校では加点があります']
-    },
     tokyo: {
       commonMistakes: [
-        '実技4教科が2倍換算なのを知らない',
-        'ESAT-Jを忘れている',
-        '換算内申と素内申を混同している',
-        '65点満点をそのまま使っていると思っている',
-        '英語スピーキングが必須だと思い込んでいる'
+        '「換算内申」と「素内申」を同じものだと思っている',
+        '中1・中2の成績も入試に関係あると思っている（一般入試の場合）',
+        '実技4教科が2倍換算なのを知らず、5教科ばかり勉強している',
+        'ESAT-J（スピーキング）の20点分を無視して計算している'
       ],
-      targetGrades: '中3の評定を基に、実技4教科は2倍して65点満点→300点満点に換算します。',
-      ratioDifferences: [
-        '都立一般：学力検査700点＋調査書点300点＋ESAT-J20点',
-        '海外帰国生徒特別選抜：配点が異なる場合があります',
-        '連携型中高一貫校：独自の選抜方法があります'
-      ],
-      specialNotes: ['ESAT-Jは免除可能な場合があります', '換算内申は300点満点が基本です']
+      targetGrades: '都立一般入試は<strong>中学3年生の成績のみ</strong>が対象です。12月に出る「調査書点」で合否の3割（300/1000点）が決まります。',
+      reversalStrategy: '実技4教科のどれか一つを「3→4」にするだけで、換算内申は2点上がります。これは当日点の約9点分に相当。5教科を必死に上げるより、副教科で稼ぐのが逆転の最短ルートです。',
+      specialNotes: [
+        'ESAT-Jの結果は、内申点・当日点とは別に20点満点で加算されます',
+        '上位校（自校作成校）では、内申点以上に当日点（特に記述）で差がつきます'
+      ]
     },
     kanagawa: {
       commonMistakes: [
-        'S値の存在を知らない',
-        '中2と中3の評定倍率が違うのを忘れている',
-        '実技教科が3倍換算なのに気づいていない',
-        'S値1.0が標準だと思い込んでいる',
-        '専門学科と普通科で計算が違うのを知らない',
-        '中2・中3の比率f:gを理解していない',
-        '特色検査を忘れている',
-        '学校ごとの比率が全て同じだと思っていると',
-        'S値計算が複雑すぎて諦めている'
+        '内申点（135点満点）だけで合否が決まると思っている',
+        '中2の成績が3分の1も占めていることを忘れている',
+        '特色検査対策を後回しにしている',
+        '「重点化」で特定の教科が2倍になるルールを知らない'
       ],
-      targetGrades: '中2・中3の評定合計を基準に、比率f:gで重み付けしてS値を計算します。',
-      ratioDifferences: [
-        '内申:学力の比率は学校ごとに異なります（4:6/5:5/3:7など）',
-        '特色検査を実施する学校では加点があります',
-        '専門学科・総合学科は別の計算方法です'
-      ],
-      specialNotes: ['f:gは合計10、各2以上の整数が基本です', 'S値は100点満点換算です']
+      targetGrades: '<strong>中2の成績(45点) ＋ 中3の成績(45点×2) ＝ 135点満点</strong>で計算します。中2の成績が確定している場合、中3でどれだけ上げる必要があるかを逆算するのが重要。',
+      reversalStrategy: '神奈川は「第2次選考」という枠があり、定員の10%は<strong>内申点を一切見ない当日点勝負</strong>で決まります。内申が低くても当日400点以上取れる実力があれば逆転合格が可能です。',
+      specialNotes: [
+        '面接は2024年度から原則廃止されました',
+        '学校ごとに「内申：当日点：特色」の比率（S値）が異なるため、自分の持ち点に有利な学校選びが必須です'
+      ]
     },
     osaka: {
       commonMistakes: [
-        'タイプⅠ〜Ⅴの違いを理解していない',
-        '内申点×10倍換算を知らない',
-        '当日点500点満点を忘れている',
-        '自分のタイプがどれか分からない',
-        'すべての学校が同じタイプだと思っている'
+        '英検2級の「読み替え制度」の威力を知らない',
+        '中1・中2の成績が既に合否に影響していることに気づいていない',
+        '「タイプI〜V」の配点比率を自分の志望校で確認していない'
       ],
-      targetGrades: '中3の評定合計を10倍に換算して計算します。',
-      ratioDifferences: [
-        'タイプⅠ〜Ⅴで内申:当日点の比率が異なります',
-        '専門学科・総合学科は独自の配点です',
-        '単位制高校は評定ではなく単位数で評価します'
-      ],
-      specialNotes: ['タイプⅢ型が最も一般的です', '当日点は500点満点が基本です']
-    },
-    saitama: {
-      commonMistakes: [
-        '特殊な計算方法があると思い込んでいる',
-        '実技教科の倍率があると勘違い',
-        '中1・中2の成績も影響すると思っている',
-        '学校ごとの独自ルールが多いと思っている',
-        'K値方式と混同している'
-      ],
-      targetGrades: '中3のみの9教科5段階評価を標準計算します。',
-      ratioDifferences: [
-        'ほとんどの学校が標準的な計算方法です',
-        '特色検査を実施する学校があります',
-        '専門学科・総合学科で配点が異なる場合があります'
-      ],
-      specialNotes: ['埼玉県は標準的な計算が多いです', '学校ごとの確認が重要です']
+      targetGrades: '<strong>中1(1倍)：中2(1倍)：中3(3倍)</strong>の合計450点満点です。中1からの積み重ねが必須ですが、中3の配分が大きいため、最後まで逆転のチャンスはあります。',
+      reversalStrategy: '文理学科などの上位校を目指すなら、<strong>英検2級取得</strong>が最大の逆転・安定化戦略です。当日点が80%保証されるため、内申が多少低くても英語で稼ぐ必要がなくなり、他教科に集中できます。',
+      specialNotes: [
+        'チャレンジテストの結果によって、学校全体の評定の出やすさが調整されます',
+        'C問題（発展的）を採用する高校では、教科書レベルを超えた応用力が必要です'
+      ]
     },
     aichi: {
       commonMistakes: [
-        '実技教科が1.5倍換算なのを知らない',
-        '推薦入試の基準点を誤解している',
-        '専門学科で計算が特殊なのに気づいていない',
-        '名古屋市立と県立で計算が違うのを忘れている',
-        '内申点の上限を間違えている'
+        '「内申点（45点）」がそのまま使われると思っている（実際は2倍の90点満点）',
+        '中1・中2の成績が一般入試に関係あると思っている',
+        '当日点（110点満点）との合算方法を知らない'
       ],
-      targetGrades: '中3の9教科評定合計が基本で、実技教科は1.5倍換算です。',
-      ratioDifferences: [
-        '推薦入試では内申点の比重が一般入試より高くなります',
-        '名古屋市立高校は独自の計算方法を採用しています',
-        '専門学科では実技教科の比重がさらに高くなる場合があります'
+      targetGrades: '<strong>中3の9教科×2 ＝ 90点満点</strong>です。中1・中2の成績は一般入試の点数には入りませんが、推薦入試では重視されます。',
+      reversalStrategy: '愛知は当日点（110点）と内申点（90点）の合計で競いますが、学校によって「当日点重視」の校内規定があります。内申が低めなら、当日点重視（III型）の高校を戦略的に選びましょう。',
+      specialNotes: [
+        'A・Bグループの2校受験が可能。第一志望は強気に、第二志望は手堅く選ぶのが鉄則です',
+        '全教科×2倍のため、実技教科の「3」を放置すると当日点数点分を損します'
+      ]
+    },
+    chiba: {
+      commonMistakes: [
+        '中1からの成績がすべて均等に入るのを知らない',
+        '「K値」の意味を理解していない',
+        '実技教科を捨ててしまっている'
       ],
-      specialNotes: ['名古屋市立と県立で計算方法が異なる場合があります', '特色検査を実施する学校があります']
+      targetGrades: '<strong>中1(45) ＋ 中2(45) ＋ 中3(45) ＝ 135点満点</strong>。3年間が均等に評価される全国でも珍しい県です。',
+      reversalStrategy: '中1・中2で失敗した人は、<strong>K値が小さい（0.5など）</strong>高校を選びましょう。内申点の持ち点の差が半分に圧縮されるため、当日点での逆転が非常にしやすくなります。',
+      specialNotes: [
+        '2日目の「学校設定検査（自己表現など）」も点数化されるため、面接や作文の準備が不可欠です'
+      ]
     },
     default: {
       commonMistakes: [
-        '実技教科の倍率があると勘違い',
-        '中1・中2の成績も影響すると思っている',
-        '学校ごとの独自ルールを忘れている',
-        'すべての県で同じ計算方法だと思っている'
+        '実技教科の配点を軽視している',
+        '中1から中3までのどの学年が対象か把握していない',
+        '公式資料を一度も見ていない'
       ],
-      targetGrades: '中3の成績が主に対象です。中1・中2の成績は影響しない県が多いです。',
-      ratioDifferences: [
-        'ほとんどの県が標準的な9教科5段階評価です',
-        '特色検査を実施する学校があります',
-        '専門学科・総合学科で配点が異なる場合があります'
-      ],
-      specialNotes: ['学校ごとの確認が重要です', '公式資料の確認を推奨します']
+      targetGrades: '多くの県で中3の成績が重視されますが、中1からの積み重ねを見る県も増えています。',
+      reversalStrategy: '内申点が足りない場合、まずは「副教科（実技4教科）」で「4」以上を目指しましょう。多くの県で副教科は得点しやすく、かつ配点が高い傾向にあります。',
+      specialNotes: [
+        '最新の入試要綱は、必ず各都道府県の教育委員会公式サイトで確認してください'
+      ]
     }
   };
 
   const intent = searchIntents[prefectureCode] || searchIntents.default;
 
   return (
-    <div className={`rounded-2xl border border-blue-200 bg-gradient-to-br from-blue-50/80 via-indigo-50/60 to-slate-50/80 p-6 shadow-lg shadow-blue-100/50 ${className}`}>
-      <div className="flex items-start gap-4">
-        <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-blue-500 via-indigo-600 to-slate-600 shadow-lg shadow-blue-300/40">
-          <HelpCircle className="h-6 w-6 text-white" />
+    <div className={`rounded-2xl border border-blue-200 bg-gradient-to-br from-blue-50/80 via-white to-indigo-50/80 p-6 shadow-xl ${className}`}>
+      <div className="mb-6 flex items-center gap-3">
+        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-indigo-700 text-white shadow-lg">
+          <Star className="h-6 w-6" />
         </div>
-        
-        <div className="flex-1 space-y-4">
-          <div>
-            <h3 className="text-lg font-bold text-blue-800 mb-3">この県の検索意図</h3>
-            <p className="text-sm text-blue-700">
-              {prefectureNames[prefectureCode] || 'この都道府県'}の内申点計算に関するよくある検索意図と注意点をまとめました。
-            </p>
-          </div>
-
-          {/* よくある勘違い */}
-          <div className="rounded-xl border border-blue-200/50 bg-white/60 p-4">
-            <div className="flex items-center gap-2 mb-3">
-              <AlertTriangle className="h-4 w-4 text-amber-600" />
-              <h4 className="font-semibold text-blue-800">よくある勘違い（この県あるある）</h4>
-            </div>
-            <ul className="space-y-2 text-sm">
-              {intent.commonMistakes.map((mistake, index) => (
-                <li key={index} className="flex items-start gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-amber-500 mt-1.5" />
-                  <span className="text-slate-700">{mistake}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* いつの成績が使われるか */}
-          <div className="rounded-xl border border-blue-200/50 bg-white/60 p-4">
-            <div className="flex items-center gap-2 mb-3">
-              <Calendar className="h-4 w-4 text-blue-600" />
-              <h4 className="font-semibold text-blue-800">この県はいつの成績が使われる？</h4>
-            </div>
-            <p className="text-sm text-slate-700">{intent.targetGrades}</p>
-            <p className="text-xs text-slate-500 mt-2">
-              ※例外：学校・コースによっては異なる場合があります。必ず志望校の要項を確認してください。
-            </p>
-          </div>
-
-          {/* 比率の違い */}
-          <div className="rounded-xl border border-purple-200/50 bg-purple-50/60 p-4">
-            <div className="flex items-center gap-2 mb-3">
-              <TrendingUp className="h-4 w-4 text-purple-600" />
-              <h4 className="font-semibold text-purple-800">推薦/一般で比率が違う場合</h4>
-            </div>
-            <ul className="space-y-2 text-sm">
-              {intent.ratioDifferences.map((difference, index) => (
-                <li key={index} className="flex items-start gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-purple-500 mt-1.5" />
-                  <span className="text-slate-700">{difference}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* 特記事項 */}
-          {intent.specialNotes.length > 0 && (
-            <div className="rounded-xl border border-emerald-200/50 bg-emerald-50/60 p-4">
-              <div className="flex items-center gap-2 mb-3">
-                <BookOpen className="h-4 w-4 text-emerald-600" />
-                <h4 className="font-semibold text-emerald-800">特記事項</h4>
-              </div>
-              <ul className="space-y-1 text-sm">
-                {intent.specialNotes.map((note, index) => (
-                  <li key={index} className="flex items-start gap-2">
-                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 mt-1.5" />
-                    <span className="text-slate-700">{note}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
+        <div>
+          <h3 className="text-xl font-bold text-slate-800">
+            {prefectureNames[prefectureCode] || 'この県'}の入試を勝ち抜く戦略
+          </h3>
+          <p className="text-sm text-slate-500">受験生が陥りやすい罠と逆転のヒント</p>
         </div>
+      </div>
+
+      <div className="grid gap-6 md:grid-cols-2">
+        {/* よくある勘違い */}
+        <div className="rounded-xl border border-red-100 bg-red-50/50 p-5">
+          <h4 className="mb-3 flex items-center gap-2 font-bold text-red-800">
+            <AlertTriangle className="h-5 w-5" />
+            よくある勘違い
+          </h4>
+          <ul className="space-y-3">
+            {intent.commonMistakes.map((mistake, index) => (
+              <li key={index} className="flex items-start gap-2 text-sm text-red-900/80 leading-snug">
+                <span className="font-bold text-red-500">×</span>
+                {mistake}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* 逆転合格の秘策 */}
+        <div className="rounded-xl border border-emerald-100 bg-emerald-50/50 p-5">
+          <h4 className="mb-3 flex items-center gap-2 font-bold text-emerald-800">
+            <Lightbulb className="h-5 w-5" />
+            逆転合格のヒント
+          </h4>
+          <p className="text-sm leading-relaxed text-emerald-900/80">
+            {intent.reversalStrategy}
+          </p>
+          <div className="mt-4 flex items-center gap-2 rounded-lg bg-white/60 p-2 text-xs text-emerald-700">
+            <CheckCircle2 className="h-4 w-4 shrink-0" />
+            <span>この戦略で「内申点への不安」を解消しましょう。</span>
+          </div>
+        </div>
+
+        {/* いつの成績が使われるか */}
+        <div className="rounded-xl border border-blue-100 bg-blue-50/50 p-5">
+          <h4 className="mb-3 flex items-center gap-2 font-bold text-blue-800">
+            <Calendar className="h-5 w-5" />
+            対象となる成績
+          </h4>
+          <div className="text-sm leading-relaxed text-blue-900/80" dangerouslySetInnerHTML={{ __html: intent.targetGrades }} />
+        </div>
+
+        {/* 特記事項 */}
+        <div className="rounded-xl border border-slate-100 bg-slate-50/50 p-5">
+          <h4 className="mb-3 flex items-center gap-2 font-bold text-slate-800">
+            <BookOpen className="h-5 w-5" />
+            2026年度の特記事項
+          </h4>
+          <ul className="space-y-2">
+            {intent.specialNotes.map((note, index) => (
+              <li key={index} className="flex items-start gap-2 text-sm text-slate-700 leading-snug">
+                <span className="text-blue-500">•</span>
+                {note}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+      
+      <div className="mt-6 text-center">
+        <p className="text-xs text-slate-400">
+          ※上記は2026年度（令和8年度）入試予測・要綱に基づいています。最終的な判断は各学校の募集要項をご確認ください。
+        </p>
       </div>
     </div>
   );

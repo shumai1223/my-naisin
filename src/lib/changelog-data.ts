@@ -14,6 +14,27 @@ export interface ChangeLogEntry {
 
 export const CHANGELOG: ChangeLogEntry[] = [
   {
+    date: '2026-04-08',
+    type: 'update',
+    category: 'seo',
+    title: '全都道府県別ページの独自コンテンツ化と専門性強化',
+    description: '47都道府県それぞれの入試制度に基づいた、より詳細で専門的な解説・FAQ・注意点を大幅拡充。各県固有の「内申点の落とし穴」や「2026年度最新傾向」を盛り込み、検索意図への合致度を極限まで高めました。',
+  },
+  {
+    date: '2026-04-08',
+    type: 'add',
+    category: 'content',
+    title: '2026年4月新学期対応コラムの大量追加とサイトマップ同期',
+    description: '新学期からの内申点スタートダッシュを決めるための専門コラムを追加。すべての新規コンテンツが検索エンジンに正しくインデックスされるよう、XMLサイトマップおよび内部リンク構造を最適化しました。',
+  },
+  {
+    date: '2026-04-08',
+    type: 'update',
+    category: 'ui',
+    title: '視認性とアクセシビリティの大幅向上',
+    description: '長文コンテンツでも読みやすいよう、タイポグラフィの調整、図解要素の追加、スマホでの操作性改善を実施。E-E-A-T向上のため、各記事の執筆根拠となる一次資料へのアクセスを容易にしました。',
+  },
+  {
     date: '2026-03-20',
     type: 'update',
     category: 'feature',

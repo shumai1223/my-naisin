@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "my-local-search": {
+      "command": "node",
+      "args": [
+        "search.mjs"
+      ]
+    }
+  }
+}
