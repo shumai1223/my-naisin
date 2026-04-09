@@ -7,7 +7,7 @@ import { Header } from "@/components/Header";
 export function GlobalHeaderBridge() {
   const pathname = usePathname();
 
-  if (pathname === "/") {
+  if (pathname === "/" || pathname.startsWith("/blog")) {
     return null;
   }
 

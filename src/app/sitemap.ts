@@ -22,14 +22,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: '/quality', priority: 0.6, changeFrequency: 'monthly' },
   ].map(page => ({
     url: `${baseUrl}${page.url}`,
-    lastModified: new Date(),
+    lastModified: new Date('2024-05-01'), // 固定日付にしてクローラの混乱を防ぐ
     changeFrequency: page.changeFrequency as MetadataRoute.Sitemap[0]['changeFrequency'],
     priority: page.priority,
   }));
 
   const prefecturePages = PREFECTURES.map(prefecture => ({
     url: `${baseUrl}/${prefecture.code}/naishin`,
-    lastModified: new Date(),
+    lastModified: new Date('2024-05-01'), // 固定日付にしてクローラの混乱を防ぐ
     changeFrequency: 'weekly' as MetadataRoute.Sitemap[0]['changeFrequency'],
     priority: 0.8,
   }));
@@ -44,7 +44,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // 都道府県別の逆算ページなども追加（もし存在すれば）
   const prefectureReversePages = PREFECTURES.map(prefecture => ({
     url: `${baseUrl}/${prefecture.code}/reverse`,
-    lastModified: new Date(),
+    lastModified: new Date('2024-05-01'), // 固定日付にしてクローラの混乱を防ぐ
     changeFrequency: 'monthly' as MetadataRoute.Sitemap[0]['changeFrequency'],
     priority: 0.6,
   }));

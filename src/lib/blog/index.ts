@@ -12,7 +12,7 @@ import { post as kansanNaishinVsSuNaishin } from '@/lib/blog/posts/kansan-naishi
 import { post as jitsugiKyokaPrefectureComparison } from '@/lib/blog/posts/jitsugi-kyoka-prefecture-comparison';
 import { post as naishinTargetGradesByPrefecture } from '@/lib/blog/posts/naishin-target-grades-by-prefecture';
 import { post as fukukyokaBairitsuByPrefecture } from '@/lib/blog/posts/fukukyoka-bairitsu-by-prefecture';
-import { post as whatIsNaishinten } from '@/lib/blog/posts/what-is-naishinten';
+
 import { post as naishintenAverageScore } from '@/lib/blog/posts/naishinten-average-score';
 import { post as howToRaiseNaishinten } from '@/lib/blog/posts/how-to-raise-naishinten';
 import { post as all3HighSchoolOptions } from '@/lib/blog/posts/all-3-high-school-options';
@@ -59,7 +59,7 @@ export const BLOG_POSTS: BlogPost[] = [
   jitsugiKyokaPrefectureComparison,
   naishinTargetGradesByPrefecture,
   fukukyokaBairitsuByPrefecture,
-  whatIsNaishinten,
+  
   naishintenAverageScore,
   howToRaiseNaishinten,
   all3HighSchoolOptions,

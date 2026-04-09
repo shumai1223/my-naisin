@@ -608,9 +608,80 @@ export const defaultGuide: PrefectureGuide = {
   ]
 };
 
+
+import { getPrefectureByCode } from './prefectures';
+
+
+import { getPrefectureByCode } from './prefectures';
+
 // ガイドデータを取得する関数
 export function getPrefectureGuide(prefectureCode: string): PrefectureGuide {
-  return prefectureGuides[prefectureCode] || defaultGuide;
+  // すでに詳細データがある県はそれを返す
+  if (prefectureGuides[prefectureCode]) {
+    return prefectureGuides[prefectureCode];
+  }
+
+  // データがない県は、prefectures.tsの基本データを使って固有の文章を生成する
+  const pref = getPrefectureByCode(prefectureCode);
+  if (!pref) return defaultGuide;
+
+  const targetText = pref.targetGrades.length === 1 
+    ? `中${pref.targetGrades[0]}のみが対象（集中対策が必要！）` 
+    : `中${pref.targetGrades.join('・')}が対象（学年ごとの比率に注意）`;
+    
+  const practicalText = pref.practicalMultiplier > 1 
+    ? `実技は${pref.practicalMultiplier}倍（実技教科の重要度が極めて高い）` 
+    : '実技は等倍（5教科と同じ重み、バランスが重要）';
+
+  return {
+    summary3lines: {
+      target: targetText,
+      practical: practicalText,
+      maxScore: `${pref.maxScore}点満点（志望校のボーダーラインを確認しよう）`
+    },
+    examples: {
+      all3: `${Math.floor(pref.maxScore * 0.6)}点 / ${pref.maxScore}点満点（中堅校の目安）`,
+      all4: `${Math.floor(pref.maxScore * 0.8)}点 / ${pref.maxScore}点満点（上位校の目安）`,
+      practicalPlus1: `実技を1つ上げると大きなアドバンテージに`
+    },
+    pitfalls: {
+      title: `${pref.name}入試の注意点と戦略`,
+      items: [
+        `${pref.name}の公立高校入試では、${targetText}です。`,
+        `特に注意すべきは副教科の扱いです。${practicalText}。`,
+        `満点が${pref.maxScore}点であることを意識し、自分の現在地と志望校の差を正確に把握しましょう。`,
+        `推薦入試や特色選抜では、一般入試と内申点の計算方法や配点が異なる場合があるため、必ず志望校の募集要項を確認してください。`,
+        `最新の入試制度変更（面接の有無や独自検査など）については、${pref.name}教育委員会の公式発表を定期的にチェックすることが合格への第一歩です。`
+      ]
+    },
+    faq: [
+      {
+        question: `${pref.name}の内申点は何点満点ですか？`,
+        answer: `${pref.name}の内申点は${pref.maxScore}点満点です。志望校の合格ラインから逆算して、あと何点必要か把握しましょう。`
+      },
+      {
+        question: `いつの成績が内申点に入りますか？`,
+        answer: `${targetText}となっています。`
+      },
+      {
+        question: `${pref.name}での実技教科の扱いは？`,
+        answer: `${practicalText}。定期テストだけでなく、日々の提出物や授業態度も重要です。`
+      }
+    ],
+    sources: [
+      {
+        name: `${pref.name}教育委員会`,
+        url: '',
+        lastVerified: '2026年4月8日',
+        notes: `${pref.name}の公立高校入学者選抜に関する公式情報を参照してください。`
+      }
+    ],
+    related: [
+      { title: `${pref.name}の内申点計算ツール`, url: `/${pref.code}/naishin` },
+      { title: `${pref.name}の志望校から逆算`, url: `/reverse?pref=${pref.code}` },
+      { title: '内申点アップの基本戦略', url: '/blog/naishin-guide' }
+    ]
+  };
 }
 
 // 都道府県データから動的にFAQを生成する関数

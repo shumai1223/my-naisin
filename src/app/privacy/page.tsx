@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { APP_NAME } from '@/lib/constants';
 
 export default function PrivacyPage() {
-  const lastUpdated = '2026年1月28日';
+  const lastUpdated = '2026年3月29日';
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
