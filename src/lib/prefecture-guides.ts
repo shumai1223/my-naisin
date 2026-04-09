@@ -556,7 +556,7 @@ export const prefectureGuides: Record<string, PrefectureGuide> = {
       { title: '愛知の「A・Bグループ」戦略ガイド', url: '/blog/aichi-ab-group' },
       { title: '内申30からの逆転合格術', url: '/blog/naishin-30-strategy' }
     ]
-  }
+  },
 
   ibaraki: {
     summary3lines: {
@@ -762,7 +762,6 @@ export const defaultGuide: PrefectureGuide = {
 import { getPrefectureByCode } from './prefectures';
 
 
-import { getPrefectureByCode } from './prefectures';
 
 // ガイドデータを取得する関数
 export function getPrefectureGuide(prefectureCode: string): PrefectureGuide {
