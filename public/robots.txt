@@ -6,11 +6,11 @@ Crawl-delay: 1
 Allow: /css/
 Allow: /js/
 Allow: /images/
+Allow: /_next/static/
 
-# Block admin/api routes
+# Block sensitive routes
 Disallow: /api/
 Disallow: /admin/
-Disallow: /_next/
 Disallow: /contact
 
 Sitemap: https://my-naishin.com/sitemap.xml

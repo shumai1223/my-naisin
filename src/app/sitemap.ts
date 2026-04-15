@@ -4,10 +4,10 @@ import { BLOG_POSTS } from '@/lib/blog-data';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://my-naishin.com';
-  // 2026年4月15日に更新日を統一。これによりクローラに「大規模なコンテンツ更新」を通知
+  // 2026年4月15日: サイト全体の大規模アップデートをシグナル
   const lastModified = new Date('2026-04-15');
 
-  // 1. 静的コアページ
+  // 1. 静的コアページ (最重要)
   const staticPages = [
     { url: '', priority: 1.0, changeFrequency: 'daily' },
     { url: '/tools', priority: 0.9, changeFrequency: 'weekly' },
@@ -18,7 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: '/glossary', priority: 0.7, changeFrequency: 'monthly' },
     { url: '/blog', priority: 0.8, changeFrequency: 'daily' },
     { url: '/about', priority: 0.7, changeFrequency: 'monthly' },
-    { url: '/quality', priority: 0.6, changeFrequency: 'monthly' },
+    { url: '/quality', priority: 0.7, changeFrequency: 'monthly' },
     { url: '/contact', priority: 0.5, changeFrequency: 'yearly' },
     { url: '/privacy', priority: 0.5, changeFrequency: 'yearly' },
     { url: '/terms', priority: 0.5, changeFrequency: 'yearly' },
@@ -30,7 +30,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: page.priority,
   }));
 
-  // 2. 都道府県別計算ページ（最重要コンテンツ）
+  // 2. 都道府県別計算ページ（最重要コンテンツ - リダイレクトを避け、直接のURLのみ記載）
   const prefectureNaishinPages = PREFECTURES.map(prefecture => ({
     url: `${baseUrl}/${prefecture.code}/naishin`,
     lastModified,
@@ -46,15 +46,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  // 4. 都道府県別インデックスページ（/tokyo など）
-  const prefectureIndexPages = PREFECTURES.map(prefecture => ({
-    url: `${baseUrl}/${prefecture.code}`,
-    lastModified,
-    changeFrequency: 'monthly' as const,
-    priority: 0.6,
-  }));
+  // ※ /tokyo などのインデックスページは /naishin へリダイレクトされるため、
+  // クローラ予算を浪費しないようサイトマップからは除外します。
 
-  // 5. ブログ個別記事
+  // 4. ブログ個別記事
   const blogPages = BLOG_POSTS.map(post => ({
     url: `${baseUrl}/blog/${post.slug}`,
     lastModified: new Date(post.lastUpdated || post.date || '2026-04-15'),
@@ -62,12 +57,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  // すべて結合
   return [
     ...staticPages,
     ...prefectureNaishinPages,
     ...prefectureReversePages,
-    ...prefectureIndexPages,
     ...blogPages,
   ];
 }

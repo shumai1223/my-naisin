@@ -5,20 +5,20 @@ import { getAllPosts } from '@/lib/blog-data';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 
 export const metadata = {
-  title: '内申点コラム（高校受験ガイド）| My Naishin',
+  title: '高校受験・内申点対策コラム【2026年最新】成績アップの秘訣を公開',
   description:
-    '内申点の計算方法、成績の上げ方、都道府県別の違い、推薦入試と一般入試の比較など、高校受験に役立つ情報を発信。中学生・保護者向け。',
+    '【2026年度入試対応】内申点の計算方法、成績の上げ方、都道府県別の違い、実技教科対策など、現役中学生と保護者が知るべき高校受験の最前線情報を発信中。全記事プロ監修・最新データに基づいています。',
   openGraph: {
-    title: '内申点コラム（高校受験ガイド）| My Naishin',
+    title: '高校受験・内申点対策コラム【2026年最新】',
     description:
-      '内申点の計算方法、成績の上げ方、都道府県別の違いなど、高校受験に役立つ情報を発信。',
+      '内申点の計算方法、成績の上げ方、都道府県別の違いなど、高校受験に役立つ最新情報を発信。',
     type: 'website' as const,
     locale: 'ja_JP',
     siteName: 'My Naishin - 内申点計算ツール',
   },
   twitter: {
     card: 'summary_large_image' as const,
-    title: '内申点コラム（高校受験ガイド）| My Naishin',
+    title: '高校受験・内申点対策コラム【2026年最新】',
     description:
       '内申点の計算方法、成績の上げ方、都道府県別の違いなど、高校受験に役立つ情報を発信。',
   },
@@ -70,23 +70,23 @@ export default function BlogPage() {
         <div className="relative mx-auto max-w-5xl px-4 pb-16 pt-12 text-center">
           <div className="mb-5 inline-flex items-center gap-2 rounded-full bg-blue-500/15 px-4 py-2 text-sm font-semibold text-blue-300 ring-1 ring-blue-400/20">
             <BookOpen className="h-4 w-4" />
-            内申点コラム
+            2026年度入試対応
           </div>
           <h1 className="text-4xl font-extrabold tracking-tight text-white md:text-5xl">
-            高校受験ガイド
+            内申点対策コラム
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-slate-300/90">
-            内申点の基礎から成績アップの実践テクニックまで。<br className="hidden sm:inline" />
-            中学生と保護者のための完全ガイド。
+            内申点の基礎知識から、主要5教科・実技4教科の具体的な成績アップ術まで。<br className="hidden sm:inline" />
+            2026年（令和8年）4月15日現在の最新入試データに基づき解説。
           </p>
           <div className="mt-6 flex items-center justify-center gap-6 text-sm text-slate-400">
             <span className="flex items-center gap-1.5">
               <BookOpen className="h-4 w-4" />
-              全 {posts.length} 記事
+              全 {posts.length} 記事公開中
             </span>
             <span className="flex items-center gap-1.5">
               <TrendingUp className="h-4 w-4" />
-              毎月更新
+              毎週火・木更新
             </span>
           </div>
         </div>
@@ -106,7 +106,7 @@ export default function BlogPage() {
                   {i === 0 && (
                     <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-amber-100 px-3 py-1 text-xs font-bold text-amber-700">
                       <Sparkles className="h-3 w-3" />
-                      おすすめ
+                      必読ガイド
                     </div>
                   )}
                   <div className="mb-2 flex items-center gap-2">
@@ -124,7 +124,7 @@ export default function BlogPage() {
                     {post.description}
                   </p>
                   <div className="mt-4 flex items-center gap-2 text-sm font-semibold text-blue-600 opacity-0 transition-opacity group-hover:opacity-100">
-                    記事を読む
+                    詳細を詳しく見る
                     <ArrowRight className="h-4 w-4" />
                   </div>
                 </Link>
@@ -143,7 +143,7 @@ export default function BlogPage() {
                   <h2 className="text-2xl font-extrabold tracking-tight text-gray-900">
                     {category}
                   </h2>
-                  <p className="text-sm text-gray-500">{categoryPosts.length}件の記事</p>
+                  <p className="text-sm text-gray-500">{categoryPosts.length}本の解説記事</p>
                 </div>
               </div>
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -181,7 +181,7 @@ export default function BlogPage() {
                       ))}
                     </div>
                     <div className="mt-4 flex items-center gap-1.5 text-sm font-semibold text-blue-600 opacity-0 transition-all group-hover:opacity-100">
-                      読む
+                      詳しく読む
                       <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
                     </div>
                   </Link>
@@ -193,21 +193,21 @@ export default function BlogPage() {
 
         {/* Bottom CTA */}
         <div className="border-t border-gray-100 pb-16 pt-12 text-center">
-          <h3 className="text-2xl font-extrabold text-gray-900">内申点を今すぐ計算</h3>
-          <p className="mt-2 text-gray-500">47都道府県対応の無料計算ツール</p>
+          <h3 className="text-2xl font-extrabold text-gray-900">あなたの内申点、正確に計算できていますか？</h3>
+          <p className="mt-2 text-gray-500">47都道府県対応の最新シミュレーターで、志望校への距離を確認しましょう。</p>
           <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
             <Link
               href="/"
               className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 px-7 py-3.5 text-sm font-bold text-white shadow-lg shadow-blue-500/20 transition-all hover:-translate-y-0.5 hover:shadow-xl"
             >
-              内申点を計算する
+              内申点を今すぐ計算する
               <ChevronRight className="h-4 w-4" />
             </Link>
             <Link
               href="/reverse"
               className="inline-flex items-center gap-2 rounded-full bg-gray-100 px-7 py-3.5 text-sm font-semibold text-gray-700 transition-all hover:bg-gray-200"
             >
-              志望校から逆算
+              目標から逆算シミュレーション
             </Link>
           </div>
         </div>

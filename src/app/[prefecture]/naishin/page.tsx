@@ -10,8 +10,9 @@ import {
 } from 'lucide-react';
 
 import { PREFECTURES, getPrefectureByCode } from '@/lib/prefectures';
-import { getPrefectureGuide, generateDynamicFAQ } from '@/lib/prefecture-guides';
+import { getPrefectureGuide } from '@/lib/prefecture-guides';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
+import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { ErrorReportForm } from '@/components/ErrorReportForm';
 import { PrefectureUniqueElements } from '@/components/PrefectureUniqueElements';
 import { PrefectureMinimumContent } from '@/components/PrefectureMinimumContent';
@@ -26,6 +27,25 @@ interface PageProps {
   params: Promise<{ prefecture: string }>;
 }
 
+export async function generateMetadata({ params }: PageProps) {
+  const { prefecture: prefectureCode } = await params;
+  const prefecture = getPrefectureByCode(prefectureCode);
+  if (!prefecture) return {};
+
+  return {
+    title: `${prefecture.name}の内申点計算ツール【2026年最新】満点・換算方法・対象学年`,
+    description: `${prefecture.name}の高校入試に対応した内申点計算シミュレーター。${prefecture.description}。実技教科の倍率や対象学年など、令和8年度（2026年度）入試の最新情報を網羅。志望校合格に必要な内申点の目安も解説。`,
+    alternates: {
+      canonical: `https://my-naishin.com/${prefectureCode}/naishin`,
+    },
+    openGraph: {
+      title: `${prefecture.name}の内申点計算ツール【2026年最新】`,
+      description: `${prefecture.name}の高校入試に対応した内申点計算シミュレーター。${prefecture.description}。`,
+      url: `https://my-naishin.com/${prefectureCode}/naishin`,
+    }
+  };
+}
+
 function getFormulaExplanation(prefecture: { targetGrades: number[]; gradeMultipliers: Record<number, number>; practicalMultiplier: number; maxScore: number }) {
   const parts: string[] = [];
   prefecture.targetGrades.forEach(grade => {
@@ -36,7 +56,7 @@ function getFormulaExplanation(prefecture: { targetGrades: number[]; gradeMultip
   });
   let formula = parts.join(' ＋ ');
   if (prefecture.practicalMultiplier > 1) {
-    formula += `（実技${prefecture.practicalMultiplier > 1 ? '倍' : ''}）`;
+    formula += `（実技${prefecture.practicalMultiplier}倍）`;
   }
   return formula;
 }
@@ -49,7 +69,14 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
     notFound();
   }
 
+  const guide = getPrefectureGuide(prefectureCode);
   const formulaText = getFormulaExplanation(prefecture);
+  
+  // FAQデータの準備
+  const faqItems = guide.faq.map(item => ({
+    question: item.question,
+    answer: item.answer
+  }));
 
   return (
     <>
@@ -60,6 +87,7 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
           { name: `${prefecture.name}の内申点計算`, url: `https://my-naishin.com/${prefectureCode}/naishin` }
         ]}
       />
+      <FAQPageSchema faqItems={faqItems} />
 
       <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
         <div className="mx-auto max-w-4xl px-4 py-8 md:py-12">
@@ -80,7 +108,7 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
               </div>
               <div>
                 <h1 className="text-2xl font-bold text-slate-800 md:text-3xl">
-                  {prefecture.name}の内申点計算ツール
+                  {prefecture.name}の内申点計算ツール【2026年最新】
                 </h1>
                 <p className="mt-1 text-sm text-slate-500">
                   {prefecture.region} | 2026年度入試対応（令和8年度入学者選抜）
@@ -201,15 +229,15 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
                 <div className="space-y-2 text-sm">
                   <div className="flex items-start gap-2">
                     <span className="text-blue-600 font-bold">1.</span>
-                    <span><strong>対象学年：</strong>中{prefecture.targetGrades.join('・')}が対象{prefecture.targetGrades.length === 1 ? '（注：集中対策が必要）' : '（早めの対策が有利）'}</span>
+                    <span dangerouslySetInnerHTML={{ __html: guide.summary3lines.target }} />
                   </div>
                   <div className="flex items-start gap-2">
                     <span className="text-blue-600 font-bold">2.</span>
-                    <span><strong>実技倍率：</strong>{prefecture.practicalMultiplier > 1 ? `${prefecture.practicalMultiplier}倍（実技得意な人有利）` : '等倍（バランス型が有利）'}</span>
+                    <span dangerouslySetInnerHTML={{ __html: guide.summary3lines.practical }} />
                   </div>
                   <div className="flex items-start gap-2">
                     <span className="text-blue-600 font-bold">3.</span>
-                    <span><strong>満点：</strong>{prefecture.maxScore}点{prefecture.maxScore >= 200 ? '（高得点戦略が必要）' : '（効率的な得点アップが可能）'}</span>
+                    <span dangerouslySetInnerHTML={{ __html: guide.summary3lines.maxScore }} />
                   </div>
                 </div>
               </div>
@@ -238,17 +266,14 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
               {/* 都道府県固有要素（学年比率チャート等） */}
               <PrefectureUniqueElements prefectureCode={prefectureCode} />
 
-              {/* 詳細解説テキスト */}
+              {/* 詳細解説テキスト（guide.pitfallsから生成） */}
               <div className="mt-8 space-y-4 text-sm text-slate-700">
-                {prefectureCode === 'tokyo' && (
-                  <div>
-                    <h4 className="mb-2 font-semibold text-slate-800">東京都の内申ポイント</h4>
-                    <p className="text-slate-600 leading-relaxed">
-                      東京都の内申は、まず「素内申（9教科の合計＝45点満点）」と、一般入試で使う「換算内申」を分けて考えるのがコツです。換算内申は、学力検査を行う教科の評定を1倍、学力検査を行わない教科の評定を2倍として合計します。都立の一般的な5教科入試では満点が65点（＝5教科25点＋実技4教科40点）になり、実技4教科の影響が大きくなります。
-                    </p>
-                  </div>
-                )}
-                {/* 他の県の条件分岐も同様に配置... */}
+                <h4 className="mb-2 font-bold text-slate-800 text-base">{guide.pitfalls.title}</h4>
+                <ul className="list-disc pl-5 space-y-2">
+                  {guide.pitfalls.items.map((item, i) => (
+                    <li key={i} dangerouslySetInnerHTML={{ __html: item }} />
+                  ))}
+                </ul>
               </div>
             </section>
 
