@@ -6,5 +6,10 @@
         "search.mjs"
       ]
     }
+  },
+  "enabledTools": {
+    "my-local-search": [
+      "web_search"
+    ]
   }
 }

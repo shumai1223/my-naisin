@@ -4,7 +4,8 @@ import { BLOG_POSTS } from '@/lib/blog-data';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://my-naishin.com';
-  const lastModified = new Date('2026-04-09');
+  // 2026年4月15日に更新日を統一。これによりクローラに「大規模なコンテンツ更新」を通知
+  const lastModified = new Date('2026-04-15');
 
   // 1. 静的コアページ
   const staticPages = [
@@ -56,7 +57,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // 5. ブログ個別記事
   const blogPages = BLOG_POSTS.map(post => ({
     url: `${baseUrl}/blog/${post.slug}`,
-    lastModified: new Date(post.lastUpdated || post.date || '2026-04-09'),
+    lastModified: new Date(post.lastUpdated || post.date || '2026-04-15'),
     changeFrequency: 'weekly' as const,
     priority: 0.8,
   }));
