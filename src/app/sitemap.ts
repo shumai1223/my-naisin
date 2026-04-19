@@ -4,8 +4,8 @@ import { BLOG_POSTS } from '@/lib/blog-data';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://my-naishin.com';
-  // 2026年4月15日: サイト全体の大規模アップデートをシグナル
-  const lastModified = new Date('2026-04-15');
+  // 2026年4月16日: サイトの「熱気」を伝える大規模アップデート
+  const lastModified = new Date('2026-04-16');
 
   // 1. 静的コアページ (最重要)
   const staticPages = [
@@ -30,11 +30,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: page.priority,
   }));
 
-  // 2. 都道府県別計算ページ（最重要コンテンツ - リダイレクトを避け、直接のURLのみ記載）
+  // 2. 都道府県別計算ページ（最重要コンテンツ - 直URLを優先）
   const prefectureNaishinPages = PREFECTURES.map(prefecture => ({
     url: `${baseUrl}/${prefecture.code}/naishin`,
     lastModified,
-    changeFrequency: 'weekly' as const,
+    changeFrequency: 'daily' as const, // クロール頻度を上げる
     priority: 0.9,
   }));
 
@@ -42,18 +42,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const prefectureReversePages = PREFECTURES.map(prefecture => ({
     url: `${baseUrl}/${prefecture.code}/reverse`,
     lastModified,
-    changeFrequency: 'monthly' as const,
+    changeFrequency: 'weekly' as const,
     priority: 0.7,
   }));
-
-  // ※ /tokyo などのインデックスページは /naishin へリダイレクトされるため、
-  // クローラ予算を浪費しないようサイトマップからは除外します。
 
   // 4. ブログ個別記事
   const blogPages = BLOG_POSTS.map(post => ({
     url: `${baseUrl}/blog/${post.slug}`,
-    lastModified: new Date(post.lastUpdated || post.date || '2026-04-15'),
-    changeFrequency: 'weekly' as const,
+    lastModified: new Date(post.lastUpdated || post.date || '2026-04-16'),
+    changeFrequency: 'daily' as const, // 更新アピールのため
     priority: 0.8,
   }));
 

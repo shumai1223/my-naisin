@@ -27,7 +27,20 @@ export function BlogRelatedArticles({
 
     // Use prefecture filter
     if (prefectureCode) {
-      return post.title.includes(prefectureCode) || post.content.includes(prefectureCode);
+      // マッピング辞書 (コードから日本語名)
+      const prefNames: Record<string, string> = {
+        tokyo: '東京',
+        kanagawa: '神奈川',
+        osaka: '大阪',
+        aichi: '愛知',
+        saitama: '埼玉',
+        chiba: '千葉',
+        hokkaido: '北海道',
+        fukuoka: '福岡',
+        hyogo: '兵庫'
+      };
+      const prefName = prefNames[prefectureCode] || '';
+      return (prefName && post.title.includes(prefName)) || post.tags.includes(prefName);
     }
     
     // Use tag filter
@@ -38,7 +51,13 @@ export function BlogRelatedArticles({
     return true;
   }).slice(0, prefectureCode ? limit : maxArticles);
 
-  if (relatedPosts.length === 0) return null;
+  // 都道府県ページで関連記事が少ない場合は、汎用的な「内申点の上げ方」などを出す
+  const displayPosts = (prefectureCode && relatedPosts.length < limit) 
+    ? [...relatedPosts, ...allPosts.filter(p => p.slug === 'how-to-raise-naishinten' || p.slug === 'naishin-guide').filter(p => !relatedPosts.find(rp => rp.slug === p.slug))]
+        .slice(0, limit)
+    : relatedPosts;
+
+  if (displayPosts.length === 0) return null;
 
   return (
     <section className="mt-8 rounded-2xl border border-blue-100 bg-gradient-to-br from-white to-blue-50/30 p-6 shadow-sm">
@@ -53,7 +72,7 @@ export function BlogRelatedArticles({
       </div>
       
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {relatedPosts.map((post) => (
+        {displayPosts.map((post) => (
           <Link 
             key={post.slug} 
             href={`/blog/${post.slug}`}

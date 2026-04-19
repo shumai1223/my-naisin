@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Heart, FileText, Shield, Mail, AlertTriangle, Sparkles, BookOpen, User, Target, MapPin } from 'lucide-react';
+import { Heart, FileText, Shield, Mail, AlertTriangle, Sparkles, BookOpen, User, Target, MapPin, ChevronRight } from 'lucide-react';
 
 import { APP_NAME } from '@/lib/constants';
 
@@ -14,9 +14,9 @@ export function Footer() {
       
       <div className="relative px-4 py-10 md:px-6">
         {/* Main footer content */}
-        <div className="grid gap-10 md:grid-cols-3">
+        <div className="grid gap-10 md:grid-cols-4">
           {/* About */}
-          <div>
+          <div className="md:col-span-1">
             <div className="flex items-center gap-3">
               <div className="relative">
                 <div className="grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-indigo-500 via-blue-500 to-violet-600 shadow-lg shadow-indigo-300/40">
@@ -31,104 +31,101 @@ export function Footer() {
             </div>
             <p className="mt-4 text-xs leading-relaxed text-slate-500">
               中高生の内申点計算をかんたんに。<br />
-              目標設定・教科分析・達成バッジで<br />
-              あなたの勉強をサポートします。
+              全国47都道府県の最新入試制度に対応。<br />
+              教育統計に基づいた確かな情報をお届けします。
             </p>
           </div>
 
-          {/* Features */}
+          {/* Quick Links */}
           <div>
-            <div className="text-xs font-bold uppercase tracking-wider text-slate-400">機能</div>
+            <div className="text-xs font-bold uppercase tracking-wider text-slate-400">計算ツール</div>
             <ul className="mt-3 space-y-2 text-xs text-slate-600">
-              <li className="flex items-center gap-2">
-                <span className="h-1 w-1 rounded-full bg-blue-500" />
-                内申点の自動計算
+              <li>
+                <Link href="/tokyo/naishin" className="hover:text-blue-600 flex items-center gap-1">
+                  東京都 内申計算 <ChevronRight className="h-3 w-3 opacity-30" />
+                </Link>
               </li>
-              <li className="flex items-center gap-2">
-                <span className="h-1 w-1 rounded-full bg-emerald-500" />
-                レーダーチャートで可視化
+              <li>
+                <Link href="/kanagawa/naishin" className="hover:text-blue-600 flex items-center gap-1">
+                  神奈川県 内申計算 <ChevronRight className="h-3 w-3 opacity-30" />
+                </Link>
               </li>
-              <li className="flex items-center gap-2">
-                <span className="h-1 w-1 rounded-full bg-amber-500" />
-                達成バッジシステム
+              <li>
+                <Link href="/osaka/naishin" className="hover:text-blue-600 flex items-center gap-1">
+                  大阪府 内申計算 <ChevronRight className="h-3 w-3 opacity-30" />
+                </Link>
               </li>
-              <li className="flex items-center gap-2">
-                <span className="h-1 w-1 rounded-full bg-violet-500" />
-                SNSシェア機能
+              <li>
+                <Link href="/aichi/naishin" className="hover:text-blue-600 flex items-center gap-1">
+                  愛知県 内申計算 <ChevronRight className="h-3 w-3 opacity-30" />
+                </Link>
               </li>
-              <li className="flex items-center gap-2">
-                <span className="h-1 w-1 rounded-full bg-rose-500" />
-                勉強アドバイス
+              <li>
+                <Link href="/prefectures" className="text-blue-600 font-bold flex items-center gap-1 mt-2">
+                  すべての都道府県を見る <ChevronRight className="h-3 w-3" />
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Column Tags */}
+          <div>
+            <div className="text-xs font-bold uppercase tracking-wider text-slate-400">受験攻略コラム</div>
+            <ul className="mt-3 space-y-2 text-xs text-slate-600">
+              <li>
+                <Link href="/blog/naishin-guide" className="hover:text-blue-600">
+                  内申点の仕組みを徹底解説
+                </Link>
+              </li>
+              <li>
+                <Link href="/blog/how-to-raise-naishinten" className="hover:text-blue-600">
+                  内申点を上げる15の方法
+                </Link>
+              </li>
+              <li>
+                <Link href="/blog/practical-subjects-naishin-strategy" className="hover:text-blue-600">
+                  副教科で「5」を取る戦略
+                </Link>
+              </li>
+              <li>
+                <Link href="/blog/tokyo-naishin-calculation-guide" className="hover:text-blue-600">
+                  東京都の換算内申ガイド
+                </Link>
               </li>
             </ul>
           </div>
 
           {/* Links */}
           <div>
-            <div className="text-xs font-bold uppercase tracking-wider text-slate-400">リンク</div>
+            <div className="text-xs font-bold uppercase tracking-wider text-slate-400">サイト情報</div>
             <div className="mt-3 flex flex-wrap gap-2">
               <Link 
-                href="/reverse" 
-                className="flex items-center gap-1.5 rounded-full bg-emerald-100 px-3 py-1.5 text-xs font-medium text-emerald-700 transition-all hover:bg-emerald-200"
+                href="/about" 
+                className="flex items-center gap-1.5 rounded-full bg-indigo-50 px-3 py-1.5 text-xs font-medium text-indigo-700 transition-all hover:bg-indigo-100"
               >
-                <Target className="h-3 w-3" />
-                志望校から逆算
+                <User className="h-3 w-3" />
+                運営者プロフィール
               </Link>
               <Link 
-                href="/prefectures" 
-                className="flex items-center gap-1.5 rounded-full bg-indigo-100 px-3 py-1.5 text-xs font-medium text-indigo-700 transition-all hover:bg-indigo-200"
+                href="/quality" 
+                className="flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1.5 text-xs font-medium text-emerald-700 transition-all hover:bg-emerald-100"
               >
-                <MapPin className="h-3 w-3" />
-                都道府県一覧
+                <Shield className="h-3 w-3" />
+                品質保証と根拠
               </Link>
               <Link 
                 href="/glossary" 
-                className="flex items-center gap-1.5 rounded-full bg-amber-100 px-3 py-1.5 text-xs font-medium text-amber-700 transition-all hover:bg-amber-200"
+                className="flex items-center gap-1.5 rounded-full bg-amber-50 px-3 py-1.5 text-xs font-medium text-amber-700 transition-all hover:bg-amber-100"
               >
                 <BookOpen className="h-3 w-3" />
                 用語辞典
               </Link>
               <Link 
-                href="/blog" 
-                className="flex items-center gap-1.5 rounded-full bg-blue-100 px-3 py-1.5 text-xs font-medium text-blue-700 transition-all hover:bg-blue-200"
-              >
-                <BookOpen className="h-3 w-3" />
-                内申点コラム
-              </Link>
-              <Link 
-                href="/terms" 
-                className="flex items-center gap-1.5 rounded-full bg-slate-100 px-3 py-1.5 text-xs text-slate-600 transition-all hover:bg-blue-100 hover:text-blue-700"
-              >
-                <FileText className="h-3 w-3" />
-                利用規約
-              </Link>
-              <Link 
-                href="/privacy" 
-                className="flex items-center gap-1.5 rounded-full bg-slate-100 px-3 py-1.5 text-xs text-slate-600 transition-all hover:bg-emerald-100 hover:text-emerald-700"
-              >
-                <Shield className="h-3 w-3" />
-                プライバシー
-              </Link>
-              <Link 
-                href="/disclaimer" 
-                className="flex items-center gap-1.5 rounded-full bg-slate-100 px-3 py-1.5 text-xs text-slate-600 transition-all hover:bg-amber-100 hover:text-amber-700"
-              >
-                <AlertTriangle className="h-3 w-3" />
-                免責事項
-              </Link>
-              <Link 
                 href="/contact" 
-                className="flex items-center gap-1.5 rounded-full bg-slate-100 px-3 py-1.5 text-xs text-slate-600 transition-all hover:bg-violet-100 hover:text-violet-700"
+                className="flex items-center gap-1.5 rounded-full bg-violet-50 px-3 py-1.5 text-xs font-medium text-violet-700 transition-all hover:bg-violet-100"
               >
                 <Mail className="h-3 w-3" />
                 お問い合わせ
-              </Link>
-              <Link 
-                href="/about" 
-                className="flex items-center gap-1.5 rounded-full bg-slate-100 px-3 py-1.5 text-xs text-slate-600 transition-all hover:bg-indigo-100 hover:text-indigo-700"
-              >
-                <User className="h-3 w-3" />
-                運営者情報
               </Link>
             </div>
           </div>
@@ -139,10 +136,9 @@ export function Footer() {
           <div className="flex items-start gap-3">
             <AlertTriangle className="h-4 w-4 shrink-0 text-amber-500" />
             <p className="text-[11px] leading-relaxed text-amber-800">
-              <strong>ご注意:</strong> 内申点の計算方法は地域・学校によって異なる場合があります。
-              このアプリは目安としてお楽しみください。
-              実際の進路相談は学校の先生にご確認ください。
-              詳しくは<Link href="/disclaimer" className="font-medium text-amber-700 underline hover:text-amber-900">免責事項</Link>をご覧ください。
+              <strong>免責事項:</strong> 当サイトの計算結果は参考値です。実際の入試における内申点は、各中学校が作成する正式な調査書の内容に基づきます。
+              正確な情報については、各都道府県教育委員会または在籍校にご確認ください。
+              詳細は<Link href="/disclaimer" className="font-bold underline">免責事項</Link>をご覧ください。
             </p>
           </div>
         </div>
@@ -153,28 +149,16 @@ export function Footer() {
             © 2026 {APP_NAME}. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
-            <Link 
-              href="/guide" 
-              className="flex items-center gap-1 text-[11px] text-slate-400 hover:text-blue-500 transition-colors"
-            >
-              <BookOpen className="h-3 w-3" />
-              利用ガイド
-            </Link>
+            <Link href="/terms" className="text-[11px] text-slate-400 hover:text-blue-500">利用規約</Link>
             <div className="h-3 w-px bg-slate-200" />
-            <Link 
-              href="/quality" 
-              className="flex items-center gap-1 text-[11px] text-slate-400 hover:text-blue-500 transition-colors"
-            >
-              <Shield className="h-3 w-3" />
-              品質保証
-            </Link>
+            <Link href="/privacy" className="text-[11px] text-slate-400 hover:text-blue-500">プライバシーポリシー</Link>
             <div className="h-3 w-px bg-slate-200" />
             <div className="flex items-center gap-1 text-[11px] text-slate-400">
               Made with <Heart className="h-3 w-3 text-rose-400" /> for students
             </div>
             <div className="h-3 w-px bg-slate-200" />
             <div className="text-[11px] text-slate-400">
-              v2026.1
+              v2026.4.16
             </div>
           </div>
         </div>

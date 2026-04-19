@@ -7,6 +7,7 @@ import {
   BookOpen,
   Info,
   Sparkles,
+  ExternalLink,
 } from 'lucide-react';
 
 import { PREFECTURES, getPrefectureByCode } from '@/lib/prefectures';
@@ -183,9 +184,58 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
             {/* 関連ブログ記事 - 計算ツールの直下に配置して回遊性を高める */}
             <BlogRelatedArticles prefectureCode={prefectureCode} limit={3} />
 
-            {/* 根拠サマリー */}
-            <section className="mt-8">
-              <EvidenceSummary prefectureCode={prefectureCode} />
+            {/* 根拠サマリー（一次リンクの配置） */}
+            <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
+                <Info className="h-5 w-5 text-blue-500" />
+                制度の詳しい解説と一次情報
+              </h2>
+              <p className="mb-4 text-sm text-slate-600 leading-relaxed">
+                {prefecture.name}の高校入試制度について、より詳しく知りたい方は以下の信頼できる情報源をご確認ください。
+              </p>
+              <div className="grid gap-3">
+                {prefecture.sourceUrl && (
+                  <a 
+                    href={prefecture.sourceUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-between rounded-xl border border-slate-100 bg-slate-50 p-4 transition-all hover:border-blue-300 hover:bg-blue-50 group"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-white shadow-sm group-hover:bg-blue-100">
+                        <ExternalLink className="h-5 w-5 text-blue-600" />
+                      </div>
+                      <div className="text-left">
+                        <div className="text-sm font-bold text-slate-800">最新の入試制度・内申点解説 (1)</div>
+                        <div className="text-xs text-slate-500">外部の信頼できる解説ページへ</div>
+                      </div>
+                    </div>
+                    <ChevronRight className="h-4 w-4 text-slate-300 group-hover:text-blue-500" />
+                  </a>
+                )}
+                {prefecture.sourceUrl2 && (
+                  <a 
+                    href={prefecture.sourceUrl2}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-between rounded-xl border border-slate-100 bg-slate-50 p-4 transition-all hover:border-blue-300 hover:bg-blue-50 group"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-white shadow-sm group-hover:bg-blue-100">
+                        <ExternalLink className="h-5 w-5 text-blue-600" />
+                      </div>
+                      <div className="text-left">
+                        <div className="text-sm font-bold text-slate-800">最新の入試制度・内申点解説 (2)</div>
+                        <div className="text-xs text-slate-500">外部の信頼できる解説ページへ</div>
+                      </div>
+                    </div>
+                    <ChevronRight className="h-4 w-4 text-slate-300 group-hover:text-blue-500" />
+                  </a>
+                )}
+              </div>
+              <div className="mt-4 p-3 rounded-lg bg-emerald-50 border border-emerald-100 text-[11px] text-emerald-800 leading-relaxed">
+                ※当ツールの計算ロジックは、上記リンク先の情報および各教育委員会が公開する「令和8年度入学者選抜実施要綱」等に基づき、2026年度入試向けにプログラムされています。最終確認日：2026年4月19日
+              </div>
             </section>
 
             {/* ツールガイド */}

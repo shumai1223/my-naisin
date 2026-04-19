@@ -4,11 +4,11 @@ export const post: BlogPost = {
     slug: 'kansan-naishin-vs-su-naishin',
     title: '【図解】換算内申と素内申の違いとは？東京都の計算を例に解説',
     description: '「素内申」と「換算内申」の違いを徹底解説。東京都の65点満点の計算方法、調査書点への変換まで具体例で分かりやすく説明します。',
-    date: '2026-01-28',
+    date: '2026-04-19',
     category: '内申点の基礎',
     readTime: '10分',
     tags: ['換算内申', '素内申', '東京都', '計算方法'],
-    lastUpdated: '2026-01-30',
+    lastUpdated: '2026-04-19',
     author: '運営者（My Naishin）',
     sources: [
       { name: '東京都教育委員会', url: 'https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/exam/' }

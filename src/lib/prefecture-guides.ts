@@ -73,7 +73,7 @@ export const prefectureGuides: Record<string, PrefectureGuide> = {
       {
         name: '東京都教育委員会（入学者選抜）',
         url: 'https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/exam/',
-        lastVerified: '2026年2月10日',
+        lastVerified: '2026年4月19日',
         notes: '令和8年度の最新実施要綱に基づき更新済み。'
       }
     ],
@@ -123,7 +123,7 @@ export const prefectureGuides: Record<string, PrefectureGuide> = {
       {
         name: '神奈川県教育委員会（公立高校入試）',
         url: 'https://www.pref.kanagawa.jp/docs/dc4/nyusen/nyusen.html',
-        lastVerified: '2026年2月10日',
+        lastVerified: '2026年4月19日',
         notes: '面接廃止後の新制度に対応した情報を掲載。'
       }
     ],
@@ -173,7 +173,7 @@ export const prefectureGuides: Record<string, PrefectureGuide> = {
       {
         name: '大阪府教育委員会（入試情報）',
         url: 'https://www.pref.osaka.lg.jp/kotogakko/gakuji-g3/',
-        lastVerified: '2026年2月10日',
+        lastVerified: '2026年4月19日',
         notes: '英検読み替え制度、C問題採用校の最新リストを確認。'
       }
     ],
@@ -227,7 +227,7 @@ export const prefectureGuides: Record<string, PrefectureGuide> = {
       {
         name: '埼玉県教育委員会',
         url: 'https://www.pref.saitama.lg.jp/f2208/nyuushi.html',
-        lastVerified: '2026年1月30日',
+        lastVerified: '2026年4月19日',
         notes: '令和8年度埼玉県公立高等学校入学者選抜実施要綱 第3章「選抜方法」'
       }
     ],
@@ -281,7 +281,7 @@ export const prefectureGuides: Record<string, PrefectureGuide> = {
       {
         name: '千葉県教育委員会',
         url: 'https://www.pref.chiba.lg.jp/kyouiku/shidou/nyuushi/koukou/index.html',
-        lastVerified: '2026年1月30日',
+        lastVerified: '2026年4月19日',
         notes: '令和8年度千葉県公立高等学校入学者選抜実施要綱 第2章「選抜方法」'
       }
     ],
@@ -335,7 +335,7 @@ export const prefectureGuides: Record<string, PrefectureGuide> = {
       {
         name: '北海道教育委員会',
         url: 'https://www.dokyoi.pref.hokkaido.lg.jp/hk/gks/koukounyuusenn.html',
-        lastVerified: '2026年1月30日',
+        lastVerified: '2026年4月19日',
         notes: '令和8年度北海道立高等学校入学者選抜実施要綱 第3章「調査書の取扱い」'
       }
     ],
@@ -389,7 +389,7 @@ export const prefectureGuides: Record<string, PrefectureGuide> = {
       {
         name: '福岡県教育委員会',
         url: 'https://www.pref.fukuoka.lg.jp/contents/kennittei.html',
-        lastVerified: '2026年1月31日',
+        lastVerified: '2026年4月19日',
         notes: '令和8年度福岡県立高等学校入学者選抜実施要綱 第2章「選抜方法」'
       }
     ],
@@ -443,7 +443,7 @@ export const prefectureGuides: Record<string, PrefectureGuide> = {
       {
         name: '兵庫県教育委員会',
         url: 'https://www2.hyogo-c.ed.jp/hpe/koko/nyuushi/',
-        lastVerified: '2026年1月31日',
+        lastVerified: '2026年4月19日',
         notes: '令和8年度兵庫県立高等学校入学者選抜実施要綱 第3章「選抜方法」'
       }
     ],
@@ -497,7 +497,7 @@ export const prefectureGuides: Record<string, PrefectureGuide> = {
       {
         name: '広島県教育委員会',
         url: 'https://www.pref.hiroshima.lg.jp/site/kyouiku/08senior-2nd-r8-nyuushi-r8-kou-r8-kou-mokuji-r8-kou-mokuji.html',
-        lastVerified: '2026年1月31日',
+        lastVerified: '2026年4月19日',
         notes: '令和8年度広島県立高等学校入学者選抜実施要綱 第3章「選抜方法」'
       }
     ],
@@ -547,7 +547,7 @@ export const prefectureGuides: Record<string, PrefectureGuide> = {
       {
         name: '愛知県教育委員会（高等学校入試）',
         url: 'https://www.pref.aichi.jp/soshiki/kotogakko/0000027366.html',
-        lastVerified: '2026年2月10日',
+        lastVerified: '2026年4月19日',
         notes: '令和8年度の新入試日程・制度に基づき更新。'
       }
     ],
@@ -602,7 +602,7 @@ export const prefectureGuides: Record<string, PrefectureGuide> = {
       {
         name: '青森県教育委員会 高校入試情報',
         url: 'https://www.pref.aomori.lg.jp/soshiki/kyoiku/e-gakyo/senbatsu2025.html',
-        lastVerified: '2026年4月9日',
+        lastVerified: '2026年4月19日',
         notes: '令和8年度（2026年度）の最新の選抜基準、各高等学校の選抜方法（比率など）については、夏以降に発表される公式情報を必ずご確認ください。'
       }
     ],
@@ -650,7 +650,7 @@ export const prefectureGuides: Record<string, PrefectureGuide> = {
       {
         name: '岩手県教育委員会 高校入試情報',
         url: 'https://www.pref.iwate.jp/kyouikubunka/kyouiku/gakkou/senbatsu/index.html',
-        lastVerified: '2026年4月9日',
+        lastVerified: '2026年4月19日',
         notes: '令和8年度（2026年度）の正式な内申点・学力検査の比率、推薦入試の募集要項については、必ず岩手県教育委員会の公式サイトで最新情報をご確認ください。'
       }
     ],
@@ -699,7 +699,7 @@ export const prefectureGuides: Record<string, PrefectureGuide> = {
       {
         name: '宮城県教育委員会 高校入学者選抜情報',
         url: 'https://www.pref.miyagi.jp/soshiki/koukyou/r8-nyushi.html',
-        lastVerified: '2026年4月9日',
+        lastVerified: '2026年4月19日',
         notes: '令和8年度（2026年度）の「共通選抜」と「特色選抜」の具体的な選抜方法や配点比率については、今後発表される宮城県教育委員会の公式情報を必ずご確認ください。'
       }
     ],
@@ -749,7 +749,7 @@ export const defaultGuide: PrefectureGuide = {
     {
       name: '各都道府県教育委員会',
       url: '',
-      lastVerified: '2026年1月30日',
+      lastVerified: '2026年4月19日',
       notes: '各県の入学者選抜要綱を参照'
     }
   ],
@@ -823,7 +823,7 @@ export function getPrefectureGuide(prefectureCode: string): PrefectureGuide {
       {
         name: `${pref.name}教育委員会`,
         url: '',
-        lastVerified: '2026年4月8日',
+        lastVerified: '2026年4月19日',
         notes: `${pref.name}の公立高校入学者選抜に関する公式情報を参照してください。`
       }
     ],

@@ -4,11 +4,11 @@ export const post: BlogPost = {
     slug: 'jitsugi-kyoka-prefecture-comparison',
     title: '【一覧】実技4教科（副教科）が有利な県・不利な県を徹底比較！',
     description: '実技教科の内申点が2倍になる県、等倍の県を一覧で比較。副教科が得意な人・苦手な人、それぞれに有利な都道府県を解説します。',
-    date: '2026-01-22',
+    date: '2026-04-19',
     category: '都道府県別',
     readTime: '8分',
     tags: ['実技教科', '副教科', '都道府県比較', '傾斜配点'],
-    lastUpdated: '2026-01-30',
+    lastUpdated: '2026-04-19',
     author: '運営者（My Naishin）',
     sources: [
       { name: '各都道府県教育委員会公式サイト', url: '#' }

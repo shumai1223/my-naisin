@@ -1,6 +1,7 @@
 // 県別リンクリストコンポーネント
 import Link from 'next/link';
-import { PREFECTURES, getPrefectureByCode } from '@/lib/prefectures';
+import { PREFECTURES, REGIONS } from '@/lib/prefectures';
+import { ChevronRight, MapPin } from 'lucide-react';
 
 interface PrefectureLinkListProps {
   region?: string;
@@ -21,20 +22,22 @@ export function PrefectureLinkList({ region, limit }: PrefectureLinkListProps) {
   }
   
   return (
-    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
       {prefectures.map((prefecture) => (
         <div key={prefecture.code} className="prefecture-item">
           <Link 
             href={`/${prefecture.code}/naishin`} 
-            className="prefecture-link block rounded-lg border border-slate-200 bg-white p-4 transition-colors hover:border-blue-300 hover:bg-blue-50"
+            className="prefecture-link block rounded-xl border border-slate-200 bg-white p-4 transition-all hover:border-blue-300 hover:bg-blue-50 hover:shadow-sm"
           >
-            <h4 className="font-semibold text-slate-800">{prefecture.name}</h4>
-            <p className="mt-1 text-sm text-blue-600 font-medium">{prefecture.maxScore}点満点</p>
-            <div className="mt-2 text-xs text-slate-500">
-              中{prefecture.targetGrades.join('・')}対象
+            <div className="flex items-center justify-between">
+              <h4 className="font-bold text-slate-800">{prefecture.name}</h4>
+              <ChevronRight className="h-3.5 w-3.5 text-slate-300" />
             </div>
-            <div className="mt-2 flex items-center gap-2 text-xs text-slate-400">
-              <span>→ 詳細を見る</span>
+            <div className="mt-1 flex items-center justify-between">
+              <p className="text-xs text-blue-600 font-bold">{prefecture.maxScore}点満点</p>
+              <div className="text-[10px] text-slate-400">
+                中{prefecture.targetGrades.join('・')}
+              </div>
             </div>
           </Link>
         </div>
@@ -45,26 +48,25 @@ export function PrefectureLinkList({ region, limit }: PrefectureLinkListProps) {
 
 // 地域別リストコンポーネント
 export function RegionPrefectureList() {
-  const regions = [
-    { name: '北海道・東北', code: 'hokkaido-tohoku' },
-    { name: '関東', code: 'kanto' },
-    { name: '中部', code: 'chubu' },
-    { name: '近畿', code: 'kinki' },
-    { name: '中国・四国', code: 'chugoku-shikoku' },
-    { name: '九州・沖縄', code: 'kyushu-okinawa' }
-  ];
-  
   return (
-    <div className="space-y-8">
-      {regions.map((region) => {
-        const regionPrefectures = PREFECTURES.filter(p => p.region === region.name);
+    <div className="space-y-10">
+      {REGIONS.map((region) => {
+        const regionPrefectures = PREFECTURES.filter(p => p.region === region);
         
         return (
-          <div key={region.code} className="region-section">
-            <h3 className="mb-4 text-lg font-bold text-slate-800">
-              {region.name}（{regionPrefectures.length}件）
-            </h3>
-            <PrefectureLinkList region={region.name} />
+          <div key={region} className="region-section">
+            <div className="mb-4 flex items-center gap-2">
+              <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-blue-100 text-blue-600">
+                <MapPin className="h-4 w-4" />
+              </div>
+              <h3 className="text-lg font-bold text-slate-800">
+                {region}エリア
+              </h3>
+              <span className="text-xs font-medium text-slate-400 bg-slate-100 px-2 py-0.5 rounded-full">
+                {regionPrefectures.length}
+              </span>
+            </div>
+            <PrefectureLinkList region={region} />
           </div>
         );
       })}

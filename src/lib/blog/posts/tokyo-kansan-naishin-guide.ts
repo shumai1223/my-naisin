@@ -8,7 +8,7 @@ export const post: BlogPost = {
     category: '都道府県別対策',
     readTime: '10分',
     tags: ['東京都', '換算内申', '都立高校', '入試'],
-    lastUpdated: '2026-01-30',
+    lastUpdated: '2026-04-19',
     author: '運営者（My Naishin）',
     sources: [
       { name: '東京都教育委員会 入学者選抜', url: 'https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/exam/' },

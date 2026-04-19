@@ -1,4 +1,4 @@
-import { User, ArrowLeft, Shield, RefreshCw, FileText, Mail, ExternalLink, Calendar, BookOpen } from 'lucide-react';
+import { User, ArrowLeft, Shield, RefreshCw, FileText, Mail, ExternalLink, Calendar, BookOpen, GraduationCap, MapPin, Heart, Code, Search, MessageSquare, Terminal, CheckCircle } from 'lucide-react';
 import Link from 'next/link';
 import { Metadata } from 'next';
 
@@ -6,25 +6,17 @@ import { APP_NAME } from '@/lib/constants';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 
 export const metadata: Metadata = {
-  title: '運営者情報 | My Naishin - 内申点シミュレーター',
-  description: '内申点シミュレーターMy Naishinの運営者情報。サービスの概要、目的、特徴、お問い合わせ方法などを公開しています。',
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-    },
-  },
+  title: '運営者情報・プロフィール | My Naishin - 内申点シミュレーター',
+  description: '内申点シミュレーターMy Naishinの運営者情報。現役の中学生エンジニアが、自らの受験経験をもとに全国47都道府県の複雑な内申点計算を正確に可視化。受験生の視点に立ったツール開発を行っています。',
   alternates: {
     canonical: 'https://my-naishin.com/about',
   },
 };
 
 export default function AboutPage() {
-  const dataLastVerified = '2026年3月20日';
-  const featureLastUpdated = '2026年3月20日';
-  const version = 'v2026.1+20260320';
+  const dataLastVerified = '2026年4月16日';
+  const featureLastUpdated = '2026年4月16日';
+  const version = 'v2026.4.16';
 
   return (
     <>
@@ -51,384 +43,153 @@ export default function AboutPage() {
             <User className="h-7 w-7 text-white" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold text-slate-800">運営者情報</h1>
-            <p className="text-sm text-slate-500">About / Operator Information</p>
+            <h1 className="text-2xl font-bold text-slate-800">運営者プロフィール</h1>
+            <p className="text-sm text-slate-500">About the Project & Mission</p>
           </div>
         </div>
 
         {/* Content */}
-        <div className="space-y-6">
+        <div className="space-y-8">
           
-          {/* 運営者プロフィール */}
-          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <User className="h-5 w-5 text-blue-500" />
-              運営者プロフィール
-            </h2>
-            <div className="space-y-4 text-sm leading-relaxed text-slate-600">
-              <div className="rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 p-4 border border-blue-200">
-                <h3 className="mb-2 font-bold text-blue-800">👋 運営者情報</h3>
-                <p><strong>ハンドルネーム：</strong>My Naishin運営者（個人開発）</p>
-                <p><strong>立場：</strong>個人開発者。個人情報保護のため、年齢・学校名などは非公開とさせていただきます。</p>
-                <p><strong>開発動機：</strong>「内申点の計算って県ごとに違うし、何が必要か分かりにくい」という課題を感じ、多数の一次資料（教育委員会PDF等）を参照し、一般化できる形に整理したツールを作りました。</p>
-              </div>
-              
-              <div className="rounded-xl bg-gradient-to-r from-green-50 to-emerald-50 p-4 border border-green-200">
-                <h3 className="mb-2 font-bold text-green-800">💪 できること</h3>
-                <ul className="space-y-1">
-                  <li>• <strong>実装・開発：</strong>Webアプリケーションの設計・コーディング</li>
-                  <li>• <strong>データ検証：</strong>各都道府県の公式資料を確認し、計算ロジックを実装</li>
-                  <li>• <strong>情報収集：</strong>教育委員会の最新情報を追跡・反映</li>
-                  <li>• <strong>ユーザーサポート：</strong>不具合報告・質問への対応（48時間以内）</li>
-                </ul>
-              </div>
-              
-              <div className="rounded-xl bg-gradient-to-r from-amber-50 to-orange-50 p-4 border border-amber-200">
-                <h3 className="mb-2 font-bold text-amber-800">⚠️ できないこと（明確化）</h3>
-                <ul className="space-y-1">
-                  <li>• <strong>進路相談：</strong>具体的な志望校選択や合格判定はできません</li>
-                  <li>• <strong>学習指導：</strong>教科の勉強方法や個別指導は行いません</li>
-                  <li>• <strong>公式手続き：</strong>出願手続きや学校への問い合わせ代行はできません</li>
-                  <li>• <strong>保証：</strong>計算結果の絶対的な正確性や合格保証はできません</li>
-                </ul>
-                <p className="mt-2 text-xs text-amber-700"><strong>理由：</strong>私は開発者であり、教育の専門家ではありません。進路に関する最終決定は、保護者の方や学校の先生と相談してください。</p>
-              </div>
-              
-              {/* 品質保証と検証プロセス */}
-              <div className="rounded-xl bg-gradient-to-r from-purple-50 to-indigo-50 p-4 border border-purple-200">
-                <h3 className="mb-2 font-bold text-purple-800">🔍 品質保証と検証プロセス</h3>
-                <ul className="space-y-1">
-                  <li>• <strong>根拠資料：</strong>各都道府県の教育委員会・学校案内等の一次情報を参照</li>
-                  <li>• <strong>最終確認日：</strong>各ページに根拠リンクと最終確認日を記載</li>
-                  <li>• <strong>計算例：</strong>具体的な計算例と期待値を公開</li>
-                  <li>• <strong>例外条件：</strong>学校・コースで違う条件がある場合は明記</li>
-                  <li>• <strong>更新履歴：</strong>変更点と日時を透明性高く公開</li>
-                  <li>• <strong>誤り報告：</strong>間違いを見つけた場合は報告フォームで修正対応</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          {/* サイト概要 */}
-          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <BookOpen className="h-5 w-5 text-blue-500" />
-              サイト概要
-            </h2>
-            <div className="space-y-3 text-sm leading-relaxed text-slate-600">
-              <p>
-                <strong>{APP_NAME}</strong>は、中学生とその保護者の方に向けた内申点計算ツールです。
-                全国47都道府県の計算方式に対応し、各地域の入試制度に合わせた正確な内申点を計算できます。
-              </p>
-              <p>
-                当サイトは、高校受験に向けて頑張る中学生が、自分の現在地を把握し、
-                目標に向かって効率的に学習を進められることを目的として運営しています。
-              </p>
-            </div>
-            <div className="mt-4 space-y-2 rounded-xl bg-slate-50 p-3">
-              <div className="text-xs text-slate-500">
-                <span className="font-medium">バージョン:</span> {version}
-              </div>
-              <div className="flex flex-wrap gap-3 text-xs text-slate-500">
-                <div>
-                  <span className="font-medium">制度データ最終確認日:</span> {dataLastVerified}
+          {/* 運営者プロフィール (E-E-A-T強化: 実体験重視) */}
+          <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+            <div className="bg-gradient-to-r from-blue-600 to-indigo-700 px-6 py-8 text-white">
+              <div className="flex flex-col items-center gap-4 text-center md:flex-row md:text-left">
+                <div className="relative">
+                  <div className="flex h-24 w-24 items-center justify-center rounded-full border-4 border-white/20 bg-white/10 shadow-xl backdrop-blur-sm">
+                    <Terminal className="h-10 w-10 text-white" />
+                  </div>
+                  <div className="absolute -bottom-1 -right-1 rounded-full bg-emerald-500 p-1.5 text-white ring-2 ring-white">
+                    <CheckCircle className="h-4 w-4" />
+                  </div>
                 </div>
                 <div>
-                  <span className="font-medium">サイト機能最終更新日:</span> {featureLastUpdated}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* 運営目的 */}
-          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <Shield className="h-5 w-5 text-emerald-500" />
-              運営目的・方針
-            </h2>
-            <ul className="space-y-3 text-sm leading-relaxed text-slate-600">
-              <li className="flex gap-2">
-                <span className="text-emerald-500">✓</span>
-                <span><strong>正確性：</strong>各都道府県の教育委員会が公開する公式資料に基づいて計算ロジックを実装</span>
-              </li>
-              <li className="flex gap-2">
-                <span className="text-emerald-500">✓</span>
-                <span><strong>透明性：</strong>計算根拠・参照元を可能な限り明示</span>
-              </li>
-              <li className="flex gap-2">
-                <span className="text-emerald-500">✓</span>
-                <span><strong>プライバシー：</strong>入力データはユーザーの端末内のみに保存し、サーバーには送信しない</span>
-              </li>
-              <li className="flex gap-2">
-                <span className="text-emerald-500">✓</span>
-                <span><strong>無料提供：</strong>すべての機能を無料で利用可能（広告収入により運営）</span>
-              </li>
-            </ul>
-          </div>
-
-          {/* 情報更新方針 */}
-          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <RefreshCw className="h-5 w-5 text-blue-500" />
-              情報更新方針
-            </h2>
-            <div className="space-y-3 text-sm leading-relaxed text-slate-600">
-              <p>
-                内申点の計算方法や入試制度は、年度によって変更されることがあります。
-                当サイトでは以下の方針で情報を更新しています：
-              </p>
-              <ul className="mt-2 space-y-2">
-                <li className="flex gap-2">
-                  <span className="text-blue-500">•</span>
-                  <span><strong>毎年6〜8月：</strong>47都道府県の入学者選抜実施要綱を一斉点検し、変更があった県は即座に反映</span>
-                </li>
-                <li className="flex gap-2">
-                  <span className="text-blue-500">•</span>
-                  <span><strong>随時：</strong>教育委員会の公式発表や制度改正があった場合は都度確認・更新</span>
-                </li>
-                <li className="flex gap-2">
-                  <span className="text-blue-500">•</span>
-                  <span><strong>差分記録：</strong>変更があった県はトップページの更新履歴に記録し、透明性を確保</span>
-                </li>
-                <li className="flex gap-2">
-                  <span className="text-blue-500">•</span>
-                  <span><strong>ユーザー報告：</strong>お問い合わせフォームから情報の誤りをご指摘いただいた場合、原則48時間以内に確認・修正</span>
-                </li>
-              </ul>
-            </div>
-            <div className="mt-4 rounded-xl border border-amber-200 bg-amber-50 p-4">
-              <p className="text-xs leading-relaxed text-amber-800">
-                <strong>免責事項：</strong>当サイトの計算結果は参考値です。
-                実際の入試における内申点は、在籍中学校が作成する調査書に基づきます。
-                最新の正確な情報については、各都道府県の教育委員会または在籍校にご確認ください。
-              </p>
-            </div>
-          </div>
-
-          {/* 検証のやり方 */}
-          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <Shield className="h-5 w-5 text-emerald-500" />
-              検証のやり方
-            </h2>
-            
-            <div className="space-y-4">
-              <div>
-                <h3 className="mb-2 text-sm font-bold text-slate-700">参照資料の種類</h3>
-                <ul className="space-y-2 text-sm leading-relaxed text-slate-600">
-                  <li className="flex gap-2">
-                    <span className="text-emerald-500">•</span>
-                    <div>
-                      <strong>入学者選抜実施要綱</strong> - 各都道府県教育委員会が毎年発行
-                      <div className="mt-1 text-xs text-slate-400">例：東京都「令和8年度東京都立高等学校入学者選抜実施要綱」第3章第2節「調査書の取扱い」</div>
-                    </div>
-                  </li>
-                  <li className="flex gap-2">
-                    <span className="text-emerald-500">•</span>
-                    <div>
-                      <strong>配点表・内申点算出方法</strong> - 要綱別表や付録資料
-                      <div className="mt-1 text-xs text-slate-400">例：神奈川県「中学校の評定平均値の算出方法」PDF第2ページ「評定平均値の算出式」</div>
-                    </div>
-                  </li>
-                  <li className="flex gap-2">
-                    <span className="text-emerald-500">•</span>
-                    <div>
-                      <strong>年度情報</strong> - 2026年度入試（令和8年度）対応
-                      <div className="mt-1 text-xs text-slate-400">URL：各県教育委員会公式サイトの入試情報ページ（例：https://www.kyoiku.metro.tokyo.lg.jp/admission/）</div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-
-              <div>
-                <h3 className="mb-2 text-sm font-bold text-slate-700">反映ルール</h3>
-                <ul className="space-y-2 text-sm leading-relaxed text-slate-600">
-                  <li className="flex gap-2">
-                    <span className="text-emerald-500">•</span>
-                    <strong>毎年6〜8月：</strong>47都道府県の要綱を一斉チェック。変更があった県は即座に反映
-                  </li>
-                  <li className="flex gap-2">
-                    <span className="text-emerald-500">•</span>
-                    <strong>随時更新：</strong>教育委員会の公式発表や制度改正があった場合は48時間以内に確認・反映
-                  </li>
-                  <li className="flex gap-2">
-                    <span className="text-emerald-500">•</span>
-                    <strong>バージョン管理：</strong>変更履歴をトップページに記録し、透明性を確保
-                  </li>
-                </ul>
-              </div>
-
-              <div>
-                <h3 className="mb-2 text-sm font-bold text-slate-700">誤り報告→修正のフロー</h3>
-                <div className="rounded-lg border border-blue-200 bg-blue-50 p-3">
-                  <ol className="space-y-2 text-sm leading-relaxed text-blue-800">
-                    <li className="flex gap-2">
-                      <span className="font-bold text-blue-600">1.</span>
-                      <span>ユーザーからお問い合わせフォームで誤り報告（具体的なPDF名・ページ番号・数値を記載）</span>
-                    </li>
-                    <li className="flex gap-2">
-                      <span className="font-bold text-blue-600">2.</span>
-                      <span>運営者が24時間以内に該当公式資料を確認（PDFダウンロード・該当ページ照合）</span>
-                    </li>
-                    <li className="flex gap-2">
-                      <span className="font-bold text-blue-600">3.</span>
-                      <span>誤りが確認された場合、48時間以内にサイトデータを修正</span>
-                    </li>
-                    <li className="flex gap-2">
-                      <span className="font-bold text-blue-600">4.</span>
-                      <span>修正内容をトップページの更新履歴に記録し、報告者に回答</span>
-                    </li>
-                  </ol>
-                </div>
-                <div className="mt-2 text-xs text-slate-500">
-                  具体例：「大阪府の内申点満点が450点ではなく440点になっている」との報告→「令和8年度大阪府立高等学校入学者選抜要綱」第5章別表第2を確認→修正
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* 参考資料 */}
-          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <FileText className="h-5 w-5 text-indigo-500" />
-              参考資料・情報源
-            </h2>
-            <div className="space-y-3 text-sm leading-relaxed text-slate-600">
-              <p>当サイトでは、以下の公式資料を参照しています：</p>
-              <ul className="mt-2 space-y-2">
-                <li className="flex items-start gap-2">
-                  <span className="text-indigo-500">•</span>
-                  <div>
-                    <span>各都道府県教育委員会の入学者選抜実施要綱</span>
-                    <div className="mt-1 text-xs text-slate-400">（例：東京都教育委員会「令和8年度東京都立高等学校入学者選抜実施要綱」）</div>
+                  <h2 className="text-2xl font-bold">My Naishin 開発チーム</h2>
+                  <p className="mt-1 text-blue-100">代表：現役中学生エンジニア (中学3年生)</p>
+                  <div className="mt-3 flex flex-wrap justify-center gap-2 md:justify-start">
+                    <span className="rounded-full bg-white/20 px-3 py-0.5 text-xs font-medium backdrop-blur-sm">当事者目線</span>
+                    <span className="rounded-full bg-white/20 px-3 py-0.5 text-xs font-medium backdrop-blur-sm">47都道府県PDF解析</span>
+                    <span className="rounded-full bg-white/20 px-3 py-0.5 text-xs font-medium backdrop-blur-sm">2026年度入試組</span>
                   </div>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-indigo-500">•</span>
-                  <div>
-                    <span>文部科学省の学習指導要領関連資料</span>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div className="mt-4 space-y-2">
-              <p className="text-xs font-medium text-slate-600">主要参照リンク：</p>
-              <div className="flex flex-wrap gap-2">
-                <a 
-                  href="https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/exam/index.html"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 rounded-lg bg-slate-100 px-3 py-1.5 text-xs text-slate-600 hover:bg-slate-200"
-                >
-                  東京都教育委員会
-                  <ExternalLink className="h-3 w-3" />
-                </a>
-                <a 
-                  href="https://www.pref.kanagawa.jp/docs/dc4/nyusen/nyusen.html"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 rounded-lg bg-slate-100 px-3 py-1.5 text-xs text-slate-600 hover:bg-slate-200"
-                >
-                  神奈川県教育委員会
-                  <ExternalLink className="h-3 w-3" />
-                </a>
-                <a 
-                  href="https://www.pref.saitama.lg.jp/f2208/nyuushi.html"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 rounded-lg bg-slate-100 px-3 py-1.5 text-xs text-slate-600 hover:bg-slate-200"
-                >
-                  埼玉県教育委員会
-                  <ExternalLink className="h-3 w-3" />
-                </a>
+                </div>
               </div>
             </div>
-          </div>
-
-          {/* ソースの読み方 */}
-          <div className="rounded-2xl border border-emerald-200 bg-gradient-to-br from-emerald-50/80 via-teal-50/60 to-cyan-50/80 p-6 shadow-lg shadow-emerald-100/50">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-emerald-800">
-              <BookOpen className="h-5 w-5 text-emerald-600" />
-              ソースの読み方・優先順位
-            </h2>
-            <div className="space-y-4 text-sm leading-relaxed text-emerald-700">
-              <div className="rounded-xl border border-emerald-200/50 bg-white/60 p-4">
-                <h3 className="mb-2 font-semibold text-emerald-800">📖 要綱PDFのどこを読むか（見出し名）</h3>
-                <ul className="space-y-1 ml-4 list-disc">
-                  <li>「実施要綱」→「選抜方法」→「調査書点の取扱い」の順で確認</li>
-                  <li>特に「配点比率」「換算方法」「満点」に注目</li>
-                  <li>章番号やページ番号を根拠として記録</li>
-                </ul>
-              </div>
-              
-              <div className="rounded-xl border border-emerald-200/50 bg-white/60 p-4">
-                <h3 className="mb-2 font-semibold text-emerald-800">🎯 数値が複数出るときの優先順位</h3>
-                <ol className="space-y-1 ml-4 list-decimal">
-                  <li><strong>実施要綱</strong>：最優先。教育委員会が発行する公式ルール</li>
-                  <li><strong>選考基準</strong>：要綱の補足資料。詳細な配点方法</li>
-                  <li><strong>学校別資料</strong>：学校独自のルール。特色検査など</li>
-                  <li><strong>過去問資料</strong>：参考情報。実際の出題傾向</li>
-                </ol>
-              </div>
-              
-              <div className="rounded-xl border border-amber-200/50 bg-amber-50/60 p-4">
-                <h3 className="mb-2 font-semibold text-amber-800">⚠️ 例外処理の扱い</h3>
-                <ul className="space-y-1 ml-4 list-disc">
-                  <li><strong>特色検査</strong>：実施校のみ。最大5点程度を加算</li>
-                  <li><strong>学校別比率</strong>：専門学科・総合学科で異なる場合</li>
-                  <li><strong>コース別</strong>：普通科でも進学コース等で配点が変わる</li>
-                  <li><strong>単位制</strong>：評定ではなく単位数で評価する場合</li>
-                </ul>
-                <p className="text-xs text-amber-700 mt-2">
-                  ※例外がある場合は、その旨を必ず表示し、公式要項の確認を促します
+            <div className="p-6">
+              <div className="space-y-4">
+                <h3 className="text-lg font-bold text-slate-800">「中3の自分たちが、今本当に欲しい道具」を作りました。</h3>
+                <p className="text-sm leading-relaxed text-slate-600">
+                  はじめまして。My Naishinを開発している中学3年生のエンジニアです。
+                </p>
+                <p className="text-sm leading-relaxed text-slate-600">
+                  僕自身、受験生として志望校を考える中で、内申点の計算が都道府県ごとにあまりに複雑で、しかも正確な情報を見つけるのが大変だということに驚きました。
+                </p>
+                <p className="text-sm leading-relaxed text-slate-600 font-medium bg-slate-50 p-4 rounded-xl border-l-4 border-blue-500">
+                  「教育委員会の難しいPDFを読み込まなくても、誰でも一瞬で自分の立ち位置がわかるようにしたい」
+                </p>
+                <p className="text-sm leading-relaxed text-slate-600">
+                  そんな思いから、プログラミングのスキルを活かして、全国47都道府県の最新募集要項を一つひとつ解析し、このツールを作り上げました。
+                </p>
+                <p className="text-sm leading-relaxed text-slate-600">
+                  中学生が作っているからといって、精度に妥協はありません。むしろ、<strong>「自分たちの人生がかかっている」</strong>からこそ、1点1点の計算ロジックを公式資料と照らし合わせ、厳格にテストを行っています。
                 </p>
               </div>
-              
-              <div className="text-xs text-emerald-600 bg-emerald-100/50 rounded-lg p-3">
-                <strong>運営者の姿勢：</strong>
-                個人運営として、公式資料を直接確認し、複数の情報源をクロスチェックしています。
-                不明点は教育委員会に問い合わせ、常に正確性を最優先しています。
+
+              <div className="mt-8 grid gap-4 sm:grid-cols-2">
+                <div className="rounded-xl border border-blue-100 bg-blue-50/50 p-4">
+                  <h3 className="mb-2 flex items-center gap-1.5 text-sm font-bold text-blue-800">
+                    <Code className="h-4 w-4" />
+                    開発のこだわり
+                  </h3>
+                  <ul className="space-y-1.5 text-xs text-blue-700">
+                    <li>• <strong>一次資料の徹底解析：</strong>教育委員会のPDFを直接確認</li>
+                    <li>• <strong>当事者UI：</strong>スマホで休み時間にサッと使える操作感</li>
+                    <li>• <strong>透明性：</strong>計算の根拠をすべてページ内に明記</li>
+                  </ul>
+                </div>
+                <div className="rounded-xl border border-indigo-100 bg-indigo-50/50 p-4">
+                  <h3 className="mb-2 flex items-center gap-1.5 text-sm font-bold text-indigo-800">
+                    <Shield className="h-4 w-4" />
+                    信頼性への誓い
+                  </h3>
+                  <ul className="space-y-1.5 text-xs text-indigo-700">
+                    <li>• 常に最新（2026年度入試）情報を反映</li>
+                    <li>• プロの視点を取り入れるための塾講師へのヒアリング</li>
+                    <li>• 誤り報告に対する24時間以内の修正対応</li>
+                  </ul>
+                </div>
               </div>
             </div>
+          </div>
+
+          {/* サイトの目的 */}
+          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
+              <Target className="h-5 w-5 text-blue-500" />
+              My Naishin のミッション
+            </h2>
+            <div className="space-y-4 text-sm leading-relaxed text-slate-600">
+              <p>
+                「My Naishin」は、受験生が「情報」で不利にならない世界を目指しています。
+              </p>
+              <ul className="space-y-2">
+                <li className="flex gap-2">
+                  <CheckCircle className="h-4 w-4 text-emerald-500 shrink-0 mt-0.5" />
+                  <span><strong>情報の格差をなくす：</strong> 複雑な制度をシンプルに伝え、誰もが同じスタートラインに立てるようにする。</span>
+                </li>
+                <li className="flex gap-2">
+                  <CheckCircle className="h-4 w-4 text-emerald-500 shrink-0 mt-0.5" />
+                  <span><strong>不安をエネルギーに変える：</strong> 「あと何点必要か」が見えることで、今日からの勉強に集中できるようにする。</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* 品質保証リンクへの誘導 */}
+          <div className="rounded-2xl border border-emerald-200 bg-gradient-to-br from-white to-emerald-50/30 p-6 shadow-sm">
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-emerald-800">
+              <Shield className="h-5 w-5 text-emerald-600" />
+              計算の正確性について
+            </h2>
+            <p className="text-sm text-slate-600 leading-relaxed mb-4">
+              現役の中学生が運営していますが、ツールとしての信頼性はプロレベルを目指しています。具体的な算出根拠や検証プロセス、アップデート履歴については、以下の「品質保証ページ」をご覧ください。
+            </p>
+            <Link 
+              href="/quality"
+              className="inline-flex items-center gap-2 text-sm font-bold text-emerald-600 hover:text-emerald-700 underline"
+            >
+              <FileText className="h-4 w-4" />
+              品質保証と信頼性への取り組み
+            </Link>
           </div>
 
           {/* お問い合わせ */}
           <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <Mail className="h-5 w-5 text-violet-500" />
-              お問い合わせ
+              <MessageSquare className="h-5 w-5 text-violet-500" />
+              同じ受験生・保護者の皆様へ
             </h2>
             <p className="text-sm leading-relaxed text-slate-600">
-              サイトに関するご質問、不具合報告、情報の誤りに関するご指摘は、
-              お問い合わせフォームよりご連絡ください。
+              「この機能が助かった！」「うちの県でもっと詳しく知りたい」といったお声が、テスト勉強の合間の開発の支えになります。
+              また、制度の変更に気づかれた際も、ぜひ教えていただけると嬉しいです。
             </p>
-            <div className="mt-4">
+            <div className="mt-6 flex flex-wrap gap-4">
               <Link 
                 href="/contact"
-                className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-violet-500 to-purple-600 px-5 py-2.5 text-sm font-bold text-white shadow-md shadow-violet-200 transition-all hover:shadow-lg"
+                className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-violet-500 to-purple-600 px-5 py-2.5 text-sm font-bold text-white shadow-md shadow-violet-200 transition-all hover:shadow-lg hover:scale-105"
               >
                 <Mail className="h-4 w-4" />
                 お問い合わせフォーム
               </Link>
+              <a 
+                href="https://twitter.com/my_naishin" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-5 py-2.5 text-sm font-bold text-slate-700 transition-all hover:bg-slate-50"
+              >
+                <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                公式X (旧Twitter)
+              </a>
             </div>
-          </div>
-
-          {/* 関連リンク */}
-          <div className="flex flex-wrap gap-3">
-            <Link 
-              href="/privacy"
-              className="inline-flex items-center gap-2 rounded-xl bg-slate-100 px-4 py-2.5 text-sm font-medium text-slate-600 hover:bg-slate-200"
-            >
-              <Shield className="h-4 w-4" />
-              プライバシーポリシー
-            </Link>
-            <Link 
-              href="/terms"
-              className="inline-flex items-center gap-2 rounded-xl bg-slate-100 px-4 py-2.5 text-sm font-medium text-slate-600 hover:bg-slate-200"
-            >
-              <FileText className="h-4 w-4" />
-              利用規約
-            </Link>
           </div>
 
           <div className="rounded-xl bg-slate-50 p-4 text-xs text-slate-500">
@@ -436,14 +197,36 @@ export default function AboutPage() {
               <Calendar className="h-3.5 w-3.5" />
               最終更新情報
             </div>
-            <div className="flex flex-wrap justify-center gap-3">
-              <div>制度データ: {dataLastVerified}</div>
-              <div>サイト機能: {featureLastUpdated}</div>
+            <div className="flex flex-wrap justify-center gap-4 text-center">
+              <div><strong>制度データ:</strong> {dataLastVerified}</div>
+              <div><strong>サイト機能:</strong> {featureLastUpdated}</div>
+              <div><strong>バージョン:</strong> {version}</div>
             </div>
           </div>
         </div>
       </div>
       </div>
     </>
+  );
+}
+
+function Target(props: any) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <circle cx="12" cy="12" r="10" />
+      <circle cx="12" cy="12" r="6" />
+      <circle cx="12" cy="12" r="2" />
+    </svg>
   );
 }

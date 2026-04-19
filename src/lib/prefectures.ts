@@ -23,6 +23,8 @@ export interface PrefectureConfig {
   supports10PointScale?: boolean;
   // 情報源URL（教育委員会等の公式ページ）
   sourceUrl?: string;
+  // 2つ目の情報源URL
+  sourceUrl2?: string;
   // 情報源の表示名
   sourceTitle?: string;
   // 最終確認日 (YYYY-MM-DD形式)
@@ -97,9 +99,10 @@ export const PREFECTURES: PrefectureConfig[] = [
     practicalMultiplier: 1,
     maxScore: 315,
     description: '中1・中2は2倍、中3は3倍（315点満点）',
-    sourceUrl: 'https://www.dokyoi.pref.hokkaido.lg.jp/hk/gks/koukounyuusenn.html',
+    sourceUrl: 'https://www.do-con.com/nyushi/judge.html',
+    sourceUrl2: 'https://jyuku-online.com/blog/jj-hokkaido/',
     sourceTitle: '北海道教育委員会 入学者選抜',
-    lastVerified: '2026-01-30',
+    lastVerified: '2026-04-19',
     fiscalYear: '2026'
   },
   {
@@ -112,9 +115,10 @@ export const PREFECTURES: PrefectureConfig[] = [
     practicalMultiplier: 1,
     maxScore: 135,
     description: '中1〜中3の9教科×5段階（135点満点）',
-    sourceUrl: 'https://www.pref.aomori.lg.jp/soshiki/kyoiku/e-gakyo/senbatsu2025.html',
+    sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/02/feature/1273764_2532.html',
+    sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/aomori/',
     sourceTitle: '青森県教育委員会 入学者選抜',
-    lastVerified: '2026-01-30',
+    lastVerified: '2026-04-19',
     fiscalYear: '2026'
   },
   {
@@ -128,9 +132,10 @@ export const PREFECTURES: PrefectureConfig[] = [
     maxScore: 660,
     description: '5教科×2倍、実技4教科×3倍、学年比1:2:3（660点満点）',
     note: 'この計算は660点満点ですが、実際の選抜では440点満点に換算される場合があります。',
-    sourceUrl: 'https://www.pref.iwate.jp/kyouikubunka/kyouiku/gakkou/senbatsu/index.html',
+    sourceUrl: 'https://jyuke-labo.com/koukoujyukentaisaku/iwate/',
+    sourceUrl2: 'https://jyuku-online.com/blog/jj-iwate/',
     sourceTitle: '岩手県教育委員会 入学者選抜',
-    lastVerified: '2026-01-30',
+    lastVerified: '2026-04-19',
     fiscalYear: '2026'
   },
   {
@@ -143,9 +148,10 @@ export const PREFECTURES: PrefectureConfig[] = [
     practicalMultiplier: 2,
     maxScore: 195,
     description: '5教科×1倍、実技4教科×2倍（195点満点）',
-    sourceUrl: 'https://www.pref.miyagi.jp/soshiki/koukyou/kakomon-ko-nyushi.html',
+    sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/04/feature/1273766_2678.html',
+    sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/miyagi/',
     sourceTitle: '宮城県教育委員会 入学者選抜',
-    lastVerified: '2026-01-30',
+    lastVerified: '2026-04-19',
     fiscalYear: '2026'
   },
   {
@@ -158,9 +164,10 @@ export const PREFECTURES: PrefectureConfig[] = [
     practicalMultiplier: 2,
     maxScore: 195,
     description: '実技4教科は2倍（各学年65点×3＝195点満点）',
-    sourceUrl: 'https://www.pref.akita.lg.jp/pages/genre/15415',
+    sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/05/naishin/',
+    sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/akita/',
     sourceTitle: '秋田県教育委員会 入学者選抜',
-    lastVerified: '2026-01-30',
+    lastVerified: '2026-04-19',
     fiscalYear: '2026'
   },
   {
@@ -173,9 +180,10 @@ export const PREFECTURES: PrefectureConfig[] = [
     practicalMultiplier: 1,
     maxScore: 45,
     description: '中3の成績のみ（45点満点）',
-    sourceUrl: 'https://www.pref.yamagata.jp/700013/koko/20240214r7nyuugakusyasennbatu.html',
+    sourceUrl: 'https://jyuke-labo.com/koukoujyukentaisaku/yamagata/',
+    sourceUrl2: 'https://czemi.benesse.ne.jp/open/nyushi/exam/06/feature/1273769_3744.html',
     sourceTitle: '山形県教育委員会 入学者選抜',
-    lastVerified: '2026-01-30',
+    lastVerified: '2026-04-19',
     fiscalYear: '2026'
   },
   {
@@ -188,9 +196,10 @@ export const PREFECTURES: PrefectureConfig[] = [
     practicalMultiplier: 2,
     maxScore: 195,
     description: '実技4教科は2倍（195点満点）',
-    sourceUrl: 'https://www.pref.fukushima.lg.jp/site/edu/r7koukounyushi.html',
+    sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/07/feature/1273769_3744.html',
+    sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/fukushima/',
     sourceTitle: '福島県教育委員会 入学者選抜',
-    lastVerified: '2026-01-30',
+    lastVerified: '2026-04-19',
     fiscalYear: '2026'
   },
   // 関東
@@ -204,9 +213,10 @@ export const PREFECTURES: PrefectureConfig[] = [
     practicalMultiplier: 1,
     maxScore: 135,
     description: '中1〜中3の9教科×5段階（135点満点）',
-    sourceUrl: 'https://kyoiku.pref.ibaraki.jp/gakko/nyushi/highschool/',
+    sourceUrl: 'https://jyuke-labo.com/koukoujyukentaisaku/ibaraki/',
+    sourceUrl2: 'https://czemi.benesse.ne.jp/open/nyushi/exam/08/feature/1273770_3817.html',
     sourceTitle: '茨城県教育委員会 入学者選抜',
-    lastVerified: '2026-01-30',
+    lastVerified: '2026-04-19',
     fiscalYear: '2026'
   },
   {
@@ -220,9 +230,10 @@ export const PREFECTURES: PrefectureConfig[] = [
     maxScore: 135,
     description: '中1〜中3を135点満点で計算',
     note: 'この計算は135点満点ですが、高校により500点満点などに換算されます。',
-    sourceUrl: 'https://www.pref.tochigi.lg.jp/kyouiku/gakkoukyouiku/nyuugakusenkou/index.html',
+    sourceUrl: 'https://jyuke-labo.com/koukoujyukentaisaku/tochigi/',
+    sourceUrl2: 'https://czemi.benesse.ne.jp/open/nyushi/exam/09/feature/1273771_3890.html',
     sourceTitle: '栃木県教育委員会 入学者選抜',
-    lastVerified: '2026-01-30',
+    lastVerified: '2026-04-19',
     fiscalYear: '2026'
   },
   {
@@ -235,9 +246,10 @@ export const PREFECTURES: PrefectureConfig[] = [
     practicalMultiplier: 1,
     maxScore: 135,
     description: '中1〜中3の9教科×5段階（135点満点）',
-    sourceUrl: 'https://www.pref.gunma.jp/site/kyouiku/list66-367.html',
+    sourceUrl: 'https://jyuke-labo.com/koukoujyukentaisaku/gunma/',
+    sourceUrl2: 'https://czemi.benesse.ne.jp/open/nyushi/exam/10/feature/1273772_3963.html',
     sourceTitle: '群馬県教育委員会 入学者選抜',
-    lastVerified: '2026-01-30',
+    lastVerified: '2026-04-19',
     fiscalYear: '2026'
   },
   {
@@ -251,9 +263,10 @@ export const PREFECTURES: PrefectureConfig[] = [
     maxScore: 180,
     description: '学年比1:1:2で換算（180点満点が一般的）',
     note: '高校により1:1:3、1:2:3などもあり',
-    sourceUrl: 'https://www.pref.saitama.lg.jp/f2208/nyuushi.html',
+    sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/article/11/feature/0011.html',
+    sourceUrl2: 'https://jyuku-online.com/blog/jj-saitamanaisin/',
     sourceTitle: '埼玉県教育委員会 入試情報',
-    lastVerified: '2026-01-30',
+    lastVerified: '2026-04-19',
     fiscalYear: '2026',
     reverseCalc: {
       totalMaxScore: 1000,
@@ -274,9 +287,10 @@ export const PREFECTURES: PrefectureConfig[] = [
     maxScore: 135,
     description: '中1〜中3の9教科×5段階（135点満点）',
     note: 'K値（0.5〜2）で換算する高校もあり',
-    sourceUrl: 'https://www.pref.chiba.lg.jp/kyouiku/shidou/nyuushi/koukou/index.html',
+    sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/article/12/feature/0012.html',
+    sourceUrl2: 'https://janiasu.com/info-high/naishin.html',
     sourceTitle: '千葉県教育委員会 入試情報',
-    lastVerified: '2026-01-30',
+    lastVerified: '2026-04-19',
     fiscalYear: '2026'
   },
   {
@@ -289,9 +303,10 @@ export const PREFECTURES: PrefectureConfig[] = [
     practicalMultiplier: 2,
     maxScore: 65,
     description: '中3のみ：5教科×1倍＋実技4教科×2倍（65点満点）',
-    sourceUrl: 'https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/exam/',
+    sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/article/13/feature/0013.html',
+    sourceUrl2: 'https://jyuku-online.com/blog/jj-tokyo/',
     sourceTitle: '東京都教育委員会 入学者選抜',
-    lastVerified: '2026-01-30',
+    lastVerified: '2026-04-19',
     fiscalYear: '2026',
     reverseCalc: {
       totalMaxScore: 1020,
@@ -322,9 +337,10 @@ export const PREFECTURES: PrefectureConfig[] = [
     practicalMultiplier: 1,
     maxScore: 135,
     description: '中2＋中3×2倍（135点満点）',
-    sourceUrl: 'https://www.pref.kanagawa.jp/docs/dc4/nyusen/nyusen.html',
+    sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/article/14/feature/0014.html',
+    sourceUrl2: 'https://jyuku-online.com/blog/jj-kanagawa/',
     sourceTitle: '神奈川県教育委員会 入試情報',
-    lastVerified: '2026-01-30',
+    lastVerified: '2026-04-19',
     fiscalYear: '2026'
   },
   // 中部
@@ -338,9 +354,10 @@ export const PREFECTURES: PrefectureConfig[] = [
     practicalMultiplier: 1,
     maxScore: 135,
     description: '中1〜中3の9教科×5段階（135点満点）',
-    sourceUrl: 'https://www.pref.niigata.lg.jp/sec/kotogakko/nyugakushasenbatsu.html',
+    sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/15/naishin/',
+    sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/niigata/',
     sourceTitle: '新潟県教育委員会 入学者選抜',
-    lastVerified: '2026-01-30',
+    lastVerified: '2026-04-19',
     fiscalYear: '2026'
   },
   {
@@ -354,9 +371,10 @@ export const PREFECTURES: PrefectureConfig[] = [
     maxScore: 135,
     description: '中2(45点)＋中3×2倍(90点)（135点満点）',
     note: 'この計算は135点満点ですが、特別活動等の15点が加算され、150点満点となる場合があります。',
-    sourceUrl: 'https://www.pref.toyama.jp/300201/kyouiku/kenritsukoukou/07senbatsu.html',
+    sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/16/naishin/',
+    sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/toyama/',
     sourceTitle: '富山県教育委員会 入学者選抜',
-    lastVerified: '2026-01-30',
+    lastVerified: '2026-04-19',
     fiscalYear: '2026'
   },
   {
@@ -369,9 +387,10 @@ export const PREFECTURES: PrefectureConfig[] = [
     practicalMultiplier: 1,
     maxScore: 135,
     description: '中1〜中3の9教科×5段階（135点満点）',
-    sourceUrl: 'https://www.pref.ishikawa.lg.jp/kyoiku/gakkou/senbatu/senbatu.html',
+    sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/17/naishin/',
+    sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/ishikawa/',
     sourceTitle: '石川県教育委員会 入学者選抜',
-    lastVerified: '2026-01-30',
+    lastVerified: '2026-04-19',
     fiscalYear: '2026'
   },
   {
@@ -384,9 +403,10 @@ export const PREFECTURES: PrefectureConfig[] = [
     practicalMultiplier: 1,
     maxScore: 45,
     description: '中3の成績のみ（45点満点）',
-    sourceUrl: 'https://www.pref.fukui.lg.jp/doc/koukou/nyugaku/r7nyugaku.html',
+    sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/18/naishin/',
+    sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/fukui/',
     sourceTitle: '福井県教育委員会 入学者選抜',
-    lastVerified: '2026-01-30',
+    lastVerified: '2026-04-19',
     fiscalYear: '2026'
   },
   {
@@ -400,9 +420,10 @@ export const PREFECTURES: PrefectureConfig[] = [
     maxScore: 330,
     description: '5教科×2倍、実技4教科×3倍（330点満点）',
     note: '特別活動等で+30点',
-    sourceUrl: 'https://www.pref.yamanashi.jp/kyouiku-kikaku/nyuusi/saishinnonyuusijouhou.html',
+    sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/19/naishin/',
+    sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/yamanashi/',
     sourceTitle: '山梨県教育委員会 入学者選抜',
-    lastVerified: '2026-01-30',
+    lastVerified: '2026-04-19',
     fiscalYear: '2026'
   },
   {
@@ -415,9 +436,10 @@ export const PREFECTURES: PrefectureConfig[] = [
     practicalMultiplier: 1,
     maxScore: 45,
     description: '中3の成績のみ（45点満点）',
-    sourceUrl: 'https://www.pref.nagano.lg.jp/kensei/koukou/nyuugaku.html',
+    sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/20/naishin/',
+    sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/nagano/',
     sourceTitle: '長野県教育委員会 入学者選抜',
-    lastVerified: '2026-01-30',
+    lastVerified: '2026-04-19',
     fiscalYear: '2026'
   },
   {
@@ -430,9 +452,10 @@ export const PREFECTURES: PrefectureConfig[] = [
     practicalMultiplier: 1,
     maxScore: 180,
     description: '中1・中2＋中3×2倍（180点満点）',
-    sourceUrl: 'https://www.pref.gifu.lg.jp/kensei/koukou/nyuugaku.html',
+    sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/21/naishin/',
+    sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/gifu/',
     sourceTitle: '岐阜県教育委員会 入学者選抜',
-    lastVerified: '2026-01-30',
+    lastVerified: '2026-04-19',
     fiscalYear: '2026'
   },
   {
@@ -445,9 +468,10 @@ export const PREFECTURES: PrefectureConfig[] = [
     practicalMultiplier: 1,
     maxScore: 45,
     description: '中3の成績のみ（45点満点）',
-    sourceUrl: 'https://www.pref.shizuoka.jp/kensei/koukou/nyuugaku.html',
+    sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/article/22/feature/0022.html',
+    sourceUrl2: 'https://jyuku-online.com/blog/jj-shizuoka/',
     sourceTitle: '静岡県教育委員会 入学者選抜',
-    lastVerified: '2026-01-30',
+    lastVerified: '2026-04-19',
     fiscalYear: '2026'
   },
   {
@@ -460,9 +484,10 @@ export const PREFECTURES: PrefectureConfig[] = [
     practicalMultiplier: 1,
     maxScore: 90,
     description: '中3の9教科×5段階×2倍（90点満点）',
-    sourceUrl: 'https://www.pref.aichi.jp/kensei/koukou/nyuugaku.html',
+    sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/article/23/feature/0023.html',
+    sourceUrl2: 'https://jyuku-online.com/blog/jj-aichi/',
     sourceTitle: '愛知県教育委員会 入学者選抜',
-    lastVerified: '2026-01-30',
+    lastVerified: '2026-04-19',
     fiscalYear: '2026'
   },
   // 近畿
@@ -476,9 +501,10 @@ export const PREFECTURES: PrefectureConfig[] = [
     practicalMultiplier: 1,
     maxScore: 45,
     description: '中3の成績のみ（45点満点）',
-    sourceUrl: 'https://www.pref.mie.lg.jp/kensei/koukou/nyuugaku.html',
+    sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/24/naishin/',
+    sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/mie/',
     sourceTitle: '三重県教育委員会 入学者選抜',
-    lastVerified: '2026-01-30',
+    lastVerified: '2026-04-19',
     fiscalYear: '2026'
   },
   {
@@ -491,9 +517,10 @@ export const PREFECTURES: PrefectureConfig[] = [
     practicalMultiplier: 1,
     maxScore: 135,
     description: '中1〜中3の9教科×5段階（135点満点）',
-    sourceUrl: 'https://www.pref.shiga.lg.jp/kensei/koukou/nyuugaku.html',
+    sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/25/naishin/',
+    sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/shiga/',
     sourceTitle: '滋賀県教育委員会 入学者選抜',
-    lastVerified: '2026-01-30',
+    lastVerified: '2026-04-19',
     fiscalYear: '2026'
   },
   {
@@ -507,9 +534,10 @@ export const PREFECTURES: PrefectureConfig[] = [
     maxScore: 195,
     description: '中期選抜：実技4教科×2倍（195点満点）',
     note: '前期選抜は135点満点',
-    sourceUrl: 'https://www.pref.kyoto.jp/kensei/koukou/nyuugaku.html',
+    sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/article/26/feature/0026.html',
+    sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/kyoto/',
     sourceTitle: '京都府教育委員会 入学者選抜',
-    lastVerified: '2026-01-30',
+    lastVerified: '2026-04-19',
     fiscalYear: '2026'
   },
   {
@@ -522,9 +550,10 @@ export const PREFECTURES: PrefectureConfig[] = [
     practicalMultiplier: 1,
     maxScore: 450,
     description: '中1・中2は2倍、中3は6倍（450点満点）',
-    sourceUrl: 'https://www.pref.osaka.lg.jp/kotogakko/gakuji-g3/',
+    sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/article/27/feature/0027.html',
+    sourceUrl2: 'https://jyuku-online.com/blog/jj-osaka/',
     sourceTitle: '大阪府教育庁 入試情報',
-    lastVerified: '2026-01-30',
+    lastVerified: '2026-04-19',
     fiscalYear: '2026',
     reverseCalc: {
       totalMaxScore: 900,
@@ -551,9 +580,10 @@ export const PREFECTURES: PrefectureConfig[] = [
     practicalMultiplier: 7.5,
     maxScore: 250,
     description: '5教科×4倍、実技4教科×7.5倍（250点満点）',
-    sourceUrl: 'https://www2.hyogo-c.ed.jp/hpe/koko/nyuushi/',
+    sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/article/28/feature/0028.html',
+    sourceUrl2: 'https://jyuku-online.com/blog/jj-hyogo/',
     sourceTitle: '兵庫県教育委員会 入学者選抜',
-    lastVerified: '2026-01-31',
+    lastVerified: '2026-04-19',
     fiscalYear: '2026'
   },
   {
@@ -566,9 +596,10 @@ export const PREFECTURES: PrefectureConfig[] = [
     practicalMultiplier: 1,
     maxScore: 135,
     description: '中2(45点)＋中3×2倍(90点)（135点満点）',
-    sourceUrl: 'https://www.pref.nara.jp/14157.htm',
+    sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/29/naishin/',
+    sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/nara/',
     sourceTitle: '奈良県教育委員会 入学者選抜',
-    lastVerified: '2026-01-31',
+    lastVerified: '2026-04-19',
     fiscalYear: '2026'
   },
   {
@@ -581,9 +612,10 @@ export const PREFECTURES: PrefectureConfig[] = [
     practicalMultiplier: 1,
     maxScore: 180,
     description: '中1・中2＋中3×2倍（180点満点）',
-    sourceUrl: 'https://www.pref.wakayama.lg.jp/prefg/500200/d00219915.html',
+    sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/30/naishin/',
+    sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/wakayama/',
     sourceTitle: '和歌山県教育委員会 入学者選抜',
-    lastVerified: '2026-01-31',
+    lastVerified: '2026-04-19',
     fiscalYear: '2026',
     reverseCalc: {
       totalMaxScore: 1000,
@@ -604,9 +636,10 @@ export const PREFECTURES: PrefectureConfig[] = [
     maxScore: 65,
     description: '中3のみ、実技4教科×2倍（65点満点）',
     note: '高校により2倍(130点)や3倍(195点)などに換算されます。',
-    sourceUrl: 'https://www.pref.tottori.lg.jp/317825.htm',
+    sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/31/naishin/',
+    sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/tottori/',
     sourceTitle: '鳥取県教育委員会 入学者選抜',
-    lastVerified: '2026-01-31',
+    lastVerified: '2026-04-19',
     fiscalYear: '2026',
     reverseCalc: {
       totalMaxScore: 1000,
@@ -626,9 +659,10 @@ export const PREFECTURES: PrefectureConfig[] = [
     maxScore: 180,
     description: '学年比1:1:2で換算（180点満点）',
     note: 'この計算は180点満点ですが、実際の選抜では51点満点に換算され、さらに特別活動の9点が加算され60点満点となります。',
-    sourceUrl: 'https://www.pref.shimane.lg.jp/education/kyoiku/senbatsu/senbatsu_info/',
+    sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/32/naishin/',
+    sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/shimane/',
     sourceTitle: '島根県教育委員会 入学者選抜',
-    lastVerified: '2026-01-31',
+    lastVerified: '2026-04-19',
     fiscalYear: '2026',
     reverseCalc: {
       totalMaxScore: 1000,
@@ -648,9 +682,10 @@ export const PREFECTURES: PrefectureConfig[] = [
     maxScore: 195,
     description: '5教科×1倍、実技4教科×2倍を3学年分（195点満点）',
     note: '実際の計算はより複雑で、中1・中2各45点、中3が110点の合計200点満点となるのが一般的です。このツールでは簡易計算をしています。',
-    sourceUrl: 'https://www.pref.okayama.jp/site/16/913706.html',
+    sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/33/naishin/',
+    sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/okayama/',
     sourceTitle: '岡山県教育委員会 入学者選抜',
-    lastVerified: '2026-01-31',
+    lastVerified: '2026-04-19',
     fiscalYear: '2026',
     reverseCalc: {
       totalMaxScore: 1000,
@@ -669,9 +704,10 @@ export const PREFECTURES: PrefectureConfig[] = [
     practicalMultiplier: 1,
     maxScore: 225,
     description: '学年比1:1:3（225点満点）',
-    sourceUrl: 'https://www.pref.hiroshima.lg.jp/site/kyouiku/08senior-2nd-r8-nyuushi-r8-kou-r8-kou-mokuji-r8-kou-mokuji.html',
+    sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/article/34/feature/0034.html',
+    sourceUrl2: 'https://jyuku-online.com/blog/jj-hiroshima/',
     sourceTitle: '広島県教育委員会 入学者選抜',
-    lastVerified: '2026-01-31',
+    lastVerified: '2026-04-19',
     fiscalYear: '2026',
     reverseCalc: {
       totalMaxScore: 1000,
@@ -690,9 +726,10 @@ export const PREFECTURES: PrefectureConfig[] = [
     practicalMultiplier: 1,
     maxScore: 135,
     description: '中1〜中3の9教科×5段階（135点満点）',
-    sourceUrl: 'https://www.pref.yamaguchi.lg.jp/soshiki/180/',
+    sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/35/naishin/',
+    sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/yamaguchi/',
     sourceTitle: '山口県教育委員会 入学者選抜',
-    lastVerified: '2026-01-31',
+    lastVerified: '2026-04-19',
     fiscalYear: '2026',
     reverseCalc: {
       totalMaxScore: 1000,
@@ -712,9 +749,10 @@ export const PREFECTURES: PrefectureConfig[] = [
     practicalMultiplier: 2,
     maxScore: 195,
     description: '実技4教科×2倍（各学年65点×3＝195点満点）',
-    sourceUrl: 'https://nyuushi.tokushima-ec.ed.jp',
+    sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/36/naishin/',
+    sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/tokushima/',
     sourceTitle: '徳島県教育委員会 入学者選抜',
-    lastVerified: '2026-01-31',
+    lastVerified: '2026-04-19',
     fiscalYear: '2026',
     reverseCalc: {
       totalMaxScore: 1000,
@@ -734,9 +772,10 @@ export const PREFECTURES: PrefectureConfig[] = [
     maxScore: 390,
     description: '5教科×2倍、実技4教科×4倍を3学年分（390点満点）',
     note: '実際の計算はより複雑で、中1・中2は各45点、中3は130点の合計220点満点となるのが一般的です。このツールでは簡易計算をしています。',
-    sourceUrl: 'https://www.pref.kagawa.lg.jp/kenkyoui/kokokyoiku/nyushi/chugaku-koko/examination02.html',
+    sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/37/naishin/',
+    sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/kagawa/',
     sourceTitle: '香川県教育委員会 入学者選抜',
-    lastVerified: '2026-01-31',
+    lastVerified: '2026-04-19',
     fiscalYear: '2026',
     reverseCalc: {
       totalMaxScore: 1000,
@@ -755,9 +794,10 @@ export const PREFECTURES: PrefectureConfig[] = [
     practicalMultiplier: 1,
     maxScore: 135,
     description: '中1〜中3の9教科×5段階（135点満点）',
-    sourceUrl: 'https://ehime-c.esnet.ed.jp/koukou/nyuusi/nyuusi.html',
+    sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/38/naishin/',
+    sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/ehime/',
     sourceTitle: '愛媛県教育委員会 入学者選抜',
-    lastVerified: '2026-01-31',
+    lastVerified: '2026-04-19',
     fiscalYear: '2026',
     reverseCalc: {
       totalMaxScore: 1000,
@@ -778,9 +818,10 @@ export const PREFECTURES: PrefectureConfig[] = [
     description: '実技4教科×2倍（195点満点）',
     supports10PointScale: true,
     note: 'この計算は5段階評価での195点満点です。実際の中3評定は10段階評価であり、その場合260点満点となります。',
-    sourceUrl: 'https://www.pref.kochi.lg.jp/doc/r8_koukounyushi_main/',
+    sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/39/naishin/',
+    sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/kochi/',
     sourceTitle: '高知県教育委員会 入学者選抜',
-    lastVerified: '2026-01-31',
+    lastVerified: '2026-04-19',
     fiscalYear: '2026',
     reverseCalc: {
       totalMaxScore: 1000,
@@ -801,9 +842,10 @@ export const PREFECTURES: PrefectureConfig[] = [
     maxScore: 45,
     description: '中3の成績のみ（45点満点）',
     note: '一部高校で傾斜配点あり',
-    sourceUrl: 'https://www.pref.fukuoka.lg.jp/contents/kennittei.html',
+    sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/article/40/feature/0040.html',
+    sourceUrl2: 'https://jyuku-online.com/blog/jj-fukuoka/',
     sourceTitle: '福岡県教育委員会 入学者選抜',
-    lastVerified: '2026-01-31',
+    lastVerified: '2026-04-19',
     fiscalYear: '2026',
     reverseCalc: {
       totalMaxScore: 1000,
@@ -823,9 +865,10 @@ export const PREFECTURES: PrefectureConfig[] = [
     practicalMultiplier: 1,
     maxScore: 135,
     description: '中1〜中3の9教科×5段階（135点満点）',
-    sourceUrl: 'https://www.pref.saga.lg.jp/kyouiku/kiji003115881/index.html',
+    sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/41/naishin/',
+    sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/saga/',
     sourceTitle: '佐賀県教育委員会 入学者選抜',
-    lastVerified: '2026-01-31',
+    lastVerified: '2026-04-19',
     fiscalYear: '2026',
     reverseCalc: {
       totalMaxScore: 1000,
@@ -844,9 +887,10 @@ export const PREFECTURES: PrefectureConfig[] = [
     practicalMultiplier: 1,
     maxScore: 135,
     description: '中1〜中3の9教科×5段階（135点満点）',
-    sourceUrl: 'https://www.pref.nagasaki.jp/bunrui/kanko-kyoiku-bunka/shochuko/koko-nyushi/',
+    sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/42/naishin/',
+    sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/nagasaki/',
     sourceTitle: '長崎県教育委員会 入学者選抜',
-    lastVerified: '2026-01-31',
+    lastVerified: '2026-04-19',
     fiscalYear: '2026',
     reverseCalc: {
       totalMaxScore: 1000,
@@ -865,9 +909,10 @@ export const PREFECTURES: PrefectureConfig[] = [
     practicalMultiplier: 1,
     maxScore: 180,
     description: '中1・中2＋中3×2倍（180点満点）',
-    sourceUrl: 'https://www.pref.kumamoto.jp/site/kyouiku/list189-619.html',
+    sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/43/naishin/',
+    sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/kumamoto/',
     sourceTitle: '熊本県教育委員会 入学者選抜',
-    lastVerified: '2026-01-31',
+    lastVerified: '2026-04-19',
     fiscalYear: '2026',
     reverseCalc: {
       totalMaxScore: 1000,
@@ -887,9 +932,10 @@ export const PREFECTURES: PrefectureConfig[] = [
     maxScore: 520,
     description: '中3は5教科×2倍、実技4教科×4倍（520点満点）',
     note: 'この計算は520点満点ですが、実際の計算はより複雑で260点満点となるのが一般的です。このツールでは簡易計算をしています。',
-    sourceUrl: 'https://www.pref.oita.jp/site/kyoiku/list21509-25206.html',
+    sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/44/naishin/',
+    sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/oita/',
     sourceTitle: '大分県教育委員会 入学者選抜',
-    lastVerified: '2026-01-31',
+    lastVerified: '2026-04-19',
     fiscalYear: '2026',
     reverseCalc: {
       totalMaxScore: 1000,
@@ -908,9 +954,10 @@ export const PREFECTURES: PrefectureConfig[] = [
     practicalMultiplier: 1,
     maxScore: 135,
     description: '中1〜中3の9教科×5段階（135点満点）',
-    sourceUrl: 'https://www.pref.miyazaki.lg.jp/kokokyoiku/kyoikukosodate/kyoiku/20240612180352.html',
+    sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/45/naishin/',
+    sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/miyazaki/',
     sourceTitle: '宮崎県教育委員会 入学者選抜',
-    lastVerified: '2026-01-31',
+    lastVerified: '2026-04-19',
     fiscalYear: '2026',
     reverseCalc: {
       totalMaxScore: 1000,
@@ -930,9 +977,10 @@ export const PREFECTURES: PrefectureConfig[] = [
     maxScore: 450,
     description: '5教科×2倍、実技4教科×20倍（450点満点）',
     note: '実技が全体の約9割',
-    sourceUrl: 'https://www.pref.kagoshima.jp/kyoiku-bunka/school/koukou/nyushi/r5/koukounyuusi.html',
+    sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/46/naishin/',
+    sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/kagoshima/',
     sourceTitle: '鹿児島県教育委員会 入学者選抜',
-    lastVerified: '2026-01-31',
+    lastVerified: '2026-04-19',
     fiscalYear: '2026',
     reverseCalc: {
       totalMaxScore: 1000,
@@ -952,9 +1000,10 @@ export const PREFECTURES: PrefectureConfig[] = [
     practicalMultiplier: 1.5,
     maxScore: 165,
     description: '実技4教科×1.5倍（各学年55点×3＝165点満点）',
-    sourceUrl: 'https://www.pref.okinawa.jp/kyoiku/gakko/1008883/index.html',
+    sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/47/naishin/',
+    sourceUrl2: 'https://jyuku-online.com/blog/jj-okinawa/',
     sourceTitle: '沖縄県教育委員会 入学者選抜',
-    lastVerified: '2026-01-31',
+    lastVerified: '2026-04-19',
     fiscalYear: '2026',
     reverseCalc: {
       totalMaxScore: 1000,

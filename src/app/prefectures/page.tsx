@@ -1,62 +1,27 @@
-'use client';
-
-import * as React from 'react';
+import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { Search, MapPin, Calculator, ChevronRight, ExternalLink, Calendar, ChevronDown } from 'lucide-react';
+import { 
+  Calculator, 
+  ChevronRight, 
+  Home,
+  MapPin,
+  Sparkles,
+  ArrowRight,
+  Search,
+} from 'lucide-react';
 
-import { PREFECTURES, REGIONS, getPrefecturesByRegion } from '@/lib/prefectures';
-import type { RegionName } from '@/lib/prefectures';
+import { PREFECTURES, REGIONS } from '@/lib/prefectures';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 
+export const metadata = {
+  title: '都道府県別の内申点計算ツール一覧【2026年最新】全国47都道府県対応',
+  description: '全国47都道府県の高校入試に対応した内申点計算ツールの一覧ページ。お住まいの地域を選択するだけで、最新（令和8年度）の入試制度に基づいた正確な内申点を一瞬で算出できます。',
+  alternates: {
+    canonical: 'https://my-naishin.com/prefectures',
+  },
+};
+
 export default function PrefecturesPage() {
-  const [searchQuery, setSearchQuery] = React.useState('');
-  const [selectedRegion, setSelectedRegion] = React.useState<RegionName | 'all'>('all');
-  const [isRegionDropdownOpen, setIsRegionDropdownOpen] = React.useState(false);
-  const regionDropdownRef = React.useRef<HTMLDivElement>(null);
-
-  const filteredPrefectures = React.useMemo(() => {
-    let results = PREFECTURES;
-    
-    if (selectedRegion !== 'all') {
-      results = getPrefecturesByRegion(selectedRegion);
-    }
-    
-    if (searchQuery) {
-      const query = searchQuery.toLowerCase();
-      results = results.filter(p => 
-        p.name.includes(searchQuery) || 
-        p.code.toLowerCase().includes(query)
-      );
-    }
-    
-    return results;
-  }, [searchQuery, selectedRegion]);
-
-  React.useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (regionDropdownRef.current && !regionDropdownRef.current.contains(event.target as Node)) {
-        setIsRegionDropdownOpen(false);
-      }
-    }
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
-
-  const groupedByRegion = React.useMemo(() => {
-    if (selectedRegion !== 'all') {
-      return { [selectedRegion]: filteredPrefectures };
-    }
-    
-    const grouped: Record<string, typeof PREFECTURES> = {};
-    for (const region of REGIONS) {
-      const prefs = filteredPrefectures.filter(p => p.region === region);
-      if (prefs.length > 0) {
-        grouped[region] = prefs;
-      }
-    }
-    return grouped;
-  }, [filteredPrefectures, selectedRegion]);
-
   return (
     <>
       <BreadcrumbSchema 
@@ -65,222 +30,137 @@ export default function PrefecturesPage() {
           { name: '都道府県一覧', url: 'https://my-naishin.com/prefectures' }
         ]}
       />
+
       <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
-      <div className="mx-auto max-w-6xl px-4 py-8 md:py-12">
-        {/* Breadcrumb */}
-        <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
-          <Link href="/" className="hover:text-blue-600">ホーム</Link>
-          <ChevronRight className="h-4 w-4" />
-          <span className="text-slate-700">都道府県一覧</span>
-        </nav>
+        <div className="mx-auto max-w-5xl px-4 py-8 md:py-12">
+          {/* Breadcrumb */}
+          <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
+            <Link href="/" className="flex items-center gap-1 hover:text-blue-600">
+              <Home className="h-4 w-4" />
+              ホーム
+            </Link>
+            <ChevronRight className="h-4 w-4" />
+            <span className="text-slate-700">都道府県一覧</span>
+          </nav>
 
-        {/* Header */}
-        <header className="mb-8">
-          <h1 className="text-3xl font-bold text-slate-800 md:text-4xl">
-            都道府県別 内申点計算
-          </h1>
-          <p className="mt-2 text-slate-600">
-            47都道府県すべての内申点計算方法に対応。お住まいの地域を選んで計算できます。
-          </p>
-          <div className="mt-2 inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700 ring-1 ring-emerald-100">
-            2026年度入試対応（令和8年度入学者選抜）
-          </div>
-        </header>
-
-        {/* Search & Filter */}
-        <div className="mb-8 flex flex-col gap-4 sm:flex-row">
-          <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" />
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="都道府県名で検索..."
-              className="h-12 w-full rounded-xl border border-slate-200 bg-white pl-10 pr-4 text-sm shadow-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
-            />
-          </div>
-          
-          <div ref={regionDropdownRef} className="relative">
-            <button
-              type="button"
-              onClick={() => setIsRegionDropdownOpen(!isRegionDropdownOpen)}
-              className="flex h-12 w-full items-center justify-between gap-3 rounded-2xl border-2 border-slate-200 bg-white px-4 py-4 text-left transition-all shadow-sm hover:border-blue-300 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 sm:w-56"
-            >
-              <div className="flex items-center gap-3">
-                <div className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 shadow-md">
-                  <MapPin className="h-5 w-5 text-white" />
-                </div>
-                <div className="min-w-0 flex-1">
-                  <div className="text-sm font-bold text-slate-800 truncate">
-                    {selectedRegion === 'all' ? '全地域' : selectedRegion}
-                  </div>
-                  <div className="text-xs text-slate-500 truncate">
-                    {selectedRegion === 'all' ? 'すべての都道府県' : `${selectedRegion}地域`}
-                  </div>
-                </div>
-              </div>
-              <div className="rounded-full bg-slate-100 p-2 flex-shrink-0">
-                <ChevronDown className={`h-4 w-4 text-slate-400 transition-transform ${isRegionDropdownOpen ? 'rotate-180' : ''}`} />
-              </div>
-            </button>
-
-            {isRegionDropdownOpen && (
-              <div className="absolute z-50 mt-2 w-full overflow-auto rounded-2xl border border-slate-200 bg-white shadow-xl sm:w-56">
-                <div className="max-h-64 overflow-y-auto">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setSelectedRegion('all');
-                      setIsRegionDropdownOpen(false);
-                    }}
-                    className={`w-full px-4 py-3 text-left transition-colors hover:bg-blue-50 ${
-                      selectedRegion === 'all' ? 'bg-blue-50 border-l-4 border-blue-500' : ''
-                    }`}
-                  >
-                    <div className="font-medium text-slate-800">全地域</div>
-                    <div className="text-xs text-slate-500">すべての都道府県</div>
-                  </button>
-                  {REGIONS.map(region => (
-                    <button
-                      key={region}
-                      type="button"
-                      onClick={() => {
-                        setSelectedRegion(region);
-                        setIsRegionDropdownOpen(false);
-                      }}
-                      className={`w-full px-4 py-3 text-left transition-colors hover:bg-blue-50 ${
-                        selectedRegion === region ? 'bg-blue-50 border-l-4 border-blue-500' : ''
-                      }`}
-                    >
-                      <div className="font-medium text-slate-800">{region}</div>
-                      <div className="text-xs text-slate-500">{region}地域</div>
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Stats */}
-        <div className="mb-8 grid gap-4 sm:grid-cols-3">
-          <div className="rounded-xl border border-blue-200 bg-blue-50 p-4 text-center">
-            <div className="text-3xl font-bold text-blue-700">47</div>
-            <div className="text-sm text-blue-600">都道府県対応</div>
-          </div>
-          <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-center">
-            <div className="text-3xl font-bold text-emerald-700">2026年度入試対応</div>
-            <div className="text-sm text-emerald-600">（令和8年度入学者選抜）</div>
-          </div>
-          <div className="rounded-xl border border-violet-200 bg-violet-50 p-4 text-center">
-            <div className="text-3xl font-bold text-violet-700">{filteredPrefectures.length}</div>
-            <div className="text-sm text-violet-600">検索結果</div>
-          </div>
-        </div>
-
-        {/* Prefecture List by Region */}
-        <div className="space-y-8">
-          {Object.entries(groupedByRegion).map(([region, prefectures]) => (
-            <section key={region}>
-              <h2 className="mb-4 flex items-center gap-2 text-xl font-bold text-slate-800">
-                <MapPin className="h-5 w-5 text-blue-500" />
-                {region}
-                <span className="ml-2 text-sm font-normal text-slate-500">
-                  ({prefectures.length}件)
-                </span>
-              </h2>
-              
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {prefectures.map(pref => (
-                  <Link
-                    key={pref.code}
-                    href={`/${pref.code}/naishin`}
-                    className="group rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:border-blue-300 hover:shadow-md"
-                  >
-                    <div className="flex items-start justify-between">
-                      <div>
-                        <h3 className="text-lg font-bold text-slate-800 group-hover:text-blue-600">
-                          {pref.name}
-                        </h3>
-                        <div className="mt-1 text-2xl font-bold text-blue-600">
-                          {pref.maxScore}点
-                          <span className="ml-1 text-sm font-normal text-slate-500">満点</span>
-                        </div>
-                      </div>
-                      <div className="grid h-10 w-10 place-items-center rounded-lg bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-100">
-                        <Calculator className="h-5 w-5" />
-                      </div>
-                    </div>
-                    
-                    <div className="mt-3 space-y-1 text-xs text-slate-500">
-                      <div>対象：中{pref.targetGrades.join('・')}</div>
-                      {pref.practicalMultiplier > 1 && (
-                        <div>実技：{pref.practicalMultiplier}倍</div>
-                      )}
-                    </div>
-                    
-                    <div className="mt-3 flex items-center justify-between border-t border-slate-100 pt-3">
-                      {pref.sourceUrl ? (
-                        <a
-                          href={pref.sourceUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={(e) => e.stopPropagation()}
-                          className="flex items-center gap-1 text-xs text-slate-400 hover:text-blue-600"
-                        >
-                          <ExternalLink className="h-3 w-3" />
-                          公式
-                        </a>
-                      ) : (
-                        <span />
-                      )}
-                      {pref.lastVerified && (
-                        <span className="flex items-center gap-1 text-xs text-slate-400">
-                          <Calendar className="h-3 w-3" />
-                          {pref.lastVerified}
-                        </span>
-                      )}
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </section>
-          ))}
-        </div>
-
-        {filteredPrefectures.length === 0 && (
-          <div className="rounded-xl border border-slate-200 bg-white p-12 text-center">
-            <div className="text-4xl">🔍</div>
-            <div className="mt-4 text-lg font-medium text-slate-600">
-              該当する都道府県が見つかりません
+          {/* Header */}
+          <header className="mb-12 text-center">
+            <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-xl mb-6">
+              <MapPin className="h-8 w-8" />
             </div>
-            <button
-              onClick={() => {
-                setSearchQuery('');
-                setSelectedRegion('all');
-              }}
-              className="mt-4 text-sm text-blue-600 hover:underline"
-            >
-              検索条件をリセット
-            </button>
-          </div>
-        )}
+            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">
+              都道府県別の内申点計算
+            </h1>
+            <p className="mt-4 text-slate-600 max-w-2xl mx-auto leading-relaxed">
+              お住まいの地域を選択してください。各都道府県の最新（令和8年度）入試制度に基づいた、実技教科の倍率や対象学年を自動で反映した計算ツールをご利用いただけます。
+            </p>
+          </header>
 
-        {/* CTA */}
-        <div className="mt-12 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 p-8 text-center text-white">
-          <h2 className="text-2xl font-bold">今すぐ内申点を計算しよう</h2>
-          <p className="mt-2 text-blue-100">
-            都道府県を選んで、成績を入力するだけで内申点がわかります
-          </p>
-          <Link
-            href="/"
-            className="mt-6 inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3 font-bold text-blue-600 shadow-lg transition-all hover:shadow-xl"
-          >
-            <Calculator className="h-5 w-5" />
-            計算ツールを使う
-          </Link>
+          {/* Region Quick Links */}
+          <div className="mb-12 flex flex-wrap justify-center gap-2">
+            {REGIONS.map(region => (
+              <a 
+                key={region}
+                href={`#region-${region}`}
+                className="rounded-full bg-white px-4 py-2 text-sm font-medium text-slate-600 border border-slate-200 shadow-sm hover:border-blue-300 hover:text-blue-600 transition-all"
+              >
+                {region}
+              </a>
+            ))}
+          </div>
+
+          {/* Grid of Regions */}
+          <div className="space-y-12">
+            {REGIONS.map(region => {
+              const prefsInRegion = PREFECTURES.filter(p => p.region === region);
+              return (
+                <section key={region} id={`region-${region}`} className="scroll-mt-20">
+                  <div className="flex items-center gap-3 mb-6">
+                    <h2 className="text-xl font-bold text-slate-800 border-l-4 border-blue-500 pl-3">
+                      {region}
+                    </h2>
+                    <span className="text-xs font-medium text-slate-400 bg-slate-100 px-2 py-0.5 rounded-full">
+                      {prefsInRegion.length} 都道府県
+                    </span>
+                  </div>
+                  
+                  <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                    {prefsInRegion.map(pref => (
+                      <Link
+                        key={pref.code}
+                        href={`/${pref.code}/naishin`}
+                        className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:border-blue-300 hover:shadow-md hover:-translate-y-1"
+                      >
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <h3 className="text-lg font-bold text-slate-800 group-hover:text-blue-600">
+                              {pref.name}
+                            </h3>
+                            <p className="mt-1 text-xs text-slate-500 line-clamp-1">
+                              {pref.maxScore}点満点 / 実技{pref.practicalMultiplier}倍
+                            </p>
+                          </div>
+                          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-50 text-slate-400 group-hover:bg-blue-50 group-hover:text-blue-600 transition-colors">
+                            <Calculator className="h-5 w-5" />
+                          </div>
+                        </div>
+                        
+                        <div className="mt-4 flex items-center justify-between text-xs font-medium">
+                          <span className="text-slate-400">
+                            対象：中{pref.targetGrades.join('・')}
+                          </span>
+                          <span className="flex items-center gap-1 text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity">
+                            計算する <ArrowRight className="h-3 w-3" />
+                          </span>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </section>
+              );
+            })}
+          </div>
+
+          {/* Bottom Info */}
+          <div className="mt-20 rounded-3xl bg-slate-900 p-8 text-white shadow-2xl md:p-12">
+            <div className="grid gap-12 md:grid-cols-2 md:items-center">
+              <div>
+                <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/20 text-blue-400 mb-6">
+                  <Sparkles className="h-6 w-6" />
+                </div>
+                <h2 className="text-2xl font-bold mb-4">
+                  内申点アップの秘訣を公開中
+                </h2>
+                <p className="text-slate-400 leading-relaxed mb-6">
+                  計算した後は、どうやって点数を上げるかが重要です。各教科別の対策法や、副教科で「5」を取るための具体的なアクションプランをコラムでまとめています。
+                </p>
+                <Link
+                  href="/blog"
+                  className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-6 py-3 font-bold text-white transition-all hover:bg-blue-700 hover:scale-105"
+                >
+                  受験攻略コラムを読む
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+              <div className="grid gap-4">
+                <div className="rounded-2xl bg-white/5 p-5 border border-white/10">
+                  <h3 className="font-bold mb-2 flex items-center gap-2">
+                    <div className="h-1.5 w-1.5 rounded-full bg-blue-400" />
+                    最新年度（2026年）完全対応
+                  </h3>
+                  <p className="text-sm text-slate-400">毎年の入試制度変更を反映。令和8年度入試に向けた正確なシミュレーションが可能です。</p>
+                </div>
+                <div className="rounded-2xl bg-white/5 p-5 border border-white/10">
+                  <h3 className="font-bold mb-2 flex items-center gap-2">
+                    <div className="h-1.5 w-1.5 rounded-full bg-green-400" />
+                    公式資料に基づく算出
+                  </h3>
+                  <p className="text-sm text-slate-400">各都道府県教育委員会の「入学者選抜実施要綱」を根拠に、1教科ずつの重みを忠実に再現しています。</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
       </div>
     </>
   );

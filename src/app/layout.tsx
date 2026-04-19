@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import { Noto_Sans_JP } from 'next/font/google';
-import Script from 'next/script';
 import type { ReactNode } from 'react';
 
 import './globals.css';
@@ -63,14 +62,14 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="ja" className={`h-full ${notoSansJp.variable}`}>
       <head>
         <link rel="canonical" href="https://my-naishin.com" />
-      </head>
-      <body className={`min-h-screen mesh-gradient text-slate-900 antialiased`}>
-        <Script
+        {/* AdSense script using standard tag to avoid data-nscript attribute issues */}
+        <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7817682248719138"
           crossOrigin="anonymous"
-          strategy="afterInteractive"
         />
+      </head>
+      <body className={`min-h-screen mesh-gradient text-slate-900 antialiased`}>
         <GlobalHeaderBridge />
         <main>{children}</main>
         <Footer />
