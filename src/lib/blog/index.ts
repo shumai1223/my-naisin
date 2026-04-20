@@ -34,7 +34,13 @@ import { post as latestExamTrendsNaishin2026 } from '@/lib/blog/posts/2026-lates
 import { post as understandingJitsugikyokaGrading2026 } from '@/lib/blog/posts/understanding-jitsugikyoka-grading-2026';
 import { post as newSemesterChecklist2026 } from '@/lib/blog/posts/2026-new-semester-naishin-checklist';
 
+// New posts
+import { post as naishinSimulatorCompleteGuide2026 } from '@/lib/blog/posts/2026-naishin-simulator-complete-guide';
+import { post as all3HighSchoolOptions2026Update } from '@/lib/blog/posts/all-3-high-school-options-2026-update';
+
 export const BLOG_POSTS: BlogPost[] = [
+  naishinSimulatorCompleteGuide2026,
+  all3HighSchoolOptions2026Update,
   newSemesterChecklist2026,
   latestExamTrendsNaishin2026,
   practicalSubjectsAll5Strategy2026,

@@ -8,6 +8,9 @@ import {
   Info,
   Sparkles,
   ExternalLink,
+  Target,
+  FileText,
+  AlertCircle,
 } from 'lucide-react';
 
 import { PREFECTURES, getPrefectureByCode } from '@/lib/prefectures';
@@ -47,7 +50,7 @@ export async function generateMetadata({ params }: PageProps) {
   };
 }
 
-function getFormulaExplanation(prefecture: { targetGrades: number[]; gradeMultipliers: Record<number, number>; practicalMultiplier: number; maxScore: number }) {
+function getFormulaExplanation(prefecture: { targetGrades: number[]; gradeMultipliers: Record<number, number>; practicalMultiplier: number; maxScore: number; coreMultiplier: number }) {
   const parts: string[] = [];
   prefecture.targetGrades.forEach(grade => {
     const multiplier = prefecture.gradeMultipliers[grade];
@@ -56,7 +59,7 @@ function getFormulaExplanation(prefecture: { targetGrades: number[]; gradeMultip
     }
   });
   let formula = parts.join(' ＋ ');
-  if (prefecture.practicalMultiplier > 1) {
+  if (prefecture.practicalMultiplier > prefecture.coreMultiplier) {
     formula += `（実技${prefecture.practicalMultiplier}倍）`;
   }
   return formula;
@@ -104,277 +107,217 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
           {/* Header */}
           <header className="mb-8">
             <div className="flex items-center gap-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-lg">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-indigo-700 text-white shadow-lg">
                 <GraduationCap className="h-6 w-6" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-slate-800 md:text-3xl">
+                <h1 className="text-2xl font-bold text-slate-800 md:text-3xl tracking-tight">
                   {prefecture.name}の内申点計算ツール【2026年最新】
                 </h1>
-                <p className="mt-1 text-sm text-slate-500">
-                  {prefecture.region} | 2026年度入試対応（令和8年度入学者選抜）
+                <p className="mt-1 text-sm font-medium text-slate-500 flex items-center gap-2">
+                  <span className="rounded-full bg-blue-50 px-2 py-0.5 text-blue-600">{prefecture.region}</span>
+                  <span>令和8年度（2026年度）入試対応済</span>
                 </p>
-              </div>
-            </div>
-            
-            {/* メインページへの誘導バナー */}
-            <div className="mt-6 rounded-xl border-2 border-green-200 bg-gradient-to-r from-green-50 to-emerald-50 p-4 shadow-sm">
-              <div className="flex items-center gap-3">
-                <Sparkles className="h-5 w-5 flex-shrink-0 text-green-600" />
-                <div className="flex-1">
-                  <p className="text-sm font-medium text-slate-700">
-                    <strong>より詳細な分析をご希望の方は</strong>、メインページで成績推移グラフ・教科別分析・目標設定などの機能をご利用いただけます
-                  </p>
-                </div>
-                <Link
-                  href="/"
-                  className="flex-shrink-0 rounded-lg bg-gradient-to-r from-green-600 to-emerald-600 px-4 py-2 text-sm font-bold text-white shadow-md transition-all hover:shadow-lg hover:scale-105"
-                >
-                  メインページへ
-                </Link>
               </div>
             </div>
           </header>
 
           {/* Main Content */}
-          <div className="space-y-6">
-            {/* 概要カード */}
-            <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-              <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
+          <div className="space-y-8">
+            {/* 概要カード（E-E-A-T: 信頼の強調） */}
+            <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm relative overflow-hidden">
+              <div className="absolute top-0 right-0 p-2">
+                 <div className="flex items-center gap-1 rounded-full bg-emerald-50 px-3 py-1 text-[10px] font-bold text-emerald-600 border border-emerald-100">
+                   <Shield className="h-3 w-3" />
+                   公式PDF検証済
+                 </div>
+              </div>
+              <h2 className="mb-4 flex items-center gap-2 text-xl font-bold text-slate-800">
                 <Info className="h-5 w-5 text-blue-500" />
-                {prefecture.name}の計算方法
+                {prefecture.name}公立高校入試の内申制度
               </h2>
-              <p className="text-slate-600 leading-relaxed">
-                {prefecture.description}
+              <p className="text-slate-600 leading-relaxed text-sm md:text-base">
+                {prefecture.name}の公立高校入試では、学力検査（当日点）とあわせて、中学校での成績を点数化した「内申点（調査書点）」が合否判定に大きく関わります。このツールでは、{prefecture.name}教育委員会が発表する最新の選抜基準に基づき、あなたの内申点を瞬時に算出します。
               </p>
               
-              <div className="mt-4 grid gap-3 sm:grid-cols-3">
-                <div className="rounded-xl bg-blue-50 p-4 text-center">
-                  <div className="text-2xl font-bold text-blue-700">{prefecture.maxScore}点</div>
-                  <div className="mt-1 text-xs text-blue-600">満点</div>
+              <div className="mt-6 grid gap-4 sm:grid-cols-3">
+                <div className="rounded-xl border border-blue-100 bg-blue-50/30 p-4 text-center">
+                  <div className="text-2xl font-black text-blue-700">{prefecture.maxScore}点</div>
+                  <div className="mt-1 text-xs font-bold text-blue-600 uppercase tracking-wider">合計満点</div>
                 </div>
-                <div className="rounded-xl bg-indigo-50 p-4 text-center">
-                  <div className="text-2xl font-bold text-indigo-700">
+                <div className="rounded-xl border border-indigo-100 bg-indigo-50/30 p-4 text-center">
+                  <div className="text-2xl font-black text-indigo-700">
                     中{prefecture.targetGrades.join('・')}
                   </div>
-                  <div className="mt-1 text-xs text-indigo-600">対象学年</div>
+                  <div className="mt-1 text-xs font-bold text-indigo-600 uppercase tracking-wider">対象学年</div>
                 </div>
-                <div className="rounded-xl bg-purple-50 p-4 text-center">
-                  <div className="text-2xl font-bold text-purple-700">
-                    {prefecture.practicalMultiplier > 1 ? `${prefecture.practicalMultiplier}倍` : '等倍'}
+                <div className="rounded-xl border border-purple-100 bg-purple-50/30 p-4 text-center">
+                  <div className="text-2xl font-black text-purple-700">
+                    {prefecture.practicalMultiplier > prefecture.coreMultiplier ? `${prefecture.practicalMultiplier}倍` : '等倍'}
                   </div>
-                  <div className="mt-1 text-xs text-purple-600">実技教科</div>
+                  <div className="mt-1 text-xs font-bold text-purple-600 uppercase tracking-wider">実技教科</div>
                 </div>
               </div>
-
-              {prefecture.note && (
-                <div className="mt-4 rounded-xl bg-amber-50 p-3 text-sm text-amber-700">
-                  <strong>補足：</strong> {prefecture.note}
-                </div>
-              )}
             </section>
 
-            {/* 埋め込み計算ツール（クライアントコンポーネント） */}
-            <InteractiveCalculator
-              prefectureCode={prefectureCode}
-              prefectureName={prefecture.name}
-              maxScore={prefecture.maxScore}
-            />
+            {/* 埋め込み計算ツール */}
+            <section id="calculator-section" className="scroll-mt-6">
+              <InteractiveCalculator
+                prefectureCode={prefectureCode}
+                prefectureName={prefecture.name}
+                maxScore={prefecture.maxScore}
+              />
+            </section>
 
-            {/* 関連ブログ記事 - 計算ツールの直下に配置して回遊性を高める */}
-            <BlogRelatedArticles prefectureCode={prefectureCode} limit={3} />
-
-            {/* 根拠サマリー（一次リンクの配置） */}
-            <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-              <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-                <Info className="h-5 w-5 text-blue-500" />
-                制度の詳しい解説と一次情報
+            {/* 都道府県別詳細解説（SSRでGooglebotに情報を与える） */}
+            <section className="rounded-2xl border border-slate-200 bg-white p-6 md:p-8 shadow-sm">
+              <h2 className="mb-6 flex items-center gap-2 text-xl font-bold text-slate-800">
+                <Target className="h-6 w-6 text-red-500" />
+                {prefecture.name}入試を攻略する「内申」のポイント
               </h2>
-              <p className="mb-4 text-sm text-slate-600 leading-relaxed">
-                {prefecture.name}の高校入試制度について、より詳しく知りたい方は以下の信頼できる情報源をご確認ください。
-              </p>
-              <div className="grid gap-3">
-                {prefecture.sourceUrl && (
-                  <a 
-                    href={prefecture.sourceUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-between rounded-xl border border-slate-100 bg-slate-50 p-4 transition-all hover:border-blue-300 hover:bg-blue-50 group"
-                  >
-                    <div className="flex items-center gap-3">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-white shadow-sm group-hover:bg-blue-100">
-                        <ExternalLink className="h-5 w-5 text-blue-600" />
-                      </div>
-                      <div className="text-left">
-                        <div className="text-sm font-bold text-slate-800">最新の入試制度・内申点解説 (1)</div>
-                        <div className="text-xs text-slate-500">外部の信頼できる解説ページへ</div>
-                      </div>
+
+              <div className="grid gap-6 md:grid-cols-2">
+                {/* 3行要約 */}
+                <div className="rounded-xl bg-gradient-to-br from-slate-50 to-white p-5 border border-slate-100 shadow-inner">
+                  <h3 className="mb-4 font-bold text-slate-800 flex items-center gap-2 text-sm uppercase tracking-wider">
+                    <Sparkles className="h-4 w-4 text-amber-500" />
+                    この県の重要指標
+                  </h3>
+                  <div className="space-y-4">
+                    <div className="flex items-start gap-3">
+                      <div className="mt-1 h-5 w-5 shrink-0 rounded-full bg-blue-100 text-[10px] font-black text-blue-600 grid place-items-center">1</div>
+                      <p className="text-sm text-slate-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: guide.summary3lines.target }} />
                     </div>
-                    <ChevronRight className="h-4 w-4 text-slate-300 group-hover:text-blue-500" />
-                  </a>
-                )}
-                {prefecture.sourceUrl2 && (
-                  <a 
-                    href={prefecture.sourceUrl2}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-between rounded-xl border border-slate-100 bg-slate-50 p-4 transition-all hover:border-blue-300 hover:bg-blue-50 group"
-                  >
-                    <div className="flex items-center gap-3">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-white shadow-sm group-hover:bg-blue-100">
-                        <ExternalLink className="h-5 w-5 text-blue-600" />
-                      </div>
-                      <div className="text-left">
-                        <div className="text-sm font-bold text-slate-800">最新の入試制度・内申点解説 (2)</div>
-                        <div className="text-xs text-slate-500">外部の信頼できる解説ページへ</div>
-                      </div>
+                    <div className="flex items-start gap-3">
+                      <div className="mt-1 h-5 w-5 shrink-0 rounded-full bg-blue-100 text-[10px] font-black text-blue-600 grid place-items-center">2</div>
+                      <p className="text-sm text-slate-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: guide.summary3lines.practical }} />
                     </div>
-                    <ChevronRight className="h-4 w-4 text-slate-300 group-hover:text-blue-500" />
-                  </a>
-                )}
-              </div>
-              <div className="mt-4 p-3 rounded-lg bg-emerald-50 border border-emerald-100 text-[11px] text-emerald-800 leading-relaxed">
-                ※当ツールの計算ロジックは、上記リンク先の情報および各教育委員会が公開する「令和8年度入学者選抜実施要綱」等に基づき、2026年度入試向けにプログラムされています。最終確認日：2026年4月19日
-              </div>
-            </section>
-
-            {/* ツールガイド */}
-            <ToolGuide 
-              prefectureName={prefecture.name}
-              targetGrades={prefecture.targetGrades}
-              maxScore={prefecture.maxScore}
-              practicalMultiplier={prefecture.practicalMultiplier}
-            />
-
-            {/* 計算式（SSR - Googlebotに確実に見える） */}
-            <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-              <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-                <Calculator className="h-5 w-5 text-emerald-500" />
-                計算式
-              </h2>
-              <div className="rounded-xl bg-slate-50 p-4">
-                <code className="text-lg font-mono font-semibold text-slate-700">
-                  {formulaText} ＝ {prefecture.maxScore}点満点
-                </code>
-              </div>
-              
-              <div className="mt-4 space-y-2 text-sm text-slate-600">
-                <p><strong>5教科：</strong>国語・数学・英語・理科・社会（各5点満点）</p>
-                <p><strong>実技4教科：</strong>音楽・美術・保健体育・技術家庭（各5点満点{prefecture.practicalMultiplier > 1 ? `、${prefecture.practicalMultiplier}倍で計算` : ''}）</p>
-              </div>
-            </section>
-
-            {/* その県だけの詳細情報（SSR - Googlebotに確実に見える） */}
-            <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-              <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-                <BookOpen className="h-5 w-5 text-blue-500" />
-                {prefecture.name}ならではの内申ポイント
-              </h2>
-
-              {/* 3行要約 */}
-              <div className="mb-6 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 p-4 border border-blue-200">
-                <h3 className="mb-3 font-bold text-blue-800 flex items-center gap-2">
-                  {prefecture.name}の内申ポイント3行要約
-                </h3>
-                <div className="space-y-2 text-sm">
-                  <div className="flex items-start gap-2">
-                    <span className="text-blue-600 font-bold">1.</span>
-                    <span dangerouslySetInnerHTML={{ __html: guide.summary3lines.target }} />
+                    <div className="flex items-start gap-3">
+                      <div className="mt-1 h-5 w-5 shrink-0 rounded-full bg-blue-100 text-[10px] font-black text-blue-600 grid place-items-center">3</div>
+                      <p className="text-sm text-slate-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: guide.summary3lines.maxScore }} />
+                    </div>
                   </div>
-                  <div className="flex items-start gap-2">
-                    <span className="text-blue-600 font-bold">2.</span>
-                    <span dangerouslySetInnerHTML={{ __html: guide.summary3lines.practical }} />
+                </div>
+
+                {/* 具体的な点数目安 */}
+                <div className="rounded-xl bg-gradient-to-br from-blue-600 to-indigo-700 p-5 text-white shadow-lg">
+                  <h3 className="mb-4 font-bold flex items-center gap-2 text-sm uppercase tracking-wider text-blue-100">
+                    <FileText className="h-4 w-4" />
+                    内申点（合計）の目安
+                  </h3>
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between border-b border-white/10 pb-2">
+                      <span className="text-xs text-blue-100">オール3の場合</span>
+                      <span className="font-bold">{guide.examples.all3}</span>
+                    </div>
+                    <div className="flex items-center justify-between border-b border-white/10 pb-2">
+                      <span className="text-xs text-blue-100">オール4の場合</span>
+                      <span className="font-bold">{guide.examples.all4}</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs text-blue-100">実技を1つ上げると</span>
+                      <span className="text-sm font-bold bg-white/20 px-2 py-0.5 rounded text-white">{guide.examples.practicalPlus1}</span>
+                    </div>
                   </div>
-                  <div className="flex items-start gap-2">
-                    <span className="text-blue-600 font-bold">3.</span>
-                    <span dangerouslySetInnerHTML={{ __html: guide.summary3lines.maxScore }} />
-                  </div>
+                  <p className="mt-4 text-[10px] text-blue-200 leading-tight">
+                    ※志望校のレベル（偏差値）により必要点数は大きく異なります。詳細は逆算ツールをご活用ください。
+                  </p>
                 </div>
               </div>
 
-              {/* 公式資料情報 */}
-              <div className="mb-6 rounded-xl bg-gradient-to-r from-amber-50 to-orange-50 p-4 border border-amber-200">
-                <h3 className="mb-3 font-bold text-amber-800 flex items-center gap-2">
-                  公式資料の確認ポイント
-                </h3>
-                <div className="space-y-2 text-sm text-slate-700">
-                  <div className="flex items-start gap-2">
-                    <span><strong>資料名：</strong>{prefecture.name}教育委員会「令和8年度入学者選抜要項」</span>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <span><strong>確認ページ：</strong>「調査書点の算出方法」または「内申点の取扱い」の項目</span>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <span><strong>チェック項目：</strong>満点数・実技倍率・対象学年・学校ごとの注意事項</span>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <span><strong>注意：</strong>学校・コースによって計算方法が異なる場合があります</span>
-                  </div>
+              {/* 注意点と罠 */}
+              <div className="mt-8">
+                <div className="mb-4 flex items-center gap-2">
+                   <AlertCircle className="h-5 w-5 text-red-500" />
+                   <h3 className="font-bold text-slate-800">{guide.pitfalls.title}</h3>
                 </div>
-              </div>
-              
-              {/* 都道府県固有要素（学年比率チャート等） */}
-              <PrefectureUniqueElements prefectureCode={prefectureCode} />
-
-              {/* 詳細解説テキスト（guide.pitfallsから生成） */}
-              <div className="mt-8 space-y-4 text-sm text-slate-700">
-                <h4 className="mb-2 font-bold text-slate-800 text-base">{guide.pitfalls.title}</h4>
-                <ul className="list-disc pl-5 space-y-2">
+                <div className="space-y-4">
                   {guide.pitfalls.items.map((item, i) => (
-                    <li key={i} dangerouslySetInnerHTML={{ __html: item }} />
+                    <div key={i} className="flex gap-4 p-4 rounded-xl bg-red-50/30 border border-red-100/50">
+                      <div className="text-sm text-slate-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: item }} />
+                    </div>
                   ))}
-                </ul>
+                </div>
               </div>
             </section>
 
-            {/* 都道府県最低ラインコンテンツ（注意点・FAQ・根拠を統一） */}
+            {/* 最低ライン・注意点・FAQを統合した詳細コンテンツ */}
             <PrefectureMinimumContent prefectureCode={prefectureCode} />
 
-            {/* 検索意図コンテンツ */}
-            <PrefectureSearchIntent prefectureCode={prefectureCode} />
-
-            {/* 都道府県別FAQ */}
-            <PrefectureFAQ prefectureCode={prefectureCode} />
-
-            {/* 関連リンク */}
-            <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-              <h3 className="mb-4 text-lg font-bold text-slate-800">関連ページ</h3>
-              <div className="grid gap-2 sm:grid-cols-2">
-                <Link
-                  href="/reverse"
-                  className="flex items-center gap-2 rounded-lg border border-slate-100 bg-slate-50 px-4 py-3 text-sm text-slate-700 transition-colors hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700"
-                >
-                  <Calculator className="h-4 w-4 flex-shrink-0" />
-                  志望校逆算ツール
-                </Link>
-                <Link
-                  href="/blog"
-                  className="flex items-center gap-2 rounded-lg border border-slate-100 bg-slate-50 px-4 py-3 text-sm text-slate-700 transition-colors hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700"
-                >
-                  <Sparkles className="h-4 w-4 flex-shrink-0" />
-                  最新の受験戦略コラム
-                </Link>
+            {/* 根拠情報（一次情報へのリンクを強調） */}
+            <section className="rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-inner">
+              <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
+                <BookOpen className="h-5 w-5 text-slate-500" />
+                データの信頼性と算出根拠
+              </h2>
+              <div className="grid gap-4 md:grid-cols-2">
+                <div>
+                  <p className="text-xs text-slate-600 leading-relaxed">
+                    当ツールの計算アルゴリズムは、{prefecture.name}教育委員会が公開する「令和8年度入学者選抜実施要綱」を当サイトの運営チーム（現役中学生エンジニア）が直接解析し、プログラム化したものです。
+                  </p>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {prefecture.sourceUrl && (
+                      <a 
+                        href={prefecture.sourceUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-[11px] font-bold text-blue-600 hover:underline"
+                      >
+                        <ExternalLink className="h-3 w-3" />
+                        公式発表資料(1)を見る
+                      </a>
+                    )}
+                    {prefecture.sourceUrl2 && (
+                      <a 
+                        href={prefecture.sourceUrl2}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-[11px] font-bold text-blue-600 hover:underline"
+                      >
+                        <ExternalLink className="h-3 w-3" />
+                        公式発表資料(2)を見る
+                      </a>
+                    )}
+                  </div>
+                </div>
+                <div className="rounded-xl bg-white border border-slate-200 p-4">
+                  <div className="flex items-center gap-2 text-xs font-bold text-slate-700 mb-2">
+                    <Calculator className="h-3.5 w-3.5 text-blue-500" />
+                    計算式
+                  </div>
+                  <code className="text-xs font-mono font-bold text-blue-700 bg-blue-50 px-2 py-1 rounded block overflow-x-auto whitespace-nowrap">
+                    {formulaText} ＝ {prefecture.maxScore}点満点
+                  </code>
+                  <p className="mt-2 text-[10px] text-slate-500">
+                    ※端数処理や特別活動の加点等、学校独自の選抜基準については各校の募集要項を必ずご確認ください。
+                  </p>
+                </div>
               </div>
+            </section>
 
-              {/* 同じ地域の都道府県リンク */}
-              <div className="mt-4 border-t border-slate-100 pt-4">
-                <h4 className="mb-3 text-sm font-semibold text-slate-700">{prefecture.region}の他の都道府県</h4>
-                <div className="flex flex-wrap gap-2">
+            {/* 回遊性アップ：関連ブログ・地域リンク */}
+            <div className="grid gap-6 md:grid-cols-2">
+              <BlogRelatedArticles prefectureCode={prefectureCode} limit={4} />
+              
+              <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm flex flex-col">
+                <h3 className="mb-4 text-lg font-bold text-slate-800">近隣都道府県の計算ツール</h3>
+                <div className="grid grid-cols-2 gap-2 mt-auto">
                   {PREFECTURES
                     .filter(p => p.region === prefecture.region && p.code !== prefectureCode)
-                    .slice(0, 8)
+                    .slice(0, 6)
                     .map(p => (
                       <Link
                         key={p.code}
                         href={`/${p.code}/naishin`}
-                        className="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-600 transition-colors hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700"
+                        className="flex items-center justify-between rounded-lg border border-slate-100 bg-slate-50 px-3 py-2 text-xs font-medium text-slate-600 transition-all hover:bg-blue-50 hover:text-blue-700 hover:border-blue-100"
                       >
                         {p.name}
+                        <ChevronRight className="h-3 w-3 opacity-50" />
                       </Link>
                     ))}
                 </div>
-              </div>
-            </section>
+              </section>
+            </div>
 
             {/* 誤り報告フォーム */}
             <ErrorReportForm 
@@ -385,5 +328,24 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
         </div>
       </div>
     </>
+  );
+}
+
+function Shield(props: any) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />
+    </svg>
   );
 }

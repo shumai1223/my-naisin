@@ -5,7 +5,7 @@ export const post: BlogPost = {
     slug: 'fukukyoka-bairitsu-by-prefecture',
     title: '【都道府県別】副教科の倍率まとめ｜2倍？3倍？等倍？',
     description: '実技4教科（音楽・美術・保体・技家）の倍率は都道府県で異なります。2倍・3倍・等倍の県を一覧で比較し、副教科が内申に与える影響を解説。',
-    date: '2026-04-19',
+    date: '2026-04-20',
     category: '都道府県別ガイド',
     readTime: '12分',
     tags: ['内申点', '副教科', '実技教科', '倍率', '都道府県別'],

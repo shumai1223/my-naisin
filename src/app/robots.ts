@@ -9,8 +9,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: [
           '/api/',
           '/pref/',      // 旧パス
-          '/reverse?',   // クエリパラメータ付きURLのクロール制限
-          '/*?*',        // 無限クロールの防止
         ],
       },
     ],

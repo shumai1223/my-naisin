@@ -4,21 +4,20 @@ import { BLOG_POSTS } from '@/lib/blog-data';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://my-naishin.com';
-  // 2026年4月16日: サイトの「熱気」を伝える大規模アップデート
-  const lastModified = new Date('2026-04-16');
+  const lastModified = new Date(); // 動的に現在時刻を取得して常に最新アピール
 
   // 1. 静的コアページ (最重要)
   const staticPages = [
-    { url: '', priority: 1.0, changeFrequency: 'daily' },
-    { url: '/tools', priority: 0.9, changeFrequency: 'weekly' },
-    { url: '/reverse', priority: 0.9, changeFrequency: 'weekly' },
-    { url: '/prefectures', priority: 0.9, changeFrequency: 'weekly' },
+    { url: '', priority: 1.0, changeFrequency: 'always' },
+    { url: '/reverse', priority: 1.0, changeFrequency: 'always' },
+    { url: '/tools', priority: 0.9, changeFrequency: 'daily' },
+    { url: '/prefectures', priority: 0.9, changeFrequency: 'daily' },
     { url: '/comparison', priority: 0.8, changeFrequency: 'weekly' },
-    { url: '/guide', priority: 0.8, changeFrequency: 'monthly' },
-    { url: '/glossary', priority: 0.7, changeFrequency: 'monthly' },
-    { url: '/blog', priority: 0.8, changeFrequency: 'daily' },
-    { url: '/about', priority: 0.7, changeFrequency: 'monthly' },
-    { url: '/quality', priority: 0.7, changeFrequency: 'monthly' },
+    { url: '/guide', priority: 0.8, changeFrequency: 'weekly' },
+    { url: '/glossary', priority: 0.8, changeFrequency: 'weekly' },
+    { url: '/blog', priority: 0.9, changeFrequency: 'always' },
+    { url: '/about', priority: 0.8, changeFrequency: 'monthly' },
+    { url: '/quality', priority: 0.8, changeFrequency: 'monthly' },
     { url: '/contact', priority: 0.5, changeFrequency: 'yearly' },
     { url: '/privacy', priority: 0.5, changeFrequency: 'yearly' },
     { url: '/terms', priority: 0.5, changeFrequency: 'yearly' },
@@ -30,32 +29,41 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: page.priority,
   }));
 
-  // 2. 都道府県別計算ページ（最重要コンテンツ - 直URLを優先）
+  // 2. 都道府県別計算ページ（最重要コンテンツ）
   const prefectureNaishinPages = PREFECTURES.map(prefecture => ({
     url: `${baseUrl}/${prefecture.code}/naishin`,
     lastModified,
-    changeFrequency: 'daily' as const, // クロール頻度を上げる
-    priority: 0.9,
+    changeFrequency: 'always' as const, // 強烈なクロール要求
+    priority: 1.0,
   }));
 
-  // 3. 都道府県別逆算ページ
+  // 3. 都道府県別逆算ページ（リダイレクトしてるけど一応インデックスさせる）
   const prefectureReversePages = PREFECTURES.map(prefecture => ({
     url: `${baseUrl}/${prefecture.code}/reverse`,
     lastModified,
-    changeFrequency: 'weekly' as const,
-    priority: 0.7,
+    changeFrequency: 'daily' as const,
+    priority: 0.9,
   }));
 
-  // 4. ブログ個別記事
+  // 4. 都道府県別トップページ (追加)
+  const prefectureTopPages = PREFECTURES.map(prefecture => ({
+    url: `${baseUrl}/${prefecture.code}`,
+    lastModified,
+    changeFrequency: 'always' as const,
+    priority: 0.9,
+  }));
+
+  // 5. ブログ個別記事
   const blogPages = BLOG_POSTS.map(post => ({
     url: `${baseUrl}/blog/${post.slug}`,
-    lastModified: new Date(post.lastUpdated || post.date || '2026-04-16'),
-    changeFrequency: 'daily' as const, // 更新アピールのため
-    priority: 0.8,
+    lastModified: new Date(post.lastUpdated || post.date || lastModified),
+    changeFrequency: 'daily' as const, 
+    priority: 0.9,
   }));
 
   return [
     ...staticPages,
+    ...prefectureTopPages,
     ...prefectureNaishinPages,
     ...prefectureReversePages,
     ...blogPages,

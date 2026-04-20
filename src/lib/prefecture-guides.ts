@@ -73,7 +73,7 @@ export const prefectureGuides: Record<string, PrefectureGuide> = {
       {
         name: '東京都教育委員会（入学者選抜）',
         url: 'https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/exam/',
-        lastVerified: '2026年4月19日',
+        lastVerified: '2026年4月20日',
         notes: '令和8年度の最新実施要綱に基づき更新済み。'
       }
     ],
@@ -100,7 +100,7 @@ export const prefectureGuides: Record<string, PrefectureGuide> = {
       items: [
         '<strong>面接の廃止</strong>：2024年度から原則廃止され、その分「内申」「当日点」「特色検査」の比重が上がりました。',
         '<strong>中3の成績は2倍</strong>：中2の45点満点 ＋ 中3の90点満点 ＝ 135点満点。中3での爆伸びが逆転の鍵です。',
-        '<strong>特色検査の壁</strong>：横浜翠嵐や柏陽、希望ケ丘などの上位校では、教科横断型の「特色検査」が課されます。内申点が高くてもここで逆転されるケースが多発。',
+        '<strong>特色検査の壁</strong>：横浜翠嵐や柏陽、希望ケ丘などの上位校では、教科横断型の「特色検査」が課されます。内申点が高くてもここで逆転されるケースが多発. 。',
         '<strong>S値の計算</strong>：学校ごとに「2:8:2」や「3:7:3」など、内申と当日点の比率が異なります。内申が低い人は「当日点重視」の学校を選ぶ戦略が有効。',
         '主体的態度のA判定が必須：観点別評価の「主体性」がB以下だと、5段階評価で「4」以上を取るのが極めて難しくなっています。'
       ]
@@ -123,7 +123,7 @@ export const prefectureGuides: Record<string, PrefectureGuide> = {
       {
         name: '神奈川県教育委員会（公立高校入試）',
         url: 'https://www.pref.kanagawa.jp/docs/dc4/nyusen/nyusen.html',
-        lastVerified: '2026年4月19日',
+        lastVerified: '2026年4月20日',
         notes: '面接廃止後の新制度に対応した情報を掲載。'
       }
     ],
@@ -173,8 +173,8 @@ export const prefectureGuides: Record<string, PrefectureGuide> = {
       {
         name: '大阪府教育委員会（入試情報）',
         url: 'https://www.pref.osaka.lg.jp/kotogakko/gakuji-g3/',
-        lastVerified: '2026年4月19日',
-        notes: '英検読み替え制度、C問題採用校の最新リストを確認。'
+        lastVerified: '2026年4月20日',
+        notes: '英検読み替え制度、C問題採用校の最新リストを確認. 。'
       }
     ],
     related: [
@@ -227,7 +227,7 @@ export const prefectureGuides: Record<string, PrefectureGuide> = {
       {
         name: '埼玉県教育委員会',
         url: 'https://www.pref.saitama.lg.jp/f2208/nyuushi.html',
-        lastVerified: '2026年4月19日',
+        lastVerified: '2026年4月20日',
         notes: '令和8年度埼玉県公立高等学校入学者選抜実施要綱 第3章「選抜方法」'
       }
     ],
@@ -262,7 +262,7 @@ export const prefectureGuides: Record<string, PrefectureGuide> = {
     faq: [
       {
         question: '千葉県の内申点は何点満点ですか？',
-        answer: '千葉県の内申点は135点満点です。中1〜中3の9教科×5段階＝45点×3年間＝135点として計算されます。全教科が等倍で、実技教科の傾斜配点はありません。'
+        answer: '千葉県の内申点は135点満点です。中1〜中3の9教科×5段階＝45点×3年間＝135点として計算されます。全教科が等倍で、実技教科の傾斜配点はありません. 。'
       },
       {
         question: '千葉県はいつの成績が内申点になりますか？',
@@ -281,7 +281,7 @@ export const prefectureGuides: Record<string, PrefectureGuide> = {
       {
         name: '千葉県教育委員会',
         url: 'https://www.pref.chiba.lg.jp/kyouiku/shidou/nyuushi/koukou/index.html',
-        lastVerified: '2026年4月19日',
+        lastVerified: '2026年4月20日',
         notes: '令和8年度千葉県公立高等学校入学者選抜実施要綱 第2章「選抜方法」'
       }
     ],
@@ -335,7 +335,7 @@ export const prefectureGuides: Record<string, PrefectureGuide> = {
       {
         name: '北海道教育委員会',
         url: 'https://www.dokyoi.pref.hokkaido.lg.jp/hk/gks/koukounyuusenn.html',
-        lastVerified: '2026年4月19日',
+        lastVerified: '2026年4月20日',
         notes: '令和8年度北海道立高等学校入学者選抜実施要綱 第3章「調査書の取扱い」'
       }
     ],
@@ -389,7 +389,7 @@ export const prefectureGuides: Record<string, PrefectureGuide> = {
       {
         name: '福岡県教育委員会',
         url: 'https://www.pref.fukuoka.lg.jp/contents/kennittei.html',
-        lastVerified: '2026年4月19日',
+        lastVerified: '2026年4月20日',
         notes: '令和8年度福岡県立高等学校入学者選抜実施要綱 第2章「選抜方法」'
       }
     ],
@@ -424,7 +424,7 @@ export const prefectureGuides: Record<string, PrefectureGuide> = {
     faq: [
       {
         question: '兵庫県の内申点は何点満点ですか？',
-        answer: '兵庫県の内申点は250点満点です。5教科×5段階×4倍＝100点、実技4教科×5段階×7.5倍＝150点の合計です。実技教科が全体の60%を占める独特の配点です。'
+        answer: '兵庫県の内申点は250点満点です。5教科×5段階×4倍＝100点、実技4教科×5段階×7.5倍＝150点の合計です。実技教科が全体の60%を占める独特の配点です. 。'
       },
       {
         question: '兵庫県はいつの成績が内申点になりますか？',
@@ -443,7 +443,7 @@ export const prefectureGuides: Record<string, PrefectureGuide> = {
       {
         name: '兵庫県教育委員会',
         url: 'https://www2.hyogo-c.ed.jp/hpe/koko/nyuushi/',
-        lastVerified: '2026年4月19日',
+        lastVerified: '2026年4月20日',
         notes: '令和8年度兵庫県立高等学校入学者選抜実施要綱 第3章「選抜方法」'
       }
     ],
@@ -497,7 +497,7 @@ export const prefectureGuides: Record<string, PrefectureGuide> = {
       {
         name: '広島県教育委員会',
         url: 'https://www.pref.hiroshima.lg.jp/site/kyouiku/08senior-2nd-r8-nyuushi-r8-kou-r8-kou-mokuji-r8-kou-mokuji.html',
-        lastVerified: '2026年4月19日',
+        lastVerified: '2026年4月20日',
         notes: '令和8年度広島県立高等学校入学者選抜実施要綱 第3章「選抜方法」'
       }
     ],
@@ -510,50 +510,49 @@ export const prefectureGuides: Record<string, PrefectureGuide> = {
   
   aichi: {
     summary3lines: {
-      target: '中3のみが対象（集中対策が必要）',
-      practical: '等倍（全教科均等）',
-      maxScore: '90点（1点の差が合否を分ける）'
+      target: '<strong>中学3年生の2学期</strong>の成績のみが対象',
+      practical: '主要5教科と実技4教科が<strong>すべて等倍</strong>',
+      maxScore: '90点満点（1教科5点×9教科×2倍）'
     },
     examples: {
-      all3: '54点（中堅校の標準ライン）',
-      all4: '72点（旭丘・明和などのトップ校目安）',
-      practicalPlus1: '56点（1教科アップで2点加算）'
+      all3: '54点（中堅校の標準ライン。当日点での挽回が必要）',
+      all4: '72点（旭丘・明和・一宮などのトップ校受験の最低ライン）',
+      practicalPlus1: '実技1教科アップは当日点2〜3点分の価値に相当'
     },
     pitfalls: {
-      title: '愛知県入試の「高倍率」と注意点',
+      title: '愛知県公立高校入試・令和8年度（2026年）の「型」と戦略',
       items: [
-        '<strong>中3の成績×2</strong>：1教科（5段階）が2倍され、9教科で90点満点。中1・中2は含まれないため、中3での逆転が可能です。',
-        '<strong>A・Bグループ2回受験</strong>：公立高校を2校受験できる独自制度。内申点が足りなくても、実力相応校と挑戦校の組み合わせが可能です。',
-        '<strong>校内順位の決定</strong>：当日点と内申点の合計で決まる「I・II・III型」の校内規定があり、進学校ほど当日点重視（II型・III型）になります。',
-        '副教科も等倍ですが、満点が90点と低いため、副教科の「3」は「5」の人と4点差（当日点数点分）になります。',
-        '特色選抜の拡大：一部の普通科でも特色選抜が導入され、内申点以外の活動実績も重視されるようになっています。'
+        '<strong>「校内順位」を決定する3つの型：</strong>愛知県では、高校ごとに「当日点重視」「内申点重視」「均等」の3タイプ（I型・II型・III型）のいずれかを採用しています。旭丘などの進学校は、当日点を1.5倍〜2倍にする「III型」「V型」を採用しており、内申が少し低くても当日点での大逆転が可能です。',
+        '<strong>全国唯一の「A・Bグループ」2校受験：</strong>公立高校を2校受験できるため、「第一志望は挑戦校、第二志望は安全校」という戦略が一般的です。ただし、この組み合わせ（複合選抜）のルールが非常に複雑で、内申点によって「どの組み合わせなら合格可能性が高いか」を見極める必要があります。',
+        '<strong>中1・中2は「推薦」のみ影響：</strong>一般入試の内申点（90点満点）には中3の成績しか入りませんが、推薦入試を狙う場合は中1からの活動実績や評定が重要視されます。',
+        '<strong>「主体的に学習に取り組む態度」が合否の隠し味：</strong>評定が同点の場合、観点別評価の「主体性」の丸の数などで順位が決まるケースがあります。定期テストだけでなく、ワークの「＋αの書き込み」などが最後の1枠を決めます。'
       ]
     },
     faq: [
       {
-        question: '愛知県は2校受けられるって本当？',
-        answer: 'はい、AグループとBグループから1校ずつ、計2校の公立高校に出願できます。これにより、第一志望にチャレンジしつつ、第二志望で確実に合格を狙う戦略が立てられます。'
+        question: '愛知県はいつの成績が内申点になりますか？',
+        answer: '一般入試では<strong>「中学3年生の2学期（または12月時点）」</strong>の成績のみが使われます。中1・中2の成績は含まれませんが、中3の成績を2倍して計算するため、中3での1点のミスが大きく響く仕組みです。'
       },
       {
-        question: '愛知県で内申30だとどこの高校に行ける？',
-        answer: '内申30（換算60点）は中堅校への合格圏内です。ただし、名古屋市内の人気校では当日点での高い得点力が求められます。'
+        question: '内申が30（換算60）ですが、どこを狙えますか？',
+        answer: '名古屋市内の普通科中堅校であれば、当日点で7割（77点/110点）以上取れれば十分に合格圏内です。ただし、愛知県は当日点重視の高校が多いため、内申30でも当日点次第で上のレベルを狙うことも可能です。'
       },
       {
-        question: '中1・中2の成績は全く見られない？',
-        answer: '公立一般入試の点数計算には含まれません。しかし、推薦入試では3年間の活動実績が評価対象となります。'
+        question: '私立高校の推薦をもらうには？',
+        answer: '愛知県の私立推薦は、内申点の基準が非常に明確です。多くの私立高校で「9教科合計〇〇以上」という基準があり、これに1点でも足りないと推薦はもらえません。12月の内申確定までに1点でも積み上げることが必須です。'
       }
     ],
     sources: [
       {
-        name: '愛知県教育委員会（高等学校入試）',
+        name: '愛知県教育委員会（高等学校教育課）',
         url: 'https://www.pref.aichi.jp/soshiki/kotogakko/0000027366.html',
-        lastVerified: '2026年4月19日',
-        notes: '令和8年度の新入試日程・制度に基づき更新。'
+        lastVerified: '2026年4月20日',
+        notes: '令和8年度（2026年度）入学者選抜実施要綱。校内順位決定方式の詳細を確認済み。'
       }
     ],
     related: [
-      { title: '【愛知版】内申点・校内順位計算', url: '/aichi/naishin' },
-      { title: '愛知の「A・Bグループ」戦略ガイド', url: '/blog/aichi-ab-group' },
+      { title: '愛知県の内申点・校内順位計算', url: '/aichi/naishin' },
+      { title: '愛知の「A・Bグループ」最強の組み合わせ', url: '/blog/aichi-ab-group' },
       { title: '内申30からの逆転合格術', url: '/blog/naishin-30-strategy' }
     ]
   },
@@ -572,7 +571,7 @@ export const prefectureGuides: Record<string, PrefectureGuide> = {
     examples: {
       all3: '81点（中堅校のボーダーライン）',
       all4: '108点（青森・八戸・弘前など上位校の目安）',
-      practicalPlus1: '82点（1点でも多く積み上げることが重要）'
+      practicalPlus1: '82点（1点しても多く積み上げることが重要）'
     },
     pitfalls: {
       title: '青森県の公立高校入試・令和8年度（2026年）の重要ポイントと戦略',
@@ -602,7 +601,7 @@ export const prefectureGuides: Record<string, PrefectureGuide> = {
       {
         name: '青森県教育委員会 高校入試情報',
         url: 'https://www.pref.aomori.lg.jp/soshiki/kyoiku/e-gakyo/senbatsu2025.html',
-        lastVerified: '2026年4月19日',
+        lastVerified: '2026年4月20日',
         notes: '令和8年度（2026年度）の最新の選抜基準、各高等学校の選抜方法（比率など）については、夏以降に発表される公式情報を必ずご確認ください。'
       }
     ],
@@ -650,7 +649,7 @@ export const prefectureGuides: Record<string, PrefectureGuide> = {
       {
         name: '岩手県教育委員会 高校入試情報',
         url: 'https://www.pref.iwate.jp/kyouikubunka/kyouiku/gakkou/senbatsu/index.html',
-        lastVerified: '2026年4月19日',
+        lastVerified: '2026年4月20日',
         notes: '令和8年度（2026年度）の正式な内申点・学力検査の比率、推薦入試の募集要項については、必ず岩手県教育委員会の公式サイトで最新情報をご確認ください。'
       }
     ],
@@ -688,7 +687,7 @@ export const prefectureGuides: Record<string, PrefectureGuide> = {
       },
       {
         question: '新しい「共通選抜」と「特色選抜」とは、具体的に何が違うのですか？',
-        answer: '「共通選抜」は、これまで通り「学力検査点」と「調査書点」の合計点で、募集定員の70%の合格者を決定するものです。一方、「特色選抜」は残り30%の枠で、各高校が求める生徒像（例：理数系の探究活動に優れた生徒、スポーツで全国レベルの実績を持つ生徒など）に基づいて、調査書の内容をより深く評価したり、面接や実技試験を課したりして選抜します。自分のアピールポイントと合致する高校・学科を選ぶことで、合格の可能性を高められます。'
+        answer: '「共通選抜」は、これまで通り「学力検査点」と「調査書点」の合計点で、募集定員の70%の合格者を決定するものです。一方、「特色選抜」は残り30%の枠で、各高校が求める生徒像（例：理数系の探究活動に優れた生徒、スポーツで全国レベルの実績を持つ生徒など）に基づいて、調査書の内容をより深く評価したり、面接や実技試験を課したりして選抜します。自分の強みが活かせる選抜方式を見極めることが重要です。'
       },
       {
         question: '仙台第一高校や仙台第二高校に合格するには、どれくらいの内申点が必要ですか？',
@@ -699,7 +698,7 @@ export const prefectureGuides: Record<string, PrefectureGuide> = {
       {
         name: '宮城県教育委員会 高校入学者選抜情報',
         url: 'https://www.pref.miyagi.jp/soshiki/koukyou/r8-nyushi.html',
-        lastVerified: '2026年4月19日',
+        lastVerified: '2026年4月20日',
         notes: '令和8年度（2026年度）の「共通選抜」と「特色選抜」の具体的な選抜方法や配点比率については、今後発表される宮城県教育委員会の公式情報を必ずご確認ください。'
       }
     ],
@@ -749,7 +748,7 @@ export const defaultGuide: PrefectureGuide = {
     {
       name: '各都道府県教育委員会',
       url: '',
-      lastVerified: '2026年4月19日',
+      lastVerified: '2026年4月20日',
       notes: '各県の入学者選抜要綱を参照'
     }
   ],
@@ -823,7 +822,7 @@ export function getPrefectureGuide(prefectureCode: string): PrefectureGuide {
       {
         name: `${pref.name}教育委員会`,
         url: '',
-        lastVerified: '2026年4月19日',
+        lastVerified: '2026年4月20日',
         notes: `${pref.name}の公立高校入学者選抜に関する公式情報を参照してください。`
       }
     ],

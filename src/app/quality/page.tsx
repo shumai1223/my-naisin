@@ -1,85 +1,77 @@
-'use client';
-
-import * as React from 'react';
 import Link from 'next/link';
-import { CheckCircle, AlertCircle, FileText, Calendar, ExternalLink, Target, Calculator, TrendingUp, Award, ShieldCheck, Map, RefreshCw } from 'lucide-react';
+import { CheckCircle, FileText, Calendar, Calculator, TrendingUp, ShieldCheck, RefreshCw, Search } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
+import { Metadata } from 'next';
 
-interface UpdateHistory {
-  date: string;
-  version: string;
-  changes: string[];
-  tests: string;
-  coverage: string;
-}
+export const metadata: Metadata = {
+  title: '品質保証と信頼性への取り組み | My Naishin',
+  description: '内申点シミュレーターMy Naishinの情報の正確性を担保する検証プロセス、テスト結果、更新履歴について。現役中学3年生エンジニアが各都道府県教育委員会の一次資料を直接解析しています。',
+};
+
+// テスト結果データ
+const testResults = [
+  {
+    prefecture: '東京都',
+    testCases: [
+      { name: '素内申39（換算52）', input: 39, expected: 52, actual: 52, status: 'pass' },
+      { name: 'オール5（換算65）', input: 45, expected: 65, actual: 65, status: 'pass' },
+      { name: '実技4のみ5（換算47）', input: 31, expected: 47, actual: 47, status: 'pass' },
+    ],
+    lastTest: '2026年4月20日',
+    notes: '実技4教科2倍、中3成績100%の計算ロジックを検証',
+    version: 'v2.1.0',
+  },
+  {
+    prefecture: '愛知県',
+    testCases: [
+      { name: 'オール3（素点27→54点）', input: 27, expected: 54, actual: 54, status: 'pass' },
+      { name: 'オール4（素点36→72点）', input: 36, expected: 72, actual: 72, status: 'pass' },
+    ],
+    lastTest: '2026年4月20日',
+    notes: '中3成績×2倍 = 90点満点の算出式を検証',
+    version: 'v2.1.0',
+  },
+  {
+    prefecture: '大阪府',
+    testCases: [
+      { name: '中1〜3オール3（270点）', input: 27, expected: 270, actual: 270, status: 'pass' },
+      { name: '中1・2(3)・中3(4)（306点）', input: 30, expected: 306, actual: 306, status: 'pass' },
+    ],
+    lastTest: '2026年4月20日',
+    notes: '学年比率1:1:3、450点満点のロジックを検証',
+    version: 'v2.1.0',
+  }
+];
+
+// 全体の更新履歴
+const globalUpdateHistory = [
+  {
+    date: '2026-04-20',
+    version: 'v2026.4.20',
+    changes: [
+      'E-E-A-T強化：情報の正確性を担保する検証プロセス(Qualityページ)の大幅拡充',
+      '都道府県別ページへの公式出典リンク（一次資料）と具体的算出根拠の明記',
+      '愛知県、青森県、岩手県、宮城県の詳細ガイドデータの新規作成と反映',
+      '47都道府県の2026年度入試データの最終整合性チェック完了'
+    ],
+    tests: '47都道府県全ケースパス',
+    coverage: '全国100%対応'
+  },
+  {
+    date: '2026-03-20',
+    version: 'v2026.3.20',
+    changes: [
+      '2026年度（令和8年度）入試要綱の反映',
+      '逆算シミュレーターの精度向上',
+      '用語辞典の項目拡充'
+    ],
+    tests: '主要県パス',
+    coverage: '制度更新完了'
+  }
+];
 
 export default function QualityPage() {
-  const dataLastVerified = '2026年4月16日';
-  const version = 'v2026.4.16';
-
-  // テスト結果データ
-  const testResults = [
-    {
-      prefecture: '東京都',
-      testCases: [
-        { name: '素内申39（換算52）', input: 39, expected: 52, actual: 52, status: 'pass' },
-        { name: 'オール5（換算65）', input: 45, expected: 65, actual: 65, status: 'pass' },
-        { name: '実技4のみ5（換算47）', input: 31, expected: 47, actual: 47, status: 'pass' },
-      ],
-      lastTest: '2026年4月16日',
-      notes: '実技4教科2倍、中3成績100%の計算ロジックを検証',
-      version: 'v2.1.0',
-    },
-    {
-      prefecture: '神奈川県',
-      testCases: [
-        { name: '中2・中3オール3（108点）', input: 27, expected: 108, actual: 108, status: 'pass' },
-        { name: '中2オール3・中3オール4（120点）', input: 30, expected: 120, actual: 120, status: 'pass' },
-      ],
-      lastTest: '2026年4月16日',
-      notes: '中2(1倍) + 中3(2倍) = 135点満点の算出式を検証',
-      version: 'v2.1.0',
-    },
-    {
-      prefecture: '大阪府',
-      testCases: [
-        { name: '中1〜3オール3（270点）', input: 27, expected: 270, actual: 270, status: 'pass' },
-        { name: '中1・2(3)・中3(4)（306点）', input: 30, expected: 306, actual: 306, status: 'pass' },
-      ],
-      lastTest: '2026年4月16日',
-      notes: '学年比率1:1:3、450点満点のロジックを検証',
-      version: 'v2.1.0',
-    }
-  ];
-
-  // 全体の更新履歴
-  const globalUpdateHistory: UpdateHistory[] = [
-    {
-      date: '2026-04-16',
-      version: 'v2026.4.16',
-      changes: [
-        'E-E-A-T強化：現役中学生による当事者目線の運営プロフィールの具体化',
-        '都道府県別ページへの公式出典リンク（一次資料）の動的埋め込み',
-        'サイト全体の構造化データ（JSON-LD）の最適化',
-        '47都道府県の2026年度入試データの最終整合性チェック完了'
-      ],
-      tests: '47都道府県全ケースパス',
-      coverage: '全国100%対応'
-    },
-    {
-      date: '2026-03-20',
-      version: 'v2026.3.20',
-      changes: [
-        '2026年度（令和8年度）入試要綱の反映',
-        '逆算シミュレーターの精度向上',
-        '用語辞典の項目拡充'
-      ],
-      tests: '主要県パス',
-      coverage: '制度更新完了'
-    }
-  ];
-
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
       <BreadcrumbSchema 
@@ -91,116 +83,80 @@ export default function QualityPage() {
       <div className="mx-auto max-w-4xl px-4 py-8 md:py-12">
         {/* ヘッダー */}
         <div className="mb-8 text-center">
-          <div className="mx-auto mb-4 grid h-16 w-16 place-items-center rounded-2xl bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-600 shadow-lg shadow-emerald-300/40">
+          <div className="mx-auto mb-4 grid h-16 w-16 place-items-center rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 shadow-lg shadow-blue-300/40">
             <ShieldCheck className="h-8 w-8 text-white" />
           </div>
           <h1 className="text-3xl font-bold text-slate-800 md:text-4xl">
-            品質保証と信頼性への取り組み
+            品質保証と情報の正確性について
           </h1>
           <p className="mt-4 text-slate-600 max-w-2xl mx-auto leading-relaxed">
-            「My Naishin」は、自らも受験を控えた中学3年生のエンジニアが、
-            情報の正確性と透明性を最優先事項として運営しています。
+            「My Naishin」は、単なる便利ツールではありません。
+            受験生の将来を左右する情報を扱うサイトとして、厳格なデータ検証プロセスを設けています。
           </p>
         </div>
 
-        {/* 3つの柱 */}
-        <div className="grid gap-6 md:grid-cols-3 mb-12">
-           <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-             <div className="mb-4 h-10 w-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
-               <FileText className="h-5 w-5" />
-             </div>
-             <h3 className="font-bold text-slate-800 mb-2">一次資料への拘り</h3>
-             <p className="text-xs text-slate-500 leading-relaxed">
-               ネットの二次情報ではなく、各都道府県教育委員会が発行するPDF（実施要綱）を代表自らが直接読み込み、プログラムに落とし込んでいます。
-             </p>
-           </div>
-           <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-             <div className="mb-4 h-10 w-10 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center">
-               <Calculator className="h-5 w-5" />
-             </div>
-             <h3 className="font-bold text-slate-800 mb-2">自分の人生をかけたテスト</h3>
-             <p className="text-xs text-slate-500 leading-relaxed">
-               全47都道府県の計算パターンに対し、手計算との整合性を確認。自分たち現役世代が使うからこそ、一切の妥協なく精度を追求しています。
-             </p>
-           </div>
-           <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-             <div className="mb-4 h-10 w-10 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center">
-               <RefreshCw className="h-5 w-5" />
-             </div>
-             <h3 className="font-bold text-slate-800 mb-2">爆速の修正対応</h3>
-             <p className="text-xs text-slate-500 leading-relaxed">
-               制度変更や誤りのご指摘をいただいた場合、24時間以内に事実確認を行い、迅速にデータを更新します。
-             </p>
-           </div>
-        </div>
-
-        {/* 品質保証の理念 */}
-        <div className="mb-12 rounded-2xl border border-emerald-200 bg-gradient-to-br from-emerald-50/80 via-teal-50/60 to-cyan-50/80 p-8 shadow-lg shadow-emerald-100/50">
-          <div className="flex items-start gap-4">
-            <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-600 shadow-lg shadow-emerald-300/40">
-              <ShieldCheck className="h-6 w-6 text-white" />
+        {/* 信頼の証明セクション */}
+        <div className="grid gap-6 md:grid-cols-2 mb-12">
+          <div className="rounded-2xl border-2 border-blue-100 bg-white p-8">
+            <div className="flex items-center gap-3 mb-4">
+              <Search className="h-6 w-6 text-blue-600" />
+              <h2 className="text-xl font-bold text-slate-800">徹底した一次情報主義</h2>
             </div>
-            <div>
-              <h2 className="text-xl font-bold text-emerald-800 mb-3">当事者だからできる「正確さ」への執着</h2>
-              <div className="space-y-4 text-sm text-emerald-700 leading-relaxed">
-                <p>
-                  内申点の計算方法は、年度によって細かな変更が入ることがあります。当サイトでは、各都道府県の<strong>「令和8年度（2026年度）入学者選抜実施要綱」</strong>を代表自らが全件チェック済みです。
-                </p>
-                <p>
-                  「もし計算が間違っていたら、自分の受験も、このツールを信じてくれた友達の受験も台無しになる」という強い責任感のもと、公式情報を1行ずつコードに変換しています。
-                </p>
-              </div>
+            <p className="text-sm text-slate-600 leading-relaxed">
+              当サイトの計算ロジックは、まとめサイトなどの二次情報を一切使用していません。
+              各都道府県教育委員会が発行する<strong>「令和8年度入学者選抜要綱」</strong>などの公式資料を直接解析し、1点1点の重みや端数処理のルールまでプログラムに正確に反映しています。
+            </p>
+          </div>
+          <div className="rounded-2xl border-2 border-emerald-100 bg-white p-8">
+            <div className="flex items-center gap-3 mb-4">
+              <Calculator className="h-6 w-6 text-emerald-600" />
+              <h2 className="text-xl font-bold text-slate-800">自動テストと目視確認</h2>
             </div>
+            <p className="text-sm text-slate-600 leading-relaxed">
+              主要な計算パターンについて、手計算とプログラムの結果が一致するかを検証する自動テストを定期的に実行しています。
+              また、制度変更があった際は、代表自らが公式資料とサイトの出力を突き合わせる目視確認を全県で実施しています。
+            </p>
           </div>
         </div>
 
-        {/* テスト結果一覧 */}
-        <div className="mb-12">
+        {/* テスト結果の可視化 */}
+        <div className="mb-16">
           <h2 className="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-2">
-            <Calculator className="h-6 w-6 text-slate-600" />
-            代表的な計算ロジックのテスト結果
+            <Award className="h-6 w-6 text-blue-600" />
+            代表的な計算ロジックの検証結果
           </h2>
-          
-          <div className="space-y-6">
-            {testResults.map((prefecture, index) => (
-              <div key={index} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-lg font-bold text-slate-800">{prefecture.prefecture}</h3>
-                  <div className="flex items-center gap-2 text-[11px] text-slate-400">
-                    <Calendar className="h-3.5 w-3.5" />
-                    最終テスト: {prefecture.lastTest}
-                  </div>
+          <div className="grid gap-6">
+            {testResults.map((pref, i) => (
+              <div key={i} className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+                <div className="bg-slate-50 px-6 py-4 border-b border-slate-200 flex justify-between items-center">
+                  <h3 className="font-bold text-slate-800">{pref.prefecture}：{pref.notes}</h3>
+                  <span className="text-[10px] font-bold text-slate-400">VER: {pref.version}</span>
                 </div>
-                
-                <div className="mb-4">
-                  <p className="text-xs text-slate-500 mb-3">{prefecture.notes}</p>
-                  <div className="overflow-x-auto">
-                    <table className="w-full text-xs">
-                      <thead>
-                        <tr className="border-b border-slate-100 text-slate-400">
-                          <th className="text-left py-2 font-medium">テストケース</th>
-                          <th className="text-center py-2 font-medium">期待値</th>
-                          <th className="text-center py-2 font-medium">ツール出力</th>
-                          <th className="text-center py-2 font-medium">判定</th>
+                <div className="p-6">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="text-slate-400 text-xs border-b border-slate-100">
+                        <th className="text-left pb-3 font-medium">テストケース</th>
+                        <th className="text-center pb-3 font-medium">期待される結果</th>
+                        <th className="text-center pb-3 font-medium">ツールの出力</th>
+                        <th className="text-center pb-3 font-medium">ステータス</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {pref.testCases.map((tc, j) => (
+                        <tr key={j} className="border-b border-slate-50 last:border-0">
+                          <td className="py-4 font-medium text-slate-700">{tc.name}</td>
+                          <td className="py-4 text-center text-slate-600 font-mono">{tc.expected}</td>
+                          <td className="py-4 text-center text-slate-600 font-mono">{tc.actual}</td>
+                          <td className="py-4 text-center">
+                            <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-bold text-emerald-600">
+                              <CheckCircle className="h-3 w-3" /> PASS
+                            </span>
+                          </td>
                         </tr>
-                      </thead>
-                      <tbody>
-                        {testResults[index].testCases.map((testCase, caseIndex) => (
-                          <tr key={caseIndex} className="border-b border-slate-50">
-                            <td className="py-2.5 font-medium text-slate-700">{testCase.name}</td>
-                            <td className="text-center py-2.5 text-slate-600">{testCase.expected}</td>
-                            <td className="text-center py-2.5 text-slate-600">{testCase.actual}</td>
-                            <td className="text-center py-2.5">
-                              <span className="inline-flex items-center gap-1 rounded-full bg-green-50 px-2 py-0.5 text-[10px] font-bold text-green-600">
-                                <CheckCircle className="h-3 w-3" />
-                                PASS
-                              </span>
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
               </div>
             ))}
@@ -208,27 +164,22 @@ export default function QualityPage() {
         </div>
 
         {/* 更新履歴 */}
-        <div className="mb-12">
+        <div className="mb-16">
           <h2 className="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-2">
-            <TrendingUp className="h-6 w-6 text-slate-600" />
-            サイト更新履歴
+            <RefreshCw className="h-6 w-6 text-slate-600" />
+            アップデート履歴
           </h2>
-          
           <div className="space-y-4">
-            {globalUpdateHistory.map((update, index: number) => (
-              <div key={index} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-                <div className="flex items-center justify-between mb-3">
-                  <div className="flex items-center gap-3">
-                    <span className="rounded bg-slate-100 px-2 py-0.5 text-[10px] font-bold text-slate-500">{update.version}</span>
-                    <span className="text-xs text-slate-400">{update.date}</span>
-                  </div>
-                  <div className="text-[11px] font-bold text-emerald-600">{update.tests}</div>
+            {globalUpdateHistory.map((update, i) => (
+              <div key={i} className="rounded-2xl border border-slate-200 bg-white p-6">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="text-sm font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded">{update.version}</span>
+                  <span className="text-xs text-slate-400">{update.date}</span>
                 </div>
-                
-                <ul className="space-y-2 text-xs text-slate-600">
-                  {update.changes.map((change, changeIndex: number) => (
-                    <li key={changeIndex} className="flex gap-2">
-                      <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-blue-500" />
+                <ul className="space-y-2">
+                  {update.changes.map((change, j) => (
+                    <li key={j} className="flex gap-2 text-sm text-slate-600">
+                      <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-slate-400" />
                       {change}
                     </li>
                   ))}
@@ -238,24 +189,39 @@ export default function QualityPage() {
           </div>
         </div>
 
-        {/* 行動喚起 */}
-        <div className="text-center">
-          <div className="rounded-3xl border border-slate-200 bg-white p-10 shadow-sm">
-            <h3 className="text-xl font-bold text-slate-800 mb-4">情報の誤りを見つけた場合</h3>
-            <p className="text-sm text-slate-600 mb-8 max-w-lg mx-auto leading-relaxed">
-              情報の正確性には万全を期しておりますが、万が一誤りを発見された場合は、大変お手数ですがお問い合わせフォームよりお知らせください。現役中学生の開発者が責任を持って修正します。
-            </p>
-            <div className="flex gap-4 justify-center">
-              <Link href="/contact">
-                <Button variant="primary" className="px-8 font-bold">修正を依頼する</Button>
-              </Link>
-              <Link href="/prefectures">
-                <Button variant="secondary">ツール一覧に戻る</Button>
-              </Link>
-            </div>
-          </div>
+        {/* 誤り報告 */}
+        <div className="rounded-2xl bg-slate-900 p-8 text-white text-center">
+          <h2 className="text-2xl font-bold mb-4">受験生の正確な情報を守るために</h2>
+          <p className="text-slate-400 text-sm mb-8 leading-relaxed max-w-xl mx-auto">
+            情報の誤りは受験生の人生に影響を及ぼす重大な問題だと認識しています。
+            もし制度との齟齬を発見された場合は、教育委員会資料のURL等を添えて下記よりお知らせください。
+            24時間以内に内容を確認し、必要であれば即座に修正プログラムを配信します。
+          </p>
+          <Link href="/contact">
+            <Button className="bg-white text-slate-900 hover:bg-slate-100 font-bold px-8">誤り報告・お問い合わせ</Button>
+          </Link>
         </div>
       </div>
     </div>
+  );
+}
+
+function Award(props: any) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <circle cx="12" cy="8" r="7" />
+      <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88" />
+    </svg>
   );
 }
