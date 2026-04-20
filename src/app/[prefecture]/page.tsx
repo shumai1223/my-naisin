@@ -13,7 +13,8 @@ import {
   MessageSquare,
   ShieldCheck,
   Calendar,
-  MapPin
+  MapPin,
+  Sparkles
 } from 'lucide-react';
 
 import { getPrefectureByCode, PREFECTURES } from '@/lib/prefectures';
@@ -21,6 +22,7 @@ import { getPrefectureGuide } from '@/lib/prefecture-guides';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { BlogRelatedArticles } from '@/components/BlogRelatedArticles';
 import { PrefecturePillarLinks } from '@/components/PrefecturePillarLinks';
+import { HighSchoolBorderlineTable } from '@/components/HighSchoolBorderlineTable';
 
 interface PrefecturePageProps {
   params: Promise<{
@@ -74,8 +76,11 @@ export default async function PrefecturePage({ params }: PrefecturePageProps) {
               {pref.name}公立高校入試<br className="md:hidden" />
               <span className="text-blue-300">内申点完全攻略ガイド</span>
             </h1>
-            <p className="mx-auto max-w-2xl text-lg text-blue-100/90 md:text-xl">
-              令和8年度（2026年度）入試対応済。{pref.name}特有の計算ルール、実技倍率、合否判定における内申の重みを徹底解析。
+            <p className="mx-auto max-w-2xl text-lg text-blue-100/90 md:text-xl font-bold">
+              令和8年度（2026年度）入学者選抜に完全対応。
+            </p>
+            <p className="mx-auto max-w-2xl mt-2 text-blue-100/80">
+              {pref.name}特有の計算ルール、実技倍率、合否判定における内申の重みを徹底解析しました。
             </p>
             
             <div className="mt-10 flex flex-wrap justify-center gap-4">
@@ -91,7 +96,7 @@ export default async function PrefecturePage({ params }: PrefecturePageProps) {
                 className="inline-flex items-center gap-2 rounded-xl bg-blue-600/30 px-8 py-4 text-lg font-bold text-white shadow-lg backdrop-blur-md ring-1 ring-white/30 transition-all hover:bg-blue-600/50 hover:-translate-y-1"
               >
                 <Target className="h-6 w-6" />
-                志望校から逆算
+                合格目標から逆算
               </Link>
             </div>
           </div>
@@ -100,7 +105,7 @@ export default async function PrefecturePage({ params }: PrefecturePageProps) {
         <div className="mx-auto max-w-5xl px-4 py-12">
           <div className="grid gap-8 lg:grid-cols-3">
             {/* Main Content */}
-            <div className="space-y-8 lg:col-span-2">
+            <div className="space-y-12 lg:col-span-2">
               
               {/* 3つのポイント */}
               <section className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
@@ -132,6 +137,9 @@ export default async function PrefecturePage({ params }: PrefecturePageProps) {
                    </div>
                 </div>
               </section>
+
+              {/* 高校別ボーダーライン一覧（最重要データ） */}
+              <HighSchoolBorderlineTable prefectureCode={code} prefectureName={pref.name} />
 
               {/* 関連ナビゲーション */}
               <section className="grid gap-4 sm:grid-cols-2">
@@ -172,19 +180,20 @@ export default async function PrefecturePage({ params }: PrefecturePageProps) {
               </section>
 
               {/* 信頼性と根拠 */}
-              <section className="rounded-2xl bg-slate-800 p-8 text-white shadow-xl">
+              <section className="rounded-3xl bg-slate-800 p-8 text-white shadow-xl">
                  <div className="flex items-start gap-4">
-                   <div className="rounded-xl bg-blue-500 p-3">
+                   <div className="rounded-xl bg-blue-500 p-3 shadow-lg shadow-blue-500/20">
                      <ShieldCheck className="h-8 w-8" />
                    </div>
                    <div>
                      <h2 className="text-xl font-bold">情報の信頼性について</h2>
-                     <p className="mt-2 text-slate-300 text-sm leading-relaxed">
+                     <p className="mt-3 text-slate-300 text-sm leading-relaxed">
                        当サイトの情報は、{pref.name}教育委員会が公式に発表している「令和8年度（2026年度）入学者選抜実施要綱」等の一次資料を元に、現役のエンジニアと受験専門チームが1点1点の計算ロジックを検証しています。
                      </p>
-                     <div className="mt-4 flex items-center gap-4 text-xs font-medium">
-                       <span className="flex items-center gap-1"><Calendar className="h-3 w-3" /> 2026年4月最終更新済</span>
-                       <span className="flex items-center gap-1"><Search className="h-3 w-3" /> 一次資料検証済</span>
+                     <div className="mt-6 flex flex-wrap items-center gap-4 text-xs font-bold text-blue-300">
+                       <span className="flex items-center gap-1 bg-white/10 px-3 py-1 rounded-full"><Calendar className="h-3 w-3" /> 2026年4月最終更新済</span>
+                       <span className="flex items-center gap-1 bg-white/10 px-3 py-1 rounded-full"><Search className="h-3 w-3" /> 一次資料検証済</span>
+                       <span className="flex items-center gap-1 bg-white/10 px-3 py-1 rounded-full"><Sparkles className="h-3 w-3" /> 2025年度入試結果反映</span>
                      </div>
                    </div>
                  </div>
