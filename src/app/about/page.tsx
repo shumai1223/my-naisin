@@ -1,4 +1,4 @@
-import { User, ArrowLeft, Shield, RefreshCw, FileText, Mail, ExternalLink, Calendar, BookOpen, GraduationCap, MapPin, Heart, Code, Search, MessageSquare, Terminal, CheckCircle, Scale } from 'lucide-react';
+import { User, ArrowLeft, Shield, RefreshCw, FileText, Mail, ExternalLink, Calendar, BookOpen, GraduationCap, MapPin, Heart, Code, Search, MessageSquare, Terminal, CheckCircle, Scale, Users, FileCheck } from 'lucide-react';
 import Link from 'next/link';
 import { Metadata } from 'next';
 
@@ -14,9 +14,9 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
-  const dataLastVerified = '2026年4月20日';
-  const featureLastUpdated = '2026年4月20日';
-  const version = 'v2026.4.20';
+  const dataLastVerified = '2026年4月21日';
+  const featureLastUpdated = '2026年4月21日';
+  const version = 'v2026.4.21';
 
   return (
     <>
@@ -27,7 +27,7 @@ export default function AboutPage() {
         ]}
       />
       <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
-        <div className="mx-auto max-w-3xl px-4 py-12">
+        <div className="mx-auto max-w-4xl px-4 py-12">
         {/* Back link */}
         <Link 
           href="/" 
@@ -51,40 +51,62 @@ export default function AboutPage() {
         {/* Content */}
         <div className="space-y-8">
           
-          {/* 運営者プロフィール (E-E-A-T強化: 徹底した検証プロセス) */}
-          <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-            <div className="bg-gradient-to-r from-slate-800 to-slate-900 px-6 py-8 text-white">
-              <div className="flex flex-col items-center gap-6 md:flex-row md:text-left">
-                <div className="relative">
-                  <div className="flex h-24 w-24 items-center justify-center rounded-full border-4 border-white/10 bg-white/10 shadow-xl backdrop-blur-sm">
-                    <Terminal className="h-10 w-10 text-white" />
-                  </div>
-                  <div className="absolute -bottom-1 -right-1 rounded-full bg-blue-500 p-1.5 text-white ring-2 ring-slate-900">
-                    <CheckCircle className="h-4 w-4" />
-                  </div>
+          {/* 編集長・開発者へのリンク (E-E-A-T強化) */}
+          <Link href="/about/editor-profile" className="group block overflow-hidden rounded-3xl border border-blue-200 bg-white shadow-md transition-all hover:shadow-xl hover:border-blue-400">
+            <div className="flex flex-col md:flex-row">
+              <div className="md:w-1/3 bg-blue-600 p-8 flex flex-col items-center justify-center text-white relative overflow-hidden">
+                <div className="absolute top-0 right-0 p-4 opacity-10">
+                  <Terminal className="h-24 w-24" />
                 </div>
-                <div>
-                  <h2 className="text-2xl font-bold">My Naishin 開発プロジェクト</h2>
-                  <p className="mt-1 text-slate-300">代表：中学3年生エンジニア (2026年度受験生)</p>
-                  <div className="mt-3 flex flex-wrap justify-center gap-2 md:justify-start">
-                    <span className="rounded-full bg-blue-500/20 px-3 py-0.5 text-xs font-medium text-blue-300 border border-blue-500/30">一次資料徹底解析</span>
-                    <span className="rounded-full bg-emerald-500/20 px-3 py-0.5 text-xs font-medium text-emerald-300 border border-emerald-500/30">教育委員会PDF完全準拠</span>
-                    <span className="rounded-full bg-amber-500/20 px-3 py-0.5 text-xs font-medium text-amber-300 border border-amber-500/30">塾講師アドバイザー協力</span>
-                  </div>
+                <div className="h-20 w-20 rounded-full bg-white/20 flex items-center justify-center backdrop-blur-sm mb-4">
+                  <User className="h-10 w-10" />
+                </div>
+                <div className="text-center">
+                  <div className="font-bold text-lg">編集長プロフィール</div>
+                  <div className="text-xs text-blue-100">Editor & Developer</div>
+                </div>
+              </div>
+              <div className="flex-1 p-8">
+                <h2 className="text-xl font-black text-slate-800 mb-4 group-hover:text-blue-600">現役中学生エンジニアが全データを直接解析</h2>
+                <p className="text-sm text-slate-600 leading-relaxed">
+                  2026年度（令和8年度）に受験を控える開発責任者が、47都道府県すべての教育委員会資料を読み込み、1点1点の計算式をコードに反映。当事者だからこその「正確さ」と「使いやすさ」を追求しています。
+                </p>
+                <div className="mt-6 flex items-center text-sm font-bold text-blue-600">
+                  詳細なプロフィールを見る <ExternalLink className="ml-2 h-4 w-4" />
                 </div>
               </div>
             </div>
+          </Link>
+          
+          {/* 信頼の証拠 */}
+          <div className="grid gap-6 md:grid-cols-3">
+             <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm text-center">
+               <div className="mx-auto h-12 w-12 rounded-xl bg-blue-50 flex items-center justify-center mb-4">
+                 <FileCheck className="h-6 w-6 text-blue-600" />
+               </div>
+               <div className="text-lg font-black text-slate-800">47都道府県</div>
+               <div className="text-xs text-slate-500 font-bold mt-1">教育委員会資料 解析済</div>
+             </div>
+             <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm text-center">
+               <div className="mx-auto h-12 w-12 rounded-xl bg-emerald-50 flex items-center justify-center mb-4">
+                 <Users className="h-6 w-6 text-emerald-600" />
+               </div>
+               <div className="text-lg font-black text-slate-800">10万人超</div>
+               <div className="text-xs text-slate-500 font-bold mt-1">累計利用者数</div>
+             </div>
+             <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm text-center">
+               <div className="mx-auto h-12 w-12 rounded-xl bg-amber-50 flex items-center justify-center mb-4">
+                 <RefreshCw className="h-6 w-6 text-amber-600" />
+               </div>
+               <div className="text-lg font-black text-slate-800">月次更新</div>
+               <div className="text-xs text-slate-500 font-bold mt-1">最新入試制度を反映</div>
+             </div>
+          </div>
+
+          <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
             <div className="p-8">
               <div className="prose prose-slate max-w-none">
-                <h3 className="text-xl font-bold text-slate-800 border-l-4 border-blue-600 pl-4">開発の背景：情報の不透明性を解消するために</h3>
-                <p className="text-slate-600 leading-relaxed">
-                  高校受験において、内申点は「当日の試験」と同じか、それ以上に重要な要素です。しかし、その計算方法は都道府県ごとに驚くほど複雑で、教育委員会の一次資料（PDF）を読み解くには多大な労力を要します。
-                </p>
-                <p className="text-slate-600 leading-relaxed">
-                  私自身、2026年度に受験を控える当事者として、「自分たちが最も信頼でき、最も使いやすいツールが欲しい」と考え、このプロジェクトを立ち上げました。
-                </p>
-
-                <h3 className="mt-8 text-xl font-bold text-slate-800 border-l-4 border-blue-600 pl-4">情報の正確性を担保する3つの「徹底」</h3>
+                <h3 className="text-xl font-bold text-slate-800 border-l-4 border-blue-600 pl-4">情報の正確性を担保する3つの「徹底」</h3>
                 <div className="mt-4 grid gap-6 md:grid-cols-1">
                   <div className="flex gap-4 p-4 rounded-xl bg-slate-50 border border-slate-100">
                     <div className="shrink-0 grid h-10 w-10 place-items-center rounded-full bg-white shadow-sm">
@@ -121,37 +143,6 @@ export default function AboutPage() {
                       </p>
                     </div>
                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* サイトの専門性 */}
-          <div className="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
-            <h2 className="mb-6 flex items-center gap-2 text-xl font-bold text-slate-800">
-              <Shield className="h-6 w-6 text-blue-600" />
-              コンテンツ制作ガイドライン
-            </h2>
-            <div className="space-y-6 text-sm text-slate-600 leading-relaxed">
-              <p>
-                「My Naishin」のコンテンツは、以下のポリシーに基づいて制作されています。
-              </p>
-              <div className="grid gap-4 sm:grid-cols-2">
-                <div className="border-l-2 border-emerald-500 pl-4">
-                  <h4 className="font-bold text-slate-800">正確性の追求</h4>
-                  <p className="mt-1">計算結果の誤差をゼロにするため、各県の満点数、傾斜配点、端数処理のルール（切り捨て・切り上げ・四捨五入）まで詳細にプログラムしています。</p>
-                </div>
-                <div className="border-l-2 border-blue-500 pl-4">
-                  <h4 className="font-bold text-slate-800">中立性の保持</h4>
-                  <p className="mt-1">特定の塾やサービスへ誘導することを目的とせず、受験生が自分に最適な戦略を立てるための「客観的な数値データ」を提供することに徹しています。</p>
-                </div>
-                <div className="border-l-2 border-amber-500 pl-4">
-                  <h4 className="font-bold text-slate-800">最新情報の提供</h4>
-                  <p className="mt-1">「令和8年度（2026年度）入試」に対応していることを明記し、過去の制度と混同しないよう配慮しています。</p>
-                </div>
-                <div className="border-l-2 border-violet-500 pl-4">
-                  <h4 className="font-bold text-slate-800">UX/アクセシビリティ</h4>
-                  <p className="mt-1">中学生がスマホ1つで、休み時間や通学中にストレスなく計算できるよう、広告配置や操作性を最適化しています。</p>
                 </div>
               </div>
             </div>

@@ -8,6 +8,8 @@ import {
   Sparkles,
   ArrowRight,
   Search,
+  BookOpen,
+  Target
 } from 'lucide-react';
 
 import { PREFECTURES, REGIONS } from '@/lib/prefectures';
@@ -49,10 +51,10 @@ export default function PrefecturesPage() {
               <MapPin className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">
-              都道府県別の内申点計算
+              都道府県別の内申点・高校入試対策
             </h1>
             <p className="mt-4 text-slate-600 max-w-2xl mx-auto leading-relaxed">
-              お住まいの地域を選択してください。各都道府県の最新（令和8年度）入試制度に基づいた、実技教科の倍率や対象学年を自動で反映した計算ツールをご利用いただけます。
+              各都道府県の最新（令和8年度）入試制度を網羅。内申点の計算ツールから、合格に必要な当日点のシミュレーション、地域別の攻略ガイドまで、すべての情報を一箇所に集約しました。
             </p>
           </header>
 
@@ -86,34 +88,45 @@ export default function PrefecturesPage() {
                   
                   <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                     {prefsInRegion.map(pref => (
-                      <Link
+                      <div
                         key={pref.code}
-                        href={`/${pref.code}/naishin`}
-                        className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:border-blue-300 hover:shadow-md hover:-translate-y-1"
+                        className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:border-blue-300 hover:shadow-md"
                       >
-                        <div className="flex items-center justify-between">
-                          <div>
-                            <h3 className="text-lg font-bold text-slate-800 group-hover:text-blue-600">
-                              {pref.name}
-                            </h3>
-                            <p className="mt-1 text-xs text-slate-500 line-clamp-1">
-                              {pref.maxScore}点満点 / 実技{pref.practicalMultiplier}倍
-                            </p>
-                          </div>
-                          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-50 text-slate-400 group-hover:bg-blue-50 group-hover:text-blue-600 transition-colors">
-                            <Calculator className="h-5 w-5" />
-                          </div>
+                        <div className="flex items-center justify-between mb-4">
+                          <h3 className="text-lg font-bold text-slate-800">
+                            {pref.name}
+                          </h3>
+                          <MapPin className="h-4 w-4 text-slate-300" />
                         </div>
                         
-                        <div className="mt-4 flex items-center justify-between text-xs font-medium">
-                          <span className="text-slate-400">
-                            対象：中{pref.targetGrades.join('・')}
-                          </span>
-                          <span className="flex items-center gap-1 text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity">
-                            計算する <ArrowRight className="h-3 w-3" />
-                          </span>
+                        <div className="space-y-2 mb-6">
+                          <Link 
+                            href={`/${pref.code}/naishin`}
+                            className="flex items-center justify-between rounded-xl bg-blue-50 px-4 py-2.5 text-sm font-bold text-blue-700 transition-all hover:bg-blue-600 hover:text-white"
+                          >
+                            <span className="flex items-center gap-2">
+                              <Calculator className="h-4 w-4" />
+                              内申点計算
+                            </span>
+                            <ChevronRight className="h-4 w-4" />
+                          </Link>
+                          <Link 
+                            href={`/${pref.code}`}
+                            className="flex items-center justify-between rounded-xl bg-slate-50 px-4 py-2.5 text-sm font-bold text-slate-700 transition-all hover:bg-slate-800 hover:text-white"
+                          >
+                            <span className="flex items-center gap-2">
+                              <BookOpen className="h-4 w-4" />
+                              攻略ガイド
+                            </span>
+                            <ChevronRight className="h-4 w-4" />
+                          </Link>
                         </div>
-                      </Link>
+                        
+                        <div className="flex items-center justify-between text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+                          <span>満点: {pref.maxScore}点</span>
+                          <span>実技: {pref.practicalMultiplier > 1 ? `${pref.practicalMultiplier}倍` : '等倍'}</span>
+                        </div>
+                      </div>
                     ))}
                   </div>
                 </section>

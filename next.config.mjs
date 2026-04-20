@@ -18,27 +18,18 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   async redirects() {
-    // 都道府県ページのリダイレクト（/{code} → /{code}/naishin）
-    const prefectureRedirects = PREFECTURE_CODES.map((code) => ({
-      source: `/${code}`,
-      destination: `/${code}/naishin`,
-      permanent: true,
-    }));
-
-    // 都道府県リバースページのリダイレクト（/{code}/reverse → /reverse?pref={code}）
-    const prefectureReverseRedirects = PREFECTURE_CODES.map((code) => ({
-      source: `/${code}/reverse`,
-      destination: `/reverse?pref=${code}`,
-      permanent: true,
-    }));
-
     return [
-      ...prefectureRedirects,
-      ...prefectureReverseRedirects,
+      // 都道府県リバースページのリダイレクト（/{code}/reverse → /reverse?pref={code}）
+      // /reverse?pref={code}に統一したため、不要なリダイレクトを削除
+      ...PREFECTURE_CODES.map((code) => ({
+        source: `/${code}/reverse`,
+        destination: `/reverse?pref=${code}`,
+        permanent: true,
+      })),
       {
         source: '/blog/suisen-vs-ippan-naishin',
         destination: '/blog/naishin-guide#制度編',
-        permanent: true,
+        permanent: true
       },
     ];
   },

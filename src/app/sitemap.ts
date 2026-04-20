@@ -17,6 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: '/glossary', priority: 0.8, changeFrequency: 'weekly' },
     { url: '/blog', priority: 0.9, changeFrequency: 'always' },
     { url: '/about', priority: 0.8, changeFrequency: 'monthly' },
+    { url: '/about/editor-profile', priority: 0.9, changeFrequency: 'monthly' },
     { url: '/quality', priority: 0.8, changeFrequency: 'monthly' },
     { url: '/contact', priority: 0.5, changeFrequency: 'yearly' },
     { url: '/privacy', priority: 0.5, changeFrequency: 'yearly' },
