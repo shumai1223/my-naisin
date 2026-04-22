@@ -14,6 +14,13 @@ export interface ChangeLogEntry {
 
 export const CHANGELOG: ChangeLogEntry[] = [
   {
+    date: '2026-04-22',
+    type: 'update',
+    category: 'data',
+    title: '高校データの大幅改新および上位校情報の公開',
+    description: '全国47都道府県の公立高校入試ボーダーラインデータを大幅に更新しました。各都道府県の上位10校を中心に、合格目安となる内申点や当日点の情報を最新の入試結果に基づき収集・公開。志望校選びの精度を向上させました。',
+  },
+  {
     date: '2026-04-08',
     type: 'update',
     category: 'seo',
@@ -263,6 +270,13 @@ export const CHANGELOG: ChangeLogEntry[] = [
     category: 'feature',
     title: '成績推移グラフを追加',
     description: '過去の計算履歴をグラフで可視化できるようになりました。',
+  },
+  {
+    date: '2026-01-20',
+    type: 'add',
+    category: 'feature',
+    title: '履歴保存機能を追加',
+    description: '計算結果を端末に保存し、後から振り返れるようになりました。',
   },
   {
     date: '2026-01-20',

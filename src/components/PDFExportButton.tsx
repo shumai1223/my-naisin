@@ -193,7 +193,7 @@ export function PDFExportButton({
           <div class="evidence">
             <div class="section-title">根拠情報</div>
             <p><strong>根拠資料:</strong> ${prefecture?.name}教育委員会「令和8年度入学者選抜実施要綱」</p>
-            <p><strong>最終確認日:</strong> 2026年4月20日</p>
+            <p><strong>最終確認日:</strong> 2026年4月22日</p>
             <p><strong>計算根拠:</strong> 公式資料に基づき9教科5段階評価で計算</p>
             <p><strong>注意事項:</strong> 学校・コースによって配点が異なる場合があります。必ず志望校の要項を確認してください。</p>
             <p><strong>URL:</strong> ${typeof window !== 'undefined' ? window.location.origin : 'https://my-naishin.com'}/${prefectureCode}/naishin</p>

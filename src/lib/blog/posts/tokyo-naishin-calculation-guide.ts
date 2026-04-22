@@ -5,7 +5,7 @@ export const post: BlogPost = {
     title: '【2026年最新】東京都立高校入試の内申点計算を完全攻略｜換算内申・調査書点の出し方',
     description: '東京都立高校入試の内申点（調査書点）の計算方法を現役受験生目線で徹底解説。実技4教科が2倍になる「換算内申」の仕組みから、ESAT-J（スピーキングテスト）の影響、合格に必要な内申点の目安まで、最新情報を網羅。',
     date: '2025-01-18',
-    lastUpdated: '2026-04-21',
+    lastUpdated: '2026-04-22',
     category: '都道府県別対策',
     readTime: '15分',
     author: 'My Naishin 編集部',

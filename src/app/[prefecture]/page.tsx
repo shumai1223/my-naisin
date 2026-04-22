@@ -193,7 +193,7 @@ export default async function PrefecturePage({ params }: PrefecturePageProps) {
                      <div className="mt-6 flex flex-wrap items-center gap-4 text-xs font-bold text-blue-300">
                        <span className="flex items-center gap-1 bg-white/10 px-3 py-1 rounded-full"><Calendar className="h-3 w-3" /> 2026年4月最終更新済</span>
                        <span className="flex items-center gap-1 bg-white/10 px-3 py-1 rounded-full"><Search className="h-3 w-3" /> 一次資料検証済</span>
-                       <span className="flex items-center gap-1 bg-white/10 px-3 py-1 rounded-full"><Sparkles className="h-3 w-3" /> 2025年度入試結果反映</span>
+                       <span className="flex items-center gap-1 bg-white/10 px-3 py-1 rounded-full"><Sparkles className="h-3 w-3" /> 2026年度入試結果反映</span>
                      </div>
                    </div>
                  </div>

@@ -3,8 +3,8 @@ import { BlogPost } from '../types';
 export const post: BlogPost = {
   slug: 'all-3-high-school-options-2026-update',
   title: 'オール3（内申27）で行ける高校は？2026年最新の都道府県別合格ラインと逆転術',
-  date: '2026-04-20',
-  lastUpdated: '2026-04-20',
+  date: '2026-04-22',
+  lastUpdated: '2026-04-22',
   author: 'My内申 編集部',
   readTime: '4 min',
   tags: ["オール3","内申27","志望校選び","逆転合格"],

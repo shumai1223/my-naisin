@@ -5,7 +5,7 @@ import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { APP_NAME } from '@/lib/constants';
 
 export default function DisclaimerPage() {
-  const lastUpdated = '2026年4月20日';
+  const lastUpdated = '2026年4月22日';
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">

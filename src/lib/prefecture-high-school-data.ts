@@ -1,6 +1,6 @@
 /**
  * My Naishin - 全国47都道府県 公立高校入試ボーダーラインデータ
- * 2025年度（令和7年度）入試対応
+ * 2026年度（令和8年度）入試対応
  * データソース：教育委員会公式資料、進学塾公開データ、OPENLANE等
  *              進研ゼミ合格者アンケート、じゅけラボ予備校、各都道府県教育委員会公式HP
  */
@@ -66,7 +66,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 410,
         totalScore: 875,
         notes: "Aランク（ほぼオール5）でも当日点400点以上必須",
-        source: "北海道高校入試情報 2025年度",
+        source: "北海道高校入試情報 2026年度",
       },
       {
         rank: 2,
@@ -75,7 +75,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 308,
         avgScore: 405,
         totalScore: 870,
-        source: "北海道高校入試情報 2025年度",
+        source: "北海道高校入試情報 2026年度",
       },
       {
         rank: 3,
@@ -84,7 +84,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 305,
         avgScore: 400,
         totalScore: 860,
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 4,
@@ -93,7 +93,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 300,
         avgScore: 395,
         totalScore: 845,
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 5,
@@ -102,7 +102,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 298,
         avgScore: 390,
         totalScore: 840,
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 6,
@@ -111,7 +111,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 295,
         avgScore: 385,
         totalScore: 830,
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 7,
@@ -120,7 +120,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 290,
         avgScore: 380,
         totalScore: 820,
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 8,
@@ -129,7 +129,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 285,
         avgScore: 375,
         totalScore: 810,
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 9,
@@ -138,7 +138,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 280,
         avgScore: 370,
         totalScore: 800,
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 10,
@@ -147,7 +147,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 275,
         avgScore: 365,
         totalScore: 790,
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
     ],
     blogContentIdeas: [
@@ -189,8 +189,8 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         department: "普通科",
         avgNaishin: 126,
         avgScore: 430,
-        notes: "県内最難関。内申126/135・当日430/500が目安（進研ゼミ先輩報告2025年度ベース）",
-        source: "進研ゼミ 高校入試情報サイト 2025年度",
+        notes: "県内最難関。内申126/135・当日430/500が目安（進研ゼミ先輩報告2026年度ベース）",
+        source: "進研ゼミ 高校入試情報サイト 2026年度",
       },
       {
         rank: 2,
@@ -199,7 +199,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 124,
         avgScore: 420,
         notes: "津軽地方最上位校。内申・当日点ともに高水準",
-        source: "進研ゼミ 高校入試情報サイト 2025年度",
+        source: "進研ゼミ 高校入試情報サイト 2026年度",
       },
       {
         rank: 3,
@@ -208,7 +208,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 122,
         avgScore: 415,
         notes: "南部地方の最上位校",
-        source: "進研ゼミ 高校入試情報サイト 2025年度",
+        source: "進研ゼミ 高校入試情報サイト 2026年度",
       },
       {
         rank: 4,
@@ -217,7 +217,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 115,
         avgScore: 390,
         notes: "青森市内上位校。青森高校に次ぐ難易度",
-        source: "S-classブログ 令和7年度入試ボーダー情報",
+        source: "S-classブログ 令和8年度入試ボーダー情報",
       },
       {
         rank: 5,
@@ -226,7 +226,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 112,
         avgScore: 375,
         notes: "弘前地区2番手校",
-        source: "S-classブログ 令和7年度入試ボーダー情報",
+        source: "S-classブログ 令和8年度入試ボーダー情報",
       },
       {
         rank: 6,
@@ -235,7 +235,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 108,
         avgScore: 360,
         notes: "八戸地区2番手校",
-        source: "S-classブログ 令和7年度入試ボーダー情報",
+        source: "S-classブログ 令和8年度入試ボーダー情報",
       },
       {
         rank: 7,
@@ -244,7 +244,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 105,
         avgScore: 345,
         notes: "青森市中位校",
-        source: "S-classブログ 令和7年度入試ボーダー情報",
+        source: "S-classブログ 令和8年度入試ボーダー情報",
       },
       {
         rank: 8,
@@ -253,7 +253,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 100,
         avgScore: 330,
         notes: "青森市中位校",
-        source: "S-classブログ 令和7年度入試ボーダー情報",
+        source: "S-classブログ 令和8年度入試ボーダー情報",
       },
       {
         rank: 9,
@@ -262,7 +262,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 98,
         avgScore: 320,
         notes: "弘前地区中位校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 10,
@@ -271,7 +271,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 95,
         avgScore: 310,
         notes: "八戸地区中位校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
     ],
     blogContentIdeas: [
@@ -296,7 +296,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
       hasRecommendation: false,
       hasInterview: true,
       uniqueRules: [
-        "2025年度から推薦入試が廃止となり、特色入学者選抜と一般入学者選抜に移行",
+        "2026年度から推薦入試が廃止となり、特色入学者選抜と一般入学者選抜に移行",
         "内申点は主要5教科に学年比率（中1×2・中2×4・中3×6）、実技4教科に（中1×3・中2×6・中3×9）をかけた660点満点を500点に圧縮して換算",
         "学年比率は中1：中2：中3＝1：2：3（中3の内申が最も重要）",
         "実技4教科の比重は主要5教科の約1.5倍と非常に高い",
@@ -313,7 +313,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         department: "普通科",
         avgNaishin: 400,
         avgScore: 370,
-        notes: "学力点：内申7：3。500点換算で内申400/学力370がボーダー目安（滝沢進学塾2025年度推計）",
+        notes: "学力点：内申7：3。500点換算で内申400/学力370がボーダー目安（滝沢進学塾2026年度推計）",
         source: "滝沢進学塾 2025年3月入試合格ボーダーライン",
       },
       {
@@ -359,7 +359,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 310,
         avgScore: 230,
         notes: "花巻地区トップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 7,
@@ -368,7 +368,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 320,
         avgScore: 240,
         notes: "一関地区トップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 8,
@@ -377,7 +377,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 300,
         avgScore: 225,
         notes: "奥州地区トップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 9,
@@ -386,7 +386,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 290,
         avgScore: 215,
         notes: "久慈地区トップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 10,
@@ -395,7 +395,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 285,
         avgScore: 210,
         notes: "宮古地区トップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
     ],
     blogContentIdeas: [
@@ -456,7 +456,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 178,
         avgScore: 445,
         notes: "女子進学校。普通科・国際探求科・理数探求科を設置",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 4,
@@ -465,7 +465,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 172,
         avgScore: 430,
         notes: "ナンバースクール中堅。内申・当日ともに高水準",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 5,
@@ -474,7 +474,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 165,
         avgScore: 415,
         notes: "学力：内申6：4。仙台市南部の上位校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 6,
@@ -483,7 +483,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 160,
         avgScore: 400,
         notes: "仙台市南部の上位校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 7,
@@ -492,7 +492,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 156,
         avgScore: 385,
         notes: "仙台北部エリアの上位校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 8,
@@ -501,7 +501,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 150,
         avgScore: 370,
         notes: "塩竈・多賀城エリア上位校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 9,
@@ -510,7 +510,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 187,
         avgScore: 465,
         notes: "理数科は普通科よりさらに高倍率",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 10,
@@ -519,7 +519,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 145,
         avgScore: 360,
         notes: "石巻地区トップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
     ],
     blogContentIdeas: [
@@ -561,7 +561,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 130,
         avgScore: 440,
         notes: "秋田県最難関。東大進学実績あり",
-        source: "進研ゼミ・じゅけラボ予備校 2025年度推計",
+        source: "進研ゼミ・じゅけラボ予備校 2026年度推計",
       },
       {
         rank: 2,
@@ -570,7 +570,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 126,
         avgScore: 420,
         notes: "秋田市内2番手。文武両道の進学校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 3,
@@ -579,7 +579,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 118,
         avgScore: 390,
         notes: "秋田市内3番手校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 4,
@@ -588,7 +588,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 120,
         avgScore: 400,
         notes: "横手地区トップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 5,
@@ -597,7 +597,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 116,
         avgScore: 385,
         notes: "大館地区トップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 6,
@@ -606,7 +606,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 112,
         avgScore: 370,
         notes: "能代地区トップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 7,
@@ -615,7 +615,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 110,
         avgScore: 360,
         notes: "由利本荘地区トップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 8,
@@ -624,7 +624,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 113,
         avgScore: 372,
         notes: "大仙地区トップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 9,
@@ -633,7 +633,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 108,
         avgScore: 355,
         notes: "秋田市内中位〜上位校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 10,
@@ -642,7 +642,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 105,
         avgScore: 345,
         notes: "湯沢地区トップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
     ],
     blogContentIdeas: [
@@ -683,7 +683,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 44,
         avgScore: 450,
         notes: "県内最難関。東大・京大進学実績あり。内申44/45・当日450/500が目安",
-        source: "進研ゼミ・推計 2025年度",
+        source: "進研ゼミ・推計 2026年度",
       },
       {
         rank: 2,
@@ -692,7 +692,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 42,
         avgScore: 420,
         notes: "山形市内2番手校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 3,
@@ -701,7 +701,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 40,
         avgScore: 395,
         notes: "山形市内3番手校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 4,
@@ -710,7 +710,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 42,
         avgScore: 415,
         notes: "庄内地方トップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 5,
@@ -719,7 +719,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 41,
         avgScore: 410,
         notes: "庄内地方2番手校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 6,
@@ -728,7 +728,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 43,
         avgScore: 430,
         notes: "置賜地方トップ校。伝統校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 7,
@@ -737,7 +737,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 39,
         avgScore: 385,
         notes: "最上地方トップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 8,
@@ -746,7 +746,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 38,
         avgScore: 375,
         notes: "山形市内中位校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 9,
@@ -755,7 +755,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 38,
         avgScore: 370,
         notes: "村山南部エリアの上位校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 10,
@@ -764,7 +764,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 37,
         avgScore: 360,
         notes: "天童市の上位校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
     ],
     blogContentIdeas: [
@@ -806,7 +806,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 185,
         avgScore: 440,
         notes: "県内最難関。内申185/195・当日440/500が目安",
-        source: "KATEKYO学院福島・推計 2025年度",
+        source: "KATEKYO学院福島・推計 2026年度",
       },
       {
         rank: 2,
@@ -815,7 +815,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 183,
         avgScore: 435,
         notes: "郡山地区最難関。東大・旧帝大への進学実績",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 3,
@@ -824,7 +824,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 180,
         avgScore: 425,
         notes: "いわき地区最難関",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 4,
@@ -833,7 +833,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 178,
         avgScore: 420,
         notes: "会津地区トップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 5,
@@ -842,7 +842,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 165,
         avgScore: 395,
         notes: "福島市内2番手校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 6,
@@ -851,7 +851,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 162,
         avgScore: 385,
         notes: "郡山地区2番手校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 7,
@@ -860,7 +860,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 160,
         avgScore: 378,
         notes: "郡山地区3番手校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 8,
@@ -869,7 +869,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 158,
         avgScore: 370,
         notes: "県南地区トップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 9,
@@ -878,7 +878,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 152,
         avgScore: 358,
         notes: "浜通り北部のトップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 10,
@@ -887,7 +887,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 150,
         avgScore: 350,
         notes: "須賀川地区トップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
     ],
     blogContentIdeas: [
@@ -929,7 +929,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 133,
         avgScore: 450,
         notes: "県内最難関。東大・旧帝大への進学実績多数。内申133/135・当日450/500が目安",
-        source: "進研ゼミ 先輩報告データ 2025年度",
+        source: "進研ゼミ 先輩報告データ 2026年度",
       },
       {
         rank: 2,
@@ -938,7 +938,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 132,
         avgScore: 445,
         notes: "南部エリア最難関",
-        source: "進研ゼミ・推計 2025年度",
+        source: "進研ゼミ・推計 2026年度",
       },
       {
         rank: 3,
@@ -947,7 +947,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 124,
         avgScore: 410,
         notes: "竜ヶ崎地区トップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 4,
@@ -956,7 +956,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 122,
         avgScore: 405,
         notes: "水戸市内2番手校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 5,
@@ -965,7 +965,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 120,
         avgScore: 395,
         notes: "日立地区トップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 6,
@@ -974,7 +974,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 118,
         avgScore: 385,
         notes: "筑西・下妻地区トップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 7,
@@ -983,7 +983,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 116,
         avgScore: 375,
         notes: "取手地区トップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 8,
@@ -992,7 +992,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 114,
         avgScore: 365,
         notes: "古河地区上位校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 9,
@@ -1001,7 +1001,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 112,
         avgScore: 355,
         notes: "石岡地区トップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 10,
@@ -1010,7 +1010,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 110,
         avgScore: 345,
         notes: "鹿島地区トップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
     ],
     blogContentIdeas: [
@@ -1051,7 +1051,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 133,
         avgScore: 448,
         notes: "県内最難関男子校。東大・京大進学実績多数",
-        source: "進研ゼミ 先輩報告データ 2025年度",
+        source: "進研ゼミ 先輩報告データ 2026年度",
       },
       {
         rank: 2,
@@ -1060,7 +1060,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 132,
         avgScore: 440,
         notes: "県内最難関女子校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 3,
@@ -1069,7 +1069,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 124,
         avgScore: 405,
         notes: "栃木地区トップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 4,
@@ -1078,7 +1078,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 122,
         avgScore: 398,
         notes: "小山地区トップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 5,
@@ -1087,7 +1087,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 120,
         avgScore: 390,
         notes: "佐野地区トップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 6,
@@ -1096,7 +1096,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 118,
         avgScore: 382,
         notes: "宇都宮市内中堅上位校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 7,
@@ -1105,7 +1105,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 116,
         avgScore: 372,
         notes: "足利地区トップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 8,
@@ -1114,7 +1114,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 115,
         avgScore: 365,
         notes: "真岡地区トップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 9,
@@ -1123,7 +1123,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 113,
         avgScore: 358,
         notes: "那須地区トップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 10,
@@ -1132,7 +1132,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 110,
         avgScore: 345,
         notes: "鹿沼地区トップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
     ],
     blogContentIdeas: [
@@ -1173,7 +1173,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 133,
         avgScore: 445,
         notes: "県内最難関男子校。東大・京大進学実績",
-        source: "進研ゼミ 先輩報告データ 2025年度",
+        source: "進研ゼミ 先輩報告データ 2026年度",
       },
       {
         rank: 2,
@@ -1182,7 +1182,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 132,
         avgScore: 438,
         notes: "県内最難関女子校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 3,
@@ -1191,7 +1191,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 130,
         avgScore: 430,
         notes: "高崎地区最難関男子校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 4,
@@ -1200,7 +1200,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 129,
         avgScore: 425,
         notes: "高崎地区最難関女子校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 5,
@@ -1209,7 +1209,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 124,
         avgScore: 405,
         notes: "太田地区トップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 6,
@@ -1218,7 +1218,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 122,
         avgScore: 395,
         notes: "東部地区トップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 7,
@@ -1227,7 +1227,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 118,
         avgScore: 380,
         notes: "前橋地区2番手校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 8,
@@ -1236,7 +1236,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 115,
         avgScore: 368,
         notes: "高崎地区中堅上位校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 9,
@@ -1245,7 +1245,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 112,
         avgScore: 355,
         notes: "渋川地区トップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 10,
@@ -1254,7 +1254,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 110,
         avgScore: 345,
         notes: "利根地区トップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
     ],
     blogContentIdeas: [
@@ -1295,7 +1295,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 440,
         totalScore: 880,
         notes: "学校選択問題採用。K値が高い可能性",
-        source: "埼玉県公立高校進学情報 2025年度",
+        source: "埼玉県公立高校進学情報 2026年度",
       },
       {
         rank: 2,
@@ -1304,7 +1304,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 126,
         avgScore: 435,
         totalScore: 875,
-        source: "埼玉県公立高校進学情報 2025年度",
+        source: "埼玉県公立高校進学情報 2026年度",
       },
       {
         rank: 3,
@@ -1313,7 +1313,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 125,
         avgScore: 430,
         totalScore: 870,
-        source: "埼玉県公立高校進学情報 2025年度",
+        source: "埼玉県公立高校進学情報 2026年度",
       },
       {
         rank: 4,
@@ -1322,7 +1322,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 122,
         avgScore: 420,
         totalScore: 855,
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 5,
@@ -1331,7 +1331,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 120,
         avgScore: 415,
         totalScore: 850,
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 6,
@@ -1340,7 +1340,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 118,
         avgScore: 410,
         totalScore: 840,
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 7,
@@ -1349,7 +1349,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 116,
         avgScore: 405,
         totalScore: 830,
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 8,
@@ -1358,7 +1358,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 114,
         avgScore: 400,
         totalScore: 820,
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 9,
@@ -1367,7 +1367,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 112,
         avgScore: 395,
         totalScore: 810,
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 10,
@@ -1376,7 +1376,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 110,
         avgScore: 390,
         totalScore: 800,
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
     ],
     blogContentIdeas: [
@@ -1417,7 +1417,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 445,
         totalScore: 880,
         notes: "学校設定検査あり。加重配点が高い可能性",
-        source: "千葉県公立高校入試情報 2025年度",
+        source: "千葉県公立高校入試情報 2026年度",
       },
       {
         rank: 2,
@@ -1426,7 +1426,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 128,
         avgScore: 440,
         totalScore: 875,
-        source: "千葉県公立高校入試情報 2025年度",
+        source: "千葉県公立高校入試情報 2026年度",
       },
       {
         rank: 3,
@@ -1435,7 +1435,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 127,
         avgScore: 435,
         totalScore: 870,
-        source: "千葉県公立高校入試情報 2025年度",
+        source: "千葉県公立高校入試情報 2026年度",
       },
       {
         rank: 4,
@@ -1444,7 +1444,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 125,
         avgScore: 430,
         totalScore: 865,
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 5,
@@ -1453,7 +1453,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 123,
         avgScore: 425,
         totalScore: 860,
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 6,
@@ -1462,7 +1462,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 120,
         avgScore: 420,
         totalScore: 850,
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 7,
@@ -1471,7 +1471,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 118,
         avgScore: 415,
         totalScore: 840,
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 8,
@@ -1480,7 +1480,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 116,
         avgScore: 410,
         totalScore: 830,
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 9,
@@ -1489,7 +1489,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 114,
         avgScore: 405,
         totalScore: 820,
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 10,
@@ -1498,7 +1498,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 112,
         avgScore: 400,
         totalScore: 810,
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
     ],
     blogContentIdeas: [
@@ -1538,7 +1538,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 455,
         totalScore: 900,
         notes: "都内トップ校。実技も含めてほぼオール5同然",
-        source: "塾選/都立合格ナビ 2025年度",
+        source: "塾選/都立合格ナビ 2026年度",
       },
       {
         rank: 2,
@@ -1547,7 +1547,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 61,
         avgScore: 450,
         totalScore: 880,
-        source: "都立合格ナビ 2025年度",
+        source: "都立合格ナビ 2026年度",
       },
       {
         rank: 3,
@@ -1556,7 +1556,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 61,
         avgScore: 445,
         totalScore: 870,
-        source: "都立合格ナビ 2025年度",
+        source: "都立合格ナビ 2026年度",
       },
       {
         rank: 4,
@@ -1565,7 +1565,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 60,
         avgScore: 440,
         totalScore: 860,
-        source: "都立合格ナビ 2025年度",
+        source: "都立合格ナビ 2026年度",
       },
       {
         rank: 5,
@@ -1574,7 +1574,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 59,
         avgScore: 435,
         totalScore: 850,
-        source: "都立合格ナビ 2025年度",
+        source: "都立合格ナビ 2026年度",
       },
       {
         rank: 6,
@@ -1583,7 +1583,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 57,
         avgScore: 425,
         totalScore: 830,
-        source: "都立合格ナビ 2025年度",
+        source: "都立合格ナビ 2026年度",
       },
       {
         rank: 7,
@@ -1592,7 +1592,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 57,
         avgScore: 420,
         totalScore: 820,
-        source: "都立合格ナビ 2025年度",
+        source: "都立合格ナビ 2026年度",
       },
       {
         rank: 8,
@@ -1601,7 +1601,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 56,
         avgScore: 415,
         totalScore: 810,
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 9,
@@ -1610,7 +1610,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 55,
         avgScore: 410,
         totalScore: 800,
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 10,
@@ -1619,7 +1619,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 55,
         avgScore: 405,
         totalScore: 790,
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
     ],
     blogContentIdeas: [
@@ -1648,7 +1648,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         "中2の成績も評価対象に含まれる（早期対策が必須）",
         "特色検査実施校が複数存在",
         "学校ごとの重点化制度（英数理を2倍など）",
-        "2025年度全県合格者平均286.1点（500点満点）",
+        "2026年度全県合格者平均286.1点（500点満点）",
       ],
     },
     topHighSchools: [
@@ -1660,7 +1660,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 440,
         totalScore: 885,
         notes: "内申：学力：特色＝3:7:3 特色検査あり",
-        source: "ステップ 2025年度",
+        source: "ステップ 2026年度",
       },
       {
         rank: 2,
@@ -1670,7 +1670,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 430,
         totalScore: 875,
         notes: "内申：学力：特色＝4:6:2",
-        source: "ステップ 2025年度",
+        source: "ステップ 2026年度",
       },
       {
         rank: 3,
@@ -1680,7 +1680,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 425,
         totalScore: 865,
         notes: "内申：学力：特色＝3:7:2",
-        source: "ステップ 2025年度",
+        source: "ステップ 2026年度",
       },
       {
         rank: 4,
@@ -1690,7 +1690,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 420,
         totalScore: 855,
         notes: "英数理を調査書で2倍（重点化）",
-        source: "ステップ 2025年度",
+        source: "ステップ 2026年度",
       },
       {
         rank: 5,
@@ -1700,7 +1700,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 415,
         totalScore: 845,
         notes: "内申：学力：特色＝4:6:2",
-        source: "ステップ 2025年度",
+        source: "ステップ 2026年度",
       },
       {
         rank: 6,
@@ -1709,7 +1709,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 125,
         avgScore: 380,
         totalScore: 800,
-        source: "オフスペース 2025年度",
+        source: "オフスペース 2026年度",
       },
       {
         rank: 7,
@@ -1718,7 +1718,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 123,
         avgScore: 375,
         totalScore: 795,
-        source: "オフスペース 2025年度",
+        source: "オフスペース 2026年度",
       },
       {
         rank: 8,
@@ -1727,7 +1727,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 120,
         avgScore: 370,
         totalScore: 785,
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 9,
@@ -1736,7 +1736,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 118,
         avgScore: 365,
         totalScore: 775,
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 10,
@@ -1745,13 +1745,13 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 115,
         avgScore: 360,
         totalScore: 765,
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
     ],
     blogContentIdeas: [
       "神奈川県は『中2から内申が入る』：中学2年生からの成績戦略が合否を決める",
       "135点満点の仕組み：中2と中3で異なる重み付けの完全解説",
-      "2025年度全県平均286.1点の意味：難易度上昇トレンドを読む",
+      "2026年度全県平均286.1点の意味：難易度上昇トレンドを読む",
       "特色検査実施校の戦略：横浜翠嵐・湘南など進学指導重点校の選び方",
       "面接廃止でどう変わった？内申と学力検査の比重を徹底分析",
     ],
@@ -1787,7 +1787,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 145,
         avgScore: 420,
         notes: "県内最難関。東大・京大進学実績あり。内申145/150・当日420/450が目安",
-        source: "進研ゼミ 先輩報告データ 2025年度",
+        source: "進研ゼミ 先輩報告データ 2026年度",
       },
       {
         rank: 2,
@@ -1796,7 +1796,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 140,
         avgScore: 400,
         notes: "新潟市内2番手校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 3,
@@ -1805,7 +1805,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 143,
         avgScore: 410,
         notes: "長岡地区最難関",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 4,
@@ -1814,7 +1814,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 138,
         avgScore: 395,
         notes: "上越地区トップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 5,
@@ -1823,7 +1823,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 136,
         avgScore: 385,
         notes: "下越地区（新発田）トップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 6,
@@ -1832,7 +1832,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 134,
         avgScore: 378,
         notes: "三条地区トップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 7,
@@ -1841,7 +1841,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 133,
         avgScore: 372,
         notes: "新潟市内3番手校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 8,
@@ -1850,7 +1850,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 130,
         avgScore: 360,
         notes: "中越地区（柏崎）トップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 9,
@@ -1859,7 +1859,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 125,
         avgScore: 345,
         notes: "下越地区（村上）トップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 10,
@@ -1868,7 +1868,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 122,
         avgScore: 335,
         notes: "魚沼地区トップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
     ],
     blogContentIdeas: [
@@ -1909,7 +1909,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 143,
         avgScore: 190,
         notes: "県内最難関。内申143/150・当日190/200が目安",
-        source: "進研ゼミ・推計 2025年度",
+        source: "進研ゼミ・推計 2026年度",
       },
       {
         rank: 2,
@@ -1918,7 +1918,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 140,
         avgScore: 187,
         notes: "富山市内2番手校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 3,
@@ -1927,7 +1927,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 138,
         avgScore: 183,
         notes: "高岡地区最難関",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 4,
@@ -1936,7 +1936,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 133,
         avgScore: 175,
         notes: "砺波地区トップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 5,
@@ -1945,7 +1945,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 130,
         avgScore: 170,
         notes: "新川地区トップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 6,
@@ -1954,7 +1954,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 126,
         avgScore: 165,
         notes: "中部（滑川）地区上位校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 7,
@@ -1963,7 +1963,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 124,
         avgScore: 162,
         notes: "富山市内中位校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 8,
@@ -1972,7 +1972,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 120,
         avgScore: 158,
         notes: "高岡地区2番手校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 9,
@@ -1981,7 +1981,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 116,
         avgScore: 153,
         notes: "富山市南部の上位校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 10,
@@ -1990,7 +1990,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 112,
         avgScore: 148,
         notes: "南砺地区トップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
     ],
     blogContentIdeas: [
@@ -2032,7 +2032,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 133,
         avgScore: 450,
         notes: "県内最難関。東大・京大・医学部進学実績多数",
-        source: "進研ゼミ 先輩報告データ 2025年度",
+        source: "進研ゼミ 先輩報告データ 2026年度",
       },
       {
         rank: 2,
@@ -2041,7 +2041,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 128,
         avgScore: 420,
         notes: "金沢市内2番手校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 3,
@@ -2050,7 +2050,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 122,
         avgScore: 395,
         notes: "能登地区トップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 4,
@@ -2059,7 +2059,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 125,
         avgScore: 408,
         notes: "南加賀地区トップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 5,
@@ -2068,7 +2068,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 120,
         avgScore: 388,
         notes: "金沢市内3番手校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 6,
@@ -2077,7 +2077,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 115,
         avgScore: 370,
         notes: "金沢市内中位校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 7,
@@ -2086,7 +2086,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 112,
         avgScore: 355,
         notes: "南加賀地区2番手校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 8,
@@ -2095,7 +2095,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 108,
         avgScore: 340,
         notes: "中能登地区トップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 9,
@@ -2104,7 +2104,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 104,
         avgScore: 325,
         notes: "奥能登（輪島）地区トップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 10,
@@ -2113,14 +2113,14 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 100,
         avgScore: 310,
         notes: "奥能登（珠洲）地区トップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
     ],
     blogContentIdeas: [
       "石川県の内申は『非公表』ルール：実態は合否を左右するのに公開されない不思議な仕組み",
       "金沢泉丘高校の合格ボーダー：北陸随一の進学校を狙うために必要な実力",
       "前期選抜（推薦）vs後期選抜（一般）：石川県の2回選抜制を最大限に活用する方法",
-      "能登半島地震（2024年）の影響：石川県の入試制度への影響と2025年度の変化",
+      "能登半島地震（2024年）の影響：石川県の入試制度への影響と2026年度の変化",
       "小松・七尾・金沢3極分散：石川県の地域別トップ校比較と受験戦略",
     ],
   },
@@ -2156,7 +2156,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 420,
         totalScore: 740,
         notes: "山梨県最難関。探究科は県内トップ層が集まる",
-        source: "進研ゼミ・じゅけラボ 2025年度推計",
+        source: "進研ゼミ・じゅけラボ 2026年度推計",
       },
       {
         rank: 2,
@@ -2166,7 +2166,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 400,
         totalScore: 705,
         notes: "学習量・校風で鍛えられる進学校",
-        source: "Axis・じゅけラボ 2025年度推計",
+        source: "Axis・じゅけラボ 2026年度推計",
       },
       {
         rank: 3,
@@ -2176,7 +2176,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 380,
         totalScore: 675,
         notes: "甲府市内の主要進学校",
-        source: "進研ゼミ 2025年度推計",
+        source: "進研ゼミ 2026年度推計",
       },
       {
         rank: 4,
@@ -2186,7 +2186,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 360,
         totalScore: 640,
         notes: "南部の代表的進学校",
-        source: "進研ゼミ 2025年度推計",
+        source: "進研ゼミ 2026年度推計",
       },
       {
         rank: 5,
@@ -2196,7 +2196,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 340,
         totalScore: 610,
         notes: "東山梨地区の上位校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 6,
@@ -2206,7 +2206,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 320,
         totalScore: 575,
         notes: "富士北麓地区の中核校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 7,
@@ -2216,7 +2216,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 305,
         totalScore: 550,
         notes: "郡内地区の主要進学校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 8,
@@ -2226,7 +2226,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 285,
         totalScore: 520,
         notes: "甲府市内の総合型高校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 9,
@@ -2236,7 +2236,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 275,
         totalScore: 505,
         notes: "北巨摩地区の伝統校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 10,
@@ -2246,7 +2246,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 260,
         totalScore: 480,
         notes: "峡東地区の中核校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
     ],
     blogContentIdeas: [
@@ -2277,7 +2277,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         "前期選抜（自己推薦型）は学力検査なし・面接・作文または小論文等で選抜",
         "すべての受験者に面接を実施（対面または紙上面接）",
         "4学区制があるが、現在は全県から全高校・全学科に志願可能",
-        "2025年度入試は5科目平均点が数年ぶりに300点を突破し基礎学力重視の傾向",
+        "2026年度入試は5科目平均点が数年ぶりに300点を突破し基礎学力重視の傾向",
       ],
     },
     topHighSchools: [
@@ -2288,7 +2288,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 44,
         avgScore: 440,
         notes: "長野県最難関・北信地区の頂点。志願倍率が毎年高い",
-        source: "進研ゼミ・Axis 2025年度推計",
+        source: "進研ゼミ・Axis 2026年度推計",
       },
       {
         rank: 2,
@@ -2297,7 +2297,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 44,
         avgScore: 435,
         notes: "中信地区のトップ校。旧制松本中学の伝統を持つ",
-        source: "進研ゼミ 2025年度推計",
+        source: "進研ゼミ 2026年度推計",
       },
       {
         rank: 3,
@@ -2306,7 +2306,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 43,
         avgScore: 420,
         notes: "東信地区トップ。附属中学との連携が特色",
-        source: "進研ゼミ 2025年度推計",
+        source: "進研ゼミ 2026年度推計",
       },
       {
         rank: 4,
@@ -2315,7 +2315,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 42,
         avgScore: 405,
         notes: "東信地区の伝統校。上田市の進学の要",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 5,
@@ -2324,7 +2324,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 42,
         avgScore: 395,
         notes: "北信地区で長野高校に次ぐ人気校",
-        source: "Axis 2025年度推計",
+        source: "Axis 2026年度推計",
       },
       {
         rank: 6,
@@ -2333,7 +2333,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 42,
         avgScore: 390,
         notes: "南信・諏訪地区のトップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 7,
@@ -2342,7 +2342,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 41,
         avgScore: 375,
         notes: "北信地区の主要進学校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 8,
@@ -2351,7 +2351,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 41,
         avgScore: 365,
         notes: "中信地区の伝統進学校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 9,
@@ -2360,7 +2360,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 40,
         avgScore: 350,
         notes: "南信・飯田地区のトップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 10,
@@ -2369,7 +2369,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 40,
         avgScore: 340,
         notes: "上伊那地区の主要進学校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
     ],
     blogContentIdeas: [
@@ -2412,7 +2412,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 460,
         totalScore: 628,
         notes: "岐阜県最難関。内申3:学力7の比率で学力重視",
-        source: "COTUS・じゅけラボ 2025年度推計",
+        source: "COTUS・じゅけラボ 2026年度推計",
       },
       {
         rank: 2,
@@ -2422,7 +2422,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 440,
         totalScore: 602,
         notes: "西濃地区トップ。岐阜高校に並ぶ難関校",
-        source: "COTUS 2025年度推計",
+        source: "COTUS 2026年度推計",
       },
       {
         rank: 3,
@@ -2432,7 +2432,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 425,
         totalScore: 583,
         notes: "岐阜市内の伝統進学校",
-        source: "進研ゼミ 2025年度推計",
+        source: "進研ゼミ 2026年度推計",
       },
       {
         rank: 4,
@@ -2442,7 +2442,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 410,
         totalScore: 563,
         notes: "岐阜市内の主要進学校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 5,
@@ -2452,7 +2452,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 390,
         totalScore: 538,
         notes: "東濃地区の進学校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 6,
@@ -2462,7 +2462,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 380,
         totalScore: 525,
         notes: "東濃地区の伝統校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 7,
@@ -2472,7 +2472,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 365,
         totalScore: 505,
         notes: "各務原市の主要進学校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 8,
@@ -2482,7 +2482,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 355,
         totalScore: 493,
         notes: "中濃地区の中核校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 9,
@@ -2492,7 +2492,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 345,
         totalScore: 480,
         notes: "可児市の主要進学校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 10,
@@ -2502,7 +2502,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 330,
         totalScore: 460,
         notes: "恵那地区の伝統校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
     ],
     blogContentIdeas: [
@@ -2545,7 +2545,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 98,
         totalScore: 282,
         notes: "方式Ⅴ採用。当日点98/110点要求",
-        source: "さくら個別指導学院 2025年度",
+        source: "さくら個別指導学院 2026年度",
       },
       {
         rank: 2,
@@ -2555,7 +2555,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 95,
         totalScore: 274,
         notes: "方式Ⅴ採用",
-        source: "さくら個別指導学院 2025年度",
+        source: "さくら個別指導学院 2026年度",
       },
       {
         rank: 3,
@@ -2565,7 +2565,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 92,
         totalScore: 266,
         notes: "方式Ⅴ採用",
-        source: "さくら個別指導学院 2025年度",
+        source: "さくら個別指導学院 2026年度",
       },
       {
         rank: 4,
@@ -2574,7 +2574,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 41,
         avgScore: 91,
         totalScore: 266,
-        source: "さくら個別指導学院 2025年度",
+        source: "さくら個別指導学院 2026年度",
       },
       {
         rank: 5,
@@ -2583,7 +2583,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 40,
         avgScore: 89,
         totalScore: 258,
-        source: "さくら個別指導学院 2025年度",
+        source: "さくら個別指導学院 2026年度",
       },
       {
         rank: 6,
@@ -2592,7 +2592,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 39,
         avgScore: 86,
         totalScore: 250,
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 7,
@@ -2601,7 +2601,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 38,
         avgScore: 84,
         totalScore: 244,
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 8,
@@ -2610,7 +2610,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 37,
         avgScore: 82,
         totalScore: 238,
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 9,
@@ -2619,7 +2619,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 36,
         avgScore: 80,
         totalScore: 232,
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 10,
@@ -2628,7 +2628,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 35,
         avgScore: 78,
         totalScore: 226,
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
     ],
     blogContentIdeas: [
@@ -2641,7 +2641,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
   },
 /**
  * My Naishin - 全国47都道府県 公立高校入試ボーダーラインデータ
- * 2025年度（令和7年度）入試対応
+ * 2026年度（令和8年度）入試対応
  * データソース：教育委員会公式資料、進学塾公開データ、OPENLANE等
  *              進研ゼミ合格者アンケート、じゅけラボ予備校、各都道府県教育委員会公式HP
  *
@@ -2677,7 +2677,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 43,
         avgScore: 440,
         notes: "偏差値68。内申43以上＋当日430点以上が目安",
-        source: "進研ゼミ合格者アンケート 2025年度",
+        source: "進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 2,
@@ -2686,7 +2686,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 42,
         avgScore: 410,
         notes: "偏差値65。内申42以上＋当日400点以上が目安",
-        source: "進研ゼミ合格者アンケート 2025年度",
+        source: "進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 3,
@@ -2695,7 +2695,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 40,
         avgScore: 390,
         notes: "偏差値63。内申40以上＋当日380点以上が目安",
-        source: "進研ゼミ合格者アンケート 2025年度",
+        source: "進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 4,
@@ -2704,7 +2704,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 42,
         avgScore: 410,
         notes: "偏差値65。内申42以上＋当日400点以上が目安",
-        source: "進研ゼミ合格者アンケート 2025年度",
+        source: "進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 5,
@@ -2713,7 +2713,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 39,
         avgScore: 370,
         notes: "偏差値62。内申39以上＋当日360点以上が目安",
-        source: "進研ゼミ合格者アンケート 2025年度",
+        source: "進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 6,
@@ -2722,7 +2722,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 38,
         avgScore: 350,
         notes: "偏差値60。内申38以上＋当日340点以上が目安",
-        source: "進研ゼミ合格者アンケート 2025年度",
+        source: "進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 7,
@@ -2731,7 +2731,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 41,
         avgScore: 400,
         notes: "偏差値64。全県学区・数学重視",
-        source: "進研ゼミ合格者アンケート 2025年度",
+        source: "進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 8,
@@ -2740,7 +2740,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 36,
         avgScore: 320,
         notes: "偏差値57。内申36以上＋当日310点以上が目安",
-        source: "進研ゼミ合格者アンケート 2025年度",
+        source: "進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 9,
@@ -2749,7 +2749,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 32,
         avgScore: 280,
         notes: "偏差値52。内申32以上＋当日270点以上が目安",
-        source: "進研ゼミ合格者アンケート 2025年度",
+        source: "進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 10,
@@ -2758,7 +2758,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 38,
         avgScore: 360,
         notes: "偏差値60。内申38以上＋当日350点以上が目安",
-        source: "進研ゼミ合格者アンケート 2025年度",
+        source: "進研ゼミ合格者アンケート 2026年度",
       },
     ],
     blogContentIdeas: [
@@ -2798,7 +2798,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 130,
         avgScore: 440,
         notes: "偏差値70。内申：学力＝3：7。内申125以上＋当日420点以上が目安",
-        source: "英数塾STfun・進研ゼミ合格者アンケート 2025年度",
+        source: "英数塾STfun・進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 2,
@@ -2807,7 +2807,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 120,
         avgScore: 400,
         notes: "偏差値67。内申：学力＝3：7。内申115以上＋当日380点以上が目安",
-        source: "進研ゼミ合格者アンケート 2025年度",
+        source: "進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 3,
@@ -2816,7 +2816,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 115,
         avgScore: 375,
         notes: "偏差値64。内申：学力＝4：6。内申110以上＋当日360点以上が目安",
-        source: "進研ゼミ合格者アンケート 2025年度",
+        source: "進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 4,
@@ -2825,7 +2825,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 113,
         avgScore: 365,
         notes: "偏差値63。内申：学力＝4：6。内申108以上＋当日350点以上が目安",
-        source: "進研ゼミ合格者アンケート 2025年度",
+        source: "進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 5,
@@ -2834,7 +2834,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 107,
         avgScore: 355,
         notes: "偏差値61。内申：学力＝4：6。内申100以上＋当日340点以上が目安",
-        source: "進研ゼミ合格者アンケート 2025年度",
+        source: "進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 6,
@@ -2843,7 +2843,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 101,
         avgScore: 325,
         notes: "偏差値58。内申：学力＝5：5。内申95以上＋当日310点以上が目安",
-        source: "進研ゼミ合格者アンケート 2025年度",
+        source: "進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 7,
@@ -2852,7 +2852,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 103,
         avgScore: 335,
         notes: "偏差値59。内申：学力＝4：6 or 5：5。内申96以上＋当日320点以上が目安",
-        source: "英数塾STfun・進研ゼミ合格者アンケート 2025年度",
+        source: "英数塾STfun・進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 8,
@@ -2861,7 +2861,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 100,
         avgScore: 320,
         notes: "偏差値58。内申：学力＝4：6。内申93以上＋当日300点以上が目安",
-        source: "進研ゼミ合格者アンケート 2025年度",
+        source: "進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 9,
@@ -2870,7 +2870,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 91,
         avgScore: 285,
         notes: "偏差値54。内申：学力＝5：5。内申85以上＋当日270点以上が目安",
-        source: "進研ゼミ合格者アンケート 2025年度",
+        source: "進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 10,
@@ -2879,7 +2879,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 86,
         avgScore: 265,
         notes: "偏差値52（公立）。内申：学力＝5：5。内申80以上＋当日250点以上が目安",
-        source: "進研ゼミ合格者アンケート 2025年度",
+        source: "進研ゼミ合格者アンケート 2026年度",
       },
     ],
     blogContentIdeas: [
@@ -2920,7 +2920,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 185,
         totalScore: 545,
         notes: "特例校。独自の難易度の高い問題を出題",
-        source: "京都府高校入試情報 2025年度",
+        source: "京都府高校入試情報 2026年度",
       },
       {
         rank: 2,
@@ -2930,7 +2930,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 180,
         totalScore: 535,
         notes: "特例校。調査書の比率が低い",
-        source: "京都府高校入試情報 2025年度",
+        source: "京都府高校入試情報 2026年度",
       },
       {
         rank: 3,
@@ -2940,7 +2940,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 175,
         totalScore: 525,
         notes: "特例校",
-        source: "京都府高校入試情報 2025年度",
+        source: "京都府高校入試情報 2026年度",
       },
       {
         rank: 4,
@@ -2949,7 +2949,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 165,
         avgScore: 170,
         totalScore: 510,
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 5,
@@ -2958,7 +2958,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 160,
         avgScore: 165,
         totalScore: 495,
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 6,
@@ -2967,7 +2967,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 155,
         avgScore: 160,
         totalScore: 480,
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 7,
@@ -2976,7 +2976,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 150,
         avgScore: 155,
         totalScore: 465,
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 8,
@@ -2985,7 +2985,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 148,
         avgScore: 150,
         totalScore: 458,
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 9,
@@ -2994,7 +2994,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 145,
         avgScore: 145,
         totalScore: 450,
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 10,
@@ -3003,7 +3003,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 142,
         avgScore: 140,
         totalScore: 442,
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
     ],
     blogContentIdeas: [
@@ -3032,7 +3032,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         "文理学科設置校はほぼすべてタイプⅠ採用",
         "タイプⅠの内申比率は0.6倍に圧縮",
         "当日630点の高難度問題を出題する学校が多い",
-        "2025年度トップ校は430/450以上の内申が必須",
+        "2026年度トップ校は430/450以上の内申が必須",
       ],
     },
     topHighSchools: [
@@ -3044,7 +3044,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 410,
         totalScore: 950,
         notes: "タイプⅠ採用。当日点410点以上が合格の目安",
-        source: "大阪公立高校入試 2025年度",
+        source: "大阪公立高校入試 2026年度",
       },
       {
         rank: 2,
@@ -3054,7 +3054,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 400,
         totalScore: 935,
         notes: "文理学科。内申435は450点中で約96%",
-        source: "大阪公立高校入試 2025年度",
+        source: "大阪公立高校入試 2026年度",
       },
       {
         rank: 3,
@@ -3064,7 +3064,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 390,
         totalScore: 925,
         notes: "タイプⅠ採用",
-        source: "大阪公立高校入試 2025年度",
+        source: "大阪公立高校入試 2026年度",
       },
       {
         rank: 4,
@@ -3073,7 +3073,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 430,
         avgScore: 385,
         totalScore: 915,
-        source: "大阪公立高校入試 2025年度",
+        source: "大阪公立高校入試 2026年度",
       },
       {
         rank: 5,
@@ -3082,7 +3082,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 430,
         avgScore: 380,
         totalScore: 910,
-        source: "大阪公立高校入試 2025年度",
+        source: "大阪公立高校入試 2026年度",
       },
       {
         rank: 6,
@@ -3092,7 +3092,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 375,
         totalScore: 900,
         notes: "普通科ではタイプが異なる可能性",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 7,
@@ -3101,7 +3101,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 420,
         avgScore: 370,
         totalScore: 890,
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 8,
@@ -3110,7 +3110,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 415,
         avgScore: 365,
         totalScore: 880,
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 9,
@@ -3119,7 +3119,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 410,
         avgScore: 360,
         totalScore: 870,
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 10,
@@ -3128,7 +3128,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 405,
         avgScore: 355,
         totalScore: 860,
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
     ],
     blogContentIdeas: [
@@ -3156,7 +3156,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         "実技教科の倍率が7.5倍という全国で最高レベル",
         "主要5教科の評定が4倍、実技4教科が7.5倍",
         "実技1教科の『1』の差が学力検査の約15点分に相当",
-        "2025年度国語平均点が前年比22.4点上昇という異例の事態",
+        "2026年度国語平均点が前年比22.4点上昇という異例の事態",
         "トップ校のボーダーが前年比20～30点押し上げられた",
       ],
     },
@@ -3169,7 +3169,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 449,
         totalScore: 890,
         notes: "兵庫県トップ校。実技教科がほぼオール5",
-        source: "OPENLANE 2025年度",
+        source: "OPENLANE 2026年度",
       },
       {
         rank: 2,
@@ -3178,7 +3178,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 234,
         avgScore: 437,
         totalScore: 871,
-        source: "OPENLANE 2025年度",
+        source: "OPENLANE 2026年度",
       },
       {
         rank: 3,
@@ -3187,7 +3187,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 234,
         avgScore: 428,
         totalScore: 862,
-        source: "OPENLANE 2025年度",
+        source: "OPENLANE 2026年度",
       },
       {
         rank: 4,
@@ -3196,8 +3196,8 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 235,
         avgScore: 430,
         totalScore: 865,
-        notes: "2025年度実績は異例の高難度",
-        source: "推計 2025年度",
+        notes: "2026年度実績は異例の高難度",
+        source: "推計 2026年度",
       },
       {
         rank: 5,
@@ -3206,7 +3206,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 230,
         avgScore: 415,
         totalScore: 845,
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 6,
@@ -3215,7 +3215,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 228,
         avgScore: 410,
         totalScore: 838,
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 7,
@@ -3224,7 +3224,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 225,
         avgScore: 405,
         totalScore: 830,
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 8,
@@ -3233,7 +3233,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 222,
         avgScore: 400,
         totalScore: 822,
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 9,
@@ -3242,7 +3242,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 220,
         avgScore: 395,
         totalScore: 815,
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 10,
@@ -3251,13 +3251,13 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 218,
         avgScore: 390,
         totalScore: 808,
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
     ],
     blogContentIdeas: [
       "兵庫県『実技教科7.5倍』の衝撃：副教科対策が合否の鍵",
       "実技1教科の『1の差』＝当日点15点分の意味を完全解説",
-      "2025年度国語平均点が前年比22.4点上昇した理由と対策",
+      "2026年度国語平均点が前年比22.4点上昇した理由と対策",
       "長田高校の合格者平均241点の内訳：実技教科の重要性",
       "兵庫県で『逆転合格』が難しい理由：実技倍率の高さを考える",
     ],
@@ -3293,7 +3293,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 172,
         avgScore: 220,
         notes: "偏差値70。パターン④（中3のみ180点満点）。内申割合31%。学力400点換算での逆転合格が現実的",
-        source: "理塾・進研ゼミ合格者アンケート 2025年度",
+        source: "理塾・進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 2,
@@ -3302,7 +3302,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 167,
         avgScore: 215,
         notes: "偏差値68。パターン④（中3のみ180点満点）。内申割合31%。中1・中2が悪くても中3＋当日点で逆転可能",
-        source: "理塾・進研ゼミ合格者アンケート 2025年度",
+        source: "理塾・進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 3,
@@ -3311,7 +3311,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 162,
         avgScore: 205,
         notes: "偏差値66。パターン④（中3のみ）。内申割合31%。当日点重視校",
-        source: "理塾・進研ゼミ合格者アンケート 2025年度",
+        source: "理塾・進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 4,
@@ -3320,7 +3320,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 155,
         avgScore: 190,
         notes: "偏差値63。パターン④（中3のみ180点満点）。内申割合38%。内申割合がやや高め",
-        source: "理塾・進研ゼミ合格者アンケート 2025年度",
+        source: "理塾・進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 5,
@@ -3329,7 +3329,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 149,
         avgScore: 180,
         notes: "偏差値60。パターン④。内申割合36%",
-        source: "理塾・進研ゼミ合格者アンケート 2025年度",
+        source: "理塾・進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 6,
@@ -3338,7 +3338,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 165,
         avgScore: 150,
         notes: "偏差値53。パターン③（中1・中2×2倍198点満点）。内申割合44%。中1・中2の成績が大きく影響する内申重視型",
-        source: "理塾・進研ゼミ合格者アンケート 2025年度",
+        source: "理塾・進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 7,
@@ -3347,7 +3347,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 117,
         avgScore: 145,
         notes: "偏差値52。標準パターン（144点満点）。内申割合37%",
-        source: "理塾・進研ゼミ合格者アンケート 2025年度",
+        source: "理塾・進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 8,
@@ -3356,7 +3356,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 121,
         avgScore: 160,
         notes: "偏差値54。標準パターン（144点満点）。内申割合37%",
-        source: "理塾・進研ゼミ合格者アンケート 2025年度",
+        source: "理塾・進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 9,
@@ -3365,7 +3365,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 103,
         avgScore: 125,
         notes: "偏差値48。標準パターン（144点満点）。内申割合37%",
-        source: "理塾・進研ゼミ合格者アンケート 2025年度",
+        source: "理塾・進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 10,
@@ -3374,7 +3374,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 103,
         avgScore: 125,
         notes: "偏差値48。標準パターン（144点満点）。内申割合37%",
-        source: "理塾・進研ゼミ合格者アンケート 2025年度",
+        source: "理塾・進研ゼミ合格者アンケート 2026年度",
       },
     ],
     blogContentIdeas: [
@@ -3414,7 +3414,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 174,
         avgScore: 440,
         notes: "偏差値68。傾斜配点：国語・数学・英語を1.5倍。内申168以上＋当日420点以上が目安",
-        source: "進研ゼミ合格者アンケート 2025年度",
+        source: "進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 2,
@@ -3423,7 +3423,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 167,
         avgScore: 420,
         notes: "偏差値66。傾斜配点：国語・数学・英語を1.5倍。内申160以上＋当日400点以上が目安",
-        source: "進研ゼミ合格者アンケート 2025年度",
+        source: "進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 3,
@@ -3432,7 +3432,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 153,
         avgScore: 375,
         notes: "偏差値60。内申145以上＋当日360点以上が目安",
-        source: "進研ゼミ合格者アンケート 2025年度",
+        source: "進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 4,
@@ -3441,7 +3441,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 145,
         avgScore: 340,
         notes: "偏差値57。傾斜配点：国語・数学・英語を1.5倍。内申135以上＋当日320点以上が目安",
-        source: "進研ゼミ合格者アンケート 2025年度",
+        source: "進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 5,
@@ -3450,7 +3450,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 146,
         avgScore: 345,
         notes: "偏差値58。傾斜配点：数学・理科を1.5倍。理系科目強化が必須",
-        source: "家庭教師のあすなろ 2025年度",
+        source: "家庭教師のあすなろ 2026年度",
       },
       {
         rank: 6,
@@ -3459,7 +3459,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 153,
         avgScore: 375,
         notes: "偏差値60。傾斜配点：数学・英語を1.5倍。数学・英語重視",
-        source: "家庭教師のあすなろ 2025年度",
+        source: "家庭教師のあすなろ 2026年度",
       },
       {
         rank: 7,
@@ -3468,7 +3468,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 139,
         avgScore: 320,
         notes: "偏差値55。傾斜配点：国語・英語を1.5倍。語学系強化が必須",
-        source: "家庭教師のあすなろ 2025年度",
+        source: "家庭教師のあすなろ 2026年度",
       },
       {
         rank: 8,
@@ -3477,7 +3477,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 129,
         avgScore: 290,
         notes: "偏差値52。内申120以上＋当日270点以上が目安",
-        source: "進研ゼミ合格者アンケート 2025年度",
+        source: "進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 9,
@@ -3486,7 +3486,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 120,
         avgScore: 267,
         notes: "偏差値50。傾斜配点：最も得点の高い1教科を2倍。得意教科を最大化する戦略が有効",
-        source: "家庭教師のあすなろ 2025年度",
+        source: "家庭教師のあすなろ 2026年度",
       },
       {
         rank: 10,
@@ -3495,7 +3495,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 115,
         avgScore: 262,
         notes: "偏差値50。傾斜配点：数学・理科を1.3倍。数学・理科重視の工業系",
-        source: "家庭教師のあすなろ 2025年度",
+        source: "家庭教師のあすなろ 2026年度",
       },
     ],
     blogContentIdeas: [
@@ -3535,7 +3535,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 55,
         avgScore: 400,
         notes: "偏差値66。内申書評点60点満点換算。内申高水準＋当日380点以上",
-        source: "進研ゼミ合格者アンケート 2025年度",
+        source: "進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 2,
@@ -3544,7 +3544,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 53,
         avgScore: 390,
         notes: "偏差値65。内申50以上＋当日370点以上",
-        source: "進研ゼミ合格者アンケート 2025年度",
+        source: "進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 3,
@@ -3553,7 +3553,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 49,
         avgScore: 340,
         notes: "偏差値60。内申45以上＋当日320点以上",
-        source: "進研ゼミ合格者アンケート 2025年度",
+        source: "進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 4,
@@ -3562,7 +3562,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 46,
         avgScore: 320,
         notes: "偏差値58。内申42以上＋当日300点以上",
-        source: "進研ゼミ合格者アンケート 2025年度",
+        source: "進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 5,
@@ -3571,7 +3571,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 44,
         avgScore: 310,
         notes: "偏差値57。内申40以上＋当日290点以上",
-        source: "進研ゼミ合格者アンケート 2025年度",
+        source: "進研ゼミ合格者アンケート 2026年度",
       },
     ],
     blogContentIdeas: [
@@ -3657,7 +3657,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 192,
         avgScore: 450,
         notes: "偏差値70。内申185以上＋当日430点以上が目安",
-        source: "進研ゼミ合格者アンケート 2025年度",
+        source: "進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 2,
@@ -3666,7 +3666,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 177,
         avgScore: 410,
         notes: "偏差値65。内申170以上＋当日390点以上",
-        source: "進研ゼミ合格者アンケート 2025年度",
+        source: "進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 3,
@@ -3675,7 +3675,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 167,
         avgScore: 390,
         notes: "偏差値63。内申160以上＋当日370点以上",
-        source: "進研ゼミ合格者アンケート 2025年度",
+        source: "進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 4,
@@ -3684,7 +3684,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 149,
         avgScore: 330,
         notes: "偏差値57。内申140以上＋当日310点以上",
-        source: "進研ゼミ合格者アンケート 2025年度",
+        source: "進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 5,
@@ -3693,7 +3693,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 162,
         avgScore: 375,
         notes: "偏差値62。内申155以上＋当日355点以上",
-        source: "進研ゼミ合格者アンケート 2025年度",
+        source: "進研ゼミ合格者アンケート 2026年度",
       },
     ],
     blogContentIdeas: [
@@ -3733,7 +3733,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 212,
         avgScore: 440,
         notes: "偏差値69。内申205以上＋当日420点以上",
-        source: "進研ゼミ合格者アンケート 2025年度",
+        source: "進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 2,
@@ -3742,7 +3742,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 209,
         avgScore: 430,
         notes: "偏差値68。内申200以上＋当日410点以上",
-        source: "進研ゼミ合格者アンケート 2025年度",
+        source: "進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 3,
@@ -3751,7 +3751,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 189,
         avgScore: 390,
         notes: "偏差値63。内申180以上＋当日370点以上",
-        source: "進研ゼミ合格者アンケート 2025年度",
+        source: "進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 4,
@@ -3760,7 +3760,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 187,
         avgScore: 385,
         notes: "偏差値63。内申178以上＋当日365点以上",
-        source: "進研ゼミ合格者アンケート 2025年度",
+        source: "進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 5,
@@ -3769,7 +3769,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 173,
         avgScore: 350,
         notes: "偏差値59。内申165以上＋当日330点以上",
-        source: "進研ゼミ合格者アンケート 2025年度",
+        source: "進研ゼミ合格者アンケート 2026年度",
       },
     ],
     blogContentIdeas: [
@@ -3855,7 +3855,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 207,
         avgScore: 410,
         notes: "偏差値67。実技が高くないと届かない水準。内申200以上＋当日390点以上。実技オール5が事実上必要",
-        source: "進研ゼミ合格者アンケート 2025年度",
+        source: "進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 2,
@@ -3864,7 +3864,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 200,
         avgScore: 395,
         notes: "偏差値65。内申193以上＋当日375点以上",
-        source: "進研ゼミ合格者アンケート 2025年度",
+        source: "進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 3,
@@ -3873,7 +3873,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 193,
         avgScore: 380,
         notes: "偏差値63。内申185以上＋当日360点以上",
-        source: "進研ゼミ合格者アンケート 2025年度",
+        source: "進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 4,
@@ -3882,7 +3882,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 173,
         avgScore: 330,
         notes: "偏差値57。内申165以上＋当日310点以上",
-        source: "進研ゼミ合格者アンケート 2025年度",
+        source: "進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 5,
@@ -3891,7 +3891,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 166,
         avgScore: 320,
         notes: "偏差値56。内申158以上＋当日300点以上",
-        source: "進研ゼミ合格者アンケート 2025年度",
+        source: "進研ゼミ合格者アンケート 2026年度",
       },
     ],
     blogContentIdeas: [
@@ -3930,7 +3930,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 129,
         avgScore: 430,
         notes: "偏差値68。内申123以上＋当日410点以上",
-        source: "進研ゼミ合格者アンケート 2025年度",
+        source: "進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 2,
@@ -3939,7 +3939,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 119,
         avgScore: 390,
         notes: "偏差値64。内申113以上＋当日370点以上",
-        source: "進研ゼミ合格者アンケート 2025年度",
+        source: "進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 3,
@@ -3948,7 +3948,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 116,
         avgScore: 380,
         notes: "偏差値63。内申110以上＋当日360点以上",
-        source: "進研ゼミ合格者アンケート 2025年度",
+        source: "進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 4,
@@ -3957,7 +3957,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 106,
         avgScore: 340,
         notes: "偏差値59。内申100以上＋当日320点以上",
-        source: "進研ゼミ合格者アンケート 2025年度",
+        source: "進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 5,
@@ -3966,7 +3966,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 98,
         avgScore: 310,
         notes: "偏差値56。内申92以上＋当日290点以上",
-        source: "進研ゼミ合格者アンケート 2025年度",
+        source: "進研ゼミ合格者アンケート 2026年度",
       },
     ],
     blogContentIdeas: [
@@ -4005,7 +4005,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 128,
         avgScore: 425,
         notes: "偏差値68。内申122以上＋当日405点以上",
-        source: "進研ゼミ合格者アンケート 2025年度",
+        source: "進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 2,
@@ -4014,7 +4014,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 118,
         avgScore: 390,
         notes: "偏差値64。内申112以上＋当日370点以上",
-        source: "進研ゼミ合格者アンケート 2025年度",
+        source: "進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 3,
@@ -4023,7 +4023,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 111,
         avgScore: 360,
         notes: "偏差値60。内申105以上＋当日340点以上",
-        source: "進研ゼミ合格者アンケート 2025年度",
+        source: "進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 4,
@@ -4032,7 +4032,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 109,
         avgScore: 350,
         notes: "偏差値59。内申102以上＋当日330点以上",
-        source: "進研ゼミ合格者アンケート 2025年度",
+        source: "進研ゼミ合格者アンケート 2026年度",
       },
       {
         rank: 5,
@@ -4041,7 +4041,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 102,
         avgScore: 330,
         notes: "偏差値57。内申95以上＋当日310点以上",
-        source: "進研ゼミ合格者アンケート 2025年度",
+        source: "進研ゼミ合格者アンケート 2026年度",
       },
     ],
     blogContentIdeas: [
@@ -4108,7 +4108,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         "全13学区制を維持（地域により受験可能校が限定される）",
         "学力検査300点満点（共通問題）",
         "調査書点は中3評定45点満点",
-        "2025年度トップ3校（修猷館・福岡・筑紫丘）は内申40点以上、当日点260点以上が最低ライン",
+        "2026年度トップ3校（修猷館・福岡・筑紫丘）は内申40点以上、当日点260点以上が最低ライン",
         "学区制により地域差が顕著",
       ],
     },
@@ -4121,7 +4121,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 261,
         totalScore: 565,
         notes: "福岡の御三家筆頭。九州でも有数の難関校",
-        source: "福岡合格判定 2025年度",
+        source: "福岡合格判定 2026年度",
       },
       {
         rank: 2,
@@ -4131,7 +4131,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 260,
         totalScore: 563,
         notes: "福岡県内でも競争が激しい",
-        source: "福岡合格判定 2025年度",
+        source: "福岡合格判定 2026年度",
       },
       {
         rank: 3,
@@ -4140,7 +4140,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 40,
         avgScore: 255,
         totalScore: 558,
-        source: "福岡合格判定 2025年度",
+        source: "福岡合格判定 2026年度",
       },
       {
         rank: 4,
@@ -4149,7 +4149,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 39,
         avgScore: 226,
         totalScore: 508,
-        source: "福岡合格判定 2025年度",
+        source: "福岡合格判定 2026年度",
       },
       {
         rank: 5,
@@ -4158,7 +4158,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 38,
         avgScore: 225,
         totalScore: 506,
-        source: "福岡合格判定 2025年度",
+        source: "福岡合格判定 2026年度",
       },
       {
         rank: 6,
@@ -4167,7 +4167,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 36,
         avgScore: 234,
         totalScore: 498,
-        source: "福岡合格判定 2025年度",
+        source: "福岡合格判定 2026年度",
       },
       {
         rank: 7,
@@ -4176,7 +4176,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 35,
         avgScore: 224,
         totalScore: 495,
-        source: "福岡合格判定 2025年度",
+        source: "福岡合格判定 2026年度",
       },
       {
         rank: 8,
@@ -4185,7 +4185,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 34,
         avgScore: 220,
         totalScore: 487,
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 9,
@@ -4194,7 +4194,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 33,
         avgScore: 215,
         totalScore: 478,
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 10,
@@ -4203,7 +4203,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgNaishin: 32,
         avgScore: 210,
         totalScore: 469,
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
     ],
     blogContentIdeas: [
@@ -4244,7 +4244,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 430,
         totalScore: 558,
         notes: "佐賀県最難関。九州でも有数の進学実績を誇る",
-        source: "進研ゼミ・推計 2025年度",
+        source: "進研ゼミ・推計 2026年度",
       },
       {
         rank: 2,
@@ -4254,7 +4254,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 410,
         totalScore: 532,
         notes: "佐賀西に次ぐ県内第2位の進学校",
-        source: "進研ゼミ 2025年度推計",
+        source: "進研ゼミ 2026年度推計",
       },
       {
         rank: 3,
@@ -4264,7 +4264,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 390,
         totalScore: 508,
         notes: "附属中学との連携が特色の進学校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 4,
@@ -4274,7 +4274,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 375,
         totalScore: 490,
         notes: "県東部・鳥栖地区のトップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 5,
@@ -4284,7 +4284,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 360,
         totalScore: 472,
         notes: "唐津地区の主要進学校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 6,
@@ -4294,7 +4294,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 345,
         totalScore: 453,
         notes: "小城地区の伝統進学校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 7,
@@ -4304,7 +4304,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 335,
         totalScore: 440,
         notes: "西部地区の中核校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 8,
@@ -4314,7 +4314,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 320,
         totalScore: 422,
         notes: "伊万里地区の主要校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 9,
@@ -4324,7 +4324,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 305,
         totalScore: 403,
         notes: "多久・中部地区の主要校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 10,
@@ -4334,7 +4334,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 290,
         totalScore: 385,
         notes: "南部地区の中核校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
     ],
     blogContentIdeas: [
@@ -4375,7 +4375,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 440,
         totalScore: 610,
         notes: "長崎県最難関。九州でも高い進学実績",
-        source: "進研ゼミ・推計 2025年度",
+        source: "進研ゼミ・推計 2026年度",
       },
       {
         rank: 2,
@@ -4385,7 +4385,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 415,
         totalScore: 577,
         notes: "長崎市内の有力進学校",
-        source: "進研ゼミ 2025年度推計",
+        source: "進研ゼミ 2026年度推計",
       },
       {
         rank: 3,
@@ -4395,7 +4395,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 410,
         totalScore: 570,
         notes: "北部・佐世保地区のトップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 4,
@@ -4405,7 +4405,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 390,
         totalScore: 542,
         notes: "島原半島地区のトップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 5,
@@ -4415,7 +4415,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 375,
         totalScore: 523,
         notes: "大村市・中部地区の主要進学校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 6,
@@ -4425,7 +4425,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 365,
         totalScore: 510,
         notes: "諫早市の中核進学校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 7,
@@ -4435,7 +4435,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 355,
         totalScore: 497,
         notes: "長崎市東部の進学校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 8,
@@ -4445,7 +4445,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 340,
         totalScore: 478,
         notes: "長崎市南部の主要校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 9,
@@ -4455,7 +4455,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 325,
         totalScore: 458,
         notes: "佐世保地区の有力校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 10,
@@ -4465,7 +4465,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 305,
         totalScore: 430,
         notes: "五島地区（離島）のトップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
     ],
     blogContentIdeas: [
@@ -4506,7 +4506,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 450,
         totalScore: 695,
         notes: "熊本県最難関・旧制第五高校の伝統を持つ九州屈指の名門",
-        source: "進研ゼミ・推計 2025年度",
+        source: "進研ゼミ・推計 2026年度",
       },
       {
         rank: 2,
@@ -4516,7 +4516,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 430,
         totalScore: 668,
         notes: "熊本市内の伝統進学校。熊本高校と並ぶ難関校",
-        source: "進研ゼミ 2025年度推計",
+        source: "進研ゼミ 2026年度推計",
       },
       {
         rank: 3,
@@ -4526,7 +4526,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 415,
         totalScore: 645,
         notes: "熊本市内の有力進学校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 4,
@@ -4536,7 +4536,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 395,
         totalScore: 617,
         notes: "宇城地区のトップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 5,
@@ -4546,7 +4546,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 380,
         totalScore: 595,
         notes: "八代地区の主要進学校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 6,
@@ -4556,7 +4556,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 365,
         totalScore: 575,
         notes: "玉名地区の伝統校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 7,
@@ -4566,7 +4566,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 350,
         totalScore: 555,
         notes: "菊池地区の主要進学校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 8,
@@ -4576,7 +4576,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 340,
         totalScore: 540,
         notes: "天草地区のトップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 9,
@@ -4586,7 +4586,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 325,
         totalScore: 520,
         notes: "山鹿・北部地区の主要校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 10,
@@ -4596,7 +4596,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 310,
         totalScore: 500,
         notes: "球磨地区のトップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
     ],
     blogContentIdeas: [
@@ -4637,7 +4637,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 440,
         totalScore: null,
         notes: "大分県最難関。九州トップクラスの進学実績",
-        source: "進研ゼミ・推計 2025年度（内申非公開のため当日点のみ参考値）",
+        source: "進研ゼミ・推計 2026年度（内申非公開のため当日点のみ参考値）",
       },
       {
         rank: 2,
@@ -4647,7 +4647,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 415,
         totalScore: null,
         notes: "大分市内の有力進学校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 3,
@@ -4657,7 +4657,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 400,
         totalScore: null,
         notes: "大分市内の伝統校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 4,
@@ -4667,7 +4667,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 380,
         totalScore: null,
         notes: "別府地区のトップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 5,
@@ -4677,7 +4677,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 365,
         totalScore: null,
         notes: "北部・中津地区のトップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 6,
@@ -4687,7 +4687,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 350,
         totalScore: null,
         notes: "南部・佐伯地区の主要進学校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 7,
@@ -4697,7 +4697,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 335,
         totalScore: null,
         notes: "臼杵・大分南部地区の進学校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 8,
@@ -4707,7 +4707,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 345,
         totalScore: null,
         notes: "西部・日田地区のトップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 9,
@@ -4717,7 +4717,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 310,
         totalScore: null,
         notes: "竹田・大野地区の主要校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 10,
@@ -4727,7 +4727,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 295,
         totalScore: null,
         notes: "玖珠郡の中核校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
     ],
     blogContentIdeas: [
@@ -4768,7 +4768,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 430,
         totalScore: 855,
         notes: "宮崎県最難関。実技教科満点レベルが合格の必要条件",
-        source: "進研ゼミ・家庭教師のアルファ 2025年度推計",
+        source: "進研ゼミ・家庭教師のアルファ 2026年度推計",
       },
       {
         rank: 2,
@@ -4778,7 +4778,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 415,
         totalScore: 830,
         notes: "宮崎市内第2位の進学校",
-        source: "進研ゼミ 2025年度推計",
+        source: "進研ゼミ 2026年度推計",
       },
       {
         rank: 3,
@@ -4788,7 +4788,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 400,
         totalScore: 808,
         notes: "都城地区のトップ校。理数科も難関",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 4,
@@ -4798,7 +4798,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 385,
         totalScore: 785,
         notes: "北部・延岡地区のトップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 5,
@@ -4808,7 +4808,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 370,
         totalScore: 762,
         notes: "南部・日南地区の主要進学校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 6,
@@ -4818,7 +4818,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 360,
         totalScore: 745,
         notes: "宮崎市北部の進学校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 7,
@@ -4828,7 +4828,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 348,
         totalScore: 726,
         notes: "小林・西諸地区の主要校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 8,
@@ -4838,7 +4838,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 335,
         totalScore: 705,
         notes: "児湯地区のトップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 9,
@@ -4848,7 +4848,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 320,
         totalScore: 682,
         notes: "西都・西米良地区の主要校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 10,
@@ -4858,7 +4858,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 310,
         totalScore: 665,
         notes: "都城地区の有力校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
     ],
     blogContentIdeas: [
@@ -4899,7 +4899,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 445,
         totalScore: 875,
         notes: "鹿児島県最難関・九州トップ水準の進学実績を誇る名門校",
-        source: "進研ゼミ・家庭教師のアルファ 2025年度推計",
+        source: "進研ゼミ・家庭教師のアルファ 2026年度推計",
       },
       {
         rank: 2,
@@ -4909,7 +4909,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 425,
         totalScore: 845,
         notes: "鹿児島市内の有力進学校",
-        source: "進研ゼミ 2025年度推計",
+        source: "進研ゼミ 2026年度推計",
       },
       {
         rank: 3,
@@ -4919,7 +4919,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 410,
         totalScore: 822,
         notes: "鹿児島市内の主要進学校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 4,
@@ -4929,7 +4929,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 395,
         totalScore: 800,
         notes: "姶良・加治木地区のトップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 5,
@@ -4939,7 +4939,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 380,
         totalScore: 778,
         notes: "鹿児島市南部の進学校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 6,
@@ -4949,7 +4949,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 368,
         totalScore: 758,
         notes: "大隅地区のトップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 7,
@@ -4959,7 +4959,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 355,
         totalScore: 737,
         notes: "薩摩川内地区の主要進学校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 8,
@@ -4969,7 +4969,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 340,
         totalScore: 715,
         notes: "北薩地区の主要校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 9,
@@ -4979,7 +4979,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 325,
         totalScore: 690,
         notes: "南薩地区の中核校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 10,
@@ -4989,7 +4989,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 310,
         totalScore: 665,
         notes: "奄美地区（離島）のトップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
     ],
     blogContentIdeas: [
@@ -5030,7 +5030,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 430,
         totalScore: 587,
         notes: "沖縄県最難関水準。国際色が強く大学進学実績も県トップ",
-        source: "進研ゼミ・推計 2025年度",
+        source: "進研ゼミ・推計 2026年度",
       },
       {
         rank: 2,
@@ -5040,7 +5040,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 415,
         totalScore: 567,
         notes: "那覇市内の伝統進学校",
-        source: "進研ゼミ 2025年度推計",
+        source: "進研ゼミ 2026年度推計",
       },
       {
         rank: 3,
@@ -5050,7 +5050,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 400,
         totalScore: 548,
         notes: "那覇市内の主要進学校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 4,
@@ -5060,7 +5060,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 420,
         totalScore: 575,
         notes: "理数科は県内最難関水準。医学部進学者多数",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 5,
@@ -5070,7 +5070,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 405,
         totalScore: 555,
         notes: "中高一貫の進学校。芸術・体育コースも有名",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 6,
@@ -5080,7 +5080,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 385,
         totalScore: 528,
         notes: "那覇市南部の主要進学校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 7,
@@ -5090,7 +5090,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 375,
         totalScore: 515,
         notes: "浦添市の中核進学校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 8,
@@ -5100,7 +5100,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 360,
         totalScore: 497,
         notes: "中部地区の主要進学校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 9,
@@ -5110,7 +5110,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 345,
         totalScore: 479,
         notes: "宜野湾市の主要校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
       {
         rank: 10,
@@ -5120,7 +5120,7 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
         avgScore: 330,
         totalScore: 460,
         notes: "北部地区のトップ校",
-        source: "推計 2025年度",
+        source: "推計 2026年度",
       },
     ],
     blogContentIdeas: [

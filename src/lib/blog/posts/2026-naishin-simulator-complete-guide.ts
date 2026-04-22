@@ -3,8 +3,8 @@ import { BlogPost } from '../types';
 export const post: BlogPost = {
   slug: '2026-naishin-simulator-complete-guide',
   title: '【2026年最新】内申点計算シミュレーターの完全ガイド｜全47都道府県の合格ラインを逆算',
-  date: '2026-04-20',
-  lastUpdated: '2026-04-20',
+  date: '2026-04-22',
+  lastUpdated: '2026-04-22',
   author: 'My内申 編集部',
   readTime: '5 min',
   tags: ["内申点","受験シミュレーター","2026年入試","合格ライン"],

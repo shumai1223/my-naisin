@@ -102,7 +102,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://www.do-con.com/nyushi/judge.html',
     sourceUrl2: 'https://jyuku-online.com/blog/jj-hokkaido/',
     sourceTitle: '北海道教育委員会 入学者選抜',
-    lastVerified: '2026-04-20',
+    lastVerified: '2026-04-22',
     fiscalYear: '2026'
   },
   {
@@ -118,7 +118,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/02/feature/1273764_2532.html',
     sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/aomori/',
     sourceTitle: '青森県教育委員会 入学者選抜',
-    lastVerified: '2026-04-20',
+    lastVerified: '2026-04-22',
     fiscalYear: '2026'
   },
   {
@@ -135,7 +135,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://jyuke-labo.com/koukoujyukentaisaku/iwate/',
     sourceUrl2: 'https://jyuku-online.com/blog/jj-iwate/',
     sourceTitle: '岩手県教育委員会 入学者選抜',
-    lastVerified: '2026-04-20',
+    lastVerified: '2026-04-22',
     fiscalYear: '2026'
   },
   {
@@ -151,7 +151,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/04/feature/1273766_2678.html',
     sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/miyagi/',
     sourceTitle: '宮城県教育委員会 入学者選抜',
-    lastVerified: '2026-04-20',
+    lastVerified: '2026-04-22',
     fiscalYear: '2026'
   },
   {
@@ -167,7 +167,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/05/naishin/',
     sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/akita/',
     sourceTitle: '秋田県教育委員会 入学者選抜',
-    lastVerified: '2026-04-20',
+    lastVerified: '2026-04-22',
     fiscalYear: '2026'
   },
   {
@@ -183,7 +183,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://jyuke-labo.com/koukoujyukentaisaku/yamagata/',
     sourceUrl2: 'https://czemi.benesse.ne.jp/open/nyushi/exam/06/feature/1273769_3744.html',
     sourceTitle: '山形県教育委員会 入学者選抜',
-    lastVerified: '2026-04-20',
+    lastVerified: '2026-04-22',
     fiscalYear: '2026'
   },
   {
@@ -199,7 +199,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/07/feature/1273769_3744.html',
     sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/fukushima/',
     sourceTitle: '福島県教育委員会 入学者選抜',
-    lastVerified: '2026-04-20',
+    lastVerified: '2026-04-22',
     fiscalYear: '2026'
   },
   // 関東
@@ -216,7 +216,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://jyuke-labo.com/koukoujyukentaisaku/ibaraki/',
     sourceUrl2: 'https://czemi.benesse.ne.jp/open/nyushi/exam/08/feature/1273770_3817.html',
     sourceTitle: '茨城県教育委員会 入学者選抜',
-    lastVerified: '2026-04-20',
+    lastVerified: '2026-04-22',
     fiscalYear: '2026'
   },
   {
@@ -233,7 +233,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://jyuke-labo.com/koukoujyukentaisaku/tochigi/',
     sourceUrl2: 'https://czemi.benesse.ne.jp/open/nyushi/exam/09/feature/1273771_3890.html',
     sourceTitle: '栃木県教育委員会 入学者選抜',
-    lastVerified: '2026-04-20',
+    lastVerified: '2026-04-22',
     fiscalYear: '2026'
   },
   {
@@ -249,7 +249,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://jyuke-labo.com/koukoujyukentaisaku/gunma/',
     sourceUrl2: 'https://czemi.benesse.ne.jp/open/nyushi/exam/10/feature/1273772_3963.html',
     sourceTitle: '群馬県教育委員会 入学者選抜',
-    lastVerified: '2026-04-20',
+    lastVerified: '2026-04-22',
     fiscalYear: '2026'
   },
   {
@@ -266,7 +266,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/article/11/feature/0011.html',
     sourceUrl2: 'https://jyuku-online.com/blog/jj-saitamanaisin/',
     sourceTitle: '埼玉県教育委員会 入試情報',
-    lastVerified: '2026-04-20',
+    lastVerified: '2026-04-22',
     fiscalYear: '2026',
     reverseCalc: {
       totalMaxScore: 1000,
@@ -290,7 +290,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/article/12/feature/0012.html',
     sourceUrl2: 'https://janiasu.com/info-high/naishin.html',
     sourceTitle: '千葉県教育委員会 入試情報',
-    lastVerified: '2026-04-20',
+    lastVerified: '2026-04-22',
     fiscalYear: '2026'
   },
   {
@@ -306,7 +306,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/article/13/feature/0013.html',
     sourceUrl2: 'https://jyuku-online.com/blog/jj-tokyo/',
     sourceTitle: '東京都教育委員会 入学者選抜',
-    lastVerified: '2026-04-20',
+    lastVerified: '2026-04-22',
     fiscalYear: '2026',
     reverseCalc: {
       totalMaxScore: 1020,
@@ -340,7 +340,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/article/14/feature/0014.html',
     sourceUrl2: 'https://jyuku-online.com/blog/jj-kanagawa/',
     sourceTitle: '神奈川県教育委員会 入試情報',
-    lastVerified: '2026-04-20',
+    lastVerified: '2026-04-22',
     fiscalYear: '2026'
   },
   // 中部
@@ -357,7 +357,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/15/naishin/',
     sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/niigata/',
     sourceTitle: '新潟県教育委員会 入学者選抜',
-    lastVerified: '2026-04-20',
+    lastVerified: '2026-04-22',
     fiscalYear: '2026'
   },
   {
@@ -374,7 +374,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/16/naishin/',
     sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/toyama/',
     sourceTitle: '富山県教育委員会 入学者選抜',
-    lastVerified: '2026-04-20',
+    lastVerified: '2026-04-22',
     fiscalYear: '2026'
   },
   {
@@ -390,7 +390,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/17/naishin/',
     sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/ishikawa/',
     sourceTitle: '石川県教育委員会 入学者選抜',
-    lastVerified: '2026-04-20',
+    lastVerified: '2026-04-22',
     fiscalYear: '2026'
   },
   {
@@ -406,7 +406,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/18/naishin/',
     sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/fukui/',
     sourceTitle: '福井県教育委員会 入学者選抜',
-    lastVerified: '2026-04-20',
+    lastVerified: '2026-04-22',
     fiscalYear: '2026'
   },
   {
@@ -423,7 +423,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/19/naishin/',
     sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/yamanashi/',
     sourceTitle: '山梨県教育委員会 入学者選抜',
-    lastVerified: '2026-04-20',
+    lastVerified: '2026-04-22',
     fiscalYear: '2026'
   },
   {
@@ -439,7 +439,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/20/naishin/',
     sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/nagano/',
     sourceTitle: '長野県教育委員会 入学者選抜',
-    lastVerified: '2026-04-20',
+    lastVerified: '2026-04-22',
     fiscalYear: '2026'
   },
   {
@@ -455,7 +455,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/21/naishin/',
     sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/gifu/',
     sourceTitle: '岐阜県教育委員会 入学者選抜',
-    lastVerified: '2026-04-20',
+    lastVerified: '2026-04-22',
     fiscalYear: '2026'
   },
   {
@@ -471,7 +471,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/article/22/feature/0022.html',
     sourceUrl2: 'https://jyuku-online.com/blog/jj-shizuoka/',
     sourceTitle: '静岡県教育委員会 入学者選抜',
-    lastVerified: '2026-04-20',
+    lastVerified: '2026-04-22',
     fiscalYear: '2026'
   },
   {
@@ -487,7 +487,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/article/23/feature/0023.html',
     sourceUrl2: 'https://jyuku-online.com/blog/jj-aichi/',
     sourceTitle: '愛知県教育委員会 入学者選抜',
-    lastVerified: '2026-04-20',
+    lastVerified: '2026-04-22',
     fiscalYear: '2026'
   },
   // 近畿
@@ -504,7 +504,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/24/naishin/',
     sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/mie/',
     sourceTitle: '三重県教育委員会 入学者選抜',
-    lastVerified: '2026-04-20',
+    lastVerified: '2026-04-22',
     fiscalYear: '2026'
   },
   {
@@ -520,7 +520,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/25/naishin/',
     sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/shiga/',
     sourceTitle: '滋賀県教育委員会 入学者選抜',
-    lastVerified: '2026-04-20',
+    lastVerified: '2026-04-22',
     fiscalYear: '2026'
   },
   {
@@ -537,7 +537,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/article/26/feature/0026.html',
     sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/kyoto/',
     sourceTitle: '京都府教育委員会 入学者選抜',
-    lastVerified: '2026-04-20',
+    lastVerified: '2026-04-22',
     fiscalYear: '2026'
   },
   {
@@ -553,7 +553,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/article/27/feature/0027.html',
     sourceUrl2: 'https://jyuku-online.com/blog/jj-osaka/',
     sourceTitle: '大阪府教育庁 入試情報',
-    lastVerified: '2026-04-20',
+    lastVerified: '2026-04-22',
     fiscalYear: '2026',
     reverseCalc: {
       totalMaxScore: 900,
@@ -583,7 +583,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/article/28/feature/0028.html',
     sourceUrl2: 'https://jyuku-online.com/blog/jj-hyogo/',
     sourceTitle: '兵庫県教育委員会 入学者選抜',
-    lastVerified: '2026-04-20',
+    lastVerified: '2026-04-22',
     fiscalYear: '2026'
   },
   {
@@ -599,7 +599,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/29/naishin/',
     sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/nara/',
     sourceTitle: '奈良県教育委員会 入学者選抜',
-    lastVerified: '2026-04-20',
+    lastVerified: '2026-04-22',
     fiscalYear: '2026'
   },
   {
@@ -615,7 +615,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/30/naishin/',
     sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/wakayama/',
     sourceTitle: '和歌山県教育委員会 入学者選抜',
-    lastVerified: '2026-04-20',
+    lastVerified: '2026-04-22',
     fiscalYear: '2026',
     reverseCalc: {
       totalMaxScore: 1000,
@@ -639,7 +639,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/31/naishin/',
     sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/tottori/',
     sourceTitle: '鳥取県教育委員会 入学者選抜',
-    lastVerified: '2026-04-20',
+    lastVerified: '2026-04-22',
     fiscalYear: '2026',
     reverseCalc: {
       totalMaxScore: 1000,
@@ -662,7 +662,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/32/naishin/',
     sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/shimane/',
     sourceTitle: '島根県教育委員会 入学者選抜',
-    lastVerified: '2026-04-20',
+    lastVerified: '2026-04-22',
     fiscalYear: '2026',
     reverseCalc: {
       totalMaxScore: 1000,
@@ -685,7 +685,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/33/naishin/',
     sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/okayama/',
     sourceTitle: '岡山県教育委員会 入学者選抜',
-    lastVerified: '2026-04-20',
+    lastVerified: '2026-04-22',
     fiscalYear: '2026',
     reverseCalc: {
       totalMaxScore: 1000,
@@ -707,7 +707,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/article/34/feature/0034.html',
     sourceUrl2: 'https://jyuku-online.com/blog/jj-hiroshima/',
     sourceTitle: '広島県教育委員会 入学者選抜',
-    lastVerified: '2026-04-20',
+    lastVerified: '2026-04-22',
     fiscalYear: '2026',
     reverseCalc: {
       totalMaxScore: 1000,
@@ -729,7 +729,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/35/naishin/',
     sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/yamaguchi/',
     sourceTitle: '山口県教育委員会 入学者選抜',
-    lastVerified: '2026-04-20',
+    lastVerified: '2026-04-22',
     fiscalYear: '2026',
     reverseCalc: {
       totalMaxScore: 1000,
@@ -752,7 +752,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/36/naishin/',
     sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/tokushima/',
     sourceTitle: '徳島県教育委員会 入学者選抜',
-    lastVerified: '2026-04-20',
+    lastVerified: '2026-04-22',
     fiscalYear: '2026',
     reverseCalc: {
       totalMaxScore: 1000,
@@ -775,7 +775,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/37/naishin/',
     sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/kagawa/',
     sourceTitle: '香川県教育委員会 入学者選抜',
-    lastVerified: '2026-04-20',
+    lastVerified: '2026-04-22',
     fiscalYear: '2026',
     reverseCalc: {
       totalMaxScore: 1000,
@@ -797,7 +797,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/38/naishin/',
     sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/ehime/',
     sourceTitle: '愛媛県教育委員会 入学者選抜',
-    lastVerified: '2026-04-20',
+    lastVerified: '2026-04-22',
     fiscalYear: '2026',
     reverseCalc: {
       totalMaxScore: 1000,
@@ -821,7 +821,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/39/naishin/',
     sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/kochi/',
     sourceTitle: '高知県教育委員会 入学者選抜',
-    lastVerified: '2026-04-20',
+    lastVerified: '2026-04-22',
     fiscalYear: '2026',
     reverseCalc: {
       totalMaxScore: 1000,
@@ -845,7 +845,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/article/40/feature/0040.html',
     sourceUrl2: 'https://jyuku-online.com/blog/jj-fukuoka/',
     sourceTitle: '福岡県教育委員会 入学者選抜',
-    lastVerified: '2026-04-20',
+    lastVerified: '2026-04-22',
     fiscalYear: '2026',
     reverseCalc: {
       totalMaxScore: 1000,
@@ -868,7 +868,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/41/naishin/',
     sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/saga/',
     sourceTitle: '佐賀県教育委員会 入学者選抜',
-    lastVerified: '2026-04-20',
+    lastVerified: '2026-04-22',
     fiscalYear: '2026',
     reverseCalc: {
       totalMaxScore: 1000,
@@ -890,7 +890,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/42/naishin/',
     sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/nagasaki/',
     sourceTitle: '長崎県教育委員会 入学者選抜',
-    lastVerified: '2026-04-20',
+    lastVerified: '2026-04-22',
     fiscalYear: '2026',
     reverseCalc: {
       totalMaxScore: 1000,
@@ -912,7 +912,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/43/naishin/',
     sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/kumamoto/',
     sourceTitle: '熊本県教育委員会 入学者選抜',
-    lastVerified: '2026-04-20',
+    lastVerified: '2026-04-22',
     fiscalYear: '2026',
     reverseCalc: {
       totalMaxScore: 1000,
@@ -935,7 +935,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/44/naishin/',
     sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/oita/',
     sourceTitle: '大分県教育委員会 入学者選抜',
-    lastVerified: '2026-04-20',
+    lastVerified: '2026-04-22',
     fiscalYear: '2026',
     reverseCalc: {
       totalMaxScore: 1000,
@@ -957,7 +957,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/45/naishin/',
     sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/miyazaki/',
     sourceTitle: '宮崎県教育委員会 入学者選抜',
-    lastVerified: '2026-04-20',
+    lastVerified: '2026-04-22',
     fiscalYear: '2026',
     reverseCalc: {
       totalMaxScore: 1000,
@@ -980,7 +980,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/46/naishin/',
     sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/kagoshima/',
     sourceTitle: '鹿児島県教育委員会 入学者選抜',
-    lastVerified: '2026-04-20',
+    lastVerified: '2026-04-22',
     fiscalYear: '2026',
     reverseCalc: {
       totalMaxScore: 1000,
@@ -1003,7 +1003,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/47/naishin/',
     sourceUrl2: 'https://jyuku-online.com/blog/jj-okinawa/',
     sourceTitle: '沖縄県教育委員会 入学者選抜',
-    lastVerified: '2026-04-20',
+    lastVerified: '2026-04-22',
     fiscalYear: '2026',
     reverseCalc: {
       totalMaxScore: 1000,

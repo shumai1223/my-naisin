@@ -14,8 +14,8 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
-  const dataLastVerified = '2026年4月21日';
-  const featureLastUpdated = '2026年4月21日';
+  const dataLastVerified = '2026年4月22日';
+  const featureLastUpdated = '2026年4月22日';
   const version = 'v2026.4.21';
 
   return (

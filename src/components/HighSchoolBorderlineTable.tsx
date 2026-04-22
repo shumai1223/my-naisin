@@ -49,7 +49,7 @@ export function HighSchoolBorderlineTable({ prefectureCode, prefectureName }: Hi
         </p>
         <div className="mt-4 flex items-center gap-2 text-xs font-bold text-blue-600 bg-blue-100/50 w-fit px-3 py-1.5 rounded-full">
           <Award className="h-3.5 w-3.5" />
-          2025年度（令和7年度）入試結果・追跡調査に基づくデータ
+          2026年度（令和8年度）入試結果・追跡調査に基づくデータ
         </div>
       </div>
 

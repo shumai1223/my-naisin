@@ -3,8 +3,8 @@ import { BlogPost } from '../types';
 export const post: BlogPost = {
   slug: 'practical-subjects-all-5-strategy-2026-update',
   title: '【2026年入試対応】副教科（実技4教科）で内申点「オール5」を取る裏ワザ的戦略',
-  date: '2026-04-20',
-  lastUpdated: '2026-04-20',
+  date: '2026-04-22',
+  lastUpdated: '2026-04-22',
   author: 'My内申 編集部',
   readTime: '6 min',
   tags: ["副教科","実技教科","内申点アップ","評価基準","オール5"],

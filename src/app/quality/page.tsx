@@ -18,7 +18,7 @@ const testResults = [
       { name: 'オール5（換算65）', input: 45, expected: 65, actual: 65, status: 'pass' },
       { name: '実技4のみ5（換算47）', input: 31, expected: 47, actual: 47, status: 'pass' },
     ],
-    lastTest: '2026年4月20日',
+    lastTest: '2026年4月22日',
     notes: '実技4教科2倍、中3成績100%の計算ロジックを検証',
     version: 'v2.1.0',
   },
@@ -28,7 +28,7 @@ const testResults = [
       { name: 'オール3（素点27→54点）', input: 27, expected: 54, actual: 54, status: 'pass' },
       { name: 'オール4（素点36→72点）', input: 36, expected: 72, actual: 72, status: 'pass' },
     ],
-    lastTest: '2026年4月20日',
+    lastTest: '2026年4月22日',
     notes: '中3成績×2倍 = 90点満点の算出式を検証',
     version: 'v2.1.0',
   },
@@ -38,7 +38,7 @@ const testResults = [
       { name: '中1〜3オール3（270点）', input: 27, expected: 270, actual: 270, status: 'pass' },
       { name: '中1・2(3)・中3(4)（306点）', input: 30, expected: 306, actual: 306, status: 'pass' },
     ],
-    lastTest: '2026年4月20日',
+    lastTest: '2026年4月22日',
     notes: '学年比率1:1:3、450点満点のロジックを検証',
     version: 'v2.1.0',
   }
@@ -47,7 +47,7 @@ const testResults = [
 // 全体の更新履歴
 const globalUpdateHistory = [
   {
-    date: '2026-04-20',
+    date: '2026-04-22',
     version: 'v2026.4.20',
     changes: [
       'E-E-A-T強化：情報の正確性を担保する検証プロセス(Qualityページ)の大幅拡充',
