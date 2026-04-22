@@ -26,6 +26,7 @@ import { PrefectureSearchIntent } from '@/components/PrefectureSearchIntent';
 import { PrefectureFAQ } from '@/components/PrefectureFAQ';
 import { BlogRelatedArticles } from '@/components/BlogRelatedArticles';
 import InteractiveCalculator from '@/components/Calculator/InteractiveCalculatorWrapper';
+import { HighSchoolBorderlineTable } from '@/components/HighSchoolBorderlineTable';
 
 interface PageProps {
   params: Promise<{ prefecture: string }>;
@@ -168,6 +169,9 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
                 maxScore={prefecture.maxScore}
               />
             </section>
+
+            {/* 高校別ボーダーライン一覧 */}
+            <HighSchoolBorderlineTable prefectureCode={prefectureCode} prefectureName={prefecture.name} />
 
             {/* 都道府県別詳細解説（SSRでGooglebotに情報を与える） */}
             <section className="rounded-2xl border border-slate-200 bg-white p-6 md:p-8 shadow-sm">
