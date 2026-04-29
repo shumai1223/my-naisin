@@ -14,6 +14,22 @@ export interface ChangeLogEntry {
 
 export const CHANGELOG: ChangeLogEntry[] = [
   {
+    date: '2026-04-29',
+    type: 'add',
+    category: 'content',
+    title: '【東京都】2026年度入試完全ガイド記事の追加',
+    description: '分割募集廃止や深沢高校の「10:0」選抜など、2026年度（令和8年度）の最新の都立高校入試制度に対応した詳細解説記事を公開しました。換算内申からESAT-Jまで、網羅的に解説しています。',
+    sourceUrl: 'https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/exam/',
+    sourceName: '東京都教育委員会',
+  },
+  {
+    date: '2026-04-29',
+    type: 'update',
+    category: 'ui',
+    title: 'エディトリアル・ブログデザインへの全面刷新',
+    description: 'コンテンツの読みやすさと専門性を高めるため、ブログ記事のデザインを雑誌のような「エディトリアル」スタイルに刷新しました。タイポグラフィ、余白、視覚要素を最適化し、長文でも没入して読める環境を整えました。',
+  },
+  {
     date: '2026-04-22',
     type: 'update',
     category: 'data',
@@ -39,7 +55,7 @@ export const CHANGELOG: ChangeLogEntry[] = [
     type: 'update',
     category: 'ui',
     title: '視認性とアクセシビリティの大幅向上',
-    description: '長文コンテンツでも読みやすいよう、タイポグラフィの調整、図解要素の追加、スマホでの操作性改善を実施。E-E-A-T向上のため、各記事の執筆根拠となる一次資料へのアクセスを容易にしました。',
+    description: '長文コンテンツでも読みやすいよう、タイポグラフィの調整、図解要素の追加、スマホでの操作性改善を実施. 。E-E-A-T向上のため、各記事の執筆根拠となる一次資料へのアクセスを容易にしました。',
   },
   {
     date: '2026-03-20',
