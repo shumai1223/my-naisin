@@ -88,7 +88,7 @@ export default function EditorProfilePage() {
                     <div className="text-[10px] font-bold text-slate-500 uppercase">一次資料準拠</div>
                   </div>
                   <div className="text-center p-3 rounded-xl bg-slate-50 border border-slate-100">
-                    <div className="text-2xl font-black text-slate-800">30k+</div>
+                    <div className="text-2xl font-black text-slate-800">継続改善中</div>
                     <div className="text-[10px] font-bold text-slate-500 uppercase">月間ユーザー</div>
                   </div>
                   <div className="text-center p-3 rounded-xl bg-slate-50 border border-slate-100">
@@ -109,7 +109,7 @@ export default function EditorProfilePage() {
                   <li className="flex gap-3">
                     <GraduationCap className="h-5 w-5 text-blue-500 shrink-0" />
                     <div>
-                      <div className="text-sm font-bold text-slate-800">芝浦工業大学附属中学校 3年</div>
+                      <div className="text-sm font-bold text-slate-800">都内私立中 3年</div>
                       <div className="text-xs text-slate-500">（在学中・2026年度受験生）</div>
                     </div>
                   </li>
@@ -182,7 +182,7 @@ export default function EditorProfilePage() {
                   <li className="flex gap-4 p-4 rounded-xl bg-white shadow-sm border border-slate-100">
                     <FileText className="h-6 w-6 text-blue-500 shrink-0" />
                     <div>
-                      <h4 className="font-bold text-slate-800 m-0">累計利用者数 10万人突破</h4>
+                      <h4 className="font-bold text-slate-800 m-0">継続的な改善</h4>
                       <p className="text-sm text-slate-600 m-0 mt-1">
                         公開から数ヶ月で多くの受験生・保護者・学校関係者にご利用いただいています。日々のフィードバックを元に、毎週のアップデートを継続しています。
                       </p>

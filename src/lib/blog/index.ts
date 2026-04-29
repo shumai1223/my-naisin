@@ -37,8 +37,10 @@ import { post as newSemesterChecklist2026 } from '@/lib/blog/posts/2026-new-seme
 // New posts
 import { post as naishinSimulatorCompleteGuide2026 } from '@/lib/blog/posts/2026-naishin-simulator-complete-guide';
 import { post as all3HighSchoolOptions2026Update } from '@/lib/blog/posts/all-3-high-school-options-2026-update';
+import { post as toritsuNyushi2026KanzenGuide } from '@/lib/blog/posts/toritsu-nyushi-2026-kanzen-guide';
 
 export const BLOG_POSTS: BlogPost[] = [
+  toritsuNyushi2026KanzenGuide,
   naishinSimulatorCompleteGuide2026,
   all3HighSchoolOptions2026Update,
   newSemesterChecklist2026,

@@ -268,7 +268,7 @@ function ReversePageContent() {
 
 export default function ReversePage() {
   return (
-    <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="text-slate-500">読み込み中...</div></div>}>
+    <Suspense fallback={<div className="min-h-screen"><ReversePageContent /></div>}>
       <ReversePageContent />
     </Suspense>
   );

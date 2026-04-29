@@ -115,7 +115,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     practicalMultiplier: 1,
     maxScore: 135,
     description: '中1〜中3の9教科×5段階（135点満点）',
-    sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/exam/02/feature/1273764_2532.html',
+    sourceUrl: 'https://www.pref.aomori.lg.jp/soshiki/kyoiku/e-gakyo/nyuushi.html',
     sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/aomori/',
     sourceTitle: '青森県教育委員会 入学者選抜',
     lastVerified: '2026-04-22',
