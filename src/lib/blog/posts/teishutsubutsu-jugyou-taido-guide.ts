@@ -6,7 +6,7 @@ export const post: BlogPost = {
   description: '内申点アップに直結する「提出物」と「授業態度」の極意を徹底解説。新学習指導要領の「主体的に学習に取り組む態度」でA評価を勝ち取るための科目別ワークの書き方から先生の視点まで網羅しました。',
   date: '2026-05-01',
   lastUpdated: '2026-05-01',
-  category: '内申点対策',
+  category: '対策・実践',
   readTime: '15分',
   author: '運営者（My Naishin）',
   tags: ['内申点', '提出物', '授業態度', '観点別評価', '定期テスト'],

@@ -6,7 +6,7 @@ export const post: BlogPost = {
   description: '高校受験の合否を左右する内申点。47都道府県で全く異なる計算方式から、志望校合格に必要な当日点の逆算方法まで、My Naishinのシミュレーターを使った最強の受験戦略を徹底解説します。',
   date: '2026-05-01',
   lastUpdated: '2026-05-01',
-  category: '総合ガイド',
+  category: '基礎知識',
   readTime: '20分',
   author: '運営者（My Naishin）',
   tags: ['内申点', '高校入試', '計算方法', '志望校選び', 'ツール'],

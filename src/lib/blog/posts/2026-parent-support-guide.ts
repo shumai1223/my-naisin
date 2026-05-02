@@ -6,7 +6,7 @@ export const post: BlogPost = {
   description: '2026年度の高校受験に向けて、中3の4月から親ができる内申点対策を徹底解説。観点別評価の仕組みから、提出物管理、定期テスト対策、副教科での稼ぎ方、NGな親の行動まで、保護者が知っておくべきサポートの極意をお伝えします。',
   date: '2026-04-30',
   lastUpdated: '2026-04-30',
-  category: '高校受験対策',
+  category: '進路・受験',
   readTime: '10分',
   author: '運営者（My Naishin）',
   tags: [

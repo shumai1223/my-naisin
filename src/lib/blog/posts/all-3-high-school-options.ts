@@ -6,7 +6,7 @@ export const post: BlogPost = {
   description: '「内申点オール3」の偏差値目安（40〜45）や、公立・私立で行ける高校のレベルを徹底解説。平均点に届かない理由から、換算内申の仕組み、志望校のランクを上げるための逆転戦略まで詳しく紹介します。',
   date: '2026-04-29',
   lastUpdated: '2026-04-29',
-  category: '高校受験',
+  category: '進路・受験',
   readTime: '6分',
   author: '運営者（My Naishin）',
   tags: ['内申点', '高校受験', '志望校選び', '偏差値'],

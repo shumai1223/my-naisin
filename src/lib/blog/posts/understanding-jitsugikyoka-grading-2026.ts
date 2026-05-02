@@ -6,7 +6,7 @@ export const post: BlogPost = {
   description: '才能やセンスは不要！中学生が音楽・美術・保健体育・技術家庭科の実技4教科で内申点「5」を取るための具体的な行動リスト、振り返りシートの書き方、テスト対策の裏ワザを徹底解説します。',
   date: '2026-05-02',
   lastUpdated: '2026-05-02',
-  category: '内申点対策',
+  category: '対策・実践',
   readTime: '15分',
   author: '運営者（My Naishin）',
   tags: ['内申点', '実技教科', '高校受験', '定期テスト', '勉強法'],

@@ -6,7 +6,7 @@ export const post: BlogPost = {
   description: '千葉県公立高校入試の内申点は中1〜中3の9教科・3年間の成績が対象。135点満点の評定合計値にK値を掛けて調査書得点が決まる仕組みを、計算例・高校別K値一覧とともにわかりやすく解説します。',
   date:        '2026-04-30',
   lastUpdated: '2026-04-30',
-  category:    '千葉県の内申点',
+  category: '都道府県別',
   readTime:    '8分',
   author:      '運営者（My Naishin）',
   tags:        ['千葉県', '内申点', 'K値', '公立高校入試', '調査書', '計算方法'],

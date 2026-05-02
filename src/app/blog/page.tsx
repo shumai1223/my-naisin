@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { BookOpen, Calendar, Clock, ChevronRight, Sparkles, Tag, TrendingUp, ArrowRight } from 'lucide-react';
+import { BookOpen, Calendar, Clock, ChevronRight, Sparkles, Tag, TrendingUp, ArrowRight, BookMarked, Target, GraduationCap, MapPin, Edit3 } from 'lucide-react';
 
 import { getAllPosts } from '@/lib/blog-data';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
@@ -30,13 +30,13 @@ export const metadata = {
 export default function BlogPage() {
   const posts = getAllPosts();
 
-  const categoryIcons: Record<string, string> = {
-    'guide': '📘',
-    '基礎知識': '📚',
-    '対策・実践': '🎯',
-    '進路・受験': '🏫',
-    '都道府県別': '🗾',
-    '教科別': '📝',
+  const categoryIcons: Record<string, React.ReactNode> = {
+    'guide': <BookMarked className="h-6 w-6 text-blue-600" />,
+    '基礎知識': <BookOpen className="h-6 w-6 text-indigo-600" />,
+    '対策・実践': <Target className="h-6 w-6 text-emerald-600" />,
+    '進路・受験': <GraduationCap className="h-6 w-6 text-violet-600" />,
+    '都道府県別': <MapPin className="h-6 w-6 text-rose-600" />,
+    '教科別': <Edit3 className="h-6 w-6 text-amber-600" />,
   };
 
   // 最新3記事をピックアップ
@@ -60,33 +60,30 @@ export default function BlogPage() {
           { name: '内申点コラム', url: 'https://my-naishin.com/blog' }
         ]}
       />
-      <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-[#fafafa]">
       {/* Hero */}
-      <div className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-blue-950 to-indigo-950">
-        <div className="absolute inset-0 opacity-30">
-          <div className="absolute -top-24 right-1/4 h-96 w-96 rounded-full bg-blue-500/20 blur-3xl" />
-          <div className="absolute -bottom-24 left-1/4 h-96 w-96 rounded-full bg-indigo-500/20 blur-3xl" />
-        </div>
-        <div className="relative mx-auto max-w-5xl px-4 pb-16 pt-12 text-center">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full bg-blue-500/15 px-4 py-2 text-sm font-semibold text-blue-300 ring-1 ring-blue-400/20">
+      <div className="relative overflow-hidden bg-white border-b border-gray-100">
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-white pointer-events-none" />
+        <div className="relative mx-auto max-w-5xl px-4 py-16 text-center">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-blue-50 px-4 py-1.5 text-sm font-medium text-blue-600 ring-1 ring-blue-100/50 shadow-sm">
             <BookOpen className="h-4 w-4" />
             2026年度入試対応
           </div>
-          <h1 className="text-4xl font-extrabold tracking-tight text-white md:text-5xl">
+          <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl lg:text-5xl">
             内申点対策コラム
           </h1>
-          <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-slate-300/90">
+          <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-gray-600">
             内申点の基礎知識から、主要5教科・実技4教科の具体的な成績アップ術まで。<br className="hidden sm:inline" />
             2026年（令和8年）4月15日現在の最新入試データに基づき解説。
           </p>
-          <div className="mt-6 flex items-center justify-center gap-6 text-sm text-slate-400">
-            <span className="flex items-center gap-1.5">
-              <BookOpen className="h-4 w-4" />
-              全 {posts.length} 記事公開中
+          <div className="mt-8 flex items-center justify-center gap-6 text-sm text-gray-500 font-medium">
+            <span className="flex items-center gap-1.5 bg-white px-3 py-1 rounded-full shadow-sm ring-1 ring-gray-100">
+              <BookOpen className="h-4 w-4 text-blue-500" />
+              全 {posts.length} 記事
             </span>
-            <span className="flex items-center gap-1.5">
-              <TrendingUp className="h-4 w-4" />
-              毎週火・木更新
+            <span className="flex items-center gap-1.5 bg-white px-3 py-1 rounded-full shadow-sm ring-1 ring-gray-100">
+              <TrendingUp className="h-4 w-4 text-emerald-500" />
+              定期更新
             </span>
           </div>
         </div>
@@ -95,36 +92,37 @@ export default function BlogPage() {
       <div className="mx-auto max-w-5xl px-4">
         {/* Featured Posts */}
         {featuredPosts.length > 0 && (
-          <div className="mt-8 mb-16 md:mt-10">
-            <div className="grid gap-4 md:grid-cols-3">
+          <div className="mt-12 mb-20">
+            <h2 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+              <Sparkles className="h-5 w-5 text-amber-500" />
+              注目の記事
+            </h2>
+            <div className="grid gap-6 md:grid-cols-3">
               {featuredPosts.map((post, i) => (
                 <Link
                   key={post.slug}
                   href={`/blog/${post.slug}`}
-                  className={`group relative overflow-hidden rounded-2xl border border-gray-200 bg-white p-6 shadow-lg transition-all hover:-translate-y-1 hover:shadow-xl ${i === 0 ? 'md:col-span-2 md:row-span-2 md:p-8' : ''}`}
+                  className={`group relative overflow-hidden rounded-2xl bg-white border border-gray-200/60 p-6 sm:p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:border-blue-100 ${i === 0 ? 'md:col-span-2 md:row-span-2 flex flex-col justify-between' : 'flex flex-col'}`}
                 >
-                  {i === 0 && (
-                    <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-amber-100 px-3 py-1 text-xs font-bold text-amber-700">
-                      <Sparkles className="h-3 w-3" />
-                      必読ガイド
+                  <div>
+                    <div className="mb-4 flex flex-wrap items-center gap-3">
+                      <span className="inline-block rounded-md bg-gray-50 px-2.5 py-1 text-xs font-medium text-gray-600 ring-1 ring-gray-200/50">
+                        {post.category}
+                      </span>
+                      <span className="flex items-center gap-1.5 text-xs text-gray-400 font-medium">
+                        <Calendar className="h-3.5 w-3.5" />
+                        {new Date(post.date).toLocaleDateString('ja-JP')}
+                      </span>
                     </div>
-                  )}
-                  <div className="mb-2 flex items-center gap-2">
-                    <span className="inline-block rounded-full bg-blue-50 px-2.5 py-0.5 text-xs font-semibold text-blue-600 ring-1 ring-blue-100">
-                      {post.category}
-                    </span>
-                    <span className="text-xs text-gray-400">
-                      {new Date(post.date).toLocaleDateString('ja-JP')}
-                    </span>
+                    <h3 className={`font-bold text-gray-900 transition-colors group-hover:text-blue-600 ${i === 0 ? 'text-2xl sm:text-3xl leading-tight' : 'text-lg leading-snug'}`}>
+                      {post.title}
+                    </h3>
+                    <p className={`mt-3 text-gray-500 leading-relaxed ${i === 0 ? 'text-base sm:text-lg line-clamp-3' : 'text-sm line-clamp-2'}`}>
+                      {post.description}
+                    </p>
                   </div>
-                  <h3 className={`font-bold text-gray-900 transition-colors group-hover:text-blue-600 ${i === 0 ? 'text-xl md:text-2xl' : 'text-base line-clamp-2'}`}>
-                    {post.title}
-                  </h3>
-                  <p className={`mt-2 text-gray-500 ${i === 0 ? 'text-base line-clamp-3' : 'text-sm line-clamp-2'}`}>
-                    {post.description}
-                  </p>
-                  <div className="mt-4 flex items-center gap-2 text-sm font-semibold text-blue-600 opacity-0 transition-opacity group-hover:opacity-100">
-                    詳細を詳しく見る
+                  <div className="mt-6 flex items-center gap-2 text-sm font-medium text-blue-600 opacity-0 transform translate-x-[-10px] transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0">
+                    記事を読む
                     <ArrowRight className="h-4 w-4" />
                   </div>
                 </Link>
@@ -134,55 +132,53 @@ export default function BlogPage() {
         )}
 
         {/* Category Sections */}
-        <div className="space-y-16 pb-16">
+        <div className="space-y-24 pb-24">
           {Object.entries(postsByCategory).map(([category, categoryPosts]) => (
-            <section key={category}>
-              <div className="mb-8 flex items-center gap-3">
-                <span className="text-2xl">{categoryIcons[category] || '📄'}</span>
+            <section key={category} className="scroll-mt-24">
+              <div className="mb-8 flex items-center gap-4 border-b border-gray-100 pb-4">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gray-50 ring-1 ring-gray-100 shadow-sm">
+                  {categoryIcons[category] || <BookOpen className="h-6 w-6 text-gray-400" />}
+                </div>
                 <div>
-                  <h2 className="text-2xl font-extrabold tracking-tight text-gray-900">
+                  <h2 className="text-2xl font-bold tracking-tight text-gray-900">
                     {category}
                   </h2>
-                  <p className="text-sm text-gray-500">{categoryPosts.length}本の解説記事</p>
+                  <p className="text-sm font-medium text-gray-500 mt-1">{categoryPosts.length}件の記事</p>
                 </div>
               </div>
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {categoryPosts.map((post) => (
                   <Link
                     key={post.slug}
                     href={`/blog/${post.slug}`}
-                    className="group flex flex-col rounded-2xl border border-gray-100 bg-white p-5 shadow-sm transition-all hover:border-blue-200 hover:shadow-lg"
+                    className="group flex flex-col rounded-2xl bg-white border border-gray-200/60 p-6 transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:border-blue-100 hover:-translate-y-0.5"
                   >
-                    <div className="mb-3 flex items-center gap-2">
-                      <span className="flex items-center gap-1 text-xs text-gray-400">
-                        <Calendar className="h-3 w-3" />
+                    <div className="mb-4 flex items-center gap-3 text-xs font-medium text-gray-400">
+                      <span className="flex items-center gap-1.5 bg-gray-50 px-2 py-1 rounded-md">
+                        <Calendar className="h-3.5 w-3.5" />
                         {new Date(post.date).toLocaleDateString('ja-JP')}
                       </span>
-                      <span className="flex items-center gap-1 text-xs text-gray-400">
-                        <Clock className="h-3 w-3" />
+                      <span className="flex items-center gap-1.5">
+                        <Clock className="h-3.5 w-3.5" />
                         {post.readTime}
                       </span>
                     </div>
-                    <h3 className="flex-1 text-base font-bold leading-snug text-gray-900 transition-colors group-hover:text-blue-600 line-clamp-2">
+                    <h3 className="flex-1 text-base font-bold leading-relaxed text-gray-900 transition-colors group-hover:text-blue-600 line-clamp-2">
                       {post.title}
                     </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-gray-500 line-clamp-2">
+                    <p className="mt-3 text-sm leading-relaxed text-gray-500 line-clamp-2">
                       {post.description}
                     </p>
-                    <div className="mt-4 flex flex-wrap gap-1.5">
+                    <div className="mt-5 flex flex-wrap gap-2">
                       {post.tags.slice(0, 3).map((tag) => (
                         <span
                           key={tag}
-                          className="inline-flex items-center gap-0.5 rounded-full bg-gray-50 px-2 py-0.5 text-[11px] text-gray-500 ring-1 ring-gray-100"
+                          className="inline-flex items-center gap-1 rounded-md bg-gray-50 px-2.5 py-1 text-xs font-medium text-gray-500 transition-colors group-hover:bg-blue-50 group-hover:text-blue-600"
                         >
-                          <Tag className="h-2.5 w-2.5" />
+                          <Tag className="h-3 w-3" />
                           {tag}
                         </span>
                       ))}
-                    </div>
-                    <div className="mt-4 flex items-center gap-1.5 text-sm font-semibold text-blue-600 opacity-0 transition-all group-hover:opacity-100">
-                      詳しく読む
-                      <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
                     </div>
                   </Link>
                 ))}
@@ -192,22 +188,27 @@ export default function BlogPage() {
         </div>
 
         {/* Bottom CTA */}
-        <div className="border-t border-gray-100 pb-16 pt-12 text-center">
-          <h3 className="text-2xl font-extrabold text-gray-900">あなたの内申点、正確に計算できていますか？</h3>
-          <p className="mt-2 text-gray-500">47都道府県対応の最新シミュレーターで、志望校への距離を確認しましょう。</p>
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+        <div className="rounded-3xl bg-white p-8 sm:p-12 text-center shadow-sm ring-1 ring-gray-100 mb-24 max-w-4xl mx-auto">
+          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-blue-50 mb-6">
+            <Target className="h-8 w-8 text-blue-600" />
+          </div>
+          <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">志望校との距離を正確に測る</h3>
+          <p className="text-gray-500 mb-8 max-w-2xl mx-auto leading-relaxed">
+            47都道府県の最新入試データに対応。あなたの内申点と当日点の目安を瞬時にシミュレーションできます。
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href="/"
-              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 px-7 py-3.5 text-sm font-bold text-white shadow-lg shadow-blue-500/20 transition-all hover:-translate-y-0.5 hover:shadow-xl"
+              className="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-xl bg-blue-600 px-8 py-4 text-sm font-bold text-white transition-all duration-200 hover:bg-blue-700 hover:shadow-md active:scale-95"
             >
-              内申点を今すぐ計算する
-              <ChevronRight className="h-4 w-4" />
+              内申点を計算する
+              <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
               href="/reverse"
-              className="inline-flex items-center gap-2 rounded-full bg-gray-100 px-7 py-3.5 text-sm font-semibold text-gray-700 transition-all hover:bg-gray-200"
+              className="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-xl bg-gray-50 px-8 py-4 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-200 transition-all duration-200 hover:bg-gray-100 active:scale-95"
             >
-              目標から逆算シミュレーション
+              目標から逆算する
             </Link>
           </div>
         </div>

@@ -6,7 +6,7 @@ export const post: BlogPost = {
   description: '2026年（令和8年度）の都立高校入試の仕組みを徹底解説！全日制の分割募集廃止や「10:0」の当日点勝負など最新の変更点から、内申点の計算方法、ESAT-Jの配点まで、受験生と保護者が知るべき情報を網羅しました。',
   date: '2026-05-01',
   lastUpdated: '2026-05-01',
-  category: '高校受験ガイド',
+  category: '基礎知識',
   readTime: '15分',
   author: '運営者（My Naishin）',
   tags: ['都立高校', '内申点', '入試制度', 'ESAT-J', '2026年度入試'],

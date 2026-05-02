@@ -6,7 +6,7 @@ export const post: BlogPost = {
   description: '公立高校入試の内申点で副教科（実技4教科）がどれだけ重視されるかを都道府県別に徹底解説。東京2倍・兵庫7.5倍・鹿児島20倍など、地域差が驚くほど大きい副教科倍率をまとめました。',
   date: '2026-04-30',
   lastUpdated: '2026-04-30',
-  category: '内申点対策',
+  category: '対策・実践',
   readTime: '7分',
   author: '運営者（My Naishin）',
   tags: ['副教科', '内申点', '実技教科', '都道府県別', '高校受験', '倍率'],

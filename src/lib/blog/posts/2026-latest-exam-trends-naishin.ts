@@ -6,7 +6,7 @@ export const post: BlogPost = {
   description: '2026年度公立高校入試では、GIGAスクール構想で育ったデジタルネイティブ世代が受験する。タブレット活用の評価方法、探究学習の内申への影響、東京ESAT-Jを筆頭に広がるスピーキングテストの実態と対策を徹底解説。',
   date: '2026-04-29',
   lastUpdated: '2026-04-29',
-  category: '入試情報',
+  category: '進路・受験',
   readTime: '10分',
   author: '運営者（My Naishin）',
   tags: ['内申点', 'GIGAスクール', 'スピーキングテスト', '探究学習', '2026年度入試', '高校受験対策'],

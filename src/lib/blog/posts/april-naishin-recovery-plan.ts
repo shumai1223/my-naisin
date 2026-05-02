@@ -6,7 +6,7 @@ export const post: BlogPost = {
   description: '中3の4月、まだ内申点は挽回できる！オール3の平均的状況から、トップ校を狙える「5」へと成績を引き上げるための具体的なアクションプランを徹底解説。観点別評価の攻略法や、1学期中間テストへの対策を網羅しています。手遅れになる前に行動を。',
   date: '2026-04-30',
   lastUpdated: '2026-04-30',
-  category: '内申点対策',
+  category: '対策・実践',
   readTime: '15分',
   author: '運営者（My Naishin）',
   tags: [
