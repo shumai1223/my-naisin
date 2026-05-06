@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { PREFECTURES, REGIONS, getPrefecturesByRegion } from '@/lib/prefectures';
 import HomeClient from './HomeClient';
-import { Calculator, BookOpen, MapPin, Sparkles, ShieldCheck } from 'lucide-react';
+import { Calculator, BookOpen, MapPin, Sparkles, ShieldCheck, ChevronRight } from 'lucide-react';
 
 export default function Page() {
   return (
@@ -24,8 +24,7 @@ export default function Page() {
                   高校受験において、内申点（調査書点）は当日の学力検査と同様に、あるいはそれ以上に合否を分ける重要な要素です。
                 </p>
                 <p>
-                  しかし、その計算方法は都道府県ごとに驚くほど異なります。「中3の成績だけを見る県」「実技教科が2倍、3倍になる県」「1年生からの積み重ねが評価される県」など、
-                  自分の地域のルールを正確に把握していなければ、効率的な受験戦略を立てることはできません。
+                  自分の地域のルールを正確に把握していなければ、効率的な受験戦略を立てることはできません。当サイトでは、各都道府県教育委員会が発表した最新の選抜基準に基づき、正確な計算機能と詳細な解説を提供しています。
                 </p>
               </div>
             </div>
@@ -33,20 +32,21 @@ export default function Page() {
             <div>
               <h3 className="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2">
                 <MapPin className="text-emerald-600" />
-                都道府県別の計算ルールを確認
+                都道府県別の入試対策・計算ツール
               </h3>
               <div className="grid gap-6">
                 {REGIONS.map(region => (
                   <div key={region} className="rounded-2xl border border-slate-100 bg-slate-50/50 p-6">
                     <h4 className="font-bold text-slate-800 mb-4 border-b border-slate-200 pb-2">{region}</h4>
-                    <div className="flex flex-wrap gap-2">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
                       {getPrefecturesByRegion(region).map(pref => (
                         <Link
                           key={pref.code}
-                          href={`/${pref.code}/naishin`}
-                          className="rounded-lg bg-white px-3 py-2 text-sm font-medium text-slate-700 shadow-sm ring-1 ring-slate-200 transition-all hover:bg-blue-50 hover:text-blue-700 hover:ring-blue-300"
+                          href={`/${pref.code}`}
+                          className="flex items-center justify-between rounded-lg bg-white px-3 py-2 text-sm font-medium text-slate-700 shadow-sm ring-1 ring-slate-200 transition-all hover:bg-blue-50 hover:text-blue-700 hover:ring-blue-300"
                         >
                           {pref.name}
+                          <ChevronRight className="h-3 w-3 opacity-30" />
                         </Link>
                       ))}
                     </div>
@@ -87,9 +87,6 @@ export default function Page() {
               <p className="text-sm text-amber-800 leading-relaxed mb-4">
                 当サイトの情報は、全国47都道府県の教育委員会が発表した2026年度（令和8年度）入学者選抜の最新実施要綱を元に作成されています。
               </p>
-              <p className="text-sm text-amber-800 leading-relaxed">
-                常に最新の情報を反映するよう努めておりますが、学校独自の傾斜配点や制度変更があるため、最終的な判断は必ず公式の募集要綱をご確認ください。
-              </p>
               <div className="mt-4 pt-4 border-t border-amber-200">
                 <Link href="/quality" className="text-sm font-bold text-amber-900 hover:underline flex items-center gap-1">
                   情報の信頼性への取り組み <ChevronRight className="h-4 w-4" />
@@ -124,24 +121,5 @@ export default function Page() {
         </div>
       </section>
     </>
-  );
-}
-
-function ChevronRight(props: any) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="m9 18 6-6-6-6" />
-    </svg>
   );
 }

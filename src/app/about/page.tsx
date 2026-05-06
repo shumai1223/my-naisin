@@ -91,7 +91,7 @@ export default function AboutPage() {
                <div className="mx-auto h-12 w-12 rounded-xl bg-emerald-50 flex items-center justify-center mb-4">
                  <Users className="h-6 w-6 text-emerald-600" />
                </div>
-               <div className="text-lg font-black text-slate-800">10万人超</div>
+               <div className="text-lg font-black text-slate-800">集計中</div>
                <div className="text-xs text-slate-500 font-bold mt-1">累計利用者数</div>
              </div>
              <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm text-center">

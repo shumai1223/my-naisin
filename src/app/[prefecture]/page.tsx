@@ -23,6 +23,7 @@ import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { BlogRelatedArticles } from '@/components/BlogRelatedArticles';
 import { PrefecturePillarLinks } from '@/components/PrefecturePillarLinks';
 import { HighSchoolBorderlineTable } from '@/components/HighSchoolBorderlineTable';
+import { TrustInfo } from '@/components/TrustInfo';
 
 interface PrefecturePageProps {
   params: Promise<{
@@ -178,6 +179,8 @@ export default async function PrefecturePage({ params }: PrefecturePageProps) {
                 </div>
                 <BlogRelatedArticles prefectureCode={code} limit={6} />
               </section>
+
+              <TrustInfo />
 
               {/* 信頼性と根拠 */}
               <section className="rounded-3xl bg-slate-800 p-8 text-white shadow-xl">

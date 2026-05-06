@@ -11,6 +11,7 @@ import {
   Target,
   FileText,
   AlertCircle,
+  Shield,
 } from 'lucide-react';
 
 import { PREFECTURES, getPrefectureByCode } from '@/lib/prefectures';
@@ -18,15 +19,11 @@ import { getPrefectureGuide } from '@/lib/prefecture-guides';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { ErrorReportForm } from '@/components/ErrorReportForm';
-import { PrefectureUniqueElements } from '@/components/PrefectureUniqueElements';
 import { PrefectureMinimumContent } from '@/components/PrefectureMinimumContent';
-import { ToolGuide } from '@/components/ToolGuide';
-import { EvidenceSummary } from '@/components/EvidenceSummary';
-import { PrefectureSearchIntent } from '@/components/PrefectureSearchIntent';
-import { PrefectureFAQ } from '@/components/PrefectureFAQ';
 import { BlogRelatedArticles } from '@/components/BlogRelatedArticles';
 import InteractiveCalculator from '@/components/Calculator/InteractiveCalculatorWrapper';
 import { HighSchoolBorderlineTable } from '@/components/HighSchoolBorderlineTable';
+import { TrustInfo } from '@/components/TrustInfo';
 
 interface PageProps {
   params: Promise<{ prefecture: string }>;
@@ -299,6 +296,8 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
               </div>
             </section>
 
+            <TrustInfo />
+
             {/* 回遊性アップ：関連ブログ・地域リンク */}
             <div className="grid gap-6 md:grid-cols-2">
               <BlogRelatedArticles prefectureCode={prefectureCode} limit={4} />
@@ -332,24 +331,5 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
         </div>
       </div>
     </>
-  );
-}
-
-function Shield(props: any) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />
-    </svg>
   );
 }

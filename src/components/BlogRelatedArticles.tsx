@@ -1,5 +1,6 @@
 import { BlogPost } from '@/lib/blog/types';
 import { BLOG_POSTS } from '@/lib/blog/index';
+import { getPrefectureByCode } from '@/lib/prefectures';
 import Link from 'next/link';
 import { BookOpen, ChevronRight, Sparkles } from 'lucide-react';
 
@@ -21,26 +22,17 @@ export function BlogRelatedArticles({
   limit = 3
 }: BlogRelatedArticlesProps) {
   
+  const prefecture = prefectureCode ? getPrefectureByCode(prefectureCode) : null;
+  const prefName = prefecture?.name || '';
+
   const relatedPosts = allPosts.filter(post => {
     // Exclude current
     if (currentSlug && post.slug === currentSlug) return false;
 
     // Use prefecture filter
-    if (prefectureCode) {
-      // マッピング辞書 (コードから日本語名)
-      const prefNames: Record<string, string> = {
-        tokyo: '東京',
-        kanagawa: '神奈川',
-        osaka: '大阪',
-        aichi: '愛知',
-        saitama: '埼玉',
-        chiba: '千葉',
-        hokkaido: '北海道',
-        fukuoka: '福岡',
-        hyogo: '兵庫'
-      };
-      const prefName = prefNames[prefectureCode] || '';
-      return (prefName && post.title.includes(prefName)) || post.tags.includes(prefName);
+    if (prefName) {
+      const isPrefMatch = post.title.includes(prefName) || post.tags.includes(prefName);
+      if (isPrefMatch) return true;
     }
     
     // Use tag filter
@@ -48,23 +40,35 @@ export function BlogRelatedArticles({
       return post.tags.some(tag => currentTags.includes(tag));
     }
     
-    return true;
-  }).slice(0, prefectureCode ? limit : maxArticles);
+    return false;
+  });
 
-  // 都道府県ページで関連記事が少ない場合は、汎用的な「内申点の上げ方」などを出す
-  const displayPosts = (prefectureCode && relatedPosts.length < limit) 
-    ? [...relatedPosts, ...allPosts.filter(p => p.slug === 'how-to-raise-naishinten' || p.slug === 'naishin-guide').filter(p => !relatedPosts.find(rp => rp.slug === p.slug))]
-        .slice(0, limit)
-    : relatedPosts;
+  // 重要記事（全県共通で役立つもの）
+  const staplePosts = allPosts.filter(p => 
+    p.slug === 'how-to-raise-naishinten' || 
+    p.slug === 'naishin-guide' || 
+    p.slug === 'naishinten-high-school-exam-system' ||
+    p.slug === 'practical-subjects-naishin-strategy'
+  );
+
+  // 表示する記事の構築（県別記事 + 不足分を重要記事で埋める）
+  const displayPosts = [...relatedPosts];
+  staplePosts.forEach(post => {
+    if (displayPosts.length < limit && !displayPosts.find(p => p.slug === post.slug) && post.slug !== currentSlug) {
+      displayPosts.push(post);
+    }
+  });
 
   if (displayPosts.length === 0) return null;
+
+  const finalPosts = displayPosts.slice(0, limit);
 
   return (
     <section className="mt-8 rounded-2xl border border-blue-100 bg-gradient-to-br from-white to-blue-50/30 p-6 shadow-sm">
       <div className="mb-4 flex items-center justify-between">
         <h2 className="flex items-center gap-2 text-lg font-bold text-slate-800">
           <Sparkles className="h-5 w-5 text-blue-500" />
-          あわせて読みたい攻略記事
+          {prefName ? `${prefName}入試に役立つ攻略記事` : 'あわせて読みたい攻略記事'}
         </h2>
         <Link href="/blog" className="text-sm font-medium text-blue-600 hover:underline flex items-center">
           記事一覧へ <ChevronRight className="h-4 w-4" />
@@ -72,7 +76,7 @@ export function BlogRelatedArticles({
       </div>
       
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {displayPosts.map((post) => (
+        {finalPosts.map((post) => (
           <Link 
             key={post.slug} 
             href={`/blog/${post.slug}`}
