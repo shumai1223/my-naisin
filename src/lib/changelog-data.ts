@@ -14,6 +14,13 @@ export interface ChangeLogEntry {
 
 export const CHANGELOG: ChangeLogEntry[] = [
   {
+    date: '2026-05-08',
+    type: 'add',
+    category: 'content',
+    title: '夏休みの戦略記事を追加：復習と予習の黄金比を徹底解説',
+    description: '夏休みを制して内申点を爆上げするための「復習＋予習」黄金比を解説した新着記事を公開。時期別の学習スケジュールや、2学期の成績に直結する具体的な取り組みを提案しています。',
+  },
+  {
     date: '2026-04-29',
     type: 'update',
     category: 'content',
@@ -48,14 +55,14 @@ export const CHANGELOG: ChangeLogEntry[] = [
     type: 'update',
     category: 'seo',
     title: '全都道府県別ページの独自コンテンツ化と専門性強化',
-    description: '47都道府県それぞれの入試制度に基づいた、より詳細で専門的な解説・FAQ・注意点を大幅拡充。各県固有の「内申点の落とし穴」や「2026年度最新傾向」を盛り込み、検索意図への合致度を極限まで高めました。',
+    description: '47都道府県それぞれの入試制度に基づいた、より詳細で専門的な解説・FAQ・注意点を大幅拡充. 。各県固有の「内申点の落とし穴」や「2026年度最新傾向」を盛り込み、検索意図への合致度を極限まで高めました。',
   },
   {
     date: '2026-04-08',
     type: 'add',
     category: 'content',
     title: '2026年4月新学期対応コラムの大量追加とサイトマップ同期',
-    description: '新学期からの内申点スタートダッシュを決めるための専門コラムを追加. 。すべての新規コンテンツが検索エンジンに正しくインデックスされるよう、XMLサイトマップおよび内部リンク構造を最適化しました。',
+    description: '新学期からの内申点スタートダッシュを決めるための専門コラムを追加。すべての新規コンテンツが検索エンジンに正しくインデックスされるよう、XMLサイトマップおよび内部リンク構造を最適化しました。',
   },
   {
     date: '2026-04-08',
@@ -118,7 +125,7 @@ export const CHANGELOG: ChangeLogEntry[] = [
     type: 'fix',
     category: 'content',
     title: 'プライバシーポリシー・お問い合わせページの改善',
-    description: 'GA未導入の記述修正、セクション番号重複の修正、AdPlaceholderのテキスト削除、お問い合わせフォームのname属性追加、SNSリンクの修正を実施。',
+    description: 'GA未導入の記述修正、セクション番号重複の修正、AdPlaceholder의テキスト削除、お問い合わせフォームのname属性追加、SNSリンクの修正を実施。',
   },
   {
     date: '2026-02-11',

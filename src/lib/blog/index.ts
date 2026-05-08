@@ -40,8 +40,10 @@ import { post as all3HighSchoolOptions2026Update } from '@/lib/blog/posts/all-3-
 import { post as toritsuNyushi2026KanzenGuide } from '@/lib/blog/posts/toritsu-nyushi-2026-kanzen-guide';
 import { post as practicalSubjectsAll5Strategy2026Update } from '@/lib/blog/posts/practical-subjects-all-5-strategy-2026-update';
 import { post as whatIsNaishinten } from '@/lib/blog/posts/what-is-naishinten';
+import { post as summerVacationGoldenRatio } from '@/lib/blog/posts/summer-vacation-review-preview-golden-ratio';
 
 export const BLOG_POSTS: BlogPost[] = [
+  summerVacationGoldenRatio,
   toritsuNyushi2026KanzenGuide,
   naishinSimulatorCompleteGuide2026,
   all3HighSchoolOptions2026Update,

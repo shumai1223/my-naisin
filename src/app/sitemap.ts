@@ -5,7 +5,7 @@ import { BLOG_POSTS } from '@/lib/blog-data';
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://my-naishin.com';
   // 最終更新日を固定の最新日付にするか、各データの更新日を反映させる
-  const lastModified = new Date('2026-05-06'); 
+  const lastModified = new Date('2026-05-08'); 
 
   // 1. 静的コアページ
   const staticPages = [
