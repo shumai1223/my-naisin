@@ -215,11 +215,6 @@ export default async function BlogPostPage({ params }: PageProps) {
             itemProp="articleBody"
             dangerouslySetInnerHTML={{
               __html: post.content
-                .replace(/## /g, '<h2>')
-                .replace(/### /g, '<h3>')
-                .replace(/#### /g, '<h4>')
-                .replace(/---/g, '<hr>')
-                .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
                 .replace(/<!-- AD_PLACEHOLDER -->/g, '')
                 .replace(/__PREFECTURE_LINK_LIST__/g, '')
             }}

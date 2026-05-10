@@ -52,16 +52,15 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  verification: {
-    google: 'your-google-verification-code', // 必要に応じてユーザーに設定してもらう
-  },
+  ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+    ? { verification: { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION } }
+    : {}),
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="ja" className={`h-full ${notoSansJp.variable}`}>
       <head>
-        <link rel="canonical" href="https://my-naishin.com" />
         {/* AdSense script using standard tag to avoid data-nscript attribute issues */}
         <script
           async

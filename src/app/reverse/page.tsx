@@ -4,7 +4,7 @@ import * as React from 'react';
 import Link from 'next/link';
 import nextDynamic from 'next/dynamic';
 import { Home, ChevronRight, Target, HelpCircle, AlertTriangle, CheckCircle } from 'lucide-react';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
@@ -16,6 +16,7 @@ const ReverseCalculator = nextDynamic(
 );
 
 function ReversePageContent() {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const hasPrefParam = searchParams?.has('pref');
   
@@ -196,8 +197,8 @@ function ReversePageContent() {
                 </div>
               </section>
 
-              <ReverseCalculator 
-                onBack={() => window.location.href = '/'} 
+              <ReverseCalculator
+                onBack={() => router.push('/')}
               />
 
               {/* 関連リンク */}

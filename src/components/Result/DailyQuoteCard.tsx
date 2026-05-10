@@ -34,9 +34,14 @@ function getDailyQuote(): typeof QUOTES[0] {
 }
 
 export function DailyQuoteCard() {
-  const [quote, setQuote] = React.useState(getDailyQuote());
+  // Initialize with first quote, then update to today's quote on client to avoid hydration mismatch
+  const [quote, setQuote] = React.useState(QUOTES[0]);
   const [liked, setLiked] = React.useState(false);
   const [showRefresh, setShowRefresh] = React.useState(false);
+
+  React.useEffect(() => {
+    setQuote(getDailyQuote());
+  }, []);
 
   const refreshQuote = () => {
     const randomIndex = Math.floor(Math.random() * QUOTES.length);

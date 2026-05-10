@@ -144,6 +144,23 @@ const SUBJECT_ADVICE: Record<string, { weak: string; improve: string; strong: st
 };
 
 export function StudyAdvice({ scores, result }: StudyAdviceProps) {
+  // Random indices populated on client only to avoid hydration mismatch
+  const [randomIndices, setRandomIndices] = React.useState<{
+    actionTip: number;
+    generalTip: number;
+    secondGeneralTip: number;
+    motivation: number;
+  } | null>(null);
+
+  React.useEffect(() => {
+    setRandomIndices({
+      actionTip: Math.floor(Math.random() * STUDY_TIPS.actionTips.length),
+      generalTip: Math.floor(Math.random() * STUDY_TIPS.general.length),
+      secondGeneralTip: Math.floor(Math.random() * STUDY_TIPS.general.length),
+      motivation: Math.floor(Math.random() * STUDY_TIPS.motivation.length),
+    });
+  }, []);
+
   // Safely get percent
   const percent = Math.floor(result?.percent || 0);
   
@@ -275,14 +292,16 @@ export function StudyAdvice({ scores, result }: StudyAdviceProps) {
       priority: 'tip',
     });
 
-    // Add action tip
-    const actionTip = STUDY_TIPS.actionTips[Math.floor(Math.random() * STUDY_TIPS.actionTips.length)];
-    advice.push({
-      icon: CheckCircle2,
-      title: `🎯 今日のアクション：${actionTip.title}`,
-      description: actionTip.desc,
-      priority: 'tip',
-    });
+    // Add action tip (only after client mount to avoid hydration mismatch)
+    if (randomIndices) {
+      const actionTip = STUDY_TIPS.actionTips[randomIndices.actionTip];
+      advice.push({
+        icon: CheckCircle2,
+        title: `🎯 今日のアクション：${actionTip.title}`,
+        description: actionTip.desc,
+        priority: 'tip',
+      });
+    }
 
     // Add multiple weak subject advice if there are many
     if (weakSubjects.length >= 2) {
@@ -307,24 +326,25 @@ export function StudyAdvice({ scores, result }: StudyAdviceProps) {
       });
     }
 
-    // Random study tip
-    const randomTip = STUDY_TIPS.general[Math.floor(Math.random() * STUDY_TIPS.general.length)];
-    advice.push({
-      icon: randomTip.icon,
-      title: randomTip.title,
-      description: randomTip.desc,
-      priority: 'tip',
-    });
-
-    // Add second random tip for variety
-    const secondTip = STUDY_TIPS.general[Math.floor(Math.random() * STUDY_TIPS.general.length)];
-    if (secondTip.title !== randomTip.title) {
+    // Random study tips (only after client mount to avoid hydration mismatch)
+    if (randomIndices) {
+      const randomTip = STUDY_TIPS.general[randomIndices.generalTip];
       advice.push({
-        icon: secondTip.icon,
-        title: secondTip.title,
-        description: secondTip.desc,
+        icon: randomTip.icon,
+        title: randomTip.title,
+        description: randomTip.desc,
         priority: 'tip',
       });
+
+      const secondTip = STUDY_TIPS.general[randomIndices.secondGeneralTip];
+      if (secondTip.title !== randomTip.title) {
+        advice.push({
+          icon: secondTip.icon,
+          title: secondTip.title,
+          description: secondTip.desc,
+          priority: 'tip',
+        });
+      }
     }
 
     return advice.slice(0, 10);
@@ -332,10 +352,10 @@ export function StudyAdvice({ scores, result }: StudyAdviceProps) {
 
   const advice = generateAdvice();
 
-  // Random motivation message
-  const [motivation] = React.useState(
-    STUDY_TIPS.motivation[Math.floor(Math.random() * STUDY_TIPS.motivation.length)]
-  );
+  // Random motivation message (defaults to first item, randomized on client mount)
+  const motivation = randomIndices
+    ? STUDY_TIPS.motivation[randomIndices.motivation]
+    : STUDY_TIPS.motivation[0];
 
   const priorityConfig = {
     critical: { 

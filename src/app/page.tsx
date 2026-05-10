@@ -1,7 +1,14 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { PREFECTURES, REGIONS, getPrefecturesByRegion } from '@/lib/prefectures';
 import HomeClient from './HomeClient';
 import { Calculator, BookOpen, MapPin, Sparkles, ShieldCheck, ChevronRight } from 'lucide-react';
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: '/',
+  },
+};
 
 export default function Page() {
   return (

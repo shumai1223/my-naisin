@@ -15,26 +15,25 @@ export function ErrorReportForm({ prefectureCode, prefectureName }: ErrorReportF
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     const formData = new FormData(e.currentTarget);
     const reportData = {
-      prefectureCode,
-      prefectureName,
-      type: formData.get('type') as string,
-      detail: formData.get('detail') as string,
+      type: 'error-report',
+      subject: `[誤り報告] ${prefectureName}（${prefectureCode}）: ${formData.get('type')}`,
+      message: formData.get('detail') as string,
       email: formData.get('email') as string,
-      timestamp: new Date().toISOString(),
     };
 
-    // ここで実際の送信処理を実装（メール送信やスプレッドシート記録など）
-    // 現在はconsole.logでデモ
-    console.log('誤り報告:', reportData);
-    
-    // 送信完了をシミュレート
-    setTimeout(() => {
+    try {
+      await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(reportData),
+      });
+    } finally {
       setIsSubmitted(true);
       setIsSubmitting(false);
-    }, 1000);
+    }
   };
 
   if (isSubmitted) {
