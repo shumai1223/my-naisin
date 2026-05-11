@@ -51,8 +51,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const blogPages = BLOG_POSTS.map(post => ({
     url: `${baseUrl}/blog/${post.slug}`,
     lastModified: new Date(post.lastUpdated || post.date || lastModified),
-    changeFrequency: 'weekly' as const, 
+    changeFrequency: 'weekly' as const,
     priority: 0.8,
+  }));
+
+  // 5. ブログタグページ
+  const tagSet = new Set<string>();
+  BLOG_POSTS.forEach(post => post.tags.forEach(tag => tagSet.add(tag)));
+  const tagPages = Array.from(tagSet).map(tag => ({
+    url: `${baseUrl}/blog/tag/${encodeURIComponent(tag)}`,
+    lastModified,
+    changeFrequency: 'weekly' as const,
+    priority: 0.6,
   }));
 
   return [
@@ -60,5 +70,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...prefectureTopPages,
     ...prefectureNaishinPages,
     ...blogPages,
+    ...tagPages,
   ];
 }

@@ -11,6 +11,10 @@ import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { PrefectureLinkList } from '@/components/PrefectureLinkList';
 import { BlogRelatedArticles } from '@/components/BlogRelatedArticles';
+import { BlogStickyTOC } from '@/components/Blog/BlogStickyTOC';
+import { BlogShareButtons } from '@/components/Blog/BlogShareButtons';
+import { ReadingProgressBar } from '@/components/Blog/ReadingProgressBar';
+import { BackToTopButton } from '@/components/Blog/BackToTopButton';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -84,8 +88,12 @@ export default async function BlogPostPage({ params }: PageProps) {
   const prevPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
   const nextPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
 
+  const articleUrl = `https://my-naishin.com/blog/${post.slug}`;
+
   return (
     <div className="min-h-screen bg-white">
+      <ReadingProgressBar targetSelector="article" />
+      <BackToTopButton />
       <BlogPostingSchema
         title={post.title}
         description={post.description}
@@ -134,10 +142,14 @@ export default async function BlogPostPage({ params }: PageProps) {
               {post.category}
             </span>
             {post.tags.slice(0, 3).map((tag) => (
-              <span key={tag} className="inline-flex items-center gap-1 rounded-full bg-white/5 px-3 py-1 text-xs text-slate-400 ring-1 ring-white/10">
+              <Link
+                key={tag}
+                href={`/blog/tag/${encodeURIComponent(tag)}`}
+                className="inline-flex items-center gap-1 rounded-full bg-white/5 px-3 py-1 text-xs text-slate-300 ring-1 ring-white/10 transition-colors hover:bg-white/15 hover:text-white hover:ring-white/25"
+              >
                 <Tag className="h-3 w-3" />
                 {tag}
-              </span>
+              </Link>
             ))}
           </div>
 
@@ -198,8 +210,10 @@ export default async function BlogPostPage({ params }: PageProps) {
       </div>
 
       {/* Article Body */}
-      <div className="mx-auto max-w-3xl px-4">
-        <article 
+      <div className="mx-auto max-w-3xl xl:max-w-[78rem] px-4">
+        <div className="xl:grid xl:grid-cols-[minmax(0,1fr)_18rem] xl:gap-10">
+          <div className="min-w-0 xl:max-w-3xl xl:mx-auto">
+        <article
           className="relative mt-6 rounded-t-2xl bg-white pt-10 md:mt-8 md:pt-12"
           itemScope
           itemType="https://schema.org/Article"
@@ -289,6 +303,29 @@ export default async function BlogPostPage({ params }: PageProps) {
             </div>
           )}
         </article>
+
+        {/* Tags + Share */}
+        <div className="mt-10 grid gap-4 md:grid-cols-2">
+          <div className="rounded-2xl border border-gray-200/70 bg-white p-5 shadow-sm">
+            <div className="mb-3 flex items-center gap-2">
+              <Tag className="h-4 w-4 text-blue-500" />
+              <h3 className="text-sm font-bold text-gray-800">関連タグ</h3>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {post.tags.map((tag) => (
+                <Link
+                  key={tag}
+                  href={`/blog/tag/${encodeURIComponent(tag)}`}
+                  className="inline-flex items-center gap-1 rounded-full bg-gray-50 px-3 py-1 text-xs font-medium text-gray-700 ring-1 ring-gray-200 transition-colors hover:bg-blue-50 hover:text-blue-600 hover:ring-blue-200"
+                >
+                  <Tag className="h-3 w-3" />
+                  {tag}
+                </Link>
+              ))}
+            </div>
+          </div>
+          <BlogShareButtons title={post.title} url={articleUrl} />
+        </div>
 
         {/* CTA — Premium */}
         <div className="mt-12">
@@ -400,6 +437,12 @@ export default async function BlogPostPage({ params }: PageProps) {
             <ChevronLeft className="h-4 w-4" />
             コラム一覧に戻る
           </Link>
+        </div>
+          </div>
+          {/* Sticky TOC (desktop only) */}
+          <div className="mt-8">
+            <BlogStickyTOC rootSelector=".blog-content" />
+          </div>
         </div>
       </div>
     </div>

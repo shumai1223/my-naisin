@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { PREFECTURES, REGIONS, getPrefecturesByRegion } from '@/lib/prefectures';
+import { getAllPosts } from '@/lib/blog-data';
 import HomeClient from './HomeClient';
-import { Calculator, BookOpen, MapPin, Sparkles, ShieldCheck, ChevronRight } from 'lucide-react';
+import { Calculator, BookOpen, MapPin, Sparkles, ShieldCheck, ChevronRight, Calendar, Clock, ArrowRight, Zap } from 'lucide-react';
 
 export const metadata: Metadata = {
   alternates: {
@@ -11,9 +12,71 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
+  const latestPosts = getAllPosts().slice(0, 5);
+  const sidebarPosts = latestPosts.slice(0, 3);
+
   return (
     <>
       <HomeClient />
+
+      {/* Latest Articles — homepage funnel */}
+      <section className="mx-auto max-w-5xl px-4 pt-12">
+        <div className="rounded-3xl bg-white p-6 sm:p-8 shadow-sm ring-1 ring-gray-100">
+          <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <div className="mb-2 inline-flex items-center gap-1.5 rounded-full bg-rose-50 px-3 py-1 text-xs font-bold text-rose-600 ring-1 ring-rose-100">
+                <Zap className="h-3 w-3" />
+                新着記事
+              </div>
+              <h2 className="text-2xl font-extrabold tracking-tight text-slate-900">
+                最新の受験コラム
+              </h2>
+              <p className="mt-1 text-sm text-slate-500">
+                内申点アップ・志望校選び・実技対策など、最新の入試情報を発信中。
+              </p>
+            </div>
+            <Link
+              href="/blog"
+              className="inline-flex items-center gap-1.5 rounded-full bg-gray-900 px-5 py-2.5 text-sm font-bold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:shadow-xl"
+            >
+              すべての記事
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {latestPosts.map((post, i) => (
+              <Link
+                key={post.slug}
+                href={`/blog/${post.slug}`}
+                className={`group flex flex-col rounded-2xl border border-slate-200 bg-white p-5 transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-md ${
+                  i === 0 ? 'lg:col-span-1' : ''
+                }`}
+              >
+                <div className="mb-3 flex items-center gap-2 text-[11px] font-medium text-slate-400">
+                  <span className="inline-flex items-center gap-1 rounded-md bg-slate-50 px-2 py-0.5">
+                    {post.category}
+                  </span>
+                  <span className="inline-flex items-center gap-1">
+                    <Calendar className="h-3 w-3" />
+                    {new Date(post.date).toLocaleDateString('ja-JP')}
+                  </span>
+                  <span className="inline-flex items-center gap-1">
+                    <Clock className="h-3 w-3" />
+                    {post.readTime}
+                  </span>
+                </div>
+                <h3 className="flex-1 text-sm font-bold leading-snug text-slate-900 transition-colors group-hover:text-blue-600 line-clamp-3">
+                  {post.title}
+                </h3>
+                <div className="mt-4 flex items-center gap-1 text-xs font-semibold text-blue-600 opacity-0 transition-all group-hover:opacity-100">
+                  記事を読む <ArrowRight className="h-3 w-3" />
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* SEO Optimized Content Section */}
       <section className="mx-auto max-w-5xl px-4 py-16">
@@ -104,21 +167,19 @@ export default function Page() {
             <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
               <h3 className="font-bold text-slate-900 mb-4 flex items-center gap-2">
                 <BookOpen className="text-blue-500" />
-                人気の受験コラム
+                最新の受験コラム
               </h3>
               <div className="space-y-4">
-                <Link href="/blog/naishin-guide" className="block group">
-                  <p className="text-sm font-medium text-slate-800 group-hover:text-blue-600 transition-colors">【完全版】内申点とは？計算方法と評価を上げるコツ</p>
-                  <p className="text-xs text-slate-500 mt-1">2026/04/10更新</p>
-                </Link>
-                <Link href="/blog/practical-subjects-tips" className="block group">
-                  <p className="text-sm font-medium text-slate-800 group-hover:text-blue-600 transition-colors">実技4教科で「オール5」を取るための提出物ハック</p>
-                  <p className="text-xs text-slate-500 mt-1">2026/04/12更新</p>
-                </Link>
-                <Link href="/blog/tokyo-naishin-calculation-guide" className="block group">
-                  <p className="text-sm font-medium text-slate-800 group-hover:text-blue-600 transition-colors">東京都立入試の換算内申シミュレーション</p>
-                  <p className="text-xs text-slate-500 mt-1">2026/04/15更新</p>
-                </Link>
+                {sidebarPosts.map((post) => (
+                  <Link key={post.slug} href={`/blog/${post.slug}`} className="block group">
+                    <p className="text-sm font-medium text-slate-800 group-hover:text-blue-600 transition-colors line-clamp-2">
+                      {post.title}
+                    </p>
+                    <p className="text-xs text-slate-500 mt-1">
+                      {new Date(post.lastUpdated ?? post.date).toLocaleDateString('ja-JP')}更新
+                    </p>
+                  </Link>
+                ))}
               </div>
               <Link href="/blog" className="mt-6 block text-center text-sm font-bold text-blue-600 hover:text-blue-700">
                 記事一覧を見る
