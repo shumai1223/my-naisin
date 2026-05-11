@@ -81,7 +81,7 @@ export function BlogSection() {
             NEW 記事追加
           </div>
           <h2 className="text-2xl font-extrabold tracking-tight text-gray-900">内申点コラム</h2>
-          <p className="mt-1 text-sm text-gray-500">基礎知識から実践テクニックまで、全{FEATURED_ARTICLES.length * 3}記事以上</p>
+          <p className="mt-1 text-sm text-gray-500">基礎知識から実践テクニックまで、全80記事以上</p>
         </div>
         <Link
           href="/blog"

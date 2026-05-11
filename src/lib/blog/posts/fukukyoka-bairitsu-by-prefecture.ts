@@ -5,9 +5,9 @@ export const post: BlogPost = {
   title: '【都道府県別】副教科の倍率まとめ｜2倍？3倍？等倍？',
   description: '公立高校入試の内申点で副教科（実技4教科）がどれだけ重視されるかを都道府県別に徹底解説。東京2倍・兵庫7.5倍・鹿児島20倍など、地域差が驚くほど大きい副教科倍率をまとめました。',
   date: '2026-04-30',
-  lastUpdated: '2026-04-30',
+  lastUpdated: '2026-05-11',
   category: '対策・実践',
-  readTime: '7分',
+  readTime: '12分',
   author: '運営者（My Naishin）',
   tags: ['副教科', '内申点', '実技教科', '都道府県別', '高校受験', '倍率'],
   sources: [
@@ -30,6 +30,9 @@ export const post: BlogPost = {
     <li><a href="#hight-bai-group">副教科3倍以上グループ</a></li>
     <li><a href="#tobai-group">等倍（主要5教科と同じ）グループ</a></li>
     <li><a href="#impact">副教科1段階アップで内申点はどう変わる？</a></li>
+    <li><a href="#all47-list">全47都道府県の実技倍率早見表</a></li>
+    <li><a href="#practical-strategy">実技倍率が高い県の戦略</a></li>
+    <li><a href="#moe-multiplier">倍率が高い県で「1段階アップ」がもたらす真のインパクト</a></li>
     <li><a href="#summary">まとめ</a></li>
   </ul>
 </div>
@@ -250,6 +253,113 @@ export const post: BlogPost = {
 </div>
 
 <p>東京都では副教科を1段階上げると主要教科の2倍の恩恵があります。兵庫や鹿児島では、副教科の取り組み次第で内申点が大きく変わることがわかります。<strong>副教科を軽視するのは、地域によってはかなりもったいない戦略</strong>と言えます。</p>
+
+<hr>
+<h2 id="all47-list">全47都道府県の実技倍率早見表</h2>
+<p>全国47都道府県の実技倍率（実技4教科の主要5教科に対する倍率）と、内申点の満点を一覧で比較しました。</p>
+
+<div class="table-container">
+  <table>
+    <thead>
+      <tr><th>地域</th><th>都道府県</th><th>満点</th><th>実技倍率の特徴</th></tr>
+    </thead>
+    <tbody>
+      <tr><td rowspan="7">北海道・東北</td><td>北海道</td><td>315点</td><td>学年×倍率（中3が3倍）、実技は通常倍率</td></tr>
+      <tr><td>青森</td><td>135点</td><td>等倍（9教科同じ扱い）</td></tr>
+      <tr><td>岩手</td><td>660点</td><td>実技×3倍、学年比1:2:3</td></tr>
+      <tr><td>宮城</td><td>195点</td><td>実技×2倍</td></tr>
+      <tr><td>秋田</td><td>195点</td><td>実技×2倍</td></tr>
+      <tr><td>山形</td><td>45点</td><td>中3のみ等倍</td></tr>
+      <tr><td>福島</td><td>195点</td><td>実技×2倍</td></tr>
+      <tr><td rowspan="7">関東</td><td>茨城</td><td>135点</td><td>等倍</td></tr>
+      <tr><td>栃木</td><td>135点</td><td>等倍</td></tr>
+      <tr><td>群馬</td><td>135点</td><td>等倍</td></tr>
+      <tr><td>埼玉</td><td>学校による</td><td>高校ごとに倍率設定</td></tr>
+      <tr><td>千葉</td><td>135点</td><td>K値による補正あり</td></tr>
+      <tr><td><strong>東京</strong></td><td><strong>65点</strong></td><td><strong>実技×2倍（中3のみ）</strong></td></tr>
+      <tr><td>神奈川</td><td>135点</td><td>中3が2倍、実技は等倍</td></tr>
+      <tr><td rowspan="9">中部</td><td>新潟</td><td>135点</td><td>等倍</td></tr>
+      <tr><td>富山</td><td>135点</td><td>等倍</td></tr>
+      <tr><td>石川</td><td>135点</td><td>等倍</td></tr>
+      <tr><td>福井</td><td>135点</td><td>等倍</td></tr>
+      <tr><td>山梨</td><td>135点</td><td>等倍</td></tr>
+      <tr><td>長野</td><td>135点</td><td>等倍</td></tr>
+      <tr><td>岐阜</td><td>135点</td><td>等倍</td></tr>
+      <tr><td>静岡</td><td>135点</td><td>等倍</td></tr>
+      <tr><td>愛知</td><td>90点</td><td>中3のみ、9教科×2倍</td></tr>
+      <tr><td rowspan="7">近畿</td><td>三重</td><td>135点</td><td>等倍</td></tr>
+      <tr><td>滋賀</td><td>135点</td><td>等倍</td></tr>
+      <tr><td>京都</td><td>135点</td><td>等倍</td></tr>
+      <tr><td>大阪</td><td>450点</td><td>学校選抜タイプによる</td></tr>
+      <tr><td><strong>兵庫</strong></td><td><strong>250点</strong></td><td><strong>実技×7.5倍（全国最高）</strong></td></tr>
+      <tr><td>奈良</td><td>135点</td><td>等倍</td></tr>
+      <tr><td>和歌山</td><td>135点</td><td>等倍</td></tr>
+      <tr><td rowspan="9">中国・四国</td><td>鳥取</td><td>135点</td><td>等倍</td></tr>
+      <tr><td>島根</td><td>135点</td><td>等倍</td></tr>
+      <tr><td>岡山</td><td>135点</td><td>等倍</td></tr>
+      <tr><td>広島</td><td>135点</td><td>等倍</td></tr>
+      <tr><td>山口</td><td>135点</td><td>等倍</td></tr>
+      <tr><td>徳島</td><td>135点</td><td>等倍</td></tr>
+      <tr><td>香川</td><td>135点</td><td>等倍</td></tr>
+      <tr><td>愛媛</td><td>135点</td><td>等倍</td></tr>
+      <tr><td>高知</td><td>135点</td><td>等倍（10段階評価対応）</td></tr>
+      <tr><td rowspan="8">九州・沖縄</td><td>福岡</td><td>45点</td><td>中3のみ等倍</td></tr>
+      <tr><td>佐賀</td><td>135点</td><td>等倍</td></tr>
+      <tr><td>長崎</td><td>135点</td><td>等倍</td></tr>
+      <tr><td>熊本</td><td>135点</td><td>等倍</td></tr>
+      <tr><td>大分</td><td>135点</td><td>等倍</td></tr>
+      <tr><td>宮崎</td><td>135点</td><td>等倍</td></tr>
+      <tr><td><strong>鹿児島</strong></td><td><strong>450点</strong></td><td><strong>1教科50点換算（実技重視）</strong></td></tr>
+      <tr><td>沖縄</td><td>135点</td><td>等倍</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>※ 詳細な計算式と最新の制度は<a href="/">トップページの計算ツール</a>で都道府県を選択して確認できます。</p>
+
+<hr>
+<h2 id="practical-strategy">実技倍率が高い県の戦略</h2>
+<p>実技倍率が高い県（兵庫・東京・岩手など）では、実技4教科の評定アップが内申点全体に与える影響が極めて大きくなります。具体的な戦略を整理しました。</p>
+
+<div class="card-grid">
+  <div class="card">
+    <h4>音楽：合唱コンクール・実技テスト・ワークシート</h4>
+    <p>合唱コンクールへの積極参加で「主体性」評価を獲得。実技テストは反復練習で。鑑賞ワークシートは「曲の特徴・自分の感想・関連知識」を充実させると「思考・判断・表現」がA評価に。</p>
+  </div>
+  <div class="card">
+    <h4>美術：作品の完成度より過程を見せる</h4>
+    <p>下手でもいい。スケッチ・構想メモ・制作過程の振り返りを記録すれば「主体性」「思考」が高評価。「○○の表現に挑戦した、次は△△を意識する」と具体的に振り返る。</p>
+  </div>
+  <div class="card">
+    <h4>保健体育：筆記テストで稼ぐ</h4>
+    <p>実技が苦手でも、保健の筆記テスト（健康・病気・応急処置）は暗記で満点取れる。準備運動・後片付けでの積極性も「主体性」評価に直結。</p>
+  </div>
+  <div class="card">
+    <h4>技術家庭：制作物の振り返りを丁寧に</h4>
+    <p>制作物は丁寧に。専門用語の暗記で筆記テストを稼ぐ。「なぜこの素材を選んだか」「次回はどう改善するか」を振り返りに書くと「思考・判断・表現」が高評価。</p>
+  </div>
+</div>
+
+<hr>
+<h2 id="moe-multiplier">倍率が高い県で「1段階アップ」がもたらす真のインパクト</h2>
+<p>具体的な数値で、実技倍率の違いがもたらす内申点インパクトを比較しましょう。</p>
+
+<div class="table-container">
+  <table>
+    <thead>
+      <tr><th>都道府県</th><th>実技1教科を1段階上げる効果</th><th>主要1教科を1段階上げる効果</th><th>差</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>東京</td><td>+2点（65点満点中）</td><td>+1点（65点満点中）</td><td>実技が2倍効率的</td></tr>
+      <tr><td>兵庫</td><td>+7.5点（250点満点中）</td><td>+4点（250点満点中）</td><td>実技が約2倍効率的</td></tr>
+      <tr><td>岩手</td><td>+3〜9点（学年×倍率による）</td><td>+2〜6点</td><td>実技が1.5倍効率的</td></tr>
+      <tr><td>愛知</td><td>+2点（90点満点中）</td><td>+2点</td><td>同じ（等倍）</td></tr>
+      <tr><td>福岡</td><td>+1点（45点満点中）</td><td>+1点</td><td>同じ（等倍）</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>実技倍率が高い県では、苦手な実技教科で1段階上げる方が、得意な主要教科で1段階上げるより内申点アップに効率的です。<strong>実技対策に時間を投資するのは、コストパフォーマンスが非常に高い</strong>のです。</p>
 
 <hr>
 <h2 id="summary">まとめ</h2>

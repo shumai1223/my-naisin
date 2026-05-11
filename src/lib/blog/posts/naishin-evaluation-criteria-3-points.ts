@@ -5,9 +5,9 @@ export const post: BlogPost = {
   title: '内申点は3観点で決まる！通知表の評価基準をわかりやすく整理',
   description: '内申点（評定）の元になる「3観点」とは何かを徹底解説。知識・技能、思考・判断・表現、主体的に学習に取り組む態度の違いや、AＢＣがどう評定に変わるかを中学生・保護者向けにわかりやすく整理しました。',
   date: '2026-04-30',
-  lastUpdated: '2026-04-30',
+  lastUpdated: '2026-05-11',
   category: '基礎知識',
-  readTime: '7分',
+  readTime: '12分',
   author: '運営者（My Naishin）',
   tags: ['内申点', '観点別評価', '通知表', '評定', '学習指導要領', '中学生'],
   sources: [
@@ -29,6 +29,9 @@ export const post: BlogPost = {
     <li><a href="#point3">観点③：主体的に学習に取り組む態度</a></li>
     <li><a href="#abc-to-grade">AＢＣが評定1〜5に変わる仕組み</a></li>
     <li><a href="#how-to-raise">観点別評価を上げるには</a></li>
+    <li><a href="#abc-evaluation">A・B・Cと評定1〜5の関係</a></li>
+    <li><a href="#subject-differences">教科ごとの3観点の重視ポイント</a></li>
+    <li><a href="#case-studies">実例：3観点評価のケーススタディ</a></li>
     <li><a href="#summary">まとめ</a></li>
   </ul>
 </div>
@@ -200,6 +203,103 @@ export const post: BlogPost = {
     <h4>③主体的な態度を上げる</h4>
     <p>提出物を期限内に出すことが最低条件。振り返りシートや自己評価欄には「どこが難しかったか」「次にどうするか」を具体的に書く。授業で疑問が出たときは質問する。</p>
   </div>
+</div>
+
+<hr>
+<h2 id="abc-evaluation">A・B・Cと評定1〜5の関係を詳しく理解する</h2>
+<p>3観点の評価（A・B・C）から評定（1〜5）への変換ルールは、文部科学省が公表している「観点別評価と評定の関係」をベースに、各学校が運用ルールを定めている。一般的な目安は以下のようになる。</p>
+
+<div class="table-container">
+  <table>
+    <thead>
+      <tr><th>3観点の組み合わせ</th><th>評定の目安</th><th>説明</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>AAA</strong></td><td>5</td><td>すべての観点で「十分満足できる」状態。トップクラスの評価。</td></tr>
+      <tr><td><strong>AAB / ABA / BAA</strong></td><td>4</td><td>2観点でA、1観点でB。バランスが取れていれば4で確定。</td></tr>
+      <tr><td><strong>ABB / BAB / BBA</strong></td><td>3 または 4</td><td>テスト点数や学校の運用次第。境界線上の評価。</td></tr>
+      <tr><td><strong>BBB</strong></td><td>3</td><td>すべて「おおむね満足」のレベル。標準的な評価。</td></tr>
+      <tr><td><strong>BBC / BCB / CBB</strong></td><td>2 または 3</td><td>1観点でCがつくと評定全体が下がる。</td></tr>
+      <tr><td><strong>BCC / CBC / CCB</strong></td><td>2</td><td>2観点でCがつくと評定2に下がる可能性大。</td></tr>
+      <tr><td><strong>CCC</strong></td><td>1</td><td>すべての観点で「努力を要する」状態。要改善。</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="point-box">
+  <h4>重要：1つの観点でCがつくとどうなるか</h4>
+  <p>たとえテストで90点を取って「知識・技能」がAでも、「主体的に学習に取り組む態度」がC（提出物の遅れ・授業態度の悪さなど）だと、評定はACA→ABC相当に下がり、評定3〜4止まりになる可能性がある。逆に、テスト60点でも3観点すべてA（提出物・授業態度・振り返りが完璧）なら評定5を取った実例も報告されている。</p>
+</div>
+
+<hr>
+<h2 id="subject-differences">教科ごとの3観点の重視ポイントの違い</h2>
+<p>3観点は全教科共通だが、各観点に何が含まれるかは教科で異なる。教科担当の先生のシラバスを確認することが第一歩だ。</p>
+
+<div class="card-grid">
+  <div class="card">
+    <h4>国語</h4>
+    <p><strong>知識・技能</strong>：漢字・文法・古典の知識。<br>
+    <strong>思考・判断・表現</strong>：読解力・記述力・発表での論理性。<br>
+    <strong>主体的態度</strong>：日常の読書・自主的な調べ学習・振り返りの深さ。</p>
+  </div>
+  <div class="card">
+    <h4>数学</h4>
+    <p><strong>知識・技能</strong>：定期テストの計算・公式運用。<br>
+    <strong>思考・判断・表現</strong>：応用問題・証明問題・記述問題。<br>
+    <strong>主体的態度</strong>：ワークの解き直し・間違いノート・粘り強い取り組み。</p>
+  </div>
+  <div class="card">
+    <h4>英語</h4>
+    <p><strong>知識・技能</strong>：単語・文法・リスニング・スピーキング技能。<br>
+    <strong>思考・判断・表現</strong>：英作文・スピーチ・対話の発展性。<br>
+    <strong>主体的態度</strong>：自主的なリスニング・英語日記・授業中の発言。</p>
+  </div>
+  <div class="card">
+    <h4>理科</h4>
+    <p><strong>知識・技能</strong>：実験・観察の技能、専門用語の理解。<br>
+    <strong>思考・判断・表現</strong>：実験レポートの考察・仮説の設定。<br>
+    <strong>主体的態度</strong>：実験への積極参加・追加調査・振り返りの質。</p>
+  </div>
+  <div class="card">
+    <h4>社会</h4>
+    <p><strong>知識・技能</strong>：年代・人物・地名・用語の暗記。<br>
+    <strong>思考・判断・表現</strong>：資料の読み取り・論述・現代との関連付け。<br>
+    <strong>主体的態度</strong>：時事ニュースへの関心・調べ学習の深さ。</p>
+  </div>
+  <div class="card">
+    <h4>実技4教科</h4>
+    <p><strong>知識・技能</strong>：実技の上手さ・専門知識のテスト点。<br>
+    <strong>思考・判断・表現</strong>：作品の独創性・工夫の言語化。<br>
+    <strong>主体的態度</strong>：授業の準備・片付け・振り返りの具体性。実技4教科ではここが特に重視される傾向。</p>
+  </div>
+</div>
+
+<hr>
+<h2 id="case-studies">実例：3観点評価のケーススタディ</h2>
+<p>具体的な3観点評価のケースを見ながら、どこを改善すれば評定が上がるか考えてみよう。</p>
+
+<div class="point-box">
+  <h4>ケース1：テストはいいのに評定が4止まり（中3・男子・数学）</h4>
+  <p><strong>状況</strong>：定期テスト平均90点。観点はAAB（主体性がB）。<br>
+  <strong>原因</strong>：ワークの解き直しをしていない、振り返りシートが浅い、授業中に質問しない。<br>
+  <strong>対策</strong>：①ワークに「解き直しの跡」を残す（×印→再度解く→○印）。②振り返りに「今回つまずいたポイントと、次回どう対策するか」を書く。③授業後に1問でも質問しに行く。<br>
+  <strong>結果</strong>：1学期後にAAAに変化、評定5に到達。</p>
+</div>
+
+<div class="point-box">
+  <h4>ケース2：頑張っているのに評定3が続く（中2・女子・国語）</h4>
+  <p><strong>状況</strong>：定期テスト平均70点、提出物は出している。観点はBBB。<br>
+  <strong>原因</strong>：提出物を「出すだけ」になっており質が低い、レポートで自分の意見を書いていない。<br>
+  <strong>対策</strong>：①ワークの記入量を1.5倍に、感想欄も埋める。②レポートで必ず「自分はこう思う、なぜなら」を入れる。③読書記録を週1で先生に提出する自主活動を始める。<br>
+  <strong>結果</strong>：2学期にABB、評定4に上昇。</p>
+</div>
+
+<div class="point-box">
+  <h4>ケース3：実技で評定2を取ってしまった（中3・男子・美術）</h4>
+  <p><strong>状況</strong>：絵が苦手で作品が雑、振り返りも「楽しかった」程度。観点はBCC。<br>
+  <strong>原因</strong>：技能評価Cはセンスの問題で短期改善は困難。しかし「主体的態度」と「思考・判断・表現」は改善可能。<br>
+  <strong>対策</strong>：①制作過程のスケッチ・メモを充実させる。②振り返りに「○○の表現に挑戦した、次は△△を意識したい」を書く。③制作中に先生に「ここはどう改善できますか」と相談する。<br>
+  <strong>結果</strong>：3学期にBBB相当、評定3に上昇。</p>
 </div>
 
 <hr>
