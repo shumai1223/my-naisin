@@ -14,6 +14,13 @@ export interface ChangeLogEntry {
 
 export const CHANGELOG: ChangeLogEntry[] = [
   {
+    date: '2026-05-12',
+    type: 'update',
+    category: 'ui',
+    title: '結果画面をタブ式に刷新・パフォーマンス大幅改善',
+    description: '「重要な情報」「詳しく分析」の2タブで情報を整理し、カードが多すぎる問題を解消。レーダーチャートや成績推移グラフなど重いコンポーネントを遅延読み込みに切り替え、初期表示速度を大幅に向上しました。初回訪問時に空の結果画面が表示されるケースも修正しています。',
+  },
+  {
     date: '2026-05-08',
     type: 'add',
     category: 'content',

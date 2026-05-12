@@ -133,14 +133,15 @@ export function ResultSection({
       {
         id: 'key',
         label: '重要な情報',
-        icon: <Sparkles className="h-4 w-4" />,
-        description: 'スコアと計算根拠'
+        icon: <Sparkles className="h-5 w-5" />,
+        description: 'スコア・計算根拠・保存'
       },
       {
         id: 'detail',
-        label: '詳しく見る',
-        icon: <BarChart3 className="h-4 w-4" />,
-        description: '分析・モチベ・サポート'
+        label: '詳しく分析',
+        icon: <BarChart3 className="h-5 w-5" />,
+        badge: '15+',
+        description: 'グラフ・アドバイス・目標設定'
       }
     ],
     []
@@ -290,18 +291,24 @@ export function ResultSection({
             </div>
           </Card>
 
-          <div className="rounded-2xl border border-dashed border-slate-200 bg-slate-50/60 p-4 text-center text-sm text-slate-500">
-            さらに詳しい分析や勉強サポートは
-            <button
-              type="button"
-              onClick={() => setActiveTab('detail')}
-              className="mx-1 inline-flex items-center gap-1 font-semibold text-blue-600 underline-offset-2 hover:underline"
-            >
-              「詳しく見る」タブ
-              <ChevronRight className="h-3 w-3" />
-            </button>
-            から確認できます。
-          </div>
+          <button
+            type="button"
+            onClick={() => setActiveTab('detail')}
+            className="group flex w-full items-center justify-between rounded-2xl border-2 border-indigo-200 bg-gradient-to-r from-indigo-50 via-violet-50 to-blue-50 px-5 py-4 text-left transition-all duration-200 hover:border-indigo-400 hover:shadow-md"
+          >
+            <div>
+              <div className="text-sm font-bold text-indigo-800">
+                📊 もっと詳しく分析する
+              </div>
+              <div className="mt-0.5 text-xs text-indigo-600">
+                レーダーチャート・成績推移・アドバイスなど15項目以上
+              </div>
+            </div>
+            <div className="flex items-center gap-1 rounded-lg bg-indigo-600 px-3 py-2 text-sm font-bold text-white shadow-sm transition-all group-hover:bg-indigo-700 group-hover:shadow-md">
+              詳しく見る
+              <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+            </div>
+          </button>
         </div>
       ) : (
         <div

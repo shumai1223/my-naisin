@@ -25,7 +25,7 @@ export function Tabs({ items, activeId, onChange, className }: TabsProps) {
       role="tablist"
       aria-label="結果の表示切り替え"
       className={cn(
-        'sticky top-2 z-20 mx-auto flex w-full max-w-xl items-stretch gap-1 rounded-2xl border border-slate-200 bg-white/95 p-1 shadow-md backdrop-blur',
+        'sticky top-2 z-20 flex w-full items-stretch gap-2 rounded-2xl border border-slate-200 bg-white/95 p-2 shadow-lg backdrop-blur',
         className
       )}
     >
@@ -41,31 +41,42 @@ export function Tabs({ items, activeId, onChange, className }: TabsProps) {
             id={`tab-${item.id}`}
             onClick={() => onChange(item.id)}
             className={cn(
-              'group relative flex flex-1 flex-col items-center justify-center gap-0.5 rounded-xl px-3 py-2 text-sm font-semibold transition-all duration-200',
+              'group relative flex flex-1 flex-col items-center justify-center gap-1 overflow-hidden rounded-xl px-4 py-3.5 text-base font-bold transition-all duration-200',
               active
-                ? 'bg-gradient-to-br from-blue-500 via-indigo-500 to-violet-500 text-white shadow-md shadow-indigo-300/40'
-                : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
+                ? 'bg-gradient-to-br from-blue-500 via-indigo-500 to-violet-600 text-white shadow-lg shadow-indigo-300/50'
+                : 'border border-dashed border-slate-300 bg-slate-50 text-slate-600 hover:border-indigo-300 hover:bg-indigo-50 hover:text-indigo-700'
             )}
           >
-            <span className="flex items-center gap-1.5">
+            {/* 非アクティブタブにアニメーション pulse リング */}
+            {!active && (
+              <span
+                aria-hidden
+                className="absolute inset-0 rounded-xl ring-2 ring-indigo-300/60 animate-ping opacity-0 group-hover:opacity-100"
+              />
+            )}
+
+            <span className="relative flex items-center gap-2">
               {item.icon}
-              <span>{item.label}</span>
+              <span className="text-base leading-none">{item.label}</span>
               {item.badge ? (
                 <span
                   className={cn(
-                    'ml-0.5 rounded-full px-1.5 py-0.5 text-[10px] font-bold',
-                    active ? 'bg-white/25 text-white' : 'bg-slate-200 text-slate-600'
+                    'rounded-full px-2 py-0.5 text-xs font-extrabold',
+                    active
+                      ? 'bg-white/25 text-white'
+                      : 'bg-indigo-100 text-indigo-700'
                   )}
                 >
                   {item.badge}
                 </span>
               ) : null}
             </span>
+
             {item.description ? (
               <span
                 className={cn(
-                  'hidden text-[10px] font-medium sm:block',
-                  active ? 'text-white/80' : 'text-slate-400'
+                  'relative text-[11px] font-medium leading-none',
+                  active ? 'text-white/80' : 'text-slate-400 group-hover:text-indigo-500'
                 )}
               >
                 {item.description}
