@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { Calculator, Target, BookOpen, ChevronRight, Sparkles } from 'lucide-react';
+import { Calculator, Target, BookOpen, ChevronRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export type NavigationMode = 'select' | 'calculate' | 'reverse' | 'learn';
@@ -11,46 +11,6 @@ interface HeroNavigationProps {
   onModeChange: (mode: NavigationMode) => void;
   currentMode: NavigationMode;
 }
-
-const navigationOptions = [
-  {
-    id: 'calculate' as const,
-    icon: Calculator,
-    title: '内申点を計算する',
-    description: '都道府県を選んで成績を入力するだけ',
-    gradient: 'from-blue-500 via-indigo-500 to-violet-600',
-    bgGradient: 'from-blue-50 via-indigo-50 to-violet-50',
-    borderColor: 'border-blue-200',
-    badge: '30秒で完了',
-    badgeColor: 'bg-blue-100 text-blue-700',
-  },
-  {
-    id: 'reverse' as const,
-    icon: Target,
-    title: '志望校から逆算',
-    description: '目標点から必要な当日点を計算',
-    gradient: 'from-emerald-500 via-teal-500 to-cyan-600',
-    bgGradient: 'from-emerald-50 via-teal-50 to-cyan-50',
-    borderColor: 'border-emerald-200',
-    badge: '目標設定',
-    badgeColor: 'bg-emerald-100 text-emerald-700',
-    href: '/reverse',
-    isSecondary: true,
-  },
-  {
-    id: 'learn' as const,
-    icon: BookOpen,
-    title: '制度を理解する',
-    description: '都道府県別の計算方法・コラム',
-    gradient: 'from-amber-500 via-orange-500 to-rose-500',
-    bgGradient: 'from-amber-50 via-orange-50 to-rose-50',
-    borderColor: 'border-amber-200',
-    badge: '47都道府県対応',
-    badgeColor: 'bg-amber-100 text-amber-700',
-    href: '/prefectures',
-    isSecondary: true,
-  },
-];
 
 export function HeroNavigation({ onModeChange, currentMode }: HeroNavigationProps) {
   if (currentMode !== 'select') {
@@ -70,7 +30,7 @@ export function HeroNavigation({ onModeChange, currentMode }: HeroNavigationProp
 
       <div className="space-y-6">
         {/* Main CTA - Single prominent button */}
-        <div className="flex justify-center">
+        <div className="flex flex-col items-center gap-2">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -87,7 +47,7 @@ export function HeroNavigation({ onModeChange, currentMode }: HeroNavigationProp
               className="group relative w-full overflow-hidden rounded-xl bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-600 px-8 py-4 text-center font-semibold text-white shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] md:py-5 md:text-lg"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-              
+
               <div className="relative flex items-center justify-center gap-3">
                 <Calculator className="h-5 w-5 md:h-6 md:w-6" />
                 <span>内申点を計算する</span>
@@ -95,6 +55,9 @@ export function HeroNavigation({ onModeChange, currentMode }: HeroNavigationProp
               </div>
             </button>
           </motion.div>
+          <p className="max-w-lg text-center text-xs text-slate-500">
+            例：「通知表の数字をいま入れて、内申点を出したい」→ こちら
+          </p>
         </div>
 
         {/* Quick Prefecture Selection - 1クリック化 */}
@@ -137,13 +100,13 @@ export function HeroNavigation({ onModeChange, currentMode }: HeroNavigationProp
           </Link>
         </div>
 
-        {/* Secondary navigation - smaller links */}
+        {/* Secondary navigation - 用途別に具体例つきで提示 */}
         <div className="flex flex-col items-center gap-4">
           <div className="text-center text-sm text-slate-500">
             または、目的別に選ぶ
           </div>
-          
-          <div className="flex flex-col gap-3 sm:flex-row sm:gap-4">
+
+          <div className="grid w-full max-w-3xl gap-3 sm:grid-cols-2">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -151,14 +114,20 @@ export function HeroNavigation({ onModeChange, currentMode }: HeroNavigationProp
             >
               <Link
                 href="/reverse"
-                className="group inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-sm transition-all duration-300 hover:border-slate-300 hover:shadow-md hover:bg-slate-50"
+                className="group flex h-full flex-col gap-1 rounded-xl border border-emerald-200 bg-gradient-to-br from-emerald-50 via-teal-50/50 to-white p-4 text-left shadow-sm transition-all duration-300 hover:border-emerald-300 hover:shadow-md"
               >
-                <Target className="h-4 w-4" />
-                <span>志望校から逆算</span>
-                <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                <div className="flex items-center gap-2">
+                  <Target className="h-5 w-5 text-emerald-600" />
+                  <span className="text-base font-bold text-slate-800">志望校から逆算</span>
+                  <ChevronRight className="ml-auto h-4 w-4 text-emerald-500 transition-transform group-hover:translate-x-1" />
+                </div>
+                <p className="text-xs text-slate-600">目標点から必要な当日点を計算</p>
+                <p className="mt-1 text-xs text-emerald-700">
+                  例：「志望校の目標点に届くか確かめたい」→ こちら
+                </p>
               </Link>
             </motion.div>
-            
+
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -166,11 +135,17 @@ export function HeroNavigation({ onModeChange, currentMode }: HeroNavigationProp
             >
               <Link
                 href="/guide"
-                className="group inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-sm transition-all duration-300 hover:border-slate-300 hover:shadow-md hover:bg-slate-50"
+                className="group flex h-full flex-col gap-1 rounded-xl border border-amber-200 bg-gradient-to-br from-amber-50 via-orange-50/50 to-white p-4 text-left shadow-sm transition-all duration-300 hover:border-amber-300 hover:shadow-md"
               >
-                <BookOpen className="h-4 w-4" />
-                <span>制度を理解する</span>
-                <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                <div className="flex items-center gap-2">
+                  <BookOpen className="h-5 w-5 text-amber-600" />
+                  <span className="text-base font-bold text-slate-800">制度を理解する</span>
+                  <ChevronRight className="ml-auto h-4 w-4 text-amber-500 transition-transform group-hover:translate-x-1" />
+                </div>
+                <p className="text-xs text-slate-600">都道府県別の計算方法・コラム</p>
+                <p className="mt-1 text-xs text-amber-700">
+                  例：「換算内申って何？まず仕組みを知りたい」→ こちら
+                </p>
               </Link>
             </motion.div>
           </div>
