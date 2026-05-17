@@ -21,7 +21,7 @@ import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 
 export const metadata: Metadata = {
   title: '編集長・開発者プロフィール | My Naishin',
-  description: 'My Naishin（マイ内申）の編集長兼開発者、現役中学生エンジニアのプロフィール。47都道府県の教育委員会資料を自ら解析し、正確な内申点計算ツールの開発・運営を行っています。',
+  description: 'My Naishin（マイ内申）の開発者・しゅうまいのプロフィール。2026年度受験を控える現役中学生エンジニアが、47都道府県の教育委員会資料を自ら解析し、正確な内申点計算ツールを開発・運営しています。',
 };
 
 export default function EditorProfilePage() {
@@ -63,8 +63,8 @@ export default function EditorProfilePage() {
               </div>
 
               <div className="flex-1 text-center md:text-left">
-                <h1 className="text-3xl font-black text-slate-900">My Naishin 開発責任者</h1>
-                <p className="mt-2 text-xl font-bold text-blue-600">現役中学生エンジニア (2026年度受験生)</p>
+                <h1 className="text-3xl font-black text-slate-900">しゅうまい</h1>
+                <p className="mt-2 text-xl font-bold text-blue-600">My Naishin 開発責任者 / 現役中学生エンジニア (2026年度受験生)</p>
                 
                 <div className="mt-6 flex flex-wrap justify-center md:justify-start gap-3">
                   <span className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-600 border border-slate-200">
@@ -78,6 +78,18 @@ export default function EditorProfilePage() {
                   </span>
                 </div>
 
+                <div className="mt-4 flex justify-center md:justify-start">
+                  <a
+                    href="https://github.com/shumai1223"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-4 py-2 text-xs font-bold text-white hover:bg-slate-700 transition-colors"
+                  >
+                    <Github className="h-3.5 w-3.5" />
+                    @shumai1223
+                  </a>
+                </div>
+
                 <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-4">
                   <div className="text-center p-3 rounded-xl bg-slate-50 border border-slate-100">
                     <div className="text-2xl font-black text-slate-800">47</div>
@@ -86,10 +98,6 @@ export default function EditorProfilePage() {
                   <div className="text-center p-3 rounded-xl bg-slate-50 border border-slate-100">
                     <div className="text-2xl font-black text-slate-800">100%</div>
                     <div className="text-[10px] font-bold text-slate-500 uppercase">一次資料準拠</div>
-                  </div>
-                  <div className="text-center p-3 rounded-xl bg-slate-50 border border-slate-100">
-                    <div className="text-2xl font-black text-slate-800">継続改善中</div>
-                    <div className="text-[10px] font-bold text-slate-500 uppercase">月間ユーザー</div>
                   </div>
                   <div className="text-center p-3 rounded-xl bg-slate-50 border border-slate-100">
                     <div className="text-2xl font-black text-slate-800">2026</div>

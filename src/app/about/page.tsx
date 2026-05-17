@@ -67,9 +67,9 @@ export default function AboutPage() {
                 </div>
               </div>
               <div className="flex-1 p-8">
-                <h2 className="text-xl font-black text-slate-800 mb-4 group-hover:text-blue-600">現役中学生エンジニアが全データを直接解析</h2>
+                <h2 className="text-xl font-black text-slate-800 mb-4 group-hover:text-blue-600">しゅうまい（現役中学生エンジニア）が全データを直接解析</h2>
                 <p className="text-sm text-slate-600 leading-relaxed">
-                  2026年度（令和8年度）に受験を控える開発責任者が、47都道府県すべての教育委員会資料を読み込み、1点1点の計算式をコードに反映。当事者だからこその「正確さ」と「使いやすさ」を追求しています。
+                  2026年度（令和8年度）に受験を控える開発者・しゅうまいが、47都道府県すべての教育委員会資料を読み込み、1点1点の計算式をコードに反映。当事者だからこその「正確さ」と「使いやすさ」を追求しています。
                 </p>
                 <div className="mt-6 flex items-center text-sm font-bold text-blue-600">
                   詳細なプロフィールを見る <ExternalLink className="ml-2 h-4 w-4" />
