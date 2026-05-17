@@ -1,4 +1,4 @@
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import Link from 'next/link';
 import { 
   Calculator, 
@@ -18,7 +18,7 @@ import {
 } from 'lucide-react';
 
 import { getPrefectureByCode, PREFECTURES } from '@/lib/prefectures';
-import { getPrefectureGuide } from '@/lib/prefecture-guides';
+import { getPrefectureGuide, PREFECTURES_WITH_GUIDE } from '@/lib/prefecture-guides';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { BlogRelatedArticles } from '@/components/BlogRelatedArticles';
 import { PrefecturePillarLinks } from '@/components/PrefecturePillarLinks';
@@ -51,6 +51,11 @@ export default async function PrefecturePage({ params }: PrefecturePageProps) {
 
   if (!pref) {
     notFound();
+  }
+
+  // 手書きguideのない県はツールページへリダイレクト（薄いコンテンツ回避）
+  if (!PREFECTURES_WITH_GUIDE.has(code)) {
+    redirect(`/${code}/naishin`);
   }
 
   const guide = getPrefectureGuide(code);

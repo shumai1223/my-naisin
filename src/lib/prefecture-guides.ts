@@ -834,6 +834,9 @@ export function getPrefectureGuide(prefectureCode: string): PrefectureGuide {
   };
 }
 
+// 手書きguideデータが存在する都道府県コードのセット
+export const PREFECTURES_WITH_GUIDE = new Set(Object.keys(prefectureGuides));
+
 // 都道府県データから動的にFAQを生成する関数
 export function generateDynamicFAQ(prefectureCode: string, prefecture: PrefectureConfig): { question: string; answer: string }[] {
   const targetGradesText = prefecture.targetGrades.length === 1 

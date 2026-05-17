@@ -1,6 +1,5 @@
 import { BlogPost } from '@/lib/blog/types';
 import { POST_FAQS } from '@/lib/blog/faqs';
-import { generatePrefectureBlogPosts } from '@/lib/blog/prefecture-blog-generator';
 import { post as naishinGuide } from '@/lib/blog/posts/naishin-guide';
 import { post as improveGradesFromAll3 } from '@/lib/blog/posts/improve-grades-from-all-3';
 import { post as naishinEvaluationCriteria3Points } from '@/lib/blog/posts/naishin-evaluation-criteria-3-points';
@@ -106,16 +105,7 @@ const HAND_WRITTEN_POSTS: BlogPost[] = [
   whatIsNaishinten,
 ];
 
-// Merge: hand-written posts + auto-generated prefecture posts (for prefectures not yet covered)
-const EXISTING_SLUGS = new Set(HAND_WRITTEN_POSTS.map(p => p.slug));
-const GENERATED_PREFECTURE_POSTS = generatePrefectureBlogPosts().filter(
-  p => !EXISTING_SLUGS.has(p.slug)
-);
-
-export const BLOG_POSTS: BlogPost[] = [
-  ...HAND_WRITTEN_POSTS,
-  ...GENERATED_PREFECTURE_POSTS,
-].map(enrichPost);
+export const BLOG_POSTS: BlogPost[] = HAND_WRITTEN_POSTS.map(enrichPost);
 
 export function getPostBySlug(slug: string): BlogPost | undefined {
   return BLOG_POSTS.find(post => post.slug === slug);

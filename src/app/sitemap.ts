@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next';
 import { PREFECTURES } from '@/lib/prefectures';
 import { BLOG_POSTS } from '@/lib/blog-data';
+import { PREFECTURES_WITH_GUIDE } from '@/lib/prefecture-guides';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://my-naishin.com';
@@ -39,13 +40,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 1.0,
   }));
 
-  // 3. 都道府県別トップページ (解説記事)
-  const prefectureTopPages = PREFECTURES.map(prefecture => ({
-    url: `${baseUrl}/${prefecture.code}`,
-    lastModified,
-    changeFrequency: 'daily' as const,
-    priority: 0.9,
-  }));
+  // 3. 都道府県別トップページ（手書きguideのある県のみ）
+  const prefectureTopPages = PREFECTURES
+    .filter(prefecture => PREFECTURES_WITH_GUIDE.has(prefecture.code))
+    .map(prefecture => ({
+      url: `${baseUrl}/${prefecture.code}`,
+      lastModified,
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
+    }));
 
   // 4. ブログ個別記事
   const blogPages = BLOG_POSTS.map(post => ({
