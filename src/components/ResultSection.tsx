@@ -14,6 +14,7 @@ import { ScoreGauge } from '@/components/Result/ScoreGauge';
 import { RankCard } from '@/components/Result/RankCard';
 import { CalculationBasis } from '@/components/Result/CalculationBasis';
 import { PointValueCard } from '@/components/Result/PointValueCard';
+import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { getPrefectureByCode, type PrefectureConfig } from '@/lib/prefectures';
 import type { ResultData, SavedHistoryEntry, Scores } from '@/lib/types';
 
@@ -195,6 +196,21 @@ export function ResultSection({
           <RankCard result={result} />
           <PointValueCard scores={scores} prefectureCode={prefectureCode} />
           <CalculationBasis prefectureCode={prefectureCode} total={result.total} max={result.max} />
+
+          <Card className="overflow-hidden">
+            <div className="px-6 py-5 text-center">
+              <div className="mb-2 text-sm font-bold text-slate-700">
+                💡 内申点アップに通信教育という選択肢
+              </div>
+              <div className="mb-4 text-xs text-slate-500">
+                定期テスト対策に強い教材で、毎学期の評定を底上げ
+              </div>
+              <AffiliateAd id="zkai-banner" />
+              <div className="mt-3 text-xs">
+                無料の<AffiliateAd id="zkai-text-request" className="mx-1" hideLabel />（PR）から始められます
+              </div>
+            </div>
+          </Card>
 
           {prefectureCode === 'kanagawa' && (
             <Card className="overflow-hidden">
@@ -395,6 +411,18 @@ export function ResultSection({
           <QuickStudyTimer />
           <SubjectBreakdown scores={scores} prefectureCode={prefectureCode} />
           <GoalSection currentScore={result.total} maxScore={result.max} />
+
+          <Card className="overflow-hidden">
+            <div className="px-6 py-6 text-center">
+              <div className="mb-2 text-sm font-bold text-slate-700">
+                📱 月額2,178円で全教科見放題
+              </div>
+              <div className="mb-4 text-xs text-slate-500">
+                スマホ・タブレットで学べる定番のオンライン学習サービス
+              </div>
+              <AffiliateAd id="sapuri-banner-300" />
+            </div>
+          </Card>
         </div>
       )}
     </section>

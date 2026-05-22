@@ -143,6 +143,14 @@ export function Footer() {
           </div>
         </div>
 
+        {/* 広告表記（ステマ規制対応・必須） */}
+        <div className="mt-3 rounded-xl border border-slate-200/60 bg-white/40 p-3 text-center">
+          <p className="text-[11px] leading-relaxed text-slate-500">
+            <strong className="text-slate-600">広告表記:</strong> 当サイトは、第三者配信のアフィリエイト広告サービスを利用しており、リンクから商品やサービスをお申し込みいただいた場合、運営者が広告主から成果報酬を受け取ることがあります。
+            なお、紹介する商品・サービスは運営者が中立的に評価して選定しています。
+          </p>
+        </div>
+
         {/* Bottom bar */}
         <div className="mt-6 flex flex-col items-center justify-between gap-3 border-t border-slate-200 pt-6 sm:flex-row">
           <p className="text-[11px] text-slate-400">
