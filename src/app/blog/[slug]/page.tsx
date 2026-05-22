@@ -225,18 +225,14 @@ export default async function BlogPostPage({ params }: PageProps) {
           <meta itemProp="author" content="My Naishin" />
           <meta itemProp="keywords" content={post.tags.join(', ')} />
 
-          {/* 記事冒頭の関連サービスCTA */}
-          <div className="mb-8 rounded-xl border border-amber-200 bg-gradient-to-r from-amber-50 to-orange-50 px-5 py-4">
-            <div className="text-xs text-slate-500 mb-1">📚 内申点アップに役立つ教材</div>
-            <p className="text-sm leading-relaxed text-slate-700">
-              定期テスト対策で5教科＋実技にまんべんなく対応するなら、
+          {/* 記事冒頭の関連サービスCTA（コンパクト） */}
+          <div className="mb-8 rounded-xl border border-amber-200 bg-amber-50/60 px-4 py-3">
+            <p className="text-xs leading-relaxed text-slate-700">
+              <span className="text-slate-500">関連教材：</span>
               <AffiliateAd id="sapuri-text" className="mx-1" hideLabel />
-              （月額2,178円・無料体験あり）が定番です。実技教科の動画講座も豊富。
-            </p>
-            <p className="mt-2 text-sm leading-relaxed text-slate-700">
-              より本格的に難関校を目指す人には、
+              （月額2,178円）／
               <AffiliateAd id="zkai-text-middle" className="mx-1" hideLabel />
-              （PR・テキスト＋添削で内申＋偏差値の両方を伸ばす定番）もおすすめ。
+              （PR）が内申点アップの定番。
             </p>
           </div>
 
@@ -323,7 +319,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         {/* 記事末尾の関連サービス広告 */}
         <div className="mt-10 rounded-2xl border border-slate-200 bg-white px-6 py-6 text-center shadow-sm">
           <div className="mb-2 text-sm font-bold text-slate-700">
-            📱 記事を読んだあなたへ
+            記事を読んだあなたへ
           </div>
           <div className="mb-4 text-xs text-slate-500">
             内申点を上げる第一歩は、毎日の学習習慣から。月額2,178円のオンライン学習サービス。

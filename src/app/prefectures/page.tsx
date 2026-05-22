@@ -14,6 +14,7 @@ import {
 
 import { PREFECTURES, REGIONS } from '@/lib/prefectures';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
+import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 
 export const metadata = {
   title: '都道府県別の内申点計算ツール一覧【2026年最新】全国47都道府県対応',
@@ -134,8 +135,27 @@ export default function PrefecturesPage() {
             })}
           </div>
 
+          {/* 広告セクション */}
+          <div className="mt-16 rounded-3xl border border-slate-200 bg-white px-6 py-8 shadow-sm text-center">
+            <div className="text-base font-bold text-slate-800 mb-1">
+              47都道府県すべてに対応する通信教育
+            </div>
+            <div className="text-xs text-slate-500 mb-5 leading-relaxed max-w-xl mx-auto">
+              地域差のない高品質な学習教材で、内申点アップと志望校合格を両立。<AffiliateAd id="zkai-text-middle" hideLabel />（PR）は全国の中学生に支持されています。
+            </div>
+            <div className="hidden md:block">
+              <AffiliateAd id="zkai-banner" />
+            </div>
+            <div className="md:hidden">
+              <AffiliateAd id="sapuri-banner-300" />
+            </div>
+            <div className="mt-4 text-xs">
+              無料の<AffiliateAd id="zkai-text-request" className="mx-1" hideLabel />（PR）で詳細を確認
+            </div>
+          </div>
+
           {/* Bottom Info */}
-          <div className="mt-20 rounded-3xl bg-slate-900 p-8 text-white shadow-2xl md:p-12">
+          <div className="mt-12 rounded-3xl bg-slate-900 p-8 text-white shadow-2xl md:p-12">
             <div className="grid gap-12 md:grid-cols-2 md:items-center">
               <div>
                 <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/20 text-blue-400 mb-6">

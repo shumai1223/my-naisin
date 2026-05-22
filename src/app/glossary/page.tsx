@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { BookOpen, ChevronRight, Home, Search } from 'lucide-react';
 import * as React from 'react';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
+import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 
 interface GlossaryLink {
   label: string;
@@ -304,6 +305,22 @@ export default function GlossaryPage() {
             </button>
           </div>
         )}
+
+        {/* アフィリエイト広告 */}
+        <section className="mt-10 rounded-2xl border border-slate-200 bg-white px-6 py-6 text-center shadow-sm">
+          <div className="text-sm font-bold text-slate-700 mb-1">
+            用語を理解したら、実践へ
+          </div>
+          <div className="text-xs text-slate-500 mb-4 leading-relaxed">
+            内申点アップに直結する学習なら<AffiliateAd id="zkai-text-middle" hideLabel />（PR）。テキスト＋添削で得点力を底上げ。
+          </div>
+          <div className="hidden md:block">
+            <AffiliateAd id="zkai-banner" />
+          </div>
+          <div className="md:hidden">
+            <AffiliateAd id="sapuri-banner-300" />
+          </div>
+        </section>
 
         {/* 関連リンク */}
         <section className="mt-10 rounded-2xl border border-slate-200 bg-slate-50 p-6">

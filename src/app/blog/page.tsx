@@ -4,6 +4,7 @@ import { BookOpen, Sparkles, TrendingUp, ArrowRight } from 'lucide-react';
 import { getAllPosts } from '@/lib/blog-data';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { BlogListClient, type BlogListItem } from '@/components/Blog/BlogListClient';
+import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 
 export const metadata = {
   title: '高校受験・内申点対策コラム【2026年最新】成績アップの秘訣を公開',
@@ -82,6 +83,23 @@ export default function BlogPage() {
 
         <div className="mx-auto max-w-5xl px-4">
           <BlogListClient posts={listItems} />
+
+          {/* 広告セクション */}
+          <div className="mb-12 rounded-3xl border border-slate-200 bg-white px-6 py-8 shadow-sm text-center">
+            <div className="text-base font-bold text-slate-800 mb-1">
+              記事と一緒に活用したい学習教材
+            </div>
+            <div className="text-xs text-slate-500 mb-5 leading-relaxed max-w-xl mx-auto">
+              内申点アップの基本は毎日の積み重ね。<AffiliateAd id="sapuri-text" hideLabel />（月額2,178円・無料体験あり）と
+              <AffiliateAd id="zkai-text-middle" className="ml-1" hideLabel />（PR）が中学生に最も使われている定番教材です。
+            </div>
+            <div className="hidden md:block">
+              <AffiliateAd id="zkai-banner" />
+            </div>
+            <div className="md:hidden">
+              <AffiliateAd id="sapuri-banner-300" />
+            </div>
+          </div>
 
           {/* Bottom CTA */}
           <div className="rounded-3xl bg-white p-8 sm:p-12 text-center shadow-sm ring-1 ring-gray-100 mb-24 max-w-4xl mx-auto">

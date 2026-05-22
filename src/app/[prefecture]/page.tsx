@@ -172,15 +172,22 @@ export default async function PrefecturePage({ params }: PrefecturePageProps) {
                 </Link>
               </section>
 
-              {/* 通信教育の紹介（Z会バナー） */}
+              {/* 通信教育の紹介（Z会バナー＋テキスト・モバイル対応） */}
               <section className="rounded-3xl border border-slate-200 bg-white px-6 py-6 shadow-sm text-center">
                 <div className="text-sm font-bold text-slate-700 mb-1">
-                  📚 {pref.name}の高校入試に向けて
+                  {pref.name}の高校入試に向けて
                 </div>
                 <div className="text-xs text-slate-500 mb-4">
                   <AffiliateAd id="zkai-text-advanced" hideLabel />（PR）— 内申点アップから難関校対策まで対応する通信教育。
                 </div>
-                <AffiliateAd id="zkai-banner" />
+                {/* Desktop */}
+                <div className="hidden md:block">
+                  <AffiliateAd id="zkai-banner" />
+                </div>
+                {/* Mobile */}
+                <div className="md:hidden">
+                  <AffiliateAd id="sapuri-banner-300" />
+                </div>
                 <div className="mt-3 text-xs">
                   まずは無料の<AffiliateAd id="zkai-text-request" className="mx-1" hideLabel />（PR）から
                 </div>
@@ -270,7 +277,7 @@ export default async function PrefecturePage({ params }: PrefecturePageProps) {
               {/* オンライン学習サービス紹介 */}
               <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm text-center">
                 <div className="text-xs font-bold text-slate-700 mb-2">
-                  💻 自宅で学べる個別指導
+                  自宅で学べる個別指導
                 </div>
                 <div className="text-[11px] text-slate-500 mb-3 leading-relaxed">
                   内申点を上げる<br />毎日の学習習慣づくりに

@@ -200,12 +200,25 @@ export function ResultSection({
           <Card className="overflow-hidden">
             <div className="px-6 py-5 text-center">
               <div className="mb-2 text-sm font-bold text-slate-700">
-                💡 内申点アップに通信教育という選択肢
+                内申点アップに通信教育という選択肢
               </div>
               <div className="mb-4 text-xs text-slate-500">
                 定期テスト対策に強い教材で、毎学期の評定を底上げ
               </div>
-              <AffiliateAd id="zkai-banner" />
+              {/* Desktop: 728x90バナー */}
+              <div className="hidden md:block">
+                <AffiliateAd id="zkai-banner" />
+              </div>
+              {/* Mobile: テキストCTAボックス */}
+              <div className="md:hidden rounded-xl bg-blue-50 border border-blue-100 p-4 text-left">
+                <div className="text-sm font-bold text-blue-900 mb-1">
+                  <AffiliateAd id="zkai-text-middle" hideLabel />
+                </div>
+                <div className="text-xs text-blue-700 mb-3 leading-relaxed">
+                  難関校対策にも対応。テキスト＋添削で内申＋偏差値を伸ばす定番教材。
+                </div>
+                <AffiliateAd id="zkai-text-advanced" hideLabel />
+              </div>
               <div className="mt-3 text-xs">
                 無料の<AffiliateAd id="zkai-text-request" className="mx-1" hideLabel />（PR）から始められます
               </div>
@@ -415,7 +428,7 @@ export function ResultSection({
           <Card className="overflow-hidden">
             <div className="px-6 py-6 text-center">
               <div className="mb-2 text-sm font-bold text-slate-700">
-                📱 月額2,178円で全教科見放題
+                月額2,178円で全教科見放題
               </div>
               <div className="mb-4 text-xs text-slate-500">
                 スマホ・タブレットで学べる定番のオンライン学習サービス

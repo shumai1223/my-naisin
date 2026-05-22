@@ -9,6 +9,7 @@ import { Suspense } from 'react';
 
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
+import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 
 const ReverseCalculator = nextDynamic(
   () => import('@/components/Calculator/ReverseCalculator').then((mod) => mod.ReverseCalculator),
@@ -200,6 +201,25 @@ function ReversePageContent() {
               <ReverseCalculator
                 onBack={() => router.push('/')}
               />
+
+              {/* 計算後のZ会CTA - 志望校が決まった人向け */}
+              <section className="mt-8 rounded-2xl border border-blue-200 bg-gradient-to-br from-blue-50 to-indigo-50 px-6 py-6 text-center shadow-sm">
+                <div className="text-sm font-bold text-slate-800 mb-1">
+                  必要な得点が分かったあなたへ
+                </div>
+                <div className="text-xs text-slate-600 mb-4 leading-relaxed">
+                  目標点まであと一歩。<AffiliateAd id="zkai-text-advanced" hideLabel />（PR）なら、添削指導で「本当の得点力」が身につきます。
+                </div>
+                <div className="hidden md:block">
+                  <AffiliateAd id="zkai-banner" />
+                </div>
+                <div className="md:hidden">
+                  <AffiliateAd id="sapuri-banner-300" />
+                </div>
+                <div className="mt-3 text-xs">
+                  無料の<AffiliateAd id="zkai-text-request" className="mx-1" hideLabel />（PR）で詳細をチェック
+                </div>
+              </section>
 
               {/* 関連リンク */}
               <section className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-6">

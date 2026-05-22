@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Calculator, BookOpen, Target, TrendingUp, ArrowRight, CheckCircle } from 'lucide-react';
 import Link from 'next/link';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
+import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 
 export default function ToolsPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
@@ -146,6 +147,22 @@ export default function ToolsPage() {
                   </div>
                 );
               })}
+            </div>
+          </section>
+
+          {/* アフィリエイト広告 */}
+          <section className="mb-12 rounded-2xl border border-slate-200 bg-white px-6 py-6 text-center shadow-sm">
+            <div className="text-sm font-bold text-slate-700 mb-1">
+              ツールを使ったあとの「次の一歩」
+            </div>
+            <div className="text-xs text-slate-500 mb-4 leading-relaxed">
+              現状把握ができたら、実際の学習へ。<AffiliateAd id="sapuri-text" hideLabel />（月額2,178円・無料体験あり）でスマホ学習を始める人が増えています。
+            </div>
+            <div className="hidden md:block">
+              <AffiliateAd id="sapuri-banner-468" />
+            </div>
+            <div className="md:hidden">
+              <AffiliateAd id="sapuri-banner-300" />
             </div>
           </section>
 

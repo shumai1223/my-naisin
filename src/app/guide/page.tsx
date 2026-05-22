@@ -8,6 +8,7 @@ import { PREFECTURES } from '@/lib/prefectures';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
+import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 
 const REGIONS = [
   { name: '北海道・東北', codes: ['hokkaido', 'aomori', 'iwate', 'miyagi', 'akita', 'yamagata', 'fukushima'] },
@@ -181,6 +182,22 @@ export default function GuidePage() {
                   </div>
                 </div>
               )}
+
+              {/* アフィリエイト広告 */}
+              <div className="mt-6 rounded-xl border border-slate-200 bg-white p-5 text-center">
+                <div className="text-sm font-bold text-slate-700 mb-1">
+                  制度を学んだ次は、点数アップへ
+                </div>
+                <div className="text-xs text-slate-500 mb-4">
+                  内申点を効率よく上げるには<AffiliateAd id="zkai-text-middle" hideLabel />（PR）が定番
+                </div>
+                <div className="hidden md:block">
+                  <AffiliateAd id="sapuri-banner-468" />
+                </div>
+                <div className="md:hidden">
+                  <AffiliateAd id="sapuri-banner-300" />
+                </div>
+              </div>
 
               <div className="mt-6 rounded-xl border border-emerald-200 bg-gradient-to-br from-emerald-50 to-teal-50 p-4">
                 <h3 className="mb-2 text-base font-bold text-emerald-800">📌 ポイント</h3>
