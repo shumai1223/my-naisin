@@ -209,7 +209,7 @@ export default async function PrefecturePage({ params }: PrefecturePageProps) {
                   <AffiliateAd id="sapuri-banner-300" />
                 </div>
                 <div className="mt-3 text-xs">
-                  まずは無料の<AffiliateAd id="zkai-text-request" className="mx-1" hideLabel />（PR）から
+                  まずは<AffiliateAd id="zkai-text-request" className="mx-1" hideLabel />（PR）から
                 </div>
               </section>
 

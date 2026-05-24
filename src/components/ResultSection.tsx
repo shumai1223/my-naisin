@@ -193,12 +193,9 @@ export function ResultSection({
           aria-labelledby="tab-key"
           className="space-y-4"
         >
-          <RankCard result={result} />
-          <PointValueCard scores={scores} prefectureCode={prefectureCode} />
-          <CalculationBasis prefectureCode={prefectureCode} total={result.total} max={result.max} />
-
+          {/* 計算結果直後の最高エンゲージ位置：Z会CTA（モバイルは大きめタップ領域） */}
           <Card className="overflow-hidden">
-            <div className="px-6 py-5 text-center">
+            <div className="px-5 py-5 text-center md:px-6">
               <div className="mb-2 text-sm font-bold text-slate-700">
                 内申点アップに通信教育という選択肢
               </div>
@@ -209,21 +206,32 @@ export function ResultSection({
               <div className="hidden md:block">
                 <AffiliateAd id="zkai-banner" />
               </div>
-              {/* Mobile: テキストCTAボックス */}
-              <div className="md:hidden rounded-xl bg-blue-50 border border-blue-100 p-4 text-left">
-                <div className="text-sm font-bold text-blue-900 mb-1">
-                  <AffiliateAd id="zkai-text-middle" hideLabel />
+              {/* Mobile: ボタン化したCTA（タップしやすい44px以上） */}
+              <div className="md:hidden">
+                <div className="rounded-xl bg-blue-50 border border-blue-100 p-4 text-left">
+                  <div className="mb-2 text-sm font-bold text-blue-900">
+                    中学生のためのＺ会の通信教育
+                  </div>
+                  <div className="mb-3 text-xs text-blue-700 leading-relaxed">
+                    難関校対策にも対応。テキスト＋添削で内申＋偏差値を伸ばす定番教材。
+                  </div>
+                  <AffiliateAd
+                    id="zkai-text-request"
+                    hideLabel
+                    linkClassName="block w-full rounded-xl bg-blue-600 px-5 py-3.5 text-center text-base font-bold text-white shadow-md shadow-blue-500/30 active:bg-blue-700"
+                  />
+                  <div className="mt-2 text-center text-[10px] text-slate-400">[PR]</div>
                 </div>
-                <div className="text-xs text-blue-700 mb-3 leading-relaxed">
-                  難関校対策にも対応。テキスト＋添削で内申＋偏差値を伸ばす定番教材。
-                </div>
-                <AffiliateAd id="zkai-text-advanced" hideLabel />
               </div>
-              <div className="mt-3 text-xs">
-                無料の<AffiliateAd id="zkai-text-request" className="mx-1" hideLabel />（PR）から始められます
+              <div className="mt-3 hidden text-xs md:block">
+                <AffiliateAd id="zkai-text-request" className="mx-1" hideLabel />（PR）から始められます
               </div>
             </div>
           </Card>
+
+          <RankCard result={result} />
+          <PointValueCard scores={scores} prefectureCode={prefectureCode} />
+          <CalculationBasis prefectureCode={prefectureCode} total={result.total} max={result.max} />
 
           {prefectureCode === 'kanagawa' && (
             <Card className="overflow-hidden">

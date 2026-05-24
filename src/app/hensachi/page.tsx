@@ -353,7 +353,7 @@ export default function HensachiPage() {
               <AffiliateAd id="sapuri-banner-300" />
             </div>
             <div className="mt-3 text-xs">
-              無料の<AffiliateAd id="zkai-text-request" className="mx-1" hideLabel />（PR）で詳細を確認
+              <AffiliateAd id="zkai-text-request" className="mx-1" hideLabel />（PR）で詳細を確認
             </div>
           </section>
 

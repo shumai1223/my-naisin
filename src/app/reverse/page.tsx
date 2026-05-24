@@ -217,7 +217,7 @@ function ReversePageContent() {
                   <AffiliateAd id="sapuri-banner-300" />
                 </div>
                 <div className="mt-3 text-xs">
-                  無料の<AffiliateAd id="zkai-text-request" className="mx-1" hideLabel />（PR）で詳細をチェック
+                  <AffiliateAd id="zkai-text-request" className="mx-1" hideLabel />（PR）で詳細をチェック
                 </div>
               </section>
 

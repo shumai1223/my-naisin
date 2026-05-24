@@ -62,7 +62,7 @@ export const AFFILIATES: Record<AffiliateId, AffiliateConfig> = {
     type: 'text',
     name: 'Z会 資料請求',
     href: 'https://px.a8.net/svt/ejp?a8mat=4B3SN7+9TNI42+E0Q+CUQYA',
-    text: '資料請求はこちら',
+    text: '無料で資料をもらう',
     trackingPixel: 'https://www15.a8.net/0.gif?a8mat=4B3SN7+9TNI42+E0Q+CUQYA',
   },
   'shoin-banner': {

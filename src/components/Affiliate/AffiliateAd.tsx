@@ -7,9 +7,11 @@ interface AffiliateAdProps {
   centered?: boolean;
   /** PR表記を非表示にする（フッター近くなどで重複する場合のみ） */
   hideLabel?: boolean;
+  /** textタイプのアンカー要素に直接付与するclass。指定するとデフォルトのスタイルを置き換える（ボタン化したいときに使う） */
+  linkClassName?: string;
 }
 
-export function AffiliateAd({ id, className = '', centered = true, hideLabel = false }: AffiliateAdProps) {
+export function AffiliateAd({ id, className = '', centered = true, hideLabel = false, linkClassName }: AffiliateAdProps) {
   const ad = AFFILIATES[id];
 
   const label = !hideLabel && (
@@ -35,7 +37,7 @@ export function AffiliateAd({ id, className = '', centered = true, hideLabel = f
           href={ad.href}
           rel="nofollow sponsored noopener"
           target="_blank"
-          className="font-bold text-blue-600 underline decoration-blue-300 underline-offset-2 hover:text-blue-700 hover:decoration-blue-500"
+          className={linkClassName ?? 'font-bold text-blue-600 underline decoration-blue-300 underline-offset-2 hover:text-blue-700 hover:decoration-blue-500'}
         >
           {ad.text}
         </a>
