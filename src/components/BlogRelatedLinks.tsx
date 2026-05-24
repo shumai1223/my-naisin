@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Calculator, Target, BookOpen, ChevronRight, MapPin } from 'lucide-react';
+import { Calculator, Target, BookOpen, ChevronRight, MapPin, TrendingUp } from 'lucide-react';
 import { PREFECTURES, REGIONS } from '@/lib/prefectures';
 
 interface BlogRelatedLinksProps {
@@ -69,7 +69,37 @@ export function BlogRelatedLinks({
           </div>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2 pt-4 border-t border-slate-100">
+        <div className="grid gap-3 sm:grid-cols-2 pt-4 border-t border-slate-100">
+          {/* 偏差値計算ツール */}
+          <Link
+            href="/hensachi"
+            className="flex items-center gap-3 rounded-xl border border-purple-200 bg-purple-50 px-4 py-3 text-sm font-bold text-purple-700 transition-colors hover:border-purple-300 hover:bg-purple-100"
+          >
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white text-purple-600 shadow-sm">
+              <TrendingUp className="h-4 w-4" />
+            </div>
+            <div className="flex-1">
+              <div className="text-[10px] font-medium text-purple-600/80 leading-none mb-1">HENSACHI</div>
+              偏差値を5教科で計算
+            </div>
+            <ChevronRight className="h-4 w-4" />
+          </Link>
+
+          {/* 評定平均ツール */}
+          <Link
+            href="/hyotei-heikin"
+            className="flex items-center gap-3 rounded-xl border border-teal-200 bg-teal-50 px-4 py-3 text-sm font-bold text-teal-700 transition-colors hover:border-teal-300 hover:bg-teal-100"
+          >
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white text-teal-600 shadow-sm">
+              <Calculator className="h-4 w-4" />
+            </div>
+            <div className="flex-1">
+              <div className="text-[10px] font-medium text-teal-600/80 leading-none mb-1">HYOTEI HEIKIN</div>
+              評定平均を自動計算
+            </div>
+            <ChevronRight className="h-4 w-4" />
+          </Link>
+
           {/* 逆算ツール */}
           {showReverseTool && (
             <Link

@@ -170,6 +170,26 @@ export default async function PrefecturePage({ params }: PrefecturePageProps) {
                     シミュレーションする <ArrowRight className="ml-1 h-4 w-4" />
                   </div>
                 </Link>
+                <Link href="/hensachi" className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:border-purple-300 hover:shadow-md">
+                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-purple-100 text-purple-600 transition-colors group-hover:bg-purple-600 group-hover:text-white">
+                    <TrendingUp className="h-6 w-6" />
+                  </div>
+                  <h3 className="text-xl font-bold text-slate-800">偏差値計算ツール</h3>
+                  <p className="mt-2 text-sm text-slate-500">5教科の点数から偏差値を瞬時に算出。志望校レベルと比較できます。</p>
+                  <div className="mt-4 flex items-center font-bold text-purple-600 group-hover:underline">
+                    偏差値を計算する <ArrowRight className="ml-1 h-4 w-4" />
+                  </div>
+                </Link>
+                <Link href="/hyotei-heikin" className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:border-teal-300 hover:shadow-md">
+                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-teal-100 text-teal-600 transition-colors group-hover:bg-teal-600 group-hover:text-white">
+                    <Calculator className="h-6 w-6" />
+                  </div>
+                  <h3 className="text-xl font-bold text-slate-800">評定平均 自動計算</h3>
+                  <p className="mt-2 text-sm text-slate-500">通知表の評定から平均値と素内申を同時表示。推薦入試の確認に。</p>
+                  <div className="mt-4 flex items-center font-bold text-teal-600 group-hover:underline">
+                    評定平均を計算する <ArrowRight className="ml-1 h-4 w-4" />
+                  </div>
+                </Link>
               </section>
 
               {/* 通信教育の紹介（Z会バナー＋テキスト・モバイル対応） */}

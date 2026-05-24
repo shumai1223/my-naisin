@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { Calculator, Target, BookOpen, ChevronRight } from 'lucide-react';
+import { Calculator, Target, BookOpen, ChevronRight, TrendingUp } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export type NavigationMode = 'select' | 'calculate' | 'reverse' | 'learn';
@@ -131,7 +131,49 @@ export function HeroNavigation({ onModeChange, currentMode }: HeroNavigationProp
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.15, duration: 0.3 }}
+            >
+              <Link
+                href="/hensachi"
+                className="group flex h-full flex-col gap-1 rounded-xl border border-purple-200 bg-gradient-to-br from-purple-50 via-indigo-50/50 to-white p-4 text-left shadow-sm transition-all duration-300 hover:border-purple-300 hover:shadow-md"
+              >
+                <div className="flex items-center gap-2">
+                  <TrendingUp className="h-5 w-5 text-purple-600" />
+                  <span className="text-base font-bold text-slate-800">偏差値を計算</span>
+                  <ChevronRight className="ml-auto h-4 w-4 text-purple-500 transition-transform group-hover:translate-x-1" />
+                </div>
+                <p className="text-xs text-slate-600">5教科の点数から偏差値を瞬時に算出</p>
+                <p className="mt-1 text-xs text-purple-700">
+                  例：「模試の点数から偏差値を知りたい」→ こちら
+                </p>
+              </Link>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.3 }}
+            >
+              <Link
+                href="/hyotei-heikin"
+                className="group flex h-full flex-col gap-1 rounded-xl border border-teal-200 bg-gradient-to-br from-teal-50 via-cyan-50/50 to-white p-4 text-left shadow-sm transition-all duration-300 hover:border-teal-300 hover:shadow-md"
+              >
+                <div className="flex items-center gap-2">
+                  <Calculator className="h-5 w-5 text-teal-600" />
+                  <span className="text-base font-bold text-slate-800">評定平均を自動計算</span>
+                  <ChevronRight className="ml-auto h-4 w-4 text-teal-500 transition-transform group-hover:translate-x-1" />
+                </div>
+                <p className="text-xs text-slate-600">通知表の評定から平均値・素内申を算出</p>
+                <p className="mt-1 text-xs text-teal-700">
+                  例：「推薦入試の評定平均を確認したい」→ こちら
+                </p>
+              </Link>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.25, duration: 0.3 }}
             >
               <Link
                 href="/guide"
