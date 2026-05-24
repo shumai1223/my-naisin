@@ -24,6 +24,15 @@ export const metadata = {
   },
 };
 
+const REGION_DESCRIPTIONS: Record<string, string> = {
+  関東: '東京・神奈川・千葉・埼玉では換算内申が中心。東京は実技4教科を2倍に加重、神奈川はA値・S値が独特。茨城・栃木・群馬は素内申に近い扱い。',
+  近畿: '大阪は3年間の評定をすべて使う独特の制度で内申比率も高い。兵庫は5教科と実技の傾斜が控えめ、京都・奈良・滋賀・和歌山は推薦制度が手厚いのが特徴。',
+  '九州・沖縄': '福岡は3年間の評定を均等配分、熊本・鹿児島は実技を重視。長崎・佐賀・大分・宮崎・沖縄は推薦入試と一般入試で内申の扱いが大きく異なる。',
+  '中部': '愛知は内申と当日点の比率が学校ごとに細かく設定される。静岡・新潟・長野は実技教科の倍率に注意。',
+  '北海道・東北': '北海道は学習点300点満点という独特の制度。東北各県は3年間累計の評定を使うことが多く、副教科の扱いに差がある。',
+  '中国・四国': '広島・岡山・愛媛は推薦と一般で内申基準が大きく異なる。山口・徳島・香川・高知は素内申に近い扱い。',
+};
+
 export default function PrefecturesPage() {
   return (
     <>
@@ -76,9 +85,10 @@ export default function PrefecturesPage() {
           <div className="space-y-12">
             {REGIONS.map(region => {
               const prefsInRegion = PREFECTURES.filter(p => p.region === region);
+              const regionDescription = REGION_DESCRIPTIONS[region];
               return (
                 <section key={region} id={`region-${region}`} className="scroll-mt-20">
-                  <div className="flex items-center gap-3 mb-6">
+                  <div className="flex items-center gap-3 mb-3">
                     <h2 className="text-xl font-bold text-slate-800 border-l-4 border-blue-500 pl-3">
                       {region}
                     </h2>
@@ -86,6 +96,11 @@ export default function PrefecturesPage() {
                       {prefsInRegion.length} 都道府県
                     </span>
                   </div>
+                  {regionDescription && (
+                    <p className="mb-6 text-sm leading-relaxed text-slate-600">
+                      {regionDescription}
+                    </p>
+                  )}
                   
                   <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                     {prefsInRegion.map(pref => (

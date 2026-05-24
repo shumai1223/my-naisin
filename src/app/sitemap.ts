@@ -12,6 +12,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages = [
     { url: '', priority: 1.0, changeFrequency: 'always' },
     { url: '/reverse', priority: 1.0, changeFrequency: 'always' },
+    { url: '/hensachi', priority: 1.0, changeFrequency: 'weekly' },
+    { url: '/hyotei-heikin', priority: 1.0, changeFrequency: 'weekly' },
     { url: '/tools', priority: 0.9, changeFrequency: 'daily' },
     { url: '/prefectures', priority: 0.9, changeFrequency: 'daily' },
     { url: '/comparison', priority: 0.8, changeFrequency: 'weekly' },

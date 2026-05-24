@@ -20,6 +20,24 @@ export default function ToolsPage() {
       color: 'blue'
     },
     {
+      category: 'calculation',
+      title: '偏差値計算ツール',
+      description: '5教科の点数・平均点から偏差値を瞬時に算出',
+      features: ['5教科対応', '平均点入力', '簡易/詳細モード', '高校レベル目安'],
+      href: '/hensachi',
+      icon: TrendingUp,
+      color: 'purple'
+    },
+    {
+      category: 'calculation',
+      title: '評定平均 自動計算',
+      description: '通知表の評定から平均値・素内申を同時算出',
+      features: ['9教科対応', 'クリック入力', '評定平均と内申点を同時表示', '推薦入試対応'],
+      href: '/hyotei-heikin',
+      icon: Calculator,
+      color: 'green'
+    },
+    {
       category: 'reverse',
       title: '逆算ツール',
       description: '志望校に合格するために必要な当日点を算出',

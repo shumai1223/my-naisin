@@ -41,6 +41,16 @@ export function Footer() {
             <div className="text-xs font-bold uppercase tracking-wider text-slate-400">計算ツール</div>
             <ul className="mt-3 space-y-2 text-xs text-slate-600">
               <li>
+                <Link href="/hensachi" className="hover:text-blue-600 flex items-center gap-1">
+                  偏差値計算（5教科） <ChevronRight className="h-3 w-3 opacity-30" />
+                </Link>
+              </li>
+              <li>
+                <Link href="/hyotei-heikin" className="hover:text-blue-600 flex items-center gap-1">
+                  評定平均 自動計算 <ChevronRight className="h-3 w-3 opacity-30" />
+                </Link>
+              </li>
+              <li>
                 <Link href="/tokyo/naishin" className="hover:text-blue-600 flex items-center gap-1">
                   東京都 内申計算 <ChevronRight className="h-3 w-3 opacity-30" />
                 </Link>
@@ -53,11 +63,6 @@ export function Footer() {
               <li>
                 <Link href="/osaka/naishin" className="hover:text-blue-600 flex items-center gap-1">
                   大阪府 内申計算 <ChevronRight className="h-3 w-3 opacity-30" />
-                </Link>
-              </li>
-              <li>
-                <Link href="/aichi/naishin" className="hover:text-blue-600 flex items-center gap-1">
-                  愛知県 内申計算 <ChevronRight className="h-3 w-3 opacity-30" />
                 </Link>
               </li>
               <li>
