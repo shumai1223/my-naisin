@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   description:
     'My Naishinの内申点計算精度を検証。都道府県別のテストケース結果、公式資料との照合、品質保証プロセスを公開しています。',
   robots: {
-    index: false,
+    index: true,
     follow: true,
   },
   openGraph: {

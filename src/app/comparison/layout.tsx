@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   description:
     '47都道府県の内申点計算方法を比較。満点・実技倍率・対象学年・当日点比率の違いを一目で確認。引っ越しや受験先の検討に便利。',
   robots: {
-    index: false,
+    index: true,
     follow: true,
   },
   openGraph: {

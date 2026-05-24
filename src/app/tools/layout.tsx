@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   description:
     '内申点計算ツール、志望校からの逆算ツール、都道府県別比較ツールなど、高校受験に役立つ無料ツールを一覧で紹介。47都道府県対応。',
   robots: {
-    index: false,
+    index: true,
     follow: true,
   },
   openGraph: {
