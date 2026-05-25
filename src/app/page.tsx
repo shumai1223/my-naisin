@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { PREFECTURES, REGIONS, getPrefecturesByRegion } from '@/lib/prefectures';
 import { getAllPosts } from '@/lib/blog-data';
 import HomeClient from './HomeClient';
+import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { Calculator, BookOpen, MapPin, Sparkles, ShieldCheck, ChevronRight, Calendar, Clock, ArrowRight, Zap } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -75,6 +76,14 @@ export default function Page() {
               </Link>
             ))}
           </div>
+
+          {/* PR ストリップ：コラム読了後のフック */}
+          <div className="mt-6 rounded-2xl border border-blue-100 bg-blue-50/60 px-5 py-4 text-center">
+            <div className="text-xs text-slate-700">
+              <AffiliateAd id="zkai-text-middle" hideLabel />（PR）の通信教育で内申＋偏差値を伸ばす。まずは
+              <AffiliateAd id="zkai-text-request" hideLabel />（PR）で詳細を確認。
+            </div>
+          </div>
         </div>
       </section>
 
@@ -123,6 +132,23 @@ export default function Page() {
                   </div>
                 ))}
               </div>
+
+              {/* 47都道府県リンク直下：志望校選びの次の一手 */}
+              <div className="mt-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                <div className="grid items-center gap-4 md:grid-cols-[1fr_auto]">
+                  <div>
+                    <div className="text-sm font-bold text-slate-800">
+                      地域の制度を把握したら、学力対策を進める
+                    </div>
+                    <p className="mt-1 text-xs text-slate-600 leading-relaxed">
+                      スタディサプリ中学講座なら全教科のプロ講師の映像授業を月額料金で受けられます。
+                    </p>
+                  </div>
+                  <div className="flex justify-center md:justify-end">
+                    <AffiliateAd id="sapuri-banner-300" />
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div className="rounded-3xl bg-gradient-to-br from-blue-600 to-indigo-700 p-8 text-white">
@@ -161,6 +187,19 @@ export default function Page() {
                 <Link href="/quality" className="text-sm font-bold text-amber-900 hover:underline flex items-center gap-1">
                   情報の信頼性への取り組み <ChevronRight className="h-4 w-4" />
                 </Link>
+              </div>
+            </div>
+
+            {/* サイドバーPR：個別指導の選択肢 */}
+            <div className="rounded-2xl border border-emerald-100 bg-emerald-50/50 p-6">
+              <h3 className="font-bold text-emerald-900 mb-3 text-sm">
+                自宅で個別指導を受けるなら
+              </h3>
+              <p className="text-xs text-emerald-800 leading-relaxed mb-4">
+                ネット松陰塾は自宅でマンツーマンの個別指導を受けられる自立学習スタイル。内申点の底上げに。
+              </p>
+              <div className="flex justify-start">
+                <AffiliateAd id="shoin-banner" centered={false} />
               </div>
             </div>
 

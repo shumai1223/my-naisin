@@ -5,6 +5,7 @@ import { ArrowUpDown, MapPin, TrendingUp, Info, CheckCircle } from 'lucide-react
 import Link from 'next/link';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { PREFECTURES, getPrefectureByCode } from '@/lib/prefectures';
+import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 
 export default function ComparisonPage() {
   const [selectedPrefectures, setSelectedPrefectures] = useState<string[]>([]);
@@ -93,6 +94,24 @@ export default function ComparisonPage() {
               </div>
             )}
           </section>
+
+          {/* 高インテント志望校層への PR: 比較着手時に表示 */}
+          {selectedPrefectureData.length >= 2 && (
+            <section className="mb-6 rounded-2xl border border-indigo-100 bg-gradient-to-br from-indigo-50 to-blue-50 p-5 shadow-sm">
+              <div className="text-center">
+                <div className="mb-2 text-sm font-bold text-slate-800">
+                  進学先の選択肢を比べているなら、いまの実力チェックも
+                </div>
+                <div className="mb-3 text-xs text-slate-600">
+                  複数県の制度を比較するレベルの志望校検討なら、難関校受験対策に強い通信教育で実力を伸ばす選択肢があります。
+                </div>
+                <div className="text-sm">
+                  <AffiliateAd id="zkai-text-advanced" hideLabel />（PR）／
+                  <AffiliateAd id="zkai-text-request" hideLabel />（PR）
+                </div>
+              </div>
+            </section>
+          )}
 
           {/* 比較結果 */}
           {selectedPrefectureData.length >= 2 && (
@@ -255,6 +274,24 @@ export default function ComparisonPage() {
               </ol>
             </section>
           )}
+
+          {/* ページ末尾の広告：教材・個別指導の選択肢 */}
+          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <h3 className="mb-4 text-base font-bold text-slate-800">受験準備の学習リソース</h3>
+            <div className="grid items-center gap-6 md:grid-cols-[1fr_auto]">
+              <div>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  地域ごとの内申制度の違いを把握したら、次は実際の学習に進みましょう。映像授業のスタディサプリは全教科の単元別講義で苦手を集中対策、ネット松陰塾は自宅でマンツーマンの個別指導が受けられます。
+                </p>
+                <div className="mt-3 flex items-center gap-3">
+                  <AffiliateAd id="shoin-banner" centered={false} />
+                </div>
+              </div>
+              <div className="flex justify-center md:justify-end">
+                <AffiliateAd id="sapuri-banner-468" />
+              </div>
+            </div>
+          </section>
         </div>
       </div>
     </>

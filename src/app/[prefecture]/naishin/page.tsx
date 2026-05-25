@@ -24,6 +24,7 @@ import { BlogRelatedArticles } from '@/components/BlogRelatedArticles';
 import InteractiveCalculator from '@/components/Calculator/InteractiveCalculatorWrapper';
 import { HighSchoolBorderlineTable } from '@/components/HighSchoolBorderlineTable';
 import { TrustInfo } from '@/components/TrustInfo';
+import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 
 interface PageProps {
   params: Promise<{ prefecture: string }>;
@@ -167,8 +168,58 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
               />
             </section>
 
+            {/* 計算後・最高エンゲージ位置の Z会 CTA */}
+            <section className="rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-50 to-indigo-50 p-6 shadow-sm">
+              <div className="text-center">
+                <div className="mb-2 text-sm font-bold text-slate-700">
+                  内申点アップに通信教育という選択肢
+                </div>
+                <div className="mb-4 text-xs text-slate-500">
+                  {prefecture.name}の高校入試に向けて、定期テスト対策と受験対策を両立
+                </div>
+                {/* Desktop: 728×90 */}
+                <div className="hidden md:block">
+                  <AffiliateAd id="zkai-banner" />
+                </div>
+                {/* Mobile: フルワイドCTAボタン */}
+                <div className="md:hidden">
+                  <div className="rounded-xl bg-white border border-blue-100 p-4 text-left">
+                    <div className="mb-2 text-sm font-bold text-blue-900">
+                      中学生のためのＺ会の通信教育
+                    </div>
+                    <div className="mb-3 text-xs text-blue-700 leading-relaxed">
+                      テキスト＋添削で内申＋偏差値を伸ばす定番教材。
+                    </div>
+                    <AffiliateAd
+                      id="zkai-text-request"
+                      hideLabel
+                      linkClassName="block w-full rounded-xl bg-blue-600 px-5 py-3.5 text-center text-base font-bold text-white shadow-md shadow-blue-500/30 active:bg-blue-700"
+                    />
+                    <div className="mt-2 text-center text-[10px] text-slate-400">[PR]</div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
             {/* 高校別ボーダーライン一覧 */}
             <HighSchoolBorderlineTable prefectureCode={prefectureCode} prefectureName={prefecture.name} />
+
+            {/* 志望校検討モードのユーザーへ：スタサプ */}
+            <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <div className="grid items-center gap-4 md:grid-cols-[1fr_auto]">
+                <div>
+                  <div className="text-sm font-bold text-slate-800">
+                    志望校レベルに合わせた学習を始める
+                  </div>
+                  <div className="mt-1 text-xs text-slate-500 leading-relaxed">
+                    {prefecture.name}の高校別ボーダーラインを見て志望校が見えてきたら、いまの学力との差を埋める準備を。スタディサプリ中学講座なら全教科のプロ講師の映像授業を月額料金で受けられます。
+                  </div>
+                </div>
+                <div className="flex justify-center md:justify-end">
+                  <AffiliateAd id="sapuri-banner-300" />
+                </div>
+              </div>
+            </section>
 
             {/* 都道府県別詳細解説（SSRでGooglebotに情報を与える） */}
             <section className="rounded-2xl border border-slate-200 bg-white p-6 md:p-8 shadow-sm">
@@ -301,7 +352,7 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
             {/* 回遊性アップ：関連ブログ・地域リンク */}
             <div className="grid gap-6 md:grid-cols-2">
               <BlogRelatedArticles prefectureCode={prefectureCode} limit={4} />
-              
+
               <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm flex flex-col">
                 <h3 className="mb-4 text-lg font-bold text-slate-800">近隣都道府県の計算ツール</h3>
                 <div className="grid grid-cols-2 gap-2 mt-auto">
@@ -321,6 +372,31 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
                 </div>
               </section>
             </div>
+
+            {/* 学習方法の提案：通信教育・個別指導の選択肢 */}
+            <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <h3 className="mb-4 text-base font-bold text-slate-800">学習方法を選ぶ</h3>
+              <div className="grid gap-4 md:grid-cols-2">
+                <div className="rounded-xl border border-blue-100 bg-blue-50/40 p-4">
+                  <div className="mb-2 text-sm font-bold text-blue-900">難関校を狙うなら</div>
+                  <p className="mb-3 text-xs text-blue-700 leading-relaxed">
+                    トップ校を志望する場合、内申点だけでなく当日点の実力も鍵。Z会の通信教育は難関校受験対策で実績ある教材です。
+                  </p>
+                  <div className="text-sm">
+                    <AffiliateAd id="zkai-text-advanced" hideLabel />（PR）
+                  </div>
+                </div>
+                <div className="rounded-xl border border-emerald-100 bg-emerald-50/40 p-4">
+                  <div className="mb-2 text-sm font-bold text-emerald-900">個別指導で内申を底上げ</div>
+                  <p className="mb-3 text-xs text-emerald-700 leading-relaxed">
+                    自宅でマンツーマンの個別指導を受けたいなら、ネット松陰塾の自立学習スタイルが選択肢になります。
+                  </p>
+                  <div className="flex justify-start">
+                    <AffiliateAd id="shoin-banner" centered={false} />
+                  </div>
+                </div>
+              </div>
+            </section>
 
             {/* 誤り報告フォーム */}
             <ErrorReportForm 

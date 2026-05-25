@@ -231,6 +231,26 @@ export function ResultSection({
 
           <RankCard result={result} />
           <PointValueCard scores={scores} prefectureCode={prefectureCode} />
+
+          {/* スコア解釈後の中間CTA：スタディサプリ */}
+          <Card className="overflow-hidden">
+            <div className="px-5 py-5 md:px-6">
+              <div className="grid items-center gap-4 md:grid-cols-[1fr_auto]">
+                <div>
+                  <div className="text-sm font-bold text-slate-800">
+                    定期テスト対策ならスタディサプリ
+                  </div>
+                  <div className="mt-1 text-xs text-slate-500 leading-relaxed">
+                    プロ講師の映像授業で全教科の単元別講義。月額料金で見放題。
+                  </div>
+                </div>
+                <div className="flex justify-center md:justify-end">
+                  <AffiliateAd id="sapuri-banner-300" />
+                </div>
+              </div>
+            </div>
+          </Card>
+
           <CalculationBasis prefectureCode={prefectureCode} total={result.total} max={result.max} />
 
           {prefectureCode === 'kanagawa' && (
@@ -359,6 +379,22 @@ export function ResultSection({
             currentMax={result.max}
             currentPrefecture={prefectureCode}
           />
+
+          {/* 詳細分析を開く高インテント層へ：Z会難関校 */}
+          <Card className="overflow-hidden">
+            <div className="px-5 py-5 md:px-6">
+              <div className="text-sm font-bold text-slate-800 mb-2">
+                難関校を狙うなら、当日点の実力も伸ばす
+              </div>
+              <div className="text-xs text-slate-500 leading-relaxed mb-3">
+                内申点を最大化したら、次は当日点。トップ校受験で実績ある通信教育の選択肢があります。
+              </div>
+              <div className="text-sm">
+                <AffiliateAd id="zkai-text-advanced" hideLabel />（PR）／
+                <AffiliateAd id="zkai-text-request" hideLabel />（PR）
+              </div>
+            </div>
+          </Card>
 
           <Card className="overflow-hidden">
             <div className="border-b border-slate-100/80 bg-gradient-to-r from-emerald-50/80 via-teal-50/60 to-green-50/80 px-6 py-5">
