@@ -28,6 +28,7 @@ import { ResultSection } from '@/components/ResultSection';
 import { ChangeLogSection } from '@/components/ChangeLogSection';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
+import Loader from '@/components/ui/Loader';
 import { HistoryPanel } from '@/components/HistoryPanel';
 import { BlogSection } from '@/components/BlogSection';
 import { NaishinGuideSection } from '@/components/NaishinGuideSection';
@@ -38,10 +39,10 @@ import { ThreeStepGuide } from '@/components/ThreeStepGuide';
 
 const SECTION_LOADER = (
   <div
-    className="flex h-32 animate-pulse items-center justify-center rounded-2xl border border-slate-200 bg-white text-sm text-slate-400"
+    className="flex h-32 items-center justify-center rounded-2xl border border-slate-200 bg-white"
     aria-busy="true"
   >
-    読み込み中...
+    <Loader variant="inline" message="セクションを準備しています..." />
   </div>
 );
 

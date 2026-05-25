@@ -7,6 +7,7 @@ import { BookOpen, ChevronRight, ExternalLink, FileText, RotateCcw, Share2, Spar
 
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
+import Loader from '@/components/ui/Loader';
 import { Switch } from '@/components/ui/Switch';
 import { Tabs, type TabItem } from '@/components/ui/Tabs';
 import { PrintButton } from '@/components/PrintButton';
@@ -20,10 +21,10 @@ import type { ResultData, SavedHistoryEntry, Scores } from '@/lib/types';
 
 const CARD_LOADER = (
   <div
-    className="flex h-28 animate-pulse items-center justify-center rounded-2xl border border-slate-200 bg-white text-xs text-slate-400"
+    className="flex h-28 items-center justify-center rounded-2xl border border-slate-200 bg-white"
     aria-busy="true"
   >
-    読み込み中...
+    <Loader variant="spinner" size="md" message="読み込み中..." />
   </div>
 );
 

@@ -10,6 +10,7 @@ import { Suspense } from 'react';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
+import Loader from '@/components/ui/Loader';
 
 const ReverseCalculator = nextDynamic(
   () => import('@/components/Calculator/ReverseCalculator').then((mod) => mod.ReverseCalculator),
@@ -279,7 +280,7 @@ function ReversePageContent() {
 
 export default function ReversePage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-slate-50 flex items-center justify-center">読み込み中...</div>}>
+    <Suspense fallback={<Loader variant="fullscreen" message="逆算ツールを準備しています..." />}>
       <ReversePageContent />
     </Suspense>
   );
