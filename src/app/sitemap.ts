@@ -5,21 +5,21 @@ import { PREFECTURES_WITH_GUIDE } from '@/lib/prefecture-guides';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://my-naishin.com';
-  // 最終更新日を固定の最新日付にするか、各データの更新日を反映させる
-  const lastModified = new Date('2026-05-08'); 
+  // ビルド時の日付を採用（再デプロイのたびに更新される）
+  const lastModified = new Date();
 
   // 1. 静的コアページ
   const staticPages = [
-    { url: '', priority: 1.0, changeFrequency: 'always' },
-    { url: '/reverse', priority: 1.0, changeFrequency: 'always' },
+    { url: '', priority: 1.0, changeFrequency: 'daily' },
+    { url: '/reverse', priority: 1.0, changeFrequency: 'weekly' },
     { url: '/hensachi', priority: 1.0, changeFrequency: 'weekly' },
     { url: '/hyotei-heikin', priority: 1.0, changeFrequency: 'weekly' },
-    { url: '/tools', priority: 0.9, changeFrequency: 'daily' },
-    { url: '/prefectures', priority: 0.9, changeFrequency: 'daily' },
+    { url: '/tools', priority: 0.9, changeFrequency: 'weekly' },
+    { url: '/prefectures', priority: 0.9, changeFrequency: 'weekly' },
     { url: '/comparison', priority: 0.8, changeFrequency: 'weekly' },
     { url: '/guide', priority: 0.8, changeFrequency: 'weekly' },
     { url: '/glossary', priority: 0.8, changeFrequency: 'weekly' },
-    { url: '/blog', priority: 0.9, changeFrequency: 'always' },
+    { url: '/blog', priority: 0.9, changeFrequency: 'daily' },
     { url: '/about', priority: 0.7, changeFrequency: 'monthly' },
     { url: '/about/editor-profile', priority: 0.7, changeFrequency: 'monthly' },
     { url: '/quality', priority: 0.7, changeFrequency: 'monthly' },

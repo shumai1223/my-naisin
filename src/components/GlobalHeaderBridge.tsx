@@ -1,15 +1,14 @@
 "use client";
 
+import type { ReactNode } from "react";
 import { usePathname } from "next/navigation";
 
-import { Header } from "@/components/Header";
-
-export function GlobalHeaderBridge() {
+export function GlobalHeaderBridge({ children }: { children: ReactNode }) {
   const pathname = usePathname();
 
   if (pathname === "/" || pathname.startsWith("/blog")) {
     return null;
   }
 
-  return <Header />;
+  return <>{children}</>;
 }

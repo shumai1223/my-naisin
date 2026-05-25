@@ -1,5 +1,3 @@
-'use client';
-
 import Link from 'next/link';
 import { Sparkles, Star, TrendingUp, Shield, Zap, Award, Clock, BookOpen } from 'lucide-react';
 

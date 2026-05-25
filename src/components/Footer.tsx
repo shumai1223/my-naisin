@@ -1,5 +1,3 @@
-'use client';
-
 import Link from 'next/link';
 import { Heart, FileText, Shield, Mail, AlertTriangle, Sparkles, BookOpen, User, Target, MapPin, ChevronRight } from 'lucide-react';
 

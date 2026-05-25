@@ -1,11 +1,13 @@
 import type { Metadata } from 'next';
 import { Noto_Sans_JP } from 'next/font/google';
+import Script from 'next/script';
 import type { ReactNode } from 'react';
 
 import './globals.css';
 
 import { CookieConsent } from '@/components/CookieConsent';
 import { GlobalHeaderBridge } from '@/components/GlobalHeaderBridge';
+import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 
 const notoSansJp = Noto_Sans_JP({
@@ -60,19 +62,19 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="ja" className={`h-full ${notoSansJp.variable}`}>
-      <head>
-        {/* AdSense script using standard tag to avoid data-nscript attribute issues */}
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7817682248719138"
-          crossOrigin="anonymous"
-        />
-      </head>
       <body className={`min-h-screen mesh-gradient text-slate-900 antialiased`}>
-        <GlobalHeaderBridge />
+        <GlobalHeaderBridge>
+          <Header />
+        </GlobalHeaderBridge>
         <main>{children}</main>
         <Footer />
         <CookieConsent />
+        <Script
+          id="adsbygoogle-init"
+          strategy="lazyOnload"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7817682248719138"
+          crossOrigin="anonymous"
+        />
       </body>
     </html>
   );
