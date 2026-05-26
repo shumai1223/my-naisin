@@ -14,6 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: '/reverse', priority: 1.0, changeFrequency: 'weekly' },
     { url: '/hensachi', priority: 1.0, changeFrequency: 'weekly' },
     { url: '/hyotei-heikin', priority: 1.0, changeFrequency: 'weekly' },
+    { url: '/tokyo/total-score', priority: 1.0, changeFrequency: 'weekly' },
     { url: '/tools', priority: 0.9, changeFrequency: 'weekly' },
     { url: '/prefectures', priority: 0.9, changeFrequency: 'weekly' },
     { url: '/comparison', priority: 0.8, changeFrequency: 'weekly' },

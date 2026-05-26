@@ -61,25 +61,6 @@ export function PrefectureMinimumContent({ prefectureCode }: PrefectureMinimumCo
 
   return (
     <>
-      {/* FAQ構造化データ */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": faq.map(f => ({
-              "@type": "Question",
-              "name": f.question,
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": f.answer
-              }
-            }))
-          })
-        }}
-      />
-      
       <div className="space-y-6">
       {/* 基本情報 */}
       <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">

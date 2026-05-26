@@ -42,6 +42,7 @@ import { post as toritsuNyushi2026KanzenGuide } from '@/lib/blog/posts/toritsu-n
 import { post as practicalSubjectsAll5Strategy2026Update } from '@/lib/blog/posts/practical-subjects-all-5-strategy-2026-update';
 import { post as whatIsNaishinten } from '@/lib/blog/posts/what-is-naishinten';
 import { post as summerVacationGoldenRatio } from '@/lib/blog/posts/summer-vacation-review-preview-golden-ratio';
+import { post as hensachiKoukouIchiran2026 } from '@/lib/blog/posts/hensachi-koukou-ichiran-2026';
 
 // Articles whose date should be refreshed (old 2025-05-01 articles)
 const FRESHEN_DATE = '2026-05-11';
@@ -63,6 +64,7 @@ function enrichPost(post: BlogPost): BlogPost {
 }
 
 const HAND_WRITTEN_POSTS: BlogPost[] = [
+  hensachiKoukouIchiran2026,
   summerVacationGoldenRatio,
   toritsuNyushi2026KanzenGuide,
   naishinSimulatorCompleteGuide2026,

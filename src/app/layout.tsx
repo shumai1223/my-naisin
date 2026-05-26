@@ -19,11 +19,11 @@ const notoSansJp = Noto_Sans_JP({
 export const metadata: Metadata = {
   metadataBase: new URL('https://my-naishin.com'),
   title: {
-    default: '内申点シミュレーター | My Naishin - 全国47都道府県対応',
+    default: '【無料】内申点 計算サイト｜全国47都道府県対応・偏差値も同時算出 | My Naishin',
     template: '%s | My Naishin'
   },
-  description: '全国47都道府県の内申点計算に対応。9教科の成績を入力するだけで各地域の方式に合わせて自動計算。2026年度（令和8年度）入試の最新情報に基づき、成績推移グラフ、教科別アドバイス、目標設定、高校受験に役立つ学習記事を提供。',
-  keywords: ['内申点', '内申点計算', '高校受験', '成績', '中学生', '内申書', '調査書', '成績管理', '学習アドバイス', '47都道府県', '2026年度入試'],
+  description: '中学生向けの無料内申点計算サイト。全国47都道府県の最新方式に対応し、9教科（5教科＋実技4教科）の評定を入れるだけで内申点を自動計算。5教科の偏差値計算ツール・志望校からの逆算機能も同時に利用でき、2026年度（令和8年度）入試対策に最適です。',
+  keywords: ['内申点', '内申点計算', '内申点計算サイト', '偏差値計算サイト', '偏差値計算サイト 5教科', '偏差値計算サイト 中学生', '評定平均 計算サイト', '高校受験', '中学生', '47都道府県', '2026年度入試'],
   authors: [{ name: 'My Naishin' }],
   icons: {
     icon: [
@@ -31,8 +31,8 @@ export const metadata: Metadata = {
     ],
   },
   openGraph: {
-    title: '内申点シミュレーター | My Naishin - 全国47都道府県対応',
-    description: '全国47都道府県の内申点計算に対応。9教科の成績を入力するだけで各地域の方式に合わせて自動計算。',
+    title: '【無料】内申点 計算サイト｜全国47都道府県対応・偏差値も同時算出 | My Naishin',
+    description: '全国47都道府県の内申点計算に対応。9教科の評定を入れるだけで自動計算、5教科の偏差値計算と志望校逆算も同時に。',
     type: 'website',
     locale: 'ja_JP',
     siteName: 'My Naishin - 内申点計算ツール',
@@ -40,8 +40,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: '内申点シミュレーター | My Naishin - 全国47都道府県対応',
-    description: '全国47都道府県の内申点計算に対応。9教科の成績を入力するだけで各地域の方式に合わせて自動計算。',
+    title: '【無料】内申点 計算サイト｜全国47都道府県対応・偏差値も同時算出 | My Naishin',
+    description: '全国47都道府県の内申点計算に対応。9教科の評定を入れるだけで自動計算、5教科の偏差値計算と志望校逆算も同時に。',
   },
   robots: {
     index: true,

@@ -2,8 +2,9 @@
 
 import * as React from 'react';
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
 import confetti from 'canvas-confetti';
-import { ArrowRight, RotateCcw } from 'lucide-react';
+import { ArrowRight, RotateCcw, Calculator, ChevronRight, TrendingUp as TrendingUpIcon } from 'lucide-react';
 
 import { DEFAULT_SCORES } from '@/lib/constants';
 import { getPrefectureByCode, DEFAULT_PREFECTURE_CODE } from '@/lib/prefectures';
@@ -275,6 +276,48 @@ export default function HomeClient() {
                     <span className="text-slate-400">/</span>
                     <AffiliateAd id="zkai-text-request" hideLabel />
                     <span className="text-[10px] text-slate-400">[PR]</span>
+                  </div>
+                </div>
+              )}
+
+              {/* 人気急上昇ツール バナー（select画面のみ・/hensachi /hyotei-heikinへの強誘導） */}
+              {navigationMode === 'select' && (
+                <div className="px-4 pb-4 md:px-6">
+                  <div className="rounded-2xl border-2 border-amber-300 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 p-4 shadow-md">
+                    <div className="mb-3 flex items-center gap-2">
+                      <span className="inline-flex animate-pulse items-center gap-1 rounded-full bg-red-500 px-2 py-0.5 text-[10px] font-black text-white">
+                        🔥 急上昇
+                      </span>
+                      <span className="text-xs font-bold text-amber-900">今、最も検索されている計算ツール</span>
+                    </div>
+                    <div className="grid gap-2 sm:grid-cols-2">
+                      <Link
+                        href="/hyotei-heikin"
+                        className="group flex items-center gap-3 rounded-xl bg-white p-3 shadow-sm transition-all hover:shadow-md hover:-translate-y-0.5"
+                      >
+                        <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white">
+                          <Calculator className="h-5 w-5" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="text-sm font-bold text-slate-800 group-hover:text-emerald-600">評定平均 自動計算</div>
+                          <div className="text-[11px] text-slate-500">通知表から評定平均と素内申を一括算出</div>
+                        </div>
+                        <ChevronRight className="h-4 w-4 text-emerald-500 transition-transform group-hover:translate-x-1" />
+                      </Link>
+                      <Link
+                        href="/hensachi"
+                        className="group flex items-center gap-3 rounded-xl bg-white p-3 shadow-sm transition-all hover:shadow-md hover:-translate-y-0.5"
+                      >
+                        <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-purple-500 to-indigo-600 text-white">
+                          <TrendingUpIcon className="h-5 w-5" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="text-sm font-bold text-slate-800 group-hover:text-purple-600">偏差値計算（5教科）</div>
+                          <div className="text-[11px] text-slate-500">点数と平均点から偏差値を瞬時に算出</div>
+                        </div>
+                        <ChevronRight className="h-4 w-4 text-purple-500 transition-transform group-hover:translate-x-1" />
+                      </Link>
+                    </div>
                   </div>
                 </div>
               )}

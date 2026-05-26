@@ -16,8 +16,8 @@ export async function generateMetadata({ params }: { params: Promise<{ prefectur
     };
   }
 
-  const title = `${prefecture.name}の内申点計算ツール【${prefecture.maxScore}点満点】| My Naishin`;
-  const description = `${prefecture.name}の内申点を自動計算。${prefecture.description} 計算式、注意点、よくある質問を詳しく解説。${prefecture.name}の高校入試対策に。`;
+  const title = `【無料】${prefecture.name}の内申点 自動計算サイト｜${prefecture.maxScore}点満点・2026年最新版`;
+  const description = `${prefecture.name}の内申点を無料で自動計算。${prefecture.description} 5教科＋実技4教科の評定から${prefecture.maxScore}点満点で瞬時に算出し、志望校のボーダーラインとも比較できます。2026年（令和8年度）入試の最新計算式に対応。`;
   const keywords = [
     prefecture.name,
     `${prefecture.name} 内申点`,

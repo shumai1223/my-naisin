@@ -4,7 +4,7 @@ import { PREFECTURES, REGIONS, getPrefecturesByRegion } from '@/lib/prefectures'
 import { getAllPosts } from '@/lib/blog-data';
 import HomeClient from './HomeClient';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
-import { Calculator, BookOpen, MapPin, Sparkles, ShieldCheck, ChevronRight, Calendar, Clock, ArrowRight, Zap } from 'lucide-react';
+import { Calculator, BookOpen, MapPin, Sparkles, ShieldCheck, ChevronRight, Calendar, Clock, ArrowRight, Zap, TrendingUp, Target } from 'lucide-react';
 
 export const metadata: Metadata = {
   alternates: {
@@ -99,12 +99,47 @@ export default function Page() {
               </h2>
               <div className="prose prose-slate max-w-none text-slate-600 leading-relaxed">
                 <p>
-                  My Naishinは、現役の中学生とその保護者のために開発された、<strong>全国47都道府県の最新計算方式に完全対応</strong>した内申点シミュレーターです。
+                  My Naishinは、現役の中学生とその保護者のために開発された、<strong>全国47都道府県の最新計算方式に完全対応</strong>した内申点計算サイトです。
                   高校受験において、内申点（調査書点）は当日の学力検査と同様に、あるいはそれ以上に合否を分ける重要な要素です。
                 </p>
                 <p>
                   自分の地域のルールを正確に把握していなければ、効率的な受験戦略を立てることはできません。当サイトでは、各都道府県教育委員会が発表した最新の選抜基準に基づき、正確な計算機能と詳細な解説を提供しています。
                 </p>
+              </div>
+            </div>
+
+            {/* 5教科 偏差値計算サイトへの内部リンク強化（SEO: 偏差値計算サイト 5教科 / 中学生） */}
+            <div className="rounded-2xl border border-indigo-100 bg-gradient-to-br from-indigo-50/60 via-purple-50/40 to-blue-50/60 p-6 md:p-7">
+              <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-bold text-indigo-700 ring-1 ring-indigo-100">
+                <TrendingUp className="h-3 w-3" />
+                内申点と合わせて使う
+              </div>
+              <h3 className="mb-3 text-xl font-bold text-slate-900">
+                5教科の偏差値計算サイトも無料で利用可能（中学生・高校生対応）
+              </h3>
+              <p className="mb-4 text-sm leading-relaxed text-slate-700">
+                内申点と並んで合否を左右するのが <strong>5教科の偏差値</strong>。My Naishinの
+                <Link href="/hensachi" className="font-bold text-indigo-700 underline decoration-indigo-300 underline-offset-2 hover:text-indigo-800">
+                  偏差値計算サイト【5教科対応】
+                </Link>
+                では、点数・平均点・標準偏差から自分の偏差値を瞬時に算出。平均点しか分からない場合の簡易モードや、教科別の偏差値も同時に計算できます。志望校との距離をひと目で確認できるので、内申点とセットでの戦略立案に最適です。
+              </p>
+              <div className="flex flex-wrap gap-2">
+                <Link
+                  href="/hensachi"
+                  className="inline-flex items-center gap-1.5 rounded-full bg-indigo-600 px-5 py-2 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-indigo-700 hover:shadow-lg"
+                >
+                  <Target className="h-3.5 w-3.5" />
+                  5教科の偏差値を計算する
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+                <Link
+                  href="/hyotei-heikin"
+                  className="inline-flex items-center gap-1.5 rounded-full bg-white px-5 py-2 text-sm font-bold text-indigo-700 ring-1 ring-indigo-200 transition-all hover:bg-indigo-50"
+                >
+                  評定平均を計算する
+                  <ChevronRight className="h-3.5 w-3.5" />
+                </Link>
               </div>
             </div>
 

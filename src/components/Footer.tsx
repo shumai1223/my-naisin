@@ -49,6 +49,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/tokyo/total-score" className="hover:text-blue-600 flex items-center gap-1">
+                  都立高校 総合得点 計算（1020点） <ChevronRight className="h-3 w-3 opacity-30" />
+                </Link>
+              </li>
+              <li>
                 <Link href="/tokyo/naishin" className="hover:text-blue-600 flex items-center gap-1">
                   東京都 内申計算 <ChevronRight className="h-3 w-3 opacity-30" />
                 </Link>

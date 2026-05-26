@@ -15,9 +15,10 @@ import {
 } from 'lucide-react';
 
 import { PREFECTURES, getPrefectureByCode } from '@/lib/prefectures';
-import { getPrefectureGuide } from '@/lib/prefecture-guides';
+import { getPrefectureGuide, generateDynamicFAQ } from '@/lib/prefecture-guides';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
+import { HowToSchema } from '@/components/StructuredData/HowToSchema';
 import { ErrorReportForm } from '@/components/ErrorReportForm';
 import { PrefectureMinimumContent } from '@/components/PrefectureMinimumContent';
 import { BlogRelatedArticles } from '@/components/BlogRelatedArticles';
@@ -36,14 +37,14 @@ export async function generateMetadata({ params }: PageProps) {
   if (!prefecture) return {};
 
   return {
-    title: `${prefecture.name}の内申点計算ツール【2026年最新】満点・換算方法・対象学年`,
-    description: `${prefecture.name}の高校入試に対応した内申点計算シミュレーター。${prefecture.description}。実技教科の倍率や対象学年など、令和8年度（2026年度）入試の最新情報を網羅。志望校合格に必要な内申点の目安も解説。`,
+    title: `【無料】${prefecture.name}の内申点 自動計算サイト｜${prefecture.maxScore}点満点・2026年最新版`,
+    description: `${prefecture.name}の内申点を無料で自動計算。${prefecture.description}。実技教科の倍率・対象学年・換算方法に完全対応し、9教科の評定を入れるだけで${prefecture.maxScore}点満点で瞬時に算出。令和8年度（2026年度）入試の最新ルールで、志望校のボーダーラインとも比較できます。`,
     alternates: {
       canonical: `https://my-naishin.com/${prefectureCode}/naishin`,
     },
     openGraph: {
-      title: `${prefecture.name}の内申点計算ツール【2026年最新】`,
-      description: `${prefecture.name}の高校入試に対応した内申点計算シミュレーター。${prefecture.description}。`,
+      title: `【無料】${prefecture.name}の内申点 自動計算サイト｜${prefecture.maxScore}点満点・2026年最新版`,
+      description: `${prefecture.name}の高校入試に対応。9教科の評定から${prefecture.maxScore}点満点の内申点を瞬時に算出。`,
       url: `https://my-naishin.com/${prefectureCode}/naishin`,
     }
   };
@@ -74,12 +75,30 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
 
   const guide = getPrefectureGuide(prefectureCode);
   const formulaText = getFormulaExplanation(prefecture);
-  
-  // FAQデータの準備
-  const faqItems = guide.faq.map(item => ({
-    question: item.question,
-    answer: item.answer
-  }));
+
+  // 構造化データのFAQ：PrefectureMinimumContent内で可視表示されているFAQと完全一致させる
+  // （Googleは構造化データと可視テキストの一致を要求）
+  const faqItems = generateDynamicFAQ(prefectureCode, prefecture);
+
+  // 計算手順のHowTo構造化データ
+  const howToSteps = [
+    {
+      name: '都道府県を選ぶ',
+      text: `${prefecture.name}を選択して、${prefecture.name}専用の計算式に切り替えます。`
+    },
+    {
+      name: '9教科の評定を入力',
+      text: `中${prefecture.targetGrades.join('・')}の主要5教科と実技4教科の評定（1〜5）をスライダーで入力します。`
+    },
+    {
+      name: '計算ボタンを押す',
+      text: `${prefecture.name}方式の倍率（5教科×${prefecture.coreMultiplier}倍／実技×${prefecture.practicalMultiplier}倍）が自動適用され、${prefecture.maxScore}点満点で内申点が表示されます。`
+    },
+    {
+      name: '志望校ボーダーと比較',
+      text: '同ページの高校別ボーダーライン一覧と照らし合わせて、目標との差を確認します。'
+    }
+  ];
 
   return (
     <>
@@ -91,6 +110,11 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
         ]}
       />
       <FAQPageSchema faqItems={faqItems} />
+      <HowToSchema
+        name={`${prefecture.name}の内申点を計算する方法`}
+        description={`${prefecture.name}の公立高校入試で使われる${prefecture.maxScore}点満点の内申点を、9教科の評定から計算する手順。`}
+        steps={howToSteps}
+      />
 
       <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
         <div className="mx-auto max-w-4xl px-4 py-8 md:py-12">

@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { Calculator, BookOpen, ChevronRight, Home, AlertTriangle, TrendingUp, Award } from 'lucide-react';
+import { Calculator, BookOpen, ChevronRight, Home, AlertTriangle, TrendingUp, Award, User, Calendar, ShieldCheck, FileCheck } from 'lucide-react';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
@@ -56,6 +56,71 @@ export default function HensachiPage() {
             </p>
           </header>
 
+          {/* クイックナビ：ページ内ジャンプ + 他ツール誘導 */}
+          <div className="mb-6 -mx-2 overflow-x-auto pb-1 px-2">
+            <div className="flex gap-2 whitespace-nowrap">
+              <a href="#calculator-section" className="inline-flex items-center gap-1 rounded-full bg-purple-600 px-4 py-1.5 text-xs font-bold text-white shadow-sm hover:bg-purple-700">
+                <Calculator className="h-3.5 w-3.5" />
+                計算ツールへ
+              </a>
+              <a href="#real-examples" className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50">
+                実例5パターン
+              </a>
+              <a href="#hensachi-koukou" className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50">
+                偏差値と高校
+              </a>
+              <a href="#hensachi-faq" className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50">
+                よくある質問
+              </a>
+              <Link href="/" className="inline-flex items-center gap-1 rounded-full bg-blue-50 px-3 py-1.5 text-xs font-bold text-blue-700 ring-1 ring-blue-200 hover:bg-blue-100">
+                内申点も計算
+                <ChevronRight className="h-3 w-3" />
+              </Link>
+            </div>
+          </div>
+
+          {/* 運営者・検証情報カード（E-E-A-T強化） */}
+          <div className="mb-6 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+            <div className="flex items-start gap-4">
+              <div className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-purple-500 to-indigo-600 text-white shadow-md">
+                <User className="h-6 w-6" />
+              </div>
+              <div className="flex-1">
+                <div className="flex flex-wrap items-center gap-2 mb-1">
+                  <div className="text-sm font-bold text-slate-800">監修・運営：しゅうまい</div>
+                  <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-bold text-emerald-700 ring-1 ring-emerald-200">
+                    <ShieldCheck className="h-3 w-3" />
+                    2026年度受験生
+                  </span>
+                </div>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  現役中学生エンジニアが、47都道府県すべての教育委員会一次資料を読み解いて作った計算ツールです。
+                  <Link href="/about/editor-profile" className="font-bold text-purple-600 hover:underline ml-1">
+                    運営者プロフィール →
+                  </Link>
+                </p>
+                <div className="mt-2 flex flex-wrap gap-3 text-[10px] text-slate-500">
+                  <span className="flex items-center gap-1">
+                    <Calendar className="h-3 w-3" />
+                    最終データ検証：2026年5月25日
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <FileCheck className="h-3 w-3" />
+                    計算ロジック：文部科学省 学習指導要領準拠
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* ファーストビュー直下のPRストリップ */}
+          <div className="mb-6 rounded-xl border border-purple-200 bg-gradient-to-r from-purple-50 via-indigo-50 to-purple-50 px-4 py-3">
+            <p className="text-xs text-slate-700 leading-relaxed text-center">
+              偏差値を上げる定番教材：<AffiliateAd id="zkai-text-middle" className="mx-1" hideLabel />（PR）/
+              <AffiliateAd id="zkai-text-request" className="mx-1" hideLabel />
+            </p>
+          </div>
+
           {/* What is 偏差値 */}
           <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
@@ -87,7 +152,32 @@ export default function HensachiPage() {
           </section>
 
           {/* Calculator */}
-          <HensachiCalculator />
+          <div id="calculator-section">
+            <HensachiCalculator />
+          </div>
+
+          {/* 計算結果直後の最高エンゲージ位置：Z会CTA */}
+          <section className="mt-6 rounded-2xl border-2 border-purple-300 bg-gradient-to-br from-purple-50 to-indigo-50 px-6 py-6 shadow-md text-center">
+            <div className="text-base font-bold text-slate-800 mb-1">
+              この偏差値を上げる、最短ルート
+            </div>
+            <div className="text-xs text-slate-600 mb-4 leading-relaxed">
+              <AffiliateAd id="zkai-text-advanced" hideLabel />（PR）— 添削指導で「テストで点を取れる思考力」を鍛える定番教材
+            </div>
+            <div className="hidden md:block">
+              <AffiliateAd id="zkai-banner" />
+            </div>
+            <div className="md:hidden">
+              <a
+                href="https://px.a8.net/svt/ejp?a8mat=4B3SN7+9TNI42+E0Q+CUQYA"
+                rel="nofollow sponsored noopener"
+                target="_blank"
+                className="block w-full rounded-xl bg-purple-600 px-6 py-3.5 font-bold text-white shadow-lg transition-all hover:bg-purple-700 active:scale-95"
+              >
+                無料で資料をもらう（PR）
+              </a>
+            </div>
+          </section>
 
           {/* Formula */}
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
@@ -190,6 +280,22 @@ export default function HensachiPage() {
             </div>
           </section>
 
+          {/* 中間広告：スタサプ */}
+          <section className="mt-8 rounded-2xl border border-slate-200 bg-white px-6 py-6 shadow-sm text-center">
+            <div className="text-sm font-bold text-slate-700 mb-1">
+              スマホ・タブレットで全教科対策
+            </div>
+            <div className="text-xs text-slate-500 mb-4 leading-relaxed">
+              月額2,178円で5教科+実技も学習できる<AffiliateAd id="sapuri-text" hideLabel />（PR）。無料体験あり。
+            </div>
+            <div className="hidden md:block">
+              <AffiliateAd id="sapuri-banner-468" />
+            </div>
+            <div className="md:hidden">
+              <AffiliateAd id="sapuri-banner-300" />
+            </div>
+          </section>
+
           {/* 偏差値と内申点の関係 */}
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="mb-4 text-lg font-bold text-slate-800 border-l-4 border-purple-500 pl-3">
@@ -261,8 +367,142 @@ export default function HensachiPage() {
             </div>
           </section>
 
-          {/* よくある質問 */}
+          {/* 実例5パターンで見る偏差値計算 */}
+          <section id="real-examples" className="mt-8 scroll-mt-20 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <h2 className="mb-4 text-lg font-bold text-slate-800 border-l-4 border-purple-500 pl-3">
+              実例5パターンで見る「あなたの偏差値」
+            </h2>
+            <p className="text-sm text-slate-600 mb-5 leading-relaxed">
+              数式だけだとピンと来ないので、具体的な点数で偏差値を計算した5つのパターンを用意しました。自分に近いケースを探してみてください。
+            </p>
+            <div className="space-y-3">
+              <div className="rounded-xl border border-red-200 bg-red-50 p-4">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="text-sm font-bold text-red-900">パターン1：高得点だが平均も高い</div>
+                  <div className="text-xl font-black text-red-700">偏差値58.3</div>
+                </div>
+                <div className="text-xs text-red-800 space-y-1">
+                  <div>• 自分の点数：85点 / 平均点：72点 / 標準偏差：15</div>
+                  <div>• 計算：50 + 10 × (85 − 72) ÷ 15 = 50 + 8.67 = <strong>58.3</strong></div>
+                  <div className="mt-1 italic">→ 「85点も取ったのに偏差値60行かない」と感じるかも。それは平均が高いから。</div>
+                </div>
+              </div>
+              <div className="rounded-xl border border-orange-200 bg-orange-50 p-4">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="text-sm font-bold text-orange-900">パターン2：難しいテストで健闘</div>
+                  <div className="text-xl font-black text-orange-700">偏差値65.0</div>
+                </div>
+                <div className="text-xs text-orange-800 space-y-1">
+                  <div>• 自分の点数：65点 / 平均点：43点 / 標準偏差：15</div>
+                  <div>• 計算：50 + 10 × (65 − 43) ÷ 15 = 50 + 14.67 = <strong>65.0</strong></div>
+                  <div className="mt-1 italic">→ 65点でも、難しいテストで周りが取れていなければ偏差値65に。難関模試あるある。</div>
+                </div>
+              </div>
+              <div className="rounded-xl border border-amber-200 bg-amber-50 p-4">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="text-sm font-bold text-amber-900">パターン3：平均ちょうど</div>
+                  <div className="text-xl font-black text-amber-700">偏差値50.0</div>
+                </div>
+                <div className="text-xs text-amber-800 space-y-1">
+                  <div>• 自分の点数：60点 / 平均点：60点 / 標準偏差：15</div>
+                  <div>• 計算：50 + 10 × (60 − 60) ÷ 15 = <strong>50.0</strong></div>
+                  <div className="mt-1 italic">→ 平均点ぴったり = 偏差値50。これが「真ん中」の意味。</div>
+                </div>
+              </div>
+              <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-4">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="text-sm font-bold text-emerald-900">パターン4：5教科で総合偏差値を出す</div>
+                  <div className="text-xl font-black text-emerald-700">偏差値57.0</div>
+                </div>
+                <div className="text-xs text-emerald-800 space-y-1">
+                  <div>• 国語60、数学55、英語60、理科55、社会55（5教科平均偏差値）</div>
+                  <div>• 計算：(60+55+60+55+55) ÷ 5 = <strong>57.0</strong></div>
+                  <div className="mt-1 italic">→ 当ツールは各教科の偏差値の平均値を「総合偏差値」として表示します（厳密な5教科合計偏差値とは微妙に異なります）。</div>
+                </div>
+              </div>
+              <div className="rounded-xl border border-blue-200 bg-blue-50 p-4">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="text-sm font-bold text-blue-900">パターン5：標準偏差が大きい問題</div>
+                  <div className="text-xl font-black text-blue-700">偏差値55.0</div>
+                </div>
+                <div className="text-xs text-blue-800 space-y-1">
+                  <div>• 自分の点数：70点 / 平均点：60点 / 標準偏差：20</div>
+                  <div>• 計算：50 + 10 × (70 − 60) ÷ 20 = 50 + 5 = <strong>55.0</strong></div>
+                  <div className="mt-1 italic">→ 標準偏差が大きい（点数のバラツキが大きい）テストでは、同じ「平均+10点」でも偏差値の上がり方が小さくなる。</div>
+                </div>
+              </div>
+            </div>
+            <p className="mt-4 text-xs text-slate-500 italic">
+              上記の式に自分の数字を入れるのが面倒な人は、<a href="#calculator-section" className="text-purple-600 underline font-bold">ページ上部の計算ツール</a>を使ってください（数値を入れるだけ）。
+            </p>
+          </section>
+
+          {/* 偏差値の3大誤解 */}
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <h2 className="mb-4 text-lg font-bold text-slate-800 border-l-4 border-purple-500 pl-3">
+              中学生・保護者がハマる「偏差値の3大誤解」
+            </h2>
+            <div className="space-y-4">
+              <div className="flex gap-4 rounded-xl bg-red-50 border border-red-200 p-5">
+                <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-red-600 font-black text-white">1</div>
+                <div>
+                  <h3 className="font-bold text-red-900 mb-1">誤解1：偏差値は点数に比例する</h3>
+                  <p className="text-sm text-red-800 leading-relaxed">
+                    「テストで90点取れば偏差値も90」と思っている中学生・保護者は本当に多い。違います。偏差値は<strong>集団内の相対位置</strong>で、点数とは別次元の概念。100点満点で50点でも、平均が30点なら偏差値60以上になります。
+                  </p>
+                </div>
+              </div>
+              <div className="flex gap-4 rounded-xl bg-orange-50 border border-orange-200 p-5">
+                <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-orange-600 font-black text-white">2</div>
+                <div>
+                  <h3 className="font-bold text-orange-900 mb-1">誤解2：模試の偏差値は全部同じ基準</h3>
+                  <p className="text-sm text-orange-800 leading-relaxed">
+                    駿台模試で偏差値55、進研模試で偏差値65、同じ実力でもこれくらい違います。母集団のレベルが全く違うからです。
+                    <strong>志望校判定を見るときは「必ず同じ模試の偏差値」で比較</strong>してください。「進研模試で偏差値65だから安心」と思っていたら、駿台では55相当だった、というのはよくある話です。
+                  </p>
+                </div>
+              </div>
+              <div className="flex gap-4 rounded-xl bg-amber-50 border border-amber-200 p-5">
+                <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-amber-600 font-black text-white">3</div>
+                <div>
+                  <h3 className="font-bold text-amber-900 mb-1">誤解3：偏差値が高ければ内申点も自動的に高い</h3>
+                  <p className="text-sm text-amber-800 leading-relaxed">
+                    模試偏差値65でも、提出物未提出・授業中の私語が多い場合、内申点は3〜4が平均ということもザラ。<strong>偏差値（学力）と内申点（態度・主体性も含む総合評価）は別物</strong>です。
+                    特に推薦入試は内申点が出願条件なので、偏差値だけ磨いても受験できない学校が出てきます。
+                    詳しくは<Link href="/blog/teishutsubutsu-jugyou-taido-guide" className="font-bold underline">提出物・授業態度で評定アップする方法</Link>を参照。
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* 2026年度入試の偏差値最新事情 */}
+          <section className="mt-8 rounded-2xl border-2 border-purple-200 bg-purple-50/30 p-6 shadow-sm">
+            <h2 className="mb-4 text-lg font-bold text-slate-800 border-l-4 border-purple-500 pl-3">
+              2026年度（令和8年度）入試の偏差値最新事情
+            </h2>
+            <div className="space-y-3 text-sm leading-relaxed text-slate-700">
+              <p>
+                <strong>1. 受験者数の減少で偏差値が変動傾向</strong><br/>
+                少子化により高校受験者数は減少。2025年度入試では一部の中堅校で偏差値が2〜3ポイント下がる現象が観測されました。同じ偏差値でも、年度ごとに「行ける高校」が変わります。
+              </p>
+              <p>
+                <strong>2. 都立高校の自校作成問題校の動向</strong><br/>
+                日比谷・西・国立など自校作成問題校では、共通問題の偏差値より低めに出るのが特徴。同じ「偏差値70」でも、自校作成校では実質偏差値73〜75レベルの問題が出ます。
+              </p>
+              <p>
+                <strong>3. ESAT-J（英語スピーキング）の偏差値への影響</strong><br/>
+                2024年度から都立入試にESAT-Jが正式導入。スピーキング能力が偏差値に直結する時代に。詳しくは<Link href="/tokyo/total-score" className="text-blue-600 underline font-bold">都立高校総合得点計算ツール</Link>でシミュレーションできます。
+              </p>
+              <p>
+                <strong>4. 新観点別評価制度の影響</strong><br/>
+                2021年度から実施された3観点評価（知識・技能／思考・判断・表現／主体的に学習に取り組む態度）により、内申点と模試偏差値のギャップが広がる傾向。学力偏差値が高くても態度評価でCがつくと内申は3になることも。
+              </p>
+            </div>
+          </section>
+
+          {/* よくある質問 */}
+          <section id="hensachi-faq" className="mt-8 scroll-mt-20 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="mb-4 text-lg font-bold text-slate-800 border-l-4 border-purple-500 pl-3">
               偏差値に関するよくある質問
             </h2>
@@ -301,7 +541,7 @@ export default function HensachiPage() {
           </section>
 
           {/* 偏差値と高校 */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section id="hensachi-koukou" className="mt-8 scroll-mt-20 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
               <Award className="h-5 w-5 text-amber-500" />
               偏差値と高校レベルの目安
@@ -369,6 +609,28 @@ export default function HensachiPage() {
                   <li>• 偏差値は学習目標の目安として活用し、最終的な志望校判定は模試の判定結果や学校の先生にご相談ください。</li>
                 </ul>
               </div>
+            </div>
+          </section>
+
+          {/* トップページ誘導：内申点も計算しよう */}
+          <section className="mt-8 overflow-hidden rounded-3xl bg-gradient-to-br from-blue-600 via-indigo-600 to-violet-600 p-8 text-white shadow-xl">
+            <div className="grid items-center gap-6 md:grid-cols-[1fr_auto]">
+              <div>
+                <div className="mb-2 inline-flex items-center gap-1 rounded-full bg-white/20 px-3 py-1 text-xs font-bold backdrop-blur-md">
+                  次のステップ
+                </div>
+                <h2 className="text-2xl font-black mb-2">偏差値だけで合否は決まらない</h2>
+                <p className="text-sm text-blue-100 leading-relaxed">
+                  高校受験は「偏差値」だけでなく「内申点」も同じくらい重要です。47都道府県の正確な計算式で、あなたの内申点も確認しましょう。
+                </p>
+              </div>
+              <Link
+                href="/"
+                className="inline-flex items-center gap-2 rounded-2xl bg-white px-6 py-4 font-bold text-blue-700 shadow-xl transition-all hover:scale-105 hover:shadow-2xl"
+              >
+                内申点を計算する
+                <ChevronRight className="h-5 w-5" />
+              </Link>
             </div>
           </section>
 

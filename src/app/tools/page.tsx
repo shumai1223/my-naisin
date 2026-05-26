@@ -38,6 +38,15 @@ export default function ToolsPage() {
       color: 'green'
     },
     {
+      category: 'calculation',
+      title: '都立高校 総合得点 計算',
+      description: '東京都立高校入試の1020点満点を自動計算',
+      features: ['1020点満点対応', '学力検査・調査書・ESAT-J', '主要都立合格目安付き', '2026年度対応'],
+      href: '/tokyo/total-score',
+      icon: Target,
+      color: 'blue'
+    },
+    {
       category: 'reverse',
       title: '逆算ツール',
       description: '志望校に合格するために必要な当日点を算出',
