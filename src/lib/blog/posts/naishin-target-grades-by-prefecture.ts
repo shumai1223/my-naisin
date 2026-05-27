@@ -413,5 +413,14 @@ export const post: BlogPost = {
   <p>My Naishinでは都道府県別の内申点計算方法や、実践的な成績アップの方法をわかりやすく解説しています。</p>
   <a href="/">内申点の攻略法をチェックする</a>
 </div>
+
+<div class="point-box" style="margin-top: 2rem;">
+  <h4>あわせて使いたい無料ツール</h4>
+  <ul>
+    <li><strong>通知表の評定平均を確認したい</strong> → <a href="/hyotei-heikin">評定平均 計算サイト</a>で9教科の評定から評定平均と素内申を瞬時に算出</li>
+    <li><strong>定期テスト・模試の偏差値を出したい</strong> → <a href="/hensachi">偏差値計算サイト（5教科対応）</a>で点数から偏差値を瞬時に算出</li>
+    <li><strong>東京都の総合得点（1020点）を計算したい</strong> → <a href="/tokyo/total-score">都立高校 総合得点計算サイト</a>で学力検査・調査書点・ESAT-Jを一括算出</li>
+  </ul>
+</div>
   `,
 };

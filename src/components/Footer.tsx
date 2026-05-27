@@ -54,6 +54,21 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/kanagawa/s-value" className="hover:text-blue-600 flex items-center gap-1">
+                  神奈川県 S値 計算（1000点） <ChevronRight className="h-3 w-3 opacity-30" />
+                </Link>
+              </li>
+              <li>
+                <Link href="/osaka/total-score" className="hover:text-blue-600 flex items-center gap-1">
+                  大阪府 総合点 計算（タイプⅠ〜Ⅴ） <ChevronRight className="h-3 w-3 opacity-30" />
+                </Link>
+              </li>
+              <li>
+                <Link href="/hokkaido/rank" className="hover:text-blue-600 flex items-center gap-1">
+                  北海道 内申ランク判定 <ChevronRight className="h-3 w-3 opacity-30" />
+                </Link>
+              </li>
+              <li>
                 <Link href="/tokyo/naishin" className="hover:text-blue-600 flex items-center gap-1">
                   東京都 内申計算 <ChevronRight className="h-3 w-3 opacity-30" />
                 </Link>

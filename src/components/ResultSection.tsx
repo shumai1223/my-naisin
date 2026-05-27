@@ -254,6 +254,73 @@ export function ResultSection({
 
           <CalculationBasis prefectureCode={prefectureCode} total={result.total} max={result.max} />
 
+          {/* 内申点計算後の関連ツール導線（/hyotei-heikin・/hensachi の被リンク強化＋ユーザー回遊性アップ） */}
+          <Card className="overflow-hidden">
+            <div className="border-b border-slate-100/80 bg-gradient-to-r from-emerald-50/80 via-teal-50/60 to-cyan-50/80 px-6 py-5">
+              <div className="text-base font-bold text-slate-800">🧮 関連する無料ツール</div>
+              <div className="mt-1 text-sm text-slate-500">
+                内申点と合わせて確認しておきたい指標を、専用ツールで瞬時に算出できます。
+              </div>
+            </div>
+            <div className="grid gap-3 p-6 md:grid-cols-2">
+              <Link
+                href="/hyotei-heikin"
+                className="group flex items-start gap-3 rounded-xl border border-emerald-200 bg-gradient-to-br from-emerald-50/50 to-white p-4 transition-all hover:border-emerald-400 hover:shadow-md"
+              >
+                <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white shadow-sm">
+                  <BarChart3 className="h-5 w-5" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="text-sm font-bold text-slate-800 group-hover:text-emerald-700">
+                    評定平均 計算サイト
+                  </div>
+                  <p className="mt-1 text-xs text-slate-600 leading-relaxed">
+                    通知表の評定（1〜5）から評定平均と素内申を瞬時に算出。私立併願優遇・推薦入試の基準確認に。
+                  </p>
+                </div>
+                <ChevronRight className="mt-3 h-4 w-4 text-emerald-500 transition-transform group-hover:translate-x-1" />
+              </Link>
+
+              <Link
+                href="/hensachi"
+                className="group flex items-start gap-3 rounded-xl border border-purple-200 bg-gradient-to-br from-purple-50/50 to-white p-4 transition-all hover:border-purple-400 hover:shadow-md"
+              >
+                <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-purple-500 to-indigo-600 text-white shadow-sm">
+                  <Sparkles className="h-5 w-5" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="text-sm font-bold text-slate-800 group-hover:text-purple-700">
+                    偏差値計算サイト（5教科）
+                  </div>
+                  <p className="mt-1 text-xs text-slate-600 leading-relaxed">
+                    模試・定期テストの点数と平均点から偏差値を瞬時に算出。志望校との距離を確認できます。
+                  </p>
+                </div>
+                <ChevronRight className="mt-3 h-4 w-4 text-purple-500 transition-transform group-hover:translate-x-1" />
+              </Link>
+
+              {prefectureCode === 'tokyo' && (
+                <Link
+                  href="/tokyo/total-score"
+                  className="group flex items-start gap-3 rounded-xl border border-blue-200 bg-gradient-to-br from-blue-50/50 to-white p-4 transition-all hover:border-blue-400 hover:shadow-md md:col-span-2"
+                >
+                  <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-blue-500 to-indigo-700 text-white shadow-sm">
+                    <FileText className="h-5 w-5" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="text-sm font-bold text-slate-800 group-hover:text-blue-700">
+                      都立高校 総合得点計算（1020点満点）
+                    </div>
+                    <p className="mt-1 text-xs text-slate-600 leading-relaxed">
+                      学力検査700点・調査書点300点・ESAT-J 20点の3要素から、都立入試の総合得点を算出。志望校の合格目安と比較できます。
+                    </p>
+                  </div>
+                  <ChevronRight className="mt-3 h-4 w-4 text-blue-500 transition-transform group-hover:translate-x-1" />
+                </Link>
+              )}
+            </div>
+          </Card>
+
           {prefectureCode === 'kanagawa' && (
             <Card className="overflow-hidden">
               <div className="border-b border-slate-100/80 bg-gradient-to-r from-indigo-50/80 via-blue-50/60 to-sky-50/80 px-6 py-5">

@@ -243,6 +243,99 @@ export default function TokyoTotalScorePage() {
             </div>
           </section>
 
+          {/* 合格基準点シミュレーション（SEO: 都立高校 合格基準点 シュミレーション / 都立 点数 計算） */}
+          <section className="mt-8 rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-50/40 via-indigo-50/30 to-white p-6 shadow-sm">
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
+              <Target className="h-5 w-5 text-blue-500" />
+              都立高校 合格基準点 シミュレーション（点数計算の早見表）
+            </h2>
+            <p className="text-sm text-slate-600 leading-relaxed mb-4">
+              都立高校の合否は<strong>1020点満点中、何点取れば合格できるか</strong>がすべて。志望校レベル別に、当日点・換算内申・ESAT-Jの組み合わせをパターン別にシミュレーションしました。「自分の点数が合格ラインに届くか」を素早く判定できます。
+            </p>
+
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm border-collapse">
+                <thead>
+                  <tr className="bg-slate-100 text-left">
+                    <th className="border border-slate-200 px-3 py-2 font-bold">志望校レベル</th>
+                    <th className="border border-slate-200 px-3 py-2 font-bold text-right">合格目安</th>
+                    <th className="border border-slate-200 px-3 py-2 font-bold text-right">当日点5教科</th>
+                    <th className="border border-slate-200 px-3 py-2 font-bold text-right">換算内申</th>
+                    <th className="border border-slate-200 px-3 py-2 font-bold text-right">ESAT-J</th>
+                  </tr>
+                </thead>
+                <tbody className="text-slate-700">
+                  <tr>
+                    <td className="border border-slate-200 px-3 py-2 font-bold">日比谷・西・国立クラス</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right text-red-700 font-bold">870点+</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right">450点+</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right">60+</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right">A〜B</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-slate-200 px-3 py-2 font-bold">戸山・青山クラス</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right text-orange-700 font-bold">830点+</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right">430点+</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right">58+</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right">A〜B</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-slate-200 px-3 py-2 font-bold">新宿・駒場クラス</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right text-amber-700 font-bold">780点+</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right">400点+</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right">55+</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right">B〜C</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-slate-200 px-3 py-2 font-bold">小山台・三田クラス</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right text-emerald-700 font-bold">730点+</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right">370点+</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right">52+</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right">B〜C</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-slate-200 px-3 py-2 font-bold">城東・広尾クラス</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right text-blue-700 font-bold">660点+</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right">330点+</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right">48+</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right">C〜D</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-slate-200 px-3 py-2 font-bold">中堅校（偏差値55前後）</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right text-slate-700 font-bold">580点+</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right">290点+</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right">42+</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right">D〜E</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-slate-200 px-3 py-2 font-bold">中堅下位校（偏差値50前後）</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right text-slate-700 font-bold">500点+</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right">250点+</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right">36+</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right">D〜F</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div className="mt-4 rounded-xl bg-white border border-blue-100 p-4">
+              <h3 className="text-sm font-bold text-slate-800 mb-2">点数計算のシミュレーション例</h3>
+              <p className="text-xs text-slate-600 leading-relaxed mb-2">
+                例：<strong>新宿高校（合格目安780点+）志望、当日点400点・換算内申55・ESAT-J「B」</strong>の場合
+              </p>
+              <ul className="text-xs text-slate-700 space-y-1 ml-4 list-disc">
+                <li>学力検査700点換算：400 ÷ 500 × 700 ≒ <strong>560点</strong></li>
+                <li>調査書点300点換算：55 ÷ 65 × 300 ≒ <strong>254点</strong></li>
+                <li>ESAT-J：B評価 → <strong>16点</strong></li>
+                <li>合計：560 + 254 + 16 ＝ <strong className="text-blue-700">830点</strong>（新宿の合格目安780を超過）</li>
+              </ul>
+            </div>
+
+            <p className="mt-3 text-xs text-slate-500">
+              ※ シミュレーション結果は過去の入試データに基づく目安です。年度・倍率・他受験者の得点状況により変動します。
+            </p>
+          </section>
+
           {/* よくある質問 */}
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
