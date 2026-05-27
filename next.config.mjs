@@ -31,6 +31,12 @@ const nextConfig = {
         destination: '/blog/naishin-guide#制度編',
         permanent: true
       },
+      // 旧 all-3-high-school-options ページを2026年最新版に統合（authority集約）
+      {
+        source: '/blog/all-3-high-school-options',
+        destination: '/blog/all-3-high-school-options-2026-update',
+        permanent: true
+      },
     ];
   },
 };

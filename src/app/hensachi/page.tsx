@@ -4,14 +4,21 @@ import { Calculator, BookOpen, ChevronRight, Home, AlertTriangle, TrendingUp, Aw
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
+import { HowToSchema } from '@/components/StructuredData/HowToSchema';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { HensachiCalculator } from '@/components/Hensachi/HensachiCalculator';
 
 export const metadata: Metadata = {
-  title: '偏差値計算サイト【5教科対応】中学生・高校生の偏差値を瞬時に算出 | My Naishin',
-  description: '中学生・高校生向けの無料偏差値計算ツール。5教科の点数と平均点・標準偏差から、自分の偏差値を一瞬で計算。平均点しかわからない場合の簡易モードや、各教科の偏差値も同時に算出。志望校との距離も確認できます。',
+  title: '偏差値計算サイト 5教科【中学生・高校生対応】無料・30秒で算出 | My Naishin',
+  description: '【無料】5教科対応の偏差値計算サイト。点数と平均点・標準偏差を入れるだけで、中学生・高校生の偏差値を30秒で自動算出。教科別偏差値・志望校との距離も同時に確認。2026年最新版。',
+  keywords: ['偏差値計算サイト', '偏差値計算サイト 5教科', '偏差値計算サイト 中学生', '偏差値計算', '偏差値 計算', '5教科 偏差値', '中学生 偏差値', '高校生 偏差値'],
   alternates: {
     canonical: 'https://my-naishin.com/hensachi',
+  },
+  openGraph: {
+    title: '偏差値計算サイト 5教科【中学生・高校生対応】無料・30秒で算出 | My Naishin',
+    description: '5教科の点数と平均点から偏差値を瞬時に計算。中学生・高校生向け無料ツール。',
+    url: 'https://my-naishin.com/hensachi',
   },
 };
 
@@ -27,6 +34,18 @@ export default function HensachiPage() {
         items={[
           { name: 'ホーム', url: 'https://my-naishin.com/' },
           { name: '偏差値計算', url: 'https://my-naishin.com/hensachi' },
+        ]}
+      />
+      <HowToSchema
+        id="howto-hensachi"
+        name="5教科の偏差値を計算する方法"
+        description="自分の点数・平均点・標準偏差から、中学生・高校生向けに5教科の偏差値を瞬時に計算する手順。"
+        totalTime="PT1M"
+        steps={[
+          { name: '点数を入力する', text: '5教科それぞれの自分の点数（0〜100点など）を入力します。' },
+          { name: '平均点を入力する', text: 'テストごとの平均点を入力します。平均点が不明な場合は簡易モードで概算できます。' },
+          { name: '標準偏差を入力する（任意）', text: '標準偏差が分かる場合は入力すると、より正確な偏差値が算出できます。分からない場合は自動推定モードに切り替わります。' },
+          { name: '結果を確認する', text: '5教科の合計偏差値と教科別偏差値が瞬時に表示されます。志望校の合格基準偏差値と比較できます。' },
         ]}
       />
 

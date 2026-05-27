@@ -4,14 +4,21 @@ import { Calculator, ChevronRight, Home, BookOpen, AlertCircle, TrendingUp, Awar
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
+import { HowToSchema } from '@/components/StructuredData/HowToSchema';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { HyoteiHeikinCalculator } from '@/components/HyoteiHeikin/HyoteiHeikinCalculator';
 
 export const metadata: Metadata = {
-  title: '評定平均 自動計算【中学生対応】通知表からワンクリックで算出 | My Naishin',
-  description: '中学生の評定平均（通知表の平均値）を自動計算する無料ツール。9教科の評定を入力するだけで、評定平均（4.2など）が瞬時に算出され、高校入試での「内申点」相当の数値も同時に確認できます。推薦入試の基準にもどうぞ。',
+  title: '評定平均 計算サイト【中学生対応・無料】通知表から30秒で自動算出 | My Naishin',
+  description: '【無料】評定平均 計算サイト。9教科の評定を入れるだけで、中学生の評定平均（4.2など）と素内申を30秒で自動算出。高校入試の推薦基準や私立併願優遇の出願目安にも対応。2026年最新版。',
+  keywords: ['評定平均 計算サイト', '評定平均 計算', '評定平均 自動計算', '評定平均 中学生', '評定平均 自動計算 中学生', '通知表 平均', '内申点 評定平均', '素内申'],
   alternates: {
     canonical: 'https://my-naishin.com/hyotei-heikin',
+  },
+  openGraph: {
+    title: '評定平均 計算サイト【中学生対応・無料】通知表から30秒で自動算出 | My Naishin',
+    description: '9教科の評定から評定平均と素内申を瞬時に計算。中学生向け無料ツール。',
+    url: 'https://my-naishin.com/hyotei-heikin',
   },
 };
 
@@ -27,6 +34,18 @@ export default function HyoteiHeikinPage() {
         items={[
           { name: 'ホーム', url: 'https://my-naishin.com/' },
           { name: '評定平均 自動計算', url: 'https://my-naishin.com/hyotei-heikin' },
+        ]}
+      />
+      <HowToSchema
+        id="howto-hyotei-heikin"
+        name="評定平均を計算する方法"
+        description="通知表の9教科の評定（1〜5）から、中学生の評定平均と素内申を自動で算出する手順。"
+        totalTime="PT1M"
+        steps={[
+          { name: '通知表を用意する', text: '直近の学期の通知表または成績通知書を手元に用意します。' },
+          { name: '9教科の評定を入力', text: '国語・数学・英語・理科・社会・音楽・美術・保健体育・技術家庭の9教科の5段階評定を入力します。' },
+          { name: '評定平均と素内申を確認', text: '9教科の評定の平均値（評定平均）と合計値（素内申、最大45点）が瞬時に表示されます。' },
+          { name: '私立併願優遇・推薦基準と比較', text: '志望校が示す評定平均の基準値（3.5以上、3.8以上など）と照らし合わせ、出願可否を確認できます。' },
         ]}
       />
 

@@ -4,6 +4,7 @@ import { Calculator, ChevronRight, Home, BookOpen, AlertCircle, Award, Target } 
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
+import { HowToSchema } from '@/components/StructuredData/HowToSchema';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { TokyoTotalScoreCalculator } from '@/components/TokyoTotalScore/TokyoTotalScoreCalculator';
 
@@ -28,6 +29,18 @@ export default function TokyoTotalScorePage() {
           { name: 'ホーム', url: 'https://my-naishin.com/' },
           { name: '東京都', url: 'https://my-naishin.com/tokyo' },
           { name: '都立高校 総合得点計算', url: 'https://my-naishin.com/tokyo/total-score' },
+        ]}
+      />
+      <HowToSchema
+        id="howto-tokyo-total-score"
+        name="都立高校 総合得点（1020点満点）を計算する方法"
+        description="学力検査700点・調査書点300点・ESAT-J 20点の3要素から、都立高校入試の総合得点を1020点満点で算出する手順。"
+        totalTime="PT2M"
+        steps={[
+          { name: '学力検査の点数を入力', text: '5教科（国数英理社）の合計点を入力します。500点満点が自動的に1.4倍され、700点満点に換算されます。' },
+          { name: '換算内申を入力', text: '主要5教科＋実技4教科×2の換算内申（65点満点）を入力します。当サイトの東京都内申点計算ツールで自動算出した値を使えます。' },
+          { name: 'ESAT-J評価を選ぶ', text: 'A〜F評価から自分の評価を選択します。A=20点・B=16点・C=12点・D=8点・E=4点・F=0点が自動換算されます。' },
+          { name: '総合得点と志望校比較', text: '1020点満点中の総合得点が瞬時に算出され、日比谷・西・国立・戸山など主要都立高校の合格目安との距離も確認できます。' },
         ]}
       />
 

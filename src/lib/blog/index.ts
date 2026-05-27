@@ -16,7 +16,8 @@ import { post as fukukyokaBairitsuByPrefecture } from '@/lib/blog/posts/fukukyok
 
 import { post as naishintenAverageScore } from '@/lib/blog/posts/naishinten-average-score';
 import { post as howToRaiseNaishinten } from '@/lib/blog/posts/how-to-raise-naishinten';
-import { post as all3HighSchoolOptions } from '@/lib/blog/posts/all-3-high-school-options';
+// all-3-high-school-options（旧版）は all-3-high-school-options-2026-update へ 301 redirect 済み（next.config.mjs）。
+// 旧URLが Google にインデックスされ続けるカニバリ防止のため、サイト内の一覧からは外す。
 import { post as naishintenNotEnoughStrategies } from '@/lib/blog/posts/naishinten-not-enough-strategies';
 import { post as naishintenFromJunior1 } from '@/lib/blog/posts/naishinten-from-junior-1';
 import { post as teikiTestAndNaishinten } from '@/lib/blog/posts/teiki-test-and-naishinten';
@@ -38,6 +39,7 @@ import { post as newSemesterChecklist2026 } from '@/lib/blog/posts/2026-new-seme
 // New posts
 import { post as naishinSimulatorCompleteGuide2026 } from '@/lib/blog/posts/2026-naishin-simulator-complete-guide';
 import { post as all3HighSchoolOptions2026Update } from '@/lib/blog/posts/all-3-high-school-options-2026-update';
+import { generatePrefectureBlogPosts } from '@/lib/blog/prefecture-blog-generator';
 import { post as toritsuNyushi2026KanzenGuide } from '@/lib/blog/posts/toritsu-nyushi-2026-kanzen-guide';
 import { post as practicalSubjectsAll5Strategy2026Update } from '@/lib/blog/posts/practical-subjects-all-5-strategy-2026-update';
 import { post as whatIsNaishinten } from '@/lib/blog/posts/what-is-naishinten';
@@ -97,7 +99,6 @@ const HAND_WRITTEN_POSTS: BlogPost[] = [
   
   naishintenAverageScore,
   howToRaiseNaishinten,
-  all3HighSchoolOptions,
   naishintenNotEnoughStrategies,
   naishintenFromJunior1,
   teikiTestAndNaishinten,
@@ -107,7 +108,13 @@ const HAND_WRITTEN_POSTS: BlogPost[] = [
   whatIsNaishinten,
 ];
 
-export const BLOG_POSTS: BlogPost[] = HAND_WRITTEN_POSTS.map(enrichPost);
+// 47都道府県の内申点計算ガイドを自動生成（手書き記事と重複するスラッグは除外）
+const GENERATED_PREFECTURE_POSTS: BlogPost[] = generatePrefectureBlogPosts();
+
+export const BLOG_POSTS: BlogPost[] = [
+  ...HAND_WRITTEN_POSTS,
+  ...GENERATED_PREFECTURE_POSTS,
+].map(enrichPost);
 
 export function getPostBySlug(slug: string): BlogPost | undefined {
   return BLOG_POSTS.find(post => post.slug === slug);

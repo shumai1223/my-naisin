@@ -20,27 +20,33 @@ export const post: BlogPost = {
       <p>自分の今の成績から志望校に届くのか、入試本番で何点取れば逆転できるのかを知るための完全ガイドとしてご活用ください。</p>
     </div>
 
+    <div class="cta-box" style="margin: 1.5rem 0; padding: 1.25rem 1.5rem; background: linear-gradient(135deg, #eff6ff 0%, #eef2ff 100%); border: 2px solid #bfdbfe; border-radius: 16px;">
+      <p style="margin: 0 0 0.5rem 0; font-weight: 700; color: #1e3a8a;">🧮 計算式を読む前に、まず数字を確かめたい方へ</p>
+      <p style="margin: 0 0 0.75rem 0; font-size: 0.875rem; color: #1e40af; line-height: 1.6;">本記事で解説する全ての計算（換算内申・調査書点・1020点総合得点）は、当サイトの<strong>都立高校 総合得点 計算サイト</strong>で自動算出できます。記事を読む前に、まず自分の現在地を確認してから読むと理解が圧倒的に早くなります。</p>
+      <p style="margin: 0;"><a href="/tokyo/total-score" style="display: inline-block; padding: 0.5rem 1.25rem; background: #2563eb; color: #fff; font-weight: 700; border-radius: 9999px; text-decoration: none;">▶ 都立 総合得点（1020点）を今すぐ計算する</a></p>
+    </div>
+
     <div class="toc">
       <h3>この記事の内容</h3>
       <ul>
-        <li><a href="#section-intro">都立高校入試の合否が決まる仕組み</a></li>
-        <li><a href="#section-diff">「素内申」と「換算内申」の違いとは？</a></li>
-        <li><a href="#section-calc-kansan">【65点満点】換算内申の計算方法</a></li>
-        <li><a href="#section-calc-chosasho">【300点満点】調査書点への換算方法</a></li>
-        <li><a href="#section-calc-gakuryoku">【700点満点】学力検査（当日点）の計算方法</a></li>
-        <li><a href="#section-calc-esatj">【20点満点】スピーキングテスト（ESAT-J）の点数化</a></li>
-        <li><a href="#section-total-score">【1020点満点】総合得点の計算まとめ</a></li>
-        <li><a href="#section-simulation">【パターン別】総合得点シミュレーション</a></li>
-        <li><a href="#section-latest-trend">2026年度・2027年度入試の最新トピック</a></li>
-        <li><a href="#section-up-strategy">換算内申をアップさせるための戦略</a></li>
-        <li><a href="#section-reverse-strategy">内申点が足りない！本番での逆転戦略</a></li>
-        <li><a href="#section-faq">換算内申に関するよくある質問（FAQ）</a></li>
-        <li><a href="#section-summary">まとめ</a></li>
+        <li><a href="#s-intro">都立高校入試の合否が決まる仕組み</a></li>
+        <li><a href="#s-diff">「素内申」と「換算内申」の違いとは？</a></li>
+        <li><a href="#s-calc-kansan">【65点満点】換算内申の計算方法</a></li>
+        <li><a href="#s-calc-chosasho">【300点満点】調査書点への換算方法</a></li>
+        <li><a href="#s-calc-gakuryoku">【700点満点】学力検査（当日点）の計算方法</a></li>
+        <li><a href="#s-calc-esatj">【20点満点】スピーキングテスト（ESAT-J）の点数化</a></li>
+        <li><a href="#s-total-score">【1020点満点】総合得点の計算まとめ</a></li>
+        <li><a href="#s-simulation">【パターン別】総合得点シミュレーション</a></li>
+        <li><a href="#s-latest-trend">2026年度・2027年度入試の最新トピック</a></li>
+        <li><a href="#s-up-strategy">換算内申をアップさせるための戦略</a></li>
+        <li><a href="#s-reverse-strategy">内申点が足りない！本番での逆転戦略</a></li>
+        <li><a href="#s-faq">換算内申に関するよくある質問（FAQ）</a></li>
+        <li><a href="#s-summary">まとめ</a></li>
       </ul>
     </div>
 
     <hr>
-    <h2 id="section-intro">都立高校入試の合否が決まる仕組み</h2>
+    <h2 id="s-intro">都立高校入試の合否が決まる仕組み</h2>
     <p>都立高校の一般入試（第一次募集・分割前期募集）は、当日のテストの点数だけで合否が決まるわけではありません。中学校での成績（内申点）と当日のテストの点数を決められた比率で合計し、その<strong>総合得点</strong>が高い順に合格者が決まります。</p>
     <p>まずは、どのような要素が合否判定に使われるのか、全体像を把握しましょう。</p>
 
@@ -57,7 +63,7 @@ export const post: BlogPost = {
     <p>東京都の一般的な「7：3」の比率を採用している高校では、当日の学力検査が7割、中学校の調査書（内申点）が3割という割合になります。調査書点については中学1年生や2年生の成績は含まれず、<strong>中学3年生の成績のみ</strong>が対象となります。</p>
 
     <hr>
-    <h2 id="section-diff">「素内申」と「換算内申」の違いとは？</h2>
+    <h2 id="s-diff">「素内申」と「換算内申」の違いとは？</h2>
     <p>都立高校入試の計算をする前に、必ず知っておかなければならないのが<strong>「素内申（そないしん）」</strong>と<strong>「換算内申（かんさんないしん）」</strong>の違いです。</p>
 
     <h3>素内申（そないしん）とは？</h3>
@@ -78,7 +84,7 @@ export const post: BlogPost = {
     <p>なぜ実技教科を2倍にするのでしょうか？それは、都立高校の一般入試では主要5教科のテストは行われますが、実技4教科のテストは行われないからです。そのため、「テストで測れない実技教科の能力は、中学校の成績を2倍にして評価しよう」という東京都教育委員会のルールなのです。</p>
 
     <hr>
-    <h2 id="section-calc-kansan">【65点満点】換算内申の計算方法</h2>
+    <h2 id="s-calc-kansan">【65点満点】換算内申の計算方法</h2>
     <p>それでは、具体的に換算内申の計算方法を詳しく見ていきましょう。計算式自体は非常にシンプルです。</p>
 
     <div class="point-box">
@@ -125,7 +131,7 @@ export const post: BlogPost = {
     <p>このように、都立入試においては<strong>実技4教科の成績（評定）が極めて大きな影響力を持つ</strong>ことが分かります。</p>
 
     <hr>
-    <h2 id="section-calc-chosasho">【300点満点】調査書点への換算方法</h2>
+    <h2 id="s-calc-chosasho">【300点満点】調査書点への換算方法</h2>
     <p>先ほど計算した「換算内申（65点満点）」は、そのままでは合否判定の点数として使えません。都立高校入試の一般的な比率である「学力検査7：調査書3」に合わせて、<strong>調査書点を300点満点に圧縮（換算）</strong>する必要があります。</p>
 
     <div class="point-box">
@@ -184,7 +190,7 @@ export const post: BlogPost = {
     <p>表を見ると、換算内申が1点違うと、調査書点では約4.6点の差（300÷65）になることが分かります。都立入試においては、<strong>「換算内申の1点は、当日のテストの約4.6点分に相当する」</strong>ということをしっかりと覚えておいてください。内申点を1上げることは、当日のテストで5点（1問分）多く正解することと同じ価値があるのです。</p>
 
     <hr>
-    <h2 id="section-calc-gakuryoku">【700点満点】学力検査（当日点）の計算方法</h2>
+    <h2 id="s-calc-gakuryoku">【700点満点】学力検査（当日点）の計算方法</h2>
     <p>内申点の計算ができたら、次は入試本番の点数（学力検査点）の計算方法です。都立高校の一般入試では、国語・数学・英語・理科・社会の5教科を受験します。各教科100点満点、合計500点満点です。</p>
     <p>しかし、「学力検査7：調査書3」の比率に合わせるため、当日のテストの点数を<strong>700点満点に換算</strong>します。</p>
 
@@ -202,7 +208,7 @@ export const post: BlogPost = {
     <p>例えば「数学と理科の点数を1.5倍にして計算する」といったルールです。志望校が傾斜配点を導入しているかどうかは、東京都教育委員会の公式発表や、各高校の募集要項を必ず確認してください。</p>
 
     <hr>
-    <h2 id="section-calc-esatj">【20点満点】スピーキングテスト（ESAT-J）の点数化</h2>
+    <h2 id="s-calc-esatj">【20点満点】スピーキングテスト（ESAT-J）の点数化</h2>
     <p>令和5年度（2023年度）入試から導入され、2026年度・2027年度入試でも継続して実施されるのが、中学校英語スピーキングテスト<strong>「ESAT-J（English Speaking Achievement Test for Junior High School Students）」</strong>です。</p>
     <p>中学3年生の11月下旬にタブレット端末を使用して行われるこのテストの結果は、都立高校入試の総合得点に加算されます。</p>
 
@@ -223,7 +229,7 @@ export const post: BlogPost = {
     <p>※何らかの正当な理由（病気等）でESAT-Jを受験できなかった不受験者に対しては、当日の英語の筆記試験の点数から仮想のESAT-Jの点数を算出する特例措置が設けられています。</p>
 
     <hr>
-    <h2 id="section-total-score">【1020点満点】総合得点の計算まとめ</h2>
+    <h2 id="s-total-score">【1020点満点】総合得点の計算まとめ</h2>
     <p>ここまで計算してきた3つの要素をすべて足し合わせることで、最終的な合否を判定する<strong>「総合得点」</strong>が算出されます。</p>
 
     <div class="point-box">
@@ -259,7 +265,7 @@ export const post: BlogPost = {
     <p>この1020点満点のうち、何点を取れば志望校に合格できるのか（合格基準点・ボーダーライン）を把握することが、都立高校受験戦略の第一歩となります。各高校の合格基準点は、模擬試験の主催団体（Vもぎ、Wもぎなど）のデータ集を参考にすると良いでしょう。</p>
 
     <hr>
-    <h2 id="section-simulation">【パターン別】総合得点シミュレーション</h2>
+    <h2 id="s-simulation">【パターン別】総合得点シミュレーション</h2>
     <p>理論だけでは分かりにくいため、実際に架空の受験生Aさん、Bさん、Cさんを設定して、総合得点がどのようになるのかシミュレーションしてみましょう。</p>
 
     <h3>シミュレーション条件</h3>
@@ -303,7 +309,7 @@ export const post: BlogPost = {
     <p>これが都立高校入試における<strong>「実技教科の重要性」</strong>の真実です。実技教科をおろそかにすることは、都立入試において非常に危険な行為であると言えます。</p>
 
     <hr>
-    <h2 id="section-latest-trend">2026年度・2027年度入試の最新トピック</h2>
+    <h2 id="s-latest-trend">2026年度・2027年度入試の最新トピック</h2>
     <p>都立高校入試の制度は、時代に合わせて少しずつ変化しています。2026年度（令和8年度）および2027年度（令和9年度）の受験生が知っておくべき、重要な最新制度のトピックを解説します。</p>
 
     <h3>1. 男女合同定員制の完全実施</h3>
@@ -315,7 +321,7 @@ export const post: BlogPost = {
     <p>これは、「中学校での内申点は振るわなかったが、当日の実力は非常に高い」という生徒を救済し、多様な人材を受け入れるための制度です。内申点にハンデを抱えている受験生にとっては、当日のテストで高得点を取ることで一発逆転を狙えるチャンスとなります。（※実施校や導入割合については、東京都教育委員会の最新の発表を必ず確認してください）</p>
 
     <hr>
-    <h2 id="section-up-strategy">換算内申をアップさせるための戦略</h2>
+    <h2 id="s-up-strategy">換算内申をアップさせるための戦略</h2>
     <p>換算内申の計算方法や重要性が分かったところで、では具体的にどうすれば内申点をアップさせることができるのでしょうか。中学3年生の1学期・2学期に実践すべき具体的なアクションを紹介します。</p>
 
     <div class="tips-list">
@@ -350,7 +356,7 @@ export const post: BlogPost = {
     </div>
 
     <hr>
-    <h2 id="section-reverse-strategy">内申点が足りない！本番での逆転戦略</h2>
+    <h2 id="s-reverse-strategy">内申点が足りない！本番での逆転戦略</h2>
     <p>「3年生の2学期の成績が出たけれど、志望校の目安となる換算内申に届かなかった…」<br>そんな場合でも、諦める必要はありません。都立入試は7割が当日のテストの点数です。本番で何点取れば逆転できるのかを正確に計算し、戦略を立てましょう。</p>
 
     <div class="point-box">
@@ -365,7 +371,7 @@ export const post: BlogPost = {
     <p>つまり、当日の5教科の合計テストで、目標点数よりも<strong>約17点高く取る（各教科で3〜4点ずつ上乗せする）</strong>ことができれば、内申点のビハインドを完全に跳ね返し、合格ラインに並ぶことができるのです。1教科あたり1問余分に正解すれば良いと考えれば、決して不可能な数字ではないことが分かるはずです。</p>
 
     <hr>
-    <h2 id="section-faq">換算内申に関するよくある質問（FAQ）</h2>
+    <h2 id="s-faq">換算内申に関するよくある質問（FAQ）</h2>
 
     <div class="card-grid">
       <div class="card">
@@ -387,7 +393,7 @@ export const post: BlogPost = {
     </div>
 
     <hr>
-    <h2 id="section-summary">まとめ</h2>
+    <h2 id="s-summary">まとめ</h2>
     <div class="summary-box">
       <h3>この記事で押さえたいポイント</h3>
       <ul>

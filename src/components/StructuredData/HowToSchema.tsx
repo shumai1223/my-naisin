@@ -11,9 +11,10 @@ interface HowToSchemaProps {
   description: string;
   steps: HowToStep[];
   totalTime?: string;
+  id?: string;
 }
 
-export function HowToSchema({ name, description, steps, totalTime = 'PT2M' }: HowToSchemaProps) {
+export function HowToSchema({ name, description, steps, totalTime = 'PT2M', id = 'howto-schema' }: HowToSchemaProps) {
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'HowTo',
@@ -31,7 +32,7 @@ export function HowToSchema({ name, description, steps, totalTime = 'PT2M' }: Ho
 
   return (
     <Script
-      id="howto-schema"
+      id={id}
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
     />

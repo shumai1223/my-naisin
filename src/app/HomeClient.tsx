@@ -280,7 +280,7 @@ export default function HomeClient() {
                 </div>
               )}
 
-              {/* 人気急上昇ツール バナー（select画面のみ・/hensachi /hyotei-heikinへの強誘導） */}
+              {/* 人気急上昇ツール バナー（select画面のみ・/hensachi /hyotei-heikin /tokyo/total-scoreへの強誘導） */}
               {navigationMode === 'select' && (
                 <div className="px-4 pb-4 md:px-6">
                   <div className="rounded-2xl border-2 border-amber-300 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 p-4 shadow-md">
@@ -290,7 +290,7 @@ export default function HomeClient() {
                       </span>
                       <span className="text-xs font-bold text-amber-900">今、最も検索されている計算ツール</span>
                     </div>
-                    <div className="grid gap-2 sm:grid-cols-2">
+                    <div className="grid gap-2 sm:grid-cols-3">
                       <Link
                         href="/hyotei-heikin"
                         className="group flex items-center gap-3 rounded-xl bg-white p-3 shadow-sm transition-all hover:shadow-md hover:-translate-y-0.5"
@@ -316,6 +316,19 @@ export default function HomeClient() {
                           <div className="text-[11px] text-slate-500">点数と平均点から偏差値を瞬時に算出</div>
                         </div>
                         <ChevronRight className="h-4 w-4 text-purple-500 transition-transform group-hover:translate-x-1" />
+                      </Link>
+                      <Link
+                        href="/tokyo/total-score"
+                        className="group flex items-center gap-3 rounded-xl bg-white p-3 shadow-sm transition-all hover:shadow-md hover:-translate-y-0.5"
+                      >
+                        <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-blue-500 to-indigo-700 text-white">
+                          <Calculator className="h-5 w-5" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="text-sm font-bold text-slate-800 group-hover:text-blue-600">都立 総合得点 計算（1020点）</div>
+                          <div className="text-[11px] text-slate-500">学力検査・調査書・ESAT-Jを一括算出</div>
+                        </div>
+                        <ChevronRight className="h-4 w-4 text-blue-500 transition-transform group-hover:translate-x-1" />
                       </Link>
                     </div>
                   </div>

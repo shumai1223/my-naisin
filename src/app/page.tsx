@@ -115,14 +115,18 @@ export default function Page() {
                 内申点と合わせて使う
               </div>
               <h3 className="mb-3 text-xl font-bold text-slate-900">
-                5教科の偏差値計算サイトも無料で利用可能（中学生・高校生対応）
+                5教科の偏差値・評定平均も無料で算出（中学生・高校生対応）
               </h3>
               <p className="mb-4 text-sm leading-relaxed text-slate-700">
-                内申点と並んで合否を左右するのが <strong>5教科の偏差値</strong>。My Naishinの
+                内申点と並んで合否を左右するのが <strong>5教科の偏差値</strong>。
                 <Link href="/hensachi" className="font-bold text-indigo-700 underline decoration-indigo-300 underline-offset-2 hover:text-indigo-800">
-                  偏差値計算サイト【5教科対応】
+                  偏差値計算ツール（5教科対応）
                 </Link>
-                では、点数・平均点・標準偏差から自分の偏差値を瞬時に算出。平均点しか分からない場合の簡易モードや、教科別の偏差値も同時に計算できます。志望校との距離をひと目で確認できるので、内申点とセットでの戦略立案に最適です。
+                では、点数・平均点・標準偏差から自分の偏差値を瞬時に算出。教科別の偏差値や、平均点しか分からない場合の簡易モードにも対応しています。通知表からそのまま入力できる
+                <Link href="/hyotei-heikin" className="font-bold text-indigo-700 underline decoration-indigo-300 underline-offset-2 hover:text-indigo-800">
+                  評定平均の自動計算ツール
+                </Link>
+                と組み合わせれば、内申点・評定平均・偏差値を一気通貫で把握でき、志望校との距離をひと目で確認できます。
               </p>
               <div className="flex flex-wrap gap-2">
                 <Link
@@ -138,6 +142,37 @@ export default function Page() {
                   className="inline-flex items-center gap-1.5 rounded-full bg-white px-5 py-2 text-sm font-bold text-indigo-700 ring-1 ring-indigo-200 transition-all hover:bg-indigo-50"
                 >
                   評定平均を計算する
+                  <ChevronRight className="h-3.5 w-3.5" />
+                </Link>
+              </div>
+            </div>
+
+            {/* 都立高校 総合得点（1020点）計算ツールへの内部リンク強化 */}
+            <div className="rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-50/60 via-indigo-50/40 to-violet-50/60 p-6 md:p-7">
+              <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-bold text-blue-700 ring-1 ring-blue-100">
+                <Calculator className="h-3 w-3" />
+                東京都の受験生向け
+              </div>
+              <h3 className="mb-3 text-xl font-bold text-slate-900">
+                都立高校 総合得点（1020点満点）計算サイト ─ 学力検査・調査書点・ESAT-Jを一括算出
+              </h3>
+              <p className="mb-4 text-sm leading-relaxed text-slate-700">
+                都立高校の一般入試は、<strong>学力検査700点＋調査書点300点＋ESAT-J 20点＝1020点満点</strong>の総合得点で合否が決まります。「都立高校 総合得点 計算サイト」では、3つの要素を入力するだけで合計点と志望校の合格目安までの距離を瞬時に算出。日比谷・西・国立・戸山など主要都立高校のボーダー比較にも対応しています。
+              </p>
+              <div className="flex flex-wrap gap-2">
+                <Link
+                  href="/tokyo/total-score"
+                  className="inline-flex items-center gap-1.5 rounded-full bg-blue-600 px-5 py-2 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-lg"
+                >
+                  <Calculator className="h-3.5 w-3.5" />
+                  都立 総合得点を計算する（1020点）
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+                <Link
+                  href="/tokyo/naishin"
+                  className="inline-flex items-center gap-1.5 rounded-full bg-white px-5 py-2 text-sm font-bold text-blue-700 ring-1 ring-blue-200 transition-all hover:bg-blue-50"
+                >
+                  東京都の内申点だけ計算する
                   <ChevronRight className="h-3.5 w-3.5" />
                 </Link>
               </div>

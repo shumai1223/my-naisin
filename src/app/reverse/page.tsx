@@ -9,6 +9,7 @@ import { Suspense } from 'react';
 
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
+import { HowToSchema } from '@/components/StructuredData/HowToSchema';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import Loader from '@/components/ui/Loader';
 
@@ -33,6 +34,18 @@ function ReversePageContent() {
         items={[
           { name: 'ホーム', url: 'https://my-naishin.com/' },
           { name: '志望校から逆算', url: 'https://my-naishin.com/reverse' },
+        ]}
+      />
+      <HowToSchema
+        id="howto-reverse"
+        name="志望校から必要な当日点を逆算する方法"
+        description="志望校の合格基準点と現在の内申点・配点比率から、入試当日に取るべき学力検査の点数を逆算する手順。"
+        totalTime="PT2M"
+        steps={[
+          { name: '都道府県を選ぶ', text: '受験する都道府県を選び、その地域の内申点満点と配点比率を読み込みます。' },
+          { name: '内申点を入力', text: '現在の内申点（自動計算ツールで算出した数値）を入力します。' },
+          { name: '志望校の合格基準点を入力', text: '志望校の合格者平均点や合格基準点（模試判定資料や進路指導の資料に基づく）を入力します。' },
+          { name: '必要な当日点を確認', text: '内申点と合格基準点の差から、入試当日の学力検査で取るべき点数が瞬時に逆算されます。' },
         ]}
       />
       <div className="mx-auto max-w-7xl px-4 py-6 lg:px-8">

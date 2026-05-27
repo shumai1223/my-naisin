@@ -36,15 +36,19 @@ export async function generateMetadata({ params }: PageProps) {
   const prefecture = getPrefectureByCode(prefectureCode);
   if (!prefecture) return {};
 
+  // モバイルSERPの先頭24文字に「{県名}の内申点 計算」を必ず含め、descriptionは「無料」「30秒」「2026年最新」を120字以内に圧縮（モバイル表示2行に収める）
+  const title = `${prefecture.name}の内申点 計算サイト【無料・${prefecture.maxScore}点満点】2026年最新 | My Naishin`;
+  const description = `【無料】${prefecture.name}の内申点を30秒で自動計算。9教科の評定を入れるだけで${prefecture.maxScore}点満点で瞬時に算出。実技倍率・対象学年・志望校ボーダー比較も対応。2026年最新版。`;
+
   return {
-    title: `【無料】${prefecture.name}の内申点 自動計算サイト｜${prefecture.maxScore}点満点・2026年最新版`,
-    description: `${prefecture.name}の内申点を無料で自動計算。${prefecture.description}。実技教科の倍率・対象学年・換算方法に完全対応し、9教科の評定を入れるだけで${prefecture.maxScore}点満点で瞬時に算出。令和8年度（2026年度）入試の最新ルールで、志望校のボーダーラインとも比較できます。`,
+    title,
+    description,
     alternates: {
       canonical: `https://my-naishin.com/${prefectureCode}/naishin`,
     },
     openGraph: {
-      title: `【無料】${prefecture.name}の内申点 自動計算サイト｜${prefecture.maxScore}点満点・2026年最新版`,
-      description: `${prefecture.name}の高校入試に対応。9教科の評定から${prefecture.maxScore}点満点の内申点を瞬時に算出。`,
+      title,
+      description,
       url: `https://my-naishin.com/${prefectureCode}/naishin`,
     }
   };
@@ -224,6 +228,32 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
                 </div>
               </div>
             </section>
+
+            {/* 東京限定：1020点満点 総合得点計算ツールへの誘導 */}
+            {prefectureCode === 'tokyo' && (
+              <section className="rounded-2xl border-2 border-blue-200 bg-gradient-to-br from-blue-50 to-indigo-50 p-6 shadow-sm">
+                <div className="flex flex-wrap items-center gap-4 md:flex-nowrap">
+                  <div className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 text-white shadow-lg">
+                    <Calculator className="h-7 w-7" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-lg font-bold text-blue-900">
+                      都立高校の総合得点（1020点満点）も計算する
+                    </h3>
+                    <p className="mt-1 text-sm leading-relaxed text-blue-800">
+                      内申点（調査書点300点）に学力検査700点・ESAT-J 20点を加えた<strong>1020点満点の総合得点</strong>を一括で算出できます。日比谷・西・国立など主要都立高校の合格ラインとも比較可能。
+                    </p>
+                  </div>
+                  <Link
+                    href="/tokyo/total-score"
+                    className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-blue-600 px-5 py-2.5 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-lg"
+                  >
+                    総合得点を計算する
+                    <ChevronRight className="h-4 w-4" />
+                  </Link>
+                </div>
+              </section>
+            )}
 
             {/* 高校別ボーダーライン一覧 */}
             <HighSchoolBorderlineTable prefectureCode={prefectureCode} prefectureName={prefecture.name} />
