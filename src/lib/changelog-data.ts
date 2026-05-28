@@ -14,6 +14,13 @@ export interface ChangeLogEntry {
 
 export const CHANGELOG: ChangeLogEntry[] = [
   {
+    date: '2026-05-28',
+    type: 'update',
+    category: 'seo',
+    title: 'GSC実データ駆動の取りこぼし回収バッチ',
+    description: '47都道府県ページのタイトル・H1に「2026年度入試対応」を追加、高関連度ブログ15本へ /hensachi 内部リンクを注入、不登校・通信制記事に教育委員会の一次ソースを追補、全ブログヘッダーに「現役中3が運営」E-E-A-Tバッジを設置。',
+  },
+  {
     date: '2026-05-12',
     type: 'update',
     category: 'ui',

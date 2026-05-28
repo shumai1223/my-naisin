@@ -748,7 +748,7 @@ export default function HensachiPage() {
             <h2 className="mb-4 text-lg font-bold text-slate-800">偏差値・内申点に関する関連コラム</h2>
             <div className="space-y-3">
               {[
-                { slug: 'all-3-high-school-options', title: '【2026年】オール3の偏差値は40〜45｜内申27で行ける高校と逆転戦略' },
+                { slug: 'all-3-high-school-options-2026-update', title: '【2026年】オール3の偏差値は40〜45｜内申27で行ける高校と逆転戦略' },
                 { slug: 'naishin-target-grades-by-prefecture', title: '都道府県別の目標内申点ガイド｜偏差値別に必要な評定を解説' },
                 { slug: 'how-to-raise-naishinten', title: '内申点を上げる15の方法【完全保存版】' },
                 { slug: '2026-naishin-reversal-strategy', title: '2026年版・内申点逆転戦略｜短期間で偏差値5アップ' },

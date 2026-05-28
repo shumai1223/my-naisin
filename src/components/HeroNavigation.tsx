@@ -26,6 +26,10 @@ export function HeroNavigation({ onModeChange, currentMode }: HeroNavigationProp
         <p className="mt-3 text-slate-600 md:text-lg">
           通知表の数字を入れるだけ。計算根拠と公式資料も一緒に確認できます。
         </p>
+        <p className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-rose-50 px-3 py-1 text-xs font-bold text-rose-700 ring-1 ring-rose-100">
+          <span aria-hidden="true">✍️</span>
+          運営者は<strong>2026年度受験生・現役中3</strong>。当事者が作る内申点ツール
+        </p>
       </div>
 
       <div className="space-y-6">

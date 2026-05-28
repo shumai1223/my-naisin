@@ -162,6 +162,15 @@ export default async function BlogPostPage({ params }: PageProps) {
             {post.description}
           </p>
 
+          {/* E-E-A-T: 運営者の当事者性を1行で示す */}
+          <Link
+            href="/about/editor-profile"
+            className="mt-4 inline-flex items-center gap-2 rounded-full bg-rose-500/15 px-3.5 py-1.5 text-xs font-semibold text-rose-200 ring-1 ring-rose-400/30 transition-colors hover:bg-rose-500/25 hover:text-white"
+          >
+            <span aria-hidden="true">✍️</span>
+            運営者は<strong className="text-rose-100">2026年度受験生・現役中3</strong>。当事者目線で執筆
+          </Link>
+
           {/* Meta Info */}
           <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-white/10 pt-5">
             {/* Author */}

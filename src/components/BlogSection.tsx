@@ -35,8 +35,8 @@ const FEATURED_ARTICLES = [
     readTime: '15分',
   },
   {
-    slug: 'all-3-high-school-options',
-    title: 'オール3で行ける高校は？偏差値・進路の目安',
+    slug: 'all-3-high-school-options-2026-update',
+    title: 'オール3で行ける高校は？偏差値・進路の目安【2026年度入試対応】',
     description: 'オール3は偏差値40〜50が目安。逆転合格の戦略も紹介。',
     icon: School,
     color: 'from-violet-500 to-purple-600',

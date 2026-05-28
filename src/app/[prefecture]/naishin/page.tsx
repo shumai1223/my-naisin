@@ -128,7 +128,7 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
             <ChevronRight className="h-4 w-4" />
             <Link href="/prefectures" className="hover:text-blue-600">都道府県一覧</Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">{prefecture.name}の内申点計算</span>
+            <span className="text-slate-700">{prefecture.name}の内申点 計算サイト</span>
           </nav>
 
           {/* Header */}
@@ -139,7 +139,7 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
               </div>
               <div>
                 <h1 className="text-2xl font-bold text-slate-800 md:text-3xl tracking-tight">
-                  {prefecture.name}の内申点計算ツール【2026年最新】
+                  {prefecture.name}の内申点 計算サイト【2026年最新・無料】
                 </h1>
                 <p className="mt-1 text-sm font-medium text-slate-500 flex items-center gap-2">
                   <span className="rounded-full bg-blue-50 px-2 py-0.5 text-blue-600">{prefecture.region}</span>
@@ -164,7 +164,7 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
                 {prefecture.name}公立高校入試の内申制度
               </h2>
               <p className="text-slate-600 leading-relaxed text-sm md:text-base">
-                {prefecture.name}の公立高校入試では、学力検査（当日点）とあわせて、中学校での成績を点数化した「内申点（調査書点）」が合否判定に大きく関わります。このツールでは、{prefecture.name}教育委員会が発表する最新の選抜基準に基づき、あなたの内申点を瞬時に算出します。
+                {prefecture.name}の公立高校入試では、学力検査（当日点）とあわせて、中学校での成績を点数化した「内申点（調査書点）」が合否判定に大きく関わります。本ページは、{prefecture.name}に対応した<strong>内申点 計算 サイト</strong>として、{prefecture.name}教育委員会が発表する最新の選抜基準に基づき、9教科の評定からあなたの内申点を瞬時に算出します。会員登録・ダウンロード不要、スマホ・PCどちらでも30秒で完了します。
               </p>
               
               <div className="mt-6 grid gap-4 sm:grid-cols-3">

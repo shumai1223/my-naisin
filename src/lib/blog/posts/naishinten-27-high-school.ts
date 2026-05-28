@@ -339,5 +339,11 @@ export const post: BlogPost = {
 </div>
 
 <p>関連記事：<a href="/blog/naishinten-30-high-school">内申点30で行ける高校は？</a>／<a href="/blog/all-3-high-school-options-2026-update">オール3で行ける高校【2026年最新】</a>／<a href="/blog/how-to-raise-naishinten">内申点の上げ方7選</a></p>
+
+<div class="point-box">
+  <h4>関連ツール｜偏差値を5教科で瞬時に計算</h4>
+  <p>志望校との距離感を測るには、内申点だけでなく<strong>5教科の偏差値</strong>も知っておくべきです。当サイトの<a href="/hensachi"><strong>偏差値計算サイト（5教科対応・無料）</strong></a>なら、定期テスト・模試の得点を入力するだけで瞬時に偏差値を算出。学校別の合格偏差値とも比較できます。</p>
+</div>
+
   `,
 };

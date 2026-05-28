@@ -327,7 +327,7 @@ export default function HyoteiHeikinPage() {
                   </div>
                 </div>
                 <div className="text-sm text-blue-900 leading-relaxed">
-                  <strong>狙える高校：</strong>偏差値45〜50の中堅校が中心。私立は単願推薦で多くの選択肢あり。当日点で逆転して上位校を狙うことも可能。詳細は<Link href="/blog/all-3-high-school-options" className="font-bold underline">オール3で行ける高校特集</Link>を参照。
+                  <strong>狙える高校：</strong>偏差値45〜50の中堅校が中心。私立は単願推薦で多くの選択肢あり。当日点で逆転して上位校を狙うことも可能。詳細は<Link href="/blog/all-3-high-school-options-2026-update" className="font-bold underline">オール3で行ける高校特集【2026年版】</Link>を参照。
                 </div>
               </div>
 

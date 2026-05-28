@@ -12,6 +12,8 @@ export const post: BlogPost = {
   tags: ['不登校', '内申点対策', '高校選び', '保護者向け'],
   sources: [
     { name: '文部科学省「不登校児童生徒への支援の在り方について」', url: 'https://www.mext.go.jp/a_menu/shotou/seitoshidou/1397802.htm' },
+    { name: '文部科学省「通信制高等学校の質の確保・向上に関するガイドライン」', url: 'https://www.mext.go.jp/a_menu/shotou/kaikaku/1394873.htm' },
+    { name: '東京都教育委員会「令和8年度都立通信制高等学校入学者選抜実施要綱」', url: 'https://www.kyoiku.metro.tokyo.lg.jp/' },
     { name: '東京都教育委員会「チャレンジスクール」', url: 'https://www.toritsuko.metro.tokyo.lg.jp/challenge/' }
   ],
   content: `
@@ -140,6 +142,7 @@ export const post: BlogPost = {
   <div class="card">
     <h4>1. 通信制高校</h4>
     <p>学校から送られるレポート学習と、規定回数のスクーリング（登校）で高卒資格を取得します。毎日通学する必要がないため、対人関係に不安があるお子様や、自分のペースで学びたいお子様に最適です。近年はプログラミングやイラストなど専門スキルを学べるコースも人気です。学力検査や内申点の提出を求められない学校が大半です。</p>
+    <p class="source-note">一次ソース：<a href="https://www.kyoiku.metro.tokyo.lg.jp/" target="_blank" rel="noopener noreferrer">東京都教育委員会「令和8年度都立通信制高等学校入学者選抜実施要綱」</a>では、選抜方法として「面接・作文（必要に応じて学力検査）」と明記されており、調査書の取扱いも全日制とは別建てとなっています。各都道府県の教育委員会サイトで「通信制 入学者選抜 実施要綱」と検索すれば、地域ごとの最新基準を必ず一次情報で確認できます。</p>
   </div>
   <div class="card">
     <h4>2. チャレンジスクール・エンカレッジスクール</h4>
