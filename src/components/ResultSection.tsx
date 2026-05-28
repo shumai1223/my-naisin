@@ -194,6 +194,110 @@ export function ResultSection({
           aria-labelledby="tab-key"
           className="space-y-4"
         >
+          {/* 内申点レベル別の動的訴求：結果の percent に応じて、最適な教材・サービスを切り替えて表示 */}
+          <Card className="overflow-hidden">
+            <div className="border-b border-slate-100/80 bg-gradient-to-r from-amber-50/80 via-orange-50/60 to-rose-50/80 px-6 py-5">
+              <div className="flex items-center gap-2">
+                <Sparkles className="h-5 w-5 text-amber-500" />
+                <div className="text-base font-bold text-slate-800">
+                  あなたの内申点レベルに合った学習サポート
+                </div>
+              </div>
+              <div className="mt-1 text-xs text-slate-500">
+                計算結果（満点比 {result.percent.toFixed(0)}%）から、今のあなたに最適な学習方法を提案します
+              </div>
+            </div>
+            <div className="p-6">
+              {result.percent >= 80 ? (
+                // 高内申層（80%+）：難関対策・上位志望校
+                <div className="space-y-3">
+                  <div className="rounded-xl border-2 border-purple-200 bg-gradient-to-br from-purple-50 to-indigo-50 p-4">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="inline-flex items-center gap-1 rounded-full bg-purple-600 px-2 py-0.5 text-[10px] font-black text-white">
+                        難関校志望者へ
+                      </span>
+                      <div className="text-sm font-bold text-purple-900">
+                        Z会の通信教育（難関校受験コース）
+                      </div>
+                    </div>
+                    <p className="text-xs text-purple-800 leading-relaxed mb-3">
+                      内申点が高い層は、当日点の取り切りで合否が決まります。Z会の難関校受験コースは、応用問題対策・記述力育成・添削指導で、トップ校合格者の定番教材。
+                    </p>
+                    <div className="text-xs">
+                      <AffiliateAd id="zkai-text-advanced" hideLabel />（PR）
+                    </div>
+                  </div>
+                </div>
+              ) : result.percent >= 60 ? (
+                // 中位層（60〜80%）：通信教育で安定上昇
+                <div className="space-y-3">
+                  <div className="rounded-xl border-2 border-blue-200 bg-gradient-to-br from-blue-50 to-indigo-50 p-4">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="inline-flex items-center gap-1 rounded-full bg-blue-600 px-2 py-0.5 text-[10px] font-black text-white">
+                        中堅上位を狙うなら
+                      </span>
+                      <div className="text-sm font-bold text-blue-900">
+                        Z会の通信教育 ＋ スタディサプリ
+                      </div>
+                    </div>
+                    <p className="text-xs text-blue-800 leading-relaxed mb-3">
+                      あと一押しで上位校が見える層。テキスト＋添削で定期テスト対策が万全のZ会と、月額2,178円で映像授業見放題のスタディサプリの組み合わせがコスパ最高。
+                    </p>
+                    <div className="text-xs space-y-1">
+                      <div><AffiliateAd id="zkai-text-middle" hideLabel />（PR）── テキスト＋添削で内申＋偏差値を伸ばす</div>
+                      <div><AffiliateAd id="sapuri-text" hideLabel /> ── 月額2,178円で5教科＋実技の映像授業</div>
+                    </div>
+                  </div>
+                </div>
+              ) : result.percent >= 40 ? (
+                // 中堅層（40〜60%）：基礎固め
+                <div className="space-y-3">
+                  <div className="rounded-xl border-2 border-emerald-200 bg-gradient-to-br from-emerald-50 to-teal-50 p-4">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="inline-flex items-center gap-1 rounded-full bg-emerald-600 px-2 py-0.5 text-[10px] font-black text-white">
+                        基礎固めで底上げ
+                      </span>
+                      <div className="text-sm font-bold text-emerald-900">
+                        スタディサプリ中学講座 ＋ ネット松陰塾
+                      </div>
+                    </div>
+                    <p className="text-xs text-emerald-800 leading-relaxed mb-3">
+                      苦手教科の理解不足が原因で評定が伸び悩んでいる層。映像授業で「分からない」を解消し、個別指導で学習習慣を作るのが最短ルート。
+                    </p>
+                    <div className="grid gap-2 md:grid-cols-2">
+                      <AffiliateAd id="sapuri-banner-300" />
+                      <AffiliateAd id="shoin-banner" />
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                // 下位層（〜40%）：個別指導で学習習慣
+                <div className="space-y-3">
+                  <div className="rounded-xl border-2 border-rose-200 bg-gradient-to-br from-rose-50 to-orange-50 p-4">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="inline-flex items-center gap-1 rounded-full bg-rose-600 px-2 py-0.5 text-[10px] font-black text-white">
+                        まず学習習慣から
+                      </span>
+                      <div className="text-sm font-bold text-rose-900">
+                        ネット松陰塾の個別指導 ＋ スタディサプリ
+                      </div>
+                    </div>
+                    <p className="text-xs text-rose-800 leading-relaxed mb-3">
+                      学習習慣が確立していない層は、まず「毎日机に向かう」を作ることが最優先。個別指導でつまずきポイントを潰しながら、映像授業で基礎を理解する2段構えが効果的。
+                    </p>
+                    <div className="grid gap-2 md:grid-cols-2">
+                      <AffiliateAd id="shoin-banner" />
+                      <AffiliateAd id="sapuri-banner-300" />
+                    </div>
+                  </div>
+                </div>
+              )}
+              <div className="mt-3 text-center text-[10px] text-slate-400">
+                ※ 上記は内申点レベルから推定した一般的なおすすめです。実際の学習プランは志望校や個人の特性に合わせて選んでください。
+              </div>
+            </div>
+          </Card>
+
           {/* 計算結果直後の最高エンゲージ位置：Z会CTA（モバイルは大きめタップ領域） */}
           <Card className="overflow-hidden">
             <div className="px-5 py-5 text-center md:px-6">

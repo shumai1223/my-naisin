@@ -4,7 +4,43 @@ import { PREFECTURES, REGIONS, getPrefecturesByRegion } from '@/lib/prefectures'
 import { getAllPosts } from '@/lib/blog-data';
 import HomeClient from './HomeClient';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
-import { Calculator, BookOpen, MapPin, Sparkles, ShieldCheck, ChevronRight, Calendar, Clock, ArrowRight, Zap, TrendingUp, Target } from 'lucide-react';
+import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
+import { Calculator, BookOpen, MapPin, Sparkles, ShieldCheck, ChevronRight, Calendar, Clock, ArrowRight, Zap, TrendingUp, Target, HelpCircle } from 'lucide-react';
+
+const HOME_FAQS = [
+  {
+    question: '内申点 計算サイトは無料で使えますか？',
+    answer: 'はい、My Naishin の内申点 計算サイトは完全無料で利用できます。会員登録も不要で、9教科の評定を入力するだけで47都道府県の方式に従った内申点を瞬時に算出できます。',
+  },
+  {
+    question: '内申点の計算方法は都道府県で違いますか？',
+    answer: 'はい、内申点の計算方法は都道府県ごとに大きく異なります。たとえば東京都は中3のみで換算内申65点満点、神奈川県は中2＋中3×2で135点満点、北海道は中1〜中3で315点満点（ランクA〜M判定）です。当サイトの内申点 計算サイトは47都道府県すべての方式に対応しています。',
+  },
+  {
+    question: '内申点の計算はいつから意識すべきですか？',
+    answer: '都道府県によって対象学年が異なります。東京都・愛知県・福岡県などは中3のみが対象、神奈川県・富山県は中2＋中3、北海道・宮城県・福島県など多数の県は中1〜中3の3年間が対象です。中1〜中3対象の県では中1の最初の定期テストから内申点に影響するため、早めの対策が重要です。',
+  },
+  {
+    question: '内申点と評定平均の違いは何ですか？',
+    answer: '内申点は9教科の評定の合計値（例：38点）、評定平均は平均値（例：4.2）です。同じ通知表データを別の形で表現しています。推薦入試では「評定平均◯以上」、一般入試では「内申点◯点以上」と使い分けられることが多いです。当サイトでは内申点計算サイトと評定平均 計算サイトの両方を無料で提供しています。',
+  },
+  {
+    question: '内申点 計算サイトで実技4教科の2倍計算に対応していますか？',
+    answer: 'はい、東京都・宮城県・秋田県・福島県・群馬県・大分県・宮崎県・沖縄県など、実技4教科を2倍計算する都道府県の方式に対応しています。それ以外にも兵庫県（実技7.5倍）、鹿児島県（実技50点換算）など特殊な方式にも対応しています。',
+  },
+  {
+    question: '内申点 計算結果はスマホで保存できますか？',
+    answer: 'はい、計算結果はスマホやPCのブラウザに自動保存されます（端末内のみに保存され、外部に送信されません）。複数回の計算を履歴として残せるため、定期テスト後の評定変化や、目標との差を継続的に追跡できます。',
+  },
+  {
+    question: '内申点 計算結果から志望校の合否目安はわかりますか？',
+    answer: 'はい、当サイトでは計算結果と都道府県別の主要高校のボーダーライン一覧を比較できます。また「志望校から逆算」ツールを使えば、志望校の合格基準点から、入試当日に取るべき学力検査の点数を逆算できます。',
+  },
+  {
+    question: '内申点を上げる最も効率的な方法は？',
+    answer: '①提出物を期限内＋丁寧に出す、②授業中の発言で「主体性」評価を上げる、③定期テストで安定して平均点+10点を取る、④実技4教科で「3→4」を狙う（特に実技2倍方式の都道府県では効果絶大）、⑤先生に質問する習慣を作る、の5つが効果的です。詳しくは内申点を上げる方法の記事もご参考ください。',
+  },
+];
 
 export const metadata: Metadata = {
   alternates: {
@@ -18,6 +54,7 @@ export default function Page() {
 
   return (
     <>
+      <FAQPageSchema faqItems={HOME_FAQS} />
       <HomeClient />
 
       {/* Latest Articles — homepage funnel */}
@@ -221,6 +258,38 @@ export default function Page() {
               </div>
             </div>
 
+            {/* 「内申点 計算」semantic enrichment：GSCで pos 7 → 3 を狙うためのキーワード密度UP */}
+            <div className="rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-50/40 via-indigo-50/30 to-white p-6 md:p-8">
+              <h2 className="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                <Calculator className="text-blue-600 h-5 w-5" />
+                内申点 計算サイトとしてのMy Naishinの強み
+              </h2>
+              <div className="prose prose-slate max-w-none text-sm leading-relaxed text-slate-600 space-y-3">
+                <p>
+                  <strong>内申点 計算</strong>を正確に行うには、お住まいの都道府県の最新の換算方式を把握する必要があります。My Naishinは<strong>47都道府県すべての内申点 計算方式</strong>を実装しており、9教科の評定を入力するだけで瞬時に正確な内申点を算出できる無料ツールです。
+                </p>
+                <p>
+                  たとえば<strong>東京都の内申点 計算</strong>は中3のみが対象で、実技4教科を2倍にした「換算内申」65点満点で評価されます。<strong>神奈川県の内申点 計算</strong>は中2＋中3×2で135点満点、<strong>北海道の内申点 計算</strong>は中1〜中3の3年間で315点満点（A〜Mランク）と、地域によって全く異なります。手計算では間違いやすい複雑な計算も、当サイトなら<strong>30秒で正確に算出</strong>できます。
+                </p>
+                <p>
+                  <strong>内申点 計算結果</strong>と志望校のボーダーラインを比較する機能、<strong>志望校から必要な当日点を逆算</strong>する機能、<strong>評定平均・偏差値の同時算出</strong>機能も完備。高校受験で合否を分ける内申点を「計算するだけ」で終わらせず、戦略立案までサポートします。
+                </p>
+                <div className="rounded-xl bg-white border border-blue-100 p-4 mt-4">
+                  <h3 className="text-sm font-bold text-blue-900 mb-2 flex items-center gap-1.5">
+                    <Sparkles className="h-3.5 w-3.5" />
+                    内申点 計算でMy Naishinが選ばれる5つの理由
+                  </h3>
+                  <ul className="text-xs text-slate-700 space-y-1.5 ml-1">
+                    <li>✅ <strong>47都道府県完全対応</strong>：各都道府県教育委員会の公式入試要綱を直接読み込んで実装</li>
+                    <li>✅ <strong>会員登録・課金不要</strong>：完全無料・広告のみで運営</li>
+                    <li>✅ <strong>30秒で算出</strong>：9教科の評定を入力するだけ</li>
+                    <li>✅ <strong>計算結果の保存</strong>：履歴管理で評定変化を追跡可能</li>
+                    <li>✅ <strong>志望校との比較</strong>：高校別ボーダーラインを同時表示</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
             <div className="rounded-3xl bg-gradient-to-br from-blue-600 to-indigo-700 p-8 text-white">
               <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
                 <Sparkles />
@@ -240,6 +309,40 @@ export default function Page() {
                   <p><strong>志望校の「計算比率」を知る：</strong> 内申と当日点の比率が3:7の学校と7:3の学校では、対策が全く異なります。自分の持ち点に合わせた学校選びが逆転合格の鍵です。</p>
                 </li>
               </ul>
+            </div>
+
+            {/* 内申点 計算 関連 FAQ（FAQPageSchema と一致した可視テキスト） */}
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 md:p-8 shadow-sm">
+              <h2 className="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2">
+                <HelpCircle className="text-blue-600 h-5 w-5" />
+                内申点 計算サイトのよくある質問
+              </h2>
+              <div className="space-y-3">
+                {HOME_FAQS.map((faq, i) => (
+                  <details key={i} className="group rounded-xl border border-slate-200 bg-slate-50/40 overflow-hidden">
+                    <summary className="flex cursor-pointer items-start gap-3 px-5 py-4 hover:bg-slate-100/60">
+                      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-600 text-xs font-black text-white">
+                        Q
+                      </span>
+                      <span className="flex-1 pt-0.5 text-sm font-bold text-slate-800">{faq.question}</span>
+                      <ChevronRight className="h-4 w-4 shrink-0 text-slate-400 transition-transform group-open:rotate-90" />
+                    </summary>
+                    <div className="border-t border-slate-200 bg-white px-5 py-4">
+                      <div className="flex items-start gap-3">
+                        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-rose-500 text-xs font-black text-white">
+                          A
+                        </span>
+                        <p className="flex-1 pt-0.5 text-sm leading-relaxed text-slate-700">{faq.answer}</p>
+                      </div>
+                    </div>
+                  </details>
+                ))}
+              </div>
+              <div className="mt-6 rounded-xl border border-blue-100 bg-blue-50/40 p-4 text-center">
+                <p className="text-sm text-slate-700">
+                  もっと詳しく知りたい方は <Link href="/blog/naishin-guide" className="font-bold text-blue-700 underline">内申点ガイド</Link>・<Link href="/blog/how-to-raise-naishinten" className="font-bold text-blue-700 underline">内申点の上げ方</Link>・<Link href="/blog" className="font-bold text-blue-700 underline">受験コラム一覧</Link>へ
+                </p>
+              </div>
             </div>
           </div>
 

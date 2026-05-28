@@ -47,8 +47,10 @@ import { post as summerVacationGoldenRatio } from '@/lib/blog/posts/summer-vacat
 import { post as hensachiKoukouIchiran2026 } from '@/lib/blog/posts/hensachi-koukou-ichiran-2026';
 import { post as hyoteiHeikin40HighSchool } from '@/lib/blog/posts/hyotei-heikin-4-0-high-school';
 import { post as hyoteiHeikin35HighSchool } from '@/lib/blog/posts/hyotei-heikin-3-5-high-school';
+import { post as hyoteiHeikin45HighSchool } from '@/lib/blog/posts/hyotei-heikin-4-5-high-school';
 import { post as naishinten27HighSchool } from '@/lib/blog/posts/naishinten-27-high-school';
 import { post as naishinten30HighSchool } from '@/lib/blog/posts/naishinten-30-high-school';
+import { post as parentHyoteiHeikinSuisenGuide } from '@/lib/blog/posts/parent-hyotei-heikin-suisen-guide';
 
 // Articles whose date should be refreshed (old 2025-05-01 articles)
 const FRESHEN_DATE = '2026-05-11';
@@ -70,6 +72,8 @@ function enrichPost(post: BlogPost): BlogPost {
 }
 
 const HAND_WRITTEN_POSTS: BlogPost[] = [
+  parentHyoteiHeikinSuisenGuide,
+  hyoteiHeikin45HighSchool,
   hyoteiHeikin40HighSchool,
   hyoteiHeikin35HighSchool,
   naishinten27HighSchool,

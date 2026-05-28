@@ -5,8 +5,44 @@ import { Calculator, BookOpen, ChevronRight, Home, AlertTriangle, TrendingUp, Aw
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
 import { HowToSchema } from '@/components/StructuredData/HowToSchema';
+import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { HensachiCalculator } from '@/components/Hensachi/HensachiCalculator';
+
+const HENSACHI_FAQS = [
+  {
+    question: '偏差値計算サイトは無料で使えますか？',
+    answer: 'はい、My Naishin の偏差値計算サイト（5教科対応）は完全無料で利用できます。会員登録不要で、点数・平均点・標準偏差を入力するだけで30秒で偏差値を算出できます。',
+  },
+  {
+    question: '学校のテストの偏差値はどう計算する？',
+    answer: '学校のテストの偏差値は、クラスや学年全体の平均点と標準偏差を使って計算します。先生に平均点と標準偏差を聞けば当ツールの詳細モードで正確に計算できます。標準偏差が分からない場合は、簡易モード（標準偏差15）でおおよその目安が分かります。',
+  },
+  {
+    question: '偏差値はマイナスになる？100を超える？',
+    answer: '理論上、偏差値は計算式上マイナスにも100超にもなり得ます。極端に低い点数や、満点近い得点を平均点との差が大きい状況で取った場合などです。ただし、模試などでは通常25〜75程度の範囲に収まります。',
+  },
+  {
+    question: '偏差値を1ヶ月で5上げることは可能？',
+    answer: '苦手教科の底上げによっては可能です。たとえば苦手教科が偏差値40なら、基本問題を集中的に演習することで1ヶ月で偏差値50近くまで上げられる場合があります。ただし、偏差値60以上を1ヶ月で5上げるのは現実的に困難です。',
+  },
+  {
+    question: '学校ごとの偏差値（合格偏差値）はどう見る？',
+    answer: '「○○高校の偏差値は65」という表現は、その学校に合格するための目安となる偏差値です。模試で偏差値65が安定して取れていれば、その学校に十分挑戦できるレベルといえます。志望校の偏差値は、進学塾や受験情報サイトで確認できます。',
+  },
+  {
+    question: '内申点と偏差値、どちらを重視すべき？',
+    answer: '両方とも重要ですが、優先度は都道府県により異なります。東京・神奈川など内申比率の高い地域では内申点が重要、当日点比率の高い地域では模試偏差値が重要です。',
+  },
+  {
+    question: '偏差値50は平均ですか？',
+    answer: 'はい、偏差値50はその模試・テストを受けた集団のちょうど平均に位置することを意味します。偏差値55で上位30%、偏差値60で上位16%、偏差値65で上位7%、偏差値70で上位2%が目安です。',
+  },
+  {
+    question: '5教科の偏差値と3教科の偏差値、どちらを見る？',
+    answer: '公立高校受験は5教科で評価されるため、5教科の偏差値を主に見ます。私立高校は3教科（英語・数学・国語）入試が主流のため、3教科の偏差値も参考になります。当ツールは5教科対応ですが、教科別偏差値も同時に算出できるため、3教科だけ抽出して確認することも可能です。',
+  },
+];
 
 export const metadata: Metadata = {
   title: '偏差値計算サイト 5教科【中学生・高校生対応】無料・30秒で算出 | My Naishin',
@@ -48,6 +84,7 @@ export default function HensachiPage() {
           { name: '結果を確認する', text: '5教科の合計偏差値と教科別偏差値が瞬時に表示されます。志望校の合格基準偏差値と比較できます。' },
         ]}
       />
+      <FAQPageSchema faqItems={HENSACHI_FAQS} />
 
       <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
@@ -520,42 +557,36 @@ export default function HensachiPage() {
             </div>
           </section>
 
-          {/* よくある質問 */}
+          {/* よくある質問（FAQPageSchema と完全一致） */}
           <section id="hensachi-faq" className="mt-8 scroll-mt-20 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="mb-4 text-lg font-bold text-slate-800 border-l-4 border-purple-500 pl-3">
-              偏差値に関するよくある質問
+              偏差値計算サイトに関するよくある質問
             </h2>
-            <div className="space-y-4">
-              <div>
-                <div className="font-bold text-slate-800 text-sm">Q. 学校のテストの偏差値はどう計算する？</div>
-                <p className="mt-1 text-sm text-slate-600 leading-relaxed">
-                  学校のテストの偏差値は、クラスや学年全体の平均点と標準偏差を使って計算します。先生に平均点と標準偏差を聞いてもらえれば、当ツールの詳細モードで正確に計算できます。標準偏差が分からない場合は、簡易モード（標準偏差15）でおおよその目安が分かります。
-                </p>
-              </div>
-              <div>
-                <div className="font-bold text-slate-800 text-sm">Q. 偏差値はマイナスになる？100を超える？</div>
-                <p className="mt-1 text-sm text-slate-600 leading-relaxed">
-                  理論上、偏差値は計算式上マイナスにも100超にもなり得ます。極端に低い点数や、満点近い得点を平均点との差が大きい状況で取った場合などです。ただし、模試などでは通常25〜75程度の範囲に収まります。当ツールでも同じ範囲を想定した表示にしています。
-                </p>
-              </div>
-              <div>
-                <div className="font-bold text-slate-800 text-sm">Q. 偏差値を1ヶ月で5上げることは可能？</div>
-                <p className="mt-1 text-sm text-slate-600 leading-relaxed">
-                  苦手教科の底上げによっては可能です。たとえば苦手教科が偏差値40なら、基本問題を集中的に演習することで1ヶ月で偏差値50近くまで上げられる場合があります。ただし、偏差値60以上を1ヶ月で5上げるのは現実的に困難です。すでに高い偏差値帯では、伸びしろ自体が小さくなるためです。
-                </p>
-              </div>
-              <div>
-                <div className="font-bold text-slate-800 text-sm">Q. 学校ごとの偏差値（合格偏差値）はどう見る？</div>
-                <p className="mt-1 text-sm text-slate-600 leading-relaxed">
-                  「○○高校の偏差値は65」という表現は、その学校に合格するための目安となる偏差値です。模試で偏差値65が安定して取れていれば、その学校に十分挑戦できるレベルといえます。志望校の偏差値は、進学塾や受験情報サイトで確認できます。
-                </p>
-              </div>
-              <div>
-                <div className="font-bold text-slate-800 text-sm">Q. 内申点と偏差値、どちらを重視すべき？</div>
-                <p className="mt-1 text-sm text-slate-600 leading-relaxed">
-                  両方とも重要ですが、優先度は都道府県により異なります。<Link href="/tokyo/naishin" className="text-blue-600 underline">東京</Link>・<Link href="/kanagawa/naishin" className="text-blue-600 underline">神奈川</Link>など内申比率の高い地域では内申点が重要、当日点比率の高い地域では模試偏差値が重要です。詳しくは<Link href="/prefectures" className="text-blue-600 underline">都道府県別ページ</Link>や<Link href="/blog/naishin-target-grades-by-prefecture" className="text-blue-600 underline">都道府県別の目標内申点ガイド</Link>で確認してください。
-                </p>
-              </div>
+            <div className="space-y-3">
+              {HENSACHI_FAQS.map((faq, i) => (
+                <details key={i} className="group rounded-xl border border-slate-200 bg-slate-50/40 overflow-hidden">
+                  <summary className="flex cursor-pointer items-start gap-3 px-5 py-4 hover:bg-slate-100/60">
+                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-purple-600 text-xs font-black text-white">
+                      Q
+                    </span>
+                    <span className="flex-1 pt-0.5 text-sm font-bold text-slate-800">{faq.question}</span>
+                    <ChevronRight className="h-4 w-4 shrink-0 text-slate-400 transition-transform group-open:rotate-90" />
+                  </summary>
+                  <div className="border-t border-slate-200 bg-white px-5 py-4">
+                    <div className="flex items-start gap-3">
+                      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-rose-500 text-xs font-black text-white">
+                        A
+                      </span>
+                      <p className="flex-1 pt-0.5 text-sm leading-relaxed text-slate-700">{faq.answer}</p>
+                    </div>
+                  </div>
+                </details>
+              ))}
+            </div>
+            <div className="mt-6 rounded-xl border border-purple-100 bg-purple-50/40 p-4 text-center">
+              <p className="text-sm text-slate-700">
+                さらに詳しく：<Link href="/blog/naishin-target-grades-by-prefecture" className="font-bold text-purple-700 underline">都道府県別の目標内申点ガイド</Link>・<Link href="/prefectures" className="font-bold text-purple-700 underline">47都道府県別ページ</Link>
+              </p>
             </div>
           </section>
 

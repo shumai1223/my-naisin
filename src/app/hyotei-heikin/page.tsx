@@ -5,8 +5,40 @@ import { Calculator, ChevronRight, Home, BookOpen, AlertCircle, TrendingUp, Awar
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
 import { HowToSchema } from '@/components/StructuredData/HowToSchema';
+import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { HyoteiHeikinCalculator } from '@/components/HyoteiHeikin/HyoteiHeikinCalculator';
+
+const HYOTEI_FAQS = [
+  {
+    question: '評定平均と内申点の違いは？',
+    answer: '「評定平均」は1教科あたりの平均値（4.2など）、「内申点（素内申）」は合計値（38など）で表現します。同じ通知表データを別の形で表したものです。当ツールでは両方を同時に確認できます。',
+  },
+  {
+    question: '評定平均はいつの通知表を使う？',
+    answer: '推薦入試では、中学3年の1学期または前期の成績を使うのが一般的です。一般入試で使う「内申点」は都道府県により異なり、中3のみ／中1〜3まで幅広く対象になる場合があります。',
+  },
+  {
+    question: '評定平均は5段階？10段階？',
+    answer: '公立中学校では原則として5段階評価が使われています。一部の私立中学では10段階を使うこともありますが、高校入試の調査書では5段階に換算されます。',
+  },
+  {
+    question: '評定平均4.0で行ける高校は？',
+    answer: '評定平均4.0は全中学生の上位30%圏内、偏差値換算で55〜62相当です。公立中堅上位校（駒場・小山台・松陽など）、私立の特進コース・準特進コース併願が現実的なターゲットになります。',
+  },
+  {
+    question: '評定平均3.5で行ける高校は？',
+    answer: '評定平均3.5は偏差値換算で48〜53相当。公立中堅校（偏差値50前後）、私立進学コース併願が現実的です。首都圏私立の併願優遇制度の最低基準（3.5以上）にちょうど合致します。',
+  },
+  {
+    question: '評定平均はどう上げる？',
+    answer: '①提出物を期限内＋丁寧に出す、②授業中の発言で「主体性」評価を上げる、③定期テストで安定して平均点+10点を取る、④実技4教科で「3→4」を狙う、⑤先生に質問する習慣を作る、の5つが効果的です。',
+  },
+  {
+    question: '評定平均は推薦入試でどう使われる？',
+    answer: '公立高校の推薦入試では「評定平均◯以上」が出願基準として明示されます。上位校で4.0〜4.5以上、中堅校で3.3〜3.8以上が基準。私立の併願優遇制度でも評定平均が出願基準になります。',
+  },
+];
 
 export const metadata: Metadata = {
   title: '評定平均 計算サイト【中学生対応・無料】通知表から30秒で自動算出 | My Naishin',
@@ -48,6 +80,7 @@ export default function HyoteiHeikinPage() {
           { name: '私立併願優遇・推薦基準と比較', text: '志望校が示す評定平均の基準値（3.5以上、3.8以上など）と照らし合わせ、出願可否を確認できます。' },
         ]}
       />
+      <FAQPageSchema faqItems={HYOTEI_FAQS} />
 
       <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
