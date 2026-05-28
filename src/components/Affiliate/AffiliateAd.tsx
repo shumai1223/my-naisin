@@ -9,9 +9,12 @@ interface AffiliateAdProps {
   hideLabel?: boolean;
   /** textタイプのアンカー要素に直接付与するclass。指定するとデフォルトのスタイルを置き換える（ボタン化したいときに使う） */
   linkClassName?: string;
+  /** AdSense審査モード（NEXT_PUBLIC_ADSENSE_AUDIT=1）時のみ非表示にする。重複配置の終盤側に付与。合格後は環境変数を消すだけで全復元される。 */
+  auditHide?: boolean;
 }
 
-export function AffiliateAd({ id, className = '', centered = true, hideLabel = false, linkClassName }: AffiliateAdProps) {
+export function AffiliateAd({ id, className = '', centered = true, hideLabel = false, linkClassName, auditHide = false }: AffiliateAdProps) {
+  if (auditHide && process.env.NEXT_PUBLIC_ADSENSE_AUDIT === '1') return null;
   const ad = AFFILIATES[id];
 
   const label = !hideLabel && (

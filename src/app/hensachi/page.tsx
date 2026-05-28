@@ -637,13 +637,13 @@ export default function HensachiPage() {
               定期テスト対策で偏差値を底上げするなら<AffiliateAd id="zkai-text-middle" hideLabel />（PR）が定番
             </div>
             <div className="hidden md:block">
-              <AffiliateAd id="zkai-banner" />
+              <AffiliateAd id="zkai-banner" auditHide />
             </div>
             <div className="md:hidden">
-              <AffiliateAd id="sapuri-banner-300" />
+              <AffiliateAd id="sapuri-banner-300" auditHide />
             </div>
             <div className="mt-3 text-xs">
-              <AffiliateAd id="zkai-text-request" className="mx-1" hideLabel />（PR）で詳細を確認
+              <AffiliateAd id="zkai-text-request" className="mx-1" hideLabel auditHide />（PR）で詳細を確認
             </div>
           </section>
 

@@ -12,7 +12,7 @@ export const post: BlogPost = {
   tags: ['内申点', '副教科', '実技4教科', 'オール5', '定期テスト対策', '高校受験', '通知表'],
   sources: [
     { name: '文部科学省｜学習評価の在り方について', url: 'https://www.mext.go.jp/b_menu/shingi/chukyo/chukyo3/004/gaiyou/attach/1292216.htm' },
-    { name: '東京都教育委員会｜都立高校入学者選抜実施要綱', url: 'https://www.kyoiku.metro.tokyo.lg.jp/admission/senior_high/examination/application.html' },
+    { name: '東京都教育委員会｜都立高校入学者選抜実施要綱', url: 'https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/exam/' },
     { name: '家庭教師のアルファ｜都道府県別内申点計算方法', url: 'https://alpha-katekyo.jp/tips/tips286/' },
     { name: 'ベネッセ教育情報サイト｜副教科の勉強法', url: 'https://benesse.jp/kyouiku/202012/20201208-99.html' },
     { name: '学研の家庭教師｜副教科テスト対策', url: 'https://www.kame.co.jp/column/column8_5-html' },

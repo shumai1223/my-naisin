@@ -12,7 +12,7 @@ export const post: BlogPost = {
   tags: ['都立高校', '内申点', '入試制度', 'ESAT-J', '2026年度入試'],
   sources: [
     { name: '東京都教育委員会 令和8年度入学者選抜実施要綱', url: 'https://www.kyoiku.metro.tokyo.lg.jp/' },
-    { name: '中学校英語スピーキングテスト（ESAT-J）特設ページ', url: 'https://www.kyoiku.metro.tokyo.lg.jp/school/content/esat-j.html' }
+    { name: '中学校英語スピーキングテスト（ESAT-J）特設ページ', url: 'https://www.kyoiku.metro.tokyo.lg.jp/school/junior_high_school/esat-j/' }
   ],
   content: `
     <div class="lead">

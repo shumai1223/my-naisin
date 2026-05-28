@@ -22,7 +22,7 @@ export const post: BlogPost = {
     },
     {
       name: '東京都教育委員会 都立高校入試内申点の換算方法',
-      url: 'https://www.kyoiku.metro.tokyo.lg.jp/school/high_school/entrance_exam/',
+      url: 'https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/exam/',
     },
   ],
   content: `

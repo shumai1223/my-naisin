@@ -12,7 +12,7 @@ export const post: BlogPost = {
   tags: ['内申点', 'オール3', '志望校選び', '偏差値', '公立高校'],
   sources: [
     { name: '東京都教育委員会：令和8年度東京都立高等学校入学者選抜', url: 'https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/exam/' },
-    { name: '神奈川県教育委員会：公立高校入学者選抜について', url: 'https://www.pref.kanagawa.jp/docs/dc4/nyusen/nyusen/kanagawa.html' },
+    { name: '神奈川県教育委員会：公立高校入学者選抜について', url: 'https://www.pref.kanagawa.jp/docs/dc4/nyusen/' },
     { name: '大阪府教育委員会：公立高等学校入学者選抜', url: 'https://www.pref.osaka.lg.jp/kotogakko/gakuji-g3/' }
   ],
   content: `

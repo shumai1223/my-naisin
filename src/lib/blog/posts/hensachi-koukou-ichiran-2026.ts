@@ -12,7 +12,7 @@ export const post: BlogPost = {
   tags: ['偏差値', '高校受験', '志望校選び', '内申点'],
   sources: [
     { name: '東京都教育委員会 令和8年度入学者選抜', url: 'https://www.kyoiku.metro.tokyo.lg.jp/' },
-    { name: '神奈川県教育委員会', url: 'https://www.pref.kanagawa.jp/docs/dc4/nyusen/nyusen/kanagawa.html' },
+    { name: '神奈川県教育委員会', url: 'https://www.pref.kanagawa.jp/docs/dc4/nyusen/' },
     { name: '大阪府教育庁', url: 'https://www.pref.osaka.lg.jp/kyoikusomu/' },
   ],
   content: `

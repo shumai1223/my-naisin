@@ -11,7 +11,7 @@ export const post: BlogPost = {
   author: '運営者（My Naishin）',
   tags: ['内申点', '逆転合格', '当日点', '公立高校入試', '受験対策', '勉強法', '2026年度'],
   sources: [
-    { name: '東京都教育委員会：都立高校入試制度', url: 'https://www.kyoiku.metro.tokyo.lg.jp/school/content/examination.html' },
+    { name: '東京都教育委員会：都立高校入試制度', url: 'https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/exam/' },
     { name: '家庭教師のアルファ：都道府県別・内申点計算方法', url: 'https://alpha-katekyo.jp/tips/tips286/' },
     { name: '湘南ゼミナール：内申点が足りない場合の対処法', url: 'https://www.shozemi.com/column/highexam/13940/' },
     { name: '学研の家庭教師：内申点が足りない場合', url: 'https://www.kame.co.jp/column/column000040-html' },
