@@ -5,8 +5,28 @@ import { Calculator, ChevronRight, Home, BookOpen, AlertCircle, Award } from 'lu
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
 import { HowToSchema } from '@/components/StructuredData/HowToSchema';
+import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { HokkaidoRankCalculator } from '@/components/Hokkaido/HokkaidoRankCalculator';
+
+// 可視の「よくある質問」セクションと完全一致させた FAQ（FAQ リッチリザルト用）
+const HOKKAIDO_RANK_FAQS = [
+  {
+    question: '内申ランクとは何ですか？',
+    answer:
+      '内申ランクとは、北海道公立高校入試で使われる内申点（315点満点）を20点刻みでA〜Mの13段階に分類した指標です。Aランクが最上位（296〜315点）、Mランクが最下位（0〜75点）。志望校の合格判定にランクと学力検査の組み合わせが使われます。',
+  },
+  {
+    question: '札幌南に合格するには何ランクが必要？',
+    answer:
+      '札幌南・札幌北などの最上位校はAランク（内申点296以上）が望ましく、学力検査でも270点以上が目安です。Bランク（276〜295）でも当日点が高ければ合格圏内です。',
+  },
+  {
+    question: '中1からランクは決まる？',
+    answer:
+      '北海道の内申点は中1〜中3の3年間の成績を、2:2:3の比重で合算します。中3の比重が大きいですが、中1・中2の評定も無視できない比重を持つため、中1の最初の定期テストから内申点に影響します。',
+  },
+];
 
 export const metadata: Metadata = {
   title: '北海道 内申ランクA〜M判定【無料】公立高校入試の合否目安 | My Naishin',
@@ -48,6 +68,7 @@ export default function HokkaidoRankPage() {
           { name: 'ランクと合格目安を確認', text: 'Aランク（最上位）〜Mランク（要努力）のどこに該当するかが瞬時に判定され、札幌南・札幌北など主要高校の合格目安と比較できます。' },
         ]}
       />
+      <FAQPageSchema faqItems={HOKKAIDO_RANK_FAQS} />
 
       <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">

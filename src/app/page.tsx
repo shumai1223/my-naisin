@@ -5,6 +5,8 @@ import { getAllPosts } from '@/lib/blog-data';
 import HomeClient from './HomeClient';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
+import { PrefectureNaishinTable } from '@/components/PrefectureNaishinTable';
+import { KantenHyokaOfficial } from '@/components/KantenHyokaOfficial';
 import { Calculator, BookOpen, MapPin, Sparkles, ShieldCheck, ChevronRight, Calendar, Clock, ArrowRight, Zap, TrendingUp, Target, HelpCircle } from 'lucide-react';
 
 const HOME_FAQS = [
@@ -258,6 +260,9 @@ export default function Page() {
               </div>
             </div>
 
+            {/* 全国47都道府県の内申点計算方式 比較一覧表（被引用・スニペット獲得用の一次情報アセット） */}
+            <PrefectureNaishinTable />
+
             {/* 「内申点 計算」semantic enrichment：GSCで pos 7 → 3 を狙うためのキーワード密度UP */}
             <div className="rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-50/40 via-indigo-50/30 to-white p-6 md:p-8">
               <h2 className="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
@@ -289,6 +294,9 @@ export default function Page() {
                 </div>
               </div>
             </div>
+
+            {/* 文科省一次情報ベースの権威コンテンツ（独自性・E-E-A-T・外部権威リンク） */}
+            <KantenHyokaOfficial />
 
             <div className="rounded-3xl bg-gradient-to-br from-blue-600 to-indigo-700 p-8 text-white">
               <h3 className="text-xl font-bold mb-4 flex items-center gap-2">

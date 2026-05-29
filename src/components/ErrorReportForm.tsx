@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import { AlertTriangle, Send, CheckCircle } from 'lucide-react';
 
+import { CONTACT_EMAIL, submitContact, openMailtoFallback } from '@/lib/contact';
+
 interface ErrorReportFormProps {
   prefectureCode: string;
   prefectureName: string;
@@ -11,27 +13,33 @@ interface ErrorReportFormProps {
 export function ErrorReportForm({ prefectureCode, prefectureName }: ErrorReportFormProps) {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  // Webhook配信できず mailto フォールバックした場合 true
+  const [mailtoMode, setMailtoMode] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
 
     const formData = new FormData(e.currentTarget);
-    const reportData = {
-      type: 'error-report',
-      subject: `[誤り報告] ${prefectureName}（${prefectureCode}）: ${formData.get('type')}`,
-      message: formData.get('detail') as string,
-      email: formData.get('email') as string,
-    };
+    const subject = `[誤り報告] ${prefectureName}（${prefectureCode}）: ${formData.get('type')}`;
+    const detail = (formData.get('detail') as string) || '';
+    const email = (formData.get('email') as string) || '';
 
     try {
-      await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(reportData),
-      });
-    } finally {
+      const result = await submitContact({ type: 'error-report', subject, message: detail, email });
+
+      if (result.ok && result.delivered) {
+        setMailtoMode(false);
+      } else if (result.error) {
+        alert(result.error);
+        return;
+      } else {
+        // 配信先未設定／失敗 → メールアプリで確実に届ける
+        openMailtoFallback(subject, `${detail}\n\n返信先: ${email || '(なし)'}`);
+        setMailtoMode(true);
+      }
       setIsSubmitted(true);
+    } finally {
       setIsSubmitting(false);
     }
   };
@@ -41,9 +49,16 @@ export function ErrorReportForm({ prefectureCode, prefectureName }: ErrorReportF
       <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-6 text-center">
         <CheckCircle className="mx-auto h-12 w-12 text-emerald-600" />
         <h3 className="mt-4 text-lg font-semibold text-emerald-800">ご報告ありがとうございます</h3>
-        <p className="mt-2 text-sm text-emerald-600">
-          内容を確認し、必要に応じて修正いたします。
-        </p>
+        {mailtoMode ? (
+          <p className="mt-2 text-sm text-emerald-600">
+            メールアプリに内容を下書きしました。<strong>そのまま送信</strong>してください。<br />
+            開かない場合は <a href={`mailto:${CONTACT_EMAIL}`} className="font-bold underline">{CONTACT_EMAIL}</a> までお願いします。
+          </p>
+        ) : (
+          <p className="mt-2 text-sm text-emerald-600">
+            内容を確認し、必要に応じて修正いたします。
+          </p>
+        )}
       </div>
     );
   }

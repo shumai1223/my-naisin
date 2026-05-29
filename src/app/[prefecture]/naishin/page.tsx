@@ -31,6 +31,50 @@ interface PageProps {
   params: Promise<{ prefecture: string }>;
 }
 
+/**
+ * 県専用の上位計算ツールへの内部リンク設定。
+ * GSC実データ上、神奈川/大阪/北海道の /[code]/naishin ページは月数千impを集める強いページだが、
+ * 各県専用ツール（S値・総合点・内申ランク）は検索2ページ目に沈んでいた。
+ * 強い内申ページから専用ツールへ文脈リンクを通し、評価（権威）を流して順位を引き上げる。
+ */
+const SIBLING_TOOLS: Record<
+  string,
+  { href: string; badge: string; title: string; description: string; cta: string }
+> = {
+  tokyo: {
+    href: '/tokyo/total-score',
+    badge: '東京都の受験生向け',
+    title: '都立高校の総合得点（1020点満点）も計算する',
+    description:
+      '内申点（調査書点300点）に学力検査700点・ESAT-J 20点を加えた1020点満点の総合得点を一括で算出できます。日比谷・西・国立など主要都立高校の合格ラインとも比較可能。',
+    cta: '総合得点を計算する',
+  },
+  kanagawa: {
+    href: '/kanagawa/s-value',
+    badge: '神奈川県の受験生向け',
+    title: '神奈川県のS値（S1・S2／1000点満点）も自動計算する',
+    description:
+      '神奈川県の公立高校入試は、内申点・学力検査・特色検査を志望校ごとの比率で合算した「S値」で合否が決まります。内申点と当日点を入れるだけで1000点満点のS値を算出し、横浜翠嵐・湘南など難関校の合格目安と比較できます。',
+    cta: 'S値を計算する（1000点）',
+  },
+  osaka: {
+    href: '/osaka/total-score',
+    badge: '大阪府の受験生向け',
+    title: '大阪府公立高校の総合点（タイプⅠ〜Ⅴ）も計算する',
+    description:
+      '大阪府の公立高校入試は、学力検査450点と調査書（内申点）450点を、志望校の選抜タイプ（Ⅰ＝7:3〜Ⅴ＝3:7）の比率で合算した総合点で合否が決まります。北野・茨木・天王寺など主要校の合格目安と比較できます。',
+    cta: '総合点を計算する',
+  },
+  hokkaido: {
+    href: '/hokkaido/rank',
+    badge: '北海道の受験生向け',
+    title: '北海道の内申ランク（A〜M）も判定する',
+    description:
+      '北海道の公立高校入試では、内申点（315点満点）をA〜Mの13ランクに分類して合否判定に使います。内申点と学力検査点を入れるだけで該当ランクを判定し、札幌南・札幌北など主要校の合格目安と比較できます。',
+    cta: '内申ランクを判定する',
+  },
+};
+
 export async function generateMetadata({ params }: PageProps) {
   const { prefecture: prefectureCode } = await params;
   const prefecture = getPrefectureByCode(prefectureCode);
@@ -79,6 +123,7 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
 
   const guide = getPrefectureGuide(prefectureCode);
   const formulaText = getFormulaExplanation(prefecture);
+  const siblingTool = SIBLING_TOOLS[prefectureCode];
 
   // 構造化データのFAQ：PrefectureMinimumContent内で可視表示されているFAQと完全一致させる
   // （Googleは構造化データと可視テキストの一致を要求）
@@ -229,26 +274,26 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
               </div>
             </section>
 
-            {/* 東京限定：1020点満点 総合得点計算ツールへの誘導 */}
-            {prefectureCode === 'tokyo' && (
+            {/* 県専用の上位ツールへの誘導（高impの内申ページから page2 のS値/総合点/ランク判定ページへ評価を流す内部リンク） */}
+            {siblingTool && (
               <section className="rounded-2xl border-2 border-blue-200 bg-gradient-to-br from-blue-50 to-indigo-50 p-6 shadow-sm">
+                <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-bold text-blue-700 ring-1 ring-blue-100">
+                  <Sparkles className="h-3 w-3" />
+                  {siblingTool.badge}
+                </div>
                 <div className="flex flex-wrap items-center gap-4 md:flex-nowrap">
                   <div className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 text-white shadow-lg">
                     <Calculator className="h-7 w-7" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-lg font-bold text-blue-900">
-                      都立高校の総合得点（1020点満点）も計算する
-                    </h3>
-                    <p className="mt-1 text-sm leading-relaxed text-blue-800">
-                      内申点（調査書点300点）に学力検査700点・ESAT-J 20点を加えた<strong>1020点満点の総合得点</strong>を一括で算出できます。日比谷・西・国立など主要都立高校の合格ラインとも比較可能。
-                    </p>
+                    <h3 className="text-lg font-bold text-blue-900">{siblingTool.title}</h3>
+                    <p className="mt-1 text-sm leading-relaxed text-blue-800">{siblingTool.description}</p>
                   </div>
                   <Link
-                    href="/tokyo/total-score"
+                    href={siblingTool.href}
                     className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-blue-600 px-5 py-2.5 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-lg"
                   >
-                    総合得点を計算する
+                    {siblingTool.cta}
                     <ChevronRight className="h-4 w-4" />
                   </Link>
                 </div>

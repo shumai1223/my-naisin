@@ -4,13 +4,15 @@ import * as React from 'react';
 import { Mail, ArrowLeft, Send, MessageCircle, Github, Bug, AlertCircle } from 'lucide-react';
 import Link from 'next/link';
 
-import { APP_NAME } from '@/lib/constants';
+import { CONTACT_EMAIL, submitContact, openMailtoFallback } from '@/lib/contact';
 
 type FormType = 'general' | 'bug';
 
 export default function ContactPage() {
   const [formType, setFormType] = React.useState<FormType>('general');
   const [submitted, setSubmitted] = React.useState(false);
+  // Webhook配信できず mailto フォールバックした場合 true（完了画面の文言を切り替える）
+  const [mailtoMode, setMailtoMode] = React.useState(false);
   const [bugDetails, setBugDetails] = React.useState({
     device: '',
     browser: '',
@@ -22,63 +24,58 @@ export default function ContactPage() {
   const handleGeneralSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
-    
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          type: 'general',
-          name: formData.get('name'),
-          email: formData.get('email'),
-          subject: formData.get('subject'),
-          message: formData.get('message'),
-        }),
-      });
+    const name = String(formData.get('name') || '');
+    const email = String(formData.get('email') || '');
+    const message = String(formData.get('message') || '');
 
-      const data = await response.json();
-      
-      if (response.ok) {
-        setSubmitted(true);
-      } else {
-        alert(data.error || '送信に失敗しました。時間を置いて再度お試しください。');
-      }
-    } catch (error) {
-      alert('送信に失敗しました。時間を置いて再度お試しください。');
+    const result = await submitContact({ type: 'general', name, email, message });
+
+    if (result.ok && result.delivered) {
+      setMailtoMode(false);
+      setSubmitted(true);
+      return;
     }
+    if (result.error) {
+      alert(result.error);
+      return;
+    }
+    // 配信先未設定／ネットワーク失敗 → メールアプリで確実に届ける
+    openMailtoFallback(
+      `【My Naishin お問い合わせ】${name || '匿名'}`,
+      `お名前: ${name}\nメール: ${email}\n\n${message}`
+    );
+    setMailtoMode(true);
+    setSubmitted(true);
   };
 
   const handleBugSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          type: 'bug',
-          email: bugDetails.email,
-          device: bugDetails.device,
-          browser: bugDetails.browser,
-          description: bugDetails.description,
-          steps: bugDetails.steps,
-        }),
-      });
 
-      const data = await response.json();
-      
-      if (response.ok) {
-        setSubmitted(true);
-      } else {
-        alert(data.error || '送信に失敗しました。時間を置いて再度お試しください。');
-      }
-    } catch (error) {
-      alert('送信に失敗しました。時間を置いて再度お試しください。');
+    const result = await submitContact({
+      type: 'bug',
+      email: bugDetails.email,
+      device: bugDetails.device,
+      browser: bugDetails.browser,
+      description: bugDetails.description,
+      steps: bugDetails.steps,
+    });
+
+    if (result.ok && result.delivered) {
+      setMailtoMode(false);
+      setSubmitted(true);
+      return;
     }
+    if (result.error) {
+      alert(result.error);
+      return;
+    }
+    openMailtoFallback(
+      '【My Naishin 不具合報告】',
+      `端末: ${bugDetails.device}\nブラウザ: ${bugDetails.browser}\n返信先: ${bugDetails.email}\n\n` +
+        `不具合の内容:\n${bugDetails.description}\n\n再現手順:\n${bugDetails.steps}`
+    );
+    setMailtoMode(true);
+    setSubmitted(true);
   };
 
   return (
@@ -111,7 +108,7 @@ export default function ContactPage() {
             <div className="mb-4 flex gap-2">
               <button
                 type="button"
-                onClick={() => { setFormType('general'); setSubmitted(false); }}
+                onClick={() => { setFormType('general'); setSubmitted(false); setMailtoMode(false); }}
                 className={`flex flex-1 items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-medium transition-all ${
                   formType === 'general'
                     ? 'bg-violet-100 text-violet-700 ring-2 ring-violet-200'
@@ -123,7 +120,7 @@ export default function ContactPage() {
               </button>
               <button
                 type="button"
-                onClick={() => { setFormType('bug'); setSubmitted(false); }}
+                onClick={() => { setFormType('bug'); setSubmitted(false); setMailtoMode(false); }}
                 className={`flex flex-1 items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-medium transition-all ${
                   formType === 'bug'
                     ? 'bg-rose-100 text-rose-700 ring-2 ring-rose-200'
@@ -140,14 +137,28 @@ export default function ContactPage() {
                 <div className="mx-auto mb-3 grid h-12 w-12 place-items-center rounded-full bg-green-100">
                   <Send className="h-6 w-6 text-green-600" />
                 </div>
-                <p className="font-bold text-green-700">送信完了！</p>
-                <p className="mt-1 text-sm text-green-600">
-                  {formType === 'bug' ? '不具合報告' : 'お問い合わせ'}ありがとうございます。<br />
-                  内容を確認次第、対応いたします。
-                </p>
+                {mailtoMode ? (
+                  <>
+                    <p className="font-bold text-green-700">メールアプリを開きました 📩</p>
+                    <p className="mt-1 text-sm text-green-600">
+                      入力内容を下書きしました。<strong>そのまま送信</strong>してください。<br />
+                      メールアプリが開かない場合は、お手数ですが
+                      <a href={`mailto:${CONTACT_EMAIL}`} className="font-bold underline">{CONTACT_EMAIL}</a>
+                      まで直接お送りください。
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <p className="font-bold text-green-700">送信完了！</p>
+                    <p className="mt-1 text-sm text-green-600">
+                      {formType === 'bug' ? '不具合報告' : 'お問い合わせ'}ありがとうございます。<br />
+                      内容を確認次第、対応いたします。
+                    </p>
+                  </>
+                )}
                 <button
                   type="button"
-                  onClick={() => setSubmitted(false)}
+                  onClick={() => { setSubmitted(false); setMailtoMode(false); }}
                   className="mt-4 text-sm text-green-600 underline hover:text-green-700"
                 >
                   別のお問い合わせをする
@@ -313,8 +324,20 @@ export default function ContactPage() {
               <h2 className="mb-4 text-lg font-bold text-slate-800">その他の連絡方法</h2>
               
               <div className="space-y-3">
-                <a 
-                  href="https://github.com/shumai1223/my-naisin" 
+                <a
+                  href={`mailto:${CONTACT_EMAIL}`}
+                  className="flex items-center gap-3 rounded-xl bg-slate-50 p-4 transition-colors hover:bg-slate-100"
+                >
+                  <div className="grid h-10 w-10 place-items-center rounded-lg bg-violet-100">
+                    <Mail className="h-5 w-5 text-violet-600" />
+                  </div>
+                  <div className="min-w-0">
+                    <div className="text-sm font-bold text-slate-700">メール</div>
+                    <div className="truncate text-xs text-slate-500">{CONTACT_EMAIL}</div>
+                  </div>
+                </a>
+                <a
+                  href="https://github.com/shumai1223/my-naisin"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 rounded-xl bg-slate-50 p-4 transition-colors hover:bg-slate-100"

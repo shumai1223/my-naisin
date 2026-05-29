@@ -5,8 +5,33 @@ import { Calculator, ChevronRight, Home, BookOpen, AlertCircle, Award } from 'lu
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
 import { HowToSchema } from '@/components/StructuredData/HowToSchema';
+import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { KanagawaSValueCalculator } from '@/components/Kanagawa/KanagawaSValueCalculator';
+
+// 可視の「よくある質問」セクションと完全一致させた FAQ（FAQ リッチリザルト用）
+const KANAGAWA_S_VALUE_FAQS = [
+  {
+    question: 'S値とは何ですか？',
+    answer:
+      'S値とは、神奈川県公立高校入試の合否判定に使われる総合得点のことです。内申点（135点満点）と学力検査点（500点満点）をそれぞれ100点満点に換算し、志望校ごとに定められた比率（合計10）で合算した1000点満点の指標です。',
+  },
+  {
+    question: 'S1値とS2値の違いは？',
+    answer:
+      'S1値は内申点＋学力検査の合計（1000点満点）、S2値はS1値に特色検査を加えた数値（特色検査実施校のみ）。横浜翠嵐・湘南など難関校はS2値で合否が決まります。',
+  },
+  {
+    question: '神奈川の内申点はいつの成績？',
+    answer:
+      '神奈川県の内申点は中2の評定合計＋中3の評定合計×2で計算されます（135点満点）。中3の比重が大きいため、中3の成績アップが内申点全体に効きます。',
+  },
+  {
+    question: '特色検査の比率は？',
+    answer:
+      '特色検査の比率は学校ごとに最大「5」まで設定されます。難関校（横浜翠嵐・湘南・厚木・柏陽・川和など）で実施され、S2値の合否判定に大きく影響します。',
+  },
+];
 
 export const metadata: Metadata = {
   title: '神奈川県 S値 自動計算【無料・S1/S2対応】公立高校入試の合否判定 | My Naishin',
@@ -50,6 +75,7 @@ export default function KanagawaSValuePage() {
           { name: 'S値と志望校比較', text: '1000点満点のS1値（S2値）が瞬時に算出され、横浜翠嵐・湘南・柏陽など主要高校の合格目安と比較できます。' },
         ]}
       />
+      <FAQPageSchema faqItems={KANAGAWA_S_VALUE_FAQS} />
 
       <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">

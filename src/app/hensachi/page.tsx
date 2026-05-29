@@ -252,6 +252,55 @@ export default function HensachiPage() {
             </p>
           </section>
 
+          {/* 中学生が5教科の偏差値を出す方法（「偏差値計算サイト 5教科」「偏差値計算サイト 中学生」の意図直撃） */}
+          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <h2 className="mb-4 text-lg font-bold text-slate-800 border-l-4 border-purple-500 pl-3">
+              中学生が5教科の偏差値を計算する方法【定期テスト・模試対応】
+            </h2>
+            <div className="space-y-4 text-sm leading-relaxed text-slate-700">
+              <p>
+                「学校の定期テストでは偏差値が出ない」という中学生は多いはずです。多くの中学校では順位や平均点までしか開示されないためです。
+                ただし、<strong>自分の点数・教科ごとの平均点</strong>さえ分かれば、この偏差値計算サイトで5教科それぞれの偏差値を出せます。
+                平均点は答案返却時に先生が口頭で伝えることが多いので、5教科分メモしておきましょう。
+              </p>
+
+              <div className="rounded-xl bg-purple-50 border border-purple-100 p-4">
+                <h3 className="font-bold text-purple-900 mb-2">中学生が偏差値を出す3ステップ</h3>
+                <ol className="ml-4 list-decimal space-y-1.5 text-purple-800">
+                  <li>5教科それぞれの<strong>自分の点数</strong>を用意する（テストの点数そのまま）。</li>
+                  <li>5教科それぞれの<strong>クラス・学年の平均点</strong>を用意する（先生に聞くのが確実）。</li>
+                  <li>標準偏差が分かれば入力、分からなければ<strong>定期テストは15〜20</strong>を目安に。あとは上の計算ツールに入れるだけ。</li>
+                </ol>
+              </div>
+
+              <div>
+                <h3 className="font-bold text-slate-800 mb-1">「5教科合計の偏差値」には2つの考え方がある</h3>
+                <p>
+                  中学生がよく混乱するのが「5教科トータルの偏差値」です。実は出し方は2通りあります。
+                </p>
+                <ul className="mt-2 ml-4 list-disc space-y-1.5">
+                  <li>
+                    <strong>① 各教科の偏差値を平均する方法</strong>：国語58・数学52・英語60・理科54・社会56 → 平均して偏差値56。教科ごとの得意不得意を反映しやすい方法です。
+                  </li>
+                  <li>
+                    <strong>② 5教科の合計点で偏差値を出す方法</strong>：5教科合計点（例：500点満点中380点）と、5教科合計の平均点・標準偏差から計算します。模試の「総合偏差値」はこちらに近い考え方です。
+                  </li>
+                </ul>
+                <p className="mt-2 text-xs text-slate-500">
+                  当ツールは①の「教科別偏差値の平均」を総合偏差値として表示します。模試の総合偏差値（②）とは数値が微妙にずれる場合がありますが、自分の立ち位置を把握する目的では十分に使えます。
+                </p>
+              </div>
+
+              <div>
+                <h3 className="font-bold text-slate-800 mb-1">定期テストと模試で偏差値が違うのはなぜ？</h3>
+                <p>
+                  同じ実力でも、<strong>受けた集団（母集団）が違えば偏差値は変わります</strong>。学年全体が受ける定期テストと、受験者層がそろう模試では平均点も標準偏差も異なるため、定期テストの偏差値が高めに出ることがよくあります。
+                  志望校判定では、必ず<strong>同じ模試どうしの偏差値</strong>で比較してください。中学生のうちは、定期テストの偏差値で日々の調子を確認し、年数回の模試で受験者層の中での実力を測る、という使い分けが王道です。
+                </p>
+              </div>
+            </div>
+          </section>
+
           {/* 偏差値の意味と特性 */}
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="mb-4 text-lg font-bold text-slate-800 border-l-4 border-purple-500 pl-3">
