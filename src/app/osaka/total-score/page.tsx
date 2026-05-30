@@ -5,8 +5,28 @@ import { Calculator, ChevronRight, Home, BookOpen, AlertCircle, Award } from 'lu
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
 import { HowToSchema } from '@/components/StructuredData/HowToSchema';
+import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { OsakaTotalScoreCalculator } from '@/components/Osaka/OsakaTotalScoreCalculator';
+
+// 可視の「よくある質問」セクションと完全一致させた FAQ（FAQ リッチリザルト用）
+const OSAKA_TOTAL_SCORE_FAQS = [
+  {
+    question: '大阪府の選抜タイプとは何ですか？',
+    answer:
+      '大阪府の公立高校入試では、学力検査と内申点の比率を志望校ごとに5パターン（タイプⅠ〜Ⅴ）から採用します。タイプⅠ（7:3）は学力検査重視、タイプⅤ（3:7）は内申重視。志望校がどのタイプかは事前に確認しましょう。',
+  },
+  {
+    question: '大阪府の内申点はいつの成績？',
+    answer:
+      '大阪府の内申点は中1〜中3の3年間すべてが対象です。学年倍率は中1：中2：中3 ＝ 2：2：6で、中3の比重が最も大きいです。',
+  },
+  {
+    question: '文理学科と普通科の違いは？',
+    answer:
+      '文理学科は北野・茨木・天王寺・大手前・四條畷・三国丘・豊中・高津・岸和田・生野の10校に設置され、難関大学進学を目指す高度な学習を行います。タイプⅠ（7:3）採用が多く、学力検査重視の選抜です。',
+  },
+];
 
 export const metadata: Metadata = {
   title: '大阪府公立高校 タイプⅠ〜Ⅴ計算【無料・総合点シミュレーション】 | My Naishin',
@@ -49,6 +69,7 @@ export default function OsakaTotalScorePage() {
           { name: '総合点と志望校比較', text: '450点満点の総合点が瞬時に算出され、北野・茨木・天王寺など主要府立高校の合格目安と比較できます。' },
         ]}
       />
+      <FAQPageSchema faqItems={OSAKA_TOTAL_SCORE_FAQS} />
 
       <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">

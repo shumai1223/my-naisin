@@ -5,6 +5,7 @@ import { Calculator, ChevronRight, Home, BookOpen, AlertCircle, Award, Target } 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
 import { HowToSchema } from '@/components/StructuredData/HowToSchema';
+import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { TokyoTotalScoreCalculator } from '@/components/TokyoTotalScore/TokyoTotalScoreCalculator';
 
@@ -15,6 +16,30 @@ export const metadata: Metadata = {
     canonical: 'https://my-naishin.com/tokyo/total-score',
   },
 };
+
+// 可視の「よくある質問」セクションと完全一致させた FAQ（FAQ リッチリザルト用）
+const TOKYO_TOTAL_SCORE_FAQS = [
+  {
+    question: '自校作成問題校（日比谷・西・国立）はこの計算式で使える？',
+    answer:
+      '自校作成問題校でも、満点配分は1020点で同じです。ただし、各校が独自に難易度の高い問題を出題するため、同じ「学力検査700点」でも難易度の差で実際の難易度は大きく異なります。',
+  },
+  {
+    question: 'ESAT-Jを受けていない場合はどうなる？',
+    answer:
+      'ESAT-J対象外の学校・コースでは、20点をそのまま除いた1000点満点で計算します。当ツールでは「ESAT-J: 0」または該当項目を空欄にすることで対応できます。',
+  },
+  {
+    question: '当日点・調査書点の換算結果は四捨五入？',
+    answer:
+      'はい、東京都教育委員会の規定では、各換算後の点数は小数点以下を四捨五入して整数化します。当ツールも同じ処理をしています。',
+  },
+  {
+    question: '換算内申はどう計算する？',
+    answer:
+      '東京都の換算内申は「主要5教科の評定 ×1倍 + 実技4教科の評定 ×2倍」で最大65点になります。詳しくは東京都の内申点計算ツールと換算内申の徹底ガイドをご覧ください。',
+  },
+];
 
 export default function TokyoTotalScorePage() {
   return (
@@ -43,6 +68,7 @@ export default function TokyoTotalScorePage() {
           { name: '総合得点と志望校比較', text: '1020点満点中の総合得点が瞬時に算出され、日比谷・西・国立・戸山など主要都立高校の合格目安との距離も確認できます。' },
         ]}
       />
+      <FAQPageSchema faqItems={TOKYO_TOTAL_SCORE_FAQS} />
 
       <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
