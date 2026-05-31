@@ -38,11 +38,13 @@ export const metadata: Metadata = {
     locale: 'ja_JP',
     siteName: 'My Naishin - 内申点計算ツール',
     url: 'https://my-naishin.com',
+    images: [{ url: '/og-image.png', alt: '内申点 計算サイト My Naishin｜全国47都道府県対応・無料' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: '内申点 計算サイト【2026年度入試対応・全国47都道府県】| My Naishin',
     description: '全国47都道府県の内申点計算に対応。9教科の評定を入れるだけで自動計算、志望校からの逆算機能つき。',
+    images: ['/og-image.png'],
   },
   robots: {
     index: true,
