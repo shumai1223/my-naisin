@@ -84,7 +84,7 @@ export default function EmbedPage() {
               <iframe
                 src="/embed/naishin"
                 width="100%"
-                height={520}
+                height={640}
                 style={{ border: '1px solid #e5e7eb', borderRadius: 16, maxWidth: 480, background: '#fff' }}
                 title="内申点・評定平均 計算ツール｜My Naishin"
                 loading="lazy"
