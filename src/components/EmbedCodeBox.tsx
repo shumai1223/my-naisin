@@ -6,9 +6,13 @@ import { Check, Code2 } from 'lucide-react';
 /**
  * 埋め込みウィジェットのiframeコードをワンクリックでコピーさせる被リンク導線。
  * ブロガー・塾サイトが貼るたびに my-naishin.com への被リンクが増える。
+ *
+ * 重要：iframe内のリンクは別ドキュメント＝埋め込み元からの被リンクにならない。
+ * そのため iframe の「外（ホストページ側）」に必ず表示クレジットの <a href> を入れる。
+ * これが埋め込み元ドメインからの実被リンクになる（widget backlinkの定石）。
  */
-const SNIPPET =
-  '<iframe src="https://my-naishin.com/embed/naishin" width="100%" height="520" style="border:1px solid #e5e7eb;border-radius:16px;max-width:480px" title="内申点・評定平均 計算ツール｜My Naishin" loading="lazy"></iframe>';
+const SNIPPET = `<iframe src="https://my-naishin.com/embed/naishin" width="100%" height="520" style="border:1px solid #e5e7eb;border-radius:16px;max-width:480px" title="内申点・評定平均 計算ツール｜My Naishin" loading="lazy"></iframe>
+<p style="max-width:480px;margin:6px auto 0;font-size:12px;color:#64748b;text-align:center">内申点・評定平均の計算ツール by <a href="https://my-naishin.com/" target="_blank" rel="noopener">My Naishin（内申点 計算サイト）</a></p>`;
 
 export function EmbedCodeBox() {
   const [copied, setCopied] = React.useState(false);

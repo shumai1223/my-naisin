@@ -109,8 +109,8 @@ export default function EmbedPage() {
           <section className="mb-8 rounded-2xl border border-amber-100 bg-amber-50/60 p-5">
             <h2 className="mb-2 text-sm font-bold text-amber-900">ご利用にあたってのお願い</h2>
             <ul className="space-y-1.5 text-xs leading-relaxed text-amber-800">
-              <li>・ウィジェット内の「Powered by My Naishin」の出典リンクは、そのまま残してください。</li>
-              <li>・改変（リンクの削除・差し替え）はご遠慮ください。デザインの一部調整（枠の色など外側のスタイル）は自由です。</li>
+              <li>・コードに含まれる <strong>「by My Naishin（内申点 計算サイト）」のクレジットリンク</strong>（iframeのすぐ下の行）は、そのまま残してください。無料で提供を続けるための唯一のお願いです。</li>
+              <li>・リンクの削除・差し替え・改変はご遠慮ください。枠の色など外側のスタイル調整は自由です。</li>
               <li>・商用・非商用問わず、教育目的の範囲で自由にご利用いただけます。</li>
             </ul>
           </section>
