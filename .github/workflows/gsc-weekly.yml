@@ -1,0 +1,57 @@
+name: GSC Weekly Report
+
+on:
+  schedule:
+    # 毎週月曜 午前9時（JST）= UTC 月曜0時
+    - cron: '0 0 * * 1'
+  workflow_dispatch: # 手動実行も可能
+
+jobs:
+  gsc-report:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate GSC weekly report
+        id: gsc
+        run: npx tsx src/scripts/gsc-weekly-report.ts
+        env:
+          GSC_SA_KEY: ${{ secrets.GSC_SA_KEY }}
+          GSC_SITE_URL: ${{ vars.GSC_SITE_URL || 'sc-domain:my-naishin.com' }}
+
+      - name: Upload report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: gsc-weekly-report
+          path: |
+            gsc-weekly-report.md
+            gsc-weekly-report.json
+          retention-days: 90
+
+      - name: Create issue with report
+        if: success()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const body = fs.readFileSync('gsc-weekly-report.md', 'utf8');
+            const date = '${{ steps.gsc.outputs.report_date }}';
+            github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `📊 GSC週次レポート: ${date}`,
+              body,
+              labels: ['gsc-report', 'automated', 'seo']
+            });

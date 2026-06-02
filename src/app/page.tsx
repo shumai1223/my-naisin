@@ -7,6 +7,7 @@ import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { PrefectureNaishinTable } from '@/components/PrefectureNaishinTable';
 import { KantenHyokaOfficial } from '@/components/KantenHyokaOfficial';
+import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { Calculator, BookOpen, MapPin, Sparkles, ShieldCheck, ChevronRight, Calendar, Clock, ArrowRight, Zap, TrendingUp, Target, HelpCircle } from 'lucide-react';
 
 const HOME_FAQS = [
@@ -300,6 +301,9 @@ export default function Page() {
 
             {/* 文科省一次情報ベースの権威コンテンツ（独自性・E-E-A-T・外部権威リンク） */}
             <KantenHyokaOfficial />
+
+            {/* 保護者向けリード導線（収益化の本命：広告表示→資料請求の送客） */}
+            <ParentLeadCTA />
 
             <div className="rounded-3xl bg-gradient-to-br from-blue-600 to-indigo-700 p-8 text-white">
               <h3 className="text-xl font-bold mb-4 flex items-center gap-2">

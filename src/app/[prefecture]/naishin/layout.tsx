@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { PREFECTURES } from '@/lib/prefectures';
+import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -67,6 +68,7 @@ export default async function PrefectureNaishinLayout({ children, params }: Layo
 
       {/* SSR静的コンテンツ - Googlebotが初回HTMLで読めるテキスト */}
       {prefecture && (
+        <>
         <section className="mx-auto max-w-4xl px-4 py-8">
           <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="text-lg font-bold text-slate-800 mb-3">
@@ -119,6 +121,13 @@ export default async function PrefectureNaishinLayout({ children, params }: Layo
             )}
           </div>
         </section>
+        <div className="mx-auto max-w-4xl px-4 pb-8">
+          <ParentLeadCTA
+            heading={`${prefecture.name}の入試で、お子さまの内申点は足りていますか？`}
+            body={`${prefecture.name}は${prefecture.maxScore}点満点。合格ラインまであと何点必要か、ご家庭でできる対策を無料の資料で確認できます。費用はかからず、請求は数分で完了します。`}
+          />
+        </div>
+        </>
       )}
 
     </>

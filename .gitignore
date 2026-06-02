@@ -87,3 +87,8 @@ __sapper__/
 
 # Next.js build output
 .open-next
+
+# 自動生成レポート（CIアーティファクト／ローカル実行の出力。クエリ情報を含むため非コミット）
+gsc-weekly-report.json
+gsc-weekly-report.md
+link-monitor-report.json
