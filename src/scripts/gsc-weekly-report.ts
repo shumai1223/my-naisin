@@ -63,6 +63,20 @@ async function fetchQueries(
   return (res.data.rows as Row[]) || [];
 }
 
+// 全体集計（dimensions無し＝匿名化クエリも含む正確な総数）。サマリのWoWに使う。
+async function fetchTotals(
+  client: ReturnType<typeof google.searchconsole>,
+  startDate: string,
+  endDate: string,
+): Promise<{ clicks: number; impressions: number }> {
+  const res = await client.searchanalytics.query({
+    siteUrl: SITE_URL,
+    requestBody: { startDate, endDate, rowLimit: 1 },
+  });
+  const row = (res.data.rows as Array<{ clicks?: number; impressions?: number }> | undefined)?.[0];
+  return { clicks: row?.clicks ?? 0, impressions: row?.impressions ?? 0 };
+}
+
 async function main() {
   if (!SA_KEY) {
     console.error(
@@ -91,19 +105,21 @@ async function main() {
   console.log(`   今週: ${recentStart} 〜 ${recentEnd}`);
   console.log(`   前週: ${prevStart} 〜 ${prevEnd}`);
 
-  const [recent, prev] = await Promise.all([
+  const [recent, prev, recentTot, prevTot] = await Promise.all([
     fetchQueries(client, recentStart, recentEnd),
     fetchQueries(client, prevStart, prevEnd),
+    fetchTotals(client, recentStart, recentEnd),
+    fetchTotals(client, prevStart, prevEnd),
   ]);
 
   const prevByQuery = new Map<string, Row>();
   for (const r of prev) prevByQuery.set(r.keys[0], r);
 
-  const sum = (rows: Row[], k: 'clicks' | 'impressions') => rows.reduce((a, r) => a + r[k], 0);
-  const recentClicks = sum(recent, 'clicks');
-  const recentImp = sum(recent, 'impressions');
-  const prevClicks = sum(prev, 'clicks');
-  const prevImp = sum(prev, 'impressions');
+  // サマリは全体集計を使う（per-queryの合計は匿名化クエリ分が欠落し過少になるため）
+  const recentClicks = recentTot.clicks;
+  const recentImp = recentTot.impressions;
+  const prevClicks = prevTot.clicks;
+  const prevImp = prevTot.impressions;
   const wow = (now: number, before: number) => (before === 0 ? 0 : (now - before) / before);
 
   // 1. striking distance（5〜15位 × 表示多）
