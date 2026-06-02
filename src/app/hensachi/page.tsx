@@ -46,8 +46,8 @@ const HENSACHI_FAQS = [
 
 export const metadata: Metadata = {
   title: '偏差値計算サイト 5教科【中学生・高校生対応】無料・30秒で算出 | My Naishin',
-  description: '【無料】5教科対応の偏差値計算サイト。点数と平均点・標準偏差を入れるだけで、中学生・高校生の偏差値を30秒で自動算出。教科別偏差値・志望校との距離も同時に確認。2026年最新版。',
-  keywords: ['偏差値計算サイト', '偏差値計算サイト 5教科', '偏差値計算サイト 中学生', '偏差値計算', '偏差値 計算', '偏差値 求める サイト', '偏差値 出す サイト', '5教科 偏差値', '中学生 偏差値', '高校生 偏差値'],
+  description: '【無料】5教科対応の偏差値計算サイト。点数と平均点・標準偏差を入れるだけで、中学生・高校生の偏差値を30秒で自動算出（中学生の偏差値診断にも対応）。教科別偏差値・志望校との距離も同時に確認。2026年最新版。',
+  keywords: ['偏差値計算サイト', '偏差値計算サイト 5教科', '偏差値計算サイト 中学生', '偏差値計算', '偏差値 計算', '偏差値診断', '偏差値診断 中学生', '中学生 偏差値 診断', '偏差値 求める サイト', '偏差値 出す サイト', '5教科 偏差値', '中学生 偏差値', '高校生 偏差値'],
   alternates: {
     canonical: 'https://my-naishin.com/hensachi',
   },
@@ -108,7 +108,7 @@ export default function HensachiPage() {
             </h1>
             <p className="mt-4 text-slate-600 max-w-2xl mx-auto leading-relaxed">
               中学生・高校生向けの、偏差値を無料で求められる計算サイト。<br />
-              点数・平均点・標準偏差を入れるだけで、あなたの偏差値を瞬時に算出します。
+              点数・平均点・標準偏差を入れるだけで偏差値を瞬時に算出。中学生の<strong>偏差値診断</strong>にもそのまま使えます。
             </p>
           </header>
 
@@ -298,6 +298,39 @@ export default function HensachiPage() {
                   志望校判定では、必ず<strong>同じ模試どうしの偏差値</strong>で比較してください。中学生のうちは、定期テストの偏差値で日々の調子を確認し、年数回の模試で受験者層の中での実力を測る、という使い分けが王道です。
                 </p>
               </div>
+            </div>
+          </section>
+
+          {/* 偏差値診断（surgingクエリ「偏差値診断 中学生」を"立ち位置を知る"角度で捕捉） */}
+          <section className="mt-8 rounded-2xl border-2 border-purple-200 bg-purple-50/30 p-6 shadow-sm">
+            <h2 className="mb-3 text-lg font-bold text-slate-800 border-l-4 border-purple-500 pl-3">
+              偏差値診断｜あなたの今の立ち位置がわかる（中学生向け）
+            </h2>
+            <p className="mb-4 text-sm leading-relaxed text-slate-700">
+              この偏差値計算サイトは、点数を入れるだけで使える<strong>中学生の偏差値診断ツール</strong>でもあります。
+              「偏差値を計算する」とは、つまり<strong>自分が集団の中でどの位置にいるかを診断する</strong>こと。診断結果からは、次の3つがわかります。
+            </p>
+            <div className="grid gap-3 sm:grid-cols-3">
+              <div className="rounded-xl border border-purple-100 bg-white p-4">
+                <div className="mb-1 text-sm font-bold text-purple-900">① 全体での立ち位置</div>
+                <p className="text-xs leading-relaxed text-slate-600">偏差値60で上位16%、70で上位2%。同学年で自分が上位何%かが一目でわかります。</p>
+              </div>
+              <div className="rounded-xl border border-purple-100 bg-white p-4">
+                <div className="mb-1 text-sm font-bold text-purple-900">② 志望校との距離</div>
+                <p className="text-xs leading-relaxed text-slate-600">志望校の合格偏差値と今の偏差値の差から、あと偏差値いくつ伸ばせばいいかが明確になります。</p>
+              </div>
+              <div className="rounded-xl border border-purple-100 bg-white p-4">
+                <div className="mb-1 text-sm font-bold text-purple-900">③ 教科ごとの強み弱み</div>
+                <p className="text-xs leading-relaxed text-slate-600">教科別の偏差値を診断すれば、どこを伸ばせば総合が上がるか（＝苦手の底上げ）が見えます。</p>
+              </div>
+            </div>
+            <div className="mt-4 text-center">
+              <a
+                href="#calculator-section"
+                className="inline-flex items-center gap-1.5 rounded-full bg-purple-600 px-5 py-2.5 text-sm font-bold text-white shadow-md transition-all hover:bg-purple-700"
+              >
+                偏差値を診断する（無料）
+              </a>
             </div>
           </section>
 
