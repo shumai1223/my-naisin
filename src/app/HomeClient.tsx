@@ -34,6 +34,7 @@ import { HistoryPanel } from '@/components/HistoryPanel';
 import { BlogSection } from '@/components/BlogSection';
 import { NaishinGuideSection } from '@/components/NaishinGuideSection';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
+import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { ThreeStepGuide } from '@/components/ThreeStepGuide';
@@ -435,6 +436,17 @@ export default function HomeClient() {
                           lastSaved={lastSaved}
                           onShareOpen={() => setShareOpen(true)}
                         />
+                      )}
+
+                      {/* 結果直後（＝最も志望校との距離が気になる瞬間）の保護者リード導線。審査中は休眠 */}
+                      {showResult && (
+                        <div className="mt-6">
+                          <ParentLeadCTA
+                            auditHide
+                            heading="この結果、志望校の合格ラインに届いていますか？"
+                            body="内申点は「今からの動き方」で十分に変えられます。お子さまに合った対策を、まずは無料の資料で確認できます（保護者の方向け・費用はかかりません）。"
+                          />
+                        </div>
                       )}
                     </>
                   )}

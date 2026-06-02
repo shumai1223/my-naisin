@@ -1,4 +1,5 @@
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
+import type { AffiliateId } from '@/lib/affiliates';
 import { ShieldCheck, FileText } from 'lucide-react';
 
 interface ParentLeadCTAProps {
@@ -9,6 +10,8 @@ interface ParentLeadCTAProps {
   className?: string;
   /** AdSense審査モード時に隠す（重複配置の終盤側に付与） */
   auditHide?: boolean;
+  /** 送客先プログラム。高単価の塾資料請求を追加したら差し替える（既定=Z会資料請求） */
+  affiliateId?: AffiliateId;
 }
 
 /**
@@ -18,7 +21,7 @@ interface ParentLeadCTAProps {
  * 「契約の意思決定者＝保護者」に向けて、無料資料請求（高単価リード）へ誘導する。
  * 実リンク・トラッキング・rel/PR表記は AffiliateAd に集約してコンプラを担保。
  */
-export function ParentLeadCTA({ heading, body, className = '', auditHide = false }: ParentLeadCTAProps) {
+export function ParentLeadCTA({ heading, body, className = '', auditHide = false, affiliateId = 'zkai-text-request' }: ParentLeadCTAProps) {
   if (auditHide && process.env.NEXT_PUBLIC_ADSENSE_AUDIT === '1') return null;
 
   return (
@@ -40,7 +43,7 @@ export function ParentLeadCTA({ heading, body, className = '', auditHide = false
 
       <div className="flex flex-col items-stretch gap-2 sm:flex-row sm:items-center">
         <AffiliateAd
-          id="zkai-text-request"
+          id={affiliateId}
           hideLabel
           linkClassName="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 px-6 py-3.5 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-emerald-700 hover:shadow-lg active:scale-95 sm:w-auto"
         />

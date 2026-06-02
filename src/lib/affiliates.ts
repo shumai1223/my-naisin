@@ -30,6 +30,9 @@ interface TextAffiliate {
 
 export type AffiliateConfig = BannerAffiliate | TextAffiliate;
 
+// 高単価プログラム（個別塾の資料請求/体験 など）の追加手順は MONETIZATION.md を参照。
+// 追加は2手: (1) 上の AffiliateId union に型を足す (2) 下の Record にエントリを足す。
+// 送客先は <ParentLeadCTA affiliateId="new-id" /> で差し替え可能。
 export const AFFILIATES: Record<AffiliateId, AffiliateConfig> = {
   'zkai-banner': {
     id: 'zkai-banner',
