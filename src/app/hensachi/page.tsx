@@ -708,6 +708,11 @@ export default function HensachiPage() {
                 <span className="text-slate-600">入りやすい高校（オール3〜3.5レベル）</span>
               </div>
             </div>
+            <div className="mt-4 rounded-xl border border-amber-100 bg-amber-50/50 p-3 text-center text-sm">
+              <Link href="/blog/hensachi-koukou-ichiran-2026" className="font-bold text-amber-800 underline">
+                偏差値別 行ける高校の一覧【2026年版・偏差値40〜70】をもっと詳しく →
+              </Link>
+            </div>
           </section>
 
           {/* アフィリエイト */}
@@ -830,6 +835,7 @@ export default function HensachiPage() {
             <h2 className="mb-4 text-lg font-bold text-slate-800">偏差値・内申点に関する関連コラム</h2>
             <div className="space-y-3">
               {[
+                { slug: 'hensachi-koukou-ichiran-2026', title: '偏差値別 行ける高校一覧【2026年最新】偏差値40〜70の公立・私立' },
                 { slug: 'all-3-high-school-options-2026-update', title: '【2026年】オール3の偏差値は40〜45｜内申27で行ける高校と逆転戦略' },
                 { slug: 'naishin-target-grades-by-prefecture', title: '都道府県別の目標内申点ガイド｜偏差値別に必要な評定を解説' },
                 { slug: 'how-to-raise-naishinten', title: '内申点を上げる15の方法【完全保存版】' },

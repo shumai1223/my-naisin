@@ -300,6 +300,7 @@ export default function HyoteiHeikinPage() {
                 </div>
                 <div className="text-sm text-amber-900 leading-relaxed">
                   <strong>狙える高校：</strong>新宿、駒場、小山台、川和、市立金沢、寝屋川、四日市など中位上位校。多くの私立併願優遇の基準4.0をクリア。難関校は当日点での頑張りが必要。
+                  詳しくは<Link href="/blog/hyotei-heikin-4-0-high-school" className="font-bold underline">評定平均4.0で行ける高校の解説</Link>へ。
                 </div>
               </div>
 
@@ -314,6 +315,7 @@ export default function HyoteiHeikinPage() {
                 </div>
                 <div className="text-sm text-emerald-900 leading-relaxed">
                   <strong>狙える高校：</strong>中堅公立高校全般（偏差値55前後）。私立では併願優遇制度のある中堅校に多数チャレンジ可能。「平均より上」のポジション。
+                  詳しくは<Link href="/blog/hyotei-heikin-3-5-high-school" className="font-bold underline">評定平均3.5で行ける高校の解説</Link>へ。
                 </div>
               </div>
 
@@ -872,6 +874,11 @@ export default function HyoteiHeikinPage() {
             <h2 className="mb-4 text-lg font-bold text-slate-800">評定平均・内申点に関する関連コラム</h2>
             <div className="space-y-3">
               {[
+                { slug: 'hyotei-heikin-4-0-high-school', title: '評定平均4.0で行ける高校は？私立併願優遇・推薦の出願基準【2026年】' },
+                { slug: 'hyotei-heikin-3-5-high-school', title: '評定平均3.5で行ける高校は？併願優遇の基準と公立の目安【2026年】' },
+                { slug: 'naishinten-27-high-school', title: '内申点27（オール3）で行ける高校は？偏差値目安と逆転戦略【2026年】' },
+                { slug: 'naishinten-30-high-school', title: '内申点30で行ける高校は？評定平均3.3の公立・私立目安【2026年】' },
+                { slug: 'hensachi-koukou-ichiran-2026', title: '偏差値別 行ける高校一覧【2026年最新】偏差値40〜70の公立・私立' },
                 { slug: 'kansan-naishin-vs-su-naishin', title: '【図解】換算内申と素内申の違いとは？' },
                 { slug: 'naishin-evaluation-criteria-3-points', title: '通知表の3観点評価を徹底解説｜A・B・Cの付き方' },
                 { slug: 'teishutsubutsu-jugyou-taido-guide', title: '提出物・授業態度で評定アップする方法【保存版】' },
