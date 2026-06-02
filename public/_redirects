@@ -1,3 +1,9 @@
 # Redirects
 # NOTE: HTTPS強制はCloudflareダッシュボードの「Always Use HTTPS」またはHSTSで行ってください。
 # このファイルでhttps://へのリダイレクトを書くと、httpsアクセス時に無限ループになるため削除しました。
+
+# 旧 all-3 ページの統合（canonical集約・link equity保全）
+# next.config.mjs にも同じ301があるが、GSCで「Googleが旧URLを正規採用」状態を確認したため、
+# Cloudflareのアセット層で確実に先発火する _redirects 側にも明示する（同一宛先・冪等）。
+# 反映後は GSC のURL検査で旧URLの「インデックス登録をリクエスト」して再クロールを促すこと。
+/blog/all-3-high-school-options  /blog/all-3-high-school-options-2026-update  301
