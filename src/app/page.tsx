@@ -372,7 +372,7 @@ export default function Page() {
               </div>
               <div className="mt-6 rounded-xl border border-blue-100 bg-blue-50/40 p-4 text-center">
                 <p className="text-sm text-slate-700">
-                  もっと詳しく知りたい方は <Link href="/blog/naishin-guide" className="font-bold text-blue-700 underline">内申点ガイド</Link>・<Link href="/blog/how-to-raise-naishinten" className="font-bold text-blue-700 underline">内申点の上げ方</Link>・<Link href="/blog/naishinten-average-score" className="font-bold text-blue-700 underline">内申点の平均は何点？</Link>・<Link href="/blog" className="font-bold text-blue-700 underline">受験コラム一覧</Link>へ
+                  もっと詳しく知りたい方は <Link href="/blog/naishin-guide" className="font-bold text-blue-700 underline">内申点ガイド</Link>・<Link href="/blog/how-to-raise-naishinten" className="font-bold text-blue-700 underline">内申点の上げ方</Link>・<Link href="/blog/naishinten-average-score" className="font-bold text-blue-700 underline">内申点の平均は何点？</Link>・<Link href="/koukou-hiyou" className="font-bold text-blue-700 underline">高校の費用シミュレーター</Link>・<Link href="/blog" className="font-bold text-blue-700 underline">受験コラム一覧</Link>へ
                 </p>
               </div>
             </div>
