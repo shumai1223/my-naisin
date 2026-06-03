@@ -238,9 +238,9 @@ export default async function BlogPostPage({ params }: PageProps) {
           <div className="mb-8 rounded-xl border border-amber-200 bg-amber-50/60 px-4 py-3">
             <p className="text-xs leading-relaxed text-slate-700">
               <span className="text-slate-500">関連教材：</span>
-              <AffiliateAd id="sapuri-text" className="mx-1" hideLabel />
+              <AffiliateAd id="sapuri-text" className="mx-1" hideLabel auditHide />
               （月額2,178円）／
-              <AffiliateAd id="zkai-text-middle" className="mx-1" hideLabel />
+              <AffiliateAd id="zkai-text-middle" className="mx-1" hideLabel auditHide />
               （PR）が内申点アップの定番。
             </p>
           </div>

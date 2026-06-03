@@ -27,7 +27,7 @@ const FAQS = [
 ];
 
 export const metadata: Metadata = {
-  title: '高校の費用シミュレーター｜公立・私立の3年間の学費と総額【2026年】',
+  title: '高校の費用シミュレーター｜公立・私立の3年間の学費と総額【2026年】 | My Naishin',
   description:
     '高校3年間にかかる費用を無料でシミュレーション。公立・私立を選ぶだけで、学費・教材費・通学費などの総額を自動計算。文部科学省「子供の学習費調査」の一次データに準拠（就学支援金考慮）。',
   alternates: { canonical: 'https://my-naishin.com/koukou-hiyou' },

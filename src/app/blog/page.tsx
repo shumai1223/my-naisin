@@ -7,7 +7,7 @@ import { BlogListClient, type BlogListItem } from '@/components/Blog/BlogListCli
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 
 export const metadata = {
-  title: '高校受験・内申点対策コラム【2026年最新】成績アップの秘訣を公開',
+  title: '高校受験・内申点対策コラム【2026年最新】成績アップの秘訣を公開 | My Naishin',
   description:
     '【2026年度入試対応】内申点の計算方法、成績の上げ方、都道府県別の違い、実技教科対策など、現役中学生と保護者が知るべき高校受験の最前線情報を発信中。全記事プロ監修・最新データに基づいています。',
   openGraph: {

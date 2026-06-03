@@ -2,10 +2,10 @@ import { BlogPost } from '@/lib/blog/types';
 
 export const post: BlogPost = {
   slug: 'hyotei-heikin-4-5-high-school',
-  title: '評定平均4.5で行ける高校は？難関校・推薦入試・特待生制度の出願基準【2026年】',
+  title: '評定平均4.5で行ける高校は？偏差値63〜68の難関校・推薦・特待生の出願基準【2026年】',
   description: '【2026年最新】評定平均4.5（オール4.5相当）で行ける高校を完全解説。公立難関校（日比谷・湘南・北野クラス）の推薦基準、私立特待生制度、4.5から4.8以上を狙う最終調整戦略まで、中学生・保護者向けにまとめました。',
   date: '2026-05-28',
-  lastUpdated: '2026-05-28',
+  lastUpdated: '2026-06-03',
   category: '進路・受験',
   readTime: '18分',
   author: '運営者（My Naishin）',

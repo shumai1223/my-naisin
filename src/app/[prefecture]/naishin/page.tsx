@@ -80,8 +80,9 @@ export async function generateMetadata({ params }: PageProps) {
   const prefecture = getPrefectureByCode(prefectureCode);
   if (!prefecture) return {};
 
-  // モバイルSERPの先頭24文字に「{県名}の内申点 計算」を必ず含め、descriptionは「無料」「30秒」「2026年最新」を120字以内に圧縮（モバイル表示2行に収める）
-  const title = `${prefecture.name}の内申点 計算サイト【無料・${prefecture.maxScore}点満点】2026年最新 | My Naishin`;
+  // モバイルSERPの先頭に「{県名}の内申点 自動計算ツール」を front-load し、「内申点 計算」「内申点 自動計算」「{県名} 内申点」の主要クエリを冒頭で満たす。
+  // 末尾ブランドは1回のみ（root layout の title.template は廃止済。二重「| My Naishin」防止）。descriptionは「無料」「30秒」「2026最新」を120字以内に圧縮。
+  const title = `${prefecture.name}の内申点 自動計算ツール｜${prefecture.maxScore}点満点・無料【2026年度入試対応】 | My Naishin`;
   const description = `【無料】${prefecture.name}の内申点を30秒で自動計算。9教科の評定を入れるだけで${prefecture.maxScore}点満点で瞬時に算出。実技倍率・対象学年・志望校ボーダー比較も対応。2026年最新版。`;
 
   return {
@@ -315,7 +316,7 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
                   </div>
                 </div>
                 <div className="flex justify-center md:justify-end">
-                  <AffiliateAd id="sapuri-banner-300" />
+                  <AffiliateAd id="sapuri-banner-300" auditHide />
                 </div>
               </div>
             </section>
@@ -482,7 +483,7 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
                     トップ校を志望する場合、内申点だけでなく当日点の実力も鍵。Z会の通信教育は難関校受験対策で実績ある教材です。
                   </p>
                   <div className="text-sm">
-                    <AffiliateAd id="zkai-text-advanced" hideLabel />（PR）
+                    <AffiliateAd id="zkai-text-advanced" hideLabel auditHide />（PR）
                   </div>
                 </div>
                 <div className="rounded-xl border border-emerald-100 bg-emerald-50/40 p-4">
@@ -491,7 +492,7 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
                     自宅でマンツーマンの個別指導を受けたいなら、ネット松陰塾の自立学習スタイルが選択肢になります。
                   </p>
                   <div className="flex justify-start">
-                    <AffiliateAd id="shoin-banner" centered={false} />
+                    <AffiliateAd id="shoin-banner" centered={false} auditHide />
                   </div>
                 </div>
               </div>

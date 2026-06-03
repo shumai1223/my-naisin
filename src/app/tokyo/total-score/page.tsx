@@ -256,7 +256,7 @@ export default function TokyoTotalScorePage() {
               目標点まであと一歩のあなたへ
             </div>
             <div className="text-xs text-slate-500 mb-4 leading-relaxed">
-              内申点・当日点の両方を伸ばす学習なら<AffiliateAd id="zkai-text-middle" hideLabel />（PR）が定番
+              内申点・当日点の両方を伸ばす学習なら<AffiliateAd id="zkai-text-middle" hideLabel auditHide />（PR）が定番
             </div>
             <div className="hidden md:block">
               <AffiliateAd id="zkai-banner" />
@@ -265,7 +265,7 @@ export default function TokyoTotalScorePage() {
               <AffiliateAd id="sapuri-banner-300" />
             </div>
             <div className="mt-3 text-xs">
-              <AffiliateAd id="zkai-text-request" hideLabel />（PR）から詳細をチェック
+              <AffiliateAd id="zkai-text-request" hideLabel auditHide />（PR）から詳細をチェック
             </div>
           </section>
 

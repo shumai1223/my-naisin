@@ -273,9 +273,9 @@ export default function HomeClient() {
                 <div className="px-4 pb-3 md:px-6">
                   <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 rounded-xl border border-blue-100 bg-gradient-to-r from-blue-50 via-indigo-50 to-blue-50 px-4 py-2.5 text-center text-xs text-slate-600 md:text-sm">
                     <span>内申点アップに通信教育という選択肢。</span>
-                    <AffiliateAd id="zkai-text-middle" hideLabel />
+                    <AffiliateAd id="zkai-text-middle" hideLabel auditHide />
                     <span className="text-slate-400">/</span>
-                    <AffiliateAd id="zkai-text-request" hideLabel />
+                    <AffiliateAd id="zkai-text-request" hideLabel auditHide />
                     <span className="text-[10px] text-slate-400">[PR]</span>
                   </div>
                 </div>

@@ -218,7 +218,7 @@ export default function OsakaTotalScorePage() {
               目標点まであと一歩のあなたへ
             </div>
             <div className="text-xs text-slate-500 mb-4 leading-relaxed">
-              大阪府立高校の対策には<AffiliateAd id="zkai-text-middle" hideLabel />（PR）が定番
+              大阪府立高校の対策には<AffiliateAd id="zkai-text-middle" hideLabel auditHide />（PR）が定番
             </div>
             <div className="hidden md:block">
               <AffiliateAd id="zkai-banner" />

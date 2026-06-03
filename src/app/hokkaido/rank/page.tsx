@@ -180,7 +180,7 @@ export default function HokkaidoRankPage() {
               目標ランクまであと一歩のあなたへ
             </div>
             <div className="text-xs text-slate-500 mb-4 leading-relaxed">
-              北海道公立高校受験には<AffiliateAd id="zkai-text-middle" hideLabel />（PR）が定番
+              北海道公立高校受験には<AffiliateAd id="zkai-text-middle" hideLabel auditHide />（PR）が定番
             </div>
             <div className="hidden md:block">
               <AffiliateAd id="zkai-banner" />

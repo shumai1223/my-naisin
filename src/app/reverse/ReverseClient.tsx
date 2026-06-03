@@ -222,7 +222,7 @@ function ReversePageContent() {
                   必要な得点が分かったあなたへ
                 </div>
                 <div className="text-xs text-slate-600 mb-4 leading-relaxed">
-                  目標点まであと一歩。<AffiliateAd id="zkai-text-advanced" hideLabel />（PR）なら、添削指導で「本当の得点力」が身につきます。
+                  目標点まであと一歩。<AffiliateAd id="zkai-text-advanced" hideLabel auditHide />（PR）なら、添削指導で「本当の得点力」が身につきます。
                 </div>
                 <div className="hidden md:block">
                   <AffiliateAd id="zkai-banner" />
@@ -231,7 +231,7 @@ function ReversePageContent() {
                   <AffiliateAd id="sapuri-banner-300" />
                 </div>
                 <div className="mt-3 text-xs">
-                  <AffiliateAd id="zkai-text-request" className="mx-1" hideLabel />（PR）で詳細をチェック
+                  <AffiliateAd id="zkai-text-request" className="mx-1" hideLabel auditHide />（PR）で詳細をチェック
                 </div>
               </section>
 
