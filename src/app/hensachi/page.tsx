@@ -1,13 +1,46 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { Calculator, BookOpen, ChevronRight, Home, AlertTriangle, TrendingUp, Award, User, Calendar, ShieldCheck, FileCheck } from 'lucide-react';
+import { Calculator, BookOpen, ChevronRight, Home, AlertTriangle, TrendingUp, Award, User, Calendar, ShieldCheck, FileCheck, Table2, Percent, BarChart3, GraduationCap, Target } from 'lucide-react';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
 import { HowToSchema } from '@/components/StructuredData/HowToSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
+import { DatasetSchema } from '@/components/StructuredData/DatasetSchema';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { HensachiCalculator } from '@/components/Hensachi/HensachiCalculator';
+
+// 偏差値 → 上位%・順位（正規分布に基づく数学的に厳密な対応値。偏差値の標準偏差=10で算出）
+const PERCENTILE_ROWS: { h: string; top: string; r300: string; r1000: string; note?: string }[] = [
+  { h: '75', top: '0.6%', r300: '約2位', r1000: '約6位', note: '超トップ層' },
+  { h: '72.5', top: '1.2%', r300: '約4位', r1000: '約12位' },
+  { h: '70', top: '2.3%', r300: '約7位', r1000: '約23位', note: '最難関校ライン' },
+  { h: '67.5', top: '4.0%', r300: '約12位', r1000: '約40位' },
+  { h: '65', top: '6.7%', r300: '約20位', r1000: '約67位', note: '難関校ライン' },
+  { h: '62.5', top: '10.6%', r300: '約32位', r1000: '約106位' },
+  { h: '60', top: '15.9%', r300: '約48位', r1000: '約159位', note: '上位校ライン' },
+  { h: '57.5', top: '22.7%', r300: '約68位', r1000: '約227位' },
+  { h: '55', top: '30.9%', r300: '約93位', r1000: '約309位' },
+  { h: '52.5', top: '40.1%', r300: '約120位', r1000: '約401位' },
+  { h: '50', top: '50%', r300: '150位', r1000: '500位', note: 'ちょうど平均' },
+  { h: '47.5', top: '59.9%', r300: '約180位', r1000: '約599位' },
+  { h: '45', top: '69.1%', r300: '約207位', r1000: '約691位' },
+  { h: '40', top: '84.1%', r300: '約252位', r1000: '約841位' },
+  { h: '35', top: '93.3%', r300: '約280位', r1000: '約933位' },
+  { h: '30', top: '97.7%', r300: '約293位', r1000: '約977位' },
+];
+
+// 点数 → 偏差値 早見表（標準偏差15で算出）。行=自分の点数 / 列=平均点40・50・60・70
+const HAYAMI_ROWS: { score: string; m40: string; m50: string; m60: string; m70: string }[] = [
+  { score: '100点', m40: '90.0', m50: '83.3', m60: '76.7', m70: '70.0' },
+  { score: '90点', m40: '83.3', m50: '76.7', m60: '70.0', m70: '63.3' },
+  { score: '80点', m40: '76.7', m50: '70.0', m60: '63.3', m70: '56.7' },
+  { score: '70点', m40: '70.0', m50: '63.3', m60: '56.7', m70: '50.0' },
+  { score: '60点', m40: '63.3', m50: '56.7', m60: '50.0', m70: '43.3' },
+  { score: '50点', m40: '56.7', m50: '50.0', m60: '43.3', m70: '36.7' },
+  { score: '40点', m40: '50.0', m50: '43.3', m60: '36.7', m70: '30.0' },
+  { score: '30点', m40: '43.3', m50: '36.7', m60: '30.0', m70: '23.3' },
+];
 
 const HENSACHI_FAQS = [
   {
@@ -42,12 +75,28 @@ const HENSACHI_FAQS = [
     question: '5教科の偏差値と3教科の偏差値、どちらを見る？',
     answer: '公立高校受験は5教科で評価されるため、5教科の偏差値を主に見ます。私立高校は3教科（英語・数学・国語）入試が主流のため、3教科の偏差値も参考になります。当ツールは5教科対応ですが、教科別偏差値も同時に算出できるため、3教科だけ抽出して確認することも可能です。',
   },
+  {
+    question: '偏差値60は上位何％ですか？順位だと何番目？',
+    answer: '偏差値60は上位約15.9％（おおむね上位16％）です。300人の集団なら約48位、1,000人なら約159位に相当します。同様に偏差値65は上位約6.7％（300人中約20位）、偏差値70は上位約2.3％（300人中約7位）、偏差値55は上位約30.9％（300人中約93位）です。ページ内の「偏差値→上位％・順位 完全対応表」で偏差値30〜75まで確認できます。',
+  },
+  {
+    question: '偏差値は自分で計算できますか？電卓でも出せる？',
+    answer: 'はい、出せます。「偏差値＝50＋10×(自分の点数−平均点)÷標準偏差」の式に、自分の点数・テストの平均点・標準偏差を入れるだけです。標準偏差が分からない場合は定期テストなら15〜20を目安に。電卓でも計算できますが、5教科分をまとめて出すなら当ページの計算ツールが速く、平均点だけ分かれば「点数→偏差値 早見表」でおおよその値をその場で読み取ることもできます。',
+  },
+  {
+    question: '高校の偏差値と大学の偏差値は同じ基準ですか？',
+    answer: '別物です。偏差値は「その試験を受けた集団（母集団）の中での位置」なので、高校受験と大学受験では母集団が違い、同じ数字でも意味が変わります。一般に大学受験のほうが受験する層が絞られて学力レベルが上がるため、同じ人でも大学受験の偏差値は高校受験より低めに出やすい、と言われます。「高校偏差値65＝大学偏差値65の大学に入れる」ではない点に注意してください。',
+  },
+  {
+    question: '偏差値ランキングだけで志望校を決めていい？',
+    answer: '偏差値ランキングは合格難易度の目安としては有用ですが、それだけで志望校を決めるのは危険です。実際の合否は内申点（調査書点）と当日点の合計で決まり、地域によって内申の比重が大きく異なります。さらに通学時間・校風・大学進学実績・部活なども進路満足度を左右します。偏差値で候補を絞り、内申点計算ツールや各都道府県の入試制度ページで合格戦略を立てるのがおすすめです。',
+  },
 ];
 
 export const metadata: Metadata = {
   title: '偏差値計算サイト 5教科【中学生・高校生対応】無料・30秒で算出 | My Naishin',
-  description: '【無料】5教科対応の偏差値計算サイト。点数と平均点・標準偏差を入れるだけで、中学生・高校生の偏差値を30秒で自動算出（中学生の偏差値診断にも対応）。教科別偏差値・志望校との距離も同時に確認。2026年最新版。',
-  keywords: ['偏差値計算サイト', '偏差値計算サイト 5教科', '偏差値計算サイト 中学生', '偏差値計算', '偏差値 計算', '偏差値診断', '偏差値診断 中学生', '中学生 偏差値 診断', '偏差値 求める サイト', '偏差値 出す サイト', '5教科 偏差値', '中学生 偏差値', '高校生 偏差値'],
+  description: '【無料】5教科対応の偏差値計算サイト。点数と平均点・標準偏差を入れるだけで偏差値を30秒で自動算出。点数→偏差値の早見表、偏差値→上位％・順位の完全対応表（偏差値60＝上位約16%）も収録。模試で偏差値が違う理由・高校と大学の偏差値の違いまで解説。2026年最新版。',
+  keywords: ['偏差値計算サイト', '偏差値計算サイト 5教科', '偏差値計算サイト 中学生', '偏差値計算', '偏差値 計算', '偏差値診断', '偏差値診断 中学生', '中学生 偏差値 診断', '偏差値 求める サイト', '偏差値 出す サイト', '5教科 偏差値', '中学生 偏差値', '高校生 偏差値', '偏差値 上位 何%', '偏差値60 上位', '偏差値65 順位', '偏差値 早見表', '偏差値 順位 換算', '偏差値 とは', '模試 偏差値 違い', '大学 偏差値 違い'],
   alternates: {
     canonical: 'https://my-naishin.com/hensachi',
   },
@@ -85,6 +134,15 @@ export default function HensachiPage() {
         ]}
       />
       <FAQPageSchema faqItems={HENSACHI_FAQS} />
+      <DatasetSchema
+        name="偏差値→上位パーセンタイル・順位 対応表（偏差値30〜75）"
+        description="偏差値を上位何パーセント・300人中／1,000人中の順位に換算した対応表。正規分布に基づき数学的に算出した一次参照データ。例：偏差値60＝上位約16%（300人中約48位）、偏差値65＝上位約6.7%、偏差値70＝上位約2.3%。"
+        url="https://my-naishin.com/hensachi#hensachi-percentile"
+        variableMeasured={['偏差値', '上位パーセンタイル(%)', '300人中の順位', '1000人中の順位']}
+        keywords={['偏差値 上位 何%', '偏差値60 上位', '偏差値65 順位', '偏差値 パーセンタイル', '偏差値 順位 換算']}
+        citation="正規分布（標準正規分布）に基づく算出。偏差値=50+10z。"
+        dateModified="2026-06-03"
+      />
 
       <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
@@ -119,8 +177,23 @@ export default function HensachiPage() {
                 <Calculator className="h-3.5 w-3.5" />
                 計算ツールへ
               </a>
+              <a href="#hensachi-hayami" className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50">
+                <Table2 className="h-3.5 w-3.5" />
+                点数→偏差値 早見表
+              </a>
+              <a href="#hensachi-percentile" className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50">
+                <Percent className="h-3.5 w-3.5" />
+                偏差値→上位％・順位
+              </a>
+              <a href="#hensachi-moshi" className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50">
+                模試で偏差値が違う理由
+              </a>
               <a href="#real-examples" className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50">
                 実例5パターン
+              </a>
+              <a href="#hensachi-daigaku" className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50">
+                <GraduationCap className="h-3.5 w-3.5" />
+                高校と大学の偏差値
               </a>
               <a href="#hensachi-koukou" className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50">
                 偏差値と高校
@@ -252,6 +325,86 @@ export default function HensachiPage() {
             </p>
           </section>
 
+          {/* 点数→偏差値 早見表（「偏差値 計算」「偏差値 出し方」意図 + 引用されやすい参照データ） */}
+          <section id="hensachi-hayami" className="mt-8 scroll-mt-20 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <h2 className="mb-2 flex items-center gap-2 text-lg font-bold text-slate-800 border-l-4 border-purple-500 pl-3">
+              <Table2 className="h-5 w-5 text-purple-500" />
+              点数→偏差値 早見表【平均点別・計算不要】
+            </h2>
+            <p className="mb-4 text-sm leading-relaxed text-slate-600">
+              「自分の点数」と「テストの平均点」が分かれば、計算しなくても偏差値のおおよその値をこの表から読み取れます。
+              標準偏差は定期テストで一般的な<strong>15</strong>で算出。正確な値は上の計算ツールに自分の標準偏差を入れてください。
+            </p>
+            <div className="overflow-x-auto">
+              <table className="min-w-full text-xs md:text-sm">
+                <thead>
+                  <tr className="bg-purple-600 text-white">
+                    <th className="border border-purple-400 px-3 py-2 text-left font-bold whitespace-nowrap">自分の点数 ＼ 平均点</th>
+                    <th className="border border-purple-400 px-3 py-2 text-center font-bold">平均40点</th>
+                    <th className="border border-purple-400 px-3 py-2 text-center font-bold">平均50点</th>
+                    <th className="border border-purple-400 px-3 py-2 text-center font-bold">平均60点</th>
+                    <th className="border border-purple-400 px-3 py-2 text-center font-bold">平均70点</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {HAYAMI_ROWS.map((row) => (
+                    <tr key={row.score} className="odd:bg-white even:bg-slate-50">
+                      <td className="border border-slate-200 px-3 py-2 font-bold text-slate-800 whitespace-nowrap">{row.score}</td>
+                      <td className="border border-slate-200 px-3 py-2 text-center text-slate-700">{row.m40}</td>
+                      <td className="border border-slate-200 px-3 py-2 text-center text-slate-700">{row.m50}</td>
+                      <td className="border border-slate-200 px-3 py-2 text-center text-slate-700">{row.m60}</td>
+                      <td className="border border-slate-200 px-3 py-2 text-center text-slate-700">{row.m70}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="mt-3 text-xs leading-relaxed text-slate-500">
+              例：平均60点のテストで80点なら偏差値<strong className="text-purple-700">63.3</strong>、平均50点で70点なら偏差値<strong className="text-purple-700">63.3</strong>。
+              同じ点数でも平均点が低いテストほど偏差値は高く出ます。教科ごとに平均点が違うので、5教科それぞれで読み取るのがコツです。
+            </p>
+          </section>
+
+          {/* 偏差値→上位%・順位 完全対応表（「偏差値60 上位何%」「偏差値65 順位」直撃 + Dataset構造化でAI引用資産化） */}
+          <section id="hensachi-percentile" className="mt-8 scroll-mt-20 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <h2 className="mb-2 flex items-center gap-2 text-lg font-bold text-slate-800 border-l-4 border-purple-500 pl-3">
+              <Percent className="h-5 w-5 text-purple-500" />
+              偏差値→上位％・順位 完全対応表【偏差値30〜75】
+            </h2>
+            <p className="mb-4 text-sm leading-relaxed text-slate-600">
+              「偏差値60って上位何％？」「偏差値65なら何位くらい？」に一発で答える対応表です。
+              正規分布に基づいて<strong>数学的に算出</strong>した値なので、模試の種類に関係なく成り立ちます（300人・1,000人の集団に換算）。
+            </p>
+            <div className="overflow-x-auto">
+              <table className="min-w-full text-xs md:text-sm">
+                <thead>
+                  <tr className="bg-indigo-600 text-white">
+                    <th className="border border-indigo-400 px-3 py-2 text-center font-bold">偏差値</th>
+                    <th className="border border-indigo-400 px-3 py-2 text-center font-bold">上位</th>
+                    <th className="border border-indigo-400 px-3 py-2 text-center font-bold">300人中</th>
+                    <th className="border border-indigo-400 px-3 py-2 text-center font-bold">1,000人中</th>
+                    <th className="border border-indigo-400 px-3 py-2 text-left font-bold">目安</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {PERCENTILE_ROWS.map((row) => (
+                    <tr key={row.h} className={row.note ? 'bg-purple-50/70 font-medium' : 'odd:bg-white even:bg-slate-50'}>
+                      <td className="border border-slate-200 px-3 py-2 text-center font-black text-indigo-700">{row.h}</td>
+                      <td className="border border-slate-200 px-3 py-2 text-center text-slate-700">{row.top}</td>
+                      <td className="border border-slate-200 px-3 py-2 text-center text-slate-700">{row.r300}</td>
+                      <td className="border border-slate-200 px-3 py-2 text-center text-slate-700">{row.r1000}</td>
+                      <td className="border border-slate-200 px-3 py-2 text-left text-xs text-slate-500">{row.note ?? ''}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="mt-3 text-xs leading-relaxed text-slate-500">
+              ※ 偏差値は「平均50・標準偏差10」の正規分布で定義されるため、上位％・順位はテストの種類によらず一定です。
+              実際の模試では分布が完全な正規分布からややずれるため、端（偏差値75以上・25以下）では誤差が出ます。
+            </p>
+          </section>
+
           {/* 中学生が5教科の偏差値を出す方法（「偏差値計算サイト 5教科」「偏差値計算サイト 中学生」の意図直撃） */}
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="mb-4 text-lg font-bold text-slate-800 border-l-4 border-purple-500 pl-3">
@@ -377,6 +530,53 @@ export default function HensachiPage() {
                 </p>
               </div>
             </div>
+          </section>
+
+          {/* 模試で偏差値が違う理由（「進研模試 偏差値」「駿台 偏差値 換算」「模試 偏差値 違い」意図） */}
+          <section id="hensachi-moshi" className="mt-8 scroll-mt-20 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <h2 className="mb-2 flex items-center gap-2 text-lg font-bold text-slate-800 border-l-4 border-purple-500 pl-3">
+              <BarChart3 className="h-5 w-5 text-purple-500" />
+              模試によって偏差値が違うのはなぜ？【母集団の話】
+            </h2>
+            <p className="mb-4 text-sm leading-relaxed text-slate-700">
+              「進研模試で偏差値65だったのに、別の模試では55だった」——よくある話です。原因は<strong>母集団（その模試を受けた集団）のレベルの違い</strong>。
+              難関校志望者ばかりが受ける模試では周りが強いので偏差値は<strong>低めに</strong>、幅広い層が受ける模試では<strong>高めに</strong>出ます。同じ実力でも、受ける模試で偏差値は10前後も変わります。
+            </p>
+            <div className="overflow-x-auto">
+              <table className="min-w-full text-xs md:text-sm">
+                <thead>
+                  <tr className="bg-slate-700 text-white">
+                    <th className="border border-slate-500 px-3 py-2 text-left font-bold whitespace-nowrap">模試のタイプ</th>
+                    <th className="border border-slate-500 px-3 py-2 text-left font-bold">母集団</th>
+                    <th className="border border-slate-500 px-3 py-2 text-center font-bold whitespace-nowrap">偏差値の出方</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="odd:bg-white even:bg-slate-50">
+                    <td className="border border-slate-200 px-3 py-2 font-bold text-slate-800">難関者が集中する模試<br /><span className="font-normal text-xs text-slate-500">（駿台中学生テスト など）</span></td>
+                    <td className="border border-slate-200 px-3 py-2 text-slate-700">上位層が多く、レベルが高い</td>
+                    <td className="border border-slate-200 px-3 py-2 text-center font-bold text-red-600">低めに出る</td>
+                  </tr>
+                  <tr className="odd:bg-white even:bg-slate-50">
+                    <td className="border border-slate-200 px-3 py-2 font-bold text-slate-800">受験者層が標準的な模試<br /><span className="font-normal text-xs text-slate-500">（北辰テスト・Vもぎ/Wもぎ・五ツ木 など）</span></td>
+                    <td className="border border-slate-200 px-3 py-2 text-slate-700">その地域の受験生が幅広く受ける</td>
+                    <td className="border border-slate-200 px-3 py-2 text-center font-bold text-amber-600">標準的</td>
+                  </tr>
+                  <tr className="odd:bg-white even:bg-slate-50">
+                    <td className="border border-slate-200 px-3 py-2 font-bold text-slate-800">学校一斉・基礎層も多い模試<br /><span className="font-normal text-xs text-slate-500">（進研模試 など）</span></td>
+                    <td className="border border-slate-200 px-3 py-2 text-slate-700">母集団が最も広く、平均的</td>
+                    <td className="border border-slate-200 px-3 py-2 text-center font-bold text-emerald-600">高めに出る</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div className="mt-4 rounded-xl bg-amber-50 border border-amber-200 p-4 text-sm leading-relaxed text-amber-900">
+              <strong>判定で見るときの鉄則：</strong>志望校判定は<strong>必ず同じ模試どうしの偏差値</strong>で比較すること。
+              「A模試で偏差値60、B模試で偏差値55」を直接くらべても意味がありません。各模試の判定（合格可能性%）と、複数回の<strong>平均偏差値</strong>で実力を見るのが正解です。
+            </div>
+            <p className="mt-3 text-xs leading-relaxed text-slate-500">
+              ※ 上の「低め/高め」はあくまで母集団の違いによる一般的な傾向です。模試名・年度により実際の出方は変わります。正確な換算は各模試の成績表・判定をご確認ください。
+            </p>
           </section>
 
           {/* 偏差値を上げる方法 */}
@@ -712,6 +912,50 @@ export default function HensachiPage() {
               <Link href="/blog/hensachi-koukou-ichiran-2026" className="font-bold text-amber-800 underline">
                 偏差値別 行ける高校の一覧【2026年版・偏差値40〜70】をもっと詳しく →
               </Link>
+            </div>
+          </section>
+
+          {/* 高校偏差値 vs 大学偏差値（「大学 偏差値」spillover意図 + 進学リテラシー） */}
+          <section id="hensachi-daigaku" className="mt-8 scroll-mt-20 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800 border-l-4 border-purple-500 pl-3">
+              <GraduationCap className="h-5 w-5 text-purple-500" />
+              高校の偏差値と大学の偏差値は「別物」
+            </h2>
+            <div className="space-y-4 text-sm leading-relaxed text-slate-700">
+              <p>
+                「高校で偏差値65だから、大学も偏差値65のところに入れる」——これは<strong>大きな誤解</strong>です。
+                偏差値はあくまで「その試験を受けた集団の中での位置」。高校受験と大学受験では<strong>受ける集団（母集団）がまったく違う</strong>ため、同じ数字でも意味が変わります。
+              </p>
+              <div className="grid gap-3 sm:grid-cols-2">
+                <div className="rounded-xl border border-blue-200 bg-blue-50 p-4">
+                  <div className="mb-1 flex items-center gap-1.5 text-sm font-bold text-blue-900">
+                    <Target className="h-4 w-4" />
+                    高校受験の偏差値
+                  </div>
+                  <p className="text-xs leading-relaxed text-blue-800">
+                    母集団は「その地域の中学3年生ほぼ全員」。学力の幅が非常に広いため、上位に行くほど偏差値が伸びやすい傾向があります。
+                  </p>
+                </div>
+                <div className="rounded-xl border border-violet-200 bg-violet-50 p-4">
+                  <div className="mb-1 flex items-center gap-1.5 text-sm font-bold text-violet-900">
+                    <Target className="h-4 w-4" />
+                    大学受験の偏差値
+                  </div>
+                  <p className="text-xs leading-relaxed text-violet-800">
+                    母集団は「その大学を受ける受験生」に絞られ、進学校の生徒や浪人生も含むハイレベルな集団。同じ実力でも偏差値は<strong>低めに出やすい</strong>です。
+                  </p>
+                </div>
+              </div>
+              <p className="text-xs text-slate-500">
+                よく「大学受験の偏差値は高校受験より10ほど下がる」と言われるのは、この母集団レベルの違いが理由です（学校・学部により差があります）。高校で安定して上位にいても、大学受験では新しいスタートラインに立つつもりで準備するのが安全です。
+              </p>
+              <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-4">
+                <h3 className="mb-1 text-sm font-bold text-emerald-900">大学を見据えるなら「偏差値」より先に動けること</h3>
+                <p className="text-xs leading-relaxed text-emerald-800">
+                  大学受験の偏差値は高校に入ってからの勝負ですが、<strong>大学進学にかかるお金（学費・一人暮らし費用・奨学金）</strong>は今から把握できます。
+                  早く知っておくほど、志望校の選択肢も、必要な準備も変わります。高校生になったら、学力（偏差値）と費用の両面で進学を設計していきましょう。
+                </p>
+              </div>
             </div>
           </section>
 
