@@ -180,7 +180,7 @@ export default function Page() {
               <p className="mb-4 text-sm leading-relaxed text-slate-700">
                 内申点と並んで合否を左右するのが <strong>5教科の偏差値</strong>。
                 <Link href="/hensachi" className="font-bold text-indigo-700 underline decoration-indigo-300 underline-offset-2 hover:text-indigo-800">
-                  偏差値計算ツール（5教科対応）
+                  偏差値計算サイト（5教科対応・中学生/高校生）
                 </Link>
                 では、点数・平均点・標準偏差から自分の偏差値を瞬時に算出。教科別の偏差値や、平均点しか分からない場合の簡易モードにも対応しています。通知表からそのまま入力できる
                 <Link href="/hyotei-heikin" className="font-bold text-indigo-700 underline decoration-indigo-300 underline-offset-2 hover:text-indigo-800">

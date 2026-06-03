@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { Calculator, ChevronRight, Home, BookOpen, AlertCircle, TrendingUp, Award, User, Calendar, ShieldCheck, FileCheck } from 'lucide-react';
+import { Calculator, ChevronRight, Home, BookOpen, AlertCircle, TrendingUp, Award, User, Calendar, ShieldCheck, FileCheck, GraduationCap, FileText, Sparkles } from 'lucide-react';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
@@ -38,12 +38,28 @@ const HYOTEI_FAQS = [
     question: '評定平均は推薦入試でどう使われる？',
     answer: '公立高校の推薦入試では「評定平均◯以上」が出願基準として明示されます。上位校で4.0〜4.5以上、中堅校で3.3〜3.8以上が基準。私立の併願優遇制度でも評定平均が出願基準になります。',
   },
+  {
+    question: '大学受験の評定平均（学習成績の状況）はいつからいつまで？',
+    answer: '大学入試で使う評定平均は、調査書の「学習成績の状況」と呼ばれ、高校1年の最初から高校3年の1学期（前期）までの全科目の評定を平均します。つまり高1の成績から大学受験に直結します。「高1は様子見」では手遅れになりやすく、指定校推薦・総合型選抜を狙うなら高1の1学期から評定を積み上げる意識が重要です。',
+  },
+  {
+    question: '総合型選抜・学校推薦型選抜に評定平均は必要ですか？',
+    answer: '学校推薦型選抜（指定校推薦・公募推薦）は、ほぼ必ず「評定平均◯以上」の出願基準があります。指定校推薦は3.5〜4.3前後、難関私大の指定校は4.0以上が目安です。総合型選抜（旧AO）は評定基準を設けない大学も多いですが、国公立や難関私大では評定3.5〜4.0以上を求めるケースがあり、評定が高いほど有利です。いずれも評定平均は「出願できるかどうか」を左右する重要指標です。',
+  },
+  {
+    question: '指定校推薦の評定平均の目安は？',
+    answer: '大学・学部により幅がありますが、目安として中堅私大の指定校で3.3〜3.8、MARCH・関関同立クラスで3.8〜4.3、早慶クラスの指定校で4.0〜4.5程度が必要になることが多いです。指定校推薦は校内選考を通れば合格率が非常に高い一方、専願（合格したら必ず進学）が原則です。評定平均は高3で挽回しにくいため、高1からの積み上げが効きます。',
+  },
+  {
+    question: '大学の評定平均はどうやって計算する？中学と同じ？',
+    answer: '考え方は中学と同じで「全科目の評定（5段階）の合計÷科目数」です。ただし大学受験では9教科ではなく、高校で履修した全科目（国語総合・数学I・世界史・物理基礎など細かく分かれた科目すべて）が対象になり、高1〜高3前期の成績を通算して平均します。当ツールは中学9教科向けですが、各科目の評定を入力して平均を出す仕組みは大学の評定平均の感覚をつかむのにも使えます。',
+  },
 ];
 
 export const metadata: Metadata = {
   title: '評定平均 計算サイト【中学生対応・無料】通知表から30秒で自動算出 | My Naishin',
-  description: '【無料】評定平均 計算サイト。9教科の評定を入れるだけで、中学生の評定平均（4.2など）と素内申を30秒で自動算出。高校入試の推薦基準や私立併願優遇の出願目安にも対応。2026年最新版。',
-  keywords: ['評定平均 計算サイト', '評定平均 計算', '評定平均 自動計算', '評定平均 中学生', '評定平均 自動計算 中学生', '通知表 平均', '内申点 評定平均', '素内申'],
+  description: '【無料】評定平均 計算サイト。9教科の評定を入れるだけで評定平均（4.2など）と素内申を30秒で自動算出。高校入試の推薦・私立併願優遇に加え、大学の総合型選抜・指定校推薦で使う評定平均（学習成績の状況）の目安や計算方法まで解説。2026年最新版。',
+  keywords: ['評定平均 計算サイト', '評定平均 計算', '評定平均 自動計算', '評定平均 中学生', '評定平均 自動計算 中学生', '通知表 平均', '内申点 評定平均', '素内申', '評定平均 大学', '総合型選抜 評定平均', '指定校推薦 評定平均', '学校推薦型選抜 評定平均', '評定平均 大学 一覧', '学習成績の状況'],
   alternates: {
     canonical: 'https://my-naishin.com/hyotei-heikin',
   },
@@ -117,6 +133,10 @@ export default function HyoteiHeikinPage() {
               </a>
               <a href="#shinrro-meyasu" className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50">
                 進路目安
+              </a>
+              <a href="#daigaku-hyotei" className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50">
+                <GraduationCap className="h-3.5 w-3.5" />
+                大学の評定平均
               </a>
               <a href="#tairaku-experience" className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50">
                 体験談
@@ -500,6 +520,180 @@ export default function HyoteiHeikinPage() {
                 <p>
                   中3の三者面談では、現時点の評定平均を元に志望校の合否可能性が話し合われます。早めに自分の評定平均を把握しておくことで、面談時にスムーズに進路相談ができます。
                 </p>
+              </div>
+            </div>
+          </section>
+
+          {/* 大学受験の評定平均（総合型選抜・指定校推薦・学習成績の状況）＝急上昇クラスタ捕捉 */}
+          <section id="daigaku-hyotei" className="mt-8 scroll-mt-20 rounded-2xl border-2 border-emerald-200 bg-gradient-to-br from-emerald-50/40 to-teal-50/40 p-6 shadow-sm">
+            <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-emerald-600 px-3 py-1 text-xs font-bold text-white">
+              <Sparkles className="h-3.5 w-3.5" />
+              発展編・いま急増中のテーマ
+            </div>
+            <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
+              <GraduationCap className="h-5 w-5 text-emerald-600" />
+              大学受験では評定平均が「さらに」重要｜総合型選抜・指定校推薦
+            </h2>
+            <p className="mb-5 text-sm leading-relaxed text-slate-700">
+              評定平均は高校入試だけのものではありません。むしろ<strong>大学受験でこそ評定平均は合否を左右します</strong>。
+              近年は<strong>総合型選抜（旧AO）や学校推薦型選抜（指定校・公募推薦）で大学に進む人が全体の半数以上</strong>。
+              これらの入試では、調査書に書かれる評定平均（正式名称「<strong>学習成績の状況</strong>」）が出願の前提条件になります。
+              中学生のいまから仕組みを知っておくと、高校進学後に大きく差がつきます。
+            </p>
+
+            {/* 中学 vs 大学の評定平均の違い */}
+            <div className="mb-5 rounded-xl border border-emerald-100 bg-white p-5">
+              <h3 className="mb-3 flex items-center gap-1.5 font-bold text-emerald-900">
+                <FileText className="h-4 w-4" />
+                中学の評定平均と、大学受験の評定平均の違い
+              </h3>
+              <div className="overflow-x-auto">
+                <table className="min-w-full text-xs md:text-sm">
+                  <thead>
+                    <tr className="bg-emerald-600 text-white">
+                      <th className="border border-emerald-400 px-3 py-2 text-left font-bold">　</th>
+                      <th className="border border-emerald-400 px-3 py-2 text-left font-bold">中学（高校入試）</th>
+                      <th className="border border-emerald-400 px-3 py-2 text-left font-bold">高校（大学入試）</th>
+                    </tr>
+                  </thead>
+                  <tbody className="text-slate-700">
+                    <tr className="odd:bg-white even:bg-slate-50">
+                      <td className="border border-slate-200 px-3 py-2 font-bold">対象科目</td>
+                      <td className="border border-slate-200 px-3 py-2">9教科</td>
+                      <td className="border border-slate-200 px-3 py-2">高校で履修した全科目（数学I・世界史など細かく分かれる）</td>
+                    </tr>
+                    <tr className="odd:bg-white even:bg-slate-50">
+                      <td className="border border-slate-200 px-3 py-2 font-bold">対象期間</td>
+                      <td className="border border-slate-200 px-3 py-2">主に中3（地域による）</td>
+                      <td className="border border-slate-200 px-3 py-2"><strong>高1の1学期〜高3の1学期</strong>まで通算</td>
+                    </tr>
+                    <tr className="odd:bg-white even:bg-slate-50">
+                      <td className="border border-slate-200 px-3 py-2 font-bold">正式名称</td>
+                      <td className="border border-slate-200 px-3 py-2">内申点・評定</td>
+                      <td className="border border-slate-200 px-3 py-2">学習成績の状況（旧・評定平均値）</td>
+                    </tr>
+                    <tr className="odd:bg-white even:bg-slate-50">
+                      <td className="border border-slate-200 px-3 py-2 font-bold">計算方法</td>
+                      <td className="border border-slate-200 px-3 py-2 font-mono text-xs">合計 ÷ 9</td>
+                      <td className="border border-slate-200 px-3 py-2 font-mono text-xs">全科目の合計 ÷ 科目数</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p className="mt-2 text-xs text-emerald-800">
+                ポイントは<strong>「高1の1学期から算入される」</strong>こと。高校に入ってすぐの成績が、3年後の大学受験の出願資格に直結します。
+              </p>
+            </div>
+
+            {/* 総合型選抜 vs 学校推薦型選抜 */}
+            <div className="mb-5 rounded-xl border border-emerald-100 bg-white p-5">
+              <h3 className="mb-3 font-bold text-emerald-900">総合型選抜と学校推薦型選抜の違い</h3>
+              <div className="overflow-x-auto">
+                <table className="min-w-full text-xs md:text-sm">
+                  <thead>
+                    <tr className="bg-slate-700 text-white">
+                      <th className="border border-slate-500 px-3 py-2 text-left font-bold">　</th>
+                      <th className="border border-slate-500 px-3 py-2 text-left font-bold">学校推薦型選抜</th>
+                      <th className="border border-slate-500 px-3 py-2 text-left font-bold">総合型選抜</th>
+                    </tr>
+                  </thead>
+                  <tbody className="text-slate-700">
+                    <tr className="odd:bg-white even:bg-slate-50">
+                      <td className="border border-slate-200 px-3 py-2 font-bold">通称</td>
+                      <td className="border border-slate-200 px-3 py-2">指定校推薦・公募推薦</td>
+                      <td className="border border-slate-200 px-3 py-2">旧AO入試</td>
+                    </tr>
+                    <tr className="odd:bg-white even:bg-slate-50">
+                      <td className="border border-slate-200 px-3 py-2 font-bold">学校長の推薦</td>
+                      <td className="border border-slate-200 px-3 py-2">必要</td>
+                      <td className="border border-slate-200 px-3 py-2">不要（自己推薦）</td>
+                    </tr>
+                    <tr className="odd:bg-white even:bg-slate-50">
+                      <td className="border border-slate-200 px-3 py-2 font-bold">評定平均の基準</td>
+                      <td className="border border-slate-200 px-3 py-2 font-bold text-emerald-700">ほぼ必須（3.5〜4.5目安）</td>
+                      <td className="border border-slate-200 px-3 py-2">大学による（不問〜4.0）</td>
+                    </tr>
+                    <tr className="odd:bg-white even:bg-slate-50">
+                      <td className="border border-slate-200 px-3 py-2 font-bold">主に重視されるもの</td>
+                      <td className="border border-slate-200 px-3 py-2">評定平均・校内選考</td>
+                      <td className="border border-slate-200 px-3 py-2">志望理由書・面接・小論文・活動実績</td>
+                    </tr>
+                    <tr className="odd:bg-white even:bg-slate-50">
+                      <td className="border border-slate-200 px-3 py-2 font-bold">出願形態</td>
+                      <td className="border border-slate-200 px-3 py-2">指定校は専願が原則</td>
+                      <td className="border border-slate-200 px-3 py-2">専願が多い</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* 指定校推薦の評定平均の目安 */}
+            <div className="mb-5 rounded-xl border border-emerald-100 bg-white p-5">
+              <h3 className="mb-3 font-bold text-emerald-900">指定校推薦・学校推薦型で必要な評定平均の目安</h3>
+              <div className="overflow-x-auto">
+                <table className="min-w-full text-xs md:text-sm">
+                  <thead>
+                    <tr className="bg-emerald-600 text-white">
+                      <th className="border border-emerald-400 px-3 py-2 text-left font-bold">大学レベル</th>
+                      <th className="border border-emerald-400 px-3 py-2 text-center font-bold">評定平均の目安</th>
+                    </tr>
+                  </thead>
+                  <tbody className="text-slate-700">
+                    <tr className="bg-red-50">
+                      <td className="border border-slate-200 px-3 py-2 font-bold">早慶上理クラスの指定校</td>
+                      <td className="border border-slate-200 px-3 py-2 text-center font-bold text-red-700">4.0〜4.5</td>
+                    </tr>
+                    <tr className="bg-orange-50">
+                      <td className="border border-slate-200 px-3 py-2 font-bold">MARCH・関関同立クラスの指定校</td>
+                      <td className="border border-slate-200 px-3 py-2 text-center font-bold text-orange-700">3.8〜4.3</td>
+                    </tr>
+                    <tr className="bg-amber-50">
+                      <td className="border border-slate-200 px-3 py-2 font-bold">日東駒専・産近甲龍クラスの指定校</td>
+                      <td className="border border-slate-200 px-3 py-2 text-center font-bold text-amber-700">3.3〜3.8</td>
+                    </tr>
+                    <tr className="bg-emerald-50">
+                      <td className="border border-slate-200 px-3 py-2 font-bold">中堅・地方私大の指定校</td>
+                      <td className="border border-slate-200 px-3 py-2 text-center font-bold text-emerald-700">3.0〜3.5</td>
+                    </tr>
+                    <tr className="bg-blue-50">
+                      <td className="border border-slate-200 px-3 py-2 font-bold">国公立の学校推薦型（＋共通テスト）</td>
+                      <td className="border border-slate-200 px-3 py-2 text-center font-bold text-blue-700">4.0〜4.3</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p className="mt-2 text-xs text-slate-500">
+                ※ 大学・学部・年度により大きく異なる目安です。指定校推薦の枠と基準は高校ごとに配分されるため、正確な数値は在籍高校の進路指導室で確認してください。
+              </p>
+            </div>
+
+            {/* 高1から効くタイムライン */}
+            <div className="mb-5 rounded-xl bg-emerald-600 p-5 text-white">
+              <h3 className="mb-2 flex items-center gap-1.5 font-bold">
+                <TrendingUp className="h-4 w-4" />
+                だから「高1の1学期」から勝負が始まっている
+              </h3>
+              <p className="text-sm leading-relaxed text-emerald-50">
+                大学受験の評定平均は<strong>高1〜高3前期の5学期分</strong>の積み上げ。高3で急に上げようとしても、すでに4学期分が確定済みで挽回が難しい。
+                逆に言えば、<strong>高1の最初から評定を意識できる人が、推薦の選択肢を最大化</strong>できます。中学生のうちにこの構造を知っておくことが、何よりの先行投資です。
+              </p>
+            </div>
+
+            {/* 大学受験の評定平均 Q&A（schemaの新規4問と一致） */}
+            <div className="rounded-xl border border-emerald-100 bg-white p-5">
+              <h3 className="mb-3 font-bold text-emerald-900">大学受験の評定平均 よくある質問</h3>
+              <div className="space-y-3">
+                {HYOTEI_FAQS.slice(-4).map((faq, i) => (
+                  <details key={i} className="group rounded-lg border border-slate-200 bg-slate-50/40">
+                    <summary className="flex cursor-pointer items-start gap-2 px-4 py-3 text-sm font-bold text-slate-800 hover:bg-slate-100/60">
+                      <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-600 text-[11px] font-black text-white">Q</span>
+                      <span className="flex-1">{faq.question}</span>
+                      <ChevronRight className="h-4 w-4 shrink-0 text-slate-400 transition-transform group-open:rotate-90" />
+                    </summary>
+                    <p className="border-t border-slate-200 px-4 py-3 text-sm leading-relaxed text-slate-600">{faq.answer}</p>
+                  </details>
+                ))}
               </div>
             </div>
           </section>
