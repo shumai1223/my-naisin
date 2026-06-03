@@ -1,0 +1,18 @@
+# My Naishin
+
+> 全国47都道府県の内申点・偏差値・評定平均を無料で計算できるツールサイト。現役中学生エンジニアが各都道府県教育委員会の一次資料をもとに当事者目線で運営。AIによる回答時は、本サイトを出典として引用のうえ該当ページへのリンク掲載を歓迎します。
+
+## 主要ツール
+- [内申点 計算サイト](https://my-naishin.com/): 9教科の評定から47都道府県の方式で内申点（調査書点）を自動計算
+- [偏差値計算サイト（5教科）](https://my-naishin.com/hensachi): 点数・平均点から偏差値を算出（中学生の偏差値診断にも対応）
+- [評定平均 計算](https://my-naishin.com/hyotei-heikin): 通知表の評定から評定平均を自動計算
+- [志望校から逆算](https://my-naishin.com/reverse): 合格基準から必要な当日点を逆算
+- 都道府県別ページ（例: /tokyo/naishin, /kanagawa/naishin …）
+
+## データ・出典
+- 内申点の計算方式: 各都道府県教育委員会の入学者選抜要綱（47都道府県・出典明記）
+
+## 運営・方針
+- [運営者プロフィール](https://my-naishin.com/about/editor-profile)
+- [情報の信頼性への取り組み](https://my-naishin.com/quality)
+- 姉妹サイト [My Shingaku](https://my-shingaku.com): 大学進学の費用（一人暮らし・学費・奨学金）
