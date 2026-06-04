@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: PrefecturePageProps) {
   if (!pref) return {};
 
   return {
-    title: `${pref.name}公立高校入試の内申点対策・計算ガイド【2026年最新】`,
+    title: `${pref.name}公立高校入試の内申点対策・計算ガイド【2026年最新】 | My Naishin`,
     description: `${pref.name}の高校入試における内申点の計算方法、換算内申、実技教科の倍率、対象学年を徹底解説。${pref.description}。志望校合格に向けた内申点アップの戦略も掲載。`,
     alternates: {
       canonical: `https://my-naishin.com/${code}`,

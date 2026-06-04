@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: PageProps) {
   const tag = decodeURIComponent(rawTag);
   const posts = getAllPosts().filter((p) => p.tags.includes(tag));
 
-  const title = `「${tag}」に関する受験コラム一覧（${posts.length}件）`;
+  const title = `「${tag}」に関する受験コラム一覧（${posts.length}件）| My Naishin`;
   const description = `「${tag}」に関連する内申点・高校受験コラムを${posts.length}件掲載。最新の入試情報に基づき、現役中学生と保護者に役立つ実践的な情報を発信中。`;
   const url = `https://my-naishin.com/blog/tag/${rawTag}`;
 
