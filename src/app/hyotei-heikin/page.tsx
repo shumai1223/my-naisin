@@ -403,6 +403,15 @@ export default function HyoteiHeikinPage() {
               </div>
               <AffiliateAd id="shoin-banner" />
             </div>
+            <div className="rounded-2xl border border-slate-200 bg-white px-5 py-5 text-center shadow-sm">
+              <div className="text-xs font-bold text-slate-700 mb-1">
+                送迎不要のオンライン個別指導
+              </div>
+              <div className="text-[11px] text-slate-500 mb-3 leading-relaxed">
+                先生1人に生徒2人まで・全国対応
+              </div>
+              <AffiliateAd id="sora-juku-banner" auditHide />
+            </div>
           </section>
 
           {/* 5段階評価の仕組み */}
@@ -698,6 +707,17 @@ export default function HyoteiHeikinPage() {
             </div>
           </section>
 
+          {/* 大学受験向け広告 */}
+          <section className="mt-8 rounded-2xl border border-emerald-200 bg-emerald-50/30 px-6 py-5 text-center shadow-sm">
+            <div className="text-sm font-bold text-emerald-900 mb-1">
+              大学受験も評定平均が鍵｜高1から始める通信教育
+            </div>
+            <div className="text-xs text-emerald-700 mb-4 leading-relaxed">
+              総合型選抜・指定校推薦を狙うなら<AffiliateAd id="zkai-daigaku" hideLabel />（PR）で大学受験の基礎を固める
+            </div>
+            <AffiliateAd id="atama-banner" auditHide />
+          </section>
+
           {/* 評定平均と入試 */}
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
@@ -759,6 +779,10 @@ export default function HyoteiHeikinPage() {
             </div>
             <div className="mt-3 text-xs">
               <AffiliateAd id="zkai-text-request" className="mx-1" hideLabel auditHide />（PR）で詳細を確認
+            </div>
+            <div className="mt-4 border-t border-slate-100 pt-4">
+              <div className="text-xs text-slate-500 mb-2">成績保証制度ありの個別指導も選択肢に</div>
+              <AffiliateAd id="campus-banner" auditHide />
             </div>
           </section>
 

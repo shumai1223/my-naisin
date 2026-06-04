@@ -3,10 +3,19 @@ export type AffiliateId =
   | 'zkai-text-middle'
   | 'zkai-text-advanced'
   | 'zkai-text-request'
+  | 'zkai-daigaku'
   | 'shoin-banner'
   | 'sapuri-banner-468'
   | 'sapuri-banner-300'
-  | 'sapuri-text';
+  | 'sapuri-text'
+  | 'sora-juku-text'
+  | 'sora-juku-banner'
+  | 'morijuku-text'
+  | 'morijuku-banner'
+  | 'campus-text'
+  | 'campus-banner'
+  | 'atama-text'
+  | 'atama-banner';
 
 interface BannerAffiliate {
   id: AffiliateId;
@@ -105,5 +114,85 @@ export const AFFILIATES: Record<AffiliateId, AffiliateConfig> = {
     href: 'https://px.a8.net/svt/ejp?a8mat=4B3SN7+CIP5PU+36T2+TSJ42',
     text: '中学講座',
     trackingPixel: 'https://www19.a8.net/0.gif?a8mat=4B3SN7+CIP5PU+36T2+TSJ42',
+  },
+  'zkai-daigaku': {
+    id: 'zkai-daigaku',
+    type: 'text',
+    name: 'Z会 高校生・大学受験生向け',
+    href: 'https://px.a8.net/svt/ejp?a8mat=4B3SN7+9TNI42+E0Q+C0B9U',
+    text: 'Ｚ会 高校生・大学受験生向け',
+    trackingPixel: 'https://www16.a8.net/0.gif?a8mat=4B3SN7+9TNI42+E0Q+C0B9U',
+  },
+  'sora-juku-text': {
+    id: 'sora-juku-text',
+    type: 'text',
+    name: 'そら塾',
+    href: 'https://px.a8.net/svt/ejp?a8mat=4B3SN7+EDZ52Q+4YWU+5YJRM',
+    text: '【そら塾】',
+    trackingPixel: 'https://www15.a8.net/0.gif?a8mat=4B3SN7+EDZ52Q+4YWU+5YJRM',
+  },
+  'sora-juku-banner': {
+    id: 'sora-juku-banner',
+    type: 'banner',
+    name: 'そら塾',
+    href: 'https://px.a8.net/svt/ejp?a8mat=4B3SN7+EDZ52Q+4YWU+5ZMCH',
+    imgSrc: 'https://www21.a8.net/svt/bgt?aid=260517571870&wid=001&eno=01&mid=s00000023187001006000&mc=1',
+    width: 300,
+    height: 250,
+    trackingPixel: 'https://www10.a8.net/0.gif?a8mat=4B3SN7+EDZ52Q+4YWU+5ZMCH',
+  },
+  'morijuku-text': {
+    id: 'morijuku-text',
+    type: 'text',
+    name: '森塾',
+    href: 'https://px.a8.net/svt/ejp?a8mat=4B3SN7+EDDPGY+4YWU+NTJWY',
+    text: '【森塾】',
+    trackingPixel: 'https://www10.a8.net/0.gif?a8mat=4B3SN7+EDDPGY+4YWU+NTJWY',
+  },
+  'morijuku-banner': {
+    id: 'morijuku-banner',
+    type: 'banner',
+    name: '森塾',
+    href: 'https://px.a8.net/svt/ejp?a8mat=4B3SN7+EDDPGY+4YWU+NUU7L',
+    imgSrc: 'https://www23.a8.net/svt/bgt?aid=260517571869&wid=001&eno=01&mid=s00000023187004007000&mc=1',
+    width: 300,
+    height: 250,
+    trackingPixel: 'https://www12.a8.net/0.gif?a8mat=4B3SN7+EDDPGY+4YWU+NUU7L',
+  },
+  'campus-text': {
+    id: 'campus-text',
+    type: 'text',
+    name: '個別指導キャンパス',
+    href: 'https://px.a8.net/svt/ejp?a8mat=4B3SN7+BZ1UR6+5VB8+5YJRM',
+    text: '個別指導キャンパス',
+    trackingPixel: 'https://www11.a8.net/0.gif?a8mat=4B3SN7+BZ1UR6+5VB8+5YJRM',
+  },
+  'campus-banner': {
+    id: 'campus-banner',
+    type: 'banner',
+    name: '個別指導キャンパス',
+    href: 'https://px.a8.net/svt/ejp?a8mat=4B3SN7+BZ1UR6+5VB8+5YZ75',
+    imgSrc: 'https://www27.a8.net/svt/bgt?aid=260517571724&wid=001&eno=01&mid=s00000027386001003000&mc=1',
+    width: 300,
+    height: 250,
+    trackingPixel: 'https://www11.a8.net/0.gif?a8mat=4B3SN7+BZ1UR6+5VB8+5YZ75',
+  },
+  'atama-text': {
+    id: 'atama-text',
+    type: 'text',
+    name: 'atama+ オンライン塾',
+    href: 'https://px.a8.net/svt/ejp?a8mat=4B3SN7+BKRG8I+5K0K+5YJRM',
+    text: '【atama＋ オンライン塾】',
+    trackingPixel: 'https://www19.a8.net/0.gif?a8mat=4B3SN7+BKRG8I+5K0K+5YJRM',
+  },
+  'atama-banner': {
+    id: 'atama-banner',
+    type: 'banner',
+    name: 'atama+ オンライン塾',
+    href: 'https://px.a8.net/svt/ejp?a8mat=4B3SN7+BKRG8I+5K0K+5YZ75',
+    imgSrc: 'https://www26.a8.net/svt/bgt?aid=260517571700&wid=001&eno=01&mid=s00000025922001003000&mc=1',
+    width: 300,
+    height: 250,
+    trackingPixel: 'https://www12.a8.net/0.gif?a8mat=4B3SN7+BKRG8I+5K0K+5YZ75',
   },
 };

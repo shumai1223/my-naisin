@@ -634,6 +634,17 @@ export default function HensachiPage() {
             </div>
           </section>
 
+          {/* 中間広告：atama+ */}
+          <section className="mt-8 rounded-2xl border border-slate-200 bg-white px-6 py-6 shadow-sm text-center">
+            <div className="text-sm font-bold text-slate-700 mb-1">
+              AIが苦手を自動分析・個別カリキュラムで偏差値アップ
+            </div>
+            <div className="text-xs text-slate-500 mb-4 leading-relaxed">
+              マンツーマンAI×担任サポート制の<AffiliateAd id="atama-text" hideLabel />（PR）。無料体験あり。
+            </div>
+            <AffiliateAd id="atama-banner" auditHide />
+          </section>
+
           {/* 偏差値と内申点の関係 */}
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="mb-4 text-lg font-bold text-slate-800 border-l-4 border-purple-500 pl-3">
@@ -975,6 +986,10 @@ export default function HensachiPage() {
             </div>
             <div className="mt-3 text-xs">
               <AffiliateAd id="zkai-text-request" className="mx-1" hideLabel auditHide />（PR）で詳細を確認
+            </div>
+            <div className="mt-4 border-t border-slate-100 pt-4">
+              <div className="text-xs text-slate-500 mb-2">個別指導で効率よく偏差値を上げたい方に</div>
+              <AffiliateAd id="campus-banner" auditHide />
             </div>
           </section>
 

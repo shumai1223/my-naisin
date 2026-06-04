@@ -495,6 +495,22 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
                     <AffiliateAd id="shoin-banner" centered={false} auditHide />
                   </div>
                 </div>
+                <div className="rounded-xl border border-sky-100 bg-sky-50/40 p-4">
+                  <div className="mb-2 text-sm font-bold text-sky-900">送迎不要のオンライン個別指導</div>
+                  <p className="mb-3 text-xs text-sky-700 leading-relaxed">
+                    先生1人に生徒2人まで。{prefecture.name}全域から受講できるオンライン個別指導塾です。
+                  </p>
+                  <AffiliateAd id="sora-juku-banner" auditHide />
+                </div>
+                {['tokyo', 'kanagawa', 'saitama', 'chiba', 'osaka'].includes(prefectureCode) && (
+                  <div className="rounded-xl border border-orange-100 bg-orange-50/40 p-4">
+                    <div className="mb-2 text-sm font-bold text-orange-900">教室で学ぶ個別指導</div>
+                    <p className="mb-3 text-xs text-orange-700 leading-relaxed">
+                      {prefecture.name}内に教室がある<AffiliateAd id="morijuku-text" hideLabel />（PR）。先生1人に生徒2人までの個別指導で定期テスト対策。
+                    </p>
+                    <AffiliateAd id="morijuku-banner" auditHide />
+                  </div>
+                )}
               </div>
             </section>
 
