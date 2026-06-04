@@ -14,6 +14,57 @@ export interface ChangeLogEntry {
 
 export const CHANGELOG: ChangeLogEntry[] = [
   {
+    date: '2026-06-04',
+    type: 'fix',
+    category: 'seo',
+    title: 'タイトルブランド表記の全ページ統一',
+    description: '47都道府県・ブログタグ・県トップページで「| My Naishin」ブランドが欠落していた問題を修正。title.templateを廃止し各ページで明示的に管理する方式に統一しました。',
+  },
+  {
+    date: '2026-06-04',
+    type: 'fix',
+    category: 'feature',
+    title: 'Cloudflareビルド環境のメモリ不足を解消',
+    description: 'Node.jsヒープ上限を4096MBに引き上げ、型チェックフェーズのOOMクラッシュを修正。2026-06-02以降の全変更が本番に未反映だった問題を解消しました。',
+  },
+  {
+    date: '2026-06-03',
+    type: 'fix',
+    category: 'seo',
+    title: 'タイトル二重ブランド問題を根本修正・CTR改善タイトル刷新',
+    description: 'layout.tsxのtitle.templateと各ページの手動ブランドが衝突し「… | My Naishin | My Naishin」と二重化していた問題を解消。47都道府県のタイトルを主要クエリをfront-loadした形式に刷新。定期テスト・内申平均ブログのタイトルをcuriosity-gap型に変更し低CTRを改善。AdSense審査向けauditHideを全ページに拡大。',
+  },
+  {
+    date: '2026-06-03',
+    type: 'update',
+    category: 'seo',
+    title: '偏差値・評定平均ページの大型拡張と大学受験クラスタ対応',
+    description: '偏差値ページに点数→偏差値早見表・偏差値→上位%完全対応表・DatasetSchema・模試母集団解説・高校vs大学偏差値を追加。評定平均ページに総合型選抜(+1050%急上昇)・指定校推薦・大学入試向け発展セクションを追設。Google Trends実データに基づいた市場規模最大化戦略の実装。',
+  },
+  {
+    date: '2026-06-02',
+    type: 'add',
+    category: 'feature',
+    title: '高校3年間の費用シミュレーターを追加',
+    description: '公立・私立別の入学金・授業料・修学旅行費・制服代など全費用を網羅したシミュレーターを新設（/koukou-hiyou）。文部科学省「子供の学習費調査」一次情報に準拠。フッターの計算ツール欄からもアクセス可能。',
+    sourceUrl: 'https://www.mext.go.jp/b_menu/toukei/chousa03/gakushuuhi/1268091.htm',
+    sourceName: '文部科学省「子供の学習費調査」',
+  },
+  {
+    date: '2026-06-02',
+    type: 'add',
+    category: 'seo',
+    title: 'AIクローラ方針・llms.txt・Dataset構造化データを実装',
+    description: 'AIクローラへの引用許可・学習専用拒否の方針をrobots.txtに明示。llms.txtを新設してAIへのサイト概要を記述。偏差値早見表データにDatasetスキーマを付与し、AI検索エンジンからの引用資産化（GEO対策）を実施。',
+  },
+  {
+    date: '2026-06-02',
+    type: 'add',
+    category: 'feature',
+    title: '保護者リード導線と収益化装置を整備',
+    description: 'AdSense審査対応の広告配置最適化・計算結果直後CTA・保護者向けリード送客導線を実装。GSC週次監視スクリプトを追加し、検索順位変動を自動追跡できる運用基盤を整備。',
+  },
+  {
     date: '2026-05-28',
     type: 'update',
     category: 'seo',
