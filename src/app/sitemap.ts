@@ -66,21 +66,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  // 5. ブログタグページ
-  const tagSet = new Set<string>();
-  BLOG_POSTS.forEach(post => post.tags.forEach(tag => tagSet.add(tag)));
-  const tagPages = Array.from(tagSet).map(tag => ({
-    url: `${baseUrl}/blog/tag/${encodeURIComponent(tag)}`,
-    lastModified,
-    changeFrequency: 'weekly' as const,
-    priority: 0.6,
-  }));
-
   return [
     ...staticPages,
     ...prefectureTopPages,
     ...prefectureNaishinPages,
     ...blogPages,
-    ...tagPages,
   ];
 }
