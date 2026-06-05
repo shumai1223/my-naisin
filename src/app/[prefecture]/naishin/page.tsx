@@ -75,6 +75,36 @@ const SIBLING_TOOLS: Record<
   },
 };
 
+/**
+ * 高imp×低CTR県のタイトル/ディスクリプション個別最適化（GSC 2026-06-04 実測）。
+ * 汎用テンプレ（"{県名}の内申点 自動計算ツール｜{満点}点満点…"）は順位pos6前後でもCTRが伸びない県があった：
+ *   兵庫 2,036imp/CTR1.8%・福岡 608imp/1.5%・北海道 531imp/1.9%・熊本 300imp/1.0%。
+ * 各県の「方式の特殊性」をcuriosity-gap＋具体数値でSERPに出して差別化する。
+ * 数値は src/lib/prefectures.ts の確定データに一致（捏造なし）。掲載のない県は従来テンプレへフォールバック。
+ */
+const PREFECTURE_META_OVERRIDES: Record<string, { title: string; description: string }> = {
+  hyogo: {
+    title: '兵庫県の内申点 計算｜なぜ250点満点？5教科4倍・実技7.5倍を30秒で自動計算【2026】 | My Naishin',
+    description:
+      '【無料】兵庫県の内申点は5教科×4倍＋実技4教科×7.5倍の250点満点と全国屈指の特殊方式。手計算でミスしやすい換算を、9教科の評定を入れるだけで30秒で正確に算出。志望校ボーダー比較も対応。2026年度入試対応。',
+  },
+  fukuoka: {
+    title: '福岡県の内申点 計算｜中3の成績だけで45点満点・実技も同等評価【2026】30秒で自動計算 | My Naishin',
+    description:
+      '【無料】福岡県の内申点は中3の9教科のみで45点満点。主要5教科と実技4教科が同じ重みで効くのがポイント。評定を入れるだけで30秒で算出し、志望校ボーダー比較・当日点の逆算にも対応。2026年度入試対応。',
+  },
+  hokkaido: {
+    title: '北海道の内申点 計算｜中1から加点・315点満点とA〜Mランクを30秒で自動判定【2026】 | My Naishin',
+    description:
+      '【無料】北海道の内申点は中1・中2が2倍、中3が3倍の315点満点。さらにA〜Mの内申ランクで合否を判定します。評定を入れるだけで内申点とランクを30秒で自動算出。札幌南・北など主要校の目安と比較。2026年度入試対応。',
+  },
+  kumamoto: {
+    title: '熊本県の内申点 計算｜中1から加算・中3は2倍の180点満点を30秒で自動計算【2026】 | My Naishin',
+    description:
+      '【無料】熊本県の内申点は中1・中2＋中3×2倍の180点満点。中1の成績から加算されるため早めの対策が重要です。評定を入れるだけで30秒で正確に算出し、志望校ボーダー比較にも対応。2026年度入試対応。',
+  },
+};
+
 export async function generateMetadata({ params }: PageProps) {
   const { prefecture: prefectureCode } = await params;
   const prefecture = getPrefectureByCode(prefectureCode);
@@ -82,8 +112,14 @@ export async function generateMetadata({ params }: PageProps) {
 
   // モバイルSERPの先頭に「{県名}の内申点 自動計算ツール」を front-load し、「内申点 計算」「内申点 自動計算」「{県名} 内申点」の主要クエリを冒頭で満たす。
   // 末尾ブランドは1回のみ（root layout の title.template は廃止済。二重「| My Naishin」防止）。descriptionは「無料」「30秒」「2026最新」を120字以内に圧縮。
-  const title = `${prefecture.name}の内申点 自動計算ツール｜${prefecture.maxScore}点満点・無料【2026年度入試対応】 | My Naishin`;
-  const description = `【無料】${prefecture.name}の内申点を30秒で自動計算。9教科の評定を入れるだけで${prefecture.maxScore}点満点で瞬時に算出。実技倍率・対象学年・志望校ボーダー比較も対応。2026年最新版。`;
+  // 高imp×低CTR県は PREFECTURE_META_OVERRIDES で個別最適化（curiosity-gap）、それ以外は汎用テンプレ。
+  const override = PREFECTURE_META_OVERRIDES[prefectureCode];
+  const title =
+    override?.title ??
+    `${prefecture.name}の内申点 自動計算ツール｜${prefecture.maxScore}点満点・無料【2026年度入試対応】 | My Naishin`;
+  const description =
+    override?.description ??
+    `【無料】${prefecture.name}の内申点を30秒で自動計算。9教科の評定を入れるだけで${prefecture.maxScore}点満点で瞬時に算出。実技倍率・対象学年・志望校ボーダー比較も対応。2026年最新版。`;
 
   return {
     title,
