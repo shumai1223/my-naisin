@@ -13,7 +13,8 @@ import Script from 'next/script';
  *    （同一セッションでの同意更新は CookieConsent 側から gtag('consent','update') を発火）
  *  - window.gtag を定義するので track() がそのまま流れる。
  */
-const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
+// GA4測定IDは公開値（HTMLに露出する非機密）なので既定値として焼き込み、env で上書き可能にする。
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID || 'G-VRVSVK1X5Z';
 
 export function GoogleAnalytics() {
   if (!GA_ID) return null;
