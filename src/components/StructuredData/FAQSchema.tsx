@@ -1,7 +1,3 @@
-'use client';
-
-import Script from 'next/script';
-
 interface FAQItem {
   question: string;
   answer: string;
@@ -25,9 +21,9 @@ export function FAQSchema({ faqs }: FAQSchemaProps) {
     }))
   };
 
+  // SSRの生HTMLに含めるためプレーンな <script>（next/scriptはJS注入でAIクローラーに不可視）。
   return (
-    <Script
-      id="faq-schema"
+    <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
     />

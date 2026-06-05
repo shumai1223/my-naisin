@@ -1,5 +1,3 @@
-import Script from 'next/script';
-
 interface HowToStep {
   name: string;
   text: string;
@@ -14,7 +12,7 @@ interface HowToSchemaProps {
   id?: string;
 }
 
-export function HowToSchema({ name, description, steps, totalTime = 'PT2M', id = 'howto-schema' }: HowToSchemaProps) {
+export function HowToSchema({ name, description, steps, totalTime = 'PT2M' }: HowToSchemaProps) {
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'HowTo',
@@ -30,9 +28,9 @@ export function HowToSchema({ name, description, steps, totalTime = 'PT2M', id =
     })),
   };
 
+  // SSRの生HTMLに含めるためプレーンな <script>（next/scriptはJS注入でAIクローラーに不可視）。
   return (
-    <Script
-      id={id}
+    <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
     />

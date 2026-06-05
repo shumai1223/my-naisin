@@ -101,7 +101,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         url={`https://my-naishin.com/blog/${post.slug}`}
         datePublished={post.date}
         dateModified={post.lastUpdated}
-        author={post.author ?? 'My Naishin'}
+        author="しゅうまい"
         tags={post.tags}
       />
       <BreadcrumbSchema
@@ -231,7 +231,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           <meta itemProp="headline" content={post.title} />
           <meta itemProp="description" content={post.description} />
           <meta itemProp="datePublished" content={post.date} />
-          <meta itemProp="author" content="My Naishin" />
+          <meta itemProp="author" content="しゅうまい" />
           <meta itemProp="keywords" content={post.tags.join(', ')} />
 
           {/* 記事冒頭の関連サービスCTA（コンパクト） */}

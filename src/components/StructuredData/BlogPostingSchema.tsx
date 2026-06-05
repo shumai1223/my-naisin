@@ -1,5 +1,3 @@
-import Script from 'next/script';
-
 interface BlogPostingSchemaProps {
   title: string;
   description: string;
@@ -33,10 +31,15 @@ export function BlogPostingSchema({
     url,
     datePublished,
     dateModified: dateModified ?? datePublished,
+    // 著者は Person（現役中学生エンジニアしゅうまい）で機械可読化。E-E-A-T最大の差別化点。
+    // @id を editor-profile / SiteSchema の founder と共有し、Googleに同一エンティティとして統合させる。
     author: {
-      '@type': 'Organization',
+      '@type': 'Person',
+      '@id': 'https://my-naishin.com/#person-shumai',
       name: author,
-      url: 'https://my-naishin.com',
+      url: 'https://my-naishin.com/about/editor-profile',
+      jobTitle: '現役中学生エンジニア（2026年度受験生）',
+      sameAs: ['https://github.com/shumai1223'],
     },
     publisher: {
       '@type': 'Organization',
@@ -56,9 +59,9 @@ export function BlogPostingSchema({
     ...(tags && tags.length > 0 ? { keywords: tags.join(', ') } : {}),
   };
 
+  // SSRの生HTMLに含めるためプレーンな <script>（next/scriptはJS注入でAIクローラーに不可視）。
   return (
-    <Script
-      id="blogposting-schema"
+    <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
     />

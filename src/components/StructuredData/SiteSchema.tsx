@@ -1,5 +1,3 @@
-import Script from 'next/script';
-
 /**
  * サイト全体のエンティティを宣言する Organization + WebSite の JSON-LD。
  * ルートレイアウトで一度だけ描画し、全ページに適用する。
@@ -28,6 +26,7 @@ export function SiteSchema() {
     foundingDate: '2025',
     founder: {
       '@type': 'Person',
+      '@id': 'https://my-naishin.com/#person-shumai',
       name: 'しゅうまい',
       url: 'https://my-naishin.com/about/editor-profile',
     },
@@ -55,9 +54,9 @@ export function SiteSchema() {
     },
   };
 
+  // JSON-LD はSSRの生HTMLに含めるためプレーンな <script> で出力する（next/scriptはJS注入でクローラーに不可視）。
   return (
-    <Script
-      id="site-schema"
+    <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{
         __html: JSON.stringify([organization, website]),

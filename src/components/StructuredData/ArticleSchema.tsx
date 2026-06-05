@@ -1,5 +1,3 @@
-import Script from 'next/script';
-
 interface ArticleSchemaProps {
   title: string;
   description: string;
@@ -44,9 +42,9 @@ export function ArticleSchema({
     }),
   };
 
+  // SSRの生HTMLに含めるためプレーンな <script>（next/scriptはJS注入でAIクローラーに不可視）。
   return (
-    <Script
-      id="article-schema"
+    <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
     />

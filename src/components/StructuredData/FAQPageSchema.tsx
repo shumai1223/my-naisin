@@ -1,5 +1,3 @@
-import Script from 'next/script';
-
 interface FAQItem {
   question: string;
   answer: string;
@@ -23,9 +21,11 @@ export function FAQPageSchema({ faqItems }: FAQPageSchemaProps) {
     })),
   };
 
+  // JSON-LD は next/script ではなくプレーンな <script> で出力する。
+  // next/script(既定 afterInteractive) は JS でクライアント注入されるため SSR の生HTMLに含まれず、
+  // JSを実行しないAIクローラー/監査ツールから FAQPage が見えなくなる（GEO上の致命傷）。
   return (
-    <Script
-      id="faq-schema"
+    <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
     />

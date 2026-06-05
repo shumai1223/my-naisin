@@ -25,9 +25,47 @@ export const metadata: Metadata = {
 };
 
 export default function EditorProfilePage() {
+  // 運営者「しゅうまい」の Person を ProfilePage として機械可読化。
+  // @id は SiteSchema(founder) / BlogPostingSchema(author) と共有し、Googleに同一人物として統合させる。
+  // これがサイト最大の差別化点「現役中学生エンジニアが執筆・開発」のE-E-A-T構造化の中核。
+  const profileSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ProfilePage',
+    mainEntity: {
+      '@type': 'Person',
+      '@id': 'https://my-naishin.com/#person-shumai',
+      name: 'しゅうまい',
+      url: 'https://my-naishin.com/about/editor-profile',
+      jobTitle: 'My Naishin 開発責任者 / 現役中学生エンジニア（2026年度受験生）',
+      description:
+        '2026年度高校受験を控える現役中学生のフルスタックエンジニア。全国47都道府県の教育委員会が発行する入学者選抜要綱（一次資料）を自ら解析し、内申点・評定平均・偏差値・志望校逆算の計算ツールを開発・運営している。当事者目線での正確性とわかりやすさを重視。',
+      knowsAbout: [
+        '高校受験',
+        '内申点',
+        '調査書点',
+        '評定平均',
+        '偏差値',
+        '都道府県別 入試制度',
+        'TypeScript',
+        'Next.js',
+      ],
+      sameAs: ['https://github.com/shumai1223'],
+      worksFor: {
+        '@type': 'Organization',
+        '@id': 'https://my-naishin.com/#organization',
+        name: 'My Naishin',
+        url: 'https://my-naishin.com',
+      },
+    },
+  };
+
   return (
     <>
-      <BreadcrumbSchema 
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(profileSchema) }}
+      />
+      <BreadcrumbSchema
         items={[
           { name: 'ホーム', url: 'https://my-naishin.com/' },
           { name: '運営者情報', url: 'https://my-naishin.com/about' },
