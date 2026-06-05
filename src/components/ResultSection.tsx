@@ -12,6 +12,7 @@ import { Switch } from '@/components/ui/Switch';
 import { Tabs, type TabItem } from '@/components/ui/Tabs';
 import { PrintButton } from '@/components/PrintButton';
 import { ScoreGauge } from '@/components/Result/ScoreGauge';
+import { GapToTarget } from '@/components/Result/GapToTarget';
 import { RankCard } from '@/components/Result/RankCard';
 import { CalculationBasis } from '@/components/Result/CalculationBasis';
 import { PointValueCard } from '@/components/Result/PointValueCard';
@@ -194,7 +195,17 @@ export function ResultSection({
           aria-labelledby="tab-key"
           className="space-y-4"
         >
-          {/* 内申点レベル別の動的訴求：結果の percent に応じて、最適な教材・サービスを切り替えて表示 */}
+          {/* 橋①：取引の発火点。目標内申とのギャップを生成し、状態別に保護者向け成果報酬CTA＋保護者バトンを出す。
+              最高インテントの瞬間なので最上部に単独配置（散らさない）。 */}
+          <GapToTarget
+            result={result}
+            prefectureCode={prefectureCode}
+            prefectureName={selectedPrefecture?.name}
+            onShareOpen={onShareOpen}
+          />
+
+          {/* 子ども向け第2選択肢（クリックアフィリ）：内申点レベル別の動的訴求。
+              観客=生徒に向けた教材導線。橋①（保護者・成果報酬）の下に置く。 */}
           <Card className="overflow-hidden">
             <div className="border-b border-slate-100/80 bg-gradient-to-r from-amber-50/80 via-orange-50/60 to-rose-50/80 px-6 py-5">
               <div className="flex items-center gap-2">

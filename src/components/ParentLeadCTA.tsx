@@ -12,6 +12,8 @@ interface ParentLeadCTAProps {
   auditHide?: boolean;
   /** 送客先プログラム。高単価の塾資料請求を追加したら差し替える（既定=Z会資料請求） */
   affiliateId?: AffiliateId;
+  /** ボタン下の補足表記（PR/無料など）。affiliateIdを差し替えたら送客先名に合わせる */
+  note?: string;
 }
 
 /**
@@ -21,7 +23,7 @@ interface ParentLeadCTAProps {
  * 「契約の意思決定者＝保護者」に向けて、無料資料請求（高単価リード）へ誘導する。
  * 実リンク・トラッキング・rel/PR表記は AffiliateAd に集約してコンプラを担保。
  */
-export function ParentLeadCTA({ heading, body, className = '', auditHide = false, affiliateId = 'zkai-text-request' }: ParentLeadCTAProps) {
+export function ParentLeadCTA({ heading, body, className = '', auditHide = false, affiliateId = 'zkai-text-request', note = 'Z会の通信教育の資料請求（PR）／無料' }: ParentLeadCTAProps) {
   if (auditHide && process.env.NEXT_PUBLIC_ADSENSE_AUDIT === '1') return null;
 
   return (
@@ -49,7 +51,7 @@ export function ParentLeadCTA({ heading, body, className = '', auditHide = false
         />
         <span className="inline-flex items-center justify-center gap-1.5 text-xs text-slate-500">
           <FileText className="h-3.5 w-3.5" />
-          Z会の通信教育の資料請求（PR）／無料
+          {note}
         </span>
       </div>
     </section>
