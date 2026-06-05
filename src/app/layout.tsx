@@ -10,6 +10,7 @@ import { GlobalHeaderBridge } from '@/components/GlobalHeaderBridge';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { SiteSchema } from '@/components/StructuredData/SiteSchema';
+import { GoogleAnalytics } from '@/components/GoogleAnalytics';
 
 const notoSansJp = Noto_Sans_JP({
   variable: '--font-noto-sans-jp',
@@ -63,6 +64,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="ja" className={`h-full ${notoSansJp.variable}`}>
       <body className={`min-h-screen mesh-gradient text-slate-900 antialiased`}>
+        <GoogleAnalytics />
         <SiteSchema />
         <GlobalHeaderBridge>
           <Header />

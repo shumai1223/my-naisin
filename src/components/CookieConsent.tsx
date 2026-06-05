@@ -53,6 +53,16 @@ export function CookieConsent() {
 
   const handleAcceptAll = () => {
     localStorage.setItem(COOKIE_CONSENT_KEY, 'all');
+    // GA4 Consent Mode：同一セッションで即時に計測を許可（gtag未ロード時はno-op）
+    const w = window as unknown as { gtag?: (...args: unknown[]) => void };
+    if (typeof w.gtag === 'function') {
+      w.gtag('consent', 'update', {
+        ad_storage: 'granted',
+        analytics_storage: 'granted',
+        ad_user_data: 'granted',
+        ad_personalization: 'granted',
+      });
+    }
     setIsVisible(false);
   };
 
