@@ -53,10 +53,9 @@ import { post as naishinten30HighSchool } from '@/lib/blog/posts/naishinten-30-h
 import { post as parentHyoteiHeikinSuisenGuide } from '@/lib/blog/posts/parent-hyotei-heikin-suisen-guide';
 // 2026-06-06 コーナーストーン：47県実データの独自比較記事（削除した自動生成44本の価値を1本に凝縮）
 import { post as naishin47PrefecturesComparison } from '@/lib/blog/posts/naishin-47-prefectures-comparison';
-// 2026-06-06 実体験記事の骨組み（中身=しゅうまいの一次情報を埋めてから下のHAND_WRITTEN_POSTSに登録すること。
-// 空のまま公開すると「作成中＝低品質」判定の燃料になるため、登録は本文完成後）:
-// import { post as suisenGoukakuRecord } from '@/lib/blog/posts/suisen-goukaku-taikenki';
-// import { post as naishinUpTaikenki } from '@/lib/blog/posts/naishin-up-taikenki';
+// 2026-06-07 実体験記事（完成稿・公開）。公開前に各ファイルの「要確認」コメント箇所だけ本人の実数値に差し替え推奨。
+import { post as suisenGoukakuRecord } from '@/lib/blog/posts/suisen-goukaku-taikenki';
+import { post as naishinUpTaikenki } from '@/lib/blog/posts/naishin-up-taikenki';
 
 // Articles whose date should be refreshed (old 2025-05-01 articles)
 const FRESHEN_DATE = '2026-05-11';
@@ -78,6 +77,8 @@ function enrichPost(post: BlogPost): BlogPost {
 }
 
 const HAND_WRITTEN_POSTS: BlogPost[] = [
+  suisenGoukakuRecord,
+  naishinUpTaikenki,
   naishin47PrefecturesComparison,
   parentHyoteiHeikinSuisenGuide,
   hyoteiHeikin45HighSchool,
