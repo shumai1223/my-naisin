@@ -14,6 +14,8 @@ interface ParentLeadCTAProps {
   affiliateId?: AffiliateId;
   /** ボタン下の補足表記（PR/無料など）。affiliateIdを差し替えたら送客先名に合わせる */
   note?: string;
+  /** CTAボタンの文言。塾系（アンカーが「【森塾】」等）を送客先にしたとき、行動を促す文に上書きする。 */
+  ctaText?: string;
 }
 
 /**
@@ -23,7 +25,7 @@ interface ParentLeadCTAProps {
  * 「契約の意思決定者＝保護者」に向けて、無料資料請求（高単価リード）へ誘導する。
  * 実リンク・トラッキング・rel/PR表記は AffiliateAd に集約してコンプラを担保。
  */
-export function ParentLeadCTA({ heading, body, className = '', auditHide = false, affiliateId = 'zkai-text-request', note = 'Z会の通信教育の資料請求（PR）／無料' }: ParentLeadCTAProps) {
+export function ParentLeadCTA({ heading, body, className = '', auditHide = false, affiliateId = 'zkai-text-request', note = 'Z会の通信教育の資料請求（PR）／無料', ctaText = '無料で資料をもらう' }: ParentLeadCTAProps) {
   if (auditHide && process.env.NEXT_PUBLIC_ADSENSE_AUDIT === '1') return null;
 
   return (
@@ -47,6 +49,7 @@ export function ParentLeadCTA({ heading, body, className = '', auditHide = false
         <AffiliateAd
           id={affiliateId}
           hideLabel
+          ctaText={ctaText}
           linkClassName="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 px-6 py-3.5 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-emerald-700 hover:shadow-lg active:scale-95 sm:w-auto"
         />
         <span className="inline-flex items-center justify-center gap-1.5 text-xs text-slate-500">

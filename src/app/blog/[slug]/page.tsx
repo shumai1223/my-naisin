@@ -16,6 +16,8 @@ import { BlogShareButtons } from '@/components/Blog/BlogShareButtons';
 import { ReadingProgressBar } from '@/components/Blog/ReadingProgressBar';
 import { BackToTopButton } from '@/components/Blog/BackToTopButton';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
+import { AdSlot } from '@/components/AdSlot';
+import { AD_SLOTS } from '@/lib/ad-slots';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -334,6 +336,11 @@ export default async function BlogPostPage({ params }: PageProps) {
             内申点を上げる第一歩は、毎日の学習習慣から。月額2,178円のオンライン学習サービス。
           </div>
           <AffiliateAd id="sapuri-banner-300" />
+        </div>
+
+        {/* AdSense床（承認＝NEXT_PUBLIC_ADSENSE_ENABLED=1 まで描画されない。読了直後の高エンゲージ位置） */}
+        <div className="mt-8">
+          <AdSlot slot={AD_SLOTS.blogArticleEnd} />
         </div>
 
         {/* Tags + Share */}

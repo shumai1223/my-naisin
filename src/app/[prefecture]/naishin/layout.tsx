@@ -124,7 +124,10 @@ export default async function PrefectureNaishinLayout({ children, params }: Layo
         <div className="mx-auto max-w-4xl px-4 pb-8">
           <ParentLeadCTA
             heading={`${prefecture.name}の入試で、お子さまの内申点は足りていますか？`}
-            body={`${prefecture.name}は${prefecture.maxScore}点満点。合格ラインまであと何点必要か、ご家庭でできる対策を無料の資料で確認できます。費用はかからず、請求は数分で完了します。`}
+            body={`${prefecture.name}は${prefecture.maxScore}点満点。合格ラインまであと何点必要か、お子さまに必要な対策をオンライン個別指導の無料体験で確認できます。全国どこからでも受講でき、費用はかかりません。`}
+            affiliateId="sora-juku-text"
+            ctaText="無料体験を申し込む（そら塾）"
+            note="【そら塾】オンライン個別指導の無料体験（PR）"
           />
         </div>
         </>

@@ -198,6 +198,7 @@ export function GapToTarget({ result, prefectureCode, prefectureName, onShareOpe
                   heading="お子さまの「あと数点」を、今からどう積むか"
                   body="内申点は残りの定期テストと提出物の取り組みで十分に動きます。AI個別指導の無料体験で、お子さまにいま必要な対策を具体的に確認できます（費用はかかりません）。"
                   affiliateId="atama-text"
+                  ctaText="無料で資料・体験を申し込む"
                   note="【atama＋ オンライン塾】の資料請求・無料体験（PR）"
                 />
               </>
@@ -210,9 +211,10 @@ export function GapToTarget({ result, prefectureCode, prefectureName, onShareOpe
                 </div>
                 <ParentLeadCTA
                   heading="あと数点で、選べる高校が変わります"
-                  body="この時期のあと数点は合否を直接左右します。今から何を積めば届くのか、ご家庭でできる対策を無料の資料で確認しておきませんか。"
-                  affiliateId="zkai-text-request"
-                  note="Z会の通信教育の資料請求（PR）／無料"
+                  body="この時期のあと数点は合否を直接左右します。今から何を積めば届くのか、お子さまに必要な対策をオンライン個別指導の無料体験で具体的に確認できます（費用はかかりません）。"
+                  affiliateId="sora-juku-text"
+                  ctaText="無料体験を申し込む（そら塾）"
+                  note="【そら塾】オンライン個別指導の無料体験（PR）"
                 />
               </>
             )}

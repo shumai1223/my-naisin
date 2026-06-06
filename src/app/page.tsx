@@ -319,8 +319,14 @@ export default function Page() {
             {/* 文科省一次情報ベースの権威コンテンツ（独自性・E-E-A-T・外部権威リンク） */}
             <KantenHyokaOfficial />
 
-            {/* 保護者向けリード導線（収益化の本命：広告表示→資料請求の送客） */}
-            <ParentLeadCTA />
+            {/* 保護者向けリード導線（収益化の本命：高単価＝オンライン個別の無料体験へ送客） */}
+            <ParentLeadCTA
+              heading="お子さまの内申点、志望校に届いていますか？"
+              body="内申点は「今からの動き方」で大きく変わります。お子さまに必要な対策を、オンライン個別指導の無料体験で確認できます。全国どこからでも受講でき、費用はかかりません。"
+              affiliateId="sora-juku-text"
+              ctaText="無料体験を申し込む（そら塾）"
+              note="【そら塾】オンライン個別指導の無料体験（PR）"
+            />
 
             <div className="rounded-3xl bg-gradient-to-br from-blue-600 to-indigo-700 p-8 text-white">
               <h3 className="text-xl font-bold mb-4 flex items-center gap-2">

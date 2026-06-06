@@ -11,9 +11,11 @@ interface AffiliateAdProps {
   linkClassName?: string;
   /** AdSense審査モード（NEXT_PUBLIC_ADSENSE_AUDIT=1）時のみ非表示にする。重複配置の終盤側に付与。合格後は環境変数を消すだけで全復元される。 */
   auditHide?: boolean;
+  /** textタイプのアンカー表示文言を上書き（href/トラッキングは維持）。塾の素のアンカー文「【森塾】」等を、CTAボタンとして自然な行動文にしたいときに使う。 */
+  ctaText?: string;
 }
 
-export function AffiliateAd({ id, className = '', centered = true, hideLabel = false, linkClassName, auditHide = false }: AffiliateAdProps) {
+export function AffiliateAd({ id, className = '', centered = true, hideLabel = false, linkClassName, auditHide = false, ctaText }: AffiliateAdProps) {
   if (auditHide && process.env.NEXT_PUBLIC_ADSENSE_AUDIT === '1') return null;
   const ad = AFFILIATES[id];
 
@@ -42,7 +44,7 @@ export function AffiliateAd({ id, className = '', centered = true, hideLabel = f
           target="_blank"
           className={linkClassName ?? 'font-bold text-blue-600 underline decoration-blue-300 underline-offset-2 hover:text-blue-700 hover:decoration-blue-500'}
         >
-          {ad.text}
+          {ctaText ?? ad.text}
         </a>
         {trackingPixel}
       </span>

@@ -444,7 +444,10 @@ export default function HomeClient() {
                           <ParentLeadCTA
                             auditHide
                             heading="この結果、志望校の合格ラインに届いていますか？"
-                            body="内申点は「今からの動き方」で十分に変えられます。お子さまに合った対策を、まずは無料の資料で確認できます（保護者の方向け・費用はかかりません）。"
+                            body="内申点は「今からの動き方」で十分に変えられます。お子さまに必要な対策を、AI個別指導の無料体験で具体的に確認できます（保護者の方向け・費用はかかりません）。"
+                            affiliateId="atama-text"
+                            ctaText="無料で資料・体験を申し込む"
+                            note="【atama＋ オンライン塾】の資料請求・無料体験（PR）"
                           />
                         </div>
                       )}
