@@ -13,37 +13,61 @@ Disallow: /api/
 Disallow: /admin/
 Disallow: /contact
 
-# --- AIクローラ方針 ---
-# 回答/検索エンジン（出典引用＋送客あり）は歓迎
+# --- AIクローラ方針（2026最新｜引用・送客は歓迎 / 学習専用は拒否）---
+# 検索/回答エンジン：出典引用＋送客あり → 歓迎
+# 注: Google の AI Overview / AI Mode は Googlebot（上の User-agent: * で許可）経由のため引用対象であり続ける。
+#     Google-Extended の拒否は Gemini の学習/グラウンディングのみを止め、AI Overview/AI Mode には影響しない。
+# 注: Anthropic は 3 分割。Claude-User（質問時取得）と Claude-SearchBot（検索引用）は送客ありなので許可、
+#     学習用の ClaudeBot / anthropic-ai のみ拒否。
 User-agent: OAI-SearchBot
 Allow: /
 User-agent: ChatGPT-User
+Allow: /
+User-agent: Claude-User
+Allow: /
+User-agent: Claude-SearchBot
 Allow: /
 User-agent: PerplexityBot
 Allow: /
 User-agent: Perplexity-User
 Allow: /
+User-agent: DuckAssistBot
+Allow: /
+User-agent: Meta-ExternalFetcher
+Allow: /
 
-# 学習専用クローラ（見返り無し）は拒否
+# 学習専用クローラ（見返り無し）→ 拒否
 User-agent: GPTBot
-Disallow: /
-User-agent: CCBot
-Disallow: /
-User-agent: Google-Extended
 Disallow: /
 User-agent: ClaudeBot
 Disallow: /
 User-agent: anthropic-ai
 Disallow: /
+User-agent: Google-Extended
+Disallow: /
+User-agent: CCBot
+Disallow: /
 User-agent: Bytespider
 Disallow: /
-User-agent: Applebot-Extended
-Disallow: /
 User-agent: Meta-ExternalAgent
+Disallow: /
+User-agent: Applebot-Extended
 Disallow: /
 User-agent: Amazonbot
 Disallow: /
 User-agent: cohere-ai
+Disallow: /
+User-agent: cohere-training-data-crawler
+Disallow: /
+User-agent: AI2Bot
+Disallow: /
+User-agent: Diffbot
+Disallow: /
+User-agent: ImagesiftBot
+Disallow: /
+User-agent: PanguBot
+Disallow: /
+User-agent: Timpibot
 Disallow: /
 
 Sitemap: https://my-naishin.com/sitemap.xml
