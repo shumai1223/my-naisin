@@ -150,8 +150,8 @@ export default function Page() {
       {/* SEO Optimized Content Section */}
       <section className="mx-auto max-w-5xl px-4 py-16">
         <div className="grid gap-8 lg:grid-cols-3">
-          {/* Main Content Column */}
-          <div className="lg:col-span-2 space-y-12">
+          {/* Main Content Column（min-w-0: gridトラックが内部の広い要素で押し広げられ右が見切れるのを防ぐ） */}
+          <div className="min-w-0 lg:col-span-2 space-y-12">
             <div>
               <h2 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-2">
                 <Calculator className="text-blue-600" />
@@ -378,8 +378,9 @@ export default function Page() {
             </div>
           </div>
 
-          {/* Sidebar/Right Column */}
-          <div className="space-y-8">
+          {/* Sidebar/Right Column（PC: stickyで本文が長くても右側が空かないよう追従＋回遊モジュール増設） */}
+          <div className="min-w-0">
+            <div className="space-y-8 lg:sticky lg:top-24">
             <div className="rounded-2xl border border-amber-100 bg-amber-50 p-6">
               <h3 className="font-bold text-amber-900 mb-4 flex items-center gap-2">
                 <ShieldCheck className="text-amber-600" />
@@ -393,6 +394,66 @@ export default function Page() {
                   情報の信頼性への取り組み <ChevronRight className="h-4 w-4" />
                 </Link>
               </div>
+            </div>
+
+            {/* 回遊モジュール：無料の計算ツール（内部リンク強化＋右側を埋める） */}
+            <div className="rounded-2xl border border-indigo-100 bg-gradient-to-br from-indigo-50/50 to-white p-6 shadow-sm">
+              <h3 className="mb-4 flex items-center gap-2 font-bold text-slate-900">
+                <Calculator className="h-5 w-5 text-indigo-500" />
+                無料の計算ツール
+              </h3>
+              <div className="space-y-2">
+                {[
+                  { href: '/hensachi', label: '偏差値計算（5教科）' },
+                  { href: '/hyotei-heikin', label: '評定平均 計算' },
+                  { href: '/reverse', label: '志望校から逆算' },
+                  { href: '/koukou-hiyou', label: '高校費用シミュレーター' },
+                ].map((tool) => (
+                  <Link
+                    key={tool.href}
+                    href={tool.href}
+                    className="flex items-center justify-between rounded-lg bg-white px-3 py-2 text-sm font-medium text-slate-700 ring-1 ring-slate-200 transition-all hover:bg-indigo-50 hover:text-indigo-700 hover:ring-indigo-200"
+                  >
+                    {tool.label}
+                    <ChevronRight className="h-3.5 w-3.5 opacity-40" />
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            {/* 回遊モジュール：よく見られる都道府県（高トラフィック県への内部リンク） */}
+            <div className="rounded-2xl border border-blue-100 bg-white p-6 shadow-sm">
+              <h3 className="mb-4 flex items-center gap-2 font-bold text-slate-900">
+                <MapPin className="h-5 w-5 text-blue-500" />
+                よく見られる都道府県
+              </h3>
+              <div className="grid grid-cols-2 gap-2">
+                {[
+                  { code: 'tokyo', name: '東京都' },
+                  { code: 'kanagawa', name: '神奈川県' },
+                  { code: 'osaka', name: '大阪府' },
+                  { code: 'hyogo', name: '兵庫県' },
+                  { code: 'hokkaido', name: '北海道' },
+                  { code: 'aichi', name: '愛知県' },
+                  { code: 'saitama', name: '埼玉県' },
+                  { code: 'fukuoka', name: '福岡県' },
+                ].map((pref) => (
+                  <Link
+                    key={pref.code}
+                    href={`/${pref.code}/naishin`}
+                    className="flex items-center justify-between rounded-lg bg-slate-50 px-3 py-2 text-sm font-medium text-slate-700 ring-1 ring-slate-200 transition-all hover:bg-blue-50 hover:text-blue-700 hover:ring-blue-200"
+                  >
+                    {pref.name}
+                    <ChevronRight className="h-3 w-3 opacity-40" />
+                  </Link>
+                ))}
+              </div>
+              <Link
+                href="/prefectures"
+                className="mt-3 block text-center text-xs font-bold text-blue-600 hover:text-blue-700"
+              >
+                47都道府県すべて見る
+              </Link>
             </div>
 
             {/* サイドバーPR：個別指導の選択肢 */}
@@ -428,6 +489,7 @@ export default function Page() {
               <Link href="/blog" className="mt-6 block text-center text-sm font-bold text-blue-600 hover:text-blue-700">
                 記事一覧を見る
               </Link>
+            </div>
             </div>
           </div>
         </div>

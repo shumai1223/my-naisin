@@ -38,7 +38,7 @@ export function CiteAssetBox() {
       </p>
 
       <div className="flex flex-col gap-2 sm:flex-row">
-        <code className="flex-1 overflow-x-auto whitespace-nowrap rounded-lg border border-slate-200 bg-white px-3 py-2 text-[11px] text-slate-600">
+        <code className="min-w-0 flex-1 overflow-x-auto whitespace-nowrap rounded-lg border border-slate-200 bg-white px-3 py-2 text-[11px] text-slate-600">
           {citeSnippet}
         </code>
         <div className="flex shrink-0 gap-2">
