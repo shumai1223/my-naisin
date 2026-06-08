@@ -23,8 +23,9 @@ interface SaveResultCTAProps {
 }
 
 // LINE公式アカウントの友だち追加URL（例: https://lin.ee/xxxxxxx）。
-// Cloudflare の環境変数 NEXT_PUBLIC_LINE_ADD_URL を設定した瞬間に LINE導線が点灯する。
-const LINE_ADD_URL = process.env.NEXT_PUBLIC_LINE_ADD_URL || '';
+// LINE公式アカウントの友だち追加URL（公開情報のため直書き＝ビルド変数事故なしで確実に点灯）。
+// 別アカウントに差し替える場合は環境変数 NEXT_PUBLIC_LINE_ADD_URL が優先される。
+const LINE_ADD_URL = process.env.NEXT_PUBLIC_LINE_ADD_URL || 'https://lin.ee/8tQMAxX';
 
 type Status = 'idle' | 'submitting' | 'success' | 'fallback' | 'error';
 
