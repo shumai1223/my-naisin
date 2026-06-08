@@ -238,6 +238,75 @@ export function appendHistoryEntry(params: { scores: Scores; memo?: string; pref
   }
 }
 
+/**
+ * 保存した目標（堀A：再訪導線の燃料）。
+ * 結果ページで「志望校までの差」を確定した瞬間に保存し、次回訪問時に
+ * 「前回の続き＝◯◯まであと△点」を出して“使い捨て”を“再訪”に変える。
+ */
+export interface SavedGoal {
+  prefectureCode: string;
+  prefectureName?: string;
+  /** 目標内申点 */
+  target: number;
+  /** 目標のラベル（例：「横浜翠嵐の目安」「あなたの目標」） */
+  targetLabel?: string;
+  /** 保存時点の内申点 */
+  score: number;
+  /** 目標までのギャップ（正＝不足、0以下＝到達） */
+  gap: number;
+  /** ISO日時 */
+  savedAt: string;
+}
+
+const SAVED_GOAL_KEY = 'my-naishin:saved-goal';
+
+export function readSavedGoal(): SavedGoal | null {
+  if (typeof window === 'undefined') return null;
+  try {
+    const raw = window.localStorage.getItem(SAVED_GOAL_KEY);
+    if (!raw) return null;
+    const obj = JSON.parse(raw) as Record<string, unknown>;
+    const target = toFiniteNumber(obj.target);
+    const score = toFiniteNumber(obj.score);
+    const gap = toFiniteNumber(obj.gap);
+    const prefectureCode = typeof obj.prefectureCode === 'string' ? obj.prefectureCode : null;
+    const savedAt = typeof obj.savedAt === 'string' ? obj.savedAt : null;
+    if (target == null || score == null || gap == null || !prefectureCode || !savedAt) return null;
+    if (!Number.isFinite(Date.parse(savedAt))) return null;
+    return {
+      prefectureCode,
+      prefectureName: typeof obj.prefectureName === 'string' ? obj.prefectureName : undefined,
+      target: Math.round(target),
+      targetLabel: typeof obj.targetLabel === 'string' ? obj.targetLabel : undefined,
+      score: Math.round(score),
+      gap: Math.round(gap),
+      savedAt,
+    };
+  } catch {
+    return null;
+  }
+}
+
+export function writeSavedGoal(goal: Omit<SavedGoal, 'savedAt'> & { savedAt?: string }): SavedGoal | null {
+  if (typeof window === 'undefined') return null;
+  try {
+    const entry: SavedGoal = { ...goal, savedAt: goal.savedAt ?? new Date().toISOString() };
+    window.localStorage.setItem(SAVED_GOAL_KEY, JSON.stringify(entry));
+    return entry;
+  } catch {
+    return null;
+  }
+}
+
+export function clearSavedGoal() {
+  if (typeof window === 'undefined') return;
+  try {
+    window.localStorage.removeItem(SAVED_GOAL_KEY);
+  } catch {
+    // ignore
+  }
+}
+
 export function updateHistoryMemo(id: string, memo: string) {
   if (typeof window === 'undefined') return null;
   try {

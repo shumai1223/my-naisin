@@ -6,8 +6,10 @@ import { Target, Send, ChevronRight, TrendingUp, PartyPopper, Wallet, Info } fro
 
 import { Card } from '@/components/ui/Card';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
+import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { PREFECTURE_HIGH_SCHOOL_DATA } from '@/lib/prefecture-high-school-data';
 import { track } from '@/lib/track';
+import { writeSavedGoal } from '@/lib/persistence';
 import type { ResultData } from '@/lib/types';
 
 interface GapToTargetProps {
@@ -63,12 +65,22 @@ export function GapToTarget({ result, prefectureCode, prefectureName, onShareOpe
   const state: GapState | null = gap == null ? null : gap <= 0 ? 'met' : gap <= 3 ? 'close' : 'far';
 
   function pickSchool(s: { name: string; avgNaishin: number }) {
+    const label = `${s.name}の目安`;
     setTarget(s.avgNaishin);
-    setTargetLabel(`${s.name}の目安`);
+    setTargetLabel(label);
     track('gap_target_set', {
       pref: prefectureCode,
       source: 'school',
       target: s.avgNaishin,
+      gap: s.avgNaishin - result.total,
+    });
+    // 堀A：再訪導線の燃料として目標を保存（次回「前回の続き＝あと◯点」を出せる）
+    writeSavedGoal({
+      prefectureCode,
+      prefectureName,
+      target: s.avgNaishin,
+      targetLabel: label,
+      score: result.total,
       gap: s.avgNaishin - result.total,
     });
   }
@@ -82,6 +94,14 @@ export function GapToTarget({ result, prefectureCode, prefectureName, onShareOpe
       pref: prefectureCode,
       source: 'manual',
       target: clamped,
+      gap: clamped - result.total,
+    });
+    writeSavedGoal({
+      prefectureCode,
+      prefectureName,
+      target: clamped,
+      targetLabel: 'あなたの目標',
+      score: result.total,
       gap: clamped - result.total,
     });
   }
@@ -260,6 +280,21 @@ export function GapToTarget({ result, prefectureCode, prefectureName, onShareOpe
                 <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </div>
             </button>
+
+            {/* 堀A（名簿化）：高インテントな結果直後に「保存／LINEで受け取る」。受験期トラフィックを資産へ。 */}
+            <SaveResultCTA
+              source="gap-target"
+              prefectureCode={prefectureCode}
+              prefectureName={prefectureName}
+              score={result.total}
+              target={target ?? undefined}
+              gap={gap ?? undefined}
+              heading={
+                state === 'met'
+                  ? 'この合格圏を、受験本番までキープしませんか？'
+                  : `「${targetLabel}まであと${gap}点」を、受験本番まで一緒に追いませんか？`
+              }
+            />
 
             {/* ヘッジ（信頼の堀を守る語尾） */}
             <div className="flex items-start gap-2 rounded-xl bg-slate-50 px-4 py-3 text-[11px] leading-relaxed text-slate-500">

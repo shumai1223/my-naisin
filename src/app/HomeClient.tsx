@@ -8,7 +8,14 @@ import { ArrowRight, RotateCcw, Calculator, ChevronRight, TrendingUp as Trending
 
 import { DEFAULT_SCORES } from '@/lib/constants';
 import { getPrefectureByCode, DEFAULT_PREFECTURE_CODE } from '@/lib/prefectures';
-import { appendHistoryEntry, getSaveConsent, readHistory, setSaveConsent } from '@/lib/persistence';
+import {
+  appendHistoryEntry,
+  getSaveConsent,
+  readHistory,
+  setSaveConsent,
+  readSavedGoal,
+  type SavedGoal,
+} from '@/lib/persistence';
 import type { ResultData, SavedHistoryEntry, Scores, SubjectKey } from '@/lib/types';
 import {
   calculateMaxScore,
@@ -92,6 +99,7 @@ export default function HomeClient() {
   const [saveEnabled, setSaveEnabled] = React.useState(true);
   const [saveMemo, setSaveMemo] = React.useState('');
   const [lastSaved, setLastSaved] = React.useState<SavedHistoryEntry | null>(null);
+  const [savedGoal, setSavedGoal] = React.useState<SavedGoal | null>(null);
 
   const selectedPrefecture = React.useMemo(
     () => getPrefectureByCode(prefectureCode),
@@ -134,6 +142,7 @@ export default function HomeClient() {
 
     const history = readHistory();
     setLastSaved(history[0] ?? null);
+    setSavedGoal(readSavedGoal());
 
     // 履歴があり、かつ scores が初期値から変更されている場合のみ計算モードに遷移。
     // 初回ユーザーや空の入力では「目的を選ぶ」画面を維持して、空の結果画面を防ぐ。
@@ -267,6 +276,41 @@ export default function HomeClient() {
               <div className="px-4 pb-4 md:px-6">
                 <StatsBar />
               </div>
+
+              {/* 堀A（再訪導線）：保存した目標があれば「前回の続き＝あと◯点」を出し、使い捨てを再訪に変える */}
+              {savedGoal && (
+                <div className="px-4 pb-4 md:px-6">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (savedGoal.prefectureCode) setPrefectureCode(savedGoal.prefectureCode);
+                      setNavigationMode('calculate');
+                      window.setTimeout(() => {
+                        document
+                          .getElementById('calculator')
+                          ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                      }, 80);
+                    }}
+                    className="group flex w-full items-center justify-between gap-3 rounded-2xl border-2 border-indigo-200 bg-gradient-to-r from-indigo-50 via-blue-50 to-sky-50 px-5 py-4 text-left transition-all hover:border-indigo-400 hover:shadow-md"
+                  >
+                    <span className="min-w-0">
+                      <span className="flex items-center gap-2 text-sm font-bold text-indigo-900">
+                        <TrendingUpIcon className="h-4 w-4 shrink-0" />
+                        おかえりなさい！前回の続きから
+                      </span>
+                      <span className="mt-0.5 block truncate text-xs text-indigo-700">
+                        {savedGoal.gap > 0
+                          ? `${savedGoal.targetLabel ?? '目標'}まであと ${savedGoal.gap}点（前回の内申 ${savedGoal.score}）`
+                          : `${savedGoal.targetLabel ?? '目標'}に到達（前回の内申 ${savedGoal.score}）。今の成績で再チェック`}
+                      </span>
+                    </span>
+                    <span className="flex items-center gap-1 rounded-lg bg-indigo-600 px-3 py-2 text-xs font-bold text-white shadow-sm transition-all group-hover:bg-indigo-700">
+                      続ける
+                      <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                    </span>
+                  </button>
+                </div>
+              )}
 
               {/* ファーストビューのZ会CTA：select画面のみ。EPC50+の最優先素材を上部に露出 */}
               {navigationMode === 'select' && (

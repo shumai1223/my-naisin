@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Heart, FileText, Shield, Mail, AlertTriangle, Sparkles, BookOpen, User, Target, MapPin, ChevronRight } from 'lucide-react';
+import { Heart, FileText, Shield, Mail, AlertTriangle, Sparkles, BookOpen, User, Target, MapPin, ChevronRight, Database } from 'lucide-react';
 
 import { APP_NAME } from '@/lib/constants';
 
@@ -148,12 +148,19 @@ export function Footer() {
                 <BookOpen className="h-3 w-3" />
                 用語辞典
               </Link>
-              <Link 
-                href="/contact" 
+              <Link
+                href="/contact"
                 className="flex items-center gap-1.5 rounded-full bg-violet-50 px-3 py-1.5 text-xs font-medium text-violet-700 transition-all hover:bg-violet-100"
               >
                 <Mail className="h-3 w-3" />
                 お問い合わせ
+              </Link>
+              <Link
+                href="/developers"
+                className="flex items-center gap-1.5 rounded-full bg-slate-100 px-3 py-1.5 text-xs font-medium text-slate-700 transition-all hover:bg-slate-200"
+              >
+                <Database className="h-3 w-3" />
+                データAPI / MCP
               </Link>
             </div>
           </div>

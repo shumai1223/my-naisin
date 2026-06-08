@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { APP_NAME } from '@/lib/constants';
 
 export default function PrivacyPage() {
-  const lastUpdated = '2026年4月22日';
+  const lastUpdated = '2026年6月8日';
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
@@ -42,7 +42,7 @@ export default function PrivacyPage() {
             </li>
             <li className="flex gap-2">
               <span className="text-emerald-500">✓</span>
-              <span><strong>お問い合わせ時：</strong>返信のためメールアドレス等を取得します</span>
+              <span><strong>お問い合わせ・受け取り登録時：</strong>返信・配信のためメールアドレス等を取得します（任意）</span>
             </li>
             <li className="flex gap-2">
               <span className="text-emerald-500">✓</span>
@@ -156,6 +156,21 @@ export default function PrivacyPage() {
               サイトの改善およびユーザー体験の向上のためにのみ使用されます。
               個人を特定するために使用されることはありません。
             </p>
+
+            <h3 className="mb-2 mt-4 text-sm font-bold text-slate-700">2.4 受験情報の受け取り登録（任意）</h3>
+            <div className="rounded-xl border border-sky-200 bg-sky-50 p-4">
+              <p className="text-sm leading-relaxed text-sky-800">
+                <strong>「結果を保存・受け取る」機能をご利用の場合：</strong>受験情報・内申対策のお届けのため、
+                メールアドレスを取得します。登録は完全に任意で、ツールの利用に登録は必要ありません。
+              </p>
+              <ul className="mt-2 space-y-1 text-xs text-sky-700">
+                <li>• <strong>取得項目：</strong>メールアドレス、登録時の文脈情報（選択中の都道府県・内申点・目標・差。任意）</li>
+                <li>• <strong>利用目的：</strong>受験情報・内申対策・志望校情報の配信のみ（同意した場合に限る）</li>
+                <li>• <strong>配信解除：</strong>各配信またはお問い合わせからいつでも解除できます</li>
+                <li>• <strong>第三者提供：</strong>本人の同意なく第三者へ提供・販売することはありません</li>
+                <li>• <strong>LINEでの受け取り：</strong>LINE公式アカウントを友だち追加された場合、LINEヤフー株式会社のプライバシーポリシーも適用されます</li>
+              </ul>
+            </div>
           </section>
 
           {/* ローカルストレージ */}

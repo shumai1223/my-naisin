@@ -11,6 +11,8 @@
 |---|---|---|---|
 | `NEXT_PUBLIC_ADSENSE_AUDIT` | `1` | `auditHide`付きの広告/CTA（重複配置・結果直後の保護者CTA等）を**隠す**＝審査用のクリーンな見た目 | **審査中はON** |
 | `NEXT_PUBLIC_ADSENSE_ENABLED` | `1` | `<AdSlot>`のAdSense広告枠を**描画**する | **承認後にON** |
+| `NEXT_PUBLIC_LINE_ADD_URL` | `https://lin.ee/xxxx` | 結果ページ等の `SaveResultCTA` に**LINE友だち追加ボタン**を点灯（堀A＝名簿の本体） | LINE公式アカウント開設後 |
+| `LEAD_WEBHOOK_URL` | Discord/Slack Webhook URL | `/api/lead` の登録メールを**運営者に通知**（未設定なら `CONTACT_WEBHOOK_URL` を流用、それも無ければユーザー側でmailtoフォールバック） | リード収集を始めたら |
 
 - **審査中（今）**：`NEXT_PUBLIC_ADSENSE_AUDIT=1` をセットして再デプロイ。広告密度を絞った状態で審査を受ける。
 - **承認後**：`AUDIT` を外す → 休眠CTAが点火。`NEXT_PUBLIC_ADSENSE_ENABLED=1` をセット → AdSense枠が点火。再デプロイ。
@@ -87,6 +89,37 @@
 - **AdSense**：コンソールのページRPM。教育系の目安¥150〜400/1000PV。
 - **送客**：ASP管理画面の「資料請求/体験 発生数 × 単価」。`ParentLeadCTA`経由のクリック率もトラッキングピクセルで把握。
 - **意思決定**：月次で「AdSense ÷ 送客」の比率を見る。送客が伸びるほど学生ニッチの天井を超えていける。
+
+---
+
+## 5. 堀A（名簿化）— 受験期トラフィックを“資産”に変える
+
+受験期(11–2月)に来る数万人を「使い捨て」で終わらせず、**会員（LINE友だち＋メール名簿）**にして毎年再収穫する。北極星の両面プラットフォームの共通燃料。
+
+- **実装**：`src/components/SaveResultCTA.tsx`（LINE友だち追加＋メール受け取りフォーム）。設置＝結果ページ最高インテント点（`GapToTarget` 内・目標確定直後）／`/hensachi`／`/hyotei-heikin`。
+- **配信**：`/api/lead` → `LEAD_WEBHOOK_URL`（無ければ `CONTACT_WEBHOOK_URL`）へ通知。未設定でも `lead.ts` の **mailtoフォールバック**で取りこぼさない。個人情報はサーバー保存せず通知転送のみ（本格CRM/ESPは後段）。
+- **再訪導線**：`persistence.ts` の `savedGoal`（目標と「あと◯点」を端末保存）→ ホームに「おかえりなさい！前回の続きから」バナー。
+- **計測**：`line_friend_click` / `lead_submit` / `lead_submit_success`（GA4 G-VRVSVK1X5Z）。
+
+### 残タスク（ユーザー操作）
+1. **LINE公式アカウントを開設**（無料）→ 友だち追加URL（`https://lin.ee/xxxx`）を `NEXT_PUBLIC_LINE_ADD_URL` に設定。これが名簿の本体。
+2. リード通知先（Discord/Slack Webhook）を `LEAD_WEBHOOK_URL` に設定（`CONTACT_WEBHOOK_URL` 流用でも可）。
+3. ある程度貯まったらメール配信（ESP）/LINE配信で「内申対策・出願スケジュール」を定期配信 → 体験申込・資料請求に再送客。
+
+---
+
+## 6. 堀B（AIデータ API / MCP）— AIが呼びにくる一次データ層
+
+AI時代に「溶けない収益」＝AIが必ず参照する一次データの供給側に回る。47都道府県の計算方式を機械可読化。
+
+- **REST**：`GET /api/naishin`（全47件）／`GET /api/naishin/{code}`（詳細＋オール3/4/5の厳密計算例＋目安校）。CORS全許可・CDNキャッシュ1h・`meta.license`=出典明記で無料。
+- **MCP**：`/api/mcp`（JSON-RPC 2.0・`list_prefectures`/`get_prefecture`/`calculate_naishin`）。AIエージェントが**厳密な内申点**を呼べる＝「概算で終わらせず正確値＋出典送客」を構造的に実現。
+- **正準ソース**：`src/lib/naishin-dataset.ts`（REST/MCP/ドキュメントが共有。表示用 `PREFECTURES`＋`utils` 計算を一本化）。
+- **発見導線**：`/developers`（ドキュメント）／`llms.txt`／`robots`（`/api/naishin`・`/api/mcp` を明示許可）／`schema.org Dataset` の `distribution`（DataDownload）／フッター内部リンク／sitemap。
+
+### 次の一手（任意）
+- Pay Per Crawl（Cloudflare）対応で「学習用クロールは課金、引用は許可」を実装し、データそのものを直接換金する。
+- 利用ログ（どのAI/サイトが呼んだか）を取り、供給側（塾/私立）交渉の実績データにする。
 
 ---
 

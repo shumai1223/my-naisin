@@ -43,7 +43,8 @@ export default function robots(): MetadataRoute.Robots {
       { userAgent: AI_TRAINING_BOTS, disallow: '/' },
       {
         userAgent: '*',
-        allow: '/',
+        // 公開データAPI（堀B：AIが呼べる一次データ層）は明示的に許可。その他の /api は非公開のまま。
+        allow: ['/', '/api/naishin', '/api/mcp'],
         disallow: ['/api/', '/*?*'],
       },
     ],

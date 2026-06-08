@@ -8,6 +8,10 @@ Allow: /js/
 Allow: /images/
 Allow: /_next/static/
 
+# Public data API（堀B：AI・開発者向けの一次データ層は公開）
+Allow: /api/naishin
+Allow: /api/mcp
+
 # Block sensitive routes
 Disallow: /api/
 Disallow: /admin/

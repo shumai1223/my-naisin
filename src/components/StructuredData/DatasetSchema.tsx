@@ -10,6 +10,13 @@ interface DatasetSchemaProps {
   citation?: string;
   /** キーワード（AI/検索の主題理解を助ける）。 */
   keywords?: string[];
+  /** 機械可読の配布形態（DataDownload）。AI/検索がJSON APIを発見する導線。 */
+  distribution?: ReadonlyArray<{
+    '@type': 'DataDownload';
+    encodingFormat: string;
+    contentUrl: string;
+    name?: string;
+  }>;
 }
 
 /**
@@ -25,6 +32,7 @@ export function DatasetSchema({
   dateModified,
   citation,
   keywords,
+  distribution,
 }: DatasetSchemaProps) {
   const schema = {
     '@context': 'https://schema.org',
@@ -37,6 +45,7 @@ export function DatasetSchema({
     license: 'https://my-naishin.com/terms',
     ...(keywords ? { keywords } : {}),
     ...(dateModified ? { dateModified } : {}),
+    ...(distribution ? { distribution } : {}),
     ...(variableMeasured
       ? {
           variableMeasured: variableMeasured.map((v) => ({
