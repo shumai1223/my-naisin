@@ -711,7 +711,7 @@ export default function HensachiPage() {
                 </table>
               </div>
               <p className="mt-3 text-xs text-slate-500">
-                ※ 都道府県や学校により異なります。あくまで全国平均の目安です。<Link href="/" className="text-blue-600 underline">内申点計算ツール</Link>で自分の地域の正確な値を確認できます。
+                ※ 都道府県や学校により異なります。あくまで全国平均の目安です。<Link href="/" className="text-blue-600 underline">内申点 計算サイト（47都道府県対応）</Link>で自分の地域の正確な値を確認できます。
               </p>
             </div>
           </section>
@@ -1035,7 +1035,7 @@ export default function HensachiPage() {
             <h2 className="mb-4 text-lg font-bold text-slate-800">関連ツール</h2>
             <div className="grid gap-3 sm:grid-cols-2">
               <Link href="/" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow">
-                <span className="text-sm font-medium text-slate-700">内申点を計算する（換算対応）</span>
+                <span className="text-sm font-medium text-slate-700">内申点 計算サイト（換算対応）</span>
                 <ChevronRight className="h-4 w-4 text-slate-400" />
               </Link>
               <Link href="/hyotei-heikin" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow">

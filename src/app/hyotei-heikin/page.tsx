@@ -131,6 +131,9 @@ export default function HyoteiHeikinPage() {
                 <Calculator className="h-3.5 w-3.5" />
                 計算ツールへ
               </a>
+              <a href="#kansan-hayami" className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50">
+                換算早見表
+              </a>
               <a href="#shinrro-meyasu" className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50">
                 進路目安
               </a>
@@ -270,6 +273,90 @@ export default function HyoteiHeikinPage() {
                 <strong>注意：</strong>都道府県によっては「内申点（合計値）」を直接使うため、評定平均（小数）が使われない場合もあります。詳しくは<Link href="/prefectures" className="text-blue-600 underline">都道府県別ページ</Link>をご確認ください。
               </div>
             </div>
+          </section>
+
+          {/* 評定平均⇄内申点⇄偏差値 換算早見表（SEO: 評定平均 内申点 換算 / 素内申 早見表 / 評定平均 偏差値） */}
+          <section id="kansan-hayami" className="mt-8 scroll-mt-20 rounded-2xl border border-emerald-100 bg-gradient-to-br from-emerald-50/40 to-white p-6 shadow-sm">
+            <h2 className="mb-3 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
+              評定平均・内申点（素内申）・偏差値 換算早見表【2026年版】
+            </h2>
+            <p className="text-sm text-slate-600 mb-4 leading-relaxed">
+              「評定平均◯◯は内申点（素内申）で何点？」「偏差値ではどのくらい？」を一覧で確認できる換算早見表です。
+              評定平均（9教科の平均）と素内申（9教科の合計・45点満点）は同じ通知表データの別表現。下表で自分の位置とおおよその到達校レベルをチェックできます。
+            </p>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="bg-emerald-600 text-white text-left">
+                    <th className="border border-emerald-400 px-3 py-2 font-bold">評定平均</th>
+                    <th className="border border-emerald-400 px-3 py-2 font-bold text-right">素内申（9教科合計／45）</th>
+                    <th className="border border-emerald-400 px-3 py-2 font-bold text-right">偏差値の目安</th>
+                    <th className="border border-emerald-400 px-3 py-2 font-bold">到達校レベルの目安</th>
+                  </tr>
+                </thead>
+                <tbody className="text-slate-700">
+                  <tr className="bg-red-50">
+                    <td className="border border-slate-200 px-3 py-2 font-bold">5.0</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right">45</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right">70以上</td>
+                    <td className="border border-slate-200 px-3 py-2">最難関（日比谷・北野・灘など）</td>
+                  </tr>
+                  <tr className="bg-orange-50">
+                    <td className="border border-slate-200 px-3 py-2 font-bold">4.5</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right">41</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right">65〜69</td>
+                    <td className="border border-slate-200 px-3 py-2">難関（地域トップ進学校）</td>
+                  </tr>
+                  <tr className="bg-amber-50">
+                    <td className="border border-slate-200 px-3 py-2 font-bold">4.0</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right">36</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right">60〜64</td>
+                    <td className="border border-slate-200 px-3 py-2">上位校・私立特進併願</td>
+                  </tr>
+                  <tr className="bg-amber-50/60">
+                    <td className="border border-slate-200 px-3 py-2 font-bold">3.8</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right">34</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right">57〜60</td>
+                    <td className="border border-slate-200 px-3 py-2">私立併願優遇の定番基準ライン</td>
+                  </tr>
+                  <tr className="bg-emerald-50">
+                    <td className="border border-slate-200 px-3 py-2 font-bold">3.5</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right">32</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right">53〜57</td>
+                    <td className="border border-slate-200 px-3 py-2">中堅上位校・併願優遇多数</td>
+                  </tr>
+                  <tr className="bg-emerald-50/60">
+                    <td className="border border-slate-200 px-3 py-2 font-bold">3.3</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right">30</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right">50〜53</td>
+                    <td className="border border-slate-200 px-3 py-2">中堅校（おおよその平均ライン）</td>
+                  </tr>
+                  <tr className="bg-blue-50">
+                    <td className="border border-slate-200 px-3 py-2 font-bold">3.0</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right">27</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right">45〜50</td>
+                    <td className="border border-slate-200 px-3 py-2">中堅下位校（オール3）</td>
+                  </tr>
+                  <tr className="bg-slate-50">
+                    <td className="border border-slate-200 px-3 py-2 font-bold">2.5</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right">23</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right">40〜45</td>
+                    <td className="border border-slate-200 px-3 py-2">基礎学力校・私立単願</td>
+                  </tr>
+                  <tr className="bg-slate-50">
+                    <td className="border border-slate-200 px-3 py-2 font-bold">2.0</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right">18</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right">35〜40</td>
+                    <td className="border border-slate-200 px-3 py-2">基礎校・通信制・サポート校</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p className="mt-3 text-xs text-slate-500 leading-relaxed">
+              ※ 素内申は「9教科の評定の合計」、偏差値の目安は全国模試データに基づく参考値です。実際の入試では都道府県ごとの<strong>換算内申</strong>（実技4教科を2倍にするなど）が使われるため、正確な内申点は
+              <Link href="/" className="text-emerald-600 underline font-bold">内申点 計算サイト（換算対応）</Link>で、偏差値は
+              <Link href="/hensachi" className="text-emerald-600 underline font-bold">5教科の偏差値計算サイト</Link>でご確認ください。
+            </p>
           </section>
 
           {/* 評定平均別の進路目安 */}
@@ -1033,7 +1120,7 @@ export default function HyoteiHeikinPage() {
             <h2 className="mb-4 text-lg font-bold text-slate-800">関連ツール</h2>
             <div className="grid gap-3 sm:grid-cols-2">
               <Link href="/" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow">
-                <span className="text-sm font-medium text-slate-700">内申点を計算する（換算対応）</span>
+                <span className="text-sm font-medium text-slate-700">内申点 計算サイト（換算対応）</span>
                 <ChevronRight className="h-4 w-4 text-slate-400" />
               </Link>
               <Link href="/hensachi" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow">

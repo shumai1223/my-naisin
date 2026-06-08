@@ -11,7 +11,7 @@ import { TokyoTotalScoreCalculator } from '@/components/TokyoTotalScore/TokyoTot
 
 export const metadata: Metadata = {
   title: '都立高校 総合得点 計算サイト【1020点満点】学力検査・調査書点・ESAT-J | My Naishin',
-  description: '東京都立高校入試の総合得点（1020点満点）を自動計算する無料ツール。学力検査700点・調査書点300点・ESAT-J 20点の配分から、合計点と志望校合格ラインまでの距離を瞬時に算出。日比谷・西・国立・戸山など主要都立高校の合格目安にも対応。',
+  description: '東京都立高校入試の総合得点（1020点満点）を自動計算する無料サイト。5教科の当日点を700点換算、換算内申を300点換算、ESAT-J 20点を合算して合計点と志望校合格ラインまでの距離を瞬時に算出。当日点・換算内申の換算早見表（旧1000点満点対応）と、日比谷・西・国立・戸山など主要都立高校の合格目安も掲載。',
   alternates: {
     canonical: 'https://my-naishin.com/tokyo/total-score',
   },
@@ -169,6 +169,76 @@ export default function TokyoTotalScorePage() {
                 </div>
               </div>
             </div>
+          </section>
+
+          {/* 当日点・換算内申の換算早見表（SEO: 当日点計算 サイト / 1000点換算 サイト / 都立 換算 早見表 / 都立高校 1000点満点 計算） */}
+          <section id="kansan-hayami" className="mt-8 scroll-mt-20 rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-50/40 to-white p-6 shadow-sm">
+            <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
+              <Calculator className="h-5 w-5 text-blue-500" />
+              当日点・換算内申の換算早見表（手計算用）
+            </h2>
+            <p className="text-sm text-slate-600 leading-relaxed mb-4">
+              「5教科の素点合計（500点満点）が700点換算で何点になるか」「換算内申（65点満点）が300点換算で何点か」を一覧にした早見表です。
+              都立入試はかつての1000点満点から<strong>ESAT-J 20点を加えた現行1020点満点</strong>になりましたが、学力検査700点＋調査書点300点の換算は共通。当日点・調査書点を素早く確認できます。
+            </p>
+            <div className="grid gap-5 md:grid-cols-2">
+              {/* 当日点 → 700点換算 */}
+              <div>
+                <h3 className="mb-2 text-sm font-bold text-blue-900">① 5教科の素点合計 → 学力検査700点換算</h3>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="bg-blue-600 text-white text-left">
+                        <th className="border border-blue-400 px-3 py-1.5 font-bold">素点（／500）</th>
+                        <th className="border border-blue-400 px-3 py-1.5 font-bold text-right">700点換算</th>
+                      </tr>
+                    </thead>
+                    <tbody className="text-slate-700">
+                      {[
+                        ['500', '700'], ['450', '630'], ['400', '560'], ['350', '490'],
+                        ['300', '420'], ['250', '350'], ['200', '280'], ['150', '210'],
+                      ].map(([raw, conv]) => (
+                        <tr key={raw} className="odd:bg-white even:bg-slate-50">
+                          <td className="border border-slate-200 px-3 py-1.5 font-bold">{raw}</td>
+                          <td className="border border-slate-200 px-3 py-1.5 text-right">{conv}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                <p className="mt-1 text-[11px] text-slate-500">換算式：素点 ÷ 500 × 700</p>
+              </div>
+              {/* 換算内申 → 300点換算 */}
+              <div>
+                <h3 className="mb-2 text-sm font-bold text-emerald-900">② 換算内申 → 調査書点300点換算</h3>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="bg-emerald-600 text-white text-left">
+                        <th className="border border-emerald-400 px-3 py-1.5 font-bold">換算内申（／65）</th>
+                        <th className="border border-emerald-400 px-3 py-1.5 font-bold text-right">300点換算</th>
+                      </tr>
+                    </thead>
+                    <tbody className="text-slate-700">
+                      {[
+                        ['65', '300'], ['60', '277'], ['55', '254'], ['50', '231'],
+                        ['45', '208'], ['40', '185'], ['35', '162'], ['30', '138'],
+                      ].map(([raw, conv]) => (
+                        <tr key={raw} className="odd:bg-white even:bg-slate-50">
+                          <td className="border border-slate-200 px-3 py-1.5 font-bold">{raw}</td>
+                          <td className="border border-slate-200 px-3 py-1.5 text-right">{conv}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                <p className="mt-1 text-[11px] text-slate-500">換算式：換算内申 ÷ 65 × 300（四捨五入）</p>
+              </div>
+            </div>
+            <p className="mt-3 text-xs text-slate-500 leading-relaxed">
+              ※ ①の700点換算＋②の300点換算＋ESAT-J（最大20点）＝総合得点（1020点満点）。換算内申がわからない場合は
+              <Link href="/tokyo/naishin" className="text-blue-600 underline font-bold">東京都の内申点計算ツール</Link>で先に算出してから、上のツールに入力してください。
+            </p>
           </section>
 
           {/* 主要都立高校の合格ライン目安 */}
