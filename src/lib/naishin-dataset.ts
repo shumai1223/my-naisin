@@ -11,7 +11,7 @@
 import { PREFECTURES, getPrefectureByCode } from '@/lib/prefectures';
 import { PREFECTURE_HIGH_SCHOOL_DATA } from '@/lib/prefecture-high-school-data';
 import { DEFAULT_SCORES } from '@/lib/constants';
-import { calculateTotalScore, calculateMaxScore, calculatePercent } from '@/lib/utils';
+import { calculateTotalScore, calculateMaxScore, calculatePercent, clamp } from '@/lib/utils';
 import type { Scores, SubjectKey } from '@/lib/types';
 
 export const SITE_URL = 'https://my-naishin.com';
@@ -192,23 +192,40 @@ export function calculateNaishin(input: CalculateInput) {
   const p = getPrefectureByCode(input.prefectureCode);
   if (!p) return null;
 
+  // 評定の有効範囲（10段階対応県でフラグONのときのみ1〜10、通常は1〜5）。
+  // 公開APIは外部（AI/任意のクライアント）から叩かれるため、ここで必ずクランプして
+  // 「返却scoresと計算totalが食い違う／範囲外のゴミ入力をそのまま映す」事態を防ぐ＝信頼の堀を守る。
+  const use10 = Boolean(input.use10PointScale) && Boolean(p.supports10PointScale);
+  const maxGrade = use10 ? 10 : 5;
+
   const scores: Scores = { ...DEFAULT_SCORES };
+  const adjustedInputs: SubjectKey[] = [];
   (Object.keys(scores) as SubjectKey[]).forEach((k) => {
     const raw = input.scores?.[k];
     if (typeof raw === 'number' && Number.isFinite(raw)) {
-      scores[k] = raw;
+      const safe = clamp(Math.round(raw), 1, maxGrade);
+      if (safe !== raw) adjustedInputs.push(k);
+      scores[k] = safe;
     }
   });
 
-  const total = calculateTotalScore(scores, input.prefectureCode, input.use10PointScale);
-  const max = calculateMaxScore(input.prefectureCode, input.use10PointScale);
+  const total = calculateTotalScore(scores, input.prefectureCode, use10);
+  const max = calculateMaxScore(input.prefectureCode, use10);
   return {
     prefectureCode: p.code,
     prefectureName: p.name,
     total,
     max,
     percent: calculatePercent(total, max),
+    // 実際に計算へ用いたサニタイズ済みの評定（1〜maxGrade・整数）。total と必ず整合する。
     scores,
+    validGradeRange: `1〜${maxGrade}`,
+    ...(adjustedInputs.length
+      ? {
+          adjustedInputs,
+          warning: `範囲外または非整数の評定を ${`1〜${maxGrade}`} に丸めて計算しました（${adjustedInputs.join(', ')}）。`,
+        }
+      : {}),
     toolUrl: `${SITE_URL}/${p.code}/naishin`,
     note: '正確な配点・特例は各都道府県の選抜要綱をご確認ください。出典: My Naishin（https://my-naishin.com）',
   };
