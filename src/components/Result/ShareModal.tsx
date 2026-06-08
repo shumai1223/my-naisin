@@ -48,6 +48,9 @@ export function ShareModal({ open, onClose, result, scores, shareUrl }: ShareMod
   const [busy, setBusy] = React.useState(false);
   const [saveStatus, setSaveStatus] = React.useState<SaveStatus>('idle');
   const [toast, setToast] = React.useState<string | null>(null);
+  // ネイティブ共有用に「先回り生成」した画像。クリック時に重い処理をしないための要。
+  const [preparedDataUrl, setPreparedDataUrl] = React.useState<string | null>(null);
+  const [preparing, setPreparing] = React.useState(false);
 
   const showToast = React.useCallback((message: string) => {
     setToast(message);
@@ -75,12 +78,36 @@ export function ShareModal({ open, onClose, result, scores, shareUrl }: ShareMod
     }
   }, []);
 
+  // モーダルを開いた瞬間に画像を先回り生成しておく。
+  // Web Share API はユーザー操作の直後でないと共有シートを開かない（iOS/Chrome）。
+  // クリック後に html2canvas を回すとアクティベーションが切れて navigator.share() が拒否されるため、
+  // ここで事前に用意し、共有ハンドラ側は「重い処理ゼロで即 share」にする。
+  React.useEffect(() => {
+    if (!open) {
+      setPreparedDataUrl(null);
+      setPreparing(false);
+      return;
+    }
+    let cancelled = false;
+    setPreparing(true);
+    (async () => {
+      const dataUrl = await generatePngWithHtml2Canvas();
+      if (!cancelled) {
+        setPreparedDataUrl(dataUrl);
+        setPreparing(false);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [open, generatePngWithHtml2Canvas]);
+
   const onDownload = React.useCallback(async () => {
     if (busy) return;
     setBusy(true);
     setSaveStatus('generating');
     try {
-      const dataUrl = await generatePngWithHtml2Canvas();
+      const dataUrl = preparedDataUrl ?? (await generatePngWithHtml2Canvas());
       if (!dataUrl) {
         setSaveStatus('error');
         showToast('画像生成に失敗…もう一回試してね');
@@ -100,41 +127,36 @@ export function ShareModal({ open, onClose, result, scores, shareUrl }: ShareMod
     } finally {
       setBusy(false);
     }
-  }, [busy, generatePngWithHtml2Canvas, result.rank.code, result.percent, showToast]);
+  }, [busy, preparedDataUrl, generatePngWithHtml2Canvas, result.rank.code, result.percent, showToast]);
 
   const onNativeShare = React.useCallback(async () => {
-    if (busy) return;
     if (typeof navigator === 'undefined' || !navigator.share) {
       showToast('この端末では共有機能が使えません');
       return;
     }
-    setBusy(true);
-    setSaveStatus('generating');
+    // ★ここで html2canvas 等の重い非同期処理を絶対にしない。
+    //   画像はモーダル展開時に preparedDataUrl へ生成済み。クリック→即 share でアクティベーションを保つ。
     try {
-      const dataUrl = await generatePngWithHtml2Canvas();
-      if (!dataUrl) {
-        setSaveStatus('error');
-        return;
-      }
-      const file = dataUrlToFile(dataUrl, `my-naishin_${result.rank.code}.png`);
       const shareData: ShareData = {
         title: APP_NAME,
-        url: shareUrl || undefined
+        url: shareUrl || undefined,
       };
-      if (navigator.canShare && navigator.canShare({ files: [file] })) {
-        shareData.files = [file];
+      if (preparedDataUrl) {
+        const file = dataUrlToFile(preparedDataUrl, `my-naishin_${result.rank.code}.png`);
+        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+          shareData.files = [file];
+        }
       }
       await navigator.share(shareData);
       burstConfetti();
-      setSaveStatus('success');
       showToast('🎉 共有しました！');
-      setTimeout(() => setSaveStatus('idle'), 2500);
-    } catch {
-      setSaveStatus('idle');
-    } finally {
-      setBusy(false);
+    } catch (err) {
+      // AbortError＝ユーザーがキャンセル（正常）なので無視。それ以外は保存導線へ誘導。
+      if ((err as Error)?.name !== 'AbortError') {
+        showToast('共有できませんでした。「画像を保存」からシェアしてね');
+      }
     }
-  }, [busy, generatePngWithHtml2Canvas, result.rank.code, shareUrl, showToast]);
+  }, [preparedDataUrl, result.rank.code, shareUrl, showToast]);
 
   React.useEffect(() => {
     if (!open) return;
@@ -213,7 +235,8 @@ export function ShareModal({ open, onClose, result, scores, shareUrl }: ShareMod
                         colors.glow
                       )}>
                         <div className="h-full w-full origin-top-left scale-[0.533]">
-                          <ShareCard ref={captureRef} result={result} scores={scores} />
+                          {/* プレビュー表示専用（キャプチャ対象は下部の隠し要素1つに統一） */}
+                          <ShareCard result={result} scores={scores} />
                         </div>
                       </div>
                       <div className="mt-3 flex items-center justify-center gap-1.5 text-xs text-slate-400">
@@ -275,12 +298,21 @@ export function ShareModal({ open, onClose, result, scores, shareUrl }: ShareMod
                         <button
                           type="button"
                           onClick={onNativeShare}
-                          disabled={busy}
+                          disabled={preparing}
                           className="group w-full rounded-2xl border-2 border-slate-200 bg-white py-3.5 text-slate-700 transition-all hover:border-slate-300 hover:bg-slate-50 disabled:opacity-70"
                         >
                           <div className="flex items-center justify-center gap-2 font-medium">
-                            <Share2 className="h-4 w-4 text-slate-500 transition-colors group-hover:text-slate-600" />
-                            <span>端末の共有機能を使う</span>
+                            {preparing ? (
+                              <>
+                                <Loader2 className="h-4 w-4 animate-spin text-slate-500" />
+                                <span>画像を準備中…</span>
+                              </>
+                            ) : (
+                              <>
+                                <Share2 className="h-4 w-4 text-slate-500 transition-colors group-hover:text-slate-600" />
+                                <span>端末の共有機能を使う</span>
+                              </>
+                            )}
                           </div>
                         </button>
                       </div>
