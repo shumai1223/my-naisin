@@ -26,6 +26,7 @@ import InteractiveCalculator from '@/components/Calculator/InteractiveCalculator
 import { HighSchoolBorderlineTable } from '@/components/HighSchoolBorderlineTable';
 import { TrustInfo } from '@/components/TrustInfo';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
+import { SaveResultCTA } from '@/components/SaveResultCTA';
 
 interface PageProps {
   params: Promise<{ prefecture: string }>;
@@ -72,6 +73,38 @@ const SIBLING_TOOLS: Record<
     description:
       '北海道の公立高校入試では、内申点（315点満点）をA〜Mの13ランクに分類して合否判定に使います。内申点と学力検査点を入れるだけで該当ランクを判定し、札幌南・札幌北など主要校の合格目安と比較できます。',
     cta: '内申ランクを判定する',
+  },
+  aichi: {
+    href: '/aichi/total-score',
+    badge: '愛知県の受験生向け',
+    title: '愛知県の評価方法Ⅰ〜Ⅴ・総合得点も詳しく見る',
+    description:
+      '愛知県は内申点（評定得点・最大90）と学力検査（110点）を、志望校が選ぶ評価方法Ⅰ〜Ⅴで重み付けして校内順位を決めます。評定得点の換算早見表と評価方法別の満点・計算例を確認できます。',
+    cta: '評価方法・総合得点を見る',
+  },
+  chiba: {
+    href: '/chiba/total-score',
+    badge: '千葉県の受験生向け',
+    title: '千葉県の調査書点（K値）・総合得点も詳しく見る',
+    description:
+      '千葉県は学力検査500点に、評定135×係数K（0.5〜2）の調査書点と学校設定検査を合算します。わかりにくいK値の早見表（評定×K）と計算例で、志望校の比重を確認できます。',
+    cta: 'K値・調査書点を見る',
+  },
+  saitama: {
+    href: '/saitama/total-score',
+    badge: '埼玉県の受験生向け',
+    title: '埼玉県の調査書点（学年比率）も詳しく見る',
+    description:
+      '埼玉県は学力検査500点に、中1〜中3の評定を学年比率（1:1:2・1:1:3・1:2:3など）で重み付けした調査書点を合算します。各学年の比重（％）早見表で、どの学年が効くか確認できます。',
+    cta: '学年比率・調査書点を見る',
+  },
+  fukuoka: {
+    href: '/fukuoka/total-score',
+    badge: '福岡県の受験生向け',
+    title: '福岡県の内申点（中3のみ45点）・当日点の仕組みを見る',
+    description:
+      '福岡県は内申点（中3の9教科＝45点）と学力検査（5教科×60＝300点）の両方の順位でA群・B群を判定します。内申・当日点の早見表とA群・B群の仕組みを確認できます。',
+    cta: '内申45点・当日点を見る',
   },
 };
 
@@ -277,6 +310,15 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
                 maxScore={prefecture.maxScore}
               />
             </section>
+
+            {/* 結果保存・名簿化（堀A）：47都道府県の内申ページ共通の名簿受け皿 */}
+            <SaveResultCTA
+              source="prefecture"
+              prefectureCode={prefectureCode}
+              prefectureName={prefecture.name}
+              heading={`${prefecture.name}の内申点と「あと何点」を、忘れないうちに受け取りませんか？`}
+              body="内申点アップのコツ・志望校の最新ボーダー・出願スケジュールを、受験本番まで無料でお届けします。LINEかメールで、いつでも解除できます。"
+            />
 
             {/* 計算後・最高エンゲージ位置の Z会 CTA */}
             <section className="rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-50 to-indigo-50 p-6 shadow-sm">

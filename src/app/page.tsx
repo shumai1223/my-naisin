@@ -238,6 +238,41 @@ export default function Page() {
               </div>
             </div>
 
+            {/* 都道府県別の合否判定ツール（新設の種火ページへ評価を流す内部リンクハブ） */}
+            <div className="rounded-2xl border border-rose-100 bg-gradient-to-br from-rose-50/50 via-orange-50/30 to-white p-6 md:p-7">
+              <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-bold text-rose-700 ring-1 ring-rose-100">
+                <Target className="h-3 w-3" />
+                総合得点・合否判定
+              </div>
+              <h3 className="mb-2 text-xl font-bold text-slate-900">
+                都道府県別の「総合得点・合否判定」計算ツール
+              </h3>
+              <p className="mb-4 text-sm leading-relaxed text-slate-700">
+                内申点だけでなく、当日点を合わせた総合得点や合否判定の方式は都道府県で大きく異なります（S値・タイプ・K値・評価方法・学年比率など）。主要県の専用ツール・早見表はこちら。
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {[
+                  { href: '/tokyo/total-score', label: '東京 総合得点（1020点）' },
+                  { href: '/kanagawa/s-value', label: '神奈川 S値' },
+                  { href: '/osaka/total-score', label: '大阪 タイプⅠ〜Ⅴ' },
+                  { href: '/aichi/total-score', label: '愛知 評価方法Ⅰ〜Ⅴ' },
+                  { href: '/chiba/total-score', label: '千葉 K値' },
+                  { href: '/saitama/total-score', label: '埼玉 学年比率' },
+                  { href: '/fukuoka/total-score', label: '福岡 内申45＋当日300' },
+                  { href: '/hokkaido/rank', label: '北海道 内申ランク' },
+                ].map((t) => (
+                  <Link
+                    key={t.href}
+                    href={t.href}
+                    className="inline-flex items-center gap-1 rounded-full bg-white px-4 py-2 text-sm font-bold text-rose-700 ring-1 ring-rose-200 transition-all hover:-translate-y-0.5 hover:bg-rose-50"
+                  >
+                    {t.label}
+                    <ChevronRight className="h-3.5 w-3.5 opacity-60" />
+                  </Link>
+                ))}
+              </div>
+            </div>
+
             <div>
               <h3 className="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2">
                 <MapPin className="text-emerald-600" />
