@@ -71,10 +71,17 @@ export default function Page() {
             name: '全国47都道府県 内申点 計算方式データ',
             description:
               '全国47都道府県の内申点（調査書点）の計算方式・満点・対象学年・実技4教科の倍率。各都道府県教育委員会の入学者選抜要綱に基づく一次データ。',
-            creator: { '@type': 'Organization', name: 'My Naishin' },
+            creator: { '@type': 'Organization', name: 'My Naishin', url: 'https://my-naishin.com/' },
             spatialCoverage: '日本（47都道府県）',
             variableMeasured: ['内申点満点', '対象学年', '実技4教科の倍率'],
             url: 'https://my-naishin.com/',
+            isAccessibleForFree: true,
+            license: 'https://my-naishin.com/developers',
+            distribution: {
+              '@type': 'DataDownload',
+              encodingFormat: 'application/json',
+              contentUrl: 'https://my-naishin.com/api/naishin',
+            },
           }),
         }}
       />
