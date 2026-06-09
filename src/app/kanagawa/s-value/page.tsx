@@ -8,6 +8,8 @@ import { HowToSchema } from '@/components/StructuredData/HowToSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { KanagawaSValueCalculator } from '@/components/Kanagawa/KanagawaSValueCalculator';
+import { SaveResultCTA } from '@/components/SaveResultCTA';
+import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 
 // 可視の「よくある質問」セクションと完全一致させた FAQ（FAQ リッチリザルト用）
 const KANAGAWA_S_VALUE_FAQS = [
@@ -134,6 +136,16 @@ export default function KanagawaSValuePage() {
           {/* Calculator */}
           <KanagawaSValueCalculator />
 
+          {/* 結果保存・名簿化（堀A） */}
+          <SaveResultCTA
+            source="prefecture"
+            prefectureCode="kanagawa"
+            prefectureName="神奈川県"
+            className="mt-6"
+            heading="この神奈川S値と「あと何点」を、忘れないうちに受け取りませんか？"
+            body="S値アップのコツ・横浜翠嵐や湘南など志望校の最新ボーダー・出願スケジュールを、受験本番まで無料でお届けします。LINEかメールで、いつでも解除できます。"
+          />
+
           {/* S値の計算式 */}
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
@@ -164,6 +176,81 @@ export default function KanagawaSValuePage() {
                 </p>
               </div>
             </div>
+          </section>
+
+          {/* S値 換算早見表（SEO: 神奈川 内申 100点換算 / s値 早見表 / 学力検査 換算） */}
+          <section className="mt-8 rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-50/40 to-white p-6 shadow-sm">
+            <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
+              <Calculator className="h-5 w-5 text-blue-500" />
+              S値の換算早見表（手計算用）
+            </h2>
+            <p className="text-sm text-slate-600 leading-relaxed mb-4">
+              S値は「内申点（135満点）と学力検査（500満点）をそれぞれ<strong>100点満点に換算</strong>し、志望校の比率（合計10）で合算」します。下の早見表で自分の換算値をすぐ確認できます。
+            </p>
+            <div className="grid gap-5 md:grid-cols-2">
+              {/* 内申135 → 100換算 */}
+              <div>
+                <h3 className="mb-2 text-sm font-bold text-blue-900">① 内申点（135満点）→ 100点換算</h3>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="bg-blue-600 text-white text-left">
+                        <th className="border border-blue-400 px-3 py-1.5 font-bold">内申（／135）</th>
+                        <th className="border border-blue-400 px-3 py-1.5 font-bold text-right">100点換算</th>
+                      </tr>
+                    </thead>
+                    <tbody className="text-slate-700">
+                      {[
+                        ['135', '100.0'], ['125', '92.6'], ['115', '85.2'], ['105', '77.8'],
+                        ['95', '70.4'], ['85', '63.0'], ['75', '55.6'],
+                      ].map(([raw, conv]) => (
+                        <tr key={raw} className="odd:bg-white even:bg-slate-50">
+                          <td className="border border-slate-200 px-3 py-1.5 font-bold">{raw}</td>
+                          <td className="border border-slate-200 px-3 py-1.5 text-right">{conv}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                <p className="mt-1 text-[11px] text-slate-500">換算式：内申 ÷ 135 × 100</p>
+              </div>
+              {/* 学力500 → 100換算 */}
+              <div>
+                <h3 className="mb-2 text-sm font-bold text-indigo-900">② 学力検査（500満点）→ 100点換算</h3>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="bg-indigo-600 text-white text-left">
+                        <th className="border border-indigo-400 px-3 py-1.5 font-bold">学力（／500）</th>
+                        <th className="border border-indigo-400 px-3 py-1.5 font-bold text-right">100点換算</th>
+                      </tr>
+                    </thead>
+                    <tbody className="text-slate-700">
+                      {[
+                        ['500', '100'], ['450', '90'], ['400', '80'], ['350', '70'],
+                        ['300', '60'], ['250', '50'], ['200', '40'],
+                      ].map(([raw, conv]) => (
+                        <tr key={raw} className="odd:bg-white even:bg-slate-50">
+                          <td className="border border-slate-200 px-3 py-1.5 font-bold">{raw}</td>
+                          <td className="border border-slate-200 px-3 py-1.5 text-right">{conv}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                <p className="mt-1 text-[11px] text-slate-500">換算式：学力 ÷ 500 × 100</p>
+              </div>
+            </div>
+            <div className="mt-4 rounded-xl bg-white border border-blue-100 p-4">
+              <h3 className="text-sm font-bold text-slate-800 mb-2">S1の計算例（比率4:6の高校）</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                内申115（換算85.2）・学力400点（換算80）・比率<strong>内申4:学力6</strong>の場合：<br />
+                S1 ＝ 85.2 × 4 ＋ 80 × 6 ＝ 340.8 ＋ 480 ＝ <strong className="text-blue-700">約821点</strong>（川和の目安S1 830にあと一歩）
+              </p>
+            </div>
+            <p className="mt-3 text-xs text-slate-500">
+              ※ 比率は学校ごとに異なります（合計10）。特色検査実施校はS2値も必要。正確な値は上の計算ツールでご確認ください。
+            </p>
           </section>
 
           {/* 主要校の比率と合格ライン */}
@@ -266,6 +353,13 @@ export default function KanagawaSValuePage() {
               <AffiliateAd id="sapuri-banner-300" />
             </div>
           </section>
+
+          {/* 保護者向けリード（換金の本命：資料請求送客） */}
+          <ParentLeadCTA
+            className="mt-8"
+            heading="神奈川の志望校、S値はあと何点で届きますか？"
+            body="S値は内申と当日点の伸ばし方で変わります。お子さまに必要な対策を、まずは無料の資料で確認できます。請求は数分・費用はかかりません。"
+          />
 
           {/* よくある質問 */}
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">

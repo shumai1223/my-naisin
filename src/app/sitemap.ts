@@ -17,6 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: '/tokyo/total-score', priority: 1.0, changeFrequency: 'weekly' },
     { url: '/kanagawa/s-value', priority: 1.0, changeFrequency: 'weekly' },
     { url: '/osaka/total-score', priority: 1.0, changeFrequency: 'weekly' },
+    { url: '/aichi/total-score', priority: 1.0, changeFrequency: 'weekly' },
     { url: '/hokkaido/rank', priority: 1.0, changeFrequency: 'weekly' },
     { url: '/koukou-hiyou', priority: 0.9, changeFrequency: 'weekly' },
     { url: '/tools', priority: 0.9, changeFrequency: 'weekly' },

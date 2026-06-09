@@ -8,6 +8,8 @@ import { HowToSchema } from '@/components/StructuredData/HowToSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { TokyoTotalScoreCalculator } from '@/components/TokyoTotalScore/TokyoTotalScoreCalculator';
+import { SaveResultCTA } from '@/components/SaveResultCTA';
+import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 
 export const metadata: Metadata = {
   title: '都立高校 総合得点 計算サイト【1020点満点】学力検査・調査書点・ESAT-J | My Naishin',
@@ -132,6 +134,16 @@ export default function TokyoTotalScorePage() {
 
           {/* Calculator */}
           <TokyoTotalScoreCalculator />
+
+          {/* 結果保存・名簿化（堀A） */}
+          <SaveResultCTA
+            source="prefecture"
+            prefectureCode="tokyo"
+            prefectureName="東京都"
+            className="mt-6"
+            heading="この総合得点と「あと何点」を、忘れないうちに受け取りませんか？"
+            body="総合得点アップのコツ・日比谷や西など志望校の最新ボーダー・出願スケジュールを、受験本番まで無料でお届けします。LINEかメールで、いつでも解除できます。"
+          />
 
           {/* 計算式の解説 */}
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
@@ -431,6 +443,13 @@ export default function TokyoTotalScorePage() {
               ※ シミュレーション結果は過去の入試データに基づく目安です。年度・倍率・他受験者の得点状況により変動します。
             </p>
           </section>
+
+          {/* 保護者向けリード（換金の本命：資料請求送客） */}
+          <ParentLeadCTA
+            className="mt-8"
+            heading="都立の志望校、総合得点はあと何点で届きますか？"
+            body="総合得点は当日点と内申の伸ばし方で変わります。お子さまに必要な対策を、まずは無料の資料で確認できます。請求は数分・費用はかかりません。"
+          />
 
           {/* よくある質問 */}
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">

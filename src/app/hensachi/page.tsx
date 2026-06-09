@@ -1048,6 +1048,52 @@ export default function HensachiPage() {
             </div>
           </section>
 
+          {/* 偏差値→上位%・順位 早見表（SEO: 偏差値60 上位何% / 偏差値65 順位 / 偏差値 順位 換算） */}
+          <section id="hensachi-percentile" className="mt-8 scroll-mt-20 rounded-2xl border border-indigo-100 bg-gradient-to-br from-indigo-50/40 to-white p-6 shadow-sm">
+            <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
+              <TrendingUp className="h-5 w-5 text-indigo-500" />
+              偏差値→上位%・順位 換算早見表
+            </h2>
+            <p className="text-sm text-slate-600 leading-relaxed mb-4">
+              「偏差値60は上位何%？」「偏差値65だと100人中何番目？」を一覧にした早見表です。偏差値は<strong>平均50・標準偏差10の正規分布</strong>を前提に、全体の中での位置（上位パーセント・順位）に換算できます。
+            </p>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="bg-indigo-600 text-white text-left">
+                    <th className="border border-indigo-400 px-3 py-2 font-bold">偏差値</th>
+                    <th className="border border-indigo-400 px-3 py-2 font-bold text-right">上位</th>
+                    <th className="border border-indigo-400 px-3 py-2 font-bold text-right">100人中</th>
+                    <th className="border border-indigo-400 px-3 py-2 font-bold text-right">1000人中</th>
+                  </tr>
+                </thead>
+                <tbody className="text-slate-700">
+                  {[
+                    ['75', '0.6%', '約1位', '約6位'],
+                    ['70', '2.3%', '約2位', '約23位'],
+                    ['65', '6.7%', '約7位', '約67位'],
+                    ['60', '15.9%', '約16位', '約159位'],
+                    ['55', '30.9%', '約31位', '約309位'],
+                    ['50', '50.0%', '約50位', '約500位'],
+                    ['45', '69.1%', '約69位', '約691位'],
+                    ['40', '84.1%', '約84位', '約841位'],
+                    ['35', '93.3%', '約93位', '約933位'],
+                  ].map(([hensachi, top, per100, per1000]) => (
+                    <tr key={hensachi} className="odd:bg-white even:bg-slate-50">
+                      <td className="border border-slate-200 px-3 py-2 font-bold">{hensachi}</td>
+                      <td className="border border-slate-200 px-3 py-2 text-right">{top}</td>
+                      <td className="border border-slate-200 px-3 py-2 text-right">{per100}</td>
+                      <td className="border border-slate-200 px-3 py-2 text-right">{per1000}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="mt-3 text-xs text-slate-500 leading-relaxed">
+              ※ 正規分布に基づく理論値です。実際の模試では受験者層により分布が偏るため目安としてご利用ください。自分の偏差値は上の<a href="#calculator-section" className="text-indigo-600 underline font-bold">偏差値計算ツール</a>で、内申点は<Link href="/" className="text-indigo-600 underline font-bold">内申点 計算サイト</Link>で確認できます。
+            </p>
+          </section>
+
           {/* 関連ツール */}
           <section className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-6">
             <h2 className="mb-4 text-lg font-bold text-slate-800">関連ツール</h2>

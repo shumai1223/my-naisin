@@ -8,6 +8,8 @@ import { HowToSchema } from '@/components/StructuredData/HowToSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { OsakaTotalScoreCalculator } from '@/components/Osaka/OsakaTotalScoreCalculator';
+import { SaveResultCTA } from '@/components/SaveResultCTA';
+import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 
 // 可視の「よくある質問」セクションと完全一致させた FAQ（FAQ リッチリザルト用）
 const OSAKA_TOTAL_SCORE_FAQS = [
@@ -143,6 +145,16 @@ export default function OsakaTotalScorePage() {
           {/* Calculator */}
           <OsakaTotalScoreCalculator />
 
+          {/* 結果保存・名簿化（堀A） */}
+          <SaveResultCTA
+            source="prefecture"
+            prefectureCode="osaka"
+            prefectureName="大阪府"
+            className="mt-6"
+            heading="この総合点と「あと何点」を、忘れないうちに受け取りませんか？"
+            body="総合点アップのコツ・北野や茨木など文理学科の最新ボーダー・出願スケジュールを、受験本番まで無料でお届けします。LINEかメールで、いつでも解除できます。"
+          />
+
           {/* 計算式の解説 */}
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
@@ -173,6 +185,57 @@ export default function OsakaTotalScorePage() {
                 </p>
               </div>
             </div>
+          </section>
+
+          {/* タイプ別 総合点 早見表（SEO: 大阪 タイプ1 計算方法 / 大阪 総合点 計算 / タイプ別 満点） */}
+          <section className="mt-8 rounded-2xl border border-orange-100 bg-gradient-to-br from-orange-50/40 to-white p-6 shadow-sm">
+            <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
+              <Calculator className="h-5 w-5 text-orange-500" />
+              タイプⅠ〜Ⅴ 総合点の早見表（満点内訳）
+            </h2>
+            <p className="text-sm text-slate-600 leading-relaxed mb-4">
+              大阪府の総合点は<strong>学力検査（450満点）と内申点（450満点）を、志望校のタイプ比率で重み付け</strong>して合算（総合450点満点）します。タイプごとの満点内訳は下のとおり。「学力で何点・内申で何点とれば総合何点か」を素早く把握できます。
+            </p>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="bg-orange-600 text-white text-left">
+                    <th className="border border-orange-400 px-3 py-2 font-bold">タイプ</th>
+                    <th className="border border-orange-400 px-3 py-2 font-bold text-center">比率(学力:内申)</th>
+                    <th className="border border-orange-400 px-3 py-2 font-bold text-right">学力の満点寄与</th>
+                    <th className="border border-orange-400 px-3 py-2 font-bold text-right">内申の満点寄与</th>
+                    <th className="border border-orange-400 px-3 py-2 font-bold text-right">総合満点</th>
+                  </tr>
+                </thead>
+                <tbody className="text-slate-700">
+                  {[
+                    ['Ⅰ', '7 : 3', '315', '135'],
+                    ['Ⅱ', '6 : 4', '270', '180'],
+                    ['Ⅲ', '5 : 5', '225', '225'],
+                    ['Ⅳ', '4 : 6', '180', '270'],
+                    ['Ⅴ', '3 : 7', '135', '315'],
+                  ].map(([type, ratio, gakuryoku, naishin]) => (
+                    <tr key={type} className="odd:bg-white even:bg-slate-50">
+                      <td className="border border-slate-200 px-3 py-2 font-bold">タイプ{type}</td>
+                      <td className="border border-slate-200 px-3 py-2 text-center">{ratio}</td>
+                      <td className="border border-slate-200 px-3 py-2 text-right">{gakuryoku}</td>
+                      <td className="border border-slate-200 px-3 py-2 text-right">{naishin}</td>
+                      <td className="border border-slate-200 px-3 py-2 text-right font-bold">450</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div className="mt-4 rounded-xl bg-white border border-orange-100 p-4">
+              <h3 className="text-sm font-bold text-slate-800 mb-2">総合点の計算例（タイプⅠ＝7:3 の文理学科）</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                学力360点・内申380点・<strong>タイプⅠ（学力0.7／内申0.3）</strong>の場合：<br />
+                総合 ＝ 360 × 0.7 ＋ 380 × 0.3 ＝ 252 ＋ 114 ＝ <strong className="text-orange-700">366点</strong>（大手前の目安370にあと一歩）
+              </p>
+            </div>
+            <p className="mt-3 text-xs text-slate-500">
+              ※ 学力・内申はいずれも450点満点。正確な総合点は上の計算ツールでご確認ください。
+            </p>
           </section>
 
           {/* 主要校のタイプと合格ライン */}
@@ -227,6 +290,13 @@ export default function OsakaTotalScorePage() {
               <AffiliateAd id="sapuri-banner-300" />
             </div>
           </section>
+
+          {/* 保護者向けリード（換金の本命：資料請求送客） */}
+          <ParentLeadCTA
+            className="mt-8"
+            heading="大阪の志望校、総合点はあと何点で届きますか？"
+            body="総合点は学力と内申の伸ばし方で変わります。お子さまに必要な対策を、まずは無料の資料で確認できます。請求は数分・費用はかかりません。"
+          />
 
           {/* よくある質問 */}
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
