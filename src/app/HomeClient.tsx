@@ -24,6 +24,7 @@ import {
   getRankForPercent,
   updateScoreValue
 } from '@/lib/utils';
+import { track } from '@/lib/track';
 
 import { Header } from '@/components/Header';
 import { HeroNavigation, NavigationMode } from '@/components/HeroNavigation';
@@ -196,6 +197,15 @@ export default function HomeClient() {
       window.localStorage.setItem('my-naishin:kanagawa-A', String(result.total));
     }
   }, [prefectureCode, result.total, showResult]);
+
+  // 換金ファネルの分母：ホームで結果が初めて表示された時点で1回だけ result_view を計測
+  const resultViewedRef = React.useRef(false);
+  React.useEffect(() => {
+    if (showResult && !resultViewedRef.current) {
+      resultViewedRef.current = true;
+      track('result_view', { source: 'home', pref: prefectureCode });
+    }
+  }, [showResult, prefectureCode]);
 
   const onScoreChange = React.useCallback((key: SubjectKey, nextValue: number) => {
     setScores((prev) => updateScoreValue(prev, key, nextValue));

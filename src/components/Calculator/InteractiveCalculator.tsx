@@ -16,6 +16,7 @@ import { ScoreGauge } from '@/components/Result/ScoreGauge';
 import { RankCard } from '@/components/Result/RankCard';
 import { NextActionButtons } from '@/components/NextActionButtons';
 import { PDFExportButton } from '@/components/PDFExportButton';
+import { track } from '@/lib/track';
 import type { Scores, SubjectKey } from '@/lib/types';
 
 interface InteractiveCalculatorProps {
@@ -42,6 +43,8 @@ export function InteractiveCalculator({ prefectureCode, prefectureName, maxScore
 
   const handleCalculate = () => {
     setShowResult(true);
+    // 換金ファネルの分母（per-1,000結果あたりの share/lead を測るための result_view）
+    track('result_view', { source: 'prefecture', pref: prefectureCode });
     if (typeof window !== 'undefined') {
       if (prefectureCode === 'kanagawa') {
         window.localStorage.setItem('my-naishin:kanagawa-A', String(total));
