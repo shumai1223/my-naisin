@@ -238,7 +238,10 @@ export default function ChibaTotalScorePage() {
           <ParentLeadCTA
             className="mb-8"
             heading="千葉の志望校、K値に合った対策ができていますか？"
-            body="志望校のK値で必要な内申・当日点のバランスは変わります。お子さまに合った対策を、まずは無料の資料で確認できます。請求は数分・費用はかかりません。"
+            body="志望校のK値で必要な内申・当日点のバランスは変わります。お子さまに合った対策を、塾の無料体験で具体的に確認できます（費用はかかりません）。"
+            affiliateId="morijuku-text"
+            ctaText="無料体験を申し込む（森塾）"
+            note="【森塾】の無料体験授業（PR）"
           />
 
           {/* よくある質問 */}

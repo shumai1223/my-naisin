@@ -7,6 +7,7 @@ import { WebApplicationSchema } from '@/components/StructuredData/WebApplication
 import { HowToSchema } from '@/components/StructuredData/HowToSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
+import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { HokkaidoRankCalculator } from '@/components/Hokkaido/HokkaidoRankCalculator';
 
 // 可視の「よくある質問」セクションと完全一致させた FAQ（FAQ リッチリザルト用）
@@ -189,6 +190,16 @@ export default function HokkaidoRankPage() {
               <AffiliateAd id="sapuri-banner-300" />
             </div>
           </section>
+
+          {/* 保護者向けリード（換金の本命：オンライン個別の無料体験送客） */}
+          <ParentLeadCTA
+            className="mt-8"
+            heading="北海道の志望校、内申ランクはあと何点で上がりますか？"
+            body="ランクは中1〜中3の評定で決まり、残りの定期テストでまだ動きます。お子さまにいま必要な対策を、オンライン個別指導の無料体験で具体的に確認できます（費用はかかりません）。"
+            affiliateId="sora-juku-text"
+            ctaText="無料体験を申し込む（そら塾）"
+            note="【そら塾】オンライン個別指導の無料体験（PR）"
+          />
 
           {/* よくある質問 */}
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">

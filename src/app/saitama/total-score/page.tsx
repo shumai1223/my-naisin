@@ -233,7 +233,10 @@ export default function SaitamaTotalScorePage() {
           <ParentLeadCTA
             className="mb-8"
             heading="埼玉の志望校、学年比率に合った対策ができていますか？"
-            body="志望校の学年比率で、どの学年の成績が効くかは変わります。お子さまに合った対策を、まずは無料の資料で確認できます。請求は数分・費用はかかりません。"
+            body="志望校の学年比率で、どの学年の成績が効くかは変わります。お子さまに合った対策を、塾の無料体験で具体的に確認できます（費用はかかりません）。"
+            affiliateId="morijuku-text"
+            ctaText="無料体験を申し込む（森塾）"
+            note="【森塾】の無料体験授業（PR）"
           />
 
           {/* よくある質問 */}

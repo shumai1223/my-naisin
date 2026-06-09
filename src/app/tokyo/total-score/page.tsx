@@ -448,7 +448,10 @@ export default function TokyoTotalScorePage() {
           <ParentLeadCTA
             className="mt-8"
             heading="都立の志望校、総合得点はあと何点で届きますか？"
-            body="総合得点は当日点と内申の伸ばし方で変わります。お子さまに必要な対策を、まずは無料の資料で確認できます。請求は数分・費用はかかりません。"
+            body="総合得点は当日点と内申の伸ばし方で変わります。お子さまにいま必要な対策を、塾の無料体験で具体的に確認できます（費用はかかりません）。"
+            affiliateId="morijuku-text"
+            ctaText="無料体験を申し込む（森塾）"
+            note="【森塾】の無料体験授業（PR）"
           />
 
           {/* よくある質問 */}

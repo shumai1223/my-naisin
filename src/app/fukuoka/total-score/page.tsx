@@ -242,7 +242,10 @@ export default function FukuokaTotalScorePage() {
           <ParentLeadCTA
             className="mb-8"
             heading="福岡の志望校、内申と当日点の両方が届いていますか？"
-            body="福岡はA群でまず合否が決まるため、学力と内申の両立がカギ。お子さまに必要な対策を、まずは無料の資料で確認できます。請求は数分・費用はかかりません。"
+            body="福岡はA群でまず合否が決まるため、学力と内申の両立がカギ。お子さまにいま必要な対策を、オンライン個別指導の無料体験で具体的に確認できます（費用はかかりません）。"
+            affiliateId="sora-juku-text"
+            ctaText="無料体験を申し込む（そら塾）"
+            note="【そら塾】オンライン個別指導の無料体験（PR）"
           />
 
           {/* よくある質問 */}

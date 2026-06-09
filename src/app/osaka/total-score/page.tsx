@@ -295,7 +295,10 @@ export default function OsakaTotalScorePage() {
           <ParentLeadCTA
             className="mt-8"
             heading="大阪の志望校、総合点はあと何点で届きますか？"
-            body="総合点は学力と内申の伸ばし方で変わります。お子さまに必要な対策を、まずは無料の資料で確認できます。請求は数分・費用はかかりません。"
+            body="総合点は学力と内申の伸ばし方で変わります。お子さまにいま必要な対策を、個別指導の無料体験で具体的に確認できます（費用はかかりません）。"
+            affiliateId="campus-text"
+            ctaText="無料体験を申し込む（個別指導キャンパス）"
+            note="個別指導キャンパスの無料体験（PR）"
           />
 
           {/* よくある質問 */}
