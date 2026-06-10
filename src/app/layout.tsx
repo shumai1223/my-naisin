@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Noto_Sans_JP } from 'next/font/google';
 import Script from 'next/script';
 import type { ReactNode } from 'react';
@@ -60,6 +60,10 @@ export const metadata: Metadata = {
   ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
     ? { verification: { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION } }
     : {}),
+};
+
+export const viewport: Viewport = {
+  themeColor: '#4f46e5',
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

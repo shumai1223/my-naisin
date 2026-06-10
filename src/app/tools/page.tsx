@@ -12,6 +12,7 @@ import {
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
+import { RelatedToolsSection } from '@/components/RelatedToolsSection';
 
 export const metadata: Metadata = {
   // 親レイアウトの title.template による二重サフィックスを避けるため absolute で完全指定
@@ -350,6 +351,18 @@ export default function ToolsPage() {
               </Link>
             </div>
           </section>
+
+          {/* 次の一手・関連 */}
+          <RelatedToolsSection
+            className="mt-8"
+            links={[
+              { href: '/hogosha', title: '保護者の方へ', desc: '塾はいつから・費用の目安・内申の上げ方を保護者向けに解説' },
+              { href: '/guide', title: '高校受験の進め方ガイド', desc: '内申点・偏差値・出願までの全体像' },
+              { href: '/prefectures', title: '47都道府県の内申点ページ', desc: 'お住まいの地域の方式で正確に計算' },
+              { href: '/developers', title: 'データAPI / MCP（開発者・AI向け）', desc: '内申点の一次データを機械可読で提供' },
+              { href: 'https://my-shingaku.com', title: '大学進学の費用（姉妹サイト）', desc: '一人暮らし・学費・奨学金の目安（My Shingaku）', external: true },
+            ]}
+          />
         </div>
       </div>
     </>

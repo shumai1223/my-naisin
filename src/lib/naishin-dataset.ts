@@ -104,7 +104,10 @@ export function buildDatasetIndex() {
       endpoints: {
         index: `${SITE_URL}/api/naishin`,
         prefecture: `${SITE_URL}/api/naishin/{code}`,
+        reverse: `${SITE_URL}/api/naishin/{code}?target={点数}`,
+        compare: `${SITE_URL}/api/naishin/compare?codes={code1,code2}&grade=4`,
         mcp: `${SITE_URL}/api/mcp`,
+        openapi: `${SITE_URL}/api/openapi`,
         docs: `${SITE_URL}/developers`,
       },
     },
@@ -423,5 +426,11 @@ export const DATASET_DISTRIBUTION = [
     encodingFormat: 'application/json',
     contentUrl: `${SITE_URL}/api/naishin`,
     name: '内申点計算データ（全47都道府県・JSON）',
+  },
+  {
+    '@type': 'DataDownload',
+    encodingFormat: 'application/json',
+    contentUrl: `${SITE_URL}/api/openapi`,
+    name: 'OpenAPI 3.1 仕様書（REST API）',
   },
 ] as const;

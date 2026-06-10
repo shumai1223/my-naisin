@@ -40,9 +40,12 @@ describe('buildDatasetIndex（/api/naishin 契約）', () => {
     }
   });
 
-  test('endpointsメタが揃う', () => {
+  test('endpointsメタが揃う（新エンドポイント含む）', () => {
     expect(index.meta.endpoints.index).toContain('/api/naishin');
     expect(index.meta.endpoints.mcp).toContain('/api/mcp');
+    expect(index.meta.endpoints.openapi).toContain('/api/openapi');
+    expect(index.meta.endpoints.compare).toContain('/api/naishin/compare');
+    expect(index.meta.endpoints.reverse).toContain('target');
   });
 });
 
@@ -98,5 +101,11 @@ describe('DATASET_DISTRIBUTION（Dataset構造化の契約）', () => {
     expect(DATASET_DISTRIBUTION[0]['@type']).toBe('DataDownload');
     expect(DATASET_DISTRIBUTION[0].encodingFormat).toBe('application/json');
     expect(DATASET_DISTRIBUTION[0].contentUrl).toContain('/api/naishin');
+  });
+
+  test('OpenAPI仕様書もDataDownloadとして公開', () => {
+    const openapi = DATASET_DISTRIBUTION.find((d) => d.contentUrl.includes('/api/openapi'));
+    expect(openapi).toBeDefined();
+    expect(openapi!['@type']).toBe('DataDownload');
   });
 });
