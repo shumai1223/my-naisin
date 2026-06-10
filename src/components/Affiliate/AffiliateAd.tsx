@@ -18,6 +18,8 @@ interface AffiliateAdProps {
 export function AffiliateAd({ id, className = '', centered = true, hideLabel = false, linkClassName, auditHide = false, ctaText }: AffiliateAdProps) {
   if (auditHide && process.env.NEXT_PUBLIC_ADSENSE_AUDIT === '1') return null;
   const ad = AFFILIATES[id];
+  // 先回し枠（未確定案件）はリンク未確定なので描画しない＝デッドリンク/空ピクセルを出さない。
+  if ((ad.status ?? 'live') === 'pending') return null;
 
   const label = !hideLabel && (
     <div className="mb-1 text-[10px] font-medium text-slate-400">広告</div>

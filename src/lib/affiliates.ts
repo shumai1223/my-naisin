@@ -15,7 +15,15 @@ export type AffiliateId =
   | 'campus-text'
   | 'campus-banner'
   | 'atama-text'
-  | 'atama-banner';
+  | 'atama-banner'
+  // ── 先回し枠（新ASP・塾/家庭教師の無料体験。リンク確定後に status:'live' + href/pixel を挿すだけ） ──
+  | 'afb-juku-trial'
+  | 'accesstrade-juku-trial'
+  | 'rentracks-juku-trial'
+  | 'afb-katei-kyoshi';
+
+/** 'pending' は枠だけ確保した未確定案件。AffiliateAd は描画せず（デッドリンクを出さない）、selectLeadOffer も返さない。 */
+type AffiliateStatus = 'live' | 'pending';
 
 interface BannerAffiliate {
   id: AffiliateId;
@@ -26,6 +34,8 @@ interface BannerAffiliate {
   width: number;
   height: number;
   trackingPixel: string;
+  /** 既定 'live'。未確定枠は 'pending'。 */
+  status?: AffiliateStatus;
 }
 
 interface TextAffiliate {
@@ -35,6 +45,8 @@ interface TextAffiliate {
   href: string;
   text: string;
   trackingPixel: string;
+  /** 既定 'live'。未確定枠は 'pending'。 */
+  status?: AffiliateStatus;
 }
 
 export type AffiliateConfig = BannerAffiliate | TextAffiliate;
@@ -195,4 +207,51 @@ export const AFFILIATES: Record<AffiliateId, AffiliateConfig> = {
     height: 250,
     trackingPixel: 'https://www12.a8.net/0.gif?a8mat=4B3SN7+BKRG8I+5K0K+5YZ75',
   },
+
+  // ── 先回し枠（未確定 / status:'pending'） ─────────────────────────────────
+  // メモリの本線：最大レバー＝塾/個別/家庭教師の「無料体験」CPA¥3000–1万を
+  // afb / アクセストレード / レントラックス 等で発掘して ParentLeadCTA に張替える。
+  // リンク確定後：status を 'live' に変え、href / text(or imgSrc等) / trackingPixel を実値に差し替えるだけ。
+  // pending の間は AffiliateAd が何も描画しない＝デッドリンクは出ない。
+  'afb-juku-trial': {
+    id: 'afb-juku-trial',
+    type: 'text',
+    name: '塾の無料体験（afb）',
+    href: '#',
+    text: '無料体験を申し込む',
+    trackingPixel: '',
+    status: 'pending',
+  },
+  'accesstrade-juku-trial': {
+    id: 'accesstrade-juku-trial',
+    type: 'text',
+    name: '塾の無料体験（アクセストレード）',
+    href: '#',
+    text: '無料体験を申し込む',
+    trackingPixel: '',
+    status: 'pending',
+  },
+  'rentracks-juku-trial': {
+    id: 'rentracks-juku-trial',
+    type: 'text',
+    name: '塾の無料体験（レントラックス）',
+    href: '#',
+    text: '無料体験を申し込む',
+    trackingPixel: '',
+    status: 'pending',
+  },
+  'afb-katei-kyoshi': {
+    id: 'afb-katei-kyoshi',
+    type: 'text',
+    name: '家庭教師の無料体験（afb）',
+    href: '#',
+    text: '無料体験・資料請求をする',
+    trackingPixel: '',
+    status: 'pending',
+  },
 };
+
+/** live（描画可能）な案件か。pending の先回し枠を弾く。 */
+export function isLiveAffiliate(id: AffiliateId): boolean {
+  return (AFFILIATES[id]?.status ?? 'live') === 'live';
+}

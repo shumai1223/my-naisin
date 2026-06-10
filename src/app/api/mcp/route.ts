@@ -5,9 +5,13 @@ import {
   buildDatasetIndex,
   buildPrefectureDetail,
   calculateNaishin,
+  comparePrefectures,
+  reverseCalcRequiredAverage,
+  targetToRequiredGrades,
   DATASET_META,
   SITE_URL,
 } from '@/lib/naishin-dataset';
+import type { SubjectKey } from '@/lib/types';
 
 /**
  * MCP互換エンドポイント（堀B / AIネイティブの城①）。
@@ -85,6 +89,57 @@ const TOOLS = [
       required: ['prefectureCode', 'scores'],
     },
   },
+  {
+    name: 'compare_prefectures',
+    description:
+      '同じ評定（既定オール4）のとき、複数の都道府県で内申点（調査書点）がどれだけ変わるかを比較する。満点・倍率設計の違いを定量的に示す。',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        codes: {
+          type: 'array',
+          items: { type: 'string' },
+          description: '比較する都道府県コードの配列（例: ["tokyo","osaka","hyogo"]）。',
+        },
+        grade: {
+          type: 'number',
+          description: '任意。一律評定（1〜5、既定4）。',
+        },
+      },
+      required: ['codes'],
+    },
+  },
+  {
+    name: 'reverse_calc',
+    description:
+      '目標の内申点（調査書点）から、必要な評定平均を逆算する。内申は一律評定に対して線形なので厳密に求まる。',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        prefectureCode: { type: 'string', description: '都道府県コード（例: tokyo）。' },
+        targetNaishin: { type: 'number', description: '目標とする内申点（調査書点）。' },
+      },
+      required: ['prefectureCode', 'targetNaishin'],
+    },
+  },
+  {
+    name: 'target_to_required_grades',
+    description:
+      '目標内申点に対し、どの教科を上げるのが最も効率的か（1段階あたりの内申増分）を返す。現在の評定を渡すと不足ぶんと優先的に上げるべき教科を提案する。',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        prefectureCode: { type: 'string', description: '都道府県コード（例: hyogo）。' },
+        targetNaishin: { type: 'number', description: '目標とする内申点（調査書点）。' },
+        currentScores: {
+          type: 'object',
+          description:
+            '任意。現在の9教科の評定（1〜5）。キー: japanese, math, english, science, social, music, art, pe, tech。',
+        },
+      },
+      required: ['prefectureCode', 'targetNaishin'],
+    },
+  },
 ] as const;
 
 type JsonRpcId = string | number | null;
@@ -126,6 +181,45 @@ function runTool(name: string, args: Record<string, unknown>) {
     const scores = (args.scores ?? {}) as Record<string, number>;
     const use10PointScale = Boolean(args.use10PointScale);
     const result = calculateNaishin({ prefectureCode, scores, use10PointScale });
+    if (!result) {
+      return toolText({ error: 'not_found', message: `都道府県コード「${prefectureCode}」は見つかりませんでした。` });
+    }
+    return toolText(result);
+  }
+
+  if (name === 'compare_prefectures') {
+    const codes = Array.isArray(args.codes) ? args.codes.map((c) => String(c)) : [];
+    if (codes.length === 0) {
+      return toolText({ error: 'invalid_params', message: 'codes（都道府県コードの配列）を1件以上指定してください。' });
+    }
+    const grade = typeof args.grade === 'number' ? args.grade : undefined;
+    return toolText(comparePrefectures({ codes, grade }));
+  }
+
+  if (name === 'reverse_calc') {
+    const prefectureCode = String(args.prefectureCode ?? '').trim();
+    const targetNaishin = Number(args.targetNaishin);
+    if (!Number.isFinite(targetNaishin)) {
+      return toolText({ error: 'invalid_params', message: 'targetNaishin（目標内申点）は数値で指定してください。' });
+    }
+    const result = reverseCalcRequiredAverage({ prefectureCode, targetNaishin });
+    if (!result) {
+      return toolText({ error: 'not_found', message: `都道府県コード「${prefectureCode}」は見つかりませんでした。` });
+    }
+    return toolText(result);
+  }
+
+  if (name === 'target_to_required_grades') {
+    const prefectureCode = String(args.prefectureCode ?? '').trim();
+    const targetNaishin = Number(args.targetNaishin);
+    if (!Number.isFinite(targetNaishin)) {
+      return toolText({ error: 'invalid_params', message: 'targetNaishin（目標内申点）は数値で指定してください。' });
+    }
+    const currentScores =
+      args.currentScores && typeof args.currentScores === 'object'
+        ? (args.currentScores as Partial<Record<SubjectKey, number>>)
+        : undefined;
+    const result = targetToRequiredGrades({ prefectureCode, targetNaishin, currentScores });
     if (!result) {
       return toolText({ error: 'not_found', message: `都道府県コード「${prefectureCode}」は見つかりませんでした。` });
     }

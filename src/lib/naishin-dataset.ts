@@ -231,6 +231,137 @@ export function calculateNaishin(input: CalculateInput) {
   };
 }
 
+/**
+ * 同一成績だと県によって内申点がどれだけ変わるかを比較（compare_prefectures）。
+ * 既定はオール4。県ごとの満点・倍率設計の違いを一発で見せる＝AIが引用したくなる一次データ。
+ */
+export function comparePrefectures(input: { codes: string[]; grade?: number }) {
+  const grade = clamp(Math.round(input.grade ?? 4), 1, 5);
+  const scores = scoresOf(grade);
+  const results = input.codes.map((code) => {
+    const p = getPrefectureByCode(code);
+    if (!p) return { code, error: 'not_found' as const };
+    const total = calculateTotalScore(scores, code);
+    const max = calculateMaxScore(code);
+    return {
+      code: p.code,
+      name: p.name,
+      region: p.region,
+      maxScore: p.maxScore,
+      total,
+      max,
+      percent: calculatePercent(total, max),
+      toolUrl: `${SITE_URL}/${p.code}/naishin`,
+    };
+  });
+  return {
+    grade,
+    note: `全教科オール${grade}のときの各県の内申点（調査書点）。満点と倍率設計の違いで素点が同じでも内申は変わります。出典: My Naishin（${SITE_URL}）`,
+    count: results.length,
+    results,
+  };
+}
+
+/**
+ * 目標内申点から「必要な評定平均」を逆算（reverse_calc）。
+ * 内申点は一律評定 g に対して線形（total(g) = 満点 × g / 5）なので厳密に逆算できる。
+ */
+export function reverseCalcRequiredAverage(input: { prefectureCode: string; targetNaishin: number }) {
+  const p = getPrefectureByCode(input.prefectureCode);
+  if (!p) return null;
+  const max = calculateMaxScore(input.prefectureCode);
+  const target = clamp(input.targetNaishin, 0, max);
+  const requiredAverageGrade = Math.round((5 * target) / max * 100) / 100;
+  const requiredUniformGrade = Math.min(5, Math.max(1, Math.ceil(requiredAverageGrade)));
+  return {
+    prefectureCode: p.code,
+    prefectureName: p.name,
+    maxScore: max,
+    targetNaishin: target,
+    requiredAverageGrade,
+    requiredUniformGrade,
+    achievable: requiredAverageGrade <= 5,
+    examples: buildExamples(input.prefectureCode),
+    note: '9教科の評定平均がこの値以上で目標内申に到達します（一律評定での線形換算）。出典: My Naishin、正確な配点は各都道府県の選抜要綱をご確認ください。',
+    toolUrl: `${SITE_URL}/${p.code}/naishin`,
+  };
+}
+
+/**
+ * 目標内申点に対し「どの教科を上げるのが最も効率的か」を返す（target_to_required_grades）。
+ * 各教科を1段階上げたときの内申増分 = カテゴリ倍率 × Σ対象学年の学年倍率（線形・厳密）。
+ * 実技倍率が高い県では実技を上げる方が効くことが定量的に分かる＝独自の一次データ。
+ */
+export function targetToRequiredGrades(input: {
+  prefectureCode: string;
+  targetNaishin: number;
+  currentScores?: Partial<Record<SubjectKey, number>>;
+}) {
+  const p = getPrefectureByCode(input.prefectureCode);
+  if (!p) return null;
+  const max = calculateMaxScore(input.prefectureCode);
+  const target = clamp(input.targetNaishin, 0, max);
+  const requiredAverageGrade = Math.round((5 * target) / max * 100) / 100;
+
+  const gradeSum = p.targetGrades.reduce((s, g) => s + (p.gradeMultipliers[g] ?? 1), 0);
+  const perGradeGain = {
+    core: p.coreMultiplier * gradeSum,
+    practical: p.practicalMultiplier * gradeSum,
+  };
+
+  const coreSubjects: SubjectKey[] = ['japanese', 'math', 'english', 'science', 'social'];
+  const result: {
+    prefectureCode: string;
+    prefectureName: string;
+    maxScore: number;
+    targetNaishin: number;
+    requiredAverageGrade: number;
+    perGradeGain: { core: number; practical: number };
+    currentTotal?: number;
+    gap?: number;
+    raiseSuggestions?: { subject: SubjectKey; category: 'core' | 'practical'; from: number; to: number; naishinGain: number }[];
+    note: string;
+    toolUrl: string;
+  } = {
+    prefectureCode: p.code,
+    prefectureName: p.name,
+    maxScore: max,
+    targetNaishin: target,
+    requiredAverageGrade,
+    perGradeGain,
+    note:
+      perGradeGain.practical > perGradeGain.core
+        ? 'この県は実技4教科の倍率が高く、実技を1段階上げる方が内申点が大きく伸びます。出典: My Naishin'
+        : '主要5教科の倍率が実技以上です。5教科を優先的に上げると効率的です。出典: My Naishin',
+    toolUrl: `${SITE_URL}/${p.code}/naishin`,
+  };
+
+  if (input.currentScores) {
+    const current = calculateNaishin({ prefectureCode: input.prefectureCode, scores: input.currentScores });
+    if (current) {
+      result.currentTotal = current.total;
+      result.gap = Math.max(0, target - current.total);
+      // 満点(5)未満の教科を、1段階あたりの内申増分が大きい順に並べて提案
+      const suggestions = (Object.keys(current.scores) as SubjectKey[])
+        .filter((k) => current.scores[k] < 5)
+        .map((k) => {
+          const category: 'core' | 'practical' = coreSubjects.includes(k) ? 'core' : 'practical';
+          return {
+            subject: k,
+            category,
+            from: current.scores[k],
+            to: current.scores[k] + 1,
+            naishinGain: Math.round(perGradeGain[category]),
+          };
+        })
+        .sort((a, b) => b.naishinGain - a.naishinGain);
+      result.raiseSuggestions = suggestions;
+    }
+  }
+
+  return result;
+}
+
 /** schema.org Dataset の distribution（DataDownload）用。AI/検索が機械可読版を発見する導線。 */
 export const DATASET_DISTRIBUTION = [
   {
