@@ -78,6 +78,15 @@ Content-Type: application/json
   }
 }`;
 
+  const restToolsExample = `# 目標内申から逆算（必要評定平均＋効率の良い教科）
+GET ${SITE_URL}/api/naishin/tokyo?target=240
+
+# さらに学習計画（週次マイルストーン）を同梱
+GET ${SITE_URL}/api/naishin/tokyo?target=240&current=180&weeks=12
+
+# 複数都道府県を同じ評定で横並び比較
+GET ${SITE_URL}/api/naishin/compare?codes=tokyo,osaka,hyogo&grade=4`;
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
       <BreadcrumbSchema
@@ -180,6 +189,14 @@ Content-Type: application/json
               /api/openapi <ExternalLink className="h-3 w-3" />
             </a>
           </p>
+
+          <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">④ 逆算・比較・学習計画（クエリで利用）</h3>
+          <p className="mb-2 text-sm text-slate-600">
+            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">?target=</code> で必要評定平均の逆算、
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">&weeks=</code> で週次の学習計画、
+            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">/compare</code> で複数県比較。
+          </p>
+          <CodeBlock>{restToolsExample}</CodeBlock>
         </section>
 
         {/* MCP */}

@@ -35,6 +35,8 @@ jobs:
         run: npm run check:consistency
       - name: Forbidden words check
         run: npm run check:forbidden
+      - name: Orphan page report (internal links)
+        run: npm run check:orphans
 
   link-check:
     runs-on: ubuntu-latest
