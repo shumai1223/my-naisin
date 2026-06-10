@@ -8,6 +8,8 @@
 import {
   buildDatasetIndex,
   buildPrefectureDetail,
+  buildResourceList,
+  readResourceByUri,
   calculateNaishin,
   DATASET_META,
   DATASET_DISTRIBUTION,
@@ -93,6 +95,30 @@ describe('calculateNaishin（計算API/MCP 契約・信頼の堀）', () => {
 
   test('存在しない県は null', () => {
     expect(calculateNaishin({ prefectureCode: 'nope', scores: {} })).toBeNull();
+  });
+});
+
+describe('MCP resources（resources/list・resources/read 契約）', () => {
+  test('47件のリソースが揃い、各uriが /api/naishin/ を指す', () => {
+    const resources = buildResourceList();
+    expect(resources).toHaveLength(47);
+    for (const r of resources) {
+      expect(r.uri).toContain('https://my-naishin.com/api/naishin/');
+      expect(r.name).toBeTruthy();
+      expect(r.mimeType).toBe('application/json');
+    }
+  });
+
+  test('resources/read はuriから該当県の詳細JSONを返す', () => {
+    const res = readResourceByUri('https://my-naishin.com/api/naishin/tokyo');
+    expect(res).not.toBeNull();
+    expect(res!.mimeType).toBe('application/json');
+    const parsed = JSON.parse(res!.text) as { code: string };
+    expect(parsed.code).toBe('tokyo');
+  });
+
+  test('存在しないuriは null', () => {
+    expect(readResourceByUri('https://my-naishin.com/api/naishin/atlantis')).toBeNull();
   });
 });
 

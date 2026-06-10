@@ -115,6 +115,27 @@ export function buildDatasetIndex() {
   };
 }
 
+/**
+ * MCP resources（AIエージェントが「読める一次資料」として参照する層）。
+ * 各都道府県の機械可読URL（apiUrl）を1リソースとして列挙する。tools と並ぶ堀Bの第2の入口。
+ */
+export function buildResourceList() {
+  return PREFECTURES.map((p) => ({
+    uri: `${SITE_URL}/api/naishin/${p.code}`,
+    name: `${p.name}の内申点計算方式`,
+    description: `${p.name}（公立高校入試）の内申点（調査書点）計算方式・厳密な計算例・目安校。出典明記で利用可。`,
+    mimeType: 'application/json',
+  }));
+}
+
+/** resources/read 用。uri（…/api/naishin/{code}）から該当県の詳細JSONを返す。 */
+export function readResourceByUri(uri: string) {
+  const code = String(uri).split('/').filter(Boolean).pop() ?? '';
+  const detail = buildPrefectureDetail(code);
+  if (!detail) return null;
+  return { uri, mimeType: 'application/json', text: JSON.stringify(detail, null, 2) };
+}
+
 function scoresOf(value: number): Scores {
   const base: Scores = { ...DEFAULT_SCORES };
   (Object.keys(base) as SubjectKey[]).forEach((k) => {

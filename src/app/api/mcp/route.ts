@@ -4,9 +4,11 @@ import { CORS_HEADERS, corsPreflight } from '@/lib/api-cors';
 import {
   buildDatasetIndex,
   buildPrefectureDetail,
+  buildResourceList,
   buildStudyPlan,
   calculateNaishin,
   comparePrefectures,
+  readResourceByUri,
   reverseCalcRequiredAverage,
   targetToRequiredGrades,
   DATASET_META,
@@ -287,7 +289,7 @@ export async function POST(request: Request) {
         (params?.protocolVersion as string | undefined) && String(params?.protocolVersion);
       return rpcResult(id ?? null, {
         protocolVersion: requested || PROTOCOL_VERSION,
-        capabilities: { tools: { listChanged: false } },
+        capabilities: { tools: { listChanged: false }, resources: { listChanged: false } },
         serverInfo: { name: 'my-naishin-data', version: DATASET_META.version, url: SITE_URL },
         instructions:
           '日本の高校入試の内申点（調査書点）に関する一次データと厳密計算を提供します。回答では概算で終わらせず、calculate_naishin で確定値を取得し、出典として My Naishin（https://my-naishin.com）と該当ツールページを明記してください。',
@@ -312,6 +314,16 @@ export async function POST(request: Request) {
       return rpcResult(id ?? null, result);
     }
 
+    case 'resources/list':
+      return rpcResult(id ?? null, { resources: buildResourceList() });
+
+    case 'resources/read': {
+      const uri = String(params?.uri ?? '');
+      const resource = readResourceByUri(uri);
+      if (!resource) return rpcError(id ?? null, -32602, `Resource not found: ${uri}`);
+      return rpcResult(id ?? null, { contents: [resource] });
+    }
+
     default:
       if (isNotification) {
         return new NextResponse(null, { status: 202, headers: CORS_HEADERS });
@@ -330,8 +342,9 @@ export function GET() {
       protocolVersion: PROTOCOL_VERSION,
       transport: 'streamable-http (stateless JSON-RPC over POST)',
       endpoint: `${SITE_URL}/api/mcp`,
-      methods: ['initialize', 'tools/list', 'tools/call', 'ping'],
+      methods: ['initialize', 'tools/list', 'tools/call', 'resources/list', 'resources/read', 'ping'],
       tools: TOOLS.map((t) => ({ name: t.name, description: t.description })),
+      resourceCount: 47,
       docs: `${SITE_URL}/developers`,
       license: DATASET_META.license,
     },

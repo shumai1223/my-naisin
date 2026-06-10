@@ -70,6 +70,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="ja" className={`h-full ${notoSansJp.variable}`}>
       <body className={`min-h-screen mesh-gradient text-slate-900 antialiased`}>
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-bold focus:text-indigo-700 focus:shadow-lg focus:ring-2 focus:ring-indigo-500"
+        >
+          本文へスキップ
+        </a>
         <GoogleAnalytics />
         <AffiliateClickTracker />
         <SiteEngagementTracker />
@@ -77,7 +83,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <GlobalHeaderBridge>
           <Header />
         </GlobalHeaderBridge>
-        <main>{children}</main>
+        <main id="main-content">{children}</main>
         <Footer />
         <CookieConsent />
         <Script
