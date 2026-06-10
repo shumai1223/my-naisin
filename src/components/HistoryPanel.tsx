@@ -31,6 +31,19 @@ export function HistoryPanel({ onLoadEntry }: HistoryPanelProps) {
     onLoadEntry?.(entry);
   };
 
+  // 達成率の推移（県が混在しても比較できるよう % で時系列化。古い→新しい）
+  const series = React.useMemo(() => {
+    return history
+      .slice(0, 12)
+      .reverse()
+      .map((e) => {
+        const code = e.prefectureCode ?? DEFAULT_PREFECTURE_CODE;
+        const total = calculateTotalScore(e.scores, code);
+        const max = calculateMaxScore(code);
+        return calculatePercent(total, max);
+      });
+  }, [history]);
+
   if (history.length === 0) {
     return null;
   }
@@ -60,6 +73,15 @@ export function HistoryPanel({ onLoadEntry }: HistoryPanelProps) {
 
       {isExpanded && (
         <div className="border-t border-slate-100 px-5 py-4">
+          {series.length >= 2 && (
+            <div className="mb-4 rounded-xl border border-slate-100 bg-slate-50 p-3">
+              <div className="mb-1.5 flex items-center justify-between">
+                <span className="text-xs font-bold text-slate-600">達成率の推移</span>
+                <span className="text-xs font-bold text-blue-600">最新 {series[series.length - 1]}%</span>
+              </div>
+              <Sparkline values={series} />
+            </div>
+          )}
           <div className="space-y-2">
             {history.slice(0, 10).map((entry) => {
               const prefCode = entry.prefectureCode ?? DEFAULT_PREFECTURE_CODE;
@@ -117,5 +139,35 @@ export function HistoryPanel({ onLoadEntry }: HistoryPanelProps) {
         </div>
       )}
     </div>
+  );
+}
+
+/** 達成率の推移を見せる軽量な自前SVGスパークライン（recharts非依存・§12）。 */
+function Sparkline({ values }: { values: number[] }) {
+  const W = 280;
+  const H = 56;
+  const P = 6;
+  const n = values.length;
+  const x = (i: number) => P + (i * (W - 2 * P)) / (n - 1);
+  const y = (v: number) => H - P - (Math.min(100, Math.max(0, v)) / 100) * (H - 2 * P);
+  const line = values.map((v, i) => `${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(' ');
+  const area = `${P},${H - P} ${line} ${W - P},${H - P}`;
+
+  return (
+    <svg viewBox={`0 0 ${W} ${H}`} className="block h-auto w-full" role="img" aria-label="達成率の推移グラフ">
+      <defs>
+        <linearGradient id="sparkArea" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#3b82f6" stopOpacity={0.25} />
+          <stop offset="100%" stopColor="#3b82f6" stopOpacity={0} />
+        </linearGradient>
+      </defs>
+      <polygon points={area} fill="url(#sparkArea)" />
+      <polyline points={line} fill="none" stroke="#3b82f6" strokeWidth={2} strokeLinejoin="round" strokeLinecap="round" />
+      {values.map((v, i) => (
+        <circle key={i} cx={x(i)} cy={y(v)} r={2.5} fill="#3b82f6">
+          <title>{`${v}%`}</title>
+        </circle>
+      ))}
+    </svg>
   );
 }
