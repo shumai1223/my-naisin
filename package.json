@@ -17,6 +17,7 @@
     "check:links": "node scripts/check-source-links.mjs",
     "check:forbidden": "node scripts/check-forbidden-words.js",
     "check:consistency": "node scripts/check-data-consistency.js",
+    "check:orphans": "node scripts/check-orphans.mjs",
     "check:all": "npm run check:consistency && npm run check:forbidden",
     "monitor:links": "npx tsx src/scripts/link-monitor.ts",
     "test:e2e": "playwright test",

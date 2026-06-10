@@ -63,6 +63,24 @@ async function fetchQueries(
   return (res.data.rows as Row[]) || [];
 }
 
+// ページ次元（面＝URL別）。勝ち面/負け面の自動検出に使う。
+async function fetchPages(
+  client: ReturnType<typeof google.searchconsole>,
+  startDate: string,
+  endDate: string,
+): Promise<Row[]> {
+  const res = await client.searchanalytics.query({
+    siteUrl: SITE_URL,
+    requestBody: { startDate, endDate, dimensions: ['page'], rowLimit: 1000 },
+  });
+  return (res.data.rows as Row[]) || [];
+}
+
+// 表示用にURLをパスへ短縮（origin を除去）。
+function shortPath(url: string): string {
+  return url.replace(/^https?:\/\/[^/]+/, '') || '/';
+}
+
 // 全体集計（dimensions無し＝匿名化クエリも含む正確な総数）。サマリのWoWに使う。
 async function fetchTotals(
   client: ReturnType<typeof google.searchconsole>,
@@ -105,15 +123,32 @@ async function main() {
   console.log(`   今週: ${recentStart} 〜 ${recentEnd}`);
   console.log(`   前週: ${prevStart} 〜 ${prevEnd}`);
 
-  const [recent, prev, recentTot, prevTot] = await Promise.all([
+  const [recent, prev, recentTot, prevTot, recentPages, prevPages] = await Promise.all([
     fetchQueries(client, recentStart, recentEnd),
     fetchQueries(client, prevStart, prevEnd),
     fetchTotals(client, recentStart, recentEnd),
     fetchTotals(client, prevStart, prevEnd),
+    fetchPages(client, recentStart, recentEnd),
+    fetchPages(client, prevStart, prevEnd),
   ]);
 
   const prevByQuery = new Map<string, Row>();
   for (const r of prev) prevByQuery.set(r.keys[0], r);
+
+  const prevPageByUrl = new Map<string, Row>();
+  for (const r of prevPages) prevPageByUrl.set(r.keys[0], r);
+
+  // 勝ち面：クリック上位の面（評価を集約すべき稼ぎ頭）
+  const winnerPages = recentPages
+    .slice()
+    .sort((a, b) => b.clicks - a.clicks)
+    .slice(0, 12);
+
+  // 負け面：露出は十分なのにクリックされない面（タイトル/内部リンク/CTAのテコ入れ対象）
+  const loserPages = recentPages
+    .filter((r) => r.impressions >= 150 && r.ctr < 0.01)
+    .sort((a, b) => b.impressions - a.impressions)
+    .slice(0, 12);
 
   // サマリは全体集計を使う（per-queryの合計は匿名化クエリ分が欠落し過少になるため）
   const recentClicks = recentTot.clicks;
@@ -229,6 +264,29 @@ async function main() {
     );
   else L.push('_該当なし_\n');
 
+  L.push('## 🏆 勝ち面（クリック上位ページ＝評価を集約すべき稼ぎ頭）');
+  L.push('> 内部リンクのハブにして評価を流す／換金CTAの最適配置を優先する面。');
+  L.push('');
+  if (winnerPages.length)
+    table(
+      winnerPages.map((r) => {
+        const p = prevPageByUrl.get(r.keys[0]);
+        return [shortPath(r.keys[0]), String(r.clicks), pct(r.ctr), fmtDelta(r.clicks - (p?.clicks ?? 0))];
+      }),
+      ['ページ', '今週click', 'CTR', 'WoW'],
+    );
+  else L.push('_該当なし_\n');
+
+  L.push('## 🩹 負け面（高imp・低CTRページ＝タイトル/内部リンク/CTAのテコ入れ対象）');
+  L.push('> 露出はあるのにクリックされていない面。タイトル・description・内部リンク・CTA位置を見直す。');
+  L.push('');
+  if (loserPages.length)
+    table(
+      loserPages.map((r) => [shortPath(r.keys[0]), String(r.impressions), pct(r.ctr), r.position.toFixed(1)]),
+      ['ページ', '表示', 'CTR', '順位'],
+    );
+  else L.push('_該当なし_\n');
+
   L.push('---');
   L.push('_このレポートは GitHub Actions により自動生成されています（src/scripts/gsc-weekly-report.ts）。_');
 
@@ -236,7 +294,7 @@ async function main() {
   fs.writeFileSync('gsc-weekly-report.md', md);
   fs.writeFileSync(
     'gsc-weekly-report.json',
-    JSON.stringify({ generatedAt: new Date().toISOString(), recentEnd, striking, lowCtr, dropped, rising, newcomers }, null, 2),
+    JSON.stringify({ generatedAt: new Date().toISOString(), recentEnd, striking, lowCtr, dropped, rising, newcomers, winnerPages, loserPages }, null, 2),
   );
 
   console.log('\n' + md + '\n');
