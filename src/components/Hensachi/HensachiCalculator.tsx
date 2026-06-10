@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { Calculator, RotateCcw, Settings2 } from 'lucide-react';
 
-import { track } from '@/lib/track';
+import { track, funnel } from '@/lib/track';
 
 const SUBJECTS = [
   { key: 'kokugo', label: '国語' },
@@ -114,8 +114,13 @@ export function HensachiCalculator() {
     }, {} as Record<SubjectKey, SubjectInput>)
   );
   const viewedRef = React.useRef(false);
+  const startedRef = React.useRef(false);
 
   const updateField = (key: SubjectKey, field: keyof SubjectInput, value: string) => {
+    if (!startedRef.current) {
+      startedRef.current = true;
+      funnel.toolStart({ tool: 'hensachi', placement: 'hensachi' });
+    }
     setInputs((prev) => ({ ...prev, [key]: { ...prev[key], [field]: value } }));
   };
 
@@ -145,10 +150,11 @@ export function HensachiCalculator() {
 
   const totalEval = evaluateLabel(totalHensachi);
 
-  // 換金ファネルの分母：合計偏差値が初めて算出された時点で1回だけ result_view を計測
+  // 換金ファネルの分母：合計偏差値が初めて算出された時点で1回だけ calc_complete / result_view を計測
   React.useEffect(() => {
     if (totalHensachi !== null && !viewedRef.current) {
       viewedRef.current = true;
+      funnel.calcComplete({ tool: 'hensachi', placement: 'hensachi' }, { hensachi: Number(totalHensachi.toFixed(1)) });
       track('result_view', { source: 'hensachi' });
     }
   }, [totalHensachi]);

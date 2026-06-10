@@ -7,6 +7,7 @@ import {
   comparePrefectures,
   reverseCalcRequiredAverage,
   targetToRequiredGrades,
+  buildStudyPlan,
 } from '../naishin-dataset';
 import { calculateMaxScore } from '../utils';
 
@@ -97,5 +98,33 @@ describe('targetToRequiredGrades', () => {
     };
     const res = targetToRequiredGrades({ prefectureCode: 'tokyo', targetNaishin: 50, currentScores: allFive });
     expect(res!.gap).toBe(0);
+  });
+});
+
+describe('buildStudyPlan', () => {
+  test('週次マイルストーンが残り週数だけ生成され、最終週で目標に到達', () => {
+    const plan = buildStudyPlan({ prefectureCode: 'tokyo', currentNaishin: 40, targetNaishin: 60, weeksRemaining: 10 });
+    expect(plan).not.toBeNull();
+    expect(plan!.gap).toBe(20);
+    expect(plan!.perWeekNaishinGain).toBe(2);
+    expect(plan!.milestones).toHaveLength(10);
+    expect(plan!.milestones[9].targetNaishin).toBe(60);
+    expect(plan!.milestones[0].week).toBe(1);
+  });
+
+  test('残り週数は1〜52にクランプ', () => {
+    const plan = buildStudyPlan({ prefectureCode: 'tokyo', currentNaishin: 0, targetNaishin: 60, weeksRemaining: 999 });
+    expect(plan!.weeksRemaining).toBe(52);
+    expect(plan!.milestones).toHaveLength(52);
+  });
+
+  test('すでに到達済みならgap0・維持アドバイス', () => {
+    const plan = buildStudyPlan({ prefectureCode: 'tokyo', currentNaishin: 60, targetNaishin: 50, weeksRemaining: 8 });
+    expect(plan!.gap).toBe(0);
+    expect(plan!.note).toContain('維持');
+  });
+
+  test('不正な県コードは null', () => {
+    expect(buildStudyPlan({ prefectureCode: 'nope', currentNaishin: 1, targetNaishin: 2, weeksRemaining: 4 })).toBeNull();
   });
 });

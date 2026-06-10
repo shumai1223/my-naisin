@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { Calculator, RotateCcw } from 'lucide-react';
 
-import { track } from '@/lib/track';
+import { track, funnel } from '@/lib/track';
 
 const SUBJECTS = [
   { key: 'kokugo', label: '国語', group: 'main' as const },
@@ -29,8 +29,13 @@ export function HyoteiHeikinCalculator() {
     }, {} as Record<SubjectKey, number | null>)
   );
   const viewedRef = React.useRef(false);
+  const startedRef = React.useRef(false);
 
   const setRating = (key: SubjectKey, value: number) => {
+    if (!startedRef.current) {
+      startedRef.current = true;
+      funnel.toolStart({ tool: 'hyotei-heikin', placement: 'hyotei-heikin' });
+    }
     setRatings((prev) => ({ ...prev, [key]: value }));
   };
 
@@ -48,10 +53,11 @@ export function HyoteiHeikinCalculator() {
   const average = filledRatings.length > 0 ? total / filledRatings.length : null;
   const allFilled = filledRatings.length === SUBJECTS.length;
 
-  // 換金ファネルの分母：評定平均が初めて算出された時点で1回だけ result_view を計測
+  // 換金ファネルの分母：評定平均が初めて算出された時点で1回だけ calc_complete / result_view を計測
   React.useEffect(() => {
     if (average !== null && !viewedRef.current) {
       viewedRef.current = true;
+      funnel.calcComplete({ tool: 'hyotei-heikin', placement: 'hyotei-heikin' }, { average: Number(average.toFixed(1)) });
       track('result_view', { source: 'hyotei' });
     }
   }, [average]);

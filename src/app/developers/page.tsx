@@ -196,7 +196,8 @@ Content-Type: application/json
             <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">compare_prefectures</code>
             <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">reverse_calc</code>
             <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">target_to_required_grades</code>
-            の6ツールを呼び出せます。
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">build_study_plan</code>
+            の7ツールを呼び出せます。
           </p>
 
           <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">接続設定</h3>

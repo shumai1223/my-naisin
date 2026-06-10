@@ -4,6 +4,7 @@ import { CORS_HEADERS, corsPreflight } from '@/lib/api-cors';
 import {
   buildDatasetIndex,
   buildPrefectureDetail,
+  buildStudyPlan,
   calculateNaishin,
   comparePrefectures,
   reverseCalcRequiredAverage,
@@ -140,6 +141,21 @@ const TOOLS = [
       required: ['prefectureCode', 'targetNaishin'],
     },
   },
+  {
+    name: 'build_study_plan',
+    description:
+      '現在の内申点・目標内申点・残り週数から、週あたり必要な内申増分・優先教科・週次マイルストーンの学習計画を返す。',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        prefectureCode: { type: 'string', description: '都道府県コード（例: tokyo）。' },
+        currentNaishin: { type: 'number', description: '現在の内申点（調査書点）。' },
+        targetNaishin: { type: 'number', description: '目標とする内申点（調査書点）。' },
+        weeksRemaining: { type: 'number', description: '本番・学期末までの残り週数（1〜52）。' },
+      },
+      required: ['prefectureCode', 'currentNaishin', 'targetNaishin', 'weeksRemaining'],
+    },
+  },
 ] as const;
 
 type JsonRpcId = string | number | null;
@@ -220,6 +236,21 @@ function runTool(name: string, args: Record<string, unknown>) {
         ? (args.currentScores as Partial<Record<SubjectKey, number>>)
         : undefined;
     const result = targetToRequiredGrades({ prefectureCode, targetNaishin, currentScores });
+    if (!result) {
+      return toolText({ error: 'not_found', message: `都道府県コード「${prefectureCode}」は見つかりませんでした。` });
+    }
+    return toolText(result);
+  }
+
+  if (name === 'build_study_plan') {
+    const prefectureCode = String(args.prefectureCode ?? '').trim();
+    const currentNaishin = Number(args.currentNaishin);
+    const targetNaishin = Number(args.targetNaishin);
+    const weeksRemaining = Number(args.weeksRemaining);
+    if (![currentNaishin, targetNaishin, weeksRemaining].every(Number.isFinite)) {
+      return toolText({ error: 'invalid_params', message: 'currentNaishin・targetNaishin・weeksRemaining は数値で指定してください。' });
+    }
+    const result = buildStudyPlan({ prefectureCode, currentNaishin, targetNaishin, weeksRemaining });
     if (!result) {
       return toolText({ error: 'not_found', message: `都道府県コード「${prefectureCode}」は見つかりませんでした。` });
     }

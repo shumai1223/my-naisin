@@ -362,6 +362,60 @@ export function targetToRequiredGrades(input: {
   return result;
 }
 
+/**
+ * 学習計画ジェネレータ（build_study_plan）。目標差分を週次マイルストーンに落とす。
+ * 現在内申・目標内申・残り週数から、週あたり必要な内申増分・優先教科・週次目標を返す（すべて線形・厳密）。
+ */
+export function buildStudyPlan(input: {
+  prefectureCode: string;
+  currentNaishin: number;
+  targetNaishin: number;
+  weeksRemaining: number;
+}) {
+  const reverse = reverseCalcRequiredAverage({
+    prefectureCode: input.prefectureCode,
+    targetNaishin: input.targetNaishin,
+  });
+  if (!reverse) return null;
+  const efficiency = targetToRequiredGrades({
+    prefectureCode: input.prefectureCode,
+    targetNaishin: input.targetNaishin,
+  });
+
+  const max = reverse.maxScore;
+  const target = reverse.targetNaishin;
+  const current = clamp(input.currentNaishin, 0, max);
+  const gap = Math.max(0, target - current);
+  const weeks = clamp(Math.round(input.weeksRemaining || 1), 1, 52);
+  const perWeekNaishinGain = Math.round((gap / weeks) * 10) / 10;
+
+  const milestones = Array.from({ length: weeks }, (_, i) => {
+    const week = i + 1;
+    return { week, targetNaishin: Math.round(current + (gap * week) / weeks) };
+  });
+
+  return {
+    prefectureCode: reverse.prefectureCode,
+    prefectureName: reverse.prefectureName,
+    maxScore: max,
+    currentNaishin: current,
+    targetNaishin: target,
+    gap,
+    achievable: reverse.achievable, // 目標が満点以内（必要評定平均が5.0以下）か
+    weeksRemaining: weeks,
+    requiredAverageGrade: reverse.requiredAverageGrade,
+    perWeekNaishinGain,
+    perGradeGain: efficiency?.perGradeGain,
+    focusAdvice: efficiency?.note,
+    milestones,
+    note:
+      gap === 0
+        ? 'すでに目標内申に到達しています。維持しつつ当日点（学力検査）対策に重心を移しましょう。'
+        : `残り${weeks}週で内申を${gap}点伸ばす計画です。週あたり約${perWeekNaishinGain}点ぶんの改善（提出物・定期テスト・授業態度）が目安です。出典: My Naishin`,
+    toolUrl: `${SITE_URL}/${reverse.prefectureCode}/naishin`,
+  };
+}
+
 /** schema.org Dataset の distribution（DataDownload）用。AI/検索が機械可読版を発見する導線。 */
 export const DATASET_DISTRIBUTION = [
   {

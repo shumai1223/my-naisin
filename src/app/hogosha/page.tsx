@@ -18,6 +18,8 @@ import {
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
+import { ParentLeadCTAExperiment } from '@/components/ParentLeadCTAExperiment';
+import { RelatedToolsSection } from '@/components/RelatedToolsSection';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { SITE_URL } from '@/lib/naishin-dataset';
 
@@ -228,6 +230,23 @@ export default function HogoshaPage() {
             className="mb-10"
           />
 
+          {/* 次の一手（評価を稼ぎ頭・姉妹サイトへ流す） */}
+          <RelatedToolsSection
+            className="mb-10"
+            links={[
+              { href: '/guide', title: '高校受験の進め方ガイド', desc: '内申点・偏差値・出願までの全体像を保護者向けに整理' },
+              { href: '/comparison', title: '都道府県の入試制度を比較', desc: '内申比率・配点方式を地域ごとに比較' },
+              { href: '/koukou-hiyou', title: '高校の費用シミュレーター', desc: '公立・私立の3年間の費用目安を試算' },
+              { href: '/blog', title: '受験攻略コラム', desc: '内申点の上げ方・副教科で5を取る戦略など' },
+              {
+                href: 'https://my-shingaku.com',
+                title: '大学進学の費用を調べる（姉妹サイト）',
+                desc: '一人暮らし・学費・奨学金の目安（My Shingaku）',
+                external: true,
+              },
+            ]}
+          />
+
           {/* 保護者FAQ */}
           <section className="mb-10">
             <h2 className="mb-5 flex items-center gap-2 text-xl font-bold text-slate-800">
@@ -252,8 +271,8 @@ export default function HogoshaPage() {
             </div>
           </section>
 
-          {/* 保護者向けリード（最下部・読了者） */}
-          <ParentLeadCTA placement="parent-lp" auditHide />
+          {/* 保護者向けリード（最下部・読了者）。CTA文言をA/Bテスト（自作A/B基盤） */}
+          <ParentLeadCTAExperiment experimentId="hogosha-cta-text-2026" placement="parent-lp" auditHide />
 
           <p className="mt-8 flex items-center justify-center gap-1.5 text-center text-xs text-slate-400">
             <ShieldCheck className="h-3.5 w-3.5" />

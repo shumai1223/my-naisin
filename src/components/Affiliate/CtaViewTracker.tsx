@@ -32,7 +32,10 @@ export function CtaViewTracker({ placement, pref, program }: CtaViewTrackerProps
         for (const entry of entries) {
           if (entry.isIntersecting && !fired) {
             fired = true;
-            funnel.ctaView({ placement, pref }, program ? { program } : {});
+            funnel.ctaView(
+              { placement, pref },
+              { page: window.location.pathname, ...(program ? { program } : {}) }
+            );
             observer.disconnect();
           }
         }

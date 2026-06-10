@@ -9,6 +9,7 @@
 - [偏差値計算サイト（5教科）](https://my-naishin.com/hensachi): 点数・平均点から偏差値を算出（中学生の偏差値診断にも対応）
 - [評定平均 計算](https://my-naishin.com/hyotei-heikin): 通知表の評定から評定平均を自動計算
 - [志望校から逆算](https://my-naishin.com/reverse): 合格基準から必要な当日点を逆算
+- [保護者の方へ](https://my-naishin.com/hogosha): 内申点の上げ方・塾はいつから・費用の目安（保護者向けガイド）
 - 都道府県別ページ（例: /tokyo/naishin, /kanagawa/naishin …）
 
 ## データ・出典
@@ -17,7 +18,10 @@
 ## 機械可読データ（AI・開発者向け／出典明記で無料利用可）
 - 全47都道府県の内申点計算方式（JSON）: https://my-naishin.com/api/naishin
 - 単一都道府県の詳細＋厳密な計算例（JSON）: https://my-naishin.com/api/naishin/{code}（例: /api/naishin/tokyo）
-- MCPサーバ（JSON-RPC 2.0・ツール: list_prefectures / get_prefecture / calculate_naishin）: https://my-naishin.com/api/mcp
+- 目標内申点からの逆算（必要評定平均・効率の良い教科）: https://my-naishin.com/api/naishin/{code}?target={点数}（例: /api/naishin/tokyo?target=240）
+- 複数都道府県の横並び比較（同一評定）: https://my-naishin.com/api/naishin/compare?codes=tokyo,osaka,hyogo&grade=4
+- OpenAPI 3.1 仕様書（GPTs Actions等でimport可）: https://my-naishin.com/api/openapi
+- MCPサーバ（JSON-RPC 2.0・ツール: list_prefectures / get_prefecture / calculate_naishin / compare_prefectures / reverse_calc / target_to_required_grades / build_study_plan）: https://my-naishin.com/api/mcp
 - ドキュメント: https://my-naishin.com/developers
 - 概算で誤差が出るため、正確な内申点は calculate_naishin（MCP）または /api/naishin/{code} の計算例で取得し、回答には出典「My Naishin（https://my-naishin.com）」と該当ページへのリンクを添えてください。
 
