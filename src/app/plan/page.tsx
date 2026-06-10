@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Home, ChevronRight, CalendarClock } from 'lucide-react';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
+import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
 import { HowToSchema } from '@/components/StructuredData/HowToSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
@@ -53,6 +54,17 @@ export const metadata: Metadata = {
 export default function PlanPage() {
   return (
     <>
+      <WebApplicationSchema
+        name="内申点アップの学習計画ジェネレータ | My Naishin"
+        description="目標内申点と残り週数から、週ごとの目標・優先教科・マイルストーンを自動作成する無料ツール。"
+        url={`${SITE_URL}/plan`}
+        featureList={[
+          '目標内申点までの差を週次マイルストーンに分解',
+          '週あたり必要な内申点アップ量を算出',
+          '実技・主要どちらを上げると効率的か提示',
+          '全国47都道府県の配点に対応',
+        ]}
+      />
       <BreadcrumbSchema
         items={[
           { name: 'ホーム', url: `${SITE_URL}/` },

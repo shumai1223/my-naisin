@@ -11,6 +11,8 @@ import { WebApplicationSchema } from '@/components/StructuredData/WebApplication
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { HowToSchema } from '@/components/StructuredData/HowToSchema';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
+import { ParentLeadCTA } from '@/components/ParentLeadCTA';
+import { SaveResultCTA } from '@/components/SaveResultCTA';
 import Loader from '@/components/ui/Loader';
 
 const ReverseCalculator = nextDynamic(
@@ -214,6 +216,17 @@ function ReversePageContent() {
 
               <ReverseCalculator
                 onBack={() => router.push('/')}
+              />
+
+              {/* 保護者向けリード（換金の本命：志望校が見えた保護者を無料資料請求へ） */}
+              <ParentLeadCTA placement="result" auditHide className="mt-8" />
+
+              {/* 結果の保存（名簿化：再訪の燃料） */}
+              <SaveResultCTA
+                source="gap-target"
+                heading="必要点と志望校を、受験本番まで無料で受け取りませんか？"
+                body="目標までの差・出願スケジュール・対策のコツを、LINEまたはメールでお届けします。いつでも解除できます。"
+                className="mt-6"
               />
 
               {/* 計算後のZ会CTA - 志望校が決まった人向け */}
