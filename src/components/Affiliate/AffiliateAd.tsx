@@ -42,6 +42,8 @@ export function AffiliateAd({ id, className = '', centered = true, hideLabel = f
           href={ad.href}
           rel="nofollow sponsored noopener"
           target="_blank"
+          data-aff-id={ad.id}
+          data-aff-name={ad.name}
           className={linkClassName ?? 'font-bold text-blue-600 underline decoration-blue-300 underline-offset-2 hover:text-blue-700 hover:decoration-blue-500'}
         >
           {ctaText ?? ad.text}
@@ -54,7 +56,7 @@ export function AffiliateAd({ id, className = '', centered = true, hideLabel = f
   return (
     <div className={`${centered ? 'flex flex-col items-center' : ''} ${className}`}>
       {label}
-      <a href={ad.href} rel="nofollow sponsored noopener" target="_blank">
+      <a href={ad.href} rel="nofollow sponsored noopener" target="_blank" data-aff-id={ad.id} data-aff-name={ad.name}>
         <img
           src={ad.imgSrc}
           width={ad.width}

@@ -11,6 +11,7 @@ import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { SiteSchema } from '@/components/StructuredData/SiteSchema';
 import { GoogleAnalytics } from '@/components/GoogleAnalytics';
+import { AffiliateClickTracker } from '@/components/Affiliate/AffiliateClickTracker';
 
 const notoSansJp = Noto_Sans_JP({
   variable: '--font-noto-sans-jp',
@@ -65,6 +66,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="ja" className={`h-full ${notoSansJp.variable}`}>
       <body className={`min-h-screen mesh-gradient text-slate-900 antialiased`}>
         <GoogleAnalytics />
+        <AffiliateClickTracker />
         <SiteSchema />
         <GlobalHeaderBridge>
           <Header />
