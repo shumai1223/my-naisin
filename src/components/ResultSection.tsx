@@ -3,7 +3,7 @@
 import * as React from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import { BookOpen, ChevronRight, ExternalLink, FileText, RotateCcw, Share2, Sparkles, BarChart3 } from 'lucide-react';
+import { BookOpen, ChevronRight, ExternalLink, FileText, RotateCcw, Send, Share2, Sparkles, BarChart3 } from 'lucide-react';
 
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
@@ -18,6 +18,7 @@ import { CalculationBasis } from '@/components/Result/CalculationBasis';
 import { PointValueCard } from '@/components/Result/PointValueCard';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { getPrefectureByCode, type PrefectureConfig } from '@/lib/prefectures';
+import { track, EVENTS } from '@/lib/track';
 import type { ResultData, SavedHistoryEntry, Scores } from '@/lib/types';
 
 const CARD_LOADER = (
@@ -131,6 +132,17 @@ export function ResultSection({
 }: ResultSectionProps) {
   const [activeTab, setActiveTab] = React.useState<ResultTabId>('key');
 
+  // 橋②バトン（生徒→保護者）：最高インテントの瞬間（スコア表示直後）に押される送り手側の計装。
+  // GapToTarget 内の同イベントとは source で区別する。決裁者（保護者）へオファーを届ける唯一の動線。
+  const onSendToParent = React.useCallback(() => {
+    track(EVENTS.SHARE_TO_PARENT, {
+      pref: prefectureCode,
+      source: 'result-top',
+      percent: Math.round(result.percent),
+    });
+    onShareOpen();
+  }, [prefectureCode, result.percent, onShareOpen]);
+
   const tabs: TabItem[] = React.useMemo(
     () => [
       {
@@ -172,15 +184,29 @@ export function ResultSection({
               </div>
             </div>
 
-            <div className="flex w-full flex-col gap-2 md:w-auto md:flex-row">
-              <Button
-                onClick={onShareOpen}
-                leftIcon={<Share2 className="h-4 w-4" />}
-                className="w-full md:w-auto"
+            <div className="flex w-full flex-col gap-2 md:w-auto md:items-end">
+              {/* 橋②バトン：最上部＝感情ピークに「おうちの人に送る」を主役配置（目標設定の後ろに隠さない）。
+                  共有先は保護者最適化ページ（/hogosha）への文脈付きリンク＝決裁者がオファーに着地する。 */}
+              <button
+                type="button"
+                onClick={onSendToParent}
+                className="group inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-3.5 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:shadow-lg active:scale-95 md:w-auto"
               >
-                シェア画像を作る
-              </Button>
-              <PrintButton />
+                <Send className="h-4 w-4" />
+                この結果をおうちの人に送る
+                <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+              </button>
+              <div className="flex w-full gap-2 md:w-auto">
+                <Button
+                  variant="secondary"
+                  onClick={onShareOpen}
+                  leftIcon={<Share2 className="h-4 w-4" />}
+                  className="w-full md:w-auto"
+                >
+                  シェア画像
+                </Button>
+                <PrintButton />
+              </div>
             </div>
           </div>
         </div>

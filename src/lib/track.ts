@@ -51,7 +51,8 @@ export const EVENTS = {
   LINE_FRIEND_CLICK: 'line_friend_click',
   // ── 橋①/橋② 先行指標 ──
   GAP_TARGET_SET: 'gap_target_set',
-  SHARE_TO_PARENT: 'share_to_parent',
+  SHARE_TO_PARENT: 'share_to_parent', // 生徒が「保護者に送る」を押した（橋②バトンの送り手側）
+  PARENT_LANDING_VIEW: 'parent_landing_view', // 共有リンクから保護者が着地した（橋②バトンの受け手側＝決裁者到達）
   MET_BRIDGE_CLICK: 'met_bridge_click',
   SAVED_GOAL_REVISIT: 'saved_goal_revisit',
   // ── 行動計装 ──

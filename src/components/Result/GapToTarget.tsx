@@ -109,6 +109,7 @@ export function GapToTarget({ result, prefectureCode, prefectureName, onShareOpe
   function shareToParent() {
     track('share_to_parent', {
       pref: prefectureCode,
+      source: 'gap',
       state: state ?? 'none',
       gap: gap ?? 0,
     });

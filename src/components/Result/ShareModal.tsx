@@ -17,7 +17,10 @@ export interface ShareModalProps {
   onClose: () => void;
   result: ResultData;
   scores: Scores;
+  /** 共有先URL（橋②：保護者最適化ページ /hogosha への文脈付きリンク） */
   shareUrl: string;
+  /** 共有に添える本文（「相談したい」動機のメッセージ）。未指定なら従来どおりタイトルのみ。 */
+  shareText?: string;
 }
 
 function dataUrlToFile(dataUrl: string, filename: string) {
@@ -43,7 +46,7 @@ function burstConfetti() {
 
 type SaveStatus = 'idle' | 'generating' | 'success' | 'error';
 
-export function ShareModal({ open, onClose, result, scores, shareUrl }: ShareModalProps) {
+export function ShareModal({ open, onClose, result, scores, shareUrl, shareText }: ShareModalProps) {
   const captureRef = React.useRef<HTMLDivElement | null>(null);
   const [busy, setBusy] = React.useState(false);
   const [saveStatus, setSaveStatus] = React.useState<SaveStatus>('idle');
@@ -139,6 +142,7 @@ export function ShareModal({ open, onClose, result, scores, shareUrl }: ShareMod
     try {
       const shareData: ShareData = {
         title: APP_NAME,
+        text: shareText || undefined,
         url: shareUrl || undefined,
       };
       if (preparedDataUrl) {
@@ -156,7 +160,7 @@ export function ShareModal({ open, onClose, result, scores, shareUrl }: ShareMod
         showToast('共有できませんでした。「画像を保存」からシェアしてね');
       }
     }
-  }, [preparedDataUrl, result.rank.code, shareUrl, showToast]);
+  }, [preparedDataUrl, result.rank.code, shareUrl, shareText, showToast]);
 
   React.useEffect(() => {
     if (!open) return;
@@ -210,8 +214,8 @@ export function ShareModal({ open, onClose, result, scores, shareUrl }: ShareMod
                         <Sparkles className="h-6 w-6" />
                       </div>
                       <div>
-                        <h2 className="text-lg font-bold">シェア画像を作成</h2>
-                        <p className="mt-0.5 text-sm text-white/80">結果をSNSでシェアしよう</p>
+                        <h2 className="text-lg font-bold">おうちの人に送る</h2>
+                        <p className="mt-0.5 text-sm text-white/80">結果を見せて、受験の相談をはじめよう</p>
                       </div>
                     </div>
                     <button
@@ -254,9 +258,9 @@ export function ShareModal({ open, onClose, result, scores, shareUrl }: ShareMod
                             <Sparkles className="h-4 w-4 text-blue-600" />
                           </div>
                           <div>
-                            <div className="text-sm font-semibold text-blue-900">おすすめの使い方</div>
+                            <div className="text-sm font-semibold text-blue-900">おうちの人に見せると、相談がはじめやすい</div>
                             <p className="mt-1 text-xs leading-relaxed text-blue-700">
-                              「画像を保存」してからSNSやLINEに貼り付けるのが一番カンタン！
+                              「端末の共有機能」からLINEで送るのが一番カンタン。リンクから保護者の方が「今からできる対策」を確認できます。
                             </p>
                           </div>
                         </div>
@@ -310,7 +314,7 @@ export function ShareModal({ open, onClose, result, scores, shareUrl }: ShareMod
                             ) : (
                               <>
                                 <Share2 className="h-4 w-4 text-slate-500 transition-colors group-hover:text-slate-600" />
-                                <span>端末の共有機能を使う</span>
+                                <span>LINEなどで送る</span>
                               </>
                             )}
                           </div>

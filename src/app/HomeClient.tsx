@@ -16,6 +16,7 @@ import {
   readSavedGoal,
   type SavedGoal,
 } from '@/lib/persistence';
+import { buildParentShareUrl, buildParentShareMessage } from '@/lib/share';
 import type { ResultData, SavedHistoryEntry, Scores, SubjectKey } from '@/lib/types';
 import {
   calculateMaxScore,
@@ -96,6 +97,7 @@ export default function HomeClient() {
   const [showResult, setShowResult] = React.useState(false);
   const [shareOpen, setShareOpen] = React.useState(false);
   const [shareUrl, setShareUrl] = React.useState('');
+  const [shareText, setShareText] = React.useState('');
   const [navigationMode, setNavigationMode] = React.useState<NavigationMode>('select');
   const [saveEnabled, setSaveEnabled] = React.useState(true);
   const [saveMemo, setSaveMemo] = React.useState('');
@@ -206,6 +208,27 @@ export default function HomeClient() {
       track('result_view', { source: 'home', pref: prefectureCode });
     }
   }, [showResult, prefectureCode]);
+
+  // 橋②（生徒→保護者バトン）：共有を開く瞬間に、結果＋保存済み目標を載せた
+  // 「保護者最適化ページ（/hogosha）」への文脈付きURLとメッセージを組む。
+  // これで決裁者（保護者）が、画像ではなくオファー（資料請求/無料体験）に着地する。
+  const openShare = React.useCallback(() => {
+    const goal = readSavedGoal();
+    const matched = goal && goal.prefectureCode === prefectureCode ? goal : null;
+    const ctx = {
+      prefectureCode,
+      prefectureName: selectedPrefecture?.name,
+      score: result.total,
+      max: result.max,
+      target: matched?.target ?? null,
+      gap: matched?.gap ?? null,
+      label: matched?.targetLabel,
+    };
+    const origin = typeof window !== 'undefined' ? window.location.origin : 'https://my-naishin.com';
+    setShareUrl(buildParentShareUrl(origin, ctx));
+    setShareText(buildParentShareMessage(ctx));
+    setShareOpen(true);
+  }, [prefectureCode, selectedPrefecture, result.total, result.max]);
 
   const onScoreChange = React.useCallback((key: SubjectKey, nextValue: number) => {
     setScores((prev) => updateScoreValue(prev, key, nextValue));
@@ -488,7 +511,7 @@ export default function HomeClient() {
                           onSaveMemoChange={setSaveMemo}
                           onSaveNow={onSaveNow}
                           lastSaved={lastSaved}
-                          onShareOpen={() => setShareOpen(true)}
+                          onShareOpen={openShare}
                         />
                       )}
 
@@ -535,6 +558,7 @@ export default function HomeClient() {
           result={result}
           scores={scores}
           shareUrl={shareUrl}
+          shareText={shareText}
         />
       )}
     </div>

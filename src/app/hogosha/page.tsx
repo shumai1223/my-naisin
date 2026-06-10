@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import Link from 'next/link';
 import {
   Home,
@@ -19,6 +20,7 @@ import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { ParentLeadCTAExperiment } from '@/components/ParentLeadCTAExperiment';
+import { ParentShareBanner } from '@/components/ParentShareBanner';
 import { RelatedToolsSection } from '@/components/RelatedToolsSection';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { SITE_URL } from '@/lib/naishin-dataset';
@@ -153,6 +155,12 @@ export default function HogoshaPage() {
             <ChevronRight className="h-4 w-4" />
             <span className="text-slate-700">保護者の方へ</span>
           </nav>
+
+          {/* 橋②バトンの着地：生徒が共有したリンク（?from=share）で来た保護者に、結果を文脈付きで提示。
+              useSearchParams を内包するため Suspense で包み、/hogosha は静的（SSG）のまま維持する。 */}
+          <Suspense fallback={null}>
+            <ParentShareBanner />
+          </Suspense>
 
           {/* Header */}
           <header className="mb-8 text-center">
