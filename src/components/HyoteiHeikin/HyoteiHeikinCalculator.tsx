@@ -110,7 +110,7 @@ export function HyoteiHeikinCalculator() {
 
       {/* 結果表示 */}
       {average !== null && (
-        <div className="bg-gradient-to-br from-emerald-50 to-teal-50 px-6 py-6 border-t-2 border-emerald-200">
+        <div className="bg-gradient-to-br from-emerald-50 to-teal-50 px-6 py-6 border-t-2 border-emerald-200" role="status" aria-live="polite">
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="text-center">
               <div className="text-xs font-bold text-slate-600 mb-1">評定平均</div>

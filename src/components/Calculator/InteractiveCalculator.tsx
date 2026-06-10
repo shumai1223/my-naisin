@@ -100,7 +100,7 @@ export function InteractiveCalculator({ prefectureCode, prefectureName, maxScore
       </div>
 
       {showResult && (
-        <div id="result" className="mt-6 rounded-xl bg-white p-6 shadow-sm">
+        <div id="result" className="mt-6 rounded-xl bg-white p-6 shadow-sm" role="status" aria-live="polite">
           <h3 className="mb-4 text-center text-lg font-bold text-slate-800">
             あなたの{prefectureName}での内申点
           </h3>

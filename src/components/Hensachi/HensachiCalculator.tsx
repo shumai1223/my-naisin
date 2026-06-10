@@ -258,7 +258,7 @@ export function HensachiCalculator() {
 
       {/* 5教科合計の偏差値 */}
       {totalHensachi !== null && totalEval && (
-        <div className={`bg-gradient-to-br ${totalEval.bgGradient} px-6 py-6 border-t-2 ${totalEval.borderClass}`}>
+        <div className={`bg-gradient-to-br ${totalEval.bgGradient} px-6 py-6 border-t-2 ${totalEval.borderClass}`} role="status" aria-live="polite">
           <div className="text-center">
             <div className="text-xs font-bold text-slate-600 mb-1">5教科の平均偏差値</div>
             <div className={`text-5xl font-black ${totalEval.textClass}`}>

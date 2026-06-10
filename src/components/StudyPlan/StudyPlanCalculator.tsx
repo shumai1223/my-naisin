@@ -160,7 +160,7 @@ export function StudyPlanCalculator() {
       </form>
 
       {result && result.studyPlan && (
-        <div className="mt-6 rounded-xl bg-white p-6 shadow-sm">
+        <div className="mt-6 rounded-xl bg-white p-6 shadow-sm" role="status" aria-live="polite">
           {!result.achievable && (
             <div className="mb-4 flex items-start gap-2 rounded-xl border border-amber-200 bg-amber-50 p-3 text-xs text-amber-800">
               <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" />
