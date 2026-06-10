@@ -10,6 +10,7 @@ import {
   buildStudyPlan,
 } from '../naishin-dataset';
 import { calculateMaxScore } from '../utils';
+import { PREFECTURES } from '../prefectures';
 
 describe('comparePrefectures', () => {
   test('オール4の東京は内申52（満点65 × 4/5）', () => {
@@ -127,4 +128,28 @@ describe('buildStudyPlan', () => {
   test('不正な県コードは null', () => {
     expect(buildStudyPlan({ prefectureCode: 'nope', currentNaishin: 1, targetNaishin: 2, weeksRemaining: 4 })).toBeNull();
   });
+});
+
+describe('全47都道府県での不変条件（新ツール回帰）', () => {
+  test.each(PREFECTURES.map((p) => [p.code, p.name] as const))(
+    '%s (%s): 満点を狙うと必要評定平均は5.0・オール5比較はmaxScore一致・増分は正',
+    (code) => {
+      const max = calculateMaxScore(code);
+
+      // reverse: target=max → 必要評定平均 5.0
+      const rev = reverseCalcRequiredAverage({ prefectureCode: code, targetNaishin: max });
+      expect(rev!.requiredAverageGrade).toBe(5);
+      expect(rev!.achievable).toBe(true);
+
+      // compare(grade=5): total === maxScore
+      const cmp = comparePrefectures({ codes: [code], grade: 5 });
+      const row = cmp.results[0] as { total: number; max: number };
+      expect(row.total).toBe(max);
+
+      // target_to_required_grades: 1段階あたりの増分は両カテゴリとも正
+      const eff = targetToRequiredGrades({ prefectureCode: code, targetNaishin: max });
+      expect(eff!.perGradeGain.core).toBeGreaterThan(0);
+      expect(eff!.perGradeGain.practical).toBeGreaterThan(0);
+    }
+  );
 });
