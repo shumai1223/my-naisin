@@ -12,6 +12,7 @@ import { Footer } from '@/components/Footer';
 import { SiteSchema } from '@/components/StructuredData/SiteSchema';
 import { GoogleAnalytics } from '@/components/GoogleAnalytics';
 import { AffiliateClickTracker } from '@/components/Affiliate/AffiliateClickTracker';
+import { SiteEngagementTracker } from '@/components/SiteEngagementTracker';
 
 const notoSansJp = Noto_Sans_JP({
   variable: '--font-noto-sans-jp',
@@ -67,6 +68,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className={`min-h-screen mesh-gradient text-slate-900 antialiased`}>
         <GoogleAnalytics />
         <AffiliateClickTracker />
+        <SiteEngagementTracker />
         <SiteSchema />
         <GlobalHeaderBridge>
           <Header />

@@ -162,6 +162,13 @@ export function Footer() {
                 <Database className="h-3 w-3" />
                 データAPI / MCP
               </Link>
+              <Link
+                href="/hogosha"
+                className="flex items-center gap-1.5 rounded-full bg-rose-50 px-3 py-1.5 text-xs font-medium text-rose-700 transition-all hover:bg-rose-100"
+              >
+                <Heart className="h-3 w-3" />
+                保護者の方へ
+              </Link>
             </div>
           </div>
         </div>

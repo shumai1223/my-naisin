@@ -16,7 +16,7 @@ import { ScoreGauge } from '@/components/Result/ScoreGauge';
 import { RankCard } from '@/components/Result/RankCard';
 import { NextActionButtons } from '@/components/NextActionButtons';
 import { PDFExportButton } from '@/components/PDFExportButton';
-import { track } from '@/lib/track';
+import { track, funnel } from '@/lib/track';
 import type { Scores, SubjectKey } from '@/lib/types';
 
 interface InteractiveCalculatorProps {
@@ -28,6 +28,8 @@ interface InteractiveCalculatorProps {
 export function InteractiveCalculator({ prefectureCode, prefectureName, maxScore }: InteractiveCalculatorProps) {
   const [scores, setScores] = React.useState<Scores>(DEFAULT_SCORES);
   const [showResult, setShowResult] = React.useState(false);
+  // ファネル先頭（tool_start）を最初の入力で一度だけ送る
+  const startedRef = React.useRef(false);
 
   const max = calculateMaxScore(prefectureCode);
   const total = calculateTotalScore(scores, prefectureCode);
@@ -35,6 +37,10 @@ export function InteractiveCalculator({ prefectureCode, prefectureName, maxScore
   const rank = getRankForPercent(percent);
 
   const handleScoreChange = (subject: SubjectKey, value: number) => {
+    if (!startedRef.current) {
+      startedRef.current = true;
+      funnel.toolStart({ pref: prefectureCode, tool: 'naishin', placement: 'prefecture' });
+    }
     setScores(prev => ({
       ...prev,
       [subject]: value
@@ -43,7 +49,8 @@ export function InteractiveCalculator({ prefectureCode, prefectureName, maxScore
 
   const handleCalculate = () => {
     setShowResult(true);
-    // 換金ファネルの分母（per-1,000結果あたりの share/lead を測るための result_view）
+    // 計算成立 → 結果表示。換金ファネルの分母（result_view）も送る。
+    funnel.calcComplete({ pref: prefectureCode, tool: 'naishin', placement: 'prefecture' }, { total, percent });
     track('result_view', { source: 'prefecture', pref: prefectureCode });
     if (typeof window !== 'undefined') {
       if (prefectureCode === 'kanagawa') {
