@@ -27,3 +27,19 @@ export function corsJson(data: unknown, init?: { status?: number; cacheSeconds?:
 export function corsPreflight() {
   return new NextResponse(null, { status: 204, headers: CORS_HEADERS });
 }
+
+/**
+ * 公開データAPIの利用ログ（堀B：「誰がどのエンドポイントを叩いたか＝堀の証拠」§9）。
+ * Cloudflare のログに1行JSONで残す。PIIは取らず、UA・参照元・任意メタのみ。失敗してもAPIに影響させない。
+ */
+export function logApiHit(endpoint: string, request?: Request, extra?: Record<string, unknown>) {
+  try {
+    const ua = request?.headers.get('user-agent')?.slice(0, 160) ?? '';
+    const referer = request?.headers.get('referer')?.slice(0, 160) ?? '';
+    console.log(
+      JSON.stringify({ t: new Date().toISOString(), api: endpoint, ua, ...(referer ? { referer } : {}), ...extra })
+    );
+  } catch {
+    /* ログ失敗はAPIに影響させない */
+  }
+}

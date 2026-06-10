@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-import { CORS_HEADERS, corsPreflight } from '@/lib/api-cors';
+import { CORS_HEADERS, corsPreflight, logApiHit } from '@/lib/api-cors';
 import {
   buildDatasetIndex,
   buildPrefectureDetail,
@@ -314,6 +314,12 @@ export async function POST(request: Request) {
     params?: Record<string, unknown>;
   };
 
+  // 利用ログ（堀の証拠）：methodと、tools/callならツール名を残す。
+  logApiHit('mcp', request, {
+    method: method ?? '(none)',
+    ...(method === 'tools/call' && params?.name ? { tool: String(params.name) } : {}),
+  });
+
   // 通知（idなし）は本文不要。202で黙認。
   const isNotification = id === null || id === undefined;
 
@@ -382,7 +388,8 @@ export async function POST(request: Request) {
 }
 
 /** ディスカバリ：GETでサーバ情報とツール一覧を返す。 */
-export function GET() {
+export function GET(request: Request) {
+  logApiHit('mcp-discovery', request);
   return NextResponse.json(
     {
       name: 'my-naishin-data',

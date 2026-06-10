@@ -3,6 +3,8 @@
 import * as React from 'react';
 import { School, ArrowRight, RotateCcw } from 'lucide-react';
 
+import { track, funnel } from '@/lib/track';
+
 const yen = (n: number) => '¥' + Math.round(n).toLocaleString('ja-JP');
 
 // 文科省「子供の学習費調査（令和3年度）」学習費総額（年間）＋入学準備費の概算
@@ -18,8 +20,17 @@ export function KoukouHiyouCalculator() {
   const [annual, setAnnual] = React.useState<number>(PRESETS.kouritsu.annual);
   const [initial, setInitial] = React.useState<number>(PRESETS.kouritsu.initial);
   const [show, setShow] = React.useState(false);
+  const startedRef = React.useRef(false);
+
+  const markStart = () => {
+    if (!startedRef.current) {
+      startedRef.current = true;
+      funnel.toolStart({ tool: 'koukou-hiyou', placement: 'koukou-hiyou' });
+    }
+  };
 
   const apply = (k: Kind) => {
+    markStart();
     setKind(k);
     setAnnual(PRESETS[k].annual);
     setInitial(PRESETS[k].initial);
@@ -29,6 +40,8 @@ export function KoukouHiyouCalculator() {
 
   const onCalc = () => {
     setShow(true);
+    funnel.calcComplete({ tool: 'koukou-hiyou', placement: 'koukou-hiyou' }, { total });
+    track('result_view', { source: 'koukou-hiyou' });
     requestAnimationFrame(() => document.getElementById('kh-result')?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
   };
 
@@ -50,8 +63,8 @@ export function KoukouHiyouCalculator() {
       </div>
 
       <div className="mt-5 grid gap-3 sm:grid-cols-2">
-        <Field label="1年間の学習費（授業料・教材・通学費など）" value={annual} onChange={(n) => { setAnnual(n); }} />
-        <Field label="入学時の準備費（入学金・制服など）" value={initial} onChange={(n) => { setInitial(n); }} />
+        <Field label="1年間の学習費（授業料・教材・通学費など）" value={annual} onChange={(n) => { markStart(); setAnnual(n); }} />
+        <Field label="入学時の準備費（入学金・制服など）" value={initial} onChange={(n) => { markStart(); setInitial(n); }} />
       </div>
       <p className="mt-2 text-xs text-slate-500">
         ※ 初期値は文科省「子供の学習費調査」の学習費総額（公立 約51万円/年・私立 約105万円/年）。就学支援金で軽減された後の実支出に近い値です。
@@ -68,7 +81,7 @@ export function KoukouHiyouCalculator() {
       </div>
 
       {show && (
-        <div id="kh-result" className="mt-8 scroll-mt-20">
+        <div id="kh-result" className="mt-8 scroll-mt-20" role="status" aria-live="polite">
           <div className="rounded-2xl border-2 border-blue-300 bg-gradient-to-br from-blue-50 to-indigo-50 p-5 text-center">
             <div className="flex items-center justify-center gap-1.5 text-sm font-bold text-blue-800"><School className="h-4 w-4" />高校3年間でかかる費用</div>
             <div className="mt-1 text-4xl font-black tracking-tight text-blue-700 md:text-5xl">{yen(total)}</div>

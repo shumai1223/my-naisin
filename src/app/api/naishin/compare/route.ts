@@ -1,4 +1,4 @@
-import { corsJson, corsPreflight } from '@/lib/api-cors';
+import { corsJson, corsPreflight, logApiHit } from '@/lib/api-cors';
 import { comparePrefectures } from '@/lib/naishin-dataset';
 
 /**
@@ -30,6 +30,7 @@ export function GET(request: Request) {
   const gradeRaw = url.searchParams.get('grade');
   const grade = gradeRaw !== null && Number.isFinite(Number(gradeRaw)) ? Number(gradeRaw) : undefined;
 
+  logApiHit('naishin-compare', request, { codes: codes.length });
   return corsJson(comparePrefectures({ codes, grade }));
 }
 

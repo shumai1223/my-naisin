@@ -1,4 +1,4 @@
-import { corsJson, corsPreflight } from '@/lib/api-cors';
+import { corsJson, corsPreflight, logApiHit } from '@/lib/api-cors';
 import {
   buildPrefectureDetail,
   buildStudyPlan,
@@ -18,6 +18,7 @@ import {
  */
 export async function GET(request: Request, { params }: { params: Promise<{ code: string }> }) {
   const { code } = await params;
+  logApiHit('naishin-detail', request, { code });
 
   const notFound = () =>
     corsJson(

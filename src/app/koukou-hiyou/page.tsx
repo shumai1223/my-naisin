@@ -4,6 +4,7 @@ import { School, Home, ChevronRight, HelpCircle, BookCheck } from 'lucide-react'
 
 import { KoukouHiyouCalculator } from '@/components/KoukouHiyouCalculator';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
+import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -96,8 +97,18 @@ export default function KoukouHiyouPage() {
         <div className="mt-8">
           <ParentLeadCTA
             auditHide
+            placement="parent-lp"
             heading="高校の学費、今のうちに備えていますか？"
             body="高校3年間の費用は公立でも約165万円。早めの準備で選択肢が広がります。ご家庭に合った学習・進学プランを、まずは無料の資料で確認できます。"
+          />
+        </div>
+
+        {/* 名簿化（費用に関心の高い保護者を受験本番まで保持） */}
+        <div className="mt-6">
+          <SaveResultCTA
+            source="home"
+            heading="進学費用と受験情報を、無料で受け取りませんか？"
+            body="学費の備え方・就学支援金・志望校選びのコツを、LINEまたはメールでお届けします。いつでも解除できます。"
           />
         </div>
 
