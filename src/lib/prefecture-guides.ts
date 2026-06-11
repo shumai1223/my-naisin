@@ -1,6 +1,17 @@
 // 都道府県別ガイドデータ（データ駆動設計）
 
 import { PrefectureConfig } from './prefectures';
+import { calculateTotalScore } from './utils';
+import { DEFAULT_SCORES } from './constants';
+import type { Scores, SubjectKey } from './types';
+
+/** 9教科すべてを評定nにしたスコア（オールn）。 */
+function allGradeScores(n: number): Scores {
+  return (Object.keys(DEFAULT_SCORES) as SubjectKey[]).reduce(
+    (acc, k) => ({ ...acc, [k]: n }),
+    {} as Scores,
+  );
+}
 
 export interface PrefectureGuide {
   summary3lines: {
@@ -849,6 +860,10 @@ export function generateDynamicFAQ(prefectureCode: string, prefecture: Prefectur
     ? `5教科×${prefecture.coreMultiplier}倍、実技4教科×${prefecture.practicalMultiplier}倍`
     : `全教科×${prefecture.coreMultiplier}倍`;
 
+  // オール3の確定値（検証済みデータから厳密計算）。「オール3」は検索需要が高い。
+  const all3 = calculateTotalScore(allGradeScores(3), prefectureCode);
+  const practicalEfficient = prefecture.practicalMultiplier > prefecture.coreMultiplier;
+
   return [
     {
       question: `${prefecture.name}の内申点は何点満点ですか？`,
@@ -861,6 +876,16 @@ export function generateDynamicFAQ(prefectureCode: string, prefecture: Prefectur
     {
       question: `${prefecture.name}の実技教科はどう扱われますか？`,
       answer: `${prefecture.name}では実技4教科は${prefecture.practicalMultiplier === 1 ? '他の教科と同じ扱いです。' : `${prefecture.practicalMultiplier}倍で計算され、特に重要です。`}`
+    },
+    {
+      question: `${prefecture.name}でオール3だと内申点はいくつですか？`,
+      answer: `9教科すべて3（オール3）の場合、${prefecture.name}の内申点は${all3}点（${prefecture.maxScore}点満点）です。オール5なら満点の${prefecture.maxScore}点に到達します。`
+    },
+    {
+      question: `${prefecture.name}で内申点を効率よく上げるには？`,
+      answer: practicalEfficient
+        ? `${prefecture.name}は実技4教科が×${prefecture.practicalMultiplier}と比重が大きいため、音楽・美術・保健体育・技術家庭の評定を1つ上げると効率的に内申点が伸びます。`
+        : `${prefecture.name}は全教科が同じ重みなので、苦手教科の底上げが近道です。${targetGradesText}が対象のため、対象学年の定期テストと提出物・授業態度を確実に押さえましょう。`
     }
   ];
 }
