@@ -4,7 +4,6 @@ import * as React from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { Target, Calculator, Info, ArrowLeft, ChevronDown, ExternalLink, Copy, Check, HelpCircle, MapPin } from 'lucide-react';
-import { motion } from 'framer-motion';
 
 import { PREFECTURES, getPrefectureByCode } from '@/lib/prefectures';
 import { getExamRatioByCode, DEFAULT_EXAM_RATIO } from '@/lib/prefecture-exam-data';
@@ -817,11 +816,7 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
       </Card>
 
       {result && (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
-        >
+        <div className="animate-fade-in-up">
           <Card className="overflow-hidden" variant="elevated">
             <div className="border-b border-slate-100/80 bg-gradient-to-r from-emerald-50 via-teal-50 to-cyan-50 px-6 py-5">
               <div className="text-lg font-bold text-slate-800">📊 逆算結果</div>
@@ -1019,7 +1014,7 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
               </div>
             </div>
           </Card>
-        </motion.div>
+        </div>
       )}
     </div>
   );

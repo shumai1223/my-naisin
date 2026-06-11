@@ -3,7 +3,6 @@
 import * as React from 'react';
 import Link from 'next/link';
 import { MapPin, Calculator, Share2, ArrowRight } from 'lucide-react';
-import { motion } from 'framer-motion';
 
 export function ThreeStepGuide() {
   const steps = [
@@ -42,12 +41,7 @@ export function ThreeStepGuide() {
       
       {/* メインの計算ツール（大きい） */}
       <div className="mb-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0 }}
-          className="md:transform md:scale-105"
-        >
+        <div className="md:transform md:scale-105 animate-fade-in-up">
           <Link href={steps[0].href}>
             <div className={`group relative rounded-2xl border border-slate-200 bg-white p-8 shadow-lg transition-all hover:shadow-xl hover:border-emerald-300 ring-2 ring-emerald-500 ring-opacity-50 bg-gradient-to-br from-emerald-50 to-teal-50`}>
               {/* ステップ番号 */}
@@ -75,17 +69,16 @@ export function ThreeStepGuide() {
               </div>
             </div>
           </Link>
-        </motion.div>
+        </div>
       </div>
-      
+
       {/* 残り2つ（小さく並べる） */}
       <div className="grid gap-6 md:grid-cols-2">
         {steps.slice(1).map((step, index) => (
-          <motion.div
+          <div
             key={step.number}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: (index + 1) * 0.1 }}
+            className="animate-fade-in-up"
+            style={{ animationDelay: `${(index + 1) * 100}ms` }}
           >
             <Link href={step.href}>
               <div className={`group relative rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:shadow-lg hover:border-slate-300 ${
@@ -132,7 +125,7 @@ export function ThreeStepGuide() {
                 </div>
               </div>
             </Link>
-          </motion.div>
+          </div>
         ))}
       </div>
       

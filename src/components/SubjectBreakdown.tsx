@@ -1,7 +1,6 @@
 'use client';
 
 import * as React from 'react';
-import { motion } from 'framer-motion';
 import { BarChart3, ArrowUp, Minus } from 'lucide-react';
 
 import type { Scores } from '@/lib/types';
@@ -55,25 +54,22 @@ export function SubjectBreakdown({ scores, prefectureCode }: SubjectBreakdownPro
       <div className="p-5">
         <div className="grid gap-2">
           {subjectData.map((subject, i) => (
-            <motion.div
+            <div
               key={subject.key}
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: i * 0.03 }}
-              className="group flex items-center gap-3 rounded-lg bg-slate-50 p-2.5 transition-colors hover:bg-slate-100"
+              className="group flex animate-fade-in items-center gap-3 rounded-lg bg-slate-50 p-2.5 transition-colors hover:bg-slate-100"
+              style={{ animationDelay: `${i * 30}ms` }}
             >
               <div className="w-16 shrink-0 text-xs font-medium text-slate-600">{subject.label}</div>
               <div className="flex-1">
                 <div className="h-2 overflow-hidden rounded-full bg-slate-200">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    animate={{ width: `${subject.percent}%` }}
-                    transition={{ duration: 0.5, delay: i * 0.03 }}
-                    className={`h-full rounded-full ${
+                  {/* バーは width をインラインで指定し、CSS transition で伸びを表現（framer-motion非依存） */}
+                  <div
+                    className={`h-full rounded-full transition-[width] duration-500 ease-out ${
                       subject.isHigh ? 'bg-gradient-to-r from-emerald-400 to-emerald-500' :
                       subject.isLow ? 'bg-gradient-to-r from-amber-400 to-orange-400' :
                       'bg-gradient-to-r from-blue-400 to-blue-500'
                     }`}
+                    style={{ width: `${subject.percent}%` }}
                   />
                 </div>
               </div>
@@ -84,7 +80,7 @@ export function SubjectBreakdown({ scores, prefectureCode }: SubjectBreakdownPro
               {getSubjectWeight(prefectureCode, subject.category) > 1 && (
                 <div className="rounded bg-blue-100 px-1.5 py-0.5 text-[10px] font-medium text-blue-600">×{getSubjectWeight(prefectureCode, subject.category)}</div>
               )}
-            </motion.div>
+            </div>
           ))}
         </div>
 

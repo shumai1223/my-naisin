@@ -3,7 +3,6 @@
 import * as React from 'react';
 import Link from 'next/link';
 import { Calculator, Target, BookOpen, ChevronRight, TrendingUp } from 'lucide-react';
-import { motion } from 'framer-motion';
 
 export type NavigationMode = 'select' | 'calculate' | 'reverse' | 'learn';
 
@@ -35,12 +34,7 @@ export function HeroNavigation({ onModeChange, currentMode }: HeroNavigationProp
       <div className="space-y-6">
         {/* Main CTA - Single prominent button */}
         <div className="flex flex-col items-center gap-2">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
-            className="w-full max-w-lg"
-          >
+          <div className="w-full max-w-lg animate-fade-in-up">
             <button
               onClick={() => {
                 onModeChange('calculate');
@@ -58,7 +52,7 @@ export function HeroNavigation({ onModeChange, currentMode }: HeroNavigationProp
                 <ChevronRight className="h-5 w-5 transition-transform group-hover:translate-x-1 md:h-6 md:w-6" />
               </div>
             </button>
-          </motion.div>
+          </div>
           <p className="max-w-lg text-center text-xs text-slate-500">
             例：「通知表の数字をいま入れて、内申点を出したい」→ こちら
           </p>
@@ -79,11 +73,10 @@ export function HeroNavigation({ onModeChange, currentMode }: HeroNavigationProp
               { code: 'saitama', name: '埼玉' },
               { code: 'chiba', name: '千葉' },
             ].map((pref, index) => (
-              <motion.div
+              <div
                 key={pref.code}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 + index * 0.05, duration: 0.3 }}
+                className="animate-fade-in-up"
+                style={{ animationDelay: `${100 + index * 50}ms` }}
               >
                 <Link
                   href={`/${pref.code}/naishin`}
@@ -92,7 +85,7 @@ export function HeroNavigation({ onModeChange, currentMode }: HeroNavigationProp
                   <span>{pref.name}</span>
                   <ChevronRight className="ml-1 h-3 w-3 transition-transform group-hover:translate-x-1" />
                 </Link>
-              </motion.div>
+              </div>
             ))}
           </div>
           
@@ -111,11 +104,7 @@ export function HeroNavigation({ onModeChange, currentMode }: HeroNavigationProp
           </div>
 
           <div className="grid w-full max-w-3xl gap-3 sm:grid-cols-2">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1, duration: 0.3 }}
-            >
+            <div className="animate-fade-in-up" style={{ animationDelay: '100ms' }}>
               <Link
                 href="/reverse"
                 className="group flex h-full flex-col gap-1 rounded-xl border border-emerald-200 bg-gradient-to-br from-emerald-50 via-teal-50/50 to-white p-4 text-left shadow-sm transition-all duration-300 hover:border-emerald-300 hover:shadow-md"
@@ -130,13 +119,9 @@ export function HeroNavigation({ onModeChange, currentMode }: HeroNavigationProp
                   例：「志望校の目標点に届くか確かめたい」→ こちら
                 </p>
               </Link>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.15, duration: 0.3 }}
-            >
+            <div className="animate-fade-in-up" style={{ animationDelay: '150ms' }}>
               <Link
                 href="/hensachi"
                 className="group flex h-full flex-col gap-1 rounded-xl border border-purple-200 bg-gradient-to-br from-purple-50 via-indigo-50/50 to-white p-4 text-left shadow-sm transition-all duration-300 hover:border-purple-300 hover:shadow-md"
@@ -151,13 +136,9 @@ export function HeroNavigation({ onModeChange, currentMode }: HeroNavigationProp
                   例：「模試の点数から偏差値を知りたい」→ こちら
                 </p>
               </Link>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.3 }}
-            >
+            <div className="animate-fade-in-up" style={{ animationDelay: '200ms' }}>
               <Link
                 href="/hyotei-heikin"
                 className="group flex h-full flex-col gap-1 rounded-xl border border-teal-200 bg-gradient-to-br from-teal-50 via-cyan-50/50 to-white p-4 text-left shadow-sm transition-all duration-300 hover:border-teal-300 hover:shadow-md"
@@ -172,13 +153,9 @@ export function HeroNavigation({ onModeChange, currentMode }: HeroNavigationProp
                   例：「推薦入試の評定平均を確認したい」→ こちら
                 </p>
               </Link>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.25, duration: 0.3 }}
-            >
+            <div className="animate-fade-in-up" style={{ animationDelay: '250ms' }}>
               <Link
                 href="/guide"
                 className="group flex h-full flex-col gap-1 rounded-xl border border-amber-200 bg-gradient-to-br from-amber-50 via-orange-50/50 to-white p-4 text-left shadow-sm transition-all duration-300 hover:border-amber-300 hover:shadow-md"
@@ -193,7 +170,7 @@ export function HeroNavigation({ onModeChange, currentMode }: HeroNavigationProp
                   例：「換算内申って何？まず仕組みを知りたい」→ こちら
                 </p>
               </Link>
-            </motion.div>
+            </div>
           </div>
         </div>
       </div>

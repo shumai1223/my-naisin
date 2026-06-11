@@ -1,7 +1,6 @@
 'use client';
 
 import * as React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { Cookie, X, ExternalLink, Shield, BarChart3, Settings, CheckCircle2 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -75,28 +74,18 @@ export function CookieConsent() {
     setIsVisible(false);
   };
 
-  return (
-    <AnimatePresence>
-      {isVisible && (
-        <>
-          {/* Backdrop overlay */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[60] bg-slate-900/40 backdrop-blur-sm"
-            onClick={handleDecline}
-          />
+  if (!isVisible) return null;
 
-          {/* Modal */}
-          <motion.div
-            initial={{ y: 30, opacity: 0, scale: 0.95 }}
-            animate={{ y: 0, opacity: 1, scale: 1 }}
-            exit={{ y: 30, opacity: 0, scale: 0.95 }}
-            transition={{ type: 'spring', damping: 28, stiffness: 350 }}
-            className="fixed inset-x-4 bottom-4 top-auto z-[70] sm:inset-x-auto sm:left-1/2 sm:bottom-6 sm:w-full sm:max-w-xl sm:-translate-x-1/2"
-          >
+  return (
+    <>
+      {/* Backdrop overlay（CSSフェードイン・framer-motion非依存） */}
+      <div
+        className="fixed inset-0 z-[60] animate-fade-in bg-slate-900/40 backdrop-blur-sm"
+        onClick={handleDecline}
+      />
+
+      {/* Modal（CSSフェードイン。中央寄せの -translate-x-1/2 と競合しないよう opacity のみ） */}
+      <div className="fixed inset-x-4 bottom-4 top-auto z-[70] animate-fade-in sm:inset-x-auto sm:left-1/2 sm:bottom-6 sm:w-full sm:max-w-xl sm:-translate-x-1/2">
             <div className="relative overflow-hidden rounded-3xl border border-white/60 bg-white/95 shadow-[0_25px_80px_-12px_rgba(0,0,0,0.25),0_0_0_1px_rgba(255,255,255,0.8)_inset] backdrop-blur-xl">
               {/* Decorative gradients */}
               <div className="absolute -right-24 -top-24 h-48 w-48 rounded-full bg-gradient-to-br from-amber-200 to-orange-300 opacity-40 blur-3xl" />
@@ -137,25 +126,16 @@ export function CookieConsent() {
                   className="mt-4 flex items-center gap-1.5 text-sm font-semibold text-blue-600 transition-colors hover:text-blue-700"
                 >
                   {showDetails ? '詳細を隠す' : 'Cookieの種類を詳しく見る'}
-                  <motion.span
-                    animate={{ rotate: showDetails ? 180 : 0 }}
-                    transition={{ duration: 0.2 }}
-                    className="inline-block"
+                  <span
+                    className={`inline-block transition-transform duration-200 ${showDetails ? 'rotate-180' : ''}`}
                   >
                     ▼
-                  </motion.span>
+                  </span>
                 </button>
 
-                {/* Cookie categories */}
-                <AnimatePresence>
-                  {showDetails && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.25, ease: 'easeInOut' }}
-                      className="overflow-hidden"
-                    >
+                {/* Cookie categories（展開は条件レンダリング・CSSフェードイン） */}
+                {showDetails && (
+                    <div className="animate-fade-in overflow-hidden">
                       <div className="mt-4 grid gap-3">
                         {COOKIE_CATEGORIES.map((cat) => (
                           <div
@@ -182,9 +162,8 @@ export function CookieConsent() {
                           </div>
                         ))}
                       </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                    </div>
+                )}
 
                 {/* Privacy link */}
                 <div className="mt-5 flex items-center gap-1 text-xs text-slate-500">
@@ -222,9 +201,7 @@ export function CookieConsent() {
                 </p>
               </div>
             </div>
-          </motion.div>
-        </>
-      )}
-    </AnimatePresence>
+      </div>
+    </>
   );
 }

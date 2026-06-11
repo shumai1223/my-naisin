@@ -1,7 +1,6 @@
 'use client';
 
 import * as React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, X, TrendingUp } from 'lucide-react';
 
 const LAST_VISIT_KEY = 'naishin-last-visit';
@@ -44,16 +43,10 @@ export function WelcomeBack() {
     return 'おかえり！久しぶり！';
   };
 
+  if (!isVisible) return null;
+
   return (
-    <AnimatePresence>
-      {isVisible && (
-        <motion.div
-          initial={{ opacity: 0, y: -20, scale: 0.95 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: -10, scale: 0.95 }}
-          transition={{ type: 'spring', damping: 20, stiffness: 300 }}
-          className="fixed left-1/2 top-4 z-50 -translate-x-1/2"
-        >
+    <div className="fixed left-1/2 top-4 z-50 -translate-x-1/2 animate-fade-in">
           <div className="flex items-center gap-3 rounded-2xl border border-indigo-200 bg-gradient-to-r from-indigo-50 to-violet-50 px-4 py-3 shadow-lg shadow-indigo-100/50">
             <div className="grid h-8 w-8 place-items-center rounded-lg bg-gradient-to-br from-indigo-500 to-violet-500 shadow-md">
               <Sparkles className="h-4 w-4 text-white" />
@@ -73,8 +66,6 @@ export function WelcomeBack() {
               <X className="h-4 w-4" />
             </button>
           </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+    </div>
   );
 }

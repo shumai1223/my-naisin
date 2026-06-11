@@ -1,7 +1,6 @@
 'use client';
 
 import * as React from 'react';
-import { motion } from 'framer-motion';
 
 import { cn } from '@/lib/utils';
 
@@ -32,12 +31,13 @@ export const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
         )}
         {...props}
       >
-        <motion.span
+        {/* framer-motion を外し、つまみの移動は CSS transform（translate-x）で再現 */}
+        <span
           aria-hidden="true"
-          initial={false}
-          animate={{ x: checked ? 20 : 0 }}
-          transition={{ type: 'spring', stiffness: 500, damping: 35 }}
-          className="pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow-sm"
+          className={cn(
+            'pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow-sm transition-transform duration-150 ease-out',
+            checked ? 'translate-x-5' : 'translate-x-0'
+          )}
         />
       </button>
     );

@@ -1,7 +1,6 @@
 'use client';
 
 import * as React from 'react';
-import { motion } from 'framer-motion';
 import { TrendingUp, Target, Zap, Award } from 'lucide-react';
 
 import { SUBJECTS } from '@/lib/constants';
@@ -43,11 +42,7 @@ export function LiveScorePreview({ scores, prefectureCode }: LiveScorePreviewPro
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: -10 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="mb-5 overflow-hidden rounded-2xl border border-slate-200 bg-gradient-to-br from-white via-slate-50/50 to-blue-50/30 shadow-lg"
-    >
+    <div className="mb-5 animate-fade-in overflow-hidden rounded-2xl border border-slate-200 bg-gradient-to-br from-white via-slate-50/50 to-blue-50/30 shadow-lg">
       <div className="p-4">
         {/* メインスコア表示 */}
         <div className="flex items-center justify-between gap-4">
@@ -61,14 +56,13 @@ export function LiveScorePreview({ scores, prefectureCode }: LiveScorePreviewPro
             <div>
               <div className="text-xs font-medium text-slate-500">現在のスコア</div>
               <div className="flex items-baseline gap-1">
-                <motion.span
+                {/* key={total} で値が変わるたび remount → CSS の score-pop を再生（framer-motion非依存） */}
+                <span
                   key={total}
-                  initial={{ scale: 1.2 }}
-                  animate={{ scale: 1 }}
-                  className={cn('text-3xl font-black', colorStyle.text)}
+                  className={cn('score-pop text-3xl font-black', colorStyle.text)}
                 >
                   {total}
-                </motion.span>
+                </span>
                 <span className="text-lg font-semibold text-slate-400">/ {max}</span>
               </div>
             </div>
@@ -90,11 +84,9 @@ export function LiveScorePreview({ scores, prefectureCode }: LiveScorePreviewPro
         {/* プログレスバー */}
         <div className="mt-4">
           <div className="h-2.5 w-full overflow-hidden rounded-full bg-slate-200">
-            <motion.div
-              className={cn('h-full rounded-full bg-gradient-to-r', colorStyle.gradient)}
-              initial={{ width: 0 }}
-              animate={{ width: `${percent}%` }}
-              transition={{ duration: 0.5, ease: 'easeOut' }}
+            <div
+              className={cn('h-full rounded-full bg-gradient-to-r transition-[width] duration-500 ease-out', colorStyle.gradient)}
+              style={{ width: `${percent}%` }}
             />
           </div>
         </div>
@@ -130,6 +122,6 @@ export function LiveScorePreview({ scores, prefectureCode }: LiveScorePreviewPro
           </div>
         )}
       </div>
-    </motion.div>
+    </div>
   );
 }

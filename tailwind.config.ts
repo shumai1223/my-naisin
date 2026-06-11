@@ -14,8 +14,9 @@ const config: Config = {
       animation: {
         shimmer: 'shimmer 1.5s infinite linear',
         float: 'float 3s ease-in-out infinite',
-        'fade-in': 'fade-in 0.5s ease-out forwards',
-        'fade-in-up': 'fade-in-up 0.5s ease-out forwards',
+        // both: アニメ開始前(遅延中)も 0% 状態を保持＝stagger遅延時に一瞬チラつかない
+        'fade-in': 'fade-in 0.5s ease-out both',
+        'fade-in-up': 'fade-in-up 0.5s ease-out both',
       },
       keyframes: {
         shimmer: {

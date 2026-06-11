@@ -1,15 +1,15 @@
 'use client';
 
 import * as React from 'react';
-import { motion, type HTMLMotionProps } from 'framer-motion';
 
 import { cn } from '@/lib/utils';
 
 type ButtonVariant = 'primary' | 'secondary' | 'ghost';
 type ButtonSize = 'sm' | 'md' | 'lg';
 
-// Omit a`children` from HTMLMotionProps and redefine it to avoid type conflicts.
-export interface ButtonProps extends Omit<HTMLMotionProps<'button'>, 'children'> {
+// framer-motion を外し、tap/hover の微アニメは CSS（active:scale / hover:-translate-y）で再現。
+// Button はサイト全域で使われるため、ここから framer-motion を外すと多数ページの初期バンドルから重量依存が消える。
+export interface ButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'children'> {
   children: React.ReactNode;
   variant?: ButtonVariant;
   size?: ButtonSize;
@@ -51,15 +51,14 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const isDisabled = disabled || loading;
 
     return (
-      <motion.button
+      <button
         ref={ref}
         type={type}
         disabled={isDisabled}
-        whileTap={{ scale: 0.98 }}
-        whileHover={isDisabled ? undefined : { y: -1 }}
-        transition={{ type: 'spring', stiffness: 450, damping: 35 }}
         className={cn(
           'inline-flex select-none items-center justify-center gap-2 tracking-tight outline-none ring-offset-2 ring-offset-white focus-visible:ring-2 focus-visible:ring-blue-500/50 disabled:cursor-not-allowed disabled:opacity-60 transition-all duration-100',
+          // framer-motion 相当の微アニメ（CSS）：tap で少し縮み、hover で1px浮く（無効時は浮かせない）
+          'active:scale-[0.98] enabled:hover:-translate-y-px',
           sizeClass[size],
           variantClass[variant],
           className
@@ -78,7 +77,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             {rightIcon}
           </>
         )}
-      </motion.button>
+      </button>
     );
   }
 );
