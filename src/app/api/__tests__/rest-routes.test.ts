@@ -7,6 +7,7 @@
 import { GET as indexGet } from '@/app/api/naishin/route';
 import { GET as codeGet } from '@/app/api/naishin/[code]/route';
 import { GET as compareGet } from '@/app/api/naishin/compare/route';
+import { GET as csvGet } from '@/app/api/naishin/csv/route';
 import { GET as openapiGet } from '@/app/api/openapi/route';
 
 function req(url: string) {
@@ -18,6 +19,21 @@ describe('/api/naishin（インデックス）', () => {
     const json = await (await indexGet()).json();
     expect(json.prefectures).toHaveLength(47);
     expect(json.meta.endpoints.openapi).toContain('/api/openapi');
+  });
+});
+
+describe('/api/naishin/csv', () => {
+  test('text/csv・BOM付き・ヘッダ＋47行で配布', async () => {
+    const res = csvGet(req('https://my-naishin.com/api/naishin/csv'));
+    expect(res.headers.get('content-type')).toContain('text/csv');
+    expect(res.headers.get('access-control-allow-origin')).toBe('*');
+    // BOMはバイト列(EF BB BF)で検証する。Response.text() は先頭BOMを剥がすため byte で確認。
+    const bytes = new Uint8Array(await res.clone().arrayBuffer());
+    expect([bytes[0], bytes[1], bytes[2]]).toEqual([0xef, 0xbb, 0xbf]);
+    // text() はBOMを剥がして返すので、そのまま行分割すればヘッダ＋47行。
+    const lines = (await res.text()).split('\r\n');
+    expect(lines).toHaveLength(48);
+    expect(lines[0]).toContain('code,name,region');
   });
 });
 

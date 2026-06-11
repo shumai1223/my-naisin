@@ -11,6 +11,8 @@ import {
   buildResourceList,
   readResourceByUri,
   calculateNaishin,
+  buildDatasetCsv,
+  DATASET_CSV_COLUMNS,
   DATASET_META,
   DATASET_DISTRIBUTION,
 } from '../naishin-dataset';
@@ -133,5 +135,53 @@ describe('DATASET_DISTRIBUTION（Dataset構造化の契約）', () => {
     const openapi = DATASET_DISTRIBUTION.find((d) => d.contentUrl.includes('/api/openapi'));
     expect(openapi).toBeDefined();
     expect(openapi!['@type']).toBe('DataDownload');
+  });
+
+  test('CSV配布もDataDownloadとして公開（text/csv → /api/naishin/csv）', () => {
+    const csv = DATASET_DISTRIBUTION.find((d) => d.encodingFormat === 'text/csv');
+    expect(csv).toBeDefined();
+    expect(csv!['@type']).toBe('DataDownload');
+    expect(csv!.contentUrl).toContain('/api/naishin/csv');
+  });
+});
+
+describe('buildDatasetCsv（/api/naishin/csv 契約）', () => {
+  const csv = buildDatasetCsv();
+  const lines = csv.split('\r\n');
+
+  test('CRLF区切り・ヘッダ＋47行・列数が一致', () => {
+    expect(lines).toHaveLength(48); // header + 47県
+    expect(lines[0]).toBe(DATASET_CSV_COLUMNS.join(','));
+    const index = buildDatasetIndex();
+    expect(lines.length - 1).toBe(index.prefectures.length);
+  });
+
+  test('各行の列数がヘッダと一致（CSVエスケープ崩れがない）', () => {
+    const expectedCols = DATASET_CSV_COLUMNS.length;
+    // カンマを含む値はクォートされるため、素朴な split ではなく簡易パーサで列数を数える
+    const countCols = (line: string): number => {
+      let cols = 1;
+      let inQuotes = false;
+      for (let i = 0; i < line.length; i += 1) {
+        const ch = line[i];
+        if (ch === '"') {
+          if (inQuotes && line[i + 1] === '"') i += 1; // エスケープされた "
+          else inQuotes = !inQuotes;
+        } else if (ch === ',' && !inQuotes) {
+          cols += 1;
+        }
+      }
+      return cols;
+    };
+    for (const line of lines) {
+      expect(countCols(line)).toBe(expectedCols);
+    }
+  });
+
+  test('1列目がコード・東京/大阪など主要県の満点が一致', () => {
+    const tokyo = lines.find((l) => l.startsWith('tokyo,'));
+    expect(tokyo).toBeDefined();
+    // tool_url 列に正しいツールURLが含まれる
+    expect(tokyo).toContain('https://my-naishin.com/tokyo/naishin');
   });
 });

@@ -450,8 +450,72 @@ export const DATASET_DISTRIBUTION = [
   },
   {
     '@type': 'DataDownload',
+    encodingFormat: 'text/csv',
+    contentUrl: `${SITE_URL}/api/naishin/csv`,
+    name: '内申点計算データ（全47都道府県・CSV／表計算・引用向け）',
+  },
+  {
+    '@type': 'DataDownload',
     encodingFormat: 'application/json',
     contentUrl: `${SITE_URL}/api/openapi`,
     name: 'OpenAPI 3.1 仕様書（REST API）',
   },
 ] as const;
+
+/** CSV 1セルのエスケープ（カンマ・改行・引用符を含む値はダブルクォートで囲み内部"を""に）。 */
+function csvCell(value: string | number | boolean): string {
+  const s = String(value);
+  return /[",\n\r]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+}
+
+/** CSVの列定義（堀B：表計算ソフト・データカタログ・引用向けのフラットなデータセット）。 */
+export const DATASET_CSV_COLUMNS = [
+  'code',
+  'name',
+  'region',
+  'target_grades',
+  'grade1_multiplier',
+  'grade2_multiplier',
+  'grade3_multiplier',
+  'core_multiplier',
+  'practical_multiplier',
+  'max_score',
+  'supports_10_point_scale',
+  'tool_url',
+  'api_url',
+  'source_url',
+  'last_verified',
+  'fiscal_year',
+  'description',
+] as const;
+
+/**
+ * 全47都道府県の内申点計算方式を1行1県のフラットなCSV文字列で返す（ヘッダ行つき）。
+ * JSON API（/api/naishin）と同じ正準ソース（PrefectureRecord）から生成し、表計算・研究・引用に使える形にする。
+ */
+export function buildDatasetCsv(): string {
+  const header = DATASET_CSV_COLUMNS.join(',');
+  const rows = PREFECTURES.map(buildRecord).map((r) => {
+    const cells: (string | number | boolean)[] = [
+      r.code,
+      r.name,
+      r.region,
+      r.targetGrades.join(';'),
+      r.gradeMultipliers[1] ?? '',
+      r.gradeMultipliers[2] ?? '',
+      r.gradeMultipliers[3] ?? '',
+      r.coreMultiplier,
+      r.practicalMultiplier,
+      r.maxScore,
+      r.supports10PointScale,
+      r.toolUrl,
+      r.apiUrl,
+      r.source.url ?? '',
+      r.source.lastVerified ?? '',
+      r.source.fiscalYear ?? '',
+      r.description,
+    ];
+    return cells.map(csvCell).join(',');
+  });
+  return [header, ...rows].join('\r\n');
+}

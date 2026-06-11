@@ -17,6 +17,7 @@
 
 ## 機械可読データ（AI・開発者向け／出典明記で無料利用可）
 - 全47都道府県の内申点計算方式（JSON）: https://my-naishin.com/api/naishin
+- 全47都道府県の内申点計算方式（CSV／表計算・データ引用向け・BOM付きUTF-8）: https://my-naishin.com/api/naishin/csv
 - 単一都道府県の詳細＋厳密な計算例（JSON）: https://my-naishin.com/api/naishin/{code}（例: /api/naishin/tokyo）
 - 目標内申点からの逆算（必要評定平均・効率の良い教科）: https://my-naishin.com/api/naishin/{code}?target={点数}（例: /api/naishin/tokyo?target=240）
 - 複数都道府県の横並び比較（同一評定）: https://my-naishin.com/api/naishin/compare?codes=tokyo,osaka,hyogo&grade=4

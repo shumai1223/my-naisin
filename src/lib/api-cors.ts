@@ -23,6 +23,22 @@ export function corsJson(data: unknown, init?: { status?: number; cacheSeconds?:
   });
 }
 
+/** GETの公開CSV（CDNキャッシュ1時間・ダウンロード名つき）。Excelの日本語化け回避にBOMを付与。 */
+export function corsCsv(csv: string, init?: { filename?: string; cacheSeconds?: number }) {
+  const cache = init?.cacheSeconds ?? 3600;
+  const filename = init?.filename ?? 'data.csv';
+  const BOM = String.fromCharCode(0xFEFF);
+  return new NextResponse(BOM + csv, {
+    status: 200,
+    headers: {
+      ...CORS_HEADERS,
+      'Content-Type': 'text/csv; charset=utf-8',
+      'Content-Disposition': `inline; filename="${filename}"`,
+      'Cache-Control': `public, max-age=${cache}, s-maxage=${cache}, stale-while-revalidate=86400`,
+    },
+  });
+}
+
 /** プリフライト用の共通OPTIONSレスポンス。 */
 export function corsPreflight() {
   return new NextResponse(null, { status: 204, headers: CORS_HEADERS });

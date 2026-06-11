@@ -190,7 +190,26 @@ GET ${SITE_URL}/api/naishin/compare?codes=tokyo,osaka,hyogo&grade=4`;
             </a>
           </p>
 
-          <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">④ 逆算・比較・学習計画（クエリで利用）</h3>
+          <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">④ CSVダウンロード（表計算・データ引用向け）</h3>
+          <p className="mb-2 text-sm text-slate-600">
+            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">GET /api/naishin/csv</code>
+            — 全47都道府県を1行1県のフラットなCSV（BOM付きUTF-8）で配布。Excel・Googleスプレッドシート・
+            データカタログ・研究用途にそのまま読み込めます（JSONと同じ正準ソースから生成）。
+          </p>
+          <p className="mt-1 text-xs text-slate-500">
+            ダウンロード：{' '}
+            <a
+              href="/api/naishin/csv"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 font-semibold text-indigo-600 underline"
+            >
+              /api/naishin/csv <ExternalLink className="h-3 w-3" />
+            </a>
+            <span className="ml-2">列：code, name, region, target_grades, grade1〜3_multiplier, core/practical_multiplier, max_score, tool_url, source_url, last_verified ほか</span>
+          </p>
+
+          <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">⑤ 逆算・比較・学習計画（クエリで利用）</h3>
           <p className="mb-2 text-sm text-slate-600">
             <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">?target=</code> で必要評定平均の逆算、
             <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">&weeks=</code> で週次の学習計画、
