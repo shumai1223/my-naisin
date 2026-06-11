@@ -45,4 +45,6 @@ export interface SavedHistoryEntry {
   memo?: string;
   prefectureCode?: string;
   use10PointScale?: boolean;
+  /** 学年・学期ラベル（中1→中3トラッキング用。terms.ts の TermOption.value）。後付け可。 */
+  term?: string;
 }

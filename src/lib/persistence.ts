@@ -1,5 +1,6 @@
 import { DEFAULT_SCORES } from '@/lib/constants';
 import { DEFAULT_PREFECTURE_CODE } from '@/lib/prefectures';
+import { isValidTerm } from '@/lib/terms';
 import type { SavedHistoryEntry, Scores, SubjectKey } from '@/lib/types';
 
 const HISTORY_KEY = 'my-naishin:history';
@@ -141,6 +142,7 @@ function sanitizeHistoryEntry(value: unknown): SavedHistoryEntry | null {
   };
 
   if (memo) entry.memo = memo;
+  if (isValidTerm(obj.term)) entry.term = obj.term;
   return entry;
 }
 
@@ -319,6 +321,30 @@ export function updateHistoryMemo(id: string, memo: string) {
     const updated: SavedHistoryEntry = { ...next[index] };
     if (trimmed) updated.memo = trimmed;
     else delete updated.memo;
+    next[index] = updated;
+
+    writeHistory(next);
+    return updated;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * 履歴エントリに学年・学期ラベル（中1→中3トラッキング用）を後付け／更新する。
+ * 空文字や不正値を渡すと term を解除する。
+ */
+export function updateHistoryTerm(id: string, term: string) {
+  if (typeof window === 'undefined') return null;
+  try {
+    const history = readHistory();
+    const index = history.findIndex((e) => e.id === id);
+    if (index === -1) return null;
+
+    const next = [...history];
+    const updated: SavedHistoryEntry = { ...next[index] };
+    if (isValidTerm(term)) updated.term = term;
+    else delete updated.term;
     next[index] = updated;
 
     writeHistory(next);

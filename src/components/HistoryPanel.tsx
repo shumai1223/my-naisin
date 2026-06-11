@@ -1,7 +1,8 @@
 'use client';
 
 import * as React from 'react';
-import { History, Trash2, Clock, ChevronDown, ChevronUp } from 'lucide-react';
+import Link from 'next/link';
+import { History, Trash2, Clock, ChevronDown, ChevronUp, LineChart, ArrowRight } from 'lucide-react';
 
 import { readHistory, clearHistory } from '@/lib/persistence';
 import { DEFAULT_PREFECTURE_CODE } from '@/lib/prefectures';
@@ -82,6 +83,18 @@ export function HistoryPanel({ onLoadEntry }: HistoryPanelProps) {
               <Sparkline values={series} />
             </div>
           )}
+
+          {/* 製品ループ：保存→ダッシュボードで中1→中3の推移を継続トラッキング */}
+          <Link
+            href="/dashboard"
+            className="mb-4 flex items-center justify-between gap-2 rounded-xl border border-blue-200 bg-blue-50 px-4 py-3 text-sm font-bold text-blue-700 transition-colors hover:bg-blue-100"
+          >
+            <span className="flex items-center gap-2">
+              <LineChart className="h-4 w-4" />
+              ダッシュボードで推移グラフを見る
+            </span>
+            <ArrowRight className="h-4 w-4" />
+          </Link>
           <div className="space-y-2">
             {history.slice(0, 10).map((entry) => {
               const prefCode = entry.prefectureCode ?? DEFAULT_PREFECTURE_CODE;

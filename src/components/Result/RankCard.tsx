@@ -3,7 +3,6 @@
 import * as React from 'react';
 import { motion } from 'framer-motion';
 import { Crown, Sparkles } from 'lucide-react';
-import confetti from 'canvas-confetti';
 
 import { RANK_DEFINITIONS } from '@/lib/constants';
 import { getPrefectureByCode } from '@/lib/prefectures';
@@ -23,7 +22,11 @@ export function RankCard({ result }: RankCardProps) {
 
   React.useEffect(() => {
     if (!isS) return;
-    const timer = window.setTimeout(() => {
+    let cancelled = false;
+    const timer = window.setTimeout(async () => {
+      // 動的 import で canvas-confetti を初期バンドルから外す（S ランク演出時のみ読み込む）。
+      const confetti = (await import('canvas-confetti')).default;
+      if (cancelled) return;
       confetti({
         particleCount: 80,
         spread: 60,
@@ -34,7 +37,10 @@ export function RankCard({ result }: RankCardProps) {
         colors: ['#3b82f6', '#60a5fa', '#93c5fd', '#2563eb']
       });
     }, 350);
-    return () => window.clearTimeout(timer);
+    return () => {
+      cancelled = true;
+      window.clearTimeout(timer);
+    };
   }, [isS]);
 
   const rankVisual = React.useMemo(() => {

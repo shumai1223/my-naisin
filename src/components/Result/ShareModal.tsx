@@ -3,8 +3,8 @@
 import * as React from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Download, Share2, X, Loader2, CheckCircle, Sparkles, Smartphone } from 'lucide-react';
-import confetti from 'canvas-confetti';
-import html2canvas from 'html2canvas';
+// canvas-confetti / html2canvas は重い（html2canvas は約150KB+）。共有モーダルを開いて
+// 実際に使う瞬間まで読み込まないよう、ハンドラ内の動的 import に寄せて初期バンドルから外す。
 
 import { APP_NAME } from '@/lib/constants';
 import type { ResultData, Scores } from '@/lib/types';
@@ -33,7 +33,8 @@ function dataUrlToFile(dataUrl: string, filename: string) {
   return new File([array], filename, { type: mime });
 }
 
-function burstConfetti() {
+async function burstConfetti() {
+  const confetti = (await import('canvas-confetti')).default;
   confetti({
     particleCount: 120,
     spread: 80,
@@ -65,6 +66,7 @@ export function ShareModal({ open, onClose, result, scores, shareUrl, shareText 
     try {
       await document.fonts.ready;
       await new Promise(resolve => setTimeout(resolve, 100));
+      const html2canvas = (await import('html2canvas')).default;
       const canvas = await html2canvas(captureRef.current, {
         scale: 2,
         useCORS: true,

@@ -3,7 +3,6 @@
 import * as React from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import confetti from 'canvas-confetti';
 import { ArrowRight, RotateCcw, Calculator, ChevronRight, TrendingUp as TrendingUpIcon } from 'lucide-react';
 
 import { DEFAULT_SCORES } from '@/lib/constants';
@@ -75,7 +74,9 @@ const ShareModal = dynamic(
   { ssr: false }
 );
 
-function popConfetti() {
+async function popConfetti() {
+  // 動的 import で canvas-confetti を初期バンドルから外す（演出時のみ読み込む）。
+  const confetti = (await import('canvas-confetti')).default;
   confetti({
     particleCount: 120,
     spread: 70,

@@ -22,6 +22,7 @@ export type LeadPlacement =
   | 'prefecture' // 県別ページ
   | 'parent-lp' // 保護者LP（/hogosha）
   | 'blog' // 記事内
+  | 'dashboard' // 成績ダッシュボード（継続トラッキング＝高インテント）
   | 'home'; // トップ
 
 export interface LeadOffer {
@@ -71,6 +72,10 @@ export const PLACEMENT_LEAD_OVERRIDES: Partial<Record<LeadPlacement, Partial<Lea
   'parent-lp': {
     heading: 'お子さまの志望校合格を、ご家庭からあと押し',
     body: '内申点・偏差値の伸ばし方はご家庭の関わりで変わります。費用をかけずに始められる対策から、無料の資料で確認してみませんか。',
+  },
+  dashboard: {
+    heading: '成績の「伸び」を、合格まで届く伸びに',
+    body: '記録をつけて伸びが見えてきた今が、次の一手を打つ好機です。中1→中3の積み上げを志望校ラインまで届かせる家庭学習の進め方を、まずは無料の資料でご確認ください。',
   },
 };
 
