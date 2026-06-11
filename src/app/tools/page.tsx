@@ -8,6 +8,7 @@ import {
   ArrowRight,
   CheckCircle,
   MapPin,
+  LineChart,
 } from 'lucide-react';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
@@ -83,6 +84,14 @@ const TOOL_GROUPS: { id: string; heading: string; tools: Tool[] }[] = [
         href: '/hyotei-heikin',
         icon: Calculator,
         color: 'green',
+      },
+      {
+        title: '成績の記録ダッシュボード（推移グラフ）',
+        description: '計算した内申点を保存して、中1→中3の伸びを推移グラフで見える化',
+        features: ['中1→中3トラッキング', '学期ごとの記録', '目標ラインまでの差', '三者面談用PDF'],
+        href: '/dashboard',
+        icon: LineChart,
+        color: 'orange',
       },
     ],
   },

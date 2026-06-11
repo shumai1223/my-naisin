@@ -5,7 +5,7 @@ import { APP_NAME } from '@/lib/constants';
 
 export function Footer() {
   return (
-    <footer className="relative overflow-hidden border-t border-slate-200/30">
+    <footer className="relative overflow-hidden border-t border-slate-200/30 print:hidden">
       {/* Background with subtle pattern */}
       <div className="absolute inset-0 bg-gradient-to-b from-slate-50/90 via-slate-100/70 to-slate-200/50" />
       <div className="absolute inset-0 opacity-30" style={{ backgroundImage: 'radial-gradient(circle at 25% 25%, rgba(99, 102, 241, 0.05) 0%, transparent 50%), radial-gradient(circle at 75% 75%, rgba(168, 85, 247, 0.04) 0%, transparent 50%)' }} />
