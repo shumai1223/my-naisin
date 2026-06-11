@@ -9,6 +9,7 @@ import {
   CheckCircle,
   MapPin,
   LineChart,
+  MessageCircleQuestion,
 } from 'lucide-react';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
@@ -191,6 +192,14 @@ const TOOL_GROUPS: { id: string; heading: string; tools: Tool[] }[] = [
     id: 'guide',
     heading: '基礎から学ぶガイド',
     tools: [
+      {
+        title: '内申点クイックアンサー（質問する）',
+        description: '「兵庫県は何点満点？」などの疑問に、47都道府県の検証済みデータで即回答',
+        features: ['47都道府県対応', 'オール3/4/5の確定値', '満点・対象学年・倍率', '出典つき'],
+        href: '/ask',
+        icon: MessageCircleQuestion,
+        color: 'green',
+      },
       {
         title: '内申点ガイド（完全解説）',
         description: '内申点の仕組み・計算方法・上げ方までまとめて解説',

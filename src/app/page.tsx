@@ -321,6 +321,38 @@ export default function Page() {
                   </div>
                 </div>
               </div>
+
+              {/* 新ツールの発見動線：質問で即回答／成績の継続トラッキング */}
+              <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                <Link
+                  href="/ask"
+                  className="group flex items-start gap-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-md"
+                >
+                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white">
+                    <Sparkles className="h-5 w-5" />
+                  </span>
+                  <span>
+                    <span className="block text-sm font-bold text-slate-800">内申点クイックアンサー</span>
+                    <span className="mt-0.5 block text-xs leading-relaxed text-slate-600">
+                      「兵庫県は何点満点？」など、47都道府県の検証済みデータで即回答
+                    </span>
+                  </span>
+                </Link>
+                <Link
+                  href="/dashboard"
+                  className="group flex items-start gap-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-emerald-300 hover:shadow-md"
+                >
+                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white">
+                    <TrendingUp className="h-5 w-5" />
+                  </span>
+                  <span>
+                    <span className="block text-sm font-bold text-slate-800">成績の記録ダッシュボード</span>
+                    <span className="mt-0.5 block text-xs leading-relaxed text-slate-600">
+                      計算した内申点を保存して、中1→中3の伸びを推移グラフで管理
+                    </span>
+                  </span>
+                </Link>
+              </div>
             </div>
 
             {/* 全国47都道府県の内申点計算方式 比較一覧表（被引用・スニペット獲得用の一次情報アセット） */}
