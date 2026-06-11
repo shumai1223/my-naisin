@@ -64,6 +64,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/ask" className="hover:text-blue-600 flex items-center gap-1">
+                  内申点クイックアンサー（質問する） <ChevronRight className="h-3 w-3 opacity-30" />
+                </Link>
+              </li>
+              <li>
                 <Link href="/tokyo/total-score" className="hover:text-blue-600 flex items-center gap-1">
                   都立高校 総合得点 計算（1020点） <ChevronRight className="h-3 w-3 opacity-30" />
                 </Link>
