@@ -2,7 +2,7 @@ import { BlogPost } from '@/lib/blog/types';
 
 export const post: BlogPost = {
   slug: 'naishin-target-grades-by-prefecture',
-  title: '【都道府県別】内申点の対象学年まとめ｜中1から？中3だけ？',
+  title: '内申点は中1から？中3だけ？対象学年を47都道府県の早見表で確認【2026】',
   description: '高校入試で使われる内申点の対象学年は都道府県によって大きく異なります。「中3のみ」「中2・中3」「中1〜中3の3年間」のどれに当たるかを47都道府県一覧表でわかりやすく解説。あなたの都道府県が中1から内申点に影響するのかすぐ確認できます。',
   date: '2025-05-01',
   lastUpdated: '2025-05-01',

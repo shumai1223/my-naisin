@@ -27,6 +27,7 @@ import { HighSchoolBorderlineTable } from '@/components/HighSchoolBorderlineTabl
 import { TrustInfo } from '@/components/TrustInfo';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
+import { RelatedToolsSection } from '@/components/RelatedToolsSection';
 
 interface PageProps {
   params: Promise<{ prefecture: string }>;
@@ -570,6 +571,17 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
                 </div>
               </section>
             </div>
+
+            {/* 次の一手・関連ツール（評価を稼ぎ頭の偏差値クラスタ／逆算へ循環） */}
+            <RelatedToolsSection
+              heading="次の一手・関連ツール"
+              links={[
+                { href: '/hensachi', title: '偏差値を計算する（5教科）', desc: '内申点とあわせて学力の立ち位置も把握' },
+                { href: '/hensachi/shiboukou', title: '偏差値から行ける高校を見る', desc: '届く高校レベルを安全圏・実力相応・チャレンジで' },
+                { href: '/reverse', title: '志望校から必要な当日点を逆算', desc: `${prefecture.name}の配点比率で「あと何点」を算出` },
+                { href: '/hyotei-heikin', title: '評定平均を計算する', desc: '推薦・私立併願優遇で使う評定平均を確認' },
+              ]}
+            />
 
             {/* 学習方法の提案：通信教育・個別指導の選択肢 */}
             <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">

@@ -13,8 +13,28 @@ import {
 } from 'lucide-react';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
+import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { RelatedToolsSection } from '@/components/RelatedToolsSection';
+
+const TOOLS_FAQS = [
+  {
+    question: '高校受験の計算ツールは無料で使えますか？登録は必要？',
+    answer: 'すべて完全無料・会員登録不要で使えます。内申点（47都道府県対応）・偏差値（5教科）・評定平均・都立1020点総合得点・神奈川S値・志望校からの逆算まで、ブラウザだけでその場で計算できます。',
+  },
+  {
+    question: 'どのツールから使えばいいですか？',
+    answer: 'まず「内申点 計算サイト」で現在の内申点を確認し、次に「偏差値計算」で学力の立ち位置を把握、「偏差値→志望校レンジ逆引き」で届く高校のレベルを見て、「志望校から逆算」で当日に必要な点数を設定する流れがおすすめです。志望校が固まってきたら、都道府県専用ツール（S値・1020点・内申ランク）で精密に判定できます。',
+  },
+  {
+    question: '内申点と偏差値はどう使い分ける？',
+    answer: '内申点は通知表の評定を入試用に点数化したもの（地域で満点・比率が違う）、偏差値は模試での学力の位置を表す指標です。合否は「内申点＋当日点の合計」で決まるため、両方を把握するのが基本。内申比率の高い地域では内申点、当日点比率の高い地域では偏差値（学力）の優先度が上がります。',
+  },
+  {
+    question: '都道府県専用の計算ツールはどの地域に対応していますか？',
+    answer: '内申点計算は47都道府県すべてに対応しています。総合得点・合否判定の専用ツールは、東京（1020点）・神奈川（S値）・大阪（タイプⅠ〜Ⅴ）・愛知（評価方法Ⅰ〜Ⅴ）・千葉（K値）・埼玉（学年比率）・福岡（A群B群）・北海道（内申ランク）を用意しています。',
+  },
+];
 
 export const metadata: Metadata = {
   // 親レイアウトの title.template による二重サフィックスを避けるため absolute で完全指定
@@ -280,6 +300,7 @@ export default function ToolsPage() {
           { name: 'ツール一覧', url: 'https://my-naishin.com/tools' },
         ]}
       />
+      <FAQPageSchema faqItems={TOOLS_FAQS} />
 
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
         <div className="mx-auto max-w-5xl px-4 py-8 md:py-12">
@@ -380,6 +401,19 @@ export default function ToolsPage() {
                   <li>4. 志望校の入試方式に合わせて対策</li>
                 </ol>
               </div>
+            </div>
+          </section>
+
+          {/* FAQ（検索意図の網羅で順位を底上げ＋AI引用資産） */}
+          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <h2 className="mb-4 text-xl font-bold text-slate-800">よくある質問</h2>
+            <div className="space-y-4">
+              {TOOLS_FAQS.map((f) => (
+                <div key={f.question} className="border-b border-slate-100 pb-4 last:border-0 last:pb-0">
+                  <h3 className="mb-1 text-sm font-bold text-slate-800">Q. {f.question}</h3>
+                  <p className="text-sm leading-relaxed text-slate-600">A. {f.answer}</p>
+                </div>
+              ))}
             </div>
           </section>
 

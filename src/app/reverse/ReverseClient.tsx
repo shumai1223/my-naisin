@@ -10,6 +10,7 @@ import { Suspense } from 'react';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { HowToSchema } from '@/components/StructuredData/HowToSchema';
+import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
@@ -19,6 +20,25 @@ const ReverseCalculator = nextDynamic(
   () => import('@/components/Calculator/ReverseCalculator').then((mod) => mod.ReverseCalculator),
   { ssr: false }
 );
+
+const REVERSE_FAQS = [
+  {
+    question: '当日点（学力検査点）はどうやって逆算するの？',
+    answer: '「志望校の合格基準点 −（あなたの内申点を入試方式で点数化した値）＝当日に必要な学力検査点」で逆算します。内申比率が高い地域は内申点が高いほど必要な当日点が下がり、当日点比率が高い地域はその逆です。当ツールは都道府県の満点・配点比率を読み込み、この差を自動で計算します。',
+  },
+  {
+    question: '合格基準点（ボーダー）が分からないときは？',
+    answer: '模試の判定資料、進学塾・学校の進路指導資料、合格者平均点の公開データなどを目安にします。当ツールは特定校のボーダーを断定しませんが、合格基準点を入力すれば「あと何点必要か」を即座に逆算できます。志望校レベルの目安は偏差値→志望校レンジ逆引きでも確認できます。',
+  },
+  {
+    question: '東京都の1020点満点や神奈川のS値でも逆算できる？',
+    answer: 'できます。東京都（学力700＋調査書300＋ESAT-J20＝1020点）や神奈川県のS値など、地域固有の総合得点方式に対応しています。各都道府県の専用ページで満点と配点比率を確認しながら逆算してください。',
+  },
+  {
+    question: '当日点と内申点、どちらを優先して上げるべき？',
+    answer: '都道府県の配点比率で決まります。内申比率が高い地域（東京・神奈川など）は内申点の1点が当日点の数点分に相当することがあり、内申対策が効率的。当日点比率が高い地域は学力検査の得点力が優先です。逆算結果の「必要な当日点」と現状の差を見て、現実的な方を優先しましょう。',
+  },
+];
 
 function ReversePageContent() {
   const router = useRouter();
@@ -50,6 +70,7 @@ function ReversePageContent() {
           { name: '必要な当日点を確認', text: '内申点と合格基準点の差から、入試当日の学力検査で取るべき点数が瞬時に逆算されます。' },
         ]}
       />
+      <FAQPageSchema faqItems={REVERSE_FAQS} />
       <div className="mx-auto max-w-7xl px-4 py-6 lg:px-8">
         <div className="mx-auto max-w-4xl">
           <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl">
@@ -248,6 +269,47 @@ function ReversePageContent() {
                 </div>
               </section>
 
+              {/* 当日点逆算の考え方（本文・検索意図の網羅で順位を底上げ） */}
+              <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                <h2 className="mb-3 text-lg font-bold text-slate-800">当日点の逆算とは？合格点から必要点数を出す考え方</h2>
+                <p className="text-sm leading-relaxed text-slate-600">
+                  高校入試の合否は、多くの都道府県で<strong>「内申点（調査書点）＋ 当日の学力検査点」の合計</strong>で決まります。
+                  だから「志望校に受かるには、当日に何点取ればいいか」は<strong>合格基準点 −（点数化した内申点）</strong>で逆算できます。
+                  内申点がすでに高ければ必要な当日点は下がり、内申点が低ければその分を当日点で取り返す必要がある、というシンプルな関係です。
+                </p>
+                <div className="mt-4 grid gap-3 sm:grid-cols-3">
+                  <div className="rounded-xl border border-blue-100 bg-blue-50 p-4">
+                    <div className="text-xs font-bold text-blue-900">① 合格基準点</div>
+                    <p className="mt-1 text-xs leading-relaxed text-blue-800">模試判定・進路資料・合格者平均から目安を把握。</p>
+                  </div>
+                  <div className="rounded-xl border border-emerald-100 bg-emerald-50 p-4">
+                    <div className="text-xs font-bold text-emerald-900">② 点数化した内申点</div>
+                    <p className="mt-1 text-xs leading-relaxed text-emerald-800">都道府県の方式で内申を点数に換算（満点・比率は地域差大）。</p>
+                  </div>
+                  <div className="rounded-xl border border-purple-100 bg-purple-50 p-4">
+                    <div className="text-xs font-bold text-purple-900">③ 必要な当日点</div>
+                    <p className="mt-1 text-xs leading-relaxed text-purple-800">①−②＝当日に取るべき点数。配点比率で重みが変わる。</p>
+                  </div>
+                </div>
+                <p className="mt-4 text-xs leading-relaxed text-slate-500">
+                  まだ自分の内申点を把握していない場合は<Link href="/" className="font-bold text-blue-600 hover:underline">内申点 計算サイト（47都道府県）</Link>で先に算出を。
+                  志望校レベルの当たりをつけるなら<Link href="/hensachi/shiboukou" className="font-bold text-blue-600 hover:underline">偏差値→志望校レンジ逆引き</Link>が便利です。
+                </p>
+              </section>
+
+              {/* FAQ */}
+              <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
+                <div className="space-y-4">
+                  {REVERSE_FAQS.map((f) => (
+                    <div key={f.question} className="border-b border-slate-100 pb-4 last:border-0 last:pb-0">
+                      <h3 className="mb-1 text-sm font-bold text-slate-800">Q. {f.question}</h3>
+                      <p className="text-sm leading-relaxed text-slate-600">A. {f.answer}</p>
+                    </div>
+                  ))}
+                </div>
+              </section>
+
               {/* 関連リンク */}
               <section className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-6">
                 <h2 className="mb-4 text-lg font-bold text-slate-800">関連コンテンツ</h2>
@@ -281,17 +343,17 @@ function ReversePageContent() {
                     <ChevronRight className="h-4 w-4 text-slate-400" />
                   </Link>
                   <Link
-                    href="/glossary"
+                    href="/tokyo/total-score"
                     className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow"
                   >
-                    <span className="text-sm font-medium text-slate-700">用語辞典（内申点の基礎知識）</span>
+                    <span className="text-sm font-medium text-slate-700">都立1020点 総合得点を計算する</span>
                     <ChevronRight className="h-4 w-4 text-slate-400" />
                   </Link>
                   <Link
-                    href="/blog/naishin-guide"
+                    href="/kanagawa/s-value"
                     className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow"
                   >
-                    <span className="text-sm font-medium text-slate-700">都道府県別の計算方法を比較</span>
+                    <span className="text-sm font-medium text-slate-700">神奈川S値を計算する</span>
                     <ChevronRight className="h-4 w-4 text-slate-400" />
                   </Link>
                 </div>
