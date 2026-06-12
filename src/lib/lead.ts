@@ -16,6 +16,9 @@ export type LeadSource =
   | 'result'
   | 'gap-target'
   | 'hensachi'
+  | 'hensachi-kyoka-betsu'
+  | 'hensachi-shiboukou'
+  | 'hensachi-moshi'
   | 'hyotei-heikin'
   | 'prefecture'
   | 'home';
