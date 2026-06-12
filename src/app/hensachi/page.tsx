@@ -11,6 +11,7 @@ import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { HensachiCalculator } from '@/components/Hensachi/HensachiCalculator';
+import { HensachiClusterNav } from '@/components/Hensachi/HensachiClusterNav';
 
 // 偏差値 → 上位%・順位（正規分布に基づく数学的に厳密な対応値。偏差値の標準偏差=10で算出）
 const PERCENTILE_ROWS: { h: string; top: string; r300: string; r1000: string; note?: string }[] = [
@@ -301,6 +302,11 @@ export default function HensachiPage() {
           {/* 堀A：結果を保存・LINE/メールで受け取る（受験期トラフィックの資産化） */}
           <div className="mt-6">
             <SaveResultCTA source="hensachi" />
+          </div>
+
+          {/* 偏差値クラスタのハブ：教科別・志望校レンジ・上げ方への内部リンク */}
+          <div className="mt-6">
+            <HensachiClusterNav current="hub" />
           </div>
 
           {/* 計算結果直後の最高エンゲージ位置：Z会CTA */}
