@@ -17,6 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: '/hensachi/kyoka-betsu', priority: 0.9, changeFrequency: 'weekly' },
     { url: '/hensachi/shiboukou', priority: 0.9, changeFrequency: 'weekly' },
     { url: '/hensachi/agekata', priority: 0.9, changeFrequency: 'weekly' },
+    { url: '/hensachi/moshi', priority: 0.9, changeFrequency: 'weekly' },
     { url: '/hyotei-heikin', priority: 1.0, changeFrequency: 'weekly' },
     { url: '/hyotei-heikin/suisen-kijun', priority: 0.9, changeFrequency: 'weekly' },
     { url: '/tokyo/total-score', priority: 1.0, changeFrequency: 'weekly' },

@@ -104,4 +104,31 @@ describe('answerQuery（偏差値の数式・決定論回答）', () => {
     const a = answerQuery('偏差値ってなに');
     expect(a?.title).toBe('偏差値とは');
   });
+
+  test('「偏差値の上げ方」は上げ方の回答', () => {
+    const a = answerQuery('偏差値の上げ方を教えて');
+    expect(a?.title).toBe('偏差値の上げ方');
+    expect(a?.links.some((l) => l.href === '/hensachi/agekata')).toBe(true);
+  });
+});
+
+describe('answerQuery（拡張した一般FAQの網羅）', () => {
+  test.each([
+    ['指定校推薦の評定平均は？', '推薦に必要な評定平均', '/hyotei-heikin/suisen-kijun'],
+    ['素内申って何？', '素内申とは', '/'],
+    ['調査書点とは', '調査書（調査書点）とは', '/'],
+    ['内申点は何年生から対象？', '内申点の対象学年', '/blog/naishin-target-grades-by-prefecture'],
+    ['オール4で行ける高校は？', 'オール4で行ける高校', '/hensachi/shiboukou'],
+    ['オール5で行ける高校', 'オール5で行ける高校', '/hensachi/shiboukou'],
+  ])('「%s」→ %s', (q, title, href) => {
+    const a = answerQuery(q);
+    expect(a?.kind).toBe('general');
+    expect(a?.title).toBe(title);
+    expect(a?.links.some((l) => l.href === href)).toBe(true);
+  });
+
+  test('「評定平均とは」は推薦factに誤マッチせず評定平均とはを返す', () => {
+    const a = answerQuery('評定平均とは');
+    expect(a?.title).toBe('評定平均とは');
+  });
 });

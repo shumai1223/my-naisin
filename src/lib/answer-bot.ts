@@ -161,12 +161,63 @@ const GENERAL_FACTS: { test: RegExp; result: Omit<AnswerResult, 'kind'> }[] = [
     },
   },
   {
+    test: /(推薦.*評定|評定.*推薦|推薦基準|指定校|併願優遇|総合型)/,
+    result: {
+      title: '推薦に必要な評定平均',
+      answer:
+        '高校受験の推薦は上位校で4.0〜4.5以上、中堅校で3.3〜3.8前後、私立の併願優遇は最低3.0〜3.5以上が一般的な目安です。大学の指定校推薦は中堅私大3.3〜3.8／MARCH・関関同立3.8〜4.3／早慶4.0〜4.5が目安。基準は学校・年度で変わるため必ず募集要項で確認を。',
+      links: [
+        { href: '/hyotei-heikin/suisen-kijun', label: '推薦に必要な評定平均の早見表を見る' },
+        { href: '/hyotei-heikin', label: '評定平均を自動計算する' },
+      ],
+    },
+  },
+  {
     test: /評定平均/,
     result: {
       title: '評定平均とは',
       answer:
         '評定平均は、9教科などの評定（5段階）を合計して教科数で割った平均値です。推薦入試の出願基準（例：評定平均4.0以上）として使われます。',
-      links: [{ href: '/hyotei-heikin', label: '評定平均を自動計算する' }],
+      links: [
+        { href: '/hyotei-heikin', label: '評定平均を自動計算する' },
+        { href: '/hyotei-heikin/suisen-kijun', label: '推薦に必要な評定平均の早見表' },
+      ],
+    },
+  },
+  {
+    test: /素内申/,
+    result: {
+      title: '素内申とは',
+      answer:
+        '素内申は、9教科の評定（5段階）をそのまま合計した数値です（例：オール3なら27、満点45）。これを都道府県の方式で点数化したものが「換算内申」で、入試の調査書点に使われます。',
+      links: [
+        { href: '/', label: '内申点（素内申）を計算する' },
+        { href: '/blog/kansan-naishin-vs-su-naishin', label: '換算内申と素内申の違いを見る' },
+      ],
+    },
+  },
+  {
+    test: /調査書/,
+    result: {
+      title: '調査書（調査書点）とは',
+      answer:
+        '調査書は中学校が作成する成績・活動の記録で、入試で点数化される部分が「調査書点（内申点）」です。満点や対象学年は都道府県で大きく異なります。',
+      links: [
+        { href: '/', label: '自分の都道府県で調査書点を計算する' },
+        { href: '/prefectures', label: '47都道府県の調査書点方式を見る' },
+      ],
+    },
+  },
+  {
+    test: /(いつから|何年生|対象学年|中1から)/,
+    result: {
+      title: '内申点の対象学年',
+      answer:
+        '内申点の対象学年は都道府県で異なり、「中3のみ」「中2・中3」「中1〜中3の3年間」の3パターンに大きく分かれます。中1から対象になる地域では、1年生の成績から入試に影響します。',
+      links: [
+        { href: '/blog/naishin-target-grades-by-prefecture', label: '47都道府県の対象学年 早見表' },
+        { href: '/prefectures', label: 'あなたの都道府県を確認する' },
+      ],
     },
   },
   {
@@ -187,6 +238,30 @@ const GENERAL_FACTS: { test: RegExp; result: Omit<AnswerResult, 'kind'> }[] = [
       links: [
         { href: '/blog/all-3-high-school-options-2026-update', label: 'オール3で行ける高校（都道府県別）' },
         { href: '/reverse', label: '志望校から必要な当日点を逆算する' },
+      ],
+    },
+  },
+  {
+    test: /オール4/,
+    result: {
+      title: 'オール4で行ける高校',
+      answer:
+        'オール4は内申36（45点満点）で、模試の偏差値では58〜63前後、上位校〜中堅上位校が目安です。私立の併願優遇や上位公立校の推薦基準にも届きやすい水準です。',
+      links: [
+        { href: '/hensachi/shiboukou', label: '偏差値から行ける高校レンジを見る' },
+        { href: '/hyotei-heikin/suisen-kijun', label: '推薦に必要な評定平均の早見表' },
+      ],
+    },
+  },
+  {
+    test: /オール5/,
+    result: {
+      title: 'オール5で行ける高校',
+      answer:
+        'オール5は内申45（満点）で、模試の偏差値では68以上、最難関校（地域トップ）が射程です。内申はほぼ満点でも、トップ校は当日点も高水準が必要になります。',
+      links: [
+        { href: '/hensachi/shiboukou', label: '偏差値から行ける高校レンジを見る' },
+        { href: '/reverse', label: 'トップ校に必要な当日点を逆算する' },
       ],
     },
   },
@@ -247,6 +322,18 @@ function hensachiAnswer(raw: string, nq: string): AnswerResult | null {
         links: HENSACHI_LINKS,
       };
     }
+  }
+
+  // 上げ方・伸ばし方
+  if (/(上げ|あげ|伸ば|のばし)/.test(nq)) {
+    return {
+      kind: 'general',
+      title: '偏差値の上げ方',
+      answer:
+        '偏差値を効率よく上げるコツは「一番偏差値が低い教科から取り組む」ことです。伸びしろが大きく、基本問題の取りこぼしを潰すだけで数ポイント動きます。暗記分野（理科・社会・英単語）は直前でも伸びます。',
+      details: ['偏差値を+5上げる目安＝標準偏差15なら約+7.5点', '同じ模試で推移を見て手応えを確認'],
+      links: [{ href: '/hensachi/agekata', label: '偏差値の上げ方を詳しく見る' }, { href: '/hensachi/moshi', label: '模試の偏差値の見方' }],
+    };
   }
 
   // 計算方法・出し方
