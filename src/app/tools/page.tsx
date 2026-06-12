@@ -79,6 +79,14 @@ const TOOL_GROUPS: { id: string; heading: string; tools: Tool[] }[] = [
         color: 'purple',
       },
       {
+        title: '教科別の偏差値 計算（国数英理社）',
+        description: '教科ごとの点数と平均点から、国語・数学・英語・理科・社会の偏差値を個別に算出',
+        features: ['教科別に算出', '5教科／3教科', '苦手教科を特定', '教科別の上げ方'],
+        href: '/hensachi/kyoka-betsu',
+        icon: TrendingUp,
+        color: 'purple',
+      },
+      {
         title: '評定平均 自動計算',
         description: '通知表の評定から評定平均（4.2など）と素内申を同時に算出',
         features: ['9教科対応', 'クリック入力', '評定平均＋内申点を同時表示', '推薦入試の出願目安'],
@@ -171,6 +179,14 @@ const TOOL_GROUPS: { id: string; heading: string; tools: Tool[] }[] = [
     heading: '逆算・比較で受験戦略を立てる',
     tools: [
       {
+        title: '偏差値→志望校レンジ逆引き',
+        description: '偏差値を入れるだけで、届く高校レベルを安全圏・実力相応・チャレンジの3段階で表示',
+        features: ['偏差値から逆引き', '3段階レンジ', '偏差値↔内申の並置', '高校レベル目安'],
+        href: '/hensachi/shiboukou',
+        icon: Target,
+        color: 'purple',
+      },
+      {
         title: '志望校から逆算ツール',
         description: '志望校の合格基準点と内申点から、当日に必要な学力検査の点数を逆算',
         features: ['志望校対応', '配点比率対応', '当日点を逆算', '学習計画立案'],
@@ -198,6 +214,22 @@ const TOOL_GROUPS: { id: string; heading: string; tools: Tool[] }[] = [
         features: ['47都道府県対応', 'オール3/4/5の確定値', '満点・対象学年・倍率', '出典つき'],
         href: '/ask',
         icon: MessageCircleQuestion,
+        color: 'green',
+      },
+      {
+        title: '偏差値の出し方・上げ方・見方',
+        description: '偏差値の計算方法、偏差値50＝上位何%という見方、1か月で効率よく上げるコツを解説',
+        features: ['計算式の使い方', '上位%・順位の早見表', '苦手教科から上げる', '1か月の上げ方'],
+        href: '/hensachi/agekata',
+        icon: TrendingUp,
+        color: 'purple',
+      },
+      {
+        title: '推薦に必要な評定平均 早見表',
+        description: '高校推薦・私立併願優遇・大学の指定校/総合型選抜で必要な評定平均の目安を一覧化',
+        features: ['高校・大学の基準', '併願優遇の最低基準', '指定校の目安', '出し方・上げ方'],
+        href: '/hyotei-heikin/suisen-kijun',
+        icon: BookOpen,
         color: 'green',
       },
       {

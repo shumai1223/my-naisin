@@ -8,6 +8,7 @@
 
 import { PREFECTURES, getPrefectureByCode } from '@/lib/prefectures';
 import { buildPrefectureDetail } from '@/lib/naishin-dataset';
+import { hensachiToUpperPercent, hensachiToRank, tierForHensachi } from '@/lib/hensachi';
 
 export interface AnswerLink {
   href: string;
@@ -210,6 +211,58 @@ function generalAnswer(nq: string): AnswerResult | null {
   return null;
 }
 
+/** 全角数字（と全角ピリオド）を半角へ。「偏差値６０」を拾えるようにする。 */
+function toHalfWidthDigits(s: string): string {
+  return s.replace(/[０-９．]/g, (c) => String.fromCharCode(c.charCodeAt(0) - 0xfee0));
+}
+
+const HENSACHI_LINKS: AnswerLink[] = [
+  { href: '/hensachi', label: '5教科の偏差値を計算する' },
+  { href: '/hensachi/shiboukou', label: '偏差値から行ける高校を見る' },
+];
+
+/**
+ * 「偏差値○○は上位何%／何位」「偏差値の出し方」を“数式で”決定論的に即答する（堀B/GEO）。
+ * 正規分布から算出するため捏造ゼロ。数値も計算意図も無い漠然とした質問は null（→一般FAQへ委譲）。
+ */
+function hensachiAnswer(raw: string, nq: string): AnswerResult | null {
+  if (!/偏差値/.test(nq)) return null;
+
+  // 偏差値○○（数値）→ 上位%・順位・高校レベルの目安を算出
+  const m = toHalfWidthDigits(raw).match(/偏差値[^0-9]{0,3}([0-9]{2}(?:\.[0-9])?)/);
+  if (m) {
+    const h = parseFloat(m[1]);
+    if (h >= 20 && h <= 90) {
+      const upper = hensachiToUpperPercent(h);
+      const tier = tierForHensachi(h);
+      return {
+        kind: 'general',
+        title: `偏差値${m[1]}は上位何％？順位は？`,
+        answer: `偏差値${m[1]}は上位約${upper.toFixed(1)}％です。300人の集団なら約${hensachiToRank(h, 300)}位、1,000人なら約${hensachiToRank(h, 1000)}位に相当します。`,
+        details: [
+          `高校レベルの目安：${tier.label}`,
+          `同じレベル帯でよく見られる内申点（45点満点）の目安：${tier.naishin45}`,
+          '※正規分布（平均50・標準偏差10）から算出した理論値です。',
+        ],
+        links: HENSACHI_LINKS,
+      };
+    }
+  }
+
+  // 計算方法・出し方
+  if (/(計算|出し方|求め方|どうやって|どう出す|式)/.test(nq)) {
+    return {
+      kind: 'general',
+      title: '偏差値の出し方（計算方法）',
+      answer:
+        '偏差値は「偏差値＝50＋10×(自分の点数−平均点)÷標準偏差」で計算します。例：平均60点・標準偏差15のテストで80点なら、50＋10×(80−60)÷15＝約63.3です。',
+      details: ['標準偏差が分からない場合、定期テストでは15前後が目安', '偏差値50＝集団のちょうど平均（上位50%）'],
+      links: [{ href: '/hensachi/agekata', label: '偏差値の出し方・上げ方を見る' }, ...HENSACHI_LINKS],
+    };
+  }
+  return null;
+}
+
 /**
  * クエリに対する最良の単一回答を返す（自信がなければ null）。
  * 県が特定できれば県の検証済みデータを最優先、なければ一般FAQ。
@@ -218,6 +271,10 @@ export function answerQuery(query: string): AnswerResult | null {
   const raw = (query ?? '').trim();
   if (raw.length < 2) return null;
   const nq = normalize(raw);
+
+  // 偏差値の数値・計算は数式で即答（県名より優先：「東京 偏差値65」等の取り違え回避）
+  const hen = hensachiAnswer(raw, nq);
+  if (hen) return hen;
 
   const code = detectPrefectureCode(raw);
   if (code) {

@@ -1137,6 +1137,10 @@ export default function HyoteiHeikinPage() {
           <section className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-6">
             <h2 className="mb-4 text-lg font-bold text-slate-800">関連ツール</h2>
             <div className="grid gap-3 sm:grid-cols-2">
+              <Link href="/hyotei-heikin/suisen-kijun" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow ring-1 ring-emerald-100">
+                <span className="text-sm font-medium text-slate-700">推薦に必要な評定平均の早見表を見る</span>
+                <ChevronRight className="h-4 w-4 text-slate-400" />
+              </Link>
               <Link href="/" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow">
                 <span className="text-sm font-medium text-slate-700">内申点 計算サイト（換算対応）</span>
                 <ChevronRight className="h-4 w-4 text-slate-400" />

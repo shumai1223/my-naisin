@@ -74,3 +74,34 @@ describe('answerQuery（一般FAQ）', () => {
     expect(answerQuery('天気')).toBeNull();
   });
 });
+
+describe('answerQuery（偏差値の数式・決定論回答）', () => {
+  test('「偏差値60は上位何%？」→ 上位約15.9%を含む', () => {
+    const a = answerQuery('偏差値60は上位何%？');
+    expect(a?.kind).toBe('general');
+    expect(a?.answer).toContain('15.9');
+    expect(a?.links.some((l) => l.href === '/hensachi')).toBe(true);
+  });
+
+  test('全角数字「偏差値６５ 順位」も拾う', () => {
+    const a = answerQuery('偏差値６５の順位は？');
+    expect(a?.answer).toContain('6.7');
+  });
+
+  test('「東京 偏差値65」は県判定より偏差値回答を優先', () => {
+    const a = answerQuery('東京 偏差値65 上位');
+    expect(a?.kind).toBe('general');
+    expect(a?.title).toContain('偏差値65');
+  });
+
+  test('「偏差値の出し方」は計算式を返す', () => {
+    const a = answerQuery('偏差値の出し方を教えて');
+    expect(a?.title).toContain('出し方');
+    expect(a?.answer).toContain('50');
+  });
+
+  test('数値も計算意図もない「偏差値ってなに」は一般FAQ（偏差値とは）に委譲', () => {
+    const a = answerQuery('偏差値ってなに');
+    expect(a?.title).toBe('偏差値とは');
+  });
+});
