@@ -15,6 +15,8 @@ import {
 } from 'lucide-react';
 
 import { PREFECTURES, getPrefectureByCode } from '@/lib/prefectures';
+import { getTotalScoreSystem } from '@/lib/total-score/registry';
+import { getExplainer } from '@/lib/total-score/explainers';
 import { getPrefectureGuide, generateDynamicFAQ } from '@/lib/prefecture-guides';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -150,6 +152,34 @@ const SIBLING_TOOLS: Record<
 };
 
 /**
+ * SIBLING_TOOLS に個別エントリが無い県でも、total-score の計算機（第1層）／解説（第2層）があれば
+ * 自動で内部リンクを生成する（孤立防止・県を足すたびに自動で繋がる）。
+ */
+function buildTotalScoreSibling(code: string): (typeof SIBLING_TOOLS)[string] | undefined {
+  const calc = getTotalScoreSystem(code);
+  if (calc) {
+    return {
+      href: `/${code}/total-score`,
+      badge: `${calc.name}の受験生向け`,
+      title: `${calc.name}の総合得点（合否の目安）も計算する`,
+      description: `${calc.name}の公立高校入試の総合得点を、内申点と当日点から自動計算できます。志望校の合格ラインまでの距離を確認しましょう。`,
+      cta: '総合得点を計算する',
+    };
+  }
+  const exp = getExplainer(code);
+  if (exp) {
+    return {
+      href: `/${code}/total-score`,
+      badge: `${exp.name}の受験生向け`,
+      title: `${exp.name}の総合得点・合否の仕組みを見る`,
+      description: `${exp.name}は内申点と当日点を単純に足して合否が決まらない方式です。配点と「どう合否が決まるか」を一次情報に基づいて正確に解説しています。`,
+      cta: '合否の仕組みを見る',
+    };
+  }
+  return undefined;
+}
+
+/**
  * 高imp×低CTR県のタイトル/ディスクリプション個別最適化（GSC 2026-06-04 実測）。
  * 汎用テンプレ（"{県名}の内申点 自動計算ツール｜{満点}点満点…"）は順位pos6前後でもCTRが伸びない県があった：
  *   兵庫 2,036imp/CTR1.8%・福岡 608imp/1.5%・北海道 531imp/1.9%・熊本 300imp/1.0%。
@@ -254,7 +284,7 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
 
   const guide = getPrefectureGuide(prefectureCode);
   const formulaText = getFormulaExplanation(prefecture);
-  const siblingTool = SIBLING_TOOLS[prefectureCode];
+  const siblingTool = SIBLING_TOOLS[prefectureCode] ?? buildTotalScoreSibling(prefectureCode);
 
   // 構造化データのFAQ：PrefectureMinimumContent内で可視表示されているFAQと完全一致させる
   // （Googleは構造化データと可視テキストの一致を要求）

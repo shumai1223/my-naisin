@@ -74,3 +74,34 @@ export interface TotalScoreSystem {
   /** 学校別ボーダーは持たない（常に true・信頼の堀）。 */
   schoolBordersOmitted: true;
 }
+
+/** 第2層（計算機にしない）の合成方式の分類。 */
+export type Tier2Method = '相関図' | '相関表' | '割合方式' | '段階選抜' | '校別比重' | '総合判断';
+
+/**
+ * 第2層県の解説ページ用データ。
+ * 相関図・相関表・割合・段階選抜・校別比重・総合判断のため「足し算で総合得点を出せない」県を、
+ * 計算機を偽造せず正直に解説する（＝競合が真似できない独自コンテンツ＝信頼の堀）。
+ * 満点・配点は公文書で確認できた範囲のみ持ち、不明は持たない（捏造ゼロ）。
+ */
+export interface TotalScoreExplainer {
+  code: string;
+  name: string;
+  routeSlug: string;
+  localTerm: string;
+  fiscalYear: string;
+  method: Tier2Method;
+  academic: { subjects: number; perSubjectMax?: number; rawMax?: number; weightingNote?: string; note?: string };
+  report: { targetGrades: number[]; rawMax?: number; note: string };
+  /** 面接・特色検査などの概要（任意）。 */
+  others?: string;
+  /** 合成方法の説明（なぜ単純な足し算で総合得点が出ないか）。 */
+  composition: string;
+  /** 第2層と判定した理由。 */
+  tier2Reason: string;
+  /** ※前年度版・要確認 等の注記（任意）。 */
+  caveat?: string;
+  source: TsSource;
+  /** 学校別ボーダーは持たない（常に true・信頼の堀）。 */
+  schoolBordersOmitted: true;
+}

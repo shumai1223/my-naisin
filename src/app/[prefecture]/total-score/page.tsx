@@ -4,11 +4,13 @@ import Link from 'next/link';
 import { Calculator, ChevronRight, Home, BookOpen, AlertCircle, ExternalLink } from 'lucide-react';
 
 import { getTotalScoreSystem } from '@/lib/total-score/registry';
+import { getExplainer } from '@/lib/total-score/explainers';
 import type { TotalScoreSystem } from '@/lib/total-score/types';
 import { selectLeadOffer } from '@/lib/lead-config';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
 import { TotalScoreCalculator } from '@/components/TotalScore/TotalScoreCalculator';
+import { TotalScoreExplainerView } from '@/components/TotalScore/TotalScoreExplainerView';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 
@@ -27,7 +29,15 @@ function stableTotalMax(system: TotalScoreSystem): number | null {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { prefecture } = await params;
   const system = getTotalScoreSystem(prefecture);
-  if (!system) return { title: '総合得点 計算 | My Naishin' };
+  if (!system) {
+    const e = getExplainer(prefecture);
+    if (!e) return { title: '総合得点 計算 | My Naishin' };
+    return {
+      title: `${e.name}公立高校 総合得点・合否の仕組み【${e.localTerm}】内申点と当日点の使われ方 | My Naishin`,
+      description: `${e.name}の公立高校入試（${e.localTerm}）は内申点と当日点を単純に足して合否が決まる方式ではありません。配点と「どう合否が決まるか」を${e.fiscalYear}年度（令和8年度）入試対応で一次情報に基づき正確に解説。${e.source.docTitle}準拠。`,
+      alternates: { canonical: `${BASE}/${e.code}/total-score` },
+    };
+  }
 
   const total = stableTotalMax(system);
   const mantenLabel = total ? `【${total}点満点】` : '';
@@ -47,7 +57,9 @@ export default async function PrefectureTotalScorePage({ params }: PageProps) {
   const { prefecture } = await params;
   const system = getTotalScoreSystem(prefecture);
   if (!system) {
-    notFound();
+    const explainer = getExplainer(prefecture);
+    if (!explainer) notFound();
+    return <TotalScoreExplainerView explainer={explainer} />;
   }
 
   const total = stableTotalMax(system);
