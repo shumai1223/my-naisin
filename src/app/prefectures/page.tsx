@@ -69,9 +69,9 @@ export default function PrefecturesPage() {
           </header>
 
           {/* Region Quick Links */}
-          <div className="mb-12 flex flex-wrap justify-center gap-2">
+          <div className="mb-8 flex flex-wrap justify-center gap-2">
             {REGIONS.map(region => (
-              <a 
+              <a
                 key={region}
                 href={`#region-${region}`}
                 className="rounded-full bg-white px-4 py-2 text-sm font-medium text-slate-600 border border-slate-200 shadow-sm hover:border-blue-300 hover:text-blue-600 transition-all"
@@ -80,6 +80,25 @@ export default function PrefecturesPage() {
               </a>
             ))}
           </div>
+
+          {/* 総合得点ハブへの導線 */}
+          <Link
+            href="/total-score"
+            className="mb-12 flex items-center justify-between gap-4 rounded-2xl border-2 border-blue-200 bg-gradient-to-r from-blue-50 to-violet-50 p-5 shadow-sm transition-all hover:shadow-md"
+          >
+            <div className="flex items-center gap-4">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-violet-700 text-white shadow">
+                <Target className="h-6 w-6" />
+              </div>
+              <div>
+                <div className="font-bold text-slate-800">都道府県別 総合得点・合否の仕組み（全47県）</div>
+                <p className="mt-0.5 text-sm text-slate-600">
+                  内申点＋当日点の合算方法・合否の決まり方を全県分まとめました。計算できる県は自動計算ツール付き。
+                </p>
+              </div>
+            </div>
+            <ChevronRight className="h-5 w-5 shrink-0 text-blue-400" />
+          </Link>
 
           {/* Grid of Regions */}
           <div className="space-y-12">
