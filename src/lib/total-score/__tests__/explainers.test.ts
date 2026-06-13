@@ -20,6 +20,18 @@ describe('total-score explainers (第2層)', () => {
     }
   });
 
+  it('ボリューム項目（overview・flow・faqs）が充実している（索引・GEO対策）', () => {
+    for (const e of Object.values(TOTAL_SCORE_EXPLAINERS)) {
+      expect(e.overview.length).toBeGreaterThan(60);
+      expect(e.flow.length).toBeGreaterThanOrEqual(3);
+      expect(e.faqs.length).toBeGreaterThanOrEqual(3);
+      for (const f of e.faqs) {
+        expect(f.q.length).toBeGreaterThan(8);
+        expect(f.a.length).toBeGreaterThan(30);
+      }
+    }
+  });
+
   it('第1層（計算機）と第2層（解説）は排他＝同じ県が両方に存在しない（ルート分岐の前提）', () => {
     for (const code of EXPLAINER_CODES) {
       expect(TOTAL_SCORE_SYSTEMS[code]).toBeUndefined();

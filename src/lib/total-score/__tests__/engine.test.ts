@@ -36,6 +36,35 @@ describe('total-score engine', () => {
     }
   });
 
+  describe('invariant: ボリューム項目（overview・computeSteps・faqs）が充実', () => {
+    for (const [code, system] of Object.entries(TOTAL_SCORE_SYSTEMS)) {
+      it(`${code}: overview・手順・FAQが揃っている`, () => {
+        expect(system.overview.length).toBeGreaterThan(60);
+        expect(system.computeSteps.length).toBeGreaterThanOrEqual(3);
+        expect(system.faqs.length).toBeGreaterThanOrEqual(3);
+        for (const f of system.faqs) {
+          expect(f.a.length).toBeGreaterThan(30);
+        }
+      });
+    }
+  });
+
+  describe('invariant: 計算例（examples）は engine と整合し満点を超えない', () => {
+    for (const [code, system] of Object.entries(TOTAL_SCORE_SYSTEMS)) {
+      for (const ex of system.examples ?? []) {
+        it(`${code}: ${ex.label} の総合得点が満点以内`, () => {
+          const r = computeTotalScore(system, {
+            academicRaw: ex.academicRaw,
+            reportRaw: ex.reportRaw,
+            ratioOptionId: ex.ratioOptionId,
+          });
+          expect(r.total).toBeLessThanOrEqual(r.totalMax);
+          expect(r.total).toBeGreaterThanOrEqual(0);
+        });
+      }
+    }
+  });
+
   // --- 兵庫（固定1:1・総合500） ---
   describe('兵庫', () => {
     const hyogo = getTotalScoreSystem('hyogo')!;

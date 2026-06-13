@@ -47,6 +47,26 @@ export interface TsRatioOption {
   note?: string;
 }
 
+/** よくある質問（県固有の数値で独自性を出す。FAQPageSchema にも使う）。 */
+export interface TsFaq {
+  q: string;
+  a: string;
+}
+
+/**
+ * 計算例（素点を入れると engine が総合得点を出す）。
+ * 数値は engine が計算するので捏造は起きない。data には入力値だけ持つ。
+ */
+export interface TsWorkedExample {
+  /** 見出し（例「内申オール4・当日点350点なら？」）。 */
+  label: string;
+  academicRaw: number;
+  reportRaw: number;
+  /** 使う比率オプションID（未指定なら既定）。 */
+  ratioOptionId?: string;
+  note?: string;
+}
+
 /** 県教委一次ソースの参照。 */
 export interface TsSource {
   url: string;
@@ -70,6 +90,14 @@ export interface TotalScoreSystem {
   report: TsReport;
   /** 比率オプション（先頭が既定）。固定式は1件。 */
   ratioOptions: TsRatioOption[];
+  /** ページ冒頭の制度概要（2〜4文。SEO/GEO用の本文）。 */
+  overview: string;
+  /** 総合得点の計算手順（番号付きで表示）。 */
+  computeSteps: string[];
+  /** 県固有のよくある質問（3件以上推奨）。 */
+  faqs: TsFaq[];
+  /** 計算例（engine で総合得点を出す。任意）。 */
+  examples?: TsWorkedExample[];
   source: TsSource;
   /** 学校別ボーダーは持たない（常に true・信頼の堀）。 */
   schoolBordersOmitted: true;
@@ -95,10 +123,18 @@ export interface TotalScoreExplainer {
   report: { targetGrades: number[]; rawMax?: number; note: string };
   /** 面接・特色検査などの概要（任意）。 */
   others?: string;
+  /** ページ冒頭の制度概要（2〜4文。SEO/GEO用の本文）。 */
+  overview: string;
   /** 合成方法の説明（なぜ単純な足し算で総合得点が出ないか）。 */
   composition: string;
+  /** 合否決定のステップ（番号付きフローで表示。相関図/段階選抜の核心＝独自コンテンツ）。 */
+  flow: string[];
   /** 第2層と判定した理由。 */
   tier2Reason: string;
+  /** 県固有のよくある質問（3件以上推奨）。 */
+  faqs: TsFaq[];
+  /** 受験生が実際にできること（合計点が出せない代わりの行動指針）。 */
+  whatToDo?: string[];
   /** ※前年度版・要確認 等の注記（任意）。 */
   caveat?: string;
   source: TsSource;

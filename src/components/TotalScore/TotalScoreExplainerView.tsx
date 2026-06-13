@@ -1,9 +1,10 @@
 import Link from 'next/link';
-import { ChevronRight, Home, BookOpen, AlertCircle, ExternalLink, Info, Network } from 'lucide-react';
+import { ChevronRight, Home, BookOpen, AlertCircle, ExternalLink, Info, Network, ListOrdered, HelpCircle, CheckCircle2 } from 'lucide-react';
 
 import type { TotalScoreExplainer } from '@/lib/total-score/types';
 import { selectLeadOffer } from '@/lib/lead-config';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
+import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 
@@ -35,6 +36,9 @@ export function TotalScoreExplainerView({ explainer: e }: { explainer: TotalScor
           { name: '総合得点・合否の仕組み', url },
         ]}
       />
+      {e.faqs.length > 0 && (
+        <FAQPageSchema faqItems={e.faqs.map((f) => ({ question: f.q, answer: f.a }))} />
+      )}
 
       <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
@@ -69,6 +73,11 @@ export function TotalScoreExplainerView({ explainer: e }: { explainer: TotalScor
               このページでは、配点と「どう合否が決まるか」を一次情報に基づいて正確に解説します。
             </p>
           </header>
+
+          {/* 制度概要（本文・SEO/GEO） */}
+          <section className="mb-8 rounded-2xl border border-violet-100 bg-violet-50/40 p-6">
+            <p className="leading-loose text-slate-700">{e.overview}</p>
+          </section>
 
           {/* なぜ計算機が無いか（正直な説明＝信頼の堀） */}
           <section className="mb-8 rounded-2xl border-2 border-violet-200 bg-violet-50/60 p-6 shadow-sm">
@@ -129,6 +138,44 @@ export function TotalScoreExplainerView({ explainer: e }: { explainer: TotalScor
             )}
           </section>
 
+          {/* 合否決定の流れ（番号付きフロー＝独自コンテンツ） */}
+          {e.flow.length > 0 && (
+            <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
+                <ListOrdered className="h-5 w-5 text-violet-500" />
+                {e.name}の合否が決まるまでの流れ
+              </h2>
+              <ol className="space-y-3">
+                {e.flow.map((step, i) => (
+                  <li key={i} className="flex gap-3">
+                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-violet-600 text-sm font-bold text-white">
+                      {i + 1}
+                    </span>
+                    <span className="pt-0.5 text-sm leading-relaxed text-slate-700">{step}</span>
+                  </li>
+                ))}
+              </ol>
+            </section>
+          )}
+
+          {/* 受験生が今できること */}
+          {e.whatToDo && e.whatToDo.length > 0 && (
+            <section className="mb-8 rounded-2xl border border-emerald-200 bg-emerald-50/50 p-6">
+              <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
+                <CheckCircle2 className="h-5 w-5 text-emerald-600" />
+                合計点が出せない代わりに、今できること
+              </h2>
+              <ul className="space-y-2">
+                {e.whatToDo.map((item, i) => (
+                  <li key={i} className="flex gap-2 text-sm leading-relaxed text-slate-700">
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-500" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+
           {/* 結果保存・名簿化（堀A） */}
           <SaveResultCTA
             source="prefecture"
@@ -163,6 +210,30 @@ export function TotalScoreExplainerView({ explainer: e }: { explainer: TotalScor
               </p>
             </div>
           </div>
+
+          {/* よくある質問（FAQ・県固有） */}
+          {e.faqs.length > 0 && (
+            <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
+                <HelpCircle className="h-5 w-5 text-violet-500" />
+                {e.name}の入試 よくある質問
+              </h2>
+              <div className="space-y-4">
+                {e.faqs.map((f, i) => (
+                  <div key={i} className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                    <h3 className="mb-2 flex gap-2 text-sm font-bold text-slate-800">
+                      <span className="text-violet-600">Q.</span>
+                      {f.q}
+                    </h3>
+                    <p className="flex gap-2 text-sm leading-relaxed text-slate-600">
+                      <span className="font-bold text-emerald-600">A.</span>
+                      <span>{f.a}</span>
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
 
           {/* 関連リンク */}
           <section className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-6">
