@@ -114,6 +114,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/tools" className="hover:text-blue-600 flex items-center gap-1">
+                  全ツール一覧（受験対策ツール集） <ChevronRight className="h-3 w-3 opacity-30" />
+                </Link>
+              </li>
+              <li>
                 <Link href="/prefectures" className="text-blue-600 font-bold flex items-center gap-1 mt-2">
                   すべての都道府県を見る <ChevronRight className="h-3 w-3" />
                 </Link>

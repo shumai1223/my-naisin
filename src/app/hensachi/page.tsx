@@ -12,6 +12,7 @@ import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { HensachiCalculator } from '@/components/Hensachi/HensachiCalculator';
 import { HensachiClusterNav } from '@/components/Hensachi/HensachiClusterNav';
+import { ToolClusterNav } from '@/components/ToolClusterNav';
 
 // 偏差値 → 上位%・順位（正規分布に基づく数学的に厳密な対応値。偏差値の標準偏差=10で算出）
 const PERCENTILE_ROWS: { h: string; top: string; r300: string; r1000: string; note?: string }[] = [
@@ -1192,6 +1193,8 @@ export default function HensachiPage() {
               </Link>
             </div>
           </section>
+
+          <ToolClusterNav current="hensachi" className="mt-8" />
         </div>
       </div>
     </>

@@ -10,6 +10,7 @@ import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { HyoteiHeikinCalculator } from '@/components/HyoteiHeikin/HyoteiHeikinCalculator';
+import { ToolClusterNav } from '@/components/ToolClusterNav';
 
 const HYOTEI_FAQS = [
   {
@@ -1260,6 +1261,8 @@ export default function HyoteiHeikinPage() {
               </Link>
             </div>
           </section>
+
+          <ToolClusterNav current="hyotei-heikin" className="mt-8" />
         </div>
       </div>
     </>
