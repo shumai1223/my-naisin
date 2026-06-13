@@ -2,6 +2,7 @@ import { MetadataRoute } from 'next';
 import { PREFECTURES } from '@/lib/prefectures';
 import { BLOG_POSTS } from '@/lib/blog-data';
 import { PREFECTURES_WITH_GUIDE } from '@/lib/prefecture-guides';
+import { VERIFIED_TOTAL_SCORE_CODES } from '@/lib/total-score/registry';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://my-naishin.com';
@@ -82,10 +83,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
+  // 5. 第1層（検証済み）の総合得点ページ（registry の allowlist から自動生成。県を足すと自動で載る）
+  const totalScorePages = VERIFIED_TOTAL_SCORE_CODES.map(code => ({
+    url: `${baseUrl}/${code}/total-score`,
+    lastModified,
+    changeFrequency: 'weekly' as const,
+    priority: 1.0,
+  }));
+
   return [
     ...staticPages,
     ...prefectureTopPages,
     ...prefectureNaishinPages,
     ...blogPages,
+    ...totalScorePages,
   ];
 }
