@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { MessageCircle, Mail, BellRing, Check, Loader2, ShieldCheck, Bookmark } from 'lucide-react';
 
 import { track } from '@/lib/track';
+import { lineAddUrl, type LineAudience } from '@/lib/line';
 import { isValidEmail, openLeadMailtoFallback, submitLead, type LeadPayload, type LeadSource } from '@/lib/lead';
 
 interface SaveResultCTAProps {
@@ -19,13 +20,10 @@ interface SaveResultCTAProps {
   heading?: string;
   /** 補足文の上書き */
   body?: string;
+  /** 名簿の対象（生徒/保護者）。保護者面では 'parent' を渡すと保護者用LINEアカウントへ分離。既定 'student'。 */
+  audience?: LineAudience;
   className?: string;
 }
-
-// LINE公式アカウントの友だち追加URL（例: https://lin.ee/xxxxxxx）。
-// LINE公式アカウントの友だち追加URL（公開情報のため直書き＝ビルド変数事故なしで確実に点灯）。
-// 別アカウントに差し替える場合は環境変数 NEXT_PUBLIC_LINE_ADD_URL が優先される。
-const LINE_ADD_URL = process.env.NEXT_PUBLIC_LINE_ADD_URL || 'https://lin.ee/8tQMAxX';
 
 type Status = 'idle' | 'submitting' | 'success' | 'fallback' | 'error';
 
@@ -48,8 +46,10 @@ export function SaveResultCTA({
   gap,
   heading,
   body,
+  audience = 'student',
   className = '',
 }: SaveResultCTAProps) {
+  const LINE_ADD_URL = lineAddUrl(audience);
   const [email, setEmail] = React.useState('');
   const [consent, setConsent] = React.useState(false);
   const [status, setStatus] = React.useState<Status>('idle');

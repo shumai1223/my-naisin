@@ -193,9 +193,12 @@ export function ResultSection({
                 className="group inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-3.5 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:shadow-lg active:scale-95 md:w-auto"
               >
                 <Send className="h-4 w-4" />
-                この結果をおうちの人に送る
+                成績レポートをおうちの人に送る
                 <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </button>
+              <p className="text-[11px] leading-snug text-slate-500 md:text-right">
+                受験の相談用に、結果をまとめて共有できます
+              </p>
               <div className="flex w-full gap-2 md:w-auto">
                 <Button
                   variant="secondary"

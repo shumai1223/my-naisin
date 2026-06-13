@@ -9,8 +9,13 @@
  * 優先度（具体的なものが勝つ）：
  *   全体既定 < 面の既定 < 県の勝者 < 県×面の勝者
  *
- * 重要：既定（DEFAULT_LEAD_OFFER）は現行 ParentLeadCTA の表示と完全一致させてある。
- * → 勝者を設定するまで挙動は一切変わらない（安全に後から最適化していける器）。
+ * 【2026-06-13 初期勝者の仮置き】Z会一本足を解消し、今日から GA4 で program×placement を学習する。
+ *   - result（最高インテント）→ そら塾（オンライン個別の無料体験。全国オンライン対応で県を選ばない）
+ *   - parent-lp（保護者LP）→ atama＋（AI塾の無料体験。全国オンライン対応）
+ *   - 関西の県 → 個別指導キャンパス（関西地盤）／関東の県 → 森塾（関東地盤）を県オーバーライドで割当
+ *   - 最大流入面（hensachi / hyotei-heikin / home / blog）は安全側の Z会 資料請求（無料）を維持＝クリーンな対照群
+ *  すべて A8 の「無料体験／無料資料請求」型（live）で、有料バナーではない＝戦略に整合。
+ *  勝者が出たら affiliateId をこの表で差し替えるだけ（コンポーネントは無改修）。
  */
 
 import type { AffiliateId } from '@/lib/affiliates';
@@ -23,6 +28,8 @@ export type LeadPlacement =
   | 'parent-lp' // 保護者LP（/hogosha）
   | 'blog' // 記事内
   | 'dashboard' // 成績ダッシュボード（継続トラッキング＝高インテント）
+  | 'hiyou' // 学費・塾代クラスタ（保護者が検索者本人＝権限ズレゼロの本命面）
+  | 'mendan' // 三者面談パック（保護者が検索者・7月/12月の二毛作）
   | 'home'; // トップ
 
 export interface LeadOffer {
@@ -48,45 +55,94 @@ export const DEFAULT_LEAD_OFFER: LeadOffer = {
   ctaText: '無料で資料をもらう',
 };
 
+/** 送客先プログラムごとの note / ctaText（表記ゆれ・ミスラベルを防ぐ単一ソース）。 */
+const PROGRAM_PRESET: Partial<Record<AffiliateId, Pick<LeadOffer, 'note' | 'ctaText'>>> = {
+  'sora-juku-text': { note: 'そら塾（オンライン個別指導）の無料体験（PR）', ctaText: '無料体験を申し込む' },
+  'atama-text': { note: 'atama＋ オンライン塾の無料体験（PR）', ctaText: '無料体験を申し込む' },
+  'campus-text': { note: '個別指導キャンパスの無料体験・資料請求（PR）', ctaText: '無料体験を申し込む' },
+  'morijuku-text': { note: '森塾の無料体験授業（PR）', ctaText: '無料体験を申し込む' },
+  'zkai-text-request': { note: 'Z会の通信教育の資料請求（PR）／無料', ctaText: '無料で資料をもらう' },
+  'zkai-daigaku': { note: 'Z会 高校生・大学受験生向けの資料請求（PR）／無料', ctaText: '無料で資料をもらう' },
+};
+
+/** プログラムIDから note/ctaText を補完したオファー断片を作る（割当ミスを防ぐ）。 */
+function offerFor(affiliateId: AffiliateId, copy: Pick<LeadOffer, 'heading' | 'body'>): Partial<LeadOffer> {
+  return { affiliateId, ...PROGRAM_PRESET[affiliateId], ...copy };
+}
+
 /**
- * 面ごとの既定（文脈最適化）。プログラムは安全のため既定（Z会資料請求）を踏襲し、
- * コピーだけ面の文脈に寄せる。GA4で勝てる無料体験案件が見つかったら affiliateId を差し替える。
+ * 面ごとの既定（文脈最適化）。
+ * 最大流入面（hensachi/hyotei-heikin）は安全側の Z会（既定）を維持し、コピーだけ損失回避で締める。
+ * 高インテント面（result/parent-lp）には無料体験案件を割当てて GA4 で勝者を学習する。
  */
 export const PLACEMENT_LEAD_OVERRIDES: Partial<Record<LeadPlacement, Partial<LeadOffer>>> = {
-  result: {
-    heading: '結果が出た今が、対策の始めどきです',
-    body: '内申点・偏差値は「今からの伸ばし方」で変わります。志望校との差を埋める家庭学習の進め方を、まずは無料の資料でご確認ください。請求は数分・費用はかかりません。',
-  },
+  // 最高インテント面。結果が出た直後の保護者に「全国オンラインの無料体験」をぶつけて学習開始。
+  result: offerFor('sora-juku-text', {
+    heading: '結果が出た今が、対策の“始めどき”です',
+    body: '内申点・偏差値の差は、動き出すのが遅いほど取り戻すのが大変になります。間に合ううちに、まずは無料体験で「今の学力で何が足りないか」を見える化しませんか。オンライン対応・費用はかかりません。',
+  }),
+  // 保護者LP。決裁者である保護者に AI塾の無料体験を提示。
+  'parent-lp': offerFor('atama-text', {
+    heading: 'お子さまの志望校合格を、ご家庭からあと押し',
+    body: '「やり方が分からないまま時間だけが過ぎる」のが、いちばんもったいない失点です。AIが弱点だけを狙って学習をつくる無料体験で、最短ルートをまず確認してみませんか。費用はかかりません。',
+  }),
+  // ── 以下は安全側の Z会（既定）を維持し、コピーだけ損失回避で締める ──
   hensachi: {
-    heading: '偏差値を上げる「正しい順番」、ご存じですか？',
-    body: '偏差値は学習量より「やり方」で伸びが大きく変わります。お子さまに合った伸ばし方を、まずは無料の資料で確認してみませんか。',
+    heading: '偏差値、間違った順番で勉強していませんか？',
+    body: '偏差値は学習“量”より“やり方”で伸びが大きく変わります。遠回りで時間を失う前に、お子さまに合った伸ばし方を無料の資料で確認してみませんか。',
   },
   'hyotei-heikin': {
-    heading: '評定平均（内申）は、推薦のカギを握ります',
-    body: '評定平均は日々の積み重ねで決まります。今からできる対策と推薦の基準を、無料の資料でまとめて確認できます。',
+    heading: '評定平均は、あとから取り返しにくい数字です',
+    body: '評定平均（内申）は日々の積み重ねで決まり、下がってからでは戻すのに学期単位の時間がかかります。今からできる対策と推薦の基準を、無料の資料でまとめて確認できます。',
   },
   prefecture: {
-    heading: 'この地域の入試、お子さまの成績で届きますか？',
-    body: '都道府県ごとに内申点の比重は大きく異なります。志望校との差を埋める家庭学習の進め方を、まずは無料の資料でご確認ください。',
-  },
-  'parent-lp': {
-    heading: 'お子さまの志望校合格を、ご家庭からあと押し',
-    body: '内申点・偏差値の伸ばし方はご家庭の関わりで変わります。費用をかけずに始められる対策から、無料の資料で確認してみませんか。',
+    heading: 'この地域の入試、お子さまの成績で本当に届きますか？',
+    body: '都道府県ごとに内申点の比重は大きく異なり、同じ偏差値でも合否が分かれます。志望校との差を埋める家庭学習の進め方を、まずは無料の資料でご確認ください。',
   },
   dashboard: {
-    heading: '成績の「伸び」を、合格まで届く伸びに',
-    body: '記録をつけて伸びが見えてきた今が、次の一手を打つ好機です。中1→中3の積み上げを志望校ラインまで届かせる家庭学習の進め方を、まずは無料の資料でご確認ください。',
+    heading: '積み上げた“伸び”を、合格まで届く伸びに',
+    body: '記録で伸びが見えてきた今が、次の一手の好機です。ここで止めると差は開く一方です。中1→中3の積み上げを志望校ラインまで届かせる進め方を、無料の資料でご確認ください。',
+  },
+  hiyou: offerFor('zkai-daigaku', {
+    heading: '高校3年間にかかるお金、把握できていますか？',
+    body: '私立・公立で学費は大きく変わり、塾代まで含めると総額は数百万円規模になります。早めに「我が家の進路でいくら必要か」を見える化しておくと、選択肢を狭めずに済みます。まずは無料の資料で確認を。',
+  }),
+  mendan: {
+    heading: '三者面談の前に、ご家庭の“現在地”を整理しておきませんか',
+    body: '面談は限られた時間です。志望校との差・今からできる対策を事前に把握しておくと、先生に的確に相談でき、貴重な面談を最大限に活かせます。無料の資料で要点を確認しておきましょう。',
   },
 };
 
 /**
  * 県の勝者（GA4の affiliate_click/lead_submit を県別に見て、効いた案件をここに固定していく）。
- * 例：塾の無料体験で校舎カバレッジの高い県は、その塾の text/banner を割り当てる。
- * 現状は空（=既定にフォールバック）。データが出たら1行ずつ埋める運用。
+ * 【初期割当】地盤の塾を地域に割当。関西=個別指導キャンパス／関東=森塾。
+ * （いずれも A8 の無料体験／資料請求。校舎カバレッジが高い地域＝CVRが出やすい仮説をGA4で検証）。
  */
+const KANSAI_CAMPUS = offerFor('campus-text', {
+  heading: 'この地域の入試、お子さまの成績で届きますか？',
+  body: '内申の比重が地域で異なる中、合否ラインまでの距離は早く知るほど対策が打てます。関西で校舎数の多い個別指導の無料体験で、今の弱点を見える化しませんか。費用はかかりません。',
+});
+const KANTO_MORI = offerFor('morijuku-text', {
+  heading: 'この地域の入試、お子さまの成績で届きますか？',
+  body: '内申の比重が地域で異なる中、合否ラインまでの距離は早く知るほど対策が打てます。関東で校舎数の多い個別指導の無料体験授業で、今の弱点を見える化しませんか。費用はかかりません。',
+});
+
 export const PREFECTURE_LEAD_OVERRIDES: Partial<Record<string, Partial<LeadOffer>>> = {
-  // 例（コメントのまま・有効化はGA4の勝者確定後）:
-  // tokyo: { affiliateId: 'sora-juku-text', note: 'そら塾の無料体験（PR）／オンライン対応', ctaText: '無料体験を申し込む' },
+  // 関西（個別指導キャンパスの地盤）
+  osaka: KANSAI_CAMPUS,
+  hyogo: KANSAI_CAMPUS,
+  kyoto: KANSAI_CAMPUS,
+  nara: KANSAI_CAMPUS,
+  shiga: KANSAI_CAMPUS,
+  wakayama: KANSAI_CAMPUS,
+  // 関東（森塾の地盤）
+  tokyo: KANTO_MORI,
+  kanagawa: KANTO_MORI,
+  saitama: KANTO_MORI,
+  chiba: KANTO_MORI,
+  ibaraki: KANTO_MORI,
+  tochigi: KANTO_MORI,
+  gunma: KANTO_MORI,
 };
 
 /**

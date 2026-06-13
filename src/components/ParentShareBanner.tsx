@@ -50,11 +50,11 @@ export function ParentShareBanner() {
     <section className="mb-8 overflow-hidden rounded-2xl border-2 border-blue-200 bg-gradient-to-br from-blue-50 via-indigo-50/70 to-white p-6 shadow-sm md:p-7">
       <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-bold text-blue-700 ring-1 ring-blue-200">
         <Inbox className="h-3.5 w-3.5" />
-        お子さまから結果が届きました
+        お子さまから成績レポートが届きました
       </div>
 
       <h2 className="mb-2 text-xl font-bold leading-snug text-slate-900 md:text-2xl">
-        {prefectureName ? `${prefectureName}の` : ''}内申点の計算結果が共有されました
+        {prefectureName ? `${prefectureName}の` : ''}内申点の成績レポートが届きました
       </h2>
 
       {hasScore && (

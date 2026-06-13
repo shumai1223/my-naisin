@@ -57,12 +57,12 @@ export function buildParentShareUrl(origin: string, ctx: ParentShareContext): st
 export function buildParentShareMessage(ctx: Pick<ParentShareContext, 'target' | 'gap' | 'label'>): string {
   if (isNum(ctx.gap) && ctx.gap > 0) {
     const where = ctx.label ? `${ctx.label}` : '目標';
-    return `内申点を計算したよ。${where}まであと${Math.round(ctx.gap)}点。受験のこと、おうちの人に相談したくて送りました。`;
+    return `内申点の成績レポートを送ります。${where}まであと${Math.round(ctx.gap)}点。受験のこと、おうちの人に相談したくて。`;
   }
   if (isNum(ctx.gap) && ctx.gap <= 0 && isNum(ctx.target)) {
-    return '内申点を計算したよ。今のところ目標に届いてた！この調子で続けたいから見てね。';
+    return '内申点の成績レポートを送ります。今のところ目標に届いてた！この調子で続けたいから見てね。';
   }
-  return '内申点を計算したよ。受験のこと、一緒に考えてほしくて送りました。';
+  return '内申点の成績レポートを送ります。受験のこと、一緒に考えてほしくて。';
 }
 
 export interface ParsedParentShare {

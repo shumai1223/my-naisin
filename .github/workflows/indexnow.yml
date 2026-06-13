@@ -1,0 +1,63 @@
+name: IndexNow ping
+
+# 新規/更新URLを Bing・Yandex に即時通知（ChatGPT Search=Bingインデックス対策の本体）。
+# 本番(Cloudflare Workers)はpushで自動デプロイされるため、push後に少し待ってから
+# 本番sitemapを取得→既知スナップショットとの差分(新規URL)だけを IndexNow へ送る。
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/app/sitemap.ts'
+      - 'src/lib/prefectures.ts'
+      - 'src/lib/blog-data.ts'
+      - 'src/lib/blog/**'
+      - 'src/lib/prefecture-guides.ts'
+  workflow_dispatch:
+    inputs:
+      all:
+        description: 'sitemapの全URLを再送信する'
+        type: boolean
+        default: false
+  schedule:
+    - cron: '30 1 * * *' # 毎日 UTC1:30（取りこぼし防止のセーフティネット）
+
+permissions:
+  contents: write
+
+concurrency:
+  group: indexnow
+  cancel-in-progress: false
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Wait for Cloudflare Workers deploy
+        if: github.event_name == 'push'
+        run: sleep 120
+
+      - name: IndexNow ping
+        run: node scripts/indexnow.mjs ${{ inputs.all && '--all' || '' }}
+        env:
+          INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
+
+      - name: Commit updated snapshot
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if ! git diff --quiet -- .indexnow/known-urls.json; then
+            git add .indexnow/known-urls.json
+            git commit -m "chore(indexnow): update known-urls snapshot [skip ci]"
+            git push
+          else
+            echo "snapshot unchanged"
+          fi

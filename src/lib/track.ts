@@ -59,6 +59,8 @@ export const EVENTS = {
   SCROLL_DEPTH: 'scroll_depth',
   RAGE_CLICK: 'rage_click',
   REVERSE_CALC_USE: 'reverse_calc_use', // 逆算ツールの利用
+  // ── AI送客（GEO）計装 ──
+  AI_REFERRAL: 'ai_referral', // ChatGPT/Perplexity/Copilot 等のAI経由の着地（GEOのROI可視化）
   // ── 実験基盤 ──
   EXPERIMENT_IMPRESSION: 'experiment_impression',
 } as const;
@@ -100,6 +102,67 @@ export const funnel = {
   leadSubmit: (ctx: FunnelContext = {}, extra: TrackParams = {}) =>
     track(EVENTS.LEAD_SUBMIT, { ...ctxParams(ctx), ...extra }),
 };
+
+/* ────────────────────────────────────────────────────────────────────────
+ * AI送客（GEO）の判定
+ *
+ * ChatGPT Search / Perplexity / Copilot 等から着地したかを referrer・URLパラメータで判定する。
+ * AI経由の実数を可視化しないと「GEO（堀B/引用最適化）に投資すべきか」の意思決定が盲目になる。
+ * 純粋関数（window非依存）＝ユニットテスト可能。判定不能なら null。
+ * ──────────────────────────────────────────────────────────────────────── */
+const AI_REFERRER_PATTERNS: { source: string; test: RegExp }[] = [
+  { source: 'chatgpt', test: /(^|\.)chatgpt\.com$|(^|\.)chat\.openai\.com$|(^|\.)openai\.com$/ },
+  { source: 'perplexity', test: /(^|\.)perplexity\.ai$/ },
+  { source: 'copilot', test: /(^|\.)copilot\.microsoft\.com$|(^|\.)bing\.com$/ },
+  { source: 'gemini', test: /(^|\.)gemini\.google\.com$|(^|\.)bard\.google\.com$/ },
+  { source: 'claude', test: /(^|\.)claude\.ai$/ },
+  { source: 'you', test: /(^|\.)you\.com$/ },
+  { source: 'felo', test: /(^|\.)felo\.ai$/ },
+  { source: 'genspark', test: /(^|\.)genspark\.ai$/ },
+];
+
+/** 多くのAIアシスタントは utm_source / ref に自分のドメインを載せる（referrerが空でも拾える）。 */
+function aiSourceFromParam(value: string): string | null {
+  const v = value.toLowerCase();
+  for (const { source, test } of AI_REFERRER_PATTERNS) {
+    // utm値は 'chatgpt.com' のようなホスト名 or 'chatgpt' のような素の名前が来る
+    if (test.test(v) || v === source) return source;
+  }
+  return null;
+}
+
+/**
+ * referrer（document.referrer）と URL のクエリ文字列から AI送客元を判定する。
+ * @param referrer document.referrer（フルURL or 空文字）
+ * @param locationSearch window.location.search（'?utm_source=chatgpt.com' 等）
+ */
+export function classifyAiReferrer(referrer: string, locationSearch = ''): string | null {
+  // 1) referrer のホスト名で判定
+  if (referrer) {
+    try {
+      const host = new URL(referrer).hostname.toLowerCase();
+      for (const { source, test } of AI_REFERRER_PATTERNS) {
+        if (test.test(host)) return source;
+      }
+    } catch {
+      /* 不正なURLは無視してパラメータ判定にフォールバック */
+    }
+  }
+  // 2) utm_source / ref / source パラメータで判定（referrerが落ちるAIアプリ内ブラウザ対策）
+  try {
+    const params = new URLSearchParams(locationSearch);
+    for (const key of ['utm_source', 'ref', 'source', 'referrer']) {
+      const val = params.get(key);
+      if (val) {
+        const src = aiSourceFromParam(val);
+        if (src) return src;
+      }
+    }
+  } catch {
+    /* no-op */
+  }
+  return null;
+}
 
 /** スクロール深度（25/50/75/100）を一度ずつ送る計装をページに仕込む。返り値で解除。SSR安全。 */
 export function installScrollDepthTracking(ctx: FunnelContext = {}): () => void {

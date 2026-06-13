@@ -21,16 +21,29 @@ describe('selectLeadOffer', () => {
     expect(DEFAULT_LEAD_OFFER.ctaText).toBe('無料で資料をもらう');
   });
 
-  test('面の既定はコピーを上書きしつつ送客先は維持する', () => {
+  test('result面は初期勝者（liveな無料体験案件）に出し分け、コピーも文脈化される', () => {
     const offer = selectLeadOffer({ placement: 'result' });
-    expect(offer.affiliateId).toBe(DEFAULT_LEAD_OFFER.affiliateId);
+    // Z会一本足を解消：result は別のlive案件に出し分ける
+    expect(offer.affiliateId).not.toBe(DEFAULT_LEAD_OFFER.affiliateId);
+    expect(isLiveAffiliate(offer.affiliateId)).toBe(true);
     expect(offer.heading).toBe(PLACEMENT_LEAD_OVERRIDES.result?.heading);
     expect(offer.heading).not.toBe(DEFAULT_LEAD_OFFER.heading);
+    // note/ctaText が affiliateId と整合（プログラムプリセットでミスラベル防止）
+    expect(offer.note).toContain('PR');
+    expect(offer.ctaText).toBeTruthy();
   });
 
-  test('未設定の県は既定にフォールバックする', () => {
+  test('未設定の県（面指定なし）は既定にフォールバックする', () => {
     const offer = selectLeadOffer({ prefectureCode: 'okinawa' });
     expect(offer.affiliateId).toBe(DEFAULT_LEAD_OFFER.affiliateId);
+  });
+
+  test('県オーバーライド（関東/関西）は live な地盤塾に解決する', () => {
+    for (const pref of ['tokyo', 'osaka', 'hyogo', 'kanagawa']) {
+      const offer = selectLeadOffer({ prefectureCode: pref, placement: 'prefecture' });
+      expect(isLiveAffiliate(offer.affiliateId)).toBe(true);
+      expect(offer.note).toContain('PR');
+    }
   });
 
   test('全ての解決オファーは live な案件のみ（pendingの先回し枠を出さない）', () => {
