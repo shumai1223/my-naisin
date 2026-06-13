@@ -61,6 +61,9 @@ export const EVENTS = {
   REVERSE_CALC_USE: 'reverse_calc_use', // 逆算ツールの利用
   // ── AI送客（GEO）計装 ──
   AI_REFERRAL: 'ai_referral', // ChatGPT/Perplexity/Copilot 等のAI経由の着地（GEOのROI可視化）
+  // ── 名簿velocity（離脱直前の最後の捕捉） ──
+  EXIT_INTENT_VIEW: 'exit_intent_view', // 退出インテントでLINE誘導モーダルを表示
+  EXIT_INTENT_DISMISS: 'exit_intent_dismiss', // 閉じた（出し過ぎ検知の分母）
   // ── 実験基盤 ──
   EXPERIMENT_IMPRESSION: 'experiment_impression',
 } as const;
