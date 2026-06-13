@@ -2,8 +2,8 @@ import { TOTAL_SCORE_EXPLAINERS, EXPLAINER_CODES, getExplainer } from '../explai
 import { TOTAL_SCORE_SYSTEMS } from '../registry';
 
 describe('total-score explainers (第2層)', () => {
-  it('20県が登録されている（wave1: 9県 ＋ wave2: 11県）', () => {
-    expect(EXPLAINER_CODES).toHaveLength(20);
+  it('第2層31県すべてが登録されている（wave1:9 ＋ wave2:11 ＋ wave3:11）', () => {
+    expect(EXPLAINER_CODES).toHaveLength(31);
   });
 
   it('必須項目が埋まっている（捏造ゼロ・出典必須）', () => {
