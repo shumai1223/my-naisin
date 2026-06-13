@@ -20,7 +20,10 @@ export type AffiliateId =
   | 'afb-juku-trial'
   | 'accesstrade-juku-trial'
   | 'rentracks-juku-trial'
-  | 'afb-katei-kyoshi';
+  | 'afb-katei-kyoshi'
+  // ── 学費クラスタの最高単価帯（保護者＝決裁者・無料相談/資料請求。CPA¥8k–1.5万） ──
+  | 'fp-soudan'
+  | 'gakushi-hoken';
 
 /** 'pending' は枠だけ確保した未確定案件。AffiliateAd は描画せず（デッドリンクを出さない）、selectLeadOffer も返さない。 */
 type AffiliateStatus = 'live' | 'pending';
@@ -246,6 +249,27 @@ export const AFFILIATES: Record<AffiliateId, AffiliateConfig> = {
     name: '家庭教師の無料体験（afb）',
     href: '#',
     text: '無料体験・資料請求をする',
+    trackingPixel: '',
+    status: 'pending',
+  },
+  // ── 学費クラスタの最高単価帯（先回し枠／元栓が開いたら status:'live' + href/pixel を差すだけ） ──
+  // 保護者の最大関心=お金。教育資金FPの無料相談・学資保険の一括資料請求は CPA¥8,000–15,000 で最高単価帯。
+  // lead-config の 'hiyou' 面（/koukou-hiyou・/juku-hiyou）の送客先をここに張り替える想定。
+  'fp-soudan': {
+    id: 'fp-soudan',
+    type: 'text',
+    name: '教育資金の無料FP相談',
+    href: '#',
+    text: '教育資金の無料相談をする',
+    trackingPixel: '',
+    status: 'pending',
+  },
+  'gakushi-hoken': {
+    id: 'gakushi-hoken',
+    type: 'text',
+    name: '学資保険の一括資料請求',
+    href: '#',
+    text: '学資保険の資料を無料で取り寄せる',
     trackingPixel: '',
     status: 'pending',
   },

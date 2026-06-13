@@ -120,6 +120,10 @@ describe('answerQuery（拡張した一般FAQの網羅）', () => {
     ['内申点は何年生から対象？', '内申点の対象学年', '/blog/naishin-target-grades-by-prefecture'],
     ['オール4で行ける高校は？', 'オール4で行ける高校', '/hensachi/shiboukou'],
     ['オール5で行ける高校', 'オール5で行ける高校', '/hensachi/shiboukou'],
+    ['三者面談で先生に聞くことは？', '三者面談の準備', '/mendan'],
+    ['当日点・総合得点とは？', '当日点・総合得点とは', '/reverse'],
+    ['中学生の塾代はいくら？', '中学生の塾代の相場', '/juku-hiyou'],
+    ['高校3年間の費用の目安は？', '高校の費用の目安', '/koukou-hiyou'],
   ])('「%s」→ %s', (q, title, href) => {
     const a = answerQuery(q);
     expect(a?.kind).toBe('general');

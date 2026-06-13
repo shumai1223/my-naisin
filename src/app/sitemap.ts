@@ -29,6 +29,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: '/fukuoka/total-score', priority: 1.0, changeFrequency: 'weekly' },
     { url: '/hokkaido/rank', priority: 1.0, changeFrequency: 'weekly' },
     { url: '/koukou-hiyou', priority: 0.9, changeFrequency: 'weekly' },
+    { url: '/juku-hiyou', priority: 0.9, changeFrequency: 'weekly' },
     { url: '/dashboard', priority: 0.7, changeFrequency: 'monthly' },
     { url: '/ask', priority: 0.8, changeFrequency: 'weekly' },
     { url: '/hogosha', priority: 0.9, changeFrequency: 'weekly' },

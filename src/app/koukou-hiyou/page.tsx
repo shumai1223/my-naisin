@@ -129,6 +129,8 @@ export default function KoukouHiyouPage() {
         <section className="mt-10">
           <h2 className="mb-3 text-lg font-bold text-slate-900">関連ツール</h2>
           <div className="grid gap-3 sm:grid-cols-2">
+            <Link href="/juku-hiyou" className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-4 text-sm font-bold text-slate-900 shadow-sm hover:border-blue-200">塾代シミュレーター（相場・総額）→</Link>
+            <Link href="/mendan" className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-4 text-sm font-bold text-slate-900 shadow-sm hover:border-blue-200">三者面談の準備チェックリスト →</Link>
             <Link href="/" className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-4 text-sm font-bold text-slate-900 shadow-sm hover:border-blue-200">内申点を計算する →</Link>
             <Link href="/hensachi" className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-4 text-sm font-bold text-slate-900 shadow-sm hover:border-blue-200">偏差値を計算する →</Link>
           </div>
