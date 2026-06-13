@@ -2,8 +2,8 @@ import { TOTAL_SCORE_EXPLAINERS, EXPLAINER_CODES, getExplainer } from '../explai
 import { TOTAL_SCORE_SYSTEMS } from '../registry';
 
 describe('total-score explainers (第2層)', () => {
-  it('第2層31県すべてが登録されている（wave1:9 ＋ wave2:11 ＋ wave3:11）', () => {
-    expect(EXPLAINER_CODES).toHaveLength(31);
+  it('解説ページ34県が登録されている（第2層31 ＋ 計算確証不十分の岩手・滋賀・大分）', () => {
+    expect(EXPLAINER_CODES).toHaveLength(34);
   });
 
   it('必須項目が埋まっている（捏造ゼロ・出典必須）', () => {
