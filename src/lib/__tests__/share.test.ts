@@ -7,6 +7,8 @@ import {
   buildParentShareUrl,
   buildParentShareMessage,
   parseParentShare,
+  encodeSharePayload,
+  decodeSharePayload,
 } from '@/lib/share';
 
 describe('buildParentSharePath / Url', () => {
@@ -61,6 +63,51 @@ describe('buildParentShareMessage', () => {
   test('目標なしは汎用の相談メッセージ', () => {
     const msg = buildParentShareMessage({ target: null, gap: null });
     expect(msg).toContain('一緒に考えてほしくて');
+  });
+});
+
+describe('encode/decodeSharePayload（?d= compact・UTF-8安全・壊れた入力は無視）', () => {
+  test('日本語を含む文脈をroundtripできる', () => {
+    const enc = encodeSharePayload({
+      prefectureCode: 'osaka',
+      prefectureName: '大阪府',
+      score: 38,
+      max: 45,
+      target: 41,
+      gap: 3,
+      grade: 3,
+      label: '北野の目安',
+    });
+    expect(enc).toMatch(/^[A-Za-z0-9_-]+$/); // base64url（+/=を含まない）
+    const dec = decodeSharePayload(enc);
+    expect(dec).toMatchObject({
+      isShare: true,
+      prefectureCode: 'osaka',
+      prefectureName: '大阪府',
+      score: 38,
+      max: 45,
+      target: 41,
+      gap: 3,
+      grade: 3,
+      label: '北野の目安',
+    });
+  });
+
+  test('壊れた/空の入力は null（例外を投げない）', () => {
+    expect(decodeSharePayload(undefined)).toBeNull();
+    expect(decodeSharePayload('!!!not-base64!!!')).toBeNull();
+    expect(decodeSharePayload('')).toBeNull();
+  });
+
+  test('parseParentShare は ?d= を復元し、個別クエリが上書きする', () => {
+    const d = encodeSharePayload({ prefectureCode: 'hyogo', score: 30, max: 45, grade: 2 });
+    const p = parseParentShare({ d });
+    expect(p.isShare).toBe(true);
+    expect(p.prefectureCode).toBe('hyogo');
+    expect(p.grade).toBe(2);
+    // 個別クエリが優先
+    const p2 = parseParentShare({ d, score: '40' });
+    expect(p2.score).toBe(40);
   });
 });
 

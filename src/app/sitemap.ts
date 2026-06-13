@@ -32,6 +32,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: '/dashboard', priority: 0.7, changeFrequency: 'monthly' },
     { url: '/ask', priority: 0.8, changeFrequency: 'weekly' },
     { url: '/hogosha', priority: 0.9, changeFrequency: 'weekly' },
+    { url: '/mendan', priority: 0.8, changeFrequency: 'weekly' },
     { url: '/tools', priority: 0.9, changeFrequency: 'weekly' },
     { url: '/embed', priority: 0.6, changeFrequency: 'monthly' },
     { url: '/developers', priority: 0.6, changeFrequency: 'monthly' },

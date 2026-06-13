@@ -812,6 +812,32 @@ export default function HyoteiHeikinPage() {
             </div>
           </section>
 
+          {/* 高校生向け分岐：通知表が出る7月/12月波で、推薦が見えた次の関心＝大学費用へ（姉妹サイトmy-shingaku） */}
+          <section className="mt-8 overflow-hidden rounded-2xl border-2 border-indigo-200 bg-gradient-to-br from-indigo-50 via-violet-50/60 to-white p-6 shadow-sm">
+            <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-indigo-600 px-3 py-1 text-xs font-bold text-white">
+              <GraduationCap className="h-3.5 w-3.5" />
+              高校生・高校生のお子さまをお持ちの方へ
+            </div>
+            <h2 className="mb-2 text-lg font-bold leading-snug text-slate-900 md:text-xl">
+              推薦が見えてきたら、早めに「大学進学の費用」も把握を
+            </h2>
+            <p className="mb-5 text-sm leading-relaxed text-slate-700">
+              <strong>1学期の通知表が返ってきたこのタイミング</strong>で評定平均がわかり、指定校推薦・総合型選抜の現実味が増します。
+              次に直面するのが<strong>大学進学の費用</strong>です。学費・一人暮らしの仕送り・奨学金の目安を早めに把握しておくと、
+              進路の選択肢を狭めずに準備できます。大学進学の費用は、大学受験専門の姉妹サイトで調べられます。
+            </p>
+            <a
+              href="https://my-shingaku.com/gakuhi"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-indigo-600 px-6 py-3.5 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-indigo-700 hover:shadow-lg active:scale-95 sm:w-auto"
+            >
+              大学進学の費用を調べる（My Shingaku）
+              <ChevronRight className="h-4 w-4" />
+            </a>
+            <p className="mt-2 text-xs text-slate-500">姉妹サイト My Shingaku（大学受験・進学費用）へ移動します</p>
+          </section>
+
           {/* 大学受験向け広告 */}
           <section className="mt-8 rounded-2xl border border-emerald-200 bg-emerald-50/30 px-6 py-5 text-center shadow-sm">
             <div className="text-sm font-bold text-emerald-900 mb-1">

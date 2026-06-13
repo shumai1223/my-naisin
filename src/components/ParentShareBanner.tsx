@@ -40,11 +40,12 @@ export function ParentShareBanner() {
 
   if (!share.isShare) return null;
 
-  const { prefectureName, score, max, target, gap, label } = share;
+  const { prefectureName, score, max, target, gap, label, grade } = share;
   const hasScore = typeof score === 'number';
   const hasGap = typeof gap === 'number';
   const met = hasGap && (gap as number) <= 0;
   const targetWord = label || '目標';
+  const gradeLead = typeof grade === 'number' ? `中${grade}の今からなら、まだ十分に間に合います。` : '';
 
   return (
     <section className="mb-8 overflow-hidden rounded-2xl border-2 border-blue-200 bg-gradient-to-br from-blue-50 via-indigo-50/70 to-white p-6 shadow-sm md:p-7">
@@ -88,7 +89,7 @@ export function ParentShareBanner() {
       <p className="text-sm leading-relaxed text-slate-700">
         {met
           ? 'お子さまは目標ラインに到達しています。この力をキープし、さらに伸ばすために、ご家庭でできる対策を無料の資料で確認できます。'
-          : 'ここから内申点・偏差値は「今からの伸ばし方」で大きく変わります。お子さまに合った対策を、まずは無料の資料・体験でご確認ください（費用はかかりません）。'}
+          : `${gradeLead}ここから内申点・偏差値は「今からの伸ばし方」で大きく変わります。お子さまに合った対策を、まずは無料の資料・体験でご確認ください（費用はかかりません）。`}
       </p>
     </section>
   );
