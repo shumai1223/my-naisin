@@ -32,6 +32,7 @@ export function ParentShareBanner() {
     if (!share.isShare) return;
     track(EVENTS.PARENT_LANDING_VIEW, {
       pref: share.prefectureCode ?? 'none',
+      metric: share.metricLabel ?? '内申点',
       has_target: typeof share.target === 'number',
       ...(typeof share.gap === 'number' ? { gap: share.gap } : {}),
     });
@@ -45,6 +46,7 @@ export function ParentShareBanner() {
   const hasGap = typeof gap === 'number';
   const met = hasGap && (gap as number) <= 0;
   const targetWord = label || '目標';
+  const metric = share.metricLabel || '内申点';
   const gradeLead = typeof grade === 'number' ? `中${grade}の今からなら、まだ十分に間に合います。` : '';
 
   return (
@@ -55,13 +57,13 @@ export function ParentShareBanner() {
       </div>
 
       <h2 className="mb-2 text-xl font-bold leading-snug text-slate-900 md:text-2xl">
-        {prefectureName ? `${prefectureName}の` : ''}内申点の成績レポートが届きました
+        {prefectureName ? `${prefectureName}の` : ''}{metric}の成績レポートが届きました
       </h2>
 
       {hasScore && (
         <div className="mb-4 flex flex-wrap items-center gap-3">
           <div className="rounded-xl border border-slate-200 bg-white px-4 py-2.5">
-            <div className="text-[11px] font-bold text-slate-500">現在の内申点</div>
+            <div className="text-[11px] font-bold text-slate-500">現在の{metric}</div>
             <div className="text-2xl font-black tracking-tight text-slate-800">
               {score}
               {typeof max === 'number' && <span className="text-base font-semibold text-slate-400">/{max}</span>}

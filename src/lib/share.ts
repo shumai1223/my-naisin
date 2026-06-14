@@ -26,6 +26,8 @@ export interface ParentShareContext {
   label?: string;
   /** 学年（1/2/3）。文脈見出し（「中3の今からなら」等）に使う。 */
   grade?: number | null;
+  /** 指標名（既定は内申点。総合得点ツール等から共有する場合に「総合得点」等を渡す）。 */
+  metricLabel?: string;
 }
 
 function isNum(v: number | null | undefined): v is number {
@@ -78,6 +80,7 @@ export function encodeSharePayload(ctx: ParentShareContext): string {
   if (isNum(ctx.gap)) obj.g = Math.round(ctx.gap);
   if (ctx.label) obj.l = ctx.label.slice(0, 40);
   if (isNum(ctx.grade)) obj.gr = Math.round(ctx.grade);
+  if (ctx.metricLabel) obj.ml = ctx.metricLabel.slice(0, 16);
   return bytesToBase64Url(utf8ToBytes(JSON.stringify(obj)));
 }
 
@@ -105,6 +108,7 @@ export function decodeSharePayload(d: string | undefined): ParsedParentShare | n
       gap: clampInt(o.g, -2000, 2000),
       grade: clampInt(o.gr, 1, 3),
       label: str(o.l)?.slice(0, 40),
+      metricLabel: str(o.ml)?.slice(0, 16),
     };
   } catch {
     return null;
@@ -123,6 +127,7 @@ export function buildParentSharePath(ctx: ParentShareContext): string {
   if (isNum(ctx.gap)) q.set('gap', String(Math.round(ctx.gap)));
   if (isNum(ctx.grade)) q.set('grade', String(Math.round(ctx.grade)));
   if (ctx.label) q.set('label', ctx.label);
+  if (ctx.metricLabel) q.set('ml', ctx.metricLabel);
   return `/hogosha?${q.toString()}`;
 }
 
@@ -157,6 +162,7 @@ export interface ParsedParentShare {
   gap?: number;
   grade?: number;
   label?: string;
+  metricLabel?: string;
 }
 
 type RawParams = Record<string, string | string[] | undefined>;
@@ -199,5 +205,6 @@ export function parseParentShare(params: RawParams): ParsedParentShare {
     grade: pick(safeInt(params.grade, 1, 3), decoded?.grade),
     // 表示用ラベルは長さを抑える（誤・悪意入力の肥大防止）
     label: pick(label ? label.slice(0, 40) : undefined, decoded?.label),
+    metricLabel: pick(firstStr(params.ml)?.slice(0, 16), decoded?.metricLabel),
   };
 }

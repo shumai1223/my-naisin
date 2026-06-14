@@ -6,6 +6,7 @@ import { Calculator, RotateCcw } from 'lucide-react';
 import type { TotalScoreSystem } from '@/lib/total-score/types';
 import { computeTotalScore } from '@/lib/total-score/engine';
 import { EVENTS, track } from '@/lib/track';
+import { ParentShareLinkButton } from '@/components/ParentShareLinkButton';
 
 interface Props {
   system: TotalScoreSystem;
@@ -170,6 +171,20 @@ export function TotalScoreCalculator({ system }: Props) {
               <div className="text-[10px] text-slate-500">/{result.option.reportMax}点</div>
             </div>
           </div>
+
+          {/* 橋②：総合得点の結果を保護者に共有（実数つきで /hogosha へ着地→決裁者がオファーに触れる） */}
+          <ParentShareLinkButton
+            className="mt-5"
+            tool="total-score"
+            label="この結果をおうちの人に送る"
+            ctx={{
+              prefectureCode: system.code,
+              prefectureName: system.name,
+              score: result.total,
+              max: result.totalMax,
+              metricLabel: '総合得点',
+            }}
+          />
 
           <p className="mt-4 text-center text-[11px] leading-relaxed text-slate-500">
             ※ 満点・配点は{system.name}教育委員会の令和8年度入学者選抜要項に基づく目安です。実際の合否は倍率・他の受験者の得点で変動します。学校別の合格ボーダーは掲載していません。

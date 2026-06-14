@@ -155,3 +155,29 @@ describe('parseParentShare（受け手＝保護者ページ側・外部入力を
     expect(p.label?.length).toBe(40); // 長さ抑制
   });
 });
+
+describe('metricLabel（総合得点など内申点以外の指標の共有）', () => {
+  test('path / parse で metricLabel が往復する', () => {
+    const path = buildParentSharePath({
+      prefectureCode: 'hyogo',
+      prefectureName: '兵庫県',
+      score: 380,
+      max: 500,
+      metricLabel: '総合得点',
+    });
+    const p = parseParentShare(Object.fromEntries(new URLSearchParams(path.split('?')[1])));
+    expect(p.metricLabel).toBe('総合得点');
+    expect(p.score).toBe(380);
+    expect(p.max).toBe(500);
+  });
+
+  test('compact payload(?d=) でも metricLabel が往復する', () => {
+    const d = encodeSharePayload({ score: 380, max: 500, metricLabel: '総合得点' });
+    expect(decodeSharePayload(d)?.metricLabel).toBe('総合得点');
+  });
+
+  test('metricLabel 未指定なら undefined（既定の内申点表示はバナー側でフォールバック）', () => {
+    const p = parseParentShare({ from: 'share', score: '58', max: '65' });
+    expect(p.metricLabel).toBeUndefined();
+  });
+});
