@@ -49,6 +49,16 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/hiyou" className="hover:text-blue-600 flex items-center gap-1">
+                  お金・費用まとめ（教育費・学費・塾代） <ChevronRight className="h-3 w-3 opacity-30" />
+                </Link>
+              </li>
+              <li>
+                <Link href="/kyouiku-hi" className="hover:text-blue-600 flex items-center gap-1">
+                  教育費シミュレーター（中学〜高校卒業） <ChevronRight className="h-3 w-3 opacity-30" />
+                </Link>
+              </li>
+              <li>
                 <Link href="/koukou-hiyou" className="hover:text-blue-600 flex items-center gap-1">
                   高校の費用シミュレーター（公立/私立） <ChevronRight className="h-3 w-3 opacity-30" />
                 </Link>
@@ -56,6 +66,11 @@ export function Footer() {
               <li>
                 <Link href="/juku-hiyou" className="hover:text-blue-600 flex items-center gap-1">
                   塾代シミュレーター（相場・総額） <ChevronRight className="h-3 w-3 opacity-30" />
+                </Link>
+              </li>
+              <li>
+                <Link href="/shougakukin" className="hover:text-blue-600 flex items-center gap-1">
+                  高校無償化・就学支援金ガイド <ChevronRight className="h-3 w-3 opacity-30" />
                 </Link>
               </li>
               <li>

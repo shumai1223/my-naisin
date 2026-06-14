@@ -487,7 +487,8 @@ export default function Page() {
                   { href: '/hensachi', label: '偏差値計算（5教科）' },
                   { href: '/hyotei-heikin', label: '評定平均 計算' },
                   { href: '/reverse', label: '志望校から逆算' },
-                  { href: '/koukou-hiyou', label: '高校費用シミュレーター' },
+                  { href: '/kyouiku-hi', label: '教育費シミュレーター' },
+                  { href: '/hiyou', label: 'お金・費用まとめ' },
                 ].map((tool) => (
                   <Link
                     key={tool.href}

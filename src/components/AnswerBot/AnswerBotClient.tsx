@@ -16,6 +16,8 @@ const EXAMPLE_QUERIES = [
   '三者面談で先生に聞くことは？',
   '当日点・総合得点とは？',
   '高校3年間の費用の目安は？',
+  '高校無償化は年収いくらまで？',
+  '教育費は中学から高校までいくら？',
 ];
 
 export function AnswerBotClient() {

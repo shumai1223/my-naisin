@@ -129,10 +129,12 @@ export default function KoukouHiyouPage() {
         <section className="mt-10">
           <h2 className="mb-3 text-lg font-bold text-slate-900">関連ツール</h2>
           <div className="grid gap-3 sm:grid-cols-2">
+            <Link href="/kyouiku-hi" className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-4 text-sm font-bold text-slate-900 shadow-sm hover:border-blue-200">教育費シミュレーター（中学〜高校卒業）→</Link>
             <Link href="/juku-hiyou" className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-4 text-sm font-bold text-slate-900 shadow-sm hover:border-blue-200">塾代シミュレーター（相場・総額）→</Link>
+            <Link href="/shougakukin" className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-4 text-sm font-bold text-slate-900 shadow-sm hover:border-blue-200">高校無償化・就学支援金ガイド →</Link>
+            <Link href="/hiyou" className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-4 text-sm font-bold text-slate-900 shadow-sm hover:border-blue-200">お金・費用まとめ →</Link>
             <Link href="/mendan" className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-4 text-sm font-bold text-slate-900 shadow-sm hover:border-blue-200">三者面談の準備チェックリスト →</Link>
             <Link href="/" className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-4 text-sm font-bold text-slate-900 shadow-sm hover:border-blue-200">内申点を計算する →</Link>
-            <Link href="/hensachi" className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-4 text-sm font-bold text-slate-900 shadow-sm hover:border-blue-200">偏差値を計算する →</Link>
           </div>
         </section>
       </div>

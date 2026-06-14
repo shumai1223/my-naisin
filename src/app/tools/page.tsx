@@ -10,6 +10,7 @@ import {
   MapPin,
   LineChart,
   MessageCircleQuestion,
+  Wallet,
 } from 'lucide-react';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
@@ -233,6 +234,44 @@ const TOOL_GROUPS: { id: string; heading: string; tools: Tool[] }[] = [
     ],
   },
   {
+    id: 'money',
+    heading: '費用・お金の計算（保護者向け）',
+    tools: [
+      {
+        title: '教育費シミュレーター（中学〜高校卒業）',
+        description: '現在の学年・進路・塾の形態から、高校卒業までの教育費総額を内訳つきで概算',
+        features: ['中学残り＋高校3年＋塾代', '公立・私立で比較', '文科省データ準拠', '大学費用の目安も'],
+        href: '/kyouiku-hi',
+        icon: Wallet,
+        color: 'green',
+      },
+      {
+        title: '高校の費用シミュレーター',
+        description: '公立・私立の高校3年間にかかる学費・教材費・通学費の総額を試算',
+        features: ['公立 約165万円', '私立 約340万円', '入学準備費も調整', '就学支援金考慮'],
+        href: '/koukou-hiyou',
+        icon: Wallet,
+        color: 'blue',
+      },
+      {
+        title: '塾代シミュレーター（相場・総額）',
+        description: '集団塾・個別指導・家庭教師の月謝相場と、受験までの総額の目安を試算',
+        features: ['形態別の月謝相場', '季節講習費込み', '3年間の総額', '抑えるコツ'],
+        href: '/juku-hiyou',
+        icon: Wallet,
+        color: 'orange',
+      },
+      {
+        title: '高校無償化・就学支援金ガイド',
+        description: '公立・私立別の支援額、世帯年収の目安、奨学給付金・大学の奨学金まで解説',
+        features: ['年収区分で支援額', '私立 上限39.6万円', '奨学給付金', '大学の奨学金'],
+        href: '/shougakukin',
+        icon: Wallet,
+        color: 'green',
+      },
+    ],
+  },
+  {
     id: 'guide',
     heading: '基礎から学ぶガイド',
     tools: [
@@ -267,6 +306,14 @@ const TOOL_GROUPS: { id: string; heading: string; tools: Tool[] }[] = [
         href: '/blog/naishin-guide',
         icon: BookOpen,
         color: 'orange',
+      },
+      {
+        title: '高校受験の年間スケジュール（中3）',
+        description: '4月〜3月に「いつ何をするか」を月別に解説。内申確定・三者面談・出願の流れが分かる',
+        features: ['月別やること', '内申が決まる時期', '三者面談 7月/12月', '出願・入試の流れ'],
+        href: '/juken-schedule',
+        icon: BookOpen,
+        color: 'blue',
       },
       {
         title: '47都道府県の入試制度ページ',

@@ -56,6 +56,8 @@ import { post as naishin47PrefecturesComparison } from '@/lib/blog/posts/naishin
 // 2026-06-07 実体験記事（完成稿・公開）。公開前に各ファイルの「要確認」コメント箇所だけ本人の実数値に差し替え推奨。
 import { post as suisenGoukakuRecord } from '@/lib/blog/posts/suisen-goukaku-taikenki';
 import { post as naishinUpTaikenki } from '@/lib/blog/posts/naishin-up-taikenki';
+// 2026-06-14 保護者お金クラスタのピラー記事（教育費総額→/kyouiku-hi・/shougakukin・/hiyou へ内部リンク）
+import { post as educationCostJuniorToHigh } from '@/lib/blog/posts/education-cost-junior-high-to-high-school';
 
 // Articles whose date should be refreshed (old 2025-05-01 articles)
 const FRESHEN_DATE = '2026-05-11';
@@ -77,6 +79,7 @@ function enrichPost(post: BlogPost): BlogPost {
 }
 
 const HAND_WRITTEN_POSTS: BlogPost[] = [
+  educationCostJuniorToHigh,
   suisenGoukakuRecord,
   naishinUpTaikenki,
   naishin47PrefecturesComparison,

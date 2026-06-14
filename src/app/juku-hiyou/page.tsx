@@ -177,10 +177,11 @@ export default function JukuHiyouPage() {
 
           <RelatedToolsSection
             links={[
+              { href: '/kyouiku-hi', title: '教育費シミュレーター', desc: '中学〜高校卒業までの総額を内訳つきで試算' },
               { href: '/koukou-hiyou', title: '高校の費用シミュレーター', desc: '公立・私立の3年間の費用目安を試算' },
+              { href: '/shougakukin', title: '高校無償化・就学支援金ガイド', desc: '公立・私立別の支援額と世帯年収の目安' },
+              { href: '/hiyou', title: 'お金・費用まとめ', desc: '教育費・学費・塾代・無償化をまとめて確認' },
               { href: '/hogosha', title: '保護者の方へ', desc: '塾はいつから・費用の目安・親ができること' },
-              { href: '/mendan', title: '三者面談の準備チェックリスト', desc: '先生に聞くこと・面談前に確認する数値' },
-              { href: '/', title: '内申点を計算する', desc: '全国47都道府県の最新方式に対応' },
               { href: 'https://my-shingaku.com/gakuhi', title: '大学進学の費用（姉妹サイト）', desc: '学費・一人暮らし・奨学金の目安（My Shingaku）', external: true },
             ]}
           />

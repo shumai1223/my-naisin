@@ -124,6 +124,10 @@ describe('answerQuery（拡張した一般FAQの網羅）', () => {
     ['当日点・総合得点とは？', '当日点・総合得点とは', '/reverse'],
     ['中学生の塾代はいくら？', '中学生の塾代の相場', '/juku-hiyou'],
     ['高校3年間の費用の目安は？', '高校の費用の目安', '/koukou-hiyou'],
+    ['高校無償化は年収いくらまで？', '高校無償化・教育費の支援', '/shougakukin'],
+    ['就学支援金はいくらもらえる？', '高校無償化・教育費の支援', '/shougakukin'],
+    ['教育費は中学から高校までいくら？', '高校無償化・教育費の支援', '/kyouiku-hi'],
+    ['大学の奨学金について教えて', '高校無償化・教育費の支援', '/shougakukin'],
   ])('「%s」→ %s', (q, title, href) => {
     const a = answerQuery(q);
     expect(a?.kind).toBe('general');

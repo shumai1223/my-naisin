@@ -89,6 +89,7 @@ const RELATED_LINKS = [
   { href: '/hensachi', title: '偏差値を計算する', desc: '点数と平均点から偏差値を算出。上位何%かもわかる。' },
   { href: '/hyotei-heikin', title: '評定平均を計算する', desc: '通知表から評定平均を計算。推薦基準の早見表つき。' },
   { href: '/reverse', title: '志望校から逆算する', desc: '目標校から必要な内申点・当日点を逆算。' },
+  { href: '/juken-schedule', title: '高校受験の年間スケジュール', desc: '三者面談・出願の時期と、月別にやることを確認。' },
   { href: '/hogosha', title: '保護者の方へ', desc: '塾はいつから・費用の目安・親ができることを整理。' },
 ];
 

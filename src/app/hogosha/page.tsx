@@ -247,9 +247,10 @@ export default function HogoshaPage() {
           <RelatedToolsSection
             className="mb-10"
             links={[
-              { href: '/guide', title: '高校受験の進め方ガイド', desc: '内申点・偏差値・出願までの全体像を保護者向けに整理' },
+              { href: '/hiyou', title: 'お金・費用まとめ', desc: '教育費・高校学費・塾代・高校無償化を一括で把握' },
+              { href: '/kyouiku-hi', title: '教育費シミュレーター', desc: '中学〜高校卒業までの総額を内訳つきで試算' },
+              { href: '/shougakukin', title: '高校無償化・就学支援金ガイド', desc: '公立・私立別の支援額と世帯年収の目安' },
               { href: '/comparison', title: '都道府県の入試制度を比較', desc: '内申比率・配点方式を地域ごとに比較' },
-              { href: '/koukou-hiyou', title: '高校の費用シミュレーター', desc: '公立・私立の3年間の費用目安を試算' },
               { href: '/mendan', title: '三者面談の準備チェックリスト', desc: '先生に聞くこと・持ち物・面談前に確認する数値' },
               { href: '/blog', title: '受験攻略コラム', desc: '内申点の上げ方・副教科で5を取る戦略など' },
               {

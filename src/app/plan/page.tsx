@@ -122,8 +122,8 @@ export default function PlanPage() {
             className="mt-10"
             links={[
               { href: '/reverse', title: '志望校から逆算する', desc: '目標校から必要な内申点・当日点を逆算' },
+              { href: '/juken-schedule', title: '高校受験の年間スケジュール', desc: '中3の4月〜3月にやることを月別に確認' },
               { href: '/hensachi', title: '偏差値を計算する', desc: '学力の立ち位置を5教科で把握' },
-              { href: '/prefectures', title: '47都道府県の内申点ページ', desc: 'お住まいの地域の方式で正確に計算' },
               { href: '/hogosha', title: '保護者の方へ', desc: '塾はいつから・費用の目安・内申の上げ方' },
             ]}
           />

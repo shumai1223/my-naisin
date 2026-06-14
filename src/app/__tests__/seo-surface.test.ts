@@ -21,6 +21,16 @@ describe('sitemap()', () => {
     }
   });
 
+  test('保護者お金クラスタ（教育費・学費・塾代・無償化）が含まれる', () => {
+    for (const path of ['/hiyou', '/kyouiku-hi', '/koukou-hiyou', '/juku-hiyou', '/shougakukin']) {
+      expect(urls).toContain(`${BASE}${path}`);
+    }
+  });
+
+  test('受験スケジュールページが含まれる', () => {
+    expect(urls).toContain(`${BASE}/juken-schedule`);
+  });
+
   test('47都道府県の内申点ページが揃う', () => {
     const naishinPages = urls.filter((u) => /\/[a-z]+\/naishin$/.test(u));
     expect(naishinPages).toHaveLength(PREFECTURES.length);
