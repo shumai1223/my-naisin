@@ -86,6 +86,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   // 5. 第1層（検証済み）の総合得点 計算機ページ（registry の allowlist から自動生成）
+  //    total-score は計算機13県（静的8＋registry5）＋解説34県＝全47県をカバー。
+  //    ハブ /total-score（上の staticPages）＋以下の動的URLで全県がサイトマップに載る。
   const totalScorePages = VERIFIED_TOTAL_SCORE_CODES.map(code => ({
     url: `${baseUrl}/${code}/total-score`,
     lastModified,
