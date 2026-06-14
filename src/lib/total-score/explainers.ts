@@ -803,7 +803,7 @@ const explainers: TotalScoreExplainer[] = [
         a: '前期募集（2月）は学力検査がなく、調査書・面接・特色適性検査等で選抜します。後期募集（3月）は5教科の学力検査と調査書で選抜します。このページは後期募集の仕組みを解説しています。',
       },
     ],
-    caveat: '特別活動等の加算点が30点か60点か二次情報で不一致＝要確認。令和8年度の基本事項で確定値を要確認。',
+    caveat: '特別活動・校外活動等の加算は令和8年度の入試情報では30点満点が優勢（学習の記録330点とは別枠・各校が基準を設定）。最終確定は県教委の基本事項での確認を推奨。',
     source: {
       url: 'https://www.pref.yamanashi.jp/kyouiku-kikaku/nyuusi/saishinnonyuusijouhou.html',
       docTitle: '令和8年度山梨県立高等学校入学者選抜の基本事項',
@@ -1055,7 +1055,7 @@ const explainers: TotalScoreExplainer[] = [
     localTerm: '特別入学者選抜・一般入学者選抜（相関表）',
     fiscalYear: '2026',
     method: '相関表',
-    academic: { subjects: 5, rawMax: 350, note: '5教科。1教科70点（60点との情報もあり要確認）＝素点350点。理数科等で傾斜、岡山朝日は国数英を自校作成' },
+    academic: { subjects: 5, perSubjectMax: 70, rawMax: 350, note: '5教科×70点＝素点350点。理数科等で傾斜、岡山朝日は国数英を自校作成' },
     report: { targetGrades: [1, 2, 3], rawMax: 200, note: '中1・中2各45点＋中3＝110点（5教科×2＋実技×3）＝合計200点' },
     others: '特別入学者選抜で面接・選択検査。',
     overview:
@@ -1088,7 +1088,7 @@ const explainers: TotalScoreExplainer[] = [
         a: '岡山朝日高校など一部の進学校は、国語・数学・英語を自校作成問題（独自問題）で実施します。共通問題より難易度が高い傾向があるため、志望校の出題方式を確認して対策する必要があります。',
       },
     ],
-    caveat: '学力検査1教科の満点（70点か60点か）が二次情報で不一致＝要確認。県教委要項PDF本文で確定値を要確認。',
+    caveat: '学力検査の配点（5教科×70点＝350点）は令和8年度の複数の入試情報で一致。最終確定は県教委要項PDF本文での確認を推奨。',
     source: {
       url: 'https://www.pref.okayama.jp/site/16/',
       docTitle: '令和8年度岡山県公立高等学校入学者選抜（岡山県教育委員会）',
