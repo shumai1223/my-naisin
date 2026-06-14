@@ -650,6 +650,8 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
                 { href: '/hensachi/shiboukou', title: '偏差値から行ける高校を見る', desc: '届く高校レベルを安全圏・実力相応・チャレンジで' },
                 { href: '/reverse', title: '志望校から必要な当日点を逆算', desc: `${prefecture.name}の配点比率で「あと何点」を算出` },
                 { href: '/hyotei-heikin', title: '評定平均を計算する', desc: '推薦・私立併願優遇で使う評定平均を確認' },
+                { href: '/juken-schedule', title: '高校受験の年間スケジュール', desc: '内申が決まる時期・三者面談・出願を月別に確認' },
+                { href: '/hiyou', title: 'お金・費用まとめ（保護者向け）', desc: '教育費・高校学費・塾代・高校無償化を一括で把握' },
               ]}
             />
 
