@@ -45,8 +45,8 @@ export function SubjectSlider({ subject, prefectureCode, value, onChange, maxGra
           </div>
         </div>
 
-        {/* スコア表示と+/-ボタン */}
-        <div className="flex shrink-0 items-center gap-2">
+        {/* スコア表示と+/-ボタン（連打が正当なので rage_click 計測から除外） */}
+        <div className="flex shrink-0 items-center gap-2" data-no-rage>
           <button
             type="button"
             onClick={() => setValue(value - 1)}
@@ -113,7 +113,7 @@ export function SubjectSlider({ subject, prefectureCode, value, onChange, maxGra
 
       {/* モバイル用クイック選択ボタン */}
       {maxGrade <= 5 && (
-        <div className="mt-3 grid grid-cols-5 gap-1.5 md:hidden">
+        <div className="mt-3 grid grid-cols-5 gap-1.5 md:hidden" data-no-rage>
           {Array.from({ length: maxGrade }, (_, i) => i + 1).map((i) => (
             <button
               key={i}

@@ -4,7 +4,7 @@ import * as React from 'react';
 import Link from 'next/link';
 import { MessageCircle, Mail, BellRing, Check, Loader2, ShieldCheck, Bookmark } from 'lucide-react';
 
-import { track } from '@/lib/track';
+import { EVENTS, track } from '@/lib/track';
 import { lineAddUrl, type LineAudience } from '@/lib/line';
 import { isValidEmail, openLeadMailtoFallback, submitLead, type LeadPayload, type LeadSource } from '@/lib/lead';
 
@@ -54,6 +54,14 @@ export function SaveResultCTA({
   const [consent, setConsent] = React.useState(false);
   const [status, setStatus] = React.useState<Status>('idle');
   const [error, setError] = React.useState<string | null>(null);
+  const formStartedRef = React.useRef(false);
+
+  // 名簿フォームへの最初の入力で form_start を一度だけ。lead_submit との比で「入力したのに送らない」歩留まりを可視化。
+  function onFormStart() {
+    if (formStartedRef.current) return;
+    formStartedRef.current = true;
+    track(EVENTS.FORM_START, { source, pref: prefectureCode ?? 'none' });
+  }
 
   const payload: LeadPayload = React.useMemo(
     () => ({ email, consent, source, prefectureCode, prefectureName, score, target, gap }),
@@ -184,7 +192,11 @@ export function SaveResultCTA({
                 inputMode="email"
                 autoComplete="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => {
+                  onFormStart();
+                  setEmail(e.target.value);
+                }}
+                onFocus={onFormStart}
                 placeholder="メールアドレス"
                 aria-label="メールアドレス"
                 className="h-11 flex-1 rounded-2xl border border-slate-200 bg-white px-4 text-sm text-slate-800 shadow-sm outline-none placeholder:text-slate-400 focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20"

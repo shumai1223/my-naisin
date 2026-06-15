@@ -59,6 +59,15 @@ export function SiteEngagementTracker() {
     }
 
     function onClick(e: MouseEvent) {
+      // 計算機のステッパー（±ボタン）等、連打が“正当な操作”の要素は rage_click から除外（偽陽性を弾く）。
+      // SubjectSlider 等が data-no-rage を付与。range/number 入力も意図的な微調整なので対象外。
+      const t = e.target;
+      if (
+        t instanceof Element &&
+        t.closest('[data-no-rage],input[type="range"],input[type="number"]')
+      ) {
+        return;
+      }
       const now = Date.now();
       clicks = clicks.filter((c) => now - c.t < WINDOW_MS);
       clicks.push({ x: e.clientX, y: e.clientY, t: now });

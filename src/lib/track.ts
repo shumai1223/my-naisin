@@ -46,6 +46,7 @@ export const EVENTS = {
   RESULT_VIEW: 'result_view', // 結果セクションの表示（換金の分母）
   CTA_VIEW: 'cta_view', // 換金CTAが視界に入った
   AFFILIATE_CLICK: 'affiliate_click', // アフィリンククリック（AffiliateClickTracker が自動送出）
+  FORM_START: 'form_start', // 名簿フォームへの最初の入力（lead_submit の分母＝歩留まり計測）
   LEAD_SUBMIT: 'lead_submit', // 名簿登録の送信
   LEAD_SUBMIT_SUCCESS: 'lead_submit_success',
   LINE_FRIEND_CLICK: 'line_friend_click',

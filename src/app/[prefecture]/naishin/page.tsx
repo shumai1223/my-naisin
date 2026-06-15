@@ -423,7 +423,7 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
                 </div>
                 {/* Desktop: 728×90 */}
                 <div className="hidden md:block">
-                  <AffiliateAd id="zkai-banner" />
+                  <AffiliateAd id="zkai-banner" trackView viewPlacement="prefecture" viewPref={prefectureCode} />
                 </div>
                 {/* Mobile: フルワイドCTAボタン */}
                 <div className="md:hidden">
@@ -486,7 +486,7 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
                   </div>
                 </div>
                 <div className="flex justify-center md:justify-end">
-                  <AffiliateAd id="sapuri-banner-300" auditHide />
+                  <AffiliateAd id="sapuri-banner-300" auditHide trackView viewPlacement="prefecture" viewPref={prefectureCode} />
                 </div>
               </div>
             </section>

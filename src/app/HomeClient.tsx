@@ -24,7 +24,7 @@ import {
   getRankForPercent,
   updateScoreValue
 } from '@/lib/utils';
-import { track } from '@/lib/track';
+import { track, EVENTS } from '@/lib/track';
 
 import { Header } from '@/components/Header';
 import { HeroNavigation, NavigationMode } from '@/components/HeroNavigation';
@@ -146,7 +146,12 @@ export default function HomeClient() {
 
     const history = readHistory();
     setLastSaved(history[0] ?? null);
-    setSavedGoal(readSavedGoal());
+    const sg = readSavedGoal();
+    setSavedGoal(sg);
+    // 再訪導線が点灯する＝保存済み目標を持つリピーターが戻ってきた。継続接点のKPIとして一度だけ計測。
+    if (sg) {
+      track(EVENTS.SAVED_GOAL_REVISIT, { pref: sg.prefectureCode ?? 'none', gap: sg.gap });
+    }
 
     // 履歴があり、かつ scores が初期値から変更されている場合のみ計算モードに遷移。
     // 初回ユーザーや空の入力では「目的を選ぶ」画面を維持して、空の結果画面を防ぐ。

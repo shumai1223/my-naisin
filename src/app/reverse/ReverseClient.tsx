@@ -259,10 +259,10 @@ function ReversePageContent() {
                   目標点まであと一歩。<AffiliateAd id="zkai-text-advanced" hideLabel auditHide />（PR）なら、添削指導で「本当の得点力」が身につきます。
                 </div>
                 <div className="hidden md:block">
-                  <AffiliateAd id="zkai-banner" />
+                  <AffiliateAd id="zkai-banner" trackView viewPlacement="reverse" />
                 </div>
                 <div className="md:hidden">
-                  <AffiliateAd id="sapuri-banner-300" />
+                  <AffiliateAd id="sapuri-banner-300" trackView viewPlacement="reverse" />
                 </div>
                 <div className="mt-3 text-xs">
                   <AffiliateAd id="zkai-text-request" className="mx-1" hideLabel auditHide />（PR）で詳細をチェック

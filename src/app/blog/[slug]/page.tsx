@@ -340,7 +340,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           <div className="mb-4 text-xs text-slate-500">
             内申点を上げる第一歩は、毎日の学習習慣から。月額2,178円のオンライン学習サービス。
           </div>
-          <AffiliateAd id="sapuri-banner-300" />
+          <AffiliateAd id="sapuri-banner-300" trackView viewPlacement="blog" />
         </div>
 
         {/* AdSense床（承認＝NEXT_PUBLIC_ADSENSE_ENABLED=1 まで描画されない。読了直後の高エンゲージ位置） */}
