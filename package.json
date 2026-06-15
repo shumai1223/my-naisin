@@ -23,6 +23,7 @@
     "ga4:auth": "node --use-system-ca scripts/ga4-auth.mjs",
     "ga4": "node --use-system-ca scripts/ga4.mjs",
     "ga4:mcp": "node --use-system-ca scripts/ga4-mcp.mjs",
+    "ga4:weekly": "node --use-system-ca scripts/ga4-weekly.mjs",
     "test:e2e": "playwright test",
     "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
     "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy"

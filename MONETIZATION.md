@@ -123,6 +123,11 @@
 - **AdSense**：コンソールのページRPM。教育系の目安¥150〜400/1000PV。
 - **送客**：ASP管理画面の「資料請求/体験 発生数 × 単価」。`ParentLeadCTA`経由のクリック率もトラッキングピクセルで把握。
 - **意思決定**：月次で「AdSense ÷ 送客」の比率を見る。送客が伸びるほど学生ニッチの天井を超えていける。
+- **週次の儀式（自動化）**：`npm run ga4:weekly` で換金ファネル（result_view→cta_view→affiliate_click→lead_submit）の
+  WoW・歩留まり・効いた面（pagePath別 cta_view/affiliate_click）を1コマンド出力（`reports/` に保存）。
+- **面×案件の勝者分解**：GA4管理 > カスタム定義 で**イベントスコープのカスタムディメンション**を登録すると、
+  週次レポートが placement/program 別の勝者表を自動表示する。登録するパラメータ名（そのままの文字列）：
+  `placement`／`program`／`pref`／`depth`。登録は1回・反映24〜48h。これが「勝ち案件×勝ち面」をlead-configへ昇格する根拠データ。
 
 ---
 
