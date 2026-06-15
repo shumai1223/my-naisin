@@ -23,6 +23,12 @@ const CARDS: Card[] = [
     icon: Wallet,
   },
   {
+    href: '/shinro-hiyou',
+    title: '高校〜大学の教育費（進路別）',
+    desc: '高校・世帯年収・大学(国公立/私立)・自宅か下宿かから、卒業までの総額を就学支援金込みで概算',
+    icon: GraduationCap,
+  },
+  {
     href: '/koukou-hiyou',
     title: '高校の費用シミュレーター',
     desc: '公立・私立の高校3年間にかかる学費・教材費・通学費の総額を試算',

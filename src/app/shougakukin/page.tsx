@@ -245,6 +245,7 @@ export default function ShougakukinPage() {
           <RelatedToolsSection
             links={[
               { href: '/kyouiku-hi', title: '教育費シミュレーター', desc: '中学〜高校卒業までの総額を内訳つきで試算' },
+              { href: '/shinro-hiyou', title: '高校〜大学の教育費（進路別）', desc: '大学まで含めた総額を自宅/下宿・就学支援金込みで試算' },
               { href: '/koukou-hiyou', title: '高校の費用シミュレーター', desc: '公立・私立の3年間の費用を試算' },
               { href: '/juku-hiyou', title: '塾代シミュレーター', desc: '集団・個別・家庭教師の月謝と総額の目安' },
               { href: '/hogosha', title: '保護者の方へ', desc: '塾はいつから・費用の目安・親ができること' },

@@ -5,6 +5,7 @@ import { Home, ChevronRight, Wallet, Calculator, Users, GraduationCap, Lightbulb
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
+import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { JukuhiCalculator } from '@/components/JukuhiCalculator';
 import { RelatedToolsSection } from '@/components/RelatedToolsSection';
 import { SITE_URL } from '@/lib/naishin-dataset';
@@ -157,6 +158,28 @@ export default function JukuHiyouPage() {
             </ul>
           </section>
 
+          {/* 塾リード接続（コツ④の「無料体験で比較」を実行可能に。FP相談=上部、塾体験=ここで二毛作）。
+              page intent（塾を比べたい保護者）に最も合う全国オンライン個別の無料体験へ。cta_view計装つき。 */}
+          <section className="mb-10 rounded-2xl border border-amber-200 bg-gradient-to-br from-amber-50 to-orange-50/60 p-6 shadow-sm">
+            <div className="mb-2 inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-bold text-amber-700 ring-1 ring-amber-200">
+              <Users className="h-3.5 w-3.5" />
+              塾選びは「無料体験」で比べてから
+            </div>
+            <h2 className="mb-2 text-lg font-bold text-amber-900">月謝の安さだけで決めない。相性は体験で分かる</h2>
+            <p className="mb-4 text-sm leading-relaxed text-slate-700">
+              同じ予算でも、指導の相性・講師・教室の雰囲気で伸び方は変わります。送迎不要・全国どこからでも受けられるオンライン個別指導なら、まず無料体験で「合うかどうか」を確かめてから決められます。費用はかかりません。
+            </p>
+            <AffiliateAd
+              id="sora-juku-text"
+              hideLabel
+              trackView
+              viewPlacement="juku-hiyou"
+              ctaText="オンライン個別指導の無料体験を申し込む"
+              linkClassName="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-amber-600 px-6 py-3.5 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-amber-700 active:scale-95 sm:w-auto"
+            />
+            <div className="mt-2 text-[11px] text-slate-400">そら塾（オンライン個別指導）の無料体験（PR）</div>
+          </section>
+
           {/* FAQ */}
           <section className="mb-10">
             <h2 className="mb-5 text-xl font-bold text-slate-800">よくある質問</h2>
@@ -178,6 +201,7 @@ export default function JukuHiyouPage() {
           <RelatedToolsSection
             links={[
               { href: '/kyouiku-hi', title: '教育費シミュレーター', desc: '中学〜高校卒業までの総額を内訳つきで試算' },
+              { href: '/shinro-hiyou', title: '高校〜大学の教育費（進路別）', desc: '大学まで含めた総額を自宅/下宿・就学支援金込みで試算' },
               { href: '/koukou-hiyou', title: '高校の費用シミュレーター', desc: '公立・私立の3年間の費用目安を試算' },
               { href: '/shougakukin', title: '高校無償化・就学支援金ガイド', desc: '公立・私立別の支援額と世帯年収の目安' },
               { href: '/hiyou', title: 'お金・費用まとめ', desc: '教育費・学費・塾代・無償化をまとめて確認' },
