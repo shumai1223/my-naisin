@@ -49,16 +49,21 @@ export function getOAuth2Client(redirectUri) {
 
 export function saveToken(tokens) {
   ensureDir();
-  // 再認証で refresh_token が省略される場合に備え、既存値を温存してマージ。
-  let existing = {};
-  if (fs.existsSync(TOKEN_PATH)) {
-    try {
-      existing = JSON.parse(fs.readFileSync(TOKEN_PATH, 'utf8'));
-    } catch {
-      /* ignore */
+  // refresh_token を含む = 新規の同意（npm run ga4:auth）。古いメタ（refresh_token_expires_in 等）を
+  // 引きずらないよう丸ごと差し替える。本番公開後の再認証で「7日失効」表示が残るのを防ぐ。
+  // refresh_token を含まない = アクセストークンの自動更新。既存の refresh_token を温存するためマージ。
+  let merged = tokens;
+  if (!tokens.refresh_token) {
+    let existing = {};
+    if (fs.existsSync(TOKEN_PATH)) {
+      try {
+        existing = JSON.parse(fs.readFileSync(TOKEN_PATH, 'utf8'));
+      } catch {
+        /* ignore */
+      }
     }
+    merged = { ...existing, ...tokens };
   }
-  const merged = { ...existing, ...tokens };
   fs.writeFileSync(TOKEN_PATH, JSON.stringify(merged, null, 2));
   return TOKEN_PATH;
 }
