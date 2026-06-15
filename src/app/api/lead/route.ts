@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 import { sendLeadEmails, espConfigured } from '@/lib/esp';
+import { persistLead } from '@/lib/leads-db';
 
 /**
  * 名簿化（堀A）のリード受け口。
@@ -181,6 +182,9 @@ export async function POST(request: NextRequest) {
         console.error('Lead ESP send failed:', err);
       }
     }
+
+    // 6) 同意済みリードを D1 に永続化（配信母数）。バインディング未設定なら no-op。受付の成否には影響させない。
+    await persistLead(data);
 
     return NextResponse.json({ success: true, delivered });
   } catch (error) {

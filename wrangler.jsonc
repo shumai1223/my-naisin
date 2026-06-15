@@ -17,4 +17,13 @@
       "service": "my-naishin"
     }
   ]
+  // ── 名簿の永続化（堀A／配信母数）を点火する手順 ──
+  // src/lib/leads-db.ts は LEADS_DB バインディングがあれば同意リードを D1 に保存（無ければ no-op）。
+  //   1) wrangler d1 create my-naishin-leads      → 出力の database_id を控える
+  //   2) 下のブロックのコメントを外し database_id を貼る:
+  // , "d1_databases": [
+  //     { "binding": "LEADS_DB", "database_name": "my-naishin-leads", "database_id": "<ここに貼る>" }
+  //   ]
+  //   3) wrangler d1 execute my-naishin-leads --remote --file=migrations/0001_create_leads.sql
+  //   4) 再デプロイ。以降、同意リードが自動でD1に蓄積される。
 }

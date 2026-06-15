@@ -145,7 +145,9 @@
 ### 残タスク（ユーザー操作）
 1. **LINE公式アカウントを開設**（無料）→ 友だち追加URL（`https://lin.ee/xxxx`）を `NEXT_PUBLIC_LINE_ADD_URL` に設定。これが名簿の本体。
 2. リード通知先（Discord/Slack Webhook）を `LEAD_WEBHOOK_URL` に設定（`CONTACT_WEBHOOK_URL` 流用でも可）。
-3. ある程度貯まったらメール配信（ESP）/LINE配信で「内申対策・出願スケジュール」を定期配信 → 体験申込・資料請求に再送客。
+3. **ESP（Resend）で「配信できる名簿」化**＝`RESEND_API_KEY`＋`LEAD_FROM_EMAIL` を設定 → 登録者へ歓迎メール自動送信（`src/lib/esp.ts`／コードは結線済・env待ち）。
+4. **D1で配信母数を保存**＝`wrangler d1 create my-naishin-leads` → `wrangler.jsonc` の `LEADS_DB` バインディングのコメントを外し database_id を貼る → `migrations/0001_create_leads.sql` を適用 → 再デプロイ（`src/lib/leads-db.ts`／コードは結線済・バインディング待ち）。
+5. 貯まったらステップメール/季節配信で「内申対策・出願スケジュール」を定期配信 → 体験申込・資料請求に再送客。
 
 ---
 
