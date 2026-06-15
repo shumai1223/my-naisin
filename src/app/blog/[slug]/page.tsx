@@ -18,6 +18,7 @@ import { BackToTopButton } from '@/components/Blog/BackToTopButton';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { AdSlot } from '@/components/AdSlot';
 import { AD_SLOTS } from '@/lib/ad-slots';
+import { FutoukouLeadCTA } from '@/components/FutoukouLeadCTA';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -326,6 +327,10 @@ export default async function BlogPostPage({ params }: PageProps) {
             </div>
           )}
         </article>
+
+        {/* 不登校クラスタ専用の保護者リード（もしも・クラスジャパン/ティントル）。
+            汎用の塾/通信教育CTAより、不登校記事の読者（在宅・内申不問の学びを探す保護者）に文脈一致する。 */}
+        {post.tags.includes('不登校') && <FutoukouLeadCTA className="mt-10" />}
 
         {/* 記事末尾の関連サービス広告 */}
         <div className="mt-10 rounded-2xl border border-slate-200 bg-white px-6 py-6 text-center shadow-sm">

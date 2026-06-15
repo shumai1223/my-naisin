@@ -29,6 +29,7 @@ import { HighSchoolBorderlineTable } from '@/components/HighSchoolBorderlineTabl
 import { TrustInfo } from '@/components/TrustInfo';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
+import { ParentLeadCTAExperiment } from '@/components/ParentLeadCTAExperiment';
 import { RelatedToolsSection } from '@/components/RelatedToolsSection';
 
 interface PageProps {
@@ -696,8 +697,17 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
               </div>
             </section>
 
+            {/* 保護者リード（換金の本命）：県別ページは堀の主力なのに cta_view=0 だった面。
+                ページ末尾＝全文を読んだ高エンゲージ保護者に、県×面エンジンが解決した無料リード（関東=森塾/関西=キャンパス/他=Z会資料請求）を提示。
+                A/B基盤（experiment_impression）を最大流入面で実稼働させ、勝ち文言を lead-config に昇格させる。 */}
+            <ParentLeadCTAExperiment
+              experimentId="pref-lead-cta-v1"
+              placement="prefecture"
+              prefectureCode={prefectureCode}
+            />
+
             {/* 誤り報告フォーム */}
-            <ErrorReportForm 
+            <ErrorReportForm
               prefectureCode={prefectureCode}
               prefectureName={prefecture.name}
             />

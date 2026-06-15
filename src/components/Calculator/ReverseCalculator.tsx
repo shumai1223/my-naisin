@@ -13,6 +13,7 @@ import { calculateMaxScore } from '@/lib/utils';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { TokyoExtendedCalculator } from '@/components/Calculator/TokyoExtendedCalculator';
+import { EVENTS, funnel, trackEvent } from '@/lib/track';
 
 interface ReverseCalculatorProps {
   onBack: () => void;
@@ -311,6 +312,23 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
       calculate();
     }
   }, [osakaType, prefectureCode, currentNaishin, targetTotalScore, calculate]);
+
+  // 最高インテント面の計装：明示的に「計算」を押した瞬間だけ reverse_calc_use を送る
+  // （osaka の自動再計算では発火させない＝意図的な利用のみ計測）。これが GA4 で cta_view23 に対し
+  // 換金0だった最高インテント面の「実利用」の分母になる。
+  const handleCalculate = React.useCallback(() => {
+    trackEvent(EVENTS.REVERSE_CALC_USE, { pref: prefectureCode, tool: 'reverse', mode });
+    calculate();
+  }, [calculate, prefectureCode, mode]);
+
+  // 結果が初めて出たら result_view を一度だけ（換金ファネルの分母を /reverse でも確立）。
+  const resultViewFiredRef = React.useRef(false);
+  React.useEffect(() => {
+    if (result && !resultViewFiredRef.current) {
+      resultViewFiredRef.current = true;
+      funnel.resultView({ pref: prefectureCode, tool: 'reverse', placement: 'result' });
+    }
+  }, [result, prefectureCode]);
 
   return (
     <div className="space-y-4">
@@ -804,7 +822,7 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
             )}
 
             <Button
-              onClick={calculate}
+              onClick={handleCalculate}
               leftIcon={<Calculator className="h-4 w-4" />}
               className="w-full shadow-md shadow-emerald-500/20"
             >
