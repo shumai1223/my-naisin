@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+import { sendLeadEmails, espConfigured } from '@/lib/esp';
+
 /**
  * 名簿化（堀A）のリード受け口。
  *
@@ -166,6 +168,17 @@ export async function POST(request: NextRequest) {
       } catch (err) {
         console.error('Lead webhook forward failed:', err);
         delivered = false;
+      }
+    }
+
+    // 5) ESP（Resend）で登録者へ歓迎メール＋運営者へ通知（RESEND_API_KEY 設定時のみ）。
+    //    本人に1通届いた＝名簿として有効＝「配信できる名簿」化。歓迎メール成功も delivered とみなし mailto を抑止。
+    if (espConfigured()) {
+      try {
+        const esp = await sendLeadEmails(data);
+        delivered = delivered || esp.delivered || esp.owner;
+      } catch (err) {
+        console.error('Lead ESP send failed:', err);
       }
     }
 
