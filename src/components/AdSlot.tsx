@@ -34,8 +34,16 @@ interface AdSlotProps {
   style?: React.CSSProperties;
 }
 
+/** プレースホルダ（未差し替え）のスロットIDか。'0000000000' / 空 / 数字以外を弾く。 */
+function isPlaceholderSlot(slot: string): boolean {
+  const s = slot.trim();
+  return s === '' || /^0+$/.test(s) || !/^\d+$/.test(s);
+}
+
 export function AdSlot({ slot, format = 'auto', responsive = true, className = '', style }: AdSlotProps) {
-  const enabled = process.env.NEXT_PUBLIC_ADSENSE_ENABLED === '1';
+  // 二重ガード：env で点火していても、スロットIDが未差し替え（'0000000000'等）なら描画しない。
+  // → 承認後に「envだけ先に1にしてID差し替えを忘れる」事故で、本番に空/壊れ広告が出るのを防ぐ。
+  const enabled = process.env.NEXT_PUBLIC_ADSENSE_ENABLED === '1' && !isPlaceholderSlot(slot);
 
   useEffect(() => {
     if (!enabled) return;

@@ -76,7 +76,8 @@ export function ExitIntentLineModal() {
       if (e.clientY <= 0 && !e.relatedTarget) trigger();
     };
 
-    // モバイル：下に読み進めた後の“素早い上方向スクロール反転”（戻る操作の前兆）
+    // モバイル：下に読み進めた後の“上方向スクロール反転”（戻る/読み終わりの前兆）。
+    // 閾値を緩和（velUp 1.2→0.8 / y<600→900）。モバイルでは「読み終えて上に戻す」動作が離脱の主要シグナル。
     let lastY = window.scrollY;
     let lastT = Date.now();
     const onScrollMobile = () => {
@@ -85,21 +86,29 @@ export function ExitIntentLineModal() {
       const dy = y - lastY;
       const dt = t - lastT || 1;
       const velUp = -dy / dt; // 上方向の速度（px/ms）
-      if (velUp > 1.2 && y < 600 && scrolledRef.current) trigger();
+      if (velUp > 0.8 && y < 900 && scrolledRef.current) trigger();
       lastY = y;
       lastT = t;
+    };
+
+    // モバイル最重要：タブ切替/ホームボタン/画面ロック/タブを閉じる＝visibilitychange→hidden。
+    // mouseout が発火しないモバイル(全体の71%)での離脱を確実に捕捉する。モーダルは復帰時に見える。
+    const onVisibility = () => {
+      if (document.visibilityState === 'hidden') trigger();
     };
 
     armedRef.current = true;
     window.addEventListener('scroll', onScroll, { passive: true });
     document.addEventListener('mouseout', onMouseOut);
     window.addEventListener('scroll', onScrollMobile, { passive: true });
+    document.addEventListener('visibilitychange', onVisibility);
 
     return () => {
       window.clearTimeout(engageTimer);
       window.removeEventListener('scroll', onScroll);
       document.removeEventListener('mouseout', onMouseOut);
       window.removeEventListener('scroll', onScrollMobile);
+      document.removeEventListener('visibilitychange', onVisibility);
     };
   }, []);
 

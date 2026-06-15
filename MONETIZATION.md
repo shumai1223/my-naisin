@@ -19,6 +19,40 @@
 
 ---
 
+## 0.5. 承認 → live 1行作業表（★最新・ここだけ見れば回る）
+
+> 2026-06 時点。送客先の差し替えは **`lead-config.ts` の表** と **`affiliates.ts` の1エントリ**に集約済み。コンポーネントは無改修。
+> `status: 'pending'` の枠は `AffiliateAd`/`selectLeadOffer` が描画しない＝デッドリンクは出ない。**承認 → 下表の1行 → push（=自動デプロイ）**。
+
+### A. 学費面（最高単価 CPA¥8k–1.5万）｜lead-config `PLACEMENT_LEAD_OVERRIDES.hiyou = fp-soudan`
+| 承認・解放 | 作業（1箇所） |
+|---|---|
+| ✅ 稼働中 | もしも「保険トータルプロフェッショナル」(FP無料相談¥13,800) で `fp-soudan` live。 |
+| A8 保険コンパス / マネードクター | EPCが上なら **`affiliates.ts` の `fp-soudan` の `href`/`trackingPixel` を勝者ASPへ差し替え**るだけ（slotは `fp-soudan` 固定）。EPC順=保険コンパス>マネードクター>保険見直し本舗。 |
+| 学資保険（ガーデン等） | `affiliates.ts` の `gakushi-hoken`（pending）の `href`/`trackingPixel` を実値にし `status` 行を削除 → `/shougakukin` の送客先に割当。 |
+
+### B. 塾・家庭教師（無料体験 CPA¥3k–1万・本線レバー）
+| 枠（pending） | ASP | live化（1エントリ） |
+|---|---|---|
+| `accesstrade-juku-trial` | アクセストレード | `href`/`text`/`trackingPixel` を実値に → `status` 行削除。県×面の勝者へ `PREFECTURE_PLACEMENT_LEAD_OVERRIDES` で割当。 |
+| `afb-juku-trial` | afb | 同上。 |
+| `rentracks-juku-trial` | レントラックス | 同上。 |
+| `afb-katei-kyoshi` | afb（家庭教師） | 同上。`mendan`/`prefecture` 面と相性良。 |
+
+**昇格の型**：承認案件のEPCが現行（森塾/キャンパス/Z会資料請求）を上回ったら、`PLACEMENT_LEAD_OVERRIDES`（面）か `PREFECTURE_PLACEMENT_LEAD_OVERRIDES`（県×面）に1行追加。note/ctaText は `PROGRAM_PRESET` に1行足せば表記ゆれ防止。
+
+### C. もしも 提携中（審査なし・live済・配置済）
+`moshimo-e-live`→mendan ／ `moshimo-studycoach`→dashboard ／ `moshimo-classjapan`+`moshimo-tintoru`→不登校blog(`FutoukouLeadCTA`) ／ `fp-soudan`→hiyou。
+
+### D. AdSense（床）
+1. コンソールで広告ユニット作成 → `data-ad-slot` 取得。
+2. `src/lib/ad-slots.ts` の `'0000000000'` を取得IDへ差し替え（`AdSlot` は二重ガード：env=1でもID未差し替えなら非描画＝壊れ広告は出ない）。
+3. `NEXT_PUBLIC_ADSENSE_ENABLED=1` をセット。`NEXT_PUBLIC_ADSENSE_AUDIT` を削除すると `auditHide` 枠が全復元。
+
+> 旧「2. 保護者リード送客」の出し分け表は初期(そら塾/atama+)世代の記録。**現行の正は上の 0.5 と `lead-config.ts`**（FP/もしも/森塾/キャンパス世代）。
+
+---
+
 ## 1. AdSense（収益の床）
 
 ### 審査を通すチェックリスト
