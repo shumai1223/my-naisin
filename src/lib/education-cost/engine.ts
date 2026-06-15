@@ -6,6 +6,8 @@ import {
   JUKU_RATES,
   LEARNING_COST_ANNUAL,
   SHUGAKU_SHIEN_TIERS,
+  UNIVERSITY_AWAY_COST,
+  UNIVERSITY_ESTIMATE,
 } from './data';
 import type {
   CourseType,
@@ -13,7 +15,11 @@ import type {
   EducationCostResult,
   IncomeBracket,
   JukuType,
+  PathCostInput,
+  PathCostResult,
+  Residence,
   SchoolStage,
+  UniversityType,
 } from './types';
 
 /** 円の整形（¥1,234,567）。負値は0に丸める。 */
@@ -97,4 +103,45 @@ export function highSchoolSupportOver3Years(course: CourseType, bracket: IncomeB
  */
 export function highSchoolRealCost(course: CourseType, bracket: IncomeBracket): number {
   return Math.max(0, highSchoolTotal(course) - highSchoolSupportOver3Years(course, bracket));
+}
+
+/** 大学4年の学費分（円）。'none'（高卒）は0。 */
+export function universityTuition(type: UniversityType): number {
+  if (type === 'none') return 0;
+  return UNIVERSITY_ESTIMATE[type].fourYear;
+}
+
+/** 大学で自宅外通学する場合の追加費用（初期費用＋仕送り4年）。自宅 or 高卒は0。 */
+export function universityLivingCost(type: UniversityType, residence: Residence): number {
+  if (type === 'none' || residence === 'home') return 0;
+  return UNIVERSITY_AWAY_COST.firstYearSetup + UNIVERSITY_AWAY_COST.annualSupport * 4;
+}
+
+/** 大学4年の総額（学費＋自宅外費用）。 */
+export function universityTotal(type: UniversityType, residence: Residence): number {
+  return universityTuition(type) + universityLivingCost(type, residence);
+}
+
+/**
+ * 高校〜大学卒業までの進路別総額シミュレーション（保護者＝決裁者の最大関心＝お金）。
+ * ＝ 高校3年間の実質負担（就学支援金 控除後） ＋ 大学4年の総額（学費＋自宅外費用）。
+ * 数値は文科省「子供の学習費調査」「就学支援金」＋日本政策金融公庫の自宅外費用（いずれも一次情報・概算）。
+ */
+export function simulateHighToUniversity(input: PathCostInput): PathCostResult {
+  const { highCourse, incomeBracket, universityType, residence } = input;
+  const highSchoolBeforeSupport = highSchoolTotal(highCourse);
+  const highSchoolSupport = highSchoolSupportOver3Years(highCourse, incomeBracket);
+  const highSchoolReal = Math.max(0, highSchoolBeforeSupport - highSchoolSupport);
+  const tuition = universityTuition(universityType);
+  const living = universityLivingCost(universityType, residence);
+  const university = tuition + living;
+  return {
+    highSchoolBeforeSupport,
+    highSchoolSupport,
+    highSchoolReal,
+    universityTuition: tuition,
+    universityLiving: living,
+    university,
+    total: highSchoolReal + university,
+  };
 }

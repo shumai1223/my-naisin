@@ -19,6 +19,42 @@ export type JukuType = 'none' | 'shudan' | 'kobetsu' | 'katei';
 /** 就学支援金の世帯年収区分（目安。正確な判定は所得割課税標準額で行われる）。 */
 export type IncomeBracket = 'under590' | 'under910' | 'over910';
 
+/** 大学の種別（学費の概算区分）。'none' は大学進学なし（高卒）。 */
+export type UniversityType = 'none' | 'national' | 'privateHumanities' | 'privateScience';
+
+/** 通学形態（自宅通学 / 自宅外＝下宿・一人暮らし）。 */
+export type Residence = 'home' | 'away';
+
+/** 高校〜大学卒業までの進路別総額シミュレーションの入力。 */
+export interface PathCostInput {
+  /** 進学先高校の課程（公立 / 私立）。 */
+  highCourse: CourseType;
+  /** 就学支援金の世帯年収区分（高校授業料の軽減に使う）。 */
+  incomeBracket: IncomeBracket;
+  /** 進学先大学の種別（なし＝高卒）。 */
+  universityType: UniversityType;
+  /** 大学の通学形態（自宅 / 自宅外）。自宅外は仕送り・初期費用を加算。 */
+  residence: Residence;
+}
+
+/** 高校〜大学卒業までの進路別総額の内訳つき結果。 */
+export interface PathCostResult {
+  /** 高校3年間の学習費総額（就学支援金 控除前）。 */
+  highSchoolBeforeSupport: number;
+  /** 高校3年間の就学支援金 軽減額（目安）。 */
+  highSchoolSupport: number;
+  /** 高校3年間の実質負担（就学支援金 控除後）。 */
+  highSchoolReal: number;
+  /** 大学の学費分（4年）。 */
+  universityTuition: number;
+  /** 大学の自宅外費用分（初期費用＋仕送り4年）。自宅なら0。 */
+  universityLiving: number;
+  /** 大学4年の総額（学費＋自宅外費用）。 */
+  university: number;
+  /** 高校〜大学の総額（高校実質負担＋大学総額）。 */
+  total: number;
+}
+
 /** 1段階・1課程あたりの年間学習費総額（文科省 子供の学習費調査）。 */
 export interface StageAnnualCost {
   stage: SchoolStage;

@@ -89,3 +89,23 @@ export const UNIVERSITY_ESTIMATE = {
   privateHumanities: { label: '私立大学（文系）', firstYear: 1180000, fourYear: 4000000, note: '入学金・授業料・施設設備費の概算' },
   privateScience: { label: '私立大学（理系）', firstYear: 1550000, fourYear: 5400000, note: '実験実習費を含む概算' },
 } as const;
+
+/** 自宅外通学（下宿・一人暮らし）の費用目安の出典。 */
+export const JFC_AWAY_COST_SOURCE: CostSource = {
+  url: 'https://www.jfc.go.jp/n/findings/',
+  docTitle: '日本政策金融公庫「教育費負担の実態調査結果」（自宅外通学・仕送り）',
+  lastChecked: '2026-06-15',
+};
+
+/**
+ * 大学で自宅外通学（下宿・一人暮らし）をする場合の追加費用の目安（円）。
+ * 出典：日本政策金融公庫「教育費負担の実態調査結果」。自宅外通学を始めるための費用 約39.3万円、
+ * 自宅外通学者への仕送り（家賃・生活費）年額 約95.8万円。あくまで全国平均の目安で、地域・大学で大きく変動する。
+ */
+export const UNIVERSITY_AWAY_COST = {
+  /** 自宅外通学を始めるための初期費用（敷金・家財・転居等）。 */
+  firstYearSetup: 393000,
+  /** 仕送り（家賃・生活費）の年額目安。 */
+  annualSupport: 958000,
+  note: '日本政策金融公庫調査：自宅外通学開始費用 約39.3万円・年間仕送り 約95.8万円（全国平均の目安）',
+} as const;

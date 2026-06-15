@@ -221,6 +221,7 @@ export default function KyouikuHiPage() {
 
           <RelatedToolsSection
             links={[
+              { href: '/shinro-hiyou', title: '高校〜大学の教育費（進路別）', desc: '大学まで含めた総額を自宅/下宿・就学支援金込みで試算' },
               { href: '/koukou-hiyou', title: '高校の費用シミュレーター', desc: '公立・私立の3年間の費用を詳しく試算' },
               { href: '/juku-hiyou', title: '塾代シミュレーター', desc: '集団・個別・家庭教師の月謝と総額の目安' },
               { href: '/shougakukin', title: '高校の学費支援・就学支援金ガイド', desc: '高校無償化・私立支援・奨学金の目安' },

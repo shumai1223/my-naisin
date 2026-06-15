@@ -33,6 +33,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: '/hokkaido/rank', priority: 1.0, changeFrequency: 'weekly' },
     { url: '/hiyou', priority: 0.9, changeFrequency: 'weekly' },
     { url: '/kyouiku-hi', priority: 0.9, changeFrequency: 'weekly' },
+    { url: '/shinro-hiyou', priority: 0.9, changeFrequency: 'weekly' },
     { url: '/koukou-hiyou', priority: 0.9, changeFrequency: 'weekly' },
     { url: '/juku-hiyou', priority: 0.9, changeFrequency: 'weekly' },
     { url: '/shougakukin', priority: 0.9, changeFrequency: 'weekly' },
