@@ -16,6 +16,7 @@ import {
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
+import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { PrintButton } from '@/components/PrintButton';
 import { RelatedToolsSection } from '@/components/RelatedToolsSection';
 import { SITE_URL } from '@/lib/naishin-dataset';
@@ -231,6 +232,11 @@ export default function MendanPage() {
               </ul>
               <p className="mt-4 text-xs text-slate-500">
                 費用は無料の資料請求・無料体験で比較しておくと、選択肢を狭めずに判断できます。
+              </p>
+              <p className="mt-2 text-xs text-slate-500">
+                英語が不安な場合は、
+                <AffiliateAd id="moshimo-rewrite" hideLabel linkClassName="font-bold text-blue-600 underline decoration-blue-300 underline-offset-2 hover:text-blue-700" />
+                （PR）で受験英語専門の無料相談もできます。
               </p>
             </div>
           </section>

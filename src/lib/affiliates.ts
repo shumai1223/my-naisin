@@ -23,7 +23,13 @@ export type AffiliateId =
   | 'afb-katei-kyoshi'
   // ── 学費クラスタの最高単価帯（保護者＝決裁者・無料相談/資料請求。CPA¥8k–1.5万） ──
   | 'fp-soudan'
-  | 'gakushi-hoken';
+  | 'gakushi-hoken'
+  // ── もしも 提携中（審査なし・2026-06-15 live結線） ──
+  | 'moshimo-e-live'
+  | 'moshimo-studycoach'
+  | 'moshimo-classjapan'
+  | 'moshimo-tintoru'
+  | 'moshimo-rewrite';
 
 /** 'pending' は枠だけ確保した未確定案件。AffiliateAd は描画せず（デッドリンクを出さない）、selectLeadOffer も返さない。 */
 type AffiliateStatus = 'live' | 'pending';
@@ -255,14 +261,14 @@ export const AFFILIATES: Record<AffiliateId, AffiliateConfig> = {
   // ── 学費クラスタの最高単価帯（先回し枠／元栓が開いたら status:'live' + href/pixel を差すだけ） ──
   // 保護者の最大関心=お金。教育資金FPの無料相談・学資保険の一括資料請求は CPA¥8,000–15,000 で最高単価帯。
   // lead-config の 'hiyou' 面（/koukou-hiyou・/juku-hiyou）の送客先をここに張り替える想定。
+  // 2026-06-15 もしも「保険のトータルプロフェッショナル」(専門家FP無料相談 CPA¥13,800・審査なし提携中)で live化。
   'fp-soudan': {
     id: 'fp-soudan',
     type: 'text',
-    name: '教育資金の無料FP相談',
-    href: '#',
-    text: '教育資金の無料相談をする',
-    trackingPixel: '',
-    status: 'pending',
+    name: '専門家FPの無料保険・教育資金相談',
+    href: 'https://af.moshimo.com/af/c/click?a_id=5638594&p_id=1831&pc_id=3531&pl_id=25541',
+    text: '教育資金を専門家FPに無料で相談',
+    trackingPixel: 'https://i.moshimo.com/af/i/impression?a_id=5638594&p_id=1831&pc_id=3531&pl_id=25541',
   },
   'gakushi-hoken': {
     id: 'gakushi-hoken',
@@ -272,6 +278,48 @@ export const AFFILIATES: Record<AffiliateId, AffiliateConfig> = {
     text: '学資保険の資料を無料で取り寄せる',
     trackingPixel: '',
     status: 'pending',
+  },
+
+  // ── もしも 提携中（審査なし・2026-06-15 live。テキストリンク1本/プログラム＝形式で選定） ──
+  'moshimo-e-live': {
+    id: 'moshimo-e-live',
+    type: 'text',
+    name: 'e-Live（小中高オンライン家庭教師）',
+    href: 'https://af.moshimo.com/af/c/click?a_id=5638580&p_id=4328&pc_id=11085&pl_id=58609',
+    text: '小中高オンライン家庭教師の無料体験',
+    trackingPixel: 'https://i.moshimo.com/af/i/impression?a_id=5638580&p_id=4328&pc_id=11085&pl_id=58609',
+  },
+  'moshimo-studycoach': {
+    id: 'moshimo-studycoach',
+    type: 'text',
+    name: 'スタディコーチ（東大式オンライン塾）',
+    href: 'https://af.moshimo.com/af/c/click?a_id=5638581&p_id=3243&pc_id=7650&pl_id=42307',
+    text: '東大式コーチングの無料体験',
+    trackingPixel: 'https://i.moshimo.com/af/i/impression?a_id=5638581&p_id=3243&pc_id=7650&pl_id=42307',
+  },
+  'moshimo-classjapan': {
+    id: 'moshimo-classjapan',
+    type: 'text',
+    name: 'クラスジャパン小中学園（不登校オンラインフリースクール）',
+    href: 'https://af.moshimo.com/af/c/click?a_id=5638587&p_id=4781&pc_id=12631&pl_id=62984',
+    text: '不登校生のオンラインフリースクール（無料で資料請求）',
+    trackingPixel: 'https://i.moshimo.com/af/i/impression?a_id=5638587&p_id=4781&pc_id=12631&pl_id=62984',
+  },
+  'moshimo-tintoru': {
+    id: 'moshimo-tintoru',
+    type: 'text',
+    name: 'ティントル（不登校専門オンライン個別指導）',
+    href: 'https://af.moshimo.com/af/c/click?a_id=5638588&p_id=4342&pc_id=11154&pl_id=58815',
+    text: '不登校専門オンライン個別指導の無料体験',
+    trackingPixel: 'https://i.moshimo.com/af/i/impression?a_id=5638588&p_id=4342&pc_id=11154&pl_id=58815',
+  },
+  'moshimo-rewrite': {
+    id: 'moshimo-rewrite',
+    type: 'text',
+    name: 'Re-Write（受験英語専門ゼミ）',
+    href: 'https://af.moshimo.com/af/c/click?a_id=5638547&p_id=3991&pc_id=10043&pl_id=55079',
+    text: '受験英語専門ゼミの無料相談',
+    trackingPixel: 'https://i.moshimo.com/af/i/impression?a_id=5638547&p_id=3991&pc_id=10043&pl_id=55079',
   },
 };
 
