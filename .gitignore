@@ -92,3 +92,6 @@ __sapper__/
 gsc-weekly-report.json
 gsc-weekly-report.md
 link-monitor-report.json
+
+# GA4 OAuth 連携の機密（client_secret / refresh_token / 選択プロパティ）。絶対にコミットしない。
+.ga4/
