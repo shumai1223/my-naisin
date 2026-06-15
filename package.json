@@ -20,9 +20,9 @@
     "check:orphans": "node scripts/check-orphans.mjs",
     "check:all": "npm run check:consistency && npm run check:forbidden",
     "monitor:links": "npx tsx src/scripts/link-monitor.ts",
-    "ga4:auth": "node scripts/ga4-auth.mjs",
-    "ga4": "node scripts/ga4.mjs",
-    "ga4:mcp": "node scripts/ga4-mcp.mjs",
+    "ga4:auth": "node --use-system-ca scripts/ga4-auth.mjs",
+    "ga4": "node --use-system-ca scripts/ga4.mjs",
+    "ga4:mcp": "node --use-system-ca scripts/ga4-mcp.mjs",
     "test:e2e": "playwright test",
     "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
     "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy"

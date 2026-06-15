@@ -2,7 +2,7 @@
   "mcpServers": {
     "ga4": {
       "command": "node",
-      "args": ["scripts/ga4-mcp.mjs"]
+      "args": ["--use-system-ca", "scripts/ga4-mcp.mjs"]
     }
   }
 }

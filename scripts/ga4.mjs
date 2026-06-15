@@ -89,8 +89,10 @@ function printRow(cells, widths) {
   console.log(cells.map((c, i) => String(c ?? '').padEnd(widths[i])).join('  '));
 }
 function printTable(headers, rows, widths) {
-  printRow(headers, widths);
-  console.log(widths.map((w) => '-'.repeat(w)).join('  '));
+  if (headers.length) {
+    printRow(headers, widths);
+    console.log(widths.map((w) => '-'.repeat(w)).join('  '));
+  }
   rows.forEach((r) => printRow(r, widths));
 }
 
@@ -129,7 +131,8 @@ async function main() {
     console.log('(データなし — 期間内に計測イベントが無い可能性。GA4が稼働中か・プロパティIDが正しいか確認)');
     return;
   }
-  printTable(headers, rows);
+  const widths = colWidths(headers, rows);
+  printTable(headers, rows, widths);
 
   // 合計（ディメンションがある場合のみ意味がある）
   if (dimensions.length && data.totals?.[0]?.metricValues) {
@@ -137,7 +140,7 @@ async function main() {
       ...dimHeaders.map((_, i) => (i === 0 ? 'TOTAL' : '')),
       ...data.totals[0].metricValues.map((m, i) => fmt(metHeaders[i], m.value)),
     ];
-    printTable([], [totalRow]); // 区切り済みの下にTOTAL行だけ追記
+    printTable([], [totalRow], widths); // メイン表と同じ列幅でTOTAL行を整列追記
   }
 }
 
