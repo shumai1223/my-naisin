@@ -6,32 +6,10 @@ import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
+import { JukenIcsButton } from '@/components/JukenIcsButton';
 import { RelatedToolsSection } from '@/components/RelatedToolsSection';
 import { SITE_URL } from '@/lib/naishin-dataset';
-
-type Month = {
-  month: string;
-  phase: string;
-  todo: string;
-  /** 関連する内部リンク（任意） */
-  link?: { href: string; label: string };
-};
-
-// 中3の年間スケジュール（一般的な流れ。具体的な入試日程は都道府県・年度で異なるため断定しない）。
-const SCHEDULE: Month[] = [
-  { month: '4月', phase: '新学期・基礎固め', todo: '中3の内申は多くの地域で最重視。1学期の最初の提出物・授業態度から評価が始まる。生活リズムと学習習慣を立て直す。', link: { href: '/blog/april-naishin-recovery-plan', label: '4月の内申リカバリープラン' } },
-  { month: '5月', phase: '中間テスト', todo: '1学期中間テストで好スタートを切る。内申点・偏差値の「現在地」を計算して把握しておく。', link: { href: '/', label: '内申点を計算する' } },
-  { month: '6月', phase: '志望校の情報収集', todo: '学校説明会・文化祭の日程を確認し始める。志望校の偏差値・内申の目安と自分の差を見える化。', link: { href: '/hensachi/shiboukou', label: '偏差値から行ける高校レンジを見る' } },
-  { month: '7月', phase: '期末テスト・三者面談', todo: '1学期期末テスト。三者面談で先生に「今の評定・志望校との差・あと何が必要か」を具体的に確認する。', link: { href: '/mendan', label: '三者面談の準備チェックリスト' } },
-  { month: '8月', phase: '夏休み（天王山）', todo: '中1・中2の総復習を一気に進める好機。夏期講習を使うなら費用とコマ数を先に把握する。', link: { href: '/blog/summer-vacation-review-preview-golden-ratio', label: '夏休みの復習・予習の黄金比' } },
-  { month: '9月', phase: '2学期・実力テスト', todo: '2学期は内申に直結する重要学期。実力テスト・模試で偏差値の推移を確認し、弱点教科を特定する。', link: { href: '/hensachi', label: '5教科の偏差値を計算する' } },
-  { month: '10月', phase: '志望校の絞り込み', todo: '説明会に参加し、志望校を実力相応・チャレンジ・安全圏で整理。私立併願校の検討も始める。', link: { href: '/blog/how-to-choose-high-school-2026', label: '志望校の選び方（2026年版）' } },
-  { month: '11月', phase: '2学期中間〜過去問', todo: '内申が固まる時期。過去問演習を開始し、志望校の合格ラインから必要な当日点を逆算する。', link: { href: '/reverse', label: '志望校から必要な当日点を逆算する' } },
-  { month: '12月', phase: '2学期末・最終面談', todo: '2学期の評定で多くの地域の内申がほぼ確定。三者面談で受験校（私立併願・公立第一志望）を最終決定する。', link: { href: '/mendan', label: '三者面談で受験校を決める準備' } },
-  { month: '1月', phase: '私立出願・入試開始', todo: '私立高校の出願・入試が始まる（地域差あり）。願書・調査書など出願書類を期限内にそろえる。', link: { href: '/hiyou', label: '受験・進学にかかるお金を確認' } },
-  { month: '2月', phase: '私立入試・公立出願', todo: '私立入試の本番、公立高校の出願。体調管理を最優先に、過去問の総仕上げを行う。', link: { href: '/blog/toritsu-nyushi-2026-kanzen-guide', label: '公立入試の完全ガイド' } },
-  { month: '3月', phase: '公立入試・合格発表', todo: '公立高校の学力検査・合格発表（地域差あり）。最後まで当日点で内申の差は取り返せる。', link: { href: '/total-score', label: '都道府県別の総合得点の仕組み' } },
-];
+import { JUKEN_SCHEDULE as SCHEDULE } from '@/lib/juken-schedule';
 
 const FAQS = [
   {
@@ -129,6 +107,15 @@ export default function JukenSchedulePage() {
             <p className="mt-3 text-xs text-slate-500">
               ※ 一般的な流れの目安です。私立はおおむね1〜2月、公立は2〜3月に入試が行われますが、具体的な日程・選抜方式は都道府県・学校で異なります。必ず募集要項で確認してください。
             </p>
+
+            {/* 名簿の“商品”：月別の準備ToDoをカレンダーに取り込めるICS（公式日程ではなく準備リマインダー）。 */}
+            <div className="mt-5 flex flex-col items-center gap-2 rounded-2xl border border-sky-200 bg-sky-50/50 p-5 text-center">
+              <div className="text-sm font-bold text-slate-800">この準備スケジュールをカレンダーに入れておく</div>
+              <p className="text-xs leading-relaxed text-slate-600">
+                各月の「やること」を終日リマインダーとして、Googleカレンダー・Appleカレンダーに取り込めます（公式の入試日ではなく準備の目安です）。
+              </p>
+              <JukenIcsButton />
+            </div>
           </section>
 
           {/* 保護者リード */}
