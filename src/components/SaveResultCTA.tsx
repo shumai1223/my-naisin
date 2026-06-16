@@ -6,6 +6,7 @@ import { MessageCircle, Mail, BellRing, Check, Loader2, ShieldCheck, Bookmark } 
 
 import { EVENTS, track } from '@/lib/track';
 import { lineAddUrl, type LineAudience } from '@/lib/line';
+import { LIST_BENEFITS } from '@/lib/broadcast-templates';
 import { isValidEmail, openLeadMailtoFallback, submitLead, type LeadPayload, type LeadSource } from '@/lib/lead';
 
 interface SaveResultCTAProps {
@@ -160,6 +161,17 @@ export function SaveResultCTA({
         </div>
       ) : (
         <div className="space-y-4">
+          {/* 追加する“理由”を具体化（友だち追加の動機づけ＝名簿velocityのKPI施策）。
+              「受験情報」では曖昧なので、受け取れる中身を3つ明示する。 */}
+          <ul className="grid gap-1.5 sm:grid-cols-3">
+            {LIST_BENEFITS.map((b) => (
+              <li key={b} className="flex items-start gap-1.5 rounded-lg bg-white/70 px-2.5 py-2 text-xs font-medium text-slate-600 ring-1 ring-sky-100">
+                <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-emerald-500" />
+                {b}
+              </li>
+            ))}
+          </ul>
+
           {/* 受け皿1：LINE（プッシュ可能な“溶けない名簿”） */}
           {LINE_ADD_URL && (
             <a

@@ -246,6 +246,14 @@ const TOOL_GROUPS: { id: string; heading: string; tools: Tool[] }[] = [
         color: 'green',
       },
       {
+        title: '高校〜大学の教育費（進路別シミュレーター）',
+        description: '高校・世帯年収・大学（国公立/私立）・自宅か下宿かから、卒業までの総額を就学支援金込みで概算',
+        features: ['高校3年＋大学4年の総額', '自宅/下宿の差を反映', '就学支援金で実質負担', '日本政策金融公庫データ'],
+        href: '/shinro-hiyou',
+        icon: Wallet,
+        color: 'blue',
+      },
+      {
         title: '高校の費用シミュレーター',
         description: '公立・私立の高校3年間にかかる学費・教材費・通学費の総額を試算',
         features: ['公立 約165万円', '私立 約340万円', '入学準備費も調整', '就学支援金考慮'],

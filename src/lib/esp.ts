@@ -17,6 +17,7 @@
  */
 
 import { CONTACT_EMAIL } from '@/lib/contact';
+import { LIST_BENEFITS } from '@/lib/broadcast-templates';
 
 const RESEND_ENDPOINT = 'https://api.resend.com/emails';
 const SITE_URL = 'https://my-naishin.com';
@@ -90,7 +91,10 @@ export async function sendLeadWelcome(d: LeadEmailData): Promise<boolean> {
     <div style="font-size:20px;font-weight:700;margin-top:4px">受け取り登録ありがとうございます</div>
   </div>
   <div style="border:1px solid #e2e8f0;border-top:0;border-radius:0 0 16px 16px;padding:24px">
-    <p>受験本番まで、<strong>内申点アップのコツ・志望校の最新ボーダー・出願スケジュール</strong>を無料でお届けします。</p>
+    <p>受験本番まで、お子さまの受験を後押しする情報を無料でお届けします。受け取れるのは：</p>
+    <ul style="padding-left:18px;margin:8px 0 14px">
+      ${LIST_BENEFITS.map((b) => `<li>${esc(b)}</li>`).join('')}
+    </ul>
     ${ctx ? `<p style="background:#f1f5f9;border-radius:10px;padding:12px 14px;font-size:14px">あなたの記録：<strong>${ctx}</strong></p>` : ''}
     <p style="margin-top:18px;font-weight:700">まずはここから</p>
     <ul style="padding-left:18px">
