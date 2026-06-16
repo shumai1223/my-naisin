@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { School, Home, ChevronRight, HelpCircle, BookCheck } from 'lucide-react';
 
 import { KoukouHiyouCalculator } from '@/components/KoukouHiyouCalculator';
+import { AnswerBox } from '@/components/AnswerBox';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
@@ -68,6 +69,14 @@ export default function KoukouHiyouPage() {
         </p>
 
         <div className="mt-6">
+          <AnswerBox question="高校3年間の費用はいくら？公立と私立でどれくらい違う？">
+            文部科学省「子供の学習費調査」をもとにすると、<strong>公立高校は3年間で約165万円、私立高校は約340万円</strong>が目安です
+            （学費・教材費・通学費・塾代などを含む総額）。1年あたりは公立 約51万円・私立 約105万円で、私立はおおむね公立の約2倍。
+            就学支援金で授業料負担は軽減できます。下のシミュレーターで公立・私立を選ぶと、3年間の総額の目安が分かります。
+          </AnswerBox>
+        </div>
+
+        <div className="mt-6">
           <KoukouHiyouCalculator />
         </div>
 
@@ -131,6 +140,7 @@ export default function KoukouHiyouPage() {
           <div className="grid gap-3 sm:grid-cols-2">
             <Link href="/kyouiku-hi" className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-4 text-sm font-bold text-slate-900 shadow-sm hover:border-blue-200">教育費シミュレーター（中学〜高校卒業）→</Link>
             <Link href="/juku-hiyou" className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-4 text-sm font-bold text-slate-900 shadow-sm hover:border-blue-200">塾代シミュレーター（相場・総額）→</Link>
+            <Link href="/shinro-hiyou" className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-4 text-sm font-bold text-slate-900 shadow-sm hover:border-blue-200">高校〜大学の教育費（進路別シミュレーター）→</Link>
             <Link href="/shougakukin" className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-4 text-sm font-bold text-slate-900 shadow-sm hover:border-blue-200">高校無償化・就学支援金ガイド →</Link>
             <Link href="/hiyou" className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-4 text-sm font-bold text-slate-900 shadow-sm hover:border-blue-200">お金・費用まとめ →</Link>
             <Link href="/mendan" className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-4 text-sm font-bold text-slate-900 shadow-sm hover:border-blue-200">三者面談の準備チェックリスト →</Link>
