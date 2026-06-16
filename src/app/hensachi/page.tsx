@@ -11,6 +11,7 @@ import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { HensachiCalculator } from '@/components/Hensachi/HensachiCalculator';
+import { AnswerBox } from '@/components/AnswerBox';
 import { HensachiClusterNav } from '@/components/Hensachi/HensachiClusterNav';
 import { ToolClusterNav } from '@/components/ToolClusterNav';
 
@@ -283,6 +284,15 @@ export default function HensachiPage() {
               </div>
             </div>
           </section>
+
+          {/* 答え先出し（GEO/AI引用・強調スニペット）。偏差値の定義式を即答する。 */}
+          <div className="mb-6">
+            <AnswerBox question="偏差値はどう計算する？偏差値60は上位何%？">
+              偏差値は<strong>「50 ＋ 10 ×（自分の点数 − 平均点）÷ 標準偏差」</strong>で求めます。
+              平均点を取ると偏差値50、<strong>偏差値60は上位約16%、偏差値70は上位約2.3%</strong>です（平均50・標準偏差10の正規分布で一定）。
+              標準偏差が分からない場合は定期テストで15〜20が目安。下の計算ツールに点数・平均点を入れると、5教科の偏差値と上位％を自動算出できます（無料・登録不要）。
+            </AnswerBox>
+          </div>
 
           {/* Calculator */}
           <div id="calculator-section">

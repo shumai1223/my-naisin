@@ -14,6 +14,7 @@ import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
+import { AnswerBox } from '@/components/AnswerBox';
 import Loader from '@/components/ui/Loader';
 
 const ReverseCalculator = nextDynamic(
@@ -101,6 +102,12 @@ function ReversePageContent() {
                   「この高校に受かるには、当日の試験で何点取ればいい？」——そんな疑問に答える逆算ツールです。
                   現在の内申点と志望校の配点比率を入力するだけで、合格に必要な当日点の目安がわかります。
                 </p>
+
+                <AnswerBox question="志望校に受かるには当日何点必要？どう逆算する？">
+                  必要な当日点は<strong>「志望校の合格基準点 −（あなたの内申点を入試方式で点数化した値）」</strong>で逆算します。
+                  内申比率が高い地域は内申点が高いほど必要な当日点が下がり、当日点比率が高い地域はその逆です。
+                  下のツールは都道府県の満点・配点比率（東京1020点・神奈川S値にも対応）を読み込み、「あと何点必要か」を自動計算します。
+                </AnswerBox>
 
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div className="rounded-xl border border-blue-200 bg-blue-50 p-4">
