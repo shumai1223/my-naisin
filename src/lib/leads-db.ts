@@ -91,3 +91,21 @@ export async function persistLead(input: PersistLeadInput): Promise<boolean> {
     return false;
   }
 }
+
+/**
+ * 配信停止：該当メールの unsubscribed フラグを立てる。バインディング未設定なら no-op（false）。
+ * 一斉配信ジョブは unsubscribed=0 のみを対象にする運用。
+ */
+export async function markUnsubscribed(email: string): Promise<boolean> {
+  try {
+    const { getCloudflareContext } = await import('@opennextjs/cloudflare');
+    const { env } = await getCloudflareContext({ async: true });
+    const db = (env as unknown as { LEADS_DB?: MinimalD1 }).LEADS_DB;
+    if (!db) return false;
+    await db.prepare('UPDATE leads SET unsubscribed = 1 WHERE email = ?').bind(email.trim().toLowerCase()).run();
+    return true;
+  } catch (err) {
+    console.error('markUnsubscribed skipped:', err instanceof Error ? err.message : err);
+    return false;
+  }
+}

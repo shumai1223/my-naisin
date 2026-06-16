@@ -18,6 +18,7 @@
 
 import { CONTACT_EMAIL } from '@/lib/contact';
 import { LIST_BENEFITS } from '@/lib/broadcast-templates';
+import { unsubscribeUrl } from '@/lib/unsubscribe';
 
 const RESEND_ENDPOINT = 'https://api.resend.com/emails';
 const SITE_URL = 'https://my-naishin.com';
@@ -103,7 +104,8 @@ export async function sendLeadWelcome(d: LeadEmailData): Promise<boolean> {
       <li><a href="${SITE_URL}/hiyou" style="color:#4f46e5">高校〜大学の教育費・支援制度を確認する</a></li>
     </ul>
     <p style="font-size:12px;color:#94a3b8;margin-top:22px">
-      このメールに心当たりがない場合は破棄してください。配信の停止をご希望の場合は、このメールにそのまま返信してください。
+      このメールに心当たりがない場合は破棄してください。
+      ${(() => { const u = unsubscribeUrl(d.email); return u ? `配信を停止する場合は<a href="${u}" style="color:#94a3b8">こちら</a>、またはこのメールに返信してください。` : '配信の停止をご希望の場合は、このメールにそのまま返信してください。'; })()}
     </p>
   </div>
 </div>`.trim();

@@ -15,6 +15,7 @@
 | `LEAD_WEBHOOK_URL` | Discord/Slack Webhook URL | `/api/lead` の登録メールを**運営者に通知**（未設定なら `CONTACT_WEBHOOK_URL` を流用、それも無ければユーザー側でmailtoフォールバック） | リード収集を始めたら |
 | `RESEND_API_KEY` | Resend APIキー | 設定で**ESP点火**：登録者へ歓迎メール＋運営者へ通知（`/api/lead`）。本人に1通届く＝「配信できる名簿」化（堀A） | ドメイン認証後 |
 | `LEAD_FROM_EMAIL` | `My Naishin <info@my-naishin.com>` | 歓迎メールの差出人（Resendで認証したドメイン）。未設定は noreply 既定 | RESEND設定時 |
+| `UNSUB_SECRET` | ランダムな長い文字列 | 配信停止リンクのHMAC署名鍵。設定でメールに署名付き「配信停止」リンクを掲載（`/api/unsubscribe`→D1 unsubscribed=1）。未設定なら返信停止のみ | RESEND設定時に併せて |
 
 - **審査中（今）**：`NEXT_PUBLIC_ADSENSE_AUDIT=1` をセットして再デプロイ。広告密度を絞った状態で審査を受ける。
 - **承認後**：`AUDIT` を外す → 休眠CTAが点火。`NEXT_PUBLIC_ADSENSE_ENABLED=1` をセット → AdSense枠が点火。再デプロイ。
