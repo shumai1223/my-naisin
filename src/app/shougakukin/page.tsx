@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Home, ChevronRight, HandCoins, BookCheck, HelpCircle, ShieldCheck, Landmark } from 'lucide-react';
 
 import { ShugakuShienEstimator } from '@/components/ShugakuShienEstimator';
+import { AnswerBox } from '@/components/AnswerBox';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { RelatedToolsSection } from '@/components/RelatedToolsSection';
@@ -94,6 +95,15 @@ export default function ShougakukinPage() {
               <strong>一次情報に基づいて</strong>わかりやすく解説します。
             </p>
           </header>
+
+          {/* 答え先出し（GEO/AI引用） */}
+          <div className="mb-8">
+            <AnswerBox question="高校無償化（就学支援金）はいくら？私立も無償？">
+              公立高校は授業料相当（年11万8,800円）が実質無償化されます。<strong>私立高校は世帯年収の目安に応じて年額上限39万6,000円まで</strong>支援され、
+              年収約590万円未満の区分では授業料の大部分がまかなわれる場合があります。授業料以外（入学金・施設費・教材費など）は対象外で完全無料にはなりません。
+              下のツールで世帯年収の区分と進学先を選ぶと、支援額と実質負担の目安が分かります。
+            </AnswerBox>
+          </div>
 
           {/* エスティメーター */}
           <section className="mb-8">

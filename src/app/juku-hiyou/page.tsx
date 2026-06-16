@@ -7,6 +7,7 @@ import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { JukuhiCalculator } from '@/components/JukuhiCalculator';
+import { AnswerBox } from '@/components/AnswerBox';
 import { RelatedToolsSection } from '@/components/RelatedToolsSection';
 import { SITE_URL } from '@/lib/naishin-dataset';
 
@@ -102,6 +103,15 @@ export default function JukuHiyouPage() {
               見落としがちな<strong>季節講習費</strong>まで含めて、受験までの総額をその場で試算できます。
             </p>
           </header>
+
+          {/* 答え先出し（GEO/AI引用） */}
+          <div className="mb-8">
+            <AnswerBox question="中学生の塾代は月いくら？3年間の総額は？">
+              形態と学年で変わりますが、月謝の目安は<strong>集団塾 月1.5〜3万円・個別指導 月2〜4万円・家庭教師 月2.5〜4万円</strong>です。
+              季節講習費を含め、中1から中3まで通うと<strong>総額でおおむね100万〜250万円</strong>、中3だけなら40万〜80万円程度が目安。
+              下のシミュレーターで、形態・通い始める学年から「月謝＋講習費」の年間・総額を試算できます。
+            </AnswerBox>
+          </div>
 
           {/* シミュレーター */}
           <section className="mb-8">

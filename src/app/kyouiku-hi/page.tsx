@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Home, ChevronRight, Wallet, BookCheck, HelpCircle, TrendingUp, GraduationCap } from 'lucide-react';
 
 import { EducationCostCalculator } from '@/components/EducationCostCalculator';
+import { AnswerBox } from '@/components/AnswerBox';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { RelatedToolsSection } from '@/components/RelatedToolsSection';
@@ -106,6 +107,14 @@ export default function KyouikuHiPage() {
               内訳つきで概算します。数値は<strong>文部科学省「子供の学習費調査」</strong>の一次データに準拠します。
             </p>
           </header>
+
+          <div className="mb-8">
+            <AnswerBox question="中学生から高校卒業まで、教育費は総額いくら？">
+              文部科学省「子供の学習費調査」をもとにすると、<strong>公立中学→公立高校で塾代別に約300万円前後</strong>、
+              <strong>私立高校に進むと約450万円前後</strong>が目安です（高校3年間だけなら公立 約{toManYen(highSchoolTotal('public'))}・私立 約{toManYen(highSchoolTotal('private'))}）。
+              塾・習い事を加えるとさらに増えます。下のシミュレーターで、学年・進路・通塾形態を選ぶと総額の目安がすぐ分かります。
+            </AnswerBox>
+          </div>
 
           <section className="mb-8">
             <EducationCostCalculator />

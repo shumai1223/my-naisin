@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Home, ChevronRight, Wallet, BookCheck, HelpCircle, TrendingUp, GraduationCap, PiggyBank } from 'lucide-react';
 
 import { EducationPathSimulator } from '@/components/EducationPathSimulator';
+import { AnswerBox } from '@/components/AnswerBox';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { RelatedToolsSection } from '@/components/RelatedToolsSection';
@@ -110,6 +111,14 @@ export default function ShinroHiyouPage() {
               数値は<strong>文部科学省「子供の学習費調査」</strong>と<strong>日本政策金融公庫</strong>の一次データに準拠します。
             </p>
           </header>
+
+          <div className="mb-8">
+            <AnswerBox question="高校〜大学卒業まで、教育費は総額いくら？">
+              進路で大きく変わります。<strong>公立高校→国公立大学（自宅）でおよそ{toManYen(simulateHighToUniversity({ highCourse: 'public', incomeBracket: 'under910', universityType: 'national', residence: 'home' }).total)}</strong>、
+              <strong>私立高校→私立大学文系（下宿）で約{toManYen(simulateHighToUniversity({ highCourse: 'private', incomeBracket: 'under910', universityType: 'privateHumanities', residence: 'away' }).total)}</strong>が目安です（就学支援金込み・塾代別）。
+              下のシミュレーターで、高校・世帯年収・大学・自宅/下宿を選ぶとあなたの進路の総額が分かります。数値は文科省・日本政策金融公庫の一次データに準拠。
+            </AnswerBox>
+          </div>
 
           <section className="mb-8">
             <EducationPathSimulator />
