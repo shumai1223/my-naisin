@@ -419,6 +419,30 @@ export default function HomeClient() {
                 </div>
               )}
 
+              {/* 保護者導線（select画面のみ）：本命の換金クラスタ＝学費・お金のツールへ。
+                  保護者＝決裁者の最大関心はお金。最大流入面（ホーム）から高CPAの学費ハブへ評価と人を流す。 */}
+              {navigationMode === 'select' && (
+                <div className="px-4 pb-4 md:px-6">
+                  <Link
+                    href="/hiyou"
+                    className="group flex items-center gap-3 rounded-2xl border border-indigo-200 bg-gradient-to-r from-indigo-50 via-white to-emerald-50 px-4 py-3 shadow-sm transition-all hover:-translate-y-0.5 hover:border-indigo-300 hover:shadow-md"
+                  >
+                    <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-indigo-500 to-emerald-600 text-white shadow-sm">
+                      <span className="text-lg font-black">¥</span>
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <div className="text-sm font-bold text-slate-800 group-hover:text-indigo-700">
+                        保護者の方へ｜教育費・学費・塾代のシミュレーター
+                      </div>
+                      <div className="text-[11px] text-slate-500">
+                        高校〜大学の費用・高校無償化・就学支援金を文科省データで無料試算
+                      </div>
+                    </div>
+                    <ChevronRight className="h-4 w-4 text-indigo-500 transition-transform group-hover:translate-x-1" />
+                  </Link>
+                </div>
+              )}
+
               <HeroNavigation onModeChange={setNavigationMode} currentMode={navigationMode} />
 
               <main id="calculator" className="px-4 pb-10 md:px-6">
