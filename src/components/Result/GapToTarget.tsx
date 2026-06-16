@@ -282,21 +282,6 @@ export function GapToTarget({ result, prefectureCode, prefectureName, onShareOpe
               </div>
             </button>
 
-            {/* 堀A（名簿化）：高インテントな結果直後に「保存／LINEで受け取る」。受験期トラフィックを資産へ。 */}
-            <SaveResultCTA
-              source="gap-target"
-              prefectureCode={prefectureCode}
-              prefectureName={prefectureName}
-              score={result.total}
-              target={target ?? undefined}
-              gap={gap ?? undefined}
-              heading={
-                state === 'met'
-                  ? 'この合格圏を、受験本番までキープしませんか？'
-                  : `「${targetLabel}まであと${gap}点」を、受験本番まで一緒に追いませんか？`
-              }
-            />
-
             {/* ヘッジ（信頼の堀を守る語尾） */}
             <div className="flex items-start gap-2 rounded-xl bg-slate-50 px-4 py-3 text-[11px] leading-relaxed text-slate-500">
               <Info className="mt-0.5 h-3.5 w-3.5 shrink-0 text-slate-400" />
@@ -318,6 +303,25 @@ export function GapToTarget({ result, prefectureCode, prefectureName, onShareOpe
             目標を選ぶ／入れると、合格目安まで「あと何点」かが表示されます。
           </div>
         )}
+
+        {/* 堀A（名簿化）：計算した“全員”に常時表示。目標設定（gap_target_set）はGA4で極小だったため、
+            名簿capture を目標設定の後ろに隠さず、結果直後の高インテントで誰もが受け取れるようにする
+            （= lead_submit=0／名簿velocity の最大ボトルネック解消）。目標があれば文脈を込める。 */}
+        <SaveResultCTA
+          source="gap-target"
+          prefectureCode={prefectureCode}
+          prefectureName={prefectureName}
+          score={result.total}
+          target={target ?? undefined}
+          gap={gap ?? undefined}
+          heading={
+            state === 'met'
+              ? 'この合格圏を、受験本番までキープしませんか？'
+              : state && gap != null
+                ? `「${targetLabel}まであと${gap}点」を、受験本番まで一緒に追いませんか？`
+                : 'この内申点と「あと何点」を、受験本番まで無料で受け取りませんか？'
+          }
+        />
       </div>
     </Card>
   );
