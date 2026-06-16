@@ -30,6 +30,7 @@ import { TrustInfo } from '@/components/TrustInfo';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { ParentLeadCTAExperiment } from '@/components/ParentLeadCTAExperiment';
+import { AnswerBox } from '@/components/AnswerBox';
 import { RelatedToolsSection } from '@/components/RelatedToolsSection';
 
 interface PageProps {
@@ -358,6 +359,17 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
 
           {/* Main Content */}
           <div className="space-y-8">
+            {/* 答え先出し（GEO/AI引用・強調スニペット）。検証済みデータのみで断定的に即答する。 */}
+            <AnswerBox question={`${prefecture.name}の内申点は何点満点？どう計算する？`}>
+              <strong>{prefecture.name}の公立高校入試の内申点は{prefecture.maxScore}点満点</strong>です。
+              対象は中{prefecture.targetGrades.join('・')}の成績で、
+              {prefecture.practicalMultiplier > prefecture.coreMultiplier
+                ? `実技4教科は${prefecture.practicalMultiplier}倍に重み付けされます`
+                : '主要5教科と実技4教科は同じ重み（等倍）です'}
+              。計算式は「{formulaText}＝{prefecture.maxScore}点満点」。
+              下の計算ツールに9教科の評定（1〜5）を入れると、{prefecture.name}の方式で内申点を自動算出できます（無料・登録不要）。
+            </AnswerBox>
+
             {/* 概要カード（E-E-A-T: 信頼の強調） */}
             <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm relative overflow-hidden">
               <div className="absolute top-0 right-0 p-2">
