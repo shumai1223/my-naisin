@@ -39,13 +39,29 @@ interface Decorated {
   total: number;
   max: number;
   percent: number;
+  /** 素内申（9教科の評定の合計・最大45）。県の換算を通さない生の合計。 */
+  suNaishin: number;
+  /** 評定平均（素内申 ÷ 9・1.0〜5.0）。推薦/指定校の基準と比べる指標。 */
+  hyotei: number;
 }
 
 function decorate(entry: SavedHistoryEntry): Decorated {
   const code = entry.prefectureCode ?? DEFAULT_PREFECTURE_CODE;
   const total = calculateTotalScore(entry.scores, code);
   const max = calculateMaxScore(code);
-  return { entry, code, total, max, percent: Math.round(calculatePercent(total, max)) };
+  const suNaishin = (Object.values(entry.scores) as number[]).reduce(
+    (a, b) => a + (Number.isFinite(b) ? b : 0),
+    0
+  );
+  return {
+    entry,
+    code,
+    total,
+    max,
+    percent: Math.round(calculatePercent(total, max)),
+    suNaishin,
+    hyotei: suNaishin / 9,
+  };
 }
 
 function formatShortDate(iso: string): string {
@@ -130,9 +146,54 @@ export function DashboardClient() {
       });
   }, [decorated, plotValue]);
 
+  // 評定平均（5段階）の系列。素内申/9なので県をまたいでも比較可能（換算前の生の指標）。
+  const dateHyoteiPoints: TimeSeriesPoint[] = React.useMemo(() => {
+    return [...decorated]
+      .sort((a, b) => Date.parse(a.entry.savedAt) - Date.parse(b.entry.savedAt))
+      .map((d) => ({
+        label: formatShortDate(d.entry.savedAt),
+        value: Math.round(d.hyotei * 100) / 100,
+        caption: `評定平均 ${d.hyotei.toFixed(1)}（素内申 ${d.suNaishin}/45）`,
+      }));
+  }, [decorated]);
+
+  const termHyoteiPoints: TimeSeriesPoint[] = React.useMemo(() => {
+    const byTerm = new Map<string, Decorated>();
+    for (const d of decorated) {
+      const t = d.entry.term;
+      if (!t) continue;
+      const prev = byTerm.get(t);
+      if (!prev || Date.parse(d.entry.savedAt) > Date.parse(prev.entry.savedAt)) byTerm.set(t, d);
+    }
+    return [...byTerm.values()]
+      .sort((a, b) => getTermOrder(a.entry.term) - getTermOrder(b.entry.term))
+      .map((d) => {
+        const opt = TERM_OPTIONS.find((o) => o.value === d.entry.term);
+        return {
+          label: opt?.shortLabel ?? '—',
+          value: Math.round(d.hyotei * 100) / 100,
+          caption: `${opt?.label ?? ''}：評定平均 ${d.hyotei.toFixed(1)}（素内申 ${d.suNaishin}/45）`,
+        };
+      });
+  }, [decorated]);
+
   const taggedCount = React.useMemo(() => decorated.filter((d) => d.entry.term).length, [decorated]);
   const activePoints = mode === 'term' ? termPoints : datePoints;
+  const activeHyoteiPoints = mode === 'term' ? termHyoteiPoints : dateHyoteiPoints;
   const canChart = activePoints.length >= 2;
+  const canHyoteiChart = activeHyoteiPoints.length >= 2;
+
+  // 前回比（最新の伸び）。日付の新しい2件の差を出して「続けると伸びが見える」習慣化フックにする。
+  const delta = React.useMemo(() => {
+    const byDate = [...decorated].sort((a, b) => Date.parse(b.entry.savedAt) - Date.parse(a.entry.savedAt));
+    if (byDate.length < 2) return null;
+    const [cur, prev] = byDate;
+    return {
+      total: cur.total - prev.total,
+      hyotei: Math.round((cur.hyotei - prev.hyotei) * 10) / 10,
+      sameMax: cur.max === prev.max,
+    };
+  }, [decorated]);
 
   const handleTermChange = (id: string, term: string) => {
     updateHistoryTerm(id, term);
@@ -242,6 +303,36 @@ export function DashboardClient() {
           </div>
         </div>
 
+        {delta && (
+          <div className="mb-3 flex flex-wrap items-center gap-2 text-xs">
+            <span className="font-bold text-slate-500">前回比</span>
+            {delta.sameMax && (
+              <span
+                className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 font-bold ${
+                  delta.total > 0
+                    ? 'bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200'
+                    : delta.total < 0
+                      ? 'bg-rose-50 text-rose-600 ring-1 ring-rose-200'
+                      : 'bg-slate-100 text-slate-500'
+                }`}
+              >
+                内申点 {delta.total > 0 ? `+${delta.total}` : delta.total}点
+              </span>
+            )}
+            <span
+              className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 font-bold ${
+                delta.hyotei > 0
+                  ? 'bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200'
+                  : delta.hyotei < 0
+                    ? 'bg-rose-50 text-rose-600 ring-1 ring-rose-200'
+                    : 'bg-slate-100 text-slate-500'
+              }`}
+            >
+              評定平均 {delta.hyotei > 0 ? `+${delta.hyotei.toFixed(1)}` : delta.hyotei.toFixed(1)}
+            </span>
+          </div>
+        )}
+
         {canChart ? (
           <NaishinTimeSeriesChart
             points={activePoints}
@@ -264,6 +355,23 @@ export function DashboardClient() {
           </p>
         )}
       </section>
+
+      {/* 評定平均の推移（推薦・指定校の出願基準と比べる指標。素内申/9なので県をまたいでも比較可） */}
+      {canHyoteiChart && (
+        <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <h2 className="mb-4 flex items-center gap-2 text-base font-bold text-slate-800">
+            <GraduationCap className="h-5 w-5 text-emerald-500" />
+            評定平均の推移
+          </h2>
+          <NaishinTimeSeriesChart points={activeHyoteiPoints} yMax={5} yLabel="評定平均（5段階）" />
+          <p className="mt-3 text-xs text-slate-400">
+            ※ 評定平均＝9教科の素内申合計 ÷ 9。推薦・私立併願優遇・指定校推薦の出願基準と比べる目安です。
+            <Link href="/hyotei-heikin/suisen-kijun" className="ml-1 font-bold text-emerald-600 hover:underline">
+              推薦に必要な評定基準を見る →
+            </Link>
+          </p>
+        </section>
+      )}
 
       {/* 履歴 + 学期タグ付け */}
       <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">

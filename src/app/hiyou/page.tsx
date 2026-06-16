@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, Wallet, Calculator, HandCoins, School, GraduationCap, HelpCircle, Info } from 'lucide-react';
+import { Home, ChevronRight, Wallet, Calculator, HandCoins, School, GraduationCap, HelpCircle, Info, Receipt } from 'lucide-react';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -39,6 +39,12 @@ const CARDS: Card[] = [
     title: '塾代シミュレーター',
     desc: '集団塾・個別指導・家庭教師の月謝相場と、受験までの総額の目安',
     icon: Calculator,
+  },
+  {
+    href: '/juken-ryou',
+    title: '受験料・模試代シミュレーター',
+    desc: '公立の選抜手数料・私立の受験料・模試代・入学初期費用を併願校数から試算',
+    icon: Receipt,
   },
   {
     href: '/shougakukin',

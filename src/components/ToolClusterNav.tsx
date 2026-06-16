@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Calculator, TrendingUp, Percent, Target, MapPin, Users, ChevronRight, Wrench } from 'lucide-react';
+import { Calculator, TrendingUp, Percent, Target, MapPin, Users, ChevronRight, Wrench, Sigma, Wallet } from 'lucide-react';
 
 /**
  * サイト横断のツールクラスタ・ハブ&スポーク内部リンク（情報設計 §7）。
@@ -16,6 +16,8 @@ export type ToolClusterKey =
   | 'hyotei-heikin'
   | 'reverse'
   | 'prefectures'
+  | 'total-score'
+  | 'hiyou'
   | 'mendan';
 
 interface ClusterPage {
@@ -31,7 +33,9 @@ const CLUSTER_PAGES: ClusterPage[] = [
   { key: 'hensachi', href: '/hensachi', title: '偏差値を計算する（5教科）', desc: '点数と平均点から偏差値を30秒で算出。上位何%かも分かる', icon: TrendingUp },
   { key: 'hyotei-heikin', href: '/hyotei-heikin', title: '評定平均を計算する', desc: '通知表から評定平均を計算。推薦・併願優遇の基準早見表つき', icon: Percent },
   { key: 'reverse', href: '/reverse', title: '志望校から逆算する', desc: '目標校から必要な内申点・当日点を逆算。あと何点が分かる', icon: Target },
+  { key: 'total-score', href: '/total-score', title: '総合得点を計算する（県別）', desc: '内申×当日点の県別の合否計算。S値・換算内申にも対応', icon: Sigma },
   { key: 'prefectures', href: '/prefectures', title: '都道府県別の入試制度', desc: 'お住まいの地域の内申比率・配点方式・総合得点の計算', icon: MapPin },
+  { key: 'hiyou', href: '/hiyou', title: 'お金・費用まとめ（保護者向け）', desc: '高校学費・教育費総額・塾代・高校無償化を一括で把握', icon: Wallet },
   { key: 'mendan', href: '/mendan', title: '三者面談の準備', desc: '先生に聞くことリスト・持ち物・面談前に確認する数値', icon: Users },
 ];
 

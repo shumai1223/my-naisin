@@ -36,6 +36,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: '/shinro-hiyou', priority: 0.9, changeFrequency: 'weekly' },
     { url: '/koukou-hiyou', priority: 0.9, changeFrequency: 'weekly' },
     { url: '/juku-hiyou', priority: 0.9, changeFrequency: 'weekly' },
+    { url: '/juken-ryou', priority: 0.9, changeFrequency: 'weekly' },
     { url: '/shougakukin', priority: 0.9, changeFrequency: 'weekly' },
     { url: '/dashboard', priority: 0.7, changeFrequency: 'monthly' },
     { url: '/ask', priority: 0.8, changeFrequency: 'weekly' },
