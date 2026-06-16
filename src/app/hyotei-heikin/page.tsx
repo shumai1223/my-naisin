@@ -157,6 +157,46 @@ export default function HyoteiHeikinPage() {
             </div>
           </div>
 
+          {/* 通知表シーズンの行動喚起（7月＝評定平均の年間ピーク／12月の二毛作）。
+              「出たらすぐ計算→記録」で名簿の粘着性（dashboard）と推薦基準（suisen-kijun）への回遊を作る。
+              特定月にハードコードせず、通知表が返るたびに常に正しい文言（年中エバーグリーン）。 */}
+          <section className="mb-6 overflow-hidden rounded-2xl border-2 border-amber-200 bg-gradient-to-br from-amber-50 via-yellow-50/60 to-white p-5 shadow-sm md:p-6">
+            <div className="mb-2 inline-flex items-center gap-1.5 rounded-full bg-amber-500 px-3 py-1 text-xs font-bold text-white">
+              <Calendar className="h-3.5 w-3.5" />
+              通知表が返ってきたら
+            </div>
+            <h2 className="mb-2 text-base font-bold leading-snug text-slate-900 md:text-lg">
+              学期の通知表が出たこのタイミングで、評定平均を計算して「記録」しておきましょう
+            </h2>
+            <p className="mb-4 text-sm leading-relaxed text-slate-700">
+              評定平均は学期ごとに変わります。<strong>通知表が返ってくるたびに計算して残しておく</strong>と、推薦の出願基準に届きそうか・前回からどう動いたかが一目でわかります。
+              推薦（学校推薦型・指定校）は<strong>1学期の評定が効く</strong>ため、早めの把握が選択肢を広げます。
+            </p>
+            <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap">
+              <a
+                href="#calculator-section"
+                className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-amber-500 px-5 py-2.5 text-sm font-bold text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-amber-600"
+              >
+                <Calculator className="h-4 w-4" />
+                いまの評定平均を計算する
+              </a>
+              <Link
+                href="/hyotei-heikin/suisen-kijun"
+                className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-white px-5 py-2.5 text-sm font-bold text-amber-700 ring-1 ring-amber-200 transition-colors hover:bg-amber-50"
+              >
+                <Award className="h-4 w-4" />
+                推薦に必要な評定基準を見る
+              </Link>
+              <Link
+                href="/dashboard"
+                className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-white px-5 py-2.5 text-sm font-bold text-slate-700 ring-1 ring-slate-200 transition-colors hover:bg-slate-50"
+              >
+                <TrendingUp className="h-4 w-4" />
+                成績の推移を記録する
+              </Link>
+            </div>
+          </section>
+
           {/* 運営者・検証情報カード（E-E-A-T強化） */}
           <div className="mb-6 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
             <div className="flex items-start gap-4">

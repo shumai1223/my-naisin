@@ -44,8 +44,9 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         // 公開データAPI（堀B：AIが呼べる一次データ層）は明示的に許可。その他の /api は非公開のまま。
-        allow: ['/', '/api/naishin', '/api/mcp', '/api/openapi'],
-        disallow: ['/api/', '/*?*'],
+        allow: ['/', '/api/naishin', '/api/mcp', '/api/openapi', '/api/card'],
+        // /go/* はアフィリ送客の 302 リダイレクタ（中身なし）＝クロール予算の無駄なので拒否。
+        disallow: ['/api/', '/go/', '/*?*'],
       },
     ],
     sitemap: 'https://my-naishin.com/sitemap.xml',

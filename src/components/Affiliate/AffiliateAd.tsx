@@ -1,4 +1,5 @@
 import { AFFILIATES, type AffiliateId } from '@/lib/affiliates';
+import { goHref } from '@/lib/go-links';
 import { CtaViewTracker } from '@/components/Affiliate/CtaViewTracker';
 
 interface AffiliateAdProps {
@@ -20,13 +21,21 @@ interface AffiliateAdProps {
   viewPlacement?: string;
   /** trackView時の都道府県コード（面×県のCTR分解用）。 */
   viewPref?: string;
+  /** /go 一次ログ用の都道府県コード（未指定なら viewPref を流用）。 */
+  pref?: string;
+  /** /go 一次ログ用の設置面（未指定なら viewPlacement を流用）。 */
+  placement?: string;
 }
 
-export function AffiliateAd({ id, className = '', centered = true, hideLabel = false, linkClassName, auditHide = false, ctaText, trackView = false, viewPlacement, viewPref }: AffiliateAdProps) {
+export function AffiliateAd({ id, className = '', centered = true, hideLabel = false, linkClassName, auditHide = false, ctaText, trackView = false, viewPlacement, viewPref, pref, placement }: AffiliateAdProps) {
   if (auditHide && process.env.NEXT_PUBLIC_ADSENSE_AUDIT === '1') return null;
   const ad = AFFILIATES[id];
   // 先回し枠（未確定案件）はリンク未確定なので描画しない＝デッドリンク/空ピクセルを出さない。
   if ((ad.status ?? 'live') === 'pending') return null;
+
+  // クリックはファーストパーティ /go の 302 をくぐらせて D1 に一次記録する（GA4欠測の補完）。
+  // 302先は AFFILIATES の固定 href だけ＝オープンリダイレクトにならない。
+  const href = goHref(ad.id, { pref: pref ?? viewPref, placement: placement ?? viewPlacement });
 
   // 視認計測（opt-in）。描画される（pending/auditHideを通過した）ときだけ仕込むので空インプは出ない。
   const viewTracker = trackView ? (
@@ -54,7 +63,7 @@ export function AffiliateAd({ id, className = '', centered = true, hideLabel = f
         {viewTracker}
         {!hideLabel && <span className="mr-1 text-[10px] font-medium text-slate-400">[PR]</span>}
         <a
-          href={ad.href}
+          href={href}
           rel="nofollow sponsored noopener"
           target="_blank"
           data-aff-id={ad.id}
@@ -72,7 +81,7 @@ export function AffiliateAd({ id, className = '', centered = true, hideLabel = f
     <div className={`${centered ? 'flex flex-col items-center' : ''} ${className}`}>
       {viewTracker}
       {label}
-      <a href={ad.href} rel="nofollow sponsored noopener" target="_blank" data-aff-id={ad.id} data-aff-name={ad.name}>
+      <a href={href} rel="nofollow sponsored noopener" target="_blank" data-aff-id={ad.id} data-aff-name={ad.name}>
         <img
           src={ad.imgSrc}
           width={ad.width}

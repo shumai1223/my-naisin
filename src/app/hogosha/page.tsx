@@ -25,6 +25,7 @@ import { HogoshaLeadCTA } from '@/components/HogoshaLeadCTA';
 import { RelatedToolsSection } from '@/components/RelatedToolsSection';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { SITE_URL } from '@/lib/naishin-dataset';
+import { parseParentShare, encodeSharePayload } from '@/lib/share';
 
 const PARENT_FAQS = [
   {
@@ -54,7 +55,7 @@ const PARENT_FAQS = [
   },
 ];
 
-export const metadata: Metadata = {
+const BASE_METADATA: Metadata = {
   title: '保護者の方へ｜高校受験で親ができること・塾はいつから・費用の目安 | My Naishin',
   description:
     '高校受験は保護者のサポートで結果が変わります。内申点の上げ方、塾はいつから通うべきか、費用の目安、内申点と偏差値どちらを優先するかを、当事者目線でわかりやすく解説。お子さまの内申点・偏差値・志望校との差を無料ツールで今すぐ確認できます。',
@@ -77,6 +78,45 @@ export const metadata: Metadata = {
     type: 'website',
   },
 };
+
+/**
+ * 動的OGP（P2-4）：共有リンク（?from=share&...）で来たときは、お子さまの成績レポート画像
+ * （/api/card）を og:image / twitter:image に差す。LINE 等のプレビューが「数値入りの成績カード」
+ * になり、保護者の開封率が上がる＝橋②バトンの受け手到達率を底上げする。
+ * 共有文脈が無い通常アクセスでは BASE_METADATA をそのまま返す（=従来どおり）。
+ */
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}): Promise<Metadata> {
+  const sp = await searchParams;
+  const share = parseParentShare(sp);
+  if (!share.isShare || typeof share.score !== 'number') return BASE_METADATA;
+
+  const d = encodeSharePayload({
+    score: share.score,
+    max: typeof share.max === 'number' ? share.max : 45,
+    target: typeof share.target === 'number' ? share.target : null,
+    gap: typeof share.gap === 'number' ? share.gap : null,
+    prefectureCode: share.prefectureCode,
+    prefectureName: share.prefectureName,
+    grade: typeof share.grade === 'number' ? share.grade : null,
+    label: share.label,
+    metricLabel: share.metricLabel,
+  });
+  const cardUrl = `${SITE_URL}/api/card?d=${encodeURIComponent(d)}`;
+  const alt = `${share.prefectureName ?? ''}${share.metricLabel ?? '内申点'}の成績レポート`;
+
+  return {
+    ...BASE_METADATA,
+    openGraph: {
+      ...BASE_METADATA.openGraph,
+      images: [{ url: cardUrl, width: 1200, height: 630, alt }],
+    },
+    twitter: { card: 'summary_large_image', images: [cardUrl] },
+  };
+}
 
 const TOOLS = [
   {

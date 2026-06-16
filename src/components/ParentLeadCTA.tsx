@@ -64,6 +64,8 @@ export function ParentLeadCTA({ heading, body, className = '', auditHide = false
           id={resolvedAffiliateId}
           hideLabel
           ctaText={resolvedCtaText}
+          pref={prefectureCode}
+          placement={placement}
           linkClassName="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 px-6 py-3.5 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-emerald-700 hover:shadow-lg active:scale-95 sm:w-auto"
         />
         <span className="inline-flex items-center justify-center gap-1.5 text-xs text-slate-500">

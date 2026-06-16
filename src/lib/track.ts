@@ -53,6 +53,7 @@ export const EVENTS = {
   // ── 橋①/橋② 先行指標 ──
   GAP_TARGET_SET: 'gap_target_set',
   SHARE_TO_PARENT: 'share_to_parent', // 生徒が「保護者に送る」を押した（橋②バトンの送り手側）
+  SHARE_IMAGE: 'share_image', // 成績レポート“画像”を共有/保存した（視覚カード＝LINE開封率の主因）
   PARENT_LANDING_VIEW: 'parent_landing_view', // 共有リンクから保護者が着地した（橋②バトンの受け手側＝決裁者到達）
   MET_BRIDGE_CLICK: 'met_bridge_click',
   SAVED_GOAL_REVISIT: 'saved_goal_revisit',

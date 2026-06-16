@@ -12,9 +12,12 @@ Allow: /_next/static/
 Allow: /api/naishin
 Allow: /api/mcp
 Allow: /api/openapi
+# 成績レポートの共有/OG画像（SNSクローラが取得できるよう許可）
+Allow: /api/card
 
 # Block sensitive routes
 Disallow: /api/
+Disallow: /go/
 Disallow: /admin/
 Disallow: /contact
 

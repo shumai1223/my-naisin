@@ -5,7 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import { Inbox, Target, PartyPopper } from 'lucide-react';
 
 import { EVENTS, track } from '@/lib/track';
-import { parseParentShare } from '@/lib/share';
+import { parseParentShare, encodeSharePayload } from '@/lib/share';
 
 /**
  * 橋②バトンの受け手側（決裁者＝保護者の着地ヒーロー）。
@@ -48,6 +48,23 @@ export function ParentShareBanner() {
   const targetWord = label || '目標';
   const metric = share.metricLabel || '内申点';
   const gradeLead = typeof grade === 'number' ? `中${grade}の今からなら、まだ十分に間に合います。` : '';
+
+  // お子さまが共有した成績レポート画像（/api/card）。サーバー生成SVGなので確実に表示できる。
+  const cardSrc = hasScore
+    ? `/api/card?d=${encodeURIComponent(
+        encodeSharePayload({
+          score: score as number,
+          max: typeof max === 'number' ? max : 45,
+          target: typeof target === 'number' ? target : null,
+          gap: typeof gap === 'number' ? gap : null,
+          prefectureCode: share.prefectureCode,
+          prefectureName,
+          grade: typeof grade === 'number' ? grade : null,
+          label,
+          metricLabel: share.metricLabel,
+        })
+      )}`
+    : null;
 
   return (
     <section className="mb-8 overflow-hidden rounded-2xl border-2 border-blue-200 bg-gradient-to-br from-blue-50 via-indigo-50/70 to-white p-6 shadow-sm md:p-7">
@@ -93,6 +110,21 @@ export function ParentShareBanner() {
           ? 'お子さまは目標ラインに到達しています。この力をキープし、さらに伸ばすために、ご家庭でできる対策を無料の資料で確認できます。'
           : `${gradeLead}ここから内申点・偏差値は「今からの伸ばし方」で大きく変わります。お子さまに合った対策を、まずは無料の資料・体験でご確認ください（費用はかかりません）。`}
       </p>
+
+      {cardSrc && (
+        <div className="mt-4 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={cardSrc}
+            alt={`${prefectureName ?? ''}${metric}の成績レポート`}
+            width={1200}
+            height={630}
+            loading="lazy"
+            decoding="async"
+            style={{ width: '100%', height: 'auto', display: 'block' }}
+          />
+        </div>
+      )}
     </section>
   );
 }

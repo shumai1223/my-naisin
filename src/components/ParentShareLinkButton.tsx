@@ -8,32 +8,90 @@ import { APP_NAME } from '@/lib/constants';
 import {
   buildParentShareUrl,
   buildParentShareMessage,
+  encodeSharePayload,
   type ParentShareContext,
 } from '@/lib/share';
 
 /**
  * 橋②（生徒→保護者バトン）の軽量な送り手ボタン。
  *
- * 画像生成（html2canvas）を伴う ShareModal と違い、Web Share API ＋ クリップボードだけで
- * 「保護者最適化ページ /hogosha」への文脈付きリンクを共有する。総合得点・偏差値など
- * 内申点以外の結果ページからも、決裁者（保護者）を実数つきの着地ページへ運べる。
+ * Web Share API ＋ クリップボードで「保護者最適化ページ /hogosha」への文脈付きリンクを共有する。
+ * さらに（withImage）サーバー生成の成績レポート画像（/api/card）を Web Share に**ファイル添付**できる：
+ * 視覚カードは LINE 等の開封率を大きく上げる主因。html2canvas を使う ShareModal と違い、
+ * サーバーSVG→canvas→PNG で軽量に画像を作るので、総合得点・偏差値など内申点以外のツールでも
+ * 画像つき共有を出せる。画像生成はベストエフォートで、失敗してもリンク共有は必ず成立する。
  *
- * metricLabel を ctx に載せると、/hogosha の着地バナーが「総合得点の成績レポート」等に切り替わる
- * （未指定なら従来どおり「内申点」）。
+ * metricLabel を ctx に載せると、/hogosha 着地バナーとカードが「総合得点の成績レポート」等に切り替わる。
  */
+
+/** /api/card の SVG を取得して PNG の File に変換（同一オリジン・外部参照なしなので canvas は汚染されない）。 */
+async function buildCardFile(d: string, filename: string): Promise<File | null> {
+  try {
+    if (typeof document === 'undefined') return null;
+    const res = await fetch(`/api/card?d=${encodeURIComponent(d)}`);
+    if (!res.ok) return null;
+    const svgText = await res.text();
+    const blob = new Blob([svgText], { type: 'image/svg+xml;charset=utf-8' });
+    const objUrl = URL.createObjectURL(blob);
+    try {
+      const img = new Image();
+      img.decoding = 'async';
+      await new Promise<void>((resolve, reject) => {
+        img.onload = () => resolve();
+        img.onerror = () => reject(new Error('svg image load failed'));
+        img.src = objUrl;
+      });
+      const canvas = document.createElement('canvas');
+      canvas.width = 1200;
+      canvas.height = 630;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return null;
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      const pngBlob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, 'image/png'));
+      if (!pngBlob) return null;
+      return new File([pngBlob], filename, { type: 'image/png' });
+    } finally {
+      URL.revokeObjectURL(objUrl);
+    }
+  } catch {
+    return null;
+  }
+}
+
 export function ParentShareLinkButton({
   ctx,
   className = '',
   tool,
   label = 'おうちの人に結果を送る',
+  withImage = true,
 }: {
   ctx: ParentShareContext;
   className?: string;
   /** 計装用のツール識別子（例: 'total-score'）。 */
   tool?: string;
   label?: string;
+  /** 成績レポート画像（/api/card）を Web Share に添付する（既定 true）。 */
+  withImage?: boolean;
 }) {
   const [copied, setCopied] = React.useState(false);
+  // Web Share API はユーザー操作直後でないとファイル共有を拒否する（iOS/Chrome）ため、
+  // クリック時に重い生成をせず、マウント時に先回りで画像を用意しておく。
+  const fileRef = React.useRef<File | null>(null);
+  const payload = React.useMemo(() => encodeSharePayload(ctx), [ctx]);
+
+  React.useEffect(() => {
+    if (!withImage) return;
+    let cancelled = false;
+    (async () => {
+      const file = await buildCardFile(payload, 'my-naishin-report.png');
+      if (!cancelled) fileRef.current = file;
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [payload, withImage]);
 
   const onShare = React.useCallback(async () => {
     const origin = typeof window !== 'undefined' ? window.location.origin : 'https://my-naishin.com';
@@ -46,10 +104,20 @@ export function ParentShareLinkButton({
       ...(tool ? { tool } : {}),
     });
 
-    // スマホ＝ネイティブ共有シート（LINE等）。PC/未対応＝クリップボードにコピー。
+    // スマホ＝ネイティブ共有シート（LINE等）。可能なら成績レポート画像も添付。
     if (typeof navigator !== 'undefined' && navigator.share) {
       try {
-        await navigator.share({ title: APP_NAME, text, url });
+        const data: ShareData = { title: APP_NAME, text, url };
+        const file = fileRef.current;
+        if (file && navigator.canShare && navigator.canShare({ files: [file] })) {
+          data.files = [file];
+          track(EVENTS.SHARE_IMAGE, {
+            pref: ctx.prefectureCode ?? 'none',
+            metric: ctx.metricLabel ?? '内申点',
+            ...(tool ? { tool } : {}),
+          });
+        }
+        await navigator.share(data);
         return;
       } catch (err) {
         // ユーザーキャンセル（AbortError）は何もしない。それ以外はコピーへフォールバック。
