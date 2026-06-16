@@ -18,6 +18,7 @@
     "check:forbidden": "node scripts/check-forbidden-words.js",
     "check:consistency": "node scripts/check-data-consistency.js",
     "check:orphans": "node scripts/check-orphans.mjs",
+    "check:freshness": "node scripts/check-freshness.mjs",
     "check:all": "npm run check:consistency && npm run check:forbidden",
     "monitor:links": "npx tsx src/scripts/link-monitor.ts",
     "ga4:auth": "node --use-system-ca scripts/ga4-auth.mjs",
