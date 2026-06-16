@@ -96,3 +96,9 @@ reports/
 
 # GA4 OAuth 連携の機密（client_secret / refresh_token / 選択プロパティ）。絶対にコミットしない。
 .ga4/
+
+# 週次レポート/プレビューの生成物（コミットしない）
+newsletter-preview-*.html
+kpi-weekly-report.md
+gsc-weekly-report.md
+gsc-weekly-report.json
