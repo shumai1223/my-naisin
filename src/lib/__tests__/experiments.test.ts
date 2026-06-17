@@ -4,14 +4,24 @@ import {
   runningExperiments,
   judgeWinner,
 } from '@/lib/experiments';
+import { isLiveAffiliate } from '@/lib/affiliates';
 
 describe('experiments registry', () => {
   it('全実験は arms[0] を control とし、id が一意', () => {
     const ids = new Set<string>();
     for (const e of EXPERIMENTS) {
       expect(e.arms.length).toBeGreaterThanOrEqual(2);
+      expect(e.arms[0].id).toBe('control');
       expect(ids.has(e.id)).toBe(false);
       ids.add(e.id);
+    }
+  });
+
+  it('running な実験のアームに割当てた送客先は live のみ（pendingを稼働させない）', () => {
+    for (const e of runningExperiments()) {
+      for (const arm of e.arms) {
+        if (arm.affiliateId) expect(isLiveAffiliate(arm.affiliateId)).toBe(true);
+      }
     }
   });
 

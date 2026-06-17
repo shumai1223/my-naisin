@@ -127,7 +127,7 @@ export default function JitsugikaPage() {
           {/* 保護者リード */}
           <div className="mt-8">
             <ParentLeadCTA
-              placement="result"
+              placement="jitsugika"
               heading="実技を含めた内申アップを、効率よく進めるなら"
               body="実技4教科は提出物・作品・姿勢で評定が動きます。お子さまの弱点に合わせた学習の進め方を、オンライン個別指導の無料体験で確認できます（保護者の方向け・費用はかかりません）。"
             />

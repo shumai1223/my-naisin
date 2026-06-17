@@ -15,10 +15,18 @@
 
 import {
   getBroadcastTemplate,
+  getMonthlyMessage,
   type BroadcastTemplate,
   type BroadcastTrigger,
+  type Audience,
 } from '@/lib/broadcast-templates';
 import { unsubscribeUrl } from '@/lib/unsubscribe';
+
+/**
+ * レンダラが必要とする最小形（件名・本文・CTA）。
+ * BroadcastTemplate も MONTHLY_CALENDAR の AudienceMessage も、これを満たすのでそのまま描画できる。
+ */
+export type RenderableBroadcast = Pick<BroadcastTemplate, 'subject' | 'body' | 'cta'>;
 
 const SITE_URL = 'https://my-naishin.com';
 
@@ -36,13 +44,13 @@ function esc(s: string): string {
 }
 
 /** 件名（配信月ラベルがあれば先頭に付ける）。 */
-export function renderNewsletterSubject(template: BroadcastTemplate, ctx: NewsletterContext = {}): string {
+export function renderNewsletterSubject(template: RenderableBroadcast, ctx: NewsletterContext = {}): string {
   const prefix = ctx.monthLabel ? `[${ctx.monthLabel}] ` : '';
   return `${prefix}${template.subject}`;
 }
 
 /** プレーンテキスト本文（HTML非対応クライアント向けフォールバック）。 */
-export function renderNewsletterText(template: BroadcastTemplate, ctx: NewsletterContext = {}): string {
+export function renderNewsletterText(template: RenderableBroadcast, ctx: NewsletterContext = {}): string {
   const lead = ctx.prefectureName ? `${ctx.prefectureName}にお住まいの方へ。\n\n` : '';
   const unsub = ctx.email ? unsubscribeUrl(ctx.email) : null;
   return [
@@ -59,7 +67,7 @@ export function renderNewsletterText(template: BroadcastTemplate, ctx: Newslette
 }
 
 /** ブランド付き HTML メール。esp.ts の歓迎メールとトーンを揃える。 */
-export function renderNewsletterHtml(template: BroadcastTemplate, ctx: NewsletterContext = {}): string {
+export function renderNewsletterHtml(template: RenderableBroadcast, ctx: NewsletterContext = {}): string {
   const lead = ctx.prefectureName
     ? `<p style="background:#eef2ff;border-radius:10px;padding:10px 14px;font-size:14px;color:#3730a3;margin:0 0 14px">${esc(ctx.prefectureName)}にお住まいの方へ</p>`
     : '';
@@ -100,5 +108,23 @@ export function renderNewsletter(
     subject: renderNewsletterSubject(template, ctx),
     html: renderNewsletterHtml(template, ctx),
     text: renderNewsletterText(template, ctx),
+  };
+}
+
+/**
+ * 12ヶ月カレンダー（H4）から、月×対象（生徒/保護者）で1通ぶんをレンダリングする。
+ * LINE名簿は student、メール名簿は parent を渡す。見つからなければ null。
+ */
+export function renderMonthlyNewsletter(
+  month: number,
+  audience: Audience,
+  ctx: NewsletterContext = {}
+): { subject: string; html: string; text: string } | null {
+  const message = getMonthlyMessage(month, audience);
+  if (!message) return null;
+  return {
+    subject: renderNewsletterSubject(message, ctx),
+    html: renderNewsletterHtml(message, ctx),
+    text: renderNewsletterText(message, ctx),
   };
 }

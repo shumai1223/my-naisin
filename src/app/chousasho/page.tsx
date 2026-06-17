@@ -233,6 +233,27 @@ export default function ChousashoPage() {
             </div>
           </section>
 
+          {/* 調査書の「次のステップ」（推薦＝調査書で勝負／不登校＝出欠の文脈） */}
+          <section className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-6">
+            <h2 className="mb-4 text-lg font-bold text-slate-800">調査書の次のステップ</h2>
+            <div className="grid gap-3 sm:grid-cols-2">
+              {[
+                { href: '/suisen-nyuushi', title: '推薦入試とは？（調査書で勝負する入試）', desc: '指定校・公募・総合型の違いと、調査書・評定の準備' },
+                { href: '/hyouka-kijun', title: '観点別評価の仕組み（評定がどう決まる）', desc: '3観点で何が評価され、調査書の評定になるか' },
+                { href: '/futoukou', title: '不登校と内申点（出欠の記録と受験）', desc: '欠席日数は調査書にどう書かれ、合否にどう影響するか' },
+                { href: '/mendan', title: '三者面談で調査書・評定を確認する', desc: '面談で聞くこと・今の評定の把握' },
+              ].map((c) => (
+                <Link key={c.href} href={c.href} className="group flex items-start justify-between gap-3 rounded-xl bg-white p-4 shadow-sm ring-1 ring-slate-100 transition-shadow hover:shadow-md">
+                  <span>
+                    <span className="block text-sm font-bold text-slate-800 group-hover:text-blue-700">{c.title}</span>
+                    <span className="mt-0.5 block text-xs leading-relaxed text-slate-500">{c.desc}</span>
+                  </span>
+                  <ChevronRight className="mt-0.5 h-4 w-4 shrink-0 text-slate-400" />
+                </Link>
+              ))}
+            </div>
+          </section>
+
           <ToolClusterNav current="naishin" className="mt-8" />
         </div>
       </div>

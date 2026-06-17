@@ -30,6 +30,10 @@ export type LeadPlacement =
   | 'dashboard' // 成績ダッシュボード（継続トラッキング＝高インテント）
   | 'hiyou' // 学費・塾代クラスタ（保護者が検索者本人＝権限ズレゼロの本命面）
   | 'mendan' // 三者面談パック（保護者が検索者・7月/12月の二毛作）
+  | 'suisen' // 推薦入試／総合型選抜（評定で勝負→大学進学→教育費。FP無料相談）
+  | 'naishin-up' // 内申点の上げ方（内申を上げたい＝通塾動機。塾体験）
+  | 'jitsugika' // 実技4教科対策（弱点克服＝個別指導需要）
+  | 'futoukou' // 不登校クラスタ（在宅・内申不問の学び。不登校専門の個別指導）
   | 'home'; // トップ
 
 export interface LeadOffer {
@@ -66,11 +70,20 @@ const PROGRAM_PRESET: Partial<Record<AffiliateId, Pick<LeadOffer, 'note' | 'ctaT
   'fp-soudan': { note: '専門家FPの無料相談（PR）／教育資金・保険・何度でも無料', ctaText: '教育資金を無料でFPに相談する' },
   'moshimo-e-live': { note: 'e-Live オンライン家庭教師の無料体験（PR）', ctaText: '無料体験を申し込む' },
   'moshimo-studycoach': { note: 'スタディコーチ（東大式オンライン塾）の無料体験（PR）', ctaText: '無料体験・相談をする' },
+  'moshimo-tintoru': { note: 'ティントル（不登校専門オンライン個別指導）の無料体験（PR）', ctaText: '無料体験を申し込む' },
 };
 
 /** プログラムIDから note/ctaText を補完したオファー断片を作る（割当ミスを防ぐ）。 */
 function offerFor(affiliateId: AffiliateId, copy: Pick<LeadOffer, 'heading' | 'body'>): Partial<LeadOffer> {
   return { affiliateId, ...PROGRAM_PRESET[affiliateId], ...copy };
+}
+
+/**
+ * プログラムIDの note/ctaText プリセットを返す（A/Bで送客先を差し替える時のミスラベル防止）。
+ * 未登録IDは空（呼び出し側で既定にフォールバック）。
+ */
+export function programPreset(affiliateId: AffiliateId): Pick<LeadOffer, 'note' | 'ctaText'> | undefined {
+  return PROGRAM_PRESET[affiliateId];
 }
 
 /**
@@ -116,6 +129,26 @@ export const PLACEMENT_LEAD_OVERRIDES: Partial<Record<LeadPlacement, Partial<Lea
   mendan: offerFor('moshimo-e-live', {
     heading: '三者面談の前に、ご家庭の“現在地”を整理しておきませんか',
     body: '面談は限られた時間です。志望校との差・今からできる対策を事前に把握しておくと、先生に的確に相談できます。小中高対応のオンライン家庭教師の無料体験で「今の学力で何が足りないか」を見える化しておくと、面談がぐっと具体的になります。費用はかかりません。',
+  }),
+  // 2026-06-17 推薦/総合型選抜面（評定で勝負→専願が多く進学先が早く決まる→教育費）。学費面と同じ最高単価FP無料相談へ。
+  suisen: offerFor('fp-soudan', {
+    heading: '推薦・総合型で進学先が早く決まるからこそ、費用の見通しを',
+    body: '推薦・総合型は専願が原則のことが多く、進学先が早く決まります。だからこそ「我が家はいくら必要か・就学支援金や奨学金で実質負担がどれだけ下がるか」を早めに把握すると安心です。教育資金に詳しい専門家FPへ無料で相談でき、その場で契約を迫られることはありません。',
+  }),
+  // 2026-06-17 内申を上げたい層（＝通塾の最有力動機）。全国オンラインの個別指導の無料体験で学習開始。
+  'naishin-up': offerFor('sora-juku-text', {
+    heading: '内申点アップは「正しい順番で・続けられるか」で差がつきます',
+    body: '行動の方向は分かっても、家庭だけで継続するのは簡単ではありません。お子さまに必要な対策を、オンライン個別指導の無料体験で具体的に確認しませんか。全国オンライン対応・費用はかかりません。',
+  }),
+  // 2026-06-17 実技が弱点＝苦手をピンポイントで埋めたい層。オンライン個別指導の無料体験へ。
+  jitsugika: offerFor('sora-juku-text', {
+    heading: '実技も含めた弱点対策、効率よく進めるなら',
+    body: '実技4教科は提出物・作品・取り組む姿勢で評定が動きます。お子さまの弱点に合わせた進め方を、オンライン個別指導の無料体験で確認できます。全国オンライン対応・費用はかかりません。',
+  }),
+  // 2026-06-17 不登校クラスタ（在宅・内申不問の学び）。不登校専門のオンライン個別指導（CPA¥5,000）へ。
+  futoukou: offerFor('moshimo-tintoru', {
+    heading: '学校に行けなくても、学びと進路は続けられます',
+    body: '在宅で学べて、お子さまのペースに合わせて先生が伴走する学びの場があります。不登校専門のオンライン個別指導の無料体験で、学び直しから受験対策まで雰囲気を確かめてみてください。費用はかからず、その場で契約を迫られることはありません。',
   }),
 };
 

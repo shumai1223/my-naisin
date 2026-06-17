@@ -11,6 +11,7 @@
  */
 
 import type { LeadPlacement } from '@/lib/lead-config';
+import type { AffiliateId } from '@/lib/affiliates';
 
 export type ExperimentStatus = 'running' | 'paused' | 'decided';
 
@@ -20,6 +21,14 @@ export interface ExperimentArm {
   label: string;
   /** 割当の重み（既定1）。 */
   weight?: number;
+  /** 送客先を差し替えるアーム（offer A/B）。指定が live なときだけ ParentLeadCTAExperiment が採用。 */
+  affiliateId?: AffiliateId;
+  /** CTA文言の接頭辞（copy A/B 例「今すぐ」）。 */
+  ctaPrefix?: string;
+  /** 見出しの差し替え（copy A/B）。 */
+  heading?: string;
+  /** 本文の差し替え（copy A/B）。 */
+  body?: string;
 }
 
 export interface ExperimentDef {
@@ -52,11 +61,55 @@ export const EXPERIMENTS: ExperimentDef[] = [
     status: 'running',
     arms: [
       { id: 'control', label: '出し分けエンジンの既定文言' },
-      { id: 'urgent', label: '「今すぐ＋（既定文言）」で緊急性を付与' },
+      { id: 'urgent', label: '「今すぐ＋（既定文言）」で緊急性を付与', ctaPrefix: '今すぐ' },
     ],
     primaryMetric: 'affiliate_click',
     placement: 'parent-lp',
     note: '送客先（affiliateId）は固定し、純粋にコピーの効きだけを測る。最大流入の県別47面に設置して母数を稼ぐ。',
+  },
+  {
+    // 実験1（H8）：result面の送客オファーA/B。そら塾（現状）vs e-Live（もしも live）。
+    id: 'result-offer-2026',
+    hypothesis: 'result面で、個別指導塾（そら塾）よりオンライン家庭教師（e-Live）の方が affiliate_click/CVR が高い。',
+    status: 'running',
+    arms: [
+      { id: 'control', label: 'そら塾（オンライン個別指導・現状の既定）', affiliateId: 'sora-juku-text' },
+      { id: 'elive', label: 'e-Live（小中高オンライン家庭教師）', affiliateId: 'moshimo-e-live' },
+    ],
+    primaryMetric: 'affiliate_click',
+    placement: 'result',
+    note: 'コピーは同一・送客先だけを差し替えて純粋にオファーの効きを測る。両アームとも live。勝者を lead-config の result面に固定する。',
+  },
+  {
+    // 実験2（H8）：hiyou面のコピーA/B。FP相談の訴求 vs ツール文脈（計算する）。送客先は同一（fp-soudan）。
+    id: 'hiyou-copy-2026',
+    hypothesis: 'hiyou面で「高校3年間でいくら必要か計算する」（ツール文脈）の方が、FP相談の直接訴求より cta_view→affiliate_click が伸びる。',
+    status: 'running',
+    arms: [
+      { id: 'control', label: '教育資金をFPに相談（現状の既定コピー）' },
+      {
+        id: 'tool-frame',
+        label: 'ツール文脈：まず費用を計算する流れで誘導',
+        heading: '高校3年間で、いくら必要か把握できていますか？',
+        body: '進路によって教育費は数百万円規模で変わります。まずは我が家の必要額をざっくり把握し、必要なら教育資金に詳しい専門家FPへ無料で相談できます（その場で契約を迫られることはありません）。',
+      },
+    ],
+    primaryMetric: 'affiliate_click',
+    placement: 'hiyou',
+    note: '送客先（fp-soudan）は固定。直接訴求 vs ツール文脈で「保護者の入り口」の効きを比較する。',
+  },
+  {
+    // 実験3（H8）：承認後のFP A/B（保険コンパス vs マネードクター）。両者 pending のため承認まで paused。
+    id: 'fp-offer-2026',
+    hypothesis: 'FP無料相談で、保険コンパス（EPC高）とマネードクターのどちらが affiliate_click→成果で勝るか。',
+    status: 'paused',
+    arms: [
+      { id: 'control', label: '保険コンパス（EPC高め）', affiliateId: 'hoken-compass' },
+      { id: 'money-doctor', label: 'マネードクター', affiliateId: 'money-doctor' },
+    ],
+    primaryMetric: 'affiliate_click',
+    placement: 'hiyou',
+    note: '両案件とも承認待ち（pending）。承認され live 化したら status を running に変更して走らせる。',
   },
 ];
 

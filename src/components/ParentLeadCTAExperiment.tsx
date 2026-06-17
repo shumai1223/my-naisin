@@ -2,10 +2,12 @@
 
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { useExperiment } from '@/components/ab/useExperiment';
-import { selectLeadOffer, type LeadPlacement } from '@/lib/lead-config';
+import { selectLeadOffer, programPreset, type LeadPlacement } from '@/lib/lead-config';
+import { isLiveAffiliate } from '@/lib/affiliates';
+import { getExperiment, type ExperimentArm } from '@/lib/experiments';
 
 interface ParentLeadCTAExperimentProps {
-  /** 実験ID（GA4の experiment_impression × cta_view/affiliate_click を突合するキー）。 */
+  /** 実験ID（experiments.ts のレジストリと一致。GA4の experiment_impression × cta_view/affiliate_click を突合）。 */
   experimentId: string;
   placement?: LeadPlacement;
   prefectureCode?: string;
@@ -13,19 +15,20 @@ interface ParentLeadCTAExperimentProps {
   auditHide?: boolean;
 }
 
+/** レジストリに無い実験IDでも壊さないためのフォールバック（旧 control/urgent コピーA/B）。 */
+const FALLBACK_ARMS: ExperimentArm[] = [
+  { id: 'control', label: '既定' },
+  { id: 'urgent', label: '今すぐ付与', ctaPrefix: '今すぐ' },
+];
+
 /**
- * 保護者リードCTAの「コピー（CTA文言）」を A/Bテストするクライアントラッパー（自作A/B基盤の実稼働面）。
+ * 保護者リードCTAの A/B ラッパー（自作A/B基盤の実稼働面・H8で汎用化）。
  *
- * 設計のキモ：
- *  - 送客先（affiliateId）は出し分けエンジン（lead-config）の既定のまま＝収益先は変えず「文言」だけを検証。
- *    → 勝敗が「案件の良し悪し」ではなく純粋に「コピーの効き」で測れる。
- *  - challenger は各プログラムの文脈ctaText（資料請求/無料体験）を尊重しつつ「今すぐ」で緊急性を足す。
- *    汎用の固定文言で塾の「無料体験」と通信教育の「資料請求」を潰さない（プログラム別の自然さを維持）。
- *  - useExperiment が端末ごとに決定論バケットを割当て、experiment_impression を1回送出。
- *    勝者は GA4 で experiment_impression × cta_view/affiliate_click を見て判断し、勝った文言を lead-config へ昇格。
- *
- * これを最大流入面（県別 /[pref]/naishin 47面）に置くことで、experiment_impression が母数レベルで貯まり、
- * 「11日で1回」だった死蔵A/B基盤が初めて意思決定可能な統計量を持つ。
+ * experiments.ts のレジストリからアームを読み、端末ごとに決定論バケットを割当て、各アームの
+ * 差分（送客先 affiliateId / 見出し / 本文 / CTA接頭辞）を ParentLeadCTA に流す。
+ *  - offer A/B：arm.affiliateId が live のときだけ送客先を差し替え（note/ctaText はプリセットで整合）。
+ *  - copy A/B：arm.heading / arm.body / arm.ctaPrefix で文言だけを差し替え（送客先は据え置き）。
+ * 勝者は GA4 で experiment_impression × cta_view/affiliate_click を見て judgeWinner（experiments.ts）で判定。
  */
 export function ParentLeadCTAExperiment({
   experimentId,
@@ -34,16 +37,32 @@ export function ParentLeadCTAExperiment({
   className,
   auditHide,
 }: ParentLeadCTAExperimentProps) {
-  const variant = useExperiment(experimentId, [{ id: 'control' }, { id: 'urgent' }]);
+  const def = getExperiment(experimentId);
+  const arms = def?.arms?.length ? def.arms : FALLBACK_ARMS;
 
-  // control は出し分けエンジンの既定文言。urgent は同じ送客先の文脈ctaTextに「今すぐ」で緊急性を付与。
-  const baseCtaText = selectLeadOffer({ prefectureCode, placement }).ctaText;
-  const ctaText = variant === 'urgent' ? `今すぐ${baseCtaText}` : undefined;
+  const variantId = useExperiment(
+    experimentId,
+    arms.map((a) => ({ id: a.id, weight: a.weight }))
+  );
+  const arm = arms.find((a) => a.id === variantId) ?? arms[0];
+
+  // 送客先の差し替え（offer A/B）。pending は描画されないので live のみ採用。
+  const swapId = arm.affiliateId && isLiveAffiliate(arm.affiliateId) ? arm.affiliateId : undefined;
+  const preset = swapId ? programPreset(swapId) : undefined;
+
+  // CTA文言：接頭辞があれば（差し替え先 or 既定の）ctaText に付与。
+  const base = selectLeadOffer({ prefectureCode, placement });
+  const baseCtaText = preset?.ctaText ?? base.ctaText;
+  const ctaText = arm.ctaPrefix ? `${arm.ctaPrefix}${baseCtaText}` : preset?.ctaText;
 
   return (
     <ParentLeadCTA
       placement={placement}
       prefectureCode={prefectureCode}
+      affiliateId={swapId}
+      heading={arm.heading}
+      body={arm.body}
+      note={preset?.note}
       ctaText={ctaText}
       className={className}
       auditHide={auditHide}

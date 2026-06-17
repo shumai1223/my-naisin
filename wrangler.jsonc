@@ -26,5 +26,12 @@
   //   ]
   //   3) wrangler d1 execute my-naishin-leads --remote --file=migrations/0001_create_leads.sql
   //      （クリック一次ログも同じDBに同居：--file=migrations/0002_create_clicks.sql も適用）
-  //   4) 再デプロイ。以降、同意リード（leads）と /go のクリック（clicks）が自動でD1に蓄積される。
+  //      （Web Push 購読も同居：--file=migrations/0003_create_push_subscriptions.sql も適用）
+  //   4) 再デプロイ。以降、同意リード（leads）/ クリック（clicks）/ プッシュ購読（push_subscriptions）が自動でD1に蓄積される。
+  //
+  // ── env 変数（Dashboard か `wrangler secret put` で設定。未設定なら各機能は休眠） ──
+  //   ADMIN_REPORT_TOKEN           … /admin/report?token=… の認証トークン（送客実績レポート・H5）
+  //   NEXT_PUBLIC_VAPID_PUBLIC_KEY … Web Push 公開鍵（クライアントに露出・H-NEW）※ `npm run push-send -- --gen-keys` で生成
+  //   VAPID_PRIVATE_KEY            … Web Push 秘密鍵（配信スクリプト用・secret 推奨）
+  //   VAPID_SUBJECT               … mailto:naishin.dev@gmail.com（VAPID連絡先）
 }

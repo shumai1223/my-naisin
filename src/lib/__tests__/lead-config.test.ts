@@ -47,7 +47,7 @@ describe('selectLeadOffer', () => {
   });
 
   test('全ての解決オファーは live な案件のみ（pendingの先回し枠を出さない）', () => {
-    const placements: LeadPlacement[] = ['result', 'hensachi', 'hyotei-heikin', 'prefecture', 'parent-lp', 'blog', 'home'];
+    const placements: LeadPlacement[] = ['result', 'hensachi', 'hyotei-heikin', 'prefecture', 'parent-lp', 'blog', 'home', 'dashboard', 'hiyou', 'mendan', 'suisen', 'naishin-up', 'jitsugika', 'futoukou'];
     for (const placement of placements) {
       const offer = selectLeadOffer({ placement, prefectureCode: 'tokyo' });
       expect(isLiveAffiliate(offer.affiliateId)).toBe(true);

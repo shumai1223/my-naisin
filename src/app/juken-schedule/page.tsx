@@ -7,6 +7,7 @@ import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { JukenIcsButton } from '@/components/JukenIcsButton';
+import { WebPushOptIn } from '@/components/WebPushOptIn';
 import { RelatedToolsSection } from '@/components/RelatedToolsSection';
 import { SITE_URL } from '@/lib/naishin-dataset';
 import { JUKEN_SCHEDULE as SCHEDULE } from '@/lib/juken-schedule';
@@ -127,6 +128,9 @@ export default function JukenSchedulePage() {
                 購読がうまくいかない場合は、カレンダーの「URLで追加」に <span className="font-mono text-slate-600">https://my-naishin.com/api/calendar</span> を貼り付けてください。
               </p>
             </div>
+
+            {/* Web Push：出願・通知表のリマインド（カレンダー購読と並ぶGoogle非依存の再訪チャネル） */}
+            <WebPushOptIn className="mt-5" />
           </section>
 
           {/* 保護者リード */}

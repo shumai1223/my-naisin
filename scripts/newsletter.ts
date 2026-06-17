@@ -20,12 +20,19 @@
 import { writeFileSync } from 'node:fs';
 import { readFileSync } from 'node:fs';
 
-import { BROADCAST_TEMPLATES, getBroadcastTemplate, type BroadcastTrigger } from '@/lib/broadcast-templates';
+import {
+  BROADCAST_TEMPLATES,
+  getBroadcastTemplate,
+  getMonthlyMessage,
+  type BroadcastTrigger,
+  type Audience,
+} from '@/lib/broadcast-templates';
 import {
   renderNewsletterHtml,
   renderNewsletterText,
   renderNewsletterSubject,
   type NewsletterContext,
+  type RenderableBroadcast,
 } from '@/lib/newsletter';
 import { unsubscribeUrl } from '@/lib/unsubscribe';
 
@@ -65,20 +72,46 @@ function chunk<T>(arr: T[], size: number): T[][] {
 }
 
 async function main() {
-  const trigger = (arg('trigger') ?? 'monthly-checklist') as BroadcastTrigger;
   const monthLabel = arg('month');
   const prefectureFilter = arg('prefecture'); // 県コードで絞る（任意）
   const recipientsPath = arg('recipients');
   const send = flag('send') && !flag('dry-run');
 
-  const template = getBroadcastTemplate(trigger);
-  if (!template) {
-    console.error(`✗ 不明な trigger: ${trigger}`);
-    console.error(`  使用可能: ${BROADCAST_TEMPLATES.map((t) => t.trigger).join(', ')}`);
-    process.exit(1);
+  // モード判定：--calMonth（12ヶ月カレンダー・H4）優先、無ければ --trigger（季節/ステップ）。
+  const calMonthArg = arg('calMonth');
+  let template: RenderableBroadcast;
+  let jobLabel: string;
+  let previewSlug: string;
+
+  if (calMonthArg) {
+    const month = Number(calMonthArg);
+    const audience = (arg('audience') ?? 'student') as Audience;
+    if (!Number.isInteger(month) || month < 1 || month > 12 || (audience !== 'student' && audience !== 'parent')) {
+      console.error('✗ --calMonth=1..12 と --audience=student|parent を指定してください。');
+      process.exit(1);
+    }
+    const message = getMonthlyMessage(month, audience);
+    if (!message) {
+      console.error(`✗ ${month}月のカレンダー配信が見つかりません。`);
+      process.exit(1);
+    }
+    template = message;
+    jobLabel = `calMonth=${month} audience=${audience}`;
+    previewSlug = `cal-${month}-${audience}`;
+  } else {
+    const trigger = (arg('trigger') ?? 'monthly-checklist') as BroadcastTrigger;
+    const seasonTemplate = getBroadcastTemplate(trigger);
+    if (!seasonTemplate) {
+      console.error(`✗ 不明な trigger: ${trigger}`);
+      console.error(`  使用可能: ${BROADCAST_TEMPLATES.map((t) => t.trigger).join(', ')}`);
+      process.exit(1);
+    }
+    template = seasonTemplate;
+    jobLabel = `trigger=${trigger}`;
+    previewSlug = trigger;
   }
 
-  console.log(`■ ニュースレター配信  trigger=${trigger}  ${monthLabel ? `month=${monthLabel}` : ''}`);
+  console.log(`■ ニュースレター配信  ${jobLabel}  ${monthLabel ? `month=${monthLabel}` : ''}`);
   console.log(`  件名: ${renderNewsletterSubject(template, { monthLabel })}`);
 
   // 宛先の読み込み（無ければ dry-run のサンプルでレンダリング確認のみ）。
@@ -99,7 +132,7 @@ async function main() {
     prefectureName: sample?.prefecture_name,
     email: sample?.email,
   };
-  const previewFile = `newsletter-preview-${trigger}.html`;
+  const previewFile = `newsletter-preview-${previewSlug}.html`;
   writeFileSync(previewFile, renderNewsletterHtml(template, sampleCtx), 'utf8');
   console.log(`  プレビュー: ${previewFile} を書き出しました。`);
 

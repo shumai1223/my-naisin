@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, TrendingUp, ClipboardCheck, MessageSquare, Palette, Calculator, HelpCircle, BookOpen } from 'lucide-react';
+import { Home, ChevronRight, TrendingUp, ClipboardCheck, MessageSquare, Palette, Calculator, HelpCircle, BookOpen, Sprout, Layers, Flame, LineChart } from 'lucide-react';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -45,6 +45,48 @@ export const metadata: Metadata = {
     type: 'website',
   },
 };
+
+const GRADE_PLANS = [
+  {
+    grade: '中3',
+    icon: Flame,
+    accent: 'from-rose-500 to-orange-600',
+    badge: '残り期間で最大化',
+    headline: '上げられる上限を見極め、優先度をつける',
+    points: [
+      '対象が「中3のみ」の地域なら今学期がほぼすべて。1・2学期に全集中。',
+      '伸びしろの大きい教科・実技から優先（評定3→4は4→5より上げやすい）。',
+      '提出物・授業態度はすぐ反映される即効レバー。今日から完璧に。',
+      'まず現状の内申点を計算し、志望校との差を当日点で補えるか逆算する。',
+    ],
+  },
+  {
+    grade: '中2',
+    icon: Layers,
+    accent: 'from-blue-500 to-indigo-600',
+    badge: '中3に備えた土台作り',
+    headline: '中だるみを防ぎ、評定の「型」を固める',
+    points: [
+      '中2・中3が対象の地域では、中2の評定が入試に直結し始める。',
+      '定期テストの勉強サイクル（2週間前から計画）を習慣として確立する。',
+      '苦手教科を作らない。中2でつまずくと中3で挽回コストが跳ね上がる。',
+      '実技4教科の取り組み方（提出物・作品の質）をここで身につける。',
+    ],
+  },
+  {
+    grade: '中1',
+    icon: Sprout,
+    accent: 'from-emerald-500 to-teal-600',
+    badge: '習慣形成が最大レバー',
+    headline: 'いちばん効くのは「良い習慣」を先に作ること',
+    points: [
+      '中1から対象の地域では、1年生の成績から入試に影響する。',
+      '提出物を期限前に出す・授業で1日1回発言する習慣を当たり前にする。',
+      'テストの点より「学習習慣」と「先生の信頼」の貯金が後で効く。',
+      '最初のうちに評定5の取り方を体で覚えると、中3まで複利で効く。',
+    ],
+  },
+];
 
 const AXES = [
   {
@@ -141,10 +183,45 @@ export default function NaishinAgeKataPage() {
             })}
           </section>
 
+          {/* 学年別「今からできること」（中1/中2/中3で優先度が違う） */}
+          <section className="mt-10">
+            <h2 className="mb-1 text-lg font-bold text-slate-800">学年別「今からできること」</h2>
+            <p className="mb-4 text-sm leading-relaxed text-slate-500">
+              内申点は学期ごとの積み重ね。<strong>同じ4軸でも、学年によって優先度が変わります</strong>。お子さま（あなた）の学年に合わせて読んでください。
+            </p>
+            <div className="space-y-4">
+              {GRADE_PLANS.map((g) => {
+                const Icon = g.icon;
+                return (
+                  <div key={g.grade} className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+                    <div className={`flex items-center justify-between gap-3 bg-gradient-to-r ${g.accent} px-5 py-3 text-white`}>
+                      <div className="flex items-center gap-2">
+                        <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-white/20"><Icon className="h-5 w-5" /></span>
+                        <span className="text-lg font-black">{g.grade}</span>
+                        <span className="text-sm font-bold opacity-90">{g.headline}</span>
+                      </div>
+                      <span className="hidden shrink-0 rounded-full bg-white/20 px-2.5 py-0.5 text-[10px] font-bold sm:inline">{g.badge}</span>
+                    </div>
+                    <ul className="space-y-1.5 p-5 text-sm leading-relaxed text-slate-700">
+                      {g.points.map((p) => (
+                        <li key={p} className="flex gap-2"><span className="text-blue-500">・</span><span>{p}</span></li>
+                      ))}
+                    </ul>
+                  </div>
+                );
+              })}
+            </div>
+            {/* dashboard の学年選択と連動＝リテンション */}
+            <Link href="/dashboard" className="mt-4 flex items-center justify-between gap-3 rounded-xl border border-indigo-200 bg-indigo-50/50 p-4 text-sm font-bold text-indigo-700 transition-colors hover:bg-indigo-50">
+              <span className="flex items-center gap-2"><LineChart className="h-4 w-4" />学年を選んで、内申点の伸びを記録・グラフ化する（無料）</span>
+              <ChevronRight className="h-4 w-4 shrink-0" />
+            </Link>
+          </section>
+
           {/* 保護者リード（内申改善＝塾無料体験・live） */}
           <div className="mt-8">
             <ParentLeadCTA
-              placement="result"
+              placement="naishin-up"
               heading="行動は分かっても、続けられるかが分かれ目です"
               body="内申アップは「正しい順番で・継続できるか」で差がつきます。お子さまに必要な対策を、オンライン個別指導の無料体験で具体的に確認できます（保護者の方向け・費用はかかりません）。"
             />

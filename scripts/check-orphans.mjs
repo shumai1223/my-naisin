@@ -58,9 +58,11 @@ function main() {
   const srcFiles = walk(SRC_DIR, (f) => /\.(tsx?|mjs|js)$/.test(f));
   const haystack = srcFiles.map((f) => fs.readFileSync(f, 'utf8')).join('\n');
 
+  // 意図的に内部リンクしないルート（認証付き管理・noindex）。SEO評価を届ける必要が無いので除外。
   const orphans = [];
   for (const route of routes) {
     if (route === '/') continue; // ホームは常にリンクされている扱い
+    if (route.startsWith('/admin')) continue; // 管理ページ（認証・noindex）はリンクしない設計
     // route がどこかに文字列として現れるか（href, sitemap, Link など）。
     // 前方一致も許容（/about → /about/editor-profile からの逆流は無視したいので境界をチェック）。
     const re = new RegExp(`['"\`]${route.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(['"\`/?#])`);

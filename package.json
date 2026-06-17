@@ -22,6 +22,8 @@
     "check:all": "npm run check:consistency && npm run check:forbidden",
     "monitor:links": "npx tsx src/scripts/link-monitor.ts",
     "newsletter": "npx tsx scripts/newsletter.ts",
+    "sales-report": "npx tsx scripts/generate-sales-report.ts",
+    "push-send": "npx tsx scripts/push-send.ts",
     "ga4:auth": "node --use-system-ca scripts/ga4-auth.mjs",
     "ga4": "node --use-system-ca scripts/ga4.mjs",
     "ga4:mcp": "node --use-system-ca scripts/ga4-mcp.mjs",
@@ -67,6 +69,8 @@
     "ts-jest": "^29.1.2",
     "tsx": "^4.7.0",
     "typescript": "^5.9.3",
+    "web-push": "^3.6.7",
+    "@types/web-push": "^3.6.4",
     "wrangler": "^4.59.2"
   }
 }
