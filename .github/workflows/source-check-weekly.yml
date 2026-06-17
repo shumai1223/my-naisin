@@ -1,0 +1,67 @@
+name: Source & Freshness Check (weekly)
+
+# 一次資料URLの死活＆鮮度を毎週チェック（E-E-A-Tの堀の保守）。
+# 文科省・各都道府県教委のページが移転/削除されたら早期にIssueで気づける。
+
+on:
+  schedule:
+    - cron: '0 22 * * 2' # 毎週水曜 午前7時(JST) = 火曜22:00 UTC
+  workflow_dispatch:
+
+jobs:
+  source-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check source links (死活)
+        id: links
+        continue-on-error: true
+        run: npm run check:links 2>&1 | tee source-check.log
+
+      - name: Check freshness (鮮度)
+        id: freshness
+        continue-on-error: true
+        run: npm run check:freshness 2>&1 | tee -a source-check.log
+
+      - name: Upload log
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: source-check-log
+          path: source-check.log
+          retention-days: 90
+
+      - name: Open issue on failure
+        if: steps.links.outcome == 'failure' || steps.freshness.outcome == 'failure'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            let log = '';
+            try { log = fs.readFileSync('source-check.log', 'utf8').slice(-5000); } catch {}
+            const body = [
+              '一次資料リンクの死活チェック / 鮮度チェックで問題を検出しました。',
+              '文科省・都道府県教委ページの移転/削除や、鮮度切れの可能性があります。',
+              '',
+              '```',
+              log,
+              '```',
+            ].join('\n');
+            github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `⚠️ 一次資料チェック失敗: ${new Date().toISOString().slice(0,10)}`,
+              body,
+              labels: ['source-check', 'automated', 'trust'],
+            });

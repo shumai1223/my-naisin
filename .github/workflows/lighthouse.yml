@@ -1,0 +1,33 @@
+name: Lighthouse CWV
+
+# Core Web Vitals（LCP/CLS/TBT）を継続計測。framer-motion 撤去や重い変更の前後で回帰を検知する。
+# 本番URLに対して実行（プレビューデプロイ不要）。週次＋手動。
+
+on:
+  schedule:
+    - cron: '0 23 * * 0' # 毎週月曜 午前8時(JST) = 日曜23:00 UTC
+  workflow_dispatch:
+    inputs:
+      url:
+        description: '計測する単一URL（省略時は主要ページ一式）'
+        required: false
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run Lighthouse
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          urls: |
+            https://my-naishin.com/
+            https://my-naishin.com/hensachi
+            https://my-naishin.com/hyotei-heikin
+            https://my-naishin.com/tokyo/naishin
+          # モバイル実機相当（受験トラフィックの約7割がモバイル）で計測。
+          configPath: ./.lighthouserc.json
+          uploadArtifacts: true
+          temporaryPublicStorage: true

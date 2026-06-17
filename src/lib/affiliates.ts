@@ -21,6 +21,10 @@ export type AffiliateId =
   | 'accesstrade-juku-trial'
   | 'rentracks-juku-trial'
   | 'afb-katei-kyoshi'
+  // 家庭教師の先回し枠（もしも審査待ち・CPA¥11,000–13,000）。承認時に href/trackingPixel を差すだけで live。
+  | 'gakken-katei-kyoshi'
+  | 'ganba-katei-kyoshi'
+  | 'manalink-katei-kyoshi'
   // ── 学費クラスタの最高単価帯（保護者＝決裁者・無料相談/資料請求。CPA¥8k–1.5万） ──
   | 'fp-soudan'
   | 'gakushi-hoken'
@@ -258,6 +262,34 @@ export const AFFILIATES: Record<AffiliateId, AffiliateConfig> = {
     name: '家庭教師の無料体験（afb）',
     href: '#',
     text: '無料体験・資料請求をする',
+    trackingPixel: '',
+    status: 'pending',
+  },
+  // 家庭教師の先回し枠（もしも審査待ち・CPA¥11,000–13,000）。承認時の差し替えは2箇所（href / trackingPixel）＋status行を削除。
+  'gakken-katei-kyoshi': {
+    id: 'gakken-katei-kyoshi',
+    type: 'text',
+    name: '学研の家庭教師（無料体験・資料請求）',
+    href: '#',
+    text: '無料体験・資料請求をする',
+    trackingPixel: '',
+    status: 'pending',
+  },
+  'ganba-katei-kyoshi': {
+    id: 'ganba-katei-kyoshi',
+    type: 'text',
+    name: '家庭教師のガンバ（無料体験・資料請求）',
+    href: '#',
+    text: '無料体験・資料請求をする',
+    trackingPixel: '',
+    status: 'pending',
+  },
+  'manalink-katei-kyoshi': {
+    id: 'manalink-katei-kyoshi',
+    type: 'text',
+    name: 'マナリンク（オンライン家庭教師・無料相談）',
+    href: '#',
+    text: '無料体験・相談をする',
     trackingPixel: '',
     status: 'pending',
   },

@@ -80,6 +80,18 @@ export default function KoukouHiyouPage() {
           <KoukouHiyouCalculator />
         </div>
 
+        {/* 公立vs私立 3年総額（就学支援金＝無償化を年収で反映）への導線 */}
+        <Link
+          href="/koukou-hiyou/kokoroze"
+          className="mt-6 flex items-center justify-between gap-3 rounded-2xl border-2 border-emerald-200 bg-gradient-to-br from-emerald-50 to-teal-50/50 p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-emerald-300 hover:shadow-md"
+        >
+          <span>
+            <span className="block text-sm font-bold text-emerald-800">公立 vs 私立、3年間の「実質負担」を比較する →</span>
+            <span className="mt-0.5 block text-xs leading-relaxed text-slate-600">高校無償化（就学支援金）を世帯年収で反映。私立は無償化後いくらか・公立とどれだけ違うかが分かります。</span>
+          </span>
+          <ChevronRight className="h-5 w-5 shrink-0 text-emerald-500" />
+        </Link>
+
         {/* 出典（一次情報準拠） */}
         <div className="mt-6 rounded-xl border border-slate-200 bg-slate-50/60 p-4">
           <div className="mb-2 flex items-center gap-1.5 text-xs font-bold text-slate-600">

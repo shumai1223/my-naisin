@@ -6,6 +6,7 @@ import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { AnswerBox } from '@/components/AnswerBox';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
+import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { SITE_URL } from '@/lib/naishin-dataset';
 
 const FAQS = [
@@ -170,6 +171,15 @@ export default function SougouGataSenbatsuPage() {
               </Link>
             ))}
           </section>
+
+          {/* 保護者リード（総合型→大学進学→教育資金。FP無料相談＝live・権限ズレ0の保護者面） */}
+          <div className="mt-8">
+            <ParentLeadCTA
+              placement="hiyou"
+              heading="推薦・総合型で大学へ。進学費用の見通しは立っていますか？"
+              body="総合型・推薦は専願が原則のことが多く、進学先を早く絞るほど準備が進みます。我が家はいくら必要か・就学支援金や奨学金で実質負担がどれだけ下がるかを、教育資金に詳しい専門家FPへ無料で相談できます（その場で契約を迫られることはありません）。"
+            />
+          </div>
 
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800"><HelpCircle className="h-5 w-5 text-violet-600" />よくある質問</h2>

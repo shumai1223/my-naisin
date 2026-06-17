@@ -5,6 +5,7 @@ import { Home, ChevronRight, FileText, ListChecks, Scale, HelpCircle, PenLine, C
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { AnswerBox } from '@/components/AnswerBox';
+import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { ToolClusterNav } from '@/components/ToolClusterNav';
 import { SITE_URL } from '@/lib/naishin-dataset';
 
@@ -201,6 +202,15 @@ export default function ChousashoPage() {
               </Link>
             </div>
           </section>
+
+          {/* 保護者リード（調査書＝三者面談・出願の文脈。家庭教師の無料体験＝live） */}
+          <div className="mt-8">
+            <ParentLeadCTA
+              placement="mendan"
+              heading="調査書（評定）で志望校に届くか、早めに見極めを"
+              body="調査書の中心は日々の評定です。出願前に「今の成績で何が足りないか」を把握しておくと、三者面談や志望校選びが具体的になります。小中高対応のオンライン家庭教師の無料体験で、弱点を見える化できます（保護者の方向け・費用はかかりません）。"
+            />
+          </div>
 
           {/* FAQ */}
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">

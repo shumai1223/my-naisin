@@ -1216,6 +1216,14 @@ export default function HyoteiHeikinPage() {
                 <span className="text-sm font-medium text-slate-700">調査書とは？内申点との違い</span>
                 <ChevronRight className="h-4 w-4 text-slate-400" />
               </Link>
+              <Link href="/naishin-age-kata" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow">
+                <span className="text-sm font-medium text-slate-700">内申点の上げ方（4軸）</span>
+                <ChevronRight className="h-4 w-4 text-slate-400" />
+              </Link>
+              <Link href="/jitsugika" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow">
+                <span className="text-sm font-medium text-slate-700">実技4教科の内申点対策</span>
+                <ChevronRight className="h-4 w-4 text-slate-400" />
+              </Link>
               <Link href="/" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow">
                 <span className="text-sm font-medium text-slate-700">内申点 計算サイト（換算対応）</span>
                 <ChevronRight className="h-4 w-4 text-slate-400" />
