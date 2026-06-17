@@ -115,6 +115,31 @@ export default function EmbedPage() {
             </ul>
           </section>
 
+          {/* 塾・学校サイト運営者向けパートナー導線（被リンク量産＝堀B。申請はcontact流用） */}
+          <section className="mb-8 overflow-hidden rounded-2xl border-2 border-blue-200 bg-gradient-to-br from-blue-50 to-indigo-50/40 p-6 shadow-sm">
+            <h2 className="mb-2 text-base font-bold text-slate-800">塾・学校・教育ブログ運営者の方へ（無料パートナー）</h2>
+            <p className="mb-3 text-sm leading-relaxed text-slate-700">
+              生徒・保護者がよく使う「内申点・評定平均の計算ツール」を、貴サイトに無料で設置できます。
+              読者の役に立つ実用ツールが増え、サイトの滞在時間・信頼性の向上に役立ちます。導入は<strong>iframeコードを貼るだけ</strong>・登録不要です。
+            </p>
+            <ol className="mb-4 space-y-1.5 text-sm leading-relaxed text-slate-700">
+              <li><strong>1.</strong> 上の「コードをコピー」でiframe＋クレジットを取得</li>
+              <li><strong>2.</strong> ブログ記事・サイトの好きな場所に貼り付け</li>
+              <li><strong>3.</strong> クレジットリンク（by My Naishin）はそのまま残す</li>
+            </ol>
+            <p className="mb-4 text-xs leading-relaxed text-slate-500">
+              ロゴの差し替え・特定教科への特化・自校カラーへの調整など、提携・カスタム埋め込みのご相談も歓迎です。
+              「埋め込みました」のご連絡もお気軽にどうぞ（相互紹介の検討材料にします）。
+            </p>
+            <Link
+              href="/contact?topic=embed"
+              className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-blue-700"
+            >
+              埋め込み・提携について相談する
+              <ChevronRight className="h-4 w-4" />
+            </Link>
+          </section>
+
           {/* 関連 */}
           <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="mb-3 text-base font-bold text-slate-800">本家サイトのツール</h2>

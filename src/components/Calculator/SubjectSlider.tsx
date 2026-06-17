@@ -119,6 +119,8 @@ export function SubjectSlider({ subject, prefectureCode, value, onChange, maxGra
               key={i}
               type="button"
               onClick={() => setValue(i)}
+              aria-label={`${subject.label}の評定を${i}にする`}
+              aria-pressed={i === value}
               className={cn(
                 'h-9 rounded-lg text-sm font-semibold transition-all',
                 i === value

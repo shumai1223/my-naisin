@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, CalendarDays, HelpCircle, Target, Sparkles } from 'lucide-react';
+import { Home, ChevronRight, CalendarDays, HelpCircle, Target, Sparkles, CalendarPlus } from 'lucide-react';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -115,6 +115,17 @@ export default function JukenSchedulePage() {
                 各月の「やること」を終日リマインダーとして、Googleカレンダー・Appleカレンダーに取り込めます（公式の入試日ではなく準備の目安です）。
               </p>
               <JukenIcsButton />
+              {/* 購読（自動更新）: webcal:// でカレンダーアプリに登録すると毎年の準備ToDoが届き続ける＝Google非依存の再訪チャネル */}
+              <a
+                href="webcal://my-naishin.com/api/calendar"
+                className="inline-flex items-center gap-2 rounded-xl border-2 border-sky-200 bg-white px-5 py-2.5 text-sm font-bold text-sky-700 transition-colors hover:border-sky-300 hover:bg-sky-50"
+              >
+                <CalendarPlus className="h-4 w-4" />
+                カレンダーに「購読」（自動更新）
+              </a>
+              <p className="text-[11px] leading-relaxed text-slate-500">
+                購読がうまくいかない場合は、カレンダーの「URLで追加」に <span className="font-mono text-slate-600">https://my-naishin.com/api/calendar</span> を貼り付けてください。
+              </p>
             </div>
           </section>
 
