@@ -18,7 +18,10 @@ import { ExitIntentLineModal } from '@/components/ExitIntentLineModal';
 const notoSansJp = Noto_Sans_JP({
   variable: '--font-noto-sans-jp',
   display: 'swap',
+  // 日本語フォントは巨大なので preload しない（フルfontのpreloadはLCPを悪化させる）。
   preload: false,
+  // スワップ中は端末標準の日本語フォントで描画＝字形が近くCLS（レイアウトずれ）を抑える。
+  fallback: ['system-ui', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Meiryo', 'sans-serif'],
 });
 
 export const metadata: Metadata = {
@@ -81,6 +84,14 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="ja" className={`h-full ${notoSansJp.variable}`}>
+      <head>
+        {/* 第三者オリジンへの接続を前倒し（CWV：LCP/INP改善）。フォントは next/font が自己ホストするため
+            fonts.gstatic.com への preconnect は不要（むしろアンチパターン）。計測/広告のみ前倒しする。 */}
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
+        <link rel="dns-prefetch" href="https://i.moshimo.com" />
+      </head>
       <body className={`min-h-screen mesh-gradient text-slate-900 antialiased`}>
         <a
           href="#main-content"

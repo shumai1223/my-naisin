@@ -9,6 +9,7 @@ import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { DatasetSchema } from '@/components/StructuredData/DatasetSchema';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
+import { PREFECTURES } from '@/lib/prefectures';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { HensachiCalculator } from '@/components/Hensachi/HensachiCalculator';
 import { AnswerBox } from '@/components/AnswerBox';
@@ -1142,32 +1143,31 @@ export default function HensachiPage() {
             </div>
           </section>
 
-          {/* 都道府県別計算 */}
+          {/* 都道府県別の偏差値の目安と内申点（全47県の内部リンクハブ）。
+              偏差値は全国共通の指標だが「行ける高校レベル」「内申の比重」は地域で大きく異なる。
+              各県の /[pref]/naishin に、検証済みの高校ボーダー（内申・総合点）と入試制度がまとまっているので、
+              「偏差値 ◯◯県」で来た人をその県の正準ページへ案内する（重複ページを作らず内部リンクで回遊）。 */}
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-3 text-lg font-bold text-slate-800">都道府県別の内申点を計算する</h2>
-            <p className="text-xs text-slate-500 mb-4">偏差値だけでなく、内申点も同時にチェックすると合格戦略が立てやすくなります</p>
-            <div className="grid gap-2 sm:grid-cols-3">
-              {[
-                { code: 'tokyo', name: '東京都' },
-                { code: 'kanagawa', name: '神奈川県' },
-                { code: 'chiba', name: '千葉県' },
-                { code: 'saitama', name: '埼玉県' },
-                { code: 'osaka', name: '大阪府' },
-                { code: 'hyogo', name: '兵庫県' },
-                { code: 'aichi', name: '愛知県' },
-                { code: 'fukuoka', name: '福岡県' },
-                { code: 'hokkaido', name: '北海道' },
-              ].map((pref) => (
+            <h2 className="mb-3 text-lg font-bold text-slate-800">都道府県別の偏差値の目安と内申点</h2>
+            <p className="text-xs text-slate-500 mb-4">
+              偏差値は全国共通でも、同じ偏差値で「行ける高校」や内申の比重は地域で変わります。お住まいの都道府県のページで、検証済みの高校ボーダー（内申・総合点）と入試制度を確認できます。
+            </p>
+            <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4">
+              {PREFECTURES.map((pref) => (
                 <Link
                   key={pref.code}
                   href={`/${pref.code}/naishin`}
                   className="flex items-center justify-between rounded-lg bg-purple-50 px-3 py-2 text-sm font-medium text-purple-800 hover:bg-purple-100 hover:text-purple-900 transition-colors"
                 >
-                  {pref.name}の内申計算
-                  <ChevronRight className="h-3 w-3 opacity-60" />
+                  <span className="truncate">{pref.name}</span>
+                  <ChevronRight className="h-3 w-3 shrink-0 opacity-60" />
                 </Link>
               ))}
             </div>
+            <p className="mt-3 text-xs text-slate-400">
+              ※ 高校別の偏差値は模試・年度で変動するため、当サイトは各県教委の一次資料で確認できる内申・総合点のボーダーを掲載しています。偏差値の全国的な目安は
+              <Link href="/hensachi/shiboukou" className="text-purple-600 underline">偏差値から行ける高校レベル</Link>をご覧ください。
+            </p>
           </section>
 
           {/* 関連コラム */}

@@ -102,3 +102,8 @@ newsletter-preview-*.html
 kpi-weekly-report.md
 gsc-weekly-report.md
 gsc-weekly-report.json
+
+# Playwright E2E の生成物
+test-results/
+playwright-report/
+.playwright/
