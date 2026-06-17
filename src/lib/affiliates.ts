@@ -24,6 +24,9 @@ export type AffiliateId =
   // ── 学費クラスタの最高単価帯（保護者＝決裁者・無料相談/資料請求。CPA¥8k–1.5万） ──
   | 'fp-soudan'
   | 'gakushi-hoken'
+  // 承認待ちの先回し枠（FP無料相談のA/B候補・学資保険）。承認が来たら href/trackingPixel を差すだけで live。
+  | 'hoken-compass'
+  | 'money-doctor'
   // ── もしも 提携中（審査なし・2026-06-15 live結線） ──
   | 'moshimo-e-live'
   | 'moshimo-studycoach'
@@ -270,12 +273,37 @@ export const AFFILIATES: Record<AffiliateId, AffiliateConfig> = {
     text: '教育資金を専門家FPに無料で相談',
     trackingPixel: 'https://i.moshimo.com/af/i/impression?a_id=5638594&p_id=1831&pc_id=3531&pl_id=25541',
   },
+  // ★承認時の差し替えは1案件あたり2箇所だけ：(1) href を実リンクに (2) trackingPixel を実値に → status 行を削除。
+  //   例) gakushi-hoken（ガーデン学資保険の一括資料請求・A8/ASP承認後）:
+  //       href: 'https://px.a8.net/svt/ejp?a8mat=＜実値＞',
+  //       trackingPixel: 'https://www＜n＞.a8.net/0.gif?a8mat=＜実値＞',
+  //       （status:'pending' の行を消すと AffiliateAd が描画＝即 live）
   'gakushi-hoken': {
     id: 'gakushi-hoken',
     type: 'text',
-    name: '学資保険の一括資料請求',
+    name: '学資保険の一括資料請求（ガーデン学資保険）',
     href: '#',
     text: '学資保険の資料を無料で取り寄せる',
+    trackingPixel: '',
+    status: 'pending',
+  },
+  // FP無料相談の A/B 候補（live の もしも「保険トータルプロフェッショナル」＝fp-soudan と比較するための先回し枠）。
+  // 承認後、lead-config の hiyou 面オファーをこの id に差し替えれば送客先を切替できる。
+  'hoken-compass': {
+    id: 'hoken-compass',
+    type: 'text',
+    name: '保険コンパス（教育資金FPの無料相談）',
+    href: '#',
+    text: '教育資金を専門家FPに無料で相談',
+    trackingPixel: '',
+    status: 'pending',
+  },
+  'money-doctor': {
+    id: 'money-doctor',
+    type: 'text',
+    name: 'マネードクター（教育資金FPの無料相談）',
+    href: '#',
+    text: '教育資金を専門家FPに無料で相談',
     trackingPixel: '',
     status: 'pending',
   },

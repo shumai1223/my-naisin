@@ -1208,6 +1208,14 @@ export default function HyoteiHeikinPage() {
                 <span className="text-sm font-medium text-slate-700">推薦に必要な評定平均の早見表を見る</span>
                 <ChevronRight className="h-4 w-4 text-slate-400" />
               </Link>
+              <Link href="/sougou-gata-senbatsu" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow ring-1 ring-violet-100">
+                <span className="text-sm font-medium text-slate-700">総合型選抜とは？評定の目安・準備時期</span>
+                <ChevronRight className="h-4 w-4 text-slate-400" />
+              </Link>
+              <Link href="/chousasho" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow">
+                <span className="text-sm font-medium text-slate-700">調査書とは？内申点との違い</span>
+                <ChevronRight className="h-4 w-4 text-slate-400" />
+              </Link>
               <Link href="/" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow">
                 <span className="text-sm font-medium text-slate-700">内申点 計算サイト（換算対応）</span>
                 <ChevronRight className="h-4 w-4 text-slate-400" />

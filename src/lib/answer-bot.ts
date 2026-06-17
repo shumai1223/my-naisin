@@ -168,6 +168,7 @@ const GENERAL_FACTS: { test: RegExp; result: Omit<AnswerResult, 'kind'> }[] = [
         '高校受験の推薦は上位校で4.0〜4.5以上、中堅校で3.3〜3.8前後、私立の併願優遇は最低3.0〜3.5以上が一般的な目安です。大学の指定校推薦は中堅私大3.3〜3.8／MARCH・関関同立3.8〜4.3／早慶4.0〜4.5が目安。基準は学校・年度で変わるため必ず募集要項で確認を。',
       links: [
         { href: '/hyotei-heikin/suisen-kijun', label: '推薦に必要な評定平均の早見表を見る' },
+        { href: '/sougou-gata-senbatsu', label: '総合型選抜とは？評定の目安・準備時期' },
         { href: '/hyotei-heikin', label: '評定平均を自動計算する' },
       ],
     },
@@ -201,8 +202,9 @@ const GENERAL_FACTS: { test: RegExp; result: Omit<AnswerResult, 'kind'> }[] = [
     result: {
       title: '調査書（調査書点）とは',
       answer:
-        '調査書は中学校が作成する成績・活動の記録で、入試で点数化される部分が「調査書点（内申点）」です。満点や対象学年は都道府県で大きく異なります。',
+        '調査書は中学校が作成して高校へ提出する書類で、学習の記録（評定）・特別活動・行動・出欠が記載されます。入試で点数化される部分が「調査書点（内申点）」です。満点や対象学年は都道府県で大きく異なります。',
       links: [
+        { href: '/chousasho', label: '調査書とは？記載内容・内申点との違い' },
         { href: '/', label: '自分の都道府県で調査書点を計算する' },
         { href: '/prefectures', label: '47都道府県の調査書点方式を見る' },
       ],

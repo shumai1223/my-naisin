@@ -58,9 +58,20 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
-    ? { verification: { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION } }
-    : {}),
+  // サイト所有確認（env を入れた瞬間に <meta> が出る）。
+  //  - Google Search Console: NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+  //  - Bing Webmaster Tools: NEXT_PUBLIC_BING_SITE_VERIFICATION（msvalidate.01 の content 値）
+  //    ※ ChatGPT検索は Bing インデックスが母体＝Bing WMT 登録＋サイトマップ提出で AI 送客経路を開通させる。
+  ...(() => {
+    const verification: NonNullable<Metadata['verification']> = {};
+    if (process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION) {
+      verification.google = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
+    }
+    if (process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION) {
+      verification.other = { 'msvalidate.01': process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION };
+    }
+    return Object.keys(verification).length ? { verification } : {};
+  })(),
 };
 
 export const viewport: Viewport = {
