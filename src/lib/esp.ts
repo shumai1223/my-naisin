@@ -34,13 +34,37 @@ export interface LeadEmailData {
   note?: string;
 }
 
-/** ESP（Resend）が設定済みか。 */
-export function espConfigured(): boolean {
-  return Boolean(process.env.RESEND_API_KEY);
+interface EspEnv {
+  apiKey: string | undefined;
+  from: string;
 }
 
-function fromAddress(): string {
-  return process.env.LEAD_FROM_EMAIL || 'My Naishin <noreply@my-naishin.com>';
+/**
+ * RESEND_API_KEY / LEAD_FROM_EMAIL を解決する。
+ * process.env → Cloudflare env（getCloudflareContext）の順で見る。
+ * 重要：OpenNext(Cloudflare) では `wrangler secret put` の値が process.env に出ないことがある。
+ * D1（LEADS_DB）と同じく getCloudflareContext().env を見ることで、設定済みのsecretを確実に拾う。
+ */
+async function readEspEnv(): Promise<EspEnv> {
+  let apiKey = process.env.RESEND_API_KEY;
+  let from = process.env.LEAD_FROM_EMAIL;
+  if (!apiKey || !from) {
+    try {
+      const { getCloudflareContext } = await import('@opennextjs/cloudflare');
+      const { env } = await getCloudflareContext({ async: true });
+      const e = env as unknown as Record<string, string | undefined>;
+      apiKey = apiKey || e.RESEND_API_KEY;
+      from = from || e.LEAD_FROM_EMAIL;
+    } catch {
+      /* Workers外（テスト/ビルド）では process.env のみ */
+    }
+  }
+  return { apiKey, from: from || 'My Naishin <noreply@my-naishin.com>' };
+}
+
+/** ESP（Resend）が設定済みか（Cloudflare env も見る）。 */
+export async function espConfigured(): Promise<boolean> {
+  return Boolean((await readEspEnv()).apiKey);
 }
 
 interface ResendPayload {
@@ -51,15 +75,19 @@ interface ResendPayload {
   reply_to?: string;
 }
 
-async function sendViaResend(payload: ResendPayload): Promise<boolean> {
-  const key = process.env.RESEND_API_KEY;
-  if (!key) return false;
+async function sendViaResend(payload: ResendPayload, apiKey: string | undefined): Promise<boolean> {
+  if (!apiKey) return false;
   try {
     const res = await fetch(RESEND_ENDPOINT, {
       method: 'POST',
-      headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
+      headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
     });
+    if (!res.ok) {
+      // 失敗理由をログに残す（domain未認証=403 等の切り分け用。wrangler tail で確認できる）。
+      const detail = await res.text().catch(() => '');
+      console.error('Resend send not ok:', res.status, detail.slice(0, 300));
+    }
     return res.ok;
   } catch (err) {
     console.error('Resend send failed:', err);
@@ -82,7 +110,7 @@ function contextLine(d: LeadEmailData): string {
 }
 
 /** 登録者への歓迎メール（最初の接点＝到達性の確立）。 */
-export async function sendLeadWelcome(d: LeadEmailData): Promise<boolean> {
+export async function sendLeadWelcome(d: LeadEmailData, env: EspEnv): Promise<boolean> {
   const ctx = contextLine(d);
   const prefPath = d.prefectureCode ? `${SITE_URL}/${esc(d.prefectureCode)}/naishin` : `${SITE_URL}/`;
   const html = `
@@ -111,16 +139,16 @@ export async function sendLeadWelcome(d: LeadEmailData): Promise<boolean> {
 </div>`.trim();
 
   return sendViaResend({
-    from: fromAddress(),
+    from: env.from,
     to: [d.email],
     subject: '【My Naishin】受け取り登録ありがとうございます（受験情報をお届けします）',
     html,
     reply_to: CONTACT_EMAIL,
-  });
+  }, env.apiKey);
 }
 
 /** 運営者への通知メール（Webhook と二重でも可・取りこぼし防止）。 */
-export async function sendOwnerNotify(d: LeadEmailData): Promise<boolean> {
+export async function sendOwnerNotify(d: LeadEmailData, env: EspEnv): Promise<boolean> {
   const ctx = contextLine(d) || '-';
   const html = `
 <div style="font-family:sans-serif;line-height:1.6">
@@ -134,12 +162,12 @@ export async function sendOwnerNotify(d: LeadEmailData): Promise<boolean> {
 </div>`.trim();
 
   return sendViaResend({
-    from: fromAddress(),
+    from: env.from,
     to: [CONTACT_EMAIL],
     subject: `【My Naishin】新規リード: ${d.email}`,
     html,
     reply_to: d.email,
-  });
+  }, env.apiKey);
 }
 
 /**
@@ -147,7 +175,8 @@ export async function sendOwnerNotify(d: LeadEmailData): Promise<boolean> {
  * 返り値 delivered=歓迎メール送信成功（=本人に1通届いた＝名簿として有効）。
  */
 export async function sendLeadEmails(d: LeadEmailData): Promise<{ delivered: boolean; owner: boolean }> {
-  if (!espConfigured()) return { delivered: false, owner: false };
-  const [welcome, owner] = await Promise.all([sendLeadWelcome(d), sendOwnerNotify(d)]);
+  const env = await readEspEnv();
+  if (!env.apiKey) return { delivered: false, owner: false };
+  const [welcome, owner] = await Promise.all([sendLeadWelcome(d, env), sendOwnerNotify(d, env)]);
   return { delivered: welcome, owner };
 }

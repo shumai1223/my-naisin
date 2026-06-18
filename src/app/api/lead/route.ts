@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-import { sendLeadEmails, espConfigured } from '@/lib/esp';
+import { sendLeadEmails } from '@/lib/esp';
 import { persistLead } from '@/lib/leads-db';
 
 /**
@@ -172,15 +172,14 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // 5) ESP（Resend）で登録者へ歓迎メール＋運営者へ通知（RESEND_API_KEY 設定時のみ）。
+    // 5) ESP（Resend）で登録者へ歓迎メール＋運営者へ通知。
+    //    sendLeadEmails は env（RESEND_API_KEY）を Cloudflare env 経由で解決し、未設定なら自前で no-op。
     //    本人に1通届いた＝名簿として有効＝「配信できる名簿」化。歓迎メール成功も delivered とみなし mailto を抑止。
-    if (espConfigured()) {
-      try {
-        const esp = await sendLeadEmails(data);
-        delivered = delivered || esp.delivered || esp.owner;
-      } catch (err) {
-        console.error('Lead ESP send failed:', err);
-      }
+    try {
+      const esp = await sendLeadEmails(data);
+      delivered = delivered || esp.delivered || esp.owner;
+    } catch (err) {
+      console.error('Lead ESP send failed:', err);
     }
 
     // 6) 同意済みリードを D1 に永続化（配信母数）。バインディング未設定なら no-op。受付の成否には影響させない。
