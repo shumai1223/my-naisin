@@ -11,6 +11,7 @@ import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { PREFECTURES } from '@/lib/prefectures';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
+import { ParentCostBridge } from '@/components/ParentCostBridge';
 import { HensachiCalculator } from '@/components/Hensachi/HensachiCalculator';
 import { AnswerBox } from '@/components/AnswerBox';
 import { HensachiClusterNav } from '@/components/Hensachi/HensachiClusterNav';
@@ -315,6 +316,9 @@ export default function HensachiPage() {
           <div className="mt-6">
             <SaveResultCTA source="hensachi" />
           </div>
+
+          {/* 結果直後の同スケール導線（生徒→保護者）：偏差値→志望校が見えたら学費/塾代を確認 */}
+          <ParentCostBridge className="mt-6" />
 
           {/* 偏差値クラスタのハブ：教科別・志望校レンジ・上げ方への内部リンク */}
           <div className="mt-6">

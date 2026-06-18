@@ -30,7 +30,14 @@ export function SiteEngagementTracker() {
     const WINDOW_MS = 1000;
     const RADIUS = 32; // px
     const THRESHOLD = 3; // 連打回数
-    let clicks: { x: number; y: number; t: number }[] = [];
+    let clicks: { x: number; y: number; t: number; el: Element | null }[] = [];
+
+    /** 連打先の「操作可能な祖先要素」を返す（±ボタン・ページャ等の同一要素連打を識別するため）。 */
+    function closestInteractive(target: EventTarget | null): Element | null {
+      return target instanceof Element
+        ? target.closest('a,button,[role="button"],input,label,summary,[onclick]')
+        : null;
+    }
 
     /**
      * 連打された要素を「次データで犯人特定できる」最小情報に要約する。
@@ -69,18 +76,25 @@ export function SiteEngagementTracker() {
         return;
       }
       const now = Date.now();
+      const el = closestInteractive(t);
       clicks = clicks.filter((c) => now - c.t < WINDOW_MS);
-      clicks.push({ x: e.clientX, y: e.clientY, t: now });
+      clicks.push({ x: e.clientX, y: e.clientY, t: now, el });
       const near = clicks.filter(
         (c) => Math.abs(c.x - e.clientX) < RADIUS && Math.abs(c.y - e.clientY) < RADIUS
       );
       if (near.length >= THRESHOLD) {
-        track(EVENTS.RAGE_CLICK, {
-          page: window.location.pathname,
-          count: near.length,
-          ...describeTarget(e.target),
-        });
-        clicks = []; // 多重発火を防ぐ
+        // 同一の操作可能要素（±ステッパー・ページャ・数量インクリメンタ等）への連打は
+        // フラストレーションではなく“正当な反復操作”。同じ interactive 要素への連打は rage とみなさない。
+        // これで data-no-rage の付け漏れがあってもステッパー偽陽性を全面的に弾ける。
+        const sameInteractiveRepeat = el !== null && near.every((c) => c.el === el);
+        if (!sameInteractiveRepeat) {
+          track(EVENTS.RAGE_CLICK, {
+            page: window.location.pathname,
+            count: near.length,
+            ...describeTarget(e.target),
+          });
+        }
+        clicks = []; // 多重発火を防ぐ（rage判定の有無に関わらずリセット）
       }
     }
 

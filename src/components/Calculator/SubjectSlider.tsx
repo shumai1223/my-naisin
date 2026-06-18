@@ -27,7 +27,8 @@ export function SubjectSlider({ subject, prefectureCode, value, onChange, maxGra
   );
 
   return (
-    <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition-shadow hover:shadow-md">
+    // data-no-rage: ステッパー/スライダー/クイック選択の連打はすべて正当な操作なので、カード全体を rage_click から除外（偽陽性の根絶）。
+    <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition-shadow hover:shadow-md" data-no-rage>
       {/* ヘッダー */}
       <div className="mb-3 flex items-center justify-between gap-3">
         <div className="min-w-0 flex-1">
@@ -52,7 +53,7 @@ export function SubjectSlider({ subject, prefectureCode, value, onChange, maxGra
             onClick={() => setValue(value - 1)}
             disabled={value <= 1}
             className={cn(
-              'grid h-9 w-9 place-items-center rounded-lg border transition-all',
+              'grid h-10 w-10 place-items-center rounded-lg border transition-all',
               value <= 1
                 ? 'border-slate-200 bg-slate-50 text-slate-300 cursor-not-allowed'
                 : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50 active:scale-95'
@@ -85,7 +86,7 @@ export function SubjectSlider({ subject, prefectureCode, value, onChange, maxGra
             onClick={() => setValue(value + 1)}
             disabled={value >= maxGrade}
             className={cn(
-              'grid h-9 w-9 place-items-center rounded-lg border transition-all',
+              'grid h-10 w-10 place-items-center rounded-lg border transition-all',
               value >= maxGrade
                 ? 'border-slate-200 bg-slate-50 text-slate-300 cursor-not-allowed'
                 : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50 active:scale-95'
@@ -122,7 +123,7 @@ export function SubjectSlider({ subject, prefectureCode, value, onChange, maxGra
               aria-label={`${subject.label}の評定を${i}にする`}
               aria-pressed={i === value}
               className={cn(
-                'h-9 rounded-lg text-sm font-semibold transition-all',
+                'h-10 rounded-lg text-sm font-semibold transition-all',
                 i === value
                   ? 'bg-blue-500 text-white shadow-sm'
                   : 'bg-slate-100 text-slate-600 hover:bg-slate-200 active:scale-95'

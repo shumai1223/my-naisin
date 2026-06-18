@@ -4,6 +4,7 @@ import { Calculator, ChevronRight, Home, Network, HelpCircle, MapPin, Info } fro
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
+import { HensachiPromo } from '@/components/HensachiPromo';
 import { HUB_CALCULATORS, HUB_EXPLAINERS, HUB_ALL } from '@/lib/total-score/hub';
 
 const BASE = 'https://my-naishin.com';
@@ -165,6 +166,9 @@ export default function TotalScoreHubPage() {
               受験生を誤解させないために、足し算で出せない県を無理に計算機にせず、仕組みを正直に解説する方針を取っています。
             </p>
           </section>
+
+          {/* 偏差値クラスタへ評価を集約（稼ぎ頭 /hensachi の文脈内部リンク） */}
+          <HensachiPromo className="mb-10" />
 
           {/* FAQ */}
           <section className="mb-10 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">

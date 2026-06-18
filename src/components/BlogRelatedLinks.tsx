@@ -80,7 +80,7 @@ export function BlogRelatedLinks({
             </div>
             <div className="flex-1">
               <div className="text-[10px] font-medium text-purple-600/80 leading-none mb-1">HENSACHI</div>
-              偏差値を5教科で計算
+              偏差値計算サイト（5教科）
             </div>
             <ChevronRight className="h-4 w-4" />
           </Link>

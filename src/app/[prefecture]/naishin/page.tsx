@@ -30,6 +30,7 @@ import { TrustInfo } from '@/components/TrustInfo';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { ParentLeadCTAExperiment } from '@/components/ParentLeadCTAExperiment';
+import { ParentCostBridge } from '@/components/ParentCostBridge';
 import { AnswerBox } from '@/components/AnswerBox';
 import { RelatedToolsSection } from '@/components/RelatedToolsSection';
 
@@ -424,6 +425,9 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
               body="内申点アップのコツ・志望校の最新ボーダー・出願スケジュールを、受験本番まで無料でお届けします。LINEかメールで、いつでも解除できます。"
             />
 
+            {/* 結果直後の同スケール導線（生徒→保護者）：権限ズレを避け、購入を迫らず学費/塾代の情報面へ */}
+            <ParentCostBridge prefectureName={prefecture.name} />
+
             {/* 計算後・最高エンゲージ位置の Z会 CTA */}
             <section className="rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-50 to-indigo-50 p-6 shadow-sm">
               <div className="text-center">
@@ -659,11 +663,12 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
             <RelatedToolsSection
               heading="次の一手・関連ツール"
               links={[
-                { href: '/hensachi', title: '偏差値を計算する（5教科）', desc: '内申点とあわせて学力の立ち位置も把握' },
+                { href: '/hensachi', title: '偏差値計算サイト（5教科）', desc: '内申点とあわせて学力の立ち位置も把握' },
                 { href: '/hensachi/shiboukou', title: '偏差値から行ける高校を見る', desc: '届く高校レベルを安全圏・実力相応・チャレンジで' },
                 { href: '/reverse', title: '志望校から必要な当日点を逆算', desc: `${prefecture.name}の配点比率で「あと何点」を算出` },
                 { href: '/hyotei-heikin', title: '評定平均を計算する', desc: '推薦・私立併願優遇で使う評定平均を確認' },
                 { href: '/juken-schedule', title: '高校受験の年間スケジュール', desc: '内申が決まる時期・三者面談・出願を月別に確認' },
+                { href: '/tools', title: '高校受験の計算ツール一覧', desc: '内申点・偏差値・S値・逆算をまとめて確認' },
                 { href: '/hiyou', title: 'お金・費用まとめ（保護者向け）', desc: '教育費・高校学費・塾代・高校無償化を一括で把握' },
               ]}
             />

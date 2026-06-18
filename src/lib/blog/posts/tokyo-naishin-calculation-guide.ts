@@ -2,7 +2,7 @@ import { BlogPost } from '@/lib/blog/types';
 
 export const post: BlogPost = {
   slug: 'tokyo-naishin-calculation-guide',
-  title: '東京都立の内申点 計算方法【2026】実技2倍・換算内申65点の出し方を例つきで',
+  title: '東京都立の内申点 計算方法【2026】実技2倍・換算内申65点の早見表と自動計算サイト',
   description: '【2026年度（令和8年度）入試対応】東京都立高校入試における内申点（換算内申・調査書点）の計算方法を徹底解説。実技4教科が2倍になる仕組みや、ESAT-J（スピーキングテスト）の加点、内申点1点が当日のテスト何点分に相当するかなど、受験生必見の情報を網羅しました。',
   date: '2026-05-01',
   lastUpdated: '2026-05-01',

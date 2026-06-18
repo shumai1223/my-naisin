@@ -7,6 +7,7 @@ import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
+import { HensachiPromo } from '@/components/HensachiPromo';
 
 const BASE = 'https://my-naishin.com';
 
@@ -185,6 +186,9 @@ export function TotalScoreExplainerView({ explainer: e }: { explainer: TotalScor
             heading={`${e.name}の入試情報を、受験本番まで受け取りませんか？`}
             body="出願スケジュール・内申点アップのコツ・志望校の動向を無料でお届けします。LINEかメールで、いつでも解除できます。"
           />
+
+          {/* 偏差値クラスタへ評価を集約（稼ぎ頭 /hensachi の文脈内部リンク） */}
+          <HensachiPromo className="mt-8" />
 
           {/* 保護者向けリード（換金の本命） */}
           <ParentLeadCTA

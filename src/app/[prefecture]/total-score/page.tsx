@@ -15,6 +15,7 @@ import { TotalScoreCalculator } from '@/components/TotalScore/TotalScoreCalculat
 import { TotalScoreExplainerView } from '@/components/TotalScore/TotalScoreExplainerView';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
+import { HensachiPromo } from '@/components/HensachiPromo';
 
 /** 早見表：既定の比率オプションで、得点率の組合せ→総合得点を engine で算出する。 */
 function buildQuickTable(system: TotalScoreSystem) {
@@ -342,6 +343,9 @@ export default async function PrefectureTotalScorePage({ params }: PageProps) {
               )}
             </div>
           </section>
+
+          {/* 偏差値クラスタへ評価を集約（稼ぎ頭 /hensachi の文脈内部リンク） */}
+          <HensachiPromo className="mt-8" />
 
           {/* 保護者向けリード（換金の本命） */}
           <ParentLeadCTA

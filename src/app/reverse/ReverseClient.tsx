@@ -13,6 +13,7 @@ import { HowToSchema } from '@/components/StructuredData/HowToSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
+import { ParentCostBridge } from '@/components/ParentCostBridge';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { AnswerBox } from '@/components/AnswerBox';
 import Loader from '@/components/ui/Loader';
@@ -245,6 +246,9 @@ function ReversePageContent() {
               <ReverseCalculator
                 onBack={() => router.push('/')}
               />
+
+              {/* 結果直後の同スケール導線（生徒→保護者）：購入を迫らず、必要点が見えたいま学費/塾代を確認 */}
+              <ParentCostBridge className="mt-8" />
 
               {/* 保護者向けリード（換金の本命：志望校が見えた保護者を無料資料請求へ） */}
               <ParentLeadCTA placement="result" auditHide className="mt-8" />

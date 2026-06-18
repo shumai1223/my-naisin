@@ -17,8 +17,8 @@ import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 
 export const metadata = {
-  title: '都道府県別の内申点計算ツール一覧【2026年最新】全国47都道府県対応 | My Naishin',
-  description: '全国47都道府県の高校入試に対応した内申点計算ツールの一覧ページ。お住まいの地域を選択するだけで、最新（令和8年度）の入試制度に基づいた正確な内申点を一瞬で算出できます。',
+  title: '内申点 計算サイト 47都道府県一覧｜都道府県別の高校入試・実技倍率を確認【2026年度・無料】 | My Naishin',
+  description: '全国47都道府県の高校入試に対応した内申点 計算サイトの一覧。お住まいの地域を選ぶだけで、最新（令和8年度）の入試制度・満点・実技倍率に基づいた内申点を無料で正確に算出できます。総合得点・合否の仕組みの早見表へもここから。',
   alternates: {
     canonical: 'https://my-naishin.com/prefectures',
   },
