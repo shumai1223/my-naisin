@@ -4,6 +4,7 @@ import * as React from 'react';
 import { Bell, BellRing, Check, X } from 'lucide-react';
 
 import { track } from '@/lib/track';
+import { VAPID_PUBLIC_KEY } from '@/lib/push-config';
 
 /**
  * Web Push 購読のオプトイン（H-NEW）。出願締切・通知表リマインドの再訪チャネルを点ける。
@@ -14,8 +15,6 @@ import { track } from '@/lib/track';
  *  - 購読は /api/push/subscribe に保存（D1）。失敗してもUIは静かに復帰。
  *  - 県・対象（生徒/保護者）を任意で付与し、配信の出し分けに使う。
  */
-
-const VAPID_PUBLIC_KEY = process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY;
 
 type State = 'idle' | 'working' | 'subscribed' | 'denied' | 'error' | 'unsupported';
 

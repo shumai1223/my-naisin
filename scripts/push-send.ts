@@ -25,6 +25,8 @@
 
 import { readFileSync, writeFileSync } from 'node:fs';
 
+import { VAPID_PUBLIC_KEY } from '@/lib/push-config';
+
 function arg(name: string): string | undefined {
   const hit = process.argv.find((a) => a.startsWith(`--${name}=`));
   return hit ? hit.slice(name.length + 3) : undefined;
@@ -81,11 +83,11 @@ async function main() {
     return;
   }
 
-  const publicKey = process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY;
-  const privateKey = process.env.VAPID_PRIVATE_KEY;
+  const publicKey = VAPID_PUBLIC_KEY; // 公開鍵は push-config の定数（env override 可）
+  const privateKey = process.env.VAPID_PRIVATE_KEY; // 秘密鍵はローカルのシェルenvから（コミット禁止）
   const subject = process.env.VAPID_SUBJECT || 'mailto:naishin.dev@gmail.com';
-  if (!publicKey || !privateKey) {
-    console.error('✗ VAPID鍵が未設定です。--gen-keys で生成し env に設定してください。');
+  if (!privateKey) {
+    console.error('✗ VAPID_PRIVATE_KEY が未設定です。送信前に環境変数で渡してください（例: $env:VAPID_PRIVATE_KEY="..."）。');
     process.exit(1);
   }
   webpush.setVapidDetails(subject, publicKey, privateKey);
