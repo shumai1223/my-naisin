@@ -18,7 +18,8 @@
  *
  * 安全：
  *  - 既定は dry-run（送らない）。本送信は --send。
- *  - web-push は配信時のみ必要な依存。未インストールでも tsc/CI を壊さないよう動的importで読む。
+ *  - web-push はこのスクリプト専用の依存（本体ビルドには不要なので package.json には入れない）。
+ *    初回だけ `npm i web-push` を実行してから使う。未インストールでも tsc/CI/本番ビルドは壊れない（動的import）。
  *  - VAPID鍵が無ければ中止。404/410 の endpoint は「revoke候補」として一覧出力（D1で revoked=1 に）。
  */
 
