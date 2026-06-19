@@ -50,6 +50,11 @@ export const EVENTS = {
   LEAD_SUBMIT: 'lead_submit', // 名簿登録の送信
   LEAD_SUBMIT_SUCCESS: 'lead_submit_success',
   LINE_FRIEND_CLICK: 'line_friend_click',
+  // ── リードマグネット（登録の“即時の見返り”＝互恵性で lead_submit を底上げ） ──
+  LEAD_MAGNET_VIEW: 'lead_magnet_view', // 登録成功後の見返り一式が表示された
+  LEAD_MAGNET_CARD: 'lead_magnet_card', // 登録者が成績カード（画像）を開いた
+  LEAD_MAGNET_PARENT: 'lead_magnet_parent', // 登録者が「おうちの人に送る」を押した（橋②）
+  LEAD_MAGNET_NEXT: 'lead_magnet_next', // 登録者が「次の一手」リンクへ進んだ（内部回遊）
   // ── 橋①/橋② 先行指標 ──
   GAP_TARGET_SET: 'gap_target_set',
   SHARE_TO_PARENT: 'share_to_parent', // 生徒が「保護者に送る」を押した（橋②バトンの送り手側）

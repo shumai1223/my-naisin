@@ -31,6 +31,15 @@ describe('experiments registry', () => {
     expect(e?.arms[0].id).toBe('control');
     expect(runningExperiments().some((x) => x.id === 'hogosha-cta-text-2026')).toBe(true);
   });
+
+  it('lead_submit を主要指標にする実験が稼働している（名簿velocityのA/B）', () => {
+    const leadExps = runningExperiments().filter((e) => e.primaryMetric === 'lead_submit');
+    expect(leadExps.length).toBeGreaterThanOrEqual(1);
+    // SaveResultCTA が参照するコピーA/B。reward アームは ctaPrefix を持つ。
+    const copy = getExperiment('lead-copy-2026');
+    expect(copy?.primaryMetric).toBe('lead_submit');
+    expect(copy?.arms.find((a) => a.id === 'reward')?.ctaPrefix).toBeTruthy();
+  });
 });
 
 describe('judgeWinner', () => {

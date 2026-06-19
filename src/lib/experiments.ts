@@ -99,6 +99,21 @@ export const EXPERIMENTS: ExperimentDef[] = [
     note: '送客先（fp-soudan）は固定。直接訴求 vs ツール文脈で「保護者の入り口」の効きを比較する。',
   },
   {
+    // 実験4（A6/K1）：名簿登録ボタンのコピーA/B。これが初の primaryMetric='lead_submit' 実験。
+    // 仮説：登録の“見返り”（成績カード）を先に名指しすると、互恵性で送信率（lead_submit）が上がる。
+    // 送信先・フォームは同一。ボタン文言だけを差し替えて純粋にコピーの効きを測る（SaveResultCTAが参照）。
+    id: 'lead-copy-2026',
+    hypothesis: '名簿登録ボタンを「結果カードを無料でもらう」と見返りで名指しすると、汎用の「無料で受け取る」より lead_submit が上がる。',
+    status: 'running',
+    arms: [
+      { id: 'control', label: '無料で受け取る（汎用）' },
+      { id: 'reward', label: '結果カードを無料でもらう（見返りを名指し）', ctaPrefix: '結果カードを' },
+    ],
+    primaryMetric: 'lead_submit',
+    placement: 'result',
+    note: '最高インテント面（result/gap-target）で母数を稼ぐ。勝者が出たら SaveResultCTA の既定ボタン文言を昇格させる。',
+  },
+  {
     // 実験3（H8）：承認後のFP A/B（保険コンパス vs マネードクター）。両者 pending のため承認まで paused。
     id: 'fp-offer-2026',
     hypothesis: 'FP無料相談で、保険コンパス（EPC高）とマネードクターのどちらが affiliate_click→成果で勝るか。',

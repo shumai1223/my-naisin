@@ -312,6 +312,7 @@ export function GapToTarget({ result, prefectureCode, prefectureName, onShareOpe
           prefectureCode={prefectureCode}
           prefectureName={prefectureName}
           score={result.total}
+          max={result.max}
           target={target ?? undefined}
           gap={gap ?? undefined}
           heading={

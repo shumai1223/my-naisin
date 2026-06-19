@@ -2,12 +2,29 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { MessageCircle, Mail, BellRing, Check, Loader2, ShieldCheck, Bookmark } from 'lucide-react';
+import {
+  MessageCircle,
+  Mail,
+  BellRing,
+  Check,
+  Loader2,
+  ShieldCheck,
+  Bookmark,
+  Download,
+  Send,
+  Sparkles,
+  ChevronRight,
+} from 'lucide-react';
 
 import { EVENTS, track } from '@/lib/track';
 import { lineAddUrl, type LineAudience } from '@/lib/line';
 import { LIST_BENEFITS } from '@/lib/broadcast-templates';
 import { isValidEmail, openLeadMailtoFallback, submitLead, type LeadPayload, type LeadSource } from '@/lib/lead';
+import { buildLeadMagnet } from '@/lib/lead-magnet';
+import { useExperiment } from '@/components/ab/useExperiment';
+
+/** lead-copy-2026 のアーム（[[experiments]]）。安定参照のためモジュールレベルに置く。 */
+const LEAD_COPY_ARMS = [{ id: 'control' as const }, { id: 'reward' as const }];
 
 interface SaveResultCTAProps {
   /** 設置場所（セグメント用） */
@@ -15,6 +32,12 @@ interface SaveResultCTAProps {
   prefectureCode?: string;
   prefectureName?: string;
   score?: number;
+  /** 満点。指定すると登録成功後に「成績カード（画像）」と保護者バトンを渡せる（A2/A5）。 */
+  max?: number;
+  /** 学年（1/2/3）。成績カード・セグメントの文脈に使う。 */
+  grade?: number;
+  /** 指標ラベル（偏差値/評定平均/総合得点 …）。未指定なら source から導出。 */
+  metricLabel?: string;
   target?: number;
   gap?: number;
   /** 見出しの上書き（未指定なら文脈に応じた既定） */
@@ -43,6 +66,9 @@ export function SaveResultCTA({
   prefectureCode,
   prefectureName,
   score,
+  max,
+  grade,
+  metricLabel,
   target,
   gap,
   heading,
@@ -56,6 +82,17 @@ export function SaveResultCTA({
   const [status, setStatus] = React.useState<Status>('idle');
   const [error, setError] = React.useState<string | null>(null);
   const formStartedRef = React.useRef(false);
+
+  // 登録の“即時の見返り”一式（成績カード・保護者バトン・次の一手）。score+max が揃えばカードを渡せる。
+  const leadMagnet = React.useMemo(
+    () => buildLeadMagnet({ source, prefectureCode, prefectureName, score, max, grade, target, gap, metricLabel }),
+    [source, prefectureCode, prefectureName, score, max, grade, target, gap, metricLabel]
+  );
+  const hasCard = leadMagnet.cardPath !== null;
+
+  // 名簿登録ボタンのコピーA/B（初の lead_submit 実験）。カードを渡せる面でだけ「見返り」文言にする（誇大表現の防止）。
+  const copyVariant = useExperiment('lead-copy-2026', LEAD_COPY_ARMS);
+  const submitLabel = copyVariant === 'reward' && hasCard ? '結果カードを無料でもらう' : '無料で受け取る';
 
   // 名簿フォームへの最初の入力で form_start を一度だけ。lead_submit との比で「入力したのに送らない」歩留まりを可視化。
   function onFormStart() {
@@ -94,7 +131,8 @@ export function SaveResultCTA({
     }
 
     setStatus('submitting');
-    track('lead_submit', { source, pref: prefectureCode ?? 'none', gap: gap ?? 0 });
+    // variant を載せて GA4 で experiment_impression × lead_submit を突合（lead-copy-2026 の勝者判定）。
+    track('lead_submit', { source, pref: prefectureCode ?? 'none', gap: gap ?? 0, variant: copyVariant });
 
     const result = await submitLead(payload);
 
@@ -117,6 +155,26 @@ export function SaveResultCTA({
 
   const done = status === 'success' || status === 'fallback';
 
+  // 登録成功後の“見返り”が表示されたら一度だけ計測（互恵性ファネルの分母）。
+  React.useEffect(() => {
+    if (done) {
+      track(EVENTS.LEAD_MAGNET_VIEW, {
+        source,
+        pref: prefectureCode ?? 'none',
+        has_card: hasCard,
+        next: leadMagnet.nextStep.href,
+      });
+    }
+    // done への遷移時に一度だけ
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [done]);
+
+  const onCardClick = () => track(EVENTS.LEAD_MAGNET_CARD, { source, pref: prefectureCode ?? 'none' });
+  const onParentMagnetClick = () =>
+    track(EVENTS.LEAD_MAGNET_PARENT, { source, pref: prefectureCode ?? 'none', gap: gap ?? 0 });
+  const onNextMagnetClick = () =>
+    track(EVENTS.LEAD_MAGNET_NEXT, { source, pref: prefectureCode ?? 'none', to: leadMagnet.nextStep.href });
+
   return (
     <section
       className={`overflow-hidden rounded-2xl border border-sky-200 bg-gradient-to-br from-sky-50 via-blue-50/60 to-white p-6 shadow-sm md:p-7 ${className}`}
@@ -135,29 +193,83 @@ export function SaveResultCTA({
       </p>
 
       {done ? (
-        <div className="flex items-start gap-3 rounded-2xl border border-emerald-200 bg-emerald-50 p-4">
-          <div className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-full bg-emerald-500 text-white">
-            <Check className="h-4 w-4" />
+        <div className="space-y-4">
+          {/* 確認＋登録の見返りの見出し（何が手に入ったかを名指し） */}
+          <div className="flex items-start gap-3 rounded-2xl border border-emerald-200 bg-emerald-50 p-4">
+            <div className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-full bg-emerald-500 text-white">
+              <Check className="h-4 w-4" />
+            </div>
+            <div className="text-sm leading-relaxed text-emerald-900">
+              <div className="font-bold">{leadMagnet.headline}</div>
+              <p className="mt-1 text-emerald-800">{leadMagnet.subline}</p>
+              {status === 'fallback' && (
+                <>
+                  <p className="mt-2 text-emerald-800">
+                    確実にお届けするため、メールアプリが開きます。そのまま送信してください。
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => openLeadMailtoFallback(payload)}
+                    className="mt-1 text-xs font-semibold text-emerald-700 underline"
+                  >
+                    メールアプリが開かない場合はこちら
+                  </button>
+                </>
+              )}
+            </div>
           </div>
-          <div className="text-sm leading-relaxed text-emerald-900">
-            <div className="font-bold">受け取り登録を受け付けました。</div>
-            {status === 'fallback' ? (
-              <>
-                <p className="mt-1 text-emerald-800">
-                  確実にお届けするため、メールアプリが開きます。そのまま送信してください。
-                </p>
-                <button
-                  type="button"
-                  onClick={() => openLeadMailtoFallback(payload)}
-                  className="mt-2 text-xs font-semibold text-emerald-700 underline"
+
+          {/* 見返り①：成績カード（画像）。score+max が揃ったときだけ。登録の互恵性の核。 */}
+          {leadMagnet.cardPath && (
+            <div className="rounded-2xl border border-slate-200 bg-white p-4">
+              <div className="mb-2 flex items-center gap-1.5 text-xs font-bold text-slate-600">
+                <Sparkles className="h-3.5 w-3.5 text-sky-600" />
+                あなたの成績カードができました
+              </div>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={leadMagnet.cardPath}
+                alt="あなたの成績カード"
+                className="w-full rounded-xl border border-slate-100 shadow-sm"
+                loading="lazy"
+              />
+              <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                <a
+                  href={leadMagnet.cardPath}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={onCardClick}
+                  className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-sky-200 bg-white px-4 py-3 text-sm font-bold text-sky-700 transition-all hover:border-sky-400 hover:bg-sky-50 active:scale-[0.99]"
                 >
-                  メールアプリが開かない場合はこちら
-                </button>
-              </>
-            ) : (
-              <p className="mt-1 text-emerald-800">受験本番まで、内申対策と志望校情報をお届けします。</p>
-            )}
-          </div>
+                  <Download className="h-4 w-4" />
+                  画像を保存する
+                </a>
+                {leadMagnet.parentSharePath && (
+                  <Link
+                    href={leadMagnet.parentSharePath}
+                    onClick={onParentMagnetClick}
+                    className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-3 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-blue-700 active:scale-[0.99]"
+                  >
+                    <Send className="h-4 w-4" />
+                    おうちの人に送る
+                  </Link>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* 見返り②：次の一手（常に1つ）。広告ではなく役立つ内部ページへ＝満足度＋内部回遊（SEO）。 */}
+          <Link
+            href={leadMagnet.nextStep.href}
+            onClick={onNextMagnetClick}
+            className="group flex items-center justify-between gap-3 rounded-2xl border-2 border-sky-200 bg-gradient-to-r from-sky-50 to-blue-50 px-5 py-4 transition-all hover:border-sky-400 hover:shadow-md"
+          >
+            <div>
+              <div className="text-sm font-bold text-sky-900">{leadMagnet.nextStep.label}</div>
+              <div className="mt-0.5 text-xs text-sky-700">{leadMagnet.nextStep.description}</div>
+            </div>
+            <ChevronRight className="h-5 w-5 shrink-0 text-sky-500 transition-transform group-hover:translate-x-0.5" />
+          </Link>
         </div>
       ) : (
         <div className="space-y-4">
@@ -226,7 +338,7 @@ export function SaveResultCTA({
                 ) : (
                   <>
                     <BellRing className="h-4 w-4" />
-                    無料で受け取る
+                    {submitLabel}
                   </>
                 )}
               </button>
