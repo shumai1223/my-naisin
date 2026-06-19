@@ -36,7 +36,14 @@ export type AffiliateId =
   | 'moshimo-studycoach'
   | 'moshimo-classjapan'
   | 'moshimo-tintoru'
-  | 'moshimo-rewrite';
+  | 'moshimo-rewrite'
+  // ── 季節講習の先回し枠（冬期/夏期講習の無料体験・招待）。ASP出品は秋／夏。承認時に href/pixel を差すだけで live。 ──
+  // 未approveの間は seasonal が自動で既存塾（そら塾/森塾/キャンパス）にフォールバックするのでデッドリンクは出ない。
+  | 'winter-koushuu-trial'
+  | 'summer-koushuu-trial'
+  // ── アクセストレード 提携承認済み（2026-06-19 live・入会=paid型） ──
+  | 'shinken-koukou'
+  | 'eten-net';
 
 /** 'pending' は枠だけ確保した未確定案件。AffiliateAd は描画せず（デッドリンクを出さない）、selectLeadOffer も返さない。 */
 type AffiliateStatus = 'live' | 'pending';
@@ -380,6 +387,45 @@ export const AFFILIATES: Record<AffiliateId, AffiliateConfig> = {
     href: 'https://af.moshimo.com/af/c/click?a_id=5638547&p_id=3991&pc_id=10043&pl_id=55079',
     text: '受験英語専門ゼミの無料相談',
     trackingPixel: 'https://i.moshimo.com/af/i/impression?a_id=5638547&p_id=3991&pc_id=10043&pl_id=55079',
+  },
+
+  // ── 季節講習の先回し枠（pending）。承認時の差し替えは2箇所：(1) href を実リンクに (2) trackingPixel を実値に → status 行を削除。 ──
+  // 秋（10〜11月）にASP出品される「冬期講習 無料招待/無料体験」案件を申請→ここに挿すと、seasonal が冬の高インテント面へ自動適用。
+  'winter-koushuu-trial': {
+    id: 'winter-koushuu-trial',
+    type: 'text',
+    name: '冬期講習の無料体験・招待',
+    href: '#',
+    text: '冬期講習の無料体験を申し込む',
+    trackingPixel: '',
+    status: 'pending',
+  },
+  'summer-koushuu-trial': {
+    id: 'summer-koushuu-trial',
+    type: 'text',
+    name: '夏期講習の無料体験・招待',
+    href: '#',
+    text: '夏期講習の無料体験を申し込む',
+    trackingPixel: '',
+    status: 'pending',
+  },
+
+  // ── アクセストレード 提携承認済み（2026-06-19 live）。入会=paid型＝無料リードより優先度は下。 ──
+  'shinken-koukou': {
+    id: 'shinken-koukou',
+    type: 'text',
+    name: '進研ゼミ高校講座',
+    href: 'https://h.accesstrade.net/sp/cc?rk=0100q3i600ot1k',
+    text: '進研ゼミ 高校講座',
+    trackingPixel: 'https://h.accesstrade.net/sp/rr?rk=0100q3i600ot1k',
+  },
+  'eten-net': {
+    id: 'eten-net',
+    type: 'text',
+    name: 'e点ネット塾（インターネット自宅学習）',
+    href: 'https://h.accesstrade.net/sp/cc?rk=0100c4te00ot1k',
+    text: 'インターネット自宅学習 e点ネット塾',
+    trackingPixel: 'https://h.accesstrade.net/sp/rr?rk=0100c4te00ot1k',
   },
 };
 

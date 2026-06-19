@@ -18,7 +18,8 @@
  *  勝者が出たら affiliateId をこの表で差し替えるだけ（コンポーネントは無改修）。
  */
 
-import type { AffiliateId } from '@/lib/affiliates';
+import { AFFILIATES, isLiveAffiliate, type AffiliateId } from '@/lib/affiliates';
+import { resolveSeason, SEASON_COPY, type Season } from '@/lib/seasonal';
 
 export type LeadPlacement =
   | 'result' // 計算結果の直後（最高インテント）
@@ -71,6 +72,8 @@ const PROGRAM_PRESET: Partial<Record<AffiliateId, Pick<LeadOffer, 'note' | 'ctaT
   'moshimo-e-live': { note: 'e-Live オンライン家庭教師の無料体験（PR）', ctaText: '無料体験を申し込む' },
   'moshimo-studycoach': { note: 'スタディコーチ（東大式オンライン塾）の無料体験（PR）', ctaText: '無料体験・相談をする' },
   'moshimo-tintoru': { note: 'ティントル（不登校専門オンライン個別指導）の無料体験（PR）', ctaText: '無料体験を申し込む' },
+  'winter-koushuu-trial': { note: '塾の冬期講習・無料体験（PR）／費用はかかりません', ctaText: '冬期講習の無料体験を申し込む' },
+  'summer-koushuu-trial': { note: '塾の夏期講習・無料体験（PR）／費用はかかりません', ctaText: '夏期講習の無料体験を申し込む' },
 };
 
 /** プログラムIDから note/ctaText を補完したオファー断片を作る（割当ミスを防ぐ）。 */
@@ -192,11 +195,52 @@ export const PREFECTURE_PLACEMENT_LEAD_OVERRIDES: Record<string, Partial<LeadOff
   // 例: 'osaka:result': { affiliateId: 'morijuku-text', note: '森塾の無料体験（PR）／無料', ctaText: '無料体験を申し込む' },
 };
 
+// ── 季節講習スワップ（夏期/冬期） ────────────────────────────────────────────
 /**
- * 県 × 面から最適な保護者リードオファーを解決する（純粋関数・サーバー安全）。
- * 何も指定が無ければ DEFAULT_LEAD_OFFER（=現行表示）を返す。
+ * 季節中だけ「塾の季節講習 無料体験」に寄せる面（高インテントの“通塾動機”面のみ）。
+ * 学費FP（hiyou/suisen）・家庭教師（mendan）・不登校（futoukou）・Z会の対照面（hensachi/hyotei/home/blog）は除外。
  */
-export function selectLeadOffer(opts: { prefectureCode?: string; placement?: LeadPlacement } = {}): LeadOffer {
+const SEASONAL_PLACEMENTS = new Set<LeadPlacement>([
+  'result',
+  'prefecture',
+  'naishin-up',
+  'jitsugika',
+  'dashboard',
+  'parent-lp',
+]);
+
+/** 季節ごとの専用案件（pending）。live になったら自動でこちらへ送客が切り替わる。 */
+const SEASON_AFFILIATE: Record<Season, AffiliateId> = {
+  winter: 'winter-koushuu-trial',
+  summer: 'summer-koushuu-trial',
+};
+
+/** 季節講習の送客に使える塾（無料体験の塾系）。 */
+const SEASONAL_JUKU_IDS = new Set<AffiliateId>(['sora-juku-text', 'morijuku-text', 'campus-text', 'atama-text']);
+
+/**
+ * 季節講習の送客先を解決：専用案件が live ならそれ、無ければ県の地盤塾、無ければ全国オンライン（そら塾）。
+ * pending の専用枠には絶対にフォールバックしない（デッドリンクを出さない）。
+ */
+function seasonalAffiliate(season: Season, prefectureCode?: string): AffiliateId {
+  const dedicated = SEASON_AFFILIATE[season];
+  if (isLiveAffiliate(dedicated)) return dedicated;
+  const prefOff = prefectureCode ? PREFECTURE_LEAD_OVERRIDES[prefectureCode] : undefined;
+  if (prefOff?.affiliateId && SEASONAL_JUKU_IDS.has(prefOff.affiliateId)) return prefOff.affiliateId;
+  return 'sora-juku-text';
+}
+
+/**
+ * 県 × 面 × 季節 から最適な保護者リードオファーを解決する（純粋関数・サーバー安全）。
+ * 何も指定が無ければ DEFAULT_LEAD_OFFER（=現行表示）を返す。
+ *
+ * 季節講習モード（夏期/冬期）が有効で、面が SEASONAL_PLACEMENTS のときは、
+ * 送客先を塾の季節講習体験に寄せ、コピーを季節訴求に差し替える（[[seasonal]]）。
+ * season を渡さなければ日付で自動判定（受験中は放置で 11/1 に冬モードへ）。
+ */
+export function selectLeadOffer(
+  opts: { prefectureCode?: string; placement?: LeadPlacement; season?: Season | null } = {}
+): LeadOffer {
   const { prefectureCode, placement } = opts;
   const placementOverride = placement ? PLACEMENT_LEAD_OVERRIDES[placement] : undefined;
   const prefOverride = prefectureCode ? PREFECTURE_LEAD_OVERRIDES[prefectureCode] : undefined;
@@ -205,10 +249,25 @@ export function selectLeadOffer(opts: { prefectureCode?: string; placement?: Lea
       ? PREFECTURE_PLACEMENT_LEAD_OVERRIDES[`${prefectureCode}:${placement}`]
       : undefined;
 
-  return {
+  const base: LeadOffer = {
     ...DEFAULT_LEAD_OFFER,
     ...placementOverride,
     ...prefOverride,
     ...comboOverride,
   };
+
+  const season = resolveSeason(opts.season);
+  if (season && placement && SEASONAL_PLACEMENTS.has(placement)) {
+    const affiliateId = seasonalAffiliate(season, prefectureCode);
+    const copy = SEASON_COPY[season];
+    return {
+      affiliateId,
+      heading: copy.heading,
+      body: copy.body,
+      ctaText: copy.ctaText,
+      note: `${AFFILIATES[affiliateId].name}の${copy.kw} 無料体験（PR）／費用はかかりません`,
+    };
+  }
+
+  return base;
 }

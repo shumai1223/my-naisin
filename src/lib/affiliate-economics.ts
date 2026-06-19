@@ -81,6 +81,9 @@ export const AFFILIATE_ECONOMICS: Partial<Record<AffiliateId, AffiliateEconomics
   'afb-juku-trial': { cpaYen: 4000, convRate: 0.08, convRateLow: 0.04, kind: 'free-lead' },
   'accesstrade-juku-trial': { cpaYen: 4000, convRate: 0.08, convRateLow: 0.04, kind: 'free-lead' },
   'rentracks-juku-trial': { cpaYen: 4000, convRate: 0.08, convRateLow: 0.04, kind: 'free-lead' },
+  // 季節講習（受験直前/長期休みの高インテント＝通年より転換やや高めの仮定）
+  'winter-koushuu-trial': { cpaYen: 4000, convRate: 0.1, convRateLow: 0.05, kind: 'free-lead' },
+  'summer-koushuu-trial': { cpaYen: 4000, convRate: 0.09, convRateLow: 0.045, kind: 'free-lead' },
   'afb-katei-kyoshi': { cpaYen: 10000, convRate: 0.05, convRateLow: 0.015, kind: 'free-lead' },
   // ── 通信教育（資料請求＝溶けにくい無料リード） ──
   'zkai-text-request': { cpaYen: 800, convRate: 0.12, convRateLow: 0.06, kind: 'doc-request' },
@@ -97,6 +100,9 @@ export const AFFILIATE_ECONOMICS: Partial<Record<AffiliateId, AffiliateEconomics
   'campus-banner': { cpaYen: 4000, convRate: 0.06, convRateLow: 0.03, kind: 'free-lead' },
   'atama-banner': { cpaYen: 4000, convRate: 0.05, convRateLow: 0.03, kind: 'free-lead' },
   'shoin-banner': { cpaYen: 800, convRate: 0.03, convRateLow: 0.012, kind: 'paid' },
+  // ── アクセストレード（入会＝paid型・CVR低めの仮定） ──
+  'shinken-koukou': { cpaYen: 5860, convRate: 0.02, convRateLow: 0.008, kind: 'paid' },
+  'eten-net': { cpaYen: 1905, convRate: 0.02, convRateLow: 0.008, kind: 'paid' },
 };
 
 /** プログラムの推定経済性を返す（未掲載は free-lead 既定）。 */

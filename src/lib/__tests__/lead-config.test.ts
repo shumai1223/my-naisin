@@ -22,7 +22,8 @@ describe('selectLeadOffer', () => {
   });
 
   test('result面は初期勝者（liveな無料体験案件）に出し分け、コピーも文脈化される', () => {
-    const offer = selectLeadOffer({ placement: 'result' });
+    // 季節講習スワップを切って通年の基底挙動を検証（季節挙動は seasonal-lead.test.ts）。
+    const offer = selectLeadOffer({ placement: 'result', season: null });
     // Z会一本足を解消：result は別のlive案件に出し分ける
     expect(offer.affiliateId).not.toBe(DEFAULT_LEAD_OFFER.affiliateId);
     expect(isLiveAffiliate(offer.affiliateId)).toBe(true);
