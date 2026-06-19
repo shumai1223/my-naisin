@@ -5,6 +5,8 @@
 
 import {
   selectLeadOffer,
+  auditPlacementOffers,
+  ALL_LEAD_PLACEMENTS,
   DEFAULT_LEAD_OFFER,
   PLACEMENT_LEAD_OVERRIDES,
   type LeadPlacement,
@@ -62,5 +64,43 @@ describe('selectLeadOffer', () => {
     expect(offer.body).toBeTruthy();
     expect(offer.note).toBeTruthy();
     expect(offer.ctaText).toBeTruthy();
+  });
+});
+
+describe('auditPlacementOffers（北極星：保護者面に有料を置かない）', () => {
+  // 県・季節の代表的な組み合わせ。通年（null）と夏冬を、関東/関西/未設定県で総当たり監査する。
+  const prefs: (string | undefined)[] = [undefined, 'tokyo', 'osaka', 'okinawa'];
+  const seasons = [null, 'summer', 'winter'] as const;
+
+  test('全面の監査が全 placement を網羅する', () => {
+    const audit = auditPlacementOffers();
+    expect(audit).toHaveLength(ALL_LEAD_PLACEMENTS.length);
+    expect(new Set(audit.map((a) => a.placement)).size).toBe(ALL_LEAD_PLACEMENTS.length);
+  });
+
+  test('どの県・季節でも、解決される送客先に有料成約（paid）は無い＝戦略ドリフト検出', () => {
+    for (const prefectureCode of prefs) {
+      for (const season of seasons) {
+        for (const row of auditPlacementOffers({ prefectureCode, season })) {
+          // 有料が紛れ込んだら、どの面・県・季節かを明示して落とす
+          expect({
+            placement: row.placement,
+            prefectureCode: prefectureCode ?? '(none)',
+            season: season ?? 'allyear',
+            kind: row.kind,
+            parentSafe: row.parentSafe,
+          }).toMatchObject({ parentSafe: true });
+          expect(row.kind).not.toBe('paid');
+        }
+      }
+    }
+  });
+
+  test('監査行は live な送客先のみ（pending を出さない）', () => {
+    for (const row of auditPlacementOffers({ prefectureCode: 'tokyo', season: null })) {
+      expect(isLiveAffiliate(row.affiliateId)).toBe(true);
+      expect(row.kindLabel).toBeTruthy();
+      expect(row.programName).toBeTruthy();
+    }
   });
 });

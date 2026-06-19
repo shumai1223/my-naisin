@@ -26,6 +26,7 @@ import {
   estimatedRevenueYen,
   yen,
 } from '@/lib/affiliate-economics';
+import { auditPlacementOffers } from '@/lib/lead-config';
 
 function arg(name: string): string | undefined {
   const hit = process.argv.find((a) => a.startsWith(`--${name}=`));
@@ -100,6 +101,16 @@ function main() {
     )
     .join('\n');
 
+  // 面別オファー監査（通年の基底設定）。保護者面に有料が紛れていないか・各面の送客先を一望する。
+  const auditRows = auditPlacementOffers({ season: null });
+  const auditTable = auditRows
+    .map(
+      (a) =>
+        `| ${a.placement} | ${a.programName} \`${a.affiliateId}\` | ${a.kindLabel} | ${a.parentSafe ? '✅' : '⚠️ 有料'} |`
+    )
+    .join('\n');
+  const unsafeCount = auditRows.filter((a) => !a.parentSafe).length;
+
   const md = `# 送客実績レポート — ${monthLabel}
 
 > ⚠ 推定リード数・推定発生額は **未実測の仮定**（CPA・転換率は affiliate-economics.ts の概算）です。
@@ -120,6 +131,16 @@ ${progTable || '| (データなし) | 0 | - | 0 | ¥0 |'}
 
 ${topTable('面（placement）別 クリック', byPlacement)}
 ${topTable('都道府県別 クリック', byPref)}
+
+## 面別オファー監査（送客先と種別）
+
+> 北極星：保護者面には「無料リード（資料請求／無料体験／無料相談）」のみを置く。
+> 「種別」が有料成約の面（⚠️）は権限ズレで溶けやすく、CIの戦略ガード（lead-config.test）でも検出されます。
+> ${unsafeCount === 0 ? '現在、有料が紛れている面はありません（戦略整合）。' : `⚠️ 有料が ${unsafeCount} 面で検出されました。lead-config を見直してください。`}
+
+| 面（placement） | 送客先 | 種別 | 保護者面OK |
+| --- | --- | --- | :---: |
+${auditTable}
 
 ## 直接送客契約（来季）に向けたメモ
 

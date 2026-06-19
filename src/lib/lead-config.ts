@@ -19,7 +19,31 @@
  */
 
 import { AFFILIATES, isLiveAffiliate, type AffiliateId } from '@/lib/affiliates';
+import {
+  economicsFor,
+  isParentSafeOffer,
+  OFFER_KIND_LABEL,
+  type OfferKind,
+} from '@/lib/affiliate-economics';
 import { resolveSeason, SEASON_COPY, type Season } from '@/lib/seasonal';
+
+/** 全ての保護者リード面（監査・網羅テスト・営業資料の単一ソース）。 */
+export const ALL_LEAD_PLACEMENTS = [
+  'result',
+  'hensachi',
+  'hyotei-heikin',
+  'prefecture',
+  'parent-lp',
+  'blog',
+  'dashboard',
+  'hiyou',
+  'mendan',
+  'suisen',
+  'naishin-up',
+  'jitsugika',
+  'futoukou',
+  'home',
+] as const satisfies readonly LeadPlacement[];
 
 export type LeadPlacement =
   | 'result' // 計算結果の直後（最高インテント）
@@ -270,4 +294,44 @@ export function selectLeadOffer(
   }
 
   return base;
+}
+
+// ── 面別オファー監査（戦略ドリフトの検出・営業資料） ──────────────────────────
+/**
+ * 1面の解決結果＋その種別・戦略整合（保護者面に有料を置いていないか）。
+ */
+export interface PlacementOfferAudit {
+  placement: LeadPlacement;
+  affiliateId: AffiliateId;
+  /** 送客先プログラム名。 */
+  programName: string;
+  /** 推定経済性の種別（資料請求/無料リード/有料）。 */
+  kind: OfferKind;
+  kindLabel: string;
+  /** 保護者面に置いて良いか（=有料でない）。false が出たら北極星に反する。 */
+  parentSafe: boolean;
+  ctaText: string;
+}
+
+/**
+ * 全ての面（任意で県・季節を固定）について、いま実際に解決される送客先と種別を返す（純粋）。
+ * 用途：①CIで「保護者面に有料オファーを置かない」という北極星を機械検証する
+ *       ②generate-sales-report に「面別オファー監査」を載せ、運用で一望できるようにする。
+ */
+export function auditPlacementOffers(
+  opts: { prefectureCode?: string; season?: Season | null } = {}
+): PlacementOfferAudit[] {
+  return ALL_LEAD_PLACEMENTS.map((placement) => {
+    const offer = selectLeadOffer({ placement, prefectureCode: opts.prefectureCode, season: opts.season });
+    const kind = economicsFor(offer.affiliateId).kind;
+    return {
+      placement,
+      affiliateId: offer.affiliateId,
+      programName: AFFILIATES[offer.affiliateId]?.name ?? offer.affiliateId,
+      kind,
+      kindLabel: OFFER_KIND_LABEL[kind],
+      parentSafe: isParentSafeOffer(offer.affiliateId),
+      ctaText: offer.ctaText,
+    };
+  });
 }

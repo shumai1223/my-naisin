@@ -110,6 +110,36 @@ export function economicsFor(id: AffiliateId): AffiliateEconomics {
   return AFFILIATE_ECONOMICS[id] ?? KIND_DEFAULT['free-lead'];
 }
 
+/** 種別の日本語ラベル（営業資料・監査表示の単一ソース）。 */
+export const OFFER_KIND_LABEL: Record<OfferKind, string> = {
+  'doc-request': '資料請求（無料）',
+  'free-lead': '無料リード（体験/相談）',
+  paid: '有料成約',
+};
+
+/**
+ * 申込のハードルの低い順＝コミットメント階段（A8）。資料請求(0) < 無料体験/相談(1) < 有料成約(2)。
+ * 北極星（[[monetization-reality-2026-06]]）：保護者面ほど「無料度の高い（=低コミットメント）オファー」を上位に。
+ */
+export function commitmentLevel(kind: OfferKind): 0 | 1 | 2 {
+  switch (kind) {
+    case 'doc-request':
+      return 0;
+    case 'free-lead':
+      return 1;
+    case 'paid':
+      return 2;
+  }
+}
+
+/**
+ * 保護者リード面に置いて良いオファーか（=有料成約でない）。
+ * 「保護者 × 無料リード」だけが効くという北極星を、コードで判定可能にする（CIで戦略ドリフトを止める）。
+ */
+export function isParentSafeOffer(id: AffiliateId): boolean {
+  return economicsFor(id).kind !== 'paid';
+}
+
 /** クリック数 → 推定成果（リード）数【楽観】。 */
 export function estimatedLeads(id: AffiliateId, clicks: number): number {
   return clicks * economicsFor(id).convRate;
