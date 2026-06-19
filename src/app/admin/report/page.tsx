@@ -1,26 +1,32 @@
 import type { Metadata } from 'next';
 
-import { getClickSummary, type ClickAggRow } from '@/lib/clicks-db';
+import { getClickSummary, getClickTrend, type ClickAggRow } from '@/lib/clicks-db';
+import { getLeadSummary } from '@/lib/leads-db';
+import { countActiveSubscriptions } from '@/lib/push-db';
 import {
   economicsFor,
-  estimatedLeads,
+  estimatedLeadsLow,
   estimatedRevenueYen,
+  confirmedRevenueYen,
+  CONFIRM_RATE,
   yen,
 } from '@/lib/affiliate-economics';
 import { AFFILIATES, type AffiliateId } from '@/lib/affiliates';
 
 /**
- * 送客実績レポート（認証付き・H5）。来季の直接送客契約（CPA交渉）の「実績データ」をいつでも出せる土台。
+ * 送客アナリティクス（管理ダッシュボード・認証付き・H5）。
+ * 来季の直接送客契約（CPA交渉）の「実績データ」をいつでも出せる土台。
  *
  * 設計：
- *  - D1 のクリック実数（/go 経由）を program 単位に集計し、推定リード数・推定発生額に変換して表示。
- *  - 金額は affiliate-economics.ts の「仮定」ベース（=営業の当たり）。実報酬は ASP管理画面が正、と明記。
+ *  - D1 のクリック実数（/go 経由）を program × 面 × 県 × 日 に分解して可視化。
+ *  - 金額は2系統：推定発生額【楽観】と 推定確定額【保守＝主役】（convRateLow × CONFIRM_RATE 控除）。
+ *  - 名簿（leads）・Push購読（push_subscriptions）の堀KPIも同画面で確認。
  *  - 認証：?token=＜ADMIN_REPORT_TOKEN＞ が一致した時だけ表示。未設定/不一致は何も出さない（noindex）。
- *  - D1 未バインド時は「0件」として静かに動く（push=本番なので壊さない）。
+ *  - D1 未バインド時は全ゼロで静かに動く（push=本番なので壊さない）。
  */
 
 export const metadata: Metadata = {
-  title: '送客実績レポート（管理）| My Naishin',
+  title: '送客アナリティクス（管理）| My Naishin',
   robots: { index: false, follow: false },
 };
 
@@ -40,25 +46,80 @@ async function getAdminToken(): Promise<string | undefined> {
   }
 }
 
+// ── 集計ヘルパ ───────────────────────────────────────────────
 interface ProgramAgg {
   id: AffiliateId;
   name: string;
   clicks: number;
+  optimistic: number; // 推定発生額（楽観）
+  confirmed: number; // 推定確定額（保守・主役）
+  leadsLow: number; // 推定リード（保守）
 }
 
-/** program×県×面の行を program 単位に畳む。 */
 function aggregateByProgram(rows: ClickAggRow[]): ProgramAgg[] {
   const map = new Map<string, number>();
   for (const r of rows) {
     map.set(r.affiliate_id, (map.get(r.affiliate_id) ?? 0) + r.clicks);
   }
   return [...map.entries()]
-    .map(([id, clicks]) => ({
-      id: id as AffiliateId,
-      name: (AFFILIATES[id as AffiliateId]?.name as string) ?? id,
-      clicks,
-    }))
+    .map(([id, clicks]) => {
+      const aid = id as AffiliateId;
+      return {
+        id: aid,
+        name: (AFFILIATES[aid]?.name as string) ?? id,
+        clicks,
+        optimistic: estimatedRevenueYen(aid, clicks),
+        confirmed: confirmedRevenueYen(aid, clicks),
+        leadsLow: estimatedLeadsLow(aid, clicks),
+      };
+    })
+    .sort((a, b) => b.confirmed - a.confirmed || b.clicks - a.clicks);
+}
+
+interface DimAgg {
+  key: string;
+  clicks: number;
+  confirmed: number;
+}
+/** 面別 / 県別など、任意キーで clicks と 確定額（保守）を畳む。 */
+function aggregateByDim(rows: ClickAggRow[], pick: (r: ClickAggRow) => string | null): DimAgg[] {
+  const map = new Map<string, { clicks: number; confirmed: number }>();
+  for (const r of rows) {
+    const key = pick(r) ?? '(不明)';
+    const cur = map.get(key) ?? { clicks: 0, confirmed: 0 };
+    cur.clicks += r.clicks;
+    cur.confirmed += confirmedRevenueYen(r.affiliate_id as AffiliateId, r.clicks);
+    map.set(key, cur);
+  }
+  return [...map.entries()]
+    .map(([key, v]) => ({ key, ...v }))
     .sort((a, b) => b.clicks - a.clicks);
+}
+
+function pct(n: number): string {
+  return `${+(n * 100).toFixed(1)}%`;
+}
+
+function maskEmail(email: string): string {
+  const [local, domain] = email.split('@');
+  if (!domain) return '***';
+  const head = local.slice(0, 2);
+  return `${head}${'*'.repeat(Math.max(1, local.length - head.length))}@${domain}`;
+}
+
+const KIND_LABEL: Record<string, { label: string; cls: string }> = {
+  'free-lead': { label: '無料体験', cls: 'bg-emerald-100 text-emerald-700' },
+  'doc-request': { label: '資料請求', cls: 'bg-sky-100 text-sky-700' },
+  paid: { label: '有料', cls: 'bg-amber-100 text-amber-700' },
+};
+
+function Bar({ value, max, className = 'bg-emerald-500' }: { value: number; max: number; className?: string }) {
+  const w = max > 0 ? Math.max(2, Math.round((value / max) * 100)) : 0;
+  return (
+    <div className="h-2 w-full rounded-full bg-slate-100">
+      <div className={`h-2 rounded-full ${className}`} style={{ width: `${w}%` }} />
+    </div>
+  );
 }
 
 function Gate() {
@@ -88,85 +149,289 @@ export default async function AdminReportPage({
   const daysRaw = typeof sp.days === 'string' ? Number(sp.days) : 30;
   const days = Number.isFinite(daysRaw) ? Math.max(1, Math.min(365, Math.round(daysRaw))) : 30;
 
-  const rows = await getClickSummary(days);
+  const [rows, trend, leads, pushCount] = await Promise.all([
+    getClickSummary(days),
+    getClickTrend(days),
+    getLeadSummary(20),
+    countActiveSubscriptions(),
+  ]);
+
   const programs = aggregateByProgram(rows);
+  const byPlacement = aggregateByDim(rows, (r) => r.placement);
+  const byPref = aggregateByDim(rows, (r) => r.prefecture);
 
   const totals = programs.reduce(
     (acc, p) => {
       acc.clicks += p.clicks;
-      acc.leads += estimatedLeads(p.id, p.clicks);
-      acc.revenue += estimatedRevenueYen(p.id, p.clicks);
+      acc.optimistic += p.optimistic;
+      acc.confirmed += p.confirmed;
+      acc.leadsLow += p.leadsLow;
       return acc;
     },
-    { clicks: 0, leads: 0, revenue: 0 }
+    { clicks: 0, optimistic: 0, confirmed: 0, leadsLow: 0 }
   );
+
+  const maxProgClicks = Math.max(1, ...programs.map((p) => p.clicks));
+  const maxPlacement = Math.max(1, ...byPlacement.map((p) => p.clicks));
+  const maxPref = Math.max(1, ...byPref.map((p) => p.clicks));
+  const maxTrend = Math.max(1, ...trend.map((t) => t.clicks));
+  const maxSource = Math.max(1, ...leads.bySource.map((s) => s.n));
+
+  const card = 'rounded-xl border border-slate-200 bg-white p-4 shadow-sm';
+  const sectionTitle = 'text-sm font-black text-slate-900';
 
   return (
     <div className="min-h-screen bg-slate-50">
-      <div className="mx-auto max-w-4xl px-4 py-8">
-        <h1 className="text-xl font-bold text-slate-900">送客実績レポート（管理）</h1>
-        <p className="mt-1 text-sm text-slate-500">
-          直近 <strong>{days}日</strong> の /go 経由クリック実数（D1）。期間は <code>?days=</code> で変更。
-        </p>
-
-        <div className="mt-4 rounded-xl border border-amber-200 bg-amber-50 p-3 text-xs leading-relaxed text-amber-900">
-          ⚠ 推定リード数・推定発生額は <strong>未実測の「仮定」</strong>（CPA・転換率は affiliate-economics.ts の概算）です。
-          確定報酬は各ASP管理画面が正。「発生」≠「着金」（承認・確定にラグあり）。実測が出たら係数を実数に置換します。
+      <div className="mx-auto max-w-5xl px-4 py-8">
+        {/* ヘッダ */}
+        <div className="flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <h1 className="text-xl font-black text-slate-900">送客アナリティクス（管理）</h1>
+            <p className="mt-1 text-sm text-slate-500">
+              直近 <strong>{days}日</strong> の /go 経由クリック実数（D1一次ログ）。期間は <code>?days=</code> で変更。
+            </p>
+          </div>
+          <div className="flex gap-1.5 text-xs">
+            {[7, 30, 90, 365].map((d) => (
+              <a
+                key={d}
+                href={`?token=${encodeURIComponent(token)}&days=${d}`}
+                className={`rounded-lg px-2.5 py-1 font-bold ring-1 transition-colors ${
+                  d === days
+                    ? 'bg-slate-800 text-white ring-slate-800'
+                    : 'bg-white text-slate-600 ring-slate-200 hover:bg-slate-100'
+                }`}
+              >
+                {d}日
+              </a>
+            ))}
+          </div>
         </div>
 
-        {/* サマリ */}
-        <div className="mt-5 grid grid-cols-3 gap-3">
-          {[
-            { label: '総クリック（実数）', value: totals.clicks.toLocaleString('ja-JP') },
-            { label: '推定リード数（仮定）', value: totals.leads.toFixed(1) },
-            { label: '推定発生額（仮定）', value: yen(totals.revenue) },
-          ].map((s) => (
-            <div key={s.label} className="rounded-xl border border-slate-200 bg-white p-4 text-center shadow-sm">
-              <div className="text-xs text-slate-500">{s.label}</div>
-              <div className="mt-1 text-lg font-black text-slate-900">{s.value}</div>
+        {/* 注意 */}
+        <div className="mt-4 rounded-xl border border-amber-200 bg-amber-50 p-3 text-xs leading-relaxed text-amber-900">
+          ⚠ 金額は <strong>未実測の「仮定」</strong>（CPA・転換率は affiliate-economics.ts の概算）。
+          <strong>推定確定額（保守）</strong>＝クリック×保守転換率×CPA×却下控除(×{CONFIRM_RATE})で「着金見込み」に寄せた主役の数字。
+          <strong>推定発生額（楽観）</strong>は理想上限（営業の天井）。確定報酬は各ASP管理画面が正・「発生」≠「着金」。
+        </div>
+
+        {/* KPIカード */}
+        <div className="mt-5 grid grid-cols-2 gap-3 md:grid-cols-5">
+          <div className={card}>
+            <div className="text-[11px] text-slate-500">総クリック（実数）</div>
+            <div className="mt-1 text-xl font-black text-slate-900 tabular-nums">
+              {totals.clicks.toLocaleString('ja-JP')}
             </div>
-          ))}
+          </div>
+          <div className="rounded-xl border-2 border-emerald-300 bg-emerald-50 p-4 shadow-sm md:col-span-2">
+            <div className="text-[11px] font-bold text-emerald-700">推定確定額（保守・主役）</div>
+            <div className="mt-1 text-2xl font-black text-emerald-700 tabular-nums">{yen(totals.confirmed)}</div>
+            <div className="mt-0.5 text-[11px] text-emerald-600/80">
+              推定リード（保守）{totals.leadsLow.toFixed(1)} 件
+            </div>
+          </div>
+          <div className={card}>
+            <div className="text-[11px] text-slate-500">推定発生額（楽観・参考）</div>
+            <div className="mt-1 text-xl font-bold text-slate-400 tabular-nums">{yen(totals.optimistic)}</div>
+          </div>
+          <div className={card}>
+            <div className="text-[11px] text-slate-500">本物リード / Push</div>
+            <div className="mt-1 text-xl font-black text-slate-900 tabular-nums">
+              {leads.total.toLocaleString('ja-JP')}
+              <span className="ml-1 text-xs font-normal text-slate-400">名簿</span>
+            </div>
+            <div className="text-[11px] text-slate-500">Push購読 {pushCount} / 停止 {leads.unsubscribed}</div>
+          </div>
+        </div>
+
+        {/* 日次クリック推移 */}
+        <div className="mt-6">
+          <h2 className={sectionTitle}>日次クリック推移</h2>
+          {trend.length === 0 ? (
+            <p className="mt-2 text-sm text-slate-400">期間内にクリックがありません。</p>
+          ) : (
+            <div className="mt-2 flex items-end gap-0.5 rounded-xl border border-slate-200 bg-white p-3 shadow-sm">
+              {trend.map((t) => (
+                <div key={t.day} className="group relative flex-1" title={`${t.day}: ${t.clicks}`}>
+                  <div
+                    className="mx-auto w-full rounded-t bg-emerald-400 transition-colors group-hover:bg-emerald-600"
+                    style={{ height: `${Math.max(3, Math.round((t.clicks / maxTrend) * 64))}px` }}
+                  />
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* プログラム別 */}
-        <div className="mt-6 overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm">
-          <table className="min-w-full text-sm">
-            <thead>
-              <tr className="bg-slate-700 text-left text-white">
-                <th className="px-3 py-2 font-bold">プログラム</th>
-                <th className="px-3 py-2 text-right font-bold">クリック</th>
-                <th className="px-3 py-2 text-right font-bold">推定CPA</th>
-                <th className="px-3 py-2 text-right font-bold">推定リード</th>
-                <th className="px-3 py-2 text-right font-bold">推定発生額</th>
-              </tr>
-            </thead>
-            <tbody className="text-slate-700">
-              {programs.length === 0 ? (
-                <tr>
-                  <td colSpan={5} className="px-3 py-6 text-center text-slate-400">
-                    クリックデータがありません（D1 未バインド、または期間内にクリックなし）。
-                  </td>
+        <div className="mt-6">
+          <h2 className={sectionTitle}>プログラム別（確定額＝保守の降順）</h2>
+          <div className="mt-2 overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm">
+            <table className="min-w-full text-sm">
+              <thead>
+                <tr className="bg-slate-700 text-left text-white">
+                  <th className="px-3 py-2 font-bold">プログラム</th>
+                  <th className="px-3 py-2 text-right font-bold">クリック</th>
+                  <th className="px-3 py-2 text-right font-bold">CPA</th>
+                  <th className="px-3 py-2 text-right font-bold">転換 楽観/保守</th>
+                  <th className="px-3 py-2 text-right font-bold text-slate-300">発生額(楽観)</th>
+                  <th className="px-3 py-2 text-right font-bold">確定額(保守)</th>
                 </tr>
-              ) : (
-                programs.map((p) => (
-                  <tr key={p.id} className="odd:bg-white even:bg-slate-50">
-                    <td className="px-3 py-2">
-                      <span className="font-bold text-slate-800">{p.name}</span>
-                      <span className="ml-1 text-[10px] text-slate-400">{p.id}</span>
+              </thead>
+              <tbody className="text-slate-700">
+                {programs.length === 0 ? (
+                  <tr>
+                    <td colSpan={6} className="px-3 py-6 text-center text-slate-400">
+                      クリックデータがありません（D1 未バインド、または期間内にクリックなし）。
                     </td>
-                    <td className="px-3 py-2 text-right tabular-nums">{p.clicks.toLocaleString('ja-JP')}</td>
-                    <td className="px-3 py-2 text-right tabular-nums">{yen(economicsFor(p.id).cpaYen)}</td>
-                    <td className="px-3 py-2 text-right tabular-nums">{estimatedLeads(p.id, p.clicks).toFixed(1)}</td>
-                    <td className="px-3 py-2 text-right font-bold tabular-nums text-emerald-700">{yen(estimatedRevenueYen(p.id, p.clicks))}</td>
                   </tr>
+                ) : (
+                  programs.map((p) => {
+                    const e = economicsFor(p.id);
+                    const k = KIND_LABEL[e.kind] ?? KIND_LABEL['free-lead'];
+                    return (
+                      <tr key={p.id} className="odd:bg-white even:bg-slate-50">
+                        <td className="px-3 py-2">
+                          <div className="flex items-center gap-1.5">
+                            <span className="font-bold text-slate-800">{p.name}</span>
+                            <span className={`rounded px-1.5 py-0.5 text-[10px] font-bold ${k.cls}`}>{k.label}</span>
+                          </div>
+                          <div className="mt-1 max-w-[160px]">
+                            <Bar value={p.clicks} max={maxProgClicks} />
+                          </div>
+                        </td>
+                        <td className="px-3 py-2 text-right tabular-nums">{p.clicks.toLocaleString('ja-JP')}</td>
+                        <td className="px-3 py-2 text-right tabular-nums text-slate-500">{yen(e.cpaYen)}</td>
+                        <td className="px-3 py-2 text-right tabular-nums text-xs text-slate-500">
+                          {pct(e.convRate)} / <span className="font-bold text-slate-700">{pct(e.convRateLow)}</span>
+                        </td>
+                        <td className="px-3 py-2 text-right tabular-nums text-slate-400">{yen(p.optimistic)}</td>
+                        <td className="px-3 py-2 text-right font-black tabular-nums text-emerald-700">{yen(p.confirmed)}</td>
+                      </tr>
+                    );
+                  })
+                )}
+              </tbody>
+              {programs.length > 0 && (
+                <tfoot>
+                  <tr className="border-t-2 border-slate-200 bg-slate-50 font-black text-slate-800">
+                    <td className="px-3 py-2">合計</td>
+                    <td className="px-3 py-2 text-right tabular-nums">{totals.clicks.toLocaleString('ja-JP')}</td>
+                    <td className="px-3 py-2" />
+                    <td className="px-3 py-2" />
+                    <td className="px-3 py-2 text-right tabular-nums text-slate-400">{yen(totals.optimistic)}</td>
+                    <td className="px-3 py-2 text-right tabular-nums text-emerald-700">{yen(totals.confirmed)}</td>
+                  </tr>
+                </tfoot>
+              )}
+            </table>
+          </div>
+        </div>
+
+        {/* 面別 / 県別 */}
+        <div className="mt-6 grid gap-4 md:grid-cols-2">
+          <div>
+            <h2 className={sectionTitle}>面別（どのページが送客しているか）</h2>
+            <div className="mt-2 space-y-2 rounded-xl border border-slate-200 bg-white p-3 shadow-sm">
+              {byPlacement.length === 0 ? (
+                <p className="text-sm text-slate-400">データなし</p>
+              ) : (
+                byPlacement.slice(0, 12).map((d) => (
+                  <div key={d.key} className="flex items-center gap-3 text-sm">
+                    <span className="w-28 shrink-0 truncate font-medium text-slate-700">{d.key}</span>
+                    <div className="flex-1">
+                      <Bar value={d.clicks} max={maxPlacement} className="bg-indigo-400" />
+                    </div>
+                    <span className="w-8 shrink-0 text-right tabular-nums text-slate-600">{d.clicks}</span>
+                    <span className="w-16 shrink-0 text-right text-xs tabular-nums text-emerald-700">{yen(d.confirmed)}</span>
+                  </div>
                 ))
               )}
-            </tbody>
-          </table>
+            </div>
+          </div>
+          <div>
+            <h2 className={sectionTitle}>県別（トップ12）</h2>
+            <div className="mt-2 space-y-2 rounded-xl border border-slate-200 bg-white p-3 shadow-sm">
+              {byPref.length === 0 ? (
+                <p className="text-sm text-slate-400">データなし</p>
+              ) : (
+                byPref.slice(0, 12).map((d) => (
+                  <div key={d.key} className="flex items-center gap-3 text-sm">
+                    <span className="w-20 shrink-0 truncate font-medium text-slate-700">{d.key}</span>
+                    <div className="flex-1">
+                      <Bar value={d.clicks} max={maxPref} className="bg-sky-400" />
+                    </div>
+                    <span className="w-8 shrink-0 text-right tabular-nums text-slate-600">{d.clicks}</span>
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* 名簿（堀A） */}
+        <div className="mt-6">
+          <h2 className={sectionTitle}>名簿（堀A・配信母数）— 全期間</h2>
+          <div className="mt-2 grid gap-4 md:grid-cols-2">
+            <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+              <div className="flex items-baseline gap-2">
+                <span className="text-3xl font-black text-emerald-700 tabular-nums">{leads.total}</span>
+                <span className="text-sm text-slate-500">本物リード（配信可能）</span>
+              </div>
+              <div className="mt-3 text-[11px] font-bold text-slate-500">経路別</div>
+              <div className="mt-1 space-y-1.5">
+                {leads.bySource.length === 0 ? (
+                  <p className="text-sm text-slate-400">まだ0件。最初の1件が出たらここに乗る。</p>
+                ) : (
+                  leads.bySource.map((s) => (
+                    <div key={s.source} className="flex items-center gap-2 text-sm">
+                      <span className="w-24 shrink-0 truncate text-slate-700">{s.source}</span>
+                      <div className="flex-1">
+                        <Bar value={s.n} max={maxSource} className="bg-emerald-400" />
+                      </div>
+                      <span className="w-6 text-right tabular-nums text-slate-600">{s.n}</span>
+                    </div>
+                  ))
+                )}
+              </div>
+              {leads.byPref.length > 0 && (
+                <>
+                  <div className="mt-3 text-[11px] font-bold text-slate-500">県別（上位）</div>
+                  <div className="mt-1 flex flex-wrap gap-1.5">
+                    {leads.byPref.slice(0, 10).map((p) => (
+                      <span key={p.prefecture_name} className="rounded-full bg-slate-100 px-2 py-0.5 text-xs text-slate-600">
+                        {p.prefecture_name} {p.n}
+                      </span>
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
+            <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+              <div className="border-b border-slate-100 px-3 py-2 text-[11px] font-bold text-slate-500">最近の登録（最新20件・メールは伏字）</div>
+              {leads.recent.length === 0 ? (
+                <p className="px-3 py-6 text-center text-sm text-slate-400">まだ登録がありません。</p>
+              ) : (
+                <table className="min-w-full text-xs">
+                  <tbody className="text-slate-600">
+                    {leads.recent.map((r, i) => (
+                      <tr key={i} className="border-b border-slate-50 last:border-0">
+                        <td className="px-3 py-1.5 tabular-nums text-slate-400">{r.created_at?.slice(5, 16)}</td>
+                        <td className="px-3 py-1.5 font-medium text-slate-700">{maskEmail(r.email)}</td>
+                        <td className="px-3 py-1.5 text-slate-500">{r.source ?? '—'}</td>
+                        <td className="px-3 py-1.5 text-slate-500">{r.prefecture_name ?? '—'}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              )}
+            </div>
+          </div>
         </div>
 
         <p className="mt-6 text-xs text-slate-400">
-          来季の直接送客契約（塾・個別指導へのCPA交渉）の営業資料は、このクリック実績＋ scripts/generate-sales-report.ts の月次Markdownを使用。
+          来季の直接送客契約（塾・個別指導へのCPA交渉）の営業資料は、このクリック実績＋名簿件数＋
+          scripts/generate-sales-report.ts の月次Markdownを使用。確定額は ASP 管理画面の実数で更新する運用。
         </p>
       </div>
     </div>

@@ -105,3 +105,34 @@ export async function getClickSummary(days = 7): Promise<ClickAggRow[]> {
     return [];
   }
 }
+
+export interface ClickTrendRow {
+  day: string; // YYYY-MM-DD
+  clicks: number;
+}
+
+/**
+ * 直近 N 日のクリックを日別に集計（ダッシュボードの推移バー用）。
+ * バインディング未設定なら空配列。
+ */
+export async function getClickTrend(days = 30): Promise<ClickTrendRow[]> {
+  try {
+    const db = await getDb();
+    if (!db) return [];
+    const since = Math.max(1, Math.min(365, Math.round(days)));
+    const { results } = await db
+      .prepare(
+        `SELECT date(created_at) AS day, COUNT(*) AS clicks
+         FROM clicks
+         WHERE created_at >= datetime('now', ?)
+         GROUP BY day
+         ORDER BY day ASC`
+      )
+      .bind(`-${since} days`)
+      .all<ClickTrendRow>();
+    return results ?? [];
+  } catch (err) {
+    console.error('getClickTrend skipped:', err instanceof Error ? err.message : err);
+    return [];
+  }
+}

@@ -21,12 +21,26 @@
  * 使う分だけの最小 D1 型（@cloudflare/workers-types を依存に足さずに済ませる）。
  * prepare→bind→run のみ使用。バインディングが無い環境では参照しないので安全。
  */
+interface D1Result<T = Record<string, unknown>> {
+  results?: T[];
+}
 interface D1PreparedStatement {
   bind(...values: unknown[]): D1PreparedStatement;
   run(): Promise<unknown>;
+  all<T = Record<string, unknown>>(): Promise<D1Result<T>>;
 }
 interface MinimalD1 {
   prepare(query: string): D1PreparedStatement;
+}
+
+async function getLeadsDb(): Promise<MinimalD1 | null> {
+  try {
+    const { getCloudflareContext } = await import('@opennextjs/cloudflare');
+    const { env } = await getCloudflareContext({ async: true });
+    return (env as unknown as { LEADS_DB?: MinimalD1 }).LEADS_DB ?? null;
+  } catch {
+    return null; // Workers外（テスト/ビルド）では休眠
+  }
 }
 
 export interface PersistLeadInput {
@@ -107,5 +121,74 @@ export async function markUnsubscribed(email: string): Promise<boolean> {
   } catch (err) {
     console.error('markUnsubscribed skipped:', err instanceof Error ? err.message : err);
     return false;
+  }
+}
+
+export interface LeadRecentRow {
+  created_at: string;
+  email: string;
+  source: string | null;
+  prefecture_name: string | null;
+  score: number | null;
+}
+export interface LeadSummary {
+  /** 配信可能（unsubscribed=0）な本物リード総数＝¥0→1のKPI。 */
+  total: number;
+  /** 配信停止済み件数。 */
+  unsubscribed: number;
+  bySource: { source: string; n: number }[];
+  byPref: { prefecture_name: string; n: number }[];
+  recent: LeadRecentRow[];
+}
+
+/**
+ * 名簿サマリ（管理ダッシュボード用）。バインディング未設定なら全ゼロ。
+ * 件数は配信可能（unsubscribed=0）を基準にし、recent は最新 N 件。
+ */
+export async function getLeadSummary(recentLimit = 20): Promise<LeadSummary> {
+  const empty: LeadSummary = { total: 0, unsubscribed: 0, bySource: [], byPref: [], recent: [] };
+  try {
+    const db = await getLeadsDb();
+    if (!db) return empty;
+    const limit = Math.max(1, Math.min(100, Math.round(recentLimit)));
+
+    const totalQ = await db
+      .prepare(`SELECT COUNT(*) AS n FROM leads WHERE unsubscribed = 0`)
+      .all<{ n: number }>();
+    const unsubQ = await db
+      .prepare(`SELECT COUNT(*) AS n FROM leads WHERE unsubscribed = 1`)
+      .all<{ n: number }>();
+    const sourceQ = await db
+      .prepare(
+        `SELECT COALESCE(source, '(不明)') AS source, COUNT(*) AS n
+         FROM leads WHERE unsubscribed = 0
+         GROUP BY source ORDER BY n DESC`
+      )
+      .all<{ source: string; n: number }>();
+    const prefQ = await db
+      .prepare(
+        `SELECT prefecture_name, COUNT(*) AS n
+         FROM leads WHERE unsubscribed = 0 AND prefecture_name IS NOT NULL
+         GROUP BY prefecture_name ORDER BY n DESC LIMIT 20`
+      )
+      .all<{ prefecture_name: string; n: number }>();
+    const recentQ = await db
+      .prepare(
+        `SELECT created_at, email, source, prefecture_name, score
+         FROM leads ORDER BY id DESC LIMIT ?`
+      )
+      .bind(limit)
+      .all<LeadRecentRow>();
+
+    return {
+      total: totalQ.results?.[0]?.n ?? 0,
+      unsubscribed: unsubQ.results?.[0]?.n ?? 0,
+      bySource: sourceQ.results ?? [],
+      byPref: prefQ.results ?? [],
+      recent: recentQ.results ?? [],
+    };
+  } catch (err) {
+    console.error('getLeadSummary skipped:', err instanceof Error ? err.message : err);
+    return empty;
   }
 }
