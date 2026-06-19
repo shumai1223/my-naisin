@@ -136,3 +136,68 @@ export async function getClickTrend(days = 30): Promise<ClickTrendRow[]> {
     return [];
   }
 }
+
+export interface ClickRefRow {
+  referer: string | null;
+  affiliate_id: string;
+  clicks: number;
+}
+
+/**
+ * 直近 N 日のクリックを「流入元ページ（referer）× プログラム」で集計（送客元の可視化）。
+ * placement が未付与（素のバナー等）でも referer は全クリックで記録されるので、
+ * 「どのページが送客しているか」を取りこぼさず追える。
+ */
+export async function getRefererSummary(days = 30): Promise<ClickRefRow[]> {
+  try {
+    const db = await getDb();
+    if (!db) return [];
+    const since = Math.max(1, Math.min(365, Math.round(days)));
+    const { results } = await db
+      .prepare(
+        `SELECT referer, affiliate_id, COUNT(*) AS clicks
+         FROM clicks
+         WHERE created_at >= datetime('now', ?)
+         GROUP BY referer, affiliate_id
+         ORDER BY clicks DESC
+         LIMIT 300`
+      )
+      .bind(`-${since} days`)
+      .all<ClickRefRow>();
+    return results ?? [];
+  } catch (err) {
+    console.error('getRefererSummary skipped:', err instanceof Error ? err.message : err);
+    return [];
+  }
+}
+
+export interface PeriodCompare {
+  current: number;
+  previous: number;
+}
+
+/**
+ * 直近 N 日 と その前 N 日 のクリック総数を返す（前期間比のKPI用）。
+ * バインディング未設定なら 0/0。
+ */
+export async function getClickPeriodComparison(days = 30): Promise<PeriodCompare> {
+  try {
+    const db = await getDb();
+    if (!db) return { current: 0, previous: 0 };
+    const n = Math.max(1, Math.min(365, Math.round(days)));
+    const { results } = await db
+      .prepare(
+        `SELECT
+           SUM(CASE WHEN created_at >= datetime('now', ?) THEN 1 ELSE 0 END) AS current,
+           SUM(CASE WHEN created_at >= datetime('now', ?) AND created_at < datetime('now', ?) THEN 1 ELSE 0 END) AS previous
+         FROM clicks`
+      )
+      .bind(`-${n} days`, `-${2 * n} days`, `-${n} days`)
+      .all<{ current: number | null; previous: number | null }>();
+    const r = results?.[0];
+    return { current: r?.current ?? 0, previous: r?.previous ?? 0 };
+  } catch (err) {
+    console.error('getClickPeriodComparison skipped:', err instanceof Error ? err.message : err);
+    return { current: 0, previous: 0 };
+  }
+}
