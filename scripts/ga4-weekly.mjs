@@ -42,6 +42,11 @@ const FUNNEL_EVENTS = [
   'form_start',
   'lead_submit',
   'lead_submit_success',
+  // リードマグネット（登録の“即時の見返り”＝互恵性ループ）
+  'lead_magnet_view',
+  'lead_magnet_card',
+  'lead_magnet_parent',
+  'lead_magnet_next',
   'line_friend_click',
   'reverse_calc_use',
   'saved_goal_revisit',
@@ -151,12 +156,20 @@ async function main() {
   // ── 歩留まり（率） ──
   const rv = g('result_view', now), cv = g('cta_view', now), ac = g('affiliate_click', now);
   const fs0 = g('form_start', now), ls = g('lead_submit', now);
+  const lss = g('lead_submit_success', now);
+  const lmv = g('lead_magnet_view', now), lmc = g('lead_magnet_card', now);
+  const lmp = g('lead_magnet_parent', now), lmn = g('lead_magnet_next', now);
   lines.push('## 歩留まり（今週）');
   lines.push('');
   lines.push(mdTable(['指標', '値', '意味'], [
     ['cta_view / result_view', pct(cv, rv), '結果→CTA到達率'],
     ['affiliate_click / cta_view', pct(ac, cv), '換金CTR（最重要）'],
     ['lead_submit / form_start', pct(ls, fs0), '名簿フォームの完了率'],
+    ['lead_submit_success / lead_submit', pct(lss, ls), '名簿の配信成功率'],
+    // リードマグネット（登録の見返りが効いているか＝互恵性ループの先行指標）
+    ['lead_magnet_card / lead_magnet_view', pct(lmc, lmv), '登録者が成績カードを開いた率'],
+    ['lead_magnet_parent / lead_magnet_view', pct(lmp, lmv), '登録者が保護者へ送った率（橋②）'],
+    ['lead_magnet_next / lead_magnet_view', pct(lmn, lmv), '登録者が次の一手へ回遊した率'],
   ]));
   lines.push('');
 
@@ -206,6 +219,18 @@ async function main() {
     lines.push('> 登録後、本レポートが自動で面×案件の勝者表を出します。');
   }
   lines.push('');
+
+  // ── A/B（lead-copy-2026）：登録ボタンのコピー別 lead_submit。variant 別で勝者を見る ──
+  const lsByVariant = await eventByCustomDim(client, property, cur.start, cur.end, 'lead_submit', 'variant');
+  if (lsByVariant?.length) {
+    lines.push('## 名簿コピーA/B（lead-copy-2026）｜variant別 lead_submit（今週）');
+    lines.push('');
+    lines.push(mdTable(['variant', 'lead_submit'], lsByVariant.map(([v, c]) => [v || '(set)', c.toLocaleString('en-US')])));
+    lines.push('');
+    lines.push('> control（無料で受け取る）vs reward（結果カードを無料でもらう）。experiment_impression で割り、');
+    lines.push('> 有意差が出たら experiments.ts の judgeWinner で確認→勝者を SaveResultCTA の既定文言へ昇格。');
+    lines.push('');
+  }
 
   const out = lines.join('\n');
   console.log(out);
