@@ -885,7 +885,7 @@ export default function HyoteiHeikinPage() {
               大学受験も評定平均が鍵｜高1から始める通信教育
             </div>
             <div className="text-xs text-emerald-700 mb-4 leading-relaxed">
-              総合型選抜・指定校推薦を狙うなら<AffiliateAd id="zkai-daigaku" hideLabel />（PR）で大学受験の基礎を固める
+              総合型選抜・指定校推薦を狙うなら<AffiliateAd id="zkai-daigaku" hideLabel />（PR）や<AffiliateAd id="shinken-koukou" hideLabel placement="hyotei-koukou" />（PR）で高1から大学受験の基礎を固める
             </div>
             <AffiliateAd id="atama-banner" auditHide />
           </section>

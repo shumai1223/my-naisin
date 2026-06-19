@@ -472,7 +472,7 @@ export default function ToolsPage() {
               ツールを使ったあとの「次の一歩」
             </div>
             <div className="mb-4 text-xs leading-relaxed text-slate-500">
-              現状把握ができたら、実際の学習へ。<AffiliateAd id="sapuri-text" hideLabel auditHide />（月額2,178円・無料体験あり）でスマホ学習を始める人が増えています。
+              現状把握ができたら、実際の学習へ。<AffiliateAd id="sapuri-text" hideLabel auditHide />（月額2,178円・無料体験あり）や<AffiliateAd id="eten-net" hideLabel placement="tools" />（PR・インターネット自宅学習）で家庭学習を始める人が増えています。
             </div>
             <div className="hidden md:block">
               <AffiliateAd id="sapuri-banner-468" />
