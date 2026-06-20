@@ -248,15 +248,29 @@ export default async function BlogPostPage({ params }: PageProps) {
             </p>
           </div>
 
-          <div
-            className="blog-content"
-            itemProp="articleBody"
-            dangerouslySetInnerHTML={{
-              __html: post.content
-                .replace(/<!-- AD_PLACEHOLDER -->/g, '')
-                .replace(/__PREFECTURE_LINK_LIST__/g, '')
-            }}
-          />
+          {/* 本文。`<!-- AD_PLACEHOLDER -->` を境に分割し、記事内（H2間）に AdSense床を挿入。
+              マーカーが無い記事は単一セグメント＝従来と完全に同じ描画。AdSlot は承認まで null（安全）。 */}
+          {post.content
+            .replace(/__PREFECTURE_LINK_LIST__/g, '')
+            .split('<!-- AD_PLACEHOLDER -->')
+            .flatMap((segment, i, arr) => {
+              const nodes = [
+                <div
+                  key={`seg-${i}`}
+                  className="blog-content"
+                  itemProp={i === 0 ? 'articleBody' : undefined}
+                  dangerouslySetInnerHTML={{ __html: segment }}
+                />,
+              ];
+              if (i < arr.length - 1) {
+                nodes.push(
+                  <div key={`ad-${i}`} className="my-8">
+                    <AdSlot slot={AD_SLOTS.blogInArticle} format="fluid" minHeight={280} />
+                  </div>
+                );
+              }
+              return nodes;
+            })}
           
           {/* 内申点ガイド記事のみ、県別リストを動的挿入 */}
           {post.slug === 'naishin-guide' && (

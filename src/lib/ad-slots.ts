@@ -15,6 +15,11 @@
 export const AD_SLOTS = {
   /** ブログ記事の本文末（読了直後＝高エンゲージ。関連記事の手前） */
   blogArticleEnd: '0000000000', // TODO: 承認後にAdSenseのスロットIDへ差し替え
+  /**
+   * ブログ本文中（記事内の `<!-- AD_PLACEHOLDER -->` の位置＝最初のスクロール後・H2間）。
+   * 記事内フルイドユニット（format="fluid"）を想定。マーカーが無い記事には一切出ない（安全）。
+   */
+  blogInArticle: '0000000000', // TODO: 承認後にAdSenseの「記事内」ユニットのスロットIDへ差し替え
 } as const;
 
 export type AdSlotKey = keyof typeof AD_SLOTS;

@@ -13,6 +13,7 @@ import { Tabs, type TabItem } from '@/components/ui/Tabs';
 import { PrintButton } from '@/components/PrintButton';
 import { ScoreGauge } from '@/components/Result/ScoreGauge';
 import { GapToTarget } from '@/components/Result/GapToTarget';
+import { ParentCostBridge } from '@/components/ParentCostBridge';
 import { RankCard } from '@/components/Result/RankCard';
 import { CalculationBasis } from '@/components/Result/CalculationBasis';
 import { PointValueCard } from '@/components/Result/PointValueCard';
@@ -232,6 +233,11 @@ export function ResultSection({
             prefectureName={selectedPrefecture?.name}
             onShareOpen={onShareOpen}
           />
+
+          {/* C3：学費橋の全面展開。結果が出た全員に「次はお金」の同スケール情報導線を出し、
+              決裁者（保護者）が自然に関与する学費面（高CPAリードが正しく載る面）へ集約する。
+              この面では購入を一切迫らない（権限ズレ対策＝換金は学費ページ側に委譲）。 */}
+          <ParentCostBridge prefectureName={selectedPrefecture?.name} />
 
           {/* 子ども向け第2選択肢（クリックアフィリ）：内申点レベル別の動的訴求。
               観客=生徒に向けた教材導線。橋①（保護者・成果報酬）の下に置く。 */}

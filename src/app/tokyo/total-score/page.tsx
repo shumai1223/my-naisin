@@ -10,6 +10,7 @@ import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { TokyoTotalScoreCalculator } from '@/components/TokyoTotalScore/TokyoTotalScoreCalculator';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
+import { ParentCostBridge } from '@/components/ParentCostBridge';
 
 export const metadata: Metadata = {
   title: '都立高校 総合得点 計算サイト【1020点満点】学力検査・調査書点・ESAT-J | My Naishin',
@@ -136,6 +137,8 @@ export default function TokyoTotalScorePage() {
           <TokyoTotalScoreCalculator />
 
           {/* 結果保存・名簿化（堀A） */}
+          <ParentCostBridge prefectureName="東京都" className="mb-6" />
+
           <SaveResultCTA
             source="prefecture"
             prefectureCode="tokyo"

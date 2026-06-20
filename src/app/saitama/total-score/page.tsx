@@ -8,6 +8,7 @@ import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
+import { ParentCostBridge } from '@/components/ParentCostBridge';
 
 const SAITAMA_FAQS = [
   {
@@ -183,6 +184,8 @@ export default function SaitamaTotalScorePage() {
           </section>
 
           {/* 結果保存・名簿化（堀A） */}
+          <ParentCostBridge prefectureName="埼玉県" className="mb-6" />
+
           <SaveResultCTA
             source="prefecture"
             prefectureCode="saitama"

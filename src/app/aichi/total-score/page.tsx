@@ -8,6 +8,7 @@ import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
+import { ParentCostBridge } from '@/components/ParentCostBridge';
 
 // 可視の「よくある質問」セクションと完全一致させた FAQ（FAQ リッチリザルト用）
 const AICHI_FAQS = [
@@ -179,6 +180,8 @@ export default function AichiTotalScorePage() {
           </section>
 
           {/* 結果保存・名簿化（堀A） */}
+          <ParentCostBridge prefectureName="愛知県" className="mb-6" />
+
           <SaveResultCTA
             source="prefecture"
             prefectureCode="aichi"

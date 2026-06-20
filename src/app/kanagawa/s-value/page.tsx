@@ -10,6 +10,7 @@ import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { KanagawaSValueCalculator } from '@/components/Kanagawa/KanagawaSValueCalculator';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
+import { ParentCostBridge } from '@/components/ParentCostBridge';
 
 // 可視の「よくある質問」セクションと完全一致させた FAQ（FAQ リッチリザルト用）
 const KANAGAWA_S_VALUE_FAQS = [
@@ -137,6 +138,8 @@ export default function KanagawaSValuePage() {
           <KanagawaSValueCalculator />
 
           {/* 結果保存・名簿化（堀A） */}
+          <ParentCostBridge prefectureName="神奈川県" className="mb-6" />
+
           <SaveResultCTA
             source="prefecture"
             prefectureCode="kanagawa"

@@ -15,6 +15,7 @@ import { TotalScoreCalculator } from '@/components/TotalScore/TotalScoreCalculat
 import { TotalScoreExplainerView } from '@/components/TotalScore/TotalScoreExplainerView';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
+import { ParentCostBridge } from '@/components/ParentCostBridge';
 import { HensachiPromo } from '@/components/HensachiPromo';
 
 /** 早見表：既定の比率オプションで、得点率の組合せ→総合得点を engine で算出する。 */
@@ -185,6 +186,8 @@ export default async function PrefectureTotalScorePage({ params }: PageProps) {
           <TotalScoreCalculator system={system} />
 
           {/* 結果保存・名簿化（堀A） */}
+          <ParentCostBridge prefectureName={system.name} className="mb-6" />
+
           <SaveResultCTA
             source="prefecture"
             prefectureCode={system.code}

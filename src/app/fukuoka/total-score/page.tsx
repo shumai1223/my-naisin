@@ -8,6 +8,7 @@ import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
+import { ParentCostBridge } from '@/components/ParentCostBridge';
 
 const FUKUOKA_FAQS = [
   {
@@ -213,6 +214,8 @@ export default function FukuokaTotalScorePage() {
           </section>
 
           {/* 結果保存・名簿化（堀A） */}
+          <ParentCostBridge prefectureName="福岡県" className="mb-6" />
+
           <SaveResultCTA
             source="prefecture"
             prefectureCode="fukuoka"

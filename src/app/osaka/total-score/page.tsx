@@ -10,6 +10,7 @@ import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { OsakaTotalScoreCalculator } from '@/components/Osaka/OsakaTotalScoreCalculator';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
+import { ParentCostBridge } from '@/components/ParentCostBridge';
 
 // 可視の「よくある質問」セクションと完全一致させた FAQ（FAQ リッチリザルト用）
 const OSAKA_TOTAL_SCORE_FAQS = [
@@ -146,6 +147,8 @@ export default function OsakaTotalScorePage() {
           <OsakaTotalScoreCalculator />
 
           {/* 結果保存・名簿化（堀A） */}
+          <ParentCostBridge prefectureName="大阪府" className="mb-6" />
+
           <SaveResultCTA
             source="prefecture"
             prefectureCode="osaka"
