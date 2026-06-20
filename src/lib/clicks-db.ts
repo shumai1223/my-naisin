@@ -106,27 +106,32 @@ export async function getClickSummary(days = 7): Promise<ClickAggRow[]> {
   }
 }
 
+export type TrendGranularity = 'day' | 'hour';
+
 export interface ClickTrendRow {
-  day: string; // YYYY-MM-DD
+  /** 日別は 'YYYY-MM-DD'、時間別は 'YYYY-MM-DD HH'（UTC）。 */
+  bucket: string;
   clicks: number;
 }
 
 /**
- * 直近 N 日のクリックを日別に集計（ダッシュボードの推移バー用）。
- * バインディング未設定なら空配列。
+ * 直近 N 日のクリックを 日別 or 時間別 に集計（ダッシュボードの推移グラフ/表用）。
+ * granularity='hour' は粒度が細かいので呼び出し側で日数を絞ること。バインディング未設定なら空配列。
  */
-export async function getClickTrend(days = 30): Promise<ClickTrendRow[]> {
+export async function getClickTrend(days = 30, granularity: TrendGranularity = 'day'): Promise<ClickTrendRow[]> {
   try {
     const db = await getDb();
     if (!db) return [];
     const since = Math.max(1, Math.min(365, Math.round(days)));
+    // 固定文字列のみ（ユーザー入力ではない）＝SQLインジェクションにならない。
+    const sel = granularity === 'hour' ? "substr(created_at, 1, 13)" : 'date(created_at)';
     const { results } = await db
       .prepare(
-        `SELECT date(created_at) AS day, COUNT(*) AS clicks
+        `SELECT ${sel} AS bucket, COUNT(*) AS clicks
          FROM clicks
          WHERE created_at >= datetime('now', ?)
-         GROUP BY day
-         ORDER BY day ASC`
+         GROUP BY bucket
+         ORDER BY bucket ASC`
       )
       .bind(`-${since} days`)
       .all<ClickTrendRow>();

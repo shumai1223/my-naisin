@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 import { AFFILIATES, isLiveAffiliate, type AffiliateId } from '@/lib/affiliates';
 import { persistClick } from '@/lib/clicks-db';
+import { isBotUserAgent } from '@/lib/bot-filter';
 
 /**
  * ファーストパーティ・リダイレクタ（P1-1/P1-4）。
@@ -31,6 +32,13 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
 
   // allowlist 外 / pending / href未設定 → ホームへ退避（オープンリダイレクト・デッドリンク防止）
   if (!affiliate || !isLiveAffiliate(id as AffiliateId) || !affiliate.href || affiliate.href === '#') {
+    return NextResponse.redirect(`${SITE}/`, { status: 302, headers: { 'Cache-Control': 'no-store' } });
+  }
+
+  // ボット/クローラ/スキャナ対策（robots.txt の /go/ disallow を無視する非正規bot向けのサーバ側二重防御）。
+  // ASPへ飛ばさず・D1にも記録せずホームへ退避 → ①無効クリックのASP計上(EPC悪化/アカウントリスク)
+  // ②クリックデータの汚染（偽の勝者・幻の確定額）を同時に防ぐ。
+  if (isBotUserAgent(request.headers.get('user-agent'))) {
     return NextResponse.redirect(`${SITE}/`, { status: 302, headers: { 'Cache-Control': 'no-store' } });
   }
 

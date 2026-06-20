@@ -18,6 +18,7 @@ import {
   yen,
 } from '@/lib/affiliate-economics';
 import { AFFILIATES, type AffiliateId } from '@/lib/affiliates';
+import { TrendChart } from '@/components/admin/TrendChart';
 
 /**
  * 送客アナリティクス（管理ダッシュボード・認証付き・H5）。
@@ -135,35 +136,6 @@ function Bar({ value, max, className = 'bg-emerald-500' }: { value: number; max:
   );
 }
 
-/** 日次クリックの折れ線グラフ（SVG・サーバー描画）。 */
-function LineChart({ data }: { data: { day: string; clicks: number }[] }) {
-  if (data.length === 0) return <p className="mt-2 text-sm text-slate-400">期間内にクリックがありません。</p>;
-  const W = 640, H = 150, pl = 30, pr = 12, pt = 14, pb = 22;
-  const iw = W - pl - pr, ih = H - pt - pb;
-  const n = data.length;
-  const max = Math.max(1, ...data.map((d) => d.clicks));
-  const x = (i: number) => (n === 1 ? pl + iw / 2 : pl + (i * iw) / (n - 1));
-  const y = (c: number) => pt + ih - (c / max) * ih;
-  const pts = data.map((d, i) => `${x(i).toFixed(1)},${y(d.clicks).toFixed(1)}`).join(' ');
-  const area = `${pl},${(pt + ih).toFixed(1)} ${pts} ${x(n - 1).toFixed(1)},${(pt + ih).toFixed(1)}`;
-  const peak = data.reduce((m, d) => (d.clicks > m.clicks ? d : m), data[0]);
-  return (
-    <svg viewBox={`0 0 ${W} ${H}`} className="mt-2 w-full" style={{ maxHeight: 190 }}>
-      <line x1={pl} y1={pt} x2={W - pr} y2={pt} className="stroke-slate-100" strokeWidth={1} />
-      <line x1={pl} y1={pt + ih / 2} x2={W - pr} y2={pt + ih / 2} className="stroke-slate-100" strokeWidth={1} />
-      <line x1={pl} y1={pt + ih} x2={W - pr} y2={pt + ih} className="stroke-slate-200" strokeWidth={1} />
-      <polygon points={area} className="fill-emerald-100/70" />
-      <polyline points={pts} className="fill-none stroke-emerald-500" strokeWidth={2} strokeLinejoin="round" strokeLinecap="round" />
-      {n <= 60 && data.map((d, i) => <circle key={i} cx={x(i)} cy={y(d.clicks)} r={2.2} className="fill-emerald-600" />)}
-      <text x={4} y={pt + 4} className="fill-slate-400 text-[9px]">{max}</text>
-      <text x={4} y={pt + ih} className="fill-slate-400 text-[9px]">0</text>
-      <text x={pl} y={H - 5} className="fill-slate-400 text-[9px]">{data[0].day.slice(5)}</text>
-      <text x={W - pr} y={H - 5} textAnchor="end" className="fill-slate-400 text-[9px]">{data[n - 1].day.slice(5)}</text>
-      <text x={x(data.indexOf(peak))} y={y(peak.clicks) - 5} textAnchor="middle" className="fill-emerald-700 text-[9px] font-bold">{peak.clicks}</text>
-    </svg>
-  );
-}
-
 function DeltaBadge({ cur, prev }: { cur: number; prev: number }) {
   if (prev <= 0) return <span className="text-[11px] font-bold text-emerald-600">新規</span>;
   const d = (cur - prev) / prev;
@@ -203,14 +175,21 @@ export default async function AdminReportPage({
   const daysRaw = typeof sp.days === 'string' ? Number(sp.days) : 30;
   const days = Number.isFinite(daysRaw) ? Math.max(1, Math.min(365, Math.round(daysRaw))) : 30;
 
+  // 推移グラフ/表の粒度（日別 or 時間別）。時間別は粒度が細かいので窓を最大3日に絞る。
+  const trendView: 'day' | 'hour' = sp.trend === 'hour' ? 'hour' : 'day';
+  const trendDays = trendView === 'hour' ? Math.min(days, 3) : days;
+
   const [rows, trend, refRows, compare, leads, pushCount] = await Promise.all([
     getClickSummary(days),
-    getClickTrend(days),
+    getClickTrend(trendDays, trendView),
     getRefererSummary(days),
     getClickPeriodComparison(days),
     getLeadSummary(20),
     countActiveSubscriptions(),
   ]);
+
+  const trendPoints = trend.map((r) => ({ label: r.bucket, value: r.clicks }));
+  const maxTrend = Math.max(1, ...trend.map((r) => r.clicks));
 
   const programs = aggregateByProgram(rows);
   const byPlacement = aggregateByDim(rows, (r) => r.placement);
@@ -332,11 +311,66 @@ export default async function AdminReportPage({
           </div>
         </div>
 
-        {/* 日次クリック推移（折れ線） */}
+        {/* クリック推移（折れ線＋表・日/時間切替・ホバーで件数表示） */}
         <div className="mt-6">
-          <h2 className={sectionTitle}>日次クリック推移</h2>
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <h2 className={sectionTitle}>
+              クリック推移（{trendView === 'hour' ? `時間別・直近${trendDays}日` : '日別'}）
+            </h2>
+            <div className="flex gap-1.5 text-xs">
+              {(['day', 'hour'] as const).map((v) => (
+                <a
+                  key={v}
+                  href={`?token=${encodeURIComponent(token)}&days=${days}&trend=${v}`}
+                  className={`rounded-lg px-2.5 py-1 font-bold ring-1 transition-colors ${
+                    v === trendView
+                      ? 'bg-emerald-600 text-white ring-emerald-600'
+                      : 'bg-white text-slate-600 ring-slate-200 hover:bg-slate-100'
+                  }`}
+                >
+                  {v === 'day' ? '日別' : '時間別'}
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* グラフ（ホバーで該当の日/時間と件数） */}
           <div className="mt-2 rounded-xl border border-slate-200 bg-white p-3 shadow-sm">
-            <LineChart data={trend} />
+            <TrendChart points={trendPoints} granularity={trendView} />
+          </div>
+
+          {/* 推移表（新しい順） */}
+          <div className="mt-3 max-h-72 overflow-y-auto rounded-xl border border-slate-200 bg-white shadow-sm">
+            <table className="min-w-full text-sm">
+              <thead className="sticky top-0">
+                <tr className="bg-slate-700 text-left text-white">
+                  <th className="px-3 py-2 font-bold">{trendView === 'hour' ? '日時（UTC）' : '日付'}</th>
+                  <th className="px-3 py-2 text-right font-bold">クリック</th>
+                  <th className="px-3 py-2 font-bold" />
+                </tr>
+              </thead>
+              <tbody className="text-slate-700">
+                {trend.length === 0 ? (
+                  <tr>
+                    <td colSpan={3} className="px-3 py-6 text-center text-slate-400">データなし</td>
+                  </tr>
+                ) : (
+                  [...trend].reverse().map((r) => (
+                    <tr key={r.bucket} className="odd:bg-white even:bg-slate-50">
+                      <td className="px-3 py-1.5 tabular-nums">
+                        {trendView === 'hour' ? `${r.bucket.slice(5, 10)} ${r.bucket.slice(11, 13)}時` : r.bucket.slice(5)}
+                      </td>
+                      <td className="px-3 py-1.5 text-right font-bold tabular-nums">{r.clicks.toLocaleString('ja-JP')}</td>
+                      <td className="px-3 py-1.5">
+                        <div className="w-32">
+                          <Bar value={r.clicks} max={maxTrend} />
+                        </div>
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
           </div>
         </div>
 
