@@ -26,6 +26,23 @@ function clamp(v: string | null, max: number): string | undefined {
   return t ? t.slice(0, max) : undefined;
 }
 
+/**
+ * placement クエリが無いクリック（素のバナー等）を、同一オリジンの referer パスから面に推定する。
+ * これで「placement未付与＝(不明)」をページ単位で取りこぼさず回収（referer がある実クリックに限る）。
+ * 外部 referer・referer無し（bot/直叩き）は undefined のまま（=偽の面を作らない）。
+ */
+function placementFromReferer(referer: string | null): string | undefined {
+  if (!referer) return undefined;
+  try {
+    const u = new URL(referer);
+    if (!u.hostname.endsWith('my-naishin.com')) return undefined;
+    const path = u.pathname.replace(/\/+$/, '') || '/';
+    return path.slice(0, 40);
+  } catch {
+    return undefined;
+  }
+}
+
 export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const affiliate = AFFILIATES[id as AffiliateId];
@@ -43,13 +60,15 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
   }
 
   const url = new URL(request.url);
+  const refererRaw = request.headers.get('referer');
   // 先にログ（D1未バインドなら no-op）。記録に失敗しても送客（302）は必ず行う。
   try {
     await persistClick({
       affiliateId: id,
       prefecture: clamp(url.searchParams.get('pref'), 40),
-      placement: clamp(url.searchParams.get('placement'), 40),
-      referer: clamp(request.headers.get('referer'), 300),
+      // placement 明示があれば最優先。無ければ referer パスから面を推定（取りこぼし回収）。
+      placement: clamp(url.searchParams.get('placement'), 40) ?? placementFromReferer(refererRaw),
+      referer: clamp(refererRaw, 300),
     });
   } catch {
     /* no-op：計測はベストエフォート、送客を止めない */
