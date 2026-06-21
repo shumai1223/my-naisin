@@ -43,6 +43,10 @@ export interface ClickInput {
   prefecture?: string;
   placement?: string;
   referer?: string;
+  /** 端末/bot識別用の User-Agent（先頭を保存）。 */
+  userAgent?: string;
+  /** 同一送信元バースト検出用の IPハッシュ（生IPは保存しない）。 */
+  ipHash?: string;
 }
 
 function s(v: string | undefined): string | null {
@@ -61,15 +65,72 @@ export async function persistClick(input: ClickInput): Promise<boolean> {
     if (!db) return false;
     await db
       .prepare(
-        `INSERT INTO clicks (affiliate_id, prefecture, placement, referer, created_at)
-         VALUES (?, ?, ?, ?, datetime('now'))`
+        `INSERT INTO clicks (affiliate_id, prefecture, placement, referer, user_agent, ip_hash, created_at)
+         VALUES (?, ?, ?, ?, ?, ?, datetime('now'))`
       )
-      .bind(s(input.affiliateId), s(input.prefecture), s(input.placement), s(input.referer))
+      .bind(
+        s(input.affiliateId),
+        s(input.prefecture),
+        s(input.placement),
+        s(input.referer),
+        s(input.userAgent),
+        s(input.ipHash)
+      )
       .run();
     return true;
   } catch (err) {
     console.error('persistClick skipped:', err instanceof Error ? err.message : err);
     return false;
+  }
+}
+
+/**
+ * 同一 IPハッシュの直近 N 秒のクリック数（レート制限＝バースト検出用）。
+ * バインディング未設定・エラー時は 0（フェイルオープン＝送客を止めない）。
+ */
+export async function countRecentClicksByIp(ipHash: string, seconds = 120): Promise<number> {
+  try {
+    const db = await getDb();
+    if (!db || !ipHash) return 0;
+    const sec = Math.max(1, Math.min(3600, Math.round(seconds)));
+    const { results } = await db
+      .prepare(
+        `SELECT COUNT(*) AS n FROM clicks WHERE ip_hash = ? AND created_at >= datetime('now', ?)`
+      )
+      .bind(ipHash, `-${sec} seconds`)
+      .all<{ n: number }>();
+    return results?.[0]?.n ?? 0;
+  } catch {
+    return 0; // フェイルオープン
+  }
+}
+
+export interface ClickRecentRow {
+  created_at: string;
+  affiliate_id: string;
+  placement: string | null;
+  prefecture: string | null;
+  referer: string | null;
+  user_agent: string | null;
+}
+
+/** 直近 N 件のクリック明細（UA付き・ダッシュボードの自己検証用）。未バインドなら空。 */
+export async function getRecentClicks(limit = 25): Promise<ClickRecentRow[]> {
+  try {
+    const db = await getDb();
+    if (!db) return [];
+    const n = Math.max(1, Math.min(100, Math.round(limit)));
+    const { results } = await db
+      .prepare(
+        `SELECT created_at, affiliate_id, placement, prefecture, referer, user_agent
+         FROM clicks ORDER BY id DESC LIMIT ?`
+      )
+      .bind(n)
+      .all<ClickRecentRow>();
+    return results ?? [];
+  } catch (err) {
+    console.error('getRecentClicks skipped:', err instanceof Error ? err.message : err);
+    return [];
   }
 }
 

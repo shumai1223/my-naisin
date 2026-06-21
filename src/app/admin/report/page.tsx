@@ -5,8 +5,10 @@ import {
   getClickTrend,
   getRefererSummary,
   getClickPeriodComparison,
+  getRecentClicks,
   type ClickAggRow,
 } from '@/lib/clicks-db';
+import { isBotUserAgent } from '@/lib/bot-filter';
 import { getLeadSummary } from '@/lib/leads-db';
 import { countActiveSubscriptions } from '@/lib/push-db';
 import {
@@ -179,13 +181,14 @@ export default async function AdminReportPage({
   const trendView: 'day' | 'hour' = sp.trend === 'hour' ? 'hour' : 'day';
   const trendDays = trendView === 'hour' ? Math.min(days, 3) : days;
 
-  const [rows, trend, refRows, compare, leads, pushCount] = await Promise.all([
+  const [rows, trend, refRows, compare, leads, pushCount, recentClicks] = await Promise.all([
     getClickSummary(days),
     getClickTrend(trendDays, trendView),
     getRefererSummary(days),
     getClickPeriodComparison(days),
     getLeadSummary(20),
     countActiveSubscriptions(),
+    getRecentClicks(25),
   ]);
 
   const trendPoints = trend.map((r) => ({ label: r.bucket, value: r.clicks }));
@@ -607,6 +610,58 @@ export default async function AdminReportPage({
                 </table>
               )}
             </div>
+          </div>
+        </div>
+
+        {/* 直近クリック明細（UA・bot判定＝自己検証用） */}
+        <div className="mt-6">
+          <h2 className={sectionTitle}>直近クリック明細（UA・bot判定）</h2>
+          <p className="mt-0.5 text-[11px] text-slate-400">
+            UA記録＋IPレート制限を導入済。🤖=UAがbot/スクリプト・👤=実ブラウザ・👤?=実ブラウザだがreferer無し（要注意）・—=UA記録前の旧データ。
+          </p>
+          <div className="mt-2 overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm">
+            <table className="min-w-full text-xs">
+              <thead>
+                <tr className="bg-slate-700 text-left text-white">
+                  <th className="px-2 py-2 font-bold">時刻(UTC)</th>
+                  <th className="px-2 py-2 font-bold">判定</th>
+                  <th className="px-2 py-2 font-bold">案件</th>
+                  <th className="px-2 py-2 font-bold">面</th>
+                  <th className="px-2 py-2 font-bold">流入元</th>
+                  <th className="px-2 py-2 font-bold">UA</th>
+                </tr>
+              </thead>
+              <tbody className="text-slate-600">
+                {recentClicks.length === 0 ? (
+                  <tr>
+                    <td colSpan={6} className="px-2 py-6 text-center text-slate-400">クリックがありません。</td>
+                  </tr>
+                ) : (
+                  recentClicks.map((r, i) => {
+                    const uaKnown = !!r.user_agent;
+                    const bot = uaKnown && isBotUserAgent(r.user_agent);
+                    const verdict = !uaKnown ? '—' : bot ? '🤖bot' : r.referer ? '👤' : '👤?';
+                    return (
+                      <tr key={i} className={`border-b border-slate-50 last:border-0 ${bot ? 'bg-rose-50/60' : ''}`}>
+                        <td className="px-2 py-1.5 tabular-nums text-slate-400">{r.created_at?.slice(5, 16)}</td>
+                        <td className="px-2 py-1.5 whitespace-nowrap">{verdict}</td>
+                        <td className="px-2 py-1.5 font-medium text-slate-700">
+                          {(AFFILIATES[r.affiliate_id as AffiliateId]?.name as string) ?? r.affiliate_id}
+                        </td>
+                        <td className="px-2 py-1.5">{r.placement ?? '-'}</td>
+                        <td className="px-2 py-1.5 font-mono text-[10px]">{r.referer ? refPath(r.referer) : '(直接/null)'}</td>
+                        <td
+                          className="max-w-[220px] truncate px-2 py-1.5 font-mono text-[10px] text-slate-400"
+                          title={r.user_agent ?? ''}
+                        >
+                          {r.user_agent ? r.user_agent.slice(0, 60) : '(記録前)'}
+                        </td>
+                      </tr>
+                    );
+                  })
+                )}
+              </tbody>
+            </table>
           </div>
         </div>
 
