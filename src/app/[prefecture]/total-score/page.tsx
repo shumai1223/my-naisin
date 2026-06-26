@@ -40,14 +40,13 @@ interface PageProps {
   params: Promise<{ prefecture: string }>;
 }
 
-// 計算機13県＋解説34県＝全47県をビルド時に静的生成（SSG）。
+// 計算機（registry 5県）＋解説（explainers 34県）＝39県をビルド時に静的生成（SSG）。残り8県(tokyo等)は専用ページで別途存在。
 // これがないと毎リクエストでフルSSRが走り、Worker のCPU/メモリ上限超過（Error 1102）の主因になる。
+// dynamicParams は既定（true）のまま：プリレンダ漏れがあってもオンデマンド描画にフォールバックし、ハード404にしない（解説34県の取りこぼし防止）。
 export function generateStaticParams() {
   const codes = Array.from(new Set([...VERIFIED_TOTAL_SCORE_CODES, ...EXPLAINER_CODES]));
   return codes.map((code) => ({ prefecture: code }));
 }
-// system も explainer も無い県は静的404（オンデマンドSSRを止める）。
-export const dynamicParams = false;
 
 const BASE = 'https://my-naishin.com';
 

@@ -40,11 +40,10 @@ interface PageProps {
 
 // 47都道府県すべてをビルド時に静的生成（SSG）し、毎リクエストのSSRをなくす。
 // これがないと Cloudflare Worker が各アクセス/クロールごとにフルSSRし、CPU/メモリ上限超過（Error 1102）が多発する。
+// dynamicParams は既定（true）のまま：万一プリレンダ漏れの県があってもオンデマンドで描画し、ハード404にしない（安全策）。
 export function generateStaticParams() {
   return PREFECTURES.map((p) => ({ prefecture: p.code }));
 }
-// 47県以外は静的404（オンデマンドSSRを完全に止める）。
-export const dynamicParams = false;
 
 /**
  * 県専用の上位計算ツールへの内部リンク設定。
