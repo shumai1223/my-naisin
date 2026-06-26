@@ -81,6 +81,12 @@ interface PageProps {
   params: Promise<{ code: string }>;
 }
 
+// 47都道府県すべてをビルド時に静的生成（SSG）。毎リクエストSSRを止め Worker CPU超過（Error 1102）を防ぐ。
+export function generateStaticParams() {
+  return PREFECTURES.map((p) => ({ code: p.code }));
+}
+export const dynamicParams = false;
+
 export default async function PrefecturePage({ params }: PageProps) {
   const { code } = await params;
   const prefecture = getPrefectureByCode(code);

@@ -3,8 +3,8 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { Calculator, ChevronRight, Home, BookOpen, AlertCircle, ExternalLink, ListOrdered, HelpCircle, TableProperties } from 'lucide-react';
 
-import { getTotalScoreSystem } from '@/lib/total-score/registry';
-import { getExplainer } from '@/lib/total-score/explainers';
+import { getTotalScoreSystem, VERIFIED_TOTAL_SCORE_CODES } from '@/lib/total-score/registry';
+import { getExplainer, EXPLAINER_CODES } from '@/lib/total-score/explainers';
 import { computeTotalScore } from '@/lib/total-score/engine';
 import type { TotalScoreSystem } from '@/lib/total-score/types';
 import { selectLeadOffer } from '@/lib/lead-config';
@@ -39,6 +39,15 @@ function buildQuickTable(system: TotalScoreSystem) {
 interface PageProps {
   params: Promise<{ prefecture: string }>;
 }
+
+// 計算機13県＋解説34県＝全47県をビルド時に静的生成（SSG）。
+// これがないと毎リクエストでフルSSRが走り、Worker のCPU/メモリ上限超過（Error 1102）の主因になる。
+export function generateStaticParams() {
+  const codes = Array.from(new Set([...VERIFIED_TOTAL_SCORE_CODES, ...EXPLAINER_CODES]));
+  return codes.map((code) => ({ prefecture: code }));
+}
+// system も explainer も無い県は静的404（オンデマンドSSRを止める）。
+export const dynamicParams = false;
 
 const BASE = 'https://my-naishin.com';
 

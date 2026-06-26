@@ -32,6 +32,14 @@ interface PrefecturePageProps {
   }>;
 }
 
+// 手書きguideのある県（本文が重い県トップ）をビルド時に静的生成し、毎リクエストSSRをなくす（Error 1102対策）。
+// guideの無い県は naishin への軽量リダイレクトのみなのでオンデマンドでも低コスト（dynamicParams は既定の true のまま）。
+export function generateStaticParams() {
+  return PREFECTURES
+    .filter((p) => PREFECTURES_WITH_GUIDE.has(p.code))
+    .map((p) => ({ prefecture: p.code }));
+}
+
 export async function generateMetadata({ params }: PrefecturePageProps) {
   const { prefecture: code } = await params;
   const pref = getPrefectureByCode(code);

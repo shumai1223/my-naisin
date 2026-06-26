@@ -38,6 +38,14 @@ interface PageProps {
   params: Promise<{ prefecture: string }>;
 }
 
+// 47都道府県すべてをビルド時に静的生成（SSG）し、毎リクエストのSSRをなくす。
+// これがないと Cloudflare Worker が各アクセス/クロールごとにフルSSRし、CPU/メモリ上限超過（Error 1102）が多発する。
+export function generateStaticParams() {
+  return PREFECTURES.map((p) => ({ prefecture: p.code }));
+}
+// 47県以外は静的404（オンデマンドSSRを完全に止める）。
+export const dynamicParams = false;
+
 /**
  * 県専用の上位計算ツールへの内部リンク設定。
  * GSC実データ上、神奈川/大阪/北海道の /[code]/naishin ページは月数千impを集める強いページだが、
