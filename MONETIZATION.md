@@ -169,17 +169,37 @@ DDレポート §H「課金実装：ゼロ → まず蛇口が要る」への着
 - **キー発行**：`POST /api/keys`（無料キー自己発行・平文は一度だけ）／`GET /api/keys`（有効性確認）。`/developers` に料金表＋発行UI（`ApiKeyIssuer`）。平文は保存せず **SHA-256 ハッシュのみ** D1 保存。
 - **データ層**：`src/lib/api-keys.ts`（D1: `api_keys`/`api_usage`）。`getApiKeyStats()` で「誰がどれだけ使うか＝堀の証拠」を可視化可能。
 
-**点火（1コマンド）**：既存の `LEADS_DB`（bound 済）に課金テーブルを作るだけ。
+- **機能の線引き（フリーミアムの罠回避）**：`TIER_CAPABILITY_MATRIX`（api-tiers.ts）が「金を払う理由」を機械可読化。
+  per-query API と スナップショットDLは全ティア開放（＝GEO/被引用の燃料は止めない）が、**高レート・大量クォータ・出典明記なし商用・SLA・データ再配布ライセンス**は有料側のみ。`/developers` に機能比較表で表示。
+
+**点火①（無料キー・1コマンド）**：既存の `LEADS_DB`（bound 済）に課金テーブルを作るだけ。
 ```
 wrangler d1 execute my-naishin-leads --remote --file=migrations/0005_create_api_keys.sql
 ```
-適用後 `POST /api/keys` が実キーを発行（未適用なら 503「準備中」＝匿名ティアでそのまま使える）。Pro/Scale は Stripe Webhook から `issueApiKey({tier:'pro'})` を呼べば**完全自動課金**。
+適用後 `POST /api/keys` が実キーを発行（未適用なら 503「準備中」＝匿名ティアでそのまま使える）。
+
+### Stripe決済ループ（本丸＝「蛇口に水を流す」）— 結線済・env点火
+DDレポートの辛口指摘「決済→自動proキー発行のループが無い」への回答。**クレカ決済 → Webhook → 自動proキー発行＆メール送付 → 解約で自動失効**まで閉じている（SDK不要・raw fetch + Web Crypto署名検証）。
+
+- **入口**：`POST /api/billing/checkout { tier }` → Stripe Checkout URL を返す（`/developers` の「Proにアップグレード」ボタン＝`UpgradeButton`）。
+- **出口**：`POST /api/stripe/webhook` … `checkout.session.completed`→`issueApiKey({tier})`＋`sendApiKeyEmail()`（平文一度きり）／`customer.subscription.deleted`→`revokeApiKeysBySubscription()`で自動失効。
+- **lib**：`src/lib/stripe.ts`（checkout作成・HMAC-SHA256署名検証・price↔tier）。未設定なら全休眠（checkout 503・Webhook 503）。
+
+**点火②（決済・env＋migration＋Webhook登録）**：
+```
+wrangler d1 execute my-naishin-leads --remote --file=migrations/0006_api_keys_stripe.sql   # 購読↔キーの紐付け列
+wrangler secret put STRIPE_SECRET_KEY          # sk_live_...
+wrangler secret put STRIPE_WEBHOOK_SECRET      # whsec_...（Webhook作成後に取得）
+wrangler secret put STRIPE_PRICE_PRO           # price_...（Pro定期課金のprice ID）
+# 任意: STRIPE_PRICE_SCALE（Scaleもセルフ決済にする場合）
+```
+Stripeダッシュボードで Webhook エンドポイントに `https://my-naishin.com/api/stripe/webhook` を登録（イベント: `checkout.session.completed` / `customer.subscription.deleted`）。RESEND_API_KEY 設定済なら購入者へキーが自動メール。
 
 ### 次の一手（任意）
-- **Stripe Billing 接続**：Checkout/Webhook → `issueApiKey({tier:'pro'|'scale'})` で従量・サブスクを自動化（§H Phase1-2）。
-- **年額データライセンス**（CSV/JSON定期更新）＝`scale` を塾チェーン/EdTechへ。年次の制度更新という労働集約点を収益源に転換（§H Phase3）。
+- 価格変更（アップ/ダウングレード）の `customer.subscription.updated` でのティア付け替え（現状はログのみ）。
+- **年額データライセンス**（CSV/JSON定期更新フィード）＝`scale` を塾チェーン/EdTechへ。年次の制度更新という労働集約点を収益源に転換（§H Phase3）。
 - Pay Per Crawl（Cloudflare）対応で「学習用クロールは課金、引用は許可」を実装し、データそのものを直接換金する。
-- 利用ログ（どのAI/サイトが呼んだか）を取り、供給側（塾/私立）交渉の実績データにする。
+- 最初の1社を取る営業（B2B需要の創出）＝技術ではなく送り込み。/developers のB2B価値提案＋実績ログ（/admin/report）を営業資料に。
 
 ---
 

@@ -65,6 +65,9 @@ export interface IssueKeyInput {
   tier?: ApiTier;
   label?: string;
   email?: string;
+  /** Stripe 連携（有料発行時のみ）。解約時の自動失効に使う。要 migration 0006。 */
+  stripeCustomerId?: string;
+  stripeSubscriptionId?: string;
 }
 
 export interface IssuedKey {
@@ -86,12 +89,25 @@ export async function issueApiKey(input: IssueKeyInput = {}): Promise<IssuedKey 
     const apiKey = generateApiKeyPlaintext();
     const hash = await hashApiKey(apiKey);
     const prefix = keyPrefixOf(apiKey);
+
+    // Stripe ID は migration 0006 の列に依存するため、提供されたときだけ列に含める
+    // （0005 のみ適用済みの無料発行経路では新列を参照せず安全に動く）。
+    const cols = ['key_hash', 'key_prefix', 'tier', 'label', 'email', 'status', 'created_at'];
+    const vals = ['?', '?', '?', '?', '?', "'active'", "datetime('now')"];
+    const binds: unknown[] = [hash, prefix, tier, input.label?.slice(0, 80) || null, input.email?.slice(0, 254) || null];
+    if (input.stripeCustomerId) {
+      cols.push('stripe_customer_id');
+      vals.push('?');
+      binds.push(input.stripeCustomerId);
+    }
+    if (input.stripeSubscriptionId) {
+      cols.push('stripe_subscription_id');
+      vals.push('?');
+      binds.push(input.stripeSubscriptionId);
+    }
     await db
-      .prepare(
-        `INSERT INTO api_keys (key_hash, key_prefix, tier, label, email, status, created_at)
-         VALUES (?, ?, ?, ?, ?, 'active', datetime('now'))`
-      )
-      .bind(hash, prefix, tier, input.label?.slice(0, 80) || null, input.email?.slice(0, 254) || null)
+      .prepare(`INSERT INTO api_keys (${cols.join(', ')}) VALUES (${vals.join(', ')})`)
+      .bind(...binds)
       .run();
     return { apiKey, prefix, tier };
   } catch (err) {
@@ -160,6 +176,25 @@ export async function recordApiUsage(keyId: number, now: Date = new Date()): Pro
   } catch (err) {
     console.error('recordApiUsage skipped:', err instanceof Error ? err.message : err);
     return null;
+  }
+}
+
+/**
+ * Stripe 購読の解約・失効時に、その購読で発行したキーを revoke する（自動失効）。
+ * 要 migration 0006。未バインド/未適用は no-op（false）。返り値＝失効を試みたか。
+ */
+export async function revokeApiKeysBySubscription(subscriptionId: string): Promise<boolean> {
+  try {
+    const db = await getDb();
+    if (!db || !subscriptionId) return false;
+    await db
+      .prepare(`UPDATE api_keys SET status = 'revoked' WHERE stripe_subscription_id = ?`)
+      .bind(subscriptionId)
+      .run();
+    return true;
+  } catch (err) {
+    console.error('revokeApiKeysBySubscription skipped:', err instanceof Error ? err.message : err);
+    return false;
   }
 }
 

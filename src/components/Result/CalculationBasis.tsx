@@ -4,6 +4,7 @@ import * as React from 'react';
 import { Info, ExternalLink, Calendar, BookOpen, AlertTriangle } from 'lucide-react';
 
 import { getPrefectureByCode } from '@/lib/prefectures';
+import { sourceTrustLabel } from '@/lib/source-trust';
 
 interface CalculationBasisProps {
   prefectureCode: string;
@@ -75,17 +76,27 @@ export function CalculationBasis({ prefectureCode, total, max }: CalculationBasi
       )}
 
       <div className="mt-3 flex flex-wrap items-center gap-3 border-t border-slate-100 pt-3">
-        {prefecture.sourceUrl && (
-          <a
-            href={prefecture.sourceUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-full bg-blue-50 px-3 py-1.5 text-xs font-medium text-blue-600 transition-colors hover:bg-blue-100"
-          >
-            <ExternalLink className="h-3 w-3" />
-            {prefecture.name}教育委員会（公式）
-          </a>
-        )}
+        {prefecture.sourceUrl && (() => {
+          const trust = sourceTrustLabel(prefecture);
+          const official = trust?.badge === '公式';
+          return (
+            <a
+              href={prefecture.sourceUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium transition-colors ${
+                official
+                  ? 'bg-blue-50 text-blue-600 hover:bg-blue-100'
+                  : 'bg-slate-50 text-slate-600 hover:bg-slate-100'
+              }`}
+            >
+              <ExternalLink className="h-3 w-3" />
+              {official
+                ? `${prefecture.name}教育委員会（公式）`
+                : `出典を見る（${trust?.badge ?? '一次照合中'}）`}
+            </a>
+          );
+        })()}
 
         <div className="flex items-center gap-1.5 text-xs text-slate-500">
           <Calendar className="h-3 w-3" />
@@ -97,6 +108,13 @@ export function CalculationBasis({ prefectureCode, total, max }: CalculationBasi
           <span>計算式は各都道府県の公式資料に基づく</span>
         </div>
       </div>
+
+      {(() => {
+        const trust = sourceTrustLabel(prefecture);
+        return trust?.note ? (
+          <p className="mt-2 text-[11px] leading-relaxed text-slate-400">{trust.note}</p>
+        ) : null;
+      })()}
     </div>
   );
 }

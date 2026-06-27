@@ -3,10 +3,11 @@ import Link from 'next/link';
 import { Database, Code2, Bot, Scale, ArrowLeft, Terminal, Sparkles, ExternalLink, KeyRound, Gauge } from 'lucide-react';
 
 import { ApiKeyIssuer } from '@/components/Developers/ApiKeyIssuer';
+import { UpgradeButton } from '@/components/Developers/UpgradeButton';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { DatasetSchema } from '@/components/StructuredData/DatasetSchema';
 import { DATASET_DISTRIBUTION, DATASET_META, SITE_URL } from '@/lib/naishin-dataset';
-import { TIER_POLICIES, formatTierPrice, type ApiTier } from '@/lib/api-tiers';
+import { TIER_POLICIES, TIER_CAPABILITY_MATRIX, formatTierPrice, type ApiTier } from '@/lib/api-tiers';
 
 export const metadata: Metadata = {
   title: '内申点データAPI / MCP（開発者・AI向け）| My Naishin',
@@ -301,6 +302,37 @@ GET ${SITE_URL}/api/naishin/compare?codes=tokyo,osaka,hyogo&grade=4`;
             <Link href="/contact" className="mx-1 underline">お問い合わせ</Link>から。
           </p>
 
+          {/* 機能比較（金を払う理由を明示＝フリーミアムの罠回避） */}
+          <h3 className="mb-2 mt-6 text-sm font-bold text-slate-700">プラン別にできること</h3>
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[560px] border-collapse text-left text-sm">
+              <thead>
+                <tr className="border-b-2 border-slate-200 text-xs text-slate-500">
+                  <th className="py-2 pr-3 font-semibold">機能</th>
+                  {(['anonymous', 'free', 'pro', 'scale'] as ApiTier[]).map((t) => (
+                    <th key={t} className="py-2 pr-3 text-center font-semibold">{TIER_POLICIES[t].label.split('（')[0]}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {TIER_CAPABILITY_MATRIX.map((cap) => (
+                  <tr key={cap.label} className="border-b border-slate-100">
+                    <td className="py-2 pr-3 text-slate-700">{cap.label}</td>
+                    {(['anonymous', 'free', 'pro', 'scale'] as ApiTier[]).map((t) => (
+                      <td key={t} className="py-2 pr-3 text-center">
+                        {cap.has(TIER_POLICIES[t]) ? (
+                          <span className="font-bold text-emerald-600">✓</span>
+                        ) : (
+                          <span className="text-slate-300">—</span>
+                        )}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
           <h3 className="mb-2 mt-6 flex items-center gap-2 text-sm font-bold text-slate-700">
             <KeyRound className="h-4 w-4 text-indigo-500" />
             無料APIキーを今すぐ発行
@@ -310,6 +342,23 @@ GET ${SITE_URL}/api/naishin/compare?codes=tokyo,osaka,hyogo&grade=4`;
             キーの有効性確認：<code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">GET /api/keys</code>（Authorization: Bearer &lt;key&gt;）。
             発行は <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">POST /api/keys</code>。
           </p>
+
+          {/* B2B：本番組み込みの価値提案＋決済導線 */}
+          <div className="mt-6 rounded-2xl border-2 border-amber-200 bg-gradient-to-br from-amber-50 to-orange-50 p-6">
+            <h3 className="text-base font-bold text-slate-800">本番組み込みなら Pro — 自前実装を省けます</h3>
+            <p className="mt-2 text-sm leading-relaxed text-slate-700">
+              47都道府県×全方式（東京1020点・神奈川S値・大阪タイプ・千葉K値・北海道ランク…）の内申点計算を
+              自前で実装・毎年保守するのは大きな負担です。Pro なら<strong>高レート・大量クォータ・出典明記なしでの商用利用・SLA</strong>付きで、
+              要綱改訂の追従も当方が肩代わりします。受験アプリ・進路SaaS・塾チェーンの内申自動算出にそのまま組み込めます。
+            </p>
+            <div className="mt-4">
+              <UpgradeButton tier="pro" label="Proにアップグレード（月額 ¥3,000〜）" />
+            </div>
+            <p className="mt-3 text-xs text-slate-500">
+              大規模・データ再配布・年額ライセンス（CSV/JSONの定期更新フィード＋更新通知）は Scale で個別対応。
+              <Link href="/contact" className="mx-1 font-semibold text-amber-700 underline">お問い合わせ</Link>ください。
+            </p>
+          </div>
         </section>
 
         {/* License */}

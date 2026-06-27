@@ -180,3 +180,35 @@ export async function sendLeadEmails(d: LeadEmailData): Promise<{ delivered: boo
   const [welcome, owner] = await Promise.all([sendLeadWelcome(d, env), sendOwnerNotify(d, env)]);
   return { delivered: welcome, owner };
 }
+
+/**
+ * 課金成立時、購入者へ発行済みAPIキー（平文・一度きり）をメールで届ける（堀B／Stripeループの出口）。
+ * RESEND_API_KEY 未設定なら no-op（false）。失敗してもWebhookのACKには影響させない。
+ */
+export async function sendApiKeyEmail(email: string, apiKey: string, tier: string): Promise<boolean> {
+  const env = await readEspEnv();
+  if (!env.apiKey) return false;
+  const html = `
+<div style="font-family:-apple-system,'Segoe UI',Roboto,sans-serif;max-width:560px;margin:0 auto;color:#1e293b;line-height:1.7">
+  <div style="background:linear-gradient(135deg,#4f46e5,#7c3aed);padding:24px;border-radius:16px 16px 0 0;color:#fff">
+    <div style="font-size:13px;opacity:.85">My Naishin 内申点データAPI</div>
+    <div style="font-size:20px;font-weight:700;margin-top:4px">${esc(tier.toUpperCase())} プランのご利用ありがとうございます</div>
+  </div>
+  <div style="border:1px solid #e2e8f0;border-top:0;border-radius:0 0 16px 16px;padding:24px">
+    <p>下記がAPIキーです。<strong>このメールでしか確認できません</strong>ので安全に保管してください。</p>
+    <p style="background:#0f172a;color:#e2e8f0;border-radius:10px;padding:14px;font-family:monospace;font-size:13px;word-break:break-all">${esc(apiKey)}</p>
+    <p style="font-weight:700;margin-top:18px">使い方</p>
+    <p style="background:#f1f5f9;border-radius:10px;padding:12px 14px;font-size:13px;font-family:monospace">curl -H "Authorization: Bearer ${esc(apiKey)}" ${SITE_URL}/api/naishin</p>
+    <ul style="padding-left:18px;font-size:14px">
+      <li>ドキュメント・OpenAPI・MCP：<a href="${SITE_URL}/developers" style="color:#4f46e5">${SITE_URL}/developers</a></li>
+      <li>キーの有効性確認：<code>GET ${SITE_URL}/api/keys</code>（Authorization: Bearer ...）</li>
+    </ul>
+    <p style="font-size:12px;color:#94a3b8;margin-top:22px">解約・プラン変更は Stripe のカスタマーポータルから。ご不明点はこのメールに返信してください。</p>
+  </div>
+</div>`.trim();
+
+  return sendViaResend(
+    { from: env.from, to: [email], subject: `【My Naishin API】${tier.toUpperCase()}プランのAPIキー`, html, reply_to: CONTACT_EMAIL },
+    env.apiKey
+  );
+}
