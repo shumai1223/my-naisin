@@ -6,6 +6,7 @@
  */
 
 import { PREFECTURES, getPrefectureByCode } from '../prefectures';
+import { PREFECTURE_SOURCES } from '../prefecture-sources';
 import { EXAM_RATIO_DATA } from '../prefecture-exam-data';
 import { calculateMaxScore, calculateTotalScore } from '../utils';
 import { DEFAULT_SCORES } from '../constants';
@@ -75,6 +76,48 @@ describe('PREFECTURES（47都道府県データ）', () => {
       for (const url of [p.sourceUrl, p.sourceUrl2]) {
         if (url) expect(url).toMatch(/^https?:\/\//);
       }
+    }
+  });
+});
+
+/**
+ * E-E-A-T 応急処置B（出典の一次化）の回帰ガード。
+ * DDレポート最大リスク「sourceTitle＝教育委員会／sourceUrl＝二次メディア」の自己矛盾を
+ * 検証済み県では恒久的に潰す。primary は教育委員会/県公式ドメイン、二次は sourceUrl2 へ。
+ */
+describe('E-E-A-T: 出典の一次化（応急処置B）', () => {
+  // 教育委員会・県公式のドメイン（pref.*.jp / *.lg.jp / *.ed.jp / *.go.jp / metro.tokyo）。
+  const OFFICIAL_DOMAIN = /(\.lg\.jp|\.go\.jp|\.ed\.jp|pref\.[a-z]+\.jp|metro\.tokyo)/;
+  // 一次URLを primary に確定済みの県（流入上位＋検証済み）。
+  const OFFICIAL_PRIMARY = [
+    'tokyo', 'kanagawa', 'osaka', 'aichi', 'fukuoka', 'hokkaido', 'saitama',
+    'chiba', 'hyogo', 'yamagata', 'tottori', 'fukui', 'kagoshima', 'aomori',
+  ];
+
+  test('検証済み県は primary sourceUrl が教育委員会/県公式（二次メディアでない）', () => {
+    for (const code of OFFICIAL_PRIMARY) {
+      const p = getPrefectureByCode(code);
+      expect(p).toBeTruthy();
+      expect(p!.sourceUrl).toBeTruthy();
+      expect(p!.sourceUrl!).toMatch(OFFICIAL_DOMAIN);
+    }
+  });
+
+  test('PREFECTURE_SOURCES を持つ県は primary がその一次URL集合に含まれる', () => {
+    for (const [code, sources] of Object.entries(PREFECTURE_SOURCES)) {
+      const p = getPrefectureByCode(code);
+      expect(p).toBeTruthy();
+      const officialUrls = sources.map((s) => s.sourceUrl);
+      expect(officialUrls).toContain(p!.sourceUrl);
+    }
+  });
+
+  test('一次化した県は二次ソースを sourceUrl2（相互検証）として保持', () => {
+    for (const code of OFFICIAL_PRIMARY) {
+      const p = getPrefectureByCode(code);
+      // aomori は元々一次のみ＝二次任意。それ以外は相互検証の二次を残す。
+      if (code === 'aomori') continue;
+      expect(p!.sourceUrl2).toBeTruthy();
     }
   });
 });

@@ -54,6 +54,11 @@ export function CalculationBasis({ prefectureCode, total, max }: CalculationBasi
         <div className="rounded-lg bg-white p-3 shadow-sm">
           <div className="mb-1 text-xs font-medium text-slate-500">満点</div>
           <div className="font-bold text-slate-800">{max}点</div>
+          {prefecture.simplifiedCalc && typeof prefecture.actualMaxScore === 'number' && (
+            <div className="mt-0.5 text-[11px] font-medium text-amber-600">
+              実選抜換算 {prefecture.actualMaxScore}点
+            </div>
+          )}
         </div>
 
         <div className="rounded-lg bg-white p-3 shadow-sm">

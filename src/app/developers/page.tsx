@@ -1,10 +1,12 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Database, Code2, Bot, Scale, ArrowLeft, Terminal, Sparkles, ExternalLink } from 'lucide-react';
+import { Database, Code2, Bot, Scale, ArrowLeft, Terminal, Sparkles, ExternalLink, KeyRound, Gauge } from 'lucide-react';
 
+import { ApiKeyIssuer } from '@/components/Developers/ApiKeyIssuer';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { DatasetSchema } from '@/components/StructuredData/DatasetSchema';
 import { DATASET_DISTRIBUTION, DATASET_META, SITE_URL } from '@/lib/naishin-dataset';
+import { TIER_POLICIES, formatTierPrice, type ApiTier } from '@/lib/api-tiers';
 
 export const metadata: Metadata = {
   title: '内申点データAPI / MCP（開発者・AI向け）| My Naishin',
@@ -40,18 +42,18 @@ export default function DevelopersPage() {
     "endpoints": { "prefecture": "${SITE_URL}/api/naishin/{code}", "mcp": "${SITE_URL}/api/mcp" }
   },
   "prefectures": [
-    { "code": "tokyo", "name": "東京都", "maxScore": 300, "coreMultiplier": 1, "practicalMultiplier": 2, ... }
+    { "code": "tokyo", "name": "東京都", "maxScore": 65, "coreMultiplier": 1, "practicalMultiplier": 2, ... }
   ]
 }`;
 
   const detailExample = `GET ${SITE_URL}/api/naishin/tokyo
 
 {
-  "code": "tokyo", "name": "東京都", "maxScore": 300,
-  "formula": { "summary": "各学年で「主要5教科×1 + 実技4教科×2」…" },
+  "code": "tokyo", "name": "東京都", "maxScore": 65,
+  "formula": { "summary": "中3のみ「主要5教科×1 + 実技4教科×2」=65点満点…" },
   "examples": [
-    { "label": "オール3", "total": 135, "max": 300, "percent": 45 },
-    { "label": "オール5", "total": 225, "max": 300, "percent": 75 }
+    { "label": "オール3", "total": 39, "max": 65, "percent": 60 },
+    { "label": "オール5", "total": 65, "max": 65, "percent": 100 }
   ],
   "targetSchools": [ { "name": "…", "targetNaishin": 0 } ]
 }`;
@@ -251,6 +253,63 @@ GET ${SITE_URL}/api/naishin/compare?codes=tokyo,osaka,hyogo&grade=4`;
               {DATASET_META.aiUsageNote}
             </span>
           </div>
+        </section>
+
+        {/* 料金プラン・APIキー */}
+        <section className="mb-10">
+          <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
+            <Gauge className="h-5 w-5 text-indigo-500" />
+            料金プランとレート上限
+          </h2>
+          <p className="mb-4 text-sm leading-relaxed text-slate-600">
+            <strong>キー無しでもそのまま利用できます</strong>（匿名ティア・出典明記が条件）。
+            継続利用や大量呼び出しには下の<strong>無料APIキー</strong>を発行するとレート上限と月次クォータが上がります。
+            本番組み込み（受験アプリ・進路SaaS・塾チェーン）やデータライセンス（CSV/JSONの定期更新）は Pro / Scale をご利用ください。
+          </p>
+
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[560px] border-collapse text-left text-sm">
+              <thead>
+                <tr className="border-b-2 border-slate-200 text-xs text-slate-500">
+                  <th className="py-2 pr-3 font-semibold">プラン</th>
+                  <th className="py-2 pr-3 font-semibold">レート/分</th>
+                  <th className="py-2 pr-3 font-semibold">月次クォータ</th>
+                  <th className="py-2 pr-3 font-semibold">料金</th>
+                  <th className="py-2 font-semibold">対象</th>
+                </tr>
+              </thead>
+              <tbody>
+                {(['anonymous', 'free', 'pro', 'scale'] as ApiTier[]).map((t) => {
+                  const p = TIER_POLICIES[t];
+                  return (
+                    <tr key={t} className="border-b border-slate-100 align-top">
+                      <td className="py-2.5 pr-3 font-semibold text-slate-800">{p.label}</td>
+                      <td className="py-2.5 pr-3 text-slate-600">{p.ratePerMinute.toLocaleString('ja-JP')}</td>
+                      <td className="py-2.5 pr-3 text-slate-600">
+                        {p.monthlyQuota > 0 ? p.monthlyQuota.toLocaleString('ja-JP') : '個別 / 計測なし'}
+                      </td>
+                      <td className="py-2.5 pr-3 font-medium text-slate-700">{formatTierPrice(t)}</td>
+                      <td className="py-2.5 text-xs text-slate-500">{p.audience}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+          <p className="mt-2 text-xs text-slate-400">
+            ※ レート上限はベストエフォート、月次クォータは発行キー単位で計測します。Pro / Scale・年額データライセンスのお見積りは
+            <Link href="/contact" className="mx-1 underline">お問い合わせ</Link>から。
+          </p>
+
+          <h3 className="mb-2 mt-6 flex items-center gap-2 text-sm font-bold text-slate-700">
+            <KeyRound className="h-4 w-4 text-indigo-500" />
+            無料APIキーを今すぐ発行
+          </h3>
+          <ApiKeyIssuer />
+          <p className="mt-2 text-xs text-slate-500">
+            キーの有効性確認：<code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">GET /api/keys</code>（Authorization: Bearer &lt;key&gt;）。
+            発行は <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">POST /api/keys</code>。
+          </p>
         </section>
 
         {/* License */}

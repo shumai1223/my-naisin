@@ -50,8 +50,12 @@ export interface PrefectureRecord {
   coreMultiplier: number;
   /** 実技4教科の倍率 */
   practicalMultiplier: number;
-  /** 内申点の満点 */
+  /** 内申点の満点（このツールの内部計算値） */
   maxScore: number;
+  /** 簡易計算採用県（実選抜の換算式と異なる）か。 */
+  simplifiedCalc?: boolean;
+  /** 実選抜換算での満点（maxScore と異なる場合のみ）。透明性のための二段表記。 */
+  actualMaxScore?: number;
   supports10PointScale: boolean;
   description: string;
   note?: string;
@@ -78,6 +82,8 @@ function buildRecord(p: (typeof PREFECTURES)[number]): PrefectureRecord {
     coreMultiplier: p.coreMultiplier,
     practicalMultiplier: p.practicalMultiplier,
     maxScore: p.maxScore,
+    ...(p.simplifiedCalc ? { simplifiedCalc: true } : {}),
+    ...(typeof p.actualMaxScore === 'number' ? { actualMaxScore: p.actualMaxScore } : {}),
     supports10PointScale: Boolean(p.supports10PointScale),
     description: p.description,
     ...(p.note ? { note: p.note } : {}),
@@ -480,10 +486,13 @@ export const DATASET_CSV_COLUMNS = [
   'core_multiplier',
   'practical_multiplier',
   'max_score',
+  'actual_max_score',
+  'simplified_calc',
   'supports_10_point_scale',
   'tool_url',
   'api_url',
   'source_url',
+  'source_url2',
   'last_verified',
   'fiscal_year',
   'description',
@@ -507,10 +516,13 @@ export function buildDatasetCsv(): string {
       r.coreMultiplier,
       r.practicalMultiplier,
       r.maxScore,
+      r.actualMaxScore ?? '',
+      r.simplifiedCalc ? 'true' : 'false',
       r.supports10PointScale,
       r.toolUrl,
       r.apiUrl,
       r.source.url ?? '',
+      r.source.url2 ?? '',
       r.source.lastVerified ?? '',
       r.source.fiscalYear ?? '',
       r.description,

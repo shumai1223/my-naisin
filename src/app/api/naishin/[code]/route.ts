@@ -1,3 +1,4 @@
+import { gateApiRequest } from '@/lib/api-auth';
 import { corsJson, corsPreflight, logApiHit } from '@/lib/api-cors';
 import {
   buildPrefectureDetail,
@@ -17,8 +18,11 @@ import {
  *   さらに学習計画（週次マイルストーン）を含めて返す。
  */
 export async function GET(request: Request, { params }: { params: Promise<{ code: string }> }) {
+  const gate = await gateApiRequest(request);
+  if (!gate.allowed) return gate.response;
   const { code } = await params;
-  logApiHit('naishin-detail', request, { code });
+  logApiHit('naishin-detail', request, { code, tier: gate.tier });
+  const h = { headers: gate.headers, private: gate.cachePrivate } as const;
 
   const notFound = () =>
     corsJson(
@@ -27,7 +31,7 @@ export async function GET(request: Request, { params }: { params: Promise<{ code
         message: `都道府県コード「${code}」は見つかりませんでした。一覧は /api/naishin を参照してください。`,
         index: 'https://my-naishin.com/api/naishin',
       },
-      { status: 404, cacheSeconds: 300 }
+      { status: 404, cacheSeconds: 300, headers: gate.headers }
     );
 
   // ?target= があれば逆算モード（reverse_calc + target_to_required_grades）。
@@ -37,7 +41,7 @@ export async function GET(request: Request, { params }: { params: Promise<{ code
     if (!Number.isFinite(target)) {
       return corsJson(
         { error: 'invalid_params', message: 'target は数値で指定してください（例: ?target=180）。' },
-        { status: 400, cacheSeconds: 300 }
+        { status: 400, cacheSeconds: 300, headers: gate.headers }
       );
     }
     const reverse = reverseCalcRequiredAverage({ prefectureCode: code, targetNaishin: target });
@@ -58,18 +62,21 @@ export async function GET(request: Request, { params }: { params: Promise<{ code
       });
     }
 
-    return corsJson({
-      mode: 'reverse',
-      ...reverse,
-      perGradeGain: efficiency.perGradeGain,
-      raisePriority: efficiency.note,
-      ...(studyPlan ? { studyPlan } : {}),
-    });
+    return corsJson(
+      {
+        mode: 'reverse',
+        ...reverse,
+        perGradeGain: efficiency.perGradeGain,
+        raisePriority: efficiency.note,
+        ...(studyPlan ? { studyPlan } : {}),
+      },
+      h
+    );
   }
 
   const detail = buildPrefectureDetail(code);
   if (!detail) return notFound();
-  return corsJson(detail);
+  return corsJson(detail, h);
 }
 
 export function OPTIONS() {

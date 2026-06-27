@@ -15,12 +15,16 @@ export function GET() {
       title: 'My Naishin 内申点データAPI',
       version: DATASET_META.version,
       description:
-        '日本全国47都道府県の公立高校入試における内申点（調査書点）の計算方式データと厳密計算を提供する公開REST API。出典明記で無料利用可。MCP互換エンドポイントは /api/mcp。',
+        '日本全国47都道府県の公立高校入試における内申点（調査書点）の計算方式データと厳密計算を提供する公開REST API。' +
+        'キー無し（匿名ティア）でそのまま利用でき、出典明記で無料。継続・大量利用には無料APIキー（POST /api/keys で自己発行）を付けるとレート上限と月次クォータが上がる（Pro / Scale は /developers）。' +
+        'レスポンスには X-Api-Tier / X-RateLimit-* ヘッダが付く。MCP互換エンドポイントは /api/mcp。',
       contact: { name: 'My Naishin', url: SITE_URL },
       license: { name: DATASET_META.license.type, url: `${SITE_URL}/developers` },
     },
     servers: [{ url: SITE_URL, description: '本番' }],
-    externalDocs: { description: '開発者ドキュメント', url: `${SITE_URL}/developers` },
+    externalDocs: { description: '開発者ドキュメント（料金プラン含む）', url: `${SITE_URL}/developers` },
+    // キーは任意（匿名でも可）。付与するとティア昇格＋クォータ。空オブジェクトで「無認証も許可」を明示。
+    security: [{}, { ApiKeyAuth: [] }, { BearerAuth: [] }],
     paths: {
       '/api/naishin': {
         get: {
@@ -37,6 +41,7 @@ export function GET() {
                 },
               },
             },
+            '429': { description: 'レート上限または当月クォータを超過（Retry-After ヘッダ参照）' },
           },
         },
       },
@@ -107,9 +112,68 @@ export function GET() {
           responses: { '200': { description: '成功' } },
         },
       },
+      '/api/keys': {
+        post: {
+          operationId: 'issueApiKey',
+          summary: '無料APIキーの自己発行（平文は一度だけ返る）',
+          description:
+            'free ティアのAPIキーを発行する。レスポンスの apiKey は再表示できないため安全に保管すること。Pro / Scale プランは /developers から。',
+          requestBody: {
+            required: false,
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  properties: {
+                    label: { type: 'string', description: '用途メモ（任意）', example: 'my-juku-app' },
+                    email: { type: 'string', description: '連絡先（任意）', example: 'dev@example.com' },
+                  },
+                },
+              },
+            },
+          },
+          responses: {
+            '200': {
+              description: '発行成功',
+              content: { 'application/json': { schema: { $ref: '#/components/schemas/IssuedKey' } } },
+            },
+            '429': { description: '発行レート超過' },
+            '503': { description: 'キー発行は準備中（匿名ティアで利用可）' },
+          },
+        },
+        get: {
+          operationId: 'verifyApiKey',
+          summary: '自分のキーの有効性・ティアを確認（平文は返さない）',
+          security: [{ BearerAuth: [] }, { ApiKeyAuth: [] }],
+          responses: { '200': { description: '確認結果' }, '400': { description: 'キー未指定' }, '404': { description: '無効' } },
+        },
+      },
     },
     components: {
+      securitySchemes: {
+        ApiKeyAuth: {
+          type: 'apiKey',
+          in: 'header',
+          name: 'x-api-key',
+          description: '無料キーは POST /api/keys で自己発行。キー無しでも匿名ティアで利用可。',
+        },
+        BearerAuth: {
+          type: 'http',
+          scheme: 'bearer',
+          description: 'Authorization: Bearer <apiKey>。キー無しでも匿名ティアで利用可。',
+        },
+      },
       schemas: {
+        IssuedKey: {
+          type: 'object',
+          properties: {
+            apiKey: { type: 'string', example: 'mnsk_live_xxxxxxxx' },
+            prefix: { type: 'string', example: 'mnsk_live_a1b2c3d4' },
+            tier: { type: 'string', example: 'free' },
+            rateLimitPerMinute: { type: 'integer', example: 120 },
+            monthlyQuota: { type: 'integer', example: 10000 },
+          },
+        },
         Prefecture: {
           type: 'object',
           properties: {
@@ -119,7 +183,9 @@ export function GET() {
             targetGrades: { type: 'array', items: { type: 'integer' }, example: [3] },
             coreMultiplier: { type: 'number', example: 1 },
             practicalMultiplier: { type: 'number', example: 2 },
-            maxScore: { type: 'integer', example: 300 },
+            // 東京都の内申点（調査書点）満点は65点（中3のみ：5教科×1＋実技4教科×2）。
+            // 1020点満点系への換算は reverseCalc 側の係数で行う（API本体は65を返す）。
+            maxScore: { type: 'integer', example: 65 },
             supports10PointScale: { type: 'boolean' },
             toolUrl: { type: 'string', format: 'uri' },
             apiUrl: { type: 'string', format: 'uri' },

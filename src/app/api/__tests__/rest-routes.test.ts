@@ -16,15 +16,23 @@ function req(url: string) {
 
 describe('/api/naishin（インデックス）', () => {
   test('47県・新エンドポイントメタを含む', async () => {
-    const json = await (await indexGet()).json();
+    const json = await (await indexGet(req('https://my-naishin.com/api/naishin'))).json();
     expect(json.prefectures).toHaveLength(47);
     expect(json.meta.endpoints.openapi).toContain('/api/openapi');
+  });
+
+  test('キー無しは匿名ティアのレートヘッダ付き＝後方互換でそのまま使える', async () => {
+    const res = await indexGet(req('https://my-naishin.com/api/naishin'));
+    expect(res.headers.get('x-api-tier')).toBe('anonymous');
+    expect(res.headers.get('x-ratelimit-limit')).toBeTruthy();
+    // 匿名はCDNキャッシュ維持（public）。
+    expect(res.headers.get('cache-control')).toContain('public');
   });
 });
 
 describe('/api/naishin/csv', () => {
   test('text/csv・BOM付き・ヘッダ＋47行で配布', async () => {
-    const res = csvGet(req('https://my-naishin.com/api/naishin/csv'));
+    const res = await csvGet(req('https://my-naishin.com/api/naishin/csv'));
     expect(res.headers.get('content-type')).toContain('text/csv');
     expect(res.headers.get('access-control-allow-origin')).toBe('*');
     // BOMはバイト列(EF BB BF)で検証する。Response.text() は先頭BOMを剥がすため byte で確認。

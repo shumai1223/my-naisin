@@ -10,6 +10,7 @@ import {
 } from '@/lib/clicks-db';
 import { isBotUserAgent } from '@/lib/bot-filter';
 import { getLeadSummary } from '@/lib/leads-db';
+import { getApiKeyStats } from '@/lib/api-keys';
 import { countActiveSubscriptions } from '@/lib/push-db';
 import {
   economicsFor,
@@ -181,7 +182,7 @@ export default async function AdminReportPage({
   const trendView: 'day' | 'hour' = sp.trend === 'hour' ? 'hour' : 'day';
   const trendDays = trendView === 'hour' ? Math.min(days, 3) : days;
 
-  const [rows, trend, refRows, compare, leads, pushCount, recentClicks] = await Promise.all([
+  const [rows, trend, refRows, compare, leads, pushCount, recentClicks, apiKeys] = await Promise.all([
     getClickSummary(days),
     getClickTrend(trendDays, trendView),
     getRefererSummary(days),
@@ -189,7 +190,16 @@ export default async function AdminReportPage({
     getLeadSummary(20),
     countActiveSubscriptions(),
     getRecentClicks(25),
+    getApiKeyStats(50),
   ]);
+
+  // API（堀B）の利用集計：発行キー数・当月リクエスト合計・ティア内訳。
+  const apiThisMonth = apiKeys.reduce((s, k) => s + (k.this_month || 0), 0);
+  const apiTotalReq = apiKeys.reduce((s, k) => s + (k.request_count || 0), 0);
+  const apiByTier = apiKeys.reduce<Record<string, number>>((acc, k) => {
+    acc[k.tier] = (acc[k.tier] ?? 0) + 1;
+    return acc;
+  }, {});
 
   const trendPoints = trend.map((r) => ({ label: r.bucket, value: r.clicks }));
   const maxTrend = Math.max(1, ...trend.map((r) => r.clicks));
@@ -611,6 +621,66 @@ export default async function AdminReportPage({
               )}
             </div>
           </div>
+        </div>
+
+        {/* API利用（堀B・課金ゲートの証拠＝誰がどれだけ呼んだか） */}
+        <div className="mt-6">
+          <h2 className={sectionTitle}>API利用（堀B・課金ゲート）— B2B交渉の実績データ</h2>
+          <p className="mt-0.5 text-[11px] text-slate-400">
+            発行済みAPIキーと利用量（D1 api_keys / api_usage）。未点火（migrations/0005未適用）なら空。
+          </p>
+          <div className="mt-2 grid grid-cols-2 gap-3 md:grid-cols-4">
+            <div className={card}>
+              <div className="text-[11px] text-slate-500">発行キー数</div>
+              <div className="mt-1 text-xl font-black text-slate-900 tabular-nums">{apiKeys.length}</div>
+            </div>
+            <div className={card}>
+              <div className="text-[11px] text-slate-500">当月リクエスト</div>
+              <div className="mt-1 text-xl font-black text-indigo-700 tabular-nums">{apiThisMonth.toLocaleString('ja-JP')}</div>
+            </div>
+            <div className={card}>
+              <div className="text-[11px] text-slate-500">累計リクエスト</div>
+              <div className="mt-1 text-xl font-bold text-slate-700 tabular-nums">{apiTotalReq.toLocaleString('ja-JP')}</div>
+            </div>
+            <div className={card}>
+              <div className="text-[11px] text-slate-500">ティア内訳</div>
+              <div className="mt-1 text-xs font-medium text-slate-700">
+                {Object.keys(apiByTier).length === 0
+                  ? '—'
+                  : Object.entries(apiByTier).map(([t, n]) => `${t}:${n}`).join(' / ')}
+              </div>
+            </div>
+          </div>
+          {apiKeys.length > 0 && (
+            <div className="mt-3 overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm">
+              <table className="min-w-full text-xs">
+                <thead>
+                  <tr className="bg-slate-700 text-left text-white">
+                    <th className="px-2 py-2 font-bold">キー</th>
+                    <th className="px-2 py-2 font-bold">ティア</th>
+                    <th className="px-2 py-2 font-bold">状態</th>
+                    <th className="px-2 py-2 text-right font-bold">当月</th>
+                    <th className="px-2 py-2 text-right font-bold">累計</th>
+                    <th className="px-2 py-2 font-bold">最終利用</th>
+                  </tr>
+                </thead>
+                <tbody className="text-slate-600">
+                  {apiKeys.map((k, i) => (
+                    <tr key={i} className="border-b border-slate-50 last:border-0">
+                      <td className="px-2 py-1.5 font-mono text-[10px] text-slate-700">{k.prefix}</td>
+                      <td className="px-2 py-1.5 font-medium">{k.tier}</td>
+                      <td className="px-2 py-1.5">
+                        <span className={k.status === 'active' ? 'text-emerald-600' : 'text-rose-500'}>{k.status}</span>
+                      </td>
+                      <td className="px-2 py-1.5 text-right tabular-nums">{(k.this_month || 0).toLocaleString('ja-JP')}</td>
+                      <td className="px-2 py-1.5 text-right tabular-nums">{(k.request_count || 0).toLocaleString('ja-JP')}</td>
+                      <td className="px-2 py-1.5 tabular-nums text-slate-400">{k.last_used_at?.slice(5, 16) ?? '—'}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
         </div>
 
         {/* 直近クリック明細（UA・bot判定＝自己検証用） */}

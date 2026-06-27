@@ -11,20 +11,33 @@ export const CORS_HEADERS: Record<string, string> = {
   'Access-Control-Max-Age': '86400',
 };
 
-/** GETの公開JSON（CDNキャッシュ1時間）。 */
-export function corsJson(data: unknown, init?: { status?: number; cacheSeconds?: number }) {
+/** 計測対象（APIキー付き）は都度最新を返すため private/no-store にする。 */
+function cacheHeader(cacheSeconds: number, isPrivate?: boolean): string {
+  if (isPrivate) return 'private, no-store';
+  return `public, max-age=${cacheSeconds}, s-maxage=${cacheSeconds}, stale-while-revalidate=86400`;
+}
+
+/** GETの公開JSON（既定はCDNキャッシュ1時間）。headers でレート/ティアを上乗せ、private で計測用に非キャッシュ化。 */
+export function corsJson(
+  data: unknown,
+  init?: { status?: number; cacheSeconds?: number; headers?: Record<string, string>; private?: boolean }
+) {
   const cache = init?.cacheSeconds ?? 3600;
   return NextResponse.json(data, {
     status: init?.status ?? 200,
     headers: {
       ...CORS_HEADERS,
-      'Cache-Control': `public, max-age=${cache}, s-maxage=${cache}, stale-while-revalidate=86400`,
+      ...(init?.headers ?? {}),
+      'Cache-Control': cacheHeader(cache, init?.private),
     },
   });
 }
 
-/** GETの公開CSV（CDNキャッシュ1時間・ダウンロード名つき）。Excelの日本語化け回避にBOMを付与。 */
-export function corsCsv(csv: string, init?: { filename?: string; cacheSeconds?: number }) {
+/** GETの公開CSV（既定はCDNキャッシュ1時間・ダウンロード名つき）。Excelの日本語化け回避にBOMを付与。 */
+export function corsCsv(
+  csv: string,
+  init?: { filename?: string; cacheSeconds?: number; headers?: Record<string, string>; private?: boolean }
+) {
   const cache = init?.cacheSeconds ?? 3600;
   const filename = init?.filename ?? 'data.csv';
   const BOM = String.fromCharCode(0xFEFF);
@@ -32,9 +45,10 @@ export function corsCsv(csv: string, init?: { filename?: string; cacheSeconds?: 
     status: 200,
     headers: {
       ...CORS_HEADERS,
+      ...(init?.headers ?? {}),
       'Content-Type': 'text/csv; charset=utf-8',
       'Content-Disposition': `inline; filename="${filename}"`,
-      'Cache-Control': `public, max-age=${cache}, s-maxage=${cache}, stale-while-revalidate=86400`,
+      'Cache-Control': cacheHeader(cache, init?.private),
     },
   });
 }
