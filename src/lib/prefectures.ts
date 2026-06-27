@@ -303,9 +303,9 @@ export const PREFECTURES: PrefectureConfig[] = [
     practicalMultiplier: 2,
     maxScore: 65,
     description: '中3のみ：5教科×1倍＋実技4教科×2倍（65点満点）',
-    sourceUrl: 'https://czemi.benesse.ne.jp/open/nyushi/article/13/feature/0013.html',
-    sourceUrl2: 'https://jyuku-online.com/blog/jj-tokyo/',
-    sourceTitle: '東京都教育委員会 入学者選抜',
+    sourceUrl: 'https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/exam/release20250925_r8yoko.html',
+    sourceUrl2: 'https://czemi.benesse.ne.jp/open/nyushi/article/13/feature/0013.html',
+    sourceTitle: '東京都教育委員会「令和8年度入学者選抜実施要綱」',
     lastVerified: '2026-04-22',
     fiscalYear: '2026',
     reverseCalc: {

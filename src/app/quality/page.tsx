@@ -6,7 +6,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: '品質保証と信頼性への取り組み | My Naishin',
-  description: '内申点シミュレーターMy Naishinの情報の正確性を担保する検証プロセス、テスト結果、更新履歴について。現役中学3年生エンジニアが各都道府県教育委員会の一次資料を直接解析しています。',
+  description: '内申点シミュレーターMy Naishinの情報の正確性を担保する検証プロセス、テスト結果、更新履歴について。現役中学3年生エンジニアが各都道府県の公式選抜要綱を主たる根拠に解析し、信頼できる教育情報源と相互検証しています。',
 };
 
 // テスト結果データ
@@ -51,7 +51,7 @@ const globalUpdateHistory = [
     version: 'v2026.4.20',
     changes: [
       'E-E-A-T強化：情報の正確性を担保する検証プロセス(Qualityページ)の大幅拡充',
-      '都道府県別ページへの公式出典リンク（一次資料）と具体的算出根拠の明記',
+      '都道府県別ページへの出典リンク（公式資料・信頼できる教育情報源）と具体的算出根拠の明記',
       '愛知県、青森県、岩手県、宮城県の詳細ガイドデータの新規作成と反映',
       '47都道府県の2026年度入試データの最終整合性チェック完了'
     ],
@@ -100,11 +100,11 @@ export default function QualityPage() {
           <div className="rounded-2xl border-2 border-blue-100 bg-white p-8">
             <div className="flex items-center gap-3 mb-4">
               <Search className="h-6 w-6 text-blue-600" />
-              <h2 className="text-xl font-bold text-slate-800">徹底した一次情報主義</h2>
+              <h2 className="text-xl font-bold text-slate-800">公式の選抜要綱を主軸にした検証</h2>
             </div>
             <p className="text-sm text-slate-600 leading-relaxed">
-              当サイトの計算ロジックは、まとめサイトなどの二次情報を一切使用していません。
-              各都道府県教育委員会が発行する<strong>「令和8年度入学者選抜要綱」</strong>などの公式資料を直接解析し、1点1点の重みや端数処理のルールまでプログラムに正確に反映しています。
+              当サイトの計算ロジックは、各都道府県教育委員会が発行する<strong>「令和8年度入学者選抜要綱」</strong>などの公式資料を主たる根拠とし、1点1点の重みや端数処理のルールまでプログラムに反映しています。
+              県によっては、公式資料に加えて信頼できる教育情報サイトの解説も補助的に参照し、内容を相互に突き合わせて検証しています。
             </p>
           </div>
           <div className="rounded-2xl border-2 border-emerald-100 bg-white p-8">
