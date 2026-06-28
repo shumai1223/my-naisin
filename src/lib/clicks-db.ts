@@ -134,6 +134,19 @@ export async function getRecentClicks(limit = 25): Promise<ClickRecentRow[]> {
   }
 }
 
+/**
+ * 「信頼できるクリック」= 自サイト（my-naishin.com）の面から押された＝内部referer付き。
+ * 実ブラウザのCTAクリックは必ず内部refererを伴う（[[bot-filter]] の classifyClick と同じ前提）ため、
+ * これを満たさない /go 直叩き（ブラウザUAのスクレイパ）を集計から除外する軸になる。
+ * 取り込み時点で bot-UA・空UA・IPバーストは既に除外済みなので、ここはさらに「内部referer」で絞る。
+ */
+const TRUSTED_CLAUSE = "referer LIKE 'https://my-naishin.com%'";
+
+/** trustedOnly=true なら内部referer条件を AND 連結する（固定文字列＝SQLインジェクションにならない）。 */
+function trustFilter(trustedOnly?: boolean): string {
+  return trustedOnly ? ` AND ${TRUSTED_CLAUSE}` : '';
+}
+
 export interface ClickAggRow {
   affiliate_id: string;
   prefecture: string | null;
@@ -145,7 +158,7 @@ export interface ClickAggRow {
  * 直近 N 日のクリック集計（KPIダイジェスト＝P6-1 用）。
  * バインディング未設定なら空配列。program × 県 × 面 のクリック実数を返す。
  */
-export async function getClickSummary(days = 7): Promise<ClickAggRow[]> {
+export async function getClickSummary(days = 7, opts: { trustedOnly?: boolean } = {}): Promise<ClickAggRow[]> {
   try {
     const db = await getDb();
     if (!db) return [];
@@ -154,7 +167,7 @@ export async function getClickSummary(days = 7): Promise<ClickAggRow[]> {
       .prepare(
         `SELECT affiliate_id, prefecture, placement, COUNT(*) AS clicks
          FROM clicks
-         WHERE created_at >= datetime('now', ?)
+         WHERE created_at >= datetime('now', ?)${trustFilter(opts.trustedOnly)}
          GROUP BY affiliate_id, prefecture, placement
          ORDER BY clicks DESC`
       )
@@ -179,7 +192,11 @@ export interface ClickTrendRow {
  * 直近 N 日のクリックを 日別 or 時間別 に集計（ダッシュボードの推移グラフ/表用）。
  * granularity='hour' は粒度が細かいので呼び出し側で日数を絞ること。バインディング未設定なら空配列。
  */
-export async function getClickTrend(days = 30, granularity: TrendGranularity = 'day'): Promise<ClickTrendRow[]> {
+export async function getClickTrend(
+  days = 30,
+  granularity: TrendGranularity = 'day',
+  opts: { trustedOnly?: boolean } = {}
+): Promise<ClickTrendRow[]> {
   try {
     const db = await getDb();
     if (!db) return [];
@@ -190,7 +207,7 @@ export async function getClickTrend(days = 30, granularity: TrendGranularity = '
       .prepare(
         `SELECT ${sel} AS bucket, COUNT(*) AS clicks
          FROM clicks
-         WHERE created_at >= datetime('now', ?)
+         WHERE created_at >= datetime('now', ?)${trustFilter(opts.trustedOnly)}
          GROUP BY bucket
          ORDER BY bucket ASC`
       )
@@ -246,7 +263,7 @@ export interface PeriodCompare {
  * 直近 N 日 と その前 N 日 のクリック総数を返す（前期間比のKPI用）。
  * バインディング未設定なら 0/0。
  */
-export async function getClickPeriodComparison(days = 30): Promise<PeriodCompare> {
+export async function getClickPeriodComparison(days = 30, opts: { trustedOnly?: boolean } = {}): Promise<PeriodCompare> {
   try {
     const db = await getDb();
     if (!db) return { current: 0, previous: 0 };
@@ -256,7 +273,8 @@ export async function getClickPeriodComparison(days = 30): Promise<PeriodCompare
         `SELECT
            SUM(CASE WHEN created_at >= datetime('now', ?) THEN 1 ELSE 0 END) AS current,
            SUM(CASE WHEN created_at >= datetime('now', ?) AND created_at < datetime('now', ?) THEN 1 ELSE 0 END) AS previous
-         FROM clicks`
+         FROM clicks
+         WHERE 1=1${trustFilter(opts.trustedOnly)}`
       )
       .bind(`-${n} days`, `-${2 * n} days`, `-${n} days`)
       .all<{ current: number | null; previous: number | null }>();
@@ -265,5 +283,43 @@ export async function getClickPeriodComparison(days = 30): Promise<PeriodCompare
   } catch (err) {
     console.error('getClickPeriodComparison skipped:', err instanceof Error ? err.message : err);
     return { current: 0, previous: 0 };
+  }
+}
+
+export interface ClickTrustCounts {
+  /** 全記録クリック（取り込み時に bot-UA/空UA/IPバーストは既に除外済み）。 */
+  total: number;
+  /** 信頼＝自サイト面から押された（内部refererあり）。 */
+  trusted: number;
+  /** 疑わしい＝ブラウザUAだが内部referer無し（/go直叩きスクレイパが大半）。 */
+  suspect: number;
+}
+
+/**
+ * 直近 N 日のクリックを「信頼 / 疑わしい」で分解（ダッシュボードの清浄度バナー用）。
+ * trusted = 内部referer、suspect = total - trusted。バインディング未設定なら全ゼロ。
+ */
+export async function getClickTrustCounts(days = 30): Promise<ClickTrustCounts> {
+  try {
+    const db = await getDb();
+    if (!db) return { total: 0, trusted: 0, suspect: 0 };
+    const since = Math.max(1, Math.min(365, Math.round(days)));
+    const { results } = await db
+      .prepare(
+        `SELECT
+           COUNT(*) AS total,
+           SUM(CASE WHEN ${TRUSTED_CLAUSE} THEN 1 ELSE 0 END) AS trusted
+         FROM clicks
+         WHERE created_at >= datetime('now', ?)`
+      )
+      .bind(`-${since} days`)
+      .all<{ total: number | null; trusted: number | null }>();
+    const r = results?.[0];
+    const total = r?.total ?? 0;
+    const trusted = r?.trusted ?? 0;
+    return { total, trusted, suspect: Math.max(0, total - trusted) };
+  } catch (err) {
+    console.error('getClickTrustCounts skipped:', err instanceof Error ? err.message : err);
+    return { total: 0, trusted: 0, suspect: 0 };
   }
 }

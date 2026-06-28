@@ -6,9 +6,10 @@ import {
   getRefererSummary,
   getClickPeriodComparison,
   getRecentClicks,
+  getClickTrustCounts,
   type ClickAggRow,
 } from '@/lib/clicks-db';
-import { isBotUserAgent } from '@/lib/bot-filter';
+import { classifyClick, type ClickTrust } from '@/lib/bot-filter';
 import { getLeadSummary } from '@/lib/leads-db';
 import { getApiKeyStats } from '@/lib/api-keys';
 import { countActiveSubscriptions } from '@/lib/push-db';
@@ -182,16 +183,30 @@ export default async function AdminReportPage({
   const trendView: 'day' | 'hour' = sp.trend === 'hour' ? 'hour' : 'day';
   const trendDays = trendView === 'hour' ? Math.min(days, 3) : days;
 
-  const [rows, trend, refRows, compare, leads, pushCount, recentClicks, apiKeys] = await Promise.all([
-    getClickSummary(days),
-    getClickTrend(trendDays, trendView),
+  // クリックの清浄度：既定は「信頼（自サイト面から押された＝内部refererあり）」だけで集計。
+  // ?clicks=all で疑わしい(/go直叩きスクレイパ)も含めた全数を表示。
+  const trustedOnly = sp.clicks !== 'all';
+  const to = { trustedOnly };
+
+  const [rows, trend, refRows, compare, leads, pushCount, recentClicks, apiKeys, trust] = await Promise.all([
+    getClickSummary(days, to),
+    getClickTrend(trendDays, trendView, to),
     getRefererSummary(days),
-    getClickPeriodComparison(days),
+    getClickPeriodComparison(days, to),
     getLeadSummary(20),
     countActiveSubscriptions(),
-    getRecentClicks(25),
+    getRecentClicks(50),
     getApiKeyStats(50),
+    getClickTrustCounts(days),
   ]);
+
+  // 直近クリックの信頼度分類（明細＋サマリ）。
+  const classified = recentClicks.map((r) => ({ row: r, trust: classifyClick({ userAgent: r.user_agent, referer: r.referer }) }));
+  const trustCount = (t: ClickTrust) => classified.filter((c) => c.trust === t).length;
+  const recentTrust = { human: trustCount('human'), suspect: trustCount('suspect'), bot: trustCount('bot'), unknown: trustCount('unknown') };
+  // 既定（trustedOnly）では明細も信頼クリックだけ表示。?clicks=all で全件。
+  const visibleClicks = trustedOnly ? classified.filter((c) => c.trust === 'human') : classified;
+  const suspectShare = trust.total > 0 ? Math.round((trust.suspect / trust.total) * 100) : 0;
 
   // API（堀B）の利用集計：発行キー数・当月リクエスト合計・ティア内訳。
   const apiThisMonth = apiKeys.reduce((s, k) => s + (k.this_month || 0), 0);
@@ -278,7 +293,7 @@ export default async function AdminReportPage({
             {[7, 30, 90, 365].map((d) => (
               <a
                 key={d}
-                href={`?token=${encodeURIComponent(token)}&days=${d}`}
+                href={`?token=${encodeURIComponent(token)}&days=${d}${trustedOnly ? '' : '&clicks=all'}`}
                 className={`rounded-lg px-2.5 py-1 font-bold ring-1 transition-colors ${
                   d === days ? 'bg-slate-800 text-white ring-slate-800' : 'bg-white text-slate-600 ring-slate-200 hover:bg-slate-100'
                 }`}
@@ -296,10 +311,42 @@ export default async function AdminReportPage({
           <strong>推定発生額（楽観）</strong>は理想上限。確定報酬は各ASP管理画面が正・「発生」≠「着金」。
         </div>
 
+        {/* クリック清浄度＋表示切替（既定＝信頼クリックのみ） */}
+        <div className="mt-3 rounded-xl border border-slate-200 bg-white p-3 shadow-sm">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <div className="text-xs text-slate-600">
+              直近{days}日の記録 <strong>{trust.total.toLocaleString('ja-JP')}</strong> 件中、
+              <span className="font-bold text-emerald-700"> 信頼 {trust.trusted.toLocaleString('ja-JP')}</span>（自サイト面から）／
+              <span className="font-bold text-amber-600"> 疑わしい {trust.suspect.toLocaleString('ja-JP')}</span>（{suspectShare}%・/go直叩き）
+              <span className="ml-1 text-slate-400">※bot/空UA/IPバーストは記録前に除外済み</span>
+            </div>
+            <div className="flex gap-1.5 text-xs">
+              {([['信頼のみ', ''], ['全件', 'all']] as const).map(([labelTxt, val]) => {
+                const active = (val === 'all') === !trustedOnly;
+                return (
+                  <a
+                    key={val || 'trusted'}
+                    href={`?token=${encodeURIComponent(token)}&days=${days}${val ? `&clicks=${val}` : ''}`}
+                    className={`rounded-lg px-2.5 py-1 font-bold ring-1 transition-colors ${
+                      active ? 'bg-emerald-600 text-white ring-emerald-600' : 'bg-white text-slate-600 ring-slate-200 hover:bg-slate-100'
+                    }`}
+                  >
+                    {labelTxt}
+                  </a>
+                );
+              })}
+            </div>
+          </div>
+          <p className="mt-1.5 text-[11px] leading-relaxed text-slate-400">
+            実ブラウザのCTAクリックは必ず自サイト(my-naishin.com)の referer を伴います。内部refererの無いブラウザUAクリックは
+            /go を直接叩くスクレイパが大半のため、<strong>既定では「信頼」だけを集計</strong>しています（KPI・推移・プログラム別・面別・県別すべて）。
+          </p>
+        </div>
+
         {/* KPIカード */}
         <div className="mt-5 grid grid-cols-2 gap-3 md:grid-cols-5">
           <div className={card}>
-            <div className="text-[11px] text-slate-500">総クリック（実数）</div>
+            <div className="text-[11px] text-slate-500">{trustedOnly ? '信頼クリック（実数）' : '総クリック（全件）'}</div>
             <div className="mt-1 text-xl font-black text-slate-900 tabular-nums">{totals.clicks.toLocaleString('ja-JP')}</div>
             <div className="mt-0.5">
               <DeltaBadge cur={compare.current} prev={compare.previous} />
@@ -334,7 +381,7 @@ export default async function AdminReportPage({
               {(['day', 'hour'] as const).map((v) => (
                 <a
                   key={v}
-                  href={`?token=${encodeURIComponent(token)}&days=${days}&trend=${v}`}
+                  href={`?token=${encodeURIComponent(token)}&days=${days}&trend=${v}${trustedOnly ? '' : '&clicks=all'}`}
                   className={`rounded-lg px-2.5 py-1 font-bold ring-1 transition-colors ${
                     v === trendView
                       ? 'bg-emerald-600 text-white ring-emerald-600'
@@ -683,11 +730,16 @@ export default async function AdminReportPage({
           )}
         </div>
 
-        {/* 直近クリック明細（UA・bot判定＝自己検証用） */}
+        {/* 直近クリック明細（信頼度分類＝自己検証用） */}
         <div className="mt-6">
-          <h2 className={sectionTitle}>直近クリック明細（UA・bot判定）</h2>
+          <h2 className={sectionTitle}>直近クリック明細（信頼度分類）</h2>
           <p className="mt-0.5 text-[11px] text-slate-400">
-            UA記録＋IPレート制限を導入済。🤖=UAがbot/スクリプト・👤=実ブラウザ・👤?=実ブラウザだがreferer無し（要注意）・—=UA記録前の旧データ。
+            👤信頼=ブラウザUA＋自サイトreferer（実際に面から押された）／⚠️疑わしい=ブラウザUAだが内部referer無し（/go直叩きスクレイパが大半）／🤖bot=UAがbot・空UA／—=UA記録前の旧データ。
+            直近{classified.length}件：<span className="font-bold text-emerald-700">信頼 {recentTrust.human}</span> ・
+            <span className="font-bold text-amber-600"> 疑わしい {recentTrust.suspect}</span> ・
+            <span className="font-bold text-rose-500"> bot {recentTrust.bot}</span>
+            {recentTrust.unknown ? ` ・旧 ${recentTrust.unknown}` : ''}
+            <span className="ml-1 text-slate-400">（{trustedOnly ? '信頼のみ表示中・「全件」で疑わしいも表示' : '全件表示中・「信頼のみ」で絞り込み'}）</span>
           </p>
           <div className="mt-2 overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm">
             <table className="min-w-full text-xs">
@@ -702,17 +754,19 @@ export default async function AdminReportPage({
                 </tr>
               </thead>
               <tbody className="text-slate-600">
-                {recentClicks.length === 0 ? (
+                {visibleClicks.length === 0 ? (
                   <tr>
-                    <td colSpan={6} className="px-2 py-6 text-center text-slate-400">クリックがありません。</td>
+                    <td colSpan={6} className="px-2 py-6 text-center text-slate-400">
+                      {trustedOnly ? '信頼できるクリックはまだありません（「全件」で疑わしいクリックも確認できます）。' : 'クリックがありません。'}
+                    </td>
                   </tr>
                 ) : (
-                  recentClicks.map((r, i) => {
-                    const uaKnown = !!r.user_agent;
-                    const bot = uaKnown && isBotUserAgent(r.user_agent);
-                    const verdict = !uaKnown ? '—' : bot ? '🤖bot' : r.referer ? '👤' : '👤?';
+                  visibleClicks.map(({ row: r, trust: t }, i) => {
+                    const verdict =
+                      t === 'human' ? '👤 信頼' : t === 'suspect' ? '⚠️ 疑わしい' : t === 'bot' ? '🤖 bot' : '—';
+                    const rowBg = t === 'bot' ? 'bg-rose-50/60' : t === 'suspect' ? 'bg-amber-50/60' : '';
                     return (
-                      <tr key={i} className={`border-b border-slate-50 last:border-0 ${bot ? 'bg-rose-50/60' : ''}`}>
+                      <tr key={i} className={`border-b border-slate-50 last:border-0 ${rowBg}`}>
                         <td className="px-2 py-1.5 tabular-nums text-slate-400">{r.created_at?.slice(5, 16)}</td>
                         <td className="px-2 py-1.5 whitespace-nowrap">{verdict}</td>
                         <td className="px-2 py-1.5 font-medium text-slate-700">
