@@ -17,6 +17,16 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  // Cloudflare の「build cache 復元」が webpack の永続FSキャッシュと衝突し、
+  // 復元されたパックが欠けると本番ビルドが `ENOENT … client-production/*.pack` で落ちる
+  // （Cloudflare側のキャッシュ不整合・コードとは無関係の既知症状）。
+  // 本番ビルドでは webpack の永続FSキャッシュを無効化し、壊れたキャッシュを読まないようにする。
+  webpack: (config, { dev }) => {
+    if (!dev) {
+      config.cache = false;
+    }
+    return config;
+  },
   async redirects() {
     return [
       // 都道府県リバースページのリダイレクト（/{code}/reverse → /reverse?pref={code}）
