@@ -352,7 +352,7 @@ GET ${SITE_URL}/api/naishin/compare?codes=tokyo,osaka,hyogo&grade=4`;
               要綱改訂の追従も当方が肩代わりします。受験アプリ・進路SaaS・塾チェーンの内申自動算出にそのまま組み込めます。
             </p>
             <div className="mt-4">
-              <UpgradeButton tier="pro" label="Proにアップグレード（月額 ¥3,000〜）" />
+              <UpgradeButton tier="pro" label="Proにアップグレード（月額 ¥9,800〜）" />
             </div>
             <p className="mt-3 text-xs text-slate-500">
               大規模・データ再配布・年額ライセンス（CSV/JSONの定期更新フィード＋更新通知）は Scale で個別対応。

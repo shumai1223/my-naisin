@@ -37,8 +37,9 @@ export interface TierPolicy {
 }
 
 /**
- * ティアの正準テーブル。価格は DDレポート §H の推奨（月¥3,000〜＋従量、年額ライセンス）に整合。
- * monthlyPriceJpy はあくまで目安表示で、実課金は Stripe 接続後に有効化する。
+ * ティアの正準テーブル。価格は「価値ベース」で設定（自前実装＝エンジニア数十万円＋毎年の要綱改訂保守の代替）。
+ * Pro ¥9,800/月（B2B APIの標準入口）、Scale は年額データライセンス（個別）。¥3,000は安すぎて価値を過小評価する
+ * シグナルになるため採らない。monthlyPriceJpy は目安表示で、実課金は Stripe 接続後に有効化する。
  */
 export const TIER_POLICIES: Record<ApiTier, TierPolicy> = {
   anonymous: {
@@ -76,7 +77,7 @@ export const TIER_POLICIES: Record<ApiTier, TierPolicy> = {
     commercialUse: true,
     prioritySupport: true, // ★SLA・優先サポート
     dataLicense: false,
-    monthlyPriceJpy: 3_000,
+    monthlyPriceJpy: 9_800,
     audience: '受験アプリ・進路SaaS・塾チェーンの本番組み込み',
     sla: '99.9%（ベストエフォート・障害時は翌月クレジット）',
   },
