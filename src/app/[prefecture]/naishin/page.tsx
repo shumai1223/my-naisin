@@ -24,13 +24,11 @@ import { HowToSchema } from '@/components/StructuredData/HowToSchema';
 import { ErrorReportForm } from '@/components/ErrorReportForm';
 import { PrefectureMinimumContent } from '@/components/PrefectureMinimumContent';
 import { BlogRelatedArticles } from '@/components/BlogRelatedArticles';
-import InteractiveCalculator from '@/components/Calculator/InteractiveCalculatorWrapper';
+import { NaishinResultFlow } from '@/components/Calculator/NaishinResultFlow';
 import { HighSchoolBorderlineTable } from '@/components/HighSchoolBorderlineTable';
 import { TrustInfo } from '@/components/TrustInfo';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
-import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { ParentLeadCTAExperiment } from '@/components/ParentLeadCTAExperiment';
-import { ParentCostBridge } from '@/components/ParentCostBridge';
 import { AnswerBox } from '@/components/AnswerBox';
 import { RelatedToolsSection } from '@/components/RelatedToolsSection';
 
@@ -414,26 +412,12 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
               </div>
             </section>
 
-            {/* 埋め込み計算ツール */}
-            <section id="calculator-section" className="scroll-mt-6">
-              <InteractiveCalculator
-                prefectureCode={prefectureCode}
-                prefectureName={prefecture.name}
-                maxScore={prefecture.maxScore}
-              />
-            </section>
-
-            {/* 結果保存・名簿化（堀A）：47都道府県の内申ページ共通の名簿受け皿 */}
-            <SaveResultCTA
-              source="prefecture"
+            {/* 計算ツール＋結果連動の名簿/送客導線（内申点の実測値をCTAへ配線＝47県共通で成績カード/保護者バトン点灯） */}
+            <NaishinResultFlow
               prefectureCode={prefectureCode}
               prefectureName={prefecture.name}
-              heading={`${prefecture.name}の内申点と「あと何点」を、忘れないうちに受け取りませんか？`}
-              body="内申点アップのコツ・志望校の最新ボーダー・出願スケジュールを、受験本番まで無料でお届けします。LINEかメールで、いつでも解除できます。"
+              maxScore={prefecture.maxScore}
             />
-
-            {/* 結果直後の同スケール導線（生徒→保護者）：権限ズレを避け、購入を迫らず学費/塾代の情報面へ */}
-            <ParentCostBridge prefectureName={prefecture.name} />
 
             {/* 計算後・最高エンゲージ位置の Z会 CTA */}
             <section className="rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-50 to-indigo-50 p-6 shadow-sm">

@@ -23,9 +23,11 @@ interface InteractiveCalculatorProps {
   prefectureCode: string;
   prefectureName: string;
   maxScore: number;
+  /** 計算成立後、内申点の実測値を親へ通知（結果連動の名簿/送客導線用）。 */
+  onResult?: (r: { total: number; max: number } | null) => void;
 }
 
-export function InteractiveCalculator({ prefectureCode, prefectureName, maxScore }: InteractiveCalculatorProps) {
+export function InteractiveCalculator({ prefectureCode, prefectureName, maxScore, onResult }: InteractiveCalculatorProps) {
   const [scores, setScores] = React.useState<Scores>(DEFAULT_SCORES);
   const [showResult, setShowResult] = React.useState(false);
   // ファネル先頭（tool_start）を最初の入力で一度だけ送る
@@ -35,6 +37,11 @@ export function InteractiveCalculator({ prefectureCode, prefectureName, maxScore
   const total = calculateTotalScore(scores, prefectureCode);
   const percent = calculatePercent(total, max);
   const rank = getRankForPercent(percent);
+
+  // 計算表示後、実測の内申点を親へ通知（結果連動でCTAを個別化＝カード/保護者バトンを点灯）。
+  React.useEffect(() => {
+    if (showResult) onResult?.({ total, max });
+  }, [showResult, total, max, onResult]);
 
   const handleScoreChange = (subject: SubjectKey, value: number) => {
     if (!startedRef.current) {
