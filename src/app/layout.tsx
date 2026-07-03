@@ -14,6 +14,7 @@ import { GoogleAnalytics } from '@/components/GoogleAnalytics';
 import { AffiliateClickTracker } from '@/components/Affiliate/AffiliateClickTracker';
 import { SiteEngagementTracker } from '@/components/SiteEngagementTracker';
 import { ExitIntentLineModal } from '@/components/ExitIntentLineModal';
+import { StickyConvertBar } from '@/components/StickyConvertBar';
 
 const notoSansJp = Noto_Sans_JP({
   variable: '--font-noto-sans-jp',
@@ -110,6 +111,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <Footer />
         <CookieConsent />
         <ExitIntentLineModal />
+        <StickyConvertBar />
         <Script
           id="adsbygoogle-init"
           strategy="lazyOnload"
