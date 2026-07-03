@@ -18,6 +18,7 @@ import {
   estimatedLeadsLow,
   estimatedRevenueYen,
   confirmedRevenueYen,
+  rankLiveOffersByEV,
   CONFIRM_RATE,
   yen,
 } from '@/lib/affiliate-economics';
@@ -268,6 +269,10 @@ export default async function AdminReportPage({
     { clicks: 0, optimistic: 0, confirmed: 0, leadsLow: 0 }
   );
 
+  // オファーEVランキング（クリック実績と無関係の「1クリックの価値」＝配置最適化の物差し・提携済みlive全案件）。
+  const evRanking = rankLiveOffersByEV();
+  const maxEv = Math.max(1, ...evRanking.map((o) => o.confirmedPer1000));
+
   const maxProgClicks = Math.max(1, ...programs.map((p) => p.clicks));
   const maxPlacement = Math.max(1, ...byPlacement.map((p) => p.clicks));
   const maxPref = Math.max(1, ...byPref.map((p) => p.clicks));
@@ -450,6 +455,35 @@ export default async function AdminReportPage({
                   </div>
                   <div className="mt-1 text-lg font-black text-emerald-700 tabular-nums">{yen(v.confirmed)}</div>
                   <div className="text-[11px] text-slate-500">{v.clicks}クリック・確定額の{share}%</div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* オファーEVランキング（提携済みlive・1クリックの価値＝配置最適化の物差し・“最適解”の単一ソース） */}
+        <div className="mt-6">
+          <h2 className={sectionTitle}>オファーEVランキング（提携済みlive・1,000クリックあたり推定確定額）</h2>
+          <p className="mt-0.5 text-[11px] leading-relaxed text-slate-400">
+            クリック実績と無関係の「1クリックがいくら生むか」の理論値（保守）。高インテント面ほど上位のオファーを置くのが最適。
+            新規提携が live になると自動でここに正しい順位で並ぶ（affiliate-economics.rankLiveOffersByEV）。
+          </p>
+          <div className="mt-2 space-y-1.5 rounded-xl border border-slate-200 bg-white p-3 shadow-sm">
+            {evRanking.map((o, i) => {
+              const k = KIND_LABEL[o.kind] ?? KIND_LABEL['free-lead'];
+              return (
+                <div key={o.id} className="flex items-center gap-3 text-sm">
+                  <span className="w-5 shrink-0 text-right tabular-nums text-slate-400">{i + 1}</span>
+                  <span className="w-52 shrink-0 truncate">
+                    <span className="font-bold text-slate-800">{o.programName}</span>
+                    <span className={`ml-1 rounded px-1 py-0.5 text-[10px] font-bold ${k.cls}`}>{k.label}</span>
+                  </span>
+                  <div className="flex-1">
+                    <Bar value={o.confirmedPer1000} max={maxEv} className="bg-emerald-500" />
+                  </div>
+                  <span className="w-24 shrink-0 text-right text-xs font-black tabular-nums text-emerald-700">
+                    {yen(o.confirmedPer1000)}
+                  </span>
                 </div>
               );
             })}
