@@ -466,20 +466,24 @@ export default function ToolsPage() {
             </section>
           ))}
 
-          {/* アフィリエイト広告 */}
-          <section className="mb-10 rounded-2xl border border-slate-200 bg-white px-6 py-6 text-center shadow-sm">
-            <div className="mb-1 text-sm font-bold text-slate-700">
+          {/* ツール後の次の一歩：2026-07 AdSense撤退＝アフィリ一本化に伴い、EV最小のスタサプ/e点の
+              表示バナー（推定EV ¥5〜9/click）を撤去し、EVの高い全国オンライン個別の無料体験へ一本化。 */}
+          <section className="mb-10 rounded-2xl border border-emerald-200 bg-gradient-to-br from-emerald-50 to-white px-6 py-6 text-center shadow-sm">
+            <div className="mb-1 text-sm font-bold text-slate-800">
               ツールを使ったあとの「次の一歩」
             </div>
-            <div className="mb-4 text-xs leading-relaxed text-slate-500">
-              現状把握ができたら、実際の学習へ。<AffiliateAd id="sapuri-text" hideLabel auditHide />（月額2,178円・無料体験あり）や<AffiliateAd id="eten-net" hideLabel placement="tools" />（PR・インターネット自宅学習）で家庭学習を始める人が増えています。
+            <div className="mb-4 text-xs leading-relaxed text-slate-600">
+              現状把握ができたら、次は「足りない分をどう埋めるか」。全国オンライン対応のAI個別指導の無料体験で、お子さまにいま必要な対策を具体的に確認できます（費用はかかりません）。
             </div>
-            <div className="hidden md:block">
-              <AffiliateAd id="sapuri-banner-468" />
-            </div>
-            <div className="md:hidden">
-              <AffiliateAd id="sapuri-banner-300" />
-            </div>
+            <AffiliateAd
+              id="atama-text"
+              hideLabel
+              ctaText="無料体験で弱点と対策を確認する"
+              trackView
+              viewPlacement="tools"
+              linkClassName="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 px-6 py-3.5 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-emerald-700 sm:w-auto"
+            />
+            <div className="mt-2 text-[11px] text-slate-500">【atama＋ オンライン塾】の無料体験（PR）</div>
           </section>
 
           {/* 使い方ガイド */}

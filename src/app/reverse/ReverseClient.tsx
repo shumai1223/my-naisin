@@ -11,7 +11,6 @@ import { WebApplicationSchema } from '@/components/StructuredData/WebApplication
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { HowToSchema } from '@/components/StructuredData/HowToSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
-import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { ParentCostBridge } from '@/components/ParentCostBridge';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
@@ -261,24 +260,9 @@ function ReversePageContent() {
                 className="mt-6"
               />
 
-              {/* 計算後のZ会CTA - 志望校が決まった人向け */}
-              <section className="mt-8 rounded-2xl border border-blue-200 bg-gradient-to-br from-blue-50 to-indigo-50 px-6 py-6 text-center shadow-sm">
-                <div className="text-sm font-bold text-slate-800 mb-1">
-                  必要な得点が分かったあなたへ
-                </div>
-                <div className="text-xs text-slate-600 mb-4 leading-relaxed">
-                  目標点まであと一歩。<AffiliateAd id="zkai-text-advanced" hideLabel auditHide />（PR）なら、添削指導で「本当の得点力」が身につきます。
-                </div>
-                <div className="hidden md:block">
-                  <AffiliateAd id="zkai-banner" trackView viewPlacement="reverse" />
-                </div>
-                <div className="md:hidden">
-                  <AffiliateAd id="sapuri-banner-300" trackView viewPlacement="reverse" />
-                </div>
-                <div className="mt-3 text-xs">
-                  <AffiliateAd id="zkai-text-request" className="mx-1" hideLabel auditHide />（PR）で詳細をチェック
-                </div>
-              </section>
+              {/* 2026-07 AdSense撤退＝アフィリ一本化：ここにあった Z会/スタサプの表示バナー群
+                  （推定EV ¥1.5〜29/click）は、上の保護者リード(塾無料体験 ¥84〜)＋LINE名簿と
+                  同じクリックを奪う低EVの重複だったため撤去。プライム面を高EVオファーに集中させる。 */}
 
               {/* 当日点逆算の考え方（本文・検索意図の網羅で順位を底上げ） */}
               <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
