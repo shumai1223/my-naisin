@@ -21,7 +21,14 @@ type SubjectKey = (typeof SUBJECTS)[number]['key'];
 
 const RATING_OPTIONS = [1, 2, 3, 4, 5];
 
-export function HyoteiHeikinCalculator() {
+interface HyoteiHeikinCalculatorProps {
+  /** 評定平均が変わるたびに呼ばれる（親が結果連動の換金導線を出すため）。 */
+  onResult?: (value: number | null) => void;
+  /** 結果ボックス内（評定平均の直下＝最高エンゲージ位置）に差し込むCTA。 */
+  resultFooter?: React.ReactNode;
+}
+
+export function HyoteiHeikinCalculator({ onResult, resultFooter }: HyoteiHeikinCalculatorProps = {}) {
   const [ratings, setRatings] = React.useState<Record<SubjectKey, number | null>>(() =>
     SUBJECTS.reduce((acc, s) => {
       acc[s.key] = null;
@@ -61,6 +68,11 @@ export function HyoteiHeikinCalculator() {
       track('result_view', { source: 'hyotei' });
     }
   }, [average]);
+
+  // 評定平均を親へ通知（結果連動の換金導線）。onResult は安定参照前提（useStateのsetter）。
+  React.useEffect(() => {
+    onResult?.(average);
+  }, [average, onResult]);
 
   return (
     <div className="rounded-2xl border-2 border-emerald-200 bg-white shadow-lg overflow-hidden">
@@ -136,6 +148,7 @@ export function HyoteiHeikinCalculator() {
               {SUBJECTS.length - filledRatings.length}教科の入力が残っています
             </div>
           )}
+          {resultFooter}
         </div>
       )}
     </div>

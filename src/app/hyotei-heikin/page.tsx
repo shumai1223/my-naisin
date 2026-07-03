@@ -7,9 +7,7 @@ import { WebApplicationSchema } from '@/components/StructuredData/WebApplication
 import { HowToSchema } from '@/components/StructuredData/HowToSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
-import { ParentLeadCTA } from '@/components/ParentLeadCTA';
-import { SaveResultCTA } from '@/components/SaveResultCTA';
-import { HyoteiHeikinCalculator } from '@/components/HyoteiHeikin/HyoteiHeikinCalculator';
+import { HyoteiResultFlow } from '@/components/HyoteiHeikin/HyoteiResultFlow';
 import { ToolClusterNav } from '@/components/ToolClusterNav';
 
 const HYOTEI_FAQS = [
@@ -257,25 +255,9 @@ export default function HyoteiHeikinPage() {
             </div>
           </section>
 
-          {/* Calculator */}
+          {/* Calculator＋結果連動の換金導線（評定平均の実測値をCTAへ配線） */}
           <div id="calculator-section">
-            <HyoteiHeikinCalculator />
-          </div>
-
-          {/* 即効レバー：最高CTRページの結果直後に保護者リード（決裁者＝保護者へ高単価送客） */}
-          <div className="mt-6">
-            <ParentLeadCTA
-              heading="この評定平均で、志望校の出願基準に届きますか？"
-              body="評定平均は残りの定期テストと提出物で十分に動きます。お子さまにいま必要な対策を、AI個別指導の無料体験で具体的に確認できます（保護者の方向け・費用はかかりません）。"
-              affiliateId="atama-text"
-              ctaText="無料で資料・体験を申し込む"
-              note="【atama＋ オンライン塾】の資料請求・無料体験（PR）"
-            />
-          </div>
-
-          {/* 堀A：結果を保存・LINE/メールで受け取る（受験期トラフィックの資産化） */}
-          <div className="mt-6">
-            <SaveResultCTA source="hyotei-heikin" />
+            <HyoteiResultFlow />
           </div>
 
           {/* 計算結果直後の最高エンゲージ位置：Z会CTA */}
