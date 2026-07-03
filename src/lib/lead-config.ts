@@ -115,8 +115,9 @@ export function programPreset(affiliateId: AffiliateId): Pick<LeadOffer, 'note' 
 
 /**
  * 面ごとの既定（文脈最適化）。
- * 最大流入面（hensachi/hyotei-heikin）は安全側の Z会（既定）を維持し、コピーだけ損失回避で締める。
- * 高インテント面（result/parent-lp）には無料体験案件を割当てて GA4 で勝者を学習する。
+ * 2026-07 AdSense撤退で収益をアフィリ一本化。全ての実配置面を「EVの高い無料リード（塾体験/FP相談）」へ寄せ、
+ * EV最小の Z会資料請求は DEFAULT_LEAD_OFFER（＝未設定面の安全な床）だけに残す。
+ * EVの物差しは affiliate-economics の rankLiveOffersByEV()。高インテント面ほど高EVオファーを割当てる。
  */
 export const PLACEMENT_LEAD_OVERRIDES: Partial<Record<LeadPlacement, Partial<LeadOffer>>> = {
   // 最高インテント面。結果が出た直後の保護者に「全国オンラインの無料体験」をぶつけて学習開始。
@@ -129,15 +130,18 @@ export const PLACEMENT_LEAD_OVERRIDES: Partial<Record<LeadPlacement, Partial<Lea
     heading: 'お子さまの志望校合格を、ご家庭からあと押し',
     body: '「やり方が分からないまま時間だけが過ぎる」のが、いちばんもったいない失点です。AIが弱点だけを狙って学習をつくる無料体験で、最短ルートをまず確認してみませんか。費用はかかりません。',
   }),
-  // ── 以下は安全側の Z会（既定）を維持し、コピーだけ損失回避で締める ──
-  hensachi: {
+  // ── 最大流入面（hensachi/hyotei-heikin）。2026-07 AdSense撤退＝収益をアフィリ一本化に伴い、
+  //    従来の「Z会資料請求（EV最小の対照群）」を廃し、EVの高い全国オンライン塾の無料体験（atama＋）へ。
+  //    ※実ページ（HensachiResultFlow/HyoteiResultFlow）は既に atama をハードコード済。ここは
+  //      クラスタ面（/hensachi/kyoka-betsu 等）とauditPlacementOffers（営業レポート）の整合を取る。 ──
+  hensachi: offerFor('atama-text', {
     heading: '偏差値、間違った順番で勉強していませんか？',
-    body: '偏差値は学習“量”より“やり方”で伸びが大きく変わります。遠回りで時間を失う前に、お子さまに合った伸ばし方を無料の資料で確認してみませんか。',
-  },
-  'hyotei-heikin': {
+    body: '偏差値は学習“量”より“やり方”で伸びが大きく変わります。遠回りで時間を失う前に、お子さまに合った伸ばし方を、AI個別指導の無料体験で具体的に確認できます（費用はかかりません）。',
+  }),
+  'hyotei-heikin': offerFor('atama-text', {
     heading: '評定平均は、あとから取り返しにくい数字です',
-    body: '評定平均（内申）は日々の積み重ねで決まり、下がってからでは戻すのに学期単位の時間がかかります。今からできる対策と推薦の基準を、無料の資料でまとめて確認できます。',
-  },
+    body: '評定平均（内申）は日々の積み重ねで決まり、下がってからでは戻すのに学期単位の時間がかかります。今からできる対策と推薦の基準を、AI個別指導の無料体験でまとめて確認できます（費用はかかりません）。',
+  }),
   prefecture: {
     heading: 'この地域の入試、お子さまの成績で本当に届きますか？',
     body: '都道府県ごとに内申点の比重は大きく異なり、同じ偏差値でも合否が分かれます。志望校との差を埋める家庭学習の進め方を、まずは無料の資料でご確認ください。',

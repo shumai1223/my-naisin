@@ -32,6 +32,7 @@ export function HensachiResultFlow() {
       {/* 即効レバー：最高CTRページの結果直後に保護者リード（決裁者＝保護者へ高単価送客） */}
       <div className="mt-6">
         <ParentLeadCTA
+          placement="hensachi"
           heading={has ? `偏差値${v}、志望校に届きますか？保護者の方へ` : 'この偏差値で、志望校に届きますか？保護者の方へ'}
           body="偏差値は「今からの伸ばし方」で十分に動きます。お子さまにいま必要な対策を、AI個別指導の無料体験で具体的に確認できます（保護者の方向け・費用はかかりません）。"
           affiliateId="atama-text"

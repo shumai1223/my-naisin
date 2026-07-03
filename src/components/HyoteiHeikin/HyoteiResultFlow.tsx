@@ -23,6 +23,7 @@ export function HyoteiResultFlow() {
       {/* 即効レバー：最高CTRページの結果直後に保護者リード（決裁者＝保護者へ高単価送客） */}
       <div className="mt-6">
         <ParentLeadCTA
+          placement="hyotei-heikin"
           heading={has ? `評定平均${v}、志望校の出願基準に届きますか？` : 'この評定平均で、志望校の出願基準に届きますか？'}
           body="評定平均は残りの定期テストと提出物で十分に動きます。お子さまにいま必要な対策を、AI個別指導の無料体験で具体的に確認できます（保護者の方向け・費用はかかりません）。"
           affiliateId="atama-text"

@@ -18,7 +18,7 @@
  *  - scripts/generate-sales-report.ts（月次の営業/振り返りレポート Markdown 生成）
  */
 
-import type { AffiliateId } from '@/lib/affiliates';
+import { AFFILIATES, isLiveAffiliate, type AffiliateId } from '@/lib/affiliates';
 
 export type OfferKind = 'free-lead' | 'doc-request' | 'paid';
 
@@ -168,4 +168,59 @@ export function confirmedRevenueYen(id: AffiliateId, clicks: number): number {
 /** 円を「¥1,234」表記に。 */
 export function yen(n: number): string {
   return `¥${Math.round(n).toLocaleString('ja-JP')}`;
+}
+
+// ── EVランキング（“既存アフィリの最適解”の単一ソース） ──────────────────────────
+/**
+ * クリック1,000あたりの推定確定額（保守・主役）＝1オファーのEVを表す単一の指標。
+ * 「この面にどのオファーを置くと1クリックがいくら生むか」を1数字で比較するための正準関数。
+ */
+export function confirmedPer1000(id: AffiliateId): number {
+  return confirmedRevenueYen(id, 1000);
+}
+
+export interface LiveOfferEV {
+  id: AffiliateId;
+  programName: string;
+  kind: OfferKind;
+  cpaYen: number;
+  /** クリック1,000あたりの推定確定額（保守）。EVの単一指標。 */
+  confirmedPer1000: number;
+}
+
+/**
+ * live な全プログラムを「1クリックあたりの推定確定額（保守）」の高い順に並べた表。
+ * ＝いま提携済みのアフィリの中で“1クリックがいくら生むか”の単一の真実。配置最適化の物差し。
+ *
+ * 使い道：
+ *  - /admin/report・generate-sales-report に「稼ぐ順」を出し、どの面を高EVオファーに寄せるか判断する。
+ *  - 新規承認が出たら AFFILIATES を live にするだけで、ここに自動で正しい順位で並ぶ（＝手作業のランキング更新が不要）。
+ *  - CIの不変条件（保護者面に高EVの無料リードが載っているか）を機械検証する土台。
+ * pending（未確定枠＝デッドリンクで0円）は除外する。
+ */
+export function rankLiveOffersByEV(): LiveOfferEV[] {
+  return (Object.keys(AFFILIATES) as AffiliateId[])
+    .filter((id) => isLiveAffiliate(id))
+    .map((id) => {
+      const e = economicsFor(id);
+      return {
+        id,
+        programName: AFFILIATES[id].name,
+        kind: e.kind,
+        cpaYen: e.cpaYen,
+        confirmedPer1000: confirmedRevenueYen(id, 1000),
+      };
+    })
+    .sort((a, b) => b.confirmedPer1000 - a.confirmedPer1000);
+}
+
+/**
+ * 述語に合う live プログラムのうち EV 最大の1つのIDを返す（未一致は undefined）。
+ * 面に置く「最適オファー」をIDハードコードせず選ぶのに使う
+ * （例：全国オンライン塾の無料体験のうちEV最大＝承認状況が変わっても自動で最適へ追従できる）。
+ */
+export function topLiveOfferByEV(
+  predicate: (o: LiveOfferEV) => boolean = () => true
+): AffiliateId | undefined {
+  return rankLiveOffersByEV().find(predicate)?.id;
 }
