@@ -11,7 +11,7 @@ interface AffiliateAdProps {
   hideLabel?: boolean;
   /** textタイプのアンカー要素に直接付与するclass。指定するとデフォルトのスタイルを置き換える（ボタン化したいときに使う） */
   linkClassName?: string;
-  /** AdSense審査モード（NEXT_PUBLIC_ADSENSE_AUDIT=1）時のみ非表示にする。重複配置の終盤側に付与。合格後は環境変数を消すだけで全復元される。 */
+  /** @deprecated AdSense撤退で無効化（常に表示）。後方互換のため受けるだけ。 */
   auditHide?: boolean;
   /** textタイプのアンカー表示文言を上書き（href/トラッキングは維持）。塾の素のアンカー文「【森塾】」等を、CTAボタンとして自然な行動文にしたいときに使う。 */
   ctaText?: string;
@@ -28,7 +28,8 @@ interface AffiliateAdProps {
 }
 
 export function AffiliateAd({ id, className = '', centered = true, hideLabel = false, linkClassName, auditHide = false, ctaText, trackView = false, viewPlacement, viewPref, pref, placement }: AffiliateAdProps) {
-  if (auditHide && process.env.NEXT_PUBLIC_ADSENSE_AUDIT === '1') return null;
+  // AdSense撤退（2026-07）で審査モードは廃止。auditHide は後方互換で受けるが、もう隠さない。
+  void auditHide;
   const ad = AFFILIATES[id];
   // 先回し枠（未確定案件）はリンク未確定なので描画しない＝デッドリンク/空ピクセルを出さない。
   if ((ad.status ?? 'live') === 'pending') return null;

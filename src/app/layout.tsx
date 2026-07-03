@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from 'next';
 import { Noto_Sans_JP } from 'next/font/google';
-import Script from 'next/script';
 import type { ReactNode } from 'react';
 
 import './globals.css';
@@ -90,7 +89,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             fonts.gstatic.com への preconnect は不要（むしろアンチパターン）。計測/広告のみ前倒しする。 */}
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-        <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
         <link rel="dns-prefetch" href="https://i.moshimo.com" />
       </head>
       <body className={`min-h-screen mesh-gradient text-slate-900 antialiased`}>
@@ -112,12 +110,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <CookieConsent />
         <ExitIntentLineModal />
         <StickyConvertBar />
-        <Script
-          id="adsbygoogle-init"
-          strategy="lazyOnload"
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7817682248719138"
-          crossOrigin="anonymous"
-        />
+        {/* AdSense撤退（2026-07）：adsbygoogle.js の常時ロードを撤去。
+            AdSlot は NEXT_PUBLIC_ADSENSE_ENABLED=1 のときだけ描画＝広告ユニットは元々ゼロで、
+            このスクリプトはページを重くするだけだった。収益は保護者リード送客（アフィリ）に一本化。 */}
       </body>
     </html>
   );
