@@ -105,7 +105,14 @@ function evaluateLabel(hensachi: number | null): EvalResult | null {
   };
 }
 
-export function HensachiCalculator() {
+interface HensachiCalculatorProps {
+  /** 合計偏差値が変わるたびに呼ばれる（親が結果連動の換金導線を出すため）。 */
+  onResult?: (value: number | null) => void;
+  /** 結果ボックス内（偏差値の直下＝最高エンゲージ位置）に差し込むCTA。 */
+  resultFooter?: React.ReactNode;
+}
+
+export function HensachiCalculator({ onResult, resultFooter }: HensachiCalculatorProps = {}) {
   const [mode, setMode] = React.useState<'simple' | 'advanced'>('simple');
   const [inputs, setInputs] = React.useState<Record<SubjectKey, SubjectInput>>(() =>
     SUBJECTS.reduce((acc, s) => {
@@ -158,6 +165,11 @@ export function HensachiCalculator() {
       track('result_view', { source: 'hensachi' });
     }
   }, [totalHensachi]);
+
+  // 合計偏差値を親へ通知（結果連動の換金導線＝41%流入の資産化）。onResult は安定参照前提（useStateのsetter）。
+  React.useEffect(() => {
+    onResult?.(totalHensachi);
+  }, [totalHensachi, onResult]);
 
   return (
     <div className="rounded-2xl border-2 border-purple-200 bg-white shadow-lg overflow-hidden">
@@ -270,6 +282,7 @@ export function HensachiCalculator() {
             <div className="mt-4 text-xs text-slate-600">
               ※ 各教科の偏差値の平均値（厳密な5教科総合偏差値とは若干異なります）
             </div>
+            {resultFooter}
           </div>
         </div>
       )}

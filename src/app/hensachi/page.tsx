@@ -8,11 +8,8 @@ import { HowToSchema } from '@/components/StructuredData/HowToSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { DatasetSchema } from '@/components/StructuredData/DatasetSchema';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
-import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { PREFECTURES } from '@/lib/prefectures';
-import { SaveResultCTA } from '@/components/SaveResultCTA';
-import { ParentCostBridge } from '@/components/ParentCostBridge';
-import { HensachiCalculator } from '@/components/Hensachi/HensachiCalculator';
+import { HensachiResultFlow } from '@/components/Hensachi/HensachiResultFlow';
 import { AnswerBox } from '@/components/AnswerBox';
 import { HensachiClusterNav } from '@/components/Hensachi/HensachiClusterNav';
 import { ToolClusterNav } from '@/components/ToolClusterNav';
@@ -296,29 +293,8 @@ export default function HensachiPage() {
             </AnswerBox>
           </div>
 
-          {/* Calculator */}
-          <div id="calculator-section">
-            <HensachiCalculator />
-          </div>
-
-          {/* 即効レバー：最高CTRページの結果直後に保護者リード（決裁者＝保護者へ高単価送客） */}
-          <div className="mt-6">
-            <ParentLeadCTA
-              heading="この偏差値で、志望校に届きますか？保護者の方へ"
-              body="偏差値は「今からの伸ばし方」で十分に動きます。お子さまにいま必要な対策を、AI個別指導の無料体験で具体的に確認できます（保護者の方向け・費用はかかりません）。"
-              affiliateId="atama-text"
-              ctaText="無料で資料・体験を申し込む"
-              note="【atama＋ オンライン塾】の資料請求・無料体験（PR）"
-            />
-          </div>
-
-          {/* 堀A：結果を保存・LINE/メールで受け取る（受験期トラフィックの資産化） */}
-          <div className="mt-6">
-            <SaveResultCTA source="hensachi" />
-          </div>
-
-          {/* 結果直後の同スケール導線（生徒→保護者）：偏差値→志望校が見えたら学費/塾代を確認 */}
-          <ParentCostBridge className="mt-6" />
+          {/* Calculator＋結果連動の換金導線（偏差値の実測値をCTAへ配線＝41%流入の資産化） */}
+          <HensachiResultFlow />
 
           {/* 偏差値クラスタのハブ：教科別・志望校レンジ・上げ方への内部リンク */}
           <div className="mt-6">
