@@ -11,11 +11,9 @@ import { selectLeadOffer } from '@/lib/lead-config';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
-import { TotalScoreCalculator } from '@/components/TotalScore/TotalScoreCalculator';
+import { TotalScoreResultFlow } from '@/components/TotalScore/TotalScoreResultFlow';
 import { TotalScoreExplainerView } from '@/components/TotalScore/TotalScoreExplainerView';
-import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
-import { ParentCostBridge } from '@/components/ParentCostBridge';
 import { HensachiPromo } from '@/components/HensachiPromo';
 
 /** 早見表：既定の比率オプションで、得点率の組合せ→総合得点を engine で算出する。 */
@@ -190,19 +188,11 @@ export default async function PrefectureTotalScorePage({ params }: PageProps) {
             )}
           </section>
 
-          {/* Calculator */}
-          <TotalScoreCalculator system={system} />
-
-          {/* 結果保存・名簿化（堀A） */}
-          <ParentCostBridge prefectureName={system.name} className="mb-6" />
-
-          <SaveResultCTA
-            source="prefecture"
-            prefectureCode={system.code}
-            prefectureName={system.name}
-            className="mt-6"
-            heading="この総合得点と「あと何点」を、忘れないうちに受け取りませんか？"
-            body="総合得点アップのコツ・志望校の最新動向・出願スケジュールを、受験本番まで無料でお届けします。LINEかメールで、いつでも解除できます。"
+          {/* Calculator＋結果連動の名簿/送客導線（総合得点の実測値をCTAへ配線＝成績カード/保護者バトン点灯） */}
+          <TotalScoreResultFlow
+            system={system}
+            saveHeading="この総合得点と「あと何点」を、忘れないうちに受け取りませんか？"
+            saveBody="総合得点アップのコツ・志望校の最新動向・出願スケジュールを、受験本番まで無料でお届けします。LINEかメールで、いつでも解除できます。"
           />
 
           {/* 計算の手順（番号付き） */}

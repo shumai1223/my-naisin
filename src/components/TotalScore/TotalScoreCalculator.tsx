@@ -10,13 +10,15 @@ import { ParentShareLinkButton } from '@/components/ParentShareLinkButton';
 
 interface Props {
   system: TotalScoreSystem;
+  /** 入力後、総合得点の実測値を親へ通知（結果連動の名簿/送客導線用）。 */
+  onResult?: (r: { total: number; max: number } | null) => void;
 }
 
 /**
  * 第1層県の汎用 総合得点計算機（registry のレコードを受け取り、engine で計算）。
  * 入力は「学力検査の合計点」「内申点（県の調査書スケール）」と、比率オプション（複数ある県のみ）。
  */
-export function TotalScoreCalculator({ system }: Props) {
+export function TotalScoreCalculator({ system, onResult }: Props) {
   const [academicInput, setAcademicInput] = React.useState('');
   const [reportInput, setReportInput] = React.useState('');
   const [optionId, setOptionId] = React.useState(system.ratioOptions[0].id);
@@ -35,6 +37,11 @@ export function TotalScoreCalculator({ system }: Props) {
       track(EVENTS.CALC_COMPLETE, { tool: 'total-score', pref: system.code });
     }
   }, [hasInput, system.code]);
+
+  // 総合得点の実測値を親へ通知（結果連動でCTAを個別化＝カード/保護者バトンを点灯）。
+  React.useEffect(() => {
+    onResult?.(hasInput ? { total: result.total, max: result.totalMax } : null);
+  }, [hasInput, result.total, result.totalMax, onResult]);
 
   const reset = () => {
     setAcademicInput('');

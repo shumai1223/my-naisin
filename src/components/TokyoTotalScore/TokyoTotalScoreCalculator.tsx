@@ -13,7 +13,12 @@ const ESAT_GRADES = [
   { grade: 'なし', score: 0, label: '未受験・対象外' },
 ];
 
-export function TokyoTotalScoreCalculator() {
+interface TokyoTotalScoreCalculatorProps {
+  /** 入力後、総合得点(1020点満点)の実測値を親へ通知（結果連動の名簿/送客導線用）。 */
+  onResult?: (r: { total: number; max: number } | null) => void;
+}
+
+export function TokyoTotalScoreCalculator({ onResult }: TokyoTotalScoreCalculatorProps = {}) {
   const [scoreInput, setScoreInput] = React.useState('');
   const [naishinInput, setNaishinInput] = React.useState('');
   const [esatGrade, setEsatGrade] = React.useState('A');
@@ -31,6 +36,11 @@ export function TokyoTotalScoreCalculator() {
   const percent = (total / 1020) * 100;
 
   const hasInput = scoreInput !== '' || naishinInput !== '';
+
+  // 総合得点の実測値を親へ通知（結果連動でCTAを個別化＝カード/保護者バトンを点灯）。
+  React.useEffect(() => {
+    onResult?.(hasInput ? { total, max: 1020 } : null);
+  }, [hasInput, total, onResult]);
 
   const reset = () => {
     setScoreInput('');

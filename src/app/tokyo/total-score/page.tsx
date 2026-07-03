@@ -7,10 +7,8 @@ import { WebApplicationSchema } from '@/components/StructuredData/WebApplication
 import { HowToSchema } from '@/components/StructuredData/HowToSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
-import { TokyoTotalScoreCalculator } from '@/components/TokyoTotalScore/TokyoTotalScoreCalculator';
-import { SaveResultCTA } from '@/components/SaveResultCTA';
+import { TokyoTotalScoreResultFlow } from '@/components/TokyoTotalScore/TokyoTotalScoreResultFlow';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
-import { ParentCostBridge } from '@/components/ParentCostBridge';
 
 export const metadata: Metadata = {
   title: '都立高校 総合得点 計算サイト【1020点満点】学力検査・調査書点・ESAT-J | My Naishin',
@@ -133,20 +131,8 @@ export default function TokyoTotalScorePage() {
             </div>
           </section>
 
-          {/* Calculator */}
-          <TokyoTotalScoreCalculator />
-
-          {/* 結果保存・名簿化（堀A） */}
-          <ParentCostBridge prefectureName="東京都" className="mb-6" />
-
-          <SaveResultCTA
-            source="prefecture"
-            prefectureCode="tokyo"
-            prefectureName="東京都"
-            className="mt-6"
-            heading="この総合得点と「あと何点」を、忘れないうちに受け取りませんか？"
-            body="総合得点アップのコツ・日比谷や西など志望校の最新ボーダー・出願スケジュールを、受験本番まで無料でお届けします。LINEかメールで、いつでも解除できます。"
-          />
+          {/* Calculator＋結果連動の名簿/送客導線（総合得点の実測値をCTAへ配線＝成績カード/保護者バトン点灯） */}
+          <TokyoTotalScoreResultFlow />
 
           {/* 計算式の解説 */}
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
