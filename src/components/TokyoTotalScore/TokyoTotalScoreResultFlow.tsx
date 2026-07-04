@@ -5,6 +5,8 @@ import * as React from 'react';
 import { TokyoTotalScoreCalculator } from '@/components/TokyoTotalScore/TokyoTotalScoreCalculator';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { ParentCostBridge } from '@/components/ParentCostBridge';
+import { ParentWindowBridge } from '@/components/ParentWindowBridge';
+import { ShindanEntryLink } from '@/components/ShindanEntryLink';
 
 /**
  * 都立総合得点（1020点満点・買い意図最濃・CTR15.8%）の結果連動 換金フロー。
@@ -16,6 +18,16 @@ export function TokyoTotalScoreResultFlow() {
   return (
     <>
       <TokyoTotalScoreCalculator onResult={setResult} />
+
+      {/* 保護者ウィンドウ（三者面談・出願期だけ点灯）：都立総合得点の現在地＋成績カードを面談へ持って行く導線 */}
+      <ParentWindowBridge
+        className="mb-6"
+        metricLabel="総合得点"
+        score={result?.total}
+        max={result?.max}
+        prefectureCode="tokyo"
+        prefectureName="東京都"
+      />
 
       <ParentCostBridge prefectureName="東京都" className="mb-6" />
 
@@ -35,6 +47,9 @@ export function TokyoTotalScoreResultFlow() {
           body="総合得点アップのコツ・日比谷や西など志望校の最新ボーダー・出願スケジュールを、受験本番まで無料でお届けします。LINEかメールで、いつでも解除できます。"
         />
       </div>
+
+      {/* 塾診断ファネルへの入口（結果に合う塾を無料診断） */}
+      <ShindanEntryLink className="mt-6" />
     </>
   );
 }

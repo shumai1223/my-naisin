@@ -5,6 +5,8 @@ import * as React from 'react';
 import InteractiveCalculator from '@/components/Calculator/InteractiveCalculatorWrapper';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { ParentCostBridge } from '@/components/ParentCostBridge';
+import { ParentWindowBridge } from '@/components/ParentWindowBridge';
+import { ShindanEntryLink } from '@/components/ShindanEntryLink';
 
 interface NaishinResultFlowProps {
   prefectureCode: string;
@@ -51,8 +53,21 @@ export function NaishinResultFlow({ prefectureCode, prefectureName, maxScore }: 
         />
       </div>
 
+      {/* 保護者ウィンドウ（三者面談・出願期だけ点灯）：内申点の現在地＋成績カードを面談へ持って行く導線 */}
+      <ParentWindowBridge
+        className="mt-6"
+        metricLabel="内申点"
+        score={result?.total}
+        max={result?.max}
+        prefectureCode={prefectureCode}
+        prefectureName={prefectureName}
+      />
+
       {/* 結果直後の同スケール導線（生徒→保護者）：権限ズレを避け、購入を迫らず学費/塾代の情報面へ */}
       <ParentCostBridge prefectureName={prefectureName} />
+
+      {/* 塾診断ファネルへの入口（結果に合う塾を無料診断） */}
+      <ShindanEntryLink className="mt-6" />
     </>
   );
 }

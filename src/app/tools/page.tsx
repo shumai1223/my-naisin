@@ -231,6 +231,14 @@ const TOOL_GROUPS: { id: string; heading: string; tools: Tool[] }[] = [
         icon: TrendingUp,
         color: 'green',
       },
+      {
+        title: '塾診断（結果に合う塾を無料診断）',
+        description: '県・学年・目標との差・希望形態・状況から、お子さまに合う塾・家庭教師を診断',
+        features: ['提携中の塾から診断', 'オンライン/対面で選ぶ', '難関・不登校にも対応', '無料体験・無料相談のみ'],
+        href: '/juku-shindan',
+        icon: Target,
+        color: 'orange',
+      },
     ],
   },
   {

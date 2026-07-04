@@ -6,6 +6,8 @@ import { HyoteiHeikinCalculator } from '@/components/HyoteiHeikin/HyoteiHeikinCa
 import { HyoteiResultActions } from '@/components/HyoteiHeikin/HyoteiResultActions';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
+import { ParentWindowBridge } from '@/components/ParentWindowBridge';
+import { ShindanEntryLink } from '@/components/ShindanEntryLink';
 
 /**
  * /hyotei-heikin（CTR13.5%・高intent）の結果連動 換金フロー。
@@ -46,6 +48,12 @@ export function HyoteiResultFlow() {
           }
         />
       </div>
+
+      {/* 保護者ウィンドウ（三者面談・出願期だけ点灯）：評定平均の現在地を面談へ持って行く導線 */}
+      <ParentWindowBridge className="mt-6" metricLabel="評定平均" score={typeof value === 'number' ? value : undefined} />
+
+      {/* 塾診断ファネルへの入口（結果に合う塾を無料診断） */}
+      <ShindanEntryLink className="mt-6" />
     </>
   );
 }

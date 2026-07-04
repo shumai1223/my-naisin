@@ -6,6 +6,8 @@ import type { TotalScoreSystem } from '@/lib/total-score/types';
 import { TotalScoreCalculator } from '@/components/TotalScore/TotalScoreCalculator';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { ParentCostBridge } from '@/components/ParentCostBridge';
+import { ParentWindowBridge } from '@/components/ParentWindowBridge';
+import { ShindanEntryLink } from '@/components/ShindanEntryLink';
 
 interface TotalScoreResultFlowProps {
   system: TotalScoreSystem;
@@ -25,6 +27,16 @@ export function TotalScoreResultFlow({ system, saveHeading, saveBody }: TotalSco
     <>
       <TotalScoreCalculator system={system} onResult={setResult} />
 
+      {/* 保護者ウィンドウ（三者面談・出願期だけ点灯）：総合得点の現在地＋成績カードを面談へ持って行く導線 */}
+      <ParentWindowBridge
+        className="mb-6"
+        metricLabel="総合得点"
+        score={result?.total}
+        max={result?.max}
+        prefectureCode={system.code}
+        prefectureName={system.name}
+      />
+
       <ParentCostBridge prefectureName={system.name} className="mb-6" />
 
       <div id="save-result" className="scroll-mt-24">
@@ -43,6 +55,9 @@ export function TotalScoreResultFlow({ system, saveHeading, saveBody }: TotalSco
           body={saveBody}
         />
       </div>
+
+      {/* 塾診断ファネルへの入口（結果に合う塾を無料診断） */}
+      <ShindanEntryLink className="mt-6" />
     </>
   );
 }

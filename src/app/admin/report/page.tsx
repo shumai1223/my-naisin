@@ -10,8 +10,9 @@ import {
   type ClickAggRow,
 } from '@/lib/clicks-db';
 import { classifyClick, type ClickTrust } from '@/lib/bot-filter';
-import { getLeadSummary } from '@/lib/leads-db';
+import { getLeadSummary, getLeadDailyCounts } from '@/lib/leads-db';
 import { getApiKeyStats } from '@/lib/api-keys';
+import { evaluateJulyGate, bucketDailyByWeek, type GateVerdict } from '@/lib/velocity';
 import { countActiveSubscriptions } from '@/lib/push-db';
 import {
   economicsFor,
@@ -189,17 +190,47 @@ export default async function AdminReportPage({
   const trustedOnly = sp.clicks !== 'all';
   const to = { trustedOnly };
 
-  const [rows, trend, refRows, compare, leads, pushCount, recentClicks, apiKeys, trust] = await Promise.all([
-    getClickSummary(days, to),
-    getClickTrend(trendDays, trendView, to),
-    getRefererSummary(days),
-    getClickPeriodComparison(days, to),
-    getLeadSummary(20),
-    countActiveSubscriptions(),
-    getRecentClicks(50),
-    getApiKeyStats(50),
-    getClickTrustCounts(days),
-  ]);
+  const [rows, trend, refRows, compare, leads, pushCount, recentClicks, apiKeys, trust, weeklyClickTrend, leadDaily] =
+    await Promise.all([
+      getClickSummary(days, to),
+      getClickTrend(trendDays, trendView, to),
+      getRefererSummary(days),
+      getClickPeriodComparison(days, to),
+      getLeadSummary(20),
+      countActiveSubscriptions(),
+      getRecentClicks(50),
+      getApiKeyStats(50),
+      getClickTrustCounts(days),
+      getClickTrend(56, 'day', to),
+      getLeadDailyCounts(56),
+    ]);
+
+  // ── 今季の桁レバー（Build 3）：7/20 反証ゲート＋週次velocity ──────────────────
+  // 発生（conversions）は D1 に無い（ASP管理画面が一次）ため 0 で評価する＝GO判定は本人がASPで確認して読む。
+  // クリックの今季/前季は表示中の期間（days）で比較。
+  const gate = evaluateJulyGate({
+    clicks: compare.current,
+    clicksPrev: compare.previous,
+    leads: leads.total,
+    conversions: 0,
+  });
+  const weeklyClicks = bucketDailyByWeek(
+    weeklyClickTrend.map((r) => ({ date: r.bucket, count: r.clicks })),
+    8
+  );
+  const weeklyLeads = bucketDailyByWeek(
+    leadDaily.map((r) => ({ date: r.date, count: r.n })),
+    8
+  );
+  const maxWeeklyClicks = Math.max(1, ...weeklyClicks.map((w) => w.count));
+  const maxWeeklyLeads = Math.max(1, ...weeklyLeads.map((w) => w.count));
+  const GATE_STYLE: Record<GateVerdict, { badge: string; ring: string }> = {
+    pending: { badge: 'bg-slate-100 text-slate-600', ring: 'border-slate-200' },
+    go: { badge: 'bg-emerald-100 text-emerald-700', ring: 'border-emerald-300' },
+    iterate: { badge: 'bg-amber-100 text-amber-700', ring: 'border-amber-300' },
+    pivot: { badge: 'bg-rose-100 text-rose-700', ring: 'border-rose-300' },
+  };
+  const gateStyle = GATE_STYLE[gate.verdict];
 
   // 直近クリックの信頼度分類（明細＋サマリ）。
   const classified = recentClicks.map((r) => ({ row: r, trust: classifyClick({ userAgent: r.user_agent, referer: r.referer }) }));
@@ -374,6 +405,84 @@ export default async function AdminReportPage({
             </div>
             <div className="text-[11px] text-slate-500">Push {pushCount} / 停止 {leads.unsubscribed}</div>
           </div>
+        </div>
+
+        {/* 今季の桁レバー（7/20 反証ゲート＋週次velocity）＝日曜60分でここだけ見る統治装置 */}
+        <div className="mt-6">
+          <h2 className={sectionTitle}>今季の桁レバー ― 7/20 反証ゲート</h2>
+          <p className="mt-0.5 text-[11px] leading-relaxed text-slate-400">
+            桁を動かすのは保護者起点クリック（C_p）のみ。7/20 に「クリックN倍／発生M件」で GO / ITERATE / PIVOT を判定する。
+            ¥予測はしない＝先行指標だけで読む。<strong>発生（conversions）はASP管理画面が一次</strong>（この画面では0で評価）。
+          </p>
+
+          {/* ゲート判定カード */}
+          <div className={`mt-2 rounded-xl border-2 ${gateStyle.ring} bg-white p-4 shadow-sm`}>
+            <div className="flex flex-wrap items-center gap-2">
+              <span className={`rounded-full px-2.5 py-1 text-xs font-black ${gateStyle.badge}`}>{gate.verdictLabel}</span>
+              <span className="text-xs text-slate-500">
+                {gate.decided ? `判定日 ${gate.deadline} 到達` : `判定日 ${gate.deadline}（あと${gate.daysLeft}日）`}
+              </span>
+            </div>
+            <p className="mt-2 text-sm leading-relaxed text-slate-700">{gate.rationale}</p>
+            <div className="mt-3 grid grid-cols-2 gap-3 md:grid-cols-4">
+              <div>
+                <div className="text-[11px] text-slate-500">クリック前季比</div>
+                <div className="mt-0.5 text-lg font-black tabular-nums text-slate-900">{gate.clickMultipleLabel}</div>
+              </div>
+              <div>
+                <div className="text-[11px] text-slate-500">今季 / 前季クリック</div>
+                <div className="mt-0.5 text-lg font-black tabular-nums text-slate-900">
+                  {gate.clicks.toLocaleString('ja-JP')}
+                  <span className="text-xs font-normal text-slate-400"> / {gate.clicksPrev.toLocaleString('ja-JP')}</span>
+                </div>
+              </div>
+              <div>
+                <div className="text-[11px] text-slate-500">発生（ASP実測）</div>
+                <div className="mt-0.5 text-lg font-black tabular-nums text-slate-900">{gate.conversions}</div>
+              </div>
+              <div>
+                <div className="text-[11px] text-slate-500">本物リード累計</div>
+                <div className="mt-0.5 text-lg font-black tabular-nums text-emerald-700">{gate.leads.toLocaleString('ja-JP')}</div>
+              </div>
+            </div>
+          </div>
+
+          {/* 週次velocity（クリック / 新規リード） */}
+          <div className="mt-3 grid gap-4 md:grid-cols-2">
+            <div>
+              <div className="text-xs font-bold text-slate-600">週次クリック（{trustedOnly ? '信頼・' : ''}直近8週）</div>
+              <div className="mt-2 space-y-1.5 rounded-xl border border-slate-200 bg-white p-3 shadow-sm">
+                {weeklyClicks.map((w) => (
+                  <div key={w.weekStart} className="flex items-center gap-3 text-sm">
+                    <span className="w-12 shrink-0 text-right tabular-nums text-slate-500">{w.label}</span>
+                    <div className="flex-1">
+                      <Bar value={w.count} max={maxWeeklyClicks} className="bg-emerald-500" />
+                    </div>
+                    <span className="w-10 shrink-0 text-right font-bold tabular-nums text-slate-700">{w.count}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div>
+              <div className="text-xs font-bold text-slate-600">週次 新規リード（直近8週）</div>
+              <div className="mt-2 space-y-1.5 rounded-xl border border-slate-200 bg-white p-3 shadow-sm">
+                {weeklyLeads.map((w) => (
+                  <div key={w.weekStart} className="flex items-center gap-3 text-sm">
+                    <span className="w-12 shrink-0 text-right tabular-nums text-slate-500">{w.label}</span>
+                    <div className="flex-1">
+                      <Bar value={w.count} max={maxWeeklyLeads} className="bg-sky-500" />
+                    </div>
+                    <span className="w-10 shrink-0 text-right font-bold tabular-nums text-slate-700">{w.count}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <p className="mt-2 text-[11px] leading-relaxed text-slate-400">
+            ※ line_friend_click / lead_submit の placement別（保護者起点クリックの主計器）は GA4 で本人が確認する
+            （サイト側D1は /go 経由のアフィリクリックのみ計器化。LINE友だち追加・名簿送信はGA4イベント）。
+          </p>
         </div>
 
         {/* クリック推移（折れ線＋表・日/時間切替・ホバーで件数表示） */}

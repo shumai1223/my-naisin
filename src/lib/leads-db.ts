@@ -141,6 +141,38 @@ export interface LeadSummary {
   recent: LeadRecentRow[];
 }
 
+export interface LeadDailyRow {
+  /** 'YYYY-MM-DD'（UTC）。 */
+  date: string;
+  n: number;
+}
+
+/**
+ * 直近 N 日の「新規リード」を日別に集計（名簿velocityの週次バケットの素データ＝Build 3）。
+ * 取得の velocity を測る目的なので、後から unsubscribed になった行も“獲得”として数える（フィルタしない）。
+ * バインディング未設定なら空配列。呼び出し側で velocity.bucketDailyByWeek に渡して週次に畳む。
+ */
+export async function getLeadDailyCounts(days = 56): Promise<LeadDailyRow[]> {
+  try {
+    const db = await getLeadsDb();
+    if (!db) return [];
+    const since = Math.max(1, Math.min(365, Math.round(days)));
+    const { results } = await db
+      .prepare(
+        `SELECT date(created_at) AS date, COUNT(*) AS n
+         FROM leads
+         WHERE created_at >= datetime('now', ?)
+         GROUP BY date ORDER BY date ASC`
+      )
+      .bind(`-${since} days`)
+      .all<LeadDailyRow>();
+    return results ?? [];
+  } catch (err) {
+    console.error('getLeadDailyCounts skipped:', err instanceof Error ? err.message : err);
+    return [];
+  }
+}
+
 /**
  * 名簿サマリ（管理ダッシュボード用）。バインディング未設定なら全ゼロ。
  * 件数は配信可能（unsubscribed=0）を基準にし、recent は最新 N 件。

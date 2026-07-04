@@ -9,6 +9,8 @@
  *
  *   # レポート生成（標準出力 / --out でファイル保存）：
  *   npx tsx scripts/generate-sales-report.ts --clicks=clicks.json --month=2026年8月 --out=report-2026-08.md
+ *   # 7/20 反証ゲートに実測を載せる（任意・既定0）：--prev-clicks=前季クリック --leads=名簿累計 --conversions=ASP発生
+ *   npx tsx scripts/generate-sales-report.ts --clicks=clicks.json --prev-clicks=120 --leads=12 --conversions=0
  *
  * 思想（[[fable5-master-plan-2026-06]] / [[honbun-portfolio-strategy]]）：
  *   来年3月に塾・個別指導へ「送客実績＋CPA交渉」を持ち込むには、実績データを今から貯めて
@@ -27,6 +29,7 @@ import {
   yen,
 } from '@/lib/affiliate-economics';
 import { auditPlacementOffers } from '@/lib/lead-config';
+import { evaluateJulyGate } from '@/lib/velocity';
 
 function arg(name: string): string | undefined {
   const hit = process.argv.find((a) => a.startsWith(`--${name}=`));
@@ -91,6 +94,18 @@ function main() {
   const { byProgram, byPlacement, byPref } = aggregate(rows);
 
   const totalClicks = byProgram.reduce((s, p) => s + p.clicks, 0);
+
+  // 今季の桁レバー（7/20 反証ゲート）。発生・名簿・前季クリックは実測が一次なので引数で受ける（既定0）。
+  const num = (v: string | undefined) => {
+    const n = Number(v);
+    return Number.isFinite(n) ? n : 0;
+  };
+  const gate = evaluateJulyGate({
+    clicks: totalClicks,
+    clicksPrev: num(arg('prev-clicks')),
+    leads: num(arg('leads')),
+    conversions: num(arg('conversions')),
+  });
   const totalLeads = byProgram.reduce((s, p) => s + estimatedLeads(p.id, p.clicks), 0);
   const totalRevenue = byProgram.reduce((s, p) => s + estimatedRevenueYen(p.id, p.clicks), 0);
 
@@ -122,6 +137,16 @@ function main() {
 - 総クリック（実数）: **${totalClicks.toLocaleString('ja-JP')}**
 - 推定リード数（仮定）: **${totalLeads.toFixed(1)}**
 - 推定発生額（仮定）: **${yen(totalRevenue)}**
+
+## 今季の桁レバー（7/20 反証ゲート）
+
+> 桁を動かすのは保護者起点クリック（C_p）のみ。7/20 に「クリックN倍／発生M件」で GO / ITERATE / PIVOT を判定。
+> ¥予測はしない＝先行指標だけで採点。発生・名簿・前季クリックは実測が一次（\`--conversions=\` / \`--leads=\` / \`--prev-clicks=\` で指定）。
+
+- 判定: **${gate.verdictLabel}**（${gate.decided ? `判定日 ${gate.deadline} 到達` : `判定日 ${gate.deadline}・あと${gate.daysLeft}日`}）
+- クリック前季比: **${gate.clickMultipleLabel}**（今季 ${gate.clicks.toLocaleString('ja-JP')} / 前季 ${gate.clicksPrev.toLocaleString('ja-JP')}）
+- 発生（ASP実測）: **${gate.conversions}** ／ 本物リード累計: **${gate.leads.toLocaleString('ja-JP')}**
+- 判断: ${gate.rationale}
 
 ## プログラム別
 
