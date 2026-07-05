@@ -98,6 +98,7 @@ async function main() {
     return;
   }
 
+  let allOk = true;
   for (let i = 0; i < toPing.length; i += BATCH) {
     const chunk = toPing.slice(i, i + BATCH);
     const { status, ok } = await pingBatch(chunk);
@@ -105,7 +106,15 @@ async function main() {
     if (!ok && status !== 200 && status !== 202) {
       // 422=URL/keyの不一致など。CIを赤くして気づけるように。
       process.exitCode = 1;
+      allOk = false;
     }
+  }
+
+  if (!allOk) {
+    // 送信失敗時はスナップショットを更新しない＝次回実行時に同じURLを「新規」として再送信対象にする
+    // （更新してしまうと失敗したURLが「既知」扱いになり、二度と通知されなくなるため）。
+    console.log('[indexnow] 一部送信失敗のためスナップショットは更新しません（次回再送信されます）。');
+    return;
   }
 
   await saveSnapshot(current);
