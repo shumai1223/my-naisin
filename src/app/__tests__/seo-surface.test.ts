@@ -4,12 +4,43 @@
  * SEO/PWA表層（sitemap・robots・manifest）の回帰テスト。
  * 新ページの登録漏れ・公開APIのrobots許可漏れ・マニフェスト破損を検知する。
  */
+import fs from 'fs';
+import path from 'path';
 import sitemap from '@/app/sitemap';
 import robots from '@/app/robots';
 import manifest from '@/app/manifest';
 import { PREFECTURES } from '@/lib/prefectures';
+import { SITEMAP_EXCLUDED_ROUTES } from '@/lib/page-registry';
 
 const BASE = 'https://my-naishin.com';
+
+/** src/app 配下を再帰的に走査し、静的ページ（page.tsx）のURLを列挙する。 */
+function walk(dir: string, acc: string[] = []): string[] {
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const full = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      if (entry.name === 'node_modules' || entry.name === '.next') continue;
+      walk(full, acc);
+    } else if (entry.name === 'page.tsx') {
+      acc.push(full);
+    }
+  }
+  return acc;
+}
+
+/** page.tsx のファイルパス → ルート。動的セグメント・APIはnull。 */
+function pageFileToRoute(appDir: string, file: string): string | null {
+  let rel = path.relative(appDir, file).replace(/\\/g, '/');
+  rel = rel.replace(/\/?page\.tsx$/, '');
+  rel = rel
+    .split('/')
+    .filter((seg) => !(seg.startsWith('(') && seg.endsWith(')')))
+    .join('/');
+  const route = '/' + rel;
+  if (route.startsWith('/api')) return null;
+  if (route.includes('[')) return null; // 動的ルートは prefecture/blog/total-score 経路で別途カバー
+  return route === '/' ? '' : route.replace(/\/$/, '');
+}
 
 describe('sitemap()', () => {
   const entries = sitemap();
@@ -41,6 +72,16 @@ describe('sitemap()', () => {
       expect(e.url.startsWith(BASE)).toBe(true);
       expect(typeof e.priority).toBe('number');
     }
+  });
+
+  test('src/app配下の全静的ページがsitemapに登録されている（登録漏れの再発防止）', () => {
+    const appDir = path.join(__dirname, '..');
+    const pageFiles = walk(appDir);
+    const routes = [...new Set(pageFiles.map((f) => pageFileToRoute(appDir, f)).filter((r): r is string => r !== null))];
+    const missing = routes.filter(
+      (route) => !SITEMAP_EXCLUDED_ROUTES.includes(route) && !urls.includes(`${BASE}${route}`)
+    );
+    expect(missing).toEqual([]);
   });
 });
 
