@@ -5,8 +5,8 @@ import { Calculator, ChevronRight, Home, BookOpen, AlertCircle, Award } from 'lu
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { HowToSchema } from '@/components/StructuredData/HowToSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
-import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
+import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { ParentCostBridge } from '@/components/ParentCostBridge';
 
@@ -249,30 +249,27 @@ export default function AichiTotalScorePage() {
             </div>
           </section>
 
-          {/* アフィリエイト */}
+          {/* 2タッチ目：AI個別指導（上のParentLeadCTAとは別プログラムで多様性確保。旧Z会/サプリ¥1.5-5.4/clickの代替） */}
           <section className="mb-8 rounded-2xl border border-slate-200 bg-white px-6 py-6 text-center shadow-sm">
             <div className="text-sm font-bold text-slate-700 mb-1">
-              目標点まであと一歩のあなたへ
+              AIが弱点を自動分析する個別指導
             </div>
             <div className="text-xs text-slate-500 mb-4 leading-relaxed">
-              愛知県公立高校の対策には<AffiliateAd id="zkai-text-middle" hideLabel auditHide />（PR）が定番
+              <AffiliateAd id="atama-text" hideLabel />（PR）の無料体験で、今の学力に必要な対策を確認できます。
             </div>
-            <div className="hidden md:block">
-              <AffiliateAd id="zkai-banner" />
-            </div>
-            <div className="md:hidden">
-              <AffiliateAd id="sapuri-banner-300" />
-            </div>
+            <AffiliateAd id="atama-banner" />
           </section>
 
-          {/* 保護者向けリード（換金の本命：資料請求送客） */}
+          {/* 保護者向けリード（換金の本命：資料請求送客。愛知は関東/関西の地盤塾が無いため全国オンライン対応のそら塾へ。
+              旧Z会/サプリ¥1.5-5.4/clickブロックは低EVで撤去。旧affiliateId=morijuku-textは関東限定チェーンで
+              愛知に校舎が無い地域ミスマッチだったため是正） */}
           <ParentLeadCTA
             className="mb-8"
             heading="愛知の志望校、評価方法に合った対策ができていますか？"
-            body="評価方法Ⅰ〜Ⅴで必要な得点配分は変わります。お子さまに合った対策を、塾の無料体験で具体的に確認できます（費用はかかりません）。"
-            affiliateId="morijuku-text"
-            ctaText="無料体験を申し込む（森塾）"
-            note="【森塾】の無料体験授業（PR）"
+            body="評価方法Ⅰ〜Ⅴで必要な得点配分は変わります。お子さまに合った対策を、全国オンライン対応の個別指導の無料体験で具体的に確認できます（費用はかかりません）。"
+            affiliateId="sora-juku-text"
+            ctaText="無料体験を申し込む（そら塾）"
+            note="【そら塾】オンライン個別指導の無料体験（PR）"
           />
 
           {/* よくある質問 */}

@@ -6,8 +6,8 @@ import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
 import { HowToSchema } from '@/components/StructuredData/HowToSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
-import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { TokyoTotalScoreResultFlow } from '@/components/TokyoTotalScore/TokyoTotalScoreResultFlow';
+import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 
 export const metadata: Metadata = {
@@ -321,23 +321,15 @@ export default function TokyoTotalScorePage() {
             </p>
           </section>
 
-          {/* アフィリエイト */}
+          {/* 2タッチ目：AI個別指導（下のParentLeadCTAとは別プログラムで多様性確保。旧Z会/サプリ¥1.5-5.4/clickの代替） */}
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white px-6 py-6 text-center shadow-sm">
             <div className="text-sm font-bold text-slate-700 mb-1">
-              目標点まであと一歩のあなたへ
+              AIが弱点を自動分析する個別指導
             </div>
             <div className="text-xs text-slate-500 mb-4 leading-relaxed">
-              内申点・当日点の両方を伸ばす学習なら<AffiliateAd id="zkai-text-middle" hideLabel auditHide />（PR）が定番
+              <AffiliateAd id="atama-text" hideLabel />（PR）の無料体験で、今の学力に必要な対策を確認できます。
             </div>
-            <div className="hidden md:block">
-              <AffiliateAd id="zkai-banner" />
-            </div>
-            <div className="md:hidden">
-              <AffiliateAd id="sapuri-banner-300" />
-            </div>
-            <div className="mt-3 text-xs">
-              <AffiliateAd id="zkai-text-request" hideLabel auditHide />（PR）から詳細をチェック
-            </div>
+            <AffiliateAd id="atama-banner" />
           </section>
 
           {/* 合格基準点シミュレーション（SEO: 都立高校 合格基準点 シュミレーション / 都立 点数 計算） */}

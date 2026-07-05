@@ -16,6 +16,7 @@ import { BlogShareButtons } from '@/components/Blog/BlogShareButtons';
 import { ReadingProgressBar } from '@/components/Blog/ReadingProgressBar';
 import { BackToTopButton } from '@/components/Blog/BackToTopButton';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
+import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { AdSlot } from '@/components/AdSlot';
 import { AD_SLOTS } from '@/lib/ad-slots';
 import { FutoukouLeadCTA } from '@/components/FutoukouLeadCTA';
@@ -237,14 +238,12 @@ export default async function BlogPostPage({ params }: PageProps) {
           <meta itemProp="author" content="しゅうまい" />
           <meta itemProp="keywords" content={post.tags.join(', ')} />
 
-          {/* 記事冒頭の関連サービスCTA（コンパクト） */}
+          {/* 記事冒頭の2タッチ目：AI個別指導（末尾のParentLeadCTA(blog=そら塾)とは別プログラムで多様性確保。旧サプリ/Z会¥1.5-5.4/clickの代替） */}
           <div className="mb-8 rounded-xl border border-amber-200 bg-amber-50/60 px-4 py-3">
             <p className="text-xs leading-relaxed text-slate-700">
-              <span className="text-slate-500">関連教材：</span>
-              <AffiliateAd id="sapuri-text" className="mx-1" hideLabel auditHide />
-              （月額2,178円）／
-              <AffiliateAd id="zkai-text-middle" className="mx-1" hideLabel auditHide />
-              （PR）が内申点アップの定番。
+              <span className="text-slate-500">関連サービス：</span>
+              <AffiliateAd id="atama-text" className="mx-1" hideLabel />
+              （PR）AIが弱点を自動分析する個別指導の無料体験。
             </p>
           </div>
 
@@ -346,16 +345,8 @@ export default async function BlogPostPage({ params }: PageProps) {
             汎用の塾/通信教育CTAより、不登校記事の読者（在宅・内申不問の学びを探す保護者）に文脈一致する。 */}
         {post.tags.includes('不登校') && <FutoukouLeadCTA className="mt-10" />}
 
-        {/* 記事末尾の関連サービス広告 */}
-        <div className="mt-10 rounded-2xl border border-slate-200 bg-white px-6 py-6 text-center shadow-sm">
-          <div className="mb-2 text-sm font-bold text-slate-700">
-            記事を読んだあなたへ
-          </div>
-          <div className="mb-4 text-xs text-slate-500">
-            内申点を上げる第一歩は、毎日の学習習慣から。月額2,178円のオンライン学習サービス。
-          </div>
-          <AffiliateAd id="sapuri-banner-300" trackView viewPlacement="blog" />
-        </div>
+        {/* 記事末尾の関連サービスCTA（blog placement＝EV¥84/clickのそら塾へ統一。旧サプリ¥5.4/clickは撤去） */}
+        <ParentLeadCTA className="mt-10" placement="blog" />
 
         {/* AdSense床（承認＝NEXT_PUBLIC_ADSENSE_ENABLED=1 まで描画されない。読了直後の高エンゲージ位置） */}
         <div className="mt-8">

@@ -25,6 +25,7 @@ import { PrefecturePillarLinks } from '@/components/PrefecturePillarLinks';
 import { HighSchoolBorderlineTable } from '@/components/HighSchoolBorderlineTable';
 import { TrustInfo } from '@/components/TrustInfo';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
+import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 
 interface PrefecturePageProps {
   params: Promise<{
@@ -200,26 +201,8 @@ export default async function PrefecturePage({ params }: PrefecturePageProps) {
                 </Link>
               </section>
 
-              {/* 通信教育の紹介（Z会バナー＋テキスト・モバイル対応） */}
-              <section className="rounded-3xl border border-slate-200 bg-white px-6 py-6 shadow-sm text-center">
-                <div className="text-sm font-bold text-slate-700 mb-1">
-                  {pref.name}の高校入試に向けて
-                </div>
-                <div className="text-xs text-slate-500 mb-4">
-                  <AffiliateAd id="zkai-text-advanced" hideLabel />（PR）— 内申点アップから難関校対策まで対応する通信教育。
-                </div>
-                {/* Desktop */}
-                <div className="hidden md:block">
-                  <AffiliateAd id="zkai-banner" />
-                </div>
-                {/* Mobile */}
-                <div className="md:hidden">
-                  <AffiliateAd id="sapuri-banner-300" />
-                </div>
-                <div className="mt-3 text-xs">
-                  まずは<AffiliateAd id="zkai-text-request" className="mx-1" hideLabel />（PR）から
-                </div>
-              </section>
+              {/* 保護者リード（県×面エンジンで自動解決：関東=森塾/関西=キャンパス/他=全国オンライン塾。旧Z会/サプリ¥1.5-28.8/clickは撤去） */}
+              <ParentLeadCTA prefectureCode={code} placement="prefecture" />
 
               {/* 関連コラム */}
               <section>

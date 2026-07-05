@@ -229,14 +229,6 @@ export default function HyoteiHeikinPage() {
             </div>
           </div>
 
-          {/* ファーストビュー直下のPRストリップ */}
-          <div className="mb-6 rounded-xl border border-emerald-200 bg-gradient-to-r from-emerald-50 via-teal-50 to-emerald-50 px-4 py-3">
-            <p className="text-xs text-slate-700 leading-relaxed text-center">
-              評定平均を上げる定番教材：<AffiliateAd id="zkai-text-middle" className="mx-1" hideLabel />（PR）/
-              <AffiliateAd id="zkai-text-request" className="mx-1" hideLabel />
-            </p>
-          </div>
-
           {/* What is 評定平均 */}
           <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
@@ -260,26 +252,24 @@ export default function HyoteiHeikinPage() {
             <HyoteiResultFlow />
           </div>
 
-          {/* 計算結果直後の最高エンゲージ位置：Z会CTA */}
+          {/* 計算結果直後の最高エンゲージ位置：EV最上位のAI個別指導無料体験へ集中（旧Z会は低EVで撤去） */}
           <section className="mt-6 rounded-2xl border-2 border-emerald-300 bg-gradient-to-br from-emerald-50 to-teal-50 px-6 py-6 shadow-md text-center">
             <div className="text-base font-bold text-slate-800 mb-1">
               この評定平均を上げるなら
             </div>
             <div className="text-xs text-slate-600 mb-4 leading-relaxed">
-              内申点アップに直結する学習なら<AffiliateAd id="zkai-text-middle" hideLabel />（PR）。テキスト＋添削で定期テスト対策が万全。
+              内申点アップに直結する学習なら<AffiliateAd id="atama-text" hideLabel />（PR）。AIが弱点を自動分析する個別指導の無料体験。
             </div>
             <div className="hidden md:block">
-              <AffiliateAd id="zkai-banner" />
+              <AffiliateAd id="atama-banner" />
             </div>
             <div className="md:hidden">
-              <a
-                href="https://px.a8.net/svt/ejp?a8mat=4B3SN7+9TNI42+E0Q+CUQYA"
-                rel="nofollow sponsored noopener"
-                target="_blank"
-                className="block w-full rounded-xl bg-emerald-600 px-6 py-3.5 font-bold text-white shadow-lg transition-all hover:bg-emerald-700 active:scale-95"
-              >
-                無料で資料をもらう（PR）
-              </a>
+              <AffiliateAd
+                id="atama-text"
+                hideLabel
+                ctaText="無料体験を申し込む（PR）"
+                linkClassName="block w-full rounded-xl bg-emerald-600 px-6 py-3.5 font-bold text-white shadow-lg transition-all hover:bg-emerald-700 active:scale-95"
+              />
             </div>
           </section>
 
@@ -511,17 +501,8 @@ export default function HyoteiHeikinPage() {
             </div>
           </section>
 
-          {/* 中間広告：スタサプ + 松陰塾 */}
+          {/* 中間広告：自宅で個別指導 + オンライン個別指導（低EVのスタサプ¥5.4/clickは撤去） */}
           <section className="mt-8 grid gap-4 sm:grid-cols-2">
-            <div className="rounded-2xl border border-slate-200 bg-white px-5 py-5 text-center shadow-sm">
-              <div className="text-xs font-bold text-slate-700 mb-1">
-                スマホで全教科対策
-              </div>
-              <div className="text-[11px] text-slate-500 mb-3 leading-relaxed">
-                月額2,178円で5教科+実技
-              </div>
-              <AffiliateAd id="sapuri-banner-300" />
-            </div>
             <div className="rounded-2xl border border-slate-200 bg-white px-5 py-5 text-center shadow-sm">
               <div className="text-xs font-bold text-slate-700 mb-1">
                 自宅で個別指導
@@ -538,7 +519,7 @@ export default function HyoteiHeikinPage() {
               <div className="text-[11px] text-slate-500 mb-3 leading-relaxed">
                 先生1人に生徒2人まで・全国対応
               </div>
-              <AffiliateAd id="sora-juku-banner" auditHide />
+              <AffiliateAd id="sora-juku-banner" />
             </div>
           </section>
 
@@ -869,7 +850,6 @@ export default function HyoteiHeikinPage() {
             <div className="text-xs text-emerald-700 mb-4 leading-relaxed">
               総合型選抜・指定校推薦を狙うなら<AffiliateAd id="zkai-daigaku" hideLabel />（PR）や<AffiliateAd id="shinken-koukou" hideLabel placement="hyotei-koukou" />（PR）で高1から大学受験の基礎を固める
             </div>
-            <AffiliateAd id="atama-banner" auditHide />
           </section>
 
           {/* 評定平均と入試 */}
@@ -914,29 +894,6 @@ export default function HyoteiHeikinPage() {
                   <div className="text-xs">私立高校や入りやすい公立高校が選択肢に</div>
                 </div>
               </div>
-            </div>
-          </section>
-
-          {/* アフィリエイト */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white px-6 py-6 text-center shadow-sm">
-            <div className="text-sm font-bold text-slate-700 mb-1">
-              評定平均を上げたいあなたへ
-            </div>
-            <div className="text-xs text-slate-500 mb-4 leading-relaxed">
-              定期テスト対策で評定を底上げするなら<AffiliateAd id="zkai-text-middle" hideLabel />（PR）が定番
-            </div>
-            <div className="hidden md:block">
-              <AffiliateAd id="zkai-banner" auditHide />
-            </div>
-            <div className="md:hidden">
-              <AffiliateAd id="sapuri-banner-300" auditHide />
-            </div>
-            <div className="mt-3 text-xs">
-              <AffiliateAd id="zkai-text-request" className="mx-1" hideLabel auditHide />（PR）で詳細を確認
-            </div>
-            <div className="mt-4 border-t border-slate-100 pt-4">
-              <div className="text-xs text-slate-500 mb-2">成績保証制度ありの個別指導も選択肢に</div>
-              <AffiliateAd id="campus-banner" auditHide />
             </div>
           </section>
 

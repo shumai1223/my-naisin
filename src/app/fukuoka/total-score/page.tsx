@@ -5,8 +5,8 @@ import { Calculator, ChevronRight, Home, BookOpen, AlertCircle, Award } from 'lu
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { HowToSchema } from '@/components/StructuredData/HowToSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
-import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
+import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { ParentCostBridge } from '@/components/ParentCostBridge';
 
@@ -225,23 +225,18 @@ export default function FukuokaTotalScorePage() {
             body="内申(中3)・当日点の伸ばし方、修猷館・福岡など志望校の最新ボーダー、出願スケジュールを受験本番まで無料でお届けします。LINEかメールで、いつでも解除できます。"
           />
 
-          {/* アフィリエイト */}
+          {/* 2タッチ目：AI個別指導（下のParentLeadCTAとは別プログラムで多様性確保。旧Z会/サプリ¥1.5-5.4/clickの代替） */}
           <section className="mb-8 rounded-2xl border border-slate-200 bg-white px-6 py-6 text-center shadow-sm">
             <div className="text-sm font-bold text-slate-700 mb-1">
-              目標点まであと一歩のあなたへ
+              AIが弱点を自動分析する個別指導
             </div>
             <div className="text-xs text-slate-500 mb-4 leading-relaxed">
-              福岡県公立高校の対策には<AffiliateAd id="zkai-text-middle" hideLabel auditHide />（PR）が定番
+              <AffiliateAd id="atama-text" hideLabel />（PR）の無料体験で、今の学力に必要な対策を確認できます。
             </div>
-            <div className="hidden md:block">
-              <AffiliateAd id="zkai-banner" />
-            </div>
-            <div className="md:hidden">
-              <AffiliateAd id="sapuri-banner-300" />
-            </div>
+            <AffiliateAd id="atama-banner" />
           </section>
 
-          {/* 保護者向けリード */}
+          {/* 保護者向けリード（旧Z会/サプリ¥1.5-5.4/clickブロックは低EVで撤去） */}
           <ParentLeadCTA
             className="mb-8"
             heading="福岡の志望校、内申と当日点の両方が届いていますか？"

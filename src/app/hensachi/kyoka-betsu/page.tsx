@@ -128,14 +128,6 @@ export default function HensachiKyokaBetsuPage() {
             </div>
           </div>
 
-          {/* ファーストビュー直下PR */}
-          <div className="mb-6 rounded-xl border border-purple-200 bg-gradient-to-r from-purple-50 via-indigo-50 to-purple-50 px-4 py-3 text-center">
-            <p className="text-xs leading-relaxed text-slate-700">
-              苦手教科の底上げに：<AffiliateAd id="zkai-text-middle" className="mx-1" hideLabel />（PR）/
-              <AffiliateAd id="zkai-text-request" className="mx-1" hideLabel />
-            </p>
-          </div>
-
           {/* Calculator（教科別偏差値を同時算出） */}
           <HensachiCalculator />
 
@@ -209,14 +201,13 @@ export default function HensachiKyokaBetsuPage() {
             <HensachiClusterNav current="kyoka-betsu" />
           </div>
 
-          {/* アフィリエイト */}
+          {/* アフィリエイト（旧Z会/サプリ¥1.5-5.4/clickは撤去し、全国オンライン個別¥84/clickへ） */}
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white px-6 py-6 text-center shadow-sm">
             <div className="mb-1 text-sm font-bold text-slate-700">苦手教科を、効率よく底上げ</div>
             <div className="mb-4 text-xs leading-relaxed text-slate-500">
-              定期テスト対策の定番教材<AffiliateAd id="zkai-text-middle" hideLabel />（PR）で、教科ごとの土台を固める
+              苦手教科だけをピンポイントで底上げする<AffiliateAd id="sora-juku-text" hideLabel />（PR）。無料体験あり。
             </div>
-            <div className="hidden md:block"><AffiliateAd id="zkai-banner" auditHide /></div>
-            <div className="md:hidden"><AffiliateAd id="sapuri-banner-300" auditHide /></div>
+            <AffiliateAd id="sora-juku-banner" />
           </section>
 
           {/* FAQ */}

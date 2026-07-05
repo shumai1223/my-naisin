@@ -246,14 +246,6 @@ export default function HensachiPage() {
             </div>
           </div>
 
-          {/* ファーストビュー直下のPRストリップ */}
-          <div className="mb-6 rounded-xl border border-purple-200 bg-gradient-to-r from-purple-50 via-indigo-50 to-purple-50 px-4 py-3">
-            <p className="text-xs text-slate-700 leading-relaxed text-center">
-              偏差値を上げる定番教材：<AffiliateAd id="zkai-text-middle" className="mx-1" hideLabel />（PR）/
-              <AffiliateAd id="zkai-text-request" className="mx-1" hideLabel />
-            </p>
-          </div>
-
           {/* What is 偏差値 */}
           <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
@@ -301,26 +293,24 @@ export default function HensachiPage() {
             <HensachiClusterNav current="hub" />
           </div>
 
-          {/* 計算結果直後の最高エンゲージ位置：Z会CTA */}
+          {/* 計算結果直後の最高エンゲージ位置：EV最上位のAI個別指導無料体験へ集中（旧Z会は低EVで撤去） */}
           <section className="mt-6 rounded-2xl border-2 border-purple-300 bg-gradient-to-br from-purple-50 to-indigo-50 px-6 py-6 shadow-md text-center">
             <div className="text-base font-bold text-slate-800 mb-1">
               この偏差値を上げる、最短ルート
             </div>
             <div className="text-xs text-slate-600 mb-4 leading-relaxed">
-              <AffiliateAd id="zkai-text-advanced" hideLabel />（PR）— 添削指導で「テストで点を取れる思考力」を鍛える定番教材
+              <AffiliateAd id="atama-text" hideLabel />（PR）— AIが弱点を自動分析する個別指導の無料体験
             </div>
             <div className="hidden md:block">
-              <AffiliateAd id="zkai-banner" />
+              <AffiliateAd id="atama-banner" />
             </div>
             <div className="md:hidden">
-              <a
-                href="https://px.a8.net/svt/ejp?a8mat=4B3SN7+9TNI42+E0Q+CUQYA"
-                rel="nofollow sponsored noopener"
-                target="_blank"
-                className="block w-full rounded-xl bg-purple-600 px-6 py-3.5 font-bold text-white shadow-lg transition-all hover:bg-purple-700 active:scale-95"
-              >
-                無料で資料をもらう（PR）
-              </a>
+              <AffiliateAd
+                id="atama-text"
+                hideLabel
+                ctaText="無料体験を申し込む（PR）"
+                linkClassName="block w-full rounded-xl bg-purple-600 px-6 py-3.5 font-bold text-white shadow-lg transition-all hover:bg-purple-700 active:scale-95"
+              />
             </div>
           </section>
 
@@ -634,20 +624,15 @@ export default function HensachiPage() {
             </div>
           </section>
 
-          {/* 中間広告：スタサプ */}
+          {/* 中間広告：そら塾（全国オンライン個別・EV¥84/click。旧サプリ¥5.4/clickは低EVで撤去し高EV枠へ振替） */}
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white px-6 py-6 shadow-sm text-center">
             <div className="text-sm font-bold text-slate-700 mb-1">
-              スマホ・タブレットで全教科対策
+              全国どこでも受けられるオンライン個別指導
             </div>
             <div className="text-xs text-slate-500 mb-4 leading-relaxed">
-              月額2,178円で5教科+実技も学習できる<AffiliateAd id="sapuri-text" hideLabel />（PR）。無料体験あり。
+              苦手教科だけをピンポイントで底上げする<AffiliateAd id="sora-juku-text" hideLabel />（PR）。無料体験あり。
             </div>
-            <div className="hidden md:block">
-              <AffiliateAd id="sapuri-banner-468" />
-            </div>
-            <div className="md:hidden">
-              <AffiliateAd id="sapuri-banner-300" />
-            </div>
+            <AffiliateAd id="sora-juku-banner" />
           </section>
 
           {/* 中間広告：atama+ */}
@@ -658,7 +643,7 @@ export default function HensachiPage() {
             <div className="text-xs text-slate-500 mb-4 leading-relaxed">
               マンツーマンAI×担任サポート制の<AffiliateAd id="atama-text" hideLabel />（PR）。無料体験あり。
             </div>
-            <AffiliateAd id="atama-banner" auditHide />
+            <AffiliateAd id="atama-banner" />
           </section>
 
           {/* 偏差値と内申点の関係 */}
@@ -983,29 +968,6 @@ export default function HensachiPage() {
                   早く知っておくほど、志望校の選択肢も、必要な準備も変わります。高校生になったら、学力（偏差値）と費用の両面で進学を設計していきましょう。
                 </p>
               </div>
-            </div>
-          </section>
-
-          {/* アフィリエイト */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white px-6 py-6 text-center shadow-sm">
-            <div className="text-sm font-bold text-slate-700 mb-1">
-              偏差値を上げる学習教材
-            </div>
-            <div className="text-xs text-slate-500 mb-4 leading-relaxed">
-              定期テスト対策で偏差値を底上げするなら<AffiliateAd id="zkai-text-middle" hideLabel />（PR）が定番
-            </div>
-            <div className="hidden md:block">
-              <AffiliateAd id="zkai-banner" auditHide />
-            </div>
-            <div className="md:hidden">
-              <AffiliateAd id="sapuri-banner-300" auditHide />
-            </div>
-            <div className="mt-3 text-xs">
-              <AffiliateAd id="zkai-text-request" className="mx-1" hideLabel auditHide />（PR）で詳細を確認
-            </div>
-            <div className="mt-4 border-t border-slate-100 pt-4">
-              <div className="text-xs text-slate-500 mb-2">個別指導で効率よく偏差値を上げたい方に</div>
-              <AffiliateAd id="campus-banner" auditHide />
             </div>
           </section>
 

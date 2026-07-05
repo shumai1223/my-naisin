@@ -198,14 +198,13 @@ export default function HensachiMoshiPage() {
             />
           </div>
 
-          {/* アフィリエイト */}
+          {/* アフィリエイト（旧Z会/サプリ¥1.5-5.4/clickは撤去し、全国オンライン個別¥84/clickへ） */}
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white px-6 py-6 text-center shadow-sm">
             <div className="mb-1 text-sm font-bold text-slate-700">模試の点数を、確実に伸ばす</div>
             <div className="mb-4 text-xs leading-relaxed text-slate-500">
-              添削指導で「初見の問題でも解ける思考力」を鍛える<AffiliateAd id="zkai-text-advanced" hideLabel />（PR）
+              苦手分野だけをピンポイントで底上げする<AffiliateAd id="sora-juku-text" hideLabel />（PR）。無料体験あり。
             </div>
-            <div className="hidden md:block"><AffiliateAd id="zkai-banner" auditHide /></div>
-            <div className="md:hidden"><AffiliateAd id="sapuri-banner-300" auditHide /></div>
+            <AffiliateAd id="sora-juku-banner" />
           </section>
 
           {/* クラスタナビ */}

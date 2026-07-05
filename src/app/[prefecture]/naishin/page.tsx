@@ -28,6 +28,7 @@ import { NaishinResultFlow } from '@/components/Calculator/NaishinResultFlow';
 import { HighSchoolBorderlineTable } from '@/components/HighSchoolBorderlineTable';
 import { TrustInfo } from '@/components/TrustInfo';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
+import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { ParentLeadCTAExperiment } from '@/components/ParentLeadCTAExperiment';
 import { AnswerBox } from '@/components/AnswerBox';
 import { RelatedToolsSection } from '@/components/RelatedToolsSection';
@@ -419,38 +420,8 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
               maxScore={prefecture.maxScore}
             />
 
-            {/* 計算後・最高エンゲージ位置の Z会 CTA */}
-            <section className="rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-50 to-indigo-50 p-6 shadow-sm">
-              <div className="text-center">
-                <div className="mb-2 text-sm font-bold text-slate-700">
-                  内申点アップに通信教育という選択肢
-                </div>
-                <div className="mb-4 text-xs text-slate-500">
-                  {prefecture.name}の高校入試に向けて、定期テスト対策と受験対策を両立
-                </div>
-                {/* Desktop: 728×90 */}
-                <div className="hidden md:block">
-                  <AffiliateAd id="zkai-banner" trackView viewPlacement="prefecture" viewPref={prefectureCode} />
-                </div>
-                {/* Mobile: フルワイドCTAボタン */}
-                <div className="md:hidden">
-                  <div className="rounded-xl bg-white border border-blue-100 p-4 text-left">
-                    <div className="mb-2 text-sm font-bold text-blue-900">
-                      中学生のためのＺ会の通信教育
-                    </div>
-                    <div className="mb-3 text-xs text-blue-700 leading-relaxed">
-                      テキスト＋添削で内申＋偏差値を伸ばす定番教材。
-                    </div>
-                    <AffiliateAd
-                      id="zkai-text-request"
-                      hideLabel
-                      linkClassName="block w-full rounded-xl bg-blue-600 px-5 py-3.5 text-center text-base font-bold text-white shadow-md shadow-blue-500/30 active:bg-blue-700"
-                    />
-                    <div className="mt-2 text-center text-[10px] text-slate-400">[PR]</div>
-                  </div>
-                </div>
-              </div>
-            </section>
+            {/* 計算後・最高エンゲージ位置：内申点アップの高EVオファー（naishin-up placement＝全国オンライン個別/地盤塾に自動解決。旧Z会¥1.5-29/clickは撤去） */}
+            <ParentLeadCTA prefectureCode={prefectureCode} placement="naishin-up" />
 
             {/* 県専用の上位ツールへの誘導（高impの内申ページから page2 のS値/総合点/ランク判定ページへ評価を流す内部リンク） */}
             {siblingTool && (
@@ -481,7 +452,7 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
             {/* 高校別ボーダーライン一覧 */}
             <HighSchoolBorderlineTable prefectureCode={prefectureCode} prefectureName={prefecture.name} />
 
-            {/* 志望校検討モードのユーザーへ：スタサプ */}
+            {/* 志望校検討モードのユーザーへ：AI個別指導（旧サプリ¥5.4/clickは低EVで撤去） */}
             <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
               <div className="grid items-center gap-4 md:grid-cols-[1fr_auto]">
                 <div>
@@ -489,11 +460,11 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
                     志望校レベルに合わせた学習を始める
                   </div>
                   <div className="mt-1 text-xs text-slate-500 leading-relaxed">
-                    {prefecture.name}の高校別ボーダーラインを見て志望校が見えてきたら、いまの学力との差を埋める準備を。スタディサプリ中学講座なら全教科のプロ講師の映像授業を月額料金で受けられます。
+                    {prefecture.name}の高校別ボーダーラインを見て志望校が見えてきたら、いまの学力との差を埋める準備を。AIが弱点を自動分析する個別指導の無料体験で、今の学力に必要な対策を確認できます。
                   </div>
                 </div>
                 <div className="flex justify-center md:justify-end">
-                  <AffiliateAd id="sapuri-banner-300" auditHide trackView viewPlacement="prefecture" viewPref={prefectureCode} />
+                  <AffiliateAd id="atama-banner" trackView viewPlacement="prefecture" viewPref={prefectureCode} />
                 </div>
               </div>
             </section>
@@ -671,10 +642,10 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
                 <div className="rounded-xl border border-blue-100 bg-blue-50/40 p-4">
                   <div className="mb-2 text-sm font-bold text-blue-900">難関校を狙うなら</div>
                   <p className="mb-3 text-xs text-blue-700 leading-relaxed">
-                    トップ校を志望する場合、内申点だけでなく当日点の実力も鍵。Z会の通信教育は難関校受験対策で実績ある教材です。
+                    トップ校を志望する場合、内申点だけでなく当日点の実力も鍵。現役東大・難関大生による学習コーチングで、難関校対策を伴走してもらう選択肢もあります。
                   </p>
                   <div className="text-sm">
-                    <AffiliateAd id="zkai-text-advanced" hideLabel auditHide />（PR）
+                    <AffiliateAd id="moshimo-studycoach" hideLabel />（PR）
                   </div>
                 </div>
                 <div className="rounded-xl border border-emerald-100 bg-emerald-50/40 p-4">
@@ -693,13 +664,23 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
                   </p>
                   <AffiliateAd id="sora-juku-banner" auditHide />
                 </div>
-                {['tokyo', 'kanagawa', 'saitama', 'chiba', 'osaka'].includes(prefectureCode) && (
+                {/* 校舎所在地の実態に合わせる：関東=森塾／関西=個別指導キャンパス（旧コードは大阪にも関東限定の森塾を誤表示していた） */}
+                {['tokyo', 'kanagawa', 'saitama', 'chiba', 'ibaraki', 'tochigi', 'gunma'].includes(prefectureCode) && (
                   <div className="rounded-xl border border-orange-100 bg-orange-50/40 p-4">
                     <div className="mb-2 text-sm font-bold text-orange-900">教室で学ぶ個別指導</div>
                     <p className="mb-3 text-xs text-orange-700 leading-relaxed">
                       {prefecture.name}内に教室がある<AffiliateAd id="morijuku-text" hideLabel />（PR）。先生1人に生徒2人までの個別指導で定期テスト対策。
                     </p>
-                    <AffiliateAd id="morijuku-banner" auditHide />
+                    <AffiliateAd id="morijuku-banner" />
+                  </div>
+                )}
+                {['osaka', 'hyogo', 'kyoto', 'nara', 'shiga', 'wakayama'].includes(prefectureCode) && (
+                  <div className="rounded-xl border border-orange-100 bg-orange-50/40 p-4">
+                    <div className="mb-2 text-sm font-bold text-orange-900">教室で学ぶ個別指導</div>
+                    <p className="mb-3 text-xs text-orange-700 leading-relaxed">
+                      {prefecture.name}内に教室がある<AffiliateAd id="campus-text" hideLabel />（PR）。先生1人に生徒2人までの個別指導で定期テスト対策。
+                    </p>
+                    <AffiliateAd id="campus-banner" />
                   </div>
                 )}
               </div>
