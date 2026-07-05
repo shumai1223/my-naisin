@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Calculator, BookOpen, Target, TrendingUp, BarChart3, ChevronRight } from 'lucide-react';
+import { Calculator, BookOpen, Target, TrendingUp, BarChart3, Sparkles, ChevronRight } from 'lucide-react';
 
 /**
  * 偏差値クラスタのハブ＆スポーク内部リンク（情報設計 §7）。
@@ -7,7 +7,7 @@ import { Calculator, BookOpen, Target, TrendingUp, BarChart3, ChevronRight } fro
  * 72倍市場の稼ぎ頭 /hensachi を中心に、教科別・志望校レンジ・上げ方の各スポークを相互リンクし、
  * リンクジュースをクラスタ内に循環させる。`current` で現在地を強調（自己リンクは無効化）。
  */
-export type HensachiClusterKey = 'hub' | 'kyoka-betsu' | 'shiboukou' | 'agekata' | 'moshi';
+export type HensachiClusterKey = 'hub' | 'shindan' | 'kyoka-betsu' | 'shiboukou' | 'agekata' | 'moshi';
 
 interface ClusterPage {
   key: HensachiClusterKey;
@@ -19,6 +19,7 @@ interface ClusterPage {
 
 const CLUSTER_PAGES: ClusterPage[] = [
   { key: 'hub', href: '/hensachi', title: '偏差値計算サイト（5教科）', desc: '点数・平均点から偏差値を30秒で算出。早見表・順位換算つき', icon: Calculator },
+  { key: 'shindan', href: '/hensachi/shindan', title: '偏差値診断（点数不要）', desc: '点数が分からなくても5つの質問で偏差値の目安を診断', icon: Sparkles },
   { key: 'kyoka-betsu', href: '/hensachi/kyoka-betsu', title: '教科別の偏差値を出す', desc: '国語・数学・英語・理科・社会／5教科・3教科を個別に計算', icon: BookOpen },
   { key: 'shiboukou', href: '/hensachi/shiboukou', title: '偏差値→志望校レンジ逆引き', desc: '偏差値から届く高校レベルと、内申点との並置を確認', icon: Target },
   { key: 'agekata', href: '/hensachi/agekata', title: '偏差値の出し方・上げ方', desc: '計算式の使い方と、1か月で偏差値を上げる具体策', icon: TrendingUp },

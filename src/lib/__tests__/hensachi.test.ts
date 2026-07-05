@@ -17,6 +17,8 @@ import {
   combinedHensachi,
   naishinToHensachiGuide,
   buildPercentileTable,
+  RANK_BANDS,
+  bandToHensachiRange,
   HIGH_SCHOOL_TIERS,
   SUBJECTS,
 } from '@/lib/hensachi';
@@ -174,5 +176,49 @@ describe('SUBJECTS / buildPercentileTable', () => {
     const row = buildPercentileTable().find((r) => r.h === 50)!;
     expect(row.upperPercent).toBeCloseTo(50, 4);
     expect(row.rank300).toBe(150);
+  });
+});
+
+describe('RANK_BANDS / bandToHensachiRange（偏差値診断の自己申告バンド）', () => {
+  test('5バンドが0〜100%を隙間なく連続してカバーする', () => {
+    const sorted = [...RANK_BANDS].sort((a, b) => a.lowerPercent - b.lowerPercent);
+    expect(sorted[0].lowerPercent).toBe(0);
+    expect(sorted[sorted.length - 1].upperPercent).toBe(100);
+    for (let i = 0; i < sorted.length - 1; i++) {
+      expect(sorted[i].upperPercent).toBe(sorted[i + 1].lowerPercent);
+    }
+  });
+
+  test('中央バンド（mid）は閉じた範囲を返す', () => {
+    const mid = RANK_BANDS.find((b) => b.id === 'mid')!;
+    const { min, max } = bandToHensachiRange(mid);
+    expect(min).not.toBeNull();
+    expect(max).not.toBeNull();
+    expect(min!).toBeLessThan(max!);
+  });
+
+  test('最上位バンド（top）は下限のみ（上限は偽の精度を避けてnull）', () => {
+    const top = RANK_BANDS.find((b) => b.id === 'top')!;
+    const { min, max } = bandToHensachiRange(top);
+    expect(min).not.toBeNull();
+    expect(max).toBeNull();
+  });
+
+  test('最下位バンド（bottom）は上限のみ（下限はnull）', () => {
+    const bottom = RANK_BANDS.find((b) => b.id === 'bottom')!;
+    const { min, max } = bandToHensachiRange(bottom);
+    expect(min).toBeNull();
+    expect(max).not.toBeNull();
+  });
+
+  test('上位バンドほど偏差値が高い（バンド順とhensachi順が一致、隣接バンドは境界値を共有）', () => {
+    const ranges = RANK_BANDS.map((b) => bandToHensachiRange(b));
+    // top.min ≥ upper-mid.min ≥ mid.min ≥ lower-mid.min ≥ bottom.max の順に単調減少
+    // （隣接バンドは同じ境界percentileを共有するため等しくなり得る＝toBeGreaterThanOrEqual）
+    for (let i = 0; i < ranges.length - 1; i++) {
+      const cur = ranges[i].min ?? ranges[i].max!;
+      const next = ranges[i + 1].min ?? ranges[i + 1].max!;
+      expect(cur).toBeGreaterThanOrEqual(next);
+    }
   });
 });

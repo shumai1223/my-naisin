@@ -100,6 +100,14 @@ const TOOL_GROUPS: { id: string; heading: string; tools: Tool[] }[] = [
         color: 'purple',
       },
       {
+        title: '偏差値診断（点数不要・5問）',
+        description: '点数・平均点が分からなくても、5つの質問に答えるだけで偏差値の目安と届く高校レベルを診断',
+        features: ['点数不要・5問だけ', '正規分布の数式で算出', '内申との整合性チェック', '次の一手へ直結'],
+        href: '/hensachi/shindan',
+        icon: TrendingUp,
+        color: 'purple',
+      },
+      {
         title: '教科別の偏差値 計算（国数英理社）',
         description: '教科ごとの点数と平均点から、国語・数学・英語・理科・社会の偏差値を個別に算出',
         features: ['教科別に算出', '5教科／3教科', '苦手教科を特定', '教科別の上げ方'],

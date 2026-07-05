@@ -265,3 +265,37 @@ export function buildPercentileTable(
     rank1000: hensachiToRank(h, 1000),
   }));
 }
+
+/* ────────────────────────────────────────────────────────────────────────
+ * 偏差値診断（/hensachi/shindan）：点数を知らなくても答えられる自己申告バンドから
+ * 偏差値“帯”を推定する。数字を捏造せず、既存の正規分布数式を自己申告バンドの
+ * 境界値に適用するだけ＝計算式は他の偏差値ツールと完全に同一。
+ * ──────────────────────────────────────────────────────────────────────── */
+
+export interface RankBand {
+  id: string;
+  label: string;
+  /** 上位%の範囲（小さいほど上位）。lowerPercent < upperPercent、0〜100。 */
+  lowerPercent: number;
+  upperPercent: number;
+}
+
+/** 「テストの順位はだいたいどのくらい？」の自己申告バンド（点数を知らなくても回答できる）。 */
+export const RANK_BANDS: RankBand[] = [
+  { id: 'top', label: 'だいたいいつも上位（学年で上位1割くらい）', lowerPercent: 0, upperPercent: 10 },
+  { id: 'upper-mid', label: '平均より上（学年で上位3割くらい）', lowerPercent: 10, upperPercent: 30 },
+  { id: 'mid', label: '真ん中くらい', lowerPercent: 30, upperPercent: 70 },
+  { id: 'lower-mid', label: '平均より下（学年で下位3割くらい）', lowerPercent: 70, upperPercent: 90 },
+  { id: 'bottom', label: '苦手な方だと思う（学年で下位1割くらい）', lowerPercent: 90, upperPercent: 100 },
+];
+
+/**
+ * 自己申告バンドを偏差値の目安に変換。両端が開いているバンド（top/bottom）は
+ * 片側だけの目安（〜以上／〜以下）を返し、閉じたバンドは範囲を返す
+ * （0%・100%側の境界は数学的に無限大に発散するため、偽の精度を出さない）。
+ */
+export function bandToHensachiRange(band: RankBand): { min: number | null; max: number | null } {
+  const min = band.upperPercent >= 100 ? null : roundHensachi(upperPercentToHensachi(band.upperPercent));
+  const max = band.lowerPercent <= 0 ? null : roundHensachi(upperPercentToHensachi(band.lowerPercent));
+  return { min, max };
+}

@@ -499,13 +499,20 @@ export default function HensachiPage() {
                 <p className="text-xs leading-relaxed text-slate-600">教科別の偏差値を診断すれば、どこを伸ばせば総合が上がるか（＝苦手の底上げ）が見えます。</p>
               </div>
             </div>
-            <div className="mt-4 text-center">
+            <div className="mt-4 flex flex-col items-center gap-2 sm:flex-row sm:justify-center">
               <a
                 href="#calculator-section"
                 className="inline-flex items-center gap-1.5 rounded-full bg-purple-600 px-5 py-2.5 text-sm font-bold text-white shadow-md transition-all hover:bg-purple-700"
               >
-                偏差値を診断する（無料）
+                点数を入れて診断する（無料）
               </a>
+              <Link
+                href="/hensachi/shindan"
+                className="inline-flex items-center gap-1.5 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-purple-700 ring-1 ring-purple-200 transition-all hover:bg-purple-50"
+              >
+                点数が分からない場合は5問で診断
+                <ChevronRight className="h-4 w-4" />
+              </Link>
             </div>
           </section>
 

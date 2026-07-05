@@ -21,6 +21,7 @@ export const STATIC_PAGES: StaticPageEntry[] = [
   { url: '/reverse', priority: 1.0, changeFrequency: 'weekly' },
   { url: '/plan', priority: 0.9, changeFrequency: 'weekly' },
   { url: '/hensachi', priority: 1.0, changeFrequency: 'weekly' },
+  { url: '/hensachi/shindan', priority: 0.9, changeFrequency: 'weekly' },
   { url: '/hensachi/kyoka-betsu', priority: 0.9, changeFrequency: 'weekly' },
   { url: '/hensachi/shiboukou', priority: 0.9, changeFrequency: 'weekly' },
   { url: '/hensachi/agekata', priority: 0.9, changeFrequency: 'weekly' },
