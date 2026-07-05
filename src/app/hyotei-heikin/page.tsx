@@ -9,6 +9,7 @@ import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { HyoteiResultFlow } from '@/components/HyoteiHeikin/HyoteiResultFlow';
 import { ToolClusterNav } from '@/components/ToolClusterNav';
+import { StaticToolEntryLinks } from '@/components/StaticToolEntryLinks';
 
 const HYOTEI_FAQS = [
   {
@@ -246,6 +247,11 @@ export default function HyoteiHeikinPage() {
               </div>
             </div>
           </section>
+
+          {/* 静的（計算前）内部リンク：/juku-shindan・/hogoshaのGooglebot可視性確保 */}
+          <div className="mb-6">
+            <StaticToolEntryLinks />
+          </div>
 
           {/* Calculator＋結果連動の換金導線（評定平均の実測値をCTAへ配線） */}
           <div id="calculator-section">

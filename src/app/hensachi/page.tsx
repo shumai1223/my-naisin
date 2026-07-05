@@ -13,6 +13,7 @@ import { HensachiResultFlow } from '@/components/Hensachi/HensachiResultFlow';
 import { AnswerBox } from '@/components/AnswerBox';
 import { HensachiClusterNav } from '@/components/Hensachi/HensachiClusterNav';
 import { ToolClusterNav } from '@/components/ToolClusterNav';
+import { StaticToolEntryLinks } from '@/components/StaticToolEntryLinks';
 
 // 偏差値 → 上位%・順位（正規分布に基づく数学的に厳密な対応値。偏差値の標準偏差=10で算出）
 const PERCENTILE_ROWS: { h: string; top: string; r300: string; r1000: string; note?: string }[] = [
@@ -283,6 +284,11 @@ export default function HensachiPage() {
               平均点を取ると偏差値50、<strong>偏差値60は上位約16%、偏差値70は上位約2.3%</strong>です（平均50・標準偏差10の正規分布で一定）。
               標準偏差が分からない場合は定期テストで15〜20が目安。下の計算ツールに点数・平均点を入れると、5教科の偏差値と上位％を自動算出できます（無料・登録不要）。
             </AnswerBox>
+          </div>
+
+          {/* 静的（計算前）内部リンク：/juku-shindan・/hogoshaのGooglebot可視性確保 */}
+          <div className="mb-6">
+            <StaticToolEntryLinks />
           </div>
 
           {/* Calculator＋結果連動の換金導線（偏差値の実測値をCTAへ配線＝41%流入の資産化） */}

@@ -25,6 +25,7 @@ import { ErrorReportForm } from '@/components/ErrorReportForm';
 import { PrefectureMinimumContent } from '@/components/PrefectureMinimumContent';
 import { BlogRelatedArticles } from '@/components/BlogRelatedArticles';
 import { NaishinResultFlow } from '@/components/Calculator/NaishinResultFlow';
+import { StaticToolEntryLinks } from '@/components/StaticToolEntryLinks';
 import { HighSchoolBorderlineTable } from '@/components/HighSchoolBorderlineTable';
 import { TrustInfo } from '@/components/TrustInfo';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
@@ -412,6 +413,9 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
                 </div>
               </div>
             </section>
+
+            {/* 静的（計算前）内部リンク：/juku-shindan・/hogoshaのGooglebot可視性確保 */}
+            <StaticToolEntryLinks />
 
             {/* 計算ツール＋結果連動の名簿/送客導線（内申点の実測値をCTAへ配線＝47県共通で成績カード/保護者バトン点灯） */}
             <NaishinResultFlow
