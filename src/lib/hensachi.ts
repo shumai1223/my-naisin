@@ -107,6 +107,20 @@ export function upperPercentToHensachi(upperPercent: number): number {
   return 50 + 10 * z;
 }
 
+/**
+ * 母集団 population 人中 rank 位（1始まり、上位から数えた順位）から偏差値を逆算。
+ * 順位は整数に量子化されているため hensachiToRank と厳密な往復一致はしない（概算）。
+ * 無効入力（0以下・非有限）は null。
+ */
+export function rankToHensachi(rank: number, population: number): number | null {
+  if (!Number.isFinite(rank) || !Number.isFinite(population) || population <= 0 || rank <= 0) {
+    return null;
+  }
+  const clampedRank = Math.min(rank, population);
+  const upperPercent = (clampedRank / population) * 100;
+  return upperPercentToHensachi(upperPercent);
+}
+
 /* ────────────────────────────────────────────────────────────────────────
  * 教科メタ（5教科 / 3教科 / 主要科目の区分）
  * ──────────────────────────────────────────────────────────────────────── */

@@ -14,6 +14,7 @@ import { AnswerBox } from '@/components/AnswerBox';
 import { HensachiClusterNav } from '@/components/Hensachi/HensachiClusterNav';
 import { ToolClusterNav } from '@/components/ToolClusterNav';
 import { StaticToolEntryLinks } from '@/components/StaticToolEntryLinks';
+import { RankHensachiCalculator } from '@/components/Hensachi/RankHensachiCalculator';
 
 // 偏差値 → 上位%・順位（正規分布に基づく数学的に厳密な対応値。偏差値の標準偏差=10で算出）
 const PERCENTILE_ROWS: { h: string; top: string; r300: string; r1000: string; note?: string }[] = [
@@ -419,6 +420,11 @@ export default function HensachiPage() {
               ※ 偏差値は「平均50・標準偏差10」の正規分布で定義されるため、上位％・順位はテストの種類によらず一定です。
               実際の模試では分布が完全な正規分布からややずれるため、端（偏差値75以上・25以下）では誤差が出ます。
             </p>
+
+            <div className="mt-6">
+              <h3 className="mb-3 text-sm font-bold text-slate-700">上の表にない値も計算する（偏差値⇔順位 双方向計算機）</h3>
+              <RankHensachiCalculator />
+            </div>
           </section>
 
           {/* 中学生が5教科の偏差値を出す方法（「偏差値計算サイト 5教科」「偏差値計算サイト 中学生」の意図直撃） */}

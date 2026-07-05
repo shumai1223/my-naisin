@@ -11,6 +11,7 @@ import {
   hensachiToUpperPercent,
   hensachiToRank,
   upperPercentToHensachi,
+  rankToHensachi,
   tierForHensachi,
   reachBandsForHensachi,
   combinedHensachi,
@@ -98,6 +99,26 @@ describe('upperPercentToHensachi（逆引き）', () => {
       const pct = hensachiToUpperPercent(h);
       expect(upperPercentToHensachi(pct)).toBeCloseTo(h, 2);
     }
+  });
+});
+
+describe('rankToHensachi（順位からの逆引き）', () => {
+  test('300人中150位 → 偏差値50', () => {
+    expect(rankToHensachi(150, 300)).toBeCloseTo(50, 4);
+  });
+  test('hensachiToRank と往復でおおむね一致（順位は整数量子化のため近似）', () => {
+    for (const h of [45, 50, 55, 60, 65]) {
+      const rank = hensachiToRank(h, 300);
+      expect(rankToHensachi(rank, 300)).toBeCloseTo(h, 0);
+    }
+  });
+  test('順位が母集団を超える場合は母集団人数にクランプ', () => {
+    expect(rankToHensachi(500, 300)).toBe(rankToHensachi(300, 300));
+  });
+  test('無効入力は null', () => {
+    expect(rankToHensachi(0, 300)).toBeNull();
+    expect(rankToHensachi(50, 0)).toBeNull();
+    expect(rankToHensachi(NaN, 300)).toBeNull();
   });
 });
 
