@@ -100,6 +100,15 @@ describe('robots()', () => {
     const allowList = Array.isArray(allow) ? allow : [allow];
     expect(allowList).toEqual(expect.arrayContaining(['/api/naishin', '/api/mcp', '/api/openapi']));
   });
+
+  test('/admin/を拒否（page-registryのSITEMAP_EXCLUDED_ROUTESと対）', () => {
+    const wildcard = (Array.isArray(r.rules) ? r.rules : [r.rules]).find(
+      (rule) => rule.userAgent === '*'
+    );
+    const disallow = wildcard?.disallow ?? [];
+    const disallowList = Array.isArray(disallow) ? disallow : [disallow];
+    expect(disallowList).toEqual(expect.arrayContaining(['/admin/']));
+  });
 });
 
 describe('manifest()', () => {

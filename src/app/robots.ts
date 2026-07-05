@@ -1,7 +1,8 @@
 import type { MetadataRoute } from 'next';
 
 // AIクローラ方針：回答/検索エンジン(出典引用＋送客あり)は歓迎、学習専用クローラ(見返り無し)は拒否。
-// ※ public/robots.txt と整合（静的ファイルが優先される構成のため両方を同一方針に保つ）。
+// ※ 本ファイルが robots.txt の単一ソース（public/robots.txt は廃止。静的ファイルがあると
+//   本番でそちらが優先され本ファイルの `/*?*` 拒否ルールが無効化されるため）。
 // 検索/回答エンジン(出典引用＋送客あり)=歓迎。
 // Anthropicは3分割: Claude-User(質問時取得)/Claude-SearchBot(検索引用)は送客ありで許可、学習用ClaudeBotのみ拒否。
 // GooglebotがAI Overview/AI Modeを担うため、別途明示せず下の '*' 許可を維持(クエリURL除外も継承させる)。
@@ -46,7 +47,9 @@ export default function robots(): MetadataRoute.Robots {
         // 公開データAPI（堀B：AIが呼べる一次データ層）は明示的に許可。その他の /api は非公開のまま。
         allow: ['/', '/api/naishin', '/api/mcp', '/api/openapi', '/api/card', '/api/calendar'],
         // /go/* はアフィリ送客の 302 リダイレクタ（中身なし）＝クロール予算の無駄なので拒否。
-        disallow: ['/api/', '/go/', '/*?*'],
+        // /admin/* は認証必須の内部ページ（page-registry.ts の SITEMAP_EXCLUDED_ROUTES と対）。
+        disallow: ['/api/', '/go/', '/admin/', '/*?*'],
+        crawlDelay: 1,
       },
     ],
     sitemap: 'https://my-naishin.com/sitemap.xml',
