@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Share2, Check } from 'lucide-react';
+import { Share2, Check, QrCode } from 'lucide-react';
 
 import { EVENTS, track } from '@/lib/track';
 import { APP_NAME } from '@/lib/constants';
@@ -76,6 +76,7 @@ export function ParentShareLinkButton({
   withImage?: boolean;
 }) {
   const [copied, setCopied] = React.useState(false);
+  const [qrUrl, setQrUrl] = React.useState<string | null>(null);
   // Web Share API はユーザー操作直後でないとファイル共有を拒否する（iOS/Chrome）ため、
   // クリック時に重い生成をせず、マウント時に先回りで画像を用意しておく。
   const fileRef = React.useRef<File | null>(null);
@@ -134,23 +135,59 @@ export function ParentShareLinkButton({
     }
   }, [ctx, tool]);
 
+  // その場（同じ部屋）にいる保護者にスマホで直接読み取ってもらうQRコード。
+  // parent_landing_view がほぼ0という実測（リンク共有は後で開かれずに流れがち）への
+  // 即席の打ち手＝「今、目の前で見せる」導線。外部QR生成サービス（画像のみ・データ送信なし）を使い、
+  // 依存追加なしで実装する。
+  const onToggleQr = React.useCallback(() => {
+    if (qrUrl) {
+      setQrUrl(null);
+      return;
+    }
+    const origin = typeof window !== 'undefined' ? window.location.origin : 'https://my-naishin.com';
+    const targetUrl = buildParentShareUrl(origin, ctx);
+    setQrUrl(`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(targetUrl)}`);
+    track(EVENTS.SHARE_QR_REVEAL, {
+      pref: ctx.prefectureCode ?? 'none',
+      metric: ctx.metricLabel ?? '内申点',
+      ...(tool ? { tool } : {}),
+    });
+  }, [ctx, tool, qrUrl]);
+
   return (
-    <button
-      type="button"
-      onClick={onShare}
-      className={`inline-flex w-full items-center justify-center gap-2 rounded-xl border-2 border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-bold text-emerald-700 transition-all hover:border-emerald-300 hover:bg-emerald-100 ${className}`}
-    >
-      {copied ? (
-        <>
-          <Check className="h-4 w-4" />
-          リンクをコピーしました
-        </>
-      ) : (
-        <>
-          <Share2 className="h-4 w-4" />
-          {label}
-        </>
+    <div className={className}>
+      <button
+        type="button"
+        onClick={onShare}
+        className="inline-flex w-full items-center justify-center gap-2 rounded-xl border-2 border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-bold text-emerald-700 transition-all hover:border-emerald-300 hover:bg-emerald-100"
+      >
+        {copied ? (
+          <>
+            <Check className="h-4 w-4" />
+            リンクをコピーしました
+          </>
+        ) : (
+          <>
+            <Share2 className="h-4 w-4" />
+            {label}
+          </>
+        )}
+      </button>
+      <button
+        type="button"
+        onClick={onToggleQr}
+        className="mt-2 inline-flex w-full items-center justify-center gap-1.5 text-xs font-bold text-emerald-700 underline decoration-emerald-300 underline-offset-2 hover:text-emerald-800"
+      >
+        <QrCode className="h-3.5 w-3.5" />
+        {qrUrl ? 'QRコードを閉じる' : '今、そばにいるなら：QRコードで見せる'}
+      </button>
+      {qrUrl && (
+        <div className="mt-3 flex flex-col items-center gap-2 rounded-xl border border-emerald-100 bg-emerald-50/50 p-4">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={qrUrl} alt="保護者のスマホで読み取るQRコード" width={160} height={160} className="rounded-lg bg-white p-2 shadow-sm" />
+          <p className="text-center text-[11px] text-slate-500">保護者のスマホのカメラで読み取ると、この結果がそのまま開きます</p>
+        </div>
       )}
-    </button>
+    </div>
   );
 }
