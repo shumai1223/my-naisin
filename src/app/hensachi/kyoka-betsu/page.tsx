@@ -158,14 +158,22 @@ export default function HensachiKyokaBetsuPage() {
             </p>
             <div className="grid gap-3 sm:grid-cols-2">
               {SUBJECTS.map((s) => (
-                <div key={s.key} className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <Link
+                  key={s.key}
+                  href={`/hensachi/kyoka-betsu/${s.key}`}
+                  className="group rounded-xl border border-slate-100 bg-slate-50 p-4 transition-all hover:border-purple-200 hover:bg-purple-50/50"
+                >
                   <div className="mb-1 flex items-center gap-2">
                     <span className="grid h-7 w-7 place-items-center rounded-lg bg-purple-100 text-xs font-black text-purple-700">{s.label.charAt(0)}</span>
                     <span className="text-sm font-bold text-slate-800">{s.label}</span>
                     {s.in3 && <span className="rounded-full bg-indigo-100 px-2 py-0.5 text-[10px] font-bold text-indigo-700">3教科</span>}
                   </div>
                   <p className="text-xs leading-relaxed text-slate-600">{s.tip}</p>
-                </div>
+                  <span className="mt-2 flex items-center gap-1 text-[11px] font-bold text-purple-600 group-hover:underline">
+                    {s.label}の上げ方を詳しく見る
+                    <ChevronRight className="h-3 w-3" />
+                  </span>
+                </Link>
               ))}
             </div>
           </section>
