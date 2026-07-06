@@ -187,6 +187,18 @@ export default function HensachiMoshiPage() {
             </p>
           </section>
 
+          {/* 主要な地域模試ガイドへの導線 */}
+          <section className="mt-8 rounded-2xl border-2 border-purple-200 bg-purple-50/30 p-6 shadow-sm">
+            <h2 className="mb-2 text-sm font-bold text-slate-800">Vもぎ・北辰テストなど、地域の模試について知りたい方へ</h2>
+            <p className="mb-3 text-sm leading-relaxed text-slate-600">
+              志望校がある都道府県ごとに主流の模試が異なります。Vもぎ・Wもぎ・北辰テスト・五ツ木模試・新教研の運営会社や対象地域を整理しました。
+            </p>
+            <Link href="/hensachi/moshi/ichiran" className="inline-flex items-center gap-1.5 rounded-full bg-purple-600 px-5 py-2.5 text-sm font-bold text-white shadow-md transition-all hover:bg-purple-700">
+              主要な地域模試ガイドを見る
+              <ChevronRight className="h-4 w-4" />
+            </Link>
+          </section>
+
           {/* 保護者リード */}
           <div className="mt-8">
             <ParentLeadCTA
