@@ -49,6 +49,7 @@ export const metadata: Metadata = {
 const GRADE_PLANS = [
   {
     grade: '中3',
+    slug: 'chu3',
     icon: Flame,
     accent: 'from-rose-500 to-orange-600',
     badge: '残り期間で最大化',
@@ -62,6 +63,7 @@ const GRADE_PLANS = [
   },
   {
     grade: '中2',
+    slug: 'chu2',
     icon: Layers,
     accent: 'from-blue-500 to-indigo-600',
     badge: '中3に備えた土台作り',
@@ -75,6 +77,7 @@ const GRADE_PLANS = [
   },
   {
     grade: '中1',
+    slug: 'chu1',
     icon: Sprout,
     accent: 'from-emerald-500 to-teal-600',
     badge: '習慣形成が最大レバー',
@@ -207,6 +210,13 @@ export default function NaishinAgeKataPage() {
                         <li key={p} className="flex gap-2"><span className="text-blue-500">・</span><span>{p}</span></li>
                       ))}
                     </ul>
+                    <Link
+                      href={`/naishin-age-kata/${g.slug}`}
+                      className="flex items-center justify-between gap-2 border-t border-slate-100 px-5 py-3 text-xs font-bold text-blue-600 transition-colors hover:bg-blue-50/50 hover:underline"
+                    >
+                      {g.grade}向けにさらに詳しく見る
+                      <ChevronRight className="h-3.5 w-3.5" />
+                    </Link>
                   </div>
                 );
               })}
