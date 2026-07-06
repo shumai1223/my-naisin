@@ -23,6 +23,7 @@
     "monitor:links": "npx tsx src/scripts/link-monitor.ts",
     "newsletter": "npx tsx scripts/newsletter.ts",
     "sales-report": "npx tsx scripts/generate-sales-report.ts",
+    "kpi:weekly": "npx tsx scripts/weekly-kpi-report.ts",
     "push-send": "npx tsx scripts/push-send.ts",
     "ga4:auth": "node --use-system-ca scripts/ga4-auth.mjs",
     "ga4": "node --use-system-ca scripts/ga4.mjs",

@@ -5,8 +5,11 @@ import {
   weekStartOf,
   bucketDailyByWeek,
   evaluateJulyGate,
+  evaluateTripwires,
   GATE_DEADLINE,
   GATE_CLICK_MULTIPLE_TARGET,
+  HENSACHI_CTR_ALERT_THRESHOLD,
+  AI_REFERRAL_SHARE_ALERT_THRESHOLD,
 } from '../velocity';
 
 const D = (iso: string) => new Date(`${iso}T00:00:00Z`);
@@ -104,5 +107,100 @@ describe('evaluateJulyGate（7/20 反証ゲート）', () => {
     const g = evaluateJulyGate({ now: D('2026-07-20'), clicks: 10, clicksPrev: 1, leads: 0, conversions: 0 });
     expect(g.decided).toBe(true);
     expect(g.daysLeft).toBe(0);
+  });
+});
+
+describe('evaluateTripwires（週次KPIレポートの常設監視4本）', () => {
+  const baseInput = {
+    hensachiWeeklyCtr: [
+      { weekStart: '2026-06-08', ctrPercent: 4.5 },
+      { weekStart: '2026-06-15', ctrPercent: 4.2 },
+      { weekStart: '2026-06-22', ctrPercent: 4.0 },
+      { weekStart: '2026-06-29', ctrPercent: 4.3 },
+    ],
+    toolPages: { impNow: 1000, impPrev: 1000, clicksNow: 100, clicksPrev: 100 },
+    aiReferralSharePercent: 3,
+    headQueryCtrNow: 8.6,
+    headQueryCtrPrev: 8.0,
+  };
+
+  it('全て健全なら4本とも発火しない', () => {
+    const results = evaluateTripwires(baseInput);
+    expect(results.every((r) => !r.triggered)).toBe(true);
+    expect(results).toHaveLength(4);
+  });
+
+  it('①/hensachi CTRが4週連続で閾値未満なら発火', () => {
+    const results = evaluateTripwires({
+      ...baseInput,
+      hensachiWeeklyCtr: [
+        { weekStart: '2026-06-08', ctrPercent: 3.1 },
+        { weekStart: '2026-06-15', ctrPercent: 3.0 },
+        { weekStart: '2026-06-22', ctrPercent: 2.9 },
+        { weekStart: '2026-06-29', ctrPercent: 3.15 },
+      ],
+    });
+    expect(results.find((r) => r.id === 'hensachi-ctr')?.triggered).toBe(true);
+  });
+
+  it('①4週分のデータが無いと判定不可（発火しない）', () => {
+    const results = evaluateTripwires({ ...baseInput, hensachiWeeklyCtr: [{ weekStart: '2026-06-29', ctrPercent: 1.0 }] });
+    const r = results.find((r) => r.id === 'hensachi-ctr')!;
+    expect(r.triggered).toBe(false);
+    expect(r.detail).toContain('判定不可');
+  });
+
+  it('①4週中3週だけ閾値未満（1週だけ揺れ戻し）なら発火しない', () => {
+    const results = evaluateTripwires({
+      ...baseInput,
+      hensachiWeeklyCtr: [
+        { weekStart: '2026-06-08', ctrPercent: 3.0 },
+        { weekStart: '2026-06-15', ctrPercent: 3.0 },
+        { weekStart: '2026-06-22', ctrPercent: 3.0 },
+        { weekStart: '2026-06-29', ctrPercent: 5.0 },
+      ],
+    });
+    expect(results.find((r) => r.id === 'hensachi-ctr')?.triggered).toBe(false);
+  });
+
+  it('②表示回数が伸びてクリックが横ばいなら発火', () => {
+    const results = evaluateTripwires({
+      ...baseInput,
+      toolPages: { impNow: 1500, impPrev: 1000, clicksNow: 103, clicksPrev: 100 },
+    });
+    expect(results.find((r) => r.id === 'tool-imp-click-divergence')?.triggered).toBe(true);
+  });
+
+  it('②表示もクリックも同じ比率で伸びていれば発火しない', () => {
+    const results = evaluateTripwires({
+      ...baseInput,
+      toolPages: { impNow: 1500, impPrev: 1000, clicksNow: 150, clicksPrev: 100 },
+    });
+    expect(results.find((r) => r.id === 'tool-imp-click-divergence')?.triggered).toBe(false);
+  });
+
+  it('③ai_referralシェアが閾値超なら発火', () => {
+    const results = evaluateTripwires({ ...baseInput, aiReferralSharePercent: 12 });
+    expect(results.find((r) => r.id === 'ai-referral-share')?.triggered).toBe(true);
+  });
+
+  it('③閾値ちょうどは発火しない（境界値）', () => {
+    const results = evaluateTripwires({ ...baseInput, aiReferralSharePercent: AI_REFERRAL_SHARE_ALERT_THRESHOLD });
+    expect(results.find((r) => r.id === 'ai-referral-share')?.triggered).toBe(false);
+  });
+
+  it('④ヘッドクエリCTRが半減以下なら発火', () => {
+    const results = evaluateTripwires({ ...baseInput, headQueryCtrNow: 3.9, headQueryCtrPrev: 8.0 });
+    expect(results.find((r) => r.id === 'head-query-ctr-halved')?.triggered).toBe(true);
+  });
+
+  it('④半減未満（6割程度の低下）なら発火しない', () => {
+    const results = evaluateTripwires({ ...baseInput, headQueryCtrNow: 5.0, headQueryCtrPrev: 8.0 });
+    expect(results.find((r) => r.id === 'head-query-ctr-halved')?.triggered).toBe(false);
+  });
+
+  it('閾値定数はbacklogに記載の値と一致する', () => {
+    expect(HENSACHI_CTR_ALERT_THRESHOLD).toBe(3.2);
+    expect(AI_REFERRAL_SHARE_ALERT_THRESHOLD).toBe(10);
   });
 });

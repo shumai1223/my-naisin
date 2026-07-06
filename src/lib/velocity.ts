@@ -163,3 +163,95 @@ export function evaluateJulyGate(input: JulyGateInput): JulyGate {
     rationale,
   };
 }
+
+/* ────────────────────────────────────────────────────────────────────────
+ * トリップワイヤー4本（I-1：週次KPIレポートの常設監視項目）。
+ * 戦略決定 §1-3（[[fable5-fullaccel-backlog-2026-07]]）で定義された、Google一点依存下で
+ * 「悪化を検知したら即座に気づく」ための閾値ベースの純関数。¥予測はしない＝先行指標のみ。
+ * ──────────────────────────────────────────────────────────────────────── */
+
+/** /hensachi のCTRがこの値未満だと「悪化」とみなす閾値（%）。通常CTR4.5%からの−30%目安。 */
+export const HENSACHI_CTR_ALERT_THRESHOLD = 3.2;
+
+/** ai_referral のシェア（%）がこれを超えたら要観察（AI検索への依存度上昇）。 */
+export const AI_REFERRAL_SHARE_ALERT_THRESHOLD = 10;
+
+export interface WeeklyCtr {
+  /** 週の開始日（'YYYY-MM-DD'）。古い→新しい順で渡す。 */
+  weekStart: string;
+  /** その週のCTR（%、0-100）。 */
+  ctrPercent: number;
+}
+
+export interface TripwireInput {
+  /** /hensachi の週次CTR履歴（古い→新しい順・直近4週以上が理想）。 */
+  hensachiWeeklyCtr: WeeklyCtr[];
+  /** ツール面（複数ページ合算）の表示回数・クリック数（今週 vs 前週）。 */
+  toolPages: { impNow: number; impPrev: number; clicksNow: number; clicksPrev: number };
+  /** ai_referral（AI検索・回答エンジン経由の着地）が全トラフィックに占めるシェア（%）。 */
+  aiReferralSharePercent: number;
+  /** 「内申点 計算」ヘッドクエリのCTR（%、今週 vs 前週）。 */
+  headQueryCtrNow: number;
+  headQueryCtrPrev: number;
+}
+
+export interface TripwireResult {
+  id: 'hensachi-ctr' | 'tool-imp-click-divergence' | 'ai-referral-share' | 'head-query-ctr-halved';
+  label: string;
+  triggered: boolean;
+  detail: string;
+}
+
+/**
+ * トリップワイヤー4本を評価する。
+ *  ①/hensachi CTRが4週連続で閾値未満（構造的な悪化・一時的な揺れではない）
+ *  ②ツール面：表示回数は増えているのにクリックが横ばい＝タイトル/スニペットの劣化 or 検索意図とのズレ
+ *  ③ai_referralシェアが閾値超＝AI検索への依存度が上がっている（Google一点依存の中の新リスク）
+ *  ④「内申点 計算」ヘッドクエリのCTRが半減＝最重要語の競合悪化 or AI Overview吸収の兆候
+ */
+export function evaluateTripwires(input: TripwireInput): TripwireResult[] {
+  const last4 = input.hensachiWeeklyCtr.slice(-4);
+  const hensachiTriggered =
+    last4.length === 4 && last4.every((w) => w.ctrPercent < HENSACHI_CTR_ALERT_THRESHOLD);
+
+  const { impNow, impPrev, clicksNow, clicksPrev } = input.toolPages;
+  const impGrowth = impPrev > 0 ? (impNow - impPrev) / impPrev : 0;
+  const clickGrowth = clicksPrev > 0 ? (clicksNow - clicksPrev) / clicksPrev : 0;
+  // 表示は10%以上伸びたのにクリックは5%未満の伸び（乖離）＝CTRが実質悪化している。
+  const toolDivergenceTriggered = impPrev > 0 && impGrowth >= 0.1 && clickGrowth < 0.05;
+
+  const aiReferralTriggered = input.aiReferralSharePercent > AI_REFERRAL_SHARE_ALERT_THRESHOLD;
+
+  const headQueryTriggered =
+    input.headQueryCtrPrev > 0 && input.headQueryCtrNow <= input.headQueryCtrPrev / 2;
+
+  return [
+    {
+      id: 'hensachi-ctr',
+      label: '/hensachi CTR 4週連続低下',
+      triggered: hensachiTriggered,
+      detail:
+        last4.length < 4
+          ? `週次データが${last4.length}週分しかなく判定不可（4週分必要）`
+          : `直近4週のCTR: ${last4.map((w) => `${w.ctrPercent.toFixed(1)}%`).join(' → ')}（閾値${HENSACHI_CTR_ALERT_THRESHOLD}%）`,
+    },
+    {
+      id: 'tool-imp-click-divergence',
+      label: 'ツール面：表示増×クリック横ばいの乖離',
+      triggered: toolDivergenceTriggered,
+      detail: `表示 ${(impGrowth * 100).toFixed(0)}% / クリック ${(clickGrowth * 100).toFixed(0)}%（今週 imp${impNow.toLocaleString('ja-JP')}/click${clicksNow.toLocaleString('ja-JP')}）`,
+    },
+    {
+      id: 'ai-referral-share',
+      label: 'ai_referral シェア上昇',
+      triggered: aiReferralTriggered,
+      detail: `シェア ${input.aiReferralSharePercent.toFixed(1)}%（閾値${AI_REFERRAL_SHARE_ALERT_THRESHOLD}%）`,
+    },
+    {
+      id: 'head-query-ctr-halved',
+      label: '「内申点 計算」ヘッドクエリCTR半減',
+      triggered: headQueryTriggered,
+      detail: `今週${input.headQueryCtrNow.toFixed(1)}% / 前週${input.headQueryCtrPrev.toFixed(1)}%`,
+    },
+  ];
+}
