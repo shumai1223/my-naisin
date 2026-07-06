@@ -18,6 +18,7 @@ import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { PrintButton } from '@/components/PrintButton';
+import { MendanSummaryCard } from '@/components/MendanSummaryCard';
 import { RelatedToolsSection } from '@/components/RelatedToolsSection';
 import { SITE_URL } from '@/lib/naishin-dataset';
 
@@ -133,7 +134,7 @@ export default function MendanPage() {
       <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
           {/* Breadcrumb */}
-          <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
+          <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500 print:hidden">
             <Link href="/" className="flex items-center gap-1 hover:text-blue-600">
               <Home className="h-4 w-4" />
               ホーム
@@ -144,18 +145,21 @@ export default function MendanPage() {
 
           {/* Header */}
           <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-xl print:hidden">
               <Users className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">三者面談 準備チェックリスト</h1>
-            <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-slate-600">
+            <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-slate-600 print:hidden">
               三者面談は<strong>限られた時間</strong>です。お子さまの「現在地」を数値で把握し、聞くことを整理しておくだけで、
               貴重な面談を最大限に活かせます。<strong>7月・12月の面談前</strong>に、このページをそのままお使いください。
             </p>
+            <div className="mt-4 print:hidden">
+              <PrintButton />
+            </div>
           </header>
 
           {/* タイミングの案内 */}
-          <section className="mb-8 rounded-2xl border border-amber-200 bg-amber-50/60 p-5">
+          <section className="mb-8 rounded-2xl border border-amber-200 bg-amber-50/60 p-5 print:hidden">
             <div className="mb-2 flex items-center gap-2 font-bold text-amber-800">
               <CalendarClock className="h-5 w-5" />
               面談の時期と狙い
@@ -167,10 +171,10 @@ export default function MendanPage() {
           </section>
 
           {/* 保護者リード（最高インテント・面談=保護者が決裁者） */}
-          <ParentLeadCTA placement="mendan" className="mb-10" />
+          <ParentLeadCTA placement="mendan" className="mb-10 print:hidden" />
 
           {/* 面談前の準備3ステップ */}
-          <section className="mb-10">
+          <section className="mb-10 print:hidden">
             <h2 className="mb-5 text-xl font-bold text-slate-800">面談前に「数値」を準備する3ステップ</h2>
             <div className="grid gap-4 md:grid-cols-3">
               {PREP_STEPS.map((s) => {
@@ -194,17 +198,19 @@ export default function MendanPage() {
             </div>
           </section>
 
+          {/* 面談で見せる1枚：現在の数値（印刷対象） */}
+          <MendanSummaryCard />
+
           {/* 印刷できる：先生に聞くことリスト */}
           <section className="mb-10">
-            <div className="mb-4 flex items-center justify-between gap-3">
+            <div className="mb-4 flex items-center gap-2">
               <h2 className="flex items-center gap-2 text-xl font-bold text-slate-800">
-                <MessageCircleQuestion className="h-5 w-5 text-indigo-600" />
+                <MessageCircleQuestion className="h-5 w-5 text-indigo-600 print:hidden" />
                 先生に聞くことリスト
               </h2>
-              <PrintButton />
             </div>
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-              <p className="mb-4 text-sm text-slate-500">
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm print:border print:shadow-none">
+              <p className="mb-4 text-sm text-slate-500 print:hidden">
                 印刷して持参すると、聞き忘れを防げます。気になる項目にチェックを入れてお使いください。
               </p>
               <ul className="space-y-3">
@@ -219,7 +225,7 @@ export default function MendanPage() {
           </section>
 
           {/* 保護者が準備すること */}
-          <section className="mb-10">
+          <section className="mb-10 print:hidden">
             <h2 className="mb-4 flex items-center gap-2 text-xl font-bold text-slate-800">
               <ClipboardList className="h-5 w-5 text-emerald-600" />
               保護者が面談前に整理しておくこと
@@ -243,7 +249,7 @@ export default function MendanPage() {
           </section>
 
           {/* FAQ */}
-          <section className="mb-10">
+          <section className="mb-10 print:hidden">
             <h2 className="mb-5 text-xl font-bold text-slate-800">よくある質問</h2>
             <div className="space-y-3">
               {MENDAN_FAQS.map((faq) => (
@@ -260,7 +266,7 @@ export default function MendanPage() {
             </div>
           </section>
 
-          <RelatedToolsSection links={RELATED_LINKS} />
+          <RelatedToolsSection links={RELATED_LINKS} className="print:hidden" />
         </div>
       </div>
     </>

@@ -102,14 +102,18 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <AffiliateClickTracker />
         <SiteEngagementTracker />
         <SiteSchema />
-        <GlobalHeaderBridge>
-          <Header />
-        </GlobalHeaderBridge>
+        <div className="print:hidden">
+          <GlobalHeaderBridge>
+            <Header />
+          </GlobalHeaderBridge>
+        </div>
         <main id="main-content">{children}</main>
-        <Footer />
-        <CookieConsent />
-        <ExitIntentLineModal />
-        <StickyConvertBar />
+        <div className="print:hidden">
+          <Footer />
+          <CookieConsent />
+          <ExitIntentLineModal />
+          <StickyConvertBar />
+        </div>
         {/* AdSense撤退（2026-07）：adsbygoogle.js の常時ロードを撤去。
             AdSlot は NEXT_PUBLIC_ADSENSE_ENABLED=1 のときだけ描画＝広告ユニットは元々ゼロで、
             このスクリプトはページを重くするだけだった。収益は保護者リード送客（アフィリ）に一本化。 */}
