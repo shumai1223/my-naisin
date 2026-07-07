@@ -1,4 +1,4 @@
-import { computeReportRaw, computeTotalScore, reportRawAtFullMarks, scaleScore } from '../engine';
+import { computeReportRaw, computeTotalScore, reportRawAtFullMarks, scaleScore, requiredAcademicRaw } from '../engine';
 import { TOTAL_SCORE_SYSTEMS, getTotalScoreSystem, isVerifiedTotalScore } from '../registry';
 
 describe('total-score engine', () => {
@@ -166,6 +166,51 @@ describe('total-score engine', () => {
       // registry.niigata の '7-3' 比率オプション（reportMax=700）と同じ換算構造の確認
       expect(scaleScore(135, 135, 700)).toBe(700);
       expect(scaleScore(0, 135, 700)).toBe(0);
+    });
+  });
+
+  // --- requiredAcademicRaw（B-2：総合得点方式のreverseエンジン） ---
+  describe('requiredAcademicRaw', () => {
+    it('兵庫：満点内申(250)・目標500点 → 必要学力=500点(満点)', () => {
+      const hyogo = getTotalScoreSystem('hyogo')!;
+      const r = requiredAcademicRaw(hyogo, { targetTotal: 500, reportRaw: 250 });
+      expect(r.requiredAcademicRaw).toBe(500);
+    });
+
+    it('兵庫：内申0・目標250点(内申換算満点相当) → 必要学力=学力素点500点満点中500点', () => {
+      // 兵庫は内申換算250:学力換算250の1:1。内申換算0で目標250なら、学力換算側も250必要＝学力素点は満点(500)。
+      const hyogo = getTotalScoreSystem('hyogo')!;
+      const r = requiredAcademicRaw(hyogo, { targetTotal: 250, reportRaw: 0 });
+      expect(r.requiredAcademicRaw).toBe(500);
+    });
+
+    it('目標が現在の内申点だけで届く場合、必要学力は0以下（既に到達）', () => {
+      const hyogo = getTotalScoreSystem('hyogo')!;
+      const r = requiredAcademicRaw(hyogo, { targetTotal: 100, reportRaw: 250 });
+      expect(r.requiredAcademicRaw).toBeLessThanOrEqual(0);
+    });
+
+    it('学力満点でも届かない場合、必要学力は満点を超える', () => {
+      const hyogo = getTotalScoreSystem('hyogo')!;
+      const r = requiredAcademicRaw(hyogo, { targetTotal: 500, reportRaw: 0 });
+      expect(r.requiredAcademicRaw).toBeGreaterThan(hyogo.academic.rawMax);
+    });
+
+    it('computeTotalScoreとの往復一致：requiredAcademicRawをそのまま入れると目標総合点に一致（丸め誤差を考慮）', () => {
+      for (const [, system] of Object.entries(TOTAL_SCORE_SYSTEMS)) {
+        const reportRaw = system.report.rawMax * 0.6;
+        const targetTotal = Math.round((system.academic.rawMax + system.report.rawMax) * 0.5);
+        const { requiredAcademicRaw: needed } = requiredAcademicRaw(system, { targetTotal, reportRaw });
+        if (needed < 0 || needed > system.academic.rawMax) continue; // 範囲外は往復一致の対象外
+        const r = computeTotalScore(system, { academicRaw: needed, reportRaw });
+        expect(Math.abs(r.total - targetTotal)).toBeLessThanOrEqual(1);
+      }
+    });
+
+    it('新潟（比率オプション指定）：7:3・内申満点(135) → 必要学力=学力満点換算(300)相当', () => {
+      const niigata = getTotalScoreSystem('niigata')!;
+      const r = requiredAcademicRaw(niigata, { targetTotal: 1000, reportRaw: 135, ratioOptionId: '7-3' });
+      expect(r.requiredAcademicRaw).toBe(500); // reportConverted=700なので残り300 → 学力素点500点満点中500点
     });
   });
 

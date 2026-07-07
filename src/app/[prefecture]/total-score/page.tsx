@@ -12,6 +12,7 @@ import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { TotalScoreResultFlow } from '@/components/TotalScore/TotalScoreResultFlow';
+import { TotalScoreReverseCalculator } from '@/components/TotalScore/TotalScoreReverseCalculator';
 import { TotalScoreExplainerView } from '@/components/TotalScore/TotalScoreExplainerView';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { HensachiPromo } from '@/components/HensachiPromo';
@@ -194,6 +195,11 @@ export default async function PrefectureTotalScorePage({ params }: PageProps) {
             saveHeading="この総合得点と「あと何点」を、忘れないうちに受け取りませんか？"
             saveBody="総合得点アップのコツ・志望校の最新動向・出願スケジュールを、受験本番まで無料でお届けします。LINEかメールで、いつでも解除できます。"
           />
+
+          {/* B-2: 目標総合得点から必要な学力検査点を逆算（reverseエンジンのtotal-score展開） */}
+          <div className="mt-6">
+            <TotalScoreReverseCalculator system={system} />
+          </div>
 
           {/* 計算の手順（番号付き） */}
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">

@@ -57,6 +57,32 @@ export function computeTotalScore(system: TotalScoreSystem, input: TotalScoreInp
   return { academic, report, total: academic + report, totalMax, option };
 }
 
+export interface RequiredAcademicResult {
+  /** 目標総合得点に必要な学力検査の素点（0..academic.rawMaxの範囲外もそのまま返す＝呼び出し側で「既に到達」「満点でも届かない」を判定するため）。 */
+  requiredAcademicRaw: number;
+  /** 入力した内申素点の換算後の点（比率オプション適用後）。 */
+  reportConverted: number;
+  /** 採用した比率オプション。 */
+  option: TsRatioOption;
+}
+
+/**
+ * computeTotalScore の逆算：目標総合得点・現在の内申素点から、必要な学力検査の素点を返す。
+ * 「あと何点」逆算（B-2：総合得点方式の県への reverse エンジン展開）に使う。
+ */
+export function requiredAcademicRaw(
+  system: TotalScoreSystem,
+  input: { targetTotal: number; reportRaw: number; ratioOptionId?: string },
+): RequiredAcademicResult {
+  const option = resolveRatioOption(system, input.ratioOptionId);
+  const reportRawClamped = clamp(input.reportRaw, 0, system.report.rawMax);
+  const reportConverted = Math.round((reportRawClamped / system.report.rawMax) * option.reportMax);
+  const requiredAcademicConverted = input.targetTotal - reportConverted;
+  const requiredAcademicRawValue =
+    option.academicMax > 0 ? (requiredAcademicConverted / option.academicMax) * system.academic.rawMax : 0;
+  return { requiredAcademicRaw: requiredAcademicRawValue, reportConverted, option };
+}
+
 /**
  * 評定満点（対象学年の主要5・実技4が全て満点）のときの内申換算素点。
  * 入力上限のバリデーションと、データ整合テスト（rawMax と一致するか）に使う。
