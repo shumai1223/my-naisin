@@ -13,6 +13,7 @@ import { classifyClick, type ClickTrust } from '@/lib/bot-filter';
 import { getLeadSummary, getLeadDailyCounts } from '@/lib/leads-db';
 import { getApiKeyStats, getFreemiumFunnel } from '@/lib/api-keys';
 import { evaluateJulyGate, bucketDailyByWeek, type GateVerdict } from '@/lib/velocity';
+import { checkExperimentPortfolioHealth, MIN_RUNNING_EXPERIMENTS } from '@/lib/experiments';
 import { countActiveSubscriptions } from '@/lib/push-db';
 import {
   economicsFor,
@@ -227,6 +228,7 @@ export default async function AdminReportPage({
     leads: leads.total,
     conversions: 0,
   });
+  const experimentHealth = checkExperimentPortfolioHealth();
   const weeklyClicks = bucketDailyByWeek(
     weeklyClickTrend.map((r) => ({ date: r.bucket, count: r.clicks })),
     8
@@ -917,6 +919,36 @@ export default async function AdminReportPage({
               <div className="mt-0.5 text-[10px] text-slate-400">
                 {apiFunnel.convertedEmails}/{apiFunnel.distinctFreeEmails}件（メール登録済free）
               </div>
+            </div>
+          </div>
+        </div>
+
+        {/* A/B実験ポートフォリオの健全性（I-2・常時2本運用＋月次ローテーション） */}
+        <div className="mt-6">
+          <h2 className={sectionTitle}>A/B実験ポートフォリオ — 常時{MIN_RUNNING_EXPERIMENTS}本運用</h2>
+          <div className="mt-2 grid grid-cols-2 gap-3 md:grid-cols-3">
+            <div className={card}>
+              <div className="text-[11px] text-slate-500">稼働中の実験</div>
+              <div className={`mt-1 text-xl font-black tabular-nums ${experimentHealth.belowMinimum ? 'text-rose-600' : 'text-slate-900'}`}>
+                {experimentHealth.runningCount}本
+              </div>
+              {experimentHealth.belowMinimum && (
+                <div className="mt-0.5 text-[10px] font-bold text-rose-500">下限{MIN_RUNNING_EXPERIMENTS}本を下回っています</div>
+              )}
+            </div>
+            <div className={`${card} md:col-span-2`}>
+              <div className="text-[11px] text-slate-500">月次ローテーション要（30日超・未決着）</div>
+              {experimentHealth.overdueForRotation.length === 0 ? (
+                <div className="mt-1 text-sm font-medium text-emerald-700">なし</div>
+              ) : (
+                <div className="mt-1 flex flex-wrap gap-1.5">
+                  {experimentHealth.overdueForRotation.map((r) => (
+                    <span key={r.id} className="rounded-full bg-amber-100 px-2 py-0.5 text-xs font-bold text-amber-700">
+                      {r.id}（{r.daysRunning}日）
+                    </span>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>

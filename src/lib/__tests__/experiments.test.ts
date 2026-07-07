@@ -3,8 +3,14 @@ import {
   getExperiment,
   runningExperiments,
   judgeWinner,
+  checkExperimentPortfolioHealth,
+  MIN_RUNNING_EXPERIMENTS,
+  ROTATION_INTERVAL_DAYS,
+  type ExperimentDef,
 } from '@/lib/experiments';
 import { isLiveAffiliate } from '@/lib/affiliates';
+
+const D = (iso: string) => new Date(`${iso}T00:00:00Z`);
 
 describe('experiments registry', () => {
   it('全実験は arms[0] を control とし、id が一意', () => {
@@ -113,5 +119,86 @@ describe('judgeWinner', () => {
 
   it('アームが1つ以下なら null', () => {
     expect(judgeWinner([{ id: 'control', impressions: 10, conversions: 1 }])).toBeNull();
+  });
+});
+
+describe('checkExperimentPortfolioHealth（常時2本A/B運用・月次ローテーション・I-2）', () => {
+  it('実レジストリは現在runningが2本以上あり下限を満たす', () => {
+    const health = checkExperimentPortfolioHealth(EXPERIMENTS, D('2026-07-07'));
+    expect(health.runningCount).toBeGreaterThanOrEqual(MIN_RUNNING_EXPERIMENTS);
+    expect(health.belowMinimum).toBe(false);
+  });
+
+  it('running数が下限未満だとbelowMinimumが立つ', () => {
+    const one: ExperimentDef[] = [
+      {
+        id: 'solo-2026',
+        hypothesis: 'test',
+        status: 'running',
+        arms: [{ id: 'control', label: 'c' }, { id: 'b', label: 'b', ctaPrefix: 'x' }],
+        primaryMetric: 'cta_view',
+        startedAt: '2026-07-01',
+      },
+    ];
+    const health = checkExperimentPortfolioHealth(one, D('2026-07-07'));
+    expect(health.runningCount).toBe(1);
+    expect(health.belowMinimum).toBe(true);
+  });
+
+  it('ROTATION_INTERVAL_DAYSを超えて未決着で稼働中の実験をoverdueForRotationに挙げる', () => {
+    const stale: ExperimentDef[] = [
+      {
+        id: 'stale-2026',
+        hypothesis: 'test',
+        status: 'running',
+        arms: [{ id: 'control', label: 'c' }, { id: 'b', label: 'b', ctaPrefix: 'x' }],
+        primaryMetric: 'cta_view',
+        startedAt: '2026-05-01',
+      },
+      {
+        id: 'fresh-2026',
+        hypothesis: 'test',
+        status: 'running',
+        arms: [{ id: 'control', label: 'c' }, { id: 'b', label: 'b', ctaPrefix: 'y' }],
+        primaryMetric: 'cta_view',
+        startedAt: '2026-07-01',
+      },
+    ];
+    const health = checkExperimentPortfolioHealth(stale, D('2026-07-07'));
+    expect(health.overdueForRotation.map((r) => r.id)).toEqual(['stale-2026']);
+    expect(health.overdueForRotation[0].daysRunning).toBeGreaterThanOrEqual(ROTATION_INTERVAL_DAYS);
+  });
+
+  it('startedAtが無い実験はローテーション判定から除外される（安全側）', () => {
+    const noDate: ExperimentDef[] = [
+      { id: 'a', hypothesis: 'x', status: 'running', arms: [{ id: 'control', label: 'c' }, { id: 'b', label: 'b' }], primaryMetric: 'cta_view' },
+      { id: 'b2', hypothesis: 'x', status: 'running', arms: [{ id: 'control', label: 'c' }, { id: 'b', label: 'b' }], primaryMetric: 'cta_view' },
+    ];
+    const health = checkExperimentPortfolioHealth(noDate, D('2026-07-07'));
+    expect(health.overdueForRotation).toHaveLength(0);
+  });
+
+  it('paused/decidedの実験はrunningCount・ローテーション判定に含まれない', () => {
+    const mixed: ExperimentDef[] = [
+      {
+        id: 'running-1',
+        hypothesis: 'x',
+        status: 'running',
+        arms: [{ id: 'control', label: 'c' }, { id: 'b', label: 'b' }],
+        primaryMetric: 'cta_view',
+        startedAt: '2026-01-01',
+      },
+      {
+        id: 'paused-1',
+        hypothesis: 'x',
+        status: 'paused',
+        arms: [{ id: 'control', label: 'c' }, { id: 'b', label: 'b' }],
+        primaryMetric: 'cta_view',
+        startedAt: '2026-01-01',
+      },
+    ];
+    const health = checkExperimentPortfolioHealth(mixed, D('2026-07-07'));
+    expect(health.runningCount).toBe(1);
+    expect(health.overdueForRotation.map((r) => r.id)).toEqual(['running-1']);
   });
 });

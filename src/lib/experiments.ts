@@ -48,6 +48,8 @@ export interface ExperimentDef {
   decidedAt?: string;
   /** 運用メモ。 */
   note?: string;
+  /** 実験を開始した日（'YYYY-MM-DD'）。月次ローテーション判定に使う（I-2）。 */
+  startedAt?: string;
 }
 
 /**
@@ -66,6 +68,7 @@ export const EXPERIMENTS: ExperimentDef[] = [
     primaryMetric: 'affiliate_click',
     placement: 'parent-lp',
     note: '送客先（affiliateId）は固定し、純粋にコピーの効きだけを測る。最大流入の県別47面に設置して母数を稼ぐ。',
+    startedAt: '2026-06-16',
   },
   {
     // 実験1（H8）：result面の送客オファーA/B。そら塾（現状）vs e-Live（もしも live）。
@@ -79,6 +82,7 @@ export const EXPERIMENTS: ExperimentDef[] = [
     primaryMetric: 'affiliate_click',
     placement: 'result',
     note: 'コピーは同一・送客先だけを差し替えて純粋にオファーの効きを測る。両アームとも live。勝者を lead-config の result面に固定する。',
+    startedAt: '2026-06-17',
   },
   {
     // 実験2（H8）：hiyou面のコピーA/B。FP相談の訴求 vs ツール文脈（計算する）。送客先は同一（fp-soudan）。
@@ -97,6 +101,7 @@ export const EXPERIMENTS: ExperimentDef[] = [
     primaryMetric: 'affiliate_click',
     placement: 'hiyou',
     note: '送客先（fp-soudan）は固定。直接訴求 vs ツール文脈で「保護者の入り口」の効きを比較する。',
+    startedAt: '2026-06-17',
   },
   {
     // 実験4（A6/K1）：名簿登録ボタンのコピーA/B。これが初の primaryMetric='lead_submit' 実験。
@@ -112,6 +117,7 @@ export const EXPERIMENTS: ExperimentDef[] = [
     primaryMetric: 'lead_submit',
     placement: 'result',
     note: '最高インテント面（result/gap-target）で母数を稼ぐ。勝者が出たら SaveResultCTA の既定ボタン文言を昇格させる。',
+    startedAt: '2026-06-20',
   },
   {
     // 実験3（H8）：承認後のFP A/B（保険コンパス vs マネードクター）。両者 pending のため承認まで paused。
@@ -125,6 +131,7 @@ export const EXPERIMENTS: ExperimentDef[] = [
     primaryMetric: 'affiliate_click',
     placement: 'hiyou',
     note: '両案件とも承認待ち（pending）。承認され live 化したら status を running に変更して走らせる。',
+    startedAt: '2026-06-17',
   },
 ];
 
@@ -136,6 +143,56 @@ export function getExperiment(id: string): ExperimentDef | undefined {
 /** 走っている実験だけ。 */
 export function runningExperiments(): ExperimentDef[] {
   return EXPERIMENTS.filter((e) => e.status === 'running');
+}
+
+/* ────────────────────────────────────────────────────────────────────────
+ * 実験ポートフォリオの健全性（I-2：常時2本A/B運用・月次ローテーション）。
+ *
+ * 「常に2本以上を稼働させる」「未決着のまま1ヶ月を超えたら判定 or 差し替えを検討する」という
+ * 運用ルールを、月が変わるたびに手作業でチェックしなくても機械的に気づけるようにする。
+ * judgeWinner自体は既存（GA4の集計値が要る）。ここは「そもそも母数が足りているか／
+ * 判定を先延ばしにし続けていないか」という運用のヘルスチェックのみ（純粋関数）。
+ * ──────────────────────────────────────────────────────────────────────── */
+
+const EXPERIMENT_DAY_MS = 86_400_000;
+
+/** 常時ここまでは稼働させる、というポートフォリオの下限。 */
+export const MIN_RUNNING_EXPERIMENTS = 2;
+/** この日数を超えて未決着のまま稼働中なら、月次ローテーション（判定 or 差し替え）の対象として警告する。 */
+export const ROTATION_INTERVAL_DAYS = 30;
+
+export interface ExperimentPortfolioHealth {
+  runningCount: number;
+  /** runningCount が下限未満か。 */
+  belowMinimum: boolean;
+  /** ROTATION_INTERVAL_DAYS を超えて稼働中（要・判定 or ローテーション）の実験。 */
+  overdueForRotation: { id: string; daysRunning: number }[];
+}
+
+/**
+ * 実験ポートフォリオの健全性を判定する（純粋関数・テスト可能）。
+ * startedAt が無い実験はローテーション判定の対象外（開始日不明のため判定不能・除外するのみで安全側）。
+ */
+export function checkExperimentPortfolioHealth(
+  experiments: ExperimentDef[] = EXPERIMENTS,
+  now: Date = new Date(),
+  minRunning: number = MIN_RUNNING_EXPERIMENTS,
+  rotationDays: number = ROTATION_INTERVAL_DAYS
+): ExperimentPortfolioHealth {
+  const running = experiments.filter((e) => e.status === 'running');
+  const overdueForRotation = running
+    .filter((e): e is ExperimentDef & { startedAt: string } => Boolean(e.startedAt))
+    .map((e) => ({
+      id: e.id,
+      daysRunning: Math.floor((now.getTime() - new Date(`${e.startedAt}T00:00:00Z`).getTime()) / EXPERIMENT_DAY_MS),
+    }))
+    .filter((r) => r.daysRunning >= rotationDays);
+
+  return {
+    runningCount: running.length,
+    belowMinimum: running.length < minRunning,
+    overdueForRotation,
+  };
 }
 
 /* ────────────────────────────────────────────────────────────────────────
