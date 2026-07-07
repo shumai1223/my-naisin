@@ -1,0 +1,68 @@
+name: KPI Gate Weekly (velocity + 7/20-8/20-9/20 gate)
+
+# 0-8：7/20反証ゲート判定＋週次velocityメールの自動化。
+# GA4はOAuth前提でCIから直接呼べないため（[[ga4-mcp-integration]]）、
+# ここではGSC_SA_KEY（サービスアカウント・既存gsc-weekly.ymlと同じ秘密情報）のみで
+# 取得できる範囲（クリック倍率・トリップワイヤーの一部）を自動生成する軽量版。
+# C_p/送客/確定発生/名簿velocityはGA4/ASP手動値が無いため「未計測」表示になり
+# （src/lib/weekly-kpi-report.ts の manualDataProvided=false 分岐）、0件と誤読されない。
+# 7/20等の判定確定日にこの状態のまま自動実行された場合はgate欄も
+# 「⚠️判定保留（未計測）」表示になり、confirmedConversions=0起因の誤判定を確定表示しない。
+# 正式なゲート判定・フル版メール送信は本人 or 監督付きセッションが
+# `npm run kpi:weekly -- --send --cp=... --leads-total=... --conversions=...` を
+# 手動値付きで実行して確定させる（このワークフローはあくまで毎週の軽量ヘルスチェック）。
+on:
+  schedule:
+    # 毎週月曜 午前10時（JST）= UTC 月曜1時。GSC週次(0時)の後に走らせる。
+    - cron: '0 1 * * 1'
+  workflow_dispatch: # 手動実行も可能
+
+jobs:
+  kpi-gate-digest:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate weekly KPI gate digest (GSC-only, no --send)
+        run: npx tsx scripts/weekly-kpi-report.ts
+        env:
+          GSC_SA_KEY: ${{ secrets.GSC_SA_KEY }}
+          GSC_SITE_URL: ${{ vars.GSC_SITE_URL || 'sc-domain:my-naishin.com' }}
+
+      - name: Upload report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: kpi-gate-weekly-report
+          path: reports/weekly-kpi-*.txt
+          retention-days: 90
+
+      - name: Create issue with digest
+        if: success()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+            const dir = 'reports';
+            const files = fs.readdirSync(dir).filter(f => f.startsWith('weekly-kpi-'));
+            const latest = files.sort().at(-1);
+            const body = fs.readFileSync(path.join(dir, latest), 'utf8');
+            github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `🚦 週次KPIゲート（GSC自動版）: ${latest.replace('weekly-kpi-', '').replace('.txt', '')}`,
+              body: body + '\n\n---\n※このIssueはGSC自動取得のみの軽量版です。C_p/送客/名簿velocity等の確定にはGA4手動値付きで`npm run kpi:weekly -- --send ...`を実行してください。',
+              labels: ['kpi', 'gate', 'automated', 'monetization']
+            });

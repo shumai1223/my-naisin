@@ -50,9 +50,9 @@ describe('selectLeadOffer × 季節講習スワップ', () => {
     expect(['sora-juku-text', 'morijuku-text', 'campus-text', 'atama-text']).toContain(o.affiliateId);
   });
 
-  it('季節対象外の面（hiyou=FP）は季節中でも不変', () => {
+  it('季節対象外の面（hiyou=学資保険）は季節中でも不変', () => {
     const o = selectLeadOffer({ placement: 'hiyou', season: 'winter' });
-    expect(o.affiliateId).toBe('fp-soudan');
+    expect(o.affiliateId).toBe('moshimo-garden-gakushi');
   });
 
   it('季節なし（off）は通年の出し分けに戻る', () => {

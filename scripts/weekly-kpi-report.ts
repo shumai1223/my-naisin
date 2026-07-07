@@ -33,6 +33,13 @@
  * 無人CIから直接は呼べない。そのためGA4由来の数値（C_p/ai_referral share/名簿velocity）は
  * 現状CLI引数での手渡しとし、本人 or /loop が月曜朝に ga4:weekly / GA4 MCP の結果を渡して実行する
  * 運用とする。将来GA4サービスアカウントをプロパティに追加できれば完全無人化できる。
+ *
+ * 0-8：上記のGA4系引数を1つも渡さずに実行した場合（.github/workflows/kpi-gate-weekly.yml の
+ * 無人実行など）は自動的に manualDataProvided=false を立て、C_p/送客/確定発生/名簿velocity欄を
+ * 「0件」でなく「未計測」と表示する（GSC自動取得分＝クリック倍率とトリップワイヤーの一部のみで
+ * 構成される軽量版メール）。7/20等の判定確定日にこの状態のまま自動実行が走った場合はgate判定も
+ * 「⚠️判定保留（未計測）」に切り替わり、conversions=0のデフォルト値がそのままPIVOT等の誤判定として
+ * 確定してしまうのを防ぐ（実測値は必ずこのスクリプトを手動引数付きで再実行して確定させること）。
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -219,8 +226,16 @@ async function main() {
     fetchHeadQueryCtrWoW(client),
   ]);
 
+  const manualDataProvided =
+    args.cp !== undefined ||
+    args['leads-week'] !== undefined ||
+    args['leads-total'] !== undefined ||
+    args.conversions !== undefined ||
+    args['affiliate-clicks'] !== undefined;
+
   const data: WeeklyKpiData = {
     weekEnding: curEnd,
+    manualDataProvided,
     gsc: { clicksNow: totalsNow.clicks, clicksPrev: totalsPrev.clicks, impNow: totalsNow.impressions, impPrev: totalsPrev.impressions },
     parentLandingViews: num(args.cp),
     leadVelocity: {

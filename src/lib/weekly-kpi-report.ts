@@ -38,6 +38,14 @@ export interface WeeklyKpiData {
   confirmedConversions: number;
   gate: JulyGateInput;
   tripwires: TripwireInput;
+  /**
+   * GA4/ASP由来の手動値（C_p・送客・確定発生・名簿velocity・gate.leads/conversions）が
+   * 実際に渡されたか（既定true=従来通り数値をそのまま表示）。
+   * false＝GSC自動取得のみの無人実行＝これらの数値欄は「未計測」と表示し、実測の0と混同させない
+   * （0-8：CIからGSC_SA_KEYのみで自動送信する運用を安全にするための区別。とくに7/20等の判定日に
+   * 手動値なしでconversions=0のまま確定判定してしまう誤判定を防ぐ）。
+   */
+  manualDataProvided?: boolean;
 }
 
 function fmt(n: number): string {
@@ -52,45 +60,60 @@ function pctDelta(now: number, prev: number): string {
 
 /** 週次KPIメールの本文（プレーンテキスト・1画面で読み切れる分量）を組み立てる。 */
 export function formatWeeklyKpiEmail(data: WeeklyKpiData): { subject: string; text: string } {
+  const manual = data.manualDataProvided !== false;
   const gate = evaluateJulyGate(data.gate);
+  const gateUnverified = !manual && gate.decided;
   const tripwires = evaluateTripwires(data.tripwires);
   const triggeredCount = tripwires.filter((t) => t.triggered).length;
+  const unmeasured = '未計測（手動値待ち）';
 
-  const subject = `週次KPI ${data.weekEnding} ｜ ゲート:${gate.verdictLabel.split('（')[0]} ｜ 警報${triggeredCount}件`;
+  const subject = `週次KPI ${data.weekEnding} ｜ ゲート:${gateUnverified ? '判定保留' : gate.verdictLabel.split('（')[0]} ｜ 警報${triggeredCount}件`;
 
   const lines: string[] = [];
   lines.push(`週次KPIレポート（${data.weekEnding} 時点）`);
   lines.push('');
   lines.push('■ 桁レバー（7/20 反証ゲート）');
-  lines.push(`  判定: ${gate.verdictLabel}（${gate.decided ? `判定日到達` : `あと${gate.daysLeft}日`}）`);
+  lines.push(`  判定: ${gateUnverified ? '⚠️判定保留（未計測）' : gate.verdictLabel}（${gate.decided ? `判定日到達` : `あと${gate.daysLeft}日`}）`);
   lines.push(`  クリック前季比: ${gate.clickMultipleLabel}（今季${fmt(gate.clicks)} / 前季${fmt(gate.clicksPrev)}）`);
-  lines.push(`  発生（ASP実測）: ${gate.conversions}件 ／ 名簿累計: ${fmt(gate.leads)}件`);
-  lines.push(`  ${gate.rationale}`);
+  lines.push(`  発生（ASP実測）: ${manual ? `${gate.conversions}件` : unmeasured} ／ 名簿累計: ${manual ? `${fmt(gate.leads)}件` : unmeasured}`);
+  if (gateUnverified) {
+    lines.push('  ⚠️ leads/conversionsが未計測（GSC自動取得のみの無人実行）のため正式判定は保留。実測値を渡して再実行し確定させてください。');
+  } else {
+    lines.push(`  ${gate.rationale}`);
+  }
   lines.push('');
   lines.push('■ 実測サマリ（今週）');
   lines.push(`  GSCクリック: ${fmt(data.gsc.clicksNow)}（${pctDelta(data.gsc.clicksNow, data.gsc.clicksPrev)}）／ 表示: ${fmt(data.gsc.impNow)}（${pctDelta(data.gsc.impNow, data.gsc.impPrev)}）`);
-  lines.push(`  C_p（保護者接点 parent_landing_view）: ${fmt(data.parentLandingViews)}件`);
-  lines.push(`  送客（affiliate_click）: ${fmt(data.affiliateClicks)}件`);
-  lines.push(`  確定発生（ASP実測）: ${data.confirmedConversions}件`);
+  lines.push(`  C_p（保護者接点 parent_landing_view）: ${manual ? `${fmt(data.parentLandingViews)}件` : unmeasured}`);
+  lines.push(`  送客（affiliate_click）: ${manual ? `${fmt(data.affiliateClicks)}件` : unmeasured}`);
+  lines.push(`  確定発生（ASP実測）: ${manual ? `${data.confirmedConversions}件` : unmeasured}`);
   lines.push('');
   lines.push('■ 名簿velocity');
-  const weeklyPace = data.leadVelocity.targetPerWeek > 0 ? (data.leadVelocity.leadsThisWeek / data.leadVelocity.targetPerWeek) * 100 : null;
-  lines.push(`  今週の登録: ${fmt(data.leadVelocity.leadsThisWeek)}件 ／ 目標: ${fmt(data.leadVelocity.targetPerWeek)}件/週${weeklyPace !== null ? `（達成率${weeklyPace.toFixed(0)}%）` : ''}`);
-  lines.push(`  名簿累計: ${fmt(data.leadVelocity.leadsTotal)}件`);
+  if (manual) {
+    const weeklyPace = data.leadVelocity.targetPerWeek > 0 ? (data.leadVelocity.leadsThisWeek / data.leadVelocity.targetPerWeek) * 100 : null;
+    lines.push(`  今週の登録: ${fmt(data.leadVelocity.leadsThisWeek)}件 ／ 目標: ${fmt(data.leadVelocity.targetPerWeek)}件/週${weeklyPace !== null ? `（達成率${weeklyPace.toFixed(0)}%）` : ''}`);
+    lines.push(`  名簿累計: ${fmt(data.leadVelocity.leadsTotal)}件`);
+  } else {
+    lines.push(`  今週の登録: ${unmeasured} ／ 名簿累計: ${unmeasured}`);
+  }
   lines.push('');
   lines.push('■ 名簿3,000逆算（C-1）');
-  const roster = evaluateRosterVelocityTarget({
-    now: data.gate.now,
-    currentRoster: data.leadVelocity.leadsTotal,
-    observedDailyVelocity: data.leadVelocity.leadsThisWeek / 7,
-  });
-  lines.push(
-    `  目標${fmt(roster.targetRoster)}件まで残り${fmt(roster.gap)}件／期限まで${roster.daysLeft}日 → 必要velocity ${roster.requiredDailyVelocity.toFixed(1)}件/日（${roster.requiredWeeklyVelocity.toFixed(0)}件/週）`
-  );
-  if (roster.paceRatio !== null) {
+  if (manual) {
+    const roster = evaluateRosterVelocityTarget({
+      now: data.gate.now,
+      currentRoster: data.leadVelocity.leadsTotal,
+      observedDailyVelocity: data.leadVelocity.leadsThisWeek / 7,
+    });
     lines.push(
-      `  実測ペース ${(roster.observedDailyVelocity ?? 0).toFixed(1)}件/日＝必要ペース比${(roster.paceRatio * 100).toFixed(0)}%（${roster.onTrack ? 'オンペース' : '未達ペース'}）`
+      `  目標${fmt(roster.targetRoster)}件まで残り${fmt(roster.gap)}件／期限まで${roster.daysLeft}日 → 必要velocity ${roster.requiredDailyVelocity.toFixed(1)}件/日（${roster.requiredWeeklyVelocity.toFixed(0)}件/週）`
     );
+    if (roster.paceRatio !== null) {
+      lines.push(
+        `  実測ペース ${(roster.observedDailyVelocity ?? 0).toFixed(1)}件/日＝必要ペース比${(roster.paceRatio * 100).toFixed(0)}%（${roster.onTrack ? 'オンペース' : '未達ペース'}）`
+      );
+    }
+  } else {
+    lines.push(`  ${unmeasured}（名簿累計が未入力のため逆算不可）`);
   }
   if (data.funnelStages && data.funnelStages.length >= 2) {
     const bottleneck = findFunnelBottleneck(data.funnelStages);

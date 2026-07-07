@@ -142,4 +142,47 @@ describe('formatWeeklyKpiEmail', () => {
     const { text } = formatWeeklyKpiEmail(baseData());
     expect(text).not.toContain('Consent捕捉率');
   });
+
+  describe('manualDataProvided=false（0-8：GSC自動取得のみの無人実行）', () => {
+    it('C_p・送客・確定発生・名簿velocityを「未計測」と表示し、0件と混同させない', () => {
+      const data = baseData({ manualDataProvided: false });
+      const { text } = formatWeeklyKpiEmail(data);
+      expect(text).toContain('C_p（保護者接点 parent_landing_view）: 未計測（手動値待ち）');
+      expect(text).toContain('送客（affiliate_click）: 未計測（手動値待ち）');
+      expect(text).toContain('確定発生（ASP実測）: 未計測（手動値待ち）');
+      expect(text).toContain('今週の登録: 未計測（手動値待ち） ／ 名簿累計: 未計測（手動値待ち）');
+      expect(text).not.toContain('確定発生（ASP実測）: 0件');
+    });
+
+    it('名簿3,000逆算セクションは未計測扱いになり数値の逆算を出さない', () => {
+      const data = baseData({ manualDataProvided: false });
+      const { text } = formatWeeklyKpiEmail(data);
+      expect(text).toContain('名簿累計が未入力のため逆算不可');
+      expect(text).not.toContain('必要velocity');
+    });
+
+    it('判定期限前（pending）なら未計測でも通常通りpendingを表示する（判定自体に影響しない）', () => {
+      const data = baseData({ manualDataProvided: false });
+      const { text, subject } = formatWeeklyKpiEmail(data);
+      expect(text).toContain('判定前');
+      expect(subject).toContain('ゲート:判定前');
+    });
+
+    it('判定期限到達後は「⚠️判定保留（未計測）」に切り替わり、conversions=0起因の誤判定を確定表示しない', () => {
+      const data = baseData({
+        manualDataProvided: false,
+        gate: { now: D('2026-07-21'), clicks: 5820, clicksPrev: 1557, leads: 0, conversions: 0 },
+      });
+      const { text, subject } = formatWeeklyKpiEmail(data);
+      expect(text).toContain('⚠️判定保留（未計測）');
+      expect(text).toContain('実測値を渡して再実行し確定させてください');
+      expect(text).not.toContain('PIVOT（仮説の見直し）');
+      expect(subject).toContain('ゲート:判定保留');
+    });
+
+    it('manualDataProvided省略時は従来通り（true扱い）で既存挙動を維持する', () => {
+      const { text } = formatWeeklyKpiEmail(baseData());
+      expect(text).not.toContain('未計測');
+    });
+  });
 });
