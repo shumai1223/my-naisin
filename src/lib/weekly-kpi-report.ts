@@ -11,6 +11,7 @@ import {
   evaluateTripwires,
   evaluateRosterVelocityTarget,
   findFunnelBottleneck,
+  evaluateConsentCapture,
   type JulyGateInput,
   type TripwireInput,
   type FunnelStage,
@@ -29,6 +30,8 @@ export interface WeeklyKpiData {
   funnelStages?: FunnelStage[];
   /** ai_referralのソース別内訳（任意・件数降順でなくてよい＝表示側でソートする）。トリップワイヤー③の判定には使わず内訳表示のみ（G-2）。 */
   aiReferralBySource?: { source: string; count: number }[];
+  /** GA4 Organic Searchセッション（今週。任意）。あればConsent捕捉率の定点観測行を出す（I-5）。 */
+  ga4OrganicSessions?: number;
   /** 送客（affiliate_click）今週件数。 */
   affiliateClicks: number;
   /** ASP実測の確定発生件数（分からなければ0。¥は書かない）。 */
@@ -108,6 +111,15 @@ export function formatWeeklyKpiEmail(data: WeeklyKpiData): { subject: string; te
     const sorted = [...data.aiReferralBySource].sort((a, b) => b.count - a.count);
     for (const s of sorted) {
       lines.push(`  ${s.source}: ${fmt(s.count)}件`);
+    }
+  }
+  if (data.ga4OrganicSessions !== undefined) {
+    const consent = evaluateConsentCapture({ gscClicks: data.gsc.clicksNow, ga4OrganicSessions: data.ga4OrganicSessions });
+    lines.push('');
+    lines.push('■ Consent捕捉率 定点観測（I-5）');
+    lines.push(`  ${consent.triggered ? '🚨' : '✅'} ${consent.detail}`);
+    if (consent.triggered) {
+      lines.push('  実測の変化ではなく計測事故（GTM/同意バナー/GA4タグ抜け）の可能性を疑って確認してください。');
     }
   }
   lines.push('');

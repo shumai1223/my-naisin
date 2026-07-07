@@ -123,4 +123,23 @@ describe('formatWeeklyKpiEmail', () => {
     const { text } = formatWeeklyKpiEmail(baseData());
     expect(text).not.toContain('ソース別内訳');
   });
+
+  it('ga4OrganicSessionsを渡すとConsent捕捉率セクションが出る（I-5）', () => {
+    const data = baseData({ ga4OrganicSessions: 1038 }); // gsc.clicksNow=5820 → 約5.6x
+    const { text } = formatWeeklyKpiEmail(data);
+    expect(text).toContain('Consent捕捉率');
+    expect(text).toContain('✅');
+  });
+
+  it('Consent捕捉率が基準から急変していると🚨で警告文を出す', () => {
+    const data = baseData({ ga4OrganicSessions: 100 }); // 5820/100=58.2x
+    const { text } = formatWeeklyKpiEmail(data);
+    expect(text).toContain('🚨');
+    expect(text).toContain('計測事故');
+  });
+
+  it('ga4OrganicSessions省略時はConsent捕捉率セクションを出さない', () => {
+    const { text } = formatWeeklyKpiEmail(baseData());
+    expect(text).not.toContain('Consent捕捉率');
+  });
 });

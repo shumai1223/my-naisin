@@ -8,12 +8,15 @@ import {
   evaluateTripwires,
   evaluateRosterVelocityTarget,
   findFunnelBottleneck,
+  evaluateConsentCapture,
   GATE_DEADLINE,
   GATE_CLICK_MULTIPLE_TARGET,
   HENSACHI_CTR_ALERT_THRESHOLD,
   AI_REFERRAL_SHARE_ALERT_THRESHOLD,
   ROSTER_TARGET,
   ROSTER_TARGET_DEADLINE,
+  CONSENT_CAPTURE_RATIO_BASELINE,
+  CONSENT_CAPTURE_RATIO_TOLERANCE,
 } from '../velocity';
 
 const D = (iso: string) => new Date(`${iso}T00:00:00Z`);
@@ -293,5 +296,45 @@ describe('findFunnelBottleneck（週次ボトルネック特定・C-1）', () =>
     // a→b は前段0で除外、b→c のみ比較対象＝(100-50)/100=0.5
     expect(b?.fromLabel).toBe('b');
     expect(b?.dropRatio).toBeCloseTo(0.5, 5);
+  });
+});
+
+describe('evaluateConsentCapture（Consent捕捉率の定点観測・I-5）', () => {
+  it('基準値ちょうどは発火しない', () => {
+    const r = evaluateConsentCapture({ gscClicks: 560, ga4OrganicSessions: 100 });
+    expect(r.ratio).toBeCloseTo(CONSENT_CAPTURE_RATIO_BASELINE, 5);
+    expect(r.deviation).toBeCloseTo(0, 5);
+    expect(r.triggered).toBe(false);
+  });
+
+  it('許容乖離ちょうど（境界）は発火しない', () => {
+    const boundary = CONSENT_CAPTURE_RATIO_BASELINE * (1 + CONSENT_CAPTURE_RATIO_TOLERANCE);
+    const r = evaluateConsentCapture({ gscClicks: boundary * 100, ga4OrganicSessions: 100 });
+    expect(r.triggered).toBe(false);
+  });
+
+  it('許容乖離を超えて急増（計測事故で分母が急減した見え方）すると発火する', () => {
+    const r = evaluateConsentCapture({ gscClicks: 5820, ga4OrganicSessions: 200 }); // 29.1x
+    expect(r.triggered).toBe(true);
+    expect(r.deviation).toBeGreaterThan(CONSENT_CAPTURE_RATIO_TOLERANCE);
+  });
+
+  it('許容乖離を超えて急減（GA4側が急に多く拾い出した＝Consent同意率が急上昇 or GSC側の失報）すると発火する', () => {
+    const r = evaluateConsentCapture({ gscClicks: 5820, ga4OrganicSessions: 3000 }); // 1.94x
+    expect(r.triggered).toBe(true);
+    expect(r.deviation).toBeLessThan(-CONSENT_CAPTURE_RATIO_TOLERANCE);
+  });
+
+  it('GA4 organicセッション0件は判定不可（誤ってtriggeredにしない）', () => {
+    const r = evaluateConsentCapture({ gscClicks: 5820, ga4OrganicSessions: 0 });
+    expect(r.ratio).toBeNull();
+    expect(r.triggered).toBe(false);
+    expect(r.detail).toContain('判定不可');
+  });
+
+  it('基準値・許容乖離は上書き可能', () => {
+    const r = evaluateConsentCapture({ gscClicks: 1000, ga4OrganicSessions: 100 }, 10, 0.1); // ratio=10=baseline
+    expect(r.baseline).toBe(10);
+    expect(r.triggered).toBe(false);
   });
 });

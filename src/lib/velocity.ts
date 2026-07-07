@@ -229,6 +229,63 @@ export function evaluateRosterVelocityTarget(input: RosterVelocityInput): Roster
   };
 }
 
+/* ────────────────────────────────────────────────────────────────────────
+ * Consent捕捉率の定点観測（I-5）。
+ * GA4はConsent Mode未同意者を計測できず、GSC実クリックの一部しかGA4に現れない
+ * （[[ga4-data-snapshot-2026-06]]の実測比 約5.6x）。この比率が急変したら、トラフィックの
+ * 実態変化ではなく計測側の事故（GTM崩れ・同意バナー破損・GA4タグ抜け等）を疑う合図にする。
+ * ──────────────────────────────────────────────────────────────────────── */
+
+/** Consent捕捉率（GSCクリック / GA4 organicセッション）の実測基準値。 */
+export const CONSENT_CAPTURE_RATIO_BASELINE = 5.6;
+/** 基準からの許容乖離（相対値。0.5=±50%）。これを超えたら計測事故を疑って要確認。 */
+export const CONSENT_CAPTURE_RATIO_TOLERANCE = 0.5;
+
+export interface ConsentCaptureInput {
+  /** GSCの実クリック数（信頼できる一次値）。 */
+  gscClicks: number;
+  /** GA4のOrganic Searchセッション数（Consent Mode下の過少計測値）。 */
+  ga4OrganicSessions: number;
+}
+
+export interface ConsentCaptureResult {
+  /** gscClicks / ga4OrganicSessions。セッション0はnull（判定不可）。 */
+  ratio: number | null;
+  baseline: number;
+  /** (ratio-baseline)/baseline。ratioがnullならnull。 */
+  deviation: number | null;
+  /** |deviation| が許容乖離を超えたか＝計測事故の疑い。 */
+  triggered: boolean;
+  detail: string;
+}
+
+/** Consent捕捉率が基準から乖離していないかを判定する（純粋関数・I-5）。 */
+export function evaluateConsentCapture(
+  input: ConsentCaptureInput,
+  baseline: number = CONSENT_CAPTURE_RATIO_BASELINE,
+  tolerance: number = CONSENT_CAPTURE_RATIO_TOLERANCE
+): ConsentCaptureResult {
+  if (input.ga4OrganicSessions <= 0) {
+    return {
+      ratio: null,
+      baseline,
+      deviation: null,
+      triggered: false,
+      detail: 'GA4 organicセッションが0件のため判定不可',
+    };
+  }
+  const ratio = input.gscClicks / input.ga4OrganicSessions;
+  const deviation = (ratio - baseline) / baseline;
+  const triggered = Math.abs(deviation) > tolerance;
+  return {
+    ratio,
+    baseline,
+    deviation,
+    triggered,
+    detail: `実測比 ${ratio.toFixed(1)}x（基準${baseline}x・乖離${(deviation * 100).toFixed(0)}%）`,
+  };
+}
+
 export interface FunnelStage {
   id: string;
   label: string;

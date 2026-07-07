@@ -21,6 +21,8 @@
  *                            2件以上あればどの遷移が一番ドロップしているか（ボトルネック）を自動特定する（C-1）
  *  --ai-referral-sources=<source:count,...>  ai_referralのソース別内訳（例: chatgpt:20,perplexity:8,google-sge:5）。
  *                            指定するとメールに内訳一覧を出す（トリップワイヤー③のシェア判定には使わない・表示専用。G-2）
+ *  --ga4-organic-sessions=<件数>  GA4 Organic Searchセッション（今週）。指定するとConsent捕捉率
+ *                            （GSCクリック/GA4セッション、基準5.6x）の定点観測行を出す（I-5）
  *
  * 実行:
  *   npx tsx scripts/weekly-kpi-report.ts                 # プレビューのみ（stdout + reports/）
@@ -228,6 +230,7 @@ async function main() {
     },
     funnelStages: parseFunnelStages(args.funnel),
     aiReferralBySource: parseSourceCounts(args['ai-referral-sources']),
+    ga4OrganicSessions: args['ga4-organic-sessions'] !== undefined ? num(args['ga4-organic-sessions']) : undefined,
     affiliateClicks: num(args['affiliate-clicks']),
     confirmedConversions: num(args.conversions),
     gate: {
