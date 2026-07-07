@@ -54,6 +54,7 @@ export const STATIC_PAGES: StaticPageEntry[] = [
   { url: '/juku-hiyou', priority: 0.9, changeFrequency: 'weekly' },
   { url: '/juken-ryou', priority: 0.9, changeFrequency: 'weekly' },
   { url: '/koukou-bairitsu', priority: 0.9, changeFrequency: 'weekly' },
+  { url: '/katei-kyoshi', priority: 0.8, changeFrequency: 'weekly' },
   { url: '/naishin-age-kata', priority: 0.9, changeFrequency: 'weekly' },
   { url: '/naishin-age-kata/chu1', priority: 0.8, changeFrequency: 'weekly' },
   { url: '/naishin-age-kata/chu2', priority: 0.8, changeFrequency: 'weekly' },
