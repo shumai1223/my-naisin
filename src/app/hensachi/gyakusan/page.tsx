@@ -6,7 +6,7 @@ import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { HensachiClusterNav } from '@/components/Hensachi/HensachiClusterNav';
-import { HensachiGyakusanCalculator } from '@/components/Hensachi/HensachiGyakusanCalculator';
+import { HensachiGyakusanResultFlow } from '@/components/Hensachi/HensachiGyakusanResultFlow';
 import { SITE_URL } from '@/lib/naishin-dataset';
 
 const FAQS = [
@@ -81,7 +81,7 @@ export default function HensachiGyakusanPage() {
             </p>
           </header>
 
-          <HensachiGyakusanCalculator />
+          <HensachiGyakusanResultFlow />
 
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="mb-3 text-lg font-bold text-slate-800">逆算の考え方</h2>

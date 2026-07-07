@@ -5,12 +5,26 @@ import * as React from 'react';
 import { calcHensachi, requiredScoreForHensachi, roundHensachi } from '@/lib/hensachi';
 import { funnel } from '@/lib/track';
 
+export interface HensachiGyakusanResult {
+  /** 今の得点での偏差値（丸め後）。 */
+  currentHensachi: number;
+  /** 目標偏差値。 */
+  targetHensachi: number;
+  /** 目標までの差（偏差値換算・正=不足）。他の/hensachi系フローと同じ単位に揃える。 */
+  gap: number;
+}
+
+interface HensachiGyakusanCalculatorProps {
+  /** 結果連動CTA（C-15）：今の偏差値/目標/差（偏差値単位）を親へ持ち上げる。 */
+  onResult?: (result: HensachiGyakusanResult | null) => void;
+}
+
 /**
  * 過去問・模試の得点から今の偏差値を出し、目標偏差値に必要な点数を逆算する計算機。
  * 2つの式はどちらも lib/hensachi.ts の同じ一次式（偏差値=50+10×(score-average)/stdDev）の
  * 順方向・逆方向であり、新しい計算ロジックは増やさない。
  */
-export function HensachiGyakusanCalculator() {
+export function HensachiGyakusanCalculator({ onResult }: HensachiGyakusanCalculatorProps = {}) {
   const [score, setScore] = React.useState('');
   const [average, setAverage] = React.useState('');
   const [stdDev, setStdDev] = React.useState('');
@@ -32,6 +46,16 @@ export function HensachiGyakusanCalculator() {
   const requiredScore =
     Number.isFinite(targetNum) ? requiredScoreForHensachi(targetNum, averageNum, stdDevNum) : null;
   const gap = requiredScore !== null && score !== '' ? requiredScore - scoreNum : null;
+
+  // 結果連動CTA（C-15）：偏差値単位（他の/hensachi系フローと同じ単位）で親へ持ち上げる。
+  React.useEffect(() => {
+    if (currentHensachi === null || !Number.isFinite(targetNum)) {
+      onResult?.(null);
+      return;
+    }
+    const rounded = roundHensachi(currentHensachi);
+    onResult?.({ currentHensachi: rounded, targetHensachi: targetNum, gap: targetNum - rounded });
+  }, [currentHensachi, targetNum, onResult]);
 
   return (
     <div className="rounded-2xl border-2 border-purple-200 bg-white p-5 shadow-lg md:p-6">

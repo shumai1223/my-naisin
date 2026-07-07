@@ -21,6 +21,7 @@ describe('defaultMetricLabel', () => {
     expect(defaultMetricLabel('prefecture')).toBe('内申点');
     expect(defaultMetricLabel('hensachi')).toBe('偏差値');
     expect(defaultMetricLabel('hensachi-shiboukou')).toBe('偏差値');
+    expect(defaultMetricLabel('hensachi-gyakusan')).toBe('偏差値');
     expect(defaultMetricLabel('hyotei-heikin')).toBe('評定平均');
   });
 });
@@ -45,6 +46,7 @@ describe('leadMagnetNextStep', () => {
   it('偏差値系は偏差値の上げ方へ', () => {
     expect(leadMagnetNextStep({ source: 'hensachi' }).href).toBe('/hensachi/agekata');
     expect(leadMagnetNextStep({ source: 'hensachi-moshi' }).href).toBe('/hensachi/agekata');
+    expect(leadMagnetNextStep({ source: 'hensachi-gyakusan' }).href).toBe('/hensachi/agekata');
   });
 
   it('評定平均は推薦基準へ', () => {

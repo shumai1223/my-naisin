@@ -19,6 +19,7 @@ export type LeadSource =
   | 'hensachi-kyoka-betsu'
   | 'hensachi-shiboukou'
   | 'hensachi-moshi'
+  | 'hensachi-gyakusan'
   | 'hyotei-heikin'
   | 'prefecture'
   | 'juku-shindan'
