@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Calculator, BookOpen, Target, TrendingUp, BarChart3, Sparkles, ChevronRight, ArrowLeftRight } from 'lucide-react';
+import { Calculator, BookOpen, Target, TrendingUp, BarChart3, Sparkles, ChevronRight, ArrowLeftRight, Undo2 } from 'lucide-react';
 
 /**
  * 偏差値クラスタのハブ＆スポーク内部リンク（情報設計 §7）。
@@ -7,7 +7,7 @@ import { Calculator, BookOpen, Target, TrendingUp, BarChart3, Sparkles, ChevronR
  * 72倍市場の稼ぎ頭 /hensachi を中心に、教科別・志望校レンジ・上げ方の各スポークを相互リンクし、
  * リンクジュースをクラスタ内に循環させる。`current` で現在地を強調（自己リンクは無効化）。
  */
-export type HensachiClusterKey = 'hub' | 'shindan' | 'kyoka-betsu' | 'shiboukou' | 'agekata' | 'moshi' | 'mantenkan';
+export type HensachiClusterKey = 'hub' | 'shindan' | 'kyoka-betsu' | 'shiboukou' | 'agekata' | 'moshi' | 'mantenkan' | 'gyakusan';
 
 interface ClusterPage {
   key: HensachiClusterKey;
@@ -25,6 +25,7 @@ const CLUSTER_PAGES: ClusterPage[] = [
   { key: 'agekata', href: '/hensachi/agekata', title: '偏差値の出し方・上げ方', desc: '計算式の使い方と、1か月で偏差値を上げる具体策', icon: TrendingUp },
   { key: 'moshi', href: '/hensachi/moshi', title: '模試の偏差値の見方', desc: '模試で偏差値が違う理由・回次別・推移の正しい見方', icon: BarChart3 },
   { key: 'mantenkan', href: '/hensachi/mantenkan', title: '満点変換つき偏差値計算', desc: '500点・1000点満点など100点満点以外のテスト・模試に対応', icon: ArrowLeftRight },
+  { key: 'gyakusan', href: '/hensachi/gyakusan', title: '目標偏差値まであと何点？逆算', desc: '過去問・模試の得点から、目標偏差値に必要な点数を逆算', icon: Undo2 },
 ];
 
 export function HensachiClusterNav({ current }: { current: HensachiClusterKey }) {

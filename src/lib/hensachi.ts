@@ -79,6 +79,18 @@ export function roundHensachi(h: number): number {
   return Math.round(h * 10) / 10;
 }
 
+/**
+ * calcHensachi の逆算：目標偏差値に到達するために必要な点数を返す。
+ * 偏差値 = 50 + 10×(score − average)÷stdDev を score について解いた式。
+ * 「あと何点」逆算（過去問の得点・平均点・標準偏差から、目標偏差値に必要な点を出す）に使う。
+ */
+export function requiredScoreForHensachi(targetHensachi: number, average: number, stdDev: number): number | null {
+  if (!Number.isFinite(targetHensachi) || !Number.isFinite(average) || !Number.isFinite(stdDev) || stdDev <= 0) {
+    return null;
+  }
+  return average + (stdDev * (targetHensachi - 50)) / 10;
+}
+
 /** 偏差値 h に対応する z 値（z = (h − 50) / 10）。 */
 export function hensachiToZ(h: number): number {
   return (h - 50) / 10;

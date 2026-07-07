@@ -8,6 +8,7 @@ import {
   standardNormalCdf,
   standardNormalInv,
   calcHensachi,
+  requiredScoreForHensachi,
   hensachiToUpperPercent,
   hensachiToRank,
   upperPercentToHensachi,
@@ -58,6 +59,25 @@ describe('calcHensachi', () => {
   test('標準偏差0や不正値は null', () => {
     expect(calcHensachi(60, 50, 0)).toBeNull();
     expect(calcHensachi(NaN, 50, 15)).toBeNull();
+  });
+});
+
+describe('requiredScoreForHensachi（calcHensachiの逆算・「あと何点」の単一ソース）', () => {
+  test('目標偏差値50 → 必要点数=平均点', () => {
+    expect(requiredScoreForHensachi(50, 50, 15)).toBe(50);
+  });
+  test('目標偏差値60（+1σ）→ 必要点数=平均+標準偏差', () => {
+    expect(requiredScoreForHensachi(60, 50, 15)).toBe(65);
+  });
+  test('calcHensachiとの往復一致：requiredScoreForHensachiの結果をcalcHensachiに戻すと目標偏差値に一致', () => {
+    for (const target of [40, 50, 55, 60, 70]) {
+      const requiredScore = requiredScoreForHensachi(target, 55, 12)!;
+      expect(calcHensachi(requiredScore, 55, 12)).toBeCloseTo(target, 6);
+    }
+  });
+  test('標準偏差0や不正値は null', () => {
+    expect(requiredScoreForHensachi(60, 50, 0)).toBeNull();
+    expect(requiredScoreForHensachi(NaN, 50, 15)).toBeNull();
   });
 });
 
