@@ -94,6 +94,9 @@ gsc-weekly-report.md
 link-monitor-report.json
 reports/
 
+# D1バックアップ（名簿・APIキー等のPIIを含むため絶対に非コミット。H-4）
+backups/
+
 # GA4 OAuth 連携の機密（client_secret / refresh_token / 選択プロパティ）。絶対にコミットしない。
 .ga4/
 
