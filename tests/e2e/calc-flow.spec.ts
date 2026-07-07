@@ -18,6 +18,19 @@ test('トップ: 内申点の結果と保護者リードCTAが表示される', 
   await page.screenshot({ path: 'test-results/home-full.png', fullPage: true });
 });
 
+test('黄金導線（H-6）: 計算→結果→CTA→LINE友だち追加リンクまで到達できる', async ({ page }) => {
+  await page.goto('/', { waitUntil: 'domcontentloaded' });
+  // 計算（既定スコアで即時結果表示）
+  await expect(page.getByText(/点/).first()).toBeVisible();
+  // 結果直後のCTA（堀A：LINE/メール名簿化）が描画される
+  const lineLink = page.locator('a[href*="lin.ee"], a[href*="line.me"]').first();
+  await expect(lineLink).toBeVisible();
+  // クリックすると外部（LINE）へ飛ぶリンクであること（実際には遷移しない・href検証のみ）
+  await expect(lineLink).toHaveAttribute('target', '_blank');
+  const href = await lineLink.getAttribute('href');
+  expect(href).toBeTruthy();
+});
+
 test('偏差値ツール: 計算機ページが描画される', async ({ page }) => {
   await page.goto('/hensachi', { waitUntil: 'domcontentloaded' });
   await expect(page.locator('h1').first()).toContainText(/偏差値/);
