@@ -20,6 +20,8 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run Lighthouse
+        id: lighthouse
+        continue-on-error: true
         uses: treosh/lighthouse-ci-action@v12
         with:
           urls: |
@@ -31,3 +33,30 @@ jobs:
           configPath: ./.lighthouserc.json
           uploadArtifacts: true
           temporaryPublicStorage: true
+
+      # LCP退行アラート（H-2）：.lighthouserc.json で largest-contentful-paint を
+      # error 判定にしているため、2500msを超えるとこのステップの outcome が failure になる。
+      # continue-on-error で一旦通してレポートのuploadは必ず走らせつつ、ここでIssue化して見逃さないようにする。
+      - name: Create issue on LCP regression
+        if: steps.lighthouse.outcome == 'failure'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `🚨 Lighthouse CWV: LCP退行を検知 (${new Date().toISOString().slice(0, 10)})`,
+              body: [
+                'Lighthouse CI で largest-contentful-paint が閾値(2500ms)を超えました（.lighthouserc.json）。',
+                '',
+                `詳細: ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
+                '',
+                '直近の変更（framer-motion追加・重い画像・render-blockingスクリプト等）を疑ってください。'
+              ].join('\n'),
+              labels: ['performance', 'automated']
+            });
+
+      # 検知後もJobを赤くして見逃し防止（レポートは上のステップで既にuploadされている）。
+      - name: Fail job if LCP regressed
+        if: steps.lighthouse.outcome == 'failure'
+        run: exit 1
