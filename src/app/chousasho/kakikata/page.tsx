@@ -140,6 +140,7 @@ export default function ChousashoKakikataPage() {
             {[
               { href: '/chousasho', title: '調査書とは？（記載内容・内申点との違い）' },
               { href: '/chousasho/hyoutei', title: '調査書と内申点・評定平均の連動' },
+              { href: '/chousasho/reibun', title: '活動報告書の書き方例文・依頼マナー' },
               { href: '/mendan', title: '三者面談の準備（先生に聞くこと）' },
               { href: '/juken-schedule', title: '受験スケジュール・出願時期' },
             ].map((c) => (

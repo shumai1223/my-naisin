@@ -65,6 +65,7 @@ export const STATIC_PAGES: StaticPageEntry[] = [
   { url: '/chousasho', priority: 0.9, changeFrequency: 'weekly' },
   { url: '/chousasho/kakikata', priority: 0.8, changeFrequency: 'weekly' },
   { url: '/chousasho/hyoutei', priority: 0.8, changeFrequency: 'weekly' },
+  { url: '/chousasho/reibun', priority: 0.8, changeFrequency: 'weekly' },
   { url: '/sougou-gata-senbatsu', priority: 0.8, changeFrequency: 'weekly' },
   { url: '/suisen-nyuushi', priority: 0.9, changeFrequency: 'weekly' },
   { url: '/hyouka-kijun', priority: 0.8, changeFrequency: 'weekly' },

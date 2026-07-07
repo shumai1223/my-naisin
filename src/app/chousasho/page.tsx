@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, FileText, ListChecks, Scale, HelpCircle, PenLine, Calculator } from 'lucide-react';
+import { Home, ChevronRight, FileText, ListChecks, Scale, HelpCircle, PenLine, Calculator, NotebookPen } from 'lucide-react';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -182,6 +182,15 @@ export default function ChousashoPage() {
               <span>
                 <span className="flex items-center gap-1 font-bold text-slate-800 group-hover:text-blue-700">調査書と内申点・評定平均の連動<ChevronRight className="h-4 w-4 text-slate-400" /></span>
                 <span className="mt-1 block text-sm leading-relaxed text-slate-600">評定→内申点→調査書点へ。総合得点での合否の仕組み。</span>
+              </span>
+            </Link>
+            <Link href="/chousasho/reibun" className="group flex items-start gap-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-md">
+              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-rose-500 to-pink-600 text-white shadow-md">
+                <NotebookPen className="h-5 w-5" />
+              </span>
+              <span>
+                <span className="flex items-center gap-1 font-bold text-slate-800 group-hover:text-blue-700">活動報告書の書き方例文・依頼マナー<ChevronRight className="h-4 w-4 text-slate-400" /></span>
+                <span className="mt-1 block text-sm leading-relaxed text-slate-600">部活動・検定・委員会別の例文と、先生への依頼マナー・期限チェックリスト。</span>
               </span>
             </Link>
           </section>
