@@ -3,6 +3,8 @@
  *
  *   npx tsx scripts/newsletter.ts --trigger=monthly-checklist --month=2026年7月 --dry-run
  *   npx tsx scripts/newsletter.ts --trigger=season-summer --recipients=recipients.json --send
+ *   npx tsx scripts/newsletter.ts --winterCheckpoint=open --variant=B --audience=parent --dry-run
+ *     （冬窓11/15-12/25の事前組込A/B・C-1。--winterCheckpoint=open|final --variant=A|B --audience=student|parent）
  *
  * 思想（[[fable5-master-plan-2026-06]]）：配信できない名簿は資産でない。D1 に貯まった購読者へ
  * broadcast-templates.ts の“中身”を Resend で一斉配信し、受験本番までの接点を保つ。
@@ -24,8 +26,11 @@ import {
   BROADCAST_TEMPLATES,
   getBroadcastTemplate,
   getMonthlyMessage,
+  getWinterMessage,
   type BroadcastTrigger,
   type Audience,
+  type WinterCheckpoint,
+  type CopyVariant,
 } from '@/lib/broadcast-templates';
 import {
   renderNewsletterHtml,
@@ -77,13 +82,34 @@ async function main() {
   const recipientsPath = arg('recipients');
   const send = flag('send') && !flag('dry-run');
 
-  // モード判定：--calMonth（12ヶ月カレンダー・H4）優先、無ければ --trigger（季節/ステップ）。
+  // モード判定：--winterCheckpoint（冬窓A/B・C-1）＞--calMonth（12ヶ月カレンダー・H4）＞--trigger（季節/ステップ）。
+  const winterCheckpointArg = arg('winterCheckpoint');
   const calMonthArg = arg('calMonth');
   let template: RenderableBroadcast;
   let jobLabel: string;
   let previewSlug: string;
 
-  if (calMonthArg) {
+  if (winterCheckpointArg) {
+    const checkpoint = winterCheckpointArg as WinterCheckpoint;
+    const variant = (arg('variant') ?? 'A') as CopyVariant;
+    const audience = (arg('audience') ?? 'student') as Audience;
+    if (
+      (checkpoint !== 'open' && checkpoint !== 'final') ||
+      (variant !== 'A' && variant !== 'B') ||
+      (audience !== 'student' && audience !== 'parent')
+    ) {
+      console.error('✗ --winterCheckpoint=open|final --variant=A|B --audience=student|parent を指定してください。');
+      process.exit(1);
+    }
+    const message = getWinterMessage(checkpoint, variant, audience);
+    if (!message) {
+      console.error(`✗ 冬窓配信（${checkpoint}/${variant}）が見つかりません。`);
+      process.exit(1);
+    }
+    template = message;
+    jobLabel = `winter=${checkpoint} variant=${variant} audience=${audience}`;
+    previewSlug = `winter-${checkpoint}-${variant}-${audience}`;
+  } else if (calMonthArg) {
     const month = Number(calMonthArg);
     const audience = (arg('audience') ?? 'student') as Audience;
     if (!Number.isInteger(month) || month < 1 || month > 12 || (audience !== 'student' && audience !== 'parent')) {

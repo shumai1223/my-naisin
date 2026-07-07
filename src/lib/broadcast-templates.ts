@@ -339,3 +339,102 @@ export function getMonthlyBroadcast(month: number): MonthlyBroadcast | undefined
 export function getMonthlyMessage(month: number, audience: Audience): AudienceMessage | undefined {
   return getMonthlyBroadcast(month)?.[audience];
 }
+
+/* ────────────────────────────────────────────────────────────────────────
+ * 冬窓（11/15-12/25）配信カレンダー＋コピーA/B事前組込（C-1）。
+ *
+ * 11/15は新規開発凍結・収穫オペ移行日（[[fable5-fullaccel-backlog-2026-07]]）。凍結後に
+ * 新しいコピーを書く/実装する余地は無いため、窓を「open（窓オープン＝面談前の現在地整理）」
+ * 「final（出願直前の最終確認）」の2チェックポイントに分け、それぞれ2バリアント（A=落ち着いた
+ * 現在地整理トーン／B=期限接近の緊急性トーン）を今のうちに用意しておく。
+ * 断定日付は持たない（県・年度で変わるため捏造ゼロ）＝parent-window.ts と同方針。
+ * ──────────────────────────────────────────────────────────────────────── */
+
+export type WinterCheckpoint = 'open' | 'final';
+export type CopyVariant = 'A' | 'B';
+
+export interface WinterBroadcastVariant {
+  checkpoint: WinterCheckpoint;
+  variant: CopyVariant;
+  /** 目安の送信時期（断定日ではなく目安ラベル）。 */
+  targetDateLabel: string;
+  student: AudienceMessage;
+  parent: AudienceMessage;
+}
+
+export const WINTER_WINDOW_SCHEDULE: WinterBroadcastVariant[] = [
+  {
+    checkpoint: 'open',
+    variant: 'A',
+    targetDateLabel: '11月中旬ごろ（冬窓オープン）',
+    student: {
+      subject: '【2学期末】面談の前に、いまの現在地を整理しておきませんか',
+      body: 'まもなく2学期末の三者面談・出願準備の時期です。今の内申点・偏差値・志望校との差を数値で整理しておくと、先生への相談がぐっと具体的になります。焦らず、まずは現在地の確認から始めましょう。',
+      cta: { label: '今の内申点・差を計算する', path: '/' },
+    },
+    parent: {
+      subject: '【2学期末】出願を決める面談の前に整理したいこと',
+      body: '2学期末の三者面談は、内申が実質固まり出願校を決める大切な場です。お子さまの現在地（数値と目標との差）と、家庭の費用方針を事前に整理しておくと、限られた面談の時間を最大限に活かせます。',
+      cta: { label: '面談前に確認すべきことを見る', path: '/mendan' },
+    },
+  },
+  {
+    checkpoint: 'open',
+    variant: 'B',
+    targetDateLabel: '11月中旬ごろ（冬窓オープン）',
+    student: {
+      subject: '【出願まで秒読み】今の実力、数値で把握できていますか？',
+      body: '出願校を決める大事な面談が近づいています。「なんとなく大丈夫」ではなく、内申点・偏差値・志望校との差を今すぐ数値で確認しておきましょう。知っているかどうかで面談での相談の質が変わります。',
+      cta: { label: '今すぐ現在地を確認する', path: '/' },
+    },
+    parent: {
+      subject: '【出願まで秒読み】面談前に必ず確認したい3つの数値',
+      body: '出願校を決める面談が近づく中、①内申点 ②偏差値 ③志望校との差 を家庭で把握できていますか。数値の裏付けがあると、面談での先生への相談も、家庭内での話し合いも格段に具体的になります。今のうちの確認をおすすめします。',
+      cta: { label: '今すぐ現在地を確認する', path: '/mendan' },
+    },
+  },
+  {
+    checkpoint: 'final',
+    variant: 'A',
+    targetDateLabel: '12月下旬ごろ（出願直前）',
+    student: {
+      subject: '【出願直前】最後にもう一度、志望校との差を確認しましょう',
+      body: '出願校を決める最終段階です。今の内申点＋当日点の見込みで、志望校が安全圏・合格圏・努力圏のどれかを最後にもう一度確認しておきましょう。併願校の組み合わせも、無理のない範囲で見直しておくと安心です。',
+      cta: { label: '総合得点で最終確認する', path: '/total-score' },
+    },
+    parent: {
+      subject: '【出願直前】最終確認しておきたい費用と手続き',
+      body: '出願校を決める最終段階です。お子さまの数値（内申・偏差値・差）に加えて、進学先ごとの費用の見通し（私立併願の場合の実質負担など）を最後に整理しておくと、出願後も落ち着いて過ごせます。',
+      cta: { label: '進学先ごとの費用を最終確認する', path: '/hiyou' },
+    },
+  },
+  {
+    checkpoint: 'final',
+    variant: 'B',
+    targetDateLabel: '12月下旬ごろ（出願直前）',
+    student: {
+      subject: '【出願まであとわずか】今日、現在地を確認しておこう',
+      body: '出願まで残りわずかです。志望校との差を知らないまま出願日を迎えるのは避けたいところ。今日のうちに総合得点・当日点の必要点を確認し、残りの日数でできることに集中しましょう。',
+      cta: { label: '今すぐ最終チェックする', path: '/total-score' },
+    },
+    parent: {
+      subject: '【出願まであとわずか】費用の最終確認はお済みですか？',
+      body: '出願まで残りわずかです。併願校の組み合わせによって費用は大きく変わります。まだ確認できていなければ、今日のうちに進学先ごとの実質負担を確認しておくことをおすすめします。',
+      cta: { label: '今すぐ費用を最終確認する', path: '/hiyou' },
+    },
+  },
+];
+
+/** チェックポイント×バリアントから冬窓配信を引く（無ければ undefined）。 */
+export function getWinterBroadcast(checkpoint: WinterCheckpoint, variant: CopyVariant): WinterBroadcastVariant | undefined {
+  return WINTER_WINDOW_SCHEDULE.find((w) => w.checkpoint === checkpoint && w.variant === variant);
+}
+
+/** チェックポイント×バリアント×対象から、レンダラ互換の1通ぶんを取り出す。 */
+export function getWinterMessage(
+  checkpoint: WinterCheckpoint,
+  variant: CopyVariant,
+  audience: Audience
+): AudienceMessage | undefined {
+  return getWinterBroadcast(checkpoint, variant)?.[audience];
+}
