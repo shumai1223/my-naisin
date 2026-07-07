@@ -11,7 +11,7 @@ import {
 } from '@/lib/clicks-db';
 import { classifyClick, type ClickTrust } from '@/lib/bot-filter';
 import { getLeadSummary, getLeadDailyCounts } from '@/lib/leads-db';
-import { getApiKeyStats } from '@/lib/api-keys';
+import { getApiKeyStats, getFreemiumFunnel } from '@/lib/api-keys';
 import { evaluateJulyGate, bucketDailyByWeek, type GateVerdict } from '@/lib/velocity';
 import { countActiveSubscriptions } from '@/lib/push-db';
 import {
@@ -190,20 +190,33 @@ export default async function AdminReportPage({
   const trustedOnly = sp.clicks !== 'all';
   const to = { trustedOnly };
 
-  const [rows, trend, refRows, compare, leads, pushCount, recentClicks, apiKeys, trust, weeklyClickTrend, leadDaily] =
-    await Promise.all([
-      getClickSummary(days, to),
-      getClickTrend(trendDays, trendView, to),
-      getRefererSummary(days),
-      getClickPeriodComparison(days, to),
-      getLeadSummary(20),
-      countActiveSubscriptions(),
-      getRecentClicks(50),
-      getApiKeyStats(50),
-      getClickTrustCounts(days),
-      getClickTrend(56, 'day', to),
-      getLeadDailyCounts(56),
-    ]);
+  const [
+    rows,
+    trend,
+    refRows,
+    compare,
+    leads,
+    pushCount,
+    recentClicks,
+    apiKeys,
+    trust,
+    weeklyClickTrend,
+    leadDaily,
+    apiFunnel,
+  ] = await Promise.all([
+    getClickSummary(days, to),
+    getClickTrend(trendDays, trendView, to),
+    getRefererSummary(days),
+    getClickPeriodComparison(days, to),
+    getLeadSummary(20),
+    countActiveSubscriptions(),
+    getRecentClicks(50),
+    getApiKeyStats(50),
+    getClickTrustCounts(days),
+    getClickTrend(56, 'day', to),
+    getLeadDailyCounts(56),
+    getFreemiumFunnel(),
+  ]);
 
   // ── 今季の桁レバー（Build 3）：7/20 反証ゲート＋週次velocity ──────────────────
   // 発生（conversions）は D1 に無い（ASP管理画面が一次）ため 0 で評価する＝GO判定は本人がASPで確認して読む。
@@ -871,6 +884,41 @@ export default async function AdminReportPage({
               </table>
             </div>
           )}
+        </div>
+
+        {/* Freemiumファネル（E-5・発行→利用開始→当月継続→pro転換） */}
+        <div className="mt-6">
+          <h2 className={sectionTitle}>Freemiumファネル — 発行→利用→pro転換</h2>
+          <p className="mt-0.5 text-[11px] text-slate-400">
+            free発行後に同メールでpro/scaleキーが発行されたら「転換」とみなす（tierは同一キーで書き換わらない設計＝stripe/webhook）。転換率の分母はメール登録があるfreeキーのみ。
+          </p>
+          <div className="mt-2 grid grid-cols-2 gap-3 md:grid-cols-5">
+            <div className={card}>
+              <div className="text-[11px] text-slate-500">free発行</div>
+              <div className="mt-1 text-xl font-black text-slate-900 tabular-nums">{apiFunnel.issuedFree}</div>
+            </div>
+            <div className={card}>
+              <div className="text-[11px] text-slate-500">利用開始（1回以上）</div>
+              <div className="mt-1 text-xl font-bold text-slate-700 tabular-nums">{apiFunnel.activatedFree}</div>
+            </div>
+            <div className={card}>
+              <div className="text-[11px] text-slate-500">当月継続利用</div>
+              <div className="mt-1 text-xl font-bold text-slate-700 tabular-nums">{apiFunnel.activeThisMonthFree}</div>
+            </div>
+            <div className={card}>
+              <div className="text-[11px] text-slate-500">pro/scale発行</div>
+              <div className="mt-1 text-xl font-black text-indigo-700 tabular-nums">{apiFunnel.issuedPaid}</div>
+            </div>
+            <div className={card}>
+              <div className="text-[11px] text-slate-500">転換率（メール一致）</div>
+              <div className="mt-1 text-xl font-black text-emerald-700 tabular-nums">
+                {apiFunnel.distinctFreeEmails > 0 ? `${(apiFunnel.conversionRate * 100).toFixed(1)}%` : '—'}
+              </div>
+              <div className="mt-0.5 text-[10px] text-slate-400">
+                {apiFunnel.convertedEmails}/{apiFunnel.distinctFreeEmails}件（メール登録済free）
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* 直近クリック明細（信頼度分類＝自己検証用） */}

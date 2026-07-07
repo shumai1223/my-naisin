@@ -208,6 +208,90 @@ export interface ApiKeyStat {
   this_month: number;
 }
 
+export interface FreemiumFunnelCounts {
+  /** free ティアの累計発行数。 */
+  issuedFree: number;
+  /** free ティアで累計1回以上呼び出したキー数（=お試しで終わらず実際に使った）。 */
+  activatedFree: number;
+  /** free ティアで当月1回以上呼び出したキー数（=継続利用）。 */
+  activeThisMonthFree: number;
+  /** pro/scale の累計発行数。 */
+  issuedPaid: number;
+  /** free ティアでメール登録のある一意ユーザー数（転換率の分母）。 */
+  distinctFreeEmails: number;
+  /** free発行後に同メールでpro/scaleを発行した一意ユーザー数（=転換）。 */
+  convertedEmails: number;
+}
+
+export interface FreemiumFunnel extends FreemiumFunnelCounts {
+  /** convertedEmails / distinctFreeEmails（メール未登録の匿名発行は分母から除外）。分母0は0。 */
+  conversionRate: number;
+}
+
+/** D1非依存の純粋計算。カウントから転換率を出すだけ＝テスト可能。 */
+export function computeFreemiumFunnel(counts: FreemiumFunnelCounts): FreemiumFunnel {
+  return {
+    ...counts,
+    conversionRate: counts.distinctFreeEmails > 0 ? counts.convertedEmails / counts.distinctFreeEmails : 0,
+  };
+}
+
+const EMPTY_FUNNEL_COUNTS: FreemiumFunnelCounts = {
+  issuedFree: 0,
+  activatedFree: 0,
+  activeThisMonthFree: 0,
+  issuedPaid: 0,
+  distinctFreeEmails: 0,
+  convertedEmails: 0,
+};
+
+/**
+ * Freemiumファネル（発行→利用開始→当月継続→pro転換）の実測値。D1未接続は全0。
+ * pro/scale発行はStripe Webhookが同メールで新規キーを都度発行する設計（stripe/webhook/route.ts）
+ * のため、「転換」は同一キーのtier変化ではなくメール一致で判定する。
+ */
+export async function getFreemiumFunnel(now: Date = new Date()): Promise<FreemiumFunnel> {
+  try {
+    const db = await getDb();
+    if (!db) return computeFreemiumFunnel(EMPTY_FUNNEL_COUNTS);
+    const period = periodKey(now);
+    const [issuedFree, activatedFree, activeThisMonth, issuedPaid, distinctEmails, converted] = await Promise.all([
+      db.prepare(`SELECT COUNT(*) AS n FROM api_keys WHERE tier = 'free'`).all<{ n: number }>(),
+      db.prepare(`SELECT COUNT(*) AS n FROM api_keys WHERE tier = 'free' AND request_count > 0`).all<{ n: number }>(),
+      db
+        .prepare(
+          `SELECT COUNT(DISTINCT k.id) AS n FROM api_keys k
+           JOIN api_usage u ON u.key_id = k.id AND u.period = ?
+           WHERE k.tier = 'free' AND u.count > 0`
+        )
+        .bind(period)
+        .all<{ n: number }>(),
+      db.prepare(`SELECT COUNT(*) AS n FROM api_keys WHERE tier IN ('pro', 'scale')`).all<{ n: number }>(),
+      db
+        .prepare(`SELECT COUNT(DISTINCT email) AS n FROM api_keys WHERE tier = 'free' AND email IS NOT NULL`)
+        .all<{ n: number }>(),
+      db
+        .prepare(
+          `SELECT COUNT(DISTINCT f.email) AS n FROM api_keys f
+           WHERE f.tier = 'free' AND f.email IS NOT NULL
+           AND EXISTS (SELECT 1 FROM api_keys p WHERE p.email = f.email AND p.tier IN ('pro', 'scale'))`
+        )
+        .all<{ n: number }>(),
+    ]);
+    return computeFreemiumFunnel({
+      issuedFree: issuedFree.results?.[0]?.n ?? 0,
+      activatedFree: activatedFree.results?.[0]?.n ?? 0,
+      activeThisMonthFree: activeThisMonth.results?.[0]?.n ?? 0,
+      issuedPaid: issuedPaid.results?.[0]?.n ?? 0,
+      distinctFreeEmails: distinctEmails.results?.[0]?.n ?? 0,
+      convertedEmails: converted.results?.[0]?.n ?? 0,
+    });
+  } catch (err) {
+    console.error('getFreemiumFunnel skipped:', err instanceof Error ? err.message : err);
+    return computeFreemiumFunnel(EMPTY_FUNNEL_COUNTS);
+  }
+}
+
 /** 管理ダッシュボード用：発行済みキーと当月利用の一覧。未バインドなら空。 */
 export async function getApiKeyStats(limit = 50): Promise<ApiKeyStat[]> {
   try {

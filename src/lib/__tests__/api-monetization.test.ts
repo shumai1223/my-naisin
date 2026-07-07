@@ -16,6 +16,7 @@ import {
   periodKey,
 } from '../api-tiers';
 import { createRateLimiter, extractApiKey, gateApiRequest } from '../api-auth';
+import { computeFreemiumFunnel } from '../api-keys';
 
 describe('api-tiers（ティア表の正準データ）', () => {
   test('4ティアが揃い、レートは anonymous < free < pro < scale で単調増加', () => {
@@ -128,5 +129,46 @@ describe('gateApiRequest（匿名経路：D1未接続でも壊れない）', () 
     if (last && !last.allowed) {
       expect(last.response.status).toBe(429);
     }
+  });
+});
+
+describe('computeFreemiumFunnel（D1非依存の転換率計算）', () => {
+  test('メール登録0件は転換率0（ゼロ除算を起こさない）', () => {
+    const f = computeFreemiumFunnel({
+      issuedFree: 5,
+      activatedFree: 2,
+      activeThisMonthFree: 1,
+      issuedPaid: 0,
+      distinctFreeEmails: 0,
+      convertedEmails: 0,
+    });
+    expect(f.conversionRate).toBe(0);
+  });
+
+  test('転換率 = convertedEmails / distinctFreeEmails', () => {
+    const f = computeFreemiumFunnel({
+      issuedFree: 100,
+      activatedFree: 40,
+      activeThisMonthFree: 20,
+      issuedPaid: 5,
+      distinctFreeEmails: 25,
+      convertedEmails: 5,
+    });
+    expect(f.conversionRate).toBe(0.2);
+  });
+
+  test('入力カウントをそのまま透過する', () => {
+    const f = computeFreemiumFunnel({
+      issuedFree: 10,
+      activatedFree: 8,
+      activeThisMonthFree: 6,
+      issuedPaid: 2,
+      distinctFreeEmails: 4,
+      convertedEmails: 1,
+    });
+    expect(f.issuedFree).toBe(10);
+    expect(f.activatedFree).toBe(8);
+    expect(f.activeThisMonthFree).toBe(6);
+    expect(f.issuedPaid).toBe(2);
   });
 });
