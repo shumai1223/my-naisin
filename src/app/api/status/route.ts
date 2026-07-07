@@ -27,6 +27,8 @@ export async function GET() {
         totalScoreIndex: '/api/total-score',
         totalScoreDetail: '/api/total-score/{code}',
         hensachiPercentileTable: '/api/hensachi/percentile-table',
+        educationCost: '/api/education-cost',
+        educationCostPathToUniversity: '/api/education-cost/path-to-university',
         mcp: '/api/mcp',
         openapi: '/api/openapi',
       },

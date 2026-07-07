@@ -13,6 +13,8 @@ import { GET as statusGet } from '@/app/api/status/route';
 import { GET as totalScoreIndexGet } from '@/app/api/total-score/route';
 import { GET as totalScoreDetailGet } from '@/app/api/total-score/[code]/route';
 import { GET as percentileTableGet } from '@/app/api/hensachi/percentile-table/route';
+import { GET as educationCostGet } from '@/app/api/education-cost/route';
+import { GET as pathToUniversityGet } from '@/app/api/education-cost/path-to-university/route';
 
 function req(url: string) {
   return new Request(url);
@@ -112,6 +114,47 @@ describe('/api/hensachi/percentile-table（E-4）', () => {
   test('不正なvaluesは400', async () => {
     const res = await percentileTableGet(
       req('https://my-naishin.com/api/hensachi/percentile-table?values=abc'),
+    );
+    expect(res.status).toBe(400);
+  });
+});
+
+describe('/api/education-cost（E-4）', () => {
+  test('既定値（中1・公立・公立・塾なし）で計算する', async () => {
+    const json = await (
+      await educationCostGet(req('https://my-naishin.com/api/education-cost'))
+    ).json();
+    expect(json.result.total).toBeGreaterThan(0);
+    expect(json.input.currentGrade).toBe(1);
+  });
+
+  test('パラメータ指定で計算する', async () => {
+    const json = await (
+      await educationCostGet(
+        req('https://my-naishin.com/api/education-cost?currentGrade=3&juniorCourse=public&highCourse=private&jukuType=kobetsu'),
+      )
+    ).json();
+    expect(json.input.highCourse).toBe('private');
+    expect(json.result.juniorRemainingYears).toBe(1);
+  });
+
+  test('不正なcurrentGradeは400', async () => {
+    const res = await educationCostGet(req('https://my-naishin.com/api/education-cost?currentGrade=9'));
+    expect(res.status).toBe(400);
+  });
+});
+
+describe('/api/education-cost/path-to-university（E-4）', () => {
+  test('既定値（公立高・under590・国立・自宅）で計算する', async () => {
+    const json = await (
+      await pathToUniversityGet(req('https://my-naishin.com/api/education-cost/path-to-university'))
+    ).json();
+    expect(json.result.total).toBeGreaterThan(0);
+  });
+
+  test('不正なuniversityTypeは400', async () => {
+    const res = await pathToUniversityGet(
+      req('https://my-naishin.com/api/education-cost/path-to-university?universityType=harvard'),
     );
     expect(res.status).toBe(400);
   });

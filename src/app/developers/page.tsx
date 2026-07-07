@@ -309,7 +309,26 @@ curl ${SITE_URL}/api/status`;
             </a>
           </p>
 
-          <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">⑦ ステータス確認（認証不要）</h3>
+          <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">⑦ 教育費シミュレーション</h3>
+          <p className="mb-2 text-sm text-slate-600">
+            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">GET /api/education-cost</code>
+            {' / '}
+            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">GET /api/education-cost/path-to-university</code>
+            {' — '}文部科学省「子供の学習費調査」等に基づく教育費総額・高校〜大学の進路別総額を計算（<code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">/kyouiku-hi</code>・<code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">/shinro-hiyou</code>と同一エンジン）。
+          </p>
+          <p className="mt-1 text-xs text-slate-500">
+            実際に開く：{' '}
+            <a
+              href="/api/education-cost?currentGrade=1&juniorCourse=public&highCourse=public&jukuType=kobetsu"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 font-semibold text-indigo-600 underline"
+            >
+              /api/education-cost（例） <ExternalLink className="h-3 w-3" />
+            </a>
+          </p>
+
+          <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">⑧ ステータス確認（認証不要）</h3>
           <p className="mb-2 text-sm text-slate-600">
             <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">GET /api/status</code>
             — APIが稼働しているか・データセットのバージョンを軽量に確認（レート制限なし）。
@@ -326,7 +345,7 @@ curl ${SITE_URL}/api/status`;
             </a>
           </p>
 
-          <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">⑧ 逆算・比較・学習計画（クエリで利用）</h3>
+          <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">⑨ 逆算・比較・学習計画（クエリで利用）</h3>
           <p className="mb-2 text-sm text-slate-600">
             <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">?target=</code> で必要評定平均の逆算、
             <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">&weeks=</code> で週次の学習計画、
