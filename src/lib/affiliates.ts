@@ -49,6 +49,8 @@ export type AffiliateId =
   // 未approveの間は seasonal が自動で既存塾（そら塾/森塾/キャンパス）にフォールバックするのでデッドリンクは出ない。
   | 'winter-koushuu-trial'
   | 'summer-koushuu-trial'
+  // ── 入試直前期（1〜2月）専用の先回し枠。「講習」でなく「直前個別フォロー/無料相談」系の案件が出たら差す（D-7）。 ──
+  | 'last-minute-trial'
   // ── アクセストレード 提携承認済み（2026-06-19 live・入会=paid型） ──
   | 'shinken-koukou'
   | 'eten-net';
@@ -464,6 +466,17 @@ export const AFFILIATES: Record<AffiliateId, AffiliateConfig> = {
     name: '夏期講習の無料体験・招待',
     href: '#',
     text: '夏期講習の無料体験を申し込む',
+    trackingPixel: '',
+    status: 'pending',
+  },
+  // 1〜2月（出願・当日点の追い込み期）にASP出品される「入試直前 個別フォロー/無料相談」案件を
+  // 申請→ここに挿すと last-minute シーズンの高インテント面へ自動適用（D-7）。
+  'last-minute-trial': {
+    id: 'last-minute-trial',
+    type: 'text',
+    name: '入試直前の無料相談・招待',
+    href: '#',
+    text: '入試直前の無料相談を申し込む',
     trackingPixel: '',
     status: 'pending',
   },

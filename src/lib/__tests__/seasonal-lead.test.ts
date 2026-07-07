@@ -4,11 +4,16 @@ import { selectLeadOffer } from '@/lib/lead-config';
 const D = (iso: string) => new Date(`${iso}T00:00:00Z`);
 
 describe('getActiveSeason（日付→季節）', () => {
-  it('冬期講習〜受験直前 11/1〜2/15 は winter', () => {
+  it('冬期講習（募集期） 11/1〜12/31 は winter', () => {
     expect(getActiveSeason(D('2026-11-01'))).toBe('winter');
     expect(getActiveSeason(D('2026-12-15'))).toBe('winter');
-    expect(getActiveSeason(D('2027-01-20'))).toBe('winter');
-    expect(getActiveSeason(D('2027-02-15'))).toBe('winter');
+    expect(getActiveSeason(D('2026-12-31'))).toBe('winter');
+  });
+
+  it('入試直前（追い込み期） 1/1〜2/15 は last-minute（D-7: 講習募集終了後は別コピーへ切替）', () => {
+    expect(getActiveSeason(D('2027-01-01'))).toBe('last-minute');
+    expect(getActiveSeason(D('2027-01-20'))).toBe('last-minute');
+    expect(getActiveSeason(D('2027-02-15'))).toBe('last-minute');
   });
 
   it('夏期講習 6/15〜8/10 は summer', () => {
@@ -43,6 +48,17 @@ describe('selectLeadOffer × 季節講習スワップ', () => {
     const o = selectLeadOffer({ placement: 'naishin-up', season: 'summer' });
     expect(o.ctaText).toContain('夏期講習');
     expect(o.affiliateId).toBe('sora-juku-text');
+  });
+
+  it('入試直前（last-minute）は「講習」でなく直前対策コピー＋無料相談の言い回しになる（D-7）', () => {
+    const o = selectLeadOffer({ placement: 'result', season: 'last-minute' });
+    expect(o.heading).toBe(SEASON_COPY['last-minute'].heading);
+    expect(o.ctaText).toContain('入試直前');
+    expect(o.ctaText).not.toContain('講習');
+    expect(o.note).toContain('無料相談');
+    expect(o.note).not.toContain('無料体験');
+    // last-minute-trial は pending のため live 塾へフォールバック（デッドリンクを出さない）
+    expect(['sora-juku-text', 'morijuku-text', 'campus-text', 'atama-text']).toContain(o.affiliateId);
   });
 
   it('専用枠が pending の今は live 塾にフォールバック（デッドリンクを出さない）', () => {

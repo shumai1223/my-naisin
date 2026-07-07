@@ -104,6 +104,7 @@ const PROGRAM_PRESET: Partial<Record<AffiliateId, Pick<LeadOffer, 'note' | 'ctaT
   'moshimo-manabuterasu': { note: 'まなぶてらす（オンライン家庭教師）の無料体験レッスン（PR）', ctaText: '無料体験を申し込む' },
   'winter-koushuu-trial': { note: '塾の冬期講習・無料体験（PR）／費用はかかりません', ctaText: '冬期講習の無料体験を申し込む' },
   'summer-koushuu-trial': { note: '塾の夏期講習・無料体験（PR）／費用はかかりません', ctaText: '夏期講習の無料体験を申し込む' },
+  'last-minute-trial': { note: '入試直前の個別フォロー・無料相談（PR）／費用はかかりません', ctaText: '入試直前の無料相談を申し込む' },
 };
 
 /** プログラムIDから note/ctaText を補完したオファー断片を作る（割当ミスを防ぐ）。 */
@@ -252,7 +253,7 @@ export const PREFECTURE_PLACEMENT_LEAD_OVERRIDES: Record<string, Partial<LeadOff
   // 例: 'osaka:result': { affiliateId: 'morijuku-text', note: '森塾の無料体験（PR）／無料', ctaText: '無料体験を申し込む' },
 };
 
-// ── 季節講習スワップ（夏期/冬期） ────────────────────────────────────────────
+// ── 季節講習スワップ（夏期/冬期/直前） ────────────────────────────────────────────
 /**
  * 季節中だけ「塾の季節講習 無料体験」に寄せる面（高インテントの“通塾動機”面のみ）。
  * 学費FP（hiyou/suisen）・家庭教師（mendan）・不登校（futoukou）・Z会の対照面（hensachi/hyotei/home/blog）は除外。
@@ -269,6 +270,7 @@ const SEASONAL_PLACEMENTS = new Set<LeadPlacement>([
 const SEASON_AFFILIATE: Record<Season, AffiliateId> = {
   winter: 'winter-koushuu-trial',
   summer: 'summer-koushuu-trial',
+  'last-minute': 'last-minute-trial',
 };
 
 /** 季節講習の送客に使える塾（無料体験の塾系）。 */
@@ -321,7 +323,7 @@ export function selectLeadOffer(
       heading: copy.heading,
       body: copy.body,
       ctaText: copy.ctaText,
-      note: `${AFFILIATES[affiliateId].name}の${copy.kw} 無料体験（PR）／費用はかかりません`,
+      note: `${AFFILIATES[affiliateId].name}の${copy.kw} ${copy.offerKind}（PR）／費用はかかりません`,
     };
   }
 

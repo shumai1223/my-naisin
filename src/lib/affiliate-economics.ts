@@ -91,6 +91,8 @@ export const AFFILIATE_ECONOMICS: Partial<Record<AffiliateId, AffiliateEconomics
   // 季節講習（受験直前/長期休みの高インテント＝通年より転換やや高めの仮定）
   'winter-koushuu-trial': { cpaYen: 4000, convRate: 0.1, convRateLow: 0.05, kind: 'free-lead' },
   'summer-koushuu-trial': { cpaYen: 4000, convRate: 0.09, convRateLow: 0.045, kind: 'free-lead' },
+  // 入試直前（1-2月）＝出願・当日点で検索意図が最も切実な窓＝季節枠の中でも転換は最も高めの仮定（D-7）
+  'last-minute-trial': { cpaYen: 4000, convRate: 0.11, convRateLow: 0.055, kind: 'free-lead' },
   'afb-katei-kyoshi': { cpaYen: 10000, convRate: 0.05, convRateLow: 0.015, kind: 'free-lead' },
   // ── 通信教育（資料請求＝溶けにくい無料リード） ──
   'zkai-text-request': { cpaYen: 800, convRate: 0.12, convRateLow: 0.06, kind: 'doc-request' },

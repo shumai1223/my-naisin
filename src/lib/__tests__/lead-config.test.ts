@@ -68,9 +68,9 @@ describe('selectLeadOffer', () => {
 });
 
 describe('auditPlacementOffers（北極星：保護者面に有料を置かない）', () => {
-  // 県・季節の代表的な組み合わせ。通年（null）と夏冬を、関東/関西/未設定県で総当たり監査する。
+  // 県・季節の代表的な組み合わせ。通年（null）と夏冬＋直前(D-7)を、関東/関西/未設定県で総当たり監査する。
   const prefs: (string | undefined)[] = [undefined, 'tokyo', 'osaka', 'okinawa'];
-  const seasons = [null, 'summer', 'winter'] as const;
+  const seasons = [null, 'summer', 'winter', 'last-minute'] as const;
 
   test('全面の監査が全 placement を網羅する', () => {
     const audit = auditPlacementOffers();
