@@ -77,6 +77,8 @@ export type GateVerdict = 'pending' | 'go' | 'iterate' | 'pivot';
 export interface JulyGateInput {
   /** 判定日（既定 now）。 */
   now?: Date;
+  /** 判定期限（既定 GATE_DEADLINE=7/20）。8/20・9/20等の月次ゲートにも同じ関数を再利用できる（I-3）。 */
+  deadlineIso?: string;
   /** 今季（直近N日）の信頼クリック実数。 */
   clicks: number;
   /** 前季（そのさらに前N日）の信頼クリック実数。 */
@@ -119,7 +121,8 @@ function endOfDayMs(iso: string): number {
  */
 export function evaluateJulyGate(input: JulyGateInput): JulyGate {
   const now = input.now ?? new Date();
-  const deadlineMs = endOfDayMs(GATE_DEADLINE);
+  const deadline = input.deadlineIso ?? GATE_DEADLINE;
+  const deadlineMs = endOfDayMs(deadline);
   const decided = now.getTime() >= deadlineMs;
   const daysLeft = Math.max(0, Math.ceil((deadlineMs - now.getTime()) / DAY_MS));
 
@@ -133,7 +136,7 @@ export function evaluateJulyGate(input: JulyGateInput): JulyGate {
   if (!decided) {
     verdict = 'pending';
     verdictLabel = '判定前';
-    rationale = `7/20まであと${daysLeft}日。クリック倍率と発生件数を貯めて当日に判定する。`;
+    rationale = `${deadline}まであと${daysLeft}日。クリック倍率と発生件数を貯めて当日に判定する。`;
   } else if (input.conversions > 0) {
     verdict = 'go';
     verdictLabel = 'GO（モデル成立）';
@@ -149,7 +152,7 @@ export function evaluateJulyGate(input: JulyGateInput): JulyGate {
   }
 
   return {
-    deadline: GATE_DEADLINE,
+    deadline,
     daysLeft,
     decided,
     clickMultiple,
@@ -162,6 +165,55 @@ export function evaluateJulyGate(input: JulyGateInput): JulyGate {
     verdictLabel,
     rationale,
   };
+}
+
+/* ────────────────────────────────────────────────────────────────────────
+ * 月次ゲート定例化：7/20→8/20→9/20（I-3）。
+ * 9/30出荷凍結までの3回のチェックポイントと、各回のPIVOT条件を今のうちに明文化しておく。
+ * 判定ロジック自体はevaluateJulyGateと完全に同一（GO/ITERATE/PIVOTの基準を使い回す＝
+ * 8月・9月になってから基準を再発明・再議論する必要が無い）。deadlineIsoを渡して呼べば良い。
+ * ──────────────────────────────────────────────────────────────────────── */
+
+export interface GateMilestone {
+  id: string;
+  /** 判定期限（'YYYY-MM-DD'）。evaluateJulyGateのdeadlineIsoにそのまま渡せる。 */
+  deadlineIso: string;
+  label: string;
+  /** この回で確認すること・前回からの変化点（運用メモ）。 */
+  focus: string;
+}
+
+/** 9/30出荷凍結までの月次ゲート日程（正準・単一ソース）。 */
+export const GATE_SCHEDULE: GateMilestone[] = [
+  {
+    id: 'july-20',
+    deadlineIso: GATE_DEADLINE,
+    label: '7/20 初速ゲート',
+    focus: '保護者接点（C_p）の反証。発生1件でGO、クリック前季比2倍以上でITERATE、どちらも無ければPIVOT。',
+  },
+  {
+    id: 'august-20',
+    deadlineIso: '2026-08-20',
+    label: '8/20 中間ゲート',
+    focus: '同じGO/ITERATE/PIVOT基準を再適用。7/20からの1ヶ月で発生・クリックが伸びたかを確認し、9/30出荷凍結に向けた残りタスクの優先度を調整する。',
+  },
+  {
+    id: 'september-20',
+    deadlineIso: '2026-09-20',
+    label: '9/20 最終ゲート',
+    focus: '9/30新規開発凍結の10日前の最終チェック。同基準で判定し、10月以降の特単交渉（D-1）・my-shingaku仕上げへの工数配分を確定する。',
+  },
+];
+
+/**
+ * 現在時刻からみて「次に評価すべき」マイルストーンを返す（未到来の最初のもの）。
+ * 全て過ぎていれば最後（9/20）を返す＝週次KPIレポート等が常にどれかを指せるようにする。
+ */
+export function activeGateMilestone(now: Date = new Date()): GateMilestone {
+  for (const m of GATE_SCHEDULE) {
+    if (now.getTime() <= endOfDayMs(m.deadlineIso)) return m;
+  }
+  return GATE_SCHEDULE[GATE_SCHEDULE.length - 1];
 }
 
 /* ────────────────────────────────────────────────────────────────────────

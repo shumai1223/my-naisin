@@ -9,6 +9,8 @@ import {
   evaluateRosterVelocityTarget,
   findFunnelBottleneck,
   evaluateConsentCapture,
+  GATE_SCHEDULE,
+  activeGateMilestone,
   GATE_DEADLINE,
   GATE_CLICK_MULTIPLE_TARGET,
   HENSACHI_CTR_ALERT_THRESHOLD,
@@ -114,6 +116,57 @@ describe('evaluateJulyGate（7/20 反証ゲート）', () => {
     const g = evaluateJulyGate({ now: D('2026-07-20'), clicks: 10, clicksPrev: 1, leads: 0, conversions: 0 });
     expect(g.decided).toBe(true);
     expect(g.daysLeft).toBe(0);
+  });
+
+  it('deadlineIsoを渡すと8/20等の月次ゲート（I-3）にも同じ関数を再利用できる', () => {
+    const pending = evaluateJulyGate({
+      now: D('2026-08-01'),
+      deadlineIso: '2026-08-20',
+      clicks: 100,
+      clicksPrev: 100,
+      leads: 0,
+      conversions: 0,
+    });
+    expect(pending.deadline).toBe('2026-08-20');
+    expect(pending.verdict).toBe('pending');
+
+    const decided = evaluateJulyGate({
+      now: D('2026-08-21'),
+      deadlineIso: '2026-08-20',
+      clicks: 100,
+      clicksPrev: 100,
+      leads: 0,
+      conversions: 2,
+    });
+    expect(decided.verdict).toBe('go');
+  });
+
+  it('deadlineIso省略時は既定のGATE_DEADLINE（7/20）を使う', () => {
+    const g = evaluateJulyGate({ now: D('2026-07-04'), clicks: 200, clicksPrev: 100, leads: 5, conversions: 0 });
+    expect(g.deadline).toBe(GATE_DEADLINE);
+  });
+});
+
+describe('GATE_SCHEDULE / activeGateMilestone（月次ゲート定例化・I-3）', () => {
+  it('7/20→8/20→9/20の3回が日付順に揃う', () => {
+    expect(GATE_SCHEDULE.map((m) => m.deadlineIso)).toEqual(['2026-07-20', '2026-08-20', '2026-09-20']);
+    expect(GATE_SCHEDULE[0].deadlineIso).toBe(GATE_DEADLINE);
+  });
+
+  it('各マイルストーンはPIVOT条件（focus）を持つ', () => {
+    for (const m of GATE_SCHEDULE) {
+      expect(m.focus.length).toBeGreaterThan(0);
+    }
+  });
+
+  it('未到来の最初のマイルストーンを返す', () => {
+    expect(activeGateMilestone(D('2026-07-04')).id).toBe('july-20');
+    expect(activeGateMilestone(D('2026-07-21')).id).toBe('august-20');
+    expect(activeGateMilestone(D('2026-08-21')).id).toBe('september-20');
+  });
+
+  it('全て過ぎていれば最後（9/20）を返す', () => {
+    expect(activeGateMilestone(D('2026-12-01')).id).toBe('september-20');
   });
 });
 
