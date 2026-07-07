@@ -24,6 +24,7 @@ import {
 import { TERM_OPTIONS, getTermLabel, getTermOrder } from '@/lib/terms';
 import { DEFAULT_PREFECTURE_CODE, getPrefectureByCode } from '@/lib/prefectures';
 import { calculateTotalScore, calculateMaxScore, calculatePercent } from '@/lib/utils';
+import { computeLiveGoalProgress } from '@/lib/goal-progress';
 import { track } from '@/lib/track';
 import type { SavedHistoryEntry } from '@/lib/types';
 
@@ -200,6 +201,16 @@ export function DashboardClient() {
     setHistory(readHistory());
   };
 
+  // 目標到達率（C-4：継続トラッカー化）。計算自体はlib/goal-progress.tsの純関数（テスト済み）に委譲する。
+  const liveGoalProgress = React.useMemo(() => {
+    if (!goal) return null;
+    const latestSame = decorated.find((d) => d.code === goal.prefectureCode);
+    return computeLiveGoalProgress(
+      goal,
+      latestSame ? { total: latestSame.total, savedAt: latestSame.entry.savedAt } : null
+    );
+  }, [goal, decorated]);
+
   const handleClear = () => {
     if (confirm('保存した計算履歴をすべて削除しますか？この操作は取り消せません。')) {
       clearHistory();
@@ -245,23 +256,35 @@ export function DashboardClient() {
   return (
     <div className="space-y-6">
       {/* 目標カード（保存した目標＝再訪の燃料） */}
-      {goal && (
+      {goal && liveGoalProgress && (
         <section className="overflow-hidden rounded-2xl border border-emerald-200 bg-gradient-to-br from-emerald-50 to-white p-5 shadow-sm">
           <div className="flex items-start gap-3">
             <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-emerald-500 text-white shadow">
               <Target className="h-5 w-5" />
             </div>
             <div className="min-w-0 flex-1">
-              <div className="text-xs font-bold text-emerald-700">保存中の目標</div>
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="text-xs font-bold text-emerald-700">保存中の目標</span>
+                {liveGoalProgress.rate !== null && (
+                  <span className="rounded-full bg-emerald-600 px-2 py-0.5 text-[11px] font-bold text-white">
+                    到達率 {Math.min(100, Math.max(0, liveGoalProgress.rate))}%
+                  </span>
+                )}
+                {liveGoalProgress.isLive && (
+                  <span className="rounded-full bg-white px-2 py-0.5 text-[11px] font-medium text-emerald-600 ring-1 ring-emerald-200">
+                    直近の記録を反映
+                  </span>
+                )}
+              </div>
               <div className="mt-0.5 text-lg font-bold text-slate-900">
                 {goal.targetLabel ?? `${goal.prefectureName ?? getPrefectureByCode(goal.prefectureCode)?.name ?? ''}の目標`}
                 <span className="ml-1 text-emerald-700">{goal.target}点</span>
               </div>
               <p className="mt-1 text-sm text-slate-600">
-                {goal.gap > 0 ? (
+                {liveGoalProgress.gap > 0 ? (
                   <>
-                    現在 {goal.score}点 ・ 目標まで{' '}
-                    <span className="font-bold text-emerald-700">あと{goal.gap}点</span>
+                    現在 {liveGoalProgress.currentScore}点 ・ 目標まで{' '}
+                    <span className="font-bold text-emerald-700">あと{liveGoalProgress.gap}点</span>
                   </>
                 ) : (
                   <span className="font-bold text-emerald-700">目標達成ライン到達 🎉</span>
