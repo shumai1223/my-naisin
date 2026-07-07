@@ -132,6 +132,8 @@ describe('answerQuery（拡張した一般FAQの網羅）', () => {
     ['不登校だと調査書はどうなる？', '不登校でも高校受験はできる？', '/futoukou'],
     ['推薦入試に調査書は必要？', '推薦入試に調査書は必要？種類の違いは？', '/suisen-nyuushi'],
     ['実技が苦手でも内申点を上げられる？', '実技4教科で内申点を上げられる？', '/jitsugika'],
+    ['高校入試の志願倍率とは', '高校入試の倍率とは', '/koukou-bairitsu'],
+    ['内申点が足りない', '内申点・当日点が足りないときの対策', '/tarinai-taisaku'],
   ])('「%s」→ %s', (q, title, href) => {
     const a = answerQuery(q);
     expect(a?.kind).toBe('general');
@@ -142,5 +144,15 @@ describe('answerQuery（拡張した一般FAQの網羅）', () => {
   test('「評定平均とは」は推薦factに誤マッチせず評定平均とはを返す', () => {
     const a = answerQuery('評定平均とは');
     expect(a?.title).toBe('評定平均とは');
+  });
+
+  test('推薦基準の回答は併願優遇の仕組みページへもリンクする（G-1）', () => {
+    const a = answerQuery('指定校推薦の評定平均は？');
+    expect(a?.links.some((l) => l.href === '/heigan-yuugu')).toBe(true);
+  });
+
+  test('総合得点の回答は都道府県別ハブ（/total-score）へもリンクする（G-1）', () => {
+    const a = answerQuery('当日点・総合得点とは？');
+    expect(a?.links.some((l) => l.href === '/total-score')).toBe(true);
   });
 });

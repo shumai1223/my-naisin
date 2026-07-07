@@ -218,6 +218,7 @@ const GENERAL_FACTS: { test: RegExp; result: Omit<AnswerResult, 'kind'> }[] = [
         { href: '/hyotei-heikin/suisen-kijun', label: '推薦に必要な評定平均の早見表を見る' },
         { href: '/sougou-gata-senbatsu', label: '総合型選抜とは？評定の目安・準備時期' },
         { href: '/hyotei-heikin', label: '評定平均を自動計算する' },
+        { href: '/heigan-yuugu', label: '併願優遇の仕組み・単願推薦との違いを見る' },
       ],
     },
   },
@@ -360,6 +361,7 @@ const GENERAL_FACTS: { test: RegExp; result: Omit<AnswerResult, 'kind'> }[] = [
         '高校入試の合否は多くの地域で「内申点（調査書点）＋当日点（学力検査）」の合計で決まります。配点比率や満点は都道府県で大きく異なり、東京は1020点、神奈川はS値、大阪はタイプⅠ〜Ⅴなど方式が分かれます。志望校のボーダーから必要な当日点を逆算できます。',
       links: [
         { href: '/reverse', label: '志望校から必要な当日点を逆算する' },
+        { href: '/total-score', label: '都道府県別の総合得点方式一覧・計算機を見る' },
         { href: '/prefectures', label: '都道府県別の配点比率・総合得点方式を見る' },
       ],
     },
@@ -435,6 +437,27 @@ const GENERAL_FACTS: { test: RegExp; result: Omit<AnswerResult, 'kind'> }[] = [
         { href: '/kyouiku-hi', label: '教育費シミュレーター（中学〜高校卒業の総額）' },
         { href: '/shougakukin', label: '高校無償化・就学支援金ガイド' },
         { href: '/hogosha', label: '保護者の方へ（塾はいつから・費用の目安）' },
+      ],
+    },
+  },
+  {
+    test: /(志願倍率|実質倍率|入試.*倍率|倍率.*(高校|入試))/,
+    result: {
+      title: '高校入試の倍率とは',
+      answer:
+        '志願倍率は「志願者数÷募集人員」、実質倍率は「受験者数÷合格者数」で計算します。学校別の実数は年度で変動し都道府県教育委員会が発表する一次情報が正確なため、当サイトでは学校別の断定値は掲載していません。自分で計算して見通しを立てられる計算機を用意しています。',
+      links: [{ href: '/koukou-bairitsu', label: '志願倍率・実質倍率の計算機を使う' }],
+    },
+  },
+  {
+    test: /(内申.*足りない|当日点.*足りない|合格.*届かない|(内申|点数).*(あと少し|ギリギリ))/,
+    result: {
+      title: '内申点・当日点が足りないときの対策',
+      answer:
+        '直前期に内申点そのものを大きく上げるのは難しいため、①当日点で逆転できるか逆算する ②残り日数で伸びしろの大きい分野に絞って優先対策する ③併願校の組み合わせを見直す、の3方向で整理するのがおすすめです。',
+      links: [
+        { href: '/tarinai-taisaku', label: '内申・当日点が足りない冬の対策ガイド' },
+        { href: '/reverse', label: '志望校から必要な当日点を逆算する' },
       ],
     },
   },
