@@ -43,7 +43,7 @@ export default async function AdminWorklogPage({
   const sp = await searchParams;
   const token = typeof sp.token === 'string' ? sp.token : undefined;
 
-  if (!(await isAuthorizedAdminToken(token))) {
+  if (!token || !(await isAuthorizedAdminToken(token))) {
     return <Gate />;
   }
 
