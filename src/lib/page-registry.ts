@@ -32,6 +32,7 @@ export const STATIC_PAGES: StaticPageEntry[] = [
   { url: '/hensachi/agekata', priority: 0.9, changeFrequency: 'weekly' },
   { url: '/hensachi/moshi', priority: 0.9, changeFrequency: 'weekly' },
   { url: '/hensachi/moshi/ichiran', priority: 0.8, changeFrequency: 'weekly' },
+  { url: '/hensachi/mantenkan', priority: 0.8, changeFrequency: 'weekly' },
   { url: '/hyotei-heikin', priority: 1.0, changeFrequency: 'weekly' },
   { url: '/hyotei-heikin/suisen-kijun', priority: 0.9, changeFrequency: 'weekly' },
   { url: '/total-score', priority: 0.9, changeFrequency: 'weekly' },
