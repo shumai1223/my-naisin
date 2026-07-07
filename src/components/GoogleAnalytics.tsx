@@ -1,6 +1,8 @@
 'use client';
 
 import Script from 'next/script';
+import { usePathname } from 'next/navigation';
+import { isAdminPath } from '@/lib/admin-path';
 
 /**
  * GA4（gtag.js）。橋①の先行指標（gap_target_set / share_to_parent / met_bridge_click）を
@@ -17,7 +19,9 @@ import Script from 'next/script';
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID || 'G-VRVSVK1X5Z';
 
 export function GoogleAnalytics() {
-  if (!GA_ID) return null;
+  const pathname = usePathname();
+  // /admin配下はADMIN_REPORT_TOKENが?token=でURLに乗るため、GA4のpage_viewに平文記録されないよう未読込にする（0-5）。
+  if (!GA_ID || isAdminPath(pathname)) return null;
 
   return (
     <>
