@@ -2,7 +2,7 @@
  * 冬窓（11/15-12/25）配信カレンダー事前組込＋コピーA/Bのテスト（C-1）。
  * 凍結後（11/15以降）に新規コピーを書く余地が無いため、今のうちに構造が揃っていることを固定する。
  */
-import { WINTER_WINDOW_SCHEDULE, getWinterBroadcast, getWinterMessage } from '../broadcast-templates';
+import { WINTER_WINDOW_SCHEDULE, getWinterBroadcast, getWinterMessage, PARENT_EMAIL_COURSE, getParentCourseStep } from '../broadcast-templates';
 
 describe('WINTER_WINDOW_SCHEDULE（冬窓A/B事前組込・C-1）', () => {
   it('open/finalの2チェックポイント×A/Bの2バリアント=4件が揃っている', () => {
@@ -53,5 +53,35 @@ describe('getWinterBroadcast / getWinterMessage', () => {
   it('audience違いでCTAのpathが異なる（生徒=行動ツール／保護者=換金面）', () => {
     const entry = getWinterBroadcast('final', 'A')!;
     expect(entry.student.cta.path).not.toBe(entry.parent.cta.path);
+  });
+});
+
+describe('PARENT_EMAIL_COURSE（保護者メール講座5通・C-7）', () => {
+  it('5ステップが揃い、内申仕組み→上げ方→費用→塾選び→窓案内の順でdayOffsetが単調増加する', () => {
+    expect(PARENT_EMAIL_COURSE).toHaveLength(5);
+    const steps = PARENT_EMAIL_COURSE.map((s) => s.step);
+    expect(steps).toEqual([1, 2, 3, 4, 5]);
+    const offsets = PARENT_EMAIL_COURSE.map((s) => s.dayOffset);
+    expect(offsets).toEqual([...offsets].sort((a, b) => a - b));
+    expect(new Set(offsets).size).toBe(offsets.length); // 重複日なし
+  });
+
+  it('各ステップは件名・本文・CTAを持つ', () => {
+    for (const step of PARENT_EMAIL_COURSE) {
+      expect(step.subject.length).toBeGreaterThan(0);
+      expect(step.body.length).toBeGreaterThan(0);
+      expect(step.cta.path.startsWith('/')).toBe(true);
+    }
+  });
+
+  it('断定的な確定日付を本文に含まない＝捏造ゼロ方針の維持', () => {
+    for (const step of PARENT_EMAIL_COURSE) {
+      expect(step.body).not.toMatch(/\d{1,2}月\d{1,2}日/);
+    }
+  });
+
+  it('getParentCourseStepでステップ番号から引ける・未知の番号はundefined', () => {
+    expect(getParentCourseStep(1)?.subject).toContain('内申点');
+    expect(getParentCourseStep(99)).toBeUndefined();
   });
 });

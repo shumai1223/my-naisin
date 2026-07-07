@@ -438,3 +438,68 @@ export function getWinterMessage(
 ): AudienceMessage | undefined {
   return getWinterBroadcast(checkpoint, variant)?.[audience];
 }
+
+/* ────────────────────────────────────────────────────────────────────────
+ * 保護者メール講座（5通・C-7）。
+ *
+ * 従来、登録直後の歓迎メール（esp.ts sendLeadWelcome）が1通届くだけで、
+ * その後の接点は月1配信（MONTHLY_CALENDAR）任せだった＝登録直後の関与が最も高い
+ * 最初の3週間を活かせていなかった。ここでは「内申の仕組み→上げ方→費用→塾選び→
+ * 三者面談/出願の窓」の5ステップを、登録からの経過日数(dayOffset)でスケジュール
+ * できる講座として定義する（実送信はscripts/newsletter.tsが--courseStep指定＋
+ * D1のcreated_atで対象を絞り込む運用。push-scenarios.tsのrecalc-reminderと同じ
+ * 「created_atを代理指標にする」設計を踏襲）。
+ * 保護者（メール名簿）専用＝生徒（LINE名簿）向けの月次配信とは別チャネル。
+ */
+export interface ParentCourseStep {
+  /** 講座内の順番（1〜5）。 */
+  step: number;
+  /** 登録から何日後に送るか（目安・送信側で±許容誤差を持たせる）。 */
+  dayOffset: number;
+  subject: string;
+  body: string;
+  cta: { label: string; path: string };
+}
+
+export const PARENT_EMAIL_COURSE: ParentCourseStep[] = [
+  {
+    step: 1,
+    dayOffset: 3,
+    subject: '【第1回】内申点はどうやって決まるの？（3観点のしくみ）',
+    body: '内申点はテストの点数だけで決まりません。「知識・技能」「思考・判断・表現」「主体的に学習に取り組む態度」の3観点で評価され、提出物の期限や授業中の取り組みも評定に直結します。まずはお子さまの今の内申点を数値で把握するところから始めましょう。',
+    cta: { label: '内申点の仕組みと今の点数を確認する', path: '/hyouka-kijun' },
+  },
+  {
+    step: 2,
+    dayOffset: 7,
+    subject: '【第2回】内申点を上げるために家庭でできること',
+    body: '内申点は日々の積み重ねで決まるからこそ、家庭のサポートが効きます。①提出物の期限を家族で共有する ②苦手教科を1つ決めて先取りする ③定期テスト2週間前から計画を立てる。実技4教科は倍率が高い地域もあるため、侮らず取り組むのがポイントです。',
+    cta: { label: '内申点の上げ方（学年別）を見る', path: '/naishin-age-kata' },
+  },
+  {
+    step: 3,
+    dayOffset: 10,
+    subject: '【第3回】高校〜大学、教育費の全体像を先に知っておく',
+    body: '進路選びは費用と切り離せません。公立・私立で3年間の総額は大きく変わり、就学支援金（高校無償化）で実質負担が下がるケースもあります。早い段階で全体像を把握しておくと、進路の選択肢を狭めずに済みます。',
+    cta: { label: '高校〜大学の教育費を試算する', path: '/hiyou' },
+  },
+  {
+    step: 4,
+    dayOffset: 14,
+    subject: '【第4回】塾選びで後悔しないための視点',
+    body: '塾・個別指導・オンラインは、合う/合わないが子どもによって大きく分かれます。まずは無料体験で「今の学力で何が足りないか」を見える化してから比較するのが失敗しないコツ。費用だけでなく、通いやすさ・指導スタイルも含めて検討しましょう。',
+    cta: { label: '塾代の相場と無料体験を比較する', path: '/juku-hiyou' },
+  },
+  {
+    step: 5,
+    dayOffset: 21,
+    subject: '【第5回】三者面談・出願の「窓」が近づいたらお知らせします',
+    body: 'ここまでの内容はいつでもサイトで再確認できます。三者面談や出願が近づく時期には、あらためて「今のうちに確認しておきたいこと」をお届けします。それまでは、お子さまの内申点・偏差値を定期的に計算して、変化を記録しておくのがおすすめです。',
+    cta: { label: '三者面談の準備チェックリストを見る', path: '/mendan' },
+  },
+];
+
+/** 講座のステップ番号(1〜5)からテンプレを引く。 */
+export function getParentCourseStep(step: number): ParentCourseStep | undefined {
+  return PARENT_EMAIL_COURSE.find((s) => s.step === step);
+}

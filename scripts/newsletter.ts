@@ -5,6 +5,10 @@
  *   npx tsx scripts/newsletter.ts --trigger=season-summer --recipients=recipients.json --send
  *   npx tsx scripts/newsletter.ts --winterCheckpoint=open --variant=B --audience=parent --dry-run
  *     （冬窓11/15-12/25の事前組込A/B・C-1。--winterCheckpoint=open|final --variant=A|B --audience=student|parent）
+ *   npx tsx scripts/newsletter.ts --courseStep=1 --recipients=parent-recipients.json --send
+ *     （保護者メール講座5通・C-7。--courseStep=1..5。宛先はcreated_atが対象日数±許容誤差の
+ *       保護者(メール名簿)のみを事前にD1から絞り込んでrecipientsに渡す運用。各ステップの目安
+ *       dayOffsetはbroadcast-templates.tsのPARENT_EMAIL_COURSEを参照）
  *
  * 思想（[[fable5-master-plan-2026-06]]）：配信できない名簿は資産でない。D1 に貯まった購読者へ
  * broadcast-templates.ts の“中身”を Resend で一斉配信し、受験本番までの接点を保つ。
@@ -27,6 +31,7 @@ import {
   getBroadcastTemplate,
   getMonthlyMessage,
   getWinterMessage,
+  getParentCourseStep,
   type BroadcastTrigger,
   type Audience,
   type WinterCheckpoint,
@@ -82,14 +87,26 @@ async function main() {
   const recipientsPath = arg('recipients');
   const send = flag('send') && !flag('dry-run');
 
-  // モード判定：--winterCheckpoint（冬窓A/B・C-1）＞--calMonth（12ヶ月カレンダー・H4）＞--trigger（季節/ステップ）。
+  // モード判定：--courseStep（保護者メール講座・C-7）＞--winterCheckpoint（冬窓A/B・C-1）
+  //           ＞--calMonth（12ヶ月カレンダー・H4）＞--trigger（季節/ステップ）。
+  const courseStepArg = arg('courseStep');
   const winterCheckpointArg = arg('winterCheckpoint');
   const calMonthArg = arg('calMonth');
   let template: RenderableBroadcast;
   let jobLabel: string;
   let previewSlug: string;
 
-  if (winterCheckpointArg) {
+  if (courseStepArg) {
+    const step = Number(courseStepArg);
+    const message = getParentCourseStep(step);
+    if (!message) {
+      console.error(`✗ 不明な courseStep: ${courseStepArg}（有効値: 1〜5）`);
+      process.exit(1);
+    }
+    template = message;
+    jobLabel = `courseStep=${step}（保護者メール講座・約${message.dayOffset}日後）`;
+    previewSlug = `parent-course-${step}`;
+  } else if (winterCheckpointArg) {
     const checkpoint = winterCheckpointArg as WinterCheckpoint;
     const variant = (arg('variant') ?? 'A') as CopyVariant;
     const audience = (arg('audience') ?? 'student') as Audience;
