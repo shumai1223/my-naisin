@@ -6,7 +6,15 @@
  * 7/20反証ゲート判定＋トリップワイヤー4本を1通にまとめ、月曜に読むだけで済む形にする。
  */
 
-import { evaluateJulyGate, evaluateTripwires, type JulyGateInput, type TripwireInput } from '@/lib/velocity';
+import {
+  evaluateJulyGate,
+  evaluateTripwires,
+  evaluateRosterVelocityTarget,
+  findFunnelBottleneck,
+  type JulyGateInput,
+  type TripwireInput,
+  type FunnelStage,
+} from '@/lib/velocity';
 
 export interface WeeklyKpiData {
   /** レポート対象週の終端日（'YYYY-MM-DD'）。 */
@@ -17,6 +25,8 @@ export interface WeeklyKpiData {
   parentLandingViews: number;
   /** 名簿velocity：今週のlead_submit件数と、逆算目標（例：約20/日）。 */
   leadVelocity: { leadsThisWeek: number; targetPerWeek: number; leadsTotal: number };
+  /** 週次ファネル段階（任意・古い→新しいでなく上流→下流の順）。あればボトルネック特定行を出す（C-1）。 */
+  funnelStages?: FunnelStage[];
   /** 送客（affiliate_click）今週件数。 */
   affiliateClicks: number;
   /** ASP実測の確定発生件数（分からなければ0。¥は書かない）。 */
@@ -62,6 +72,29 @@ export function formatWeeklyKpiEmail(data: WeeklyKpiData): { subject: string; te
   const weeklyPace = data.leadVelocity.targetPerWeek > 0 ? (data.leadVelocity.leadsThisWeek / data.leadVelocity.targetPerWeek) * 100 : null;
   lines.push(`  今週の登録: ${fmt(data.leadVelocity.leadsThisWeek)}件 ／ 目標: ${fmt(data.leadVelocity.targetPerWeek)}件/週${weeklyPace !== null ? `（達成率${weeklyPace.toFixed(0)}%）` : ''}`);
   lines.push(`  名簿累計: ${fmt(data.leadVelocity.leadsTotal)}件`);
+  lines.push('');
+  lines.push('■ 名簿3,000逆算（C-1）');
+  const roster = evaluateRosterVelocityTarget({
+    now: data.gate.now,
+    currentRoster: data.leadVelocity.leadsTotal,
+    observedDailyVelocity: data.leadVelocity.leadsThisWeek / 7,
+  });
+  lines.push(
+    `  目標${fmt(roster.targetRoster)}件まで残り${fmt(roster.gap)}件／期限まで${roster.daysLeft}日 → 必要velocity ${roster.requiredDailyVelocity.toFixed(1)}件/日（${roster.requiredWeeklyVelocity.toFixed(0)}件/週）`
+  );
+  if (roster.paceRatio !== null) {
+    lines.push(
+      `  実測ペース ${(roster.observedDailyVelocity ?? 0).toFixed(1)}件/日＝必要ペース比${(roster.paceRatio * 100).toFixed(0)}%（${roster.onTrack ? 'オンペース' : '未達ペース'}）`
+    );
+  }
+  if (data.funnelStages && data.funnelStages.length >= 2) {
+    const bottleneck = findFunnelBottleneck(data.funnelStages);
+    if (bottleneck) {
+      lines.push(
+        `  週次ボトルネック: ${bottleneck.fromLabel}(${fmt(bottleneck.fromCount)})→${bottleneck.toLabel}(${fmt(bottleneck.toCount)}) でドロップ${(bottleneck.dropRatio * 100).toFixed(0)}%`
+      );
+    }
+  }
   lines.push('');
   lines.push(`■ トリップワイヤー（${triggeredCount}/4 発火）`);
   for (const t of tripwires) {

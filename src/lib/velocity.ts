@@ -165,6 +165,105 @@ export function evaluateJulyGate(input: JulyGateInput): JulyGate {
 }
 
 /* ────────────────────────────────────────────────────────────────────────
+ * 名簿3,000逆算velocity＋週次ボトルネック特定（C-1）。
+ * 「必要velocity≈20登録/日」は固定値ではなく、目標名簿数(3,000)と冬窓オープン(11/15＝
+ * 新規開発凍結・収穫オペ移行日)までの残日数から逆算する。実測(現velocity)との差分と、
+ * ファネルのどの遷移が一番歪んでいるか（ボトルネック）を機械的に特定する。
+ * ──────────────────────────────────────────────────────────────────────── */
+
+/** 名簿逆算の既定目標（[[fable5-fullaccel-backlog-2026-07]] TIER C）。 */
+export const ROSTER_TARGET = 3000;
+/** 冬窓オープン＝この日までに名簿を積み上げる（以降は新規開発凍結・収穫オペのみ）。 */
+export const ROSTER_TARGET_DEADLINE = '2026-11-15';
+
+export interface RosterVelocityInput {
+  now?: Date;
+  /** 名簿累計（現在値）。 */
+  currentRoster: number;
+  /** 目標名簿数（既定 ROSTER_TARGET=3000）。 */
+  targetRoster?: number;
+  /** 目標期限（既定 ROSTER_TARGET_DEADLINE=冬窓オープン）。 */
+  deadlineIso?: string;
+  /** 直近の実測ペース（1日あたりのlead_submit件数）。省略時は達成率を出さない。 */
+  observedDailyVelocity?: number;
+}
+
+export interface RosterVelocityGate {
+  targetRoster: number;
+  currentRoster: number;
+  /** 目標までの残り件数（達成済みなら0）。 */
+  gap: number;
+  /** 期限までの残日数（最低1＝ゼロ除算回避）。 */
+  daysLeft: number;
+  /** 逆算した必要日次velocity（gap/daysLeft）。 */
+  requiredDailyVelocity: number;
+  requiredWeeklyVelocity: number;
+  observedDailyVelocity: number | null;
+  /** 実測/必要（1.0が「必要ペースちょうど」）。observedDailyVelocity省略時はnull。 */
+  paceRatio: number | null;
+  onTrack: boolean | null;
+}
+
+/** 名簿3,000逆算ゲート（C-1）：必要velocityを固定値でなく目標・期限・現在値から都度算出する。 */
+export function evaluateRosterVelocityTarget(input: RosterVelocityInput): RosterVelocityGate {
+  const now = input.now ?? new Date();
+  const targetRoster = input.targetRoster ?? ROSTER_TARGET;
+  const deadlineIso = input.deadlineIso ?? ROSTER_TARGET_DEADLINE;
+  const daysLeft = Math.max(1, Math.ceil((endOfDayMs(deadlineIso) - now.getTime()) / DAY_MS));
+  const gap = Math.max(0, targetRoster - input.currentRoster);
+  const requiredDailyVelocity = gap / daysLeft;
+  const observedDailyVelocity = input.observedDailyVelocity ?? null;
+  const paceRatio =
+    observedDailyVelocity !== null && requiredDailyVelocity > 0 ? observedDailyVelocity / requiredDailyVelocity : null;
+
+  return {
+    targetRoster,
+    currentRoster: input.currentRoster,
+    gap,
+    daysLeft,
+    requiredDailyVelocity,
+    requiredWeeklyVelocity: requiredDailyVelocity * 7,
+    observedDailyVelocity,
+    paceRatio,
+    onTrack: paceRatio === null ? null : paceRatio >= 1,
+  };
+}
+
+export interface FunnelStage {
+  id: string;
+  label: string;
+  count: number;
+}
+
+export interface FunnelBottleneck {
+  fromLabel: string;
+  toLabel: string;
+  fromCount: number;
+  toCount: number;
+  /** (fromCount - toCount) / fromCount。負のドロップ（増加）は0に丸める。 */
+  dropRatio: number;
+}
+
+/**
+ * 隣接するファネル段階のうち、相対ドロップ率が最大の遷移（＝ボトルネック）を返す。
+ * fromCount<=0の遷移は比較不能として除外。stagesが2件未満はnull。
+ * 週次でこれを回せば「どこで落ちているか」を毎回機械的に特定できる（C-1）。
+ */
+export function findFunnelBottleneck(stages: FunnelStage[]): FunnelBottleneck | null {
+  let worst: FunnelBottleneck | null = null;
+  for (let i = 1; i < stages.length; i += 1) {
+    const prev = stages[i - 1];
+    const cur = stages[i];
+    if (prev.count <= 0) continue;
+    const dropRatio = Math.max(0, (prev.count - cur.count) / prev.count);
+    if (!worst || dropRatio > worst.dropRatio) {
+      worst = { fromLabel: prev.label, toLabel: cur.label, fromCount: prev.count, toCount: cur.count, dropRatio };
+    }
+  }
+  return worst;
+}
+
+/* ────────────────────────────────────────────────────────────────────────
  * トリップワイヤー4本（I-1：週次KPIレポートの常設監視項目）。
  * 戦略決定 §1-3（[[fable5-fullaccel-backlog-2026-07]]）で定義された、Google一点依存下で
  * 「悪化を検知したら即座に気づく」ための閾値ベースの純関数。¥予測はしない＝先行指標のみ。

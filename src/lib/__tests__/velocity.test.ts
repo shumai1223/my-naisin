@@ -6,10 +6,14 @@ import {
   bucketDailyByWeek,
   evaluateJulyGate,
   evaluateTripwires,
+  evaluateRosterVelocityTarget,
+  findFunnelBottleneck,
   GATE_DEADLINE,
   GATE_CLICK_MULTIPLE_TARGET,
   HENSACHI_CTR_ALERT_THRESHOLD,
   AI_REFERRAL_SHARE_ALERT_THRESHOLD,
+  ROSTER_TARGET,
+  ROSTER_TARGET_DEADLINE,
 } from '../velocity';
 
 const D = (iso: string) => new Date(`${iso}T00:00:00Z`);
@@ -202,5 +206,92 @@ describe('evaluateTripwires（週次KPIレポートの常設監視4本）', () =
   it('閾値定数はbacklogに記載の値と一致する', () => {
     expect(HENSACHI_CTR_ALERT_THRESHOLD).toBe(3.2);
     expect(AI_REFERRAL_SHARE_ALERT_THRESHOLD).toBe(10);
+  });
+});
+
+describe('evaluateRosterVelocityTarget（名簿3,000逆算・C-1）', () => {
+  it('既定値は3,000件・冬窓オープン(11/15)から逆算する', () => {
+    const g = evaluateRosterVelocityTarget({ now: D('2026-07-16'), currentRoster: 0 });
+    expect(g.targetRoster).toBe(ROSTER_TARGET);
+    expect(g.gap).toBe(3000);
+    // 7/16 → 11/15 は122日
+    expect(g.daysLeft).toBe(122);
+    expect(g.requiredDailyVelocity).toBeCloseTo(3000 / 122, 5);
+    expect(g.requiredWeeklyVelocity).toBeCloseTo((3000 / 122) * 7, 5);
+    expect(g.observedDailyVelocity).toBeNull();
+    expect(g.paceRatio).toBeNull();
+    expect(g.onTrack).toBeNull();
+  });
+
+  it('目標到達済み（gapは負にならず0）', () => {
+    const g = evaluateRosterVelocityTarget({ now: D('2026-07-16'), currentRoster: 5000 });
+    expect(g.gap).toBe(0);
+    expect(g.requiredDailyVelocity).toBe(0);
+  });
+
+  it('実測ペースを渡すと必要ペース比・オンペース判定が出る', () => {
+    const onTrack = evaluateRosterVelocityTarget({
+      now: D('2026-07-16'),
+      currentRoster: 0,
+      observedDailyVelocity: 3000 / 122,
+    });
+    expect(onTrack.paceRatio).toBeCloseTo(1, 5);
+    expect(onTrack.onTrack).toBe(true);
+
+    const behind = evaluateRosterVelocityTarget({
+      now: D('2026-07-16'),
+      currentRoster: 0,
+      observedDailyVelocity: 0.5,
+    });
+    expect(behind.paceRatio).toBeLessThan(1);
+    expect(behind.onTrack).toBe(false);
+  });
+
+  it('期限当日でも残日数は最低1（ゼロ除算しない）', () => {
+    const g = evaluateRosterVelocityTarget({ now: D(ROSTER_TARGET_DEADLINE), currentRoster: 100 });
+    expect(g.daysLeft).toBeGreaterThanOrEqual(1);
+    expect(Number.isFinite(g.requiredDailyVelocity)).toBe(true);
+  });
+
+  it('目標・期限は上書き可能', () => {
+    const g = evaluateRosterVelocityTarget({
+      now: D('2026-08-01'),
+      currentRoster: 200,
+      targetRoster: 1000,
+      deadlineIso: '2026-09-01',
+    });
+    expect(g.targetRoster).toBe(1000);
+    expect(g.gap).toBe(800);
+    expect(g.daysLeft).toBe(31);
+  });
+});
+
+describe('findFunnelBottleneck（週次ボトルネック特定・C-1）', () => {
+  it('最大の相対ドロップ率を持つ遷移を返す', () => {
+    const b = findFunnelBottleneck([
+      { id: 'tool_start', label: 'tool_start', count: 477 },
+      { id: 'cta_view', label: 'cta_view', count: 759 }, // 増加（ドロップ0扱い）
+      { id: 'affiliate_click', label: 'affiliate_click', count: 14 }, // 759→14=98%ドロップ
+      { id: 'lead_submit', label: 'lead_submit', count: 2 }, // 14→2=86%ドロップ
+    ]);
+    expect(b?.fromLabel).toBe('cta_view');
+    expect(b?.toLabel).toBe('affiliate_click');
+    expect(b?.dropRatio).toBeCloseTo((759 - 14) / 759, 5);
+  });
+
+  it('段階が1件以下はnull', () => {
+    expect(findFunnelBottleneck([])).toBeNull();
+    expect(findFunnelBottleneck([{ id: 'a', label: 'a', count: 10 }])).toBeNull();
+  });
+
+  it('前段が0件の遷移は比較不能として除外し、増加は負にならず0扱い', () => {
+    const b = findFunnelBottleneck([
+      { id: 'a', label: 'a', count: 0 },
+      { id: 'b', label: 'b', count: 100 },
+      { id: 'c', label: 'c', count: 50 },
+    ]);
+    // a→b は前段0で除外、b→c のみ比較対象＝(100-50)/100=0.5
+    expect(b?.fromLabel).toBe('b');
+    expect(b?.dropRatio).toBeCloseTo(0.5, 5);
   });
 });

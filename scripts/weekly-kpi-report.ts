@@ -16,7 +16,9 @@
  *  --leads-week=<件数>       今週のlead_submit件数（既定0）
  *  --leads-total=<件数>      名簿累計（既定0）
  *  --conversions=<件数>      ASP実測の確定発生件数（既定0。¥は書かない）
- *  --target-per-week=<件数>  名簿velocityの週次目標（既定140＝C-1の「約20/日」逆算目標）
+ *  --target-per-week=<件数>  名簿velocityの週次目標（既定140＝C-1の「約20/日」逆算目標の参考値。実際の逆算はROSTER_TARGET/期限から都度算出）
+ *  --funnel=<id:count,...>   週次ファネル段階（上流→下流の順。例: tool_start:477,cta_view:759,lead_submit:2）。
+ *                            2件以上あればどの遷移が一番ドロップしているか（ボトルネック）を自動特定する（C-1）
  *
  * 実行:
  *   npx tsx scripts/weekly-kpi-report.ts                 # プレビューのみ（stdout + reports/）
@@ -34,6 +36,7 @@ import { fileURLToPath } from 'node:url';
 import { google } from 'googleapis';
 
 import { formatWeeklyKpiEmail, type WeeklyKpiData } from '@/lib/weekly-kpi-report';
+import type { FunnelStage } from '@/lib/velocity';
 import { CONTACT_EMAIL } from '@/lib/contact';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -63,6 +66,19 @@ const num = (v: unknown, fallback = 0): number => {
   const n = Number(v);
   return Number.isFinite(n) ? n : fallback;
 };
+
+/** "id1:count1,id2:count2" を上流→下流の順のFunnelStage[]にパースする。不正行は無視。 */
+function parseFunnelStages(raw: unknown): FunnelStage[] | undefined {
+  if (typeof raw !== 'string' || !raw.trim()) return undefined;
+  const stages: FunnelStage[] = [];
+  for (const part of raw.split(',')) {
+    const [id, countStr] = part.split(':');
+    const count = Number(countStr);
+    if (!id || !Number.isFinite(count)) continue;
+    stages.push({ id: id.trim(), label: id.trim(), count });
+  }
+  return stages.length >= 2 ? stages : undefined;
+}
 
 function ymd(daysAgo: number): string {
   const d = new Date();
@@ -195,6 +211,7 @@ async function main() {
       targetPerWeek: num(args['target-per-week'], 140),
       leadsTotal: num(args['leads-total']),
     },
+    funnelStages: parseFunnelStages(args.funnel),
     affiliateClicks: num(args['affiliate-clicks']),
     confirmedConversions: num(args.conversions),
     gate: {
