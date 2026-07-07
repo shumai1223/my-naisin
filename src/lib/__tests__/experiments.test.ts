@@ -40,6 +40,34 @@ describe('experiments registry', () => {
     expect(copy?.primaryMetric).toBe('lead_submit');
     expect(copy?.arms.find((a) => a.id === 'reward')?.ctaPrefix).toBeTruthy();
   });
+
+  // scaled-contentゲート（H-5）：A/B実験も「コピペで同じ物を2アーム分」という重複バグが起こり得る面。
+  // control と実際に差分（送客先 or コピー）が無いアームは、有意差が絶対に出ない無意味な実験になる。
+  it('control以外の各アームは、送客先・見出し・本文・CTA接頭辞のいずれかがcontrolと異なる（コピペ重複防止）', () => {
+    for (const e of EXPERIMENTS) {
+      const control = e.arms[0];
+      for (const arm of e.arms.slice(1)) {
+        const hasAnyDiff =
+          arm.affiliateId !== control.affiliateId ||
+          arm.heading !== control.heading ||
+          arm.body !== control.body ||
+          arm.ctaPrefix !== control.ctaPrefix;
+        expect(hasAnyDiff).toBe(true);
+
+        // 両アームが同じフィールドを定義している場合、値そのものが一致していないことも確認する
+        // （片方だけ未定義で「差はある」と誤判定されるケースを潰す＝より厳密な重複検出）。
+        if (arm.heading !== undefined && control.heading !== undefined) {
+          expect(arm.heading).not.toBe(control.heading);
+        }
+        if (arm.body !== undefined && control.body !== undefined) {
+          expect(arm.body).not.toBe(control.body);
+        }
+        if (arm.ctaPrefix !== undefined && control.ctaPrefix !== undefined) {
+          expect(arm.ctaPrefix).not.toBe(control.ctaPrefix);
+        }
+      }
+    }
+  });
 });
 
 describe('judgeWinner', () => {
