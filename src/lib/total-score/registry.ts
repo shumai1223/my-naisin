@@ -7,6 +7,7 @@
 // 二次情報どまりの県（大分ほか）は確定するまで載せない。
 
 import type { TotalScoreSystem } from './types';
+import { CURRENT_FISCAL_YEAR_STRING } from '@/lib/fiscal-year';
 
 /** 兵庫県：判定資料A（内申250）＝判定資料C（学力250）を同等に扱う固定1:1。総合500点。 */
 const hyogo: TotalScoreSystem = {
@@ -14,7 +15,7 @@ const hyogo: TotalScoreSystem = {
   name: '兵庫県',
   routeSlug: 'total-score',
   localTerm: '判定資料（複数志願選抜）',
-  fiscalYear: '2026',
+  fiscalYear: CURRENT_FISCAL_YEAR_STRING,
   academic: { subjects: 5, perSubjectMax: 100, rawMax: 500, weightingNote: '一部学科で傾斜配点あり' },
   report: {
     targetGrades: [3],
@@ -69,7 +70,7 @@ const kyoto: TotalScoreSystem = {
   name: '京都府',
   routeSlug: 'total-score',
   localTerm: '中期選抜',
-  fiscalYear: '2026',
+  fiscalYear: CURRENT_FISCAL_YEAR_STRING,
   academic: { subjects: 5, perSubjectMax: 40, rawMax: 200 },
   report: {
     targetGrades: [1, 2, 3],
@@ -124,7 +125,7 @@ const tochigi: TotalScoreSystem = {
   name: '栃木県',
   routeSlug: 'total-score',
   localTerm: '一般選抜',
-  fiscalYear: '2026',
+  fiscalYear: CURRENT_FISCAL_YEAR_STRING,
   academic: { subjects: 5, perSubjectMax: 100, rawMax: 500, weightingNote: '宇都宮・宇都宮女子等で国数英（社）に傾斜' },
   report: {
     targetGrades: [1, 2, 3],
@@ -185,7 +186,7 @@ const niigata: TotalScoreSystem = {
   name: '新潟県',
   routeSlug: 'total-score',
   localTerm: '一般選抜',
-  fiscalYear: '2026',
+  fiscalYear: CURRENT_FISCAL_YEAR_STRING,
   academic: { subjects: 5, perSubjectMax: 100, rawMax: 500, weightingNote: '一部校で英語・数学等を2倍に傾斜' },
   report: {
     targetGrades: [1, 2, 3],
@@ -246,7 +247,7 @@ const tottori: TotalScoreSystem = {
   name: '鳥取県',
   routeSlug: 'total-score',
   localTerm: '一般入学者選抜',
-  fiscalYear: '2026',
+  fiscalYear: CURRENT_FISCAL_YEAR_STRING,
   academic: { subjects: 5, perSubjectMax: 50, rawMax: 250, weightingNote: '理数科・総合学科で傾斜あり' },
   report: {
     targetGrades: [3],
