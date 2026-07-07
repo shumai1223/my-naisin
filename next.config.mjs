@@ -1,3 +1,43 @@
+import fs from 'node:fs';
+import path from 'node:path';
+
+/**
+ * worklogビューア（I-6）のデータをビルド時に焼き込む。
+ *
+ * なぜここで（next.config.mjsの先頭）：Cloudflare Workers（OpenNext）ランタイムには
+ * リポジトリの生ファイル（docs/worklog/*.md）が存在しない＝`force-dynamic`な認証ページの
+ * リクエスト時にfsで読もうとすると本番で確実に失敗する。next.config.mjsはNext.jsの
+ * ビルド開始時に必ず一度だけ評価される（`next build`をどう起動しても通る唯一の共通経路）ため、
+ * ここでdocs/worklog/*.mdを読み、`src/generated/worklog-data.json`へ literal データとして
+ * 書き出す。ページ側はこのJSONを通常のstatic importで読む＝webpackがバンドルに literal として
+ * 埋め込むのでWorkersランタイムでも安全に読める（fsを一切使わない）。
+ *
+ * ローカルのtsc/jestはnext.config.mjsを評価しないため、`src/generated/worklog-data.json`は
+ * 最低限の内容をコミットしておく（型解決・importの成立が目的。本番はCloudflareの各ビルドで
+ * 常に最新のdocs/worklog内容に上書きされるので、コミット済みの中身自体の鮮度は問わない）。
+ */
+function generateWorklogData() {
+  try {
+    const worklogDir = path.join(process.cwd(), 'docs', 'worklog');
+    if (!fs.existsSync(worklogDir)) return;
+    const files = fs.readdirSync(worklogDir).filter((f) => /^\d{4}-\d{2}-\d{2}\.md$/.test(f));
+    const entries = files
+      .map((f) => ({
+        date: f.replace(/\.md$/, ''),
+        content: fs.readFileSync(path.join(worklogDir, f), 'utf8'),
+      }))
+      .sort((a, b) => b.date.localeCompare(a.date)); // 最新日降順
+
+    const outDir = path.join(process.cwd(), 'src', 'generated');
+    fs.mkdirSync(outDir, { recursive: true });
+    fs.writeFileSync(path.join(outDir, 'worklog-data.json'), JSON.stringify(entries), 'utf8');
+  } catch (err) {
+    // ビルド全体を壊さない（worklogビューアは付随機能・本体の可用性を優先）。
+    console.error('worklog data generation skipped:', err instanceof Error ? err.message : err);
+  }
+}
+generateWorklogData();
+
 // 都道府県コード一覧（ビルド時に静的生成するためハードコード）
 const PREFECTURE_CODES = [
   'hokkaido', 'aomori', 'iwate', 'miyagi', 'akita', 'yamagata', 'fukushima',

@@ -99,4 +99,4 @@ export const STATIC_PAGES: StaticPageEntry[] = [
  * 意図的にサイトマップへ含めない静的ルート（認証必須・noindex運用）。
  * sitemap-registry.test.ts のファイルシステム走査で除外するアローリスト。
  */
-export const SITEMAP_EXCLUDED_ROUTES = ['/admin/report'];
+export const SITEMAP_EXCLUDED_ROUTES = ['/admin/report', '/admin/worklog'];

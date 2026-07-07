@@ -14,6 +14,7 @@ import { getLeadSummary, getLeadDailyCounts } from '@/lib/leads-db';
 import { getApiKeyStats, getFreemiumFunnel } from '@/lib/api-keys';
 import { evaluateJulyGate, bucketDailyByWeek, type GateVerdict } from '@/lib/velocity';
 import { checkExperimentPortfolioHealth, MIN_RUNNING_EXPERIMENTS } from '@/lib/experiments';
+import { isAuthorizedAdminToken } from '@/lib/admin-auth';
 import { countActiveSubscriptions } from '@/lib/push-db';
 import {
   economicsFor,
@@ -46,19 +47,6 @@ export const metadata: Metadata = {
 
 // 認証＋D1読み取りのため毎回サーバーで評価する。
 export const dynamic = 'force-dynamic';
-
-async function getAdminToken(): Promise<string | undefined> {
-  try {
-    const { getCloudflareContext } = await import('@opennextjs/cloudflare');
-    const { env } = await getCloudflareContext({ async: true });
-    return (
-      (env as unknown as { ADMIN_REPORT_TOKEN?: string }).ADMIN_REPORT_TOKEN ??
-      process.env.ADMIN_REPORT_TOKEN
-    );
-  } catch {
-    return process.env.ADMIN_REPORT_TOKEN;
-  }
-}
 
 // ── 集計ヘルパ ───────────────────────────────────────────────
 interface ProgramAgg {
@@ -173,9 +161,8 @@ export default async function AdminReportPage({
 }) {
   const sp = await searchParams;
   const token = typeof sp.token === 'string' ? sp.token : undefined;
-  const expected = await getAdminToken();
 
-  if (!expected || !token || token !== expected) {
+  if (!token || !(await isAuthorizedAdminToken(token))) {
     return <Gate />;
   }
 
