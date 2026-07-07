@@ -45,7 +45,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         // 公開データAPI（堀B：AIが呼べる一次データ層）は明示的に許可。その他の /api は非公開のまま。
-        allow: ['/', '/api/naishin', '/api/mcp', '/api/openapi', '/api/card', '/api/calendar', '/api/status'],
+        allow: ['/', '/api/naishin', '/api/mcp', '/api/openapi', '/api/card', '/api/calendar', '/api/status', '/api/total-score', '/api/hensachi'],
         // /go/* はアフィリ送客の 302 リダイレクタ（中身なし）＝クロール予算の無駄なので拒否。
         // /admin/* は認証必須の内部ページ（page-registry.ts の SITEMAP_EXCLUDED_ROUTES と対）。
         disallow: ['/api/', '/go/', '/admin/', '/*?*'],

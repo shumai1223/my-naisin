@@ -10,6 +10,9 @@ import { GET as compareGet } from '@/app/api/naishin/compare/route';
 import { GET as csvGet } from '@/app/api/naishin/csv/route';
 import { GET as openapiGet } from '@/app/api/openapi/route';
 import { GET as statusGet } from '@/app/api/status/route';
+import { GET as totalScoreIndexGet } from '@/app/api/total-score/route';
+import { GET as totalScoreDetailGet } from '@/app/api/total-score/[code]/route';
+import { GET as percentileTableGet } from '@/app/api/hensachi/percentile-table/route';
 
 function req(url: string) {
   return new Request(url);
@@ -40,6 +43,77 @@ describe('/api/status', () => {
     expect(json.dataset.prefectureCount).toBe(47);
     expect(json.endpoints.naishinIndex).toBe('/api/naishin');
     expect(typeof json.timestamp).toBe('string');
+  });
+});
+
+describe('/api/total-score（E-4：総合得点方式のAPI化）', () => {
+  test('一覧はregistryの5県のみ・apiUrl/toolUrlを含む', async () => {
+    const json = await (await totalScoreIndexGet(req('https://my-naishin.com/api/total-score'))).json();
+    expect(json.systems.length).toBeGreaterThanOrEqual(5);
+    const hyogo = json.systems.find((s: { code: string }) => s.code === 'hyogo');
+    expect(hyogo.apiUrl).toBe('https://my-naishin.com/api/total-score/hyogo');
+    expect(hyogo.toolUrl).toBe('https://my-naishin.com/hyogo/total-score');
+  });
+
+  test('詳細：計算式・出典を含む', async () => {
+    const res = await totalScoreDetailGet(req('https://my-naishin.com/api/total-score/hyogo'), {
+      params: Promise.resolve({ code: 'hyogo' }),
+    });
+    const json = await res.json();
+    expect(json.code).toBe('hyogo');
+    expect(json.source.url).toContain('hyogo-c.ed.jp');
+  });
+
+  test('academicRaw/reportRaw指定で総合得点を計算する', async () => {
+    const res = await totalScoreDetailGet(
+      req('https://my-naishin.com/api/total-score/hyogo?academicRaw=500&reportRaw=250'),
+      { params: Promise.resolve({ code: 'hyogo' }) },
+    );
+    const json = await res.json();
+    expect(json.mode).toBe('compute');
+    expect(json.total).toBe(500);
+  });
+
+  test('targetTotal/reportRaw指定で必要学力点を逆算する', async () => {
+    const res = await totalScoreDetailGet(
+      req('https://my-naishin.com/api/total-score/hyogo?targetTotal=500&reportRaw=250'),
+      { params: Promise.resolve({ code: 'hyogo' }) },
+    );
+    const json = await res.json();
+    expect(json.mode).toBe('reverse');
+    expect(json.requiredAcademicRaw).toBe(500);
+  });
+
+  test('未知の県コードは404', async () => {
+    const res = await totalScoreDetailGet(req('https://my-naishin.com/api/total-score/nowhere'), {
+      params: Promise.resolve({ code: 'nowhere' }),
+    });
+    expect(res.status).toBe(404);
+  });
+});
+
+describe('/api/hensachi/percentile-table（E-4）', () => {
+  test('既定の代表偏差値で対応表を返す', async () => {
+    const json = await (
+      await percentileTableGet(req('https://my-naishin.com/api/hensachi/percentile-table'))
+    ).json();
+    expect(json.table.length).toBeGreaterThan(0);
+    expect(json.table.find((r: { h: number }) => r.h === 50).upperPercent).toBeCloseTo(50, 4);
+  });
+
+  test('?values=で任意の偏差値を指定できる', async () => {
+    const json = await (
+      await percentileTableGet(req('https://my-naishin.com/api/hensachi/percentile-table?values=60,70'))
+    ).json();
+    expect(json.table).toHaveLength(2);
+    expect(json.table[0].h).toBe(60);
+  });
+
+  test('不正なvaluesは400', async () => {
+    const res = await percentileTableGet(
+      req('https://my-naishin.com/api/hensachi/percentile-table?values=abc'),
+    );
+    expect(res.status).toBe(400);
   });
 });
 

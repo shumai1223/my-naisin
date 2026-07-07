@@ -267,7 +267,49 @@ curl ${SITE_URL}/api/status`;
             <span className="ml-2">列：code, name, region, target_grades, grade1〜3_multiplier, core/practical_multiplier, max_score, tool_url, source_url, last_verified ほか</span>
           </p>
 
-          <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">⑤ ステータス確認（認証不要）</h3>
+          <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">⑤ 総合得点方式（内申点＋学力検査の統一エンジン）</h3>
+          <p className="mb-2 text-sm text-slate-600">
+            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">GET /api/total-score</code>
+            {' / '}
+            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">GET /api/total-score/{'{code}'}</code>
+            {' — '}兵庫・京都・栃木・新潟・鳥取の総合得点システム定義と計算式。
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">?academicRaw=&reportRaw=</code>
+            で総合得点を計算、
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">?targetTotal=&reportRaw=</code>
+            で必要な学力検査点を逆算できます。
+          </p>
+          <p className="mt-1 text-xs text-slate-500">
+            実際に開く：{' '}
+            <a
+              href="/api/total-score/hyogo?academicRaw=500&reportRaw=250"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 font-semibold text-indigo-600 underline"
+            >
+              /api/total-score/hyogo?academicRaw=500&amp;reportRaw=250 <ExternalLink className="h-3 w-3" />
+            </a>
+          </p>
+
+          <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">⑥ 偏差値 対応表（正規分布から算出）</h3>
+          <p className="mb-2 text-sm text-slate-600">
+            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">GET /api/hensachi/percentile-table</code>
+            — 偏差値→上位%・母集団順位の対応表。
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">?values=45,50,55</code>
+            で任意の偏差値を指定可能。
+          </p>
+          <p className="mt-1 text-xs text-slate-500">
+            実際に開く：{' '}
+            <a
+              href="/api/hensachi/percentile-table"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 font-semibold text-indigo-600 underline"
+            >
+              /api/hensachi/percentile-table <ExternalLink className="h-3 w-3" />
+            </a>
+          </p>
+
+          <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">⑦ ステータス確認（認証不要）</h3>
           <p className="mb-2 text-sm text-slate-600">
             <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">GET /api/status</code>
             — APIが稼働しているか・データセットのバージョンを軽量に確認（レート制限なし）。
@@ -284,7 +326,7 @@ curl ${SITE_URL}/api/status`;
             </a>
           </p>
 
-          <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">⑥ 逆算・比較・学習計画（クエリで利用）</h3>
+          <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">⑧ 逆算・比較・学習計画（クエリで利用）</h3>
           <p className="mb-2 text-sm text-slate-600">
             <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">?target=</code> で必要評定平均の逆算、
             <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">&weeks=</code> で週次の学習計画、
