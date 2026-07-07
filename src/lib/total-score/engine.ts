@@ -67,3 +67,14 @@ export function reportRawAtFullMarks(report: TsReport): number {
   const practicalSum = 4 * report.perGradeMax * years;
   return computeReportRaw(report, { coreSum, practicalSum });
 }
+
+/**
+ * 任意の満点(rawMax)の得点を、任意の目標満点(targetMax、既定1000)へ線形換算する。
+ * 新潟県の「調査書・学力をそれぞれ1000点に換算して合算する」方式と同じ比例計算（computeTotalScore内部と同型）。
+ * rawMax が0以下の場合は換算不能として0を返す。
+ */
+export function scaleScore(raw: number, rawMax: number, targetMax = 1000): number {
+  if (rawMax <= 0) return 0;
+  const clamped = clamp(raw, 0, rawMax);
+  return Math.round((clamped / rawMax) * targetMax);
+}

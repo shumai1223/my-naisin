@@ -120,7 +120,7 @@ export default function MantenkanPage() {
           </section>
 
           <div className="mt-8">
-            <HensachiClusterNav current="hub" />
+            <HensachiClusterNav current="mantenkan" />
           </div>
         </div>
       </div>

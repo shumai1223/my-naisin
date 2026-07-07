@@ -212,6 +212,10 @@ export default function TotalScoreHubPage() {
                 <span className="text-sm font-medium text-slate-700">すべての受験ツールを見る</span>
                 <ChevronRight className="h-4 w-4 text-slate-400" />
               </Link>
+              <Link href="/total-score/mantenkan" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm transition-shadow hover:shadow-md">
+                <span className="text-sm font-medium text-slate-700">得点を1000点満点に換算する</span>
+                <ChevronRight className="h-4 w-4 text-slate-400" />
+              </Link>
             </div>
           </section>
         </div>

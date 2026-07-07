@@ -36,6 +36,7 @@ export const STATIC_PAGES: StaticPageEntry[] = [
   { url: '/hyotei-heikin', priority: 1.0, changeFrequency: 'weekly' },
   { url: '/hyotei-heikin/suisen-kijun', priority: 0.9, changeFrequency: 'weekly' },
   { url: '/total-score', priority: 0.9, changeFrequency: 'weekly' },
+  { url: '/total-score/mantenkan', priority: 0.8, changeFrequency: 'weekly' },
   { url: '/tokyo/total-score', priority: 1.0, changeFrequency: 'weekly' },
   { url: '/kanagawa/s-value', priority: 1.0, changeFrequency: 'weekly' },
   { url: '/osaka/total-score', priority: 1.0, changeFrequency: 'weekly' },

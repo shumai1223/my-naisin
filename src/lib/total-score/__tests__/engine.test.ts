@@ -1,4 +1,4 @@
-import { computeReportRaw, computeTotalScore, reportRawAtFullMarks } from '../engine';
+import { computeReportRaw, computeTotalScore, reportRawAtFullMarks, scaleScore } from '../engine';
 import { TOTAL_SCORE_SYSTEMS, getTotalScoreSystem, isVerifiedTotalScore } from '../registry';
 
 describe('total-score engine', () => {
@@ -131,6 +131,41 @@ describe('total-score engine', () => {
     it('比率未指定なら先頭（9-1）が既定', () => {
       const r = computeTotalScore(tochigi, { academicRaw: 500, reportRaw: 135 });
       expect(r.option.id).toBe('9-1');
+    });
+  });
+
+  // --- scaleScore（任意満点→1000点換算） ---
+  describe('scaleScore', () => {
+    it('満点入力 → target満点', () => {
+      expect(scaleScore(500, 500, 1000)).toBe(1000);
+      expect(scaleScore(135, 135)).toBe(1000);
+    });
+
+    it('0点入力 → 0', () => {
+      expect(scaleScore(0, 500, 1000)).toBe(0);
+    });
+
+    it('半分の得点 → target満点の半分', () => {
+      expect(scaleScore(250, 500, 1000)).toBe(500);
+    });
+
+    it('targetMaxを省略すると1000が既定', () => {
+      expect(scaleScore(50, 100)).toBe(500);
+    });
+
+    it('rawMaxが0以下なら0（ゼロ除算を起こさない）', () => {
+      expect(scaleScore(10, 0)).toBe(0);
+      expect(scaleScore(10, -5)).toBe(0);
+    });
+
+    it('満点を超える入力はclampされ、target満点を超えない', () => {
+      expect(scaleScore(999, 500, 1000)).toBe(1000);
+    });
+
+    it('新潟の調査書135点満点をtargetMax=700(=1000×0.7)に換算 → 満点で700', () => {
+      // registry.niigata の '7-3' 比率オプション（reportMax=700）と同じ換算構造の確認
+      expect(scaleScore(135, 135, 700)).toBe(700);
+      expect(scaleScore(0, 135, 700)).toBe(0);
     });
   });
 
