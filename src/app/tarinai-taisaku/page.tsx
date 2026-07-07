@@ -136,6 +136,9 @@ export default function TarinaiTaisakuPage() {
                 <Link href="/mendan" className="inline-flex items-center gap-1 rounded-full bg-blue-600 px-4 py-2 text-xs font-bold text-white shadow-sm hover:bg-blue-700">
                   三者面談で相談する準備<ChevronRightSquare className="h-3.5 w-3.5" />
                 </Link>
+                <Link href="/heigan-yuugu" className="inline-flex items-center gap-1 rounded-full bg-white px-4 py-2 text-xs font-bold text-blue-700 ring-1 ring-blue-300 hover:bg-blue-50">
+                  併願優遇の制度を確認する<ChevronRightSquare className="h-3.5 w-3.5" />
+                </Link>
                 <Link href="/juken-schedule" className="inline-flex items-center gap-1 rounded-full bg-white px-4 py-2 text-xs font-bold text-blue-700 ring-1 ring-blue-300 hover:bg-blue-50">
                   出願スケジュールを確認する<ChevronRightSquare className="h-3.5 w-3.5" />
                 </Link>

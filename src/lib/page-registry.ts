@@ -76,6 +76,7 @@ export const STATIC_PAGES: StaticPageEntry[] = [
   { url: '/mendan', priority: 0.8, changeFrequency: 'weekly' },
   { url: '/juken-schedule', priority: 0.8, changeFrequency: 'weekly' },
   { url: '/tarinai-taisaku', priority: 0.9, changeFrequency: 'weekly' },
+  { url: '/heigan-yuugu', priority: 0.8, changeFrequency: 'weekly' },
   { url: '/tools', priority: 0.9, changeFrequency: 'weekly' },
   { url: '/embed', priority: 0.6, changeFrequency: 'monthly' },
   { url: '/partner', priority: 0.5, changeFrequency: 'monthly' },
