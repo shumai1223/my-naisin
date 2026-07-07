@@ -116,6 +116,7 @@ export default function PartnerPage() {
               <li className="flex gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" /><span><strong className="text-white">CPA提携</strong>：無料体験・資料請求などの成果1件ごとの成果報酬。ASP経由でも、直接でも可。</span></li>
               <li className="flex gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" /><span><strong className="text-white">直接送客契約</strong>：商圏（都道府県）を指定した独占的な送客。実績に応じてCPA・条件を設計。</span></li>
               <li className="flex gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" /><span><strong className="text-white">ウィジェット提供</strong>：内申点・評定平均の計算ツールを貴塾サイトへ無料で埋め込み（SEO・回遊強化）。</span></li>
+              <li className="flex gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" /><span><strong className="text-white">掲載枠スポンサー（県×面）</strong>：都道府県・ページ種別を指定した月額固定の掲載枠。成果報酬ではなく定額でのご出稿をご希望の場合はこちらをご相談ください（「広告」表記込み・商圏の独占可）。</span></li>
             </ul>
           </section>
 

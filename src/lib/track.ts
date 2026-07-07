@@ -74,6 +74,8 @@ export const EVENTS = {
   EXIT_INTENT_DISMISS: 'exit_intent_dismiss', // 閉じた（出し過ぎ検知の分母）
   // ── 実験基盤 ──
   EXPERIMENT_IMPRESSION: 'experiment_impression',
+  // ── 掲載枠スポンサー（D-3・直販の県×面固定枠。AFFILIATES/lead-configとは別商流） ──
+  SPONSOR_CLICK: 'sponsor_click',
 } as const;
 
 export type AnalyticsEvent = (typeof EVENTS)[keyof typeof EVENTS];

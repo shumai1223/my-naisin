@@ -33,6 +33,7 @@ import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { ParentLeadCTAExperiment } from '@/components/ParentLeadCTAExperiment';
 import { AnswerBox } from '@/components/AnswerBox';
 import { RelatedToolsSection } from '@/components/RelatedToolsSection';
+import { SponsorSlot } from '@/components/SponsorSlot';
 
 interface PageProps {
   params: Promise<{ prefecture: string }>;
@@ -472,6 +473,9 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
                 </div>
               </div>
             </section>
+
+            {/* 掲載枠スポンサー（D-3・県×面の直販枠。未契約の間は描画0） */}
+            <SponsorSlot placement="naishin" prefectureCode={prefectureCode} />
 
             {/* 都道府県別詳細解説（SSRでGooglebotに情報を与える） */}
             <section className="rounded-2xl border border-slate-200 bg-white p-6 md:p-8 shadow-sm">
