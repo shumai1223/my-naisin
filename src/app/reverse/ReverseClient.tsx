@@ -197,44 +197,49 @@ function ReversePageContent() {
                 <div className="space-y-4">
                   <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
                     <h3 className="mb-3 text-sm font-bold text-slate-700">入力例</h3>
-                    <div className="grid gap-2 text-sm text-slate-600">
-                      <div className="flex justify-between">
-                        <span>換算内申：</span>
-                        <span className="font-medium">50 / 65</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>目標総合点：</span>
-                        <span className="font-medium">931 / 1020</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>ESAT-J見込み：</span>
-                        <span className="font-medium">20 / 20</span>
-                      </div>
-                    </div>
+                    {/* G-5：AI引用/構造化抽出しやすいよう、div疑似テーブルから意味論的なtableへ */}
+                    <table className="w-full text-sm text-slate-600">
+                      <tbody>
+                        <tr className="border-b border-slate-200/70 last:border-0">
+                          <th scope="row" className="py-1 text-left font-normal">換算内申</th>
+                          <td className="py-1 text-right font-medium">50 / 65</td>
+                        </tr>
+                        <tr className="border-b border-slate-200/70 last:border-0">
+                          <th scope="row" className="py-1 text-left font-normal">目標総合点</th>
+                          <td className="py-1 text-right font-medium">931 / 1020</td>
+                        </tr>
+                        <tr>
+                          <th scope="row" className="py-1 text-left font-normal">ESAT-J見込み</th>
+                          <td className="py-1 text-right font-medium">20 / 20</td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
-                  
+
                   <div className="rounded-lg border border-emerald-200 bg-emerald-50 p-4">
                     <h3 className="mb-3 text-sm font-bold text-emerald-700">計算</h3>
-                    <div className="space-y-2 text-sm text-emerald-600">
-                      <div className="flex justify-between">
-                        <span>調査書点（推定）：</span>
-                        <span className="font-bold text-emerald-800">round(50 ÷ 65 × 300) = 231点</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>必要学力検査点：</span>
-                        <span className="font-bold text-emerald-800">931 - 231 - 20 = 680点 / 700点</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>必要得点率：</span>
-                        <span className="font-bold text-emerald-800">約97%</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>5教科平均：</span>
-                        <span className="font-bold text-emerald-800">約136点 / 140点</span>
-                      </div>
-                    </div>
+                    <table className="w-full text-sm text-emerald-600">
+                      <tbody>
+                        <tr className="border-b border-emerald-200/60 last:border-0">
+                          <th scope="row" className="py-1 text-left font-normal">調査書点（推定）</th>
+                          <td className="py-1 text-right font-bold text-emerald-800">round(50 ÷ 65 × 300) = 231点</td>
+                        </tr>
+                        <tr className="border-b border-emerald-200/60 last:border-0">
+                          <th scope="row" className="py-1 text-left font-normal">必要学力検査点</th>
+                          <td className="py-1 text-right font-bold text-emerald-800">931 - 231 - 20 = 680点 / 700点</td>
+                        </tr>
+                        <tr className="border-b border-emerald-200/60 last:border-0">
+                          <th scope="row" className="py-1 text-left font-normal">必要得点率</th>
+                          <td className="py-1 text-right font-bold text-emerald-800">約97%</td>
+                        </tr>
+                        <tr>
+                          <th scope="row" className="py-1 text-left font-normal">5教科平均</th>
+                          <td className="py-1 text-right font-bold text-emerald-800">約136点 / 140点</td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
-                  
+
                   <div className="rounded-lg border border-blue-200 bg-blue-50 p-4">
                     <h3 className="mb-2 text-sm font-bold text-blue-700">解説</h3>
                     <p className="text-xs text-blue-600">
