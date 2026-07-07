@@ -104,6 +104,10 @@ export default function HensachiGyakusanPage() {
                 偏差値の出し方・上げ方
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
+              <Link href="/tarinai-taisaku" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-purple-200 hover:bg-purple-50/50">
+                内申点・当日点が足りない冬の緊急対策
+                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
+              </Link>
             </div>
           </section>
 

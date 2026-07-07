@@ -351,6 +351,13 @@ function ReversePageContent() {
                     <span className="text-sm font-medium text-slate-700">神奈川S値を計算する</span>
                     <ChevronRight className="h-4 w-4 text-slate-400" />
                   </Link>
+                  <Link
+                    href="/tarinai-taisaku"
+                    className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow"
+                  >
+                    <span className="text-sm font-medium text-slate-700">内申点・当日点が足りない冬の緊急対策</span>
+                    <ChevronRight className="h-4 w-4 text-slate-400" />
+                  </Link>
                 </div>
               </section>
             </div>
