@@ -5,10 +5,9 @@ import { Calculator, ChevronRight, Home, BookOpen, AlertCircle, Award } from 'lu
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { HowToSchema } from '@/components/StructuredData/HowToSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
-import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
-import { ParentCostBridge } from '@/components/ParentCostBridge';
+import { ChibaTotalScoreResultFlow } from '@/components/Chiba/ChibaTotalScoreResultFlow';
 
 const CHIBA_FAQS = [
   {
@@ -148,6 +147,11 @@ export default function ChibaTotalScorePage() {
             </p>
           </section>
 
+          {/* B-4: 実数入力の総合得点計算機（結果連動の名簿導線つき） */}
+          <div className="mb-8">
+            <ChibaTotalScoreResultFlow />
+          </div>
+
           {/* K値 早見表 */}
           <section className="mb-8 rounded-2xl border border-emerald-100 bg-gradient-to-br from-emerald-50/40 to-white p-6 shadow-sm">
             <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
@@ -187,18 +191,6 @@ export default function ChibaTotalScorePage() {
               ))}
             </div>
           </section>
-
-          {/* 結果保存・名簿化（堀A） */}
-          <ParentCostBridge prefectureName="千葉県" className="mb-6" />
-
-          <SaveResultCTA
-            source="prefecture"
-            prefectureCode="chiba"
-            prefectureName="千葉県"
-            className="mb-8"
-            heading="千葉のK値別「あと何点」を、忘れないうちに受け取りませんか？"
-            body="調査書点・学力検査の伸ばし方、千葉・船橋など志望校のK値と最新ボーダー、出願スケジュールを受験本番まで無料でお届けします。LINEかメールで、いつでも解除できます。"
-          />
 
           {/* 計算例 */}
           <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
