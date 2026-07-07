@@ -97,6 +97,9 @@ reports/
 # D1バックアップ（名簿・APIキー等のPIIを含むため絶対に非コミット。H-4）
 backups/
 
+# EV表の実測入力シート（ASP実績＝非公開の事業数値を含むため非コミット。テンプレートのみコミット。D-6）
+data/affiliate-actuals.json
+
 # GA4 OAuth 連携の機密（client_secret / refresh_token / 選択プロパティ）。絶対にコミットしない。
 .ga4/
 
