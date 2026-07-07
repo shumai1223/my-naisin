@@ -27,6 +27,8 @@ export interface WeeklyKpiData {
   leadVelocity: { leadsThisWeek: number; targetPerWeek: number; leadsTotal: number };
   /** 週次ファネル段階（任意・古い→新しいでなく上流→下流の順）。あればボトルネック特定行を出す（C-1）。 */
   funnelStages?: FunnelStage[];
+  /** ai_referralのソース別内訳（任意・件数降順でなくてよい＝表示側でソートする）。トリップワイヤー③の判定には使わず内訳表示のみ（G-2）。 */
+  aiReferralBySource?: { source: string; count: number }[];
   /** 送客（affiliate_click）今週件数。 */
   affiliateClicks: number;
   /** ASP実測の確定発生件数（分からなければ0。¥は書かない）。 */
@@ -99,6 +101,14 @@ export function formatWeeklyKpiEmail(data: WeeklyKpiData): { subject: string; te
   lines.push(`■ トリップワイヤー（${triggeredCount}/4 発火）`);
   for (const t of tripwires) {
     lines.push(`  ${t.triggered ? '🚨' : '✅'} ${t.label}：${t.detail}`);
+  }
+  if (data.aiReferralBySource && data.aiReferralBySource.length > 0) {
+    lines.push('');
+    lines.push('■ ai_referral ソース別内訳（G-2）');
+    const sorted = [...data.aiReferralBySource].sort((a, b) => b.count - a.count);
+    for (const s of sorted) {
+      lines.push(`  ${s.source}: ${fmt(s.count)}件`);
+    }
   }
   lines.push('');
   lines.push('※ ¥予測は記載していません（先行指標のみで採点する運用のため）。');

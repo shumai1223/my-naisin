@@ -19,6 +19,8 @@
  *  --target-per-week=<件数>  名簿velocityの週次目標（既定140＝C-1の「約20/日」逆算目標の参考値。実際の逆算はROSTER_TARGET/期限から都度算出）
  *  --funnel=<id:count,...>   週次ファネル段階（上流→下流の順。例: tool_start:477,cta_view:759,lead_submit:2）。
  *                            2件以上あればどの遷移が一番ドロップしているか（ボトルネック）を自動特定する（C-1）
+ *  --ai-referral-sources=<source:count,...>  ai_referralのソース別内訳（例: chatgpt:20,perplexity:8,google-sge:5）。
+ *                            指定するとメールに内訳一覧を出す（トリップワイヤー③のシェア判定には使わない・表示専用。G-2）
  *
  * 実行:
  *   npx tsx scripts/weekly-kpi-report.ts                 # プレビューのみ（stdout + reports/）
@@ -78,6 +80,19 @@ function parseFunnelStages(raw: unknown): FunnelStage[] | undefined {
     stages.push({ id: id.trim(), label: id.trim(), count });
   }
   return stages.length >= 2 ? stages : undefined;
+}
+
+/** "source1:count1,source2:count2" をai_referralソース別内訳にパースする。不正行は無視。 */
+function parseSourceCounts(raw: unknown): { source: string; count: number }[] | undefined {
+  if (typeof raw !== 'string' || !raw.trim()) return undefined;
+  const items: { source: string; count: number }[] = [];
+  for (const part of raw.split(',')) {
+    const [source, countStr] = part.split(':');
+    const count = Number(countStr);
+    if (!source || !Number.isFinite(count)) continue;
+    items.push({ source: source.trim(), count });
+  }
+  return items.length > 0 ? items : undefined;
 }
 
 function ymd(daysAgo: number): string {
@@ -212,6 +227,7 @@ async function main() {
       leadsTotal: num(args['leads-total']),
     },
     funnelStages: parseFunnelStages(args.funnel),
+    aiReferralBySource: parseSourceCounts(args['ai-referral-sources']),
     affiliateClicks: num(args['affiliate-clicks']),
     confirmedConversions: num(args.conversions),
     gate: {

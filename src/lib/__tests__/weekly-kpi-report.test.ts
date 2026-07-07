@@ -80,4 +80,47 @@ describe('formatWeeklyKpiEmail', () => {
     expect(text).toContain('GO（モデル成立）');
     expect(subject).toContain('ゲート:GO');
   });
+
+  it('名簿3,000逆算セクションを含む（C-1）', () => {
+    const { text } = formatWeeklyKpiEmail(baseData());
+    expect(text).toContain('名簿3,000逆算');
+    expect(text).toContain('必要velocity');
+  });
+
+  it('funnelStagesを渡すと週次ボトルネック行が出る（C-1）', () => {
+    const data = baseData({
+      funnelStages: [
+        { id: 'cta_view', label: 'cta_view', count: 759 },
+        { id: 'affiliate_click', label: 'affiliate_click', count: 14 },
+      ],
+    });
+    const { text } = formatWeeklyKpiEmail(data);
+    expect(text).toContain('週次ボトルネック');
+    expect(text).toContain('cta_view(759)→affiliate_click(14)');
+  });
+
+  it('funnelStages省略時はボトルネック行を出さない', () => {
+    const { text } = formatWeeklyKpiEmail(baseData());
+    expect(text).not.toContain('週次ボトルネック');
+  });
+
+  it('aiReferralBySourceを渡すと件数降順の内訳を出す（G-2）', () => {
+    const data = baseData({
+      aiReferralBySource: [
+        { source: 'perplexity', count: 5 },
+        { source: 'chatgpt', count: 20 },
+      ],
+    });
+    const { text } = formatWeeklyKpiEmail(data);
+    expect(text).toContain('ai_referral ソース別内訳');
+    const chatgptIdx = text.indexOf('chatgpt');
+    const perplexityIdx = text.indexOf('perplexity');
+    expect(chatgptIdx).toBeGreaterThan(-1);
+    expect(chatgptIdx).toBeLessThan(perplexityIdx);
+  });
+
+  it('aiReferralBySource省略時は内訳セクションを出さない', () => {
+    const { text } = formatWeeklyKpiEmail(baseData());
+    expect(text).not.toContain('ソース別内訳');
+  });
 });
