@@ -5,6 +5,7 @@ import * as React from 'react';
 import { HokkaidoRankCalculator, type HokkaidoRankResult } from '@/components/Hokkaido/HokkaidoRankCalculator';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { ParentCostBridge } from '@/components/ParentCostBridge';
+import { ParentWindowBridge } from '@/components/ParentWindowBridge';
 
 /**
  * 北海道内申ランクページの結果連動フロー（B-5）。
@@ -16,6 +17,16 @@ export function HokkaidoRankResultFlow() {
   return (
     <>
       <HokkaidoRankCalculator onResult={setResult} />
+
+      {/* 保護者ウィンドウ（三者面談・出願期だけ点灯）：総合得点の現在地＋成績カードを面談へ持って行く導線（C-10） */}
+      <ParentWindowBridge
+        className="mt-8"
+        metricLabel="総合得点"
+        score={result?.total}
+        max={result?.max}
+        prefectureCode="hokkaido"
+        prefectureName="北海道"
+      />
 
       <ParentCostBridge prefectureName="北海道" className="mt-8" />
 

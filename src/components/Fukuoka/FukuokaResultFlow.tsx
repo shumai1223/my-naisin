@@ -5,6 +5,7 @@ import * as React from 'react';
 import { FukuokaScoreCalculator, type FukuokaScoreResult } from '@/components/Fukuoka/FukuokaScoreCalculator';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { ParentCostBridge } from '@/components/ParentCostBridge';
+import { ParentWindowBridge } from '@/components/ParentWindowBridge';
 
 /** 福岡内申点・当日点ページの結果連動フロー（B-5）。 */
 export function FukuokaResultFlow() {
@@ -13,6 +14,16 @@ export function FukuokaResultFlow() {
   return (
     <>
       <FukuokaScoreCalculator onResult={setResult} />
+
+      {/* 保護者ウィンドウ（三者面談・出願期だけ点灯）：総合得点の現在地＋成績カードを面談へ持って行く導線（C-10） */}
+      <ParentWindowBridge
+        className="mt-6"
+        metricLabel="総合得点"
+        score={result?.total}
+        max={result?.max}
+        prefectureCode="fukuoka"
+        prefectureName="福岡県"
+      />
 
       <ParentCostBridge prefectureName="福岡県" className="mt-6" />
 
