@@ -8,8 +8,7 @@ import { HowToSchema } from '@/components/StructuredData/HowToSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
-import { ParentCostBridge } from '@/components/ParentCostBridge';
-import { HokkaidoRankCalculator } from '@/components/Hokkaido/HokkaidoRankCalculator';
+import { HokkaidoRankResultFlow } from '@/components/Hokkaido/HokkaidoRankResultFlow';
 
 // 可視の「よくある質問」セクションと完全一致させた FAQ（FAQ リッチリザルト用）
 const HOKKAIDO_RANK_FAQS = [
@@ -141,11 +140,8 @@ export default function HokkaidoRankPage() {
             </div>
           </section>
 
-          {/* Calculator */}
-          <HokkaidoRankCalculator />
-
-          {/* C3：学費橋（計算できたら次はお金。購入を迫らず学費面＝高CPAリード面へ集約） */}
-          <ParentCostBridge prefectureName="北海道" className="mt-8" />
+          {/* Calculator＋結果連動の名簿導線（B-5：SaveResultCTAが無かった穴を埋める） */}
+          <HokkaidoRankResultFlow />
 
           {/* 内申点の計算式 */}
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">

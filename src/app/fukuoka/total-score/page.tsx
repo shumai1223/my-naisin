@@ -5,10 +5,9 @@ import { Calculator, ChevronRight, Home, BookOpen, AlertCircle, Award } from 'lu
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { HowToSchema } from '@/components/StructuredData/HowToSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
-import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
-import { ParentCostBridge } from '@/components/ParentCostBridge';
+import { FukuokaResultFlow } from '@/components/Fukuoka/FukuokaResultFlow';
 
 const FUKUOKA_FAQS = [
   {
@@ -213,17 +212,10 @@ export default function FukuokaTotalScorePage() {
             </div>
           </section>
 
-          {/* 結果保存・名簿化（堀A） */}
-          <ParentCostBridge prefectureName="福岡県" className="mb-6" />
-
-          <SaveResultCTA
-            source="prefecture"
-            prefectureCode="fukuoka"
-            prefectureName="福岡県"
-            className="mb-8"
-            heading="福岡の「内申＋当日点」のバランスと志望校情報を受け取りませんか？"
-            body="内申(中3)・当日点の伸ばし方、修猷館・福岡など志望校の最新ボーダー、出願スケジュールを受験本番まで無料でお届けします。LINEかメールで、いつでも解除できます。"
-          />
+          {/* B-5: 実数入力の計算機（結果連動の名簿導線つき） */}
+          <div className="mb-8">
+            <FukuokaResultFlow />
+          </div>
 
           {/* 2タッチ目：AI個別指導（下のParentLeadCTAとは別プログラムで多様性確保。旧Z会/サプリ¥1.5-5.4/clickの代替） */}
           <section className="mb-8 rounded-2xl border border-slate-200 bg-white px-6 py-6 text-center shadow-sm">

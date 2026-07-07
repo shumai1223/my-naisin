@@ -5,10 +5,9 @@ import { Calculator, ChevronRight, Home, BookOpen, AlertCircle, Award } from 'lu
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { HowToSchema } from '@/components/StructuredData/HowToSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
-import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
-import { ParentCostBridge } from '@/components/ParentCostBridge';
+import { AichiTotalScoreResultFlow } from '@/components/Aichi/AichiTotalScoreResultFlow';
 
 // 可視の「よくある質問」セクションと完全一致させた FAQ（FAQ リッチリザルト用）
 const AICHI_FAQS = [
@@ -137,6 +136,11 @@ export default function AichiTotalScorePage() {
             </p>
           </section>
 
+          {/* B-5: 実数入力の総合得点計算機（結果連動の名簿導線つき） */}
+          <div className="mb-8">
+            <AichiTotalScoreResultFlow />
+          </div>
+
           {/* 評定得点 早見表 */}
           <section className="mb-8 rounded-2xl border border-rose-100 bg-gradient-to-br from-rose-50/40 to-white p-6 shadow-sm">
             <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
@@ -178,18 +182,6 @@ export default function AichiTotalScorePage() {
               ※ 評定は中3のみが対象。9教科の評定を入れて合計を出すなら<Link href="/aichi/naishin" className="text-rose-600 underline font-bold">愛知県の内申点計算ツール</Link>が便利です。
             </p>
           </section>
-
-          {/* 結果保存・名簿化（堀A） */}
-          <ParentCostBridge prefectureName="愛知県" className="mb-6" />
-
-          <SaveResultCTA
-            source="prefecture"
-            prefectureCode="aichi"
-            prefectureName="愛知県"
-            className="mb-8"
-            heading="愛知の評価方法別「あと何点」を、忘れないうちに受け取りませんか？"
-            body="内申・当日点の伸ばし方、旭丘・明和など志望校の評価方法と最新ボーダー、出願スケジュールを受験本番まで無料でお届けします。LINEかメールで、いつでも解除できます。"
-          />
 
           {/* 評価方法Ⅰ〜Ⅴ 早見表 */}
           <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">

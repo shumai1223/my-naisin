@@ -22,7 +22,17 @@ const RANK_TABLE = [
   { rank: 'M', min: 0, label: '要努力' },
 ];
 
-export function HokkaidoRankCalculator() {
+export interface HokkaidoRankResult {
+  total: number;
+  max: number;
+}
+
+interface Props {
+  /** 総合点(概算)が変わるたびに呼ばれる（結果連動の名簿導線に使う）。 */
+  onResult?: (r: HokkaidoRankResult | null) => void;
+}
+
+export function HokkaidoRankCalculator({ onResult }: Props = {}) {
   const [naishinInput, setNaishinInput] = React.useState('');
   const [gakuryokuInput, setGakuryokuInput] = React.useState('');
 
@@ -38,6 +48,10 @@ export function HokkaidoRankCalculator() {
   const percent = (total / maxTotal) * 100;
 
   const hasInput = naishinInput !== '' || gakuryokuInput !== '';
+
+  React.useEffect(() => {
+    onResult?.(hasInput ? { total, max: maxTotal } : null);
+  }, [hasInput, total, onResult]);
 
   const reset = () => {
     setNaishinInput('');
