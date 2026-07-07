@@ -90,6 +90,15 @@ GET ${SITE_URL}/api/naishin/tokyo?target=240&current=180&weeks=12
 # 複数都道府県を同じ評定で横並び比較
 GET ${SITE_URL}/api/naishin/compare?codes=tokyo,osaka,hyogo&grade=4`;
 
+  const quickstartExample = `# 1) 全47都道府県の一覧（対象学年・倍率・満点・出典）
+curl ${SITE_URL}/api/naishin
+
+# 2) 東京都の詳細（計算式・確定値の計算例つき）
+curl ${SITE_URL}/api/naishin/tokyo
+
+# 3) APIが生きているか確認（認証不要）
+curl ${SITE_URL}/api/status`;
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
       <BreadcrumbSchema
@@ -134,6 +143,52 @@ GET ${SITE_URL}/api/naishin/compare?codes=tokyo,osaka,hyogo&grade=4`;
             AIアシスタント・進路支援ツール・研究での利用を歓迎します。出典を明記いただければ、商用・非商用問わず無料です。
           </p>
         </div>
+
+        {/* クイックスタート（curl 3行・E-3） */}
+        <section className="mb-10">
+          <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
+            <Terminal className="h-5 w-5 text-indigo-500" />
+            クイックスタート（30秒）
+          </h2>
+          <p className="mb-3 text-sm leading-relaxed text-slate-600">
+            登録・APIキーなしで、今すぐ試せます。
+          </p>
+          <CodeBlock>{quickstartExample}</CodeBlock>
+        </section>
+
+        {/* 利用シーン（事例・E-3） */}
+        <section className="mb-10">
+          <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
+            <Sparkles className="h-5 w-5 text-violet-500" />
+            どんな用途で使えるか
+          </h2>
+          <div className="grid gap-3 sm:grid-cols-2">
+            <div className="rounded-xl border border-slate-200 bg-white p-4">
+              <div className="text-sm font-bold text-slate-800">進路相談AIエージェント</div>
+              <p className="mt-1 text-xs leading-relaxed text-slate-600">
+                MCPツール（calculate_naishin・reverse_calc等）を呼び出し、生徒の評定から内申点を厳密計算し、目標までの差を答える。
+              </p>
+            </div>
+            <div className="rounded-xl border border-slate-200 bg-white p-4">
+              <div className="text-sm font-bold text-slate-800">塾・進路支援SaaSの内申自動算出</div>
+              <p className="mt-1 text-xs leading-relaxed text-slate-600">
+                47都道府県ぶんの計算方式を自前実装せず、REST APIから都道府県コードを渡すだけで内申点を算出。
+              </p>
+            </div>
+            <div className="rounded-xl border border-slate-200 bg-white p-4">
+              <div className="text-sm font-bold text-slate-800">受験情報メディア・比較サイト</div>
+              <p className="mt-1 text-xs leading-relaxed text-slate-600">
+                CSV/JSONを定期取得し、都道府県別の入試制度比較表・記事の一次データとして引用（出典明記）。
+              </p>
+            </div>
+            <div className="rounded-xl border border-slate-200 bg-white p-4">
+              <div className="text-sm font-bold text-slate-800">研究・統計利用</div>
+              <p className="mt-1 text-xs leading-relaxed text-slate-600">
+                全国の内申点算出方式の構造化データセットとして、比較研究や教育政策分析に利用。
+              </p>
+            </div>
+          </div>
+        </section>
 
         {/* REST API */}
         <section className="mb-10">
@@ -212,7 +267,24 @@ GET ${SITE_URL}/api/naishin/compare?codes=tokyo,osaka,hyogo&grade=4`;
             <span className="ml-2">列：code, name, region, target_grades, grade1〜3_multiplier, core/practical_multiplier, max_score, tool_url, source_url, last_verified ほか</span>
           </p>
 
-          <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">⑤ 逆算・比較・学習計画（クエリで利用）</h3>
+          <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">⑤ ステータス確認（認証不要）</h3>
+          <p className="mb-2 text-sm text-slate-600">
+            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">GET /api/status</code>
+            — APIが稼働しているか・データセットのバージョンを軽量に確認（レート制限なし）。
+          </p>
+          <p className="mt-1 text-xs text-slate-500">
+            実際に開く：{' '}
+            <a
+              href="/api/status"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 font-semibold text-indigo-600 underline"
+            >
+              /api/status <ExternalLink className="h-3 w-3" />
+            </a>
+          </p>
+
+          <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">⑥ 逆算・比較・学習計画（クエリで利用）</h3>
           <p className="mb-2 text-sm text-slate-600">
             <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">?target=</code> で必要評定平均の逆算、
             <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">&weeks=</code> で週次の学習計画、

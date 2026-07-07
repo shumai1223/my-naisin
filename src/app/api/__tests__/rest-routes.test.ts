@@ -9,6 +9,7 @@ import { GET as codeGet } from '@/app/api/naishin/[code]/route';
 import { GET as compareGet } from '@/app/api/naishin/compare/route';
 import { GET as csvGet } from '@/app/api/naishin/csv/route';
 import { GET as openapiGet } from '@/app/api/openapi/route';
+import { GET as statusGet } from '@/app/api/status/route';
 
 function req(url: string) {
   return new Request(url);
@@ -27,6 +28,18 @@ describe('/api/naishin（インデックス）', () => {
     expect(res.headers.get('x-ratelimit-limit')).toBeTruthy();
     // 匿名はCDNキャッシュ維持（public）。
     expect(res.headers.get('cache-control')).toContain('public');
+  });
+});
+
+describe('/api/status', () => {
+  test('status:ok・データセット件数・エンドポイント一覧を返す（認証不要）', async () => {
+    const res = await statusGet();
+    const json = await res.json();
+    expect(res.status).toBe(200);
+    expect(json.status).toBe('ok');
+    expect(json.dataset.prefectureCount).toBe(47);
+    expect(json.endpoints.naishinIndex).toBe('/api/naishin');
+    expect(typeof json.timestamp).toBe('string');
   });
 });
 
