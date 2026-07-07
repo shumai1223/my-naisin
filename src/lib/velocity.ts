@@ -463,3 +463,38 @@ export function evaluateTripwires(input: TripwireInput): TripwireResult[] {
     },
   ];
 }
+
+/* ────────────────────────────────────────────────────────────────────────
+ * 特単交渉トリガー（D-1）。[[fable5-fullaccel-backlog-2026-07]] 戦略決定§1-6：
+ * 「発生50件/月で交渉発動」の閾値を判定する純関数。¥予測はせず件数のみで判定する。
+ * ──────────────────────────────────────────────────────────────────────── */
+
+/** この件数（ASP発生/月）に達したら特単（ボリュームディスカウント/上乗せCPA）交渉を開始する。 */
+export const SPECIAL_RATE_NEGOTIATION_THRESHOLD = 50;
+
+export interface SpecialRateNegotiationResult {
+  triggered: boolean;
+  conversionsThisMonth: number;
+  threshold: number;
+  /** 閾値までの残り件数（到達済みなら0）。 */
+  remaining: number;
+  detail: string;
+}
+
+/** 当月のASP発生件数（プログラム横断の合計）が閾値に達したかを判定する。 */
+export function evaluateSpecialRateNegotiationTrigger(
+  conversionsThisMonth: number,
+  threshold: number = SPECIAL_RATE_NEGOTIATION_THRESHOLD
+): SpecialRateNegotiationResult {
+  const triggered = conversionsThisMonth >= threshold;
+  const remaining = Math.max(0, threshold - conversionsThisMonth);
+  return {
+    triggered,
+    conversionsThisMonth,
+    threshold,
+    remaining,
+    detail: triggered
+      ? `当月発生${conversionsThisMonth}件が閾値${threshold}件に到達＝特単交渉キットを送る（👤親名義）`
+      : `当月発生${conversionsThisMonth}件／閾値${threshold}件（あと${remaining}件）`,
+  };
+}

@@ -12,6 +12,9 @@
  *   # 7/20 反証ゲートに実測を載せる（任意・既定0）：--prev-clicks=前季クリック --leads=名簿累計 --conversions=ASP発生
  *   npx tsx scripts/generate-sales-report.ts --clicks=clicks.json --prev-clicks=120 --leads=12 --conversions=0
  *
+ *   # 特単交渉トリガー（D-1・任意）：当月ASP発生累計が50件/月に達すると交渉文面を自動生成
+ *   npx tsx scripts/generate-sales-report.ts --clicks=clicks.json --conversions-this-month=52
+ *
  * 思想（[[fable5-master-plan-2026-06]] / [[honbun-portfolio-strategy]]）：
  *   来年3月に塾・個別指導へ「送客実績＋CPA交渉」を持ち込むには、実績データを今から貯めて
  *   いつでもレポート化できる必要がある。クリックは /go(D1) の一次データ＝欠測しない。
@@ -29,7 +32,7 @@ import {
   yen,
 } from '@/lib/affiliate-economics';
 import { auditPlacementOffers } from '@/lib/lead-config';
-import { evaluateJulyGate } from '@/lib/velocity';
+import { evaluateJulyGate, evaluateSpecialRateNegotiationTrigger } from '@/lib/velocity';
 
 function arg(name: string): string | undefined {
   const hit = process.argv.find((a) => a.startsWith(`--${name}=`));
@@ -126,6 +129,42 @@ function main() {
     .join('\n');
   const unsafeCount = auditRows.filter((a) => !a.parentSafe).length;
 
+  // 特単交渉トリガー（D-1）：当月ASP発生件数の累計を渡すと閾値50件/月の判定＋交渉文面を出す。
+  const conversionsThisMonth = arg('conversions-this-month');
+  const nego = conversionsThisMonth !== undefined ? evaluateSpecialRateNegotiationTrigger(num(conversionsThisMonth)) : null;
+  const negoSection = nego
+    ? `
+
+## 特単交渉トリガー（D-1）
+
+- ${nego.triggered ? '🚨 発火' : '✅ 未発火'}：${nego.detail}
+${
+  nego.triggered
+    ? `
+### 交渉文面（叩き台・${monthLabel}）
+
+> 送信は必ず親名義（👤）で。金額・条件は先方との関係性に応じて調整してください。
+
+\`\`\`
+件名：送客実績のご報告とお願い（My Naishin）
+
+いつもお世話になっております。My Naishin（内申点・偏差値の計算サイト）です。
+
+おかげさまで${monthLabel}の送客実績は下記の通りとなりました。
+- 総クリック（実数）: ${totalClicks.toLocaleString('ja-JP')}件
+- うち貴社向け送客の発生（貴社ご確認の実績）: ${nego.conversionsThisMonth}件
+
+継続して安定した送客ができておりますので、送客件数の実績に応じた条件（成果単価の見直し、
+または一定件数以上でのボリュームディスカウント／上乗せ）についてご相談させていただけますと幸いです。
+可能でしたら一度オンラインでお時間をいただけますでしょうか。
+
+引き続きよろしくお願いいたします。
+\`\`\`
+`
+    : ''
+}`
+    : '';
+
   const md = `# 送客実績レポート — ${monthLabel}
 
 > ⚠ 推定リード数・推定発生額は **未実測の仮定**（CPA・転換率は affiliate-economics.ts の概算）です。
@@ -172,7 +211,7 @@ ${auditTable}
 - ASP経由 CPA に対し、直接契約では +30〜80% の上乗せ余地があるケースがある（要交渉）。
 - 上位プログラム＝塾/個別/家庭教師の「無料体験」をまず直接契約の打診対象に。
 - 県×面で偏りがあれば、その県の地場塾へ「この地域で月◯クリック送れます」と提示できる。
-`;
+${negoSection}`;
 
   if (out) {
     writeFileSync(out, md, 'utf8');

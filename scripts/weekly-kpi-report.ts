@@ -246,6 +246,7 @@ async function main() {
     funnelStages: parseFunnelStages(args.funnel),
     aiReferralBySource: parseSourceCounts(args['ai-referral-sources']),
     ga4OrganicSessions: args['ga4-organic-sessions'] !== undefined ? num(args['ga4-organic-sessions']) : undefined,
+    conversionsThisMonth: args['conversions-this-month'] !== undefined ? num(args['conversions-this-month']) : undefined,
     affiliateClicks: num(args['affiliate-clicks']),
     confirmedConversions: num(args.conversions),
     gate: {

@@ -19,6 +19,8 @@ import {
   ROSTER_TARGET_DEADLINE,
   CONSENT_CAPTURE_RATIO_BASELINE,
   CONSENT_CAPTURE_RATIO_TOLERANCE,
+  evaluateSpecialRateNegotiationTrigger,
+  SPECIAL_RATE_NEGOTIATION_THRESHOLD,
 } from '../velocity';
 
 const D = (iso: string) => new Date(`${iso}T00:00:00Z`);
@@ -389,5 +391,32 @@ describe('evaluateConsentCapture（Consent捕捉率の定点観測・I-5）', ()
     const r = evaluateConsentCapture({ gscClicks: 1000, ga4OrganicSessions: 100 }, 10, 0.1); // ratio=10=baseline
     expect(r.baseline).toBe(10);
     expect(r.triggered).toBe(false);
+  });
+});
+
+describe('evaluateSpecialRateNegotiationTrigger', () => {
+  it('閾値未満は未発火', () => {
+    const r = evaluateSpecialRateNegotiationTrigger(49);
+    expect(r.triggered).toBe(false);
+    expect(r.remaining).toBe(1);
+    expect(r.threshold).toBe(SPECIAL_RATE_NEGOTIATION_THRESHOLD);
+  });
+
+  it('閾値ちょうどで発火', () => {
+    const r = evaluateSpecialRateNegotiationTrigger(50);
+    expect(r.triggered).toBe(true);
+    expect(r.remaining).toBe(0);
+  });
+
+  it('閾値超過でも発火（remainingは0で頭打ち）', () => {
+    const r = evaluateSpecialRateNegotiationTrigger(120);
+    expect(r.triggered).toBe(true);
+    expect(r.remaining).toBe(0);
+  });
+
+  it('閾値は上書き可能', () => {
+    const r = evaluateSpecialRateNegotiationTrigger(30, 30);
+    expect(r.triggered).toBe(true);
+    expect(r.threshold).toBe(30);
   });
 });

@@ -12,6 +12,7 @@ import {
   evaluateRosterVelocityTarget,
   findFunnelBottleneck,
   evaluateConsentCapture,
+  evaluateSpecialRateNegotiationTrigger,
   type JulyGateInput,
   type TripwireInput,
   type FunnelStage,
@@ -32,6 +33,8 @@ export interface WeeklyKpiData {
   aiReferralBySource?: { source: string; count: number }[];
   /** GA4 Organic Searchセッション（今週。任意）。あればConsent捕捉率の定点観測行を出す（I-5）。 */
   ga4OrganicSessions?: number;
+  /** 当月のASP発生件数累計（任意）。あれば特単交渉トリガー（D-1・閾値50件/月）の判定行を出す。 */
+  conversionsThisMonth?: number;
   /** 送客（affiliate_click）今週件数。 */
   affiliateClicks: number;
   /** ASP実測の確定発生件数（分からなければ0。¥は書かない）。 */
@@ -143,6 +146,15 @@ export function formatWeeklyKpiEmail(data: WeeklyKpiData): { subject: string; te
     lines.push(`  ${consent.triggered ? '🚨' : '✅'} ${consent.detail}`);
     if (consent.triggered) {
       lines.push('  実測の変化ではなく計測事故（GTM/同意バナー/GA4タグ抜け）の可能性を疑って確認してください。');
+    }
+  }
+  if (data.conversionsThisMonth !== undefined) {
+    const nego = evaluateSpecialRateNegotiationTrigger(data.conversionsThisMonth);
+    lines.push('');
+    lines.push('■ 特単交渉トリガー（D-1・閾値50件/月）');
+    lines.push(`  ${nego.triggered ? '🚨' : '✅'} ${nego.detail}`);
+    if (nego.triggered) {
+      lines.push('  → scripts/generate-sales-report.ts --conversions-this-month=… で交渉文面付きレポートを生成し、親名義で送信してください。');
     }
   }
   lines.push('');
