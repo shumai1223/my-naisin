@@ -56,6 +56,35 @@
 
 ---
 
+## 0.6. 承認 → 即日 live化 SLA手順書（D-3・D-10）
+
+> 目的：承認/契約成立の連絡が来てから**その日のうち**にpush（=Cloudflare自動デプロイ）まで終える。
+> 上の0.5表は「どのファイルの何行目を直すか」の**対象一覧**。ここは「新しい案件が来た時に何をするか」の**手順そのもの**（未知の案件・0.5に無い案件にも使える）。
+
+### 手順（目安30分以内でcommitまで）
+1. **記録**：承認/契約メールのASP名・案件名・成果地点（無料体験/資料請求/月額スポンサー等）・条件（CPA額 or 月額固定）をメモ。
+2. **該当ファイルを1箇所だけ直す**（設計上、複数箇所に散らばらない）：
+   - ASPアフィリ（CPA型）→ `src/lib/affiliates.ts` の該当エントリの `href`/`text`/`trackingPixel` を実値にし `status: 'pending'` 行を削除。
+   - 送客先の面を決める/変える → `src/lib/lead-config.ts` の `PLACEMENT_LEAD_OVERRIDES`（面）または `PREFECTURE_PLACEMENT_LEAD_OVERRIDES`（県×面）に1行。
+   - 直販の掲載枠スポンサー（D-3・月額固定・県×面） → `src/lib/sponsor-slots.ts` の `SPONSOR_SLOTS` に1行追加（キーは `placement` または `${prefectureCode}:${placement}`）。EVランキングやlead-config監査の対象外なので他ファイルは触らない。
+   - EV前提（CPA/転換率）が分かれば → `src/lib/affiliate-economics.ts` に反映（無ければ既定値のままでよい。実測が貯まったら `npm run ev:reconcile` で後日突合＝D-6）。
+3. **検証**（省略しない。redは絶対push禁止）：
+   - `npx tsc --noEmit`（OOM時は `NODE_OPTIONS=--max-old-space-size=8192`）
+   - `npx jest`
+   - `npm run check:all`（データ整合性・禁止ワード）
+   - `npm run check:orphans`（新規ページを足した場合のみ）
+   - 実exitコードを確認（パイプでの誤読を避ける）。
+4. **commit → push**：feat/contentプレフィックス・日本語1行・このタスク由来なら `(D-3)`/`(D-10)` 等のタスクID併記。pushは即Cloudflare自動デプロイ＝これで「live化」完了。
+5. **本番確認**：対象ページをWebFetch等で開き、新しい枠/リンクが描画されているか確認（キャッシュがあるため`?cb=<値>`等でURLを変える）。
+6. **記録**：`docs/worklog/`に承認内容・commit hash・確認結果を1行。
+
+### 前提として既に自動化済みのもの（この手順を速くしている理由）
+- `AffiliateAd`/`SponsorSlot`/`AdSlot` はいずれも「未確定(pending)/未契約は描画0」の二重ガード設計＝焦って直しても壊れたリンクが本番に出ない。
+- 送客先の差し替えは表1行で完結する設計（コンポーネント側は無改修）＝レビューの手間がほぼ無い。
+- push＝本番反映（手動デプロイ工程が無い）。
+
+---
+
 ## 1. AdSense（収益の床）
 
 ### 審査を通すチェックリスト
