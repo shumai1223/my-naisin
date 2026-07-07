@@ -131,6 +131,14 @@ const TOOL_GROUPS: { id: string; heading: string; tools: Tool[] }[] = [
         icon: LineChart,
         color: 'orange',
       },
+      {
+        title: '高校入試 倍率計算（志願倍率・実質倍率）',
+        description: '募集人員・志願者数（または受験者数・合格者数）から、志願倍率・実質倍率を計算',
+        features: ['志願倍率＝志願者数÷募集人員', '実質倍率＝受験者数÷合格者数', '違いの解説つき'],
+        href: '/koukou-bairitsu',
+        icon: Calculator,
+        color: 'blue',
+      },
     ],
   },
   {
