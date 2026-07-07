@@ -3,17 +3,17 @@ import Link from 'next/link';
 import { Code2, Check, Zap, Gift, ShieldCheck, ChevronRight, Home } from 'lucide-react';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
-import { EmbedCodeBox } from '@/components/EmbedCodeBox';
+import { EmbedWidgetPicker } from '@/components/EmbedWidgetPicker';
 
 export const metadata: Metadata = {
-  title: { absolute: '無料の内申点・評定平均 計算ウィジェット｜ブログに貼れる埋め込みコード | My Naishin' },
+  title: { absolute: '無料の内申点・偏差値 計算ウィジェット｜ブログに貼れる埋め込みコード | My Naishin' },
   description:
-    '【無料・登録不要】内申点（素内申）と評定平均を計算できるツールを、あなたのブログ・サイトに埋め込めます。iframeコードをコピーして貼るだけ。塾・教育ブログ・受験情報サイトの読者に便利な計算機を提供できます。',
-  keywords: ['内申点 計算 ウィジェット', '評定平均 ツール 埋め込み', '内申点 計算機 ブログ', '受験 ツール iframe'],
+    '【無料・登録不要】内申点（素内申・評定平均）と偏差値（5教科）を計算できるツールを、あなたのブログ・サイトに埋め込めます。iframeコードをコピーして貼るだけ。塾・教育ブログ・受験情報サイトの読者に便利な計算機を提供できます。',
+  keywords: ['内申点 計算 ウィジェット', '偏差値 計算 埋め込み', '評定平均 ツール 埋め込み', '内申点 計算機 ブログ', '受験 ツール iframe'],
   alternates: { canonical: 'https://my-naishin.com/embed' },
   openGraph: {
-    title: '無料の内申点・評定平均 計算ウィジェット｜ブログに貼れる埋め込みコード | My Naishin',
-    description: '内申点・評定平均の計算ツールを、iframeコードのコピペであなたのサイトに設置できます。無料・登録不要。',
+    title: '無料の内申点・偏差値 計算ウィジェット｜ブログに貼れる埋め込みコード | My Naishin',
+    description: '内申点・評定平均・偏差値の計算ツールを、iframeコードのコピペであなたのサイトに設置できます。無料・登録不要。',
     url: 'https://my-naishin.com/embed',
     type: 'website',
   },
@@ -47,11 +47,11 @@ export default function EmbedPage() {
               <Code2 className="h-8 w-8" />
             </div>
             <h1 className="text-2xl font-bold text-slate-900 md:text-3xl">
-              内申点・評定平均の計算ツールを、あなたのサイトに
+              内申点・偏差値の計算ツールを、あなたのサイトに
             </h1>
             <p className="mt-3 text-slate-600 leading-relaxed">
               塾・家庭教師・教育ブログ・受験情報サイトの運営者の方へ。<br />
-              読者がその場で「素内申」と「評定平均」を計算できるツールを、<strong>無料・登録不要</strong>で設置できます。
+              読者がその場で「素内申・評定平均」または「偏差値」を計算できるツールを、<strong>無料・登録不要</strong>で設置できます。
             </p>
           </header>
 
@@ -74,31 +74,13 @@ export default function EmbedPage() {
             </div>
           </div>
 
-          {/* ライブプレビュー */}
+          {/* ライブプレビュー＋埋め込みコード（ウィジェット選択つき） */}
           <section className="mb-8">
             <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
               <Check className="h-5 w-5 text-emerald-600" />
-              プレビュー（実際に動きます）
+              好きなウィジェットを選んで、この2行を貼るだけ
             </h2>
-            <div className="flex justify-center rounded-2xl border border-slate-200 bg-slate-50 p-4">
-              <iframe
-                src="/embed/naishin"
-                width="100%"
-                height={640}
-                style={{ border: '1px solid #e5e7eb', borderRadius: 16, maxWidth: 480, background: '#fff' }}
-                title="内申点・評定平均 計算ツール｜My Naishin"
-                loading="lazy"
-              />
-            </div>
-          </section>
-
-          {/* 埋め込みコード */}
-          <section className="mb-8">
-            <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <Code2 className="h-5 w-5 text-blue-600" />
-              この2行を貼るだけ
-            </h2>
-            <EmbedCodeBox />
+            <EmbedWidgetPicker />
             <p className="mt-3 text-xs leading-relaxed text-slate-500">
               WordPress・はてなブログ・note（HTML埋め込み対応プラン）・自作サイトなどに貼り付けてください。
               幅は自動で親要素に合わせて調整されます（最大480px）。高さが足りない場合は <code className="rounded bg-slate-100 px-1">height</code> の数値を増やしてください。
@@ -119,7 +101,7 @@ export default function EmbedPage() {
           <section className="mb-8 overflow-hidden rounded-2xl border-2 border-blue-200 bg-gradient-to-br from-blue-50 to-indigo-50/40 p-6 shadow-sm">
             <h2 className="mb-2 text-base font-bold text-slate-800">塾・学校・教育ブログ運営者の方へ（無料パートナー）</h2>
             <p className="mb-3 text-sm leading-relaxed text-slate-700">
-              生徒・保護者がよく使う「内申点・評定平均の計算ツール」を、貴サイトに無料で設置できます。
+              生徒・保護者がよく使う「内申点・評定平均」「偏差値」の計算ツールを、貴サイトに無料で設置できます。
               読者の役に立つ実用ツールが増え、サイトの滞在時間・信頼性の向上に役立ちます。導入は<strong>iframeコードを貼るだけ</strong>・登録不要です。
             </p>
             <ol className="mb-4 space-y-1.5 text-sm leading-relaxed text-slate-700">
@@ -144,7 +126,7 @@ export default function EmbedPage() {
           <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="mb-3 text-base font-bold text-slate-800">本家サイトのツール</h2>
             <p className="mb-4 text-xs text-slate-500">
-              ウィジェットは「素内申・評定平均」専用です。都道府県別の換算内申・偏差値・S値などは本家サイトでどうぞ。
+              ウィジェットは「素内申・評定平均」「偏差値（簡易・標準偏差15固定）」の2種類です。都道府県別の換算内申・標準偏差指定の偏差値・S値などは本家サイトでどうぞ。
             </p>
             <div className="grid gap-2 sm:grid-cols-2">
               <Link href="/" className="flex items-center justify-between rounded-xl bg-slate-50 p-3 text-sm font-medium text-slate-700 hover:bg-blue-50 hover:text-blue-700">
