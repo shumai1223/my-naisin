@@ -80,6 +80,27 @@ export function roundHensachi(h: number): number {
 }
 
 /**
+ * 現在の偏差値から目標偏差値までを、指定週数で均等按分した週次マイルストーンに分解する。
+ * 断定的な学習計画ではなく「直線的に伸ばした場合の目安」の按分のみ（捏造ゼロ）。
+ * target <= current（すでに到達）の場合は空配列を返す（計画不要）。
+ */
+export function buildHensachiWeeklyPlan(
+  current: number,
+  target: number,
+  weeks = 5,
+): { week: number; targetHensachi: number }[] {
+  if (!Number.isFinite(current) || !Number.isFinite(target) || weeks <= 0 || target <= current) {
+    return [];
+  }
+  const step = (target - current) / weeks;
+  return Array.from({ length: weeks }, (_, i) => {
+    const weekNum = i + 1;
+    const value = weekNum === weeks ? target : current + step * weekNum;
+    return { week: weekNum, targetHensachi: roundHensachi(value) };
+  });
+}
+
+/**
  * calcHensachi の逆算：目標偏差値に到達するために必要な点数を返す。
  * 偏差値 = 50 + 10×(score − average)÷stdDev を score について解いた式。
  * 「あと何点」逆算（過去問の得点・平均点・標準偏差から、目標偏差値に必要な点を出す）に使う。

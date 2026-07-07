@@ -4,6 +4,7 @@ import * as React from 'react';
 
 import { HensachiCalculator } from '@/components/Hensachi/HensachiCalculator';
 import { HensachiResultActions } from '@/components/Hensachi/HensachiResultActions';
+import { HensachiGapToTarget } from '@/components/Hensachi/HensachiGapToTarget';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { ParentCostBridge } from '@/components/ParentCostBridge';
@@ -21,14 +22,25 @@ import { ShindanEntryLink } from '@/components/ShindanEntryLink';
  */
 export function HensachiResultFlow() {
   const [value, setValue] = React.useState<number | null>(null);
+  const [target, setTarget] = React.useState<number | null>(null);
+  const [gap, setGap] = React.useState<number | null>(null);
   const v = typeof value === 'number' ? value.toFixed(1) : '';
   const has = v !== '';
   const scoreProp = typeof value === 'number' ? value : undefined;
+  const handleTargetChange = React.useCallback((t: number | null, g: number | null) => {
+    setTarget(t);
+    setGap(g);
+  }, []);
 
   return (
     <>
       <div id="calculator-section">
         <HensachiCalculator onResult={setValue} resultFooter={<HensachiResultActions value={value} />} />
+      </div>
+
+      {/* A-9: 偏差値+5(チャレンジ帯)を既定目標にした週次計画ジェネレータ。target/gapはLINE保存CTAへ渡す */}
+      <div className="mt-6">
+        <HensachiGapToTarget value={value} onTargetChange={handleTargetChange} />
       </div>
 
       {/* 即効レバー：最高CTRページの結果直後に保護者リード（決裁者＝保護者へ高単価送客） */}
@@ -49,7 +61,15 @@ export function HensachiResultFlow() {
           source="hensachi"
           score={scoreProp}
           metricLabel="偏差値"
-          heading={has ? `偏差値${v}を記録して、伸びを追いかけませんか？` : undefined}
+          target={target ?? undefined}
+          gap={gap ?? undefined}
+          heading={
+            has && target !== null && gap !== null
+              ? `目標偏差値${target}まであと${gap}。記録して一緒に追いかけませんか？`
+              : has
+                ? `偏差値${v}を記録して、伸びを追いかけませんか？`
+                : undefined
+          }
           body={
             has
               ? `いまの偏差値${v}を保存し、志望校まで「あと何点」を受験本番まで一緒に追いかけます。伸ばし方のコツ・志望校の最新情報をLINE/メールで無料でお届けします。`
