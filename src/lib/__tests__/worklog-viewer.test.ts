@@ -17,11 +17,11 @@ describe('parseWorklogMarkdown', () => {
     expect(parsed.date).toBe('2026-07-07');
   });
 
-  it('HH:MM行をtime付きで、それ以外はtime:nullで拾う', () => {
+  it('HH:MM行をtime付きで拾い、1日の中は新しい順（最新が先頭）にする', () => {
     const parsed = parseWorklogMarkdown('2026-07-07', SAMPLE);
     expect(parsed.lines).toHaveLength(2);
-    expect(parsed.lines[0]).toEqual({ time: '11:17', text: '▶開始 A-6（満点変換独立URL）' });
-    expect(parsed.lines[1].time).toBe('11:25');
+    expect(parsed.lines[0].time).toBe('11:25');
+    expect(parsed.lines[1]).toEqual({ time: '11:17', text: '▶開始 A-6（満点変換独立URL）' });
   });
 
   it('空行は無視する', () => {

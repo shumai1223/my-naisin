@@ -327,7 +327,7 @@ export default async function AdminReportPage({
               直近 <strong>{days}日</strong> の /go 経由クリック実数（D1一次ログ）。期間は <code>?days=</code> で変更。
             </p>
           </div>
-          <div className="flex gap-1.5 text-xs">
+          <div className="flex flex-wrap items-center gap-1.5 text-xs">
             {[7, 30, 90, 365].map((d) => (
               <a
                 key={d}
@@ -339,6 +339,12 @@ export default async function AdminReportPage({
                 {d}日
               </a>
             ))}
+            <a
+              href={`/admin/worklog?token=${encodeURIComponent(token)}`}
+              className="rounded-lg bg-white px-2.5 py-1 font-bold text-slate-600 ring-1 ring-slate-200 transition-colors hover:bg-slate-100"
+            >
+              worklog →
+            </a>
           </div>
         </div>
 

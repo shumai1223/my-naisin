@@ -53,6 +53,9 @@ export function parseWorklogMarkdown(date: string, content: string): ParsedWorkl
     }
   }
 
+  // 1日の中も新しい作業が上（本人要望）。ファイルは時系列昇順で追記されるので反転する。
+  lines.reverse();
+
   return { date, title, lines };
 }
 

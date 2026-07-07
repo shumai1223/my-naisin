@@ -1,0 +1,33 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__gsc__gsc_search_analytics",
+      "mcp__gsc__gsc_inspect_url",
+      "mcp__gsc__gsc_list_sites",
+      "mcp__gsc__gsc_list_sitemaps",
+      "mcp__ga4__ga4_preset",
+      "mcp__ga4__ga4_run_report",
+      "mcp__ga4__ga4_list_properties",
+      "Bash(npx tsc --noEmit *)",
+      "Bash(npx jest *)",
+      "Bash(node_modules/.bin/tsc --noEmit *)",
+      "Bash(node_modules/.bin/jest *)",
+      "Bash(npm run check:all)",
+      "PowerShell(Select-String *)",
+      "PowerShell(Get-ChildItem *)",
+      "PowerShell(Get-Content *)",
+      "PowerShell(npx tsc --noEmit *)",
+      "PowerShell(npx jest *)",
+      "PowerShell(npm run check:all)",
+      "PowerShell(node scripts/check-orphans.mjs)",
+      "PowerShell(node node_modules/typescript/bin/tsc *)",
+      "PowerShell(Start-Sleep *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git push)",
+      "PowerShell(git add *)",
+      "PowerShell(git commit *)",
+      "PowerShell(git push)"
+    ]
+  }
+}

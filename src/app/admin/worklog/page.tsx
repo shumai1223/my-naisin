@@ -51,7 +51,15 @@ export default async function AdminWorklogPage({
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-8">
-      <h1 className="text-xl font-black text-slate-900">worklogビューア</h1>
+      <div className="flex flex-wrap items-end justify-between gap-2">
+        <h1 className="text-xl font-black text-slate-900">worklogビューア</h1>
+        <a
+          href={`/admin/report?token=${encodeURIComponent(token)}`}
+          className="rounded-lg bg-white px-2.5 py-1 text-xs font-bold text-slate-600 ring-1 ring-slate-200 transition-colors hover:bg-slate-100"
+        >
+          送客アナリティクス →
+        </a>
+      </div>
       <p className="mt-1 text-xs text-slate-400">
         docs/worklog/*.md（無人ループの作業ログ）・最新日降順・{days.length}日分。
       </p>
