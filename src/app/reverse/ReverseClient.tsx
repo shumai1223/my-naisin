@@ -13,9 +13,11 @@ import { HowToSchema } from '@/components/StructuredData/HowToSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { ParentCostBridge } from '@/components/ParentCostBridge';
+import { ParentWindowBridge } from '@/components/ParentWindowBridge';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { AnswerBox } from '@/components/AnswerBox';
 import Loader from '@/components/ui/Loader';
+import type { ReverseResult } from '@/components/Calculator/ReverseCalculator';
 
 const ReverseCalculator = nextDynamic(
   () => import('@/components/Calculator/ReverseCalculator').then((mod) => mod.ReverseCalculator),
@@ -45,7 +47,9 @@ function ReversePageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const hasPrefParam = searchParams?.has('pref');
-  
+  const [result, setResult] = React.useState<ReverseResult | null>(null);
+  const [prefCtx, setPrefCtx] = React.useState<{ prefectureCode: string; prefectureName?: string }>({ prefectureCode: '' });
+
   return (
     <div className="min-h-screen">
       <WebApplicationSchema
@@ -244,20 +248,42 @@ function ReversePageContent() {
 
               <ReverseCalculator
                 onBack={() => router.push('/')}
+                onResult={(r, ctx) => {
+                  setResult(r);
+                  setPrefCtx(ctx);
+                }}
               />
 
               {/* 結果直後の同スケール導線（生徒→保護者）：購入を迫らず、必要点が見えたいま学費/塾代を確認 */}
-              <ParentCostBridge className="mt-8" />
+              <ParentCostBridge prefectureName={prefCtx.prefectureName} className="mt-8" />
 
               {/* 保護者向けリード（換金の本命：志望校が見えた保護者を無料資料請求へ） */}
-              <ParentLeadCTA placement="result" auditHide className="mt-8" />
+              <ParentLeadCTA placement="result" prefectureCode={prefCtx.prefectureCode || undefined} auditHide className="mt-8" />
 
-              {/* 結果の保存（名簿化：再訪の燃料） */}
+              {/* 結果の保存（名簿化：再訪の燃料）。必要当日点/満点が出たら実測値で個別化する（C-14）。 */}
               <SaveResultCTA
                 source="gap-target"
-                heading="必要点と志望校を、受験本番まで無料で受け取りませんか？"
+                prefectureCode={prefCtx.prefectureCode || undefined}
+                prefectureName={prefCtx.prefectureName}
+                score={result?.requiredExamScore}
+                max={result?.examMaxScore}
+                heading={
+                  result
+                    ? `必要な当日点${result.requiredExamScore}/${result.examMaxScore}点を、受験本番まで無料で受け取りませんか？`
+                    : '必要点と志望校を、受験本番まで無料で受け取りませんか？'
+                }
                 body="目標までの差・出願スケジュール・対策のコツを、LINEまたはメールでお届けします。いつでも解除できます。"
                 className="mt-6"
+              />
+
+              {/* 保護者ウィンドウ（三者面談・出願期だけ点灯）：必要当日点の現在地＋成績カードを面談へ持って行く導線（C-14） */}
+              <ParentWindowBridge
+                className="mt-6"
+                metricLabel="必要な当日点"
+                score={result?.requiredExamScore}
+                max={result?.examMaxScore}
+                prefectureCode={prefCtx.prefectureCode || undefined}
+                prefectureName={prefCtx.prefectureName}
               />
 
               {/* 2026-07 AdSense撤退＝アフィリ一本化：ここにあった Z会/スタサプの表示バナー群

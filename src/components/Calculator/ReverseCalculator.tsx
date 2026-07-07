@@ -17,9 +17,14 @@ import { EVENTS, funnel, trackEvent } from '@/lib/track';
 
 interface ReverseCalculatorProps {
   onBack: () => void;
+  /**
+   * 結果連動CTA（C-14）：必要当日点/満点と、選択中の都道府県を親へ持ち上げる。
+   * 都道府県セレクタは内部stateのため、結果とあわせて渡さないと親側でCTAを県別最適化できない。
+   */
+  onResult?: (result: ReverseResult | null, context: { prefectureCode: string; prefectureName?: string }) => void;
 }
 
-interface ReverseResult {
+export interface ReverseResult {
   requiredExamScore: number;
   examMaxScore: number;
   examPercent: number;
@@ -77,7 +82,7 @@ const TERM_HELP: Record<string, { title: string; description: string }> = {
   }
 };
 
-export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
+export function ReverseCalculator({ onBack, onResult }: ReverseCalculatorProps) {
   const searchParams = useSearchParams();
   const initialPref = searchParams.get('pref') ?? 'tokyo';
   const initialRatio = searchParams.get('ratio');
@@ -329,6 +334,11 @@ export function ReverseCalculator({ onBack }: ReverseCalculatorProps) {
       funnel.resultView({ pref: prefectureCode, tool: 'reverse', placement: 'result' });
     }
   }, [result, prefectureCode]);
+
+  // 結果連動CTA（C-14）：必要当日点/満点と選択県を親へ持ち上げ、SaveResultCTA/ParentWindowBridgeを個別化する。
+  React.useEffect(() => {
+    onResult?.(result, { prefectureCode, prefectureName: prefecture?.name });
+  }, [result, onResult, prefectureCode, prefecture]);
 
   return (
     <div className="space-y-4">
