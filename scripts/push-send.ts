@@ -4,14 +4,20 @@
  *   # 0) 初回だけ：VAPID鍵を生成して env に設定（NEXT_PUBLIC_VAPID_PUBLIC_KEY / VAPID_PRIVATE_KEY / VAPID_SUBJECT）
  *   npx tsx scripts/push-send.ts --gen-keys
  *
- *   # 1) D1 から購読をエクスポート（revoked=0 のみ）
+ *   # 1) D1 から購読をエクスポート（revoked=0 のみ。created_atはrecalc-reminderシナリオの絞り込みに使う）
  *   wrangler d1 execute my-naishin-leads --remote --json \
- *     --command "SELECT endpoint, p256dh, auth, prefecture, audience FROM push_subscriptions WHERE revoked=0" \
+ *     --command "SELECT endpoint, p256dh, auth, prefecture, audience, created_at FROM push_subscriptions WHERE revoked=0" \
  *     > subs.json
  *
- *   # 2) ドライラン（送らない）→ 本送信（--send）
+ *   # 2) ドライラン（送らない）→ 本送信（--send）。文面は手打ちでも、--scenario指定でも可。
  *   npx tsx scripts/push-send.ts --subs=subs.json --title="出願はお済みですか？" --body="出願締切が近づいています" --url="/juken-schedule"
  *   npx tsx scripts/push-send.ts --subs=subs.json --title="..." --body="..." --url="/total-score" --send
+ *
+ *   # 2') シナリオ配信（C-3）：文面はpush-scenarios.tsの単一ソースから自動決定。
+ *   #    recalc-reminder は --recalc-days（既定30・許容±--recalc-tolerance既定1日）で
+ *   #    createdAtが「約N日前」の購読だけに絞る（日次実行を想定・全件への誤爆を防ぐ）。
+ *   npx tsx scripts/push-send.ts --subs=subs.json --scenario=recalc-reminder --send
+ *   npx tsx scripts/push-send.ts --subs=subs.json --scenario=parent-window-eve --send   # 窓前日のみ自動選択、窓前日でなければ送信0件
  *
  * 思想（[[fable5-master-plan-2026-06]] / [[north-star-vision-2026-06]]）：
  *   名簿＋プッシュは Google 非依存の再訪チャネル。1,000人購読すれば「1プッシュで数万円」が動く装置になる。
@@ -26,6 +32,7 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 
 import { VAPID_PUBLIC_KEY } from '@/lib/push-config';
+import { PUSH_SCENARIOS, activeParentWindowEveScenario, isAroundDaysAgo, type PushScenarioId } from '@/lib/push-scenarios';
 
 function arg(name: string): string | undefined {
   const hit = process.argv.find((a) => a.startsWith(`--${name}=`));
@@ -44,6 +51,7 @@ interface SubRow {
   auth: string;
   prefecture?: string | null;
   audience?: string | null;
+  created_at?: string | null;
 }
 
 function loadSubs(path: string): SubRow[] {
@@ -93,12 +101,34 @@ async function main() {
   webpush.setVapidDetails(subject, publicKey, privateKey);
 
   const subsPath = arg('subs');
-  const title = arg('title') ?? 'My Naishin';
-  const bodyText = arg('body') ?? '';
-  const url = arg('url') ?? '/';
   const prefFilter = arg('prefecture');
   const audienceFilter = arg('audience');
   const send = flag('send') && !flag('dry-run');
+
+  // --scenario=recalc-reminder | parent-window-eve … push-scenarios.ts の単一ソースから文面を自動決定。
+  // parent-window-eve は「今日が窓前日でなければ」シナリオ自体が無い＝安全に0件送信で終わる。
+  const scenarioArg = arg('scenario');
+  let scenario: { title: string; body: string; url: string } | null = null;
+  if (scenarioArg === 'parent-window-eve') {
+    scenario = activeParentWindowEveScenario();
+    if (!scenario) {
+      console.log('■ 今日は保護者収穫窓の前日ではありません（parent-window-eve該当なし）。送信対象0件で終了します。');
+      return;
+    }
+  } else if (scenarioArg) {
+    const found = PUSH_SCENARIOS[scenarioArg as PushScenarioId];
+    if (!found) {
+      console.error(`✗ 未知のシナリオ: ${scenarioArg}（有効値: ${Object.keys(PUSH_SCENARIOS).join(', ')}, parent-window-eve）`);
+      process.exit(1);
+    }
+    scenario = found;
+  }
+
+  const title = arg('title') ?? scenario?.title ?? 'My Naishin';
+  const bodyText = arg('body') ?? scenario?.body ?? '';
+  const url = arg('url') ?? scenario?.url ?? '/';
+  const recalcDays = Number(arg('recalc-days') ?? '30');
+  const recalcTolerance = Number(arg('recalc-tolerance') ?? '1');
 
   if (!subsPath) {
     console.error('✗ --subs=subs.json を指定してください（D1 の push_subscriptions をエクスポート）。');
@@ -108,8 +138,13 @@ async function main() {
   let subs = loadSubs(subsPath);
   if (prefFilter) subs = subs.filter((s) => s.prefecture === prefFilter);
   if (audienceFilter) subs = subs.filter((s) => s.audience === audienceFilter);
+  if (scenarioArg === 'recalc-reminder') {
+    subs = subs.filter((s) => isAroundDaysAgo(s.created_at, recalcDays, recalcTolerance));
+  }
 
-  console.log(`■ Web Push 配信  宛先=${subs.length}件${prefFilter ? ` pref=${prefFilter}` : ''}${audienceFilter ? ` audience=${audienceFilter}` : ''}`);
+  console.log(
+    `■ Web Push 配信  宛先=${subs.length}件${prefFilter ? ` pref=${prefFilter}` : ''}${audienceFilter ? ` audience=${audienceFilter}` : ''}${scenarioArg ? ` scenario=${scenarioArg}` : ''}`
+  );
   console.log(`  タイトル: ${title}`);
   console.log(`  本文: ${bodyText}`);
   console.log(`  遷移先: ${url}`);
