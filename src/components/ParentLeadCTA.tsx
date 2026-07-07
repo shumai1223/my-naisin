@@ -1,8 +1,8 @@
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { CtaViewTracker } from '@/components/Affiliate/CtaViewTracker';
 import type { AffiliateId } from '@/lib/affiliates';
-import { selectLeadOffer, type LeadPlacement } from '@/lib/lead-config';
-import { ShieldCheck, FileText } from 'lucide-react';
+import { selectLeadOffer, selectSecondaryLeadOffer, type LeadPlacement } from '@/lib/lead-config';
+import { ShieldCheck, FileText, Plus } from 'lucide-react';
 
 interface ParentLeadCTAProps {
   /** 見出し（未指定なら出し分けエンジンの解決値）。都道府県名などで文脈最適化できる */
@@ -44,6 +44,10 @@ export function ParentLeadCTA({ heading, body, className = '', auditHide = false
   const resolvedNote = note ?? offer.note;
   const resolvedCtaText = ctaText ?? offer.ctaText;
 
+  // 副オファー（1ページの換金機会を増やす相補ペア）。主と被る／pending のときは null。
+  // 明示 affiliateId で主を差し替えている場合は、副が主と重複しうるので出さない（安全側）。
+  const secondary = affiliateId ? null : selectSecondaryLeadOffer({ prefectureCode, placement });
+
   return (
     <section
       className={`overflow-hidden rounded-2xl border border-emerald-200 bg-gradient-to-br from-emerald-50 via-teal-50/60 to-white p-6 shadow-sm md:p-7 ${className}`}
@@ -75,6 +79,24 @@ export function ParentLeadCTA({ heading, body, className = '', auditHide = false
           {resolvedNote}
         </span>
       </div>
+
+      {secondary && (
+        <div className="mt-4 flex flex-col items-stretch gap-1.5 border-t border-emerald-100 pt-4 sm:flex-row sm:items-center sm:gap-3">
+          <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-600">
+            <Plus className="h-3.5 w-3.5 text-emerald-600" />
+            あわせて検討したい方はこちら
+          </span>
+          <AffiliateAd
+            id={secondary.affiliateId}
+            hideLabel
+            ctaText={secondary.ctaText}
+            pref={prefectureCode}
+            placement={placement}
+            linkClassName="inline-flex items-center gap-1.5 text-sm font-bold text-emerald-700 underline underline-offset-2 transition-colors hover:text-emerald-800"
+          />
+          <span className="text-xs text-slate-400">{secondary.note}</span>
+        </div>
+      )}
     </section>
   );
 }

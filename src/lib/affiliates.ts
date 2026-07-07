@@ -37,6 +37,14 @@ export type AffiliateId =
   | 'moshimo-classjapan'
   | 'moshimo-tintoru'
   | 'moshimo-rewrite'
+  // ── もしも 提携中（2026-07-07 承認分を live 結線） ──
+  // FP・学資（保護者＝決裁者・最高単価帯）／オンライン塾・家庭教師の無料リード。
+  | 'moshimo-garden-gakushi' // ガーデン｜学資金の無料相談・面談 CPA¥11,500（審査あり）
+  | 'moshimo-garden-chochiku' // ガーデン｜貯蓄の無料相談・面談 CPA¥11,500（審査あり）
+  | 'moshimo-manecafe' // マネカフェ｜FP診断 CPA¥11,500（本人OK・審査あり）
+  | 'moshimo-minhoken' // みんなの生命保険アドバイザー 無料保険相談 CPA¥17,000（審査あり）
+  | 'moshimo-withstudy' // ウィズスタディ｜低価格オンライン塾 無料体験 CPA¥11,500〜18,000
+  | 'moshimo-manabuterasu' // まなぶてらす｜オンライン家庭教師 無料体験 CPA¥8,000
   // ── 季節講習の先回し枠（冬期/夏期講習の無料体験・招待）。ASP出品は秋／夏。承認時に href/pixel を差すだけで live。 ──
   // 未approveの間は seasonal が自動で既存塾（そら塾/森塾/キャンパス）にフォールバックするのでデッドリンクは出ない。
   | 'winter-koushuu-trial'
@@ -387,6 +395,56 @@ export const AFFILIATES: Record<AffiliateId, AffiliateConfig> = {
     href: 'https://af.moshimo.com/af/c/click?a_id=5638547&p_id=3991&pc_id=10043&pl_id=55079',
     text: '受験英語専門ゼミの無料相談',
     trackingPixel: 'https://i.moshimo.com/af/i/impression?a_id=5638547&p_id=3991&pc_id=10043&pl_id=55079',
+  },
+
+  // ── もしも 提携中（2026-07-07 承認分・live）。テキストリンク1本/プログラム＝形式で選定。 ──
+  'moshimo-garden-gakushi': {
+    id: 'moshimo-garden-gakushi',
+    type: 'text',
+    name: 'ガーデン（学資金の無料相談・FP面談）',
+    href: 'https://af.moshimo.com/af/c/click?a_id=5638593&p_id=5006&pc_id=13414&pl_id=65626',
+    text: '学資・教育資金を専門家FPに無料で相談',
+    trackingPixel: 'https://i.moshimo.com/af/i/impression?a_id=5638593&p_id=5006&pc_id=13414&pl_id=65626',
+  },
+  'moshimo-garden-chochiku': {
+    id: 'moshimo-garden-chochiku',
+    type: 'text',
+    name: 'ガーデン（貯蓄・家計の無料相談・FP面談）',
+    href: 'https://af.moshimo.com/af/c/click?a_id=5638598&p_id=4952&pc_id=13229&pl_id=65173',
+    text: '教育資金・家計を専門家FPに無料で相談',
+    trackingPixel: 'https://i.moshimo.com/af/i/impression?a_id=5638598&p_id=4952&pc_id=13229&pl_id=65173',
+  },
+  'moshimo-manecafe': {
+    id: 'moshimo-manecafe',
+    type: 'text',
+    name: 'マネカフェ（気軽なFP診断・無料相談）',
+    href: 'https://af.moshimo.com/af/c/click?a_id=5638600&p_id=7333&pc_id=21072&pl_id=92242',
+    text: '教育資金の悩みをFPに無料で相談',
+    trackingPixel: 'https://i.moshimo.com/af/i/impression?a_id=5638600&p_id=7333&pc_id=21072&pl_id=92242',
+  },
+  'moshimo-minhoken': {
+    id: 'moshimo-minhoken',
+    type: 'text',
+    name: 'みんなの生命保険アドバイザー（無料保険相談）',
+    href: 'https://af.moshimo.com/af/c/click?a_id=5638596&p_id=7059&pc_id=20203&pl_id=89248',
+    text: '教育資金・保険を専門家に無料で相談',
+    trackingPixel: 'https://i.moshimo.com/af/i/impression?a_id=5638596&p_id=7059&pc_id=20203&pl_id=89248',
+  },
+  'moshimo-withstudy': {
+    id: 'moshimo-withstudy',
+    type: 'text',
+    name: 'ウィズスタディ（低価格オンライン塾）',
+    href: 'https://af.moshimo.com/af/c/click?a_id=5638541&p_id=6942&pc_id=19853&pl_id=87808',
+    text: '低価格オンライン塾の無料体験',
+    trackingPixel: 'https://i.moshimo.com/af/i/impression?a_id=5638541&p_id=6942&pc_id=19853&pl_id=87808',
+  },
+  'moshimo-manabuterasu': {
+    id: 'moshimo-manabuterasu',
+    type: 'text',
+    name: 'まなぶてらす（オンライン家庭教師）',
+    href: 'https://af.moshimo.com/af/c/click?a_id=5638546&p_id=4590&pc_id=12001&pl_id=61374',
+    text: 'オンライン家庭教師の無料体験レッスン',
+    trackingPixel: 'https://i.moshimo.com/af/i/impression?a_id=5638546&p_id=4590&pc_id=12001&pl_id=61374',
   },
 
   // ── 季節講習の先回し枠（pending）。承認時の差し替えは2箇所：(1) href を実リンクに (2) trackingPixel を実値に → status 行を削除。 ──

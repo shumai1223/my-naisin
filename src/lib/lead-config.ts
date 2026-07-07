@@ -96,6 +96,12 @@ const PROGRAM_PRESET: Partial<Record<AffiliateId, Pick<LeadOffer, 'note' | 'ctaT
   'moshimo-e-live': { note: 'e-Live オンライン家庭教師の無料体験（PR）', ctaText: '無料体験を申し込む' },
   'moshimo-studycoach': { note: 'スタディコーチ（東大式オンライン塾）の無料体験（PR）', ctaText: '無料体験・相談をする' },
   'moshimo-tintoru': { note: 'ティントル（不登校専門オンライン個別指導）の無料体験（PR）', ctaText: '無料体験を申し込む' },
+  'moshimo-garden-gakushi': { note: 'ガーデンの学資・教育資金の無料FP相談（PR）／何度でも無料', ctaText: '学資・教育資金を無料でFPに相談する' },
+  'moshimo-garden-chochiku': { note: 'ガーデンの家計・教育資金の無料FP相談（PR）／何度でも無料', ctaText: '教育資金を無料でFPに相談する' },
+  'moshimo-manecafe': { note: 'マネカフェの無料FP診断・相談（PR）／気軽に相談', ctaText: '教育資金を無料でFPに相談する' },
+  'moshimo-minhoken': { note: 'みんなの生命保険アドバイザーの無料相談（PR）', ctaText: '教育資金・保険を無料で相談する' },
+  'moshimo-withstudy': { note: 'ウィズスタディ（低価格オンライン塾）の無料体験（PR）', ctaText: '無料体験を申し込む' },
+  'moshimo-manabuterasu': { note: 'まなぶてらす（オンライン家庭教師）の無料体験レッスン（PR）', ctaText: '無料体験を申し込む' },
   'winter-koushuu-trial': { note: '塾の冬期講習・無料体験（PR）／費用はかかりません', ctaText: '冬期講習の無料体験を申し込む' },
   'summer-koushuu-trial': { note: '塾の夏期講習・無料体験（PR）／費用はかかりません', ctaText: '夏期講習の無料体験を申し込む' },
 };
@@ -125,10 +131,11 @@ export const PLACEMENT_LEAD_OVERRIDES: Partial<Record<LeadPlacement, Partial<Lea
     heading: '結果が出た今が、対策の“始めどき”です',
     body: '内申点・偏差値の差は、動き出すのが遅いほど取り戻すのが大変になります。間に合ううちに、まずは無料体験で「今の学力で何が足りないか」を見える化しませんか。オンライン対応・費用はかかりません。',
   }),
-  // 保護者LP。決裁者である保護者に AI塾の無料体験を提示。
-  'parent-lp': offerFor('atama-text', {
-    heading: 'お子さまの志望校合格を、ご家庭からあと押し',
-    body: '「やり方が分からないまま時間だけが過ぎる」のが、いちばんもったいない失点です。AIが弱点だけを狙って学習をつくる無料体験で、最短ルートをまず確認してみませんか。費用はかかりません。',
+  // 保護者LP＝最も保護者向けの面。2026-07-07 主オファーを AI塾体験から「貯蓄・教育資金の無料FP相談」
+  //   （ガーデン貯蓄・もしも CPA¥11,500）へ昇格＝決裁者である保護者のお金の関心に直撃（AI塾体験は副オファーへ）。
+  'parent-lp': offerFor('moshimo-garden-chochiku', {
+    heading: '志望校合格まで、ご家庭のお金の準備は大丈夫ですか？',
+    body: '高校〜大学の教育費は進路で数百万円規模で変わります。「我が家はいくら必要か・どう貯めるか」を、教育資金に詳しい専門家FPへ無料で相談できます。何度でも無料で、その場で契約を迫られることはありません。',
   }),
   // ── 最大流入面（hensachi/hyotei-heikin）。2026-07 AdSense撤退＝収益をアフィリ一本化に伴い、
   //    従来の「Z会資料請求（EV最小の対照群）」を廃し、EVの高い全国オンライン塾の無料体験（atama＋）へ。
@@ -142,17 +149,22 @@ export const PLACEMENT_LEAD_OVERRIDES: Partial<Record<LeadPlacement, Partial<Lea
     heading: '評定平均は、あとから取り返しにくい数字です',
     body: '評定平均（内申）は日々の積み重ねで決まり、下がってからでは戻すのに学期単位の時間がかかります。今からできる対策と推薦の基準を、AI個別指導の無料体験でまとめて確認できます（費用はかかりません）。',
   }),
-  prefecture: {
+  // 2026-07-07 県別ページ（広トラフィック）は affiliateId 未指定で最低EVの zkai-request(資料請求¥800)に落ちていた。
+  //   関東=森塾／関西=個別指導キャンパス（県オーバーライド）以外の約30県を、全国オンライン家庭教師の無料体験
+  //   （まなぶてらす・もしも CPA¥8,000）へ昇格。地域を選ばず、どの県からでも成立する無料リード。
+  prefecture: offerFor('moshimo-manabuterasu', {
     heading: 'この地域の入試、お子さまの成績で本当に届きますか？',
-    body: '都道府県ごとに内申点の比重は大きく異なり、同じ偏差値でも合否が分かれます。志望校との差を埋める家庭学習の進め方を、まずは無料の資料でご確認ください。',
-  },
+    body: '都道府県ごとに内申点の比重は大きく異なり、同じ偏差値でも合否が分かれます。志望校との差を埋める学習の進め方を、全国どこからでも受けられるオンライン家庭教師の無料体験でご確認ください。費用はかかりません。',
+  }),
   // 2026-06-15 継続トラッキング面（高インテント）を、学習管理コーチングの無料体験（もしも・スタディコーチ）へ。
   dashboard: offerFor('moshimo-studycoach', {
     heading: '積み上げた“伸び”を、合格まで届く伸びに',
     body: '記録で伸びが見えてきた今が、次の一手の好機です。現役東大・難関大生による学習管理コーチングの無料体験で、中1→中3の積み上げを志望校ラインまで最短で届かせる進め方を確認できます。費用はかかりません。',
   }),
-  // 2026-06-15 学費面（権限ズレ0・最高単価）を Z会資料請求のプレースホルダから「専門家FP無料相談」(もしも・CPA¥13,800)へ昇格。
-  hiyou: offerFor('fp-soudan', {
+  // 2026-06-15 学費面（権限ズレ0・最高単価）を Z会資料請求のプレースホルダから「専門家FP無料相談」へ昇格。
+  // 2026-07-07 送客先を汎用FP(fp-soudan/保険寄り)から学資特化のガーデン学資金(もしも・CPA¥11,500)へ。学費面のテーマにより整合。
+  //   ※ fp-soudan/garden-chochiku/manecafe/minhoken(¥17,000) は同EV帯のFP無料相談＝A/Bベンチ（EVランクに載る・面ローテ候補）。
+  hiyou: offerFor('moshimo-garden-gakushi', {
     heading: '高校・大学でかかるお金、備えはできていますか？',
     body: '高校〜大学までの教育費は進路によって数百万円規模で変わります。「我が家はいくら必要か・どう準備するか」を、教育資金に詳しい専門家FPへ無料で相談できます。相談は何度でも無料で、その場で契約を迫られることはありません。',
   }),
@@ -162,9 +174,11 @@ export const PLACEMENT_LEAD_OVERRIDES: Partial<Record<LeadPlacement, Partial<Lea
     body: '面談は限られた時間です。志望校との差・今からできる対策を事前に把握しておくと、先生に的確に相談できます。小中高対応のオンライン家庭教師の無料体験で「今の学力で何が足りないか」を見える化しておくと、面談がぐっと具体的になります。費用はかかりません。',
   }),
   // 2026-06-17 推薦/総合型選抜面（評定で勝負→専願が多く進学先が早く決まる→教育費）。学費面と同じ最高単価FP無料相談へ。
-  suisen: offerFor('fp-soudan', {
+  // 2026-07-07 送客先を fp-soudan(¥13,800)から最高CPAのみんなの生命保険アドバイザー(もしも・¥17,000)へ。高インテントの保護者面に最高単価をぶつける。
+  //   ※ fp-soudan/garden-chochiku/manecafe は同EV帯のFP無料相談＝A/Bベンチ（面ローテ候補）。
+  suisen: offerFor('moshimo-minhoken', {
     heading: '推薦・総合型で進学先が早く決まるからこそ、費用の見通しを',
-    body: '推薦・総合型は専願が原則のことが多く、進学先が早く決まります。だからこそ「我が家はいくら必要か・就学支援金や奨学金で実質負担がどれだけ下がるか」を早めに把握すると安心です。教育資金に詳しい専門家FPへ無料で相談でき、その場で契約を迫られることはありません。',
+    body: '推薦・総合型は専願が原則のことが多く、進学先が早く決まります。だからこそ「我が家はいくら必要か・就学支援金や奨学金で実質負担がどれだけ下がるか」を早めに把握すると安心です。教育資金に詳しい専門家へ無料で相談でき、その場で契約を迫られることはありません。',
   }),
   // 2026-06-17 内申を上げたい層（＝通塾の最有力動機）。全国オンラインの個別指導の無料体験で学習開始。
   'naishin-up': offerFor('sora-juku-text', {
@@ -172,9 +186,11 @@ export const PLACEMENT_LEAD_OVERRIDES: Partial<Record<LeadPlacement, Partial<Lea
     body: '行動の方向は分かっても、家庭だけで継続するのは簡単ではありません。お子さまに必要な対策を、オンライン個別指導の無料体験で具体的に確認しませんか。全国オンライン対応・費用はかかりません。',
   }),
   // 2026-06-17 実技が弱点＝苦手をピンポイントで埋めたい層。オンライン個別指導の無料体験へ。
-  jitsugika: offerFor('sora-juku-text', {
-    heading: '実技も含めた弱点対策、効率よく進めるなら',
-    body: '実技4教科は提出物・作品・取り組む姿勢で評定が動きます。お子さまの弱点に合わせた進め方を、オンライン個別指導の無料体験で確認できます。全国オンライン対応・費用はかかりません。',
+  // 2026-07-07 送客先を そら塾 から ウィズスタディ（低価格オンライン塾・もしも CPA¥11,500〜）へ。
+  //   「苦手を低コストで補いたい」層に価格訴求が刺さる仮説をGA4で検証（そら塾は result/naishin-up/blog に残る＝対照群）。
+  jitsugika: offerFor('moshimo-withstudy', {
+    heading: '実技も含めた弱点対策、続けやすい料金で',
+    body: '実技4教科は提出物・作品・取り組む姿勢で評定が動きます。お子さまの弱点に合わせた進め方を、1科目から続けやすい低価格オンライン塾の無料体験で確認できます。全国オンライン対応・費用はかかりません。',
   }),
   // 2026-06-17 不登校クラスタ（在宅・内申不問の学び）。不登校専門のオンライン個別指導（CPA¥5,000）へ。
   futoukou: offerFor('moshimo-tintoru', {
@@ -187,6 +203,12 @@ export const PLACEMENT_LEAD_OVERRIDES: Partial<Record<LeadPlacement, Partial<Lea
   blog: offerFor('sora-juku-text', {
     heading: '読んだ内容を、今日から実践に変えるなら',
     body: 'わかったことを一人で継続するのは簡単ではありません。お子さまに合った進め方を、オンライン個別指導の無料体験で具体的に確認できます。全国オンライン対応・費用はかかりません。',
+  }),
+  // 2026-07-07 トップ面（最大級のトラフィック）は home override が無く最低EVの DEFAULT_LEAD_OFFER(zkai資料請求¥800)に
+  //   落ちていた。生徒・保護者が混在するので、広く刺さる全国オンライン個別の無料体験（そら塾）へ昇格。
+  home: offerFor('sora-juku-text', {
+    heading: 'お子さまの「今の学力」、正しく把握できていますか？',
+    body: '内申点・偏差値は「今からの伸ばし方」で大きく変わります。まずは全国対応のオンライン個別指導の無料体験で、今の弱点と伸ばし方を具体的に確認してみませんか。費用はかかりません。',
   }),
 };
 
@@ -241,7 +263,6 @@ const SEASONAL_PLACEMENTS = new Set<LeadPlacement>([
   'naishin-up',
   'jitsugika',
   'dashboard',
-  'parent-lp',
 ]);
 
 /** 季節ごとの専用案件（pending）。live になったら自動でこちらへ送客が切り替わる。 */
@@ -305,6 +326,51 @@ export function selectLeadOffer(
   }
 
   return base;
+}
+
+// ── 副オファー（1ページあたりの提示アフィリを増やす相補ペア） ────────────────────
+/**
+ * 各面に「2つ目の無料リード」を添えて、1ページの換金機会を増やす（2026-07-07）。
+ * 設計＝主オファーと“意思決定者×子ども”で相補にする：
+ *   - 主が塾/家庭教師（子ども動機）の面 → 副は教育資金FPの無料相談（保護者のお金）
+ *   - 主がFP（保護者のお金）の面 → 副は学習の無料体験（子どもの学び）
+ * すべて live の無料リード（parent-safe）のみ。主と同一IDになる面は出さない（重複回避）。
+ * 季節スワップで主が塾に変わる面でも、副（FP）はそのまま並ぶ＝密度は落ちない。
+ */
+export const PLACEMENT_SECONDARY_OFFER: Partial<Record<LeadPlacement, AffiliateId>> = {
+  // 主＝塾/家庭教師 → 副＝教育資金FP
+  result: 'moshimo-garden-gakushi',
+  hensachi: 'fp-soudan',
+  'hyotei-heikin': 'fp-soudan',
+  prefecture: 'fp-soudan',
+  'naishin-up': 'fp-soudan',
+  jitsugika: 'fp-soudan',
+  dashboard: 'fp-soudan',
+  blog: 'fp-soudan',
+  home: 'fp-soudan',
+  futoukou: 'moshimo-garden-gakushi',
+  mendan: 'moshimo-garden-gakushi',
+  // 主＝FP → 副＝学習の無料体験
+  hiyou: 'sora-juku-text',
+  suisen: 'sora-juku-text',
+  'parent-lp': 'atama-text',
+};
+
+/**
+ * 面の副オファー（無料リード1本）を解決する（純粋）。
+ * 主オファーと同一プログラム・pending・未設定のときは null（＝副は描画しない）。
+ */
+export function selectSecondaryLeadOffer(
+  opts: { prefectureCode?: string; placement?: LeadPlacement; season?: Season | null } = {}
+): Pick<LeadOffer, 'affiliateId' | 'note' | 'ctaText'> | null {
+  const { placement } = opts;
+  if (!placement) return null;
+  const id = PLACEMENT_SECONDARY_OFFER[placement];
+  if (!id || !isLiveAffiliate(id)) return null;
+  // 主オファーと被ったら出さない（同じ送客先を2つ並べない）。
+  if (selectLeadOffer(opts).affiliateId === id) return null;
+  const preset = PROGRAM_PRESET[id];
+  return { affiliateId: id, note: preset?.note ?? '', ctaText: preset?.ctaText ?? 'くわしく見る' };
 }
 
 // ── 面別オファー監査（戦略ドリフトの検出・営業資料） ──────────────────────────

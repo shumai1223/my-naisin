@@ -63,6 +63,13 @@ export const AFFILIATE_ECONOMICS: Partial<Record<AffiliateId, AffiliateEconomics
   'hoken-compass': { cpaYen: 12000, convRate: 0.05, convRateLow: 0.015, kind: 'free-lead' },
   'money-doctor': { cpaYen: 11000, convRate: 0.05, convRateLow: 0.015, kind: 'free-lead' },
   'gakushi-hoken': { cpaYen: 8000, convRate: 0.06, convRateLow: 0.02, kind: 'doc-request' },
+  // ── もしも 2026-07-07 承認分（FP・学資＝保護者決裁で保守厳しめ／塾・家庭教師＝生徒に刺さる） ──
+  'moshimo-garden-gakushi': { cpaYen: 11500, convRate: 0.05, convRateLow: 0.015, kind: 'free-lead' },
+  'moshimo-garden-chochiku': { cpaYen: 11500, convRate: 0.05, convRateLow: 0.015, kind: 'free-lead' },
+  'moshimo-manecafe': { cpaYen: 11500, convRate: 0.05, convRateLow: 0.015, kind: 'free-lead' },
+  'moshimo-minhoken': { cpaYen: 17000, convRate: 0.05, convRateLow: 0.015, kind: 'free-lead' },
+  'moshimo-withstudy': { cpaYen: 11500, convRate: 0.07, convRateLow: 0.04, kind: 'free-lead' },
+  'moshimo-manabuterasu': { cpaYen: 8000, convRate: 0.06, convRateLow: 0.04, kind: 'free-lead' },
   // ── 不登校クラスタ（高CPA・専門性で転換しやすい仮定／資料系は保護者決裁で保守厳しめ） ──
   'moshimo-classjapan': { cpaYen: 20000, convRate: 0.04, convRateLow: 0.015, kind: 'free-lead' },
   'moshimo-tintoru': { cpaYen: 5000, convRate: 0.07, convRateLow: 0.04, kind: 'free-lead' },
