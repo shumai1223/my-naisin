@@ -174,6 +174,10 @@ export default function ShutsuganJunbiPage() {
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="mb-3 text-sm font-bold text-slate-700">あわせて確認</h2>
             <div className="grid gap-2 sm:grid-cols-2">
+              <Link href="/shutsugan-junbi/shibou-riyuusho" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-violet-200 hover:bg-violet-50/50">
+                志望理由書の書き方・構成
+                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
+              </Link>
               <Link href="/suisen-nyuushi" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-violet-200 hover:bg-violet-50/50">
                 推薦入試の仕組み
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />

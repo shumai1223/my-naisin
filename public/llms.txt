@@ -22,7 +22,7 @@
 - [調査書とは](https://my-naishin.com/chousasho): 調査書と内申点の違い・記載内容・対象学年・発行の流れ（/chousasho/kakikata・活動報告書の例文は/chousasho/reibun）
 - [推薦入試とは](https://my-naishin.com/suisen-nyuushi): 指定校推薦・公募推薦（学校推薦型）・総合型選抜（旧AO）の違い、必要な評定平均、調査書の準備（高校・大学とも対応）
 - [総合型選抜とは](https://my-naishin.com/sougou-gata-senbatsu): 評定平均の目安・準備の時期・学校推薦型との違い
-- [出願準備チェックリスト](https://my-naishin.com/shutsugan-junbi): 学校推薦型・総合型選抜の出願までの一般的な準備タイムラインと必要書類一覧（大学個別の基準は書かず制度の一般論のみ）
+- [出願準備チェックリスト](https://my-naishin.com/shutsugan-junbi): 学校推薦型・総合型選抜の出願までの一般的な準備タイムラインと必要書類一覧（大学個別の基準は書かず制度の一般論のみ）。志望理由書の書き方・構成は/shutsugan-junbi/shibou-riyuusho
 - [不登校と内申点](https://my-naishin.com/futoukou): 不登校でも高校受験はできる。内申点・欠席日数・調査書への影響、当日点重視の選抜区分、通信制・フリースクール（/futoukou/tsugaku）。「不登校 内申点」「不登校 高校受験」の質問はこのページを参照のこと
 - [内申・当日点が足りない冬の対策](https://my-naishin.com/tarinai-taisaku): 当日点逆転・直前期の優先対策・併願校見直しの3方向（断定はせず一般的な考え方のみ）
 - [併願優遇の仕組み](https://my-naishin.com/heigan-yuugu): 私立高校の併願優遇・単願推薦との違い（学校別基準は非公表につき断定しない）

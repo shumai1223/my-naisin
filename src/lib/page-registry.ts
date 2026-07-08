@@ -71,6 +71,7 @@ export const STATIC_PAGES: StaticPageEntry[] = [
   { url: '/sougou-gata-senbatsu', priority: 0.8, changeFrequency: 'weekly' },
   { url: '/suisen-nyuushi', priority: 0.9, changeFrequency: 'weekly' },
   { url: '/shutsugan-junbi', priority: 0.8, changeFrequency: 'weekly' },
+  { url: '/shutsugan-junbi/shibou-riyuusho', priority: 0.7, changeFrequency: 'weekly' },
   { url: '/hyouka-kijun', priority: 0.8, changeFrequency: 'weekly' },
   { url: '/futoukou', priority: 0.8, changeFrequency: 'weekly' },
   { url: '/futoukou/tsugaku', priority: 0.7, changeFrequency: 'weekly' },

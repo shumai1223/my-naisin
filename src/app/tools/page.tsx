@@ -11,6 +11,7 @@ import {
   LineChart,
   MessageCircleQuestion,
   Wallet,
+  FileText,
 } from 'lucide-react';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
@@ -410,6 +411,14 @@ const TOOL_GROUPS: { id: string; heading: string; tools: Tool[] }[] = [
         href: '/shutsugan-junbi',
         icon: BookOpen,
         color: 'purple',
+      },
+      {
+        title: '志望理由書の書き方・構成',
+        description: '志望理由書の一般的な構成5要素と、テーマ決めから清書までの書き方の手順を解説',
+        features: ['構成5要素', 'テーマの決め方', '5STEPの書き方', 'よくある失敗パターン'],
+        href: '/shutsugan-junbi/shibou-riyuusho',
+        icon: FileText,
+        color: 'rose',
       },
       {
         title: '47都道府県の入試制度ページ',
