@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, Handshake, Users, Target, BarChart3, MapPin, Code2, Mail, CheckCircle2 } from 'lucide-react';
+import { Home, ChevronRight, Handshake, Users, Target, BarChart3, MapPin, Code2, Mail, CheckCircle2, Printer } from 'lucide-react';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { SITE_URL } from '@/lib/naishin-dataset';
@@ -118,6 +118,31 @@ export default function PartnerPage() {
               <li className="flex gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" /><span><strong className="text-white">ウィジェット提供</strong>：内申点・評定平均の計算ツールを貴塾サイトへ無料で埋め込み（SEO・回遊強化）。</span></li>
               <li className="flex gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" /><span><strong className="text-white">掲載枠スポンサー（県×面）</strong>：都道府県・ページ種別を指定した月額固定の掲載枠。成果報酬ではなく定額でのご出稿をご希望の場合はこちらをご相談ください（「広告」表記込み・商圏の独占可）。</span></li>
             </ul>
+          </section>
+
+          {/* 生徒配布資料・データ提供 */}
+          <section className="mb-10 rounded-2xl border border-white/10 bg-white/5 p-6">
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-white"><Printer className="h-5 w-5 text-emerald-300" />生徒配布資料・データ提供</h2>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div className="rounded-xl border border-white/10 bg-white/5 p-5">
+                <h3 className="mb-2 text-sm font-bold text-white">生徒配布用の印刷資料</h3>
+                <p className="mb-3 text-sm leading-relaxed text-slate-300">
+                  都道府県別の内申点計算方法・注意点・出典をまとめたA4印刷対応ページを、入塾説明・体験授業時の配布資料としてそのままご利用いただけます。無料・出典明記済みです。
+                </p>
+                <Link href="/pref/tokyo" className="inline-flex items-center gap-1 text-sm font-bold text-emerald-300 hover:underline">
+                  印刷対応ページの例（東京都）を見る<ChevronRight className="h-4 w-4" />
+                </Link>
+              </div>
+              <div className="rounded-xl border border-white/10 bg-white/5 p-5">
+                <h3 className="mb-2 text-sm font-bold text-white">データ提供メニュー</h3>
+                <p className="mb-3 text-sm leading-relaxed text-slate-300">
+                  47都道府県の内申点・総合得点・偏差値対応表をCSV・APIで提供しています。塾内システムへの組み込みや、自社の指導資料・コンテンツ制作の基礎データとしてご利用いただけます。
+                </p>
+                <Link href="/developers" className="inline-flex items-center gap-1 text-sm font-bold text-emerald-300 hover:underline">
+                  データ提供・APIの詳細を見る<ChevronRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </div>
           </section>
 
           {/* 流れ */}
