@@ -8,17 +8,10 @@
  * パンくずリッチリザルトの取りこぼしをレビュー無しでも防げる
  * ([[opennext-ssg-1102-gotcha]]のH-7 dynamic-route-ssg.test.tsと同じ回帰テストパターン)。
  *
- * このリポジトリでは `app/xxx/page.tsx` が同じディレクトリの `XxxClient.tsx` に描画を
- * 委譲するパターンが多い。page.tsx単体だけを見ると「無い」と誤検知し、
- * 実際にはClient側に既に実装済みのBreadcrumbSchemaを重複追加してしまう事故が
- * 2026-07-08に実際に発生した（comparison/glossary/guide/reverseの4面）。
- * そのため判定は page.tsx + 同ディレクトリの *Client.tsx を合算した内容で行い、
- * 重複（2箇所以上での使用）も検知する。
- *
- * FAQPageSchema/HowToSchema/DatasetSchemaの網羅監査は継続タスク（L-2の残り）。
+ * FAQPageSchema/HowToSchema/DatasetSchemaの網羅監査は rich-results-faq.test.ts 等に分割。
  */
-import fs from 'fs';
 import path from 'path';
+import { walkPageFiles, routeFromFile, effectiveContent, countJsxUsages } from '@/lib/rich-results-audit';
 
 /**
  * BreadcrumbSchemaが無くても正当と判断済みの例外。
@@ -34,43 +27,9 @@ const BREADCRUMB_EXEMPT_ROUTES: Record<string, string> = {
   '/[prefecture]/reverse': 'permanentRedirectのみのリダイレクトページ（実コンテンツ無し）',
 };
 
-function walk(dir: string, acc: string[] = []): string[] {
-  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-    const full = path.join(dir, entry.name);
-    if (entry.isDirectory()) {
-      if (entry.name === 'node_modules' || entry.name === '.next') continue;
-      walk(full, acc);
-    } else if (entry.name === 'page.tsx') {
-      acc.push(full);
-    }
-  }
-  return acc;
-}
-
-function routeFromFile(appDir: string, file: string): string {
-  const rel = path.relative(appDir, file).replace(/\\/g, '/').replace(/\/?page\.tsx$/, '');
-  return '/' + rel;
-}
-
-/** page.tsxが委譲する同ディレクトリの *Client.tsx も含めた実質的な描画内容を返す。 */
-function effectiveContent(file: string): string {
-  const dir = path.dirname(file);
-  const pageContent = fs.readFileSync(file, 'utf8');
-  const clientFiles = fs
-    .readdirSync(dir)
-    .filter((f) => /Client\.tsx$/.test(f))
-    .map((f) => fs.readFileSync(path.join(dir, f), 'utf8'));
-  return [pageContent, ...clientFiles].join('\n');
-}
-
-function countBreadcrumbUsages(content: string): number {
-  const matches = content.match(/<BreadcrumbSchema\b/g);
-  return matches ? matches.length : 0;
-}
-
 describe('BreadcrumbSchema網羅チェック（L-2）', () => {
   const appDir = path.join(__dirname, '..');
-  const pageFiles = walk(appDir);
+  const pageFiles = walkPageFiles(appDir);
 
   test('page.tsxが少なくとも1件は見つかる（テスト自体が空振りしていないことの確認）', () => {
     expect(pageFiles.length).toBeGreaterThan(0);
@@ -79,7 +38,7 @@ describe('BreadcrumbSchema網羅チェック（L-2）', () => {
   test.each(pageFiles.map((file) => [routeFromFile(appDir, file), file] as const))(
     '%s: BreadcrumbSchemaを重複なく持つ、または理由付きの例外リストに登録されている',
     (route, file) => {
-      const count = countBreadcrumbUsages(effectiveContent(file));
+      const count = countJsxUsages('BreadcrumbSchema', effectiveContent(file));
 
       if (count === 0) {
         const exemptReason = BREADCRUMB_EXEMPT_ROUTES[route];
