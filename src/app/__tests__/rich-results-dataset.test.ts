@@ -42,6 +42,7 @@ const DATASET_EXEMPT_ROUTES: Record<string, string> = {
   '/embed': '埋め込みウィジェット選択ページ（データセットの提供なし）',
   '/for-teachers': '先生・進路指導向けの活用案内ページ（データセットの提供なし）',
   '/futoukou': '不登校支援の解説ページ（データセットの提供なし）',
+  '/futoukou/shussekiatsukai': '出席扱いの解説ページ（データセットの提供なし）',
   '/futoukou/tsugaku': '通学再開支援の解説ページ（データセットの提供なし）',
   '/glossary': '用語辞典（定義の一覧でありデータセットではない）',
   '/guide': '内申点 完全ガイド（読み物でありデータセットの提供なし）',

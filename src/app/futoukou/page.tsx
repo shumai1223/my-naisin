@@ -145,7 +145,7 @@ export default function FutoukouPage() {
           </section>
 
           {/* 通信制・フリースクール子ページ */}
-          <section className="mt-8">
+          <section className="mt-8 space-y-3">
             <Link href="/futoukou/tsugaku" className="group flex items-start gap-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-rose-300 hover:shadow-md">
               <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-rose-500 to-pink-600 text-white shadow-md">
                 <Route className="h-5 w-5" />
@@ -153,6 +153,15 @@ export default function FutoukouPage() {
               <span>
                 <span className="flex items-center gap-1 font-bold text-slate-800 group-hover:text-rose-700">通信制高校・フリースクールという選択肢<ChevronRight className="h-4 w-4 text-slate-400" /></span>
                 <span className="mt-1 block text-sm leading-relaxed text-slate-600">全日制以外の進路の違い（通信制・定時制・サポート校・フリースクール）と、出席扱いの仕組み・在宅で学ぶ方法。</span>
+              </span>
+            </Link>
+            <Link href="/futoukou/shussekiatsukai" className="group flex items-start gap-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-rose-300 hover:shadow-md">
+              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-rose-500 to-pink-600 text-white shadow-md">
+                <ShieldCheck className="h-5 w-5" />
+              </span>
+              <span>
+                <span className="flex items-center gap-1 font-bold text-slate-800 group-hover:text-rose-700">「出席扱い」とは？相談の流れ<ChevronRight className="h-4 w-4 text-slate-400" /></span>
+                <span className="mt-1 block text-sm leading-relaxed text-slate-600">自宅学習・フリースクールが出席扱いになる仕組みと、学校への相談から校長判断までの一般的な流れ。</span>
               </span>
             </Link>
           </section>
