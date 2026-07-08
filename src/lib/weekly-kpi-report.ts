@@ -13,9 +13,12 @@ import {
   findFunnelBottleneck,
   evaluateConsentCapture,
   evaluateSpecialRateNegotiationTrigger,
+  findWeakestPlacementFunnel,
+  suggestFunnelIntervention,
   type JulyGateInput,
   type TripwireInput,
   type FunnelStage,
+  type PlacementFunnel,
 } from '@/lib/velocity';
 
 export interface WeeklyKpiData {
@@ -29,6 +32,8 @@ export interface WeeklyKpiData {
   leadVelocity: { leadsThisWeek: number; targetPerWeek: number; leadsTotal: number };
   /** 週次ファネル段階（任意・古い→新しいでなく上流→下流の順）。あればボトルネック特定行を出す（C-1）。 */
   funnelStages?: FunnelStage[];
+  /** 面（ページ/placement）別の週次ファネル（任意）。あれば最弱面の特定+テコ入れ提案行を出す（Q-3）。 */
+  funnelByPlacement?: PlacementFunnel[];
   /** ai_referralのソース別内訳（任意・件数降順でなくてよい＝表示側でソートする）。トリップワイヤー③の判定には使わず内訳表示のみ（G-2）。 */
   aiReferralBySource?: { source: string; count: number }[];
   /** GA4 Organic Searchセッション（今週。任意）。あればConsent捕捉率の定点観測行を出す（I-5）。 */
@@ -127,6 +132,19 @@ export function formatWeeklyKpiEmail(data: WeeklyKpiData): { subject: string; te
     }
   }
   lines.push('');
+  if (data.funnelByPlacement && data.funnelByPlacement.length > 0) {
+    const weakest = findWeakestPlacementFunnel(data.funnelByPlacement);
+    lines.push('■ 面別ファネル段差診断（Q-3・最優先でテコ入れすべき面）');
+    if (weakest) {
+      lines.push(
+        `  最弱面: ${weakest.placement} の ${weakest.fromLabel}(${fmt(weakest.fromCount)})→${weakest.toLabel}(${fmt(weakest.toCount)}) でドロップ${(weakest.dropRatio * 100).toFixed(0)}%`
+      );
+      lines.push(`  提案: ${suggestFunnelIntervention(weakest)}`);
+    } else {
+      lines.push('  比較可能な面別データがありませんでした（各面2段階以上のデータが必要）。');
+    }
+    lines.push('');
+  }
   lines.push(`■ トリップワイヤー（${triggeredCount}/4 発火）`);
   for (const t of tripwires) {
     lines.push(`  ${t.triggered ? '🚨' : '✅'} ${t.label}：${t.detail}`);

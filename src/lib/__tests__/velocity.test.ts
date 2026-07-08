@@ -21,6 +21,8 @@ import {
   CONSENT_CAPTURE_RATIO_TOLERANCE,
   evaluateSpecialRateNegotiationTrigger,
   SPECIAL_RATE_NEGOTIATION_THRESHOLD,
+  findWeakestPlacementFunnel,
+  suggestFunnelIntervention,
 } from '../velocity';
 
 const D = (iso: string) => new Date(`${iso}T00:00:00Z`);
@@ -418,5 +420,65 @@ describe('evaluateSpecialRateNegotiationTrigger', () => {
     const r = evaluateSpecialRateNegotiationTrigger(30, 30);
     expect(r.triggered).toBe(true);
     expect(r.threshold).toBe(30);
+  });
+});
+
+describe('findWeakestPlacementFunnel（面別ファネル段差の自動診断・Q-3）', () => {
+  it('複数面のうちドロップ率が最大の面を返す', () => {
+    const r = findWeakestPlacementFunnel([
+      {
+        placement: 'hensachi',
+        stages: [
+          { id: 'result_view', label: 'result_view', count: 1000 },
+          { id: 'cta_view', label: 'cta_view', count: 900 }, // 10%ドロップ
+          { id: 'affiliate_click', label: 'affiliate_click', count: 800 }, // 11%ドロップ
+        ],
+      },
+      {
+        placement: 'juku-shindan',
+        stages: [
+          { id: 'result_view', label: 'result_view', count: 300 },
+          { id: 'cta_view', label: 'cta_view', count: 280 }, // 7%ドロップ
+          { id: 'affiliate_click', label: 'affiliate_click', count: 20 }, // 93%ドロップ＝最悪
+        ],
+      },
+    ]);
+    expect(r?.placement).toBe('juku-shindan');
+    expect(r?.fromLabel).toBe('cta_view');
+    expect(r?.toLabel).toBe('affiliate_click');
+    expect(r?.dropRatio).toBeCloseTo((280 - 20) / 280, 5);
+  });
+
+  it('全面が比較不能（1段以下）ならnull', () => {
+    expect(
+      findWeakestPlacementFunnel([
+        { placement: 'a', stages: [{ id: 'x', label: 'x', count: 10 }] },
+        { placement: 'b', stages: [] },
+      ])
+    ).toBeNull();
+  });
+
+  it('面が空配列ならnull', () => {
+    expect(findWeakestPlacementFunnel([])).toBeNull();
+  });
+});
+
+describe('suggestFunnelIntervention（テコ入れ方針の提案・Q-3）', () => {
+  it('既知の遷移パターンには専用の方針文言を返す', () => {
+    const bottleneck = findFunnelBottleneck([
+      { id: 'result_view', label: 'result_view', count: 500 },
+      { id: 'cta_view', label: 'cta_view', count: 100 },
+    ]);
+    expect(bottleneck).not.toBeNull();
+    expect(suggestFunnelIntervention(bottleneck!)).toMatch(/配置・表示タイミング/);
+  });
+
+  it('未知の遷移には汎用の方針文言を返す', () => {
+    const bottleneck = findFunnelBottleneck([
+      { id: 'custom_a', label: 'カスタムA', count: 500 },
+      { id: 'custom_b', label: 'カスタムB', count: 100 },
+    ]);
+    expect(bottleneck).not.toBeNull();
+    expect(suggestFunnelIntervention(bottleneck!)).toMatch(/カスタムA→カスタムB/);
   });
 });

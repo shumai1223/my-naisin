@@ -104,6 +104,36 @@ describe('formatWeeklyKpiEmail', () => {
     expect(text).not.toContain('週次ボトルネック');
   });
 
+  it('funnelByPlacementを渡すと最弱面とテコ入れ提案が出る（Q-3）', () => {
+    const data = baseData({
+      funnelByPlacement: [
+        {
+          placement: 'hensachi',
+          stages: [
+            { id: 'result_view', label: 'result_view', count: 1000 },
+            { id: 'cta_view', label: 'cta_view', count: 900 },
+          ],
+        },
+        {
+          placement: 'juku-shindan',
+          stages: [
+            { id: 'cta_view', label: 'cta_view', count: 280 },
+            { id: 'affiliate_click', label: 'affiliate_click', count: 20 },
+          ],
+        },
+      ],
+    });
+    const { text } = formatWeeklyKpiEmail(data);
+    expect(text).toContain('面別ファネル段差診断');
+    expect(text).toContain('最弱面: juku-shindan');
+    expect(text).toContain('提案:');
+  });
+
+  it('funnelByPlacement省略時は面別診断行を出さない', () => {
+    const { text } = formatWeeklyKpiEmail(baseData());
+    expect(text).not.toContain('面別ファネル段差診断');
+  });
+
   it('aiReferralBySourceを渡すと件数降順の内訳を出す（G-2）', () => {
     const data = baseData({
       aiReferralBySource: [

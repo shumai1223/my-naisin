@@ -347,6 +347,9 @@ export interface FunnelStage {
 export interface FunnelBottleneck {
   fromLabel: string;
   toLabel: string;
+  /** 遷移元/先のFunnelStage.id（テコ入れ方針の対応表引きに使う。Q-3）。 */
+  fromId: string;
+  toId: string;
   fromCount: number;
   toCount: number;
   /** (fromCount - toCount) / fromCount。負のドロップ（増加）は0に丸める。 */
@@ -366,7 +369,7 @@ export function findFunnelBottleneck(stages: FunnelStage[]): FunnelBottleneck | 
     if (prev.count <= 0) continue;
     const dropRatio = Math.max(0, (prev.count - cur.count) / prev.count);
     if (!worst || dropRatio > worst.dropRatio) {
-      worst = { fromLabel: prev.label, toLabel: cur.label, fromCount: prev.count, toCount: cur.count, dropRatio };
+      worst = { fromLabel: prev.label, toLabel: cur.label, fromId: prev.id, toId: cur.id, fromCount: prev.count, toCount: cur.count, dropRatio };
     }
   }
   return worst;
@@ -497,4 +500,52 @@ export function evaluateSpecialRateNegotiationTrigger(
       ? `当月発生${conversionsThisMonth}件が閾値${threshold}件に到達＝特単交渉キットを送る（👤親名義）`
       : `当月発生${conversionsThisMonth}件／閾値${threshold}件（あと${remaining}件）`,
   };
+}
+
+/* ────────────────────────────────────────────────────────────────────────
+ * ファネル段差の面別自動診断（Q-3）。findFunnelBottleneck（C-1）はサイト全体の
+ * 単一ファネルしか見ないため、面（ページ/placement）ごとに独立したファネルを
+ * 週次で比較し、最も歩留まりが悪い面＝最優先でテコ入れすべき面を機械的に特定する。
+ * ──────────────────────────────────────────────────────────────────────── */
+
+export interface PlacementFunnel {
+  /** ページ/placement識別子（例 'hensachi', 'juku-shindan'）。表示ラベルを兼ねる。 */
+  placement: string;
+  stages: FunnelStage[];
+}
+
+export interface PlacementFunnelBottleneck extends FunnelBottleneck {
+  placement: string;
+}
+
+/**
+ * 面ごとにfindFunnelBottleneckを適用し、ドロップ率が最大の面を返す（＝週次で最初に見るべき面）。
+ * 全面がドロップ率0（比較不能含む）の場合はnull。
+ */
+export function findWeakestPlacementFunnel(placements: PlacementFunnel[]): PlacementFunnelBottleneck | null {
+  let worst: PlacementFunnelBottleneck | null = null;
+  for (const p of placements) {
+    const bottleneck = findFunnelBottleneck(p.stages);
+    if (!bottleneck) continue;
+    if (!worst || bottleneck.dropRatio > worst.dropRatio) {
+      worst = { ...bottleneck, placement: p.placement };
+    }
+  }
+  return worst;
+}
+
+/** ステージidの遷移パターン→テコ入れ方針の対応表（既知の組み合わせのみ・未知はfallback）。 */
+const FUNNEL_INTERVENTION_HINTS: { from: string; to: string; hint: string }[] = [
+  { from: 'result_view', to: 'cta_view', hint: 'CTAが視界に入っていない＝結果画面内の配置・表示タイミングを見直す' },
+  { from: 'cta_view', to: 'affiliate_click', hint: 'CTAは見えているがクリックされない＝オファーコピー・訴求・並び順（EV順）を見直す' },
+  { from: 'cta_view', to: 'line_friend_click', hint: 'CTAは見えているがクリックされない＝LINE導線の訴求文言・特典を見直す' },
+  { from: 'cta_view', to: 'form_start', hint: 'CTAは見えているが入力が始まらない＝フォームへの導線・見出しを見直す' },
+  { from: 'form_start', to: 'lead_submit', hint: '入力を始めても送信されない＝フォーム項目数・離脱ポイントを見直す（入力摩擦）' },
+];
+
+/** ボトルネック（面別/全体どちらでも可）に対する一般的なテコ入れ方針を1行で返す。未知の遷移は汎用文言。 */
+export function suggestFunnelIntervention(bottleneck: FunnelBottleneck): string {
+  const hint = FUNNEL_INTERVENTION_HINTS.find((h) => h.from === bottleneck.fromId && h.to === bottleneck.toId);
+  if (hint) return hint.hint;
+  return `${bottleneck.fromLabel}→${bottleneck.toLabel}の歩留まりが最も悪い＝この遷移の導線（表示・訴求・入力）を優先的に見直す`;
 }

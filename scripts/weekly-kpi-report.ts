@@ -19,6 +19,10 @@
  *  --target-per-week=<件数>  名簿velocityの週次目標（既定140＝C-1の「約20/日」逆算目標の参考値。実際の逆算はROSTER_TARGET/期限から都度算出）
  *  --funnel=<id:count,...>   週次ファネル段階（上流→下流の順。例: tool_start:477,cta_view:759,lead_submit:2）。
  *                            2件以上あればどの遷移が一番ドロップしているか（ボトルネック）を自動特定する（C-1）
+ *  --funnel-by-placement=<placement=id:count,id:count;placement2=id:count,...>
+ *                            面（ページ/placement）別の週次ファネル。例:
+ *                            hensachi=result_view:1000,cta_view:900;juku-shindan=cta_view:280,affiliate_click:20
+ *                            指定すると全面のうち最もドロップ率が悪い面とテコ入れ方針の提案を1行出す（Q-3）
  *  --ai-referral-sources=<source:count,...>  ai_referralのソース別内訳（例: chatgpt:20,perplexity:8,google-sge:5）。
  *                            指定するとメールに内訳一覧を出す（トリップワイヤー③のシェア判定には使わない・表示専用。G-2）
  *  --ga4-organic-sessions=<件数>  GA4 Organic Searchセッション（今週）。指定するとConsent捕捉率
@@ -47,7 +51,7 @@ import { fileURLToPath } from 'node:url';
 import { google } from 'googleapis';
 
 import { formatWeeklyKpiEmail, type WeeklyKpiData } from '@/lib/weekly-kpi-report';
-import type { FunnelStage } from '@/lib/velocity';
+import type { FunnelStage, PlacementFunnel } from '@/lib/velocity';
 import { CONTACT_EMAIL } from '@/lib/contact';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -89,6 +93,22 @@ function parseFunnelStages(raw: unknown): FunnelStage[] | undefined {
     stages.push({ id: id.trim(), label: id.trim(), count });
   }
   return stages.length >= 2 ? stages : undefined;
+}
+
+/**
+ * "placement1=id1:count1,id2:count2;placement2=id1:count1,id2:count2" を
+ * 面別ファネル（PlacementFunnel[]）にパースする（Q-3）。各面2段階未満は除外。
+ */
+function parseFunnelByPlacement(raw: unknown): PlacementFunnel[] | undefined {
+  if (typeof raw !== 'string' || !raw.trim()) return undefined;
+  const placements: PlacementFunnel[] = [];
+  for (const chunk of raw.split(';')) {
+    const [placement, stagesRaw] = chunk.split('=');
+    if (!placement || !stagesRaw) continue;
+    const stages = parseFunnelStages(stagesRaw);
+    if (stages) placements.push({ placement: placement.trim(), stages });
+  }
+  return placements.length > 0 ? placements : undefined;
 }
 
 /** "source1:count1,source2:count2" をai_referralソース別内訳にパースする。不正行は無視。 */
@@ -244,6 +264,7 @@ async function main() {
       leadsTotal: num(args['leads-total']),
     },
     funnelStages: parseFunnelStages(args.funnel),
+    funnelByPlacement: parseFunnelByPlacement(args['funnel-by-placement']),
     aiReferralBySource: parseSourceCounts(args['ai-referral-sources']),
     ga4OrganicSessions: args['ga4-organic-sessions'] !== undefined ? num(args['ga4-organic-sessions']) : undefined,
     conversionsThisMonth: args['conversions-this-month'] !== undefined ? num(args['conversions-this-month']) : undefined,
