@@ -44,3 +44,16 @@ export function countJsxUsages(tagName: string, content: string): number {
   const matches = content.match(re);
   return matches ? matches.length : 0;
 }
+
+/**
+ * JSXコンポーネント使用 + 生JSON-LD（`'@type': 'HowTo'`等）の両方を数える。
+ * ホームページのDatasetSchemaのように、専用コンポーネントを使わず<script>で
+ * 直接JSON-LDを埋め込む実装が実在するため（component検索だけだと偽陰性になる）。
+ */
+export function countSchemaUsages(componentTag: string, atType: string, content: string): number {
+  const componentCount = countJsxUsages(componentTag, content);
+  const inlineRe = new RegExp(`@type['"]?\\s*:\\s*['"]${atType}['"]`, 'g');
+  const inlineMatches = content.match(inlineRe);
+  const inlineCount = inlineMatches ? inlineMatches.length : 0;
+  return componentCount + inlineCount;
+}

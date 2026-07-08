@@ -5,6 +5,7 @@ import { getAllPosts } from '@/lib/blog-data';
 import HomeClient from './HomeClient';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
+import { HowToSchema } from '@/components/StructuredData/HowToSchema';
 import { PrefectureNaishinTable } from '@/components/PrefectureNaishinTable';
 import { KantenHyokaOfficial } from '@/components/KantenHyokaOfficial';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
@@ -71,6 +72,17 @@ export default function Page() {
   return (
     <>
       <FAQPageSchema faqItems={HOME_FAQS} />
+      <HowToSchema
+        id="howto-naishin"
+        name="内申点を計算する方法"
+        description="都道府県を選んで9教科の評定を入力するだけで、その都道府県の計算方式に従った内申点を自動計算する手順。"
+        totalTime="PT1M"
+        steps={[
+          { name: '都道府県を選ぶ', text: '内申点の計算方式（満点・対象学年・実技教科の倍率）は都道府県ごとに異なるため、まず自分の都道府県を選択します。' },
+          { name: '9教科の評定を入力する', text: '国語・数学・英語・理科・社会・音楽・美術・保健体育・技術家庭の評定（1〜5）を入力します。' },
+          { name: '結果を確認する', text: '選択した都道府県の方式に従って内申点が自動計算され、満点に対する達成率や目標との差も同時に表示されます。' },
+        ]}
+      />
       {/* GEO: AIに「出典として引用される」ためのデータセット定義 */}
       <script
         type="application/ld+json"
