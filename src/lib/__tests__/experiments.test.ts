@@ -8,6 +8,9 @@ import {
   checkExperimentPortfolioHealth,
   MIN_RUNNING_EXPERIMENTS,
   ROTATION_INTERVAL_DAYS,
+  requiredSampleSizePerArm,
+  DEFAULT_TEST_ALPHA,
+  DEFAULT_TEST_POWER,
   type ExperimentDef,
 } from '@/lib/experiments';
 import { isLiveAffiliate } from '@/lib/affiliates';
@@ -123,6 +126,61 @@ describe('judgeWinner', () => {
 
   it('アームが1つ以下なら null', () => {
     expect(judgeWinner([{ id: 'control', impressions: 10, conversions: 1 }])).toBeNull();
+  });
+
+  it('サンプル不足時、検出力80%の目安件数を推奨文に含める（Q-2）', () => {
+    const v = judgeWinner([
+      { id: 'control', impressions: 50, conversions: 5 }, // 10%
+      { id: 'urgent', impressions: 50, conversions: 10 }, // 20%
+    ]);
+    expect(v!.requiredSampleEstimate).not.toBeNull();
+    expect(v!.requiredSampleEstimate).toBeGreaterThan(0);
+    expect(v!.recommendation).toContain('検出力80%の目安');
+  });
+
+  it('対照群のCVRが0またはリフト0のときはrequiredSampleEstimateがnull', () => {
+    const v = judgeWinner([
+      { id: 'control', impressions: 100, conversions: 0 },
+      { id: 'urgent', impressions: 100, conversions: 0 },
+    ]);
+    expect(v!.requiredSampleEstimate).toBeNull();
+  });
+});
+
+describe('requiredSampleSizePerArm（検出力サンプルサイズ計算・Q-2）', () => {
+  it('既知の入力（5%→7%・α=0.05・power=0.8）で標準公式通りの値を返す', () => {
+    // 手計算リファレンス: p1=0.05, p2=0.07, pbar=0.06
+    // term1=1.96*sqrt(2*0.06*0.94)=0.6584, term2=0.8416*sqrt(0.05*0.95+0.07*0.93)=0.2824
+    // n=(0.9408)^2/(0.02)^2 ≈ 2213
+    const n = requiredSampleSizePerArm({ baselineRate: 0.05, minDetectableEffect: 0.02 });
+    expect(n).toBeGreaterThanOrEqual(2100);
+    expect(n).toBeLessThanOrEqual(2300);
+  });
+
+  it('検出したい差が小さいほど必要サンプルは大きくなる', () => {
+    const small = requiredSampleSizePerArm({ baselineRate: 0.1, minDetectableEffect: 0.01 });
+    const large = requiredSampleSizePerArm({ baselineRate: 0.1, minDetectableEffect: 0.05 });
+    expect(small).toBeGreaterThan(large);
+  });
+
+  it('power=0.9はpower=0.8より必要サンプルが大きい（より厳しい検出力を要求するため）', () => {
+    const p80 = requiredSampleSizePerArm({ baselineRate: 0.1, minDetectableEffect: 0.02, power: 0.8 });
+    const p90 = requiredSampleSizePerArm({ baselineRate: 0.1, minDetectableEffect: 0.02, power: 0.9 });
+    expect(p90).toBeGreaterThan(p80);
+  });
+
+  it('未対応のalpha/powerはエラーを投げる', () => {
+    expect(() => requiredSampleSizePerArm({ baselineRate: 0.1, minDetectableEffect: 0.02, alpha: 0.2 })).toThrow();
+    expect(() => requiredSampleSizePerArm({ baselineRate: 0.1, minDetectableEffect: 0.02, power: 0.5 })).toThrow();
+  });
+
+  it('minDetectableEffectが0以下はエラーを投げる', () => {
+    expect(() => requiredSampleSizePerArm({ baselineRate: 0.1, minDetectableEffect: 0 })).toThrow();
+  });
+
+  it('既定値はDEFAULT_TEST_ALPHA=0.05・DEFAULT_TEST_POWER=0.8', () => {
+    expect(DEFAULT_TEST_ALPHA).toBe(0.05);
+    expect(DEFAULT_TEST_POWER).toBe(0.8);
   });
 });
 

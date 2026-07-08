@@ -850,8 +850,66 @@ export interface WinnerVerdict {
   pValue: number;
   /** 95%（|z|>=1.96）かつ最小サンプル充足で有意。 */
   significant: boolean;
+  /**
+   * 現在観測されているリフト（bestRate-controlRate）を本当の効果量だと仮定した場合に、
+   * 有意差を検出力80%で検出するのに各アーム必要な母数の目安（Q-2）。
+   * controlRate=0またはリフト=0で計算不能なときはnull（事後検出力の参考値であり、これ単体を
+   * 停止基準にはしない＝既存のminSample/有意差判定が引き続き唯一の意思決定ロジック）。
+   */
+  requiredSampleEstimate: number | null;
   /** 日本語の一言（運用にそのまま出せる）。 */
   recommendation: string;
+}
+
+/* ────────────────────────────────────────────────────────────────────────
+ * 検出力分析（Q-2）：二項比率の検出力サンプルサイズ計算（標準公式・Fleiss et al.）。
+ * n = (z_(α/2)・√(2p̄q̄) + z_β・√(p1q1+p2q2))² / (p1-p2)²
+ * z値は既定のα=0.05（両側）・power=0.8/0.9のみサポート（任意値の逆正規分布計算は
+ * 近似誤差が積み重なりやすいため、実務でよく使う組み合わせに限定して精度を担保する）。
+ * ──────────────────────────────────────────────────────────────────────── */
+
+/** 有意水準（両側）ごとの z_(α/2)。サポート外の値を渡すとrequiredSampleSizePerArmがエラーを投げる。 */
+const Z_ALPHA_TWO_SIDED: Record<number, number> = { 0.05: 1.959964, 0.01: 2.575829 };
+/** 検出力ごとの z_β。サポート外の値を渡すとrequiredSampleSizePerArmがエラーを投げる。 */
+const Z_BETA: Record<number, number> = { 0.8: 0.841621, 0.9: 1.281552 };
+
+/** requiredSampleSizePerArm の既定の有意水準（両側5%）。 */
+export const DEFAULT_TEST_ALPHA = 0.05;
+/** requiredSampleSizePerArm の既定の検出力（80%）。 */
+export const DEFAULT_TEST_POWER = 0.8;
+
+export interface SampleSizeInput {
+  /** controlの想定CVR（0-1）。 */
+  baselineRate: number;
+  /** 検出したい絶対差（0-1・例0.02=2ポイント差。相対リフトでなく絶対差で指定する）。 */
+  minDetectableEffect: number;
+  /** 有意水準（両側・既定0.05）。サポート値: 0.05, 0.01。 */
+  alpha?: number;
+  /** 検出力（既定0.8）。サポート値: 0.8, 0.9。 */
+  power?: number;
+}
+
+/**
+ * 二項比率のA/Bで、指定した検出力・有意水準のもとで最小検出差を検出するのに
+ * 各アームへ必要な最小サンプルサイズ（分母）を返す（標準公式・純粋関数）。
+ * 「最小サンプルは何件あればいいか」を勘でなく計算で決めるための土台（Q-2）。
+ */
+export function requiredSampleSizePerArm(input: SampleSizeInput): number {
+  const alpha = input.alpha ?? DEFAULT_TEST_ALPHA;
+  const power = input.power ?? DEFAULT_TEST_POWER;
+  const zAlpha = Z_ALPHA_TWO_SIDED[alpha];
+  const zBeta = Z_BETA[power];
+  if (zAlpha === undefined) throw new Error(`requiredSampleSizePerArm: unsupported alpha ${alpha}（対応値: ${Object.keys(Z_ALPHA_TWO_SIDED).join(', ')}）`);
+  if (zBeta === undefined) throw new Error(`requiredSampleSizePerArm: unsupported power ${power}（対応値: ${Object.keys(Z_BETA).join(', ')}）`);
+  if (input.minDetectableEffect <= 0) throw new Error('requiredSampleSizePerArm: minDetectableEffect must be > 0');
+
+  const p1 = input.baselineRate;
+  const p2 = input.baselineRate + input.minDetectableEffect;
+  const pBar = (p1 + p2) / 2;
+  const term1 = zAlpha * Math.sqrt(2 * pBar * (1 - pBar));
+  const term2 = zBeta * Math.sqrt(p1 * (1 - p1) + p2 * (1 - p2));
+  const n = (term1 + term2) ** 2 / input.minDetectableEffect ** 2;
+  return Math.ceil(n);
 }
 
 /** 標準正規分布の両側p値の近似（Abramowitz & Stegun 7.1.26 ベース）。 */
@@ -895,18 +953,35 @@ export function judgeWinner(arms: ArmResult[], minSample = 100): WinnerVerdict |
   const enoughSample = n1 >= minSample && n2 >= minSample;
   const significant = best.id !== control.id && enoughSample && Math.abs(z) >= 1.96;
 
+  // 現在観測中のリフトを真の効果量と仮定した場合の必要サンプル目安（事後診断・停止基準ではない）。
+  const observedEffect = Math.abs(bestRate - controlRate);
+  let requiredSampleEstimate: number | null = null;
+  if (best.id !== control.id && controlRate > 0 && controlRate < 1 && observedEffect > 0) {
+    try {
+      requiredSampleEstimate = requiredSampleSizePerArm({ baselineRate: controlRate, minDetectableEffect: observedEffect });
+    } catch {
+      requiredSampleEstimate = null;
+    }
+  }
+
   let recommendation: string;
   if (best.id === control.id) {
     recommendation = enoughSample
       ? `対照群（${control.id}）が最良。現状維持を推奨。`
       : `サンプル不足（各アーム${minSample}件未満）。判定保留。`;
   } else if (!enoughSample) {
-    recommendation = `${best.id} がリード（+${(lift * 100).toFixed(1)}%）だがサンプル不足。継続して母数を貯める。`;
+    const powerNote = requiredSampleEstimate !== null ? `（検出力80%の目安：各アーム約${fmtSampleSize(requiredSampleEstimate)}件）` : '';
+    recommendation = `${best.id} がリード（+${(lift * 100).toFixed(1)}%）だがサンプル不足。継続して母数を貯める${powerNote}。`;
   } else if (significant) {
     recommendation = `${best.id} を採用推奨：control比 +${(lift * 100).toFixed(1)}%・有意（p≈${pValue.toFixed(3)}）。lead-config / コピーを ${best.id} に昇格。`;
   } else {
     recommendation = `${best.id} がやや優勢（+${(lift * 100).toFixed(1)}%）だが有意差なし（p≈${pValue.toFixed(3)}）。継続。`;
   }
 
-  return { control: control.id, controlRate, bestArm: best.id, bestRate, lift, z, pValue, significant, recommendation };
+  return { control: control.id, controlRate, bestArm: best.id, bestRate, lift, z, pValue, significant, requiredSampleEstimate, recommendation };
+}
+
+/** 3桁区切りの簡易フォーマット（依存追加を避けるための最小実装）。 */
+function fmtSampleSize(n: number): string {
+  return n.toLocaleString('en-US');
 }
