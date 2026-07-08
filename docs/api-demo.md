@@ -3,6 +3,11 @@
 My Naishin の内申点データAPI・MCPを、送客先候補（塾SaaS・受験アプリ・教育メディア）に見せるための実行例集。
 すべて実装済みのロジックから実際に生成した値（架空の数値ではない）。
 
+より実践的な組み込み例は用途別チュートリアル（P-6）を参照:
+[①1人分の判定](./api-tutorials/01-single-judgment.md) /
+[②複数生徒・複数都道府県の一括処理](./api-tutorials/02-batch-processing.md) /
+[③ダッシュボード構築例](./api-tutorials/03-dashboard-building.md)
+
 ## 1. REST API（curl 3行）
 
 ```bash
