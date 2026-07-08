@@ -20,6 +20,7 @@
 
 import { google } from 'googleapis';
 import fs from 'fs';
+import { findUncoveredOpportunityQueries, formatMiningCandidatesMarkdown } from '../lib/query-mining';
 
 const SITE_URL = process.env.GSC_SITE_URL || 'sc-domain:my-naishin.com';
 const SA_KEY = process.env.GSC_SA_KEY;
@@ -195,6 +196,9 @@ async function main() {
     .sort((a, b) => b.impressions - a.impressions)
     .slice(0, 10);
 
+  // 6. 新面候補（TIER L-1）：表示回数はあるのに専用ページが無いクエリ
+  const uncoveredCandidates = findUncoveredOpportunityQueries(recent);
+
   // --- Markdownレポート組み立て ---
   const L: string[] = [];
   L.push(`# 📊 GSC週次レポート（${recentEnd} 時点）`);
@@ -264,6 +268,11 @@ async function main() {
     );
   else L.push('_該当なし_\n');
 
+  L.push('## 🆕 新面候補（表示回数はあるが専用ページが無いクエリ）');
+  L.push('> imp>=50 かつ 順位>8位（1ページ目未満）かつ 既存トピック外＝面の空白地帯。ここに出ても即面化はせず、決定論的に答えられるもの（自社エンジン・検証済みデータで正しい値を返せるもの）だけを選んで着手する（TIER L-1）。');
+  L.push('');
+  L.push(formatMiningCandidatesMarkdown(uncoveredCandidates));
+
   L.push('## 🏆 勝ち面（クリック上位ページ＝評価を集約すべき稼ぎ頭）');
   L.push('> 内部リンクのハブにして評価を流す／換金CTAの最適配置を優先する面。');
   L.push('');
@@ -294,7 +303,11 @@ async function main() {
   fs.writeFileSync('gsc-weekly-report.md', md);
   fs.writeFileSync(
     'gsc-weekly-report.json',
-    JSON.stringify({ generatedAt: new Date().toISOString(), recentEnd, striking, lowCtr, dropped, rising, newcomers, winnerPages, loserPages }, null, 2),
+    JSON.stringify(
+      { generatedAt: new Date().toISOString(), recentEnd, striking, lowCtr, dropped, rising, newcomers, uncoveredCandidates, winnerPages, loserPages },
+      null,
+      2,
+    ),
   );
 
   console.log('\n' + md + '\n');
