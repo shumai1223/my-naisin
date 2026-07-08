@@ -40,7 +40,6 @@ const HOWTO_EXEMPT_ROUTES: Record<string, string> = {
   '/dashboard': '個人の成績推移トラッカー（保存済みデータに依存し一律の手順定義が不適切）',
   '/developers': 'API仕様ページ（利用手順はcurl例で代替済み・HowTo化は過剰）',
   '/disclaimer': '免責事項（リッチリザルト価値が低い定型ページ）',
-  '/embed': '埋め込みウィジェット選択ページ（手順コンテンツなし）',
   '/for-teachers': '先生・進路指導向けの活用案内ページ（手順でなく用途別の紹介）',
   '/futoukou': '不登校支援の解説ページ（手順でなく制度・選択肢の解説）',
   '/futoukou/tsugaku': '通学再開支援の解説ページ（手順でなく制度解説）',

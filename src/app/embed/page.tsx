@@ -1,9 +1,33 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Code2, Check, Zap, Gift, ShieldCheck, ChevronRight, Home } from 'lucide-react';
+import { Code2, Check, Zap, Gift, ShieldCheck, ChevronRight, Home, ListChecks } from 'lucide-react';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
+import { HowToSchema } from '@/components/StructuredData/HowToSchema';
 import { EmbedWidgetPicker } from '@/components/EmbedWidgetPicker';
+
+const PLATFORM_GUIDES = [
+  {
+    platform: 'WordPress',
+    steps: ['投稿・固定ページの編集画面を開く', 'ブロックの追加から「カスタムHTML」ブロックを選ぶ', 'コピーしたコードを貼り付ける', 'プレビューで表示を確認して更新・公開する'],
+  },
+  {
+    platform: 'はてなブログ',
+    steps: ['記事編集画面を開く', '編集モードを「見たまま」から「HTML編集」に切り替える', 'コードを貼り付けたい位置に挿入する', 'プレビューで表示を確認して公開する'],
+  },
+  {
+    platform: 'note',
+    steps: ['HTML埋め込みに対応したプラン（note pro等）で記事を編集する', '埋め込み機能からカスタムHTMLを選ぶ', 'コードを貼り付けて表示を確認する'],
+  },
+  {
+    platform: 'Google Sites',
+    steps: ['ページ編集画面を開く', '「挿入」→「埋め込み」を選ぶ', '「HTMLを埋め込む」タブでコードを貼り付ける', '配置とサイズを調整して公開する'],
+  },
+  {
+    platform: 'その他（HTMLを直接編集できるサイト）',
+    steps: ['表示したい位置のHTMLソースを開く', 'コードをそのまま貼り付ける', '表示を確認して保存・公開する'],
+  },
+];
 
 export const metadata: Metadata = {
   title: { absolute: '無料の内申点・偏差値 計算ウィジェット｜ブログに貼れる埋め込みコード | My Naishin' },
@@ -27,6 +51,13 @@ export default function EmbedPage() {
           { name: 'ホーム', url: 'https://my-naishin.com/' },
           { name: '埋め込みウィジェット', url: 'https://my-naishin.com/embed' },
         ]}
+      />
+      <HowToSchema
+        id="howto-embed-wordpress"
+        name="内申点・偏差値ウィジェットのWordPressへの設置方法"
+        description="コピーしたiframeコードをWordPressのカスタムHTMLブロックに貼り付けて設置する手順（はてなブログ・note・Google Sites等の手順はページ内で個別に解説）"
+        totalTime="PT3M"
+        steps={PLATFORM_GUIDES[0].steps.map((s) => ({ name: s, text: s }))}
       />
 
       <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
@@ -84,6 +115,33 @@ export default function EmbedPage() {
             <p className="mt-3 text-xs leading-relaxed text-slate-500">
               WordPress・はてなブログ・note（HTML埋め込み対応プラン）・自作サイトなどに貼り付けてください。
               幅は自動で親要素に合わせて調整されます（最大480px）。高さが足りない場合は <code className="rounded bg-slate-100 px-1">height</code> の数値を増やしてください。
+            </p>
+          </section>
+
+          {/* プラットフォーム別 設置ガイド（P-4） */}
+          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
+              <ListChecks className="h-5 w-5 text-blue-600" />
+              プラットフォーム別 設置ガイド
+            </h2>
+            <div className="space-y-5">
+              {PLATFORM_GUIDES.map((g) => (
+                <div key={g.platform}>
+                  <h3 className="mb-2 text-sm font-bold text-slate-800">{g.platform}</h3>
+                  <ol className="space-y-1 text-sm leading-relaxed text-slate-600">
+                    {g.steps.map((s, i) => (
+                      <li key={s} className="flex gap-2">
+                        <span className="shrink-0 font-bold text-blue-600">{i + 1}.</span>
+                        {s}
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+              ))}
+            </div>
+            <p className="mt-4 text-xs leading-relaxed text-slate-400">
+              ※ 上記以外のブログ・CMSでも、HTMLをそのまま挿入できる編集欄（カスタムHTML・埋め込み・コードブロック等）があれば同様の手順で設置できます。
+              管理画面の項目名はサービスの仕様変更により変わることがあります。
             </p>
           </section>
 
