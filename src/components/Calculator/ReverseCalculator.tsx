@@ -553,9 +553,10 @@ export function ReverseCalculator({ onBack, onResult }: ReverseCalculatorProps) 
                 都立一般（1020点満点）を自動設定しています。換算内申・学力検査・ESAT-Jで必要当日点を逆算できます。
               </div>
               <div className="rounded-xl border border-slate-200 bg-white p-4">
-                <label className="mb-2 block text-sm font-bold text-slate-700">現在の換算内申</label>
+                <label htmlFor="reverse-tokyo-kanso-naishin" className="mb-2 block text-sm font-bold text-slate-700">現在の換算内申</label>
                 <div className="flex items-center gap-2">
                   <input
+                    id="reverse-tokyo-kanso-naishin"
                     type="number"
                     min={0}
                     max={65}
@@ -658,13 +659,14 @@ export function ReverseCalculator({ onBack, onResult }: ReverseCalculatorProps) 
 
             <div className="grid gap-4 md:grid-cols-2">
               <div>
-                <label className="mb-2 block text-sm font-bold text-slate-700">
+                <label htmlFor="reverse-target-score" className="mb-2 block text-sm font-bold text-slate-700">
                   目標総合点
                   <span className="ml-1 text-xs font-normal text-amber-500">※必須</span>
                   <span className="ml-1 text-xs font-normal text-slate-500">（内申＋当日点の合計）</span>
                 </label>
                 <div className="flex items-center gap-2">
                   <input
+                    id="reverse-target-score"
                     type="text"
                     inputMode="numeric"
                     pattern="[0-9]*"
@@ -690,13 +692,14 @@ export function ReverseCalculator({ onBack, onResult }: ReverseCalculatorProps) 
               </div>
 
               <div>
-                <label className="mb-2 block text-sm font-bold text-slate-700">
+                <label htmlFor="reverse-current-naishin" className="mb-2 block text-sm font-bold text-slate-700">
                   {prefectureCode === 'kanagawa' ? 'A（評定合計）' : '現在の内申点'}
                   <span className="ml-1 text-xs font-normal text-amber-500">※必須</span>
                   <span className="ml-1 text-xs font-normal text-slate-500">（{naishinMax}点満点）</span>
                 </label>
                 <div className="flex items-center gap-2">
                   <input
+                    id="reverse-current-naishin"
                     type="text"
                     inputMode="numeric"
                     pattern="[0-9]*"
@@ -780,9 +783,10 @@ export function ReverseCalculator({ onBack, onResult }: ReverseCalculatorProps) 
               )}
               <div className="grid gap-4 md:grid-cols-2">
                 <div>
-                  <label className="mb-1 block text-xs font-medium text-slate-600">内申点の比率</label>
+                  <label htmlFor="reverse-naishin-ratio" className="mb-1 block text-xs font-medium text-slate-600">内申点の比率</label>
                   <div className="flex items-center gap-2">
                     <input
+                      id="reverse-naishin-ratio"
                       type="text"
                       inputMode="numeric"
                       pattern="[0-9]*"
@@ -803,9 +807,10 @@ export function ReverseCalculator({ onBack, onResult }: ReverseCalculatorProps) 
                   </div>
                 </div>
                 <div>
-                  <label className="mb-1 block text-xs font-medium text-slate-600">当日点の満点</label>
+                  <label htmlFor="reverse-exam-max" className="mb-1 block text-xs font-medium text-slate-600">当日点の満点</label>
                   <div className="flex items-center gap-2">
                     <input
+                      id="reverse-exam-max"
                       type="text"
                       inputMode="numeric"
                       pattern="[0-9]*"

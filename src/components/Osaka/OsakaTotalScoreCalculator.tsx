@@ -81,10 +81,11 @@ export function OsakaTotalScoreCalculator() {
       <div className="p-6 space-y-5">
         {/* 内申点 */}
         <div>
-          <label className="block text-sm font-bold text-slate-800 mb-1">
+          <label htmlFor="osaka-naishin" className="block text-sm font-bold text-slate-800 mb-1">
             内申点（450点満点）<span className="text-xs font-normal text-slate-500 ml-2">3年間合算・9教科</span>
           </label>
           <input
+            id="osaka-naishin"
             type="number"
             value={naishinInput}
             onChange={(e) => setNaishinInput(e.target.value)}
@@ -97,10 +98,11 @@ export function OsakaTotalScoreCalculator() {
 
         {/* 学力検査 */}
         <div>
-          <label className="block text-sm font-bold text-slate-800 mb-1">
+          <label htmlFor="osaka-gakuryoku" className="block text-sm font-bold text-slate-800 mb-1">
             学力検査点（450点満点）<span className="text-xs font-normal text-slate-500 ml-2">5教科 × 90点</span>
           </label>
           <input
+            id="osaka-gakuryoku"
             type="number"
             value={gakuryokuInput}
             onChange={(e) => setGakuryokuInput(e.target.value)}

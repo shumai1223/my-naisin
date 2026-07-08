@@ -57,11 +57,12 @@ export function TotalScoreReverseCalculator({ system }: Props) {
 
       {multipleOptions && (
         <div className="mb-4">
-          <label className="mb-2 block text-sm font-bold text-slate-700">
+          <label htmlFor="total-score-reverse-ratio" className="mb-2 block text-sm font-bold text-slate-700">
             志望校の「内申：学力」の比率
           </label>
           <div className="relative">
             <select
+              id="total-score-reverse-ratio"
               value={optionId}
               onChange={(e) => {
                 onFirstUse();

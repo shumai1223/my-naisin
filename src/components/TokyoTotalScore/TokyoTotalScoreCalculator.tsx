@@ -89,11 +89,12 @@ export function TokyoTotalScoreCalculator({ onResult }: TokyoTotalScoreCalculato
       <div className="p-6 space-y-5">
         {/* 学力検査 */}
         <div>
-          <label className="block text-sm font-bold text-slate-700 mb-2">
+          <label htmlFor="tokyo-total-score-exam" className="block text-sm font-bold text-slate-700 mb-2">
             5教科 学力検査の合計点
             <span className="ml-2 text-xs font-normal text-slate-500">（500点満点 / 各教科100点）</span>
           </label>
           <input
+            id="tokyo-total-score-exam"
             type="number"
             inputMode="decimal"
             min="0"
@@ -112,11 +113,12 @@ export function TokyoTotalScoreCalculator({ onResult }: TokyoTotalScoreCalculato
 
         {/* 調査書点 */}
         <div>
-          <label className="block text-sm font-bold text-slate-700 mb-2">
+          <label htmlFor="tokyo-total-score-naishin" className="block text-sm font-bold text-slate-700 mb-2">
             換算内申
             <span className="ml-2 text-xs font-normal text-slate-500">（65点満点 = 5教科の評定 + 実技4教科×2）</span>
           </label>
           <input
+            id="tokyo-total-score-naishin"
             type="number"
             inputMode="decimal"
             min="0"

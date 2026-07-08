@@ -59,10 +59,11 @@ export function FukuokaScoreCalculator({ onResult }: Props) {
 
       <div className="space-y-5 p-6">
         <div>
-          <label className="mb-1 block text-sm font-bold text-slate-800">
+          <label htmlFor="fukuoka-naishin" className="mb-1 block text-sm font-bold text-slate-800">
             内申点（45点満点）<span className="ml-2 text-xs font-normal text-slate-500">中3の9教科のみ</span>
           </label>
           <input
+            id="fukuoka-naishin"
             type="number"
             inputMode="decimal"
             min={0}
@@ -75,10 +76,11 @@ export function FukuokaScoreCalculator({ onResult }: Props) {
         </div>
 
         <div>
-          <label className="mb-1 block text-sm font-bold text-slate-800">
+          <label htmlFor="fukuoka-gakuryoku" className="mb-1 block text-sm font-bold text-slate-800">
             学力検査点（300点満点）<span className="ml-2 text-xs font-normal text-slate-500">5教科×60点</span>
           </label>
           <input
+            id="fukuoka-gakuryoku"
             type="number"
             inputMode="decimal"
             min={0}

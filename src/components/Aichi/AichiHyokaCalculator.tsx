@@ -67,10 +67,11 @@ export function AichiHyokaCalculator({ onResult }: Props) {
 
       <div className="space-y-5 p-6">
         <div>
-          <label className="mb-1 block text-sm font-bold text-slate-800">
+          <label htmlFor="aichi-naishin-sum" className="mb-1 block text-sm font-bold text-slate-800">
             9教科の評定合計（45点満点）<span className="ml-2 text-xs font-normal text-slate-500">中3のみ対象</span>
           </label>
           <input
+            id="aichi-naishin-sum"
             type="number"
             inputMode="decimal"
             min={0}
@@ -86,10 +87,11 @@ export function AichiHyokaCalculator({ onResult }: Props) {
         </div>
 
         <div>
-          <label className="mb-1 block text-sm font-bold text-slate-800">
+          <label htmlFor="aichi-gakuryoku" className="mb-1 block text-sm font-bold text-slate-800">
             学力検査点（110点満点）<span className="ml-2 text-xs font-normal text-slate-500">5教科×22点</span>
           </label>
           <input
+            id="aichi-gakuryoku"
             type="number"
             inputMode="decimal"
             min={0}

@@ -32,6 +32,7 @@ export function BlogCTA({ prefectureCode, variant = 'default' }: BlogCTAProps) {
           </div>
           <div className="flex items-center gap-2">
             <select
+              aria-label="都道府県を選択"
               value={selectedPrefecture}
               onChange={(e) => setSelectedPrefecture(e.target.value)}
               className="h-9 rounded-lg border border-slate-200 bg-white px-3 text-sm outline-none focus:border-blue-500"

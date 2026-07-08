@@ -106,13 +106,14 @@ export function TotalScoreCalculator({ system, onResult }: Props) {
 
         {/* 学力検査 */}
         <div>
-          <label className="mb-2 block text-sm font-bold text-slate-700">
+          <label htmlFor="total-score-academic" className="mb-2 block text-sm font-bold text-slate-700">
             学力検査の合計点
             <span className="ml-2 text-xs font-normal text-slate-500">
               （{system.academic.rawMax}点満点 / {system.academic.subjects}教科×{system.academic.perSubjectMax}点）
             </span>
           </label>
           <input
+            id="total-score-academic"
             type="number"
             inputMode="decimal"
             min="0"
@@ -131,11 +132,12 @@ export function TotalScoreCalculator({ system, onResult }: Props) {
 
         {/* 内申点 */}
         <div>
-          <label className="mb-2 block text-sm font-bold text-slate-700">
+          <label htmlFor="total-score-report" className="mb-2 block text-sm font-bold text-slate-700">
             内申点（調査書点）
             <span className="ml-2 text-xs font-normal text-slate-500">（{system.report.rawMax}点満点）</span>
           </label>
           <input
+            id="total-score-report"
             type="number"
             inputMode="decimal"
             min="0"

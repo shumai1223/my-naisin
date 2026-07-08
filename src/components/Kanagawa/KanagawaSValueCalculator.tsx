@@ -84,10 +84,11 @@ export function KanagawaSValueCalculator() {
       <div className="p-6 space-y-5">
         {/* 内申点 */}
         <div>
-          <label className="block text-sm font-bold text-slate-800 mb-1">
+          <label htmlFor="kanagawa-naishin" className="block text-sm font-bold text-slate-800 mb-1">
             内申点（135点満点）<span className="text-xs font-normal text-slate-500 ml-2">中2＋中3×2 / 9教科</span>
           </label>
           <input
+            id="kanagawa-naishin"
             type="number"
             value={naishinInput}
             onChange={(e) => setNaishinInput(e.target.value)}
@@ -100,10 +101,11 @@ export function KanagawaSValueCalculator() {
 
         {/* 学力検査 */}
         <div>
-          <label className="block text-sm font-bold text-slate-800 mb-1">
+          <label htmlFor="kanagawa-gakuryoku" className="block text-sm font-bold text-slate-800 mb-1">
             学力検査点（500点満点）<span className="text-xs font-normal text-slate-500 ml-2">5教科 × 100点</span>
           </label>
           <input
+            id="kanagawa-gakuryoku"
             type="number"
             value={gakuryokuInput}
             onChange={(e) => setGakuryokuInput(e.target.value)}
@@ -137,10 +139,11 @@ export function KanagawaSValueCalculator() {
 
         {/* 特色検査（任意） */}
         <div>
-          <label className="block text-sm font-bold text-slate-800 mb-1">
+          <label htmlFor="kanagawa-tokushoku" className="block text-sm font-bold text-slate-800 mb-1">
             特色検査（任意・最大100点）<span className="text-xs font-normal text-slate-500 ml-2">難関校のみ実施</span>
           </label>
           <input
+            id="kanagawa-tokushoku"
             type="number"
             value={tokushokuInput}
             onChange={(e) => setTokushokuInput(e.target.value)}

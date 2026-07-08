@@ -72,10 +72,11 @@ export function ChibaKValueCalculator({ onResult }: Props) {
 
       <div className="space-y-5 p-6">
         <div>
-          <label className="mb-1 block text-sm font-bold text-slate-800">
+          <label htmlFor="chiba-hyotei-sum" className="mb-1 block text-sm font-bold text-slate-800">
             評定合計（135点満点）<span className="ml-2 text-xs font-normal text-slate-500">9教科×5段階×3学年</span>
           </label>
           <input
+            id="chiba-hyotei-sum"
             type="number"
             inputMode="decimal"
             min={0}
@@ -88,10 +89,11 @@ export function ChibaKValueCalculator({ onResult }: Props) {
         </div>
 
         <div>
-          <label className="mb-1 block text-sm font-bold text-slate-800">
+          <label htmlFor="chiba-gakuryoku" className="mb-1 block text-sm font-bold text-slate-800">
             学力検査点（500点満点）<span className="ml-2 text-xs font-normal text-slate-500">5教科×100点</span>
           </label>
           <input
+            id="chiba-gakuryoku"
             type="number"
             inputMode="decimal"
             min={0}

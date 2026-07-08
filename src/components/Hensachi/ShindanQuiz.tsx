@@ -128,11 +128,12 @@ export function ShindanQuiz() {
         </div>
 
         {/* Q3 都道府県 */}
-        <label className="mb-1.5 flex items-center gap-1.5 text-sm font-bold text-slate-700">
+        <label htmlFor="shindan-prefecture" className="mb-1.5 flex items-center gap-1.5 text-sm font-bold text-slate-700">
           <MapPin className="h-4 w-4 text-purple-600" />
           Q3. お住まいの都道府県
         </label>
         <select
+          id="shindan-prefecture"
           value={prefectureCode}
           onChange={(e) => { onFirstTouch(); setPrefectureCode(e.target.value); }}
           className="mb-5 h-11 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm text-slate-800 outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20"

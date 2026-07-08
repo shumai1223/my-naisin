@@ -228,8 +228,9 @@ export function HensachiCalculator({ onResult, resultFooter }: HensachiCalculato
               </div>
               <div className={`grid gap-3 ${mode === 'simple' ? 'sm:grid-cols-2' : 'sm:grid-cols-3'}`}>
                 <div>
-                  <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1">点数</label>
+                  <label htmlFor={`hensachi-${subject.key}-score`} className="block text-[10px] font-bold text-slate-500 uppercase mb-1">点数</label>
                   <input
+                    id={`hensachi-${subject.key}-score`}
                     type="number"
                     inputMode="decimal"
                     value={input.score}
@@ -239,8 +240,9 @@ export function HensachiCalculator({ onResult, resultFooter }: HensachiCalculato
                   />
                 </div>
                 <div>
-                  <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1">平均点</label>
+                  <label htmlFor={`hensachi-${subject.key}-average`} className="block text-[10px] font-bold text-slate-500 uppercase mb-1">平均点</label>
                   <input
+                    id={`hensachi-${subject.key}-average`}
                     type="number"
                     inputMode="decimal"
                     value={input.average}
@@ -251,8 +253,9 @@ export function HensachiCalculator({ onResult, resultFooter }: HensachiCalculato
                 </div>
                 {mode === 'advanced' && (
                   <div>
-                    <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1">標準偏差</label>
+                    <label htmlFor={`hensachi-${subject.key}-stddev`} className="block text-[10px] font-bold text-slate-500 uppercase mb-1">標準偏差</label>
                     <input
+                      id={`hensachi-${subject.key}-stddev`}
                       type="number"
                       inputMode="decimal"
                       value={input.stdDev}

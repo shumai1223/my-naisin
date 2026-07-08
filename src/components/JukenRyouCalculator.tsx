@@ -92,10 +92,11 @@ export function JukenRyouCalculator() {
         {/* 私立併願校数 */}
         <div>
           <div className="mb-1 flex items-center justify-between">
-            <label className="text-sm font-medium text-slate-700">私立高校の受験校数（併願含む）</label>
+            <label htmlFor="jukenryou-private-count" className="text-sm font-medium text-slate-700">私立高校の受験校数（併願含む）</label>
             <span className="text-sm font-bold text-emerald-700">{privateCount}校</span>
           </div>
           <input
+            id="jukenryou-private-count"
             type="range"
             min={0}
             max={5}
@@ -112,10 +113,11 @@ export function JukenRyouCalculator() {
         {/* 模試回数 */}
         <div>
           <div className="mb-1 flex items-center justify-between">
-            <label className="text-sm font-medium text-slate-700">受ける模試の回数（中3の年間）</label>
+            <label htmlFor="jukenryou-moshi-count" className="text-sm font-medium text-slate-700">受ける模試の回数（中3の年間）</label>
             <span className="text-sm font-bold text-emerald-700">{moshiCount}回</span>
           </div>
           <input
+            id="jukenryou-moshi-count"
             type="range"
             min={0}
             max={12}

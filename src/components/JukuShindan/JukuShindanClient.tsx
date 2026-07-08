@@ -161,11 +161,12 @@ export function JukuShindanClient() {
       {/* 入力フォーム */}
       <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm md:p-7">
         {/* 県 */}
-        <label className="mb-1.5 flex items-center gap-1.5 text-sm font-bold text-slate-700">
+        <label htmlFor="juku-shindan-prefecture" className="mb-1.5 flex items-center gap-1.5 text-sm font-bold text-slate-700">
           <MapPin className="h-4 w-4 text-blue-600" />
           お住まいの都道府県
         </label>
         <select
+          id="juku-shindan-prefecture"
           value={prefectureCode}
           onChange={(e) => {
             onFirstTouch();

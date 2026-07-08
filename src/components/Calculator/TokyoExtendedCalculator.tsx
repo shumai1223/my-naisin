@@ -77,7 +77,7 @@ export function TokyoExtendedCalculator({ kansoNaishin }: TokyoExtendedCalculato
 
         {/* 学力検査点入力 */}
         <div>
-          <label className="mb-2 flex items-center gap-2 text-sm font-medium text-slate-700">
+          <label htmlFor="tokyo-exam-score" className="mb-2 flex items-center gap-2 text-sm font-medium text-slate-700">
             <span>📝 学力検査（当日点）</span>
             <span className="text-xs text-slate-400">500点満点</span>
           </label>
@@ -89,9 +89,11 @@ export function TokyoExtendedCalculator({ kansoNaishin }: TokyoExtendedCalculato
               step={10}
               value={examScore}
               onChange={(e) => setExamScore(Number(e.target.value))}
+              aria-label="学力検査（当日点）"
               className="flex-1 h-2 rounded-full bg-slate-200 appearance-none cursor-pointer accent-rose-500"
             />
             <input
+              id="tokyo-exam-score"
               type="number"
               min={0}
               max={500}
@@ -177,8 +179,9 @@ export function TokyoExtendedCalculator({ kansoNaishin }: TokyoExtendedCalculato
             <span className="text-sm font-bold text-slate-700">目標から逆算</span>
           </div>
           <div className="flex items-center gap-3 mb-3">
-            <label className="text-sm text-slate-600">目標総合得点:</label>
+            <label htmlFor="tokyo-target-score" className="text-sm text-slate-600">目標総合得点:</label>
             <input
+              id="tokyo-target-score"
               type="number"
               min={0}
               max={1020}

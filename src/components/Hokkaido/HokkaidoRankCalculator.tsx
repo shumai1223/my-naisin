@@ -89,10 +89,11 @@ export function HokkaidoRankCalculator({ onResult }: Props = {}) {
       <div className="p-6 space-y-5">
         {/* 内申点 */}
         <div>
-          <label className="block text-sm font-bold text-slate-800 mb-1">
+          <label htmlFor="hokkaido-naishin" className="block text-sm font-bold text-slate-800 mb-1">
             内申点（315点満点）<span className="text-xs font-normal text-slate-500 ml-2">中1〜中3 9教科</span>
           </label>
           <input
+            id="hokkaido-naishin"
             type="number"
             value={naishinInput}
             onChange={(e) => setNaishinInput(e.target.value)}
@@ -108,10 +109,11 @@ export function HokkaidoRankCalculator({ onResult }: Props = {}) {
 
         {/* 学力検査 */}
         <div>
-          <label className="block text-sm font-bold text-slate-800 mb-1">
+          <label htmlFor="hokkaido-gakuryoku" className="block text-sm font-bold text-slate-800 mb-1">
             学力検査点（300点満点）<span className="text-xs font-normal text-slate-500 ml-2">5教科 × 60点</span>
           </label>
           <input
+            id="hokkaido-gakuryoku"
             type="number"
             value={gakuryokuInput}
             onChange={(e) => setGakuryokuInput(e.target.value)}
