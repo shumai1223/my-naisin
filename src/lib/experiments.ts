@@ -13,7 +13,14 @@
 import type { LeadPlacement } from '@/lib/lead-config';
 import type { AffiliateId } from '@/lib/affiliates';
 
-export type ExperimentStatus = 'running' | 'paused' | 'decided';
+/**
+ * 'queued'（TIER L-4追加）: まだどのコンポーネントにも配線していない候補実験。
+ * runningExperiments() / checkExperimentPortfolioHealth の稼働数カウントには入らない
+ * （母数を稼げていない実験を「稼働中」と誤カウントしないため）。ポートフォリオが
+ * MIN_RUNNING_EXPERIMENTS を割ったり月次ローテーション対象が出たりしたときに、
+ * queuedExperiments() から仮説を練り直さず次の1本を選んで配線・status を running に変える運用。
+ */
+export type ExperimentStatus = 'running' | 'paused' | 'decided' | 'queued';
 
 export interface ExperimentArm {
   id: string;
@@ -29,6 +36,10 @@ export interface ExperimentArm {
   heading?: string;
   /** 本文の差し替え（copy A/B）。 */
   body?: string;
+  /** CTAボタンの配色クラス差し替え（color A/B・TIER L-4追加。activate時にボタン側の実装が読む）。 */
+  ctaColorClass?: string;
+  /** CTA表示までの遅延ms（timing A/B・TIER L-4追加。0=即時表示）。 */
+  revealDelayMs?: number;
 }
 
 export interface ExperimentDef {
@@ -133,6 +144,196 @@ export const EXPERIMENTS: ExperimentDef[] = [
     note: '両案件とも承認待ち（pending）。承認され live 化したら status を running に変更して走らせる。',
     startedAt: '2026-06-17',
   },
+
+  /* ────────────────────────────────────────────────────────────────────
+   * 実験バンク（TIER L-4・2026-07-08新設）: 未配線の候補15本。
+   * ポートフォリオが MIN_RUNNING_EXPERIMENTS を割った・月次ローテーション対象が出た際に、
+   * ここから次の1本を選んで対象コンポーネントに experimentId を配線し、status を running に
+   * 変更するだけで新しい仮説検証を始められる（毎回ゼロから仮説を考え直さない弾倉）。
+   * コピー/配置順/オファー/色/タイミングの5軸を横断済み。placement は既存実験と重複しない
+   * 面を優先し、まだA/Bが1本も走っていない面（hensachi/hyotei-heikin/prefecture/blog/
+   * dashboard/mendan/suisen/naishin-up/jitsugika/futoukou/home）を中心にカバー。
+   * ──────────────────────────────────────────────────────────────────── */
+  {
+    id: 'hensachi-cta-color-2026',
+    hypothesis: '偏差値ツールの保護者CTAボタンを緑系にすると、既定の青系より affiliate_click が上がる（color A/B）。',
+    status: 'queued',
+    arms: [
+      { id: 'control', label: '既定の配色（青系）' },
+      { id: 'green', label: '緑系（安心感訴求）', ctaColorClass: 'bg-emerald-600 hover:bg-emerald-700' },
+    ],
+    primaryMetric: 'affiliate_click',
+    placement: 'hensachi',
+    note: '配線先候補: /hensachi 内のParentLeadCTA。activate時にボタン側でctaColorClassを読む実装を追加する。',
+  },
+  {
+    id: 'hyotei-heikin-heading-2026',
+    hypothesis: '評定平均ツールの見出しを「推薦・併願優遇の基準を確認」にすると、汎用見出しより cta_view→affiliate_click が伸びる（copy A/B）。',
+    status: 'queued',
+    arms: [
+      { id: 'control', label: '既定見出し（汎用訴求）' },
+      { id: 'suisen-frame', label: '推薦・併願優遇の基準フレーム', heading: '推薦・併願優遇の基準を確認' },
+    ],
+    primaryMetric: 'affiliate_click',
+    placement: 'hyotei-heikin',
+    note: '配線先候補: /hyotei-heikin のParentLeadCTA。suisen-kijunページとの導線文脈と整合させて活性化する。',
+  },
+  {
+    id: 'prefecture-order-2026',
+    hypothesis: '県別ページで保護者CTAを内申点計算ツールより先（ページ上部）に出すと、後出しより cta_view が伸びる（配置順A/B）。',
+    status: 'queued',
+    arms: [
+      { id: 'control', label: '既定の並び順（ツール→保護者CTA）' },
+      { id: 'cta-first', label: '保護者CTAを先に表示', body: 'placement-order:cta-first' },
+    ],
+    primaryMetric: 'cta_view',
+    placement: 'prefecture',
+    note: '配線先候補: [prefecture]/page.tsx。activate時にbodyの疑似フラグでなく実際のJSX順序を分岐させる実装に置き換える。',
+  },
+  {
+    id: 'blog-cta-timing-2026',
+    hypothesis: '記事内CTAを即時表示でなく本文の30%スクロール到達後に表示すると、既読者に絞れてaffiliate_clickの質(CVR)が上がる（timing A/B）。',
+    status: 'queued',
+    arms: [
+      { id: 'control', label: '即時表示' },
+      { id: 'scroll-gated', label: 'スクロール30%到達後に表示', revealDelayMs: 0 },
+    ],
+    primaryMetric: 'affiliate_click',
+    placement: 'blog',
+    note: '配線先候補: BlogCTA。revealDelayMsは時間ベース、scroll-gatedは実際にはスクロール位置ベースなので活性化時にIntersectionObserver実装を追加する。',
+  },
+  {
+    id: 'dashboard-cta-copy-2026',
+    hypothesis: '成績ダッシュボードの保護者CTAで「前回比+◯点」を見出しに出すと、汎用コピーより affiliate_click が伸びる（継続トラッキングの実測差分訴求・copy A/B）。',
+    status: 'queued',
+    arms: [
+      { id: 'control', label: '汎用の保護者向けコピー' },
+      { id: 'delta-frame', label: '前回比の実測差分を見出しに（動的差し込み）', heading: '前回の記録からの変化を踏まえて' },
+    ],
+    primaryMetric: 'affiliate_click',
+    placement: 'dashboard',
+    note: '配線先候補: DashboardClient内のParentLeadCTA。deltaは[[session-2026-07-08]]のcomputeLiveGoalProgress系の実測値を差し込む。',
+  },
+  {
+    id: 'mendan-offer-2026',
+    hypothesis: '三者面談パック面で、個別指導塾よりオンライン家庭教師（スタディコーチ）の方が affiliate_click が高い（offer A/B）。',
+    status: 'queued',
+    arms: [
+      { id: 'control', label: '個別指導塾（既定）', affiliateId: 'moshimo-e-live' },
+      { id: 'studycoach', label: 'スタディコーチ（東大式オンライン塾）', affiliateId: 'moshimo-studycoach' },
+    ],
+    primaryMetric: 'affiliate_click',
+    placement: 'mendan',
+    note: '配線先候補: /mendan のParentLeadCTA。result-offer-2026と同軸だが面談準備という別インテントでの再検証。',
+  },
+  {
+    id: 'suisen-copy-2026',
+    hypothesis: '推薦・総合型選抜面でFP無料相談を「大学までの学費」で訴求すると、制度解説文脈の既定コピーより affiliate_click が伸びる（copy A/B）。',
+    status: 'queued',
+    arms: [
+      { id: 'control', label: '既定コピー（制度解説文脈）' },
+      { id: 'cost-frame', label: '大学までの学費フレーム', heading: '推薦で進学した後の学費、今から相談できます' },
+    ],
+    primaryMetric: 'affiliate_click',
+    placement: 'suisen',
+    note: '配線先候補: /suisen-nyuushi・/sougou-gata-senbatsu のParentLeadCTA。',
+  },
+  {
+    id: 'naishin-up-offer-2026',
+    hypothesis: '内申点の上げ方面で、映像授業（atama+）より個別指導塾（そら塾）の方が affiliate_click が高い（offer A/B）。',
+    status: 'queued',
+    arms: [
+      { id: 'control', label: 'atama+（既定・映像授業AI型）', affiliateId: 'atama-text' },
+      { id: 'sora-juku', label: 'そら塾（個別指導）', affiliateId: 'sora-juku-text' },
+    ],
+    primaryMetric: 'affiliate_click',
+    placement: 'naishin-up',
+    note: '配線先候補: /naishin-age-kata系のParentLeadCTA。「内申を上げたい」という通塾動機の強いインテントでの再検証。',
+  },
+  {
+    id: 'jitsugika-copy-2026',
+    hypothesis: '実技教科対策面で見出しを「内申点への影響」で訴求すると、「弱点克服」の既定コピーより affiliate_click が伸びる（copy A/B）。',
+    status: 'queued',
+    arms: [
+      { id: 'control', label: '既定見出し（弱点克服フレーム）' },
+      { id: 'naishin-impact', label: '内申点への影響フレーム', heading: '実技教科の評定、内申点への影響を今から対策' },
+    ],
+    primaryMetric: 'affiliate_click',
+    placement: 'jitsugika',
+    note: '配線先候補: /jitsugika のParentLeadCTA。',
+  },
+  {
+    id: 'futoukou-offer-2026',
+    hypothesis: '不登校クラスタで、ティントル（個別指導特化）よりクラスジャパン小中学園（フリースクール）の方が affiliate_click が高い（offer A/B）。',
+    status: 'queued',
+    arms: [
+      { id: 'control', label: 'ティントル（既定・不登校専門個別指導）', affiliateId: 'moshimo-tintoru' },
+      { id: 'classjapan', label: 'クラスジャパン小中学園（オンラインフリースクール）', affiliateId: 'moshimo-classjapan' },
+    ],
+    primaryMetric: 'affiliate_click',
+    placement: 'futoukou',
+    note: '配線先候補: /futoukou・/futoukou/tsugaku のParentLeadCTA。両者とも在宅学習の学び方が異なるため訴求文脈の違いにも注意。',
+  },
+  {
+    id: 'home-cta-color-2026',
+    hypothesis: 'トップページの保護者CTAボタンをオレンジ系にすると、既定の青系より cta_view→affiliate_click が伸びる（color A/B）。',
+    status: 'queued',
+    arms: [
+      { id: 'control', label: '既定の配色（青系）' },
+      { id: 'orange', label: 'オレンジ系（緊急性・注目訴求）', ctaColorClass: 'bg-orange-500 hover:bg-orange-600' },
+    ],
+    primaryMetric: 'affiliate_click',
+    placement: 'home',
+    note: '配線先候補: HomeClient内のParentLeadCTA。最大流入面のため慎重に既存CVRを壊さないか小さいトラフィック比率から開始する。',
+  },
+  {
+    id: 'result-second-round-timing-2026',
+    hypothesis: 'result面のCTAを、計算結果アニメーション完了後に表示すると、即時表示より結果を認知した状態でのaffiliate_clickの質(CVR)が上がる（timing A/B・result系ローテーション2巡目）。',
+    status: 'queued',
+    arms: [
+      { id: 'control', label: '即時表示（既定）' },
+      { id: 'post-animation', label: '結果アニメーション完了後に表示', revealDelayMs: 600 },
+    ],
+    primaryMetric: 'affiliate_click',
+    placement: 'result',
+    note: 'result-offer-2026が決着した後のローテーション候補。revealDelayMsはResultSection側のアニメーション完了イベントに合わせて調整する。',
+  },
+  {
+    id: 'hiyou-third-round-copy-2026',
+    hypothesis: 'hiyou面で「高校3年間で約◯万円」と具体額を見出しに出すと、一般論の既定コピーより cta_view→affiliate_click が伸びる（copy A/B・hiyou系ローテーション3巡目）。',
+    status: 'queued',
+    arms: [
+      { id: 'control', label: '既定コピー（一般論フレーム）' },
+      { id: 'concrete-yen', label: '具体額フレーム（動的差し込み）', heading: '高校3年間で必要な金額、今すぐ目安を確認' },
+    ],
+    primaryMetric: 'affiliate_click',
+    placement: 'hiyou',
+    note: 'hiyou-copy-2026・fp-offer-2026に続く3巡目候補。concrete-yenはeducation-cost enginで算出した実測レンジを差し込む。',
+  },
+  {
+    id: 'parent-lp-order-2026',
+    hypothesis: '/hogoshaでCTAをページ最上部（ファーストビュー）に出すと、記事末配置の既定より cta_view が伸びる（配置順A/B・parent-lp系ローテーション2巡目）。',
+    status: 'queued',
+    arms: [
+      { id: 'control', label: '既定の配置（記事末）' },
+      { id: 'above-fold', label: 'ファーストビューに配置', body: 'placement-order:above-fold' },
+    ],
+    primaryMetric: 'cta_view',
+    placement: 'parent-lp',
+    note: 'hogosha-cta-text-2026（コピーA/B）とは別軸（配置順）。両実験は同時に走らせず順番に検証する。',
+  },
+  {
+    id: 'blog-offer-2026',
+    hypothesis: '記事内広告で、Z会（通信教育）よりatama+（映像授業AI型）の方が affiliate_click が高い（offer A/B）。',
+    status: 'queued',
+    arms: [
+      { id: 'control', label: 'Z会（既定）', affiliateId: 'zkai-text-middle' },
+      { id: 'atama', label: 'atama+（映像授業AI型）', affiliateId: 'atama-text' },
+    ],
+    primaryMetric: 'affiliate_click',
+    placement: 'blog',
+    note: '配線先候補: AffiliateAd（記事内設置）。blog-cta-timing-2026（同一面のtiming軸）と同時に走らせない。',
+  },
 ];
 
 /** id から実験定義を引く。 */
@@ -143,6 +344,24 @@ export function getExperiment(id: string): ExperimentDef | undefined {
 /** 走っている実験だけ。 */
 export function runningExperiments(): ExperimentDef[] {
   return EXPERIMENTS.filter((e) => e.status === 'running');
+}
+
+/** まだ配線していない候補実験（弾倉）。配列の並び順＝優先度（先頭から順に活性化する運用）。 */
+export function queuedExperiments(): ExperimentDef[] {
+  return EXPERIMENTS.filter((e) => e.status === 'queued');
+}
+
+/** 次に活性化すべき候補を1本選ぶ。placementを指定するとその面の候補を優先し、無ければ先頭を返す。 */
+export function nextQueuedExperiment(
+  placement?: LeadPlacement,
+  experiments: ExperimentDef[] = EXPERIMENTS
+): ExperimentDef | undefined {
+  const queued = experiments.filter((e) => e.status === 'queued');
+  if (placement) {
+    const matched = queued.find((e) => e.placement === placement);
+    if (matched) return matched;
+  }
+  return queued[0];
 }
 
 /* ────────────────────────────────────────────────────────────────────────
@@ -167,6 +386,8 @@ export interface ExperimentPortfolioHealth {
   belowMinimum: boolean;
   /** ROTATION_INTERVAL_DAYS を超えて稼働中（要・判定 or ローテーション）の実験。 */
   overdueForRotation: { id: string; daysRunning: number }[];
+  /** 未配線の候補実験（弾倉）の残数（TIER L-4）。belowMinimum/overdueが出た時に即活性化できる本数の目安。 */
+  queuedAvailableCount: number;
 }
 
 /**
@@ -192,6 +413,7 @@ export function checkExperimentPortfolioHealth(
     runningCount: running.length,
     belowMinimum: running.length < minRunning,
     overdueForRotation,
+    queuedAvailableCount: experiments.filter((e) => e.status === 'queued').length,
   };
 }
 

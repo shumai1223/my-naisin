@@ -929,7 +929,14 @@ export default async function AdminReportPage({
                 <div className="mt-0.5 text-[10px] font-bold text-rose-500">下限{MIN_RUNNING_EXPERIMENTS}本を下回っています</div>
               )}
             </div>
-            <div className={`${card} md:col-span-2`}>
+            <div className={card}>
+              <div className="text-[11px] text-slate-500">配線待ちの候補（弾倉）</div>
+              <div className="mt-1 text-xl font-black tabular-nums text-slate-900">
+                {experimentHealth.queuedAvailableCount}本
+              </div>
+              <div className="mt-0.5 text-[10px] text-slate-400">下限割れ・ローテーション時にここから選んで活性化</div>
+            </div>
+            <div className={`${card} md:col-span-3`}>
               <div className="text-[11px] text-slate-500">月次ローテーション要（30日超・未決着）</div>
               {experimentHealth.overdueForRotation.length === 0 ? (
                 <div className="mt-1 text-sm font-medium text-emerald-700">なし</div>

@@ -2,6 +2,8 @@ import {
   EXPERIMENTS,
   getExperiment,
   runningExperiments,
+  queuedExperiments,
+  nextQueuedExperiment,
   judgeWinner,
   checkExperimentPortfolioHealth,
   MIN_RUNNING_EXPERIMENTS,
@@ -48,8 +50,8 @@ describe('experiments registry', () => {
   });
 
   // scaled-contentゲート（H-5）：A/B実験も「コピペで同じ物を2アーム分」という重複バグが起こり得る面。
-  // control と実際に差分（送客先 or コピー）が無いアームは、有意差が絶対に出ない無意味な実験になる。
-  it('control以外の各アームは、送客先・見出し・本文・CTA接頭辞のいずれかがcontrolと異なる（コピペ重複防止）', () => {
+  // control と実際に差分（送客先 or コピー or 色 or タイミング）が無いアームは、有意差が絶対に出ない無意味な実験になる。
+  it('control以外の各アームは、送客先・見出し・本文・CTA接頭辞・配色・表示タイミングのいずれかがcontrolと異なる（コピペ重複防止）', () => {
     for (const e of EXPERIMENTS) {
       const control = e.arms[0];
       for (const arm of e.arms.slice(1)) {
@@ -57,7 +59,9 @@ describe('experiments registry', () => {
           arm.affiliateId !== control.affiliateId ||
           arm.heading !== control.heading ||
           arm.body !== control.body ||
-          arm.ctaPrefix !== control.ctaPrefix;
+          arm.ctaPrefix !== control.ctaPrefix ||
+          arm.ctaColorClass !== control.ctaColorClass ||
+          arm.revealDelayMs !== control.revealDelayMs;
         expect(hasAnyDiff).toBe(true);
 
         // 両アームが同じフィールドを定義している場合、値そのものが一致していないことも確認する
@@ -200,5 +204,52 @@ describe('checkExperimentPortfolioHealth（常時2本A/B運用・月次ローテ
     const health = checkExperimentPortfolioHealth(mixed, D('2026-07-07'));
     expect(health.runningCount).toBe(1);
     expect(health.overdueForRotation.map((r) => r.id)).toEqual(['running-1']);
+  });
+
+  it('queuedAvailableCountは実レジストリのqueued件数と一致する', () => {
+    const health = checkExperimentPortfolioHealth();
+    expect(health.queuedAvailableCount).toBe(EXPERIMENTS.filter((e) => e.status === 'queued').length);
+  });
+});
+
+describe('実験バンク（TIER L-4・queued弾倉）', () => {
+  it('queuedExperiments()はstatus=queuedのみを返し、15本以上ある', () => {
+    const queued = queuedExperiments();
+    expect(queued.length).toBeGreaterThanOrEqual(15);
+    for (const e of queued) {
+      expect(e.status).toBe('queued');
+    }
+  });
+
+  it('queuedな実験はrunningExperiments()に含まれない（稼働数の誤カウント防止）', () => {
+    const runningIds = new Set(runningExperiments().map((e) => e.id));
+    for (const e of queuedExperiments()) {
+      expect(runningIds.has(e.id)).toBe(false);
+    }
+  });
+
+  it('queuedな実験は全てplacementを持つ（配線先が明示されている）', () => {
+    for (const e of queuedExperiments()) {
+      expect(e.placement).toBeDefined();
+    }
+  });
+
+  it('nextQueuedExperiment(placement)は該当面の候補を優先して返す', () => {
+    const e = nextQueuedExperiment('hensachi');
+    expect(e?.placement).toBe('hensachi');
+  });
+
+  it('nextQueuedExperiment()はplacement未指定なら先頭の候補を返す', () => {
+    const e = nextQueuedExperiment();
+    expect(e).toEqual(queuedExperiments()[0]);
+  });
+
+  it('指定placementに一致する候補が無ければ先頭にフォールバックする', () => {
+    const list: ExperimentDef[] = [
+      { id: 'q1', hypothesis: 'x', status: 'queued', arms: [{ id: 'control', label: 'c' }, { id: 'b', label: 'b', ctaPrefix: 'p' }], primaryMetric: 'cta_view', placement: 'result' },
+      { id: 'q2', hypothesis: 'x', status: 'queued', arms: [{ id: 'control', label: 'c' }, { id: 'b', label: 'b', ctaPrefix: 'p' }], primaryMetric: 'cta_view', placement: 'hiyou' },
+    ];
+    expect(nextQueuedExperiment('mendan', list)?.id).toBe('q1');
+    expect(nextQueuedExperiment('hiyou', list)?.id).toBe('q2');
   });
 });
