@@ -8,6 +8,13 @@
  * パンくずリッチリザルトの取りこぼしをレビュー無しでも防げる
  * ([[opennext-ssg-1102-gotcha]]のH-7 dynamic-route-ssg.test.tsと同じ回帰テストパターン)。
  *
+ * このリポジトリでは `app/xxx/page.tsx` が同じディレクトリの `XxxClient.tsx` に描画を
+ * 委譲するパターンが多い。page.tsx単体だけを見ると「無い」と誤検知し、
+ * 実際にはClient側に既に実装済みのBreadcrumbSchemaを重複追加してしまう事故が
+ * 2026-07-08に実際に発生した（comparison/glossary/guide/reverseの4面）。
+ * そのため判定は page.tsx + 同ディレクトリの *Client.tsx を合算した内容で行い、
+ * 重複（2箇所以上での使用）も検知する。
+ *
  * FAQPageSchema/HowToSchema/DatasetSchemaの網羅監査は継続タスク（L-2の残り）。
  */
 import fs from 'fs';
@@ -45,6 +52,22 @@ function routeFromFile(appDir: string, file: string): string {
   return '/' + rel;
 }
 
+/** page.tsxが委譲する同ディレクトリの *Client.tsx も含めた実質的な描画内容を返す。 */
+function effectiveContent(file: string): string {
+  const dir = path.dirname(file);
+  const pageContent = fs.readFileSync(file, 'utf8');
+  const clientFiles = fs
+    .readdirSync(dir)
+    .filter((f) => /Client\.tsx$/.test(f))
+    .map((f) => fs.readFileSync(path.join(dir, f), 'utf8'));
+  return [pageContent, ...clientFiles].join('\n');
+}
+
+function countBreadcrumbUsages(content: string): number {
+  const matches = content.match(/<BreadcrumbSchema\b/g);
+  return matches ? matches.length : 0;
+}
+
 describe('BreadcrumbSchema網羅チェック（L-2）', () => {
   const appDir = path.join(__dirname, '..');
   const pageFiles = walk(appDir);
@@ -54,13 +77,18 @@ describe('BreadcrumbSchema網羅チェック（L-2）', () => {
   });
 
   test.each(pageFiles.map((file) => [routeFromFile(appDir, file), file] as const))(
-    '%s: BreadcrumbSchemaを持つ、または理由付きの例外リストに登録されている',
+    '%s: BreadcrumbSchemaを重複なく持つ、または理由付きの例外リストに登録されている',
     (route, file) => {
-      const content = fs.readFileSync(file, 'utf8');
-      if (/BreadcrumbSchema\b/.test(content)) return;
+      const count = countBreadcrumbUsages(effectiveContent(file));
 
-      const exemptReason = BREADCRUMB_EXEMPT_ROUTES[route];
-      expect(exemptReason).toBeDefined();
+      if (count === 0) {
+        const exemptReason = BREADCRUMB_EXEMPT_ROUTES[route];
+        expect(exemptReason).toBeDefined();
+        return;
+      }
+
+      // 重複使用（page.tsxとClient.tsxの両方に実装、等）を検知する。
+      expect(count).toBe(1);
     },
   );
 

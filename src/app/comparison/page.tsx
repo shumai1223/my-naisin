@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 
 import ComparisonClient from './ComparisonClient';
-import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 
 export const metadata: Metadata = {
   // 親レイアウトの title.template による二重サフィックスを避けるため absolute で完全指定
@@ -26,15 +25,5 @@ export const metadata: Metadata = {
 };
 
 export default function ComparisonPage() {
-  return (
-    <>
-      <BreadcrumbSchema
-        items={[
-          { name: 'ホーム', url: 'https://my-naishin.com/' },
-          { name: '都道府県別比較', url: 'https://my-naishin.com/comparison' },
-        ]}
-      />
-      <ComparisonClient />
-    </>
-  );
+  return <ComparisonClient />;
 }
