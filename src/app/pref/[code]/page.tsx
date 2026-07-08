@@ -12,6 +12,7 @@ import {
   ArrowRight
 } from 'lucide-react';
 import { PREFECTURES, getPrefectureByCode } from '@/lib/prefectures';
+import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 
 // 県別の落とし穴・注意点データ
 const PREFECTURE_PITFALLS: Record<string, { title: string; items: string[] }> = {
@@ -119,6 +120,12 @@ export default async function PrefecturePage({ params }: PageProps) {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <BreadcrumbSchema
+        items={[
+          { name: 'ホーム', url: 'https://my-naishin.com/' },
+          { name: `${prefecture.name}の内申点`, url: `https://my-naishin.com/pref/${prefecture.code}` },
+        ]}
+      />
       <div className="mx-auto max-w-4xl px-4 py-8 md:py-12">
         {/* Breadcrumb */}
         <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 
 import GlossaryClient from './GlossaryClient';
+import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 
 export const metadata: Metadata = {
   // 親レイアウトの title.template による二重サフィックスを避けるため absolute で完全指定
@@ -27,5 +28,15 @@ export const metadata: Metadata = {
 };
 
 export default function GlossaryPage() {
-  return <GlossaryClient />;
+  return (
+    <>
+      <BreadcrumbSchema
+        items={[
+          { name: 'ホーム', url: 'https://my-naishin.com/' },
+          { name: '用語辞典', url: 'https://my-naishin.com/glossary' },
+        ]}
+      />
+      <GlossaryClient />
+    </>
+  );
 }
