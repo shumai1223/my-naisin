@@ -26,6 +26,7 @@ import {
   type OfferKind,
 } from '@/lib/affiliate-economics';
 import { resolveSeason, SEASON_COPY, type Season } from '@/lib/seasonal';
+import { PREFECTURES, type PrefectureConfig } from '@/lib/prefectures';
 
 /** 全ての保護者リード面（監査・網羅テスト・営業資料の単一ソース）。 */
 export const ALL_LEAD_PLACEMENTS = [
@@ -246,10 +247,53 @@ export const PREFECTURE_LEAD_OVERRIDES: Partial<Record<string, Partial<LeadOffer
 };
 
 /**
+ * 学年スコープの表示（[[prefectures]]のtargetGradesに基づく・捏造ゼロ）。
+ * 中3のみ／2学年／3学年で内申点に反映される範囲が県ごとに異なる（実際の計算方式の一部）。
+ */
+function gradeScopeLabel(pref: PrefectureConfig): string {
+  const grades = [...pref.targetGrades].sort();
+  if (grades.length === 3) return '中1〜中3の3年間';
+  return grades.map((g) => `中${g}`).join('・');
+}
+
+/**
+ * 主要教科・実技教科の倍率差の表現（[[prefectures]]のcoreMultiplier/practicalMultiplierに基づく・捏造ゼロ）。
+ */
+function weightingPhrase(pref: PrefectureConfig): string {
+  if (pref.practicalMultiplier > pref.coreMultiplier) {
+    return `実技4教科の評定が${pref.practicalMultiplier}倍で重視される方式`;
+  }
+  if (pref.practicalMultiplier < pref.coreMultiplier) {
+    return `主要5教科の評定が${pref.coreMultiplier}倍で重視される方式`;
+  }
+  return '9教科がそのまま反映される方式';
+}
+
+/**
+ * 県別の保護者CTAコピーを、検証済みの計算方式データ（[[prefecture-exam-systems-verified]]・
+ * src/lib/prefectures.ts）から機械的に組み立てる（L-5・捏造ゼロ＝手書き47本ではなくエンジン生成）。
+ * 送客先（affiliateId）・note・ctaTextはここでは差し替えない＝見出し/本文のみの上書きにして、
+ * どの案件を出すかというEV判断（県オーバーライド／季節スワップ）とは責務を分離する。
+ */
+function buildPrefectureCTACopy(pref: PrefectureConfig): Pick<LeadOffer, 'heading' | 'body'> {
+  const scope = gradeScopeLabel(pref);
+  const weighting = weightingPhrase(pref);
+  return {
+    heading: `${pref.name}の内申点、正しく計算できていますか？`,
+    body: `${pref.name}の内申点は${scope}の評定を、${weighting}で${pref.maxScore}点満点に換算します。県ごとに計算方式が異なるため、まずは正確な今の内申点を把握しておくと対策が立てやすくなります。全国対応のオンライン個別指導の無料体験で、今の弱点と伸ばし方を具体的に確認できます。費用はかかりません。`,
+  };
+}
+
+/**
  * 県×面の勝者（最も具体的＝最優先）。キーは `${prefectureCode}:${placement}`。
  * 「勝ち案件 × 勝ち面」マトリクスの最終形。GA4結果をここへ反映する。
+ *
+ * 'prefecture' 面は47都道府県全件を buildPrefectureCTACopy() で機械生成して先埋めする
+ * （見出し/本文のみ・送客先は既存の県/季節オーバーライドを維持）。GA4で個別の勝者
+ * （affiliateId差し替え等）が判明したら、下の追記エリアで同キーを上書きする。
  */
 export const PREFECTURE_PLACEMENT_LEAD_OVERRIDES: Record<string, Partial<LeadOffer>> = {
+  ...Object.fromEntries(PREFECTURES.map((pref) => [`${pref.code}:prefecture`, buildPrefectureCTACopy(pref)])),
   // 例: 'osaka:result': { affiliateId: 'morijuku-text', note: '森塾の無料体験（PR）／無料', ctaText: '無料体験を申し込む' },
 };
 
