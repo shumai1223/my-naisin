@@ -18,6 +18,8 @@ import {
 import Link from 'next/link';
 import { Metadata } from 'next';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
+import { PREFECTURES } from '@/lib/prefectures';
+import { CURRENT_FISCAL_YEAR, REIWA_YEAR_LABEL } from '@/lib/fiscal-year';
 
 export const metadata: Metadata = {
   title: '編集長・開発者プロフィール | My Naishin',
@@ -130,7 +132,7 @@ export default function EditorProfilePage() {
 
                 <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-4">
                   <div className="text-center p-3 rounded-xl bg-slate-50 border border-slate-100">
-                    <div className="text-2xl font-black text-slate-800">47</div>
+                    <div className="text-2xl font-black text-slate-800">{PREFECTURES.length}</div>
                     <div className="text-[10px] font-bold text-slate-500 uppercase">都道府県解析</div>
                   </div>
                   <div className="text-center p-3 rounded-xl bg-slate-50 border border-slate-100">
@@ -138,7 +140,7 @@ export default function EditorProfilePage() {
                     <div className="text-[10px] font-bold text-slate-500 uppercase">一次資料準拠</div>
                   </div>
                   <div className="text-center p-3 rounded-xl bg-slate-50 border border-slate-100">
-                    <div className="text-2xl font-black text-slate-800">2026</div>
+                    <div className="text-2xl font-black text-slate-800">{CURRENT_FISCAL_YEAR}</div>
                     <div className="text-[10px] font-bold text-slate-500 uppercase">最新対応年度</div>
                   </div>
                 </div>
@@ -205,7 +207,7 @@ export default function EditorProfilePage() {
                 </p>
                 <p className="text-slate-600 leading-relaxed">
                   「それなら、自分が完璧なツールを作ればいい」<br />
-                  そう考えて、47都道府県すべての入試要綱（令和8年度最新版）を読み解き、1点1点の計算ロジックをプログラムに落とし込みました。
+                  そう考えて、{PREFECTURES.length}都道府県すべての入試要綱（{REIWA_YEAR_LABEL}最新版）を読み解き、1点1点の計算ロジックをプログラムに落とし込みました。
                 </p>
                 <div className="my-8 rounded-2xl bg-blue-50 p-6 border border-blue-100">
                   <h3 className="text-lg font-bold text-blue-900 mt-0">My Naishinの使命</h3>
