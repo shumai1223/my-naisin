@@ -20,7 +20,10 @@
 
 import { google } from 'googleapis';
 import fs from 'fs';
+import path from 'path';
 import { findUncoveredOpportunityQueries, formatMiningCandidatesMarkdown } from '../lib/query-mining';
+import { findCtrUnderperformers, formatCtrUnderperformersMarkdown } from '../lib/ctr-improvement';
+import { findRoutesDueForMeasurement, type CtrChangeLogEntry } from '../lib/ctr-improvement-log';
 
 const SITE_URL = process.env.GSC_SITE_URL || 'sc-domain:my-naishin.com';
 const SA_KEY = process.env.GSC_SA_KEY;
@@ -199,6 +202,19 @@ async function main() {
   // 6. 新面候補（TIER L-1）：表示回数はあるのに専用ページが無いクエリ
   const uncoveredCandidates = findUncoveredOpportunityQueries(recent);
 
+  // 7. CTR自動改善ループ（TIER L-3）：掲載順位から見て明らかにCTRが低い面（流入上位5面は除外済み）
+  const ctrUnderperformers = findCtrUnderperformers(recentPages);
+
+  // 変更履歴ログ（TIER L-3）：3週間経過し未測定の変更があれば「効果測定して」と促す
+  const changeLogPath = path.join(__dirname, '..', '..', 'data', 'ctr-improvement-log.json');
+  let ctrChangeLog: CtrChangeLogEntry[] = [];
+  try {
+    ctrChangeLog = JSON.parse(fs.readFileSync(changeLogPath, 'utf8'));
+  } catch {
+    ctrChangeLog = [];
+  }
+  const dueForMeasurement = findRoutesDueForMeasurement(ctrChangeLog, new Date());
+
   // --- Markdownレポート組み立て ---
   const L: string[] = [];
   L.push(`# 📊 GSC週次レポート（${recentEnd} 時点）`);
@@ -296,6 +312,16 @@ async function main() {
     );
   else L.push('_該当なし_\n');
 
+  L.push('## 🔁 CTR自動改善ループ（掲載順位から見て明らかにCTRが低い面・TIER L-3）');
+  L.push('> 順位帯別の期待CTR目安を大きく下回る面（流入上位5面は除外済み）。ガード: 同一面の変更は3週間隔・変更はdata/ctr-improvement-log.jsonに記録して3週後に効果測定する。');
+  L.push('');
+  L.push(formatCtrUnderperformersMarkdown(ctrUnderperformers));
+  if (dueForMeasurement.length) {
+    L.push('**⏰ 3週間経過し効果測定が必要な変更:**');
+    for (const e of dueForMeasurement) L.push(`- ${e.route}（変更日: ${e.changedAt}）`);
+    L.push('');
+  }
+
   L.push('---');
   L.push('_このレポートは GitHub Actions により自動生成されています（src/scripts/gsc-weekly-report.ts）。_');
 
@@ -304,7 +330,7 @@ async function main() {
   fs.writeFileSync(
     'gsc-weekly-report.json',
     JSON.stringify(
-      { generatedAt: new Date().toISOString(), recentEnd, striking, lowCtr, dropped, rising, newcomers, uncoveredCandidates, winnerPages, loserPages },
+      { generatedAt: new Date().toISOString(), recentEnd, striking, lowCtr, dropped, rising, newcomers, uncoveredCandidates, winnerPages, loserPages, ctrUnderperformers, dueForMeasurement },
       null,
       2,
     ),
