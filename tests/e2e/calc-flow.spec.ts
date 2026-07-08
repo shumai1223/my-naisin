@@ -51,3 +51,33 @@ test('共有導線: 受験料シミュが描画され費用目安が出る', asy
   // シミュ結果の「円」表記が見える（既定値で即時表示）
   await expect(page.getByText(/¥|円/).first()).toBeVisible();
 });
+
+/**
+ * 以下3件（TIER L-8）: 都道府県別の総合得点/S値/ランク計算機は、初期値が空文字で
+ * 「入力するまで結果が出ない」設計（home/hensachi/juken-ryouと違い既定値では何も表示されない）。
+ * L-10（a11y対応）で追加したid付きinput（htmlFor連携）をそのままロケータとして使い、
+ * 実際に値を入力→結果と保護者CTAが出ることまで確認する黄金導線テスト。
+ */
+test('都立総合得点: 学力検査点を入力すると総合得点と保護者CTAが表示される', async ({ page }) => {
+  await page.goto('/tokyo/total-score', { waitUntil: 'domcontentloaded' });
+  await expect(page.locator('h1').first()).toBeVisible();
+  await page.locator('#tokyo-total-score-exam').fill('420');
+  await expect(page.getByText('あなたの総合得点')).toBeVisible();
+  await expect(page.getByText(/保護者/).first()).toBeVisible();
+});
+
+test('神奈川S値: 内申点を入力するとS値と保護者CTAが表示される', async ({ page }) => {
+  await page.goto('/kanagawa/s-value', { waitUntil: 'domcontentloaded' });
+  await expect(page.locator('h1').first()).toBeVisible();
+  await page.locator('#kanagawa-naishin').fill('110');
+  await expect(page.getByText(/あなたのS1値/)).toBeVisible();
+  await expect(page.getByText(/保護者/).first()).toBeVisible();
+});
+
+test('北海道内申ランク: 内申点を入力するとランクと保護者CTAが表示される', async ({ page }) => {
+  await page.goto('/hokkaido/rank', { waitUntil: 'domcontentloaded' });
+  await expect(page.locator('h1').first()).toBeVisible();
+  await page.locator('#hokkaido-naishin').fill('240');
+  await expect(page.getByText('あなたの内申ランク')).toBeVisible();
+  await expect(page.getByText(/保護者/).first()).toBeVisible();
+});
