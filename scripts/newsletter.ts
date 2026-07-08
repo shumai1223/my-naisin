@@ -13,6 +13,10 @@
  * 思想（[[fable5-master-plan-2026-06]]）：配信できない名簿は資産でない。D1 に貯まった購読者へ
  * broadcast-templates.ts の“中身”を Resend で一斉配信し、受験本番までの接点を保つ。
  *
+ * 開封/クリック計測（TIER Q-4）：送信する各メールにResendのtags（kind/course_step等）を自動付与する。
+ * Resend Webhook（/api/resend/webhook・migration 0010未適用）が返すdata.tagsで配信種別を相関できるため、
+ * 送信時に別途DB書き込みは不要。
+ *
  * 安全：
  *  - 既定は --dry-run（送らない）。実送信は明示の --send が必要。
  *  - 実送信には RESEND_API_KEY が必須（無ければ中止）。配信停止リンクには UNSUB_SECRET 推奨。
@@ -95,6 +99,10 @@ async function main() {
   let template: RenderableBroadcast;
   let jobLabel: string;
   let previewSlug: string;
+  // Resendのtags機能（Q-4）：送信時に付与すると、開封/クリックのwebhookペイロードにそのまま
+  // data.tagsとして返ってくるため、送信時に別途DB書き込みをしなくても配信種別を相関できる
+  // （/api/resend/webhook・email-events-db.ts参照）。
+  let tags: { name: string; value: string }[] = [];
 
   if (courseStepArg) {
     const step = Number(courseStepArg);
@@ -106,6 +114,10 @@ async function main() {
     template = message;
     jobLabel = `courseStep=${step}（保護者メール講座・約${message.dayOffset}日後）`;
     previewSlug = `parent-course-${step}`;
+    tags = [
+      { name: 'kind', value: 'parent_course' },
+      { name: 'course_step', value: String(step) },
+    ];
   } else if (winterCheckpointArg) {
     const checkpoint = winterCheckpointArg as WinterCheckpoint;
     const variant = (arg('variant') ?? 'A') as CopyVariant;
@@ -126,6 +138,12 @@ async function main() {
     template = message;
     jobLabel = `winter=${checkpoint} variant=${variant} audience=${audience}`;
     previewSlug = `winter-${checkpoint}-${variant}-${audience}`;
+    tags = [
+      { name: 'kind', value: 'winter' },
+      { name: 'checkpoint', value: checkpoint },
+      { name: 'variant', value: variant },
+      { name: 'audience', value: audience },
+    ];
   } else if (calMonthArg) {
     const month = Number(calMonthArg);
     const audience = (arg('audience') ?? 'student') as Audience;
@@ -141,6 +159,11 @@ async function main() {
     template = message;
     jobLabel = `calMonth=${month} audience=${audience}`;
     previewSlug = `cal-${month}-${audience}`;
+    tags = [
+      { name: 'kind', value: 'calendar' },
+      { name: 'month', value: String(month) },
+      { name: 'audience', value: audience },
+    ];
   } else {
     const trigger = (arg('trigger') ?? 'monthly-checklist') as BroadcastTrigger;
     const seasonTemplate = getBroadcastTemplate(trigger);
@@ -152,6 +175,10 @@ async function main() {
     template = seasonTemplate;
     jobLabel = `trigger=${trigger}`;
     previewSlug = trigger;
+    tags = [
+      { name: 'kind', value: 'seasonal' },
+      { name: 'trigger', value: trigger },
+    ];
   }
 
   console.log(`■ ニュースレター配信  ${jobLabel}  ${monthLabel ? `month=${monthLabel}` : ''}`);
@@ -212,6 +239,7 @@ async function main() {
         subject: renderNewsletterSubject(template, ctx),
         html: renderNewsletterHtml(template, ctx),
         text: renderNewsletterText(template, ctx),
+        ...(tags.length > 0 ? { tags } : {}),
         ...(unsub
           ? {
               headers: {
