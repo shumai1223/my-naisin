@@ -81,3 +81,35 @@ test('北海道内申ランク: 内申点を入力するとランクと保護者
   await expect(page.getByText('あなたの内申ランク')).toBeVisible();
   await expect(page.getByText(/保護者/).first()).toBeVisible();
 });
+
+test('愛知総合得点: 評定合計を入力すると総合得点と保護者CTAが表示される', async ({ page }) => {
+  await page.goto('/aichi/total-score', { waitUntil: 'domcontentloaded' });
+  await expect(page.locator('h1').first()).toBeVisible();
+  await page.locator('#aichi-naishin-sum').fill('36');
+  await expect(page.getByText(/あなたの総合得点/)).toBeVisible();
+  await expect(page.getByText(/保護者/).first()).toBeVisible();
+});
+
+test('千葉K値: 評定合計を入力すると総合得点と保護者CTAが表示される', async ({ page }) => {
+  await page.goto('/chiba/total-score', { waitUntil: 'domcontentloaded' });
+  await expect(page.locator('h1').first()).toBeVisible();
+  await page.locator('#chiba-hyotei-sum').fill('108');
+  await expect(page.getByText(/あなたの総合得点/)).toBeVisible();
+  await expect(page.getByText(/保護者/).first()).toBeVisible();
+});
+
+test('福岡総合得点: 内申点を入力すると合計と保護者CTAが表示される', async ({ page }) => {
+  await page.goto('/fukuoka/total-score', { waitUntil: 'domcontentloaded' });
+  await expect(page.locator('h1').first()).toBeVisible();
+  await page.locator('#fukuoka-naishin').fill('36');
+  await expect(page.getByText('内申＋当日点の合計（目安）')).toBeVisible();
+  await expect(page.getByText(/保護者/).first()).toBeVisible();
+});
+
+test('大阪総合得点: 内申点を入力すると総合点と保護者CTAが表示される', async ({ page }) => {
+  await page.goto('/osaka/total-score', { waitUntil: 'domcontentloaded' });
+  await expect(page.locator('h1').first()).toBeVisible();
+  await page.locator('#osaka-naishin').fill('350');
+  await expect(page.getByText(/あなたの総合点/)).toBeVisible();
+  await expect(page.getByText(/保護者/).first()).toBeVisible();
+});
