@@ -153,6 +153,9 @@ export default function PartnerPage() {
           <p className="mt-8 text-center text-xs leading-relaxed text-slate-500">
             ※ 送客実績はクリック実数（一次データ）でご提示します。成果の確定・報酬条件は提携形態により異なります。
           </p>
+          <p className="mt-3 text-center text-xs leading-relaxed text-slate-500">
+            学校・進路指導のご担当者様は<Link href="/for-teachers" className="font-bold text-emerald-700 hover:underline">先生・進路指導のご担当者様へ</Link>のページもご覧ください。
+          </p>
         </div>
       </div>
     </>

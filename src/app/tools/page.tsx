@@ -608,6 +608,7 @@ export default function ToolsPage() {
               { href: '/guide', title: '高校受験の進め方ガイド', desc: '内申点・偏差値・出願までの全体像' },
               { href: '/prefectures', title: '47都道府県の内申点ページ', desc: 'お住まいの地域の方式で正確に計算' },
               { href: '/developers', title: 'データAPI / MCP（開発者・AI向け）', desc: '内申点の一次データを機械可読で提供' },
+              { href: '/for-teachers', title: '先生・進路指導のご担当者様へ', desc: '三者面談・授業配布・学校サイトへの埋め込みでの活用方法' },
               { href: 'https://my-shingaku.com', title: '大学進学の費用（姉妹サイト）', desc: '一人暮らし・学費・奨学金の目安（My Shingaku）', external: true },
             ]}
           />

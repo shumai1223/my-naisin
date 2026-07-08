@@ -84,6 +84,7 @@ export const STATIC_PAGES: StaticPageEntry[] = [
   { url: '/tools', priority: 0.9, changeFrequency: 'weekly' },
   { url: '/embed', priority: 0.6, changeFrequency: 'monthly' },
   { url: '/partner', priority: 0.5, changeFrequency: 'monthly' },
+  { url: '/for-teachers', priority: 0.5, changeFrequency: 'monthly' },
   { url: '/developers', priority: 0.6, changeFrequency: 'monthly' },
   { url: '/prefectures', priority: 0.9, changeFrequency: 'weekly' },
   { url: '/comparison', priority: 0.8, changeFrequency: 'weekly' },
