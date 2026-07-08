@@ -67,6 +67,11 @@ describe('sitemap()', () => {
     expect(naishinPages).toHaveLength(PREFECTURES.length);
   });
 
+  test('47都道府県の印刷対応ページ（/pref/{code}）が揃う（P-1・sitemap登録漏れの再発防止）', () => {
+    const handoutPages = urls.filter((u) => /\/pref\/[a-z]+$/.test(u));
+    expect(handoutPages).toHaveLength(PREFECTURES.length);
+  });
+
   test('各エントリは url と priority を持つ', () => {
     for (const e of entries) {
       expect(e.url.startsWith(BASE)).toBe(true);

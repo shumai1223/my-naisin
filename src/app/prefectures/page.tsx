@@ -1,15 +1,16 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { 
-  Calculator, 
-  ChevronRight, 
+import {
+  Calculator,
+  ChevronRight,
   Home,
   MapPin,
   Sparkles,
   ArrowRight,
   Search,
   BookOpen,
-  Target
+  Target,
+  Printer
 } from 'lucide-react';
 
 import { PREFECTURES, REGIONS } from '@/lib/prefectures';
@@ -145,7 +146,7 @@ export default function PrefecturesPage() {
                             </span>
                             <ChevronRight className="h-4 w-4" />
                           </Link>
-                          <Link 
+                          <Link
                             href={`/${pref.code}`}
                             className="flex items-center justify-between rounded-xl bg-slate-50 px-4 py-2.5 text-sm font-bold text-slate-700 transition-all hover:bg-slate-800 hover:text-white"
                           >
@@ -154,6 +155,16 @@ export default function PrefecturesPage() {
                               攻略ガイド
                             </span>
                             <ChevronRight className="h-4 w-4" />
+                          </Link>
+                          <Link
+                            href={`/pref/${pref.code}`}
+                            className="flex items-center justify-between rounded-xl bg-slate-50 px-4 py-2 text-xs font-bold text-slate-500 transition-all hover:bg-slate-800 hover:text-white"
+                          >
+                            <span className="flex items-center gap-2">
+                              <Printer className="h-3.5 w-3.5" />
+                              印刷用資料（先生・保護者向け）
+                            </span>
+                            <ChevronRight className="h-3.5 w-3.5" />
                           </Link>
                         </div>
                         

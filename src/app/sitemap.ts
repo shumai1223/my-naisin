@@ -37,6 +37,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     }));
 
+  // 3.5 都道府県別 印刷対応の計算方法まとめ（P-1・全47県。/pref/{code}はgenerateStaticParamsのみで
+  //     sitemap登録が漏れていたため追加。先生・進路指導向けのA4印刷資料）
+  const prefectureHandoutPages = PREFECTURES.map(prefecture => ({
+    url: `${baseUrl}/pref/${prefecture.code}`,
+    lastModified,
+    changeFrequency: 'monthly' as const,
+    priority: 0.5,
+  }));
+
   // 4. ブログ個別記事
   const blogPages = BLOG_POSTS.map(post => ({
     url: `${baseUrl}/blog/${post.slug}`,
@@ -67,6 +76,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...staticPages,
     ...prefectureTopPages,
     ...prefectureNaishinPages,
+    ...prefectureHandoutPages,
     ...blogPages,
     ...totalScorePages,
     ...totalScoreExplainerPages,

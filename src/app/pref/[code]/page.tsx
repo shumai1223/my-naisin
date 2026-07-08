@@ -12,6 +12,7 @@ import {
   ArrowRight
 } from 'lucide-react';
 import { PREFECTURES, getPrefectureByCode } from '@/lib/prefectures';
+import { PrintButton } from '@/components/PrintButton';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 
 // 県別の落とし穴・注意点データ
@@ -128,7 +129,7 @@ export default async function PrefecturePage({ params }: PageProps) {
       />
       <div className="mx-auto max-w-4xl px-4 py-8 md:py-12">
         {/* Breadcrumb */}
-        <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
+        <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500 print:hidden">
           <Link href="/" className="hover:text-blue-600">ホーム</Link>
           <ChevronRight className="h-4 w-4" />
           <span className="text-slate-700">{prefecture.name}の内申点</span>
@@ -136,19 +137,26 @@ export default async function PrefecturePage({ params }: PageProps) {
 
         {/* Header */}
         <header className="mb-8">
-          <div className="flex items-center gap-3">
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-lg">
-              <GraduationCap className="h-6 w-6" />
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-lg print:hidden">
+                <GraduationCap className="h-6 w-6" />
+              </div>
+              <div>
+                <h1 className="text-2xl font-bold text-slate-800 md:text-3xl">
+                  {prefecture.name}の内申点計算方法
+                </h1>
+                <p className="mt-1 text-sm text-slate-500">
+                  {prefecture.region} | 令和{prefecture.fiscalYear || '7'}年度入試対応
+                </p>
+              </div>
             </div>
-            <div>
-              <h1 className="text-2xl font-bold text-slate-800 md:text-3xl">
-                {prefecture.name}の内申点計算方法
-              </h1>
-              <p className="mt-1 text-sm text-slate-500">
-                {prefecture.region} | 令和{prefecture.fiscalYear || '7'}年度入試対応
-              </p>
-            </div>
+            <PrintButton />
           </div>
+          <p className="mt-3 text-xs leading-relaxed text-slate-500 print:hidden">
+            このページはA4印刷を想定したレイアウトです。学級通信・進路指導資料としてそのまま配布いただけます（
+            <Link href="/for-teachers" className="font-bold text-blue-600 hover:underline">先生・進路指導のご担当者様へ</Link>）。
+          </p>
         </header>
 
         {/* Main Content */}
@@ -258,7 +266,7 @@ export default async function PrefecturePage({ params }: PageProps) {
           </section>
 
           {/* CTA - 計算機へ */}
-          <section className="rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 p-6 text-center text-white shadow-lg">
+          <section className="rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 p-6 text-center text-white shadow-lg print:hidden">
             <h2 className="text-xl font-bold">
               {prefecture.name}の内申点を計算してみよう！
             </h2>
@@ -275,7 +283,7 @@ export default async function PrefecturePage({ params }: PageProps) {
           </section>
 
           {/* 関連リンク */}
-          <section className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
+          <section className="rounded-2xl border border-slate-200 bg-slate-50 p-6 print:hidden">
             <h2 className="mb-4 text-lg font-bold text-slate-800">関連コンテンツ</h2>
             <div className="grid gap-3 sm:grid-cols-2">
               <Link
@@ -294,6 +302,11 @@ export default async function PrefecturePage({ params }: PageProps) {
               </Link>
             </div>
           </section>
+
+          {/* 印刷時のみ表示する出典（ヘッダー/フッターが print:hidden のため、紙面に出典を残す） */}
+          <p className="hidden text-xs text-slate-500 print:block">
+            出典: My Naishin（https://my-naishin.com/pref/{prefecture.code}）
+          </p>
         </div>
       </div>
     </div>
