@@ -404,6 +404,14 @@ const TOOL_GROUPS: { id: string; heading: string; tools: Tool[] }[] = [
         color: 'blue',
       },
       {
+        title: '学校推薦型・総合型選抜の出願準備チェックリスト',
+        description: '出願までの一般的な準備タイムラインと必要書類の一覧。大学個別の基準は書かず制度の一般論のみ',
+        features: ['高1からのタイムライン', '必要書類チェックリスト', '調査書・志望理由書', '推薦/総合型 両対応'],
+        href: '/shutsugan-junbi',
+        icon: BookOpen,
+        color: 'purple',
+      },
+      {
         title: '47都道府県の入試制度ページ',
         description: '各都道府県の内申点方式・専用計算ツールへの入口',
         features: ['47都道府県', '県別の計算式', '高校ボーダー', '出典リンク付き'],

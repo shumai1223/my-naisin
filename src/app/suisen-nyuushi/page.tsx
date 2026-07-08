@@ -191,6 +191,9 @@ export default function SuisenNyuushiPage() {
               <Link href="/sougou-gata-senbatsu" className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-violet-600 px-6 py-3.5 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-violet-700 sm:w-auto">
                 総合型選抜とは？評定の目安・準備時期<ChevronRight className="h-4 w-4" />
               </Link>
+              <Link href="/shutsugan-junbi" className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white px-6 py-3.5 text-sm font-bold text-violet-700 ring-1 ring-violet-200 transition-colors hover:bg-violet-50 sm:w-auto">
+                出願準備チェックリストを見る
+              </Link>
               <a href="https://my-shingaku.com" target="_blank" rel="noopener noreferrer" className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white px-6 py-3.5 text-sm font-bold text-indigo-700 ring-1 ring-indigo-200 transition-colors hover:bg-indigo-50 sm:w-auto">
                 大学受験・進学費用を調べる（My Shingaku）
               </a>

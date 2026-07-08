@@ -80,6 +80,7 @@ const DATASET_EXEMPT_ROUTES: Record<string, string> = {
   '/reverse': '志望校逆算計算機（単発計算UIでありデータセットの提供ではない）',
   '/shinro-hiyou': '進路別費用シミュレーター（単発計算UIでありデータセットの提供ではない）',
   '/shougakukin': '就学支援金シミュレーター（単発計算UIでありデータセットの提供ではない）',
+  '/shutsugan-junbi': '出願準備チェックリストページ（データセットの提供なし）',
   '/sougou-gata-senbatsu': '総合型選抜の解説ページ（データセットの提供なし）',
   '/suisen-nyuushi': '推薦入試の解説ページ（データセットの提供なし）',
   '/tarinai-taisaku': '内申・当日点不足の対策ハブ（データセットの提供なし）',

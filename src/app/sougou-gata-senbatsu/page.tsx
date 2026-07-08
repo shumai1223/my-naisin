@@ -162,6 +162,7 @@ export default function SougouGataSenbatsuPage() {
             {[
               { href: '/hyotei-heikin', title: '評定平均を計算する（高校生・大学推薦対応）' },
               { href: '/hyotei-heikin/suisen-kijun', title: '推薦に必要な評定平均の早見表' },
+              { href: '/shutsugan-junbi', title: '出願準備チェックリスト（タイムライン・必要書類）' },
               { href: '/chousasho', title: '調査書とは？（評定がどう使われるか）' },
               { href: '/shinro-hiyou', title: '高校〜大学の教育費（進路別）' },
             ].map((c) => (
