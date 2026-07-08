@@ -24,6 +24,7 @@ import { walkPageFiles, routeFromFile, effectiveContent, countJsxUsages } from '
 const FAQ_EXEMPT_ROUTES: Record<string, string> = {
   '/about': '運営者情報ページ（Q&A形式のコンテンツなし）',
   '/about/editor-profile': '運営者プロフィールページ（Q&A形式のコンテンツなし）',
+  '/admin/juku-reviews': 'noindex・トークン認証必須の内部ツール（リッチリザルト対象外・R-1第3弾）',
   '/admin/report': 'noindex・トークン認証必須の内部ツール（リッチリザルト対象外）',
   '/admin/worklog': 'noindex・トークン認証必須の内部ツール（リッチリザルト対象外）',
   '/blog': '記事一覧ページ（個別記事はblog/[slug]側でFAQPageSchema対応済み）',

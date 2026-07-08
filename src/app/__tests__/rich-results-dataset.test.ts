@@ -25,6 +25,7 @@ import { walkPageFiles, routeFromFile, effectiveContent, countSchemaUsages } fro
 const DATASET_EXEMPT_ROUTES: Record<string, string> = {
   '/about': '運営者情報ページ（データセットの提供なし）',
   '/about/editor-profile': '運営者プロフィールページ（データセットの提供なし）',
+  '/admin/juku-reviews': 'noindex・トークン認証必須の内部ツール（リッチリザルト対象外・R-1第3弾）',
   '/admin/report': 'noindex・トークン認証必須の内部ツール（リッチリザルト対象外）',
   '/admin/worklog': 'noindex・トークン認証必須の内部ツール（リッチリザルト対象外）',
   '/ask': '決定論Q&Aツール（単発応答でありデータセットの提供ではない）',

@@ -19,6 +19,7 @@ import { walkPageFiles, routeFromFile, effectiveContent, countJsxUsages } from '
  */
 const BREADCRUMB_EXEMPT_ROUTES: Record<string, string> = {
   '/': 'ホーム自体がパンくずの起点＝BreadcrumbList不要',
+  '/admin/juku-reviews': 'noindex・トークン認証必須の内部ツール（リッチリザルト対象外・R-1第3弾）',
   '/admin/report': 'noindex・トークン認証必須の内部ツール（リッチリザルト対象外）',
   '/admin/worklog': 'noindex・トークン認証必須の内部ツール（リッチリザルト対象外）',
   '/contact': '問い合わせページ（リッチリザルト価値が低い定型ページ）',

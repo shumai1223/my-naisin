@@ -26,6 +26,7 @@ import { walkPageFiles, routeFromFile, effectiveContent, countSchemaUsages } fro
 const HOWTO_EXEMPT_ROUTES: Record<string, string> = {
   '/about': '運営者情報ページ（手順コンテンツなし）',
   '/about/editor-profile': '運営者プロフィールページ（手順コンテンツなし）',
+  '/admin/juku-reviews': 'noindex・トークン認証必須の内部ツール（リッチリザルト対象外・R-1第3弾）',
   '/admin/report': 'noindex・トークン認証必須の内部ツール（リッチリザルト対象外）',
   '/admin/worklog': 'noindex・トークン認証必須の内部ツール（リッチリザルト対象外）',
   '/ask': '決定論Q&Aツール（手順でなく単発の質問応答）',

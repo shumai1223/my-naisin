@@ -21,6 +21,7 @@ const NO_INBOUND_LINK_EXEMPT_ROUTES: Record<string, string> = {
   '/': 'ホームページ自体（常にルートとして直接アクセスされる）',
   '/admin/report': '認証必須のnoindex内部ツール（意図的にリンクしない設計）',
   '/admin/worklog': '認証必須のnoindex内部ツール（意図的にリンクしない設計）',
+  '/admin/juku-reviews': '認証必須のnoindex内部ツール（意図的にリンクしない設計・R-1第3弾）',
 };
 
 describe('内部リンクグラフ監査（L-6）: 準孤児（登録簿のみに存在するページ）の検出', () => {

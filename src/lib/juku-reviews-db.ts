@@ -93,6 +93,35 @@ export async function getApprovedReviews(jukuId: AffiliateId, limit = 20): Promi
   }
 }
 
+export interface ReviewRow extends ApprovedReviewRow {
+  status: ReviewStatus;
+  moderator_note: string | null;
+}
+
+/**
+ * 指定ステータスの口コミを一覧取得する（管理画面用・全ステータス対象）。
+ * バインディング未設定・テーブル未作成・0件なら空配列。
+ */
+export async function getReviewsByStatus(status: ReviewStatus, limit = 50): Promise<ReviewRow[]> {
+  try {
+    const db = await getReviewsDb();
+    if (!db) return [];
+    const cappedLimit = Math.max(1, Math.min(200, Math.round(limit)));
+    const { results } = await db
+      .prepare(
+        `SELECT id, juku_id, rating, comment, prefecture_code, status, moderator_note, created_at
+         FROM juku_reviews WHERE status = ?
+         ORDER BY id DESC LIMIT ?`
+      )
+      .bind(status, cappedLimit)
+      .all<ReviewRow>();
+    return results ?? [];
+  } catch (err) {
+    console.error('getReviewsByStatus skipped:', err instanceof Error ? err.message : err);
+    return [];
+  }
+}
+
 /**
  * モデレーション操作：状態を遷移する。canTransitionReviewStatusで許可されない遷移はfalse
  * （現在の状態を読んでから検査するため、DB未接続時はfalseになる＝安全側）。
