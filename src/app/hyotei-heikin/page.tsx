@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { Calculator, ChevronRight, Home, BookOpen, AlertCircle, TrendingUp, Award, User, Calendar, ShieldCheck, FileCheck, GraduationCap, FileText, Sparkles } from 'lucide-react';
+import { Calculator, ChevronRight, Home, BookOpen, AlertCircle, TrendingUp, Award, User, Calendar, ShieldCheck, FileCheck, GraduationCap, FileText, Sparkles, Undo2 } from 'lucide-react';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
@@ -185,6 +185,13 @@ export default function HyoteiHeikinPage() {
               >
                 <Award className="h-4 w-4" />
                 推薦に必要な評定基準を見る
+              </Link>
+              <Link
+                href="/hyotei-heikin/gyakusan"
+                className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-white px-5 py-2.5 text-sm font-bold text-emerald-700 ring-1 ring-emerald-200 transition-colors hover:bg-emerald-50"
+              >
+                <Undo2 className="h-4 w-4" />
+                残りで必要な平均を逆算する
               </Link>
               <Link
                 href="/dashboard"

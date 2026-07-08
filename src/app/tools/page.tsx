@@ -380,6 +380,14 @@ const TOOL_GROUPS: { id: string; heading: string; tools: Tool[] }[] = [
         color: 'green',
       },
       {
+        title: '評定平均の逆算計算機',
+        description: '目標の評定平均に届かせるには、残りの学期・教科で平均いくつ取ればよいかを逆算',
+        features: ['現在の平均から逆算', '残り回数を入力', 'プリセット目標(3.5〜5.0)', '推薦・総合型選抜に'],
+        href: '/hyotei-heikin/gyakusan',
+        icon: Target,
+        color: 'purple',
+      },
+      {
         title: '内申点ガイド（完全解説）',
         description: '内申点の仕組み・計算方法・上げ方までまとめて解説',
         features: ['基礎解説', '都道府県別の違い', 'よくある質問', '対策方法'],

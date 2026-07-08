@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, Award, Calculator, TrendingUp, User, ShieldCheck, Calendar, FileCheck, AlertTriangle, GraduationCap } from 'lucide-react';
+import { Home, ChevronRight, Award, Calculator, TrendingUp, User, ShieldCheck, Calendar, FileCheck, AlertTriangle, GraduationCap, Undo2 } from 'lucide-react';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -258,6 +258,10 @@ export default function HyoteiSuisenKijunPage() {
             <div className="grid gap-3 sm:grid-cols-2">
               <Link href="/hyotei-heikin" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm transition-shadow hover:shadow-md">
                 <span className="text-sm font-medium text-slate-700"><Calculator className="mr-2 inline h-4 w-4 text-emerald-500" />評定平均を計算する</span>
+                <ChevronRight className="h-4 w-4 text-slate-400" />
+              </Link>
+              <Link href="/hyotei-heikin/gyakusan" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm transition-shadow hover:shadow-md">
+                <span className="text-sm font-medium text-slate-700"><Undo2 className="mr-2 inline h-4 w-4 text-emerald-500" />残りで必要な平均を逆算する</span>
                 <ChevronRight className="h-4 w-4 text-slate-400" />
               </Link>
               <Link href="/" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm transition-shadow hover:shadow-md">
