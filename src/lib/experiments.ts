@@ -334,6 +334,408 @@ export const EXPERIMENTS: ExperimentDef[] = [
     placement: 'blog',
     note: '配線先候補: AffiliateAd（記事内設置）。blog-cta-timing-2026（同一面のtiming軸）と同時に走らせない。',
   },
+
+  /* ────────────────────────────────────────────────────────────────────
+   * 実験バンク第2弾（TIER Q-1・2026-07-09追加）: 未配線の候補30本。
+   * L-4の15本は「面（配置/オファー/色/タイミング）」軸で横断していたのに対し、
+   * こちらは「コピーの型（訴求パターン）」軸で横断する30本＝見出し型5・社会証明型5・
+   * 時期訴求型5・簡潔型5・保護者宛名型10。同一面でも異なる訴求パターンを試せるよう、
+   * 既存のqueued/running実験とは別軸（同一placementへの追加ラウンドも可）で設計。
+   * 社会証明型は「利用者数」等の未検証統計を一切使わず、既にサイト全体で実装済みの
+   * 一次情報準拠（教育委員会/文科省統計）というデータ根拠のみを訴求する（捏造回避）。
+   * 不登校クラスタの時期訴求は、対象読者の心理的負荷を踏まえ「早めの相談で選択肢が
+   * 広がる」という機会訴求に留め、恐怖・強い緊急性を煽る表現は使わない。
+   * ──────────────────────────────────────────────────────────────────── */
+
+  // ── 見出し型（heading A/B）×5 ──
+  {
+    id: 'result-headline-2026',
+    hypothesis: '結果画面で見出しを「志望校まであと何が必要か」というギャップ直接訴求にすると、既定の一般見出しより affiliate_click が伸びる（見出し型A/B）。',
+    status: 'queued',
+    arms: [
+      { id: 'control', label: '既定見出し（汎用訴求）' },
+      { id: 'gap-frame', label: 'ギャップ直接訴求', heading: '志望校まで、あと何が必要か分かりましたか？' },
+    ],
+    primaryMetric: 'affiliate_click',
+    placement: 'result',
+    note: '配線先候補: ResultSection内のParentLeadCTA。見出し軸のみ変更し送客先・本文は既定を維持。result-offer-2026・result-second-round-timing-2026とは別軸。',
+  },
+  {
+    id: 'hensachi-headline-2026',
+    hypothesis: '偏差値ツールで見出しを「あと何点で偏差値が上がるか」の具体行動フレームにすると、既定の一般見出しより affiliate_click が伸びる（見出し型A/B）。',
+    status: 'queued',
+    arms: [
+      { id: 'control', label: '既定見出し（汎用訴求）' },
+      { id: 'action-frame', label: '具体行動フレーム', heading: '偏差値をあと5上げるには、何をすればいいですか？' },
+    ],
+    primaryMetric: 'affiliate_click',
+    placement: 'hensachi',
+    note: '配線先候補: /hensachi のParentLeadCTA。hensachi-cta-color-2026（色軸）とは別軸。',
+  },
+  {
+    id: 'parent-lp-headline-2026',
+    hypothesis: '/hogoshaで見出しを「今の内申点は志望校の基準に届いているか」という基準比較フレームにすると、既定より affiliate_click が伸びる（見出し型A/B）。',
+    status: 'queued',
+    arms: [
+      { id: 'control', label: '既定見出し（汎用訴求）' },
+      { id: 'benchmark-frame', label: '基準比較フレーム', heading: '今の内申点、志望校の基準に届いていますか？' },
+    ],
+    primaryMetric: 'affiliate_click',
+    placement: 'parent-lp',
+    note: '配線先候補: /hogosha のCTA。hogosha-cta-text-2026（ctaPrefix軸）・parent-lp-order-2026（配置順軸）とは別軸。',
+  },
+  {
+    id: 'blog-headline-2026',
+    hypothesis: '記事内CTAで見出しを「この記事を読んだ今だからできること」という文脈連動フレームにすると、汎用見出しより affiliate_click が伸びる（見出し型A/B）。',
+    status: 'queued',
+    arms: [
+      { id: 'control', label: '既定見出し（汎用訴求）' },
+      { id: 'context-frame', label: '文脈連動フレーム', heading: 'この記事を読んだ今、次にできることがあります' },
+    ],
+    primaryMetric: 'affiliate_click',
+    placement: 'blog',
+    note: '配線先候補: BlogCTA。blog-cta-timing-2026（timing軸）・blog-offer-2026（offer軸）とは別軸。',
+  },
+  {
+    id: 'futoukou-headline-2026',
+    hypothesis: '不登校クラスタで見出しを「学校に行けなくても進路の選択肢はある」という安心訴求にすると、既定見出しより affiliate_click が伸びる（見出し型A/B）。',
+    status: 'queued',
+    arms: [
+      { id: 'control', label: '既定見出し（汎用訴求）' },
+      { id: 'reassurance-frame', label: '安心訴求フレーム', heading: '学校に行けなくても、進路の選択肢はあります' },
+    ],
+    primaryMetric: 'affiliate_click',
+    placement: 'futoukou',
+    note: '配線先候補: FutoukouLeadCTA。futoukou-offer-2026（offer軸）とは別軸。',
+  },
+
+  // ── 社会証明型（データ根拠訴求。利用者数等の未検証統計は不使用）×5 ──
+  {
+    id: 'home-social-proof-2026',
+    hypothesis: 'トップページの保護者CTA本文に「47都道府県の教育委員会一次情報に基づく」というデータ根拠訴求を加えると、既定本文より affiliate_click が伸びる（社会証明型A/B）。',
+    status: 'queued',
+    arms: [
+      { id: 'control', label: '既定本文（汎用訴求）' },
+      {
+        id: 'source-authority',
+        label: 'データ根拠訴求',
+        body: '内申点・偏差値は「今からの伸ばし方」で大きく変わります。47都道府県の教育委員会が公表する入学者選抜要綱を一次情報として計算しており、ご家庭でできる対策をまずは無料の資料で確認できます。',
+      },
+    ],
+    primaryMetric: 'affiliate_click',
+    placement: 'home',
+    note: '利用者数・満足度等の未検証統計は使わず、既に/for-teachers等で実装済みの一次情報準拠という事実のみを訴求（捏造回避）。home-cta-color-2026（色軸）とは別軸。',
+  },
+  {
+    id: 'hyotei-heikin-social-proof-2026',
+    hypothesis: '評定平均ツールの本文に「学校推薦型・総合型選抜での評定平均の使われ方に基づく」というデータ根拠訴求を加えると、既定本文より affiliate_click が伸びる（社会証明型A/B）。',
+    status: 'queued',
+    arms: [
+      { id: 'control', label: '既定本文（汎用訴求）' },
+      {
+        id: 'source-authority',
+        label: 'データ根拠訴求',
+        body: '評定平均は学校推薦型・総合型選抜の出願基準として使われます。仕組みを踏まえた対策を、まずは無料の資料で確認できます。',
+      },
+    ],
+    primaryMetric: 'affiliate_click',
+    placement: 'hyotei-heikin',
+    note: 'hyotei-heikin-heading-2026（見出し軸）とは別軸。',
+  },
+  {
+    id: 'prefecture-social-proof-2026',
+    hypothesis: '県別ページの保護者CTA本文に「お住まいの都道府県の教育委員会データに基づく」というデータ根拠訴求を加えると、既定本文より affiliate_click が伸びる（社会証明型A/B）。',
+    status: 'queued',
+    arms: [
+      { id: 'control', label: '既定本文（汎用訴求）' },
+      {
+        id: 'source-authority',
+        label: 'データ根拠訴求',
+        body: 'お住まいの都道府県の教育委員会が公表する入学者選抜要綱に基づいて計算しています。今からの対策を、まずは無料の資料で確認できます。',
+      },
+    ],
+    primaryMetric: 'affiliate_click',
+    placement: 'prefecture',
+    note: 'prefecture-order-2026（配置順軸）とは別軸。',
+  },
+  {
+    id: 'hiyou-social-proof-2026',
+    hypothesis: '学費シミュレーターの本文に「文部科学省の統計に基づく試算」というデータ根拠訴求を加えると、既定本文より affiliate_click が伸びる（社会証明型A/B）。',
+    status: 'queued',
+    arms: [
+      { id: 'control', label: '既定本文（汎用訴求）' },
+      {
+        id: 'source-authority',
+        label: 'データ根拠訴求',
+        body: '文部科学省の統計に基づく教育費データで試算しています。進路によって数百万円規模で変わる教育費を、まずは無料でFPに相談できます。',
+      },
+    ],
+    primaryMetric: 'affiliate_click',
+    placement: 'hiyou',
+    note: 'hiyou-copy-2026・hiyou-third-round-copy-2026（いずれもフレーム軸）とは別軸。education-costエンジンが文科省統計ベースである事実のみを訴求。',
+  },
+  {
+    id: 'mendan-social-proof-2026',
+    hypothesis: '三者面談パックの本文に「内申点・偏差値の実測値をそのまま使える」というデータ根拠訴求を加えると、既定本文より affiliate_click が伸びる（社会証明型A/B）。',
+    status: 'queued',
+    arms: [
+      { id: 'control', label: '既定本文（汎用訴求）' },
+      {
+        id: 'source-authority',
+        label: 'データ根拠訴求',
+        body: 'ご家庭で計算した内申点・偏差値の実測値をそのまま面談準備に使えます。面談前に、対策の相談先も確認しておきましょう。',
+      },
+    ],
+    primaryMetric: 'affiliate_click',
+    placement: 'mendan',
+    note: 'mendan-offer-2026（offer軸）とは別軸。「学校の先生も使っている」等の未検証な採用実績は主張しない。',
+  },
+
+  // ── 時期訴求型（urgency/timing A/B）×5 ──
+  {
+    id: 'suisen-urgency-2026',
+    hypothesis: '総合型選抜・学校推薦型選抜の出願時期（秋）が近いタイミングで時期を明示した見出しにすると、既定より affiliate_click が伸びる（時期訴求型A/B）。',
+    status: 'queued',
+    arms: [
+      { id: 'control', label: '既定見出し（制度解説フレーム）' },
+      { id: 'season-frame', label: '出願シーズン明示フレーム', heading: '出願シーズンに向けて、今のうちに学費の相談を' },
+    ],
+    primaryMetric: 'affiliate_click',
+    placement: 'suisen',
+    note: 'suisen-copy-2026（学費フレーム軸）とは別軸。断定日付は書かず「出願シーズン」という一般的な時期感のみ。秋（9-11月）に活性化するのが自然。',
+  },
+  {
+    id: 'jitsugika-urgency-2026',
+    hypothesis: '実技教科の評定は学期末の通知表で確定するため、時期を明示した見出しにすると既定より affiliate_click が伸びる（時期訴求型A/B）。',
+    status: 'queued',
+    arms: [
+      { id: 'control', label: '既定見出し（弱点克服フレーム）' },
+      { id: 'timing-frame', label: '通知表前の時期明示フレーム', heading: '次の通知表が出る前に、実技教科の対策を' },
+    ],
+    primaryMetric: 'affiliate_click',
+    placement: 'jitsugika',
+    note: 'jitsugika-copy-2026（内申点影響フレーム軸）とは別軸。学期末（7月・12月・3月頃）に活性化するのが自然。',
+  },
+  {
+    id: 'naishin-up-urgency-2026',
+    hypothesis: '内申点の上げ方面で、次の通知表が出る前という時期を明示した見出しにすると既定より affiliate_click が伸びる（時期訴求型A/B）。',
+    status: 'queued',
+    arms: [
+      { id: 'control', label: '既定見出し（汎用訴求）' },
+      { id: 'timing-frame', label: '通知表前の時期明示フレーム', heading: '次の通知表が出る前に、内申点の伸ばし方を確認' },
+    ],
+    primaryMetric: 'affiliate_click',
+    placement: 'naishin-up',
+    note: 'naishin-up-offer-2026（offer軸）とは別軸。',
+  },
+  {
+    id: 'dashboard-urgency-2026',
+    hypothesis: '成績ダッシュボードで、新しい記録を追加した直後という時期を明示した見出しにすると既定より affiliate_click が伸びる（時期訴求型A/B）。',
+    status: 'queued',
+    arms: [
+      { id: 'control', label: '既定見出し（汎用訴求）' },
+      { id: 'just-recorded-frame', label: '記録直後の時期明示フレーム', heading: '今回の記録が出た今だからこそ、次に向けた対策を' },
+    ],
+    primaryMetric: 'affiliate_click',
+    placement: 'dashboard',
+    note: 'dashboard-cta-copy-2026（前回比差分フレーム軸）とは別軸。',
+  },
+  {
+    id: 'futoukou-urgency-2026',
+    hypothesis: '不登校クラスタで「早めの相談ほど選べる選択肢が増える」という機会訴求にすると既定より affiliate_click が伸びる（時期訴求型A/B）。',
+    status: 'queued',
+    arms: [
+      { id: 'control', label: '既定見出し（汎用訴求）' },
+      { id: 'early-opportunity-frame', label: '早期相談の機会訴求フレーム', heading: '早めに相談するほど、選べる選択肢が増えます' },
+    ],
+    primaryMetric: 'affiliate_click',
+    placement: 'futoukou',
+    note: '対象読者の心理的負荷に配慮し、恐怖・強い緊急性を煽らず「早いほど選択肢が増える」という前向きな機会訴求に留める。futoukou-offer-2026・futoukou-headline-2026とは別軸。',
+  },
+
+  // ── 簡潔型（コピー短縮 A/B）×5 ──
+  {
+    id: 'hensachi-concise-2026',
+    hypothesis: '偏差値ツールの本文を短く簡潔にすると、既定の長め本文より cta_view→affiliate_click が伸びる（簡潔型A/B。読了負荷を下げて離脱を防ぐ仮説）。',
+    status: 'queued',
+    arms: [
+      { id: 'control', label: '既定本文（詳しめの説明）' },
+      { id: 'concise', label: '簡潔本文（1文に短縮）', body: '偏差値は伸ばし方次第。無料の資料でご家庭の対策を確認できます。' },
+    ],
+    primaryMetric: 'affiliate_click',
+    placement: 'hensachi',
+    note: 'hensachi-cta-color-2026・hensachi-headline-2026とは別軸。内容の主張は変えず文字数のみ短縮。',
+  },
+  {
+    id: 'hyotei-heikin-concise-2026',
+    hypothesis: '評定平均ツールの本文を短く簡潔にすると、既定の長め本文より affiliate_click が伸びる（簡潔型A/B）。',
+    status: 'queued',
+    arms: [
+      { id: 'control', label: '既定本文（詳しめの説明）' },
+      { id: 'concise', label: '簡潔本文（1文に短縮）', body: '評定平均は伸ばし方次第。無料の資料で対策を確認できます。' },
+    ],
+    primaryMetric: 'affiliate_click',
+    placement: 'hyotei-heikin',
+    note: 'hyotei-heikin-heading-2026・hyotei-heikin-social-proof-2026とは別軸。',
+  },
+  {
+    id: 'prefecture-concise-2026',
+    hypothesis: '県別ページの保護者CTA本文を短く簡潔にすると、既定の長め本文より affiliate_click が伸びる（簡潔型A/B）。',
+    status: 'queued',
+    arms: [
+      { id: 'control', label: '既定本文（詳しめの説明）' },
+      { id: 'concise', label: '簡潔本文（1文に短縮）', body: '内申点は今からの対策で変わります。無料の資料で確認できます。' },
+    ],
+    primaryMetric: 'affiliate_click',
+    placement: 'prefecture',
+    note: 'prefecture-order-2026・prefecture-social-proof-2026とは別軸。',
+  },
+  {
+    id: 'home-concise-2026',
+    hypothesis: 'トップページの保護者CTA本文を短く簡潔にすると、既定の長め本文より affiliate_click が伸びる（簡潔型A/B）。',
+    status: 'queued',
+    arms: [
+      { id: 'control', label: '既定本文（詳しめの説明）' },
+      { id: 'concise', label: '簡潔本文（1文に短縮）', body: '内申点・偏差値は今からの対策で変わります。無料の資料で確認できます。' },
+    ],
+    primaryMetric: 'affiliate_click',
+    placement: 'home',
+    note: 'home-cta-color-2026・home-social-proof-2026とは別軸。',
+  },
+  {
+    id: 'result-concise-2026',
+    hypothesis: '結果画面の保護者CTA本文を短く簡潔にすると、既定の長め本文より affiliate_click が伸びる（簡潔型A/B）。',
+    status: 'queued',
+    arms: [
+      { id: 'control', label: '既定本文（詳しめの説明）' },
+      { id: 'concise', label: '簡潔本文（1文に短縮）', body: 'この結果を踏まえた対策を、無料の資料で確認できます。' },
+    ],
+    primaryMetric: 'affiliate_click',
+    placement: 'result',
+    note: 'result-offer-2026・result-headline-2026・result-second-round-timing-2026とは別軸。',
+  },
+
+  // ── 保護者宛名型（見出しで「保護者の方へ」と直接呼びかけるA/B）×10 ──
+  {
+    id: 'blog-parent-address-2026',
+    hypothesis: '記事内CTAの見出しで「保護者の方へ」と直接呼びかけると、既定の汎用見出しより affiliate_click が伸びる（保護者宛名型A/B）。',
+    status: 'queued',
+    arms: [
+      { id: 'control', label: '既定見出し（汎用訴求）' },
+      { id: 'parent-address', label: '保護者宛名フレーム', heading: '保護者の方へ：お子さまの今の内申点・偏差値を無料で確認できます' },
+    ],
+    primaryMetric: 'affiliate_click',
+    placement: 'blog',
+    note: 'blog-cta-timing-2026・blog-offer-2026・blog-headline-2026とは別軸。',
+  },
+  {
+    id: 'dashboard-parent-address-2026',
+    hypothesis: '成績ダッシュボードの見出しで「保護者の方へ」と直接呼びかけると、既定より affiliate_click が伸びる（保護者宛名型A/B）。',
+    status: 'queued',
+    arms: [
+      { id: 'control', label: '既定見出し（汎用訴求）' },
+      { id: 'parent-address', label: '保護者宛名フレーム', heading: '保護者の方へ：お子さまの成績推移を踏まえた次の一手' },
+    ],
+    primaryMetric: 'affiliate_click',
+    placement: 'dashboard',
+    note: 'dashboard-cta-copy-2026・dashboard-urgency-2026とは別軸。',
+  },
+  {
+    id: 'mendan-parent-address-2026',
+    hypothesis: '三者面談パックの見出しで「保護者の方へ」と直接呼びかけると、既定より affiliate_click が伸びる（保護者宛名型A/B）。',
+    status: 'queued',
+    arms: [
+      { id: 'control', label: '既定見出し（汎用訴求）' },
+      { id: 'parent-address', label: '保護者宛名フレーム', heading: '保護者の方へ：三者面談前に準備しておきたいこと' },
+    ],
+    primaryMetric: 'affiliate_click',
+    placement: 'mendan',
+    note: 'mendan-offer-2026・mendan-social-proof-2026とは別軸。',
+  },
+  {
+    id: 'suisen-parent-address-2026',
+    hypothesis: '推薦・総合型選抜面の見出しで「保護者の方へ」と直接呼びかけると、既定より affiliate_click が伸びる（保護者宛名型A/B）。',
+    status: 'queued',
+    arms: [
+      { id: 'control', label: '既定見出し（制度解説フレーム）' },
+      { id: 'parent-address', label: '保護者宛名フレーム', heading: '保護者の方へ：推薦・総合型選抜後の学費、今から相談できます' },
+    ],
+    primaryMetric: 'affiliate_click',
+    placement: 'suisen',
+    note: 'suisen-copy-2026・suisen-urgency-2026とは別軸。',
+  },
+  {
+    id: 'naishin-up-parent-address-2026',
+    hypothesis: '内申点の上げ方面の見出しで「保護者の方へ」と直接呼びかけると、既定より affiliate_click が伸びる（保護者宛名型A/B）。',
+    status: 'queued',
+    arms: [
+      { id: 'control', label: '既定見出し（汎用訴求）' },
+      { id: 'parent-address', label: '保護者宛名フレーム', heading: '保護者の方へ：内申点を上げるためにご家庭でできること' },
+    ],
+    primaryMetric: 'affiliate_click',
+    placement: 'naishin-up',
+    note: 'naishin-up-offer-2026・naishin-up-urgency-2026とは別軸。',
+  },
+  {
+    id: 'jitsugika-parent-address-2026',
+    hypothesis: '実技教科対策面の見出しで「保護者の方へ」と直接呼びかけると、既定より affiliate_click が伸びる（保護者宛名型A/B）。',
+    status: 'queued',
+    arms: [
+      { id: 'control', label: '既定見出し（弱点克服フレーム）' },
+      { id: 'parent-address', label: '保護者宛名フレーム', heading: '保護者の方へ：実技教科の内申点、対策の選択肢があります' },
+    ],
+    primaryMetric: 'affiliate_click',
+    placement: 'jitsugika',
+    note: 'jitsugika-copy-2026・jitsugika-urgency-2026とは別軸。',
+  },
+  {
+    id: 'futoukou-parent-address-2026',
+    hypothesis: '不登校クラスタの見出しで「保護者の方へ」と直接呼びかけると、既定より affiliate_click が伸びる（保護者宛名型A/B）。',
+    status: 'queued',
+    arms: [
+      { id: 'control', label: '既定見出し（汎用訴求）' },
+      { id: 'parent-address', label: '保護者宛名フレーム', heading: '保護者の方へ：お子さまの「学校に行けない」を進路の不利にしない方法があります' },
+    ],
+    primaryMetric: 'affiliate_click',
+    placement: 'futoukou',
+    note: 'futoukou-offer-2026・futoukou-headline-2026・futoukou-urgency-2026とは別軸。文言はfutoukou-headline-2026と重複しないよう別表現にした。',
+  },
+  {
+    id: 'hiyou-parent-address-2026',
+    hypothesis: '学費シミュレーターの見出しで「保護者の方へ」と直接呼びかけると、既定より affiliate_click が伸びる（保護者宛名型A/B）。',
+    status: 'queued',
+    arms: [
+      { id: 'control', label: '既定見出し（一般論フレーム）' },
+      { id: 'parent-address', label: '保護者宛名フレーム', heading: '保護者の方へ：高校3年間の教育費、今から把握できます' },
+    ],
+    primaryMetric: 'affiliate_click',
+    placement: 'hiyou',
+    note: 'hiyou-copy-2026・hiyou-third-round-copy-2026・hiyou-social-proof-2026とは別軸。',
+  },
+  {
+    id: 'parent-lp-parent-address-2026',
+    hypothesis: '/hogoshaの見出しで「保護者の方へ」と直接呼びかけると、既定より affiliate_click が伸びる（保護者宛名型A/B）。',
+    status: 'queued',
+    arms: [
+      { id: 'control', label: '既定見出し（汎用訴求）' },
+      { id: 'parent-address', label: '保護者宛名フレーム', heading: '保護者の方へ：お子さまの内申点・偏差値を今すぐ無料で確認' },
+    ],
+    primaryMetric: 'affiliate_click',
+    placement: 'parent-lp',
+    note: '既に保護者向けLPだが、明示的な宛名呼びかけの効きを検証。parent-lp-order-2026・parent-lp-headline-2026とは別軸。',
+  },
+  {
+    id: 'home-parent-address-2026',
+    hypothesis: 'トップページの見出しで「保護者の方へ」と直接呼びかけると、既定より affiliate_click が伸びる（保護者宛名型A/B）。',
+    status: 'queued',
+    arms: [
+      { id: 'control', label: '既定見出し（汎用訴求）' },
+      { id: 'parent-address', label: '保護者宛名フレーム', heading: '保護者の方へ：お子さまの内申点、今のままで大丈夫ですか？' },
+    ],
+    primaryMetric: 'affiliate_click',
+    placement: 'home',
+    note: 'home-cta-color-2026・home-social-proof-2026・home-concise-2026とは別軸。',
+  },
 ];
 
 /** id から実験定義を引く。 */
