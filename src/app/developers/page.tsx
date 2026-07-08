@@ -491,6 +491,11 @@ curl ${SITE_URL}/api/status`;
               大規模・データ再配布・年額ライセンス（CSV/JSONの定期更新フィード＋更新通知）は Scale で個別対応。
               <Link href="/contact" className="mx-1 font-semibold text-amber-700 underline">お問い合わせ</Link>ください。
             </p>
+            <p className="mt-3 text-xs text-slate-500">
+              塾・学習塾・進路指導の事業者様は、
+              <Link href="/partner" className="mx-1 font-semibold text-amber-700 underline">パートナー向けページ</Link>
+              で埋め込みウィジェットやデータ提供メニューもご覧いただけます。
+            </p>
           </div>
         </section>
 

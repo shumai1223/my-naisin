@@ -294,6 +294,14 @@ const TOOL_GROUPS: { id: string; heading: string; tools: Tool[] }[] = [
         color: 'orange',
       },
       {
+        title: '家庭教師の比較（訪問・オンライン・個別指導塾）',
+        description: '訪問型・オンライン家庭教師・個別指導塾の違いと料金相場、選び方を比較',
+        features: ['訪問/オンラインの違い', '料金相場を形態別に', '個別指導塾との比較', '選び方のポイント'],
+        href: '/katei-kyoshi',
+        icon: Wallet,
+        color: 'rose',
+      },
+      {
         title: '高校無償化・就学支援金ガイド',
         description: '公立・私立別の支援額、世帯年収の目安、奨学給付金・大学の奨学金まで解説',
         features: ['年収区分で支援額', '私立 上限39.6万円', '奨学給付金', '大学の奨学金'],
