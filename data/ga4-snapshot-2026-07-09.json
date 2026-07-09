@@ -1,0 +1,89 @@
+{
+  "meta": {
+    "property": "540358022",
+    "fetchedAt": "2026-07-09",
+    "method": "GA4 Data API (MCP・監督付きセッション)。7/20ゲート先行読み＋placement/rage実データ＋トリップワイヤー判定。",
+    "note": "placementカスタムディメンションは2026-07-08頃登録のため、それ以前のイベントは(not set)に落ちる。el_*(rage犯人特定用)は未登録と判明＝GA4管理画面での追加登録が必要(👤・L-9ブロッカー)。"
+  },
+  "funnelSinceAuditHideRemoval": {
+    "dateRange": "2026-07-04..2026-07-09",
+    "events": {
+      "cta_view": { "count": 451, "users": 183 },
+      "calc_complete": { "count": 397, "users": 122 },
+      "result_view": { "count": 199, "users": 121 },
+      "line_friend_click": { "count": 5, "users": 5 },
+      "affiliate_click": { "count": 3, "users": 3 },
+      "lead_submit": { "count": 0, "users": 0 },
+      "form_start": { "count": 1, "users": 1 },
+      "share_to_parent": { "count": 6, "users": 3 },
+      "parent_landing_view": { "count": 0, "users": 0 },
+      "ai_referral": { "count": 13, "users": 8 },
+      "session_start": { "count": 372, "users": 290 }
+    },
+    "reading": "BoFu転換は依然ほぼ0(cta_view451→換金系9)。parent_landing_view=0継続＝C_p≈0。/hogoshaが未インデックス(Discovered止まり)のため保護者の自然流入経路が存在しないことと整合。"
+  },
+  "ctaViewByPlacement": {
+    "dateRange": "2026-07-01..2026-07-09",
+    "note": "placementディメンション初の実データ(0-4登録の成果)。(not set)219は登録前分。",
+    "rows": {
+      "mendan-bridge": 130,
+      "parent-lead": 64,
+      "hensachi": 60,
+      "shindan": 25,
+      "hyotei-heikin": 24,
+      "result": 23,
+      "naishin-up": 18,
+      "prefecture": 16,
+      "blog": 11,
+      "parent-lp": 9,
+      "hiyou": 6,
+      "mendan": 4,
+      "juku-hiyou": 1,
+      "(not set)": 219
+    }
+  },
+  "rageClickByPage": {
+    "dateRange": "2026-07-01..2026-07-09",
+    "rows": {
+      "/tokyo/total-score": 13,
+      "/reverse": 9,
+      "/hensachi/shiboukou": 7,
+      "/hensachi": 5,
+      "/koukou-hiyou": 2,
+      "/": 1,
+      "/aichi/naishin": 1,
+      "/hyogo/naishin": 1,
+      "/kanagawa/s-value": 1,
+      "/nara/naishin": 1
+    },
+    "blocker": "el_tag/el_text等のカスタムディメンションがGA4未登録のため要素レベルの犯人特定は不可(👤登録後1-2週で蓄積)。"
+  },
+  "tripwires": {
+    "dateRange": "GSC 2026-06-11..2026-07-08",
+    "w1_hensachiCtr4wUnder3.2pct": {
+      "triggered": false,
+      "weeklyCtr": [0.0457, 0.0407, 0.049, 0.0404],
+      "note": "週次CTR 4.57%→4.07%→4.90%→4.04%(最終週は7/2-6の5日)。閾値3.2%未満の週はゼロ。posも5.3-6.1で安定。"
+    },
+    "w2_impUpClickFlat": {
+      "triggered": false,
+      "note": "28d imp201,426(前回診断158,657)×clicks6,167(前回5,820)=imp+27%/clicks+6%の軽い乖離はあるが、窓が異なる(6/7-7/3 vs 6/11-7/8)＋新規面のimp立ち上がり期のため正常範囲。次回週次で継続観察。"
+    },
+    "w3_aiReferralShareOver10pct": {
+      "triggered": false,
+      "note": "7/4以降 ai_referral 13 vs session_start 372 ≈ 3.5%。"
+    },
+    "w4_naishinHeadCtrHalved": {
+      "triggered": false,
+      "note": "「内申点 計算」28d CTR9.7%/pos3.3(前回7/5診断8.6%/pos3.4)＝むしろ改善。"
+    }
+  },
+  "indexInspection": {
+    "date": "2026-07-09",
+    "results": {
+      "/hogosha": "Discovered - currently not indexed(前回7/5=unknown→前進。sitemap+blogタグページから発見済み・クロール待ち)",
+      "/juku-shindan": "Discovered - currently not indexed(前回7/5=unknown+sitemap漏れ→0-1修正が効いてsitemap経由で発見済み・クロール待ち)",
+      "/pref/tokyo": "URL is unknown to Google(P-1のsitemap登録push=今日03:39のため未クロールは正常。1-2週後に再検査)"
+    }
+  }
+}
