@@ -3,16 +3,7 @@
 import * as React from 'react';
 import { Calculator, RotateCcw } from 'lucide-react';
 import { TargetDistancePanel } from '@/components/TotalScore/TargetDistancePanel';
-
-// 大阪府公立高校の選抜タイプ別比率（学力検査:調査書）
-// タイプ1：7:3（学力重視）／タイプ2：6:4／タイプ3：5:5／タイプ4：4:6／タイプ5：3:7（内申重視）
-const TYPE_OPTIONS = [
-  { label: 'タイプⅠ（7:3 学力最重視）', gakuryoku: 0.7, naishin: 0.3 },
-  { label: 'タイプⅡ（6:4 学力重視）', gakuryoku: 0.6, naishin: 0.4 },
-  { label: 'タイプⅢ（5:5 標準）', gakuryoku: 0.5, naishin: 0.5 },
-  { label: 'タイプⅣ（4:6 内申重視）', gakuryoku: 0.4, naishin: 0.6 },
-  { label: 'タイプⅤ（3:7 内申最重視）', gakuryoku: 0.3, naishin: 0.7 },
-];
+import { OSAKA_TYPE_OPTIONS, OSAKA_TOTAL_SCORE_MAX, computeOsakaTotalScore, osakaRankLabel } from '@/lib/total-score/osaka';
 
 export interface OsakaTotalScoreResult {
   total: number;
@@ -32,23 +23,18 @@ export function OsakaTotalScoreCalculator({ onResult }: OsakaTotalScoreCalculato
   const naishin = parseFloat(naishinInput) || 0; // 450点満点（内申点）
   const gakuryoku = parseFloat(gakuryokuInput) || 0; // 450点満点（学力検査）
 
-  const type = TYPE_OPTIONS[typeIndex];
-
-  // 大阪府の総合点は学力検査 × 比率 + 内申 × 比率（簡略化）
-  // 公式の計算では学力検査と調査書がそれぞれ満点450点として、タイプ別係数を掛ける
-  const gakuryokuScore = gakuryoku * type.gakuryoku;
-  const naishinScore = naishin * type.naishin;
-  const total = Math.round(gakuryokuScore + naishinScore);
-
-  // 大阪府の総合点満点はタイプにより異なる（450点基準）
-  const maxTotal = 450;
-  const percent = (total / maxTotal) * 100;
+  const { gakuryokuScore, naishinScore, total, percent, type } = computeOsakaTotalScore({
+    naishinRaw: naishin,
+    gakuryokuRaw: gakuryoku,
+    typeIndex,
+  });
+  const maxTotal = OSAKA_TOTAL_SCORE_MAX;
 
   const hasInput = naishinInput !== '' || gakuryokuInput !== '';
 
   React.useEffect(() => {
     onResult?.(hasInput ? { total, max: maxTotal } : null);
-  }, [hasInput, total, onResult]);
+  }, [hasInput, total, maxTotal, onResult]);
 
   const reset = () => {
     setNaishinInput('');
@@ -65,14 +51,7 @@ export function OsakaTotalScoreCalculator({ onResult }: OsakaTotalScoreCalculato
     return 'text-blue-700';
   };
 
-  const getRankLabel = () => {
-    if (total >= 380) return '最難関校レベル（北野・茨木・天王寺・三国丘）';
-    if (total >= 350) return '難関校レベル（豊中・大手前・四條畷・高津）';
-    if (total >= 310) return '上位校レベル（春日丘・寝屋川・池田・千里）';
-    if (total >= 270) return '中堅上位校レベル（牧野・刀根山・八尾）';
-    if (total >= 220) return '中堅校レベル';
-    return '基礎を固める段階';
-  };
+  const getRankLabel = () => osakaRankLabel(total);
 
   return (
     <div className="rounded-2xl border-2 border-orange-200 bg-white shadow-lg overflow-hidden">
@@ -133,7 +112,7 @@ export function OsakaTotalScoreCalculator({ onResult }: OsakaTotalScoreCalculato
         <div>
           <label className="block text-sm font-bold text-slate-800 mb-1">志望校の選抜タイプ（学力:内申）</label>
           <div className="space-y-1">
-            {TYPE_OPTIONS.map((opt, i) => (
+            {OSAKA_TYPE_OPTIONS.map((opt, i) => (
               <button
                 key={opt.label}
                 type="button"

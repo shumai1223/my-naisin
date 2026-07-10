@@ -25,6 +25,7 @@ import { isStatsMetric, buildSuppressedAggregate, STATS_MIN_SAMPLE_SIZE, STATS_M
 import { getStatsValues } from '@/lib/stats-db';
 import { computeTokyoTotalScore, tokyoRankLabel, TOKYO_ESAT_GRADES } from '@/lib/total-score/tokyo';
 import { computeKanagawaSValue, kanagawaRankLabel, KANAGAWA_RATIO_OPTIONS } from '@/lib/total-score/kanagawa';
+import { computeOsakaTotalScore, osakaRankLabel, OSAKA_TYPE_OPTIONS } from '@/lib/total-score/osaka';
 
 /**
  * MCP互換エンドポイント（堀B / AIネイティブの城①）。
@@ -317,6 +318,19 @@ const TOOLS = [
         gakuryokuRaw: { type: 'number', description: '学力検査点素点（500点満点）。' },
         tokushokuRaw: { type: 'number', description: '任意。特色検査の得点（最大100点。難関校のみ実施）。未指定はS2=S1。' },
         ratioIndex: { type: 'number', description: `任意。比率パターンのインデックス（既定0=4:6標準）。選択肢: ${KANAGAWA_RATIO_OPTIONS.map((o, i) => `${i}=${o.label}`).join(', ')}` },
+      },
+      required: ['naishinRaw', 'gakuryokuRaw'],
+    },
+  },
+  {
+    name: 'calculate_osaka_total_score',
+    description: `大阪府の総合点（学力検査450点+内申450点を志望校の選抜タイプ別比率で加重合算/450点満点）を計算する。統一エンジンとは配点構造が異なる個別実装。選抜タイプ: ${OSAKA_TYPE_OPTIONS.map((o, i) => `${i}=${o.label}`).join(', ')}。`,
+    inputSchema: {
+      type: 'object',
+      properties: {
+        naishinRaw: { type: 'number', description: '内申点素点（450点満点＝3年間合算・9教科）。' },
+        gakuryokuRaw: { type: 'number', description: '学力検査点素点（450点満点＝5教科×90点）。' },
+        typeIndex: { type: 'number', description: `任意。選抜タイプのインデックス（既定2=タイプⅢ 5:5標準）。選択肢: ${OSAKA_TYPE_OPTIONS.map((o, i) => `${i}=${o.label}`).join(', ')}` },
       },
       required: ['naishinRaw', 'gakuryokuRaw'],
     },
@@ -620,6 +634,17 @@ async function runTool(name: string, args: Record<string, unknown>) {
     const ratioIndex = Number.isFinite(Number(args.ratioIndex)) ? Number(args.ratioIndex) : undefined;
     const result = computeKanagawaSValue({ naishinRaw, gakuryokuRaw, tokushokuRaw, ratioIndex });
     return toolText({ ...result, rankLabel: kanagawaRankLabel(result.s1) });
+  }
+
+  if (name === 'calculate_osaka_total_score') {
+    const naishinRaw = Number(args.naishinRaw);
+    const gakuryokuRaw = Number(args.gakuryokuRaw);
+    if (!Number.isFinite(naishinRaw) || !Number.isFinite(gakuryokuRaw)) {
+      return toolText({ error: 'invalid_params', message: 'naishinRaw・gakuryokuRawは数値で指定してください。' });
+    }
+    const typeIndex = Number.isFinite(Number(args.typeIndex)) ? Number(args.typeIndex) : undefined;
+    const result = computeOsakaTotalScore({ naishinRaw, gakuryokuRaw, typeIndex });
+    return toolText({ ...result, rankLabel: osakaRankLabel(result.total) });
   }
 
   return null;
