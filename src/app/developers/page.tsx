@@ -290,7 +290,32 @@ curl ${SITE_URL}/api/status`;
             </a>
           </p>
 
-          <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">⑥ 偏差値 対応表（正規分布から算出）</h3>
+          <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">⑥ 偏差値の計算・逆算・順位変換</h3>
+          <p className="mb-2 text-sm text-slate-600">
+            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">GET /api/hensachi</code>
+            {' — '}
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">?score=&average=&stdDev=</code>
+            で偏差値を計算、
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">?targetHensachi=&average=&stdDev=</code>
+            で必要点数を逆算、
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">?rank=&population=</code>
+            /
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">?hensachi=&population=</code>
+            で順位⇄偏差値を相互変換できます。
+          </p>
+          <p className="mt-1 text-xs text-slate-500">
+            実際に開く：{' '}
+            <a
+              href="/api/hensachi?score=70&average=60&stdDev=10"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 font-semibold text-indigo-600 underline"
+            >
+              /api/hensachi?score=70&amp;average=60&amp;stdDev=10 <ExternalLink className="h-3 w-3" />
+            </a>
+          </p>
+
+          <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">⑥b 偏差値 対応表（正規分布から算出）</h3>
           <p className="mb-2 text-sm text-slate-600">
             <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">GET /api/hensachi/percentile-table</code>
             — 偏差値→上位%・母集団順位の対応表。
@@ -369,7 +394,13 @@ curl ${SITE_URL}/api/status`;
             <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">reverse_calc</code>
             <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">target_to_required_grades</code>
             <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">build_study_plan</code>
-            の7ツールを呼び出せます。さらに <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">resources/list・resources/read</code>（47都道府県を読める一次資料として公開）と
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">calculate_hensachi</code>
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">reverse_calc_hensachi</code>
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">hensachi_rank_convert</code>
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">list_total_score_systems</code>
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">calculate_total_score</code>
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">reverse_calc_total_score</code>
+            の13ツールを呼び出せます。さらに <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">resources/list・resources/read</code>（47都道府県を読める一次資料として公開）と
             <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">prompts/list・prompts/get</code>（内申点を確定値で答え出典を添える定型プロンプト）に対応しています。
           </p>
 

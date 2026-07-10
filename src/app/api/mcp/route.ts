@@ -15,6 +15,9 @@ import {
   SITE_URL,
 } from '@/lib/naishin-dataset';
 import type { SubjectKey } from '@/lib/types';
+import { calcHensachi, requiredScoreForHensachi, rankToHensachi, hensachiToRank, roundHensachi } from '@/lib/hensachi';
+import { TOTAL_SCORE_SYSTEMS, VERIFIED_TOTAL_SCORE_CODES, getTotalScoreSystem } from '@/lib/total-score/registry';
+import { computeTotalScore, requiredAcademicRaw } from '@/lib/total-score/engine';
 
 /**
  * MCP互換エンドポイント（堀B / AIネイティブの城①）。
@@ -158,6 +161,79 @@ const TOOLS = [
       required: ['prefectureCode', 'currentNaishin', 'targetNaishin', 'weeksRemaining'],
     },
   },
+  {
+    name: 'calculate_hensachi',
+    description: '得点・平均点・標準偏差から偏差値（50 + 10×(得点−平均点)÷標準偏差）を計算する。',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        score: { type: 'number', description: '本人の得点。' },
+        average: { type: 'number', description: '平均点。' },
+        stdDev: { type: 'number', description: '標準偏差（0より大きい値）。不明な場合の一般的な目安は15。' },
+      },
+      required: ['score', 'average', 'stdDev'],
+    },
+  },
+  {
+    name: 'reverse_calc_hensachi',
+    description: '目標偏差値・平均点・標準偏差から、必要な得点を逆算する。',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        targetHensachi: { type: 'number', description: '目標とする偏差値。' },
+        average: { type: 'number', description: '平均点。' },
+        stdDev: { type: 'number', description: '標準偏差（0より大きい値）。' },
+      },
+      required: ['targetHensachi', 'average', 'stdDev'],
+    },
+  },
+  {
+    name: 'hensachi_rank_convert',
+    description: '偏差値⇄母集団中の順位を正規分布近似で相互変換する。direction="to_rank"で偏差値→順位、"to_hensachi"で順位→偏差値。',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        direction: { type: 'string', description: '"to_rank" または "to_hensachi"。' },
+        hensachi: { type: 'number', description: 'direction="to_rank"のとき必須。偏差値。' },
+        rank: { type: 'number', description: 'direction="to_hensachi"のとき必須。順位（1始まり）。' },
+        population: { type: 'number', description: '母集団の人数（1以上）。' },
+      },
+      required: ['direction', 'population'],
+    },
+  },
+  {
+    name: 'list_total_score_systems',
+    description: '公立高校入試の総合得点（学力検査点＋内申点を合算する方式）を統一エンジンで計算できる都道府県一覧を返す（現時点で対応: 兵庫・京都・栃木・新潟・鳥取・愛知・千葉。他県は個別実装のためこのツール対象外）。',
+    inputSchema: { type: 'object', properties: {} },
+  },
+  {
+    name: 'calculate_total_score',
+    description: '学力検査点（素点）・調査書点（素点）から、指定県の方式で総合得点を計算する。対象県は list_total_score_systems を参照。',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        prefectureCode: { type: 'string', description: '都道府県コード（例: hyogo）。list_total_score_systemsで対応県を確認。' },
+        academicRaw: { type: 'number', description: '学力検査点の素点。' },
+        reportRaw: { type: 'number', description: '調査書点（内申点）の素点。' },
+        ratioOptionId: { type: 'string', description: '任意。県によって複数の傾斜配点オプションがある場合のID。' },
+      },
+      required: ['prefectureCode', 'academicRaw', 'reportRaw'],
+    },
+  },
+  {
+    name: 'reverse_calc_total_score',
+    description: '目標総合得点・調査書点（素点）から、必要な学力検査点を逆算する。学校別の合格ボーダーは断定しない（ユーザー自身が設定した目標点に対する距離のみ）。',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        prefectureCode: { type: 'string', description: '都道府県コード（例: hyogo）。' },
+        targetTotal: { type: 'number', description: '目標とする総合得点。' },
+        reportRaw: { type: 'number', description: '調査書点（内申点）の素点。' },
+        ratioOptionId: { type: 'string', description: '任意。傾斜配点オプションID。' },
+      },
+      required: ['prefectureCode', 'targetTotal', 'reportRaw'],
+    },
+  },
 ] as const;
 
 /**
@@ -291,6 +367,92 @@ function runTool(name: string, args: Record<string, unknown>) {
       return toolText({ error: 'not_found', message: `都道府県コード「${prefectureCode}」は見つかりませんでした。` });
     }
     return toolText(result);
+  }
+
+  if (name === 'calculate_hensachi') {
+    const score = Number(args.score);
+    const average = Number(args.average);
+    const stdDev = Number(args.stdDev);
+    const result = calcHensachi(score, average, stdDev);
+    if (result === null) {
+      return toolText({ error: 'invalid_params', message: 'score・average・stdDev（stdDev>0）は数値で指定してください。' });
+    }
+    return toolText({ score, average, stdDev, hensachi: roundHensachi(result) });
+  }
+
+  if (name === 'reverse_calc_hensachi') {
+    const targetHensachi = Number(args.targetHensachi);
+    const average = Number(args.average);
+    const stdDev = Number(args.stdDev);
+    const result = requiredScoreForHensachi(targetHensachi, average, stdDev);
+    if (result === null) {
+      return toolText({ error: 'invalid_params', message: 'targetHensachi・average・stdDev（stdDev>0）は数値で指定してください。' });
+    }
+    return toolText({ targetHensachi, average, stdDev, requiredScore: Math.round(result * 10) / 10 });
+  }
+
+  if (name === 'hensachi_rank_convert') {
+    const direction = String(args.direction ?? '');
+    const population = Number(args.population);
+    if (!Number.isFinite(population) || population <= 0) {
+      return toolText({ error: 'invalid_params', message: 'population（1以上）は数値で指定してください。' });
+    }
+    if (direction === 'to_rank') {
+      const hensachi = Number(args.hensachi);
+      if (!Number.isFinite(hensachi)) {
+        return toolText({ error: 'invalid_params', message: 'direction="to_rank"にはhensachiが必要です。' });
+      }
+      return toolText({ direction, hensachi, population, rank: hensachiToRank(hensachi, population) });
+    }
+    if (direction === 'to_hensachi') {
+      const rank = Number(args.rank);
+      const result = rankToHensachi(rank, population);
+      if (result === null) {
+        return toolText({ error: 'invalid_params', message: 'rank は1〜populationの範囲で指定してください。' });
+      }
+      return toolText({ direction, rank, population, hensachi: roundHensachi(result) });
+    }
+    return toolText({ error: 'invalid_params', message: 'directionは"to_rank"または"to_hensachi"を指定してください。' });
+  }
+
+  if (name === 'list_total_score_systems') {
+    const systems = VERIFIED_TOTAL_SCORE_CODES.map((code) => {
+      const s = TOTAL_SCORE_SYSTEMS[code];
+      return { code: s.code, name: s.name, localTerm: s.localTerm, academic: s.academic, report: s.report };
+    });
+    return toolText({ count: systems.length, systems });
+  }
+
+  if (name === 'calculate_total_score') {
+    const prefectureCode = String(args.prefectureCode ?? '').trim();
+    const system = getTotalScoreSystem(prefectureCode);
+    if (!system) {
+      return toolText({ error: 'not_found', message: `都道府県コード「${prefectureCode}」の総合得点システムは見つかりませんでした（list_total_score_systemsで対応県を確認してください）。` });
+    }
+    const academicRaw = Number(args.academicRaw);
+    const reportRaw = Number(args.reportRaw);
+    if (!Number.isFinite(academicRaw) || !Number.isFinite(reportRaw)) {
+      return toolText({ error: 'invalid_params', message: 'academicRaw・reportRawは数値で指定してください。' });
+    }
+    const ratioOptionId = typeof args.ratioOptionId === 'string' ? args.ratioOptionId : undefined;
+    const result = computeTotalScore(system, { academicRaw, reportRaw, ratioOptionId });
+    return toolText({ mode: 'compute', code: system.code, name: system.name, ...result });
+  }
+
+  if (name === 'reverse_calc_total_score') {
+    const prefectureCode = String(args.prefectureCode ?? '').trim();
+    const system = getTotalScoreSystem(prefectureCode);
+    if (!system) {
+      return toolText({ error: 'not_found', message: `都道府県コード「${prefectureCode}」の総合得点システムは見つかりませんでした（list_total_score_systemsで対応県を確認してください）。` });
+    }
+    const targetTotal = Number(args.targetTotal);
+    const reportRaw = Number(args.reportRaw);
+    if (!Number.isFinite(targetTotal) || !Number.isFinite(reportRaw)) {
+      return toolText({ error: 'invalid_params', message: 'targetTotal・reportRawは数値で指定してください。' });
+    }
+    const ratioOptionId = typeof args.ratioOptionId === 'string' ? args.ratioOptionId : undefined;
+    const result = requiredAcademicRaw(system, { targetTotal, reportRaw, ratioOptionId });
+    return toolText({ mode: 'reverse', code: system.code, name: system.name, ...result });
   }
 
   return null;

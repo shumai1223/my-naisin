@@ -29,11 +29,13 @@ describe('/api/mcp JSON-RPC 契約', () => {
     expect(json.result.capabilities.prompts).toBeDefined();
   });
 
-  test('tools/list は7ツールを返す', async () => {
+  test('tools/list は13ツールを返す（S-5でhensachi/total-score系6本を追加）', async () => {
     const res = await POST(rpc('tools/list'));
     const json = await res.json();
-    expect(json.result.tools).toHaveLength(7);
+    expect(json.result.tools).toHaveLength(13);
     expect(json.result.tools.map((t: { name: string }) => t.name)).toContain('build_study_plan');
+    expect(json.result.tools.map((t: { name: string }) => t.name)).toContain('calculate_hensachi');
+    expect(json.result.tools.map((t: { name: string }) => t.name)).toContain('calculate_total_score');
   });
 
   test('tools/call calculate_naishin は確定値(東京オール5=65)を返す', async () => {
@@ -43,6 +45,75 @@ describe('/api/mcp JSON-RPC 契約', () => {
     const json = await res.json();
     const data = JSON.parse(json.result.content[0].text);
     expect(data.total).toBe(65);
+  });
+
+  test('tools/call calculate_hensachi は式通りの偏差値を返す', async () => {
+    const res = await POST(
+      rpc('tools/call', { name: 'calculate_hensachi', arguments: { score: 70, average: 60, stdDev: 10 } })
+    );
+    const json = await res.json();
+    const data = JSON.parse(json.result.content[0].text);
+    expect(data.hensachi).toBe(60);
+  });
+
+  test('tools/call reverse_calc_hensachi は必要点数を逆算する', async () => {
+    const res = await POST(
+      rpc('tools/call', { name: 'reverse_calc_hensachi', arguments: { targetHensachi: 60, average: 60, stdDev: 10 } })
+    );
+    const json = await res.json();
+    const data = JSON.parse(json.result.content[0].text);
+    expect(data.requiredScore).toBe(70);
+  });
+
+  test('tools/call hensachi_rank_convert（to_rank/to_hensachi 双方向）', async () => {
+    const toRank = await POST(
+      rpc('tools/call', { name: 'hensachi_rank_convert', arguments: { direction: 'to_rank', hensachi: 50, population: 300 } })
+    );
+    const toRankData = JSON.parse((await toRank.json()).result.content[0].text);
+    expect(toRankData.rank).toBe(150);
+
+    const toHensachi = await POST(
+      rpc('tools/call', { name: 'hensachi_rank_convert', arguments: { direction: 'to_hensachi', rank: 150, population: 300 } })
+    );
+    const toHensachiData = JSON.parse((await toHensachi.json()).result.content[0].text);
+    expect(toHensachiData.hensachi).toBeCloseTo(50, 1);
+  });
+
+  test('tools/call list_total_score_systems はregistryの県一覧を返す', async () => {
+    const res = await POST(rpc('tools/call', { name: 'list_total_score_systems', arguments: {} }));
+    const data = JSON.parse((await res.json()).result.content[0].text);
+    expect(data.count).toBeGreaterThanOrEqual(5);
+    expect(data.systems.map((s: { code: string }) => s.code)).toContain('hyogo');
+  });
+
+  test('tools/call calculate_total_score / reverse_calc_total_score は既存REST同等の結果を返す', async () => {
+    const compute = await POST(
+      rpc('tools/call', {
+        name: 'calculate_total_score',
+        arguments: { prefectureCode: 'hyogo', academicRaw: 500, reportRaw: 250 },
+      })
+    );
+    const computeData = JSON.parse((await compute.json()).result.content[0].text);
+    expect(computeData.mode).toBe('compute');
+    expect(computeData.total).toBe(500);
+
+    const reverse = await POST(
+      rpc('tools/call', {
+        name: 'reverse_calc_total_score',
+        arguments: { prefectureCode: 'hyogo', targetTotal: 500, reportRaw: 250 },
+      })
+    );
+    const reverseData = JSON.parse((await reverse.json()).result.content[0].text);
+    expect(reverseData.mode).toBe('reverse');
+    expect(reverseData.requiredAcademicRaw).toBe(500);
+  });
+
+  test('tools/call calculate_total_score は未対応県で not_found を返す', async () => {
+    const res = await POST(
+      rpc('tools/call', { name: 'calculate_total_score', arguments: { prefectureCode: 'nowhere', academicRaw: 1, reportRaw: 1 } })
+    );
+    const data = JSON.parse((await res.json()).result.content[0].text);
+    expect(data.error).toBe('not_found');
   });
 
   test('resources/list は47件、resources/read は該当県JSON', async () => {
@@ -73,7 +144,7 @@ describe('/api/mcp JSON-RPC 契約', () => {
   test('GET ディスカバリはツール/メソッド一覧を返す', async () => {
     const res = GET();
     const json = await res.json();
-    expect(json.tools).toHaveLength(7);
+    expect(json.tools).toHaveLength(13);
     expect(json.methods).toContain('resources/read');
   });
 });

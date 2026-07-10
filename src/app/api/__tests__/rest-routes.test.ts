@@ -12,6 +12,7 @@ import { GET as openapiGet } from '@/app/api/openapi/route';
 import { GET as statusGet } from '@/app/api/status/route';
 import { GET as totalScoreIndexGet } from '@/app/api/total-score/route';
 import { GET as totalScoreDetailGet } from '@/app/api/total-score/[code]/route';
+import { GET as hensachiGet } from '@/app/api/hensachi/route';
 import { GET as percentileTableGet } from '@/app/api/hensachi/percentile-table/route';
 import { GET as educationCostGet } from '@/app/api/education-cost/route';
 import { GET as pathToUniversityGet } from '@/app/api/education-cost/path-to-university/route';
@@ -91,6 +92,56 @@ describe('/api/total-score（E-4：総合得点方式のAPI化）', () => {
       params: Promise.resolve({ code: 'nowhere' }),
     });
     expect(res.status).toBe(404);
+  });
+});
+
+describe('/api/hensachi（S-5：偏差値の計算・逆算・順位変換）', () => {
+  test('パラメータ無しはメタ情報（エンドポイント一覧）を返す', async () => {
+    const json = await (await hensachiGet(req('https://my-naishin.com/api/hensachi'))).json();
+    expect(json.meta.endpoints.compute).toContain('score=');
+    expect(json.meta.toolUrl).toBe('https://my-naishin.com/hensachi');
+  });
+
+  test('score/average/stdDev指定で偏差値を計算する', async () => {
+    const json = await (
+      await hensachiGet(req('https://my-naishin.com/api/hensachi?score=70&average=60&stdDev=10'))
+    ).json();
+    expect(json.mode).toBe('compute');
+    expect(json.hensachi).toBe(60);
+  });
+
+  test('targetHensachi指定で必要点数を逆算する', async () => {
+    const json = await (
+      await hensachiGet(req('https://my-naishin.com/api/hensachi?targetHensachi=60&average=60&stdDev=10'))
+    ).json();
+    expect(json.mode).toBe('reverse');
+    expect(json.requiredScore).toBe(70);
+  });
+
+  test('rank/population指定で順位から偏差値を逆算する', async () => {
+    const json = await (
+      await hensachiGet(req('https://my-naishin.com/api/hensachi?rank=150&population=300'))
+    ).json();
+    expect(json.mode).toBe('rank_to_hensachi');
+    expect(json.hensachi).toBeCloseTo(50, 1);
+  });
+
+  test('hensachi/population指定で偏差値から順位を算出する', async () => {
+    const json = await (
+      await hensachiGet(req('https://my-naishin.com/api/hensachi?hensachi=50&population=300'))
+    ).json();
+    expect(json.mode).toBe('hensachi_to_rank');
+    expect(json.rank).toBe(150);
+  });
+
+  test('不正なパラメータ（stdDev=0）は400', async () => {
+    const res = await hensachiGet(req('https://my-naishin.com/api/hensachi?score=70&average=60&stdDev=0'));
+    expect(res.status).toBe(400);
+  });
+
+  test('不正なパラメータ（population未指定でrank指定）は400', async () => {
+    const res = await hensachiGet(req('https://my-naishin.com/api/hensachi?rank=10'));
+    expect(res.status).toBe(400);
   });
 });
 
@@ -233,5 +284,13 @@ describe('/api/openapi', () => {
     expect(json.openapi).toBe('3.1.0');
     expect(json.paths['/api/naishin']).toBeDefined();
     expect(json.paths['/api/naishin/compare']).toBeDefined();
+  });
+
+  test('S-5：hensachi/total-score系エンドポイントが記載されている（従来は未記載だった穴）', async () => {
+    const json = await (await openapiGet()).json();
+    expect(json.paths['/api/hensachi']).toBeDefined();
+    expect(json.paths['/api/hensachi/percentile-table']).toBeDefined();
+    expect(json.paths['/api/total-score']).toBeDefined();
+    expect(json.paths['/api/total-score/{code}']).toBeDefined();
   });
 });

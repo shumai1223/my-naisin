@@ -105,6 +105,65 @@ export function GET() {
           },
         },
       },
+      '/api/hensachi': {
+        get: {
+          operationId: 'calculateHensachi',
+          summary: '偏差値の計算・逆算・順位変換（S-5）',
+          description:
+            '?score=&average=&stdDev= で偏差値を計算。?targetHensachi=&average=&stdDev= で必要点数を逆算。' +
+            '?rank=&population= で順位から偏差値、?hensachi=&population= で偏差値から順位を算出。パラメータ無しはエンドポイント一覧。',
+          parameters: [
+            { name: 'score', in: 'query', required: false, description: '得点。', schema: { type: 'number', example: 70 } },
+            { name: 'average', in: 'query', required: false, description: '平均点。', schema: { type: 'number', example: 60 } },
+            { name: 'stdDev', in: 'query', required: false, description: '標準偏差（>0）。', schema: { type: 'number', example: 10 } },
+            { name: 'targetHensachi', in: 'query', required: false, description: '目標偏差値（逆算モード）。', schema: { type: 'number', example: 65 } },
+            { name: 'rank', in: 'query', required: false, description: '順位（rank_to_hensachiモード）。', schema: { type: 'number', example: 150 } },
+            { name: 'hensachi', in: 'query', required: false, description: '偏差値（hensachi_to_rankモード）。', schema: { type: 'number', example: 50 } },
+            { name: 'population', in: 'query', required: false, description: '母集団の人数。', schema: { type: 'number', example: 300 } },
+          ],
+          responses: {
+            '200': { description: '成功' },
+            '400': { description: 'パラメータが不正（数値以外・stdDev<=0等）' },
+          },
+        },
+      },
+      '/api/hensachi/percentile-table': {
+        get: {
+          operationId: 'hensachiPercentileTable',
+          summary: '偏差値→上位%・母集団順位の対応表',
+          description: '?values=45,50,55 で任意の偏差値リストを指定可能（カンマ区切り）。未指定は既定の代表偏差値（30〜75）。',
+          parameters: [
+            { name: 'values', in: 'query', required: false, description: 'カンマ区切りの偏差値リスト。', schema: { type: 'string', example: '45,50,55,60,65' } },
+          ],
+          responses: { '200': { description: '成功' }, '400': { description: 'valuesが数値でない' } },
+        },
+      },
+      '/api/total-score': {
+        get: {
+          operationId: 'listTotalScoreSystems',
+          summary: '統一エンジンで計算可能な総合得点方式（学力検査点＋内申点）の一覧',
+          description: '統一エンジン（registry）を持つ5県のみ対象。東京・神奈川等の個別実装8県は含まれない。',
+          responses: { '200': { description: '成功' } },
+        },
+      },
+      '/api/total-score/{code}': {
+        get: {
+          operationId: 'getTotalScoreSystem',
+          summary: '特定県の総合得点システム詳細／?academicRaw=&reportRaw= で計算／?targetTotal=&reportRaw= で逆算',
+          parameters: [
+            { name: 'code', in: 'path', required: true, description: '都道府県コード（例: hyogo）。', schema: { type: 'string', example: 'hyogo' } },
+            { name: 'academicRaw', in: 'query', required: false, description: '学力検査点の素点（計算モード）。', schema: { type: 'number', example: 500 } },
+            { name: 'reportRaw', in: 'query', required: false, description: '調査書点の素点。', schema: { type: 'number', example: 250 } },
+            { name: 'targetTotal', in: 'query', required: false, description: '目標総合得点（逆算モード）。', schema: { type: 'number', example: 500 } },
+            { name: 'ratioOptionId', in: 'query', required: false, description: '任意。傾斜配点オプションID。', schema: { type: 'string' } },
+          ],
+          responses: {
+            '200': { description: '成功' },
+            '400': { description: 'パラメータが数値でない' },
+            '404': { description: '都道府県コードが見つからない（対応5県は /api/total-score を参照）' },
+          },
+        },
+      },
       '/api/openapi': {
         get: {
           operationId: 'getOpenApiSpec',
