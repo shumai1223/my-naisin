@@ -28,7 +28,7 @@ const NO_ACCESSIBLE_NAME_EXEMPT: Record<string, string> = {
   'src/app/contact/page.tsx:234': 'お問い合わせフォーム（同上）',
   'src/app/contact/page.tsx:254': 'お問い合わせフォーム（同上）',
   'src/app/contact/page.tsx:301': 'お問い合わせフォーム（同上）',
-  'src/app/glossary/GlossaryClient.tsx:222': '用語検索ボックス（計算機フォームのスコープ外・次周継続タスク候補）',
+  'src/app/glossary/GlossaryClient.tsx:226': '用語検索ボックス（計算機フォームのスコープ外・次周継続タスク候補）',
   'src/components/ErrorReportForm.tsx:82': 'エラー報告フォーム（同上）',
   'src/components/ErrorReportForm.tsx:113': 'エラー報告フォーム（同上）',
   'src/components/Result/PersonalGoalCard.tsx:187': '目標メモの自由記述編集欄（同上）',

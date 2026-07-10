@@ -5,6 +5,7 @@ import { BookOpen, ChevronRight, Home, Search } from 'lucide-react';
 import * as React from 'react';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
+import { HUB_ALL } from '@/lib/total-score/hub';
 
 interface GlossaryLink {
   label: string;
@@ -166,6 +167,9 @@ const GLOSSARY_TERMS: GlossaryTerm[] = [
   },
 ];
 
+/** 都道府県別の呼び方対応表用（O-3: 用語×県方式の差異辞典）。HUB_ALL（検証済み・total-score registry/explainers由来）を五十音順に並べ替えるのみ＝新規データなし。 */
+const PREFECTURE_TERMS_SORTED = [...HUB_ALL].sort((a, b) => a.name.localeCompare(b.name, 'ja'));
+
 export default function GlossaryClient() {
   const [searchQuery, setSearchQuery] = React.useState('');
 
@@ -305,6 +309,36 @@ export default function GlossaryClient() {
             </button>
           </div>
         )}
+
+        {/* 都道府県別の呼び方対応表（O-3: 用語×県方式の差異辞典） */}
+        <section className="mt-10 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <h2 className="mb-1 text-lg font-bold text-slate-800">都道府県別の呼び方対応表</h2>
+          <p className="mb-4 text-sm leading-relaxed text-slate-500">
+            「換算内申」「S値」「K値」など、内申点・総合得点にまつわる呼び方や計算方式は都道府県ごとに異なります。お住まいの都道府県の呼び方をここで確認できます。
+          </p>
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[420px] text-sm">
+              <thead>
+                <tr className="border-b border-slate-200 text-left text-xs text-slate-500">
+                  <th scope="col" className="py-2 pr-3 font-bold">都道府県</th>
+                  <th scope="col" className="py-2 font-bold">呼び方・方式</th>
+                </tr>
+              </thead>
+              <tbody>
+                {PREFECTURE_TERMS_SORTED.map((e) => (
+                  <tr key={e.code} className="border-b border-slate-100 last:border-0">
+                    <td className="py-1.5 pr-3">
+                      <Link href={e.href} className="font-bold text-amber-700 hover:underline">
+                        {e.name}
+                      </Link>
+                    </td>
+                    <td className="py-1.5 text-slate-600">{e.term}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
 
         {/* アフィリエイト広告 */}
         <section className="mt-10 rounded-2xl border border-slate-200 bg-white px-6 py-6 text-center shadow-sm">
