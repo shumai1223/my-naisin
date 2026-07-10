@@ -27,6 +27,14 @@ import {
 } from '@/lib/affiliate-economics';
 import { AFFILIATES, type AffiliateId } from '@/lib/affiliates';
 import { TrendChart } from '@/components/admin/TrendChart';
+import { STATS_METRICS, STATS_MIN_SAMPLE_SIZE, computeAggregate, type StatsMetric } from '@/lib/stats-aggregation';
+import { getStatsValues } from '@/lib/stats-db';
+
+const STATS_METRIC_LABEL: Record<StatsMetric, string> = {
+  naishin: '内申点',
+  hensachi: '偏差値',
+  'total-score': '総合得点',
+};
 
 /**
  * 送客アナリティクス（管理ダッシュボード・認証付き・H5）。
@@ -191,6 +199,7 @@ export default async function AdminReportPage({
     weeklyClickTrend,
     leadDaily,
     apiFunnel,
+    statsValuesByMetric,
   ] = await Promise.all([
     getClickSummary(days, to),
     getClickTrend(trendDays, trendView, to),
@@ -204,7 +213,17 @@ export default async function AdminReportPage({
     getClickTrend(56, 'day', to),
     getLeadDailyCounts(56),
     getFreemiumFunnel(),
+    Promise.all(STATS_METRICS.map((metric) => getStatsValues(metric))),
   ]);
+
+  // 匿名統計（S-1）の収集状況：件数のみ（k-匿名性のため集計値そのものはここでは出さない）。
+  const statsStatus = STATS_METRICS.map((metric, i) => {
+    const values = statsValuesByMetric[i];
+    const aggregate = computeAggregate(values);
+    const count = aggregate?.count ?? 0;
+    return { metric, count, sufficient: count >= STATS_MIN_SAMPLE_SIZE };
+  });
+  const statsTotalCount = statsStatus.reduce((s, r) => s + r.count, 0);
 
   // ── 今季の桁レバー（Build 3）：7/20 反証ゲート＋週次velocity ──────────────────
   // 発生（conversions）は D1 に無い（ASP管理画面が一次）ため 0 で評価する＝GO判定は本人がASPで確認して読む。
@@ -912,6 +931,33 @@ export default async function AdminReportPage({
               <div className="mt-0.5 text-[10px] text-slate-400">
                 {apiFunnel.convertedEmails}/{apiFunnel.distinctFreeEmails}件（メール登録済free）
               </div>
+            </div>
+          </div>
+        </div>
+
+        {/* 匿名統計データ収集状況（S-1・A-12・公開面は/stats） */}
+        <div className="mt-6">
+          <h2 className={sectionTitle}>匿名統計データ収集状況（S-1）— 公開面は /stats</h2>
+          <p className="mt-0.5 text-[11px] leading-relaxed text-slate-400">
+            各計算機の「匿名で統計に協力する」オプトインからの提出件数。サンプルサイズが{STATS_MIN_SAMPLE_SIZE}件未満の指標は
+            k-匿名性のため公開面（/stats）でも集計値（平均・最小・最大）を表示せず件数のみ表示する。
+          </p>
+          <div className="mt-2 grid grid-cols-2 gap-3 md:grid-cols-4">
+            {statsStatus.map((s) => (
+              <div key={s.metric} className={card}>
+                <div className="text-[11px] text-slate-500">{STATS_METRIC_LABEL[s.metric]}</div>
+                <div className={`mt-1 text-xl font-black tabular-nums ${s.sufficient ? 'text-emerald-700' : 'text-slate-900'}`}>
+                  {s.count.toLocaleString('ja-JP')}
+                  <span className="ml-1 text-xs font-normal text-slate-400">件</span>
+                </div>
+                <div className={`mt-0.5 text-[10px] font-bold ${s.sufficient ? 'text-emerald-600' : 'text-amber-600'}`}>
+                  {s.sufficient ? '公開中（集計値あり）' : `あと${STATS_MIN_SAMPLE_SIZE - s.count}件で公開`}
+                </div>
+              </div>
+            ))}
+            <div className={card}>
+              <div className="text-[11px] text-slate-500">合計提出数</div>
+              <div className="mt-1 text-xl font-bold text-slate-700 tabular-nums">{statsTotalCount.toLocaleString('ja-JP')}</div>
             </div>
           </div>
         </div>
