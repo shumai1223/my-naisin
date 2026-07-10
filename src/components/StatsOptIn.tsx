@@ -1,29 +1,47 @@
 'use client';
 
 /**
- * 匿名統計オプトインUI（TIER N-1）。
+ * 匿名統計オプトインUI（S-1）。
  *
- * ⚠️ このコンポーネントは意図的にどのページにもマウントしていない（build-not-launch）。
- * 理由: 現時点で送信先API（N-3・/api/stats/*相当）・集計スキーマ（N-2・D1 migration）が
- * いずれも未実装のため、ここで同意しても実際には何も収集・送信されない。実体の無い同意を
- * ユーザーに求める見せかけの機能を公開しないため、N-2（D1 migration適用・👤監督付き）と
- * N-3（集計API実装）が揃った時点で初めて結果画面へ組み込む。状態管理自体は
- * src/lib/stats-consent.ts に実装済みでテスト済み＝結線するだけで機能する状態で待機している。
+ * D1 migration 0007（stats_submissions）適用済み・/api/stats/submit実装済み（旧N-3）につき、
+ * metric/value等を渡すと同意済みユーザーの結果を自動で匿名送信する（stats-submit-client.ts）。
+ * 送信は同一の計算結果に対して1回のみ（signature方式で重複送信を防止）。
+ * 同意していない・値が無い場合は何も送信しない（見せかけの機能にしない設計を維持）。
  */
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { BarChart3, ShieldCheck } from 'lucide-react';
 
 import { readStatsConsent, grantStatsConsent, revokeStatsConsent } from '@/lib/stats-consent';
+import { submitStatsResult } from '@/lib/stats-submit-client';
+import type { StatsMetric } from '@/lib/stats-aggregation';
 
-export function StatsOptIn({ className = '' }: { className?: string }) {
+interface StatsOptInProps {
+  className?: string;
+  /** 送信する指標。value と両方指定された時のみ自動送信する。 */
+  metric?: StatsMetric;
+  value?: number | null;
+  maxValue?: number | null;
+  prefectureCode?: string;
+}
+
+export function StatsOptIn({ className = '', metric, value, maxValue, prefectureCode }: StatsOptInProps) {
   const [granted, setGranted] = useState(false);
   const [consentedAt, setConsentedAt] = useState<string | null>(null);
+  const submittedSignature = useRef<string | null>(null);
 
   useEffect(() => {
     const state = readStatsConsent();
     setGranted(state.granted);
     setConsentedAt(state.consentedAt);
   }, []);
+
+  useEffect(() => {
+    if (!granted || !metric || typeof value !== 'number' || !Number.isFinite(value)) return;
+    const signature = `${metric}:${prefectureCode ?? ''}:${value}:${maxValue ?? ''}`;
+    if (submittedSignature.current === signature) return;
+    submittedSignature.current = signature;
+    void submitStatsResult({ metric, value, maxValue: maxValue ?? undefined, prefectureCode });
+  }, [granted, metric, value, maxValue, prefectureCode]);
 
   const handleToggle = () => {
     if (granted) {

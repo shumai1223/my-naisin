@@ -10,6 +10,7 @@ import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { ParentCostBridge } from '@/components/ParentCostBridge';
 import { ParentWindowBridge } from '@/components/ParentWindowBridge';
 import { ShindanEntryLink } from '@/components/ShindanEntryLink';
+import { StatsOptIn } from '@/components/StatsOptIn';
 
 /**
  * /hensachi（全流入の約41%）の結果連動 換金フロー。
@@ -41,6 +42,11 @@ export function HensachiResultFlow() {
       {/* A-9: 偏差値+5(チャレンジ帯)を既定目標にした週次計画ジェネレータ。target/gapはLINE保存CTAへ渡す */}
       <div className="mt-6">
         <HensachiGapToTarget value={value} onTargetChange={handleTargetChange} />
+      </div>
+
+      {/* S-1: 匿名統計オプトイン。同意済みなら偏差値の実測値を匿名で自動送信 */}
+      <div className="mt-6">
+        <StatsOptIn metric="hensachi" value={value} />
       </div>
 
       {/* 即効レバー：最高CTRページの結果直後に保護者リード（決裁者＝保護者へ高単価送客） */}

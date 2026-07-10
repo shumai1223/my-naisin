@@ -4,14 +4,13 @@ import { isValidStatsSubmission, type StatsMetric } from '@/lib/stats-aggregatio
 import { insertStatsSubmission } from '@/lib/stats-db';
 
 /**
- * 匿名統計の投稿受け口（TIER N-3）。/api/lead と同方針の公開POST（レート制限あり・API鍵不要）。
+ * 匿名統計の投稿受け口（S-1・旧N-3）。/api/lead と同方針の公開POST（レート制限あり・API鍵不要）。
  *
  * PII（メール・氏名・IP等）は一切受け取らない・保存しない。個人を特定できる情報を持たないことが
  * 「匿名で統計に協力する」（stats-consent.ts・StatsOptIn）という同意文言の前提。
  *
- * ⚠️ 2026-07-09時点、このエンドポイントを呼び出すクライアントコードは存在しない
- * （StatsOptInは意図的に未マウント）。deploy後も実際に叩かれることはなく、
- * migration 0007 適用後にStatsOptInを結線して初めてデータが流れ始める。
+ * migration 0007 適用済み・呼び出し元は src/lib/stats-submit-client.ts（同意済みユーザーの
+ * 結果のみ送信）。2026-07-11時点で/hensachiに結線済み（他計算機面への展開は継続タスク）。
  */
 
 type SubmitBody = {

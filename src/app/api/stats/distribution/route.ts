@@ -13,10 +13,9 @@ import { SITE_URL } from '@/lib/naishin-dataset';
  *   insufficientData:true で集計値自体を返さない（[[fable5-loop-protocol]]の捏造回避原則と同じ思想＝
  *   データが無いものを在るかのように見せない）。
  *
- * ⚠️ 2026-07-09時点、オプトインUI（StatsOptIn）は未マウント・migration 0007は未適用のため、
- *   実際に集計対象となるデータはまだ0件。このエンドポイントは常に insufficientData:true を返す
- *   （設計上安全＝存在しないデータを捏造して返すことはない）。N-1のUI結線・N-2の migration適用が
- *   完了すると自動的にデータが貯まり始める。
+ * migration 0007 適用済み・StatsOptInは2026-07-11時点で/hensachiに結線済み（他計算機面への
+ *   展開は継続タスク）。サンプルサイズがSTATS_MIN_SAMPLE_SIZE未満のセルは常にinsufficientData:true
+ *   （設計上安全＝存在しないデータを捏造して返すことはない）。
  */
 export async function GET(request: Request) {
   const gate = await gateApiRequest(request);

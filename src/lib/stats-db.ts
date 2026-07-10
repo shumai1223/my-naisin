@@ -1,16 +1,14 @@
 /**
- * 匿名統計（stats_submissions）のD1永続化＝TIER N-3。leads-db.tsと同じ安全設計を踏襲する。
+ * 匿名統計（stats_submissions）のD1永続化＝S-1（旧N-3）。leads-db.tsと同じ安全設計を踏襲する。
  *
  * 安全設計：
  *  - D1バインディング `LEADS_DB`（既存・稼働中。leads/clicks等と同じDBにテーブルを同居させる設計）
  *    が無ければ完全no-op。
- *  - stats_submissionsテーブル自体は migrations/0007_create_stats_submissions.sql が定義するが
- *    2026-07-09時点で未適用（👤監督付き適用待ち）。テーブルが無い状態でクエリすればD1側が
- *    エラーを返すが、ここでは例外を握りつぶしてno-op（[]/false）にするため、適用前でも
- *    APIやビルドを壊さない。
- *  - 個人を特定できる情報（メール・IP・ユーザー識別子）は一切扱わない。stats-consent.ts /
- *    StatsOptInコンポーネントは意図的に未マウントのため、適用後もこのモジュールを実際に
- *    呼び出すクライアントコードはまだ存在しない（配線は次周以降）。
+ *  - stats_submissionsテーブル自体は migrations/0007_create_stats_submissions.sql が定義し、
+ *    2026-07-10に本番適用済み。バインディング未設定（ローカルテスト等）でも例外を握りつぶして
+ *    no-op（[]/false）にするため、常にAPIやビルドを壊さない。
+ *  - 個人を特定できる情報（メール・IP・ユーザー識別子）は一切扱わない。StatsOptInコンポーネントは
+ *    2026-07-11に/hensachiへ結線済み（stats-submit-client.ts経由で同意済みユーザーの結果のみ送信）。
  */
 import { isValidStatsSubmission, type StatsMetric, type StatsSubmissionInput } from '@/lib/stats-aggregation';
 

@@ -1,6 +1,6 @@
--- 匿名統計（TIER N-2・A-12の一次データ堀）＝Cloudflare D1。
+-- 匿名統計（S-1・旧TIER N-2・A-12の一次データ堀）＝Cloudflare D1。
 -- 適用: wrangler d1 execute my-naishin-leads --remote --file=migrations/0007_create_stats_submissions.sql
--- ⚠️ 2026-07-09時点で未適用（👤監督付き適用待ち）。適用前提の送信元API（N-3）も未実装。
+-- ✅ 2026-07-10に本番適用済み。送信元API（/api/stats/submit）実装済み。
 --
 -- 設計方針:
 --  - PII（メール・氏名・IP・ユーザー識別子等）は一切保存しない列構成。個人を特定できる情報を
