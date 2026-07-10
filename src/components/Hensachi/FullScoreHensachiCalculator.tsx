@@ -5,7 +5,7 @@ import * as React from 'react';
 import { calcHensachi, roundHensachi } from '@/lib/hensachi';
 import { funnel } from '@/lib/track';
 
-const FULL_SCORE_PRESETS = [100, 300, 500, 900, 1000] as const;
+const FULL_SCORE_PRESETS = [100, 250, 300, 500, 900, 1000] as const;
 
 /**
  * 満点が100点以外(500点満点・1000点満点など)のテスト・模試向けの偏差値計算機。
