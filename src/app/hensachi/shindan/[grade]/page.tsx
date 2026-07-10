@@ -8,6 +8,7 @@ import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { ShindanResultFlow } from '@/components/Hensachi/ShindanResultFlow';
 import { HensachiClusterNav } from '@/components/Hensachi/HensachiClusterNav';
 import { SHINDAN_GRADE_CONTENTS, getShindanGradeContent } from '@/lib/shindan-grade-content';
+import { SHINDAN_PURPOSE_CONTENTS } from '@/lib/shindan-purpose-content';
 import { SITE_URL } from '@/lib/naishin-dataset';
 
 interface PageProps {
@@ -137,6 +138,22 @@ export default async function GradeShindanPage({ params }: PageProps) {
               >
                 学年を選ばず診断する
               </Link>
+            </div>
+          </section>
+
+          {/* 目的別診断への導線（S-2⑤：学年軸↔目的軸のクロスリンク） */}
+          <section className="mt-4 rounded-2xl border border-slate-200 bg-slate-50 p-6">
+            <h2 className="mb-3 text-sm font-bold text-slate-700">目的で診断したい場合はこちら</h2>
+            <div className="flex flex-wrap gap-2">
+              {SHINDAN_PURPOSE_CONTENTS.map((p) => (
+                <Link
+                  key={p.slug}
+                  href={`/hensachi/shindan/mokuteki/${p.slug}`}
+                  className="rounded-full border border-purple-200 bg-white px-4 py-2 text-xs font-bold text-purple-700 transition-colors hover:bg-purple-50"
+                >
+                  {p.label}
+                </Link>
+              ))}
             </div>
           </section>
         </div>

@@ -8,6 +8,7 @@ import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { ShindanResultFlow } from '@/components/Hensachi/ShindanResultFlow';
 import { HensachiClusterNav } from '@/components/Hensachi/HensachiClusterNav';
 import { SHINDAN_PURPOSE_CONTENTS, getShindanPurposeContent } from '@/lib/shindan-purpose-content';
+import { SHINDAN_GRADE_CONTENTS } from '@/lib/shindan-grade-content';
 import { SITE_URL } from '@/lib/naishin-dataset';
 
 interface PageProps {
@@ -137,6 +138,22 @@ export default async function PurposeShindanPage({ params }: PageProps) {
               >
                 目的を選ばず診断する
               </Link>
+            </div>
+          </section>
+
+          {/* 学年別診断への導線（S-2⑤：目的軸↔学年軸のクロスリンク） */}
+          <section className="mt-4 rounded-2xl border border-slate-200 bg-slate-50 p-6">
+            <h2 className="mb-3 text-sm font-bold text-slate-700">学年で診断したい場合はこちら</h2>
+            <div className="flex flex-wrap gap-2">
+              {SHINDAN_GRADE_CONTENTS.map((g) => (
+                <Link
+                  key={g.slug}
+                  href={`/hensachi/shindan/${g.slug}`}
+                  className="rounded-full border border-purple-200 bg-white px-4 py-2 text-xs font-bold text-purple-700 transition-colors hover:bg-purple-50"
+                >
+                  {g.label}向け診断
+                </Link>
+              ))}
             </div>
           </section>
         </div>
