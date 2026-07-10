@@ -23,6 +23,7 @@ import { simulateEducationCost, simulateHighToUniversity } from '@/lib/education
 import type { CourseType, JukuType, IncomeBracket, UniversityType, Residence } from '@/lib/education-cost/types';
 import { isStatsMetric, buildSuppressedAggregate, STATS_MIN_SAMPLE_SIZE, STATS_METRICS } from '@/lib/stats-aggregation';
 import { getStatsValues } from '@/lib/stats-db';
+import { computeTokyoTotalScore, tokyoRankLabel, TOKYO_ESAT_GRADES } from '@/lib/total-score/tokyo';
 
 /**
  * MCP互換エンドポイント（堀B / AIネイティブの城①）。
@@ -290,6 +291,19 @@ const TOOLS = [
         prefecture: { type: 'string', description: '任意。都道府県コード（例: tokyo）で絞り込み。未指定は全国集計。' },
       },
       required: ['metric'],
+    },
+  },
+  {
+    name: 'calculate_tokyo_total_score',
+    description: `東京都の総合得点（学力検査700点+調査書点300点+ESAT-J20点=1020点満点）を計算する。統一エンジン(list_total_score_systems対象)とは配点構造が異なる個別実装。ESAT-Jの評価段階: ${TOKYO_ESAT_GRADES.map((g) => `${g.grade}(${g.score}点)`).join(', ')}。`,
+    inputSchema: {
+      type: 'object',
+      properties: {
+        academicRaw: { type: 'number', description: '5教科学力検査の合計点素点（500点満点）。' },
+        naishinRaw: { type: 'number', description: '換算内申（65点満点）。' },
+        esatGrade: { type: 'string', description: 'ESAT-Jの評価段階（A/B/C/D/E/F/なし）。' },
+      },
+      required: ['academicRaw', 'naishinRaw', 'esatGrade'],
     },
   },
 ] as const;
@@ -568,6 +582,17 @@ async function runTool(name: string, args: Record<string, unknown>) {
     const values = await getStatsValues(metric, prefecture);
     const aggregate = buildSuppressedAggregate(values);
     return toolText({ metric, prefecture: prefecture ?? null, minSampleSize: STATS_MIN_SAMPLE_SIZE, insufficientData: aggregate === null, aggregate });
+  }
+
+  if (name === 'calculate_tokyo_total_score') {
+    const academicRaw = Number(args.academicRaw);
+    const naishinRaw = Number(args.naishinRaw);
+    const esatGrade = String(args.esatGrade ?? '');
+    if (!Number.isFinite(academicRaw) || !Number.isFinite(naishinRaw)) {
+      return toolText({ error: 'invalid_params', message: 'academicRaw・naishinRawは数値で指定してください。' });
+    }
+    const result = computeTokyoTotalScore({ academicRaw, naishinRaw, esatGrade });
+    return toolText({ ...result, rankLabel: tokyoRankLabel(result.total) });
   }
 
   return null;

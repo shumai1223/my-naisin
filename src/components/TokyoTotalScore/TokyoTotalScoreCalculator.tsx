@@ -3,16 +3,7 @@
 import * as React from 'react';
 import { Calculator, RotateCcw } from 'lucide-react';
 import { TargetDistancePanel } from '@/components/TotalScore/TargetDistancePanel';
-
-const ESAT_GRADES = [
-  { grade: 'A', score: 20, label: '80点以上' },
-  { grade: 'B', score: 16, label: '65〜79点' },
-  { grade: 'C', score: 12, label: '50〜64点' },
-  { grade: 'D', score: 8, label: '35〜49点' },
-  { grade: 'E', score: 4, label: '20〜34点' },
-  { grade: 'F', score: 0, label: '20点未満' },
-  { grade: 'なし', score: 0, label: '未受験・対象外' },
-];
+import { TOKYO_ESAT_GRADES, TOKYO_TOTAL_SCORE_MAX, computeTokyoTotalScore, tokyoRankLabel } from '@/lib/total-score/tokyo';
 
 interface TokyoTotalScoreCalculatorProps {
   /** 入力後、総合得点(1020点満点)の実測値を親へ通知（結果連動の名簿/送客導線用）。 */
@@ -27,21 +18,18 @@ export function TokyoTotalScoreCalculator({ onResult }: TokyoTotalScoreCalculato
 
   const academicScore = parseFloat(scoreInput) || 0;
   const naishinValue = parseFloat(naishinInput) || 0;
-  const esatScore = ESAT_GRADES.find((g) => g.grade === esatGrade)?.score ?? 0;
 
-  // 学力検査700点換算
-  const academicConverted = Math.round((academicScore / 500) * 700);
-  // 調査書点300点換算
-  const naishinConverted = Math.round((naishinValue / 65) * 300);
-  // 総合得点
-  const total = academicConverted + naishinConverted + esatScore;
-  const percent = (total / 1020) * 100;
+  const { academicConverted, naishinConverted, esatScore, total, percent } = computeTokyoTotalScore({
+    academicRaw: academicScore,
+    naishinRaw: naishinValue,
+    esatGrade,
+  });
 
   const hasInput = scoreInput !== '' || naishinInput !== '';
 
   // 総合得点の実測値を親へ通知（結果連動でCTAを個別化＝カード/保護者バトンを点灯）。
   React.useEffect(() => {
-    onResult?.(hasInput ? { total, max: 1020 } : null);
+    onResult?.(hasInput ? { total, max: TOKYO_TOTAL_SCORE_MAX } : null);
   }, [hasInput, total, onResult]);
 
   const reset = () => {
@@ -59,15 +47,7 @@ export function TokyoTotalScoreCalculator({ onResult }: TokyoTotalScoreCalculato
     return 'text-blue-700';
   };
 
-  const getRankLabel = () => {
-    if (total >= 880) return '最難関校レベル（日比谷・西・国立）';
-    if (total >= 840) return '難関校レベル（戸山・青山）';
-    if (total >= 800) return '上位校レベル（新宿・駒場）';
-    if (total >= 720) return '中堅上位校レベル（小山台・三田）';
-    if (total >= 640) return '中堅校レベル（城東・広尾）';
-    if (total >= 560) return '中堅下位校レベル';
-    return '基礎を固める段階';
-  };
+  const getRankLabel = () => tokyoRankLabel(total);
 
   return (
     <div className="rounded-2xl border-2 border-blue-200 bg-white shadow-lg overflow-hidden">
@@ -148,7 +128,7 @@ export function TokyoTotalScoreCalculator({ onResult }: TokyoTotalScoreCalculato
             <span className="ml-2 text-xs font-normal text-slate-500">（英語スピーキング・最大20点）</span>
           </label>
           <div className="grid grid-cols-4 sm:grid-cols-7 gap-2">
-            {ESAT_GRADES.map((option) => (
+            {TOKYO_ESAT_GRADES.map((option) => (
               <button
                 key={option.grade}
                 type="button"
@@ -179,7 +159,7 @@ export function TokyoTotalScoreCalculator({ onResult }: TokyoTotalScoreCalculato
             <div className="text-xs font-bold text-slate-600 mb-1">あなたの総合得点</div>
             <div className={`text-6xl font-black ${getRankColor()}`}>
               {total}
-              <span className="text-2xl font-bold text-slate-400">/1020</span>
+              <span className="text-2xl font-bold text-slate-400">/{TOKYO_TOTAL_SCORE_MAX}</span>
             </div>
             <div className="mt-2 text-sm font-bold text-slate-700">
               得点率 {percent.toFixed(1)}%
@@ -211,7 +191,7 @@ export function TokyoTotalScoreCalculator({ onResult }: TokyoTotalScoreCalculato
             targetInput={targetInput}
             onTargetInputChange={setTargetInput}
             total={total}
-            totalMax={1020}
+            totalMax={TOKYO_TOTAL_SCORE_MAX}
             inputId="tokyo-total-score-target"
           />
         </div>
