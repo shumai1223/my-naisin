@@ -68,6 +68,7 @@ const HOWTO_EXEMPT_ROUTES: Record<string, string> = {
   '/privacy': 'プライバシーポリシー（リッチリザルト価値が低い定型ページ）',
   '/quality': '品質・E-E-A-T説明ページ（手順コンテンツなし）',
   '/sougou-gata-senbatsu': '総合型選抜の解説ページ（手順でなく制度解説）',
+  '/stats': '全国統計データ表示ページ（集計値の一覧表示であり手順ではない。DatasetSchemaで対応）',
   '/suisen-nyuushi': '推薦入試の解説ページ（手順でなく制度解説）',
   '/tarinai-taisaku': '内申・当日点不足の対策ハブ（下位の計算機ページへの導線が本体）',
   '/terms': '利用規約（リッチリザルト価値が低い定型ページ）',

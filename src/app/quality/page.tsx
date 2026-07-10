@@ -189,6 +189,17 @@ export default function QualityPage() {
           </div>
         </div>
 
+        {/* 統計データへの導線 */}
+        <div className="mb-16 rounded-2xl border border-emerald-200 bg-emerald-50 p-6">
+          <h2 className="mb-2 text-lg font-bold text-slate-800">利用者の匿名データによる統計</h2>
+          <p className="mb-4 text-sm leading-relaxed text-slate-600">
+            計算機の結果を任意でオプトインいただいた匿名データから、内申点・偏差値・総合得点の全国分布を集計・公開しています。個人を特定できる情報は一切含みません。
+          </p>
+          <Link href="/stats" className="inline-flex items-center gap-1 text-sm font-bold text-emerald-700 hover:underline">
+            全国統計データを見る →
+          </Link>
+        </div>
+
         {/* 誤り報告 */}
         <div className="rounded-2xl bg-slate-900 p-8 text-white text-center">
           <h2 className="text-2xl font-bold mb-4">受験生の正確な情報を守るために</h2>
