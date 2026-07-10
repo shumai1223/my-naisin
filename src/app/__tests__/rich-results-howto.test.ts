@@ -45,6 +45,7 @@ const HOWTO_EXEMPT_ROUTES: Record<string, string> = {
   '/futoukou': '不登校支援の解説ページ（手順でなく制度・選択肢の解説）',
   '/futoukou/tsugaku': '通学再開支援の解説ページ（手順でなく制度解説）',
   '/glossary': '用語辞典（定義の一覧で手順ではない）',
+  '/glossary/[term]': '用語個別ページ（定義・具体例の解説であり手順ではない）',
   '/guide': '内申点 完全ガイド（網羅的な読み物であり単一の手順列ではない）',
   '/heigan-yuugu': '併願優遇制度の解説ページ（手順でなく制度解説）',
   '/hensachi/kyoka-betsu/[subject]': '教科別の上げ方解説ページ（手順でなく学習アドバイス）',
