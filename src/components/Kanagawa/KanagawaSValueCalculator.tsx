@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import { Calculator, RotateCcw } from 'lucide-react';
+import { TargetDistancePanel } from '@/components/TotalScore/TargetDistancePanel';
 
 const RATIO_OPTIONS = [
   { label: '4:6（標準）', naishin: 4, gakuryoku: 6 },
@@ -17,6 +18,7 @@ export function KanagawaSValueCalculator() {
   const [gakuryokuInput, setGakuryokuInput] = React.useState('');
   const [tokushokuInput, setTokushokuInput] = React.useState('');
   const [ratioIndex, setRatioIndex] = React.useState(0);
+  const [targetInput, setTargetInput] = React.useState('');
 
   const naishin = parseFloat(naishinInput) || 0; // 135点満点
   const gakuryoku = parseFloat(gakuryokuInput) || 0; // 500点満点
@@ -42,6 +44,7 @@ export function KanagawaSValueCalculator() {
     setGakuryokuInput('');
     setTokushokuInput('');
     setRatioIndex(0);
+    setTargetInput('');
   };
 
   const getRankColor = () => {
@@ -181,6 +184,14 @@ export function KanagawaSValueCalculator() {
               </ul>
             </div>
           </div>
+
+          <TargetDistancePanel
+            targetInput={targetInput}
+            onTargetInputChange={setTargetInput}
+            total={s1}
+            totalMax={1000}
+            inputId="kanagawa-total-score-target"
+          />
         </div>
       )}
     </div>

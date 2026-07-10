@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import { Calculator, RotateCcw } from 'lucide-react';
+import { TargetDistancePanel } from '@/components/TotalScore/TargetDistancePanel';
 
 const ESAT_GRADES = [
   { grade: 'A', score: 20, label: '80点以上' },
@@ -22,6 +23,7 @@ export function TokyoTotalScoreCalculator({ onResult }: TokyoTotalScoreCalculato
   const [scoreInput, setScoreInput] = React.useState('');
   const [naishinInput, setNaishinInput] = React.useState('');
   const [esatGrade, setEsatGrade] = React.useState('A');
+  const [targetInput, setTargetInput] = React.useState('');
 
   const academicScore = parseFloat(scoreInput) || 0;
   const naishinValue = parseFloat(naishinInput) || 0;
@@ -46,6 +48,7 @@ export function TokyoTotalScoreCalculator({ onResult }: TokyoTotalScoreCalculato
     setScoreInput('');
     setNaishinInput('');
     setEsatGrade('A');
+    setTargetInput('');
   };
 
   const getRankColor = () => {
@@ -203,6 +206,14 @@ export function TokyoTotalScoreCalculator({ onResult }: TokyoTotalScoreCalculato
               <div className="text-[10px] text-slate-500">/20点</div>
             </div>
           </div>
+
+          <TargetDistancePanel
+            targetInput={targetInput}
+            onTargetInputChange={setTargetInput}
+            total={total}
+            totalMax={1020}
+            inputId="tokyo-total-score-target"
+          />
         </div>
       )}
     </div>

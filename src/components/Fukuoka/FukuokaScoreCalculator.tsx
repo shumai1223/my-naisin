@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import { Calculator, RotateCcw } from 'lucide-react';
+import { TargetDistancePanel } from '@/components/TotalScore/TargetDistancePanel';
 
 export interface FukuokaScoreResult {
   total: number;
@@ -24,6 +25,7 @@ const MAX_TOTAL = MAX_NAISHIN + MAX_GAKURYOKU;
 export function FukuokaScoreCalculator({ onResult }: Props) {
   const [naishinInput, setNaishinInput] = React.useState('');
   const [gakuryokuInput, setGakuryokuInput] = React.useState('');
+  const [targetInput, setTargetInput] = React.useState('');
 
   const naishin = parseFloat(naishinInput) || 0;
   const gakuryoku = parseFloat(gakuryokuInput) || 0;
@@ -38,6 +40,7 @@ export function FukuokaScoreCalculator({ onResult }: Props) {
   const reset = () => {
     setNaishinInput('');
     setGakuryokuInput('');
+    setTargetInput('');
   };
 
   return (
@@ -112,6 +115,16 @@ export function FukuokaScoreCalculator({ onResult }: Props) {
           <p className="mx-auto mt-3 max-w-sm text-[11px] leading-relaxed text-slate-400">
             ※ 福岡県はA群（学力・内申の両方の順位が合格圏）とB群（総合判断）の二段階選抜です。この合計は目安であり、単純合計の順位だけで合否が決まるわけではありません。
           </p>
+
+          <div className="mx-auto max-w-sm text-left">
+            <TargetDistancePanel
+              targetInput={targetInput}
+              onTargetInputChange={setTargetInput}
+              total={total}
+              totalMax={MAX_TOTAL}
+              inputId="fukuoka-total-score-target"
+            />
+          </div>
         </div>
       )}
     </div>

@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import { Calculator, RotateCcw } from 'lucide-react';
+import { TargetDistancePanel } from '@/components/TotalScore/TargetDistancePanel';
 
 // 北海道公立高校のランク（A〜M）変換テーブル
 // 内申点の素点（315点満点：中1〜中3 各9教科×5段階×3学年で多少異なるが概算）
@@ -35,6 +36,7 @@ interface Props {
 export function HokkaidoRankCalculator({ onResult }: Props = {}) {
   const [naishinInput, setNaishinInput] = React.useState('');
   const [gakuryokuInput, setGakuryokuInput] = React.useState('');
+  const [targetInput, setTargetInput] = React.useState('');
 
   const naishin = parseFloat(naishinInput) || 0; // 315点満点
   const gakuryoku = parseFloat(gakuryokuInput) || 0; // 300点満点（5教科 × 60点 = 300点）
@@ -56,6 +58,7 @@ export function HokkaidoRankCalculator({ onResult }: Props = {}) {
   const reset = () => {
     setNaishinInput('');
     setGakuryokuInput('');
+    setTargetInput('');
   };
 
   const getRankColor = () => {
@@ -150,6 +153,14 @@ export function HokkaidoRankCalculator({ onResult }: Props = {}) {
               <div className="text-xs text-slate-500 mt-1">満点比 {percent.toFixed(1)}%</div>
             </div>
           </div>
+
+          <TargetDistancePanel
+            targetInput={targetInput}
+            onTargetInputChange={setTargetInput}
+            total={total}
+            totalMax={maxTotal}
+            inputId="hokkaido-total-score-target"
+          />
         </div>
       )}
     </div>

@@ -7,6 +7,7 @@ import type { TotalScoreSystem } from '@/lib/total-score/types';
 import { computeTotalScore } from '@/lib/total-score/engine';
 import { EVENTS, track } from '@/lib/track';
 import { ParentShareLinkButton } from '@/components/ParentShareLinkButton';
+import { TargetDistancePanel } from '@/components/TotalScore/TargetDistancePanel';
 
 interface Props {
   system: TotalScoreSystem;
@@ -50,12 +51,6 @@ export function TotalScoreCalculator({ system, onResult }: Props) {
     setOptionId(system.ratioOptions[0].id);
     setTargetInput('');
   };
-
-  // 当日自己採点後の「目標との距離」表示（S-3①）。目標はユーザー自身が設定する目安値であり、
-  // 学校別の合格ボーダーを断定するものではない（捏造ゼロ・既存のTotalScoreReverseCalculatorと同じ注記方針）。
-  const targetTotal = parseFloat(targetInput) || 0;
-  const hasTarget = targetInput !== '';
-  const distance = hasTarget ? targetTotal - result.total : null;
 
   const tone =
     percent >= 80
@@ -190,44 +185,12 @@ export function TotalScoreCalculator({ system, onResult }: Props) {
           </div>
 
           {/* 目標との距離（S-3①：当日自己採点後に「あと何点」を確認する） */}
-          <div className="mt-6 rounded-xl border border-indigo-100 bg-white p-4">
-            <label htmlFor="total-score-target" className="mb-2 block text-xs font-bold text-slate-600">
-              目標の総合得点（任意・ご自身で設定した目安）
-            </label>
-            <input
-              id="total-score-target"
-              type="number"
-              inputMode="decimal"
-              min="0"
-              max={result.totalMax}
-              value={targetInput}
-              onChange={(e) => setTargetInput(e.target.value)}
-              placeholder="例：志望校の目安点"
-              className="h-11 w-full rounded-lg border border-slate-200 px-4 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200"
-            />
-            {hasTarget && distance !== null && (
-              <div
-                className={`mt-3 rounded-lg p-3 text-center ${
-                  distance <= 0 ? 'bg-emerald-50 text-emerald-800' : 'bg-indigo-50 text-indigo-800'
-                }`}
-                role="status"
-                aria-live="polite"
-              >
-                {distance <= 0 ? (
-                  <span className="text-sm font-bold">目標の総合得点にすでに届いています。</span>
-                ) : (
-                  <>
-                    <span className="text-xs font-bold">目標まであと</span>
-                    <span className="mx-1 text-2xl font-black">{Math.round(distance)}</span>
-                    <span className="text-xs font-bold">点</span>
-                  </>
-                )}
-              </div>
-            )}
-            <p className="mt-2 text-[11px] leading-relaxed text-slate-400">
-              ※ 目標の総合得点はご自身で設定した目安です。学校別の合格ボーダーではありません。
-            </p>
-          </div>
+          <TargetDistancePanel
+            targetInput={targetInput}
+            onTargetInputChange={setTargetInput}
+            total={result.total}
+            totalMax={result.totalMax}
+          />
 
           {/* 橋②：総合得点の結果を保護者に共有（実数つきで /hogosha へ着地→決裁者がオファーに触れる） */}
           <ParentShareLinkButton

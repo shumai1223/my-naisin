@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import { Calculator, RotateCcw } from 'lucide-react';
+import { TargetDistancePanel } from '@/components/TotalScore/TargetDistancePanel';
 
 // 大阪府公立高校の選抜タイプ別比率（学力検査:調査書）
 // タイプ1：7:3（学力重視）／タイプ2：6:4／タイプ3：5:5／タイプ4：4:6／タイプ5：3:7（内申重視）
@@ -17,6 +18,7 @@ export function OsakaTotalScoreCalculator() {
   const [naishinInput, setNaishinInput] = React.useState('');
   const [gakuryokuInput, setGakuryokuInput] = React.useState('');
   const [typeIndex, setTypeIndex] = React.useState(2); // タイプⅢ（5:5）をデフォルト
+  const [targetInput, setTargetInput] = React.useState('');
 
   const naishin = parseFloat(naishinInput) || 0; // 450点満点（内申点）
   const gakuryoku = parseFloat(gakuryokuInput) || 0; // 450点満点（学力検査）
@@ -39,6 +41,7 @@ export function OsakaTotalScoreCalculator() {
     setNaishinInput('');
     setGakuryokuInput('');
     setTypeIndex(2);
+    setTargetInput('');
   };
 
   const getRankColor = () => {
@@ -153,6 +156,14 @@ export function OsakaTotalScoreCalculator() {
               </ul>
             </div>
           </div>
+
+          <TargetDistancePanel
+            targetInput={targetInput}
+            onTargetInputChange={setTargetInput}
+            total={total}
+            totalMax={maxTotal}
+            inputId="osaka-total-score-target"
+          />
         </div>
       )}
     </div>
