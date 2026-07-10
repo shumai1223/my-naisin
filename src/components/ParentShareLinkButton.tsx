@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import { Share2, Check, QrCode } from 'lucide-react';
+import { toDataURL as qrToDataURL } from 'qrcode';
 
 import { EVENTS, track } from '@/lib/track';
 import { APP_NAME } from '@/lib/constants';
@@ -137,8 +138,8 @@ export function ParentShareLinkButton({
 
   // その場（同じ部屋）にいる保護者にスマホで直接読み取ってもらうQRコード。
   // parent_landing_view がほぼ0という実測（リンク共有は後で開かれずに流れがち）への
-  // 即席の打ち手＝「今、目の前で見せる」導線。外部QR生成サービス（画像のみ・データ送信なし）を使い、
-  // 依存追加なしで実装する。
+  // 即席の打ち手＝「今、目の前で見せる」導線。成績payload入りのURLを外部QR生成サービスに
+  // 送信していた旧実装を、qrcode パッケージによるブラウザ内ローカル生成に置換（データ送信なし）。
   const onToggleQr = React.useCallback(() => {
     if (qrUrl) {
       setQrUrl(null);
@@ -146,7 +147,9 @@ export function ParentShareLinkButton({
     }
     const origin = typeof window !== 'undefined' ? window.location.origin : 'https://my-naishin.com';
     const targetUrl = buildParentShareUrl(origin, ctx);
-    setQrUrl(`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(targetUrl)}`);
+    qrToDataURL(targetUrl, { width: 200, margin: 1 })
+      .then((dataUrl) => setQrUrl(dataUrl))
+      .catch(() => setQrUrl(null));
     track(EVENTS.SHARE_QR_REVEAL, {
       pref: ctx.prefectureCode ?? 'none',
       metric: ctx.metricLabel ?? '内申点',
