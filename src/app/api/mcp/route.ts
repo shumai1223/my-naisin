@@ -18,6 +18,9 @@ import type { SubjectKey } from '@/lib/types';
 import { calcHensachi, requiredScoreForHensachi, rankToHensachi, hensachiToRank, roundHensachi } from '@/lib/hensachi';
 import { TOTAL_SCORE_SYSTEMS, VERIFIED_TOTAL_SCORE_CODES, getTotalScoreSystem } from '@/lib/total-score/registry';
 import { computeTotalScore, requiredAcademicRaw } from '@/lib/total-score/engine';
+import { calcApplicationRatio, calcActualRatio, roundRatio } from '@/lib/bairitsu';
+import { simulateEducationCost, simulateHighToUniversity } from '@/lib/education-cost/engine';
+import type { CourseType, JukuType, IncomeBracket, UniversityType, Residence } from '@/lib/education-cost/types';
 
 /**
  * MCP互換エンドポイント（堀B / AIネイティブの城①）。
@@ -232,6 +235,47 @@ const TOOLS = [
         ratioOptionId: { type: 'string', description: '任意。傾斜配点オプションID。' },
       },
       required: ['prefectureCode', 'targetTotal', 'reportRaw'],
+    },
+  },
+  {
+    name: 'calculate_bairitsu',
+    description: '高校入試の倍率を計算する。志願倍率＝志願者数÷募集人員、実質倍率＝受験者数÷合格者数。学校別の実データは県教委の一次情報でのみ正確なため、本ツールは比率計算のみを提供する。',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        mode: { type: 'string', description: '"application"（志願倍率）または"actual"（実質倍率）。' },
+        applicants: { type: 'number', description: 'mode="application"のとき必須。志願者数。' },
+        capacity: { type: 'number', description: 'mode="application"のとき必須。募集人員（1以上）。' },
+        testTakers: { type: 'number', description: 'mode="actual"のとき必須。受験者数。' },
+        passers: { type: 'number', description: 'mode="actual"のとき必須。合格者数（1以上）。' },
+      },
+      required: ['mode'],
+    },
+  },
+  {
+    name: 'calculate_education_cost',
+    description: '中学の残り年数＋高校3年間＋塾代の教育費総額を、文部科学省「子供の学習費調査」等の一次データに基づき試算する。',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        currentGrade: { type: 'number', description: '現在の学年（1〜3）。既定1。' },
+        juniorCourse: { type: 'string', description: '"public"（公立）または"private"（私立）。既定public。' },
+        highCourse: { type: 'string', description: '高校の"public"または"private"。既定public。' },
+        jukuType: { type: 'string', description: '"none"/"shudan"（集団）/"kobetsu"（個別）/"katei"（家庭教師）。既定none。' },
+      },
+    },
+  },
+  {
+    name: 'calculate_path_to_university_cost',
+    description: '高校〜大学卒業までの進路別総額を、就学支援金の軽減後の高校実質負担＋大学4年間（自宅外なら仕送り込み）で試算する。',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        highCourse: { type: 'string', description: '"public"または"private"。既定public。' },
+        incomeBracket: { type: 'string', description: '"under590"/"under910"/"over910"（世帯年収の目安帯）。既定under590。' },
+        universityType: { type: 'string', description: '"none"/"national"（国立）/"privateHumanities"（私立文系）/"privateScience"（私立理系）。既定national。' },
+        residence: { type: 'string', description: '"home"（自宅）または"away"（自宅外・仕送り込み）。既定home。' },
+      },
     },
   },
 ] as const;
@@ -453,6 +497,52 @@ function runTool(name: string, args: Record<string, unknown>) {
     const ratioOptionId = typeof args.ratioOptionId === 'string' ? args.ratioOptionId : undefined;
     const result = requiredAcademicRaw(system, { targetTotal, reportRaw, ratioOptionId });
     return toolText({ mode: 'reverse', code: system.code, name: system.name, ...result });
+  }
+
+  if (name === 'calculate_bairitsu') {
+    const mode = String(args.mode ?? '');
+    if (mode === 'application') {
+      const applicants = Number(args.applicants);
+      const capacity = Number(args.capacity);
+      const result = calcApplicationRatio(applicants, capacity);
+      if (result === null) {
+        return toolText({ error: 'invalid_params', message: 'applicants・capacity（capacity>0）は数値で指定してください。' });
+      }
+      return toolText({ mode: 'application_ratio', applicants, capacity, ratio: roundRatio(result) });
+    }
+    if (mode === 'actual') {
+      const testTakers = Number(args.testTakers);
+      const passers = Number(args.passers);
+      const result = calcActualRatio(testTakers, passers);
+      if (result === null) {
+        return toolText({ error: 'invalid_params', message: 'testTakers・passers（passers>0）は数値で指定してください。' });
+      }
+      return toolText({ mode: 'actual_ratio', testTakers, passers, ratio: roundRatio(result) });
+    }
+    return toolText({ error: 'invalid_params', message: 'modeは"application"または"actual"を指定してください。' });
+  }
+
+  if (name === 'calculate_education_cost') {
+    const currentGrade = ([1, 2, 3] as const).includes(Number(args.currentGrade) as 1 | 2 | 3)
+      ? (Number(args.currentGrade) as 1 | 2 | 3)
+      : 1;
+    const juniorCourse = (args.juniorCourse === 'private' ? 'private' : 'public') as CourseType;
+    const highCourse = (args.highCourse === 'private' ? 'private' : 'public') as CourseType;
+    const jukuTypeCandidates: JukuType[] = ['none', 'shudan', 'kobetsu', 'katei'];
+    const jukuType = (jukuTypeCandidates.includes(args.jukuType as JukuType) ? args.jukuType : 'none') as JukuType;
+    const result = simulateEducationCost({ currentGrade, juniorCourse, highCourse, jukuType });
+    return toolText({ input: { currentGrade, juniorCourse, highCourse, jukuType }, result });
+  }
+
+  if (name === 'calculate_path_to_university_cost') {
+    const highCourse = (args.highCourse === 'private' ? 'private' : 'public') as CourseType;
+    const incomeCandidates: IncomeBracket[] = ['under590', 'under910', 'over910'];
+    const incomeBracket = (incomeCandidates.includes(args.incomeBracket as IncomeBracket) ? args.incomeBracket : 'under590') as IncomeBracket;
+    const universityCandidates: UniversityType[] = ['none', 'national', 'privateHumanities', 'privateScience'];
+    const universityType = (universityCandidates.includes(args.universityType as UniversityType) ? args.universityType : 'national') as UniversityType;
+    const residence = (args.residence === 'away' ? 'away' : 'home') as Residence;
+    const result = simulateHighToUniversity({ highCourse, incomeBracket, universityType, residence });
+    return toolText({ input: { highCourse, incomeBracket, universityType, residence }, result });
   }
 
   return null;

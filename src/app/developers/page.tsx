@@ -353,6 +353,27 @@ curl ${SITE_URL}/api/status`;
             </a>
           </p>
 
+          <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">⑦b 高校入試の倍率計算</h3>
+          <p className="mb-2 text-sm text-slate-600">
+            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">GET /api/bairitsu</code>
+            {' — '}
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">?applicants=&capacity=</code>
+            で志願倍率、
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">?testTakers=&passers=</code>
+            で実質倍率を計算します（学校別の実データは県教委一次情報のみが正確なため、本APIは比率計算のみを提供）。
+          </p>
+          <p className="mt-1 text-xs text-slate-500">
+            実際に開く：{' '}
+            <a
+              href="/api/bairitsu?applicants=120&capacity=80"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 font-semibold text-indigo-600 underline"
+            >
+              /api/bairitsu?applicants=120&amp;capacity=80 <ExternalLink className="h-3 w-3" />
+            </a>
+          </p>
+
           <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">⑧ ステータス確認（認証不要）</h3>
           <p className="mb-2 text-sm text-slate-600">
             <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">GET /api/status</code>
@@ -400,7 +421,10 @@ curl ${SITE_URL}/api/status`;
             <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">list_total_score_systems</code>
             <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">calculate_total_score</code>
             <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">reverse_calc_total_score</code>
-            の13ツールを呼び出せます。さらに <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">resources/list・resources/read</code>（47都道府県を読める一次資料として公開）と
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">calculate_bairitsu</code>
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">calculate_education_cost</code>
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">calculate_path_to_university_cost</code>
+            の16ツールを呼び出せます。さらに <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">resources/list・resources/read</code>（47都道府県を読める一次資料として公開）と
             <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">prompts/list・prompts/get</code>（内申点を確定値で答え出典を添える定型プロンプト）に対応しています。
           </p>
 

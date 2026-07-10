@@ -164,6 +164,47 @@ export function GET() {
           },
         },
       },
+      '/api/bairitsu': {
+        get: {
+          operationId: 'calculateBairitsu',
+          summary: '高校入試の倍率計算（志願倍率・実質倍率）',
+          description:
+            '?applicants=&capacity= で志願倍率、?testTakers=&passers= で実質倍率を計算。学校別・年度別の実データは県教委一次情報のみが正確なため、本APIは比率計算のみを提供する。',
+          parameters: [
+            { name: 'applicants', in: 'query', required: false, description: '志願者数。', schema: { type: 'number', example: 120 } },
+            { name: 'capacity', in: 'query', required: false, description: '募集人員（>0）。', schema: { type: 'number', example: 80 } },
+            { name: 'testTakers', in: 'query', required: false, description: '受験者数。', schema: { type: 'number', example: 110 } },
+            { name: 'passers', in: 'query', required: false, description: '合格者数（>0）。', schema: { type: 'number', example: 80 } },
+          ],
+          responses: { '200': { description: '成功' }, '400': { description: 'パラメータが不正' } },
+        },
+      },
+      '/api/education-cost': {
+        get: {
+          operationId: 'calculateEducationCost',
+          summary: '中学残り＋高校3年＋塾代の教育費総額シミュレーション',
+          parameters: [
+            { name: 'currentGrade', in: 'query', required: false, description: '現在の学年（1〜3、既定1）。', schema: { type: 'integer', example: 1 } },
+            { name: 'juniorCourse', in: 'query', required: false, description: 'public または private（既定public）。', schema: { type: 'string', example: 'public' } },
+            { name: 'highCourse', in: 'query', required: false, description: 'public または private（既定public）。', schema: { type: 'string', example: 'public' } },
+            { name: 'jukuType', in: 'query', required: false, description: 'none/shudan/kobetsu/katei（既定none）。', schema: { type: 'string', example: 'none' } },
+          ],
+          responses: { '200': { description: '成功' }, '400': { description: 'パラメータが不正' } },
+        },
+      },
+      '/api/education-cost/path-to-university': {
+        get: {
+          operationId: 'calculatePathToUniversityCost',
+          summary: '高校〜大学卒業までの進路別総額シミュレーション',
+          parameters: [
+            { name: 'highCourse', in: 'query', required: false, description: 'public または private（既定public）。', schema: { type: 'string', example: 'public' } },
+            { name: 'incomeBracket', in: 'query', required: false, description: 'under590/under910/over910（既定under590）。', schema: { type: 'string', example: 'under590' } },
+            { name: 'universityType', in: 'query', required: false, description: 'none/national/privateHumanities/privateScience（既定national）。', schema: { type: 'string', example: 'national' } },
+            { name: 'residence', in: 'query', required: false, description: 'home または away（既定home）。', schema: { type: 'string', example: 'home' } },
+          ],
+          responses: { '200': { description: '成功' }, '400': { description: 'パラメータが不正' } },
+        },
+      },
       '/api/openapi': {
         get: {
           operationId: 'getOpenApiSpec',

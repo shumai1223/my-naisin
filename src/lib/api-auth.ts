@@ -150,3 +150,14 @@ export async function gateApiRequest(request: Request): Promise<GateResult> {
   }
   return { allowed: true, tier, headers: rateHeaders(tier, usedWindow), cachePrivate: false };
 }
+
+/**
+ * テスト専用：モジュール内シングルトンのレート制限器をクリアする。
+ * Jestのテストリクエストはヘッダ無し（clientIp()が'unknown'にフォールバック）のため、
+ * 同一テストファイル内の全リクエストが `ip:unknown` バケットを共有し、REST契約テストが
+ * 増えるほど無関係なテスト同士がanonymousティアの1分間レート上限（30）を食い合って
+ * 429で偽落ちする（2026-07-11判明・S-5でエンドポイントを増やした際に顕在化）。
+ */
+export function resetApiRateLimiterForTests(): void {
+  limiter.reset();
+}

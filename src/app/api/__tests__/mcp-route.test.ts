@@ -29,13 +29,16 @@ describe('/api/mcp JSON-RPC 契約', () => {
     expect(json.result.capabilities.prompts).toBeDefined();
   });
 
-  test('tools/list は13ツールを返す（S-5でhensachi/total-score系6本を追加）', async () => {
+  test('tools/list は16ツールを返す（S-5でhensachi/total-score/bairitsu/education-cost系9本を追加）', async () => {
     const res = await POST(rpc('tools/list'));
     const json = await res.json();
-    expect(json.result.tools).toHaveLength(13);
+    expect(json.result.tools).toHaveLength(16);
     expect(json.result.tools.map((t: { name: string }) => t.name)).toContain('build_study_plan');
     expect(json.result.tools.map((t: { name: string }) => t.name)).toContain('calculate_hensachi');
     expect(json.result.tools.map((t: { name: string }) => t.name)).toContain('calculate_total_score');
+    expect(json.result.tools.map((t: { name: string }) => t.name)).toContain('calculate_bairitsu');
+    expect(json.result.tools.map((t: { name: string }) => t.name)).toContain('calculate_education_cost');
+    expect(json.result.tools.map((t: { name: string }) => t.name)).toContain('calculate_path_to_university_cost');
   });
 
   test('tools/call calculate_naishin は確定値(東京オール5=65)を返す', async () => {
@@ -116,6 +119,34 @@ describe('/api/mcp JSON-RPC 契約', () => {
     expect(data.error).toBe('not_found');
   });
 
+  test('tools/call calculate_bairitsu（application/actual 双方向）', async () => {
+    const application = await POST(
+      rpc('tools/call', { name: 'calculate_bairitsu', arguments: { mode: 'application', applicants: 120, capacity: 80 } })
+    );
+    const applicationData = JSON.parse((await application.json()).result.content[0].text);
+    expect(applicationData.ratio).toBe(1.5);
+
+    const actual = await POST(
+      rpc('tools/call', { name: 'calculate_bairitsu', arguments: { mode: 'actual', testTakers: 160, passers: 80 } })
+    );
+    const actualData = JSON.parse((await actual.json()).result.content[0].text);
+    expect(actualData.ratio).toBe(2);
+  });
+
+  test('tools/call calculate_education_cost は既定値で総額を計算する', async () => {
+    const res = await POST(rpc('tools/call', { name: 'calculate_education_cost', arguments: {} }));
+    const data = JSON.parse((await res.json()).result.content[0].text);
+    expect(data.input.currentGrade).toBe(1);
+    expect(data.result.total).toBeGreaterThan(0);
+  });
+
+  test('tools/call calculate_path_to_university_cost は既定値で総額を計算する', async () => {
+    const res = await POST(rpc('tools/call', { name: 'calculate_path_to_university_cost', arguments: {} }));
+    const data = JSON.parse((await res.json()).result.content[0].text);
+    expect(data.input.universityType).toBe('national');
+    expect(data.result.total).toBeGreaterThan(0);
+  });
+
   test('resources/list は47件、resources/read は該当県JSON', async () => {
     const list = await (await POST(rpc('resources/list'))).json();
     expect(list.result.resources).toHaveLength(47);
@@ -144,7 +175,7 @@ describe('/api/mcp JSON-RPC 契約', () => {
   test('GET ディスカバリはツール/メソッド一覧を返す', async () => {
     const res = GET();
     const json = await res.json();
-    expect(json.tools).toHaveLength(13);
+    expect(json.tools).toHaveLength(16);
     expect(json.methods).toContain('resources/read');
   });
 });

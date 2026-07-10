@@ -13,13 +13,22 @@ import { GET as statusGet } from '@/app/api/status/route';
 import { GET as totalScoreIndexGet } from '@/app/api/total-score/route';
 import { GET as totalScoreDetailGet } from '@/app/api/total-score/[code]/route';
 import { GET as hensachiGet } from '@/app/api/hensachi/route';
+import { GET as bairitsuGet } from '@/app/api/bairitsu/route';
 import { GET as percentileTableGet } from '@/app/api/hensachi/percentile-table/route';
 import { GET as educationCostGet } from '@/app/api/education-cost/route';
 import { GET as pathToUniversityGet } from '@/app/api/education-cost/path-to-university/route';
+import { resetApiRateLimiterForTests } from '@/lib/api-auth';
 
 function req(url: string) {
   return new Request(url);
 }
+
+// Jestのテストリクエストはヘッダ無し＝clientIp()が'unknown'にフォールバックし、同一ファイル内の
+// 全リクエストがip:unknownバケットを共有する。テストが増えるほど無関係な他describeとanonymousの
+// 1分間レート上限（30）を食い合って429偽落ちするため、テストごとにレート制限器をクリアする。
+beforeEach(() => {
+  resetApiRateLimiterForTests();
+});
 
 describe('/api/naishin（インデックス）', () => {
   test('47県・新エンドポイントメタを含む', async () => {
@@ -141,6 +150,35 @@ describe('/api/hensachi（S-5：偏差値の計算・逆算・順位変換）', 
 
   test('不正なパラメータ（population未指定でrank指定）は400', async () => {
     const res = await hensachiGet(req('https://my-naishin.com/api/hensachi?rank=10'));
+    expect(res.status).toBe(400);
+  });
+});
+
+describe('/api/bairitsu（S-5：高校入試の倍率計算）', () => {
+  test('パラメータ無しはメタ情報（エンドポイント一覧）を返す', async () => {
+    const json = await (await bairitsuGet(req('https://my-naishin.com/api/bairitsu'))).json();
+    expect(json.meta.endpoints.applicationRatio).toContain('applicants=');
+    expect(json.meta.toolUrl).toBe('https://my-naishin.com/koukou-bairitsu');
+  });
+
+  test('applicants/capacity指定で志願倍率を計算する', async () => {
+    const json = await (
+      await bairitsuGet(req('https://my-naishin.com/api/bairitsu?applicants=120&capacity=80'))
+    ).json();
+    expect(json.mode).toBe('application_ratio');
+    expect(json.ratio).toBe(1.5);
+  });
+
+  test('testTakers/passers指定で実質倍率を計算する', async () => {
+    const json = await (
+      await bairitsuGet(req('https://my-naishin.com/api/bairitsu?testTakers=160&passers=80'))
+    ).json();
+    expect(json.mode).toBe('actual_ratio');
+    expect(json.ratio).toBe(2);
+  });
+
+  test('募集人員0（不正）は400', async () => {
+    const res = await bairitsuGet(req('https://my-naishin.com/api/bairitsu?applicants=100&capacity=0'));
     expect(res.status).toBe(400);
   });
 });
@@ -292,5 +330,12 @@ describe('/api/openapi', () => {
     expect(json.paths['/api/hensachi/percentile-table']).toBeDefined();
     expect(json.paths['/api/total-score']).toBeDefined();
     expect(json.paths['/api/total-score/{code}']).toBeDefined();
+  });
+
+  test('S-5：bairitsu/education-cost系エンドポイントが記載されている', async () => {
+    const json = await (await openapiGet()).json();
+    expect(json.paths['/api/bairitsu']).toBeDefined();
+    expect(json.paths['/api/education-cost']).toBeDefined();
+    expect(json.paths['/api/education-cost/path-to-university']).toBeDefined();
   });
 });
