@@ -29,10 +29,10 @@ describe('/api/mcp JSON-RPC 契約', () => {
     expect(json.result.capabilities.prompts).toBeDefined();
   });
 
-  test('tools/list は18ツールを返す（S-5でhensachi/total-score/bairitsu/education-cost/stats/tokyoの11本を追加）', async () => {
+  test('tools/list は19ツールを返す（S-5でhensachi/total-score/bairitsu/education-cost/stats/tokyo/kanagawaの12本を追加）', async () => {
     const res = await POST(rpc('tools/list'));
     const json = await res.json();
-    expect(json.result.tools).toHaveLength(18);
+    expect(json.result.tools).toHaveLength(19);
     expect(json.result.tools.map((t: { name: string }) => t.name)).toContain('build_study_plan');
     expect(json.result.tools.map((t: { name: string }) => t.name)).toContain('calculate_hensachi');
     expect(json.result.tools.map((t: { name: string }) => t.name)).toContain('calculate_total_score');
@@ -170,6 +170,15 @@ describe('/api/mcp JSON-RPC 契約', () => {
     expect(data.rankLabel).toContain('最難関校レベル');
   });
 
+  test('tools/call calculate_kanagawa_s_value は満点入力でS1=1000を返す', async () => {
+    const res = await POST(
+      rpc('tools/call', { name: 'calculate_kanagawa_s_value', arguments: { naishinRaw: 135, gakuryokuRaw: 500 } })
+    );
+    const data = JSON.parse((await res.json()).result.content[0].text);
+    expect(data.s1).toBe(1000);
+    expect(data.rankLabel).toContain('最難関校レベル');
+  });
+
   test('resources/list は47件、resources/read は該当県JSON', async () => {
     const list = await (await POST(rpc('resources/list'))).json();
     expect(list.result.resources).toHaveLength(47);
@@ -198,7 +207,7 @@ describe('/api/mcp JSON-RPC 契約', () => {
   test('GET ディスカバリはツール/メソッド一覧を返す', async () => {
     const res = GET();
     const json = await res.json();
-    expect(json.tools).toHaveLength(18);
+    expect(json.tools).toHaveLength(19);
     expect(json.methods).toContain('resources/read');
   });
 });

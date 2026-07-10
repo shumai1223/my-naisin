@@ -3,15 +3,7 @@
 import * as React from 'react';
 import { Calculator, RotateCcw } from 'lucide-react';
 import { TargetDistancePanel } from '@/components/TotalScore/TargetDistancePanel';
-
-const RATIO_OPTIONS = [
-  { label: '4:6（標準）', naishin: 4, gakuryoku: 6 },
-  { label: '3:7（学力重視）', naishin: 3, gakuryoku: 7 },
-  { label: '2:8（学力最重視）', naishin: 2, gakuryoku: 8 },
-  { label: '5:5（バランス型）', naishin: 5, gakuryoku: 5 },
-  { label: '6:4（内申重視）', naishin: 6, gakuryoku: 4 },
-  { label: '7:3（内申最重視）', naishin: 7, gakuryoku: 3 },
-];
+import { KANAGAWA_RATIO_OPTIONS, KANAGAWA_S_VALUE_MAX, computeKanagawaSValue, kanagawaRankLabel } from '@/lib/total-score/kanagawa';
 
 export interface KanagawaSValueResult {
   total: number;
@@ -33,23 +25,17 @@ export function KanagawaSValueCalculator({ onResult }: KanagawaSValueCalculatorP
   const gakuryoku = parseFloat(gakuryokuInput) || 0; // 500点満点
   const tokushoku = parseFloat(tokushokuInput) || 0; // 最大100点（学校による）
 
-  const ratio = RATIO_OPTIONS[ratioIndex];
-
-  // S1値（特色検査なし）の計算式：
-  // S1 = (内申/135 × 100 × 内申比率) + (学力/500 × 100 × 学力比率)
-  // 比率の合計は10
-  const naishinConverted = (naishin / 135) * 100 * ratio.naishin;
-  const gakuryokuConverted = (gakuryoku / 500) * 100 * ratio.gakuryoku;
-  const s1 = Math.round(naishinConverted + gakuryokuConverted);
-
-  // S2値（特色検査あり） = S1 + 特色検査の比率（最大5）
-  // 簡略化のため、特色検査を比例配分（最大5として加算）
-  const s2 = Math.round(s1 + tokushoku * 5);
+  const { naishinConverted, gakuryokuConverted, s1, s2, ratio } = computeKanagawaSValue({
+    naishinRaw: naishin,
+    gakuryokuRaw: gakuryoku,
+    tokushokuRaw: tokushoku,
+    ratioIndex,
+  });
 
   const hasInput = naishinInput !== '' || gakuryokuInput !== '';
 
   React.useEffect(() => {
-    onResult?.(hasInput ? { total: s1, max: 1000 } : null);
+    onResult?.(hasInput ? { total: s1, max: KANAGAWA_S_VALUE_MAX } : null);
   }, [hasInput, s1, onResult]);
 
   const reset = () => {
@@ -68,14 +54,7 @@ export function KanagawaSValueCalculator({ onResult }: KanagawaSValueCalculatorP
     return 'text-blue-700';
   };
 
-  const getRankLabel = () => {
-    if (s1 >= 900) return '最難関校レベル（横浜翠嵐・湘南）';
-    if (s1 >= 830) return '難関校レベル（柏陽・厚木・川和）';
-    if (s1 >= 750) return '上位校レベル（光陵・希望ヶ丘・小田原）';
-    if (s1 >= 680) return '中堅上位校レベル（鎌倉・大和・横浜緑ヶ丘）';
-    if (s1 >= 600) return '中堅校レベル';
-    return '基礎を固める段階';
-  };
+  const getRankLabel = () => kanagawaRankLabel(s1);
 
   return (
     <div className="rounded-2xl border-2 border-blue-200 bg-white shadow-lg overflow-hidden">
@@ -136,7 +115,7 @@ export function KanagawaSValueCalculator({ onResult }: KanagawaSValueCalculatorP
         <div>
           <label className="block text-sm font-bold text-slate-800 mb-1">志望校の比率（内申：学力）</label>
           <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
-            {RATIO_OPTIONS.map((opt, i) => (
+            {KANAGAWA_RATIO_OPTIONS.map((opt, i) => (
               <button
                 key={opt.label}
                 type="button"
@@ -202,7 +181,7 @@ export function KanagawaSValueCalculator({ onResult }: KanagawaSValueCalculatorP
             targetInput={targetInput}
             onTargetInputChange={setTargetInput}
             total={s1}
-            totalMax={1000}
+            totalMax={KANAGAWA_S_VALUE_MAX}
             inputId="kanagawa-total-score-target"
           />
         </div>

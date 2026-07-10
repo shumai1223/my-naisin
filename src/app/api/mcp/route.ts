@@ -24,6 +24,7 @@ import type { CourseType, JukuType, IncomeBracket, UniversityType, Residence } f
 import { isStatsMetric, buildSuppressedAggregate, STATS_MIN_SAMPLE_SIZE, STATS_METRICS } from '@/lib/stats-aggregation';
 import { getStatsValues } from '@/lib/stats-db';
 import { computeTokyoTotalScore, tokyoRankLabel, TOKYO_ESAT_GRADES } from '@/lib/total-score/tokyo';
+import { computeKanagawaSValue, kanagawaRankLabel, KANAGAWA_RATIO_OPTIONS } from '@/lib/total-score/kanagawa';
 
 /**
  * MCP互換エンドポイント（堀B / AIネイティブの城①）。
@@ -304,6 +305,20 @@ const TOOLS = [
         esatGrade: { type: 'string', description: 'ESAT-Jの評価段階（A/B/C/D/E/F/なし）。' },
       },
       required: ['academicRaw', 'naishinRaw', 'esatGrade'],
+    },
+  },
+  {
+    name: 'calculate_kanagawa_s_value',
+    description: `神奈川県のS値（S1=内申・学力を志望校比率で100点満点換算し合算/1000点満点。S2=S1+特色検査）を計算する。統一エンジンとは配点構造が異なる個別実装。比率パターン: ${KANAGAWA_RATIO_OPTIONS.map((o, i) => `${i}=${o.label}`).join(', ')}。`,
+    inputSchema: {
+      type: 'object',
+      properties: {
+        naishinRaw: { type: 'number', description: '内申点素点（135点満点＝中2＋中3×2の9教科評定）。' },
+        gakuryokuRaw: { type: 'number', description: '学力検査点素点（500点満点）。' },
+        tokushokuRaw: { type: 'number', description: '任意。特色検査の得点（最大100点。難関校のみ実施）。未指定はS2=S1。' },
+        ratioIndex: { type: 'number', description: `任意。比率パターンのインデックス（既定0=4:6標準）。選択肢: ${KANAGAWA_RATIO_OPTIONS.map((o, i) => `${i}=${o.label}`).join(', ')}` },
+      },
+      required: ['naishinRaw', 'gakuryokuRaw'],
     },
   },
 ] as const;
@@ -593,6 +608,18 @@ async function runTool(name: string, args: Record<string, unknown>) {
     }
     const result = computeTokyoTotalScore({ academicRaw, naishinRaw, esatGrade });
     return toolText({ ...result, rankLabel: tokyoRankLabel(result.total) });
+  }
+
+  if (name === 'calculate_kanagawa_s_value') {
+    const naishinRaw = Number(args.naishinRaw);
+    const gakuryokuRaw = Number(args.gakuryokuRaw);
+    if (!Number.isFinite(naishinRaw) || !Number.isFinite(gakuryokuRaw)) {
+      return toolText({ error: 'invalid_params', message: 'naishinRaw・gakuryokuRawは数値で指定してください。' });
+    }
+    const tokushokuRaw = Number.isFinite(Number(args.tokushokuRaw)) ? Number(args.tokushokuRaw) : undefined;
+    const ratioIndex = Number.isFinite(Number(args.ratioIndex)) ? Number(args.ratioIndex) : undefined;
+    const result = computeKanagawaSValue({ naishinRaw, gakuryokuRaw, tokushokuRaw, ratioIndex });
+    return toolText({ ...result, rankLabel: kanagawaRankLabel(result.s1) });
   }
 
   return null;
