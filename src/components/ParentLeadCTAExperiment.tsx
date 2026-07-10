@@ -28,7 +28,9 @@ const FALLBACK_ARMS: ExperimentArm[] = [
  * 差分（送客先 affiliateId / 見出し / 本文 / CTA接頭辞）を ParentLeadCTA に流す。
  *  - offer A/B：arm.affiliateId が live のときだけ送客先を差し替え（note/ctaText はプリセットで整合）。
  *  - copy A/B：arm.heading / arm.body / arm.ctaPrefix で文言だけを差し替え（送客先は据え置き）。
- * 勝者は GA4 で experiment_impression × cta_view/affiliate_click を見て judgeWinner（experiments.ts）で判定。
+ * 勝者は cta_view/affiliate_clickに直接載るvariantディメンション（S-6）を judgeWinner（experiments.ts）へ
+ * 集計して判定。experiment_impressionとの突合は不要（GA4 Data APIはセッション単位のイベント間ジョインを
+ * 素直に提供しないため、変換イベント自体にvariantを持たせる設計にした）。
  */
 export function ParentLeadCTAExperiment({
   experimentId,
@@ -66,6 +68,7 @@ export function ParentLeadCTAExperiment({
       ctaText={ctaText}
       className={className}
       auditHide={auditHide}
+      variant={variantId}
     />
   );
 }

@@ -25,9 +25,14 @@ interface AffiliateAdProps {
   pref?: string;
   /** /go 一次ログ用の設置面（未指定なら viewPlacement を流用）。 */
   placement?: string;
+  /**
+   * A/Bバリアント（ParentLeadCTAExperiment経由のとき）。data-variant属性としてアンカーへ付与し、
+   * AffiliateClickTrackerがaffiliate_clickに載せる（S-6・offer/color A/Bの勝敗をGA4で分解可能にする）。
+   */
+  variant?: string;
 }
 
-export function AffiliateAd({ id, className = '', centered = true, hideLabel = false, linkClassName, auditHide = false, ctaText, trackView = false, viewPlacement, viewPref, pref, placement }: AffiliateAdProps) {
+export function AffiliateAd({ id, className = '', centered = true, hideLabel = false, linkClassName, auditHide = false, ctaText, trackView = false, viewPlacement, viewPref, pref, placement, variant }: AffiliateAdProps) {
   // AdSense撤退（2026-07）で審査モードは廃止。auditHide は後方互換で受けるが、もう隠さない。
   void auditHide;
   const ad = AFFILIATES[id];
@@ -40,8 +45,17 @@ export function AffiliateAd({ id, className = '', centered = true, hideLabel = f
 
   // 視認計測（opt-in）。描画される（pending/auditHideを通過した）ときだけ仕込むので空インプは出ない。
   const viewTracker = trackView ? (
-    <CtaViewTracker placement={viewPlacement ?? 'affiliate'} pref={viewPref} program={id} />
+    <CtaViewTracker placement={viewPlacement ?? 'affiliate'} pref={viewPref} program={id} variant={variant} />
   ) : null;
+
+  // クリック計測用のdata属性（AffiliateClickTrackerがdocumentレベルのclickリスナーで拾う）。
+  const clickDataAttrs = {
+    'data-aff-id': ad.id,
+    'data-aff-name': ad.name,
+    ...(placement || viewPlacement ? { 'data-placement': placement ?? viewPlacement } : {}),
+    ...(pref || viewPref ? { 'data-pref': pref ?? viewPref } : {}),
+    ...(variant ? { 'data-variant': variant } : {}),
+  };
 
   const label = !hideLabel && (
     <div className="mb-1 text-[10px] font-medium text-slate-400">広告</div>
@@ -67,8 +81,7 @@ export function AffiliateAd({ id, className = '', centered = true, hideLabel = f
           href={href}
           rel="nofollow sponsored noopener"
           target="_blank"
-          data-aff-id={ad.id}
-          data-aff-name={ad.name}
+          {...clickDataAttrs}
           className={linkClassName ?? 'font-bold text-blue-600 underline decoration-blue-300 underline-offset-2 hover:text-blue-700 hover:decoration-blue-500'}
         >
           {ctaText ?? ad.text}
@@ -82,7 +95,7 @@ export function AffiliateAd({ id, className = '', centered = true, hideLabel = f
     <div className={`${centered ? 'flex flex-col items-center' : ''} ${className}`}>
       {viewTracker}
       {label}
-      <a href={href} rel="nofollow sponsored noopener" target="_blank" data-aff-id={ad.id} data-aff-name={ad.name}>
+      <a href={href} rel="nofollow sponsored noopener" target="_blank" {...clickDataAttrs}>
         <img
           src={ad.imgSrc}
           width={ad.width}

@@ -22,6 +22,8 @@ interface ParentLeadCTAProps {
   prefectureCode?: string;
   /** 設置面。出し分けエンジンの解決＋cta_viewの計装に使う。 */
   placement?: LeadPlacement;
+  /** A/Bバリアント（ParentLeadCTAExperiment経由のとき）。cta_view/affiliate_clickに載せてGA4で勝敗分解する（S-6）。 */
+  variant?: string;
 }
 
 /**
@@ -31,7 +33,7 @@ interface ParentLeadCTAProps {
  * 「契約の意思決定者＝保護者」に向けて、無料資料請求（高単価リード）へ誘導する。
  * 実リンク・トラッキング・rel/PR表記は AffiliateAd に集約してコンプラを担保。
  */
-export function ParentLeadCTA({ heading, body, className = '', auditHide = false, affiliateId, note, ctaText, prefectureCode, placement }: ParentLeadCTAProps) {
+export function ParentLeadCTA({ heading, body, className = '', auditHide = false, affiliateId, note, ctaText, prefectureCode, placement, variant }: ParentLeadCTAProps) {
   // AdSense撤退（2026-07）で審査モードは廃止。auditHide は後方互換で受けるが、もう隠さない
   // （＝これまで NEXT_PUBLIC_ADSENSE_AUDIT=1 で休眠していた保護者リードCTAを全面点灯＝換金導線の解凍）。
   void auditHide;
@@ -52,7 +54,7 @@ export function ParentLeadCTA({ heading, body, className = '', auditHide = false
     <section
       className={`overflow-hidden rounded-2xl border border-emerald-200 bg-gradient-to-br from-emerald-50 via-teal-50/60 to-white p-6 shadow-sm md:p-7 ${className}`}
     >
-      <CtaViewTracker placement={placement ?? 'parent-lead'} pref={prefectureCode} program={resolvedAffiliateId} />
+      <CtaViewTracker placement={placement ?? 'parent-lead'} pref={prefectureCode} program={resolvedAffiliateId} variant={variant} />
       <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-bold text-emerald-700 ring-1 ring-emerald-200">
         <ShieldCheck className="h-3.5 w-3.5" />
         保護者の方へ
@@ -72,6 +74,7 @@ export function ParentLeadCTA({ heading, body, className = '', auditHide = false
           ctaText={resolvedCtaText}
           pref={prefectureCode}
           placement={placement}
+          variant={variant}
           linkClassName="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 px-6 py-3.5 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-emerald-700 hover:shadow-lg active:scale-95 sm:w-auto"
         />
         <span className="inline-flex items-center justify-center gap-1.5 text-xs text-slate-500">

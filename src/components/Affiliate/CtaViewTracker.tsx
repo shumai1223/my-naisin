@@ -11,6 +11,11 @@ interface CtaViewTrackerProps {
   pref?: string;
   /** 送客先プログラム（cta_view を program 別に見たいとき）。 */
   program?: string;
+  /**
+   * A/Bバリアント（ParentLeadCTAExperiment経由のとき）。experiment_impressionと同じ値を載せ、
+   * cta_view単体でもGA4のvariantディメンションで勝敗を分解できるようにする（S-6・突合に頼らない設計）。
+   */
+  variant?: string;
 }
 
 /**
@@ -20,7 +25,7 @@ interface CtaViewTrackerProps {
  * 不可視センチネルを自分自身で監視し、交差したら発火→自動で監視解除。
  * これで「affiliate_click ÷ cta_view」=面ごとの換金率（CTR）が GA4 で取れる。
  */
-export function CtaViewTracker({ placement, pref, program }: CtaViewTrackerProps) {
+export function CtaViewTracker({ placement, pref, program, variant }: CtaViewTrackerProps) {
   const ref = React.useRef<HTMLSpanElement | null>(null);
 
   React.useEffect(() => {
@@ -34,7 +39,11 @@ export function CtaViewTracker({ placement, pref, program }: CtaViewTrackerProps
             fired = true;
             funnel.ctaView(
               { placement, pref },
-              { page: window.location.pathname, ...(program ? { program } : {}) }
+              {
+                page: window.location.pathname,
+                ...(program ? { program } : {}),
+                ...(variant ? { variant } : {}),
+              }
             );
             observer.disconnect();
           }
@@ -44,7 +53,7 @@ export function CtaViewTracker({ placement, pref, program }: CtaViewTrackerProps
     );
     observer.observe(el);
     return () => observer.disconnect();
-  }, [placement, pref, program]);
+  }, [placement, pref, program, variant]);
 
   return <span ref={ref} aria-hidden="true" style={{ display: 'block', width: 0, height: 0 }} />;
 }
