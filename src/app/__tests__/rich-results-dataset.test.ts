@@ -65,6 +65,7 @@ const DATASET_EXEMPT_ROUTES: Record<string, string> = {
   '/jitsugika': '実技教科の解説ページ（データセットの提供なし）',
   '/juken-ryou': '受験料シミュレーター（単発計算UIでありデータセットの提供ではない）',
   '/juken-schedule': '受験スケジュール参照ページ（個別イベント情報でありデータセットではない）',
+  '/juken-toujitsu': '受験当日の持ち物・タイムライン解説ページ（チェックリスト/HowToでありデータセットの提供ではない）',
   '/juku-hiyou': '塾費用シミュレーター（単発計算UIでありデータセットの提供ではない）',
   '/juku-shindan': '塾診断クイズ（単発診断UIでありデータセットの提供ではない）',
   '/katei-kyoshi': '家庭教師比較ページ（データセットの提供なし）',

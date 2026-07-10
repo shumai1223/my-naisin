@@ -187,6 +187,7 @@ export default function JukenSchedulePage() {
 
           <RelatedToolsSection
             links={[
+              { href: '/juken-toujitsu', title: '受験当日の持ち物・タイムライン', desc: '当日の持ち物チェックリストと一般的な流れ' },
               { href: '/plan', title: '内申点アップの学習計画ジェネレータ', desc: '目標まであと何点・週次プランを自動作成' },
               { href: '/reverse', title: '志望校から逆算する', desc: '目標校から必要な内申点・当日点を逆算' },
               { href: '/mendan', title: '三者面談の準備チェックリスト', desc: '先生に聞くこと・面談前に確認する数値' },
