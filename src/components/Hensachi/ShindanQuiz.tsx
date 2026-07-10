@@ -11,6 +11,7 @@ import {
   Search,
   ChevronRight,
   Check,
+  Users,
 } from 'lucide-react';
 
 import { PREFECTURES } from '@/lib/prefectures';
@@ -23,6 +24,7 @@ import {
   roundHensachi,
 } from '@/lib/hensachi';
 import { funnel } from '@/lib/track';
+import { HensachiGapToTarget } from '@/components/Hensachi/HensachiGapToTarget';
 
 export type Concern = 'reach' | 'improve' | 'juku' | 'futoukou';
 
@@ -239,28 +241,59 @@ export function ShindanQuiz({ defaultGrade, defaultConcern }: ShindanQuizProps =
             </div>
           </div>
 
-          {/* 次の一手（Q5の関心に応じて分岐） */}
+          {/* 次の一手（Q5の関心に応じて分岐・S-2③） */}
           <div className="rounded-2xl border-2 border-blue-200 bg-blue-50/40 p-5 shadow-sm">
             <h3 className="mb-3 text-sm font-bold text-slate-800">次の一手</h3>
             {concern === 'reach' && (
-              <Link href="/hensachi/shiboukou" className="flex items-center justify-between gap-3 rounded-xl bg-white p-4 shadow-sm hover:-translate-y-0.5 transition-all">
-                <span className="text-sm font-bold text-blue-700">偏差値→志望校レンジを詳しく見る</span>
-                <ChevronRight className="h-4 w-4 text-blue-400" />
-              </Link>
+              <div className="space-y-2">
+                <Link href="/hensachi/shiboukou" className="flex items-center justify-between gap-3 rounded-xl bg-white p-4 shadow-sm hover:-translate-y-0.5 transition-all">
+                  <span className="text-sm font-bold text-blue-700">偏差値→志望校レンジを詳しく見る</span>
+                  <ChevronRight className="h-4 w-4 text-blue-400" />
+                </Link>
+                <Link href="/hogosha" className="flex items-center justify-between gap-3 rounded-xl bg-white p-3 shadow-sm hover:-translate-y-0.5 transition-all">
+                  <span className="flex items-center gap-1.5 text-xs font-bold text-slate-600">
+                    <Users className="h-3.5 w-3.5 text-slate-400" />
+                    保護者の方へ：志望校が見えたら学費・塾代の目安を確認する
+                  </span>
+                  <ChevronRight className="h-3.5 w-3.5 text-slate-400" />
+                </Link>
+              </div>
             )}
             {concern === 'improve' && (
-              <Link href="/hensachi/agekata" className="flex items-center justify-between gap-3 rounded-xl bg-white p-4 shadow-sm hover:-translate-y-0.5 transition-all">
-                <span className="text-sm font-bold text-blue-700">偏差値の上げ方・具体策を見る</span>
-                <ChevronRight className="h-4 w-4 text-blue-400" />
-              </Link>
+              <div className="space-y-3">
+                <Link href="/hensachi/agekata" className="flex items-center justify-between gap-3 rounded-xl bg-white p-4 shadow-sm hover:-translate-y-0.5 transition-all">
+                  <span className="text-sm font-bold text-blue-700">偏差値の上げ方・具体策を見る</span>
+                  <ChevronRight className="h-4 w-4 text-blue-400" />
+                </Link>
+                {representativeHensachi !== null && <HensachiGapToTarget value={representativeHensachi} />}
+              </div>
             )}
-            {(concern === 'juku' || concern === 'futoukou') && (
-              <Link href="/juku-shindan" className="flex items-center justify-between gap-3 rounded-xl bg-white p-4 shadow-sm hover:-translate-y-0.5 transition-all">
-                <span className="text-sm font-bold text-blue-700">
-                  {concern === 'futoukou' ? '不登校対応の塾・オンライン学習を診断する' : '結果に合う塾を診断する（無料）'}
-                </span>
-                <ChevronRight className="h-4 w-4 text-blue-400" />
-              </Link>
+            {concern === 'juku' && (
+              <div className="space-y-2">
+                <Link href="/juku-shindan" className="flex items-center justify-between gap-3 rounded-xl bg-white p-4 shadow-sm hover:-translate-y-0.5 transition-all">
+                  <span className="text-sm font-bold text-blue-700">結果に合う塾を診断する（無料）</span>
+                  <ChevronRight className="h-4 w-4 text-blue-400" />
+                </Link>
+                <Link href="/hogosha" className="flex items-center justify-between gap-3 rounded-xl bg-white p-3 shadow-sm hover:-translate-y-0.5 transition-all">
+                  <span className="flex items-center gap-1.5 text-xs font-bold text-slate-600">
+                    <Users className="h-3.5 w-3.5 text-slate-400" />
+                    保護者の方へ：塾・費用の選び方を確認する
+                  </span>
+                  <ChevronRight className="h-3.5 w-3.5 text-slate-400" />
+                </Link>
+              </div>
+            )}
+            {concern === 'futoukou' && (
+              <div className="space-y-2">
+                <Link href="/futoukou" className="flex items-center justify-between gap-3 rounded-xl bg-white p-4 shadow-sm hover:-translate-y-0.5 transition-all">
+                  <span className="text-sm font-bold text-blue-700">不登校でも高校受験はできる（内申点・出席の扱いを見る）</span>
+                  <ChevronRight className="h-4 w-4 text-blue-400" />
+                </Link>
+                <Link href="/juku-shindan" className="flex items-center justify-between gap-3 rounded-xl bg-white p-3 shadow-sm hover:-translate-y-0.5 transition-all">
+                  <span className="text-xs font-bold text-slate-600">不登校対応の塾・オンライン学習を診断する</span>
+                  <ChevronRight className="h-3.5 w-3.5 text-slate-400" />
+                </Link>
+              </div>
             )}
           </div>
         </div>
