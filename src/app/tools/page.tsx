@@ -415,6 +415,14 @@ const TOOL_GROUPS: { id: string; heading: string; tools: Tool[] }[] = [
         color: 'blue',
       },
       {
+        title: '出願倍率の読み方',
+        description: '中間発表と確定倍率の違い、志願変更の一般的な仕組み、倍率をどう受け止めればいいかを解説',
+        features: ['中間発表と確定倍率の違い', '志願変更の一般的な仕組み', '倍率だけで判断しない考え方', 'よくある質問'],
+        href: '/koukou-bairitsu/yomikata',
+        icon: LineChart,
+        color: 'blue',
+      },
+      {
         title: '受験当日の持ち物・タイムライン',
         description: '当日の持ち物チェックリスト、前日から試験終了までの一般的な流れ、遅刻・忘れ物への対応',
         features: ['持ち物チェックリスト', '当日のタイムライン', 'トラブル対応', '一般選抜向け'],

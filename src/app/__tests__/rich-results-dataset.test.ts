@@ -72,6 +72,7 @@ const DATASET_EXEMPT_ROUTES: Record<string, string> = {
   '/juku-shindan': '塾診断クイズ（単発診断UIでありデータセットの提供ではない）',
   '/katei-kyoshi': '家庭教師比較ページ（データセットの提供なし）',
   '/koukou-bairitsu': '倍率計算機（単発計算UIでありデータセットの提供ではない）',
+  '/koukou-bairitsu/yomikata': '出願倍率の読み方解説ページ（一般的な読み方の解説でありデータセットの提供ではない）',
   '/koukou-hiyou': '高校費用シミュレーター（単発計算UIでありデータセットの提供ではない）',
   '/koukou-hiyou/kokoroze': '公私3年間実質負担シミュレーター（単発計算UIでありデータセットの提供ではない）',
   '/kyouiku-hi': '教育費シミュレーター（単発計算UIでありデータセットの提供ではない）',

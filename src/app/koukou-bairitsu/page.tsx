@@ -119,6 +119,10 @@ export default function KoukouBairitsuPage() {
                 都道府県別の総合得点の仕組みを見る
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
+              <Link href="/koukou-bairitsu/yomikata" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-indigo-200 hover:bg-indigo-50/50">
+                出願倍率の読み方を見る
+                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
+              </Link>
             </div>
           </section>
 
