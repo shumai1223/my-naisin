@@ -8,6 +8,7 @@ import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { ParentCostBridge } from '@/components/ParentCostBridge';
 import { ParentWindowBridge } from '@/components/ParentWindowBridge';
 import { ShindanEntryLink } from '@/components/ShindanEntryLink';
+import { StatsOptIn } from '@/components/StatsOptIn';
 
 interface TotalScoreResultFlowProps {
   system: TotalScoreSystem;
@@ -58,6 +59,11 @@ export function TotalScoreResultFlow({ system, saveHeading, saveBody }: TotalSco
 
       {/* 塾診断ファネルへの入口（結果に合う塾を無料診断） */}
       <ShindanEntryLink className="mt-6" />
+
+      {/* S-1: 匿名統計オプトイン。同意済みなら総合得点の実測値を匿名で自動送信 */}
+      <div className="mt-6">
+        <StatsOptIn metric="total-score" value={result?.total} maxValue={result?.max} prefectureCode={system.code} />
+      </div>
     </>
   );
 }

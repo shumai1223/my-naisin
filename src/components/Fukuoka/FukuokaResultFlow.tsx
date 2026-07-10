@@ -6,6 +6,7 @@ import { FukuokaScoreCalculator, type FukuokaScoreResult } from '@/components/Fu
 import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { ParentCostBridge } from '@/components/ParentCostBridge';
 import { ParentWindowBridge } from '@/components/ParentWindowBridge';
+import { StatsOptIn } from '@/components/StatsOptIn';
 
 /** 福岡内申点・当日点ページの結果連動フロー（B-5）。 */
 export function FukuokaResultFlow() {
@@ -41,6 +42,11 @@ export function FukuokaResultFlow() {
           }
           body="内申(中3)・当日点の伸ばし方、修猷館・福岡など志望校の最新ボーダー、出願スケジュールを受験本番まで無料でお届けします。LINEかメールで、いつでも解除できます。"
         />
+      </div>
+
+      {/* S-1: 匿名統計オプトイン */}
+      <div className="mt-6">
+        <StatsOptIn metric="total-score" value={result?.total} maxValue={result?.max} prefectureCode="fukuoka" />
       </div>
     </>
   );

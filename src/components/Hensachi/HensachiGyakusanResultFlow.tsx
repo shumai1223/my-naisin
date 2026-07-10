@@ -7,6 +7,7 @@ import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { ParentWindowBridge } from '@/components/ParentWindowBridge';
 import { ParentCostBridge } from '@/components/ParentCostBridge';
+import { StatsOptIn } from '@/components/StatsOptIn';
 
 /**
  * /hensachi/gyakusan の結果連動フロー（C-15）。
@@ -51,6 +52,11 @@ export function HensachiGyakusanResultFlow() {
 
       {/* 結果直後の同スケール導線（生徒→保護者） */}
       <ParentCostBridge className="mt-6" />
+
+      {/* S-1: 匿名統計オプトイン */}
+      <div className="mt-6">
+        <StatsOptIn metric="hensachi" value={result?.currentHensachi} />
+      </div>
     </>
   );
 }

@@ -6,6 +6,7 @@ import { HokkaidoRankCalculator, type HokkaidoRankResult } from '@/components/Ho
 import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { ParentCostBridge } from '@/components/ParentCostBridge';
 import { ParentWindowBridge } from '@/components/ParentWindowBridge';
+import { StatsOptIn } from '@/components/StatsOptIn';
 
 /**
  * 北海道内申ランクページの結果連動フロー（B-5）。
@@ -44,6 +45,11 @@ export function HokkaidoRankResultFlow() {
           }
           body="内申・当日点の伸ばし方、札幌南・札幌北など志望校の最新ランクとボーダー、出願スケジュールを受験本番まで無料でお届けします。LINEかメールで、いつでも解除できます。"
         />
+      </div>
+
+      {/* S-1: 匿名統計オプトイン */}
+      <div className="mt-6">
+        <StatsOptIn metric="total-score" value={result?.total} maxValue={result?.max} prefectureCode="hokkaido" />
       </div>
     </>
   );

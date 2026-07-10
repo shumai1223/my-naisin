@@ -15,6 +15,7 @@ import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { ParentCostBridge } from '@/components/ParentCostBridge';
 import { ParentWindowBridge } from '@/components/ParentWindowBridge';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
+import { StatsOptIn } from '@/components/StatsOptIn';
 import { AnswerBox } from '@/components/AnswerBox';
 import Loader from '@/components/ui/Loader';
 import type { ReverseResult } from '@/components/Calculator/ReverseCalculator';
@@ -290,6 +291,16 @@ function ReversePageContent() {
                 prefectureCode={prefCtx.prefectureCode || undefined}
                 prefectureName={prefCtx.prefectureName}
               />
+
+              {/* S-1: 匿名統計オプトイン */}
+              <div className="mt-6">
+                <StatsOptIn
+                  metric="total-score"
+                  value={result?.requiredExamScore}
+                  maxValue={result?.examMaxScore}
+                  prefectureCode={prefCtx.prefectureCode || undefined}
+                />
+              </div>
 
               {/* 2026-07 AdSense撤退＝アフィリ一本化：ここにあった Z会/スタサプの表示バナー群
                   （推定EV ¥1.5〜29/click）は、上の保護者リード(塾無料体験 ¥84〜)＋LINE名簿と

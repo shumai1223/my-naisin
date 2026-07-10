@@ -7,6 +7,7 @@ import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { ParentCostBridge } from '@/components/ParentCostBridge';
 import { ParentWindowBridge } from '@/components/ParentWindowBridge';
 import { ShindanEntryLink } from '@/components/ShindanEntryLink';
+import { StatsOptIn } from '@/components/StatsOptIn';
 
 /**
  * 都立総合得点（1020点満点・買い意図最濃・CTR15.8%）の結果連動 換金フロー。
@@ -50,6 +51,11 @@ export function TokyoTotalScoreResultFlow() {
 
       {/* 塾診断ファネルへの入口（結果に合う塾を無料診断） */}
       <ShindanEntryLink className="mt-6" />
+
+      {/* S-1: 匿名統計オプトイン */}
+      <div className="mt-6">
+        <StatsOptIn metric="total-score" value={result?.total} maxValue={result?.max} prefectureCode="tokyo" />
+      </div>
     </>
   );
 }

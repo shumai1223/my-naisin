@@ -6,6 +6,7 @@ import { ChibaKValueCalculator, type ChibaKValueResult } from '@/components/Chib
 import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { ParentCostBridge } from '@/components/ParentCostBridge';
 import { ParentWindowBridge } from '@/components/ParentWindowBridge';
+import { StatsOptIn } from '@/components/StatsOptIn';
 
 /**
  * 千葉K値ページの結果連動フロー（B-4）。
@@ -45,6 +46,11 @@ export function ChibaTotalScoreResultFlow() {
           }
           body="調査書点・学力検査の伸ばし方、千葉・船橋など志望校のK値と最新ボーダー、出願スケジュールを受験本番まで無料でお届けします。LINEかメールで、いつでも解除できます。"
         />
+      </div>
+
+      {/* S-1: 匿名統計オプトイン */}
+      <div className="mt-6">
+        <StatsOptIn metric="total-score" value={result?.total} maxValue={result?.max} prefectureCode="chiba" />
       </div>
     </>
   );

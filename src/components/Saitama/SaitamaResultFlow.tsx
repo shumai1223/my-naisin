@@ -6,6 +6,7 @@ import { SaitamaTotalScoreCalculator, type SaitamaTotalScoreResult } from '@/com
 import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { ParentCostBridge } from '@/components/ParentCostBridge';
 import { ParentWindowBridge } from '@/components/ParentWindowBridge';
+import { StatsOptIn } from '@/components/StatsOptIn';
 
 /** 埼玉県総合得点ページの結果連動フロー（S-3①・残タスク）。 */
 export function SaitamaResultFlow() {
@@ -40,6 +41,11 @@ export function SaitamaResultFlow() {
           }
           body="調査書点・学力検査の伸ばし方、浦和・大宮など志望校の選抜基準と最新ボーダー、出願スケジュールを受験本番まで無料でお届けします。LINEかメールで、いつでも解除できます。"
         />
+      </div>
+
+      {/* S-1: 匿名統計オプトイン */}
+      <div className="mt-6">
+        <StatsOptIn metric="total-score" value={result?.total} maxValue={result?.max} prefectureCode="saitama" />
       </div>
     </>
   );

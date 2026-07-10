@@ -6,6 +6,7 @@ import { AichiHyokaCalculator, type AichiHyokaResult } from '@/components/Aichi/
 import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { ParentCostBridge } from '@/components/ParentCostBridge';
 import { ParentWindowBridge } from '@/components/ParentWindowBridge';
+import { StatsOptIn } from '@/components/StatsOptIn';
 
 /** 愛知評価方法ページの結果連動フロー（B-5）。 */
 export function AichiTotalScoreResultFlow() {
@@ -41,6 +42,11 @@ export function AichiTotalScoreResultFlow() {
           }
           body="内申・当日点の伸ばし方、旭丘・明和など志望校の評価方法と最新ボーダー、出願スケジュールを受験本番まで無料でお届けします。LINEかメールで、いつでも解除できます。"
         />
+      </div>
+
+      {/* S-1: 匿名統計オプトイン */}
+      <div className="mt-6">
+        <StatsOptIn metric="total-score" value={result?.total} maxValue={result?.max} prefectureCode="aichi" />
       </div>
     </>
   );
