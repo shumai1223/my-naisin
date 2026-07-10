@@ -5,7 +5,7 @@ import { Home, ChevronRight, Sparkles } from 'lucide-react';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
-import { ShindanQuiz } from '@/components/Hensachi/ShindanQuiz';
+import { ShindanResultFlow } from '@/components/Hensachi/ShindanResultFlow';
 import { HensachiClusterNav } from '@/components/Hensachi/HensachiClusterNav';
 import { SHINDAN_GRADE_CONTENTS, getShindanGradeContent } from '@/lib/shindan-grade-content';
 import { SITE_URL } from '@/lib/naishin-dataset';
@@ -83,7 +83,7 @@ export default async function GradeShindanPage({ params }: PageProps) {
           </header>
 
           {/* 診断ツール本体（学年をあらかじめ選択済みで表示） */}
-          <ShindanQuiz defaultGrade={content.grade} />
+          <ShindanResultFlow defaultGrade={content.grade} />
 
           {/* この学年ならではの使い方 */}
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">

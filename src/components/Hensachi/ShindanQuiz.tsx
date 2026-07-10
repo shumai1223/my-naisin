@@ -59,14 +59,25 @@ function Pill({ active, onClick, children }: { active: boolean; onClick: () => v
  * （精度を偽装しない＝上位/下位バンドは片側だけの目安を表示）。
  * 対象クエリ：偏差値診断・診断 中学生・高校偏差値診断（合計約3,600imp/28dがpos7-9に滞留）。
  */
+export interface ShindanResult {
+  /** 代表偏差値（自己申告バンドの中央値・目安）。 */
+  hensachi: number;
+  grade: number;
+  prefectureCode: string;
+  prefectureName?: string;
+  concern: Concern;
+}
+
 interface ShindanQuizProps {
   /** 学年別ページ（/hensachi/shindan/[grade]）から渡された既定の学年。Q1をあらかじめ選択済みにする。 */
   defaultGrade?: number;
   /** 目的別ページ（/hensachi/shindan/mokuteki/[purpose]）から渡された既定の関心。Q5をあらかじめ選択済みにする。 */
   defaultConcern?: Concern;
+  /** 診断確定後、親へ結果を通知（結果連動の名簿/送客導線・匿名統計送信用・S-2④）。 */
+  onResult?: (r: ShindanResult | null) => void;
 }
 
-export function ShindanQuiz({ defaultGrade, defaultConcern }: ShindanQuizProps = {}) {
+export function ShindanQuiz({ defaultGrade, defaultConcern, onResult }: ShindanQuizProps = {}) {
   const [grade, setGrade] = React.useState<number | undefined>(defaultGrade);
   const [rankBandId, setRankBandId] = React.useState<string | undefined>(undefined);
   const [prefectureCode, setPrefectureCode] = React.useState('');
@@ -106,6 +117,14 @@ export function ShindanQuiz({ defaultGrade, defaultConcern }: ShindanQuizProps =
 
   const reach = representativeHensachi !== null ? reachBandsForHensachi(representativeHensachi) : null;
   const currentTier = representativeHensachi !== null ? tierForHensachi(representativeHensachi) : null;
+
+  React.useEffect(() => {
+    if (submitted && representativeHensachi !== null && grade && prefectureCode && concern) {
+      onResult?.({ hensachi: representativeHensachi, grade, prefectureCode, prefectureName: prefName, concern });
+    } else {
+      onResult?.(null);
+    }
+  }, [submitted, representativeHensachi, grade, prefectureCode, prefName, concern, onResult]);
 
   return (
     <div>

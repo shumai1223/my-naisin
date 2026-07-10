@@ -68,6 +68,7 @@ const HENSACHI_SOURCES: ReadonlySet<LeadSource> = new Set<LeadSource>([
   'hensachi-shiboukou',
   'hensachi-moshi',
   'hensachi-gyakusan',
+  'hensachi-shindan',
 ]);
 
 /** source から既定の指標ラベルを導出（呼び出し側が metricLabel を渡さなかったとき）。 */

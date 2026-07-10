@@ -5,7 +5,7 @@ import { Home, ChevronRight, Sparkles } from 'lucide-react';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
-import { ShindanQuiz } from '@/components/Hensachi/ShindanQuiz';
+import { ShindanResultFlow } from '@/components/Hensachi/ShindanResultFlow';
 import { HensachiClusterNav } from '@/components/Hensachi/HensachiClusterNav';
 import { SHINDAN_PURPOSE_CONTENTS, getShindanPurposeContent } from '@/lib/shindan-purpose-content';
 import { SITE_URL } from '@/lib/naishin-dataset';
@@ -83,7 +83,7 @@ export default async function PurposeShindanPage({ params }: PageProps) {
           </header>
 
           {/* 診断ツール本体（Q5をあらかじめ選択済みで表示） */}
-          <ShindanQuiz defaultConcern={content.concern} />
+          <ShindanResultFlow defaultConcern={content.concern} />
 
           {/* この目的ならではの使い方 */}
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">

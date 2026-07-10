@@ -6,7 +6,7 @@ import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
 import { HowToSchema } from '@/components/StructuredData/HowToSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
-import { ShindanQuiz } from '@/components/Hensachi/ShindanQuiz';
+import { ShindanResultFlow } from '@/components/Hensachi/ShindanResultFlow';
 import { HensachiClusterNav } from '@/components/Hensachi/HensachiClusterNav';
 import { RelatedToolsSection } from '@/components/RelatedToolsSection';
 import { SHINDAN_GRADE_CONTENTS } from '@/lib/shindan-grade-content';
@@ -121,7 +121,7 @@ export default function HensachiShindanPage() {
           </header>
 
           {/* 診断ツール本体 */}
-          <ShindanQuiz />
+          <ShindanResultFlow />
 
           {/* 学年別で診断する */}
           <section className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-6">
