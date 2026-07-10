@@ -7,6 +7,7 @@ import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { ParentCostBridge } from '@/components/ParentCostBridge';
 import { ParentWindowBridge } from '@/components/ParentWindowBridge';
 import { ShindanEntryLink } from '@/components/ShindanEntryLink';
+import { StatsOptIn } from '@/components/StatsOptIn';
 
 interface NaishinResultFlowProps {
   prefectureCode: string;
@@ -68,6 +69,11 @@ export function NaishinResultFlow({ prefectureCode, prefectureName, maxScore }: 
 
       {/* 塾診断ファネルへの入口（結果に合う塾を無料診断） */}
       <ShindanEntryLink className="mt-6" />
+
+      {/* S-1: 匿名統計オプトイン。同意済みなら内申点の実測値を匿名で自動送信（1ファイルで全47県に効く） */}
+      <div className="mt-6">
+        <StatsOptIn metric="naishin" value={result?.total} maxValue={result?.max} prefectureCode={prefectureCode} />
+      </div>
     </>
   );
 }
