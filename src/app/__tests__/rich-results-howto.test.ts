@@ -60,6 +60,8 @@ const HOWTO_EXEMPT_ROUTES: Record<string, string> = {
   '/mendan': '面談準備パック（面談で見せる資料の生成であり厳密な計算手順ではない。CANDIDATE_FOR_HOWTO_CONTENT参照）',
   '/naishin-age-kata': '学年別の上げ方ハブページ（下位ページへの導線のみ）',
   '/naishin-age-kata/[grade]': '学年別の上げ方解説ページ（手順でなく学習アドバイス）',
+  '/naishin-oru': 'オール3/4/5内申点ハブページ（下位ページへの導線のみ）',
+  '/naishin-oru/[grade]': 'オール3/4/5内申点の計算例ページ（計算結果一覧であり手順ではない）',
   '/partner': '塾/パートナー向けLP（手順コンテンツなし）',
   '/pref/[code]': '県別注意点ページ（箇条書きの注意点であり手順ではない）',
   '/prefectures': '都道府県一覧ハブ（一覧のみで手順コンテンツなし）',

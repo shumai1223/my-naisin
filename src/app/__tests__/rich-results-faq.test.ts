@@ -36,6 +36,7 @@ const FAQ_EXEMPT_ROUTES: Record<string, string> = {
   '/embed': '埋め込みウィジェット選択ページ（Q&A形式のコンテンツなし）',
   '/glossary': '用語辞典（定義の一覧でありQ&A形式ではない）',
   '/guide': '内申点完全ガイド（Q&A形式のセクションなし。CANDIDATE_FOR_FAQ_CONTENT参照）',
+  '/naishin-oru': 'オール3/4/5内申点ハブページ（下位ページへの導線のみ・Q&Aは/naishin-oru/[grade]側で対応済み）',
   '/partner': '塾/パートナー向けLP（Q&A形式のコンテンツなし。CANDIDATE_FOR_FAQ_CONTENT参照）',
   '/pref/[code]': '県別注意点ページ（箇条書きでQ&A形式ではない）',
   '/prefectures': '都道府県一覧ハブ（一覧のみでQ&A形式のコンテンツなし）',

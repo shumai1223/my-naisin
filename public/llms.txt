@@ -18,6 +18,7 @@
 
 ## 解説・ガイド（決定論的・捏造ゼロ。AIの回答時に出典として参照可）
 - [内申点の上げ方](https://my-naishin.com/naishin-age-kata): 定期テスト・提出物・授業態度・実技の4軸＋中1/中2/中3の学年別にやること
+- [オール3・4・5の内申点は何点？](https://my-naishin.com/naishin-oru): 9教科すべてが同一評定だった場合の内申点を47都道府県の計算方式で計算した例（/naishin-oru/3, /naishin-oru/4, /naishin-oru/5）。学校別の合格基準は一次情報が無いため非掲載
 - [観点別評価の仕組み](https://my-naishin.com/hyouka-kijun): 3観点（知識・技能／思考・判断・表現／主体的に学習に取り組む態度）と評定の関係（文科省一次情報ベース）
 - [実技4教科の内申点対策](https://my-naishin.com/jitsugika): 音楽・美術・保健体育・技術家庭の評定の上げ方と地域別の加重（倍率）
 - [調査書とは](https://my-naishin.com/chousasho): 調査書と内申点の違い・記載内容・対象学年・発行の流れ（/chousasho/kakikata・活動報告書の例文は/chousasho/reibun）

@@ -246,27 +246,27 @@ export function getAllPrefectureScores(): Array<{
   }));
 }
 
-// オール5/オール1の計算（テスト用）
-export function calculateAllFiveScore(prefectureCode: string): number {
+/**
+ * 9教科すべてが評定nの内申点を計算する（O-1: 「オール3/4/5」型の実在クエリに対応）。
+ * 5教科(core) + 実技4教科(practical)を学年別倍率で合成する既存の内申点計算式をnで一般化したもの。
+ */
+export function calculateAllNScore(prefectureCode: string, n: number): number {
   const prefecture = getPrefectureByCode(prefectureCode);
-  if (!prefecture) return 45;
-  
+  if (!prefecture) return 9 * n;
+
   let total = 0;
   for (const grade of prefecture.targetGrades) {
     const multiplier = prefecture.gradeMultipliers[grade] || 1;
-    total += (5 * 5 * prefecture.coreMultiplier + 4 * 5 * prefecture.practicalMultiplier) * multiplier;
+    total += (5 * n * prefecture.coreMultiplier + 4 * n * prefecture.practicalMultiplier) * multiplier;
   }
   return Math.round(total);
 }
 
+// オール5/オール1の計算（テスト用）
+export function calculateAllFiveScore(prefectureCode: string): number {
+  return calculateAllNScore(prefectureCode, 5);
+}
+
 export function calculateAllOneScore(prefectureCode: string): number {
-  const prefecture = getPrefectureByCode(prefectureCode);
-  if (!prefecture) return 9;
-  
-  let total = 0;
-  for (const grade of prefecture.targetGrades) {
-    const multiplier = prefecture.gradeMultipliers[grade] || 1;
-    total += (5 * 1 * prefecture.coreMultiplier + 4 * 1 * prefecture.practicalMultiplier) * multiplier;
-  }
-  return Math.round(total);
+  return calculateAllNScore(prefectureCode, 1);
 }

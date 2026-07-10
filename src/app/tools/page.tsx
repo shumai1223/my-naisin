@@ -333,6 +333,14 @@ const TOOL_GROUPS: { id: string; heading: string; tools: Tool[] }[] = [
         color: 'blue',
       },
       {
+        title: 'オール3・4・5の内申点は何点？',
+        description: '9教科すべてが同じ評定だった場合の内申点を、47都道府県の計算方式で実際に計算した例を一覧で確認',
+        features: ['オール3/4/5の3パターン', '47都道府県すべて掲載', '主要都道府県は優先表示', '自分の内申点計算へ直結'],
+        href: '/naishin-oru',
+        icon: Calculator,
+        color: 'blue',
+      },
+      {
         title: '観点別評価の仕組み（3観点）',
         description: '知識・技能／思考・判断・表現／主体的に取り組む態度の3観点で、評定がどう決まるかを文科省の一次情報で解説',
         features: ['3観点で何が評価されるか', '評定への総括', '主体的態度の評価', '実技が響く理由'],
