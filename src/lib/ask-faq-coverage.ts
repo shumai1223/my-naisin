@@ -30,3 +30,48 @@ export function buildPrefectureMaxScoreFaqs(): AskFaqItem[] {
     return { question, answer: result.answer };
   });
 }
+
+/**
+ * 都道府県に紐づかない一般Q&A（GENERAL_FACTS・answer-bot.ts）を機械生成する（S-4②）。
+ * 各質問文は対応するGENERAL_FACTSの正規表現に一致するよう選定し、expectedTitleで
+ * 実際にヒットしたfactが意図どおりか検証する（正規表現は先勝ち判定のため、文言次第では
+ * 別のfactに誤ヒットしうる。ここでassertすることで誤配線をビルド/テスト時に検知する）。
+ */
+const GENERAL_FACT_QUESTIONS: { question: string; expectedTitle: string }[] = [
+  { question: '換算内申とは何ですか？', expectedTitle: '換算内申とは' },
+  { question: '不登校でも高校受験はできますか？', expectedTitle: '不登校でも高校受験はできる？' },
+  { question: '推薦入試に調査書は必要ですか？', expectedTitle: '推薦入試に調査書は必要？種類の違いは？' },
+  { question: '実技4教科で内申点を上げられますか？', expectedTitle: '実技4教科で内申点を上げられる？' },
+  { question: '推薦に必要な評定平均はどのくらいですか？', expectedTitle: '推薦に必要な評定平均' },
+  { question: '評定平均とは何ですか？', expectedTitle: '評定平均とは' },
+  { question: '素内申とは何ですか？', expectedTitle: '素内申とは' },
+  { question: '調査書はいつ誰に発行してもらいますか？', expectedTitle: '調査書の発行は誰に・いつ頼む？' },
+  { question: '調査書とは何ですか？', expectedTitle: '調査書（調査書点）とは' },
+  { question: '内申点はいつから対象になりますか？', expectedTitle: '内申点の対象学年' },
+  { question: '偏差値とは何ですか？', expectedTitle: '偏差値とは' },
+  { question: 'オール3で行ける高校はどこですか？', expectedTitle: 'オール3で行ける高校' },
+  { question: 'オール4で行ける高校はどこですか？', expectedTitle: 'オール4で行ける高校' },
+  { question: 'オール5で行ける高校はどこですか？', expectedTitle: 'オール5で行ける高校' },
+  { question: '内申点とは何ですか？', expectedTitle: '内申点とは' },
+  { question: '三者面談ではどんな準備をすればいいですか？', expectedTitle: '三者面談の準備' },
+  { question: '当日点や総合得点とは何ですか？', expectedTitle: '当日点・総合得点とは' },
+  { question: '高校受験の受験料や模試代はいくらですか？', expectedTitle: '高校受験の受験料・模試代' },
+  { question: '就学支援金は年収いくらまでもらえますか？', expectedTitle: '就学支援金は年収いくらまで？' },
+  { question: '高校無償化とはどんな制度ですか？', expectedTitle: '高校無償化・教育費の支援' },
+  { question: '中学生の塾代の相場はどれくらいですか？', expectedTitle: '中学生の塾代の相場' },
+  { question: '高校3年間の学費はどれくらいかかりますか？', expectedTitle: '高校の費用の目安' },
+  { question: '高校入試の志願倍率とはどう計算しますか？', expectedTitle: '高校入試の倍率とは' },
+  { question: '内申点が足りないときはどうすればいいですか？', expectedTitle: '内申点・当日点が足りないときの対策' },
+];
+
+export function buildGeneralFactFaqs(): AskFaqItem[] {
+  return GENERAL_FACT_QUESTIONS.map(({ question, expectedTitle }) => {
+    const result = answerQuery(question);
+    if (!result || result.title !== expectedTitle) {
+      throw new Error(
+        `ask-faq-coverage: 「${question}」の回答タイトルが想定と不一致（想定=${expectedTitle} / 実際=${result?.title ?? 'null'}）。GENERAL_FACTSの正規表現の優先順位を確認してください。`
+      );
+    }
+    return { question, answer: result.answer };
+  });
+}

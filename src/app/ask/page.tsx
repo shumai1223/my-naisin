@@ -8,7 +8,7 @@ import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { RelatedToolsSection } from '@/components/RelatedToolsSection';
 import { AnswerBotClient } from '@/components/AnswerBot/AnswerBotClient';
-import { buildPrefectureMaxScoreFaqs } from '@/lib/ask-faq-coverage';
+import { buildPrefectureMaxScoreFaqs, buildGeneralFactFaqs } from '@/lib/ask-faq-coverage';
 
 export const metadata: Metadata = {
   title: '内申点クイックアンサー｜質問するとすぐ答える（47都道府県の方式・自社データ）| My Naishin',
@@ -24,22 +24,9 @@ export const metadata: Metadata = {
 };
 
 // 可視のQ&A（サーバーレンダリング＝JSなしでもAI/検索が読める一次情報）。
-// すべて naishin-dataset の検証済みデータに一致する内容のみ掲載（捏造ゼロ）。
-const GENERAL_ASK_FAQS = [
-  {
-    question: '換算内申とは何ですか？',
-    answer:
-      '換算内申は、入試で使うために評定を都道府県の方式で点数化したものです。素内申（評定の単純合計）に倍率や学年比をかけて算出します。',
-  },
-  {
-    question: '評定平均とは何ですか？',
-    answer:
-      '評定平均は、9教科などの評定（5段階）を合計して教科数で割った平均値です。推薦入試の出願基準（例：評定平均4.0以上）として使われます。',
-  },
-];
-
-// 47都道府県×「内申点は何点満点ですか？」をanswerQuery()から機械生成（S-4①・GEO決定論網羅拡張）。
-// interactiveツール（AnswerBotClient）と同じ関数から生成されるため表示内容がズレない。
+// すべてanswerQuery()（answer-bot.ts）から機械生成＝interactiveツール（AnswerBotClient）と
+// 同じ関数から生成されるため表示内容がズレない（S-4①②・GEO決定論網羅拡張）。
+const GENERAL_ASK_FAQS = buildGeneralFactFaqs();
 const PREFECTURE_ASK_FAQS = buildPrefectureMaxScoreFaqs();
 
 const ASK_FAQS = [...GENERAL_ASK_FAQS, ...PREFECTURE_ASK_FAQS];
@@ -99,7 +86,7 @@ export default function AskPage() {
           {/* 可視のQ&A（GEO：JSなしでも読める一次情報） */}
           <section className="mt-10">
             <h2 className="mb-1 text-lg font-bold text-slate-800">よくある質問と回答</h2>
-            <p className="mb-4 text-xs text-slate-400">47都道府県すべての「内申点は何点満点？」に個別回答（検証済みデータから機械生成・自分の県だけタップして確認できます）</p>
+            <p className="mb-4 text-xs text-slate-400">制度・費用のよくある疑問と、47都道府県すべての「内申点は何点満点？」に個別回答（検証済みデータから機械生成・タップして確認できます）</p>
             <div className="space-y-3">
               {ASK_FAQS.map((faq) => (
                 <details
