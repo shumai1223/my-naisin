@@ -50,6 +50,7 @@ const DATASET_EXEMPT_ROUTES: Record<string, string> = {
   '/heigan-yuugu': '併願優遇制度の解説ページ（データセットの提供なし）',
   '/hensachi/agekata': '偏差値の上げ方解説ページ（データセットの提供なし）',
   '/hensachi/gyakusan': '偏差値逆算計算機（単発計算UIでありデータセットの提供ではない）',
+  '/hensachi/gyakusan/hayamihyou': '偏差値早見表（既定仮定に基づく一覧表示でありデータセットの提供ではない）',
   '/hensachi/kyoka-betsu': '教科別ハブページ（データセットの提供なし）',
   '/hensachi/kyoka-betsu/[subject]': '教科別の上げ方解説ページ（データセットの提供なし）',
   '/hensachi/mantenkan': '満点変換計算機（単発計算UIでありデータセットの提供ではない）',

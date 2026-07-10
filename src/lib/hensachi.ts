@@ -112,6 +112,34 @@ export function requiredScoreForHensachi(targetHensachi: number, average: number
   return average + (stdDev * (targetHensachi - 50)) / 10;
 }
 
+/**
+ * 「偏差値◯◯は5教科何点？」型の早見表用の既定仮定（O-2）。
+ * 満点500点（5教科×100点）に対し、他ツールと同じ既定値（平均=満点の50%・標準偏差=満点の15%。
+ * [[FullScoreHensachiCalculator]]のA-6既定値と同一）を採用した一般的な目安。
+ * 実際のテストの平均点・標準偏差は毎回異なるため、正確な値は
+ * /hensachi/gyakusan で自分のテストの数値を入力して計算することを案内する。
+ */
+export const GYAKUSAN_HAYAMIHYOU_ASSUMED_FULL_SCORE = 500;
+export const GYAKUSAN_HAYAMIHYOU_ASSUMED_AVERAGE = GYAKUSAN_HAYAMIHYOU_ASSUMED_FULL_SCORE * 0.5;
+export const GYAKUSAN_HAYAMIHYOU_ASSUMED_STDDEV = GYAKUSAN_HAYAMIHYOU_ASSUMED_FULL_SCORE * 0.15;
+
+export interface HensachiScoreLookupRow {
+  hensachi: number;
+  requiredScore: number;
+}
+
+/** 偏差値→目安点数の早見表を生成する（既定仮定=500点満点・平均250・標準偏差75）。 */
+export function buildHensachiScoreLookupTable(
+  hensachiValues: number[] = Array.from({ length: 46 }, (_, i) => 75 - i)
+): HensachiScoreLookupRow[] {
+  return hensachiValues.map((hensachi) => ({
+    hensachi,
+    requiredScore: Math.round(
+      requiredScoreForHensachi(hensachi, GYAKUSAN_HAYAMIHYOU_ASSUMED_AVERAGE, GYAKUSAN_HAYAMIHYOU_ASSUMED_STDDEV) ?? 0
+    ),
+  }));
+}
+
 /** 偏差値 h に対応する z 値（z = (h − 50) / 10）。 */
 export function hensachiToZ(h: number): number {
   return (h - 50) / 10;

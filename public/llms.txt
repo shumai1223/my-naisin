@@ -6,7 +6,7 @@
 
 ## 主要ツール
 - [内申点 計算サイト](https://my-naishin.com/): 9教科の評定から47都道府県の方式で内申点（調査書点）を自動計算
-- [偏差値計算サイト（5教科）](https://my-naishin.com/hensachi): 点数・平均点から偏差値を算出。診断（/hensachi/shindan）・教科別（/hensachi/kyoka-betsu）・満点換算（/hensachi/mantenkan）・目標逆算（/hensachi/gyakusan）・模試の仕組み（/hensachi/moshi）にも対応
+- [偏差値計算サイト（5教科）](https://my-naishin.com/hensachi): 点数・平均点から偏差値を算出。診断（/hensachi/shindan）・教科別（/hensachi/kyoka-betsu）・満点換算（/hensachi/mantenkan）・目標逆算（/hensachi/gyakusan・早見表は/hensachi/gyakusan/hayamihyou）・模試の仕組み（/hensachi/moshi）にも対応
 - [評定平均 計算](https://my-naishin.com/hyotei-heikin): 通知表の評定から評定平均を自動計算。推薦基準（/hyotei-heikin/suisen-kijun）・逆算（/hyotei-heikin/gyakusan）にも対応
 - [志望校から逆算](https://my-naishin.com/reverse): 合格基準から必要な当日点を逆算
 - [総合得点方式（都道府県別）](https://my-naishin.com/total-score): 東京(1020点)・神奈川(S値)・大阪・愛知(評価方法I-V)など独自の総合得点方式を都道府県ごとに計算・逆算

@@ -34,6 +34,7 @@ export const STATIC_PAGES: StaticPageEntry[] = [
   { url: '/hensachi/moshi/ichiran', priority: 0.8, changeFrequency: 'weekly' },
   { url: '/hensachi/mantenkan', priority: 0.8, changeFrequency: 'weekly' },
   { url: '/hensachi/gyakusan', priority: 0.8, changeFrequency: 'weekly' },
+  { url: '/hensachi/gyakusan/hayamihyou', priority: 0.7, changeFrequency: 'weekly' },
   { url: '/hyotei-heikin', priority: 1.0, changeFrequency: 'weekly' },
   { url: '/hyotei-heikin/suisen-kijun', priority: 0.9, changeFrequency: 'weekly' },
   { url: '/hyotei-heikin/gyakusan', priority: 0.8, changeFrequency: 'weekly' },

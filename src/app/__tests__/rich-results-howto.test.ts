@@ -78,6 +78,7 @@ const HOWTO_EXEMPT_ROUTES: Record<string, string> = {
   // 以下は実際に入力→計算の手順を持つ計算機/診断ツールだが、各ページの実フローを
   // 確認しながら正確なHowToStepを書く必要があるため今回は見送り、次周以降の継続タスクとする。
   '/hensachi/gyakusan': '偏差値逆算計算機（未着手・CANDIDATE_FOR_HOWTO_CONTENT）',
+  '/hensachi/gyakusan/hayamihyou': '偏差値早見表（入力不要の静的な参照表であり手順ではない）',
   '/hensachi/mantenkan': '満点変換計算機（未着手・CANDIDATE_FOR_HOWTO_CONTENT）',
   '/total-score/mantenkan': '総合得点満点変換計算機（未着手・CANDIDATE_FOR_HOWTO_CONTENT）',
   '/koukou-bairitsu': '倍率計算機（未着手・CANDIDATE_FOR_HOWTO_CONTENT）',
