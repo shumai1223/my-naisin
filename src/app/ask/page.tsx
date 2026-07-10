@@ -8,6 +8,7 @@ import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { RelatedToolsSection } from '@/components/RelatedToolsSection';
 import { AnswerBotClient } from '@/components/AnswerBot/AnswerBotClient';
+import { buildPrefectureMaxScoreFaqs } from '@/lib/ask-faq-coverage';
 
 export const metadata: Metadata = {
   title: '内申点クイックアンサー｜質問するとすぐ答える（47都道府県の方式・自社データ）| My Naishin',
@@ -24,27 +25,7 @@ export const metadata: Metadata = {
 
 // 可視のQ&A（サーバーレンダリング＝JSなしでもAI/検索が読める一次情報）。
 // すべて naishin-dataset の検証済みデータに一致する内容のみ掲載（捏造ゼロ）。
-const ASK_FAQS = [
-  {
-    question: '兵庫県の内申点は何点満点ですか？',
-    answer:
-      '兵庫県の内申点（調査書点）は250点満点です。中3の評定を対象に、主要5教科×4＋実技4教科×7.5で算出します。実技4教科の比重が大きいのが特徴です。',
-  },
-  {
-    question: '東京都でオール5だと内申点はいくつですか？',
-    answer:
-      '東京都の換算内申は「主要5教科×1＋実技4教科×2」で最大65点です。9教科すべて5（オール5）なら65点満点に到達します。',
-  },
-  {
-    question: '神奈川県の内申点は何年生が対象ですか？',
-    answer:
-      '神奈川県は中2と中3が対象で、中2×1＋中3×2の135点満点です。中3の評定の比重が2倍になります。',
-  },
-  {
-    question: '大阪府の内申点の仕組みは？',
-    answer:
-      '大阪府の内申点は450点満点です。中1×2＋中2×2＋中3×6の学年倍率で、中3の比重が大きいのが特徴です。選抜タイプⅠ〜Ⅴで内申と学力検査の比率が変わります。',
-  },
+const GENERAL_ASK_FAQS = [
   {
     question: '換算内申とは何ですか？',
     answer:
@@ -56,6 +37,12 @@ const ASK_FAQS = [
       '評定平均は、9教科などの評定（5段階）を合計して教科数で割った平均値です。推薦入試の出願基準（例：評定平均4.0以上）として使われます。',
   },
 ];
+
+// 47都道府県×「内申点は何点満点ですか？」をanswerQuery()から機械生成（S-4①・GEO決定論網羅拡張）。
+// interactiveツール（AnswerBotClient）と同じ関数から生成されるため表示内容がズレない。
+const PREFECTURE_ASK_FAQS = buildPrefectureMaxScoreFaqs();
+
+const ASK_FAQS = [...GENERAL_ASK_FAQS, ...PREFECTURE_ASK_FAQS];
 
 export default function AskPage() {
   return (
@@ -111,7 +98,8 @@ export default function AskPage() {
 
           {/* 可視のQ&A（GEO：JSなしでも読める一次情報） */}
           <section className="mt-10">
-            <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問と回答</h2>
+            <h2 className="mb-1 text-lg font-bold text-slate-800">よくある質問と回答</h2>
+            <p className="mb-4 text-xs text-slate-400">47都道府県すべての「内申点は何点満点？」に個別回答（検証済みデータから機械生成・自分の県だけタップして確認できます）</p>
             <div className="space-y-3">
               {ASK_FAQS.map((faq) => (
                 <details
