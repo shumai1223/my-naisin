@@ -51,6 +51,7 @@ const HOWTO_EXEMPT_ROUTES: Record<string, string> = {
   '/hensachi/moshi': '模試ハブページ（下位ページへの導線のみ）',
   '/hensachi/moshi/ichiran': '模試一覧・解説ページ（手順でなく模試の紹介）',
   '/hensachi/shiboukou': '志望校の決め方解説ページ（手順でなく判断基準の解説）',
+  '/hensachi/shindan/[grade]': '学年別偏差値診断ページ（診断手順のHowToSchemaは親ページ/hensachi/shindanが正・重複回避）',
   '/hogosha': '保護者向けランディングページ（手順コンテンツなし）',
   '/hyotei-heikin/suisen-kijun': '推薦基準の解説ページ（手順でなく制度解説）',
   '/hyouka-kijun': '評価基準の解説ページ（手順でなく制度解説）',

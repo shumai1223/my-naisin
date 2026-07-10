@@ -57,8 +57,13 @@ function Pill({ active, onClick, children }: { active: boolean; onClick: () => v
  * （精度を偽装しない＝上位/下位バンドは片側だけの目安を表示）。
  * 対象クエリ：偏差値診断・診断 中学生・高校偏差値診断（合計約3,600imp/28dがpos7-9に滞留）。
  */
-export function ShindanQuiz() {
-  const [grade, setGrade] = React.useState<number | undefined>(undefined);
+interface ShindanQuizProps {
+  /** 学年別ページ（/hensachi/shindan/[grade]）から渡された既定の学年。Q1をあらかじめ選択済みにする。 */
+  defaultGrade?: number;
+}
+
+export function ShindanQuiz({ defaultGrade }: ShindanQuizProps = {}) {
+  const [grade, setGrade] = React.useState<number | undefined>(defaultGrade);
   const [rankBandId, setRankBandId] = React.useState<string | undefined>(undefined);
   const [prefectureCode, setPrefectureCode] = React.useState('');
   const [naishinRefIndex, setNaishinRefIndex] = React.useState<number | undefined>(undefined);

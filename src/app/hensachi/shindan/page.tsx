@@ -9,6 +9,7 @@ import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { ShindanQuiz } from '@/components/Hensachi/ShindanQuiz';
 import { HensachiClusterNav } from '@/components/Hensachi/HensachiClusterNav';
 import { RelatedToolsSection } from '@/components/RelatedToolsSection';
+import { SHINDAN_GRADE_CONTENTS } from '@/lib/shindan-grade-content';
 import { SITE_URL } from '@/lib/naishin-dataset';
 
 const SHINDAN_FAQS = [
@@ -120,6 +121,25 @@ export default function HensachiShindanPage() {
 
           {/* 診断ツール本体 */}
           <ShindanQuiz />
+
+          {/* 学年別で診断する */}
+          <section className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-6">
+            <h2 className="mb-3 text-sm font-bold text-slate-700">学年別で診断する</h2>
+            <p className="mb-3 text-xs leading-relaxed text-slate-500">
+              学年ごとに診断結果の使い方（志望校の見通し・内申とのバランス確認など）が変わります。あらかじめ学年を選んだ状態で診断したい場合はこちらから。
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {SHINDAN_GRADE_CONTENTS.map((g) => (
+                <Link
+                  key={g.slug}
+                  href={`/hensachi/shindan/${g.slug}`}
+                  className="rounded-full border border-purple-200 bg-white px-4 py-2 text-xs font-bold text-purple-700 transition-colors hover:bg-purple-50"
+                >
+                  {g.label}向け診断
+                </Link>
+              ))}
+            </div>
+          </section>
 
           {/* 偏差値クラスタのハブ */}
           <div className="mt-8">
