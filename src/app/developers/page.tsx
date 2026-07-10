@@ -424,7 +424,8 @@ curl ${SITE_URL}/api/status`;
             <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">calculate_bairitsu</code>
             <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">calculate_education_cost</code>
             <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">calculate_path_to_university_cost</code>
-            の16ツールを呼び出せます。さらに <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">resources/list・resources/read</code>（47都道府県を読める一次資料として公開）と
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">get_stats_distribution</code>
+            の17ツールを呼び出せます。さらに <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">resources/list・resources/read</code>（47都道府県を読める一次資料として公開）と
             <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">prompts/list・prompts/get</code>（内申点を確定値で答え出典を添える定型プロンプト）に対応しています。
           </p>
 

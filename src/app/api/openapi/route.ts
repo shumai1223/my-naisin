@@ -205,6 +205,19 @@ export function GET() {
           responses: { '200': { description: '成功' }, '400': { description: 'パラメータが不正' } },
         },
       },
+      '/api/stats/distribution': {
+        get: {
+          operationId: 'getStatsDistribution',
+          summary: '匿名統計（内申点・偏差値・総合得点の全国分布）',
+          description:
+            '利用者が任意でオプトインした匿名の計算結果（PII無し）を集計。サンプルサイズ30件未満のセルはinsufficientData:trueとなり集計値自体を返さない（k-匿名性）。',
+          parameters: [
+            { name: 'metric', in: 'query', required: true, description: 'naishin / hensachi / total-score のいずれか。', schema: { type: 'string', example: 'naishin' } },
+            { name: 'prefecture', in: 'query', required: false, description: '任意。都道府県コードで絞り込み。', schema: { type: 'string', example: 'tokyo' } },
+          ],
+          responses: { '200': { description: '成功' }, '400': { description: 'metricが不正' } },
+        },
+      },
       '/api/openapi': {
         get: {
           operationId: 'getOpenApiSpec',

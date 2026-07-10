@@ -21,6 +21,8 @@ import { computeTotalScore, requiredAcademicRaw } from '@/lib/total-score/engine
 import { calcApplicationRatio, calcActualRatio, roundRatio } from '@/lib/bairitsu';
 import { simulateEducationCost, simulateHighToUniversity } from '@/lib/education-cost/engine';
 import type { CourseType, JukuType, IncomeBracket, UniversityType, Residence } from '@/lib/education-cost/types';
+import { isStatsMetric, buildSuppressedAggregate, STATS_MIN_SAMPLE_SIZE, STATS_METRICS } from '@/lib/stats-aggregation';
+import { getStatsValues } from '@/lib/stats-db';
 
 /**
  * MCP互換エンドポイント（堀B / AIネイティブの城①）。
@@ -278,6 +280,18 @@ const TOOLS = [
       },
     },
   },
+  {
+    name: 'get_stats_distribution',
+    description: `利用者が任意でオプトインした匿名の計算結果（内申点・偏差値・総合得点等）を集計した全国分布を返す。個人を特定できる情報は含まない。サンプルサイズが${STATS_MIN_SAMPLE_SIZE}件未満のセルはinsufficientData:trueとなり集計値自体を返さない（k-匿名性・捏造ゼロの安全設計）。`,
+    inputSchema: {
+      type: 'object',
+      properties: {
+        metric: { type: 'string', description: `対象指標。次のいずれか: ${STATS_METRICS.join(', ')}` },
+        prefecture: { type: 'string', description: '任意。都道府県コード（例: tokyo）で絞り込み。未指定は全国集計。' },
+      },
+      required: ['metric'],
+    },
+  },
 ] as const;
 
 /**
@@ -329,7 +343,7 @@ function toolText(data: unknown) {
   return { content: [{ type: 'text', text: JSON.stringify(data, null, 2) }] };
 }
 
-function runTool(name: string, args: Record<string, unknown>) {
+async function runTool(name: string, args: Record<string, unknown>) {
   if (name === 'list_prefectures') {
     const index = buildDatasetIndex();
     const region = typeof args.region === 'string' ? args.region : undefined;
@@ -545,6 +559,17 @@ function runTool(name: string, args: Record<string, unknown>) {
     return toolText({ input: { highCourse, incomeBracket, universityType, residence }, result });
   }
 
+  if (name === 'get_stats_distribution') {
+    const metric = String(args.metric ?? '');
+    if (!isStatsMetric(metric)) {
+      return toolText({ error: 'invalid_params', message: `metric は次のいずれかを指定してください: ${STATS_METRICS.join(', ')}` });
+    }
+    const prefecture = typeof args.prefecture === 'string' ? args.prefecture : undefined;
+    const values = await getStatsValues(metric, prefecture);
+    const aggregate = buildSuppressedAggregate(values);
+    return toolText({ metric, prefecture: prefecture ?? null, minSampleSize: STATS_MIN_SAMPLE_SIZE, insufficientData: aggregate === null, aggregate });
+  }
+
   return null;
 }
 
@@ -605,7 +630,7 @@ export async function POST(request: Request) {
     case 'tools/call': {
       const name = String(params?.name ?? '');
       const args = (params?.arguments ?? {}) as Record<string, unknown>;
-      const result = runTool(name, args);
+      const result = await runTool(name, args);
       if (!result) return rpcError(id ?? null, -32602, `Unknown tool: ${name}`);
       return rpcResult(id ?? null, result);
     }

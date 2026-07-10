@@ -338,4 +338,9 @@ describe('/api/openapi', () => {
     expect(json.paths['/api/education-cost']).toBeDefined();
     expect(json.paths['/api/education-cost/path-to-university']).toBeDefined();
   });
+
+  test('S-1⑥：匿名統計エンドポイントが記載されている', async () => {
+    const json = await (await openapiGet()).json();
+    expect(json.paths['/api/stats/distribution']).toBeDefined();
+  });
 });

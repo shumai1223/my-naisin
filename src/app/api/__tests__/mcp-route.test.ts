@@ -29,10 +29,10 @@ describe('/api/mcp JSON-RPC 契約', () => {
     expect(json.result.capabilities.prompts).toBeDefined();
   });
 
-  test('tools/list は16ツールを返す（S-5でhensachi/total-score/bairitsu/education-cost系9本を追加）', async () => {
+  test('tools/list は17ツールを返す（S-5でhensachi/total-score/bairitsu/education-cost/statsの10本を追加）', async () => {
     const res = await POST(rpc('tools/list'));
     const json = await res.json();
-    expect(json.result.tools).toHaveLength(16);
+    expect(json.result.tools).toHaveLength(17);
     expect(json.result.tools.map((t: { name: string }) => t.name)).toContain('build_study_plan');
     expect(json.result.tools.map((t: { name: string }) => t.name)).toContain('calculate_hensachi');
     expect(json.result.tools.map((t: { name: string }) => t.name)).toContain('calculate_total_score');
@@ -147,6 +147,20 @@ describe('/api/mcp JSON-RPC 契約', () => {
     expect(data.result.total).toBeGreaterThan(0);
   });
 
+  test('tools/call get_stats_distribution はD1未設定のテスト環境ではinsufficientData:trueを返す（no-op契約）', async () => {
+    const res = await POST(rpc('tools/call', { name: 'get_stats_distribution', arguments: { metric: 'naishin' } }));
+    const data = JSON.parse((await res.json()).result.content[0].text);
+    expect(data.metric).toBe('naishin');
+    expect(data.insufficientData).toBe(true);
+    expect(data.aggregate).toBeNull();
+  });
+
+  test('tools/call get_stats_distribution は不正なmetricで invalid_params を返す', async () => {
+    const res = await POST(rpc('tools/call', { name: 'get_stats_distribution', arguments: { metric: 'unknown' } }));
+    const data = JSON.parse((await res.json()).result.content[0].text);
+    expect(data.error).toBe('invalid_params');
+  });
+
   test('resources/list は47件、resources/read は該当県JSON', async () => {
     const list = await (await POST(rpc('resources/list'))).json();
     expect(list.result.resources).toHaveLength(47);
@@ -175,7 +189,7 @@ describe('/api/mcp JSON-RPC 契約', () => {
   test('GET ディスカバリはツール/メソッド一覧を返す', async () => {
     const res = GET();
     const json = await res.json();
-    expect(json.tools).toHaveLength(16);
+    expect(json.tools).toHaveLength(17);
     expect(json.methods).toContain('resources/read');
   });
 });
