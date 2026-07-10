@@ -13,6 +13,7 @@ import {
   Wallet,
   FileText,
   ClipboardCheck,
+  PenLine,
 } from 'lucide-react';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
@@ -419,6 +420,14 @@ const TOOL_GROUPS: { id: string; heading: string; tools: Tool[] }[] = [
         features: ['持ち物チェックリスト', '当日のタイムライン', 'トラブル対応', '一般選抜向け'],
         href: '/juken-toujitsu',
         icon: ClipboardCheck,
+        color: 'blue',
+      },
+      {
+        title: '自己採点のやり方',
+        description: '学力検査後の自己採点を5ステップで解説。自己採点した得点から総合得点の目安を確認する方法まで',
+        features: ['自己採点の5ステップ', '記述式の部分点の考え方', '総合得点ツールへ直結', '一般選抜向け'],
+        href: '/jikosaiten',
+        icon: PenLine,
         color: 'blue',
       },
       {

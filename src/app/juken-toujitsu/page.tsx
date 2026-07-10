@@ -197,6 +197,10 @@ export default function JukenToujitsuPage() {
                 出願・受験スケジュール一覧
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
+              <Link href="/jikosaiten" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-blue-200 hover:bg-blue-50/50">
+                自己採点のやり方
+                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
+              </Link>
               <Link href="/tarinai-taisaku" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-blue-200 hover:bg-blue-50/50">
                 内申・当日点が足りない冬の対策
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
