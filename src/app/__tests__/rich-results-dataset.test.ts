@@ -46,6 +46,7 @@ const DATASET_EXEMPT_ROUTES: Record<string, string> = {
   '/futoukou/shussekiatsukai': '出席扱いの解説ページ（データセットの提供なし）',
   '/futoukou/tsugaku': '通学再開支援の解説ページ（データセットの提供なし）',
   '/glossary': '用語辞典（定義の一覧でありデータセットではない）',
+  '/goukaku-happyo': '合格発表後の手続き解説ページ（一般的な流れの解説でありデータセットの提供ではない）',
   '/guide': '内申点 完全ガイド（読み物でありデータセットの提供なし）',
   '/heigan-yuugu': '併願優遇制度の解説ページ（データセットの提供なし）',
   '/hensachi/agekata': '偏差値の上げ方解説ページ（データセットの提供なし）',

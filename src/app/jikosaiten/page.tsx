@@ -189,6 +189,10 @@ export default function JikosaitenPage() {
                 高校入試の倍率計算
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
+              <Link href="/goukaku-happyo" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-blue-200 hover:bg-blue-50/50">
+                合格発表後の手続き
+                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
+              </Link>
             </div>
           </section>
         </div>
