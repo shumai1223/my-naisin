@@ -5,6 +5,7 @@ import { PREFECTURES_WITH_GUIDE } from '@/lib/prefecture-guides';
 import { VERIFIED_TOTAL_SCORE_CODES } from '@/lib/total-score/registry';
 import { EXPLAINER_CODES } from '@/lib/total-score/explainers';
 import { STATIC_PAGES } from '@/lib/page-registry';
+import { SHINDAN_PURPOSE_CONTENTS } from '@/lib/shindan-purpose-content';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://my-naishin.com';
@@ -72,6 +73,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
+  // 7. 目的別偏差値診断ページ（S-2②・/hensachi/shindan/mokuteki/[purpose]。中間の一覧ページを
+  //    持たない3階層の動的ルートのためSTATIC_PAGES登録簿だけではsitemapに載らず、専用生成が必要）。
+  const shindanPurposePages = SHINDAN_PURPOSE_CONTENTS.map(p => ({
+    url: `${baseUrl}/hensachi/shindan/mokuteki/${p.slug}`,
+    lastModified,
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }));
+
   return [
     ...staticPages,
     ...prefectureTopPages,
@@ -80,5 +90,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...blogPages,
     ...totalScorePages,
     ...totalScoreExplainerPages,
+    ...shindanPurposePages,
   ];
 }

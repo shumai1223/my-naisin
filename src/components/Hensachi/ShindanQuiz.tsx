@@ -24,7 +24,7 @@ import {
 } from '@/lib/hensachi';
 import { funnel } from '@/lib/track';
 
-type Concern = 'reach' | 'improve' | 'juku' | 'futoukou';
+export type Concern = 'reach' | 'improve' | 'juku' | 'futoukou';
 
 const GRADE_OPTIONS = [1, 2, 3];
 
@@ -60,14 +60,16 @@ function Pill({ active, onClick, children }: { active: boolean; onClick: () => v
 interface ShindanQuizProps {
   /** 学年別ページ（/hensachi/shindan/[grade]）から渡された既定の学年。Q1をあらかじめ選択済みにする。 */
   defaultGrade?: number;
+  /** 目的別ページ（/hensachi/shindan/mokuteki/[purpose]）から渡された既定の関心。Q5をあらかじめ選択済みにする。 */
+  defaultConcern?: Concern;
 }
 
-export function ShindanQuiz({ defaultGrade }: ShindanQuizProps = {}) {
+export function ShindanQuiz({ defaultGrade, defaultConcern }: ShindanQuizProps = {}) {
   const [grade, setGrade] = React.useState<number | undefined>(defaultGrade);
   const [rankBandId, setRankBandId] = React.useState<string | undefined>(undefined);
   const [prefectureCode, setPrefectureCode] = React.useState('');
   const [naishinRefIndex, setNaishinRefIndex] = React.useState<number | undefined>(undefined);
-  const [concern, setConcern] = React.useState<Concern | undefined>(undefined);
+  const [concern, setConcern] = React.useState<Concern | undefined>(defaultConcern);
   const [submitted, setSubmitted] = React.useState(false);
   const startedRef = React.useRef(false);
   const resultRef = React.useRef<HTMLDivElement | null>(null);

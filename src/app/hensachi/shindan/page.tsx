@@ -10,6 +10,7 @@ import { ShindanQuiz } from '@/components/Hensachi/ShindanQuiz';
 import { HensachiClusterNav } from '@/components/Hensachi/HensachiClusterNav';
 import { RelatedToolsSection } from '@/components/RelatedToolsSection';
 import { SHINDAN_GRADE_CONTENTS } from '@/lib/shindan-grade-content';
+import { SHINDAN_PURPOSE_CONTENTS } from '@/lib/shindan-purpose-content';
 import { SITE_URL } from '@/lib/naishin-dataset';
 
 const SHINDAN_FAQS = [
@@ -136,6 +137,25 @@ export default function HensachiShindanPage() {
                   className="rounded-full border border-purple-200 bg-white px-4 py-2 text-xs font-bold text-purple-700 transition-colors hover:bg-purple-50"
                 >
                   {g.label}向け診断
+                </Link>
+              ))}
+            </div>
+          </section>
+
+          {/* 目的別で診断する */}
+          <section className="mt-6 rounded-2xl border border-slate-200 bg-slate-50 p-6">
+            <h2 className="mb-3 text-sm font-bold text-slate-700">目的別で診断する</h2>
+            <p className="mb-3 text-xs leading-relaxed text-slate-500">
+              「志望校を決めたい」「内申を挽回したい」「塾に通うか迷っている」など、今知りたいことに合わせて診断したい場合はこちらから。
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {SHINDAN_PURPOSE_CONTENTS.map((p) => (
+                <Link
+                  key={p.slug}
+                  href={`/hensachi/shindan/mokuteki/${p.slug}`}
+                  className="rounded-full border border-purple-200 bg-white px-4 py-2 text-xs font-bold text-purple-700 transition-colors hover:bg-purple-50"
+                >
+                  {p.label}
                 </Link>
               ))}
             </div>

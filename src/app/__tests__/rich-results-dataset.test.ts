@@ -59,6 +59,7 @@ const DATASET_EXEMPT_ROUTES: Record<string, string> = {
   '/hensachi/moshi/ichiran': '模試一覧・解説ページ（換算表非公表のため数値データセット自体を掲載していない）',
   '/hensachi/shindan': '偏差値診断クイズ（単発診断UIでありデータセットの提供ではない）',
   '/hensachi/shindan/[grade]': '学年別偏差値診断ページ（診断UIは親ページと共通・データセットの提供ではない）',
+  '/hensachi/shindan/mokuteki/[purpose]': '目的別偏差値診断ページ（診断UIは親ページと共通・データセットの提供ではない）',
   '/hiyou': '教育費シミュレーター（単発計算UIでありデータセットの提供ではない）',
   '/hogosha': '保護者向けランディングページ（データセットの提供なし）',
   '/hyotei-heikin': '評定平均計算UI（単発計算でありデータセット定義はhome/hensachi側が正）',
