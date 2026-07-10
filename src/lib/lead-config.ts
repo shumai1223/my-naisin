@@ -16,6 +16,11 @@
  *   - 最大流入面（hensachi / hyotei-heikin / home / blog）は安全側の Z会 資料請求（無料）を維持＝クリーンな対照群
  *  すべて A8 の「無料体験／無料資料請求」型（live）で、有料バナーではない＝戦略に整合。
  *  勝者が出たら affiliateId をこの表で差し替えるだけ（コンポーネントは無改修）。
+ *
+ * PLAYBOOK移植メモ（F-7⑤）: このファイルはほぼ全体がmy-naishin固有のコンテンツ
+ * （PROGRAM_PRESETの文言・PLACEMENT/PREFECTURE_*_OVERRIDES・季節スワップの結線）。
+ * 「プログラムIDのプリセットを見出し/本文と合成する」パターンのみ src/lib/lead-config-engine.ts
+ * （buildOfferFragment）へ分離済み＝他サイトへコピー可能なのはそこだけで、残りはゼロから書く前提。
  */
 
 import { AFFILIATES, isLiveAffiliate, type AffiliateId } from '@/lib/affiliates';
@@ -27,6 +32,7 @@ import {
 } from '@/lib/affiliate-economics';
 import { resolveSeason, SEASON_COPY, type Season } from '@/lib/seasonal';
 import { PREFECTURES, type PrefectureConfig } from '@/lib/prefectures';
+import { buildOfferFragment } from '@/lib/lead-config-engine';
 
 /** 全ての保護者リード面（監査・網羅テスト・営業資料の単一ソース）。 */
 export const ALL_LEAD_PLACEMENTS = [
@@ -110,7 +116,7 @@ const PROGRAM_PRESET: Partial<Record<AffiliateId, Pick<LeadOffer, 'note' | 'ctaT
 
 /** プログラムIDから note/ctaText を補完したオファー断片を作る（割当ミスを防ぐ）。 */
 function offerFor(affiliateId: AffiliateId, copy: Pick<LeadOffer, 'heading' | 'body'>): Partial<LeadOffer> {
-  return { affiliateId, ...PROGRAM_PRESET[affiliateId], ...copy };
+  return buildOfferFragment(affiliateId, PROGRAM_PRESET, copy);
 }
 
 /**
