@@ -6,11 +6,9 @@ import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
 import { HowToSchema } from '@/components/StructuredData/HowToSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
-import { KanagawaSValueCalculator } from '@/components/Kanagawa/KanagawaSValueCalculator';
-import { SaveResultCTA } from '@/components/SaveResultCTA';
+import { KanagawaResultFlow } from '@/components/Kanagawa/KanagawaResultFlow';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
-import { ParentCostBridge } from '@/components/ParentCostBridge';
 
 // 可視の「よくある質問」セクションと完全一致させた FAQ（FAQ リッチリザルト用）
 const KANAGAWA_S_VALUE_FAQS = [
@@ -134,20 +132,8 @@ export default function KanagawaSValuePage() {
             </div>
           </section>
 
-          {/* Calculator */}
-          <KanagawaSValueCalculator />
-
-          {/* 結果保存・名簿化（堀A） */}
-          <ParentCostBridge prefectureName="神奈川県" className="mb-6" />
-
-          <SaveResultCTA
-            source="prefecture"
-            prefectureCode="kanagawa"
-            prefectureName="神奈川県"
-            className="mt-6"
-            heading="この神奈川S値と「あと何点」を、忘れないうちに受け取りませんか？"
-            body="S値アップのコツ・横浜翠嵐や湘南など志望校の最新ボーダー・出願スケジュールを、受験本番まで無料でお届けします。LINEかメールで、いつでも解除できます。"
-          />
+          {/* Calculator・結果連動（S-1④） */}
+          <KanagawaResultFlow />
 
           {/* S値の計算式 */}
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">

@@ -14,7 +14,16 @@ const TYPE_OPTIONS = [
   { label: 'タイプⅤ（3:7 内申最重視）', gakuryoku: 0.3, naishin: 0.7 },
 ];
 
-export function OsakaTotalScoreCalculator() {
+export interface OsakaTotalScoreResult {
+  total: number;
+  max: number;
+}
+
+interface OsakaTotalScoreCalculatorProps {
+  onResult?: (r: OsakaTotalScoreResult | null) => void;
+}
+
+export function OsakaTotalScoreCalculator({ onResult }: OsakaTotalScoreCalculatorProps = {}) {
   const [naishinInput, setNaishinInput] = React.useState('');
   const [gakuryokuInput, setGakuryokuInput] = React.useState('');
   const [typeIndex, setTypeIndex] = React.useState(2); // タイプⅢ（5:5）をデフォルト
@@ -36,6 +45,10 @@ export function OsakaTotalScoreCalculator() {
   const percent = (total / maxTotal) * 100;
 
   const hasInput = naishinInput !== '' || gakuryokuInput !== '';
+
+  React.useEffect(() => {
+    onResult?.(hasInput ? { total, max: maxTotal } : null);
+  }, [hasInput, total, onResult]);
 
   const reset = () => {
     setNaishinInput('');

@@ -6,11 +6,9 @@ import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
 import { HowToSchema } from '@/components/StructuredData/HowToSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
-import { OsakaTotalScoreCalculator } from '@/components/Osaka/OsakaTotalScoreCalculator';
-import { SaveResultCTA } from '@/components/SaveResultCTA';
+import { OsakaResultFlow } from '@/components/Osaka/OsakaResultFlow';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
-import { ParentCostBridge } from '@/components/ParentCostBridge';
 
 // 可視の「よくある質問」セクションと完全一致させた FAQ（FAQ リッチリザルト用）
 const OSAKA_TOTAL_SCORE_FAQS = [
@@ -143,20 +141,8 @@ export default function OsakaTotalScorePage() {
             </div>
           </section>
 
-          {/* Calculator */}
-          <OsakaTotalScoreCalculator />
-
-          {/* 結果保存・名簿化（堀A） */}
-          <ParentCostBridge prefectureName="大阪府" className="mb-6" />
-
-          <SaveResultCTA
-            source="prefecture"
-            prefectureCode="osaka"
-            prefectureName="大阪府"
-            className="mt-6"
-            heading="この総合点と「あと何点」を、忘れないうちに受け取りませんか？"
-            body="総合点アップのコツ・北野や茨木など文理学科の最新ボーダー・出願スケジュールを、受験本番まで無料でお届けします。LINEかメールで、いつでも解除できます。"
-          />
+          {/* Calculator・結果連動（S-1④） */}
+          <OsakaResultFlow />
 
           {/* 計算式の解説 */}
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">

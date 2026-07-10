@@ -13,7 +13,16 @@ const RATIO_OPTIONS = [
   { label: '7:3（内申最重視）', naishin: 7, gakuryoku: 3 },
 ];
 
-export function KanagawaSValueCalculator() {
+export interface KanagawaSValueResult {
+  total: number;
+  max: number;
+}
+
+interface KanagawaSValueCalculatorProps {
+  onResult?: (r: KanagawaSValueResult | null) => void;
+}
+
+export function KanagawaSValueCalculator({ onResult }: KanagawaSValueCalculatorProps = {}) {
   const [naishinInput, setNaishinInput] = React.useState('');
   const [gakuryokuInput, setGakuryokuInput] = React.useState('');
   const [tokushokuInput, setTokushokuInput] = React.useState('');
@@ -38,6 +47,10 @@ export function KanagawaSValueCalculator() {
   const s2 = Math.round(s1 + tokushoku * 5);
 
   const hasInput = naishinInput !== '' || gakuryokuInput !== '';
+
+  React.useEffect(() => {
+    onResult?.(hasInput ? { total: s1, max: 1000 } : null);
+  }, [hasInput, s1, onResult]);
 
   const reset = () => {
     setNaishinInput('');
