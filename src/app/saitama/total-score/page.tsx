@@ -5,10 +5,9 @@ import { Calculator, ChevronRight, Home, BookOpen, AlertCircle } from 'lucide-re
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { HowToSchema } from '@/components/StructuredData/HowToSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
-import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
-import { ParentCostBridge } from '@/components/ParentCostBridge';
+import { SaitamaResultFlow } from '@/components/Saitama/SaitamaResultFlow';
 
 const SAITAMA_FAQS = [
   {
@@ -183,17 +182,10 @@ export default function SaitamaTotalScorePage() {
             </p>
           </section>
 
-          {/* 結果保存・名簿化（堀A） */}
-          <ParentCostBridge prefectureName="埼玉県" className="mb-6" />
-
-          <SaveResultCTA
-            source="prefecture"
-            prefectureCode="saitama"
-            prefectureName="埼玉県"
-            className="mb-8"
-            heading="埼玉の学年比率に合わせた「あと何点」を受け取りませんか？"
-            body="調査書点・学力検査の伸ばし方、浦和・大宮など志望校の選抜基準と最新ボーダー、出願スケジュールを受験本番まで無料でお届けします。LINEかメールで、いつでも解除できます。"
-          />
+          {/* 総合得点計算機・結果連動（S-3①） */}
+          <div className="mb-8">
+            <SaitamaResultFlow />
+          </div>
 
           {/* 計算例 */}
           <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
