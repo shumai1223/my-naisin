@@ -39,6 +39,11 @@ export function track(event: string, params: TrackParams = {}): void {
  * 下のヘルパーを使うことで、命名ゆれ・計測漏れを型で防ぐ。
  * ──────────────────────────────────────────────────────────────────────── */
 
+/**
+ * PLAYBOOK移植メモ（F-7）: track() 本体・FunnelContext・ctxParams はサイト非依存でそのままコピー可能。
+ * 他サイト（例: my-shingaku）へ移植する際は、EVENTS の語彙（result_view/cta_view 等の概念は流用しつつ、
+ * 指標名は対象サイトの計算対象＝大学受験・学費相談等）に合わせて書き換えること。
+ */
 export const EVENTS = {
   // ── ファネル本線 ──
   TOOL_START: 'tool_start', // 計算機の入力開始（最初の操作）
