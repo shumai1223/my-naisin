@@ -26,6 +26,11 @@ export interface SeasonCopy {
   ctaText: string;
 }
 
+/**
+ * PLAYBOOK移植メモ（F-7）: Season型・getActiveSeason・resolveSeasonの日付判定ロジックはサイト非依存で
+ * そのままコピー可能（「受験シーズン」という概念自体は大学受験等でも成立する）。他サイトへ移植する際は
+ * SEASON_COPY の文言（塾の季節講習という高校受験文脈）だけを対象サイトの訴求に書き換えること。
+ */
 export const SEASON_COPY: Record<Season, SeasonCopy> = {
   winter: {
     kw: '冬期講習',

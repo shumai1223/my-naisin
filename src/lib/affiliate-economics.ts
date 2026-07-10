@@ -16,22 +16,26 @@
  * 使い手：
  *  - /admin/report（認証付き・送客アナリティクスの金額換算）
  *  - scripts/generate-sales-report.ts（月次の営業/振り返りレポート Markdown 生成）
+ *
+ * PLAYBOOK移植メモ（F-7④）: 型・計算式（EV公式そのもの）は src/lib/ev-engine.ts に分離済み
+ * （他サイトへそのままコピー可能）。このファイルに残るのは my-naishin 固有の実データ
+ * （AFFILIATE_ECONOMICS・CONFIRM_RATE等の仮定値）と、AffiliateId に紐づくルックアップ関数群。
  */
 
 import { AFFILIATES, isLiveAffiliate, type AffiliateId } from '@/lib/affiliates';
+import {
+  type OfferKind,
+  type AffiliateEconomics,
+  commitmentLevel,
+  yen,
+  estimatedLeadsFor,
+  estimatedLeadsLowFor,
+  estimatedRevenueYenFor,
+  confirmedRevenueYenFor,
+} from '@/lib/ev-engine';
 
-export type OfferKind = 'free-lead' | 'doc-request' | 'paid';
-
-export interface AffiliateEconomics {
-  /** 1成果あたりの想定報酬（円・推定）。 */
-  cpaYen: number;
-  /** クリック→成果 の楽観転換率（理想上限・未実測の仮定）。 */
-  convRate: number;
-  /** クリック→成果 の保守転換率（権限ズレ・生徒面前提を織り込んだ現実線）。主役。 */
-  convRateLow: number;
-  /** 種別（無料体験・資料請求＝溶けにくい／有料＝CVR低くEPCで溶ける）。 */
-  kind: OfferKind;
-}
+export type { OfferKind, AffiliateEconomics };
+export { commitmentLevel, yen };
 
 /**
  * 「発生」→「確定（着金）」の歩留まり。ASPは無効・重複・条件未達のリードを 3〜4割却下するため、
@@ -127,21 +131,6 @@ export const OFFER_KIND_LABEL: Record<OfferKind, string> = {
 };
 
 /**
- * 申込のハードルの低い順＝コミットメント階段（A8）。資料請求(0) < 無料体験/相談(1) < 有料成約(2)。
- * 北極星（[[monetization-reality-2026-06]]）：保護者面ほど「無料度の高い（=低コミットメント）オファー」を上位に。
- */
-export function commitmentLevel(kind: OfferKind): 0 | 1 | 2 {
-  switch (kind) {
-    case 'doc-request':
-      return 0;
-    case 'free-lead':
-      return 1;
-    case 'paid':
-      return 2;
-  }
-}
-
-/**
  * 保護者リード面に置いて良いオファーか（=有料成約でない）。
  * 「保護者 × 無料リード」だけが効くという北極星を、コードで判定可能にする（CIで戦略ドリフトを止める）。
  */
@@ -151,18 +140,17 @@ export function isParentSafeOffer(id: AffiliateId): boolean {
 
 /** クリック数 → 推定成果（リード）数【楽観】。 */
 export function estimatedLeads(id: AffiliateId, clicks: number): number {
-  return clicks * economicsFor(id).convRate;
+  return estimatedLeadsFor(economicsFor(id), clicks);
 }
 
 /** クリック数 → 推定成果（リード）数【保守】。 */
 export function estimatedLeadsLow(id: AffiliateId, clicks: number): number {
-  return clicks * economicsFor(id).convRateLow;
+  return estimatedLeadsLowFor(economicsFor(id), clicks);
 }
 
 /** クリック数 → 推定発生額（円）【楽観】。発生≠着金（承認・確定はラグ＋却下あり）。 */
 export function estimatedRevenueYen(id: AffiliateId, clicks: number): number {
-  const e = economicsFor(id);
-  return clicks * e.convRate * e.cpaYen;
+  return estimatedRevenueYenFor(economicsFor(id), clicks);
 }
 
 /**
@@ -170,13 +158,7 @@ export function estimatedRevenueYen(id: AffiliateId, clicks: number): number {
  * 保守転換率 × CPA × 却下控除（CONFIRM_RATE）で「着金見込み」に寄せた現実線。
  */
 export function confirmedRevenueYen(id: AffiliateId, clicks: number): number {
-  const e = economicsFor(id);
-  return clicks * e.convRateLow * e.cpaYen * CONFIRM_RATE;
-}
-
-/** 円を「¥1,234」表記に。 */
-export function yen(n: number): string {
-  return `¥${Math.round(n).toLocaleString('ja-JP')}`;
+  return confirmedRevenueYenFor(economicsFor(id), clicks, CONFIRM_RATE);
 }
 
 // ── EVランキング（“既存アフィリの最適解”の単一ソース） ──────────────────────────
