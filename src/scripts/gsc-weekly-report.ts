@@ -24,6 +24,7 @@ import path from 'path';
 import { findUncoveredOpportunityQueries, formatMiningCandidatesMarkdown } from '../lib/query-mining';
 import { findCtrUnderperformers, formatCtrUnderperformersMarkdown } from '../lib/ctr-improvement';
 import { findRoutesDueForMeasurement, type CtrChangeLogEntry } from '../lib/ctr-improvement-log';
+import { LAUNCH_BATCHES, evaluateLaunchBatchStatus, formatLaunchBatchMarkdown } from '../lib/new-page-launch-tracker';
 
 const SITE_URL = process.env.GSC_SITE_URL || 'sc-domain:my-naishin.com';
 const SA_KEY = process.env.GSC_SA_KEY;
@@ -215,6 +216,12 @@ async function main() {
   }
   const dueForMeasurement = findRoutesDueForMeasurement(ctrChangeLog, new Date());
 
+  // 新面インデックス監視（TIER I-7）：直近バッチの離陸/未発見状況
+  const launchBatchStatuses = LAUNCH_BATCHES.map((batch) => ({
+    label: batch.label,
+    statuses: evaluateLaunchBatchStatus(batch.routes, recentPages),
+  }));
+
   // --- Markdownレポート組み立て ---
   const L: string[] = [];
   L.push(`# 📊 GSC週次レポート（${recentEnd} 時点）`);
@@ -312,6 +319,14 @@ async function main() {
     );
   else L.push('_該当なし_\n');
 
+  L.push('## 🛬 新面インデックス監視（TIER I-7）');
+  L.push('> 直近に新設したバッチが発見（GSCに表示回数が計測）されているかの一覧。未発見が多い場合はsitemap再送信・内部リンク経路を再確認する。');
+  L.push('');
+  for (const batch of LAUNCH_BATCHES) {
+    L.push(formatLaunchBatchMarkdown(batch, evaluateLaunchBatchStatus(batch.routes, recentPages)));
+    L.push('');
+  }
+
   L.push('## 🔁 CTR自動改善ループ（掲載順位から見て明らかにCTRが低い面・TIER L-3）');
   L.push('> 順位帯別の期待CTR目安を大きく下回る面（流入上位5面は除外済み）。ガード: 同一面の変更は3週間隔・変更はdata/ctr-improvement-log.jsonに記録して3週後に効果測定する。');
   L.push('');
@@ -330,7 +345,7 @@ async function main() {
   fs.writeFileSync(
     'gsc-weekly-report.json',
     JSON.stringify(
-      { generatedAt: new Date().toISOString(), recentEnd, striking, lowCtr, dropped, rising, newcomers, uncoveredCandidates, winnerPages, loserPages, ctrUnderperformers, dueForMeasurement },
+      { generatedAt: new Date().toISOString(), recentEnd, striking, lowCtr, dropped, rising, newcomers, uncoveredCandidates, winnerPages, loserPages, ctrUnderperformers, dueForMeasurement, launchBatchStatuses },
       null,
       2,
     ),
