@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { APP_NAME } from '@/lib/constants';
 
 export default function PrivacyPage() {
-  const lastUpdated = '2026年6月8日';
+  const lastUpdated = '2026年7月12日';
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
@@ -169,6 +169,22 @@ export default function PrivacyPage() {
                 <li>• <strong>配信解除：</strong>各配信またはお問い合わせからいつでも解除できます</li>
                 <li>• <strong>第三者提供：</strong>本人の同意なく第三者へ提供・販売することはありません</li>
                 <li>• <strong>LINEでの受け取り：</strong>LINE公式アカウントを友だち追加された場合、LINEヤフー株式会社のプライバシーポリシーも適用されます</li>
+              </ul>
+            </div>
+
+            <h3 className="mb-2 mt-4 text-sm font-bold text-slate-700">2.5 匿名統計への協力（任意）</h3>
+            <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-4">
+              <p className="text-sm leading-relaxed text-emerald-800">
+                <strong>「匿名で統計に協力する」にチェックを入れた場合：</strong>計算結果（内申点・偏差値・総合得点等の数値のみ）を、
+                氏名・メールアドレス・IPアドレス等を一切含まない形で送信し、全国の傾向を示す統計データ（
+                <Link href="/stats" className="text-emerald-700 underline">全国統計データページ</Link>
+                ）の作成に利用します。
+              </p>
+              <ul className="mt-2 space-y-1 text-xs text-emerald-700">
+                <li>• <strong>取得項目：</strong>指標の種類（内申点／偏差値／総合得点）、数値、都道府県コード（任意）のみ。個人を特定できる情報は一切含みません</li>
+                <li>• <strong>利用目的：</strong>全国の匿名集計統計データの作成・公開（サンプルサイズが一定件数未満の項目は非公開）</li>
+                <li>• <strong>同意の撤回：</strong>チェックを外すことでいつでも協力を停止できます（過去に送信済みのデータは個人と紐づいていないため個別の削除はできません）</li>
+                <li>• <strong>第三者提供：</strong>集計済みの統計データとしてAPI・CSV形式で一般公開しますが、個人を特定できる情報は含まれません</li>
               </ul>
             </div>
           </section>
@@ -388,17 +404,17 @@ export default function PrivacyPage() {
             <h2 className="mb-3 text-lg font-bold text-slate-800">6. アクセス解析ツールについて</h2>
             <p className="text-sm leading-relaxed text-slate-600">
               当サイトでは、サービス向上およびユーザー体験の改善を目的として、
-              将来的にGoogleアナリティクス等のアクセス解析ツールを導入する予定です。
-              導入された場合、これらのツールはトラフィックデータを収集するためにCookieを使用しますが、
+              Googleアナリティクス（GA4）を導入しています。
+              このツールはトラフィックデータを収集するためにCookieを使用しますが、
               このデータは匿名で収集され、個人を特定するものではありません。
             </p>
             <p className="mt-3 text-sm leading-relaxed text-slate-600">
-              導入後に収集される情報には、ページビュー数、セッション時間、使用デバイス、地理的位置（国・地域レベル）、
+              収集される情報には、ページビュー数、セッション時間、使用デバイス、地理的位置（国・地域レベル）、
               参照元URLなどが含まれます。これらの情報は、サイトのコンテンツ改善、
               ユーザビリティの向上、およびサービス品質の維持に活用されます。
             </p>
             <p className="mt-3 text-sm leading-relaxed text-slate-600">
-              Googleアナリティクス導入後、データ収集を無効にするには、
+              Googleアナリティクスによるデータ収集を無効にするには、
               <a 
                 href="https://tools.google.com/dlpage/gaoptout" 
                 target="_blank" 
