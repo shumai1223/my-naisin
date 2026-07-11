@@ -8,7 +8,7 @@ import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { RelatedToolsSection } from '@/components/RelatedToolsSection';
 import { AnswerBotClient } from '@/components/AnswerBot/AnswerBotClient';
-import { buildPrefectureMaxScoreFaqs, buildGeneralFactFaqs } from '@/lib/ask-faq-coverage';
+import { buildPrefectureMaxScoreFaqs, buildGeneralFactFaqs, buildPrefectureTargetGradesFaqs } from '@/lib/ask-faq-coverage';
 
 export const metadata: Metadata = {
   title: '内申点クイックアンサー｜質問するとすぐ答える（47都道府県の方式・自社データ）| My Naishin',
@@ -28,8 +28,9 @@ export const metadata: Metadata = {
 // 同じ関数から生成されるため表示内容がズレない（S-4①②・GEO決定論網羅拡張）。
 const GENERAL_ASK_FAQS = buildGeneralFactFaqs();
 const PREFECTURE_ASK_FAQS = buildPrefectureMaxScoreFaqs();
+const PREFECTURE_TARGET_GRADES_FAQS = buildPrefectureTargetGradesFaqs();
 
-const ASK_FAQS = [...GENERAL_ASK_FAQS, ...PREFECTURE_ASK_FAQS];
+const ASK_FAQS = [...GENERAL_ASK_FAQS, ...PREFECTURE_ASK_FAQS, ...PREFECTURE_TARGET_GRADES_FAQS];
 
 export default function AskPage() {
   return (
@@ -86,7 +87,7 @@ export default function AskPage() {
           {/* 可視のQ&A（GEO：JSなしでも読める一次情報） */}
           <section className="mt-10">
             <h2 className="mb-1 text-lg font-bold text-slate-800">よくある質問と回答</h2>
-            <p className="mb-4 text-xs text-slate-400">制度・費用のよくある疑問と、47都道府県すべての「内申点は何点満点？」に個別回答（検証済みデータから機械生成・タップして確認できます）</p>
+            <p className="mb-4 text-xs text-slate-400">制度・費用のよくある疑問と、47都道府県すべての「内申点は何点満点？」「対象学年はいつ？」に個別回答（検証済みデータから機械生成・タップして確認できます）</p>
             <div className="space-y-3">
               {ASK_FAQS.map((faq) => (
                 <details

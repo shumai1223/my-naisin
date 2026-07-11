@@ -32,6 +32,22 @@ export function buildPrefectureMaxScoreFaqs(): AskFaqItem[] {
 }
 
 /**
+ * 47都道府県 × 「内申点の対象学年はいつですか？」をanswerQuery()から機械生成する（S-4④・軸拡張1本目）。
+ * answer-bot.tsのdetectIntent()が「対象学年」を含む質問文を targetGrades 意図として検出する
+ * （prefectureAnswer()に既存のロジックをそのまま再利用・新規判定基準はゼロ）。
+ */
+export function buildPrefectureTargetGradesFaqs(): AskFaqItem[] {
+  return PREFECTURES.map((p) => {
+    const question = `${p.name}の内申点の対象学年はいつですか？`;
+    const result = answerQuery(question);
+    if (!result) {
+      throw new Error(`ask-faq-coverage: ${p.name}(${p.code})のtargetGrades回答が生成できません`);
+    }
+    return { question, answer: result.answer };
+  });
+}
+
+/**
  * 都道府県に紐づかない一般Q&A（GENERAL_FACTS・answer-bot.ts）を機械生成する（S-4②）。
  * 各質問文は対応するGENERAL_FACTSの正規表現に一致するよう選定し、expectedTitleで
  * 実際にヒットしたfactが意図どおりか検証する（正規表現は先勝ち判定のため、文言次第では
