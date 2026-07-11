@@ -10,5 +10,17 @@
     "changedAt": "2026-07-11",
     "note": "title/descriptionをcuriosity-gap型に変更（「実技4教科が2倍になる195点満点」）。data/gsc-mining-2026-07-09.json時点でimp528/CTR1.89%/pos9.3・expectedMinCtr2%",
     "ctrBefore": 0.01893939393939394
+  },
+  {
+    "route": "/hokkaido/rank",
+    "changedAt": "2026-07-11",
+    "note": "GSC MCP実データ(07-02〜07-08)で発見した新規underperformer。title/descriptionをA〜M13段階＋具体的な閾値(A=296点以上/M=75点以下)を明示する形に変更。GSC実測: imp749/CTR0.80%/pos5.9・expectedMinCtr4%",
+    "ctrBefore": 0.00801068090787717
+  },
+  {
+    "route": "/mie/naishin",
+    "changedAt": "2026-07-11",
+    "note": "GSC MCP実データ(07-02〜07-08)で発見した新規underperformer。PREFECTURE_META_OVERRIDESに新規追加（従来は汎用テンプレのまま）。「中3のみ45点満点」の実データ特性をcuriosity-gap化。GSC実測: imp433/CTR1.39%/pos4.7・expectedMinCtr4%",
+    "ctrBefore": 0.013856812933025405
   }
 ]

@@ -30,14 +30,14 @@ const HOKKAIDO_RANK_FAQS = [
 ];
 
 export const metadata: Metadata = {
-  title: '北海道 内申ランクA〜M判定【無料】公立高校入試の合否目安 | My Naishin',
-  description: '【無料】北海道公立高校入試の内申ランク（A〜M）を瞬時に判定。内申点315点・学力検査300点を入力するだけで、Aランク〜Mランクのどこに該当するかと、札幌南・札幌北など主要校との距離を確認できます。2026年度入試対応。',
+  title: '北海道の内申ランク判定｜315点満点をA〜M全13段階に自動変換【無料・2026】 | My Naishin',
+  description: '【無料】北海道の内申点（中1:中2:中3=2:2:3で合算した315点満点）から、A（296点以上）〜M（75点以下）の内申ランクを30秒で自動判定。学力検査点とあわせて札幌南・札幌北など主要校の合格目安とも比較できます。2026年度入試対応。',
   keywords: ['北海道 内申ランク', '北海道 ランク 計算', '北海道 公立高校', 'Aランク', 'Bランク', '札幌南', '札幌北', '内申点 北海道'],
   alternates: {
     canonical: 'https://my-naishin.com/hokkaido/rank',
   },
   openGraph: {
-    title: '北海道 内申ランクA〜M判定【無料】公立高校入試の合否目安 | My Naishin',
+    title: '北海道の内申ランク判定｜315点満点をA〜M全13段階に自動変換【無料・2026】 | My Naishin',
     description: '北海道公立高校入試の内申ランクを瞬時に判定。主要校の合格目安と比較可能。',
     url: 'https://my-naishin.com/hokkaido/rank',
   },

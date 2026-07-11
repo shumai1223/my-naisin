@@ -250,6 +250,13 @@ const PREFECTURE_META_OVERRIDES: Record<string, { title: string; description: st
     description:
       '【無料】宮城県の内申点は中1〜中3の全学年が対象、実技4教科の評定が2倍で効く195点満点。9教科の評定を入れるだけで30秒で正確に算出。志望校ボーダー比較も対応。2026年度入試対応。',
   },
+  // 2026-07-11: L-3(CTR自動改善ループ)の実データ(GSC MCP直接取得・07-02〜07-08)で低CTR判定。
+  // 中1・中2は判定基準の対象外というmieの特殊性（gradeMultipliers 1:0 2:0 3:1）はテンプレ文言では伝わらない。
+  mie: {
+    title: '三重県の内申点 計算｜中3の成績だけで45点満点を30秒で自動計算【2026】 | My Naishin',
+    description:
+      '【無料】三重県の内申点は中1・中2の成績が反映されない中3のみの45点満点。9教科の評定を入れるだけで30秒で正確に算出し、志望校ボーダー比較にも対応。2026年度入試対応。',
+  },
 };
 
 export async function generateMetadata({ params }: PageProps) {
