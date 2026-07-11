@@ -552,13 +552,30 @@ curl ${SITE_URL}/api/status`;
               <UpgradeButton tier="pro" label="Proにアップグレード（月額 ¥9,800〜）" />
             </div>
             <p className="mt-3 text-xs text-slate-500">
-              大規模・データ再配布・年額ライセンス（CSV/JSONの定期更新フィード＋更新通知）は Scale で個別対応。
-              <Link href="/contact" className="mx-1 font-semibold text-amber-700 underline">お問い合わせ</Link>ください。
-            </p>
-            <p className="mt-3 text-xs text-slate-500">
               塾・学習塾・進路指導の事業者様は、
               <Link href="/partner" className="mx-1 font-semibold text-amber-700 underline">パートナー向けページ</Link>
               で埋め込みウィジェットやデータ提供メニューもご覧いただけます。
+            </p>
+          </div>
+
+          {/* Enterprise（Scale）：名称・SLA・データ再配布ライセンスを明示（E-6・2026-07-10 👤裁定B＝文言強調のみ・価格は個別見積りのまま） */}
+          <div className="mt-6 rounded-2xl border-2 border-slate-300 bg-gradient-to-br from-slate-50 to-indigo-100 p-6">
+            <h3 className="text-base font-bold text-slate-800">
+              大規模利用・データライセンスなら {TIER_POLICIES.scale.label}
+            </h3>
+            <p className="mt-2 text-sm leading-relaxed text-slate-700">
+              {TIER_POLICIES.scale.audience}向け。レート上限
+              <strong className="mx-1">{TIER_POLICIES.scale.ratePerMinute.toLocaleString('ja-JP')}回/分</strong>
+              に加え、<strong>{TIER_POLICIES.scale.sla}</strong>の専用SLAと、
+              <strong>データ再配布ライセンス（CSV/JSONの定期更新フィード＋更新通知つき）</strong>が付きます。
+              47都道府県全方式の要綱改訂の追従・保守もこちらで引き受けます。
+            </p>
+            <div className="mt-4">
+              <UpgradeButton tier="scale" label="Enterpriseについて相談する" />
+            </div>
+            <p className="mt-3 text-xs text-slate-500">
+              価格は利用規模・データライセンス範囲に応じた{formatTierPrice('scale')}。
+              <Link href="/contact" className="mx-1 font-semibold text-indigo-700 underline">お問い合わせ</Link>ください。
             </p>
           </div>
         </section>
