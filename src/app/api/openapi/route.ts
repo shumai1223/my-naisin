@@ -218,6 +218,20 @@ export function GET() {
           responses: { '200': { description: '成功' }, '400': { description: 'metricが不正' } },
         },
       },
+      '/api/stats/percentile': {
+        get: {
+          operationId: 'getStatsPercentile',
+          summary: '匿名統計パーセンタイル（自分の値が全国協力者内で何%タイルか）',
+          description:
+            '利用者が任意でオプトインした匿名の計算結果と比較した、指定した値のパーセンタイル。サンプルサイズ30件未満はinsufficientData:trueとなり結果自体を返さない（k-匿名性）。紹介・解放機構（T-1）の「全国統計の先行閲覧」の元データ。',
+          parameters: [
+            { name: 'metric', in: 'query', required: true, description: 'naishin / hensachi / total-score のいずれか。', schema: { type: 'string', example: 'hensachi' } },
+            { name: 'value', in: 'query', required: true, description: '自分の値。', schema: { type: 'number', example: 58 } },
+            { name: 'prefecture', in: 'query', required: false, description: '任意。都道府県コードで絞り込み。', schema: { type: 'string', example: 'tokyo' } },
+          ],
+          responses: { '200': { description: '成功' }, '400': { description: 'パラメータが不正' } },
+        },
+      },
       '/api/stats/csv': {
         get: {
           operationId: 'getStatsCsv',

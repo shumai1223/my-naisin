@@ -10,6 +10,8 @@ import {
   buildSuppressedAggregate,
   isValidStatsSubmission,
   buildStatsCsv,
+  computePercentileRank,
+  buildSuppressedPercentile,
 } from '../stats-aggregation';
 
 describe('isStatsMetric', () => {
@@ -102,6 +104,49 @@ describe('buildStatsCsv（TIER N-7・CSV配布）', () => {
     );
     const dataLine = csv.trim().split('\n')[1];
     expect(dataLine).toBe('naishin,内申点,40,false,35.50,20,45,30,2026-07-11T00:00:00.000Z');
+  });
+});
+
+describe('computePercentileRank（T-1：解放機構の中身＝全国統計パーセンタイル）', () => {
+  it('自分以下（同値含む）の割合を返す', () => {
+    // [10,20,30,40,50] のうち target=30 以下は 10,20,30 の3件/5件=60%
+    expect(computePercentileRank([10, 20, 30, 40, 50], 30)).toBe(60);
+  });
+
+  it('全員より高いなら100', () => {
+    expect(computePercentileRank([10, 20, 30], 100)).toBe(100);
+  });
+
+  it('全員より低いなら0未満にはならない（自分以下0件）', () => {
+    expect(computePercentileRank([10, 20, 30], 5)).toBe(0);
+  });
+
+  it('非有限値は除外して計算する', () => {
+    expect(computePercentileRank([10, NaN, 20, Infinity], 10)).toBe(50);
+  });
+
+  it('空配列・非有限targetはnull', () => {
+    expect(computePercentileRank([], 10)).toBeNull();
+    expect(computePercentileRank([10, 20], NaN)).toBeNull();
+  });
+});
+
+describe('buildSuppressedPercentile（k-匿名性を適用したパーセンタイル）', () => {
+  it('サンプルサイズが閾値以上ならcount/percentileを返す', () => {
+    const values = Array.from({ length: STATS_MIN_SAMPLE_SIZE }, (_, i) => i + 1); // 1..30
+    const result = buildSuppressedPercentile(values, 30);
+    expect(result).not.toBeNull();
+    expect(result?.count).toBe(STATS_MIN_SAMPLE_SIZE);
+    expect(result?.percentile).toBe(100);
+  });
+
+  it('サンプルサイズが閾値未満ならnull（非表示・捏造しない）', () => {
+    const values = Array.from({ length: STATS_MIN_SAMPLE_SIZE - 1 }, (_, i) => i + 1);
+    expect(buildSuppressedPercentile(values, 15)).toBeNull();
+  });
+
+  it('空配列はnull', () => {
+    expect(buildSuppressedPercentile([], 10)).toBeNull();
   });
 });
 

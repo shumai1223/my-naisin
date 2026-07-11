@@ -11,6 +11,8 @@ import { ParentCostBridge } from '@/components/ParentCostBridge';
 import { ParentWindowBridge } from '@/components/ParentWindowBridge';
 import { ShindanEntryLink } from '@/components/ShindanEntryLink';
 import { StatsOptIn } from '@/components/StatsOptIn';
+import { UnlockGate } from '@/components/UnlockGate';
+import { NationalPercentileReveal } from '@/components/NationalPercentileReveal';
 
 /**
  * /hensachi（全流入の約41%）の結果連動 換金フロー。
@@ -48,6 +50,19 @@ export function HensachiResultFlow() {
       <div className="mt-6">
         <StatsOptIn metric="hensachi" value={value} />
       </div>
+
+      {/* T-1: 紹介・解放機構。保護者に送る/LINE登録で全国統計の先行閲覧が解放される */}
+      {has && (
+        <div className="mt-6">
+          <UnlockGate
+            placement="hensachi-percentile"
+            tool="hensachi"
+            shareCtx={{ score: value as number, target: target ?? undefined, gap: gap ?? undefined, metricLabel: '偏差値' }}
+          >
+            <NationalPercentileReveal metric="hensachi" metricLabel="偏差値" value={value} />
+          </UnlockGate>
+        </div>
+      )}
 
       {/* 即効レバー：最高CTRページの結果直後に保護者リード（決裁者＝保護者へ高単価送客） */}
       <div className="mt-6">

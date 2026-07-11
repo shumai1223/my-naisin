@@ -81,6 +81,9 @@ export const EVENTS = {
   EXPERIMENT_IMPRESSION: 'experiment_impression',
   // ── 掲載枠スポンサー（D-3・直販の県×面固定枠。AFFILIATES/lead-configとは別商流） ──
   SPONSOR_CLICK: 'sponsor_click',
+  // ── 紹介・解放機構（T-1・G1名簿velocityの主エンジン） ──
+  UNLOCK_TEASER_VIEW: 'unlock_teaser_view', // ロック中コンテンツ（解放前の誘い）が表示された
+  UNLOCK_GRANTED: 'unlock_granted', // 共有/LINE追加で解放された（分母=unlock_teaser_view）
 } as const;
 
 export type AnalyticsEvent = (typeof EVENTS)[keyof typeof EVENTS];

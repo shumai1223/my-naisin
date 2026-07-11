@@ -6,6 +6,7 @@
  */
 import { POST as submitPOST } from '@/app/api/stats/submit/route';
 import { GET as distributionGET } from '@/app/api/stats/distribution/route';
+import { GET as percentileGET } from '@/app/api/stats/percentile/route';
 import { GET as csvGET } from '@/app/api/stats/csv/route';
 import type { NextRequest } from 'next/server';
 
@@ -81,6 +82,41 @@ describe('/api/stats/distribution 契約', () => {
 
   test('prefectureを指定してもmetaに反映される', async () => {
     const res = await distributionGET(distributionReq('?metric=hensachi&prefecture=osaka', { ip: '3.1.1.4' }));
+    const json = await res.json();
+    expect(json.meta.prefecture).toBe('osaka');
+  });
+});
+
+describe('/api/stats/percentile 契約（T-1：紹介・解放機構の中身）', () => {
+  test('metric未指定は400', async () => {
+    const res = await percentileGET(distributionReq('?value=40', { ip: '4.1.1.1' }));
+    expect(res.status).toBe(400);
+  });
+
+  test('不正なmetricは400', async () => {
+    const res = await percentileGET(distributionReq('?metric=unknown&value=40', { ip: '4.1.1.2' }));
+    expect(res.status).toBe(400);
+  });
+
+  test('valueが数値でない・未指定は400', async () => {
+    const res1 = await percentileGET(distributionReq('?metric=naishin', { ip: '4.1.1.3' }));
+    expect(res1.status).toBe(400);
+    const res2 = await percentileGET(distributionReq('?metric=naishin&value=abc', { ip: '4.1.1.4' }));
+    expect(res2.status).toBe(400);
+  });
+
+  test('妥当なパラメータはD1未設定なのでinsufficientData:true・result:null（捏造しない契約）', async () => {
+    const res = await percentileGET(distributionReq('?metric=hensachi&value=58', { ip: '4.1.1.5' }));
+    expect(res.status).toBe(200);
+    const json = await res.json();
+    expect(json.insufficientData).toBe(true);
+    expect(json.result).toBeNull();
+    expect(json.meta.metric).toBe('hensachi');
+    expect(json.meta.value).toBe(58);
+  });
+
+  test('prefectureを指定してもmetaに反映される', async () => {
+    const res = await percentileGET(distributionReq('?metric=naishin&value=40&prefecture=osaka', { ip: '4.1.1.6' }));
     const json = await res.json();
     expect(json.meta.prefecture).toBe('osaka');
   });

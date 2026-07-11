@@ -67,6 +67,7 @@ export function ParentShareLinkButton({
   tool,
   label = 'おうちの人に結果を送る',
   withImage = true,
+  onShared,
 }: {
   ctx: ParentShareContext;
   className?: string;
@@ -75,6 +76,8 @@ export function ParentShareLinkButton({
   label?: string;
   /** 成績レポート画像（/api/card）を Web Share に添付する（既定 true）。 */
   withImage?: boolean;
+  /** 共有ボタンが押された（＝送信意図が確定した）時に一度だけ呼ばれる。T-1解放機構の着火点。 */
+  onShared?: () => void;
 }) {
   const [copied, setCopied] = React.useState(false);
   const [qrUrl, setQrUrl] = React.useState<string | null>(null);
@@ -105,6 +108,7 @@ export function ParentShareLinkButton({
       metric: ctx.metricLabel ?? '内申点',
       ...(tool ? { tool } : {}),
     });
+    onShared?.();
 
     // スマホ＝ネイティブ共有シート（LINE等）。可能なら成績レポート画像も添付。
     if (typeof navigator !== 'undefined' && navigator.share) {
@@ -134,7 +138,7 @@ export function ParentShareLinkButton({
     } catch {
       // クリップボードも不可なら何もしない（最低限ボタンは壊さない）。
     }
-  }, [ctx, tool]);
+  }, [ctx, tool, onShared]);
 
   // その場（同じ部屋）にいる保護者にスマホで直接読み取ってもらうQRコード。
   // parent_landing_view がほぼ0という実測（リンク共有は後で開かれずに流れがち）への

@@ -105,6 +105,41 @@ export function buildStatsCsv(rows: StatsCsvRow[], generatedAtIso: string = new 
   return lines.join('\n') + '\n';
 }
 
+export interface PercentileResult {
+  /** 集計対象の全件数（表示前のk-匿名性判定用）。 */
+  count: number;
+  /** 自分の値以下（自分を含む）の割合（0〜100・四捨五入）。「全国上位◯%」の元データ。 */
+  percentile: number;
+}
+
+/**
+ * 提出値の集合の中で target が何%タイル（自分以下が全体の何%か）かを計算する（純粋関数）。
+ * 空配列・非有限値は null。同値はすべて「自分以下」に含める（<=）。
+ */
+export function computePercentileRank(values: number[], target: number): number | null {
+  if (!Number.isFinite(target)) return null;
+  const finite = values.filter((v) => Number.isFinite(v));
+  if (finite.length === 0) return null;
+  const atOrBelow = finite.filter((v) => v <= target).length;
+  return Math.round((atOrBelow / finite.length) * 100);
+}
+
+/**
+ * k-匿名性を適用したパーセンタイル集計（T-1：解放機構の中身＝全国統計の先行閲覧）。
+ * サンプルサイズが閾値未満ならnull（＝呼び出し側は「まだデータが足りません」にフォールバック）。
+ */
+export function buildSuppressedPercentile(
+  values: number[],
+  target: number,
+  threshold: number = STATS_MIN_SAMPLE_SIZE
+): PercentileResult | null {
+  const finite = values.filter((v) => Number.isFinite(v));
+  if (shouldSuppressCell(finite.length, threshold)) return null;
+  const percentile = computePercentileRank(finite, target);
+  if (percentile === null) return null;
+  return { count: finite.length, percentile };
+}
+
 /** 提出データの妥当性検査（DBに書く前のバリデーション・N-3のAPI実装時に使う想定）。 */
 export function isValidStatsSubmission(input: unknown): input is StatsSubmissionInput {
   if (!input || typeof input !== 'object') return false;
