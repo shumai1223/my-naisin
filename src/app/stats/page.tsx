@@ -87,6 +87,9 @@ export const metadata: Metadata = {
 export default async function StatsPage() {
   const url = `${SITE_URL}/stats`;
   const stats = await loadStats();
+  // このページはforce-dynamicで毎リクエスト時にD1から再集計している＝キャッシュされた古い数値を
+  // 表示することはない（N-6：鮮度表示。バッチ更新パイプラインは不要＝常に集計時点が「今」）。
+  const generatedAt = new Date();
 
   return (
     <>
@@ -137,6 +140,9 @@ export default async function StatsPage() {
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">全国統計データ</h1>
             <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-slate-600">
               内申点・偏差値・総合得点の計算機を使った方が任意でオプトインした匿名データを集計しています。個人を特定できる情報は一切含みません。
+            </p>
+            <p className="mt-2 text-xs text-slate-400">
+              集計日時：{generatedAt.toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' })}（このページは表示のたびに最新データを集計します）
             </p>
           </header>
 
