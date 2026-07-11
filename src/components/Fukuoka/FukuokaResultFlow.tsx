@@ -7,6 +7,8 @@ import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { ParentCostBridge } from '@/components/ParentCostBridge';
 import { ParentWindowBridge } from '@/components/ParentWindowBridge';
 import { StatsOptIn } from '@/components/StatsOptIn';
+import { UnlockGate } from '@/components/UnlockGate';
+import { NationalPercentileReveal } from '@/components/NationalPercentileReveal';
 
 /** 福岡内申点・当日点ページの結果連動フロー（B-5）。 */
 export function FukuokaResultFlow() {
@@ -48,6 +50,19 @@ export function FukuokaResultFlow() {
       <div className="mt-6">
         <StatsOptIn metric="total-score" value={result?.total} maxValue={result?.max} prefectureCode="fukuoka" />
       </div>
+
+      {/* T-1: 紹介・解放機構。保護者に送る/LINE登録で全国統計の先行閲覧が解放される */}
+      {result && (
+        <div className="mt-6">
+          <UnlockGate
+            placement="total-score-percentile"
+            tool="total-score"
+            shareCtx={{ score: result.total, max: result.max, prefectureCode: 'fukuoka', prefectureName: '福岡県', metricLabel: '総合得点' }}
+          >
+            <NationalPercentileReveal metric="total-score" metricLabel="総合得点" value={result.total} prefectureCode="fukuoka" />
+          </UnlockGate>
+        </div>
+      )}
     </>
   );
 }

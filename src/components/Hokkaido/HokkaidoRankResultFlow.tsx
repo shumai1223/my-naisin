@@ -7,6 +7,8 @@ import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { ParentCostBridge } from '@/components/ParentCostBridge';
 import { ParentWindowBridge } from '@/components/ParentWindowBridge';
 import { StatsOptIn } from '@/components/StatsOptIn';
+import { UnlockGate } from '@/components/UnlockGate';
+import { NationalPercentileReveal } from '@/components/NationalPercentileReveal';
 
 /**
  * 北海道内申ランクページの結果連動フロー（B-5）。
@@ -51,6 +53,19 @@ export function HokkaidoRankResultFlow() {
       <div className="mt-6">
         <StatsOptIn metric="total-score" value={result?.total} maxValue={result?.max} prefectureCode="hokkaido" />
       </div>
+
+      {/* T-1: 紹介・解放機構。保護者に送る/LINE登録で全国統計の先行閲覧が解放される */}
+      {result && (
+        <div className="mt-6">
+          <UnlockGate
+            placement="total-score-percentile"
+            tool="total-score"
+            shareCtx={{ score: result.total, max: result.max, prefectureCode: 'hokkaido', prefectureName: '北海道', metricLabel: '総合点' }}
+          >
+            <NationalPercentileReveal metric="total-score" metricLabel="総合点" value={result.total} prefectureCode="hokkaido" />
+          </UnlockGate>
+        </div>
+      )}
     </>
   );
 }

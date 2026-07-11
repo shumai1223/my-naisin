@@ -7,6 +7,8 @@ import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { ParentCostBridge } from '@/components/ParentCostBridge';
 import { ParentWindowBridge } from '@/components/ParentWindowBridge';
 import { StatsOptIn } from '@/components/StatsOptIn';
+import { UnlockGate } from '@/components/UnlockGate';
+import { NationalPercentileReveal } from '@/components/NationalPercentileReveal';
 
 /**
  * 大阪府総合点ページの結果連動フロー（S-1④）。
@@ -52,6 +54,19 @@ export function OsakaResultFlow() {
       <div className="mt-6">
         <StatsOptIn metric="total-score" value={result?.total} maxValue={result?.max} prefectureCode="osaka" />
       </div>
+
+      {/* T-1: 紹介・解放機構。保護者に送る/LINE登録で全国統計の先行閲覧が解放される */}
+      {result && (
+        <div className="mt-6">
+          <UnlockGate
+            placement="total-score-percentile"
+            tool="total-score"
+            shareCtx={{ score: result.total, max: result.max, prefectureCode: 'osaka', prefectureName: '大阪府', metricLabel: '総合点' }}
+          >
+            <NationalPercentileReveal metric="total-score" metricLabel="総合点" value={result.total} prefectureCode="osaka" />
+          </UnlockGate>
+        </div>
+      )}
     </>
   );
 }

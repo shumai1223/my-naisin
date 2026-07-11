@@ -7,6 +7,8 @@ import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { ParentCostBridge } from '@/components/ParentCostBridge';
 import { ParentWindowBridge } from '@/components/ParentWindowBridge';
 import { StatsOptIn } from '@/components/StatsOptIn';
+import { UnlockGate } from '@/components/UnlockGate';
+import { NationalPercentileReveal } from '@/components/NationalPercentileReveal';
 
 /** 埼玉県総合得点ページの結果連動フロー（S-3①・残タスク）。 */
 export function SaitamaResultFlow() {
@@ -47,6 +49,19 @@ export function SaitamaResultFlow() {
       <div className="mt-6">
         <StatsOptIn metric="total-score" value={result?.total} maxValue={result?.max} prefectureCode="saitama" />
       </div>
+
+      {/* T-1: 紹介・解放機構。保護者に送る/LINE登録で全国統計の先行閲覧が解放される */}
+      {result && (
+        <div className="mt-6">
+          <UnlockGate
+            placement="total-score-percentile"
+            tool="total-score"
+            shareCtx={{ score: result.total, max: result.max, prefectureCode: 'saitama', prefectureName: '埼玉県', metricLabel: '総合得点（目安）' }}
+          >
+            <NationalPercentileReveal metric="total-score" metricLabel="総合得点（目安）" value={result.total} prefectureCode="saitama" />
+          </UnlockGate>
+        </div>
+      )}
     </>
   );
 }

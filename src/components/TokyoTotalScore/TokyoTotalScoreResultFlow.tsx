@@ -8,6 +8,8 @@ import { ParentCostBridge } from '@/components/ParentCostBridge';
 import { ParentWindowBridge } from '@/components/ParentWindowBridge';
 import { ShindanEntryLink } from '@/components/ShindanEntryLink';
 import { StatsOptIn } from '@/components/StatsOptIn';
+import { UnlockGate } from '@/components/UnlockGate';
+import { NationalPercentileReveal } from '@/components/NationalPercentileReveal';
 
 /**
  * 都立総合得点（1020点満点・買い意図最濃・CTR15.8%）の結果連動 換金フロー。
@@ -56,6 +58,19 @@ export function TokyoTotalScoreResultFlow() {
       <div className="mt-6">
         <StatsOptIn metric="total-score" value={result?.total} maxValue={result?.max} prefectureCode="tokyo" />
       </div>
+
+      {/* T-1: 紹介・解放機構。保護者に送る/LINE登録で全国統計の先行閲覧が解放される */}
+      {result && (
+        <div className="mt-6">
+          <UnlockGate
+            placement="total-score-percentile"
+            tool="total-score"
+            shareCtx={{ score: result.total, max: result.max, prefectureCode: 'tokyo', prefectureName: '東京都', metricLabel: '総合得点' }}
+          >
+            <NationalPercentileReveal metric="total-score" metricLabel="総合得点" value={result.total} prefectureCode="tokyo" />
+          </UnlockGate>
+        </div>
+      )}
     </>
   );
 }

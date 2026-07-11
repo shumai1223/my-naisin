@@ -8,6 +8,8 @@ import { ParentCostBridge } from '@/components/ParentCostBridge';
 import { ParentWindowBridge } from '@/components/ParentWindowBridge';
 import { ShindanEntryLink } from '@/components/ShindanEntryLink';
 import { StatsOptIn } from '@/components/StatsOptIn';
+import { UnlockGate } from '@/components/UnlockGate';
+import { NationalPercentileReveal } from '@/components/NationalPercentileReveal';
 
 interface NaishinResultFlowProps {
   prefectureCode: string;
@@ -74,6 +76,30 @@ export function NaishinResultFlow({ prefectureCode, prefectureName, maxScore }: 
       <div className="mt-6">
         <StatsOptIn metric="naishin" value={result?.total} maxValue={result?.max} prefectureCode={prefectureCode} />
       </div>
+
+      {/* T-1: 紹介・解放機構。保護者に送る/LINE登録で全国統計の先行閲覧が解放される（1ファイルで全47県に効く） */}
+      {result && (
+        <div className="mt-6">
+          <UnlockGate
+            placement="naishin-percentile"
+            tool="naishin"
+            shareCtx={{
+              score: result.total,
+              max: result.max,
+              prefectureCode,
+              prefectureName,
+              metricLabel: '内申点',
+            }}
+          >
+            <NationalPercentileReveal
+              metric="naishin"
+              metricLabel="内申点"
+              value={result.total}
+              prefectureCode={prefectureCode}
+            />
+          </UnlockGate>
+        </div>
+      )}
     </>
   );
 }

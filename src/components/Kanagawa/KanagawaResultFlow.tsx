@@ -7,6 +7,8 @@ import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { ParentCostBridge } from '@/components/ParentCostBridge';
 import { ParentWindowBridge } from '@/components/ParentWindowBridge';
 import { StatsOptIn } from '@/components/StatsOptIn';
+import { UnlockGate } from '@/components/UnlockGate';
+import { NationalPercentileReveal } from '@/components/NationalPercentileReveal';
 
 /**
  * 神奈川S値ページの結果連動フロー（S-1④）。
@@ -52,6 +54,19 @@ export function KanagawaResultFlow() {
       <div className="mt-6">
         <StatsOptIn metric="total-score" value={result?.total} maxValue={result?.max} prefectureCode="kanagawa" />
       </div>
+
+      {/* T-1: 紹介・解放機構。保護者に送る/LINE登録で全国統計の先行閲覧が解放される */}
+      {result && (
+        <div className="mt-6">
+          <UnlockGate
+            placement="total-score-percentile"
+            tool="total-score"
+            shareCtx={{ score: result.total, max: result.max, prefectureCode: 'kanagawa', prefectureName: '神奈川県', metricLabel: 'S1値' }}
+          >
+            <NationalPercentileReveal metric="total-score" metricLabel="S1値" value={result.total} prefectureCode="kanagawa" />
+          </UnlockGate>
+        </div>
+      )}
     </>
   );
 }
