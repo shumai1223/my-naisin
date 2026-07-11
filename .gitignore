@@ -103,6 +103,9 @@ data/affiliate-actuals.json
 # GA4 OAuth 連携の機密（client_secret / refresh_token / 選択プロパティ）。絶対にコミットしない。
 .ga4/
 
+# Search Console OAuth 連携の機密（refresh_token・選択サイト。client_secretは.ga4/を共用）。
+.gsc/
+
 # 週次レポート/プレビューの生成物（コミットしない）
 newsletter-preview-*.html
 kpi-weekly-report.md

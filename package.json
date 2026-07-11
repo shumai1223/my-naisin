@@ -34,9 +34,13 @@
     "ga4:weekly": "node --use-system-ca scripts/ga4-weekly.mjs",
     "test:e2e": "playwright test",
     "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
-    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy"
+    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+    "gsc:auth": "node --use-system-ca scripts/gsc-auth.mjs",
+    "gsc:mcp": "node --use-system-ca scripts/gsc-mcp.mjs",
+    "gsc": "node --use-system-ca scripts/gsc.mjs"
   },
   "dependencies": {
+    "@googleapis/searchconsole": "^6.0.1",
     "@opennextjs/cloudflare": "^1.16.5",
     "@tailwindcss/postcss": "^4.2.2",
     "@types/qrcode": "^1.5.6",

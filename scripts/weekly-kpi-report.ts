@@ -28,6 +28,15 @@
  *  --ga4-organic-sessions=<件数>  GA4 Organic Searchセッション（今週）。指定するとConsent捕捉率
  *                            （GSCクリック/GA4セッション、基準5.6x）の定点観測行を出す（I-5）
  *
+ * ロードマップゲート G1〜G6（2026-07-11 収益試算v2・[[session-2026-07-11-revenue-forecast-roadmap]]）:
+ *  --cp-this-month=<件数>          当月のC_p累計（G4・11/30判定）
+ *  --contract-count=<社数>         稼働中の直接契約社数（G3・10/31判定）
+ *  --contracts-mrr=<円>            直接契約の月額合計・実測請求額（G5・12/25判定）
+ *  --api-customers=<社数>          API有料顧客数（G3）
+ *  --api-mrr=<円>                  API課金の月額合計・実測（G5）
+ *  --cumulative-confirmed-yen=<円> シーズン累計の確定額（ASP確定+契約+API等を手集計。G5/G6）
+ *  --g2-confirmed=<true|false>     冬案件ASP申請＋S-3インデックス確認が完了したか（G2・9/30判定）
+ *
  * 実行:
  *   npx tsx scripts/weekly-kpi-report.ts                 # プレビューのみ（stdout + reports/）
  *   npx tsx scripts/weekly-kpi-report.ts --send           # RESEND_API_KEY設定時のみ実送信
@@ -270,6 +279,15 @@ async function main() {
     conversionsThisMonth: args['conversions-this-month'] !== undefined ? num(args['conversions-this-month']) : undefined,
     affiliateClicks: num(args['affiliate-clicks']),
     confirmedConversions: num(args.conversions),
+    roadmapGateActuals: {
+      cpThisMonth: args['cp-this-month'] !== undefined ? num(args['cp-this-month']) : undefined,
+      contractCount: args['contract-count'] !== undefined ? num(args['contract-count']) : undefined,
+      contractsMrr: args['contracts-mrr'] !== undefined ? num(args['contracts-mrr']) : undefined,
+      apiCustomers: args['api-customers'] !== undefined ? num(args['api-customers']) : undefined,
+      apiMrr: args['api-mrr'] !== undefined ? num(args['api-mrr']) : undefined,
+      cumulativeConfirmedYen: args['cumulative-confirmed-yen'] !== undefined ? num(args['cumulative-confirmed-yen']) : undefined,
+      g2Confirmed: args['g2-confirmed'] !== undefined ? args['g2-confirmed'] === 'true' || args['g2-confirmed'] === true : undefined,
+    },
     gate: {
       clicks: totalsNow.clicks,
       clicksPrev: totalsPrev.clicks,

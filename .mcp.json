@@ -3,6 +3,10 @@
     "ga4": {
       "command": "node",
       "args": ["--use-system-ca", "scripts/ga4-mcp.mjs"]
+    },
+    "gsc": {
+      "command": "node",
+      "args": ["--use-system-ca", "scripts/gsc-mcp.mjs"]
     }
   }
 }

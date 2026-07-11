@@ -20,6 +20,7 @@ import {
   type FunnelStage,
   type PlacementFunnel,
 } from '@/lib/velocity';
+import { evaluateRoadmapGates, nextRoadmapGate, type RoadmapGateActuals } from '@/lib/roadmap-gates';
 
 export interface WeeklyKpiData {
   /** レポート対象週の終端日（'YYYY-MM-DD'）。 */
@@ -40,6 +41,11 @@ export interface WeeklyKpiData {
   ga4OrganicSessions?: number;
   /** 当月のASP発生件数累計（任意）。あれば特単交渉トリガー（D-1・閾値50件/月）の判定行を出す。 */
   conversionsThisMonth?: number;
+  /**
+   * 能動運用ロードマップ目盛りG1〜G6（[[session-2026-07-11-revenue-forecast-roadmap]]）の実測。
+   * 未入力の項目はそのゲートが「unmeasured」表示になるだけで他のゲートには影響しない。
+   */
+  roadmapGateActuals?: RoadmapGateActuals;
   /** 送客（affiliate_click）今週件数。 */
   affiliateClicks: number;
   /** ASP実測の確定発生件数（分からなければ0。¥は書かない）。 */
@@ -88,6 +94,31 @@ export function formatWeeklyKpiEmail(data: WeeklyKpiData): { subject: string; te
     lines.push('  ⚠️ leads/conversionsが未計測（GSC自動取得のみの無人実行）のため正式判定は保留。実測値を渡して再実行し確定させてください。');
   } else {
     lines.push(`  ${gate.rationale}`);
+  }
+  lines.push('');
+  {
+    const gateActuals: RoadmapGateActuals = {
+      rosterN: manual ? data.leadVelocity.leadsTotal : undefined,
+      conversionsThisMonth: data.conversionsThisMonth,
+      ...data.roadmapGateActuals,
+    };
+    const nextGate = nextRoadmapGate(data.gate.now);
+    const evaluations = evaluateRoadmapGates(gateActuals, data.gate.now);
+    const statusIcon: Record<string, string> = {
+      'on-track-max': '🟢',
+      'on-track-effort': '🟡',
+      behind: '🔴',
+      unmeasured: '⚪',
+      'manual-check': '⚪',
+      upcoming: '·',
+    };
+    // ¥予測は書かない運用（このメールの一貫方針）＝G5/G6の目安・実測detailに含まれる金額表記は
+    // このチャネルに限り伏せる（判定自体は内部でyen額を使って正しく行っている・数字はadmin/reportで確認）。
+    const redactYen = (s: string): string => s.replace(/¥[\d,]+(?:万)?/g, '[金額はadmin/report参照]');
+    lines.push(`■ ロードマップゲート（努力/最高シナリオ・次点: ${nextGate.label} ${nextGate.dateIso}）`);
+    for (const ev of evaluations) {
+      lines.push(`  ${statusIcon[ev.status] ?? '·'} ${ev.label}（${ev.dateIso}）: ${redactYen(ev.detail)}`);
+    }
   }
   lines.push('');
   lines.push('■ 実測サマリ（今週）');

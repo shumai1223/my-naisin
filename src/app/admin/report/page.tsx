@@ -13,6 +13,7 @@ import { classifyClick, type ClickTrust } from '@/lib/bot-filter';
 import { getLeadSummary, getLeadDailyCounts } from '@/lib/leads-db';
 import { getApiKeyStats, getFreemiumFunnel } from '@/lib/api-keys';
 import { evaluateJulyGate, bucketDailyByWeek, type GateVerdict } from '@/lib/velocity';
+import { evaluateRoadmapGates, nextRoadmapGate, type GateStatus } from '@/lib/roadmap-gates';
 import { checkExperimentPortfolioHealth, MIN_RUNNING_EXPERIMENTS } from '@/lib/experiments';
 import { isAuthorizedAdminToken } from '@/lib/admin-auth';
 import { countActiveSubscriptions } from '@/lib/push-db';
@@ -235,6 +236,20 @@ export default async function AdminReportPage({
     conversions: 0,
   });
   const experimentHealth = checkExperimentPortfolioHealth();
+
+  // ── 能動運用ロードマップ目盛りG1〜G6（2026-07-11収益試算v2）: D1にあるのは名簿累計のみ ──
+  // 契約社数/API顧客数/C_p月次/累計確定額は👤がscripts/weekly-kpi-report.tsに手渡しする運用
+  // （この画面はD1実データのみを使い、無いものは正直にunmeasured/upcomingのまま表示する）。
+  const roadmapGates = evaluateRoadmapGates({ rosterN: leads.total }, new Date());
+  const nextGate = nextRoadmapGate(new Date());
+  const GATE_STATUS_STYLE: Record<GateStatus, { badge: string; ring: string; icon: string }> = {
+    upcoming: { badge: 'bg-slate-100 text-slate-500', ring: 'border-slate-200', icon: '·' },
+    'on-track-max': { badge: 'bg-emerald-100 text-emerald-700', ring: 'border-emerald-300', icon: '🟢' },
+    'on-track-effort': { badge: 'bg-amber-100 text-amber-700', ring: 'border-amber-300', icon: '🟡' },
+    behind: { badge: 'bg-rose-100 text-rose-700', ring: 'border-rose-300', icon: '🔴' },
+    unmeasured: { badge: 'bg-slate-100 text-slate-500', ring: 'border-slate-200', icon: '⚪' },
+    'manual-check': { badge: 'bg-slate-100 text-slate-500', ring: 'border-slate-200', icon: '⚪' },
+  };
   const weeklyClicks = bucketDailyByWeek(
     weeklyClickTrend.map((r) => ({ date: r.bucket, count: r.clicks })),
     8
@@ -510,6 +525,30 @@ export default async function AdminReportPage({
             ※ line_friend_click / lead_submit の placement別（保護者起点クリックの主計器）は GA4 で本人が確認する
             （サイト側D1は /go 経由のアフィリクリックのみ計器化。LINE友だち追加・名簿送信はGA4イベント）。
           </p>
+        </div>
+
+        {/* 能動運用ロードマップ G1〜G6（2026-07-11収益試算v2・努力/最高シナリオへの目盛り） */}
+        <div className="mt-6">
+          <h2 className={sectionTitle}>能動運用ロードマップ ― 目盛りG1〜G6</h2>
+          <p className="mt-0.5 text-[11px] leading-relaxed text-slate-400">
+            現状運用のまま（保守〜強気）と能動運用（努力〜最高）の差を月次で判定する。名簿累計Nのみこの画面のD1実データ、
+            それ以外（契約社数・API顧客数・C_p月次・累計確定額）は <code>scripts/weekly-kpi-report.ts</code> に手渡しした値が正。
+            次点: <strong>{nextGate.label}</strong>（{nextGate.dateIso}）。
+          </p>
+          <div className="mt-2 space-y-1.5">
+            {roadmapGates.map((g) => {
+              const style = GATE_STATUS_STYLE[g.status];
+              return (
+                <div key={g.id} className={`flex flex-wrap items-center gap-2 rounded-xl border ${style.ring} bg-white p-2.5 shadow-sm`}>
+                  <span className={`rounded-full px-2 py-0.5 text-[11px] font-black ${style.badge}`}>
+                    {style.icon} {g.label}
+                  </span>
+                  <span className="text-[11px] text-slate-400">{g.dateIso}</span>
+                  <span className="flex-1 text-xs text-slate-600">{g.detail}</span>
+                </div>
+              );
+            })}
+          </div>
         </div>
 
         {/* クリック推移（折れ線＋表・日/時間切替・ホバーで件数表示） */}
