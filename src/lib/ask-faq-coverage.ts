@@ -80,6 +80,27 @@ export function buildPrefectureFormulaFaqs(): AskFaqItem[] {
 }
 
 /**
+ * 47都道府県 × 「オール3・4・5だと内申点は何点ですか？」をanswerQuery()から機械生成する（S-4④・軸拡張4本目=最終軸）。
+ * detectIntent()の`/オール([3-5])/`正規表現は最初にマッチした数字（3）だけで{all:3}意図を検出するため、
+ * result.answerの一文はオール3のみを述べる。ただしprefectureAnswer()の{all}分岐が返すdetailsには
+ * 常にオール3/4/5全ての例が含まれる（answer-bot.ts:114 `detail.examples.map(...)`）ため、
+ * 質問文どおり「それぞれ」を網羅する回答にするためanswerとdetailsを連結する（新規判定基準・計算は追加せず、
+ * 既存エンジンが返した値をそのまま連結するのみ＝捏造ゼロ）。
+ */
+export function buildPrefectureAllGradesFaqs(): AskFaqItem[] {
+  return PREFECTURES.map((p) => {
+    const question = `${p.name}でオール3・4・5だと内申点はそれぞれ何点ですか？`;
+    const result = answerQuery(question);
+    if (!result) {
+      throw new Error(`ask-faq-coverage: ${p.name}(${p.code})のallGrades回答が生成できません`);
+    }
+    const details = result.details ?? [];
+    const answer = details.length > 0 ? `${result.answer} ${details.join('、')}。` : result.answer;
+    return { question, answer };
+  });
+}
+
+/**
  * 都道府県に紐づかない一般Q&A（GENERAL_FACTS・answer-bot.ts）を機械生成する（S-4②）。
  * 各質問文は対応するGENERAL_FACTSの正規表現に一致するよう選定し、expectedTitleで
  * 実際にヒットしたfactが意図どおりか検証する（正規表現は先勝ち判定のため、文言次第では

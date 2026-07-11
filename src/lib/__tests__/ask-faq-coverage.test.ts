@@ -1,7 +1,7 @@
 /**
  * /ask 機械列挙Q&A（S-4①②）のテスト。
  */
-import { buildPrefectureMaxScoreFaqs, buildGeneralFactFaqs, buildPrefectureTargetGradesFaqs, buildPrefecturePracticalFaqs, buildPrefectureFormulaFaqs } from '../ask-faq-coverage';
+import { buildPrefectureMaxScoreFaqs, buildGeneralFactFaqs, buildPrefectureTargetGradesFaqs, buildPrefecturePracticalFaqs, buildPrefectureFormulaFaqs, buildPrefectureAllGradesFaqs } from '../ask-faq-coverage';
 import { PREFECTURES } from '../prefectures';
 
 describe('buildPrefectureMaxScoreFaqs', () => {
@@ -111,6 +111,39 @@ describe('buildPrefectureFormulaFaqs（S-4④・軸拡張3本目=計算式）', 
       const p = PREFECTURES[i];
       expect(faqs[i].answer.length).toBeGreaterThan(0);
       expect(faqs[i].question).toContain(p.name);
+    }
+  });
+});
+
+describe('buildPrefectureAllGradesFaqs（S-4④・軸拡張4本目=最終軸=オール3-4-5）', () => {
+  const faqs = buildPrefectureAllGradesFaqs();
+
+  it('47都道府県すべて分生成される', () => {
+    expect(faqs.length).toBe(47);
+  });
+
+  it('質問文はすべて異なる（重複なし）・他軸の質問文とも重複しない', () => {
+    const questions = faqs.map((f) => f.question);
+    expect(new Set(questions).size).toBe(questions.length);
+    const otherQuestions = new Set([
+      ...buildPrefectureMaxScoreFaqs().map((f) => f.question),
+      ...buildPrefectureTargetGradesFaqs().map((f) => f.question),
+      ...buildPrefecturePracticalFaqs().map((f) => f.question),
+      ...buildPrefectureFormulaFaqs().map((f) => f.question),
+    ]);
+    for (const q of questions) {
+      expect(otherQuestions.has(q)).toBe(false);
+    }
+  });
+
+  it('すべての回答が空でなく、都道府県名とオール3/4/5の3例すべてを含む', () => {
+    for (let i = 0; i < faqs.length; i++) {
+      const p = PREFECTURES[i];
+      expect(faqs[i].answer.length).toBeGreaterThan(0);
+      expect(faqs[i].answer).toContain(p.name);
+      expect(faqs[i].answer).toContain('オール3');
+      expect(faqs[i].answer).toContain('オール4');
+      expect(faqs[i].answer).toContain('オール5');
     }
   });
 });
