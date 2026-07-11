@@ -143,12 +143,12 @@ export default function SougouGataSenbatsuPage() {
             </p>
             <div className="flex flex-col items-stretch gap-2 sm:flex-row">
               <a
-                href="https://my-shingaku.com"
+                href="https://my-shingaku.com/sougou-suisen"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-indigo-600 px-6 py-3.5 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-indigo-700 sm:w-auto"
               >
-                大学受験・進学費用を調べる（My Shingaku）
+                大学の総合型・学校推薦型選抜と費用を調べる（My Shingaku）
                 <ChevronRight className="h-4 w-4" />
               </a>
               <span className="inline-flex items-center justify-center text-xs text-slate-500">

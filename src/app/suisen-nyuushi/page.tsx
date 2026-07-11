@@ -194,8 +194,8 @@ export default function SuisenNyuushiPage() {
               <Link href="/shutsugan-junbi" className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white px-6 py-3.5 text-sm font-bold text-violet-700 ring-1 ring-violet-200 transition-colors hover:bg-violet-50 sm:w-auto">
                 出願準備チェックリストを見る
               </Link>
-              <a href="https://my-shingaku.com" target="_blank" rel="noopener noreferrer" className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white px-6 py-3.5 text-sm font-bold text-indigo-700 ring-1 ring-indigo-200 transition-colors hover:bg-indigo-50 sm:w-auto">
-                大学受験・進学費用を調べる（My Shingaku）
+              <a href="https://my-shingaku.com/sougou-suisen" target="_blank" rel="noopener noreferrer" className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white px-6 py-3.5 text-sm font-bold text-indigo-700 ring-1 ring-indigo-200 transition-colors hover:bg-indigo-50 sm:w-auto">
+                大学の総合型選抜・学校推薦型選抜を見る（My Shingaku）
               </a>
             </div>
           </section>

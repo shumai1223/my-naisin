@@ -199,12 +199,12 @@ export default function ShutsuganJunbiPage() {
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
               <a
-                href="https://my-shingaku.com"
+                href="https://my-shingaku.com/sougou-suisen"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-between gap-2 rounded-xl border border-indigo-100 bg-indigo-50/50 p-4 text-sm font-bold text-indigo-700 hover:border-indigo-200 hover:bg-indigo-50"
               >
-                大学受験・進学費用を調べる（My Shingaku）
+                大学の総合型・学校推薦型選抜を調べる（My Shingaku）
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-indigo-400" />
               </a>
             </div>
