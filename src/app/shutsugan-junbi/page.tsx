@@ -198,6 +198,15 @@ export default function ShutsuganJunbiPage() {
                 残りで必要な評定平均を逆算する
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
+              <a
+                href="https://my-shingaku.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-between gap-2 rounded-xl border border-indigo-100 bg-indigo-50/50 p-4 text-sm font-bold text-indigo-700 hover:border-indigo-200 hover:bg-indigo-50"
+              >
+                大学受験・進学費用を調べる（My Shingaku）
+                <ChevronRightSquare className="h-4 w-4 shrink-0 text-indigo-400" />
+              </a>
             </div>
           </section>
 
