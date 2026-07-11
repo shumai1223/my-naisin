@@ -28,6 +28,7 @@ import { computeKanagawaSValue, kanagawaRankLabel, KANAGAWA_RATIO_OPTIONS } from
 import { computeOsakaTotalScore, osakaRankLabel, OSAKA_TYPE_OPTIONS } from '@/lib/total-score/osaka';
 import { computeAichiTotalScore, AICHI_METHODS } from '@/lib/total-score/aichi';
 import { computeChibaKValue, CHIBA_K_PRESETS } from '@/lib/total-score/chiba';
+import { computeSaitamaTotalScore } from '@/lib/total-score/saitama';
 
 /**
  * MCP互換エンドポイント（堀B / AIネイティブの城①）。
@@ -363,6 +364,18 @@ const TOOLS = [
         schoolExamRaw: { type: 'number', description: '任意。学校設定検査の得点（最大150点）。指定すると満点計算にも含まれる。' },
       },
       required: ['hyoteiRaw', 'gakuryokuRaw'],
+    },
+  },
+  {
+    name: 'calculate_saitama_total_score',
+    description: '埼玉県の総合得点（目安）を計算する。埼玉県は調査書点の満点・学力検査との比率が高校・学科ごとに異なり県内一律の換算式が無いため（捏造ゼロ方針）、学力検査点(500点満点)とユーザー自身が募集要項に沿って把握している調査書点（換算後の自己申告値）を単純合算するのみ。学校別ボーダーは断定しない。',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        gakuryokuRaw: { type: 'number', description: '学力検査点素点（500点満点＝5教科×100点）。' },
+        chosashoRaw: { type: 'number', description: '調査書点（換算後の自己申告値。ユーザーが志望校の募集要項に沿って把握している点数）。' },
+      },
+      required: ['gakuryokuRaw', 'chosashoRaw'],
     },
   },
 ] as const;
@@ -706,6 +719,16 @@ async function runTool(name: string, args: Record<string, unknown>) {
       schoolExamRaw: includeSchoolExam ? Number(args.schoolExamRaw) : undefined,
       includeSchoolExam,
     });
+    return toolText(result);
+  }
+
+  if (name === 'calculate_saitama_total_score') {
+    const gakuryokuRaw = Number(args.gakuryokuRaw);
+    const chosashoRaw = Number(args.chosashoRaw);
+    if (!Number.isFinite(gakuryokuRaw) || !Number.isFinite(chosashoRaw)) {
+      return toolText({ error: 'invalid_params', message: 'gakuryokuRaw・chosashoRawは数値で指定してください。' });
+    }
+    const result = computeSaitamaTotalScore({ gakuryokuRaw, chosashoRaw });
     return toolText(result);
   }
 

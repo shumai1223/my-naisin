@@ -29,10 +29,10 @@ describe('/api/mcp JSON-RPC 契約', () => {
     expect(json.result.capabilities.prompts).toBeDefined();
   });
 
-  test('tools/list は22ツールを返す（S-5でhensachi/total-score/bairitsu/education-cost/stats/tokyo/kanagawa/osaka/aichi/chibaの15本を追加）', async () => {
+  test('tools/list は23ツールを返す（S-5でhensachi/total-score/bairitsu/education-cost/stats/tokyo/kanagawa/osaka/aichi/chiba/saitamaの16本を追加）', async () => {
     const res = await POST(rpc('tools/list'));
     const json = await res.json();
-    expect(json.result.tools).toHaveLength(22);
+    expect(json.result.tools).toHaveLength(23);
     expect(json.result.tools.map((t: { name: string }) => t.name)).toContain('build_study_plan');
     expect(json.result.tools.map((t: { name: string }) => t.name)).toContain('calculate_hensachi');
     expect(json.result.tools.map((t: { name: string }) => t.name)).toContain('calculate_total_score');
@@ -214,6 +214,14 @@ describe('/api/mcp JSON-RPC 契約', () => {
     expect(data.max).toBe(635); // 500 + 135*1.0（othersRaw未指定）
   });
 
+  test('tools/call calculate_saitama_total_score は単純合算を返す', async () => {
+    const res = await POST(
+      rpc('tools/call', { name: 'calculate_saitama_total_score', arguments: { gakuryokuRaw: 380, chosashoRaw: 260 } })
+    );
+    const data = JSON.parse((await res.json()).result.content[0].text);
+    expect(data.total).toBe(640);
+  });
+
   test('resources/list は47件、resources/read は該当県JSON', async () => {
     const list = await (await POST(rpc('resources/list'))).json();
     expect(list.result.resources).toHaveLength(47);
@@ -242,7 +250,7 @@ describe('/api/mcp JSON-RPC 契約', () => {
   test('GET ディスカバリはツール/メソッド一覧を返す', async () => {
     const res = GET();
     const json = await res.json();
-    expect(json.tools).toHaveLength(22);
+    expect(json.tools).toHaveLength(23);
     expect(json.methods).toContain('resources/read');
   });
 });

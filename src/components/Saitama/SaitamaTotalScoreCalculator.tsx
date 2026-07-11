@@ -3,6 +3,7 @@
 import * as React from 'react';
 import { Calculator, RotateCcw } from 'lucide-react';
 import { TargetDistancePanel } from '@/components/TotalScore/TargetDistancePanel';
+import { SAITAMA_MAX_GAKURYOKU, SAITAMA_ASSUMED_TOTAL_CEILING, computeSaitamaTotalScore } from '@/lib/total-score/saitama';
 
 export interface SaitamaTotalScoreResult {
   total: number;
@@ -12,12 +13,6 @@ export interface SaitamaTotalScoreResult {
 interface Props {
   onResult?: (r: SaitamaTotalScoreResult | null) => void;
 }
-
-const MAX_GAKURYOKU = 500;
-// 調査書点の満点は高校・学科ごとに設定が異なり県内一律の値が無いため、このページ上部の
-// 解説と同じ「合計は900点前後（高校により異なる）」の目安をそのまま使う（新たな断定はしない）。
-const ASSUMED_CHOSASHO_CEILING = 400;
-const ASSUMED_TOTAL_CEILING = MAX_GAKURYOKU + ASSUMED_CHOSASHO_CEILING;
 
 /**
  * 埼玉県の総合得点 順方向計算機（S-3①・残タスク）。
@@ -35,10 +30,10 @@ export function SaitamaTotalScoreCalculator({ onResult }: Props) {
   const gakuryoku = parseFloat(gakuryokuInput) || 0;
   const chosasho = parseFloat(chosashoInput) || 0;
   const hasInput = gakuryokuInput !== '' || chosashoInput !== '';
-  const total = gakuryoku + chosasho;
+  const { total } = computeSaitamaTotalScore({ gakuryokuRaw: gakuryoku, chosashoRaw: chosasho });
 
   React.useEffect(() => {
-    onResult?.(hasInput ? { total, max: ASSUMED_TOTAL_CEILING } : null);
+    onResult?.(hasInput ? { total, max: SAITAMA_ASSUMED_TOTAL_CEILING } : null);
   }, [hasInput, total, onResult]);
 
   const reset = () => {
@@ -74,7 +69,7 @@ export function SaitamaTotalScoreCalculator({ onResult }: Props) {
             type="number"
             inputMode="decimal"
             min={0}
-            max={MAX_GAKURYOKU}
+            max={SAITAMA_MAX_GAKURYOKU}
             value={gakuryokuInput}
             onChange={(e) => setGakuryokuInput(e.target.value)}
             placeholder="例：380"
@@ -109,7 +104,7 @@ export function SaitamaTotalScoreCalculator({ onResult }: Props) {
           <div className="mx-auto mt-4 max-w-sm rounded-xl border border-violet-100 bg-white p-3 text-left">
             <div className="mb-2 text-xs font-bold text-slate-700">内訳</div>
             <ul className="space-y-1 text-xs text-slate-600">
-              <li>学力検査：{gakuryoku} / {MAX_GAKURYOKU}点</li>
+              <li>学力検査：{gakuryoku} / {SAITAMA_MAX_GAKURYOKU}点</li>
               <li>調査書点（自己申告）：{chosasho}点</li>
               <li className="border-t border-slate-100 pt-1 font-bold">合計：{total}点</li>
             </ul>
@@ -123,7 +118,7 @@ export function SaitamaTotalScoreCalculator({ onResult }: Props) {
               targetInput={targetInput}
               onTargetInputChange={setTargetInput}
               total={total}
-              totalMax={ASSUMED_TOTAL_CEILING}
+              totalMax={SAITAMA_ASSUMED_TOTAL_CEILING}
               inputId="saitama-total-score-target"
             />
           </div>
