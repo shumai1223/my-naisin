@@ -249,3 +249,33 @@ export function nextRoadmapGate(now: Date = new Date()): RoadmapGateDefinition {
   }
   return ROADMAP_GATES[ROADMAP_GATES.length - 1];
 }
+
+/**
+ * 月次アクチュアル入力リマインダ（T-7）。
+ *
+ * G1/G3/G4/G5/G6は判定日に👤から渡された実測値（rosterN/contractCount/apiCustomers/cpThisMonth等）で
+ * 自動判定されるが、実測値は月末になるまで自然に集まらない（ASP/契約/API管理画面を見る行為が要る）。
+ * 判定日直前まで渡し忘れると unmeasured のまま判定が確定してしまうため、週次KPIレポの巡回で
+ * 「そろそろ月次実測を渡すタイミング」と機械的に気づけるようにする（ROADMAP_GATESの日付から算出）。
+ *
+ * windowDaysの既定は7＝週次実行(毎週月曜)の1周期分。判定日当日〜7日前の間に実行された週次レポが
+ * 必ず最低1回はこのリマインダを拾える（週次サイクルより短い閾値だと巡回タイミング次第で拾い漏れる）。
+ */
+export interface GateReminder {
+  id: string;
+  label: string;
+  dateIso: string;
+  daysLeft: number;
+}
+
+export function upcomingGateReminders(now: Date = new Date(), windowDays: number = 7): GateReminder[] {
+  const reminders: GateReminder[] = [];
+  for (const g of ROADMAP_GATES) {
+    const deadlineMs = endOfDayMs(g.dateIso);
+    const daysLeft = Math.ceil((deadlineMs - now.getTime()) / 86_400_000);
+    if (daysLeft >= 0 && daysLeft <= windowDays) {
+      reminders.push({ id: g.id, label: g.label, dateIso: g.dateIso, daysLeft });
+    }
+  }
+  return reminders;
+}

@@ -20,7 +20,7 @@ import {
   type FunnelStage,
   type PlacementFunnel,
 } from '@/lib/velocity';
-import { evaluateRoadmapGates, nextRoadmapGate, type RoadmapGateActuals } from '@/lib/roadmap-gates';
+import { evaluateRoadmapGates, nextRoadmapGate, upcomingGateReminders, type RoadmapGateActuals } from '@/lib/roadmap-gates';
 
 export interface WeeklyKpiData {
   /** レポート対象週の終端日（'YYYY-MM-DD'）。 */
@@ -118,6 +118,15 @@ export function formatWeeklyKpiEmail(data: WeeklyKpiData): { subject: string; te
     lines.push(`■ ロードマップゲート（努力/最高シナリオ・次点: ${nextGate.label} ${nextGate.dateIso}）`);
     for (const ev of evaluations) {
       lines.push(`  ${statusIcon[ev.status] ?? '·'} ${ev.label}（${ev.dateIso}）: ${redactYen(ev.detail)}`);
+    }
+
+    // T-7：判定日が7日以内に迫っているゲートは、月次実測（ASP/契約/API管理画面）を渡すタイミングを明示する。
+    const reminders = upcomingGateReminders(data.gate.now);
+    if (reminders.length > 0) {
+      lines.push('');
+      for (const r of reminders) {
+        lines.push(`  🔔 そろそろ月次実測を渡すタイミングです: ${r.label}（${r.dateIso}・あと${r.daysLeft}日）`);
+      }
     }
   }
   lines.push('');

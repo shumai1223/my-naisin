@@ -13,7 +13,7 @@ import { classifyClick, type ClickTrust } from '@/lib/bot-filter';
 import { getLeadSummary, getLeadDailyCounts } from '@/lib/leads-db';
 import { getApiKeyStats, getFreemiumFunnel } from '@/lib/api-keys';
 import { evaluateJulyGate, bucketDailyByWeek, type GateVerdict } from '@/lib/velocity';
-import { evaluateRoadmapGates, nextRoadmapGate, type GateStatus } from '@/lib/roadmap-gates';
+import { evaluateRoadmapGates, nextRoadmapGate, upcomingGateReminders, type GateStatus } from '@/lib/roadmap-gates';
 import { checkExperimentPortfolioHealth, MIN_RUNNING_EXPERIMENTS } from '@/lib/experiments';
 import { isAuthorizedAdminToken } from '@/lib/admin-auth';
 import { countActiveSubscriptions } from '@/lib/push-db';
@@ -242,6 +242,7 @@ export default async function AdminReportPage({
   // （この画面はD1実データのみを使い、無いものは正直にunmeasured/upcomingのまま表示する）。
   const roadmapGates = evaluateRoadmapGates({ rosterN: leads.total }, new Date());
   const nextGate = nextRoadmapGate(new Date());
+  const gateReminders = upcomingGateReminders(new Date()); // T-7：判定日7日以内の月次実測入力リマインダ
   const GATE_STATUS_STYLE: Record<GateStatus, { badge: string; ring: string; icon: string }> = {
     upcoming: { badge: 'bg-slate-100 text-slate-500', ring: 'border-slate-200', icon: '·' },
     'on-track-max': { badge: 'bg-emerald-100 text-emerald-700', ring: 'border-emerald-300', icon: '🟢' },
@@ -535,6 +536,15 @@ export default async function AdminReportPage({
             それ以外（契約社数・API顧客数・C_p月次・累計確定額）は <code>scripts/weekly-kpi-report.ts</code> に手渡しした値が正。
             次点: <strong>{nextGate.label}</strong>（{nextGate.dateIso}）。
           </p>
+          {gateReminders.length > 0 && (
+            <div className="mt-2 space-y-1">
+              {gateReminders.map((r) => (
+                <div key={r.id} className="rounded-xl border border-amber-300 bg-amber-50 p-2.5 text-xs font-semibold text-amber-800">
+                  🔔 そろそろ月次実測を渡すタイミングです: {r.label}（{r.dateIso}・あと{r.daysLeft}日）
+                </div>
+              ))}
+            </div>
+          )}
           <div className="mt-2 space-y-1.5">
             {roadmapGates.map((g) => {
               const style = GATE_STATUS_STYLE[g.status];

@@ -9,6 +9,7 @@ import {
   detectWinterAffiliateReadiness,
   winterAffiliateReadinessSummary,
   WINTER_SEASONAL_AFFILIATE_IDS,
+  upcomingGateReminders,
   type RoadmapGateActuals,
 } from '../roadmap-gates';
 
@@ -154,6 +155,40 @@ describe('G6 実測照合（2/28）', () => {
   });
   it('累計<56万でbehind', () => {
     expect(evalG6({ cumulativeConfirmedYen: 100_000 }).status).toBe('behind');
+  });
+});
+
+describe('T-7：upcomingGateReminders（月次アクチュアル入力リマインダ）', () => {
+  it('判定日7日前ちょうどはリマインダに含まれる（既定windowDays=7）', () => {
+    const reminders = upcomingGateReminders(D('2026-08-24')); // G1=2026-08-31の7日前
+    expect(reminders.map((r) => r.id)).toContain('g1-roster-velocity');
+    const g1 = reminders.find((r) => r.id === 'g1-roster-velocity');
+    expect(g1?.daysLeft).toBe(7);
+  });
+
+  it('判定日8日前は含まれない（窓の外）', () => {
+    const reminders = upcomingGateReminders(D('2026-08-23'));
+    expect(reminders.map((r) => r.id)).not.toContain('g1-roster-velocity');
+  });
+
+  it('判定日当日はdaysLeft=0で含まれる', () => {
+    const reminders = upcomingGateReminders(D('2026-08-31'));
+    const g1 = reminders.find((r) => r.id === 'g1-roster-velocity');
+    expect(g1?.daysLeft).toBe(0);
+  });
+
+  it('判定日を過ぎたゲートは含まれない（過ぎたら通常のstatus判定に委ねる）', () => {
+    const reminders = upcomingGateReminders(D('2026-09-01'));
+    expect(reminders.map((r) => r.id)).not.toContain('g1-roster-velocity');
+  });
+
+  it('windowDaysを広げるとより先のゲートも拾える', () => {
+    const reminders = upcomingGateReminders(D('2026-07-15'), 60);
+    expect(reminders.map((r) => r.id)).toContain('g1-roster-velocity');
+  });
+
+  it('どのゲートも窓に入らない日は空配列', () => {
+    expect(upcomingGateReminders(D('2026-07-15'), 7)).toEqual([]);
   });
 });
 
