@@ -3,6 +3,7 @@
 import * as React from 'react';
 import { Calculator, RotateCcw } from 'lucide-react';
 import { TargetDistancePanel } from '@/components/TotalScore/TargetDistancePanel';
+import { FUKUOKA_MAX_NAISHIN, FUKUOKA_MAX_GAKURYOKU, FUKUOKA_MAX_TOTAL, computeFukuokaScore } from '@/lib/total-score/fukuoka';
 
 export interface FukuokaScoreResult {
   total: number;
@@ -12,10 +13,6 @@ export interface FukuokaScoreResult {
 interface Props {
   onResult?: (r: FukuokaScoreResult | null) => void;
 }
-
-const MAX_NAISHIN = 45;
-const MAX_GAKURYOKU = 300;
-const MAX_TOTAL = MAX_NAISHIN + MAX_GAKURYOKU;
 
 /**
  * 福岡県の内申点（中3のみ45点）＋学力検査（300点）の実数計算機（B-5）。
@@ -30,11 +27,10 @@ export function FukuokaScoreCalculator({ onResult }: Props) {
   const naishin = parseFloat(naishinInput) || 0;
   const gakuryoku = parseFloat(gakuryokuInput) || 0;
   const hasInput = naishinInput !== '' || gakuryokuInput !== '';
-  const total = naishin + gakuryoku;
-  const percent = (total / MAX_TOTAL) * 100;
+  const { total, percent } = computeFukuokaScore({ naishinRaw: naishin, gakuryokuRaw: gakuryoku });
 
   React.useEffect(() => {
-    onResult?.(hasInput ? { total, max: MAX_TOTAL } : null);
+    onResult?.(hasInput ? { total, max: FUKUOKA_MAX_TOTAL } : null);
   }, [hasInput, total, onResult]);
 
   const reset = () => {
@@ -70,7 +66,7 @@ export function FukuokaScoreCalculator({ onResult }: Props) {
             type="number"
             inputMode="decimal"
             min={0}
-            max={MAX_NAISHIN}
+            max={FUKUOKA_MAX_NAISHIN}
             value={naishinInput}
             onChange={(e) => setNaishinInput(e.target.value)}
             placeholder="例：36"
@@ -87,7 +83,7 @@ export function FukuokaScoreCalculator({ onResult }: Props) {
             type="number"
             inputMode="decimal"
             min={0}
-            max={MAX_GAKURYOKU}
+            max={FUKUOKA_MAX_GAKURYOKU}
             value={gakuryokuInput}
             onChange={(e) => setGakuryokuInput(e.target.value)}
             placeholder="例：210"
@@ -101,15 +97,15 @@ export function FukuokaScoreCalculator({ onResult }: Props) {
           <div className="mb-1 text-xs font-bold text-slate-600">内申＋当日点の合計（目安）</div>
           <div className="text-5xl font-black text-sky-700">
             {total}
-            <span className="text-xl font-bold text-slate-400">/{MAX_TOTAL}</span>
+            <span className="text-xl font-bold text-slate-400">/{FUKUOKA_MAX_TOTAL}</span>
           </div>
           <div className="mt-2 text-xs font-bold text-slate-600">満点比 {percent.toFixed(1)}%</div>
           <div className="mx-auto mt-4 max-w-sm rounded-xl border border-sky-100 bg-white p-3 text-left">
             <div className="mb-2 text-xs font-bold text-slate-700">内訳</div>
             <ul className="space-y-1 text-xs text-slate-600">
-              <li>内申点（中3）：{naishin} / {MAX_NAISHIN}点</li>
-              <li>学力検査：{gakuryoku} / {MAX_GAKURYOKU}点</li>
-              <li className="border-t border-slate-100 pt-1 font-bold">合計：{total} / {MAX_TOTAL}点</li>
+              <li>内申点（中3）：{naishin} / {FUKUOKA_MAX_NAISHIN}点</li>
+              <li>学力検査：{gakuryoku} / {FUKUOKA_MAX_GAKURYOKU}点</li>
+              <li className="border-t border-slate-100 pt-1 font-bold">合計：{total} / {FUKUOKA_MAX_TOTAL}点</li>
             </ul>
           </div>
           <p className="mx-auto mt-3 max-w-sm text-[11px] leading-relaxed text-slate-400">
@@ -121,7 +117,7 @@ export function FukuokaScoreCalculator({ onResult }: Props) {
               targetInput={targetInput}
               onTargetInputChange={setTargetInput}
               total={total}
-              totalMax={MAX_TOTAL}
+              totalMax={FUKUOKA_MAX_TOTAL}
               inputId="fukuoka-total-score-target"
             />
           </div>

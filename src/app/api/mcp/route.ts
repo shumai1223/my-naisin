@@ -29,6 +29,7 @@ import { computeOsakaTotalScore, osakaRankLabel, OSAKA_TYPE_OPTIONS } from '@/li
 import { computeAichiTotalScore, AICHI_METHODS } from '@/lib/total-score/aichi';
 import { computeChibaKValue, CHIBA_K_PRESETS } from '@/lib/total-score/chiba';
 import { computeSaitamaTotalScore } from '@/lib/total-score/saitama';
+import { computeFukuokaScore } from '@/lib/total-score/fukuoka';
 
 /**
  * MCP互換エンドポイント（堀B / AIネイティブの城①）。
@@ -376,6 +377,18 @@ const TOOLS = [
         chosashoRaw: { type: 'number', description: '調査書点（換算後の自己申告値。ユーザーが志望校の募集要項に沿って把握している点数）。' },
       },
       required: ['gakuryokuRaw', 'chosashoRaw'],
+    },
+  },
+  {
+    name: 'calculate_fukuoka_score',
+    description: '福岡県の内申点＋学力検査点の合計（目安・345点満点）を計算する。福岡県はA群（学力・内申の両方の順位が合格圏）とB群（総合判断）の二段階選抜のため、この合計だけで合否が決まるわけではない（学校別ボーダー断定なし）。',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        naishinRaw: { type: 'number', description: '内申点素点（45点満点＝中3の9教科のみ）。' },
+        gakuryokuRaw: { type: 'number', description: '学力検査点素点（300点満点＝5教科×60点）。' },
+      },
+      required: ['naishinRaw', 'gakuryokuRaw'],
     },
   },
 ] as const;
@@ -729,6 +742,16 @@ async function runTool(name: string, args: Record<string, unknown>) {
       return toolText({ error: 'invalid_params', message: 'gakuryokuRaw・chosashoRawは数値で指定してください。' });
     }
     const result = computeSaitamaTotalScore({ gakuryokuRaw, chosashoRaw });
+    return toolText(result);
+  }
+
+  if (name === 'calculate_fukuoka_score') {
+    const naishinRaw = Number(args.naishinRaw);
+    const gakuryokuRaw = Number(args.gakuryokuRaw);
+    if (!Number.isFinite(naishinRaw) || !Number.isFinite(gakuryokuRaw)) {
+      return toolText({ error: 'invalid_params', message: 'naishinRaw・gakuryokuRawは数値で指定してください。' });
+    }
+    const result = computeFukuokaScore({ naishinRaw, gakuryokuRaw });
     return toolText(result);
   }
 

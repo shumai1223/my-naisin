@@ -29,10 +29,10 @@ describe('/api/mcp JSON-RPC 契約', () => {
     expect(json.result.capabilities.prompts).toBeDefined();
   });
 
-  test('tools/list は23ツールを返す（S-5でhensachi/total-score/bairitsu/education-cost/stats/tokyo/kanagawa/osaka/aichi/chiba/saitamaの16本を追加）', async () => {
+  test('tools/list は24ツールを返す（S-5でhensachi/total-score/bairitsu/education-cost/stats/tokyo/kanagawa/osaka/aichi/chiba/saitama/fukuokaの17本を追加）', async () => {
     const res = await POST(rpc('tools/list'));
     const json = await res.json();
-    expect(json.result.tools).toHaveLength(23);
+    expect(json.result.tools).toHaveLength(24);
     expect(json.result.tools.map((t: { name: string }) => t.name)).toContain('build_study_plan');
     expect(json.result.tools.map((t: { name: string }) => t.name)).toContain('calculate_hensachi');
     expect(json.result.tools.map((t: { name: string }) => t.name)).toContain('calculate_total_score');
@@ -222,6 +222,15 @@ describe('/api/mcp JSON-RPC 契約', () => {
     expect(data.total).toBe(640);
   });
 
+  test('tools/call calculate_fukuoka_score は満点入力で345点を返す', async () => {
+    const res = await POST(
+      rpc('tools/call', { name: 'calculate_fukuoka_score', arguments: { naishinRaw: 45, gakuryokuRaw: 300 } })
+    );
+    const data = JSON.parse((await res.json()).result.content[0].text);
+    expect(data.total).toBe(345);
+    expect(data.percent).toBe(100);
+  });
+
   test('resources/list は47件、resources/read は該当県JSON', async () => {
     const list = await (await POST(rpc('resources/list'))).json();
     expect(list.result.resources).toHaveLength(47);
@@ -250,7 +259,7 @@ describe('/api/mcp JSON-RPC 契約', () => {
   test('GET ディスカバリはツール/メソッド一覧を返す', async () => {
     const res = GET();
     const json = await res.json();
-    expect(json.tools).toHaveLength(23);
+    expect(json.tools).toHaveLength(24);
     expect(json.methods).toContain('resources/read');
   });
 });
