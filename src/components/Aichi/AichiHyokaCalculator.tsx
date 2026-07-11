@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import { Calculator, RotateCcw } from 'lucide-react';
+import { AICHI_METHODS, computeAichiTotalScore } from '@/lib/total-score/aichi';
 
 export interface AichiHyokaResult {
   total: number;
@@ -11,14 +12,6 @@ export interface AichiHyokaResult {
 interface Props {
   onResult?: (r: AichiHyokaResult | null) => void;
 }
-
-const METHODS = [
-  { type: 'Ⅰ', naishinMul: 1, gakuryokuMul: 1, max: 200, label: '等倍（標準）' },
-  { type: 'Ⅱ', naishinMul: 1.5, gakuryokuMul: 1, max: 245, label: 'やや内申重視' },
-  { type: 'Ⅲ', naishinMul: 1, gakuryokuMul: 1.5, max: 255, label: 'やや当日点重視' },
-  { type: 'Ⅳ', naishinMul: 2, gakuryokuMul: 1, max: 290, label: '内申最重視' },
-  { type: 'Ⅴ', naishinMul: 1, gakuryokuMul: 2, max: 310, label: '当日点最重視' },
-] as const;
 
 /**
  * 愛知県の評価方法Ⅰ〜Ⅴの実数計算機（B-5）。
@@ -32,11 +25,14 @@ export function AichiHyokaCalculator({ onResult }: Props) {
 
   const naishinSum = parseFloat(naishinSumInput) || 0;
   const gakuryoku = parseFloat(gakuryokuInput) || 0;
-  const hyoteitokuten = naishinSum * 2; // 評定得点（90点満点）
-  const method = METHODS[methodIndex];
+
+  const { hyoteitokuten, total, method } = computeAichiTotalScore({
+    naishinSumRaw: naishinSum,
+    gakuryokuRaw: gakuryoku,
+    methodIndex,
+  });
 
   const hasInput = naishinSumInput !== '' || gakuryokuInput !== '';
-  const total = Math.round((hyoteitokuten * method.naishinMul + gakuryoku * method.gakuryokuMul) * 10) / 10;
 
   React.useEffect(() => {
     onResult?.(hasInput ? { total, max: method.max } : null);
@@ -106,7 +102,7 @@ export function AichiHyokaCalculator({ onResult }: Props) {
         <div>
           <label className="mb-1 block text-sm font-bold text-slate-800">志望校の評価方法</label>
           <div className="grid grid-cols-5 gap-2">
-            {METHODS.map((m, i) => (
+            {AICHI_METHODS.map((m, i) => (
               <button
                 key={m.type}
                 type="button"

@@ -26,6 +26,7 @@ import { getStatsValues } from '@/lib/stats-db';
 import { computeTokyoTotalScore, tokyoRankLabel, TOKYO_ESAT_GRADES } from '@/lib/total-score/tokyo';
 import { computeKanagawaSValue, kanagawaRankLabel, KANAGAWA_RATIO_OPTIONS } from '@/lib/total-score/kanagawa';
 import { computeOsakaTotalScore, osakaRankLabel, OSAKA_TYPE_OPTIONS } from '@/lib/total-score/osaka';
+import { computeAichiTotalScore, AICHI_METHODS } from '@/lib/total-score/aichi';
 
 /**
  * MCP互換エンドポイント（堀B / AIネイティブの城①）。
@@ -333,6 +334,19 @@ const TOOLS = [
         typeIndex: { type: 'number', description: `任意。選抜タイプのインデックス（既定2=タイプⅢ 5:5標準）。選択肢: ${OSAKA_TYPE_OPTIONS.map((o, i) => `${i}=${o.label}`).join(', ')}` },
       },
       required: ['naishinRaw', 'gakuryokuRaw'],
+    },
+  },
+  {
+    name: 'calculate_aichi_total_score',
+    description: `愛知県の総合得点（評定得点=9教科評定合計×2/90点満点+学力検査点/110点満点を志望校の評価方法Ⅰ〜Ⅴ別倍率で加算。満点は評価方法により異なる）を計算する。統一エンジンとは配点構造が異なる個別実装。評価方法: ${AICHI_METHODS.map((m, i) => `${i}=${m.type}(${m.label}・満点${m.max})`).join(', ')}。`,
+    inputSchema: {
+      type: 'object',
+      properties: {
+        naishinSumRaw: { type: 'number', description: '9教科評定合計の素点（45点満点・中3のみ対象）。' },
+        gakuryokuRaw: { type: 'number', description: '学力検査点素点（110点満点＝5教科×22点）。' },
+        methodIndex: { type: 'number', description: `任意。評価方法のインデックス（既定0=評価方法Ⅰ等倍標準）。選択肢: ${AICHI_METHODS.map((m, i) => `${i}=${m.type}`).join(', ')}` },
+      },
+      required: ['naishinSumRaw', 'gakuryokuRaw'],
     },
   },
 ] as const;
@@ -645,6 +659,17 @@ async function runTool(name: string, args: Record<string, unknown>) {
     const typeIndex = Number.isFinite(Number(args.typeIndex)) ? Number(args.typeIndex) : undefined;
     const result = computeOsakaTotalScore({ naishinRaw, gakuryokuRaw, typeIndex });
     return toolText({ ...result, rankLabel: osakaRankLabel(result.total) });
+  }
+
+  if (name === 'calculate_aichi_total_score') {
+    const naishinSumRaw = Number(args.naishinSumRaw);
+    const gakuryokuRaw = Number(args.gakuryokuRaw);
+    if (!Number.isFinite(naishinSumRaw) || !Number.isFinite(gakuryokuRaw)) {
+      return toolText({ error: 'invalid_params', message: 'naishinSumRaw・gakuryokuRawは数値で指定してください。' });
+    }
+    const methodIndex = Number.isFinite(Number(args.methodIndex)) ? Number(args.methodIndex) : undefined;
+    const result = computeAichiTotalScore({ naishinSumRaw, gakuryokuRaw, methodIndex });
+    return toolText(result);
   }
 
   return null;
