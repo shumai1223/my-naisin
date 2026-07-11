@@ -24,7 +24,7 @@ import path from 'path';
 import { findUncoveredOpportunityQueries, formatMiningCandidatesMarkdown } from '../lib/query-mining';
 import { findCtrUnderperformers, formatCtrUnderperformersMarkdown } from '../lib/ctr-improvement';
 import { findRoutesDueForMeasurement, type CtrChangeLogEntry } from '../lib/ctr-improvement-log';
-import { LAUNCH_BATCHES, evaluateLaunchBatchStatus, formatLaunchBatchMarkdown } from '../lib/new-page-launch-tracker';
+import { LAUNCH_BATCHES, evaluateLaunchBatchStatus, formatLaunchBatchMarkdown, evaluateBatchGoStopVerdict } from '../lib/new-page-launch-tracker';
 
 const SITE_URL = process.env.GSC_SITE_URL || 'sc-domain:my-naishin.com';
 const SA_KEY = process.env.GSC_SA_KEY;
@@ -216,11 +216,11 @@ async function main() {
   }
   const dueForMeasurement = findRoutesDueForMeasurement(ctrChangeLog, new Date());
 
-  // 新面インデックス監視（TIER I-7）：直近バッチの離陸/未発見状況
-  const launchBatchStatuses = LAUNCH_BATCHES.map((batch) => ({
-    label: batch.label,
-    statuses: evaluateLaunchBatchStatus(batch.routes, recentPages),
-  }));
+  // 新面インデックス監視（TIER I-7）：直近バッチの離陸/未発見状況＋GO/STOP判定（O-6）
+  const launchBatchStatuses = LAUNCH_BATCHES.map((batch) => {
+    const statuses = evaluateLaunchBatchStatus(batch.routes, recentPages);
+    return { label: batch.label, statuses, verdict: evaluateBatchGoStopVerdict(batch, statuses) };
+  });
 
   // --- Markdownレポート組み立て ---
   const L: string[] = [];
@@ -319,11 +319,14 @@ async function main() {
     );
   else L.push('_該当なし_\n');
 
-  L.push('## 🛬 新面インデックス監視（TIER I-7）');
-  L.push('> 直近に新設したバッチが発見（GSCに表示回数が計測）されているかの一覧。未発見が多い場合はsitemap再送信・内部リンク経路を再確認する。');
+  L.push('## 🛬 新面インデックス監視（TIER I-7）＋バッチGO/STOP判定（TIER O-6）');
+  L.push('> 直近に新設したバッチが発見（GSCに表示回数が計測）されているかの一覧。未発見が多い場合はsitemap再送信・内部リンク経路を再確認する。GO/STOPは離陸率と経過日数（14日未満は判定保留）から機械判定。');
   L.push('');
-  for (const batch of LAUNCH_BATCHES) {
-    L.push(formatLaunchBatchMarkdown(batch, evaluateLaunchBatchStatus(batch.routes, recentPages)));
+  const VERDICT_ICON: Record<string, string> = { go: '🟢 GO', wait: '⏳ 保留', 'stop-investigate': '🔴 STOP・要調査' };
+  for (const { label, statuses, verdict } of launchBatchStatuses) {
+    const batch = LAUNCH_BATCHES.find((b) => b.label === label)!;
+    L.push(formatLaunchBatchMarkdown(batch, statuses));
+    L.push(`**判定: ${VERDICT_ICON[verdict.verdict] ?? verdict.verdict}** — ${verdict.detail}`);
     L.push('');
   }
 
