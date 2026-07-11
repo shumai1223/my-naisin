@@ -48,6 +48,22 @@ export function buildPrefectureTargetGradesFaqs(): AskFaqItem[] {
 }
 
 /**
+ * 47都道府県 × 「実技教科の倍率はいくつですか？」をanswerQuery()から機械生成する（S-4④・軸拡張2本目）。
+ * detectIntent()の「実技|副教科|倍率|傾斜」正規表現にヒットする質問文で practical 意図を検出する
+ * （prefectureAnswer()に既存のロジックをそのまま再利用・新規判定基準はゼロ）。
+ */
+export function buildPrefecturePracticalFaqs(): AskFaqItem[] {
+  return PREFECTURES.map((p) => {
+    const question = `${p.name}は実技教科の倍率はいくつですか？`;
+    const result = answerQuery(question);
+    if (!result) {
+      throw new Error(`ask-faq-coverage: ${p.name}(${p.code})のpractical回答が生成できません`);
+    }
+    return { question, answer: result.answer };
+  });
+}
+
+/**
  * 都道府県に紐づかない一般Q&A（GENERAL_FACTS・answer-bot.ts）を機械生成する（S-4②）。
  * 各質問文は対応するGENERAL_FACTSの正規表現に一致するよう選定し、expectedTitleで
  * 実際にヒットしたfactが意図どおりか検証する（正規表現は先勝ち判定のため、文言次第では
