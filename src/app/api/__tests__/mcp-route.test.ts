@@ -29,10 +29,10 @@ describe('/api/mcp JSON-RPC 契約', () => {
     expect(json.result.capabilities.prompts).toBeDefined();
   });
 
-  test('tools/list は21ツールを返す（S-5でhensachi/total-score/bairitsu/education-cost/stats/tokyo/kanagawa/osaka/aichiの14本を追加）', async () => {
+  test('tools/list は22ツールを返す（S-5でhensachi/total-score/bairitsu/education-cost/stats/tokyo/kanagawa/osaka/aichi/chibaの15本を追加）', async () => {
     const res = await POST(rpc('tools/list'));
     const json = await res.json();
-    expect(json.result.tools).toHaveLength(21);
+    expect(json.result.tools).toHaveLength(22);
     expect(json.result.tools.map((t: { name: string }) => t.name)).toContain('build_study_plan');
     expect(json.result.tools.map((t: { name: string }) => t.name)).toContain('calculate_hensachi');
     expect(json.result.tools.map((t: { name: string }) => t.name)).toContain('calculate_total_score');
@@ -197,6 +197,23 @@ describe('/api/mcp JSON-RPC 契約', () => {
     expect(data.max).toBe(200);
   });
 
+  test('tools/call calculate_chiba_k_value はK=1.0満点入力で635点を返す', async () => {
+    const res = await POST(
+      rpc('tools/call', { name: 'calculate_chiba_k_value', arguments: { hyoteiRaw: 135, gakuryokuRaw: 500, kValue: 1.0 } })
+    );
+    const data = JSON.parse((await res.json()).result.content[0].text);
+    expect(data.total).toBe(635);
+    expect(data.max).toBe(635);
+  });
+
+  test('tools/call calculate_chiba_k_value はothersRaw未指定なら満点計算に含まれない', async () => {
+    const res = await POST(
+      rpc('tools/call', { name: 'calculate_chiba_k_value', arguments: { hyoteiRaw: 100, gakuryokuRaw: 400 } })
+    );
+    const data = JSON.parse((await res.json()).result.content[0].text);
+    expect(data.max).toBe(635); // 500 + 135*1.0（othersRaw未指定）
+  });
+
   test('resources/list は47件、resources/read は該当県JSON', async () => {
     const list = await (await POST(rpc('resources/list'))).json();
     expect(list.result.resources).toHaveLength(47);
@@ -225,7 +242,7 @@ describe('/api/mcp JSON-RPC 契約', () => {
   test('GET ディスカバリはツール/メソッド一覧を返す', async () => {
     const res = GET();
     const json = await res.json();
-    expect(json.tools).toHaveLength(21);
+    expect(json.tools).toHaveLength(22);
     expect(json.methods).toContain('resources/read');
   });
 });

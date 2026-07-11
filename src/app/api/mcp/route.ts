@@ -27,6 +27,7 @@ import { computeTokyoTotalScore, tokyoRankLabel, TOKYO_ESAT_GRADES } from '@/lib
 import { computeKanagawaSValue, kanagawaRankLabel, KANAGAWA_RATIO_OPTIONS } from '@/lib/total-score/kanagawa';
 import { computeOsakaTotalScore, osakaRankLabel, OSAKA_TYPE_OPTIONS } from '@/lib/total-score/osaka';
 import { computeAichiTotalScore, AICHI_METHODS } from '@/lib/total-score/aichi';
+import { computeChibaKValue, CHIBA_K_PRESETS } from '@/lib/total-score/chiba';
 
 /**
  * MCP互換エンドポイント（堀B / AIネイティブの城①）。
@@ -349,6 +350,21 @@ const TOOLS = [
       required: ['naishinSumRaw', 'gakuryokuRaw'],
     },
   },
+  {
+    name: 'calculate_chiba_k_value',
+    description: `千葉県の総合得点（学力検査点500点満点+評定合計135点満点×K値(高校ごとに異なる・一般的には${CHIBA_K_PRESETS.join('/')}等)+任意の調査書その他(最大50点)+任意の学校設定検査(最大150点)を単純加算）を計算する。統一エンジンとは配点構造が異なる個別実装。満点はK値・任意項目の入力有無で変わる目安値。`,
+    inputSchema: {
+      type: 'object',
+      properties: {
+        hyoteiRaw: { type: 'number', description: '評定合計素点（135点満点＝9教科×5段階×3学年）。' },
+        gakuryokuRaw: { type: 'number', description: '学力検査点素点（500点満点＝5教科×100点）。' },
+        kValue: { type: 'number', description: `任意。志望校のK値（既定1.0）。一般的な値: ${CHIBA_K_PRESETS.join(', ')}` },
+        othersRaw: { type: 'number', description: '任意。調査書のその他得点（最大50点）。指定すると満点計算にも含まれる。' },
+        schoolExamRaw: { type: 'number', description: '任意。学校設定検査の得点（最大150点）。指定すると満点計算にも含まれる。' },
+      },
+      required: ['hyoteiRaw', 'gakuryokuRaw'],
+    },
+  },
 ] as const;
 
 /**
@@ -669,6 +685,27 @@ async function runTool(name: string, args: Record<string, unknown>) {
     }
     const methodIndex = Number.isFinite(Number(args.methodIndex)) ? Number(args.methodIndex) : undefined;
     const result = computeAichiTotalScore({ naishinSumRaw, gakuryokuRaw, methodIndex });
+    return toolText(result);
+  }
+
+  if (name === 'calculate_chiba_k_value') {
+    const hyoteiRaw = Number(args.hyoteiRaw);
+    const gakuryokuRaw = Number(args.gakuryokuRaw);
+    if (!Number.isFinite(hyoteiRaw) || !Number.isFinite(gakuryokuRaw)) {
+      return toolText({ error: 'invalid_params', message: 'hyoteiRaw・gakuryokuRawは数値で指定してください。' });
+    }
+    const kValue = Number.isFinite(Number(args.kValue)) ? Number(args.kValue) : undefined;
+    const includeOthers = args.othersRaw !== undefined;
+    const includeSchoolExam = args.schoolExamRaw !== undefined;
+    const result = computeChibaKValue({
+      hyoteiRaw,
+      gakuryokuRaw,
+      kValue,
+      othersRaw: includeOthers ? Number(args.othersRaw) : undefined,
+      includeOthers,
+      schoolExamRaw: includeSchoolExam ? Number(args.schoolExamRaw) : undefined,
+      includeSchoolExam,
+    });
     return toolText(result);
   }
 

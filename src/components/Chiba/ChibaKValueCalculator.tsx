@@ -2,8 +2,7 @@
 
 import * as React from 'react';
 import { Calculator, RotateCcw } from 'lucide-react';
-
-const K_PRESETS = [0.5, 1.0, 1.5, 2.0] as const;
+import { CHIBA_K_PRESETS, computeChibaKValue } from '@/lib/total-score/chiba';
 
 export interface ChibaKValueResult {
   total: number;
@@ -36,10 +35,15 @@ export function ChibaKValueCalculator({ onResult }: Props) {
 
   const hasInput = hyoteiInput !== '' || gakuryokuInput !== '';
 
-  const reportScore = hyotei * k;
-  const total = Math.round(gakuryoku + reportScore + others + schoolExam);
-  // 満点はK値・その他・学校設定検査の入力有無で変わる（概算の目安として算出）。
-  const max = Math.round(500 + 135 * k + (othersInput !== '' ? 50 : 0) + (schoolExamInput !== '' ? 150 : 0));
+  const { reportScore, total, max } = computeChibaKValue({
+    hyoteiRaw: hyotei,
+    gakuryokuRaw: gakuryoku,
+    kValue: k,
+    othersRaw: others,
+    includeOthers: othersInput !== '',
+    schoolExamRaw: schoolExam,
+    includeSchoolExam: schoolExamInput !== '',
+  });
 
   React.useEffect(() => {
     onResult?.(hasInput ? { total, max } : null);
@@ -108,7 +112,7 @@ export function ChibaKValueCalculator({ onResult }: Props) {
         <div>
           <label className="mb-1 block text-sm font-bold text-slate-800">志望校のK値</label>
           <div className="flex flex-wrap gap-2">
-            {K_PRESETS.map((p) => (
+            {CHIBA_K_PRESETS.map((p) => (
               <button
                 key={p}
                 type="button"
