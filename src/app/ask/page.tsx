@@ -8,7 +8,7 @@ import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { RelatedToolsSection } from '@/components/RelatedToolsSection';
 import { AnswerBotClient } from '@/components/AnswerBot/AnswerBotClient';
-import { buildPrefectureMaxScoreFaqs, buildGeneralFactFaqs, buildPrefectureTargetGradesFaqs, buildPrefecturePracticalFaqs } from '@/lib/ask-faq-coverage';
+import { buildPrefectureMaxScoreFaqs, buildGeneralFactFaqs, buildPrefectureTargetGradesFaqs, buildPrefecturePracticalFaqs, buildPrefectureFormulaFaqs } from '@/lib/ask-faq-coverage';
 
 export const metadata: Metadata = {
   title: '内申点クイックアンサー｜質問するとすぐ答える（47都道府県の方式・自社データ）| My Naishin',
@@ -30,8 +30,15 @@ const GENERAL_ASK_FAQS = buildGeneralFactFaqs();
 const PREFECTURE_ASK_FAQS = buildPrefectureMaxScoreFaqs();
 const PREFECTURE_TARGET_GRADES_FAQS = buildPrefectureTargetGradesFaqs();
 const PREFECTURE_PRACTICAL_FAQS = buildPrefecturePracticalFaqs();
+const PREFECTURE_FORMULA_FAQS = buildPrefectureFormulaFaqs();
 
-const ASK_FAQS = [...GENERAL_ASK_FAQS, ...PREFECTURE_ASK_FAQS, ...PREFECTURE_TARGET_GRADES_FAQS, ...PREFECTURE_PRACTICAL_FAQS];
+const ASK_FAQS = [
+  ...GENERAL_ASK_FAQS,
+  ...PREFECTURE_ASK_FAQS,
+  ...PREFECTURE_TARGET_GRADES_FAQS,
+  ...PREFECTURE_PRACTICAL_FAQS,
+  ...PREFECTURE_FORMULA_FAQS,
+];
 
 export default function AskPage() {
   return (
@@ -88,7 +95,7 @@ export default function AskPage() {
           {/* 可視のQ&A（GEO：JSなしでも読める一次情報） */}
           <section className="mt-10">
             <h2 className="mb-1 text-lg font-bold text-slate-800">よくある質問と回答</h2>
-            <p className="mb-4 text-xs text-slate-400">制度・費用のよくある疑問と、47都道府県すべての「内申点は何点満点？」「対象学年はいつ？」「実技教科の倍率は？」に個別回答（検証済みデータから機械生成・タップして確認できます）</p>
+            <p className="mb-4 text-xs text-slate-400">制度・費用のよくある疑問と、47都道府県すべての「内申点は何点満点？」「対象学年はいつ？」「実技教科の倍率は？」「どうやって計算する？」に個別回答（検証済みデータから機械生成・タップして確認できます）</p>
             <div className="space-y-3">
               {ASK_FAQS.map((faq) => (
                 <details

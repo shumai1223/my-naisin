@@ -64,6 +64,22 @@ export function buildPrefecturePracticalFaqs(): AskFaqItem[] {
 }
 
 /**
+ * 47都道府県 × 「内申点はどうやって計算しますか？」をanswerQuery()から機械生成する（S-4④・軸拡張3本目）。
+ * detectIntent()の「計算|方法|出し方|どうやって|式」正規表現にヒットする質問文で formula 意図を検出する
+ * （prefectureAnswer()に既存のロジックをそのまま再利用・新規判定基準はゼロ）。
+ */
+export function buildPrefectureFormulaFaqs(): AskFaqItem[] {
+  return PREFECTURES.map((p) => {
+    const question = `${p.name}の内申点はどうやって計算しますか？`;
+    const result = answerQuery(question);
+    if (!result) {
+      throw new Error(`ask-faq-coverage: ${p.name}(${p.code})のformula回答が生成できません`);
+    }
+    return { question, answer: result.answer };
+  });
+}
+
+/**
  * 都道府県に紐づかない一般Q&A（GENERAL_FACTS・answer-bot.ts）を機械生成する（S-4②）。
  * 各質問文は対応するGENERAL_FACTSの正規表現に一致するよう選定し、expectedTitleで
  * 実際にヒットしたfactが意図どおりか検証する（正規表現は先勝ち判定のため、文言次第では
