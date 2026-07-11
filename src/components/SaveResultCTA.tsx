@@ -25,6 +25,11 @@ import { useExperiment } from '@/components/ab/useExperiment';
 
 /** lead-copy-2026 のアーム（[[experiments]]）。安定参照のためモジュールレベルに置く。 */
 const LEAD_COPY_ARMS = [{ id: 'control' as const }, { id: 'reward' as const }];
+/** T-2（LINE登録導線A/B・[[experiments]]）。安定参照のためモジュールレベルに置く。 */
+const LINE_COPY_ARMS = [{ id: 'control' as const }, { id: 'benefit' as const }];
+const LINE_POSITION_ARMS = [{ id: 'control' as const }, { id: 'email-first' as const }];
+const LINE_TIMING_ARMS = [{ id: 'control' as const }, { id: 'delayed' as const }];
+const LINE_TIMING_DELAY_MS = 1200;
 
 interface SaveResultCTAProps {
   /** 設置場所（セグメント用） */
@@ -94,6 +99,25 @@ export function SaveResultCTA({
   const copyVariant = useExperiment('lead-copy-2026', LEAD_COPY_ARMS);
   const submitLabel = copyVariant === 'reward' && hasCard ? '結果カードを無料でもらう' : '無料で受け取る';
 
+  // T-2：結果画面LINE登録導線のコピー・位置・表示タイミングA/B（3本・[[experiments]]）。
+  const lineCopyVariant = useExperiment('line-cta-copy-2026', LINE_COPY_ARMS);
+  const linePositionVariant = useExperiment('line-cta-position-2026', LINE_POSITION_ARMS);
+  const lineTimingVariant = useExperiment('line-cta-timing-2026', LINE_TIMING_ARMS);
+  const lineSubtitle =
+    lineCopyVariant === 'benefit' ? '内申点アップのコツを毎週LINEでお届け' : '友だち追加で受験情報をプッシュ通知';
+
+  // timing='delayed'のときだけ、結果表示から一拍置いてLINEブロックを表示する（controlは常時表示・レイアウトシフト回避）。
+  const [lineVisible, setLineVisible] = React.useState(lineTimingVariant !== 'delayed');
+  React.useEffect(() => {
+    if (lineTimingVariant !== 'delayed') {
+      setLineVisible(true);
+      return;
+    }
+    setLineVisible(false);
+    const t = window.setTimeout(() => setLineVisible(true), LINE_TIMING_DELAY_MS);
+    return () => window.clearTimeout(t);
+  }, [lineTimingVariant]);
+
   // 名簿フォームへの最初の入力で form_start を一度だけ。lead_submit との比で「入力したのに送らない」歩留まりを可視化。
   function onFormStart() {
     if (formStartedRef.current) return;
@@ -114,7 +138,14 @@ export function SaveResultCTA({
   }, [status]);
 
   function onLineClick() {
-    track('line_friend_click', { source, pref: prefectureCode ?? 'none', gap: gap ?? 0 });
+    track('line_friend_click', {
+      source,
+      pref: prefectureCode ?? 'none',
+      gap: gap ?? 0,
+      copy_variant: lineCopyVariant,
+      position_variant: linePositionVariant,
+      timing_variant: lineTimingVariant,
+    });
   }
 
   async function onSubmit(e: React.FormEvent) {
@@ -154,6 +185,87 @@ export function SaveResultCTA({
   }
 
   const done = status === 'success' || status === 'fallback';
+
+  // 受け皿1：LINE（プッシュ可能な“溶けない名簿”）。T-2：コピー/表示タイミングA/Bをここで反映。
+  const lineBlock = LINE_ADD_URL && lineVisible && (
+    <a
+      href={LINE_ADD_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      onClick={onLineClick}
+      className="flex items-center justify-between gap-3 rounded-2xl border-2 border-[#06C755] bg-[#06C755] px-5 py-3.5 text-left text-white shadow-md transition-all hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.99]"
+    >
+      <span className="flex items-center gap-2.5">
+        <MessageCircle className="h-5 w-5" />
+        <span>
+          <span className="block text-sm font-bold">LINEで受け取る・進路相談する</span>
+          <span className="block text-xs text-white/85">{lineSubtitle}</span>
+        </span>
+      </span>
+      <span className="rounded-lg bg-white/20 px-2.5 py-1 text-xs font-bold">無料</span>
+    </a>
+  );
+
+  // 受け皿2：メール（会員化の入口・文脈付きセグメント名簿）。
+  const emailBlock = (
+    <form onSubmit={onSubmit} className="space-y-3">
+      <div className="flex items-center gap-2 text-xs font-bold text-slate-600">
+        <Mail className="h-3.5 w-3.5 text-sky-600" />
+        メールで受け取る
+      </div>
+      <div className="flex flex-col gap-2 sm:flex-row">
+        <input
+          type="email"
+          inputMode="email"
+          autoComplete="email"
+          value={email}
+          onChange={(e) => {
+            onFormStart();
+            setEmail(e.target.value);
+          }}
+          onFocus={onFormStart}
+          placeholder="メールアドレス"
+          aria-label="メールアドレス"
+          className="h-11 flex-1 rounded-2xl border border-slate-200 bg-white px-4 text-sm text-slate-800 shadow-sm outline-none placeholder:text-slate-400 focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20"
+        />
+        <button
+          type="submit"
+          disabled={status === 'submitting'}
+          className="inline-flex h-11 items-center justify-center gap-2 rounded-2xl bg-sky-600 px-6 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-sky-700 hover:shadow-lg active:scale-95 disabled:cursor-not-allowed disabled:opacity-70"
+        >
+          {status === 'submitting' ? (
+            <>
+              <Loader2 className="h-4 w-4 animate-spin" />
+              送信中…
+            </>
+          ) : (
+            <>
+              <BellRing className="h-4 w-4" />
+              {submitLabel}
+            </>
+          )}
+        </button>
+      </div>
+
+      <label className="flex cursor-pointer items-start gap-2 text-xs leading-relaxed text-slate-500">
+        <input
+          type="checkbox"
+          checked={consent}
+          onChange={(e) => setConsent(e.target.checked)}
+          className="mt-0.5 h-4 w-4 shrink-0 rounded border-slate-300 text-sky-600 focus:ring-sky-500"
+        />
+        <span>
+          受験情報・内申対策の受け取りに同意します（
+          <Link href="/privacy" className="font-semibold text-slate-600 underline">
+            プライバシーポリシー
+          </Link>
+          ）。配信はいつでも解除できます。
+        </span>
+      </label>
+
+      {error && <p className="text-xs font-semibold text-rose-600">{error}</p>}
+    </form>
+  );
 
   // 登録成功後の“見返り”が表示されたら一度だけ計測（互恵性ファネルの分母）。
   React.useEffect(() => {
@@ -284,84 +396,18 @@ export function SaveResultCTA({
             ))}
           </ul>
 
-          {/* 受け皿1：LINE（プッシュ可能な“溶けない名簿”） */}
-          {LINE_ADD_URL && (
-            <a
-              href={LINE_ADD_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={onLineClick}
-              className="flex items-center justify-between gap-3 rounded-2xl border-2 border-[#06C755] bg-[#06C755] px-5 py-3.5 text-left text-white shadow-md transition-all hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.99]"
-            >
-              <span className="flex items-center gap-2.5">
-                <MessageCircle className="h-5 w-5" />
-                <span>
-                  <span className="block text-sm font-bold">LINEで受け取る・進路相談する</span>
-                  <span className="block text-xs text-white/85">友だち追加で受験情報をプッシュ通知</span>
-                </span>
-              </span>
-              <span className="rounded-lg bg-white/20 px-2.5 py-1 text-xs font-bold">無料</span>
-            </a>
+          {/* T-2：位置A/B。既定はLINEが先（プッシュ可能な“溶けない名簿”を優先訴求）・email-firstアームは逆順。 */}
+          {linePositionVariant === 'email-first' ? (
+            <>
+              {emailBlock}
+              {lineBlock}
+            </>
+          ) : (
+            <>
+              {lineBlock}
+              {emailBlock}
+            </>
           )}
-
-          {/* 受け皿2：メール（会員化の入口・文脈付きセグメント名簿） */}
-          <form onSubmit={onSubmit} className="space-y-3">
-            <div className="flex items-center gap-2 text-xs font-bold text-slate-600">
-              <Mail className="h-3.5 w-3.5 text-sky-600" />
-              メールで受け取る
-            </div>
-            <div className="flex flex-col gap-2 sm:flex-row">
-              <input
-                type="email"
-                inputMode="email"
-                autoComplete="email"
-                value={email}
-                onChange={(e) => {
-                  onFormStart();
-                  setEmail(e.target.value);
-                }}
-                onFocus={onFormStart}
-                placeholder="メールアドレス"
-                aria-label="メールアドレス"
-                className="h-11 flex-1 rounded-2xl border border-slate-200 bg-white px-4 text-sm text-slate-800 shadow-sm outline-none placeholder:text-slate-400 focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20"
-              />
-              <button
-                type="submit"
-                disabled={status === 'submitting'}
-                className="inline-flex h-11 items-center justify-center gap-2 rounded-2xl bg-sky-600 px-6 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-sky-700 hover:shadow-lg active:scale-95 disabled:cursor-not-allowed disabled:opacity-70"
-              >
-                {status === 'submitting' ? (
-                  <>
-                    <Loader2 className="h-4 w-4 animate-spin" />
-                    送信中…
-                  </>
-                ) : (
-                  <>
-                    <BellRing className="h-4 w-4" />
-                    {submitLabel}
-                  </>
-                )}
-              </button>
-            </div>
-
-            <label className="flex cursor-pointer items-start gap-2 text-xs leading-relaxed text-slate-500">
-              <input
-                type="checkbox"
-                checked={consent}
-                onChange={(e) => setConsent(e.target.checked)}
-                className="mt-0.5 h-4 w-4 shrink-0 rounded border-slate-300 text-sky-600 focus:ring-sky-500"
-              />
-              <span>
-                受験情報・内申対策の受け取りに同意します（
-                <Link href="/privacy" className="font-semibold text-slate-600 underline">
-                  プライバシーポリシー
-                </Link>
-                ）。配信はいつでも解除できます。
-              </span>
-            </label>
-
-            {error && <p className="text-xs font-semibold text-rose-600">{error}</p>}
-          </form>
 
           <div className="flex items-center gap-1.5 text-[11px] text-slate-400">
             <ShieldCheck className="h-3.5 w-3.5" />

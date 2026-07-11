@@ -50,7 +50,7 @@ export interface ExperimentDef {
   /** arms[0] を対照群（control）とみなす。 */
   arms: ExperimentArm[];
   /** 効きを突合する主要指標（GA4イベント）。 */
-  primaryMetric: 'cta_view' | 'affiliate_click' | 'lead_submit';
+  primaryMetric: 'cta_view' | 'affiliate_click' | 'lead_submit' | 'line_friend_click';
   /** 関係する設置面（勝者を lead-config に昇格させる際の対象）。 */
   placement?: LeadPlacement;
   /** decided のとき採用したアーム。 */
@@ -129,6 +129,48 @@ export const EXPERIMENTS: ExperimentDef[] = [
     placement: 'result',
     note: '最高インテント面（result/gap-target）で母数を稼ぐ。勝者が出たら SaveResultCTA の既定ボタン文言を昇格させる。',
     startedAt: '2026-06-20',
+  },
+  {
+    // T-2（2026-07-12）：結果画面LINE登録導線のコピーA/B。SaveResultCTAが参照。
+    id: 'line-cta-copy-2026',
+    hypothesis: '結果画面のLINE友だち追加ボタンの副題を「内申点アップのコツを毎週お届け」と具体的な受け取り内容にすると、汎用の「受験情報をプッシュ通知」より line_friend_click が上がる。',
+    status: 'running',
+    arms: [
+      { id: 'control', label: '既定副題（汎用訴求：受験情報をプッシュ通知）' },
+      { id: 'benefit', label: '具体内容フレーム', body: '友だち追加で、内申点アップのコツを毎週LINEでお届け' },
+    ],
+    primaryMetric: 'line_friend_click',
+    placement: 'result',
+    note: '送り先・登録の仕組みは同一・副題コピーのみ差し替え。SaveResultCTAの全設置面（result/prefecture/hensachi等）で母数を稼ぐ。',
+    startedAt: '2026-07-12',
+  },
+  {
+    // T-2（2026-07-12）：結果画面LINE登録導線の位置A/B。SaveResultCTAが参照。
+    id: 'line-cta-position-2026',
+    hypothesis: 'LINE友だち追加ボタンをメール登録フォームより先（上）に出す既定の並びに対し、メールを先に出す方がline_friend_clickが下がるかを検証する（プッシュ可能なLINEを先出しする現行判断の裏付け）。',
+    status: 'running',
+    arms: [
+      { id: 'control', label: '既定の並び（LINEが先・メールが後）' },
+      { id: 'email-first', label: 'メールを先に表示', body: 'placement-order:email-first' },
+    ],
+    primaryMetric: 'line_friend_click',
+    placement: 'result',
+    note: 'SaveResultCTAの受け皿2種（LINE/メール）の表示順のみ入れ替え。文言・機能は同一（bodyは実装が読む疑似フラグ。prefecture-order-2026と同じ表現規約）。',
+    startedAt: '2026-07-12',
+  },
+  {
+    // T-2（2026-07-12）：結果画面LINE登録導線の表示タイミングA/B。SaveResultCTAが参照。
+    id: 'line-cta-timing-2026',
+    hypothesis: 'LINE友だち追加ボタンを結果表示直後でなく少し間を置いて表示すると、結果を読んだ状態での意図が伴い line_friend_click の質（歩留まり）が上がる。',
+    status: 'running',
+    arms: [
+      { id: 'control', label: '即時表示（既定）' },
+      { id: 'delayed', label: '結果表示から1.2秒後に表示', revealDelayMs: 1200 },
+    ],
+    primaryMetric: 'line_friend_click',
+    placement: 'result',
+    note: 'SaveResultCTA自体は結果確定後にマウントされる設計のため、ここでの遅延はLINE受け皿ブロックの表示タイミングのみを指す（フォーム自体は変わらず表示）。',
+    startedAt: '2026-07-12',
   },
   {
     // 実験3（H8）：承認後のFP A/B（保険コンパス vs マネードクター）。両者 pending のため承認まで paused。
