@@ -73,14 +73,17 @@
 [ ] コア計算ツールを1つ実装（1意図1ツール）
 [ ] セグメント別ページを自動生成（各ページに固有データ＋出典）
 [ ] E-E-A-T：運営者プロフィール / 品質ページ / 出典 / 構造化データ
-[ ] 収益導線：AdSense（floor）＋ リード送客CTA（本命）を結果直後に
-[ ] sitemap / robots / canonical / OG
+[ ] 収益導線：リード送客CTA（本命）を結果直後に。AdSenseは同時併用しない（§1-④の自傷事故を参照）
+[ ] sitemap / robots / canonical / OG：page-registry.ts（単一ソース）→sitemap.tsを自動生成する構成にする（手動配列は新規ルート登録漏れの前科あり）
+[ ] 品質ゲートをCIに接続：uniquenessテスト（プログラマティック生成面のscaled-content対策）・a11y監査（フォームのラベル/コントラスト）・rich-results監査（FAQ/HowTo/Dataset/Breadcrumbの網羅）・internal-link-graph監査（準孤児検知）
 [ ] GSC・サーチコンソール登録、週次レポートのcronを接続
 [ ] 一次情報リンク監視を接続
 [ ] 被リンク用の埋め込みウィジェット
 ```
 
 技術スタックはこのリポジトリを雛形に：**Next.js(App Router) + Tailwind + OpenNext/Cloudflare + tsx scripts + GitHub Actions**。
+
+**コピー元＝「テンプレコピー」方式（共有npmパッケージにはしない）**：my-shingaku立ち上げ時にF-7で確立した方式。my-naishinのロジックを直接複製せず、汎用部分だけを`src/lib/ev-engine.ts`（EV計算式）・`src/lib/lead-config-engine.ts`（オファー解決パターン）に分離し、新サイトはこの2ファイルをコピーして自サイト固有のデータ（オファー一覧・県別オーバーライド等）だけを書く。`page-registry.ts`（sitemap自動生成）・`track.ts`（計装イベント名）・`seasonal.ts`（季節オファー切替）も同じ思想でコピー元にする。詳細設計は[[session-2026-07-09-f7-playbook-extraction-design]]。
 
 ---
 
