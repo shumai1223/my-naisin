@@ -6,6 +6,7 @@
  */
 import { POST as submitPOST } from '@/app/api/stats/submit/route';
 import { GET as distributionGET } from '@/app/api/stats/distribution/route';
+import { GET as csvGET } from '@/app/api/stats/csv/route';
 import type { NextRequest } from 'next/server';
 
 function submitReq(body: unknown, opts: { ip?: string; contentLength?: string } = {}) {
@@ -82,5 +83,25 @@ describe('/api/stats/distribution 契約', () => {
     const res = await distributionGET(distributionReq('?metric=hensachi&prefecture=osaka', { ip: '3.1.1.4' }));
     const json = await res.json();
     expect(json.meta.prefecture).toBe('osaka');
+  });
+});
+
+describe('/api/stats/csv 契約（TIER N-7）', () => {
+  test('CSVを返す（Content-Type text/csv・3指標ぶんの行）', async () => {
+    const req = new Request('https://my-naishin.com/api/stats/csv', { headers: { 'cf-connecting-ip': '3.2.1.1' } });
+    const res = await csvGET(req);
+    expect(res.status).toBe(200);
+    expect(res.headers.get('content-type')).toContain('text/csv');
+    const text = await res.text();
+    const lines = text.trim().split('\n');
+    expect(lines).toHaveLength(4); // header + naishin/hensachi/total-score
+    expect(lines[0]).toContain('metric,metric_label,sample_count,insufficient_data');
+  });
+
+  test('D1未設定のテスト環境ではinsufficient_data=trueで捏造しない契約', async () => {
+    const req = new Request('https://my-naishin.com/api/stats/csv', { headers: { 'cf-connecting-ip': '3.2.1.2' } });
+    const res = await csvGET(req);
+    const text = await res.text();
+    expect(text).toContain(',true,,,,'); // mean/min/max空欄
   });
 });

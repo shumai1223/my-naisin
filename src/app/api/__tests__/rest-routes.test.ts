@@ -343,4 +343,9 @@ describe('/api/openapi', () => {
     const json = await (await openapiGet()).json();
     expect(json.paths['/api/stats/distribution']).toBeDefined();
   });
+
+  test('N-7：匿名統計CSV配布エンドポイントが記載されている', async () => {
+    const json = await (await openapiGet()).json();
+    expect(json.paths['/api/stats/csv']).toBeDefined();
+  });
 });

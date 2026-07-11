@@ -65,6 +65,46 @@ export function buildSuppressedAggregate(values: number[], threshold: number = S
   return agg;
 }
 
+export interface StatsCsvRow {
+  metric: StatsMetric;
+  /** 集計対象の全件数（k-匿名性で非表示にする前の実件数）。 */
+  count: number;
+  /** 非表示（サンプルサイズ不足）ならnull。表示可能ならStatsAggregate。 */
+  aggregate: StatsAggregate | null;
+}
+
+const STATS_METRIC_LABELS: Record<StatsMetric, string> = {
+  naishin: '内申点',
+  hensachi: '偏差値',
+  'total-score': '総合得点',
+};
+
+/**
+ * 匿名統計（全国集計）をCSV文字列に変換する（純粋関数・DB非依存＝テスト可能）。
+ * サンプルサイズ不足のセルはmean/min/maxを空欄にし、insufficient_data列で明示する
+ * （k-匿名性を維持したまま「データが無いものを在るかのように見せない」原則をCSVでも徹底）。
+ */
+export function buildStatsCsv(rows: StatsCsvRow[], generatedAtIso: string = new Date().toISOString()): string {
+  const header = ['metric', 'metric_label', 'sample_count', 'insufficient_data', 'mean', 'min', 'max', 'min_sample_size', 'generated_at'];
+  const lines = [header.join(',')];
+  for (const row of rows) {
+    const insufficient = row.aggregate === null;
+    const cells = [
+      row.metric,
+      STATS_METRIC_LABELS[row.metric],
+      String(row.count),
+      String(insufficient),
+      insufficient ? '' : row.aggregate!.mean.toFixed(2),
+      insufficient ? '' : String(row.aggregate!.min),
+      insufficient ? '' : String(row.aggregate!.max),
+      String(STATS_MIN_SAMPLE_SIZE),
+      generatedAtIso,
+    ];
+    lines.push(cells.join(','));
+  }
+  return lines.join('\n') + '\n';
+}
+
 /** 提出データの妥当性検査（DBに書く前のバリデーション・N-3のAPI実装時に使う想定）。 */
 export function isValidStatsSubmission(input: unknown): input is StatsSubmissionInput {
   if (!input || typeof input !== 'object') return false;

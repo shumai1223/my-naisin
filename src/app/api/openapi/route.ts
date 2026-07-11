@@ -218,6 +218,15 @@ export function GET() {
           responses: { '200': { description: '成功' }, '400': { description: 'metricが不正' } },
         },
       },
+      '/api/stats/csv': {
+        get: {
+          operationId: 'getStatsCsv',
+          summary: '匿名統計（全国集計）のCSV配布',
+          description:
+            '内申点・偏差値・総合得点の全国集計を1行1指標のCSV（BOM付きUTF-8）で配布。サンプルサイズ30件未満の指標はinsufficient_data列がtrueとなりmean/min/maxは空欄（k-匿名性・捏造ゼロ）。',
+          responses: { '200': { description: '成功（text/csv）' } },
+        },
+      },
       '/api/openapi': {
         get: {
           operationId: 'getOpenApiSpec',

@@ -50,6 +50,11 @@ const FAQS = [
     answer:
       'はい。/api/stats/distribution エンドポイント（GET）で同じ集計データをJSON形式で取得できます。詳しい仕様は開発者向けページをご確認ください。',
   },
+  {
+    question: 'CSVで一括ダウンロードできますか？',
+    answer:
+      'はい。/api/stats/csv エンドポイント（GET）で、内申点・偏差値・総合得点の全国集計を1行1指標のCSV（表計算ソフトでそのまま開けます）でダウンロードできます。サンプルサイズが不足する指標はinsufficient_data列で明示し、平均・最小・最大は空欄のまま返します。',
+  },
 ];
 
 async function loadStats() {
@@ -104,6 +109,12 @@ export default async function StatsPage() {
             encodingFormat: 'application/json',
             contentUrl: `${SITE_URL}/api/stats/distribution?metric=naishin`,
             name: '内申点 分布データ（JSON）',
+          },
+          {
+            '@type': 'DataDownload',
+            encodingFormat: 'text/csv',
+            contentUrl: `${SITE_URL}/api/stats/csv`,
+            name: '全国集計データ（CSV・全指標）',
           },
         ]}
       />
