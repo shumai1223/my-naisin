@@ -2,7 +2,15 @@
  * 能動運用ロードマップの目盛りゲート G1〜G6（2026-07-11ロードマップ）の判定純関数テスト。
  * 日付境界・未計測・努力/最高の閾値・G2（チェックリスト系）の分岐を固定する。
  */
-import { ROADMAP_GATES, evaluateRoadmapGates, nextRoadmapGate, type RoadmapGateActuals } from '../roadmap-gates';
+import {
+  ROADMAP_GATES,
+  evaluateRoadmapGates,
+  nextRoadmapGate,
+  detectWinterAffiliateReadiness,
+  winterAffiliateReadinessSummary,
+  WINTER_SEASONAL_AFFILIATE_IDS,
+  type RoadmapGateActuals,
+} from '../roadmap-gates';
 
 const D = (iso: string) => new Date(`${iso}T00:00:00Z`);
 
@@ -58,6 +66,37 @@ describe('G2 冬案件申請（チェックリスト系・数値化しない）'
   it('g2Confirmed=trueはon-track-max、falseはbehind', () => {
     expect(evaluateRoadmapGates({ g2Confirmed: true }, D('2026-09-30'))[1].status).toBe('on-track-max');
     expect(evaluateRoadmapGates({ g2Confirmed: false }, D('2026-09-30'))[1].status).toBe('behind');
+  });
+  it('detailに自動検出(winterAffiliateReadinessSummary)の要約を含む（👤確認を上書きしない補助情報）', () => {
+    const r = evaluateRoadmapGates({}, D('2026-09-30'))[1];
+    expect(r.detail).toContain('自動検出');
+    expect(r.detail).toContain('冬季アフィリ');
+  });
+});
+
+describe('T-6：G2自動検出補助（冬季アフィリのlive化状況）', () => {
+  it('WINTER_SEASONAL_AFFILIATE_IDSは冬期講習/直前案件の2件', () => {
+    expect(WINTER_SEASONAL_AFFILIATE_IDS).toEqual(['winter-koushuu-trial', 'last-minute-trial']);
+  });
+
+  it('detectWinterAffiliateReadinessは各IDのlive状況を返す（現状は両方ともpending枠なのでfalse）', () => {
+    const readiness = detectWinterAffiliateReadiness();
+    expect(readiness).toHaveLength(2);
+    for (const r of readiness) {
+      expect(typeof r.live).toBe('boolean');
+      expect(typeof r.name).toBe('string');
+    }
+  });
+
+  it('winterAffiliateReadinessSummaryは"N/M件live化"の形式を含む', () => {
+    const summary = winterAffiliateReadinessSummary();
+    expect(summary).toMatch(/冬季アフィリ\d+\/\d+件live化/);
+  });
+
+  it('全てliveなIDリストを渡すとN/Mが一致する（isLiveAffiliateの実データに依存しないユニットテスト）', () => {
+    // 実在の常時live案件（affiliates.ts）を使い、検出ロジック自体の正しさをpending枠と独立に確認する。
+    const summary = winterAffiliateReadinessSummary(['sora-juku-text']);
+    expect(summary).toContain('冬季アフィリ1/1件live化');
   });
 });
 

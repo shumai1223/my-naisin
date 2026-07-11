@@ -12,6 +12,8 @@
  * （weekly-kpi-report.ts で両方呼び出し、本ファイルはG1以降のみを扱う）。
  */
 
+import { AFFILIATES, isLiveAffiliate, type AffiliateId } from '@/lib/affiliates';
+
 export type GateStatus =
   | 'upcoming' // 判定日前
   | 'on-track-max' // 判定日到達・最高軌道の基準を満たす
@@ -112,6 +114,38 @@ export const ROADMAP_GATES: RoadmapGateDefinition[] = [
   },
 ];
 
+/**
+ * G2の機械検出補助（T-6・部分的）。
+ *
+ * G2（冬案件ASP申請＋S-3インデックス確認）は「数値でなくチェック項目」のため本来👤確認が必要だが、
+ * 「冬期講習/直前案件のASP申請完了」の半分（ASP申請→承認→live化）は、affiliates.tsの
+ * pending枠（winter-koushuu-trial/last-minute-trial）がisLiveAffiliate()でlive判定できるかを見れば
+ * 機械検出できる。S-3インデックス確認（GSC実測）は依然👤確認が必要なため置き換えず、
+ * g2Confirmedのそばに補助情報として添えるだけ（👤の最終判断を上書きしない）。
+ */
+export const WINTER_SEASONAL_AFFILIATE_IDS: AffiliateId[] = ['winter-koushuu-trial', 'last-minute-trial'];
+
+export interface WinterAffiliateReadiness {
+  id: AffiliateId;
+  name: string;
+  live: boolean;
+}
+
+/** 冬季アフィリ枠（pending先回し）ごとのlive化状況を実データ（affiliates.ts）から検出する。 */
+export function detectWinterAffiliateReadiness(
+  ids: AffiliateId[] = WINTER_SEASONAL_AFFILIATE_IDS
+): WinterAffiliateReadiness[] {
+  return ids.map((id) => ({ id, name: AFFILIATES[id]?.name ?? id, live: isLiveAffiliate(id) }));
+}
+
+/** 「N/M件live化」の1行サマリ（週次KPIメール・admin/report向け）。 */
+export function winterAffiliateReadinessSummary(ids: AffiliateId[] = WINTER_SEASONAL_AFFILIATE_IDS): string {
+  const readiness = detectWinterAffiliateReadiness(ids);
+  const liveCount = readiness.filter((r) => r.live).length;
+  const names = readiness.map((r) => `${r.name}${r.live ? '✅live' : '未申請/承認待ち'}`).join('・');
+  return `冬季アフィリ${liveCount}/${readiness.length}件live化（${names}）`;
+}
+
 function endOfDayMs(iso: string): number {
   return new Date(`${iso}T00:00:00Z`).getTime();
 }
@@ -146,10 +180,17 @@ function evaluateGate(def: RoadmapGateDefinition, actuals: RoadmapGateActuals, n
       return { ...base, status: 'behind', detail: `名簿N=${n}（努力軌道の目安100未満）＝${def.missedAction}` };
     }
     case 'g2-winter-prep': {
-      if (actuals.g2Confirmed === undefined) return { ...base, status: 'manual-check', detail: '数値化不可のチェック項目＝👤が申請完了を確認してg2Confirmedを渡してください' };
+      const winterSummary = winterAffiliateReadinessSummary();
+      if (actuals.g2Confirmed === undefined) {
+        return {
+          ...base,
+          status: 'manual-check',
+          detail: `数値化不可のチェック項目＝👤が申請完了を確認してg2Confirmedを渡してください（自動検出: ${winterSummary}・S-3インデックス確認は引き続き👤確認が必要）`,
+        };
+      }
       return actuals.g2Confirmed
-        ? { ...base, status: 'on-track-max', detail: '冬案件ASP申請＋S-3インデックス確認済' }
-        : { ...base, status: 'behind', detail: `未完了＝${def.missedAction}` };
+        ? { ...base, status: 'on-track-max', detail: `冬案件ASP申請＋S-3インデックス確認済（自動検出: ${winterSummary}）` }
+        : { ...base, status: 'behind', detail: `未完了＝${def.missedAction}（自動検出: ${winterSummary}）` };
     }
     case 'g3-contract-api': {
       const contracts = actuals.contractCount ?? 0;
