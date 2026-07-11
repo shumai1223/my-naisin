@@ -239,6 +239,23 @@ export default function EditorProfilePage() {
                 </ul>
               </section>
 
+              {/* 姉妹サイト（R-7：2サイト共通化・運営者の一貫したブランドストーリー） */}
+              <section className="rounded-2xl border border-indigo-200 bg-indigo-50/40 p-6">
+                <h2 className="text-lg font-black text-slate-900">姉妹サイトについて</h2>
+                <p className="mt-3 text-sm leading-relaxed text-slate-600">
+                  高校受験の内申点・偏差値を扱うMy Naishinに加え、大学受験・進学費用を扱う姉妹サイト
+                  <a
+                    href="https://my-shingaku.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mx-1 font-bold text-indigo-700 underline"
+                  >
+                    My Shingaku
+                  </a>
+                  も同じ方針（公的な一次情報のみを根拠にした決定論的な計算エンジン）で運営しています。
+                </p>
+              </section>
+
               {/* Action */}
               <div className="flex flex-wrap gap-4 items-center p-8 rounded-3xl bg-gradient-to-br from-slate-100 to-white border-2 border-blue-600 shadow-xl">
                 <div className="flex-1">
