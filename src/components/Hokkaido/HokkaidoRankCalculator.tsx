@@ -3,25 +3,7 @@
 import * as React from 'react';
 import { Calculator, RotateCcw } from 'lucide-react';
 import { TargetDistancePanel } from '@/components/TotalScore/TargetDistancePanel';
-
-// 北海道公立高校のランク（A〜M）変換テーブル
-// 内申点の素点（315点満点：中1〜中3 各9教科×5段階×3学年で多少異なるが概算）
-// 簡略化：Aランク=295点以上、Bランク=275、Cランク=255 ... Mランク=15点ごと
-const RANK_TABLE = [
-  { rank: 'A', min: 296, label: '最上位（札幌南・札幌北レベル）' },
-  { rank: 'B', min: 276, label: '上位（札幌西・札幌東・札幌旭丘）' },
-  { rank: 'C', min: 256, label: '上位中堅（札幌月寒・札幌国際情報）' },
-  { rank: 'D', min: 236, label: '中堅上位（札幌北陵・札幌新川）' },
-  { rank: 'E', min: 216, label: '中堅（札幌啓成・市立札幌藻岩）' },
-  { rank: 'F', min: 196, label: '中堅下位（札幌平岸・札幌東陵）' },
-  { rank: 'G', min: 176, label: '一般中堅（札幌厚別・札幌真栄）' },
-  { rank: 'H', min: 156, label: '一般（札幌東豊・市立札幌啓北商業）' },
-  { rank: 'I', min: 136, label: '下位（札幌白石・札幌東商業）' },
-  { rank: 'J', min: 116, label: '下位中堅' },
-  { rank: 'K', min: 96, label: '基礎（札幌琴似工業など）' },
-  { rank: 'L', min: 76, label: '基礎下位' },
-  { rank: 'M', min: 0, label: '要努力' },
-];
+import { HOKKAIDO_TOTAL_SCORE_MAX, computeHokkaidoRank } from '@/lib/total-score/hokkaido';
 
 export interface HokkaidoRankResult {
   total: number;
@@ -41,19 +23,14 @@ export function HokkaidoRankCalculator({ onResult }: Props = {}) {
   const naishin = parseFloat(naishinInput) || 0; // 315点満点
   const gakuryoku = parseFloat(gakuryokuInput) || 0; // 300点満点（5教科 × 60点 = 300点）
 
-  // ランク判定
-  const rankInfo = RANK_TABLE.find((r) => naishin >= r.min) ?? RANK_TABLE[RANK_TABLE.length - 1];
-
-  // 内申点 + 学力検査の総合点（簡略化：合計615点満点）
-  const total = naishin + gakuryoku;
-  const maxTotal = 615;
-  const percent = (total / maxTotal) * 100;
+  const { rank: rankInfo, total, percent } = computeHokkaidoRank({ naishinRaw: naishin, gakuryokuRaw: gakuryoku });
+  const maxTotal = HOKKAIDO_TOTAL_SCORE_MAX;
 
   const hasInput = naishinInput !== '' || gakuryokuInput !== '';
 
   React.useEffect(() => {
     onResult?.(hasInput ? { total, max: maxTotal } : null);
-  }, [hasInput, total, onResult]);
+  }, [hasInput, total, maxTotal, onResult]);
 
   const reset = () => {
     setNaishinInput('');

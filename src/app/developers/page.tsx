@@ -432,7 +432,8 @@ curl ${SITE_URL}/api/status`;
             <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">calculate_chiba_k_value</code>
             <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">calculate_saitama_total_score</code>
             <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">calculate_fukuoka_score</code>
-            の24ツールを呼び出せます。さらに <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">resources/list・resources/read</code>（47都道府県を読める一次資料として公開）と
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">calculate_hokkaido_rank</code>
+            の25ツールを呼び出せます。さらに <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">resources/list・resources/read</code>（47都道府県を読める一次資料として公開）と
             <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">prompts/list・prompts/get</code>（内申点を確定値で答え出典を添える定型プロンプト）に対応しています。
           </p>
 

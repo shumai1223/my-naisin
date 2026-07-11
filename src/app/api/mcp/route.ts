@@ -30,6 +30,7 @@ import { computeAichiTotalScore, AICHI_METHODS } from '@/lib/total-score/aichi';
 import { computeChibaKValue, CHIBA_K_PRESETS } from '@/lib/total-score/chiba';
 import { computeSaitamaTotalScore } from '@/lib/total-score/saitama';
 import { computeFukuokaScore } from '@/lib/total-score/fukuoka';
+import { computeHokkaidoRank } from '@/lib/total-score/hokkaido';
 
 /**
  * MCP互換エンドポイント（堀B / AIネイティブの城①）。
@@ -386,6 +387,18 @@ const TOOLS = [
       type: 'object',
       properties: {
         naishinRaw: { type: 'number', description: '内申点素点（45点満点＝中3の9教科のみ）。' },
+        gakuryokuRaw: { type: 'number', description: '学力検査点素点（300点満点＝5教科×60点）。' },
+      },
+      required: ['naishinRaw', 'gakuryokuRaw'],
+    },
+  },
+  {
+    name: 'calculate_hokkaido_rank',
+    description: '北海道の内申ランク（A〜Mの13段階）と総合点（内申315点満点+学力検査300点満点=615点満点）を計算する。学校別ボーダーは断定せず、ランクは目安の帯判定。',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        naishinRaw: { type: 'number', description: '内申点素点（315点満点＝中1〜中3の9教科・中1×2+中2×2+中3×3の重み）。' },
         gakuryokuRaw: { type: 'number', description: '学力検査点素点（300点満点＝5教科×60点）。' },
       },
       required: ['naishinRaw', 'gakuryokuRaw'],
@@ -752,6 +765,16 @@ async function runTool(name: string, args: Record<string, unknown>) {
       return toolText({ error: 'invalid_params', message: 'naishinRaw・gakuryokuRawは数値で指定してください。' });
     }
     const result = computeFukuokaScore({ naishinRaw, gakuryokuRaw });
+    return toolText(result);
+  }
+
+  if (name === 'calculate_hokkaido_rank') {
+    const naishinRaw = Number(args.naishinRaw);
+    const gakuryokuRaw = Number(args.gakuryokuRaw);
+    if (!Number.isFinite(naishinRaw) || !Number.isFinite(gakuryokuRaw)) {
+      return toolText({ error: 'invalid_params', message: 'naishinRaw・gakuryokuRawは数値で指定してください。' });
+    }
+    const result = computeHokkaidoRank({ naishinRaw, gakuryokuRaw });
     return toolText(result);
   }
 
