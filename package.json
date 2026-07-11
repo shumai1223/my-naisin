@@ -26,6 +26,7 @@
     "newsletter": "npx tsx scripts/newsletter.ts",
     "sales-report": "npx tsx scripts/generate-sales-report.ts",
     "media-kit": "npx tsx scripts/generate-media-kit.ts",
+    "scaffold-site": "npx tsx scripts/scaffold-site.ts",
     "kpi:weekly": "npx tsx scripts/weekly-kpi-report.ts",
     "ev:reconcile": "npx tsx scripts/reconcile-affiliate-economics.ts",
     "push-send": "npx tsx scripts/push-send.ts",
