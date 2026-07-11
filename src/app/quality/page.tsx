@@ -189,15 +189,49 @@ export default function QualityPage() {
           </div>
         </div>
 
-        {/* 統計データへの導線 */}
+        {/* 統計データへの導線＋方法論・限界の開示（TIER N-8・研究/メディア利用向け） */}
         <div className="mb-16 rounded-2xl border border-emerald-200 bg-emerald-50 p-6">
           <h2 className="mb-2 text-lg font-bold text-slate-800">利用者の匿名データによる統計</h2>
           <p className="mb-4 text-sm leading-relaxed text-slate-600">
             計算機の結果を任意でオプトインいただいた匿名データから、内申点・偏差値・総合得点の全国分布を集計・公開しています。個人を特定できる情報は一切含みません。
           </p>
-          <Link href="/stats" className="inline-flex items-center gap-1 text-sm font-bold text-emerald-700 hover:underline">
+          <Link href="/stats" className="mb-6 inline-flex items-center gap-1 text-sm font-bold text-emerald-700 hover:underline">
             全国統計データを見る →
           </Link>
+
+          <div className="mt-4 rounded-xl border border-emerald-200 bg-white p-5">
+            <h3 className="mb-3 text-sm font-bold text-slate-800">研究・メディアの方へ：この統計データの方法論と限界</h3>
+            <ul className="space-y-2.5 text-xs leading-relaxed text-slate-600">
+              <li>
+                <strong className="text-slate-700">収集方法：</strong>
+                各計算機ページ（内申点・偏差値・総合得点）で計算した利用者本人が、任意で「匿名で統計に協力する」にオプトインした場合のみ、計算結果（数値と都道府県）を収集します。氏名・メールアドレス・IPアドレス等の個人を特定できる情報は一切収集していません。同意はいつでも撤回できます。
+              </li>
+              <li>
+                <strong className="text-slate-700">代表性の限界：</strong>
+                本データは全国の中学生から無作為抽出したものではなく、「My Naishinの計算機を使い、かつ統計協力に同意した利用者」に限られる自己選択サンプルです。母集団（全国の中学生）の分布を正確に代表する保証はなく、学術的な統計調査とは性質が異なります。参考値としてご利用ください。
+              </li>
+              <li>
+                <strong className="text-slate-700">プライバシー保護（k-匿名性）：</strong>
+                個人の値が推測されるリスクを避けるため、サンプルサイズが30件未満のセグメントは集計値を非公開にし、件数のみを表示します（
+                <Link href="/stats" className="font-semibold text-emerald-700 underline">/stats</Link>
+                で「収集中」と表示される項目）。
+              </li>
+              <li>
+                <strong className="text-slate-700">入手方法：</strong>
+                JSON API（
+                <code className="rounded bg-slate-100 px-1 py-0.5">/api/stats/distribution</code>
+                ）およびCSV一括ダウンロード（
+                <code className="rounded bg-slate-100 px-1 py-0.5">/api/stats/csv</code>
+                ）で取得できます。引用の際は「出典：My Naishin（https://my-naishin.com/stats）」の明記をお願いします。
+              </li>
+              <li>
+                <strong className="text-slate-700">お問い合わせ：</strong>
+                研究・報道での利用にあたり詳細（収集期間・生データの取り扱い等）についてご質問がある場合は、
+                <Link href="/contact" className="font-semibold text-emerald-700 underline">お問い合わせフォーム</Link>
+                からご連絡ください。
+              </li>
+            </ul>
+          </div>
         </div>
 
         {/* 誤り報告 */}
