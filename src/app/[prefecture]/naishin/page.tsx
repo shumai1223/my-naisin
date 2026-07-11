@@ -238,6 +238,18 @@ const PREFECTURE_META_OVERRIDES: Record<string, { title: string; description: st
     description:
       '【無料】千葉県の内申点は中1〜中3の9教科で素点135点。さらに高校ごとにK値（0.5〜2倍）で換算されるのが特徴です。9教科の評定を入れるだけで30秒で素内申を算出し、志望校ボーダー比較にも対応。2026年度入試対応。',
   },
+  // 以下2県はL-3(CTR自動改善ループ)の実データ抽出で低CTR判定（data/gsc-mining-2026-07-09.json）。
+  // kanagawaの「中1は入らない」型（成功済＝underperformerリスト非掲載）と同じcuriosity-gap手法を横展開。
+  nara: {
+    title: '奈良県の内申点 計算｜中1は含まれない！中2＋中3×2倍の135点満点を30秒で自動計算【2026】 | My Naishin',
+    description:
+      '【無料】奈良県の内申点は中1を除き、中2(45点)＋中3×2倍(90点)の135点満点。中3の比重が2倍になるのが特徴です。9教科の評定を入れるだけで30秒で正確に算出し、志望校ボーダー比較にも対応。2026年度入試対応。',
+  },
+  miyagi: {
+    title: '宮城県の内申点 計算｜実技4教科が2倍になる195点満点を30秒で自動計算【2026】 | My Naishin',
+    description:
+      '【無料】宮城県の内申点は中1〜中3の全学年が対象、実技4教科の評定が2倍で効く195点満点。9教科の評定を入れるだけで30秒で正確に算出。志望校ボーダー比較も対応。2026年度入試対応。',
+  },
 };
 
 export async function generateMetadata({ params }: PageProps) {

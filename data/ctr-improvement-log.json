@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "route": "/nara/naishin",
+    "changedAt": "2026-07-11",
+    "note": "title/descriptionをcuriosity-gap型に変更（kanagawa「中1は入らない」型を横展開＝「中1は含まれない！中2＋中3×2倍」）。data/gsc-mining-2026-07-09.json時点でimp554/CTR1.99%/pos7.9・expectedMinCtr2%",
+    "ctrBefore": 0.019855595667870037
+  },
+  {
+    "route": "/miyagi/naishin",
+    "changedAt": "2026-07-11",
+    "note": "title/descriptionをcuriosity-gap型に変更（「実技4教科が2倍になる195点満点」）。data/gsc-mining-2026-07-09.json時点でimp528/CTR1.89%/pos9.3・expectedMinCtr2%",
+    "ctrBefore": 0.01893939393939394
+  }
+]
