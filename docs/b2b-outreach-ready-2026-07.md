@@ -51,8 +51,8 @@ https://my-naishin.com
 
 ---
 
-## 2. スクパス
-**宛先**: https://schpass.jp/ の問い合わせ窓口から（専用フォームURL未特定・TEL 0120-411-951）
+## 2. スクパス（運営: 株式会社ユアネット）
+**宛先**: https://yournet-jp.com/hp/contact.php （※schpass.jp/contactは「塾・スクール名」必須の顧客専用フォームと判明・不適合。運営元ユアネットの一般法人窓口＝お名前・電話・メール・内容のみでこちらが適合）
 
 **件名**: 内申点計算データAPI/MCPのご案内（My Naishin）
 
