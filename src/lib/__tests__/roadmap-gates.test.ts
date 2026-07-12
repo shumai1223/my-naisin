@@ -10,7 +10,10 @@ import {
   winterAffiliateReadinessSummary,
   WINTER_SEASONAL_AFFILIATE_IDS,
   upcomingGateReminders,
+  B2B_OUTREACH_LOG,
+  latestOutreachSummary,
   type RoadmapGateActuals,
+  type B2bOutreachLogEntry,
 } from '../roadmap-gates';
 
 const D = (iso: string) => new Date(`${iso}T00:00:00Z`);
@@ -112,6 +115,48 @@ describe('G3 直接契約／API（10/31・OR条件とAND条件）', () => {
   });
   it('契約1かつAPI1はon-track-max', () => {
     expect(evalG3({ contractCount: 1, apiCustomers: 1 }).status).toBe('on-track-max');
+  });
+});
+
+describe('B2B_OUTREACH_LOG / latestOutreachSummary（U-1/U-2送信実績のG3補助情報）', () => {
+  it('B2B_OUTREACH_LOGに2026-07-12の20社送信実績が記録されている', () => {
+    const entry = B2B_OUTREACH_LOG.find((e) => e.dateIso === '2026-07-12');
+    expect(entry).toBeDefined();
+    expect(entry?.count).toBe(20);
+  });
+
+  it('latestOutreachSummaryは累計数と最新日を含む', () => {
+    const summary = latestOutreachSummary();
+    expect(summary).toContain('20社');
+    expect(summary).toContain('2026-07-12');
+  });
+
+  it('ログが空なら null を返す（契約/API実測を勝手に補完しない）', () => {
+    expect(latestOutreachSummary([])).toBeNull();
+  });
+
+  it('複数エントリがあれば合計し、最新日のものをピックする', () => {
+    const log: B2bOutreachLogEntry[] = [
+      { dateIso: '2026-07-12', count: 20, note: 'first' },
+      { dateIso: '2026-08-01', count: 5, note: 'second' },
+    ];
+    const summary = latestOutreachSummary(log);
+    expect(summary).toContain('累計25社');
+    expect(summary).toContain('2026-08-01に5社');
+  });
+});
+
+describe('G3 直接契約／APIのdetailに送信実績が補助情報として含まれる', () => {
+  it('未計測でも送信実績サマリを含む', () => {
+    const r = evaluateRoadmapGates({}, D('2026-10-31'))[2];
+    expect(r.detail).toContain('送信実績');
+    expect(r.detail).toContain('成約は未計測');
+  });
+
+  it('behind判定でも送信実績サマリを含む（成約0件と送信済みは別事実として両方見える）', () => {
+    const r = evaluateRoadmapGates({ contractCount: 0, apiCustomers: 0 }, D('2026-10-31'))[2];
+    expect(r.status).toBe('behind');
+    expect(r.detail).toContain('送信実績');
   });
 });
 

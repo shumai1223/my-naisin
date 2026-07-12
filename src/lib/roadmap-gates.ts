@@ -146,6 +146,35 @@ export function winterAffiliateReadinessSummary(ids: AffiliateId[] = WINTER_SEAS
   return `冬季アフィリ${liveCount}/${readiness.length}件live化（${names}）`;
 }
 
+/**
+ * B2Bアウトリーチ送信ログ（U-1/U-2成果の実行記録・👤実施・履歴として追記していく）。
+ *
+ * G3（直接契約／API）判定の補助情報として表示するだけで、contractCount/apiCustomers
+ * （実際に成約した数）を置き換えるものではない＝「送信した」と「成約した」は別の事実
+ * （捏造ゼロ・実測のみ原則）。送信するたびにこの配列へ1エントリ追記する運用。
+ */
+export interface B2bOutreachLogEntry {
+  dateIso: string;
+  count: number;
+  note: string;
+}
+
+export const B2B_OUTREACH_LOG: B2bOutreachLogEntry[] = [
+  {
+    dateIso: '2026-07-12',
+    count: 20,
+    note: 'API/データ連携アウトリーチ（MONETIZATION.md§6のA/B/C/F/G/H区分20社・docs/b2b-outreach-ready-2026-07.md使用）を送信完了。返信・成約は未計測。',
+  },
+];
+
+/** 送信ログの累計を1行サマリで返す（G3のdetailに添える補助情報）。ログが空ならnull。 */
+export function latestOutreachSummary(log: B2bOutreachLogEntry[] = B2B_OUTREACH_LOG): string | null {
+  if (log.length === 0) return null;
+  const totalSent = log.reduce((sum, e) => sum + e.count, 0);
+  const latest = [...log].sort((a, b) => b.dateIso.localeCompare(a.dateIso))[0];
+  return `送信実績: 累計${totalSent}社（最新${latest.dateIso}に${latest.count}社）・返信/成約は未計測`;
+}
+
 function endOfDayMs(iso: string): number {
   return new Date(`${iso}T00:00:00Z`).getTime();
 }
@@ -195,12 +224,14 @@ function evaluateGate(def: RoadmapGateDefinition, actuals: RoadmapGateActuals, n
     case 'g3-contract-api': {
       const contracts = actuals.contractCount ?? 0;
       const api = actuals.apiCustomers ?? 0;
+      const outreachNote = latestOutreachSummary();
+      const suffix = outreachNote ? `（${outreachNote}）` : '';
       if (actuals.contractCount === undefined && actuals.apiCustomers === undefined) {
-        return { ...base, status: 'unmeasured', detail: '契約社数・API顧客数が未計測' };
+        return { ...base, status: 'unmeasured', detail: `契約社数・API顧客数が未計測${suffix}` };
       }
-      if (contracts >= 1 && api >= 1) return { ...base, status: 'on-track-max', detail: `契約${contracts}社・API${api}社＝最高軌道` };
-      if (contracts >= 1 || api >= 1) return { ...base, status: 'on-track-effort', detail: `契約${contracts}社・API${api}社＝努力軌道（片方のみ）` };
-      return { ...base, status: 'behind', detail: `契約0社・API0社＝${def.missedAction}` };
+      if (contracts >= 1 && api >= 1) return { ...base, status: 'on-track-max', detail: `契約${contracts}社・API${api}社＝最高軌道${suffix}` };
+      if (contracts >= 1 || api >= 1) return { ...base, status: 'on-track-effort', detail: `契約${contracts}社・API${api}社＝努力軌道（片方のみ）${suffix}` };
+      return { ...base, status: 'behind', detail: `契約0社・API0社＝${def.missedAction}${suffix}` };
     }
     case 'g4-cp-november': {
       if (actuals.cpThisMonth === undefined || actuals.conversionsThisMonth === undefined) {
