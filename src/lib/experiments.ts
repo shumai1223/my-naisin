@@ -50,7 +50,7 @@ export interface ExperimentDef {
   /** arms[0] を対照群（control）とみなす。 */
   arms: ExperimentArm[];
   /** 効きを突合する主要指標（GA4イベント）。 */
-  primaryMetric: 'cta_view' | 'affiliate_click' | 'lead_submit' | 'line_friend_click';
+  primaryMetric: 'cta_view' | 'affiliate_click' | 'lead_submit' | 'line_friend_click' | 'unlock_granted';
   /** 関係する設置面（勝者を lead-config に昇格させる際の対象）。 */
   placement?: LeadPlacement;
   /** decided のとき採用したアーム。 */
@@ -170,6 +170,36 @@ export const EXPERIMENTS: ExperimentDef[] = [
     primaryMetric: 'line_friend_click',
     placement: 'result',
     note: 'SaveResultCTA自体は結果確定後にマウントされる設計のため、ここでの遅延はLINE受け皿ブロックの表示タイミングのみを指す（フォーム自体は変わらず表示）。',
+    startedAt: '2026-07-12',
+  },
+  {
+    // U-3（2026-07-12）：紹介・解放機構（T-1・UnlockGate）のティザー文言A/B。3アーム。
+    // 好奇心訴求（現行・control）vs 損失回避訴求 vs 具体的ベネフィット訴求で unlock_granted（分母=unlock_teaser_view）を比較する。
+    id: 'unlock-teaser-copy-2026',
+    hypothesis: '解放ゲートのティザー文言を「見れていない」型の損失回避訴求、または「順位がわかる」型の具体的ベネフィット訴求にすると、現行の好奇心訴求より unlock_granted（共有/LINE追加による解放）が上がる。',
+    status: 'running',
+    arms: [
+      {
+        id: 'control',
+        label: '好奇心訴求（現行）',
+        heading: '全国の協力者と比べてみませんか？',
+        body: 'おうちの人に結果を送るか、保護者向けLINEに登録すると、全国の協力者データと比べた「あなたの立ち位置」が見られるようになります。',
+      },
+      {
+        id: 'loss',
+        label: '損失回避訴求',
+        heading: 'あなたの立ち位置、まだ見れていません',
+        body: 'おうちの人に送るかLINE登録をするまで、全国の協力者データと比べた「あなたの立ち位置」は見られないままです。',
+      },
+      {
+        id: 'benefit',
+        label: '具体的ベネフィット訴求',
+        heading: '同学年・同都道府県との差が、数字でわかります',
+        body: 'おうちの人に送るかLINE登録をすると、同学年・同都道府県の受験生と比べた実際の順位（パーセンタイル）がすぐにわかります。',
+      },
+    ],
+    primaryMetric: 'unlock_granted',
+    note: 'UnlockGateのteaserTitle/teaserBody未指定時（=全設置面共通）の既定文言を差し替える。分母となるunlock_teaser_viewも同時計測。送信先・解放条件（共有 or LINE追加）は3アームとも同一。',
     startedAt: '2026-07-12',
   },
   {

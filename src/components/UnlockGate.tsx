@@ -9,10 +9,30 @@ import { lineAddUrl } from '@/lib/line';
 import { APP_NAME } from '@/lib/constants';
 import { ParentShareLinkButton } from '@/components/ParentShareLinkButton';
 import type { ParentShareContext } from '@/lib/share';
+import { useExperiment } from '@/components/ab/useExperiment';
 
 function isNum(v: number | null | undefined): v is number {
   return typeof v === 'number' && Number.isFinite(v);
 }
+
+/** unlock-teaser-copy-2026（U-3・[[experiments]]）のアーム。安定参照のためモジュールレベルに置く。 */
+const UNLOCK_TEASER_ARMS = [{ id: 'control' as const }, { id: 'loss' as const }, { id: 'benefit' as const }];
+
+/** unlock-teaser-copy-2026 の各アームのティザー文言（experiments.ts のheading/bodyと同一内容）。 */
+const UNLOCK_TEASER_COPY: Record<'control' | 'loss' | 'benefit', { title: string; body: string }> = {
+  control: {
+    title: '全国の協力者と比べてみませんか？',
+    body: 'おうちの人に結果を送るか、保護者向けLINEに登録すると、全国の協力者データと比べた「あなたの立ち位置」が見られるようになります。',
+  },
+  loss: {
+    title: 'あなたの立ち位置、まだ見れていません',
+    body: 'おうちの人に送るかLINE登録をするまで、全国の協力者データと比べた「あなたの立ち位置」は見られないままです。',
+  },
+  benefit: {
+    title: '同学年・同都道府県との差が、数字でわかります',
+    body: 'おうちの人に送るかLINE登録をすると、同学年・同都道府県の受験生と比べた実際の順位（パーセンタイル）がすぐにわかります。',
+  },
+};
 
 /**
  * 紹介・解放機構（T-1）の解放ゲート。
@@ -27,15 +47,16 @@ function isNum(v: number | null | undefined): v is number {
  * にフォールバックする。既存のParentWindowBridgeも同じ理由でhensachi系にはmaxを渡していない
  * （[[fable5-loop-protocol]]の捏造ゼロ原則を share/カード表示にも適用）。
  *
- * teaserTitle/teaserBody未指定時は既定の「全国統計」向け文言を使う。
+ * teaserTitle/teaserBody未指定時は unlock-teaser-copy-2026（U-3）のA/Bで決まる既定文言を使う
+ * （全設置面共通・呼び出し側で明示指定した場合はそちらを優先しA/Bの対象外にする）。
  */
 export function UnlockGate({
   children,
   shareCtx,
   tool,
   placement,
-  teaserTitle = '全国の協力者と比べてみませんか？',
-  teaserBody = 'おうちの人に結果を送るか、保護者向けLINEに登録すると、全国の協力者データと比べた「あなたの立ち位置」が見られるようになります。',
+  teaserTitle,
+  teaserBody,
   className = '',
 }: {
   children: React.ReactNode;
@@ -49,6 +70,9 @@ export function UnlockGate({
   const [unlocked, setUnlocked] = React.useState(false);
   const [copied, setCopied] = React.useState(false);
   const viewedRef = React.useRef(false);
+  const teaserVariant = useExperiment('unlock-teaser-copy-2026', UNLOCK_TEASER_ARMS);
+  const resolvedTeaserTitle = teaserTitle ?? UNLOCK_TEASER_COPY[teaserVariant].title;
+  const resolvedTeaserBody = teaserBody ?? UNLOCK_TEASER_COPY[teaserVariant].body;
 
   React.useEffect(() => {
     setUnlocked(readUnlockGate().granted);
@@ -119,9 +143,9 @@ export function UnlockGate({
       </div>
       <h3 className="mb-2 flex items-center gap-1.5 text-lg font-bold leading-snug text-slate-900 md:text-xl">
         <Sparkles className="h-5 w-5 text-amber-500" />
-        {teaserTitle}
+        {resolvedTeaserTitle}
       </h3>
-      <p className="mb-4 text-sm leading-relaxed text-slate-600">{teaserBody}</p>
+      <p className="mb-4 text-sm leading-relaxed text-slate-600">{resolvedTeaserBody}</p>
 
       <div className="grid gap-2 sm:grid-cols-2">
         {hasCard ? (
