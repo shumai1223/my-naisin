@@ -238,7 +238,7 @@ Stripeダッシュボードで Webhook エンドポイントに `https://my-nais
 
 | # | 社名 | カテゴリ | 問い合わせURL | ステータス |
 | --- | --- | --- | --- | --- |
-| 1 | Comiru（株式会社POPER） | A. 塾SaaS（校務/生徒管理） | [comiru.co/contact](https://comiru.co/contact/) | ✅確認済（学習塾特化型SaaS、導入3,000教室超） |
+| 1 | Comiru（株式会社POPER） | A. 塾SaaS（校務/生徒管理） | [poper.co/contact](http://poper.co/contact/)（一般法人窓口。comiru.co/contactは塾の契約状況必須の顧客専用フォームで不適合と判明） | ✅確認済（学習塾特化型SaaS、導入3,000教室超） |
 | 2 | スクパス | A. 塾SaaS | [schpass.jp](https://schpass.jp/)（専用フォーム未特定・TEL 0120-411-951） | ✅確認済（学習塾・スクール向け管理システム、導入2,400施設超） |
 | 3 | Grow | A. 塾SaaS | [mplanning-info.com](https://www.mplanning-info.com/)（専用フォーム未特定・TEL 03-3519-6951） | ✅確認済（学習塾トータル管理システム） |
 | 4 | E-Space | A. 塾SaaS | [e-space.club/contact](https://e-space.club/contact/) | ✅確認済（小〜中規模スクール向けスケジュール管理SaaS） |
