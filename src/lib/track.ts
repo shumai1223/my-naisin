@@ -84,6 +84,14 @@ export const EVENTS = {
   // ── 紹介・解放機構（T-1・G1名簿velocityの主エンジン） ──
   UNLOCK_TEASER_VIEW: 'unlock_teaser_view', // ロック中コンテンツ（解放前の誘い）が表示された
   UNLOCK_GRANTED: 'unlock_granted', // 共有/LINE追加で解放された（分母=unlock_teaser_view）
+  // ── 匿名統計オプトイン（S-1一次データ堀のファネル計装 2026-07-13） ──
+  // 背景: 結線後2日で stats_submissions=0 だが「表示ゼロ/同意ゼロ/送信失敗」を区別する
+  // 計測が無く盲目だった。この4段でファネルのどこが細いかを特定する。
+  STATS_OPTIN_VIEW: 'stats_optin_view', // 送信可能な結果と共にオプトインUIが表示された（分母）
+  STATS_OPTIN_GRANT: 'stats_optin_grant', // 同意チェックON
+  STATS_OPTIN_REVOKE: 'stats_optin_revoke', // 同意撤回
+  STATS_SUBMIT_OK: 'stats_submit_ok', // /api/stats/submit が2xx＝サーバ受領まで実証
+  STATS_SUBMIT_FAIL: 'stats_submit_fail', // 送信失敗（status付き）＝パイプ破断の検知
 } as const;
 
 export type AnalyticsEvent = (typeof EVENTS)[keyof typeof EVENTS];

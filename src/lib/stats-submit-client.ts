@@ -7,6 +7,7 @@
  */
 import { hasStatsConsent } from '@/lib/stats-consent';
 import { isValidStatsSubmission, type StatsSubmissionInput } from '@/lib/stats-aggregation';
+import { trackEvent, EVENTS } from '@/lib/track';
 
 /** 同意済みなら計算結果を匿名統計として送信する。未同意・不正値なら何もしない。 */
 export async function submitStatsResult(input: StatsSubmissionInput): Promise<void> {
@@ -14,13 +15,20 @@ export async function submitStatsResult(input: StatsSubmissionInput): Promise<vo
   if (!isValidStatsSubmission(input)) return;
   if (typeof fetch !== 'function') return;
   try {
-    await fetch('/api/stats/submit', {
+    const res = await fetch('/api/stats/submit', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(input),
       keepalive: true,
     });
+    // サーバ受領まで実証する計装（S-1ファネルの最終段。metricのみでPIIなし）。
+    if (res.ok) {
+      trackEvent(EVENTS.STATS_SUBMIT_OK, { metric: input.metric });
+    } else {
+      trackEvent(EVENTS.STATS_SUBMIT_FAIL, { metric: input.metric, status: res.status });
+    }
   } catch {
     // ベストエフォート。ネットワーク不調等で失敗しても計算機の利用には影響させない。
+    trackEvent(EVENTS.STATS_SUBMIT_FAIL, { metric: input.metric, status: 'network' });
   }
 }

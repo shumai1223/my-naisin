@@ -13,6 +13,7 @@ import { BarChart3, ShieldCheck } from 'lucide-react';
 
 import { readStatsConsent, grantStatsConsent, revokeStatsConsent } from '@/lib/stats-consent';
 import { submitStatsResult } from '@/lib/stats-submit-client';
+import { trackEvent, EVENTS } from '@/lib/track';
 import type { StatsMetric } from '@/lib/stats-aggregation';
 
 interface StatsOptInProps {
@@ -28,12 +29,21 @@ export function StatsOptIn({ className = '', metric, value, maxValue, prefecture
   const [granted, setGranted] = useState(false);
   const [consentedAt, setConsentedAt] = useState<string | null>(null);
   const submittedSignature = useRef<string | null>(null);
+  const viewTracked = useRef(false);
 
   useEffect(() => {
     const state = readStatsConsent();
     setGranted(state.granted);
     setConsentedAt(state.consentedAt);
   }, []);
+
+  // ファネル分母の計装: 「送信可能な結果を伴って表示された」を1マウント1回だけ記録。
+  // これが無いと stats_submissions=0 の原因（表示ゼロ/同意ゼロ/送信失敗）を区別できない。
+  useEffect(() => {
+    if (viewTracked.current || !metric || typeof value !== 'number' || !Number.isFinite(value)) return;
+    viewTracked.current = true;
+    trackEvent(EVENTS.STATS_OPTIN_VIEW, { metric, pref: prefectureCode ?? 'none' });
+  }, [metric, value, prefectureCode]);
 
   useEffect(() => {
     if (!granted || !metric || typeof value !== 'number' || !Number.isFinite(value)) return;
@@ -48,10 +58,12 @@ export function StatsOptIn({ className = '', metric, value, maxValue, prefecture
       const state = revokeStatsConsent();
       setGranted(state.granted);
       setConsentedAt(state.consentedAt);
+      trackEvent(EVENTS.STATS_OPTIN_REVOKE, { metric: metric ?? 'none' });
     } else {
       const state = grantStatsConsent();
       setGranted(state.granted);
       setConsentedAt(state.consentedAt);
+      trackEvent(EVENTS.STATS_OPTIN_GRANT, { metric: metric ?? 'none', pref: prefectureCode ?? 'none' });
     }
   };
 
