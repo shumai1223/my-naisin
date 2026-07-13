@@ -38,7 +38,8 @@ export function SiteSchema() {
       '偏差値',
       '都道府県別 入試制度',
     ],
-    sameAs: ['https://github.com/shumai1223'],
+    // 公式アカウント群。X(2026-07-13開設)はエンティティ確立とE-E-A-Tの補強に効く。
+    sameAs: ['https://github.com/shumai1223', 'https://x.com/My_Naishin'],
   };
 
   const website = {

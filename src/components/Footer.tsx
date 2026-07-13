@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Heart, FileText, Shield, Mail, AlertTriangle, Sparkles, BookOpen, User, Target, MapPin, ChevronRight, Database } from 'lucide-react';
+import { Heart, FileText, Shield, Mail, AlertTriangle, Sparkles, BookOpen, User, Target, MapPin, ChevronRight, Database, Twitter } from 'lucide-react';
 
 import { APP_NAME } from '@/lib/constants';
 
@@ -219,6 +219,15 @@ export function Footer() {
                 <Heart className="h-3 w-3" />
                 保護者の方へ
               </Link>
+              <a
+                href="https://x.com/My_Naishin"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 rounded-full bg-sky-50 px-3 py-1.5 text-xs font-medium text-sky-700 transition-all hover:bg-sky-100"
+              >
+                <Twitter className="h-3 w-3" />
+                公式X（開発の裏側）
+              </a>
             </div>
           </div>
         </div>
