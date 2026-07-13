@@ -14,12 +14,30 @@ const BOT_UA_RE =
   /bot|crawl|spider|slurp|mediapartners|googlebot|bing|yandex|baidu|duckduck|sogou|exabot|facebookexternalhit|facebot|ia_archiver|ahrefs|semrush|mj12|dotbot|petalbot|bytespider|headless|phantom|puppeteer|playwright|selenium|lighthouse|gtmetrix|pingdom|uptime|statuscake|monitor|python|curl|wget|libwww|okhttp|java(\/| )|go-http|scrapy|node-fetch|axios|postman|insomnia|scraper|scan|preview|embed|feedfetcher|apache-httpclient|gptbot|chatgpt|oai-searchbot|claudebot|claude-web|anthropic|ccbot|amazonbot|applebot|perplexity|google-extended|cohere|diffbot|dataforseo|serpstat|screaming|httpx|zgrab|masscan|nuclei|censys|nikto|wpscan|fasthttp|httpclient|guzzle|colly|dalvik|electron|crawler|fetch\b/i;
 
 /**
+ * 化石UA＝実ブラウザ集団がもう存在しない古さのUAを名乗る既知ボット。
+ * 2026-07-13実測: 「iPhone OS 13_2_3」(2019年11月のiOS)を名乗る分散スクレイパが
+ * 98IP・118クリックで/goを総当たりしASPへ到達していた。2026年にこのUAで
+ * アフィリンクを踏む実ユーザー集団は統計的に存在しないため丸ごとbot扱いする。
+ */
+const FROZEN_UA_RE = /iPhone OS 13_2_3/;
+
+/**
  * UA がボット/スクリプトらしいか。空 UA も bot 扱い（true）。
  * /go ルートで true のときは ASP に飛ばさず・記録もしない。
  */
 export function isBotUserAgent(ua: string | null | undefined): boolean {
   if (!ua || !ua.trim()) return true;
-  return BOT_UA_RE.test(ua);
+  return BOT_UA_RE.test(ua) || FROZEN_UA_RE.test(ua);
+}
+
+/**
+ * prefetch/prerender（ブラウザやアプリの先読み）リクエストか。
+ * クリック意図が無いままASPへ転送するとA8等に無効クリックが計上されるため、/go では 204 で止める。
+ * Chrome/Edge は Sec-Purpose、旧仕様は Purpose、Firefox は X-Moz を送る。
+ */
+export function isPrefetchRequest(headers: { get(name: string): string | null }): boolean {
+  const purpose = `${headers.get('sec-purpose') ?? ''} ${headers.get('purpose') ?? ''} ${headers.get('x-moz') ?? ''}`.toLowerCase();
+  return /prefetch|prerender|preview/.test(purpose);
 }
 
 /**

@@ -1,4 +1,4 @@
-import { isBotUserAgent } from '@/lib/bot-filter';
+import { isBotUserAgent, isPrefetchRequest } from '@/lib/bot-filter';
 
 describe('isBotUserAgent', () => {
   it('実ブラウザ(PC/モバイル)は bot 扱いしない', () => {
@@ -30,5 +30,36 @@ describe('isBotUserAgent', () => {
     expect(isBotUserAgent('   ')).toBe(true);
     expect(isBotUserAgent(null)).toBe(true);
     expect(isBotUserAgent(undefined)).toBe(true);
+  });
+
+  it('化石UA(iOS13.2.3偽装スクレイパ)は bot 扱い・現行iOSは通す', () => {
+    expect(
+      isBotUserAgent(
+        'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1'
+      )
+    ).toBe(true);
+    expect(
+      isBotUserAgent(
+        'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1'
+      )
+    ).toBe(false);
+  });
+});
+
+describe('isPrefetchRequest', () => {
+  const headersOf = (map: Record<string, string>) => ({
+    get: (name: string) => map[name.toLowerCase()] ?? null,
+  });
+
+  it('Sec-Purpose/Purpose/X-Moz の先読みを検出する', () => {
+    expect(isPrefetchRequest(headersOf({ 'sec-purpose': 'prefetch' }))).toBe(true);
+    expect(isPrefetchRequest(headersOf({ 'sec-purpose': 'prefetch;prerender' }))).toBe(true);
+    expect(isPrefetchRequest(headersOf({ purpose: 'prefetch' }))).toBe(true);
+    expect(isPrefetchRequest(headersOf({ 'x-moz': 'prefetch' }))).toBe(true);
+  });
+
+  it('通常リクエストは先読み扱いしない', () => {
+    expect(isPrefetchRequest(headersOf({}))).toBe(false);
+    expect(isPrefetchRequest(headersOf({ 'sec-purpose': '' }))).toBe(false);
   });
 });

@@ -2,7 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 
 import { AFFILIATES, isLiveAffiliate, type AffiliateId } from '@/lib/affiliates';
 import { persistClick, countRecentClicksByIp } from '@/lib/clicks-db';
-import { isBotUserAgent } from '@/lib/bot-filter';
+import { isBotUserAgent, isInternalReferer, isPrefetchRequest } from '@/lib/bot-filter';
+import { renderClickHopHtml } from '@/lib/click-hop';
 
 /**
  * ファーストパーティ・リダイレクタ（P1-1/P1-4）。
@@ -16,6 +17,13 @@ import { isBotUserAgent } from '@/lib/bot-filter';
  *
  * セキュリティ：302 先は AFFILIATES の allowlist の href だけ（オープンリダイレクトにしない）。
  * 不明ID・pending・href未設定はホームへ退避（デッドリンクを出さない）。
+ *
+ * 無効クリック対策（2026-07-13・4段構え）：
+ *   ① bot UA / 化石UA / 空UA → ホーム退避（記録なし）
+ *   ①' prefetch/prerender → 204（記録なし）
+ *   ② 同一IPハッシュの短時間バースト → ホーム退避（記録なし）
+ *   ③ 内部 referer なし → 302ではなくJSホップページ（click-hop.ts）。JS実行する実ブラウザのみASPへ。
+ *   内部 referer あり（自サイト面からの通常クリック）だけが従来どおり即302。
  */
 
 const SITE = 'https://my-naishin.com';
@@ -72,6 +80,11 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
     return NextResponse.redirect(`${SITE}/`, { status: 302, headers: { 'Cache-Control': 'no-store' } });
   }
 
+  // ①' 先読み（prefetch/prerender）はクリック意図が無い → ASPにも D1 にも計上せず 204 で止める。
+  if (isPrefetchRequest(request.headers)) {
+    return new NextResponse(null, { status: 204, headers: { 'Cache-Control': 'no-store' } });
+  }
+
   // ② 同一IPの短時間バースト（ブラウザ風UAのbot・連打）をレート制限で弾く。
   // 直近120秒に同一IPハッシュで6件以上＝人間の購買行動ではない → ホーム退避（記録もしない）。フェイルオープン。
   const ipRaw = (request.headers.get('cf-connecting-ip') ?? request.headers.get('x-forwarded-for') ?? '').split(',')[0];
@@ -95,6 +108,22 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
     });
   } catch {
     /* no-op：計測はベストエフォート、送客を止めない */
+  }
+
+  // ③ 内部 referer を伴わないアクセスは即302しない（2026-07-13）。
+  // ブラウザUA偽装の分散スクレイパ（iOS13.2.3・98IP）が /go 直叩き→A8等に無効クリックが
+  // 実クリックの約9倍計上されていた実測への対策。JSを実行する実ブラウザ（LINE/メール経由の
+  // 実ユーザー含む）だけがホップページ経由でASPへ進む。D1記録は上で済んでおり suspect として
+  // 分類される（ダッシュボードの信頼分類は従来どおり）。
+  if (!isInternalReferer(refererRaw)) {
+    return new NextResponse(renderClickHopHtml(affiliate.href), {
+      status: 200,
+      headers: {
+        'Content-Type': 'text/html; charset=utf-8',
+        'Cache-Control': 'no-store',
+        'X-Robots-Tag': 'noindex, nofollow',
+      },
+    });
   }
 
   return NextResponse.redirect(affiliate.href, { status: 302, headers: { 'Cache-Control': 'no-store' } });
