@@ -29,7 +29,13 @@
       "database_name": "my-naishin-leads",
       "database_id": "6d0135df-de11-4838-ace8-121a45a1ad4e"
     }
-  ]
+  ],
+  "observability": {
+    "logs": {
+      "enabled": false,
+      "invocation_logs": true
+    }
+  }
   //
   // ── env 変数（Dashboard か `wrangler secret put` で設定。未設定なら各機能は休眠） ──
   //   ADMIN_REPORT_TOKEN           … /admin/report?token=… の認証トークン（送客実績レポート・H5）
