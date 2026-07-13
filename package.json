@@ -40,7 +40,9 @@
     "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
     "gsc:auth": "node --use-system-ca scripts/gsc-auth.mjs",
     "gsc:mcp": "node --use-system-ca scripts/gsc-mcp.mjs",
-    "gsc": "node --use-system-ca scripts/gsc.mjs"
+    "gsc": "node --use-system-ca scripts/gsc.mjs",
+    "gmail:auth": "node --use-system-ca scripts/gmail-auth.mjs",
+    "gmail:mcp": "node --use-system-ca scripts/gmail-mcp.mjs"
   },
   "dependencies": {
     "@googleapis/searchconsole": "^6.0.1",
@@ -62,6 +64,7 @@
   "devDependencies": {
     "@googleapis/analyticsadmin": "^17.0.0",
     "@googleapis/analyticsdata": "^5.0.1",
+    "@googleapis/gmail": "^17.0.0",
     "@modelcontextprotocol/sdk": "^1.29.0",
     "@playwright/test": "^1.49.0",
     "@types/babel__core": "^7.20.5",

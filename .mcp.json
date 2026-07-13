@@ -7,6 +7,10 @@
     "gsc": {
       "command": "node",
       "args": ["--use-system-ca", "scripts/gsc-mcp.mjs"]
+    },
+    "gmail": {
+      "command": "node",
+      "args": ["--use-system-ca", "scripts/gmail-mcp.mjs"]
     }
   }
 }
