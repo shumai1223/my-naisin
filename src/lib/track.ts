@@ -198,11 +198,17 @@ export function installScrollDepthTracking(ctx: FunnelContext = {}): () => void 
   if (typeof window === 'undefined') return () => {};
   const milestones = [25, 50, 75, 100];
   const fired = new Set<number>();
+  // 2026-07-14: bodyがスクロールコンテナの構造（globals.css html,body{height:100%}）では
+  // Chrome/Android系で window.scrollY が常に0になり深度が測れない（iOS Safariのみ動く偏り）。
+  // window/html/body を横断で読み、capture付きで要素スクロールのイベントも拾う。
   const onScroll = () => {
     const doc = document.documentElement;
-    const scrollable = doc.scrollHeight - window.innerHeight;
+    const body = document.body;
+    const contentH = Math.max(doc.scrollHeight, body?.scrollHeight ?? 0);
+    const scrollable = contentH - window.innerHeight;
     if (scrollable <= 0) return;
-    const pct = Math.min(100, Math.round((window.scrollY / scrollable) * 100));
+    const y = Math.max(window.scrollY || 0, doc.scrollTop || 0, body?.scrollTop ?? 0);
+    const pct = Math.min(100, Math.round((y / scrollable) * 100));
     for (const m of milestones) {
       if (pct >= m && !fired.has(m)) {
         fired.add(m);
@@ -210,6 +216,6 @@ export function installScrollDepthTracking(ctx: FunnelContext = {}): () => void 
       }
     }
   };
-  window.addEventListener('scroll', onScroll, { passive: true });
-  return () => window.removeEventListener('scroll', onScroll);
+  window.addEventListener('scroll', onScroll, { passive: true, capture: true });
+  return () => window.removeEventListener('scroll', onScroll, { capture: true } as EventListenerOptions);
 }

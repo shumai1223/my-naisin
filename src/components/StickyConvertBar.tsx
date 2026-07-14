@@ -43,12 +43,22 @@ export function StickyConvertBar() {
     } catch {
       /* ストレージ不可でも表示は継続（安全側＝出す） */
     }
+    // 2026-07-14: globals.cssの html,body{height:100%;overflow-y:auto} により body がスクロール
+    // コンテナになっていて、Chrome/Android系では window.scrollY が常に0（バーが誰にも出ない）。
+    // iOS Safariはbodyスクロールをwindowに昇格するため一部ユーザーだけ動いていた。
+    // → window/html/body の scrollTop を横断で読み、capture付きリスナーで要素スクロールも拾う。
+    const scrolledY = () =>
+      Math.max(
+        window.scrollY || 0,
+        document.documentElement?.scrollTop || 0,
+        document.body?.scrollTop || 0
+      );
     const onScroll = () => {
-      if (window.scrollY > STICKY_ARM_SCROLL) setVisible(true);
+      if (scrolledY() > STICKY_ARM_SCROLL) setVisible(true);
     };
     onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    window.addEventListener('scroll', onScroll, { passive: true, capture: true });
+    return () => window.removeEventListener('scroll', onScroll, { capture: true } as EventListenerOptions);
   }, [eligible, pathname]);
 
   if (!eligible || dismissed || !visible) return null;
