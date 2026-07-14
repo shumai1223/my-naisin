@@ -289,9 +289,13 @@ export function SaveResultCTA({
 
   return (
     <section
-      className={`overflow-hidden rounded-2xl border border-sky-200 bg-gradient-to-br from-sky-50 via-blue-50/60 to-white p-6 shadow-sm md:p-7 ${className}`}
+      className={`relative overflow-hidden rounded-2xl border-2 border-sky-300 bg-gradient-to-br from-sky-50 via-blue-50 to-white p-6 shadow-lg shadow-sky-100/80 md:p-7 ${className}`}
     >
-      <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-bold text-sky-700 ring-1 ring-sky-200">
+      {/* 視線を止めるアクセント光（2026-07-14: 淡色カードの連続で名簿CTAが埋没する👤指摘への強調。
+          UnlockGateと同じ「報酬カード」の視覚言語＝濃縁+塗りバッジ+強影で結果直下の主役に格上げ） */}
+      <div className="pointer-events-none absolute -left-12 -top-12 h-40 w-40 rounded-full bg-sky-300/30 blur-2xl" />
+
+      <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-sky-600 px-3 py-1 text-xs font-bold text-white shadow-sm">
         <Bookmark className="h-3.5 w-3.5" />
         結果を保存・受け取る
       </div>
