@@ -99,6 +99,53 @@ curl ${SITE_URL}/api/naishin/tokyo
 # 3) APIが生きているか確認（認証不要）
 curl ${SITE_URL}/api/status`;
 
+  // V-10：模試会社・塾管理SaaS向けの組み込み例。
+  // calculate_naishin（生徒の評定→内申点）はMCP経由のみ公開（RESTのGETには存在しない）。
+  // total-score APIは47都道府県のうち5県（hyogo/kyoto/tochigi/niigata/tottori）のみ対応（他は404）＝
+  // 内申点APIの47都道府県対応と範囲が異なる点を明記し、対応外の県で無言でエラーにならないよう404を分岐する。
+  const integrationTsExample = `// 生徒の評定（1〜5）から内申点を計算する（全47都道府県対応・MCP経由）
+async function calculateNaishin(prefectureCode: string, scores: Record<string, number>) {
+  const res = await fetch('${SITE_URL}/api/mcp', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      jsonrpc: '2.0',
+      id: 1,
+      method: 'tools/call',
+      params: { name: 'calculate_naishin', arguments: { prefectureCode, scores } },
+    }),
+  });
+  const rpc = await res.json();
+  // MCPのtools/callはcontent[0].textにJSON文字列で結果が入る（JSON-RPC 2.0標準）
+  return JSON.parse(rpc.result.content[0].text) as {
+    total: number; max: number; percent: number; prefectureCode: string; prefectureName: string;
+  };
+}
+
+// 内申点×当日点の総合得点まで計算する（対応5県のみ・404は「非対応」として分岐）
+async function calculateTotalScoreIfSupported(prefectureCode: string, academicRaw: number, reportRaw: number) {
+  const res = await fetch(
+    \`${SITE_URL}/api/total-score/\${prefectureCode}?academicRaw=\${academicRaw}&reportRaw=\${reportRaw}\`
+  );
+  if (res.status === 404) return null; // 総合得点APIは兵庫・京都・栃木・新潟・鳥取の5県のみ対応
+  return res.json() as Promise<{ total: number; totalMax: number; academic: number; report: number }>;
+}
+
+// 模試の成績帳票に「合否判定材料」として差し込む例
+const naishin = await calculateNaishin('hyogo', {
+  japanese: 4, math: 4, english: 5, science: 3, social: 4, music: 4, art: 3, pe: 4, tech: 3,
+});
+const totalScore = await calculateTotalScoreIfSupported('hyogo', /* 学力検査素点 */ 420, /* 内申素点 */ naishin.total);
+`;
+
+  const integrationCurlExample = `# 1) 生徒の評定から内申点を計算（MCP・全47都道府県）
+curl -X POST ${SITE_URL}/api/mcp \\
+  -H "Content-Type: application/json" \\
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"calculate_naishin","arguments":{"prefectureCode":"hyogo","scores":{"japanese":4,"math":4,"english":5,"science":3,"social":4,"music":4,"art":3,"pe":4,"tech":3}}}}'
+
+# 2) 内申点×当日点の総合得点（対応5県のみ・非対応県は404）
+curl "${SITE_URL}/api/total-score/hyogo?academicRaw=420&reportRaw=200"`;
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
       <BreadcrumbSchema
@@ -188,6 +235,33 @@ curl ${SITE_URL}/api/status`;
               </p>
             </div>
           </div>
+        </section>
+
+        {/* 組み込みコードサンプル（模試会社・塾管理SaaS向け・V-10） */}
+        <section className="mb-10 rounded-2xl border-2 border-emerald-200 bg-emerald-50/40 p-6">
+          <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
+            <Code2 className="h-5 w-5 text-emerald-600" />
+            組み込みコードサンプル：模試の合否判定に内申計算を足す
+          </h2>
+          <p className="mb-3 text-sm leading-relaxed text-slate-600">
+            模試の成績帳票・塾管理SaaSに、47都道府県それぞれ異なる内申点の計算ロジックを自前実装せずに組み込む例です。
+            生徒の評定（1〜5）から内申点を出す<code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">calculate_naishin</code>
+            はMCP経由のみで提供（REST GETには存在しません）。内申×当日点の総合得点API
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">/api/total-score/{'{code}'}</code>
+            は現在<strong>兵庫・京都・栃木・新潟・鳥取の5都道府県のみ</strong>対応（内申点APIの47都道府県対応とは範囲が異なります）。
+            対応外の県は404を返すので、下記のように分岐してください。
+          </p>
+          <h3 className="mb-2 mt-4 text-sm font-bold text-slate-700">TypeScript（fetch）</h3>
+          <CodeBlock>{integrationTsExample}</CodeBlock>
+          <h3 className="mb-2 mt-4 text-sm font-bold text-slate-700">curl</h3>
+          <CodeBlock>{integrationCurlExample}</CodeBlock>
+          <p className="mt-3 text-xs leading-relaxed text-slate-500">
+            レート制限・商用利用時の出典表記省略は
+            <Link href="#pricing" className="mx-1 font-semibold text-emerald-700 underline">Proプラン</Link>
+            をご参照ください。データ連携のご相談は
+            <Link href="/partner" className="mx-1 font-semibold text-emerald-700 underline">パートナー募集ページ</Link>
+            からどうぞ。
+          </p>
         </section>
 
         {/* REST API */}
@@ -454,7 +528,7 @@ curl ${SITE_URL}/api/status`;
         </section>
 
         {/* 料金プラン・APIキー */}
-        <section className="mb-10">
+        <section id="pricing" className="mb-10 scroll-mt-6">
           <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
             <Gauge className="h-5 w-5 text-indigo-500" />
             料金プランとレート上限
