@@ -215,4 +215,68 @@ describe('formatWeeklyKpiEmail', () => {
       expect(text).not.toContain('未計測');
     });
   });
+
+  describe('newFunnelEvents（V-6：stats_optin/unlock/sticky-bar line）', () => {
+    it('渡すと解放率つきで表示される', () => {
+      const data = baseData({
+        newFunnelEvents: { statsOptinView: 55, statsOptinGrant: 5, unlockTeaserView: 78, unlockGranted: 1, lineFriendClickStickyBar: 2 },
+      });
+      const { text } = formatWeeklyKpiEmail(data);
+      expect(text).toContain('新規ファネルイベント');
+      expect(text).toContain('stats_optin_view: 55件 ／ stats_optin_grant: 5件（解放率9.1%）');
+      expect(text).toContain('unlock_teaser_view: 78件 ／ unlock_granted: 1件（解放率1.3%）');
+      expect(text).toContain('line_friend_click（sticky-bar経由）: 2件');
+    });
+
+    it('省略時はセクション自体を出さない', () => {
+      const { text } = formatWeeklyKpiEmail(baseData());
+      expect(text).not.toContain('新規ファネルイベント');
+    });
+
+    it('一部だけ渡すと未指定項目のみ未計測になる', () => {
+      const data = baseData({ newFunnelEvents: { statsOptinView: 10 } });
+      const { text } = formatWeeklyKpiEmail(data);
+      expect(text).toContain('stats_optin_view: 10件 ／ stats_optin_grant: 未計測（手動値待ち）');
+    });
+  });
+
+  describe('実験ポートフォリオ（V-6：走行中A/BのjudgeWinner結線）', () => {
+    it('走行中実験の一覧が本数付きで出る', () => {
+      const { text } = formatWeeklyKpiEmail(baseData());
+      expect(text).toMatch(/■ 実験ポートフォリオ（走行中\d+本・V-6）/);
+    });
+
+    it('データ未提供の走行中実験は「n不足」で打ち切らない旨を明記する', () => {
+      const { text } = formatWeeklyKpiEmail(baseData());
+      expect(text).toContain('⚪ lead-copy-2026: n不足（GA4データ未提供・判定保留。打ち切らず継続して母数を貯める）');
+    });
+
+    it('十分なサンプル+有意差ありなら🏆で採用推奨が出る', () => {
+      const data = baseData({
+        experimentArmResults: {
+          'lead-copy-2026': [
+            { id: 'control', impressions: 500, conversions: 40 },
+            { id: 'reward', impressions: 520, conversions: 70 },
+          ],
+        },
+      });
+      const { text } = formatWeeklyKpiEmail(data);
+      expect(text).toContain('🏆 lead-copy-2026:');
+      expect(text).toContain('採用推奨');
+    });
+
+    it('サンプル不足なら⏳またはn不足で判定を急がない', () => {
+      const data = baseData({
+        experimentArmResults: {
+          'lead-copy-2026': [
+            { id: 'control', impressions: 10, conversions: 1 },
+            { id: 'reward', impressions: 11, conversions: 3 },
+          ],
+        },
+      });
+      const { text } = formatWeeklyKpiEmail(data);
+      expect(text).toContain('lead-copy-2026:');
+      expect(text).not.toContain('🏆 lead-copy-2026:');
+    });
+  });
 });

@@ -28,6 +28,20 @@
  *  --ga4-organic-sessions=<件数>  GA4 Organic Searchセッション（今週）。指定するとConsent捕捉率
  *                            （GSCクリック/GA4セッション、基準5.6x）の定点観測行を出す（I-5）
  *
+ * 新規ファネルイベント（GA4 MCPで取得した数値を渡す。V-6・いずれも任意・未指定は「未計測」表示）:
+ *  --stats-optin-view=<件数>       stats_optin_view（今週）
+ *  --stats-optin-grant=<件数>      stats_optin_grant（今週）
+ *  --unlock-teaser-view=<件数>     unlock_teaser_view（今週）
+ *  --unlock-granted=<件数>         unlock_granted（今週）
+ *  --line-friend-click-sticky=<件数>  line_friend_click（StickyConvertBar経由・今週）
+ *
+ * 実験ポートフォリオ（V-6・任意）:
+ *  --experiment-data=<expId=armId:impressions:conversions,armId:impressions:conversions;expId2=...>
+ *    走行中A/B（src/lib/experiments.tsのEXPERIMENTS）のアーム別実測。GA4のexperiment_impression×
+ *    primaryMetricを手動で集計して渡す。arms[0]がcontrol。データが無い走行中実験は「n不足」と
+ *    表示するだけで打ち切りはしない。例:
+ *    --experiment-data="lead-copy-2026=control:500:40,reward:520:55;unlock-teaser-copy-2026=control:300:20,loss:310:35,benefit:290:18"
+ *
  * ロードマップゲート G1〜G6（2026-07-11 収益試算v2・[[session-2026-07-11-revenue-forecast-roadmap]]）:
  *  --cp-this-month=<件数>          当月のC_p累計（G4・11/30判定）
  *  --contract-count=<社数>         稼働中の直接契約社数（G3・10/31判定）
@@ -61,6 +75,7 @@ import { google } from 'googleapis';
 
 import { formatWeeklyKpiEmail, type WeeklyKpiData } from '@/lib/weekly-kpi-report';
 import type { FunnelStage, PlacementFunnel } from '@/lib/velocity';
+import type { ArmResult } from '@/lib/experiments';
 import { CONTACT_EMAIL } from '@/lib/contact';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -118,6 +133,42 @@ function parseFunnelByPlacement(raw: unknown): PlacementFunnel[] | undefined {
     if (stages) placements.push({ placement: placement.trim(), stages });
   }
   return placements.length > 0 ? placements : undefined;
+}
+
+/** V-6の新規ファネルイベント引数を1つでも渡していれば集約オブジェクトを返す。1つも無ければundefined（セクション自体を出さない）。 */
+function buildNewFunnelEvents(a: Record<string, string | boolean>): WeeklyKpiData['newFunnelEvents'] {
+  const keys = ['stats-optin-view', 'stats-optin-grant', 'unlock-teaser-view', 'unlock-granted', 'line-friend-click-sticky'] as const;
+  if (!keys.some((k) => a[k] !== undefined)) return undefined;
+  return {
+    statsOptinView: a['stats-optin-view'] !== undefined ? num(a['stats-optin-view']) : undefined,
+    statsOptinGrant: a['stats-optin-grant'] !== undefined ? num(a['stats-optin-grant']) : undefined,
+    unlockTeaserView: a['unlock-teaser-view'] !== undefined ? num(a['unlock-teaser-view']) : undefined,
+    unlockGranted: a['unlock-granted'] !== undefined ? num(a['unlock-granted']) : undefined,
+    lineFriendClickStickyBar: a['line-friend-click-sticky'] !== undefined ? num(a['line-friend-click-sticky']) : undefined,
+  };
+}
+
+/**
+ * "expId=armId:impressions:conversions,armId:impressions:conversions;expId2=..." を
+ * 実験ID→ArmResult[] のRecordにパースする（V-6）。armは2件未満の実験は除外。不正な項目は無視。
+ */
+function parseExperimentArmResults(raw: unknown): Record<string, ArmResult[]> | undefined {
+  if (typeof raw !== 'string' || !raw.trim()) return undefined;
+  const result: Record<string, ArmResult[]> = {};
+  for (const chunk of raw.split(';')) {
+    const [expId, armsRaw] = chunk.split('=');
+    if (!expId || !armsRaw) continue;
+    const arms: ArmResult[] = [];
+    for (const part of armsRaw.split(',')) {
+      const [id, impStr, convStr] = part.split(':');
+      const impressions = Number(impStr);
+      const conversions = Number(convStr);
+      if (!id || !Number.isFinite(impressions) || !Number.isFinite(conversions)) continue;
+      arms.push({ id: id.trim(), impressions, conversions });
+    }
+    if (arms.length >= 2) result[expId.trim()] = arms;
+  }
+  return Object.keys(result).length > 0 ? result : undefined;
 }
 
 /** "source1:count1,source2:count2" をai_referralソース別内訳にパースする。不正行は無視。 */
@@ -276,6 +327,8 @@ async function main() {
     funnelByPlacement: parseFunnelByPlacement(args['funnel-by-placement']),
     aiReferralBySource: parseSourceCounts(args['ai-referral-sources']),
     ga4OrganicSessions: args['ga4-organic-sessions'] !== undefined ? num(args['ga4-organic-sessions']) : undefined,
+    newFunnelEvents: buildNewFunnelEvents(args),
+    experimentArmResults: parseExperimentArmResults(args['experiment-data']),
     conversionsThisMonth: args['conversions-this-month'] !== undefined ? num(args['conversions-this-month']) : undefined,
     affiliateClicks: num(args['affiliate-clicks']),
     confirmedConversions: num(args.conversions),

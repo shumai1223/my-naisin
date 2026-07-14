@@ -21,6 +21,7 @@ import {
   type PlacementFunnel,
 } from '@/lib/velocity';
 import { evaluateRoadmapGates, nextRoadmapGate, upcomingGateReminders, type RoadmapGateActuals } from '@/lib/roadmap-gates';
+import { runningExperiments, judgeWinner, type ArmResult } from '@/lib/experiments';
 
 export interface WeeklyKpiData {
   /** レポート対象週の終端日（'YYYY-MM-DD'）。 */
@@ -39,6 +40,24 @@ export interface WeeklyKpiData {
   aiReferralBySource?: { source: string; count: number }[];
   /** GA4 Organic Searchセッション（今週。任意）。あればConsent捕捉率の定点観測行を出す（I-5）。 */
   ga4OrganicSessions?: number;
+  /**
+   * 新規ファネルイベント（T-1紹介解放機構・S-1統計オプトイン・sticky-bar経由のLINE導線）の今週件数（任意）。
+   * GA4はOAuthのみでCI非対応のため他の手動値と同様、GA4 MCP等で取得した数値を渡す運用（V-6）。
+   * 未指定の項目は表示側で「未計測」扱い（0件と混同させない）。
+   */
+  newFunnelEvents?: {
+    statsOptinView?: number;
+    statsOptinGrant?: number;
+    unlockTeaserView?: number;
+    unlockGranted?: number;
+    lineFriendClickStickyBar?: number;
+  };
+  /**
+   * 走行中A/B実験のアーム別実測（GA4のexperiment_impression×primaryMetricを手動で集計・任意・V-6）。
+   * キー=実験ID、値=judgeWinnerにそのまま渡すArmResult[]（arms[0]=control）。
+   * データが無い走行中実験は「n不足（データ未提供）」と明記し、早期に打ち切り判定をしない。
+   */
+  experimentArmResults?: Record<string, ArmResult[]>;
   /** 当月のASP発生件数累計（任意）。あれば特単交渉トリガー（D-1・閾値50件/月）の判定行を出す。 */
   conversionsThisMonth?: number;
   /**
@@ -135,6 +154,15 @@ export function formatWeeklyKpiEmail(data: WeeklyKpiData): { subject: string; te
   lines.push(`  C_p（保護者接点 parent_landing_view）: ${manual ? `${fmt(data.parentLandingViews)}件` : unmeasured}`);
   lines.push(`  送客（affiliate_click）: ${manual ? `${fmt(data.affiliateClicks)}件` : unmeasured}`);
   lines.push(`  確定発生（ASP実測）: ${manual ? `${data.confirmedConversions}件` : unmeasured}`);
+  if (data.newFunnelEvents) {
+    const fe = data.newFunnelEvents;
+    const rate = (num?: number, den?: number): string => (num !== undefined && den !== undefined && den > 0 ? `（解放率${((num / den) * 100).toFixed(1)}%）` : '');
+    lines.push('');
+    lines.push('■ 新規ファネルイベント（今週・V-6）');
+    lines.push(`  stats_optin_view: ${fe.statsOptinView !== undefined ? `${fmt(fe.statsOptinView)}件` : unmeasured} ／ stats_optin_grant: ${fe.statsOptinGrant !== undefined ? `${fmt(fe.statsOptinGrant)}件` : unmeasured}${rate(fe.statsOptinGrant, fe.statsOptinView)}`);
+    lines.push(`  unlock_teaser_view: ${fe.unlockTeaserView !== undefined ? `${fmt(fe.unlockTeaserView)}件` : unmeasured} ／ unlock_granted: ${fe.unlockGranted !== undefined ? `${fmt(fe.unlockGranted)}件` : unmeasured}${rate(fe.unlockGranted, fe.unlockTeaserView)}`);
+    lines.push(`  line_friend_click（sticky-bar経由）: ${fe.lineFriendClickStickyBar !== undefined ? `${fmt(fe.lineFriendClickStickyBar)}件` : unmeasured}`);
+  }
   lines.push('');
   lines.push('■ 名簿velocity');
   if (manual) {
@@ -213,6 +241,27 @@ export function formatWeeklyKpiEmail(data: WeeklyKpiData): { subject: string; te
     lines.push(`  ${nego.triggered ? '🚨' : '✅'} ${nego.detail}`);
     if (nego.triggered) {
       lines.push('  → scripts/generate-sales-report.ts --conversions-this-month=… で交渉文面付きレポートを生成し、親名義で送信してください。');
+    }
+  }
+  {
+    const running = runningExperiments();
+    if (running.length > 0) {
+      lines.push('');
+      lines.push(`■ 実験ポートフォリオ（走行中${running.length}本・V-6）`);
+      for (const exp of running) {
+        const armResults = data.experimentArmResults?.[exp.id];
+        if (!armResults || armResults.length < 2) {
+          lines.push(`  ⚪ ${exp.id}: n不足（GA4データ未提供・判定保留。打ち切らず継続して母数を貯める）`);
+          continue;
+        }
+        const verdict = judgeWinner(armResults);
+        if (!verdict) {
+          lines.push(`  ⚪ ${exp.id}: n不足（アーム不足・判定不能）`);
+          continue;
+        }
+        const icon = verdict.significant ? '🏆' : verdict.bestArm !== verdict.control ? '⏳' : '✅';
+        lines.push(`  ${icon} ${exp.id}: ${verdict.recommendation}`);
+      }
     }
   }
   lines.push('');
