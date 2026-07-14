@@ -145,6 +145,40 @@ export default function PartnerPage() {
             </div>
           </section>
 
+          {/* 模試会社・EdTech SaaS向け（データ連携・V-5） */}
+          <section className="mb-10 rounded-2xl border border-white/10 bg-white/5 p-6">
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-white"><Code2 className="h-5 w-5 text-emerald-300" />模試会社・教育SaaS運営者様へ（データ連携）</h2>
+            <p className="mb-4 text-sm leading-relaxed text-slate-300">
+              内申点×合否判定は貴社の本業そのものかと思います。全国47都道府県の公立高校入試における
+              <strong className="text-white">内申点（調査書点）・総合得点（内申×当日点）・偏差値</strong>の計算方式を機械可読データ化し、
+              REST API・MCP（AIエージェント向け）の両方で提供しています。貴社の模試成績帳票・塾管理SaaS・進路指導システムに
+              都道府県ごとに異なる計算ロジックを組み込むことで、開発コストをかけずに47都道府県対応の合否判定・内申点表示を実現できます。
+            </p>
+            <div className="grid gap-3 sm:grid-cols-3">
+              <div className="rounded-xl border border-white/10 bg-white/5 p-4">
+                <code className="text-xs text-emerald-300">GET /api/naishin/{'{code}'}</code>
+                <p className="mt-1 text-xs leading-relaxed text-slate-400">都道府県別の内申点計算</p>
+              </div>
+              <div className="rounded-xl border border-white/10 bg-white/5 p-4">
+                <code className="text-xs text-emerald-300">GET /api/total-score/{'{code}'}</code>
+                <p className="mt-1 text-xs leading-relaxed text-slate-400">内申×当日点の総合得点（S値・K値等）</p>
+              </div>
+              <div className="rounded-xl border border-white/10 bg-white/5 p-4">
+                <code className="text-xs text-emerald-300">GET /api/hensachi</code>
+                <p className="mt-1 text-xs leading-relaxed text-slate-400">偏差値・上位パーセンタイル計算</p>
+              </div>
+            </div>
+            <p className="mt-4 text-xs leading-relaxed text-slate-400">
+              データ連携・API組み込みではなく、成績帳票・Webサイトへの掲載枠（スポンサー掲載）にご興味があれば、そちらの形でのご相談も可能です。
+              媒体資料（トラフィック・カバレッジ実績）は<Link href="/contact" className="font-bold text-emerald-300 hover:underline">お問い合わせ</Link>いただければ個別にお送りします。
+            </p>
+            <div className="mt-4">
+              <Link href="/developers" className="inline-flex items-center gap-1 text-sm font-bold text-emerald-300 hover:underline">
+                API/MCPの詳細仕様を見る（/developers）<ChevronRight className="h-4 w-4" />
+              </Link>
+            </div>
+          </section>
+
           {/* 流れ */}
           <section className="mb-10">
             <h2 className="mb-4 text-lg font-bold text-white">提携までの流れ</h2>
