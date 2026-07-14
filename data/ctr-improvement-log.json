@@ -22,5 +22,11 @@
     "changedAt": "2026-07-11",
     "note": "GSC MCP実データ(07-02〜07-08)で発見した新規underperformer。PREFECTURE_META_OVERRIDESに新規追加（従来は汎用テンプレのまま）。「中3のみ45点満点」の実データ特性をcuriosity-gap化。GSC実測: imp433/CTR1.39%/pos4.7・expectedMinCtr4%",
     "ctrBefore": 0.013856812933025405
+  },
+  {
+    "route": "/hensachi",
+    "changedAt": "2026-07-15",
+    "note": "V-1(スコアボード5KW照準)。GSC MCP実測(6/13-7/11・28日)でクエリ「偏差値診断」(exact)がpos7.09/CTR4.15%/imp2508で滞留と確認（同ページの主力語「偏差値計算サイト 5教科」はpos2.5/CTR25.3%で対照的に強い＝この語順は変更せず維持）。titleに「高校偏差値の診断はこれ1つでOK」を追加しdescription/keywordsにも診断・求める語を補強、FAQ2問追加（高校偏差値の診断/偏差値を求めるサイト、を実測クエリのまま）。他4KW基準線: 高校偏差値 診断=pos6.54/CTR7.98%/imp764、偏差値 求める サイト=pos6.71/CTR6.64%/imp482、偏差値 求める サイト 中学生=pos5.69/CTR8.82%/imp204、偏差値診断 中学生=pos4.07/CTR25.5%/imp971(既に高水準・維持のみ)。ctrBeforeは最も伸び代の大きい「偏差値診断」(exact)のCTRを記録。",
+    "ctrBefore": 0.04146730462519936
   }
 ]
