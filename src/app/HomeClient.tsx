@@ -34,6 +34,9 @@ import { InputForm } from '@/components/Calculator/InputForm';
 import { PrefectureSelector } from '@/components/Calculator/PrefectureSelector';
 import { ReverseCalculator } from '@/components/Calculator/ReverseCalculator';
 import { ResultSection } from '@/components/ResultSection';
+import { StatsOptIn } from '@/components/StatsOptIn';
+import { UnlockGate } from '@/components/UnlockGate';
+import { NationalPercentileReveal } from '@/components/NationalPercentileReveal';
 import { ChangeLogSection } from '@/components/ChangeLogSection';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
@@ -543,6 +546,43 @@ export default function HomeClient() {
                           lastSaved={lastSaved}
                           onShareOpen={openShare}
                         />
+                      )}
+
+                      {/* S-1: 匿名統計オプトイン（トップページ計算機。47県ページのNaishinResultFlowと同じ結線） */}
+                      {showResult && (
+                        <div className="mt-6">
+                          <StatsOptIn
+                            metric="naishin"
+                            value={result.total}
+                            maxValue={result.max}
+                            prefectureCode={prefectureCode}
+                          />
+                        </div>
+                      )}
+
+                      {/* T-1: 紹介・解放機構。2026-07-14: サイト最大の計算面（トップページ）だけ
+                          ResultFlow系を通らずT-1/S-1から漏れていた穴を塞ぐ（👤の実地報告で発覚） */}
+                      {showResult && (
+                        <div className="mt-6">
+                          <UnlockGate
+                            placement="home-percentile"
+                            tool="naishin"
+                            shareCtx={{
+                              score: result.total,
+                              max: result.max,
+                              prefectureCode,
+                              prefectureName: selectedPrefecture?.name ?? '',
+                              metricLabel: '内申点',
+                            }}
+                          >
+                            <NationalPercentileReveal
+                              metric="naishin"
+                              metricLabel="内申点"
+                              value={result.total}
+                              prefectureCode={prefectureCode}
+                            />
+                          </UnlockGate>
+                        </div>
                       )}
 
                       {/* 結果直後（＝最も志望校との距離が気になる瞬間）の保護者リード導線。審査中は休眠 */}
