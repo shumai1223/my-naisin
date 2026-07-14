@@ -1,46 +1,13 @@
 'use client';
 
 import * as React from 'react';
-import { Cookie, X, ExternalLink, Shield, BarChart3, Settings, CheckCircle2 } from 'lucide-react';
+import { Cookie, X, CheckCircle2 } from 'lucide-react';
 import Link from 'next/link';
 
 const COOKIE_CONSENT_KEY = 'cookie-consent-accepted';
 
-interface CookieCategory {
-  id: string;
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-  required: boolean;
-}
-
-const COOKIE_CATEGORIES: CookieCategory[] = [
-  {
-    id: 'essential',
-    icon: <Shield className="h-4 w-4" />,
-    title: '必須Cookie',
-    description: 'サイトの基本機能（保存設定の記憶など）に必要です。無効にできません。',
-    required: true
-  },
-  {
-    id: 'analytics',
-    icon: <BarChart3 className="h-4 w-4" />,
-    title: '分析Cookie',
-    description: 'サイトの利用状況を匿名で収集し、サービス改善に役立てます（Google Analytics等）。',
-    required: false
-  },
-  {
-    id: 'advertising',
-    icon: <Settings className="h-4 w-4" />,
-    title: '広告Cookie',
-    description: 'お客様の興味に基づいた広告を表示するために使用します（Google AdSense等）。',
-    required: false
-  }
-];
-
 export function CookieConsent() {
   const [isVisible, setIsVisible] = React.useState(false);
-  const [showDetails, setShowDetails] = React.useState(false);
 
   React.useEffect(() => {
     const hasAccepted = localStorage.getItem(COOKIE_CONSENT_KEY);
@@ -76,132 +43,47 @@ export function CookieConsent() {
 
   if (!isVisible) return null;
 
+  // 2026-07-15: 旧実装は全画面バックドロップ+画面半分のモーダルで、初回訪問者の体験と
+  // 換金導線(下部の常設LINEバー等)を丸ごと塞いでいた。コンパクトな下部バナーに変更。
+  // 同意の選択肢(すべて許可/必須のみ)とプライバシーポリシー導線は維持=Consent Modeの建付けは不変。
   return (
-    <>
-      {/* Backdrop overlay（CSSフェードイン・framer-motion非依存） */}
-      <div
-        className="fixed inset-0 z-[60] animate-fade-in bg-slate-900/40 backdrop-blur-sm"
-        onClick={handleDecline}
-      />
-
-      {/* Modal（CSSフェードイン。中央寄せの -translate-x-1/2 と競合しないよう opacity のみ） */}
-      <div className="fixed inset-x-4 bottom-4 top-auto z-[70] animate-fade-in sm:inset-x-auto sm:left-1/2 sm:bottom-6 sm:w-full sm:max-w-xl sm:-translate-x-1/2">
-            <div className="relative overflow-hidden rounded-3xl border border-white/60 bg-white/95 shadow-[0_25px_80px_-12px_rgba(0,0,0,0.25),0_0_0_1px_rgba(255,255,255,0.8)_inset] backdrop-blur-xl">
-              {/* Decorative gradients */}
-              <div className="absolute -right-24 -top-24 h-48 w-48 rounded-full bg-gradient-to-br from-amber-200 to-orange-300 opacity-40 blur-3xl" />
-              <div className="absolute -bottom-16 -left-16 h-40 w-40 rounded-full bg-gradient-to-br from-blue-200 to-indigo-300 opacity-40 blur-3xl" />
-
-              {/* Close button */}
-              <button
-                onClick={handleDecline}
-                className="absolute right-4 top-4 z-10 grid h-9 w-9 place-items-center rounded-xl text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-600"
-                aria-label="閉じる"
-              >
-                <X className="h-5 w-5" />
-              </button>
-
-              {/* Header */}
-              <div className="relative border-b border-slate-100 bg-gradient-to-r from-amber-50 via-orange-50 to-amber-50 px-6 py-6 sm:px-8">
-                <div className="flex items-center gap-4">
-                  <div className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 shadow-lg shadow-amber-200">
-                    <Cookie className="h-7 w-7 text-white" />
-                  </div>
-                  <div>
-                    <h2 className="text-lg font-black text-slate-800 sm:text-xl">Cookie設定</h2>
-                    <p className="mt-0.5 text-sm text-slate-600">プライバシーを尊重したサービス提供のために</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Content */}
-              <div className="relative px-6 py-5 sm:px-8">
-                <p className="text-sm leading-relaxed text-slate-700">
-                  当サイトでは、サービス品質の向上・利用状況の分析・パーソナライズされた広告配信のためにCookieを使用しています。
-                  「すべて許可」をクリックすると、すべてのCookieの使用に同意したことになります。
-                </p>
-
-                {/* Toggle details */}
-                <button
-                  onClick={() => setShowDetails(!showDetails)}
-                  className="mt-4 flex items-center gap-1.5 text-sm font-semibold text-blue-600 transition-colors hover:text-blue-700"
-                >
-                  {showDetails ? '詳細を隠す' : 'Cookieの種類を詳しく見る'}
-                  <span
-                    className={`inline-block transition-transform duration-200 ${showDetails ? 'rotate-180' : ''}`}
-                  >
-                    ▼
-                  </span>
-                </button>
-
-                {/* Cookie categories（展開は条件レンダリング・CSSフェードイン） */}
-                {showDetails && (
-                    <div className="animate-fade-in overflow-hidden">
-                      <div className="mt-4 grid gap-3">
-                        {COOKIE_CATEGORIES.map((cat) => (
-                          <div
-                            key={cat.id}
-                            className="flex items-start gap-3 rounded-2xl border border-slate-200 bg-slate-50/80 p-4"
-                          >
-                            <div className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-white text-slate-600 shadow-sm">
-                              {cat.icon}
-                            </div>
-                            <div className="flex-1">
-                              <div className="flex items-center gap-2">
-                                <span className="text-sm font-bold text-slate-800">{cat.title}</span>
-                                {cat.required && (
-                                  <span className="rounded-md bg-blue-100 px-1.5 py-0.5 text-[10px] font-bold text-blue-700">
-                                    必須
-                                  </span>
-                                )}
-                              </div>
-                              <p className="mt-1 text-xs leading-relaxed text-slate-600">{cat.description}</p>
-                            </div>
-                            {cat.required && (
-                              <CheckCircle2 className="mt-1 h-5 w-5 shrink-0 text-green-500" />
-                            )}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                )}
-
-                {/* Privacy link */}
-                <div className="mt-5 flex items-center gap-1 text-xs text-slate-500">
-                  <span>詳しくは</span>
-                  <Link
-                    href="/privacy"
-                    className="inline-flex items-center gap-0.5 font-medium text-blue-600 underline decoration-blue-300 underline-offset-2 hover:text-blue-700"
-                  >
-                    プライバシーポリシー
-                    <ExternalLink className="h-3 w-3" />
-                  </Link>
-                  <span>をご覧ください。</span>
-                </div>
-              </div>
-
-              {/* Actions */}
-              <div className="relative border-t border-slate-100 bg-slate-50/50 px-6 py-5 sm:px-8">
-                <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                  <button
-                    onClick={handleAcceptEssential}
-                    className="order-2 rounded-xl px-5 py-3 text-sm font-semibold text-slate-600 transition-colors hover:bg-slate-200 sm:order-1"
-                  >
-                    必須のみ許可
-                  </button>
-                  <button
-                    onClick={handleAcceptAll}
-                    className="order-1 flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-blue-500 to-indigo-600 px-8 py-4 text-base font-black text-white shadow-lg shadow-blue-200 transition-all hover:shadow-xl hover:shadow-blue-300 sm:order-2"
-                  >
-                    <CheckCircle2 className="h-5 w-5" />
-                    すべて許可
-                  </button>
-                </div>
-                <p className="mt-3 text-center text-[11px] text-slate-400 sm:text-left">
-                  ※ 18歳未満の方は保護者の同意を得てからご利用ください。
-                </p>
-              </div>
-            </div>
+    <div className="fixed inset-x-3 bottom-3 z-[70] animate-fade-in sm:inset-x-auto sm:left-1/2 sm:w-full sm:max-w-lg sm:-translate-x-1/2">
+      <div className="rounded-2xl border border-slate-200 bg-white/95 p-4 shadow-xl backdrop-blur">
+        <div className="flex items-start gap-3">
+          <div className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-amber-400 to-orange-500">
+            <Cookie className="h-5 w-5 text-white" />
+          </div>
+          <p className="flex-1 text-xs leading-relaxed text-slate-600">
+            品質改善・利用状況の分析・広告配信のためにCookieを使用します。詳細は
+            <Link href="/privacy" className="font-semibold text-blue-600 underline decoration-blue-300 underline-offset-2">
+              プライバシーポリシー
+            </Link>
+            へ。※18歳未満の方は保護者の同意を得てからご利用ください。
+          </p>
+          <button
+            onClick={handleDecline}
+            className="grid h-8 w-8 shrink-0 place-items-center rounded-lg text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-600"
+            aria-label="閉じる"
+          >
+            <X className="h-4 w-4" />
+          </button>
+        </div>
+        <div className="mt-3 flex items-center justify-end gap-2">
+          <button
+            onClick={handleAcceptEssential}
+            className="rounded-xl px-4 py-2.5 text-xs font-semibold text-slate-500 transition-colors hover:bg-slate-100"
+          >
+            必須のみ許可
+          </button>
+          <button
+            onClick={handleAcceptAll}
+            className="flex items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-blue-500 to-indigo-600 px-5 py-2.5 text-sm font-bold text-white shadow-md shadow-blue-200 transition-all hover:shadow-lg"
+          >
+            <CheckCircle2 className="h-4 w-4" />
+            すべて許可
+          </button>
+        </div>
       </div>
-    </>
+    </div>
   );
 }

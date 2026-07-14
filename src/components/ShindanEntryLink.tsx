@@ -9,9 +9,10 @@ import { Search, ChevronRight } from 'lucide-react';
  */
 export function ShindanEntryLink({ className = '' }: { className?: string }) {
   return (
+    // 2026-07-15: 主役CTA埋没対策の階層整理で影と余白を一段軽く（夏期講習需要面につき降格はここまで）
     <Link
       href="/juku-shindan"
-      className={`group flex items-center justify-between gap-3 rounded-2xl border border-slate-200 bg-white px-5 py-4 shadow-sm transition-all hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-md ${className}`}
+      className={`group flex items-center justify-between gap-3 rounded-xl border border-slate-200/80 bg-white/70 px-4 py-3 transition-all hover:border-blue-300 hover:bg-white ${className}`}
     >
       <span className="flex items-center gap-3">
         <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-blue-50 text-blue-600">

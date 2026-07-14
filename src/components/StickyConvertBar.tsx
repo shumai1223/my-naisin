@@ -82,7 +82,7 @@ export function StickyConvertBar() {
         <p className="hidden flex-1 text-xs font-medium leading-tight text-slate-600 sm:block">
           <span className="font-bold text-slate-800">志望校に届くか不安？</span>
           <br />
-          LINEで今の成績に合った対策を無料相談できます。
+          内申アップのコツと受験情報をLINEで受け取れます。
         </p>
         <a
           href={lineAddUrl('student')}
@@ -92,7 +92,8 @@ export function StickyConvertBar() {
           className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-[#06C755] px-4 py-3 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.99] sm:flex-none sm:px-6"
         >
           <MessageCircle className="h-5 w-5 shrink-0" />
-          <span>LINEで志望校を無料相談</span>
+          {/* 「無料相談」は1:1返信体制が無く履行できない約束のため、配信ベースの文言に統一(2026-07-15) */}
+          <span>LINEで対策情報を受け取る</span>
         </a>
         <button
           type="button"

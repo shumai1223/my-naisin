@@ -198,7 +198,7 @@ export function SaveResultCTA({
       <span className="flex items-center gap-2.5">
         <MessageCircle className="h-5 w-5" />
         <span>
-          <span className="block text-sm font-bold">LINEで受け取る・進路相談する</span>
+          <span className="block text-sm font-bold">LINEで受験情報を受け取る</span>
           <span className="block text-xs text-white/85">{lineSubtitle}</span>
         </span>
       </span>

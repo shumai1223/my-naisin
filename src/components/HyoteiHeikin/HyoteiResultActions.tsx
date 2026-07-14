@@ -31,7 +31,8 @@ export function HyoteiResultActions({ value }: { value: number | null }) {
           className="flex items-center justify-center gap-2 rounded-xl bg-[#06C755] px-5 py-3.5 text-center text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.99]"
         >
           <MessageCircle className="h-5 w-5 shrink-0" />
-          {v ? `評定平均${v}で狙える推薦・私立をLINEで無料相談` : 'LINEで推薦・併願優遇を無料相談'}
+          {/* 「無料相談」は1:1返信体制が無く履行できない約束のため、配信ベースの文言に統一(2026-07-15) */}
+          {v ? `評定平均${v}向けの推薦対策情報をLINEで受け取る` : 'LINEで推薦・併願優遇の情報を受け取る'}
         </a>
       )}
       <div className="grid gap-2 sm:grid-cols-2">

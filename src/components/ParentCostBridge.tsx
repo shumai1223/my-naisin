@@ -18,36 +18,27 @@ interface ParentCostBridgeProps {
  */
 export function ParentCostBridge({ className = '', prefectureName }: ParentCostBridgeProps) {
   const where = prefectureName ? `${prefectureName}の高校` : '高校';
+  // 2026-07-15: 結果直下のカード渋滞で主役CTA(名簿/解放ゲート)が埋没するため、
+  // 情報導線のこの面は「細い1行+テキストリンク」に格下げ（機能は3リンクとも維持）。
   return (
-    <section
-      className={`rounded-2xl border border-emerald-100 bg-gradient-to-br from-emerald-50/70 via-teal-50/40 to-white p-5 md:p-6 ${className}`}
-    >
-      <div className="mb-2 inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-bold text-emerald-700 ring-1 ring-emerald-100">
-        <Wallet className="h-3 w-3" />
-        計算できたら、次は「お金」
-      </div>
-      <h3 className="mb-1.5 text-lg font-bold text-slate-900">
-        志望校が見えてきたら、おうちの人と費用も確認
-      </h3>
-      <p className="mb-4 text-sm leading-relaxed text-slate-700">
-        {where}3年間にかかるお金は、公立と私立で<strong>数百万円</strong>変わります。内申点・志望校が固まってきたいま、保護者の方と「学費・塾代」を同じ目線で確認しておくと、進路選びがぐっと現実的になります。
+    <section className={`rounded-xl border border-slate-200/80 bg-white/60 px-4 py-3 ${className}`}>
+      <p className="flex items-center gap-1.5 text-xs font-bold text-slate-500">
+        <Wallet className="h-3.5 w-3.5 shrink-0 text-emerald-500" />
+        次は「お金」——{where}の費用（公立と私立で3年総額は数百万円差）を保護者の方と確認
       </p>
-      <div className="grid gap-2 sm:grid-cols-3">
+      <div className="mt-1.5 flex flex-wrap gap-x-4 gap-y-1">
         {[
-          { href: '/koukou-hiyou/kokoroze', label: '公立 vs 私立 3年総額', sub: '実質負担で比較' },
-          { href: '/juku-hiyou', label: '塾・個別指導の費用', sub: '月謝の相場と総額' },
-          { href: '/hiyou', label: 'お金・無償化まとめ', sub: '就学支援金も確認' },
+          { href: '/koukou-hiyou/kokoroze', label: '公立 vs 私立 3年総額' },
+          { href: '/juku-hiyou', label: '塾・個別指導の費用' },
+          { href: '/hiyou', label: 'お金・無償化まとめ' },
         ].map((c) => (
           <Link
             key={c.href}
             href={c.href}
-            className="group flex items-center justify-between rounded-xl bg-white px-4 py-3 ring-1 ring-emerald-100 transition-all hover:-translate-y-0.5 hover:ring-emerald-300 hover:shadow-sm"
+            className="group inline-flex items-center gap-0.5 text-xs font-semibold text-emerald-700 underline-offset-2 hover:underline"
           >
-            <span className="min-w-0">
-              <span className="block text-sm font-bold text-slate-800">{c.label}</span>
-              <span className="block text-xs text-slate-500">{c.sub}</span>
-            </span>
-            <ChevronRight className="h-4 w-4 shrink-0 text-emerald-400 transition-colors group-hover:text-emerald-600" />
+            {c.label}
+            <ChevronRight className="h-3 w-3 shrink-0 transition-transform group-hover:translate-x-0.5" />
           </Link>
         ))}
       </div>
