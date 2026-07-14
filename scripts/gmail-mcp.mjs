@@ -37,9 +37,22 @@ function encodeHeaderWord(s) {
   return /^[\x20-\x7e]*$/.test(s) ? s : `=?UTF-8?B?${Buffer.from(s, 'utf8').toString('base64')}?=`;
 }
 
+// アドレスヘッダ（To/Cc）用: 表示名部分だけ RFC 2047 エンコードする。
+// 2026-07-14実測: 返信下書きで元メールの日本語表示名（"お問い合わせ受付担当" <...>）を
+// 生のまま To に書いたら Gmail 上で文字化けした。アドレス部は素通し・表示名のみ変換。
+function encodeAddressHeader(value) {
+  const s = String(value);
+  if (/^[\x20-\x7e]*$/.test(s)) return s; // ASCIIのみならそのまま
+  const m = s.match(/^\s*"?([^"<]*?)"?\s*<([^>]+)>\s*$/);
+  if (!m) return s;
+  const name = m[1].trim();
+  if (!name) return m[2];
+  return `${encodeHeaderWord(name)} <${m[2]}>`;
+}
+
 function buildMime({ to, cc, subject, body, inReplyTo, references }) {
-  const lines = [`To: ${to}`];
-  if (cc) lines.push(`Cc: ${cc}`);
+  const lines = [`To: ${encodeAddressHeader(to)}`];
+  if (cc) lines.push(`Cc: ${encodeAddressHeader(cc)}`);
   lines.push(
     `Subject: ${encodeHeaderWord(subject)}`,
     'MIME-Version: 1.0',
