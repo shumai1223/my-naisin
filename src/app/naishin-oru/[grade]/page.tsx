@@ -56,13 +56,22 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const grade = parseOruGrade(gradeParam);
   if (!grade) return {};
   const label = ORU_GRADE_LABEL[grade];
-  const title = `${label}の内申点は何点？【47都道府県の計算例】 | My Naishin`;
-  const description = `9教科すべての評定が${grade}だったときの内申点を、47都道府県の計算方式で実際に計算しました。都道府県ごとの満点・換算内申の目安がすぐにわかります。`;
+  // grade=3(オール3)は「オール3で行ける高校」実測クエリ(週数千imp)の受け皿。
+  // 学校名は断定しない方針を保ったまま、検索意図(高校の探し方)に title で正面対応する。
+  const isOru3 = grade === 3;
+  const title = isOru3
+    ? `オール3で行ける高校の探し方｜内申点は何点になる？【47都道府県】 | My Naishin`
+    : `${label}の内申点は何点？【47都道府県の計算例】 | My Naishin`;
+  const description = isOru3
+    ? `「オール3で行ける高校」を探す前に、まず内申点が実際に何点になるかを47都道府県の計算方式で確認できます。学校ごとの合格基準は年度で変動するため断定はせず、正確な内申点の計算結果と志望校選びの考え方を解説します。`
+    : `9教科すべての評定が${grade}だったときの内申点を、47都道府県の計算方式で実際に計算しました。都道府県ごとの満点・換算内申の目安がすぐにわかります。`;
   const url = `${SITE_URL}/naishin-oru/${grade}`;
   return {
     title,
     description,
-    keywords: [`${label} 内申点`, `${label} 換算内申`, `${label} 内申点 何点`, `内申点 ${label}`],
+    keywords: isOru3
+      ? [`オール3 行ける高校`, `オール3 内申点`, `オール3 換算内申`, `オール3 高校`, `内申点 オール3`]
+      : [`${label} 内申点`, `${label} 換算内申`, `${label} 内申点 何点`, `内申点 ${label}`],
     alternates: { canonical: url },
     openGraph: { title, description, url, type: 'article' },
   };
@@ -117,6 +126,16 @@ export default async function NaishinOruGradePage({ params }: PageProps) {
               <AlertTriangle className="mt-0.5 h-5 w-5 flex-shrink-0 text-amber-600" />
               <p className="text-sm leading-relaxed text-amber-900">
                 「{label}で行ける高校」を検索する方が多いですが、学校ごとの合格基準（ボーダー）は年度・倍率で毎年変動し、公表されている一次情報がないため、このページで特定の学校名は挙げていません。ここで確認できるのは「{label}の内申点が実際に何点になるか」という計算結果のみです。志望校の正確な合格基準は、その高校や都道府県教育委員会の入試情報で確認してください。
+                {grade === 3 && (
+                  <>
+                    {' '}
+                    地域ごとの偏差値レンジの目安（学校名の断定なし）は
+                    <Link href="/blog/all-3-high-school-options-2026-update" className="font-bold text-blue-700 hover:underline">
+                      オール3で行ける高校一覧の記事
+                    </Link>
+                    でも紹介しています。
+                  </>
+                )}
               </p>
             </div>
           </section>
