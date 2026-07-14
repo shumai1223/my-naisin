@@ -135,9 +135,12 @@ export function UnlockGate({
 
   return (
     <section
-      className={`overflow-hidden rounded-2xl border-2 border-dashed border-slate-300 bg-slate-50 p-6 md:p-7 ${className}`}
+      className={`relative overflow-hidden rounded-2xl border-2 border-indigo-200 bg-gradient-to-br from-indigo-50 via-white to-violet-50 p-6 shadow-lg shadow-indigo-100/70 md:p-7 ${className}`}
     >
-      <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-bold text-slate-600 ring-1 ring-slate-200">
+      {/* 視線を止めるアクセント光（2026-07-14: 旧デザインは灰色破線で存在感が無く素通りされた👤指摘） */}
+      <div className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full bg-violet-300/30 blur-2xl" />
+
+      <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-indigo-600 px-3 py-1 text-xs font-bold text-white shadow-sm">
         <Lock className="h-3.5 w-3.5" />
         解放コンテンツ
       </div>
@@ -146,6 +149,25 @@ export function UnlockGate({
         {resolvedTeaserTitle}
       </h3>
       <p className="mb-4 text-sm leading-relaxed text-slate-600">{resolvedTeaserBody}</p>
+
+      {/* ロック中プレビュー＝見返りの「形」をぼかしで見せる（数値は?? のみ。実数の捏造はしない） */}
+      <div className="relative mb-4 select-none overflow-hidden rounded-xl border border-indigo-100 bg-white/85 p-4">
+        <div className="blur-[6px]" aria-hidden="true">
+          <div className="flex items-baseline justify-between gap-3">
+            <span className="text-sm font-bold text-slate-700">全国の協力者の中でのあなたの位置</span>
+            <span className="whitespace-nowrap text-2xl font-black text-indigo-600">上位 ??%</span>
+          </div>
+          <div className="mt-2.5 h-3 w-full rounded-full bg-slate-100">
+            <div className="h-3 w-2/3 rounded-full bg-gradient-to-r from-indigo-400 to-violet-500" />
+          </div>
+        </div>
+        <div className="absolute inset-0 grid place-items-center">
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-slate-900/80 px-3.5 py-1.5 text-xs font-bold text-white shadow">
+            <Lock className="h-3.5 w-3.5" />
+            解放すると表示されます
+          </span>
+        </div>
+      </div>
 
       <div className="grid gap-2 sm:grid-cols-2">
         {hasCard ? (
