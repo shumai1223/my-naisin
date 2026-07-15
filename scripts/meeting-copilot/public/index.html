@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>商談副操縦士</title>
+<style>
+  * { box-sizing: border-box; margin: 0; }
+  body { font-family: "Yu Gothic UI", "Hiragino Sans", sans-serif; background: #0f1420; color: #e6e9f0; height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+  header { display: flex; align-items: center; gap: 12px; padding: 8px 14px; background: #171e2e; border-bottom: 1px solid #263049; }
+  header h1 { font-size: 15px; font-weight: 800; }
+  .badge { font-size: 11px; padding: 2px 8px; border-radius: 999px; background: #263049; }
+  .badge.ok { background: #14532d; color: #86efac; }
+  .badge.warn { background: #713f12; color: #fde047; }
+  main { flex: 1; display: grid; grid-template-columns: 46% 54%; min-height: 0; }
+  section { display: flex; flex-direction: column; min-height: 0; padding: 10px; gap: 8px; }
+  section.left { border-right: 1px solid #263049; }
+  .panel-title { font-size: 12px; font-weight: 700; color: #8b96ad; letter-spacing: .05em; }
+  #transcript { flex: 1; overflow-y: auto; background: #131a29; border: 1px solid #263049; border-radius: 10px; padding: 10px; font-size: 14px; line-height: 1.7; }
+  #transcript .line { margin-bottom: 4px; }
+  #transcript .t { color: #5b6780; }
+  #transcript .time { color: #5b6780; font-size: 11px; margin-right: 6px; }
+  #interim { color: #7dd3fc; font-style: italic; min-height: 1.4em; font-size: 13px; padding: 0 4px; }
+  .row { display: flex; gap: 6px; }
+  input[type=text] { flex: 1; background: #131a29; border: 1px solid #2c3a52; border-radius: 8px; color: #e6e9f0; padding: 8px 10px; font-size: 14px; }
+  button { border: 0; border-radius: 8px; padding: 8px 14px; font-size: 13px; font-weight: 700; cursor: pointer; background: #263049; color: #e6e9f0; }
+  button.primary { background: #2563eb; }
+  button.rec { background: #dc2626; }
+  button:disabled { opacity: .5; cursor: default; }
+  #suggestions { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; }
+  .card { background: #131a29; border: 1px solid #263049; border-radius: 10px; padding: 10px 12px; font-size: 15px; line-height: 1.75; white-space: pre-wrap; }
+  .card.ai { border-left: 3px solid #2563eb; }
+  .card .meta { font-size: 11px; color: #5b6780; margin-bottom: 4px; }
+  .card.loading { color: #7dd3fc; }
+  details { background: #131a29; border: 1px solid #263049; border-radius: 10px; padding: 6px 10px; }
+  details summary { cursor: pointer; font-size: 13px; font-weight: 700; padding: 4px 0; color: #cbd5e1; }
+  details .body { font-size: 14px; line-height: 1.75; padding: 6px 2px 8px; white-space: pre-wrap; color: #e6e9f0; }
+  .canned-wrap { display: flex; flex-direction: column; gap: 6px; max-height: 42%; overflow-y: auto; }
+</style>
+</head>
+<body>
+<header>
+  <h1>🎙️ 商談副操縦士</h1>
+  <span id="micBadge" class="badge">マイク: OFF</span>
+  <span id="aiBadge" class="badge warn">AI: 起動中…</span>
+  <span class="badge" style="margin-left:auto">スピーカー出音で相手の声も拾う / 保存なし</span>
+</header>
+<main>
+  <section class="left">
+    <div class="panel-title">会話ログ（自動文字起こし・編集はできないが手入力で追記可）</div>
+    <div id="transcript"></div>
+    <div id="interim"></div>
+    <div class="row">
+      <button id="micBtn">🎙️ 文字起こし開始</button>
+      <input type="text" id="manualInput" placeholder="聞き取れなかった発言を手で追記 → Enter" />
+    </div>
+  </section>
+  <section>
+    <div class="panel-title">⚡ 即答スクリプト（遅延ゼロ・来るとわかってる質問はここ）</div>
+    <div class="canned-wrap" id="canned"></div>
+    <div class="panel-title" style="margin-top:4px">🤖 AIサジェスト（想定外の質問が来たら押す・2〜5秒）</div>
+    <div class="row">
+      <input type="text" id="askInput" placeholder="補足指示（空欄なら直近の発言に回答ヒント）Ctrl+Enterでも発射" />
+      <button id="suggestBtn" class="primary">⚡ サジェスト</button>
+    </div>
+    <div id="suggestions"></div>
+  </section>
+</main>
+<script>
+// ---------- 即答スクリプト ----------
+const CANNED = [
+  ['💰 価格を聞かれた', '「費用は想定される利用者数と組み込み方で大きく変わるので、先にそちらを伺えますか？そのうえでお見積もりをお出しします。小さくパイロットから始める形も可能です」\n※先に数字を言わない。粘られても「規模を伺ってから」で通す'],
+  ['🏭 「自前で作れますよね？」', '「おっしゃる通り、御社の技術力なら作れると思います。ただ問題は作ることではなく維持で、47都道府県×毎年の制度改定を追い続けるコストがかかり続けます。弊方は月額でそれを肩代わりします。いま組めばこの冬の受験シーズンに間に合います」'],
+  ['🥇 「導入実績は？」', '「導入企業としては御社が第1号です。だからこそ第1号には最大の条件を用意します——パイロット価格・共同プレスリリース・導入事例としての最優先サポート。APIは決済まで含めて本番稼働済みで、動くものをその場でお見せできます」'],
+  ['🔒 独占の打診', '「独占ですと他社様にご提供できなくなる分、成果に関わらないミニマム・ギャランティ（毎月の最低保証額）を設定させていただく形になります。基本的には非独占を想定していますが、期間限定・用途限定の優先提供なら柔軟に検討できます」'],
+  ['🆓 「無料枠でよくない？」', '「無料枠やProプランは個人利用・社内検証向けです。御社のサービスに組み込んでエンドユーザーに提供（再配布）する場合は商用ライセンスの範囲になります。技術検証を無料枠で試していただくのは大歓迎です」'],
+  ['📈 「数十万人規模でも大丈夫？」', '「インフラはCloudflareのグローバルエッジで動いているので負荷面は問題ありません。ライセンスは利用規模に応じた設計にしますので——まさにその想定人数を、ぜひ教えてください」\n※規模を聞き出すチャンス。値付け材料'],
+  ['🔁 更新体制・キーマンリスク', '「各都道府県の教育委員会の公式発表、つまり一次ソースを直接参照し、毎年春の要項発表時期に全県を点検します。データ整合の自動テストもあり、属人的な目視には頼らない設計です。実際この1年、学業と並行して週次更新を続けてきた実績があります」'],
+  ['✍️ 契約主体を聞かれた', '「未成年のため、契約はFP2級を持つ母を介して進めます。契約・決済（Stripe稼働済み）・税務まで、法人様との取引を想定した体制をすでに整えています」'],
+  ['❓ こちらからの逆質問3本', '①「組み込み先のサービスと想定利用者数を教えてください」\n②「今回、どういうきっかけ・社内のどんな課題感でご連絡いただけたんですか？」\n③「導入までの社内プロセスと時期感を教えてください。どなたのご判断で進みますか？」'],
+  ['📊 数字ファクト（盛らない）', '・Google検索経由 直近28日で7,000クリック（月7〜8千・伸長中）\n・47都道府県すべての内申点計算に対応\n・ユーザーは中学生本人＋保護者の2層\n・提供形態: REST API / MCP / データセットの3つ・課金決済まで本番稼働済み\n・非金銭4点セット: 社名公表／製品内クレジット／出典リンク／共同リリース'],
+];
+const cannedWrap = document.getElementById('canned');
+for (const [title, body] of CANNED) {
+  const d = document.createElement('details');
+  const s = document.createElement('summary');
+  s.textContent = title;
+  const b = document.createElement('div');
+  b.className = 'body';
+  b.textContent = body;
+  d.append(s, b);
+  cannedWrap.append(d);
+}
+
+// ---------- 文字起こし ----------
+const transcriptEl = document.getElementById('transcript');
+const interimEl = document.getElementById('interim');
+const micBtn = document.getElementById('micBtn');
+const micBadge = document.getElementById('micBadge');
+const lines = []; // {time, text}
+let sentCount = 0; // AIに送信済みの行数
+let micOn = false;
+let rec = null;
+
+function addLine(text) {
+  if (!text) return;
+  const time = new Date().toTimeString().slice(0, 5);
+  lines.push({ time, text });
+  const div = document.createElement('div');
+  div.className = 'line';
+  const t = document.createElement('span');
+  t.className = 'time';
+  t.textContent = time;
+  div.append(t, document.createTextNode(text));
+  transcriptEl.append(div);
+  transcriptEl.scrollTop = transcriptEl.scrollHeight;
+}
+
+function setupRec() {
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SR) { alert('このブラウザは音声認識非対応です。Chromeを使ってください'); return null; }
+  const r = new SR();
+  r.lang = 'ja-JP';
+  r.continuous = true;
+  r.interimResults = true;
+  r.onresult = (e) => {
+    let interim = '';
+    for (let i = e.resultIndex; i < e.results.length; i++) {
+      const res = e.results[i];
+      if (res.isFinal) addLine(res[0].transcript.trim());
+      else interim += res[0].transcript;
+    }
+    interimEl.textContent = interim;
+  };
+  r.onend = () => { if (micOn) setTimeout(() => { try { r.start(); } catch {} }, 150); };
+  r.onerror = (e) => { if (e.error === 'not-allowed') { micOn = false; renderMic(); alert('マイクの使用を許可してください'); } };
+  return r;
+}
+
+function renderMic() {
+  micBtn.textContent = micOn ? '⏸ 文字起こし停止' : '🎙️ 文字起こし開始';
+  micBtn.className = micOn ? 'rec' : '';
+  micBadge.textContent = 'マイク: ' + (micOn ? 'ON' : 'OFF');
+  micBadge.className = 'badge' + (micOn ? ' ok' : '');
+}
+
+micBtn.onclick = () => {
+  if (!rec) rec = setupRec();
+  if (!rec) return;
+  micOn = !micOn;
+  if (micOn) { try { rec.start(); } catch {} } else { rec.stop(); interimEl.textContent = ''; }
+  renderMic();
+};
+
+document.getElementById('manualInput').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') { addLine('✍️ ' + e.target.value.trim()); e.target.value = ''; }
+});
+
+// ---------- AIサジェスト ----------
+const suggestionsEl = document.getElementById('suggestions');
+const suggestBtn = document.getElementById('suggestBtn');
+const askInput = document.getElementById('askInput');
+const aiBadge = document.getElementById('aiBadge');
+
+async function pollHealth() {
+  try {
+    const h = await (await fetch('/health')).json();
+    aiBadge.textContent = h.ready ? 'AI: 準備完了' : 'AI: 起動中…';
+    aiBadge.className = 'badge' + (h.ready ? ' ok' : ' warn');
+    if (h.ready) return;
+  } catch {
+    aiBadge.textContent = 'AI: サーバー未接続';
+    aiBadge.className = 'badge warn';
+  }
+  setTimeout(pollHealth, 3000);
+}
+pollHealth();
+
+let busy = false;
+async function suggest() {
+  if (busy) return;
+  const newLines = lines.slice(sentCount).map((l) => `${l.time} ${l.text}`);
+  const ask = askInput.value.trim();
+  if (newLines.length === 0 && !ask) return;
+  sentCount = lines.length;
+  askInput.value = '';
+  busy = true;
+  suggestBtn.disabled = true;
+
+  const msg =
+    (newLines.length ? `【会話ログ(新規分)】\n${newLines.join('\n')}\n\n` : '') +
+    `【依頼】${ask || '直近の相手の発言への回答ヒントを。'}`;
+
+  const card = document.createElement('div');
+  card.className = 'card ai loading';
+  card.textContent = '⏳ 考え中…';
+  suggestionsEl.prepend(card);
+
+  try {
+    const t0 = Date.now();
+    const res = await fetch('/suggest', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ text: msg }),
+    });
+    if (!res.ok) {
+      card.classList.remove('loading');
+      card.textContent = await res.text();
+    } else {
+      // ストリーミング表示: 届いた端から描画する
+      card.innerHTML = '';
+      const meta = document.createElement('div');
+      meta.className = 'meta';
+      meta.textContent = `${new Date().toTimeString().slice(0, 8)}${ask ? ' ・ ' + ask : ''} ・ ⏳`;
+      const textNode = document.createTextNode('');
+      card.append(meta, textNode);
+      const reader = res.body.getReader();
+      const dec = new TextDecoder();
+      let first = true;
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        if (first) { card.classList.remove('loading'); first = false; }
+        textNode.textContent += dec.decode(value, { stream: true });
+      }
+      textNode.textContent += dec.decode();
+      meta.textContent = meta.textContent.replace('⏳', `${((Date.now() - t0) / 1000).toFixed(1)}秒`);
+      card.classList.remove('loading');
+    }
+  } catch (e) {
+    card.classList.remove('loading');
+    card.textContent = '❌ 通信エラー: ' + e.message;
+  }
+  busy = false;
+  suggestBtn.disabled = false;
+}
+
+suggestBtn.onclick = suggest;
+document.addEventListener('keydown', (e) => { if (e.ctrlKey && e.key === 'Enter') suggest(); });
+</script>
+</body>
+</html>
