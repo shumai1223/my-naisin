@@ -45,7 +45,10 @@ export const TIER_POLICIES: Record<ApiTier, TierPolicy> = {
   anonymous: {
     tier: 'anonymous',
     label: 'Anonymous（キー無し）',
-    ratePerMinute: 30,
+    // 2026-07-16: 30→5。AI引用・お試しは数回/分で足りる。自サイトUI(same-origin)は
+    // api-auth側で別枠(30)を持つため実ユーザーには影響しない。エッジ側バインディング
+    // (wrangler.jsonc の API_RATE_LIMIT_ANON)と数字を揃えること。
+    ratePerMinute: 5,
     monthlyQuota: 0, // 月次は数えない（IP単位の窓のみ）
     attributionRequired: true,
     commercialUse: true,
@@ -58,7 +61,8 @@ export const TIER_POLICIES: Record<ApiTier, TierPolicy> = {
   free: {
     tier: 'free',
     label: 'Free（登録キー）',
-    ratePerMinute: 120,
+    // 2026-07-16: 120→15。月次1万との整合(120/分は83分で月次到達=2桁の不整合だった)。
+    ratePerMinute: 15,
     monthlyQuota: 10_000,
     attributionRequired: true,
     commercialUse: true,

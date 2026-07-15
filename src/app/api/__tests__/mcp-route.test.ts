@@ -6,6 +6,7 @@
  * 実際のハンドラ経由で検証し、AIエージェントとの接続契約の回帰を防ぐ。
  */
 import { POST, GET } from '@/app/api/mcp/route';
+import { resetApiRateLimiterForTests } from '@/lib/api-auth';
 
 function rpc(method: string, params: Record<string, unknown> = {}, id: number | null = 1) {
   return new Request('https://my-naishin.com/api/mcp', {
@@ -18,6 +19,12 @@ function rpc(method: string, params: Record<string, unknown> = {}, id: number | 
 const ALL_FIVE = {
   japanese: 5, math: 5, english: 5, science: 5, social: 5, music: 5, art: 5, pe: 5, tech: 5,
 };
+
+// 2026-07-16: MCPもgateApiRequest配下になった。テストリクエストはヘッダ無し＝ip:unknownの
+// mcpバケットを全テストが共有するため、テストごとにクリアしないと匿名上限で偽429になる。
+beforeEach(() => {
+  resetApiRateLimiterForTests();
+});
 
 describe('/api/mcp JSON-RPC 契約', () => {
   test('initialize は tools/resources/prompts を宣言', async () => {
@@ -270,5 +277,22 @@ describe('/api/mcp JSON-RPC 契約', () => {
     const json = await res.json();
     expect(json.tools).toHaveLength(25);
     expect(json.methods).toContain('resources/read');
+  });
+});
+
+describe('/api/mcp レート制限（2026-07-16: ゲート未通過の穴を封鎖）', () => {
+  test('匿名の連打はMCP専用上限(20/分)を超えると 429', async () => {
+    let last: Response | null = null;
+    for (let i = 0; i < 23; i += 1) {
+      last = await POST(rpc('ping', {}, i + 1));
+    }
+    expect(last!.status).toBe(429);
+  });
+
+  test('上限内(20/分)のAIエージェント的バーストは全て通る', async () => {
+    for (let i = 0; i < 20; i += 1) {
+      const res = await POST(rpc('ping', {}, i + 1));
+      expect(res.status).toBe(200);
+    }
   });
 });

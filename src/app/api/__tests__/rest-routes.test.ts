@@ -25,7 +25,7 @@ function req(url: string) {
 
 // Jestのテストリクエストはヘッダ無し＝clientIp()が'unknown'にフォールバックし、同一ファイル内の
 // 全リクエストがip:unknownバケットを共有する。テストが増えるほど無関係な他describeとanonymousの
-// 1分間レート上限（30）を食い合って429偽落ちするため、テストごとにレート制限器をクリアする。
+// 1分間レート上限を食い合って429偽落ちするため、テストごとにレート制限器をクリアする。
 beforeEach(() => {
   resetApiRateLimiterForTests();
 });

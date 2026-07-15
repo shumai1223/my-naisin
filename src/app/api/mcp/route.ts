@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 
+import { gateApiRequest } from '@/lib/api-auth';
 import { CORS_HEADERS, corsPreflight, logApiHit } from '@/lib/api-cors';
 import {
   buildDatasetIndex,
@@ -781,7 +782,21 @@ async function runTool(name: string, args: Record<string, unknown>) {
   return null;
 }
 
+// MCPの匿名分速上限。AIエージェントは1会話で initialize→tools/list→複数callと連続で叩くため、
+// RESTの匿名上限(5/分)では正当なAI利用が窒息する。GEO戦略上AIの引用は止めない=REST側より緩く、
+// バケットも分離してREST側の上限と食い合わないようにする。キー付きは通常のティア判定+月次計測が効く。
+const MCP_ANON_RATE_PER_MINUTE = 20;
+
 export async function POST(request: Request) {
+  // 2026-07-16: 従来MCPはゲート未通過(キー照合なし・計測なし・レート制限なし)だった。
+  // キー付きMCP利用がadmin/reportのカウントに乗らない原因かつ、無制限に叩ける穴。
+  const gate = await gateApiRequest(request, {
+    anonymousRatePerMinute: MCP_ANON_RATE_PER_MINUTE,
+    useEdgeLimiter: false, // エッジバインディングの数字(5/分)はREST用のため、ここでは使わない
+    bucket: 'mcp',
+  });
+  if (!gate.allowed) return gate.response;
+
   let body: unknown;
   try {
     body = await request.json();

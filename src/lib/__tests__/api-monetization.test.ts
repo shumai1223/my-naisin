@@ -15,7 +15,7 @@ import {
   formatTierPrice,
   periodKey,
 } from '../api-tiers';
-import { createRateLimiter, extractApiKey, gateApiRequest } from '../api-auth';
+import { createRateLimiter, extractApiKey, gateApiRequest, SAME_ORIGIN_RATE_PER_MINUTE } from '../api-auth';
 import { computeFreemiumFunnel } from '../api-keys';
 
 describe('api-tiers（ティア表の正準データ）', () => {
@@ -129,6 +129,55 @@ describe('gateApiRequest（匿名経路：D1未接続でも壊れない）', () 
     if (last && !last.allowed) {
       expect(last.response.status).toBe(429);
     }
+  });
+
+  // 2026-07-16: 匿名を5/分へ厳格化した際の実ユーザー保護。自サイトUI(StudyPlanCalculator等)は
+  // ブラウザが偽装不能な Sec-Fetch-Site: same-origin を送るため、別枠(30/分)で守られる。
+  test('same-origin(自サイトUI)は匿名の厳格上限を超えても別枠(30/分)で許可される', async () => {
+    const ip = '203.0.113.150';
+    const strictLimit = TIER_POLICIES.anonymous.ratePerMinute;
+    let last: Awaited<ReturnType<typeof gateApiRequest>> | null = null;
+    for (let i = 0; i < strictLimit + 3; i += 1) {
+      last = await gateApiRequest(
+        new Request('https://my-naishin.com/api/naishin', {
+          headers: { 'cf-connecting-ip': ip, 'sec-fetch-site': 'same-origin' },
+        })
+      );
+    }
+    expect(last!.allowed).toBe(true);
+    if (last && last.allowed) {
+      expect(last.headers['X-RateLimit-Limit']).toBe(String(SAME_ORIGIN_RATE_PER_MINUTE));
+    }
+  });
+
+  test('same-originでも緩和上限(30/分)を超えると 429', async () => {
+    const ip = '203.0.113.151';
+    let last: Awaited<ReturnType<typeof gateApiRequest>> | null = null;
+    for (let i = 0; i < SAME_ORIGIN_RATE_PER_MINUTE + 2; i += 1) {
+      last = await gateApiRequest(
+        new Request('https://my-naishin.com/api/naishin', {
+          headers: { 'cf-connecting-ip': ip, 'sec-fetch-site': 'same-origin' },
+        })
+      );
+    }
+    expect(last!.allowed).toBe(false);
+    if (last && !last.allowed) {
+      expect(last.response.status).toBe(429);
+    }
+  });
+
+  test('cross-site(第三者サイトのCORS)はsame-origin別枠の対象外＝厳格上限が適用される', async () => {
+    const ip = '203.0.113.152';
+    const strictLimit = TIER_POLICIES.anonymous.ratePerMinute;
+    let last: Awaited<ReturnType<typeof gateApiRequest>> | null = null;
+    for (let i = 0; i < strictLimit + 2; i += 1) {
+      last = await gateApiRequest(
+        new Request('https://my-naishin.com/api/naishin', {
+          headers: { 'cf-connecting-ip': ip, 'sec-fetch-site': 'cross-site' },
+        })
+      );
+    }
+    expect(last!.allowed).toBe(false);
   });
 });
 

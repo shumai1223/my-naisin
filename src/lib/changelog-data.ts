@@ -14,6 +14,14 @@ export interface ChangeLogEntry {
 
 export const CHANGELOG: ChangeLogEntry[] = [
   {
+    date: '2026-07-16',
+    type: 'update',
+    category: 'feature',
+    title: '公開API・AI連携(MCP)の利用ルールを整備',
+    description:
+      '無料利用のレート上限を用途に合わせて見直し、大量の自動アクセスへの制限を強化しました。あわせて、AI連携（MCP）でもAPIキーによる利用計測とレート制限が働くようにしています。サイト内の計算ツールのご利用には影響ありません。最新の上限値は開発者向けページに掲載しています。',
+  },
+  {
     date: '2026-07-15',
     type: 'update',
     category: 'feature',
