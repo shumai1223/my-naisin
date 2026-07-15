@@ -14,6 +14,34 @@ export interface ChangeLogEntry {
 
 export const CHANGELOG: ChangeLogEntry[] = [
   {
+    date: '2026-07-15',
+    type: 'update',
+    category: 'feature',
+    title: 'データ連携・API活用ページを拡充、案内リンクを強化',
+    description: '塾・模試運営会社向けのデータ連携ページや、開発者向けAPI活用サンプルを追加しました。あわせて、偏差値診断ページの案内文を検索ニーズに合わせて見直し、合否判定に関する各ツール間の案内リンクを強化しています。',
+  },
+  {
+    date: '2026-07-14',
+    type: 'update',
+    category: 'ui',
+    title: '計算結果画面をリニューアル、一部環境の表示不具合を修正',
+    description: '計算結果直後の「保存する」ボタンと、全国の協力者と比較できる「解放コンテンツ」の見た目を刷新しました。また、一部のスマートフォン環境（Android等）で画面下の常設バーが表示されないことがある不具合を修正しています。',
+  },
+  {
+    date: '2026-07-14',
+    type: 'update',
+    category: 'ui',
+    title: 'Cookie確認表示をコンパクト化、公式Xアカウントを開設',
+    description: 'サイト訪問時のCookie利用確認を、画面を大きく覆わないシンプルな表示に変更しました（同意の選択肢に変更はありません）。あわせて、開発の裏側や受験データを発信する公式Xアカウントを開設し、フッターからアクセスできるようにしました。',
+  },
+  {
+    date: '2026-07-13',
+    type: 'fix',
+    category: 'feature',
+    title: '不正な自動アクセスへの対策を強化',
+    description: '実際の利用者ではない自動アクセスによる無効なクリックを検知・遮断する仕組みを強化し、計測データの正確性を高めました。',
+  },
+  {
     date: '2026-07-04',
     type: 'update',
     category: 'feature',
