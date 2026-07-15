@@ -37,11 +37,11 @@ type EdgeRateLimiter = { limit(options: { key: string }): Promise<{ success: boo
  * メモリ窓はアイソレート単位でしか数えられず分散すると貫通する(2026-07-16に実証)ため、
  * 本当の壁はこちら。ローカル/jest では取得に失敗して null → メモリ窓のみにフォールバック。
  */
-async function getEdgeAnonLimiter(): Promise<EdgeRateLimiter | null> {
+async function getEdgeAnonLimiter(bindingName: string): Promise<EdgeRateLimiter | null> {
   try {
     const { getCloudflareContext } = await import('@opennextjs/cloudflare');
     const { env } = await getCloudflareContext({ async: true });
-    const rl = (env as Record<string, unknown>).API_RATE_LIMIT_ANON as EdgeRateLimiter | undefined;
+    const rl = (env as Record<string, unknown>)[bindingName] as EdgeRateLimiter | undefined;
     return rl && typeof rl.limit === 'function' ? rl : null;
   } catch {
     return null;
@@ -126,8 +126,12 @@ export type GateResult =
 export interface GateOptions {
   /** 匿名の分速上限の上書き（既定は TIER_POLICIES.anonymous.ratePerMinute）。MCPなどバースト特性の異なる入口用。 */
   anonymousRatePerMinute?: number;
-  /** エッジ側バインディング(API_RATE_LIMIT_ANON)を使うか。上限を上書きする入口では false にする（バインディングの数字は固定のため）。 */
-  useEdgeLimiter?: boolean;
+  /**
+   * 使用するエッジ側バインディング名。既定 'API_RATE_LIMIT_ANON'。
+   * 上限の異なる入口は専用バインディング（例: MCP='API_RATE_LIMIT_MCP'）を指定する
+   * （バインディングのlimitは固定値のため）。false でエッジ制限を使わない。
+   */
+  edgeBinding?: string | false;
   /** メモリ窓のバケット名前空間。既定 'ip'。別入口（MCP等）は別バケットにして食い合いを防ぐ。 */
   bucket?: string;
 }
@@ -205,7 +209,8 @@ export async function gateApiRequest(request: Request, options: GateOptions = {}
   // 第三者（CORS/サーバーサイド/直叩き）：エッジで本当に効く分速＋アイソレート内メモリ窓の二段構え。
   const policy = getTierPolicy(tier);
   const anonLimit = options.anonymousRatePerMinute ?? policy.ratePerMinute;
-  const edge = options.useEdgeLimiter === false ? null : await getEdgeAnonLimiter();
+  const edge =
+    options.edgeBinding === false ? null : await getEdgeAnonLimiter(options.edgeBinding ?? 'API_RATE_LIMIT_ANON');
   if (edge) {
     try {
       const { success } = await edge.limit({ key: ip });

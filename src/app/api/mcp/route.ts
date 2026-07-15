@@ -792,7 +792,7 @@ export async function POST(request: Request) {
   // キー付きMCP利用がadmin/reportのカウントに乗らない原因かつ、無制限に叩ける穴。
   const gate = await gateApiRequest(request, {
     anonymousRatePerMinute: MCP_ANON_RATE_PER_MINUTE,
-    useEdgeLimiter: false, // エッジバインディングの数字(5/分)はREST用のため、ここでは使わない
+    edgeBinding: 'API_RATE_LIMIT_MCP', // MCP専用のエッジ制限(20/60秒)。メモリ窓だけではアイソレート分散で貫通する
     bucket: 'mcp',
   });
   if (!gate.allowed) return gate.response;
