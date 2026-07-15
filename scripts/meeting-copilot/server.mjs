@@ -3,8 +3,9 @@
 // 以降の各質問を同一プロセスに流すことで応答2〜5秒を実現する。
 // MCP はロードしない(--strict-mcp-config)・cwd はこのディレクトリ(プロジェクト設定を拾わせない)。
 import http from 'node:http';
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync, rmSync } from 'node:fs';
 import { spawn } from 'node:child_process';
+import os from 'node:os';
 import { dirname, join, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -15,6 +16,18 @@ const MODEL = process.env.COPILOT_MODEL || 'haiku';
 const TURN_TIMEOUT_MS = 90_000;
 
 const SYSTEM_PROMPT = readFileSync(join(DIR, 'prompt.md'), 'utf8');
+
+// 「どこにも保存しない」保証: claude CLIがローカルに残すセッションログ
+// (~/.claude/projects/<このcwdのslug>/*.jsonl)を起動時と終了時に削除する。
+// 終了時はプロセスがまだ書き込み中で消せないことがあるため、次回起動時の削除が保険になる。
+function wipeSessionLogs() {
+  try {
+    const root = join(os.homedir(), '.claude', 'projects');
+    for (const d of readdirSync(root)) {
+      if (d.includes('meeting-copilot')) rmSync(join(root, d), { recursive: true, force: true });
+    }
+  } catch {}
+}
 
 // ---- 常駐 claude プロセス管理 -------------------------------------------
 let child = null;
@@ -102,17 +115,24 @@ function onResult(ev) {
   drainQueue();
 }
 
+let lastError = null;
+
 async function warmup() {
   const t0 = Date.now();
   console.log('[copilot] ウォームアップ中(初回のみ〜40秒)...');
   try {
-    await sendTurn(
+    const r = await sendTurn(
       `以下があなたへのシステム指示。全て記憶し、以後この指示に従うこと。返事は「OK」のみ。\n\n${SYSTEM_PROMPT}`,
     );
+    // セッション上限などはエラーでなく本文として返ることがある
+    if (/session limit|usage limit|rate limit/i.test(r)) throw new Error(r.slice(0, 120));
     ready = true;
+    lastError = null;
     console.log(`[copilot] 準備完了 (${((Date.now() - t0) / 1000).toFixed(1)}秒) -> http://localhost:${PORT}`);
   } catch (e) {
-    console.error('[copilot] ウォームアップ失敗:', e.message);
+    lastError = e.message;
+    console.error('[copilot] ウォームアップ失敗:', e.message, '→ 60秒後に再試行');
+    setTimeout(warmup, 60_000);
   }
 }
 
@@ -131,7 +151,7 @@ const server = http.createServer(async (req, res) => {
   }
   if (req.method === 'GET' && req.url === '/health') {
     res.writeHead(200, { 'content-type': 'application/json; charset=utf-8' });
-    return res.end(JSON.stringify({ ready, model: MODEL }));
+    return res.end(JSON.stringify({ ready, model: MODEL, error: lastError }));
   }
   if (req.method === 'POST' && req.url === '/suggest') {
     let raw = '';
@@ -164,6 +184,10 @@ const server = http.createServer(async (req, res) => {
 
 server.listen(PORT, '127.0.0.1', () => {
   console.log(`[copilot] http://localhost:${PORT} で待機中(ウォームアップ完了までサジェストは不可)`);
+  wipeSessionLogs();
   spawnChild();
   warmup();
 });
+
+process.on('exit', () => { try { child?.kill(); } catch {} wipeSessionLogs(); });
+for (const sig of ['SIGINT', 'SIGTERM', 'SIGHUP']) process.on(sig, () => process.exit(0));

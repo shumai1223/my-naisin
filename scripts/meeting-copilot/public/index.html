@@ -58,10 +58,11 @@
   <section>
     <div class="panel-title">⚡ 即答スクリプト（遅延ゼロ・来るとわかってる質問はここ）</div>
     <div class="canned-wrap" id="canned"></div>
-    <div class="panel-title" style="margin-top:4px">🤖 AIサジェスト（想定外の質問が来たら押す・2〜5秒）</div>
+    <div class="panel-title" style="margin-top:4px">🤖 AIサジェスト（自動: 質問を検知したら勝手に答えが流れる）</div>
     <div class="row">
-      <input type="text" id="askInput" placeholder="補足指示（空欄なら直近の発言に回答ヒント）Ctrl+Enterでも発射" />
-      <button id="suggestBtn" class="primary">⚡ サジェスト</button>
+      <button id="autoBtn" class="primary">🤖 自動回答: ON</button>
+      <input type="text" id="askInput" placeholder="手動で聞きたい時だけ入力 → Ctrl+Enter" />
+      <button id="suggestBtn">⚡ 手動</button>
     </div>
     <div id="suggestions"></div>
   </section>
@@ -114,6 +115,7 @@ function addLine(text) {
   div.append(t, document.createTextNode(text));
   transcriptEl.append(div);
   transcriptEl.scrollTop = transcriptEl.scrollHeight;
+  scheduleAuto();
 }
 
 function setupRec() {
@@ -165,7 +167,9 @@ const aiBadge = document.getElementById('aiBadge');
 async function pollHealth() {
   try {
     const h = await (await fetch('/health')).json();
-    aiBadge.textContent = h.ready ? 'AI: 準備完了' : 'AI: 起動中…';
+    aiBadge.textContent = h.ready ? 'AI: 準備完了'
+      : h.error ? 'AI: ⚠️ ' + h.error.slice(0, 60)
+      : 'AI: 起動中…';
     aiBadge.className = 'badge' + (h.ready ? ' ok' : ' warn');
     if (h.ready) return;
   } catch {
@@ -176,25 +180,46 @@ async function pollHealth() {
 }
 pollHealth();
 
+// ---- 自動回答モード: 発言の区切り(0.9秒沈黙)ごとに自動でAIへ流す ----
+let autoOn = true;
+let autoTimer = null;
+const autoBtn = document.getElementById('autoBtn');
+
+function scheduleAuto() {
+  if (!autoOn) return;
+  clearTimeout(autoTimer);
+  autoTimer = setTimeout(() => suggest(true), 900);
+}
+
+autoBtn.onclick = () => {
+  autoOn = !autoOn;
+  autoBtn.textContent = '🤖 自動回答: ' + (autoOn ? 'ON' : 'OFF');
+  autoBtn.className = autoOn ? 'primary' : '';
+  if (autoOn) scheduleAuto();
+};
+
 let busy = false;
-async function suggest() {
-  if (busy) return;
+async function suggest(auto = false) {
+  if (busy) { if (auto) scheduleAuto(); return; } // 生成中に来た発言は終了後にまとめて再送
   const newLines = lines.slice(sentCount).map((l) => `${l.time} ${l.text}`);
-  const ask = askInput.value.trim();
+  const ask = auto ? '' : askInput.value.trim();
   if (newLines.length === 0 && !ask) return;
   sentCount = lines.length;
-  askInput.value = '';
+  if (!auto) askInput.value = '';
   busy = true;
   suggestBtn.disabled = true;
 
   const msg =
     (newLines.length ? `【会話ログ(新規分)】\n${newLines.join('\n')}\n\n` : '') +
-    `【依頼】${ask || '直近の相手の発言への回答ヒントを。'}`;
+    `【依頼】${ask || (auto
+      ? '自動モード: 直近の発言が回答すべき質問・懸念なら回答ヒントを。不要なら「スキップ」とだけ。'
+      : '直近の相手の発言への回答ヒントを。')}`;
 
   const card = document.createElement('div');
   card.className = 'card ai loading';
   card.textContent = '⏳ 考え中…';
   suggestionsEl.prepend(card);
+  while (suggestionsEl.children.length > 10) suggestionsEl.lastChild.remove();
 
   try {
     const t0 = Date.now();
@@ -226,6 +251,8 @@ async function suggest() {
       textNode.textContent += dec.decode();
       meta.textContent = meta.textContent.replace('⏳', `${((Date.now() - t0) / 1000).toFixed(1)}秒`);
       card.classList.remove('loading');
+      // 自動モードで「回答不要」判定ならカードごと消す(画面を汚さない)
+      if (auto && textNode.textContent.trim().startsWith('スキップ')) card.remove();
     }
   } catch (e) {
     card.classList.remove('loading');
@@ -233,9 +260,10 @@ async function suggest() {
   }
   busy = false;
   suggestBtn.disabled = false;
+  if (autoOn && lines.length > sentCount) scheduleAuto(); // 生成中に溜まった発言を処理
 }
 
-suggestBtn.onclick = suggest;
+suggestBtn.onclick = () => suggest(false);
 document.addEventListener('keydown', (e) => { if (e.ctrlKey && e.key === 'Enter') suggest(); });
 </script>
 </body>
