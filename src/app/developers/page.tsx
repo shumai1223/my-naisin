@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Database, Code2, Bot, Scale, ArrowLeft, Terminal, Sparkles, ExternalLink, KeyRound, Gauge } from 'lucide-react';
+import { Database, Code2, Bot, Scale, ArrowLeft, Terminal, Sparkles, ExternalLink, KeyRound, Gauge, Play } from 'lucide-react';
 
 import { ApiKeyIssuer } from '@/components/Developers/ApiKeyIssuer';
+import { ApiPlayground } from '@/components/Developers/ApiPlayground';
 import { UpgradeButton } from '@/components/Developers/UpgradeButton';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { DatasetSchema } from '@/components/StructuredData/DatasetSchema';
@@ -201,6 +202,18 @@ curl "${SITE_URL}/api/total-score/hyogo?academicRaw=420&reportRaw=200"`;
             登録・APIキーなしで、今すぐ試せます。
           </p>
           <CodeBlock>{quickstartExample}</CodeBlock>
+        </section>
+
+        {/* APIプレイグラウンド（W-15・その場で動くものをお見せできる実演用） */}
+        <section className="mb-10">
+          <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
+            <Play className="h-5 w-5 text-indigo-500" />
+            APIプレイグラウンド
+          </h2>
+          <p className="mb-3 text-sm leading-relaxed text-slate-600">
+            都道府県を選んで、実際にAPIを呼び出してみてください。レスポンスはこの場でそのまま表示されます（登録不要）。
+          </p>
+          <ApiPlayground />
         </section>
 
         {/* 利用シーン（事例・E-3） */}
