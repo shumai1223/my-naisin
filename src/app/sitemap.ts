@@ -6,6 +6,7 @@ import { VERIFIED_TOTAL_SCORE_CODES } from '@/lib/total-score/registry';
 import { EXPLAINER_CODES } from '@/lib/total-score/explainers';
 import { STATIC_PAGES } from '@/lib/page-registry';
 import { SHINDAN_PURPOSE_CONTENTS } from '@/lib/shindan-purpose-content';
+import { NAISHIN_OMOMI_CODES } from '@/lib/naishin-omomi-content';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://my-naishin.com';
@@ -82,6 +83,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
+  // 8. 都道府県別「内申の重み」個別解説（W-13・執筆済みの県のみ。生成はNAISHIN_OMOMI_CODESに従属）
+  const naishinOmomiPages = NAISHIN_OMOMI_CODES.map(code => ({
+    url: `${baseUrl}/${code}/naishin-omomi`,
+    lastModified,
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }));
+
   return [
     ...staticPages,
     ...prefectureTopPages,
@@ -91,5 +100,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...totalScorePages,
     ...totalScoreExplainerPages,
     ...shindanPurposePages,
+    ...naishinOmomiPages,
   ];
 }

@@ -82,6 +82,7 @@ const HOWTO_EXEMPT_ROUTES: Record<string, string> = {
   '/total-score': '総合得点計算機ハブ（下位47県ページへの導線が本体）',
   '/[prefecture]': '県別内申点ガイドページ（手順でなく制度解説。CANDIDATE_FOR_HOWTO_CONTENT参照）',
   '/[prefecture]/reverse': 'permanentRedirectのみのリダイレクトページ（実コンテンツ無し）',
+  '/[prefecture]/naishin-omomi': '県別内申の重み分析ページ（手順でなく近隣県比較の分析記事。ArticleSchemaで対応）',
   // 以下は実際に入力→計算の手順を持つ計算機/診断ツールだが、各ページの実フローを
   // 確認しながら正確なHowToStepを書く必要があるため今回は見送り、次周以降の継続タスクとする。
   '/hensachi/gyakusan': '偏差値逆算計算機（未着手・CANDIDATE_FOR_HOWTO_CONTENT）',

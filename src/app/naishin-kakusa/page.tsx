@@ -6,8 +6,9 @@ import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { ArticleSchema } from '@/components/StructuredData/ArticleSchema';
 import { DatasetSchema } from '@/components/StructuredData/DatasetSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
-import { PREFECTURES } from '@/lib/prefectures';
+import { PREFECTURES, getPrefectureByCode } from '@/lib/prefectures';
 import { SITE_URL } from '@/lib/naishin-dataset';
+import { NAISHIN_OMOMI_CODES } from '@/lib/naishin-omomi-content';
 
 // 全て src/lib/prefectures.ts (各都道府県教育委員会の公式発表に基づく既存データ) から算出。
 // 新規の数値は追加していない＝捏造ゼロ。
@@ -224,6 +225,29 @@ export default function NaishinKakusaPage() {
               重要なのは<strong>「何%を実技が占めるか」「何%を中3が占めるか」という構造の違い</strong>で、①②で見た通りです。
               一部の県（岡山・香川・大分など）では、本サイトの計算モデルは簡易版であり、実際の選抜ではさらに複雑な換算（例：岡山は実選抜で200点満点に再換算）が行われる旨を各県ページに明記しています。
             </p>
+          </section>
+
+          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <h2 className="mb-3 text-lg font-bold text-slate-800">県別の詳しい分析を読む</h2>
+            <p className="mb-4 text-xs text-slate-500">
+              特に特徴的な都道府県について、近隣県との比較を交えた詳しい解説を用意しています（順次追加中）。
+            </p>
+            <div className="grid gap-2 sm:grid-cols-2">
+              {NAISHIN_OMOMI_CODES.map((code) => {
+                const pref = getPrefectureByCode(code);
+                if (!pref) return null;
+                return (
+                  <Link
+                    key={code}
+                    href={`/${code}/naishin-omomi`}
+                    className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-indigo-200 hover:bg-indigo-50/50"
+                  >
+                    {pref.name}の内申の重みを詳しく見る
+                    <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
+                  </Link>
+                );
+              })}
+            </div>
           </section>
 
           <section className="mb-8 rounded-2xl border border-slate-200 bg-slate-50 p-6">
