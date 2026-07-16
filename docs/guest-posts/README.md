@@ -12,6 +12,7 @@
 | 3 | [03-manten-hikaku-muimi.md](./03-manten-hikaku-muimi.md) | 内申点の「満点」を比べても意味がない3つの実例 | ドラフト完成 |
 | 4 | [04-ai-jidai-jyuken-joho.md](./04-ai-jidai-jyuken-joho.md) | AI時代の受験情報収集、何を信じればいいのか | ドラフト完成 |
 | 5 | [05-moshi-tsukaikata.md](./05-moshi-tsukaikata.md) | 模試の正しい使い方（母集団の違い・推移の見方・日程逆算） | ドラフト完成 |
+| 6 | [06-hogosha-kakawarikata.md](./06-hogosha-kakawarikata.md) | 内申点対策、保護者ができる3つのこと | ドラフト完成 |
 
 ## 執筆方針
 
