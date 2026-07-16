@@ -6,7 +6,7 @@
 
 1. **【最優先・5分】ベネッセ加藤様との日程調整** — 7/16 08:21に👤から7/19以降の候補日を返信送信済み。加藤様からの返信を待つのみ（Gmail監視中・返信あれば次周回のdaily-briefで通知）。
 2. **【10分】wave2 模試会社チェックリスト残り16社** — [docs/b2b-outreach-wave2-checklist.md](./b2b-outreach-wave2-checklist.md)。フォームURL確定済み10社(#1,2,4,5,7,8,9,10,17,18)は1社2〜3分でコピペ送信可。#14(寺小屋)は送信済み。電話/要探索6社は後回し推奨。
-3. **【隙間時間】wave4 新規B2B下書き** — 見つかり次第Gmail下書きに設置(このセクションはW-1進捗に応じて随時追記)。
+3. **【2分×2】wave4新規Gmail下書き2件** — [docs/b2b-outreach-wave4-checklist.md](./b2b-outreach-wave4-checklist.md)。リブレ(かとうもし)・新潟県統一模試会の2社分、Gmail下書きフォルダから確認して送信タップのみ。
 
 ## ②X投稿案（[docs/x-post-queue.md](./x-post-queue.md)より2本ピックアップ）
 
