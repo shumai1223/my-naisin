@@ -13,6 +13,7 @@
 | 4 | [04-ai-jidai-jyuken-joho.md](./04-ai-jidai-jyuken-joho.md) | AI時代の受験情報収集、何を信じればいいのか | ドラフト完成 |
 | 5 | [05-moshi-tsukaikata.md](./05-moshi-tsukaikata.md) | 模試の正しい使い方（母集団の違い・推移の見方・日程逆算） | ドラフト完成 |
 | 6 | [06-hogosha-kakawarikata.md](./06-hogosha-kakawarikata.md) | 内申点対策、保護者ができる3つのこと | ドラフト完成 |
+| 7 | [07-gakunen-betsu-taisaku.md](./07-gakunen-betsu-taisaku.md) | 中1・中2・中3、内申点対策は学年で変えるべき理由 | ドラフト完成 |
 
 ## 執筆方針
 
