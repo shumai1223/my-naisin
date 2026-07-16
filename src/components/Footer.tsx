@@ -206,6 +206,13 @@ export function Footer() {
                 お問い合わせ
               </Link>
               <Link
+                href="/press"
+                className="flex items-center gap-1.5 rounded-full bg-slate-100 px-3 py-1.5 text-xs font-medium text-slate-700 transition-all hover:bg-slate-200"
+              >
+                <FileText className="h-3 w-3" />
+                取材・プレスキット
+              </Link>
+              <Link
                 href="/developers"
                 className="flex items-center gap-1.5 rounded-full bg-slate-100 px-3 py-1.5 text-xs font-medium text-slate-700 transition-all hover:bg-slate-200"
               >

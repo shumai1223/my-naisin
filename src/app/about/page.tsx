@@ -160,11 +160,17 @@ export default function AboutPage() {
               <strong>受験生全員の情報の正確性を守るため、即座に調査・反映いたします。</strong>
             </p>
             <div className="flex flex-wrap gap-4">
-              <Link 
+              <Link
                 href="/contact"
                 className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-blue-200 transition-all hover:bg-blue-700 hover:scale-105"
               >
                 誤り報告・お問い合わせ
+              </Link>
+              <Link
+                href="/press"
+                className="inline-flex items-center gap-2 rounded-xl border-2 border-blue-600 bg-white px-6 py-3 text-sm font-bold text-blue-700 transition-all hover:bg-blue-50"
+              >
+                取材・プレスキットはこちら
               </Link>
             </div>
           </div>

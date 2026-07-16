@@ -106,6 +106,7 @@ export const STATIC_PAGES: StaticPageEntry[] = [
   { url: '/about', priority: 0.7, changeFrequency: 'monthly' },
   { url: '/about/editor-profile', priority: 0.7, changeFrequency: 'monthly' },
   { url: '/quality', priority: 0.7, changeFrequency: 'monthly' },
+  { url: '/press', priority: 0.6, changeFrequency: 'monthly' },
   { url: '/stats', priority: 0.7, changeFrequency: 'daily' },
   { url: '/contact', priority: 0.3, changeFrequency: 'yearly' },
   { url: '/privacy', priority: 0.3, changeFrequency: 'yearly' },

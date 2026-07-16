@@ -70,6 +70,7 @@ const HOWTO_EXEMPT_ROUTES: Record<string, string> = {
   '/pref/[code]': '県別注意点ページ（箇条書きの注意点であり手順ではない）',
   '/prefectures': '都道府県一覧ハブ（一覧のみで手順コンテンツなし）',
   '/privacy': 'プライバシーポリシー（リッチリザルト価値が低い定型ページ）',
+  '/press': 'プレスキットページ（手順でなく取材向け資料紹介）',
   '/quality': '品質・E-E-A-T説明ページ（手順コンテンツなし）',
   '/sougou-gata-senbatsu': '総合型選抜の解説ページ（手順でなく制度解説）',
   '/stats': '全国統計データ表示ページ（集計値の一覧表示であり手順ではない。DatasetSchemaで対応）',

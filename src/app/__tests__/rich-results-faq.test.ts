@@ -40,6 +40,7 @@ const FAQ_EXEMPT_ROUTES: Record<string, string> = {
   '/partner': '塾/パートナー向けLP（Q&A形式のコンテンツなし。CANDIDATE_FOR_FAQ_CONTENT参照）',
   '/pref/[code]': '県別注意点ページ（箇条書きでQ&A形式ではない）',
   '/prefectures': '都道府県一覧ハブ（一覧のみでQ&A形式のコンテンツなし）',
+  '/press': 'プレスキットページ（Q&A形式のコンテンツなし）',
   '/privacy': 'プライバシーポリシー（リッチリザルト価値が低い定型ページ）',
   '/quality': '品質・E-E-A-T説明ページ（Q&A形式のコンテンツなし）',
   '/terms': '利用規約（リッチリザルト価値が低い定型ページ）',
