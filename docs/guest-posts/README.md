@@ -14,6 +14,7 @@
 | 5 | [05-moshi-tsukaikata.md](./05-moshi-tsukaikata.md) | 模試の正しい使い方（母集団の違い・推移の見方・日程逆算） | ドラフト完成 |
 | 6 | [06-hogosha-kakawarikata.md](./06-hogosha-kakawarikata.md) | 内申点対策、保護者ができる3つのこと | ドラフト完成 |
 | 7 | [07-gakunen-betsu-taisaku.md](./07-gakunen-betsu-taisaku.md) | 中1・中2・中3、内申点対策は学年で変えるべき理由 | ドラフト完成 |
+| 8 | [08-suisen-nyuushi-hyoutei.md](./08-suisen-nyuushi-hyoutei.md) | 推薦入試を考えるなら、評定平均はいつから決まっているか | ドラフト完成 |
 
 ## 執筆方針
 
