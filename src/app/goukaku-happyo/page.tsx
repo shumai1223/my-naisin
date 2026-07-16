@@ -28,6 +28,10 @@ const FAQS = [
     answer: '公立高校に合格し進学する場合、併願していた私立高校への辞退手続き（入学辞退届の提出など）が必要になることが一般的です。私立高校ごとに手続き方法・期限が異なるため、出願時の案内を確認してください。',
   },
   {
+    question: '合格発表後、中学校時代の内申点はもう関係ありませんか？',
+    answer: '入試の合否判定という意味では、内申点の役目は合格発表をもって終わります。高校入学後の成績は高校での学習・定期テストによって新たに積み上げていくもので、中学校時代の内申点がそのまま引き継がれることはありません。ただし、県をまたぐ転校を将来的に検討する可能性がある場合は、都道府県ごとに内申点の重み付けの仕組み自体が異なる点は知っておくと安心です。',
+  },
+  {
     question: '第一志望に不合格だった場合、次にできることはありますか？',
     answer: '多くの都道府県では、公立高校の欠員募集（二次募集）や、私立高校の追加合格・二次募集が行われることがあります。実施の有無や日程は学校・都道府県によって異なるため、担任の先生や志望校に早めに相談することをおすすめします。まずは落ち着いて、学校からの案内・先生への相談を優先しましょう。',
   },
@@ -166,6 +170,10 @@ export default function GoukakuHappyoPage() {
               </Link>
               <Link href="/koukou-hiyou" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-blue-200 hover:bg-blue-50/50">
                 高校費用シミュレーター
+                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
+              </Link>
+              <Link href="/naishin-kakusa" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-blue-200 hover:bg-blue-50/50">
+                都道府県別 内申点格差レポート
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
             </div>
