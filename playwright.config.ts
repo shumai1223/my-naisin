@@ -11,8 +11,10 @@ import { defineConfig, devices } from '@playwright/test';
  *   npm run test:e2e
  * 既存のサーバーに当てる場合: E2E_BASE_URL=https://my-naishin.com npm run test:e2e
  *
- * 既定は dev サーバーを自動起動（ビルド不要で素早く回す）。CI で本番同等にしたいときは
- * `npm run build` 後に E2E_BASE_URL を本番URLに向けるか、command を `npm run start` に変える。
+ * ローカル既定は dev サーバーを自動起動（ビルド不要で素早く回す）。
+ * CI（process.env.CI）では `next build` 済みの成果物を `next start` で配信する
+ * （事前 `npm run build` はワークフロー側のステップで実行。dev サーバーの
+ * コールドコンパイルによるタイムアウト不安定化を避けるのが目的＝W-18①）。
  */
 
 const PORT = Number(process.env.E2E_PORT || 3100);
@@ -36,11 +38,12 @@ export default defineConfig({
     { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
     { name: 'mobile-chrome', use: { ...devices['Pixel 5'] } },
   ],
-  // 外部URLを指定したときはサーバーを起動しない。未指定なら dev サーバーを立てる。
+  // 外部URLを指定したときはサーバーを起動しない。CIは本番同等のnext start、
+  // ローカル既定はdevサーバーを自動起動する。
   webServer: process.env.E2E_BASE_URL
     ? undefined
     : {
-        command: `npm run dev -- --port ${PORT}`,
+        command: process.env.CI ? `npm run start -- --port ${PORT}` : `npm run dev -- --port ${PORT}`,
         url: BASE_URL,
         timeout: 180_000,
         reuseExistingServer: !process.env.CI,
