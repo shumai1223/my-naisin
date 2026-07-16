@@ -307,7 +307,7 @@ export default function HomeClient() {
         <div className="mx-auto max-w-4xl">
           <div className="min-w-0">
             <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl">
-              <Header />
+              <Header titleTag="h1" />
               <div className="px-4 pb-4 md:px-6">
                 <div className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700 ring-1 ring-emerald-100">
                   2026年度入試対応（令和8年度入学者選抜）

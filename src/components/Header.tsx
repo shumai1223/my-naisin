@@ -3,7 +3,16 @@ import { Sparkles, Star, TrendingUp, Shield, Zap, Award, Clock, BookOpen } from 
 
 import { APP_NAME, APP_NAME_JA } from '@/lib/constants';
 
-export function Header() {
+/**
+ * サイト名ロゴの見出しレベル。
+ * GlobalHeaderBridge によりHeaderは「/」「/blog」以外の全ページにも表示されるため、
+ * 既定は非見出し（p）にして各ページ本文の<h1>と重複しないようにする。
+ * ホームページ（HomeClient）はこのロゴが唯一の<h1>になるため明示的に'h1'を渡す。
+ * （2026-07-17判明: Playwright e2eをCI化した際にツール面で<h1>が2つ存在し
+ *   page.locator('h1').first()が本文見出しでなくロゴを拾う不具合として顕在化した）
+ */
+export function Header({ titleTag = 'p' }: { titleTag?: 'h1' | 'p' } = {}) {
+  const TitleTag = titleTag;
   return (
     <header className="overflow-hidden print:hidden">
       <div className="relative bg-gradient-to-br from-indigo-600 via-blue-600 to-violet-700 px-4 py-8 md:px-6 md:py-10 pb-12">
@@ -18,11 +27,11 @@ export function Header() {
               </div>
             </div>
             <div>
-              <h1 className="text-2xl font-extrabold leading-tight tracking-tight text-white md:text-3xl">
+              <TitleTag className="text-2xl font-extrabold leading-tight tracking-tight text-white md:text-3xl">
                 {APP_NAME}
                 <span className="mx-2 text-white/40">|</span>
                 <span className="text-blue-100">{APP_NAME_JA}</span>
-              </h1>
+              </TitleTag>
               <p className="mt-1.5 text-sm leading-relaxed text-blue-100/90 md:text-base">
                 内申点をサクッと計算 • 目標設定 • 分析 • シェア
               </p>

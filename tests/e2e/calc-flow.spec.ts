@@ -20,7 +20,8 @@ test('トップ: 内申点の結果と保護者リードCTAが表示される', 
 
 test('黄金導線（H-6）: 計算→結果→CTA→LINE友だち追加リンクまで到達できる', async ({ page }) => {
   await page.goto('/', { waitUntil: 'domcontentloaded' });
-  // 計算（既定スコアで即時結果表示）
+  // 結果はユーザーが「結果を見る」を押すまで表示されない設計（HomeClient.tsx showResult）。
+  await page.getByRole('button', { name: '結果を見る' }).click();
   await expect(page.getByText(/点/).first()).toBeVisible();
   // 結果直後のCTA（堀A：LINE/メール名簿化）が描画される
   const lineLink = page.locator('a[href*="lin.ee"], a[href*="line.me"]').first();
