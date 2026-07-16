@@ -16,6 +16,14 @@ export const CHANGELOG: ChangeLogEntry[] = [
   {
     date: '2026-07-16',
     type: 'update',
+    category: 'data',
+    title: '全47都道府県の出典を教育委員会・県公式の一次資料に統一',
+    description:
+      'これまで一部の都道府県で教育情報サイトを出典として補完していましたが、残る33県について各教育委員会・県公式サイトの入学者選抜要項ページを1件ずつ確認し、全47都道府県の主出典を公式一次資料へ切り替えました。従来の参考ページも第2出典として引き続き確認できます。',
+  },
+  {
+    date: '2026-07-16',
+    type: 'update',
     category: 'feature',
     title: '公開API・AI連携(MCP)の利用ルールを整備',
     description:

@@ -86,12 +86,17 @@ describe('PREFECTURES（47都道府県データ）', () => {
  * 検証済み県では恒久的に潰す。primary は教育委員会/県公式ドメイン、二次は sourceUrl2 へ。
  */
 describe('E-E-A-T: 出典の一次化（応急処置B）', () => {
-  // 教育委員会・県公式のドメイン（pref.*.jp / *.lg.jp / *.ed.jp / *.go.jp / metro.tokyo）。
-  const OFFICIAL_DOMAIN = /(\.lg\.jp|\.go\.jp|\.ed\.jp|pref\.[a-z]+\.jp|metro\.tokyo)/;
-  // 一次URLを primary に確定済みの県（流入上位＋検証済み）。
+  // 教育委員会・県公式のドメイン（source-trust.ts の OFFICIAL_DOMAIN と同期。kyoto-be.ne.jp=京都府教委公式）。
+  const OFFICIAL_DOMAIN = /(\.lg\.jp|\.go\.jp|\.ed\.jp|pref\.[a-z]+\.jp|metro\.tokyo|kyoto-be\.ne\.jp)/;
+  // 一次URLを primary に確定済みの県。2026-07-16に残り33県を実在・内容確認のうえ昇格し全47県が一次化完了。
   const OFFICIAL_PRIMARY = [
     'tokyo', 'kanagawa', 'osaka', 'aichi', 'fukuoka', 'hokkaido', 'saitama',
     'chiba', 'hyogo', 'yamagata', 'tottori', 'fukui', 'kagoshima', 'aomori',
+    'iwate', 'miyagi', 'akita', 'fukushima', 'ibaraki', 'tochigi', 'gunma',
+    'niigata', 'toyama', 'ishikawa', 'yamanashi', 'nagano', 'gifu', 'shizuoka',
+    'mie', 'shiga', 'kyoto', 'nara', 'wakayama', 'shimane', 'okayama',
+    'hiroshima', 'yamaguchi', 'tokushima', 'kagawa', 'ehime', 'kochi',
+    'saga', 'nagasaki', 'kumamoto', 'oita', 'miyazaki', 'okinawa',
   ];
 
   test('検証済み県は primary sourceUrl が教育委員会/県公式（二次メディアでない）', () => {

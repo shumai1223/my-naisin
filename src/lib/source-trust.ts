@@ -9,8 +9,12 @@
  * よって sourceUrl が教委/県公式ドメインかどうかで“照合済み”を判定する。
  */
 
-/** 教育委員会・県公式のドメイン（pref.*.jp / *.lg.jp / *.ed.jp / *.go.jp / metro.tokyo）。 */
-const OFFICIAL_DOMAIN = /(\.lg\.jp|\.go\.jp|\.ed\.jp|pref\.[a-z]+\.jp|metro\.tokyo)/;
+/**
+ * 教育委員会・県公式のドメイン（pref.*.jp / *.lg.jp / *.ed.jp / *.go.jp / metro.tokyo）。
+ * kyoto-be.ne.jp は京都府教育委員会の公式ドメイン（.ne.jpだが公的機関）で、
+ * 2026-07-16の全県一次化で primary に採用したため明示的に許可する。
+ */
+const OFFICIAL_DOMAIN = /(\.lg\.jp|\.go\.jp|\.ed\.jp|pref\.[a-z]+\.jp|metro\.tokyo|kyoto-be\.ne\.jp)/;
 
 /** sourceUrl が教委/県公式（＝一次資料を直接指す）か。 */
 export function isOfficialSourceUrl(url: string | undefined | null): boolean {
