@@ -123,6 +123,10 @@ export default function KoukouBairitsuPage() {
                 出願倍率の読み方を見る
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
+              <Link href="/naishin-kakusa" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-indigo-200 hover:bg-indigo-50/50">
+                都道府県別 内申点格差レポートを見る
+                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
+              </Link>
             </div>
           </section>
 
