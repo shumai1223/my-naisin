@@ -156,6 +156,37 @@ export default function JikosaitenPage() {
           </section>
 
           <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <h2 className="mb-3 flex items-center gap-2 border-l-4 border-indigo-500 pl-3 text-lg font-bold text-slate-800">
+              <AlertTriangle className="h-5 w-5 text-indigo-500" />
+              内申点と当日点、どちらが重い？ 県によって違う「配点比率」
+            </h2>
+            <p className="mb-3 text-sm leading-relaxed text-slate-600">
+              自己採点した当日点が、総合得点にどれだけ効いてくるかは都道府県・学校によって大きく異なります。
+              一部の都道府県は比率が制度として明確に決まっています。
+            </p>
+            <ul className="mb-3 space-y-2 text-sm leading-relaxed text-slate-700">
+              <li>
+                ・<strong>東京都</strong>: 内申点70：学力検査30の比率が制度として定められています（ESAT-Jスピーキングテストの得点を含む）。
+              </li>
+              <li>
+                ・<strong>大阪府</strong>: 「タイプⅠ〜Ⅴ」の5段階があり、学校・学科ごとに内申点の比重が30%〜70%の範囲で公式に決まっています。
+              </li>
+              <li>
+                ・<strong>埼玉県</strong>: 学年ごとの内申点の重み（中1:中2:中3）は1:1:2が標準ですが、学校によって1:1:3など異なるモデルを採用する場合があります。
+              </li>
+            </ul>
+            <p className="text-sm leading-relaxed text-slate-600">
+              上記以外の多くの都道府県では、内申点と当日点の比率は志望校・学科ごとの募集要項で個別に定められており、
+              全県共通の公式比率は公表されていません。当サイトの
+              <Link href="/total-score" className="mx-1 font-bold text-indigo-700 underline">
+                都道府県別の総合得点計算
+              </Link>
+              では、比率が公式に確認できない県について目安の初期値（多くの県で内申4:当日6）を設定していますが、
+              これはあくまで調整可能な目安です。<strong>実際の比率は必ず志望校の募集要項でご確認ください</strong>。
+            </p>
+          </section>
+
+          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
             <div className="space-y-4">
               {FAQS.map((f) => (
