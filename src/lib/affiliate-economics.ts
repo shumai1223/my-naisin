@@ -136,6 +136,13 @@ export const AFFILIATE_ECONOMICS: Partial<Record<AffiliateId, AffiliateEconomics
   // ── アクセストレード（入会＝paid型・CVR低めの仮定） ──
   'shinken-koukou': { cpaYen: 5860, convRate: 0.02, convRateLow: 0.008, kind: 'paid' },
   'eten-net': { cpaYen: 1905, convRate: 0.02, convRateLow: 0.008, kind: 'paid' },
+  'eten-net-home': { cpaYen: 1905, convRate: 0.02, convRateLow: 0.008, kind: 'paid' }, // eten-netの別クリエイティブ（2026-07-16承認）
+  // 天神: 成果地点のCPAが未確認（AT管理画面で要確認・2026-07-16承認）。高額教材の資料請求型と
+  // 仮定して保守に置く。⚠実CPA判明したら必ず置換（もし成果地点が「購入」なら kind:'paid' へ変更）。
+  'tenjin-chugaku': { cpaYen: 2000, convRate: 0.08, convRateLow: 0.03, kind: 'doc-request' },
+  // ── A8 2026-07-16承認: ファインドイットFP無料相談。CPA¥13,000はA8公開の実値・EPC222.47も
+  // A8公開の実測値（=ネットワーク平均でクリック単価222円）。転換率仮定は既存FP勢と同一の保守置き。 ──
+  'findit-fp-soudan': { cpaYen: 13000, convRate: 0.05, convRateLow: 0.015, kind: 'free-lead' },
 };
 
 /** プログラムの推定経済性を返す（未掲載は free-lead 既定）。 */

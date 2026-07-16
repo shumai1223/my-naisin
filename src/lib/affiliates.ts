@@ -53,7 +53,12 @@ export type AffiliateId =
   | 'last-minute-trial'
   // ── アクセストレード 提携承認済み（2026-06-19 live・入会=paid型） ──
   | 'shinken-koukou'
-  | 'eten-net';
+  | 'eten-net'
+  // ── アクセストレード 2026-07-16 承認分 ──
+  | 'tenjin-chugaku'
+  | 'eten-net-home'
+  // ── A8 2026-07-16 承認分（FP無料相談・A8公開EPC 222円=提携中FP勢で最高水準） ──
+  | 'findit-fp-soudan';
 
 /** 'pending' は枠だけ確保した未確定案件。AffiliateAd は描画せず（デッドリンクを出さない）、selectLeadOffer も返さない。 */
 type AffiliateStatus = 'live' | 'pending';
@@ -497,6 +502,34 @@ export const AFFILIATES: Record<AffiliateId, AffiliateConfig> = {
     href: 'https://h.accesstrade.net/sp/cc?rk=0100c4te00ot1k',
     text: 'インターネット自宅学習 e点ネット塾',
     trackingPixel: 'https://h.accesstrade.net/sp/rr?rk=0100c4te00ot1k',
+  },
+
+  // ── アクセストレード 2026-07-16 承認分 ──
+  'tenjin-chugaku': {
+    id: 'tenjin-chugaku',
+    type: 'text',
+    name: '天神（中学生版デジタル学習教材）',
+    href: 'https://h.accesstrade.net/sp/cc?rk=0100pmg300ot1k',
+    text: '天神（中学生）',
+    trackingPixel: 'https://h.accesstrade.net/sp/rr?rk=0100pmg300ot1k',
+  },
+  'eten-net-home': {
+    id: 'eten-net-home',
+    type: 'text',
+    name: 'e点ネット塾（自宅が塾に大変身）',
+    href: 'https://h.accesstrade.net/sp/cc?rk=0100c4tf00ot1k',
+    text: '自宅が塾に大変身　e点ネット塾',
+    trackingPixel: 'https://h.accesstrade.net/sp/rr?rk=0100c4tf00ot1k',
+  },
+
+  // ── A8 2026-07-16 承認分（ファインドイット・FP無料相談 CPA¥13,000/A8公開EPC222.47） ──
+  'findit-fp-soudan': {
+    id: 'findit-fp-soudan',
+    type: 'text',
+    name: 'ファインドイット（FP無料相談・資産形成/教育資金）',
+    href: 'https://px.a8.net/svt/ejp?a8mat=4B5WGC+8XI3G2+5MAS+5ZEMQ',
+    text: 'マネーのプロのFPに無料相談（ハーゲンダッツギフト券プレゼント中）',
+    trackingPixel: 'https://www13.a8.net/0.gif?a8mat=4B5WGC+8XI3G2+5MAS+5ZEMQ',
   },
 };
 
