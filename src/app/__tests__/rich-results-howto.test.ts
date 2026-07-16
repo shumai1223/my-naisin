@@ -51,6 +51,7 @@ const HOWTO_EXEMPT_ROUTES: Record<string, string> = {
   '/hensachi/kyoka-betsu/[subject]': '教科別の上げ方解説ページ（手順でなく学習アドバイス）',
   '/hensachi/moshi': '模試ハブページ（下位ページへの導線のみ）',
   '/hensachi/moshi/ichiran': '模試一覧・解説ページ（手順でなく模試の紹介）',
+  '/hensachi/moshi/nittei': '模試公式日程一覧ページ（手順でなくデータ一覧。DatasetSchemaで対応）',
   '/hensachi/shiboukou': '志望校の決め方解説ページ（手順でなく判断基準の解説）',
   '/hensachi/shindan/[grade]': '学年別偏差値診断ページ（診断手順のHowToSchemaは親ページ/hensachi/shindanが正・重複回避）',
   '/hensachi/shindan/mokuteki/[purpose]': '目的別偏差値診断ページ（診断手順のHowToSchemaは親ページ/hensachi/shindanが正・重複回避）',

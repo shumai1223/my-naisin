@@ -132,6 +132,10 @@ export default function MockExamIchiranPage() {
                 模試の偏差値の見方（母集団・推移の解説）
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
+              <Link href="/hensachi/moshi/nittei" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-purple-200 hover:bg-purple-50/50">
+                各模試の公式日程一覧を見る
+                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
+              </Link>
               <Link href="/hensachi" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-purple-200 hover:bg-purple-50/50">
                 偏差値を計算する（無料）
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />

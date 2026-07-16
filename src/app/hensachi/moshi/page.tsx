@@ -193,10 +193,16 @@ export default function HensachiMoshiPage() {
             <p className="mb-3 text-sm leading-relaxed text-slate-600">
               志望校がある都道府県ごとに主流の模試が異なります。Vもぎ・Wもぎ・北辰テスト・五ツ木模試・新教研の運営会社や対象地域を整理しました。
             </p>
-            <Link href="/hensachi/moshi/ichiran" className="inline-flex items-center gap-1.5 rounded-full bg-purple-600 px-5 py-2.5 text-sm font-bold text-white shadow-md transition-all hover:bg-purple-700">
-              主要な地域模試ガイドを見る
-              <ChevronRight className="h-4 w-4" />
-            </Link>
+            <div className="flex flex-wrap gap-3">
+              <Link href="/hensachi/moshi/ichiran" className="inline-flex items-center gap-1.5 rounded-full bg-purple-600 px-5 py-2.5 text-sm font-bold text-white shadow-md transition-all hover:bg-purple-700">
+                主要な地域模試ガイドを見る
+                <ChevronRight className="h-4 w-4" />
+              </Link>
+              <Link href="/hensachi/moshi/nittei" className="inline-flex items-center gap-1.5 rounded-full border-2 border-purple-600 bg-white px-5 py-2.5 text-sm font-bold text-purple-700 transition-all hover:bg-purple-50">
+                公式日程一覧を見る
+                <ChevronRight className="h-4 w-4" />
+              </Link>
+            </div>
           </section>
 
           {/* 保護者リード */}
