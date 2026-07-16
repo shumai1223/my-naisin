@@ -68,28 +68,38 @@ export function StatsOptIn({ className = '', metric, value, maxValue, prefecture
   };
 
   return (
-    <div className={`rounded-xl border border-slate-200 bg-slate-50 p-4 ${className}`}>
+    <div
+      className={`rounded-2xl border-2 p-4 shadow-sm transition-colors ${
+        granted
+          ? 'border-emerald-300 bg-gradient-to-br from-emerald-50 to-teal-50'
+          : 'border-sky-300 bg-gradient-to-br from-sky-50 to-cyan-50'
+      } ${className}`}
+    >
       <label className="flex cursor-pointer items-start gap-3">
         <input
           type="checkbox"
           checked={granted}
           onChange={handleToggle}
-          className="mt-0.5 h-4 w-4 shrink-0 rounded border-slate-300"
+          className="mt-1 h-5 w-5 shrink-0 cursor-pointer rounded border-sky-400 accent-sky-600"
         />
         <span>
-          <span className="flex items-center gap-1.5 text-sm font-bold text-slate-800">
-            <BarChart3 className="h-4 w-4 text-slate-500" />
-            匿名で統計に協力する（任意）
+          <span className="flex items-center gap-2 text-[15px] font-bold text-slate-900">
+            <span className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full ${granted ? 'bg-emerald-100' : 'bg-sky-100'}`}>
+              <BarChart3 className={`h-4 w-4 ${granted ? 'text-emerald-600' : 'text-sky-600'}`} />
+            </span>
+            匿名で全国統計に協力する（任意）
           </span>
-          <span className="mt-1 block text-xs leading-relaxed text-slate-500">
-            氏名等は一切含まれない計算結果（内申点・偏差値等の数値のみ）を、全国の傾向を示す統計データの作成に役立てます。個人を特定できる情報は収集しません。この同意はいつでも撤回できます。
+          <span className="mt-1.5 block text-xs leading-relaxed text-slate-600">
+            協力が増えるほど、あなたと同じ都道府県・学年の分布データが正確になります。送られるのは
+            <strong className="text-slate-800">計算結果の数値のみ</strong>
+            ——氏名など個人を特定できる情報は一切収集しません。同意はいつでも撤回できます。
           </span>
         </span>
       </label>
       {granted && consentedAt && (
-        <p className="mt-2 flex items-center gap-1 text-[11px] text-emerald-600">
-          <ShieldCheck className="h-3.5 w-3.5" />
-          {new Date(consentedAt).toLocaleDateString('ja-JP')}に同意済み
+        <p className="mt-2 flex items-center gap-1 text-xs font-medium text-emerald-700">
+          <ShieldCheck className="h-4 w-4" />
+          ご協力ありがとうございます（{new Date(consentedAt).toLocaleDateString('ja-JP')}に同意済み）
         </p>
       )}
     </div>

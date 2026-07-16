@@ -16,6 +16,14 @@ export const CHANGELOG: ChangeLogEntry[] = [
   {
     date: '2026-07-16',
     type: 'update',
+    category: 'ui',
+    title: '匿名統計への協力チェックを見やすくリニューアル',
+    description:
+      '計算結果の下にある「匿名で全国統計に協力する」のチェック欄を、目に留まりやすいカードデザインに刷新しました。収集するのは計算結果の数値のみで、個人を特定できる情報は含まれない点は従来どおりです。',
+  },
+  {
+    date: '2026-07-16',
+    type: 'update',
     category: 'data',
     title: '全47都道府県の出典を教育委員会・県公式の一次資料に統一',
     description:
