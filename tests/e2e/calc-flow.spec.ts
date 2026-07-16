@@ -20,6 +20,10 @@ test('トップ: 内申点の結果と保護者リードCTAが表示される', 
 
 test('黄金導線（H-6）: 計算→結果→CTA→LINE友だち追加リンクまで到達できる', async ({ page }) => {
   await page.goto('/', { waitUntil: 'domcontentloaded' });
+  // ホームは初期状態が navigationMode==='select'（目的選択画面）で、入力フォームと
+  // 「結果を見る」ボタンは「内申点を計算する」を押してcalculateモードに入るまで存在しない
+  // （HomeClient.tsx/HeroNavigation.tsx）。
+  await page.getByRole('button', { name: '内申点を計算する' }).click();
   // 結果はユーザーが「結果を見る」を押すまで表示されない設計（HomeClient.tsx showResult）。
   await page.getByRole('button', { name: '結果を見る' }).click();
   await expect(page.getByText(/点/).first()).toBeVisible();
