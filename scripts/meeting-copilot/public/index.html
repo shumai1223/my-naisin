@@ -58,7 +58,7 @@
   <section>
     <div class="panel-title">⚡ 即答スクリプト（遅延ゼロ・来るとわかってる質問はここ）</div>
     <div class="canned-wrap" id="canned"></div>
-    <div class="panel-title" style="margin-top:4px">🤖 AIサジェスト（自動: 質問を検知したら勝手に答えが流れる）</div>
+    <div class="panel-title" style="margin-top:4px">🤖 AIサジェスト（自動: 発言の区切りごとに毎回回答ヒントが流れる）</div>
     <div class="row">
       <button id="autoBtn" class="primary">🤖 自動回答: ON</button>
       <input type="text" id="askInput" placeholder="手動で聞きたい時だけ入力 → Ctrl+Enter" />
@@ -217,9 +217,7 @@ async function suggest(auto = false) {
 
   const msg =
     (newLines.length ? `【会話ログ(新規分)】\n${newLines.join('\n')}\n\n` : '') +
-    `【依頼】${ask || (auto
-      ? '自動モード: 直近の発言が回答すべき質問・懸念なら回答ヒントを。不要なら「スキップ」とだけ。'
-      : '直近の相手の発言への回答ヒントを。')}`;
+    `【依頼】${ask || '自動モード: 直近の発言への回答ヒントを。'}`;
 
   const card = document.createElement('div');
   card.className = 'card ai loading';
@@ -257,8 +255,6 @@ async function suggest(auto = false) {
       textNode.textContent += dec.decode();
       meta.textContent = meta.textContent.replace('⏳', `${((Date.now() - t0) / 1000).toFixed(1)}秒`);
       card.classList.remove('loading');
-      // 自動モードで「回答不要」判定ならカードごと消す(画面を汚さない)
-      if (auto && textNode.textContent.trim().startsWith('スキップ')) card.remove();
     }
   } catch (e) {
     card.classList.remove('loading');
