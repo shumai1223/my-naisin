@@ -503,3 +503,33 @@ export const PARENT_EMAIL_COURSE: ParentCourseStep[] = [
 export function getParentCourseStep(step: number): ParentCourseStep | undefined {
   return PARENT_EMAIL_COURSE.find((s) => s.step === step);
 }
+
+/* ────────────────────────────────────────────────────────────────────────
+ * 紹介導線ブロック（W-7・T-1紹介解放機構の配信面への標準搭載）。
+ *
+ * T-1（UnlockGate・src/components/UnlockGate.tsx）は「保護者に送る」または「保護者向けLINEに
+ * 友だち追加」のどちらかで全国統計の先行閲覧を解放する仕組みで、結果画面には既に実装済み。
+ * ここではLINE/メール配信の本文末尾に付け足せる「紹介の一言」を標準ブロック化し、配信のたびに
+ * 文面を考え直さずに済むようにする（実際にどの配信に付けるか・送信するかは👤の運用判断）。
+ * 断定的な特典内容や期限は書かない（UnlockGateの解放条件をそのまま言い換えるだけ）。
+ * ──────────────────────────────────────────────────────────────────────── */
+
+/** 名簿velocityのピーク月（8/11/12/2月・MONTHLY_CALENDARのpriority==='peak'と同じ判定基準）。 */
+const REFERRAL_BLOCK_PEAK_MONTHS: readonly number[] = [8, 11, 12, 2];
+
+export const REFERRAL_BLOCK: Record<Audience, string> = {
+  student:
+    '\n\n📊 おうちの人に結果を送るか、保護者向けLINEに登録すると、全国の協力者データと比べた「あなたの立ち位置」が見られるようになります。',
+  parent:
+    '\n\n📊 お子さまが結果を保護者に送ってくださった方・LINEにご登録いただいた方は、全国の協力者データと比べたお子さまの立ち位置を見られます。',
+};
+
+/** 配信本文の末尾に紹介導線ブロックを付け足した新しいメッセージを返す（元のmessageは変更しない）。 */
+export function withReferralBlock(message: AudienceMessage, audience: Audience): AudienceMessage {
+  return { ...message, body: message.body + REFERRAL_BLOCK[audience] };
+}
+
+/** その月がvelocityピーク月か（紹介導線ブロックを標準搭載すべき月かの判定に使う）。 */
+export function isReferralBlockPeakMonth(month: number): boolean {
+  return REFERRAL_BLOCK_PEAK_MONTHS.includes(month);
+}
