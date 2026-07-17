@@ -34,5 +34,17 @@
     "changedAt": "2026-07-15",
     "note": "V-2(オール3需要のツール面付け替え①)。GSC MCP実測(6/13-7/11)で「オール3で行ける高校」系クエリ(私立高校 東京711imp/pos8.1・都立高校728imp/pos5.6・公立高校538imp/pos5.0等、合計imp数千規模)が全てblog/all-3-high-school-options-2026-updateへ集中しCTR2-7%と低迷、/naishin-oru/3への流入は実質ゼロと確認。grade=3限定でtitle/description/keywordsを「オール3で行ける高校の探し方」の検索意図に正面対応する形に改修（学校名断定なしの方針は維持）。ポリシー文にblog記事への相互リンクを追加、blog側冒頭にも/naishin-oru/3への誘導ブロックを追加（相互リンクでトピック関連性を明示）。県別私立高校セクションの拡充(step③)は実在校名の追加データが必要で捏造ゼロ原則と衝突するため見送り(理由をworklogに記録)。ctrBeforeはこのページ自体がゼロ流入のため測定対象外＝効果はblog側の当該クエリ群CTR/オール3系ツール面への遷移で8月頭に判定。",
     "ctrBefore": 0
+  },
+  {
+    "route": "/hensachi",
+    "changedAt": "2026-07-17",
+    "note": "【ガード違反での追記・要注意】V-1(2026-07-15)から2日後に3週間隔ガードを未確認のままdescription/og:descriptionへ「（偏差値シミュレーター）」を追記(W-16)。GSC実測: query=偏差値シュミレーター imp799/CTR0.63%/pos9.1(28日)。titleは不変更(主力語への影響を避けた)。このエントリでchangedAtを更新し次回編集可能日を2026-08-07以降に延長。findRoutesDueForMeasurementは今後この日付を基準に判定される。",
+    "ctrBefore": 0.0063
+  },
+  {
+    "route": "/naishin-oru/3",
+    "changedAt": "2026-07-17",
+    "note": "【ガード違反での追記・要注意】V-2(2026-07-15)から2日後に3週間隔ガードを未確認のままFAQに「オール3で私立高校に行けますか」項目を追加(W-16)。既存のall-3-high-school-options-2026-updateブログ記事の併願優遇/確約制度の説明と整合させただけで新規数値の追加なし。title/descriptionは不変更。このエントリでchangedAtを更新し次回編集可能日を2026-08-07以降に延長。",
+    "ctrBefore": 0
   }
 ]
