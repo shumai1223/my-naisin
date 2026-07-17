@@ -175,7 +175,16 @@ function startRotation() {
       rotating = false;
       rotatingSession = null;
       console.log('[copilot] プロセスを無停止で切替完了');
-      setTimeout(() => { try { old.child.kill(); } catch {} }, 2000);
+      // 旧プロセスは「処理中のターンが無くなってから」殺す。
+      // 固定2秒だと回答中のターンごと切断される(2026-07-17の36問診断でQ15が途中切断)。
+      const killWhenIdle = () => {
+        if (!old.pending && old.queue.length === 0) {
+          try { old.child.kill(); } catch {}
+        } else {
+          setTimeout(killWhenIdle, 1000);
+        }
+      };
+      setTimeout(killWhenIdle, 2000);
     })
     .catch((e) => {
       console.error('[copilot] ローテーション用プロセスのウォームアップ失敗:', e.message, '→ 今のプロセスを継続使用');
