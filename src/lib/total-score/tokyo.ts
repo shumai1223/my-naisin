@@ -46,8 +46,11 @@ export interface TokyoTotalScoreResult {
 
 /** 学力検査点(500点満点)→700点換算＋調査書点(65点満点)→300点換算＋ESAT-J加点で総合得点(1020点満点)を計算。 */
 export function computeTokyoTotalScore(input: TokyoTotalScoreInput): TokyoTotalScoreResult {
-  const academicConverted = Math.round((input.academicRaw / 500) * 700);
-  const naishinConverted = Math.round((input.naishinRaw / 65) * 300);
+  // 満点を超える入力（誤入力・桁の暴走）でも表示が破綻しないよう、素点満点の範囲にクランプする。
+  const academicRaw = Math.min(Math.max(input.academicRaw, 0), 500);
+  const naishinRaw = Math.min(Math.max(input.naishinRaw, 0), 65);
+  const academicConverted = Math.round((academicRaw / 500) * 700);
+  const naishinConverted = Math.round((naishinRaw / 65) * 300);
   const esatScore = TOKYO_ESAT_GRADES.find((g) => g.grade === input.esatGrade)?.score ?? 0;
   const total = academicConverted + naishinConverted + esatScore;
   return {

@@ -21,6 +21,18 @@ describe('computeTokyoTotalScore（東京都：学力700+調査書300+ESAT-J20=1
     expect(result.esatScore).toBe(0);
   });
 
+  it('満点を大幅に超える入力（誤入力・桁の暴走）は満点にクランプされ、得点率が異常値にならない', () => {
+    const result = computeTokyoTotalScore({ academicRaw: 4.524888250377074e31, naishinRaw: 65, esatGrade: 'A' });
+    expect(result.total).toBe(1020);
+    expect(result.percent).toBe(100);
+  });
+
+  it('負の入力は0にクランプされる', () => {
+    const result = computeTokyoTotalScore({ academicRaw: -500, naishinRaw: -65, esatGrade: 'F' });
+    expect(result.total).toBe(0);
+    expect(result.percent).toBe(0);
+  });
+
   it('TOKYO_ESAT_GRADES全段階のスコアが仕様通り', () => {
     const byGrade = Object.fromEntries(TOKYO_ESAT_GRADES.map((g) => [g.grade, g.score]));
     expect(byGrade.A).toBe(20);
