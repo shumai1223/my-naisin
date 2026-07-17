@@ -15,6 +15,15 @@ export interface ChangeLogEntry {
 export const CHANGELOG: ChangeLogEntry[] = [
   {
     date: '2026-07-17',
+    prefectureCode: 'tokyo',
+    type: 'fix',
+    category: 'calculation',
+    title: '東京都総合得点ツールで極端な入力時に得点率表示が崩れる不具合を修正',
+    description:
+      '学力検査点や換算内申の欄に満点を大幅に超える数値を入力した際、得点率が指数表記の異常な値で表示されることがある不具合を修正しました。入力値は各項目の満点の範囲に自動で収まるようにしています。',
+  },
+  {
+    date: '2026-07-17',
     prefectureCode: 'nara',
     type: 'fix',
     category: 'calculation',
