@@ -1,29 +1,37 @@
 # 朝ブリーフィング（自動更新・W-0が毎周回上書き）
 
-最終更新: 2026-07-17 02:xx（loop自動生成）
+最終更新: 2026-07-17 12:xx（loop自動生成）
 
 ## ①今日👤が送信すべきリスト（優先度順）
 
-1. **【最優先・5分】ベネッセ加藤様との日程調整** — 7/16 08:21に👤から7/19以降の候補日を返信送信済み。加藤様からの返信を待つのみ（Gmail監視中・返信あれば次周回のdaily-briefで通知）。
-2. **【10分】wave2 模試会社チェックリスト残り16社** — [docs/b2b-outreach-wave2-checklist.md](./b2b-outreach-wave2-checklist.md)。フォームURL確定済み10社(#1,2,4,5,7,8,9,10,17,18)は1社2〜3分でコピペ送信可。#14(寺小屋)は送信済み。電話/要探索6社は後回し推奨。
-3. **【2分×2】wave4新規Gmail下書き2件** — [docs/b2b-outreach-wave4-checklist.md](./b2b-outreach-wave4-checklist.md)。リブレ(かとうもし)・新潟県統一模試会の2社分、Gmail下書きフォルダから確認して送信タップのみ。
+1. **【最優先・5分】ベネッセ加藤様との日程調整** — 7/16 08:21に👤から7/19以降の候補日を返信送信済み。加藤様からの返信を待つのみ（Gmail監視中・新規返信は今回も未確認）。
+2. **【2分×2】wave4 Gmail下書き2件（送信タップのみ）** — [docs/b2b-outreach-wave4-checklist.md](./b2b-outreach-wave4-checklist.md)。リブレ(かとうもし・香川)・新潟県統一模試会の2社分、Gmail下書きフォルダから確認して送信するだけ。
+3. **【10分】wave2 模試会社チェックリスト残り** — [docs/b2b-outreach-wave2-checklist.md](./b2b-outreach-wave2-checklist.md)。フォームURL確定済み10社(#1,2,4,5,7,8,9,10,17,18)は1社2〜3分でコピペ送信可。**#12リブレ・#16新潟県統一模試会はwave4側でメール窓口が判明済み**なので、wave2のフォーム探索は不要→上記2のGmail下書きで代替可（wave2チェックリストの当該2行は実質重複）。電話のみの残り4社(#3五ツ木/#6総進図書/#11Vもし/#13宮城新教育/#15熊本ゼミ)は後回し推奨。
+4. **【次回Gmail接続時】wave4追加下書き候補5社** — Z会(zoshinkai@zkai.co.jp)・モノグサ(法人フォーム)・ジャストシステム(biz-info@justsystems.com)・COMPASS(info@compass-e.com)・EDUCOM(navi@educom.co.jp)。この周回はGmail MCP未接続のため下書き化はまだ→次回Gmail接続時のloopが自動で下書きを作る予定。
 
-## ②X投稿案（[docs/x-post-queue.md](./x-post-queue.md)より2本ピックアップ）
+## ②X投稿案（[docs/x-post-queue.md](./x-post-queue.md)より・**2026-07-17に全45本完結**）
 
-- ⑭ブログ記事のアクセスがAIに吸われてた話（AI Overview吸収の実測エピソード）
-- ⑮誰のために作ってるか、実は途中で変わった（保護者起点への戦略転換エピソード）
-- ※x-post-queue.mdは通算15/15上限到達済み。追加はW-10(上限45への引き上げ)待ち。
+- ㊸岡山県と兵庫県、部活動なのに「加算」の有無が違う話
+- ㊺47都道府県ぶん、内申点の仕組みをぜんぶ書き終えたこと
+- ※x-post-queue.mdは通算45/45で完結。追加が必要な場合は👤判断で上限引き上げ。
 
-## ③昨日までの数字（直近3日・GA4イベント集計 2026-07-17 02:00時点）
+## ③昨日までの数字（前回計測値・2026-07-17 02:00時点のまま）
 
-- unlock_granted: 1件（3日累計）
-- stats_optin_grant: 2件／stats_submit_ok: 1件
-- line_friend_click: 3件
-- form_start: 2件／parent_landing_view: 2件
-- rage_click: 10件（要el_*ディメンション蓄積後の再分析＝0-9タスク・7/16-23以降）
-- ai_referral: 5件
-- B2B新規返信: なし（Gmail直近2日=8件中、新規は全てASP通知/Stripe/Resend等の定型メールのみ。ベネッセ加藤様スレッドは進行中も新規返信なし）
-- D1(leads/api_keys/stats_submissions)実数: 今回は社内プロキシのTLS証明書検証エラー+CLOUDFLARE_API_TOKEN未設定のため直接クエリ不可（既知の環境の罠）。GA4のstats_submit_ok=1件を代理指標として参照。
+**⚠️今回もGA4/GSC/Gmail MCP全て未接続・D1も社内プロキシのTLS制約で直接クエリ不可のため、新しい数値は取得できず。以下は前回値の再掲（更新なし）。**
+
+- unlock_granted: 1件（3日累計・前回計測）
+- stats_optin_grant: 2件／stats_submit_ok: 1件（前回計測）
+- line_friend_click: 3件（前回計測）
+- form_start: 2件／parent_landing_view: 2件（前回計測）
+- rage_click: 10件（要el_*ディメンション蓄積後の再分析＝7/16-23の窓に入っているが、今回もGA4 MCP未接続のため再分析は次回以降）
+- ai_referral: 5件（前回計測）
+- B2B新規返信: なし（Gmail MCP未接続のため今回は確認できず。ベネッセ加藤様スレッドの動きも次回接続時に確認）
+
+## ④今日のコード面の進捗（loopが本日実施した変更・参考情報）
+
+- W-7完了: LINE/メール配信への紹介導線ブロックを標準装備（送信自体は👤判断のまま）
+- W-1続き: B2B候補5社を追加調査、Z会のメール窓口を新規確定（上記④参照）
+- my-shingaku: /shogakukinの相互リンクに実バグ（ホームへの誤リンク）を発見・修正
 
 ---
 このファイルはloopが毎周回冒頭で上書きする。👤は朝これだけ見れば1日の行動が分かる状態を維持する設計（W-0）。
