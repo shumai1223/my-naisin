@@ -15,6 +15,14 @@ export interface ChangeLogEntry {
 export const CHANGELOG: ChangeLogEntry[] = [
   {
     date: '2026-07-17',
+    type: 'fix',
+    category: 'calculation',
+    title: '神奈川・大阪・愛知・千葉・埼玉・福岡・北海道の総合得点ツールでも同種の表示崩れを予防修正',
+    description:
+      '東京都の総合得点ツールで見つかった、極端な数値を入力した際に得点表示が崩れる不具合と同じ仕組みの問題が他7都道府県のツールにも起こり得る状態だったため、あわせて修正しました。各項目は満点の範囲に自動で収まります。',
+  },
+  {
+    date: '2026-07-17',
     prefectureCode: 'tokyo',
     type: 'fix',
     category: 'calculation',
