@@ -60,7 +60,7 @@ export const post: BlogPost = {
   </div>
   <div class="card">
     <h4>2倍</h4>
-    <p>最も多いパターン。東京都・神奈川県（中3のみ）・秋田県・宮城県・福島県など多数の都道府県が採用しています。副教科の評定が1段階上がると内申点は2点アップします。</p>
+    <p>最も多いパターン。東京都・秋田県・宮城県・福島県・徳島県など多数の都道府県が採用しています。副教科の評定が1段階上がると内申点は2点アップします。</p>
   </div>
   <div class="card">
     <h4>3倍以上</h4>
@@ -87,7 +87,7 @@ export const post: BlogPost = {
         <td><strong>東京都</strong></td>
         <td>実技4教科×2倍</td>
         <td>65点</td>
-        <td>中3のみ対象。芸術・体育系学科は6教科×2倍で75点満点</td>
+        <td>中3のみ対象。素内申65点を調査書点300点満点に換算して学力検査・ESAT-Jと合算</td>
       </tr>
       <tr>
         <td><strong>神奈川県</strong></td>
@@ -112,12 +112,6 @@ export const post: BlogPost = {
         <td>実技4教科×2倍</td>
         <td>195点（3年分）</td>
         <td>一般選抜の場合</td>
-      </tr>
-      <tr>
-        <td><strong>岩手県</strong></td>
-        <td>実技4教科：主要5教科の1.5倍</td>
-        <td>440点（3年分）</td>
-        <td>学年ごとに倍率が変わる複雑な計算。実技は中3で9倍、主要は6倍</td>
       </tr>
     </tbody>
   </table>
@@ -147,9 +141,14 @@ export const post: BlogPost = {
     </thead>
     <tbody>
       <tr>
+        <td><strong>岩手県</strong></td>
+        <td>実技4教科×3倍（主要5教科は×2倍）</td>
+        <td>学年ごとの倍率（中1〜中3で1:2:3）も重なるため、中3では実技×9・主要×6相当に。内申点は660点満点（実選抜換算440点）</td>
+      </tr>
+      <tr>
         <td><strong>山梨県</strong></td>
         <td>実技4教科×3倍（主要5教科は×2倍）</td>
-        <td>後期募集では副教科が主要教科より1.5倍重い</td>
+        <td>内申点は330点満点（特別活動等で+30点の場合あり）。副教科が主要教科より1.5倍重い</td>
       </tr>
       <tr>
         <td><strong>兵庫県</strong></td>
@@ -158,8 +157,8 @@ export const post: BlogPost = {
       </tr>
       <tr>
         <td><strong>鹿児島県</strong></td>
-        <td>実技4教科×100点（主要5教科は筆記90点＋内申10点）</td>
-        <td>内申点における副教科の比重が主要教科の10倍以上。事実上最も副教科重視</td>
+        <td>実技4教科×20倍（主要5教科は×2倍）</td>
+        <td>450点満点のうち実技が400点（約9割）を占める。全国で最も副教科重視</td>
       </tr>
     </tbody>
   </table>
@@ -174,7 +173,7 @@ export const post: BlogPost = {
   <p>→副教科1教科あたりの評定の「重み」は、主要1教科の<strong>約1.87倍</strong>になります。</p>
 </div>
 
-<p>さらに極端なのが鹿児島県です。主要5教科は筆記試験で90点＋内申10点の計100点ですが、副教科は内申点100点のみで評価されます。つまり副教科の担任1人が、進路に対して主要教科1科目教師の10倍もの影響力を持つ計算になります。</p>
+<p>さらに極端なのが鹿児島県です。内申点（450点満点、中3のみ対象）は主要5教科×2倍＋実技4教科×20倍で計算され、実技4教科だけで400点と全体の約9割を占めます。副教科の評定1段階の違いが、内申点全体を大きく左右する計算になります。</p>
 
 <hr>
 <h2 id="tobai-group">等倍（主要5教科と同じ）グループ</h2>
@@ -246,8 +245,8 @@ export const post: BlogPost = {
         <td>副教科1教科1段階UP → <strong>＋7.5点</strong>（250点満点中）</td>
       </tr>
       <tr>
-        <td>鹿児島県（100点/教科）</td>
-        <td>副教科1教科1段階UP → <strong>約＋20点</strong>（1教科100点×1/5）</td>
+        <td>鹿児島県（実技×20倍）</td>
+        <td>副教科1教科1段階UP → <strong>＋20点</strong>（450点満点中）</td>
       </tr>
     </tbody>
   </table>
@@ -265,53 +264,53 @@ export const post: BlogPost = {
       <tr><th>地域</th><th>都道府県</th><th>満点</th><th>実技倍率の特徴</th></tr>
     </thead>
     <tbody>
-      <tr><td rowspan="7">北海道・東北</td><td>北海道</td><td>315点</td><td>学年×倍率（中3が3倍）、実技は通常倍率</td></tr>
+      <tr><td rowspan="7">北海道・東北</td><td>北海道</td><td>315点</td><td>学年×倍率（中3が3倍）、実技は等倍</td></tr>
       <tr><td>青森</td><td>135点</td><td>等倍（9教科同じ扱い）</td></tr>
-      <tr><td>岩手</td><td>660点</td><td>実技×3倍、学年比1:2:3</td></tr>
+      <tr><td>岩手</td><td>660点</td><td>実技×3倍、学年比1:2:3（実選抜換算440点）</td></tr>
       <tr><td>宮城</td><td>195点</td><td>実技×2倍</td></tr>
       <tr><td>秋田</td><td>195点</td><td>実技×2倍</td></tr>
       <tr><td>山形</td><td>45点</td><td>中3のみ等倍</td></tr>
       <tr><td>福島</td><td>195点</td><td>実技×2倍</td></tr>
       <tr><td rowspan="7">関東</td><td>茨城</td><td>135点</td><td>等倍</td></tr>
-      <tr><td>栃木</td><td>135点</td><td>等倍</td></tr>
+      <tr><td>栃木</td><td>135点</td><td>等倍（高校により500点等に換算）</td></tr>
       <tr><td>群馬</td><td>135点</td><td>等倍</td></tr>
-      <tr><td>埼玉</td><td>学校による</td><td>高校ごとに倍率設定</td></tr>
-      <tr><td>千葉</td><td>135点</td><td>K値による補正あり</td></tr>
+      <tr><td>埼玉</td><td>180点（標準）</td><td>等倍・学年比1:1:2（高校により1:1:3等も）</td></tr>
+      <tr><td>千葉</td><td>135点</td><td>等倍（K値による補正あり）</td></tr>
       <tr><td><strong>東京</strong></td><td><strong>65点</strong></td><td><strong>実技×2倍（中3のみ）</strong></td></tr>
       <tr><td>神奈川</td><td>135点</td><td>中3が2倍、実技は等倍</td></tr>
       <tr><td rowspan="9">中部</td><td>新潟</td><td>135点</td><td>等倍</td></tr>
-      <tr><td>富山</td><td>135点</td><td>等倍</td></tr>
+      <tr><td>富山</td><td>135点</td><td>等倍（中2・中3のみ対象、+特別活動15点の場合あり）</td></tr>
       <tr><td>石川</td><td>135点</td><td>等倍</td></tr>
-      <tr><td>福井</td><td>135点</td><td>等倍</td></tr>
-      <tr><td>山梨</td><td>135点</td><td>等倍</td></tr>
-      <tr><td>長野</td><td>135点</td><td>等倍</td></tr>
-      <tr><td>岐阜</td><td>135点</td><td>等倍</td></tr>
-      <tr><td>静岡</td><td>135点</td><td>等倍</td></tr>
+      <tr><td>福井</td><td>45点</td><td>中3のみ等倍</td></tr>
+      <tr><td>山梨</td><td>330点</td><td>実技×3倍（主要は2倍）、+特別活動30点の場合あり</td></tr>
+      <tr><td>長野</td><td>45点</td><td>中3のみ等倍</td></tr>
+      <tr><td>岐阜</td><td>180点</td><td>等倍・学年比1:1:2</td></tr>
+      <tr><td>静岡</td><td>45点</td><td>中3のみ等倍</td></tr>
       <tr><td>愛知</td><td>90点</td><td>中3のみ、9教科×2倍</td></tr>
-      <tr><td rowspan="7">近畿</td><td>三重</td><td>135点</td><td>等倍</td></tr>
+      <tr><td rowspan="7">近畿</td><td>三重</td><td>45点</td><td>中3のみ等倍</td></tr>
       <tr><td>滋賀</td><td>135点</td><td>等倍</td></tr>
-      <tr><td>京都</td><td>135点</td><td>等倍</td></tr>
+      <tr><td>京都</td><td>195点</td><td>実技×2倍（中期選抜。前期選抜は135点）</td></tr>
       <tr><td>大阪</td><td>450点</td><td>学校選抜タイプによる</td></tr>
-      <tr><td><strong>兵庫</strong></td><td><strong>250点</strong></td><td><strong>実技×7.5倍（全国最高）</strong></td></tr>
-      <tr><td>奈良</td><td>135点</td><td>等倍</td></tr>
-      <tr><td>和歌山</td><td>135点</td><td>等倍</td></tr>
-      <tr><td rowspan="9">中国・四国</td><td>鳥取</td><td>135点</td><td>等倍</td></tr>
-      <tr><td>島根</td><td>135点</td><td>等倍</td></tr>
-      <tr><td>岡山</td><td>135点</td><td>等倍</td></tr>
-      <tr><td>広島</td><td>135点</td><td>等倍</td></tr>
+      <tr><td><strong>兵庫</strong></td><td><strong>250点</strong></td><td><strong>実技×7.5倍（全国最高水準）</strong></td></tr>
+      <tr><td>奈良</td><td>144点<sup>※標準</sup></td><td>等倍（2026年3月改定・学校により4パターン）</td></tr>
+      <tr><td>和歌山</td><td>180点</td><td>等倍・学年比1:1:2</td></tr>
+      <tr><td rowspan="9">中国・四国</td><td>鳥取</td><td>65点</td><td>実技×2倍、中3のみ（高校により130/195点に換算）</td></tr>
+      <tr><td>島根</td><td>180点</td><td>等倍・学年比1:1:2（実選抜では60点に換算）</td></tr>
+      <tr><td>岡山</td><td>195点</td><td>実技×2倍（実選抜換算200点）</td></tr>
+      <tr><td>広島</td><td>225点</td><td>等倍・学年比1:1:3</td></tr>
       <tr><td>山口</td><td>135点</td><td>等倍</td></tr>
-      <tr><td>徳島</td><td>135点</td><td>等倍</td></tr>
-      <tr><td>香川</td><td>135点</td><td>等倍</td></tr>
+      <tr><td>徳島</td><td>195点</td><td>実技×2倍</td></tr>
+      <tr><td>香川</td><td>390点</td><td>実技×4倍（主要2倍）、実選抜換算220点</td></tr>
       <tr><td>愛媛</td><td>135点</td><td>等倍</td></tr>
-      <tr><td>高知</td><td>135点</td><td>等倍（10段階評価対応）</td></tr>
+      <tr><td>高知</td><td>195点</td><td>実技×2倍（10段階評価の場合260点）</td></tr>
       <tr><td rowspan="8">九州・沖縄</td><td>福岡</td><td>45点</td><td>中3のみ等倍</td></tr>
       <tr><td>佐賀</td><td>135点</td><td>等倍</td></tr>
       <tr><td>長崎</td><td>135点</td><td>等倍</td></tr>
-      <tr><td>熊本</td><td>135点</td><td>等倍</td></tr>
-      <tr><td>大分</td><td>135点</td><td>等倍</td></tr>
-      <tr><td>宮崎</td><td>135点</td><td>等倍</td></tr>
-      <tr><td><strong>鹿児島</strong></td><td><strong>450点</strong></td><td><strong>1教科50点換算（実技重視）</strong></td></tr>
-      <tr><td>沖縄</td><td>135点</td><td>等倍</td></tr>
+      <tr><td>熊本</td><td>180点</td><td>等倍・学年比1:1:2</td></tr>
+      <tr><td>大分</td><td>520点</td><td>実技×4倍（主要2倍）、実選抜換算260点</td></tr>
+      <tr><td>宮崎</td><td>135点</td><td>等倍（学力検査との比率は非公表）</td></tr>
+      <tr><td><strong>鹿児島</strong></td><td><strong>450点</strong></td><td><strong>実技×20倍（実技1教科最大100点）</strong></td></tr>
+      <tr><td>沖縄</td><td>165点</td><td>実技×1.5倍</td></tr>
     </tbody>
   </table>
 </div>
@@ -407,40 +406,40 @@ export const post: BlogPost = {
         <td>中1〜中3の3年間</td>
       </tr>
       <tr>
-        <td><strong>群馬県</strong></td>
+        <td><strong>徳島県</strong></td>
         <td>実技4教科×2倍</td>
         <td>195点</td>
         <td>中1〜中3の3年間</td>
       </tr>
       <tr>
-        <td><strong>大分県</strong></td>
+        <td>京都府</td>
         <td>実技4教科×2倍</td>
         <td>195点</td>
-        <td>中1〜中3の3年間</td>
+        <td>中期選抜のみ（前期選抜は等倍135点）</td>
       </tr>
       <tr>
-        <td><strong>宮崎県</strong></td>
+        <td>岡山県</td>
         <td>実技4教科×2倍</td>
         <td>195点</td>
-        <td>中1〜中3の3年間</td>
+        <td>実選抜では200点満点に換算</td>
       </tr>
       <tr>
-        <td><strong>沖縄県</strong></td>
+        <td>高知県</td>
         <td>実技4教科×2倍</td>
         <td>195点</td>
-        <td>中1〜中3の3年間</td>
+        <td>中3が10段階評価の場合は260点満点</td>
       </tr>
     </tbody>
   </table>
 </div>
 
-<p>※さらに重い重み付けの県として、岩手県（学年×倍率の組み合わせで実質3〜9倍）、兵庫県（実技×7.5倍）、鹿児島県（1教科50点換算で実質10倍以上）などがあります。</p>
+<p>※さらに重い重み付けの県として、岩手県（主要2倍・実技3倍に学年比1:2:3が重なり、中3では実質実技9倍相当）、兵庫県（実技×7.5倍）、鹿児島県（実技×20倍で主要の10倍相当）などがあります。香川県・大分県も実技×4倍（主要2倍）と重い部類です。</p>
 
 <div class="point-box">
   <h4>副教科2倍の県で「実技1教科を1段階上げる」インパクト</h4>
   <ul>
     <li><strong>東京都</strong>：素内申では＋1点だが、調査書点（300点満点）に換算すると<strong>＋約4.6点</strong>のインパクト</li>
-    <li><strong>宮城・秋田・福島・群馬・大分・宮崎・沖縄</strong>：内申点（195点満点）で<strong>＋2点</strong>（×3年間なら最大＋6点）</li>
+    <li><strong>宮城・秋田・福島・徳島</strong>：内申点（195点満点）で<strong>＋2点</strong>（×3年間なら最大＋6点）</li>
   </ul>
   <p>副教科2倍の県では、実技1教科を「3→4」に上げるだけで内申点全体に大きな影響が出ます。特に実技は<strong>授業態度・提出物・作品の完成度</strong>で評価される比重が高いため、努力次第で確実に上げられる教科です。</p>
 </div>

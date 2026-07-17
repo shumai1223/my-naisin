@@ -4,7 +4,7 @@ import * as React from 'react';
 import { ChevronDown, MapPin, Info, AlertTriangle, Sparkles, ExternalLink, Calendar } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-import { PREFECTURES, REGIONS, getPrefecturesByRegion, type PrefectureConfig } from '@/lib/prefectures';
+import { PREFECTURES, REGIONS, getPrefecturesByRegion, resolvePrefectureConfig, type PrefectureConfig } from '@/lib/prefectures';
 import { cn } from '@/lib/utils';
 
 interface PrefectureSelectorProps {
@@ -12,6 +12,8 @@ interface PrefectureSelectorProps {
   onChange: (code: string) => void;
   use10PointScale: boolean;
   onScale10Change: (enabled: boolean) => void;
+  variantCode?: string;
+  onVariantChange?: (code: string) => void;
   className?: string;
 }
 
@@ -20,14 +22,21 @@ export function PrefectureSelector({
   onChange,
   use10PointScale,
   onScale10Change,
+  variantCode,
+  onVariantChange,
   className
 }: PrefectureSelectorProps) {
   const [isOpen, setIsOpen] = React.useState(false);
   const dropdownRef = React.useRef<HTMLDivElement>(null);
 
-  const selectedPrefecture = React.useMemo(
+  const rawSelectedPrefecture = React.useMemo(
     () => PREFECTURES.find(p => p.code === selectedCode),
     [selectedCode]
+  );
+
+  const selectedPrefecture = React.useMemo(
+    () => (rawSelectedPrefecture ? resolvePrefectureConfig(rawSelectedPrefecture, variantCode) : undefined),
+    [rawSelectedPrefecture, variantCode]
   );
 
   React.useEffect(() => {
@@ -259,6 +268,43 @@ export function PrefectureSelector({
                 )}
               />
             </button>
+          </div>
+        </motion.div>
+      )}
+
+      {/* School-dependent Pattern Selector（例: 奈良県2026年改定の4パターン） */}
+      {rawSelectedPrefecture?.variants && rawSelectedPrefecture.variants.length > 1 && onVariantChange && (
+        <motion.div
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ opacity: 1, height: 'auto' }}
+          className="rounded-2xl border border-indigo-200 bg-gradient-to-br from-indigo-50 to-blue-50 p-4"
+        >
+          <div className="text-sm font-bold text-slate-800">志望校のパターンを選択</div>
+          <div className="mt-0.5 text-xs text-slate-600">
+            {rawSelectedPrefecture.name}は学校により満点・計算方法が異なります。志望校の募集要項で確認してください。
+          </div>
+          <div className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2">
+            {rawSelectedPrefecture.variants.map((variant) => {
+              const isActive = (variantCode ?? rawSelectedPrefecture.variants![0].code) === variant.code;
+              return (
+                <button
+                  key={variant.code}
+                  type="button"
+                  onClick={() => onVariantChange(variant.code)}
+                  className={cn(
+                    'rounded-xl border px-3 py-2 text-left text-xs transition-all',
+                    isActive
+                      ? 'border-indigo-400 bg-indigo-500 text-white shadow-md'
+                      : 'border-slate-200 bg-white text-slate-600 hover:border-indigo-300'
+                  )}
+                >
+                  <div className="font-bold">{variant.name}（{variant.maxScore}点満点）</div>
+                  <div className={cn('mt-0.5 leading-relaxed', isActive ? 'text-indigo-50' : 'text-slate-500')}>
+                    {variant.description}
+                  </div>
+                </button>
+              );
+            })}
           </div>
         </motion.div>
       )}

@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { ArrowRight, RotateCcw, Calculator, ChevronRight, TrendingUp as TrendingUpIcon } from 'lucide-react';
 
 import { DEFAULT_SCORES } from '@/lib/constants';
-import { getPrefectureByCode, DEFAULT_PREFECTURE_CODE } from '@/lib/prefectures';
+import { getPrefectureByCode, resolvePrefectureConfig, DEFAULT_PREFECTURE_CODE } from '@/lib/prefectures';
 import {
   appendHistoryEntry,
   getSaveConsent,
@@ -97,6 +97,7 @@ function scoresDifferFromDefault(scores: Scores): boolean {
 export default function HomeClient() {
   const [prefectureCode, setPrefectureCode] = React.useState<string>(DEFAULT_PREFECTURE_CODE);
   const [use10PointScale, setUse10PointScale] = React.useState(false);
+  const [variantCode, setVariantCode] = React.useState<string | undefined>(undefined);
   const [scores, setScores] = React.useState<Scores>(DEFAULT_SCORES);
   const [showResult, setShowResult] = React.useState(false);
   const [shareOpen, setShareOpen] = React.useState(false);
@@ -108,10 +109,10 @@ export default function HomeClient() {
   const [lastSaved, setLastSaved] = React.useState<SavedHistoryEntry | null>(null);
   const [savedGoal, setSavedGoal] = React.useState<SavedGoal | null>(null);
 
-  const selectedPrefecture = React.useMemo(
-    () => getPrefectureByCode(prefectureCode),
-    [prefectureCode]
-  );
+  const selectedPrefecture = React.useMemo(() => {
+    const raw = getPrefectureByCode(prefectureCode);
+    return raw ? resolvePrefectureConfig(raw, variantCode) : undefined;
+  }, [prefectureCode, variantCode]);
 
   const maxGrade = use10PointScale && selectedPrefecture?.supports10PointScale ? 10 : 5;
 
@@ -177,13 +178,18 @@ export default function HomeClient() {
     }
   }, [scores, prefectureCode]);
 
+  const handlePrefectureChange = React.useCallback((code: string) => {
+    setPrefectureCode(code);
+    setVariantCode(undefined);
+  }, []);
+
   const total = React.useMemo(
-    () => calculateTotalScore(scores, prefectureCode, use10PointScale),
-    [scores, prefectureCode, use10PointScale]
+    () => calculateTotalScore(scores, prefectureCode, use10PointScale, variantCode),
+    [scores, prefectureCode, use10PointScale, variantCode]
   );
   const max = React.useMemo(
-    () => calculateMaxScore(prefectureCode, use10PointScale),
-    [prefectureCode, use10PointScale]
+    () => calculateMaxScore(prefectureCode, use10PointScale, variantCode),
+    [prefectureCode, use10PointScale, variantCode]
   );
   const percent = React.useMemo(() => calculatePercent(total, max), [total, max]);
   const rank = React.useMemo(() => getRankForPercent(percent), [percent]);
@@ -492,9 +498,11 @@ export default function HomeClient() {
                           <div className="mt-4">
                             <PrefectureSelector
                               selectedCode={prefectureCode}
-                              onChange={setPrefectureCode}
+                              onChange={handlePrefectureChange}
                               use10PointScale={use10PointScale}
                               onScale10Change={setUse10PointScale}
+                              variantCode={variantCode}
+                              onVariantChange={setVariantCode}
                             />
                           </div>
 
@@ -538,6 +546,7 @@ export default function HomeClient() {
                           scores={scores}
                           prefectureCode={prefectureCode}
                           selectedPrefecture={selectedPrefecture}
+                          variantCode={variantCode}
                           saveEnabled={saveEnabled}
                           onSaveEnabledChange={onSaveEnabledChange}
                           saveMemo={saveMemo}

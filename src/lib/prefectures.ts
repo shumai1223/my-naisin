@@ -1,6 +1,15 @@
 // 都道府県別内申点計算方法
 // 出典: https://alpha-katekyo.jp/tips/tips286/
 
+export interface PrefectureVariant {
+  code: string;
+  name: string;
+  targetGrades: number[];
+  gradeMultipliers: Record<number, number>;
+  maxScore: number;
+  description: string;
+}
+
 export interface PrefectureConfig {
   code: string;
   name: string;
@@ -35,6 +44,9 @@ export interface PrefectureConfig {
   lastVerified?: string;
   // 対象年度
   fiscalYear?: string;
+  // 学校により満点・学年倍率そのものが変わる県向けのパターン定義（例: 奈良県の2026年3月制度改定）。
+  // 存在する場合、variants[0] が標準パターンとしてベースの targetGrades/gradeMultipliers/maxScore/description と一致する。
+  variants?: PrefectureVariant[];
   // 逆算計算設定
   reverseCalc?: {
     // 合計満点（内申点換算後＋当日点）
@@ -594,16 +606,54 @@ export const PREFECTURES: PrefectureConfig[] = [
     code: 'nara',
     name: '奈良県',
     region: '近畿',
-    targetGrades: [2, 3],
-    gradeMultipliers: { 1: 0, 2: 1, 3: 2 },
+    // 2026年3月17日発表の制度改定（令和8年度〜）: 中1・中2は「主体的に学習に取り組む態度」の
+    // 9教科3段階評価（各27点）＋中3は9教科5段階評定×2倍（90点）が標準（パターン①＝144点満点）。
+    // 学校により②234点・③198点・④180点（中1・中2は加えない代わり中3をさらに2倍）の4パターンに分かれる。
+    targetGrades: [1, 2, 3],
+    gradeMultipliers: { 1: 0.6, 2: 0.6, 3: 2 },
     coreMultiplier: 1,
     practicalMultiplier: 1,
-    maxScore: 135,
-    description: '中2(45点)＋中3×2倍(90点)（135点満点）',
+    maxScore: 144,
+    description: '中1・中2は「主体的に学習に取り組む態度」9教科3段階（各27点）＋中3は9教科5段階×2倍（90点）＝標準144点満点',
+    note: '2026年3月17日発表の制度改定により、令和8年度から中1・中2の評価方法が「主体的に学習に取り組む態度」の3段階評価に変わりました（旧制度の中1除外・135点満点とは別物です）。学校により標準の144点満点のほか、②234点（中3をさらに2倍）、③198点（中1・中2を2倍）、④180点（中1・中2は加えず中3をさらに2倍）の4パターンに分かれます。志望校がどのパターンかは募集要項で必ず確認してください。',
+    variants: [
+      {
+        code: 'pattern1',
+        name: 'パターン①（標準）',
+        targetGrades: [1, 2, 3],
+        gradeMultipliers: { 1: 0.6, 2: 0.6, 3: 2 },
+        maxScore: 144,
+        description: '中1・中2「主体的に学習に取り組む態度」各27点（3段階×9教科）＋中3評定×2倍90点＝144点満点'
+      },
+      {
+        code: 'pattern2',
+        name: 'パターン②',
+        targetGrades: [1, 2, 3],
+        gradeMultipliers: { 1: 0.6, 2: 0.6, 3: 4 },
+        maxScore: 234,
+        description: '中1・中2は標準と同じ各27点、中3をさらに2倍（180点）にして合計234点満点'
+      },
+      {
+        code: 'pattern3',
+        name: 'パターン③',
+        targetGrades: [1, 2, 3],
+        gradeMultipliers: { 1: 1.2, 2: 1.2, 3: 2 },
+        maxScore: 198,
+        description: '中1・中2をそれぞれ2倍（各54点）にし、中3は標準通り90点で合計198点満点'
+      },
+      {
+        code: 'pattern4',
+        name: 'パターン④',
+        targetGrades: [3],
+        gradeMultipliers: { 1: 0, 2: 0, 3: 4 },
+        maxScore: 180,
+        description: '中1・中2の点数は調査書成績に加えず、中3をさらに2倍（180点）のみで判定'
+      }
+    ],
     sourceUrl: 'https://www.pref.nara.lg.jp/n167/66542.html',
     sourceUrl2: 'https://czemi.benesse.ne.jp/open/nyushi/exam/29/naishin/',
     sourceTitle: '奈良県 高校入試（入学者選抜）',
-    lastVerified: '2026-07-16',
+    lastVerified: '2026-07-17',
     fiscalYear: '2026'
   },
   {
@@ -969,6 +1019,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceTitle: '宮崎県 県立高等学校生徒募集（入学者選抜）',
     lastVerified: '2026-07-16',
     fiscalYear: '2026',
+    note: '学力検査・面接との比率は非公表で、高校ごとに傾斜配点が行われます。合否における内申点の実質的な重みは志望校の募集要項でご確認ください。',
     reverseCalc: {
       totalMaxScore: 1000,
       examMaxScore: 500,
@@ -1043,6 +1094,20 @@ export function getPrefecturesByRegion(region: RegionName): PrefectureConfig[] {
 
 export function getPrefectureByCode(code: string): PrefectureConfig | undefined {
   return PREFECTURES.find(p => p.code === code);
+}
+
+// variants（学校によって満点・学年倍率そのものが変わる県）を指定パターンに解決する。
+// variants がない県ではそのまま返す。variantCode 未指定/不一致時は先頭（標準パターン）を採用。
+export function resolvePrefectureConfig(prefecture: PrefectureConfig, variantCode?: string): PrefectureConfig {
+  if (!prefecture.variants || prefecture.variants.length === 0) return prefecture;
+  const variant = prefecture.variants.find(v => v.code === variantCode) ?? prefecture.variants[0];
+  return {
+    ...prefecture,
+    targetGrades: variant.targetGrades,
+    gradeMultipliers: variant.gradeMultipliers,
+    maxScore: variant.maxScore,
+    description: variant.description
+  };
 }
 
 // 簡易計算モード（中3のみ、1学年分）

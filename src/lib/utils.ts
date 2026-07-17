@@ -2,7 +2,7 @@ import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
 import { RANK_DEFINITIONS, SUBJECTS } from './constants';
-import { getPrefectureByCode } from './prefectures';
+import { getPrefectureByCode, resolvePrefectureConfig } from './prefectures';
 import type { RankDefinition, Scores, SubjectCategory, SubjectKey } from './types';
 
  const RANK_DEFINITIONS_DESC = [...RANK_DEFINITIONS].sort((a, b) => b.minPercent - a.minPercent);
@@ -23,8 +23,9 @@ export function roundInt(value: number) {
    return Math.floor(clamp(value, 0, 100));
  }
 
-export function calculateTotalScore(scores: Scores, prefectureCode: string, use10PointScale?: boolean): number {
-  const prefecture = getPrefectureByCode(prefectureCode);
+export function calculateTotalScore(scores: Scores, prefectureCode: string, use10PointScale?: boolean, variantCode?: string): number {
+  const rawPrefecture = getPrefectureByCode(prefectureCode);
+  const prefecture = rawPrefecture ? resolvePrefectureConfig(rawPrefecture, variantCode) : undefined;
   if (!prefecture) {
     // デフォルトは通常計算（45点満点）
     return SUBJECTS.reduce((sum, subject) => {
@@ -61,11 +62,12 @@ export function calculateTotalScore(scores: Scores, prefectureCode: string, use1
   return Math.round(total);
 }
 
-export function calculateMaxScore(prefectureCode: string, use10PointScale?: boolean): number {
-  const prefecture = getPrefectureByCode(prefectureCode);
-  if (!prefecture) {
+export function calculateMaxScore(prefectureCode: string, use10PointScale?: boolean, variantCode?: string): number {
+  const rawPrefecture = getPrefectureByCode(prefectureCode);
+  if (!rawPrefecture) {
     return 45; // デフォルト
   }
+  const prefecture = resolvePrefectureConfig(rawPrefecture, variantCode);
   
   const maxGrade = (use10PointScale && prefecture.supports10PointScale) ? 10 : 5;
   

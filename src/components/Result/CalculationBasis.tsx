@@ -3,17 +3,21 @@
 import * as React from 'react';
 import { Info, ExternalLink, Calendar, BookOpen, AlertTriangle } from 'lucide-react';
 
-import { getPrefectureByCode } from '@/lib/prefectures';
+import { getPrefectureByCode, resolvePrefectureConfig } from '@/lib/prefectures';
 import { sourceTrustLabel } from '@/lib/source-trust';
 
 interface CalculationBasisProps {
   prefectureCode: string;
+  variantCode?: string;
   total: number;
   max: number;
 }
 
-export function CalculationBasis({ prefectureCode, total, max }: CalculationBasisProps) {
-  const prefecture = React.useMemo(() => getPrefectureByCode(prefectureCode), [prefectureCode]);
+export function CalculationBasis({ prefectureCode, variantCode, total, max }: CalculationBasisProps) {
+  const prefecture = React.useMemo(() => {
+    const raw = getPrefectureByCode(prefectureCode);
+    return raw ? resolvePrefectureConfig(raw, variantCode) : undefined;
+  }, [prefectureCode, variantCode]);
 
   const multiplierInfo = React.useMemo(() => {
     if (!prefecture) return '';

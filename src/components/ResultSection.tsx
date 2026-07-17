@@ -109,6 +109,7 @@ interface ResultSectionProps {
   scores: Scores;
   prefectureCode: string;
   selectedPrefecture: PrefectureConfig | undefined;
+  variantCode?: string;
   saveEnabled: boolean;
   onSaveEnabledChange: (checked: boolean) => void;
   saveMemo: string;
@@ -123,6 +124,7 @@ export function ResultSection({
   scores,
   prefectureCode,
   selectedPrefecture,
+  variantCode,
   saveEnabled,
   onSaveEnabledChange,
   saveMemo,
@@ -402,7 +404,7 @@ export function ResultSection({
             </div>
           </Card>
 
-          <CalculationBasis prefectureCode={prefectureCode} total={result.total} max={result.max} />
+          <CalculationBasis prefectureCode={prefectureCode} variantCode={variantCode} total={result.total} max={result.max} />
 
           {/* 内申点計算後の関連ツール導線（/hyotei-heikin・/hensachi の被リンク強化＋ユーザー回遊性アップ） */}
           <Card className="overflow-hidden">

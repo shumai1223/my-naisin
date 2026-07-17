@@ -14,6 +14,15 @@ export interface ChangeLogEntry {
 
 export const CHANGELOG: ChangeLogEntry[] = [
   {
+    date: '2026-07-17',
+    prefectureCode: 'nara',
+    type: 'fix',
+    category: 'calculation',
+    title: '奈良県の内申点計算を2026年3月の制度改定に対応',
+    description:
+      '奈良県は2026年3月の入試制度改定により、内申点の対象学年・計算方法が変わりました。従来の「中1除外・135点満点」の表示を、標準パターンで中1・中2を含む144点満点の計算に更新し、学校により異なる4パターンをページ上で選べるようにしました。あわせて宮崎県のページに、学力検査との配点比率が非公表である旨の注記を追加しています。',
+  },
+  {
     date: '2026-07-16',
     type: 'update',
     category: 'ui',
