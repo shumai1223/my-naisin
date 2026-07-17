@@ -155,20 +155,6 @@ export default function EditorProfilePage() {
                 <h2 className="text-sm font-black text-slate-400 uppercase tracking-widest mb-4">経歴・資格</h2>
                 <ul className="space-y-4">
                   <li className="flex gap-3">
-                    <GraduationCap className="h-5 w-5 text-blue-500 shrink-0" />
-                    <div>
-                      <div className="text-sm font-bold text-slate-800">都内私立中 3年</div>
-                      <div className="text-xs text-slate-500">（在学中・2026年度受験生）</div>
-                    </div>
-                  </li>
-                  <li className="flex gap-3">
-                    <Award className="h-5 w-5 text-amber-500 shrink-0" />
-                    <div>
-                      <div className="text-sm font-bold text-slate-800">数検2級 / 英検準1級</div>
-                      <div className="text-xs text-slate-500">高い学習能力と分析力を保持</div>
-                    </div>
-                  </li>
-                  <li className="flex gap-3">
                     <Code className="h-5 w-5 text-indigo-500 shrink-0" />
                     <div>
                       <div className="text-sm font-bold text-slate-800">フルスタック開発</div>
