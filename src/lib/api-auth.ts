@@ -27,7 +27,10 @@ import {
  * 必ず cross-site になるため、この枠は実ユーザー（StudyPlanCalculator等）だけを守る。
  * サーバーサイドからの偽装は可能だが、その場合は少数のIPに集中するので per-IP 窓が効く。
  */
-export const SAME_ORIGIN_RATE_PER_MINUTE = 30;
+// 2026-07-17: 30→60。終業式(通知表デー)の朝10-11時に実測サージ(時間71クリック=平常の2倍超)を確認。
+// キャリアCGNATでは数千人が1IPを共有するため、サージ時に実ユーザーが30/分に到達し得る。
+// same-originはブラウザ強制付与で偽装経路が限定的なため、緩めてもタダ乗りリスクは増えない。
+export const SAME_ORIGIN_RATE_PER_MINUTE = 60;
 
 /** Cloudflare Workers Rate Limiting binding（データセンター単位で共有される本物のカウンタ）。 */
 type EdgeRateLimiter = { limit(options: { key: string }): Promise<{ success: boolean }> };
