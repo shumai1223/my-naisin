@@ -49,8 +49,12 @@ export interface HokkaidoRankResult {
 }
 
 /** 内申点からランク(A〜M)を判定し、学力検査点との単純合算(615点満点)を算出する。 */
+const clamp = (n: number, min: number, max: number): number => Math.min(max, Math.max(min, n));
+
 export function computeHokkaidoRank(input: HokkaidoRankInput): HokkaidoRankResult {
-  const rank = HOKKAIDO_RANK_TABLE.find((r) => input.naishinRaw >= r.min) ?? HOKKAIDO_RANK_TABLE[HOKKAIDO_RANK_TABLE.length - 1];
-  const total = input.naishinRaw + input.gakuryokuRaw;
+  const naishinRaw = clamp(input.naishinRaw, 0, HOKKAIDO_MAX_NAISHIN);
+  const gakuryokuRaw = clamp(input.gakuryokuRaw, 0, HOKKAIDO_MAX_GAKURYOKU);
+  const rank = HOKKAIDO_RANK_TABLE.find((r) => naishinRaw >= r.min) ?? HOKKAIDO_RANK_TABLE[HOKKAIDO_RANK_TABLE.length - 1];
+  const total = naishinRaw + gakuryokuRaw;
   return { rank, total, max: HOKKAIDO_TOTAL_SCORE_MAX, percent: (total / HOKKAIDO_TOTAL_SCORE_MAX) * 100 };
 }

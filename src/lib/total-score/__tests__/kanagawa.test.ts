@@ -31,6 +31,17 @@ describe('computeKanagawaSValue（神奈川S1/S2値）', () => {
     const result = computeKanagawaSValue({ naishinRaw: 135, gakuryokuRaw: 500, ratioIndex: idx });
     expect(result.s1).toBe(1000);
   });
+
+  it('満点を大幅に超える入力は満点にクランプされ、S1が異常値にならない', () => {
+    const result = computeKanagawaSValue({ naishinRaw: 1e30, gakuryokuRaw: 1e30, tokushokuRaw: 1e30 });
+    expect(result.s1).toBe(1000);
+    expect(result.s2).toBe(1500); // 1000 + 100(クランプ後の特色検査)×5
+  });
+
+  it('負の入力は0にクランプされる', () => {
+    const result = computeKanagawaSValue({ naishinRaw: -100, gakuryokuRaw: -500 });
+    expect(result.s1).toBe(0);
+  });
 });
 
 describe('kanagawaRankLabel（学校別ボーダー断定なしの帯ラベル）', () => {

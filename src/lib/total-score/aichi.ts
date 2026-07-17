@@ -41,10 +41,14 @@ export interface AichiTotalScoreResult {
   method: AichiMethodOption;
 }
 
+const clamp = (n: number, min: number, max: number): number => Math.min(max, Math.max(min, n));
+
 /** 評定得点(評定合計×2)×評定倍率 + 学力検査点×学力倍率 で総合得点を計算（評価方法により満点が異なる）。 */
 export function computeAichiTotalScore(input: AichiTotalScoreInput): AichiTotalScoreResult {
   const method = AICHI_METHODS[input.methodIndex ?? 0] ?? AICHI_METHODS[0];
-  const hyoteitokuten = input.naishinSumRaw * 2;
-  const total = Math.round((hyoteitokuten * method.naishinMul + input.gakuryokuRaw * method.gakuryokuMul) * 10) / 10;
+  const naishinSumRaw = clamp(input.naishinSumRaw, 0, 45);
+  const gakuryokuRaw = clamp(input.gakuryokuRaw, 0, 110);
+  const hyoteitokuten = naishinSumRaw * 2;
+  const total = Math.round((hyoteitokuten * method.naishinMul + gakuryokuRaw * method.gakuryokuMul) * 10) / 10;
   return { hyoteitokuten, total, max: method.max, method };
 }

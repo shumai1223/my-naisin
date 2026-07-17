@@ -34,14 +34,18 @@ export interface ChibaKValueResult {
   max: number;
 }
 
+const clamp = (n: number, min: number, max: number): number => Math.min(max, Math.max(min, n));
+
 /** 総合得点＝学力検査点 + (評定合計×K値) + 調査書その他(任意) + 学校設定検査(任意)。 */
 export function computeChibaKValue(input: ChibaKValueInput): ChibaKValueResult {
-  const k = input.kValue ?? 1.0;
-  const others = input.includeOthers ? (input.othersRaw ?? 0) : 0;
-  const schoolExam = input.includeSchoolExam ? (input.schoolExamRaw ?? 0) : 0;
+  const k = clamp(input.kValue ?? 1.0, 0, 5);
+  const others = clamp(input.includeOthers ? (input.othersRaw ?? 0) : 0, 0, 50);
+  const schoolExam = clamp(input.includeSchoolExam ? (input.schoolExamRaw ?? 0) : 0, 0, 150);
+  const hyoteiRaw = clamp(input.hyoteiRaw, 0, 135);
+  const gakuryokuRaw = clamp(input.gakuryokuRaw, 0, 500);
 
-  const reportScore = input.hyoteiRaw * k;
-  const total = Math.round(input.gakuryokuRaw + reportScore + others + schoolExam);
+  const reportScore = hyoteiRaw * k;
+  const total = Math.round(gakuryokuRaw + reportScore + others + schoolExam);
   const max = Math.round(500 + 135 * k + (input.includeOthers ? 50 : 0) + (input.includeSchoolExam ? 150 : 0));
 
   return { reportScore, total, max };

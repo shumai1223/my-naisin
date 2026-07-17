@@ -29,4 +29,14 @@ describe('computeAichiTotalScore（愛知県：評定得点(評定合計×2)+学
     expect(AICHI_METHODS).toHaveLength(5);
     expect(AICHI_METHODS.map((m) => m.type)).toEqual(['Ⅰ', 'Ⅱ', 'Ⅲ', 'Ⅳ', 'Ⅴ']);
   });
+
+  it('満点を大幅に超える入力は満点にクランプされる', () => {
+    const result = computeAichiTotalScore({ naishinSumRaw: 1e30, gakuryokuRaw: 1e30, methodIndex: 0 });
+    expect(result.total).toBe(200);
+  });
+
+  it('負の入力は0にクランプされる', () => {
+    const result = computeAichiTotalScore({ naishinSumRaw: -45, gakuryokuRaw: -110 });
+    expect(result.total).toBe(0);
+  });
 });

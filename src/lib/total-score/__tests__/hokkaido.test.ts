@@ -30,4 +30,17 @@ describe('computeHokkaidoRank（北海道：内申点からA〜Mランク判定+
     expect(HOKKAIDO_RANK_TABLE[0].rank).toBe('A');
     expect(HOKKAIDO_RANK_TABLE[HOKKAIDO_RANK_TABLE.length - 1].rank).toBe('M');
   });
+
+  it('満点を大幅に超える入力は満点にクランプされAランクのまま異常値にならない', () => {
+    const result = computeHokkaidoRank({ naishinRaw: 1e30, gakuryokuRaw: 1e30 });
+    expect(result.rank.rank).toBe('A');
+    expect(result.total).toBe(HOKKAIDO_TOTAL_SCORE_MAX);
+    expect(result.percent).toBe(100);
+  });
+
+  it('負の入力は0にクランプされる', () => {
+    const result = computeHokkaidoRank({ naishinRaw: -315, gakuryokuRaw: -300 });
+    expect(result.total).toBe(0);
+    expect(result.rank.rank).toBe('M');
+  });
 });

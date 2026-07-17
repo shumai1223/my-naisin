@@ -42,11 +42,15 @@ export interface OsakaTotalScoreResult {
   type: OsakaTypeOption;
 }
 
+const clamp = (n: number, min: number, max: number): number => Math.min(max, Math.max(min, n));
+
 /** 総合点 = 学力検査点×学力比率 + 内申点×内申比率（両者とも450点満点・比率の合計は1）。 */
 export function computeOsakaTotalScore(input: OsakaTotalScoreInput): OsakaTotalScoreResult {
   const type = OSAKA_TYPE_OPTIONS[input.typeIndex ?? 2] ?? OSAKA_TYPE_OPTIONS[2];
-  const gakuryokuScore = input.gakuryokuRaw * type.gakuryoku;
-  const naishinScore = input.naishinRaw * type.naishin;
+  const gakuryokuRaw = clamp(input.gakuryokuRaw, 0, OSAKA_TOTAL_SCORE_MAX);
+  const naishinRaw = clamp(input.naishinRaw, 0, OSAKA_TOTAL_SCORE_MAX);
+  const gakuryokuScore = gakuryokuRaw * type.gakuryoku;
+  const naishinScore = naishinRaw * type.naishin;
   const total = Math.round(gakuryokuScore + naishinScore);
   return {
     gakuryokuScore,

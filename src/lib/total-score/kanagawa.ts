@@ -47,16 +47,20 @@ export interface KanagawaSValueResult {
   max: number;
 }
 
+const clamp = (n: number, min: number, max: number): number => Math.min(max, Math.max(min, n));
+
 /**
  * S1値 = (内申/135×100×内申比率) + (学力/500×100×学力比率)。
  * S2値 = S1 + 特色検査の得点×5（特色検査を実施する難関校向けの簡略加算）。
  */
 export function computeKanagawaSValue(input: KanagawaSValueInput): KanagawaSValueResult {
   const ratio = KANAGAWA_RATIO_OPTIONS[input.ratioIndex ?? 0] ?? KANAGAWA_RATIO_OPTIONS[0];
-  const tokushoku = input.tokushokuRaw ?? 0;
+  const tokushoku = clamp(input.tokushokuRaw ?? 0, 0, 100);
+  const naishinRaw = clamp(input.naishinRaw, 0, 135);
+  const gakuryokuRaw = clamp(input.gakuryokuRaw, 0, 500);
 
-  const naishinConverted = (input.naishinRaw / 135) * 100 * ratio.naishin;
-  const gakuryokuConverted = (input.gakuryokuRaw / 500) * 100 * ratio.gakuryoku;
+  const naishinConverted = (naishinRaw / 135) * 100 * ratio.naishin;
+  const gakuryokuConverted = (gakuryokuRaw / 500) * 100 * ratio.gakuryoku;
   const s1 = Math.round(naishinConverted + gakuryokuConverted);
   const s2 = Math.round(s1 + tokushoku * 5);
 

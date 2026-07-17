@@ -30,10 +30,15 @@ export interface SaitamaTotalScoreResult {
   max: number;
 }
 
+const clamp = (n: number, min: number, max: number): number => Math.min(max, Math.max(min, n));
+
 /** 総合得点（目安）＝学力検査点＋調査書点（自己申告値）の単純合算。学校別ボーダー断定なし。 */
 export function computeSaitamaTotalScore(input: SaitamaTotalScoreInput): SaitamaTotalScoreResult {
+  const gakuryokuRaw = clamp(input.gakuryokuRaw, 0, SAITAMA_MAX_GAKURYOKU);
+  // 調査書点は高校ごとに満点が異なる自己申告値のため断定の上限は持たない。異常入力による表示破綻だけを防ぐ防御的な上限。
+  const chosashoRaw = clamp(input.chosashoRaw, 0, 1000);
   return {
-    total: input.gakuryokuRaw + input.chosashoRaw,
+    total: gakuryokuRaw + chosashoRaw,
     max: SAITAMA_ASSUMED_TOTAL_CEILING,
   };
 }

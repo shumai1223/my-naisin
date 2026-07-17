@@ -29,7 +29,11 @@ export interface FukuokaScoreResult {
  * 福岡県はA群（学力・内申の両方の順位が合格圏）／B群（総合判断）の二段階選抜のため、
  * この合計だけで合否が決まるわけではない（学校別ボーダー断定なし）。
  */
+const clamp = (n: number, min: number, max: number): number => Math.min(max, Math.max(min, n));
+
 export function computeFukuokaScore(input: FukuokaScoreInput): FukuokaScoreResult {
-  const total = input.naishinRaw + input.gakuryokuRaw;
+  const naishinRaw = clamp(input.naishinRaw, 0, FUKUOKA_MAX_NAISHIN);
+  const gakuryokuRaw = clamp(input.gakuryokuRaw, 0, FUKUOKA_MAX_GAKURYOKU);
+  const total = naishinRaw + gakuryokuRaw;
   return { total, max: FUKUOKA_MAX_TOTAL, percent: (total / FUKUOKA_MAX_TOTAL) * 100 };
 }
