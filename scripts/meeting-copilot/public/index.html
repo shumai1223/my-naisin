@@ -143,6 +143,7 @@ function setupRec() {
       else interim += res[0].transcript;
     }
     interimEl.textContent = interim;
+    if (interim !== interimText) { interimText = interim; interimChangedAt = Date.now(); }
   };
   r.onend = () => { if (micOn) setTimeout(() => { try { r.start(); } catch {} }, 150); };
   r.onerror = (e) => { if (e.error === 'not-allowed') { micOn = false; renderMic(); alert('マイクの使用を許可してください'); } };
@@ -211,14 +212,61 @@ autoBtn.onclick = () => {
   if (autoOn) scheduleAuto();
 };
 
+// ---- 先読み(投機)発火: isFinal確定を待たずにAIへ流す ----
+// Web Speechの確定(isFinal)は発話終了から0.5〜1.5秒遅れる。暫定文(interim)が
+// SPEC_STABLE_MS動かなくなった時点=発言が止まった気配で先に生成を始め、後から来る確定文が
+// 暫定文とほぼ同じなら再送しない(bigram Dice類似度)。違ったら普通に再送(先読みカードは上書きされる)。
+const SPEC_STABLE_MS = 600;
+const SPEC_MIN_CHARS = 10;
+let interimText = '';
+let interimChangedAt = 0;
+let specPending = null; // 直近の先読み発火のテキスト(次の確定文と照合したらnullへ)
+let specAt = 0;
+
+function normText(s) { return s.replace(/[\s、。．，・…？?！!「」()（）]/g, ''); }
+function bigramCounts(s) { const m = new Map(); for (let i = 0; i < s.length - 1; i++) { const g = s.slice(i, i + 2); m.set(g, (m.get(g) || 0) + 1); } return m; }
+function similarText(a, b) {
+  a = normText(a); b = normText(b);
+  if (!a || !b) return false;
+  if (a === b) return true;
+  const A = bigramCounts(a), B = bigramCounts(b);
+  let inter = 0, sizeA = 0, sizeB = 0;
+  for (const v of A.values()) sizeA += v;
+  for (const v of B.values()) sizeB += v;
+  for (const [g, v] of A) inter += Math.min(v, B.get(g) || 0);
+  return sizeA + sizeB > 0 && (2 * inter) / (sizeA + sizeB) >= 0.8;
+}
+
+setInterval(() => {
+  if (!autoOn || !micOn) return;
+  if (specPending && Date.now() - specAt > 15_000) specPending = null; // 確定が来ないまま古びた先読みは破棄
+  if (busy || !interimText || normText(interimText).length < SPEC_MIN_CHARS) return;
+  if (Date.now() - interimChangedAt < SPEC_STABLE_MS) return;
+  if (specPending && similarText(specPending, interimText)) return; // 同内容で二重発火しない
+  specPending = interimText;
+  specAt = Date.now();
+  suggest(true, interimText);
+}, 200);
+
 let busy = false;
-async function suggest(auto = false) {
-  if (busy) { if (auto) scheduleAuto(); return; } // 生成中に来た発言は終了後にまとめて再送
+async function suggest(auto = false, interim = '') {
+  // 確定文が直前の先読みとほぼ同じなら送らない(答えはもう出ている/出つつある)
+  if (auto && !interim && specPending) {
+    const newTexts = lines.slice(sentCount).map((l) => l.text).join('');
+    if (newTexts && similarText(newTexts, specPending)) {
+      sentCount = lines.length;
+      specPending = null;
+      return;
+    }
+  }
+  if (busy) { if (auto && !interim) scheduleAuto(); return; } // 生成中に来た発言は終了後にまとめて再送
   const newLines = lines.slice(sentCount).map((l) => `${l.time} ${l.text}`);
+  if (interim) newLines.push(`${new Date().toTimeString().slice(0, 5)} ${interim}`);
   const ask = auto ? '' : askInput.value.trim();
   if (newLines.length === 0 && !ask) return;
   sentCount = lines.length;
   if (!auto) askInput.value = '';
+  if (!interim) specPending = null; // 通常送信が走ったら先読みの照合は不要になる
   busy = true;
   suggestBtn.disabled = true;
 
@@ -247,7 +295,7 @@ async function suggest(auto = false) {
       card.innerHTML = '';
       const meta = document.createElement('div');
       meta.className = 'meta';
-      meta.textContent = `${new Date().toTimeString().slice(0, 8)}${ask ? ' ・ ' + ask : ''} ・ ⏳`;
+      meta.textContent = `${new Date().toTimeString().slice(0, 8)}${ask ? ' ・ ' + ask : ''}${interim ? ' ・ ⚡先読み(暫定文字起こしに基づく)' : ''} ・ ⏳`;
       const textNode = document.createTextNode('');
       card.append(meta, textNode);
       const reader = res.body.getReader();
