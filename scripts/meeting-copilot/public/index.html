@@ -186,7 +186,10 @@ async function pollHealth() {
 }
 pollHealth();
 
-// ---- 自動回答モード: 発言の区切り(0.9秒沈黙)ごとに自動でAIへ流す ----
+// ---- 自動回答モード: 発言の区切り(短い沈黙)ごとに自動でAIへ流す ----
+// Web Speech APIのisFinalが文の区切りを既に判定しているので、ここでの待ち時間は
+// 短い連続発言をまとめて送るための微調整のみ。短くするほど体感が速くなる。
+const AUTO_DEBOUNCE_MS = 350;
 let autoOn = true;
 let autoTimer = null;
 const autoBtn = document.getElementById('autoBtn');
@@ -194,7 +197,7 @@ const autoBtn = document.getElementById('autoBtn');
 function scheduleAuto() {
   if (!autoOn) return;
   clearTimeout(autoTimer);
-  autoTimer = setTimeout(() => suggest(true), 900);
+  autoTimer = setTimeout(() => suggest(true), AUTO_DEBOUNCE_MS);
 }
 
 autoBtn.onclick = () => {

@@ -2,6 +2,11 @@
 // claude CLI を stream-json モードで常駐させ(起動~35秒は初回のみ)、
 // 以降の各質問を同一プロセスに流すことで応答2〜5秒を実現する。
 // MCP はロードしない(--strict-mcp-config)・cwd はこのディレクトリ(プロジェクト設定を拾わせない)。
+//
+// 1プロセスに全ターンを流し続けると、会話履歴が積み上がって
+// 毎ターンそれを読み直すぶん応答がじわじわ遅くなる(長い商談ほど顕著)。
+// これを防ぐため、一定ターン数ごとに裏で新しいプロセスをウォームアップし、
+// 準備でき次第、応答を止めずに切り替える(ローテーション)。
 import http from 'node:http';
 import { readFileSync, readdirSync, rmSync } from 'node:fs';
 import { spawn } from 'node:child_process';
@@ -14,6 +19,8 @@ const CLAUDE_EXE = process.env.CLAUDE_EXE || 'C:/Users/E24054/.local/bin/claude.
 const PORT = Number(process.env.COPILOT_PORT || 3456);
 const MODEL = process.env.COPILOT_MODEL || 'haiku';
 const TURN_TIMEOUT_MS = 90_000;
+// 会話履歴が伸びて応答が遅くなる前に、裏でプロセスを入れ替える間隔(ターン数)
+const ROTATE_AFTER_TURNS = Number(process.env.COPILOT_ROTATE_AFTER || 8);
 
 const SYSTEM_PROMPT = readFileSync(join(DIR, 'prompt.md'), 'utf8');
 
@@ -29,15 +36,11 @@ function wipeSessionLogs() {
   } catch {}
 }
 
-// ---- 常駐 claude プロセス管理 -------------------------------------------
-let child = null;
-let ready = false; // ウォームアップ(システムプロンプト投入)完了
-let pending = null; // { resolve, reject, timer } 同時1ターンのみ
-const queue = [];
+// ---- claude プロセス1本ぶんの状態(セッション)を作る --------------------
+function createSession() {
+  const session = { child: null, ready: false, pending: null, queue: [], turnCount: 0 };
 
-function spawnChild() {
-  ready = false;
-  child = spawn(
+  session.child = spawn(
     CLAUDE_EXE,
     [
       '-p',
@@ -55,7 +58,7 @@ function spawnChild() {
   );
 
   let buf = '';
-  child.stdout.on('data', (d) => {
+  session.child.stdout.on('data', (d) => {
     buf += d.toString();
     let idx;
     while ((idx = buf.indexOf('\n')) >= 0) {
@@ -65,75 +68,126 @@ function spawnChild() {
       let ev;
       try { ev = JSON.parse(line); } catch { continue; }
       if (ev.type === 'stream_event') {
-        const d = ev.event?.delta;
-        if (d?.type === 'text_delta' && d.text && pending?.onDelta) pending.onDelta(d.text);
+        const delta = ev.event?.delta;
+        if (delta?.type === 'text_delta' && delta.text && session.pending?.onDelta) session.pending.onDelta(delta.text);
       } else if (ev.type === 'result') {
-        console.log(`[copilot] turn done: ${((ev.duration_ms ?? 0) / 1000).toFixed(1)}s (api ${((ev.duration_api_ms ?? 0) / 1000).toFixed(1)}s)`);
-        onResult(ev);
+        console.log(`[copilot] turn done: ${((ev.duration_ms ?? 0) / 1000).toFixed(1)}s (api ${((ev.duration_api_ms ?? 0) / 1000).toFixed(1)}s) [turn ${session.turnCount + 1}/${ROTATE_AFTER_TURNS}]`);
+        onResult(session, ev);
       }
     }
   });
-  child.stderr.on('data', (d) => console.error('[claude:stderr]', d.toString().slice(0, 500)));
-  child.on('exit', (code) => {
-    console.error(`[copilot] claudeプロセスが終了(code=${code})。3秒後に再起動します`);
-    ready = false;
-    if (pending) { pending.reject(new Error('claude process exited')); clearTimeout(pending.timer); pending = null; }
-    child = null;
-    setTimeout(() => { spawnChild(); warmup(); }, 3000);
-  });
+  session.child.stderr.on('data', (d) => console.error('[claude:stderr]', d.toString().slice(0, 500)));
+  session.child.on('exit', (code) => onSessionExit(session, code));
+
+  return session;
 }
 
-function sendTurn(text, onDelta) {
+function sendTurnOn(session, text, onDelta) {
   return new Promise((resolve, reject) => {
-    queue.push({ text, resolve, reject, onDelta });
-    drainQueue();
+    session.queue.push({ text, resolve, reject, onDelta });
+    drainQueue(session);
   });
 }
 
-function drainQueue() {
-  if (pending || queue.length === 0 || !child) return;
-  const { text, resolve, reject, onDelta } = queue.shift();
+function drainQueue(session) {
+  if (session.pending || session.queue.length === 0 || !session.child) return;
+  const { text, resolve, reject, onDelta } = session.queue.shift();
   const timer = setTimeout(() => {
     console.error('[copilot] ターンがタイムアウト。プロセスを再起動します');
-    pending = null;
+    session.pending = null;
     reject(new Error('turn timeout'));
-    try { child.kill(); } catch {}
+    try { session.child.kill(); } catch {}
   }, TURN_TIMEOUT_MS);
-  pending = { resolve, reject, timer, onDelta };
-  child.stdin.write(
+  session.pending = { resolve, reject, timer, onDelta };
+  session.child.stdin.write(
     JSON.stringify({ type: 'user', message: { role: 'user', content: [{ type: 'text', text }] } }) + '\n',
   );
 }
 
-function onResult(ev) {
-  if (!pending) return;
-  const { resolve, reject, timer } = pending;
+function onResult(session, ev) {
+  if (!session.pending) return;
+  const { resolve, reject, timer } = session.pending;
   clearTimeout(timer);
-  pending = null;
+  session.pending = null;
+  session.turnCount += 1;
   if (ev.is_error) reject(new Error(String(ev.result || 'claude error')));
   else resolve(String(ev.result ?? ''));
-  drainQueue();
+  drainQueue(session);
+  if (session === active && !rotating && session.turnCount >= ROTATE_AFTER_TURNS) startRotation();
 }
 
+async function warmupSession(session) {
+  const t0 = Date.now();
+  const r = await sendTurnOn(
+    session,
+    `以下があなたへのシステム指示。全て記憶し、以後この指示に従うこと。返事は「OK」のみ。\n\n${SYSTEM_PROMPT}`,
+  );
+  // セッション上限などはエラーでなく本文として返ることがある
+  if (/session limit|usage limit|rate limit/i.test(r)) throw new Error(r.slice(0, 120));
+  session.ready = true;
+  console.log(`[copilot] セッション準備完了 (${((Date.now() - t0) / 1000).toFixed(1)}秒)`);
+}
+
+// ---- アクティブセッションの管理・無停止ローテーション ---------------------
+let active = null;
+let rotating = false;
+let rotatingSession = null; // ウォームアップ中の交代要員(プロセス終了時のクリーンアップ用)
 let lastError = null;
 
-async function warmup() {
-  const t0 = Date.now();
+function onSessionExit(session, code) {
+  if (session.pending) {
+    session.pending.reject(new Error('claude process exited'));
+    clearTimeout(session.pending.timer);
+    session.pending = null;
+  }
+  if (session !== active) return; // ローテーションで退役済みの旧セッションなら無視してよい
+  console.error(`[copilot] claudeプロセスが終了(code=${code})。3秒後に再起動します`);
+  active = null;
+  rotating = false;
+  setTimeout(bootstrapActive, 3000);
+}
+
+async function bootstrapActive() {
   console.log('[copilot] ウォームアップ中(初回のみ〜40秒)...');
+  const session = createSession();
   try {
-    const r = await sendTurn(
-      `以下があなたへのシステム指示。全て記憶し、以後この指示に従うこと。返事は「OK」のみ。\n\n${SYSTEM_PROMPT}`,
-    );
-    // セッション上限などはエラーでなく本文として返ることがある
-    if (/session limit|usage limit|rate limit/i.test(r)) throw new Error(r.slice(0, 120));
-    ready = true;
+    await warmupSession(session);
+    active = session;
     lastError = null;
-    console.log(`[copilot] 準備完了 (${((Date.now() - t0) / 1000).toFixed(1)}秒) -> http://localhost:${PORT}`);
+    console.log(`[copilot] 準備完了 -> http://localhost:${PORT}`);
   } catch (e) {
     lastError = e.message;
     console.error('[copilot] ウォームアップ失敗:', e.message, '→ 60秒後に再試行');
-    setTimeout(warmup, 60_000);
+    try { session.child.kill(); } catch {}
+    setTimeout(bootstrapActive, 60_000);
   }
+}
+
+function startRotation() {
+  rotating = true;
+  console.log('[copilot] 会話が伸びてきたため裏で新しいプロセスを準備します(応答は止めない)');
+  const next = createSession();
+  rotatingSession = next;
+  warmupSession(next)
+    .then(() => {
+      const old = active;
+      active = next;
+      rotating = false;
+      rotatingSession = null;
+      console.log('[copilot] プロセスを無停止で切替完了');
+      setTimeout(() => { try { old.child.kill(); } catch {} }, 2000);
+    })
+    .catch((e) => {
+      console.error('[copilot] ローテーション用プロセスのウォームアップ失敗:', e.message, '→ 今のプロセスを継続使用');
+      rotating = false;
+      rotatingSession = null;
+      try { next.child.kill(); } catch {}
+    });
+}
+
+function sendTurn(text, onDelta) {
+  if (!active?.ready) return Promise.reject(new Error('まだウォームアップ中です。数十秒待ってから再試行してください'));
+  return sendTurnOn(active, text, onDelta);
 }
 
 // ---- HTTP サーバー --------------------------------------------------------
@@ -151,7 +205,7 @@ const server = http.createServer(async (req, res) => {
   }
   if (req.method === 'GET' && req.url === '/health') {
     res.writeHead(200, { 'content-type': 'application/json; charset=utf-8' });
-    return res.end(JSON.stringify({ ready, model: MODEL, error: lastError }));
+    return res.end(JSON.stringify({ ready: !!active?.ready, model: MODEL, error: lastError }));
   }
   if (req.method === 'POST' && req.url === '/suggest') {
     let raw = '';
@@ -161,7 +215,7 @@ const server = http.createServer(async (req, res) => {
       try {
         ({ text } = JSON.parse(raw || '{}'));
         if (!text || typeof text !== 'string') throw new Error('text required');
-        if (!ready) throw new Error('まだウォームアップ中です。数十秒待ってから再試行してください');
+        if (!active?.ready) throw new Error('まだウォームアップ中です。数十秒待ってから再試行してください');
       } catch (e) {
         res.writeHead(400, { 'content-type': 'text/plain; charset=utf-8' });
         return res.end('❌ ' + e.message);
@@ -185,9 +239,12 @@ const server = http.createServer(async (req, res) => {
 server.listen(PORT, '127.0.0.1', () => {
   console.log(`[copilot] http://localhost:${PORT} で待機中(ウォームアップ完了までサジェストは不可)`);
   wipeSessionLogs();
-  spawnChild();
-  warmup();
+  bootstrapActive();
 });
 
-process.on('exit', () => { try { child?.kill(); } catch {} wipeSessionLogs(); });
+process.on('exit', () => {
+  try { active?.child?.kill(); } catch {}
+  try { rotatingSession?.child?.kill(); } catch {}
+  wipeSessionLogs();
+});
 for (const sig of ['SIGINT', 'SIGTERM', 'SIGHUP']) process.on(sig, () => process.exit(0));
