@@ -15,6 +15,7 @@
 | 6 | [06-hogosha-kakawarikata.md](./06-hogosha-kakawarikata.md) | 内申点対策、保護者ができる3つのこと | ドラフト完成 |
 | 7 | [07-gakunen-betsu-taisaku.md](./07-gakunen-betsu-taisaku.md) | 中1・中2・中3、内申点対策は学年で変えるべき理由 | ドラフト完成 |
 | 8 | [08-suisen-nyuushi-hyoutei.md](./08-suisen-nyuushi-hyoutei.md) | 推薦入試を考えるなら、評定平均はいつから決まっているか | ドラフト完成 |
+| 9 | [09-toujitsuten-gyakusan.md](./09-toujitsuten-gyakusan.md) | 内申点が伸びなかった中3、当日点から逆算する考え方 | ドラフト完成 |
 
 ## 執筆方針
 
