@@ -52,5 +52,11 @@
     "changedAt": "2026-07-20",
     "note": "W-16(月曜定常クエリマイニング)。GSC MCP実測(6/18-7/16・28日)でクエリ「換算内申とは」がこのページでpos8.6/imp483/CTR0.21%と、ページ1表示にも関わらず壊滅的に低いCTRで滞留と発見。原因は検索意図(定義)とtitle/description(「計算方法」訴求のみ)のミスマッチと判断。titleに「とは？」を追加(『換算内申とは？計算方法【都立・65点満点】...』)、descriptionの冒頭を定義文に変更、FAQ(inline HTML)に「Q. 換算内申とは何ですか？」を追加。関連クエリ「換算内申 計算」(homepage着地・imp964/CTR2.9%/pos5.85)は今回対象外(別ページ管轄のため)。tsc0/jest118pass(該当スイート)。次回編集可能日2026-08-10以降。",
     "ctrBefore": 0.002070393374741201
+  },
+  {
+    "route": "/kanagawa/s-value",
+    "changedAt": "2026-07-20",
+    "note": "W-16(月曜定常クエリマイニング続き)。tokyo-kansan-naishin-guideと同型の「とは」ミスマッチをGSC実測(6/18-7/16・28日)で追加発見: 「s値とは」pos8.58/imp129/CTR0%、「s1値とは」pos6.92/imp25/CTR0%(合算154imp・クリック0)。FAQPageSchemaには既に「S値とは何ですか？」が存在済みだったがtitle/descriptionは「自動計算」訴求のみで定義文が無かった。titleに「S値とは？」を追加・descriptionの冒頭を定義文に変更・keywordsに「S値とは」「S1値とは」追加・openGraphも同様に更新。tsc0/jest9pass(該当スイート)。次回編集可能日2026-08-10以降。",
+    "ctrBefore": 0
   }
 ]
