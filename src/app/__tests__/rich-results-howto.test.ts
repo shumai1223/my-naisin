@@ -48,6 +48,7 @@ const HOWTO_EXEMPT_ROUTES: Record<string, string> = {
   '/glossary/[term]': '用語個別ページ（定義・具体例の解説であり手順ではない）',
   '/guide': '内申点 完全ガイド（網羅的な読み物であり単一の手順列ではない）',
   '/heigan-yuugu': '併願優遇制度の解説ページ（手順でなく制度解説）',
+  '/heigan-yuugu/tokyo': '東京都の併願優遇 公式基準まとめ（手順でなく学校ごとのデータ一覧。DatasetSchemaで対応）',
   '/hensachi/kyoka-betsu/[subject]': '教科別の上げ方解説ページ（手順でなく学習アドバイス）',
   '/hensachi/moshi': '模試ハブページ（下位ページへの導線のみ）',
   '/hensachi/moshi/ichiran': '模試一覧・解説ページ（手順でなく模試の紹介）',

@@ -164,6 +164,10 @@ export default function HeiganYuuguPage() {
           <section className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-6">
             <h2 className="mb-4 text-lg font-bold text-slate-800">あわせて確認</h2>
             <div className="grid gap-3 sm:grid-cols-2">
+              <Link href="/heigan-yuugu/tokyo" className="flex items-center justify-between gap-2 rounded-xl bg-white p-4 text-sm font-bold text-slate-700 shadow-sm hover:shadow-md">
+                オール3で行ける私立高校（東京都・公式基準つき）
+                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
+              </Link>
               <Link href="/mendan" className="flex items-center justify-between gap-2 rounded-xl bg-white p-4 text-sm font-bold text-slate-700 shadow-sm hover:shadow-md">
                 三者面談の準備チェックリスト
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />

@@ -142,7 +142,11 @@ export default async function NaishinOruGradePage({ params }: PageProps) {
                     <Link href="/blog/all-3-high-school-options-2026-update" className="font-bold text-blue-700 hover:underline">
                       オール3で行ける高校一覧の記事
                     </Link>
-                    でも紹介しています。
+                    でも紹介しています。私立高校の併願優遇については、学校の公式サイトで内申基準を確認できた例を
+                    <Link href="/heigan-yuugu/tokyo" className="font-bold text-blue-700 hover:underline">
+                      東京都の併願優遇 公式基準まとめ
+                    </Link>
+                    で紹介しています。
                   </>
                 )}
               </p>
