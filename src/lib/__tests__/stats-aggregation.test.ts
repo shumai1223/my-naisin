@@ -165,4 +165,20 @@ describe('isValidStatsSubmission', () => {
     expect(isValidStatsSubmission(null)).toBe(false);
     expect(isValidStatsSubmission('string')).toBe(false);
   });
+
+  it('指標ごとの妥当域の外は拒否する(偏差値790混入事故 2026-07-19 の再発防止)', () => {
+    expect(isValidStatsSubmission({ metric: 'hensachi', value: 790 })).toBe(false);
+    expect(isValidStatsSubmission({ metric: 'hensachi', value: 19.3 })).toBe(false);
+    expect(isValidStatsSubmission({ metric: 'hensachi', value: 20 })).toBe(true);
+    expect(isValidStatsSubmission({ metric: 'hensachi', value: 90 })).toBe(true);
+    expect(isValidStatsSubmission({ metric: 'naishin', value: 501 })).toBe(false);
+    expect(isValidStatsSubmission({ metric: 'naishin', value: -1 })).toBe(false);
+    expect(isValidStatsSubmission({ metric: 'total-score', value: 1020, maxValue: 1020 })).toBe(true);
+    expect(isValidStatsSubmission({ metric: 'total-score', value: 1101 })).toBe(false);
+  });
+
+  it('満点付きの提出は満点超えを拒否する', () => {
+    expect(isValidStatsSubmission({ metric: 'naishin', value: 46, maxValue: 45 })).toBe(false);
+    expect(isValidStatsSubmission({ metric: 'naishin', value: 45, maxValue: 45 })).toBe(true);
+  });
 });

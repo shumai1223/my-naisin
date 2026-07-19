@@ -141,12 +141,27 @@ export function buildSuppressedPercentile(
 }
 
 /** 提出データの妥当性検査（DBに書く前のバリデーション・N-3のAPI実装時に使う想定）。 */
+/**
+ * 指標ごとの妥当域。有限数チェックだけでは「偏差値790」等の異常値が保存され
+ * 平均を破壊する(2026-07-19実測: hensachi 72件中13件が域外・平均99.8に汚染)。
+ * 域は理論上の全都道府県の上限を包む緩い箱(naishinは大阪450点満点、total-scoreは東京1020等)。
+ */
+export const STATS_VALUE_LIMITS: Record<StatsMetric, { min: number; max: number }> = {
+  hensachi: { min: 20, max: 90 },
+  naishin: { min: 0, max: 500 },
+  'total-score': { min: 0, max: 1100 },
+};
+
 export function isValidStatsSubmission(input: unknown): input is StatsSubmissionInput {
   if (!input || typeof input !== 'object') return false;
   const obj = input as Record<string, unknown>;
   if (!isStatsMetric(obj.metric)) return false;
   if (typeof obj.value !== 'number' || !Number.isFinite(obj.value)) return false;
+  const { min, max } = STATS_VALUE_LIMITS[obj.metric];
+  if (obj.value < min || obj.value > max) return false;
   if (obj.maxValue !== undefined && (typeof obj.maxValue !== 'number' || !Number.isFinite(obj.maxValue))) return false;
+  // 満点が添えられている指標は「満点超えの得点」を拒否(入力ミス・いたずらの典型形)。
+  if (typeof obj.maxValue === 'number' && obj.maxValue > 0 && obj.value > obj.maxValue) return false;
   if (obj.prefectureCode !== undefined && typeof obj.prefectureCode !== 'string') return false;
   return true;
 }
