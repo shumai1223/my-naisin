@@ -8,6 +8,7 @@ import { DatasetSchema } from '@/components/StructuredData/DatasetSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { NaishinMapGrid } from '@/components/NaishinMapGrid';
 import { SITE_URL } from '@/lib/naishin-dataset';
+import { PREFECTURES } from '@/lib/prefectures';
 
 const FAQS = [
   {
@@ -134,21 +135,13 @@ export default function NaishinMapPage() {
               47都道府県すべてで、実際の成績を入れて内申点を計算できます。
             </p>
             <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4">
-              {[
-                'hokkaido', 'aomori', 'iwate', 'miyagi', 'akita', 'yamagata', 'fukushima',
-                'ibaraki', 'tochigi', 'gunma', 'saitama', 'chiba', 'tokyo', 'kanagawa',
-                'niigata', 'toyama', 'ishikawa', 'fukui', 'yamanashi', 'nagano', 'gifu',
-                'shizuoka', 'aichi', 'mie', 'shiga', 'kyoto', 'osaka', 'hyogo', 'nara',
-                'wakayama', 'tottori', 'shimane', 'okayama', 'hiroshima', 'yamaguchi',
-                'tokushima', 'kagawa', 'ehime', 'kochi', 'fukuoka', 'saga', 'nagasaki',
-                'kumamoto', 'oita', 'miyazaki', 'kagoshima', 'okinawa',
-              ].map((code) => (
+              {PREFECTURES.map((pref) => (
                 <Link
-                  key={code}
-                  href={`/${code}/naishin`}
+                  key={pref.code}
+                  href={`/${pref.code}/naishin`}
                   className="flex items-center justify-between rounded-lg bg-white px-3 py-2 text-sm font-medium text-indigo-800 shadow-sm transition-colors hover:bg-indigo-50 hover:text-indigo-900"
                 >
-                  <span className="truncate">{code}</span>
+                  <span className="truncate">{pref.name}</span>
                   <ChevronRightSquare className="h-3 w-3 shrink-0 opacity-60" />
                 </Link>
               ))}
