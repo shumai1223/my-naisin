@@ -227,6 +227,20 @@ export default function NaishinKakusaPage() {
             </p>
           </section>
 
+          <section className="mb-8 rounded-2xl border border-indigo-200 bg-indigo-50 p-6 text-center">
+            <h2 className="mb-2 text-lg font-bold text-slate-800">地図で一目で見る</h2>
+            <p className="mb-4 text-sm text-slate-600">
+              このレポートのデータを、色分けされたタイル地図で全国比較できます。
+            </p>
+            <Link
+              href="/naishin-map"
+              className="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-6 py-3 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-indigo-700"
+            >
+              内申点の日本地図を見る
+              <ChevronRightSquare className="h-4 w-4" />
+            </Link>
+          </section>
+
           <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="mb-3 text-lg font-bold text-slate-800">県別の詳しい分析を読む</h2>
             <p className="mb-4 text-xs text-slate-500">

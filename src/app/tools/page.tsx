@@ -258,6 +258,14 @@ const TOOL_GROUPS: { id: string; heading: string; tools: Tool[] }[] = [
         icon: Target,
         color: 'orange',
       },
+      {
+        title: '内申点の日本地図（都道府県タイルマップ）',
+        description: '実技傾斜・中3の重み・満点を、色分けされたタイル地図で47都道府県一目比較',
+        features: ['3指標を切替表示', 'タップで県別解説へ', '簡略化した模式図', '全件を表でも確認可'],
+        href: '/naishin-map',
+        icon: MapPin,
+        color: 'purple',
+      },
     ],
   },
   {
