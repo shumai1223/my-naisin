@@ -5,7 +5,7 @@ import { Home, ChevronRight, BarChart3, ShieldCheck, HelpCircle, Info } from 'lu
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { DatasetSchema } from '@/components/StructuredData/DatasetSchema';
-import { STATS_METRICS, STATS_MIN_SAMPLE_SIZE, computeAggregate, type StatsMetric } from '@/lib/stats-aggregation';
+import { STATS_METRICS, STATS_MIN_SAMPLE_SIZE, computeAggregate, formatStatValue, type StatsMetric } from '@/lib/stats-aggregation';
 import { getStatsValues } from '@/lib/stats-db';
 import { SITE_URL } from '@/lib/naishin-dataset';
 
@@ -174,14 +174,14 @@ export default async function StatsPage() {
                         <div className="rounded-xl bg-slate-50 p-3">
                           <div className="text-[11px] font-bold text-slate-500">最小</div>
                           <div className="text-2xl font-black text-slate-700">
-                            {aggregate.min}
+                            {formatStatValue(aggregate.min)}
                             {meta.unit}
                           </div>
                         </div>
                         <div className="rounded-xl bg-slate-50 p-3">
                           <div className="text-[11px] font-bold text-slate-500">最大</div>
                           <div className="text-2xl font-black text-slate-700">
-                            {aggregate.max}
+                            {formatStatValue(aggregate.max)}
                             {meta.unit}
                           </div>
                         </div>

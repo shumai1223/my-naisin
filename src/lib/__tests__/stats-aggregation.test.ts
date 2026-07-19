@@ -12,7 +12,19 @@ import {
   buildStatsCsv,
   computePercentileRank,
   buildSuppressedPercentile,
+  formatStatValue,
 } from '../stats-aggregation';
+
+describe('formatStatValue（統計ページのmin/max表示丸め・2026-07-19: 生の浮動小数点(21.333333333333332)が本番表示されていた事故の再発防止）', () => {
+  it('整数はそのまま文字列化する', () => {
+    expect(formatStatValue(270)).toBe('270');
+    expect(formatStatValue(0)).toBe('0');
+  });
+  it('小数は小数第1位に丸める', () => {
+    expect(formatStatValue(21.333333333333332)).toBe('21.3');
+    expect(formatStatValue(78.66666666666666)).toBe('78.7');
+  });
+});
 
 describe('isStatsMetric', () => {
   it('登録済みの指標のみtrue', () => {

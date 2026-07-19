@@ -55,6 +55,16 @@ export function computeAggregate(values: number[]): StatsAggregate | null {
 }
 
 /**
+ * 表示専用の丸め処理（min/maxが浮動小数点の場合、生の桁数(例: 21.333333333333332)を
+ * そのままUIに出さない）。整数値の指標(内申点・総合得点)はそのまま整数表示、
+ * 小数が生じうる指標(偏差値)は小数第1位に丸める。CSV/API出力(stats-aggregation.tsの
+ * buildStatsCsvRow等)は精度保持のため意図的にこの丸めを適用しない。
+ */
+export function formatStatValue(value: number): string {
+  return Number.isInteger(value) ? String(value) : value.toFixed(1);
+}
+
+/**
  * k-匿名性を適用した公開用集計。サンプルサイズが閾値未満ならnullを返す
  * （＝呼び出し側のAPI/ページは「表示できるだけのデータがまだありません」等にフォールバックする）。
  */
