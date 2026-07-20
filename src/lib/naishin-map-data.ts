@@ -1,85 +1,18 @@
 import { PREFECTURES, type PrefectureConfig } from '@/lib/prefectures';
+import { PREF_PATHS, MAP_VIEWBOX, OKINAWA_VIEWBOX } from '@/lib/naishin-map-paths';
 
 /**
  * 「内申点の日本地図」用データ。全ての数値は src/lib/prefectures.ts
  * （各都道府県教育委員会の公式発表に基づく既存データ）から算出する派生値のみで、
  * 新規の一次データは追加しない（捏造ゼロ）。
  *
- * タイル座標は実際の県境SVGパスではなく、方角関係（北→南・西→東）を保った
- * 「簡略化した模式図」用の手作業グリッド配置。
- * 各県庁所在地の実際の経度（列=西→東）・緯度（行=北→南）の相対順序を基準に、
- * 隣接県との実境界関係もできる限り再現するよう1件ずつ検証して配置している
- * （2026-07-20 👤指摘により再設計：四国の香川が徳島の南に配置される逆転や、
- * 九州の佐賀・長崎の並び崩れ等、複数の地理的誤りを是正）。
- * 47件が重複なく一意の(col,row)を持つことは __tests__/naishin-map-data.test.ts で保証する。
+ * 地図の形状そのもの（都道府県境SVGパス）は src/lib/naishin-map-paths.ts の
+ * PREF_PATHS を使用（2026-07-20 👤指摘により、47個の正方形を並べた模式図から
+ * 実際の県境の形をしたSVGパスに全面刷新。「パッと見ても日本と分かる」形を優先）。
+ * 沖縄県は実際の位置だと本州から大きく離れて地図全体が縦長になるため、
+ * 一般的な日本地図の慣習に倣い OKINAWA_VIEWBOX で別枠（インセット）表示する。
  */
-export interface MapTile {
-  code: string;
-  col: number;
-  row: number;
-}
-
-export const GRID_COLS = 11;
-export const GRID_ROWS = 15;
-
-export const MAP_TILES: MapTile[] = [
-  // 北海道
-  { code: 'hokkaido', col: 7, row: 0 },
-  // 東北（津軽海峡の分、row1は空白）
-  { code: 'aomori', col: 7, row: 2 },
-  { code: 'iwate', col: 7, row: 3 },
-  { code: 'akita', col: 6, row: 3 },
-  { code: 'miyagi', col: 7, row: 4 },
-  { code: 'yamagata', col: 6, row: 4 },
-  { code: 'fukushima', col: 7, row: 5 },
-  { code: 'niigata', col: 6, row: 5 },
-  // 関東
-  { code: 'ibaraki', col: 10, row: 6 },
-  { code: 'tochigi', col: 9, row: 6 },
-  { code: 'gunma', col: 8, row: 6 },
-  { code: 'saitama', col: 8, row: 7 },
-  { code: 'chiba', col: 10, row: 7 },
-  { code: 'tokyo', col: 9, row: 7 },
-  { code: 'kanagawa', col: 9, row: 8 },
-  // 甲信越・北陸・東海（中部）
-  { code: 'toyama', col: 6, row: 6 },
-  { code: 'ishikawa', col: 5, row: 6 },
-  { code: 'fukui', col: 5, row: 7 },
-  { code: 'yamanashi', col: 7, row: 7 },
-  { code: 'nagano', col: 7, row: 6 },
-  { code: 'gifu', col: 6, row: 7 },
-  { code: 'shizuoka', col: 7, row: 8 },
-  { code: 'aichi', col: 6, row: 8 },
-  { code: 'mie', col: 6, row: 9 },
-  // 近畿
-  { code: 'shiga', col: 5, row: 8 },
-  { code: 'kyoto', col: 4, row: 8 },
-  { code: 'osaka', col: 4, row: 9 },
-  { code: 'hyogo', col: 3, row: 8 },
-  { code: 'nara', col: 5, row: 9 },
-  { code: 'wakayama', col: 6, row: 10 },
-  // 中国
-  { code: 'tottori', col: 2, row: 8 },
-  { code: 'shimane', col: 1, row: 8 },
-  { code: 'okayama', col: 2, row: 9 },
-  { code: 'hiroshima', col: 1, row: 9 },
-  { code: 'yamaguchi', col: 0, row: 9 },
-  // 四国（香川は徳島の"南"ではなく同じ北側の並びに是正）
-  { code: 'tokushima', col: 5, row: 10 },
-  { code: 'kagawa', col: 4, row: 10 },
-  { code: 'ehime', col: 3, row: 10 },
-  { code: 'kochi', col: 4, row: 11 },
-  // 九州（佐賀・福岡・大分を同じ北側の並びに、長崎を佐賀の南に是正）
-  { code: 'fukuoka', col: 1, row: 10 },
-  { code: 'saga', col: 0, row: 10 },
-  { code: 'nagasaki', col: 0, row: 11 },
-  { code: 'kumamoto', col: 1, row: 11 },
-  { code: 'oita', col: 2, row: 10 },
-  { code: 'miyazaki', col: 2, row: 12 },
-  { code: 'kagoshima', col: 1, row: 12 },
-  // 沖縄（九州から大きく離れた南方の分、空白行を挟む）
-  { code: 'okinawa', col: 1, row: 14 },
-];
+export { PREF_PATHS, MAP_VIEWBOX, OKINAWA_VIEWBOX };
 
 /**
  * データビジュアライゼーション用の検証済みシーケンシャル(単色)5段階ランプ。
@@ -159,8 +92,7 @@ export interface MapCellDatum {
   code: string;
   name: string;
   region: string;
-  col: number;
-  row: number;
+  path: string;
   value: number;
   formatted: string;
   bucket: number;
@@ -169,16 +101,15 @@ export interface MapCellDatum {
 export function buildMapCells(metricId: MapMetricId): MapCellDatum[] {
   const metric = getMapMetric(metricId);
   const values = PREFECTURES.map((p) => metric.getValue(p));
-  return MAP_TILES.map((tile) => {
-    const pref = PREFECTURES.find((p) => p.code === tile.code);
-    if (!pref) throw new Error(`prefecture not found for tile: ${tile.code}`);
+  return PREFECTURES.map((pref) => {
+    const path = PREF_PATHS[pref.code];
+    if (!path) throw new Error(`prefecture path not found: ${pref.code}`);
     const value = metric.getValue(pref);
     return {
       code: pref.code,
       name: pref.name,
       region: pref.region,
-      col: tile.col,
-      row: tile.row,
+      path,
       value,
       formatted: metric.formatValue(value),
       bucket: bucketIndexOf(value, values),

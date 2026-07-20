@@ -230,7 +230,7 @@ export default function NaishinKakusaPage() {
           <section className="mb-8 rounded-2xl border border-indigo-200 bg-indigo-50 p-6 text-center">
             <h2 className="mb-2 text-lg font-bold text-slate-800">地図で一目で見る</h2>
             <p className="mb-4 text-sm text-slate-600">
-              このレポートのデータを、色分けされたタイル地図で全国比較できます。
+              このレポートのデータを、色分けされた日本地図で全国比較できます。
             </p>
             <Link
               href="/naishin-map"

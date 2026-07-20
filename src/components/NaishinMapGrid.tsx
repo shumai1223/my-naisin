@@ -1,33 +1,59 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useMemo, useState, type MouseEvent, type FocusEvent } from 'react';
 
 import {
-  GRID_COLS,
-  GRID_ROWS,
+  MAP_VIEWBOX,
+  OKINAWA_VIEWBOX,
   SEQUENTIAL_SCALE,
-  SEQUENTIAL_SCALE_TEXT,
   MAP_METRICS,
   buildMapCells,
   type MapMetricId,
   type MapCellDatum,
 } from '@/lib/naishin-map-data';
 
-const TILE = 34;
-const GAP = 3;
-const PAD = 6;
-
-function tileX(col: number) {
-  return PAD + col * TILE;
-}
-function tileY(row: number) {
-  return PAD + row * TILE;
-}
-
 interface TooltipState {
   cell: MapCellDatum;
   x: number;
   y: number;
+}
+
+function PrefPath({
+  cell,
+  fill,
+  onEnter,
+  onMove,
+  onFocus,
+  onLeave,
+}: {
+  cell: MapCellDatum;
+  fill: string;
+  onEnter: (e: MouseEvent<SVGAElement>, cell: MapCellDatum) => void;
+  onMove: (e: MouseEvent<SVGAElement>, cell: MapCellDatum) => void;
+  onFocus: (e: FocusEvent<SVGAElement>, cell: MapCellDatum) => void;
+  onLeave: () => void;
+}) {
+  return (
+    // eslint-disable-next-line jsx-a11y/anchor-is-valid
+    <a
+      href={`/${cell.code}/naishin-omomi`}
+      aria-label={`${cell.name}（詳しく見る）`}
+      onMouseEnter={(e) => onEnter(e, cell)}
+      onMouseMove={(e) => onMove(e, cell)}
+      onFocus={(e) => onFocus(e, cell)}
+      onBlur={onLeave}
+    >
+      <path
+        d={cell.path}
+        fill={fill}
+        stroke="#ffffff"
+        strokeWidth={0.9}
+        strokeLinejoin="round"
+        className="cursor-pointer transition-opacity hover:opacity-80"
+      />
+      <title>{cell.name}</title>
+    </a>
+  );
 }
 
 export function NaishinMapGrid() {
@@ -41,8 +67,18 @@ export function NaishinMapGrid() {
   const minCell = sortedByValue[sortedByValue.length - 1];
   const maxCell = sortedByValue[0];
 
-  const width = PAD * 2 + GRID_COLS * TILE;
-  const height = PAD * 2 + GRID_ROWS * TILE;
+  const okinawaCell = cells.find((c) => c.code === 'okinawa')!;
+  const mainCells = cells.filter((c) => c.code !== 'okinawa');
+
+  const showTooltip = (
+    e: { clientX: number; clientY: number },
+    cell: MapCellDatum,
+  ) => setTooltip({ cell, x: e.clientX, y: e.clientY });
+
+  const showTooltipFromFocus = (e: FocusEvent<SVGAElement>, cell: MapCellDatum) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setTooltip({ cell, x: rect.left + rect.width / 2, y: rect.top });
+  };
 
   return (
     <div>
@@ -89,57 +125,50 @@ export function NaishinMapGrid() {
         <span className="ml-1 text-slate-400">（左が低い・右が高い）</span>
       </div>
 
-      {/* タイルグリッド地図本体（簡略化した模式図・実際の県境SVGパスではない） */}
-      <div className="relative rounded-2xl border border-slate-200 bg-slate-50 p-2">
+      {/* 地図本体（実際の都道府県境の形をしたSVGパス。沖縄県は距離が離れているため別枠表示） */}
+      <div
+        className="relative rounded-2xl border border-slate-200 bg-slate-50 p-4"
+        onMouseLeave={() => setTooltip(null)}
+      >
         <svg
-          viewBox={`0 0 ${width} ${height}`}
+          viewBox={`${MAP_VIEWBOX.x} ${MAP_VIEWBOX.y} ${MAP_VIEWBOX.width} ${MAP_VIEWBOX.height}`}
           role="img"
-          aria-label={`都道府県別「${metric.shortLabel}」タイルマップ`}
-          className="mx-auto w-full max-w-xl"
-          onMouseLeave={() => setTooltip(null)}
+          aria-label={`都道府県別「${metric.shortLabel}」日本地図`}
+          className="mx-auto block w-full max-w-md"
         >
-          {cells.map((cell) => (
-            // eslint-disable-next-line jsx-a11y/anchor-is-valid
-            <a
+          {mainCells.map((cell) => (
+            <PrefPath
               key={cell.code}
-              href={`/${cell.code}/naishin-omomi`}
-              aria-label={`${cell.name}: ${metric.shortLabel} ${cell.formatted}（詳しく見る）`}
-              onMouseEnter={(e) =>
-                setTooltip({ cell, x: e.clientX, y: e.clientY })
-              }
-              onMouseMove={(e) => setTooltip({ cell, x: e.clientX, y: e.clientY })}
-              onFocus={(e) => {
-                const rect = e.currentTarget.getBoundingClientRect();
-                setTooltip({ cell, x: rect.left + rect.width / 2, y: rect.top });
-              }}
-              onBlur={() => setTooltip(null)}
-            >
-              <rect
-                x={tileX(cell.col)}
-                y={tileY(cell.row)}
-                width={TILE - GAP}
-                height={TILE - GAP}
-                rx={5}
-                fill={SEQUENTIAL_SCALE[cell.bucket]}
-                className="cursor-pointer transition-opacity hover:opacity-80"
-              />
-              <text
-                x={tileX(cell.col) + (TILE - GAP) / 2}
-                y={tileY(cell.row) + (TILE - GAP) / 2 + 4}
-                textAnchor="middle"
-                fontSize={10}
-                fontWeight={700}
-                fill={SEQUENTIAL_SCALE_TEXT[cell.bucket]}
-                className="pointer-events-none select-none"
-              >
-                {cell.name.slice(0, 2)}
-              </text>
-              <title>
-                {cell.name}: {metric.shortLabel} {cell.formatted}
-              </title>
-            </a>
+              cell={cell}
+              fill={SEQUENTIAL_SCALE[cell.bucket]}
+              onEnter={showTooltip}
+              onMove={showTooltip}
+              onFocus={showTooltipFromFocus}
+              onLeave={() => setTooltip(null)}
+            />
           ))}
         </svg>
+
+        {/* 沖縄インセット（本州から離れた実際の位置のまま表示すると地図全体が縦長になりすぎるため、
+            一般的な日本地図の慣習に倣い左下に別枠で表示） */}
+        <div className="absolute bottom-3 left-3 w-[15%] min-w-[48px] max-w-[72px] rounded-md border border-slate-300 bg-white/80 p-1 shadow-sm">
+          <svg
+            viewBox={`${OKINAWA_VIEWBOX.x} ${OKINAWA_VIEWBOX.y} ${OKINAWA_VIEWBOX.width} ${OKINAWA_VIEWBOX.height}`}
+            role="img"
+            aria-label={`沖縄県: ${metric.shortLabel} ${okinawaCell.formatted}`}
+            className="block w-full"
+          >
+            <PrefPath
+              cell={okinawaCell}
+              fill={SEQUENTIAL_SCALE[okinawaCell.bucket]}
+              onEnter={showTooltip}
+              onMove={showTooltip}
+              onFocus={showTooltipFromFocus}
+              onLeave={() => setTooltip(null)}
+            />
+          </svg>
+          <p className="mt-0.5 text-center text-[9px] leading-none text-slate-400">沖縄（別枠）</p>
+        </div>
 
         {tooltip && (
           <div
@@ -155,7 +184,7 @@ export function NaishinMapGrid() {
       </div>
 
       <p className="mt-2 text-[11px] text-slate-400">
-        ※このマップは都道府県の位置関係を保った簡略化した模式図です。実際の県境の形状とは異なります。タップ/クリックで各県の内申点の重み解説へ移動できます。
+        ※このマップは都道府県境の形状を簡略化したSVG地図です。縮尺・詳細な境界線は実際の地図と異なる場合があります。タップ/クリックで各県の内申点の重み解説へ移動できます。
       </p>
 
       {/* テーブル表示（色だけに頼らず全件を数値で確認できるアクセシブルな代替表示） */}

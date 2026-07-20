@@ -1,6 +1,8 @@
 import { PREFECTURES } from '@/lib/prefectures';
 import {
-  MAP_TILES,
+  PREF_PATHS,
+  MAP_VIEWBOX,
+  OKINAWA_VIEWBOX,
   MAP_METRICS,
   SEQUENTIAL_SCALE,
   SEQUENTIAL_SCALE_TEXT,
@@ -8,22 +10,24 @@ import {
   buildMapCells,
 } from '@/lib/naishin-map-data';
 
-describe('naishin-map-data（W-14 タイルグリッド地図）', () => {
-  test('MAP_TILESは47都道府県すべてを1件ずつ含む', () => {
-    expect(MAP_TILES.length).toBe(47);
-    const codes = new Set(MAP_TILES.map((t) => t.code));
-    expect(codes.size).toBe(47);
+describe('naishin-map-data（都道府県境SVGパスの日本地図）', () => {
+  test('PREF_PATHSは47都道府県すべてを1件ずつ含み、各値は非空のSVGパスである', () => {
+    const codes = Object.keys(PREF_PATHS);
+    expect(codes.length).toBe(47);
     for (const p of PREFECTURES) {
-      expect(codes.has(p.code)).toBe(true);
+      expect(PREF_PATHS[p.code]).toBeTruthy();
+      expect(PREF_PATHS[p.code].length).toBeGreaterThan(10);
+      // SVGパスは "M"(moveto) から始まる
+      expect(PREF_PATHS[p.code].trim().startsWith('M')).toBe(true);
     }
   });
 
-  test('MAP_TILESの(col,row)座標に重複がない（簡略化模式図としてタイルが重ならない）', () => {
-    const seen = new Set<string>();
-    for (const tile of MAP_TILES) {
-      const key = `${tile.col},${tile.row}`;
-      expect(seen.has(key)).toBe(false);
-      seen.add(key);
+  test('MAP_VIEWBOX・OKINAWA_VIEWBOXは幅・高さが正の有限数である', () => {
+    for (const vb of [MAP_VIEWBOX, OKINAWA_VIEWBOX]) {
+      expect(Number.isFinite(vb.x)).toBe(true);
+      expect(Number.isFinite(vb.y)).toBe(true);
+      expect(vb.width).toBeGreaterThan(0);
+      expect(vb.height).toBeGreaterThan(0);
     }
   });
 
@@ -42,7 +46,7 @@ describe('naishin-map-data（W-14 タイルグリッド地図）', () => {
   });
 
   test.each(MAP_METRICS.map((m) => [m.id] as const))(
-    'buildMapCells(%s)は47件・全て実データ由来の有限数値を返す（捏造ゼロ）',
+    'buildMapCells(%s)は47件・全て実データ由来の有限数値とSVGパスを返す（捏造ゼロ）',
     (id) => {
       const cells = buildMapCells(id);
       expect(cells.length).toBe(47);
@@ -51,6 +55,7 @@ describe('naishin-map-data（W-14 タイルグリッド地図）', () => {
         expect(cell.bucket).toBeGreaterThanOrEqual(0);
         expect(cell.bucket).toBeLessThanOrEqual(4);
         expect(cell.formatted.length).toBeGreaterThan(0);
+        expect(cell.path.length).toBeGreaterThan(10);
       }
     },
   );
