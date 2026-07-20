@@ -6,7 +6,11 @@ import { PREFECTURES, type PrefectureConfig } from '@/lib/prefectures';
  * 新規の一次データは追加しない（捏造ゼロ）。
  *
  * タイル座標は実際の県境SVGパスではなく、方角関係（北→南・西→東）を保った
- * 「簡略化した模式図」用の手作業グリッド配置（W-14 2026-07-17 👤裁定）。
+ * 「簡略化した模式図」用の手作業グリッド配置。
+ * 各県庁所在地の実際の経度（列=西→東）・緯度（行=北→南）の相対順序を基準に、
+ * 隣接県との実境界関係もできる限り再現するよう1件ずつ検証して配置している
+ * （2026-07-20 👤指摘により再設計：四国の香川が徳島の南に配置される逆転や、
+ * 九州の佐賀・長崎の並び崩れ等、複数の地理的誤りを是正）。
  * 47件が重複なく一意の(col,row)を持つことは __tests__/naishin-map-data.test.ts で保証する。
  */
 export interface MapTile {
@@ -19,52 +23,61 @@ export const GRID_COLS = 11;
 export const GRID_ROWS = 15;
 
 export const MAP_TILES: MapTile[] = [
-  { code: 'hokkaido', col: 8, row: 0 },
-  { code: 'aomori', col: 8, row: 2 },
-  { code: 'iwate', col: 8, row: 3 },
-  { code: 'akita', col: 7, row: 3 },
-  { code: 'miyagi', col: 8, row: 4 },
-  { code: 'yamagata', col: 7, row: 4 },
-  { code: 'niigata', col: 7, row: 5 },
-  { code: 'fukushima', col: 8, row: 5 },
+  // 北海道
+  { code: 'hokkaido', col: 7, row: 0 },
+  // 東北（津軽海峡の分、row1は空白）
+  { code: 'aomori', col: 7, row: 2 },
+  { code: 'iwate', col: 7, row: 3 },
+  { code: 'akita', col: 6, row: 3 },
+  { code: 'miyagi', col: 7, row: 4 },
+  { code: 'yamagata', col: 6, row: 4 },
+  { code: 'fukushima', col: 7, row: 5 },
+  { code: 'niigata', col: 6, row: 5 },
+  // 関東
+  { code: 'ibaraki', col: 10, row: 6 },
+  { code: 'tochigi', col: 9, row: 6 },
+  { code: 'gunma', col: 8, row: 6 },
+  { code: 'saitama', col: 8, row: 7 },
+  { code: 'chiba', col: 10, row: 7 },
+  { code: 'tokyo', col: 9, row: 7 },
+  { code: 'kanagawa', col: 9, row: 8 },
+  // 甲信越・北陸・東海（中部）
   { code: 'toyama', col: 6, row: 6 },
   { code: 'ishikawa', col: 5, row: 6 },
-  { code: 'nagano', col: 7, row: 6 },
-  { code: 'gunma', col: 8, row: 6 },
-  { code: 'tochigi', col: 9, row: 6 },
-  { code: 'ibaraki', col: 10, row: 6 },
   { code: 'fukui', col: 5, row: 7 },
-  { code: 'gifu', col: 6, row: 7 },
   { code: 'yamanashi', col: 7, row: 7 },
-  { code: 'saitama', col: 8, row: 7 },
-  { code: 'tokyo', col: 9, row: 7 },
-  { code: 'chiba', col: 10, row: 7 },
-  { code: 'shiga', col: 5, row: 8 },
-  { code: 'aichi', col: 6, row: 8 },
+  { code: 'nagano', col: 7, row: 6 },
+  { code: 'gifu', col: 6, row: 7 },
   { code: 'shizuoka', col: 7, row: 8 },
-  { code: 'kanagawa', col: 9, row: 8 },
+  { code: 'aichi', col: 6, row: 8 },
+  { code: 'mie', col: 6, row: 9 },
+  // 近畿
+  { code: 'shiga', col: 5, row: 8 },
   { code: 'kyoto', col: 4, row: 8 },
+  { code: 'osaka', col: 4, row: 9 },
   { code: 'hyogo', col: 3, row: 8 },
+  { code: 'nara', col: 5, row: 9 },
+  { code: 'wakayama', col: 6, row: 10 },
+  // 中国
   { code: 'tottori', col: 2, row: 8 },
   { code: 'shimane', col: 1, row: 8 },
   { code: 'okayama', col: 2, row: 9 },
   { code: 'hiroshima', col: 1, row: 9 },
   { code: 'yamaguchi', col: 0, row: 9 },
-  { code: 'osaka', col: 4, row: 9 },
-  { code: 'nara', col: 5, row: 9 },
-  { code: 'mie', col: 6, row: 9 },
-  { code: 'wakayama', col: 4, row: 10 },
+  // 四国（香川は徳島の"南"ではなく同じ北側の並びに是正）
   { code: 'tokushima', col: 5, row: 10 },
+  { code: 'kagawa', col: 4, row: 10 },
   { code: 'ehime', col: 3, row: 10 },
+  { code: 'kochi', col: 4, row: 11 },
+  // 九州（佐賀・福岡・大分を同じ北側の並びに、長崎を佐賀の南に是正）
   { code: 'fukuoka', col: 1, row: 10 },
-  { code: 'oita', col: 2, row: 10 },
-  { code: 'kochi', col: 3, row: 11 },
-  { code: 'kagawa', col: 5, row: 11 },
-  { code: 'saga', col: 0, row: 11 },
+  { code: 'saga', col: 0, row: 10 },
+  { code: 'nagasaki', col: 0, row: 11 },
   { code: 'kumamoto', col: 1, row: 11 },
-  { code: 'miyazaki', col: 2, row: 11 },
-  { code: 'nagasaki', col: 0, row: 12 },
+  { code: 'oita', col: 2, row: 10 },
+  { code: 'miyazaki', col: 2, row: 12 },
   { code: 'kagoshima', col: 1, row: 12 },
+  // 沖縄（九州から大きく離れた南方の分、空白行を挟む）
   { code: 'okinawa', col: 1, row: 14 },
 ];
 
