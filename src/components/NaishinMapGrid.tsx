@@ -28,9 +28,9 @@ function PrefPath({
 }: {
   cell: MapCellDatum;
   fill: string;
-  onEnter: (e: MouseEvent<SVGAElement>, cell: MapCellDatum) => void;
-  onMove: (e: MouseEvent<SVGAElement>, cell: MapCellDatum) => void;
-  onFocus: (e: FocusEvent<SVGAElement>, cell: MapCellDatum) => void;
+  onEnter: (e: MouseEvent<HTMLAnchorElement>, cell: MapCellDatum) => void;
+  onMove: (e: MouseEvent<HTMLAnchorElement>, cell: MapCellDatum) => void;
+  onFocus: (e: FocusEvent<HTMLAnchorElement>, cell: MapCellDatum) => void;
   onLeave: () => void;
 }) {
   return (
@@ -75,7 +75,7 @@ export function NaishinMapGrid() {
     cell: MapCellDatum,
   ) => setTooltip({ cell, x: e.clientX, y: e.clientY });
 
-  const showTooltipFromFocus = (e: FocusEvent<SVGAElement>, cell: MapCellDatum) => {
+  const showTooltipFromFocus = (e: FocusEvent<HTMLAnchorElement>, cell: MapCellDatum) => {
     const rect = e.currentTarget.getBoundingClientRect();
     setTooltip({ cell, x: rect.left + rect.width / 2, y: rect.top });
   };
