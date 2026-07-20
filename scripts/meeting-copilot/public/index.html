@@ -57,7 +57,7 @@
     </div>
   </section>
   <section>
-    <div class="panel-title">🤖 AIサジェスト（発言が左のログに確定したら回答ヒントが流れる）</div>
+    <div class="panel-title">🤖 AIサジェスト（自動: 発言の区切りごとに回答ヒントが流れる）</div>
     <div class="row">
       <button id="autoBtn" class="primary">🤖 自動回答: ON</button>
       <input type="text" id="askInput" placeholder="手動で聞きたい時だけ入力 → Ctrl+Enter" />
@@ -89,7 +89,7 @@ function addLine(text) {
   div.append(t, document.createTextNode(text));
   transcriptEl.append(div);
   transcriptEl.scrollTop = transcriptEl.scrollHeight;
-  markActivity();
+  scheduleAuto();
 }
 
 function setupRec() {
@@ -107,7 +107,8 @@ function setupRec() {
       else interim += res[0].transcript;
     }
     interimEl.textContent = interim;
-    if (interim) markActivity(); // 青文字が動いている間は発火を先送り(確定するまで流さない)
+    if (interim !== interimText) { interimText = interim; interimChangedAt = Date.now(); }
+    if (interim === '') specFiredThisUtterance = false; // 発話が途切れた→次の発話で1回だけ先読み許可
   };
   r.onend = () => { if (micOn) setTimeout(() => { try { r.start(); } catch {} }, 150); };
   r.onerror = (e) => { if (e.error === 'not-allowed') { micOn = false; renderMic(); alert('マイクの使用を許可してください'); } };
@@ -155,34 +156,18 @@ async function pollHealth() {
 }
 pollHealth();
 
-// ---- 自動回答: 左ログに"確定"した発言だけに反応する ----
-// 青文字(interim=読み取り中)には一切反応しない。文字起こしが確定し、かつ相手が
-// QUIET_MSぶん話し終えて静かになってから1回だけ流す。これで自分の喋り出しや
-// 発言の伸長に過剰反応してカードが増える問題を根絶する。
-const QUIET_MS = 800; // 文字起こしがこの時間 動かなくなったら「言い終えた」とみなす
+// ---- 自動回答モード: 発言の区切り(短い沈黙)ごとに自動でAIへ流す ----
+// Web Speech APIのisFinalが文の区切りを既に判定しているので、ここでの待ち時間は
+// 短い連続発言をまとめて送るための微調整のみ。短くするほど体感が速くなる。
+const AUTO_DEBOUNCE_MS = 350;
 let autoOn = true;
 let autoTimer = null;
-let lastActivityAt = 0;
 const autoBtn = document.getElementById('autoBtn');
-
-// 文字起こしが動いた(青文字更新 or 確定)たびに呼ぶ→発火を先送りする。
-function markActivity() {
-  lastActivityAt = Date.now();
-  scheduleAuto();
-}
 
 function scheduleAuto() {
   if (!autoOn) return;
   clearTimeout(autoTimer);
-  autoTimer = setTimeout(maybeFire, QUIET_MS);
-}
-
-function maybeFire() {
-  if (!autoOn) return;
-  if (Date.now() - lastActivityAt < QUIET_MS) { scheduleAuto(); return; } // まだ喋っている/青文字が動いている
-  if (busy) { scheduleAuto(); return; }                                    // 生成中は終わってから
-  if (lines.length <= sentCount) return; // 左ログに新しい"確定"行が無い(青文字だけ)なら流さない
-  suggest(true);
+  autoTimer = setTimeout(() => suggest(true), AUTO_DEBOUNCE_MS);
 }
 
 autoBtn.onclick = () => {
@@ -191,6 +176,48 @@ autoBtn.onclick = () => {
   autoBtn.className = autoOn ? 'primary' : '';
   if (autoOn) scheduleAuto();
 };
+
+// ---- 先読み(投機)発火: isFinal確定を待たずにAIへ流す ----
+// Web Speechの確定(isFinal)は発話終了から0.5〜1.5秒遅れる。暫定文(interim)が
+// SPEC_STABLE_MS動かなくなった時点=発言が止まった気配で先に生成を始め、後から来る確定文が
+// 暫定文とほぼ同じなら再送しない(bigram Dice類似度)。違ったら普通に再送(先読みカードは上書きされる)。
+const SPEC_STABLE_MS = 900;
+const SPEC_MIN_CHARS = 10;
+let interimText = '';
+let interimChangedAt = 0;
+let specPending = null; // 直近の先読み発火のテキスト(次の確定文と照合したらnullへ)
+let specAt = 0;
+// 発言が伸びるたび先読みが再発火して読んでいるカードを押し下げるのを防ぐ。
+// 1つの発話(interimが途切れず伸び続けている間)につき先読みは1回だけ許す。
+// 発話が途切れて次を話し始めたら(interimが一旦''になる)フラグを戻す。
+let specFiredThisUtterance = false;
+
+function normText(s) { return s.replace(/[\s、。．，・…？?！!「」()（）]/g, ''); }
+function bigramCounts(s) { const m = new Map(); for (let i = 0; i < s.length - 1; i++) { const g = s.slice(i, i + 2); m.set(g, (m.get(g) || 0) + 1); } return m; }
+function similarText(a, b) {
+  a = normText(a); b = normText(b);
+  if (!a || !b) return false;
+  if (a === b) return true;
+  const A = bigramCounts(a), B = bigramCounts(b);
+  let inter = 0, sizeA = 0, sizeB = 0;
+  for (const v of A.values()) sizeA += v;
+  for (const v of B.values()) sizeB += v;
+  for (const [g, v] of A) inter += Math.min(v, B.get(g) || 0);
+  return sizeA + sizeB > 0 && (2 * inter) / (sizeA + sizeB) >= 0.8;
+}
+
+setInterval(() => {
+  if (!autoOn || !micOn) return;
+  if (specPending && Date.now() - specAt > 15_000) specPending = null; // 確定が来ないまま古びた先読みは破棄
+  if (busy || !interimText || normText(interimText).length < SPEC_MIN_CHARS) return;
+  if (specFiredThisUtterance) return; // この発話ではもう先読み済み(伸び続けても再発火しない)
+  if (Date.now() - interimChangedAt < SPEC_STABLE_MS) return; // 発言がSPEC_STABLE_MS止まる=話し終えた気配になるまで待つ
+  if (specPending && similarText(specPending, interimText)) return; // 同内容で二重発火しない
+  specPending = interimText;
+  specAt = Date.now();
+  specFiredThisUtterance = true;
+  suggest(true, interimText);
+}, 200);
 
 // つなぎ言葉: 生成待ちの~2秒を人間が自然に喋って埋めるための一言。
 // 「そうですね」だけでは短すぎるので、2〜3秒ぶん話せる長さにする。連続で同じものが
@@ -211,13 +238,24 @@ function pickBridge() {
 }
 
 let busy = false;
-async function suggest(auto = false) {
-  if (busy) { if (auto) scheduleAuto(); return; } // 生成中に来た発言は終了後にまとめて再送
+async function suggest(auto = false, interim = '') {
+  // 確定文が直前の先読みとほぼ同じなら送らない(答えはもう出ている/出つつある)
+  if (auto && !interim && specPending) {
+    const newTexts = lines.slice(sentCount).map((l) => l.text).join('');
+    if (newTexts && similarText(newTexts, specPending)) {
+      sentCount = lines.length;
+      specPending = null;
+      return;
+    }
+  }
+  if (busy) { if (auto && !interim) scheduleAuto(); return; } // 生成中に来た発言は終了後にまとめて再送
   const newLines = lines.slice(sentCount).map((l) => `${l.time} ${l.text}`);
+  if (interim) newLines.push(`${new Date().toTimeString().slice(0, 5)} ${interim}`);
   const ask = auto ? '' : askInput.value.trim();
   if (newLines.length === 0 && !ask) return;
   sentCount = lines.length;
   if (!auto) askInput.value = '';
+  if (!interim) specPending = null; // 通常送信が走ったら先読みの照合は不要になる
   busy = true;
   suggestBtn.disabled = true;
 
@@ -252,7 +290,7 @@ async function suggest(auto = false) {
       // 来るまで大きく残し、本回答が出始めたら小さく畳んで本文を主役にする。
       const meta = document.createElement('div');
       meta.className = 'meta';
-      meta.textContent = `${new Date().toTimeString().slice(0, 8)}${ask ? ' ・ ' + ask : ''} ・ ⏳`;
+      meta.textContent = `${new Date().toTimeString().slice(0, 8)}${ask ? ' ・ ' + ask : ''}${interim ? ' ・ ⚡先読み(暫定文字起こしに基づく)' : ''} ・ ⏳`;
       const textNode = document.createTextNode('');
       card.append(meta, textNode);
       const reader = res.body.getReader();
