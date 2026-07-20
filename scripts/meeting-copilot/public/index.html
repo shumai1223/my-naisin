@@ -149,6 +149,7 @@ function setupRec() {
     }
     interimEl.textContent = interim;
     if (interim !== interimText) { interimText = interim; interimChangedAt = Date.now(); }
+    if (interim === '') specFiredThisUtterance = false; // 発話が途切れた→次の発話で1回だけ先読み許可
   };
   r.onend = () => { if (micOn) setTimeout(() => { try { r.start(); } catch {} }, 150); };
   r.onerror = (e) => { if (e.error === 'not-allowed') { micOn = false; renderMic(); alert('マイクの使用を許可してください'); } };
@@ -221,12 +222,16 @@ autoBtn.onclick = () => {
 // Web Speechの確定(isFinal)は発話終了から0.5〜1.5秒遅れる。暫定文(interim)が
 // SPEC_STABLE_MS動かなくなった時点=発言が止まった気配で先に生成を始め、後から来る確定文が
 // 暫定文とほぼ同じなら再送しない(bigram Dice類似度)。違ったら普通に再送(先読みカードは上書きされる)。
-const SPEC_STABLE_MS = 600;
+const SPEC_STABLE_MS = 900;
 const SPEC_MIN_CHARS = 10;
 let interimText = '';
 let interimChangedAt = 0;
 let specPending = null; // 直近の先読み発火のテキスト(次の確定文と照合したらnullへ)
 let specAt = 0;
+// 発言が伸びるたび先読みが再発火して読んでいるカードを押し下げるのを防ぐ。
+// 1つの発話(interimが途切れず伸び続けている間)につき先読みは1回だけ許す。
+// 発話が途切れて次を話し始めたら(interimが一旦''になる)フラグを戻す。
+let specFiredThisUtterance = false;
 
 function normText(s) { return s.replace(/[\s、。．，・…？?！!「」()（）]/g, ''); }
 function bigramCounts(s) { const m = new Map(); for (let i = 0; i < s.length - 1; i++) { const g = s.slice(i, i + 2); m.set(g, (m.get(g) || 0) + 1); } return m; }
@@ -246,10 +251,12 @@ setInterval(() => {
   if (!autoOn || !micOn) return;
   if (specPending && Date.now() - specAt > 15_000) specPending = null; // 確定が来ないまま古びた先読みは破棄
   if (busy || !interimText || normText(interimText).length < SPEC_MIN_CHARS) return;
-  if (Date.now() - interimChangedAt < SPEC_STABLE_MS) return;
+  if (specFiredThisUtterance) return; // この発話ではもう先読み済み(伸び続けても再発火しない)
+  if (Date.now() - interimChangedAt < SPEC_STABLE_MS) return; // 発言がSPEC_STABLE_MS止まる=話し終えた気配になるまで待つ
   if (specPending && similarText(specPending, interimText)) return; // 同内容で二重発火しない
   specPending = interimText;
   specAt = Date.now();
+  specFiredThisUtterance = true;
   suggest(true, interimText);
 }, 200);
 
