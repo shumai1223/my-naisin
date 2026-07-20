@@ -199,6 +199,34 @@ function sendTurn(text, onDelta) {
   return sendTurnOn(active, text, onDelta);
 }
 
+// ---- 話し言葉ポリッシュ(決定論の置換) --------------------------------------
+// プロンプトで矯正しきれない口癖を機械置換する(100問診断で「みたいな」「貴社」が残存)。
+// ストリーミング中はチャンク境界で語が割れるため、末尾数文字を持ち越してから流す。
+const POLISH = [
+  [/みたいな/g, 'のような'],
+  [/貴社/g, '御社'],
+];
+const POLISH_CARRY = 3; // 置換対象の最長語-1文字ぶん持ち越せば境界割れしない
+function polishAll(s) {
+  for (const [re, to] of POLISH) s = s.replace(re, to);
+  return s;
+}
+function makePolisher() {
+  let carry = '';
+  return {
+    push(t) {
+      const s = polishAll(carry + t);
+      carry = s.slice(-POLISH_CARRY);
+      return s.slice(0, s.length - carry.length);
+    },
+    flush() {
+      const out = polishAll(carry);
+      carry = '';
+      return out;
+    },
+  };
+}
+
 // ---- HTTP サーバー --------------------------------------------------------
 const MIME = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css' };
 
@@ -232,9 +260,15 @@ const server = http.createServer(async (req, res) => {
       // 生成テキストを逐次チャンクで流す(ブラウザ側はreaderで読みながら描画)
       res.writeHead(200, { 'content-type': 'text/plain; charset=utf-8', 'cache-control': 'no-cache' });
       let streamed = 0;
+      const polisher = makePolisher();
       try {
-        const answer = await sendTurn(text.slice(0, 8000), (t) => { streamed += t.length; res.write(t); });
-        if (streamed === 0 && answer) res.write(answer); // 部分イベントが来なかった場合の保険
+        const answer = await sendTurn(text.slice(0, 8000), (t) => {
+          streamed += t.length;
+          const out = polisher.push(t);
+          if (out) res.write(out);
+        });
+        res.write(polisher.flush());
+        if (streamed === 0 && answer) res.write(polishAll(answer)); // 部分イベントが来なかった場合の保険
       } catch (e) {
         res.write('\n❌ ' + e.message);
       }
