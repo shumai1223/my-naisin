@@ -32,6 +32,8 @@
   .card.ai { border-left: 3px solid #2563eb; }
   .card .meta { font-size: 11px; color: #5b6780; margin-bottom: 4px; }
   .card.loading { color: #7dd3fc; }
+  .card .bridge { font-size: 19px; font-weight: 700; color: #7dd3fc; line-height: 1.6; }
+  .card .bridge small { display: block; font-size: 11px; font-weight: 400; color: #5b6780; margin-top: 3px; }
   details { background: #131a29; border: 1px solid #263049; border-radius: 10px; padding: 6px 10px; }
   details summary { cursor: pointer; font-size: 13px; font-weight: 700; padding: 4px 0; color: #cbd5e1; }
   details .body { font-size: 14px; line-height: 1.75; padding: 6px 2px 8px; white-space: pre-wrap; color: #e6e9f0; }
@@ -251,6 +253,24 @@ setInterval(() => {
   suggest(true, interimText);
 }, 200);
 
+// つなぎ言葉: 生成待ちの~2秒を人間が自然に喋って埋めるための一言。
+// 「そうですね」だけでは短すぎるので、2〜3秒ぶん話せる長さにする。連続で同じものが
+// 出ないよう順送りする。中身はどれも「まだ何も答えていない」当たり障りのない相槌。
+const BRIDGES = [
+  'はい、ありがとうございます。そうですね……',
+  'なるほど、そこは大事なところですね。ええと……',
+  'そうですね、少し確認しながらお話ししますね。',
+  'ありがとうございます。整理してお答えしますと、',
+  'はい、その点ですね。ええ……',
+  'いい質問をありがとうございます。そうですね、',
+];
+let bridgeIdx = 0;
+function pickBridge() {
+  const b = BRIDGES[bridgeIdx % BRIDGES.length];
+  bridgeIdx++;
+  return b;
+}
+
 let busy = false;
 async function suggest(auto = false, interim = '') {
   // 確定文が直前の先読みとほぼ同じなら送らない(答えはもう出ている/出つつある)
@@ -279,7 +299,13 @@ async function suggest(auto = false, interim = '') {
 
   const card = document.createElement('div');
   card.className = 'card ai loading';
-  card.textContent = '⏳ 考え中…';
+  // 生成待ちの数秒を人間が喋って埋められるよう、0ms表示の「つなぎ言葉」を大きく出す。
+  // TTFB(~1.9秒)は「そうですね」だけだと持たないので、2〜3秒ぶん喋れる長めの一言を用意する。
+  const bridge = document.createElement('div');
+  bridge.className = 'bridge';
+  bridge.textContent = pickBridge();
+  bridge.append(Object.assign(document.createElement('small'), { textContent: 'この一言を読んで間を作る→下に本回答が出ます' }));
+  card.append(bridge);
   suggestionsEl.prepend(card);
   while (suggestionsEl.children.length > 10) suggestionsEl.lastChild.remove();
 
@@ -294,8 +320,8 @@ async function suggest(auto = false, interim = '') {
       card.classList.remove('loading');
       card.textContent = await res.text();
     } else {
-      // ストリーミング表示: 届いた端から描画する
-      card.innerHTML = '';
+      // ストリーミング表示: 届いた端から描画する。つなぎ言葉(bridge)は最初のトークンが
+      // 来るまで大きく残し、本回答が出始めたら小さく畳んで本文を主役にする。
       const meta = document.createElement('div');
       meta.className = 'meta';
       meta.textContent = `${new Date().toTimeString().slice(0, 8)}${ask ? ' ・ ' + ask : ''}${interim ? ' ・ ⚡先読み(暫定文字起こしに基づく)' : ''} ・ ⏳`;
@@ -307,10 +333,11 @@ async function suggest(auto = false, interim = '') {
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
-        if (first) { card.classList.remove('loading'); first = false; }
+        if (first) { card.classList.remove('loading'); bridge.remove(); first = false; }
         textNode.textContent += dec.decode(value, { stream: true });
       }
       textNode.textContent += dec.decode();
+      bridge.remove(); // トークンが1つも来なかった場合の保険(remove()は多重呼び出し安全)
       meta.textContent = meta.textContent.replace('⏳', `${((Date.now() - t0) / 1000).toFixed(1)}秒`);
       card.classList.remove('loading');
     }
