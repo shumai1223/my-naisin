@@ -22,6 +22,51 @@ import { getPrefectureByCode, type PrefectureConfig } from '@/lib/prefectures';
 import { track, EVENTS } from '@/lib/track';
 import type { ResultData, SavedHistoryEntry, Scores } from '@/lib/types';
 
+/**
+ * 都道府県別「総合得点計算」ページへのクロスプロモーション。X-4(内部リンク権威配分の総点検)で
+ * tokyoのみ特別扱いだった箇所を、既に総合得点系ページが存在する全県に展開(2026-07-23)。
+ * 文言は各ページのtitle/description/FAQに既に公開済みの内容の要約のみ(新規数値の追加なし)。
+ */
+const TOTAL_SCORE_PROMOTIONS: Record<string, { href: string; title: string; description: string }> = {
+  tokyo: {
+    href: '/tokyo/total-score',
+    title: '都立高校 総合得点計算（1020点満点）',
+    description:
+      '学力検査700点・調査書点300点・ESAT-J 20点の3要素から、都立入試の総合得点を算出。志望校の合格目安と比較できます。',
+  },
+  osaka: {
+    href: '/osaka/total-score',
+    title: '大阪府 タイプⅠ〜Ⅴ 総合点計算',
+    description:
+      '学力検査450点・内申点450点を、タイプⅠ（7:3）〜タイプⅤ（3:7）の選抜タイプ別に瞬時に算出できます。',
+  },
+  aichi: {
+    href: '/aichi/total-score',
+    title: '愛知県 総合得点計算（評定得点×2倍）',
+    description: '中3の評定合計を2倍した評定得点（90点満点）と学力検査点を合わせた総合得点を算出できます。',
+  },
+  chiba: {
+    href: '/chiba/total-score',
+    title: '千葉県 総合得点計算（係数K対応）',
+    description: '調査書点135点満点に各高校の係数K（0.5〜2）を掛けた実際の得点で、総合得点を算出できます。',
+  },
+  saitama: {
+    href: '/saitama/total-score',
+    title: '埼玉県 総合得点計算（学年比率対応）',
+    description: '高校ごとに異なる学年比率（1:1:2など）を反映した調査書点と学力検査点で総合得点を算出できます。',
+  },
+  fukuoka: {
+    href: '/fukuoka/total-score',
+    title: '福岡県 総合得点計算（中3のみ45点満点）',
+    description: '合否判定に使う中3のみの内申点（45点満点）と学力検査点を合わせた総合得点を算出できます。',
+  },
+  hokkaido: {
+    href: '/hokkaido/rank',
+    title: '北海道 内申ランク判定（A〜M全13段階）',
+    description: '内申点（315点満点）を20点刻みのA〜M13段階に自動変換し、学力検査点と合わせて比較できます。',
+  },
+};
+
 const CARD_LOADER = (
   <div
     className="flex h-28 items-center justify-center rounded-2xl border border-slate-200 bg-white"
@@ -451,9 +496,9 @@ export function ResultSection({
                 <ChevronRight className="mt-3 h-4 w-4 text-purple-500 transition-transform group-hover:translate-x-1" />
               </Link>
 
-              {prefectureCode === 'tokyo' && (
+              {TOTAL_SCORE_PROMOTIONS[prefectureCode] && (
                 <Link
-                  href="/tokyo/total-score"
+                  href={TOTAL_SCORE_PROMOTIONS[prefectureCode].href}
                   className="group flex items-start gap-3 rounded-xl border border-blue-200 bg-gradient-to-br from-blue-50/50 to-white p-4 transition-all hover:border-blue-400 hover:shadow-md md:col-span-2"
                 >
                   <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-blue-500 to-indigo-700 text-white shadow-sm">
@@ -461,10 +506,10 @@ export function ResultSection({
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="text-sm font-bold text-slate-800 group-hover:text-blue-700">
-                      都立高校 総合得点計算（1020点満点）
+                      {TOTAL_SCORE_PROMOTIONS[prefectureCode].title}
                     </div>
                     <p className="mt-1 text-xs text-slate-600 leading-relaxed">
-                      学力検査700点・調査書点300点・ESAT-J 20点の3要素から、都立入試の総合得点を算出。志望校の合格目安と比較できます。
+                      {TOTAL_SCORE_PROMOTIONS[prefectureCode].description}
                     </p>
                   </div>
                   <ChevronRight className="mt-3 h-4 w-4 text-blue-500 transition-transform group-hover:translate-x-1" />

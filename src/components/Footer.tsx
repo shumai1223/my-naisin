@@ -119,6 +119,36 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/aichi/total-score" className="hover:text-blue-600 flex items-center gap-1">
+                  愛知県 総合得点 計算（評定得点×2倍） <ChevronRight className="h-3 w-3 opacity-30" />
+                </Link>
+              </li>
+              <li>
+                <Link href="/chiba/total-score" className="hover:text-blue-600 flex items-center gap-1">
+                  千葉県 総合得点 計算（係数K対応） <ChevronRight className="h-3 w-3 opacity-30" />
+                </Link>
+              </li>
+              <li>
+                <Link href="/saitama/total-score" className="hover:text-blue-600 flex items-center gap-1">
+                  埼玉県 総合得点 計算（学年比率対応） <ChevronRight className="h-3 w-3 opacity-30" />
+                </Link>
+              </li>
+              <li>
+                <Link href="/fukuoka/total-score" className="hover:text-blue-600 flex items-center gap-1">
+                  福岡県 総合得点 計算（中3のみ45点満点） <ChevronRight className="h-3 w-3 opacity-30" />
+                </Link>
+              </li>
+              <li>
+                <Link href="/naishin-map" className="hover:text-blue-600 flex items-center gap-1">
+                  内申点の日本地図（都道府県別インタラクティブ） <ChevronRight className="h-3 w-3 opacity-30" />
+                </Link>
+              </li>
+              <li>
+                <Link href="/hensachi/moshi/nittei" className="hover:text-blue-600 flex items-center gap-1">
+                  模試日程データベース（都道府県別） <ChevronRight className="h-3 w-3 opacity-30" />
+                </Link>
+              </li>
+              <li>
                 <Link href="/tokyo/naishin" className="hover:text-blue-600 flex items-center gap-1">
                   東京都 内申計算 <ChevronRight className="h-3 w-3 opacity-30" />
                 </Link>
