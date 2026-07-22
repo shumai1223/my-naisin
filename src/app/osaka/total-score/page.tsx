@@ -4,6 +4,7 @@ import { Calculator, ChevronRight, Home, BookOpen, AlertCircle, Award } from 'lu
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
+import { DatasetSchema } from '@/components/StructuredData/DatasetSchema';
 import { HowToSchema } from '@/components/StructuredData/HowToSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { OsakaResultFlow } from '@/components/Osaka/OsakaResultFlow';
@@ -50,6 +51,13 @@ export default function OsakaTotalScorePage() {
         name="大阪府公立高校 総合点計算 | My Naishin"
         description="大阪府公立高校入試の総合点をタイプⅠ〜Ⅴ別に瞬時に算出。志望校の合格目安と比較。"
         url="https://my-naishin.com/osaka/total-score"
+      />
+      <DatasetSchema
+        name="大阪府 総合点算出方式データ（タイプⅠ〜Ⅴ）"
+        description="大阪府公立高校入試の総合点算出方式（学力検査450点・内申点450点をタイプⅠ〜Ⅴの選抜タイプ別に重み付けする方法）。大阪府教育庁の入試情報に基づくデータ。"
+        url="https://my-naishin.com/osaka/total-score"
+        variableMeasured={['学力検査点', '内申点', '選抜タイプ', '総合点満点']}
+        keywords={['総合点', '大阪府', 'タイプⅠ〜Ⅴ', '入試制度']}
       />
       <BreadcrumbSchema
         items={[

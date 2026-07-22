@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Calculator, ChevronRight, Home, BookOpen, AlertCircle, Award } from 'lucide-react';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
+import { DatasetSchema } from '@/components/StructuredData/DatasetSchema';
 import { HowToSchema } from '@/components/StructuredData/HowToSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
@@ -55,6 +56,13 @@ export const metadata: Metadata = {
 export default function FukuokaTotalScorePage() {
   return (
     <>
+      <DatasetSchema
+        name="福岡県 内申点・総合得点算出方式データ（A群・B群）"
+        description="福岡県公立高校入試の内申点(中3のみ45点満点)・学力検査(300点満点)の算出方式と、学力・内申の両方が合格圏内の受験生を先に選ぶA群、残りを総合判断するB群の二段階選抜方式。福岡県教育委員会の入試情報に基づくデータ。"
+        url="https://my-naishin.com/fukuoka/total-score"
+        variableMeasured={['内申点', '学力検査点', 'A群B群選抜区分', '総合得点満点']}
+        keywords={['内申点', '福岡県', 'A群B群', '入試制度']}
+      />
       <BreadcrumbSchema
         items={[
           { name: 'ホーム', url: 'https://my-naishin.com/' },

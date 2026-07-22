@@ -109,30 +109,14 @@ const DATASET_EXEMPT_ROUTES: Record<string, string> = {
   '/[prefecture]/reverse': 'permanentRedirectのみのリダイレクトページ（実コンテンツ無し）',
   '/[prefecture]/naishin-omomi': '県別内申の重み分析ページ（データセットではなく分析記事。データ自体は親の/naishin-kakusaがDatasetSchemaで代表）',
   '/report/2026/[prefecture]': '白書2026の県別ダイジェスト（データセットではなく分析記事。データ自体は親の/report/2026がDatasetSchemaで代表）',
-  // 以下は都道府県教育委員会一次情報で検証済みの計算方式データ（満点・学年比率・実技倍率等）を
-  // 保持しており正当なDatasetSchema追加候補だが、県ごとに変数名・満点が異なるため
-  // 1件ずつ正確に書く必要があり今回は見送り、次周以降の継続タスクとする。
-  '/aichi/total-score': '愛知県総合得点データ（評価方法Ⅰ〜Ⅴ・満点200-310）（未着手・CANDIDATE_FOR_DATASET_CONTENT）',
-  '/chiba/total-score': '千葉県総合得点データ（K値0.5-2）（未着手・CANDIDATE_FOR_DATASET_CONTENT）',
-  '/fukuoka/total-score': '福岡県総合得点データ（A群B群・学力300点）（未着手・CANDIDATE_FOR_DATASET_CONTENT）',
-  '/hokkaido/rank': '北海道ランクデータ（315点満点・ランクA〜M）（未着手・CANDIDATE_FOR_DATASET_CONTENT）',
-  '/kanagawa/s-value': '神奈川県S値データ（未着手・CANDIDATE_FOR_DATASET_CONTENT）',
-  '/osaka/total-score': '大阪府総合得点データ（タイプ別）（未着手・CANDIDATE_FOR_DATASET_CONTENT）',
-  '/saitama/total-score': '埼玉県総合得点データ（学年比率）（未着手・CANDIDATE_FOR_DATASET_CONTENT）',
-  '/tokyo/total-score': '東京都総合得点データ（1020点満点）（未着手・CANDIDATE_FOR_DATASET_CONTENT）',
+  // 2026-07-23(X-9): aichi/chiba/fukuoka/hokkaido/kanagawa/osaka/saitama/tokyoの8ページは
+  // DatasetSchemaを実装済み（各県の検証済み計算方式データ）となったため例外リストから除外。
+  // 残る/[prefecture]/total-score（47県中13県が実計算機・条件分岐が必要）のみ未着手として残す。
   '/[prefecture]/total-score': '総合得点データ（47県中13県が実計算機・条件分岐が必要）（未着手・CANDIDATE_FOR_DATASET_CONTENT）',
 };
 
 /** 次にDatasetSchemaを書く価値が高い候補（教委一次情報で検証済みの計算方式データを持つ面）。 */
 const CANDIDATE_FOR_DATASET_CONTENT = [
-  '/aichi/total-score',
-  '/chiba/total-score',
-  '/fukuoka/total-score',
-  '/hokkaido/rank',
-  '/kanagawa/s-value',
-  '/osaka/total-score',
-  '/saitama/total-score',
-  '/tokyo/total-score',
   '/[prefecture]/total-score',
 ];
 

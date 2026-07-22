@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Calculator, ChevronRight, Home, BookOpen, AlertCircle } from 'lucide-react';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
+import { DatasetSchema } from '@/components/StructuredData/DatasetSchema';
 import { HowToSchema } from '@/components/StructuredData/HowToSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
@@ -62,6 +63,13 @@ function pct(part: number, total: number) {
 export default function SaitamaTotalScorePage() {
   return (
     <>
+      <DatasetSchema
+        name="埼玉県 調査書点算出方式データ（学年比率）"
+        description="埼玉県公立高校入試の調査書点算出における一般的な学年比率(1:1:2・1:1:3・1:2:3等)のパターン。県内統一の換算式は存在せず高校・学科ごとに異なるため、志望校の募集要項の確認を前提としたデータ。埼玉県教育委員会の入試情報に基づく。"
+        url="https://my-naishin.com/saitama/total-score"
+        variableMeasured={['学年別評定', '学年比率パターン', '学力検査点']}
+        keywords={['調査書点', '埼玉県', '学年比率', '入試制度']}
+      />
       <BreadcrumbSchema
         items={[
           { name: 'ホーム', url: 'https://my-naishin.com/' },

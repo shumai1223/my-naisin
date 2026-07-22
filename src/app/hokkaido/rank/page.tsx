@@ -4,6 +4,7 @@ import { Calculator, ChevronRight, Home, BookOpen, AlertCircle, Award } from 'lu
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
+import { DatasetSchema } from '@/components/StructuredData/DatasetSchema';
 import { HowToSchema } from '@/components/StructuredData/HowToSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
@@ -50,6 +51,13 @@ export default function HokkaidoRankPage() {
         name="北海道 内申ランク判定 | My Naishin"
         description="北海道公立高校入試の内申ランク（A〜M）を瞬時に判定。志望校の合格目安と比較。"
         url="https://my-naishin.com/hokkaido/rank"
+      />
+      <DatasetSchema
+        name="北海道 内申ランク算出方式データ（A〜M全13段階）"
+        description="北海道公立高校入試の内申点(315点満点)を20点刻みでA〜M全13段階の内申ランクに変換する帯判定表。北海道教育委員会の入学者選抜情報に基づくデータ。"
+        url="https://my-naishin.com/hokkaido/rank"
+        variableMeasured={['内申点', '内申ランク(A〜M)', '学力検査点', '総合点満点']}
+        keywords={['内申ランク', '北海道', '入試制度']}
       />
       <BreadcrumbSchema
         items={[

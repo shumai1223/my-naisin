@@ -4,6 +4,7 @@ import { Calculator, ChevronRight, Home, BookOpen, AlertCircle, Award, Target } 
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
+import { DatasetSchema } from '@/components/StructuredData/DatasetSchema';
 import { HowToSchema } from '@/components/StructuredData/HowToSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { TokyoTotalScoreResultFlow } from '@/components/TokyoTotalScore/TokyoTotalScoreResultFlow';
@@ -49,6 +50,13 @@ export default function TokyoTotalScorePage() {
         name="都立高校 総合得点 計算サイト | My Naishin"
         description="東京都立高校入試の1020点満点総合得点を自動計算。学力検査・調査書点・ESAT-Jから合計点を算出。"
         url="https://my-naishin.com/tokyo/total-score"
+      />
+      <DatasetSchema
+        name="東京都 総合得点算出方式データ（1020点満点）"
+        description="都立高校入試の総合得点算出方式（学力検査700点・調査書点300点・ESAT-J 20点の内訳と換算方法）。東京都教育委員会の入学者選抜実施要綱に基づくデータ。"
+        url="https://my-naishin.com/tokyo/total-score"
+        variableMeasured={['学力検査換算点', '調査書点換算点', 'ESAT-J評価点', '総合得点満点']}
+        keywords={['総合得点', '東京都', '都立高校', 'ESAT-J', '入試制度']}
       />
       <BreadcrumbSchema
         items={[

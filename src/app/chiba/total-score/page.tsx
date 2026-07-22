@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Calculator, ChevronRight, Home, BookOpen, AlertCircle, Award } from 'lucide-react';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
+import { DatasetSchema } from '@/components/StructuredData/DatasetSchema';
 import { HowToSchema } from '@/components/StructuredData/HowToSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
@@ -63,6 +64,13 @@ function fmt(n: number) {
 export default function ChibaTotalScorePage() {
   return (
     <>
+      <DatasetSchema
+        name="千葉県 調査書点算出方式データ（K値0.5〜2）"
+        description="千葉県公立高校入試の調査書点算出方式（評定135点満点に志望校ごとの係数K(0.5〜2)を掛けて実際の調査書点を算出する方法）。千葉県教育委員会の入試情報に基づくデータ。"
+        url="https://my-naishin.com/chiba/total-score"
+        variableMeasured={['調査書点素点', 'K値', '調査書点換算値', '学力検査点']}
+        keywords={['調査書点', '千葉県', 'K値', '入試制度']}
+      />
       <BreadcrumbSchema
         items={[
           { name: 'ホーム', url: 'https://my-naishin.com/' },

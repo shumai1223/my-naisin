@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Calculator, ChevronRight, Home, BookOpen, AlertCircle, Award } from 'lucide-react';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
+import { DatasetSchema } from '@/components/StructuredData/DatasetSchema';
 import { HowToSchema } from '@/components/StructuredData/HowToSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
@@ -61,6 +62,13 @@ const HYOKA_METHODS = [
 export default function AichiTotalScorePage() {
   return (
     <>
+      <DatasetSchema
+        name="愛知県 総合得点算出方式データ（評価方法Ⅰ〜Ⅴ）"
+        description="愛知県公立高校入試の総合得点算出方式（内申点・評定得点90点満点＋当日点110点満点を志望校の評価方法Ⅰ〜Ⅴで重み付けする方法）。愛知県教育委員会の入学者選抜情報に基づくデータ。"
+        url="https://my-naishin.com/aichi/total-score"
+        variableMeasured={['評定得点', '当日点', '評価方法Ⅰ〜Ⅴ', '総合得点満点']}
+        keywords={['総合得点', '愛知県', '評価方法', '入試制度']}
+      />
       <BreadcrumbSchema
         items={[
           { name: 'ホーム', url: 'https://my-naishin.com/' },

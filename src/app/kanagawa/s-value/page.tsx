@@ -4,6 +4,7 @@ import { Calculator, ChevronRight, Home, BookOpen, AlertCircle, Award } from 'lu
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
+import { DatasetSchema } from '@/components/StructuredData/DatasetSchema';
 import { HowToSchema } from '@/components/StructuredData/HowToSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { KanagawaResultFlow } from '@/components/Kanagawa/KanagawaResultFlow';
@@ -55,6 +56,13 @@ export default function KanagawaSValuePage() {
         name="神奈川県 S値 自動計算 | My Naishin"
         description="神奈川県公立高校入試のS1値・S2値（1000点満点）を瞬時に算出。志望校比率に対応。"
         url="https://my-naishin.com/kanagawa/s-value"
+      />
+      <DatasetSchema
+        name="神奈川県 S値算出方式データ（1000点満点）"
+        description="神奈川県公立高校入試のS1値・S2値の算出方式（内申点135点・学力検査500点を志望校が選ぶ比率(4:6〜7:3)で換算し合算する方法）。神奈川県教育委員会の入学者選抜情報に基づくデータ。"
+        url="https://my-naishin.com/kanagawa/s-value"
+        variableMeasured={['内申点換算値', '学力検査換算値', 'S1値', 'S2値', '志望校比率']}
+        keywords={['S値', '神奈川県', '総合得点', '入試制度']}
       />
       <BreadcrumbSchema
         items={[
