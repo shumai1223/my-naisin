@@ -239,6 +239,10 @@ export default async function StatsPage() {
                 データの品質・出典について
                 <ChevronRight className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
+              <Link href="/report/2026" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-emerald-200 hover:bg-emerald-50/50">
+                内申点白書2026（47都道府県データ）
+                <ChevronRight className="h-4 w-4 shrink-0 text-slate-400" />
+              </Link>
             </div>
           </section>
         </div>

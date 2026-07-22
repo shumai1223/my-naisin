@@ -144,6 +144,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/report/2026" className="hover:text-blue-600 flex items-center gap-1">
+                  内申点白書2026（47都道府県データ・引用自由） <ChevronRight className="h-3 w-3 opacity-30" />
+                </Link>
+              </li>
+              <li>
                 <Link href="/hensachi/moshi/nittei" className="hover:text-blue-600 flex items-center gap-1">
                   模試日程データベース（都道府県別） <ChevronRight className="h-3 w-3 opacity-30" />
                 </Link>

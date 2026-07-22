@@ -239,6 +239,11 @@ export default function NaishinKakusaPage() {
               内申点の日本地図を見る
               <ChevronRightSquare className="h-4 w-4" />
             </Link>
+            <p className="mt-4 text-xs text-slate-500">
+              47都道府県全件の詳細データ・出典・引用ガイドラインは
+              <Link href="/report/2026" className="font-bold text-indigo-700 underline">内申点白書2026</Link>
+              にまとめています。
+            </p>
           </section>
 
           <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
