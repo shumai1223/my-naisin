@@ -97,7 +97,7 @@ export default function NaishinKakusaPage() {
         description="47都道府県の内申点計算方式を横断比較し、実技傾斜・学年比重・満点構造の違いを分析するレポート"
         datePublished="2026-07-17"
         dateModified="2026-07-17"
-        author="My Naishin"
+        author="しゅうまい"
       />
       <DatasetSchema
         name="都道府県別 内申点算出方式データ"

@@ -62,7 +62,7 @@ export default function NaishinMapPage() {
         description="47都道府県の内申点算出方式（実技傾斜・中3の重み・満点）を、都道府県境の形をした日本地図で色分け比較する可視化コンテンツ"
         datePublished="2026-07-19"
         dateModified="2026-07-20"
-        author="My Naishin"
+        author="しゅうまい"
       />
       <DatasetSchema
         name="都道府県別 内申点算出方式データ（地図可視化）"

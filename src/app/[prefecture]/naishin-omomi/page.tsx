@@ -61,7 +61,7 @@ export default async function NaishinOmomiPage({ params }: PageProps) {
         description={entry.angle}
         datePublished="2026-07-17"
         dateModified="2026-07-17"
-        author="My Naishin"
+        author="しゅうまい"
       />
       <FAQPageSchema faqItems={entry.faqs} />
 

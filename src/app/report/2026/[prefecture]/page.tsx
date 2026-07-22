@@ -67,7 +67,7 @@ export default async function Report2026PrefecturePage({ params }: PageProps) {
         description={entry.highlight}
         datePublished="2026-07-23"
         dateModified="2026-07-23"
-        author="My Naishin"
+        author="しゅうまい"
       />
       <FAQPageSchema faqItems={entry.faqs} />
 

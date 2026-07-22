@@ -168,15 +168,22 @@ describe('ArticleSchema', () => {
       description: '説明',
       datePublished: '2026-01-01',
       dateModified: '2026-06-01',
-      author: 'My Naishin',
+      author: 'しゅうまい',
     };
     const without = extractJsonLd(ArticleSchema(base)) as Record<string, unknown>;
     expectSchemaNode(without, 'Article');
     expect(without.headline).toBe('タイトル');
     expect(without.datePublished).toBe('2026-01-01');
     expect(without.dateModified).toBe('2026-06-01');
-    expect((without.author as Record<string, unknown>).name).toBe('My Naishin');
     expect(without.image).toBeUndefined();
+
+    // 著者は Person（BlogPostingSchemaと同型）。E-E-A-T差別化のためOrganizationでなくPersonで
+    // 出力し、editor-profile/SiteSchema.founderと同一@idで統合させる（2026-07-23是正）。
+    const author = without.author as Record<string, unknown>;
+    expect(author['@type']).toBe('Person');
+    expect(author['@id']).toBe('https://my-naishin.com/#person-shumai');
+    expect(author.name).toBe('しゅうまい');
+    expect(author.sameAs).toEqual(['https://github.com/shumai1223']);
 
     const withImg = extractJsonLd(
       ArticleSchema({ ...base, imageUrl: 'https://my-naishin.com/og.png' }),
