@@ -33,7 +33,7 @@ const NO_ACCESSIBLE_NAME_EXEMPT: Record<string, string> = {
   'src/components/ErrorReportForm.tsx:113': 'エラー報告フォーム（同上）',
   'src/components/Result/PersonalGoalCard.tsx:187': '目標メモの自由記述編集欄（同上）',
   'src/components/Result/PersonalGoalCard.tsx:228': '目標メモの自由記述編集欄（同上）',
-  'src/components/ResultSection.tsx:528': '結果保存時の任意メモ欄（同上）',
+  'src/components/ResultSection.tsx:573': '結果保存時の任意メモ欄（同上。2026-07-23のTOTAL_SCORE_PROMOTIONS追加でファイル冒頭に行が増え528→573へ移動）',
 };
 
 /**
