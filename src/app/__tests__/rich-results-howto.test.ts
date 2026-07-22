@@ -68,6 +68,7 @@ const HOWTO_EXEMPT_ROUTES: Record<string, string> = {
   '/naishin-kakusa': '都道府県別内申点格差の分析レポート（手順でなくデータ分析・比較記事。ArticleSchema+DatasetSchemaで対応）',
   '/naishin-map': '都道府県別内申点データの地図可視化（手順でなくデータ比較。ArticleSchema+DatasetSchemaで対応）',
   '/report/2026': '内申点白書2026（手順でなくデータ分析・引用資料。ArticleSchema+DatasetSchemaで対応）',
+  '/report/2026/[prefecture]': '白書2026の県別ダイジェスト（手順でなく県別データ分析。ArticleSchemaで対応）',
   '/naishin-oru': 'オール3/4/5内申点ハブページ（下位ページへの導線のみ）',
   '/naishin-oru/[grade]': 'オール3/4/5内申点の計算例ページ（計算結果一覧であり手順ではない）',
   '/partner': '塾/パートナー向けLP（手順コンテンツなし）',

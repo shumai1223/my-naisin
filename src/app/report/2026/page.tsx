@@ -6,10 +6,12 @@ import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { ArticleSchema } from '@/components/StructuredData/ArticleSchema';
 import { DatasetSchema } from '@/components/StructuredData/DatasetSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
-import { PREFECTURES } from '@/lib/prefectures';
 import { SITE_URL } from '@/lib/naishin-dataset';
 import { STATS_METRICS, STATS_MIN_SAMPLE_SIZE, computeAggregate, formatStatValue, type StatsMetric } from '@/lib/stats-aggregation';
 import { getStatsValues } from '@/lib/stats-db';
+import { REPORT_2026_ROWS as ROWS, REPORT_2026_NO_SKEW_COUNT as NO_SKEW_COUNT, REPORT_2026_GRADE3_ONLY as GRADE3_ONLY } from '@/lib/report-2026-data';
+import { REPORT_2026_DIGEST_CODES } from '@/lib/report-2026-digest-content';
+import { getPrefectureByCode } from '@/lib/prefectures';
 
 export const dynamic = 'force-dynamic';
 
@@ -22,27 +24,9 @@ export const dynamic = 'force-dynamic';
  * このページは「外部の記者・研究者が引用・保存する定本」としての47都道府県全件表＋
  * 出典・引用ガイドラインを備えた文書版（PDF化はPlaywrightがこの実行環境で起動不可のため
  * 後続フェーズ。まずは常に最新の一次データを反映するWeb版を定本とする）。
+ * 県別の1ページ版はX-30（/report/2026/[prefecture]）を参照——本ページと同じ
+ * src/lib/report-2026-data.tsを共有し数値の食い違いを構造的に防いでいる。
  */
-
-function grade3WeightShare(p: (typeof PREFECTURES)[number]): number {
-  const total = p.targetGrades.reduce((sum, g) => sum + (p.gradeMultipliers[g] ?? 0), 0);
-  if (total === 0) return 0;
-  return (p.gradeMultipliers[3] ?? 0) / total;
-}
-
-const ROWS = PREFECTURES.map((p) => ({
-  code: p.code,
-  name: p.name,
-  region: p.region,
-  maxScore: p.maxScore,
-  practicalSkew: +(p.practicalMultiplier / p.coreMultiplier).toFixed(2),
-  grade3WeightPct: Math.round(grade3WeightShare(p) * 1000) / 10,
-  gradeCount: p.targetGrades.length,
-  sourceUrl: p.sourceUrl,
-})).sort((a, b) => b.practicalSkew - a.practicalSkew || a.name.localeCompare(b.name, 'ja'));
-
-const NO_SKEW_COUNT = ROWS.filter((r) => r.practicalSkew === 1).length;
-const GRADE3_ONLY = ROWS.filter((r) => r.grade3WeightPct === 100);
 const MAX_SCORE_SORTED = [...ROWS].sort((a, b) => a.maxScore - b.maxScore);
 const MIN_MAX_SCORE = MAX_SCORE_SORTED[0];
 const MAX_MAX_SCORE = MAX_SCORE_SORTED[MAX_SCORE_SORTED.length - 1];
@@ -313,6 +297,31 @@ export default async function Report2026Page() {
               <Link href="/contact" className="text-indigo-600 underline">お問い合わせページ</Link>からご連絡ください。
             </p>
           </section>
+
+          {REPORT_2026_DIGEST_CODES.length > 0 && (
+            <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <h2 className="mb-3 text-lg font-bold text-slate-800">都道府県別ダイジェスト版</h2>
+              <p className="mb-4 text-xs text-slate-500">
+                白書全体でなく、特定の県だけを1ページに凝縮したミニレポートです（執筆済みの県のみ順次公開）。
+              </p>
+              <div className="grid gap-2 sm:grid-cols-2">
+                {REPORT_2026_DIGEST_CODES.map((code) => {
+                  const pref = getPrefectureByCode(code);
+                  if (!pref) return null;
+                  return (
+                    <Link
+                      key={code}
+                      href={`/report/2026/${code}`}
+                      className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-indigo-200 hover:bg-indigo-50/50"
+                    >
+                      {pref.name}版ダイジェスト
+                      <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
+                    </Link>
+                  );
+                })}
+              </div>
+            </section>
+          )}
 
           <section className="mb-8 grid gap-2 sm:grid-cols-2">
             <Link

@@ -7,6 +7,7 @@ import { EXPLAINER_CODES } from '@/lib/total-score/explainers';
 import { STATIC_PAGES } from '@/lib/page-registry';
 import { SHINDAN_PURPOSE_CONTENTS } from '@/lib/shindan-purpose-content';
 import { NAISHIN_OMOMI_CODES } from '@/lib/naishin-omomi-content';
+import { REPORT_2026_DIGEST_CODES } from '@/lib/report-2026-digest-content';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://my-naishin.com';
@@ -91,6 +92,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
+  // 9. 内申点白書2026 都道府県別ダイジェスト（X-30・執筆済みの県のみ。生成はREPORT_2026_DIGEST_CODESに従属）
+  const report2026DigestPages = REPORT_2026_DIGEST_CODES.map(code => ({
+    url: `${baseUrl}/report/2026/${code}`,
+    lastModified,
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }));
+
   return [
     ...staticPages,
     ...prefectureTopPages,
@@ -101,5 +110,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...totalScoreExplainerPages,
     ...shindanPurposePages,
     ...naishinOmomiPages,
+    ...report2026DigestPages,
   ];
 }

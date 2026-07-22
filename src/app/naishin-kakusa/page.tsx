@@ -9,6 +9,7 @@ import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { PREFECTURES, getPrefectureByCode } from '@/lib/prefectures';
 import { SITE_URL } from '@/lib/naishin-dataset';
 import { NAISHIN_OMOMI_CODES } from '@/lib/naishin-omomi-content';
+import { REPORT_2026_DIGEST_CODES } from '@/lib/report-2026-digest-content';
 
 // 全て src/lib/prefectures.ts (各都道府県教育委員会の公式発表に基づく既存データ) から算出。
 // 新規の数値は追加していない＝捏造ゼロ。
@@ -245,6 +246,31 @@ export default function NaishinKakusaPage() {
               にまとめています。
             </p>
           </section>
+
+          {REPORT_2026_DIGEST_CODES.length > 0 && (
+            <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <h2 className="mb-3 text-lg font-bold text-slate-800">白書2026の県別ダイジェストを読む</h2>
+              <p className="mb-4 text-xs text-slate-500">
+                特に構造的に特徴のある都道府県について、1ページに凝縮したミニレポートを用意しています（順次追加中）。
+              </p>
+              <div className="grid gap-2 sm:grid-cols-2">
+                {REPORT_2026_DIGEST_CODES.map((code) => {
+                  const pref = getPrefectureByCode(code);
+                  if (!pref) return null;
+                  return (
+                    <Link
+                      key={code}
+                      href={`/report/2026/${code}`}
+                      className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-indigo-200 hover:bg-indigo-50/50"
+                    >
+                      {pref.name}版ダイジェスト
+                      <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
+                    </Link>
+                  );
+                })}
+              </div>
+            </section>
+          )}
 
           <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="mb-3 text-lg font-bold text-slate-800">県別の詳しい分析を読む</h2>

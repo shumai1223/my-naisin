@@ -108,6 +108,7 @@ const DATASET_EXEMPT_ROUTES: Record<string, string> = {
   '/[prefecture]': '県別内申点ガイドページ（データセットの提供なし）',
   '/[prefecture]/reverse': 'permanentRedirectのみのリダイレクトページ（実コンテンツ無し）',
   '/[prefecture]/naishin-omomi': '県別内申の重み分析ページ（データセットではなく分析記事。データ自体は親の/naishin-kakusaがDatasetSchemaで代表）',
+  '/report/2026/[prefecture]': '白書2026の県別ダイジェスト（データセットではなく分析記事。データ自体は親の/report/2026がDatasetSchemaで代表）',
   // 以下は都道府県教育委員会一次情報で検証済みの計算方式データ（満点・学年比率・実技倍率等）を
   // 保持しており正当なDatasetSchema追加候補だが、県ごとに変数名・満点が異なるため
   // 1件ずつ正確に書く必要があり今回は見送り、次周以降の継続タスクとする。
