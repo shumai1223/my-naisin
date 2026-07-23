@@ -516,6 +516,18 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
       { label: '内申点を計算する', href: '/' },
     ],
   },
+  {
+    id: 'tokushokuka-senbatsu',
+    term: '特色化選抜（とくしょくかせんばつ）',
+    reading: 'とくしょくかせんばつ',
+    description: '一般選抜（学力検査＋内申点）とは別に、学校・学科の特色に応じた基準（実技試験・小論文・面接・特定分野の実績等）で選抜する方式。新潟県などで実施されています。',
+    example: '新潟県では一般選抜（学力検査＋学校独自検査）と特色化選抜が併存していますが、令和9年度入試から特色化選抜を廃止する予定と新潟県教育委員会が発表しています（本サイトの入試制度変更点まとめで詳細を掲載）。',
+    note: '特色化選抜の実施の有無・選抜基準は都道府県・学校によって異なります。制度が変更・廃止される場合もあるため、志望校の最新の募集要項を必ず確認してください。',
+    relatedPrefectures: '新潟県で実施（令和9年度から廃止予定）。他県にも類似の「特色選抜」制度がありますが名称・内容は異なります。',
+    links: [
+      { label: '今年度入試変更点まとめを見る', href: '/nyushi-seido-henkou' },
+    ],
+  },
 ];
 
 export function getGlossaryTerm(id: string): GlossaryTerm | undefined {
