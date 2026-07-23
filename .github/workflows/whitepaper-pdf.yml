@@ -1,0 +1,51 @@
+name: Whitepaper PDF
+
+# X-1 内申点白書2026のPDF化。ローカル/loop環境ではPlaywrightのChromeが
+# STATUS_DLL_INIT_FAILEDで起動できないため、e2eジョブと同じubuntu-latest上で
+# 生成しartifactとして受け取る。手動トリガーのみ(自動実行しない)。
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: "PDF化する本番URL"
+        required: false
+        default: "https://my-naishin.com/report/2026"
+
+jobs:
+  pdf:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+      - name: Generate PDF
+        run: |
+          node -e "
+          const { chromium } = require('playwright');
+          (async () => {
+            const browser = await chromium.launch();
+            const page = await browser.newPage();
+            await page.goto(process.env.TARGET_URL, { waitUntil: 'networkidle' });
+            await page.pdf({
+              path: 'naishin-hakusho-2026.pdf',
+              format: 'A4',
+              printBackground: true,
+              margin: { top: '10mm', bottom: '10mm', left: '8mm', right: '8mm' },
+            });
+            await browser.close();
+          })();
+          "
+        env:
+          TARGET_URL: ${{ github.event.inputs.url }}
+      - name: Upload PDF artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: naishin-hakusho-2026
+          path: naishin-hakusho-2026.pdf
+          retention-days: 30
