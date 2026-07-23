@@ -147,6 +147,81 @@ curl -X POST ${SITE_URL}/api/mcp \\
 # 2) 内申点×当日点の総合得点（対応5県のみ・非対応県は404）
 curl "${SITE_URL}/api/total-score/hyogo?academicRaw=420&reportRaw=200"`;
 
+  // ZZ-6b（2026-07-24）：Claude Desktop / Cursor / コードから、の導入別クイックスタート。
+  // レスポンス例は本物のエンジン関数(calculateNaishin/calcHensachi)を実行して得た確定値をそのまま貼付
+  // （捏造ゼロ・数値は本番と同一ソース）。X-3のサンプルリポジトリ資産（github-repo-samples/）を再利用。
+  const claudeDesktopConfigPath = `# macOS
+~/Library/Application Support/Claude/claude_desktop_config.json
+
+# Windows
+%APPDATA%\\Claude\\claude_desktop_config.json`;
+
+  const claudeDesktopAskExample = `東京都でオール4なら内申点は何点？`;
+
+  const claudeDesktopResponseExample = `{
+  "prefectureCode": "tokyo",
+  "prefectureName": "東京都",
+  "total": 52,
+  "max": 65,
+  "percent": 80,
+  "scores": { "japanese": 4, "math": 4, "english": 4, "science": 4, "social": 4, "music": 4, "art": 4, "pe": 4, "tech": 4 },
+  "validGradeRange": "1〜5",
+  "toolUrl": "${SITE_URL}/tokyo/naishin",
+  "note": "正確な配点・特例は各都道府県の選抜要綱をご確認ください。出典: My Naishin（${SITE_URL}）"
+}`;
+
+  const cursorSettingsNote = `Cursor Settings → MCP → "Add new MCP server"（またはプロジェクト直下に .cursor/mcp.json を作成）。設定形式はClaude Desktopと同じJSON。`;
+
+  const cursorAskExample = `偏差値70・平均60・標準偏差10のとき偏差値はいくつ？calculate_hensachiで計算して`;
+
+  const cursorResponseExample = `{
+  "score": 70,
+  "average": 60,
+  "stdDev": 10,
+  "hensachi": 60
+}`;
+
+  const quickstartCodeNodeExample = `// Node.js 18以降（fetch組み込み・依存パッケージ不要）
+const BASE_URL = '${SITE_URL}';
+
+async function calculateNaishinViaMcp(prefectureCode, scores) {
+  const res = await fetch(\`\${BASE_URL}/api/mcp\`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      jsonrpc: '2.0', id: 1, method: 'tools/call',
+      params: { name: 'calculate_naishin', arguments: { prefectureCode, scores } },
+    }),
+  });
+  const rpc = await res.json();
+  return JSON.parse(rpc.result.content[0].text); // MCPはcontent[0].textにJSON文字列で結果が入る
+}
+
+const naishin = await calculateNaishinViaMcp('tokyo', {
+  japanese: 4, math: 4, english: 4, science: 4, social: 4, music: 4, art: 4, pe: 4, tech: 4,
+});
+console.log(naishin.total); // -> 52`;
+
+  const quickstartCodePythonExample = `# Python 3.8以降（要 pip install requests）
+import requests
+
+BASE_URL = "${SITE_URL}"
+
+def calculate_naishin_via_mcp(prefecture_code, scores):
+    res = requests.post(f"{BASE_URL}/api/mcp", json={
+        "jsonrpc": "2.0", "id": 1, "method": "tools/call",
+        "params": {"name": "calculate_naishin", "arguments": {"prefectureCode": prefecture_code, "scores": scores}},
+    })
+    rpc = res.json()
+    import json
+    return json.loads(rpc["result"]["content"][0]["text"])
+
+naishin = calculate_naishin_via_mcp("tokyo", {
+    "japanese": 4, "math": 4, "english": 4, "science": 4, "social": 4,
+    "music": 4, "art": 4, "pe": 4, "tech": 4,
+})
+print(naishin["total"])  # -> 52`;
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
       <BreadcrumbSchema
@@ -558,6 +633,63 @@ curl "${SITE_URL}/api/total-score/hyogo?academicRaw=420&reportRaw=200"`;
               {DATASET_META.aiUsageNote}
             </span>
           </div>
+        </section>
+
+        {/* 使う場所別クイックスタート（ZZ-6b・2026-07-24） */}
+        <section className="mb-10 rounded-2xl border-2 border-violet-200 bg-violet-50/40 p-6">
+          <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
+            <Bot className="h-5 w-5 text-violet-600" />
+            使う場所別クイックスタート（10分）
+          </h2>
+          <p className="mb-5 text-sm leading-relaxed text-slate-600">
+            Claude Desktop・Cursor・自前のコードのそれぞれで、内申点データAPI/MCPを実際に呼び出す最短手順です。
+            レスポンス例はすべて本物の計算エンジンを実行して得た確定値をそのまま貼付しています。
+          </p>
+
+          <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">① Claude Desktop</h3>
+          <ol className="mb-2 list-decimal space-y-1 pl-5 text-sm leading-relaxed text-slate-600">
+            <li>設定ファイルを開く</li>
+          </ol>
+          <CodeBlock>{claudeDesktopConfigPath}</CodeBlock>
+          <ol start={2} className="mb-2 mt-3 list-decimal space-y-1 pl-5 text-sm leading-relaxed text-slate-600">
+            <li>
+              <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">mcpServers</code> に以下を追加して保存
+            </li>
+          </ol>
+          <CodeBlock>{mcpConfig}</CodeBlock>
+          <ol start={3} className="mb-2 mt-3 list-decimal space-y-1 pl-5 text-sm leading-relaxed text-slate-600">
+            <li>Claude Desktopを再起動</li>
+            <li>チャットで日本語のまま聞くだけで、Claudeが自動で calculate_naishin ツールを呼び出す</li>
+          </ol>
+          <p className="mb-2 text-sm text-slate-600">
+            入力例：<code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">{claudeDesktopAskExample}</code>
+          </p>
+          <p className="mb-2 text-xs font-semibold text-slate-500">実際に返る値（ツール呼び出しの結果）：</p>
+          <CodeBlock>{claudeDesktopResponseExample}</CodeBlock>
+
+          <h3 className="mb-2 mt-8 text-sm font-bold text-slate-700">② Cursor</h3>
+          <p className="mb-2 text-sm leading-relaxed text-slate-600">{cursorSettingsNote}</p>
+          <CodeBlock>{mcpConfig}</CodeBlock>
+          <p className="mb-2 mt-3 text-sm text-slate-600">
+            入力例：<code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">{cursorAskExample}</code>
+          </p>
+          <p className="mb-2 text-xs font-semibold text-slate-500">実際に返る値（ツール呼び出しの結果）：</p>
+          <CodeBlock>{cursorResponseExample}</CodeBlock>
+
+          <h3 className="mb-2 mt-8 text-sm font-bold text-slate-700">③ コードから（Node.js / Python）</h3>
+          <p className="mb-2 text-sm leading-relaxed text-slate-600">
+            AIクライアントを介さず、自前のアプリ・スクリプトからMCPエンドポイントを直接POSTする方法です。
+            依存パッケージなしで動くNode.js（fetch組み込み）版と、Python（requests）版を用意しました。
+          </p>
+          <h4 className="mb-1 mt-3 text-xs font-bold text-slate-600">Node.js（18以降）</h4>
+          <CodeBlock>{quickstartCodeNodeExample}</CodeBlock>
+          <h4 className="mb-1 mt-3 text-xs font-bold text-slate-600">Python（3.8以降・requests）</h4>
+          <CodeBlock>{quickstartCodePythonExample}</CodeBlock>
+          <p className="mt-3 text-xs leading-relaxed text-slate-500">
+            上記2言語版＋curlのチートシートをまとめた実行可能サンプル一式は、社内のサンプルリポジトリ資産
+            （README・node-fetch-example.mjs・python-requests-example.py・curl-cheatsheet.sh）としても
+            管理しています。いずれも本番APIへのライブリクエストで動作検証済みです。
+          </p>
         </section>
 
         {/* 料金プラン・APIキー */}
