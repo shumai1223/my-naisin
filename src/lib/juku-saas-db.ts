@@ -137,22 +137,23 @@ export async function addJukuStudent(
   jukuAccountId: number,
   displayName: string,
   prefectureCode?: string
-): Promise<boolean> {
+): Promise<number | null> {
   const trimmed = displayName.trim().slice(0, 80);
-  if (!trimmed || !Number.isFinite(jukuAccountId)) return false;
+  if (!trimmed || !Number.isFinite(jukuAccountId)) return null;
   try {
     const db = await getDb();
-    if (!db) return false;
-    await db
+    if (!db) return null;
+    const result = await db
       .prepare(
         `INSERT INTO juku_students (juku_account_id, display_name, prefecture_code, created_at) VALUES (?, ?, ?, datetime('now'))`
       )
       .bind(jukuAccountId, trimmed, prefectureCode?.trim().slice(0, 40) || null)
       .run();
-    return true;
+    const studentId = (result as { meta?: { last_row_id?: number } })?.meta?.last_row_id;
+    return typeof studentId === 'number' ? studentId : null;
   } catch (err) {
     console.error('addJukuStudent skipped:', err instanceof Error ? err.message : err);
-    return false;
+    return null;
   }
 }
 

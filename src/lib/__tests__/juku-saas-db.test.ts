@@ -69,16 +69,16 @@ describe('verifyInviteToken（D1未バインド環境=jest）', () => {
 });
 
 describe('addJukuStudent（D1未バインド環境=jest）', () => {
-  test('表示名が空ならD1に触れず即false', async () => {
-    expect(await addJukuStudent(1, '')).toBe(false);
+  test('表示名が空ならD1に触れず即null', async () => {
+    expect(await addJukuStudent(1, '')).toBeNull();
   });
 
-  test('juku_account_idが不正(NaN)ならfalse', async () => {
-    expect(await addJukuStudent(NaN, '生徒A')).toBe(false);
+  test('juku_account_idが不正(NaN)ならnull', async () => {
+    expect(await addJukuStudent(NaN, '生徒A')).toBeNull();
   });
 
-  test('正当な入力でもD1未バインドならfalse(例外を投げない)', async () => {
-    expect(await addJukuStudent(1, '生徒A', 'tokyo')).toBe(false);
+  test('正当な入力でもD1未バインドならnull(例外を投げない)', async () => {
+    expect(await addJukuStudent(1, '生徒A', 'tokyo')).toBeNull();
   });
 });
 
