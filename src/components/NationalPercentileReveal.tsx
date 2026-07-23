@@ -3,6 +3,7 @@
 import * as React from 'react';
 import { TrendingUp } from 'lucide-react';
 
+import { trackEvent, EVENTS } from '@/lib/track';
 import type { StatsMetric } from '@/lib/stats-aggregation';
 
 /**
@@ -34,6 +35,7 @@ export function NationalPercentileReveal({
   const [state, setState] = React.useState<'idle' | 'loading' | 'ready' | 'error'>('idle');
   const [national, setNational] = React.useState<{ percentile: number; count: number } | null>(null);
   const [prefecture, setPrefecture] = React.useState<{ percentile: number; count: number } | null>(null);
+  const viewTracked = React.useRef(false);
 
   React.useEffect(() => {
     if (typeof value !== 'number' || !Number.isFinite(value)) {
@@ -59,6 +61,19 @@ export function NationalPercentileReveal({
       cancelled = true;
     };
   }, [metric, value, prefectureCode]);
+
+  // ファネル計装: 実際に「全国◯%・県内◯位相当」を目にした回数のみを数える
+  // （n不足で何も表示できなかった場合はカウントしない＝解放後の実効到達率を測る）。
+  React.useEffect(() => {
+    if (viewTracked.current || state !== 'ready' || (!national && !prefecture)) return;
+    viewTracked.current = true;
+    trackEvent(EVENTS.PERCENTILE_VIEW, {
+      metric,
+      pref: prefectureCode ?? 'none',
+      hasNational: Boolean(national),
+      hasPrefecture: Boolean(prefecture),
+    });
+  }, [state, national, prefecture, metric, prefectureCode]);
 
   if (state === 'idle' || state === 'error') return null;
   // 全国・県内の両方が不足でも「まだデータが足りない」ことは誠実に見せる（何も出さずに消えない）。

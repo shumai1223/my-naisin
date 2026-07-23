@@ -92,6 +92,8 @@ export const EVENTS = {
   STATS_OPTIN_REVOKE: 'stats_optin_revoke', // 同意撤回
   STATS_SUBMIT_OK: 'stats_submit_ok', // /api/stats/submit が2xx＝サーバ受領まで実証
   STATS_SUBMIT_FAIL: 'stats_submit_fail', // 送信失敗（status付き）＝パイプ破断の検知
+  // ── パーセンタイル・フック（ZZ-1b・データフライホイールの投稿インセンティブ計装） ──
+  PERCENTILE_VIEW: 'percentile_view', // NationalPercentileRevealが全国/県内いずれかの実データを表示した（n不足のみの場合は含まない）
 } as const;
 
 export type AnalyticsEvent = (typeof EVENTS)[keyof typeof EVENTS];
