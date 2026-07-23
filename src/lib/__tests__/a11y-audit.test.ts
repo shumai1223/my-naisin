@@ -19,21 +19,10 @@ import {
 /**
  * アクセシブルな名前が無くても正当と判断済みの例外（ファイル相対パス:行番号）。
  * 追加する場合は「なぜ不要か・いつ是正するか」をコメントで残すこと（審査なしの抜け道にしない）。
- * 2026-07-08時点、全て「計算機フォーム」のスコープ外（お問い合わせ・検索・エラー報告・
- * 自由記述メモ）であり、次周以降の継続タスク候補。
+ * 2026-07-08時点に検出されていた11件（お問い合わせ・用語検索・エラー報告・目標メモ・保存メモ）は
+ * 2026-07-23にhtmlFor/id関連付けまたはaria-labelを追加して是正済み（現在は空リスト）。
  */
 const NO_ACCESSIBLE_NAME_EXEMPT: Record<string, string> = {
-  'src/app/contact/page.tsx:174': 'お問い合わせフォーム（計算機フォームのスコープ外・次周継続タスク候補）',
-  'src/app/contact/page.tsx:187': 'お問い合わせフォーム（同上）',
-  'src/app/contact/page.tsx:234': 'お問い合わせフォーム（同上）',
-  'src/app/contact/page.tsx:254': 'お問い合わせフォーム（同上）',
-  'src/app/contact/page.tsx:301': 'お問い合わせフォーム（同上）',
-  'src/app/glossary/GlossaryClient.tsx:67': '用語検索ボックス（計算機フォームのスコープ外・次周継続タスク候補。S-9でGLOSSARY_TERMSをlib/glossary-terms.tsへ切り出したため行番号が移動）',
-  'src/components/ErrorReportForm.tsx:82': 'エラー報告フォーム（同上）',
-  'src/components/ErrorReportForm.tsx:113': 'エラー報告フォーム（同上）',
-  'src/components/Result/PersonalGoalCard.tsx:187': '目標メモの自由記述編集欄（同上）',
-  'src/components/Result/PersonalGoalCard.tsx:228': '目標メモの自由記述編集欄（同上）',
-  'src/components/ResultSection.tsx:573': '結果保存時の任意メモ欄（同上。2026-07-23のTOTAL_SCORE_PROMOTIONS追加でファイル冒頭に行が増え528→573へ移動）',
 };
 
 /**

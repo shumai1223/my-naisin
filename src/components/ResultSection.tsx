@@ -574,6 +574,7 @@ export function ResultSection({
                     value={saveMemo}
                     onChange={(e) => onSaveMemoChange(e.target.value)}
                     disabled={!saveEnabled}
+                    aria-label="記録に名前を付ける（任意）"
                     placeholder="例：1学期中間、模試前 など"
                     className="mt-1 h-11 w-full rounded-2xl border border-slate-200 bg-white px-4 text-sm text-slate-800 shadow-sm outline-none placeholder:text-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 disabled:bg-slate-50 disabled:text-slate-400"
                   />

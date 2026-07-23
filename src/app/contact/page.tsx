@@ -168,10 +168,11 @@ export default function ContactPage() {
               /* General Contact Form */
               <form onSubmit={handleGeneralSubmit} className="space-y-4">
                 <div>
-                  <label className="mb-1 block text-xs font-medium text-slate-600">
+                  <label htmlFor="contact-general-name" className="mb-1 block text-xs font-medium text-slate-600">
                     お名前（ニックネーム可）
                   </label>
                   <input
+                    id="contact-general-name"
                     type="text"
                     name="name"
                     required
@@ -181,10 +182,11 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label className="mb-1 block text-xs font-medium text-slate-600">
+                  <label htmlFor="contact-general-email" className="mb-1 block text-xs font-medium text-slate-600">
                     メールアドレス
                   </label>
                   <input
+                    id="contact-general-email"
                     type="email"
                     name="email"
                     required
@@ -228,10 +230,11 @@ export default function ContactPage() {
 
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div>
-                    <label className="mb-1 block text-xs font-medium text-slate-600">
+                    <label htmlFor="contact-bug-device" className="mb-1 block text-xs font-medium text-slate-600">
                       使用端末
                     </label>
                     <select
+                      id="contact-bug-device"
                       required
                       value={bugDetails.device}
                       onChange={(e) => setBugDetails(prev => ({ ...prev, device: e.target.value }))}
@@ -248,10 +251,11 @@ export default function ContactPage() {
                   </div>
 
                   <div>
-                    <label className="mb-1 block text-xs font-medium text-slate-600">
+                    <label htmlFor="contact-bug-browser" className="mb-1 block text-xs font-medium text-slate-600">
                       ブラウザ
                     </label>
                     <select
+                      id="contact-bug-browser"
                       required
                       value={bugDetails.browser}
                       onChange={(e) => setBugDetails(prev => ({ ...prev, browser: e.target.value }))}
@@ -295,10 +299,11 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label className="mb-1 block text-xs font-medium text-slate-600">
+                  <label htmlFor="contact-bug-email" className="mb-1 block text-xs font-medium text-slate-600">
                     メールアドレス（任意・返信希望の場合）
                   </label>
                   <input
+                    id="contact-bug-email"
                     type="email"
                     value={bugDetails.email}
                     onChange={(e) => setBugDetails(prev => ({ ...prev, email: e.target.value }))}

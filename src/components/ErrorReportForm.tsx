@@ -76,10 +76,11 @@ export function ErrorReportForm({ prefectureCode, prefectureName }: ErrorReportF
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="mb-2 block text-sm font-medium text-slate-700">
+          <label htmlFor="error-report-type" className="mb-2 block text-sm font-medium text-slate-700">
             報告内容 <span className="text-red-500">*</span>
           </label>
           <select
+            id="error-report-type"
             name="type"
             required
             className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
@@ -107,10 +108,11 @@ export function ErrorReportForm({ prefectureCode, prefectureName }: ErrorReportF
         </div>
 
         <div>
-          <label className="mb-2 block text-sm font-medium text-slate-700">
+          <label htmlFor="error-report-email" className="mb-2 block text-sm font-medium text-slate-700">
             メールアドレス（任意）
           </label>
           <input
+            id="error-report-email"
             type="email"
             name="email"
             placeholder="確認が必要な場合にご連絡します"

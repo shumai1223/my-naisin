@@ -187,6 +187,7 @@ export function PersonalGoalCard() {
                   <input
                     value={editText}
                     onChange={(e) => setEditText(e.target.value)}
+                    aria-label="目標を編集"
                     className="flex-1 text-sm bg-white border border-slate-300 rounded-lg px-2 py-1 outline-none focus:border-rose-400"
                     autoFocus
                   />
@@ -229,6 +230,7 @@ export function PersonalGoalCard() {
               value={newGoal}
               onChange={(e) => setNewGoal(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && addGoal(newGoal)}
+              aria-label="新しい目標を入力"
               placeholder="目標を入力..."
               className="flex-1 text-sm border border-slate-300 rounded-xl px-3 py-2 outline-none focus:border-rose-400 focus:ring-2 focus:ring-rose-100"
               autoFocus
