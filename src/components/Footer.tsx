@@ -154,6 +154,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/genten-archive" className="hover:text-blue-600 flex items-center gap-1">
+                  一次ソース確認履歴アーカイブ（都道府県別・継続更新） <ChevronRight className="h-3 w-3 opacity-30" />
+                </Link>
+              </li>
+              <li>
                 <Link href="/hensachi/moshi/nittei" className="hover:text-blue-600 flex items-center gap-1">
                   模試日程データベース（都道府県別） <ChevronRight className="h-3 w-3 opacity-30" />
                 </Link>

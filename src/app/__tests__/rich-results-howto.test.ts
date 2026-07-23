@@ -71,6 +71,7 @@ const HOWTO_EXEMPT_ROUTES: Record<string, string> = {
   '/report/2026/[prefecture]': '白書2026の県別ダイジェスト（手順でなく県別データ分析。ArticleSchemaで対応）',
   '/naishin-oru': 'オール3/4/5内申点ハブページ（下位ページへの導線のみ）',
   '/naishin-oru/[grade]': 'オール3/4/5内申点の計算例ページ（計算結果一覧であり手順ではない）',
+  '/genten-archive': '一次ソース確認履歴アーカイブ（手順でなく確認記録の一覧。ArticleSchema+DatasetSchemaで対応）',
   '/nyushi-seido-henkou': '入試制度変更点まとめページ（手順でなくニュース速報一覧。ArticleSchemaで対応）',
   '/partner': '塾/パートナー向けLP（手順コンテンツなし）',
   '/pref/[code]': '県別注意点ページ（箇条書きの注意点であり手順ではない）',
