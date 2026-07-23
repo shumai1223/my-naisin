@@ -122,6 +122,35 @@ export default function TotalScoreHubPage() {
             </p>
           </section>
 
+          {/* 主要6都府県クイックアクセス（ZZ-8b・内部リンク強化。専用計算機を持つ都府県への直接リンク） */}
+          <section className="mb-10 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
+              <MapPin className="h-5 w-5 text-blue-600" />
+              主要都府県からすぐ計算する
+            </h2>
+            <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+              <Link href="/tokyo/total-score" className="rounded-xl border border-blue-100 bg-blue-50/50 px-3 py-2 text-center text-sm font-bold text-blue-700 hover:bg-blue-100">
+                東京都
+              </Link>
+              <Link href="/osaka/total-score" className="rounded-xl border border-blue-100 bg-blue-50/50 px-3 py-2 text-center text-sm font-bold text-blue-700 hover:bg-blue-100">
+                大阪府
+              </Link>
+              <Link href="/aichi/total-score" className="rounded-xl border border-blue-100 bg-blue-50/50 px-3 py-2 text-center text-sm font-bold text-blue-700 hover:bg-blue-100">
+                愛知県
+              </Link>
+              <Link href="/saitama/total-score" className="rounded-xl border border-blue-100 bg-blue-50/50 px-3 py-2 text-center text-sm font-bold text-blue-700 hover:bg-blue-100">
+                埼玉県
+              </Link>
+              <Link href="/chiba/total-score" className="rounded-xl border border-blue-100 bg-blue-50/50 px-3 py-2 text-center text-sm font-bold text-blue-700 hover:bg-blue-100">
+                千葉県
+              </Link>
+              <Link href="/fukuoka/total-score" className="rounded-xl border border-blue-100 bg-blue-50/50 px-3 py-2 text-center text-sm font-bold text-blue-700 hover:bg-blue-100">
+                福岡県
+              </Link>
+            </div>
+            <p className="mt-3 text-xs text-slate-400">その他の都道府県は下の一覧からお選びください。</p>
+          </section>
+
           {/* 計算機がある県 */}
           <section className="mb-10">
             <h2 className="mb-1 flex items-center gap-2 text-xl font-bold text-slate-800">
