@@ -299,6 +299,30 @@ export function SaveResultCTA({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [done]);
 
+  // ZZ-2d：保護者バトン/LINE導線への到達率の分母。result_view（結果セクション全体）とは別に、
+  // このブロック自体が視界に入った回数を1マウント1回だけ計測する（IntersectionObserver・
+  // CtaViewTracker/NationalPercentileRevealと同じ設計）。
+  const sectionRef = React.useRef<HTMLElement | null>(null);
+  const reachTrackedRef = React.useRef(false);
+  React.useEffect(() => {
+    const el = sectionRef.current;
+    if (!el || typeof IntersectionObserver === 'undefined') return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting && !reachTrackedRef.current) {
+            reachTrackedRef.current = true;
+            track(EVENTS.SAVE_RESULT_CTA_VIEW, { source, pref: prefectureCode ?? 'none' });
+            observer.disconnect();
+          }
+        }
+      },
+      { threshold: 0.4 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [source, prefectureCode]);
+
   const onCardClick = () => track(EVENTS.LEAD_MAGNET_CARD, { source, pref: prefectureCode ?? 'none' });
   const onParentMagnetClick = () =>
     track(EVENTS.LEAD_MAGNET_PARENT, { source, pref: prefectureCode ?? 'none', gap: gap ?? 0 });
@@ -307,6 +331,7 @@ export function SaveResultCTA({
 
   return (
     <section
+      ref={sectionRef}
       className={`relative overflow-hidden rounded-2xl border-2 border-sky-300 bg-gradient-to-br from-sky-50 via-blue-50 to-white p-6 shadow-lg shadow-sky-100/80 md:p-7 ${className}`}
     >
       {/* 視線を止めるアクセント光（2026-07-14: 淡色カードの連続で名簿CTAが埋没する👤指摘への強調。

@@ -51,6 +51,8 @@ export interface WeeklyKpiData {
     unlockTeaserView?: number;
     unlockGranted?: number;
     lineFriendClickStickyBar?: number;
+    /** ZZ-2d：SaveResultCTA（保護者バトン/LINE/メール受け皿）が視界に入った回数（到達率の分母）。 */
+    saveResultCtaView?: number;
   };
   /**
    * 走行中A/B実験のアーム別実測（GA4のexperiment_impression×primaryMetricを手動で集計・任意・V-6）。
@@ -162,6 +164,9 @@ export function formatWeeklyKpiEmail(data: WeeklyKpiData): { subject: string; te
     lines.push(`  stats_optin_view: ${fe.statsOptinView !== undefined ? `${fmt(fe.statsOptinView)}件` : unmeasured} ／ stats_optin_grant: ${fe.statsOptinGrant !== undefined ? `${fmt(fe.statsOptinGrant)}件` : unmeasured}${rate(fe.statsOptinGrant, fe.statsOptinView)}`);
     lines.push(`  unlock_teaser_view: ${fe.unlockTeaserView !== undefined ? `${fmt(fe.unlockTeaserView)}件` : unmeasured} ／ unlock_granted: ${fe.unlockGranted !== undefined ? `${fmt(fe.unlockGranted)}件` : unmeasured}${rate(fe.unlockGranted, fe.unlockTeaserView)}`);
     lines.push(`  line_friend_click（sticky-bar経由）: ${fe.lineFriendClickStickyBar !== undefined ? `${fmt(fe.lineFriendClickStickyBar)}件` : unmeasured}`);
+    if (fe.saveResultCtaView !== undefined) {
+      lines.push(`  save_result_cta_view（保護者バトン/LINE導線への到達・ZZ-2d）: ${fmt(fe.saveResultCtaView)}件`);
+    }
   }
   lines.push('');
   lines.push('■ 名簿velocity');

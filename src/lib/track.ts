@@ -94,6 +94,8 @@ export const EVENTS = {
   STATS_SUBMIT_FAIL: 'stats_submit_fail', // 送信失敗（status付き）＝パイプ破断の検知
   // ── パーセンタイル・フック（ZZ-1b・データフライホイールの投稿インセンティブ計装） ──
   PERCENTILE_VIEW: 'percentile_view', // NationalPercentileRevealが全国/県内いずれかの実データを表示した（n不足のみの場合は含まない）
+  // ── 保護者導線の到達計装（ZZ-2d・全計算面の結果画面から保護者バトン/LINE導線への到達率の分母） ──
+  SAVE_RESULT_CTA_VIEW: 'save_result_cta_view', // SaveResultCTA（保護者バトン/LINE/メール受け皿）が視界に入った（result_viewとは別＝結果セクション全体でなくこのブロック単体の到達）
 } as const;
 
 export type AnalyticsEvent = (typeof EVENTS)[keyof typeof EVENTS];

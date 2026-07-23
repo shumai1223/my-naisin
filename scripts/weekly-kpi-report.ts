@@ -34,6 +34,7 @@
  *  --unlock-teaser-view=<件数>     unlock_teaser_view（今週）
  *  --unlock-granted=<件数>         unlock_granted（今週）
  *  --line-friend-click-sticky=<件数>  line_friend_click（StickyConvertBar経由・今週）
+ *  --save-result-cta-view=<件数>      save_result_cta_view（SaveResultCTA到達・ZZ-2d・今週）
  *
  * 実験ポートフォリオ（V-6・任意）:
  *  --experiment-data=<expId=armId:impressions:conversions,armId:impressions:conversions;expId2=...>
@@ -137,7 +138,14 @@ function parseFunnelByPlacement(raw: unknown): PlacementFunnel[] | undefined {
 
 /** V-6の新規ファネルイベント引数を1つでも渡していれば集約オブジェクトを返す。1つも無ければundefined（セクション自体を出さない）。 */
 function buildNewFunnelEvents(a: Record<string, string | boolean>): WeeklyKpiData['newFunnelEvents'] {
-  const keys = ['stats-optin-view', 'stats-optin-grant', 'unlock-teaser-view', 'unlock-granted', 'line-friend-click-sticky'] as const;
+  const keys = [
+    'stats-optin-view',
+    'stats-optin-grant',
+    'unlock-teaser-view',
+    'unlock-granted',
+    'line-friend-click-sticky',
+    'save-result-cta-view',
+  ] as const;
   if (!keys.some((k) => a[k] !== undefined)) return undefined;
   return {
     statsOptinView: a['stats-optin-view'] !== undefined ? num(a['stats-optin-view']) : undefined,
@@ -145,6 +153,7 @@ function buildNewFunnelEvents(a: Record<string, string | boolean>): WeeklyKpiDat
     unlockTeaserView: a['unlock-teaser-view'] !== undefined ? num(a['unlock-teaser-view']) : undefined,
     unlockGranted: a['unlock-granted'] !== undefined ? num(a['unlock-granted']) : undefined,
     lineFriendClickStickyBar: a['line-friend-click-sticky'] !== undefined ? num(a['line-friend-click-sticky']) : undefined,
+    saveResultCtaView: a['save-result-cta-view'] !== undefined ? num(a['save-result-cta-view']) : undefined,
   };
 }
 

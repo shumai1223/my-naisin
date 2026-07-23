@@ -238,6 +238,18 @@ describe('formatWeeklyKpiEmail', () => {
       const { text } = formatWeeklyKpiEmail(data);
       expect(text).toContain('stats_optin_view: 10件 ／ stats_optin_grant: 未計測（手動値待ち）');
     });
+
+    it('saveResultCtaView（ZZ-2d）を渡すとその行だけ表示される', () => {
+      const data = baseData({ newFunnelEvents: { statsOptinView: 10, saveResultCtaView: 300 } });
+      const { text } = formatWeeklyKpiEmail(data);
+      expect(text).toContain('save_result_cta_view（保護者バトン/LINE導線への到達・ZZ-2d）: 300件');
+    });
+
+    it('saveResultCtaView未指定なら行自体を出さない', () => {
+      const data = baseData({ newFunnelEvents: { statsOptinView: 10 } });
+      const { text } = formatWeeklyKpiEmail(data);
+      expect(text).not.toContain('save_result_cta_view');
+    });
   });
 
   describe('実験ポートフォリオ（V-6：走行中A/BのjudgeWinner結線）', () => {
