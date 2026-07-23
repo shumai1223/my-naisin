@@ -50,7 +50,7 @@ export interface ExperimentDef {
   /** arms[0] を対照群（control）とみなす。 */
   arms: ExperimentArm[];
   /** 効きを突合する主要指標（GA4イベント）。 */
-  primaryMetric: 'cta_view' | 'affiliate_click' | 'lead_submit' | 'line_friend_click' | 'unlock_granted';
+  primaryMetric: 'cta_view' | 'affiliate_click' | 'lead_submit' | 'line_friend_click' | 'unlock_granted' | 'stats_optin_grant';
   /** 関係する設置面（勝者を lead-config に昇格させる際の対象）。 */
   placement?: LeadPlacement;
   /** decided のとき採用したアーム。 */
@@ -201,6 +201,26 @@ export const EXPERIMENTS: ExperimentDef[] = [
     primaryMetric: 'unlock_granted',
     note: 'UnlockGateのteaserTitle/teaserBody未指定時（=全設置面共通）の既定文言を差し替える。分母となるunlock_teaser_viewも同時計測。送信先・解放条件（共有 or LINE追加）は3アームとも同一。',
     startedAt: '2026-07-12',
+  },
+  {
+    // ZZ-1c（2026-07-24）：匿名統計オプトインの価値交換コピーA/B。StatsOptInが参照。
+    // ZZ-1b（NationalPercentileReveal）で「投稿すると立ち位置が見える」体験を実装したので、
+    // オプトイン時点の文言でもその見返りを先出しで明示すれば同意率が上がるはずという仮説。
+    id: 'stats-optin-value-exchange-2026',
+    hypothesis: '匿名統計オプトインの文言を「投稿すると全国比較の立ち位置（パーセンタイル）が見られる」という具体的な見返り明示にすると、既定の汎用文言（分布データが正確になる）より同意率（stats_optin_grant）が上がる。',
+    status: 'running',
+    arms: [
+      { id: 'control', label: '既定文言（汎用訴求：分布データが正確になる）' },
+      {
+        id: 'unlock-frame',
+        label: '解禁フレーム（見返り明示）',
+        heading: '投稿すると、あなたの立ち位置がわかります',
+        body: '同意すると、全国・県内の協力者データと比べたあなたの立ち位置（パーセンタイル）がすぐに見られるようになります。送られるのは計算結果の数値のみで、氏名など個人を特定できる情報は一切含みません。同意はいつでも撤回できます。',
+      },
+    ],
+    primaryMetric: 'stats_optin_grant',
+    note: 'StatsOptInが参照。分母=stats_optin_view・分子=stats_optin_grant（いずれもvariantパラメータ付きで送出・variant別集計が可能）。全計算面（hensachi/naishin/total-score等）で母数を稼ぐ。',
+    startedAt: '2026-07-24',
   },
   {
     // 実験3（H8）：承認後のFP A/B（保険コンパス vs マネードクター）。両者 pending のため承認まで paused。

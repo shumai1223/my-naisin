@@ -14,7 +14,13 @@ import { BarChart3, ShieldCheck } from 'lucide-react';
 import { readStatsConsent, grantStatsConsent, revokeStatsConsent } from '@/lib/stats-consent';
 import { submitStatsResult } from '@/lib/stats-submit-client';
 import { trackEvent, EVENTS } from '@/lib/track';
+import { useExperiment } from '@/components/ab/useExperiment';
+import { getExperiment, type ExperimentArm } from '@/lib/experiments';
 import type { StatsMetric } from '@/lib/stats-aggregation';
+
+/** ZZ-1c（投稿インセンティブUX+A/B）: 価値交換コピーの実験ID。レジストリに無くても壊さないフォールバック付き。 */
+const STATS_OPTIN_EXPERIMENT_ID = 'stats-optin-value-exchange-2026';
+const FALLBACK_ARMS: ExperimentArm[] = [{ id: 'control', label: '既定' }];
 
 interface StatsOptInProps {
   className?: string;
@@ -31,6 +37,14 @@ export function StatsOptIn({ className = '', metric, value, maxValue, prefecture
   const submittedSignature = useRef<string | null>(null);
   const viewTracked = useRef(false);
 
+  const def = getExperiment(STATS_OPTIN_EXPERIMENT_ID);
+  const arms = def?.arms?.length ? def.arms : FALLBACK_ARMS;
+  const variantId = useExperiment(
+    STATS_OPTIN_EXPERIMENT_ID,
+    arms.map((a) => ({ id: a.id, weight: a.weight }))
+  );
+  const arm = arms.find((a) => a.id === variantId) ?? arms[0];
+
   useEffect(() => {
     const state = readStatsConsent();
     setGranted(state.granted);
@@ -42,8 +56,8 @@ export function StatsOptIn({ className = '', metric, value, maxValue, prefecture
   useEffect(() => {
     if (viewTracked.current || !metric || typeof value !== 'number' || !Number.isFinite(value)) return;
     viewTracked.current = true;
-    trackEvent(EVENTS.STATS_OPTIN_VIEW, { metric, pref: prefectureCode ?? 'none' });
-  }, [metric, value, prefectureCode]);
+    trackEvent(EVENTS.STATS_OPTIN_VIEW, { metric, pref: prefectureCode ?? 'none', variant: variantId });
+  }, [metric, value, prefectureCode, variantId]);
 
   useEffect(() => {
     if (!granted || !metric || typeof value !== 'number' || !Number.isFinite(value)) return;
@@ -58,14 +72,17 @@ export function StatsOptIn({ className = '', metric, value, maxValue, prefecture
       const state = revokeStatsConsent();
       setGranted(state.granted);
       setConsentedAt(state.consentedAt);
-      trackEvent(EVENTS.STATS_OPTIN_REVOKE, { metric: metric ?? 'none' });
+      trackEvent(EVENTS.STATS_OPTIN_REVOKE, { metric: metric ?? 'none', variant: variantId });
     } else {
       const state = grantStatsConsent();
       setGranted(state.granted);
       setConsentedAt(state.consentedAt);
-      trackEvent(EVENTS.STATS_OPTIN_GRANT, { metric: metric ?? 'none', pref: prefectureCode ?? 'none' });
+      trackEvent(EVENTS.STATS_OPTIN_GRANT, { metric: metric ?? 'none', pref: prefectureCode ?? 'none', variant: variantId });
     }
   };
+
+  const heading = arm.heading ?? '匿名で全国統計に協力する（任意）';
+  const body = arm.body;
 
   return (
     <div
@@ -87,12 +104,16 @@ export function StatsOptIn({ className = '', metric, value, maxValue, prefecture
             <span className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full ${granted ? 'bg-emerald-100' : 'bg-sky-100'}`}>
               <BarChart3 className={`h-4 w-4 ${granted ? 'text-emerald-600' : 'text-sky-600'}`} />
             </span>
-            匿名で全国統計に協力する（任意）
+            {heading}
           </span>
           <span className="mt-1.5 block text-xs leading-relaxed text-slate-600">
-            協力が増えるほど、あなたと同じ都道府県・学年の分布データが正確になります。送られるのは
-            <strong className="text-slate-800">計算結果の数値のみ</strong>
-            ——氏名など個人を特定できる情報は一切収集しません。同意はいつでも撤回できます。
+            {body ?? (
+              <>
+                協力が増えるほど、あなたと同じ都道府県・学年の分布データが正確になります。送られるのは
+                <strong className="text-slate-800">計算結果の数値のみ</strong>
+                ——氏名など個人を特定できる情報は一切収集しません。同意はいつでも撤回できます。
+              </>
+            )}
           </span>
         </span>
       </label>
