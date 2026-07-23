@@ -55,6 +55,71 @@ My Naishin（https://my-naishin.com）が使用する内申点・総合得点の
 「信頼の堀」設計）。ただし、内申点単体の計算（学年別倍率・実技倍率等、`src/lib/prefectures.ts`）は
 全47都道府県で提供しています。
 
+### 内申点単体計算（47都道府県共通・`src/lib/prefectures.ts`）
+
+総合得点計算機（第1層・第2層）とは別に、内申点単体の計算（学年別倍率・5教科/実技倍率・満点）は
+`src/lib/prefectures.ts`の`PREFECTURES`配列で全47都道府県分を提供しています。この計算は2つの軸を
+掛け合わせます——①学年ごとの重み（`gradeMultipliers`。例: 北海道は中1・中2×2倍、中3×3倍）と
+②5教科と実技4教科（音楽・美術・保体・技家）の間の重み（下表の「5教科倍率」「実技倍率」＝
+`coreMultiplier`/`practicalMultiplier`）。下表は②のみを示すため、学年別の詳細な重みは
+各県の`description`/`gradeMultipliers`フィールドも合わせてご確認ください。実選抜での換算満点が
+ツール内部値と異なる県（岡山・香川・大分）は二段表記にしています。
+
+| 県 | 5教科倍率 | 実技倍率 | 内申点満点 | 出典 |
+|---|---|---|---|---|
+| 北海道 | 1 | 1 | 315点 | [北海道教育委員会 入学者選抜](https://www.dokyoi.pref.hokkaido.lg.jp/hk/kki/) |
+| 青森県 | 1 | 1 | 135点 | [青森県教育委員会 入学者選抜](https://www.pref.aomori.lg.jp/soshiki/kyoiku/e-gakyo/nyuushi.html) |
+| 岩手県 | 2 | 3 | 660点 | [岩手県教育委員会 入学者選抜実施概要](https://www.pref.iwate.jp/kyouikubunka/kyouiku/gakkou/senbatsu/1091420.html) |
+| 宮城県 | 1 | 2 | 195点 | [宮城県教育委員会 入試・入学関連](https://www.pref.miyagi.jp/site/sub-jigyou/list680.html) |
+| 秋田県 | 1 | 2 | 195点 | [秋田県 公立高等学校入学者選抜実施要項](https://www.pref.akita.lg.jp/pages/archive/91551) |
+| 山形県 | 1 | 1 | 45点 | [山形県教育委員会 入学者選抜](https://www.pref.yamagata.jp/documents/42443/r8kouritsukoutougakkounyuugakusyasennbatsujissiyoukou.pdf) |
+| 福島県 | 1 | 2 | 195点 | [福島県 県立高等学校入学者選抜実施要綱](https://www.pref.fukushima.lg.jp/uploaded/attachment/709972.pdf) |
+| 茨城県 | 1 | 1 | 135点 | [茨城県教育委員会 入学者選抜実施要項](https://kyoiku.pref.ibaraki.jp/gakko/nyushi/highschool/youkou2026/) |
+| 栃木県 | 1 | 1 | 135点 | [栃木県教育委員会 入学者選抜実施細則](https://www.pref.tochigi.lg.jp/m04/r08/documents/20250910185058.pdf) |
+| 群馬県 | 1 | 1 | 135点 | [群馬県教育委員会 入学者選抜実施要項](https://www.pref.gunma.jp/site/kyouiku/715449.html) |
+| 埼玉県 | 1 | 1 | 180点 | [埼玉県教育委員会 入試情報](https://www.pref.saitama.lg.jp/f2208/r8nyuushi-jissiyoukou.html) |
+| 千葉県 | 1 | 1 | 135点 | [千葉県教育委員会 入試情報](https://www.pref.chiba.lg.jp/kyouiku/shidou/nyuushi/koukou/r8/r8jissiyoko.html) |
+| 東京都 | 1 | 2 | 65点 | [東京都教育委員会「令和8年度入学者選抜実施要綱」](https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/exam/release20250925_r8yoko.html) |
+| 神奈川県 | 1 | 1 | 135点 | [神奈川県教育委員会 入試情報](https://www.pref.kanagawa.jp/docs/hr4/senbatsu2024.html) |
+| 新潟県 | 1 | 1 | 135点 | [新潟県 公立高等学校入学者選抜要項](https://www.pref.niigata.lg.jp/uploaded/attachment/472931.pdf) |
+| 富山県 | 1 | 1 | 135点 | [富山県 県立高等学校入学者選抜](https://www.pref.toyama.jp/300201/kyouiku/kenritsukoukou/08senbatsu.html) |
+| 石川県 | 1 | 1 | 135点 | [石川県教育委員会 公立高等学校入学者募集要綱](https://www.pref.ishikawa.lg.jp/kyoiku/gakkou/senbatu/documents/r8bosyuyoko.pdf) |
+| 福井県 | 1 | 1 | 45点 | [福井県教育委員会 入学者選抜](https://www.pref.fukui.lg.jp/doc/koukou/) |
+| 山梨県 | 2 | 3 | 330点 | [山梨県 高校入試情報](https://www.pref.yamanashi.jp/kyouiku-kikaku/nyuusi/nyusitop.html) |
+| 長野県 | 1 | 1 | 45点 | [長野県教育委員会 公立高等学校入学者選抜情報](https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/r8konyushi.html) |
+| 岐阜県 | 1 | 1 | 180点 | [岐阜県 県立高等学校入学者選抜](https://www.pref.gifu.lg.jp/site/edu/61428.html) |
+| 静岡県 | 1 | 1 | 45点 | [静岡県 公立高等学校入学者選抜関係資料](https://www.pref.shizuoka.jp/kodomokyoiku/school/kyoiku/1003764/1003891/index.html) |
+| 愛知県 | 1 | 1 | 90点 | [愛知県教育委員会 入学者選抜](https://www.pref.aichi.jp/soshiki/kotogakko/0000027366.html) |
+| 三重県 | 1 | 1 | 45点 | [三重県 県立高等学校入学者選抜実施要項](https://www.pref.mie.lg.jp/KOKOKYO/HP/m0204200379.htm) |
+| 滋賀県 | 1 | 1 | 135点 | [滋賀県教育委員会 県立高等学校入学者選抜](https://www.pref.shiga.lg.jp/edu/nyuushi/high/senbatsu/105597.html) |
+| 京都府 | 1 | 2 | 195点 | [京都府教育委員会 公立高等学校入学者選抜](https://www.kyoto-be.ne.jp/koukyou/cms/?p=6024) |
+| 大阪府 | 1 | 1 | 450点 | [大阪府教育庁 入試情報](https://www.pref.osaka.lg.jp/o180040/kotogakko/gakuji-g3/r08_kokosenbatsu.html) |
+| 兵庫県 | 4 | 7.5 | 250点 | [兵庫県教育委員会 入学者選抜](https://www.hyogo-c.ed.jp/~koko-bo/) |
+| 奈良県 | 1 | 1 | 144点 | [奈良県 高校入試（入学者選抜）](https://www.pref.nara.lg.jp/n167/66542.html) |
+| 和歌山県 | 1 | 1 | 180点 | [和歌山県教育委員会 県立高等学校入学者選抜実施要項](https://www.pref.wakayama.lg.jp/prefg/500200/d00220765.html) |
+| 鳥取県 | 1 | 2 | 65点 | [鳥取県教育委員会 入学者選抜](https://www.pref.tottori.lg.jp/www/contents/1376986345355/index.html) |
+| 島根県 | 1 | 1 | 180点 | [島根県 高校入学者選抜関連情報](https://www.pref.shimane.lg.jp/education/kyoiku/senbatsu/senbatsu_info/) |
+| 岡山県 | 1 | 2 | 195点（実選抜換算200点） | [岡山県 県立高等学校の入学者選抜](https://www.pref.okayama.jp/site/16/913706.html) |
+| 広島県 | 1 | 1 | 225点 | [広島県教育委員会 公立高等学校入学者選抜実施要項](https://www.pref.hiroshima.lg.jp/site/kyouiku/07senior-2nd-r07-nyuushi-r07-kou-r07-youkou-r07kou-youkou.html) |
+| 山口県 | 1 | 1 | 135点 | [山口県 公立高等学校入学者選抜実施大綱](https://www.pref.yamaguchi.lg.jp/site/kyouiku/310448.html) |
+| 徳島県 | 1 | 2 | 195点 | [徳島県教育委員会 公立高等学校生徒募集選抜要項](https://www.pref.tokushima.lg.jp/file/attachment/937096.pdf) |
+| 香川県 | 2 | 4 | 390点（実選抜換算220点） | [香川県教育委員会 公立高校入試](https://www.pref.kagawa.lg.jp/kenkyoui/kokokyoiku/nyushi/chugaku-koko/examination02.html) |
+| 愛媛県 | 1 | 1 | 135点 | [愛媛県教育委員会 県立学校入学者選抜等関連情報](https://ehime-kyoiku.esnet.ed.jp/koukou/nyuusi/r08nyuusi) |
+| 高知県 | 1 | 2 | 195点 | [高知県 公立高等学校入学者選抜](https://www.pref.kochi.lg.jp/doc/r8_koukounyushi_main/) |
+| 福岡県 | 1 | 1 | 45点 | [福岡県教育委員会 入学者選抜](https://www.pref.fukuoka.lg.jp/kyouiku/) |
+| 佐賀県 | 1 | 1 | 135点 | [佐賀県 県立高等学校入学者選抜実施要項](https://www.pref.saga.lg.jp/kyouiku/kiji003115881/index.html) |
+| 長崎県 | 1 | 1 | 135点 | [長崎県 公立高等学校入学者選抜実施要領](https://www.pref.nagasaki.jp/doc/page-746842.html) |
+| 熊本県 | 1 | 1 | 180点 | [熊本県 県立高等学校入学者選抜要項](https://www.pref.kumamoto.jp/site/kyouiku/244675.html) |
+| 大分県 | 2 | 4 | 520点（実選抜換算260点） | [大分県 県立高等学校入学者選抜実施要項](https://www.pref.oita.jp/site/kyoiku/r08koukounyushi.html) |
+| 宮崎県 | 1 | 1 | 135点 | [宮崎県 県立高等学校生徒募集（入学者選抜）](https://www.pref.miyazaki.lg.jp/kokokyoiku/kyoikukosodate/kyoiku/20250618193442.html) |
+| 鹿児島県 | 2 | 20 | 450点 | [鹿児島県教育委員会 入学者選抜](https://www.pref.kagoshima.jp/kyoiku-bunka/school/koukou/nyushi/) |
+| 沖縄県 | 1 | 1.5 | 165点 | [沖縄県 県立高等学校入試関連情報](https://www.pref.okinawa.lg.jp/kyoiku/gakko/1008883/1008887/1035054.html) |
+
+対応関係の抽出は転記ミスを避けるため`src/lib/prefectures.ts`を正規表現で機械抽出して生成しています
+（手動転記は誤記リスクが高いため不採用。前回セッションで試みた`tsx`経由のTS ESモジュールimportは
+このloop環境で`export const`が認識されない既知の不具合があり断念し、[[fable5-loop-protocol]]記載の
+grep/正規表現ベースの抽出に切り替えて解決しました）。
+
 ## 検証可能性を担保するテスト群
 
 - `src/lib/total-score/__tests__/*.test.ts`（県別）: 各県の計算式が既知の入力に対して期待通りの
