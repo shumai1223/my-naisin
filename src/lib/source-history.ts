@@ -18,7 +18,17 @@ export interface SourceSnapshot {
 }
 
 // 実際に確認・変更を検知した際にのみ追記する（日付・内容の捏造禁止）。
-const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {};
+const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
+  aichi: [
+    {
+      date: '2026-07-23',
+      sourceUrl: 'https://www.pref.aichi.jp/soshiki/kotogakko/0000027366.html',
+      sourceTitle:
+        '愛知県教育委員会・名古屋市教育委員会・豊橋市教育委員会「調査書情報の変更点」（令和8年4月発行）',
+      note: '令和9(2027)年度入試から調査書の「性別」「行動の記録」「出欠の記録」を削除。内申点の算出に使う「学習の記録（評定）」欄・計算方法自体には変更なしと確認（/nyushi-seido-henkouにも掲載）',
+    },
+  ],
+};
 
 export function getSourceHistory(code: string): SourceSnapshot[] {
   const pref = PREFECTURES.find((p) => p.code === code);
