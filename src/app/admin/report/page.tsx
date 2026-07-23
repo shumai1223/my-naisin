@@ -30,6 +30,7 @@ import { AFFILIATES, type AffiliateId } from '@/lib/affiliates';
 import { TrendChart } from '@/components/admin/TrendChart';
 import { STATS_METRICS, STATS_MIN_SAMPLE_SIZE, computeAggregate, type StatsMetric } from '@/lib/stats-aggregation';
 import { getStatsValues } from '@/lib/stats-db';
+import { getAdoptionDomainSummary } from '@/lib/adoption-radar-db';
 
 const STATS_METRIC_LABEL: Record<StatsMetric, string> = {
   naishin: '内申点',
@@ -46,6 +47,13 @@ const FUNNEL_STAGE_LABEL: Record<string, string> = {
   affiliate_click: 'アフィリクリック',
   line_friend_click: 'LINE追加',
   lead_submit: '名簿登録',
+};
+
+/** ZZ-6e・採用レーダーのsource値→日本語ラベル（adoption-radar-db.tsのAdoptionSourceと対応）。 */
+const ADOPTION_SOURCE_LABEL: Record<string, string> = {
+  embed_naishin: '埋め込み(内申点)',
+  embed_hensachi: '埋め込み(偏差値)',
+  api_anonymous: 'API直呼出(無キー)',
 };
 
 /**
@@ -212,6 +220,7 @@ export default async function AdminReportPage({
     leadDaily,
     apiFunnel,
     statsValuesByMetric,
+    adoptionDomains,
   ] = await Promise.all([
     getClickSummary(days, to),
     getClickTrend(trendDays, trendView, to),
@@ -226,6 +235,7 @@ export default async function AdminReportPage({
     getLeadDailyCounts(56),
     getFreemiumFunnel(),
     Promise.all(STATS_METRICS.map((metric) => getStatsValues(metric))),
+    getAdoptionDomainSummary(days),
   ]);
 
   // 匿名統計（S-1）の収集状況：件数のみ（k-匿名性のため集計値そのものはここでは出さない）。
@@ -364,6 +374,7 @@ export default async function AdminReportPage({
   const maxPlacement = Math.max(1, ...byPlacement.map((p) => p.clicks));
   const maxPref = Math.max(1, ...byPref.map((p) => p.clicks));
   const maxRef = Math.max(1, ...byReferer.map((p) => p.clicks));
+  const maxAdoption = Math.max(1, ...adoptionDomains.map((d) => d.hits));
   const maxSource = Math.max(1, ...leads.bySource.map((s) => s.n));
   const maxCombo = Math.max(1, ...combos.map((c) => c.clicks));
 
@@ -843,6 +854,37 @@ export default async function AdminReportPage({
                   </div>
                   <span className="w-8 shrink-0 text-right tabular-nums text-slate-600">{d.clicks}</span>
                   <span className="w-16 shrink-0 text-right text-xs tabular-nums text-emerald-700">{yen(d.confirmed)}</span>
+                </div>
+              ))
+            )}
+          </div>
+        </div>
+
+        {/* 採用レーダー（ZZ-6e・埋め込み/無キーAPIのReferer/Originドメイン検出） */}
+        <div className="mt-6">
+          <h2 className={sectionTitle}>採用レーダー — 誰が既に自分を組み込んでいるか（直近{days}日）</h2>
+          <p className="mt-0.5 text-[11px] leading-relaxed text-slate-400">
+            /embedウィジェットのiframe読込・APIキー無しの第三者呼出をReferer/Originドメインで検出。
+            検出ドメインは①既に価値を認めている温かいB2Bリード ②クレジットリンク未設置ならリンク依頼の最優先対象。
+            生IPは一切記録しない。連絡・確認は👤が行う（このセクションは検出のみ）。
+          </p>
+          <div className="mt-2 space-y-2 rounded-xl border border-slate-200 bg-white p-3 shadow-sm">
+            {adoptionDomains.length === 0 ? (
+              <p className="text-sm text-slate-400">
+                まだ検出なし（D1未バインド、または期間内に外部ドメインからの呼出なし）。
+              </p>
+            ) : (
+              adoptionDomains.map((d, i) => (
+                <div key={`${d.domain}-${d.source}-${i}`} className="flex items-center gap-3 text-sm">
+                  <span className="w-40 shrink-0 truncate font-mono text-xs font-bold text-slate-800">{d.domain}</span>
+                  <span className="w-32 shrink-0 truncate text-[11px] text-slate-500">
+                    {ADOPTION_SOURCE_LABEL[d.source] ?? d.source}
+                  </span>
+                  <div className="flex-1">
+                    <Bar value={d.hits} max={maxAdoption} className="bg-fuchsia-400" />
+                  </div>
+                  <span className="w-10 shrink-0 text-right tabular-nums text-slate-600">{d.hits}</span>
+                  <span className="w-20 shrink-0 text-right text-[11px] text-slate-400">{d.last_seen?.slice(5, 10)}</span>
                 </div>
               ))
             )}

@@ -10,6 +10,7 @@
  * 計算は素内申＝合計・評定平均＝平均のみ（全都道府県で正しい単純式）。
  * 県別の「換算内申」はCTAから本家サイトへ誘導する設計（正確性も担保）。
  */
+import { extractExternalDomain, persistAdoptionHit } from '@/lib/adoption-radar-db';
 
 const HTML = `<!DOCTYPE html>
 <html lang="ja">
@@ -104,7 +105,13 @@ const HTML = `<!DOCTYPE html>
 </body>
 </html>`;
 
-export async function GET() {
+export async function GET(request: Request) {
+  // 採用レーダー（ZZ-6e）: どの外部サイトがこのiframeを貼っているかをRefererドメインから検出。
+  // fire-and-forget（await しない）＝レスポンスを一切遅延させない。生IPは扱わない。
+  void persistAdoptionHit({
+    domain: extractExternalDomain(request.headers.get('referer')),
+    source: 'embed_naishin',
+  });
   return new Response(HTML, {
     headers: {
       'Content-Type': 'text/html; charset=utf-8',

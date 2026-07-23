@@ -7,6 +7,7 @@
  * 偏差値 = 50 + 10 ×（点数 − 平均点）÷ 標準偏差。標準偏差は既定15固定の簡易版）。
  * naishin版と同じ構造（自己完結HTML・Powered byクレジット・本家CTA）を踏襲。
  */
+import { extractExternalDomain, persistAdoptionHit } from '@/lib/adoption-radar-db';
 
 const HTML = `<!DOCTYPE html>
 <html lang="ja">
@@ -92,7 +93,13 @@ const HTML = `<!DOCTYPE html>
 </body>
 </html>`;
 
-export async function GET() {
+export async function GET(request: Request) {
+  // 採用レーダー（ZZ-6e）: どの外部サイトがこのiframeを貼っているかをRefererドメインから検出。
+  // fire-and-forget（await しない）＝レスポンスを一切遅延させない。生IPは扱わない。
+  void persistAdoptionHit({
+    domain: extractExternalDomain(request.headers.get('referer')),
+    source: 'embed_hensachi',
+  });
   return new Response(HTML, {
     headers: {
       'Content-Type': 'text/html; charset=utf-8',

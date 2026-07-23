@@ -13,6 +13,7 @@
 
 import { CORS_HEADERS } from './api-cors';
 import { hashApiKey, lookupApiKey, recordApiUsage } from './api-keys';
+import { extractExternalDomain, persistAdoptionHit } from './adoption-radar-db';
 import {
   getTierPolicy,
   isWithinMonthlyQuota,
@@ -207,6 +208,13 @@ export async function gateApiRequest(request: Request, options: GateOptions = {}
       },
       cachePrivate: false,
     };
+  }
+
+  // 採用レーダー（ZZ-6e）: キー無し・自サイトUI以外（＝第三者サイトからの直接呼出）を検出。
+  // Origin優先（CORSリクエストでブラウザが強制付与・偽装不能）、無ければReferer。fire-and-forget。
+  const adoptionDomain = extractExternalDomain(request.headers.get('origin') ?? request.headers.get('referer'));
+  if (adoptionDomain) {
+    void persistAdoptionHit({ domain: adoptionDomain, source: 'api_anonymous', path: new URL(request.url).pathname });
   }
 
   // 第三者（CORS/サーバーサイド/直叩き）：エッジで本当に効く分速＋アイソレート内メモリ窓の二段構え。
