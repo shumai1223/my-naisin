@@ -1061,7 +1061,7 @@ export default function HyoteiHeikinPage() {
                 <div>
                   <h3 className="font-bold text-red-900 mb-1">行動3：実技教科を捨てる</h3>
                   <p className="text-sm text-red-800 leading-relaxed">
-                    「美術は受験で使わないからどうでもいい」は最悪。<strong>東京都・神奈川県など多くの地域で実技4教科は内申点が2倍計算</strong>になります。実技で評定3を取り続けると、主要5教科を1〜2上げるよりダメージが大きい。
+                    「美術は受験で使わないからどうでもいい」は最悪。<strong>東京都・宮城県など多くの地域で実技4教科は内申点が2倍計算</strong>になります。実技で評定3を取り続けると、主要5教科を1〜2上げるよりダメージが大きい。
                   </p>
                 </div>
               </div>
