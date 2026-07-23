@@ -277,6 +277,26 @@ curl "${SITE_URL}/api/total-score/hyogo?academicRaw=420&reportRaw=200"`;
           </p>
         </section>
 
+        <section className="mb-10 rounded-2xl border border-slate-200 bg-white p-6">
+          <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
+            <Scale className="h-5 w-5 text-slate-500" />
+            計算ロジックの検証可能性
+          </h2>
+          <p className="text-sm leading-relaxed text-slate-600">
+            「この計算式は本当に正しいのか」を確認できるよう、実装コードと都道府県教育委員会の一次ソースの
+            対応関係をまとめた技術文書をGitHubで公開しています。各県の計算式・出典URL・確認日、および
+            計算式の一貫性を検証するテストコードへのポインタを含みます。
+          </p>
+          <a
+            href="https://github.com/shumai1223/my-naisin/blob/main/docs/calculation-verification-2026.md"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-indigo-600 hover:underline"
+          >
+            計算ロジック検証ガイドを見る（GitHub） <ExternalLink className="h-3.5 w-3.5" />
+          </a>
+        </section>
+
         {/* REST API */}
         <section className="mb-10">
           <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
