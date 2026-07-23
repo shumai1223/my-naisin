@@ -105,7 +105,7 @@ export function ParentShareLinkButton({
 
     // ZZ-5b：Web Share API自体はどのアプリが選ばれたかを教えないため、'native'は
     // 「OSの共有シートを開いた」までの精度（実際の送り先はLINE/Messages等が混在する）。
-    const medium = typeof navigator !== 'undefined' && navigator.share ? 'native' : 'copy';
+    const medium = typeof navigator !== 'undefined' && typeof navigator.share === 'function' ? 'native' : 'copy';
     track(EVENTS.SHARE_TO_PARENT, {
       pref: ctx.prefectureCode ?? 'none',
       metric: ctx.metricLabel ?? '内申点',
@@ -115,7 +115,7 @@ export function ParentShareLinkButton({
     onShared?.();
 
     // スマホ＝ネイティブ共有シート（LINE等）。可能なら成績レポート画像も添付。
-    if (typeof navigator !== 'undefined' && navigator.share) {
+    if (typeof navigator !== 'undefined' && typeof navigator.share === 'function') {
       try {
         const data: ShareData = { title: APP_NAME, text, url };
         const file = fileRef.current;

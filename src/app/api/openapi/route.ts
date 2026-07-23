@@ -241,6 +241,24 @@ export function GET() {
           responses: { '200': { description: '成功（text/csv）' } },
         },
       },
+      '/api/naishin/csv': {
+        get: {
+          operationId: 'getPrefecturesCsv',
+          summary: '全47都道府県の内申点計算方式（CSV配布）',
+          description:
+            '/api/naishin と同じ正準データ（naishin-dataset.ts）をCSV（BOM付きUTF-8）で配布。表計算ソフト・データカタログ・引用向け。',
+          responses: { '200': { description: '成功（text/csv）' } },
+        },
+      },
+      '/api/status': {
+        get: {
+          operationId: 'getApiStatus',
+          summary: '公開API/MCPの稼働ステータス（認証不要・軽量）',
+          description:
+            'データセットのバージョン・対象年度・都道府県数・主要エンドポイント一覧を返す。監視ツールやAIエージェントが「今APIが生きているか」を素早く確認するためのエンドポイント。データ本体は /api/naishin を参照。',
+          responses: { '200': { description: '成功' } },
+        },
+      },
       '/api/openapi': {
         get: {
           operationId: 'getOpenApiSpec',

@@ -102,7 +102,7 @@ export function UnlockGate({
 
   // 満点の無い指標（偏差値等）向けの素の共有（スコアカードなし・数値の分母を捏造しない）。
   const onPlainShare = React.useCallback(async () => {
-    const medium = typeof navigator !== 'undefined' && navigator.share ? 'native' : 'copy';
+    const medium = typeof navigator !== 'undefined' && typeof navigator.share === 'function' ? 'native' : 'copy';
     track(EVENTS.SHARE_TO_PARENT, {
       pref: shareCtx.prefectureCode ?? 'none',
       metric: shareCtx.metricLabel ?? '内申点',
@@ -112,7 +112,7 @@ export function UnlockGate({
     const origin = typeof window !== 'undefined' ? window.location.origin : 'https://my-naishin.com';
     const url = `${origin}/hogosha`;
     const text = '受験対策について、おうちの人に相談したくて。いまの状況をまとめたページを送ります。';
-    if (typeof navigator !== 'undefined' && navigator.share) {
+    if (typeof navigator !== 'undefined' && typeof navigator.share === 'function') {
       try {
         await navigator.share({ title: APP_NAME, text, url });
         grant('share');
