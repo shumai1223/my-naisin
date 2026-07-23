@@ -149,6 +149,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/nyushi-seido-henkou" className="hover:text-blue-600 flex items-center gap-1">
+                  入試制度変更点まとめ（都道府県別・随時更新） <ChevronRight className="h-3 w-3 opacity-30" />
+                </Link>
+              </li>
+              <li>
                 <Link href="/hensachi/moshi/nittei" className="hover:text-blue-600 flex items-center gap-1">
                   模試日程データベース（都道府県別） <ChevronRight className="h-3 w-3 opacity-30" />
                 </Link>

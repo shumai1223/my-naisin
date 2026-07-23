@@ -243,7 +243,9 @@ export default function NaishinKakusaPage() {
             <p className="mt-4 text-xs text-slate-500">
               47都道府県全件の詳細データ・出典・引用ガイドラインは
               <Link href="/report/2026" className="font-bold text-indigo-700 underline">内申点白書2026</Link>
-              にまとめています。
+              にまとめています。制度改定の最新情報は
+              <Link href="/nyushi-seido-henkou" className="font-bold text-indigo-700 underline">入試制度変更点まとめ</Link>
+              でも随時更新しています。
             </p>
           </section>
 
