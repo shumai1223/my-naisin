@@ -28,6 +28,14 @@ export interface ParentShareContext {
   grade?: number | null;
   /** 指標名（既定は内申点。総合得点ツール等から共有する場合に「総合得点」等を渡す）。 */
   metricLabel?: string;
+  /**
+   * 匿名統計に基づく立ち位置（ZZ-5a・結果カードv2）。/api/stats/percentileがk-匿名性ガード後に
+   * 返した実測パーセンタイル（0-100・n充足時のみ存在＝呼び出し側でinsufficientDataを見て渡す）。
+   * 捏造ゼロ：このフィールドは常にAPIレスポンスの値をそのまま転記するだけで、独自に計算しない。
+   */
+  percentile?: number | null;
+  /** percentileの集計範囲。'prefecture'（県内）を優先し、無ければ'national'（全国）。 */
+  percentileScope?: 'prefecture' | 'national' | null;
 }
 
 function isNum(v: number | null | undefined): v is number {
@@ -81,6 +89,10 @@ export function encodeSharePayload(ctx: ParentShareContext): string {
   if (ctx.label) obj.l = ctx.label.slice(0, 40);
   if (isNum(ctx.grade)) obj.gr = Math.round(ctx.grade);
   if (ctx.metricLabel) obj.ml = ctx.metricLabel.slice(0, 16);
+  if (isNum(ctx.percentile)) obj.pc = Math.round(ctx.percentile);
+  if (ctx.percentileScope === 'prefecture' || ctx.percentileScope === 'national') {
+    obj.ps = ctx.percentileScope === 'prefecture' ? 'p' : 'n';
+  }
   return bytesToBase64Url(utf8ToBytes(JSON.stringify(obj)));
 }
 
@@ -109,6 +121,8 @@ export function decodeSharePayload(d: string | undefined): ParsedParentShare | n
       grade: clampInt(o.gr, 1, 3),
       label: str(o.l)?.slice(0, 40),
       metricLabel: str(o.ml)?.slice(0, 16),
+      percentile: clampInt(o.pc, 0, 100),
+      percentileScope: o.ps === 'p' ? 'prefecture' : o.ps === 'n' ? 'national' : undefined,
     };
   } catch {
     return null;
@@ -128,6 +142,8 @@ export function buildParentSharePath(ctx: ParentShareContext): string {
   if (isNum(ctx.grade)) q.set('grade', String(Math.round(ctx.grade)));
   if (ctx.label) q.set('label', ctx.label);
   if (ctx.metricLabel) q.set('ml', ctx.metricLabel);
+  if (isNum(ctx.percentile)) q.set('pc', String(Math.round(ctx.percentile)));
+  if (ctx.percentileScope === 'prefecture' || ctx.percentileScope === 'national') q.set('ps', ctx.percentileScope === 'prefecture' ? 'p' : 'n');
   return `/hogosha?${q.toString()}`;
 }
 
@@ -163,6 +179,8 @@ export interface ParsedParentShare {
   grade?: number;
   label?: string;
   metricLabel?: string;
+  percentile?: number;
+  percentileScope?: 'prefecture' | 'national';
 }
 
 type RawParams = Record<string, string | string[] | undefined>;
@@ -206,5 +224,10 @@ export function parseParentShare(params: RawParams): ParsedParentShare {
     // 表示用ラベルは長さを抑える（誤・悪意入力の肥大防止）
     label: pick(label ? label.slice(0, 40) : undefined, decoded?.label),
     metricLabel: pick(firstStr(params.ml)?.slice(0, 16), decoded?.metricLabel),
+    percentile: pick(safeInt(params.pc, 0, 100), decoded?.percentile),
+    percentileScope: pick(
+      firstStr(params.ps) === 'p' ? 'prefecture' : firstStr(params.ps) === 'n' ? 'national' : undefined,
+      decoded?.percentileScope
+    ),
   };
 }

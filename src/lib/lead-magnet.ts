@@ -38,6 +38,9 @@ export interface LeadMagnetContext {
   metricLabel?: string;
   /** ZZ-2b・リードマグネットv2のA/B（lead-magnet-action-plan-2026）。未指定は既定(v1)のまま。 */
   nextStepVariant?: 'control' | 'action-plan-v2';
+  /** ZZ-5a・結果カードv2：/api/stats/percentileの実測値をそのまま渡す（呼び出し側で計算しない）。 */
+  percentile?: number | null;
+  percentileScope?: 'prefecture' | 'national' | null;
 }
 
 /** 「次の一手」＝登録直後に渡す内部回遊リンク（広告ではなく“役立つ次の一歩”）。 */
@@ -192,6 +195,8 @@ function shareContext(ctx: LeadMagnetContext): ParentShareContext | null {
     gap: isNum(ctx.gap) ? ctx.gap : null,
     grade: isNum(ctx.grade) ? ctx.grade : null,
     metricLabel: ctx.metricLabel ?? defaultMetricLabel(ctx.source),
+    percentile: isNum(ctx.percentile) ? ctx.percentile : null,
+    percentileScope: ctx.percentileScope ?? null,
   };
 }
 

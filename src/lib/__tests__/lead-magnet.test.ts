@@ -118,6 +118,19 @@ describe('buildLeadMagnet', () => {
     expect(decoded!.metricLabel).toBe('内申点');
   });
 
+  it('percentile/percentileScope（ZZ-5a）はcardPathペイロードにそのまま転記される', () => {
+    const m = buildLeadMagnet({ ...naishinBase, percentile: 82, percentileScope: 'prefecture' });
+    const decoded = decodeSharePayload(m.cardPath!.split('d=')[1]);
+    expect(decoded!.percentile).toBe(82);
+    expect(decoded!.percentileScope).toBe('prefecture');
+  });
+
+  it('percentile未指定ならcardPathペイロードにも含まれない（見せかけ防止）', () => {
+    const m = buildLeadMagnet({ ...naishinBase });
+    const decoded = decodeSharePayload(m.cardPath!.split('d=')[1]);
+    expect(decoded!.percentile).toBeUndefined();
+  });
+
   it('偏差値ソースは metricLabel を偏差値として埋める', () => {
     const m = buildLeadMagnet({ source: 'hensachi', score: 58, max: 100 });
     const decoded = decodeSharePayload(m.cardPath!.split('d=')[1]);

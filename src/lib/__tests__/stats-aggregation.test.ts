@@ -14,6 +14,7 @@ import {
   computePercentileRank,
   buildSuppressedPercentile,
   formatStatValue,
+  metricLabelToStatsMetric,
 } from '../stats-aggregation';
 
 describe('formatStatValue（統計ページのmin/max表示丸め・2026-07-19: 生の浮動小数点(21.333333333333332)が本番表示されていた事故の再発防止）', () => {
@@ -24,6 +25,20 @@ describe('formatStatValue（統計ページのmin/max表示丸め・2026-07-19: 
   it('小数は小数第1位に丸める', () => {
     expect(formatStatValue(21.333333333333332)).toBe('21.3');
     expect(formatStatValue(78.66666666666666)).toBe('78.7');
+  });
+});
+
+describe('metricLabelToStatsMetric（ZZ-5a・結果カードv2の県内位置フック用マッピング）', () => {
+  it('対応するラベルはStatsMetricへ変換する', () => {
+    expect(metricLabelToStatsMetric('内申点')).toBe('naishin');
+    expect(metricLabelToStatsMetric('偏差値')).toBe('hensachi');
+    expect(metricLabelToStatsMetric('総合得点')).toBe('total-score');
+  });
+
+  it('未対応のラベル(評定平均等)・未指定はnull', () => {
+    expect(metricLabelToStatsMetric('評定平均')).toBeNull();
+    expect(metricLabelToStatsMetric(undefined)).toBeNull();
+    expect(metricLabelToStatsMetric('')).toBeNull();
   });
 });
 

@@ -20,7 +20,8 @@ import { EVENTS, track } from '@/lib/track';
 import { lineAddUrl, type LineAudience } from '@/lib/line';
 import { LIST_BENEFITS } from '@/lib/broadcast-templates';
 import { isValidEmail, openLeadMailtoFallback, submitLead, type LeadPayload, type LeadSource } from '@/lib/lead';
-import { buildLeadMagnet } from '@/lib/lead-magnet';
+import { buildLeadMagnet, defaultMetricLabel } from '@/lib/lead-magnet';
+import { metricLabelToStatsMetric } from '@/lib/stats-aggregation';
 import { useExperiment } from '@/components/ab/useExperiment';
 
 /** lead-copy-2026 のアーム（[[experiments]]）。安定参照のためモジュールレベルに置く。 */
@@ -93,6 +94,38 @@ export function SaveResultCTA({
   // ZZ-2b：リードマグネットv2「県別・内申点アクションプラン」next stepのA/B。
   const actionPlanVariant = useExperiment('lead-magnet-action-plan-2026', ACTION_PLAN_ARMS);
 
+  // ZZ-5a：結果カードv2「県内位置」。/api/stats/percentileの実測値をそのまま使う
+  // （このコンポーネント側では一切計算しない＝捏造ゼロ・APIがk-匿名性ガード済み）。
+  // 対応するstatsMetric（内申点/偏差値/総合得点）が無い指標（評定平均等）は取得しない。
+  const resolvedMetricLabel = metricLabel ?? defaultMetricLabel(source);
+  const statsMetric = metricLabelToStatsMetric(resolvedMetricLabel);
+  const [percentileResult, setPercentileResult] = React.useState<{
+    percentile: number | null;
+    scope: 'prefecture' | 'national' | null;
+  }>({ percentile: null, scope: null });
+  React.useEffect(() => {
+    if (!statsMetric || typeof score !== 'number' || !Number.isFinite(score)) return;
+    let cancelled = false;
+    const params = new URLSearchParams({ metric: statsMetric, value: String(score) });
+    if (prefectureCode) params.set('prefecture', prefectureCode);
+    fetch(`/api/stats/percentile?${params.toString()}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (cancelled) return;
+        if (data?.prefectureResult) {
+          setPercentileResult({ percentile: data.prefectureResult.percentile, scope: 'prefecture' });
+        } else if (data?.result) {
+          setPercentileResult({ percentile: data.result.percentile, scope: 'national' });
+        }
+      })
+      .catch(() => {
+        /* 取得失敗はカードから立ち位置チップが消えるだけ・体験は継続 */
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [statsMetric, score, prefectureCode]);
+
   // 登録の“即時の見返り”一式（成績カード・保護者バトン・次の一手）。score+max が揃えばカードを渡せる。
   const leadMagnet = React.useMemo(
     () =>
@@ -107,8 +140,10 @@ export function SaveResultCTA({
         gap,
         metricLabel,
         nextStepVariant: actionPlanVariant,
+        percentile: percentileResult.percentile,
+        percentileScope: percentileResult.scope,
       }),
-    [source, prefectureCode, prefectureName, score, max, grade, target, gap, metricLabel, actionPlanVariant]
+    [source, prefectureCode, prefectureName, score, max, grade, target, gap, metricLabel, actionPlanVariant, percentileResult]
   );
   const hasCard = leadMagnet.cardPath !== null;
 

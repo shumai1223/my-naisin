@@ -46,6 +46,20 @@ describe('buildParentSharePath / Url', () => {
     expect(url.startsWith('https://my-naishin.com/hogosha?')).toBe(true);
     expect(url).not.toContain('com//hogosha');
   });
+
+  test('percentile/percentileScope（ZZ-5a）をpc/psクエリに載せる', () => {
+    const path = buildParentSharePath({ score: 40, max: 65, percentile: 75, percentileScope: 'national' });
+    const q = new URLSearchParams(path.split('?')[1]);
+    expect(q.get('pc')).toBe('75');
+    expect(q.get('ps')).toBe('n');
+  });
+
+  test('percentile未指定ならpc/psを載せない', () => {
+    const path = buildParentSharePath({ score: 40, max: 65 });
+    const q = new URLSearchParams(path.split('?')[1]);
+    expect(q.has('pc')).toBe(false);
+    expect(q.has('ps')).toBe(false);
+  });
 });
 
 describe('buildParentShareMessage', () => {
@@ -97,6 +111,20 @@ describe('encode/decodeSharePayload（?d= compact・UTF-8安全・壊れた入�
     expect(decodeSharePayload(undefined)).toBeNull();
     expect(decodeSharePayload('!!!not-base64!!!')).toBeNull();
     expect(decodeSharePayload('')).toBeNull();
+  });
+
+  test('percentile/percentileScope（ZZ-5a）をroundtripできる', () => {
+    const enc = encodeSharePayload({ score: 40, max: 65, percentile: 82, percentileScope: 'prefecture' });
+    const dec = decodeSharePayload(enc);
+    expect(dec?.percentile).toBe(82);
+    expect(dec?.percentileScope).toBe('prefecture');
+  });
+
+  test('percentile未指定なら含まれない（見せかけ表示を防ぐ）', () => {
+    const enc = encodeSharePayload({ score: 40, max: 65 });
+    const dec = decodeSharePayload(enc);
+    expect(dec?.percentile).toBeUndefined();
+    expect(dec?.percentileScope).toBeUndefined();
   });
 
   test('parseParentShare は ?d= を復元し、個別クエリが上書きする', () => {

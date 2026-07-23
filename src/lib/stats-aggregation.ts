@@ -18,6 +18,23 @@ export function isStatsMetric(value: unknown): value is StatsMetric {
   return typeof value === 'string' && (STATS_METRICS as readonly string[]).includes(value);
 }
 
+/** 表示用の指標ラベル（'内申点'/'偏差値'/'総合得点'）→ StatsMetric。対応しない場合はnull（例: '評定平均'は統計未収集）。 */
+const METRIC_LABEL_TO_STATS_METRIC: Record<string, StatsMetric> = {
+  内申点: 'naishin',
+  偏差値: 'hensachi',
+  総合得点: 'total-score',
+};
+
+/**
+ * リードマグネット等でラベル文字列（metricLabel）として保持している指標名から、
+ * 匿名統計API（/api/stats/percentile等）が受け付けるStatsMetricキーへ変換する（ZZ-5a）。
+ * 未対応のラベル（評定平均など統計未収集の指標）はnull。
+ */
+export function metricLabelToStatsMetric(label: string | undefined): StatsMetric | null {
+  if (!label) return null;
+  return METRIC_LABEL_TO_STATS_METRIC[label] ?? null;
+}
+
 export interface StatsSubmissionInput {
   metric: StatsMetric;
   /** 都道府県コード（任意・全国集計にはprefectureCodeを省略した提出も混在しうる）。 */
