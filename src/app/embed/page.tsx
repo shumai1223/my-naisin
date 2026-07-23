@@ -143,6 +143,19 @@ export default function EmbedPage() {
               ※ 上記以外のブログ・CMSでも、HTMLをそのまま挿入できる編集欄（カスタムHTML・埋め込み・コードブロック等）があれば同様の手順で設置できます。
               管理画面の項目名はサービスの仕様変更により変わることがあります。
             </p>
+            <p className="mt-3 text-xs leading-relaxed text-slate-500">
+              WordPressをお使いの方は、ショートコード<code className="rounded bg-slate-100 px-1">[my_naishin type=&quot;naishin&quot;]</code>で
+              設置できる専用プラグインも配布しています（
+              <a
+                href="https://github.com/shumai1223/my-naisin/tree/main/wordpress-plugin/my-naishin-calculator"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-bold text-blue-700 underline"
+              >
+                プラグインファイルを見る
+              </a>
+              ）。
+            </p>
           </section>
 
           {/* お願い */}
