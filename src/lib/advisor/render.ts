@@ -14,6 +14,7 @@ import { SUBJECTS } from '@/lib/constants';
 import type { Scores } from '@/lib/types';
 import { classifyQuestion, type AdvisorQuestionType } from './classify';
 import { addEntry, type GroundingLedger } from './ledger';
+import { verifyGrounding, SAFE_FALLBACK_TEXT, REQUIRED_DISCLAIMER } from './verify';
 
 export interface AdvisorQuestion {
   raw: string;
@@ -36,14 +37,22 @@ export interface AdvisorAnswer {
   ledger: GroundingLedger;
 }
 
-/** 決定論エンジンで答えられない・材料が足りない場合の安全な定型文（構造定数のみ・数値ゼロ）。 */
-const SAFE_FALLBACK_BODY =
-  'この質問には、決定論エンジンで正確にお答えできる材料が揃っていません。内申点計算ツールで直接計算するか、担当の先生にご確認ください。';
-
-const JUDGMENT_DISCLAIMER = '最終的な判断は学校の先生・保護者の方と相談してください。';
+/** verify.tsと同一の定型文・免責文言を単一ソースとして再利用する（文言のドリフト防止）。 */
+const JUDGMENT_DISCLAIMER = REQUIRED_DISCLAIMER;
 
 function fallback(type: AdvisorQuestionType): AdvisorAnswer {
-  return { type, text: `${SAFE_FALLBACK_BODY}\n\n${JUDGMENT_DISCLAIMER}`, ledger: [] };
+  return { type, text: SAFE_FALLBACK_TEXT, ledger: [] };
+}
+
+/**
+ * ランタイム検証（§1④・DoD「verifyGroundingがランタイムにも組み込まれfail時フォールバック動作」）。
+ * テスト時と同じverifyGroundingを使い、failした場合は該当回答を破棄して安全定型文へ落とす
+ * （エラーを見せない・利用者には常に何らかの回答が返る）。
+ */
+function verifyOrFallback(type: AdvisorQuestionType, text: string, ledger: GroundingLedger, prefContext?: string): AdvisorAnswer {
+  const result = verifyGrounding(text, ledger, prefContext);
+  if (!result.ok) return fallback(type);
+  return { type, text, ledger };
 }
 
 function sumByCategory(scores: Scores, category: 'core' | 'practical'): number {
@@ -72,7 +81,7 @@ function renderNaishinCalc(q: AdvisorQuestion): AdvisorAnswer {
 
   const link = `[${pref.name}の内申点計算ツール](/${prefCode}/naishin)`;
   const text = `入力いただいた9教科の評定から計算すると、${pref.name}の内申点は **${totalStr}点**（満点${maxStr}点）です。詳しい内訳は${link}でご確認いただけます。\n\n${JUDGMENT_DISCLAIMER}`;
-  return { type: 'naishin-calc', text, ledger };
+  return verifyOrFallback('naishin-calc', text, ledger, prefCode);
 }
 
 function renderTotalScore(q: AdvisorQuestion): AdvisorAnswer {
@@ -94,7 +103,7 @@ function renderTotalScore(q: AdvisorQuestion): AdvisorAnswer {
 
   const link = `[${system.name}の総合得点計算ツール](/${prefCode}/total-score)`;
   const text = `入力いただいた内容から計算すると、${system.name}の総合得点は **${totalStr}点**（満点${maxStr}点）です。詳しい内訳は${link}でご確認いただけます。\n\n${JUDGMENT_DISCLAIMER}`;
-  return { type: 'total-score', text, ledger };
+  return verifyOrFallback('total-score', text, ledger, prefCode);
 }
 
 function renderHensachi(q: AdvisorQuestion): AdvisorAnswer {
@@ -110,7 +119,7 @@ function renderHensachi(q: AdvisorQuestion): AdvisorAnswer {
 
   const link = '[偏差値計算ツール](/hensachi)';
   const text = `点数・平均点・標準偏差から計算すると、偏差値は **${hensachiStr}** です。詳しい計算は${link}でご確認いただけます。\n\n${JUDGMENT_DISCLAIMER}`;
-  return { type: 'hensachi', text, ledger };
+  return verifyOrFallback('hensachi', text, ledger);
 }
 
 function renderReverse(q: AdvisorQuestion): AdvisorAnswer {
@@ -135,7 +144,7 @@ function renderReverse(q: AdvisorQuestion): AdvisorAnswer {
     gap > 0
       ? `現在の内申点は${currentStr}点、目標の${targetStr}点まで**あと${gapStr}点**です。詳しい内訳は${link}でご確認いただけます。\n\n${JUDGMENT_DISCLAIMER}`
       : `現在の内申点は${currentStr}点で、目標の${targetStr}点に**${gapStr}点届いています**。詳しい内訳は${link}でご確認いただけます。\n\n${JUDGMENT_DISCLAIMER}`;
-  return { type: 'reverse', text, ledger };
+  return verifyOrFallback('reverse', text, ledger, prefCode);
 }
 
 function renderSystemExplainForPrefecture(prefCode: string): { text: string; ledger: GroundingLedger } | null {
@@ -159,7 +168,7 @@ function renderSystemExplain(q: AdvisorQuestion): AdvisorAnswer {
   if (!prefCode) return fallback('system-explain');
   const result = renderSystemExplainForPrefecture(prefCode);
   if (!result) return fallback('system-explain');
-  return { type: 'system-explain', ...result };
+  return verifyOrFallback('system-explain', result.text, result.ledger, prefCode);
 }
 
 function renderPrefectureCompare(q: AdvisorQuestion): AdvisorAnswer {
@@ -170,7 +179,13 @@ function renderPrefectureCompare(q: AdvisorQuestion): AdvisorAnswer {
   const blockB = renderSystemExplainForPrefecture(prefCodeB);
   if (!blockA || !blockB) return fallback('prefecture-compare');
 
-  // 県混線ガード（§4）：各ブロックは独立した台帳を持ち、テキストも県ごとに分離して連結する
+  // 県混線ガード（§4）：各ブロックを、そのブロック自身の県コードのみをprefContextとして
+  // 個別に検証する（片方でも他県の数値が紛れ込んでいればfail→回答全体をフォールバック）。
+  const verifiedA = verifyGrounding(blockA.text, blockA.ledger, prefCodeA);
+  const verifiedB = verifyGrounding(blockB.text, blockB.ledger, prefCodeB);
+  if (!verifiedA.ok || !verifiedB.ok) return fallback('prefecture-compare');
+
+  // 各ブロックは独立した台帳を持ち、テキストも県ごとに分離して連結する
   // （1回答=1県の制約を「県Aブロック＋県Bブロック」の2ブロック構成で満たす）。
   const text = `${blockA.text.replace(`\n\n${JUDGMENT_DISCLAIMER}`, '')}\n\n---\n\n${blockB.text}`;
   const ledger: GroundingLedger = [...blockA.ledger, ...blockB.ledger];
