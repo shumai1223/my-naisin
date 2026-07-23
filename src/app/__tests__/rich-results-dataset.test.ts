@@ -28,6 +28,7 @@ const DATASET_EXEMPT_ROUTES: Record<string, string> = {
   '/admin/juku-reviews': 'noindex・トークン認証必須の内部ツール（リッチリザルト対象外・R-1第3弾）',
   '/admin/report': 'noindex・トークン認証必須の内部ツール（リッチリザルト対象外）',
   '/admin/worklog': 'noindex・トークン認証必須の内部ツール（リッチリザルト対象外）',
+  '/advisor': 'ZZ-3c：noindex・旗付きUI（決定論Q&Aツールでデータセットの提供ではない）',
   '/ask': '決定論Q&Aツール（単発応答でありデータセットの提供ではない）',
   '/blog': '記事一覧ページ（データセットの提供なし）',
   '/blog/tag/[tag]': 'タグ別記事一覧ページ（データセットの提供なし）',

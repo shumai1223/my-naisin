@@ -27,6 +27,7 @@ const NO_INBOUND_LINK_EXEMPT_ROUTES: Record<string, string> = {
   '/admin/worklog': '認証必須のnoindex内部ツール（意図的にリンクしない設計）',
   '/admin/juku-reviews': '認証必須のnoindex内部ツール（意図的にリンクしない設計・R-1第3弾）',
   '/juken-chokuzen-check': 'ZZ-8d：季節限定の予約公開ページ（resolveSeason()がwinter/last-minuteの時のみ公開・それ以外はnotFound()）。公開前は意図的にどこからもリンクしない設計。11月の公開解禁時に他ページからの内部リンクも追加する',
+  '/advisor': 'ZZ-3c：旗付きUI（NEXT_PUBLIC_ADVISOR_ENABLED=1になるまでnotFound()・noindex）。build-not-launchのため公開判断前は意図的にどこからもリンクしない',
 };
 
 /** 「薄い面」判定のしきい値（この件数以下は例外リスト登録が必須）。scripts/link-graph-report.tsと同じ定義。 */

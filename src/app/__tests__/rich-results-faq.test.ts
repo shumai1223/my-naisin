@@ -27,6 +27,7 @@ const FAQ_EXEMPT_ROUTES: Record<string, string> = {
   '/admin/juku-reviews': 'noindex・トークン認証必須の内部ツール（リッチリザルト対象外・R-1第3弾）',
   '/admin/report': 'noindex・トークン認証必須の内部ツール（リッチリザルト対象外）',
   '/admin/worklog': 'noindex・トークン認証必須の内部ツール（リッチリザルト対象外）',
+  '/advisor': 'ZZ-3c：noindex・旗付きUI（決定論Q&Aツールで単発応答・リッチリザルト対象外）',
   '/blog': '記事一覧ページ（個別記事はblog/[slug]側でFAQPageSchema対応済み）',
   '/blog/tag/[tag]': 'タグ別記事一覧ページ（一覧のみでQ&A形式のコンテンツなし）',
   '/comparison': '都道府県比較表ページ（表形式でQ&A形式のコンテンツなし）',

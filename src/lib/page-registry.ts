@@ -133,4 +133,7 @@ export const SITEMAP_EXCLUDED_ROUTES = [
   // ZZ-8d：季節限定ページ（resolveSeason()がwinter/last-minuteの間だけ公開・それ以外はnotFound()）。
   // 公開解禁（11月〜）に合わせてSTATIC_PAGESへ移し、この行を削除すること。
   '/juken-chokuzen-check',
+  // ZZ-3c：旗付きUI（NEXT_PUBLIC_ADVISOR_ENABLED='1'まではnotFound()・noindex設定でもある）。
+  // 👤がGO判断し旗を立てた際は、noindexも解除した上でSTATIC_PAGESへ移すこと。
+  '/advisor',
 ];
