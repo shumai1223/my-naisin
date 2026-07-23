@@ -528,6 +528,19 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
       { label: '今年度入試変更点まとめを見る', href: '/nyushi-seido-henkou' },
     ],
   },
+  {
+    id: 'jiko-hyoka-shiryo',
+    term: '自己評価資料（じこひょうかしりょう）',
+    reading: 'じこひょうかしりょう',
+    description: '受検生が自分自身のこれまでの体験・力を注いだこと・高校入学後や将来取り組んでみたいことなどを、自分の言葉で記載して出願時に提出する書類。それ自体は採点されず、面接の際の参考資料として使われます。',
+    example: '埼玉県は令和9(2027)年度入試から全ての受検生に自己評価資料の提出を求め、面接で自己評価資料を参考に自らの言葉で表現してもらう仕組みを新設すると発表しています（本サイトの入試制度変更点まとめで詳細を掲載）。',
+    note: '自己評価資料は内申点（調査書の評定）とは別物で、内申点の計算には影響しません。あくまで面接時の参考資料という位置づけです。導入の有無・様式は都道府県によって異なります。',
+    relatedPrefectures: '埼玉県が令和9年度入試から導入予定。他県にも「自己PRカード」等の類似書類がありますが名称・使われ方は異なります。',
+    links: [
+      { label: '今年度入試変更点まとめを見る', href: '/nyushi-seido-henkou' },
+      { label: '埼玉県の内申点を計算', href: '/saitama/naishin' },
+    ],
+  },
 ];
 
 export function getGlossaryTerm(id: string): GlossaryTerm | undefined {
