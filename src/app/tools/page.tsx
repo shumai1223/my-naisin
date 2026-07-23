@@ -95,6 +95,14 @@ const TOOL_GROUPS: { id: string; heading: string; tools: Tool[] }[] = [
         color: 'blue',
       },
       {
+        title: '内申点タイプ診断',
+        description: '9教科の評定パターンを、都道府県の内申点計算方法と組み合わせて4タイプに無料診断（タイプに優劣なし）',
+        features: ['バランス型/実技教科型/主要教科型/教科差型', '47都道府県の計算方法と組み合わせ', 'タイプに優劣・ランクなし'],
+        href: '/naishin-type-shindan',
+        icon: ClipboardCheck,
+        color: 'blue',
+      },
+      {
         title: '偏差値計算サイト（5教科）',
         description: '点数・平均点・標準偏差から、中学生・高校生の偏差値を瞬時に算出',
         features: ['5教科対応', '教科別偏差値', '簡易/詳細モード', '高校レベル目安'],

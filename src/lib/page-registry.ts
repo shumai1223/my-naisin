@@ -22,6 +22,7 @@ export const STATIC_PAGES: StaticPageEntry[] = [
   { url: '/plan', priority: 0.9, changeFrequency: 'weekly' },
   { url: '/hensachi', priority: 1.0, changeFrequency: 'weekly' },
   { url: '/hensachi/shindan', priority: 0.9, changeFrequency: 'weekly' },
+  { url: '/naishin-type-shindan', priority: 0.8, changeFrequency: 'weekly' },
   { url: '/hensachi/kyoka-betsu', priority: 0.9, changeFrequency: 'weekly' },
   { url: '/hensachi/kyoka-betsu/kokugo', priority: 0.8, changeFrequency: 'weekly' },
   { url: '/hensachi/kyoka-betsu/sugaku', priority: 0.8, changeFrequency: 'weekly' },

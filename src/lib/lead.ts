@@ -24,6 +24,7 @@ export type LeadSource =
   | 'hyotei-heikin'
   | 'prefecture'
   | 'juku-shindan'
+  | 'naishin-type-shindan'
   | 'home';
 
 export interface LeadPayload {
