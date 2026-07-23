@@ -63,7 +63,7 @@ export function ChibaTotalScoreResultFlow() {
             tool="total-score"
             shareCtx={{ score: result.total, max: result.max, prefectureCode: 'chiba', prefectureName: '千葉県', metricLabel: '総合得点' }}
           >
-            <NationalPercentileReveal metric="total-score" metricLabel="総合得点" value={result.total} prefectureCode="chiba" />
+            <NationalPercentileReveal metric="total-score" metricLabel="総合得点" value={result.total} prefectureCode="chiba" prefectureName="千葉県" />
           </UnlockGate>
         </div>
       )}

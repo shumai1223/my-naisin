@@ -96,6 +96,7 @@ export function NaishinResultFlow({ prefectureCode, prefectureName, maxScore }: 
               metricLabel="内申点"
               value={result.total}
               prefectureCode={prefectureCode}
+              prefectureName={prefectureName}
             />
           </UnlockGate>
         </div>

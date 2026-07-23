@@ -63,7 +63,7 @@ export function OsakaResultFlow() {
             tool="total-score"
             shareCtx={{ score: result.total, max: result.max, prefectureCode: 'osaka', prefectureName: '大阪府', metricLabel: '総合点' }}
           >
-            <NationalPercentileReveal metric="total-score" metricLabel="総合点" value={result.total} prefectureCode="osaka" />
+            <NationalPercentileReveal metric="total-score" metricLabel="総合点" value={result.total} prefectureCode="osaka" prefectureName="大阪府" />
           </UnlockGate>
         </div>
       )}

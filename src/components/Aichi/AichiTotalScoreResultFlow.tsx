@@ -59,7 +59,7 @@ export function AichiTotalScoreResultFlow() {
             tool="total-score"
             shareCtx={{ score: result.total, max: result.max, prefectureCode: 'aichi', prefectureName: '愛知県', metricLabel: '総合得点' }}
           >
-            <NationalPercentileReveal metric="total-score" metricLabel="総合得点" value={result.total} prefectureCode="aichi" />
+            <NationalPercentileReveal metric="total-score" metricLabel="総合得点" value={result.total} prefectureCode="aichi" prefectureName="愛知県" />
           </UnlockGate>
         </div>
       )}

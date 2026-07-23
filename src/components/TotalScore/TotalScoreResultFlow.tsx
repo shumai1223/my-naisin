@@ -86,6 +86,7 @@ export function TotalScoreResultFlow({ system, saveHeading, saveBody }: TotalSco
               metricLabel="総合得点"
               value={result.total}
               prefectureCode={system.code}
+              prefectureName={system.name}
             />
           </UnlockGate>
         </div>

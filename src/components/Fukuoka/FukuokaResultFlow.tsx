@@ -59,7 +59,7 @@ export function FukuokaResultFlow() {
             tool="total-score"
             shareCtx={{ score: result.total, max: result.max, prefectureCode: 'fukuoka', prefectureName: '福岡県', metricLabel: '総合得点' }}
           >
-            <NationalPercentileReveal metric="total-score" metricLabel="総合得点" value={result.total} prefectureCode="fukuoka" />
+            <NationalPercentileReveal metric="total-score" metricLabel="総合得点" value={result.total} prefectureCode="fukuoka" prefectureName="福岡県" />
           </UnlockGate>
         </div>
       )}

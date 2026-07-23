@@ -58,7 +58,7 @@ export function SaitamaResultFlow() {
             tool="total-score"
             shareCtx={{ score: result.total, max: result.max, prefectureCode: 'saitama', prefectureName: '埼玉県', metricLabel: '総合得点（目安）' }}
           >
-            <NationalPercentileReveal metric="total-score" metricLabel="総合得点（目安）" value={result.total} prefectureCode="saitama" />
+            <NationalPercentileReveal metric="total-score" metricLabel="総合得点（目安）" value={result.total} prefectureCode="saitama" prefectureName="埼玉県" />
           </UnlockGate>
         </div>
       )}

@@ -67,7 +67,7 @@ export function TokyoTotalScoreResultFlow() {
             tool="total-score"
             shareCtx={{ score: result.total, max: result.max, prefectureCode: 'tokyo', prefectureName: '東京都', metricLabel: '総合得点' }}
           >
-            <NationalPercentileReveal metric="total-score" metricLabel="総合得点" value={result.total} prefectureCode="tokyo" />
+            <NationalPercentileReveal metric="total-score" metricLabel="総合得点" value={result.total} prefectureCode="tokyo" prefectureName="東京都" />
           </UnlockGate>
         </div>
       )}

@@ -63,7 +63,7 @@ export function KanagawaResultFlow() {
             tool="total-score"
             shareCtx={{ score: result.total, max: result.max, prefectureCode: 'kanagawa', prefectureName: '神奈川県', metricLabel: 'S1値' }}
           >
-            <NationalPercentileReveal metric="total-score" metricLabel="S1値" value={result.total} prefectureCode="kanagawa" />
+            <NationalPercentileReveal metric="total-score" metricLabel="S1値" value={result.total} prefectureCode="kanagawa" prefectureName="神奈川県" />
           </UnlockGate>
         </div>
       )}

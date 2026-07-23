@@ -62,7 +62,7 @@ export function HokkaidoRankResultFlow() {
             tool="total-score"
             shareCtx={{ score: result.total, max: result.max, prefectureCode: 'hokkaido', prefectureName: '北海道', metricLabel: '総合点' }}
           >
-            <NationalPercentileReveal metric="total-score" metricLabel="総合点" value={result.total} prefectureCode="hokkaido" />
+            <NationalPercentileReveal metric="total-score" metricLabel="総合点" value={result.total} prefectureCode="hokkaido" prefectureName="北海道" />
           </UnlockGate>
         </div>
       )}

@@ -37,6 +37,10 @@
   details { background: #131a29; border: 1px solid #263049; border-radius: 10px; padding: 6px 10px; }
   details summary { cursor: pointer; font-size: 13px; font-weight: 700; padding: 4px 0; color: #cbd5e1; }
   details .body { font-size: 14px; line-height: 1.75; padding: 6px 2px 8px; white-space: pre-wrap; color: #e6e9f0; }
+  footer#reminderBar { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; padding: 5px 14px; background: #171e2e; border-top: 1px solid #263049; font-size: 11px; color: #9aa5bd; }
+  footer#reminderBar .rgroup { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+  footer#reminderBar .rlabel { font-weight: 800; color: #7dd3fc; white-space: nowrap; }
+  footer#reminderBar .ritem { background: #1c2436; border: 1px solid #263049; border-radius: 6px; padding: 1px 6px; white-space: nowrap; }
 </style>
 </head>
 <body>
@@ -66,6 +70,20 @@
     <div id="suggestions"></div>
   </section>
 </main>
+<footer id="reminderBar">
+  <div class="rgroup">
+    <span class="rlabel">①非金銭4点</span>
+    <span class="ritem">「進んだ場合、"データ提供実績"として御社名を出させていただけますか?」</span>
+    <span class="ritem">「データをお使いの際は『データ提供: My Naishin』と入れていただけると嬉しいです」</span>
+    <span class="ritem">「気象庁データと同じように、出典としてリンクをいただけると助かります」</span>
+    <span class="ritem">「進んだ際はPR TIMES等での共同発表もご検討いただけますか」</span>
+  </div>
+  <div class="rgroup">
+    <span class="rlabel">②稟議ルート</span>
+    <span class="ritem">「社内では最終的にどなたのご判断に?」</span>
+    <span class="ritem">「次のステップはどんな流れに?」</span>
+  </div>
+</footer>
 <script>
 // ---------- 文字起こし ----------
 const transcriptEl = document.getElementById('transcript');

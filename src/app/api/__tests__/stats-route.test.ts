@@ -120,6 +120,23 @@ describe('/api/stats/percentile 契約（T-1：紹介・解放機構の中身）
     const json = await res.json();
     expect(json.meta.prefecture).toBe('osaka');
   });
+
+  test('prefecture未指定時はprefectureResult/prefectureInsufficientDataが両方null（Ω-1：全国と県内を独立判定する契約）', async () => {
+    const res = await percentileGET(distributionReq('?metric=naishin&value=40', { ip: '4.1.1.7' }));
+    const json = await res.json();
+    expect(json.prefectureResult).toBeNull();
+    expect(json.prefectureInsufficientData).toBeNull();
+  });
+
+  test('prefecture指定時はD1未設定でprefectureInsufficientData:true・prefectureResult:null（Ω-1：県内パーセンタイルも捏造しない契約）', async () => {
+    const res = await percentileGET(distributionReq('?metric=naishin&value=40&prefecture=osaka', { ip: '4.1.1.8' }));
+    const json = await res.json();
+    expect(json.prefectureInsufficientData).toBe(true);
+    expect(json.prefectureResult).toBeNull();
+    // 全国側(result)はprefecture指定の有無に関わらず常に全国集計であるべき契約
+    expect(json.insufficientData).toBe(true);
+    expect(json.result).toBeNull();
+  });
 });
 
 describe('/api/stats/csv 契約（TIER N-7）', () => {
