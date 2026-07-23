@@ -73,3 +73,30 @@ export async function getStatsValues(metric: StatsMetric, prefectureCode?: strin
     return [];
   }
 }
+
+/**
+ * 指定した指標の生の数値配列を都道府県コード別にまとめて取得する（ZZ-1d・/stats v2の県別分布用）。
+ * 47件のgetStatsValues呼び出しに分けず、1クエリでprefecture_code IS NOT NULLの全行を取得して
+ * JS側でgroup byする（D1へのラウンドトリップを指標あたり1回に抑える）。
+ * k-匿名性の判定・集計はstats-aggregation.ts側の責務（ここは生データのグルーピングのみ）。
+ */
+export async function getStatsValuesByPrefecture(metric: StatsMetric): Promise<Record<string, number[]>> {
+  const grouped: Record<string, number[]> = {};
+  try {
+    const db = await getStatsDb();
+    if (!db) return grouped;
+    const { results } = await db
+      .prepare('SELECT prefecture_code, value FROM stats_submissions WHERE metric = ? AND prefecture_code IS NOT NULL')
+      .bind(metric)
+      .all<{ prefecture_code: string; value: number }>();
+    for (const row of results ?? []) {
+      if (typeof row.value !== 'number' || !Number.isFinite(row.value)) continue;
+      if (typeof row.prefecture_code !== 'string' || !row.prefecture_code) continue;
+      (grouped[row.prefecture_code] ??= []).push(row.value);
+    }
+    return grouped;
+  } catch (err) {
+    console.error('getStatsValuesByPrefecture skipped:', err instanceof Error ? err.message : err);
+    return grouped;
+  }
+}

@@ -5,8 +5,16 @@ import { Home, ChevronRight, BarChart3, ShieldCheck, HelpCircle, Info } from 'lu
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { DatasetSchema } from '@/components/StructuredData/DatasetSchema';
-import { STATS_METRICS, STATS_MIN_SAMPLE_SIZE, computeAggregate, formatStatValue, type StatsMetric } from '@/lib/stats-aggregation';
-import { getStatsValues } from '@/lib/stats-db';
+import {
+  STATS_METRICS,
+  STATS_MIN_SAMPLE_SIZE,
+  computeAggregate,
+  buildPrefectureAggregates,
+  formatStatValue,
+  type StatsMetric,
+} from '@/lib/stats-aggregation';
+import { getStatsValues, getStatsValuesByPrefecture } from '@/lib/stats-db';
+import { getPrefectureByCode } from '@/lib/prefectures';
 import { SITE_URL } from '@/lib/naishin-dataset';
 
 export const dynamic = 'force-dynamic';
@@ -55,16 +63,24 @@ const FAQS = [
     answer:
       'はい。/api/stats/csv エンドポイント（GET）で、内申点・偏差値・総合得点の全国集計を1行1指標のCSV（表計算ソフトでそのまま開けます）でダウンロードできます。サンプルサイズが不足する指標はinsufficient_data列で明示し、平均・最小・最大は空欄のまま返します。',
   },
+  {
+    question: '都道府県別のデータも見られますか？',
+    answer:
+      `はい。各都道府県で${STATS_MIN_SAMPLE_SIZE}件以上のデータが集まり次第、その都道府県の平均値をこのページに追加表示します。全国集計と同じくk-匿名性を適用しているため、件数が閾値未満の都道府県はまだ表示されません（投稿が増えると自動的に追加されます）。`,
+  },
 ];
 
 async function loadStats() {
   const results = await Promise.all(
     STATS_METRICS.map(async (metric) => {
-      const values = await getStatsValues(metric);
+      const [values, valuesByPrefecture] = await Promise.all([getStatsValues(metric), getStatsValuesByPrefecture(metric)]);
       const aggregate = computeAggregate(values);
       const count = aggregate?.count ?? 0;
       const sufficient = count >= STATS_MIN_SAMPLE_SIZE;
-      return { metric, aggregate: sufficient ? aggregate : null, count };
+      const prefectureCells = buildPrefectureAggregates(valuesByPrefecture)
+        .filter((cell) => cell.aggregate !== null)
+        .sort((a, b) => b.aggregate!.count - a.aggregate!.count);
+      return { metric, aggregate: sufficient ? aggregate : null, count, prefectureCells };
     })
   );
   return results;
@@ -156,7 +172,7 @@ export default async function StatsPage() {
           </section>
 
           <section className="mb-8 grid gap-4">
-            {stats.map(({ metric, aggregate, count }) => {
+            {stats.map(({ metric, aggregate, count, prefectureCells }) => {
               const meta = METRIC_META[metric];
               return (
                 <div key={metric} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
@@ -200,6 +216,32 @@ export default async function StatsPage() {
                     <Info className="mt-0.5 h-3 w-3 shrink-0" />
                     {meta.note}
                   </p>
+
+                  {prefectureCells.length > 0 ? (
+                    <div className="mt-4 border-t border-slate-100 pt-4">
+                      <h3 className="mb-2 text-xs font-bold text-slate-600">
+                        都道府県別（{STATS_MIN_SAMPLE_SIZE}件以上のみ表示・{prefectureCells.length}県）
+                      </h3>
+                      <div className="grid gap-2 sm:grid-cols-2">
+                        {prefectureCells.map((cell) => {
+                          const pref = getPrefectureByCode(cell.prefectureCode);
+                          return (
+                            <div key={cell.prefectureCode} className="rounded-lg bg-slate-50 px-3 py-2 text-xs">
+                              <span className="font-bold text-slate-700">{pref?.name ?? cell.prefectureCode}</span>
+                              <span className="ml-2 text-slate-500">
+                                平均{formatStatValue(cell.aggregate!.mean)}
+                                {meta.unit}（n={cell.aggregate!.count}）
+                              </span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  ) : (
+                    <p className="mt-4 border-t border-slate-100 pt-4 text-[11px] leading-relaxed text-slate-400">
+                      都道府県別の内訳は、{STATS_MIN_SAMPLE_SIZE}件以上のデータが集まった都道府県からk-匿名性を保ちつつ順次表示します（現時点で条件を満たす都道府県はまだありません）。
+                    </p>
+                  )}
                 </div>
               );
             })}

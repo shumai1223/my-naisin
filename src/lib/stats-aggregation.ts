@@ -75,6 +75,30 @@ export function buildSuppressedAggregate(values: number[], threshold: number = S
   return agg;
 }
 
+export interface PrefectureStatsCell {
+  prefectureCode: string;
+  /** 集計対象の全件数（k-匿名性で非表示にする前の実件数）。 */
+  count: number;
+  /** 非表示（サンプルサイズ不足）ならnull。表示可能ならStatsAggregate。 */
+  aggregate: StatsAggregate | null;
+}
+
+/**
+ * 都道府県別の集計（ZZ-1d・/stats v2）。k-匿名性のしきい値は全国集計と同じ定数を共有する
+ * （県内は全国よりnが小さくなりやすく、閾値を緩めると個人特定リスクが上がるため）。
+ * 入力はprefectureCode→値配列のマップ（DBからのgroup byの結果を想定）・純粋関数でテスト可能。
+ */
+export function buildPrefectureAggregates(
+  valuesByPrefecture: Record<string, number[]>,
+  threshold: number = STATS_MIN_SAMPLE_SIZE
+): PrefectureStatsCell[] {
+  return Object.entries(valuesByPrefecture).map(([prefectureCode, values]) => {
+    const agg = computeAggregate(values);
+    const count = agg?.count ?? 0;
+    return { prefectureCode, count, aggregate: shouldSuppressCell(count, threshold) ? null : agg };
+  });
+}
+
 export interface StatsCsvRow {
   metric: StatsMetric;
   /** 集計対象の全件数（k-匿名性で非表示にする前の実件数）。 */
