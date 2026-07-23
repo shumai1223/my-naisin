@@ -375,6 +375,25 @@ export function findFunnelBottleneck(stages: FunnelStage[]): FunnelBottleneck | 
   return worst;
 }
 
+/**
+ * "id1:count1,id2:count2" 形式（URLクエリ・CLI引数どちらでも同じ表記）をFunnelStage[]に
+ * パースする（ZZ-2a・/admin/reportのファネル常設計器）。GA4はOAuthのみでCI/loop非対応のため、
+ * 本人がGA4 MCPで取得した数値をURLクエリに貼り付けて渡す運用（scripts/weekly-kpi-report.tsの
+ * CLI引数パーサーと同じ考え方をUI側にも展開）。不正な要素は無視・2件未満は判定不能のためundefined。
+ */
+export function parseFunnelStagesQuery(raw: string | undefined | null, labels: Record<string, string> = {}): FunnelStage[] | undefined {
+  if (!raw || !raw.trim()) return undefined;
+  const stages: FunnelStage[] = [];
+  for (const part of raw.split(',')) {
+    const [id, countStr] = part.split(':');
+    const count = Number(countStr);
+    if (!id || !Number.isFinite(count)) continue;
+    const trimmedId = id.trim();
+    stages.push({ id: trimmedId, label: labels[trimmedId] ?? trimmedId, count });
+  }
+  return stages.length >= 2 ? stages : undefined;
+}
+
 /* ────────────────────────────────────────────────────────────────────────
  * トリップワイヤー4本（I-1：週次KPIレポートの常設監視項目）。
  * 戦略決定 §1-3（[[fable5-fullaccel-backlog-2026-07]]）で定義された、Google一点依存下で

@@ -8,6 +8,7 @@ import {
   evaluateTripwires,
   evaluateRosterVelocityTarget,
   findFunnelBottleneck,
+  parseFunnelStagesQuery,
   evaluateConsentCapture,
   GATE_SCHEDULE,
   activeGateMilestone,
@@ -353,6 +354,37 @@ describe('findFunnelBottleneck（週次ボトルネック特定・C-1）', () =>
     // a→b は前段0で除外、b→c のみ比較対象＝(100-50)/100=0.5
     expect(b?.fromLabel).toBe('b');
     expect(b?.dropRatio).toBeCloseTo(0.5, 5);
+  });
+});
+
+describe('parseFunnelStagesQuery（ZZ-2a・/admin/reportファネル常設計器のURLクエリパーサー）', () => {
+  it('"id:count,id:count"形式をFunnelStage[]にパースする', () => {
+    const stages = parseFunnelStagesQuery('tool_start:477,cta_view:759,lead_submit:2');
+    expect(stages).toEqual([
+      { id: 'tool_start', label: 'tool_start', count: 477 },
+      { id: 'cta_view', label: 'cta_view', count: 759 },
+      { id: 'lead_submit', label: 'lead_submit', count: 2 },
+    ]);
+  });
+
+  it('labelsマップが渡されれば日本語ラベルに変換する', () => {
+    const stages = parseFunnelStagesQuery('tool_start:100,lead_submit:5', { tool_start: '計算開始', lead_submit: '名簿登録' });
+    expect(stages?.map((s) => s.label)).toEqual(['計算開始', '名簿登録']);
+  });
+
+  it('不正な要素は無視する', () => {
+    const stages = parseFunnelStagesQuery('tool_start:100,broken,lead_submit:notanumber,cta_view:50');
+    expect(stages).toEqual([
+      { id: 'tool_start', label: 'tool_start', count: 100 },
+      { id: 'cta_view', label: 'cta_view', count: 50 },
+    ]);
+  });
+
+  it('未指定・空文字・1件以下はundefined', () => {
+    expect(parseFunnelStagesQuery(undefined)).toBeUndefined();
+    expect(parseFunnelStagesQuery(null)).toBeUndefined();
+    expect(parseFunnelStagesQuery('')).toBeUndefined();
+    expect(parseFunnelStagesQuery('tool_start:100')).toBeUndefined();
   });
 });
 

@@ -12,7 +12,7 @@ import {
 import { classifyClick, type ClickTrust } from '@/lib/bot-filter';
 import { getLeadSummary, getLeadDailyCounts } from '@/lib/leads-db';
 import { getApiKeyStats, getFreemiumFunnel } from '@/lib/api-keys';
-import { evaluateJulyGate, bucketDailyByWeek, type GateVerdict } from '@/lib/velocity';
+import { evaluateJulyGate, bucketDailyByWeek, findFunnelBottleneck, parseFunnelStagesQuery, type GateVerdict } from '@/lib/velocity';
 import { evaluateRoadmapGates, nextRoadmapGate, upcomingGateReminders, type GateStatus } from '@/lib/roadmap-gates';
 import { checkExperimentPortfolioHealth, MIN_RUNNING_EXPERIMENTS } from '@/lib/experiments';
 import { isAuthorizedAdminToken } from '@/lib/admin-auth';
@@ -35,6 +35,17 @@ const STATS_METRIC_LABEL: Record<StatsMetric, string> = {
   naishin: '内申点',
   hensachi: '偏差値',
   'total-score': '総合得点',
+};
+
+/** ZZ-2a・ファネル常設計器のGA4イベントID→日本語ラベル（track.tsのEVENTSと対応）。 */
+const FUNNEL_STAGE_LABEL: Record<string, string> = {
+  tool_start: '計算開始',
+  calc_complete: '計算完了',
+  result_view: '結果表示',
+  cta_view: 'CTA表示',
+  affiliate_click: 'アフィリクリック',
+  line_friend_click: 'LINE追加',
+  lead_submit: '名簿登録',
 };
 
 /**
@@ -236,6 +247,14 @@ export default async function AdminReportPage({
     conversions: 0,
   });
   const experimentHealth = checkExperimentPortfolioHealth();
+
+  // ── ファネル常設計器（ZZ-2a）: GA4はOAuthのみでCI/loop非対応のため、本人がGA4 MCPで
+  // 取得した段別実数を?funnel=id:count,id:count,...でURLに貼り付けて渡す運用（週次KPIメールの
+  // --funnel引数と同じ表記）。渡されなければ入力方法の案内のみ表示する。
+  const funnelRaw = typeof sp.funnel === 'string' ? sp.funnel : undefined;
+  const funnelStages = parseFunnelStagesQuery(funnelRaw, FUNNEL_STAGE_LABEL);
+  const funnelBottleneck = funnelStages ? findFunnelBottleneck(funnelStages) : null;
+  const maxFunnelCount = Math.max(1, ...(funnelStages ?? []).map((s) => s.count));
 
   // ── 能動運用ロードマップ目盛りG1〜G6（2026-07-11収益試算v2）: D1にあるのは名簿累計のみ ──
   // 契約社数/API顧客数/C_p月次/累計確定額は👤がscripts/weekly-kpi-report.tsに手渡しする運用
@@ -526,6 +545,48 @@ export default async function AdminReportPage({
             ※ line_friend_click / lead_submit の placement別（保護者起点クリックの主計器）は GA4 で本人が確認する
             （サイト側D1は /go 経由のアフィリクリックのみ計器化。LINE友だち追加・名簿送信はGA4イベント）。
           </p>
+        </div>
+
+        {/* ファネル常設計器（ZZ-2a・view→calc→result→cta_view→cta_click→line_add/lead_submit） */}
+        <div className="mt-6">
+          <h2 className={sectionTitle}>ファネル常設計器 — 毎週「最大の漏れ段」を特定</h2>
+          <p className="mt-0.5 text-[11px] leading-relaxed text-slate-400">
+            GA4はOAuthのみでCI/loop非対応のため自動取得できません。<code>?funnel=tool_start:477,calc_complete:662,result_view:620,cta_view:759,affiliate_click:14,lead_submit:2</code>{' '}
+            のようにGA4 MCPで取得した段別実数をURLへ貼り付けて渡してください（週次KPIメールの<code>--funnel</code>引数と同じ表記）。
+          </p>
+          {!funnelStages ? (
+            <div className="mt-2 rounded-xl border border-dashed border-slate-200 bg-slate-50 p-4 text-center text-sm text-slate-500">
+              ファネルデータが未指定です（<code>?funnel=</code>を付けてアクセスしてください）。
+            </div>
+          ) : (
+            <div className="mt-2 space-y-2 rounded-xl border border-slate-200 bg-white p-3 shadow-sm">
+              {funnelStages.map((s, i) => {
+                const prev = i > 0 ? funnelStages[i - 1] : null;
+                const isBottleneckStage = funnelBottleneck && funnelBottleneck.toId === s.id;
+                const dropFromPrev = prev && prev.count > 0 ? Math.max(0, (prev.count - s.count) / prev.count) : null;
+                return (
+                  <div key={s.id} className={`flex items-center gap-3 text-sm ${isBottleneckStage ? 'rounded-lg bg-rose-50 p-1.5' : ''}`}>
+                    <span className="w-28 shrink-0 truncate font-medium text-slate-700">{s.label}</span>
+                    <div className="flex-1">
+                      <Bar value={s.count} max={maxFunnelCount} className={isBottleneckStage ? 'bg-rose-500' : 'bg-cyan-500'} />
+                    </div>
+                    <span className="w-16 shrink-0 text-right font-bold tabular-nums text-slate-800">{s.count.toLocaleString('ja-JP')}</span>
+                    {dropFromPrev !== null && (
+                      <span className={`w-16 shrink-0 text-right text-xs font-bold ${isBottleneckStage ? 'text-rose-600' : 'text-slate-400'}`}>
+                        −{(dropFromPrev * 100).toFixed(0)}%
+                      </span>
+                    )}
+                  </div>
+                );
+              })}
+              {funnelBottleneck && (
+                <div className="mt-2 rounded-xl border-2 border-rose-300 bg-rose-50 p-3 text-sm font-semibold text-rose-800">
+                  🚨 最大の漏れ段: {funnelBottleneck.fromLabel} → {funnelBottleneck.toLabel}（{funnelBottleneck.fromCount.toLocaleString('ja-JP')}
+                  →{funnelBottleneck.toCount.toLocaleString('ja-JP')}・ドロップ{(funnelBottleneck.dropRatio * 100).toFixed(0)}%）
+                </div>
+              )}
+            </div>
+          )}
         </div>
 
         {/* 能動運用ロードマップ G1〜G6（2026-07-11収益試算v2・努力/最高シナリオへの目盛り） */}
