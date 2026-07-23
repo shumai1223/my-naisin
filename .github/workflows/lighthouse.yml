@@ -24,11 +24,20 @@ jobs:
         continue-on-error: true
         uses: treosh/lighthouse-ci-action@v12
         with:
+          # ZZ-8c（2026-07-24）：主要4面→10面に拡張。冬KWマップ(docs/winter-kw-map-2026.md)で
+          # 特定した総合得点47県クラスタの優先面(tokyo/osaka)・S値(神奈川・季節倍率11.7xで最重要)・
+          # 主要リンカブル資産(naishin-kakusa/白書/stats)を追加。
           urls: |
             https://my-naishin.com/
             https://my-naishin.com/hensachi
             https://my-naishin.com/hyotei-heikin
             https://my-naishin.com/tokyo/naishin
+            https://my-naishin.com/tokyo/total-score
+            https://my-naishin.com/osaka/total-score
+            https://my-naishin.com/kanagawa/s-value
+            https://my-naishin.com/naishin-kakusa
+            https://my-naishin.com/report/2026
+            https://my-naishin.com/stats
           # モバイル実機相当（受験トラフィックの約7割がモバイル）で計測。
           configPath: ./.lighthouserc.json
           uploadArtifacts: true
