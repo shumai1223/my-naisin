@@ -1,4 +1,4 @@
-import { getActiveSeason, SEASON_COPY } from '@/lib/seasonal';
+import { getActiveSeason, isSeasonalContentLive, SEASON_COPY } from '@/lib/seasonal';
 import { selectLeadOffer } from '@/lib/lead-config';
 
 const D = (iso: string) => new Date(`${iso}T00:00:00Z`);
@@ -27,6 +27,18 @@ describe('getActiveSeason（日付→季節）', () => {
     expect(getActiveSeason(D('2026-06-10'))).toBeNull();
     expect(getActiveSeason(D('2026-09-15'))).toBeNull();
     expect(getActiveSeason(D('2026-10-31'))).toBeNull();
+  });
+});
+
+describe('isSeasonalContentLive（ZZ-8d：季節限定ページの予約公開ゲート）', () => {
+  it('winter/last-minuteはtrue', () => {
+    expect(isSeasonalContentLive('winter')).toBe(true);
+    expect(isSeasonalContentLive('last-minute')).toBe(true);
+  });
+
+  it('summer/nullはfalse', () => {
+    expect(isSeasonalContentLive('summer')).toBe(false);
+    expect(isSeasonalContentLive(null)).toBe(false);
   });
 });
 

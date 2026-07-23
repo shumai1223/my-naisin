@@ -37,6 +37,7 @@ const DATASET_EXEMPT_ROUTES: Record<string, string> = {
   '/chousasho/kakikata': '調査書の書き方解説ページ（データセットの提供なし）',
   '/chousasho/reibun': '記入例集ページ（データセットの提供なし）',
   '/comparison': '都道府県比較の一覧UI（既存47件データの再表示でありデータセット定義は/hensachi・home側が正）',
+  '/juken-chokuzen-check': 'ZZ-8d：季節限定チェックリストページ（既存ツールへの導線集約のみでデータセットの提供なし）',
   '/contact': '問い合わせページ（リッチリザルト価値が低い定型ページ）',
   '/dashboard': '個人の成績推移トラッカー（利用者個別データでありデータセットではない）',
   '/disclaimer': '免責事項（リッチリザルト価値が低い定型ページ）',

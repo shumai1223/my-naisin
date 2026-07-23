@@ -122,7 +122,14 @@ export const STATIC_PAGES: StaticPageEntry[] = [
 ];
 
 /**
- * 意図的にサイトマップへ含めない静的ルート（認証必須・noindex運用）。
+ * 意図的にサイトマップへ含めない静的ルート（認証必須・noindex運用、または季節限定の予約公開）。
  * sitemap-registry.test.ts のファイルシステム走査で除外するアローリスト。
  */
-export const SITEMAP_EXCLUDED_ROUTES = ['/admin/report', '/admin/worklog', '/admin/juku-reviews'];
+export const SITEMAP_EXCLUDED_ROUTES = [
+  '/admin/report',
+  '/admin/worklog',
+  '/admin/juku-reviews',
+  // ZZ-8d：季節限定ページ（resolveSeason()がwinter/last-minuteの間だけ公開・それ以外はnotFound()）。
+  // 公開解禁（11月〜）に合わせてSTATIC_PAGESへ移し、この行を削除すること。
+  '/juken-chokuzen-check',
+];

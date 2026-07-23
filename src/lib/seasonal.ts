@@ -94,3 +94,13 @@ export function resolveSeason(explicit?: Season | null, now: Date = new Date()):
   if (ov === 'winter' || ov === 'summer' || ov === 'last-minute') return ov;
   return getActiveSeason(now);
 }
+
+/**
+ * 季節限定ページ（ZZ-8d：冬リードマグネット等・「公開は11月」の予約公開に使う）が
+ * 今この瞬間に公開してよい季節かどうかを判定する（純粋関数）。
+ * winter（11-12月・講習募集期）とlast-minute（1月〜2/15・出願直前期）のみtrue。
+ * summer/nullでは非公開のまま（該当ページはnotFound()を返す設計を想定）。
+ */
+export function isSeasonalContentLive(season: Season | null): boolean {
+  return season === 'winter' || season === 'last-minute';
+}
