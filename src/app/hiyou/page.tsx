@@ -4,7 +4,7 @@ import { Home, ChevronRight, Wallet, Calculator, HandCoins, School, GraduationCa
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
-import { ParentLeadCTA } from '@/components/ParentLeadCTA';
+import { ParentLeadCTAExperiment } from '@/components/ParentLeadCTAExperiment';
 import { SITE_URL } from '@/lib/naishin-dataset';
 
 type Card = {
@@ -167,8 +167,8 @@ export default function HiyouHubPage() {
             })}
           </section>
 
-          {/* 保護者リード */}
-          <ParentLeadCTA placement="hiyou" className="mb-10" />
+          {/* 保護者リード（hiyou-copy-2026・2026-06-17running開始も配線漏れで無データだったA/Bを2026-07-24接続） */}
+          <ParentLeadCTAExperiment experimentId="hiyou-copy-2026" placement="hiyou" className="mb-10" />
 
           {/* なぜ早めに把握するか */}
           <section className="mb-10 rounded-2xl border border-indigo-100 bg-indigo-50/40 p-6">

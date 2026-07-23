@@ -11,7 +11,7 @@ import { WebApplicationSchema } from '@/components/StructuredData/WebApplication
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { HowToSchema } from '@/components/StructuredData/HowToSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
-import { ParentLeadCTA } from '@/components/ParentLeadCTA';
+import { ParentLeadCTAExperiment } from '@/components/ParentLeadCTAExperiment';
 import { ParentCostBridge } from '@/components/ParentCostBridge';
 import { ParentWindowBridge } from '@/components/ParentWindowBridge';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
@@ -264,7 +264,13 @@ function ReversePageContent() {
               <ParentCostBridge prefectureName={prefCtx.prefectureName} className="mt-8" />
 
               {/* 保護者向けリード（換金の本命：志望校が見えた保護者を無料資料請求へ） */}
-              <ParentLeadCTA placement="result" prefectureCode={prefCtx.prefectureCode || undefined} auditHide className="mt-8" />
+              <ParentLeadCTAExperiment
+                experimentId="result-offer-2026"
+                placement="result"
+                prefectureCode={prefCtx.prefectureCode || undefined}
+                auditHide
+                className="mt-8"
+              />
 
               {/* 結果の保存（名簿化：再訪の燃料）。必要当日点/満点が出たら実測値で個別化する（C-14）。 */}
               <SaveResultCTA

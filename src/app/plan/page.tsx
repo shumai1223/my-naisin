@@ -6,7 +6,7 @@ import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
 import { HowToSchema } from '@/components/StructuredData/HowToSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
-import { ParentLeadCTA } from '@/components/ParentLeadCTA';
+import { ParentLeadCTAExperiment } from '@/components/ParentLeadCTAExperiment';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { RelatedToolsSection } from '@/components/RelatedToolsSection';
 import { StudyPlanCalculator } from '@/components/StudyPlan/StudyPlanCalculator';
@@ -109,7 +109,7 @@ export default function PlanPage() {
 
           <StudyPlanCalculator />
 
-          <ParentLeadCTA placement="result" className="mt-10" />
+          <ParentLeadCTAExperiment experimentId="result-offer-2026" placement="result" className="mt-10" />
 
           <SaveResultCTA
             source="gap-target"
