@@ -28,6 +28,14 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       note: '令和9(2027)年度入試から調査書の「性別」「行動の記録」「出欠の記録」を削除。内申点の算出に使う「学習の記録（評定）」欄・計算方法自体には変更なしと確認（/nyushi-seido-henkouにも掲載）',
     },
   ],
+  saitama: [
+    {
+      date: '2026-07-23',
+      sourceUrl: 'https://www.pref.saitama.lg.jp/documents/258788/news2024092601.pdf',
+      sourceTitle: '埼玉県教育委員会「令和9年度埼玉県公立高等学校入学者選抜実施基本方針」（令和6年9月26日）',
+      note: '令和9(2027)年度入試から調査書の記載事項を「各教科の学習の記録（9教科5段階の評定）」を基本とする形に整理（特別活動等の記録・出欠の記録等を削除）。全受検生対象の面接・自己評価資料を新設。内申点の算出に使う評定（9教科5段階）・学年比率選択（1:1:1/1:1:2/1:1:3）の仕組み自体には変更なしと確認（/nyushi-seido-henkouにも掲載）',
+    },
+  ],
 };
 
 export function getSourceHistory(code: string): SourceSnapshot[] {
