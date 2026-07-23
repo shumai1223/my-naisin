@@ -1,5 +1,6 @@
 import {
   buildLeadMagnet,
+  buildPrefectureActionPlanStep,
   defaultMetricLabel,
   leadMagnetNextStep,
   type LeadMagnetContext,
@@ -51,6 +52,46 @@ describe('leadMagnetNextStep', () => {
 
   it('評定平均は推薦基準へ', () => {
     expect(leadMagnetNextStep({ source: 'hyotei-heikin' }).href).toBe('/hyotei-heikin/suisen-kijun');
+  });
+});
+
+describe('buildPrefectureActionPlanStep（ZZ-2b・リードマグネットv2）', () => {
+  it('実技倍率が主要教科より高い県(東京都)は実技を訴求する', () => {
+    const step = buildPrefectureActionPlanStep({ ...naishinBase, prefectureCode: 'tokyo', prefectureName: '東京都' });
+    expect(step).not.toBeNull();
+    expect(step!.href).toBe('/tokyo/naishin-omomi');
+    expect(step!.description).toContain('実技');
+    expect(step!.label).toContain('東京都');
+  });
+
+  it('中3のみ対象の県(山形県)は学年の話をする', () => {
+    const step = buildPrefectureActionPlanStep({ source: 'result', prefectureCode: 'yamagata', prefectureName: '山形県' });
+    expect(step).not.toBeNull();
+    expect(step!.href).toBe('/yamagata/naishin-omomi');
+    expect(step!.description).toContain('中3');
+  });
+
+  it('中3が中1・中2より重い県(北海道)は直近の成績の重要性を伝える', () => {
+    const step = buildPrefectureActionPlanStep({ source: 'result', prefectureCode: 'hokkaido', prefectureName: '北海道' });
+    expect(step).not.toBeNull();
+    expect(step!.description).toContain('中3');
+    expect(step!.description).toContain('直近');
+  });
+
+  it('倍率に偏りが無い県(群馬県)は満点の話に落ち着く', () => {
+    const step = buildPrefectureActionPlanStep({ source: 'result', prefectureCode: 'gunma', prefectureName: '群馬県' });
+    expect(step).not.toBeNull();
+    expect(step!.description).toContain('135点満点');
+  });
+
+  it('偏差値/評定平均sourceはnull（既に専用next stepがあるため対象外）', () => {
+    expect(buildPrefectureActionPlanStep({ source: 'hensachi', prefectureCode: 'tokyo' })).toBeNull();
+    expect(buildPrefectureActionPlanStep({ source: 'hyotei-heikin', prefectureCode: 'tokyo' })).toBeNull();
+  });
+
+  it('prefectureCode未指定・不明コードはnull', () => {
+    expect(buildPrefectureActionPlanStep({ source: 'result' })).toBeNull();
+    expect(buildPrefectureActionPlanStep({ source: 'result', prefectureCode: 'not-a-real-pref' })).toBeNull();
   });
 });
 
@@ -113,5 +154,22 @@ describe('buildLeadMagnet', () => {
   it('未達のとき見出し/補足に「あと◯点」を出す', () => {
     const m = buildLeadMagnet({ ...naishinBase, target: 50, gap: 12 });
     expect(m.subline).toContain('12');
+  });
+
+  it('nextStepVariant未指定・controlはv1（source+gapベース）のnextStepを返す', () => {
+    const m1 = buildLeadMagnet({ ...naishinBase, target: 50, gap: 12 });
+    const m2 = buildLeadMagnet({ ...naishinBase, target: 50, gap: 12, nextStepVariant: 'control' });
+    expect(m1.nextStep.href).toBe('/naishin-age-kata');
+    expect(m2.nextStep.href).toBe('/naishin-age-kata');
+  });
+
+  it('nextStepVariant=action-plan-v2は県別アクションプランのnextStepを返す（ZZ-2b）', () => {
+    const m = buildLeadMagnet({ ...naishinBase, target: 50, gap: 12, nextStepVariant: 'action-plan-v2' });
+    expect(m.nextStep.href).toBe('/tokyo/naishin-omomi');
+  });
+
+  it('action-plan-v2でも偏差値sourceはv1にフォールバックする（対象外source）', () => {
+    const m = buildLeadMagnet({ source: 'hensachi', score: 58, max: 100, prefectureCode: 'tokyo', nextStepVariant: 'action-plan-v2' });
+    expect(m.nextStep.href).toBe('/hensachi/agekata');
   });
 });

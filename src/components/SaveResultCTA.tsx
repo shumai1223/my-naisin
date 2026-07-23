@@ -25,6 +25,8 @@ import { useExperiment } from '@/components/ab/useExperiment';
 
 /** lead-copy-2026 のアーム（[[experiments]]）。安定参照のためモジュールレベルに置く。 */
 const LEAD_COPY_ARMS = [{ id: 'control' as const }, { id: 'reward' as const }];
+/** lead-magnet-action-plan-2026（ZZ-2b・リードマグネットv2）のアーム。 */
+const ACTION_PLAN_ARMS = [{ id: 'control' as const }, { id: 'action-plan-v2' as const }];
 /** T-2（LINE登録導線A/B・[[experiments]]）。安定参照のためモジュールレベルに置く。 */
 const LINE_COPY_ARMS = [{ id: 'control' as const }, { id: 'benefit' as const }];
 const LINE_POSITION_ARMS = [{ id: 'control' as const }, { id: 'email-first' as const }];
@@ -88,10 +90,25 @@ export function SaveResultCTA({
   const [error, setError] = React.useState<string | null>(null);
   const formStartedRef = React.useRef(false);
 
+  // ZZ-2b：リードマグネットv2「県別・内申点アクションプラン」next stepのA/B。
+  const actionPlanVariant = useExperiment('lead-magnet-action-plan-2026', ACTION_PLAN_ARMS);
+
   // 登録の“即時の見返り”一式（成績カード・保護者バトン・次の一手）。score+max が揃えばカードを渡せる。
   const leadMagnet = React.useMemo(
-    () => buildLeadMagnet({ source, prefectureCode, prefectureName, score, max, grade, target, gap, metricLabel }),
-    [source, prefectureCode, prefectureName, score, max, grade, target, gap, metricLabel]
+    () =>
+      buildLeadMagnet({
+        source,
+        prefectureCode,
+        prefectureName,
+        score,
+        max,
+        grade,
+        target,
+        gap,
+        metricLabel,
+        nextStepVariant: actionPlanVariant,
+      }),
+    [source, prefectureCode, prefectureName, score, max, grade, target, gap, metricLabel, actionPlanVariant]
   );
   const hasCard = leadMagnet.cardPath !== null;
 
@@ -275,6 +292,7 @@ export function SaveResultCTA({
         pref: prefectureCode ?? 'none',
         has_card: hasCard,
         next: leadMagnet.nextStep.href,
+        variant: actionPlanVariant,
       });
     }
     // done への遷移時に一度だけ
@@ -285,7 +303,7 @@ export function SaveResultCTA({
   const onParentMagnetClick = () =>
     track(EVENTS.LEAD_MAGNET_PARENT, { source, pref: prefectureCode ?? 'none', gap: gap ?? 0 });
   const onNextMagnetClick = () =>
-    track(EVENTS.LEAD_MAGNET_NEXT, { source, pref: prefectureCode ?? 'none', to: leadMagnet.nextStep.href });
+    track(EVENTS.LEAD_MAGNET_NEXT, { source, pref: prefectureCode ?? 'none', to: leadMagnet.nextStep.href, variant: actionPlanVariant });
 
   return (
     <section

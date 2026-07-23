@@ -16,6 +16,8 @@
 
 import { encodeSharePayload, buildParentSharePath, type ParentShareContext } from '@/lib/share';
 import type { LeadSource } from '@/lib/lead';
+import { getPrefectureByCode, type PrefectureConfig } from '@/lib/prefectures';
+import { getNaishinOmomiEntry } from '@/lib/naishin-omomi-content';
 
 export interface LeadMagnetContext {
   /** 登録が発生した面（セグメント／次の一手の決定に使う）。 */
@@ -34,6 +36,8 @@ export interface LeadMagnetContext {
   grade?: number;
   /** 指標ラベル（未指定なら source から既定を導出）。 */
   metricLabel?: string;
+  /** ZZ-2b・リードマグネットv2のA/B（lead-magnet-action-plan-2026）。未指定は既定(v1)のまま。 */
+  nextStepVariant?: 'control' | 'action-plan-v2';
 }
 
 /** 「次の一手」＝登録直後に渡す内部回遊リンク（広告ではなく“役立つ次の一歩”）。 */
@@ -125,6 +129,57 @@ export function leadMagnetNextStep(ctx: LeadMagnetContext): LeadMagnetNextStep {
   };
 }
 
+/**
+ * その県の内申点制度から「1つの決定的な事実」を抽出する（純粋・決定論・prefectures.ts由来のみ）。
+ * 新規の断定的数値は一切加えない＝既存の検証済みフィールドの比較だけで文章を組む。
+ */
+function describePrefectureLeverageFact(pref: PrefectureConfig): string {
+  if (pref.practicalMultiplier > pref.coreMultiplier) {
+    return `${pref.name}は実技4教科の倍率(${pref.practicalMultiplier}倍)が主要教科(${pref.coreMultiplier}倍)より高く設定されています。実技教科の対策が内申点により大きく効きます。`;
+  }
+  if (pref.targetGrades.length === 1) {
+    return `${pref.name}は中${pref.targetGrades[0]}の成績だけが入試の内申点に反映されます。今の学年の評定1つ1つが全てです。`;
+  }
+  const grade3Mult = pref.gradeMultipliers[3];
+  const otherMults = pref.targetGrades.filter((g) => g !== 3).map((g) => pref.gradeMultipliers[g]);
+  if (grade3Mult !== undefined && otherMults.length > 0 && otherMults.every((m) => grade3Mult > m)) {
+    return `${pref.name}は中3の成績が中1・中2より重く配点されます（中3は${grade3Mult}倍）。直近の成績が特に重要です。`;
+  }
+  return `${pref.name}の内申点は${pref.maxScore}点満点で計算されます。仕組みを理解して対策の優先順位をつけましょう。`;
+}
+
+/**
+ * 県別・内申点アクションプランの「次の一手」（ZZ-2b・リードマグネットv2）。
+ * prefectures.tsの実データから県固有の事実を抽出し、既存の47県解説面
+ * （/[pref]/naishin-omomi・W-13で全県執筆済み）への深掘りリンクとして提示する。
+ * hensachi/hyotei-heikin系source、またはprefectureCode不明・県データ不在の場合はnull
+ * （呼び出し側は既存のleadMagnetNextStep=v1へフォールバックする）。
+ */
+export function buildPrefectureActionPlanStep(ctx: LeadMagnetContext): LeadMagnetNextStep | null {
+  if (HENSACHI_SOURCES.has(ctx.source) || ctx.source === 'hyotei-heikin') return null;
+  if (!ctx.prefectureCode) return null;
+  const pref = getPrefectureByCode(ctx.prefectureCode);
+  if (!pref) return null;
+
+  const fact = describePrefectureLeverageFact(pref);
+  const prefLabel = ctx.prefectureName ?? pref.name;
+  const omomi = getNaishinOmomiEntry(ctx.prefectureCode);
+
+  if (omomi) {
+    return {
+      href: `/${ctx.prefectureCode}/naishin-omomi`,
+      label: `${prefLabel}の内申点アクションプラン`,
+      description: fact,
+    };
+  }
+  // naishin-omomiが無い県は理論上存在しない（47県執筆済み）が、将来の変化に備えた安全側フォールバック。
+  return {
+    href: '/naishin-age-kata',
+    label: `${prefLabel}の内申点の上げ方を見る`,
+    description: fact,
+  };
+}
+
 /** 登録の文脈から ParentShareContext（共有ペイロード）を組む。score+max が揃わなければ null。 */
 function shareContext(ctx: LeadMagnetContext): ParentShareContext | null {
   if (!isNum(ctx.score) || !isNum(ctx.max)) return null;
@@ -168,12 +223,15 @@ export function buildLeadMagnet(ctx: LeadMagnetContext): LeadMagnet {
     ? `「あと${ctx.gap}点」を受験本番まで一緒に追いかけます。まずは下から成績カードを保存し、おうちの人にも共有しておきましょう。`
     : '受験本番まで、対策のコツと志望校の最新情報を無料でお届けします。下から成績カードの保存・共有ができます。';
 
+  const nextStep =
+    ctx.nextStepVariant === 'action-plan-v2' ? buildPrefectureActionPlanStep(ctx) ?? leadMagnetNextStep(ctx) : leadMagnetNextStep(ctx);
+
   return {
     headline,
     subline,
     cardPath,
     parentSharePath,
-    nextStep: leadMagnetNextStep(ctx),
+    nextStep,
     segmentLabel: segmentLabelFor(ctx),
   };
 }

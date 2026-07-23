@@ -50,7 +50,14 @@ export interface ExperimentDef {
   /** arms[0] を対照群（control）とみなす。 */
   arms: ExperimentArm[];
   /** 効きを突合する主要指標（GA4イベント）。 */
-  primaryMetric: 'cta_view' | 'affiliate_click' | 'lead_submit' | 'line_friend_click' | 'unlock_granted' | 'stats_optin_grant';
+  primaryMetric:
+    | 'cta_view'
+    | 'affiliate_click'
+    | 'lead_submit'
+    | 'line_friend_click'
+    | 'unlock_granted'
+    | 'stats_optin_grant'
+    | 'lead_magnet_next';
   /** 関係する設置面（勝者を lead-config に昇格させる際の対象）。 */
   placement?: LeadPlacement;
   /** decided のとき採用したアーム。 */
@@ -220,6 +227,21 @@ export const EXPERIMENTS: ExperimentDef[] = [
     ],
     primaryMetric: 'stats_optin_grant',
     note: 'StatsOptInが参照。分母=stats_optin_view・分子=stats_optin_grant（いずれもvariantパラメータ付きで送出・variant別集計が可能）。全計算面（hensachi/naishin/total-score等）で母数を稼ぐ。',
+    startedAt: '2026-07-24',
+  },
+  {
+    // ZZ-2b（2026-07-24）：リードマグネットv2「県別・内申点アクションプラン」のnext step A/B。
+    // SaveResultCTAが参照。既定(source+gapベースの汎用リンク)と、prefectures.ts実データ由来の
+    // 県固有の事実+47県naishin-omomi面への深掘りリンク（W-13で全県執筆済み）を比較する。
+    id: 'lead-magnet-action-plan-2026',
+    hypothesis: 'リードマグネットの「次の一手」を県別の内申点制度の事実（実技倍率/学年比重等）に基づく具体的なアクションプランにすると、汎用の内申点の上げ方リンクよりnext step クリック率（lead_magnet_next）が上がる。',
+    status: 'running',
+    arms: [
+      { id: 'control', label: '既定（source+gapベースの汎用next step）', body: 'next-step:generic' },
+      { id: 'action-plan-v2', label: '県別アクションプラン（47県naishin-omomiへの個別深掘りリンク）', body: 'next-step:prefecture-action-plan' },
+    ],
+    primaryMetric: 'lead_magnet_next',
+    note: '分母=lead_magnet_view・分子=lead_magnet_next（いずれもvariant付きで送出）。hensachi/hyotei-heikin系sourceは対象外（既に専用next stepがあるため）。',
     startedAt: '2026-07-24',
   },
   {
