@@ -572,6 +572,13 @@ print(naishin["total"])  # -> 52`;
               /api/status <ExternalLink className="h-3 w-3" />
             </a>
           </p>
+          <p className="mt-2 text-xs text-slate-500">
+            データの最終検証日・一次ソース確認履歴も含めた信頼性の全体像は{' '}
+            <Link href="/reliability" className="font-semibold text-indigo-600 underline">
+              /reliability
+            </Link>{' '}
+            にまとめています。
+          </p>
 
           <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">⑨ 逆算・比較・学習計画（クエリで利用）</h3>
           <p className="mb-2 text-sm text-slate-600">

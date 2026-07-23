@@ -198,6 +198,10 @@ export default function QualityPage() {
           <Link href="/stats" className="mb-6 inline-flex items-center gap-1 text-sm font-bold text-emerald-700 hover:underline">
             全国統計データを見る →
           </Link>
+          <br />
+          <Link href="/reliability" className="mt-2 inline-flex items-center gap-1 text-sm font-bold text-emerald-700 hover:underline">
+            データの鮮度・検証履歴・API稼働状況のサマリーを見る →
+          </Link>
 
           <div className="mt-4 rounded-xl border border-emerald-200 bg-white p-5">
             <h3 className="mb-3 text-sm font-bold text-slate-800">研究・メディアの方へ：この統計データの方法論と限界</h3>

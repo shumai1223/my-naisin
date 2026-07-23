@@ -81,6 +81,7 @@ const HOWTO_EXEMPT_ROUTES: Record<string, string> = {
   '/privacy': 'プライバシーポリシー（リッチリザルト価値が低い定型ページ）',
   '/press': 'プレスキットページ（手順でなく取材向け資料紹介）',
   '/quality': '品質・E-E-A-T説明ページ（手順コンテンツなし）',
+  '/reliability': 'ZZ-6d：データ鮮度・検証履歴・稼働状況の集約サマリー（手順でなく状態のスナップショット。DatasetSchemaで対応）',
   '/sougou-gata-senbatsu': '総合型選抜の解説ページ（手順でなく制度解説）',
   '/stats': '全国統計データ表示ページ（集計値の一覧表示であり手順ではない。DatasetSchemaで対応）',
   '/suisen-nyuushi': '推薦入試の解説ページ（手順でなく制度解説）',

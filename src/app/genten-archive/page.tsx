@@ -184,6 +184,12 @@ export default function GentenArchivePage() {
               >
                 内申点白書2026
               </Link>
+              <Link
+                href="/reliability"
+                className="rounded-full border border-indigo-200 bg-white px-4 py-2 text-xs font-bold text-indigo-700 hover:bg-indigo-50"
+              >
+                データ鮮度・稼働状況サマリー
+              </Link>
             </div>
           </section>
         </div>
