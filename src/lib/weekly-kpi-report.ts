@@ -53,6 +53,11 @@ export interface WeeklyKpiData {
     lineFriendClickStickyBar?: number;
     /** ZZ-2d：SaveResultCTA（保護者バトン/LINE/メール受け皿）が視界に入った回数（到達率の分母）。 */
     saveResultCtaView?: number;
+    /**
+     * ZZ-5b：share_to_parent（share_click）のmedium別内訳。共有率の分子＝合計値/分母(saveResultCtaView等)。
+     * 例: { native: 40, copy: 5, line: 12, x: 2 }。未指定キーは0件でなく「取得していない」の意味。
+     */
+    shareClicksByMedium?: Record<string, number>;
   };
   /**
    * 走行中A/B実験のアーム別実測（GA4のexperiment_impression×primaryMetricを手動で集計・任意・V-6）。
@@ -166,6 +171,13 @@ export function formatWeeklyKpiEmail(data: WeeklyKpiData): { subject: string; te
     lines.push(`  line_friend_click（sticky-bar経由）: ${fe.lineFriendClickStickyBar !== undefined ? `${fmt(fe.lineFriendClickStickyBar)}件` : unmeasured}`);
     if (fe.saveResultCtaView !== undefined) {
       lines.push(`  save_result_cta_view（保護者バトン/LINE導線への到達・ZZ-2d）: ${fmt(fe.saveResultCtaView)}件`);
+    }
+    if (fe.shareClicksByMedium) {
+      const entries = Object.entries(fe.shareClicksByMedium);
+      const total = entries.reduce((s, [, n]) => s + n, 0);
+      const breakdown = entries.map(([medium, n]) => `${medium}=${fmt(n)}`).join(' / ');
+      const shareRate = fe.saveResultCtaView && fe.saveResultCtaView > 0 ? `（共有率${((total / fe.saveResultCtaView) * 100).toFixed(1)}%）` : '';
+      lines.push(`  share_click（ZZ-5b・medium別内訳）: 合計${fmt(total)}件${shareRate}　${breakdown}`);
     }
   }
   lines.push('');

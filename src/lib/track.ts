@@ -62,7 +62,9 @@ export const EVENTS = {
   LEAD_MAGNET_NEXT: 'lead_magnet_next', // 登録者が「次の一手」リンクへ進んだ（内部回遊）
   // ── 橋①/橋② 先行指標 ──
   GAP_TARGET_SET: 'gap_target_set',
-  SHARE_TO_PARENT: 'share_to_parent', // 生徒が「保護者に送る」を押した（橋②バトンの送り手側）
+  // 生徒が「保護者に送る」を押した（橋②バトンの送り手側=share_click）。
+  // ZZ-5b: paramsにmedium('native'|'copy'|'line'|'x')を付けて共有率を面別に分解できるようにする。
+  SHARE_TO_PARENT: 'share_to_parent',
   SHARE_IMAGE: 'share_image', // 成績レポート“画像”を共有/保存した（視覚カード＝LINE開封率の主因）
   SHARE_QR_REVEAL: 'share_qr_reveal', // その場でQRコードを表示した（同じ部屋にいる保護者にその場で読み取ってもらう導線）
   PARENT_LANDING_VIEW: 'parent_landing_view', // 共有リンクから保護者が着地した（橋②バトンの受け手側＝決裁者到達）

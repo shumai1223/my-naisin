@@ -102,9 +102,11 @@ export function UnlockGate({
 
   // 満点の無い指標（偏差値等）向けの素の共有（スコアカードなし・数値の分母を捏造しない）。
   const onPlainShare = React.useCallback(async () => {
+    const medium = typeof navigator !== 'undefined' && navigator.share ? 'native' : 'copy';
     track(EVENTS.SHARE_TO_PARENT, {
       pref: shareCtx.prefectureCode ?? 'none',
       metric: shareCtx.metricLabel ?? '内申点',
+      medium,
       ...(tool ? { tool } : {}),
     });
     const origin = typeof window !== 'undefined' ? window.location.origin : 'https://my-naishin.com';

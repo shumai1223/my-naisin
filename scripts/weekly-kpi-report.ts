@@ -35,6 +35,8 @@
  *  --unlock-granted=<件数>         unlock_granted（今週）
  *  --line-friend-click-sticky=<件数>  line_friend_click（StickyConvertBar経由・今週）
  *  --save-result-cta-view=<件数>      save_result_cta_view（SaveResultCTA到達・ZZ-2d・今週）
+ *  --share-clicks=<medium:count,...>  share_to_parent（share_click）のmedium別内訳・ZZ-5b
+ *                                      例: --share-clicks=native:20,copy:5,line:10,x:5
  *
  * 実験ポートフォリオ（V-6・任意）:
  *  --experiment-data=<expId=armId:impressions:conversions,armId:impressions:conversions;expId2=...>
@@ -136,6 +138,19 @@ function parseFunnelByPlacement(raw: unknown): PlacementFunnel[] | undefined {
   return placements.length > 0 ? placements : undefined;
 }
 
+/** "medium1:count1,medium2:count2" を Record<string, number> にパースする（ZZ-5b）。不正な要素は無視。 */
+function parseShareClicksByMedium(raw: unknown): Record<string, number> | undefined {
+  if (typeof raw !== 'string' || !raw.trim()) return undefined;
+  const result: Record<string, number> = {};
+  for (const part of raw.split(',')) {
+    const [medium, countStr] = part.split(':');
+    const count = Number(countStr);
+    if (!medium || !Number.isFinite(count)) continue;
+    result[medium.trim()] = count;
+  }
+  return Object.keys(result).length > 0 ? result : undefined;
+}
+
 /** V-6の新規ファネルイベント引数を1つでも渡していれば集約オブジェクトを返す。1つも無ければundefined（セクション自体を出さない）。 */
 function buildNewFunnelEvents(a: Record<string, string | boolean>): WeeklyKpiData['newFunnelEvents'] {
   const keys = [
@@ -145,6 +160,7 @@ function buildNewFunnelEvents(a: Record<string, string | boolean>): WeeklyKpiDat
     'unlock-granted',
     'line-friend-click-sticky',
     'save-result-cta-view',
+    'share-clicks',
   ] as const;
   if (!keys.some((k) => a[k] !== undefined)) return undefined;
   return {
@@ -154,6 +170,7 @@ function buildNewFunnelEvents(a: Record<string, string | boolean>): WeeklyKpiDat
     unlockGranted: a['unlock-granted'] !== undefined ? num(a['unlock-granted']) : undefined,
     lineFriendClickStickyBar: a['line-friend-click-sticky'] !== undefined ? num(a['line-friend-click-sticky']) : undefined,
     saveResultCtaView: a['save-result-cta-view'] !== undefined ? num(a['save-result-cta-view']) : undefined,
+    shareClicksByMedium: parseShareClicksByMedium(a['share-clicks']),
   };
 }
 

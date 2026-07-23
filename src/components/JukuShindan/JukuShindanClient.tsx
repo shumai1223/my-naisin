@@ -134,7 +134,8 @@ export function JukuShindanClient() {
     const base = buildParentShareMessage({ gap: effectiveGap, label: '志望校の目標' });
     const text = types ? `${base}\n（診断で合いそうな塾のタイプ：${types}）` : base;
 
-    track(EVENTS.SHARE_TO_PARENT, { source: PLACEMENT, pref: prefectureCode || 'none', tool: 'juku-shindan' });
+    const medium = typeof navigator !== 'undefined' && navigator.share ? 'native' : 'copy';
+    track(EVENTS.SHARE_TO_PARENT, { source: PLACEMENT, pref: prefectureCode || 'none', tool: 'juku-shindan', medium });
 
     if (typeof navigator !== 'undefined' && navigator.share) {
       try {

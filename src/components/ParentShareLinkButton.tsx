@@ -103,9 +103,13 @@ export function ParentShareLinkButton({
     const url = buildParentShareUrl(origin, ctx);
     const text = buildParentShareMessage(ctx);
 
+    // ZZ-5b：Web Share API自体はどのアプリが選ばれたかを教えないため、'native'は
+    // 「OSの共有シートを開いた」までの精度（実際の送り先はLINE/Messages等が混在する）。
+    const medium = typeof navigator !== 'undefined' && navigator.share ? 'native' : 'copy';
     track(EVENTS.SHARE_TO_PARENT, {
       pref: ctx.prefectureCode ?? 'none',
       metric: ctx.metricLabel ?? '内申点',
+      medium,
       ...(tool ? { tool } : {}),
     });
     onShared?.();
@@ -138,6 +142,38 @@ export function ParentShareLinkButton({
     } catch {
       // クリップボードも不可なら何もしない（最低限ボタンは壊さない）。
     }
+  }, [ctx, tool, onShared]);
+
+  // ZZ-5b：LINE/X個別共有リンク。navigator.share()と違い送り先が確定しているため
+  // medium('line'/'x')を正確に計測できる（共有率の面別分解の精度を上げる導線）。
+  const onShareLine = React.useCallback(() => {
+    const origin = typeof window !== 'undefined' ? window.location.origin : 'https://my-naishin.com';
+    const url = buildParentShareUrl(origin, ctx);
+    const text = buildParentShareMessage(ctx);
+    track(EVENTS.SHARE_TO_PARENT, {
+      pref: ctx.prefectureCode ?? 'none',
+      metric: ctx.metricLabel ?? '内申点',
+      medium: 'line',
+      ...(tool ? { tool } : {}),
+    });
+    onShared?.();
+    const lineUrl = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
+    window.open(lineUrl, '_blank', 'noopener,noreferrer');
+  }, [ctx, tool, onShared]);
+
+  const onShareX = React.useCallback(() => {
+    const origin = typeof window !== 'undefined' ? window.location.origin : 'https://my-naishin.com';
+    const url = buildParentShareUrl(origin, ctx);
+    const text = buildParentShareMessage(ctx);
+    track(EVENTS.SHARE_TO_PARENT, {
+      pref: ctx.prefectureCode ?? 'none',
+      metric: ctx.metricLabel ?? '内申点',
+      medium: 'x',
+      ...(tool ? { tool } : {}),
+    });
+    onShared?.();
+    const xUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+    window.open(xUrl, '_blank', 'noopener,noreferrer');
   }, [ctx, tool, onShared]);
 
   // その場（同じ部屋）にいる保護者にスマホで直接読み取ってもらうQRコード。
@@ -180,6 +216,22 @@ export function ParentShareLinkButton({
           </>
         )}
       </button>
+      <div className="mt-2 grid grid-cols-2 gap-2">
+        <button
+          type="button"
+          onClick={onShareLine}
+          className="inline-flex items-center justify-center gap-1.5 rounded-xl border border-[#06C755] bg-[#06C755]/10 px-3 py-2 text-xs font-bold text-[#06C755] transition-colors hover:bg-[#06C755]/20"
+        >
+          LINEで送る
+        </button>
+        <button
+          type="button"
+          onClick={onShareX}
+          className="inline-flex items-center justify-center gap-1.5 rounded-xl border border-slate-300 bg-slate-50 px-3 py-2 text-xs font-bold text-slate-700 transition-colors hover:bg-slate-100"
+        >
+          Xで共有
+        </button>
+      </div>
       <button
         type="button"
         onClick={onToggleQr}

@@ -250,6 +250,29 @@ describe('formatWeeklyKpiEmail', () => {
       const { text } = formatWeeklyKpiEmail(data);
       expect(text).not.toContain('save_result_cta_view');
     });
+
+    it('shareClicksByMedium（ZZ-5b）は合計+medium別内訳+共有率を表示する', () => {
+      const data = baseData({
+        newFunnelEvents: { saveResultCtaView: 100, shareClicksByMedium: { native: 20, copy: 5, line: 10, x: 5 } },
+      });
+      const { text } = formatWeeklyKpiEmail(data);
+      expect(text).toContain('share_click（ZZ-5b・medium別内訳）: 合計40件（共有率40.0%）');
+      expect(text).toContain('native=20');
+      expect(text).toContain('line=10');
+    });
+
+    it('shareClicksByMedium未指定なら行を出さない', () => {
+      const data = baseData({ newFunnelEvents: { statsOptinView: 10 } });
+      const { text } = formatWeeklyKpiEmail(data);
+      expect(text).not.toContain('share_click');
+    });
+
+    it('saveResultCtaViewが無い場合は共有率を出さず内訳だけ表示する', () => {
+      const data = baseData({ newFunnelEvents: { shareClicksByMedium: { native: 10 } } });
+      const { text } = formatWeeklyKpiEmail(data);
+      expect(text).toContain('share_click（ZZ-5b・medium別内訳）: 合計10件　native=10');
+      expect(text).not.toContain('共有率');
+    });
   });
 
   describe('実験ポートフォリオ（V-6：走行中A/BのjudgeWinner結線）', () => {

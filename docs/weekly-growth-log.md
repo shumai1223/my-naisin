@@ -45,3 +45,23 @@ startedAtは次回のloop-question-note整理時に是正予定）。
 **次回以降**: 数週間データを貯めてから、この3実験（+hogosha-cta-text-2026）のjudgeWinnerを
 GA4 MCP実測で回す。同時に、他の`running`実験も同様の配線漏れがないか横断監査する価値がある
 （今回は時間の都合で4件のみ確認・全件監査は次回以降）。
+
+## 2026-07-24（同日続き・ZZ-5b共有計装）
+
+**やったこと**: 橋②（生徒→保護者）の共有計装を強化。`share_to_parent`（=share_click）の
+track呼び出し全4箇所（ParentShareLinkButton/JukuShindanClient/UnlockGate）に`medium`
+パラメータ（'native'|'copy'|'line'|'x'）を追加。加えてLINE/X個別共有リンク（LINE it!公式
+share URL・X intent URL）を新設し、navigator.share()では判別不能だった送り先を、この2経路
+だけは確定させて計測できるようにした。
+
+**副産物で発見したバグ**: `/hogosha`の`generateMetadata`（OGP再生成）がZZ-5aで追加した
+percentile/percentileScopeを転記し忘れており、**LINE/X等でリンクとして共有されOGPが
+展開される経路でのみ「県内位置」チップが消える**バグを発見・修正した（クライアント側の
+`<img>`直接表示は最初から正しく表示されていたため気づきにくい種類の欠落だった）。
+
+**共有率の定義（次回以降のjudge対象）**: 分母=`save_result_cta_view`（ZZ-2d・保護者バトン導線
+への到達数）・分子=`share_to_parent`のmedium別合計。`weekly-kpi-report.ts`に`shareClicksByMedium`
+を追加済み（`scripts/weekly-kpi-report.ts --share-clicks=native:20,copy:5,line:10,x:5`で
+週次レポートに「共有率」として自動表示される）。**今回はまだ実装直後で実測データが無いため、
+数値でのjudgeは次回以降**（GA4カスタムディメンション`customEvent:medium`が新規登録扱いになる
+可能性があるため、次回はまずga4_metadataで登録済みか確認してから集計すること）。

@@ -104,6 +104,11 @@ export async function generateMetadata({
     grade: typeof share.grade === 'number' ? share.grade : null,
     label: share.label,
     metricLabel: share.metricLabel,
+    // ZZ-5b修正：percentile/percentileScopeが抜けていたため、LINE/X等でリンクを共有し
+    // OGPが再生成される経路(このgenerateMetadata)では「県内位置」チップが消えていた
+    // (クライアント側の<img>直接表示は正しく表示されていた＝この経路のみのバグ)。
+    percentile: typeof share.percentile === 'number' ? share.percentile : null,
+    percentileScope: share.percentileScope ?? null,
   });
   const cardUrl = `${SITE_URL}/api/card?d=${encodeURIComponent(d)}`;
   const alt = `${share.prefectureName ?? ''}${share.metricLabel ?? '内申点'}の成績レポート`;
