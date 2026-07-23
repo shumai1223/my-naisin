@@ -74,7 +74,13 @@ export const metadata: Metadata = {
   description:
     '47都道府県の内申点算出方式を横断比較した年次白書。実技傾斜配点・学年別重み・満点構造の違いを公式データで分析し、匿名集計統計とあわせて公開。報道・研究目的での引用・転載は出典明記のみで自由。',
   keywords: ['内申点 白書', '内申点 都道府県 比較 データ', '内申点 統計', '教育格差 データ'],
-  alternates: { canonical: `${SITE_URL}/report/2026` },
+  alternates: {
+    canonical: `${SITE_URL}/report/2026`,
+    languages: {
+      ja: `${SITE_URL}/report/2026`,
+      en: `${SITE_URL}/report/2026/en`,
+    },
+  },
   openGraph: {
     title: '内申点白書2026 | My Naishin',
     description: '47都道府県の内申点制度を公式データで横断比較した年次白書。引用・転載自由。',
@@ -140,7 +146,12 @@ export default async function Report2026Page() {
               47都道府県の内申点算出方式を、各教育委員会の公式データに基づいて横断比較した年次白書です。
               報道・研究目的での引用・転載は、出典明記のみで自由に行っていただけます。
             </p>
-            <p className="mt-2 text-xs text-slate-400">発行: My Naishin ／ 発行日: 2026年7月 ／ 対象年度: 2026年度入試</p>
+            <p className="mt-2 text-xs text-slate-400">
+              発行: My Naishin ／ 発行日: 2026年7月 ／ 対象年度: 2026年度入試 ／{' '}
+              <Link href="/report/2026/en" className="font-semibold text-indigo-700 underline">
+                English summary
+              </Link>
+            </p>
           </header>
 
           {/* ① エグゼクティブサマリー */}

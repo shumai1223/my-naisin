@@ -110,6 +110,7 @@ const DATASET_EXEMPT_ROUTES: Record<string, string> = {
   '/[prefecture]/reverse': 'permanentRedirectのみのリダイレクトページ（実コンテンツ無し）',
   '/[prefecture]/naishin-omomi': '県別内申の重み分析ページ（データセットではなく分析記事。データ自体は親の/naishin-kakusaがDatasetSchemaで代表）',
   '/report/2026/[prefecture]': '白書2026の県別ダイジェスト（データセットではなく分析記事。データ自体は親の/report/2026がDatasetSchemaで代表）',
+  '/report/2026/en': '白書2026英語版（データセットではなく要約記事。データ自体は日本語版の/report/2026がDatasetSchemaで代表）',
   // 2026-07-23(X-9): aichi/chiba/fukuoka/hokkaido/kanagawa/osaka/saitama/tokyoの8ページは
   // DatasetSchemaを実装済み（各県の検証済み計算方式データ）となったため例外リストから除外。
   // 残る/[prefecture]/total-score（47県中13県が実計算機・条件分岐が必要）のみ未着手として残す。
