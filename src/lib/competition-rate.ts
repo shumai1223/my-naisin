@@ -48,7 +48,8 @@ export interface CompetitionRateSource {
 
 export interface PrefectureCompetitionRateFile {
   prefectureCode: string;
-  source: CompetitionRateSource;
+  /** 複数の公表資料（学科区分ごとに別ファイルの県が多いため配列）。各recordsは由来を追わないが、全体としてどの資料から来たかを保持する。 */
+  sources: CompetitionRateSource[];
   /**
    * 取り込みの網羅状況を正直に記録する（Y-0憲法③「機械可読不能は正直にスキップ」の精神を
    * 「まだ着手できていない」にも適用：一部の学科区分のみ取り込み済みの状態を隠さない）。

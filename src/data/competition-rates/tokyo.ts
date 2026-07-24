@@ -9,28 +9,46 @@
  * https://www.kyoiku.metro.tokyo.lg.jp/documents/d/kyoiku/01-v2
  * 公表日: 2026-02-13（令和8年度・最終応募状況）
  *
- * ⚠️取り込み範囲は部分的（coverage参照）。全日制167校のうち、普通科（コース・単位制・
- * 海外帰国生徒対象・専門学科・総合学科を除く）101校＋普通科（島しょ）6校＝計107校のみ。
- * 残り60校（単位制12・専門学科38・総合学科10）は別の公表資料（コース・単位制／
- * 専門学科・定時制の個票）からの取り込みが必要で、次回以降のY-2続きで対応する。
+ * 個票（普通科・コース制/単位制/海外帰国生徒対象）:
+ * https://www.kyoiku.metro.tokyo.lg.jp/documents/d/kyoiku/2026-02-13-182442-923
+ *
+ * ⚠️取り込み範囲は部分的（coverage参照）。全日制167校のうち普通科119校は完了（区部57＋
+ * 多摩部44＋島しょ6＋単位制12＋コース制/海外帰国生徒対象は既存校への追加学科として計上）。
+ * 残り48校（専門学科38・総合学科10）は別の公表資料（専門学科・定時制の個票）からの
+ * 取り込みが必要で、次回以降のY-2続きで対応する。
  */
 import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
 
 export const TOKYO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
   prefectureCode: 'tokyo',
-  source: {
-    url: 'https://www.kyoiku.metro.tokyo.lg.jp/documents/d/kyoiku/2026-02-13-182440-757',
-    docTitle:
-      '東京都教育委員会 令和8年度東京都立高等学校入学者選抜応募状況（最終応募状況）1[普通科（コース、単位制以外の学校）]・2[普通科（島しょの学校）]',
-    fiscalYear: '令和8年度（2026年度）',
-    fetchedAt: '2026-07-24',
-  },
+  sources: [
+    {
+      url: 'https://www.kyoiku.metro.tokyo.lg.jp/documents/d/kyoiku/2026-02-13-182440-757',
+      docTitle:
+        '東京都教育委員会 令和8年度東京都立高等学校入学者選抜応募状況（最終応募状況）1[普通科（コース、単位制以外の学校）]・2[普通科（島しょの学校）]',
+      fiscalYear: '令和8年度（2026年度）',
+      fetchedAt: '2026-07-24',
+    },
+    {
+      url: 'https://www.kyoiku.metro.tokyo.lg.jp/documents/d/kyoiku/2026-02-13-182442-923',
+      docTitle:
+        '東京都教育委員会 令和8年度東京都立高等学校入学者選抜応募状況（最終応募状況）3[普通科（コース制の学校）]・4[普通科（単位制の学校）]・5[普通科（海外帰国生徒対象）]',
+      fiscalYear: '令和8年度（2026年度）',
+      fetchedAt: '2026-07-24',
+    },
+  ],
   coverage: {
     status: 'partial',
-    includedDepartments: ['普通科（コース・単位制・海外帰国生徒対象・専門学科・総合学科以外）', '普通科（島しょの学校）'],
-    pendingDepartments: ['普通科（単位制）', '専門学科（商業科・工業科・農業科等13学科）', '総合学科'],
+    includedDepartments: [
+      '普通科（コース・単位制・海外帰国生徒対象・専門学科・総合学科以外）',
+      '普通科（島しょの学校）',
+      '普通科（コース制の学校）',
+      '普通科（単位制の学校）',
+      '普通科（海外帰国生徒対象）',
+    ],
+    pendingDepartments: ['専門学科（商業科・工業科・農業科等13学科）', '総合学科'],
     note:
-      '全日制167校中107校（普通科の一部）のみ取り込み済み。残り60校は別文書（コース・単位制／専門学科・定時制の個票PDF）からの追加取り込みが必要（次回以降のY-2続き）。',
+      '全日制167校中普通科119校は完了。残り48校（専門学科・総合学科）は別文書（専門学科・定時制の個票PDF）からの追加取り込みが必要（次回以降のY-2続き）。',
   },
   officialSubtotals: [
     { label: '区部計', schoolCount: 57, quota: 12088, finalApplicants: 16926, finalRate: 1.4 },
@@ -38,12 +56,18 @@ export const TOKYO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { label: '島しょ計', schoolCount: 6, quota: 310, finalApplicants: 100, finalRate: 0.32 },
     { label: 'コース、単位制以外計（区部+多摩部）', schoolCount: 101, quota: 21432, finalApplicants: 28556, finalRate: 1.33 },
     {
-      label: '普通科（コース、単位制、海外帰国生徒対象以外）計＋普通科（島しょ）計＝取り込み対象全体',
+      label: '普通科（コース、単位制、海外帰国生徒対象以外）計＋普通科（島しょ）計',
       schoolCount: 107,
       quota: 21742,
       finalApplicants: 28656,
       finalRate: 1.32,
     },
+    { label: 'コース制計', schoolCount: 4, quota: 224, finalApplicants: 279, finalRate: 1.25 },
+    { label: '単位制計', schoolCount: 12, quota: 2276, finalApplicants: 2948, finalRate: 1.3 },
+    { label: '帰国対象計', schoolCount: 3, quota: 44, finalApplicants: 67, finalRate: 1.52 },
+    { label: '引揚対象計', schoolCount: 3, quota: 18, finalApplicants: 0, finalRate: 0 },
+    { label: '海外帰国生徒対象計', schoolCount: 6, quota: 62, finalApplicants: 67, finalRate: 1.08 },
+    { label: '普通科計', schoolCount: 119, quota: 24304, finalApplicants: 31950, finalRate: 1.31 },
   ],
   records: [
     // ===== 区部（57校） =====
@@ -158,5 +182,33 @@ export const TOKYO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '三宅', area: '三宅', department: '普通科', quota: 40, finalApplicants: 2, finalRate: 0.05 },
     { schoolName: '八丈', area: '八丈', department: '普通科', quota: 80, finalApplicants: 29, finalRate: 0.36 },
     { schoolName: '小笠原', area: '小笠原', department: '普通科', quota: 30, finalApplicants: 16, finalRate: 0.53 },
+
+    // ===== 普通科（コース制の学校）（4校・既存校への追加学科・延べ校数は既存107校に含まれるため校数への計上は0） =====
+    { schoolName: '深川', area: '江東', department: '普通科（コース制・外国語）', quota: 56, finalApplicants: 79, finalRate: 1.41 },
+    { schoolName: '片倉', area: '八王子', department: '普通科（コース制・造形美術）', quota: 56, finalApplicants: 37, finalRate: 0.66 },
+    { schoolName: '松が谷', area: '八王子', department: '普通科（コース制・外国語）', quota: 56, finalApplicants: 82, finalRate: 1.46 },
+    { schoolName: '小平', area: '小平', department: '普通科（コース制・外国語）', quota: 56, finalApplicants: 81, finalRate: 1.45 },
+
+    // ===== 普通科（単位制の学校）（12校・新規校） =====
+    { schoolName: '新宿', area: '新宿', department: '普通科（単位制）', quota: 284, finalApplicants: 629, finalRate: 2.21 },
+    { schoolName: '忍岡', area: '台東', department: '普通科（単位制）', quota: 124, finalApplicants: 134, finalRate: 1.08 },
+    { schoolName: '墨田川', area: '墨田', department: '普通科（単位制）', quota: 252, finalApplicants: 296, finalRate: 1.17 },
+    { schoolName: '美原', area: '大田', department: '普通科（単位制）', quota: 156, finalApplicants: 115, finalRate: 0.74 },
+    { schoolName: '深沢', area: '世田谷', department: '普通科（単位制）', quota: 130, finalApplicants: 82, finalRate: 0.63 },
+    { schoolName: '芦花', area: '世田谷', department: '普通科（単位制）', quota: 220, finalApplicants: 322, finalRate: 1.46 },
+    { schoolName: '飛鳥', area: '北', department: '普通科（単位制）', quota: 170, finalApplicants: 196, finalRate: 1.15 },
+    { schoolName: '板橋有徳', area: '板橋', department: '普通科（単位制）', quota: 156, finalApplicants: 155, finalRate: 0.99 },
+    { schoolName: '大泉桜', area: '練馬', department: '普通科（単位制）', quota: 156, finalApplicants: 150, finalRate: 0.96 },
+    { schoolName: '翔陽', area: '八王子', department: '普通科（単位制）', quota: 188, finalApplicants: 181, finalRate: 0.96 },
+    { schoolName: '国分寺', area: '国分寺', department: '普通科（単位制）', quota: 252, finalApplicants: 409, finalRate: 1.62 },
+    { schoolName: '上水', area: '武蔵村山', department: '普通科（単位制）', quota: 188, finalApplicants: 279, finalRate: 1.48 },
+
+    // ===== 普通科（海外帰国生徒対象）（6校・既存校への追加学科・帰国生3+引揚者3） =====
+    { schoolName: '三田', area: '港', department: '普通科（海外帰国生徒対象・帰国生）', quota: 18, finalApplicants: 24, finalRate: 1.33 },
+    { schoolName: '竹早', area: '文京', department: '普通科（海外帰国生徒対象・帰国生）', quota: 13, finalApplicants: 24, finalRate: 1.85 },
+    { schoolName: '日野台', area: '日野', department: '普通科（海外帰国生徒対象・帰国生）', quota: 13, finalApplicants: 19, finalRate: 1.46 },
+    { schoolName: '深川', area: '江東', department: '普通科（海外帰国生徒対象・引揚者）', quota: 6, finalApplicants: 0, finalRate: 0 },
+    { schoolName: '光丘', area: '練馬', department: '普通科（海外帰国生徒対象・引揚者）', quota: 6, finalApplicants: 0, finalRate: 0 },
+    { schoolName: '富士森', area: '八王子', department: '普通科（海外帰国生徒対象・引揚者）', quota: 6, finalApplicants: 0, finalRate: 0 },
   ],
 };
