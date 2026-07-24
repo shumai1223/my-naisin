@@ -17,6 +17,16 @@
       "service": "my-naishin"
     }
   ],
+  // ── 機能フラグ（非シークレット・feature-flags-registry.tsのFEATURE_FLAGSと同期を保つこと） ──
+  // 2026-07-24 👤承認: ZZ-3(グラウンデッドAIアドバイザー)・ZZ-4/4e(塾SaaSデモ)を点火。
+  //   advisor = 決定論エンジンのみ(AI/LLM不使用)・実データなし・robots noindex。
+  //   juku-saas = /juku/dashboard/demo(D1不要・架空シード)と/juku/dashboard(要招待トークン)の
+  //   両方がこの1フラグで開く。token無しアクセスは「招待トークンが必要です」ゲート画面のみで
+  //   実データ露出なし。
+  "vars": {
+    "NEXT_PUBLIC_ADVISOR_ENABLED": "1",
+    "NEXT_PUBLIC_JUKU_SAAS_ENABLED": "1"
+  },
   // ── 名簿/クリック/プッシュ購読の永続化（堀A）＝D1。binding は必ず "LEADS_DB"（コードがこの名前で参照）。 ──
   // 2026-06-18 接続済み（my-naishin-leads）。次にやること：
   //   1) wrangler d1 execute my-naishin-leads --remote --file=migrations/0001_create_leads.sql
