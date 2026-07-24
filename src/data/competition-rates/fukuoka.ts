@@ -4,9 +4,23 @@
  * 一次ソース: 福岡県教育委員会「令和8年度県立高等学校入学者選抜 一般入試 志願者数（確定）」
  * （県立分PDF、市組合立分は別PDF）。
  *
- * ⚠️対象範囲=PDF1〜4ページ目（青豊〜筑豊、県立全日制の全90校）を確定済み＝
- * **県立分は完結（grand totalと機械的に完全一致）**。2ページ目は宗像から始まる。
- * 市組合立分（別PDF）は未着手。
+ * ⚠️対象範囲=PDF1〜4ページ目（青豊〜筑豊、県立全日制の全90校）＋市組合立分PDF全8校
+ * （福翔・博多工業・福岡女子・福岡西陵・北九州市立高等学校・南筑・久留米商業・古賀竟成館）
+ * ＝**福岡県全日制が完結（県立90校＋市組合立8校＝計98校、両方のgrand totalと機械的に
+ * 完全一致）**。2ページ目は宗像から始まる。
+ *
+ * ⚠️2026-07-25追記（市組合立分）: 市組合立PDFは県立分と異なり、WebFetchで直接テキスト
+ * 抽出に成功した（県立分PDFは同じ手法でも「圧縮・暗号化されたバイナリ形式」として失敗した
+ * ため、原因はPDFごとの内部エンコード方式の違いと推測）。テキストが取れたため視覚読み取り
+ * より信頼度が高く、学校単位の「計」行との内部整合性チェック（Σ子学科=計行）に加えて
+ * 8校合計（quota2,120・確定志願者2,350・倍率1.11＝PDF末尾の「合計（8校）」行）とも
+ * 機械集計が完全一致することを確認した。久留米商業の経営科学科は、大学進学/経営情報/経営総合の
+ * 3コースの志願者数がPDFの注釈（注4）により合算でのみ公表されており、個別コース単位への
+ * 分解ができないため学校単位1レコード（quota240=70+70+100の合計・確定志願者266）として
+ * 正直に記録した（小倉商業・水産と同型の「くくり募集」パターン）。「北九州市立高等学校」は
+ * PDF上「北九州市立」とだけ略記されていたが、WebSearchで学校の正式名称が
+ * 「北九州市立高等学校」（北九州市戸畑区、2024年度に普通科から改編した「未来共創科」を
+ * 設置）であると確認した上で正式名称を採用した。
  *
  * ⚠️2026-07-25追記: PDF4ページ目が最終ページと判明した（末尾に「県立合計（90校）入学定員
  * 22,200・確定志願者数22,854・倍率1.03」という県レベルのグランドトータル行を確認・
@@ -129,19 +143,30 @@ export const FUKUOKA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       fiscalYear: '令和8年度（2026年度）',
       fetchedAt: '2026-07-25',
     },
+    {
+      url: 'https://www.pref.fukuoka.lg.jp/uploaded/life/806459_62802784_misc.pdf',
+      docTitle: '福岡県教育委員会 令和8年度市組合立高等学校一般入学志願状況（市組合立分PDF・全8校。県立分と異なりテキスト抽出に成功）',
+      fiscalYear: '令和8年度（2026年度）',
+      fetchedAt: '2026-07-25',
+    },
   ],
   coverage: {
-    status: 'partial',
+    status: 'complete',
     includedDepartments: [
-      '県立全日制（PDF1〜4ページ目・青豊〜筑豊の全90校＝県立分完結。機械集計がPDF末尾のグランドトータルと完全一致=quota22,200・applicants22,854・倍率1.03）',
+      '県立全日制（PDF1〜4ページ目・青豊〜筑豊の全90校。機械集計がPDF末尾のグランドトータルと完全一致=quota22,200・applicants22,854・倍率1.03）',
+      '市組合立全日制（別PDF・全8校=福翔/博多工業/福岡女子/福岡西陵/北九州市立高等学校/南筑/久留米商業/古賀竟成館。機械集計がPDF末尾のグランドトータルと完全一致=quota2,120・applicants2,350・倍率1.11）',
     ],
     pendingDepartments: [
-      '市組合立全日制（別PDF・uploaded/life/806459_62802784_misc.pdf・未着手。南筑（久留米市立）はこちらに含まれる見込み）',
+      '定時制（全日制の外側の別課程のため東京都・神奈川県・千葉県・埼玉県と同じ理由で意図的にスコープ外）',
     ],
-    note: '福岡県は資料が複数ページ＋県立/市組合立の別PDFに分かれている。今回はPDF1〜4ページ目の県立全日制90校170レコードを完全収録し、機械集計（quota22,200・applicants22,854・倍率1.03）がPDF末尾のグランドトータル（90校・定員22,200・確定志願者22,854・倍率1.03、リセモム記事とも一致）と完全に一致することを確認した。統合の過程で「小倉東」と「戸畑」という2校を誤って1レコードに統合していたミスを発見・修正した（詳細はファイル冒頭コメント参照）。残るは市組合立分（別PDF）のみで、これが完了すれば福岡県全体がstatus:complete化できる。',
+    note: '福岡県は資料が複数ページ＋県立/市組合立の別PDFに分かれているが、両方とも全日制を完全収録し、それぞれのgrand total（県立: 90校/quota22,200/applicants22,854/倍率1.03、市組合立: 8校/quota2,120/applicants2,350/倍率1.11）と機械集計が完全一致することを確認した＝福岡県の全日制（先行8県の6県目）が完結。県立分の統合過程で「小倉東」と「戸畑」という2校を誤って1レコードに統合していたミスを発見・修正した（詳細はファイル冒頭コメント参照）。定時制は東京都・神奈川県・千葉県・埼玉県と同じ理由で意図的にスコープ外。',
   },
   officialSubtotals: [
     { label: '県立全日制合計', quota: 22200, finalApplicants: 22854, finalRate: 1.03 },
+    { label: '市組合立全日制合計', quota: 2120, finalApplicants: 2350, finalRate: 1.11 },
+    { label: '博多工業 計', quota: 280, finalApplicants: 309, finalRate: 1.1 },
+    { label: '福岡女子 計', quota: 320, finalApplicants: 367, finalRate: 1.15 },
+    { label: '古賀竟成館 計', quota: 200, finalApplicants: 187, finalRate: 0.94 },
     { label: '苅田工業 計', quota: 160, finalApplicants: 159, finalRate: 0.99 },
     { label: '行橋 計', quota: 200, finalApplicants: 167, finalRate: 0.84 },
     { label: '小倉工業 計', quota: 200, finalApplicants: 220, finalRate: 1.1 },
@@ -345,5 +370,26 @@ export const FUKUOKA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '田川科学技術', department: 'ビジネス科学科', quota: 40, finalApplicants: 30, finalRate: 0.75 },
     { schoolName: '筑豊', department: '総合ビジネス科・ビジネス情報科（くくり募集）', quota: 120, finalApplicants: 58, finalRate: 0.48 },
     { schoolName: '筑豊', department: '生活デザイン科', quota: 40, finalApplicants: 27, finalRate: 0.68 },
+    { schoolName: '福翔', department: '総合学科', quota: 320, finalApplicants: 385, finalRate: 1.2 },
+    { schoolName: '博多工業', department: '機械科', quota: 80, finalApplicants: 92, finalRate: 1.15 },
+    { schoolName: '博多工業', department: '自動車工学科', quota: 40, finalApplicants: 57, finalRate: 1.43 },
+    { schoolName: '博多工業', department: 'インテリア科', quota: 40, finalApplicants: 41, finalRate: 1.03 },
+    { schoolName: '博多工業', department: '建築科', quota: 40, finalApplicants: 38, finalRate: 0.95 },
+    { schoolName: '博多工業', department: '画像工学科', quota: 40, finalApplicants: 40, finalRate: 1.0 },
+    { schoolName: '博多工業', department: '電子情報科', quota: 40, finalApplicants: 41, finalRate: 1.03 },
+    { schoolName: '福岡女子', department: '普通科', quota: 120, finalApplicants: 135, finalRate: 1.13 },
+    { schoolName: '福岡女子', department: '生活情報科', quota: 40, finalApplicants: 42, finalRate: 1.05 },
+    { schoolName: '福岡女子', department: '食物調理科', quota: 40, finalApplicants: 45, finalRate: 1.13 },
+    { schoolName: '福岡女子', department: '服飾デザイン科', quota: 40, finalApplicants: 47, finalRate: 1.18 },
+    { schoolName: '福岡女子', department: '保育福祉科', quota: 40, finalApplicants: 50, finalRate: 1.25 },
+    { schoolName: '福岡女子', department: '国際教養科', quota: 40, finalApplicants: 48, finalRate: 1.2 },
+    { schoolName: '福岡西陵', department: '普通科', quota: 320, finalApplicants: 345, finalRate: 1.08 },
+    { schoolName: '北九州市立高等学校', department: '未来共創科', quota: 200, finalApplicants: 220, finalRate: 1.1 },
+    { schoolName: '南筑', department: '普通科', quota: 240, finalApplicants: 271, finalRate: 1.13 },
+    { schoolName: '久留米商業', department: '経営科学科（大学進学・経営情報・経営総合の3コース合算公表）', quota: 240, finalApplicants: 266, finalRate: 1.11 },
+    { schoolName: '古賀竟成館', department: '普通科特進コース', quota: 40, finalApplicants: 14, finalRate: 0.35 },
+    { schoolName: '古賀竟成館', department: '普通科進学コース', quota: 105, finalApplicants: 132, finalRate: 1.26 },
+    { schoolName: '古賀竟成館', department: '普通科ベーシックデザインコース', quota: 15, finalApplicants: 12, finalRate: 0.8 },
+    { schoolName: '古賀竟成館', department: '総合ビジネス科', quota: 40, finalApplicants: 29, finalRate: 0.73 },
   ],
 };
