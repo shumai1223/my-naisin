@@ -227,7 +227,15 @@ export default async function Report2026Page() {
                 <tbody>
                   {ROWS.map((r) => (
                     <tr key={r.code} className="border-b border-slate-100 last:border-0">
-                      <td className="py-1.5 pr-2 font-medium text-slate-800">{r.name}</td>
+                      <td className="py-1.5 pr-2 font-medium text-slate-800">
+                        {REPORT_2026_DIGEST_CODES.includes(r.code) ? (
+                          <Link href={`/report/2026/${r.code}`} className="text-indigo-700 underline decoration-dotted hover:text-indigo-900">
+                            {r.name}
+                          </Link>
+                        ) : (
+                          r.name
+                        )}
+                      </td>
                       <td className="py-1.5 pr-2 text-slate-500">{r.region}</td>
                       <td className="py-1.5 pr-2 font-bold text-indigo-700">{r.practicalSkew}倍</td>
                       <td className="py-1.5 pr-2 text-slate-600">{r.grade3WeightPct}%</td>
