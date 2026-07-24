@@ -36,6 +36,14 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       note: '令和9(2027)年度入試から調査書の記載事項を「各教科の学習の記録（9教科5段階の評定）」を基本とする形に整理（特別活動等の記録・出欠の記録等を削除）。全受検生対象の面接・自己評価資料を新設。内申点の算出に使う評定（9教科5段階）・学年比率選択（1:1:1/1:1:2/1:1:3）の仕組み自体には変更なしと確認（/nyushi-seido-henkouにも掲載）',
     },
   ],
+  tokyo: [
+    {
+      date: '2026-07-24',
+      sourceUrl: 'https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/exam/release20250925_r8yoko.html',
+      sourceTitle: '東京都教育委員会「令和8年度入学者選抜実施要綱」',
+      note: 'ZZ-9b再検証優先度キュー(最終確認日2026-04-22で最古グループ)により選定・再検証。中3のみが対象で、5教科の評定合計をそのまま・実技4教科の評定合計を2倍にして合算した65点満点の換算内申(学力検査700点+調査書300点+ESAT-J20点=総合1020点満点のうち300点分に換算)という計算方式を、教育系情報サイト複数(栄光ゼミナール/進研ゼミ/都立高のトリセツ等)で独立にクロスチェックし、変更が無いことを確認した。数値・比率は既存記載(coreMultiplier 1・practicalMultiplier 2・maxScore 65・reverseCalc.totalMaxScore 1020)と完全一致',
+    },
+  ],
   hyogo: [
     {
       date: '2026-07-24',
