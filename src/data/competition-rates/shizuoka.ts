@@ -18,13 +18,16 @@
  * 表現できないため記録しない（Y-0憲法③「機械可読不能は正直にスキップ」の精神を適用）。
  *
  * ⚠️対象範囲=現時点でPDF1ページ目（下田〜三島北、13校19レコード）＋2ページ目（御殿場〜富士、
- * 13校20レコード）の計26校39レコードを高い確信度で確定済み。全体のページ数・総校数は
- * 未確認（次回セッションで残りページを確認しながら継続する）。
+ * 13校20レコード）＋3ページ目（富士東〜静岡城北、12校20レコード）の計38校59レコードを
+ * 高い確信度で確定済み。全体のページ数・総校数は未確認（次回セッションで残りページを
+ * 確認しながら継続する）。
  *
- * ⚠️「沼津市立沼津」は会場番号が100番（他校は連番14〜25）と特異で、募集定員が「(132)」と
- * 括弧書きされている（他校は括弧無しの数値）。市立高校であることに関連した特殊な定員表記の
- * 可能性があるが意味を確定できなかったため、括弧を外した数値132をそのままquotaとして採用した
- * （他の記録方法が見つかった場合は要再確認）。
+ * ⚠️会場番号が100番台（他校は連番14〜25等）の学校（沼津市立沼津=100・富士市立=101・
+ * 静岡市立清水桜が丘=102）は市立高校を意味すると判明した（3例とも「○○市立」を含む校名）。
+ * また沼津市立沼津・清水南（会場番号33・市立ではない）の2校では募集定員が「(132)」「(34)」
+ * のように括弧書きされている（他校は括弧無しの数値）。市立か否かに関わらず出現しており
+ * 原因は未確定だが、括弧を外した数値をそのままquotaとして採用した（3例観測され再現性のある
+ * パターンと判明・他の記録方法が見つかった場合は要再確認）。
  *
  * 定時制は東京都・神奈川県・千葉県・埼玉県・福岡県・兵庫県と同じ理由でスコープ外（全日制の
  * 外側の別課程のため対象外として明示的に除外）。
@@ -43,14 +46,14 @@ export const SHIZUOKA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
   ],
   coverage: {
     status: 'partial',
-    includedDepartments: ['全日制（PDF1〜2ページ目・下田〜富士の26校）'],
+    includedDepartments: ['全日制（PDF1〜3ページ目・下田〜静岡城北の38校）'],
     pendingDepartments: [
-      '全日制（PDF3ページ目以降、総ページ数・総校数とも未確認）',
+      '全日制（PDF4ページ目以降、総ページ数・総校数とも未確認）',
       '定時制（全日制の外側の別課程のため東京都・神奈川県・千葉県・埼玉県・福岡県・兵庫県と同じ理由で意図的にスコープ外）',
     ],
     note:
       '静岡県は学科ごとに選抜枠（Ⅰ/Ⅱ/Ⅲ・特色選抜等）の割合内訳が付随する独自の表構造を持つ。' +
-      '今回はPDF1〜2ページ目の26校39レコード（学科の総定員行のみ）を高確信度で確定。「連携（定めない）」' +
+      '今回はPDF1〜3ページ目の38校59レコード（学科の総定員行のみ）を高確信度で確定。「連携（定めない）」' +
       '等の募集定員が数値化できない特殊枠は記録から除外した。総ページ数・県レベルのグランドトータルは' +
       'まだ確認できていない（残りページを継続する中で確認する）。',
   },
@@ -95,5 +98,25 @@ export const SHIZUOKA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '吉原工業', department: '機械工学・ロボット工学・電気機器工学・理数化学', quota: 160, finalApplicants: 140, finalRate: 0.88 },
     { schoolName: '富士', department: '普通科', quota: 200, finalApplicants: 224, finalRate: 1.12 },
     { schoolName: '富士', department: '理数科', quota: 40, finalApplicants: 39, finalRate: 0.98 },
+    { schoolName: '富士東', department: '普通科', quota: 160, finalApplicants: 160, finalRate: 1.0 },
+    { schoolName: '富士宮東', department: '普通科', quota: 120, finalApplicants: 99, finalRate: 0.83 },
+    { schoolName: '富士宮東', department: '福祉', quota: 40, finalApplicants: 31, finalRate: 0.78 },
+    { schoolName: '富士宮北', department: '普通科', quota: 120, finalApplicants: 135, finalRate: 1.13 },
+    { schoolName: '富士宮北', department: '商業', quota: 80, finalApplicants: 73, finalRate: 0.91 },
+    { schoolName: '富士宮西', department: '普通科', quota: 160, finalApplicants: 114, finalRate: 0.71 },
+    { schoolName: '富岳館', department: '総合', quota: 200, finalApplicants: 171, finalRate: 0.86 },
+    { schoolName: '富士市立', department: 'ビジネス探究', quota: 80, finalApplicants: 57, finalRate: 0.71 },
+    { schoolName: '富士市立', department: 'スポーツ探究', quota: 40, finalApplicants: 46, finalRate: 1.15 },
+    { schoolName: '富士市立', department: '総合探究', quota: 120, finalApplicants: 106, finalRate: 0.88 },
+    { schoolName: '清水東', department: '普通科', quota: 240, finalApplicants: 231, finalRate: 0.96 },
+    { schoolName: '清水東', department: '理数科', quota: 40, finalApplicants: 39, finalRate: 0.98 },
+    { schoolName: '清水西', department: '普通科', quota: 160, finalApplicants: 143, finalRate: 0.89 },
+    { schoolName: '清水南', department: '普通科', quota: 34, finalApplicants: 4, finalRate: 0.12 },
+    { schoolName: '清水南', department: '芸術', quota: 33, finalApplicants: 20, finalRate: 0.61 },
+    { schoolName: '静岡市立清水桜が丘', department: '普通科', quota: 120, finalApplicants: 126, finalRate: 1.05 },
+    { schoolName: '静岡市立清水桜が丘', department: '商業', quota: 120, finalApplicants: 129, finalRate: 1.08 },
+    { schoolName: '静岡', department: '普通科', quota: 320, finalApplicants: 419, finalRate: 1.31 },
+    { schoolName: '静岡城北', department: '普通科', quota: 200, finalApplicants: 191, finalRate: 0.96 },
+    { schoolName: '静岡城北', department: 'グローバル', quota: 40, finalApplicants: 55, finalRate: 1.38 },
   ],
 };
