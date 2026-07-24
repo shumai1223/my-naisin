@@ -5,16 +5,17 @@ import { FUKUOKA_COMPETITION_RATES } from '../fukuoka';
  * Y-2 DoD検証（福岡県・先行8県7県目）。
  *
  * 福岡県は資料が複数ページ＋県立/市組合立の別PDFに分かれるため、今回はPDF1ページ目
- * 全27校（青豊〜遠賀）＋2ページ目30校＋3ページ目21校＋4ページ目（最終ページ）10校の
- * 計88校・167レコードのみを対象とした正直な部分収録。PDF4ページ目末尾のグランドトータル行
- * （県立合計90校・定員22,200・確定志願者22,854・倍率1.03）を確認済みで、残る1校（筑豊）が
- * 解決すればPDF県立分は完結する。2ページ目の一部・1ページ目の北筑・3〜4ページ目の大半は、
- * PDF自体の視覚読み取りが試行のたびに食い違ったため、外部の学習塾サイト記事から引用し
- * rate整合性で裏取りした。県レベルの公式合計との最終突合はまだ行っていない（筑豊が未収録の
- * ため）ので、代わりに複数学科を持つ学校について、学校単位でPDFに印字された「計」行との
- * 完全一致を検証する。
+ * 全27校（青豊〜遠賀）＋2ページ目30校＋3ページ目21校＋4ページ目（最終ページ）全11校の
+ * 計89校・169レコードを対象とした転記。PDF4ページ目末尾のグランドトータル行
+ * （県立合計90校・定員22,200・確定志願者22,854・倍率1.03、リセモム記事とも一致）を
+ * 確認済みだが、本ファイルの機械集計（89校・quota21,960・applicants22,578）とは一致しない
+ * （差分1校・quota240・applicants276、原因未特定）。2ページ目の一部・1ページ目の北筑・
+ * 3〜4ページ目の大半は、PDF自体の視覚読み取りが試行のたびに食い違ったため、外部の学習塾
+ * サイト記事から引用しrate整合性で裏取りした。県レベルの公式合計との最終突合はグランド
+ * トータル不一致が解決するまで見送り、代わりに複数学科を持つ学校について、学校単位でPDFに
+ * 印字された「計」行との完全一致を検証する。
  */
-describe('福岡県 倍率パイプラインα（Y-2・PDF1〜4ページ目 計88校の部分収録テスト）', () => {
+describe('福岡県 倍率パイプラインα（Y-2・PDF1〜4ページ目 計89校の部分収録テスト・グランドトータル不一致あり）', () => {
   const { records, officialSubtotals } = FUKUOKA_COMPETITION_RATES;
   const schoolFilters: Record<string, string> = {
     '苅田工業 計': '苅田工業',
@@ -47,9 +48,10 @@ describe('福岡県 倍率パイプラインα（Y-2・PDF1〜4ページ目 計8
     '鞍手 計': '鞍手',
     '直方 計': '直方',
     '田川科学技術 計': '田川科学技術',
+    '筑豊 計': '筑豊',
   };
 
-  it('複数学科を持つ30校すべてで、学科別内訳の合計がPDF記載の学校単位「計」行（または外部裏取り値）と完全一致する', () => {
+  it('複数学科を持つ31校すべてで、学科別内訳の合計がPDF記載の学校単位「計」行（または外部裏取り値）と完全一致する', () => {
     for (const sub of officialSubtotals) {
       const schoolName = schoolFilters[sub.label];
       const result = checkAgainstSubtotal(records, sub, (r) => r.schoolName === schoolName);
@@ -81,19 +83,28 @@ describe('福岡県 倍率パイプラインα（Y-2・PDF1〜4ページ目 計8
     expect(FUKUOKA_COMPETITION_RATES.coverage.pendingDepartments.length).toBeGreaterThan(0);
   });
 
-  it('167レコードが収録されている（1ページ目27校+2ページ目30校+3ページ目21校+4ページ目10校=計88校）', () => {
-    expect(records.length).toBe(167);
+  it('169レコードが収録されている（1ページ目27校+2ページ目30校+3ページ目21校+4ページ目11校=計89校）', () => {
+    expect(records.length).toBe(169);
   });
 
-  it('外部塾サイト(筑豊地区記事)から裏取りしたPDF4ページ目10校が正しく収録されている', () => {
+  it('外部塾サイト(筑豊地区記事)から裏取りしたPDF4ページ目11校が正しく収録されている', () => {
     const chikuhoSchools = [
       '田川', '東鷹', '嘉穂', '嘉穂東', '嘉穂総合', '鞍手', '直方',
-      '稲築志耕館', '鞍手竜徳', '田川科学技術',
+      '稲築志耕館', '鞍手竜徳', '田川科学技術', '筑豊',
     ];
     for (const name of chikuhoSchools) {
       const schoolRecords = records.filter((r) => r.schoolName === name);
       expect(schoolRecords.length).toBeGreaterThan(0);
     }
+  });
+
+  it('グランドトータル不一致がcoverage.noteに正直に記録されている（89校とPDF記載90校の差分1校が未解決）', () => {
+    const distinctSchools = new Set(records.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(89);
+    const totalQuota = records.reduce((sum, r) => sum + r.quota, 0);
+    const totalApplicants = records.reduce((sum, r) => sum + r.finalApplicants, 0);
+    expect(totalQuota).toBe(21960);
+    expect(totalApplicants).toBe(22578);
   });
 
   it('外部塾サイト(実業高校記事)から裏取りした久留米筑水/三池工業/八女工業/八女農業/浮羽工業の15レコードが正しく収録されている', () => {
