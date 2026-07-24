@@ -9,6 +9,13 @@ import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { SaitamaResultFlow } from '@/components/Saitama/SaitamaResultFlow';
+import { getPrefectureByCode } from '@/lib/prefectures';
+
+// ZZ-10c: 出典リンクはprefectures.ts(X-14再検証で更新される単一ソース)から動的取得し、
+// ハードコード文字列との乖離(ドリフト)を構造的に防ぐ。フォールバックは万一未設定時の保険。
+// (発見: 旧ハードコードは前年度r7の要項URLのまま放置されていた=本来のドリフト実害例)
+const SAITAMA_SOURCE_URL =
+  getPrefectureByCode('saitama')?.sourceUrl ?? 'https://www.pref.saitama.lg.jp/f2208/r8nyuushi-jissiyoukou.html';
 
 const SAITAMA_FAQS = [
   {
@@ -255,7 +262,7 @@ export default function SaitamaTotalScorePage() {
             <div className="flex items-start gap-2">
               <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
               <p className="text-xs text-amber-800 leading-relaxed">
-                埼玉県は学年比率・調査書の各項目の配点・学力検査と調査書の比率・第1次/第2次選抜の比率が高校・学科ごとに異なります。志望校の正確な選抜基準は<a href="https://www.pref.saitama.lg.jp/f2208/r7nyuushi-jouhou.html" target="_blank" rel="noopener noreferrer" className="text-amber-900 underline font-bold">埼玉県教育委員会の公式情報</a>でご確認ください。
+                埼玉県は学年比率・調査書の各項目の配点・学力検査と調査書の比率・第1次/第2次選抜の比率が高校・学科ごとに異なります。志望校の正確な選抜基準は<a href={SAITAMA_SOURCE_URL} target="_blank" rel="noopener noreferrer" className="text-amber-900 underline font-bold">埼玉県教育委員会の公式情報</a>でご確認ください。
               </p>
             </div>
           </div>

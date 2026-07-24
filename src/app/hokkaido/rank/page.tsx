@@ -10,6 +10,12 @@ import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { HokkaidoRankResultFlow } from '@/components/Hokkaido/HokkaidoRankResultFlow';
+import { getPrefectureByCode } from '@/lib/prefectures';
+
+// ZZ-10c: 出典リンクはprefectures.ts(X-14再検証で更新される単一ソース)から動的取得し、
+// ハードコード文字列との乖離(ドリフト)を構造的に防ぐ。フォールバックは万一未設定時の保険。
+const HOKKAIDO_SOURCE_URL =
+  getPrefectureByCode('hokkaido')?.sourceUrl ?? 'https://www.dokyoi.pref.hokkaido.lg.jp/';
 
 // 可視の「よくある質問」セクションと完全一致させた FAQ（FAQ リッチリザルト用）
 const HOKKAIDO_RANK_FAQS = [
@@ -234,7 +240,7 @@ export default function HokkaidoRankPage() {
             <div className="flex items-start gap-2">
               <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
               <p className="text-xs text-amber-800 leading-relaxed">
-                本ツールの計算結果は北海道教育委員会の規定に基づく目安です。実際の合否は当日の倍率や他の受験者の得点状況により変動します。最新の情報は<a href="https://www.dokyoi.pref.hokkaido.lg.jp/" target="_blank" rel="noopener noreferrer" className="text-amber-900 underline font-bold">北海道教育委員会の公式サイト</a>でご確認ください。
+                本ツールの計算結果は北海道教育委員会の規定に基づく目安です。実際の合否は当日の倍率や他の受験者の得点状況により変動します。最新の情報は<a href={HOKKAIDO_SOURCE_URL} target="_blank" rel="noopener noreferrer" className="text-amber-900 underline font-bold">北海道教育委員会の公式サイト</a>でご確認ください。
               </p>
             </div>
           </div>

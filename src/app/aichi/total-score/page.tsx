@@ -9,6 +9,12 @@ import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { AichiTotalScoreResultFlow } from '@/components/Aichi/AichiTotalScoreResultFlow';
+import { getPrefectureByCode } from '@/lib/prefectures';
+
+// ZZ-10c: 出典リンクはprefectures.ts(X-14再検証で更新される単一ソース)から動的取得し、
+// ハードコード文字列との乖離(ドリフト)を構造的に防ぐ。フォールバックは万一未設定時の保険。
+const AICHI_SOURCE_URL =
+  getPrefectureByCode('aichi')?.sourceUrl ?? 'https://www.pref.aichi.jp/soshiki/kotogakko/';
 
 // 可視の「よくある質問」セクションと完全一致させた FAQ（FAQ リッチリザルト用）
 const AICHI_FAQS = [
@@ -290,7 +296,7 @@ export default function AichiTotalScorePage() {
             <div className="flex items-start gap-2">
               <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
               <p className="text-xs text-amber-800 leading-relaxed">
-                本ページの計算方法は令和5年度入試以降の愛知県公立高校入学者選抜実施要項に基づく解説です。各高校が採用する評価方法・面接の有無・傾斜配点は学校により異なります。最新の情報は<a href="https://www.pref.aichi.jp/soshiki/kotogakko/" target="_blank" rel="noopener noreferrer" className="text-amber-900 underline font-bold">愛知県教育委員会の公式サイト</a>でご確認ください。
+                本ページの計算方法は令和5年度入試以降の愛知県公立高校入学者選抜実施要項に基づく解説です。各高校が採用する評価方法・面接の有無・傾斜配点は学校により異なります。最新の情報は<a href={AICHI_SOURCE_URL} target="_blank" rel="noopener noreferrer" className="text-amber-900 underline font-bold">愛知県教育委員会の公式サイト</a>でご確認ください。
               </p>
             </div>
           </div>

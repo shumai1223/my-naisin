@@ -9,6 +9,11 @@ import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { FukuokaResultFlow } from '@/components/Fukuoka/FukuokaResultFlow';
+import { getPrefectureByCode } from '@/lib/prefectures';
+
+// ZZ-10c: 出典リンクはprefectures.ts(X-14再検証で更新される単一ソース)から動的取得し、
+// ハードコード文字列との乖離(ドリフト)を構造的に防ぐ。フォールバックは万一未設定時の保険。
+const FUKUOKA_SOURCE_URL = getPrefectureByCode('fukuoka')?.sourceUrl ?? 'https://www.pref.fukuoka.lg.jp/';
 
 const FUKUOKA_FAQS = [
   {
@@ -264,7 +269,7 @@ export default function FukuokaTotalScorePage() {
             <div className="flex items-start gap-2">
               <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
               <p className="text-xs text-amber-800 leading-relaxed">
-                合否判定の詳細・加重評価の対象学科・各高校の選考方法は年度により異なります。最新の情報は<a href="https://www.pref.fukuoka.lg.jp/" target="_blank" rel="noopener noreferrer" className="text-amber-900 underline font-bold">福岡県教育委員会の公式情報</a>でご確認ください。
+                合否判定の詳細・加重評価の対象学科・各高校の選考方法は年度により異なります。最新の情報は<a href={FUKUOKA_SOURCE_URL} target="_blank" rel="noopener noreferrer" className="text-amber-900 underline font-bold">福岡県教育委員会の公式情報</a>でご確認ください。
               </p>
             </div>
           </div>

@@ -9,6 +9,12 @@ import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { ChibaTotalScoreResultFlow } from '@/components/Chiba/ChibaTotalScoreResultFlow';
+import { getPrefectureByCode } from '@/lib/prefectures';
+
+// ZZ-10c: 出典リンクはprefectures.ts(X-14再検証で更新される単一ソース)から動的取得し、
+// ハードコード文字列との乖離(ドリフト)を構造的に防ぐ。フォールバックは万一未設定時の保険。
+const CHIBA_SOURCE_URL =
+  getPrefectureByCode('chiba')?.sourceUrl ?? 'https://www.pref.chiba.lg.jp/kyouiku/shidou/koukou/';
 
 const CHIBA_FAQS = [
   {
@@ -260,7 +266,7 @@ export default function ChibaTotalScorePage() {
             <div className="flex items-start gap-2">
               <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
               <p className="text-xs text-amber-800 leading-relaxed">
-                各高校のK値・学校設定検査の配点・選抜方法は学校ごと・年度ごとに異なります。志望校の正確な配点は各高校の発表および<a href="https://www.pref.chiba.lg.jp/kyouiku/shidou/koukou/" target="_blank" rel="noopener noreferrer" className="text-amber-900 underline font-bold">千葉県教育委員会の公式情報</a>でご確認ください。
+                各高校のK値・学校設定検査の配点・選抜方法は学校ごと・年度ごとに異なります。志望校の正確な配点は各高校の発表および<a href={CHIBA_SOURCE_URL} target="_blank" rel="noopener noreferrer" className="text-amber-900 underline font-bold">千葉県教育委員会の公式情報</a>でご確認ください。
               </p>
             </div>
           </div>
