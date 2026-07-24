@@ -4,9 +4,11 @@
  * 一次ソース: 福岡県教育委員会「令和8年度県立高等学校入学者選抜 一般入試 志願者数（確定）」
  * （県立分PDF、市組合立分は別PDF）。
  *
- * ⚠️対象範囲=現時点でPDF1ページ目全27校（青豊〜遠賀）＋PDF2ページ目の27校
+ * ⚠️対象範囲=現時点でPDF1ページ目全27校（青豊〜遠賀）＋PDF2ページ目の30校
  * （宗像・光陵・水産・玄界・新宮・福岡魁誠・須恵・宇美商業・香住丘・香椎・香椎工業・福岡
- * ＋筑紫丘〜糸島の15校）のみを高い確信度で確定済み。2ページ目は宗像から始まる。
+ * ＋筑紫丘〜糸島の15校＋福岡工業/福岡農業/糸島農業）＋PDF3ページ目の16校（小郡・三井・
+ * 明善・久留米・八女・福島・伝習館・山門・三潴・大川樟風・三池・ありあけ新世・朝倉・
+ * 朝倉東・朝倉光陽・浮羽究真館）のみを高い確信度で確定済み。2ページ目は宗像から始まる。
  *
  * ⚠️2026-07-25再訂正: 登録済みsourceUrl（pref.fukuoka.lg.jp/soshiki/kyouiku-somu/nyuusen.html）
  * が404化したため現在の掲載場所を再探索し、site/kyouiku/nyushi8.html配下のPDF
@@ -20,9 +22,12 @@
  * 自己検算で確認できたためPDF読み取り値をそのまま採用（遠賀は英進館記事でも同値を確認）。
  * 八幡南・東筑・中間は単一学科（普通科のみ）のため読み違いの余地が小さく、PDF読み取り値を
  * 採用（八幡南・中間は英進館記事でも同値を確認、東筑は複数回の再読で値が安定していた）。
- * PDF3ページ目には小郡〜朝倉光陽まで約20校の未収録データが新たに確認された（密集表の
- * 視覚読み取りは試行間で数値が食い違うリスクが高く、今回は確信を持てる範囲に絞り
- * 転記を見送った＝Y-0憲法の捏造ゼロ優先）。
+ * ⚠️2026-07-25追記: PDF3ページ目（小郡〜朝倉光陽、約21校）は英進館「筑後地区」記事で
+ * 16校29レコードを外部裏取りできた（全レコードでΣ子学科=計行の自己検算も完全一致）。
+ * 残る5校（久留米筑水・八女工業・八女農業・浮羽工業・三池工業）はこの記事に掲載が無く、
+ * 各校4〜6学科の複雑な内訳でPDF単独読み取りのリスクが高いため未着手のまま持ち越し。
+ * また同記事に「南筑（久留米市立）」の記載があったが、これは市組合立分PDFの管轄であり
+ * 本ファイル（県立分）には含めない（次回の市組合立PDF転記時に活用予定）。
  *
  * ⚠️2ページ目の筑紫丘・柏陵〜糸島の15校（普通科系20レコード）は、PDF自体の密集した
  * 表組みの視覚読み取りが試行のたびに異なる数値を返す（例:筑紫丘の学科別内訳が読むたびに
@@ -85,19 +90,26 @@ export const FUKUOKA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       fiscalYear: '令和8年度（2026年度）',
       fetchedAt: '2026-07-25',
     },
+    {
+      url: 'https://www.eishinkan.net/entrance/high_admissions/7932/',
+      docTitle: '英進館 筑後地区 令和8年度公立高校一般入試志願者状況（PDF3ページ目・小郡/三井/明善/久留米/八女/福島/伝習館/山門/三潴/大川樟風/三池/ありあけ新世/朝倉/朝倉東/朝倉光陽/浮羽究真館の一括引用元）',
+      fiscalYear: '令和8年度（2026年度）',
+      fetchedAt: '2026-07-25',
+    },
   ],
   coverage: {
     status: 'partial',
     includedDepartments: [
       '県立全日制（PDF1ページ目・青豊〜遠賀の27校）',
       '県立全日制（PDF2ページ目・宗像〜糸島の30校=宗像〜福岡魁誠等の12校+筑紫丘〜糸島の15校(外部塾サイト裏取り)+福岡工業/福岡農業/糸島農業の3校(外部塾サイト裏取り)）',
+      '県立全日制（PDF3ページ目・小郡〜浮羽究真館の16校、全て英進館筑後地区記事で裏取り済み）',
     ],
     pendingDepartments: [
-      '県立全日制（PDF3ページ目・小郡〜朝倉光陽の約20校、2026-07-25に存在を確認したが未転記）',
+      '県立全日制（PDF3ページ目残り・久留米筑水/八女工業/八女農業/浮羽工業/三池工業の5校、外部裏取り元が見つからず未着手）',
       '県立全日制（PDF4ページ目以降、存在する場合は未確認）',
-      '市組合立全日制（別PDF・uploaded/life/806459_62802784_misc.pdf・未着手）',
+      '市組合立全日制（別PDF・uploaded/life/806459_62802784_misc.pdf・未着手。南筑（久留米市立）はこちらに含まれる見込み）',
     ],
-    note: '福岡県は資料が複数ページ＋県立/市組合立の別PDFに分かれており、今回はPDF1ページ目27校＋2ページ目30校の計57校のみを高確信度で確定（PDF2ページ目は完了）。PDF自体は4ページ以上に及ぶ大規模資料と判明済み（3ページ目約20校が2026-07-25に存在確認済みだが未転記）。県レベルの公式合計（全日制県立 定員22,200/志願者22,854/倍率1.03）との突合はまだ行っていない（残りページ未読のため）。学校単位の計行との突合、および外部裏取り値のrate整合性チェックのみ実施済み。',
+    note: '福岡県は資料が複数ページ＋県立/市組合立の別PDFに分かれており、今回はPDF1ページ目27校＋2ページ目30校＋3ページ目16校の計73校のみを高確信度で確定。PDF自体は4ページ以上に及ぶ大規模資料の可能性がある（3ページ目残り5校は未転記）。県レベルの公式合計（全日制県立 定員22,200/志願者22,854/倍率1.03）との突合はまだ行っていない（残りページ未読のため）。学校単位の計行との突合、および外部裏取り値のrate整合性チェックのみ実施済み。',
   },
   officialSubtotals: [
     { label: '苅田工業 計', quota: 160, finalApplicants: 159, finalRate: 0.99 },
@@ -113,6 +125,16 @@ export const FUKUOKA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { label: '香椎工業 計', quota: 280, finalApplicants: 333, finalRate: 1.19 },
     { label: '北筑 計', quota: 240, finalApplicants: 281, finalRate: 1.17 },
     { label: '折尾 計', quota: 160, finalApplicants: 169, finalRate: 1.06 },
+    { label: '小郡 計', quota: 280, finalApplicants: 299, finalRate: 1.07 },
+    { label: '三井 計', quota: 160, finalApplicants: 136, finalRate: 0.85 },
+    { label: '明善 計', quota: 320, finalApplicants: 417, finalRate: 1.3 },
+    { label: '久留米 計', quota: 240, finalApplicants: 278, finalRate: 1.16 },
+    { label: '福島 計', quota: 160, finalApplicants: 134, finalRate: 0.84 },
+    { label: '山門 計', quota: 160, finalApplicants: 148, finalRate: 0.93 },
+    { label: '三潴 計', quota: 120, finalApplicants: 67, finalRate: 0.56 },
+    { label: '大川樟風 計', quota: 120, finalApplicants: 85, finalRate: 0.71 },
+    { label: '朝倉東 計', quota: 160, finalApplicants: 137, finalRate: 0.86 },
+    { label: '朝倉光陽 計', quota: 120, finalApplicants: 105, finalRate: 0.88 },
   ],
   records: [
     { schoolName: '青豊', department: '総合学科', quota: 280, finalApplicants: 286, finalRate: 1.02 },
@@ -215,5 +237,34 @@ export const FUKUOKA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '糸島農業', department: '動植物活用科', quota: 40, finalApplicants: 42, finalRate: 1.05 },
     { schoolName: '糸島農業', department: '食品科学科', quota: 40, finalApplicants: 43, finalRate: 1.08 },
     { schoolName: '糸島農業', department: '生活科学科', quota: 40, finalApplicants: 39, finalRate: 0.98 },
+    { schoolName: '小郡', department: '普通科（コースを除く）', quota: 240, finalApplicants: 259, finalRate: 1.08 },
+    { schoolName: '小郡', department: '普通科みらい創造コース', quota: 40, finalApplicants: 40, finalRate: 1.0 },
+    { schoolName: '三井', department: '普通科（コースを除く）', quota: 80, finalApplicants: 66, finalRate: 0.83 },
+    { schoolName: '三井', department: '福祉教養コース', quota: 40, finalApplicants: 32, finalRate: 0.8 },
+    { schoolName: '三井', department: 'スポーツ健康コース', quota: 40, finalApplicants: 38, finalRate: 0.95 },
+    { schoolName: '明善', department: '普通科（コースを除く）', quota: 240, finalApplicants: 263, finalRate: 1.1 },
+    { schoolName: '明善', department: '普通科総合文科コース', quota: 40, finalApplicants: 63, finalRate: 1.58 },
+    { schoolName: '明善', department: '理数科', quota: 40, finalApplicants: 91, finalRate: 2.28 },
+    { schoolName: '久留米', department: '普通科', quota: 200, finalApplicants: 227, finalRate: 1.14 },
+    { schoolName: '久留米', department: '英語科', quota: 40, finalApplicants: 51, finalRate: 1.28 },
+    { schoolName: '八女', department: '普通科', quota: 240, finalApplicants: 243, finalRate: 1.01 },
+    { schoolName: '福島', department: '普通科', quota: 80, finalApplicants: 62, finalRate: 0.78 },
+    { schoolName: '福島', department: '総合ビジネス科', quota: 40, finalApplicants: 39, finalRate: 0.98 },
+    { schoolName: '福島', department: '生活デザイン科', quota: 40, finalApplicants: 33, finalRate: 0.83 },
+    { schoolName: '伝習館', department: '普通科', quota: 200, finalApplicants: 257, finalRate: 1.29 },
+    { schoolName: '山門', department: '普通科（コースを除く）', quota: 140, finalApplicants: 141, finalRate: 1.01 },
+    { schoolName: '山門', department: '普通科理数探究コース', quota: 20, finalApplicants: 7, finalRate: 0.35 },
+    { schoolName: '三潴', department: '普通科（コースを除く）', quota: 80, finalApplicants: 28, finalRate: 0.35 },
+    { schoolName: '三潴', department: '普通科スポーツ文化コース', quota: 40, finalApplicants: 39, finalRate: 0.98 },
+    { schoolName: '大川樟風', department: '普通科文理コース', quota: 80, finalApplicants: 60, finalRate: 0.75 },
+    { schoolName: '大川樟風', department: '住環境システム科', quota: 40, finalApplicants: 25, finalRate: 0.63 },
+    { schoolName: '三池', department: '普通科', quota: 200, finalApplicants: 192, finalRate: 0.96 },
+    { schoolName: 'ありあけ新世', department: '総合学科', quota: 160, finalApplicants: 153, finalRate: 0.96 },
+    { schoolName: '朝倉', department: '普通科', quota: 240, finalApplicants: 232, finalRate: 0.97 },
+    { schoolName: '朝倉東', department: '普通科', quota: 80, finalApplicants: 66, finalRate: 0.83 },
+    { schoolName: '朝倉東', department: 'ビジネス科', quota: 80, finalApplicants: 71, finalRate: 0.89 },
+    { schoolName: '朝倉光陽', department: '普通科', quota: 40, finalApplicants: 32, finalRate: 0.8 },
+    { schoolName: '朝倉光陽', department: '食農科学科', quota: 80, finalApplicants: 73, finalRate: 0.91 },
+    { schoolName: '浮羽究真館', department: '普通科総合コース', quota: 160, finalApplicants: 96, finalRate: 0.6 },
   ],
 };
