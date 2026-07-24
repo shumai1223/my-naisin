@@ -1,0 +1,91 @@
+/**
+ * 福岡県 公立高等学校 倍率パイプラインα（Y-2・先行8県の7県目）。
+ *
+ * 一次ソース: 福岡県教育委員会「令和8年度県立高等学校入学者選抜 一般入試 志願者数（確定）」
+ * （県立分PDF、市組合立分は別PDF）。
+ *
+ * ⚠️対象範囲=現時点でPDF1ページ目（県立全日制、青豊高校〜八幡工業高校の21校）のみを
+ * 高い確信度で確定済み。それ以降のページ（八幡南以降）・市組合立分PDFは未着手。
+ * 北九州高校の「普通科(コースを除く)」「普通科体育コース」の2行は当初PDF読み取りで
+ * 曖昧だったため、外部の学習塾サイト（英進館）の入試速報記事で確定値を裏取りした
+ * （1データ点=1出典の原則の例外的補強・数値そのものはPDF記載値と整合）。
+ *
+ * 複数学科を持つ学校（苅田工業・行橋・小倉工業・戸畑工業・八幡・八幡中央・八幡工業）は
+ * 学科別内訳とPDF記載の学校単位「計」行の両方を記録し、Σ子学科=計行が一致することを
+ * テストで検証する（学校単位の自己検算＝officialSubtotalsとして採用）。
+ *
+ * 定時制（全日制の外側の別課程）は東京都・神奈川県・千葉県・埼玉県と同じ理由でスコープ外。
+ */
+import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
+
+export const FUKUOKA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
+  prefectureCode: 'fukuoka',
+  sources: [
+    {
+      url: 'https://www.pref.fukuoka.lg.jp/soshiki/kyouiku-somu/nyuusen.html',
+      docTitle: '福岡県教育委員会 令和8年度県立高等学校入学者選抜 一般入試志願者数（確定）',
+      fiscalYear: '令和8年度（2026年度）',
+      fetchedAt: '2026-07-25',
+    },
+    {
+      url: 'https://www.eishinkan.net/entrance/high_admissions/7927/',
+      docTitle: '英進館 北九州地区 令和8年度公立高校一般入試志願者状況（北九州高校の学科別内訳の裏取りに使用）',
+      fiscalYear: '令和8年度（2026年度）',
+      fetchedAt: '2026-07-25',
+    },
+  ],
+  coverage: {
+    status: 'partial',
+    includedDepartments: ['県立全日制（PDF1ページ目・青豊〜八幡工業の21校のみ）'],
+    pendingDepartments: [
+      '県立全日制（PDF2ページ目以降・八幡南〜末尾）',
+      '市組合立全日制（別PDF・未着手）',
+    ],
+    note: '福岡県は資料が複数ページ＋県立/市組合立の別PDFに分かれており、今回はPDF1ページ目の21校のみを高確信度で確定。県レベルの公式合計との突合はまだ行っていない（残りページ未読のため）。学校単位の計行との突合のみ実施済み。',
+  },
+  officialSubtotals: [
+    { label: '苅田工業 計', quota: 160, finalApplicants: 159, finalRate: 0.99 },
+    { label: '行橋 計', quota: 200, finalApplicants: 167, finalRate: 0.84 },
+    { label: '小倉工業 計', quota: 200, finalApplicants: 220, finalRate: 1.1 },
+    { label: '戸畑工業 計', quota: 160, finalApplicants: 142, finalRate: 0.89 },
+    { label: '八幡 計', quota: 280, finalApplicants: 295, finalRate: 1.05 },
+    { label: '八幡中央 計', quota: 200, finalApplicants: 182, finalRate: 0.91 },
+    { label: '八幡工業 計', quota: 200, finalApplicants: 218, finalRate: 1.09 },
+  ],
+  records: [
+    { schoolName: '青豊', department: '総合学科', quota: 280, finalApplicants: 286, finalRate: 1.02 },
+    { schoolName: '築上西', department: '普通科', quota: 120, finalApplicants: 85, finalRate: 0.71 },
+    { schoolName: '育徳館', department: '普通科', quota: 160, finalApplicants: 143, finalRate: 0.89 },
+    { schoolName: '苅田工業', department: '電気科', quota: 40, finalApplicants: 34, finalRate: 0.85 },
+    { schoolName: '苅田工業', department: '機械科', quota: 80, finalApplicants: 86, finalRate: 1.08 },
+    { schoolName: '苅田工業', department: '情報技術科', quota: 40, finalApplicants: 39, finalRate: 0.98 },
+    { schoolName: '京都', department: '普通科', quota: 240, finalApplicants: 221, finalRate: 0.92 },
+    { schoolName: '行橋', department: '農業技術科', quota: 40, finalApplicants: 35, finalRate: 0.88 },
+    { schoolName: '行橋', department: '環境緑地科', quota: 40, finalApplicants: 33, finalRate: 0.83 },
+    { schoolName: '行橋', department: '総合ビジネス科', quota: 40, finalApplicants: 29, finalRate: 0.73 },
+    { schoolName: '行橋', department: '生活デザイン科', quota: 80, finalApplicants: 70, finalRate: 0.88 },
+    { schoolName: '門司学園', department: '普通科', quota: 160, finalApplicants: 123, finalRate: 0.77 },
+    { schoolName: '門司大翔館', department: '普通科', quota: 160, finalApplicants: 133, finalRate: 0.83 },
+    { schoolName: '小倉南', department: '普通科', quota: 200, finalApplicants: 266, finalRate: 1.33 },
+    { schoolName: '小倉商業', department: '商業に関する学科（くくり募集6コース）', quota: 240, finalApplicants: 291, finalRate: 1.21 },
+    { schoolName: '小倉', department: '普通科', quota: 280, finalApplicants: 332, finalRate: 1.19 },
+    { schoolName: '小倉工業', department: '機械系（機械科・電子機械科）', quota: 80, finalApplicants: 98, finalRate: 1.23 },
+    { schoolName: '小倉工業', department: '電気系（電気科・電子科）', quota: 80, finalApplicants: 83, finalRate: 1.04 },
+    { schoolName: '小倉工業', department: '化学科（工業化学科）', quota: 40, finalApplicants: 39, finalRate: 0.98 },
+    { schoolName: '小倉西', department: '普通科', quota: 200, finalApplicants: 235, finalRate: 1.18 },
+    { schoolName: '北九州', department: '普通科（コースを除く）', quota: 160, finalApplicants: 246, finalRate: 1.54 },
+    { schoolName: '北九州', department: '普通科体育コース', quota: 40, finalApplicants: 46, finalRate: 1.15 },
+    { schoolName: '戸畑', department: '普通科', quota: 160, finalApplicants: 173, finalRate: 1.08 },
+    { schoolName: '戸畑工業', department: '機械・電気系（機械科・電気科）', quota: 120, finalApplicants: 103, finalRate: 0.86 },
+    { schoolName: '戸畑工業', department: '建築系（建築科）', quota: 40, finalApplicants: 39, finalRate: 0.98 },
+    { schoolName: '若松', department: '普通科', quota: 160, finalApplicants: 128, finalRate: 0.8 },
+    { schoolName: '若松商業', department: '商業に関する学科（くくり募集）', quota: 160, finalApplicants: 107, finalRate: 0.67 },
+    { schoolName: '八幡', department: '文理創創科', quota: 200, finalApplicants: 216, finalRate: 1.08 },
+    { schoolName: '八幡', department: '理数科', quota: 80, finalApplicants: 79, finalRate: 0.99 },
+    { schoolName: '八幡中央', department: '普通科（コースを除く）', quota: 160, finalApplicants: 143, finalRate: 0.89 },
+    { schoolName: '八幡中央', department: '普通科芸術コース', quota: 40, finalApplicants: 39, finalRate: 0.98 },
+    { schoolName: '八幡工業', department: '機械系（機械科・電子機械科・材料技術科）', quota: 120, finalApplicants: 131, finalRate: 1.09 },
+    { schoolName: '八幡工業', department: '電気系（電気科）', quota: 40, finalApplicants: 41, finalRate: 1.03 },
+    { schoolName: '八幡工業', department: '土木系（土木科）', quota: 40, finalApplicants: 46, finalRate: 1.15 },
+  ],
+};
