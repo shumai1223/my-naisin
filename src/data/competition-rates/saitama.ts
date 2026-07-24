@@ -11,17 +11,25 @@
  * （募集人員の内数）で、Aは実際に一般選抜で競われる枠（募集人員から差し引いた後の数）。
  * 本データはAをquota・Bをfinal Applicantsとして採用する（千葉県の「募集人員(B)」採用と同じ設計）。
  *
- * ⚠️対象範囲=全日制（普通科＋専門学科＋総合学科）をほぼ完全収録（240レコード）。
- * 総合学科は公式「計」行と完全一致（1,704／1,525）。普通科は募集人員（quota合計25,517）は
- * 完全一致するが、志願確定者数の合計が公式計（27,668）に対し+4の未解明な差分が残る
- * （全240レコードの単体整合性=quota×rate≈applicantsは1件残らず確認済みだが、102校規模の
- * 普通科の中でどの1校が+4の原因かは特定に至らなかった）。専門学科は「農業に関する学科」の
- * 小計が公式計（797／634）に対し-40（quota）／-44（applicants）不足しており、6校17行の
- * 転記を複数回再読・外部ソース照合（各校の設置学科を個別に検索確認）してもなお原因を
- * 特定できなかった（見落とした学校が存在する可能性が最も高いが未確認）。同様に商業に関する
- * 学科もapplicants側に+2の小さな未解明差分が残る（quotaは完全一致）。Y-0憲法③
- * 「機械可読不能・特定困難な差分は正直に開示」に従い、この2件の残差はcoverage.noteに
- * 明記のうえ捏造や無理な帳尻合わせをせずそのまま収録する。
+ * ⚠️対象範囲=全日制（普通科＋専門学科＋総合学科）を完全収録（241レコード）＝
+ * **grand totalと機械的に完全一致（quota34,603・applicants35,976・倍率1.04）**。
+ *
+ * ⚠️2026-07-25追記（3件の未解明差分を解決）: 当初は普通科+4・農業に関する学科-40/-44・
+ * 商業に関する学科+2という3件の未解明差分があったが、原PDFをWebFetchで再取得したところ
+ * 全9ページのテキスト抽出に成功（当初はPDF単体読み取りに依存していたため精度が不足していた）。
+ * これと既存データを機械的に突合した結果、以下4件の実際の誤りを特定・修正した：
+ * ①熊谷西・越谷西・南稜・ふじみ野の4校で「2月10日時点の志願者数」列と「確定志願者数」列を
+ * 混同していた転記ミス（普通科の合計+4はこの4件のネット差分と完全一致）。
+ * ②杉戸農業高等学校は6学科（生物生産技術科・園芸科・造園科・食品流通科・生物生産工学科・
+ * 生活技術科）を設置しているが、「生活技術科」の転記が丸ごと漏れていた（熊谷農業にも同名の
+ * 学科があり、6→5学科への転記漏れは類似校の学科名に気を取られたことが原因と推測）。
+ * quota40/applicants44を追加し、農業に関する学科の-40/-44と完全に一致して解消。
+ * ③狭山経済高等学校の情報処理科で「確定数」列(75)ではなく「2月10日時点」列(77)を誤って
+ * 転記していた（商業に関する学科の+2と一致）。
+ * ④「越生翔陽」という誤った学校名で登録していたが、正しくは「越生翔桜」（令和8年4月に
+ * 越生高校と鳩山高校の統合で新設された学校）とWebSearchで確認し訂正した。
+ * これら全ての修正後、機械集計がPDF末尾のグランドトータル（quota34,603・applicants35,976・
+ * 倍率1.04）と完全に一致することを確認した。
  *
  * 定時制は東京都・神奈川県・千葉県と同じ理由でスコープ外（全日制の外側の別課程のため
  * 対象外として明示的に除外）。伊奈学園総合高等学校の「普通科」は同校の普通・スポーツ科学・
@@ -40,22 +48,23 @@ export const SAITAMA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     },
   ],
   coverage: {
-    status: 'partial',
+    status: 'complete',
     includedDepartments: ['全日制 普通科', '全日制 専門学科（農業・工業・商業・家庭・看護・外国語等14学科群）', '全日制 総合学科'],
-    pendingDepartments: [],
+    pendingDepartments: ['定時制（全日制の外側の別課程のため東京都・神奈川県・千葉県と同じ理由で意図的にスコープ外）'],
     note:
-      '全日制（普通科＋専門学科＋総合学科・240レコード）を収録。総合学科は公式計と完全一致。' +
-      '普通科は志願確定者数が公式計に対し+4、専門学科(農業に関する学科)はquota-40/applicants-44の' +
-      '未解明な差分が残る（原因未特定・複数回の再読と外部照合を実施したが特定に至らず。' +
-      '捏造回避のため無理に帳尻を合わせず正直に開示）。定時制は全日制の外側の別課程のため' +
-      'スコープ外として明示的に除外。',
+      '全日制（普通科＋専門学科＋総合学科・241レコード）を完全収録。機械集計（quota34,603・' +
+      'applicants35,976・倍率1.04）がPDF末尾のグランドトータルと完全一致することを確認済み。' +
+      '当初あった3件の未解明差分（普通科+4・農業に関する学科-40/-44・商業に関する学科+2）は' +
+      '全て実際の転記ミスと判明し修正済み（詳細はファイル冒頭コメント参照）。定時制は全日制の' +
+      '外側の別課程のためスコープ外として明示的に除外。',
   },
   officialSubtotals: [
-    { label: '普通科計（公式値・募集人員側のみ完全一致を確認済み）', quota: 25517, finalApplicants: 27668, finalRate: 1.08 },
+    { label: '全日制合計', quota: 34603, finalApplicants: 35976, finalRate: 1.04 },
+    { label: '普通科計', quota: 25517, finalApplicants: 27668, finalRate: 1.08 },
     { label: '総合学科計', quota: 1704, finalApplicants: 1525, finalRate: 0.89 },
-    { label: '農業に関する学科 計（公式値・-40/-44の未解明差分あり）', quota: 797, finalApplicants: 634, finalRate: 0.8 },
+    { label: '農業に関する学科 計', quota: 797, finalApplicants: 634, finalRate: 0.8 },
     { label: '工業に関する学科 計', quota: 2343, finalApplicants: 1973, finalRate: 0.84 },
-    { label: '商業に関する学科 計（公式値・applicants側に+2の未解明差分あり）', quota: 2206, finalApplicants: 1998, finalRate: 0.91 },
+    { label: '商業に関する学科 計', quota: 2206, finalApplicants: 1998, finalRate: 0.91 },
     { label: '家庭に関する学科 計', quota: 319, finalApplicants: 306, finalRate: 0.96 },
     { label: '看護に関する学科 計', quota: 80, finalApplicants: 88, finalRate: 1.1 },
     { label: '外国語に関する学科 計', quota: 240, finalApplicants: 270, finalRate: 1.13 },
@@ -97,7 +106,7 @@ export const SAITAMA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '小川', department: '普通科', quota: 198, finalApplicants: 162, finalRate: 0.82 },
     { schoolName: '桶川', department: '普通科', quota: 278, finalApplicants: 265, finalRate: 0.95 },
     { schoolName: '桶川西', department: '普通科', quota: 118, finalApplicants: 102, finalRate: 0.86 },
-    { schoolName: '越生翔陽', department: '普通科', quota: 118, finalApplicants: 51, finalRate: 0.43 },
+    { schoolName: '越生翔桜', department: '普通科', quota: 118, finalApplicants: 51, finalRate: 0.43 },
     { schoolName: '春日部', department: '普通科', quota: 358, finalApplicants: 473, finalRate: 1.32 },
     { schoolName: '春日部女子', department: '普通科', quota: 238, finalApplicants: 243, finalRate: 1.02 },
     { schoolName: '春日部東', department: '普通科', quota: 318, finalApplicants: 323, finalRate: 1.02 },
@@ -114,13 +123,13 @@ export const SAITAMA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '久喜', department: '普通科', quota: 278, finalApplicants: 244, finalRate: 0.88 },
     { schoolName: '熊谷', department: '普通科', quota: 278, finalApplicants: 314, finalRate: 1.13 },
     { schoolName: '熊谷女子', department: '普通科', quota: 278, finalApplicants: 313, finalRate: 1.13 },
-    { schoolName: '熊谷西', department: '普通科', quota: 278, finalApplicants: 325, finalRate: 1.17 },
+    { schoolName: '熊谷西', department: '普通科', quota: 278, finalApplicants: 324, finalRate: 1.17 },
     { schoolName: '栗橋北彩', department: '普通科', quota: 158, finalApplicants: 131, finalRate: 0.83 },
     { schoolName: '鴻巣', department: '普通科', quota: 198, finalApplicants: 172, finalRate: 0.87 },
     { schoolName: '鴻巣女子', department: '普通科', quota: 79, finalApplicants: 40, finalRate: 0.51 },
     { schoolName: '越ケ谷', department: '普通科', quota: 318, finalApplicants: 405, finalRate: 1.27 },
     { schoolName: '越谷北', department: '普通科', quota: 318, finalApplicants: 381, finalRate: 1.2 },
-    { schoolName: '越谷西', department: '普通科', quota: 318, finalApplicants: 319, finalRate: 1.01 },
+    { schoolName: '越谷西', department: '普通科', quota: 318, finalApplicants: 320, finalRate: 1.01 },
     { schoolName: '越谷東', department: '普通科', quota: 278, finalApplicants: 290, finalRate: 1.04 },
     { schoolName: '越谷南', department: '普通科', quota: 318, finalApplicants: 427, finalRate: 1.34 },
     { schoolName: '児玉', department: '普通科', quota: 79, finalApplicants: 27, finalRate: 0.34 },
@@ -142,7 +151,7 @@ export const SAITAMA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '所沢中央', department: '普通科', quota: 318, finalApplicants: 322, finalRate: 1.01 },
     { schoolName: '所沢西', department: '普通科', quota: 318, finalApplicants: 346, finalRate: 1.09 },
     { schoolName: '豊岡', department: '普通科', quota: 318, finalApplicants: 338, finalRate: 1.06 },
-    { schoolName: '南稜', department: '普通科', quota: 318, finalApplicants: 376, finalRate: 1.18 },
+    { schoolName: '南稜', department: '普通科', quota: 318, finalApplicants: 370, finalRate: 1.16 },
     { schoolName: '新座', department: '普通科', quota: 198, finalApplicants: 162, finalRate: 0.82 },
     { schoolName: '新座柳瀬', department: '普通科', quota: 198, finalApplicants: 215, finalRate: 1.09 },
     { schoolName: '蓮田松韻', department: '普通科', quota: 158, finalApplicants: 146, finalRate: 0.92 },
@@ -154,7 +163,7 @@ export const SAITAMA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '深谷', department: '普通科', quota: 198, finalApplicants: 149, finalRate: 0.75 },
     { schoolName: '深谷第一', department: '普通科', quota: 278, finalApplicants: 280, finalRate: 1.01 },
     { schoolName: '富士見', department: '普通科', quota: 198, finalApplicants: 207, finalRate: 1.05 },
-    { schoolName: 'ふじみ野', department: '普通科', quota: 118, finalApplicants: 106, finalRate: 0.9 },
+    { schoolName: 'ふじみ野', department: '普通科', quota: 118, finalApplicants: 108, finalRate: 0.92 },
     { schoolName: '不動岡', department: '普通科', quota: 358, finalApplicants: 482, finalRate: 1.35 },
     { schoolName: '本庄', department: '普通科', quota: 318, finalApplicants: 347, finalRate: 1.09 },
     { schoolName: '松伏', department: '普通科', quota: 118, finalApplicants: 116, finalRate: 0.98 },
@@ -188,6 +197,7 @@ export const SAITAMA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '杉戸農業', department: '園芸科', quota: 40, finalApplicants: 41, finalRate: 1.03 },
     { schoolName: '杉戸農業', department: '造園科', quota: 39, finalApplicants: 36, finalRate: 0.92 },
     { schoolName: '杉戸農業', department: '食品流通科', quota: 40, finalApplicants: 39, finalRate: 0.98 },
+    { schoolName: '杉戸農業', department: '生活技術科', quota: 40, finalApplicants: 44, finalRate: 1.1 },
     { schoolName: '杉戸農業', department: '生物生産技術科', quota: 40, finalApplicants: 39, finalRate: 0.98 },
     { schoolName: '秩父農工科学', department: '農業科', quota: 40, finalApplicants: 38, finalRate: 0.95 },
     { schoolName: '秩父農工科学', department: '食品化学科', quota: 39, finalApplicants: 11, finalRate: 0.28 },
@@ -256,7 +266,7 @@ export const SAITAMA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '越谷総合技術', department: '情報処理科', quota: 40, finalApplicants: 17, finalRate: 0.43 },
     { schoolName: '狭山経済', department: '流通経済科', quota: 79, finalApplicants: 73, finalRate: 0.92 },
     { schoolName: '狭山経済', department: '会計科', quota: 40, finalApplicants: 30, finalRate: 0.75 },
-    { schoolName: '狭山経済', department: '情報処理科', quota: 80, finalApplicants: 77, finalRate: 0.96 },
+    { schoolName: '狭山経済', department: '情報処理科', quota: 80, finalApplicants: 75, finalRate: 0.94 },
     { schoolName: '所沢商業', department: '情報処理科', quota: 79, finalApplicants: 57, finalRate: 0.72 },
     { schoolName: '所沢商業', department: '国際流通科', quota: 79, finalApplicants: 44, finalRate: 0.56 },
     { schoolName: '所沢商業', department: 'ビジネス会計科', quota: 40, finalApplicants: 12, finalRate: 0.3 },
@@ -294,7 +304,7 @@ export const SAITAMA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
 
     // ===== 全日制 専門学科：美術に関する学科 =====
     { schoolName: '大宮光陵', department: '美術科', quota: 40, finalApplicants: 49, finalRate: 1.23 },
-    { schoolName: '越生翔陽', department: '美術表現科', quota: 40, finalApplicants: 49, finalRate: 1.23 },
+    { schoolName: '越生翔桜', department: '美術表現科', quota: 40, finalApplicants: 49, finalRate: 1.23 },
     { schoolName: '芸術総合', department: '美術科', quota: 40, finalApplicants: 65, finalRate: 1.63 },
 
     // ===== 全日制 専門学科：音楽に関する学科 =====
