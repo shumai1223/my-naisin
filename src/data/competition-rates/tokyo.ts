@@ -11,11 +11,15 @@
  *
  * 個票（普通科・コース制/単位制/海外帰国生徒対象）:
  * https://www.kyoiku.metro.tokyo.lg.jp/documents/d/kyoiku/2026-02-13-182442-923
+ * 個票（専門学科13学科・総合学科・定時制/チャレンジスクール）:
+ * https://www.kyoiku.metro.tokyo.lg.jp/documents/d/kyoiku/03-3-v2
  *
- * ⚠️取り込み範囲は部分的（coverage参照）。全日制167校のうち普通科119校は完了（区部57＋
- * 多摩部44＋島しょ6＋単位制12＋コース制/海外帰国生徒対象は既存校への追加学科として計上）。
- * 残り48校（専門学科38・総合学科10）は別の公表資料（専門学科・定時制の個票）からの
- * 取り込みが必要で、次回以降のY-2続きで対応する。
+ * ✅全日制167校を完了（coverage参照）。普通科119校＋専門学科38校（商業/ビジネス
+ * コミュニケーション/工業(単位制含む)/科学技術/農業/水産/家庭(単位制含む)/福祉/理数/
+ * 芸術/体育/国際/併合/産業の13学科）＋総合学科10校。3種の合計は総括表の「全日制合計」
+ * 167校・30,439・38,148・1.25と完全一致（本ファイル末尾のofficialSubtotals参照）。
+ * 定時制課程（チャレンジスクール等）・在京外国人生徒等対象選抜は全日制の外側の別集計の
+ * ため対象外（Y-1の学校マスターとは別途の課程区分であり、本タスクのスコープ外）。
  */
 import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
 
@@ -36,19 +40,28 @@ export const TOKYO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       fiscalYear: '令和8年度（2026年度）',
       fetchedAt: '2026-07-24',
     },
+    {
+      url: 'https://www.kyoiku.metro.tokyo.lg.jp/documents/d/kyoiku/03-3-v2',
+      docTitle:
+        '東京都教育委員会 令和8年度東京都立高等学校入学者選抜応募状況（最終応募状況）6〜22[専門学科13学科・総合学科]（23〜25の定時制課程・チャレンジスクール・在京外国人生徒等対象選抜は全日制の外側のため対象外）',
+      fiscalYear: '令和8年度（2026年度）',
+      fetchedAt: '2026-07-24',
+    },
   ],
   coverage: {
-    status: 'partial',
+    status: 'complete',
     includedDepartments: [
       '普通科（コース・単位制・海外帰国生徒対象・専門学科・総合学科以外）',
       '普通科（島しょの学校）',
       '普通科（コース制の学校）',
       '普通科（単位制の学校）',
       '普通科（海外帰国生徒対象）',
+      '専門学科（商業・ビジネスコミュニケーション・工業・科学技術・農業・水産・家庭・福祉・理数・芸術・体育・国際・併合・産業の13学科）',
+      '総合学科',
     ],
-    pendingDepartments: ['専門学科（商業科・工業科・農業科等13学科）', '総合学科'],
+    pendingDepartments: [],
     note:
-      '全日制167校中普通科119校は完了。残り48校（専門学科・総合学科）は別文書（専門学科・定時制の個票PDF）からの追加取り込みが必要（次回以降のY-2続き）。',
+      '全日制167校（普通科119＋専門学科38＋総合学科10）を全て取り込み済み。定時制課程（チャレンジスクール等）・在京外国人生徒等対象選抜は全日制の外側の別集計のため対象外（スコープ外として明示的に除外）。',
   },
   officialSubtotals: [
     { label: '区部計', schoolCount: 57, quota: 12088, finalApplicants: 16926, finalRate: 1.4 },
@@ -68,6 +81,23 @@ export const TOKYO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { label: '引揚対象計', schoolCount: 3, quota: 18, finalApplicants: 0, finalRate: 0 },
     { label: '海外帰国生徒対象計', schoolCount: 6, quota: 62, finalApplicants: 67, finalRate: 1.08 },
     { label: '普通科計', schoolCount: 119, quota: 24304, finalApplicants: 31950, finalRate: 1.31 },
+    { label: '商業計', schoolCount: 7, quota: 798, finalApplicants: 717, finalRate: 0.9 },
+    { label: 'ビジネスコミュニケーション科計', schoolCount: 2, quota: 231, finalApplicants: 227, finalRate: 0.98 },
+    { label: '工業計', quota: 1690, finalApplicants: 1219, finalRate: 0.72 },
+    { label: '科学技術科計', schoolCount: 2, quota: 254, finalApplicants: 287, finalRate: 1.13 },
+    { label: '農業計', schoolCount: 5, quota: 413, finalApplicants: 450, finalRate: 1.09 },
+    { label: '水産計', schoolCount: 1, quota: 42, finalApplicants: 57, finalRate: 1.36 },
+    { label: '家庭合計', quota: 271, finalApplicants: 276, finalRate: 1.02 },
+    { label: '福祉計', schoolCount: 2, quota: 54, finalApplicants: 34, finalRate: 0.63 },
+    { label: '理数計', schoolCount: 2, quota: 71, finalApplicants: 210, finalRate: 2.96 },
+    { label: '芸術計', schoolCount: 1, quota: 112, finalApplicants: 182, finalRate: 1.63 },
+    { label: '体育計', schoolCount: 2, quota: 56, finalApplicants: 62, finalRate: 1.11 },
+    { label: '国際計', schoolCount: 1, quota: 138, finalApplicants: 250, finalRate: 1.81 },
+    { label: '併合科計', schoolCount: 3, quota: 105, finalApplicants: 16, finalRate: 0.15 },
+    { label: '産業科計', schoolCount: 2, quota: 274, finalApplicants: 227, finalRate: 0.83 },
+    { label: '専門学科合計', schoolCount: 38, quota: 4509, finalApplicants: 4214, finalRate: 0.93 },
+    { label: '総合学科計', schoolCount: 10, quota: 1626, finalApplicants: 1984, finalRate: 1.22 },
+    { label: '全日制合計', schoolCount: 167, quota: 30439, finalApplicants: 38148, finalRate: 1.25 },
   ],
   records: [
     // ===== 区部（57校） =====
@@ -210,5 +240,100 @@ export const TOKYO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '深川', area: '江東', department: '普通科（海外帰国生徒対象・引揚者）', quota: 6, finalApplicants: 0, finalRate: 0 },
     { schoolName: '光丘', area: '練馬', department: '普通科（海外帰国生徒対象・引揚者）', quota: 6, finalApplicants: 0, finalRate: 0 },
     { schoolName: '富士森', area: '八王子', department: '普通科（海外帰国生徒対象・引揚者）', quota: 6, finalApplicants: 0, finalRate: 0 },
+
+    // ===== 専門学科（38校・学校単位の科別「計」で集計。同一学校が複数専門学科を持つ場合は複数レコード） =====
+    // --- 商業科（7校） ---
+    { schoolName: '芝商業', area: '港', department: '商業科', quota: 100, finalApplicants: 84, finalRate: 0.84 },
+    { schoolName: '江東商業', area: '江東', department: '商業科', quota: 105, finalApplicants: 93, finalRate: 0.89 },
+    { schoolName: '第三商業', area: '江東', department: '商業科', quota: 105, finalApplicants: 115, finalRate: 1.1 },
+    { schoolName: '第一商業', area: '渋谷', department: '商業科', quota: 131, finalApplicants: 68, finalRate: 0.52 },
+    { schoolName: '第四商業', area: '練馬', department: '商業科', quota: 105, finalApplicants: 85, finalRate: 0.81 },
+    { schoolName: '葛飾商業', area: '葛飾', department: '商業科', quota: 126, finalApplicants: 106, finalRate: 0.84 },
+    { schoolName: '第五商業', area: '国立', department: '商業科', quota: 126, finalApplicants: 166, finalRate: 1.32 },
+
+    // --- ビジネスコミュニケーション科（2校） ---
+    { schoolName: '大田桜台', area: '大田', department: 'ビジネスコミュニケーション科', quota: 105, finalApplicants: 87, finalRate: 0.83 },
+    { schoolName: '千早', area: '豊島', department: 'ビジネスコミュニケーション科', quota: 126, finalApplicants: 140, finalRate: 1.11 },
+
+    // --- 工業科（単位制以外・15校。学校の「計」行で集計） ---
+    { schoolName: '工芸', area: '文京', department: '工業科', quota: 125, finalApplicants: 212, finalRate: 1.7 },
+    { schoolName: '蔵前工科', area: '台東', department: '工業科', quota: 107, finalApplicants: 71, finalRate: 0.66 },
+    { schoolName: '墨田工科', area: '江東', department: '工業科', quota: 114, finalApplicants: 65, finalRate: 0.57 },
+    { schoolName: '総合工科', area: '世田谷', department: '工業科', quota: 88, finalApplicants: 43, finalRate: 0.49 },
+    { schoolName: '中野工科', area: '中野', department: '工業科', quota: 84, finalApplicants: 73, finalRate: 0.87 },
+    { schoolName: '杉並工科', area: '杉並', department: '工業科', quota: 111, finalApplicants: 36, finalRate: 0.32 },
+    { schoolName: '荒川工科', area: '荒川', department: '工業科', quota: 112, finalApplicants: 30, finalRate: 0.27 },
+    { schoolName: '北豊島工科', area: '板橋', department: '工業科', quota: 97, finalApplicants: 39, finalRate: 0.4 },
+    { schoolName: '練馬工科', area: '練馬', department: '工業科', quota: 105, finalApplicants: 95, finalRate: 0.9 },
+    { schoolName: '足立工科', area: '足立', department: '工業科', quota: 95, finalApplicants: 55, finalRate: 0.58 },
+    { schoolName: '葛西工科', area: '江戸川', department: '工業科', quota: 122, finalApplicants: 88, finalRate: 0.72 },
+    { schoolName: '府中工科', area: '府中', department: '工業科', quota: 106, finalApplicants: 101, finalRate: 0.95 },
+    { schoolName: '町田工科', area: '町田', department: '工業科', quota: 108, finalApplicants: 53, finalRate: 0.49 },
+    { schoolName: '多摩工科', area: '福生', department: '工業科', quota: 109, finalApplicants: 101, finalRate: 0.93 },
+    { schoolName: '田無工科', area: '西東京', department: '工業科', quota: 111, finalApplicants: 85, finalRate: 0.77 },
+
+    // --- 工業科（単位制・1校） ---
+    { schoolName: '六郷工科', area: '大田', department: '工業科（単位制）', quota: 96, finalApplicants: 72, finalRate: 0.75 },
+
+    // --- 科学技術科（2校） ---
+    { schoolName: '科学技術', area: '江東', department: '科学技術科', quota: 107, finalApplicants: 78, finalRate: 0.73 },
+    { schoolName: '多摩科学技術', area: '小金井', department: '科学技術科', quota: 147, finalApplicants: 209, finalRate: 1.42 },
+
+    // --- 農業科（5校） ---
+    { schoolName: '園芸', area: '世田谷', department: '農業科', quota: 99, finalApplicants: 120, finalRate: 1.21 },
+    { schoolName: '農芸', area: '杉並', department: '農業科', quota: 92, finalApplicants: 89, finalRate: 0.97 },
+    { schoolName: '農産', area: '葛飾', department: '農業科', quota: 84, finalApplicants: 92, finalRate: 1.1 },
+    { schoolName: '農業', area: '府中', department: '農業科', quota: 63, finalApplicants: 77, finalRate: 1.22 },
+    { schoolName: '瑞穂農芸', area: '瑞穂', department: '農業科', quota: 75, finalApplicants: 72, finalRate: 0.96 },
+
+    // --- 水産科（1校） ---
+    { schoolName: '大島海洋国際', area: '大島', department: '水産科', quota: 42, finalApplicants: 57, finalRate: 1.36 },
+
+    // --- 家庭科（単位制以外・3校） ---
+    { schoolName: '赤羽北桜', area: '北', department: '家庭科', quota: 123, finalApplicants: 136, finalRate: 1.11 },
+    { schoolName: '農業', area: '府中', department: '家庭科', quota: 50, finalApplicants: 60, finalRate: 1.2 },
+    { schoolName: '瑞穂農芸', area: '瑞穂', department: '家庭科', quota: 49, finalApplicants: 26, finalRate: 0.53 },
+
+    // --- 家庭科（単位制・1校） ---
+    { schoolName: '忍岡', area: '台東', department: '家庭科（単位制）', quota: 49, finalApplicants: 54, finalRate: 1.1 },
+
+    // --- 福祉科（2校） ---
+    { schoolName: '赤羽北桜', area: '北', department: '福祉科', quota: 25, finalApplicants: 27, finalRate: 1.08 },
+    { schoolName: '野津田', area: '町田', department: '福祉科', quota: 29, finalApplicants: 7, finalRate: 0.24 },
+
+    // --- 理数科（2校） ---
+    { schoolName: '科学技術', area: '江東', department: '理数科', quota: 37, finalApplicants: 69, finalRate: 1.86 },
+    { schoolName: '立川', area: '立川', department: '理数科', quota: 34, finalApplicants: 141, finalRate: 4.15 },
+
+    // --- 芸術科（1校） ---
+    { schoolName: '総合芸術', area: '新宿', department: '芸術科', quota: 112, finalApplicants: 182, finalRate: 1.63 },
+
+    // --- 体育科（2校） ---
+    { schoolName: '駒場', area: '目黒', department: '体育科', quota: 28, finalApplicants: 34, finalRate: 1.21 },
+    { schoolName: '野津田', area: '町田', department: '体育科', quota: 28, finalApplicants: 28, finalRate: 1.0 },
+
+    // --- 国際科（1校） ---
+    { schoolName: '国際', area: '目黒', department: '国際科', quota: 138, finalApplicants: 250, finalRate: 1.81 },
+
+    // --- 併合科（3校） ---
+    { schoolName: '大島', area: '大島', department: '併合科（農林・家政）', quota: 35, finalApplicants: 10, finalRate: 0.29 },
+    { schoolName: '三宅', area: '三宅', department: '併合科（農業・家政）', quota: 35, finalApplicants: 3, finalRate: 0.09 },
+    { schoolName: '八丈', area: '八丈', department: '併合科（園芸・家政）', quota: 35, finalApplicants: 3, finalRate: 0.09 },
+
+    // --- 産業科（2校） ---
+    { schoolName: '橘', area: '墨田', department: '産業科', quota: 148, finalApplicants: 78, finalRate: 0.53 },
+    { schoolName: '八王子桑志', area: '八王子', department: '産業科', quota: 126, finalApplicants: 149, finalRate: 1.18 },
+
+    // ===== 総合学科（10校） =====
+    { schoolName: '晴海総合', area: '中央', department: '総合学科', quota: 192, finalApplicants: 399, finalRate: 2.08 },
+    { schoolName: 'つばさ総合', area: '大田', department: '総合学科', quota: 164, finalApplicants: 183, finalRate: 1.12 },
+    { schoolName: '世田谷総合', area: '世田谷', department: '総合学科', quota: 164, finalApplicants: 188, finalRate: 1.15 },
+    { schoolName: '杉並総合', area: '杉並', department: '総合学科', quota: 150, finalApplicants: 213, finalRate: 1.42 },
+    { schoolName: '王子総合', area: '北', department: '総合学科', quota: 164, finalApplicants: 175, finalRate: 1.07 },
+    { schoolName: '葛飾総合', area: '葛飾', department: '総合学科', quota: 136, finalApplicants: 141, finalRate: 1.04 },
+    { schoolName: '青梅総合', area: '青梅', department: '総合学科', quota: 164, finalApplicants: 165, finalRate: 1.01 },
+    { schoolName: '町田総合', area: '町田', department: '総合学科', quota: 164, finalApplicants: 165, finalRate: 1.01 },
+    { schoolName: '東久留米総合', area: '東久留米', department: '総合学科', quota: 164, finalApplicants: 217, finalRate: 1.32 },
+    { schoolName: '若葉総合', area: '稲城', department: '総合学科', quota: 164, finalApplicants: 138, finalRate: 0.84 },
   ],
 };
