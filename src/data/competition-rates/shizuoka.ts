@@ -1,0 +1,73 @@
+/**
+ * 静岡県 公立高等学校 倍率パイプラインα（Y-6・2県目）。
+ *
+ * 一次ソース: 静岡県教育委員会「令和8年度静岡県公立高等学校入学者選抜 志願者数一覧（変更後）」
+ * （令和8年2月26日確定・志願変更後の最終確定数）。
+ *
+ * ⚠️静岡県の資料は他県と異なる独自の表構造を持つ。各学科の募集定員の下に、
+ * 「Ⅰ（13%程度）」「Ⅱ（20%程度）」等の**選抜枠（特色選抜・連携型選抜等）の割合ベースの
+ * 内訳行**が付随するが、これらは学科の総募集定員の一部を占める「選抜方法別の内訳」であり、
+ * 別の学科や別の募集枠を意味しない（例: 下田高校普通科は総定員120に対し、Ⅰ枠16・Ⅱ枠24という
+ * 内訳が付くが16+24=40は120の一部に過ぎず、合算しても総定員と一致しない）。本データベースは
+ * 学科単位の総定員・総志願者数・総志願倍率（インデントの無い最上位行）のみを1レコードとして
+ * 採用し、Ⅰ/Ⅱ/Ⅲの内訳行は取り込まない（他県で推薦入学等の内訳を集計に含めているのと
+ * 実質的に同じ扱い）。
+ *
+ * また「連携（定めない）」「海外（若干名）」「長期（若干名）」「県外（若干名）」等、募集定員が
+ * 数値ではなく「−」（未定・若干名）と記載される特殊枠は、quota:numberという型上正直に
+ * 表現できないため記録しない（Y-0憲法③「機械可読不能は正直にスキップ」の精神を適用）。
+ *
+ * ⚠️対象範囲=現時点でPDF1ページ目（下田〜三島北、13校19レコード）のみを高い確信度で確定済み。
+ * 全体のページ数・総校数は未確認（次回セッションで残りページを確認しながら継続する）。
+ *
+ * 定時制は東京都・神奈川県・千葉県・埼玉県・福岡県・兵庫県と同じ理由でスコープ外（全日制の
+ * 外側の別課程のため対象外として明示的に除外）。
+ */
+import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
+
+export const SHIZUOKA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
+  prefectureCode: 'shizuoka',
+  sources: [
+    {
+      url: 'https://www.pref.shizuoka.jp/_res/projects/default_project/_page_/001/072/279/r8shigansyasuusiganhennkougo1.pdf',
+      docTitle: '静岡県教育委員会 令和8年度静岡県公立高等学校入学者選抜 志願者数一覧（変更後）',
+      fiscalYear: '令和8年度（2026年度）',
+      fetchedAt: '2026-07-25',
+    },
+  ],
+  coverage: {
+    status: 'partial',
+    includedDepartments: ['全日制（PDF1ページ目・下田〜三島北の13校）'],
+    pendingDepartments: [
+      '全日制（PDF2ページ目以降、総ページ数・総校数とも未確認）',
+      '定時制（全日制の外側の別課程のため東京都・神奈川県・千葉県・埼玉県・福岡県・兵庫県と同じ理由で意図的にスコープ外）',
+    ],
+    note:
+      '静岡県は学科ごとに選抜枠（Ⅰ/Ⅱ/Ⅲ・特色選抜等）の割合内訳が付随する独自の表構造を持つ。' +
+      '今回はPDF1ページ目の13校19レコード（学科の総定員行のみ）を高確信度で確定。「連携（定めない）」' +
+      '等の募集定員が数値化できない特殊枠は記録から除外した。総ページ数・県レベルのグランドトータルは' +
+      'まだ確認できていない（残りページを継続する中で確認する）。',
+  },
+  officialSubtotals: [],
+  records: [
+    { schoolName: '下田', department: '普通科', quota: 120, finalApplicants: 120, finalRate: 1.0 },
+    { schoolName: '下田', department: '理数科', quota: 40, finalApplicants: 35, finalRate: 0.88 },
+    { schoolName: '南伊豆分校', department: '園芸', quota: 40, finalApplicants: 28, finalRate: 0.7 },
+    { schoolName: '松崎', department: '普通科', quota: 40, finalApplicants: 16, finalRate: 0.4 },
+    { schoolName: '稲取', department: '普通科', quota: 40, finalApplicants: 39, finalRate: 0.98 },
+    { schoolName: '伊豆伊東', department: '普通科', quota: 160, finalApplicants: 145, finalRate: 0.91 },
+    { schoolName: '伊豆伊東', department: 'ビジネスマネジメント', quota: 80, finalApplicants: 65, finalRate: 0.81 },
+    { schoolName: '熱海', department: '普通科', quota: 40, finalApplicants: 33, finalRate: 0.83 },
+    { schoolName: '伊豆総合', department: '工業', quota: 40, finalApplicants: 30, finalRate: 0.75 },
+    { schoolName: '伊豆総合', department: '総合', quota: 40, finalApplicants: 24, finalRate: 0.6 },
+    { schoolName: '土肥分校', department: '普通科', quota: 35, finalApplicants: 21, finalRate: 0.6 },
+    { schoolName: '韮山', department: '普通科', quota: 240, finalApplicants: 223, finalRate: 0.93 },
+    { schoolName: '韮山', department: '理数科', quota: 40, finalApplicants: 70, finalRate: 1.75 },
+    { schoolName: '伊豆中央', department: '普通科', quota: 120, finalApplicants: 92, finalRate: 0.77 },
+    { schoolName: '田方農業', department: '生産科学・園芸デザイン', quota: 80, finalApplicants: 64, finalRate: 0.8 },
+    { schoolName: '田方農業', department: '動物科学', quota: 40, finalApplicants: 43, finalRate: 1.08 },
+    { schoolName: '田方農業', department: '食品科学・ライフデザイン', quota: 80, finalApplicants: 76, finalRate: 0.95 },
+    { schoolName: '三島南', department: '普通科', quota: 200, finalApplicants: 226, finalRate: 1.13 },
+    { schoolName: '三島北', department: '普通科', quota: 280, finalApplicants: 332, finalRate: 1.19 },
+  ],
+};
