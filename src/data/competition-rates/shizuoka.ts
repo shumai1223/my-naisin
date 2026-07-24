@@ -17,13 +17,13 @@
  * 数値ではなく「−」（未定・若干名）と記載される特殊枠は、quota:numberという型上正直に
  * 表現できないため記録しない（Y-0憲法③「機械可読不能は正直にスキップ」の精神を適用）。
  *
- * ⚠️対象範囲=現時点でPDF1ページ目（下田〜三島北、13校19レコード）＋2ページ目（御殿場〜富士、
- * 13校20レコード）＋3ページ目（富士東〜静岡城北、12校20レコード）＋4ページ目（静岡東〜
- * 焼津中央、8校19レコード）＋5ページ目（焼津水産〜掛川西、13校21レコード）＋6ページ目
- * （掛川工業〜磐田農業、10校19レコード）＋7ページ目（磐田西〜浜松東、10校19レコード）＋
- * 8ページ目（浜松大平台〜浜松湖北、7校21レコード）の計86校158レコードを高い確信度で
- * 確定済み。全体のページ数・総校数は未確認（次回セッションで残りページを確認しながら
- * 継続する）。
+ * ⚠️PDF1〜9ページ目（下田〜浜松市立）の全日制90校162レコードを完全収録した。機械集計
+ * （quota16,954・applicants16,895・倍率1.00）はPDF9ページ目末尾のグランドトータル
+ * （公立合計）と完全一致する。PDFは全12ページで構成され、10ページ目は特別選抜（海外
+ * 帰国生徒選抜・外国人生徒選抜・長期欠席生徒選抜・連携型選抜・県外生徒特色選抜）の内訳
+ * 詳細表（既に本体の総定員行に含まれる内数のため取り込み対象外）、11〜12ページ目は
+ * 定時制（東京都・神奈川県・千葉県・埼玉県・福岡県・兵庫県と同じ理由で意図的にスコープ外）
+ * だったため、9ページ目で全日制が完結すると確認できた。
  *
  * ⚠️会場番号が100番台（他校は連番14〜25等）の学校（沼津市立沼津=100・富士市立=101・
  * 静岡市立清水桜が丘=102）は市立高校を意味すると判明した（3例とも「○○市立」を含む校名）。
@@ -48,19 +48,20 @@ export const SHIZUOKA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     },
   ],
   coverage: {
-    status: 'partial',
-    includedDepartments: ['全日制（PDF1〜8ページ目・下田〜浜松湖北の86校）'],
+    status: 'complete',
+    includedDepartments: ['全日制（PDF1〜9ページ目・下田〜浜松市立の90校・完全収録）'],
     pendingDepartments: [
-      '全日制（PDF9ページ目以降、総ページ数・総校数とも未確認）',
       '定時制（全日制の外側の別課程のため東京都・神奈川県・千葉県・埼玉県・福岡県・兵庫県と同じ理由で意図的にスコープ外）',
     ],
     note:
       '静岡県は学科ごとに選抜枠（Ⅰ/Ⅱ/Ⅲ・特色選抜等）の割合内訳が付随する独自の表構造を持つ。' +
-      '今回はPDF1〜8ページ目の86校158レコード（学科の総定員行のみ）を高確信度で確定。「連携（定めない）」' +
-      '等の募集定員が数値化できない特殊枠は記録から除外した。総ページ数・県レベルのグランドトータルは' +
-      'まだ確認できていない（残りページを継続する中で確認する）。',
+      'PDF1〜9ページ目の90校162レコード（学科の総定員行のみ）を完全収録し、機械集計が' +
+      'PDF9ページ目末尾の公立合計（quota16,954・applicants16,895・倍率1.00）と完全一致した。' +
+      '「連携（定めない）」等の募集定員が数値化できない特殊枠は記録から除外した。',
   },
-  officialSubtotals: [],
+  officialSubtotals: [
+    { label: '公立合計', quota: 16954, finalApplicants: 16895, finalRate: 1.0 },
+  ],
   records: [
     { schoolName: '下田', department: '普通科', quota: 120, finalApplicants: 120, finalRate: 1.0 },
     { schoolName: '下田', department: '理数科', quota: 40, finalApplicants: 35, finalRate: 0.88 },
@@ -220,5 +221,9 @@ export const SHIZUOKA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '浜松湖北', department: '産業マネジメントⅠ', quota: 40, finalApplicants: 36, finalRate: 0.9 },
     { schoolName: '浜松湖北', department: '産業マネジメントⅡ', quota: 80, finalApplicants: 76, finalRate: 0.95 },
     { schoolName: '浜松湖北', department: '産業マネジメントⅢ', quota: 40, finalApplicants: 22, finalRate: 0.55 },
+    { schoolName: '佐久間分校', department: '普通科', quota: 40, finalApplicants: 21, finalRate: 0.53 },
+    { schoolName: '新居', department: '普通科', quota: 160, finalApplicants: 154, finalRate: 0.96 },
+    { schoolName: '湖西', department: '普通科', quota: 120, finalApplicants: 89, finalRate: 0.74 },
+    { schoolName: '浜松市立', department: '普通科', quota: 360, finalApplicants: 417, finalRate: 1.16 },
   ],
 };

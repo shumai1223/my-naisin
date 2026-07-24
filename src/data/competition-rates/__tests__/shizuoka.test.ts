@@ -1,3 +1,4 @@
+import { checkAgainstSubtotal } from '@/lib/competition-rate';
 import { SHIZUOKA_COMPETITION_RATES } from '../shizuoka';
 
 /**
@@ -5,12 +6,21 @@ import { SHIZUOKA_COMPETITION_RATES } from '../shizuoka';
  *
  * 静岡県は学科ごとに選抜枠（Ⅰ/Ⅱ/Ⅲ）の割合内訳が付随する独自の表構造を持つため、
  * 学科の総定員行のみを1レコードとして採用している（詳細はshizuoka.tsのファイル冒頭
- * コメント参照）。今回はPDF1〜8ページ目の86校158レコードのみを対象とした正直な部分収録。
- * 学校単位の「計」行がPDF上に存在しないため、officialSubtotalsによる突合は行わず、
- * レコード単体の整合性と学校名+学科名の重複が無いことのみを検証する。
+ * コメント参照）。PDF1〜9ページ目の全日制90校162レコードを完全収録した。機械集計
+ * （quota16,954・applicants16,895・倍率1.00）はPDF9ページ目末尾のグランドトータル
+ * （公立合計）と完全一致する。10ページ目は特別選抜の内訳詳細（既に本体の総定員行に
+ * 含まれる内数）、11〜12ページ目は定時制（東京都・神奈川県・千葉県・埼玉県・福岡県・
+ * 兵庫県と同じ理由で意図的にスコープ外）だったため、9ページ目で全日制が完結すると
+ * 確認できた。
  */
-describe('静岡県 倍率パイプラインα（Y-6・PDF1〜8ページ目86校158レコードの部分収録テスト）', () => {
-  const { records } = SHIZUOKA_COMPETITION_RATES;
+describe('静岡県 倍率パイプラインα（Y-6・全日制90校162レコードの完全収録テスト）', () => {
+  const { records, officialSubtotals } = SHIZUOKA_COMPETITION_RATES;
+
+  it('全日制の全レコード合計がPDF末尾のグランドトータル（公立合計・quota16,954・applicants16,895・倍率1.00）と完全一致する', () => {
+    const grandTotal = officialSubtotals.find((s) => s.label === '公立合計')!;
+    const result = checkAgainstSubtotal(records, grandTotal, () => true);
+    expect(result.matches).toBe(true);
+  });
 
   it('全レコードのquota>0・finalApplicants>=0・finalRateが概算で整合する', () => {
     for (const r of records) {
@@ -31,15 +41,14 @@ describe('静岡県 倍率パイプラインα（Y-6・PDF1〜8ページ目86校
     expect(dupes).toEqual([]);
   });
 
-  it('coverageが正直に部分収録を示している', () => {
-    expect(SHIZUOKA_COMPETITION_RATES.coverage.status).toBe('partial');
-    expect(SHIZUOKA_COMPETITION_RATES.coverage.pendingDepartments.length).toBeGreaterThan(0);
+  it('coverageがcompleteを示している（定時制のみ意図的にスコープ外）', () => {
+    expect(SHIZUOKA_COMPETITION_RATES.coverage.status).toBe('complete');
   });
 
-  it('158レコード・86校が収録されている（PDF1〜8ページ目・下田〜浜松湖北）', () => {
-    expect(records.length).toBe(158);
+  it('162レコード・90校が収録されている（PDF1〜9ページ目・下田〜浜松市立＝全日制全校）', () => {
+    expect(records.length).toBe(162);
     const distinctSchools = new Set(records.map((r) => r.schoolName));
-    expect(distinctSchools.size).toBe(86);
+    expect(distinctSchools.size).toBe(90);
   });
 
   it('複数学科校が正しく収録されている', () => {
