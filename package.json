@@ -30,6 +30,7 @@
     "juku-offer-report": "npx tsx scripts/juku-offer-ranking-report.ts",
     "kpi:weekly": "npx tsx scripts/weekly-kpi-report.ts",
     "outreach:followup": "npx tsx scripts/outreach-followup-report.ts",
+    "school-master:build": "npx tsx scripts/build-school-master.ts",
     "ev:reconcile": "npx tsx scripts/reconcile-affiliate-economics.ts",
     "push-send": "npx tsx scripts/push-send.ts",
     "ga4:auth": "node --use-system-ca scripts/ga4-auth.mjs",
