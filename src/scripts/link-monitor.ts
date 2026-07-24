@@ -15,6 +15,8 @@ interface LinkCheckResult {
   status: 'ok' | 'error';
   statusCode?: number;
   error?: string;
+  /** 到達はしているが通常でない応答（bot弾き・一時障害等）。status='ok'のまま参考情報として残す。 */
+  warn?: string;
   checkedAt: string;
 }
 
@@ -55,49 +57,74 @@ function extractPrefectureLinks(): PrefectureLink[] {
   return links;
 }
 
-// URLの死活チェック
-function checkUrl(url: string): Promise<LinkCheckResult> {
-  return new Promise((resolve) => {
-    const startTime = Date.now();
-    
+/** DNS不明・接続拒否など「本当に到達不能」を示すエラーメッセージか判定する。 */
+function isUnreachableError(message: string): boolean {
+  return /ENOTFOUND|getaddrinfo|ECONNREFUSED|ERR_NAME_NOT_RESOLVED/i.test(message);
+}
+
+/** 単発リクエストのステータスコードを取得（例外はrejectで返す）。 */
+function requestStatus(url: string, method: 'HEAD' | 'GET'): Promise<number> {
+  return new Promise((resolve, reject) => {
     const protocol = url.startsWith('https:') ? https : http;
-    
-    const req = protocol.request(url, { 
-      method: 'HEAD',
-      timeout: 10000, // 10秒タイムアウト
-      headers: {
-        'User-Agent': 'MyNaishin-LinkMonitor/1.0 (+https://my-naishin.com)'
+    const req = protocol.request(
+      url,
+      {
+        method,
+        timeout: 10000, // 10秒タイムアウト
+        headers: { 'User-Agent': 'MyNaishin-LinkMonitor/1.0 (+https://my-naishin.com)' },
+      },
+      (res) => {
+        resolve(res.statusCode ?? 0);
       }
-    }, (res) => {
-      resolve({
-        url,
-        status: res.statusCode && res.statusCode >= 200 && res.statusCode < 400 ? 'ok' : 'error',
-        statusCode: res.statusCode,
-        checkedAt: new Date().toISOString()
-      });
-    });
-    
-    req.on('error', (error) => {
-      resolve({
-        url,
-        status: 'error',
-        error: error.message,
-        checkedAt: new Date().toISOString()
-      });
-    });
-    
+    );
+    req.on('error', (error) => reject(error));
     req.on('timeout', () => {
       req.destroy();
-      resolve({
-        url,
-        status: 'error',
-        error: 'Request timeout',
-        checkedAt: new Date().toISOString()
-      });
+      reject(new Error('Request timeout'));
     });
-    
     req.end();
   });
+}
+
+/**
+ * URLの死活チェック。
+ * 「壊れ」とみなすのは404/410（消滅）とDNS/接続不能だけ（scripts/check-source-links.mjsと同一方針）。
+ * 403/405/429/5xx・タイムアウトは「bot弾き／HEAD非対応／一時障害」で到達自体はしているので警告に
+ * 留める（教育委員会等の公的サイトはHEAD拒否・bot拒否・低速が多く、それを毎日errorにすると
+ * 偽陽性でGitHub issueが乱発するため）。
+ */
+async function checkUrl(url: string): Promise<LinkCheckResult> {
+  const checkedAt = new Date().toISOString();
+  try {
+    let status: number;
+    try {
+      status = await requestStatus(url, 'HEAD');
+      if (status === 403 || status === 405 || status === 429 || status >= 500) {
+        status = await requestStatus(url, 'GET');
+      }
+    } catch {
+      status = await requestStatus(url, 'GET');
+    }
+    if (status === 404 || status === 410) {
+      return { url, status: 'error', statusCode: status, error: `HTTP ${status}`, checkedAt };
+    }
+    if (status >= 400) {
+      return {
+        url,
+        status: 'ok',
+        statusCode: status,
+        warn: `HTTP ${status}（bot弾き/一時障害の可能性・到達はしている）`,
+        checkedAt,
+      };
+    }
+    return { url, status: 'ok', statusCode: status, checkedAt };
+  } catch (error) {
+    const message = error instanceof Error ? error.message : 'Unknown error';
+    if (isUnreachableError(message)) {
+      return { url, status: 'error', error: message, checkedAt };
+    }
+    return { url, status: 'ok', warn: `到達確認できず（${message}）`, checkedAt };
+  }
 }
 
 // メイン処理
@@ -132,9 +159,20 @@ async function main() {
     // 結果の集計
     const okCount = results.filter(r => r.status === 'ok').length;
     const errorCount = results.filter(r => r.status === 'error').length;
-    
-    console.log(`\n✅ 監視完了: ${okCount}件正常, ${errorCount}件エラー`);
-    
+    const warnCount = results.filter(r => r.status === 'ok' && r.warn).length;
+
+    console.log(`\n✅ 監視完了: ${okCount}件正常, ${errorCount}件エラー（うち${warnCount}件は到達済みだが応答が通常でない警告）`);
+
+    if (warnCount > 0) {
+      console.log('\n⚠ 到達は確認できたが応答が通常でないURL（CIは落としません）:');
+      results
+        .filter(r => r.status === 'ok' && r.warn)
+        .forEach(result => {
+          const link = links.find(l => l.url === result.url);
+          console.log(`  ${link?.prefecture} (${link?.code}): ${result.url} — ${result.warn}`);
+        });
+    }
+
     // エラーがある場合は詳細を表示
     if (errorCount > 0) {
       console.log('\n❌ エラー詳細:');
@@ -197,4 +235,4 @@ if (require.main === module) {
   main();
 }
 
-export { extractPrefectureLinks, checkUrl };
+export { extractPrefectureLinks, checkUrl, isUnreachableError };
