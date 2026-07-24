@@ -1,0 +1,76 @@
+name: D1 Weekly Backup
+
+# ZZ-10d（信頼の要塞）：D1（名簿・クリック・APIキー等＝un-copyableな一次データ）の
+# 週次自動バックアップ。エクスポート結果はGPGで暗号化してからCI artifactに保存する
+# （生JSON＝PIIを含むデータを平文でartifact保存しない）。
+#
+# 必須シークレット（👤がGitHub repo設定で追加するまでこのワークフローは実行されない）：
+#   CLOUDFLARE_API_TOKEN     - D1:Read権限を持つCloudflare APIトークン
+#   CLOUDFLARE_ACCOUNT_ID    - 対象Cloudflareアカウントの account_id
+#   D1_BACKUP_ENCRYPTION_KEY - バックアップ暗号化用のパスフレーズ（復号は本人がローカルで実施）
+#
+# リストア手順は docs/d1-backup-restore.md を参照。
+
+on:
+  schedule:
+    # 毎週月曜 午前9時（JST）= UTC 月曜0時（gsc-weekly.ymlと同じ枠）
+    - cron: '0 0 * * 1'
+  workflow_dispatch: # 手動実行も可能（初回動作確認・オンデマンドバックアップ用）
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check required secrets
+        run: |
+          missing=""
+          [ -z "${{ secrets.CLOUDFLARE_API_TOKEN }}" ] && missing="$missing CLOUDFLARE_API_TOKEN"
+          [ -z "${{ secrets.CLOUDFLARE_ACCOUNT_ID }}" ] && missing="$missing CLOUDFLARE_ACCOUNT_ID"
+          [ -z "${{ secrets.D1_BACKUP_ENCRYPTION_KEY }}" ] && missing="$missing D1_BACKUP_ENCRYPTION_KEY"
+          if [ -n "$missing" ]; then
+            echo "::error::以下のシークレットが未設定のためバックアップを実行できません:$missing"
+            echo "::error::docs/d1-backup-restore.md の手順に従って👤がGitHub repo設定で追加してください。"
+            exit 1
+          fi
+
+      - name: Export D1 tables (JSON)
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          day=$(date -u +%Y-%m-%d)
+          mkdir -p "backups/$day"
+          for t in leads clicks push_subscriptions api_keys api_usage; do
+            npx wrangler d1 execute my-naishin-leads --remote --json --command "SELECT * FROM $t" \
+              > "backups/$day/$t.json" || echo "::warning::$t のエクスポートに失敗（テーブル未作成の可能性）"
+          done
+          echo "BACKUP_DIR=backups/$day" >> "$GITHUB_ENV"
+
+      - name: Build manifest (row counts / sizes・PII非含有)
+        run: npx tsx scripts/backup-d1.ts --dir="$BACKUP_DIR"
+
+      - name: Encrypt exports (GPG symmetric)
+        env:
+          D1_BACKUP_ENCRYPTION_KEY: ${{ secrets.D1_BACKUP_ENCRYPTION_KEY }}
+        run: |
+          for f in "$BACKUP_DIR"/*.json; do
+            gpg --batch --yes --symmetric --cipher-algo AES256 --passphrase "$D1_BACKUP_ENCRYPTION_KEY" "$f"
+            rm "$f" # 暗号化前の平文JSONはartifactに含めない
+          done
+
+      - name: Upload encrypted backup + manifest
+        uses: actions/upload-artifact@v4
+        with:
+          name: d1-backup-${{ github.run_id }}
+          path: |
+            backups/**/*.gpg
+            backups/**/manifest.json
+          retention-days: 90
