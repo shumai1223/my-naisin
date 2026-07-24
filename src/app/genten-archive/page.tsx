@@ -8,6 +8,7 @@ import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { DatasetSchema } from '@/components/StructuredData/DatasetSchema';
 import { SITE_URL } from '@/lib/naishin-dataset';
 import { getAllSourceHistories } from '@/lib/source-history';
+import { getStaleTop } from '@/lib/freshness-queue';
 import { REGIONS } from '@/lib/prefectures';
 
 // 47都道府県教育委員会の一次ソース確認履歴を蓄積する∞継続型アーカイブ(X-14)。
@@ -55,6 +56,8 @@ export default function GentenArchivePage() {
     .flatMap((h) => h.history.map((s) => s.date))
     .sort()
     .at(-1);
+  // ZZ-9b: 最終確認日が古い県から順に並べた再検証キュー(自己改善メタループの入口)。
+  const staleTop = getStaleTop(5);
 
   return (
     <>
@@ -110,6 +113,24 @@ export default function GentenArchivePage() {
               現在{histories.length}都道府県ぶん・計{totalEntries}件の確認記録があります
               （最終更新: {latestDate}）。今後、制度改定の確認・再検証を行うたびに記録を追加していきます。
             </p>
+          </section>
+
+          <section className="mb-8 rounded-2xl border border-amber-200 bg-amber-50 p-6">
+            <h2 className="mb-2 text-sm font-bold text-amber-900">次に再検証すべき都道府県（最終確認日が古い順）</h2>
+            <p className="mb-3 text-xs leading-relaxed text-amber-800">
+              運営側の再検証キューです。ここに載っている県から順に、教育委員会の一次ソースが最新の内容と
+              一致しているかを確認していきます。
+            </p>
+            <ol className="space-y-1.5 text-sm text-amber-900">
+              {staleTop.map((s, i) => (
+                <li key={s.code} className="flex items-center justify-between gap-2">
+                  <span>
+                    {i + 1}. {s.name}
+                  </span>
+                  <span className="text-xs text-amber-600">最終確認: {s.lastVerified}</span>
+                </li>
+              ))}
+            </ol>
           </section>
 
           {REGIONS.map((region) => {
