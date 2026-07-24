@@ -18,9 +18,9 @@
  * 表現できないため記録しない（Y-0憲法③「機械可読不能は正直にスキップ」の精神を適用）。
  *
  * ⚠️対象範囲=現時点でPDF1ページ目（下田〜三島北、13校19レコード）＋2ページ目（御殿場〜富士、
- * 13校20レコード）＋3ページ目（富士東〜静岡城北、12校20レコード）の計38校59レコードを
- * 高い確信度で確定済み。全体のページ数・総校数は未確認（次回セッションで残りページを
- * 確認しながら継続する）。
+ * 13校20レコード）＋3ページ目（富士東〜静岡城北、12校20レコード）＋4ページ目（静岡東〜
+ * 焼津中央、8校19レコード）の計46校78レコードを高い確信度で確定済み。全体のページ数・
+ * 総校数は未確認（次回セッションで残りページを確認しながら継続する）。
  *
  * ⚠️会場番号が100番台（他校は連番14〜25等）の学校（沼津市立沼津=100・富士市立=101・
  * 静岡市立清水桜が丘=102）は市立高校を意味すると判明した（3例とも「○○市立」を含む校名）。
@@ -46,14 +46,14 @@ export const SHIZUOKA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
   ],
   coverage: {
     status: 'partial',
-    includedDepartments: ['全日制（PDF1〜3ページ目・下田〜静岡城北の38校）'],
+    includedDepartments: ['全日制（PDF1〜4ページ目・下田〜焼津中央の46校）'],
     pendingDepartments: [
-      '全日制（PDF4ページ目以降、総ページ数・総校数とも未確認）',
+      '全日制（PDF5ページ目以降、総ページ数・総校数とも未確認）',
       '定時制（全日制の外側の別課程のため東京都・神奈川県・千葉県・埼玉県・福岡県・兵庫県と同じ理由で意図的にスコープ外）',
     ],
     note:
       '静岡県は学科ごとに選抜枠（Ⅰ/Ⅱ/Ⅲ・特色選抜等）の割合内訳が付随する独自の表構造を持つ。' +
-      '今回はPDF1〜3ページ目の38校59レコード（学科の総定員行のみ）を高確信度で確定。「連携（定めない）」' +
+      '今回はPDF1〜4ページ目の46校78レコード（学科の総定員行のみ）を高確信度で確定。「連携（定めない）」' +
       '等の募集定員が数値化できない特殊枠は記録から除外した。総ページ数・県レベルのグランドトータルは' +
       'まだ確認できていない（残りページを継続する中で確認する）。',
   },
@@ -118,5 +118,24 @@ export const SHIZUOKA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '静岡', department: '普通科', quota: 320, finalApplicants: 419, finalRate: 1.31 },
     { schoolName: '静岡城北', department: '普通科', quota: 200, finalApplicants: 191, finalRate: 0.96 },
     { schoolName: '静岡城北', department: 'グローバル', quota: 40, finalApplicants: 55, finalRate: 1.38 },
+    { schoolName: '静岡東', department: '普通科', quota: 280, finalApplicants: 308, finalRate: 1.1 },
+    { schoolName: '静岡西', department: '普通科', quota: 80, finalApplicants: 70, finalRate: 0.88 },
+    { schoolName: '駿河総合', department: '総合', quota: 200, finalApplicants: 197, finalRate: 0.99 },
+    { schoolName: '静岡農業', department: '生物生産・生産流通', quota: 80, finalApplicants: 68, finalRate: 0.85 },
+    { schoolName: '静岡農業', department: '環境科学', quota: 40, finalApplicants: 54, finalRate: 1.35 },
+    { schoolName: '静岡農業', department: '食品科学・生活科学', quota: 80, finalApplicants: 90, finalRate: 1.13 },
+    { schoolName: '科学技術', department: '機械工学', quota: 40, finalApplicants: 45, finalRate: 1.13 },
+    { schoolName: '科学技術', department: 'ロボット工学', quota: 40, finalApplicants: 42, finalRate: 1.05 },
+    { schoolName: '科学技術', department: '電気工学', quota: 40, finalApplicants: 44, finalRate: 1.1 },
+    { schoolName: '科学技術', department: '情報システム', quota: 40, finalApplicants: 75, finalRate: 1.88 },
+    { schoolName: '科学技術', department: '建築デザイン', quota: 40, finalApplicants: 58, finalRate: 1.45 },
+    { schoolName: '科学技術', department: '都市基盤工学', quota: 40, finalApplicants: 45, finalRate: 1.13 },
+    { schoolName: '科学技術', department: '電子物質工学', quota: 40, finalApplicants: 34, finalRate: 0.85 },
+    { schoolName: '科学技術', department: '理工', quota: 40, finalApplicants: 55, finalRate: 1.38 },
+    { schoolName: '静岡商業', department: '商業', quota: 160, finalApplicants: 169, finalRate: 1.06 },
+    { schoolName: '静岡商業', department: '情報処理', quota: 40, finalApplicants: 25, finalRate: 0.63 },
+    { schoolName: '静岡市立', department: '普通科', quota: 280, finalApplicants: 311, finalRate: 1.11 },
+    { schoolName: '静岡市立', department: '科学探究', quota: 40, finalApplicants: 28, finalRate: 0.7 },
+    { schoolName: '焼津中央', department: '普通科', quota: 280, finalApplicants: 291, finalRate: 1.04 },
   ],
 };
