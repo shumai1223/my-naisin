@@ -4,11 +4,16 @@
  * 一次ソース: 福岡県教育委員会「令和8年度県立高等学校入学者選抜 一般入試 志願者数（確定）」
  * （県立分PDF、市組合立分は別PDF）。
  *
- * ⚠️対象範囲=現時点でPDF1ページ目全21校（青豊〜八幡工業）＋PDF2ページ目冒頭5校
- * （宗像・光陵・水産・玄界・新宮）のみを高い確信度で確定済み。2ページ目は宗像から始まる
- * （事前の記憶で「八幡南・北筑・東筑・折尾・中間・遠賀」という校名を挙げていたが、
- * 再読の結果それらはページ1に存在せず誤記憶だったと判明＝毎回ソースを再読する規律の
- * 重要性を裏付けた）。2ページ目の福岡魁誠以降・3ページ目以降・市組合立分PDFは未着手。
+ * ⚠️対象範囲=現時点でPDF1ページ目全21校（青豊〜八幡工業）＋PDF2ページ目の12校
+ * （宗像・光陵・水産・玄界・新宮・福岡魁誠・須恵・宇美商業・香住丘・香椎・香椎工業・福岡）
+ * のみを高い確信度で確定済み。2ページ目は宗像から始まる（事前の記憶で「八幡南・北筑・東筑・
+ * 折尾・中間・遠賀」という校名を挙げていたが、再読の結果それらはページ1に存在せず誤記憶
+ * だったと判明＝毎回ソースを再読する規律の重要性を裏付けた）。
+ *
+ * ⚠️2ページ目の筑紫丘・柏陵以降は、密集した表組みの視覚読み取りが試行のたびに異なる
+ * 数値を返す（例:筑紫丘の学科別内訳が読むたびに矛盾した）ため、誤読リスクが高いと判断し
+ * 意図的に未着手のまま次回に持ち越した（Y-0憲法=捏造ゼロを優先し、無理に確定させない）。
+ * 3ページ目以降・市組合立分PDFも未着手。
  *
  * 北九州高校の「普通科(コースを除く)」「普通科体育コース」の2行、および新宮高校の
  * 普通科（コースを除く）／国際文化コース／理数科の3行は当初PDF読み取りで曖昧だったため、
@@ -57,14 +62,14 @@ export const FUKUOKA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     status: 'partial',
     includedDepartments: [
       '県立全日制（PDF1ページ目・青豊〜八幡工業の21校）',
-      '県立全日制（PDF2ページ目冒頭・宗像〜新宮の5校）',
+      '県立全日制（PDF2ページ目・宗像〜福岡の12校）',
     ],
     pendingDepartments: [
-      '県立全日制（PDF2ページ目続き・福岡魁誠以降〜末尾）',
+      '県立全日制（PDF2ページ目続き・筑紫丘以降〜末尾、視覚読み取りが不安定なため意図的に保留）',
       '県立全日制（PDF3ページ目以降、存在する場合）',
       '市組合立全日制（別PDF・未着手）',
     ],
-    note: '福岡県は資料が複数ページ＋県立/市組合立の別PDFに分かれており、今回はPDF1ページ目21校＋2ページ目冒頭5校の計26校のみを高確信度で確定。県レベルの公式合計（全日制県立 定員22,200/志願者22,854/倍率1.03）との突合はまだ行っていない（残りページ未読のため）。学校単位の計行との突合のみ実施済み。',
+    note: '福岡県は資料が複数ページ＋県立/市組合立の別PDFに分かれており、今回はPDF1ページ目21校＋2ページ目12校の計33校のみを高確信度で確定。2ページ目の筑紫丘以降は複数回の読み取り試行で数値が食い違ったため、誤読リスクを避けて意図的に未着手のまま持ち越した。県レベルの公式合計（全日制県立 定員22,200/志願者22,854/倍率1.03）との突合はまだ行っていない（残りページ未読のため）。学校単位の計行との突合のみ実施済み。',
   },
   officialSubtotals: [
     { label: '苅田工業 計', quota: 160, finalApplicants: 159, finalRate: 0.99 },
@@ -75,6 +80,9 @@ export const FUKUOKA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { label: '八幡中央 計', quota: 200, finalApplicants: 182, finalRate: 0.91 },
     { label: '八幡工業 計', quota: 200, finalApplicants: 218, finalRate: 1.09 },
     { label: '新宮 計', quota: 440, finalApplicants: 456, finalRate: 1.04 },
+    { label: '香住丘 計', quota: 400, finalApplicants: 500, finalRate: 1.25 },
+    { label: '香椎 計', quota: 440, finalApplicants: 603, finalRate: 1.37 },
+    { label: '香椎工業 計', quota: 280, finalApplicants: 333, finalRate: 1.19 },
   ],
   records: [
     { schoolName: '青豊', department: '総合学科', quota: 280, finalApplicants: 286, finalRate: 1.02 },
@@ -118,5 +126,19 @@ export const FUKUOKA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '新宮', department: '普通科（コースを除く）', quota: 360, finalApplicants: 366, finalRate: 1.02 },
     { schoolName: '新宮', department: '普通科国際文化コース', quota: 40, finalApplicants: 17, finalRate: 0.43 },
     { schoolName: '新宮', department: '理数科', quota: 40, finalApplicants: 73, finalRate: 1.83 },
+    { schoolName: '福岡魁誠', department: '総合学科', quota: 280, finalApplicants: 323, finalRate: 1.15 },
+    { schoolName: '須恵', department: '総合学科', quota: 360, finalApplicants: 317, finalRate: 0.88 },
+    { schoolName: '宇美商業', department: 'ビジネス探究科', quota: 200, finalApplicants: 182, finalRate: 0.91 },
+    { schoolName: '香住丘', department: '普通科（コースを除く）', quota: 320, finalApplicants: 398, finalRate: 1.24 },
+    { schoolName: '香住丘', department: '普通科数理データサイエンスコース', quota: 40, finalApplicants: 55, finalRate: 1.38 },
+    { schoolName: '香住丘', department: '英語科', quota: 40, finalApplicants: 47, finalRate: 1.18 },
+    { schoolName: '香椎', department: '普通科', quota: 400, finalApplicants: 583, finalRate: 1.46 },
+    { schoolName: '香椎', department: 'ファッションデザイン科', quota: 40, finalApplicants: 20, finalRate: 0.5 },
+    { schoolName: '香椎工業', department: '電気科', quota: 80, finalApplicants: 103, finalRate: 1.29 },
+    { schoolName: '香椎工業', department: '電子機械科', quota: 40, finalApplicants: 50, finalRate: 1.25 },
+    { schoolName: '香椎工業', department: '工業化学科', quota: 40, finalApplicants: 41, finalRate: 1.03 },
+    { schoolName: '香椎工業', department: '機械科', quota: 80, finalApplicants: 77, finalRate: 0.96 },
+    { schoolName: '香椎工業', department: '情報技術科', quota: 40, finalApplicants: 62, finalRate: 1.55 },
+    { schoolName: '福岡', department: '普通科', quota: 440, finalApplicants: 631, finalRate: 1.43 },
   ],
 };
