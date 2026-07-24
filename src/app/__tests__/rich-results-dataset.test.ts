@@ -31,6 +31,7 @@ const DATASET_EXEMPT_ROUTES: Record<string, string> = {
   '/advisor': 'ZZ-3c：noindex・旗付きUI（決定論Q&Aツールでデータセットの提供ではない）',
   '/juku/dashboard': 'ZZ-4d：noindex・旗付きUI・招待トークン必須の内部ツール（データセットの提供ではない）',
   '/juku/dashboard/demo': 'ZZ-4e：noindex・旗付きUIのデモ環境（データセットの提供ではない）',
+  '/partner-demo': 'AA-2：noindex・旗付きUI（プレースホルダ表示の内部確認用デモでデータセットの提供ではない）',
   '/ask': '決定論Q&Aツール（単発応答でありデータセットの提供ではない）',
   '/blog': '記事一覧ページ（データセットの提供なし）',
   '/blog/tag/[tag]': 'タグ別記事一覧ページ（データセットの提供なし）',
