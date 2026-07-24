@@ -19,9 +19,9 @@
  *
  * ⚠️対象範囲=現時点でPDF1ページ目（下田〜三島北、13校19レコード）＋2ページ目（御殿場〜富士、
  * 13校20レコード）＋3ページ目（富士東〜静岡城北、12校20レコード）＋4ページ目（静岡東〜
- * 焼津中央、8校19レコード）＋5ページ目（焼津水産〜掛川西、13校21レコード）の計59校99
- * レコードを高い確信度で確定済み。全体のページ数・総校数は未確認（次回セッションで
- * 残りページを確認しながら継続する）。
+ * 焼津中央、8校19レコード）＋5ページ目（焼津水産〜掛川西、13校21レコード）＋6ページ目
+ * （掛川工業〜磐田農業、10校19レコード）の計69校118レコードを高い確信度で確定済み。
+ * 全体のページ数・総校数は未確認（次回セッションで残りページを確認しながら継続する）。
  *
  * ⚠️会場番号が100番台（他校は連番14〜25等）の学校（沼津市立沼津=100・富士市立=101・
  * 静岡市立清水桜が丘=102）は市立高校を意味すると判明した（3例とも「○○市立」を含む校名）。
@@ -47,14 +47,14 @@ export const SHIZUOKA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
   ],
   coverage: {
     status: 'partial',
-    includedDepartments: ['全日制（PDF1〜5ページ目・下田〜掛川西の59校）'],
+    includedDepartments: ['全日制（PDF1〜6ページ目・下田〜磐田農業の69校）'],
     pendingDepartments: [
-      '全日制（PDF6ページ目以降、総ページ数・総校数とも未確認）',
+      '全日制（PDF7ページ目以降、総ページ数・総校数とも未確認）',
       '定時制（全日制の外側の別課程のため東京都・神奈川県・千葉県・埼玉県・福岡県・兵庫県と同じ理由で意図的にスコープ外）',
     ],
     note:
       '静岡県は学科ごとに選抜枠（Ⅰ/Ⅱ/Ⅲ・特色選抜等）の割合内訳が付随する独自の表構造を持つ。' +
-      '今回はPDF1〜5ページ目の59校99レコード（学科の総定員行のみ）を高確信度で確定。「連携（定めない）」' +
+      '今回はPDF1〜6ページ目の69校118レコード（学科の総定員行のみ）を高確信度で確定。「連携（定めない）」' +
       '等の募集定員が数値化できない特殊枠は記録から除外した。総ページ数・県レベルのグランドトータルは' +
       'まだ確認できていない（残りページを継続する中で確認する）。',
   },
@@ -159,5 +159,24 @@ export const SHIZUOKA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '掛川東', department: '普通科', quota: 200, finalApplicants: 257, finalRate: 1.29 },
     { schoolName: '掛川西', department: '普通科', quota: 280, finalApplicants: 315, finalRate: 1.13 },
     { schoolName: '掛川西', department: '理数科', quota: 40, finalApplicants: 55, finalRate: 1.38 },
+    { schoolName: '掛川工業', department: '機械工学', quota: 40, finalApplicants: 44, finalRate: 1.1 },
+    { schoolName: '掛川工業', department: '電気電子工学', quota: 40, finalApplicants: 38, finalRate: 0.95 },
+    { schoolName: '掛川工業', department: '情報工学', quota: 40, finalApplicants: 31, finalRate: 0.78 },
+    { schoolName: '掛川工業', department: '建築設備工学', quota: 40, finalApplicants: 43, finalRate: 1.08 },
+    { schoolName: '横須賀', department: '普通科', quota: 120, finalApplicants: 113, finalRate: 0.94 },
+    { schoolName: '池新田', department: '普通科', quota: 120, finalApplicants: 84, finalRate: 0.7 },
+    { schoolName: '小笠', department: '総合', quota: 200, finalApplicants: 202, finalRate: 1.01 },
+    { schoolName: '遠江総合', department: '総合', quota: 160, finalApplicants: 141, finalRate: 0.88 },
+    { schoolName: '袋井', department: '普通科', quota: 240, finalApplicants: 254, finalRate: 1.06 },
+    { schoolName: '袋井商業', department: '商業', quota: 120, finalApplicants: 85, finalRate: 0.71 },
+    { schoolName: '磐田南', department: '普通科', quota: 280, finalApplicants: 283, finalRate: 1.01 },
+    { schoolName: '磐田南', department: '理数科', quota: 40, finalApplicants: 75, finalRate: 1.88 },
+    { schoolName: '磐田北', department: '普通科', quota: 160, finalApplicants: 144, finalRate: 0.9 },
+    { schoolName: '磐田北', department: '福祉', quota: 40, finalApplicants: 22, finalRate: 0.55 },
+    { schoolName: '磐田農業', department: '生産科学', quota: 40, finalApplicants: 33, finalRate: 0.83 },
+    { schoolName: '磐田農業', department: '生産流通', quota: 40, finalApplicants: 44, finalRate: 1.1 },
+    { schoolName: '磐田農業', department: '環境科学', quota: 40, finalApplicants: 35, finalRate: 0.88 },
+    { schoolName: '磐田農業', department: '食品科学', quota: 40, finalApplicants: 45, finalRate: 1.13 },
+    { schoolName: '磐田農業', department: '生活科学', quota: 40, finalApplicants: 48, finalRate: 1.2 },
   ],
 };
