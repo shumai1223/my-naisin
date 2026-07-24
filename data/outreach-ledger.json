@@ -1,0 +1,190 @@
+{
+  "_comment": "AA-1追撃システムの送信台帳。Gmail MCP(gmail_search q=\"in:sent\" / 受信箱の自動受付メール)で実測した内容を手動で反映する運用(scripts/weekly-kpi-report.tsの手動入力パターンと同じ)。統計処理はsrc/lib/outreach-ledger.tsの純関数が担当。1エントリ=1組織。フォーム送信のみでGmail送信履歴に残らないもの(コエテコ/スタディサプリ等)は次回以降のバックフィル対象・現時点では未収録(捏造回避のため確証のある送信のみ収録)。",
+  "asOf": "2026-07-24",
+  "entries": [
+    {
+      "id": "benesse-kato",
+      "org": "株式会社ベネッセコーポレーション（加藤様）",
+      "lane": "b2b-saas",
+      "sourceTaskId": "AA-2",
+      "sentDate": "2026-07-12",
+      "lastContactDate": "2026-07-22",
+      "status": "meeting",
+      "followupCount": 0,
+      "threadId": "19f66046b0df26d4",
+      "note": "7/22商談実施済み・当日夜にお礼メール送信済み(19f88e81902e3e6a)。追撃対象外(商談進行中)。"
+    },
+    {
+      "id": "poper-bitcampus",
+      "org": "株式会社POPER（ビットキャンパスチーム）",
+      "lane": "b2b-saas",
+      "sourceTaskId": "W-1",
+      "sentDate": "2026-07-12",
+      "lastContactDate": "2026-07-14",
+      "status": "awaiting",
+      "followupCount": 1,
+      "threadId": "19f554759394d4d3",
+      "note": "電話折返し希望に対し7/14にメール対応への切替を依頼済み(19f603632cde61f1・これを追撃1回目とカウント)。以後返信なし。maxFollowups=1のため自動候補には出ない=次に触るかは👤判断。"
+    },
+    {
+      "id": "kagawa-moshi",
+      "org": "かとうもし（香川県統一模擬試験）",
+      "lane": "b2b-saas",
+      "sourceTaskId": "W-1",
+      "sentDate": "2026-07-17",
+      "status": "awaiting",
+      "followupCount": 0,
+      "threadId": "19f6be8c21e28888",
+      "note": "自動受付メールのみ・人間の返信なし。"
+    },
+    {
+      "id": "t-moshi",
+      "org": "新潟県統一模試会",
+      "lane": "b2b-saas",
+      "sourceTaskId": "W-1",
+      "sentDate": "2026-07-17",
+      "status": "awaiting",
+      "followupCount": 0,
+      "threadId": "19f8768bdf273775",
+      "note": "自動受付メールのみ・人間の返信なし。"
+    },
+    {
+      "id": "itsuki-s",
+      "org": "五ツ木書房",
+      "lane": "b2b-saas",
+      "sourceTaskId": "W-1",
+      "sentDate": "2026-07-17",
+      "status": "awaiting",
+      "followupCount": 0,
+      "threadId": "19f6e8d003d68514",
+      "note": "自動受付メールのみ・人間の返信なし。電話窓口(06-6913-1251)も既知。"
+    },
+    {
+      "id": "kenmoshi",
+      "org": "愛媛県模試（県模試）",
+      "lane": "b2b-saas",
+      "sourceTaskId": "W-1",
+      "sentDate": "2026-07-15",
+      "status": "awaiting",
+      "followupCount": 0,
+      "threadId": "19f63ed15fd4444d",
+      "note": "自動受付メールのみ・人間の返信なし。"
+    },
+    {
+      "id": "shinken",
+      "org": "進学研究会",
+      "lane": "b2b-saas",
+      "sourceTaskId": "W-1",
+      "sentDate": "2026-07-17",
+      "status": "awaiting",
+      "followupCount": 0,
+      "note": "wave2・👤がフォーム送信(Gmail下書き非経由のため送信メール自体はin:sentに残らない)。送信日は自動受付メール(19f6fc8e82bb1b99・20:14着)の受信時刻から確定。"
+    },
+    {
+      "id": "hokushin",
+      "org": "北辰図書",
+      "lane": "b2b-saas",
+      "sourceTaskId": "W-1",
+      "sentDate": "2026-07-17",
+      "status": "awaiting",
+      "followupCount": 0,
+      "note": "wave2・フォーム送信。送信日は自動受付メール(19f6fce325eb1339・20:20着)の受信時刻から確定。"
+    },
+    {
+      "id": "ikushin",
+      "org": "育伸社",
+      "lane": "b2b-saas",
+      "sourceTaskId": "W-1",
+      "sentDate": "2026-07-17",
+      "status": "awaiting",
+      "followupCount": 0,
+      "note": "wave2・フォーム送信。送信日は自動受付メール(19f6fd176ced2657・20:23着)の受信時刻から確定。"
+    },
+    {
+      "id": "shinkyoken",
+      "org": "新教研",
+      "lane": "b2b-saas",
+      "sourceTaskId": "W-1",
+      "sentDate": "2026-07-17",
+      "status": "awaiting",
+      "followupCount": 0,
+      "note": "wave2・フォーム送信。送信日は自動受付メール(19f6fd94b68ff7e9・20:32着)の受信時刻から確定。3営業日超で無反応なら029-252-7210へ電話可、と自動受付メールに明記あり。"
+    },
+    {
+      "id": "shingakusha",
+      "org": "進学舎",
+      "lane": "b2b-saas",
+      "sourceTaskId": "W-1",
+      "sentDate": "2026-07-17",
+      "status": "awaiting",
+      "followupCount": 0,
+      "note": "wave2・フォーム送信。送信日は自動受付メール(19f6fdab48fe1bb4・20:33着)の受信時刻から確定。"
+    },
+    {
+      "id": "gakuyu",
+      "org": "学悠出版株式会社（岐阜全県模試）",
+      "lane": "b2b-saas",
+      "sourceTaskId": "W-1",
+      "sentDate": "2026-07-17",
+      "status": "awaiting",
+      "followupCount": 0,
+      "threadId": "19f703c5c6c01725",
+      "note": "自動受付メールのみ・人間の返信なし。"
+    },
+    {
+      "id": "compass-e",
+      "org": "COMPASS（Qubena）",
+      "lane": "b2b-saas",
+      "sourceTaskId": "W-1",
+      "sentDate": "2026-07-18",
+      "status": "awaiting",
+      "followupCount": 0,
+      "threadId": "19f705797d7e94b6",
+      "note": "送信のみ・自動受付メール等の反応も未確認。"
+    },
+    {
+      "id": "educom",
+      "org": "EDUCOM",
+      "lane": "b2b-saas",
+      "sourceTaskId": "W-1",
+      "sentDate": "2026-07-18",
+      "status": "awaiting",
+      "followupCount": 0,
+      "threadId": "19f7057a5802b7a6",
+      "note": "送信のみ・自動受付メール等の反応も未確認。"
+    },
+    {
+      "id": "justsystems",
+      "org": "ジャストシステム（スマイルゼミ）",
+      "lane": "b2b-saas",
+      "sourceTaskId": "W-1",
+      "sentDate": "2026-07-18",
+      "status": "awaiting",
+      "followupCount": 0,
+      "threadId": "19f7057b21db3c08",
+      "note": "送信のみ・自動受付メール等の反応も未確認。"
+    },
+    {
+      "id": "zkai-mcp",
+      "org": "Z会",
+      "lane": "b2b-saas",
+      "sourceTaskId": "W-1",
+      "sentDate": "2026-07-18",
+      "status": "awaiting",
+      "followupCount": 0,
+      "threadId": "19f7057c092a2e65",
+      "note": "送信のみ・自動受付メール等の反応も未確認。別件で7/12頃にZ会企業営業担当の問い合わせフォーム経由の接点(zs_hojin@ml.zkai.co.jp)もあるが本件(API/MCP案内)とは別スレッド。"
+    },
+    {
+      "id": "lifeistech",
+      "org": "ライフイズテック株式会社",
+      "lane": "b2b-saas",
+      "sourceTaskId": "W-1",
+      "sentDate": "2026-07-20",
+      "status": "awaiting",
+      "followupCount": 0,
+      "threadId": "19f7bb2f6f125a06",
+      "note": "送信のみ・反応未確認。まだ日が浅い。"
+    }
+  ]
+}
