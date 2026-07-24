@@ -20,9 +20,10 @@
  * ⚠️対象範囲=現時点でPDF1ページ目（下田〜三島北、13校19レコード）＋2ページ目（御殿場〜富士、
  * 13校20レコード）＋3ページ目（富士東〜静岡城北、12校20レコード）＋4ページ目（静岡東〜
  * 焼津中央、8校19レコード）＋5ページ目（焼津水産〜掛川西、13校21レコード）＋6ページ目
- * （掛川工業〜磐田農業、10校19レコード）＋7ページ目（磐田西〜浜松東、10校19レコード）
- * の計79校137レコードを高い確信度で確定済み。全体のページ数・総校数は未確認（次回
- * セッションで残りページを確認しながら継続する）。
+ * （掛川工業〜磐田農業、10校19レコード）＋7ページ目（磐田西〜浜松東、10校19レコード）＋
+ * 8ページ目（浜松大平台〜浜松湖北、7校21レコード）の計86校158レコードを高い確信度で
+ * 確定済み。全体のページ数・総校数は未確認（次回セッションで残りページを確認しながら
+ * 継続する）。
  *
  * ⚠️会場番号が100番台（他校は連番14〜25等）の学校（沼津市立沼津=100・富士市立=101・
  * 静岡市立清水桜が丘=102）は市立高校を意味すると判明した（3例とも「○○市立」を含む校名）。
@@ -48,14 +49,14 @@ export const SHIZUOKA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
   ],
   coverage: {
     status: 'partial',
-    includedDepartments: ['全日制（PDF1〜7ページ目・下田〜浜松東の79校）'],
+    includedDepartments: ['全日制（PDF1〜8ページ目・下田〜浜松湖北の86校）'],
     pendingDepartments: [
-      '全日制（PDF8ページ目以降、総ページ数・総校数とも未確認）',
+      '全日制（PDF9ページ目以降、総ページ数・総校数とも未確認）',
       '定時制（全日制の外側の別課程のため東京都・神奈川県・千葉県・埼玉県・福岡県・兵庫県と同じ理由で意図的にスコープ外）',
     ],
     note:
       '静岡県は学科ごとに選抜枠（Ⅰ/Ⅱ/Ⅲ・特色選抜等）の割合内訳が付随する独自の表構造を持つ。' +
-      '今回はPDF1〜7ページ目の79校137レコード（学科の総定員行のみ）を高確信度で確定。「連携（定めない）」' +
+      '今回はPDF1〜8ページ目の86校158レコード（学科の総定員行のみ）を高確信度で確定。「連携（定めない）」' +
       '等の募集定員が数値化できない特殊枠は記録から除外した。総ページ数・県レベルのグランドトータルは' +
       'まだ確認できていない（残りページを継続する中で確認する）。',
   },
@@ -198,5 +199,26 @@ export const SHIZUOKA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '浜松東', department: '普通科', quota: 120, finalApplicants: 125, finalRate: 1.04 },
     { schoolName: '浜松東', department: '総合ビジネス', quota: 80, finalApplicants: 80, finalRate: 1.0 },
     { schoolName: '浜松東', department: '情報ビジネス', quota: 40, finalApplicants: 33, finalRate: 0.83 },
+    { schoolName: '浜松大平台', department: '総合', quota: 160, finalApplicants: 151, finalRate: 0.94 },
+    { schoolName: '浜松工業', department: '機械', quota: 80, finalApplicants: 95, finalRate: 1.19 },
+    { schoolName: '浜松工業', department: '電気', quota: 40, finalApplicants: 39, finalRate: 0.98 },
+    { schoolName: '浜松工業', department: '情報技術', quota: 40, finalApplicants: 34, finalRate: 0.85 },
+    { schoolName: '浜松工業', department: '建築', quota: 40, finalApplicants: 32, finalRate: 0.8 },
+    { schoolName: '浜松工業', department: '土木', quota: 40, finalApplicants: 46, finalRate: 1.15 },
+    { schoolName: '浜松工業', department: 'システム化学', quota: 40, finalApplicants: 42, finalRate: 1.05 },
+    { schoolName: '浜松工業', department: 'デザイン', quota: 40, finalApplicants: 33, finalRate: 0.83 },
+    { schoolName: '浜松工業', department: '理数工学', quota: 40, finalApplicants: 28, finalRate: 0.7 },
+    { schoolName: '浜松城北工業', department: '機械', quota: 80, finalApplicants: 79, finalRate: 0.99 },
+    { schoolName: '浜松城北工業', department: '電子機械', quota: 40, finalApplicants: 60, finalRate: 1.5 },
+    { schoolName: '浜松城北工業', department: '電気', quota: 40, finalApplicants: 36, finalRate: 0.9 },
+    { schoolName: '浜松城北工業', department: '電子', quota: 80, finalApplicants: 44, finalRate: 0.55 },
+    { schoolName: '浜松商業', department: '商業', quota: 240, finalApplicants: 278, finalRate: 1.16 },
+    { schoolName: '浜松商業', department: '情報処理', quota: 80, finalApplicants: 67, finalRate: 0.84 },
+    { schoolName: '浜名', department: '普通科', quota: 320, finalApplicants: 311, finalRate: 0.97 },
+    { schoolName: '浜北西', department: '普通科', quota: 240, finalApplicants: 237, finalRate: 0.99 },
+    { schoolName: '浜松湖北', department: '普通科', quota: 120, finalApplicants: 101, finalRate: 0.84 },
+    { schoolName: '浜松湖北', department: '産業マネジメントⅠ', quota: 40, finalApplicants: 36, finalRate: 0.9 },
+    { schoolName: '浜松湖北', department: '産業マネジメントⅡ', quota: 80, finalApplicants: 76, finalRate: 0.95 },
+    { schoolName: '浜松湖北', department: '産業マネジメントⅢ', quota: 40, finalApplicants: 22, finalRate: 0.55 },
   ],
 };
