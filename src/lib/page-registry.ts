@@ -137,4 +137,6 @@ export const SITEMAP_EXCLUDED_ROUTES = [
   // ZZ-3c：旗付きUI（NEXT_PUBLIC_ADVISOR_ENABLED='1'まではnotFound()・noindex設定でもある）。
   // 👤がGO判断し旗を立てた際は、noindexも解除した上でSTATIC_PAGESへ移すこと。
   '/advisor',
+  // ZZ-4d：塾ダッシュボード（NEXT_PUBLIC_JUKU_SAAS_ENABLED='1'まではnotFound()・招待トークン必須・noindex）。
+  '/juku/dashboard',
 ];

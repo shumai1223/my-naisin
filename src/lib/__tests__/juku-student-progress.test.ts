@@ -2,7 +2,7 @@
  * 塾SaaS MVP(ZZ-4c)の生徒別自動計算(志望県切替)+推移グラフの契約テスト。
  * 独自の採点ロジックを持たない設計を検証するため、既存エンジンとの整合を軸に固定する。
  */
-import { recomputeNaishinForPrefectures, buildStudentTrend, latestTrendDelta } from '../juku-student-progress';
+import { recomputeNaishinForPrefectures, buildStudentTrend, latestTrendDelta, computeDeclineAlerts } from '../juku-student-progress';
 import { calculateTotalScore, calculateMaxScore, calculatePercent } from '../utils';
 import type { Scores } from '../types';
 import type { ScoreSnapshotRecord } from '../juku-saas-db';
@@ -104,5 +104,35 @@ describe('latestTrendDelta', () => {
       { recordedAt: '2026-07-24', value: 50, maxValue: 65, percent: 77 },
     ];
     expect(latestTrendDelta(points)).toBe(-5);
+  });
+});
+
+describe('computeDeclineAlerts（評定低下アラート・ZZ-4d）', () => {
+  test('低下しているmetricのみをアラートとして返す', () => {
+    const trend = buildStudentTrend([
+      snap('naishin', 55, 65, '2026-04-22'),
+      snap('naishin', 45, 65, '2026-07-24'), // 低下
+      snap('hensachi', 55, null, '2026-04-22'),
+      snap('hensachi', 60, null, '2026-07-24'), // 上昇
+    ]);
+    const alerts = computeDeclineAlerts(trend);
+    expect(alerts).toEqual([{ metric: 'naishin', delta: -10 }]);
+  });
+
+  test('推移を語れない(1点以下)metricはアラート対象外', () => {
+    const trend = buildStudentTrend([snap('naishin', 55, 65, '2026-07-24')]);
+    expect(computeDeclineAlerts(trend)).toEqual([]);
+  });
+
+  test('全metricとも上昇・横ばいならアラート無し', () => {
+    const trend = buildStudentTrend([
+      snap('total-score', 400, 500, '2026-04-22'),
+      snap('total-score', 400, 500, '2026-07-24'),
+    ]);
+    expect(computeDeclineAlerts(trend)).toEqual([]);
+  });
+
+  test('データが無ければ空配列', () => {
+    expect(computeDeclineAlerts(buildStudentTrend([]))).toEqual([]);
   });
 });

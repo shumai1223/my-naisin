@@ -79,3 +79,24 @@ export function latestTrendDelta(points: StudentTrendPoint[]): number | null {
   const prev = points[points.length - 2];
   return last.value - prev.value;
 }
+
+export interface DeclineAlert {
+  metric: SnapshotMetric;
+  delta: number;
+}
+
+/**
+ * 塾ダッシュボード（ZZ-4d）の評定低下アラート。metric別に直近2点の差分がマイナスのものだけを返す
+ * （1点以下で推移を語れないmetricは対象外＝latestTrendDeltaがnullを返すものは除外）。
+ * 数値の意味づけ（「低下」の閾値）は一切持たず、単純な符号判定のみ＝決定論・捏造ゼロ。
+ */
+export function computeDeclineAlerts(trend: StudentTrendByMetric): DeclineAlert[] {
+  const alerts: DeclineAlert[] = [];
+  for (const metric of Object.keys(trend) as SnapshotMetric[]) {
+    const delta = latestTrendDelta(trend[metric]);
+    if (delta !== null && delta < 0) {
+      alerts.push({ metric, delta });
+    }
+  }
+  return alerts;
+}
