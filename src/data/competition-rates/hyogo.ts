@@ -10,12 +10,11 @@
  * （google-trends記録で新規開拓ROI④位・prefecture-exam-systems-verifiedに総合得点方式の
  * 記載済みで一定の下地あり）。
  *
- * ⚠️対象範囲=現時点でPDF2ページ目（東灘〜宝塚東、43校）＋3ページ目（宝塚北〜北条、41校）＋
- * 4ページ目（加古川北〜山崎、27校新規+松陽/西脇/小野/社/上郡/佐用/山崎への追加学科）の
- * 計111校160レコードを高い確信度で確定済み。全体は10ページ・全日制127校（県立115校・
- * 市立12校）＋定時制19校（県立15校・市立4校）の大規模資料と判明済み（1ページ目の
- * グランドトータルで確認: 全日制定員21,150・確定志願者20,567・倍率0.97）。残り6ページ
- * （5〜10ページ目）は未転記のまま次回に持ち越し。
+ * ⚠️対象範囲=PDF2〜5ページ目（東灘〜浜坂、127校190レコード）＝**全日制が完結**。
+ * PDF5ページ目末尾の「全日制127校 計」行（定員21,150・確定志願者20,567・倍率0.97）と
+ * 機械集計が完全一致することを確認済み。全体は10ページの大規模資料で、5ページ目以降
+ * （6〜10ページ目）は定時制19校（県立15校・市立4校）と判明済み（Y-0憲法に基づき東京都・
+ * 神奈川県・千葉県・埼玉県・福岡県と同じ理由で意図的にスコープ外・詳細は末尾コメント参照）。
  *
  * ⚠️「農業」という学校名はPDF記載どおりで誤記や省略ではない。兵庫県立農業高等学校
  * （加古川市・通称「県農」）の正式な公表表記であり、WebSearchで実在確認済み（7学科=
@@ -43,19 +42,20 @@ export const HYOGO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     },
   ],
   coverage: {
-    status: 'partial',
-    includedDepartments: ['全日制（PDF2〜4ページ目・東灘〜山崎の111校）'],
+    status: 'complete',
+    includedDepartments: ['全日制（PDF2〜5ページ目・東灘〜浜坂の全127校。grand totalと機械集計が完全一致）'],
     pendingDepartments: [
-      '全日制（PDF5〜10ページ目、残り約16校。127校中111校のみ着手済み）',
       '定時制（全日制の外側の別課程のため東京都・神奈川県・千葉県・埼玉県・福岡県と同じ理由で意図的にスコープ外）',
     ],
     note:
       '兵庫県は全日制127校（県立115校・市立12校）が県立/市立を区別せず1つのPDF（全10ページ）に' +
-      '収録されている大規模資料。今回はPDF2〜4ページ目の111校160レコードのみを高確信度で確定' +
-      '（1ページ目のグランドトータル: 全日制定員21,150・確定志願者20,567・倍率0.97は確認済みだが、' +
-      '111校のみでの部分突合はまだ行っていない）。残り6ページは次回以降のセッションで継続する。',
+      '収録されている大規模資料。全日制127校190レコードを完全収録し、機械集計（quota21,150・' +
+      'applicants20,567・倍率0.97）がPDF5ページ目末尾のグランドトータル（全日制127校計）と' +
+      '完全に一致することを確認した。残り5ページ（6〜10ページ目）は定時制のためスコープ外。',
   },
-  officialSubtotals: [],
+  officialSubtotals: [
+    { label: '全日制127校計', quota: 21150, finalApplicants: 20567, finalRate: 0.97 },
+  ],
   records: [
     { schoolName: '東灘', department: '普通科', quota: 200, finalApplicants: 135, finalRate: 0.68 },
     { schoolName: '御影', department: '普通科', quota: 280, finalApplicants: 220, finalRate: 0.79 },
@@ -217,5 +217,35 @@ export const HYOGO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '佐用', department: '農業科学', quota: 30, finalApplicants: 17, finalRate: 0.57 },
     { schoolName: '佐用', department: '家政', quota: 24, finalApplicants: 7, finalRate: 0.29 },
     { schoolName: '山崎', department: '森と食', quota: 20, finalApplicants: 15, finalRate: 0.75 },
+    { schoolName: '飾磨工業', department: '機械工学（単位制）', quota: 40, finalApplicants: 35, finalRate: 0.88 },
+    { schoolName: '飾磨工業', department: '電気情報工学（単位制）', quota: 20, finalApplicants: 18, finalRate: 0.9 },
+    { schoolName: '飾磨工業', department: 'エネルギー環境工学（単位制）', quota: 20, finalApplicants: 17, finalRate: 0.85 },
+    { schoolName: '姫路工業', department: '機械', quota: 40, finalApplicants: 44, finalRate: 1.1 },
+    { schoolName: '姫路工業', department: '電気', quota: 20, finalApplicants: 18, finalRate: 0.9 },
+    { schoolName: '姫路工業', department: '工業化学', quota: 20, finalApplicants: 20, finalRate: 1.0 },
+    { schoolName: '姫路工業', department: 'デザイン', quota: 20, finalApplicants: 23, finalRate: 1.15 },
+    { schoolName: '姫路工業', department: '溶接', quota: 20, finalApplicants: 18, finalRate: 0.9 },
+    { schoolName: '相生産業', department: '機械', quota: 40, finalApplicants: 38, finalRate: 0.95 },
+    { schoolName: '相生産業', department: '電気', quota: 21, finalApplicants: 13, finalRate: 0.62 },
+    { schoolName: '相生産業', department: '商業', quota: 40, finalApplicants: 39, finalRate: 0.98 },
+    { schoolName: '熊野北', department: '電気情報システム', quota: 40, finalApplicants: 41, finalRate: 1.03 },
+    { schoolName: '熊野北', department: '環境建設工学', quota: 20, finalApplicants: 21, finalRate: 1.05 },
+    { schoolName: '熊野北', department: '総合デザイン', quota: 20, finalApplicants: 25, finalRate: 1.25 },
+    { schoolName: '姫路商業', department: '商業', quota: 100, finalApplicants: 113, finalRate: 1.13 },
+    { schoolName: '千種', department: '普通科（単位制）', quota: 35, finalApplicants: 30, finalRate: 0.86 },
+    { schoolName: '豊岡', department: '普通科（単位制）', quota: 160, finalApplicants: 167, finalRate: 1.04 },
+    { schoolName: '出石', department: '普通科', quota: 79, finalApplicants: 43, finalRate: 0.54 },
+    { schoolName: '村岡', department: '普通科', quota: 69, finalApplicants: 17, finalRate: 0.25 },
+    { schoolName: '八鹿', department: '普通科', quota: 160, finalApplicants: 127, finalRate: 0.79 },
+    { schoolName: '生野', department: '普通科', quota: 69, finalApplicants: 24, finalRate: 0.35 },
+    { schoolName: '香住', department: '普通科', quota: 80, finalApplicants: 45, finalRate: 0.56 },
+    { schoolName: '豊岡総合', department: '総合学科', quota: 73, finalApplicants: 55, finalRate: 0.75 },
+    { schoolName: '和田山', department: '総合学科', quota: 112, finalApplicants: 67, finalRate: 0.6 },
+    { schoolName: '香住', department: '海洋科学（単位制）', quota: 20, finalApplicants: 10, finalRate: 0.5 },
+    { schoolName: '豊岡総合', department: '電機応用工学（単位制）', quota: 27, finalApplicants: 21, finalRate: 0.78 },
+    { schoolName: '豊岡総合', department: '環境建設工学（単位制）', quota: 32, finalApplicants: 29, finalRate: 0.91 },
+    { schoolName: '但馬農業', department: 'みのりと食（単位制）', quota: 36, finalApplicants: 33, finalRate: 0.92 },
+    { schoolName: '但馬農業', department: '総合畜産（単位制）', quota: 40, finalApplicants: 12, finalRate: 0.3 },
+    { schoolName: '浜坂', department: '普通科', quota: 41, finalApplicants: 0, finalRate: 0.0 },
   ],
 };
