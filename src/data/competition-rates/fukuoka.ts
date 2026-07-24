@@ -6,9 +6,18 @@
  *
  * ⚠️対象範囲=現時点でPDF1ページ目全27校（青豊〜遠賀）＋PDF2ページ目の30校
  * （宗像・光陵・水産・玄界・新宮・福岡魁誠・須恵・宇美商業・香住丘・香椎・香椎工業・福岡
- * ＋筑紫丘〜糸島の15校＋福岡工業/福岡農業/糸島農業）＋PDF3ページ目の16校（小郡・三井・
- * 明善・久留米・八女・福島・伝習館・山門・三潴・大川樟風・三池・ありあけ新世・朝倉・
- * 朝倉東・朝倉光陽・浮羽究真館）のみを高い確信度で確定済み。2ページ目は宗像から始まる。
+ * ＋筑紫丘〜糸島の15校＋福岡工業/福岡農業/糸島農業）＋PDF3ページ目の21校（小郡〜浮羽工業）
+ * ＋PDF4ページ目（最終ページ）10校（田川・東鷹・田川科学技術・稲築志耕館・嘉穂・嘉穂東・
+ * 嘉穂総合・鞍手・直方・鞍手竜徳）のみを高い確信度で確定済み。2ページ目は宗像から始まる。
+ *
+ * ⚠️2026-07-25追記: PDF4ページ目が最終ページと判明した（末尾に「県立合計（90校）入学定員
+ * 22,200・確定志願者数22,854・倍率1.03」という県レベルのグランドトータル行を確認・
+ * これは既知のリセモム記事の数値と完全一致）。英進館「筑豊地区」記事で9校を外部裏取り、
+ * 田川科学技術はこの記事に掲載が無かったがΣ子学科=計行の自己検算が完全一致したため
+ * PDF読み取り値のみで採用（4学科合計170=計行170と一致）。**残る1校「筑豊」のみ、
+ * 自分のPDF読み取りで学科別内訳の合計(120)と「計」行の入学定員(160)が食い違う矛盾を検出し、
+ * 誤読の可能性が高いため今回は見送り、未着手のまま持ち越した**（Y-0憲法の捏造ゼロ優先）。
+ * 筑豊が解決すればPDF県立分は完結し、県レベルグランドトータルとの最終突合を試みられる。
  *
  * ⚠️2026-07-25再訂正: 登録済みsourceUrl（pref.fukuoka.lg.jp/soshiki/kyouiku-somu/nyuusen.html）
  * が404化したため現在の掲載場所を再探索し、site/kyouiku/nyushi8.html配下のPDF
@@ -100,6 +109,12 @@ export const FUKUOKA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       fiscalYear: '令和8年度（2026年度）',
       fetchedAt: '2026-07-25',
     },
+    {
+      url: 'https://www.eishinkan.net/entrance/high_admissions/7937/',
+      docTitle: '英進館 筑豊地区 令和8年度公立高校一般入試志願者状況（PDF4ページ目・田川/東鷹/嘉穂/嘉穂東/嘉穂総合/鞍手/直方/稲築志耕館/鞍手竜徳の一括引用元）',
+      fiscalYear: '令和8年度（2026年度）',
+      fetchedAt: '2026-07-25',
+    },
   ],
   coverage: {
     status: 'partial',
@@ -107,12 +122,13 @@ export const FUKUOKA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '県立全日制（PDF1ページ目・青豊〜遠賀の27校）',
       '県立全日制（PDF2ページ目・宗像〜糸島の30校=宗像〜福岡魁誠等の12校+筑紫丘〜糸島の15校(外部塾サイト裏取り)+福岡工業/福岡農業/糸島農業の3校(外部塾サイト裏取り)）',
       '県立全日制（PDF3ページ目・小郡〜浮羽工業の21校、全て英進館筑後地区/実業高校記事で裏取り済み＝PDF3ページ目完結）',
+      '県立全日制（PDF4ページ目=最終ページ・田川〜鞍手竜徳の10校。うち9校は英進館筑豊地区記事で外部裏取り、田川科学技術はΣ子学科=計行の自己検算で採用）',
     ],
     pendingDepartments: [
-      '県立全日制（PDF4ページ目以降、存在する場合は未確認）',
+      '県立全日制（PDF4ページ目残り・筑豊の1校。自己読み取りで学科別内訳合計(120)と「計」行の入学定員(160)が食い違う矛盾を検出し、外部裏取り元も見つからず未着手）',
       '市組合立全日制（別PDF・uploaded/life/806459_62802784_misc.pdf・未着手。南筑（久留米市立）はこちらに含まれる見込み）',
     ],
-    note: '福岡県は資料が複数ページ＋県立/市組合立の別PDFに分かれており、今回はPDF1ページ目27校＋2ページ目30校＋3ページ目21校の計78校のみを高確信度で確定（PDF3ページ目まで完了）。PDF自体は4ページ以上に及ぶ大規模資料の可能性がある（未確認）。県レベルの公式合計（全日制県立 定員22,200/志願者22,854/倍率1.03）との突合はまだ行っていない（残りページ未読のため）。学校単位の計行との突合、および外部裏取り値のrate整合性チェックのみ実施済み。',
+    note: '福岡県は資料が複数ページ＋県立/市組合立の別PDFに分かれており、今回はPDF1〜4ページ目のうち88校のみを高確信度で確定。PDF4ページ目末尾に県立合計行（90校・定員22,200・確定志願者22,854・倍率1.03）を確認済み＝これはリセモム記事の数値と完全一致し、PDF県立分はこの4ページで全てであることが判明した。残る筑豊1校が解決すればPDF県立分が完結し、このグランドトータルとの最終突合を試みられる（現時点では88校のみでの部分突合はしていない）。',
   },
   officialSubtotals: [
     { label: '苅田工業 計', quota: 160, finalApplicants: 159, finalRate: 0.99 },
@@ -138,6 +154,13 @@ export const FUKUOKA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { label: '大川樟風 計', quota: 120, finalApplicants: 85, finalRate: 0.71 },
     { label: '朝倉東 計', quota: 160, finalApplicants: 137, finalRate: 0.86 },
     { label: '朝倉光陽 計', quota: 120, finalApplicants: 105, finalRate: 0.88 },
+    { label: '東鷹 計', quota: 160, finalApplicants: 135, finalRate: 0.84 },
+    { label: '嘉穂 計', quota: 320, finalApplicants: 317, finalRate: 0.99 },
+    { label: '嘉穂東 計', quota: 240, finalApplicants: 223, finalRate: 0.93 },
+    { label: '嘉穂総合 計', quota: 160, finalApplicants: 161, finalRate: 1.01 },
+    { label: '鞍手 計', quota: 240, finalApplicants: 212, finalRate: 0.88 },
+    { label: '直方 計', quota: 200, finalApplicants: 173, finalRate: 0.87 },
+    { label: '田川科学技術 計', quota: 200, finalApplicants: 170, finalRate: 0.85 },
   ],
   records: [
     { schoolName: '青豊', department: '総合学科', quota: 280, finalApplicants: 286, finalRate: 1.02 },
@@ -284,5 +307,28 @@ export const FUKUOKA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '八女農業', department: '農業系4科（くくり募集）', quota: 120, finalApplicants: 102, finalRate: 0.85 },
     { schoolName: '浮羽工業', department: '建築系', quota: 80, finalApplicants: 53, finalRate: 0.66 },
     { schoolName: '浮羽工業', department: '機械・電気系', quota: 80, finalApplicants: 76, finalRate: 0.95 },
+    { schoolName: '田川', department: '普通科', quota: 200, finalApplicants: 162, finalRate: 0.81 },
+    { schoolName: '東鷹', department: '普通科総合コース', quota: 120, finalApplicants: 103, finalRate: 0.86 },
+    { schoolName: '東鷹', department: '総合生活科', quota: 40, finalApplicants: 32, finalRate: 0.8 },
+    { schoolName: '嘉穂', department: '普通科（コースを除く）', quota: 240, finalApplicants: 234, finalRate: 0.98 },
+    { schoolName: '嘉穂', department: '普通科武道・日本文化コース', quota: 40, finalApplicants: 36, finalRate: 0.9 },
+    { schoolName: '嘉穂', department: '理数科', quota: 40, finalApplicants: 47, finalRate: 1.18 },
+    { schoolName: '嘉穂東', department: '普通科', quota: 200, finalApplicants: 192, finalRate: 0.96 },
+    { schoolName: '嘉穂東', department: '英語科', quota: 40, finalApplicants: 31, finalRate: 0.78 },
+    { schoolName: '嘉穂総合', department: '普通科総合コース', quota: 40, finalApplicants: 38, finalRate: 0.95 },
+    { schoolName: '嘉穂総合', department: '農業食品科', quota: 40, finalApplicants: 38, finalRate: 0.95 },
+    { schoolName: '嘉穂総合', department: '工業科', quota: 40, finalApplicants: 43, finalRate: 1.08 },
+    { schoolName: '嘉穂総合', department: '情報科', quota: 40, finalApplicants: 42, finalRate: 1.05 },
+    { schoolName: '鞍手', department: '普通科（コースを除く）', quota: 160, finalApplicants: 143, finalRate: 0.89 },
+    { schoolName: '鞍手', department: '普通科人間文科コース', quota: 40, finalApplicants: 32, finalRate: 0.8 },
+    { schoolName: '鞍手', department: '理数科', quota: 40, finalApplicants: 37, finalRate: 0.93 },
+    { schoolName: '直方', department: '普通科（コースを除く）', quota: 160, finalApplicants: 135, finalRate: 0.84 },
+    { schoolName: '直方', department: '普通科スポーツ科学コース', quota: 40, finalApplicants: 38, finalRate: 0.95 },
+    { schoolName: '稲築志耕館', department: '総合学科', quota: 200, finalApplicants: 144, finalRate: 0.72 },
+    { schoolName: '鞍手竜徳', department: '総合学科', quota: 160, finalApplicants: 111, finalRate: 0.69 },
+    { schoolName: '田川科学技術', department: '農業食品科', quota: 80, finalApplicants: 71, finalRate: 0.89 },
+    { schoolName: '田川科学技術', department: '工業システム科機械電気コース', quota: 40, finalApplicants: 39, finalRate: 0.98 },
+    { schoolName: '田川科学技術', department: '工業システム科建築土木コース', quota: 40, finalApplicants: 30, finalRate: 0.75 },
+    { schoolName: '田川科学技術', department: 'ビジネス科学科', quota: 40, finalApplicants: 30, finalRate: 0.75 },
   ],
 };
