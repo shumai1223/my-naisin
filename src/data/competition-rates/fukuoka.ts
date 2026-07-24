@@ -4,7 +4,7 @@
  * 一次ソース: 福岡県教育委員会「令和8年度県立高等学校入学者選抜 一般入試 志願者数（確定）」
  * （県立分PDF、市組合立分は別PDF）。
  *
- * ⚠️対象範囲=現時点でPDF1ページ目21校（青豊〜八幡工業）＋PDF2ページ目の27校
+ * ⚠️対象範囲=現時点でPDF1ページ目全27校（青豊〜遠賀）＋PDF2ページ目の27校
  * （宗像・光陵・水産・玄界・新宮・福岡魁誠・須恵・宇美商業・香住丘・香椎・香椎工業・福岡
  * ＋筑紫丘〜糸島の15校）のみを高い確信度で確定済み。2ページ目は宗像から始まる。
  *
@@ -13,7 +13,13 @@
  * （uploaded/life/806459_62802786_misc.pdf）に同一の「確定数」表があることを確認した。
  * このPDFをReadツールでページ画像として直接閲覧した結果、**「八幡南・北筑・東筑・折尾・
  * 中間・遠賀はページ1に存在せず誤記憶」という直前の結論は誤りだったと判明**＝これら6校は
- * 実際にPDF1ページ目の八幡工業の直後に実在する（未収録のまま次回に持ち越し）。また
+ * 実際にPDF1ページ目の八幡工業の直後に実在すると確認し、今回追加収録した。うち北筑は
+ * 2回の独立した視覚読み取りで「計」の確定志願者数が235→281と食い違う誤読シグナルが出た
+ * ため、外部の学習塾サイト（英進館・北九州地区記事）の学科別内訳（普通科200/235/1.18・
+ * 英語科40/46/1.15）を採用した。折尾・遠賀は学科別内訳のΣが「計」行と完全一致することを
+ * 自己検算で確認できたためPDF読み取り値をそのまま採用（遠賀は英進館記事でも同値を確認）。
+ * 八幡南・東筑・中間は単一学科（普通科のみ）のため読み違いの余地が小さく、PDF読み取り値を
+ * 採用（八幡南・中間は英進館記事でも同値を確認、東筑は複数回の再読で値が安定していた）。
  * PDF3ページ目には小郡〜朝倉光陽まで約20校の未収録データが新たに確認された（密集表の
  * 視覚読み取りは試行間で数値が食い違うリスクが高く、今回は確信を持てる範囲に絞り
  * 転記を見送った＝Y-0憲法の捏造ゼロ優先）。
@@ -59,7 +65,7 @@ export const FUKUOKA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     },
     {
       url: 'https://www.eishinkan.net/entrance/high_admissions/7927/',
-      docTitle: '英進館 北九州地区 令和8年度公立高校一般入試志願者状況（北九州高校の学科別内訳の裏取りに使用）',
+      docTitle: '英進館 北九州地区 令和8年度公立高校一般入試志願者状況（北九州高校・八幡南/北筑/東筑/中間/遠賀の学科別内訳の裏取りに使用）',
       fiscalYear: '令和8年度（2026年度）',
       fetchedAt: '2026-07-25',
     },
@@ -73,17 +79,16 @@ export const FUKUOKA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
   coverage: {
     status: 'partial',
     includedDepartments: [
-      '県立全日制（PDF1ページ目・青豊〜八幡工業の21校）',
+      '県立全日制（PDF1ページ目・青豊〜遠賀の27校）',
       '県立全日制（PDF2ページ目・宗像〜糸島の27校、うち筑紫丘〜糸島15校は外部塾サイト裏取り採用）',
     ],
     pendingDepartments: [
-      '県立全日制（PDF1ページ目残り・八幡南/北筑/東筑/折尾/中間/遠賀の6校、2026-07-25にページ1に実在すると再確認したが視覚読み取りの確信度不足で未転記）',
       '県立全日制（PDF2ページ目残り・福岡工業/福岡農業/糸島農業の3校、工業/農業系のため裏取り元が見つからず未着手）',
       '県立全日制（PDF3ページ目・小郡〜朝倉光陽の約20校、2026-07-25に存在を確認したが未転記）',
       '県立全日制（PDF4ページ目以降、存在する場合は未確認）',
       '市組合立全日制（別PDF・uploaded/life/806459_62802784_misc.pdf・未着手）',
     ],
-    note: '福岡県は資料が複数ページ＋県立/市組合立の別PDFに分かれており、今回はPDF1ページ目21校＋2ページ目27校の計48校のみを高確信度で確定。PDF自体は4ページ以上に及ぶ大規模資料と判明済み（1ページ目残り6校＋3ページ目約20校が2026-07-25に存在確認済みだが未転記）。県レベルの公式合計（全日制県立 定員22,200/志願者22,854/倍率1.03）との突合はまだ行っていない（残りページ未読のため）。学校単位の計行との突合、および外部裏取り値のrate整合性チェックのみ実施済み。',
+    note: '福岡県は資料が複数ページ＋県立/市組合立の別PDFに分かれており、今回はPDF1ページ目27校＋2ページ目27校の計54校のみを高確信度で確定。PDF自体は4ページ以上に及ぶ大規模資料と判明済み（3ページ目約20校が2026-07-25に存在確認済みだが未転記）。県レベルの公式合計（全日制県立 定員22,200/志願者22,854/倍率1.03）との突合はまだ行っていない（残りページ未読のため）。学校単位の計行との突合、および外部裏取り値のrate整合性チェックのみ実施済み。',
   },
   officialSubtotals: [
     { label: '苅田工業 計', quota: 160, finalApplicants: 159, finalRate: 0.99 },
@@ -97,6 +102,8 @@ export const FUKUOKA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { label: '香住丘 計', quota: 400, finalApplicants: 500, finalRate: 1.25 },
     { label: '香椎 計', quota: 440, finalApplicants: 603, finalRate: 1.37 },
     { label: '香椎工業 計', quota: 280, finalApplicants: 333, finalRate: 1.19 },
+    { label: '北筑 計', quota: 240, finalApplicants: 281, finalRate: 1.17 },
+    { label: '折尾 計', quota: 160, finalApplicants: 169, finalRate: 1.06 },
   ],
   records: [
     { schoolName: '青豊', department: '総合学科', quota: 280, finalApplicants: 286, finalRate: 1.02 },
@@ -174,5 +181,14 @@ export const FUKUOKA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '武蔵台', department: '普通科', quota: 400, finalApplicants: 365, finalRate: 0.91 },
     { schoolName: '筑紫', department: '普通科', quota: 400, finalApplicants: 372, finalRate: 0.93 },
     { schoolName: '糸島', department: '普通科', quota: 360, finalApplicants: 319, finalRate: 0.89 },
+    { schoolName: '八幡南', department: '普通科', quota: 240, finalApplicants: 269, finalRate: 1.12 },
+    { schoolName: '北筑', department: '普通科', quota: 200, finalApplicants: 235, finalRate: 1.18 },
+    { schoolName: '北筑', department: '英語科', quota: 40, finalApplicants: 46, finalRate: 1.15 },
+    { schoolName: '東筑', department: '普通科', quota: 280, finalApplicants: 374, finalRate: 1.34 },
+    { schoolName: '折尾', department: '総合ビジネス科', quota: 80, finalApplicants: 83, finalRate: 1.04 },
+    { schoolName: '折尾', department: '生活デザイン科', quota: 80, finalApplicants: 86, finalRate: 1.08 },
+    { schoolName: '中間', department: '普通科', quota: 200, finalApplicants: 201, finalRate: 1.01 },
+    { schoolName: '遠賀', department: '普通科・情報科学コース・情報ビジネスコース・生活創造コース（くくり募集）', quota: 120, finalApplicants: 64, finalRate: 0.53 },
+    { schoolName: '遠賀', department: '農業食品科', quota: 40, finalApplicants: 33, finalRate: 0.83 },
   ],
 };
