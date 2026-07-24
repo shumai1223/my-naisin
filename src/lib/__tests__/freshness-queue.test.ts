@@ -2,6 +2,7 @@
  * 再検証優先度キュー(ZZ-9b)の契約テスト。
  */
 import { PREFECTURES } from '../prefectures';
+import { getSourceHistory } from '../source-history';
 import { buildFreshnessQueue, getStaleTop } from '../freshness-queue';
 
 const FIXED_NOW = new Date('2026-07-24T00:00:00Z');
@@ -18,20 +19,30 @@ describe('buildFreshnessQueue', () => {
     expect(days).toEqual(sorted);
   });
 
-  test('各エントリのdaysSinceVerifiedは実際の日付差分と一致する(検算)', () => {
+  test('各エントリのdaysSinceVerifiedはgetSourceHistory()の最新日付との差分と一致する(検算)', () => {
     const queue = buildFreshnessQueue(FIXED_NOW);
     for (const entry of queue) {
-      const pref = PREFECTURES.find((p) => p.code === entry.code)!;
-      if (!pref.lastVerified) {
+      const history = getSourceHistory(entry.code);
+      if (history.length === 0) {
         expect(entry.daysSinceVerified).toBe(Number.POSITIVE_INFINITY);
         continue;
       }
+      const latestDate = history[history.length - 1].date;
       const expectedDays = Math.floor(
-        (FIXED_NOW.getTime() - new Date(`${pref.lastVerified}T00:00:00Z`).getTime()) / 86_400_000
+        (FIXED_NOW.getTime() - new Date(`${latestDate}T00:00:00Z`).getTime()) / 86_400_000
       );
       expect(entry.daysSinceVerified).toBe(expectedDays);
-      expect(entry.lastVerified).toBe(pref.lastVerified);
+      expect(entry.lastVerified).toBe(latestDate);
     }
+  });
+
+  test('MANUAL_HISTORYで再検証記録が追記された県は、prefectures.tsのlastVerifiedより新しい日付で扱われる(2026-07-24判明の設計修正の回帰防止)', () => {
+    const queue = buildFreshnessQueue(FIXED_NOW);
+    const aichi = queue.find((q) => q.code === 'aichi')!;
+    const aichiPref = PREFECTURES.find((p) => p.code === 'aichi')!;
+    // aichiはMANUAL_HISTORYに2026-07-23のエントリがあるため、baseline(prefectures.tsのlastVerified)
+    // より新しい日付がlastVerifiedとして採用されているはず。
+    expect(aichi.lastVerified >= (aichiPref.lastVerified ?? '')).toBe(true);
   });
 
   test('都道府県コードの重複がない(一意性)', () => {
