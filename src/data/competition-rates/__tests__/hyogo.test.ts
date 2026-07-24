@@ -3,12 +3,13 @@ import { HYOGO_COMPETITION_RATES } from '../hyogo';
 /**
  * Y-2/Y-6 DoD検証（兵庫県・Y-6先行着手1県目）。
  *
- * 兵庫県は全日制127校（全10ページ）の大規模資料のうち、今回はPDF2〜3ページ目の84校107レコードを
+ * 兵庫県は全日制127校（全10ページ）の大規模資料のうち、今回はPDF2〜4ページ目の111校160レコードを
  * 対象とした正直な部分収録。学校単位の「計」行がPDF上に存在しないため、officialSubtotalsに
  * よる突合は行わず、レコード単体の整合性（quota>0・finalApplicants>=0・finalRate概算一致）と
- * 学校名+学科名の重複が無いことのみを検証する。
+ * 学校名+学科名の重複が無いことのみを検証する。「農業」はPDF記載どおりの学校名（兵庫県立
+ * 農業高等学校の通称表記・WebSearchで実在確認済み）。
  */
-describe('兵庫県 倍率パイプラインα（Y-6・PDF2〜3ページ目84校107レコードの部分収録テスト）', () => {
+describe('兵庫県 倍率パイプラインα（Y-6・PDF2〜4ページ目111校160レコードの部分収録テスト）', () => {
   const { records } = HYOGO_COMPETITION_RATES;
 
   it('全レコードのquota>0・finalApplicants>=0・finalRateが概算で整合する', () => {
@@ -35,10 +36,10 @@ describe('兵庫県 倍率パイプラインα（Y-6・PDF2〜3ページ目84校
     expect(HYOGO_COMPETITION_RATES.coverage.pendingDepartments.length).toBeGreaterThan(0);
   });
 
-  it('107レコード・84校が収録されている（PDF2〜3ページ目・東灘〜北条）', () => {
-    expect(records.length).toBe(107);
+  it('160レコード・111校が収録されている（PDF2〜4ページ目・東灘〜山崎）', () => {
+    expect(records.length).toBe(160);
     const distinctSchools = new Set(records.map((r) => r.schoolName));
-    expect(distinctSchools.size).toBe(84);
+    expect(distinctSchools.size).toBe(111);
   });
 
   it('学科横断の専門学科校が正しく収録されている', () => {
@@ -52,6 +53,15 @@ describe('兵庫県 倍率パイプラインα（Y-6・PDF2〜3ページ目84校
       市尼崎双星: 4,
       市伊丹: 2,
       有馬: 2,
+      農業: 7,
+      播磨農業: 3,
+      東播工業: 4,
+      西脇工業: 4,
+      小野工業: 3,
+      松陽: 3,
+      上郡: 3,
+      佐用: 3,
+      山崎: 2,
     };
     for (const [name, count] of Object.entries(multiDeptSchools)) {
       const schoolRecords = records.filter((r) => r.schoolName === name);
