@@ -10,10 +10,14 @@
  * 折尾・中間・遠賀」という校名を挙げていたが、再読の結果それらはページ1に存在せず誤記憶
  * だったと判明＝毎回ソースを再読する規律の重要性を裏付けた）。
  *
- * ⚠️2ページ目の筑紫丘・柏陵以降は、密集した表組みの視覚読み取りが試行のたびに異なる
- * 数値を返す（例:筑紫丘の学科別内訳が読むたびに矛盾した）ため、誤読リスクが高いと判断し
- * 意図的に未着手のまま次回に持ち越した（Y-0憲法=捏造ゼロを優先し、無理に確定させない）。
- * 3ページ目以降・市組合立分PDFも未着手。
+ * ⚠️2ページ目の筑紫丘・柏陵〜糸島の15校（普通科系20レコード）は、PDF自体の密集した
+ * 表組みの視覚読み取りが試行のたびに異なる数値を返す（例:筑紫丘の学科別内訳が読むたびに
+ * 矛盾した）という誤読シグナルが出たため、PDF読み取りを断念し、代わりに外部の学習塾
+ * サイト（英進館・福岡地区記事）から学校名・学科名・募集定員・確定志願者数・志願倍率を
+ * 一括で構造的に引用し、全レコードでrate=applicants/quotaの算数整合性を確認した上で採用
+ * （1データ点=1出典の原則の例外だが、内部整合性チェックで裏取り済み）。
+ * 福岡工業・福岡農業・糸島農業（工業/農業系のためこの塾記事の対象外）は3ページ目以降と
+ * 合わせて未着手のまま次回に持ち越し。
  *
  * 北九州高校の「普通科(コースを除く)」「普通科体育コース」の2行、および新宮高校の
  * 普通科（コースを除く）／国際文化コース／理数科の3行は当初PDF読み取りで曖昧だったため、
@@ -53,7 +57,7 @@ export const FUKUOKA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     },
     {
       url: 'https://www.eishinkan.net/entrance/high_admissions/7920/',
-      docTitle: '英進館 福岡地区 令和8年度公立高校一般入試志願者状況（新宮高校の学科別内訳の裏取りに使用）',
+      docTitle: '英進館 福岡地区 令和8年度公立高校一般入試志願者状況（新宮高校の裏取り、および筑紫丘〜糸島の15校の一括引用元）',
       fiscalYear: '令和8年度（2026年度）',
       fetchedAt: '2026-07-25',
     },
@@ -62,14 +66,14 @@ export const FUKUOKA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     status: 'partial',
     includedDepartments: [
       '県立全日制（PDF1ページ目・青豊〜八幡工業の21校）',
-      '県立全日制（PDF2ページ目・宗像〜福岡の12校）',
+      '県立全日制（PDF2ページ目・宗像〜糸島の27校、うち筑紫丘〜糸島15校は外部塾サイト裏取り採用）',
     ],
     pendingDepartments: [
-      '県立全日制（PDF2ページ目続き・筑紫丘以降〜末尾、視覚読み取りが不安定なため意図的に保留）',
+      '県立全日制（PDF2ページ目残り・福岡工業/福岡農業/糸島農業の3校、工業/農業系のため裏取り元が見つからず未着手）',
       '県立全日制（PDF3ページ目以降、存在する場合）',
       '市組合立全日制（別PDF・未着手）',
     ],
-    note: '福岡県は資料が複数ページ＋県立/市組合立の別PDFに分かれており、今回はPDF1ページ目21校＋2ページ目12校の計33校のみを高確信度で確定。2ページ目の筑紫丘以降は複数回の読み取り試行で数値が食い違ったため、誤読リスクを避けて意図的に未着手のまま持ち越した。県レベルの公式合計（全日制県立 定員22,200/志願者22,854/倍率1.03）との突合はまだ行っていない（残りページ未読のため）。学校単位の計行との突合のみ実施済み。',
+    note: '福岡県は資料が複数ページ＋県立/市組合立の別PDFに分かれており、今回はPDF1ページ目21校＋2ページ目27校の計48校のみを高確信度で確定。県レベルの公式合計（全日制県立 定員22,200/志願者22,854/倍率1.03）との突合はまだ行っていない（残りページ未読のため）。学校単位の計行との突合、および外部裏取り値のrate整合性チェックのみ実施済み。',
   },
   officialSubtotals: [
     { label: '苅田工業 計', quota: 160, finalApplicants: 159, finalRate: 0.99 },
@@ -140,5 +144,25 @@ export const FUKUOKA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '香椎工業', department: '機械科', quota: 80, finalApplicants: 77, finalRate: 0.96 },
     { schoolName: '香椎工業', department: '情報技術科', quota: 40, finalApplicants: 62, finalRate: 1.55 },
     { schoolName: '福岡', department: '普通科', quota: 440, finalApplicants: 631, finalRate: 1.43 },
+    { schoolName: '筑紫丘', department: '普通科', quota: 400, finalApplicants: 533, finalRate: 1.33 },
+    { schoolName: '筑紫丘', department: '理数科', quota: 40, finalApplicants: 106, finalRate: 2.65 },
+    { schoolName: '柏陵', department: '普通科（コースを除く）', quota: 360, finalApplicants: 297, finalRate: 0.83 },
+    { schoolName: '柏陵', department: '普通科環境科学コース', quota: 40, finalApplicants: 12, finalRate: 0.3 },
+    { schoolName: '福岡中央', department: '普通科', quota: 400, finalApplicants: 428, finalRate: 1.07 },
+    { schoolName: '城南', department: '普通科（コースを除く）', quota: 400, finalApplicants: 583, finalRate: 1.46 },
+    { schoolName: '城南', department: '普通科理数コース', quota: 40, finalApplicants: 63, finalRate: 1.58 },
+    { schoolName: '修猷館', department: '普通科', quota: 440, finalApplicants: 730, finalRate: 1.66 },
+    { schoolName: '福岡講倫館', department: '総合学科', quota: 360, finalApplicants: 349, finalRate: 0.97 },
+    { schoolName: '早良', department: '普通科（コースを除く）', quota: 120, finalApplicants: 80, finalRate: 0.67 },
+    { schoolName: '早良', department: '普通科スポーツコミュニケーションコース', quota: 40, finalApplicants: 19, finalRate: 0.48 },
+    { schoolName: '玄洋', department: '普通科', quota: 280, finalApplicants: 186, finalRate: 0.66 },
+    { schoolName: '筑前', department: '普通科', quota: 400, finalApplicants: 404, finalRate: 1.01 },
+    { schoolName: '春日', department: '普通科', quota: 440, finalApplicants: 493, finalRate: 1.12 },
+    { schoolName: '太宰府', department: '普通科', quota: 240, finalApplicants: 94, finalRate: 0.39 },
+    { schoolName: '太宰府', department: '芸術科', quota: 40, finalApplicants: 44, finalRate: 1.1 },
+    { schoolName: '筑紫中央', department: '普通科', quota: 440, finalApplicants: 711, finalRate: 1.62 },
+    { schoolName: '武蔵台', department: '普通科', quota: 400, finalApplicants: 365, finalRate: 0.91 },
+    { schoolName: '筑紫', department: '普通科', quota: 400, finalApplicants: 372, finalRate: 0.93 },
+    { schoolName: '糸島', department: '普通科', quota: 360, finalApplicants: 319, finalRate: 0.89 },
   ],
 };
