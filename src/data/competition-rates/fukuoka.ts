@@ -4,17 +4,30 @@
  * 一次ソース: 福岡県教育委員会「令和8年度県立高等学校入学者選抜 一般入試 志願者数（確定）」
  * （県立分PDF、市組合立分は別PDF）。
  *
- * ⚠️対象範囲=現時点でPDF1ページ目（県立全日制、青豊高校〜八幡工業高校の21校）のみを
- * 高い確信度で確定済み。それ以降のページ（八幡南以降）・市組合立分PDFは未着手。
- * 北九州高校の「普通科(コースを除く)」「普通科体育コース」の2行は当初PDF読み取りで
- * 曖昧だったため、外部の学習塾サイト（英進館）の入試速報記事で確定値を裏取りした
- * （1データ点=1出典の原則の例外的補強・数値そのものはPDF記載値と整合）。
+ * ⚠️対象範囲=現時点でPDF1ページ目全21校（青豊〜八幡工業）＋PDF2ページ目冒頭5校
+ * （宗像・光陵・水産・玄界・新宮）のみを高い確信度で確定済み。2ページ目は宗像から始まる
+ * （事前の記憶で「八幡南・北筑・東筑・折尾・中間・遠賀」という校名を挙げていたが、
+ * 再読の結果それらはページ1に存在せず誤記憶だったと判明＝毎回ソースを再読する規律の
+ * 重要性を裏付けた）。2ページ目の福岡魁誠以降・3ページ目以降・市組合立分PDFは未着手。
  *
- * 複数学科を持つ学校（苅田工業・行橋・小倉工業・戸畑工業・八幡・八幡中央・八幡工業）は
+ * 北九州高校の「普通科(コースを除く)」「普通科体育コース」の2行、および新宮高校の
+ * 普通科（コースを除く）／国際文化コース／理数科の3行は当初PDF読み取りで曖昧だったため、
+ * 外部の学習塾サイト（英進館）の入試速報記事＋倍率=確定数/定員の算数整合性を使って
+ * 確定値を裏取りした（1データ点=1出典の原則の例外的補強・数値そのものはPDF記載の
+ * 学校単位「計」行の合計と完全に一致することを確認済み）。
+ *
+ * 水産高校は海洋科学科・食品流通科学科・アクアライフ科学科の3学科が募集定員合計160に
+ * 対して志願者数が学校単位でしか読み取れなかった（くくり募集の可能性）ため、学科別に
+ * 分解せず学校単位1レコードとして正直に記録。
+ *
+ * 複数学科を持つ学校（苅田工業・行橋・小倉工業・戸畑工業・八幡・八幡中央・八幡工業・新宮）は
  * 学科別内訳とPDF記載の学校単位「計」行の両方を記録し、Σ子学科=計行が一致することを
  * テストで検証する（学校単位の自己検算＝officialSubtotalsとして採用）。
  *
  * 定時制（全日制の外側の別課程）は東京都・神奈川県・千葉県・埼玉県と同じ理由でスコープ外。
+ *
+ * 参考（未使用・次回の県レベル突合用）: リセモム記事によると令和8年度確定の全日制県立
+ * 合計は入学定員22,200・志願者数22,854・倍率1.03（全ページ収録後の最終DoDで使用予定）。
  */
 import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
 
@@ -33,15 +46,25 @@ export const FUKUOKA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       fiscalYear: '令和8年度（2026年度）',
       fetchedAt: '2026-07-25',
     },
+    {
+      url: 'https://www.eishinkan.net/entrance/high_admissions/7920/',
+      docTitle: '英進館 福岡地区 令和8年度公立高校一般入試志願者状況（新宮高校の学科別内訳の裏取りに使用）',
+      fiscalYear: '令和8年度（2026年度）',
+      fetchedAt: '2026-07-25',
+    },
   ],
   coverage: {
     status: 'partial',
-    includedDepartments: ['県立全日制（PDF1ページ目・青豊〜八幡工業の21校のみ）'],
+    includedDepartments: [
+      '県立全日制（PDF1ページ目・青豊〜八幡工業の21校）',
+      '県立全日制（PDF2ページ目冒頭・宗像〜新宮の5校）',
+    ],
     pendingDepartments: [
-      '県立全日制（PDF2ページ目以降・八幡南〜末尾）',
+      '県立全日制（PDF2ページ目続き・福岡魁誠以降〜末尾）',
+      '県立全日制（PDF3ページ目以降、存在する場合）',
       '市組合立全日制（別PDF・未着手）',
     ],
-    note: '福岡県は資料が複数ページ＋県立/市組合立の別PDFに分かれており、今回はPDF1ページ目の21校のみを高確信度で確定。県レベルの公式合計との突合はまだ行っていない（残りページ未読のため）。学校単位の計行との突合のみ実施済み。',
+    note: '福岡県は資料が複数ページ＋県立/市組合立の別PDFに分かれており、今回はPDF1ページ目21校＋2ページ目冒頭5校の計26校のみを高確信度で確定。県レベルの公式合計（全日制県立 定員22,200/志願者22,854/倍率1.03）との突合はまだ行っていない（残りページ未読のため）。学校単位の計行との突合のみ実施済み。',
   },
   officialSubtotals: [
     { label: '苅田工業 計', quota: 160, finalApplicants: 159, finalRate: 0.99 },
@@ -51,6 +74,7 @@ export const FUKUOKA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { label: '八幡 計', quota: 280, finalApplicants: 295, finalRate: 1.05 },
     { label: '八幡中央 計', quota: 200, finalApplicants: 182, finalRate: 0.91 },
     { label: '八幡工業 計', quota: 200, finalApplicants: 218, finalRate: 1.09 },
+    { label: '新宮 計', quota: 440, finalApplicants: 456, finalRate: 1.04 },
   ],
   records: [
     { schoolName: '青豊', department: '総合学科', quota: 280, finalApplicants: 286, finalRate: 1.02 },
@@ -87,5 +111,12 @@ export const FUKUOKA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '八幡工業', department: '機械系（機械科・電子機械科・材料技術科）', quota: 120, finalApplicants: 131, finalRate: 1.09 },
     { schoolName: '八幡工業', department: '電気系（電気科）', quota: 40, finalApplicants: 41, finalRate: 1.03 },
     { schoolName: '八幡工業', department: '土木系（土木科）', quota: 40, finalApplicants: 46, finalRate: 1.15 },
+    { schoolName: '宗像', department: '普通科', quota: 360, finalApplicants: 382, finalRate: 1.06 },
+    { schoolName: '光陵', department: '普通科', quota: 400, finalApplicants: 285, finalRate: 0.71 },
+    { schoolName: '水産', department: '海洋科学科・食品流通科学科・アクアライフ科学科（くくり募集）', quota: 160, finalApplicants: 180, finalRate: 1.13 },
+    { schoolName: '玄界', department: '普通科', quota: 360, finalApplicants: 230, finalRate: 0.64 },
+    { schoolName: '新宮', department: '普通科（コースを除く）', quota: 360, finalApplicants: 366, finalRate: 1.02 },
+    { schoolName: '新宮', department: '普通科国際文化コース', quota: 40, finalApplicants: 17, finalRate: 0.43 },
+    { schoolName: '新宮', department: '理数科', quota: 40, finalApplicants: 73, finalRate: 1.83 },
   ],
 };
