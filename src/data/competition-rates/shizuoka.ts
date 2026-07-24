@@ -20,15 +20,16 @@
  * ⚠️対象範囲=現時点でPDF1ページ目（下田〜三島北、13校19レコード）＋2ページ目（御殿場〜富士、
  * 13校20レコード）＋3ページ目（富士東〜静岡城北、12校20レコード）＋4ページ目（静岡東〜
  * 焼津中央、8校19レコード）＋5ページ目（焼津水産〜掛川西、13校21レコード）＋6ページ目
- * （掛川工業〜磐田農業、10校19レコード）の計69校118レコードを高い確信度で確定済み。
- * 全体のページ数・総校数は未確認（次回セッションで残りページを確認しながら継続する）。
+ * （掛川工業〜磐田農業、10校19レコード）＋7ページ目（磐田西〜浜松東、10校19レコード）
+ * の計79校137レコードを高い確信度で確定済み。全体のページ数・総校数は未確認（次回
+ * セッションで残りページを確認しながら継続する）。
  *
  * ⚠️会場番号が100番台（他校は連番14〜25等）の学校（沼津市立沼津=100・富士市立=101・
  * 静岡市立清水桜が丘=102）は市立高校を意味すると判明した（3例とも「○○市立」を含む校名）。
  * また沼津市立沼津・清水南（会場番号33・市立ではない）の2校では募集定員が「(132)」「(34)」
  * のように括弧書きされている（他校は括弧無しの数値）。市立か否かに関わらず出現しており
- * 原因は未確定だが、括弧を外した数値をそのままquotaとして採用した（3例観測され再現性のある
- * パターンと判明・他の記録方法が見つかった場合は要再確認）。
+ * 原因は未確定だが、括弧を外した数値をそのままquotaとして採用した（浜松西「(105)」も含め
+ * 4例観測され再現性のあるパターンと判明・他の記録方法が見つかった場合は要再確認）。
  *
  * 定時制は東京都・神奈川県・千葉県・埼玉県・福岡県・兵庫県と同じ理由でスコープ外（全日制の
  * 外側の別課程のため対象外として明示的に除外）。
@@ -47,14 +48,14 @@ export const SHIZUOKA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
   ],
   coverage: {
     status: 'partial',
-    includedDepartments: ['全日制（PDF1〜6ページ目・下田〜磐田農業の69校）'],
+    includedDepartments: ['全日制（PDF1〜7ページ目・下田〜浜松東の79校）'],
     pendingDepartments: [
-      '全日制（PDF7ページ目以降、総ページ数・総校数とも未確認）',
+      '全日制（PDF8ページ目以降、総ページ数・総校数とも未確認）',
       '定時制（全日制の外側の別課程のため東京都・神奈川県・千葉県・埼玉県・福岡県・兵庫県と同じ理由で意図的にスコープ外）',
     ],
     note:
       '静岡県は学科ごとに選抜枠（Ⅰ/Ⅱ/Ⅲ・特色選抜等）の割合内訳が付随する独自の表構造を持つ。' +
-      '今回はPDF1〜6ページ目の69校118レコード（学科の総定員行のみ）を高確信度で確定。「連携（定めない）」' +
+      '今回はPDF1〜7ページ目の79校137レコード（学科の総定員行のみ）を高確信度で確定。「連携（定めない）」' +
       '等の募集定員が数値化できない特殊枠は記録から除外した。総ページ数・県レベルのグランドトータルは' +
       'まだ確認できていない（残りページを継続する中で確認する）。',
   },
@@ -178,5 +179,24 @@ export const SHIZUOKA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '磐田農業', department: '環境科学', quota: 40, finalApplicants: 35, finalRate: 0.88 },
     { schoolName: '磐田農業', department: '食品科学', quota: 40, finalApplicants: 45, finalRate: 1.13 },
     { schoolName: '磐田農業', department: '生活科学', quota: 40, finalApplicants: 48, finalRate: 1.2 },
+    { schoolName: '磐田西', department: '普通科', quota: 120, finalApplicants: 133, finalRate: 1.11 },
+    { schoolName: '磐田西', department: '総合ビジネス', quota: 80, finalApplicants: 74, finalRate: 0.93 },
+    { schoolName: '天竜', department: '森林・環境', quota: 40, finalApplicants: 33, finalRate: 0.83 },
+    { schoolName: '天竜', department: '福祉', quota: 20, finalApplicants: 6, finalRate: 0.3 },
+    { schoolName: '天竜', department: '総合', quota: 80, finalApplicants: 76, finalRate: 0.95 },
+    { schoolName: '春野校舎', department: '普通科', quota: 35, finalApplicants: 19, finalRate: 0.54 },
+    { schoolName: '浜松北', department: '普通科', quota: 320, finalApplicants: 408, finalRate: 1.28 },
+    { schoolName: '浜松北', department: '国際', quota: 40, finalApplicants: 44, finalRate: 1.1 },
+    { schoolName: '浜松西', department: '普通科', quota: 105, finalApplicants: 118, finalRate: 1.12 },
+    { schoolName: '浜松南', department: '普通科', quota: 280, finalApplicants: 374, finalRate: 1.34 },
+    { schoolName: '浜松南', department: '理数科', quota: 40, finalApplicants: 71, finalRate: 1.78 },
+    { schoolName: '浜松湖東', department: '普通科', quota: 240, finalApplicants: 228, finalRate: 0.95 },
+    { schoolName: '浜松湖南', department: '普通科', quota: 280, finalApplicants: 263, finalRate: 0.94 },
+    { schoolName: '浜松湖南', department: '英語', quota: 40, finalApplicants: 36, finalRate: 0.9 },
+    { schoolName: '浜松江之島', department: '普通科', quota: 120, finalApplicants: 133, finalRate: 1.11 },
+    { schoolName: '浜松江之島', department: '芸術', quota: 40, finalApplicants: 26, finalRate: 0.65 },
+    { schoolName: '浜松東', department: '普通科', quota: 120, finalApplicants: 125, finalRate: 1.04 },
+    { schoolName: '浜松東', department: '総合ビジネス', quota: 80, finalApplicants: 80, finalRate: 1.0 },
+    { schoolName: '浜松東', department: '情報ビジネス', quota: 40, finalApplicants: 33, finalRate: 0.83 },
   ],
 };
