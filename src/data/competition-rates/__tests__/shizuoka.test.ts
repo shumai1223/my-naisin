@@ -5,11 +5,11 @@ import { SHIZUOKA_COMPETITION_RATES } from '../shizuoka';
  *
  * 静岡県は学科ごとに選抜枠（Ⅰ/Ⅱ/Ⅲ）の割合内訳が付随する独自の表構造を持つため、
  * 学科の総定員行のみを1レコードとして採用している（詳細はshizuoka.tsのファイル冒頭
- * コメント参照）。今回はPDF1〜4ページ目の46校78レコードのみを対象とした正直な部分収録。
+ * コメント参照）。今回はPDF1〜5ページ目の59校99レコードのみを対象とした正直な部分収録。
  * 学校単位の「計」行がPDF上に存在しないため、officialSubtotalsによる突合は行わず、
  * レコード単体の整合性と学校名+学科名の重複が無いことのみを検証する。
  */
-describe('静岡県 倍率パイプラインα（Y-6・PDF1〜4ページ目46校78レコードの部分収録テスト）', () => {
+describe('静岡県 倍率パイプラインα（Y-6・PDF1〜5ページ目59校99レコードの部分収録テスト）', () => {
   const { records } = SHIZUOKA_COMPETITION_RATES;
 
   it('全レコードのquota>0・finalApplicants>=0・finalRateが概算で整合する', () => {
@@ -36,10 +36,10 @@ describe('静岡県 倍率パイプラインα（Y-6・PDF1〜4ページ目46校
     expect(SHIZUOKA_COMPETITION_RATES.coverage.pendingDepartments.length).toBeGreaterThan(0);
   });
 
-  it('78レコード・46校が収録されている（PDF1〜4ページ目・下田〜焼津中央）', () => {
-    expect(records.length).toBe(78);
+  it('99レコード・59校が収録されている（PDF1〜5ページ目・下田〜掛川西）', () => {
+    expect(records.length).toBe(99);
     const distinctSchools = new Set(records.map((r) => r.schoolName));
-    expect(distinctSchools.size).toBe(46);
+    expect(distinctSchools.size).toBe(59);
   });
 
   it('複数学科校が正しく収録されている', () => {
@@ -66,6 +66,12 @@ describe('静岡県 倍率パイプラインα（Y-6・PDF1〜4ページ目46校
       科学技術: 8,
       静岡商業: 2,
       静岡市立: 2,
+      焼津水産: 4,
+      清流館: 2,
+      島田工業: 2,
+      榛原: 2,
+      相良: 2,
+      掛川西: 2,
     };
     for (const [name, count] of Object.entries(multiDeptSchools)) {
       const schoolRecords = records.filter((r) => r.schoolName === name);

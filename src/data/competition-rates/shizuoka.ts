@@ -19,8 +19,9 @@
  *
  * ⚠️対象範囲=現時点でPDF1ページ目（下田〜三島北、13校19レコード）＋2ページ目（御殿場〜富士、
  * 13校20レコード）＋3ページ目（富士東〜静岡城北、12校20レコード）＋4ページ目（静岡東〜
- * 焼津中央、8校19レコード）の計46校78レコードを高い確信度で確定済み。全体のページ数・
- * 総校数は未確認（次回セッションで残りページを確認しながら継続する）。
+ * 焼津中央、8校19レコード）＋5ページ目（焼津水産〜掛川西、13校21レコード）の計59校99
+ * レコードを高い確信度で確定済み。全体のページ数・総校数は未確認（次回セッションで
+ * 残りページを確認しながら継続する）。
  *
  * ⚠️会場番号が100番台（他校は連番14〜25等）の学校（沼津市立沼津=100・富士市立=101・
  * 静岡市立清水桜が丘=102）は市立高校を意味すると判明した（3例とも「○○市立」を含む校名）。
@@ -46,14 +47,14 @@ export const SHIZUOKA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
   ],
   coverage: {
     status: 'partial',
-    includedDepartments: ['全日制（PDF1〜4ページ目・下田〜焼津中央の46校）'],
+    includedDepartments: ['全日制（PDF1〜5ページ目・下田〜掛川西の59校）'],
     pendingDepartments: [
-      '全日制（PDF5ページ目以降、総ページ数・総校数とも未確認）',
+      '全日制（PDF6ページ目以降、総ページ数・総校数とも未確認）',
       '定時制（全日制の外側の別課程のため東京都・神奈川県・千葉県・埼玉県・福岡県・兵庫県と同じ理由で意図的にスコープ外）',
     ],
     note:
       '静岡県は学科ごとに選抜枠（Ⅰ/Ⅱ/Ⅲ・特色選抜等）の割合内訳が付随する独自の表構造を持つ。' +
-      '今回はPDF1〜4ページ目の46校78レコード（学科の総定員行のみ）を高確信度で確定。「連携（定めない）」' +
+      '今回はPDF1〜5ページ目の59校99レコード（学科の総定員行のみ）を高確信度で確定。「連携（定めない）」' +
       '等の募集定員が数値化できない特殊枠は記録から除外した。総ページ数・県レベルのグランドトータルは' +
       'まだ確認できていない（残りページを継続する中で確認する）。',
   },
@@ -137,5 +138,26 @@ export const SHIZUOKA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '静岡市立', department: '普通科', quota: 280, finalApplicants: 311, finalRate: 1.11 },
     { schoolName: '静岡市立', department: '科学探究', quota: 40, finalApplicants: 28, finalRate: 0.7 },
     { schoolName: '焼津中央', department: '普通科', quota: 280, finalApplicants: 291, finalRate: 1.04 },
+    { schoolName: '焼津水産', department: '海洋科学', quota: 80, finalApplicants: 84, finalRate: 1.05 },
+    { schoolName: '焼津水産', department: '栽培漁業', quota: 40, finalApplicants: 26, finalRate: 0.65 },
+    { schoolName: '焼津水産', department: '食品科学', quota: 40, finalApplicants: 35, finalRate: 0.88 },
+    { schoolName: '焼津水産', department: '流通情報', quota: 40, finalApplicants: 45, finalRate: 1.13 },
+    { schoolName: '清流館', department: '普通科', quota: 160, finalApplicants: 168, finalRate: 1.05 },
+    { schoolName: '清流館', department: '福祉', quota: 40, finalApplicants: 26, finalRate: 0.65 },
+    { schoolName: '藤枝東', department: '普通科', quota: 280, finalApplicants: 335, finalRate: 1.2 },
+    { schoolName: '藤枝西', department: '普通科', quota: 160, finalApplicants: 172, finalRate: 1.08 },
+    { schoolName: '藤枝北', department: '総合', quota: 160, finalApplicants: 170, finalRate: 1.06 },
+    { schoolName: '島田', department: '普通科', quota: 160, finalApplicants: 156, finalRate: 0.98 },
+    { schoolName: '島田工業', department: '機械・電気・情報電子【Ⅰ類】', quota: 120, finalApplicants: 104, finalRate: 0.87 },
+    { schoolName: '島田工業', department: '建築・都市工学【Ⅱ類】', quota: 80, finalApplicants: 50, finalRate: 0.63 },
+    { schoolName: '島田商業', department: '商業', quota: 160, finalApplicants: 170, finalRate: 1.06 },
+    { schoolName: '川根', department: '普通科', quota: 40, finalApplicants: 25, finalRate: 0.63 },
+    { schoolName: '榛原', department: '普通科', quota: 120, finalApplicants: 101, finalRate: 0.84 },
+    { schoolName: '榛原', department: '理数科', quota: 40, finalApplicants: 22, finalRate: 0.55 },
+    { schoolName: '相良', department: '普通科', quota: 80, finalApplicants: 85, finalRate: 1.06 },
+    { schoolName: '相良', department: '商業', quota: 40, finalApplicants: 39, finalRate: 0.98 },
+    { schoolName: '掛川東', department: '普通科', quota: 200, finalApplicants: 257, finalRate: 1.29 },
+    { schoolName: '掛川西', department: '普通科', quota: 280, finalApplicants: 315, finalRate: 1.13 },
+    { schoolName: '掛川西', department: '理数科', quota: 40, finalApplicants: 55, finalRate: 1.38 },
   ],
 };
