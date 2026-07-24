@@ -17,8 +17,14 @@
  * 数値ではなく「−」（未定・若干名）と記載される特殊枠は、quota:numberという型上正直に
  * 表現できないため記録しない（Y-0憲法③「機械可読不能は正直にスキップ」の精神を適用）。
  *
- * ⚠️対象範囲=現時点でPDF1ページ目（下田〜三島北、13校19レコード）のみを高い確信度で確定済み。
- * 全体のページ数・総校数は未確認（次回セッションで残りページを確認しながら継続する）。
+ * ⚠️対象範囲=現時点でPDF1ページ目（下田〜三島北、13校19レコード）＋2ページ目（御殿場〜富士、
+ * 13校20レコード）の計26校39レコードを高い確信度で確定済み。全体のページ数・総校数は
+ * 未確認（次回セッションで残りページを確認しながら継続する）。
+ *
+ * ⚠️「沼津市立沼津」は会場番号が100番（他校は連番14〜25）と特異で、募集定員が「(132)」と
+ * 括弧書きされている（他校は括弧無しの数値）。市立高校であることに関連した特殊な定員表記の
+ * 可能性があるが意味を確定できなかったため、括弧を外した数値132をそのままquotaとして採用した
+ * （他の記録方法が見つかった場合は要再確認）。
  *
  * 定時制は東京都・神奈川県・千葉県・埼玉県・福岡県・兵庫県と同じ理由でスコープ外（全日制の
  * 外側の別課程のため対象外として明示的に除外）。
@@ -37,14 +43,14 @@ export const SHIZUOKA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
   ],
   coverage: {
     status: 'partial',
-    includedDepartments: ['全日制（PDF1ページ目・下田〜三島北の13校）'],
+    includedDepartments: ['全日制（PDF1〜2ページ目・下田〜富士の26校）'],
     pendingDepartments: [
-      '全日制（PDF2ページ目以降、総ページ数・総校数とも未確認）',
+      '全日制（PDF3ページ目以降、総ページ数・総校数とも未確認）',
       '定時制（全日制の外側の別課程のため東京都・神奈川県・千葉県・埼玉県・福岡県・兵庫県と同じ理由で意図的にスコープ外）',
     ],
     note:
       '静岡県は学科ごとに選抜枠（Ⅰ/Ⅱ/Ⅲ・特色選抜等）の割合内訳が付随する独自の表構造を持つ。' +
-      '今回はPDF1ページ目の13校19レコード（学科の総定員行のみ）を高確信度で確定。「連携（定めない）」' +
+      '今回はPDF1〜2ページ目の26校39レコード（学科の総定員行のみ）を高確信度で確定。「連携（定めない）」' +
       '等の募集定員が数値化できない特殊枠は記録から除外した。総ページ数・県レベルのグランドトータルは' +
       'まだ確認できていない（残りページを継続する中で確認する）。',
   },
@@ -69,5 +75,25 @@ export const SHIZUOKA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '田方農業', department: '食品科学・ライフデザイン', quota: 80, finalApplicants: 76, finalRate: 0.95 },
     { schoolName: '三島南', department: '普通科', quota: 200, finalApplicants: 226, finalRate: 1.13 },
     { schoolName: '三島北', department: '普通科', quota: 280, finalApplicants: 332, finalRate: 1.19 },
+    { schoolName: '御殿場', department: '創造工学', quota: 40, finalApplicants: 38, finalRate: 0.95 },
+    { schoolName: '御殿場', department: '創造ビジネス', quota: 40, finalApplicants: 42, finalRate: 1.05 },
+    { schoolName: '御殿場', department: '生活創造デザイン', quota: 40, finalApplicants: 31, finalRate: 0.78 },
+    { schoolName: '御殿場南', department: '普通科', quota: 160, finalApplicants: 126, finalRate: 0.79 },
+    { schoolName: '小山', department: '普通科', quota: 80, finalApplicants: 64, finalRate: 0.8 },
+    { schoolName: '裾野', department: '総合', quota: 80, finalApplicants: 68, finalRate: 0.85 },
+    { schoolName: '沼津東', department: '普通科', quota: 240, finalApplicants: 229, finalRate: 0.95 },
+    { schoolName: '沼津東', department: '理数科', quota: 40, finalApplicants: 55, finalRate: 1.38 },
+    { schoolName: '沼津西', department: '普通科', quota: 120, finalApplicants: 131, finalRate: 1.09 },
+    { schoolName: '沼津西', department: '芸術', quota: 40, finalApplicants: 28, finalRate: 0.7 },
+    { schoolName: '沼津城北', department: '普通科', quota: 80, finalApplicants: 52, finalRate: 0.65 },
+    { schoolName: '沼津工業', department: '機械・電気・電子ロボット・建設デザイン', quota: 160, finalApplicants: 163, finalRate: 1.02 },
+    { schoolName: '沼津商業', department: '総合ビジネス', quota: 80, finalApplicants: 103, finalRate: 1.29 },
+    { schoolName: '沼津商業', department: '情報ビジネス', quota: 80, finalApplicants: 69, finalRate: 0.86 },
+    { schoolName: '沼津市立沼津', department: '普通科', quota: 132, finalApplicants: 114, finalRate: 0.86 },
+    { schoolName: '吉原', department: '普通科', quota: 120, finalApplicants: 115, finalRate: 0.96 },
+    { schoolName: '吉原', department: '国際', quota: 40, finalApplicants: 12, finalRate: 0.3 },
+    { schoolName: '吉原工業', department: '機械工学・ロボット工学・電気機器工学・理数化学', quota: 160, finalApplicants: 140, finalRate: 0.88 },
+    { schoolName: '富士', department: '普通科', quota: 200, finalApplicants: 224, finalRate: 1.12 },
+    { schoolName: '富士', department: '理数科', quota: 40, finalApplicants: 39, finalRate: 0.98 },
   ],
 };
