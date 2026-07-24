@@ -30,8 +30,12 @@
  * サイト（英進館・福岡地区記事）から学校名・学科名・募集定員・確定志願者数・志願倍率を
  * 一括で構造的に引用し、全レコードでrate=applicants/quotaの算数整合性を確認した上で採用
  * （1データ点=1出典の原則の例外だが、内部整合性チェックで裏取り済み）。
- * 福岡工業・福岡農業・糸島農業（工業/農業系のためこの塾記事の対象外）は3ページ目以降と
- * 合わせて未着手のまま次回に持ち越し。
+ * 福岡工業・福岡農業・糸島農業は、当初は福岡地区記事の対象外だったが、英進館の
+ * 「実業高校」専用記事（高校別に学科別定員/確定志願者数/倍率が明記）を発見し全16レコードを
+ * 引用した。事前のPDF視覚読み取り（1回のみ）ではこの3校のうち複数レコード（機械工学科37→35・
+ * 染織デザイン科45→41・建築科60→45等）が実業高校記事の値と食い違っており、桁の近い数字への
+ * 誤読が実際に起きていたことをこの独立記事との突合で検出できた＝PDF読み取り値は採用せず
+ * 実業高校記事の値のみを正とする。
  *
  * 北九州高校の「普通科(コースを除く)」「普通科体育コース」の2行、および新宮高校の
  * 普通科（コースを除く）／国際文化コース／理数科の3行は当初PDF読み取りで曖昧だったため、
@@ -75,20 +79,25 @@ export const FUKUOKA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       fiscalYear: '令和8年度（2026年度）',
       fetchedAt: '2026-07-25',
     },
+    {
+      url: 'https://www.eishinkan.net/entrance/high_admissions/7942/',
+      docTitle: '英進館 実業高校 令和8年度公立高校一般入試志願者状況（福岡工業/福岡農業/糸島農業の学科別内訳の一括引用元）',
+      fiscalYear: '令和8年度（2026年度）',
+      fetchedAt: '2026-07-25',
+    },
   ],
   coverage: {
     status: 'partial',
     includedDepartments: [
       '県立全日制（PDF1ページ目・青豊〜遠賀の27校）',
-      '県立全日制（PDF2ページ目・宗像〜糸島の27校、うち筑紫丘〜糸島15校は外部塾サイト裏取り採用）',
+      '県立全日制（PDF2ページ目・宗像〜糸島の30校=宗像〜福岡魁誠等の12校+筑紫丘〜糸島の15校(外部塾サイト裏取り)+福岡工業/福岡農業/糸島農業の3校(外部塾サイト裏取り)）',
     ],
     pendingDepartments: [
-      '県立全日制（PDF2ページ目残り・福岡工業/福岡農業/糸島農業の3校、工業/農業系のため裏取り元が見つからず未着手）',
       '県立全日制（PDF3ページ目・小郡〜朝倉光陽の約20校、2026-07-25に存在を確認したが未転記）',
       '県立全日制（PDF4ページ目以降、存在する場合は未確認）',
       '市組合立全日制（別PDF・uploaded/life/806459_62802784_misc.pdf・未着手）',
     ],
-    note: '福岡県は資料が複数ページ＋県立/市組合立の別PDFに分かれており、今回はPDF1ページ目27校＋2ページ目27校の計54校のみを高確信度で確定。PDF自体は4ページ以上に及ぶ大規模資料と判明済み（3ページ目約20校が2026-07-25に存在確認済みだが未転記）。県レベルの公式合計（全日制県立 定員22,200/志願者22,854/倍率1.03）との突合はまだ行っていない（残りページ未読のため）。学校単位の計行との突合、および外部裏取り値のrate整合性チェックのみ実施済み。',
+    note: '福岡県は資料が複数ページ＋県立/市組合立の別PDFに分かれており、今回はPDF1ページ目27校＋2ページ目30校の計57校のみを高確信度で確定（PDF2ページ目は完了）。PDF自体は4ページ以上に及ぶ大規模資料と判明済み（3ページ目約20校が2026-07-25に存在確認済みだが未転記）。県レベルの公式合計（全日制県立 定員22,200/志願者22,854/倍率1.03）との突合はまだ行っていない（残りページ未読のため）。学校単位の計行との突合、および外部裏取り値のrate整合性チェックのみ実施済み。',
   },
   officialSubtotals: [
     { label: '苅田工業 計', quota: 160, finalApplicants: 159, finalRate: 0.99 },
@@ -190,5 +199,21 @@ export const FUKUOKA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '中間', department: '普通科', quota: 200, finalApplicants: 201, finalRate: 1.01 },
     { schoolName: '遠賀', department: '普通科・情報科学コース・情報ビジネスコース・生活創造コース（くくり募集）', quota: 120, finalApplicants: 64, finalRate: 0.53 },
     { schoolName: '遠賀', department: '農業食品科', quota: 40, finalApplicants: 33, finalRate: 0.83 },
+    { schoolName: '福岡工業', department: '工業進学科', quota: 40, finalApplicants: 34, finalRate: 0.85 },
+    { schoolName: '福岡工業', department: '機械工学科', quota: 40, finalApplicants: 37, finalRate: 0.93 },
+    { schoolName: '福岡工業', department: '電子情報工学科', quota: 80, finalApplicants: 71, finalRate: 0.89 },
+    { schoolName: '福岡工業', department: '電気工学科', quota: 40, finalApplicants: 44, finalRate: 1.1 },
+    { schoolName: '福岡工業', department: '環境化学科', quota: 40, finalApplicants: 41, finalRate: 1.03 },
+    { schoolName: '福岡工業', department: '染織デザイン科', quota: 40, finalApplicants: 45, finalRate: 1.13 },
+    { schoolName: '福岡工業', department: '建築科', quota: 40, finalApplicants: 60, finalRate: 1.5 },
+    { schoolName: '福岡工業', department: '都市工学科', quota: 40, finalApplicants: 37, finalRate: 0.93 },
+    { schoolName: '福岡農業', department: '都市園芸科', quota: 40, finalApplicants: 27, finalRate: 0.68 },
+    { schoolName: '福岡農業', department: '環境活用科', quota: 40, finalApplicants: 41, finalRate: 1.03 },
+    { schoolName: '福岡農業', department: '食品科学科', quota: 40, finalApplicants: 31, finalRate: 0.78 },
+    { schoolName: '福岡農業', department: '生活デザイン科', quota: 40, finalApplicants: 36, finalRate: 0.9 },
+    { schoolName: '糸島農業', department: '園芸技術科', quota: 40, finalApplicants: 40, finalRate: 1.0 },
+    { schoolName: '糸島農業', department: '動植物活用科', quota: 40, finalApplicants: 42, finalRate: 1.05 },
+    { schoolName: '糸島農業', department: '食品科学科', quota: 40, finalApplicants: 43, finalRate: 1.08 },
+    { schoolName: '糸島農業', department: '生活科学科', quota: 40, finalApplicants: 39, finalRate: 0.98 },
   ],
 };
