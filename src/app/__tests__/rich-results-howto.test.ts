@@ -32,6 +32,7 @@ const HOWTO_EXEMPT_ROUTES: Record<string, string> = {
   '/advisor': 'ZZ-3c：noindex・旗付きUI（決定論Q&Aツールで手順でなく単発の質問応答）',
   '/ask': '決定論Q&Aツール（手順でなく単発の質問応答）',
   '/juku/dashboard': 'ZZ-4d：noindex・旗付きUI・招待トークン必須の内部ツール（一覧表示で手順ではない）',
+  '/juku/dashboard/demo': 'ZZ-4e：noindex・旗付きUIのデモ環境（一覧表示で手順ではない）',
   '/blog': '記事一覧ページ（一覧のみで手順コンテンツなし）',
   '/blog/tag/[tag]': 'タグ別記事一覧ページ（一覧のみで手順コンテンツなし）',
   '/blog/[slug]': '個別記事（記事ごとに内容が異なり一律の手順定義は不可。BlogPostingSchemaで対応）',

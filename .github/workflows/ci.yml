@@ -40,6 +40,11 @@ jobs:
 
   e2e:
     runs-on: ubuntu-latest
+    env:
+      # 塾ダッシュボードのデモ環境(ZZ-4e・build-not-launch)をこのCI検証ビルドでのみ有効化する。
+      # Cloudflare本番のビルド設定とは別物（本番は未設定＝既定off）。既存の他ページの描画には
+      # 影響しない（このNEXT_PUBLIC旗を参照するのは/juku/dashboard(/demo)のみ）。
+      NEXT_PUBLIC_JUKU_SAAS_ENABLED: '1'
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -61,6 +66,14 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 7
+      - name: Upload sales screenshots (ZZ-4e：塾ダッシュボードデモのスクリーンショットツアー)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: juku-dashboard-demo-screenshots
+          path: sales-screenshots/
+          retention-days: 30
+          if-no-files-found: warn
 
   # ── 毎push CI は test + quality + e2e（決定論・常に緑になれる）だけに絞る ──
   # link-check（教委URLの死活＝外部HTTPで偽陽性が出やすい）は source-check-weekly.yml が

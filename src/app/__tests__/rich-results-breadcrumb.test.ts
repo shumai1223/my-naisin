@@ -23,6 +23,7 @@ const BREADCRUMB_EXEMPT_ROUTES: Record<string, string> = {
   '/admin/report': 'noindex・トークン認証必須の内部ツール（リッチリザルト対象外）',
   '/admin/worklog': 'noindex・トークン認証必須の内部ツール（リッチリザルト対象外）',
   '/juku/dashboard': 'ZZ-4d：noindex・旗付きUI・招待トークン必須の内部ツール（リッチリザルト対象外）',
+  '/juku/dashboard/demo': 'ZZ-4e：noindex・旗付きUIのデモ環境（リッチリザルト対象外）',
   '/contact': '問い合わせページ（リッチリザルト価値が低い定型ページ）',
   '/privacy': 'プライバシーポリシー（リッチリザルト価値が低い定型ページ）',
   '/terms': '利用規約（リッチリザルト価値が低い定型ページ）',

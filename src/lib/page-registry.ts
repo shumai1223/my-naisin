@@ -139,4 +139,6 @@ export const SITEMAP_EXCLUDED_ROUTES = [
   '/advisor',
   // ZZ-4d：塾ダッシュボード（NEXT_PUBLIC_JUKU_SAAS_ENABLED='1'まではnotFound()・招待トークン必須・noindex）。
   '/juku/dashboard',
+  // ZZ-4e：塾ダッシュボードのデモ環境（同じ旗・D1/トークン不要の決定論シードデータ・noindex）。
+  '/juku/dashboard/demo',
 ];
