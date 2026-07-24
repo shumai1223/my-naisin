@@ -79,6 +79,17 @@ const UPCOMING_CHANGES: UpcomingChange[] = [
     sourceTitle: '埼玉県教育委員会「令和9年度埼玉県公立高等学校入学者選抜実施基本方針」（令和6年9月26日）',
     confirmedDate: '2026-07-23',
   },
+  {
+    prefCode: 'chiba',
+    prefName: '千葉県',
+    effectiveYear: '令和9年度（2027年度）',
+    headline: '学力検査・国語の「話すこと・聞くこと」領域の出題方法が変わる予定',
+    detail:
+      '千葉県教育委員会は令和9(2027)年度入試から、学力検査の国語における「話すこと・聞くこと」領域の出題方法を変更すると発表しました。従来の放送による聞き取り検査に代わり、話し合いの場面等を設定した文章による出題に改め、複数の問題から資質・能力を評価できるようにするとしています。**内申点（調査書点）の算出方法自体に関する変更は確認できていません**。なお、調査書の記載事項削減（総合的な学習の時間の記録・出欠の記録・行動の記録(第3学年)・総合所見の4項目削除）は令和8(2026)年度入試から既に実施済みで、確認時点ではこちらはもう「予告」段階ではありません。',
+    sourceUrl: 'https://www.pref.chiba.lg.jp/kyouiku/shidou/press/2024/koukou/r8kaizenten.html',
+    sourceTitle: '千葉県教育委員会「千葉県公立高等学校入学者選抜の改善点について」',
+    confirmedDate: '2026-07-24',
+  },
 ];
 
 const FAQS = [
@@ -126,7 +137,7 @@ export default function NyushiSeidoHenkouPage() {
         title="公立高校入試 制度変更点まとめ"
         description="各都道府県教育委員会が公式発表した公立高校入試の制度変更予告を都道府県別にまとめた継続更新ページ"
         datePublished="2026-07-23"
-        dateModified="2026-07-23"
+        dateModified="2026-07-24"
         author="しゅうまい"
       />
       <FAQPageSchema faqItems={FAQS} />
