@@ -11,13 +11,15 @@ import {
   REPORT_2026_NO_SKEW_COUNT as NO_SKEW_COUNT,
   REPORT_2026_GRADE3_ONLY as GRADE3_ONLY,
 } from '@/lib/report-2026-data';
+import { getPrefectureEnName, getRegionEnName } from '@/lib/prefecture-en-names';
 
 /**
- * 内申点白書2026 英語版（X-20 Phase1）。海外の比較教育学研究者・国際教育系メディア向けに、
- * エグゼクティブサマリーと構造的発見トップ5のみを翻訳した要約版。47都道府県全件表は
- * 日本語版(/report/2026)とAPI(/api/naishin)を参照する設計とし、翻訳の二重管理・数値ドリフトを
- * 避けるため、動的な数値(TOP_SKEW/GRADE3_ONLY/NO_SKEW_COUNT等)は日本語版と同じ
- * src/lib/report-2026-data.tsを共有する。新規の一次データ・推測値は一切追加しない（捏造ゼロ原則）。
+ * 内申点白書2026 英語版（X-20 Phase1＋Phase2）。海外の比較教育学研究者・国際教育系メディア向けに、
+ * エグゼクティブサマリー・構造的発見トップ5・47都道府県全件比較表を翻訳した完全版。
+ * 数値は全て日本語版(/report/2026)と同じsrc/lib/report-2026-data.tsのROWSを共有インポートし、
+ * 翻訳時のハードコード転記による数値ドリフトを構造的に防止する。都道府県名・地域名の英訳は
+ * src/lib/prefecture-en-names.tsの標準ローマ字表記のみ使用（新規の一次データ・推測値は一切
+ * 追加しない＝捏造ゼロ原則）。出典URL・詳細な出典タイトルは日本語版のみに掲載し二重管理を避ける。
  */
 const MAX_SCORE_SORTED = [...ROWS].sort((a, b) => a.maxScore - b.maxScore);
 const MIN_MAX_SCORE = MAX_SCORE_SORTED[0];
@@ -74,10 +76,10 @@ export default function Report2026EnglishPage() {
         ]}
       />
       <ArticleSchema
-        title="Naishin Whitepaper 2026 (English Summary)"
-        description="English summary of the annual whitepaper comparing Japan's 47-prefecture school grading systems used in high school admissions"
+        title="Naishin Whitepaper 2026 (English Edition)"
+        description="English edition of the annual whitepaper comparing Japan's 47-prefecture school grading systems used in high school admissions, including the full 47-prefecture comparison table"
         datePublished="2026-07-23"
-        dateModified="2026-07-23"
+        dateModified="2026-07-24"
         author="Shumai"
       />
       <FAQPageSchema faqItems={FAQS} />
@@ -115,8 +117,9 @@ export default function Report2026EnglishPage() {
           <section className="mb-8 rounded-2xl border border-indigo-100 bg-indigo-50/50 p-5">
             <p className="flex items-start gap-2 text-xs leading-relaxed text-indigo-900">
               <Globe className="mt-0.5 h-4 w-4 shrink-0" />
-              This page is an English-language summary. The complete 47-prefecture comparison table,
-              source citations, and interactive calculators are available on the{' '}
+              This page includes the full 47-prefecture comparison table. Detailed source citations
+              (each prefecture&apos;s official board-of-education document titles) and interactive
+              calculators are available on the{' '}
               <Link href="/report/2026" className="font-bold underline">
                 Japanese-language edition
               </Link>{' '}
@@ -195,6 +198,46 @@ export default function Report2026EnglishPage() {
               All figures are derived mechanically from src/lib/prefectures.ts (each prefecture&apos;s
               official board of education publications). No new claims or estimates are introduced.
             </p>
+          </section>
+
+          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <h2 className="mb-3 text-lg font-bold text-slate-800">All 47 Prefectures (Full Comparison Table)</h2>
+            <p className="mb-4 text-xs text-slate-500">
+              Sorted by practical-subject weighting multiplier (descending). For official source
+              citations, see the{' '}
+              <Link href="/report/2026" className="font-semibold text-indigo-700 underline">
+                Japanese-language edition
+              </Link>
+              .
+            </p>
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-xs md:text-sm">
+                <thead>
+                  <tr className="border-b border-slate-200 text-[11px] text-slate-500">
+                    <th className="py-2 pr-2">Prefecture</th>
+                    <th className="py-2 pr-2">Region</th>
+                    <th className="py-2 pr-2">Practical-subject weight</th>
+                    <th className="py-2 pr-2">9th-grade weight</th>
+                    <th className="py-2 pr-2">School years counted</th>
+                    <th className="py-2 pr-2">Max score</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {ROWS.map((r) => (
+                    <tr key={r.code} className="border-b border-slate-100 last:border-0">
+                      <td className="py-1.5 pr-2 font-medium text-slate-800">
+                        {getPrefectureEnName(r.code) ?? r.name}
+                      </td>
+                      <td className="py-1.5 pr-2 text-slate-500">{getRegionEnName(r.region)}</td>
+                      <td className="py-1.5 pr-2 font-bold text-indigo-700">{r.practicalSkew}x</td>
+                      <td className="py-1.5 pr-2 text-slate-600">{r.grade3WeightPct}%</td>
+                      <td className="py-1.5 pr-2 text-slate-600">{r.gradeCount}</td>
+                      <td className="py-1.5 pr-2 text-slate-600">{r.maxScore} pts</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </section>
 
           <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
