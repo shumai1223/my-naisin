@@ -1,0 +1,122 @@
+/**
+ * 京都府 公立高等学校 倍率パイプラインα（Y-6・34県目・全日制完全達成）。
+ *
+ * 一次ソース: 京都府教育委員会「令和8年度京都府公立高等学校入学者選抜 中期選抜志願者数等一覧表」
+ * （令和8年3月4日発表・全4ページ）。
+ *
+ * ⚠️京都府は前期選抜（普通科は定員の3割・専門学科は最大10割まで実施）と中期選抜（残りの定員を
+ * 対象に第1〜第3志望まで出願可能な主要選抜）の2段階選抜を持つ。本データベースは他県の「一般選抜」
+ * に相当する中期選抜のみを採用した（前期選抜は既に合格が確定した別プロセスのため対象外）。
+ *
+ * 列は[募集定員（中期選抜実施学科）(A) / 前期選抜等合格者数(B) / 中期選抜募集人員(C=A-B。＝本
+ * ファイルのquota) / 志願者数（人数。＝applicants）/ 倍率（D/C。＝finalRate。印字済み値をそのまま
+ * 採用）]。注4「(D)欄は、第1志望第1順位にしている人数を記載」の通り、第2・第3志望は含まれない
+ * （他県の「第2志望」除外と同型の扱い）。京都工学院のプロジェクト工学科（ものづくり分野／
+ * まちづくり分野）、田辺高校の工業系4学科等は学科ごとに独立した募集人員・志願者数を持つため、
+ * それぞれ個別レコードとして収録した。綾部高校東分校の農業・園芸は資料上「両学科併せて」の
+ * 共有募集人員（注2）のためくくり募集として単一レコードで収録した。
+ *
+ * 機械集計（quota6,048・applicants5,160、54校（学舎・分校を含む）75レコード）が「全日制計」行
+ * （中期選抜募集人員6,048・志願者数5,160・倍率0.85）と初回転記で完全一致した（再修正なし）。
+ * 定時制課程は他県と同じ理由でスコープ外。
+ */
+import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
+
+export const KYOTO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
+  prefectureCode: 'kyoto',
+  sources: [
+    {
+      url: 'https://www.kyoto-be.ne.jp/koukyou/cms/wp-content/uploads/2025/05/%E4%BB%A4%E5%92%8C%EF%BC%98%E5%B9%B4%E5%BA%A6%E4%B8%AD%E6%9C%9F%E9%81%B8%E6%8A%9C-%E5%BA%83%E5%A0%B1%E8%B3%87%E6%96%99%EF%BC%88%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B0%EF%BC%89.pdf',
+      docTitle: '京都府教育委員会 令和8年度京都府公立高等学校入学者選抜 中期選抜志願者数等一覧表',
+      fiscalYear: '令和8年度（2026年度）',
+      fetchedAt: '2026-07-25',
+    },
+  ],
+  coverage: {
+    status: 'complete',
+    includedDepartments: ['全日制課程・中期選抜（54校（学舎・分校を含む）75レコード）'],
+    pendingDepartments: [
+      '前期選抜（既に合格が確定した別プロセスのため他県の推薦/特色選抜と同じ理由でスコープ外）',
+      '定時制課程（他県と同じ理由でスコープ外）',
+    ],
+    note: '「全日制計」行（中期選抜募集人員6,048・志願者数5,160・倍率0.85）と機械集計が完全一致した（初回転記で一致・再修正なし）。',
+  },
+  officialSubtotals: [{ label: '全日制計', schoolCount: 54, quota: 6048, finalApplicants: 5160, finalRate: 0.85 }],
+  records: [
+    { schoolName: '山城', department: '普通[単位制]', quota: 224, finalApplicants: 268, finalRate: 1.2 },
+    { schoolName: '鴨沂', department: '普通', quota: 168, finalApplicants: 207, finalRate: 1.23 },
+    { schoolName: '洛北', department: '普通[単位制]', quota: 112, finalApplicants: 135, finalRate: 1.21 },
+    { schoolName: '北稜', department: '普通', quota: 168, finalApplicants: 160, finalRate: 0.95 },
+    { schoolName: '朱雀', department: '普通', quota: 134, finalApplicants: 119, finalRate: 0.89 },
+    { schoolName: '洛東', department: '普通', quota: 168, finalApplicants: 125, finalRate: 0.74 },
+    { schoolName: '鳥羽', department: '普通[単位制]', quota: 112, finalApplicants: 125, finalRate: 1.12 },
+    { schoolName: '嵯峨野', department: '普通', quota: 84, finalApplicants: 96, finalRate: 1.14 },
+    { schoolName: '北嵯峨', department: '普通', quota: 196, finalApplicants: 176, finalRate: 0.9 },
+    { schoolName: '桂', department: '普通', quota: 196, finalApplicants: 215, finalRate: 1.1 },
+    { schoolName: '桂', department: '植物クリエイト', quota: 12, finalApplicants: 7, finalRate: 0.58 },
+    { schoolName: '桂', department: '園芸ビジネス', quota: 12, finalApplicants: 18, finalRate: 1.5 },
+    { schoolName: '洛西', department: '普通', quota: 168, finalApplicants: 141, finalRate: 0.84 },
+    { schoolName: '桃山', department: '普通', quota: 196, finalApplicants: 241, finalRate: 1.23 },
+    { schoolName: '東稜', department: '普通', quota: 140, finalApplicants: 83, finalRate: 0.59 },
+    { schoolName: '洛水', department: '普通', quota: 112, finalApplicants: 28, finalRate: 0.25 },
+    { schoolName: '京都すばる', department: '商業学科群', quota: 60, finalApplicants: 43, finalRate: 0.72 },
+    { schoolName: '京都すばる', department: '情報科学', quota: 24, finalApplicants: 21, finalRate: 0.88 },
+    { schoolName: '向陽', department: '普通', quota: 140, finalApplicants: 134, finalRate: 0.96 },
+    { schoolName: '乙訓', department: '普通', quota: 137, finalApplicants: 132, finalRate: 0.96 },
+    { schoolName: '西乙訓', department: '普通', quota: 112, finalApplicants: 23, finalRate: 0.21 },
+    { schoolName: '京都工学院', department: 'ものづくり分野', quota: 33, finalApplicants: 24, finalRate: 0.73 },
+    { schoolName: '京都工学院', department: 'まちづくり分野', quota: 22, finalApplicants: 22, finalRate: 1.0 },
+    { schoolName: '堀川', department: '普通', quota: 56, finalApplicants: 66, finalRate: 1.18 },
+    { schoolName: '日吉ケ丘', department: '普通[単位制]', quota: 168, finalApplicants: 216, finalRate: 1.29 },
+    { schoolName: '紫野', department: '普通', quota: 140, finalApplicants: 164, finalRate: 1.17 },
+    { schoolName: '開建', department: 'ルミノベーション', quota: 120, finalApplicants: 158, finalRate: 1.32 },
+    { schoolName: '東宇治', department: '普通', quota: 168, finalApplicants: 173, finalRate: 1.03 },
+    { schoolName: '莵道', department: '普通', quota: 168, finalApplicants: 115, finalRate: 0.68 },
+    { schoolName: '城南菱創', department: '普通[単位制]', quota: 80, finalApplicants: 112, finalRate: 1.4 },
+    { schoolName: '城陽', department: '普通', quota: 158, finalApplicants: 134, finalRate: 0.85 },
+    { schoolName: '西城陽', department: '普通', quota: 168, finalApplicants: 154, finalRate: 0.92 },
+    { schoolName: '京都八幡', department: '普通(総合選択制)', quota: 94, finalApplicants: 2, finalRate: 0.02 },
+    { schoolName: '京都八幡(南)', department: '介護福祉', quota: 23, finalApplicants: 1, finalRate: 0.04 },
+    { schoolName: '京都八幡(南)', department: '人間科学', quota: 18, finalApplicants: 0, finalRate: 0.0 },
+    { schoolName: '久御山', department: '普通', quota: 140, finalApplicants: 109, finalRate: 0.78 },
+    { schoolName: '田辺', department: '普通', quota: 112, finalApplicants: 141, finalRate: 1.26 },
+    { schoolName: '田辺', department: '工学探究', quota: 28, finalApplicants: 1, finalRate: 0.04 },
+    { schoolName: '田辺', department: '機械技術', quota: 9, finalApplicants: 11, finalRate: 1.22 },
+    { schoolName: '田辺', department: '電気技術', quota: 9, finalApplicants: 8, finalRate: 0.89 },
+    { schoolName: '田辺', department: '自動車', quota: 9, finalApplicants: 17, finalRate: 1.89 },
+    { schoolName: '木津', department: '普通', quota: 112, finalApplicants: 32, finalRate: 0.29 },
+    { schoolName: '木津', department: 'システム園芸', quota: 12, finalApplicants: 1, finalRate: 0.08 },
+    { schoolName: '木津', department: '情報企画', quota: 20, finalApplicants: 2, finalRate: 0.1 },
+    { schoolName: '南陽', department: '普通', quota: 112, finalApplicants: 122, finalRate: 1.09 },
+    { schoolName: '北桑田', department: '普通', quota: 42, finalApplicants: 0, finalRate: 0.0 },
+    { schoolName: '京都フォレスト', department: '普通', quota: 10, finalApplicants: 0, finalRate: 0.0 },
+    { schoolName: '亀岡', department: '普通[単位制]', quota: 140, finalApplicants: 165, finalRate: 1.18 },
+    { schoolName: '南丹', department: '総合学科[単位制]', quota: 64, finalApplicants: 2, finalRate: 0.03 },
+    { schoolName: '園部', department: '普通', quota: 84, finalApplicants: 28, finalRate: 0.33 },
+    { schoolName: '農芸', department: '農業学科群', quota: 26, finalApplicants: 18, finalRate: 0.69 },
+    { schoolName: '須知', department: '普通', quota: 42, finalApplicants: 6, finalRate: 0.14 },
+    { schoolName: '須知', department: '食品科学', quota: 19, finalApplicants: 1, finalRate: 0.05 },
+    { schoolName: '綾部', department: '普通', quota: 126, finalApplicants: 110, finalRate: 0.87 },
+    { schoolName: '綾部(東)', department: '農業・園芸(くくり)', quota: 9, finalApplicants: 2, finalRate: 0.22 },
+    { schoolName: '綾部(東)', department: '農芸化学', quota: 9, finalApplicants: 1, finalRate: 0.11 },
+    { schoolName: '福知山', department: '普通', quota: 112, finalApplicants: 95, finalRate: 0.85 },
+    { schoolName: '工業', department: '機械テクノロジー', quota: 11, finalApplicants: 14, finalRate: 1.27 },
+    { schoolName: '工業', department: 'ロボット技術', quota: 11, finalApplicants: 6, finalRate: 0.55 },
+    { schoolName: '工業', department: '電気テクノロジー', quota: 11, finalApplicants: 19, finalRate: 1.73 },
+    { schoolName: '工業', department: '環境デザイン', quota: 21, finalApplicants: 3, finalRate: 0.14 },
+    { schoolName: '工業', department: '情報テクノロジー', quota: 11, finalApplicants: 5, finalRate: 0.45 },
+    { schoolName: '大江', department: '地域創生[単位制]', quota: 56, finalApplicants: 1, finalRate: 0.02 },
+    { schoolName: '東舞鶴', department: '普通', quota: 84, finalApplicants: 39, finalRate: 0.46 },
+    { schoolName: '西舞鶴', department: '普通', quota: 112, finalApplicants: 104, finalRate: 0.93 },
+    { schoolName: '海洋', department: '海洋学科群', quota: 26, finalApplicants: 14, finalRate: 0.54 },
+    { schoolName: '宮津天橋(宮津学舎)', department: '普通[単位制]', quota: 84, finalApplicants: 73, finalRate: 0.87 },
+    { schoolName: '宮津天橋(宮津学舎)', department: '建築[単位制]', quota: 8, finalApplicants: 1, finalRate: 0.13 },
+    { schoolName: '宮津天橋(加悦谷学舎)', department: '普通[単位制]', quota: 58, finalApplicants: 37, finalRate: 0.64 },
+    { schoolName: '峰山', department: '普通', quota: 112, finalApplicants: 104, finalRate: 0.93 },
+    { schoolName: '峰山', department: '機械創造', quota: 11, finalApplicants: 1, finalRate: 0.09 },
+    { schoolName: '丹後緑風(網野学舎)', department: '普通[単位制]', quota: 49, finalApplicants: 24, finalRate: 0.49 },
+    { schoolName: '丹後緑風(網野学舎)', department: '企画経営[単位制]', quota: 8, finalApplicants: 3, finalRate: 0.38 },
+    { schoolName: '丹後緑風(久美浜学舎)', department: 'アグリサイエンス[単位制]', quota: 20, finalApplicants: 0, finalRate: 0.0 },
+    { schoolName: '丹後緑風(久美浜学舎)', department: 'みらいクリエイト[単位制]', quota: 18, finalApplicants: 2, finalRate: 0.11 },
+  ],
+};
