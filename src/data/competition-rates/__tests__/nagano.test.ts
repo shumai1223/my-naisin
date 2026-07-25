@@ -2,26 +2,28 @@ import { checkAgainstSubtotal } from '@/lib/competition-rate';
 import { NAGANO_COMPETITION_RATES } from '../nagano';
 
 /**
- * Y-6 DoD検証（長野県・10県目・部分収録=第1・第2・第3通学区のみ）。
+ * Y-6 DoD検証（長野県・10県目・全日制完全達成）。
+ *
+ * 全県計に加え4通学区（北信/東信/南信/中信）ごとの合計行が別紙内に明記されているため、
+ * 地区別の突合と全県計の突合の両方をDoDとして検証する。
  */
-describe('長野県 倍率パイプラインα（Y-6・部分収録=第1北信+第2東信+第3南信・60校102レコード）', () => {
+describe('長野県 倍率パイプラインα（Y-6・全日制77校129レコードの完全収録テスト）', () => {
   const { records, officialSubtotals } = NAGANO_COMPETITION_RATES;
 
-  it('第1通学区（北信地区）の合計が別紙記載のグランドトータル（quota2,623・applicants2,303・倍率0.88）と完全一致する', () => {
-    const subtotal = officialSubtotals.find((s) => s.label === '第1通学区（北信地区）計')!;
-    const result = checkAgainstSubtotal(records, subtotal, (r) => r.area === '北信');
+  it('全日制の全レコード合計が全県計（quota8,807・applicants7,795・倍率0.89）と完全一致する', () => {
+    const grandTotal = officialSubtotals.find((s) => s.label === '全日制計')!;
+    const result = checkAgainstSubtotal(records, grandTotal, () => true);
     expect(result.matches).toBe(true);
   });
 
-  it('第2通学区（東信地区）の合計が別紙記載のグランドトータル（quota1,875・applicants1,761・倍率0.94）と完全一致する', () => {
-    const subtotal = officialSubtotals.find((s) => s.label === '第2通学区（東信地区）計')!;
-    const result = checkAgainstSubtotal(records, subtotal, (r) => r.area === '東信');
-    expect(result.matches).toBe(true);
-  });
-
-  it('第3通学区（南信地区）の合計が別紙記載のグランドトータル（quota2,246・applicants1,985・倍率0.88）と完全一致する', () => {
-    const subtotal = officialSubtotals.find((s) => s.label === '第3通学区（南信地区）計')!;
-    const result = checkAgainstSubtotal(records, subtotal, (r) => r.area === '南信');
+  it.each([
+    ['第1通学区（北信地区）計', '北信'],
+    ['第2通学区（東信地区）計', '東信'],
+    ['第3通学区（南信地区）計', '南信'],
+    ['第4通学区（中信地区）計', '中信'],
+  ])('%sが別紙記載の地区合計と完全一致する', (label, area) => {
+    const subtotal = officialSubtotals.find((s) => s.label === label)!;
+    const result = checkAgainstSubtotal(records, subtotal, (r) => r.area === area);
     expect(result.matches).toBe(true);
   });
 
@@ -44,35 +46,41 @@ describe('長野県 倍率パイプラインα（Y-6・部分収録=第1北信+�
     expect(dupes).toEqual([]);
   });
 
-  it('coverageがpartialを示している（第1・第2・第3通学区のみ・残り第4通学区は次回以降）', () => {
-    expect(NAGANO_COMPETITION_RATES.coverage.status).toBe('partial');
+  it('coverageがcompleteを示している（定時制のみ意図的にスコープ外）', () => {
+    expect(NAGANO_COMPETITION_RATES.coverage.status).toBe('complete');
   });
 
-  it('102レコード・60校が収録されている', () => {
-    expect(records.length).toBe(102);
+  it('129レコード・77校が収録されている', () => {
+    expect(records.length).toBe(129);
     const distinctSchools = new Set(records.map((r) => r.schoolName));
-    expect(distinctSchools.size).toBe(60);
+    expect(distinctSchools.size).toBe(77);
   });
 
   it('くくり募集（複数学科・コースが募集人員を共有）が正しく収録されている', () => {
-    const iiyama = records.find((r) => r.schoolName === '飯山' && r.department.includes('くくり募集'));
-    expect(iiyama).toEqual({
-      schoolName: '飯山',
-      area: '北信',
-      department: '自然科学探究・人文科学探究（くくり募集）',
-      quota: 44,
-      finalApplicants: 10,
-      finalRate: 0.23,
-    });
-    const naganoShogyo = records.find((r) => r.schoolName === '長野商業');
-    expect(naganoShogyo).toEqual({
-      schoolName: '長野商業',
-      area: '北信',
-      department: '商業・会計（くくり募集）',
-      quota: 80,
-      finalApplicants: 82,
-      finalRate: 1.03,
-    });
+    const cases: Array<{ schoolName: string; area: string; department: string; quota: number; finalApplicants: number; finalRate: number }> = [
+      { schoolName: '飯山', area: '北信', department: '自然科学探究・人文科学探究（くくり募集）', quota: 44, finalApplicants: 10, finalRate: 0.23 },
+      { schoolName: '長野商業', area: '北信', department: '商業・会計（くくり募集）', quota: 80, finalApplicants: 82, finalRate: 1.03 },
+      {
+        schoolName: '駒ケ根工業',
+        area: '南信',
+        department: '工業（機械・電気・情報技術）',
+        quota: 48,
+        finalApplicants: 43,
+        finalRate: 0.9,
+      },
+      {
+        schoolName: '松本県ケ丘',
+        area: '中信',
+        department: '自然探究・国際探究（くくり募集）',
+        quota: 16,
+        finalApplicants: 36,
+        finalRate: 2.25,
+      },
+    ];
+    for (const c of cases) {
+      const rec = records.find((r) => r.schoolName === c.schoolName && r.department === c.department);
+      expect(rec).toEqual(c);
+    }
   });
 
   it('sourcesが公式PDF URLを正しく記録している', () => {

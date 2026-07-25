@@ -1,5 +1,5 @@
 /**
- * 長野県 公立高等学校 倍率パイプラインα（Y-6・10県目・進行中）。
+ * 長野県 公立高等学校 倍率パイプラインα（Y-6・10県目・全日制完全達成）。
  *
  * 一次ソース: 長野県教育委員会「令和8年度公立高等学校入学者後期選抜志願者数②（志望変更受付
  * 締切後の集計結果）」（3月5日公表・全8ページ）。
@@ -8,18 +8,21 @@
  * 宮城・岐阜・岡山・栃木・群馬と同型の高信頼度技法）。
  *
  * ⚠️構造上の強み: 全県計（8,807／7,795／0.89）に加えて、4通学区（第1＝北信・第2＝東信・第3＝
- * 南信・第4＝中信）ごとの「合計」行が別紙内に明記されている。これを地区単位の進捗チェックポイント
- * として活用し、通学区ごとに転記→機械集計を突合→問題なければ次の通学区へ進む方式を採用する。
+ * 南信・第4＝中信）ごとの「合計」行が別紙内に明記されている。地区単位の進捗チェックポイントとして
+ * 活用し、通学区ごとに転記→機械集計を突合→次の通学区へ進む方式で4地区とも初回転記で完全一致した。
  *
  * ⚠️罠（くくり募集）: 複数学科・コースが募集人員を共有する「くくり募集」がPDF内に複数存在する
  * （飯山の自然科学探究＋人文科学探究、長野商業の商業＋会計、須坂創成の園芸農学＋食品科学＋
- * 環境造園、更級農業の地域園芸＋植物活用＋食農科学等）。PDF別紙１冒頭の注記に「理数科等と国際
- * 関係学科等の合計値は、飯山高等学校が自然科学探究科と人文科学探究科…でくくり募集を行うため、
- * それぞれの学科の学級数を参考にした仮の数になっています」と明記されており、これらは連結学科名の
- * 単一レコードとして記録する（他県のくくり募集と同型パターン）。
+ * 環境造園、更級農業の地域園芸＋植物活用＋食農科学、諏訪実業の商業＋会計情報、上伊那農業の
+ * 3コース、駒ケ根工業の機械＋電気＋情報技術、松本県ケ丘の自然探究＋国際探究、池田工業の
+ * 機械電気学＋建築学等）。PDF別紙１冒頭の注記に「理数科等と国際関係学科等の合計値は、飯山高等学校
+ * が自然科学探究科と人文科学探究科…でくくり募集を行うため、それぞれの学科の学級数を参考にした
+ * 仮の数になっています」と明記されており、これらは連結学科名の単一レコードとして記録する
+ * （他県のくくり募集と同型パターン）。
  *
- * coverage.status='partial'（第1・第2・第3通学区の60校102レコードのみ収録。残り第4通学区
- * ＋定時制課程は次回以降のセッションで継続する）。
+ * 機械集計（quota8,807・applicants7,795・倍率0.89、77校129レコード）が全県計・4地区合計の
+ * 両方と完全一致した（4地区とも初回転記で一致・再修正なし）。定時制課程（普通・多部制単位制含む）
+ * は他県と同じ理由でスコープ外。
  */
 import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
 
@@ -34,26 +37,25 @@ export const NAGANO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     },
   ],
   coverage: {
-    status: 'partial',
+    status: 'complete',
     includedDepartments: [
       '第1通学区（北信地区）全日制（24校37レコード）',
       '第2通学区（東信地区）全日制（13校25レコード）',
       '第3通学区（南信地区）全日制（23校40レコード）',
+      '第4通学区（中信地区）全日制（17校27レコード）',
     ],
-    pendingDepartments: [
-      '第4通学区（中信地区）全日制',
-      '定時制課程（普通・多部制単位制含む・他県と同じ理由でスコープ外）',
-    ],
+    pendingDepartments: ['定時制課程（普通・多部制単位制含む・他県と同じ理由でスコープ外）'],
     note:
-      '全県計（quota8,807・applicants7,795・倍率0.89）のうち、第1通学区（北信地区）合計' +
-      '（quota2,623・applicants2,303・倍率0.88）・第2通学区（東信地区）合計' +
-      '（quota1,875・applicants1,761・倍率0.94）・第3通学区（南信地区）合計' +
-      '（quota2,246・applicants1,985・倍率0.88）と機械集計がそれぞれ完全一致した（いずれも初回転記で一致）。',
+      '全県計（quota8,807・applicants7,795・倍率0.89）と機械集計が完全一致した。4通学区の合計行' +
+      '（北信2,623/2,303・東信1,875/1,761・南信2,246/1,985・中信2,063/1,746）もそれぞれ完全一致' +
+      '（4地区とも初回転記で一致）。',
   },
   officialSubtotals: [
+    { label: '全日制計', schoolCount: 77, quota: 8807, finalApplicants: 7795, finalRate: 0.89 },
     { label: '第1通学区（北信地区）計', schoolCount: 24, quota: 2623, finalApplicants: 2303, finalRate: 0.88 },
     { label: '第2通学区（東信地区）計', schoolCount: 13, quota: 1875, finalApplicants: 1761, finalRate: 0.94 },
     { label: '第3通学区（南信地区）計', schoolCount: 23, quota: 2246, finalApplicants: 1985, finalRate: 0.88 },
+    { label: '第4通学区（中信地区）計', schoolCount: 17, quota: 2063, finalApplicants: 1746, finalRate: 0.85 },
   ],
   records: [
     { schoolName: '飯山', area: '北信', department: '普通', quota: 56, finalApplicants: 42, finalRate: 0.75 },
@@ -172,5 +174,32 @@ export const NAGANO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '下伊那農業', area: '南信', department: '生物活用', quota: 16, finalApplicants: 15, finalRate: 0.94 },
     { schoolName: '阿智', area: '南信', department: '普通', quota: 48, finalApplicants: 36, finalRate: 0.75 },
     { schoolName: '阿南', area: '南信', department: '普通', quota: 54, finalApplicants: 10, finalRate: 0.19 },
+    { schoolName: '蘇南', area: '中信', department: '総合', quota: 53, finalApplicants: 4, finalRate: 0.08 },
+    { schoolName: '木曽青峰', area: '中信', department: '普通', quota: 40, finalApplicants: 34, finalRate: 0.85 },
+    { schoolName: '木曽青峰', area: '中信', department: '農業（森林環境）', quota: 18, finalApplicants: 0, finalRate: 0.0 },
+    { schoolName: '木曽青峰', area: '中信', department: '工業（インテリア）', quota: 16, finalApplicants: 8, finalRate: 0.5 },
+    { schoolName: '木曽青峰', area: '中信', department: '理数', quota: 23, finalApplicants: 0, finalRate: 0.0 },
+    { schoolName: '塩尻志学館', area: '中信', department: '総合', quota: 80, finalApplicants: 79, finalRate: 0.99 },
+    { schoolName: '田川', area: '中信', department: '普通', quota: 93, finalApplicants: 45, finalRate: 0.48 },
+    { schoolName: '梓川', area: '中信', department: '普通', quota: 57, finalApplicants: 14, finalRate: 0.25 },
+    { schoolName: '松本工業', area: '中信', department: '機械', quota: 32, finalApplicants: 31, finalRate: 0.97 },
+    { schoolName: '松本工業', area: '中信', department: '電気', quota: 16, finalApplicants: 10, finalRate: 0.63 },
+    { schoolName: '松本工業', area: '中信', department: '電子工業', quota: 33, finalApplicants: 13, finalRate: 0.39 },
+    { schoolName: '松本県ケ丘', area: '中信', department: '普通', quota: 240, finalApplicants: 260, finalRate: 1.08 },
+    { schoolName: '松本県ケ丘', area: '中信', department: '自然探究・国際探究（くくり募集）', quota: 16, finalApplicants: 36, finalRate: 2.25 },
+    { schoolName: '松本美須々ケ丘', area: '中信', department: '普通', quota: 280, finalApplicants: 240, finalRate: 0.86 },
+    { schoolName: '松本深志', area: '中信', department: '普通', quota: 280, finalApplicants: 309, finalRate: 1.1 },
+    { schoolName: '松本蟻ケ崎', area: '中信', department: '普通', quota: 280, finalApplicants: 355, finalRate: 1.27 },
+    { schoolName: '明科', area: '中信', department: '普通', quota: 40, finalApplicants: 7, finalRate: 0.18 },
+    { schoolName: '豊科', area: '中信', department: '普通', quota: 200, finalApplicants: 172, finalRate: 0.86 },
+    { schoolName: '南安曇農業', area: '中信', department: 'グリーンサイエンス', quota: 16, finalApplicants: 17, finalRate: 1.06 },
+    { schoolName: '南安曇農業', area: '中信', department: '環境クリエイト', quota: 16, finalApplicants: 8, finalRate: 0.5 },
+    { schoolName: '南安曇農業', area: '中信', department: '生物工学', quota: 16, finalApplicants: 8, finalRate: 0.5 },
+    { schoolName: '穂高商業', area: '中信', department: '商業', quota: 32, finalApplicants: 20, finalRate: 0.63 },
+    { schoolName: '池田工業', area: '中信', department: '工業（機械・電気学・建築学）', quota: 44, finalApplicants: 2, finalRate: 0.05 },
+    { schoolName: '大町岳陽', area: '中信', department: '普通', quota: 72, finalApplicants: 62, finalRate: 0.86 },
+    { schoolName: '大町岳陽', area: '中信', department: '学究', quota: 31, finalApplicants: 0, finalRate: 0.0 },
+    { schoolName: '白馬', area: '中信', department: '普通', quota: 29, finalApplicants: 0, finalRate: 0.0 },
+    { schoolName: '白馬', area: '中信', department: '国際観光', quota: 10, finalApplicants: 12, finalRate: 1.2 },
   ],
 };
