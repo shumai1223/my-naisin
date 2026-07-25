@@ -1,0 +1,87 @@
+import { checkAgainstSubtotal } from '@/lib/competition-rate';
+import { TOCHIGI_COMPETITION_RATES } from '../tochigi';
+
+/**
+ * Y-6 DoD検証（栃木県・8県目・全日制完全達成）。
+ *
+ * 一次ソースは「出願変更状況」PDF（2/25変更後確定値）。出願倍率＝出願人員／一般選抜定員という
+ * PDF自身の定義式が、他県で採用している競争率(志願倍率)の定義と一致することを確認済み。
+ */
+describe('栃木県 倍率パイプラインα（Y-6・全日制57校107レコードの完全収録テスト）', () => {
+  const { records, officialSubtotals } = TOCHIGI_COMPETITION_RATES;
+
+  it('全日制の全レコード合計がPDF末尾の合計行（quota7,259・applicants7,602・倍率1.05）と完全一致する', () => {
+    const grandTotal = officialSubtotals.find((s) => s.label === '全日制計')!;
+    const result = checkAgainstSubtotal(records, grandTotal, () => true);
+    expect(result.matches).toBe(true);
+  });
+
+  it('全レコードのquota>0・finalApplicants>=0・finalRateが概算で整合する', () => {
+    for (const r of records) {
+      expect(r.quota).toBeGreaterThan(0);
+      expect(r.finalApplicants).toBeGreaterThanOrEqual(0);
+      expect(Math.abs(r.finalApplicants / r.quota - r.finalRate)).toBeLessThan(0.02);
+    }
+  });
+
+  it('学校名+学科名の重複が無い', () => {
+    const seen = new Set<string>();
+    const dupes: string[] = [];
+    for (const r of records) {
+      const key = `${r.schoolName}|${r.department}`;
+      if (seen.has(key)) dupes.push(key);
+      seen.add(key);
+    }
+    expect(dupes).toEqual([]);
+  });
+
+  it('coverageがcompleteを示している（定時制のみ意図的にスコープ外）', () => {
+    expect(TOCHIGI_COMPETITION_RATES.coverage.status).toBe('complete');
+  });
+
+  it('107レコード・57校が収録されている（一般選抜非実施の宇都宮東は対象外）', () => {
+    expect(records.length).toBe(107);
+    const distinctSchools = new Set(records.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(57);
+    expect(records.some((r) => r.schoolName === '宇都宮東')).toBe(false);
+  });
+
+  it('複数学科校が正しく収録されている', () => {
+    const multiDeptSchools: Record<string, number> = {
+      宇都宮中央: 2,
+      宇都宮白楊: 7,
+      宇都宮工業: 4,
+      宇都宮商業: 2,
+      鹿沼南: 3,
+      鹿沼商工: 2,
+      今市工業: 3,
+      小山: 2,
+      小山南: 2,
+      小山北桜: 4,
+      栃木農業: 2,
+      栃木工業: 3,
+      栃木商業: 2,
+      佐野松桜: 4,
+      足利工業: 3,
+      足利清風: 2,
+      真岡北陵: 5,
+      真岡工業: 3,
+      馬頭: 2,
+      那須拓陽: 5,
+      那須清峰: 4,
+      那須: 2,
+      矢板: 4,
+      高根沢: 2,
+    };
+    for (const [name, count] of Object.entries(multiDeptSchools)) {
+      const schoolRecords = records.filter((r) => r.schoolName === name);
+      expect(schoolRecords.length).toBe(count);
+    }
+  });
+
+  it('sourcesが公式PDF URLを正しく記録している', () => {
+    for (const s of TOCHIGI_COMPETITION_RATES.sources) {
+      expect(s.url).toMatch(/^https:\/\/www\.pref\.tochigi\.lg\.jp\//);
+    }
+  });
+});
