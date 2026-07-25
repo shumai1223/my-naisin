@@ -1,0 +1,148 @@
+/**
+ * 宮崎県 公立高等学校 倍率パイプラインα（Y-6・24県目・全日制完全達成）。
+ *
+ * 一次ソース: 宮崎県教育委員会「令和8年度宮崎県立高等学校入学者選抜（課程別）」内
+ * 「一般入学者選抜『最終』志願状況」（令和8年2月24日発表・志願変更後）。
+ *
+ * ⚠️宮崎県のPDFはテキスト埋め込み型でpdftotextを試みたが日本語のToUnicodeマッピングが
+ * 欠落しており学校名/学科名が読めなかったため、PDFをReadツールで画像として視覚的に読み取った
+ * （高知県・兵庫県・鳥取県・大分県と同型の技法）。
+ *
+ * 列は[定員（入学定員） / 推薦入学（内定者数・スポーツ推薦方式含む） / 一般入学募集人員（＝本
+ * ファイルのquota。定員から推薦入学内定者数を引いた数） / 一般入学者選抜「最終」志願者数（＝
+ * applicants） / 倍率（＝finalRate。学科ごとの印字値をそのまま採用）]。学校ごとに「合計」列
+ * （推薦計・一般募集計・志願計・全体倍率）が最終学科行に印字され、内訳合計との突合に使える。
+ *
+ * 宮崎西高校理数科・都城泉ヶ丘高校理数科は定員に附属中学校からの内進生を含むが、一般入学者選抜の
+ * 募集人員は既に「定員－附属中進学予定者－推薦内定者数」で調整済みの数値がそのまま印字されている
+ * ため、追加計算は不要だった。福島高校も同様に募集人員が推薦・連携型内定者数を減じた調整済み数値。
+ *
+ * 機械集計（quota3,873・applicants2,767、34校104レコード）が「全日制合計」行（募集人員3,873・
+ * 志願者数2,767・倍率0.71）と初回転記で完全一致した。定時制課程は他県と同じ理由でスコープ外。
+ */
+import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
+
+export const MIYAZAKI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
+  prefectureCode: 'miyazaki',
+  sources: [
+    {
+      url: 'https://www.pref.miyazaki.lg.jp/documents/99874/99874_20260224160129-1.pdf',
+      docTitle: '宮崎県教育委員会 令和8年度宮崎県立高等学校入学者選抜（課程別）一般入学者選抜「最終」志願状況',
+      fiscalYear: '令和8年度（2026年度）',
+      fetchedAt: '2026-07-25',
+    },
+  ],
+  coverage: {
+    status: 'complete',
+    includedDepartments: ['全日制課程（34校104レコード）'],
+    pendingDepartments: ['定時制課程（他県と同じ理由でスコープ外）'],
+    note: '「全日制合計」行（募集人員3,873・志願者数2,767・倍率0.71）と機械集計が完全一致した（初回転記で一致・再修正なし）。',
+  },
+  officialSubtotals: [{ label: '全日制合計', schoolCount: 34, quota: 3873, finalApplicants: 2767, finalRate: 0.71 }],
+  records: [
+    { schoolName: '高千穂', department: '普通', quota: 32, finalApplicants: 7, finalRate: 0.22 },
+    { schoolName: '高千穂', department: '生産流通', quota: 32, finalApplicants: 2, finalRate: 0.06 },
+    { schoolName: '高千穂', department: '情報ソリューション', quota: 19, finalApplicants: 4, finalRate: 0.21 },
+    { schoolName: '延岡', department: '普通', quota: 120, finalApplicants: 111, finalRate: 0.93 },
+    { schoolName: '延岡', department: 'メディカル・サイエンス', quota: 60, finalApplicants: 60, finalRate: 1.0 },
+    { schoolName: '延岡星雲', department: '普通', quota: 76, finalApplicants: 25, finalRate: 0.33 },
+    { schoolName: '延岡星雲', department: 'フロンティア', quota: 19, finalApplicants: 0, finalRate: 0 },
+    { schoolName: '延岡工業', department: '機械', quota: 20, finalApplicants: 28, finalRate: 1.4 },
+    { schoolName: '延岡工業', department: '電気電子', quota: 20, finalApplicants: 27, finalRate: 1.35 },
+    { schoolName: '延岡工業', department: '情報技術', quota: 20, finalApplicants: 21, finalRate: 1.05 },
+    { schoolName: '延岡工業', department: '土木', quota: 20, finalApplicants: 33, finalRate: 1.65 },
+    { schoolName: '延岡工業', department: '環境化学システム', quota: 20, finalApplicants: 21, finalRate: 1.05 },
+    { schoolName: '延岡工業', department: '生活文化', quota: 20, finalApplicants: 27, finalRate: 1.35 },
+    { schoolName: '延岡商業', department: '商業マネジメント', quota: 40, finalApplicants: 31, finalRate: 0.78 },
+    { schoolName: '延岡商業', department: '情報ソリューション', quota: 40, finalApplicants: 27, finalRate: 0.68 },
+    { schoolName: '門川', department: '総合', quota: 78, finalApplicants: 24, finalRate: 0.31 },
+    { schoolName: '門川', department: '福祉', quota: 26, finalApplicants: 5, finalRate: 0.19 },
+    { schoolName: '日向', department: '普通', quota: 71, finalApplicants: 80, finalRate: 1.13 },
+    { schoolName: '日向', department: 'フロンティア', quota: 20, finalApplicants: 6, finalRate: 0.3 },
+    { schoolName: '富島', department: '商業マネジメント', quota: 39, finalApplicants: 40, finalRate: 1.03 },
+    { schoolName: '富島', department: '情報ソリューション', quota: 37, finalApplicants: 27, finalRate: 0.73 },
+    { schoolName: '富島', department: '生活文化', quota: 19, finalApplicants: 26, finalRate: 1.37 },
+    { schoolName: '日向工業', department: '機械', quota: 15, finalApplicants: 12, finalRate: 0.8 },
+    { schoolName: '日向工業', department: '電気', quota: 17, finalApplicants: 5, finalRate: 0.29 },
+    { schoolName: '日向工業', department: '建築', quota: 24, finalApplicants: 5, finalRate: 0.21 },
+    { schoolName: '高鍋', department: '普通', quota: 60, finalApplicants: 63, finalRate: 1.05 },
+    { schoolName: '高鍋', department: '探究科学', quota: 19, finalApplicants: 9, finalRate: 0.47 },
+    { schoolName: '高鍋', department: '生活文化', quota: 22, finalApplicants: 1, finalRate: 0.05 },
+    { schoolName: '高鍋農業', department: '園芸科学', quota: 28, finalApplicants: 4, finalRate: 0.14 },
+    { schoolName: '高鍋農業', department: '畜産科学', quota: 25, finalApplicants: 0, finalRate: 0 },
+    { schoolName: '高鍋農業', department: '食品科学', quota: 20, finalApplicants: 6, finalRate: 0.3 },
+    { schoolName: '高鍋農業', department: 'フードビジネス', quota: 20, finalApplicants: 6, finalRate: 0.3 },
+    { schoolName: '妻', department: '普通', quota: 69, finalApplicants: 1, finalRate: 0.01 },
+    { schoolName: '妻', department: '普通(文理科学コース)', quota: 20, finalApplicants: 2, finalRate: 0.1 },
+    { schoolName: '妻', department: '情報ビジネスフロンティア', quota: 40, finalApplicants: 24, finalRate: 0.6 },
+    { schoolName: '妻', department: '福祉', quota: 25, finalApplicants: 3, finalRate: 0.12 },
+    { schoolName: '佐土原', department: '電子機械', quota: 37, finalApplicants: 40, finalRate: 1.08 },
+    { schoolName: '佐土原', department: '通信工学', quota: 20, finalApplicants: 23, finalRate: 1.15 },
+    { schoolName: '佐土原', department: '情報技術', quota: 37, finalApplicants: 23, finalRate: 0.62 },
+    { schoolName: '佐土原', department: '産業デザイン', quota: 20, finalApplicants: 15, finalRate: 0.75 },
+    { schoolName: '宮崎大宮', department: '普通', quota: 195, finalApplicants: 143, finalRate: 0.73 },
+    { schoolName: '宮崎大宮', department: '文科情報', quota: 64, finalApplicants: 116, finalRate: 1.81 },
+    { schoolName: '宮崎南', department: '普通', quota: 134, finalApplicants: 91, finalRate: 0.68 },
+    { schoolName: '宮崎南', department: 'フロンティア', quota: 47, finalApplicants: 70, finalRate: 1.49 },
+    { schoolName: '宮崎北', department: '普通', quota: 165, finalApplicants: 164, finalRate: 0.99 },
+    { schoolName: '宮崎北', department: 'サイエンス', quota: 24, finalApplicants: 16, finalRate: 0.67 },
+    { schoolName: '宮崎西', department: '普通', quota: 132, finalApplicants: 117, finalRate: 0.89 },
+    { schoolName: '宮崎西', department: '理数', quota: 30, finalApplicants: 48, finalRate: 1.6 },
+    { schoolName: '宮崎農業', department: '生物工学', quota: 18, finalApplicants: 13, finalRate: 0.72 },
+    { schoolName: '宮崎農業', department: '生産流通', quota: 19, finalApplicants: 18, finalRate: 0.95 },
+    { schoolName: '宮崎農業', department: '食品工学', quota: 19, finalApplicants: 23, finalRate: 1.21 },
+    { schoolName: '宮崎農業', department: '環境工学', quota: 33, finalApplicants: 7, finalRate: 0.21 },
+    { schoolName: '宮崎農業', department: '生活文化', quota: 20, finalApplicants: 21, finalRate: 1.05 },
+    { schoolName: '宮崎工業', department: '機械', quota: 14, finalApplicants: 13, finalRate: 0.93 },
+    { schoolName: '宮崎工業', department: '生産システム', quota: 16, finalApplicants: 5, finalRate: 0.31 },
+    { schoolName: '宮崎工業', department: '電気', quota: 17, finalApplicants: 28, finalRate: 1.65 },
+    { schoolName: '宮崎工業', department: '電子情報', quota: 17, finalApplicants: 22, finalRate: 1.29 },
+    { schoolName: '宮崎工業', department: '建築', quota: 18, finalApplicants: 25, finalRate: 1.39 },
+    { schoolName: '宮崎工業', department: '化学環境', quota: 24, finalApplicants: 7, finalRate: 0.29 },
+    { schoolName: '宮崎工業', department: 'インテリア', quota: 17, finalApplicants: 18, finalRate: 1.06 },
+    { schoolName: '宮崎商業', department: '商業マネジメント', quota: 68, finalApplicants: 34, finalRate: 0.5 },
+    { schoolName: '宮崎商業', department: '情報ソリューション', quota: 39, finalApplicants: 9, finalRate: 0.23 },
+    { schoolName: '宮崎商業', department: 'グローバル経済', quota: 18, finalApplicants: 12, finalRate: 0.67 },
+    { schoolName: '宮崎海洋', department: '海洋科学', quota: 66, finalApplicants: 38, finalRate: 0.58 },
+    { schoolName: '本庄', department: '総合', quota: 59, finalApplicants: 16, finalRate: 0.27 },
+    { schoolName: '小林', department: '普通', quota: 57, finalApplicants: 14, finalRate: 0.25 },
+    { schoolName: '小林', department: '普通(体育コース)', quota: 10, finalApplicants: 2, finalRate: 0.2 },
+    { schoolName: '小林', department: '普通(探究科学コース)', quota: 20, finalApplicants: 25, finalRate: 1.25 },
+    { schoolName: '小林秀峰', department: '農業', quota: 17, finalApplicants: 6, finalRate: 0.35 },
+    { schoolName: '小林秀峰', department: '機械', quota: 18, finalApplicants: 13, finalRate: 0.72 },
+    { schoolName: '小林秀峰', department: '電気', quota: 19, finalApplicants: 9, finalRate: 0.47 },
+    { schoolName: '小林秀峰', department: '商業マネジメント', quota: 20, finalApplicants: 8, finalRate: 0.4 },
+    { schoolName: '小林秀峰', department: '情報ソリューション', quota: 18, finalApplicants: 11, finalRate: 0.61 },
+    { schoolName: '小林秀峰', department: '福祉', quota: 22, finalApplicants: 0, finalRate: 0 },
+    { schoolName: '飯野', department: 'みらい探究', quota: 40, finalApplicants: 16, finalRate: 0.4 },
+    { schoolName: '飯野', department: '生活文化', quota: 21, finalApplicants: 2, finalRate: 0.1 },
+    { schoolName: '都城泉ヶ丘', department: '普通', quota: 120, finalApplicants: 122, finalRate: 1.02 },
+    { schoolName: '都城泉ヶ丘', department: '理数', quota: 26, finalApplicants: 42, finalRate: 1.62 },
+    { schoolName: '都城西', department: '普通', quota: 100, finalApplicants: 67, finalRate: 0.67 },
+    { schoolName: '都城西', department: 'フロンティア', quota: 30, finalApplicants: 39, finalRate: 1.3 },
+    { schoolName: '都城農業', department: '農業', quota: 20, finalApplicants: 25, finalRate: 1.25 },
+    { schoolName: '都城農業', department: '畜産', quota: 20, finalApplicants: 23, finalRate: 1.15 },
+    { schoolName: '都城農業', department: 'ライフデザイン', quota: 20, finalApplicants: 21, finalRate: 1.05 },
+    { schoolName: '都城農業', department: '食品科学', quota: 20, finalApplicants: 24, finalRate: 1.2 },
+    { schoolName: '都城農業', department: '農業土木', quota: 20, finalApplicants: 25, finalRate: 1.25 },
+    { schoolName: '都城工業', department: '機械', quota: 18, finalApplicants: 22, finalRate: 1.22 },
+    { schoolName: '都城工業', department: '情報制御システム', quota: 19, finalApplicants: 17, finalRate: 0.89 },
+    { schoolName: '都城工業', department: '電気', quota: 19, finalApplicants: 28, finalRate: 1.47 },
+    { schoolName: '都城工業', department: '建設システム', quota: 20, finalApplicants: 26, finalRate: 1.3 },
+    { schoolName: '都城工業', department: '化学工業', quota: 18, finalApplicants: 12, finalRate: 0.67 },
+    { schoolName: '都城工業', department: 'インテリア', quota: 20, finalApplicants: 12, finalRate: 0.6 },
+    { schoolName: '都城商業', department: '商業マネジメント', quota: 39, finalApplicants: 52, finalRate: 1.33 },
+    { schoolName: '都城商業', department: '情報ソリューション', quota: 42, finalApplicants: 39, finalRate: 0.93 },
+    { schoolName: '高城', department: '普通', quota: 50, finalApplicants: 8, finalRate: 0.16 },
+    { schoolName: '高城', department: '生活文化', quota: 20, finalApplicants: 9, finalRate: 0.45 },
+    { schoolName: '日南', department: '普通', quota: 80, finalApplicants: 16, finalRate: 0.2 },
+    { schoolName: '日南', department: '普通(探究科学コース)', quota: 24, finalApplicants: 22, finalRate: 0.92 },
+    { schoolName: '日南振徳', department: '地域農業', quota: 24, finalApplicants: 14, finalRate: 0.58 },
+    { schoolName: '日南振徳', department: '機械', quota: 20, finalApplicants: 4, finalRate: 0.2 },
+    { schoolName: '日南振徳', department: '電気', quota: 24, finalApplicants: 4, finalRate: 0.17 },
+    { schoolName: '日南振徳', department: '商業マネジメント', quota: 24, finalApplicants: 5, finalRate: 0.21 },
+    { schoolName: '日南振徳', department: '情報ソリューション', quota: 21, finalApplicants: 28, finalRate: 1.33 },
+    { schoolName: '日南振徳', department: '福祉', quota: 37, finalApplicants: 2, finalRate: 0.05 },
+    { schoolName: '福島', department: '普通', quota: 77, finalApplicants: 5, finalRate: 0.06 },
+  ],
+};
