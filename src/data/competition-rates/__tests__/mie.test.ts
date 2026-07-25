@@ -1,10 +1,10 @@
 import { MIE_COMPETITION_RATES } from '../mie';
 
 /**
- * Y-6 DoD検証（三重県・12県目・部分収録=PDF1ページ目のみ）。
+ * Y-6 DoD検証（三重県・12県目・部分収録=PDF1〜2ページ目のみ）。
  *
  * 三重県のPDFは各校末尾に「学校計」行が付随するため、その値を個別に突合する（内部整合性の
- * DoD）。全日制総計との完全一致は残り4ページ収録後に達成する。
+ * DoD）。全日制総計との完全一致は残り3ページ収録後に達成する。
  */
 const SCHOOL_LEVEL_TOTALS: Record<string, { quota: number; applicants: number }> = {
   桑名: { quota: 280, applicants: 354 },
@@ -24,12 +24,30 @@ const SCHOOL_LEVEL_TOTALS: Record<string, { quota: number; applicants: number }>
   菰野: { quota: 107, applicants: 103 },
   川越: { quota: 240, applicants: 302 },
   神戸: { quota: 240, applicants: 242 },
+  飯野: { quota: 36, applicants: 49 },
+  白子: { quota: 125, applicants: 108 },
+  石薬師: { quota: 36, applicants: 32 },
+  稲生: { quota: 80, applicants: 93 },
+  亀山: { quota: 107, applicants: 99 },
+  津: { quota: 320, applicants: 376 },
+  津西: { quota: 280, applicants: 312 },
+  津商業: { quota: 110, applicants: 106 },
+  津東: { quota: 178, applicants: 201 },
+  津工業: { quota: 108, applicants: 107 },
+  久居: { quota: 107, applicants: 109 },
+  久居農林: { quota: 108, applicants: 86 },
+  白山: { quota: 41, applicants: 16 },
+  上野: { quota: 152, applicants: 166 },
+  あけぼの学園: { quota: 18, applicants: 16 },
+  伊賀白鳳: { quota: 108, applicants: 90 },
+  名張: { quota: 92, applicants: 113 },
+  名張青峰: { quota: 127, applicants: 121 },
 };
 
-describe('三重県 倍率パイプラインα（Y-6・部分収録=PDF1ページ目17校37レコード）', () => {
+describe('三重県 倍率パイプラインα（Y-6・部分収録=PDF1〜2ページ目35校71レコード）', () => {
   const { records } = MIE_COMPETITION_RATES;
 
-  it('各校の学科別内訳合計がPDF記載の「学校計」行と完全一致する（17校全件）', () => {
+  it('各校の学科別内訳合計がPDF記載の「学校計」行と完全一致する（35校全件）', () => {
     for (const [schoolName, expected] of Object.entries(SCHOOL_LEVEL_TOTALS)) {
       const schoolRecords = records.filter((r) => r.schoolName === schoolName);
       const quotaSum = schoolRecords.reduce((acc, r) => acc + r.quota, 0);
@@ -58,14 +76,14 @@ describe('三重県 倍率パイプラインα（Y-6・部分収録=PDF1ペー�
     expect(dupes).toEqual([]);
   });
 
-  it('coverageがpartialを示している（PDF1ページ目のみ・残り4ページは次回以降）', () => {
+  it('coverageがpartialを示している（PDF1〜2ページ目のみ・残り3ページは次回以降）', () => {
     expect(MIE_COMPETITION_RATES.coverage.status).toBe('partial');
   });
 
-  it('37レコード・17校が収録されている', () => {
-    expect(records.length).toBe(37);
+  it('71レコード・35校が収録されている', () => {
+    expect(records.length).toBe(71);
     const distinctSchools = new Set(records.map((r) => r.schoolName));
-    expect(distinctSchools.size).toBe(17);
+    expect(distinctSchools.size).toBe(35);
   });
 
   it('くくり募集（複数学科・コースが後期選抜募集人数を共有）が正しく収録されている', () => {

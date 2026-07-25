@@ -23,8 +23,8 @@
  * 農業科学＋食品科学＋環境造園）。連結学科名の単一レコードとして記録する（他県のくくり募集と
  * 同型パターン）。
  *
- * coverage.status='partial'（1ページ目=桑名〜神戸の17校37レコードのみ収録。全日制総計
- * quota6,419・applicants6,636・倍率1.03に対し残り4ページを次回以降のセッションで継続する）。
+ * coverage.status='partial'（1〜2ページ目=桑名〜名張青峰の35校71レコードのみ収録。全日制総計
+ * quota6,419・applicants6,636・倍率1.03に対し残り3ページを次回以降のセッションで継続する）。
  */
 import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
 
@@ -40,11 +40,11 @@ export const MIE_COMPETITION_RATES: PrefectureCompetitionRateFile = {
   ],
   coverage: {
     status: 'partial',
-    includedDepartments: ['全日制課程（1ページ目・桑名〜神戸の17校37レコードのみ）'],
-    pendingDepartments: ['全日制課程の残り（PDF2〜5ページ目）', '定時制課程（他県と同じ理由でスコープ外）'],
+    includedDepartments: ['全日制課程（1〜2ページ目・桑名〜名張青峰の35校71レコード）'],
+    pendingDepartments: ['全日制課程の残り（PDF3〜5ページ目）', '定時制課程（他県と同じ理由でスコープ外）'],
     note:
-      '全日制総計（quota6,419・applicants6,636・倍率1.03）に対し、現時点は1ページ目の17校37レコード' +
-      'のみ収録した部分収録状態。各校の学科別内訳合計はPDF記載の「学校計」行と全17校で完全一致した。',
+      '全日制総計（quota6,419・applicants6,636・倍率1.03）に対し、現時点は1〜2ページ目の35校71' +
+      'レコードのみ収録した部分収録状態。各校の学科別内訳合計はPDF記載の「学校計」行と全35校で完全一致した。',
   },
   officialSubtotals: [],
   records: [
@@ -85,5 +85,39 @@ export const MIE_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '川越', department: '国際探究', quota: 40, finalApplicants: 91, finalRate: 2.28 },
     { schoolName: '神戸', department: '普通', quota: 200, finalApplicants: 128, finalRate: 0.64 },
     { schoolName: '神戸', department: '理数', quota: 40, finalApplicants: 114, finalRate: 2.85 },
+    { schoolName: '飯野', department: '英語コミュニケーション', quota: 36, finalApplicants: 49, finalRate: 1.36 },
+    { schoolName: '白子', department: '普通', quota: 107, finalApplicants: 92, finalRate: 0.86 },
+    { schoolName: '白子', department: '生活創造', quota: 18, finalApplicants: 16, finalRate: 0.89 },
+    { schoolName: '石薬師', department: '普通', quota: 36, finalApplicants: 32, finalRate: 0.89 },
+    { schoolName: '稲生', department: '普通', quota: 80, finalApplicants: 93, finalRate: 1.16 },
+    { schoolName: '亀山', department: '普通', quota: 53, finalApplicants: 40, finalRate: 0.75 },
+    { schoolName: '亀山', department: 'システムメディア', quota: 36, finalApplicants: 40, finalRate: 1.11 },
+    { schoolName: '亀山', department: '総合生活', quota: 18, finalApplicants: 19, finalRate: 1.06 },
+    { schoolName: '津', department: '普通', quota: 320, finalApplicants: 376, finalRate: 1.18 },
+    { schoolName: '津西', department: '普通', quota: 240, finalApplicants: 181, finalRate: 0.75 },
+    { schoolName: '津西', department: '国際科学', quota: 40, finalApplicants: 131, finalRate: 3.28 },
+    { schoolName: '津商業', department: 'ビジネス', quota: 92, finalApplicants: 93, finalRate: 1.01 },
+    { schoolName: '津商業', department: '情報システム', quota: 18, finalApplicants: 13, finalRate: 0.72 },
+    { schoolName: '津東', department: '普通', quota: 178, finalApplicants: 201, finalRate: 1.13 },
+    { schoolName: '津工業', department: '機械', quota: 54, finalApplicants: 55, finalRate: 1.02 },
+    { schoolName: '津工業', department: '電気', quota: 18, finalApplicants: 16, finalRate: 0.89 },
+    { schoolName: '津工業', department: '電子', quota: 18, finalApplicants: 20, finalRate: 1.11 },
+    { schoolName: '津工業', department: '建設工学', quota: 18, finalApplicants: 16, finalRate: 0.89 },
+    { schoolName: '久居', department: '普通', quota: 107, finalApplicants: 109, finalRate: 1.02 },
+    { schoolName: '久居農林', department: '生物生産・生物資源（くくり募集）', quota: 36, finalApplicants: 25, finalRate: 0.69 },
+    { schoolName: '久居農林', department: '環境情報・環境土木（くくり募集）', quota: 36, finalApplicants: 27, finalRate: 0.75 },
+    { schoolName: '久居農林', department: '生活デザイン', quota: 36, finalApplicants: 34, finalRate: 0.94 },
+    { schoolName: '白山', department: '普通', quota: 18, finalApplicants: 10, finalRate: 0.56 },
+    { schoolName: '白山', department: '情報コミュニケーション', quota: 23, finalApplicants: 6, finalRate: 0.26 },
+    { schoolName: '上野', department: '学際探究', quota: 112, finalApplicants: 119, finalRate: 1.06 },
+    { schoolName: '上野', department: '理数', quota: 40, finalApplicants: 47, finalRate: 1.18 },
+    { schoolName: 'あけぼの学園', department: '総合学科', quota: 18, finalApplicants: 16, finalRate: 0.89 },
+    { schoolName: '伊賀白鳳', department: '機械・電子機械・建築デザイン（くくり募集）', quota: 48, finalApplicants: 37, finalRate: 0.77 },
+    { schoolName: '伊賀白鳳', department: '生物資源・フードシステム（くくり募集）', quota: 30, finalApplicants: 34, finalRate: 1.13 },
+    { schoolName: '伊賀白鳳', department: '経営', quota: 15, finalApplicants: 7, finalRate: 0.47 },
+    { schoolName: '伊賀白鳳', department: 'ヒューマンサービス', quota: 15, finalApplicants: 12, finalRate: 0.8 },
+    { schoolName: '名張', department: '総合学科', quota: 92, finalApplicants: 113, finalRate: 1.23 },
+    { schoolName: '名張青峰', department: '普通', quota: 107, finalApplicants: 99, finalRate: 0.93 },
+    { schoolName: '名張青峰', department: '文理探究コース', quota: 20, finalApplicants: 22, finalRate: 1.1 },
   ],
 };
