@@ -31,6 +31,7 @@ import { SAGA_COMPETITION_RATES } from './saga';
 import { NAGASAKI_COMPETITION_RATES } from './nagasaki';
 import { OITA_COMPETITION_RATES } from './oita';
 import { TOTTORI_COMPETITION_RATES } from './tottori';
+import { KOCHI_COMPETITION_RATES } from './kochi';
 
 export const COMPETITION_RATE_BY_PREFECTURE: Partial<Record<string, PrefectureCompetitionRateFile>> = {
   tokyo: TOKYO_COMPETITION_RATES,
@@ -61,6 +62,7 @@ export const COMPETITION_RATE_BY_PREFECTURE: Partial<Record<string, PrefectureCo
   nagasaki: NAGASAKI_COMPETITION_RATES,
   oita: OITA_COMPETITION_RATES,
   tottori: TOTTORI_COMPETITION_RATES,
+  kochi: KOCHI_COMPETITION_RATES,
 };
 
 export const COMPETITION_RATE_FILES: PrefectureCompetitionRateFile[] = Object.values(
