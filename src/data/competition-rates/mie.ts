@@ -1,5 +1,5 @@
 /**
- * 三重県 公立高等学校 倍率パイプラインα（Y-6・12県目・進行中）。
+ * 三重県 公立高等学校 倍率パイプラインα（Y-6・12県目・全日制完全達成）。
  *
  * 一次ソース: 三重県教育委員会「令和8年度三重県立高等学校後期選抜志願状況（最終）」
  * （3月5日公表・全5ページ）。
@@ -16,15 +16,16 @@
  * 後期選抜募集人数（＝入学定員－前期内定者数＝本ファイルのquota） / 志願者数（＝applicants） /
  * 志願倍率]。さらに各校の末尾に「学校計」行が付随し、自己集計との突合チェックポイントとして機能
  * する（他県にはあまり見られない高信頼度設計）。前期選抜のみで定員が充足した学科（後期募集人数
- * =0）は他県の0-quotaパターンと同型でレコードとして採用しない。
+ * =0）は他県の0-quotaパターンと同型でレコードとして採用しない（昴学園は学校全体が該当し記録なし）。
  *
  * ⚠️罠（くくり募集）: 複数学科・コースが後期選抜募集人数を共有する「くくり募集」が存在する
  * （桑名工業の機械＋材料技術・電気＋電子、四日市西の比較文化歴史＋数理情報、四日市農芸の
- * 農業科学＋食品科学＋環境造園）。連結学科名の単一レコードとして記録する（他県のくくり募集と
- * 同型パターン）。
+ * 農業科学＋食品科学＋環境造園、久居農林の2組、伊賀白鳳の2組）。連結学科名の単一レコードとして
+ * 記録する（他県のくくり募集と同型パターン）。
  *
- * coverage.status='partial'（1〜2ページ目=桑名〜名張青峰の35校71レコードのみ収録。全日制総計
- * quota6,419・applicants6,636・倍率1.03に対し残り3ページを次回以降のセッションで継続する）。
+ * 機械集計（quota6,419・applicants6,636・倍率1.03、52校108レコード）が全日制総計と完全一致した
+ * （PDF3ページ目・末尾の総計行と一致・全52校の学校計行とも個別に完全一致）。定時制課程は他県と
+ * 同じ理由でスコープ外。
  */
 import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
 
@@ -39,14 +40,14 @@ export const MIE_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     },
   ],
   coverage: {
-    status: 'partial',
-    includedDepartments: ['全日制課程（1〜2ページ目・桑名〜名張青峰の35校71レコード）'],
-    pendingDepartments: ['全日制課程の残り（PDF3〜5ページ目）', '定時制課程（他県と同じ理由でスコープ外）'],
+    status: 'complete',
+    includedDepartments: ['全日制課程（PDF1〜3ページ目・52校108レコード）'],
+    pendingDepartments: ['定時制課程（他県と同じ理由でスコープ外）'],
     note:
-      '全日制総計（quota6,419・applicants6,636・倍率1.03）に対し、現時点は1〜2ページ目の35校71' +
-      'レコードのみ収録した部分収録状態。各校の学科別内訳合計はPDF記載の「学校計」行と全35校で完全一致した。',
+      '全日制総計（quota6,419・applicants6,636・倍率1.03）と機械集計が完全一致した。全52校の学科別' +
+      '内訳合計もPDF記載の「学校計」行と個別に完全一致している。',
   },
-  officialSubtotals: [],
+  officialSubtotals: [{ label: '全日制総計', schoolCount: 52, quota: 6419, finalApplicants: 6636, finalRate: 1.03 }],
   records: [
     { schoolName: '桑名', department: '普通', quota: 240, finalApplicants: 253, finalRate: 1.05 },
     { schoolName: '桑名', department: '理数', quota: 40, finalApplicants: 101, finalRate: 2.53 },
@@ -119,5 +120,42 @@ export const MIE_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '名張', department: '総合学科', quota: 92, finalApplicants: 113, finalRate: 1.23 },
     { schoolName: '名張青峰', department: '普通', quota: 107, finalApplicants: 99, finalRate: 0.93 },
     { schoolName: '名張青峰', department: '文理探究コース', quota: 20, finalApplicants: 22, finalRate: 1.1 },
+    { schoolName: '松阪', department: '普通', quota: 200, finalApplicants: 162, finalRate: 0.81 },
+    { schoolName: '松阪', department: '理数', quota: 39, finalApplicants: 98, finalRate: 2.51 },
+    { schoolName: '松阪工業', department: '機械', quota: 18, finalApplicants: 19, finalRate: 1.06 },
+    { schoolName: '松阪工業', department: '電気工学', quota: 18, finalApplicants: 26, finalRate: 1.44 },
+    { schoolName: '松阪工業', department: '工業化学', quota: 18, finalApplicants: 23, finalRate: 1.28 },
+    { schoolName: '松阪工業', department: '自動車', quota: 18, finalApplicants: 17, finalRate: 0.94 },
+    { schoolName: '松阪商業', department: '総合ビジネス', quota: 54, finalApplicants: 51, finalRate: 0.94 },
+    { schoolName: '松阪商業', department: '国際ビジネス', quota: 18, finalApplicants: 20, finalRate: 1.11 },
+    { schoolName: '飯南', department: '総合学科', quota: 22, finalApplicants: 4, finalRate: 0.18 },
+    { schoolName: '相可', department: '普通', quota: 53, finalApplicants: 43, finalRate: 0.81 },
+    { schoolName: '相可', department: '生産経済', quota: 18, finalApplicants: 19, finalRate: 1.06 },
+    { schoolName: '相可', department: '環境創造', quota: 18, finalApplicants: 19, finalRate: 1.06 },
+    { schoolName: '明野', department: '生産科学', quota: 18, finalApplicants: 22, finalRate: 1.22 },
+    { schoolName: '明野', department: '食品科学', quota: 18, finalApplicants: 9, finalRate: 0.5 },
+    { schoolName: '明野', department: '生活教養', quota: 18, finalApplicants: 13, finalRate: 0.72 },
+    { schoolName: '明野', department: '福祉', quota: 18, finalApplicants: 10, finalRate: 0.56 },
+    { schoolName: '宇治山田', department: '普通', quota: 107, finalApplicants: 110, finalRate: 1.03 },
+    { schoolName: '伊勢', department: '普通', quota: 240, finalApplicants: 201, finalRate: 0.84 },
+    { schoolName: '伊勢', department: '国際科学コース', quota: 40, finalApplicants: 65, finalRate: 1.63 },
+    { schoolName: '宇治山田商業', department: '商業', quota: 36, finalApplicants: 51, finalRate: 1.42 },
+    { schoolName: '宇治山田商業', department: '情報処理', quota: 18, finalApplicants: 22, finalRate: 1.22 },
+    { schoolName: '宇治山田商業', department: '国際', quota: 18, finalApplicants: 27, finalRate: 1.5 },
+    { schoolName: '伊勢工業', department: '機械', quota: 36, finalApplicants: 32, finalRate: 0.89 },
+    { schoolName: '伊勢工業', department: '電気', quota: 18, finalApplicants: 19, finalRate: 1.06 },
+    { schoolName: '伊勢工業', department: '建築', quota: 18, finalApplicants: 10, finalRate: 0.56 },
+    { schoolName: '南伊勢（度会校舎）', department: '普通', quota: 35, finalApplicants: 1, finalRate: 0.03 },
+    { schoolName: '鳥羽', department: '総合学科', quota: 18, finalApplicants: 9, finalRate: 0.5 },
+    { schoolName: '志摩', department: '普通', quota: 18, finalApplicants: 2, finalRate: 0.11 },
+    { schoolName: '水産', department: '海洋・機関', quota: 18, finalApplicants: 17, finalRate: 0.94 },
+    { schoolName: '水産', department: '水産資源', quota: 20, finalApplicants: 2, finalRate: 0.1 },
+    { schoolName: '尾鷲', department: '普通', quota: 47, finalApplicants: 42, finalRate: 0.89 },
+    { schoolName: '尾鷲', department: 'プログレッシブコース', quota: 21, finalApplicants: 5, finalRate: 0.24 },
+    { schoolName: '尾鷲', department: '情報ビジネス', quota: 20, finalApplicants: 15, finalRate: 0.75 },
+    { schoolName: '尾鷲', department: 'システム工学', quota: 21, finalApplicants: 12, finalRate: 0.57 },
+    { schoolName: '熊野青藍（木本校舎）', department: '普通', quota: 120, finalApplicants: 105, finalRate: 0.88 },
+    { schoolName: '熊野青藍（木本校舎）', department: '総合学科', quota: 26, finalApplicants: 28, finalRate: 1.08 },
+    { schoolName: '熊野青藍（紀南校舎）', department: '総合学科', quota: 27, finalApplicants: 27, finalRate: 1.0 },
   ],
 };

@@ -1,10 +1,11 @@
+import { checkAgainstSubtotal } from '@/lib/competition-rate';
 import { MIE_COMPETITION_RATES } from '../mie';
 
 /**
- * Y-6 DoD検証（三重県・12県目・部分収録=PDF1〜2ページ目のみ）。
+ * Y-6 DoD検証（三重県・12県目・全日制完全達成）。
  *
- * 三重県のPDFは各校末尾に「学校計」行が付随するため、その値を個別に突合する（内部整合性の
- * DoD）。全日制総計との完全一致は残り3ページ収録後に達成する。
+ * 三重県のPDFは各校末尾に「学校計」行が付随するため、全52校それぞれの内部整合性を検証した
+ * 上で、全日制総計との完全一致も検証する（二重のDoD）。
  */
 const SCHOOL_LEVEL_TOTALS: Record<string, { quota: number; applicants: number }> = {
   桑名: { quota: 280, applicants: 354 },
@@ -42,12 +43,33 @@ const SCHOOL_LEVEL_TOTALS: Record<string, { quota: number; applicants: number }>
   伊賀白鳳: { quota: 108, applicants: 90 },
   名張: { quota: 92, applicants: 113 },
   名張青峰: { quota: 127, applicants: 121 },
+  松阪: { quota: 239, applicants: 260 },
+  松阪工業: { quota: 72, applicants: 85 },
+  松阪商業: { quota: 72, applicants: 71 },
+  飯南: { quota: 22, applicants: 4 },
+  相可: { quota: 89, applicants: 81 },
+  明野: { quota: 72, applicants: 54 },
+  宇治山田: { quota: 107, applicants: 110 },
+  伊勢: { quota: 280, applicants: 266 },
+  宇治山田商業: { quota: 72, applicants: 100 },
+  伊勢工業: { quota: 72, applicants: 61 },
+  '南伊勢（度会校舎）': { quota: 35, applicants: 1 },
+  鳥羽: { quota: 18, applicants: 9 },
+  志摩: { quota: 18, applicants: 2 },
+  水産: { quota: 38, applicants: 19 },
+  尾鷲: { quota: 109, applicants: 74 },
 };
 
-describe('三重県 倍率パイプラインα（Y-6・部分収録=PDF1〜2ページ目35校71レコード）', () => {
-  const { records } = MIE_COMPETITION_RATES;
+describe('三重県 倍率パイプラインα（Y-6・全日制52校108レコードの完全収録テスト）', () => {
+  const { records, officialSubtotals } = MIE_COMPETITION_RATES;
 
-  it('各校の学科別内訳合計がPDF記載の「学校計」行と完全一致する（35校全件）', () => {
+  it('全日制の全レコード合計が全日制総計（quota6,419・applicants6,636・倍率1.03）と完全一致する', () => {
+    const grandTotal = officialSubtotals.find((s) => s.label === '全日制総計')!;
+    const result = checkAgainstSubtotal(records, grandTotal, () => true);
+    expect(result.matches).toBe(true);
+  });
+
+  it('各校の学科別内訳合計がPDF記載の「学校計」行と完全一致する（単独校50校全件）', () => {
     for (const [schoolName, expected] of Object.entries(SCHOOL_LEVEL_TOTALS)) {
       const schoolRecords = records.filter((r) => r.schoolName === schoolName);
       const quotaSum = schoolRecords.reduce((acc, r) => acc + r.quota, 0);
@@ -55,6 +77,15 @@ describe('三重県 倍率パイプラインα（Y-6・部分収録=PDF1〜2ペ�
       expect(quotaSum).toBe(expected.quota);
       expect(applicantsSum).toBe(expected.applicants);
     }
+  });
+
+  it('熊野青藍（木本校舎+紀南校舎の2校舎合計）がPDF記載の「学校計」行（quota173・applicants160）と完全一致する', () => {
+    const kimoto = records.filter((r) => r.schoolName === '熊野青藍（木本校舎）');
+    const kinan = records.filter((r) => r.schoolName === '熊野青藍（紀南校舎）');
+    const quotaSum = [...kimoto, ...kinan].reduce((acc, r) => acc + r.quota, 0);
+    const applicantsSum = [...kimoto, ...kinan].reduce((acc, r) => acc + r.finalApplicants, 0);
+    expect(quotaSum).toBe(173);
+    expect(applicantsSum).toBe(160);
   });
 
   it('全レコードのquota>0・finalApplicants>=0・finalRateが概算で整合する', () => {
@@ -76,14 +107,14 @@ describe('三重県 倍率パイプラインα（Y-6・部分収録=PDF1〜2ペ�
     expect(dupes).toEqual([]);
   });
 
-  it('coverageがpartialを示している（PDF1〜2ページ目のみ・残り3ページは次回以降）', () => {
-    expect(MIE_COMPETITION_RATES.coverage.status).toBe('partial');
+  it('coverageがcompleteを示している（定時制のみ意図的にスコープ外）', () => {
+    expect(MIE_COMPETITION_RATES.coverage.status).toBe('complete');
   });
 
-  it('71レコード・35校が収録されている', () => {
-    expect(records.length).toBe(71);
+  it('108レコード・52校が収録されている', () => {
+    expect(records.length).toBe(108);
     const distinctSchools = new Set(records.map((r) => r.schoolName));
-    expect(distinctSchools.size).toBe(35);
+    expect(distinctSchools.size).toBe(52);
   });
 
   it('くくり募集（複数学科・コースが後期選抜募集人数を共有）が正しく収録されている', () => {
@@ -94,6 +125,14 @@ describe('三重県 倍率パイプラインα（Y-6・部分収録=PDF1〜2ペ�
       quota: 36,
       finalApplicants: 37,
       finalRate: 1.03,
+    });
+    const igahoo1 = records.find((r) => r.schoolName === '伊賀白鳳' && r.department.includes('機械'));
+    expect(igahoo1).toEqual({
+      schoolName: '伊賀白鳳',
+      department: '機械・電子機械・建築デザイン（くくり募集）',
+      quota: 48,
+      finalApplicants: 37,
+      finalRate: 0.77,
     });
   });
 
