@@ -1,0 +1,127 @@
+/**
+ * 青森県 公立高等学校 倍率パイプラインα（Y-6・32県目・全日制完全達成）。
+ *
+ * 一次ソース: 青森県教育委員会「令和8年度青森県立高等学校入学者選抜出願状況等（全日制の課程）」
+ * （令和8年2月18日発表・出願期間2/12〜2/17正午締切・全2ページ）。
+ *
+ * 列は[入学者募集人員 / 入学者選抜募集人員（＝本ファイルのquota。三本木高校のように附属中等から
+ * の内部進学者等を差し引いた数値が既に印字されている）/ 学科別出願者数（＝applicants）/ 学科別
+ * 倍率（＝finalRate。印字済み値をそのまま採用）]。青森商業（商業・情報処理）、五所川原（普通・
+ * 理数）、三沢商業（商業・情報処理）の3校は資料上2学科が1つの募集人員・出願者数を共有する形で
+ * 掲載されており、くくり募集として単一レコードで収録した。
+ *
+ * 機械集計（quota6,980・applicants6,436、43校89レコード）が「全日制の課程合計」行（入学者選抜
+ * 募集人員6,980・学科別出願者数6,436・学科別倍率0.92）と初回転記で完全一致した（再修正なし）。
+ * 定時制課程は他県と同じ理由でスコープ外。
+ */
+import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
+
+export const AOMORI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
+  prefectureCode: 'aomori',
+  sources: [
+    {
+      url: 'https://www.pref.aomori.lg.jp/soshiki/kyoiku/e-gakyo/files/R8senbatsu_syutsugan-zennitisei.pdf',
+      docTitle: '青森県教育委員会 令和8年度青森県立高等学校入学者選抜出願状況等（全日制の課程）',
+      fiscalYear: '令和8年度（2026年度）',
+      fetchedAt: '2026-07-25',
+    },
+  ],
+  coverage: {
+    status: 'complete',
+    includedDepartments: ['全日制課程（43校89レコード）'],
+    pendingDepartments: ['定時制課程（他県と同じ理由でスコープ外）'],
+    note: '「全日制の課程合計」行（入学者選抜募集人員6,980・学科別出願者数6,436・学科別倍率0.92）と機械集計が完全一致した（初回転記で一致・再修正なし）。',
+  },
+  officialSubtotals: [{ label: '全日制の課程合計', schoolCount: 43, quota: 6980, finalApplicants: 6436, finalRate: 0.92 }],
+  records: [
+    { schoolName: '青森', department: '普通', quota: 240, finalApplicants: 263, finalRate: 1.1 },
+    { schoolName: '青森西', department: '普通', quota: 240, finalApplicants: 226, finalRate: 0.94 },
+    { schoolName: '青森東', department: '普通', quota: 240, finalApplicants: 297, finalRate: 1.24 },
+    { schoolName: '青森北', department: '普通', quota: 160, finalApplicants: 182, finalRate: 1.14 },
+    { schoolName: '青森北', department: 'スポーツ科学', quota: 40, finalApplicants: 19, finalRate: 0.48 },
+    { schoolName: '青森南', department: '普通', quota: 120, finalApplicants: 129, finalRate: 1.08 },
+    { schoolName: '青森南', department: 'グローバル探究', quota: 40, finalApplicants: 35, finalRate: 0.88 },
+    { schoolName: '青森中央', department: '総合', quota: 160, finalApplicants: 183, finalRate: 1.14 },
+    { schoolName: '浪岡', department: '普通', quota: 70, finalApplicants: 19, finalRate: 0.27 },
+    { schoolName: '青森工業', department: '機械', quota: 35, finalApplicants: 35, finalRate: 1.0 },
+    { schoolName: '青森工業', department: '電気', quota: 35, finalApplicants: 36, finalRate: 1.03 },
+    { schoolName: '青森工業', department: '電子', quota: 35, finalApplicants: 17, finalRate: 0.49 },
+    { schoolName: '青森工業', department: '情報技術', quota: 35, finalApplicants: 28, finalRate: 0.8 },
+    { schoolName: '青森工業', department: '建築', quota: 35, finalApplicants: 36, finalRate: 1.03 },
+    { schoolName: '青森工業', department: '都市環境', quota: 35, finalApplicants: 31, finalRate: 0.89 },
+    { schoolName: '青森商業', department: '商業・情報処理(くくり)', quota: 200, finalApplicants: 108, finalRate: 0.54 },
+    { schoolName: '五所川原', department: '普通・理数(くくり)', quota: 200, finalApplicants: 170, finalRate: 0.85 },
+    { schoolName: '木造', department: '総合', quota: 160, finalApplicants: 139, finalRate: 0.87 },
+    { schoolName: '鰺ヶ沢', department: '普通', quota: 40, finalApplicants: 19, finalRate: 0.48 },
+    { schoolName: '五所川原農林', department: '生物生産', quota: 35, finalApplicants: 12, finalRate: 0.34 },
+    { schoolName: '五所川原農林', department: '環境科学', quota: 35, finalApplicants: 32, finalRate: 0.91 },
+    { schoolName: '五所川原農林', department: '食品科学', quota: 35, finalApplicants: 33, finalRate: 0.94 },
+    { schoolName: '五所川原工科', department: '普通', quota: 70, finalApplicants: 55, finalRate: 0.79 },
+    { schoolName: '五所川原工科', department: '機械', quota: 35, finalApplicants: 29, finalRate: 0.83 },
+    { schoolName: '五所川原工科', department: '電子機械', quota: 35, finalApplicants: 36, finalRate: 1.03 },
+    { schoolName: '五所川原工科', department: '電気', quota: 35, finalApplicants: 20, finalRate: 0.57 },
+    { schoolName: '弘前', department: '普通', quota: 240, finalApplicants: 280, finalRate: 1.17 },
+    { schoolName: '弘前中央', department: '普通', quota: 200, finalApplicants: 261, finalRate: 1.31 },
+    { schoolName: '弘前南', department: '普通', quota: 200, finalApplicants: 199, finalRate: 1.0 },
+    { schoolName: '黒石', department: '普通', quota: 120, finalApplicants: 58, finalRate: 0.48 },
+    { schoolName: '黒石', department: '情報デザイン', quota: 40, finalApplicants: 31, finalRate: 0.78 },
+    { schoolName: '黒石', department: '看護', quota: 40, finalApplicants: 33, finalRate: 0.83 },
+    { schoolName: '柏木農業', department: '生物生産', quota: 35, finalApplicants: 24, finalRate: 0.69 },
+    { schoolName: '柏木農業', department: '環境工学', quota: 35, finalApplicants: 17, finalRate: 0.49 },
+    { schoolName: '柏木農業', department: '食品科学', quota: 35, finalApplicants: 24, finalRate: 0.69 },
+    { schoolName: '弘前工業', department: '機械', quota: 35, finalApplicants: 40, finalRate: 1.14 },
+    { schoolName: '弘前工業', department: '電気', quota: 35, finalApplicants: 39, finalRate: 1.11 },
+    { schoolName: '弘前工業', department: '電子', quota: 35, finalApplicants: 36, finalRate: 1.03 },
+    { schoolName: '弘前工業', department: '情報技術', quota: 35, finalApplicants: 40, finalRate: 1.14 },
+    { schoolName: '弘前工業', department: '土木', quota: 35, finalApplicants: 36, finalRate: 1.03 },
+    { schoolName: '弘前工業', department: '建築', quota: 35, finalApplicants: 45, finalRate: 1.29 },
+    { schoolName: '弘前実業', department: '商業', quota: 80, finalApplicants: 80, finalRate: 1.0 },
+    { schoolName: '弘前実業', department: '情報処理', quota: 40, finalApplicants: 48, finalRate: 1.2 },
+    { schoolName: '弘前実業', department: '家庭科学', quota: 40, finalApplicants: 51, finalRate: 1.28 },
+    { schoolName: '弘前実業', department: '服飾デザイン', quota: 40, finalApplicants: 48, finalRate: 1.2 },
+    { schoolName: '弘前実業', department: 'スポーツ科学', quota: 40, finalApplicants: 42, finalRate: 1.05 },
+    { schoolName: '三本木', department: '普通', quota: 165, finalApplicants: 136, finalRate: 0.82 },
+    { schoolName: '三沢', department: '普通', quota: 240, finalApplicants: 253, finalRate: 1.05 },
+    { schoolName: '野辺地', department: '普通', quota: 80, finalApplicants: 29, finalRate: 0.36 },
+    { schoolName: '七戸', department: '総合', quota: 120, finalApplicants: 53, finalRate: 0.44 },
+    { schoolName: '百石', department: '普通', quota: 80, finalApplicants: 43, finalRate: 0.54 },
+    { schoolName: '百石', department: '食物調理', quota: 40, finalApplicants: 30, finalRate: 0.75 },
+    { schoolName: '六ヶ所', department: '普通', quota: 40, finalApplicants: 28, finalRate: 0.7 },
+    { schoolName: '三本木農業恵拓', department: '普通', quota: 70, finalApplicants: 69, finalRate: 0.99 },
+    { schoolName: '三本木農業恵拓', department: '植物科学', quota: 35, finalApplicants: 22, finalRate: 0.63 },
+    { schoolName: '三本木農業恵拓', department: '動物科学', quota: 35, finalApplicants: 15, finalRate: 0.43 },
+    { schoolName: '三本木農業恵拓', department: '環境工学', quota: 35, finalApplicants: 31, finalRate: 0.89 },
+    { schoolName: '三本木農業恵拓', department: '食品科学', quota: 35, finalApplicants: 31, finalRate: 0.89 },
+    { schoolName: '十和田工業', department: '機械・エネルギー', quota: 35, finalApplicants: 32, finalRate: 0.91 },
+    { schoolName: '十和田工業', department: '電気', quota: 35, finalApplicants: 35, finalRate: 1.0 },
+    { schoolName: '十和田工業', department: '電子', quota: 35, finalApplicants: 35, finalRate: 1.0 },
+    { schoolName: '十和田工業', department: '建築', quota: 35, finalApplicants: 31, finalRate: 0.89 },
+    { schoolName: '三沢商業', department: '商業・情報処理(くくり)', quota: 120, finalApplicants: 131, finalRate: 1.09 },
+    { schoolName: '田名部', department: '普通', quota: 200, finalApplicants: 192, finalRate: 0.96 },
+    { schoolName: '大湊', department: '総合', quota: 160, finalApplicants: 101, finalRate: 0.63 },
+    { schoolName: '大間', department: '普通', quota: 70, finalApplicants: 37, finalRate: 0.53 },
+    { schoolName: 'むつ工業', department: '機械', quota: 35, finalApplicants: 32, finalRate: 0.91 },
+    { schoolName: 'むつ工業', department: '電気', quota: 35, finalApplicants: 33, finalRate: 0.94 },
+    { schoolName: 'むつ工業', department: '設備・エネルギー', quota: 35, finalApplicants: 34, finalRate: 0.97 },
+    { schoolName: '八戸', department: '普通', quota: 240, finalApplicants: 293, finalRate: 1.22 },
+    { schoolName: '八戸東', department: '普通', quota: 160, finalApplicants: 201, finalRate: 1.26 },
+    { schoolName: '八戸東', department: '表現', quota: 30, finalApplicants: 29, finalRate: 0.97 },
+    { schoolName: '八戸北', department: '普通', quota: 200, finalApplicants: 201, finalRate: 1.01 },
+    { schoolName: '八戸西', department: '普通', quota: 200, finalApplicants: 206, finalRate: 1.03 },
+    { schoolName: '八戸西', department: 'スポーツ科学', quota: 40, finalApplicants: 42, finalRate: 1.05 },
+    { schoolName: '三戸', department: '普通', quota: 40, finalApplicants: 29, finalRate: 0.73 },
+    { schoolName: '名久井農業', department: '生物生産', quota: 35, finalApplicants: 22, finalRate: 0.63 },
+    { schoolName: '名久井農業', department: '環境システム', quota: 35, finalApplicants: 16, finalRate: 0.46 },
+    { schoolName: '八戸水産', department: '海洋生産', quota: 35, finalApplicants: 37, finalRate: 1.06 },
+    { schoolName: '八戸水産', department: '水産食品', quota: 35, finalApplicants: 13, finalRate: 0.37 },
+    { schoolName: '八戸水産', department: '水産工学', quota: 35, finalApplicants: 11, finalRate: 0.31 },
+    { schoolName: '八戸工業', department: '機械', quota: 35, finalApplicants: 42, finalRate: 1.2 },
+    { schoolName: '八戸工業', department: '電気', quota: 35, finalApplicants: 35, finalRate: 1.0 },
+    { schoolName: '八戸工業', department: '電子', quota: 35, finalApplicants: 32, finalRate: 0.91 },
+    { schoolName: '八戸工業', department: '土木', quota: 35, finalApplicants: 30, finalRate: 0.86 },
+    { schoolName: '八戸工業', department: '建築', quota: 35, finalApplicants: 34, finalRate: 0.97 },
+    { schoolName: '八戸工業', department: '材料技術', quota: 35, finalApplicants: 39, finalRate: 1.11 },
+    { schoolName: '八戸商業', department: '商業', quota: 80, finalApplicants: 48, finalRate: 0.6 },
+    { schoolName: '八戸商業', department: '情報処理', quota: 40, finalApplicants: 22, finalRate: 0.55 },
+  ],
+};
