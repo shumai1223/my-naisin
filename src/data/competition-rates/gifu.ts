@@ -1,0 +1,200 @@
+/**
+ * 岐阜県 公立高等学校 倍率パイプラインα（Y-6・6県目）。
+ *
+ * 一次ソース: 岐阜県教育委員会高校教育課「令和8年度岐阜県公立高等学校第一次・連携型選抜、
+ * 通信制前期選抜 変更後出願者数」（令和8年2月17日正午締切時・全5ページ）＋同「変更後出願者数
+ * 総括表」（分野別・全体グランドトータル確認用）。
+ *
+ * ⚠️岐阜県のPDFはテキスト埋め込み型でpdftotext -layoutによるテキスト抽出が機能した（広島・熊本・
+ * 宮城と同型の高信頼度技法）。
+ *
+ * ⚠️罠: 各学科(群)の本体行（募集人員・出願者数・倍率）の下に、独自検査を含む選抜の区分
+ * （「Ⅰ」「Ⅱ」）・特色選抜等（「－」）・連携型選抜（「連携」）の内訳行が付随する。PDF冒頭の
+ * 注記に「各学科（群)の募集人員・出願者数には、独自検査を含む選抜及び連携型選抜の募集人員・
+ * 出願者数を含む」と明記されている通り、これらの内訳行は本体行の内数（静岡県の選抜枠Ⅰ/Ⅱ/Ⅲ
+ * 内訳と同型パターン）であり、本体行のみを1レコードとして採用し内訳行はSUM対象外とした。
+ * 「連携」行は出願者数が「－」（数値化不能）のことが多く、その場合も本体行に既に合算済み。
+ *
+ * 学科(群)名は源資料の表記をそのまま採用し（「普通科」等への正規化は行わず「普通」のまま）、
+ * 他県データでも同様に生表記のまま収録された学科名が多数存在することを確認済み（例:
+ * 千葉県「普通」「総合」等）。
+ *
+ * 機械集計（quota12,925・applicants12,009・倍率0.93、63校134レコード）は「変更後出願者数
+ * 総括表」記載の全日制計（県立12,485+市立440＝12,925／県立11,619+市立390＝12,009）と
+ * 完全一致した（初回転記で一致・再修正なし）。定時制課程（華陽フロンティア等11校）・通信制
+ * 課程（華陽フロンティア・飛騨高山の2校）は他県と同じ理由でスコープ外。
+ */
+import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
+
+export const GIFU_COMPETITION_RATES: PrefectureCompetitionRateFile = {
+  prefectureCode: 'gifu',
+  sources: [
+    {
+      url: 'https://www.pref.gifu.lg.jp/uploaded/attachment/485854.pdf',
+      docTitle:
+        '岐阜県教育委員会高校教育課 令和8年度岐阜県公立高等学校第一次・連携型選抜、通信制前期選抜 変更後出願者数（2月17日正午締切時）',
+      fiscalYear: '令和8年度（2026年度）',
+      fetchedAt: '2026-07-25',
+    },
+    {
+      url: 'https://www.pref.gifu.lg.jp/uploaded/attachment/485856.pdf',
+      docTitle:
+        '岐阜県教育委員会高校教育課 令和8年度岐阜県公立高等学校第一次・連携型選抜、通信制前期選抜 変更後出願者数総括表（2月17日正午締切時）',
+      fiscalYear: '令和8年度（2026年度）',
+      fetchedAt: '2026-07-25',
+    },
+  ],
+  coverage: {
+    status: 'complete',
+    includedDepartments: [
+      '全日制（第一次選抜・連携型選抜・独自検査を含む選抜等を全て含む、県立61校＋市立2校＝63校・完全収録）',
+    ],
+    pendingDepartments: [
+      '定時制課程（華陽フロンティア・岐阜商業・岐阜工業・大垣商業・大垣工業・加茂・東濃フロンティア・中津・飛騨高山・関商工・阿木の11校、全日制の外側の別課程のため他県と同じ理由で意図的にスコープ外）',
+      '通信制課程（華陽フロンティア・飛騨高山の2校、同上の理由でスコープ外）',
+    ],
+    note:
+      '全日制課程63校134レコードを完全収録し、機械集計（quota12,925・applicants12,009・' +
+      '倍率0.93）が総括表記載の全日制計（県立12,485+市立440・県立11,619+市立390）と' +
+      '完全一致した。',
+  },
+  officialSubtotals: [
+    { label: '全日制計', schoolCount: 63, quota: 12925, finalApplicants: 12009, finalRate: 0.93 },
+  ],
+  records: [
+    { schoolName: '岐阜', department: '普通', quota: 360, finalApplicants: 392, finalRate: 1.09 },
+    { schoolName: '岐阜北', department: '普通', quota: 320, finalApplicants: 384, finalRate: 1.2 },
+    { schoolName: '長良', department: '普通', quota: 360, finalApplicants: 427, finalRate: 1.19 },
+    { schoolName: '岐山', department: '普通', quota: 240, finalApplicants: 294, finalRate: 1.23 },
+    { schoolName: '岐山', department: '理数', quota: 80, finalApplicants: 67, finalRate: 0.84 },
+    { schoolName: '加納', department: '普通', quota: 280, finalApplicants: 332, finalRate: 1.19 },
+    { schoolName: '加納', department: '音楽', quota: 40, finalApplicants: 14, finalRate: 0.35 },
+    { schoolName: '加納', department: '美術', quota: 40, finalApplicants: 38, finalRate: 0.95 },
+    { schoolName: '羽島北', department: '普通', quota: 240, finalApplicants: 243, finalRate: 1.01 },
+    { schoolName: '岐阜総合学園', department: '総合', quota: 280, finalApplicants: 294, finalRate: 1.05 },
+    { schoolName: '岐阜城北', department: '生活デザイン', quota: 80, finalApplicants: 71, finalRate: 0.89 },
+    { schoolName: '岐阜城北', department: '総合', quota: 120, finalApplicants: 130, finalRate: 1.08 },
+    { schoolName: '岐阜商業', department: '流通ビジネス', quota: 160, finalApplicants: 167, finalRate: 1.04 },
+    { schoolName: '岐阜商業', department: 'ビジネス情報', quota: 80, finalApplicants: 88, finalRate: 1.1 },
+    { schoolName: '岐阜商業', department: '会計', quota: 80, finalApplicants: 88, finalRate: 1.1 },
+    { schoolName: '岐阜商業', department: 'グローバルビジネス', quota: 40, finalApplicants: 50, finalRate: 1.25 },
+    { schoolName: '岐南工業', department: '機械工学', quota: 60, finalApplicants: 50, finalRate: 0.83 },
+    { schoolName: '岐南工業', department: '自動車工学', quota: 40, finalApplicants: 50, finalRate: 1.25 },
+    { schoolName: '岐南工業', department: '電気工学', quota: 35, finalApplicants: 30, finalRate: 0.86 },
+    { schoolName: '岐南工業', department: '電子工学', quota: 35, finalApplicants: 25, finalRate: 0.71 },
+    { schoolName: '岐南工業', department: '建築工学', quota: 35, finalApplicants: 24, finalRate: 0.69 },
+    { schoolName: '岐南工業', department: '土木工学', quota: 35, finalApplicants: 32, finalRate: 0.91 },
+    { schoolName: '各務原', department: '普通', quota: 200, finalApplicants: 164, finalRate: 0.82 },
+    { schoolName: '各務原西', department: '普通', quota: 280, finalApplicants: 311, finalRate: 1.11 },
+    { schoolName: '岐阜各務野', department: 'ビジネス', quota: 120, finalApplicants: 90, finalRate: 0.75 },
+    { schoolName: '岐阜各務野', department: '情報', quota: 80, finalApplicants: 76, finalRate: 0.95 },
+    { schoolName: '岐阜各務野', department: '福祉', quota: 40, finalApplicants: 36, finalRate: 0.9 },
+    { schoolName: '本巣松陽', department: '普通', quota: 200, finalApplicants: 178, finalRate: 0.89 },
+    { schoolName: '岐阜農林', department: '動物科学', quota: 40, finalApplicants: 52, finalRate: 1.3 },
+    { schoolName: '岐阜農林', department: '園芸科学', quota: 40, finalApplicants: 34, finalRate: 0.85 },
+    { schoolName: '岐阜農林', department: '食品科学', quota: 40, finalApplicants: 42, finalRate: 1.05 },
+    { schoolName: '岐阜農林', department: '流通科学', quota: 40, finalApplicants: 56, finalRate: 1.4 },
+    { schoolName: '岐阜農林', department: '生物工学', quota: 40, finalApplicants: 35, finalRate: 0.88 },
+    { schoolName: '岐阜農林', department: '森林科学', quota: 40, finalApplicants: 29, finalRate: 0.73 },
+    { schoolName: '岐阜農林', department: '環境科学', quota: 40, finalApplicants: 29, finalRate: 0.73 },
+    { schoolName: '山県', department: '普通', quota: 105, finalApplicants: 55, finalRate: 0.52 },
+    { schoolName: '羽島', department: '普通', quota: 160, finalApplicants: 107, finalRate: 0.67 },
+    { schoolName: '岐阜工業', department: '航空・機械工学科群', quota: 110, finalApplicants: 116, finalRate: 1.05 },
+    { schoolName: '岐阜工業', department: '電気・電子工学科群', quota: 70, finalApplicants: 72, finalRate: 1.03 },
+    { schoolName: '岐阜工業', department: '建設・デザイン工学科群', quota: 70, finalApplicants: 92, finalRate: 1.31 },
+    { schoolName: '岐阜工業', department: '化学・設備工学科群', quota: 70, finalApplicants: 43, finalRate: 0.61 },
+    { schoolName: '揖斐', department: '普通', quota: 60, finalApplicants: 36, finalRate: 0.6 },
+    { schoolName: '揖斐', department: '生活デザイン', quota: 60, finalApplicants: 38, finalRate: 0.63 },
+    { schoolName: '池田', department: '普通', quota: 120, finalApplicants: 101, finalRate: 0.84 },
+    { schoolName: '大垣北', department: '普通', quota: 320, finalApplicants: 349, finalRate: 1.09 },
+    { schoolName: '大垣南', department: '普通', quota: 240, finalApplicants: 216, finalRate: 0.9 },
+    { schoolName: '大垣東', department: '普通', quota: 240, finalApplicants: 248, finalRate: 1.03 },
+    { schoolName: '大垣東', department: '理数', quota: 40, finalApplicants: 20, finalRate: 0.5 },
+    { schoolName: '大垣西', department: '普通', quota: 160, finalApplicants: 158, finalRate: 0.99 },
+    { schoolName: '大垣養老', department: '食の農学科群', quota: 60, finalApplicants: 72, finalRate: 1.2 },
+    { schoolName: '大垣養老', department: '緑の農学科群', quota: 60, finalApplicants: 50, finalRate: 0.83 },
+    { schoolName: '大垣養老', department: '総合', quota: 120, finalApplicants: 121, finalRate: 1.01 },
+    { schoolName: '大垣商業', department: 'ビジネス', quota: 200, finalApplicants: 209, finalRate: 1.05 },
+    { schoolName: '大垣商業', department: 'ビジネス情報', quota: 40, finalApplicants: 37, finalRate: 0.93 },
+    { schoolName: '大垣工業', department: '機械工学科群', quota: 105, finalApplicants: 98, finalRate: 0.93 },
+    { schoolName: '大垣工業', department: '電気・電子工学科群', quota: 105, finalApplicants: 98, finalRate: 0.93 },
+    { schoolName: '大垣工業', department: '建設工学科群', quota: 40, finalApplicants: 39, finalRate: 0.98 },
+    { schoolName: '大垣工業', department: '化学技術工学', quota: 30, finalApplicants: 19, finalRate: 0.63 },
+    { schoolName: '大垣桜', department: '服飾デザイン', quota: 40, finalApplicants: 27, finalRate: 0.68 },
+    { schoolName: '大垣桜', department: '食物', quota: 40, finalApplicants: 54, finalRate: 1.35 },
+    { schoolName: '大垣桜', department: '生活デザイン', quota: 80, finalApplicants: 44, finalRate: 0.55 },
+    { schoolName: '大垣桜', department: '福祉', quota: 40, finalApplicants: 20, finalRate: 0.5 },
+    { schoolName: '不破', department: '普通', quota: 120, finalApplicants: 64, finalRate: 0.53 },
+    { schoolName: '海津明誠', department: '普通', quota: 90, finalApplicants: 20, finalRate: 0.22 },
+    { schoolName: '海津明誠', department: 'ビジネス情報', quota: 40, finalApplicants: 27, finalRate: 0.68 },
+    { schoolName: '海津明誠', department: '生活デザイン', quota: 30, finalApplicants: 22, finalRate: 0.73 },
+    { schoolName: '郡上北', department: '普通', quota: 105, finalApplicants: 69, finalRate: 0.66 },
+    { schoolName: '郡上', department: '普通', quota: 120, finalApplicants: 92, finalRate: 0.77 },
+    { schoolName: '郡上', department: '総合農業学科群', quota: 60, finalApplicants: 51, finalRate: 0.85 },
+    { schoolName: '武義', department: '普通', quota: 120, finalApplicants: 111, finalRate: 0.93 },
+    { schoolName: '武義', department: 'ビジネス情報', quota: 60, finalApplicants: 42, finalRate: 0.7 },
+    { schoolName: '関有知', department: '普通', quota: 105, finalApplicants: 110, finalRate: 1.05 },
+    { schoolName: '関有知', department: '生活デザイン', quota: 35, finalApplicants: 36, finalRate: 1.03 },
+    { schoolName: '関', department: '普通', quota: 280, finalApplicants: 253, finalRate: 0.9 },
+    { schoolName: '加茂', department: '文理探究', quota: 280, finalApplicants: 240, finalRate: 0.86 },
+    { schoolName: '加茂農林', department: '食品科学', quota: 40, finalApplicants: 42, finalRate: 1.05 },
+    { schoolName: '加茂農林', department: '園芸流通', quota: 40, finalApplicants: 39, finalRate: 0.98 },
+    { schoolName: '加茂農林', department: '環境デザイン', quota: 40, finalApplicants: 38, finalRate: 0.95 },
+    { schoolName: '加茂農林', department: '森林科学', quota: 40, finalApplicants: 39, finalRate: 0.98 },
+    { schoolName: '加茂農林', department: '生産科学', quota: 40, finalApplicants: 46, finalRate: 1.15 },
+    { schoolName: '八百津', department: '普通', quota: 105, finalApplicants: 45, finalRate: 0.43 },
+    { schoolName: '東濃', department: '普通', quota: 120, finalApplicants: 105, finalRate: 0.88 },
+    { schoolName: '東濃実業', department: 'ビジネス', quota: 60, finalApplicants: 46, finalRate: 0.77 },
+    { schoolName: '東濃実業', department: 'ビジネス情報', quota: 60, finalApplicants: 58, finalRate: 0.97 },
+    { schoolName: '東濃実業', department: '生活デザイン', quota: 80, finalApplicants: 62, finalRate: 0.78 },
+    { schoolName: '可児', department: '普通', quota: 240, finalApplicants: 242, finalRate: 1.01 },
+    { schoolName: '可児工業', department: '機械工学', quota: 60, finalApplicants: 62, finalRate: 1.03 },
+    { schoolName: '可児工業', department: '電気工学', quota: 35, finalApplicants: 42, finalRate: 1.2 },
+    { schoolName: '可児工業', department: '建設工学科群', quota: 35, finalApplicants: 41, finalRate: 1.17 },
+    { schoolName: '可児工業', department: '化学技術工学', quota: 30, finalApplicants: 12, finalRate: 0.4 },
+    { schoolName: '多治見', department: '普通', quota: 200, finalApplicants: 127, finalRate: 0.64 },
+    { schoolName: '多治見北', department: '普通', quota: 240, finalApplicants: 229, finalRate: 0.95 },
+    { schoolName: '多治見工業', department: '電子機械工学', quota: 40, finalApplicants: 28, finalRate: 0.7 },
+    { schoolName: '多治見工業', department: '電気工学', quota: 40, finalApplicants: 54, finalRate: 1.35 },
+    { schoolName: '多治見工業', department: '産業デザイン工学', quota: 40, finalApplicants: 42, finalRate: 1.05 },
+    { schoolName: '多治見工業', department: 'セラミック工学', quota: 40, finalApplicants: 34, finalRate: 0.85 },
+    { schoolName: '瑞浪', department: '普通', quota: 80, finalApplicants: 61, finalRate: 0.76 },
+    { schoolName: '瑞浪', department: '生活デザイン', quota: 60, finalApplicants: 48, finalRate: 0.8 },
+    { schoolName: '土岐紅陵', department: '総合', quota: 90, finalApplicants: 97, finalRate: 1.08 },
+    { schoolName: '土岐商業', department: 'ビジネス', quota: 120, finalApplicants: 135, finalRate: 1.13 },
+    { schoolName: '土岐商業', department: 'ビジネス情報', quota: 40, finalApplicants: 46, finalRate: 1.15 },
+    { schoolName: '恵那', department: '普通', quota: 120, finalApplicants: 118, finalRate: 0.98 },
+    { schoolName: '恵那', department: '理数', quota: 80, finalApplicants: 98, finalRate: 1.23 },
+    { schoolName: '恵那南', department: '総合', quota: 60, finalApplicants: 39, finalRate: 0.65 },
+    { schoolName: '恵那農業', department: '食の農学科群', quota: 70, finalApplicants: 79, finalRate: 1.13 },
+    { schoolName: '恵那農業', department: '花と緑の農学科群', quota: 70, finalApplicants: 56, finalRate: 0.8 },
+    { schoolName: '中津', department: '普通', quota: 200, finalApplicants: 198, finalRate: 0.99 },
+    { schoolName: '坂下', department: '地域探究', quota: 40, finalApplicants: 37, finalRate: 0.93 },
+    { schoolName: '坂下', department: '福祉', quota: 20, finalApplicants: 7, finalRate: 0.35 },
+    { schoolName: '中津商業', department: 'ビジネス', quota: 90, finalApplicants: 106, finalRate: 1.18 },
+    { schoolName: '中津商業', department: 'ビジネス情報', quota: 30, finalApplicants: 22, finalRate: 0.73 },
+    { schoolName: '中津川工業', department: '機械工学科群', quota: 80, finalApplicants: 70, finalRate: 0.88 },
+    { schoolName: '中津川工業', department: '電気工学', quota: 40, finalApplicants: 14, finalRate: 0.35 },
+    { schoolName: '中津川工業', department: '建設工学科群', quota: 40, finalApplicants: 37, finalRate: 0.93 },
+    { schoolName: '益田清風', department: '普通', quota: 80, finalApplicants: 40, finalRate: 0.5 },
+    { schoolName: '益田清風', department: 'ビジネス情報', quota: 40, finalApplicants: 12, finalRate: 0.3 },
+    { schoolName: '益田清風', department: '総合', quota: 80, finalApplicants: 68, finalRate: 0.85 },
+    { schoolName: '斐太', department: '普通', quota: 240, finalApplicants: 220, finalRate: 0.92 },
+    { schoolName: '飛騨高山', department: '普通', quota: 80, finalApplicants: 78, finalRate: 0.98 },
+    { schoolName: '飛騨高山', department: '食の農学科群', quota: 50, finalApplicants: 51, finalRate: 1.02 },
+    { schoolName: '飛騨高山', department: '緑の農学科群', quota: 50, finalApplicants: 33, finalRate: 0.66 },
+    { schoolName: '飛騨高山', department: 'ビジネス', quota: 40, finalApplicants: 36, finalRate: 0.9 },
+    { schoolName: '飛騨高山', department: 'ビジネス情報', quota: 40, finalApplicants: 37, finalRate: 0.93 },
+    { schoolName: '飛騨高山', department: '生活デザイン', quota: 40, finalApplicants: 43, finalRate: 1.08 },
+    { schoolName: '高山工業', department: '総合工学科群', quota: 120, finalApplicants: 66, finalRate: 0.55 },
+    { schoolName: '吉城', department: '普通', quota: 90, finalApplicants: 79, finalRate: 0.88 },
+    { schoolName: '吉城', department: '理数', quota: 30, finalApplicants: 14, finalRate: 0.47 },
+    { schoolName: '飛騨神岡', department: '総合', quota: 80, finalApplicants: 43, finalRate: 0.54 },
+    { schoolName: '市立岐阜商業', department: 'ビジネス情報', quota: 40, finalApplicants: 23, finalRate: 0.58 },
+    { schoolName: '市立岐阜商業', department: 'ビジネス', quota: 120, finalApplicants: 112, finalRate: 0.93 },
+    { schoolName: '関商工', department: '機械', quota: 80, finalApplicants: 71, finalRate: 0.89 },
+    { schoolName: '関商工', department: '建設工学', quota: 40, finalApplicants: 42, finalRate: 1.05 },
+    { schoolName: '関商工', department: '電子機械', quota: 40, finalApplicants: 40, finalRate: 1.0 },
+    { schoolName: '関商工', department: '総合ビジネス', quota: 120, finalApplicants: 102, finalRate: 0.85 },
+  ],
+};
