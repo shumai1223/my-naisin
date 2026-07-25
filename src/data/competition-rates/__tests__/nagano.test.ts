@@ -2,9 +2,9 @@ import { checkAgainstSubtotal } from '@/lib/competition-rate';
 import { NAGANO_COMPETITION_RATES } from '../nagano';
 
 /**
- * Y-6 DoD検証（長野県・10県目・部分収録=第1・第2通学区のみ）。
+ * Y-6 DoD検証（長野県・10県目・部分収録=第1・第2・第3通学区のみ）。
  */
-describe('長野県 倍率パイプラインα（Y-6・部分収録=第1北信+第2東信・37校62レコード）', () => {
+describe('長野県 倍率パイプラインα（Y-6・部分収録=第1北信+第2東信+第3南信・60校102レコード）', () => {
   const { records, officialSubtotals } = NAGANO_COMPETITION_RATES;
 
   it('第1通学区（北信地区）の合計が別紙記載のグランドトータル（quota2,623・applicants2,303・倍率0.88）と完全一致する', () => {
@@ -16,6 +16,12 @@ describe('長野県 倍率パイプラインα（Y-6・部分収録=第1北信+�
   it('第2通学区（東信地区）の合計が別紙記載のグランドトータル（quota1,875・applicants1,761・倍率0.94）と完全一致する', () => {
     const subtotal = officialSubtotals.find((s) => s.label === '第2通学区（東信地区）計')!;
     const result = checkAgainstSubtotal(records, subtotal, (r) => r.area === '東信');
+    expect(result.matches).toBe(true);
+  });
+
+  it('第3通学区（南信地区）の合計が別紙記載のグランドトータル（quota2,246・applicants1,985・倍率0.88）と完全一致する', () => {
+    const subtotal = officialSubtotals.find((s) => s.label === '第3通学区（南信地区）計')!;
+    const result = checkAgainstSubtotal(records, subtotal, (r) => r.area === '南信');
     expect(result.matches).toBe(true);
   });
 
@@ -38,14 +44,14 @@ describe('長野県 倍率パイプラインα（Y-6・部分収録=第1北信+�
     expect(dupes).toEqual([]);
   });
 
-  it('coverageがpartialを示している（第1・第2通学区のみ・残り2通学区は次回以降）', () => {
+  it('coverageがpartialを示している（第1・第2・第3通学区のみ・残り第4通学区は次回以降）', () => {
     expect(NAGANO_COMPETITION_RATES.coverage.status).toBe('partial');
   });
 
-  it('62レコード・37校が収録されている', () => {
-    expect(records.length).toBe(62);
+  it('102レコード・60校が収録されている', () => {
+    expect(records.length).toBe(102);
     const distinctSchools = new Set(records.map((r) => r.schoolName));
-    expect(distinctSchools.size).toBe(37);
+    expect(distinctSchools.size).toBe(60);
   });
 
   it('くくり募集（複数学科・コースが募集人員を共有）が正しく収録されている', () => {

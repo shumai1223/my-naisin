@@ -18,7 +18,7 @@
  * それぞれの学科の学級数を参考にした仮の数になっています」と明記されており、これらは連結学科名の
  * 単一レコードとして記録する（他県のくくり募集と同型パターン）。
  *
- * coverage.status='partial'（第1・第2通学区の37校62レコードのみ収録。残り2通学区
+ * coverage.status='partial'（第1・第2・第3通学区の60校102レコードのみ収録。残り第4通学区
  * ＋定時制課程は次回以降のセッションで継続する）。
  */
 import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
@@ -35,20 +35,25 @@ export const NAGANO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
   ],
   coverage: {
     status: 'partial',
-    includedDepartments: ['第1通学区（北信地区）全日制（24校37レコード）', '第2通学区（東信地区）全日制（13校25レコード）'],
+    includedDepartments: [
+      '第1通学区（北信地区）全日制（24校37レコード）',
+      '第2通学区（東信地区）全日制（13校25レコード）',
+      '第3通学区（南信地区）全日制（23校40レコード）',
+    ],
     pendingDepartments: [
-      '第3通学区（南信地区）全日制',
       '第4通学区（中信地区）全日制',
       '定時制課程（普通・多部制単位制含む・他県と同じ理由でスコープ外）',
     ],
     note:
       '全県計（quota8,807・applicants7,795・倍率0.89）のうち、第1通学区（北信地区）合計' +
       '（quota2,623・applicants2,303・倍率0.88）・第2通学区（東信地区）合計' +
-      '（quota1,875・applicants1,761・倍率0.94）と機械集計がそれぞれ完全一致した（いずれも初回転記で一致）。',
+      '（quota1,875・applicants1,761・倍率0.94）・第3通学区（南信地区）合計' +
+      '（quota2,246・applicants1,985・倍率0.88）と機械集計がそれぞれ完全一致した（いずれも初回転記で一致）。',
   },
   officialSubtotals: [
     { label: '第1通学区（北信地区）計', schoolCount: 24, quota: 2623, finalApplicants: 2303, finalRate: 0.88 },
     { label: '第2通学区（東信地区）計', schoolCount: 13, quota: 1875, finalApplicants: 1761, finalRate: 0.94 },
+    { label: '第3通学区（南信地区）計', schoolCount: 23, quota: 2246, finalApplicants: 1985, finalRate: 0.88 },
   ],
   records: [
     { schoolName: '飯山', area: '北信', department: '普通', quota: 56, finalApplicants: 42, finalRate: 0.75 },
@@ -120,5 +125,52 @@ export const NAGANO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '野沢北', area: '東信', department: '理数', quota: 4, finalApplicants: 8, finalRate: 2.0 },
     { schoolName: '野沢南', area: '東信', department: '普通', quota: 160, finalApplicants: 155, finalRate: 0.97 },
     { schoolName: '小海', area: '東信', department: '普通', quota: 55, finalApplicants: 16, finalRate: 0.29 },
+    { schoolName: '富士見', area: '南信', department: '普通', quota: 23, finalApplicants: 14, finalRate: 0.61 },
+    { schoolName: '富士見', area: '南信', department: '農業（園芸）', quota: 16, finalApplicants: 11, finalRate: 0.69 },
+    { schoolName: '茅野', area: '南信', department: '普通', quota: 65, finalApplicants: 15, finalRate: 0.23 },
+    { schoolName: '諏訪実業', area: '南信', department: '商業（商業・会計情報）', quota: 47, finalApplicants: 16, finalRate: 0.34 },
+    { schoolName: '諏訪実業', area: '南信', department: '家庭（服飾）', quota: 17, finalApplicants: 5, finalRate: 0.29 },
+    { schoolName: '諏訪清陵', area: '南信', department: '普通', quota: 161, finalApplicants: 154, finalRate: 0.96 },
+    { schoolName: '諏訪二葉', area: '南信', department: '普通', quota: 200, finalApplicants: 202, finalRate: 1.01 },
+    { schoolName: '下諏訪向陽', area: '南信', department: '普通', quota: 100, finalApplicants: 55, finalRate: 0.55 },
+    { schoolName: '岡谷東', area: '南信', department: '普通', quota: 48, finalApplicants: 57, finalRate: 1.19 },
+    { schoolName: '岡谷南', area: '南信', department: '普通', quota: 160, finalApplicants: 153, finalRate: 0.96 },
+    { schoolName: '岡谷工業', area: '南信', department: '機械工学', quota: 24, finalApplicants: 2, finalRate: 0.08 },
+    { schoolName: '岡谷工業', area: '南信', department: '電気工学', quota: 21, finalApplicants: 5, finalRate: 0.24 },
+    { schoolName: '岡谷工業', area: '南信', department: '電子機械', quota: 18, finalApplicants: 6, finalRate: 0.33 },
+    { schoolName: '岡谷工業', area: '南信', department: '情報技術', quota: 16, finalApplicants: 19, finalRate: 1.19 },
+    { schoolName: '辰野', area: '南信', department: '普通', quota: 32, finalApplicants: 31, finalRate: 0.97 },
+    { schoolName: '辰野', area: '南信', department: '商業', quota: 16, finalApplicants: 7, finalRate: 0.44 },
+    {
+      schoolName: '上伊那農業',
+      area: '南信',
+      department: '農業（つくるマネジメント・流通マネジメント・くらしマネジメント）',
+      quota: 48,
+      finalApplicants: 51,
+      finalRate: 1.06,
+    },
+    { schoolName: '高遠', area: '南信', department: '普通', quota: 32, finalApplicants: 14, finalRate: 0.44 },
+    { schoolName: '伊那北', area: '南信', department: '普通', quota: 160, finalApplicants: 159, finalRate: 0.99 },
+    { schoolName: '伊那北', area: '南信', department: '理数', quota: 4, finalApplicants: 19, finalRate: 4.75 },
+    { schoolName: '伊那弥生ヶ丘', area: '南信', department: '普通', quota: 160, finalApplicants: 162, finalRate: 1.01 },
+    { schoolName: '赤穂', area: '南信', department: '普通', quota: 120, finalApplicants: 112, finalRate: 0.93 },
+    { schoolName: '赤穂', area: '南信', department: '商業', quota: 32, finalApplicants: 34, finalRate: 1.06 },
+    { schoolName: '駒ケ根工業', area: '南信', department: '工業（機械・電気・情報技術）', quota: 48, finalApplicants: 43, finalRate: 0.9 },
+    { schoolName: '松川', area: '南信', department: '普通', quota: 40, finalApplicants: 44, finalRate: 1.1 },
+    { schoolName: '飯田', area: '南信', department: '普通', quota: 200, finalApplicants: 193, finalRate: 0.97 },
+    { schoolName: '飯田', area: '南信', department: '理数', quota: 12, finalApplicants: 30, finalRate: 2.5 },
+    { schoolName: '飯田風越', area: '南信', department: '普通', quota: 160, finalApplicants: 164, finalRate: 1.03 },
+    { schoolName: '飯田風越', area: '南信', department: '国際教養', quota: 4, finalApplicants: 4, finalRate: 1.0 },
+    { schoolName: '飯田OIDE長姫', area: '南信', department: '機械工学', quota: 16, finalApplicants: 19, finalRate: 1.19 },
+    { schoolName: '飯田OIDE長姫', area: '南信', department: '電子機械工学', quota: 16, finalApplicants: 15, finalRate: 0.94 },
+    { schoolName: '飯田OIDE長姫', area: '南信', department: '電気電子工学', quota: 16, finalApplicants: 16, finalRate: 1.0 },
+    { schoolName: '飯田OIDE長姫', area: '南信', department: '社会基盤工学', quota: 16, finalApplicants: 13, finalRate: 0.81 },
+    { schoolName: '飯田OIDE長姫', area: '南信', department: '建築学', quota: 16, finalApplicants: 18, finalRate: 1.13 },
+    { schoolName: '飯田OIDE長姫', area: '南信', department: '商業', quota: 32, finalApplicants: 29, finalRate: 0.91 },
+    { schoolName: '下伊那農業', area: '南信', department: '栽培科学', quota: 16, finalApplicants: 18, finalRate: 1.13 },
+    { schoolName: '下伊那農業', area: '南信', department: '地域資源', quota: 16, finalApplicants: 15, finalRate: 0.94 },
+    { schoolName: '下伊那農業', area: '南信', department: '生物活用', quota: 16, finalApplicants: 15, finalRate: 0.94 },
+    { schoolName: '阿智', area: '南信', department: '普通', quota: 48, finalApplicants: 36, finalRate: 0.75 },
+    { schoolName: '阿南', area: '南信', department: '普通', quota: 54, finalApplicants: 10, finalRate: 0.19 },
   ],
 };
