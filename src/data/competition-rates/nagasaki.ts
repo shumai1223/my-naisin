@@ -1,0 +1,164 @@
+/**
+ * 長崎県 公立高等学校 倍率パイプラインα（Y-6・20県目・全日制完全達成）。
+ *
+ * 一次ソース: 長崎県教育委員会「令和8年度公立高等学校入学者選抜 一般選抜・定時制課程Ⅰ期選抜
+ * 志願状況について」（2月6日締切・全10ページ、全日制は4ページ）。
+ *
+ * ⚠️長崎県は他県で頻出した「志願変更」制度に関する記述がPDF全文に一切登場せず、2月6日締切時点の
+ * 数値がそのまま確定値として扱われる（注記④に「令和8年2月6日15:00時点」と明記）。
+ *
+ * ⚠️長崎県のPDFはテキスト埋め込み型でpdftotext -layoutによるテキスト抽出が機能した（広島・熊本・
+ * 宮城・岐阜・岡山・栃木・群馬・長野・茨城・三重・富山・石川・福井・愛媛・徳島・香川・佐賀と同型の
+ * 高信頼度技法）。列は[全募集定員 / 特別選抜等合格者数 / 一般選抜定員（＝本ファイルのquota） /
+ * 一般志願者数（＝applicants） / 志願倍率]。各校末尾に「計」行が付随し自己集計との突合チェック
+ * ポイントとして機能する（三重県と同型の高信頼度設計）。
+ *
+ * ⚠️くくり募集は注記で明記済み（※5）: 長崎東「普通・国際」の1組のみ。連結学科名の単一レコードと
+ * して記録した。
+ *
+ * ⚠️長崎県の志願倍率は小数第1位までしか公表されない（他県の多くは小数第2位）。このためfinalRate
+ * とfinalApplicants/quotaの差が他県より大きくなる場合がある（丸め誤差が最大±0.05程度）。転記の
+ * 誤りではなく公表精度の違いであり、grand total（quota/applicants）の完全一致で正確性を担保する。
+ *
+ * 機械集計（quota7,288・applicants5,794・倍率0.80、55校116レコード）が「総計」行（県立7,084／
+ * 5,596＋市立204／198）と完全一致した（初回転記で一致・再修正なし）。定時制課程は他県と同じ理由
+ * でスコープ外。
+ */
+import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
+
+export const NAGASAKI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
+  prefectureCode: 'nagasaki',
+  sources: [
+    {
+      url: 'https://www.pref.nagasaki.jp/uploads/2026/02/1770615354.pdf',
+      docTitle: '長崎県教育委員会 令和8年度公立高等学校入学者選抜 一般選抜・定時制課程Ⅰ期選抜志願状況について',
+      fiscalYear: '令和8年度（2026年度）',
+      fetchedAt: '2026-07-25',
+    },
+  ],
+  coverage: {
+    status: 'complete',
+    includedDepartments: ['全日制（55校116レコード。県立54校＋市立1校）'],
+    pendingDepartments: ['定時制課程（他県と同じ理由でスコープ外）'],
+    note: '「総計」行（quota7,288・applicants5,794・倍率0.80）と機械集計が完全一致した。',
+  },
+  officialSubtotals: [{ label: '全日制計', schoolCount: 55, quota: 7288, finalApplicants: 5794, finalRate: 0.8 }],
+  records: [
+    { schoolName: '長崎東', department: '普通・国際（くくり募集）', quota: 151, finalApplicants: 158, finalRate: 1 },
+    { schoolName: '長崎西', department: '普通', quota: 162, finalApplicants: 122, finalRate: 0.8 },
+    { schoolName: '長崎西', department: '普通（理系）', quota: 76, finalApplicants: 169, finalRate: 2.2 },
+    { schoolName: '長崎南', department: '普通', quota: 204, finalApplicants: 174, finalRate: 0.9 },
+    { schoolName: '長崎北', department: '普通', quota: 204, finalApplicants: 242, finalRate: 1.2 },
+    { schoolName: '長崎北陽台', department: '普通', quota: 170, finalApplicants: 171, finalRate: 1 },
+    { schoolName: '長崎北陽台', department: '文理探究', quota: 77, finalApplicants: 96, finalRate: 1.2 },
+    { schoolName: '佐世保南', department: '普通', quota: 136, finalApplicants: 149, finalRate: 1.1 },
+    { schoolName: '佐世保南', department: '文理探究', quota: 68, finalApplicants: 78, finalRate: 1.1 },
+    { schoolName: '佐世保北', department: '普通', quota: 113, finalApplicants: 137, finalRate: 1.2 },
+    { schoolName: '佐世保西', department: '普通', quota: 204, finalApplicants: 201, finalRate: 1 },
+    { schoolName: '宇久', department: '普通', quota: 39, finalApplicants: 0, finalRate: 0 },
+    { schoolName: '島原', department: '普通', quota: 139, finalApplicants: 97, finalRate: 0.7 },
+    { schoolName: '島原', department: '文理探究', quota: 68, finalApplicants: 58, finalRate: 0.9 },
+    { schoolName: '諫早', department: '普通', quota: 136, finalApplicants: 167, finalRate: 1.2 },
+    { schoolName: '西陵', department: '普通', quota: 204, finalApplicants: 164, finalRate: 0.8 },
+    { schoolName: '諫早東', department: '普通', quota: 74, finalApplicants: 27, finalRate: 0.4 },
+    { schoolName: '大村', department: '普通', quota: 174, finalApplicants: 139, finalRate: 0.8 },
+    { schoolName: '大村', department: '文理探究', quota: 64, finalApplicants: 87, finalRate: 1.4 },
+    { schoolName: '大村', department: '家政', quota: 34, finalApplicants: 28, finalRate: 0.8 },
+    { schoolName: '猶興館', department: '普通', quota: 66, finalApplicants: 52, finalRate: 0.8 },
+    { schoolName: '猶興館', department: '文理探究', quota: 36, finalApplicants: 15, finalRate: 0.4 },
+    { schoolName: '松浦', department: '地域科学', quota: 71, finalApplicants: 36, finalRate: 0.5 },
+    { schoolName: '松浦', department: '商業', quota: 31, finalApplicants: 17, finalRate: 0.5 },
+    { schoolName: '対馬', department: '普通', quota: 108, finalApplicants: 59, finalRate: 0.5 },
+    { schoolName: '対馬', department: '商業', quota: 33, finalApplicants: 25, finalRate: 0.8 },
+    { schoolName: '対馬', department: '国際文化交流', quota: 30, finalApplicants: 0, finalRate: 0 },
+    { schoolName: '豊玉', department: '普通', quota: 28, finalApplicants: 3, finalRate: 0.1 },
+    { schoolName: '上対馬', department: '普通', quota: 80, finalApplicants: 11, finalRate: 0.1 },
+    { schoolName: '壱岐', department: '普通', quota: 140, finalApplicants: 111, finalRate: 0.8 },
+    { schoolName: '五島', department: '普通', quota: 91, finalApplicants: 51, finalRate: 0.6 },
+    { schoolName: '五島', department: '衛生看護', quota: 36, finalApplicants: 7, finalRate: 0.2 },
+    { schoolName: '五島南', department: '普通', quota: 74, finalApplicants: 10, finalRate: 0.1 },
+    { schoolName: '奈留', department: '普通', quota: 32, finalApplicants: 4, finalRate: 0.1 },
+    { schoolName: '大崎', department: '普通', quota: 66, finalApplicants: 10, finalRate: 0.2 },
+    { schoolName: '西彼杵', department: '普通', quota: 73, finalApplicants: 17, finalRate: 0.2 },
+    { schoolName: '国見', department: '普通', quota: 107, finalApplicants: 39, finalRate: 0.4 },
+    { schoolName: '小浜', department: '普通', quota: 35, finalApplicants: 7, finalRate: 0.2 },
+    { schoolName: '小浜', department: '総合ビジネス', quota: 30, finalApplicants: 19, finalRate: 0.6 },
+    { schoolName: '口加', department: '普通', quota: 47, finalApplicants: 23, finalRate: 0.5 },
+    { schoolName: '口加', department: '普通（グローカル）', quota: 33, finalApplicants: 27, finalRate: 0.8 },
+    { schoolName: '口加', department: '福祉', quota: 22, finalApplicants: 5, finalRate: 0.2 },
+    { schoolName: '川棚', department: '普通', quota: 75, finalApplicants: 22, finalRate: 0.3 },
+    { schoolName: '川棚', department: '生活総合', quota: 30, finalApplicants: 16, finalRate: 0.5 },
+    { schoolName: '波佐見', department: '普通', quota: 48, finalApplicants: 26, finalRate: 0.5 },
+    { schoolName: '波佐見', department: '商業', quota: 37, finalApplicants: 7, finalRate: 0.2 },
+    { schoolName: '波佐見', department: '美術・工芸', quota: 10, finalApplicants: 2, finalRate: 0.2 },
+    { schoolName: '北松西', department: '普通', quota: 30, finalApplicants: 2, finalRate: 0.1 },
+    { schoolName: '上五島', department: '普通', quota: 76, finalApplicants: 37, finalRate: 0.5 },
+    { schoolName: '上五島', department: '電気情報', quota: 38, finalApplicants: 8, finalRate: 0.2 },
+    { schoolName: '中五島', department: '普通', quota: 39, finalApplicants: 14, finalRate: 0.4 },
+    { schoolName: '島原農業', department: '農業ビジネス', quota: 36, finalApplicants: 21, finalRate: 0.6 },
+    { schoolName: '島原農業', department: '食品サイエンス', quota: 37, finalApplicants: 27, finalRate: 0.7 },
+    { schoolName: '島原農業', department: '生活創造', quota: 37, finalApplicants: 15, finalRate: 0.4 },
+    { schoolName: '諫早農業', department: '農業科学', quota: 33, finalApplicants: 32, finalRate: 1 },
+    { schoolName: '諫早農業', department: '動物科学', quota: 35, finalApplicants: 39, finalRate: 1.1 },
+    { schoolName: '諫早農業', department: '環境創造', quota: 30, finalApplicants: 30, finalRate: 1 },
+    { schoolName: '諫早農業', department: '農業土木', quota: 30, finalApplicants: 33, finalRate: 1.1 },
+    { schoolName: '諫早農業', department: 'バイオ園芸', quota: 38, finalApplicants: 17, finalRate: 0.4 },
+    { schoolName: '諫早農業', department: '食品科学', quota: 35, finalApplicants: 41, finalRate: 1.2 },
+    { schoolName: '諫早農業', department: '生活科学', quota: 37, finalApplicants: 42, finalRate: 1.1 },
+    { schoolName: '北松農業', department: '生物生産', quota: 34, finalApplicants: 24, finalRate: 0.7 },
+    { schoolName: '北松農業', department: '食品流通', quota: 38, finalApplicants: 22, finalRate: 0.6 },
+    { schoolName: '北松農業', department: '生活科学', quota: 37, finalApplicants: 19, finalRate: 0.5 },
+    { schoolName: '西彼農業', department: '食料サイエンス', quota: 35, finalApplicants: 42, finalRate: 1.2 },
+    { schoolName: '西彼農業', department: '生活デザイン', quota: 39, finalApplicants: 9, finalRate: 0.2 },
+    { schoolName: '長崎工業', department: '機械', quota: 35, finalApplicants: 39, finalRate: 1.1 },
+    { schoolName: '長崎工業', department: '機械システム', quota: 30, finalApplicants: 43, finalRate: 1.4 },
+    { schoolName: '長崎工業', department: '電気', quota: 30, finalApplicants: 46, finalRate: 1.5 },
+    { schoolName: '長崎工業', department: '電子工学', quota: 37, finalApplicants: 31, finalRate: 0.8 },
+    { schoolName: '長崎工業', department: '情報技術', quota: 35, finalApplicants: 36, finalRate: 1 },
+    { schoolName: '長崎工業', department: '建築', quota: 34, finalApplicants: 45, finalRate: 1.3 },
+    { schoolName: '長崎工業', department: '工業化学', quota: 36, finalApplicants: 27, finalRate: 0.8 },
+    { schoolName: '長崎工業', department: 'インテリア', quota: 35, finalApplicants: 32, finalRate: 0.9 },
+    { schoolName: '佐世保工業', department: '機械', quota: 35, finalApplicants: 32, finalRate: 0.9 },
+    { schoolName: '佐世保工業', department: '電子機械', quota: 36, finalApplicants: 36, finalRate: 1 },
+    { schoolName: '佐世保工業', department: '電気', quota: 35, finalApplicants: 28, finalRate: 0.8 },
+    { schoolName: '佐世保工業', department: '電子工学', quota: 38, finalApplicants: 30, finalRate: 0.8 },
+    { schoolName: '佐世保工業', department: '建築', quota: 30, finalApplicants: 45, finalRate: 1.5 },
+    { schoolName: '佐世保工業', department: '土木', quota: 30, finalApplicants: 47, finalRate: 1.6 },
+    { schoolName: '鹿町工業', department: '機械', quota: 31, finalApplicants: 22, finalRate: 0.7 },
+    { schoolName: '鹿町工業', department: '電気', quota: 35, finalApplicants: 24, finalRate: 0.7 },
+    { schoolName: '鹿町工業', department: '電子工学', quota: 36, finalApplicants: 10, finalRate: 0.3 },
+    { schoolName: '鹿町工業', department: '土木技術', quota: 34, finalApplicants: 20, finalRate: 0.6 },
+    { schoolName: '島原工業', department: '機械システム', quota: 30, finalApplicants: 23, finalRate: 0.8 },
+    { schoolName: '島原工業', department: '電気電子', quota: 37, finalApplicants: 29, finalRate: 0.8 },
+    { schoolName: '島原工業', department: '建築技術', quota: 35, finalApplicants: 25, finalRate: 0.7 },
+    { schoolName: '大村工業', department: '機械', quota: 61, finalApplicants: 49, finalRate: 0.8 },
+    { schoolName: '大村工業', department: '機械システム', quota: 30, finalApplicants: 46, finalRate: 1.5 },
+    { schoolName: '大村工業', department: '電気', quota: 35, finalApplicants: 46, finalRate: 1.3 },
+    { schoolName: '大村工業', department: '電子工学', quota: 35, finalApplicants: 42, finalRate: 1.2 },
+    { schoolName: '大村工業', department: '建築', quota: 35, finalApplicants: 41, finalRate: 1.2 },
+    { schoolName: '大村工業', department: '建設工業', quota: 36, finalApplicants: 34, finalRate: 0.9 },
+    { schoolName: '大村工業', department: '化学工学', quota: 40, finalApplicants: 23, finalRate: 0.6 },
+    { schoolName: '佐世保商業', department: '会計ビジネス', quota: 76, finalApplicants: 42, finalRate: 0.6 },
+    { schoolName: '佐世保商業', department: '情報マーケティング', quota: 60, finalApplicants: 68, finalRate: 1.1 },
+    { schoolName: '佐世保商業', department: '国際コミュニケーション', quota: 34, finalApplicants: 34, finalRate: 1 },
+    { schoolName: '島原商業', department: '商業', quota: 30, finalApplicants: 35, finalRate: 1.2 },
+    { schoolName: '島原商業', department: '情報処理', quota: 38, finalApplicants: 15, finalRate: 0.4 },
+    { schoolName: '島原商業', department: '家政', quota: 34, finalApplicants: 20, finalRate: 0.6 },
+    { schoolName: '諫早商業', department: '商業', quota: 136, finalApplicants: 121, finalRate: 0.9 },
+    { schoolName: '諫早商業', department: '情報', quota: 35, finalApplicants: 34, finalRate: 1 },
+    { schoolName: '諫早商業', department: '国際コミュニケーション', quota: 33, finalApplicants: 30, finalRate: 0.9 },
+    { schoolName: '壱岐商業', department: '商業', quota: 76, finalApplicants: 16, finalRate: 0.2 },
+    { schoolName: '壱岐商業', department: '情報処理', quota: 35, finalApplicants: 28, finalRate: 0.8 },
+    { schoolName: '長崎鶴洋', department: '水産', quota: 69, finalApplicants: 36, finalRate: 0.5 },
+    { schoolName: '長崎鶴洋', department: '総合', quota: 33, finalApplicants: 20, finalRate: 0.6 },
+    { schoolName: '長崎明誠', department: '総合', quota: 154, finalApplicants: 103, finalRate: 0.7 },
+    { schoolName: '佐世保東翔', department: '総合', quota: 102, finalApplicants: 108, finalRate: 1.1 },
+    { schoolName: '大村城南', department: '総合', quota: 156, finalApplicants: 121, finalRate: 0.8 },
+    { schoolName: '平戸', department: '総合', quota: 36, finalApplicants: 11, finalRate: 0.3 },
+    { schoolName: '五島海陽', department: '総合', quota: 70, finalApplicants: 65, finalRate: 0.9 },
+    { schoolName: '島原翔南', department: '総合', quota: 75, finalApplicants: 30, finalRate: 0.4 },
+    { schoolName: '清峰', department: '総合', quota: 136, finalApplicants: 149, finalRate: 1.1 },
+    { schoolName: '市立長崎商業', department: '総合ビジネス', quota: 169, finalApplicants: 171, finalRate: 1 },
+    { schoolName: '市立長崎商業', department: '情報', quota: 35, finalApplicants: 27, finalRate: 0.8 },
+  ],
+};
