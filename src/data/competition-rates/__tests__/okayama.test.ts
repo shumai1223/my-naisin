@@ -1,14 +1,29 @@
+import { checkAgainstSubtotal } from '@/lib/competition-rate';
 import { OKAYAMA_COMPETITION_RATES } from '../okayama';
 
 /**
- * Y-6 DoD検証（岡山県・7県目・部分収録）。
+ * Y-6 DoD検証（岡山県・7県目・全日制完全達成）。
  *
- * PDF3ページ目（岡山朝日〜岡山南の14校36レコード）のみを収録した段階のテスト。coverage.status
- * が'partial'であることと、レコードの基本整合性（quota>0・重複無し・くくり募集の合算値が
- * 画像照合済みの値と一致）のみを検証する。全50校のグランドトータル突合は完全収録後に追加する。
+ * 県立全日制（49校106レコード）と市立全日制（岡山後楽館・玉野商工の2校3レコード）の両方が
+ * PDF1ページ目「総括表（全国募集を除く）」記載のグランドトータルと完全一致する。くくり募集
+ * （複数学科が一般入学募集人員を共有する9組）は（２）（３）の比率ランキング表と突合済み。
  */
-describe('岡山県 倍率パイプラインα（Y-6・部分収録=PDF3ページ目14校36レコード）', () => {
-  const { records } = OKAYAMA_COMPETITION_RATES;
+const OKAYAMA_MUNICIPAL_SCHOOLS = ['岡山後楽館', '玉野商工'];
+
+describe('岡山県 倍率パイプラインα（Y-6・全日制49校+2校＝109レコードの完全収録テスト）', () => {
+  const { records, officialSubtotals } = OKAYAMA_COMPETITION_RATES;
+
+  it('県立全日制の合計が総括表記載のグランドトータル（quota5,698・applicants5,650・倍率0.99）と完全一致する', () => {
+    const grandTotal = officialSubtotals.find((s) => s.label === '県立全日制計')!;
+    const result = checkAgainstSubtotal(records, grandTotal, (r) => !OKAYAMA_MUNICIPAL_SCHOOLS.includes(r.schoolName));
+    expect(result.matches).toBe(true);
+  });
+
+  it('市立全日制の合計が総括表記載のグランドトータル（quota63・applicants54・倍率0.86）と完全一致する', () => {
+    const grandTotal = officialSubtotals.find((s) => s.label === '市立全日制計')!;
+    const result = checkAgainstSubtotal(records, grandTotal, (r) => OKAYAMA_MUNICIPAL_SCHOOLS.includes(r.schoolName));
+    expect(result.matches).toBe(true);
+  });
 
   it('全レコードのquota>0・finalApplicants>=0・finalRateが概算で整合する', () => {
     for (const r of records) {
@@ -29,33 +44,73 @@ describe('岡山県 倍率パイプラインα（Y-6・部分収録=PDF3ペー�
     expect(dupes).toEqual([]);
   });
 
-  it('coverageがpartialを示している（PDF3ページ目のみ・残り約35校＋市立2校は次回以降）', () => {
-    expect(OKAYAMA_COMPETITION_RATES.coverage.status).toBe('partial');
+  it('coverageがcompleteを示している（定時制のみ意図的にスコープ外）', () => {
+    expect(OKAYAMA_COMPETITION_RATES.coverage.status).toBe('complete');
   });
 
-  it('36レコード・14校が収録されている', () => {
-    expect(records.length).toBe(36);
+  it('109レコード・51校が収録されている（県立49校＋市立2校）', () => {
+    expect(records.length).toBe(109);
     const distinctSchools = new Set(records.map((r) => r.schoolName));
-    expect(distinctSchools.size).toBe(14);
+    expect(distinctSchools.size).toBe(51);
   });
 
-  it('くくり募集（複数学科が一般入学募集人員を共有）が画像照合済みの合算値で正しく収録されている', () => {
-    const ikkyu = records.find((r) => r.schoolName === '岡山一宮');
-    expect(ikkyu).toEqual({
-      schoolName: '岡山一宮',
-      department: '普通・理数（くくり募集）',
-      quota: 280,
-      finalApplicants: 320,
-      finalRate: 1.14,
-    });
-    const higashiOkayama = records.find((r) => r.schoolName === '東岡山工業' && r.department.includes('くくり募集'));
-    expect(higashiOkayama).toEqual({
-      schoolName: '東岡山工業',
-      department: '機械・電子機械・電気（くくり募集）',
-      quota: 40,
-      finalApplicants: 51,
-      finalRate: 1.28,
-    });
+  it('くくり募集（複数学科が一般入学募集人員を共有）が（２）（３）の比率ランキング表と一致する値で収録されている', () => {
+    const cases: Array<{ schoolName: string; department: string; quota: number; finalApplicants: number; finalRate: number }> = [
+      { schoolName: '岡山一宮', department: '普通・理数（くくり募集）', quota: 280, finalApplicants: 320, finalRate: 1.14 },
+      { schoolName: '西大寺', department: '普通・国際情報（くくり募集）', quota: 180, finalApplicants: 243, finalRate: 1.35 },
+      { schoolName: '東岡山工業', department: '機械・電子機械・電気（くくり募集）', quota: 40, finalApplicants: 51, finalRate: 1.28 },
+      { schoolName: '岡山東商業', department: 'ビジネス創造・情報ビジネス（くくり募集）', quota: 64, finalApplicants: 143, finalRate: 2.23 },
+      { schoolName: '倉敷商業', department: '商業・国際経済・情報処理（くくり募集）', quota: 64, finalApplicants: 122, finalRate: 1.91 },
+      { schoolName: '玉島', department: '普通・理数（くくり募集）', quota: 220, finalApplicants: 191, finalRate: 0.87 },
+      { schoolName: '津山', department: '普通・理数（くくり募集）', quota: 148, finalApplicants: 131, finalRate: 0.89 },
+      { schoolName: '津山商業', department: '地域ビジネス・情報ビジネス（くくり募集）', quota: 37, finalApplicants: 29, finalRate: 0.78 },
+    ];
+    for (const c of cases) {
+      const rec = records.find((r) => r.schoolName === c.schoolName && r.department === c.department);
+      expect(rec).toEqual(c);
+    }
+  });
+
+  it('学校名なしで出現しやすい罠のあった津山東・玉野光南の学科が正しく収録されている', () => {
+    expect(records.filter((r) => r.schoolName === '津山東')).toHaveLength(3);
+    expect(records.filter((r) => r.schoolName === '玉野光南')).toHaveLength(2);
+    const tsuyamaHigashiFutsu = records.find((r) => r.schoolName === '津山東' && r.department === '普通');
+    expect(tsuyamaHigashiFutsu).toEqual({ schoolName: '津山東', department: '普通', quota: 120, finalApplicants: 118, finalRate: 0.98 });
+  });
+
+  it('複数学科校が正しく収録されている', () => {
+    const multiDeptSchools: Record<string, number> = {
+      西大寺: 2,
+      高松農業: 5,
+      興陽: 4,
+      瀬戸南: 3,
+      岡山工業: 7,
+      東岡山工業: 3,
+      岡山南: 5,
+      倉敷中央: 4,
+      倉敷鷲羽: 2,
+      倉敷工業: 5,
+      水島工業: 5,
+      津山東: 3,
+      津山工業: 6,
+      玉野光南: 2,
+      笠岡工業: 3,
+      井原: 2,
+      総社: 2,
+      高梁: 2,
+      高梁城南: 3,
+      新見: 3,
+      邑久: 2,
+      勝山: 2,
+      真庭: 3,
+      和気閑谷: 2,
+      矢掛: 2,
+      玉野商工: 2,
+    };
+    for (const [name, count] of Object.entries(multiDeptSchools)) {
+      const schoolRecords = records.filter((r) => r.schoolName === name);
+      expect(schoolRecords.length).toBe(count);
+    }
   });
 
   it('sourcesが公式PDF URLを正しく記録している', () => {
