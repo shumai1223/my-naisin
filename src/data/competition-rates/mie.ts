@@ -1,0 +1,89 @@
+/**
+ * 三重県 公立高等学校 倍率パイプラインα（Y-6・12県目・進行中）。
+ *
+ * 一次ソース: 三重県教育委員会「令和8年度三重県立高等学校後期選抜志願状況（最終）」
+ * （3月5日公表・全5ページ）。
+ *
+ * ⚠️三重県は前期選抜・後期選抜の2段階制。前期選抜は特色選抜的な小規模枠であり、後期選抜が
+ * 他県の「一般選抜」に相当する主要選抜（全日制課程の大半の入学者を占める）と判断し、後期選抜の
+ * 志願状況を一次ソースとして採用した（福島県も同型の前期/後期制だが、前期選抜自体の規模比率が
+ * 大きく複雑なため見送り、三重県を優先した）。
+ *
+ * ⚠️三重県のPDFはテキスト埋め込み型でpdftotext -layoutによるテキスト抽出が機能した（広島・熊本・
+ * 宮城・岐阜・岡山・栃木・群馬・長野・茨城と同型の高信頼度技法）。
+ *
+ * ⚠️構造上の強み: 列は[入学定員 / 前期選抜等合格内定者数（前期選抜で既に決定済みの人数） /
+ * 後期選抜募集人数（＝入学定員－前期内定者数＝本ファイルのquota） / 志願者数（＝applicants） /
+ * 志願倍率]。さらに各校の末尾に「学校計」行が付随し、自己集計との突合チェックポイントとして機能
+ * する（他県にはあまり見られない高信頼度設計）。前期選抜のみで定員が充足した学科（後期募集人数
+ * =0）は他県の0-quotaパターンと同型でレコードとして採用しない。
+ *
+ * ⚠️罠（くくり募集）: 複数学科・コースが後期選抜募集人数を共有する「くくり募集」が存在する
+ * （桑名工業の機械＋材料技術・電気＋電子、四日市西の比較文化歴史＋数理情報、四日市農芸の
+ * 農業科学＋食品科学＋環境造園）。連結学科名の単一レコードとして記録する（他県のくくり募集と
+ * 同型パターン）。
+ *
+ * coverage.status='partial'（1ページ目=桑名〜神戸の17校37レコードのみ収録。全日制総計
+ * quota6,419・applicants6,636・倍率1.03に対し残り4ページを次回以降のセッションで継続する）。
+ */
+import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
+
+export const MIE_COMPETITION_RATES: PrefectureCompetitionRateFile = {
+  prefectureCode: 'mie',
+  sources: [
+    {
+      url: 'https://www.pref.mie.lg.jp/common/content/001243656.pdf',
+      docTitle: '三重県教育委員会 令和8年度三重県立高等学校後期選抜志願状況（最終）',
+      fiscalYear: '令和8年度（2026年度）',
+      fetchedAt: '2026-07-25',
+    },
+  ],
+  coverage: {
+    status: 'partial',
+    includedDepartments: ['全日制課程（1ページ目・桑名〜神戸の17校37レコードのみ）'],
+    pendingDepartments: ['全日制課程の残り（PDF2〜5ページ目）', '定時制課程（他県と同じ理由でスコープ外）'],
+    note:
+      '全日制総計（quota6,419・applicants6,636・倍率1.03）に対し、現時点は1ページ目の17校37レコード' +
+      'のみ収録した部分収録状態。各校の学科別内訳合計はPDF記載の「学校計」行と全17校で完全一致した。',
+  },
+  officialSubtotals: [],
+  records: [
+    { schoolName: '桑名', department: '普通', quota: 240, finalApplicants: 253, finalRate: 1.05 },
+    { schoolName: '桑名', department: '理数', quota: 40, finalApplicants: 101, finalRate: 2.53 },
+    { schoolName: '桑名西', department: '普通', quota: 240, finalApplicants: 271, finalRate: 1.13 },
+    { schoolName: '桑名北', department: '普通', quota: 107, finalApplicants: 62, finalRate: 0.58 },
+    { schoolName: '桑名工業', department: '機械・材料技術（くくり募集）', quota: 36, finalApplicants: 37, finalRate: 1.03 },
+    { schoolName: '桑名工業', department: '電気・電子（くくり募集）', quota: 36, finalApplicants: 23, finalRate: 0.64 },
+    { schoolName: 'いなべ総合学園', department: '総合学科', quota: 132, finalApplicants: 148, finalRate: 1.12 },
+    { schoolName: '四日市', department: '普通', quota: 240, finalApplicants: 174, finalRate: 0.73 },
+    { schoolName: '四日市', department: '国際科学コース', quota: 80, finalApplicants: 204, finalRate: 2.55 },
+    { schoolName: '四日市南', department: '普通', quota: 240, finalApplicants: 208, finalRate: 0.87 },
+    { schoolName: '四日市南', department: '数理科学コース', quota: 80, finalApplicants: 203, finalRate: 2.54 },
+    { schoolName: '四日市西', department: '普通', quota: 120, finalApplicants: 87, finalRate: 0.73 },
+    { schoolName: '四日市西', department: '比較文化・歴史・数理情報（くくり募集）', quota: 60, finalApplicants: 73, finalRate: 1.22 },
+    { schoolName: '朝明', department: '普通', quota: 36, finalApplicants: 42, finalRate: 1.17 },
+    { schoolName: '朝明', department: 'ふくし', quota: 28, finalApplicants: 4, finalRate: 0.14 },
+    { schoolName: '四日市四郷', department: '普通', quota: 80, finalApplicants: 85, finalRate: 1.06 },
+    { schoolName: '四日市工業', department: '機械', quota: 18, finalApplicants: 19, finalRate: 1.06 },
+    { schoolName: '四日市工業', department: '電子機械', quota: 18, finalApplicants: 29, finalRate: 1.61 },
+    { schoolName: '四日市工業', department: '電気', quota: 18, finalApplicants: 22, finalRate: 1.22 },
+    { schoolName: '四日市工業', department: '電子工学', quota: 18, finalApplicants: 26, finalRate: 1.44 },
+    { schoolName: '四日市工業', department: '建築', quota: 18, finalApplicants: 21, finalRate: 1.17 },
+    { schoolName: '四日市工業', department: '物質工学', quota: 18, finalApplicants: 23, finalRate: 1.28 },
+    { schoolName: '四日市工業', department: '自動車', quota: 18, finalApplicants: 17, finalRate: 0.94 },
+    { schoolName: '四日市中央工業', department: '機械', quota: 18, finalApplicants: 20, finalRate: 1.11 },
+    { schoolName: '四日市中央工業', department: '電気', quota: 18, finalApplicants: 20, finalRate: 1.11 },
+    { schoolName: '四日市中央工業', department: '化学工学', quota: 18, finalApplicants: 20, finalRate: 1.11 },
+    { schoolName: '四日市中央工業', department: '都市工学', quota: 18, finalApplicants: 22, finalRate: 1.22 },
+    { schoolName: '四日市中央工業', department: '設備システム', quota: 18, finalApplicants: 14, finalRate: 0.78 },
+    { schoolName: '四日市商業', department: '商業', quota: 92, finalApplicants: 87, finalRate: 0.95 },
+    { schoolName: '四日市商業', department: '情報マネジメント', quota: 18, finalApplicants: 12, finalRate: 0.67 },
+    { schoolName: '四日市農芸', department: '農業科学・食品科学・環境造園（くくり募集）', quota: 54, finalApplicants: 50, finalRate: 0.93 },
+    { schoolName: '四日市農芸', department: '生活文化', quota: 36, finalApplicants: 55, finalRate: 1.53 },
+    { schoolName: '菰野', department: '普通', quota: 107, finalApplicants: 103, finalRate: 0.96 },
+    { schoolName: '川越', department: '探究', quota: 200, finalApplicants: 211, finalRate: 1.06 },
+    { schoolName: '川越', department: '国際探究', quota: 40, finalApplicants: 91, finalRate: 2.28 },
+    { schoolName: '神戸', department: '普通', quota: 200, finalApplicants: 128, finalRate: 0.64 },
+    { schoolName: '神戸', department: '理数', quota: 40, finalApplicants: 114, finalRate: 2.85 },
+  ],
+};
