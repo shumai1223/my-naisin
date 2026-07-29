@@ -5,6 +5,7 @@ import { EXAM_SCORE_STATISTICS_CHIBA } from '@/data/exam-score-statistics/chiba'
 import { EXAM_SCORE_STATISTICS_TOKYO } from '@/data/exam-score-statistics/tokyo';
 import { EXAM_SCORE_STATISTICS_NARA } from '@/data/exam-score-statistics/nara';
 import { EXAM_SCORE_STATISTICS_HYOGO } from '@/data/exam-score-statistics/hyogo';
+import { EXAM_SCORE_STATISTICS_NIIGATA } from '@/data/exam-score-statistics/niigata';
 import { EXAM_SCORE_STATISTICS_BY_PREFECTURE, EXAM_SCORE_STATISTICS_FILES } from '@/data/exam-score-statistics';
 
 describe('isPlausibleSubjectSum', () => {
@@ -149,16 +150,32 @@ describe('EXAM_SCORE_STATISTICS_HYOGO(パイロット実データ)', () => {
   });
 });
 
+describe('EXAM_SCORE_STATISTICS_NIIGATA(パイロット実データ)', () => {
+  it('5年度分(令和4〜8年度)が収録されている', () => {
+    expect(EXAM_SCORE_STATISTICS_NIIGATA.years).toHaveLength(5);
+  });
+
+  it('各教科100点満点・totalAverageは未設定(原資料の合計値は合計でなく平均のため意図的に格納しない)', () => {
+    for (const year of EXAM_SCORE_STATISTICS_NIIGATA.years) {
+      expect(year.subjects).toHaveLength(5);
+      for (const s of year.subjects) expect(s.maxScore).toBe(100);
+      expect(year.totalAverage).toBeUndefined();
+      expect(isPlausibleSubjectSum(year)).toBe(true);
+    }
+  });
+});
+
 describe('exam-score-statistics index', () => {
-  it('kochi/saitama/chiba/tokyo/nara/hyogoの6県が集約されている', () => {
+  it('kochi/saitama/chiba/tokyo/nara/hyogo/niigataの7県が集約されている', () => {
     expect(Object.keys(EXAM_SCORE_STATISTICS_BY_PREFECTURE).sort()).toEqual([
       'chiba',
       'hyogo',
       'kochi',
       'nara',
+      'niigata',
       'saitama',
       'tokyo',
     ]);
-    expect(EXAM_SCORE_STATISTICS_FILES).toHaveLength(6);
+    expect(EXAM_SCORE_STATISTICS_FILES).toHaveLength(7);
   });
 });
