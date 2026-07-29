@@ -16,6 +16,7 @@ import { EXAM_SCORE_STATISTICS_AKITA } from '@/data/exam-score-statistics/akita'
 import { EXAM_SCORE_STATISTICS_NAGANO } from '@/data/exam-score-statistics/nagano';
 import { EXAM_SCORE_STATISTICS_SHIZUOKA } from '@/data/exam-score-statistics/shizuoka';
 import { EXAM_SCORE_STATISTICS_FUKUOKA } from '@/data/exam-score-statistics/fukuoka';
+import { EXAM_SCORE_STATISTICS_HIROSHIMA } from '@/data/exam-score-statistics/hiroshima';
 import { EXAM_SCORE_STATISTICS_BY_PREFECTURE, EXAM_SCORE_STATISTICS_FILES } from '@/data/exam-score-statistics';
 
 describe('isPlausibleSubjectSum', () => {
@@ -403,8 +404,29 @@ describe('EXAM_SCORE_STATISTICS_FUKUOKA(パイロット実データ・60点満�
   });
 });
 
+describe('EXAM_SCORE_STATISTICS_HIROSHIMA(パイロット実データ・2つの公式PDFで令和7年度が重複検証済み)', () => {
+  it('3年度分(令和6〜8年度)が収録されている', () => {
+    expect(EXAM_SCORE_STATISTICS_HIROSHIMA.years).toHaveLength(3);
+  });
+
+  it('各教科50点満点(5教科合計250点満点体系)・test-takersで統一されている', () => {
+    for (const year of EXAM_SCORE_STATISTICS_HIROSHIMA.years) {
+      expect(year.averageType).toBe('test-takers');
+      expect(year.subjects).toHaveLength(5);
+      for (const s of year.subjects) expect(s.maxScore).toBe(50);
+    }
+  });
+
+  it('原資料の「5教科平均」は相加平均(合計ではない)のためtotalAverageは未設定', () => {
+    for (const year of EXAM_SCORE_STATISTICS_HIROSHIMA.years) {
+      expect(year.totalAverage).toBeUndefined();
+      expect(isPlausibleSubjectSum(year)).toBe(true);
+    }
+  });
+});
+
 describe('exam-score-statistics index', () => {
-  it('kochi/saitama/chiba/tokyo/nara/hyogo/niigata/gunma/miyagi/hokkaido/fukushima/aomori/iwate/akita/nagano/shizuoka/fukuokaの17県が集約されている', () => {
+  it('kochi/saitama/chiba/tokyo/nara/hyogo/niigata/gunma/miyagi/hokkaido/fukushima/aomori/iwate/akita/nagano/shizuoka/fukuoka/hiroshimaの18県が集約されている', () => {
     expect(Object.keys(EXAM_SCORE_STATISTICS_BY_PREFECTURE).sort()).toEqual([
       'akita',
       'aomori',
@@ -412,6 +434,7 @@ describe('exam-score-statistics index', () => {
       'fukuoka',
       'fukushima',
       'gunma',
+      'hiroshima',
       'hokkaido',
       'hyogo',
       'iwate',
@@ -424,6 +447,6 @@ describe('exam-score-statistics index', () => {
       'shizuoka',
       'tokyo',
     ]);
-    expect(EXAM_SCORE_STATISTICS_FILES).toHaveLength(17);
+    expect(EXAM_SCORE_STATISTICS_FILES).toHaveLength(18);
   });
 });
