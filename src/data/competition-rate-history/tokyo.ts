@@ -32,6 +32,7 @@ const REIWA_7: YearSnapshot = {
   fiscalYear: '令和7年度（2025年度）',
   ...SOURCE,
   origin: 'current-year-column',
+  granularity: 'category-detail',
   categories: [
     { label: '普通科(コース、単位制、島しょ、海外帰国生徒対象以外)計', schoolCount: 102, quota: 21255, applicants: 28843, rate: 1.36 },
     { label: '普通科(島しょ)計', schoolCount: 6, quota: 307, applicants: 110, rate: 0.36 },
@@ -63,6 +64,7 @@ const REIWA_6: YearSnapshot = {
   fiscalYear: '令和6年度（2024年度）',
   ...SOURCE,
   origin: 'prior-year-parenthetical',
+  granularity: 'category-detail',
   categories: [
     { label: '普通科(コース、単位制、島しょ、海外帰国生徒対象以外)計', quota: 21481, applicants: 31551, rate: 1.47 },
     { label: '普通科(島しょ)計', quota: 306, applicants: 91, rate: 0.30 },
@@ -90,7 +92,39 @@ const REIWA_6: YearSnapshot = {
   grandTotal: { label: '全日制合計', quota: 30343, applicants: 42017, rate: 1.38 },
 };
 
+/**
+ * 令和5年度総括表PDF（https://www.kyoiku.metro.tokyo.lg.jp/documents/d/kyoiku/01_teisei_2）は
+ * 「※令和5年2月21日に数字を一部訂正しました」との訂正注記付きで、訂正箇所が原本PDF上に
+ * 手書き風の取消線・訂正数値として重ねて表示されている（例: 全日制合計の最終応募人員が
+ * 42,236→42,238等）。訂正前後どちらが最終値か学科区分ごとに1件ずつ確実に判別する自信が
+ * 持てなかったため、区分別内訳（categories）の転記は見送り、全日制合計のみを収録する
+ * （granularity='grand-total-only'）。全日制合計の数値自体は教委発表を報じる独立した二次情報源
+ * 2件（よみうり進学メディア・jyuken-ex.jp、いずれも訂正後の最終値と一致）でクロスチェック済み。
+ */
+const REIWA_5: YearSnapshot = {
+  fiscalYear: '令和5年度（2023年度）',
+  sourceUrl: 'https://www.kyoiku.metro.tokyo.lg.jp/documents/d/kyoiku/01_teisei_2',
+  sourceTitle: '東京都教育委員会 令和5年度東京都立高等学校入学者選抜応募状況総括表（全日制）',
+  fetchedAt: '2026-07-29',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制合計', schoolCount: 167, quota: 30825, applicants: 42238, rate: 1.37 },
+};
+
+/** 同PDFの前年度欄（括弧内）由来。全日制合計のみ、二次情報源でクロスチェック済み（理由はREIWA_5コメント参照）。 */
+const REIWA_4: YearSnapshot = {
+  fiscalYear: '令和4年度（2022年度）',
+  sourceUrl: 'https://www.kyoiku.metro.tokyo.lg.jp/documents/d/kyoiku/01_teisei_2',
+  sourceTitle: '東京都教育委員会 令和5年度東京都立高等学校入学者選抜応募状況総括表（全日制）',
+  fetchedAt: '2026-07-29',
+  origin: 'prior-year-parenthetical',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制合計', quota: 30306, applicants: 41489, rate: 1.37 },
+};
+
 export const TOKYO_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'tokyo',
-  years: [REIWA_7, REIWA_6],
+  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4],
 };

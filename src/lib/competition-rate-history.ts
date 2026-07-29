@@ -32,6 +32,13 @@ export interface YearSnapshot {
   fetchedAt: string;
   /** 原資料が「今年度実数／（前年度実数）」の形で2年分を併記している場合、この年度分がどちら由来かを記録する。 */
   origin: 'current-year-column' | 'prior-year-parenthetical';
+  /**
+   * 'category-detail'=学科区分ごとの内訳まで転記済み（categoriesが空でない・grandTotalと突合可能）。
+   * 'grand-total-only'=原資料に区分内訳はあるが、訂正履歴等により内訳の正確な転記に自信が持てない
+   * （またはまだ着手していない）ため、教委発表・複数の独立した二次情報源で相互検証できた
+   * 全日制合計のみを記録する（Y-0憲法③「機械可読不能は正直にスキップ」の精神を転記精度にも適用）。
+   */
+  granularity: 'category-detail' | 'grand-total-only';
   categories: CategoryRateEntry[];
   /** 全日制合計等、原資料の最上位集計行（突合対象）。 */
   grandTotal: CategoryRateEntry;
