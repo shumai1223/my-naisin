@@ -1,0 +1,70 @@
+/**
+ * Λ-5 私立高校マスター 第二段: 各私立校の公式募集要項PDFから取得した募集定員データ。
+ *
+ * school-master.ts（Y-1/Λ-5第一段）が生成する schools-private/{県}.ts は文科省CSV由来の
+ * 学校コード・名称・住所のみ（機械生成・全校網羅）。本ファイルはそれとは別に、各校の
+ * 公式サイトが公開する募集要項PDF/ページから人手で確認した募集定員等を1校ずつ収録する
+ * （手動収集・揃う分だけ）。
+ *
+ * Y-0憲法を継承: ①公表値のみ ②1データ点1出典（学校単位でsourceを持つ） ③確認できない
+ * 学校は独自推定をせず skipped 配列に理由付きで正直に記録する。
+ */
+
+/** 学科・コース別の募集定員（コース分けが無い学校は単一エントリでよい）。 */
+export interface CourseCapacity {
+  courseName: string;
+  capacity: number;
+}
+
+export interface PrivateSchoolDetailSource {
+  url: string;
+  docTitle: string;
+  /** この学校のデータを確認した日（'YYYY-MM-DD'）。 */
+  fetchedAt: string;
+}
+
+/** school-master.ts の SchoolRecord.code と一致させ、参照台帳（第一段）と紐付ける。 */
+export interface PrivateSchoolDetail {
+  schoolCode: string;
+  schoolName: string;
+  /** 例: '令和8年度' '2026年度'（学校の公表表記をそのまま使う）。 */
+  fiscalYearLabel: string;
+  courses: CourseCapacity[];
+  /** courses の合計、またはコース分けが無い場合の単一定員。 */
+  totalCapacity: number;
+  source: PrivateSchoolDetailSource;
+}
+
+/** 確認できなかった学校を理由付きで記録する（捏造ゼロ・正直にスキップ台帳）。 */
+export interface PrivateSchoolSkipEntry {
+  schoolCode: string;
+  schoolName: string;
+  reason: string;
+}
+
+export interface PrivateSchoolDetailFile {
+  prefectureCode: string;
+  schools: PrivateSchoolDetail[];
+  skipped: PrivateSchoolSkipEntry[];
+}
+
+/** courses の合計が totalCapacity と一致するか（手動転記ミスの検出用）。courses空なら常にtrue。 */
+export function checkCourseCapacitySum(detail: PrivateSchoolDetail): boolean {
+  if (detail.courses.length === 0) return true;
+  const sum = detail.courses.reduce((acc, c) => acc + c.capacity, 0);
+  return sum === detail.totalCapacity;
+}
+
+/** 同一県内でschoolCodeが schools と skipped の両方に重複していないか（収録漏れ・二重登録の検出）。 */
+export function findDuplicateOrMissingCodes(
+  file: PrivateSchoolDetailFile,
+  allCodesInPrefecture: string[]
+): { duplicates: string[]; missing: string[] } {
+  const covered = [...file.schools.map((s) => s.schoolCode), ...file.skipped.map((s) => s.schoolCode)];
+  const seen = new Map<string, number>();
+  for (const code of covered) seen.set(code, (seen.get(code) ?? 0) + 1);
+  const duplicates = [...seen.entries()].filter(([, n]) => n > 1).map(([code]) => code);
+  const coveredSet = new Set(covered);
+  const missing = allCodesInPrefecture.filter((code) => !coveredSet.has(code));
+  return { duplicates, missing };
+}
