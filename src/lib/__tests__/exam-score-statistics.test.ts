@@ -11,6 +11,7 @@ import { EXAM_SCORE_STATISTICS_MIYAGI } from '@/data/exam-score-statistics/miyag
 import { EXAM_SCORE_STATISTICS_HOKKAIDO } from '@/data/exam-score-statistics/hokkaido';
 import { EXAM_SCORE_STATISTICS_FUKUSHIMA } from '@/data/exam-score-statistics/fukushima';
 import { EXAM_SCORE_STATISTICS_AOMORI } from '@/data/exam-score-statistics/aomori';
+import { EXAM_SCORE_STATISTICS_IWATE } from '@/data/exam-score-statistics/iwate';
 import { EXAM_SCORE_STATISTICS_BY_PREFECTURE, EXAM_SCORE_STATISTICS_FILES } from '@/data/exam-score-statistics';
 
 describe('isPlausibleSubjectSum', () => {
@@ -285,8 +286,32 @@ describe('EXAM_SCORE_STATISTICS_AOMORI(パイロット実データ・複数記�
   });
 });
 
+describe('EXAM_SCORE_STATISTICS_IWATE(パイロット実データ・令和8年度は一次PDF直読み)', () => {
+  it('4エントリ(令和6年度×test-takers、令和7年度×test-takers、令和8年度×test-takers/passers)が収録されている', () => {
+    expect(EXAM_SCORE_STATISTICS_IWATE.years).toHaveLength(4);
+  });
+
+  it('各教科100点満点・5教科の内訳を持つ', () => {
+    for (const year of EXAM_SCORE_STATISTICS_IWATE.years) {
+      expect(year.subjects).toHaveLength(5);
+      for (const s of year.subjects) expect(s.maxScore).toBe(100);
+    }
+  });
+
+  it('令和6年度分は一次資料が合計を明記していないためtotalAverageは未設定', () => {
+    const r6 = EXAM_SCORE_STATISTICS_IWATE.years.find((y) => y.fiscalYearLabel === '令和6年度');
+    expect(r6?.totalAverage).toBeUndefined();
+  });
+
+  it('全エントリで教科別平均点の合計がtotalAverageと妥当な範囲で一致する', () => {
+    for (const year of EXAM_SCORE_STATISTICS_IWATE.years) {
+      expect(isPlausibleSubjectSum(year)).toBe(true);
+    }
+  });
+});
+
 describe('exam-score-statistics index', () => {
-  it('kochi/saitama/chiba/tokyo/nara/hyogo/niigata/gunma/miyagi/hokkaido/fukushima/aomoriの12県が集約されている', () => {
+  it('kochi/saitama/chiba/tokyo/nara/hyogo/niigata/gunma/miyagi/hokkaido/fukushima/aomori/iwateの13県が集約されている', () => {
     expect(Object.keys(EXAM_SCORE_STATISTICS_BY_PREFECTURE).sort()).toEqual([
       'aomori',
       'chiba',
@@ -294,6 +319,7 @@ describe('exam-score-statistics index', () => {
       'gunma',
       'hokkaido',
       'hyogo',
+      'iwate',
       'kochi',
       'miyagi',
       'nara',
@@ -301,6 +327,6 @@ describe('exam-score-statistics index', () => {
       'saitama',
       'tokyo',
     ]);
-    expect(EXAM_SCORE_STATISTICS_FILES).toHaveLength(12);
+    expect(EXAM_SCORE_STATISTICS_FILES).toHaveLength(13);
   });
 });
