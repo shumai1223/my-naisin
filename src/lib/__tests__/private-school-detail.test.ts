@@ -1,6 +1,9 @@
 import { checkCourseCapacitySum, findDuplicateOrMissingCodes, type PrivateSchoolDetail } from '@/lib/private-school-detail';
 import { PRIVATE_SCHOOL_DETAIL_TOTTORI } from '@/data/private-school-detail/tottori';
+import { PRIVATE_SCHOOL_DETAIL_FUKUI } from '@/data/private-school-detail/fukui';
+import { PRIVATE_SCHOOL_DETAIL_BY_PREFECTURE, PRIVATE_SCHOOL_DETAIL_FILES } from '@/data/private-school-detail';
 import { SCHOOLS_PRIVATE_TOTTORI } from '@/data/schools-private/tottori';
+import { SCHOOLS_PRIVATE_FUKUI } from '@/data/schools-private/fukui';
 
 describe('checkCourseCapacitySum', () => {
   const base: PrivateSchoolDetail = {
@@ -74,5 +77,26 @@ describe('PRIVATE_SCHOOL_DETAIL_TOTTORI(パイロット実データ)', () => {
   it('収録4校+スキップ4校で参照台帳の8校と一致する', () => {
     expect(PRIVATE_SCHOOL_DETAIL_TOTTORI.schools.length).toBe(4);
     expect(PRIVATE_SCHOOL_DETAIL_TOTTORI.skipped.length).toBe(4);
+  });
+});
+
+describe('PRIVATE_SCHOOL_DETAIL_FUKUI(全校スキップ台帳)', () => {
+  it('schools-private/fukui.tsの全8校がskippedで網羅されている(重複・欠落なし)', () => {
+    const allCodes = SCHOOLS_PRIVATE_FUKUI.schools.map((s) => s.code);
+    const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_FUKUI, allCodes);
+    expect(result.duplicates).toEqual([]);
+    expect(result.missing).toEqual([]);
+  });
+
+  it('確度の高い確認が取れず全8校スキップ', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_FUKUI.schools.length).toBe(0);
+    expect(PRIVATE_SCHOOL_DETAIL_FUKUI.skipped.length).toBe(8);
+  });
+});
+
+describe('private-school-detail index', () => {
+  it('tottori/fukuiの2県が集約されている', () => {
+    expect(Object.keys(PRIVATE_SCHOOL_DETAIL_BY_PREFECTURE).sort()).toEqual(['fukui', 'tottori']);
+    expect(PRIVATE_SCHOOL_DETAIL_FILES).toHaveLength(2);
   });
 });
