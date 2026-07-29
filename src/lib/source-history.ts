@@ -125,6 +125,30 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       note: 'ZZ-9b再検証優先度キュー(最終確認日2026-04-22で最古グループ)により選定・再検証。一般入学者選抜で中1・中2の評定を2倍(各90点満点)・中3の評定を6倍(270点満点)とし合計450点満点とする計算方式を、教育系情報サイト複数(進研ゼミ/塾ジャーナル系)で独立にクロスチェックし、変更が無いことを確認した。数値・比率は既存記載(gradeMultipliers 1:2/2:2/3:6・maxScore 450)と完全一致',
     },
   ],
+  ehime: [
+    {
+      date: '2026-07-26',
+      sourceUrl: 'https://ehime-kyoiku.esnet.ed.jp/koukou/nyuusi/r08nyuusi',
+      sourceTitle: '愛媛県教育委員会 県立学校入学者選抜等関連情報',
+      note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16グループ)により選定・再検証。中1・中2・中3の評定を均等に合算する135点満点の内申点計算方式(実技傾斜なし・学力検査500点満点)を、教育系情報サイト複数(アルファ家庭教師/塾選/愛大研等)で独立にクロスチェックし、変更が無いことを確認した。数値は既存記載(gradeMultipliers全学年1・practicalMultiplier 1・maxScore 135)と完全一致',
+    },
+  ],
+  ibaraki: [
+    {
+      date: '2026-07-26',
+      sourceUrl: 'https://kyoiku.pref.ibaraki.jp/gakko/nyushi/highschool/youkou2026/',
+      sourceTitle: '茨城県教育委員会 入学者選抜実施要項',
+      note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16グループ)により選定・再検証。中1・中2・中3の評定を均等に合算する135点満点の内申点計算方式(実技傾斜なし)を、教育系情報サイト複数(進研ゼミ/塾ラボ/いばらき受験ナビ)で独立にクロスチェックし、変更が無いことを確認した。数値は既存記載(gradeMultipliers全学年1・practicalMultiplier 1・maxScore 135)と完全一致',
+    },
+  ],
+  okayama: [
+    {
+      date: '2026-07-26',
+      sourceUrl: 'https://www.pref.okayama.jp/site/16/913706.html',
+      sourceTitle: '岡山県 県立高等学校の入学者選抜',
+      note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16グループ)により選定・再検証。既存記載が自ら「簡易計算」と明記している通り、実際は中1・中2各45点+中3が110点(主要5教科×2倍=50点+実技4教科×3倍=60点)の合計200点満点(学力検査350点満点)という、単純な学年×教科倍率では表現しきれない構造であることを教育系情報サイト複数(塾選/エデュネッツ/KSB)で改めて確認した。ツール側の簡易表現(gradeMultipliers全学年1・practicalMultiplier 2・maxScore 195/actualMaxScore 200)・既存noteの注記内容ともに変更不要と判断',
+    },
+  ],
   chiba: [
     {
       date: '2026-07-24',
