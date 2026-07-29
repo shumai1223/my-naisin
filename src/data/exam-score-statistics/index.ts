@@ -4,12 +4,14 @@
 import { EXAM_SCORE_STATISTICS_KOCHI } from './kochi';
 import { EXAM_SCORE_STATISTICS_SAITAMA } from './saitama';
 import { EXAM_SCORE_STATISTICS_CHIBA } from './chiba';
+import { EXAM_SCORE_STATISTICS_TOKYO } from './tokyo';
 import type { ExamScoreStatisticsFile } from '@/lib/exam-score-statistics';
 
 export const EXAM_SCORE_STATISTICS_BY_PREFECTURE: Record<string, ExamScoreStatisticsFile> = {
   kochi: EXAM_SCORE_STATISTICS_KOCHI,
   saitama: EXAM_SCORE_STATISTICS_SAITAMA,
   chiba: EXAM_SCORE_STATISTICS_CHIBA,
+  tokyo: EXAM_SCORE_STATISTICS_TOKYO,
 };
 
 export const EXAM_SCORE_STATISTICS_FILES: ExamScoreStatisticsFile[] = Object.values(
