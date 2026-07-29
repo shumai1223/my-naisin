@@ -1,6 +1,7 @@
 import { isPlausibleSubjectSum, type ExamScoreYearEntry } from '@/lib/exam-score-statistics';
 import { EXAM_SCORE_STATISTICS_KOCHI } from '@/data/exam-score-statistics/kochi';
 import { EXAM_SCORE_STATISTICS_SAITAMA } from '@/data/exam-score-statistics/saitama';
+import { EXAM_SCORE_STATISTICS_CHIBA } from '@/data/exam-score-statistics/chiba';
 import { EXAM_SCORE_STATISTICS_BY_PREFECTURE, EXAM_SCORE_STATISTICS_FILES } from '@/data/exam-score-statistics';
 
 describe('isPlausibleSubjectSum', () => {
@@ -78,9 +79,21 @@ describe('EXAM_SCORE_STATISTICS_SAITAMA(パイロット実データ)', () => {
   });
 });
 
+describe('EXAM_SCORE_STATISTICS_CHIBA(パイロット実データ)', () => {
+  it('4年度分(令和2年度前期・後期・令和3年度・令和4年度)が収録されている', () => {
+    expect(EXAM_SCORE_STATISTICS_CHIBA.years).toHaveLength(4);
+  });
+
+  it('全年度で教科別平均点の合計がtotalAverageと妥当な範囲で一致する（内部矛盾のあった追検査行は除外済み）', () => {
+    for (const year of EXAM_SCORE_STATISTICS_CHIBA.years) {
+      expect(isPlausibleSubjectSum(year)).toBe(true);
+    }
+  });
+});
+
 describe('exam-score-statistics index', () => {
-  it('kochi/saitamaの2県が集約されている', () => {
-    expect(Object.keys(EXAM_SCORE_STATISTICS_BY_PREFECTURE).sort()).toEqual(['kochi', 'saitama']);
-    expect(EXAM_SCORE_STATISTICS_FILES).toHaveLength(2);
+  it('kochi/saitama/chibaの3県が集約されている', () => {
+    expect(Object.keys(EXAM_SCORE_STATISTICS_BY_PREFECTURE).sort()).toEqual(['chiba', 'kochi', 'saitama']);
+    expect(EXAM_SCORE_STATISTICS_FILES).toHaveLength(3);
   });
 });
