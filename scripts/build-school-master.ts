@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 /**
- * Y-1 学校マスター基盤: 文科省「学校コード一覧」CSVを取り込み、県別チャンク
- * （`src/data/schools/{code}.ts`）+ 集約indexを生成する。
+ * Y-1/Λ-5 学校マスター基盤: 文科省「学校コード一覧」CSVを取り込み、公立（Y-1）・私立（Λ-5）
+ * それぞれの県別チャンク（`src/data/schools/{code}.ts` / `src/data/schools-private/{code}.ts`）
+ * + 集約indexを1回のCSV取得から生成する。
  *
  * 一次ソース: https://www.mext.go.jp/b_menu/toukei/mext_01087.html
  *   東日本CSV: https://www.mext.go.jp/content/20260529-mxt_chousa01-000011635_2.csv
@@ -20,7 +21,9 @@
  *      （全行に同一文字列を反復するとバンドルが無駄に膨らむため、ファイルレベルで代表させる。
  *       全レコードが同一の一次資料に由来するため、この粒度で出典の追跡可能性は損なわれない）
  *   ③機械可読不能は正直にスキップ＝列数が合わない行はparseMextRowがnullを返し自動除外
- *   ④公立のみ・現存校のみ＝isPublicActiveHighSchoolでフィルタ
+ *   ④現存校のみ＝公立(Y-1)はisPublicActiveHighSchool・私立(Λ-5)はisPrivateActiveHighSchoolで
+ *     フィルタ（本ファイルが生成するのは学校コード・名称・住所のみ。私立校の定員・偏差値等の
+ *     募集要項データはΛ-5の別タスクとして学校ごとに個別収集し、この一覧はその参照台帳となる）
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -30,16 +33,19 @@ import { parseCsv } from '../src/lib/csv-parse';
 import {
   parseMextRow,
   isPublicActiveHighSchool,
+  isPrivateActiveHighSchool,
   extractPrefectureNumber,
   buildPrefectureNumberMap,
   toSchoolRecord,
   type SchoolRecord,
+  type RawMextRow,
 } from '../src/lib/school-master';
 import { PREFECTURES } from '../src/lib/prefectures';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
 const OUT_DIR = path.join(ROOT, 'src', 'data', 'schools');
+const OUT_DIR_PRIVATE = path.join(ROOT, 'src', 'data', 'schools-private');
 
 const EAST_URL = 'https://www.mext.go.jp/content/20260529-mxt_chousa01-000011635_2.csv';
 const WEST_URL = 'https://www.mext.go.jp/content/20260529-mxt_chousa01-000011635_4.csv';
@@ -66,20 +72,19 @@ async function loadCsvText(url: string, localPath?: string): Promise<string> {
   return new TextDecoder('shift_jis').decode(buf);
 }
 
-async function main() {
-  const args = parseArgs(process.argv.slice(2));
-  const fetchedAt = new Date().toISOString().slice(0, 10);
-
-  console.log('CSVを読み込み中...');
-  const [eastText, westText] = await Promise.all([
-    loadCsvText(EAST_URL, args.east),
-    loadCsvText(WEST_URL, args.west),
-  ]);
-
-  const eastRows = parseCsv(eastText);
-  const westRows = parseCsv(westText);
-  console.log(`east行数(ヘッダ込み): ${eastRows.length} / west行数: ${westRows.length}`);
-
+/**
+ * east/west行データからフィルタ条件(公立/私立)に合うレコードを都道府県別チャンクに書き出す
+ * （公立=Y-1、私立=Λ-5で共通の生成ロジック。設置区分の絞り込みだけが異なる）。
+ */
+function buildMaster(
+  eastRows: string[][],
+  westRows: string[][],
+  fetchedAt: string,
+  filterFn: (row: RawMextRow) => boolean,
+  outDir: string,
+  varPrefix: string,
+  ownerLabel: string
+): { total: number; emptyPrefectures: string[] } {
   const prefNumberMap = buildPrefectureNumberMap(PREFECTURES.map((p) => p.code));
 
   type Bucket = { code: string; sourceUrl: string; records: SchoolRecord[] };
@@ -97,7 +102,7 @@ async function main() {
         if (/^[A-Z0-9]{10,}/.test(cols[0] ?? '')) skippedMalformed++;
         continue;
       }
-      if (!isPublicActiveHighSchool(row)) continue;
+      if (!filterFn(row)) continue;
 
       const prefNum = extractPrefectureNumber(row.prefectureNumberField);
       const prefCode = prefNum ? prefNumberMap[prefNum] : undefined;
@@ -115,15 +120,15 @@ async function main() {
   ingest(eastRows, EAST_URL);
   ingest(westRows, WEST_URL);
 
-  if (skippedMalformed > 0) console.log(`⚠️ 列数不整合でスキップした行: ${skippedMalformed}件`);
-  if (skippedUnmappedPref > 0) console.log(`⚠️ 都道府県番号を対応付けできずスキップした行: ${skippedUnmappedPref}件`);
+  if (skippedMalformed > 0) console.log(`⚠️ [${ownerLabel}] 列数不整合でスキップした行: ${skippedMalformed}件`);
+  if (skippedUnmappedPref > 0) console.log(`⚠️ [${ownerLabel}] 都道府県番号を対応付けできずスキップした行: ${skippedUnmappedPref}件`);
 
-  fs.mkdirSync(OUT_DIR, { recursive: true });
+  fs.mkdirSync(outDir, { recursive: true });
 
   let total = 0;
   const indexLines: string[] = [];
   indexLines.push('/**');
-  indexLines.push(' * Y-1 学校マスター基盤: 47都道府県分のチャンクを集約するindex（生成物・手編集禁止）。');
+  indexLines.push(` * ${ownerLabel}: 47都道府県分のチャンクを集約するindex（生成物・手編集禁止）。`);
   indexLines.push(' * 生成: scripts/build-school-master.ts。再生成すると内容は上書きされる。');
   indexLines.push(' */');
   indexLines.push("import type { SchoolMasterFile } from '@/lib/school-master';");
@@ -137,13 +142,13 @@ async function main() {
     total += bucket.records.length;
     if (bucket.records.length === 0) emptyPrefectures.push(p.code);
 
-    // 通常はingest()内でヒットしたファイルのURLが入る。0件（本来ありえない）だった県のみ、
+    // 通常はingest()内でヒットしたファイルのURLが入る。0件だった県のみ、
     // 東日本/西日本の区切り(愛知=23までが東・滋賀=25からが西)で機械的に補う。
     const sourceUrl = bucket.sourceUrl || ((prefNumberByCode.get(p.code) ?? 0) <= 24 ? EAST_URL : WEST_URL);
 
-    const varName = `SCHOOLS_${p.code.toUpperCase().replace(/-/g, '_')}`;
+    const varName = `${varPrefix}_${p.code.toUpperCase().replace(/-/g, '_')}`;
     const fileContent = `/**
- * ${p.name}の公立高等学校マスター（Y-1・生成物・手編集禁止）。
+ * ${p.name}の${ownerLabel}（生成物・手編集禁止）。
  * 一次ソース: ${DOC_TITLE}
  * ${EDITION}
  * 取得日: ${fetchedAt}
@@ -166,7 +171,7 @@ export const ${varName}: SchoolMasterFile = ${JSON.stringify(
       2
     )};
 `;
-    fs.writeFileSync(path.join(OUT_DIR, `${p.code}.ts`), fileContent, 'utf8');
+    fs.writeFileSync(path.join(outDir, `${p.code}.ts`), fileContent, 'utf8');
 
     indexLines.push(`import { ${varName} } from './${p.code}';`);
   }
@@ -174,7 +179,7 @@ export const ${varName}: SchoolMasterFile = ${JSON.stringify(
   indexLines.push('');
   indexLines.push('export const SCHOOL_MASTER_BY_PREFECTURE: Record<string, SchoolMasterFile> = {');
   for (const p of PREFECTURES) {
-    const varName = `SCHOOLS_${p.code.toUpperCase().replace(/-/g, '_')}`;
+    const varName = `${varPrefix}_${p.code.toUpperCase().replace(/-/g, '_')}`;
     indexLines.push(`  ${p.code}: ${varName},`);
   }
   indexLines.push('};');
@@ -182,11 +187,51 @@ export const ${varName}: SchoolMasterFile = ${JSON.stringify(
   indexLines.push('export const SCHOOL_MASTER_FILES: SchoolMasterFile[] = Object.values(SCHOOL_MASTER_BY_PREFECTURE);');
   indexLines.push('');
 
-  fs.writeFileSync(path.join(OUT_DIR, 'index.ts'), indexLines.join('\n'), 'utf8');
+  fs.writeFileSync(path.join(outDir, 'index.ts'), indexLines.join('\n'), 'utf8');
 
-  console.log(`\n✅ 完了: 47都道府県・合計${total}校を書き出しました（${OUT_DIR}）`);
-  if (emptyPrefectures.length > 0) {
-    console.log(`⚠️ 0件だった都道府県: ${emptyPrefectures.join(', ')}（要確認・本来は全県1校以上あるはず）`);
+  return { total, emptyPrefectures };
+}
+
+async function main() {
+  const args = parseArgs(process.argv.slice(2));
+  const fetchedAt = new Date().toISOString().slice(0, 10);
+
+  console.log('CSVを読み込み中...');
+  const [eastText, westText] = await Promise.all([
+    loadCsvText(EAST_URL, args.east),
+    loadCsvText(WEST_URL, args.west),
+  ]);
+
+  const eastRows = parseCsv(eastText);
+  const westRows = parseCsv(westText);
+  console.log(`east行数(ヘッダ込み): ${eastRows.length} / west行数: ${westRows.length}`);
+
+  const pub = buildMaster(
+    eastRows,
+    westRows,
+    fetchedAt,
+    isPublicActiveHighSchool,
+    OUT_DIR,
+    'SCHOOLS',
+    'Y-1 公立高等学校マスター'
+  );
+  console.log(`\n✅ 公立: 47都道府県・合計${pub.total}校を書き出しました（${OUT_DIR}）`);
+  if (pub.emptyPrefectures.length > 0) {
+    console.log(`⚠️ 0件だった都道府県(公立): ${pub.emptyPrefectures.join(', ')}（要確認・本来は全県1校以上あるはず）`);
+  }
+
+  const priv = buildMaster(
+    eastRows,
+    westRows,
+    fetchedAt,
+    isPrivateActiveHighSchool,
+    OUT_DIR_PRIVATE,
+    'SCHOOLS_PRIVATE',
+    'Λ-5 私立高等学校マスター'
+  );
+  console.log(`\n✅ 私立: 47都道府県・合計${priv.total}校を書き出しました（${OUT_DIR_PRIVATE}）`);
+  if (priv.emptyPrefectures.length > 0) {
+    console.log(`⚠️ 0件だった都道府県(私立): ${priv.emptyPrefectures.join(', ')}（私立高校が存在しない県もあり得るため必ずしも異常ではない）`);
   }
 }
 

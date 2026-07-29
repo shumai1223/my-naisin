@@ -1,8 +1,8 @@
 /**
- * 栃木県の公立高等学校マスター（Y-1・生成物・手編集禁止）。
+ * 栃木県のY-1 公立高等学校マスター（生成物・手編集禁止）。
  * 一次ソース: 文部科学省 学校コード一覧（高等学校等・東日本/西日本）
  * 令和8年5月29日公表（令和8年5月1日時点・暫定版）
- * 取得日: 2026-07-24
+ * 取得日: 2026-07-29
  * 生成: scripts/build-school-master.ts（再生成すると上書きされる）
  */
 import type { SchoolMasterFile } from '@/lib/school-master';
@@ -13,7 +13,7 @@ export const SCHOOLS_TOCHIGI: SchoolMasterFile = {
     "url": "https://www.mext.go.jp/content/20260529-mxt_chousa01-000011635_2.csv",
     "docTitle": "文部科学省 学校コード一覧（高等学校等・東日本/西日本）",
     "edition": "令和8年5月29日公表（令和8年5月1日時点・暫定版）",
-    "fetchedAt": "2026-07-24"
+    "fetchedAt": "2026-07-29"
   },
   "schools": [
     {

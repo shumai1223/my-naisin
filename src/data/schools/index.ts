@@ -1,5 +1,5 @@
 /**
- * Y-1 学校マスター基盤: 47都道府県分のチャンクを集約するindex（生成物・手編集禁止）。
+ * Y-1 公立高等学校マスター: 47都道府県分のチャンクを集約するindex（生成物・手編集禁止）。
  * 生成: scripts/build-school-master.ts。再生成すると内容は上書きされる。
  */
 import type { SchoolMasterFile } from '@/lib/school-master';

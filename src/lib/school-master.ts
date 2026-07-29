@@ -70,6 +70,11 @@ export function isPublicActiveHighSchool(row: RawMextRow): boolean {
   return row.schoolType === 'D1(高校)' && row.establishment === '2(公)' && row.attributeAbolishDate === '';
 }
 
+/** Λ-5用: 高等学校（本校・分校とも含む）・設置区分=私立・廃止年月日が空（現存校）。 */
+export function isPrivateActiveHighSchool(row: RawMextRow): boolean {
+  return row.schoolType === 'D1(高校)' && row.establishment === '3(私)' && row.attributeAbolishDate === '';
+}
+
 /** '01(北海道)' のような表記から先頭2桁の都道府県番号を取り出す。取れなければnull。 */
 export function extractPrefectureNumber(field: string): string | null {
   const m = /^(\d{2})/.exec(field);

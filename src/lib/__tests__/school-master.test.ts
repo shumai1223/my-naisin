@@ -1,6 +1,7 @@
 import {
   parseMextRow,
   isPublicActiveHighSchool,
+  isPrivateActiveHighSchool,
   extractPrefectureNumber,
   buildPrefectureNumberMap,
   toSchoolRecord,
@@ -60,6 +61,32 @@ describe('isPublicActiveHighSchool', () => {
 
   it('廃止年月日が入っている(廃校)場合はfalse', () => {
     expect(isPublicActiveHighSchool({ ...base, attributeAbolishDate: '2023-05-01' })).toBe(false);
+  });
+});
+
+describe('isPrivateActiveHighSchool', () => {
+  const base = parseMextRow(VALID_ROW_COLS) as RawMextRow;
+
+  it('私立(3私)・高校・現存ならtrue', () => {
+    expect(isPrivateActiveHighSchool({ ...base, establishment: '3(私)' })).toBe(true);
+  });
+
+  it('公立(2公)はfalse', () => {
+    expect(isPrivateActiveHighSchool(base)).toBe(false);
+  });
+
+  it('国立(1国)はfalse', () => {
+    expect(isPrivateActiveHighSchool({ ...base, establishment: '1(国)' })).toBe(false);
+  });
+
+  it('高校以外(小学校等)はfalse', () => {
+    expect(isPrivateActiveHighSchool({ ...base, establishment: '3(私)', schoolType: 'B1(小学校)' })).toBe(false);
+  });
+
+  it('廃止年月日が入っている(廃校)場合はfalse', () => {
+    expect(
+      isPrivateActiveHighSchool({ ...base, establishment: '3(私)', attributeAbolishDate: '2023-05-01' })
+    ).toBe(false);
   });
 });
 
