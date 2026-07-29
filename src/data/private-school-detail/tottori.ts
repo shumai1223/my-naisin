@@ -38,6 +38,18 @@ export const PRIVATE_SCHOOL_DETAIL_TOTTORI: PrivateSchoolDetailFile = {
         fetchedAt: '2026-07-30',
       },
     },
+    {
+      schoolCode: 'D131310000070',
+      schoolName: '湯梨浜学園高等学校',
+      fiscalYearLabel: '令和8年度（2026年度）',
+      courses: [{ courseName: '特別進学コース（全日制）', capacity: 10 }],
+      totalCapacity: 10,
+      source: {
+        url: 'https://www.yurihamagakuen.ac.jp/admission/high/',
+        docTitle: '高等学校（全日制）募集要項（湯梨浜学園中学校・高等学校）',
+        fetchedAt: '2026-07-30',
+      },
+    },
   ],
   skipped: [
     {
@@ -56,18 +68,12 @@ export const PRIVATE_SCHOOL_DETAIL_TOTTORI: PrivateSchoolDetailFile = {
       schoolCode: 'D131310000043',
       schoolName: '米子北高等学校',
       reason:
-        '公式サイトに「令和8年度 生徒募集要項」PDFへのリンクは確認できたが、WebFetchがPDFバイナリを解析できずページ本文にも定員の記載が無かったため見送り(次回はPDFを直接Read toolで開く方法を推奨)。',
+        '「令和8年度 生徒募集要項」PDF(https://www.yonagokita.ed.jp/wp-content/uploads/2025/11/5ee48b95cef1bd31afb6b405f39053bc-1.pdf)への直接URLは特定できたが、全40頁でこの環境はpoppler未導入のためpages指定読み取りが機能せず内容確認に至らなかった(WebFetchも10MB超で拒否)。定員記載ページの位置が分からない限りこの環境では読了不可能なため見送り。',
     },
     {
       schoolCode: 'D131310000061',
       schoolName: '米子北斗高等学校',
       reason: '公式サイトの入試案内ページに定員の記載が無く、募集要項PDFの直接URLも特定できなかったため見送り。',
-    },
-    {
-      schoolCode: 'D131310000070',
-      schoolName: '湯梨浜学園高等学校',
-      reason:
-        '全日制・通信制それぞれの募集要項ページへのリンクは確認したが、定員の具体的な記載がページ本文になく問い合わせ推奨とされていたため見送り。',
     },
     {
       schoolCode: 'D131310000089',

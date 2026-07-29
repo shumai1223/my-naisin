@@ -71,8 +71,8 @@ describe('PRIVATE_SCHOOL_DETAIL_TOTTORI(パイロット実データ)', () => {
     expect(result.missing).toEqual([]);
   });
 
-  it('収録2校+スキップ6校で参照台帳の8校と一致する', () => {
-    expect(PRIVATE_SCHOOL_DETAIL_TOTTORI.schools.length).toBe(2);
-    expect(PRIVATE_SCHOOL_DETAIL_TOTTORI.skipped.length).toBe(6);
+  it('収録3校+スキップ5校で参照台帳の8校と一致する', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_TOTTORI.schools.length).toBe(3);
+    expect(PRIVATE_SCHOOL_DETAIL_TOTTORI.skipped.length).toBe(5);
   });
 });
