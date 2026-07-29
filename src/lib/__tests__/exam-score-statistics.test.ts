@@ -6,6 +6,7 @@ import { EXAM_SCORE_STATISTICS_TOKYO } from '@/data/exam-score-statistics/tokyo'
 import { EXAM_SCORE_STATISTICS_NARA } from '@/data/exam-score-statistics/nara';
 import { EXAM_SCORE_STATISTICS_HYOGO } from '@/data/exam-score-statistics/hyogo';
 import { EXAM_SCORE_STATISTICS_NIIGATA } from '@/data/exam-score-statistics/niigata';
+import { EXAM_SCORE_STATISTICS_GUNMA } from '@/data/exam-score-statistics/gunma';
 import { EXAM_SCORE_STATISTICS_BY_PREFECTURE, EXAM_SCORE_STATISTICS_FILES } from '@/data/exam-score-statistics';
 
 describe('isPlausibleSubjectSum', () => {
@@ -165,10 +166,36 @@ describe('EXAM_SCORE_STATISTICS_NIIGATA(パイロット実データ)', () => {
   });
 });
 
+describe('EXAM_SCORE_STATISTICS_GUNMA(パイロット実データ・既知の構造的不一致あり)', () => {
+  it('2年度分×2区分(全受検者/合格者)=4エントリが収録されている', () => {
+    expect(EXAM_SCORE_STATISTICS_GUNMA.years).toHaveLength(4);
+  });
+
+  it('test-takersは5教科の内訳を持ち、傾斜配点の影響でtotalAverageとの単純合計は一致しない(既知の構造的差異)', () => {
+    const testTakerYears = EXAM_SCORE_STATISTICS_GUNMA.years.filter((y) => y.averageType === 'test-takers');
+    expect(testTakerYears).toHaveLength(2);
+    for (const year of testTakerYears) {
+      expect(year.subjects).toHaveLength(5);
+      // 傾斜配点の影響で意図的にfalseになる(バグではない・ファイル冒頭コメント参照)
+      expect(isPlausibleSubjectSum(year)).toBe(false);
+    }
+  });
+
+  it('passersはsubjects=[]で合計のみ記録', () => {
+    const passerYears = EXAM_SCORE_STATISTICS_GUNMA.years.filter((y) => y.averageType === 'passers');
+    expect(passerYears).toHaveLength(2);
+    for (const year of passerYears) {
+      expect(year.subjects).toHaveLength(0);
+      expect(year.totalAverage).toBeDefined();
+    }
+  });
+});
+
 describe('exam-score-statistics index', () => {
-  it('kochi/saitama/chiba/tokyo/nara/hyogo/niigataの7県が集約されている', () => {
+  it('kochi/saitama/chiba/tokyo/nara/hyogo/niigata/gunmaの8県が集約されている', () => {
     expect(Object.keys(EXAM_SCORE_STATISTICS_BY_PREFECTURE).sort()).toEqual([
       'chiba',
+      'gunma',
       'hyogo',
       'kochi',
       'nara',
@@ -176,6 +203,6 @@ describe('exam-score-statistics index', () => {
       'saitama',
       'tokyo',
     ]);
-    expect(EXAM_SCORE_STATISTICS_FILES).toHaveLength(7);
+    expect(EXAM_SCORE_STATISTICS_FILES).toHaveLength(8);
   });
 });
