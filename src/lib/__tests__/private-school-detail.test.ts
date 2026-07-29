@@ -4,12 +4,14 @@ import { PRIVATE_SCHOOL_DETAIL_FUKUI } from '@/data/private-school-detail/fukui'
 import { PRIVATE_SCHOOL_DETAIL_YAMANASHI } from '@/data/private-school-detail/yamanashi';
 import { PRIVATE_SCHOOL_DETAIL_KOCHI } from '@/data/private-school-detail/kochi';
 import { PRIVATE_SCHOOL_DETAIL_SAGA } from '@/data/private-school-detail/saga';
+import { PRIVATE_SCHOOL_DETAIL_TOKUSHIMA } from '@/data/private-school-detail/tokushima';
 import { PRIVATE_SCHOOL_DETAIL_BY_PREFECTURE, PRIVATE_SCHOOL_DETAIL_FILES } from '@/data/private-school-detail';
 import { SCHOOLS_PRIVATE_TOTTORI } from '@/data/schools-private/tottori';
 import { SCHOOLS_PRIVATE_FUKUI } from '@/data/schools-private/fukui';
 import { SCHOOLS_PRIVATE_YAMANASHI } from '@/data/schools-private/yamanashi';
 import { SCHOOLS_PRIVATE_KOCHI } from '@/data/schools-private/kochi';
 import { SCHOOLS_PRIVATE_SAGA } from '@/data/schools-private/saga';
+import { SCHOOLS_PRIVATE_TOKUSHIMA } from '@/data/schools-private/tokushima';
 
 describe('checkCourseCapacitySum', () => {
   const base: PrivateSchoolDetail = {
@@ -160,15 +162,36 @@ describe('PRIVATE_SCHOOL_DETAIL_SAGA(パイロット実データ・県庁一次�
   });
 });
 
+describe('PRIVATE_SCHOOL_DETAIL_TOKUSHIMA(パイロット実データ)', () => {
+  it('収録した学校は全てcourses合計とtotalCapacityが一致する', () => {
+    for (const school of PRIVATE_SCHOOL_DETAIL_TOKUSHIMA.schools) {
+      expect(checkCourseCapacitySum(school)).toBe(true);
+    }
+  });
+
+  it('schools-private/tokushima.tsの全5校がschoolsまたはskippedのいずれかで網羅されている(重複・欠落なし)', () => {
+    const allCodes = SCHOOLS_PRIVATE_TOKUSHIMA.schools.map((s) => s.code);
+    const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_TOKUSHIMA, allCodes);
+    expect(result.duplicates).toEqual([]);
+    expect(result.missing).toEqual([]);
+  });
+
+  it('収録3校+スキップ2校で参照台帳の5校と一致する', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_TOKUSHIMA.schools.length).toBe(3);
+    expect(PRIVATE_SCHOOL_DETAIL_TOKUSHIMA.skipped.length).toBe(2);
+  });
+});
+
 describe('private-school-detail index', () => {
-  it('tottori/fukui/yamanashi/kochi/sagaの5県が集約されている', () => {
+  it('tottori/fukui/yamanashi/kochi/saga/tokushimaの6県が集約されている', () => {
     expect(Object.keys(PRIVATE_SCHOOL_DETAIL_BY_PREFECTURE).sort()).toEqual([
       'fukui',
       'kochi',
       'saga',
+      'tokushima',
       'tottori',
       'yamanashi',
     ]);
-    expect(PRIVATE_SCHOOL_DETAIL_FILES).toHaveLength(5);
+    expect(PRIVATE_SCHOOL_DETAIL_FILES).toHaveLength(6);
   });
 });
