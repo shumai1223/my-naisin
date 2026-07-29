@@ -25,6 +25,11 @@ export interface ExamScoreYearEntry {
   totalAverage?: number;
   totalMaxScore?: number;
   testTakerCount?: number;
+  /**
+   * 年度ごとに出典が異なる場合のみ設定する（例: 宮城県は年度別ページが別URL）。
+   * 単一の資料が複数年度をまとめて公表している場合はファイル側のsourceのみで足りる。
+   */
+  source?: ExamScoreStatisticsSource;
 }
 
 export interface ExamScoreStatisticsSource {

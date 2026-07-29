@@ -7,6 +7,7 @@ import { EXAM_SCORE_STATISTICS_NARA } from '@/data/exam-score-statistics/nara';
 import { EXAM_SCORE_STATISTICS_HYOGO } from '@/data/exam-score-statistics/hyogo';
 import { EXAM_SCORE_STATISTICS_NIIGATA } from '@/data/exam-score-statistics/niigata';
 import { EXAM_SCORE_STATISTICS_GUNMA } from '@/data/exam-score-statistics/gunma';
+import { EXAM_SCORE_STATISTICS_MIYAGI } from '@/data/exam-score-statistics/miyagi';
 import { EXAM_SCORE_STATISTICS_BY_PREFECTURE, EXAM_SCORE_STATISTICS_FILES } from '@/data/exam-score-statistics';
 
 describe('isPlausibleSubjectSum', () => {
@@ -191,18 +192,44 @@ describe('EXAM_SCORE_STATISTICS_GUNMA(パイロット実データ・既知の構
   });
 });
 
+describe('EXAM_SCORE_STATISTICS_MIYAGI(パイロット実データ・年度別に出典が異なる)', () => {
+  it('5年度分(令和4〜8年度)が収録されている', () => {
+    expect(EXAM_SCORE_STATISTICS_MIYAGI.years).toHaveLength(5);
+  });
+
+  it('各教科100点満点・5教科の内訳を持つ', () => {
+    for (const year of EXAM_SCORE_STATISTICS_MIYAGI.years) {
+      expect(year.subjects).toHaveLength(5);
+      for (const s of year.subjects) expect(s.maxScore).toBe(100);
+    }
+  });
+
+  it('全年度で教科別平均点の合計がtotalAverageと妥当な範囲で一致する', () => {
+    for (const year of EXAM_SCORE_STATISTICS_MIYAGI.years) {
+      expect(isPlausibleSubjectSum(year)).toBe(true);
+    }
+  });
+
+  it('年度ごとに個別のsourceを持つ(年度別ページが別URLのため)', () => {
+    for (const year of EXAM_SCORE_STATISTICS_MIYAGI.years) {
+      expect(year.source?.url).toBeTruthy();
+    }
+  });
+});
+
 describe('exam-score-statistics index', () => {
-  it('kochi/saitama/chiba/tokyo/nara/hyogo/niigata/gunmaの8県が集約されている', () => {
+  it('kochi/saitama/chiba/tokyo/nara/hyogo/niigata/gunma/miyagiの9県が集約されている', () => {
     expect(Object.keys(EXAM_SCORE_STATISTICS_BY_PREFECTURE).sort()).toEqual([
       'chiba',
       'gunma',
       'hyogo',
       'kochi',
+      'miyagi',
       'nara',
       'niigata',
       'saitama',
       'tokyo',
     ]);
-    expect(EXAM_SCORE_STATISTICS_FILES).toHaveLength(8);
+    expect(EXAM_SCORE_STATISTICS_FILES).toHaveLength(9);
   });
 });
