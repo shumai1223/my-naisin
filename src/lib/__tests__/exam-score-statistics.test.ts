@@ -19,6 +19,7 @@ import { EXAM_SCORE_STATISTICS_FUKUOKA } from '@/data/exam-score-statistics/fuku
 import { EXAM_SCORE_STATISTICS_HIROSHIMA } from '@/data/exam-score-statistics/hiroshima';
 import { EXAM_SCORE_STATISTICS_AICHI } from '@/data/exam-score-statistics/aichi';
 import { EXAM_SCORE_STATISTICS_KANAGAWA } from '@/data/exam-score-statistics/kanagawa';
+import { EXAM_SCORE_STATISTICS_IBARAKI } from '@/data/exam-score-statistics/ibaraki';
 import { EXAM_SCORE_STATISTICS_BY_PREFECTURE, EXAM_SCORE_STATISTICS_FILES } from '@/data/exam-score-statistics';
 
 describe('isPlausibleSubjectSum', () => {
@@ -467,8 +468,34 @@ describe('EXAM_SCORE_STATISTICS_KANAGAWA(パイロット実データ・合格者
   });
 });
 
+describe('EXAM_SCORE_STATISTICS_IBARAKI(パイロット実データ・令和7年度のみ全受検者/合格者の両区分)', () => {
+  it('4エントリ(令和4年度×test-takers、令和6年度×test-takers、令和7年度×test-takers/passers)が収録されている', () => {
+    expect(EXAM_SCORE_STATISTICS_IBARAKI.years).toHaveLength(4);
+  });
+
+  it('各教科100点満点(5教科合計500点満点体系)・5教科の内訳を持つ', () => {
+    for (const year of EXAM_SCORE_STATISTICS_IBARAKI.years) {
+      expect(year.subjects).toHaveLength(5);
+      for (const s of year.subjects) expect(s.maxScore).toBe(100);
+      expect(year.totalMaxScore).toBe(500);
+    }
+  });
+
+  it('全年度で教科別平均点の合計がtotalAverageと妥当な範囲で一致する', () => {
+    for (const year of EXAM_SCORE_STATISTICS_IBARAKI.years) {
+      expect(isPlausibleSubjectSum(year)).toBe(true);
+    }
+  });
+
+  it('令和4年度・令和6年度はtest-takersのみ(合格者区分の掲載が原資料に無い)、令和7年度のみ両区分が揃う', () => {
+    const r7 = EXAM_SCORE_STATISTICS_IBARAKI.years.filter((y) => y.fiscalYearLabel === '令和7年度');
+    expect(r7).toHaveLength(2);
+    expect(r7.map((y) => y.averageType).sort()).toEqual(['passers', 'test-takers']);
+  });
+});
+
 describe('exam-score-statistics index', () => {
-  it('kochi/saitama/chiba/tokyo/nara/hyogo/niigata/gunma/miyagi/hokkaido/fukushima/aomori/iwate/akita/nagano/shizuoka/fukuoka/hiroshima/aichi/kanagawaの20県が集約されている', () => {
+  it('kochi/saitama/chiba/tokyo/nara/hyogo/niigata/gunma/miyagi/hokkaido/fukushima/aomori/iwate/akita/nagano/shizuoka/fukuoka/hiroshima/aichi/kanagawa/ibarakiの21県が集約されている', () => {
     expect(Object.keys(EXAM_SCORE_STATISTICS_BY_PREFECTURE).sort()).toEqual([
       'aichi',
       'akita',
@@ -480,6 +507,7 @@ describe('exam-score-statistics index', () => {
       'hiroshima',
       'hokkaido',
       'hyogo',
+      'ibaraki',
       'iwate',
       'kanagawa',
       'kochi',
@@ -491,6 +519,6 @@ describe('exam-score-statistics index', () => {
       'shizuoka',
       'tokyo',
     ]);
-    expect(EXAM_SCORE_STATISTICS_FILES).toHaveLength(20);
+    expect(EXAM_SCORE_STATISTICS_FILES).toHaveLength(21);
   });
 });
