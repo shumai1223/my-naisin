@@ -10,6 +10,7 @@ import { EXAM_SCORE_STATISTICS_GUNMA } from '@/data/exam-score-statistics/gunma'
 import { EXAM_SCORE_STATISTICS_MIYAGI } from '@/data/exam-score-statistics/miyagi';
 import { EXAM_SCORE_STATISTICS_HOKKAIDO } from '@/data/exam-score-statistics/hokkaido';
 import { EXAM_SCORE_STATISTICS_FUKUSHIMA } from '@/data/exam-score-statistics/fukushima';
+import { EXAM_SCORE_STATISTICS_AOMORI } from '@/data/exam-score-statistics/aomori';
 import { EXAM_SCORE_STATISTICS_BY_PREFECTURE, EXAM_SCORE_STATISTICS_FILES } from '@/data/exam-score-statistics';
 
 describe('isPlausibleSubjectSum', () => {
@@ -264,9 +265,30 @@ describe('EXAM_SCORE_STATISTICS_FUKUSHIMA(パイロット実データ・前期�
   });
 });
 
+describe('EXAM_SCORE_STATISTICS_AOMORI(パイロット実データ・複数記事間クロス検証済み)', () => {
+  it('3年度分(令和6〜8年度)が収録されている', () => {
+    expect(EXAM_SCORE_STATISTICS_AOMORI.years).toHaveLength(3);
+  });
+
+  it('各教科100点満点・5教科の内訳を持ちtest-takersで統一されている', () => {
+    for (const year of EXAM_SCORE_STATISTICS_AOMORI.years) {
+      expect(year.averageType).toBe('test-takers');
+      expect(year.subjects).toHaveLength(5);
+      for (const s of year.subjects) expect(s.maxScore).toBe(100);
+    }
+  });
+
+  it('全年度で教科別平均点の合計がtotalAverageと妥当な範囲で一致する', () => {
+    for (const year of EXAM_SCORE_STATISTICS_AOMORI.years) {
+      expect(isPlausibleSubjectSum(year)).toBe(true);
+    }
+  });
+});
+
 describe('exam-score-statistics index', () => {
-  it('kochi/saitama/chiba/tokyo/nara/hyogo/niigata/gunma/miyagi/hokkaido/fukushimaの11県が集約されている', () => {
+  it('kochi/saitama/chiba/tokyo/nara/hyogo/niigata/gunma/miyagi/hokkaido/fukushima/aomoriの12県が集約されている', () => {
     expect(Object.keys(EXAM_SCORE_STATISTICS_BY_PREFECTURE).sort()).toEqual([
+      'aomori',
       'chiba',
       'fukushima',
       'gunma',
@@ -279,6 +301,6 @@ describe('exam-score-statistics index', () => {
       'saitama',
       'tokyo',
     ]);
-    expect(EXAM_SCORE_STATISTICS_FILES).toHaveLength(11);
+    expect(EXAM_SCORE_STATISTICS_FILES).toHaveLength(12);
   });
 });

@@ -12,6 +12,7 @@ import { EXAM_SCORE_STATISTICS_GUNMA } from './gunma';
 import { EXAM_SCORE_STATISTICS_MIYAGI } from './miyagi';
 import { EXAM_SCORE_STATISTICS_HOKKAIDO } from './hokkaido';
 import { EXAM_SCORE_STATISTICS_FUKUSHIMA } from './fukushima';
+import { EXAM_SCORE_STATISTICS_AOMORI } from './aomori';
 import type { ExamScoreStatisticsFile } from '@/lib/exam-score-statistics';
 
 export const EXAM_SCORE_STATISTICS_BY_PREFECTURE: Record<string, ExamScoreStatisticsFile> = {
@@ -26,6 +27,7 @@ export const EXAM_SCORE_STATISTICS_BY_PREFECTURE: Record<string, ExamScoreStatis
   miyagi: EXAM_SCORE_STATISTICS_MIYAGI,
   hokkaido: EXAM_SCORE_STATISTICS_HOKKAIDO,
   fukushima: EXAM_SCORE_STATISTICS_FUKUSHIMA,
+  aomori: EXAM_SCORE_STATISTICS_AOMORI,
 };
 
 export const EXAM_SCORE_STATISTICS_FILES: ExamScoreStatisticsFile[] = Object.values(
