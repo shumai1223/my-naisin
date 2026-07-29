@@ -1,0 +1,16 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.shumai1223/my-naishin",
+  "description": "日本全国47都道府県の高校入試・内申点（調査書点）計算方式データと厳密な計算ツールを提供するMCPサーバ。教育委員会の一次資料に基づく機械可読データセット。",
+  "version": "2026.1",
+  "repository": {
+    "url": "https://github.com/shumai1223/my-naisin",
+    "source": "github"
+  },
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://my-naishin.com/api/mcp"
+    }
+  ]
+}
