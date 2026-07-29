@@ -3,6 +3,7 @@ import { EXAM_SCORE_STATISTICS_KOCHI } from '@/data/exam-score-statistics/kochi'
 import { EXAM_SCORE_STATISTICS_SAITAMA } from '@/data/exam-score-statistics/saitama';
 import { EXAM_SCORE_STATISTICS_CHIBA } from '@/data/exam-score-statistics/chiba';
 import { EXAM_SCORE_STATISTICS_TOKYO } from '@/data/exam-score-statistics/tokyo';
+import { EXAM_SCORE_STATISTICS_NARA } from '@/data/exam-score-statistics/nara';
 import { EXAM_SCORE_STATISTICS_BY_PREFECTURE, EXAM_SCORE_STATISTICS_FILES } from '@/data/exam-score-statistics';
 
 describe('isPlausibleSubjectSum', () => {
@@ -32,6 +33,10 @@ describe('isPlausibleSubjectSum', () => {
   it('totalAverageが未設定(一次ソースが合計を明記しない場合)は常にtrue', () => {
     const { totalAverage, totalMaxScore, ...rest } = base;
     expect(isPlausibleSubjectSum(rest)).toBe(true);
+  });
+
+  it('教科別内訳が空でtotalAverageのみ公表されている場合もtrue(奈良県の合格者平均のパターン)', () => {
+    expect(isPlausibleSubjectSum({ ...base, subjects: [], totalAverage: 160.4 })).toBe(true);
   });
 });
 
@@ -106,14 +111,38 @@ describe('EXAM_SCORE_STATISTICS_TOKYO(パイロット実データ)', () => {
   });
 });
 
+describe('EXAM_SCORE_STATISTICS_NARA(パイロット実データ)', () => {
+  it('3年度分×2区分(全受検者/合格者)=6エントリが収録されている', () => {
+    expect(EXAM_SCORE_STATISTICS_NARA.years).toHaveLength(6);
+  });
+
+  it('全エントリで教科別合計とtotalAverageが妥当な範囲で一致する(合格者側はsubjects空でも自動true)', () => {
+    for (const year of EXAM_SCORE_STATISTICS_NARA.years) {
+      expect(isPlausibleSubjectSum(year)).toBe(true);
+    }
+  });
+
+  it('test-takersは5教科の内訳を持ち、passersは内訳を持たない(合計のみ公表)', () => {
+    for (const year of EXAM_SCORE_STATISTICS_NARA.years) {
+      if (year.averageType === 'test-takers') {
+        expect(year.subjects).toHaveLength(5);
+      } else {
+        expect(year.subjects).toHaveLength(0);
+        expect(year.totalAverage).toBeDefined();
+      }
+    }
+  });
+});
+
 describe('exam-score-statistics index', () => {
-  it('kochi/saitama/chiba/tokyoの4県が集約されている', () => {
+  it('kochi/saitama/chiba/tokyo/naraの5県が集約されている', () => {
     expect(Object.keys(EXAM_SCORE_STATISTICS_BY_PREFECTURE).sort()).toEqual([
       'chiba',
       'kochi',
+      'nara',
       'saitama',
       'tokyo',
     ]);
-    expect(EXAM_SCORE_STATISTICS_FILES).toHaveLength(4);
+    expect(EXAM_SCORE_STATISTICS_FILES).toHaveLength(5);
   });
 });

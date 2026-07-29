@@ -47,6 +47,9 @@ export interface ExamScoreStatisticsFile {
  */
 export function isPlausibleSubjectSum(entry: ExamScoreYearEntry): boolean {
   if (entry.totalAverage === undefined) return true;
+  // 教科別内訳が無く合計のみ公表されているケース（例: 奈良県の合格者平均は総合平均点のみで
+  // 教科別内訳が公表されていない）は、そもそも突合対象が無いため妥当とみなす。
+  if (entry.subjects.length === 0) return true;
   const sum = entry.subjects.reduce((acc, s) => acc + s.averageScore, 0);
   const tolerance = Math.max(0.5, entry.subjects.length * 0.1);
   return Math.abs(sum - entry.totalAverage) <= tolerance;
