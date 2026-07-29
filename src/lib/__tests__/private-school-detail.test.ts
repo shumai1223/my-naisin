@@ -1,9 +1,11 @@
 import { checkCourseCapacitySum, findDuplicateOrMissingCodes, type PrivateSchoolDetail } from '@/lib/private-school-detail';
 import { PRIVATE_SCHOOL_DETAIL_TOTTORI } from '@/data/private-school-detail/tottori';
 import { PRIVATE_SCHOOL_DETAIL_FUKUI } from '@/data/private-school-detail/fukui';
+import { PRIVATE_SCHOOL_DETAIL_YAMANASHI } from '@/data/private-school-detail/yamanashi';
 import { PRIVATE_SCHOOL_DETAIL_BY_PREFECTURE, PRIVATE_SCHOOL_DETAIL_FILES } from '@/data/private-school-detail';
 import { SCHOOLS_PRIVATE_TOTTORI } from '@/data/schools-private/tottori';
 import { SCHOOLS_PRIVATE_FUKUI } from '@/data/schools-private/fukui';
+import { SCHOOLS_PRIVATE_YAMANASHI } from '@/data/schools-private/yamanashi';
 
 describe('checkCourseCapacitySum', () => {
   const base: PrivateSchoolDetail = {
@@ -94,9 +96,29 @@ describe('PRIVATE_SCHOOL_DETAIL_FUKUI(全校スキップ台帳)', () => {
   });
 });
 
+describe('PRIVATE_SCHOOL_DETAIL_YAMANASHI(パイロット実データ)', () => {
+  it('収録した学校は全てcourses合計とtotalCapacityが一致する', () => {
+    for (const school of PRIVATE_SCHOOL_DETAIL_YAMANASHI.schools) {
+      expect(checkCourseCapacitySum(school)).toBe(true);
+    }
+  });
+
+  it('schools-private/yamanashi.tsの全11校がschoolsまたはskippedのいずれかで網羅されている(重複・欠落なし)', () => {
+    const allCodes = SCHOOLS_PRIVATE_YAMANASHI.schools.map((s) => s.code);
+    const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_YAMANASHI, allCodes);
+    expect(result.duplicates).toEqual([]);
+    expect(result.missing).toEqual([]);
+  });
+
+  it('収録1校+スキップ10校で参照台帳の11校と一致する', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_YAMANASHI.schools.length).toBe(1);
+    expect(PRIVATE_SCHOOL_DETAIL_YAMANASHI.skipped.length).toBe(10);
+  });
+});
+
 describe('private-school-detail index', () => {
-  it('tottori/fukuiの2県が集約されている', () => {
-    expect(Object.keys(PRIVATE_SCHOOL_DETAIL_BY_PREFECTURE).sort()).toEqual(['fukui', 'tottori']);
-    expect(PRIVATE_SCHOOL_DETAIL_FILES).toHaveLength(2);
+  it('tottori/fukui/yamanashiの3県が集約されている', () => {
+    expect(Object.keys(PRIVATE_SCHOOL_DETAIL_BY_PREFECTURE).sort()).toEqual(['fukui', 'tottori', 'yamanashi']);
+    expect(PRIVATE_SCHOOL_DETAIL_FILES).toHaveLength(3);
   });
 });
