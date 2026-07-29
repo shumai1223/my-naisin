@@ -3,11 +3,13 @@ import { PRIVATE_SCHOOL_DETAIL_TOTTORI } from '@/data/private-school-detail/tott
 import { PRIVATE_SCHOOL_DETAIL_FUKUI } from '@/data/private-school-detail/fukui';
 import { PRIVATE_SCHOOL_DETAIL_YAMANASHI } from '@/data/private-school-detail/yamanashi';
 import { PRIVATE_SCHOOL_DETAIL_KOCHI } from '@/data/private-school-detail/kochi';
+import { PRIVATE_SCHOOL_DETAIL_SAGA } from '@/data/private-school-detail/saga';
 import { PRIVATE_SCHOOL_DETAIL_BY_PREFECTURE, PRIVATE_SCHOOL_DETAIL_FILES } from '@/data/private-school-detail';
 import { SCHOOLS_PRIVATE_TOTTORI } from '@/data/schools-private/tottori';
 import { SCHOOLS_PRIVATE_FUKUI } from '@/data/schools-private/fukui';
 import { SCHOOLS_PRIVATE_YAMANASHI } from '@/data/schools-private/yamanashi';
 import { SCHOOLS_PRIVATE_KOCHI } from '@/data/schools-private/kochi';
+import { SCHOOLS_PRIVATE_SAGA } from '@/data/schools-private/saga';
 
 describe('checkCourseCapacitySum', () => {
   const base: PrivateSchoolDetail = {
@@ -138,14 +140,35 @@ describe('PRIVATE_SCHOOL_DETAIL_KOCHI(パイロット実データ)', () => {
   });
 });
 
+describe('PRIVATE_SCHOOL_DETAIL_SAGA(パイロット実データ・県庁一次資料で9校全校を収録)', () => {
+  it('収録した学校は全てcourses合計とtotalCapacityが一致する', () => {
+    for (const school of PRIVATE_SCHOOL_DETAIL_SAGA.schools) {
+      expect(checkCourseCapacitySum(school)).toBe(true);
+    }
+  });
+
+  it('schools-private/saga.tsの全9校がschoolsまたはskippedのいずれかで網羅されている(重複・欠落なし)', () => {
+    const allCodes = SCHOOLS_PRIVATE_SAGA.schools.map((s) => s.code);
+    const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_SAGA, allCodes);
+    expect(result.duplicates).toEqual([]);
+    expect(result.missing).toEqual([]);
+  });
+
+  it('9校全てを収録しスキップ0件(県庁一次資料が全校を1枚で公表していたため)', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_SAGA.schools.length).toBe(9);
+    expect(PRIVATE_SCHOOL_DETAIL_SAGA.skipped.length).toBe(0);
+  });
+});
+
 describe('private-school-detail index', () => {
-  it('tottori/fukui/yamanashi/kochiの4県が集約されている', () => {
+  it('tottori/fukui/yamanashi/kochi/sagaの5県が集約されている', () => {
     expect(Object.keys(PRIVATE_SCHOOL_DETAIL_BY_PREFECTURE).sort()).toEqual([
       'fukui',
       'kochi',
+      'saga',
       'tottori',
       'yamanashi',
     ]);
-    expect(PRIVATE_SCHOOL_DETAIL_FILES).toHaveLength(4);
+    expect(PRIVATE_SCHOOL_DETAIL_FILES).toHaveLength(5);
   });
 });
