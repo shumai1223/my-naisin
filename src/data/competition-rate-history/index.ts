@@ -40,6 +40,7 @@ import { TOTTORI_COMPETITION_RATE_HISTORY } from './tottori';
 import { TOYAMA_COMPETITION_RATE_HISTORY } from './toyama';
 import { WAKAYAMA_COMPETITION_RATE_HISTORY } from './wakayama';
 import { YAMAGATA_COMPETITION_RATE_HISTORY } from './yamagata';
+import { YAMAGUCHI_COMPETITION_RATE_HISTORY } from './yamaguchi';
 
 export const COMPETITION_RATE_HISTORY_BY_PREFECTURE: Partial<Record<string, PrefectureRateHistoryFile>> = {
   tokyo: TOKYO_COMPETITION_RATE_HISTORY,
@@ -79,6 +80,7 @@ export const COMPETITION_RATE_HISTORY_BY_PREFECTURE: Partial<Record<string, Pref
   toyama: TOYAMA_COMPETITION_RATE_HISTORY,
   wakayama: WAKAYAMA_COMPETITION_RATE_HISTORY,
   yamagata: YAMAGATA_COMPETITION_RATE_HISTORY,
+  yamaguchi: YAMAGUCHI_COMPETITION_RATE_HISTORY,
 };
 
 export const COMPETITION_RATE_HISTORY_FILES: PrefectureRateHistoryFile[] = Object.values(
