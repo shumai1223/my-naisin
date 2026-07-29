@@ -8,6 +8,7 @@ import { EXAM_SCORE_STATISTICS_HYOGO } from '@/data/exam-score-statistics/hyogo'
 import { EXAM_SCORE_STATISTICS_NIIGATA } from '@/data/exam-score-statistics/niigata';
 import { EXAM_SCORE_STATISTICS_GUNMA } from '@/data/exam-score-statistics/gunma';
 import { EXAM_SCORE_STATISTICS_MIYAGI } from '@/data/exam-score-statistics/miyagi';
+import { EXAM_SCORE_STATISTICS_HOKKAIDO } from '@/data/exam-score-statistics/hokkaido';
 import { EXAM_SCORE_STATISTICS_BY_PREFECTURE, EXAM_SCORE_STATISTICS_FILES } from '@/data/exam-score-statistics';
 
 describe('isPlausibleSubjectSum', () => {
@@ -217,11 +218,36 @@ describe('EXAM_SCORE_STATISTICS_MIYAGI(パイロット実データ・年度別�
   });
 });
 
+describe('EXAM_SCORE_STATISTICS_HOKKAIDO(パイロット実データ・2つの公式PDFで年度が重複検証済み)', () => {
+  it('3年度分×2区分(全受検者/合格者)=6エントリが収録されている', () => {
+    expect(EXAM_SCORE_STATISTICS_HOKKAIDO.years).toHaveLength(6);
+  });
+
+  it('各教科100点満点・5教科の内訳を持つ', () => {
+    for (const year of EXAM_SCORE_STATISTICS_HOKKAIDO.years) {
+      expect(year.subjects).toHaveLength(5);
+      for (const s of year.subjects) expect(s.maxScore).toBe(100);
+    }
+  });
+
+  it('全エントリで教科別合計とtotalAverageが妥当な範囲で一致する', () => {
+    for (const year of EXAM_SCORE_STATISTICS_HOKKAIDO.years) {
+      expect(isPlausibleSubjectSum(year)).toBe(true);
+    }
+  });
+
+  it('令和7年度分は2つの公式PDF双方に現れる年度だが、数値が完全一致する', () => {
+    const r7Years = EXAM_SCORE_STATISTICS_HOKKAIDO.years.filter((y) => y.fiscalYearLabel === '令和7年度');
+    expect(r7Years).toHaveLength(2);
+  });
+});
+
 describe('exam-score-statistics index', () => {
-  it('kochi/saitama/chiba/tokyo/nara/hyogo/niigata/gunma/miyagiの9県が集約されている', () => {
+  it('kochi/saitama/chiba/tokyo/nara/hyogo/niigata/gunma/miyagi/hokkaidoの10県が集約されている', () => {
     expect(Object.keys(EXAM_SCORE_STATISTICS_BY_PREFECTURE).sort()).toEqual([
       'chiba',
       'gunma',
+      'hokkaido',
       'hyogo',
       'kochi',
       'miyagi',
@@ -230,6 +256,6 @@ describe('exam-score-statistics index', () => {
       'saitama',
       'tokyo',
     ]);
-    expect(EXAM_SCORE_STATISTICS_FILES).toHaveLength(9);
+    expect(EXAM_SCORE_STATISTICS_FILES).toHaveLength(10);
   });
 });
