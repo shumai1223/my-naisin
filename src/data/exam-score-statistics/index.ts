@@ -19,6 +19,7 @@ import { EXAM_SCORE_STATISTICS_NAGANO } from './nagano';
 import { EXAM_SCORE_STATISTICS_SHIZUOKA } from './shizuoka';
 import { EXAM_SCORE_STATISTICS_FUKUOKA } from './fukuoka';
 import { EXAM_SCORE_STATISTICS_HIROSHIMA } from './hiroshima';
+import { EXAM_SCORE_STATISTICS_AICHI } from './aichi';
 import type { ExamScoreStatisticsFile } from '@/lib/exam-score-statistics';
 
 export const EXAM_SCORE_STATISTICS_BY_PREFECTURE: Record<string, ExamScoreStatisticsFile> = {
@@ -40,6 +41,7 @@ export const EXAM_SCORE_STATISTICS_BY_PREFECTURE: Record<string, ExamScoreStatis
   shizuoka: EXAM_SCORE_STATISTICS_SHIZUOKA,
   fukuoka: EXAM_SCORE_STATISTICS_FUKUOKA,
   hiroshima: EXAM_SCORE_STATISTICS_HIROSHIMA,
+  aichi: EXAM_SCORE_STATISTICS_AICHI,
 };
 
 export const EXAM_SCORE_STATISTICS_FILES: ExamScoreStatisticsFile[] = Object.values(
