@@ -1,5 +1,7 @@
 import { isPlausibleSubjectSum, type ExamScoreYearEntry } from '@/lib/exam-score-statistics';
 import { EXAM_SCORE_STATISTICS_KOCHI } from '@/data/exam-score-statistics/kochi';
+import { EXAM_SCORE_STATISTICS_SAITAMA } from '@/data/exam-score-statistics/saitama';
+import { EXAM_SCORE_STATISTICS_BY_PREFECTURE, EXAM_SCORE_STATISTICS_FILES } from '@/data/exam-score-statistics';
 
 describe('isPlausibleSubjectSum', () => {
   const base: ExamScoreYearEntry = {
@@ -23,6 +25,11 @@ describe('isPlausibleSubjectSum', () => {
 
   it('明らかにかけ離れた差(10点)はfalse', () => {
     expect(isPlausibleSubjectSum({ ...base, totalAverage: 50 })).toBe(false);
+  });
+
+  it('totalAverageが未設定(一次ソースが合計を明記しない場合)は常にtrue', () => {
+    const { totalAverage, totalMaxScore, ...rest } = base;
+    expect(isPlausibleSubjectSum(rest)).toBe(true);
   });
 });
 
@@ -49,5 +56,31 @@ describe('EXAM_SCORE_STATISTICS_KOCHI(パイロット実データ)', () => {
         ['国語', '社会', '数学', '理科', '英語'].sort()
       );
     }
+  });
+});
+
+describe('EXAM_SCORE_STATISTICS_SAITAMA(パイロット実データ)', () => {
+  it('5年度分(平成30〜令和4年度)が収録されている', () => {
+    expect(EXAM_SCORE_STATISTICS_SAITAMA.years).toHaveLength(5);
+  });
+
+  it('各教科は100点満点(高知県の50点満点と異なる)', () => {
+    for (const year of EXAM_SCORE_STATISTICS_SAITAMA.years) {
+      for (const s of year.subjects) expect(s.maxScore).toBe(100);
+    }
+  });
+
+  it('一次ソースが合計点を明記していないためtotalAverageは未設定', () => {
+    for (const year of EXAM_SCORE_STATISTICS_SAITAMA.years) {
+      expect(year.totalAverage).toBeUndefined();
+      expect(isPlausibleSubjectSum(year)).toBe(true);
+    }
+  });
+});
+
+describe('exam-score-statistics index', () => {
+  it('kochi/saitamaの2県が集約されている', () => {
+    expect(Object.keys(EXAM_SCORE_STATISTICS_BY_PREFECTURE).sort()).toEqual(['kochi', 'saitama']);
+    expect(EXAM_SCORE_STATISTICS_FILES).toHaveLength(2);
   });
 });

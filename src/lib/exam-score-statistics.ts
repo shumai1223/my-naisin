@@ -21,8 +21,9 @@ export interface ExamScoreYearEntry {
   /** 'test-takers'=全受検者平均、'passers'=合格者のみ平均。県により算出基盤が異なるため必須。 */
   averageType: ExamScoreAverageType;
   subjects: SubjectAverage[];
-  totalAverage: number;
-  totalMaxScore: number;
+  /** 一次ソースが合計点を明記している場合のみ設定。無い場合は独自に合算せず未設定のままにする。 */
+  totalAverage?: number;
+  totalMaxScore?: number;
   testTakerCount?: number;
 }
 
@@ -45,6 +46,7 @@ export interface ExamScoreStatisticsFile {
  * ではなく、教科数×0.1点程度を上限とした許容誤差での妥当性チェックとする。
  */
 export function isPlausibleSubjectSum(entry: ExamScoreYearEntry): boolean {
+  if (entry.totalAverage === undefined) return true;
   const sum = entry.subjects.reduce((acc, s) => acc + s.averageScore, 0);
   const tolerance = Math.max(0.5, entry.subjects.length * 0.1);
   return Math.abs(sum - entry.totalAverage) <= tolerance;
