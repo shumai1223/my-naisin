@@ -13,6 +13,7 @@ import { EXAM_SCORE_STATISTICS_FUKUSHIMA } from '@/data/exam-score-statistics/fu
 import { EXAM_SCORE_STATISTICS_AOMORI } from '@/data/exam-score-statistics/aomori';
 import { EXAM_SCORE_STATISTICS_IWATE } from '@/data/exam-score-statistics/iwate';
 import { EXAM_SCORE_STATISTICS_AKITA } from '@/data/exam-score-statistics/akita';
+import { EXAM_SCORE_STATISTICS_NAGANO } from '@/data/exam-score-statistics/nagano';
 import { EXAM_SCORE_STATISTICS_BY_PREFECTURE, EXAM_SCORE_STATISTICS_FILES } from '@/data/exam-score-statistics';
 
 describe('isPlausibleSubjectSum', () => {
@@ -331,8 +332,29 @@ describe('EXAM_SCORE_STATISTICS_AKITA(パイロット実データ・8%抽出調�
   });
 });
 
+describe('EXAM_SCORE_STATISTICS_NAGANO(パイロット実データ・2つの公式PDFで令和6年度が重複検証済み)', () => {
+  it('3年度分(令和5〜7年度)が収録されている', () => {
+    expect(EXAM_SCORE_STATISTICS_NAGANO.years).toHaveLength(3);
+  });
+
+  it('各教科100点満点・5教科の内訳を持ちtest-takersで統一されている(前期選抜は構造が異なるため収録対象外)', () => {
+    for (const year of EXAM_SCORE_STATISTICS_NAGANO.years) {
+      expect(year.averageType).toBe('test-takers');
+      expect(year.subjects).toHaveLength(5);
+      for (const s of year.subjects) expect(s.maxScore).toBe(100);
+    }
+  });
+
+  it('一次ソースが5教科合計を明記していないためtotalAverageは未設定', () => {
+    for (const year of EXAM_SCORE_STATISTICS_NAGANO.years) {
+      expect(year.totalAverage).toBeUndefined();
+      expect(isPlausibleSubjectSum(year)).toBe(true);
+    }
+  });
+});
+
 describe('exam-score-statistics index', () => {
-  it('kochi/saitama/chiba/tokyo/nara/hyogo/niigata/gunma/miyagi/hokkaido/fukushima/aomori/iwate/akitaの14県が集約されている', () => {
+  it('kochi/saitama/chiba/tokyo/nara/hyogo/niigata/gunma/miyagi/hokkaido/fukushima/aomori/iwate/akita/naganoの15県が集約されている', () => {
     expect(Object.keys(EXAM_SCORE_STATISTICS_BY_PREFECTURE).sort()).toEqual([
       'akita',
       'aomori',
@@ -344,11 +366,12 @@ describe('exam-score-statistics index', () => {
       'iwate',
       'kochi',
       'miyagi',
+      'nagano',
       'nara',
       'niigata',
       'saitama',
       'tokyo',
     ]);
-    expect(EXAM_SCORE_STATISTICS_FILES).toHaveLength(14);
+    expect(EXAM_SCORE_STATISTICS_FILES).toHaveLength(15);
   });
 });
