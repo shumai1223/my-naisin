@@ -22,6 +22,7 @@ import { EHIME_COMPETITION_RATE_HISTORY } from './ehime';
 import { FUKUI_COMPETITION_RATE_HISTORY } from './fukui';
 import { FUKUSHIMA_COMPETITION_RATE_HISTORY } from './fukushima';
 import { IBARAKI_COMPETITION_RATE_HISTORY } from './ibaraki';
+import { IWATE_COMPETITION_RATE_HISTORY } from './iwate';
 
 export const COMPETITION_RATE_HISTORY_BY_PREFECTURE: Partial<Record<string, PrefectureRateHistoryFile>> = {
   tokyo: TOKYO_COMPETITION_RATE_HISTORY,
@@ -43,6 +44,7 @@ export const COMPETITION_RATE_HISTORY_BY_PREFECTURE: Partial<Record<string, Pref
   fukui: FUKUI_COMPETITION_RATE_HISTORY,
   fukushima: FUKUSHIMA_COMPETITION_RATE_HISTORY,
   ibaraki: IBARAKI_COMPETITION_RATE_HISTORY,
+  iwate: IWATE_COMPETITION_RATE_HISTORY,
 };
 
 export const COMPETITION_RATE_HISTORY_FILES: PrefectureRateHistoryFile[] = Object.values(
