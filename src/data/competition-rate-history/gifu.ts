@@ -1,0 +1,29 @@
+/**
+ * 岐阜県 多年度アーカイブ（Λ-4・8県目）。
+ *
+ * 一次ソース: 岐阜県教育委員会高校教育課「令和7年度岐阜県公立高等学校第一次・連携型選抜
+ * 変更後出願者数総括表」（2025年2月18日正午締切時）
+ * https://www.pref.gifu.lg.jp/uploaded/attachment/433066.pdf
+ *
+ * 既存Y-6 gifu.tsと同一の資料シリーズ（総括表・全日制の課程・第一次選抜＋連携型選抜込み）。
+ * 「Ⅰ 第一次選抜 1 全日制の課程」の「総計」行（定員12,885・出願者数12,376・倍率0.96）を
+ * 直接転記した。テキスト抽出が明瞭でビジョン解析の誤読リスクは低い。定時制課程は
+ * 既存Y-6と同じ理由でスコープ外。
+ */
+import type { PrefectureRateHistoryFile, YearSnapshot } from '@/lib/competition-rate-history';
+
+const REIWA_7: YearSnapshot = {
+  fiscalYear: '令和7年度（2025年度）',
+  sourceUrl: 'https://www.pref.gifu.lg.jp/uploaded/attachment/433066.pdf',
+  sourceTitle: '岐阜県教育委員会高校教育課 令和7年度岐阜県公立高等学校第一次・連携型選抜 変更後出願者数総括表',
+  fetchedAt: '2026-07-29',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制の課程 総計（第一次選抜＋連携型選抜込み）', quota: 12885, applicants: 12376, rate: 0.96 },
+};
+
+export const GIFU_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
+  prefectureCode: 'gifu',
+  years: [REIWA_7],
+};
