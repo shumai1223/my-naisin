@@ -1,0 +1,30 @@
+/**
+ * 愛媛県 多年度アーカイブ（Λ-4・16県目）。
+ *
+ * 一次ソース: 愛媛県教育委員会「令和7年度県立高等学校学科別入学志願者数（全日制）
+ * （志願変更後）」（旧サイトehime-c.esnet.ed.jp配下・全1ページ・2段組）。
+ * https://ehime-c.esnet.ed.jp/koukou/nyuusi/r07nyuusi/r07isi_ato/atozenniti.pdf
+ *
+ * 既存Y-6 ehime.ts（令和8年度・現サイトehime-kyoiku.esnet.ed.jp配下）とは別URL体系だが、
+ * 同一資料シリーズ（学科別入学志願者数・志願変更後）のR7版を旧サイトのアーカイブ構造
+ * （/koukou/nyuusi/r07nyuusi/配下）から発見。末尾の「合計」行を直接転記: 定員(A)8,590・
+ * 入学志願者数(B)7,898・倍率(B/A)0.92（7898/8590=0.9194…≈0.92で整合）。定時制課程は
+ * 他県と同じ理由でスコープ外。
+ */
+import type { PrefectureRateHistoryFile, YearSnapshot } from '@/lib/competition-rate-history';
+
+const REIWA_7: YearSnapshot = {
+  fiscalYear: '令和7年度（2025年度）',
+  sourceUrl: 'https://ehime-c.esnet.ed.jp/koukou/nyuusi/r07nyuusi/r07isi_ato/atozenniti.pdf',
+  sourceTitle: '愛媛県教育委員会 令和7年度県立高等学校学科別入学志願者数（全日制）（志願変更後）',
+  fetchedAt: '2026-07-29',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '合計', quota: 8590, applicants: 7898, rate: 0.92 },
+};
+
+export const EHIME_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
+  prefectureCode: 'ehime',
+  years: [REIWA_7],
+};
