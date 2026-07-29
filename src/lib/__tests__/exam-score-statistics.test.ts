@@ -9,6 +9,7 @@ import { EXAM_SCORE_STATISTICS_NIIGATA } from '@/data/exam-score-statistics/niig
 import { EXAM_SCORE_STATISTICS_GUNMA } from '@/data/exam-score-statistics/gunma';
 import { EXAM_SCORE_STATISTICS_MIYAGI } from '@/data/exam-score-statistics/miyagi';
 import { EXAM_SCORE_STATISTICS_HOKKAIDO } from '@/data/exam-score-statistics/hokkaido';
+import { EXAM_SCORE_STATISTICS_FUKUSHIMA } from '@/data/exam-score-statistics/fukushima';
 import { EXAM_SCORE_STATISTICS_BY_PREFECTURE, EXAM_SCORE_STATISTICS_FILES } from '@/data/exam-score-statistics';
 
 describe('isPlausibleSubjectSum', () => {
@@ -242,10 +243,32 @@ describe('EXAM_SCORE_STATISTICS_HOKKAIDO(パイロット実データ・2つの�
   });
 });
 
+describe('EXAM_SCORE_STATISTICS_FUKUSHIMA(パイロット実データ・前期選抜合格者平均)', () => {
+  it('6年度分(令和3〜8年度)が収録されている', () => {
+    expect(EXAM_SCORE_STATISTICS_FUKUSHIMA.years).toHaveLength(6);
+  });
+
+  it('各教科50点満点(福島は250点満点体系)・全年度passersで統一されている', () => {
+    for (const year of EXAM_SCORE_STATISTICS_FUKUSHIMA.years) {
+      expect(year.averageType).toBe('passers');
+      expect(year.subjects).toHaveLength(5);
+      for (const s of year.subjects) expect(s.maxScore).toBe(50);
+      expect(year.totalMaxScore).toBe(250);
+    }
+  });
+
+  it('全年度で教科別平均点の合計がtotalAverageと妥当な範囲で一致する', () => {
+    for (const year of EXAM_SCORE_STATISTICS_FUKUSHIMA.years) {
+      expect(isPlausibleSubjectSum(year)).toBe(true);
+    }
+  });
+});
+
 describe('exam-score-statistics index', () => {
-  it('kochi/saitama/chiba/tokyo/nara/hyogo/niigata/gunma/miyagi/hokkaidoの10県が集約されている', () => {
+  it('kochi/saitama/chiba/tokyo/nara/hyogo/niigata/gunma/miyagi/hokkaido/fukushimaの11県が集約されている', () => {
     expect(Object.keys(EXAM_SCORE_STATISTICS_BY_PREFECTURE).sort()).toEqual([
       'chiba',
+      'fukushima',
       'gunma',
       'hokkaido',
       'hyogo',
@@ -256,6 +279,6 @@ describe('exam-score-statistics index', () => {
       'saitama',
       'tokyo',
     ]);
-    expect(EXAM_SCORE_STATISTICS_FILES).toHaveLength(10);
+    expect(EXAM_SCORE_STATISTICS_FILES).toHaveLength(11);
   });
 });
