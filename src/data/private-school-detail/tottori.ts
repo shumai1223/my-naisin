@@ -50,19 +50,30 @@ export const PRIVATE_SCHOOL_DETAIL_TOTTORI: PrivateSchoolDetailFile = {
         fetchedAt: '2026-07-30',
       },
     },
-  ],
-  skipped: [
     {
       schoolCode: 'D131310000016',
       schoolName: '鳥取敬愛高等学校',
-      reason:
-        '公式サイト(t-ki.jp)に募集要項PDFへの直接リンクが見当たらず、WebSearch要約は令和6年度(200名)の古い情報のみで最新年度の確証が取れなかったため見送り。',
+      fiscalYearLabel: '令和8年度',
+      courses: [
+        { courseName: '普通科 特別進学コース', capacity: 80 },
+        { courseName: '普通科 特別進学II類グローバルコース', capacity: 60 },
+        { courseName: '普通科 進学キャリアコース', capacity: 120 },
+        { courseName: '普通科 総合コース', capacity: 40 },
+      ],
+      totalCapacity: 300,
+      source: {
+        url: 'https://t-ki.jp/pages/20/',
+        docTitle: '入試情報（鳥取敬愛高等学校）',
+        fetchedAt: '2026-07-30',
+      },
     },
+  ],
+  skipped: [
     {
       schoolCode: 'D131310000034',
       schoolName: '倉吉北高等学校',
       reason:
-        'WebSearch要約は令和6年度(特別進学35名・総合コース105名・調理科25名)の情報のみで、令和8年度版の確証が取れなかったため見送り。',
+        '公式サイトの入試情報ページ(kurayoshikita-h.ed.jp/exam/)は「生徒募集要項をご確認ください」と案内するのみでPDFへの直接リンクがページ本文に見当たらず、WebSearchでも令和8年度版の直接URLを特定できなかったため見送り。',
     },
     {
       schoolCode: 'D131310000043',
