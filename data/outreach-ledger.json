@@ -1,5 +1,5 @@
 {
-  "_comment": "AA-1追撃システムの送信台帳。Gmail MCP(gmail_search q=\"in:sent\" / 受信箱の自動受付メール)で実測した内容を手動で反映する運用(scripts/weekly-kpi-report.tsの手動入力パターンと同じ)。統計処理はsrc/lib/outreach-ledger.tsの純関数が担当。1エントリ=1組織。フォーム送信のみでGmail送信履歴に残らないもの(コエテコ/スタディサプリ等)は次回以降のバックフィル対象・現時点では未収録(捏造回避のため確証のある送信のみ収録)。",
+  "_comment": "AA-1追撃システムの送信台帳。Gmail MCP(gmail_search q=\"in:sent\" / 受信箱の自動受付メール)で実測した内容を手動で反映する運用(scripts/weekly-kpi-report.tsの手動入力パターンと同じ)。統計処理はsrc/lib/outreach-ledger.tsの純関数が担当。1エントリ=1組織。フォーム送信のみでGmail送信履歴に残らないもの(コエテコ/スタディサプリ等)は次回以降のバックフィル対象・現時点では未収録(捏造回避のため確証のある送信のみ収録)。Λ-3(2026-07-29): reviewTierはエントリ個別のレビュー区分上書き(未指定ならb2b-saasレーンの既定値full-review)。今回は組織名から都道府県単位の小規模な模試団体と明確に判別できたもの(かとうもし/新潟県統一模試会/愛媛県模試/新教研/学悠出版)のみ保守的にspot-checkへ下げた。出版社・塾チェーン等の規模が名前だけでは断定できないものはfull-reviewのまま据え置いている(判断に迷う場合はより厳格な側=full-reviewを既定とする方針)。",
   "asOf": "2026-07-24",
   "entries": [
     {
@@ -35,7 +35,8 @@
       "status": "awaiting",
       "followupCount": 0,
       "threadId": "19f6be8c21e28888",
-      "note": "自動受付メールのみ・人間の返信なし。"
+      "note": "自動受付メールのみ・人間の返信なし。",
+      "reviewTier": "spot-check"
     },
     {
       "id": "t-moshi",
@@ -46,7 +47,8 @@
       "status": "awaiting",
       "followupCount": 0,
       "threadId": "19f8768bdf273775",
-      "note": "自動受付メールのみ・人間の返信なし。"
+      "note": "自動受付メールのみ・人間の返信なし。",
+      "reviewTier": "spot-check"
     },
     {
       "id": "itsuki-s",
@@ -68,7 +70,8 @@
       "status": "awaiting",
       "followupCount": 0,
       "threadId": "19f63ed15fd4444d",
-      "note": "自動受付メールのみ・人間の返信なし。"
+      "note": "自動受付メールのみ・人間の返信なし。",
+      "reviewTier": "spot-check"
     },
     {
       "id": "shinken",
@@ -108,7 +111,8 @@
       "sentDate": "2026-07-17",
       "status": "awaiting",
       "followupCount": 0,
-      "note": "wave2・フォーム送信。送信日は自動受付メール(19f6fd94b68ff7e9・20:32着)の受信時刻から確定。3営業日超で無反応なら029-252-7210へ電話可、と自動受付メールに明記あり。"
+      "note": "wave2・フォーム送信。送信日は自動受付メール(19f6fd94b68ff7e9・20:32着)の受信時刻から確定。3営業日超で無反応なら029-252-7210へ電話可、と自動受付メールに明記あり。",
+      "reviewTier": "spot-check"
     },
     {
       "id": "shingakusha",
@@ -129,7 +133,8 @@
       "status": "awaiting",
       "followupCount": 0,
       "threadId": "19f703c5c6c01725",
-      "note": "自動受付メールのみ・人間の返信なし。"
+      "note": "自動受付メールのみ・人間の返信なし。",
+      "reviewTier": "spot-check"
     },
     {
       "id": "compass-e",
