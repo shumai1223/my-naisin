@@ -15,6 +15,7 @@ import { EXAM_SCORE_STATISTICS_IWATE } from '@/data/exam-score-statistics/iwate'
 import { EXAM_SCORE_STATISTICS_AKITA } from '@/data/exam-score-statistics/akita';
 import { EXAM_SCORE_STATISTICS_NAGANO } from '@/data/exam-score-statistics/nagano';
 import { EXAM_SCORE_STATISTICS_SHIZUOKA } from '@/data/exam-score-statistics/shizuoka';
+import { EXAM_SCORE_STATISTICS_FUKUOKA } from '@/data/exam-score-statistics/fukuoka';
 import { EXAM_SCORE_STATISTICS_BY_PREFECTURE, EXAM_SCORE_STATISTICS_FILES } from '@/data/exam-score-statistics';
 
 describe('isPlausibleSubjectSum', () => {
@@ -382,12 +383,33 @@ describe('EXAM_SCORE_STATISTICS_SHIZUOKA(パイロット実データ・3つの�
   });
 });
 
+describe('EXAM_SCORE_STATISTICS_FUKUOKA(パイロット実データ・60点満点の特有配点・令和7年度は内部矛盾検知で見送り)', () => {
+  it('2年度分(令和5〜6年度)が収録されている', () => {
+    expect(EXAM_SCORE_STATISTICS_FUKUOKA.years).toHaveLength(2);
+  });
+
+  it('各教科60点満点(他県の100点満点/50点満点と異なる特有の配点)・test-takersで統一されている', () => {
+    for (const year of EXAM_SCORE_STATISTICS_FUKUOKA.years) {
+      expect(year.averageType).toBe('test-takers');
+      expect(year.subjects).toHaveLength(5);
+      for (const s of year.subjects) expect(s.maxScore).toBe(60);
+    }
+  });
+
+  it('全年度で教科別平均点の合計がtotalAverageと妥当な範囲で一致する(令和6年度はtotalAverage未設定)', () => {
+    for (const year of EXAM_SCORE_STATISTICS_FUKUOKA.years) {
+      expect(isPlausibleSubjectSum(year)).toBe(true);
+    }
+  });
+});
+
 describe('exam-score-statistics index', () => {
-  it('kochi/saitama/chiba/tokyo/nara/hyogo/niigata/gunma/miyagi/hokkaido/fukushima/aomori/iwate/akita/nagano/shizuokaの16県が集約されている', () => {
+  it('kochi/saitama/chiba/tokyo/nara/hyogo/niigata/gunma/miyagi/hokkaido/fukushima/aomori/iwate/akita/nagano/shizuoka/fukuokaの17県が集約されている', () => {
     expect(Object.keys(EXAM_SCORE_STATISTICS_BY_PREFECTURE).sort()).toEqual([
       'akita',
       'aomori',
       'chiba',
+      'fukuoka',
       'fukushima',
       'gunma',
       'hokkaido',
@@ -402,6 +424,6 @@ describe('exam-score-statistics index', () => {
       'shizuoka',
       'tokyo',
     ]);
-    expect(EXAM_SCORE_STATISTICS_FILES).toHaveLength(16);
+    expect(EXAM_SCORE_STATISTICS_FILES).toHaveLength(17);
   });
 });
