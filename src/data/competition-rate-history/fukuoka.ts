@@ -1,0 +1,29 @@
+/**
+ * 福岡県 多年度アーカイブ（Λ-4・4県目）。
+ *
+ * Y-2のfukuoka.ts（令和8年度・学校粒度）は県立と市組合立を別集計で完全収録済み
+ * （県立22,200/22,854/1.03・市組合立2,120/2,350/1.11）。本ファイルは過去年度分を
+ * 報道記事（リセマム）から取得するが、報道は県立分のみを報じているため、
+ * **スコープを県立全日制に限定**して収録する（市組合立分は原資料が見つかり次第追加）。
+ *
+ * 一次ソース: 福岡県教育委員会 令和7年度公立高等学校一般入試確定志願状況の発表
+ * （2025-02-21公表）を報じたリセモム記事。
+ * https://resemom.jp/article/2025/02/21/80929.html
+ */
+import type { PrefectureRateHistoryFile, YearSnapshot } from '@/lib/competition-rate-history';
+
+const REIWA_7: YearSnapshot = {
+  fiscalYear: '令和7年度（2025年度）',
+  sourceUrl: 'https://resemom.jp/article/2025/02/21/80929.html',
+  sourceTitle: 'リセモム「【高校受験2025】福岡県公立高、一般入試の志願状況（確定）修猷館1.69倍」（福岡県教育委員会 令和7年度公立高等学校一般入試確定志願状況の発表を引用）',
+  fetchedAt: '2026-07-29',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '県立全日制（一般入試・確定志願状況）', quota: 22040, applicants: 24542, rate: 1.11 },
+};
+
+export const FUKUOKA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
+  prefectureCode: 'fukuoka',
+  years: [REIWA_7],
+};
