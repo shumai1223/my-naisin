@@ -13,7 +13,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { computeFollowupCandidates, summarizeByLane, type OutreachEntry } from '@/lib/outreach-ledger';
+import { computeFollowupCandidates, summarizeByLane, reviewTierOf, type OutreachEntry } from '@/lib/outreach-ledger';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
@@ -49,9 +49,22 @@ if (candidates.length === 0) {
   process.exit(0);
 }
 
-console.log(`⚡ 追撃候補: ${candidates.length}件（経過日数が長い順）\n`);
-for (const c of candidates) {
-  console.log(`  ${c.daysSinceLastContact}日経過  ${c.entry.org}（${c.entry.lane} / ${c.entry.sourceTaskId ?? '-'}）`);
-  if (c.entry.note) console.log(`           ${c.entry.note}`);
+console.log(`⚡ 追撃候補: ${candidates.length}件（Λ-3・full-review→spot-checkの順、区分内は経過日数が長い順）\n`);
+
+const fullReview = candidates.filter((c) => reviewTierOf(c.entry) === 'full-review');
+const spotCheck = candidates.filter((c) => reviewTierOf(c.entry) === 'spot-check');
+
+function printGroup(label: string, group: typeof candidates) {
+  if (group.length === 0) return;
+  console.log(`--- ${label}（${group.length}件） ---`);
+  for (const c of group) {
+    console.log(`  ${c.daysSinceLastContact}日経過  ${c.entry.org}（${c.entry.lane} / ${c.entry.sourceTaskId ?? '-'}）`);
+    if (c.entry.note) console.log(`           ${c.entry.note}`);
+  }
+  console.log('');
 }
-console.log('\n文面テンプレは docs/aa1-followup-templates.md を参照。送信は👤の判断・実行のみ。');
+
+printGroup('🔒 full-review（送信前に全文👤確認が必須・政府/メディア/大手企業レーン）', fullReview);
+printGroup('👁 spot-check（抜き取り確認で足りる定型差し込み・NPO/相互リンク等）', spotCheck);
+
+console.log('文面テンプレは docs/aa1-followup-templates.md を参照。送信ボタンはいずれの区分でも👤のみが押す。');

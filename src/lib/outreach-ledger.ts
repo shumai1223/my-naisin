@@ -20,6 +20,14 @@ export type OutreachStatus =
   | 'declined' // 明示的な お断り／不要の返信（追撃対象から除外）
   | 'closed'; // その他の理由で追撃を打ち切り済み
 
+/**
+ * 送信前レビューのリスク区分（Λ-3）。政府/Wikipedia/学術/大手企業は`full-review`
+ * （送信前に👤が全文確認）、NPO/ウェブマスター間/中小塾等の定型差し込みは`spot-check`
+ * （抜き取り確認で足りる）。**どちらの区分でも送信ボタンを押すのは常に👤**（完全自動送信は不採用・
+ * [[gate-decisions-2026-07-28]]）。
+ */
+export type ReviewTier = 'full-review' | 'spot-check';
+
 export interface OutreachEntry {
   id: string;
   org: string;
@@ -36,6 +44,12 @@ export interface OutreachEntry {
   /** Gmail threadId（任意・追跡用）。 */
   threadId?: string;
   note?: string;
+  /**
+   * レビュー区分の個別上書き（任意）。未指定なら`LANE_DEFAULT_REVIEW_TIER`のレーン既定値を使う。
+   * 例: 'b2b-saas'レーンは既定full-reviewだが、中小塾へのテンプレ差し込みメールだけ
+   * spot-checkに下げたい場合にこのフィールドで個別指定する。
+   */
+  reviewTier?: ReviewTier;
 }
 
 export interface FollowupCandidate {
@@ -97,4 +111,29 @@ export function summarizeByLane(entries: OutreachEntry[]): Record<OutreachLane, 
   };
   for (const e of entries) base[e.lane] += 1;
   return base;
+}
+
+/**
+ * レーンごとの既定リスク区分（Λ-3）。個々のエントリで`reviewTier`が明示されていればそちらが優先される
+ * （`reviewTierOf`参照）。新しいレーンを追加する際は必ずこの表にも追記すること（TypeScriptの
+ * `Record<OutreachLane, ReviewTier>`により追記漏れはコンパイルエラーで検知される）。
+ */
+export const LANE_DEFAULT_REVIEW_TIER: Record<OutreachLane, ReviewTier> = {
+  'kyoiku-i': 'full-review', // 教育委員会等の政府機関
+  'b2b-saas': 'full-review', // 大手企業向け商談・提携交渉（中小塾等はentry.reviewTierで個別にspot-checkへ下げる）
+  chihoshi: 'full-review', // メディア（地方紙等）への対外発信
+  npo: 'spot-check',
+  'mutual-link': 'spot-check', // ウェブマスター間のテンプレ差し込み
+};
+
+/** エントリのレビュー区分を決定する（`entry.reviewTier`の個別指定 > レーンの既定値の優先順）。 */
+export function reviewTierOf(entry: Pick<OutreachEntry, 'lane' | 'reviewTier'>): ReviewTier {
+  return entry.reviewTier ?? LANE_DEFAULT_REVIEW_TIER[entry.lane];
+}
+
+/** レビュー画面向け: エントリをfull-review/spot-checkの2区分に仕分ける（区分内の順序は入力順を保持）。 */
+export function groupByReviewTier(entries: OutreachEntry[]): Record<ReviewTier, OutreachEntry[]> {
+  const result: Record<ReviewTier, OutreachEntry[]> = { 'full-review': [], 'spot-check': [] };
+  for (const e of entries) result[reviewTierOf(e)].push(e);
+  return result;
 }

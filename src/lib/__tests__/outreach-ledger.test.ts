@@ -1,4 +1,13 @@
-import { daysBetween, computeFollowupCandidates, summarizeByLane, type OutreachEntry } from '../outreach-ledger';
+import {
+  daysBetween,
+  computeFollowupCandidates,
+  summarizeByLane,
+  reviewTierOf,
+  groupByReviewTier,
+  LANE_DEFAULT_REVIEW_TIER,
+  type OutreachEntry,
+  type OutreachLane,
+} from '../outreach-ledger';
 
 describe('daysBetween', () => {
   it('計算する（同日は0）', () => {
@@ -92,5 +101,53 @@ describe('summarizeByLane', () => {
       'mutual-link': 0,
       'kyoiku-i': 0,
     });
+  });
+});
+
+describe('reviewTierOf / LANE_DEFAULT_REVIEW_TIER（Λ-3）', () => {
+  const ALL_LANES: OutreachLane[] = ['b2b-saas', 'chihoshi', 'npo', 'mutual-link', 'kyoiku-i'];
+
+  it('全レーンにLANE_DEFAULT_REVIEW_TIERが定義されている（追加レーンの登録漏れを検知）', () => {
+    for (const lane of ALL_LANES) {
+      expect(['full-review', 'spot-check']).toContain(LANE_DEFAULT_REVIEW_TIER[lane]);
+    }
+  });
+
+  it('政府(kyoiku-i)・大手企業(b2b-saas)・メディア(chihoshi)はfull-review', () => {
+    expect(LANE_DEFAULT_REVIEW_TIER['kyoiku-i']).toBe('full-review');
+    expect(LANE_DEFAULT_REVIEW_TIER['b2b-saas']).toBe('full-review');
+    expect(LANE_DEFAULT_REVIEW_TIER['chihoshi']).toBe('full-review');
+  });
+
+  it('NPO・ウェブマスター間(mutual-link)はspot-check', () => {
+    expect(LANE_DEFAULT_REVIEW_TIER['npo']).toBe('spot-check');
+    expect(LANE_DEFAULT_REVIEW_TIER['mutual-link']).toBe('spot-check');
+  });
+
+  it('reviewTierOf はentry.reviewTierの個別指定があればレーン既定値より優先する', () => {
+    const entry = makeEntry({ lane: 'b2b-saas', reviewTier: 'spot-check' }); // 中小塾への定型差し込み想定
+    expect(reviewTierOf(entry)).toBe('spot-check');
+  });
+
+  it('reviewTierOf はentry.reviewTier未指定ならレーン既定値を返す', () => {
+    const entry = makeEntry({ lane: 'npo' });
+    expect(reviewTierOf(entry)).toBe('spot-check');
+  });
+});
+
+describe('groupByReviewTier', () => {
+  it('full-review/spot-checkの2区分に仕分ける', () => {
+    const entries: OutreachEntry[] = [
+      makeEntry({ id: 'a', lane: 'kyoiku-i' }), // full-review
+      makeEntry({ id: 'b', lane: 'npo' }), // spot-check
+      makeEntry({ id: 'c', lane: 'b2b-saas', reviewTier: 'spot-check' }), // 個別指定でspot-check
+    ];
+    const grouped = groupByReviewTier(entries);
+    expect(grouped['full-review'].map((e) => e.id)).toEqual(['a']);
+    expect(grouped['spot-check'].map((e) => e.id)).toEqual(['b', 'c']);
+  });
+
+  it('空配列を渡すと両区分とも空配列を返す', () => {
+    expect(groupByReviewTier([])).toEqual({ 'full-review': [], 'spot-check': [] });
   });
 });
