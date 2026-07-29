@@ -6,6 +6,7 @@ import { Sparkles, RotateCcw } from 'lucide-react';
 import { InputForm } from '@/components/Calculator/InputForm';
 import { PrefectureSelector } from '@/components/Calculator/PrefectureSelector';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
+import { NaishinTypeShareButton } from '@/components/NaishinTypeShindan/NaishinTypeShareButton';
 import { DEFAULT_SCORES } from '@/lib/constants';
 import { diagnoseNaishinType, type NaishinTypeResult } from '@/lib/naishin-type-diagnosis';
 import { getPrefectureByCode, DEFAULT_PREFECTURE_CODE } from '@/lib/prefectures';
@@ -92,6 +93,8 @@ export function NaishinTypeShindanClient() {
               評定を入力し直す
             </button>
           </div>
+
+          <NaishinTypeShareButton type={result.type} prefectureName={prefectureName} />
 
           <SaveResultCTA
             source="naishin-type-shindan"

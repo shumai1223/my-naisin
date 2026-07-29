@@ -100,6 +100,8 @@ export const EVENTS = {
   SAVE_RESULT_CTA_VIEW: 'save_result_cta_view', // SaveResultCTA（保護者バトン/LINE/メール受け皿）が視界に入った（result_viewとは別＝結果セクション全体でなくこのブロック単体の到達）
   // ── 診断プロダクト（ZZ-5c・内申点タイプ診断） ──
   NAISHIN_TYPE_RESULT: 'naishin_type_result', // 診断結果が表示された（type_idパラメータでタイプ分布を見る・A/B実験ではないのでEXPERIMENT_IMPRESSIONと分離）
+  // ── Λ-13: バイラル診断（内申点タイプ診断の友人間シェア・生徒クリックを拡散で回収） ──
+  NAISHIN_TYPE_SHARE: 'naishin_type_share', // 診断結果カードを共有/保存した（type_id・mediumで面別に分解。優劣を煽らない設計のためSHARE_TO_PARENTとは意図的に分離）
 } as const;
 
 export type AnalyticsEvent = (typeof EVENTS)[keyof typeof EVENTS];
