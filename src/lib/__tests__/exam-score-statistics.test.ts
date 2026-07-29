@@ -18,6 +18,7 @@ import { EXAM_SCORE_STATISTICS_SHIZUOKA } from '@/data/exam-score-statistics/shi
 import { EXAM_SCORE_STATISTICS_FUKUOKA } from '@/data/exam-score-statistics/fukuoka';
 import { EXAM_SCORE_STATISTICS_HIROSHIMA } from '@/data/exam-score-statistics/hiroshima';
 import { EXAM_SCORE_STATISTICS_AICHI } from '@/data/exam-score-statistics/aichi';
+import { EXAM_SCORE_STATISTICS_KANAGAWA } from '@/data/exam-score-statistics/kanagawa';
 import { EXAM_SCORE_STATISTICS_BY_PREFECTURE, EXAM_SCORE_STATISTICS_FILES } from '@/data/exam-score-statistics';
 
 describe('isPlausibleSubjectSum', () => {
@@ -446,8 +447,28 @@ describe('EXAM_SCORE_STATISTICS_AICHI(パイロット実データ・22点満点�
   });
 });
 
+describe('EXAM_SCORE_STATISTICS_KANAGAWA(パイロット実データ・合格者平均点のtest-takersと異なる区分)', () => {
+  it('3年度分(令和6〜8年度)が収録されている', () => {
+    expect(EXAM_SCORE_STATISTICS_KANAGAWA.years).toHaveLength(3);
+  });
+
+  it('各教科100点満点・全年度passersで統一されている(他県のtest-takers平均と混同しない)', () => {
+    for (const year of EXAM_SCORE_STATISTICS_KANAGAWA.years) {
+      expect(year.averageType).toBe('passers');
+      expect(year.subjects).toHaveLength(5);
+      for (const s of year.subjects) expect(s.maxScore).toBe(100);
+    }
+  });
+
+  it('年度ごとに個別のsourceを持つ(年度別PDFのため)', () => {
+    for (const year of EXAM_SCORE_STATISTICS_KANAGAWA.years) {
+      expect(year.source?.url).toBeTruthy();
+    }
+  });
+});
+
 describe('exam-score-statistics index', () => {
-  it('kochi/saitama/chiba/tokyo/nara/hyogo/niigata/gunma/miyagi/hokkaido/fukushima/aomori/iwate/akita/nagano/shizuoka/fukuoka/hiroshima/aichiの19県が集約されている', () => {
+  it('kochi/saitama/chiba/tokyo/nara/hyogo/niigata/gunma/miyagi/hokkaido/fukushima/aomori/iwate/akita/nagano/shizuoka/fukuoka/hiroshima/aichi/kanagawaの20県が集約されている', () => {
     expect(Object.keys(EXAM_SCORE_STATISTICS_BY_PREFECTURE).sort()).toEqual([
       'aichi',
       'akita',
@@ -460,6 +481,7 @@ describe('exam-score-statistics index', () => {
       'hokkaido',
       'hyogo',
       'iwate',
+      'kanagawa',
       'kochi',
       'miyagi',
       'nagano',
@@ -469,6 +491,6 @@ describe('exam-score-statistics index', () => {
       'shizuoka',
       'tokyo',
     ]);
-    expect(EXAM_SCORE_STATISTICS_FILES).toHaveLength(19);
+    expect(EXAM_SCORE_STATISTICS_FILES).toHaveLength(20);
   });
 });
