@@ -14,6 +14,7 @@ import { GIFU_COMPETITION_RATE_HISTORY } from './gifu';
 import { OKAYAMA_COMPETITION_RATE_HISTORY } from './okayama';
 import { NAGANO_COMPETITION_RATE_HISTORY } from './nagano';
 import { ISHIKAWA_COMPETITION_RATE_HISTORY } from './ishikawa';
+import { MIE_COMPETITION_RATE_HISTORY } from './mie';
 
 export const COMPETITION_RATE_HISTORY_BY_PREFECTURE: Partial<Record<string, PrefectureRateHistoryFile>> = {
   tokyo: TOKYO_COMPETITION_RATE_HISTORY,
@@ -27,6 +28,7 @@ export const COMPETITION_RATE_HISTORY_BY_PREFECTURE: Partial<Record<string, Pref
   okayama: OKAYAMA_COMPETITION_RATE_HISTORY,
   nagano: NAGANO_COMPETITION_RATE_HISTORY,
   ishikawa: ISHIKAWA_COMPETITION_RATE_HISTORY,
+  mie: MIE_COMPETITION_RATE_HISTORY,
 };
 
 export const COMPETITION_RATE_HISTORY_FILES: PrefectureRateHistoryFile[] = Object.values(
