@@ -1,0 +1,34 @@
+/**
+ * 滋賀県 多年度アーカイブ（Λ-4・32県目）。
+ *
+ * 一次ソース: 滋賀県教育委員会「令和7年度滋賀県立高等学校入学者選抜 一般選抜（一次募集相当）
+ * 確定出願状況」（2025年3月3日確定発表）を報じたリセモム記事。
+ * https://resemom.jp/article/2025/03/03/81057.html
+ *
+ * ⚠️既存Y-6 shiga.ts（令和8年度・学校独自型選抜+一般型選抜の二本立て）とは選抜制度が異なる年度
+ * である点に注意: 滋賀県は令和8年度から入学者選抜を一本化する制度改正があり（2月・3月の2回実施
+ * →「学校独自型選抜」「一般型選抜」の2通りに再編）、令和7年度は改正前の旧制度（推薦選抜・特色選抜・
+ * スポーツ文化芸術推薦選抜＋一般選抜）。本ファイルは旧制度の「一般選抜」（他県の一般選抜相当・
+ * 各種推薦/特色選抜の合格者は対象外）を採用した。全日制課程を直接引用: 学力検査定員(quota)=6,253・
+ * 確定出願者数(applicants)=6,563・出願倍率(rate)=1.05（6563/6253=1.0496…≈1.05で整合。
+ * WebSearch要約・記事本文の2件で独立確認）。原本PDF（19頁の「結果のまとめ」はこの環境の
+ * poppler未導入によりページ指定読み取り不可のため未到達）。
+ */
+import type { PrefectureRateHistoryFile, YearSnapshot } from '@/lib/competition-rate-history';
+
+const REIWA_7: YearSnapshot = {
+  fiscalYear: '令和7年度（2025年度）',
+  sourceUrl: 'https://resemom.jp/article/2025/03/03/81057.html',
+  sourceTitle:
+    'リセモム「滋賀県公立高、一般選抜の出願状況（確定）」（滋賀県教育委員会 令和7年度一般選抜確定出願状況の発表を引用）',
+  fetchedAt: '2026-07-29',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '一般選抜 全日制課程（旧制度・推薦/特色選抜等を除く）', quota: 6253, applicants: 6563, rate: 1.05 },
+};
+
+export const SHIGA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
+  prefectureCode: 'shiga',
+  years: [REIWA_7],
+};
