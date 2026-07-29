@@ -14,6 +14,7 @@ import { EXAM_SCORE_STATISTICS_AOMORI } from '@/data/exam-score-statistics/aomor
 import { EXAM_SCORE_STATISTICS_IWATE } from '@/data/exam-score-statistics/iwate';
 import { EXAM_SCORE_STATISTICS_AKITA } from '@/data/exam-score-statistics/akita';
 import { EXAM_SCORE_STATISTICS_NAGANO } from '@/data/exam-score-statistics/nagano';
+import { EXAM_SCORE_STATISTICS_SHIZUOKA } from '@/data/exam-score-statistics/shizuoka';
 import { EXAM_SCORE_STATISTICS_BY_PREFECTURE, EXAM_SCORE_STATISTICS_FILES } from '@/data/exam-score-statistics';
 
 describe('isPlausibleSubjectSum', () => {
@@ -353,8 +354,36 @@ describe('EXAM_SCORE_STATISTICS_NAGANO(パイロット実データ・2つの公�
   });
 });
 
+describe('EXAM_SCORE_STATISTICS_SHIZUOKA(パイロット実データ・3つの公式PDFで令和6・7年度が重複検証済み)', () => {
+  it('4年度分(令和5〜8年度)が収録されている', () => {
+    expect(EXAM_SCORE_STATISTICS_SHIZUOKA.years).toHaveLength(4);
+  });
+
+  it('各教科50点満点(5教科合計250点満点体系)・test-takersで統一されている', () => {
+    for (const year of EXAM_SCORE_STATISTICS_SHIZUOKA.years) {
+      expect(year.averageType).toBe('test-takers');
+      expect(year.subjects).toHaveLength(5);
+      for (const s of year.subjects) expect(s.maxScore).toBe(50);
+    }
+  });
+
+  it('一次ソースが5教科合計を明記していないためtotalAverageは未設定', () => {
+    for (const year of EXAM_SCORE_STATISTICS_SHIZUOKA.years) {
+      expect(year.totalAverage).toBeUndefined();
+      expect(isPlausibleSubjectSum(year)).toBe(true);
+    }
+  });
+
+  it('令和6・7年度分はそれぞれ2つの公式PDFに現れる年度だが、同一のtestTakerCountで一致する', () => {
+    const r6 = EXAM_SCORE_STATISTICS_SHIZUOKA.years.find((y) => y.fiscalYearLabel === '令和6年度');
+    const r7 = EXAM_SCORE_STATISTICS_SHIZUOKA.years.find((y) => y.fiscalYearLabel === '令和7年度');
+    expect(r6?.testTakerCount).toBe(18605);
+    expect(r7?.testTakerCount).toBe(18104);
+  });
+});
+
 describe('exam-score-statistics index', () => {
-  it('kochi/saitama/chiba/tokyo/nara/hyogo/niigata/gunma/miyagi/hokkaido/fukushima/aomori/iwate/akita/naganoの15県が集約されている', () => {
+  it('kochi/saitama/chiba/tokyo/nara/hyogo/niigata/gunma/miyagi/hokkaido/fukushima/aomori/iwate/akita/nagano/shizuokaの16県が集約されている', () => {
     expect(Object.keys(EXAM_SCORE_STATISTICS_BY_PREFECTURE).sort()).toEqual([
       'akita',
       'aomori',
@@ -370,8 +399,9 @@ describe('exam-score-statistics index', () => {
       'nara',
       'niigata',
       'saitama',
+      'shizuoka',
       'tokyo',
     ]);
-    expect(EXAM_SCORE_STATISTICS_FILES).toHaveLength(15);
+    expect(EXAM_SCORE_STATISTICS_FILES).toHaveLength(16);
   });
 });
