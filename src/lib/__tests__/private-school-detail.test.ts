@@ -15,6 +15,7 @@ import { PRIVATE_SCHOOL_DETAIL_OKINAWA } from '@/data/private-school-detail/okin
 import { PRIVATE_SCHOOL_DETAIL_ISHIKAWA } from '@/data/private-school-detail/ishikawa';
 import { PRIVATE_SCHOOL_DETAIL_KAGAWA } from '@/data/private-school-detail/kagawa';
 import { PRIVATE_SCHOOL_DETAIL_MIYAZAKI } from '@/data/private-school-detail/miyazaki';
+import { PRIVATE_SCHOOL_DETAIL_TOCHIGI } from '@/data/private-school-detail/tochigi';
 import { PRIVATE_SCHOOL_DETAIL_BY_PREFECTURE, PRIVATE_SCHOOL_DETAIL_FILES } from '@/data/private-school-detail';
 import { SCHOOLS_PRIVATE_TOTTORI } from '@/data/schools-private/tottori';
 import { SCHOOLS_PRIVATE_FUKUI } from '@/data/schools-private/fukui';
@@ -32,6 +33,7 @@ import { SCHOOLS_PRIVATE_OKINAWA } from '@/data/schools-private/okinawa';
 import { SCHOOLS_PRIVATE_ISHIKAWA } from '@/data/schools-private/ishikawa';
 import { SCHOOLS_PRIVATE_KAGAWA } from '@/data/schools-private/kagawa';
 import { SCHOOLS_PRIVATE_MIYAZAKI } from '@/data/schools-private/miyazaki';
+import { SCHOOLS_PRIVATE_TOCHIGI } from '@/data/schools-private/tochigi';
 
 describe('checkCourseCapacitySum', () => {
   const base: PrivateSchoolDetail = {
@@ -401,8 +403,28 @@ describe('PRIVATE_SCHOOL_DETAIL_MIYAZAKI(14校中9校を収録・進行中)', ()
   });
 });
 
+describe('PRIVATE_SCHOOL_DETAIL_TOCHIGI(県庁一括PDF2冊で15校全校を完全収録・佐賀9/9・富山10/10を上回る最大規模)', () => {
+  it('収録した学校は全てcourses合計とtotalCapacityが一致する', () => {
+    for (const school of PRIVATE_SCHOOL_DETAIL_TOCHIGI.schools) {
+      expect(checkCourseCapacitySum(school)).toBe(true);
+    }
+  });
+
+  it('schools-private/tochigi.tsの全15校がschoolsまたはskippedのいずれかで網羅されている(重複・欠落なし)', () => {
+    const allCodes = SCHOOLS_PRIVATE_TOCHIGI.schools.map((s) => s.code);
+    const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_TOCHIGI, allCodes);
+    expect(result.duplicates).toEqual([]);
+    expect(result.missing).toEqual([]);
+  });
+
+  it('15校全てを収録しスキップ0件(県庁公表の全日制/通信制一覧PDF2冊で完全収録)', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_TOCHIGI.schools.length).toBe(15);
+    expect(PRIVATE_SCHOOL_DETAIL_TOCHIGI.skipped.length).toBe(0);
+  });
+});
+
 describe('private-school-detail index', () => {
-  it('tottori/fukui/yamanashi/kochi/saga/tokushima/nagasaki/akita/shimane/toyama/wakayama/shiga/okinawa/ishikawa/kagawa/miyazakiの16県が集約されている', () => {
+  it('tottori/fukui/yamanashi/kochi/saga/tokushima/nagasaki/akita/shimane/toyama/wakayama/shiga/okinawa/ishikawa/kagawa/miyazaki/tochigiの17県が集約されている', () => {
     expect(Object.keys(PRIVATE_SCHOOL_DETAIL_BY_PREFECTURE).sort()).toEqual([
       'akita',
       'fukui',
@@ -415,12 +437,13 @@ describe('private-school-detail index', () => {
       'saga',
       'shiga',
       'shimane',
+      'tochigi',
       'tokushima',
       'tottori',
       'toyama',
       'wakayama',
       'yamanashi',
     ]);
-    expect(PRIVATE_SCHOOL_DETAIL_FILES).toHaveLength(16);
+    expect(PRIVATE_SCHOOL_DETAIL_FILES).toHaveLength(17);
   });
 });
