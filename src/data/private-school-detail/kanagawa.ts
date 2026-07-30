@@ -12,7 +12,12 @@
  * 聖セシリア女子・聖ヨゼフ学園・聖和学院・捜真女学校・相洋・橘学苑の7校、4ページ目から
  * 桐蔭学園・立花学園・中央大学附属横浜・鶴見大学附属・東海大学付属相模・桐光学園・
  * 藤嶺学園藤沢・日本女子大学附属・日本大学・日本大学藤沢の10校を追加。5ページ目から
- * 武相(男子校・10コース)を追加。
+ * 武相(男子校・10コース)・平塚学園・藤沢翔陵・法政大学第二を追加。**教訓**: 5ページ目は
+ * 学校名と数値ブロックの対応が名前欄の見た目の並び順だけでは判断できず、各ブロックの
+ * 願書受付開始日/終了日等の日付パターンが完全一致するかで学校の境目を特定する方法が
+ * 有効だった(桐蔭学園/湘南工科大学附属の訂正と同じ教訓の実践)。白鵬女子・法政大学国際は
+ * 日付パターンで裏取りできる数値を特定できず今回は見送り(次回、日付パターン照合を
+ * 最初から徹底して再挑戦する)。
  * **2026-07-31訂正**: 桐蔭学園の数値を当初「湘南工科大学附属」として誤収録していたことが
  * 判明(4ページ目の桐蔭学園ブロックと3ページ目の湘南工科大学附属ブロックを取り違えた)。
  * schoolCodeを桐蔭学園の正しいコードへ修正し、湘南工科大学附属は正しい数値が別途確認できる
@@ -379,6 +384,40 @@ export const PRIVATE_SCHOOL_DETAIL_KANAGAWA: PrivateSchoolDetailFile = {
         { courseName: 'メディアアート表現コース(男、推薦30+一般書類選考30)', capacity: 60 },
         { courseName: '保育・フードコーディネートコース(男、推薦15+一般書類選考15)', capacity: 30 },
         { courseName: '総合コース(男、推薦30+一般書類選考30)', capacity: 60 },
+      ],
+      totalCapacity: 400,
+      source: IKUSHIN_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114320300013',
+      schoolName: '平塚学園高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '特進選抜コース(推薦35+一般専願35)', capacity: 70 },
+        { courseName: '特進コース(推薦35+一般専願35)', capacity: 70 },
+        { courseName: '進学コース(推薦180+一般専願180)', capacity: 360 },
+      ],
+      totalCapacity: 500,
+      source: IKUSHIN_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114320500075',
+      schoolName: '藤沢翔陵高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '文理融合探究コース(男、推薦5+一般1回20+書類選考5+オープン5)', capacity: 35 },
+        { courseName: '得意分野探究コース(男、推薦60+一般1回110+オープン5)', capacity: 175 },
+        { courseName: '商業(男、推薦25+一般1回45)', capacity: 70 },
+      ],
+      totalCapacity: 280,
+      source: IKUSHIN_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114313000020',
+      schoolName: '法政大学第二高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(書類選考男子150+書類選考女子150+学科試験男子50+学科試験女子50)', capacity: 400 },
       ],
       totalCapacity: 400,
       source: IKUSHIN_KANAGAWA_SOURCE,
