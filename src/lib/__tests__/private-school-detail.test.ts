@@ -7,6 +7,7 @@ import { PRIVATE_SCHOOL_DETAIL_SAGA } from '@/data/private-school-detail/saga';
 import { PRIVATE_SCHOOL_DETAIL_TOKUSHIMA } from '@/data/private-school-detail/tokushima';
 import { PRIVATE_SCHOOL_DETAIL_NAGASAKI } from '@/data/private-school-detail/nagasaki';
 import { PRIVATE_SCHOOL_DETAIL_AKITA } from '@/data/private-school-detail/akita';
+import { PRIVATE_SCHOOL_DETAIL_SHIMANE } from '@/data/private-school-detail/shimane';
 import { PRIVATE_SCHOOL_DETAIL_BY_PREFECTURE, PRIVATE_SCHOOL_DETAIL_FILES } from '@/data/private-school-detail';
 import { SCHOOLS_PRIVATE_TOTTORI } from '@/data/schools-private/tottori';
 import { SCHOOLS_PRIVATE_FUKUI } from '@/data/schools-private/fukui';
@@ -16,6 +17,7 @@ import { SCHOOLS_PRIVATE_SAGA } from '@/data/schools-private/saga';
 import { SCHOOLS_PRIVATE_TOKUSHIMA } from '@/data/schools-private/tokushima';
 import { SCHOOLS_PRIVATE_NAGASAKI } from '@/data/schools-private/nagasaki';
 import { SCHOOLS_PRIVATE_AKITA } from '@/data/schools-private/akita';
+import { SCHOOLS_PRIVATE_SHIMANE } from '@/data/schools-private/shimane';
 
 describe('checkCourseCapacitySum', () => {
   const base: PrivateSchoolDetail = {
@@ -226,18 +228,33 @@ describe('PRIVATE_SCHOOL_DETAIL_AKITA(5校中2校を収録)', () => {
   });
 });
 
+describe('PRIVATE_SCHOOL_DETAIL_SHIMANE(全10校スキップ台帳・学級数のみ公表され募集定員非公表と判明)', () => {
+  it('schools-private/shimane.tsの全10校がschoolsまたはskippedのいずれかで網羅されている(重複・欠落なし)', () => {
+    const allCodes = SCHOOLS_PRIVATE_SHIMANE.schools.map((s) => s.code);
+    const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_SHIMANE, allCodes);
+    expect(result.duplicates).toEqual([]);
+    expect(result.missing).toEqual([]);
+  });
+
+  it('確度の高い募集定員が確認できず全10校スキップ', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_SHIMANE.schools.length).toBe(0);
+    expect(PRIVATE_SCHOOL_DETAIL_SHIMANE.skipped.length).toBe(10);
+  });
+});
+
 describe('private-school-detail index', () => {
-  it('tottori/fukui/yamanashi/kochi/saga/tokushima/nagasaki/akitaの8県が集約されている', () => {
+  it('tottori/fukui/yamanashi/kochi/saga/tokushima/nagasaki/akita/shimaneの9県が集約されている', () => {
     expect(Object.keys(PRIVATE_SCHOOL_DETAIL_BY_PREFECTURE).sort()).toEqual([
       'akita',
       'fukui',
       'kochi',
       'nagasaki',
       'saga',
+      'shimane',
       'tokushima',
       'tottori',
       'yamanashi',
     ]);
-    expect(PRIVATE_SCHOOL_DETAIL_FILES).toHaveLength(8);
+    expect(PRIVATE_SCHOOL_DETAIL_FILES).toHaveLength(9);
   });
 });
