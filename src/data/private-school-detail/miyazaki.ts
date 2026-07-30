@@ -245,7 +245,7 @@ export const PRIVATE_SCHOOL_DETAIL_MIYAZAKI: PrivateSchoolDetailFile = {
     {
       schoolCode: 'D145320959163',
       schoolName: '日章学園九州国際高等学校',
-      reason: '育伸社募集要項PDFに掲載が無く募集定員を確認できなかった',
+      reason: '育伸社募集要項PDFに掲載が無く募集定員を確認できず。公式サイトでも「日本全国から受け入れる中途退学生・留学生のための単位制高校」と明記され通常の学年募集とは性質が異なると判明(2026-07-31追加確認)',
     },
   ],
 };
