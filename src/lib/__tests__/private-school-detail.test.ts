@@ -21,6 +21,7 @@ import { PRIVATE_SCHOOL_DETAIL_CHIBA } from '@/data/private-school-detail/chiba'
 import { PRIVATE_SCHOOL_DETAIL_OKAYAMA } from '@/data/private-school-detail/okayama';
 import { PRIVATE_SCHOOL_DETAIL_SHIZUOKA } from '@/data/private-school-detail/shizuoka';
 import { PRIVATE_SCHOOL_DETAIL_SAITAMA } from '@/data/private-school-detail/saitama';
+import { PRIVATE_SCHOOL_DETAIL_FUKUOKA } from '@/data/private-school-detail/fukuoka';
 import { PRIVATE_SCHOOL_DETAIL_BY_PREFECTURE, PRIVATE_SCHOOL_DETAIL_FILES } from '@/data/private-school-detail';
 import { SCHOOLS_PRIVATE_TOTTORI } from '@/data/schools-private/tottori';
 import { SCHOOLS_PRIVATE_FUKUI } from '@/data/schools-private/fukui';
@@ -44,6 +45,7 @@ import { SCHOOLS_PRIVATE_CHIBA } from '@/data/schools-private/chiba';
 import { SCHOOLS_PRIVATE_OKAYAMA } from '@/data/schools-private/okayama';
 import { SCHOOLS_PRIVATE_SHIZUOKA } from '@/data/schools-private/shizuoka';
 import { SCHOOLS_PRIVATE_SAITAMA } from '@/data/schools-private/saitama';
+import { SCHOOLS_PRIVATE_FUKUOKA } from '@/data/schools-private/fukuoka';
 
 describe('checkCourseCapacitySum', () => {
   const base: PrivateSchoolDetail = {
@@ -540,12 +542,32 @@ describe('PRIVATE_SCHOOL_DETAIL_SAITAMA(学事課一覧で58校中47校を完全
   });
 });
 
+describe('PRIVATE_SCHOOL_DETAIL_FUKUOKA(私学協会志願者数調で62校中57校を収録・4地区計/県合計17,340と完全一致検算済み)', () => {
+  it('収録した学校は全てcourses合計とtotalCapacityが一致する(coursesが空のため常にtrue)', () => {
+    for (const school of PRIVATE_SCHOOL_DETAIL_FUKUOKA.schools) {
+      expect(checkCourseCapacitySum(school)).toBe(true);
+    }
+  });
+
+  it('収録57校+スキップ2校(高校入試を実施していない2校)+未着手3校(つくば開成福岡/福岡芸術/川崎特区明蓬館)で参照台帳の62校と一致する', () => {
+    const allCodes = SCHOOLS_PRIVATE_FUKUOKA.schools.map((s) => s.code);
+    const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_FUKUOKA, allCodes);
+    expect(result.duplicates).toEqual([]);
+    expect(result.missing.sort()).toEqual(['D140313000144', 'D140313000242', 'D140360500015'].sort());
+    expect(PRIVATE_SCHOOL_DETAIL_FUKUOKA.schools.length).toBe(57);
+    expect(PRIVATE_SCHOOL_DETAIL_FUKUOKA.skipped.length).toBe(2);
+    const grandTotal = PRIVATE_SCHOOL_DETAIL_FUKUOKA.schools.reduce((acc, s) => acc + s.totalCapacity, 0);
+    expect(grandTotal).toBe(17340);
+  });
+});
+
 describe('private-school-detail index', () => {
-  it('tottori/fukui/yamanashi/kochi/saga/tokushima/nagasaki/akita/shimane/toyama/wakayama/shiga/okinawa/ishikawa/kagawa/miyazaki/tochigi/iwate/chiba/okayama/shizuoka/saitamaの22県が集約されている', () => {
+  it('tottori/fukui/yamanashi/kochi/saga/tokushima/nagasaki/akita/shimane/toyama/wakayama/shiga/okinawa/ishikawa/kagawa/miyazaki/tochigi/iwate/chiba/okayama/shizuoka/saitama/fukuokaの23県が集約されている', () => {
     expect(Object.keys(PRIVATE_SCHOOL_DETAIL_BY_PREFECTURE).sort()).toEqual([
       'akita',
       'chiba',
       'fukui',
+      'fukuoka',
       'ishikawa',
       'iwate',
       'kagawa',
@@ -566,6 +588,6 @@ describe('private-school-detail index', () => {
       'wakayama',
       'yamanashi',
     ]);
-    expect(PRIVATE_SCHOOL_DETAIL_FILES).toHaveLength(22);
+    expect(PRIVATE_SCHOOL_DETAIL_FILES).toHaveLength(23);
   });
 });
