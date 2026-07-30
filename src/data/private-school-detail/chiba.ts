@@ -13,6 +13,10 @@
  * 追加(木更津工業高専は高専のため対象外)。「推薦X+一般Y」のように同一コースが入試方式別の
  * 数値を持つ場合は合算する方針(我孫子二階堂で先例)を踏襲した。日本大学習志野・中央学院等、
  * 複数の校名ブロックが密集し数値の対応関係を確信できなかった学校は誤帰属リスクを避け見送った。
+ * 2026-07-31追記: Read toolでPDF原本を直接解析したところ日本大学習志野・中央学院を含む残り11校の
+ * 表組みが実際には明瞭に対応付けできると判明し追加収録(62校中52校)。広域通信制5校・完全中高一貫化
+ * 2校(東邦大学付属東邦)・学則定員のみで外部募集内訳不明の渋谷教育学園幕張・PDF掲載なし3校
+ * (中山学園/成美学園/千葉科学大学附属)は理由付きでskippedへ記録し、参照台帳62校を完全網羅した。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -508,8 +512,138 @@ export const PRIVATE_SCHOOL_DETAIL_CHIBA: PrivateSchoolDetailFile = {
       totalCapacity: 360,
       source: IKUSHIN_CHIBA_SOURCE,
     },
+    {
+      schoolCode: 'D112310000126',
+      schoolName: '和洋国府台女子高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [
+        { courseName: '和洋コース(女)', capacity: 50 },
+        { courseName: '進学コース(女)', capacity: 60 },
+        { courseName: '特進コース(女)', capacity: 30 },
+      ],
+      totalCapacity: 140,
+      source: IKUSHIN_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000135',
+      schoolName: '日出学園高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [{ courseName: '特進コース・進学コース計(推薦約50+一般約20)', capacity: 70 }],
+      totalCapacity: 70,
+      source: IKUSHIN_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000180',
+      schoolName: '日本大学習志野高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [{ courseName: '普通(第一志望180・一般190のうち大きい方を採用)', capacity: 190 }],
+      totalCapacity: 190,
+      source: IKUSHIN_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000233',
+      schoolName: '拓殖大学紅陵高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [{ courseName: '進学トライコース・アクティブチャレンジコース(全コース計)', capacity: 360 }],
+      totalCapacity: 360,
+      source: IKUSHIN_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000322',
+      schoolName: '成田高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [
+        { courseName: '特進αクラス', capacity: 80 },
+        { courseName: '進学クラス', capacity: 70 },
+        { courseName: '特別技能生', capacity: 50 },
+      ],
+      totalCapacity: 200,
+      source: IKUSHIN_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000331',
+      schoolName: '千葉学芸高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [
+        { courseName: '普通科(前期専願200+後期40)', capacity: 240 },
+        { courseName: '特別進学コース(前期専願25+後期15)', capacity: 40 },
+      ],
+      totalCapacity: 280,
+      source: IKUSHIN_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000377',
+      schoolName: '芝浦工業大学柏高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [
+        { courseName: 'グローバルサイエンスクラス(含内部・帰国)', capacity: 40 },
+        { courseName: 'ジェネラルラーニングクラス(含帰国)', capacity: 80 },
+      ],
+      totalCapacity: 120,
+      source: IKUSHIN_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000402',
+      schoolName: '東海大学付属市原望洋高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [
+        { courseName: '総合進学コース', capacity: 290 },
+        { courseName: 'スーパー特進コース', capacity: 30 },
+      ],
+      totalCapacity: 320,
+      source: IKUSHIN_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000466',
+      schoolName: '中央学院高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [{ courseName: '特別進学コース・進学クラス・スポーツコース(全コース計320+後期3)', capacity: 323 }],
+      totalCapacity: 323,
+      source: IKUSHIN_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000509',
+      schoolName: '東京学館浦安高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [
+        { courseName: '特別進学コース選抜', capacity: 25 },
+        { courseName: '特別進学コース', capacity: 60 },
+        { courseName: '総合進学コース', capacity: 250 },
+        { courseName: '国際教養コース', capacity: 30 },
+        { courseName: 'スポーツ進学コース(男)', capacity: 35 },
+      ],
+      totalCapacity: 400,
+      source: IKUSHIN_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000545',
+      schoolName: '東京学館高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [
+        { courseName: 'S特進コース', capacity: 30 },
+        { courseName: '特進コース', capacity: 70 },
+        { courseName: '総合進学コース(文理専攻・スポーツ専攻計)', capacity: 250 },
+      ],
+      totalCapacity: 350,
+      source: IKUSHIN_CHIBA_SOURCE,
+    },
   ],
   skipped: [
+    {
+      schoolCode: 'D112310000215',
+      schoolName: '中山学園高等学校',
+      reason: '育伸社募集要項PDFに掲載が無く募集定員を確認できなかった',
+    },
+    {
+      schoolCode: 'D112310000625',
+      schoolName: '成美学園高等學校',
+      reason: '育伸社募集要項PDFに掲載が無く募集定員を確認できなかった',
+    },
+    {
+      schoolCode: 'D112310000634',
+      schoolName: '千葉科学大学附属高等学校',
+      reason: '育伸社募集要項PDFに掲載が無く募集定員を確認できなかった',
+    },
     {
       schoolCode: 'D112310000082',
       schoolName: '明聖高等学校',
