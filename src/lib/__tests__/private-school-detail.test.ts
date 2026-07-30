@@ -37,6 +37,7 @@ import { PRIVATE_SCHOOL_DETAIL_GUNMA } from '@/data/private-school-detail/gunma'
 import { PRIVATE_SCHOOL_DETAIL_IBARAKI } from '@/data/private-school-detail/ibaraki';
 import { PRIVATE_SCHOOL_DETAIL_YAMAGUCHI } from '@/data/private-school-detail/yamaguchi';
 import { PRIVATE_SCHOOL_DETAIL_HIROSHIMA } from '@/data/private-school-detail/hiroshima';
+import { PRIVATE_SCHOOL_DETAIL_NARA } from '@/data/private-school-detail/nara';
 import { PRIVATE_SCHOOL_DETAIL_BY_PREFECTURE, PRIVATE_SCHOOL_DETAIL_FILES } from '@/data/private-school-detail';
 import { SCHOOLS_PRIVATE_TOTTORI } from '@/data/schools-private/tottori';
 import { SCHOOLS_PRIVATE_FUKUI } from '@/data/schools-private/fukui';
@@ -76,6 +77,7 @@ import { SCHOOLS_PRIVATE_GUNMA } from '@/data/schools-private/gunma';
 import { SCHOOLS_PRIVATE_IBARAKI } from '@/data/schools-private/ibaraki';
 import { SCHOOLS_PRIVATE_YAMAGUCHI } from '@/data/schools-private/yamaguchi';
 import { SCHOOLS_PRIVATE_HIROSHIMA } from '@/data/schools-private/hiroshima';
+import { SCHOOLS_PRIVATE_NARA } from '@/data/schools-private/nara';
 
 describe('checkCourseCapacitySum', () => {
   const base: PrivateSchoolDetail = {
@@ -879,8 +881,28 @@ describe('PRIVATE_SCHOOL_DETAIL_HIROSHIMA(育伸社募集要項PDFで40校中32�
   });
 });
 
+describe('PRIVATE_SCHOOL_DETAIL_NARA(育伸社募集要項PDFで18校中12校を収録・東大寺学園等6校は掲載なしで見送り)', () => {
+  it('収録した学校は全てcourses合計とtotalCapacityが一致する', () => {
+    for (const school of PRIVATE_SCHOOL_DETAIL_NARA.schools) {
+      expect(checkCourseCapacitySum(school)).toBe(true);
+    }
+  });
+
+  it('schools-private/nara.tsの全18校がschoolsまたはskippedのいずれかで網羅されている(重複・欠落なし)', () => {
+    const allCodes = SCHOOLS_PRIVATE_NARA.schools.map((s) => s.code);
+    const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_NARA, allCodes);
+    expect(result.duplicates).toEqual([]);
+    expect(result.missing).toEqual([]);
+  });
+
+  it('収録12校+スキップ6校(掲載なし)で参照台帳の18校と一致する', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_NARA.schools.length).toBe(12);
+    expect(PRIVATE_SCHOOL_DETAIL_NARA.skipped.length).toBe(6);
+  });
+});
+
 describe('private-school-detail index', () => {
-  it('akita/aomori/chiba/fukui/fukuoka/gifu/gunma/hiroshima/hyogo/ibaraki/ishikawa/iwate/kagawa/kagoshima/kochi/kumamoto/mie/miyagi/miyazaki/nagano/nagasaki/niigata/oita/okayama/okinawa/saga/saitama/shiga/shimane/shizuoka/tochigi/tokushima/tottori/toyama/wakayama/yamagata/yamaguchi/yamanashiの38県が集約されている', () => {
+  it('akita/aomori/chiba/fukui/fukuoka/gifu/gunma/hiroshima/hyogo/ibaraki/ishikawa/iwate/kagawa/kagoshima/kochi/kumamoto/mie/miyagi/miyazaki/nagano/nagasaki/nara/niigata/oita/okayama/okinawa/saga/saitama/shiga/shimane/shizuoka/tochigi/tokushima/tottori/toyama/wakayama/yamagata/yamaguchi/yamanashiの39県が集約されている', () => {
     expect(Object.keys(PRIVATE_SCHOOL_DETAIL_BY_PREFECTURE).sort()).toEqual([
       'akita',
       'aomori',
@@ -903,6 +925,7 @@ describe('private-school-detail index', () => {
       'miyazaki',
       'nagano',
       'nagasaki',
+      'nara',
       'niigata',
       'oita',
       'okayama',
@@ -921,6 +944,6 @@ describe('private-school-detail index', () => {
       'yamaguchi',
       'yamanashi',
     ]);
-    expect(PRIVATE_SCHOOL_DETAIL_FILES).toHaveLength(38);
+    expect(PRIVATE_SCHOOL_DETAIL_FILES).toHaveLength(39);
   });
 });
