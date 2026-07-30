@@ -20,6 +20,7 @@ import { PRIVATE_SCHOOL_DETAIL_IWATE } from '@/data/private-school-detail/iwate'
 import { PRIVATE_SCHOOL_DETAIL_CHIBA } from '@/data/private-school-detail/chiba';
 import { PRIVATE_SCHOOL_DETAIL_OKAYAMA } from '@/data/private-school-detail/okayama';
 import { PRIVATE_SCHOOL_DETAIL_SHIZUOKA } from '@/data/private-school-detail/shizuoka';
+import { PRIVATE_SCHOOL_DETAIL_SAITAMA } from '@/data/private-school-detail/saitama';
 import { PRIVATE_SCHOOL_DETAIL_BY_PREFECTURE, PRIVATE_SCHOOL_DETAIL_FILES } from '@/data/private-school-detail';
 import { SCHOOLS_PRIVATE_TOTTORI } from '@/data/schools-private/tottori';
 import { SCHOOLS_PRIVATE_FUKUI } from '@/data/schools-private/fukui';
@@ -42,6 +43,7 @@ import { SCHOOLS_PRIVATE_IWATE } from '@/data/schools-private/iwate';
 import { SCHOOLS_PRIVATE_CHIBA } from '@/data/schools-private/chiba';
 import { SCHOOLS_PRIVATE_OKAYAMA } from '@/data/schools-private/okayama';
 import { SCHOOLS_PRIVATE_SHIZUOKA } from '@/data/schools-private/shizuoka';
+import { SCHOOLS_PRIVATE_SAITAMA } from '@/data/schools-private/saitama';
 
 describe('checkCourseCapacitySum', () => {
   const base: PrivateSchoolDetail = {
@@ -518,8 +520,28 @@ describe('PRIVATE_SCHOOL_DETAIL_SHIZUOKA(私学協会一括PDFで48校中40校�
   });
 });
 
+describe('PRIVATE_SCHOOL_DETAIL_SAITAMA(学事課一覧で58校中47校を完全収録・浦和明の星女子は募集なし)', () => {
+  it('収録した学校は全てcourses合計とtotalCapacityが一致する', () => {
+    for (const school of PRIVATE_SCHOOL_DETAIL_SAITAMA.schools) {
+      expect(checkCourseCapacitySum(school)).toBe(true);
+    }
+  });
+
+  it('schools-private/saitama.tsの全58校がschoolsまたはskippedのいずれかで網羅されている(重複・欠落なし)', () => {
+    const allCodes = SCHOOLS_PRIVATE_SAITAMA.schools.map((s) => s.code);
+    const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_SAITAMA, allCodes);
+    expect(result.duplicates).toEqual([]);
+    expect(result.missing).toEqual([]);
+  });
+
+  it('収録47校+スキップ11校(募集なし1校+通信制のみ掲載/分校/掲載なし10校)で参照台帳の58校と一致する', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_SAITAMA.schools.length).toBe(47);
+    expect(PRIVATE_SCHOOL_DETAIL_SAITAMA.skipped.length).toBe(11);
+  });
+});
+
 describe('private-school-detail index', () => {
-  it('tottori/fukui/yamanashi/kochi/saga/tokushima/nagasaki/akita/shimane/toyama/wakayama/shiga/okinawa/ishikawa/kagawa/miyazaki/tochigi/iwate/chiba/okayama/shizuokaの21県が集約されている', () => {
+  it('tottori/fukui/yamanashi/kochi/saga/tokushima/nagasaki/akita/shimane/toyama/wakayama/shiga/okinawa/ishikawa/kagawa/miyazaki/tochigi/iwate/chiba/okayama/shizuoka/saitamaの22県が集約されている', () => {
     expect(Object.keys(PRIVATE_SCHOOL_DETAIL_BY_PREFECTURE).sort()).toEqual([
       'akita',
       'chiba',
@@ -533,6 +555,7 @@ describe('private-school-detail index', () => {
       'okayama',
       'okinawa',
       'saga',
+      'saitama',
       'shiga',
       'shimane',
       'shizuoka',
@@ -543,6 +566,6 @@ describe('private-school-detail index', () => {
       'wakayama',
       'yamanashi',
     ]);
-    expect(PRIVATE_SCHOOL_DETAIL_FILES).toHaveLength(21);
+    expect(PRIVATE_SCHOOL_DETAIL_FILES).toHaveLength(22);
   });
 });
