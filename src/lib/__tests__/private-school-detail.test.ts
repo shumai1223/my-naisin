@@ -11,6 +11,7 @@ import { PRIVATE_SCHOOL_DETAIL_SHIMANE } from '@/data/private-school-detail/shim
 import { PRIVATE_SCHOOL_DETAIL_TOYAMA } from '@/data/private-school-detail/toyama';
 import { PRIVATE_SCHOOL_DETAIL_WAKAYAMA } from '@/data/private-school-detail/wakayama';
 import { PRIVATE_SCHOOL_DETAIL_SHIGA } from '@/data/private-school-detail/shiga';
+import { PRIVATE_SCHOOL_DETAIL_OKINAWA } from '@/data/private-school-detail/okinawa';
 import { PRIVATE_SCHOOL_DETAIL_BY_PREFECTURE, PRIVATE_SCHOOL_DETAIL_FILES } from '@/data/private-school-detail';
 import { SCHOOLS_PRIVATE_TOTTORI } from '@/data/schools-private/tottori';
 import { SCHOOLS_PRIVATE_FUKUI } from '@/data/schools-private/fukui';
@@ -24,6 +25,7 @@ import { SCHOOLS_PRIVATE_SHIMANE } from '@/data/schools-private/shimane';
 import { SCHOOLS_PRIVATE_TOYAMA } from '@/data/schools-private/toyama';
 import { SCHOOLS_PRIVATE_WAKAYAMA } from '@/data/schools-private/wakayama';
 import { SCHOOLS_PRIVATE_SHIGA } from '@/data/schools-private/shiga';
+import { SCHOOLS_PRIVATE_OKINAWA } from '@/data/schools-private/okinawa';
 
 describe('checkCourseCapacitySum', () => {
   const base: PrivateSchoolDetail = {
@@ -308,13 +310,34 @@ describe('PRIVATE_SCHOOL_DETAIL_SHIGA(県の私立学校生徒募集概要PDFで
   });
 });
 
+describe('PRIVATE_SCHOOL_DETAIL_OKINAWA(12校中1校のみ全日制外部募集の伝統校・残り11校は通信制/中高一貫)', () => {
+  it('収録した学校は全てcourses合計とtotalCapacityが一致する', () => {
+    for (const school of PRIVATE_SCHOOL_DETAIL_OKINAWA.schools) {
+      expect(checkCourseCapacitySum(school)).toBe(true);
+    }
+  });
+
+  it('schools-private/okinawa.tsの全12校がschoolsまたはskippedのいずれかで網羅されている(重複・欠落なし)', () => {
+    const allCodes = SCHOOLS_PRIVATE_OKINAWA.schools.map((s) => s.code);
+    const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_OKINAWA, allCodes);
+    expect(result.duplicates).toEqual([]);
+    expect(result.missing).toEqual([]);
+  });
+
+  it('収録1校+スキップ11校で参照台帳の12校と一致する', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_OKINAWA.schools.length).toBe(1);
+    expect(PRIVATE_SCHOOL_DETAIL_OKINAWA.skipped.length).toBe(11);
+  });
+});
+
 describe('private-school-detail index', () => {
-  it('tottori/fukui/yamanashi/kochi/saga/tokushima/nagasaki/akita/shimane/toyama/wakayama/shigaの12県が集約されている', () => {
+  it('tottori/fukui/yamanashi/kochi/saga/tokushima/nagasaki/akita/shimane/toyama/wakayama/shiga/okinawaの13県が集約されている', () => {
     expect(Object.keys(PRIVATE_SCHOOL_DETAIL_BY_PREFECTURE).sort()).toEqual([
       'akita',
       'fukui',
       'kochi',
       'nagasaki',
+      'okinawa',
       'saga',
       'shiga',
       'shimane',
@@ -324,6 +347,6 @@ describe('private-school-detail index', () => {
       'wakayama',
       'yamanashi',
     ]);
-    expect(PRIVATE_SCHOOL_DETAIL_FILES).toHaveLength(12);
+    expect(PRIVATE_SCHOOL_DETAIL_FILES).toHaveLength(13);
   });
 });
