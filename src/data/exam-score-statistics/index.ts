@@ -31,6 +31,7 @@ import { EXAM_SCORE_STATISTICS_YAMAGUCHI } from './yamaguchi';
 import { EXAM_SCORE_STATISTICS_KAGAWA } from './kagawa';
 import { EXAM_SCORE_STATISTICS_EHIME } from './ehime';
 import { EXAM_SCORE_STATISTICS_OITA } from './oita';
+import { EXAM_SCORE_STATISTICS_KUMAMOTO } from './kumamoto';
 import type { ExamScoreStatisticsFile } from '@/lib/exam-score-statistics';
 
 export const EXAM_SCORE_STATISTICS_BY_PREFECTURE: Record<string, ExamScoreStatisticsFile> = {
@@ -64,6 +65,7 @@ export const EXAM_SCORE_STATISTICS_BY_PREFECTURE: Record<string, ExamScoreStatis
   kagawa: EXAM_SCORE_STATISTICS_KAGAWA,
   ehime: EXAM_SCORE_STATISTICS_EHIME,
   oita: EXAM_SCORE_STATISTICS_OITA,
+  kumamoto: EXAM_SCORE_STATISTICS_KUMAMOTO,
 };
 
 export const EXAM_SCORE_STATISTICS_FILES: ExamScoreStatisticsFile[] = Object.values(
