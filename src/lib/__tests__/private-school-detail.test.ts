@@ -916,20 +916,20 @@ describe('PRIVATE_SCHOOL_DETAIL_KYOTO(大都市圏5県の初回着手・育伸�
   });
 });
 
-describe('PRIVATE_SCHOOL_DETAIL_KANAGAWA(大都市圏5県・育伸社募集要項PDF1〜3ページ目23校を収録・進行中)', () => {
+describe('PRIVATE_SCHOOL_DETAIL_KANAGAWA(大都市圏5県・育伸社募集要項PDF1〜4ページ目23校を収録・湘南工科大学附属の誤帰属を訂正・進行中)', () => {
   it('収録した学校は全てcourses合計とtotalCapacityが一致する', () => {
     for (const school of PRIVATE_SCHOOL_DETAIL_KANAGAWA.schools) {
       expect(checkCourseCapacitySum(school)).toBe(true);
     }
   });
 
-  it('収録23校・スキップ0件で参照台帳83校のうち残り60校は未着手(重複なし)', () => {
+  it('収録23校・スキップ1校で参照台帳83校のうち残り59校は未着手(重複なし)', () => {
     const allCodes = SCHOOLS_PRIVATE_KANAGAWA.schools.map((s) => s.code);
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_KANAGAWA, allCodes);
     expect(result.duplicates).toEqual([]);
-    expect(result.missing).toHaveLength(60);
+    expect(result.missing).toHaveLength(59);
     expect(PRIVATE_SCHOOL_DETAIL_KANAGAWA.schools.length).toBe(23);
-    expect(PRIVATE_SCHOOL_DETAIL_KANAGAWA.skipped.length).toBe(0);
+    expect(PRIVATE_SCHOOL_DETAIL_KANAGAWA.skipped.length).toBe(1);
   });
 });
 
