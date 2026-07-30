@@ -27,6 +27,7 @@ import { PRIVATE_SCHOOL_DETAIL_NAGANO } from '@/data/private-school-detail/nagan
 import { PRIVATE_SCHOOL_DETAIL_GIFU } from '@/data/private-school-detail/gifu';
 import { PRIVATE_SCHOOL_DETAIL_MIE } from '@/data/private-school-detail/mie';
 import { PRIVATE_SCHOOL_DETAIL_AOMORI } from '@/data/private-school-detail/aomori';
+import { PRIVATE_SCHOOL_DETAIL_MIYAGI } from '@/data/private-school-detail/miyagi';
 import { PRIVATE_SCHOOL_DETAIL_BY_PREFECTURE, PRIVATE_SCHOOL_DETAIL_FILES } from '@/data/private-school-detail';
 import { SCHOOLS_PRIVATE_TOTTORI } from '@/data/schools-private/tottori';
 import { SCHOOLS_PRIVATE_FUKUI } from '@/data/schools-private/fukui';
@@ -56,6 +57,7 @@ import { SCHOOLS_PRIVATE_NAGANO } from '@/data/schools-private/nagano';
 import { SCHOOLS_PRIVATE_GIFU } from '@/data/schools-private/gifu';
 import { SCHOOLS_PRIVATE_MIE } from '@/data/schools-private/mie';
 import { SCHOOLS_PRIVATE_AOMORI } from '@/data/schools-private/aomori';
+import { SCHOOLS_PRIVATE_MIYAGI } from '@/data/schools-private/miyagi';
 
 describe('checkCourseCapacitySum', () => {
   const base: PrivateSchoolDetail = {
@@ -662,8 +664,25 @@ describe('PRIVATE_SCHOOL_DETAIL_AOMORI(個別学校サイトから青森山田�
   });
 });
 
+describe('PRIVATE_SCHOOL_DETAIL_MIYAGI(個別学校サイトから仙台育英学園1000・東北学院360の2校を収録・連合会一括PDFに定員記載なし)', () => {
+  it('収録した学校は全てcourses合計とtotalCapacityが一致する', () => {
+    for (const school of PRIVATE_SCHOOL_DETAIL_MIYAGI.schools) {
+      expect(checkCourseCapacitySum(school)).toBe(true);
+    }
+  });
+
+  it('収録2校・スキップ0件で残り19校は未着手(重複なし)', () => {
+    const allCodes = SCHOOLS_PRIVATE_MIYAGI.schools.map((s) => s.code);
+    const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_MIYAGI, allCodes);
+    expect(result.duplicates).toEqual([]);
+    expect(result.missing).toHaveLength(19);
+    expect(PRIVATE_SCHOOL_DETAIL_MIYAGI.schools.length).toBe(2);
+    expect(PRIVATE_SCHOOL_DETAIL_MIYAGI.skipped.length).toBe(0);
+  });
+});
+
 describe('private-school-detail index', () => {
-  it('akita/aomori/chiba/fukui/fukuoka/gifu/hyogo/ishikawa/iwate/kagawa/kochi/mie/miyazaki/nagano/nagasaki/okayama/okinawa/saga/saitama/shiga/shimane/shizuoka/tochigi/tokushima/tottori/toyama/wakayama/yamanashiの28県が集約されている', () => {
+  it('akita/aomori/chiba/fukui/fukuoka/gifu/hyogo/ishikawa/iwate/kagawa/kochi/mie/miyagi/miyazaki/nagano/nagasaki/okayama/okinawa/saga/saitama/shiga/shimane/shizuoka/tochigi/tokushima/tottori/toyama/wakayama/yamanashiの29県が集約されている', () => {
     expect(Object.keys(PRIVATE_SCHOOL_DETAIL_BY_PREFECTURE).sort()).toEqual([
       'akita',
       'aomori',
@@ -677,6 +696,7 @@ describe('private-school-detail index', () => {
       'kagawa',
       'kochi',
       'mie',
+      'miyagi',
       'miyazaki',
       'nagano',
       'nagasaki',
@@ -694,6 +714,6 @@ describe('private-school-detail index', () => {
       'wakayama',
       'yamanashi',
     ]);
-    expect(PRIVATE_SCHOOL_DETAIL_FILES).toHaveLength(28);
+    expect(PRIVATE_SCHOOL_DETAIL_FILES).toHaveLength(29);
   });
 });
