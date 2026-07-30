@@ -24,6 +24,7 @@ import { EXAM_SCORE_STATISTICS_GIFU } from '@/data/exam-score-statistics/gifu';
 import { EXAM_SCORE_STATISTICS_MIE } from '@/data/exam-score-statistics/mie';
 import { EXAM_SCORE_STATISTICS_WAKAYAMA } from '@/data/exam-score-statistics/wakayama';
 import { EXAM_SCORE_STATISTICS_SHIGA } from '@/data/exam-score-statistics/shiga';
+import { EXAM_SCORE_STATISTICS_OKAYAMA } from '@/data/exam-score-statistics/okayama';
 import { EXAM_SCORE_STATISTICS_BY_PREFECTURE, EXAM_SCORE_STATISTICS_FILES } from '@/data/exam-score-statistics';
 
 describe('isPlausibleSubjectSum', () => {
@@ -601,8 +602,36 @@ describe('EXAM_SCORE_STATISTICS_SHIGA(パイロット実データ・2つの独�
   });
 });
 
+describe('EXAM_SCORE_STATISTICS_OKAYAMA(パイロット実データ・1PDFの参考表で6年度分を一括取得)', () => {
+  it('6年度分(令和3〜8年度)が収録されている', () => {
+    expect(EXAM_SCORE_STATISTICS_OKAYAMA.years).toHaveLength(6);
+  });
+
+  it('各教科100点法換算(100点満点)・5教科の内訳を持ちtest-takersで統一されている', () => {
+    for (const year of EXAM_SCORE_STATISTICS_OKAYAMA.years) {
+      expect(year.averageType).toBe('test-takers');
+      expect(year.subjects).toHaveLength(5);
+      for (const s of year.subjects) expect(s.maxScore).toBe(100);
+    }
+  });
+
+  it('一次ソースが5教科合計を明記していないためtotalAverageは未設定', () => {
+    for (const year of EXAM_SCORE_STATISTICS_OKAYAMA.years) {
+      expect(year.totalAverage).toBeUndefined();
+      expect(isPlausibleSubjectSum(year)).toBe(true);
+    }
+  });
+
+  it('令和8年度分のみ受検者数(5,586人)が明記されている', () => {
+    const r8 = EXAM_SCORE_STATISTICS_OKAYAMA.years.find((y) => y.fiscalYearLabel === '令和8年度');
+    expect(r8?.testTakerCount).toBe(5586);
+    const others = EXAM_SCORE_STATISTICS_OKAYAMA.years.filter((y) => y.fiscalYearLabel !== '令和8年度');
+    for (const year of others) expect(year.testTakerCount).toBeUndefined();
+  });
+});
+
 describe('exam-score-statistics index', () => {
-  it('kochi/saitama/chiba/tokyo/nara/hyogo/niigata/gunma/miyagi/hokkaido/fukushima/aomori/iwate/akita/nagano/shizuoka/fukuoka/hiroshima/aichi/kanagawa/ibaraki/gifu/mie/wakayama/shigaの25県が集約されている', () => {
+  it('kochi/saitama/chiba/tokyo/nara/hyogo/niigata/gunma/miyagi/hokkaido/fukushima/aomori/iwate/akita/nagano/shizuoka/fukuoka/hiroshima/aichi/kanagawa/ibaraki/gifu/mie/wakayama/shiga/okayamaの26県が集約されている', () => {
     expect(Object.keys(EXAM_SCORE_STATISTICS_BY_PREFECTURE).sort()).toEqual([
       'aichi',
       'akita',
@@ -624,12 +653,13 @@ describe('exam-score-statistics index', () => {
       'nagano',
       'nara',
       'niigata',
+      'okayama',
       'saitama',
       'shiga',
       'shizuoka',
       'tokyo',
       'wakayama',
     ]);
-    expect(EXAM_SCORE_STATISTICS_FILES).toHaveLength(25);
+    expect(EXAM_SCORE_STATISTICS_FILES).toHaveLength(26);
   });
 });
