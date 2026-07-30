@@ -1,0 +1,226 @@
+/**
+ * 長野県私立高等学校の募集定員データ(Λ-5第二段)。
+ * 長野県(県民文化部)が公表する「令和8年度私立高等学校(全日制)の募集定員をお知らせします」
+ * プレスリリースPDFから、全日制16校を1周回で完全収録。栃木県庁PDFと同型の学科別内訳+
+ * 合計欄付きの明瞭な表形式で、16校のcourses合計を積み上げた結果が原資料の合計欄
+ * 「3,440」と完全一致することを検算済み。schools-private/nagano.tsの残り10校
+ * (長野女子/ステップ/信濃むつみ/さくら国際/コードアカデミー/地球環境/ID学園/つくば開成学園/
+ * 天龍興譲/緑誠蘭)は本プレスリリース(全日制向け)に掲載が無く、通信制・広域通信制の
+ * 可能性があるため未着手のまま残す(校名からの推測でのスキップ理由付けは行わない)。
+ */
+import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
+
+export const PRIVATE_SCHOOL_DETAIL_NAGANO: PrivateSchoolDetailFile = {
+  prefectureCode: 'nagano',
+  schools: [
+    {
+      schoolCode: 'D120320100017',
+      schoolName: '長野清泉女学院高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [{ courseName: '普通科', capacity: 175 }],
+      totalCapacity: 175,
+      source: {
+        url: 'https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/boshu2026.pdf',
+        docTitle: '令和8年度私立高等学校(全日制)の募集定員をお知らせします｜長野県県民文化部(学科別募集定員表・合計3,440と完全一致)',
+        fetchedAt: '2026-07-30',
+      },
+    },
+    {
+      schoolCode: 'D120320100035',
+      schoolName: '文化学園長野高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [{ courseName: '普通科', capacity: 210 }],
+      totalCapacity: 210,
+      source: {
+        url: 'https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/boshu2026.pdf',
+        docTitle: '令和8年度私立高等学校(全日制)の募集定員をお知らせします｜長野県県民文化部(学科別募集定員表・合計3,440と完全一致)',
+        fetchedAt: '2026-07-30',
+      },
+    },
+    {
+      schoolCode: 'D120320100044',
+      schoolName: '長野日本大学高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [
+        { courseName: '普通科', capacity: 270 },
+        { courseName: '探究創造科', capacity: 30 },
+      ],
+      totalCapacity: 300,
+      source: {
+        url: 'https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/boshu2026.pdf',
+        docTitle: '令和8年度私立高等学校(全日制)の募集定員をお知らせします｜長野県県民文化部(学科別募集定員表・合計3,440と完全一致)',
+        fetchedAt: '2026-07-30',
+      },
+    },
+    {
+      schoolCode: 'D120320100053',
+      schoolName: '長野俊英高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [{ courseName: '普通科', capacity: 215 }],
+      totalCapacity: 215,
+      source: {
+        url: 'https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/boshu2026.pdf',
+        docTitle: '令和8年度私立高等学校(全日制)の募集定員をお知らせします｜長野県県民文化部(学科別募集定員表・合計3,440と完全一致)',
+        fetchedAt: '2026-07-30',
+      },
+    },
+    {
+      schoolCode: 'D120320300015',
+      schoolName: '上田西高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [{ courseName: '普通科', capacity: 290 }],
+      totalCapacity: 290,
+      source: {
+        url: 'https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/boshu2026.pdf',
+        docTitle: '令和8年度私立高等学校(全日制)の募集定員をお知らせします｜長野県県民文化部(学科別募集定員表・合計3,440と完全一致)',
+        fetchedAt: '2026-07-30',
+      },
+    },
+    {
+      schoolCode: 'D120321700019',
+      schoolName: '佐久長聖高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [{ courseName: '普通科', capacity: 315 }],
+      totalCapacity: 315,
+      source: {
+        url: 'https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/boshu2026.pdf',
+        docTitle: '令和8年度私立高等学校(全日制)の募集定員をお知らせします｜長野県県民文化部(学科別募集定員表・合計3,440と完全一致)',
+        fetchedAt: '2026-07-30',
+      },
+    },
+    {
+      schoolCode: 'D120321400012',
+      schoolName: '東海大学付属諏訪高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [
+        { courseName: '普通科', capacity: 265 },
+        { courseName: '理数科', capacity: 40 },
+      ],
+      totalCapacity: 305,
+      source: {
+        url: 'https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/boshu2026.pdf',
+        docTitle: '令和8年度私立高等学校(全日制)の募集定員をお知らせします｜長野県県民文化部(学科別募集定員表・合計3,440と完全一致)',
+        fetchedAt: '2026-07-30',
+      },
+    },
+    {
+      schoolCode: 'D120320900019',
+      schoolName: '伊那西高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [{ courseName: '普通科', capacity: 170 }],
+      totalCapacity: 170,
+      source: {
+        url: 'https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/boshu2026.pdf',
+        docTitle: '令和8年度私立高等学校(全日制)の募集定員をお知らせします｜長野県県民文化部(学科別募集定員表・合計3,440と完全一致)',
+        fetchedAt: '2026-07-30',
+      },
+    },
+    {
+      schoolCode: 'D120320500013',
+      schoolName: '飯田女子高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [{ courseName: '普通科', capacity: 210 }],
+      totalCapacity: 210,
+      source: {
+        url: 'https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/boshu2026.pdf',
+        docTitle: '令和8年度私立高等学校(全日制)の募集定員をお知らせします｜長野県県民文化部(学科別募集定員表・合計3,440と完全一致)',
+        fetchedAt: '2026-07-30',
+      },
+    },
+    {
+      schoolCode: 'D120321500011',
+      schoolName: '東京都市大学塩尻高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [{ courseName: '普通科', capacity: 255 }],
+      totalCapacity: 255,
+      source: {
+        url: 'https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/boshu2026.pdf',
+        docTitle: '令和8年度私立高等学校(全日制)の募集定員をお知らせします｜長野県県民文化部(学科別募集定員表・合計3,440と完全一致)',
+        fetchedAt: '2026-07-30',
+      },
+    },
+    {
+      schoolCode: 'D120320200016',
+      schoolName: '松商学園高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [
+        { courseName: '普通科', capacity: 340 },
+        { courseName: '商業科', capacity: 80 },
+      ],
+      totalCapacity: 420,
+      source: {
+        url: 'https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/boshu2026.pdf',
+        docTitle: '令和8年度私立高等学校(全日制)の募集定員をお知らせします｜長野県県民文化部(学科別募集定員表・合計3,440と完全一致)',
+        fetchedAt: '2026-07-30',
+      },
+    },
+    {
+      schoolCode: 'D120320200025',
+      schoolName: '松本国際高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [{ courseName: '普通科', capacity: 190 }],
+      totalCapacity: 190,
+      source: {
+        url: 'https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/boshu2026.pdf',
+        docTitle: '令和8年度私立高等学校(全日制)の募集定員をお知らせします｜長野県県民文化部(学科別募集定員表・合計3,440と完全一致・注記に併設中学校からの入学予定者15名を含むと明記)',
+        fetchedAt: '2026-07-30',
+      },
+    },
+    {
+      schoolCode: 'D120320200052',
+      schoolName: '松本第一高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [
+        { courseName: '普通科', capacity: 120 },
+        { courseName: '家庭科(食物)', capacity: 75 },
+      ],
+      totalCapacity: 195,
+      source: {
+        url: 'https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/boshu2026.pdf',
+        docTitle: '令和8年度私立高等学校(全日制)の募集定員をお知らせします｜長野県県民文化部(学科別募集定員表・合計3,440と完全一致)',
+        fetchedAt: '2026-07-30',
+      },
+    },
+    {
+      schoolCode: 'D120320200034',
+      schoolName: 'エクセラン高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [
+        { courseName: '普通科', capacity: 90 },
+        { courseName: '美術科', capacity: 15 },
+        { courseName: '福祉科', capacity: 15 },
+      ],
+      totalCapacity: 120,
+      source: {
+        url: 'https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/boshu2026.pdf',
+        docTitle: '令和8年度私立高等学校(全日制)の募集定員をお知らせします｜長野県県民文化部(学科別募集定員表・合計3,440と完全一致)',
+        fetchedAt: '2026-07-30',
+      },
+    },
+    {
+      schoolCode: 'D120345200013',
+      schoolName: '日本ウェルネス長野高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [{ courseName: '普通科(県内生対象の総合コースのみ・全体定員80名の内数)', capacity: 30 }],
+      totalCapacity: 30,
+      source: {
+        url: 'https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/boshu2026.pdf',
+        docTitle: '令和8年度私立高等学校(全日制)の募集定員をお知らせします｜長野県県民文化部(注記「募集定員80名のうち、県内生徒を対象とする総合コースの定員を記載」・原資料の30がそのままcoursesと一致)',
+        fetchedAt: '2026-07-30',
+      },
+    },
+    {
+      schoolCode: 'D120332100012',
+      schoolName: 'ユナイテッド・ワールド・カレッジＩＳＡＫジャパン',
+      fiscalYearLabel: '令和8年度',
+      courses: [{ courseName: '普通科', capacity: 40 }],
+      totalCapacity: 40,
+      source: {
+        url: 'https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/boshu2026.pdf',
+        docTitle: '令和8年度私立高等学校(全日制)の募集定員をお知らせします｜長野県県民文化部(学科別募集定員表・合計3,440と完全一致・入学は8月1日と注記)',
+        fetchedAt: '2026-07-30',
+      },
+    },
+  ],
+  skipped: [],
+};

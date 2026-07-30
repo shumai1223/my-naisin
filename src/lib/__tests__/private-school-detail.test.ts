@@ -23,6 +23,7 @@ import { PRIVATE_SCHOOL_DETAIL_SHIZUOKA } from '@/data/private-school-detail/shi
 import { PRIVATE_SCHOOL_DETAIL_SAITAMA } from '@/data/private-school-detail/saitama';
 import { PRIVATE_SCHOOL_DETAIL_FUKUOKA } from '@/data/private-school-detail/fukuoka';
 import { PRIVATE_SCHOOL_DETAIL_HYOGO } from '@/data/private-school-detail/hyogo';
+import { PRIVATE_SCHOOL_DETAIL_NAGANO } from '@/data/private-school-detail/nagano';
 import { PRIVATE_SCHOOL_DETAIL_BY_PREFECTURE, PRIVATE_SCHOOL_DETAIL_FILES } from '@/data/private-school-detail';
 import { SCHOOLS_PRIVATE_TOTTORI } from '@/data/schools-private/tottori';
 import { SCHOOLS_PRIVATE_FUKUI } from '@/data/schools-private/fukui';
@@ -48,6 +49,7 @@ import { SCHOOLS_PRIVATE_SHIZUOKA } from '@/data/schools-private/shizuoka';
 import { SCHOOLS_PRIVATE_SAITAMA } from '@/data/schools-private/saitama';
 import { SCHOOLS_PRIVATE_FUKUOKA } from '@/data/schools-private/fukuoka';
 import { SCHOOLS_PRIVATE_HYOGO } from '@/data/schools-private/hyogo';
+import { SCHOOLS_PRIVATE_NAGANO } from '@/data/schools-private/nagano';
 
 describe('checkCourseCapacitySum', () => {
   const base: PrivateSchoolDetail = {
@@ -580,8 +582,27 @@ describe('PRIVATE_SCHOOL_DETAIL_HYOGO(55校中3校を収録・進行中)', () =>
   });
 });
 
+describe('PRIVATE_SCHOOL_DETAIL_NAGANO(県プレスリリースで26校中16校を完全収録・合計3,440と完全一致検算済み)', () => {
+  it('収録した学校は全てcourses合計とtotalCapacityが一致する', () => {
+    for (const school of PRIVATE_SCHOOL_DETAIL_NAGANO.schools) {
+      expect(checkCourseCapacitySum(school)).toBe(true);
+    }
+  });
+
+  it('収録16校・スキップ0件で残り10校は未着手(重複なし)', () => {
+    const allCodes = SCHOOLS_PRIVATE_NAGANO.schools.map((s) => s.code);
+    const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_NAGANO, allCodes);
+    expect(result.duplicates).toEqual([]);
+    expect(result.missing).toHaveLength(10);
+    expect(PRIVATE_SCHOOL_DETAIL_NAGANO.schools.length).toBe(16);
+    expect(PRIVATE_SCHOOL_DETAIL_NAGANO.skipped.length).toBe(0);
+    const grandTotal = PRIVATE_SCHOOL_DETAIL_NAGANO.schools.reduce((acc, s) => acc + s.totalCapacity, 0);
+    expect(grandTotal).toBe(3440);
+  });
+});
+
 describe('private-school-detail index', () => {
-  it('tottori/fukui/yamanashi/kochi/saga/tokushima/nagasaki/akita/shimane/toyama/wakayama/shiga/okinawa/ishikawa/kagawa/miyazaki/tochigi/iwate/chiba/okayama/shizuoka/saitama/fukuoka/hyogoの24県が集約されている', () => {
+  it('tottori/fukui/yamanashi/kochi/saga/tokushima/nagasaki/akita/shimane/toyama/wakayama/shiga/okinawa/ishikawa/kagawa/miyazaki/tochigi/iwate/chiba/okayama/shizuoka/saitama/fukuoka/hyogo/naganoの25県が集約されている', () => {
     expect(Object.keys(PRIVATE_SCHOOL_DETAIL_BY_PREFECTURE).sort()).toEqual([
       'akita',
       'chiba',
@@ -593,6 +614,7 @@ describe('private-school-detail index', () => {
       'kagawa',
       'kochi',
       'miyazaki',
+      'nagano',
       'nagasaki',
       'okayama',
       'okinawa',
@@ -608,6 +630,6 @@ describe('private-school-detail index', () => {
       'wakayama',
       'yamanashi',
     ]);
-    expect(PRIVATE_SCHOOL_DETAIL_FILES).toHaveLength(24);
+    expect(PRIVATE_SCHOOL_DETAIL_FILES).toHaveLength(25);
   });
 });
