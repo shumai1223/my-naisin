@@ -1,7 +1,7 @@
 /**
  * 宮崎県私立高等学校の募集定員データ(Λ-5第二段)。
  * schools-private/miyazaki.ts(第一段・機械生成の参照台帳)14校のうち、確度高く確認できた
- * 8校を収録。宮崎県には佐賀/香川のような県庁・協会一括PDFが見当たらず、学校ごとの個別
+ * 9校を収録。宮崎県には佐賀/香川のような県庁・協会一括PDFが見当たらず、学校ごとの個別
  * 調査(公式サイトの令和8年度入学試験要項PDF)で進めている。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
@@ -152,6 +152,28 @@ export const PRIVATE_SCHOOL_DETAIL_MIYAZAKI: PrivateSchoolDetailFile = {
       source: {
         url: 'https://www.nichigaku-highschool.info/img/doc/requirements2026.pdf',
         docTitle: '2026年度入学生 生徒募集要項｜日南学園高等学校(設置学科・募集定員表。合計の明記は原資料に無いため courses 合計240を totalCapacity として採用)',
+        fetchedAt: '2026-07-30',
+      },
+    },
+    {
+      schoolCode: 'D145334159126',
+      schoolName: '櫻美学園高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [
+        { courseName: 'スマートビジネス科', capacity: 30 },
+        { courseName: '普通科 特別進学', capacity: 15 },
+        { courseName: '普通科 進学キャリア', capacity: 15 },
+        { courseName: '普通科 スポーツ', capacity: 20 },
+        { courseName: '普通科 ヘアービューティ', capacity: 25 },
+        { courseName: '普通科 夢サポート', capacity: 15 },
+        { courseName: '調理科', capacity: 70 },
+        { courseName: 'スマートエンジニア科', capacity: 60 },
+        { courseName: '看護科(5年課程)', capacity: 40 },
+      ],
+      totalCapacity: 290,
+      source: {
+        url: 'https://oubi.ed.jp/edco/wp-content/uploads/2025/10/e17522b60a0e65e045b4a3471e05d096.pdf',
+        docTitle: '令和8年度 櫻美学園高等学校 生徒募集要項(募集定員表・30+90(普通科5コース計)+70+60+40=290で完全一致)',
         fetchedAt: '2026-07-30',
       },
     },
