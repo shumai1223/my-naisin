@@ -5,7 +5,10 @@
  * 分けて処理する方針(千葉/静岡/兵庫と同様)。「全コース計」「普通科計」等の記法は既存県と
  * 同一方針で1つの統合コースとして記録し、推薦・一般等の入試方式が別々の数値を明記している
  * 場合は合算する。一方「↓」は直前行と同一の値を意味し、合算しない(単一のクォータを複数の
- * 出願方法で共有している場合はこの記法になる)。1ページ目9校に続き2ページ目冒頭4校を追加。
+ * 出願方法で共有している場合はこの記法になる)。1ページ目9校・2ページ目冒頭4校に続き、
+ * 慶應義塾・慶應義塾湘南藤沢の2校を追加(いずれも一般募集数値が「若干」の枠は未算入)。
+ * 2ページ目の光明学園相模原・相模女子大学・向上・湘南学院は校名とコース名の列対応が
+ * 複雑で誤帰属リスクがあるため今回は見送り(次回再訪の価値あり)。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -159,6 +162,32 @@ export const PRIVATE_SCHOOL_DETAIL_KANAGAWA: PrivateSchoolDetailFile = {
       source: {
         ...IKUSHIN_KANAGAWA_SOURCE,
         docTitle: IKUSHIN_KANAGAWA_SOURCE.docTitle + '(各コースとも推薦・一般専願・一般併願・一般オープンで同一の募集人員が記載)',
+      },
+    },
+    {
+      schoolCode: 'D114310000222',
+      schoolName: '慶應義塾高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(男、推薦1次約40)', capacity: 40 },
+        { courseName: '普通(男、一般、含帰国)', capacity: 330 },
+        { courseName: '普通(男、帰国生)', capacity: 20 },
+      ],
+      totalCapacity: 390,
+      source: {
+        ...IKUSHIN_KANAGAWA_SOURCE,
+        docTitle: IKUSHIN_KANAGAWA_SOURCE.docTitle + '(帰国は若干名、全国枠(神奈川・東京・千葉・埼玉以外の居住者対象)は若干名のため数値化できず未算入)',
+      },
+    },
+    {
+      schoolCode: 'D114320500093',
+      schoolName: '慶應義塾湘南藤沢高等部',
+      fiscalYearLabel: '2026年度',
+      courses: [{ courseName: '普通(帰国生)', capacity: 20 }],
+      totalCapacity: 20,
+      source: {
+        ...IKUSHIN_KANAGAWA_SOURCE,
+        docTitle: IKUSHIN_KANAGAWA_SOURCE.docTitle + '(帰国生約20名のみ数値記載。全国枠は若干名のため未算入。一般募集の記載はこのPDFに無い)',
       },
     },
   ],
