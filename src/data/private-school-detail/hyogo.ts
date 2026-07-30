@@ -46,6 +46,48 @@ export const PRIVATE_SCHOOL_DETAIL_HYOGO: PrivateSchoolDetailFile = {
         fetchedAt: '2026-07-30',
       },
     },
+    {
+      schoolCode: 'D128310000253',
+      schoolName: '賢明女子学院高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: 'ソフィアコース(特進、女子)', capacity: 35 },
+        { courseName: 'ルミエールコース(進学、女子)', capacity: 35 },
+      ],
+      totalCapacity: 70,
+      source: {
+        url: 'https://www.ikushin.co.jp/school/pdf/03928.pdf',
+        docTitle: '2026年度 高専・私立高校 募集要項【兵庫県】｜(株)育伸社入試情報課(ソフィアコース・ルミエールコースとも専願/併願で「約35」と記載)',
+        fetchedAt: '2026-07-30',
+      },
+    },
+    {
+      schoolCode: 'D128310000342',
+      schoolName: '甲子園学院高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: 'プレミアムステージ(女子)', capacity: 80 },
+        { courseName: 'スタンダードステージ(女子)', capacity: 200 },
+      ],
+      totalCapacity: 280,
+      source: {
+        url: 'https://www.ikushin.co.jp/school/pdf/03928.pdf',
+        docTitle: '2026年度 高専・私立高校 募集要項【兵庫県】｜(株)育伸社入試情報課(プレミアムステージ80名・スタンダードステージ200名、専願/併願とも同数)',
+        fetchedAt: '2026-07-30',
+      },
+    },
+    {
+      schoolCode: 'D128310000440',
+      schoolName: '三田学園高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [],
+      totalCapacity: 40,
+      source: {
+        url: 'https://www.ikushin.co.jp/school/pdf/03928.pdf',
+        docTitle: '2026年度 高専・私立高校 募集要項【兵庫県】｜(株)育伸社入試情報課(A方式(一般)「約40(内B方式(推薦)約30)」・B方式はA方式定員の内数)',
+        fetchedAt: '2026-07-30',
+      },
+    },
   ],
   skipped: [],
 };

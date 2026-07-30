@@ -567,19 +567,19 @@ describe('PRIVATE_SCHOOL_DETAIL_FUKUOKA(私学協会志願者数調で62校中57
   });
 });
 
-describe('PRIVATE_SCHOOL_DETAIL_HYOGO(55校中3校を収録・進行中)', () => {
-  it('収録した学校は全てcourses合計とtotalCapacityが一致する(coursesが空のため常にtrue)', () => {
+describe('PRIVATE_SCHOOL_DETAIL_HYOGO(55校中6校を収録・進行中)', () => {
+  it('収録した学校は全てcourses合計とtotalCapacityが一致する', () => {
     for (const school of PRIVATE_SCHOOL_DETAIL_HYOGO.schools) {
       expect(checkCourseCapacitySum(school)).toBe(true);
     }
   });
 
-  it('収録3校・スキップ0件で残り52校は未着手(重複なし)', () => {
+  it('収録6校・スキップ0件で残り49校は未着手(重複なし)', () => {
     const allCodes = SCHOOLS_PRIVATE_HYOGO.schools.map((s) => s.code);
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_HYOGO, allCodes);
     expect(result.duplicates).toEqual([]);
-    expect(result.missing).toHaveLength(52);
-    expect(PRIVATE_SCHOOL_DETAIL_HYOGO.schools.length).toBe(3);
+    expect(result.missing).toHaveLength(49);
+    expect(PRIVATE_SCHOOL_DETAIL_HYOGO.schools.length).toBe(6);
     expect(PRIVATE_SCHOOL_DETAIL_HYOGO.skipped.length).toBe(0);
   });
 });
