@@ -10,7 +10,8 @@
  * 2ページ目の光明学園相模原・相模女子大学・向上・湘南学院は校名とコース名の列対応が
  * 複雑で誤帰属リスクがあるため今回は見送り(次回再訪の価値あり)。3ページ目から星槎・
  * 聖セシリア女子・聖ヨゼフ学園・聖和学院・捜真女学校・相洋・橘学苑の7校、4ページ目から
- * 桐蔭学園(プログレス/アドバンス/スタンダードコース)を追加。
+ * 桐蔭学園・立花学園・中央大学附属横浜・鶴見大学附属・東海大学付属相模・桐光学園・
+ * 藤嶺学園藤沢・日本女子大学附属・日本大学・日本大学藤沢の10校を追加。
  * **2026-07-31訂正**: 桐蔭学園の数値を当初「湘南工科大学附属」として誤収録していたことが
  * 判明(4ページ目の桐蔭学園ブロックと3ページ目の湘南工科大学附属ブロックを取り違えた)。
  * schoolCodeを桐蔭学園の正しいコードへ修正し、湘南工科大学附属は正しい数値が別途確認できる
@@ -278,6 +279,88 @@ export const PRIVATE_SCHOOL_DETAIL_KANAGAWA: PrivateSchoolDetailFile = {
         { courseName: 'スタンダードコース(推薦90+A方式オープン20+B方式書類選考100)', capacity: 210 },
       ],
       totalCapacity: 720,
+      source: IKUSHIN_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114336300019',
+      schoolName: '立花学園高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '特進コース(推薦20+1次専願筆記60)', capacity: 80 },
+        { courseName: '進学コース(推薦100+1次専願筆記140)', capacity: 240 },
+        { courseName: '総進コース(推薦60+1次専願筆記100)', capacity: 160 },
+      ],
+      totalCapacity: 480,
+      source: IKUSHIN_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114310000375',
+      schoolName: '中央大学附属横浜高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [{ courseName: '普通(推薦35+一般A書類選考35+一般B40)', capacity: 110 }],
+      totalCapacity: 110,
+      source: IKUSHIN_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114310000044',
+      schoolName: '鶴見大学附属高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [{ courseName: '総合進学コース・特進コース(全コース計、推薦20+一般書類選考40+一般A併願オープン30+一般Bオープン10)', capacity: 100 }],
+      totalCapacity: 100,
+      source: IKUSHIN_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114315000052',
+      schoolName: '東海大学付属相模高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [{ courseName: '普通(推薦200+一般240)', capacity: 440 }],
+      totalCapacity: 440,
+      source: IKUSHIN_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114313000066',
+      schoolName: '桐光学園高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '男子部SAコース(推薦40+一般1回60+一般2回40)', capacity: 140 },
+        { courseName: '女子部SAコース(一般1回20+一般2回20)', capacity: 40 },
+      ],
+      totalCapacity: 180,
+      source: {
+        ...IKUSHIN_KANAGAWA_SOURCE,
+        docTitle: IKUSHIN_KANAGAWA_SOURCE.docTitle + '(女子部SAコースの推薦は若干名のため未算入。帰国は両部門とも若干名のため未算入)',
+      },
+    },
+    {
+      schoolCode: 'D114320500066',
+      schoolName: '藤嶺学園藤沢高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [{ courseName: '普通(男、推薦15+Ⅰ期A書類80+Ⅰ期B10)', capacity: 105 }],
+      totalCapacity: 105,
+      source: IKUSHIN_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114313000057',
+      schoolName: '日本女子大学附属高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [{ courseName: '普通(女、推薦約65+一般専願約65)', capacity: 130 }],
+      totalCapacity: 130,
+      source: IKUSHIN_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114310000240',
+      schoolName: '日本大学高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [{ courseName: '特別進学コース・総合進学コース・総合進学コーススーパーグローバルクラス(普通科計、推薦100+A日程一般併願160)', capacity: 260 }],
+      totalCapacity: 260,
+      source: IKUSHIN_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114320500057',
+      schoolName: '日本大学藤沢高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [{ courseName: '普通(推薦160+一般200)', capacity: 360 }],
+      totalCapacity: 360,
       source: IKUSHIN_KANAGAWA_SOURCE,
     },
   ],
