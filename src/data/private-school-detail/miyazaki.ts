@@ -1,7 +1,7 @@
 /**
  * 宮崎県私立高等学校の募集定員データ(Λ-5第二段)。
  * schools-private/miyazaki.ts(第一段・機械生成の参照台帳)14校のうち、確度高く確認できた
- * 4校を収録。宮崎県には佐賀/香川のような県庁・協会一括PDFが見当たらず、学校ごとの個別
+ * 8校を収録。宮崎県には佐賀/香川のような県庁・協会一括PDFが見当たらず、学校ごとの個別
  * 調査(公式サイトの令和8年度入学試験要項PDF)で進めている。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
@@ -82,6 +82,76 @@ export const PRIVATE_SCHOOL_DETAIL_MIYAZAKI: PrivateSchoolDetailFile = {
       source: {
         url: 'https://nissho.ed.jp/wp-content/uploads/2025/10/2026youkou.pdf',
         docTitle: '令和8年度 募集要項｜日章学園高等学校(設置学科・募集定員表、自動車科は表中「30名(35名)」の併記だが本体数値30名を採用・合計450名と完全一致)',
+        fetchedAt: '2026-07-30',
+      },
+    },
+    {
+      schoolCode: 'D145320159081',
+      schoolName: '鵬翔高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [
+        { courseName: '特進英数科', capacity: 100 },
+        { courseName: '英数科(総合進学コース+トップアスリートコース)', capacity: 90 },
+        { courseName: '未来創造学科(ICT未来型ものづくり+ビジネスパイオニア+メディカルデンタルコース)', capacity: 100 },
+        { courseName: '看護科(女子のみ)', capacity: 80 },
+      ],
+      totalCapacity: 370,
+      source: {
+        url: 'https://www.hosho.ed.jp/wp-content/uploads/2025/09/鵬翔高校入学試験要項.pdf',
+        docTitle: '令和8年度 入学試験要項｜鵬翔高等学校(募集定員表・100+90+100+80=370【370名】と完全一致)',
+        fetchedAt: '2026-07-30',
+      },
+    },
+    {
+      schoolCode: 'D145320259106',
+      schoolName: '都城高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [
+        { courseName: '電気システム科(2年次より電子技術/電気技術コースに分岐)', capacity: 40 },
+        { courseName: '情報ビジネス科', capacity: 30 },
+        { courseName: '福祉科', capacity: 20 },
+        { courseName: '文理科', capacity: 15 },
+        { courseName: '普通科(総合/農業経営/食物調理/ヘアーデザイン/トータルビューティー/ライフ/スポーツコース計)', capacity: 155 },
+      ],
+      totalCapacity: 260,
+      source: {
+        url: 'https://kubogakuen.ac.jp/full-time-course/',
+        docTitle: '全日制課程(学科別募集定員)｜学校法人久保学園 都城高等学校公式サイト(40+30+20+15+155=260で完全一致)',
+        fetchedAt: '2026-07-30',
+      },
+    },
+    {
+      schoolCode: 'D145320359052',
+      schoolName: '聖心ウルスラ学園高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [
+        { courseName: '普通科(特別進学コース・総合コース)', capacity: 155 },
+        { courseName: '看護科', capacity: 40 },
+      ],
+      totalCapacity: 195,
+      source: {
+        url: 'https://www.ursula.ed.jp/high/admission/requirements/img/聖心ウルスラ学園生徒募集要項-web用.pdf',
+        docTitle: '令和8年度 生徒募集要項｜聖心ウルスラ学園高等学校(学科・募集定員表・155+40=195で完全一致)',
+        fetchedAt: '2026-07-30',
+      },
+    },
+    {
+      schoolCode: 'D145320459131',
+      schoolName: '日南学園高等学校',
+      fiscalYearLabel: '令和8年度(2026年度)',
+      courses: [
+        { courseName: '理数科', capacity: 30 },
+        { courseName: '普通科 キャリアデザインコース(新設)', capacity: 40 },
+        { courseName: '普通科 アスリートコース(名称変更)', capacity: 70 },
+        { courseName: '普通科 共育コース(名称変更)', capacity: 10 },
+        { courseName: '看護科', capacity: 40 },
+        { courseName: '調理科', capacity: 30 },
+        { courseName: '通信制課程 普通科', capacity: 20 },
+      ],
+      totalCapacity: 240,
+      source: {
+        url: 'https://www.nichigaku-highschool.info/img/doc/requirements2026.pdf',
+        docTitle: '2026年度入学生 生徒募集要項｜日南学園高等学校(設置学科・募集定員表。合計の明記は原資料に無いため courses 合計240を totalCapacity として採用)',
         fetchedAt: '2026-07-30',
       },
     },

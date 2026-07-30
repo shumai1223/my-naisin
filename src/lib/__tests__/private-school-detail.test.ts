@@ -376,32 +376,28 @@ describe('PRIVATE_SCHOOL_DETAIL_KAGAWA(県庁公表の全日制/通信制募集�
   });
 });
 
-describe('PRIVATE_SCHOOL_DETAIL_MIYAZAKI(14校中4校を収録・進行中)', () => {
+describe('PRIVATE_SCHOOL_DETAIL_MIYAZAKI(14校中8校を収録・進行中)', () => {
   it('収録した学校は全てcourses合計とtotalCapacityが一致する', () => {
     for (const school of PRIVATE_SCHOOL_DETAIL_MIYAZAKI.schools) {
       expect(checkCourseCapacitySum(school)).toBe(true);
     }
   });
 
-  it('収録4校・スキップ0件(残り10校は未着手・schools-private/miyazaki.tsの全14校のうち10校が未網羅)', () => {
+  it('収録8校・スキップ0件(残り6校は未着手・schools-private/miyazaki.tsの全14校のうち6校が未網羅)', () => {
     const allCodes = SCHOOLS_PRIVATE_MIYAZAKI.schools.map((s) => s.code);
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_MIYAZAKI, allCodes);
     expect(result.duplicates).toEqual([]);
     expect(result.missing.sort()).toEqual(
       [
         'D145320159018',
-        'D145320159081',
-        'D145320259106',
         'D145320259142',
-        'D145320359052',
         'D145320359098',
-        'D145320459131',
         'D145320559112',
         'D145320959163',
         'D145334159126',
       ].sort()
     );
-    expect(PRIVATE_SCHOOL_DETAIL_MIYAZAKI.schools.length).toBe(4);
+    expect(PRIVATE_SCHOOL_DETAIL_MIYAZAKI.schools.length).toBe(8);
     expect(PRIVATE_SCHOOL_DETAIL_MIYAZAKI.skipped.length).toBe(0);
   });
 });
