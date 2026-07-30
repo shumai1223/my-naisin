@@ -18,6 +18,7 @@ import { PRIVATE_SCHOOL_DETAIL_MIYAZAKI } from '@/data/private-school-detail/miy
 import { PRIVATE_SCHOOL_DETAIL_TOCHIGI } from '@/data/private-school-detail/tochigi';
 import { PRIVATE_SCHOOL_DETAIL_IWATE } from '@/data/private-school-detail/iwate';
 import { PRIVATE_SCHOOL_DETAIL_CHIBA } from '@/data/private-school-detail/chiba';
+import { PRIVATE_SCHOOL_DETAIL_OKAYAMA } from '@/data/private-school-detail/okayama';
 import { PRIVATE_SCHOOL_DETAIL_BY_PREFECTURE, PRIVATE_SCHOOL_DETAIL_FILES } from '@/data/private-school-detail';
 import { SCHOOLS_PRIVATE_TOTTORI } from '@/data/schools-private/tottori';
 import { SCHOOLS_PRIVATE_FUKUI } from '@/data/schools-private/fukui';
@@ -38,6 +39,7 @@ import { SCHOOLS_PRIVATE_MIYAZAKI } from '@/data/schools-private/miyazaki';
 import { SCHOOLS_PRIVATE_TOCHIGI } from '@/data/schools-private/tochigi';
 import { SCHOOLS_PRIVATE_IWATE } from '@/data/schools-private/iwate';
 import { SCHOOLS_PRIVATE_CHIBA } from '@/data/schools-private/chiba';
+import { SCHOOLS_PRIVATE_OKAYAMA } from '@/data/schools-private/okayama';
 
 describe('checkCourseCapacitySum', () => {
   const base: PrivateSchoolDetail = {
@@ -475,8 +477,25 @@ describe('PRIVATE_SCHOOL_DETAIL_CHIBA(62校中6校を収録・進行中)', () =>
   });
 });
 
+describe('PRIVATE_SCHOOL_DETAIL_OKAYAMA(27校中3校を収録・進行中)', () => {
+  it('収録した学校は全てcourses合計とtotalCapacityが一致する(coursesが空のため常にtrue)', () => {
+    for (const school of PRIVATE_SCHOOL_DETAIL_OKAYAMA.schools) {
+      expect(checkCourseCapacitySum(school)).toBe(true);
+    }
+  });
+
+  it('収録3校・スキップ0件で残り24校は未着手(重複なし)', () => {
+    const allCodes = SCHOOLS_PRIVATE_OKAYAMA.schools.map((s) => s.code);
+    const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_OKAYAMA, allCodes);
+    expect(result.duplicates).toEqual([]);
+    expect(result.missing).toHaveLength(24);
+    expect(PRIVATE_SCHOOL_DETAIL_OKAYAMA.schools.length).toBe(3);
+    expect(PRIVATE_SCHOOL_DETAIL_OKAYAMA.skipped.length).toBe(0);
+  });
+});
+
 describe('private-school-detail index', () => {
-  it('tottori/fukui/yamanashi/kochi/saga/tokushima/nagasaki/akita/shimane/toyama/wakayama/shiga/okinawa/ishikawa/kagawa/miyazaki/tochigi/iwate/chibaの19県が集約されている', () => {
+  it('tottori/fukui/yamanashi/kochi/saga/tokushima/nagasaki/akita/shimane/toyama/wakayama/shiga/okinawa/ishikawa/kagawa/miyazaki/tochigi/iwate/chiba/okayamaの20県が集約されている', () => {
     expect(Object.keys(PRIVATE_SCHOOL_DETAIL_BY_PREFECTURE).sort()).toEqual([
       'akita',
       'chiba',
@@ -487,6 +506,7 @@ describe('private-school-detail index', () => {
       'kochi',
       'miyazaki',
       'nagasaki',
+      'okayama',
       'okinawa',
       'saga',
       'shiga',
@@ -498,6 +518,6 @@ describe('private-school-detail index', () => {
       'wakayama',
       'yamanashi',
     ]);
-    expect(PRIVATE_SCHOOL_DETAIL_FILES).toHaveLength(19);
+    expect(PRIVATE_SCHOOL_DETAIL_FILES).toHaveLength(20);
   });
 });
