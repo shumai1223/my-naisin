@@ -11,7 +11,8 @@
  * 複雑で誤帰属リスクがあるため今回は見送り(次回再訪の価値あり)。3ページ目から星槎・
  * 聖セシリア女子・聖ヨゼフ学園・聖和学院・捜真女学校・相洋・橘学苑の7校、4ページ目から
  * 桐蔭学園・立花学園・中央大学附属横浜・鶴見大学附属・東海大学付属相模・桐光学園・
- * 藤嶺学園藤沢・日本女子大学附属・日本大学・日本大学藤沢の10校を追加。
+ * 藤嶺学園藤沢・日本女子大学附属・日本大学・日本大学藤沢の10校を追加。5ページ目から
+ * 武相(男子校・10コース)を追加。
  * **2026-07-31訂正**: 桐蔭学園の数値を当初「湘南工科大学附属」として誤収録していたことが
  * 判明(4ページ目の桐蔭学園ブロックと3ページ目の湘南工科大学附属ブロックを取り違えた)。
  * schoolCodeを桐蔭学園の正しいコードへ修正し、湘南工科大学附属は正しい数値が別途確認できる
@@ -361,6 +362,25 @@ export const PRIVATE_SCHOOL_DETAIL_KANAGAWA: PrivateSchoolDetailFile = {
       fiscalYearLabel: '2026年度',
       courses: [{ courseName: '普通(推薦160+一般200)', capacity: 360 }],
       totalCapacity: 360,
+      source: IKUSHIN_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114310000259',
+      schoolName: '武相高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '進学クラス(男、推薦16+一般書類選考16)', capacity: 32 },
+        { courseName: 'グローバルスタンダードコース(男、推薦16+一般書類選考16)', capacity: 32 },
+        { courseName: '進学アドバンスコース(男、推薦16+一般書類選考16)', capacity: 32 },
+        { courseName: 'グローバルアドバンスコース(男、推薦16+一般書類選考16)', capacity: 32 },
+        { courseName: 'グローバルJSLコース(男、推薦15+一般書類選考15、新設)', capacity: 30 },
+        { courseName: 'ダンスアート表現コース(男、推薦16+一般書類選考16)', capacity: 32 },
+        { courseName: 'スポーツコース(男、推薦30+一般書類選考30)', capacity: 60 },
+        { courseName: 'メディアアート表現コース(男、推薦30+一般書類選考30)', capacity: 60 },
+        { courseName: '保育・フードコーディネートコース(男、推薦15+一般書類選考15)', capacity: 30 },
+        { courseName: '総合コース(男、推薦30+一般書類選考30)', capacity: 60 },
+      ],
+      totalCapacity: 400,
       source: IKUSHIN_KANAGAWA_SOURCE,
     },
   ],
