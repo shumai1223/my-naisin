@@ -466,33 +466,22 @@ describe('PRIVATE_SCHOOL_DETAIL_TOCHIGI(県庁一括PDF2冊で15校全校を完�
   });
 });
 
-describe('PRIVATE_SCHOOL_DETAIL_IWATE(13校中2校を収録・進行中)', () => {
-  it('収録した学校は全てcourses合計とtotalCapacityが一致する(coursesが空のため常にtrue)', () => {
+describe('PRIVATE_SCHOOL_DETAIL_IWATE(個別サイト調査2校+育伸社募集要項PDFで残り11校を追加・全13校完全収録)', () => {
+  it('収録した学校は全てcourses合計とtotalCapacityが一致する', () => {
     for (const school of PRIVATE_SCHOOL_DETAIL_IWATE.schools) {
       expect(checkCourseCapacitySum(school)).toBe(true);
     }
   });
 
-  it('収録2校・スキップ0件(残り11校は未着手・schools-private/iwate.tsの全13校のうち11校が未網羅)', () => {
+  it('schools-private/iwate.tsの全13校がschoolsで網羅されている(重複・欠落なし)', () => {
     const allCodes = SCHOOLS_PRIVATE_IWATE.schools.map((s) => s.code);
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_IWATE, allCodes);
     expect(result.duplicates).toEqual([]);
-    expect(result.missing.sort()).toEqual(
-      [
-        'D103310000010',
-        'D103310000029',
-        'D103310000038',
-        'D103310000047',
-        'D103310000056',
-        'D103310000074',
-        'D103310000083',
-        'D103310000109',
-        'D103310000118',
-        'D103310000127',
-        'D103310000136',
-      ].sort()
-    );
-    expect(PRIVATE_SCHOOL_DETAIL_IWATE.schools.length).toBe(2);
+    expect(result.missing).toEqual([]);
+  });
+
+  it('13校全てを収録しスキップ0件', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_IWATE.schools.length).toBe(13);
     expect(PRIVATE_SCHOOL_DETAIL_IWATE.skipped.length).toBe(0);
   });
 });
