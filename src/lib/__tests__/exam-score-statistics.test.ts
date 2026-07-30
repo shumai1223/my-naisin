@@ -30,6 +30,7 @@ import { EXAM_SCORE_STATISTICS_KAGAWA } from '@/data/exam-score-statistics/kagaw
 import { EXAM_SCORE_STATISTICS_EHIME } from '@/data/exam-score-statistics/ehime';
 import { EXAM_SCORE_STATISTICS_OITA } from '@/data/exam-score-statistics/oita';
 import { EXAM_SCORE_STATISTICS_KUMAMOTO } from '@/data/exam-score-statistics/kumamoto';
+import { EXAM_SCORE_STATISTICS_KAGOSHIMA } from '@/data/exam-score-statistics/kagoshima';
 import { EXAM_SCORE_STATISTICS_BY_PREFECTURE, EXAM_SCORE_STATISTICS_FILES } from '@/data/exam-score-statistics';
 
 describe('isPlausibleSubjectSum', () => {
@@ -762,8 +763,29 @@ describe('EXAM_SCORE_STATISTICS_KUMAMOTO(パイロット実データ・数学/�
   });
 });
 
+describe('EXAM_SCORE_STATISTICS_KAGOSHIMA(パイロット実データ・2つの独立PDFで5年度が重複検証済み)', () => {
+  it('7年度分(令和2〜8年度)が収録されている', () => {
+    expect(EXAM_SCORE_STATISTICS_KAGOSHIMA.years).toHaveLength(7);
+  });
+
+  it('各教科90点満点(他県に無い特有配点・5教科合計450点満点)・test-takersで統一されている', () => {
+    for (const year of EXAM_SCORE_STATISTICS_KAGOSHIMA.years) {
+      expect(year.averageType).toBe('test-takers');
+      expect(year.subjects).toHaveLength(5);
+      for (const s of year.subjects) expect(s.maxScore).toBe(90);
+      expect(year.totalMaxScore).toBe(450);
+    }
+  });
+
+  it('全年度で教科別平均点の合計がtotalAverageと妥当な範囲で一致する', () => {
+    for (const year of EXAM_SCORE_STATISTICS_KAGOSHIMA.years) {
+      expect(isPlausibleSubjectSum(year)).toBe(true);
+    }
+  });
+});
+
 describe('exam-score-statistics index', () => {
-  it('kochi/saitama/chiba/tokyo/nara/hyogo/niigata/gunma/miyagi/hokkaido/fukushima/aomori/iwate/akita/nagano/shizuoka/fukuoka/hiroshima/aichi/kanagawa/ibaraki/gifu/mie/wakayama/shiga/okayama/yamaguchi/kagawa/ehime/oita/kumamotoの31県が集約されている', () => {
+  it('kochi/saitama/chiba/tokyo/nara/hyogo/niigata/gunma/miyagi/hokkaido/fukushima/aomori/iwate/akita/nagano/shizuoka/fukuoka/hiroshima/aichi/kanagawa/ibaraki/gifu/mie/wakayama/shiga/okayama/yamaguchi/kagawa/ehime/oita/kumamoto/kagoshimaの32県が集約されている', () => {
     expect(Object.keys(EXAM_SCORE_STATISTICS_BY_PREFECTURE).sort()).toEqual([
       'aichi',
       'akita',
@@ -780,6 +802,7 @@ describe('exam-score-statistics index', () => {
       'ibaraki',
       'iwate',
       'kagawa',
+      'kagoshima',
       'kanagawa',
       'kochi',
       'kumamoto',
@@ -797,6 +820,6 @@ describe('exam-score-statistics index', () => {
       'wakayama',
       'yamaguchi',
     ]);
-    expect(EXAM_SCORE_STATISTICS_FILES).toHaveLength(31);
+    expect(EXAM_SCORE_STATISTICS_FILES).toHaveLength(32);
   });
 });
