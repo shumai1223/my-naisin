@@ -35,6 +35,7 @@ import { PRIVATE_SCHOOL_DETAIL_KUMAMOTO } from './kumamoto';
 import { PRIVATE_SCHOOL_DETAIL_OITA } from './oita';
 import { PRIVATE_SCHOOL_DETAIL_KAGOSHIMA } from './kagoshima';
 import { PRIVATE_SCHOOL_DETAIL_YAMAGATA } from './yamagata';
+import { PRIVATE_SCHOOL_DETAIL_GUNMA } from './gunma';
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
 export const PRIVATE_SCHOOL_DETAIL_BY_PREFECTURE: Record<string, PrivateSchoolDetailFile> = {
@@ -72,6 +73,7 @@ export const PRIVATE_SCHOOL_DETAIL_BY_PREFECTURE: Record<string, PrivateSchoolDe
   oita: PRIVATE_SCHOOL_DETAIL_OITA,
   kagoshima: PRIVATE_SCHOOL_DETAIL_KAGOSHIMA,
   yamagata: PRIVATE_SCHOOL_DETAIL_YAMAGATA,
+  gunma: PRIVATE_SCHOOL_DETAIL_GUNMA,
 };
 
 export const PRIVATE_SCHOOL_DETAIL_FILES: PrivateSchoolDetailFile[] = Object.values(
