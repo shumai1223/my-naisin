@@ -1,8 +1,12 @@
 /**
  * 宮崎県私立高等学校の募集定員データ(Λ-5第二段)。
- * schools-private/miyazaki.ts(第一段・機械生成の参照台帳)14校のうち、確度高く確認できた
- * 10校を収録。宮崎県には佐賀/香川のような県庁・協会一括PDFが見当たらず、学校ごとの個別
- * 調査(公式サイトの令和8年度入学試験要項PDF)で進めている。
+ * schools-private/miyazaki.ts(第一段・機械生成の参照台帳)14校のうち、個別学校の
+ * 公式サイト調査で10校を先に収録。その後熊本・大分・鹿児島・山形・群馬・茨城・
+ * 山口・広島・奈良・岩手・千葉・宮城に続き(株)育伸社(入試情報課)の「2026年度
+ * 高専・私立高校募集要項【宮崎県】」(2025年11月4日現在)から都城聖ドミニコ学園・
+ * 延岡学園・小林西の3校を追加(既存の宮崎学園=340・宮崎日本大学=500・都城=260は
+ * 育伸社データと独立に完全一致確認できた)。日章学園九州国際高等学校のみこのPDFに
+ * 掲載が無く見送り。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -189,6 +193,59 @@ export const PRIVATE_SCHOOL_DETAIL_MIYAZAKI: PrivateSchoolDetailFile = {
         fetchedAt: '2026-07-31',
       },
     },
+    {
+      schoolCode: 'D145320259142',
+      schoolName: '都城聖ドミニコ学園高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [
+        { courseName: '普通', capacity: 90 },
+        { courseName: '普通(単位制)', capacity: 10 },
+      ],
+      totalCapacity: 100,
+      source: {
+        url: 'https://www.ikushin.co.jp/school/pdf/03945.pdf',
+        docTitle: '2026年度 高専・私立高校 募集要項【宮崎県】（(株)育伸社 入試情報課・2025年11月4日現在）',
+        fetchedAt: '2026-07-31',
+      },
+    },
+    {
+      schoolCode: 'D145320359098',
+      schoolName: '延岡学園高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [
+        { courseName: '調理', capacity: 40 },
+        { courseName: '普通', capacity: 170 },
+        { courseName: '情報テックリート(新設)', capacity: 70 },
+      ],
+      totalCapacity: 280,
+      source: {
+        url: 'https://www.ikushin.co.jp/school/pdf/03945.pdf',
+        docTitle: '2026年度 高専・私立高校 募集要項【宮崎県】（(株)育伸社 入試情報課・2025年11月4日現在）',
+        fetchedAt: '2026-07-31',
+      },
+    },
+    {
+      schoolCode: 'D145320559112',
+      schoolName: '小林西高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [
+        { courseName: '普通', capacity: 50 },
+        { courseName: 'ビジネス総合', capacity: 40 },
+        { courseName: '調理', capacity: 30 },
+      ],
+      totalCapacity: 120,
+      source: {
+        url: 'https://www.ikushin.co.jp/school/pdf/03945.pdf',
+        docTitle: '2026年度 高専・私立高校 募集要項【宮崎県】（(株)育伸社 入試情報課・2025年11月4日現在）',
+        fetchedAt: '2026-07-31',
+      },
+    },
   ],
-  skipped: [],
+  skipped: [
+    {
+      schoolCode: 'D145320959163',
+      schoolName: '日章学園九州国際高等学校',
+      reason: '育伸社募集要項PDFに掲載が無く募集定員を確認できなかった',
+    },
+  ],
 };

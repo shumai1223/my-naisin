@@ -422,27 +422,23 @@ describe('PRIVATE_SCHOOL_DETAIL_KAGAWA(県庁公表の全日制/通信制募集�
   });
 });
 
-describe('PRIVATE_SCHOOL_DETAIL_MIYAZAKI(14校中10校を収録・進行中)', () => {
+describe('PRIVATE_SCHOOL_DETAIL_MIYAZAKI(個別サイト10校+育伸社募集要項PDFで3校追加・14校中13校を収録)', () => {
   it('収録した学校は全てcourses合計とtotalCapacityが一致する', () => {
     for (const school of PRIVATE_SCHOOL_DETAIL_MIYAZAKI.schools) {
       expect(checkCourseCapacitySum(school)).toBe(true);
     }
   });
 
-  it('収録10校・スキップ0件(残り4校は未着手・schools-private/miyazaki.tsの全14校のうち4校が未網羅)', () => {
+  it('schools-private/miyazaki.tsの全14校がschoolsまたはskippedのいずれかで網羅されている(重複・欠落なし)', () => {
     const allCodes = SCHOOLS_PRIVATE_MIYAZAKI.schools.map((s) => s.code);
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_MIYAZAKI, allCodes);
     expect(result.duplicates).toEqual([]);
-    expect(result.missing.sort()).toEqual(
-      [
-        'D145320259142',
-        'D145320359098',
-        'D145320559112',
-        'D145320959163',
-      ].sort()
-    );
-    expect(PRIVATE_SCHOOL_DETAIL_MIYAZAKI.schools.length).toBe(10);
-    expect(PRIVATE_SCHOOL_DETAIL_MIYAZAKI.skipped.length).toBe(0);
+    expect(result.missing).toEqual([]);
+  });
+
+  it('収録13校+スキップ1校(掲載なし)で参照台帳の14校と一致する', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_MIYAZAKI.schools.length).toBe(13);
+    expect(PRIVATE_SCHOOL_DETAIL_MIYAZAKI.skipped.length).toBe(1);
   });
 });
 
