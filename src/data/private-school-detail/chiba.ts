@@ -9,10 +9,18 @@
  * 独立にクロスチェックが取れている)。千葉県は学校数が非常に多く(参照台帳62校)複数コースの
  * 「単願X・併願Y(X<Y)」という記法が頻出するため、この場合は併願側のより大きい数値を当該コースの
  * 公表総定員として採用する方針とした(Hiroshima崇徳・Ibaraki常総学院で確立した「一般時点の
- * 大きい方を採用」ルールと同一の考え方)。育伸社PDFの3〜6頁はまだ未処理で残っており、次回以降の
- * 継続対象とする。
+ * 大きい方を採用」ルールと同一の考え方)。**続き**: 育伸社PDFの3〜6頁を処理し確度の高い22校を
+ * 追加(木更津工業高専は高専のため対象外)。「推薦X+一般Y」のように同一コースが入試方式別の
+ * 数値を持つ場合は合算する方針(我孫子二階堂で先例)を踏襲した。日本大学習志野・中央学院等、
+ * 複数の校名ブロックが密集し数値の対応関係を確信できなかった学校は誤帰属リスクを避け見送った。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
+
+const IKUSHIN_CHIBA_SOURCE = {
+  url: 'https://www.ikushin.co.jp/school/pdf/03912.pdf',
+  docTitle: '2026年度 高専・私立高校 募集要項【千葉県】（(株)育伸社 入試情報課・2025年11月4日現在）',
+  fetchedAt: '2026-07-31',
+};
 
 export const PRIVATE_SCHOOL_DETAIL_CHIBA: PrivateSchoolDetailFile = {
   prefectureCode: 'chiba',
@@ -278,6 +286,227 @@ export const PRIVATE_SCHOOL_DETAIL_CHIBA: PrivateSchoolDetailFile = {
         docTitle: '2026年度 高専・私立高校 募集要項【千葉県】（(株)育伸社 入試情報課・2025年11月4日現在）',
         fetchedAt: '2026-07-31',
       },
+    },
+    {
+      schoolCode: 'D112310000242',
+      schoolName: '暁星国際高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [{ courseName: '特進・進学コース・グローバルスタディーズコース・インターナショナルコース(全コース計)', capacity: 30 }],
+      totalCapacity: 30,
+      source: IKUSHIN_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000288',
+      schoolName: '光英VERITAS高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [
+        { courseName: '普通(特待選抜)', capacity: 30 },
+        { courseName: '普通(推薦・一般)', capacity: 100 },
+      ],
+      totalCapacity: 130,
+      source: IKUSHIN_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000297',
+      schoolName: '西武台千葉高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [{ courseName: '特別選抜コース・進学コース(全コース計)', capacity: 293 }],
+      totalCapacity: 293,
+      source: IKUSHIN_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000279',
+      schoolName: '専修大学松戸高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [
+        { courseName: 'E類型', capacity: 72 },
+        { courseName: 'A類型', capacity: 150 },
+        { courseName: 'S類型', capacity: 34 },
+      ],
+      totalCapacity: 256,
+      source: IKUSHIN_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000108',
+      schoolName: '昭和学院高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [{ courseName: 'IA・TA・AA・GA・SAコース(全コース計)', capacity: 176 }],
+      totalCapacity: 176,
+      source: IKUSHIN_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000064',
+      schoolName: '昭和学院秀英高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [{ courseName: '普通(含帰国)', capacity: 80 }],
+      totalCapacity: 80,
+      source: IKUSHIN_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000493',
+      schoolName: '東海大学付属浦安高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [],
+      totalCapacity: 250,
+      source: IKUSHIN_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000206',
+      schoolName: '東京学館船橋高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [
+        { courseName: '普通', capacity: 108 },
+        { courseName: '情報ビジネス', capacity: 108 },
+        { courseName: '食物調理', capacity: 40 },
+        { courseName: '美術工芸', capacity: 36 },
+      ],
+      totalCapacity: 292,
+      source: IKUSHIN_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000171',
+      schoolName: '東葉高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [
+        { courseName: 'S特進クラス', capacity: 26 },
+        { courseName: '特進クラス', capacity: 240 },
+      ],
+      totalCapacity: 266,
+      source: IKUSHIN_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000055',
+      schoolName: '千葉聖心高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [{ courseName: '普通(女子)', capacity: 200 }],
+      totalCapacity: 200,
+      source: IKUSHIN_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000199',
+      schoolName: '千葉日本大学第一高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [
+        { courseName: '特進クラス', capacity: 40 },
+        { courseName: '進学クラス', capacity: 80 },
+      ],
+      totalCapacity: 120,
+      source: IKUSHIN_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000224',
+      schoolName: '千葉県安房西高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [],
+      totalCapacity: 100,
+      source: {
+        url: 'https://www.ikushin.co.jp/school/pdf/03912.pdf',
+        docTitle: '2026年度 高専・私立高校 募集要項【千葉県】｜(株)育伸社入試情報課(単願推薦60・単願/併願/併願特待100の2区分を確認、より大きい100を採用)',
+        fetchedAt: '2026-07-31',
+      },
+    },
+    {
+      schoolCode: 'D112310000019',
+      schoolName: '千葉経済大学附属高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [
+        { courseName: '普通・特進コース(普通科計)', capacity: 300 },
+        { courseName: '商業', capacity: 110 },
+        { courseName: '情報処理', capacity: 110 },
+      ],
+      totalCapacity: 520,
+      source: IKUSHIN_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000313',
+      schoolName: '千葉萌陽高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [{ courseName: '普通(女子)', capacity: 80 }],
+      totalCapacity: 80,
+      source: IKUSHIN_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000028',
+      schoolName: '千葉明徳高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [
+        { courseName: '特別進学コース', capacity: 70 },
+        { courseName: '進学コースHSクラス・Sクラス(進学計)', capacity: 140 },
+        { courseName: 'アスリート進学コース', capacity: 70 },
+      ],
+      totalCapacity: 280,
+      source: IKUSHIN_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000554',
+      schoolName: '千葉黎明高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [
+        { courseName: '特進コース', capacity: 46 },
+        { courseName: '進学コース', capacity: 190 },
+        { courseName: '生産ビジネス', capacity: 40 },
+      ],
+      totalCapacity: 276,
+      source: IKUSHIN_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000162',
+      schoolName: '不二女子高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [{ courseName: '普通(女子、推薦60+一般60)', capacity: 120 }],
+      totalCapacity: 120,
+      source: IKUSHIN_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000572',
+      schoolName: '茂原北陵高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [
+        { courseName: '総合コース', capacity: 135 },
+        { courseName: '特別進学コース', capacity: 25 },
+        { courseName: 'ライフデザイン', capacity: 40 },
+      ],
+      totalCapacity: 200,
+      source: IKUSHIN_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000563',
+      schoolName: '横芝敬愛高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [],
+      totalCapacity: 190,
+      source: IKUSHIN_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000395',
+      schoolName: '流通経済大学付属柏高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [
+        { courseName: '総合進学コース', capacity: 71 },
+        { courseName: 'スポーツ進学コース', capacity: 60 },
+        { courseName: '特別進学コース', capacity: 60 },
+      ],
+      totalCapacity: 191,
+      source: IKUSHIN_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000536',
+      schoolName: '二松学舎大学附属柏高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [
+        { courseName: 'スーパー特別進学コース', capacity: 65 },
+        { courseName: '特別進学コース', capacity: 100 },
+      ],
+      totalCapacity: 165,
+      source: IKUSHIN_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000386',
+      schoolName: '日本体育大学柏高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [{ courseName: 'オーセンティックラーニングコース・アスリートコース(全コース計)', capacity: 360 }],
+      totalCapacity: 360,
+      source: IKUSHIN_CHIBA_SOURCE,
     },
   ],
   skipped: [],

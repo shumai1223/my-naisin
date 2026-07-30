@@ -482,19 +482,19 @@ describe('PRIVATE_SCHOOL_DETAIL_IWATE(個別サイト調査2校+育伸社募集�
   });
 });
 
-describe('PRIVATE_SCHOOL_DETAIL_CHIBA(62校中19校を収録・育伸社募集要項PDFで10校追加・進行中)', () => {
+describe('PRIVATE_SCHOOL_DETAIL_CHIBA(62校中41校を収録・育伸社募集要項PDF3〜6頁で22校追加・進行中)', () => {
   it('収録した学校は全てcourses合計とtotalCapacityが一致する', () => {
     for (const school of PRIVATE_SCHOOL_DETAIL_CHIBA.schools) {
       expect(checkCourseCapacitySum(school)).toBe(true);
     }
   });
 
-  it('収録19校・スキップ0件で残り43校は未着手(重複なし)', () => {
+  it('収録41校・スキップ0件で残り21校は未着手(重複なし)', () => {
     const allCodes = SCHOOLS_PRIVATE_CHIBA.schools.map((s) => s.code);
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_CHIBA, allCodes);
     expect(result.duplicates).toEqual([]);
-    expect(result.missing).toHaveLength(43);
-    expect(PRIVATE_SCHOOL_DETAIL_CHIBA.schools.length).toBe(19);
+    expect(result.missing).toHaveLength(21);
+    expect(PRIVATE_SCHOOL_DETAIL_CHIBA.schools.length).toBe(41);
     expect(PRIVATE_SCHOOL_DETAIL_CHIBA.skipped.length).toBe(0);
   });
 });
