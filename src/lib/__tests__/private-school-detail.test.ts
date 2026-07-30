@@ -32,6 +32,7 @@ import { PRIVATE_SCHOOL_DETAIL_NIIGATA } from '@/data/private-school-detail/niig
 import { PRIVATE_SCHOOL_DETAIL_KUMAMOTO } from '@/data/private-school-detail/kumamoto';
 import { PRIVATE_SCHOOL_DETAIL_OITA } from '@/data/private-school-detail/oita';
 import { PRIVATE_SCHOOL_DETAIL_KAGOSHIMA } from '@/data/private-school-detail/kagoshima';
+import { PRIVATE_SCHOOL_DETAIL_YAMAGATA } from '@/data/private-school-detail/yamagata';
 import { PRIVATE_SCHOOL_DETAIL_BY_PREFECTURE, PRIVATE_SCHOOL_DETAIL_FILES } from '@/data/private-school-detail';
 import { SCHOOLS_PRIVATE_TOTTORI } from '@/data/schools-private/tottori';
 import { SCHOOLS_PRIVATE_FUKUI } from '@/data/schools-private/fukui';
@@ -66,6 +67,7 @@ import { SCHOOLS_PRIVATE_NIIGATA } from '@/data/schools-private/niigata';
 import { SCHOOLS_PRIVATE_KUMAMOTO } from '@/data/schools-private/kumamoto';
 import { SCHOOLS_PRIVATE_OITA } from '@/data/schools-private/oita';
 import { SCHOOLS_PRIVATE_KAGOSHIMA } from '@/data/schools-private/kagoshima';
+import { SCHOOLS_PRIVATE_YAMAGATA } from '@/data/schools-private/yamagata';
 
 describe('checkCourseCapacitySum', () => {
   const base: PrivateSchoolDetail = {
@@ -769,8 +771,28 @@ describe('PRIVATE_SCHOOL_DETAIL_KAGOSHIMA(育伸社募集要項PDFで22校中21�
   });
 });
 
+describe('PRIVATE_SCHOOL_DETAIL_YAMAGATA(育伸社募集要項PDFで15校中12校を収録・羽黒は数値記載なし・和順館/基督教独立学園は掲載なしで見送り)', () => {
+  it('収録した学校は全てcourses合計とtotalCapacityが一致する', () => {
+    for (const school of PRIVATE_SCHOOL_DETAIL_YAMAGATA.schools) {
+      expect(checkCourseCapacitySum(school)).toBe(true);
+    }
+  });
+
+  it('schools-private/yamagata.tsの全15校がschoolsまたはskippedのいずれかで網羅されている(重複・欠落なし)', () => {
+    const allCodes = SCHOOLS_PRIVATE_YAMAGATA.schools.map((s) => s.code);
+    const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_YAMAGATA, allCodes);
+    expect(result.duplicates).toEqual([]);
+    expect(result.missing).toEqual([]);
+  });
+
+  it('収録12校+スキップ3校(数値記載なし1校+掲載なし2校)で参照台帳の15校と一致する', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_YAMAGATA.schools.length).toBe(12);
+    expect(PRIVATE_SCHOOL_DETAIL_YAMAGATA.skipped.length).toBe(3);
+  });
+});
+
 describe('private-school-detail index', () => {
-  it('akita/aomori/chiba/fukui/fukuoka/gifu/hyogo/ishikawa/iwate/kagawa/kagoshima/kochi/kumamoto/mie/miyagi/miyazaki/nagano/nagasaki/niigata/oita/okayama/okinawa/saga/saitama/shiga/shimane/shizuoka/tochigi/tokushima/tottori/toyama/wakayama/yamanashiの33県が集約されている', () => {
+  it('akita/aomori/chiba/fukui/fukuoka/gifu/hyogo/ishikawa/iwate/kagawa/kagoshima/kochi/kumamoto/mie/miyagi/miyazaki/nagano/nagasaki/niigata/oita/okayama/okinawa/saga/saitama/shiga/shimane/shizuoka/tochigi/tokushima/tottori/toyama/wakayama/yamagata/yamanashiの34県が集約されている', () => {
     expect(Object.keys(PRIVATE_SCHOOL_DETAIL_BY_PREFECTURE).sort()).toEqual([
       'akita',
       'aomori',
@@ -804,8 +826,9 @@ describe('private-school-detail index', () => {
       'tottori',
       'toyama',
       'wakayama',
+      'yamagata',
       'yamanashi',
     ]);
-    expect(PRIVATE_SCHOOL_DETAIL_FILES).toHaveLength(33);
+    expect(PRIVATE_SCHOOL_DETAIL_FILES).toHaveLength(34);
   });
 });
