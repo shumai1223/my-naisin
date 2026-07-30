@@ -40,6 +40,7 @@ import { PRIVATE_SCHOOL_DETAIL_IBARAKI } from './ibaraki';
 import { PRIVATE_SCHOOL_DETAIL_YAMAGUCHI } from './yamaguchi';
 import { PRIVATE_SCHOOL_DETAIL_HIROSHIMA } from './hiroshima';
 import { PRIVATE_SCHOOL_DETAIL_NARA } from './nara';
+import { PRIVATE_SCHOOL_DETAIL_KYOTO } from './kyoto';
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
 export const PRIVATE_SCHOOL_DETAIL_BY_PREFECTURE: Record<string, PrivateSchoolDetailFile> = {
@@ -82,6 +83,7 @@ export const PRIVATE_SCHOOL_DETAIL_BY_PREFECTURE: Record<string, PrivateSchoolDe
   yamaguchi: PRIVATE_SCHOOL_DETAIL_YAMAGUCHI,
   hiroshima: PRIVATE_SCHOOL_DETAIL_HIROSHIMA,
   nara: PRIVATE_SCHOOL_DETAIL_NARA,
+  kyoto: PRIVATE_SCHOOL_DETAIL_KYOTO,
 };
 
 export const PRIVATE_SCHOOL_DETAIL_FILES: PrivateSchoolDetailFile[] = Object.values(
