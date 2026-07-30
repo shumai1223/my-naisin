@@ -26,6 +26,7 @@ import { PRIVATE_SCHOOL_DETAIL_HYOGO } from '@/data/private-school-detail/hyogo'
 import { PRIVATE_SCHOOL_DETAIL_NAGANO } from '@/data/private-school-detail/nagano';
 import { PRIVATE_SCHOOL_DETAIL_GIFU } from '@/data/private-school-detail/gifu';
 import { PRIVATE_SCHOOL_DETAIL_MIE } from '@/data/private-school-detail/mie';
+import { PRIVATE_SCHOOL_DETAIL_AOMORI } from '@/data/private-school-detail/aomori';
 import { PRIVATE_SCHOOL_DETAIL_BY_PREFECTURE, PRIVATE_SCHOOL_DETAIL_FILES } from '@/data/private-school-detail';
 import { SCHOOLS_PRIVATE_TOTTORI } from '@/data/schools-private/tottori';
 import { SCHOOLS_PRIVATE_FUKUI } from '@/data/schools-private/fukui';
@@ -54,6 +55,7 @@ import { SCHOOLS_PRIVATE_HYOGO } from '@/data/schools-private/hyogo';
 import { SCHOOLS_PRIVATE_NAGANO } from '@/data/schools-private/nagano';
 import { SCHOOLS_PRIVATE_GIFU } from '@/data/schools-private/gifu';
 import { SCHOOLS_PRIVATE_MIE } from '@/data/schools-private/mie';
+import { SCHOOLS_PRIVATE_AOMORI } from '@/data/schools-private/aomori';
 
 describe('checkCourseCapacitySum', () => {
   const base: PrivateSchoolDetail = {
@@ -643,10 +645,28 @@ describe('PRIVATE_SCHOOL_DETAIL_MIE(私学協会一覧で21校中13校=全日制
   });
 });
 
+describe('PRIVATE_SCHOOL_DETAIL_AOMORI(個別学校サイトから青森山田・弘前学院聖愛の2校を収録・一括PDF未発見)', () => {
+  it('収録した学校は全てcourses合計とtotalCapacityが一致する', () => {
+    for (const school of PRIVATE_SCHOOL_DETAIL_AOMORI.schools) {
+      expect(checkCourseCapacitySum(school)).toBe(true);
+    }
+  });
+
+  it('収録2校・スキップ0件で残り15校は未着手(重複なし)', () => {
+    const allCodes = SCHOOLS_PRIVATE_AOMORI.schools.map((s) => s.code);
+    const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_AOMORI, allCodes);
+    expect(result.duplicates).toEqual([]);
+    expect(result.missing).toHaveLength(15);
+    expect(PRIVATE_SCHOOL_DETAIL_AOMORI.schools.length).toBe(2);
+    expect(PRIVATE_SCHOOL_DETAIL_AOMORI.skipped.length).toBe(0);
+  });
+});
+
 describe('private-school-detail index', () => {
-  it('tottori/fukui/yamanashi/kochi/saga/tokushima/nagasaki/akita/shimane/toyama/wakayama/shiga/okinawa/ishikawa/kagawa/miyazaki/tochigi/iwate/chiba/okayama/shizuoka/saitama/fukuoka/hyogo/nagano/gifu/mieの27県が集約されている', () => {
+  it('akita/aomori/chiba/fukui/fukuoka/gifu/hyogo/ishikawa/iwate/kagawa/kochi/mie/miyazaki/nagano/nagasaki/okayama/okinawa/saga/saitama/shiga/shimane/shizuoka/tochigi/tokushima/tottori/toyama/wakayama/yamanashiの28県が集約されている', () => {
     expect(Object.keys(PRIVATE_SCHOOL_DETAIL_BY_PREFECTURE).sort()).toEqual([
       'akita',
+      'aomori',
       'chiba',
       'fukui',
       'fukuoka',
@@ -674,6 +694,6 @@ describe('private-school-detail index', () => {
       'wakayama',
       'yamanashi',
     ]);
-    expect(PRIVATE_SCHOOL_DETAIL_FILES).toHaveLength(27);
+    expect(PRIVATE_SCHOOL_DETAIL_FILES).toHaveLength(28);
   });
 });

@@ -28,6 +28,7 @@ import { PRIVATE_SCHOOL_DETAIL_HYOGO } from './hyogo';
 import { PRIVATE_SCHOOL_DETAIL_NAGANO } from './nagano';
 import { PRIVATE_SCHOOL_DETAIL_GIFU } from './gifu';
 import { PRIVATE_SCHOOL_DETAIL_MIE } from './mie';
+import { PRIVATE_SCHOOL_DETAIL_AOMORI } from './aomori';
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
 export const PRIVATE_SCHOOL_DETAIL_BY_PREFECTURE: Record<string, PrivateSchoolDetailFile> = {
@@ -58,6 +59,7 @@ export const PRIVATE_SCHOOL_DETAIL_BY_PREFECTURE: Record<string, PrivateSchoolDe
   nagano: PRIVATE_SCHOOL_DETAIL_NAGANO,
   gifu: PRIVATE_SCHOOL_DETAIL_GIFU,
   mie: PRIVATE_SCHOOL_DETAIL_MIE,
+  aomori: PRIVATE_SCHOOL_DETAIL_AOMORI,
 };
 
 export const PRIVATE_SCHOOL_DETAIL_FILES: PrivateSchoolDetailFile[] = Object.values(
