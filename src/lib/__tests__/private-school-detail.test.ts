@@ -28,6 +28,7 @@ import { PRIVATE_SCHOOL_DETAIL_GIFU } from '@/data/private-school-detail/gifu';
 import { PRIVATE_SCHOOL_DETAIL_MIE } from '@/data/private-school-detail/mie';
 import { PRIVATE_SCHOOL_DETAIL_AOMORI } from '@/data/private-school-detail/aomori';
 import { PRIVATE_SCHOOL_DETAIL_MIYAGI } from '@/data/private-school-detail/miyagi';
+import { PRIVATE_SCHOOL_DETAIL_NIIGATA } from '@/data/private-school-detail/niigata';
 import { PRIVATE_SCHOOL_DETAIL_BY_PREFECTURE, PRIVATE_SCHOOL_DETAIL_FILES } from '@/data/private-school-detail';
 import { SCHOOLS_PRIVATE_TOTTORI } from '@/data/schools-private/tottori';
 import { SCHOOLS_PRIVATE_FUKUI } from '@/data/schools-private/fukui';
@@ -58,6 +59,7 @@ import { SCHOOLS_PRIVATE_GIFU } from '@/data/schools-private/gifu';
 import { SCHOOLS_PRIVATE_MIE } from '@/data/schools-private/mie';
 import { SCHOOLS_PRIVATE_AOMORI } from '@/data/schools-private/aomori';
 import { SCHOOLS_PRIVATE_MIYAGI } from '@/data/schools-private/miyagi';
+import { SCHOOLS_PRIVATE_NIIGATA } from '@/data/schools-private/niigata';
 
 describe('checkCourseCapacitySum', () => {
   const base: PrivateSchoolDetail = {
@@ -681,8 +683,28 @@ describe('PRIVATE_SCHOOL_DETAIL_MIYAGI(個別学校サイトから仙台育英�
   });
 });
 
+describe('PRIVATE_SCHOOL_DETAIL_NIIGATA(私学協会入試日程一覧の募集定員列で全20校を完全収録)', () => {
+  it('収録した学校は全てcourses合計とtotalCapacityが一致する', () => {
+    for (const school of PRIVATE_SCHOOL_DETAIL_NIIGATA.schools) {
+      expect(checkCourseCapacitySum(school)).toBe(true);
+    }
+  });
+
+  it('schools-private/niigata.tsの全20校がschoolsで網羅されている(重複・欠落なし)', () => {
+    const allCodes = SCHOOLS_PRIVATE_NIIGATA.schools.map((s) => s.code);
+    const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_NIIGATA, allCodes);
+    expect(result.duplicates).toEqual([]);
+    expect(result.missing).toEqual([]);
+  });
+
+  it('20校全てを収録しスキップ0件', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_NIIGATA.schools.length).toBe(20);
+    expect(PRIVATE_SCHOOL_DETAIL_NIIGATA.skipped.length).toBe(0);
+  });
+});
+
 describe('private-school-detail index', () => {
-  it('akita/aomori/chiba/fukui/fukuoka/gifu/hyogo/ishikawa/iwate/kagawa/kochi/mie/miyagi/miyazaki/nagano/nagasaki/okayama/okinawa/saga/saitama/shiga/shimane/shizuoka/tochigi/tokushima/tottori/toyama/wakayama/yamanashiの29県が集約されている', () => {
+  it('akita/aomori/chiba/fukui/fukuoka/gifu/hyogo/ishikawa/iwate/kagawa/kochi/mie/miyagi/miyazaki/nagano/nagasaki/niigata/okayama/okinawa/saga/saitama/shiga/shimane/shizuoka/tochigi/tokushima/tottori/toyama/wakayama/yamanashiの30県が集約されている', () => {
     expect(Object.keys(PRIVATE_SCHOOL_DETAIL_BY_PREFECTURE).sort()).toEqual([
       'akita',
       'aomori',
@@ -700,6 +722,7 @@ describe('private-school-detail index', () => {
       'miyazaki',
       'nagano',
       'nagasaki',
+      'niigata',
       'okayama',
       'okinawa',
       'saga',
@@ -714,6 +737,6 @@ describe('private-school-detail index', () => {
       'wakayama',
       'yamanashi',
     ]);
-    expect(PRIVATE_SCHOOL_DETAIL_FILES).toHaveLength(29);
+    expect(PRIVATE_SCHOOL_DETAIL_FILES).toHaveLength(30);
   });
 });
