@@ -85,6 +85,52 @@ export const PRIVATE_SCHOOL_DETAIL_CHIBA: PrivateSchoolDetailFile = {
         fetchedAt: '2026-07-30',
       },
     },
+    {
+      schoolCode: 'D112310000368',
+      schoolName: '麗澤高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [
+        { courseName: 'S特進コース', capacity: 35 },
+        { courseName: '特選コース', capacity: 85 },
+      ],
+      totalCapacity: 120,
+      source: {
+        url: 'https://www.pref.chiba.lg.jp/gakuji/press/2025/documents/r8koukou.pdf',
+        docTitle: '令和8年度千葉県私立小・中・中等教育・高等学校生徒募集要項について｜千葉県総務部学事課(第1回・第2回とも各コースで同一の募集人員35/85が共通記載)',
+        fetchedAt: '2026-07-30',
+      },
+    },
+    {
+      schoolCode: 'D112310000420',
+      schoolName: '千葉英和高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [
+        { courseName: '普通科', capacity: 320 },
+        { courseName: '英語科', capacity: 40 },
+      ],
+      totalCapacity: 360,
+      source: {
+        url: 'https://www.pref.chiba.lg.jp/gakuji/press/2025/documents/r8koukou.pdf',
+        docTitle: '令和8年度千葉県私立小・中・中等教育・高等学校生徒募集要項について｜千葉県総務部学事課(第一志望・併願とも各学科で同一の募集人員320/40が共通記載)',
+        fetchedAt: '2026-07-30',
+      },
+    },
+    {
+      schoolCode: 'D112310000144',
+      schoolName: '千葉商科大学付属高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [
+        { courseName: '普通科 特進選抜', capacity: 205 },
+        { courseName: '普通科 総合進学', capacity: 280 },
+        { courseName: '商業科', capacity: 70 },
+      ],
+      totalCapacity: 555,
+      source: {
+        url: 'https://www.pref.chiba.lg.jp/gakuji/press/2025/documents/r8koukou.pdf',
+        docTitle: '令和8年度千葉県私立小・中・中等教育・高等学校生徒募集要項について｜千葉県総務部学事課(推薦/一般の全区分で各コース205/280/70が共通記載)',
+        fetchedAt: '2026-07-30',
+      },
+    },
   ],
   skipped: [],
 };

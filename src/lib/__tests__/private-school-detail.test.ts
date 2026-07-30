@@ -472,19 +472,19 @@ describe('PRIVATE_SCHOOL_DETAIL_IWATE(13校中2校を収録・進行中)', () =>
   });
 });
 
-describe('PRIVATE_SCHOOL_DETAIL_CHIBA(62校中6校を収録・進行中)', () => {
-  it('収録した学校は全てcourses合計とtotalCapacityが一致する(coursesが空のため常にtrue)', () => {
+describe('PRIVATE_SCHOOL_DETAIL_CHIBA(62校中9校を収録・進行中)', () => {
+  it('収録した学校は全てcourses合計とtotalCapacityが一致する', () => {
     for (const school of PRIVATE_SCHOOL_DETAIL_CHIBA.schools) {
       expect(checkCourseCapacitySum(school)).toBe(true);
     }
   });
 
-  it('収録6校・スキップ0件で残り56校は未着手(重複なし)', () => {
+  it('収録9校・スキップ0件で残り53校は未着手(重複なし)', () => {
     const allCodes = SCHOOLS_PRIVATE_CHIBA.schools.map((s) => s.code);
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_CHIBA, allCodes);
     expect(result.duplicates).toEqual([]);
-    expect(result.missing).toHaveLength(56);
-    expect(PRIVATE_SCHOOL_DETAIL_CHIBA.schools.length).toBe(6);
+    expect(result.missing).toHaveLength(53);
+    expect(PRIVATE_SCHOOL_DETAIL_CHIBA.schools.length).toBe(9);
     expect(PRIVATE_SCHOOL_DETAIL_CHIBA.skipped.length).toBe(0);
   });
 });
