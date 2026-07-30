@@ -673,20 +673,23 @@ describe('PRIVATE_SCHOOL_DETAIL_AOMORI(個別学校サイトから青森山田�
   });
 });
 
-describe('PRIVATE_SCHOOL_DETAIL_MIYAGI(個別学校サイトから仙台育英学園1000・東北学院360の2校を収録・連合会一括PDFに定員記載なし)', () => {
+describe('PRIVATE_SCHOOL_DETAIL_MIYAGI(個別学校サイト2校+育伸社募集要項PDFで11校追加・21校中13校を収録)', () => {
   it('収録した学校は全てcourses合計とtotalCapacityが一致する', () => {
     for (const school of PRIVATE_SCHOOL_DETAIL_MIYAGI.schools) {
       expect(checkCourseCapacitySum(school)).toBe(true);
     }
   });
 
-  it('収録2校・スキップ0件で残り19校は未着手(重複なし)', () => {
+  it('schools-private/miyagi.tsの全21校がschoolsまたはskippedのいずれかで網羅されている(重複・欠落なし)', () => {
     const allCodes = SCHOOLS_PRIVATE_MIYAGI.schools.map((s) => s.code);
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_MIYAGI, allCodes);
     expect(result.duplicates).toEqual([]);
-    expect(result.missing).toHaveLength(19);
-    expect(PRIVATE_SCHOOL_DETAIL_MIYAGI.schools.length).toBe(2);
-    expect(PRIVATE_SCHOOL_DETAIL_MIYAGI.skipped.length).toBe(0);
+    expect(result.missing).toEqual([]);
+  });
+
+  it('収録13校+スキップ8校(掲載なし)で参照台帳の21校と一致する', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_MIYAGI.schools.length).toBe(13);
+    expect(PRIVATE_SCHOOL_DETAIL_MIYAGI.skipped.length).toBe(8);
   });
 });
 
