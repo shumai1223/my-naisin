@@ -24,6 +24,7 @@ import { PRIVATE_SCHOOL_DETAIL_SAITAMA } from '@/data/private-school-detail/sait
 import { PRIVATE_SCHOOL_DETAIL_FUKUOKA } from '@/data/private-school-detail/fukuoka';
 import { PRIVATE_SCHOOL_DETAIL_HYOGO } from '@/data/private-school-detail/hyogo';
 import { PRIVATE_SCHOOL_DETAIL_NAGANO } from '@/data/private-school-detail/nagano';
+import { PRIVATE_SCHOOL_DETAIL_GIFU } from '@/data/private-school-detail/gifu';
 import { PRIVATE_SCHOOL_DETAIL_BY_PREFECTURE, PRIVATE_SCHOOL_DETAIL_FILES } from '@/data/private-school-detail';
 import { SCHOOLS_PRIVATE_TOTTORI } from '@/data/schools-private/tottori';
 import { SCHOOLS_PRIVATE_FUKUI } from '@/data/schools-private/fukui';
@@ -50,6 +51,7 @@ import { SCHOOLS_PRIVATE_SAITAMA } from '@/data/schools-private/saitama';
 import { SCHOOLS_PRIVATE_FUKUOKA } from '@/data/schools-private/fukuoka';
 import { SCHOOLS_PRIVATE_HYOGO } from '@/data/schools-private/hyogo';
 import { SCHOOLS_PRIVATE_NAGANO } from '@/data/schools-private/nagano';
+import { SCHOOLS_PRIVATE_GIFU } from '@/data/schools-private/gifu';
 
 describe('checkCourseCapacitySum', () => {
   const base: PrivateSchoolDetail = {
@@ -601,13 +603,34 @@ describe('PRIVATE_SCHOOL_DETAIL_NAGANO(県プレスリリースで26校中16校�
   });
 });
 
+describe('PRIVATE_SCHOOL_DETAIL_GIFU(私学振興会一覧で全21校を完全収録・中京高等学校は全日制+通信制の両課程を1校のcoursesに統合)', () => {
+  it('収録した学校は全てcourses合計とtotalCapacityが一致する', () => {
+    for (const school of PRIVATE_SCHOOL_DETAIL_GIFU.schools) {
+      expect(checkCourseCapacitySum(school)).toBe(true);
+    }
+  });
+
+  it('schools-private/gifu.tsの全21校がschoolsで網羅されている(重複・欠落なし)', () => {
+    const allCodes = SCHOOLS_PRIVATE_GIFU.schools.map((s) => s.code);
+    const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_GIFU, allCodes);
+    expect(result.duplicates).toEqual([]);
+    expect(result.missing).toEqual([]);
+  });
+
+  it('21校全てを収録しスキップ0件(全日制16校+通信制専業5校)', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_GIFU.schools.length).toBe(21);
+    expect(PRIVATE_SCHOOL_DETAIL_GIFU.skipped.length).toBe(0);
+  });
+});
+
 describe('private-school-detail index', () => {
-  it('tottori/fukui/yamanashi/kochi/saga/tokushima/nagasaki/akita/shimane/toyama/wakayama/shiga/okinawa/ishikawa/kagawa/miyazaki/tochigi/iwate/chiba/okayama/shizuoka/saitama/fukuoka/hyogo/naganoの25県が集約されている', () => {
+  it('tottori/fukui/yamanashi/kochi/saga/tokushima/nagasaki/akita/shimane/toyama/wakayama/shiga/okinawa/ishikawa/kagawa/miyazaki/tochigi/iwate/chiba/okayama/shizuoka/saitama/fukuoka/hyogo/nagano/gifuの26県が集約されている', () => {
     expect(Object.keys(PRIVATE_SCHOOL_DETAIL_BY_PREFECTURE).sort()).toEqual([
       'akita',
       'chiba',
       'fukui',
       'fukuoka',
+      'gifu',
       'hyogo',
       'ishikawa',
       'iwate',
@@ -630,6 +653,6 @@ describe('private-school-detail index', () => {
       'wakayama',
       'yamanashi',
     ]);
-    expect(PRIVATE_SCHOOL_DETAIL_FILES).toHaveLength(25);
+    expect(PRIVATE_SCHOOL_DETAIL_FILES).toHaveLength(26);
   });
 });
