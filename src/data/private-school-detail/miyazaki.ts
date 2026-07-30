@@ -1,7 +1,7 @@
 /**
  * 宮崎県私立高等学校の募集定員データ(Λ-5第二段)。
  * schools-private/miyazaki.ts(第一段・機械生成の参照台帳)14校のうち、確度高く確認できた
- * 9校を収録。宮崎県には佐賀/香川のような県庁・協会一括PDFが見当たらず、学校ごとの個別
+ * 10校を収録。宮崎県には佐賀/香川のような県庁・協会一括PDFが見当たらず、学校ごとの個別
  * 調査(公式サイトの令和8年度入学試験要項PDF)で進めている。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
@@ -175,6 +175,18 @@ export const PRIVATE_SCHOOL_DETAIL_MIYAZAKI: PrivateSchoolDetailFile = {
         url: 'https://oubi.ed.jp/edco/wp-content/uploads/2025/10/e17522b60a0e65e045b4a3471e05d096.pdf',
         docTitle: '令和8年度 櫻美学園高等学校 生徒募集要項(募集定員表・30+90(普通科5コース計)+70+60+40=290で完全一致)',
         fetchedAt: '2026-07-30',
+      },
+    },
+    {
+      schoolCode: 'D145320159018',
+      schoolName: '日向学院高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [],
+      totalCapacity: 160,
+      source: {
+        url: 'http://www.hyugagakuin.ac.jp/data/requirements_senior.pdf',
+        docTitle: '令和8年度 日向学院高等学校 生徒募集要項(募集定員表・普通科160名(内部進学生を含む))',
+        fetchedAt: '2026-07-31',
       },
     },
   ],
