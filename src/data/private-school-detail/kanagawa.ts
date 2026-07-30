@@ -8,7 +8,9 @@
  * 出願方法で共有している場合はこの記法になる)。1ページ目9校・2ページ目冒頭4校に続き、
  * 慶應義塾・慶應義塾湘南藤沢の2校を追加(いずれも一般募集数値が「若干」の枠は未算入)。
  * 2ページ目の光明学園相模原・相模女子大学・向上・湘南学院は校名とコース名の列対応が
- * 複雑で誤帰属リスクがあるため今回は見送り(次回再訪の価値あり)。
+ * 複雑で誤帰属リスクがあるため今回は見送り(次回再訪の価値あり)。3ページ目から星槎・
+ * 聖セシリア女子・聖ヨゼフ学園・聖和学院・捜真女学校・相洋・橘学苑・湘南工科大学附属の
+ * 8校を追加。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -189,6 +191,87 @@ export const PRIVATE_SCHOOL_DETAIL_KANAGAWA: PrivateSchoolDetailFile = {
         ...IKUSHIN_KANAGAWA_SOURCE,
         docTitle: IKUSHIN_KANAGAWA_SOURCE.docTitle + '(帰国生約20名のみ数値記載。全国枠は若干名のため未算入。一般募集の記載はこのPDFに無い)',
       },
+    },
+    {
+      schoolCode: 'D114310000295',
+      schoolName: '星槎高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [{ courseName: '普通(推薦25+一般24)', capacity: 49 }],
+      totalCapacity: 49,
+      source: IKUSHIN_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114321300011',
+      schoolName: '聖セシリア女子高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [{ courseName: '普通(女、推薦15+一般専併15)', capacity: 30 }],
+      totalCapacity: 30,
+      source: IKUSHIN_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114310000026',
+      schoolName: '聖ヨゼフ学園高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [{ courseName: '総合進学コース・AEコース・ILコース(推薦20+一般書類選考20)', capacity: 40 }],
+      totalCapacity: 40,
+      source: IKUSHIN_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114320800018',
+      schoolName: '聖和学院高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '英語(グローバルコース)(女、推薦10+1回書類選考30+オープン5)', capacity: 45 },
+        { courseName: '普通(リベラルコース)(女、推薦10+1回書類選考30+オープン5)', capacity: 45 },
+      ],
+      totalCapacity: 90,
+      source: IKUSHIN_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114310000099',
+      schoolName: '捜真女学校高等学部',
+      fiscalYearLabel: '2026年度',
+      courses: [{ courseName: '普通(女、推薦15+一般20)', capacity: 35 }],
+      totalCapacity: 35,
+      source: IKUSHIN_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114320600029',
+      schoolName: '相洋高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '特進コース(選抜クラス、推薦5+一般筆記20+チャレンジ二次5)', capacity: 30 },
+        { courseName: '特進コース(特進クラス、推薦25+一般筆記55+チャレンジ二次5)', capacity: 85 },
+        { courseName: '文理コース(理科クラス、推薦30+一般筆記60+チャレンジ二次5)', capacity: 95 },
+        { courseName: '文理コース(文科クラス、推薦60+一般筆記120+チャレンジ二次5)', capacity: 185 },
+        { courseName: '進学コース(推薦60+一般筆記125+チャレンジ二次5)', capacity: 190 },
+      ],
+      totalCapacity: 585,
+      source: IKUSHIN_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114310000035',
+      schoolName: '橘学苑高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '特進選抜コース(推薦15+一般書類選考15)', capacity: 30 },
+        { courseName: '文理総合コース(推薦72+一般書類選考72)', capacity: 144 },
+        { courseName: 'デザイン美術コース(推薦15+一般書類選考15)', capacity: 30 },
+      ],
+      totalCapacity: 204,
+      source: IKUSHIN_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114320500020',
+      schoolName: '湘南工科大学附属高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: 'プログレスコース(推薦30+A方式オープン30+B方式書類選考150)', capacity: 210 },
+        { courseName: 'アドバンスコース(推薦80+A方式オープン30+B方式書類選考190)', capacity: 300 },
+        { courseName: 'スタンダードコース(推薦90+A方式オープン20+B方式書類選考100)', capacity: 210 },
+      ],
+      totalCapacity: 720,
+      source: IKUSHIN_KANAGAWA_SOURCE,
     },
   ],
   skipped: [],
