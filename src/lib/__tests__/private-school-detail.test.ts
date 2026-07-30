@@ -13,6 +13,7 @@ import { PRIVATE_SCHOOL_DETAIL_WAKAYAMA } from '@/data/private-school-detail/wak
 import { PRIVATE_SCHOOL_DETAIL_SHIGA } from '@/data/private-school-detail/shiga';
 import { PRIVATE_SCHOOL_DETAIL_OKINAWA } from '@/data/private-school-detail/okinawa';
 import { PRIVATE_SCHOOL_DETAIL_ISHIKAWA } from '@/data/private-school-detail/ishikawa';
+import { PRIVATE_SCHOOL_DETAIL_KAGAWA } from '@/data/private-school-detail/kagawa';
 import { PRIVATE_SCHOOL_DETAIL_BY_PREFECTURE, PRIVATE_SCHOOL_DETAIL_FILES } from '@/data/private-school-detail';
 import { SCHOOLS_PRIVATE_TOTTORI } from '@/data/schools-private/tottori';
 import { SCHOOLS_PRIVATE_FUKUI } from '@/data/schools-private/fukui';
@@ -28,6 +29,7 @@ import { SCHOOLS_PRIVATE_WAKAYAMA } from '@/data/schools-private/wakayama';
 import { SCHOOLS_PRIVATE_SHIGA } from '@/data/schools-private/shiga';
 import { SCHOOLS_PRIVATE_OKINAWA } from '@/data/schools-private/okinawa';
 import { SCHOOLS_PRIVATE_ISHIKAWA } from '@/data/schools-private/ishikawa';
+import { SCHOOLS_PRIVATE_KAGAWA } from '@/data/schools-private/kagawa';
 
 describe('checkCourseCapacitySum', () => {
   const base: PrivateSchoolDetail = {
@@ -352,12 +354,33 @@ describe('PRIVATE_SCHOOL_DETAIL_ISHIKAWA(民間集計PDFで12校中10校を収�
   });
 });
 
+describe('PRIVATE_SCHOOL_DETAIL_KAGAWA(県庁公表の全日制/通信制募集要項2冊で13校中10校を収録)', () => {
+  it('収録した学校は全てcourses合計とtotalCapacityが一致する', () => {
+    for (const school of PRIVATE_SCHOOL_DETAIL_KAGAWA.schools) {
+      expect(checkCourseCapacitySum(school)).toBe(true);
+    }
+  });
+
+  it('schools-private/kagawa.tsの全13校がschoolsまたはskippedのいずれかで網羅されている(重複・欠落なし)', () => {
+    const allCodes = SCHOOLS_PRIVATE_KAGAWA.schools.map((s) => s.code);
+    const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_KAGAWA, allCodes);
+    expect(result.duplicates).toEqual([]);
+    expect(result.missing).toEqual([]);
+  });
+
+  it('収録10校+スキップ3校(通信制専門校)で参照台帳の13校と一致する', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_KAGAWA.schools.length).toBe(10);
+    expect(PRIVATE_SCHOOL_DETAIL_KAGAWA.skipped.length).toBe(3);
+  });
+});
+
 describe('private-school-detail index', () => {
-  it('tottori/fukui/yamanashi/kochi/saga/tokushima/nagasaki/akita/shimane/toyama/wakayama/shiga/okinawa/ishikawaの14県が集約されている', () => {
+  it('tottori/fukui/yamanashi/kochi/saga/tokushima/nagasaki/akita/shimane/toyama/wakayama/shiga/okinawa/ishikawa/kagawaの15県が集約されている', () => {
     expect(Object.keys(PRIVATE_SCHOOL_DETAIL_BY_PREFECTURE).sort()).toEqual([
       'akita',
       'fukui',
       'ishikawa',
+      'kagawa',
       'kochi',
       'nagasaki',
       'okinawa',
@@ -370,6 +393,6 @@ describe('private-school-detail index', () => {
       'wakayama',
       'yamanashi',
     ]);
-    expect(PRIVATE_SCHOOL_DETAIL_FILES).toHaveLength(14);
+    expect(PRIVATE_SCHOOL_DETAIL_FILES).toHaveLength(15);
   });
 });
