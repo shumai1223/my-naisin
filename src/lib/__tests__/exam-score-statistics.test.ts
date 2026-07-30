@@ -28,6 +28,7 @@ import { EXAM_SCORE_STATISTICS_OKAYAMA } from '@/data/exam-score-statistics/okay
 import { EXAM_SCORE_STATISTICS_YAMAGUCHI } from '@/data/exam-score-statistics/yamaguchi';
 import { EXAM_SCORE_STATISTICS_KAGAWA } from '@/data/exam-score-statistics/kagawa';
 import { EXAM_SCORE_STATISTICS_EHIME } from '@/data/exam-score-statistics/ehime';
+import { EXAM_SCORE_STATISTICS_OITA } from '@/data/exam-score-statistics/oita';
 import { EXAM_SCORE_STATISTICS_BY_PREFECTURE, EXAM_SCORE_STATISTICS_FILES } from '@/data/exam-score-statistics';
 
 describe('isPlausibleSubjectSum', () => {
@@ -714,8 +715,33 @@ describe('EXAM_SCORE_STATISTICS_EHIME(パイロット実データ・単一ソー
   });
 });
 
+describe('EXAM_SCORE_STATISTICS_OITA(パイロット実データ・前年度比の逆算で複数年度がクロス検証済み)', () => {
+  it('11年度分(平成28〜令和8年度)が収録されている', () => {
+    expect(EXAM_SCORE_STATISTICS_OITA.years).toHaveLength(11);
+  });
+
+  it('各教科50点満点・5教科の内訳を持ちtest-takersで統一されている', () => {
+    for (const year of EXAM_SCORE_STATISTICS_OITA.years) {
+      expect(year.averageType).toBe('test-takers');
+      expect(year.subjects).toHaveLength(5);
+      for (const s of year.subjects) expect(s.maxScore).toBe(50);
+    }
+  });
+
+  it('全年度で教科別平均点の合計がtotalAverageと妥当な範囲で一致する', () => {
+    for (const year of EXAM_SCORE_STATISTICS_OITA.years) {
+      expect(isPlausibleSubjectSum(year)).toBe(true);
+    }
+  });
+
+  it('令和7・8年度分のみ独立記事が明記する合計点(totalAverage)を持ち、他の年度は自前合算せず未設定', () => {
+    const withTotal = EXAM_SCORE_STATISTICS_OITA.years.filter((y) => y.totalAverage !== undefined);
+    expect(withTotal.map((y) => y.fiscalYearLabel).sort()).toEqual(['令和7年度', '令和8年度']);
+  });
+});
+
 describe('exam-score-statistics index', () => {
-  it('kochi/saitama/chiba/tokyo/nara/hyogo/niigata/gunma/miyagi/hokkaido/fukushima/aomori/iwate/akita/nagano/shizuoka/fukuoka/hiroshima/aichi/kanagawa/ibaraki/gifu/mie/wakayama/shiga/okayama/yamaguchi/kagawa/ehimeの29県が集約されている', () => {
+  it('kochi/saitama/chiba/tokyo/nara/hyogo/niigata/gunma/miyagi/hokkaido/fukushima/aomori/iwate/akita/nagano/shizuoka/fukuoka/hiroshima/aichi/kanagawa/ibaraki/gifu/mie/wakayama/shiga/okayama/yamaguchi/kagawa/ehime/oitaの30県が集約されている', () => {
     expect(Object.keys(EXAM_SCORE_STATISTICS_BY_PREFECTURE).sort()).toEqual([
       'aichi',
       'akita',
@@ -739,6 +765,7 @@ describe('exam-score-statistics index', () => {
       'nagano',
       'nara',
       'niigata',
+      'oita',
       'okayama',
       'saitama',
       'shiga',
@@ -747,6 +774,6 @@ describe('exam-score-statistics index', () => {
       'wakayama',
       'yamaguchi',
     ]);
-    expect(EXAM_SCORE_STATISTICS_FILES).toHaveLength(29);
+    expect(EXAM_SCORE_STATISTICS_FILES).toHaveLength(30);
   });
 });
