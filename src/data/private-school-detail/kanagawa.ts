@@ -2,9 +2,10 @@
  * 神奈川県私立高等学校の募集定員データ(Λ-5第二段・大都市圏5県)。
  * (株)育伸社「2026年度 私立高校 募集要項【神奈川県】」(2025年11月4日現在)をRead toolで
  * PDF原本を直接解析(千葉/京都で確立した手法)。参照台帳83校と規模が大きいため複数周回に
- * 分けて処理する方針(千葉/静岡/兵庫と同様)。今回はPDF1ページ目(所在地=小田原市〜川崎市)の
- * 9校を収録。「全コース計」「普通科計」等の記法は既存県と同一方針で1つの統合コースとして
- * 記録し、推薦+一般が同一コースの入試方式別数値の場合は合算する。
+ * 分けて処理する方針(千葉/静岡/兵庫と同様)。「全コース計」「普通科計」等の記法は既存県と
+ * 同一方針で1つの統合コースとして記録し、推薦・一般等の入試方式が別々の数値を明記している
+ * 場合は合算する。一方「↓」は直前行と同一の値を意味し、合算しない(単一のクォータを複数の
+ * 出願方法で共有している場合はこの記法になる)。1ページ目9校に続き2ページ目冒頭4校を追加。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -116,6 +117,48 @@ export const PRIVATE_SCHOOL_DETAIL_KANAGAWA: PrivateSchoolDetailFile = {
       source: {
         ...IKUSHIN_KANAGAWA_SOURCE,
         docTitle: IKUSHIN_KANAGAWA_SOURCE.docTitle + '(2026年度より鎌倉女子大学から校名変更・女子から共学化)',
+      },
+    },
+    {
+      schoolCode: 'D114310000197',
+      schoolName: '関東学院六浦高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [{ courseName: '普通(一般・GLEクラス、推薦10+一般書類選考15)', capacity: 25 }],
+      totalCapacity: 25,
+      source: IKUSHIN_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114338200016',
+      schoolName: '函嶺白百合学園高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [{ courseName: '普通(女、推薦20+一般30)', capacity: 50 }],
+      totalCapacity: 50,
+      source: IKUSHIN_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114320400049',
+      schoolName: '北鎌倉女子学園高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '先進コース・特進コース・国際コース(女、普通科計、推薦50+一般書類選考100)', capacity: 150 },
+        { courseName: '音楽(女、推薦5+一般20)', capacity: 25 },
+      ],
+      totalCapacity: 175,
+      source: IKUSHIN_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114320500011',
+      schoolName: '鵠沼高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '英語コース', capacity: 30 },
+        { courseName: '理数コース', capacity: 30 },
+        { courseName: '文理コース', capacity: 190 },
+      ],
+      totalCapacity: 250,
+      source: {
+        ...IKUSHIN_KANAGAWA_SOURCE,
+        docTitle: IKUSHIN_KANAGAWA_SOURCE.docTitle + '(各コースとも推薦・一般専願・一般併願・一般オープンで同一の募集人員が記載)',
       },
     },
   ],

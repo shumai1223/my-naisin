@@ -916,19 +916,19 @@ describe('PRIVATE_SCHOOL_DETAIL_KYOTO(大都市圏5県の初回着手・育伸�
   });
 });
 
-describe('PRIVATE_SCHOOL_DETAIL_KANAGAWA(大都市圏5県・育伸社募集要項PDF1ページ目9校を収録・進行中)', () => {
+describe('PRIVATE_SCHOOL_DETAIL_KANAGAWA(大都市圏5県・育伸社募集要項PDF1〜2ページ目13校を収録・進行中)', () => {
   it('収録した学校は全てcourses合計とtotalCapacityが一致する', () => {
     for (const school of PRIVATE_SCHOOL_DETAIL_KANAGAWA.schools) {
       expect(checkCourseCapacitySum(school)).toBe(true);
     }
   });
 
-  it('収録9校・スキップ0件で参照台帳83校のうち残り74校は未着手(重複なし)', () => {
+  it('収録13校・スキップ0件で参照台帳83校のうち残り70校は未着手(重複なし)', () => {
     const allCodes = SCHOOLS_PRIVATE_KANAGAWA.schools.map((s) => s.code);
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_KANAGAWA, allCodes);
     expect(result.duplicates).toEqual([]);
-    expect(result.missing).toHaveLength(74);
-    expect(PRIVATE_SCHOOL_DETAIL_KANAGAWA.schools.length).toBe(9);
+    expect(result.missing).toHaveLength(70);
+    expect(PRIVATE_SCHOOL_DETAIL_KANAGAWA.schools.length).toBe(13);
     expect(PRIVATE_SCHOOL_DETAIL_KANAGAWA.skipped.length).toBe(0);
   });
 });
