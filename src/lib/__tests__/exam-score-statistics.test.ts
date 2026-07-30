@@ -22,6 +22,7 @@ import { EXAM_SCORE_STATISTICS_KANAGAWA } from '@/data/exam-score-statistics/kan
 import { EXAM_SCORE_STATISTICS_IBARAKI } from '@/data/exam-score-statistics/ibaraki';
 import { EXAM_SCORE_STATISTICS_GIFU } from '@/data/exam-score-statistics/gifu';
 import { EXAM_SCORE_STATISTICS_MIE } from '@/data/exam-score-statistics/mie';
+import { EXAM_SCORE_STATISTICS_WAKAYAMA } from '@/data/exam-score-statistics/wakayama';
 import { EXAM_SCORE_STATISTICS_BY_PREFECTURE, EXAM_SCORE_STATISTICS_FILES } from '@/data/exam-score-statistics';
 
 describe('isPlausibleSubjectSum', () => {
@@ -551,8 +552,35 @@ describe('EXAM_SCORE_STATISTICS_MIE(パイロット実データ・後期選抜�
   });
 });
 
+describe('EXAM_SCORE_STATISTICS_WAKAYAMA(パイロット実データ・一般選抜区分)', () => {
+  it('2年度分(令和6〜7年度)が収録されている', () => {
+    expect(EXAM_SCORE_STATISTICS_WAKAYAMA.years).toHaveLength(2);
+  });
+
+  it('各教科100点満点・5教科の内訳を持ちtest-takersで統一されている', () => {
+    for (const year of EXAM_SCORE_STATISTICS_WAKAYAMA.years) {
+      expect(year.averageType).toBe('test-takers');
+      expect(year.subjects).toHaveLength(5);
+      for (const s of year.subjects) expect(s.maxScore).toBe(100);
+    }
+  });
+
+  it('一次ソースが5教科合計を明記していないためtotalAverageは未設定', () => {
+    for (const year of EXAM_SCORE_STATISTICS_WAKAYAMA.years) {
+      expect(year.totalAverage).toBeUndefined();
+      expect(isPlausibleSubjectSum(year)).toBe(true);
+    }
+  });
+
+  it('調査人数の母集団が年度によって大きく異なり不明瞭なためtestTakerCountは記録しない', () => {
+    for (const year of EXAM_SCORE_STATISTICS_WAKAYAMA.years) {
+      expect(year.testTakerCount).toBeUndefined();
+    }
+  });
+});
+
 describe('exam-score-statistics index', () => {
-  it('kochi/saitama/chiba/tokyo/nara/hyogo/niigata/gunma/miyagi/hokkaido/fukushima/aomori/iwate/akita/nagano/shizuoka/fukuoka/hiroshima/aichi/kanagawa/ibaraki/gifu/mieの23県が集約されている', () => {
+  it('kochi/saitama/chiba/tokyo/nara/hyogo/niigata/gunma/miyagi/hokkaido/fukushima/aomori/iwate/akita/nagano/shizuoka/fukuoka/hiroshima/aichi/kanagawa/ibaraki/gifu/mie/wakayamaの24県が集約されている', () => {
     expect(Object.keys(EXAM_SCORE_STATISTICS_BY_PREFECTURE).sort()).toEqual([
       'aichi',
       'akita',
@@ -577,7 +605,8 @@ describe('exam-score-statistics index', () => {
       'saitama',
       'shizuoka',
       'tokyo',
+      'wakayama',
     ]);
-    expect(EXAM_SCORE_STATISTICS_FILES).toHaveLength(23);
+    expect(EXAM_SCORE_STATISTICS_FILES).toHaveLength(24);
   });
 });
