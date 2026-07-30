@@ -23,6 +23,7 @@ import { EXAM_SCORE_STATISTICS_IBARAKI } from '@/data/exam-score-statistics/ibar
 import { EXAM_SCORE_STATISTICS_GIFU } from '@/data/exam-score-statistics/gifu';
 import { EXAM_SCORE_STATISTICS_MIE } from '@/data/exam-score-statistics/mie';
 import { EXAM_SCORE_STATISTICS_WAKAYAMA } from '@/data/exam-score-statistics/wakayama';
+import { EXAM_SCORE_STATISTICS_SHIGA } from '@/data/exam-score-statistics/shiga';
 import { EXAM_SCORE_STATISTICS_BY_PREFECTURE, EXAM_SCORE_STATISTICS_FILES } from '@/data/exam-score-statistics';
 
 describe('isPlausibleSubjectSum', () => {
@@ -579,8 +580,29 @@ describe('EXAM_SCORE_STATISTICS_WAKAYAMA(パイロット実データ・一般選
   });
 });
 
+describe('EXAM_SCORE_STATISTICS_SHIGA(パイロット実データ・2つの独立PDFで令和7年度が重複検証済み)', () => {
+  it('2年度分(令和7〜8年度)が収録されている', () => {
+    expect(EXAM_SCORE_STATISTICS_SHIGA.years).toHaveLength(2);
+  });
+
+  it('各教科100点満点・5教科の内訳を持ちtest-takersで統一されている', () => {
+    for (const year of EXAM_SCORE_STATISTICS_SHIGA.years) {
+      expect(year.averageType).toBe('test-takers');
+      expect(year.subjects).toHaveLength(5);
+      for (const s of year.subjects) expect(s.maxScore).toBe(100);
+    }
+  });
+
+  it('一次ソースが「学校ごとに満点値が異なるためまとめは行わなかった」と明記しているためtotalAverageは未設定', () => {
+    for (const year of EXAM_SCORE_STATISTICS_SHIGA.years) {
+      expect(year.totalAverage).toBeUndefined();
+      expect(isPlausibleSubjectSum(year)).toBe(true);
+    }
+  });
+});
+
 describe('exam-score-statistics index', () => {
-  it('kochi/saitama/chiba/tokyo/nara/hyogo/niigata/gunma/miyagi/hokkaido/fukushima/aomori/iwate/akita/nagano/shizuoka/fukuoka/hiroshima/aichi/kanagawa/ibaraki/gifu/mie/wakayamaの24県が集約されている', () => {
+  it('kochi/saitama/chiba/tokyo/nara/hyogo/niigata/gunma/miyagi/hokkaido/fukushima/aomori/iwate/akita/nagano/shizuoka/fukuoka/hiroshima/aichi/kanagawa/ibaraki/gifu/mie/wakayama/shigaの25県が集約されている', () => {
     expect(Object.keys(EXAM_SCORE_STATISTICS_BY_PREFECTURE).sort()).toEqual([
       'aichi',
       'akita',
@@ -603,10 +625,11 @@ describe('exam-score-statistics index', () => {
       'nara',
       'niigata',
       'saitama',
+      'shiga',
       'shizuoka',
       'tokyo',
       'wakayama',
     ]);
-    expect(EXAM_SCORE_STATISTICS_FILES).toHaveLength(24);
+    expect(EXAM_SCORE_STATISTICS_FILES).toHaveLength(25);
   });
 });
