@@ -19,6 +19,7 @@ import { PRIVATE_SCHOOL_DETAIL_TOCHIGI } from '@/data/private-school-detail/toch
 import { PRIVATE_SCHOOL_DETAIL_IWATE } from '@/data/private-school-detail/iwate';
 import { PRIVATE_SCHOOL_DETAIL_CHIBA } from '@/data/private-school-detail/chiba';
 import { PRIVATE_SCHOOL_DETAIL_OKAYAMA } from '@/data/private-school-detail/okayama';
+import { PRIVATE_SCHOOL_DETAIL_SHIZUOKA } from '@/data/private-school-detail/shizuoka';
 import { PRIVATE_SCHOOL_DETAIL_BY_PREFECTURE, PRIVATE_SCHOOL_DETAIL_FILES } from '@/data/private-school-detail';
 import { SCHOOLS_PRIVATE_TOTTORI } from '@/data/schools-private/tottori';
 import { SCHOOLS_PRIVATE_FUKUI } from '@/data/schools-private/fukui';
@@ -40,6 +41,7 @@ import { SCHOOLS_PRIVATE_TOCHIGI } from '@/data/schools-private/tochigi';
 import { SCHOOLS_PRIVATE_IWATE } from '@/data/schools-private/iwate';
 import { SCHOOLS_PRIVATE_CHIBA } from '@/data/schools-private/chiba';
 import { SCHOOLS_PRIVATE_OKAYAMA } from '@/data/schools-private/okayama';
+import { SCHOOLS_PRIVATE_SHIZUOKA } from '@/data/schools-private/shizuoka';
 
 describe('checkCourseCapacitySum', () => {
   const base: PrivateSchoolDetail = {
@@ -494,8 +496,30 @@ describe('PRIVATE_SCHOOL_DETAIL_OKAYAMA(27校中3校を収録・進行中)', () 
   });
 });
 
+describe('PRIVATE_SCHOOL_DETAIL_SHIZUOKA(私学協会一括PDFで48校中40校を完全収録・単独県最大の40校)', () => {
+  it('収録した学校は全てcourses合計とtotalCapacityが一致する', () => {
+    for (const school of PRIVATE_SCHOOL_DETAIL_SHIZUOKA.schools) {
+      expect(checkCourseCapacitySum(school)).toBe(true);
+    }
+  });
+
+  it('schools-private/shizuoka.tsの全48校がschoolsまたはskippedのいずれかで網羅されている(重複・欠落なし)', () => {
+    const allCodes = SCHOOLS_PRIVATE_SHIZUOKA.schools.map((s) => s.code);
+    const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_SHIZUOKA, allCodes);
+    expect(result.duplicates).toEqual([]);
+    expect(result.missing).toEqual([]);
+  });
+
+  it('収録40校+スキップ8校(全日制一覧に掲載の無い学校)で参照台帳の48校と一致し、40校のcourses合計を積み上げた総計が原資料の全体合計11,485と完全一致する', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_SHIZUOKA.schools.length).toBe(40);
+    expect(PRIVATE_SCHOOL_DETAIL_SHIZUOKA.skipped.length).toBe(8);
+    const grandTotal = PRIVATE_SCHOOL_DETAIL_SHIZUOKA.schools.reduce((acc, s) => acc + s.totalCapacity, 0);
+    expect(grandTotal).toBe(11485);
+  });
+});
+
 describe('private-school-detail index', () => {
-  it('tottori/fukui/yamanashi/kochi/saga/tokushima/nagasaki/akita/shimane/toyama/wakayama/shiga/okinawa/ishikawa/kagawa/miyazaki/tochigi/iwate/chiba/okayamaの20県が集約されている', () => {
+  it('tottori/fukui/yamanashi/kochi/saga/tokushima/nagasaki/akita/shimane/toyama/wakayama/shiga/okinawa/ishikawa/kagawa/miyazaki/tochigi/iwate/chiba/okayama/shizuokaの21県が集約されている', () => {
     expect(Object.keys(PRIVATE_SCHOOL_DETAIL_BY_PREFECTURE).sort()).toEqual([
       'akita',
       'chiba',
@@ -511,6 +535,7 @@ describe('private-school-detail index', () => {
       'saga',
       'shiga',
       'shimane',
+      'shizuoka',
       'tochigi',
       'tokushima',
       'tottori',
@@ -518,6 +543,6 @@ describe('private-school-detail index', () => {
       'wakayama',
       'yamanashi',
     ]);
-    expect(PRIVATE_SCHOOL_DETAIL_FILES).toHaveLength(20);
+    expect(PRIVATE_SCHOOL_DETAIL_FILES).toHaveLength(21);
   });
 });
