@@ -37,6 +37,7 @@ import { EXAM_SCORE_STATISTICS_YAMANASHI } from '@/data/exam-score-statistics/ya
 import { EXAM_SCORE_STATISTICS_SAGA } from '@/data/exam-score-statistics/saga';
 import { EXAM_SCORE_STATISTICS_TOKUSHIMA } from '@/data/exam-score-statistics/tokushima';
 import { EXAM_SCORE_STATISTICS_TOTTORI } from '@/data/exam-score-statistics/tottori';
+import { EXAM_SCORE_STATISTICS_SHIMANE } from '@/data/exam-score-statistics/shimane';
 import { EXAM_SCORE_STATISTICS_BY_PREFECTURE, EXAM_SCORE_STATISTICS_FILES } from '@/data/exam-score-statistics';
 
 describe('isPlausibleSubjectSum', () => {
@@ -933,8 +934,29 @@ describe('EXAM_SCORE_STATISTICS_TOTTORI(パイロット実データ・1PDFで単
   });
 });
 
+describe('EXAM_SCORE_STATISTICS_SHIMANE(パイロット実データ)', () => {
+  it('2年度分(令和6〜7年度)が収録されている', () => {
+    expect(EXAM_SCORE_STATISTICS_SHIMANE.years).toHaveLength(2);
+  });
+
+  it('各教科50点満点(5教科合計250点満点体系)・test-takersで統一されている', () => {
+    for (const year of EXAM_SCORE_STATISTICS_SHIMANE.years) {
+      expect(year.averageType).toBe('test-takers');
+      expect(year.subjects).toHaveLength(5);
+      for (const s of year.subjects) expect(s.maxScore).toBe(50);
+      expect(year.totalMaxScore).toBe(250);
+    }
+  });
+
+  it('全年度で教科別平均点の合計がtotalAverageと妥当な範囲で一致する', () => {
+    for (const year of EXAM_SCORE_STATISTICS_SHIMANE.years) {
+      expect(isPlausibleSubjectSum(year)).toBe(true);
+    }
+  });
+});
+
 describe('exam-score-statistics index', () => {
-  it('kochi/saitama/chiba/tokyo/nara/hyogo/niigata/gunma/miyagi/hokkaido/fukushima/aomori/iwate/akita/nagano/shizuoka/fukuoka/hiroshima/aichi/kanagawa/ibaraki/gifu/mie/wakayama/shiga/okayama/yamaguchi/kagawa/ehime/oita/kumamoto/kagoshima/okinawa/ishikawa/yamanashi/saga/tokushima/tottoriの38県が集約されている', () => {
+  it('kochi/saitama/chiba/tokyo/nara/hyogo/niigata/gunma/miyagi/hokkaido/fukushima/aomori/iwate/akita/nagano/shizuoka/fukuoka/hiroshima/aichi/kanagawa/ibaraki/gifu/mie/wakayama/shiga/okayama/yamaguchi/kagawa/ehime/oita/kumamoto/kagoshima/okinawa/ishikawa/yamanashi/saga/tokushima/tottori/shimaneの39県が集約されている', () => {
     expect(Object.keys(EXAM_SCORE_STATISTICS_BY_PREFECTURE).sort()).toEqual([
       'aichi',
       'akita',
@@ -967,6 +989,7 @@ describe('exam-score-statistics index', () => {
       'saga',
       'saitama',
       'shiga',
+      'shimane',
       'shizuoka',
       'tokushima',
       'tokyo',
@@ -975,6 +998,6 @@ describe('exam-score-statistics index', () => {
       'yamaguchi',
       'yamanashi',
     ]);
-    expect(EXAM_SCORE_STATISTICS_FILES).toHaveLength(38);
+    expect(EXAM_SCORE_STATISTICS_FILES).toHaveLength(39);
   });
 });
