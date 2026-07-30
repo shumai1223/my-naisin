@@ -38,6 +38,7 @@ import { EXAM_SCORE_STATISTICS_ISHIKAWA } from './ishikawa';
 import { EXAM_SCORE_STATISTICS_YAMANASHI } from './yamanashi';
 import { EXAM_SCORE_STATISTICS_SAGA } from './saga';
 import { EXAM_SCORE_STATISTICS_TOKUSHIMA } from './tokushima';
+import { EXAM_SCORE_STATISTICS_TOTTORI } from './tottori';
 import type { ExamScoreStatisticsFile } from '@/lib/exam-score-statistics';
 
 export const EXAM_SCORE_STATISTICS_BY_PREFECTURE: Record<string, ExamScoreStatisticsFile> = {
@@ -78,6 +79,7 @@ export const EXAM_SCORE_STATISTICS_BY_PREFECTURE: Record<string, ExamScoreStatis
   yamanashi: EXAM_SCORE_STATISTICS_YAMANASHI,
   saga: EXAM_SCORE_STATISTICS_SAGA,
   tokushima: EXAM_SCORE_STATISTICS_TOKUSHIMA,
+  tottori: EXAM_SCORE_STATISTICS_TOTTORI,
 };
 
 export const EXAM_SCORE_STATISTICS_FILES: ExamScoreStatisticsFile[] = Object.values(
