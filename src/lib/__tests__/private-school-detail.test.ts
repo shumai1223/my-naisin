@@ -652,19 +652,22 @@ describe('PRIVATE_SCHOOL_DETAIL_MIE(私学協会一覧で21校中13校=全日制
   });
 });
 
-describe('PRIVATE_SCHOOL_DETAIL_AOMORI(個別学校サイトから青森山田・弘前学院聖愛の2校を収録・一括PDF未発見)', () => {
+describe('PRIVATE_SCHOOL_DETAIL_AOMORI(個別学校サイト2校+育伸社募集要項PDFで残り15校を追加・全17校完全収録)', () => {
   it('収録した学校は全てcourses合計とtotalCapacityが一致する', () => {
     for (const school of PRIVATE_SCHOOL_DETAIL_AOMORI.schools) {
       expect(checkCourseCapacitySum(school)).toBe(true);
     }
   });
 
-  it('収録2校・スキップ0件で残り15校は未着手(重複なし)', () => {
+  it('schools-private/aomori.tsの全17校がschoolsで網羅されている(重複・欠落なし)', () => {
     const allCodes = SCHOOLS_PRIVATE_AOMORI.schools.map((s) => s.code);
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_AOMORI, allCodes);
     expect(result.duplicates).toEqual([]);
-    expect(result.missing).toHaveLength(15);
-    expect(PRIVATE_SCHOOL_DETAIL_AOMORI.schools.length).toBe(2);
+    expect(result.missing).toEqual([]);
+  });
+
+  it('17校全てを収録しスキップ0件', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_AOMORI.schools.length).toBe(17);
     expect(PRIVATE_SCHOOL_DETAIL_AOMORI.skipped.length).toBe(0);
   });
 });
