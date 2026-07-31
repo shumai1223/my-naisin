@@ -283,35 +283,35 @@ describe('formatWeeklyKpiEmail', () => {
 
     it('データ未提供の走行中実験は「n不足」で打ち切らない旨を明記する', () => {
       const { text } = formatWeeklyKpiEmail(baseData());
-      expect(text).toContain('⚪ lead-copy-2026: n不足（GA4データ未提供・判定保留。打ち切らず継続して母数を貯める）');
+      expect(text).toContain('⚪ line-cta-copy-2026: n不足（GA4データ未提供・判定保留。打ち切らず継続して母数を貯める）');
     });
 
     it('十分なサンプル+有意差ありなら🏆で採用推奨が出る', () => {
       const data = baseData({
         experimentArmResults: {
-          'lead-copy-2026': [
+          'line-cta-copy-2026': [
             { id: 'control', impressions: 500, conversions: 40 },
             { id: 'reward', impressions: 520, conversions: 70 },
           ],
         },
       });
       const { text } = formatWeeklyKpiEmail(data);
-      expect(text).toContain('🏆 lead-copy-2026:');
+      expect(text).toContain('🏆 line-cta-copy-2026:');
       expect(text).toContain('採用推奨');
     });
 
     it('サンプル不足なら⏳またはn不足で判定を急がない', () => {
       const data = baseData({
         experimentArmResults: {
-          'lead-copy-2026': [
+          'line-cta-copy-2026': [
             { id: 'control', impressions: 10, conversions: 1 },
             { id: 'reward', impressions: 11, conversions: 3 },
           ],
         },
       });
       const { text } = formatWeeklyKpiEmail(data);
-      expect(text).toContain('lead-copy-2026:');
-      expect(text).not.toContain('🏆 lead-copy-2026:');
+      expect(text).toContain('line-cta-copy-2026:');
+      expect(text).not.toContain('🏆 line-cta-copy-2026:');
     });
   });
 });

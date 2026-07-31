@@ -78,35 +78,35 @@ export const EXPERIMENTS: ExperimentDef[] = [
   {
     id: 'hogosha-cta-text-2026',
     hypothesis: 'CTA文言に「今すぐ」で緊急性を足すと、保護者リードのクリック率（affiliate_click）が上がる。',
-    status: 'running',
+    status: 'paused',
     arms: [
       { id: 'control', label: '出し分けエンジンの既定文言' },
       { id: 'urgent', label: '「今すぐ＋（既定文言）」で緊急性を付与', ctaPrefix: '今すぐ' },
     ],
     primaryMetric: 'affiliate_click',
     placement: 'parent-lp',
-    note: '送客先（affiliateId）は固定し、純粋にコピーの効きだけを測る。最大流入の県別47面に設置して母数を稼ぐ。',
+    note: '送客先（affiliateId）は固定し、純粋にコピーの効きだけを測る。最大流入の県別47面に設置して母数を稼ぐ。**🚨2026-08-01停止**: GA4に`experiment_id`カスタムディメンションが未登録のまま45日稼働し判定不能だったため停止(蓄積データは破棄)。👤が2026-08-01に`experiment_id`を登録済み。GA4で実際にクエリできることを確認してから、startedAtをリセットして再開する（primaryMetricは元々affiliate_clickで妥当なため変更不要）。',
     startedAt: '2026-06-16',
   },
   {
     // 実験1（H8）：result面の送客オファーA/B。そら塾（現状）vs e-Live（もしも live）。
     id: 'result-offer-2026',
     hypothesis: 'result面で、個別指導塾（そら塾）よりオンライン家庭教師（e-Live）の方が affiliate_click/CVR が高い。',
-    status: 'running',
+    status: 'paused',
     arms: [
       { id: 'control', label: 'そら塾（オンライン個別指導・現状の既定）', affiliateId: 'sora-juku-text' },
       { id: 'elive', label: 'e-Live（小中高オンライン家庭教師）', affiliateId: 'moshimo-e-live' },
     ],
     primaryMetric: 'affiliate_click',
     placement: 'result',
-    note: 'コピーは同一・送客先だけを差し替えて純粋にオファーの効きを測る。両アームとも live。勝者を lead-config の result面に固定する。',
+    note: 'コピーは同一・送客先だけを差し替えて純粋にオファーの効きを測る。両アームとも live。勝者を lead-config の result面に固定する。**🚨2026-08-01停止**: GA4 experiment_id未登録で44日判定不能に加え、D1一次ログで代替判定を試みたところ2アームの配置自体が分離していた(e-Live=mendan/shindan経由・そら塾=naishin-up経由で同一面比較になっていない=実験の体をなしていない・n=5)。**再開前に配置を揃える設計修正が必須**(同一面で送客先(affiliateId)だけを差し替える設計に直すこと。次回どのコンポーネント/面でこの実験を張るか要調査)。',
     startedAt: '2026-06-17',
   },
   {
     // 実験2（H8）：hiyou面のコピーA/B。FP相談の訴求 vs ツール文脈（計算する）。送客先は同一（fp-soudan）。
     id: 'hiyou-copy-2026',
     hypothesis: 'hiyou面で「高校3年間でいくら必要か計算する」（ツール文脈）の方が、FP相談の直接訴求より cta_view→affiliate_click が伸びる。',
-    status: 'running',
+    status: 'paused',
     arms: [
       { id: 'control', label: '教育資金をFPに相談（現状の既定コピー）' },
       {
@@ -118,7 +118,7 @@ export const EXPERIMENTS: ExperimentDef[] = [
     ],
     primaryMetric: 'affiliate_click',
     placement: 'hiyou',
-    note: '送客先（fp-soudan）は固定。直接訴求 vs ツール文脈で「保護者の入り口」の効きを比較する。',
+    note: '送客先（fp-soudan）は固定。直接訴求 vs ツール文脈で「保護者の入り口」の効きを比較する。**🚨2026-08-01停止**: GA4に`experiment_id`カスタムディメンションが未登録のまま44日稼働し判定不能だったため停止(蓄積データは破棄)。GA4で`experiment_id`が実際にクエリできることを確認してから、startedAtをリセットして再開する(primaryMetricは元々affiliate_clickで妥当なため変更不要)。',
     startedAt: '2026-06-17',
   },
   {
@@ -127,14 +127,14 @@ export const EXPERIMENTS: ExperimentDef[] = [
     // 送信先・フォームは同一。ボタン文言だけを差し替えて純粋にコピーの効きを測る（SaveResultCTAが参照）。
     id: 'lead-copy-2026',
     hypothesis: '名簿登録ボタンを「結果カードを無料でもらう」と見返りで名指しすると、汎用の「無料で受け取る」より lead_submit が上がる。',
-    status: 'running',
+    status: 'paused',
     arms: [
       { id: 'control', label: '無料で受け取る（汎用）' },
       { id: 'reward', label: '結果カードを無料でもらう（見返りを名指し）', ctaPrefix: '結果カードを' },
     ],
     primaryMetric: 'lead_submit',
     placement: 'result',
-    note: '最高インテント面（result/gap-target）で母数を稼ぐ。勝者が出たら SaveResultCTA の既定ボタン文言を昇格させる。',
+    note: '最高インテント面（result/gap-target）で母数を稼ぐ。勝者が出たら SaveResultCTA の既定ボタン文言を昇格させる。**🚨2026-08-01停止・他の3実験とは事情が異なる**: GA4 experiment_id未登録に加え、lead_submit自体が月1件しかなく41日でも判定不能だった。**この実験は`cta_view`/`form_start`等の上流指標に差し替えても解決しない**（変えているのは送信ボタンの文言そのものであり、フォーム表示(SAVE_RESULT_CTA_VIEW)や入力開始(form_start)はボタン文言を見る前のタイミングで発生するため、上流イベントには原理的にこの変数の効果が乗らない）。**次周回への申し送り**: 単純な`startedAt`リセット再開は同じ判定不能を繰り返すだけなので推奨しない。「根拠ゼロで挙動を変えない」原則に従い、このままcontrol（現状の「無料で受け取る」）を正式採用してdecidedへ格下げする案が妥当（👤確認推奨）。再挑戦する場合は、ボタン文言でなく、より上流（フォーム表示前のCTA自体の見出し等）でA/Bを組み直す設計変更が必要。',
     startedAt: '2026-06-20',
   },
   {
@@ -860,6 +860,20 @@ export function getExperiment(id: string): ExperimentDef | undefined {
 /** 走っている実験だけ。 */
 export function runningExperiments(): ExperimentDef[] {
   return EXPERIMENTS.filter((e) => e.status === 'running');
+}
+
+/**
+ * この実験IDは今トラフィックを割当てるべきか（純粋関数・useExperimentから呼ぶ）。
+ * **2026-08-01発見の再発防止**: レジストリの`status`は元々ここでしか参照されておらず
+ * （ParentLeadCTAExperiment/SaveResultCTA等は`status`を一切見ずに常時割当していた）、
+ * 4実験（hogosha-cta-text-2026等）が`status`を変えても実際のトラフィック分割が止まらない
+ * バグの温床になっていた。`status !== 'running'`（paused/decided/queued）なら常にfalseを返し、
+ * 呼び出し側（useExperiment）はcontrol(variants[0])固定・experiment_impression送信も止める。
+ * レジストリに無いID（フォールバックアーム等）は既存動作を壊さないためtrue（=通常どおり割当）。
+ */
+export function isExperimentRunning(id: string): boolean {
+  const def = getExperiment(id);
+  return def ? def.status === 'running' : true;
 }
 
 /** まだ配線していない候補実験（弾倉）。配列の並び順＝優先度（先頭から順に活性化する運用）。 */

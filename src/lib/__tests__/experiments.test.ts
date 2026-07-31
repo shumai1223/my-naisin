@@ -6,6 +6,7 @@ import {
   nextQueuedExperiment,
   judgeWinner,
   checkExperimentPortfolioHealth,
+  isExperimentRunning,
   MIN_RUNNING_EXPERIMENTS,
   ROTATION_INTERVAL_DAYS,
   requiredSampleSizePerArm,
@@ -40,16 +41,27 @@ describe('experiments registry', () => {
     const e = getExperiment('hogosha-cta-text-2026');
     expect(e).toBeDefined();
     expect(e?.arms[0].id).toBe('control');
-    expect(runningExperiments().some((x) => x.id === 'hogosha-cta-text-2026')).toBe(true);
   });
 
-  it('lead_submit を主要指標にする実験が稼働している（名簿velocityのA/B）', () => {
-    const leadExps = runningExperiments().filter((e) => e.primaryMetric === 'lead_submit');
-    expect(leadExps.length).toBeGreaterThanOrEqual(1);
-    // SaveResultCTA が参照するコピーA/B。reward アームは ctaPrefix を持つ。
+  // 2026-08-01: GA4のexperiment_idカスタムディメンション未登録により4実験
+  // （hogosha-cta-text-2026/result-offer-2026/hiyou-copy-2026/lead-copy-2026）が
+  // 41〜45日間判定不能のまま稼働し続けていたため停止した（[[fable5-fullaccel-backlog-2026-07]]
+  // Λ-2の次の追加指示・②-a）。再開は個別に検証してから行う。
+  it('lead-copy-2026はGA4 experiment_id未登録+月1件の低頻度で判定不能だったため停止済み(pausedかつcontrolのまま)', () => {
     const copy = getExperiment('lead-copy-2026');
+    expect(copy?.status).toBe('paused');
     expect(copy?.primaryMetric).toBe('lead_submit');
+    // SaveResultCTA が参照するコピーA/B。reward アームは ctaPrefix を持つ（停止中でもレジストリの形は維持）。
     expect(copy?.arms.find((a) => a.id === 'reward')?.ctaPrefix).toBeTruthy();
+  });
+
+  it('2026-08-01に停止した4実験はいずれもstatus=pausedで、停止理由がnoteに記録されている', () => {
+    const stoppedIds = ['hogosha-cta-text-2026', 'result-offer-2026', 'hiyou-copy-2026', 'lead-copy-2026'];
+    for (const id of stoppedIds) {
+      const e = getExperiment(id);
+      expect(e?.status).toBe('paused');
+      expect(e?.note).toContain('2026-08-01停止');
+    }
   });
 
   // scaled-contentゲート（H-5）：A/B実験も「コピペで同じ物を2アーム分」という重複バグが起こり得る面。
@@ -80,6 +92,21 @@ describe('experiments registry', () => {
         }
       }
     }
+  });
+});
+
+describe('isExperimentRunning（2026-08-01追加・useExperimentがトラフィック分割を止めるための判定）', () => {
+  it('status=runningの実験はtrue', () => {
+    expect(isExperimentRunning('line-cta-copy-2026')).toBe(true);
+  });
+
+  it('status=pausedの実験はfalse(2026-08-01停止分含む)', () => {
+    expect(isExperimentRunning('hogosha-cta-text-2026')).toBe(false);
+    expect(isExperimentRunning('lead-copy-2026')).toBe(false);
+  });
+
+  it('レジストリに無いID(フォールバックアーム利用時)は既存動作を壊さないためtrue', () => {
+    expect(isExperimentRunning('no-such-experiment-id')).toBe(true);
   });
 });
 
