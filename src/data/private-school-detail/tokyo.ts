@@ -208,6 +208,19 @@
  * [総合]30+推薦Ⅱ[スポーツ特別]30+一般105)は3段階が全て異なる数値のため全加算。明治大学付属
  * 八王子160・明治大学付属明治50は推薦一般で異なる数値(または偶然同じ数値)が繰り返されるが
  * 計Xラベルなしのプレーン見出しのため4頁目の基本ルールで加算。
+ * **20頁目(2026-07-31追記・★育伸社PDF全20頁の処理完了)**: 立正大学付属立正(進学・特進の2クラス
+ * で「普通科計100(推薦)・計70(一般①)・計30(一般②)」が3段階とも両方一致で反復=200の共有、
+ * 実践学園型)は複数コース反復パターンを適用。★和洋九段女子(1頁目で当時の正確な数値が取得
+ * できず保留していた学校)は今回フューチャーデザイン(2026年新設)・グローバル・サイエンス
+ * (2026年新設)の3コース全てで「全コース計40(単願推薦、併願推薦・併優一般共通枠)」が完全一致で
+ * 反復していることを確認でき=40の共有クォータとして初めて解決・収録できた。八雲学園70(特進
+ * [推薦20+一般10]+進学[推薦20+一般20])・安田学園200(S特120+特進80)・立志舎500(平日コース
+ * [A/B推薦100+一般①100]+土曜コースB推薦のみ300)・和光140・早稲田大学系属早稲田実業学校高等部
+ * 90(推薦[スポーツ文化]約45+一般約45、帰国は若干のため未算入)・早稲田大学高等学院280(男、
+ * 自己推薦約20+一般260[帰国生18を含む])は通常の複数コース/推薦一般加算。立教池袋は「一般
+ * (第一志望・オープン)若干」としか記載がなく確定的な募集人員が公表されていないためスキップ台帳へ。
+ * これにより育伸社PDF(20頁)は全頁の処理を完了した(参照台帳241校中166校収録・スキップ8校=
+ * 174/241校を判定済み、残り67校は個別公式サイト調査等の別チャネルでの継続調査が必要)。
  * 残り7校はWebSearchで個別調査し完全中高一貫(高校からの外部募集なし)と確認できたためスキップ:
  * 暁星・大妻・雙葉・共立女子(2006年度に高校募集停止)・三輪田学園・女子学院・白百合学園。
  * いずれも「女子御三家(女子学院・雙葉)」「男子伝統校(暁星)」等の著名中高一貫校で、
@@ -2162,6 +2175,109 @@ export const PRIVATE_SCHOOL_DETAIL_TOKYO: PrivateSchoolDetailFile = {
       totalCapacity: 100,
       source: IKUSHIN_TOKYO_SOURCE,
     },
+    {
+      schoolCode: 'D113311000070',
+      schoolName: '八雲学園高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '特進コース(推薦、普通科計)', capacity: 20 },
+        { courseName: '特進コース(一般①・②共通枠)', capacity: 10 },
+        { courseName: '進学コース(推薦、普通科計)', capacity: 20 },
+        { courseName: '進学コース(一般①・②共通枠)', capacity: 20 },
+      ],
+      totalCapacity: 70,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310700020',
+      schoolName: '安田学園高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: 'S特コース(A推薦・B推薦・一般併優・一般フリー共通枠)', capacity: 120 },
+        { courseName: '特進コース(A推薦・B推薦・一般併優・一般フリー共通枠)', capacity: 80 },
+      ],
+      totalCapacity: 200,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310700039',
+      schoolName: '立志舎高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(平日コース、A推薦・B推薦共通枠)', capacity: 100 },
+        { courseName: '普通(平日コース、一般①)', capacity: 100 },
+        { courseName: '普通(土曜コース、B推薦のみ掲載)', capacity: 300 },
+      ],
+      totalCapacity: 500,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311100015',
+      schoolName: '立正大学付属立正高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        {
+          courseName: '進学クラス・特進クラス(推薦共通枠、普通科計)',
+          capacity: 100,
+        },
+        {
+          courseName: '進学クラス・特進クラス(一般①共通枠、普通科計)',
+          capacity: 70,
+        },
+        {
+          courseName: '進学クラス・特進クラス(一般②共通枠、普通科計)',
+          capacity: 30,
+        },
+      ],
+      totalCapacity: 200,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113320900027',
+      schoolName: '和光高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(推薦、約)', capacity: 70 },
+        { courseName: '普通(一般、約)', capacity: 70 },
+      ],
+      totalCapacity: 140,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113321400011',
+      schoolName: '早稲田大学系属早稲田実業学校高等部',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(推薦[スポーツ・文化]、約。指定校10を含む)', capacity: 45 },
+        { courseName: '普通(一般、男女共通枠、約。帰国は若干のため未算入)', capacity: 45 },
+      ],
+      totalCapacity: 90,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113312000050',
+      schoolName: '早稲田大学高等学院',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(男、自己推薦、約)', capacity: 20 },
+        { courseName: '普通(男、一般、帰国生18を含む)', capacity: 260 },
+      ],
+      totalCapacity: 280,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310100142',
+      schoolName: '和洋九段女子高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        {
+          courseName: 'フューチャーデザインコース(2026年新設)・グローバルコース・サイエンスコース(2026年新設)(女、単願推薦・併願推薦・併優一般①②共通枠、全コース計)',
+          capacity: 40,
+        },
+      ],
+      totalCapacity: 40,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
   ],
   skipped: [
     {
@@ -2198,6 +2314,11 @@ export const PRIVATE_SCHOOL_DETAIL_TOKYO: PrivateSchoolDetailFile = {
       schoolCode: 'D113310100160',
       schoolName: '白百合学園高等学校',
       reason: '高校からの外部募集は行われておらず中学からの内進生のみのため(WebSearch要約による確認)',
+    },
+    {
+      schoolCode: 'D113311600145',
+      schoolName: '立教池袋高等学校',
+      reason: '育伸社PDFに「一般(第一志望・オープン)若干」としか記載が無く、確定的な募集人員の数値が公表されていないため(捏造ゼロ原則によりスキップ)',
     },
   ],
 };
