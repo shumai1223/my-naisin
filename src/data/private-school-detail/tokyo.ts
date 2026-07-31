@@ -114,6 +114,19 @@
  * のみ)・聖学院15・成蹊85・成女50・成城学園60・正則学園125・聖パウロ学園80・青稜130(帰国は
  * 若干のため未算入)・世田谷学園25・専修大学附属400(推薦200+一般200、コース間の計Xラベルなし
  * だが4頁目の基本ルールで加算)・創価135。
+ * **11頁目(2026-07-31追記)**: 瀧野川女子学園(女、特進選抜クラス・特進コース・進学コースの3
+ * コース全てで「普通科計135」が反復=135の共有クォータ、駒込型)・大東文化大学第一(選抜進学
+ * クラス・進学クラスの2コースで「選抜・進学計155(推薦)」「選抜・進学計160(一般)」が両方一致
+ * 反復=315の共有、特別進学クラスは独立35と合算し350)は複数コース反復パターンを適用。大成は
+ * 特別進学・文理進学・情報進学の3コースそれぞれで推薦/一般①/一般②の3段階が全て異なる明示数値
+ * (計Xラベルなし)のため全て加算し405(単一学校としては大きめの値だが原資料の構造をそのまま反映)。
+ * その他は通常の複数コース/推薦一般加算: 大東学園270(推薦135+公立併願優遇一般共通枠135)・
+ * 拓殖大学第一400(特進[推薦40+一般60]+進学[推薦120+一般180])・立川女子300(総合[推薦125+一般
+ * 125]+特別進学[推薦25+一般25]、いずれもコース間の計Xラベルなしだが4頁目の基本ルールで加算)・
+ * 玉川学園80(単一ブロック)・玉川聖学院120(推薦40+一般Ⅰ〜Ⅳ共通枠80)・多摩大学附属聖ケ丘20
+ * (一般のみ掲載)・多摩大学目黒150(推薦30+一般120)・中央学院大学中央50(普通25+商業25、別課程の
+ * ため加算)・中央大学(昼間定時制)95(推薦25+一般70、男女共通枠)・中央大学杉並300(一般公募推薦
+ * 130+帰国20+一般150、帰国は明示数値のため国際系学校とは異なり通常の校と同様に算入)。
  * 残り7校はWebSearchで個別調査し完全中高一貫(高校からの外部募集なし)と確認できたためスキップ:
  * 暁星・大妻・雙葉・共立女子(2006年度に高校募集停止)・三輪田学園・女子学院・白百合学園。
  * いずれも「女子御三家(女子学院・雙葉)」「男子伝統校(暁星)」等の著名中高一貫校で、
@@ -1037,6 +1050,168 @@ export const PRIVATE_SCHOOL_DETAIL_TOKYO: PrivateSchoolDetailFile = {
         { courseName: '普通(一般、約)', capacity: 70 },
       ],
       totalCapacity: 135,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113320400022',
+      schoolName: '大成高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '特別進学コース(推薦)', capacity: 5 },
+        { courseName: '特別進学コース(一般①)', capacity: 60 },
+        { courseName: '特別進学コース(一般②)', capacity: 10 },
+        { courseName: '文理進学コース(推薦)', capacity: 110 },
+        { courseName: '文理進学コース(一般①)', capacity: 130 },
+        { courseName: '文理進学コース(一般②)', capacity: 50 },
+        { courseName: '情報進学コース(推薦)', capacity: 10 },
+        { courseName: '情報進学コース(一般①)', capacity: 20 },
+        { courseName: '情報進学コース(一般②)', capacity: 10 },
+      ],
+      totalCapacity: 405,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311200167',
+      schoolName: '大東学園高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(推薦)', capacity: 135 },
+        { courseName: '普通(公立併願優遇・一般①②共通枠)', capacity: 135 },
+      ],
+      totalCapacity: 270,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311900035',
+      schoolName: '大東文化大学第一高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '特別進学クラス(推薦A・B・C共通枠)', capacity: 20 },
+        { courseName: '特別進学クラス(一般①・②共通枠)', capacity: 15 },
+        {
+          courseName: '選抜進学クラス・進学クラス(推薦A・B・C共通枠、選抜・進学計)',
+          capacity: 155,
+        },
+        {
+          courseName: '選抜進学クラス・進学クラス(一般①・②共通枠、選抜・進学計)',
+          capacity: 160,
+        },
+      ],
+      totalCapacity: 350,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311700091',
+      schoolName: '瀧野川女子学園高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        {
+          courseName: '特進選抜クラス・特進コース・進学コース(女、A推薦・B推薦・一般併優共通枠、普通科計)',
+          capacity: 135,
+        },
+      ],
+      totalCapacity: 135,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113322300010',
+      schoolName: '拓殖大学第一高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '特進コース(推薦Ⅰ・Ⅱ共通枠)', capacity: 40 },
+        { courseName: '特進コース(一般Ⅰ・Ⅱ共通枠)', capacity: 60 },
+        { courseName: '進学コース(推薦Ⅰ・Ⅱ共通枠)', capacity: 120 },
+        { courseName: '進学コース(一般Ⅰ・Ⅱ共通枠)', capacity: 180 },
+      ],
+      totalCapacity: 400,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113320200024',
+      schoolName: '立川女子高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '総合コース(女、推薦)', capacity: 125 },
+        { courseName: '総合コース(女、一般)', capacity: 125 },
+        { courseName: '特別進学コース(女、推薦)', capacity: 25 },
+        { courseName: '特別進学コース(女、一般)', capacity: 25 },
+      ],
+      totalCapacity: 300,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113320900045',
+      schoolName: '玉川学園高等部',
+      fiscalYearLabel: '2026年度',
+      courses: [{ courseName: '一般クラス(専願優遇・併願優遇・オープン共通枠、程度)', capacity: 80 }],
+      totalCapacity: 80,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311200176',
+      schoolName: '玉川聖学院高等部',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(女、推薦、約)', capacity: 40 },
+        {
+          courseName: '普通(女、一般Ⅰ・Ⅱ・Ⅲ①②・Ⅳ①②共通枠、約)',
+          capacity: 80,
+        },
+      ],
+      totalCapacity: 120,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113322400028',
+      schoolName: '多摩大学附属聖ケ丘高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [{ courseName: '普通(一般のみ掲載、約)', capacity: 20 }],
+      totalCapacity: 20,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311000061',
+      schoolName: '多摩大学目黒高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(推薦)', capacity: 30 },
+        { courseName: '普通(一般①・②共通枠)', capacity: 120 },
+      ],
+      totalCapacity: 150,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310800029',
+      schoolName: '中央学院大学中央高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(推薦・併優一般共通枠)', capacity: 25 },
+        { courseName: '商業(推薦・併優一般共通枠)', capacity: 25 },
+      ],
+      totalCapacity: 50,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310500013',
+      schoolName: '中央大学高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(昼間定時制、推薦、男女共通枠)', capacity: 25 },
+        { courseName: '普通(昼間定時制、一般、男女共通枠)', capacity: 70 },
+      ],
+      totalCapacity: 95,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311500084',
+      schoolName: '中央大学杉並高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(一般公募推薦)', capacity: 130 },
+        { courseName: '普通(帰国)', capacity: 20 },
+        { courseName: '普通(一般)', capacity: 150 },
+      ],
+      totalCapacity: 300,
       source: IKUSHIN_TOKYO_SOURCE,
     },
   ],
