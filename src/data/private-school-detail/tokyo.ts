@@ -81,6 +81,14 @@
  * 共通枠5、帰国生1・2回は若干のため未算入)+国際コース(推薦15+一般10=25、帰国生1回は若干でない
  * 明示数値5があったが国際系学校の帰国生ルートは主要選抜として扱いが特殊なため一貫して未算入とし
  * 一般化)=30。
+ * **8頁目(2026-07-31追記)**: 下北沢成徳(女、GL/BRセレクト/BRの3コース全てで「普通科計100」が
+ * 反復=駒込・実践学園と同型のため学校全体で100の共有クォータ)・十文字(女、リベラルアーツ/特選
+ * (人文・理数)/自己発信の3コース全てで「全コース計80」が反復=十文字全体で80の共有クォータ)の
+ * 2校は複数コースにまたがる同一ラベル反復のパターンを適用。自由ヶ丘学園(25+50+60=135、各コース
+ * 独立の数値で計Xラベルなし)・自由学園(推薦60+一般60=120、いずれも内部進学を含む)・修徳(特進
+ * 50+文理進学80=130)・淑徳(スーパー特進20+特進選抜50+留学20=90、留学コースは単願推薦のみ掲載)・
+ * 淑徳巣鴨(アルティメット38+プレミアム37+選抜80+特進80=235、4コースとも独立の数値で計Xラベル
+ * なし)は通常の複数コース加算パターンとして収録。
  * 残り7校はWebSearchで個別調査し完全中高一貫(高校からの外部募集なし)と確認できたためスキップ:
  * 暁星・大妻・雙葉・共立女子(2006年度に高校募集停止)・三輪田学園・女子学院・白百合学園。
  * いずれも「女子御三家(女子学院・雙葉)」「男子伝統校(暁星)」等の著名中高一貫校で、
@@ -646,6 +654,91 @@ export const PRIVATE_SCHOOL_DETAIL_TOKYO: PrivateSchoolDetailFile = {
         { courseName: '国際コース(一般。帰国生1回・2回は別枠のため未算入)', capacity: 10 },
       ],
       totalCapacity: 30,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311200130',
+      schoolName: '下北沢成徳高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        {
+          courseName: 'GL(グローバルエデュケーション)コース・BR(ブロードエデュケーション)コースセレクトクラス・BR(ブロードエデュケーション)コース(女、単願推薦・併願推薦・一般オープン①②共通枠、普通科計)',
+          capacity: 100,
+        },
+      ],
+      totalCapacity: 100,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311000016',
+      schoolName: '自由ヶ丘学園高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: 'プログレスコース(推薦・A日程併優・B日程併優・A日程一般・B日程一般共通枠)', capacity: 25 },
+        { courseName: 'アドバンスコース(推薦・A日程併優・B日程併優・A日程一般・B日程一般共通枠)', capacity: 50 },
+        { courseName: 'アカデミックコース(推薦・A日程併優・B日程併優・A日程一般・B日程一般共通枠)', capacity: 60 },
+      ],
+      totalCapacity: 135,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113322200011',
+      schoolName: '自由学園高等部',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(推薦、内部進学を含む)', capacity: 60 },
+        { courseName: '普通(一般、内部進学を含む)', capacity: 60 },
+      ],
+      totalCapacity: 120,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113312200021',
+      schoolName: '修徳高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '特進クラス(A推薦・B推薦・一般①②共通枠)', capacity: 50 },
+        { courseName: '文理進学クラス(A推薦・B推薦・一般①共通枠)', capacity: 80 },
+      ],
+      totalCapacity: 130,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311600038',
+      schoolName: '十文字高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        {
+          courseName: 'リベラルアーツコース・特選コース(人文・理数)・自己発信コース(女、A推薦・B推薦・一般①②共通枠、全コース計)',
+          capacity: 80,
+        },
+      ],
+      totalCapacity: 80,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311900017',
+      schoolName: '淑徳高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: 'スーパー特進コース(単願推薦・併願推薦①②・一般①②共通枠)', capacity: 20 },
+        { courseName: '特進選抜コース(単願推薦・併願推薦①②・一般①②共通枠)', capacity: 50 },
+        { courseName: '留学コース(単願推薦のみ掲載)', capacity: 20 },
+      ],
+      totalCapacity: 90,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311600083',
+      schoolName: '淑徳巣鴨高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '選抜コース(アルティメット)(A推薦・B推薦・一般Ⅰ期・Ⅱ期共通枠)', capacity: 38 },
+        { courseName: '選抜コース(プレミアム)(A推薦・B推薦・一般Ⅰ期・Ⅱ期共通枠)', capacity: 37 },
+        { courseName: '選抜コース(選抜)(A推薦・B推薦・一般Ⅰ期・Ⅱ期共通枠)', capacity: 80 },
+        { courseName: '特進コース(特進)(A推薦・B推薦・一般Ⅰ期・Ⅱ期共通枠)', capacity: 80 },
+      ],
+      totalCapacity: 235,
       source: IKUSHIN_TOKYO_SOURCE,
     },
   ],
