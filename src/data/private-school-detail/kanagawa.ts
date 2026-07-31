@@ -24,6 +24,8 @@
  * 横浜高等学校の5校を追加。横浜学園は「S選抜コース・A進学コース」という横須賀学院と
  * 酷似したコース構成のブロックが別に存在し、どちらの学校の実際の公表コース名と一致するか
  * 確信が持てなかったため今回は見送り(横須賀学院側を公知の実在コース名と照合し確度高く採用)。
+ * 7ページ目から横浜清風・横浜創英・横浜創学館・横浜隼人・横浜富士見丘学園の5校を追加
+ * (いずれも公知の実在コース名と一致することを確認済み)。
  * **2026-07-31訂正**: 桐蔭学園の数値を当初「湘南工科大学附属」として誤収録していたことが
  * 判明(4ページ目の桐蔭学園ブロックと3ページ目の湘南工科大学附属ブロックを取り違えた)。
  * schoolCodeを桐蔭学園の正しいコードへ修正し、湘南工科大学附属は正しい数値が別途確認できる
@@ -507,6 +509,62 @@ export const PRIVATE_SCHOOL_DETAIL_KANAGAWA: PrivateSchoolDetailFile = {
         ...IKUSHIN_KANAGAWA_SOURCE,
         docTitle: IKUSHIN_KANAGAWA_SOURCE.docTitle + '(推薦以降の一般各方式は全て↓で同一数値を継承)',
       },
+    },
+    {
+      schoolCode: 'D114310000179',
+      schoolName: '横浜清風高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '特進コース(推薦25+一般筆記30+オープン5)', capacity: 60 },
+        { courseName: '総合進学コース(推薦140+一般筆記130+オープン10)', capacity: 280 },
+      ],
+      totalCapacity: 340,
+      source: IKUSHIN_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114310000080',
+      schoolName: '横浜創英高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [{ courseName: '特進フロンティアコース(推薦110+オープン110)', capacity: 220 }],
+      totalCapacity: 220,
+      source: {
+        ...IKUSHIN_KANAGAWA_SOURCE,
+        docTitle: IKUSHIN_KANAGAWA_SOURCE.docTitle + '(中高一貫のサイエンスコース・グローバルコースで別途若干名募集ありと注記されるが数値未公表のため未算入)',
+      },
+    },
+    {
+      schoolCode: 'D114310000213',
+      schoolName: '横浜創学館高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(特別進学)(推薦20+一般20)', capacity: 40 },
+        { courseName: '普通(文理選抜)(推薦90+一般90)', capacity: 180 },
+        { courseName: '普通(総合進学)(推薦60+一般60)', capacity: 120 },
+      ],
+      totalCapacity: 340,
+      source: IKUSHIN_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114310000348',
+      schoolName: '横浜隼人高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(推薦60含帰国+一般専願120+オープン8)', capacity: 188 },
+        { courseName: '国際語(推薦20含帰国+一般専願40+オープン3)', capacity: 63 },
+      ],
+      totalCapacity: 251,
+      source: IKUSHIN_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114310000302',
+      schoolName: '横浜富士見丘学園高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '進学クラス(推薦35+一般30+オープン10)', capacity: 75 },
+        { courseName: '特進クラス(推薦35+一般30+オープン10)', capacity: 75 },
+      ],
+      totalCapacity: 150,
+      source: IKUSHIN_KANAGAWA_SOURCE,
     },
   ],
   skipped: [
