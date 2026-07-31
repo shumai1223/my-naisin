@@ -43,6 +43,7 @@ const FAQ_EXEMPT_ROUTES: Record<string, string> = {
   '/naishin-oru': 'オール3/4/5内申点ハブページ（下位ページへの導線のみ・Q&Aは/naishin-oru/[grade]側で対応済み）',
   '/partner': '塾/パートナー向けLP（Q&A形式のコンテンツなし。CANDIDATE_FOR_FAQ_CONTENT参照）',
   '/pref/[code]': '県別注意点ページ（箇条書きでQ&A形式ではない）',
+  '/pref/[code]/school/[schoolCode]': 'Λ-2建設中の個別学校ページ（今季倍率のデータ表示・Q&A形式ではない・noindex）',
   '/prefectures': '都道府県一覧ハブ（一覧のみでQ&A形式のコンテンツなし）',
   '/press': 'プレスキットページ（Q&A形式のコンテンツなし）',
   '/privacy': 'プライバシーポリシー（リッチリザルト価値が低い定型ページ）',

@@ -30,6 +30,7 @@ const DISCOVERABILITY_EXEMPT_ROUTES: Record<string, string> = {
   '/[prefecture]': '静的セグメントが無い単独動的ルート（本チェックの対象外・[prefecture]/naishin等の兄弟ルートで実質カバー）',
   '/[prefecture]/reverse': 'permanentRedirectのみのリダイレクトページ（[[opennext-ssg-1102-gotcha]]でsitemap対象外と確認済み）',
   '/blog/tag/[tag]': '意図的にnoindex設定（robots: { index: false }）のタグ一覧ページ',
+  '/pref/[code]/school/[schoolCode]': 'Λ-2建設中の個別学校ページ・1県パイロット。意図的にnoindex（品質ゲート②③未達）・近隣校リンク実装まではsitemap未登録・内部リンクなしが正しい状態',
 };
 
 describe('動的ルートの発見可能性監査（sitemap登録+内部リンク・TIER L）', () => {

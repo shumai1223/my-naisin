@@ -80,6 +80,7 @@ const HOWTO_EXEMPT_ROUTES: Record<string, string> = {
   '/nyushi-seido-henkou': '入試制度変更点まとめページ（手順でなくニュース速報一覧。ArticleSchemaで対応）',
   '/partner': '塾/パートナー向けLP（手順コンテンツなし）',
   '/pref/[code]': '県別注意点ページ（箇条書きの注意点であり手順ではない）',
+  '/pref/[code]/school/[schoolCode]': 'Λ-2建設中の個別学校ページ（データ表示であり手順ではない・noindex）',
   '/prefectures': '都道府県一覧ハブ（一覧のみで手順コンテンツなし）',
   '/privacy': 'プライバシーポリシー（リッチリザルト価値が低い定型ページ）',
   '/press': 'プレスキットページ（手順でなく取材向け資料紹介）',

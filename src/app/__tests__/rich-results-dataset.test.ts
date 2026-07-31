@@ -94,6 +94,7 @@ const DATASET_EXEMPT_ROUTES: Record<string, string> = {
   '/partner': '塾/パートナー向けLP（データセットの提供なし）',
   '/plan': 'プラン説明ページ（データセットの提供なし）',
   '/pref/[code]': '県別注意点ページ（箇条書きの注意点でありデータセットではない）',
+  '/pref/[code]/school/[schoolCode]': 'Λ-2建設中の個別学校ページ（単一学校のデータ表示であり公開Datasetではない・noindex）',
   '/prefectures': '都道府県一覧ハブ（一覧UIでありデータセット定義はhome側が正）',
   '/press': 'プレスキットページ（データセットの提供なし）',
   '/privacy': 'プライバシーポリシー（リッチリザルト価値が低い定型ページ）',
