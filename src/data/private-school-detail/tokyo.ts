@@ -138,6 +138,17 @@
  * 進学45)・貞静学園125(特別進学15+総合進学60+幼児教育保育60)・東亜学園405(総合選抜[推薦179+
  * 一般181]+特進[推薦10+一般35])・東海大学菅生140(医学難関大5+特進PBL15+進学120)・東海大学
  * 付属高輪台170(単一ブロック)・東京270(推薦120+一般150)・東京音楽大学付属35(単一ブロック)。
+ * **13頁目(2026-07-31追記)**: 東京家政大学附属女子(女、TKUクラスの推薦60・併願優遇一般60が
+ * 異なるラウンドで明示反復のため加算し120、SA10+CA30+TKU120=160)・東京純心女子(女、特進[推薦
+ * 20+併優10、一般は若干のため未算入]+セレクト[推薦70+併優40]=140)・東京成徳大学(特別進学
+ * [推薦・一般①共通枠30+一般②20]+進学選抜[70+20]+進学[70+20]=230、一般①は推薦と共有だが
+ * 一般②のみ独立した明示数値のため加算)・東京電機大学110(推薦30+一般[男女共通枠]80)・東京都市
+ * 大学等々力40(一般のみ掲載)を収録。東京実業は7つの科・コースそれぞれに推薦/併願ⅠA/併願ⅠB/
+ * 併願ⅡA・一般A/併願ⅡB・一般Bという5段階があり、かつ「併願10・一般5」のような1セル内の複合
+ * 数値表記も混在する極めて複雑な多段階構造のため今回は保留。東京文華(2026年度に文華女子から
+ * 校名変更・女子校から共学化)は推薦120(含スポーツコース)・一般120(含スポーツコース)が完全
+ * 同一の説明付きで反復されており、2つの独立した120プールなのか1つの120プールの記述の繰り返し
+ * なのか確証が持てないため見送り。
  * 残り7校はWebSearchで個別調査し完全中高一貫(高校からの外部募集なし)と確認できたためスキップ:
  * 暁星・大妻・雙葉・共立女子(2006年度に高校募集停止)・三輪田学園・女子学院・白百合学園。
  * いずれも「女子御三家(女子学院・雙葉)」「男子伝統校(暁星)」等の著名中高一貫校で、
@@ -1351,6 +1362,66 @@ export const PRIVATE_SCHOOL_DETAIL_TOKYO: PrivateSchoolDetailFile = {
         },
       ],
       totalCapacity: 160,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311900053',
+      schoolName: '東京家政大学附属女子高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: 'Super Advancedコース(SAクラス)(女、推薦A1・A2・B①②・併願優遇①②共通枠)', capacity: 10 },
+        { courseName: 'Creative Learningコース(CAクラス)(女、推薦A1・A2・B①②・併願優遇①②共通枠)', capacity: 30 },
+        { courseName: 'Creative Learningコース(TKUクラス)(女、推薦A1・A2・B①②共通枠)', capacity: 60 },
+        { courseName: 'Creative Learningコース(TKUクラス)(女、併願優遇一般①②共通枠)', capacity: 60 },
+      ],
+      totalCapacity: 160,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113320100052',
+      schoolName: '東京純心女子高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '特進コース(女、推薦)', capacity: 20 },
+        { courseName: '特進コース(女、併優一般Ⅰ・Ⅱ共通枠、併優。一般は若干のため未算入)', capacity: 10 },
+        { courseName: 'セレクトコース(女、推薦)', capacity: 70 },
+        { courseName: 'セレクトコース(女、併優一般Ⅰ・Ⅱ共通枠、併優。一般は若干のため未算入)', capacity: 40 },
+      ],
+      totalCapacity: 140,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311700108',
+      schoolName: '東京成徳大学高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '特別進学コース(推薦Ⅰ・Ⅱ・Ⅲ・一般①共通枠)', capacity: 30 },
+        { courseName: '特別進学コース(一般②)', capacity: 20 },
+        { courseName: '進学選抜コース(推薦Ⅰ・Ⅱ・Ⅲ・一般①共通枠)', capacity: 70 },
+        { courseName: '進学選抜コース(一般②)', capacity: 20 },
+        { courseName: '進学コース(推薦Ⅰ・Ⅱ・Ⅲ・一般①共通枠)', capacity: 70 },
+        { courseName: '進学コース(一般②)', capacity: 20 },
+      ],
+      totalCapacity: 230,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113321000015',
+      schoolName: '東京電機大学高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(推薦、約)', capacity: 30 },
+        { courseName: '普通(一般、男女共通枠、約)', capacity: 80 },
+      ],
+      totalCapacity: 110,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311200210',
+      schoolName: '東京都市大学等々力高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [{ courseName: '特別選抜コース(一般のみ掲載)', capacity: 40 }],
+      totalCapacity: 40,
       source: IKUSHIN_TOKYO_SOURCE,
     },
   ],
