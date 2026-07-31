@@ -295,6 +295,33 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
         fetchedAt: '2026-07-31',
       },
     },
+    {
+      schoolCode: 'D127310000799',
+      schoolName: '履正社高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '学藝コースS類・学藝コースⅠ類・学藝コースⅡ類(学藝コース計、専願・併願共通枠、約)', capacity: 440 },
+        { courseName: '競技コースⅢ類(強化クラブ生のみの募集、専願)', capacity: 120 },
+      ],
+      totalCapacity: 560,
+      source: {
+        ...IKUSHIN_OSAKA_SOURCE,
+        docTitle:
+          IKUSHIN_OSAKA_SOURCE.docTitle +
+          '(合計約560名はWebSearch経由で確認できた公式サイト由来の第三者要約「男女計約560名」と独立一致)',
+      },
+    },
+    {
+      schoolCode: 'D127310000085',
+      schoolName: '明星高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '文理選択コース(男、専願・併願共通枠、約)', capacity: 80 },
+        { courseName: '文理コース(男、専願・併願共通枠、約)', capacity: 40 },
+      ],
+      totalCapacity: 120,
+      source: IKUSHIN_OSAKA_SOURCE,
+    },
   ],
   skipped: [],
 };
