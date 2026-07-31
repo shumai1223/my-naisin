@@ -28,6 +28,7 @@ const NO_INBOUND_LINK_EXEMPT_ROUTES: Record<string, string> = {
   '/admin/juku-reviews': '認証必須のnoindex内部ツール（意図的にリンクしない設計・R-1第3弾）',
   '/admin/juku-matching': '認証必須のnoindex内部ツール（意図的にリンクしない設計・Λ-7 build-not-launch）',
   '/juku/dashboard/simulator': 'ZZ-4d系列：招待トークン必須のnoindex内部ツール（dashboard本体からのみ導線があれば十分・Λ-8）',
+  '/juku/dashboard/report': 'ZZ-4d系列：招待トークン必須のnoindex内部ツール（studentIdクエリ必須・dashboard本体の生徒カードからのみ導線があれば十分・Λ-8）',
   '/juken-chokuzen-check': 'ZZ-8d：季節限定の予約公開ページ（resolveSeason()がwinter/last-minuteの時のみ公開・それ以外はnotFound()）。公開前は意図的にどこからもリンクしない設計。11月の公開解禁時に他ページからの内部リンクも追加する',
   '/advisor': 'ZZ-3c：旗付きUI（NEXT_PUBLIC_ADVISOR_ENABLED=1になるまでnotFound()・noindex）。build-not-launchのため公開判断前は意図的にどこからもリンクしない',
 };

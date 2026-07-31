@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { GraduationCap, TrendingDown, Sparkles, Calculator } from 'lucide-react';
+import { GraduationCap, TrendingDown, Sparkles, Calculator, FileText } from 'lucide-react';
 
 import type { SnapshotMetric } from '@/lib/juku-saas-db';
 import { latestTrendDelta, type StudentTrendByMetric, type DeclineAlert } from '@/lib/juku-student-progress';
@@ -30,9 +30,11 @@ export interface DashboardViewProps {
   isDemo?: boolean;
   /** 内申点シミュレーターへのリンク(Λ-8・招待トークン込みのURL)。無ければボタンを表示しない。 */
   simulatorHref?: string;
+  /** 生徒別の帳票ページへのリンクを生成する関数(Λ-8・招待トークン込み)。無ければリンクを表示しない。 */
+  reportHrefForStudent?: (studentId: number | string) => string;
 }
 
-export function DashboardView({ jukuName, studentViews, isDemo, simulatorHref }: DashboardViewProps) {
+export function DashboardView({ jukuName, studentViews, isDemo, simulatorHref, reportHrefForStudent }: DashboardViewProps) {
   const totalAlerts = studentViews.reduce((sum, v) => sum + v.alerts.length, 0);
 
   return (
@@ -81,12 +83,23 @@ export function DashboardView({ jukuName, studentViews, isDemo, simulatorHref }:
                   <div key={id} className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
                     <div className="flex items-center justify-between">
                       <span className="font-bold text-slate-800">{displayName}</span>
-                      {alerts.length > 0 && (
-                        <span className="flex items-center gap-1 rounded-full bg-rose-50 px-2 py-0.5 text-xs font-bold text-rose-600">
-                          <TrendingDown className="h-3 w-3" />
-                          {alerts.length}件低下
-                        </span>
-                      )}
+                      <div className="flex items-center gap-2">
+                        {alerts.length > 0 && (
+                          <span className="flex items-center gap-1 rounded-full bg-rose-50 px-2 py-0.5 text-xs font-bold text-rose-600">
+                            <TrendingDown className="h-3 w-3" />
+                            {alerts.length}件低下
+                          </span>
+                        )}
+                        {reportHrefForStudent && (
+                          <Link
+                            href={reportHrefForStudent(id)}
+                            className="flex items-center gap-1 rounded-full bg-slate-100 px-2 py-0.5 text-xs font-medium text-slate-600 hover:bg-slate-200"
+                          >
+                            <FileText className="h-3 w-3" />
+                            帳票
+                          </Link>
+                        )}
+                      </div>
                     </div>
                     <div className="mt-2 grid grid-cols-3 gap-2 text-xs">
                       {METRICS.map((metric) => {

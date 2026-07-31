@@ -64,6 +64,9 @@ export default async function JukuDashboardPage({
       jukuName={account.name}
       studentViews={studentViews}
       simulatorHref={`/juku/dashboard/simulator?token=${encodeURIComponent(token!)}`}
+      reportHrefForStudent={(studentId) =>
+        `/juku/dashboard/report?token=${encodeURIComponent(token!)}&studentId=${studentId}`
+      }
     />
   );
 }
