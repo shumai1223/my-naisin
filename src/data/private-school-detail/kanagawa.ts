@@ -566,6 +566,20 @@ export const PRIVATE_SCHOOL_DETAIL_KANAGAWA: PrivateSchoolDetailFile = {
       totalCapacity: 150,
       source: IKUSHIN_KANAGAWA_SOURCE,
     },
+    {
+      schoolCode: 'D114310000311',
+      schoolName: '森村学園高等部',
+      fiscalYearLabel: '2026年度',
+      courses: [{ courseName: '普通(一般入試・書類選考)', capacity: 10 }],
+      totalCapacity: 10,
+      source: {
+        url: 'https://www.morimura.ac.jp/jsh/admission/senior/_pdf/senior_guidance_2026.pdf',
+        docTitle:
+          '令和8年度(2026年度)森村学園高等部 一般入学試験・帰国生入学試験 募集要項' +
+          '(帰国生入試A型・B型はいずれも男女若干名で数値非公表のため未算入。育伸社PDFの森村学園ブロックは法政大学第二との境界が確証できず見送り記録があるため本校公式サイトの一次資料を優先採用)',
+        fetchedAt: '2026-07-31',
+      },
+    },
   ],
   skipped: [
     {
