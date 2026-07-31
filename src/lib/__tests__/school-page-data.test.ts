@@ -1,4 +1,4 @@
-import { buildSchoolPageDataForPrefecture } from '../school-page-data';
+import { buildSchoolPageDataForPrefecture, selectNearbySchools, type SchoolPageData } from '../school-page-data';
 import type { SchoolRecord } from '../school-master';
 import type { CompetitionRateRecord } from '../competition-rate';
 
@@ -6,8 +6,27 @@ function rec(code: string, name: string): SchoolRecord {
   return { code, name, address: `${name}の住所`, postalCode: '1000001', branch: false };
 }
 
-function rate(schoolName: string, department: string, quota: number, finalApplicants: number, finalRate: number): CompetitionRateRecord {
-  return { schoolName, department, quota, finalApplicants, finalRate };
+function rate(
+  schoolName: string,
+  department: string,
+  quota: number,
+  finalApplicants: number,
+  finalRate: number,
+  area?: string
+): CompetitionRateRecord {
+  return { schoolName, department, quota, finalApplicants, finalRate, area };
+}
+
+function schoolData(overrides: Partial<SchoolPageData> & { schoolCode: string }): SchoolPageData {
+  return {
+    schoolName: `${overrides.schoolCode}高等学校`,
+    address: '',
+    departmentRates: [],
+    totalQuota: 0,
+    totalApplicants: 0,
+    overallRate: 0,
+    ...overrides,
+  };
 }
 
 describe('buildSchoolPageDataForPrefecture', () => {
@@ -63,5 +82,52 @@ describe('buildSchoolPageDataForPrefecture', () => {
     // ratesが無いのでmatchSummaryにも現れず、schools/skippedともに0件が正しい
     expect(result.schools).toHaveLength(0);
     expect(result.skipped).toHaveLength(0);
+  });
+
+  test('全学科レコードで一致するareaをSchoolPageDataに反映する', () => {
+    const master = [rec('T1', '東京都立日比谷高等学校')];
+    const rates = [rate('日比谷', '普通科', 253, 520, 2.06, '千代田')];
+    const result = buildSchoolPageDataForPrefecture(master, rates);
+    expect(result.schools[0].area).toBe('千代田');
+  });
+
+  test('areaが無い一次資料の学校はareaがundefinedになる(近隣校選定の対象外になるだけで安全)', () => {
+    const master = [rec('T1', '東京都立日比谷高等学校')];
+    const rates = [rate('日比谷', '普通科', 253, 520, 2.06)];
+    const result = buildSchoolPageDataForPrefecture(master, rates);
+    expect(result.schools[0].area).toBeUndefined();
+  });
+});
+
+describe('selectNearbySchools', () => {
+  test('同一areaの他校を倍率が近い順に最大3件返す', () => {
+    const target = schoolData({ schoolCode: 'A', area: '千代田', overallRate: 2.0 });
+    const all = [
+      target,
+      schoolData({ schoolCode: 'B', area: '千代田', overallRate: 1.9 }), // 差0.1
+      schoolData({ schoolCode: 'C', area: '千代田', overallRate: 1.0 }), // 差1.0
+      schoolData({ schoolCode: 'D', area: '千代田', overallRate: 2.1 }), // 差0.1
+      schoolData({ schoolCode: 'E', area: '港', overallRate: 2.0 }), // 別学区なので対象外
+    ];
+    const result = selectNearbySchools(target, all, 3);
+    expect(result.map((r) => r.schoolCode)).toEqual(['B', 'D', 'C']); // 差0.1同率はschoolCode昇順
+  });
+
+  test('areaが無い学校は空配列を返す(誤った近隣付けをしない)', () => {
+    const target = schoolData({ schoolCode: 'A', overallRate: 2.0 });
+    const all = [target, schoolData({ schoolCode: 'B', area: '千代田', overallRate: 2.0 })];
+    expect(selectNearbySchools(target, all)).toEqual([]);
+  });
+
+  test('同一areaの他校が0件なら空配列を返す(存在しない候補を作らない)', () => {
+    const target = schoolData({ schoolCode: 'A', area: '千代田', overallRate: 2.0 });
+    const all = [target, schoolData({ schoolCode: 'B', area: '港', overallRate: 2.0 })];
+    expect(selectNearbySchools(target, all)).toEqual([]);
+  });
+
+  test('自分自身は候補から除外される', () => {
+    const target = schoolData({ schoolCode: 'A', area: '千代田', overallRate: 2.0 });
+    const all = [target];
+    expect(selectNearbySchools(target, all)).toEqual([]);
   });
 });

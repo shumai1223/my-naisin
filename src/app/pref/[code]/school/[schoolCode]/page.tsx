@@ -6,7 +6,7 @@ import { ChevronRight, Home, GraduationCap, MapPin, AlertTriangle } from 'lucide
 import { getPrefectureByCode } from '@/lib/prefectures';
 import { SCHOOL_MASTER_BY_PREFECTURE } from '@/data/schools';
 import { COMPETITION_RATE_BY_PREFECTURE } from '@/data/competition-rates';
-import { buildSchoolPageDataForPrefecture, type SchoolPageData } from '@/lib/school-page-data';
+import { buildSchoolPageDataForPrefecture, selectNearbySchools, type SchoolPageData } from '@/lib/school-page-data';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 
 /**
@@ -73,9 +73,11 @@ export default async function SchoolPage({ params }: PageProps) {
   const data = getPrefectureSchoolPageData(code);
   const school = data?.schools.find((s) => s.schoolCode === schoolCode);
 
-  if (!prefecture || !school) {
+  if (!prefecture || !school || !data) {
     notFound();
   }
+
+  const nearbySchools = selectNearbySchools(school, data.schools, 3);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
@@ -161,6 +163,27 @@ export default async function SchoolPage({ params }: PageProps) {
                   </tbody>
                 </table>
               </div>
+            </section>
+          )}
+
+          {nearbySchools.length > 0 && (
+            <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <h2 className="mb-4 text-lg font-bold text-slate-800">
+                {school.area ? `同じ学区（${school.area}）の高校` : '近隣の高校'}
+              </h2>
+              <ul className="grid gap-2 sm:grid-cols-1">
+                {nearbySchools.map((n) => (
+                  <li key={n.schoolCode}>
+                    <Link
+                      href={`/pref/${prefecture.code}/school/${n.schoolCode}`}
+                      className="flex items-center justify-between rounded-xl bg-slate-50 px-4 py-3 text-sm hover:bg-slate-100"
+                    >
+                      <span className="font-medium text-slate-700">{n.schoolName}</span>
+                      <span className="text-slate-500">倍率 {n.overallRate}倍</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </section>
           )}
 
