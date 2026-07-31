@@ -221,6 +221,11 @@
  * (第一志望・オープン)若干」としか記載がなく確定的な募集人員が公表されていないためスキップ台帳へ。
  * これにより育伸社PDF(20頁)は全頁の処理を完了した(参照台帳241校中166校収録・スキップ8校=
  * 174/241校を判定済み、残り67校は個別公式サイト調査等の別チャネルでの継続調査が必要)。
+ * **PDF処理完了後の再訪(2026-07-31)**: 1頁目で保留していた足立学園・安部学院、3頁目で保留して
+ * いた川村を、4頁目以降に確立した解釈ルール(推薦/一般が別ラベルの独立ブロックなら加算、単一
+ * ブロック内の複合表記「X・Y」も加算)を適用して再訪し解決。足立学園120(探究[推薦20+一般20]+
+ * 文理[推薦20+一般20]+総合[単一ブロック40])・安部学院100(単一ブロック)・川村60(A推薦20+B推薦
+ * 10+一般・併優[一般15+併優15、東京実業/松蔭大学附属松蔭で確立した複合セル加算パターンを適用])。
  * 残り7校はWebSearchで個別調査し完全中高一貫(高校からの外部募集なし)と確認できたためスキップ:
  * 暁星・大妻・雙葉・共立女子(2006年度に高校募集停止)・三輪田学園・女子学院・白百合学園。
  * いずれも「女子御三家(女子学院・雙葉)」「男子伝統校(暁星)」等の著名中高一貫校で、
@@ -2276,6 +2281,44 @@ export const PRIVATE_SCHOOL_DETAIL_TOKYO: PrivateSchoolDetailFile = {
         },
       ],
       totalCapacity: 40,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113312100013',
+      schoolName: '足立学園高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '探究コース(男、A推薦・B推薦共通枠)', capacity: 20 },
+        { courseName: '探究コース(男、一般①・②共通枠)', capacity: 20 },
+        { courseName: '文理コース(男、A推薦・B推薦共通枠)', capacity: 20 },
+        { courseName: '文理コース(男、一般①・②共通枠)', capacity: 20 },
+        {
+          courseName: '総合コース(男、A推薦・B推薦・志自己推薦・一般①・②共通枠、単一ブロック)',
+          capacity: 40,
+        },
+      ],
+      totalCapacity: 120,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311700019',
+      schoolName: '安部学院高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [{ courseName: '商業科(女、A推薦・B推薦・一般共通枠)', capacity: 100 }],
+      totalCapacity: 100,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311600029',
+      schoolName: '川村高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(女、A推薦)', capacity: 20 },
+        { courseName: '普通(女、B推薦①・②共通枠)', capacity: 10 },
+        { courseName: '普通(女、一般①②③、一般枠)', capacity: 15 },
+        { courseName: '普通(女、一般①②③、併願優遇枠)', capacity: 15 },
+      ],
+      totalCapacity: 60,
       source: IKUSHIN_TOKYO_SOURCE,
     },
   ],
