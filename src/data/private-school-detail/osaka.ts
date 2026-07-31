@@ -322,6 +322,20 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       totalCapacity: 120,
       source: IKUSHIN_OSAKA_SOURCE,
     },
+    {
+      schoolCode: 'D127310000405',
+      schoolName: 'ピーエル学園高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [{ courseName: '普通科(国公立コース・理文選修コースの2コース計、内部進学者を含む)', capacity: 120 }],
+      totalCapacity: 120,
+      source: {
+        url: 'https://www.pl-gakuen.ac.jp/school/wp-content/uploads/boshu-youkou.pdf',
+        docTitle:
+          'PL学園高等学校(登録名:ピーエル学園高等学校) 2026年度募集要項' +
+          '(パーフェクトリバティー教団会員子弟のみが出願資格という特殊な募集制度だが募集人数自体は他校と同様に記録)',
+        fetchedAt: '2026-07-31',
+      },
+    },
   ],
   skipped: [],
 };
