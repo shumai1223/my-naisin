@@ -19,6 +19,7 @@ const SOURCE = {
   url: 'https://www.ikushin.co.jp/school/pdf/03934.pdf',
   docTitle: '2026年度 国立高校・高専・私立高校 募集要項【広島県】（(株)育伸社 入試情報課・2025年11月4日現在）',
   fetchedAt: '2026-07-31',
+  sourceTier: 'secondary' as const,
 };
 
 export const PRIVATE_SCHOOL_DETAIL_HIROSHIMA: PrivateSchoolDetailFile = {

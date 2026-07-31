@@ -24,6 +24,7 @@ export const PRIVATE_SCHOOL_DETAIL_GIFU: PrivateSchoolDetailFile = {
         url: 'https://www.sigaku-gifu.or.jp/cms/wp-content/uploads/2025/10/ac264409b527c0e5f16ffa2092e86a23.pdf',
         docTitle: '令和8年度岐阜県私立高等学校(全日制・通信制)生徒募集要項｜一般社団法人岐阜県私学振興会(学科・コース別募集定員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -41,6 +42,7 @@ export const PRIVATE_SCHOOL_DETAIL_GIFU: PrivateSchoolDetailFile = {
         url: 'https://www.sigaku-gifu.or.jp/cms/wp-content/uploads/2025/10/ac264409b527c0e5f16ffa2092e86a23.pdf',
         docTitle: '令和8年度岐阜県私立高等学校(全日制・通信制)生徒募集要項｜一般社団法人岐阜県私学振興会(学科・コース別募集定員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -57,6 +59,7 @@ export const PRIVATE_SCHOOL_DETAIL_GIFU: PrivateSchoolDetailFile = {
         url: 'https://www.sigaku-gifu.or.jp/cms/wp-content/uploads/2025/10/ac264409b527c0e5f16ffa2092e86a23.pdf',
         docTitle: '令和8年度岐阜県私立高等学校(全日制・通信制)生徒募集要項｜一般社団法人岐阜県私学振興会(学科・コース別募集定員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -74,6 +77,7 @@ export const PRIVATE_SCHOOL_DETAIL_GIFU: PrivateSchoolDetailFile = {
         url: 'https://www.sigaku-gifu.or.jp/cms/wp-content/uploads/2025/10/ac264409b527c0e5f16ffa2092e86a23.pdf',
         docTitle: '令和8年度岐阜県私立高等学校(全日制・通信制)生徒募集要項｜一般社団法人岐阜県私学振興会(学科・コース別募集定員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -91,6 +95,7 @@ export const PRIVATE_SCHOOL_DETAIL_GIFU: PrivateSchoolDetailFile = {
         url: 'https://www.sigaku-gifu.or.jp/cms/wp-content/uploads/2025/10/ac264409b527c0e5f16ffa2092e86a23.pdf',
         docTitle: '令和8年度岐阜県私立高等学校(全日制・通信制)生徒募集要項｜一般社団法人岐阜県私学振興会(学科・コース別募集定員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -106,6 +111,7 @@ export const PRIVATE_SCHOOL_DETAIL_GIFU: PrivateSchoolDetailFile = {
         url: 'https://www.sigaku-gifu.or.jp/cms/wp-content/uploads/2025/10/ac264409b527c0e5f16ffa2092e86a23.pdf',
         docTitle: '令和8年度岐阜県私立高等学校(全日制・通信制)生徒募集要項｜一般社団法人岐阜県私学振興会(学科・コース別募集定員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -121,6 +127,7 @@ export const PRIVATE_SCHOOL_DETAIL_GIFU: PrivateSchoolDetailFile = {
         url: 'https://www.sigaku-gifu.or.jp/cms/wp-content/uploads/2025/10/ac264409b527c0e5f16ffa2092e86a23.pdf',
         docTitle: '令和8年度岐阜県私立高等学校(全日制・通信制)生徒募集要項｜一般社団法人岐阜県私学振興会(学科・コース別募集定員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -135,6 +142,7 @@ export const PRIVATE_SCHOOL_DETAIL_GIFU: PrivateSchoolDetailFile = {
         url: 'https://www.sigaku-gifu.or.jp/cms/wp-content/uploads/2025/10/ac264409b527c0e5f16ffa2092e86a23.pdf',
         docTitle: '令和8年度岐阜県私立高等学校(全日制・通信制)生徒募集要項｜一般社団法人岐阜県私学振興会(学科・コース別募集定員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -149,6 +157,7 @@ export const PRIVATE_SCHOOL_DETAIL_GIFU: PrivateSchoolDetailFile = {
         url: 'https://www.sigaku-gifu.or.jp/cms/wp-content/uploads/2025/10/ac264409b527c0e5f16ffa2092e86a23.pdf',
         docTitle: '令和8年度岐阜県私立高等学校(全日制・通信制)生徒募集要項｜一般社団法人岐阜県私学振興会(学科・コース別募集定員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -165,6 +174,7 @@ export const PRIVATE_SCHOOL_DETAIL_GIFU: PrivateSchoolDetailFile = {
         url: 'https://www.sigaku-gifu.or.jp/cms/wp-content/uploads/2025/10/ac264409b527c0e5f16ffa2092e86a23.pdf',
         docTitle: '令和8年度岐阜県私立高等学校(全日制・通信制)生徒募集要項｜一般社団法人岐阜県私学振興会(学科・コース別募集定員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -181,6 +191,7 @@ export const PRIVATE_SCHOOL_DETAIL_GIFU: PrivateSchoolDetailFile = {
         url: 'https://www.sigaku-gifu.or.jp/cms/wp-content/uploads/2025/10/ac264409b527c0e5f16ffa2092e86a23.pdf',
         docTitle: '令和8年度岐阜県私立高等学校(全日制・通信制)生徒募集要項｜一般社団法人岐阜県私学振興会(学科・コース別募集定員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -195,6 +206,7 @@ export const PRIVATE_SCHOOL_DETAIL_GIFU: PrivateSchoolDetailFile = {
         url: 'https://www.sigaku-gifu.or.jp/cms/wp-content/uploads/2025/10/ac264409b527c0e5f16ffa2092e86a23.pdf',
         docTitle: '令和8年度岐阜県私立高等学校(全日制・通信制)生徒募集要項｜一般社団法人岐阜県私学振興会(学科・コース別募集定員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -209,6 +221,7 @@ export const PRIVATE_SCHOOL_DETAIL_GIFU: PrivateSchoolDetailFile = {
         url: 'https://www.sigaku-gifu.or.jp/cms/wp-content/uploads/2025/10/ac264409b527c0e5f16ffa2092e86a23.pdf',
         docTitle: '令和8年度岐阜県私立高等学校(全日制・通信制)生徒募集要項｜一般社団法人岐阜県私学振興会(学科・コース別募集定員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -225,6 +238,7 @@ export const PRIVATE_SCHOOL_DETAIL_GIFU: PrivateSchoolDetailFile = {
         url: 'https://www.sigaku-gifu.or.jp/cms/wp-content/uploads/2025/10/ac264409b527c0e5f16ffa2092e86a23.pdf',
         docTitle: '令和8年度岐阜県私立高等学校(全日制・通信制)生徒募集要項｜一般社団法人岐阜県私学振興会(学科・コース別募集定員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -239,6 +253,7 @@ export const PRIVATE_SCHOOL_DETAIL_GIFU: PrivateSchoolDetailFile = {
         url: 'https://www.sigaku-gifu.or.jp/cms/wp-content/uploads/2025/10/ac264409b527c0e5f16ffa2092e86a23.pdf',
         docTitle: '令和8年度岐阜県私立高等学校(全日制・通信制)生徒募集要項｜一般社団法人岐阜県私学振興会(学科・コース別募集定員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -258,6 +273,7 @@ export const PRIVATE_SCHOOL_DETAIL_GIFU: PrivateSchoolDetailFile = {
         url: 'https://www.sigaku-gifu.or.jp/cms/wp-content/uploads/2025/10/ac264409b527c0e5f16ffa2092e86a23.pdf',
         docTitle: '令和8年度岐阜県私立高等学校(全日制・通信制)生徒募集要項｜一般社団法人岐阜県私学振興会(学科・コース別募集定員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -272,6 +288,7 @@ export const PRIVATE_SCHOOL_DETAIL_GIFU: PrivateSchoolDetailFile = {
         url: 'https://www.sigaku-gifu.or.jp/cms/wp-content/uploads/2025/10/ac264409b527c0e5f16ffa2092e86a23.pdf',
         docTitle: '令和8年度岐阜県私立高等学校(全日制・通信制)生徒募集要項｜一般社団法人岐阜県私学振興会(学科・コース別募集定員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -286,6 +303,7 @@ export const PRIVATE_SCHOOL_DETAIL_GIFU: PrivateSchoolDetailFile = {
         url: 'https://www.sigaku-gifu.or.jp/cms/wp-content/uploads/2025/10/ac264409b527c0e5f16ffa2092e86a23.pdf',
         docTitle: '令和8年度岐阜県私立高等学校(全日制・通信制)生徒募集要項｜一般社団法人岐阜県私学振興会(学科・コース別募集定員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -306,6 +324,7 @@ export const PRIVATE_SCHOOL_DETAIL_GIFU: PrivateSchoolDetailFile = {
         url: 'https://www.sigaku-gifu.or.jp/cms/wp-content/uploads/2025/10/ac264409b527c0e5f16ffa2092e86a23.pdf',
         docTitle: '令和8年度岐阜県私立高等学校(全日制・通信制)生徒募集要項｜一般社団法人岐阜県私学振興会(学科・コース別募集定員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -322,6 +341,7 @@ export const PRIVATE_SCHOOL_DETAIL_GIFU: PrivateSchoolDetailFile = {
         url: 'https://www.sigaku-gifu.or.jp/cms/wp-content/uploads/2025/10/ac264409b527c0e5f16ffa2092e86a23.pdf',
         docTitle: '令和8年度岐阜県私立高等学校(全日制・通信制)生徒募集要項｜一般社団法人岐阜県私学振興会(学科・コース別募集定員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -336,6 +356,7 @@ export const PRIVATE_SCHOOL_DETAIL_GIFU: PrivateSchoolDetailFile = {
         url: 'https://www.sigaku-gifu.or.jp/cms/wp-content/uploads/2025/10/ac264409b527c0e5f16ffa2092e86a23.pdf',
         docTitle: '令和8年度岐阜県私立高等学校(全日制・通信制)生徒募集要項｜一般社団法人岐阜県私学振興会(学科・コース別募集定員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
   ],

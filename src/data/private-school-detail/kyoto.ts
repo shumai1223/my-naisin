@@ -21,6 +21,7 @@ const IKUSHIN_KYOTO_SOURCE = {
   url: 'https://www.ikushin.co.jp/school/pdf/03926.pdf',
   docTitle: '2026年度 国立高校・高専・私立高校 募集要項【京都府】（(株)育伸社 入試情報課・2026年2月17日現在）',
   fetchedAt: '2026-07-31',
+  sourceTier: 'secondary' as const,
 };
 
 export const PRIVATE_SCHOOL_DETAIL_KYOTO: PrivateSchoolDetailFile = {
@@ -410,6 +411,7 @@ export const PRIVATE_SCHOOL_DETAIL_KYOTO: PrivateSchoolDetailFile = {
         url: 'https://kgs.ed.jp/system/wp-content/themes/kyoto/asset/pdf/2026_yoko_high.pdf',
         docTitle: '京都女子高等学校 2026(令和8)年度入試 生徒募集要項(募集定員は全て内部進学者を除く)',
         fetchedAt: '2026-07-31',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -426,6 +428,7 @@ export const PRIVATE_SCHOOL_DETAIL_KYOTO: PrivateSchoolDetailFile = {
         url: 'https://www.kyoei.ed.jp/cms/wp-content/uploads/2026/07/1-2%E4%BB%A4%E5%92%8C9%E5%B9%B4%E5%BA%A6%E9%AB%98%E6%A0%A1%E7%94%9F%E5%BE%92%E5%8B%9F%E9%9B%86%E8%A6%81%E9%A0%85%EF%BC%88%E5%AD%A6%E6%8E%A8%E7%AD%89%E7%84%A1%E3%81%97%EF%BC%89-1.pdf',
         docTitle: '京都共栄学園高等学校 令和9年度生徒募集要項(公式サイトが既に令和8年度分を令和9年度分へ更新済みのため最新公表値として収録)',
         fetchedAt: '2026-07-31',
+        sourceTier: 'primary' as const,
       },
     },
   ],

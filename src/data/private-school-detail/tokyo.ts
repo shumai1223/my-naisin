@@ -288,6 +288,7 @@ const IKUSHIN_TOKYO_SOURCE = {
   url: 'https://www.ikushin.co.jp/school/pdf/03913.pdf',
   docTitle: '2026年度 国立高校・高専・私立高校 募集要項【東京都】（(株)育伸社 入試情報課・2025年11月4日現在）',
   fetchedAt: '2026-07-31',
+  sourceTier: 'secondary' as const,
 };
 
 export const PRIVATE_SCHOOL_DETAIL_TOKYO: PrivateSchoolDetailFile = {
@@ -2388,6 +2389,7 @@ export const PRIVATE_SCHOOL_DETAIL_TOKYO: PrivateSchoolDetailFile = {
         url: 'https://www.uenogakuen.ed.jp/exam/high/musicHi.html',
         docTitle: '上野学園中学校・高等学校 2027年度高校音楽科入試日程ページ(普通科は同校basicHi.htmlで2026年度と同一数値10/15/25を確認)',
         fetchedAt: '2026-07-31',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -2403,6 +2405,7 @@ export const PRIVATE_SCHOOL_DETAIL_TOKYO: PrivateSchoolDetailFile = {
         url: 'https://www.bunkagakuen.ac.jp/assets/images/pdf/bosyu_2025.pdf',
         docTitle: '東京文華高等学校(校名変更申請中・旧:文華女子高等学校) 2026年度生徒募集要項PDF',
         fetchedAt: '2026-07-31',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -2418,6 +2421,7 @@ export const PRIVATE_SCHOOL_DETAIL_TOKYO: PrivateSchoolDetailFile = {
         url: 'https://www.teikyo.ed.jp/exam_s/outline_s/',
         docTitle: '帝京中学校・高等学校 高等学校入試ガイド(入試要項)ページ',
         fetchedAt: '2026-07-31',
+        sourceTier: 'primary' as const,
       },
     },
   ],

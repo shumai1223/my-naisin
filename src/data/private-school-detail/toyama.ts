@@ -15,6 +15,7 @@ const SOURCE = {
   url: 'http://www.toyama-shigaku.or.jp/shigaku/pdf/bosyu_ko.pdf',
   docTitle: '令和8年度富山県私立高等学校生徒募集要項（概要）一覧＜全日制＞（富山県私立中学高等学校協会）',
   fetchedAt: '2026-07-30',
+  sourceTier: 'primary' as const,
 };
 
 export const PRIVATE_SCHOOL_DETAIL_TOYAMA: PrivateSchoolDetailFile = {

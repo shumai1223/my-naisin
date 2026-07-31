@@ -24,6 +24,7 @@ export const PRIVATE_SCHOOL_DETAIL_SHIZUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.shizuoka-shigaku.net/app/uploads/R8koukou-bosyu.pdf',
         docTitle: '令和8年度静岡県私立高等学校生徒募集一覧｜(公社)静岡県私学協会(全日制40校の学科別募集定員表・学校ごとの「計」欄と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -41,6 +42,7 @@ export const PRIVATE_SCHOOL_DETAIL_SHIZUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.shizuoka-shigaku.net/app/uploads/R8koukou-bosyu.pdf',
         docTitle: '令和8年度静岡県私立高等学校生徒募集一覧｜(公社)静岡県私学協会(全日制40校の学科別募集定員表・学校ごとの「計」欄と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -55,6 +57,7 @@ export const PRIVATE_SCHOOL_DETAIL_SHIZUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.shizuoka-shigaku.net/app/uploads/R8koukou-bosyu.pdf',
         docTitle: '令和8年度静岡県私立高等学校生徒募集一覧｜(公社)静岡県私学協会(全日制40校の学科別募集定員表・学校ごとの「計」欄と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -69,6 +72,7 @@ export const PRIVATE_SCHOOL_DETAIL_SHIZUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.shizuoka-shigaku.net/app/uploads/R8koukou-bosyu.pdf',
         docTitle: '令和8年度静岡県私立高等学校生徒募集一覧｜(公社)静岡県私学協会(全日制40校の学科別募集定員表・学校ごとの「計」欄と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -84,6 +88,7 @@ export const PRIVATE_SCHOOL_DETAIL_SHIZUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.shizuoka-shigaku.net/app/uploads/R8koukou-bosyu.pdf',
         docTitle: '令和8年度静岡県私立高等学校生徒募集一覧｜(公社)静岡県私学協会(全日制40校の学科別募集定員表・学校ごとの「計」欄と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -98,6 +103,7 @@ export const PRIVATE_SCHOOL_DETAIL_SHIZUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.shizuoka-shigaku.net/app/uploads/R8koukou-bosyu.pdf',
         docTitle: '令和8年度静岡県私立高等学校生徒募集一覧｜(公社)静岡県私学協会(全日制40校の学科別募集定員表・学校ごとの「計」欄と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -112,6 +118,7 @@ export const PRIVATE_SCHOOL_DETAIL_SHIZUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.shizuoka-shigaku.net/app/uploads/R8koukou-bosyu.pdf',
         docTitle: '令和8年度静岡県私立高等学校生徒募集一覧｜(公社)静岡県私学協会(全日制40校の学科別募集定員表・学校ごとの「計」欄と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -126,6 +133,7 @@ export const PRIVATE_SCHOOL_DETAIL_SHIZUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.shizuoka-shigaku.net/app/uploads/R8koukou-bosyu.pdf',
         docTitle: '令和8年度静岡県私立高等学校生徒募集一覧｜(公社)静岡県私学協会(全日制40校の学科別募集定員表・学校ごとの「計」欄と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -140,6 +148,7 @@ export const PRIVATE_SCHOOL_DETAIL_SHIZUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.shizuoka-shigaku.net/app/uploads/R8koukou-bosyu.pdf',
         docTitle: '令和8年度静岡県私立高等学校生徒募集一覧｜(公社)静岡県私学協会(全日制40校の学科別募集定員表・学校ごとの「計」欄と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -155,6 +164,7 @@ export const PRIVATE_SCHOOL_DETAIL_SHIZUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.shizuoka-shigaku.net/app/uploads/R8koukou-bosyu.pdf',
         docTitle: '令和8年度静岡県私立高等学校生徒募集一覧｜(公社)静岡県私学協会(全日制40校の学科別募集定員表・学校ごとの「計」欄と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -169,6 +179,7 @@ export const PRIVATE_SCHOOL_DETAIL_SHIZUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.shizuoka-shigaku.net/app/uploads/R8koukou-bosyu.pdf',
         docTitle: '令和8年度静岡県私立高等学校生徒募集一覧｜(公社)静岡県私学協会(全日制40校の学科別募集定員表・学校ごとの「計」欄と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -184,6 +195,7 @@ export const PRIVATE_SCHOOL_DETAIL_SHIZUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.shizuoka-shigaku.net/app/uploads/R8koukou-bosyu.pdf',
         docTitle: '令和8年度静岡県私立高等学校生徒募集一覧｜(公社)静岡県私学協会(全日制40校の学科別募集定員表・学校ごとの「計」欄と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -198,6 +210,7 @@ export const PRIVATE_SCHOOL_DETAIL_SHIZUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.shizuoka-shigaku.net/app/uploads/R8koukou-bosyu.pdf',
         docTitle: '令和8年度静岡県私立高等学校生徒募集一覧｜(公社)静岡県私学協会(全日制40校の学科別募集定員表・学校ごとの「計」欄と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -212,6 +225,7 @@ export const PRIVATE_SCHOOL_DETAIL_SHIZUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.shizuoka-shigaku.net/app/uploads/R8koukou-bosyu.pdf',
         docTitle: '令和8年度静岡県私立高等学校生徒募集一覧｜(公社)静岡県私学協会(全日制40校の学科別募集定員表・学校ごとの「計」欄と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -226,6 +240,7 @@ export const PRIVATE_SCHOOL_DETAIL_SHIZUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.shizuoka-shigaku.net/app/uploads/R8koukou-bosyu.pdf',
         docTitle: '令和8年度静岡県私立高等学校生徒募集一覧｜(公社)静岡県私学協会(全日制40校の学科別募集定員表・学校ごとの「計」欄と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -240,6 +255,7 @@ export const PRIVATE_SCHOOL_DETAIL_SHIZUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.shizuoka-shigaku.net/app/uploads/R8koukou-bosyu.pdf',
         docTitle: '令和8年度静岡県私立高等学校生徒募集一覧｜(公社)静岡県私学協会(全日制40校の学科別募集定員表・学校ごとの「計」欄と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -255,6 +271,7 @@ export const PRIVATE_SCHOOL_DETAIL_SHIZUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.shizuoka-shigaku.net/app/uploads/R8koukou-bosyu.pdf',
         docTitle: '令和8年度静岡県私立高等学校生徒募集一覧｜(公社)静岡県私学協会(全日制40校の学科別募集定員表・学校ごとの「計」欄と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -272,6 +289,7 @@ export const PRIVATE_SCHOOL_DETAIL_SHIZUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.shizuoka-shigaku.net/app/uploads/R8koukou-bosyu.pdf',
         docTitle: '令和8年度静岡県私立高等学校生徒募集一覧｜(公社)静岡県私学協会(全日制40校の学科別募集定員表・学校ごとの「計」欄と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -286,6 +304,7 @@ export const PRIVATE_SCHOOL_DETAIL_SHIZUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.shizuoka-shigaku.net/app/uploads/R8koukou-bosyu.pdf',
         docTitle: '令和8年度静岡県私立高等学校生徒募集一覧｜(公社)静岡県私学協会(全日制40校の学科別募集定員表・学校ごとの「計」欄と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -301,6 +320,7 @@ export const PRIVATE_SCHOOL_DETAIL_SHIZUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.shizuoka-shigaku.net/app/uploads/R8koukou-bosyu.pdf',
         docTitle: '令和8年度静岡県私立高等学校生徒募集一覧｜(公社)静岡県私学協会(全日制40校の学科別募集定員表・学校ごとの「計」欄と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -317,6 +337,7 @@ export const PRIVATE_SCHOOL_DETAIL_SHIZUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.shizuoka-shigaku.net/app/uploads/R8koukou-bosyu.pdf',
         docTitle: '令和8年度静岡県私立高等学校生徒募集一覧｜(公社)静岡県私学協会(全日制40校の学科別募集定員表・学校ごとの「計」欄と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -331,6 +352,7 @@ export const PRIVATE_SCHOOL_DETAIL_SHIZUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.shizuoka-shigaku.net/app/uploads/R8koukou-bosyu.pdf',
         docTitle: '令和8年度静岡県私立高等学校生徒募集一覧｜(公社)静岡県私学協会(全日制40校の学科別募集定員表・学校ごとの「計」欄と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -345,6 +367,7 @@ export const PRIVATE_SCHOOL_DETAIL_SHIZUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.shizuoka-shigaku.net/app/uploads/R8koukou-bosyu.pdf',
         docTitle: '令和8年度静岡県私立高等学校生徒募集一覧｜(公社)静岡県私学協会(全日制40校の学科別募集定員表・学校ごとの「計」欄と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -359,6 +382,7 @@ export const PRIVATE_SCHOOL_DETAIL_SHIZUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.shizuoka-shigaku.net/app/uploads/R8koukou-bosyu.pdf',
         docTitle: '令和8年度静岡県私立高等学校生徒募集一覧｜(公社)静岡県私学協会(全日制40校の学科別募集定員表・学校ごとの「計」欄と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -374,6 +398,7 @@ export const PRIVATE_SCHOOL_DETAIL_SHIZUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.shizuoka-shigaku.net/app/uploads/R8koukou-bosyu.pdf',
         docTitle: '令和8年度静岡県私立高等学校生徒募集一覧｜(公社)静岡県私学協会(全日制40校の学科別募集定員表・学校ごとの「計」欄と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -388,6 +413,7 @@ export const PRIVATE_SCHOOL_DETAIL_SHIZUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.shizuoka-shigaku.net/app/uploads/R8koukou-bosyu.pdf',
         docTitle: '令和8年度静岡県私立高等学校生徒募集一覧｜(公社)静岡県私学協会(全日制40校の学科別募集定員表・学校ごとの「計」欄と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -403,6 +429,7 @@ export const PRIVATE_SCHOOL_DETAIL_SHIZUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.shizuoka-shigaku.net/app/uploads/R8koukou-bosyu.pdf',
         docTitle: '令和8年度静岡県私立高等学校生徒募集一覧｜(公社)静岡県私学協会(全日制40校の学科別募集定員表・学校ごとの「計」欄と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -417,6 +444,7 @@ export const PRIVATE_SCHOOL_DETAIL_SHIZUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.shizuoka-shigaku.net/app/uploads/R8koukou-bosyu.pdf',
         docTitle: '令和8年度静岡県私立高等学校生徒募集一覧｜(公社)静岡県私学協会(全日制40校の学科別募集定員表・学校ごとの「計」欄と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -432,6 +460,7 @@ export const PRIVATE_SCHOOL_DETAIL_SHIZUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.shizuoka-shigaku.net/app/uploads/R8koukou-bosyu.pdf',
         docTitle: '令和8年度静岡県私立高等学校生徒募集一覧｜(公社)静岡県私学協会(全日制40校の学科別募集定員表・学校ごとの「計」欄と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -446,6 +475,7 @@ export const PRIVATE_SCHOOL_DETAIL_SHIZUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.shizuoka-shigaku.net/app/uploads/R8koukou-bosyu.pdf',
         docTitle: '令和8年度静岡県私立高等学校生徒募集一覧｜(公社)静岡県私学協会(全日制40校の学科別募集定員表・学校ごとの「計」欄と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -460,6 +490,7 @@ export const PRIVATE_SCHOOL_DETAIL_SHIZUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.shizuoka-shigaku.net/app/uploads/R8koukou-bosyu.pdf',
         docTitle: '令和8年度静岡県私立高等学校生徒募集一覧｜(公社)静岡県私学協会(全日制40校の学科別募集定員表・学校ごとの「計」欄と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -475,6 +506,7 @@ export const PRIVATE_SCHOOL_DETAIL_SHIZUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.shizuoka-shigaku.net/app/uploads/R8koukou-bosyu.pdf',
         docTitle: '令和8年度静岡県私立高等学校生徒募集一覧｜(公社)静岡県私学協会(全日制40校の学科別募集定員表・学校ごとの「計」欄と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -489,6 +521,7 @@ export const PRIVATE_SCHOOL_DETAIL_SHIZUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.shizuoka-shigaku.net/app/uploads/R8koukou-bosyu.pdf',
         docTitle: '令和8年度静岡県私立高等学校生徒募集一覧｜(公社)静岡県私学協会(全日制40校の学科別募集定員表・学校ごとの「計」欄と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -505,6 +538,7 @@ export const PRIVATE_SCHOOL_DETAIL_SHIZUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.shizuoka-shigaku.net/app/uploads/R8koukou-bosyu.pdf',
         docTitle: '令和8年度静岡県私立高等学校生徒募集一覧｜(公社)静岡県私学協会(全日制40校の学科別募集定員表・学校ごとの「計」欄と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -519,6 +553,7 @@ export const PRIVATE_SCHOOL_DETAIL_SHIZUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.shizuoka-shigaku.net/app/uploads/R8koukou-bosyu.pdf',
         docTitle: '令和8年度静岡県私立高等学校生徒募集一覧｜(公社)静岡県私学協会(全日制40校の学科別募集定員表・学校ごとの「計」欄と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -533,6 +568,7 @@ export const PRIVATE_SCHOOL_DETAIL_SHIZUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.shizuoka-shigaku.net/app/uploads/R8koukou-bosyu.pdf',
         docTitle: '令和8年度静岡県私立高等学校生徒募集一覧｜(公社)静岡県私学協会(全日制40校の学科別募集定員表・学校ごとの「計」欄と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -547,6 +583,7 @@ export const PRIVATE_SCHOOL_DETAIL_SHIZUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.shizuoka-shigaku.net/app/uploads/R8koukou-bosyu.pdf',
         docTitle: '令和8年度静岡県私立高等学校生徒募集一覧｜(公社)静岡県私学協会(全日制40校の学科別募集定員表・学校ごとの「計」欄と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -562,6 +599,7 @@ export const PRIVATE_SCHOOL_DETAIL_SHIZUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.shizuoka-shigaku.net/app/uploads/R8koukou-bosyu.pdf',
         docTitle: '令和8年度静岡県私立高等学校生徒募集一覧｜(公社)静岡県私学協会(全日制40校の学科別募集定員表・学校ごとの「計」欄と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -576,6 +614,7 @@ export const PRIVATE_SCHOOL_DETAIL_SHIZUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.shizuoka-shigaku.net/app/uploads/R8koukou-bosyu.pdf',
         docTitle: '令和8年度静岡県私立高等学校生徒募集一覧｜(公社)静岡県私学協会(全日制40校の学科別募集定員表・学校ごとの「計」欄と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -590,6 +629,7 @@ export const PRIVATE_SCHOOL_DETAIL_SHIZUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.shizuoka-shigaku.net/app/uploads/R8koukou-bosyu.pdf',
         docTitle: '令和8年度静岡県私立高等学校生徒募集一覧｜(公社)静岡県私学協会(全日制40校の学科別募集定員表・学校ごとの「計」欄と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
   ],

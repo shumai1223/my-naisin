@@ -23,6 +23,7 @@ export const PRIVATE_SCHOOL_DETAIL_NAGANO: PrivateSchoolDetailFile = {
         url: 'https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/boshu2026.pdf',
         docTitle: '令和8年度私立高等学校(全日制)の募集定員をお知らせします｜長野県県民文化部(学科別募集定員表・合計3,440と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -35,6 +36,7 @@ export const PRIVATE_SCHOOL_DETAIL_NAGANO: PrivateSchoolDetailFile = {
         url: 'https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/boshu2026.pdf',
         docTitle: '令和8年度私立高等学校(全日制)の募集定員をお知らせします｜長野県県民文化部(学科別募集定員表・合計3,440と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -50,6 +52,7 @@ export const PRIVATE_SCHOOL_DETAIL_NAGANO: PrivateSchoolDetailFile = {
         url: 'https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/boshu2026.pdf',
         docTitle: '令和8年度私立高等学校(全日制)の募集定員をお知らせします｜長野県県民文化部(学科別募集定員表・合計3,440と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -62,6 +65,7 @@ export const PRIVATE_SCHOOL_DETAIL_NAGANO: PrivateSchoolDetailFile = {
         url: 'https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/boshu2026.pdf',
         docTitle: '令和8年度私立高等学校(全日制)の募集定員をお知らせします｜長野県県民文化部(学科別募集定員表・合計3,440と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -74,6 +78,7 @@ export const PRIVATE_SCHOOL_DETAIL_NAGANO: PrivateSchoolDetailFile = {
         url: 'https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/boshu2026.pdf',
         docTitle: '令和8年度私立高等学校(全日制)の募集定員をお知らせします｜長野県県民文化部(学科別募集定員表・合計3,440と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -86,6 +91,7 @@ export const PRIVATE_SCHOOL_DETAIL_NAGANO: PrivateSchoolDetailFile = {
         url: 'https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/boshu2026.pdf',
         docTitle: '令和8年度私立高等学校(全日制)の募集定員をお知らせします｜長野県県民文化部(学科別募集定員表・合計3,440と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -101,6 +107,7 @@ export const PRIVATE_SCHOOL_DETAIL_NAGANO: PrivateSchoolDetailFile = {
         url: 'https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/boshu2026.pdf',
         docTitle: '令和8年度私立高等学校(全日制)の募集定員をお知らせします｜長野県県民文化部(学科別募集定員表・合計3,440と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -113,6 +120,7 @@ export const PRIVATE_SCHOOL_DETAIL_NAGANO: PrivateSchoolDetailFile = {
         url: 'https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/boshu2026.pdf',
         docTitle: '令和8年度私立高等学校(全日制)の募集定員をお知らせします｜長野県県民文化部(学科別募集定員表・合計3,440と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -125,6 +133,7 @@ export const PRIVATE_SCHOOL_DETAIL_NAGANO: PrivateSchoolDetailFile = {
         url: 'https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/boshu2026.pdf',
         docTitle: '令和8年度私立高等学校(全日制)の募集定員をお知らせします｜長野県県民文化部(学科別募集定員表・合計3,440と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -137,6 +146,7 @@ export const PRIVATE_SCHOOL_DETAIL_NAGANO: PrivateSchoolDetailFile = {
         url: 'https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/boshu2026.pdf',
         docTitle: '令和8年度私立高等学校(全日制)の募集定員をお知らせします｜長野県県民文化部(学科別募集定員表・合計3,440と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -152,6 +162,7 @@ export const PRIVATE_SCHOOL_DETAIL_NAGANO: PrivateSchoolDetailFile = {
         url: 'https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/boshu2026.pdf',
         docTitle: '令和8年度私立高等学校(全日制)の募集定員をお知らせします｜長野県県民文化部(学科別募集定員表・合計3,440と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -164,6 +175,7 @@ export const PRIVATE_SCHOOL_DETAIL_NAGANO: PrivateSchoolDetailFile = {
         url: 'https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/boshu2026.pdf',
         docTitle: '令和8年度私立高等学校(全日制)の募集定員をお知らせします｜長野県県民文化部(学科別募集定員表・合計3,440と完全一致・注記に併設中学校からの入学予定者15名を含むと明記)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -179,6 +191,7 @@ export const PRIVATE_SCHOOL_DETAIL_NAGANO: PrivateSchoolDetailFile = {
         url: 'https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/boshu2026.pdf',
         docTitle: '令和8年度私立高等学校(全日制)の募集定員をお知らせします｜長野県県民文化部(学科別募集定員表・合計3,440と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -195,6 +208,7 @@ export const PRIVATE_SCHOOL_DETAIL_NAGANO: PrivateSchoolDetailFile = {
         url: 'https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/boshu2026.pdf',
         docTitle: '令和8年度私立高等学校(全日制)の募集定員をお知らせします｜長野県県民文化部(学科別募集定員表・合計3,440と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -207,6 +221,7 @@ export const PRIVATE_SCHOOL_DETAIL_NAGANO: PrivateSchoolDetailFile = {
         url: 'https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/boshu2026.pdf',
         docTitle: '令和8年度私立高等学校(全日制)の募集定員をお知らせします｜長野県県民文化部(注記「募集定員80名のうち、県内生徒を対象とする総合コースの定員を記載」・原資料の30がそのままcoursesと一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -219,6 +234,7 @@ export const PRIVATE_SCHOOL_DETAIL_NAGANO: PrivateSchoolDetailFile = {
         url: 'https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/boshu2026.pdf',
         docTitle: '令和8年度私立高等学校(全日制)の募集定員をお知らせします｜長野県県民文化部(学科別募集定員表・合計3,440と完全一致・入学は8月1日と注記)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
   ],

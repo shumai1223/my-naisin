@@ -31,6 +31,7 @@ export const PRIVATE_SCHOOL_DETAIL_KOCHI: PrivateSchoolDetailFile = {
         url: 'https://kochi-shiritsuchuko.com/pdf/kochishiritsu_r08_entranceexamination_03.pdf',
         docTitle: '令和8年度 高知県私立高等学校 募集要項一覧［一般入試］（高知県私立中学高等学校連合会・令和7年10月14日現在、各学科とも「推薦・一般入試合計」と明記）',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -46,6 +47,7 @@ export const PRIVATE_SCHOOL_DETAIL_KOCHI: PrivateSchoolDetailFile = {
         url: 'https://kochi-shiritsuchuko.com/pdf/kochishiritsu_r08_entranceexamination_03.pdf',
         docTitle: '令和8年度 高知県私立高等学校 募集要項一覧［一般入試］（高知県私立中学高等学校連合会・令和7年10月14日現在。普通科は「推薦・一般入試合計45名」と明記、まなび創造コースは推薦入試リーフレットに登場せず一般入試枠のみのため定員10名程度がそのまま総定員）',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -58,6 +60,7 @@ export const PRIVATE_SCHOOL_DETAIL_KOCHI: PrivateSchoolDetailFile = {
         url: 'https://kochi-shiritsuchuko.com/pdf/kochishiritsu_r08_entranceexamination_03.pdf',
         docTitle: '令和8年度 高知県私立高等学校 募集要項一覧［一般入試］（高知県私立中学高等学校連合会・令和7年10月14日現在。「約30名」・推薦入試リーフレットに高知学芸高等学校の記載が無く推薦ルートが存在しないと推定されるため一般入試枠がそのまま総定員）',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -70,6 +73,7 @@ export const PRIVATE_SCHOOL_DETAIL_KOCHI: PrivateSchoolDetailFile = {
         url: 'https://kochi-shiritsuchuko.com/pdf/kochishiritsu_r08_entranceexamination_03.pdf',
         docTitle: '令和8年度 高知県私立高等学校 募集要項一覧［一般入試］（高知県私立中学高等学校連合会・令和7年10月14日現在。「約50名(S方式・H方式合計)」・推薦入試リーフレットに土佐高等学校の記載が無く推薦ルートが存在しないと推定されるため一般入試枠がそのまま総定員）',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
   ],

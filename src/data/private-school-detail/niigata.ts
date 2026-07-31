@@ -16,6 +16,7 @@ const SOURCE = {
   url: 'https://storage.googleapis.com/studio-design-asset-files/projects/xmaZ9KMAqR/s-1x1_80e93d69-f9dd-47c1-ab8f-e3f30fcd1853.pdf',
   docTitle: '令和8年度 新潟県私立高等学校 入試日程一覧（令和7年10月22日付）｜新潟県私立中学高等学校協会（学校別募集定員欄）',
   fetchedAt: '2026-07-31',
+  sourceTier: 'primary' as const,
 };
 
 export const PRIVATE_SCHOOL_DETAIL_NIIGATA: PrivateSchoolDetailFile = {

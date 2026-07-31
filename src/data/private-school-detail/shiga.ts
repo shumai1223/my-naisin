@@ -16,6 +16,7 @@ const SOURCE = {
   url: 'https://shiga-shigaku.com/wp2024/wp-content/uploads/2026/03/R8seitoboshugaiyou.pdf',
   docTitle: '令和8年度私立学校生徒募集概要(滋賀県子ども若者部子ども若者政策・私学振興課)',
   fetchedAt: '2026-07-30',
+  sourceTier: 'primary' as const,
 };
 
 export const PRIVATE_SCHOOL_DETAIL_SHIGA: PrivateSchoolDetailFile = {

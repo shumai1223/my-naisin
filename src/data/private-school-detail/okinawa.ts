@@ -25,6 +25,7 @@ export const PRIVATE_SCHOOL_DETAIL_OKINAWA: PrivateSchoolDetailFile = {
         url: 'https://www.okisho.ed.jp/_/f/2025/11/sr_01_2026_v2.pdf',
         docTitle: '2026年度 高等学校募集定員およびコース(沖縄尚学高等学校)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
   ],

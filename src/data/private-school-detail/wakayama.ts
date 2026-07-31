@@ -21,6 +21,7 @@ export const PRIVATE_SCHOOL_DETAIL_WAKAYAMA: PrivateSchoolDetailFile = {
         url: 'https://www.shin-ai.ac.jp/',
         docTitle: '和歌山信愛中学校・高等学校 高校生募集要項（令和8年度・全日制課程普通科）',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -33,6 +34,7 @@ export const PRIVATE_SCHOOL_DETAIL_WAKAYAMA: PrivateSchoolDetailFile = {
         url: 'https://www.kaichi.ed.jp/exam/s_exam/s_guideline.html',
         docTitle: '開智中学校・高等学校 高等学校募集要項（令和8年度・内部進学者約140名を含む総定員300名。SI類約40名+I類約120名は外部募集分の内訳のため総定員のみ収録）',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
   ],

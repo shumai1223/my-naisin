@@ -19,6 +19,7 @@ export const PRIVATE_SCHOOL_DETAIL_TOTTORI: PrivateSchoolDetailFile = {
         url: 'https://www.tottori-johoku.ed.jp/data/wyg/files/令和8年度募集要項.pdf',
         docTitle: '令和8年度 募集要項（鳥取城北高等学校）',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -36,6 +37,7 @@ export const PRIVATE_SCHOOL_DETAIL_TOTTORI: PrivateSchoolDetailFile = {
         url: 'https://www.yonagoshoin.ed.jp/wp-content/uploads/2025/10/c923376d670203920894703c345cb93c.pdf',
         docTitle: '2026年度 生徒募集要項（米子松蔭高等学校）',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -48,6 +50,7 @@ export const PRIVATE_SCHOOL_DETAIL_TOTTORI: PrivateSchoolDetailFile = {
         url: 'https://www.yurihamagakuen.ac.jp/admission/high/',
         docTitle: '高等学校（全日制）募集要項（湯梨浜学園中学校・高等学校）',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -65,6 +68,7 @@ export const PRIVATE_SCHOOL_DETAIL_TOTTORI: PrivateSchoolDetailFile = {
         url: 'https://t-ki.jp/pages/20/',
         docTitle: '入試情報（鳥取敬愛高等学校）',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
   ],

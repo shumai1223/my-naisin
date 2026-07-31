@@ -23,6 +23,7 @@ export const PRIVATE_SCHOOL_DETAIL_MIE: PrivateSchoolDetailFile = {
         url: 'https://www.mie-shigaku.jp/files/libs/1003/202607271318471425.pdf',
         docTitle: '令和9年度(2027年度)私立高等学校生徒募集定員(全日制)｜三重県私学協会(学校別募集定員表・合計3,760(13校)と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -35,6 +36,7 @@ export const PRIVATE_SCHOOL_DETAIL_MIE: PrivateSchoolDetailFile = {
         url: 'https://www.mie-shigaku.jp/files/libs/1003/202607271318471425.pdf',
         docTitle: '令和9年度(2027年度)私立高等学校生徒募集定員(全日制)｜三重県私学協会(学校別募集定員表・合計3,760(13校)と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -47,6 +49,7 @@ export const PRIVATE_SCHOOL_DETAIL_MIE: PrivateSchoolDetailFile = {
         url: 'https://www.mie-shigaku.jp/files/libs/1003/202607271318471425.pdf',
         docTitle: '令和9年度(2027年度)私立高等学校生徒募集定員(全日制)｜三重県私学協会(学校別募集定員表・合計3,760(13校)と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -59,6 +62,7 @@ export const PRIVATE_SCHOOL_DETAIL_MIE: PrivateSchoolDetailFile = {
         url: 'https://www.mie-shigaku.jp/files/libs/1003/202607271318471425.pdf',
         docTitle: '令和9年度(2027年度)私立高等学校生徒募集定員(全日制)｜三重県私学協会(学校別募集定員表・合計3,760(13校)と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -71,6 +75,7 @@ export const PRIVATE_SCHOOL_DETAIL_MIE: PrivateSchoolDetailFile = {
         url: 'https://www.mie-shigaku.jp/files/libs/1003/202607271318471425.pdf',
         docTitle: '令和9年度(2027年度)私立高等学校生徒募集定員(全日制)｜三重県私学協会(学校別募集定員表・合計3,760(13校)と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -83,6 +88,7 @@ export const PRIVATE_SCHOOL_DETAIL_MIE: PrivateSchoolDetailFile = {
         url: 'https://www.mie-shigaku.jp/files/libs/1003/202607271318471425.pdf',
         docTitle: '令和9年度(2027年度)私立高等学校生徒募集定員(全日制)｜三重県私学協会(学校別募集定員表・合計3,760(13校)と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -95,6 +101,7 @@ export const PRIVATE_SCHOOL_DETAIL_MIE: PrivateSchoolDetailFile = {
         url: 'https://www.mie-shigaku.jp/files/libs/1003/202607271318471425.pdf',
         docTitle: '令和9年度(2027年度)私立高等学校生徒募集定員(全日制)｜三重県私学協会(学校別募集定員表・合計3,760(13校)と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -107,6 +114,7 @@ export const PRIVATE_SCHOOL_DETAIL_MIE: PrivateSchoolDetailFile = {
         url: 'https://www.mie-shigaku.jp/files/libs/1003/202607271318471425.pdf',
         docTitle: '令和9年度(2027年度)私立高等学校生徒募集定員(全日制)｜三重県私学協会(学校別募集定員表・合計3,760(13校)と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -119,6 +127,7 @@ export const PRIVATE_SCHOOL_DETAIL_MIE: PrivateSchoolDetailFile = {
         url: 'https://www.mie-shigaku.jp/files/libs/1003/202607271318471425.pdf',
         docTitle: '令和9年度(2027年度)私立高等学校生徒募集定員(全日制)｜三重県私学協会(学校別募集定員表・合計3,760(13校)と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -131,6 +140,7 @@ export const PRIVATE_SCHOOL_DETAIL_MIE: PrivateSchoolDetailFile = {
         url: 'https://www.mie-shigaku.jp/files/libs/1003/202607271318471425.pdf',
         docTitle: '令和9年度(2027年度)私立高等学校生徒募集定員(全日制)｜三重県私学協会(学校別募集定員表・合計3,760(13校)と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -143,6 +153,7 @@ export const PRIVATE_SCHOOL_DETAIL_MIE: PrivateSchoolDetailFile = {
         url: 'https://www.mie-shigaku.jp/files/libs/1003/202607271318471425.pdf',
         docTitle: '令和9年度(2027年度)私立高等学校生徒募集定員(全日制)｜三重県私学協会(学校別募集定員表・合計3,760(13校)と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -155,6 +166,7 @@ export const PRIVATE_SCHOOL_DETAIL_MIE: PrivateSchoolDetailFile = {
         url: 'https://www.mie-shigaku.jp/files/libs/1003/202607271318471425.pdf',
         docTitle: '令和9年度(2027年度)私立高等学校生徒募集定員(全日制)｜三重県私学協会(学校別募集定員表・合計3,760(13校)と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -167,6 +179,7 @@ export const PRIVATE_SCHOOL_DETAIL_MIE: PrivateSchoolDetailFile = {
         url: 'https://www.mie-shigaku.jp/files/libs/1003/202607271318471425.pdf',
         docTitle: '令和9年度(2027年度)私立高等学校生徒募集定員(全日制)｜三重県私学協会(学校別募集定員表・合計3,760(13校)と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
   ],

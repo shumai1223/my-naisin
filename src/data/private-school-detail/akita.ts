@@ -21,6 +21,7 @@ export const PRIVATE_SCHOOL_DETAIL_AKITA: PrivateSchoolDetailFile = {
         url: 'https://www.kokugakukan.ed.jp/sys/wp-content/themes/kokugakukan/file/seitobosyu_2026.pdf',
         docTitle: '2026年度（令和8年度）国学館高等学校生徒募集要項（普通科・調理科各コースの選択は2年次から実施のため募集時点ではコース別内訳非公開）',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -38,6 +39,7 @@ export const PRIVATE_SCHOOL_DETAIL_AKITA: PrivateSchoolDetailFile = {
         url: 'https://www.meioh.ed.jp/cms/assets/uploads/2024/09/7c58edb27e312f159e70c8d18b9283f5.pdf',
         docTitle: '令和7年度（2025年度）ノースアジア大学明桜高等学校入学試験要項',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
   ],

@@ -11,6 +11,7 @@ const SOURCE = {
   url: 'https://www.ikushin.co.jp/school/pdf/03917.pdf',
   docTitle: '2026年度 国立高校・高専・私立高校 募集要項【石川県】(株式会社育伸社 入試情報課・2025年11月4日現在)',
   fetchedAt: '2026-07-30',
+  sourceTier: 'secondary' as const,
 };
 
 export const PRIVATE_SCHOOL_DETAIL_ISHIKAWA: PrivateSchoolDetailFile = {
@@ -91,6 +92,7 @@ export const PRIVATE_SCHOOL_DETAIL_ISHIKAWA: PrivateSchoolDetailFile = {
         url: 'https://www.kanazawa-gu.ac.jp/hs2/',
         docTitle: '金沢学院大学附属第二高等学校 公式サイト(2026年4月開校・コース別定員案内)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {

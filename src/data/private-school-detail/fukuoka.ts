@@ -24,6 +24,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -36,6 +37,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -48,6 +50,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -60,6 +63,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -72,6 +76,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -84,6 +89,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -96,6 +102,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -108,6 +115,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -120,6 +128,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -132,6 +141,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -144,6 +154,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -156,6 +167,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -168,6 +180,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -180,6 +193,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -192,6 +206,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -204,6 +219,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -216,6 +232,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -228,6 +245,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -240,6 +258,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -252,6 +271,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -264,6 +284,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -276,6 +297,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -288,6 +310,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -300,6 +323,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -312,6 +336,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -324,6 +349,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -336,6 +362,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -348,6 +375,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -360,6 +388,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -372,6 +401,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -384,6 +414,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -396,6 +427,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -408,6 +440,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -420,6 +453,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -432,6 +466,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -444,6 +479,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -456,6 +492,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -468,6 +505,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -480,6 +518,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -492,6 +531,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -504,6 +544,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -516,6 +557,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -528,6 +570,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -540,6 +583,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -552,6 +596,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -564,6 +609,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -576,6 +622,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -588,6 +635,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -600,6 +648,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -612,6 +661,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -624,6 +674,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -636,6 +687,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -648,6 +700,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -660,6 +713,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -672,6 +726,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -684,6 +739,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -696,6 +752,7 @@ export const PRIVATE_SCHOOL_DETAIL_FUKUOKA: PrivateSchoolDetailFile = {
         url: 'https://www.f-sigaku.com/uploads/files/%E2%98%85%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B02026%E5%85%AC%E8%A1%A8(%E5%89%8D%E6%9C%9F%E5%85%A5%E8%A9%A6%E3%81%BE%E3%81%A7).pdf',
         docTitle: '令和8年度福岡県私立高校入試 志願者数調｜福岡県私学協会(募集定員(総計)列・地区計/県合計17,340と完全一致検算済み・コース別内訳は募集定員(総計)のみ採用のためcoursesは空)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
   ],

@@ -22,6 +22,7 @@ const SOURCE = {
   url: 'https://www.pref.saga.lg.jp/kiji003114984/3_114984_362628_up_08o4sh8m.pdf',
   docTitle: '令和8年度佐賀県私立高等学校生徒募集関係一覧（佐賀県庁法務私学課私立中高・専修学校支援室）',
   fetchedAt: '2026-07-30',
+  sourceTier: 'primary' as const,
 };
 
 export const PRIVATE_SCHOOL_DETAIL_SAGA: PrivateSchoolDetailFile = {

@@ -36,6 +36,7 @@ export const PRIVATE_SCHOOL_DETAIL_TOCHIGI: PrivateSchoolDetailFile = {
         url: 'https://www.pref.tochigi.lg.jp/b05/documents/20250901153751.pdf',
         docTitle: '令和8(2026)年度私立高等学校生徒募集要項一覧(全日制)｜栃木県(学科別募集定員表・計1,440と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -55,6 +56,7 @@ export const PRIVATE_SCHOOL_DETAIL_TOCHIGI: PrivateSchoolDetailFile = {
         url: 'https://www.pref.tochigi.lg.jp/b05/documents/20250901153751.pdf',
         docTitle: '令和8(2026)年度私立高等学校生徒募集要項一覧(全日制)｜栃木県(学科別募集定員表・計520と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -74,6 +76,7 @@ export const PRIVATE_SCHOOL_DETAIL_TOCHIGI: PrivateSchoolDetailFile = {
         url: 'https://www.pref.tochigi.lg.jp/b05/documents/20250901153751.pdf',
         docTitle: '令和8(2026)年度私立高等学校生徒募集要項一覧(全日制)｜栃木県(学科別募集定員表・計390と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -95,6 +98,7 @@ export const PRIVATE_SCHOOL_DETAIL_TOCHIGI: PrivateSchoolDetailFile = {
         url: 'https://www.pref.tochigi.lg.jp/b05/documents/20250901153751.pdf',
         docTitle: '令和8(2026)年度私立高等学校生徒募集要項一覧(全日制)｜栃木県(学科別募集定員表・計870と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -107,6 +111,7 @@ export const PRIVATE_SCHOOL_DETAIL_TOCHIGI: PrivateSchoolDetailFile = {
         url: 'https://www.pref.tochigi.lg.jp/b05/documents/20250901153751.pdf',
         docTitle: '令和8(2026)年度私立高等学校生徒募集要項一覧(全日制)｜栃木県(普通科(女)単独160名)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -122,6 +127,7 @@ export const PRIVATE_SCHOOL_DETAIL_TOCHIGI: PrivateSchoolDetailFile = {
         url: 'https://www.pref.tochigi.lg.jp/b05/documents/20250901153751.pdf',
         docTitle: '令和8(2026)年度私立高等学校生徒募集要項一覧(全日制)｜栃木県(学科別募集定員表・計160と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -140,6 +146,7 @@ export const PRIVATE_SCHOOL_DETAIL_TOCHIGI: PrivateSchoolDetailFile = {
         url: 'https://www.pref.tochigi.lg.jp/b05/documents/20250901153751.pdf',
         docTitle: '令和8(2026)年度私立高等学校生徒募集要項一覧(全日制)｜栃木県(学科別募集定員表・計400と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -157,6 +164,7 @@ export const PRIVATE_SCHOOL_DETAIL_TOCHIGI: PrivateSchoolDetailFile = {
         url: 'https://www.pref.tochigi.lg.jp/b05/documents/20250901153751.pdf',
         docTitle: '令和8(2026)年度私立高等学校生徒募集要項一覧(全日制)｜栃木県(原資料表記は「白鷗大学足利」・学科別募集定員表計665と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -174,6 +182,7 @@ export const PRIVATE_SCHOOL_DETAIL_TOCHIGI: PrivateSchoolDetailFile = {
         url: 'https://www.pref.tochigi.lg.jp/b05/documents/20250901153751.pdf',
         docTitle: '令和8(2026)年度私立高等学校生徒募集要項一覧(全日制)｜栃木県(学科別募集定員表・計600と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -190,6 +199,7 @@ export const PRIVATE_SCHOOL_DETAIL_TOCHIGI: PrivateSchoolDetailFile = {
         url: 'https://www.pref.tochigi.lg.jp/b05/documents/20250901153751.pdf',
         docTitle: '令和8(2026)年度私立高等学校生徒募集要項一覧(全日制)｜栃木県(学科別募集定員表・計400と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -207,6 +217,7 @@ export const PRIVATE_SCHOOL_DETAIL_TOCHIGI: PrivateSchoolDetailFile = {
         url: 'https://www.pref.tochigi.lg.jp/b05/documents/20250901153751.pdf',
         docTitle: '令和8(2026)年度私立高等学校生徒募集要項一覧(全日制)｜栃木県(学科別募集定員表・計510と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -226,6 +237,7 @@ export const PRIVATE_SCHOOL_DETAIL_TOCHIGI: PrivateSchoolDetailFile = {
         url: 'https://www.pref.tochigi.lg.jp/b05/documents/20250901153751.pdf',
         docTitle: '令和8(2026)年度私立高等学校生徒募集要項一覧(全日制)｜栃木県(学科別募集定員表・計620と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -238,6 +250,7 @@ export const PRIVATE_SCHOOL_DETAIL_TOCHIGI: PrivateSchoolDetailFile = {
         url: 'https://www.pref.tochigi.lg.jp/b05/documents/20250901153751.pdf',
         docTitle: '令和8(2026)年度私立高等学校生徒募集要項一覧(全日制)｜栃木県(普通科単独40名)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -254,6 +267,7 @@ export const PRIVATE_SCHOOL_DETAIL_TOCHIGI: PrivateSchoolDetailFile = {
         url: 'https://www.pref.tochigi.lg.jp/b05/documents/20250901153836.pdf',
         docTitle: '令和8(2026)年度私立高等学校生徒募集要項一覧(通信制)｜栃木県(学科別募集定員表・計90と完全一致。全日制一覧には掲載が無く通信制のみの学校)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -266,6 +280,7 @@ export const PRIVATE_SCHOOL_DETAIL_TOCHIGI: PrivateSchoolDetailFile = {
         url: 'https://www.pref.tochigi.lg.jp/b05/documents/20250901153751.pdf',
         docTitle: '令和8(2026)年度私立高等学校生徒募集要項一覧(全日制)｜栃木県(普通科単独150名)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
   ],

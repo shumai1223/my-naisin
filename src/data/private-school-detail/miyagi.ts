@@ -18,6 +18,7 @@ const IKUSHIN_SOURCE = {
   url: 'https://www.ikushin.co.jp/school/pdf/03904.pdf',
   docTitle: '2026年度 高専・私立高校 募集要項【宮城県】（(株)育伸社 入試情報課・2025年11月4日現在）',
   fetchedAt: '2026-07-31',
+  sourceTier: 'secondary' as const,
 };
 
 export const PRIVATE_SCHOOL_DETAIL_MIYAGI: PrivateSchoolDetailFile = {
@@ -41,6 +42,7 @@ export const PRIVATE_SCHOOL_DETAIL_MIYAGI: PrivateSchoolDetailFile = {
         url: 'https://www.sendaiikuei.ed.jp/media/files/hs/admission/summary/26nyushi.pdf',
         docTitle: '令和8年度 仙台育英学園高等学校募集概要（コース別定員予定表）',
         fetchedAt: '2026-07-31',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -53,6 +55,7 @@ export const PRIVATE_SCHOOL_DETAIL_MIYAGI: PrivateSchoolDetailFile = {
         url: 'https://www.jhs.tohoku-gakuin.ac.jp/admission/hs/files/guide/admissions.pdf',
         docTitle: '2026年度（令和8年度）東北学院高等学校生徒募集要項（募集定員男女360名）',
         fetchedAt: '2026-07-31',
+        sourceTier: 'primary' as const,
       },
     },
     {

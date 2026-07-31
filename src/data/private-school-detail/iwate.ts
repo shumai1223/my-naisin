@@ -17,6 +17,7 @@ const IKUSHIN_SOURCE = {
   url: 'https://www.ikushin.co.jp/school/pdf/03903.pdf',
   docTitle: '2026年度 高専・私立高校 募集要項【岩手県】（(株)育伸社 入試情報課・2025年11月4日現在）',
   fetchedAt: '2026-07-31',
+  sourceTier: 'secondary' as const,
 };
 
 export const PRIVATE_SCHOOL_DETAIL_IWATE: PrivateSchoolDetailFile = {
@@ -76,6 +77,7 @@ export const PRIVATE_SCHOOL_DETAIL_IWATE: PrivateSchoolDetailFile = {
         url: 'https://www.morifu.jp/exam/examination/',
         docTitle: '入試要項ページ｜盛岡大学附属高等学校公式サイト(「全日制普通科で計150名(男女共学)」・育伸社募集要項PDFの普通科計150と完全一致確認)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'secondary' as const,
       },
     },
     {
@@ -106,6 +108,7 @@ export const PRIVATE_SCHOOL_DETAIL_IWATE: PrivateSchoolDetailFile = {
         url: 'https://www.hanamakihigashi-h.jp/',
         docTitle: '令和8年度募集要項(WebSearch要約2経路で「普通科全体の募集人員は男女計240名」と独立一致確認・育伸社募集要項PDFの普通科計240と完全一致確認)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'secondary' as const,
       },
     },
     {

@@ -19,6 +19,7 @@ export const PRIVATE_SCHOOL_DETAIL_YAMANASHI: PrivateSchoolDetailFile = {
         url: 'https://www.sundai-kofu.ed.jp/high/info/pdf/2025/R8_enrty-guidline_high.pdf',
         docTitle: '令和8年度 生徒募集要項（駿台甲府高等学校・全日制課程普通科）',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
   ],

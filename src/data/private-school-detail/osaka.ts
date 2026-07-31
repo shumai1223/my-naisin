@@ -26,6 +26,7 @@ const IKUSHIN_OSAKA_SOURCE = {
   url: 'https://www.ikushin.co.jp/school/pdf/03927.pdf',
   docTitle: '2026年度 国立高校・高専・私立高校 募集要項【大阪府】（(株)育伸社 入試情報課・2025年11月4日現在）',
   fetchedAt: '2026-07-31',
+  sourceTier: 'secondary' as const,
 };
 
 export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
@@ -178,6 +179,7 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
         url: 'https://www.shodaisakai.ac.jp/entrance',
         docTitle: '大阪商業大学堺高等学校 令和8年度(2026年度)入試 募集要項ページ(合計375名は原資料の「普通科合計」表記と一致)',
         fetchedAt: '2026-07-31',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -197,6 +199,7 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
           '大阪商業大学高等学校(本校・東大阪市) 入試情報ページ' +
           '(育伸社PDF令和8年度分と同一数値160/60/70/35を公式サイト側でも確認・大阪商業大学堺高等学校とは別法人の別校)',
         fetchedAt: '2026-07-31',
+        sourceTier: 'secondary' as const,
       },
     },
     {
@@ -212,6 +215,7 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
         url: 'https://www.daisho.ac.jp/admission/examination/',
         docTitle: '大商学園高等学校(豊中市) 令和8年度入試 募集人員ページ',
         fetchedAt: '2026-07-31',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -227,6 +231,7 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
         url: 'https://www.kun-ei.jp/wp/wp-content/uploads/2025/09/bf63555017727e2e7287863dda20a87c.pdf',
         docTitle: '大阪薫英女学院高等学校 令和8年度生徒募集要項(募集定員表に国際科80名・普通科120名と明記)',
         fetchedAt: '2026-07-31',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -283,6 +288,7 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
           '大阪国際高等学校(守口市) 2027年度生徒募集要項' +
           '(公式サイトが既に2027年度サイクルへ移行済みのため最新公表値として収録。未来探究/幼児保育進学の2コースは内訳非公表)',
         fetchedAt: '2026-07-31',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -300,6 +306,7 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
         url: 'https://www.momoyamagakuin-h.ed.jp/senior/admissions/application.html',
         docTitle: '桃山学院高等学校 2026年度入試 募集要項ページ(合計400名は原資料の記載と一致・中高一貫コース生120名は別枠のため対象外)',
         fetchedAt: '2026-07-31',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -341,6 +348,7 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
           'PL学園高等学校(登録名:ピーエル学園高等学校) 2026年度募集要項' +
           '(パーフェクトリバティー教団会員子弟のみが出願資格という特殊な募集制度だが募集人数自体は他校と同様に記録)',
         fetchedAt: '2026-07-31',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -396,6 +404,7 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
         docTitle:
           '帝塚山学院泉ヶ丘高等学校 令和8年度生徒募集要項(1次入試の募集人数「Ｓ特進コース・特進コース計 約120名」。帰国生入試分は同枠に含む)',
         fetchedAt: '2026-07-31',
+        sourceTier: 'primary' as const,
       },
     },
   ],

@@ -23,6 +23,7 @@ const SOURCE_BASE = {
   url: 'http://www.nagasaki-shigaku.jp/koshin_images/files/08koukouseitoboshuu.pdf',
   docTitle: '令和8年度 私立中学高等学校生徒募集一覧（高等学校）（長崎県私立中学高等学校協会）',
   fetchedAt: '2026-07-30',
+  sourceTier: 'primary' as const,
 };
 
 export const PRIVATE_SCHOOL_DETAIL_NAGASAKI: PrivateSchoolDetailFile = {

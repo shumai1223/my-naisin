@@ -21,6 +21,11 @@ export interface PrivateSchoolDetailSource {
   docTitle: string;
   /** この学校のデータを確認した日（'YYYY-MM-DD'）。 */
   fetchedAt: string;
+  /**
+   * 出典の階層。'primary'=各校公式サイトの募集要項。'secondary'=(株)育伸社等の第三者編集PDF由来。
+   * secondaryはindex対象外(noindex維持・内部データとしては保持)とする(2026-07-31方向修正指示・修正2)。
+   */
+  sourceTier: 'primary' | 'secondary';
 }
 
 /** school-master.ts の SchoolRecord.code と一致させ、参照台帳（第一段）と紐付ける。 */

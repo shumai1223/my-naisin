@@ -17,6 +17,7 @@ const SOURCE = {
   url: 'https://www.pref.kagawa.lg.jp/documents/43700/r8ippan.pdf',
   docTitle: '令和8年度香川県内私立高等学校全日制生徒募集要項(香川県総務部総務学事課)',
   fetchedAt: '2026-07-30',
+  sourceTier: 'primary' as const,
 };
 
 export const PRIVATE_SCHOOL_DETAIL_KAGAWA: PrivateSchoolDetailFile = {

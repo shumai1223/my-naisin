@@ -24,6 +24,7 @@ const IKUSHIN_CHIBA_SOURCE = {
   url: 'https://www.ikushin.co.jp/school/pdf/03912.pdf',
   docTitle: '2026年度 高専・私立高校 募集要項【千葉県】（(株)育伸社 入試情報課・2025年11月4日現在）',
   fetchedAt: '2026-07-31',
+  sourceTier: 'secondary' as const,
 };
 
 export const PRIVATE_SCHOOL_DETAIL_CHIBA: PrivateSchoolDetailFile = {
@@ -39,6 +40,7 @@ export const PRIVATE_SCHOOL_DETAIL_CHIBA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.chiba.lg.jp/gakuji/press/2025/documents/r8koukou.pdf',
         docTitle: '令和8年度千葉県私立小・中・中等教育・高等学校生徒募集要項について｜千葉県総務部学事課(A推薦/特別活動推薦/一般A/一般Bの全区分で募集人員406が共通記載)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -51,6 +53,7 @@ export const PRIVATE_SCHOOL_DETAIL_CHIBA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.chiba.lg.jp/gakuji/press/2025/documents/r8koukou.pdf',
         docTitle: '令和8年度千葉県私立小・中・中等教育・高等学校生徒募集要項について｜千葉県総務部学事課(推薦/第1回一般/第2回一般/第3回一般の全区分で募集人員320が共通記載)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -63,6 +66,7 @@ export const PRIVATE_SCHOOL_DETAIL_CHIBA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.chiba.lg.jp/gakuji/press/2025/documents/r8koukou.pdf',
         docTitle: '令和8年度千葉県私立小・中・中等教育・高等学校生徒募集要項について｜千葉県総務部学事課(第1回/第2回の単願・併願全区分で募集人員439が共通記載)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -75,6 +79,7 @@ export const PRIVATE_SCHOOL_DETAIL_CHIBA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.chiba.lg.jp/gakuji/press/2025/documents/r8koukou.pdf',
         docTitle: '令和8年度千葉県私立小・中・中等教育・高等学校生徒募集要項について｜千葉県総務部学事課(前期推薦/前期一般/前期推薦併願の全区分で募集人員160が共通記載・後期は「若干名」と別記のため160には含めない)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -87,6 +92,7 @@ export const PRIVATE_SCHOOL_DETAIL_CHIBA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.chiba.lg.jp/gakuji/press/2025/documents/r8koukou.pdf',
         docTitle: '令和8年度千葉県私立小・中・中等教育・高等学校生徒募集要項について｜千葉県総務部学事課(前期Ⅰ/Ⅱ/Ⅲの全区分で募集人員200が共通記載)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -99,6 +105,7 @@ export const PRIVATE_SCHOOL_DETAIL_CHIBA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.chiba.lg.jp/gakuji/press/2025/documents/r8koukou.pdf',
         docTitle: '令和8年度千葉県私立小・中・中等教育・高等学校生徒募集要項について｜千葉県総務部学事課(前期1/2/3の全区分で募集人員600が共通記載)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -114,6 +121,7 @@ export const PRIVATE_SCHOOL_DETAIL_CHIBA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.chiba.lg.jp/gakuji/press/2025/documents/r8koukou.pdf',
         docTitle: '令和8年度千葉県私立小・中・中等教育・高等学校生徒募集要項について｜千葉県総務部学事課(第1回・第2回とも各コースで同一の募集人員35/85が共通記載)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -129,6 +137,7 @@ export const PRIVATE_SCHOOL_DETAIL_CHIBA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.chiba.lg.jp/gakuji/press/2025/documents/r8koukou.pdf',
         docTitle: '令和8年度千葉県私立小・中・中等教育・高等学校生徒募集要項について｜千葉県総務部学事課(第一志望・併願とも各学科で同一の募集人員320/40が共通記載)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -145,6 +154,7 @@ export const PRIVATE_SCHOOL_DETAIL_CHIBA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.chiba.lg.jp/gakuji/press/2025/documents/r8koukou.pdf',
         docTitle: '令和8年度千葉県私立小・中・中等教育・高等学校生徒募集要項について｜千葉県総務部学事課(推薦/一般の全区分で各コース205/280/70が共通記載)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -160,6 +170,7 @@ export const PRIVATE_SCHOOL_DETAIL_CHIBA: PrivateSchoolDetailFile = {
         url: 'https://www.ikushin.co.jp/school/pdf/03912.pdf',
         docTitle: '2026年度 高専・私立高校 募集要項【千葉県】（(株)育伸社 入試情報課・2025年11月4日現在）',
         fetchedAt: '2026-07-31',
+        sourceTier: 'secondary' as const,
       },
     },
     {
@@ -172,6 +183,7 @@ export const PRIVATE_SCHOOL_DETAIL_CHIBA: PrivateSchoolDetailFile = {
         url: 'https://www.ikushin.co.jp/school/pdf/03912.pdf',
         docTitle: '2026年度 高専・私立高校 募集要項【千葉県】（(株)育伸社 入試情報課・2025年11月4日現在）',
         fetchedAt: '2026-07-31',
+        sourceTier: 'secondary' as const,
       },
     },
     {
@@ -188,6 +200,7 @@ export const PRIVATE_SCHOOL_DETAIL_CHIBA: PrivateSchoolDetailFile = {
         url: 'https://www.ikushin.co.jp/school/pdf/03912.pdf',
         docTitle: '2026年度 高専・私立高校 募集要項【千葉県】（(株)育伸社 入試情報課・2025年11月4日現在）',
         fetchedAt: '2026-07-31',
+        sourceTier: 'secondary' as const,
       },
     },
     {
@@ -203,6 +216,7 @@ export const PRIVATE_SCHOOL_DETAIL_CHIBA: PrivateSchoolDetailFile = {
         url: 'https://www.ikushin.co.jp/school/pdf/03912.pdf',
         docTitle: '2026年度 高専・私立高校 募集要項【千葉県】（(株)育伸社 入試情報課・2025年11月4日現在）',
         fetchedAt: '2026-07-31',
+        sourceTier: 'secondary' as const,
       },
     },
     {
@@ -215,6 +229,7 @@ export const PRIVATE_SCHOOL_DETAIL_CHIBA: PrivateSchoolDetailFile = {
         url: 'https://www.ikushin.co.jp/school/pdf/03912.pdf',
         docTitle: '2026年度 高専・私立高校 募集要項【千葉県】（(株)育伸社 入試情報課・2025年11月4日現在）',
         fetchedAt: '2026-07-31',
+        sourceTier: 'secondary' as const,
       },
     },
     {
@@ -227,6 +242,7 @@ export const PRIVATE_SCHOOL_DETAIL_CHIBA: PrivateSchoolDetailFile = {
         url: 'https://www.ikushin.co.jp/school/pdf/03912.pdf',
         docTitle: '2026年度 高専・私立高校 募集要項【千葉県】（(株)育伸社 入試情報課・2025年11月4日現在）',
         fetchedAt: '2026-07-31',
+        sourceTier: 'secondary' as const,
       },
     },
     {
@@ -242,6 +258,7 @@ export const PRIVATE_SCHOOL_DETAIL_CHIBA: PrivateSchoolDetailFile = {
         url: 'https://www.ikushin.co.jp/school/pdf/03912.pdf',
         docTitle: '2026年度 高専・私立高校 募集要項【千葉県】（(株)育伸社 入試情報課・2025年11月4日現在）',
         fetchedAt: '2026-07-31',
+        sourceTier: 'secondary' as const,
       },
     },
     {
@@ -257,6 +274,7 @@ export const PRIVATE_SCHOOL_DETAIL_CHIBA: PrivateSchoolDetailFile = {
         url: 'https://www.ikushin.co.jp/school/pdf/03912.pdf',
         docTitle: '2026年度 高専・私立高校 募集要項【千葉県】（(株)育伸社 入試情報課・2025年11月4日現在）',
         fetchedAt: '2026-07-31',
+        sourceTier: 'secondary' as const,
       },
     },
     {
@@ -274,6 +292,7 @@ export const PRIVATE_SCHOOL_DETAIL_CHIBA: PrivateSchoolDetailFile = {
         url: 'https://www.ikushin.co.jp/school/pdf/03912.pdf',
         docTitle: '2026年度 高専・私立高校 募集要項【千葉県】（(株)育伸社 入試情報課・2025年11月4日現在）',
         fetchedAt: '2026-07-31',
+        sourceTier: 'secondary' as const,
       },
     },
     {
@@ -289,6 +308,7 @@ export const PRIVATE_SCHOOL_DETAIL_CHIBA: PrivateSchoolDetailFile = {
         url: 'https://www.ikushin.co.jp/school/pdf/03912.pdf',
         docTitle: '2026年度 高専・私立高校 募集要項【千葉県】（(株)育伸社 入試情報課・2025年11月4日現在）',
         fetchedAt: '2026-07-31',
+        sourceTier: 'secondary' as const,
       },
     },
     {
@@ -407,6 +427,7 @@ export const PRIVATE_SCHOOL_DETAIL_CHIBA: PrivateSchoolDetailFile = {
         url: 'https://www.ikushin.co.jp/school/pdf/03912.pdf',
         docTitle: '2026年度 高専・私立高校 募集要項【千葉県】｜(株)育伸社入試情報課(単願推薦60・単願/併願/併願特待100の2区分を確認、より大きい100を採用)',
         fetchedAt: '2026-07-31',
+        sourceTier: 'secondary' as const,
       },
     },
     {

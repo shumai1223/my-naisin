@@ -55,6 +55,7 @@ const IKUSHIN_KANAGAWA_SOURCE = {
   url: 'https://www.ikushin.co.jp/school/pdf/03914.pdf',
   docTitle: '2026年度 私立高校 募集要項【神奈川県】（(株)育伸社 入試情報課・2025年11月4日現在）',
   fetchedAt: '2026-07-31',
+  sourceTier: 'secondary' as const,
 };
 
 export const PRIVATE_SCHOOL_DETAIL_KANAGAWA: PrivateSchoolDetailFile = {
@@ -602,6 +603,7 @@ export const PRIVATE_SCHOOL_DETAIL_KANAGAWA: PrivateSchoolDetailFile = {
         url: 'https://www.hakuhojoshi-h.ed.jp/prospective/guideline/',
         docTitle: '白鵬女子高等学校 令和8年度(2026年度)入試 募集要項ページ(推薦入試・一般入試の募集人員表・オープン入試は各コースとも若干名のため未算入)',
         fetchedAt: '2026-07-31',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -619,6 +621,7 @@ export const PRIVATE_SCHOOL_DETAIL_KANAGAWA: PrivateSchoolDetailFile = {
           '横浜学園高等学校 令和8年度(2026年度)生徒募集要項' +
           '(第二次入学試験は両コースとも若干名で数値非公表のため未算入。育伸社PDFでは横須賀学院と酷似したS選抜/A進学構成のブロックがあり確信が持てず見送っていたため本校公式サイトの一次資料を優先採用)',
         fetchedAt: '2026-07-31',
+        sourceTier: 'secondary' as const,
       },
     },
     {
@@ -633,6 +636,7 @@ export const PRIVATE_SCHOOL_DETAIL_KANAGAWA: PrivateSchoolDetailFile = {
           '令和8年度(2026年度)森村学園高等部 一般入学試験・帰国生入学試験 募集要項' +
           '(帰国生入試A型・B型はいずれも男女若干名で数値非公表のため未算入。育伸社PDFの森村学園ブロックは法政大学第二との境界が確証できず見送り記録があるため本校公式サイトの一次資料を優先採用)',
         fetchedAt: '2026-07-31',
+        sourceTier: 'secondary' as const,
       },
     },
     {
@@ -650,6 +654,7 @@ export const PRIVATE_SCHOOL_DETAIL_KANAGAWA: PrivateSchoolDetailFile = {
         url: 'https://www.kj.kojo.ed.jp/wp-content/themes/kojo2025/images/pdf/app.pdf',
         docTitle: '向上高等学校 令和8年度生徒募集要項(二次入試は全コース若干名で数値非公表のため未算入)',
         fetchedAt: '2026-07-31',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -667,6 +672,7 @@ export const PRIVATE_SCHOOL_DETAIL_KANAGAWA: PrivateSchoolDetailFile = {
         url: 'https://shonangakuin.ed.jp/files/pdf/entrance-examination/R08_requirements.pdf',
         docTitle: '湘南学院高等学校 2026年度入試生徒募集要項(コース合計445名は原資料の「定員 全日制/普通科/445名」と完全一致検算済み)',
         fetchedAt: '2026-07-31',
+        sourceTier: 'primary' as const,
       },
     },
   ],

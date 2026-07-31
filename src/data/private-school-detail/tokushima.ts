@@ -19,6 +19,7 @@ export const PRIVATE_SCHOOL_DETAIL_TOKUSHIMA: PrivateSchoolDetailFile = {
         url: 'http://www.bunri.ed.jp/admission/senior/',
         docTitle: '入試要項（生徒募集人員）｜徳島文理中学校・高等学校（「男女300名（徳島文理中学校出身者を含む）」・コース別内訳は非公表）',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -31,6 +32,7 @@ export const PRIVATE_SCHOOL_DETAIL_TOKUSHIMA: PrivateSchoolDetailFile = {
         url: 'https://www.seikogakuen.ac.jp/seikogakuen/wp-content/uploads/2025/08/%E7%94%9F%E5%85%89%E5%AD%A6%E5%9C%92%E9%AB%98%E7%AD%89%E5%AD%A6%E6%A0%A1-%E4%BB%A4%E5%92%8C8%E5%B9%B4%E5%BA%A6-%E5%85%A5%E5%AD%A6%E8%A9%A6%E9%A8%93%E8%A6%81%E9%A0%85.pdf',
         docTitle: '令和8年度入学試験要項｜生光学園高等学校（前期入試: 推薦10名+専願60名+一般130名=200名。後期入試は「若干名」と不確定数のため合計に含めず。R7年度版と数値完全一致）',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -43,6 +45,7 @@ export const PRIVATE_SCHOOL_DETAIL_TOKUSHIMA: PrivateSchoolDetailFile = {
         url: 'https://www.minori-hs.ed.jp/guide/',
         docTitle: 'みのり高等学校（通信制）募集要項（「本校は20名」と明記。各学習センター(サテライト施設)の定員は別途公表されており本データには含めない）',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
   ],

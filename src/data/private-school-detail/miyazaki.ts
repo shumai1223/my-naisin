@@ -27,6 +27,7 @@ export const PRIVATE_SCHOOL_DETAIL_MIYAZAKI: PrivateSchoolDetailFile = {
         url: 'https://www.miyagaku.ed.jp/wp-miyagaku/wp-content/uploads/2025/10/令和８年度入試要項.pdf',
         docTitle: '令和8年度 入学試験要項｜宮崎学園高等学校(専願受験の募集定員表・110+170+60=340で完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -45,6 +46,7 @@ export const PRIVATE_SCHOOL_DETAIL_MIYAZAKI: PrivateSchoolDetailFile = {
         url: 'https://www.m-nichidai.com/highschool/high_exam/high_pref/',
         docTitle: '入試情報(学科別募集定員)｜宮崎日本大学高等学校公式サイト(140+175+60+60+65=500で完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -62,6 +64,7 @@ export const PRIVATE_SCHOOL_DETAIL_MIYAZAKI: PrivateSchoolDetailFile = {
         url: 'https://miyaichi.ed.jp/hs/entry/',
         docTitle: '入試要項(学科別募集定員)｜宮崎第一中学高等学校公式サイト',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -87,6 +90,7 @@ export const PRIVATE_SCHOOL_DETAIL_MIYAZAKI: PrivateSchoolDetailFile = {
         url: 'https://nissho.ed.jp/wp-content/uploads/2025/10/2026youkou.pdf',
         docTitle: '令和8年度 募集要項｜日章学園高等学校(設置学科・募集定員表、自動車科は表中「30名(35名)」の併記だが本体数値30名を採用・合計450名と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -104,6 +108,7 @@ export const PRIVATE_SCHOOL_DETAIL_MIYAZAKI: PrivateSchoolDetailFile = {
         url: 'https://www.hosho.ed.jp/wp-content/uploads/2025/09/鵬翔高校入学試験要項.pdf',
         docTitle: '令和8年度 入学試験要項｜鵬翔高等学校(募集定員表・100+90+100+80=370【370名】と完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -122,6 +127,7 @@ export const PRIVATE_SCHOOL_DETAIL_MIYAZAKI: PrivateSchoolDetailFile = {
         url: 'https://kubogakuen.ac.jp/full-time-course/',
         docTitle: '全日制課程(学科別募集定員)｜学校法人久保学園 都城高等学校公式サイト(40+30+20+15+155=260で完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -137,6 +143,7 @@ export const PRIVATE_SCHOOL_DETAIL_MIYAZAKI: PrivateSchoolDetailFile = {
         url: 'https://www.ursula.ed.jp/high/admission/requirements/img/聖心ウルスラ学園生徒募集要項-web用.pdf',
         docTitle: '令和8年度 生徒募集要項｜聖心ウルスラ学園高等学校(学科・募集定員表・155+40=195で完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -157,6 +164,7 @@ export const PRIVATE_SCHOOL_DETAIL_MIYAZAKI: PrivateSchoolDetailFile = {
         url: 'https://www.nichigaku-highschool.info/img/doc/requirements2026.pdf',
         docTitle: '2026年度入学生 生徒募集要項｜日南学園高等学校(設置学科・募集定員表。合計の明記は原資料に無いため courses 合計240を totalCapacity として採用)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -179,6 +187,7 @@ export const PRIVATE_SCHOOL_DETAIL_MIYAZAKI: PrivateSchoolDetailFile = {
         url: 'https://oubi.ed.jp/edco/wp-content/uploads/2025/10/e17522b60a0e65e045b4a3471e05d096.pdf',
         docTitle: '令和8年度 櫻美学園高等学校 生徒募集要項(募集定員表・30+90(普通科5コース計)+70+60+40=290で完全一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -191,6 +200,7 @@ export const PRIVATE_SCHOOL_DETAIL_MIYAZAKI: PrivateSchoolDetailFile = {
         url: 'http://www.hyugagakuin.ac.jp/data/requirements_senior.pdf',
         docTitle: '令和8年度 日向学院高等学校 生徒募集要項(募集定員表・普通科160名(内部進学生を含む))',
         fetchedAt: '2026-07-31',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -206,6 +216,7 @@ export const PRIVATE_SCHOOL_DETAIL_MIYAZAKI: PrivateSchoolDetailFile = {
         url: 'https://www.ikushin.co.jp/school/pdf/03945.pdf',
         docTitle: '2026年度 高専・私立高校 募集要項【宮崎県】（(株)育伸社 入試情報課・2025年11月4日現在）',
         fetchedAt: '2026-07-31',
+        sourceTier: 'secondary' as const,
       },
     },
     {
@@ -222,6 +233,7 @@ export const PRIVATE_SCHOOL_DETAIL_MIYAZAKI: PrivateSchoolDetailFile = {
         url: 'https://www.ikushin.co.jp/school/pdf/03945.pdf',
         docTitle: '2026年度 高専・私立高校 募集要項【宮崎県】（(株)育伸社 入試情報課・2025年11月4日現在）',
         fetchedAt: '2026-07-31',
+        sourceTier: 'secondary' as const,
       },
     },
     {
@@ -238,6 +250,7 @@ export const PRIVATE_SCHOOL_DETAIL_MIYAZAKI: PrivateSchoolDetailFile = {
         url: 'https://www.ikushin.co.jp/school/pdf/03945.pdf',
         docTitle: '2026年度 高専・私立高校 募集要項【宮崎県】（(株)育伸社 入試情報課・2025年11月4日現在）',
         fetchedAt: '2026-07-31',
+        sourceTier: 'secondary' as const,
       },
     },
   ],

@@ -26,6 +26,7 @@ export const PRIVATE_SCHOOL_DETAIL_SAITAMA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.saitama.lg.jp/documents/26360/r8_koukounyuushiyoukou.pdf',
         docTitle: '令和8年度埼玉県私立高等学校入試要項(全日制)｜埼玉県学事課(学科(コース)別募集人員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -43,6 +44,7 @@ export const PRIVATE_SCHOOL_DETAIL_SAITAMA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.saitama.lg.jp/documents/26360/r8_koukounyuushiyoukou.pdf',
         docTitle: '令和8年度埼玉県私立高等学校入試要項(全日制)｜埼玉県学事課(学科(コース)別募集人員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -59,6 +61,7 @@ export const PRIVATE_SCHOOL_DETAIL_SAITAMA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.saitama.lg.jp/documents/26360/r8_koukounyuushiyoukou.pdf',
         docTitle: '令和8年度埼玉県私立高等学校入試要項(全日制)｜埼玉県学事課(学科(コース)別募集人員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -79,6 +82,7 @@ export const PRIVATE_SCHOOL_DETAIL_SAITAMA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.saitama.lg.jp/documents/26360/r8_koukounyuushiyoukou.pdf',
         docTitle: '令和8年度埼玉県私立高等学校入試要項(全日制)｜埼玉県学事課(学科(コース)別募集人員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -93,6 +97,7 @@ export const PRIVATE_SCHOOL_DETAIL_SAITAMA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.saitama.lg.jp/documents/26360/r8_koukounyuushiyoukou.pdf',
         docTitle: '令和8年度埼玉県私立高等学校入試要項(全日制)｜埼玉県学事課(学科(コース)別募集人員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -109,6 +114,7 @@ export const PRIVATE_SCHOOL_DETAIL_SAITAMA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.saitama.lg.jp/documents/26360/r8_koukounyuushiyoukou.pdf',
         docTitle: '令和8年度埼玉県私立高等学校入試要項(全日制)｜埼玉県学事課(学科(コース)別募集人員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -123,6 +129,7 @@ export const PRIVATE_SCHOOL_DETAIL_SAITAMA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.saitama.lg.jp/documents/26360/r8_koukounyuushiyoukou.pdf',
         docTitle: '令和8年度埼玉県私立高等学校入試要項(全日制)｜埼玉県学事課(学科(コース)別募集人員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -138,6 +145,7 @@ export const PRIVATE_SCHOOL_DETAIL_SAITAMA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.saitama.lg.jp/documents/26360/r8_koukounyuushiyoukou.pdf',
         docTitle: '令和8年度埼玉県私立高等学校入試要項(全日制)｜埼玉県学事課(学科(コース)別募集人員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -155,6 +163,7 @@ export const PRIVATE_SCHOOL_DETAIL_SAITAMA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.saitama.lg.jp/documents/26360/r8_koukounyuushiyoukou.pdf',
         docTitle: '令和8年度埼玉県私立高等学校入試要項(全日制)｜埼玉県学事課(学科(コース)別募集人員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -169,6 +178,7 @@ export const PRIVATE_SCHOOL_DETAIL_SAITAMA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.saitama.lg.jp/documents/26360/r8_koukounyuushiyoukou.pdf',
         docTitle: '令和8年度埼玉県私立高等学校入試要項(全日制)｜埼玉県学事課(学科(コース)別募集人員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -187,6 +197,7 @@ export const PRIVATE_SCHOOL_DETAIL_SAITAMA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.saitama.lg.jp/documents/26360/r8_koukounyuushiyoukou.pdf',
         docTitle: '令和8年度埼玉県私立高等学校入試要項(全日制)｜埼玉県学事課(学科(コース)別募集人員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -202,6 +213,7 @@ export const PRIVATE_SCHOOL_DETAIL_SAITAMA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.saitama.lg.jp/documents/26360/r8_koukounyuushiyoukou.pdf',
         docTitle: '令和8年度埼玉県私立高等学校入試要項(全日制)｜埼玉県学事課(学科(コース)別募集人員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -216,6 +228,7 @@ export const PRIVATE_SCHOOL_DETAIL_SAITAMA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.saitama.lg.jp/documents/26360/r8_koukounyuushiyoukou.pdf',
         docTitle: '令和8年度埼玉県私立高等学校入試要項(全日制)｜埼玉県学事課(学科(コース)別募集人員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -232,6 +245,7 @@ export const PRIVATE_SCHOOL_DETAIL_SAITAMA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.saitama.lg.jp/documents/26360/r8_koukounyuushiyoukou.pdf',
         docTitle: '令和8年度埼玉県私立高等学校入試要項(全日制)｜埼玉県学事課(学科(コース)別募集人員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -250,6 +264,7 @@ export const PRIVATE_SCHOOL_DETAIL_SAITAMA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.saitama.lg.jp/documents/26360/r8_koukounyuushiyoukou.pdf',
         docTitle: '令和8年度埼玉県私立高等学校入試要項(全日制)｜埼玉県学事課(学科(コース)別募集人員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -266,6 +281,7 @@ export const PRIVATE_SCHOOL_DETAIL_SAITAMA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.saitama.lg.jp/documents/26360/r8_koukounyuushiyoukou.pdf',
         docTitle: '令和8年度埼玉県私立高等学校入試要項(全日制)｜埼玉県学事課(学科(コース)別募集人員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -282,6 +298,7 @@ export const PRIVATE_SCHOOL_DETAIL_SAITAMA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.saitama.lg.jp/documents/26360/r8_koukounyuushiyoukou.pdf',
         docTitle: '令和8年度埼玉県私立高等学校入試要項(全日制)｜埼玉県学事課(学科(コース)別募集人員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -296,6 +313,7 @@ export const PRIVATE_SCHOOL_DETAIL_SAITAMA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.saitama.lg.jp/documents/26360/r8_koukounyuushiyoukou.pdf',
         docTitle: '令和8年度埼玉県私立高等学校入試要項(全日制)｜埼玉県学事課(学科(コース)別募集人員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -313,6 +331,7 @@ export const PRIVATE_SCHOOL_DETAIL_SAITAMA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.saitama.lg.jp/documents/26360/r8_koukounyuushiyoukou.pdf',
         docTitle: '令和8年度埼玉県私立高等学校入試要項(全日制)｜埼玉県学事課(学科(コース)別募集人員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -327,6 +346,7 @@ export const PRIVATE_SCHOOL_DETAIL_SAITAMA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.saitama.lg.jp/documents/26360/r8_koukounyuushiyoukou.pdf',
         docTitle: '令和8年度埼玉県私立高等学校入試要項(全日制)｜埼玉県学事課(学科(コース)別募集人員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -341,6 +361,7 @@ export const PRIVATE_SCHOOL_DETAIL_SAITAMA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.saitama.lg.jp/documents/26360/r8_koukounyuushiyoukou.pdf',
         docTitle: '令和8年度埼玉県私立高等学校入試要項(全日制)｜埼玉県学事課(学科(コース)別募集人員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -357,6 +378,7 @@ export const PRIVATE_SCHOOL_DETAIL_SAITAMA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.saitama.lg.jp/documents/26360/r8_koukounyuushiyoukou.pdf',
         docTitle: '令和8年度埼玉県私立高等学校入試要項(全日制)｜埼玉県学事課(学科(コース)別募集人員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -378,6 +400,7 @@ export const PRIVATE_SCHOOL_DETAIL_SAITAMA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.saitama.lg.jp/documents/26360/r8_koukounyuushiyoukou.pdf',
         docTitle: '令和8年度埼玉県私立高等学校入試要項(全日制)｜埼玉県学事課(学科(コース)別募集人員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -395,6 +418,7 @@ export const PRIVATE_SCHOOL_DETAIL_SAITAMA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.saitama.lg.jp/documents/26360/r8_koukounyuushiyoukou.pdf',
         docTitle: '令和8年度埼玉県私立高等学校入試要項(全日制)｜埼玉県学事課(学科(コース)別募集人員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -412,6 +436,7 @@ export const PRIVATE_SCHOOL_DETAIL_SAITAMA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.saitama.lg.jp/documents/26360/r8_koukounyuushiyoukou.pdf',
         docTitle: '令和8年度埼玉県私立高等学校入試要項(全日制)｜埼玉県学事課(学科(コース)別募集人員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -428,6 +453,7 @@ export const PRIVATE_SCHOOL_DETAIL_SAITAMA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.saitama.lg.jp/documents/26360/r8_koukounyuushiyoukou.pdf',
         docTitle: '令和8年度埼玉県私立高等学校入試要項(全日制)｜埼玉県学事課(学科(コース)別募集人員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -444,6 +470,7 @@ export const PRIVATE_SCHOOL_DETAIL_SAITAMA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.saitama.lg.jp/documents/26360/r8_koukounyuushiyoukou.pdf',
         docTitle: '令和8年度埼玉県私立高等学校入試要項(全日制)｜埼玉県学事課(学科(コース)別募集人員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -459,6 +486,7 @@ export const PRIVATE_SCHOOL_DETAIL_SAITAMA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.saitama.lg.jp/documents/26360/r8_koukounyuushiyoukou.pdf',
         docTitle: '令和8年度埼玉県私立高等学校入試要項(全日制)｜埼玉県学事課(学科(コース)別募集人員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -478,6 +506,7 @@ export const PRIVATE_SCHOOL_DETAIL_SAITAMA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.saitama.lg.jp/documents/26360/r8_koukounyuushiyoukou.pdf',
         docTitle: '令和8年度埼玉県私立高等学校入試要項(全日制)｜埼玉県学事課(学科(コース)別募集人員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -493,6 +522,7 @@ export const PRIVATE_SCHOOL_DETAIL_SAITAMA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.saitama.lg.jp/documents/26360/r8_koukounyuushiyoukou.pdf',
         docTitle: '令和8年度埼玉県私立高等学校入試要項(全日制)｜埼玉県学事課(学科(コース)別募集人員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -507,6 +537,7 @@ export const PRIVATE_SCHOOL_DETAIL_SAITAMA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.saitama.lg.jp/documents/26360/r8_koukounyuushiyoukou.pdf',
         docTitle: '令和8年度埼玉県私立高等学校入試要項(全日制)｜埼玉県学事課(学科(コース)別募集人員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -524,6 +555,7 @@ export const PRIVATE_SCHOOL_DETAIL_SAITAMA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.saitama.lg.jp/documents/26360/r8_koukounyuushiyoukou.pdf',
         docTitle: '令和8年度埼玉県私立高等学校入試要項(全日制)｜埼玉県学事課(学科(コース)別募集人員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -538,6 +570,7 @@ export const PRIVATE_SCHOOL_DETAIL_SAITAMA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.saitama.lg.jp/documents/26360/r8_koukounyuushiyoukou.pdf',
         docTitle: '令和8年度埼玉県私立高等学校入試要項(全日制)｜埼玉県学事課(学科(コース)別募集人員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -552,6 +585,7 @@ export const PRIVATE_SCHOOL_DETAIL_SAITAMA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.saitama.lg.jp/documents/26360/r8_koukounyuushiyoukou.pdf',
         docTitle: '令和8年度埼玉県私立高等学校入試要項(全日制)｜埼玉県学事課(学科(コース)別募集人員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -568,6 +602,7 @@ export const PRIVATE_SCHOOL_DETAIL_SAITAMA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.saitama.lg.jp/documents/26360/r8_koukounyuushiyoukou.pdf',
         docTitle: '令和8年度埼玉県私立高等学校入試要項(全日制)｜埼玉県学事課(学科(コース)別募集人員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -583,6 +618,7 @@ export const PRIVATE_SCHOOL_DETAIL_SAITAMA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.saitama.lg.jp/documents/26360/r8_koukounyuushiyoukou.pdf',
         docTitle: '令和8年度埼玉県私立高等学校入試要項(全日制)｜埼玉県学事課(学科(コース)別募集人員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -599,6 +635,7 @@ export const PRIVATE_SCHOOL_DETAIL_SAITAMA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.saitama.lg.jp/documents/26360/r8_koukounyuushiyoukou.pdf',
         docTitle: '令和8年度埼玉県私立高等学校入試要項(全日制)｜埼玉県学事課(学科(コース)別募集人員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -616,6 +653,7 @@ export const PRIVATE_SCHOOL_DETAIL_SAITAMA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.saitama.lg.jp/documents/26360/r8_koukounyuushiyoukou.pdf',
         docTitle: '令和8年度埼玉県私立高等学校入試要項(全日制)｜埼玉県学事課(学科(コース)別募集人員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -635,6 +673,7 @@ export const PRIVATE_SCHOOL_DETAIL_SAITAMA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.saitama.lg.jp/documents/26360/r8_koukounyuushiyoukou.pdf',
         docTitle: '令和8年度埼玉県私立高等学校入試要項(全日制)｜埼玉県学事課(学科(コース)別募集人員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -651,6 +690,7 @@ export const PRIVATE_SCHOOL_DETAIL_SAITAMA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.saitama.lg.jp/documents/26360/r8_koukounyuushiyoukou.pdf',
         docTitle: '令和8年度埼玉県私立高等学校入試要項(全日制)｜埼玉県学事課(学科(コース)別募集人員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -668,6 +708,7 @@ export const PRIVATE_SCHOOL_DETAIL_SAITAMA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.saitama.lg.jp/documents/26360/r8_koukounyuushiyoukou.pdf',
         docTitle: '令和8年度埼玉県私立高等学校入試要項(全日制)｜埼玉県学事課(学科(コース)別募集人員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -685,6 +726,7 @@ export const PRIVATE_SCHOOL_DETAIL_SAITAMA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.saitama.lg.jp/documents/26360/r8_koukounyuushiyoukou.pdf',
         docTitle: '令和8年度埼玉県私立高等学校入試要項(全日制)｜埼玉県学事課(学科(コース)別募集人員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -699,6 +741,7 @@ export const PRIVATE_SCHOOL_DETAIL_SAITAMA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.saitama.lg.jp/documents/26360/r8_koukounyuushiyoukou.pdf',
         docTitle: '令和8年度埼玉県私立高等学校入試要項(全日制)｜埼玉県学事課(学科(コース)別募集人員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -715,6 +758,7 @@ export const PRIVATE_SCHOOL_DETAIL_SAITAMA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.saitama.lg.jp/documents/26360/r8_koukounyuushiyoukou.pdf',
         docTitle: '令和8年度埼玉県私立高等学校入試要項(全日制)｜埼玉県学事課(学科(コース)別募集人員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -729,6 +773,7 @@ export const PRIVATE_SCHOOL_DETAIL_SAITAMA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.saitama.lg.jp/documents/26360/r8_koukounyuushiyoukou.pdf',
         docTitle: '令和8年度埼玉県私立高等学校入試要項(全日制)｜埼玉県学事課(学科(コース)別募集人員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -743,6 +788,7 @@ export const PRIVATE_SCHOOL_DETAIL_SAITAMA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.saitama.lg.jp/documents/26360/r8_koukounyuushiyoukou.pdf',
         docTitle: '令和8年度埼玉県私立高等学校入試要項(全日制)｜埼玉県学事課(学科(コース)別募集人員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
     {
@@ -757,6 +803,7 @@ export const PRIVATE_SCHOOL_DETAIL_SAITAMA: PrivateSchoolDetailFile = {
         url: 'https://www.pref.saitama.lg.jp/documents/26360/r8_koukounyuushiyoukou.pdf',
         docTitle: '令和8年度埼玉県私立高等学校入試要項(全日制)｜埼玉県学事課(学科(コース)別募集人員表)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
       },
     },
   ],

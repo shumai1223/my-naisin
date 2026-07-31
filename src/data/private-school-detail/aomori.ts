@@ -15,6 +15,7 @@ const IKUSHIN_SOURCE = {
   url: 'https://www.ikushin.co.jp/school/pdf/03902.pdf',
   docTitle: '2026年度 高専・私立高校 募集要項【青森県】（(株)育伸社 入試情報課・2025年11月4日現在）',
   fetchedAt: '2026-07-31',
+  sourceTier: 'secondary' as const,
 };
 
 export const PRIVATE_SCHOOL_DETAIL_AOMORI: PrivateSchoolDetailFile = {
@@ -34,6 +35,7 @@ export const PRIVATE_SCHOOL_DETAIL_AOMORI: PrivateSchoolDetailFile = {
         url: 'https://www.aomoriyamada-hs.jp/wp/wp-content/uploads/2025/10/2026-生徒募集要項.pdf',
         docTitle: '令和8年度 生徒募集要項｜青森山田高等学校（学科・コース及び募集人数表・育伸社募集要項PDFの普通科計280+40+40=360と完全一致）',
         fetchedAt: '2026-07-31',
+        sourceTier: 'secondary' as const,
       },
     },
     {
@@ -46,6 +48,7 @@ export const PRIVATE_SCHOOL_DETAIL_AOMORI: PrivateSchoolDetailFile = {
         url: 'https://seiai.hirogaku.ac.jp/wp-content/uploads/2025/09/7a0065b59fd4bf8c38db35fcb343063a.pdf',
         docTitle: '2026（令和8）年度 生徒募集要項｜弘前学院聖愛高等学校（募集人員216名＝推薦入試と一般入試あわせて・育伸社募集要項PDFと完全一致）',
         fetchedAt: '2026-07-31',
+        sourceTier: 'secondary' as const,
       },
     },
     {

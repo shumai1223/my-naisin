@@ -22,6 +22,7 @@ const IKUSHIN_SOURCE = {
   url: 'https://www.ikushin.co.jp/school/pdf/03928.pdf',
   docTitle: '2026年度 高専・私立高校 募集要項【兵庫県】（(株)育伸社 入試情報課・2025年11月4日現在）',
   fetchedAt: '2026-07-31',
+  sourceTier: 'secondary' as const,
 };
 
 export const PRIVATE_SCHOOL_DETAIL_HYOGO: PrivateSchoolDetailFile = {
@@ -37,6 +38,7 @@ export const PRIVATE_SCHOOL_DETAIL_HYOGO: PrivateSchoolDetailFile = {
         url: 'https://www.ikushin.co.jp/school/pdf/03928.pdf',
         docTitle: '2026年度 高専・私立高校 募集要項【兵庫県】｜(株)育伸社入試情報課(普通科単独・専願/併願とも「約20」と記載)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'secondary' as const,
       },
     },
     {
@@ -49,6 +51,7 @@ export const PRIVATE_SCHOOL_DETAIL_HYOGO: PrivateSchoolDetailFile = {
         url: 'https://www.ikushin.co.jp/school/pdf/03928.pdf',
         docTitle: '2026年度 高専・私立高校 募集要項【兵庫県】｜(株)育伸社入試情報課(国際文化科(女子)単独・専願・併願とも15名)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'secondary' as const,
       },
     },
     {
@@ -61,6 +64,7 @@ export const PRIVATE_SCHOOL_DETAIL_HYOGO: PrivateSchoolDetailFile = {
         url: 'https://www.ikushin.co.jp/school/pdf/03928.pdf',
         docTitle: '2026年度 高専・私立高校 募集要項【兵庫県】｜(株)育伸社入試情報課(普通科(アドバンストコース、男子)単独・一般(専願)「約25(含グローバル・ファウンデーション)」)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'secondary' as const,
       },
     },
     {
@@ -76,6 +80,7 @@ export const PRIVATE_SCHOOL_DETAIL_HYOGO: PrivateSchoolDetailFile = {
         url: 'https://www.ikushin.co.jp/school/pdf/03928.pdf',
         docTitle: '2026年度 高専・私立高校 募集要項【兵庫県】｜(株)育伸社入試情報課(ソフィアコース・ルミエールコースとも専願/併願で「約35」と記載)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'secondary' as const,
       },
     },
     {
@@ -91,6 +96,7 @@ export const PRIVATE_SCHOOL_DETAIL_HYOGO: PrivateSchoolDetailFile = {
         url: 'https://www.ikushin.co.jp/school/pdf/03928.pdf',
         docTitle: '2026年度 高専・私立高校 募集要項【兵庫県】｜(株)育伸社入試情報課(プレミアムステージ80名・スタンダードステージ200名、専願/併願とも同数)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'secondary' as const,
       },
     },
     {
@@ -103,6 +109,7 @@ export const PRIVATE_SCHOOL_DETAIL_HYOGO: PrivateSchoolDetailFile = {
         url: 'https://www.ikushin.co.jp/school/pdf/03928.pdf',
         docTitle: '2026年度 高専・私立高校 募集要項【兵庫県】｜(株)育伸社入試情報課(A方式(一般)「約40(内B方式(推薦)約30)」・B方式はA方式定員の内数)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'secondary' as const,
       },
     },
     {
@@ -436,6 +443,7 @@ export const PRIVATE_SCHOOL_DETAIL_HYOGO: PrivateSchoolDetailFile = {
         url: 'https://www.ikushin.co.jp/school/pdf/03928.pdf',
         docTitle: '2026年度 高専・私立高校 募集要項【兵庫県】｜(株)育伸社入試情報課(普通科・一般「約40」。系列中学校からの内部進学者を除く募集枠の可能性あり)',
         fetchedAt: '2026-07-31',
+        sourceTier: 'secondary' as const,
       },
     },
     {
@@ -468,6 +476,7 @@ export const PRIVATE_SCHOOL_DETAIL_HYOGO: PrivateSchoolDetailFile = {
         url: 'https://www.ikushin.co.jp/school/pdf/03928.pdf',
         docTitle: '2026年度 高専・私立高校 募集要項【兵庫県】｜(株)育伸社入試情報課(文理探究コース・A日程(専願I・II)100名を採用。B日程(専願III・併願)15名は別枠の可能性があり合算せず)',
         fetchedAt: '2026-07-31',
+        sourceTier: 'secondary' as const,
       },
     },
     {
@@ -540,6 +549,7 @@ export const PRIVATE_SCHOOL_DETAIL_HYOGO: PrivateSchoolDetailFile = {
         url: 'https://www.ikuno.ed.jp/admissions/highschool/',
         docTitle: '生野学園 高等学校募集要項（公式サイト・第一学年33名。公式サイトが既に2027年度サイクルへ移行していたため2027年度の値をそのまま採用）',
         fetchedAt: '2026-07-31',
+        sourceTier: 'primary' as const,
       },
     },
   ],
