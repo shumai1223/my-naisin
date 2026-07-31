@@ -923,13 +923,13 @@ describe('PRIVATE_SCHOOL_DETAIL_KANAGAWA(大都市圏5県・育伸社募集要�
     }
   });
 
-  it('収録51校・スキップ21校で参照台帳83校のうち残り11校は未着手(重複なし)', () => {
+  it('収録51校・スキップ26校で参照台帳83校のうち残り6校は未着手(重複なし)', () => {
     const allCodes = SCHOOLS_PRIVATE_KANAGAWA.schools.map((s) => s.code);
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_KANAGAWA, allCodes);
     expect(result.duplicates).toEqual([]);
-    expect(result.missing).toHaveLength(11);
+    expect(result.missing).toHaveLength(6);
     expect(PRIVATE_SCHOOL_DETAIL_KANAGAWA.schools.length).toBe(51);
-    expect(PRIVATE_SCHOOL_DETAIL_KANAGAWA.skipped.length).toBe(21);
+    expect(PRIVATE_SCHOOL_DETAIL_KANAGAWA.skipped.length).toBe(26);
   });
 });
 
