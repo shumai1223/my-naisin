@@ -173,6 +173,40 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
         fetchedAt: '2026-07-31',
       },
     },
+    {
+      schoolCode: 'D127310000888',
+      schoolName: '大阪商業大学高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: 'グローバル商大コース(含内部)', capacity: 160 },
+        { courseName: '文理進学コース', capacity: 60 },
+        { courseName: 'スポーツ専修コース(指定クラブあり)', capacity: 70 },
+        { courseName: 'デザイン美術コース', capacity: 35 },
+      ],
+      totalCapacity: 325,
+      source: {
+        url: 'https://www.daishodai-h.ed.jp/examination/admission/',
+        docTitle:
+          '大阪商業大学高等学校(本校・東大阪市) 入試情報ページ' +
+          '(育伸社PDF令和8年度分と同一数値160/60/70/35を公式サイト側でも確認・大阪商業大学堺高等学校とは別法人の別校)',
+        fetchedAt: '2026-07-31',
+      },
+    },
+    {
+      schoolCode: 'D127310000879',
+      schoolName: '大商学園高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通科(特進Ⅰ類・特進Ⅱ類・情報クリエイティブ・進学の4コース計、コース別内訳非公表)', capacity: 320 },
+        { courseName: '商業科', capacity: 40 },
+      ],
+      totalCapacity: 360,
+      source: {
+        url: 'https://www.daisho.ac.jp/admission/examination/',
+        docTitle: '大商学園高等学校(豊中市) 令和8年度入試 募集人員ページ',
+        fetchedAt: '2026-07-31',
+      },
+    },
   ],
   skipped: [],
 };

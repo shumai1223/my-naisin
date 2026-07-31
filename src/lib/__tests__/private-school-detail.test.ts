@@ -935,19 +935,19 @@ describe('PRIVATE_SCHOOL_DETAIL_KANAGAWA(大都市圏5県・育伸社募集要�
   });
 });
 
-describe('PRIVATE_SCHOOL_DETAIL_OSAKA(大都市圏5県の3県目・育伸社募集要項PDF1ページ目+公式サイト個別確認で12校を収録・進行中・参照台帳107校)', () => {
+describe('PRIVATE_SCHOOL_DETAIL_OSAKA(大都市圏5県の3県目・育伸社募集要項PDF1ページ目+公式サイト個別確認で14校を収録・進行中・参照台帳107校)', () => {
   it('収録した学校は全てcourses合計とtotalCapacityが一致する', () => {
     for (const school of PRIVATE_SCHOOL_DETAIL_OSAKA.schools) {
       expect(checkCourseCapacitySum(school)).toBe(true);
     }
   });
 
-  it('収録12校・スキップ0校で参照台帳107校のうち残り95校は未着手(重複なし)', () => {
+  it('収録14校・スキップ0校で参照台帳107校のうち残り93校は未着手(重複なし)', () => {
     const allCodes = SCHOOLS_PRIVATE_OSAKA.schools.map((s) => s.code);
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_OSAKA, allCodes);
     expect(result.duplicates).toEqual([]);
-    expect(result.missing).toHaveLength(95);
-    expect(PRIVATE_SCHOOL_DETAIL_OSAKA.schools.length).toBe(12);
+    expect(result.missing).toHaveLength(93);
+    expect(PRIVATE_SCHOOL_DETAIL_OSAKA.schools.length).toBe(14);
     expect(PRIVATE_SCHOOL_DETAIL_OSAKA.skipped.length).toBe(0);
   });
 });
