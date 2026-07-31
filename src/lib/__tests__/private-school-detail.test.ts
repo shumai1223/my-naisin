@@ -42,6 +42,7 @@ import { PRIVATE_SCHOOL_DETAIL_KYOTO } from '@/data/private-school-detail/kyoto'
 import { PRIVATE_SCHOOL_DETAIL_KANAGAWA } from '@/data/private-school-detail/kanagawa';
 import { PRIVATE_SCHOOL_DETAIL_OSAKA } from '@/data/private-school-detail/osaka';
 import { PRIVATE_SCHOOL_DETAIL_AICHI } from '@/data/private-school-detail/aichi';
+import { PRIVATE_SCHOOL_DETAIL_TOKYO } from '@/data/private-school-detail/tokyo';
 import { PRIVATE_SCHOOL_DETAIL_BY_PREFECTURE, PRIVATE_SCHOOL_DETAIL_FILES } from '@/data/private-school-detail';
 import { SCHOOLS_PRIVATE_TOTTORI } from '@/data/schools-private/tottori';
 import { SCHOOLS_PRIVATE_FUKUI } from '@/data/schools-private/fukui';
@@ -86,6 +87,7 @@ import { SCHOOLS_PRIVATE_KYOTO } from '@/data/schools-private/kyoto';
 import { SCHOOLS_PRIVATE_KANAGAWA } from '@/data/schools-private/kanagawa';
 import { SCHOOLS_PRIVATE_OSAKA } from '@/data/schools-private/osaka';
 import { SCHOOLS_PRIVATE_AICHI } from '@/data/schools-private/aichi';
+import { SCHOOLS_PRIVATE_TOKYO } from '@/data/schools-private/tokyo';
 
 describe('checkCourseCapacitySum', () => {
   const base: PrivateSchoolDetail = {
@@ -971,8 +973,25 @@ describe('PRIVATE_SCHOOL_DETAIL_AICHI(大都市圏5県の4県目・育伸社募�
   });
 });
 
+describe('PRIVATE_SCHOOL_DETAIL_TOKYO(大都市圏5県の最後・育伸社募集要項PDF1ページ目のみ着手で241校中2校を収録・スキップ7校・進行中)', () => {
+  it('収録した学校は全てcourses合計とtotalCapacityが一致する', () => {
+    for (const school of PRIVATE_SCHOOL_DETAIL_TOKYO.schools) {
+      expect(checkCourseCapacitySum(school)).toBe(true);
+    }
+  });
+
+  it('収録2校・スキップ7校で参照台帳241校のうち残り232校は未着手(重複なし)', () => {
+    const allCodes = SCHOOLS_PRIVATE_TOKYO.schools.map((s) => s.code);
+    const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_TOKYO, allCodes);
+    expect(result.duplicates).toEqual([]);
+    expect(result.missing).toHaveLength(232);
+    expect(PRIVATE_SCHOOL_DETAIL_TOKYO.schools.length).toBe(2);
+    expect(PRIVATE_SCHOOL_DETAIL_TOKYO.skipped.length).toBe(7);
+  });
+});
+
 describe('private-school-detail index', () => {
-  it('aichi/akita/aomori/chiba/fukui/fukuoka/gifu/gunma/hiroshima/hyogo/ibaraki/ishikawa/iwate/kagawa/kagoshima/kanagawa/kochi/kumamoto/kyoto/mie/miyagi/miyazaki/nagano/nagasaki/nara/niigata/oita/okayama/okinawa/osaka/saga/saitama/shiga/shimane/shizuoka/tochigi/tokushima/tottori/toyama/wakayama/yamagata/yamaguchi/yamanashiの43県が集約されている', () => {
+  it('aichi/akita/aomori/chiba/fukui/fukuoka/gifu/gunma/hiroshima/hyogo/ibaraki/ishikawa/iwate/kagawa/kagoshima/kanagawa/kochi/kumamoto/kyoto/mie/miyagi/miyazaki/nagano/nagasaki/nara/niigata/oita/okayama/okinawa/osaka/saga/saitama/shiga/shimane/shizuoka/tochigi/tokushima/tokyo/tottori/toyama/wakayama/yamagata/yamaguchi/yamanashiの44都県が集約されている', () => {
     expect(Object.keys(PRIVATE_SCHOOL_DETAIL_BY_PREFECTURE).sort()).toEqual([
       'aichi',
       'akita',
@@ -1011,6 +1030,7 @@ describe('private-school-detail index', () => {
       'shizuoka',
       'tochigi',
       'tokushima',
+      'tokyo',
       'tottori',
       'toyama',
       'wakayama',
@@ -1018,6 +1038,6 @@ describe('private-school-detail index', () => {
       'yamaguchi',
       'yamanashi',
     ]);
-    expect(PRIVATE_SCHOOL_DETAIL_FILES).toHaveLength(43);
+    expect(PRIVATE_SCHOOL_DETAIL_FILES).toHaveLength(44);
   });
 });
