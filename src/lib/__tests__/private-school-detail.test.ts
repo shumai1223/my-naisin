@@ -1,4 +1,6 @@
 import { checkCourseCapacitySum, findDuplicateOrMissingCodes, type PrivateSchoolDetail } from '@/lib/private-school-detail';
+import { PRIVATE_SCHOOL_DETAIL_FUKUSHIMA } from '@/data/private-school-detail/fukushima';
+import { SCHOOLS_PRIVATE_FUKUSHIMA } from '@/data/schools-private/fukushima';
 import { PRIVATE_SCHOOL_DETAIL_TOTTORI } from '@/data/private-school-detail/tottori';
 import { PRIVATE_SCHOOL_DETAIL_FUKUI } from '@/data/private-school-detail/fukui';
 import { PRIVATE_SCHOOL_DETAIL_YAMANASHI } from '@/data/private-school-detail/yamanashi';
@@ -990,8 +992,28 @@ describe('PRIVATE_SCHOOL_DETAIL_TOKYO(大都市圏5県の最後・育伸社募�
   });
 });
 
+describe('PRIVATE_SCHOOL_DETAIL_FUKUSHIMA(福島県庁「私立学校名簿」1PDFで全19校を一括処理・学科別入学定員=1学年募集定員を採用)', () => {
+  it('収録した学校は全てcourses合計とtotalCapacityが一致する', () => {
+    for (const school of PRIVATE_SCHOOL_DETAIL_FUKUSHIMA.schools) {
+      expect(checkCourseCapacitySum(school)).toBe(true);
+    }
+  });
+
+  it('schools-private/fukushima.tsの全19校がschoolsまたはskippedのいずれかで網羅されている(重複・欠落なし)', () => {
+    const allCodes = SCHOOLS_PRIVATE_FUKUSHIMA.schools.map((s) => s.code);
+    const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_FUKUSHIMA, allCodes);
+    expect(result.duplicates).toEqual([]);
+    expect(result.missing).toEqual([]);
+  });
+
+  it('収録17校+スキップ2校(定員欄空白1校+通信制のみ1校)で参照台帳の19校と一致する', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_FUKUSHIMA.schools.length).toBe(17);
+    expect(PRIVATE_SCHOOL_DETAIL_FUKUSHIMA.skipped.length).toBe(2);
+  });
+});
+
 describe('private-school-detail index', () => {
-  it('aichi/akita/aomori/chiba/fukui/fukuoka/gifu/gunma/hiroshima/hyogo/ibaraki/ishikawa/iwate/kagawa/kagoshima/kanagawa/kochi/kumamoto/kyoto/mie/miyagi/miyazaki/nagano/nagasaki/nara/niigata/oita/okayama/okinawa/osaka/saga/saitama/shiga/shimane/shizuoka/tochigi/tokushima/tokyo/tottori/toyama/wakayama/yamagata/yamaguchi/yamanashiの44都県が集約されている', () => {
+  it('aichi/akita/aomori/chiba/fukui/fukuoka/fukushima/gifu/gunma/hiroshima/hyogo/ibaraki/ishikawa/iwate/kagawa/kagoshima/kanagawa/kochi/kumamoto/kyoto/mie/miyagi/miyazaki/nagano/nagasaki/nara/niigata/oita/okayama/okinawa/osaka/saga/saitama/shiga/shimane/shizuoka/tochigi/tokushima/tokyo/tottori/toyama/wakayama/yamagata/yamaguchi/yamanashiの45都県が集約されている', () => {
     expect(Object.keys(PRIVATE_SCHOOL_DETAIL_BY_PREFECTURE).sort()).toEqual([
       'aichi',
       'akita',
@@ -999,6 +1021,7 @@ describe('private-school-detail index', () => {
       'chiba',
       'fukui',
       'fukuoka',
+      'fukushima',
       'gifu',
       'gunma',
       'hiroshima',
@@ -1038,6 +1061,6 @@ describe('private-school-detail index', () => {
       'yamaguchi',
       'yamanashi',
     ]);
-    expect(PRIVATE_SCHOOL_DETAIL_FILES).toHaveLength(44);
+    expect(PRIVATE_SCHOOL_DETAIL_FILES).toHaveLength(45);
   });
 });
