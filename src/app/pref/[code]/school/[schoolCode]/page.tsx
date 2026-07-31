@@ -4,15 +4,9 @@ import { notFound } from 'next/navigation';
 import { ChevronRight, Home, GraduationCap, MapPin, AlertTriangle } from 'lucide-react';
 
 import { getPrefectureByCode } from '@/lib/prefectures';
-import { SCHOOL_MASTER_BY_PREFECTURE } from '@/data/schools';
-import { COMPETITION_RATE_BY_PREFECTURE } from '@/data/competition-rates';
 import { COMPETITION_RATE_HISTORY_BY_PREFECTURE } from '@/data/competition-rate-history';
-import {
-  buildSchoolPageDataForPrefecture,
-  selectNearbySchools,
-  getSchoolCategoryTrends,
-  type SchoolPageData,
-} from '@/lib/school-page-data';
+import { selectNearbySchools, getSchoolCategoryTrends } from '@/lib/school-page-data';
+import { getPrefectureSchoolPageData } from '@/lib/school-page-lookup';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 
 /**
@@ -30,14 +24,6 @@ import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
  */
 
 const PILOT_PREFECTURE_CODES = ['tokyo'];
-
-function getPrefectureSchoolPageData(code: string): { schools: SchoolPageData[] } | null {
-  const master = SCHOOL_MASTER_BY_PREFECTURE[code];
-  const rates = COMPETITION_RATE_BY_PREFECTURE[code];
-  if (!master || !rates) return null;
-  const { schools } = buildSchoolPageDataForPrefecture(master.schools, rates.records);
-  return { schools };
-}
 
 interface PageProps {
   params: Promise<{ code: string; schoolCode: string }>;

@@ -14,6 +14,7 @@ import {
 import { PREFECTURES, getPrefectureByCode } from '@/lib/prefectures';
 import { PrintButton } from '@/components/PrintButton';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
+import { getPrefectureSchoolPageData } from '@/lib/school-page-lookup';
 
 // 県別の落とし穴・注意点データ
 const PREFECTURE_PITFALLS: Record<string, { title: string; items: string[] }> = {
@@ -519,6 +520,14 @@ export default async function PrefecturePage({ params }: PageProps) {
 
   const pitfalls = PREFECTURE_PITFALLS[code] || DEFAULT_PITFALLS;
 
+  // Λ+3: 個別学校ページ(Λ-2)への内部リンクハブ。学校ページ自体は品質ゲート③(近隣校リンク)の
+  // noindex解除判断が👤裁定待ちのため、ここでは孤児化防止のリンクのみ追加する
+  // (このページ自体はindex対象のまま・リンク先が現時点でnoindexでも問題ない)。
+  const schoolPageData = getPrefectureSchoolPageData(code);
+  const schoolsSortedByName = schoolPageData
+    ? [...schoolPageData.schools].sort((a, b) => a.schoolName.localeCompare(b.schoolName, 'ja'))
+    : [];
+
   // 計算式の説明を生成
   const getFormulaExplanation = () => {
     const parts: string[] = [];
@@ -684,6 +693,31 @@ export default async function PrefecturePage({ params }: PageProps) {
               ※ 制度は年度によって変更される場合があります。最新情報は上記公式サイトでご確認ください。
             </p>
           </section>
+
+          {/* 個別学校ページへのハブリンク(Λ+3・孤児化防止) */}
+          {schoolsSortedByName.length > 0 && (
+            <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm print:hidden">
+              <h2 className="mb-1 flex items-center gap-2 text-lg font-bold text-slate-800">
+                <GraduationCap className="h-5 w-5 text-blue-500" />
+                {prefecture.name}の高校別・入試倍率
+              </h2>
+              <p className="mb-4 text-xs text-slate-500">
+                学校ごとの今季入試倍率・募集人員のページです（{schoolsSortedByName.length}校・建設中）。
+              </p>
+              <div className="grid max-h-96 gap-1.5 overflow-y-auto pr-1 sm:grid-cols-2">
+                {schoolsSortedByName.map((s) => (
+                  <Link
+                    key={s.schoolCode}
+                    href={`/pref/${prefecture.code}/school/${s.schoolCode}`}
+                    className="flex items-center justify-between rounded-lg px-3 py-2 text-sm hover:bg-slate-50"
+                  >
+                    <span className="truncate text-slate-700">{s.schoolName}</span>
+                    <span className="ml-2 shrink-0 text-slate-400">{s.overallRate}倍</span>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          )}
 
           {/* CTA - 計算機へ */}
           <section className="rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 p-6 text-center text-white shadow-lg print:hidden">
