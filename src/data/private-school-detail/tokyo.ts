@@ -188,6 +188,15 @@
  * 20(女子部こども教育コース、推薦10+一般10)は推薦一般で同じ数値が繰り返されるが計Xラベルなしの
  * プレーン見出しのため4頁目の基本ルールで加算。その他は通常の複数コース加算: 藤村女子20(単一
  * ブロック)・文京学院大学女子125(理数キャリアT25+理数キャリアA25+国際教養T25+国際教養A50)。
+ * **18頁目(2026-07-31追記)**: 堀越は総合コース・体育コース・トレイトコースの3コース全てで
+ * 「普通科計180(推薦単願・一般AB共通枠)」が完全一致で反復=駒込と同型のため学校全体で単一の180
+ * (加算せず)。明星学園120・明治大学付属世田谷160(2026年に日本学園から校名変更・男子校→共学化)
+ * は推薦一般で同じ数値が繰り返されるが計Xラベルなしのプレーン見出しのため4頁目の基本ルールで加算。
+ * 明治学院165は推薦60(男女共通枠)+一般①75(男女共通枠)+一般②30(男女共通枠)の3段階全てが異なる
+ * 数値のため全加算。その他は通常の複数コース加算: 豊南160(特進20+選抜40+進学100)・朋優学院395
+ * (TG25[一般のみ]+AG[推薦40+一般130]+SG[推薦60+一般140])・保善300(特別進学30+大進選抜60+
+ * 大学進学210)・武蔵野160(特進ステージ30+進学ステージ130)・武蔵野大学110(ハイグレード35+
+ * PBLインターナショナル30+本科45)・明治学院東村山120(推薦50[運動クラブ約10を含む]+一般70)。
  * 残り7校はWebSearchで個別調査し完全中高一貫(高校からの外部募集なし)と確認できたためスキップ:
  * 暁星・大妻・雙葉・共立女子(2006年度に高校募集停止)・三輪田学園・女子学院・白百合学園。
  * いずれも「女子御三家(女子学院・雙葉)」「男子伝統校(暁星)」等の著名中高一貫校で、
@@ -1910,6 +1919,125 @@ export const PRIVATE_SCHOOL_DETAIL_TOKYO: PrivateSchoolDetailFile = {
         { courseName: 'こども教育コース(女子部、一般①・②共通枠)', capacity: 10 },
       ],
       totalCapacity: 20,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311600127',
+      schoolName: '豊南高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '特進コース(A推薦・B/C推薦①②・一般①②共通枠)', capacity: 20 },
+        { courseName: '選抜コース(A推薦・B/C推薦①②・一般①②共通枠)', capacity: 40 },
+        { courseName: '進学コース(A推薦・B/C推薦①②・一般①②共通枠)', capacity: 100 },
+      ],
+      totalCapacity: 160,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310900064',
+      schoolName: '朋優学院高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: 'TGコース(一般①②③共通枠、推薦の掲載なし)', capacity: 25 },
+        { courseName: 'AGコース(推薦)', capacity: 40 },
+        { courseName: 'AGコース(一般①②③共通枠)', capacity: 130 },
+        { courseName: 'SGコース(推薦)', capacity: 60 },
+        { courseName: 'SGコース(一般①②③共通枠)', capacity: 140 },
+      ],
+      totalCapacity: 395,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310400050',
+      schoolName: '保善高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '特別進学クラス(男、単願推薦・併願推薦・一般A・B・C共通枠)', capacity: 30 },
+        { courseName: '大進選抜クラス(男、単願推薦・併願推薦・一般A・B・C共通枠)', capacity: 60 },
+        { courseName: '大学進学クラス(男、単願推薦・併願推薦・一般A・B・C共通枠)', capacity: 210 },
+      ],
+      totalCapacity: 300,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311400067',
+      schoolName: '堀越高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        {
+          courseName: '総合コース・体育コース・トレイトコース(推薦単願・一般A・B共通枠、普通科計)',
+          capacity: 180,
+        },
+      ],
+      totalCapacity: 180,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113320400031',
+      schoolName: '明星学園高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(推薦)', capacity: 60 },
+        { courseName: '普通(一般・併優共通枠)', capacity: 60 },
+      ],
+      totalCapacity: 120,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311700117',
+      schoolName: '武蔵野高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '特進ステージ(推薦A・B・併優・一般共通枠)', capacity: 30 },
+        { courseName: '進学ステージ(推薦A・B・併優・一般共通枠)', capacity: 130 },
+      ],
+      totalCapacity: 160,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113322900023',
+      schoolName: '武蔵野大学高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: 'ハイグレードコース(A推薦・B推薦・併優・一般共通枠)', capacity: 35 },
+        { courseName: 'PBLインターナショナルコース(A推薦・B推薦・併優・一般共通枠)', capacity: 30 },
+        { courseName: '本科コース(A推薦・B推薦・併優・一般共通枠)', capacity: 45 },
+      ],
+      totalCapacity: 110,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310300122',
+      schoolName: '明治学院高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(推薦、男女共通枠)', capacity: 60 },
+        { courseName: '普通(一般①、男女共通枠)', capacity: 75 },
+        { courseName: '普通(一般②、男女共通枠)', capacity: 30 },
+      ],
+      totalCapacity: 165,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113321300021',
+      schoolName: '明治学院東村山高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(推薦、約。運動クラブ約10を含む)', capacity: 50 },
+        { courseName: '普通(一般、約)', capacity: 70 },
+      ],
+      totalCapacity: 120,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311200238',
+      schoolName: '明治大学付属世田谷高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(推薦)', capacity: 80 },
+        { courseName: '普通(一般)', capacity: 80 },
+      ],
+      totalCapacity: 160,
       source: IKUSHIN_TOKYO_SOURCE,
     },
   ],
