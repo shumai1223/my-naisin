@@ -19,7 +19,11 @@
  * 日付パターンで裏取りできる数値を特定できず今回は見送り(次回、日付パターン照合を
  * 最初から徹底して再挑戦する)。6ページ目から聖園女学院・三浦学苑を追加。法政大学第二の
  * ブロック(150/150/50/50)は直後の森村学園との境界を完全には確証できておらず、次回の
- * 日付パターン照合で再検算する必要がある(該当エントリのsourceに注記済み)。
+ * 日付パターン照合で再検算する必要がある(該当エントリのsourceに注記済み)。続けて日付
+ * パターン照合と公知のコース名照合を併用し横須賀学院・山手学院・横浜翠陵・横浜商科大学・
+ * 横浜高等学校の5校を追加。横浜学園は「S選抜コース・A進学コース」という横須賀学院と
+ * 酷似したコース構成のブロックが別に存在し、どちらの学校の実際の公表コース名と一致するか
+ * 確信が持てなかったため今回は見送り(横須賀学院側を公知の実在コース名と照合し確度高く採用)。
  * **2026-07-31訂正**: 桐蔭学園の数値を当初「湘南工科大学附属」として誤収録していたことが
  * 判明(4ページ目の桐蔭学園ブロックと3ページ目の湘南工科大学附属ブロックを取り違えた)。
  * schoolCodeを桐蔭学園の正しいコードへ修正し、湘南工科大学附属は正しい数値が別途確認できる
@@ -449,6 +453,60 @@ export const PRIVATE_SCHOOL_DETAIL_KANAGAWA: PrivateSchoolDetailFile = {
       ],
       totalCapacity: 394,
       source: IKUSHIN_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114320100042',
+      schoolName: '横須賀学院高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [{ courseName: 'S選抜コース・A進学コース(A進学・S選抜計、推薦80+書類選考120+オープンⅡ10)', capacity: 210 }],
+      totalCapacity: 210,
+      source: IKUSHIN_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114310000277',
+      schoolName: '山手学院高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [{ courseName: '進学コース・特別進学コース(普通科計、A日程併願80+A日程オープン40+B日程併願30+B日程オープン20)', capacity: 170 }],
+      totalCapacity: 170,
+      source: IKUSHIN_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114310000339',
+      schoolName: '横浜翠陵高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '特進フロンティアコース(推薦30+一般書類20)', capacity: 50 },
+        { courseName: '国際語(推薦130+一般書類140)', capacity: 270 },
+      ],
+      totalCapacity: 320,
+      source: IKUSHIN_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114310000286',
+      schoolName: '横浜商科大学高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '特進コース(推薦10+一般書類選考10+学科試験15+オープン5)', capacity: 40 },
+        { courseName: '進学コース(推薦140+一般書類選考60+学科試験140+オープン10)', capacity: 350 },
+        { courseName: '総合ビジネス(旧商業科、推薦40+一般書類選考40+学科試験100+オープン10)', capacity: 190 },
+      ],
+      totalCapacity: 580,
+      source: IKUSHIN_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114310000204',
+      schoolName: '横浜高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: 'プレミアコース(推薦100)', capacity: 100 },
+        { courseName: 'アドバンスコース(推薦350)', capacity: 350 },
+        { courseName: 'アクティブコース(推薦160)', capacity: 160 },
+      ],
+      totalCapacity: 610,
+      source: {
+        ...IKUSHIN_KANAGAWA_SOURCE,
+        docTitle: IKUSHIN_KANAGAWA_SOURCE.docTitle + '(推薦以降の一般各方式は全て↓で同一数値を継承)',
+      },
     },
   ],
   skipped: [
