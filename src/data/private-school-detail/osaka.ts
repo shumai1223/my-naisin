@@ -222,6 +222,62 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
         fetchedAt: '2026-07-31',
       },
     },
+    {
+      schoolCode: 'D127310000922',
+      schoolName: '大阪産業大学附属高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '特進コースS(専願・併願共通枠)', capacity: 40 },
+        { courseName: '特進コースⅠ(専願・併願共通枠)', capacity: 80 },
+        { courseName: '特進コースⅡ(専願・併願共通枠)', capacity: 80 },
+        { courseName: '進学コース(専願・併願共通枠)', capacity: 240 },
+        { courseName: 'スポーツコース(男子専願のみ)', capacity: 80 },
+        { courseName: '国際(グローバルコース)(専願・併願共通枠)', capacity: 80 },
+        { courseName: '国際(情報コミュニケーションコース)(専願・併願共通枠)', capacity: 80 },
+      ],
+      totalCapacity: 680,
+      source: {
+        ...IKUSHIN_OSAKA_SOURCE,
+        docTitle:
+          IKUSHIN_OSAKA_SOURCE.docTitle +
+          '(普通科520+国際科160=総募集人員680名。公式サイト(osaka-sandai.ed.jp)由来の第三者要約とも独立に数値一致確認)',
+      },
+    },
+    {
+      schoolCode: 'D127310000432',
+      schoolName: '大阪暁光高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通科(教育探究コース、専願・併願共通枠)', capacity: 35 },
+        { courseName: '普通科(幼児教育コース、専願・併願共通枠)', capacity: 70 },
+        { courseName: '普通科(進学総合コース、専願・併願共通枠)', capacity: 105 },
+        { courseName: '看護科(専願のみ)', capacity: 70 },
+      ],
+      totalCapacity: 280,
+      source: {
+        ...IKUSHIN_OSAKA_SOURCE,
+        docTitle: IKUSHIN_OSAKA_SOURCE.docTitle + '(第三者要約とも独立に数値一致確認)',
+      },
+    },
+    {
+      schoolCode: 'D127310000600',
+      schoolName: '大阪国際高等学校',
+      fiscalYearLabel: '2027年度',
+      courses: [
+        { courseName: 'スーパー文理探究コース(プログラムα)', capacity: 70 },
+        { courseName: 'スーパー文理探究コース(プログラムβ)', capacity: 140 },
+        { courseName: '国際バカロレアコース', capacity: 15 },
+        { courseName: '未来探究コース(大阪国際大学内部進学コース)・幼児保育進学コース(大阪国際大学短期大学部内部進学コース)、2コース計', capacity: 70 },
+      ],
+      totalCapacity: 295,
+      source: {
+        url: 'https://www.kokusai-h.oiu.ed.jp/high/admission/2027_high_youkou.pdf',
+        docTitle:
+          '大阪国際高等学校(守口市) 2027年度生徒募集要項' +
+          '(公式サイトが既に2027年度サイクルへ移行済みのため最新公表値として収録。未来探究/幼児保育進学の2コースは内訳非公表)',
+        fetchedAt: '2026-07-31',
+      },
+    },
   ],
   skipped: [],
 };
