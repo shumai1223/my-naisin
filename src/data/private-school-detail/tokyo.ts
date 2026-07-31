@@ -70,6 +70,17 @@
  * =320、いずれも一般②の「全クラス計20」という異なる数値は2次募集の補充枠と判断し未算入)・
  * 駒澤大学(単一ブロック250)も収録。国際基督教大学は帰国生入試(推薦・書類選考・学力試験の複数
  * ルート)が主体で一般枠も含め加算方法が特殊すぎるため今回は見送り。
+ * **7頁目(2026-07-31追記)**: 実践学園は特別進学・リベラルアーツ&サイエンス・文理進学・
+ * スポーツサイエンスの4コース全てで「推薦=普通科計130・一般=普通科計140」という2つの数値が
+ * 完全一致で反復されており、駒込(4コース反復)と同型の強い証拠のため学校全体で推薦130+一般140
+ * =270の共有クォータと判断。桜丘・サレジアン国際学園(北区、育伸社PDFのOCR誤読で「サレジオ」と
+ * 見えたが正しくは学校コード一覧上「サレジアン国際学園高等学校」)・品川エトワール女子・
+ * 品川翔英は単一の↓共有クォータブロックで明瞭だったため収録(105/40/150/160)。品川学藝は
+ * 普通/音楽の2つの独立した課程がそれぞれ単一ブロックで50ずつ(=100、両者は別課程なので加算)。
+ * 芝浦工業大学附属は推薦25+一般25=50(4頁目の基本ルール)。芝国際は最難関選抜コース(推薦・一般
+ * 共通枠5、帰国生1・2回は若干のため未算入)+国際コース(推薦15+一般10=25、帰国生1回は若干でない
+ * 明示数値5があったが国際系学校の帰国生ルートは主要選抜として扱いが特殊なため一貫して未算入とし
+ * 一般化)=30。
  * 残り7校はWebSearchで個別調査し完全中高一貫(高校からの外部募集なし)と確認できたためスキップ:
  * 暁星・大妻・雙葉・共立女子(2006年度に高校募集停止)・三輪田学園・女子学院・白百合学園。
  * いずれも「女子御三家(女子学院・雙葉)」「男子伝統校(暁星)」等の著名中高一貫校で、
@@ -534,6 +545,107 @@ export const PRIVATE_SCHOOL_DETAIL_TOKYO: PrivateSchoolDetailFile = {
         { courseName: '食物調理(推薦・一般①②共通枠)', capacity: 20 },
       ],
       totalCapacity: 180,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311700028',
+      schoolName: '桜丘高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: 'S(スーパーアカデミック)コース(単願推薦・併願推薦Ⅰ・Ⅱ共通枠)', capacity: 10 },
+        { courseName: 'K(インターナショナルリベラルアーツ)コース(単願推薦・併願推薦Ⅰ・Ⅱ共通枠)', capacity: 10 },
+        { courseName: 'A(アカデミック)コース(単願推薦・併願推薦Ⅰ・Ⅱ共通枠)', capacity: 85 },
+      ],
+      totalCapacity: 105,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311700073',
+      schoolName: 'サレジアン国際学園高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '本科コース(A推薦・B推薦・併優一般共通枠)', capacity: 10 },
+        { courseName: 'インターナショナルコース(SG)(A推薦・B推薦・併優一般共通枠)', capacity: 10 },
+        { courseName: 'インターナショナルコース(AG)(A推薦・B推薦・併優一般共通枠)', capacity: 20 },
+      ],
+      totalCapacity: 40,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311400012',
+      schoolName: '実践学園高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        {
+          courseName: '特別進学・リベラルアーツ&サイエンス・文理進学・スポーツサイエンスの4コース(推薦共通枠、普通科計)',
+          capacity: 130,
+        },
+        {
+          courseName: '特別進学・リベラルアーツ&サイエンス・文理進学・スポーツサイエンスの4コース(一般①②共通枠、普通科計)',
+          capacity: 140,
+        },
+      ],
+      totalCapacity: 270,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310900082',
+      schoolName: '品川エトワール女子高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '国際キャリアコース(女、A・C推薦・一般①②共通枠)', capacity: 25 },
+        { courseName: 'マルチメディア表現コース(女、A・C推薦・一般①②共通枠)', capacity: 30 },
+        { courseName: '保育コース(女、A・C推薦・一般①②共通枠)', capacity: 20 },
+        { courseName: 'キャリアデザインコース(女、A・C推薦・一般①②共通枠)', capacity: 75 },
+      ],
+      totalCapacity: 150,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310900073',
+      schoolName: '品川学藝高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(A推薦・B推薦・一般併優共通枠)', capacity: 50 },
+        { courseName: '音楽(A推薦・B推薦・一般併優共通枠)', capacity: 50 },
+      ],
+      totalCapacity: 100,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310900019',
+      schoolName: '品川翔英高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '難関進学コース(推薦・一般①②共通枠)', capacity: 20 },
+        { courseName: '国際ADVANCEDコース・国際STANDARDコース(推薦・一般①②共通枠)', capacity: 20 },
+        { courseName: '特別進学コース(推薦・一般①②共通枠)', capacity: 70 },
+        { courseName: '総合進学コース(推薦・一般①②共通枠)', capacity: 50 },
+      ],
+      totalCapacity: 160,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310800047',
+      schoolName: '芝浦工業大学附属高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(推薦)', capacity: 25 },
+        { courseName: '普通(一般)', capacity: 25 },
+      ],
+      totalCapacity: 50,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310300104',
+      schoolName: '芝国際高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '最難関選抜コース(推薦・一般共通枠。帰国生1回・2回は若干のため未算入)', capacity: 5 },
+        { courseName: '国際コース(推薦。帰国生1回・2回は別枠のため未算入)', capacity: 15 },
+        { courseName: '国際コース(一般。帰国生1回・2回は別枠のため未算入)', capacity: 10 },
+      ],
+      totalCapacity: 30,
       source: IKUSHIN_TOKYO_SOURCE,
     },
   ],
