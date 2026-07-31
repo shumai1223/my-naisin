@@ -101,10 +101,16 @@ export const AFFILIATE_ECONOMICS: Partial<Record<AffiliateId, AffiliateEconomics
   'moshimo-e-live': { cpaYen: 5000, convRate: 0.07, convRateLow: 0.04, kind: 'free-lead' },
   'moshimo-studycoach': { cpaYen: 5000, convRate: 0.06, convRateLow: 0.04, kind: 'free-lead' },
   'moshimo-rewrite': { cpaYen: 3000, convRate: 0.06, convRateLow: 0.04, kind: 'free-lead' },
-  'sora-juku-text': { cpaYen: 3500, convRate: 0.08, convRateLow: 0.04, kind: 'free-lead' },
-  'morijuku-text': { cpaYen: 4000, convRate: 0.08, convRateLow: 0.04, kind: 'free-lead' },
-  'campus-text': { cpaYen: 4000, convRate: 0.08, convRateLow: 0.04, kind: 'free-lead' },
-  'atama-text': { cpaYen: 4000, convRate: 0.07, convRateLow: 0.04, kind: 'free-lead' },
+  // ⚠️2026-08-01 実値へ是正: 下記4社のcpaYenは3,500〜4,000という横並びの仮置きのままだったが、
+  // これはASPの公開報酬額と2〜4倍乖離していた（2026-06-04の新規提携時に更新されず放置）。
+  // 出典＝ASP公開報酬（[[affiliate-ad-setup]]に記録・管理画面の表示値）。
+  // 是正前は「そら塾が最安・森塾/キャンパス/atamaが同額」という順序だったが、実際は
+  // 森塾=キャンパス(15,000) > そら塾(10,000) > atama(7,500) で、**atamaが最も安い**。
+  // convRateは引き続き未実測の仮定（ここは触らない）。
+  'sora-juku-text': { cpaYen: 10000, convRate: 0.08, convRateLow: 0.04, kind: 'free-lead' }, // 無料体験¥10,000
+  'morijuku-text': { cpaYen: 15000, convRate: 0.08, convRateLow: 0.04, kind: 'free-lead' }, // 無料体験¥15,000
+  'campus-text': { cpaYen: 15000, convRate: 0.08, convRateLow: 0.04, kind: 'free-lead' }, // 体験¥15,000（資料請求は¥1,000）
+  'atama-text': { cpaYen: 7500, convRate: 0.07, convRateLow: 0.04, kind: 'free-lead' }, // 体験¥7,500（資料請求は¥1,500）＝塾4社で最安
   // 家庭教師の高CPA（保護者決裁＝保守厳しめ）
   'gakken-katei-kyoshi': { cpaYen: 12000, convRate: 0.05, convRateLow: 0.015, kind: 'free-lead' },
   'ganba-katei-kyoshi': { cpaYen: 11000, convRate: 0.05, convRateLow: 0.015, kind: 'free-lead' },
@@ -128,11 +134,15 @@ export const AFFILIATE_ECONOMICS: Partial<Record<AffiliateId, AffiliateEconomics
   'sapuri-text': { cpaYen: 1500, convRate: 0.02, convRateLow: 0.008, kind: 'paid' },
   'sapuri-banner-468': { cpaYen: 1500, convRate: 0.015, convRateLow: 0.006, kind: 'paid' },
   'sapuri-banner-300': { cpaYen: 1500, convRate: 0.015, convRateLow: 0.006, kind: 'paid' },
-  'sora-juku-banner': { cpaYen: 3500, convRate: 0.06, convRateLow: 0.03, kind: 'free-lead' },
-  'morijuku-banner': { cpaYen: 4000, convRate: 0.06, convRateLow: 0.03, kind: 'free-lead' },
-  'campus-banner': { cpaYen: 4000, convRate: 0.06, convRateLow: 0.03, kind: 'free-lead' },
-  'atama-banner': { cpaYen: 4000, convRate: 0.05, convRateLow: 0.03, kind: 'free-lead' },
-  'shoin-banner': { cpaYen: 800, convRate: 0.03, convRateLow: 0.012, kind: 'paid' },
+  // 2026-08-01 実値へ是正（text版と同じ理由・同じ出典）。
+  'sora-juku-banner': { cpaYen: 10000, convRate: 0.06, convRateLow: 0.03, kind: 'free-lead' },
+  'morijuku-banner': { cpaYen: 15000, convRate: 0.06, convRateLow: 0.03, kind: 'free-lead' },
+  'campus-banner': { cpaYen: 15000, convRate: 0.06, convRateLow: 0.03, kind: 'free-lead' },
+  'atama-banner': { cpaYen: 7500, convRate: 0.05, convRateLow: 0.03, kind: 'free-lead' },
+  // ネット松陰塾は「入塾」成果＝paid型。cpaYenを実値¥6,000へ是正すると同時に、
+  // convRateを本ファイルの'paid'既定(0.01/0.005)へ揃える（従来の0.03/0.012は既定の3倍で、
+  // 入塾という重い成果としては楽観的すぎた。既定値に寄せるだけで新たな推定は加えない）。
+  'shoin-banner': { cpaYen: 6000, convRate: 0.01, convRateLow: 0.005, kind: 'paid' },
   // ── アクセストレード（入会＝paid型・CVR低めの仮定） ──
   'shinken-koukou': { cpaYen: 5860, convRate: 0.02, convRateLow: 0.008, kind: 'paid' },
   'eten-net': { cpaYen: 1905, convRate: 0.02, convRateLow: 0.008, kind: 'paid' },
