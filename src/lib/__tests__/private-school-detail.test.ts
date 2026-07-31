@@ -973,19 +973,19 @@ describe('PRIVATE_SCHOOL_DETAIL_AICHI(大都市圏5県の4県目・育伸社募�
   });
 });
 
-describe('PRIVATE_SCHOOL_DETAIL_TOKYO(大都市圏5県の最後・育伸社募集要項PDF1〜13ページ目着手で241校中105校を収録・スキップ7校・進行中)', () => {
+describe('PRIVATE_SCHOOL_DETAIL_TOKYO(大都市圏5県の最後・育伸社募集要項PDF1〜14ページ目着手で241校中116校を収録・スキップ7校・進行中)', () => {
   it('収録した学校は全てcourses合計とtotalCapacityが一致する', () => {
     for (const school of PRIVATE_SCHOOL_DETAIL_TOKYO.schools) {
       expect(checkCourseCapacitySum(school)).toBe(true);
     }
   });
 
-  it('収録105校・スキップ7校で参照台帳241校のうち残り129校は未着手(重複なし)', () => {
+  it('収録116校・スキップ7校で参照台帳241校のうち残り118校は未着手(重複なし)', () => {
     const allCodes = SCHOOLS_PRIVATE_TOKYO.schools.map((s) => s.code);
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_TOKYO, allCodes);
     expect(result.duplicates).toEqual([]);
-    expect(result.missing).toHaveLength(129);
-    expect(PRIVATE_SCHOOL_DETAIL_TOKYO.schools.length).toBe(105);
+    expect(result.missing).toHaveLength(118);
+    expect(PRIVATE_SCHOOL_DETAIL_TOKYO.schools.length).toBe(116);
     expect(PRIVATE_SCHOOL_DETAIL_TOKYO.skipped.length).toBe(7);
   });
 });

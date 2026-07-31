@@ -149,6 +149,16 @@
  * 校名変更・女子校から共学化)は推薦120(含スポーツコース)・一般120(含スポーツコース)が完全
  * 同一の説明付きで反復されており、2つの独立した120プールなのか1つの120プールの記述の繰り返し
  * なのか確証が持てないため見送り。
+ * **14頁目(2026-07-31追記)**: トキワ松学園(女、文理探究アドバンス・スタンダード・美術デザインの
+ * 3コース全てで「普通科計50」が反復=50の共有クォータ、駒込型)を適用。二松学舎大学附属は進学
+ * コースの推薦120・一般80がいずれも「(含特進コース)」と明記されており、特進コース独自の約40は
+ * 進学コースの120/80に既に含まれるサブセットの内訳と判断し(藤ノ花女子の普通209含特進30と同型)、
+ * 特進コースの行を別枠加算せず進学コースの200のみを採用。その他は通常の複数コース/推薦一般加算:
+ * 東京立正225(スタンダード145+イノベーション35+アドバンスト45)・東星学園50・桐朋25(男、一般
+ * のみ)・桐朋女子75(女、推薦25+一般40+音楽10、帰国生の各選考は別枠のため未算入)・東洋160
+ * (特進選抜80+特進80、2コースは独立した別ブロックで値が偶然一致)・東洋女子75(総合進学60+
+ * 特別進学15)・東洋大学京北110(単願推薦30+一般80)・豊島学院175(スーパー特進15+特別進学40+
+ * 選抜進学60+普通進学60)・中村24(女、推薦12+一般12)。
  * 残り7校はWebSearchで個別調査し完全中高一貫(高校からの外部募集なし)と確認できたためスキップ:
  * 暁星・大妻・雙葉・共立女子(2006年度に高校募集停止)・三輪田学園・女子学院・白百合学園。
  * いずれも「女子御三家(女子学院・雙葉)」「男子伝統校(暁星)」等の著名中高一貫校で、
@@ -1422,6 +1432,133 @@ export const PRIVATE_SCHOOL_DETAIL_TOKYO: PrivateSchoolDetailFile = {
       fiscalYearLabel: '2026年度',
       courses: [{ courseName: '特別選抜コース(一般のみ掲載)', capacity: 40 }],
       totalCapacity: 40,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311500093',
+      schoolName: '東京立正高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: 'スタンダードコース(推薦)', capacity: 75 },
+        { courseName: 'スタンダードコース(一般①・②共通枠)', capacity: 70 },
+        { courseName: 'イノベーションコース(推薦)', capacity: 15 },
+        { courseName: 'イノベーションコース(一般①・②共通枠)', capacity: 20 },
+        { courseName: 'アドバンストコース(推薦)', capacity: 15 },
+        { courseName: 'アドバンストコース(一般①・②共通枠)', capacity: 30 },
+      ],
+      totalCapacity: 225,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113322100012',
+      schoolName: '東星学園高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(A推薦・B推薦共通枠)', capacity: 15 },
+        { courseName: '普通(一般①・②共通枠)', capacity: 35 },
+      ],
+      totalCapacity: 50,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113321500029',
+      schoolName: '桐朋高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [{ courseName: '普通(男、一般のみ掲載、約)', capacity: 25 }],
+      totalCapacity: 25,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113320800046',
+      schoolName: '桐朋女子高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(女、推薦、約。帰国生の各選考は別枠のため未算入)', capacity: 25 },
+        { courseName: '普通(女、一般、約。帰国生の各選考は別枠のため未算入)', capacity: 40 },
+        { courseName: '音楽(推薦・一般共通枠)', capacity: 10 },
+      ],
+      totalCapacity: 75,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310100106',
+      schoolName: '東洋高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '特進選抜コース(推薦A・B・一般A・B共通枠)', capacity: 80 },
+        { courseName: '特進コース(推薦A・B・一般A・B共通枠)', capacity: 80 },
+      ],
+      totalCapacity: 160,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310500166',
+      schoolName: '東洋女子高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '総合進学コース(女、推薦Ⅰ・Ⅱ・一般共通枠)', capacity: 60 },
+        { courseName: '特別進学コース(女、推薦Ⅰ・Ⅱ・一般共通枠)', capacity: 15 },
+      ],
+      totalCapacity: 75,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310500095',
+      schoolName: '東洋大学京北高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(単願推薦)', capacity: 30 },
+        { courseName: '普通(一般①併優・一般①一般・一般②併優・一般②一般共通枠)', capacity: 80 },
+      ],
+      totalCapacity: 110,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311000034',
+      schoolName: 'トキワ松学園高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        {
+          courseName: '文理探究コース(アドバンスクラス)・文理探究コース(スタンダードクラス)・美術デザインコース(女、推薦・併優一般①②共通枠、普通科計)',
+          capacity: 50,
+        },
+      ],
+      totalCapacity: 50,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311600109',
+      schoolName: '豊島学院高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: 'スーパー特進類型(推薦・1月併願・2月併優一般共通枠)', capacity: 15 },
+        { courseName: '特別進学類型(推薦・1月併願・2月併優一般共通枠)', capacity: 40 },
+        { courseName: '選抜進学類型(推薦・1月併願・2月併優一般共通枠)', capacity: 60 },
+        { courseName: '普通進学類型(推薦・1月併願共通枠)', capacity: 60 },
+      ],
+      totalCapacity: 175,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310800038',
+      schoolName: '中村高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(女、推薦)', capacity: 12 },
+        { courseName: '普通(女、一般)', capacity: 12 },
+      ],
+      totalCapacity: 24,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310100115',
+      schoolName: '二松学舎大学附属高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '進学コース(A・C推薦・B推薦共通枠、含特進コース)', capacity: 120 },
+        { courseName: '進学コース(一般・併優Ⅰ・Ⅱ共通枠、含特進コース)', capacity: 80 },
+      ],
+      totalCapacity: 200,
       source: IKUSHIN_TOKYO_SOURCE,
     },
   ],
