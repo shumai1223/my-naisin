@@ -4,13 +4,16 @@ import { isAuthorizedAdminToken } from '@/lib/admin-auth';
 import { listJukuPartners, listReferrals, type ReferralWithPartner } from '@/lib/juku-matching-db';
 import { JukuReferralActions } from '@/components/admin/JukuReferralActions';
 import { JukuPartnerCreateForm } from '@/components/admin/JukuPartnerCreateForm';
+import { JukuPartnerInviteButton } from '@/components/admin/JukuPartnerInviteButton';
 
 /**
  * 直接マッチング市場（Λ-7・Ω-6実行層）の管理画面。build-not-launch＝フラグoffで未公開。
  *
  * admin/juku-reviewsと同じADMIN_REPORT_TOKEN認証を共有（admin-auth.ts単一ソース）。
- * 招待フロー（塾側が自分でログインして操作する）はまだ無いため、この画面は
- * 管理者(👤)が提携塾の代わりに送客の状態更新・成約報告を行う代行ツールとして先行整備する。
+ * 招待フロー（塾側が自分でログインして状態更新・成約報告を自分で行う）は未実装のまま
+ * （2026-08-01: 塾側ログインで自分の送客一覧を見られる読み取り専用ダッシュボード
+ * /juku/matching/dashboardは追加したが、状態更新・成約報告は引き続きこの管理画面から
+ * 管理者(👤)が代行する設計。招待トークンは下の提携塾一覧から発行できる）。
  * D1未バインド・migration未適用の間は常に0件表示（静かに動く＝pushで本番を壊さない）。
  */
 
@@ -86,7 +89,12 @@ export default async function AdminJukuMatchingPage({
           <div className="space-y-2">
             {partners.map((p) => (
               <div key={p.id} className="rounded-xl border border-slate-200 bg-white p-3 text-sm">
-                #{p.id} {p.name} ・ take-rate {(p.commissionRateBps / 100).toFixed(1)}% ・ status: {p.status}
+                <div>
+                  #{p.id} {p.name} ・ take-rate {(p.commissionRateBps / 100).toFixed(1)}% ・ status: {p.status}
+                </div>
+                <div className="mt-1">
+                  <JukuPartnerInviteButton jukuPartnerId={p.id} token={token} />
+                </div>
               </div>
             ))}
           </div>

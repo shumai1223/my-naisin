@@ -145,6 +145,7 @@ export const SITEMAP_EXCLUDED_ROUTES = [
   '/juku/dashboard/demo',
   '/juku/dashboard/simulator',
   '/juku/dashboard/report',
+  '/juku/matching/dashboard',
   // AA-2：パートナー統合デモ（NEXT_PUBLIC_PARTNER_DEMO_ENABLED='1'まではnotFound()・noindex・実ブランド名不使用の内部確認用）。
   '/partner-demo',
 ];

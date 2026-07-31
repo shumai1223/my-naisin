@@ -29,6 +29,7 @@ const FAQ_EXEMPT_ROUTES: Record<string, string> = {
   '/admin/community-posts': 'noindex・トークン認証必須の内部ツール（リッチリザルト対象外・Λ-14 build-not-launch）',
   '/juku/dashboard/simulator': 'ZZ-4d系列：noindex・旗付きUI・招待トークン必須の内部ツール（Q&A形式のコンテンツなし・Λ-8）',
   '/juku/dashboard/report': 'ZZ-4d系列：noindex・旗付きUI・招待トークン必須の内部ツール（生徒別帳票・Q&A形式のコンテンツなし・Λ-8）',
+  '/juku/matching/dashboard': 'noindex・旗付きUI・招待トークン必須の内部ツール（提携塾向け読み取り専用ダッシュボード・Q&A形式のコンテンツなし・Λ-7）',
   '/admin/report': 'noindex・トークン認証必須の内部ツール（リッチリザルト対象外）',
   '/admin/worklog': 'noindex・トークン認証必須の内部ツール（リッチリザルト対象外）',
   '/advisor': 'ZZ-3c：noindex・旗付きUI（決定論Q&Aツールで単発応答・リッチリザルト対象外）',

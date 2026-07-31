@@ -14,7 +14,9 @@
  *
  * 点火手順（本人操作・👤専用・build-not-launchのため現時点では未実行）：
  *  wrangler d1 execute my-naishin-leads --remote --file=migrations/0013_create_juku_matching.sql
+ *  wrangler d1 execute my-naishin-leads --remote --file=migrations/0015_add_juku_partner_invite_token.sql
  */
+import { hashInviteToken, generateInviteTokenPlaintext } from '@/lib/juku-saas-db';
 
 interface D1Result<T = Record<string, unknown>> {
   results?: T[];
@@ -204,6 +206,54 @@ export async function recordCommissionEntry(input: {
   }
 }
 
+/**
+ * 提携塾に招待トークンを発行する（招待フロー・Λ-7残作業）。juku-saas-db.tsのcreateJukuAccountと
+ * 同じ設計＝平文は保存せずSHA-256ハッシュのみをDBに書く。発行するたびに古いトークンは無効化される
+ * （1塾につき有効なトークンは常に最新の1つ）。バインディング未設定・提携塾が存在しなければnull。
+ */
+export async function issuePartnerInviteToken(jukuPartnerId: number): Promise<string | null> {
+  if (!Number.isFinite(jukuPartnerId)) return null;
+  try {
+    const db = await getDb();
+    if (!db) return null;
+    const inviteToken = generateInviteTokenPlaintext();
+    const hash = await hashInviteToken(inviteToken);
+    await db.prepare(`UPDATE juku_partners SET invite_token_hash = ? WHERE id = ?`).bind(hash, jukuPartnerId).run();
+    return inviteToken;
+  } catch (err) {
+    console.error('issuePartnerInviteToken skipped:', err instanceof Error ? err.message : err);
+    return null;
+  }
+}
+
+/**
+ * 招待トークン（平文）から提携塾アカウントを引く（招待フロー・塾側ログイン）。
+ * 見つからない・トークン未発行はnull。見つかった場合はlast_used_atを更新する（失敗は無視）。
+ */
+export async function verifyPartnerInviteToken(plaintext: string): Promise<JukuPartnerRecord | null> {
+  if (!plaintext) return null;
+  try {
+    const db = await getDb();
+    if (!db) return null;
+    const hash = await hashInviteToken(plaintext);
+    const q = await db
+      .prepare(`SELECT id, name, commission_rate_bps, status FROM juku_partners WHERE invite_token_hash = ? LIMIT 1`)
+      .bind(hash)
+      .all<{ id: number; name: string; commission_rate_bps: number; status: string }>();
+    const row = q.results?.[0];
+    if (!row) return null;
+    try {
+      await db.prepare(`UPDATE juku_partners SET last_used_at = datetime('now') WHERE id = ?`).bind(row.id).run();
+    } catch {
+      /* アクセス実績更新の失敗は認証結果に影響させない */
+    }
+    return { id: row.id, name: row.name, commissionRateBps: row.commission_rate_bps, status: row.status as JukuPartnerStatus };
+  } catch (err) {
+    console.error('verifyPartnerInviteToken skipped:', err instanceof Error ? err.message : err);
+    return null;
+  }
+}
+
 /** 提携塾の一覧（新しい順）。管理画面(admin/juku-matching)の塾一覧・作成フォーム用。 */
 export async function listJukuPartners(): Promise<JukuPartnerRecord[]> {
   try {
@@ -285,6 +335,54 @@ export async function listReferrals(status?: JukuReferralStatus, limit = 100): P
     }));
   } catch (err) {
     console.error('listReferrals skipped:', err instanceof Error ? err.message : err);
+    return [];
+  }
+}
+
+export interface PartnerOwnReferral {
+  id: number;
+  studentRef: string;
+  prefectureCode: string | null;
+  format: 'online' | 'in-person' | null;
+  status: JukuReferralStatus;
+  sentAt: string;
+}
+
+/**
+ * 指定した提携塾自身の送客ログ一覧(新しい順)。招待トークンでログインした塾側の
+ * ダッシュボード(juku/matching/dashboard)専用の読み取り専用ビュー(他塾のデータは絶対に混ざらない・
+ * WHERE juku_partner_id = ?で厳格にスコープする)。ステータス更新・成約報告は
+ * この画面からはできない(現時点ではadmin/juku-matchingでの代行操作のみ・Λ-7残作業)。
+ */
+export async function listReferralsForPartner(jukuPartnerId: number, limit = 100): Promise<PartnerOwnReferral[]> {
+  try {
+    const db = await getDb();
+    if (!db) return [];
+    const q = await db
+      .prepare(
+        `SELECT id, student_ref, prefecture_code, format, status, sent_at
+         FROM juku_referrals WHERE juku_partner_id = ?
+         ORDER BY id DESC LIMIT ?`
+      )
+      .bind(jukuPartnerId, limit)
+      .all<{
+        id: number;
+        student_ref: string;
+        prefecture_code: string | null;
+        format: string | null;
+        status: string;
+        sent_at: string;
+      }>();
+    return (q.results ?? []).map((r) => ({
+      id: r.id,
+      studentRef: r.student_ref,
+      prefectureCode: r.prefecture_code,
+      format: r.format as 'online' | 'in-person' | null,
+      status: r.status as JukuReferralStatus,
+      sentAt: r.sent_at,
+    }));
+  } catch (err) {
+    console.error('listReferralsForPartner skipped:', err instanceof Error ? err.message : err);
     return [];
   }
 }

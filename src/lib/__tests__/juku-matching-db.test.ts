@@ -17,6 +17,9 @@ import {
   getPartnerLedger,
   listJukuPartners,
   listReferrals,
+  issuePartnerInviteToken,
+  verifyPartnerInviteToken,
+  listReferralsForPartner,
 } from '../juku-matching-db';
 
 describe('isValidCommissionRateBps', () => {
@@ -153,5 +156,31 @@ describe('listReferrals（D1未バインド環境=jest）', () => {
 
   test('D1未バインドなら空配列(status未指定・例外を投げない)', async () => {
     await expect(listReferrals()).resolves.toEqual([]);
+  });
+});
+
+describe('issuePartnerInviteToken（D1未バインド環境=jest）', () => {
+  test('jukuPartnerIdが不正(NaN)ならD1に触れず即null', async () => {
+    expect(await issuePartnerInviteToken(NaN)).toBeNull();
+  });
+
+  test('正当な入力でもD1未バインドならnull(例外を投げない)', async () => {
+    expect(await issuePartnerInviteToken(1)).toBeNull();
+  });
+});
+
+describe('verifyPartnerInviteToken（D1未バインド環境=jest）', () => {
+  test('空文字はD1に触れず即null', async () => {
+    expect(await verifyPartnerInviteToken('')).toBeNull();
+  });
+
+  test('D1未バインドならnull(例外を投げない)', async () => {
+    expect(await verifyPartnerInviteToken('jinv_dummy')).toBeNull();
+  });
+});
+
+describe('listReferralsForPartner（D1未バインド環境=jest）', () => {
+  test('D1未バインドなら空配列(例外を投げない)', async () => {
+    await expect(listReferralsForPartner(1)).resolves.toEqual([]);
   });
 });
