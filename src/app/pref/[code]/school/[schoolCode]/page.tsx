@@ -6,7 +6,13 @@ import { ChevronRight, Home, GraduationCap, MapPin, AlertTriangle } from 'lucide
 import { getPrefectureByCode } from '@/lib/prefectures';
 import { SCHOOL_MASTER_BY_PREFECTURE } from '@/data/schools';
 import { COMPETITION_RATE_BY_PREFECTURE } from '@/data/competition-rates';
-import { buildSchoolPageDataForPrefecture, selectNearbySchools, type SchoolPageData } from '@/lib/school-page-data';
+import { COMPETITION_RATE_HISTORY_BY_PREFECTURE } from '@/data/competition-rate-history';
+import {
+  buildSchoolPageDataForPrefecture,
+  selectNearbySchools,
+  getSchoolCategoryTrends,
+  type SchoolPageData,
+} from '@/lib/school-page-data';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 
 /**
@@ -14,7 +20,7 @@ import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
  *
  * 👤裁定(2026-08-01・fable5-fullaccel-backlog-2026-07のΛ-2行)に基づく設計:
  *  - ①今季倍率(学校固有の一次データ)をページの主役に置く。実装済み。
- *  - ②(県内区分の多年度推移)③(近隣校リンク3本)は未実装（次のタスクで追加する）。
+ *  - ②(県内区分の多年度推移)③(近隣校リンク3本)実装済み。
  *  - **初期はnoindexで建設**（親layout.tsxが既にrobots:{index:false}を設定済み・
  *    本ページのgenerateMetadataでも明示して二重に安全側へ倒す）。
  *  - **1県パイロット**: generateStaticParamsはPILOT_PREFECTURE_CODESのみ静的生成する。
@@ -61,7 +67,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title,
     description,
-    // 建設中・品質ゲート(②多年度推移③近隣校リンク3本)未達のため明示的にnoindex。
+    // 建設中・①②③の品質ゲートは実装済みだが、③(近隣校リンク)は東京都実データで
+    // 55学区中42学区が3件未満と判明済み([[loop-question-note]]で👤判断待ち)のため、
+    // noindex解除の基準が確定するまで明示的にnoindexを維持する。
     robots: { index: false, follow: false },
     alternates: { canonical: `https://my-naishin.com/pref/${code}/school/${schoolCode}` },
   };
@@ -78,6 +86,7 @@ export default async function SchoolPage({ params }: PageProps) {
   }
 
   const nearbySchools = selectNearbySchools(school, data.schools, 3);
+  const categoryTrends = getSchoolCategoryTrends(code, school, COMPETITION_RATE_HISTORY_BY_PREFECTURE[code]);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
@@ -166,6 +175,42 @@ export default async function SchoolPage({ params }: PageProps) {
             </section>
           )}
 
+          {categoryTrends.length > 0 && (
+            <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <h2 className="mb-1 text-lg font-bold text-slate-800">学科の県内区分別・倍率の推移</h2>
+              <p className="mb-4 text-xs text-slate-500">
+                この学校固有の推移ではなく、同じ学科区分に属する{prefecture.name}内の高校をまとめた「県全体の傾向」です。
+              </p>
+              <div className="space-y-4">
+                {categoryTrends.map((trend) => (
+                  <div key={trend.categoryLabel} className="overflow-x-auto">
+                    <h3 className="mb-2 text-sm font-semibold text-slate-600">{trend.categoryLabel}</h3>
+                    <table className="w-full text-sm">
+                      <thead>
+                        <tr className="border-b border-slate-200 text-left text-slate-500">
+                          {trend.points.map((p) => (
+                            <th key={p.fiscalYear} className="py-2 pr-4 text-right font-normal">
+                              {p.fiscalYear}
+                            </th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          {trend.points.map((p) => (
+                            <td key={p.fiscalYear} className="py-2 pr-4 text-right font-semibold text-slate-700">
+                              {p.rate}倍
+                            </td>
+                          ))}
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
           {nearbySchools.length > 0 && (
             <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
               <h2 className="mb-4 text-lg font-bold text-slate-800">
@@ -190,7 +235,7 @@ export default async function SchoolPage({ params }: PageProps) {
           <section className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-xs leading-relaxed text-amber-700">
             <p className="flex items-start gap-2">
               <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" />
-              このページは建設中です。今季倍率は教育委員会公表の一次データですが、複数年度の推移・近隣校情報は今後追加予定です。学校選びの最終判断は必ず各校の公式サイト・教育委員会の最新情報でご確認ください。
+              このページは建設中です。今季倍率・学科区分の県内推移は教育委員会公表の一次データに基づきますが、近隣校リンクは学区によって表示件数が少ない場合があります。学校選びの最終判断は必ず各校の公式サイト・教育委員会の最新情報でご確認ください。
             </p>
           </section>
         </div>

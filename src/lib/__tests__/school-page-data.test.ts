@@ -1,6 +1,15 @@
-import { buildSchoolPageDataForPrefecture, selectNearbySchools, type SchoolPageData } from '../school-page-data';
+import {
+  buildSchoolPageDataForPrefecture,
+  selectNearbySchools,
+  getSchoolCategoryTrends,
+  type SchoolPageData,
+} from '../school-page-data';
 import type { SchoolRecord } from '../school-master';
 import type { CompetitionRateRecord } from '../competition-rate';
+import type { PrefectureRateHistoryFile, YearSnapshot } from '../competition-rate-history';
+import { TOKYO_COMPETITION_RATES } from '@/data/competition-rates/tokyo';
+import { TOKYO_COMPETITION_RATE_HISTORY } from '@/data/competition-rate-history/tokyo';
+import { SCHOOLS_TOKYO } from '@/data/schools/tokyo';
 
 function rec(code: string, name: string): SchoolRecord {
   return { code, name, address: `${name}の住所`, postalCode: '1000001', branch: false };
@@ -96,6 +105,59 @@ describe('buildSchoolPageDataForPrefecture', () => {
     const rates = [rate('日比谷', '普通科', 253, 520, 2.06)];
     const result = buildSchoolPageDataForPrefecture(master, rates);
     expect(result.schools[0].area).toBeUndefined();
+  });
+});
+
+describe('getSchoolCategoryTrends', () => {
+  test('historyがundefinedなら空配列を返す(データが無い都道府県で誤った推移を出さない)', () => {
+    const school = schoolData({ schoolCode: 'A', departmentRates: [rate('A', '普通科', 100, 100, 1.0)] });
+    expect(getSchoolCategoryTrends('tokyo', school, undefined)).toEqual([]);
+  });
+
+  test('対応表に無い学科(department)は正直に何も返さない', () => {
+    const school = schoolData({ schoolCode: 'A', departmentRates: [rate('A', '存在しない学科', 100, 100, 1.0)] });
+    const history: PrefectureRateHistoryFile = {
+      prefectureCode: 'tokyo',
+      years: [
+        {
+          fiscalYear: '令和7年度（2025年度）',
+          sourceUrl: 'https://example.com',
+          sourceTitle: 'テスト用',
+          fetchedAt: '2026-08-01',
+          origin: 'current-year-column',
+          granularity: 'category-detail',
+          categories: [{ label: '普通科(コース、単位制、島しょ、海外帰国生徒対象以外)計', quota: 100, applicants: 100, rate: 1.0 }],
+          grandTotal: { label: '全日制合計', quota: 100, applicants: 100, rate: 1.0 },
+        } satisfies YearSnapshot,
+      ],
+    };
+    expect(getSchoolCategoryTrends('tokyo', school, history)).toEqual([]);
+  });
+
+  test('実データ(東京都日比谷・普通科)でΛ-4の多年度推移(令和4〜7年度)を正しく解決する', () => {
+    const { schools } = buildSchoolPageDataForPrefecture(SCHOOLS_TOKYO.schools, TOKYO_COMPETITION_RATES.records);
+    const hibiya = schools.find((s) => s.schoolName.includes('日比谷'));
+    expect(hibiya).toBeDefined();
+
+    const trends = getSchoolCategoryTrends('tokyo', hibiya!, TOKYO_COMPETITION_RATE_HISTORY);
+    expect(trends).toHaveLength(1);
+    expect(trends[0].categoryLabel).toBe('普通科(コース、単位制、島しょ、海外帰国生徒対象以外)計');
+    // 令和5・4年度分はgranularity='grand-total-only'(区分内訳を持たない)なのでpointsは
+    // category-detail年度(令和7・6)の2件のみになるのが正しい(欠測を捏造しない)。
+    expect(trends[0].points).toHaveLength(2);
+    expect(trends[0].points[0]).toEqual({ fiscalYear: '令和7年度（2025年度）', rate: 1.36 });
+  });
+
+  test('複数学科を持つ学校は解決できたカテゴリを重複排除してすべて返す', () => {
+    const school = schoolData({
+      schoolCode: 'M',
+      departmentRates: [
+        rate('M', '普通科', 100, 100, 1.0),
+        rate('M', '普通科（単位制）', 50, 50, 1.0),
+      ],
+    });
+    const trends = getSchoolCategoryTrends('tokyo', school, TOKYO_COMPETITION_RATE_HISTORY);
+    expect(trends.map((t) => t.categoryLabel).sort()).toEqual(['単位制計', '普通科(コース、単位制、島しょ、海外帰国生徒対象以外)計']);
   });
 });
 

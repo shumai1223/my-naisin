@@ -9,13 +9,16 @@
  *  - 学科(department)別の複数レコードを持つ学校は、募集人員/応募者数を合算した
  *    「学校全体の今季倍率」を併せて算出する(表示側でどちらを使うか選べるようにする)
  *
- * ②(県内区分の多年度推移)は本ファイルのスコープ外(competition-rate-history.tsとの結合は
- * 後続タスクで積む)。③(近隣校リンク3本)は`selectNearbySchools`で実装済み(area=学区が
- * 全学科レコードで一致することを東京都167校の実データで確認済み・2026-08-01)。
+ * ②(県内区分の多年度推移)は`getSchoolCategoryTrends`で実装済み(department→Λ-4カテゴリの
+ * 対応表はschool-department-category.tsに分離・都道府県ごとに個別検証が必要)。
+ * ③(近隣校リンク3本)は`selectNearbySchools`で実装済み(area=学区が全学科レコードで一致する
+ * ことを東京都167校の実データで確認済み・2026-08-01)。
  */
 import type { SchoolRecord } from '@/lib/school-master';
 import type { CompetitionRateRecord } from '@/lib/competition-rate';
+import type { PrefectureRateHistoryFile } from '@/lib/competition-rate-history';
 import { matchSchoolNames, type SchoolCodeMatchResult } from '@/lib/school-name-match';
+import { resolveCategoryLabel } from '@/lib/school-department-category';
 
 export interface SchoolPageData {
   schoolCode: string;
@@ -121,4 +124,43 @@ export function selectNearbySchools(target: SchoolPageData, allSchools: SchoolPa
     area: s.area,
     overallRate: s.overallRate,
   }));
+}
+
+export interface CategoryTrendPoint {
+  fiscalYear: string;
+  rate: number;
+}
+
+export interface CategoryTrend {
+  categoryLabel: string;
+  points: CategoryTrendPoint[];
+}
+
+/**
+ * 学校の学科(departmentRates)からΛ-4カテゴリを解決し、県内区分の多年度推移を組み立てる（純粋関数）。
+ * ②「その学校の学科が属する県内区分の多年度推移を『県全体の傾向』として粒度を明示して併記する」
+ * (👤裁定2026-08-01)の実装。**これは学校固有のデータではなく県全体の傾向**であることを
+ * 呼び出し側(表示コンポーネント)が必ず明示すること（誤解を招かないため）。
+ * 対応表が無い都道府県・学科は正直に何も返さない（あいまいな推測はしない）。
+ * 1つの学校が複数学科を持つ場合、解決できたカテゴリを重複排除してすべて返す。
+ */
+export function getSchoolCategoryTrends(
+  prefectureCode: string,
+  school: SchoolPageData,
+  history: PrefectureRateHistoryFile | undefined
+): CategoryTrend[] {
+  if (!history) return [];
+  const departments = [...new Set(school.departmentRates.map((r) => r.department))];
+  const categoryLabels = [...new Set(departments.map((d) => resolveCategoryLabel(prefectureCode, d)).filter((l): l is string => l !== null))];
+
+  return categoryLabels
+    .map((categoryLabel) => {
+      const points: CategoryTrendPoint[] = [];
+      for (const year of history.years) {
+        const entry = year.categories.find((c) => c.label === categoryLabel);
+        if (entry) points.push({ fiscalYear: year.fiscalYear, rate: entry.rate });
+      }
+      return { categoryLabel, points };
+    })
+    .filter((trend) => trend.points.length > 0);
 }
