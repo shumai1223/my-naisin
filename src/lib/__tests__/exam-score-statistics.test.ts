@@ -38,6 +38,7 @@ import { EXAM_SCORE_STATISTICS_SAGA } from '@/data/exam-score-statistics/saga';
 import { EXAM_SCORE_STATISTICS_TOKUSHIMA } from '@/data/exam-score-statistics/tokushima';
 import { EXAM_SCORE_STATISTICS_TOTTORI } from '@/data/exam-score-statistics/tottori';
 import { EXAM_SCORE_STATISTICS_SHIMANE } from '@/data/exam-score-statistics/shimane';
+import { EXAM_SCORE_STATISTICS_OSAKA } from '@/data/exam-score-statistics/osaka';
 import { EXAM_SCORE_STATISTICS_BY_PREFECTURE, EXAM_SCORE_STATISTICS_FILES } from '@/data/exam-score-statistics';
 
 describe('isPlausibleSubjectSum', () => {
@@ -955,8 +956,29 @@ describe('EXAM_SCORE_STATISTICS_SHIMANE(パイロット実データ)', () => {
   });
 });
 
+describe('EXAM_SCORE_STATISTICS_OSAKA(パイロット実データ・合格者の無作為抽出標本調査n=700・国語/数学/英語はA/B/C大問別)', () => {
+  it('3年度分(令和5〜7年度)が収録されている', () => {
+    expect(EXAM_SCORE_STATISTICS_OSAKA.years).toHaveLength(3);
+  });
+
+  it('全年度でaverageType=passers・11項目(国語A/B/C・数学A/B/C・英語A/B/C・理科・社会)・100点満点', () => {
+    for (const year of EXAM_SCORE_STATISTICS_OSAKA.years) {
+      expect(year.averageType).toBe('passers');
+      expect(year.subjects).toHaveLength(11);
+      for (const s of year.subjects) expect(s.maxScore).toBe(100);
+    }
+  });
+
+  it('大問A/B/Cの重み(受検者数)が原資料に無いため、totalAverageは独自算出せず未設定', () => {
+    for (const year of EXAM_SCORE_STATISTICS_OSAKA.years) {
+      expect(year.totalAverage).toBeUndefined();
+      expect(isPlausibleSubjectSum(year)).toBe(true);
+    }
+  });
+});
+
 describe('exam-score-statistics index', () => {
-  it('kochi/saitama/chiba/tokyo/nara/hyogo/niigata/gunma/miyagi/hokkaido/fukushima/aomori/iwate/akita/nagano/shizuoka/fukuoka/hiroshima/aichi/kanagawa/ibaraki/gifu/mie/wakayama/shiga/okayama/yamaguchi/kagawa/ehime/oita/kumamoto/kagoshima/okinawa/ishikawa/yamanashi/saga/tokushima/tottori/shimaneの39県が集約されている', () => {
+  it('kochi/saitama/chiba/tokyo/nara/hyogo/niigata/gunma/miyagi/hokkaido/fukushima/aomori/iwate/akita/nagano/shizuoka/fukuoka/hiroshima/aichi/kanagawa/ibaraki/gifu/mie/wakayama/shiga/okayama/yamaguchi/kagawa/ehime/oita/kumamoto/kagoshima/okinawa/ishikawa/yamanashi/saga/tokushima/tottori/shimane/osakaの40県が集約されている', () => {
     expect(Object.keys(EXAM_SCORE_STATISTICS_BY_PREFECTURE).sort()).toEqual([
       'aichi',
       'akita',
@@ -986,6 +1008,7 @@ describe('exam-score-statistics index', () => {
       'oita',
       'okayama',
       'okinawa',
+      'osaka',
       'saga',
       'saitama',
       'shiga',
@@ -998,6 +1021,6 @@ describe('exam-score-statistics index', () => {
       'yamaguchi',
       'yamanashi',
     ]);
-    expect(EXAM_SCORE_STATISTICS_FILES).toHaveLength(39);
+    expect(EXAM_SCORE_STATISTICS_FILES).toHaveLength(40);
   });
 });
