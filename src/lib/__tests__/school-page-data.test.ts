@@ -158,6 +158,56 @@ describe('getSchoolCategoryTrends', () => {
     });
     const trends = getSchoolCategoryTrends('tokyo', school, TOKYO_COMPETITION_RATE_HISTORY);
     expect(trends.map((t) => t.categoryLabel).sort()).toEqual(['単位制計', '普通科(コース、単位制、島しょ、海外帰国生徒対象以外)計']);
+    expect(trends.every((t) => t.granularity === 'category-detail')).toBe(true);
+  });
+
+  test('department対応表が無く全年度grand-total-onlyの県(神奈川等)は県全体合計を推移として返す(Λ+1)', () => {
+    const school = schoolData({ schoolCode: 'K', departmentRates: [rate('K', '普通科', 100, 100, 1.0)] });
+    const history: PrefectureRateHistoryFile = {
+      prefectureCode: 'kanagawa',
+      years: [
+        {
+          fiscalYear: '令和7年度（2025年度）',
+          sourceUrl: 'https://example.com',
+          sourceTitle: 'テスト用',
+          fetchedAt: '2026-08-01',
+          origin: 'current-year-column',
+          granularity: 'grand-total-only',
+          categories: [],
+          grandTotal: { label: '全日制の課程（特別募集・中途退学者募集を除く）', quota: 39395, applicants: 46104, rate: 1.17 },
+        } satisfies YearSnapshot,
+      ],
+    };
+    const trends = getSchoolCategoryTrends('kanagawa', school, history);
+    expect(trends).toEqual([
+      {
+        categoryLabel: '全日制の課程（特別募集・中途退学者募集を除く）',
+        points: [{ fiscalYear: '令和7年度（2025年度）', rate: 1.17 }],
+        granularity: 'grand-total-only',
+      },
+    ]);
+  });
+
+  test('department対応表もgrand-total-only年度も無い県は空配列を返す(誤った推測をしない)', () => {
+    const school = schoolData({ schoolCode: 'X', departmentRates: [rate('X', '普通科', 100, 100, 1.0)] });
+    const history: PrefectureRateHistoryFile = {
+      prefectureCode: 'saitama',
+      years: [
+        {
+          fiscalYear: '令和7年度（2025年度）',
+          sourceUrl: 'https://example.com',
+          sourceTitle: 'テスト用',
+          fetchedAt: '2026-08-01',
+          origin: 'current-year-column',
+          granularity: 'category-detail',
+          categories: [{ label: '普通科計', quota: 100, applicants: 100, rate: 1.0 }],
+          grandTotal: { label: '全日制合計', quota: 100, applicants: 100, rate: 1.0 },
+        } satisfies YearSnapshot,
+      ],
+    };
+    // saitamaはDEPARTMENT_TO_CATEGORY_LABEL_BY_PREFECTUREに未登録のためcategoryLabelsは空、
+    // かつ当該年度はgrand-total-onlyでもないためフォールバックも発動しない。
+    expect(getSchoolCategoryTrends('saitama', school, history)).toEqual([]);
   });
 });
 

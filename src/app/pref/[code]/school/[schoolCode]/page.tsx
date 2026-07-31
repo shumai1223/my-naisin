@@ -165,9 +165,15 @@ export default async function SchoolPage({ params }: PageProps) {
 
           {categoryTrends.length > 0 && (
             <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-              <h2 className="mb-1 text-lg font-bold text-slate-800">学科の県内区分別・倍率の推移</h2>
+              <h2 className="mb-1 text-lg font-bold text-slate-800">
+                {categoryTrends.some((t) => t.granularity === 'grand-total-only')
+                  ? '県内公立高校全体の倍率の推移'
+                  : '学科の県内区分別・倍率の推移'}
+              </h2>
               <p className="mb-4 text-xs text-slate-500">
-                この学校固有の推移ではなく、同じ学科区分に属する{prefecture.name}内の高校をまとめた「県全体の傾向」です。
+                {categoryTrends.some((t) => t.granularity === 'grand-total-only')
+                  ? `この学校固有の推移ではなく、${prefecture.name}の公立高校全体を合算した「県全体の傾向」です(この県は学科区分別の集計が公表されていないため全体合計のみを掲載)。`
+                  : `この学校固有の推移ではなく、同じ学科区分に属する${prefecture.name}内の高校をまとめた「県全体の傾向」です。`}
               </p>
               <div className="space-y-4">
                 {categoryTrends.map((trend) => (

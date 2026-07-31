@@ -134,6 +134,8 @@ export interface CategoryTrendPoint {
 export interface CategoryTrend {
   categoryLabel: string;
   points: CategoryTrendPoint[];
+  /** 'category-detail'=同じ学科区分の高校のみを集計。'grand-total-only'=県内の全日制高校全体の合計(区分別データが原資料に無い県)。 */
+  granularity: 'category-detail' | 'grand-total-only';
 }
 
 /**
@@ -143,24 +145,41 @@ export interface CategoryTrend {
  * 呼び出し側(表示コンポーネント)が必ず明示すること（誤解を招かないため）。
  * 対応表が無い都道府県・学科は正直に何も返さない（あいまいな推測はしない）。
  * 1つの学校が複数学科を持つ場合、解決できたカテゴリを重複排除してすべて返す。
+ *
+ * **grand-total-only県のフォールバック(Λ+1・2026-08-01)**: 神奈川/千葉/兵庫のように、
+ * 原資料自体が学科区分別集計を公表しておらず全県合計(grandTotal)のみを記録している県は、
+ * department→category対応表(school-department-category.ts)を作りようがない（区分自体が
+ * 存在しないため、対応表が「無い」のではなく元データにそもそも区分が無い）。この場合は
+ * 学科によらず全県合計の推移をそのまま「県全体の傾向」として提示する（これは推測ではなく
+ * 原資料の構造そのものであり、Y-0憲法の「1データ点1出典」に反しない）。
  */
 export function getSchoolCategoryTrends(
   prefectureCode: string,
   school: SchoolPageData,
   history: PrefectureRateHistoryFile | undefined
 ): CategoryTrend[] {
-  if (!history) return [];
+  if (!history || history.years.length === 0) return [];
+
   const departments = [...new Set(school.departmentRates.map((r) => r.department))];
   const categoryLabels = [...new Set(departments.map((d) => resolveCategoryLabel(prefectureCode, d)).filter((l): l is string => l !== null))];
 
-  return categoryLabels
-    .map((categoryLabel) => {
-      const points: CategoryTrendPoint[] = [];
-      for (const year of history.years) {
-        const entry = year.categories.find((c) => c.label === categoryLabel);
-        if (entry) points.push({ fiscalYear: year.fiscalYear, rate: entry.rate });
-      }
-      return { categoryLabel, points };
-    })
-    .filter((trend) => trend.points.length > 0);
+  if (categoryLabels.length > 0) {
+    return categoryLabels
+      .map((categoryLabel) => {
+        const points: CategoryTrendPoint[] = [];
+        for (const year of history.years) {
+          const entry = year.categories.find((c) => c.label === categoryLabel);
+          if (entry) points.push({ fiscalYear: year.fiscalYear, rate: entry.rate });
+        }
+        return { categoryLabel, points, granularity: 'category-detail' as const };
+      })
+      .filter((trend) => trend.points.length > 0);
+  }
+
+  const allGrandTotalOnly = history.years.every((y) => y.granularity === 'grand-total-only');
+  if (!allGrandTotalOnly) return [];
+
+  const label = history.years[0].grandTotal.label;
+  const points: CategoryTrendPoint[] = history.years.map((y) => ({ fiscalYear: y.fiscalYear, rate: y.grandTotal.rate }));
+  return [{ categoryLabel: label, points, granularity: 'grand-total-only' as const }];
 }
