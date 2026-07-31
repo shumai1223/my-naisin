@@ -159,6 +159,16 @@
  * (特進選抜80+特進80、2コースは独立した別ブロックで値が偶然一致)・東洋女子75(総合進学60+
  * 特別進学15)・東洋大学京北110(単願推薦30+一般80)・豊島学院175(スーパー特進15+特別進学40+
  * 選抜進学60+普通進学60)・中村24(女、推薦12+一般12)。
+ * **15頁目(2026-07-31追記)**: 日本体育大学荏原(アカデミック・アドバンスト・スポーツの3コース
+ * 全てで「全コース計160」が反復=160の共有クォータ、駒込型)・日本大学櫻丘(特別進学S・総合進学G
+ * の2クラスで「普通科計220(推薦)」「普通科計230(A/B日程)」が両方一致反復=推薦220+一般230=450
+ * の共有、実践学園型)・日本大学第三(特進・普通の2クラスで「普通科計65(推薦)」「普通科計85
+ * (一般AB)」が両方一致反復=65+85=150の共有)は複数コース反復パターンを適用。日本大学第一
+ * (推薦75+一般AB共通枠75=150)・日本大学第二(推薦105+一般AB共通枠105=210)は推薦と一般で明示的に
+ * 同じ数値が繰り返されるが計Xラベルが無いプレーンな見出しのため4頁目の基本ルールで加算。その他は
+ * 通常の複数コース/推薦一般加算: 日本工業大学駒場210(特進35+総合進学105+文理未来70)・日本体育
+ * 大学桜華100(アドバンスト15+総合進学35+総合スポーツ50)・新渡戸文化42(単一ブロック)・日本
+ * 女子体育大学附属二階堂80(キャリアデザイン25+特別進学5+ダンス25+スポーツ25)。
  * 残り7校はWebSearchで個別調査し完全中高一貫(高校からの外部募集なし)と確認できたためスキップ:
  * 暁星・大妻・雙葉・共立女子(2006年度に高校募集停止)・三輪田学園・女子学院・白百合学園。
  * いずれも「女子御三家(女子学院・雙葉)」「男子伝統校(暁星)」等の著名中高一貫校で、
@@ -1559,6 +1569,128 @@ export const PRIVATE_SCHOOL_DETAIL_TOKYO: PrivateSchoolDetailFile = {
         { courseName: '進学コース(一般・併優Ⅰ・Ⅱ共通枠、含特進コース)', capacity: 80 },
       ],
       totalCapacity: 200,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311000025',
+      schoolName: '日本工業大学駒場高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '特進コース(推薦A・B共通枠)', capacity: 17 },
+        { courseName: '特進コース(一般併優①・マイワーク②共通枠)', capacity: 18 },
+        { courseName: '総合進学コース(推薦A・B共通枠)', capacity: 52 },
+        { courseName: '総合進学コース(一般併優①・マイワーク②共通枠)', capacity: 53 },
+        { courseName: '文理未来コース(推薦A・B共通枠)', capacity: 35 },
+        { courseName: '文理未来コース(一般併優①・マイワーク②共通枠)', capacity: 35 },
+      ],
+      totalCapacity: 210,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311100060',
+      schoolName: '日本体育大学荏原高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        {
+          courseName: 'アカデミックコース・アドバンストコース・スポーツコース(推薦・一般①②共通枠、全コース計)',
+          capacity: 160,
+        },
+      ],
+      totalCapacity: 160,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113321300012',
+      schoolName: '日本体育大学桜華高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: 'アドバンストコース(女、A推薦・B推薦・一般①②共通枠)', capacity: 15 },
+        { courseName: '総合進学コース(女、A推薦・B推薦・一般①②共通枠)', capacity: 35 },
+        { courseName: '総合スポーツコース(女、A推薦・B推薦・一般①②共通枠)', capacity: 50 },
+      ],
+      totalCapacity: 100,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311400030',
+      schoolName: '新渡戸文化高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        {
+          courseName: '普通(探究進学・美術・フードデザイン、単願推薦・単願優遇・併願優遇・第一志望優遇一般①②共通枠)',
+          capacity: 42,
+        },
+      ],
+      totalCapacity: 42,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311200229',
+      schoolName: '日本女子体育大学附属二階堂高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: 'キャリアデザインコース(女、A・C推薦・B推薦・一般①②③共通枠)', capacity: 25 },
+        { courseName: '特別進学コース(女、A推薦・B推薦・一般①②③共通枠)', capacity: 5 },
+        { courseName: 'ダンスコース(女、A推薦・B推薦・一般①②③共通枠)', capacity: 25 },
+        { courseName: 'スポーツコース(女、A推薦・B推薦・一般①②③共通枠)', capacity: 25 },
+      ],
+      totalCapacity: 80,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311200247',
+      schoolName: '日本大学櫻丘高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        {
+          courseName: '特別進学(S)クラス・総合進学(G)クラス(推薦共通枠、普通科計)',
+          capacity: 220,
+        },
+        {
+          courseName: '特別進学(S)クラス・総合進学(G)クラス(A日程・B日程共通枠、普通科計)',
+          capacity: 230,
+        },
+      ],
+      totalCapacity: 450,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310700011',
+      schoolName: '日本大学第一高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(推薦)', capacity: 75 },
+        { courseName: '普通(一般A・B共通枠)', capacity: 75 },
+      ],
+      totalCapacity: 150,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311500100',
+      schoolName: '日本大学第二高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(推薦)', capacity: 105 },
+        { courseName: '普通(一般A・B共通枠)', capacity: 105 },
+      ],
+      totalCapacity: 210,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113320900018',
+      schoolName: '日本大学第三高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        {
+          courseName: '特進クラス・普通クラス(推薦共通枠、普通科計)',
+          capacity: 65,
+        },
+        {
+          courseName: '特進クラス・普通クラス(一般A・B共通枠、普通科計)',
+          capacity: 85,
+        },
+      ],
+      totalCapacity: 150,
       source: IKUSHIN_TOKYO_SOURCE,
     },
   ],
