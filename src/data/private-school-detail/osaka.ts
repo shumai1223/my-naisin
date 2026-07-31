@@ -336,6 +336,23 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
         fetchedAt: '2026-07-31',
       },
     },
+    {
+      schoolCode: 'D127310000557',
+      schoolName: '樟蔭高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '国際教養コース(女、専願・併願共通枠)', capacity: 30 },
+        { courseName: '身体表現コース(女、専願・併願共通枠)', capacity: 30 },
+        { courseName: '総合コース(女、専願・併願共通枠)', capacity: 150 },
+      ],
+      totalCapacity: 210,
+      source: {
+        ...IKUSHIN_OSAKA_SOURCE,
+        docTitle:
+          IKUSHIN_OSAKA_SOURCE.docTitle +
+          '(30+30+150=210は公式サイト(osaka-shoin.ac.jp)由来のWebSearch要約と独立に数値一致確認)',
+      },
+    },
   ],
   skipped: [],
 };
