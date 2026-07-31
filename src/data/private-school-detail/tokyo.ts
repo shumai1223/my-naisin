@@ -102,6 +102,18 @@
  * 2コースはA/Bで完全一致)、学校全体の総定員を誤って表示するリスクを避けるため学校ごと保留。
  * 城西大学附属城西は単願65+CS10・一般①35(AC専用)・一般②AC35+CS30という多段階で対象学科が
  * 回替わる複雑な構造のため今回も保留。
+ * **10頁目(2026-07-31追記)**: 大量16校を収録。杉並学院・駿台学園・成立学園・白梅学園の一部
+ * コースは複数コースにまたがる「○○計X」ラベル反復(実践学園・聖徳学園と同型)を確認: 杉並学院
+ * (特別進学・総合進学の2コースで推薦120+一般280が両方一致反復=合計400)・駿台学園(特選・進学の
+ * 2コースで推薦110+一般130が両方一致反復=240、別枠スペシャリストコース60と合算し300)・
+ * 成立学園(特進・総合の2コースで「特進・進学計130」が推薦一般問わず完全一致=130、130+130でなく
+ * 130のみ)・白梅学園(特選国公立系・特選文理系の2つの特別選抜サブコースで「特別選抜コース計50」
+ * が一致反復=50、選抜35・進学55は独立で加算し140)。正則は推薦A・B共通枠160+一般①120=280
+ * (一般②の40は一般①からの独立した追加数値の可能性があるが2次募集の補充枠の疑いが強く駒沢学園
+ * 女子と同様の理由で未算入)。その他は通常の複数コース/推薦一般加算パターン: 巣鴨70(男、一般
+ * のみ)・聖学院15・成蹊85・成女50・成城学園60・正則学園125・聖パウロ学園80・青稜130(帰国は
+ * 若干のため未算入)・世田谷学園25・専修大学附属400(推薦200+一般200、コース間の計Xラベルなし
+ * だが4頁目の基本ルールで加算)・創価135。
  * 残り7校はWebSearchで個別調査し完全中高一貫(高校からの外部募集なし)と確認できたためスキップ:
  * 暁星・大妻・雙葉・共立女子(2006年度に高校募集停止)・三輪田学園・女子学院・白百合学園。
  * いずれも「女子御三家(女子学院・雙葉)」「男子伝統校(暁星)」等の著名中高一貫校で、
@@ -837,6 +849,194 @@ export const PRIVATE_SCHOOL_DETAIL_TOKYO: PrivateSchoolDetailFile = {
         { courseName: '普通(女、一般)', capacity: 33 },
       ],
       totalCapacity: 65,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113321100023',
+      schoolName: '白梅学園高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        {
+          courseName: '特別選抜コース(特選国公立系)・特別選抜コース(特選文理系)(女、A推薦・B推薦・一般①②共通枠、特別選抜コース計)',
+          capacity: 50,
+        },
+        { courseName: '選抜コース(選抜文理系)(女、A推薦・B推薦・一般①②共通枠)', capacity: 35 },
+        { courseName: '進学コース(進学文理系・保育教育系)(女、A推薦・B推薦・一般①②共通枠)', capacity: 55 },
+      ],
+      totalCapacity: 140,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311600065',
+      schoolName: '巣鴨高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [{ courseName: '普通(男、一般のみ掲載、約)', capacity: 70 }],
+      totalCapacity: 70,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311500011',
+      schoolName: '杉並学院高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        {
+          courseName: '特別進学コース・総合進学コース(推薦共通枠、特別・総合計)',
+          capacity: 120,
+        },
+        {
+          courseName: '特別進学コース・総合進学コース(一般①②共通枠、特別・総合計)',
+          capacity: 280,
+        },
+      ],
+      totalCapacity: 400,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311700055',
+      schoolName: '駿台学園高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        {
+          courseName: '特選コース・進学コース(推薦A・併願推薦B共通枠、特選・進学計)',
+          capacity: 110,
+        },
+        {
+          courseName: '特選コース・進学コース(併優・一般①②③共通枠、特選・進学計)',
+          capacity: 130,
+        },
+        { courseName: 'スペシャリストコース(ハイブリッド・オリジナル)(推薦)', capacity: 40 },
+        { courseName: 'スペシャリストコース(ハイブリッド・オリジナル)(一般)', capacity: 20 },
+      ],
+      totalCapacity: 300,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311700064',
+      schoolName: '聖学院高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: 'グローバルイノベーションクラス(男、推薦)', capacity: 5 },
+        { courseName: 'グローバルイノベーションクラス(男、一般、内併願優遇5)', capacity: 10 },
+      ],
+      totalCapacity: 15,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113320300032',
+      schoolName: '成蹊高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(推薦、単願、約)', capacity: 25 },
+        { courseName: '普通(一般、約)', capacity: 60 },
+      ],
+      totalCapacity: 85,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310400032',
+      schoolName: '成女高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(女、推薦特待・A・B・一般①②共通枠)', capacity: 50 },
+      ],
+      totalCapacity: 50,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311200121',
+      schoolName: '成城学園高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(推薦、約)', capacity: 20 },
+        { courseName: '普通(一般、約)', capacity: 40 },
+      ],
+      totalCapacity: 60,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310300060',
+      schoolName: '正則高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(推薦A・B共通枠)', capacity: 160 },
+        { courseName: '普通(一般①)', capacity: 120 },
+      ],
+      totalCapacity: 280,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310100071',
+      schoolName: '正則学園高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [{ courseName: '普通(男、A推薦・B推薦・一般共通枠)', capacity: 125 }],
+      totalCapacity: 125,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113320100016',
+      schoolName: '聖パウロ学園高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(グローバル・セレクティブクラス、推薦)', capacity: 30 },
+        { courseName: '普通(グローバル・セレクティブクラス、一般①②共通枠)', capacity: 50 },
+      ],
+      totalCapacity: 80,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311700082',
+      schoolName: '成立学園高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        {
+          courseName: '特進コース・総合コース(推薦単願・併願・一般共通枠、特進・進学計)',
+          capacity: 130,
+        },
+      ],
+      totalCapacity: 130,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310900046',
+      schoolName: '青稜高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(一般A[オープン]・一般B[併優]共通枠。帰国11月・1月は若干のため未算入)', capacity: 130 },
+      ],
+      totalCapacity: 130,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311200149',
+      schoolName: '世田谷学園高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(男、推薦[スポーツ])', capacity: 12 },
+        { courseName: '普通(男、一般[スポーツ])', capacity: 13 },
+      ],
+      totalCapacity: 25,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311500075',
+      schoolName: '専修大学附属高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(推薦)', capacity: 200 },
+        { courseName: '普通(一般)', capacity: 200 },
+      ],
+      totalCapacity: 400,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113321100032',
+      schoolName: '創価高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(推薦、約)', capacity: 65 },
+        { courseName: '普通(一般、約)', capacity: 70 },
+      ],
+      totalCapacity: 135,
       source: IKUSHIN_TOKYO_SOURCE,
     },
   ],
