@@ -89,6 +89,19 @@
  * 50+文理進学80=130)・淑徳(スーパー特進20+特進選抜50+留学20=90、留学コースは単願推薦のみ掲載)・
  * 淑徳巣鴨(アルティメット38+プレミアム37+選抜80+特進80=235、4コースとも独立の数値で計Xラベル
  * なし)は通常の複数コース加算パターンとして収録。
+ * **9頁目(2026-07-31追記)**: 聖徳学園は難関国公立型・文理進学型の2コースで「難関国公立・文理計」
+ * ラベルが推薦30・一般75の両方とも一致して反復されており(実践学園と同型)2コース分を推薦30+
+ * 一般75=105の共有クォータとし、別枠のデータサイエンスコース25と合算し130。昭和第一学園は
+ * 総合進学コース(文理進学)・(探究)の2サブコースで「総合進学コース計200」が一致して反復され
+ * 200の共有クォータ、英語14+選抜進学60+総合進学200+デザイン14=288。松蔭大学附属松蔭(推薦の
+ * 特待10・一般クラブ70という2つの内訳を合算し80)・城北(男、推薦約20+一般約65=85)・昭和第一
+ * (特進20+進学120=140、コース間で計Xラベルの反復なし)・昭和鉄道(単一ブロック100)・女子美術
+ * 大学付属(女、推薦32+一般33=65)も収録。順天堂大学系属理数インターは参照台帳(schools-private/
+ * tokyo.ts)に該当する学校コードが見当たらず(新設校または名称表記の相違の可能性)コード特定でき
+ * ないため見送り。潤徳女子は特進コースのみ推薦A17・推薦B①18と数値が食い違い(進学・美術の他
+ * 2コースはA/Bで完全一致)、学校全体の総定員を誤って表示するリスクを避けるため学校ごと保留。
+ * 城西大学附属城西は単願65+CS10・一般①35(AC専用)・一般②AC35+CS30という多段階で対象学科が
+ * 回替わる複雑な構造のため今回も保留。
  * 残り7校はWebSearchで個別調査し完全中高一貫(高校からの外部募集なし)と確認できたためスキップ:
  * 暁星・大妻・雙葉・共立女子(2006年度に高校募集停止)・三輪田学園・女子学院・白百合学園。
  * いずれも「女子御三家(女子学院・雙葉)」「男子伝統校(暁星)」等の著名中高一貫校で、
@@ -739,6 +752,91 @@ export const PRIVATE_SCHOOL_DETAIL_TOKYO: PrivateSchoolDetailFile = {
         { courseName: '特進コース(特進)(A推薦・B推薦・一般Ⅰ期・Ⅱ期共通枠)', capacity: 80 },
       ],
       totalCapacity: 235,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311200103',
+      schoolName: '松蔭大学附属松蔭高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(推薦、特待10・一般クラブ70)', capacity: 80 },
+      ],
+      totalCapacity: 80,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113320300014',
+      schoolName: '聖徳学園高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        {
+          courseName: '難関国公立型・文理進学型(推薦共通枠、難関国公立・文理計)',
+          capacity: 30,
+        },
+        {
+          courseName: '難関国公立型・文理進学型(一般・併優①②共通枠、難関国公立・文理計)',
+          capacity: 75,
+        },
+        { courseName: 'データサイエンスコース(推薦・一般①②共通枠)', capacity: 25 },
+      ],
+      totalCapacity: 130,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311900026',
+      schoolName: '城北高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(男、推薦、約)', capacity: 20 },
+        { courseName: '普通(男、一般、約)', capacity: 65 },
+      ],
+      totalCapacity: 85,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310500139',
+      schoolName: '昭和第一高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '特進コース(推薦Ⅰ・Ⅱ・併優・一般Ⅰ・Ⅱ共通枠)', capacity: 20 },
+        { courseName: '進学コース(推薦Ⅰ・Ⅱ・併優・一般Ⅰ・Ⅱ共通枠)', capacity: 120 },
+      ],
+      totalCapacity: 140,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113320200015',
+      schoolName: '昭和第一学園高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '英語コース(推薦・一般①②共通枠)', capacity: 14 },
+        { courseName: '選抜進学コース(推薦・一般①②共通枠)', capacity: 60 },
+        {
+          courseName: '総合進学コース(文理進学)・総合進学コース(探究)(推薦・一般①②共通枠、総合進学コース計)',
+          capacity: 200,
+        },
+        { courseName: 'デザインコース(推薦・一般①②共通枠)', capacity: 14 },
+      ],
+      totalCapacity: 288,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311600056',
+      schoolName: '昭和鉄道高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [{ courseName: '鉄道科(A・C推薦・B併願・2月併優一般共通枠)', capacity: 100 }],
+      totalCapacity: 100,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311500066',
+      schoolName: '女子美術大学付属高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(女、推薦)', capacity: 32 },
+        { courseName: '普通(女、一般)', capacity: 33 },
+      ],
+      totalCapacity: 65,
       source: IKUSHIN_TOKYO_SOURCE,
     },
   ],
