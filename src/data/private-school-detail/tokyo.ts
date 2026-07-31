@@ -25,6 +25,14 @@
  * 進学コースの3コース(10+15+25=50)は明瞭だが、音楽コースは推薦・一般で異なる数値が並び
  * かつ器楽/声楽/演奏家で細分されており構造が読み切れないため、学校単位の総定員を歪めない
  * よう学校ごと保留(1コースだけ収録すると総定員を過小表示するリスクがあるため)。
+ * **3頁目(2026-07-31追記)**: 桜美林(国公立20+特別進学30+進学130=180)・大森学園(特選20+
+ * 選抜40+総進80+工業40=180)・開成(男、一般のみ100)・かえつ有明(一般10)・科学技術学園
+ * (総合60+特進20=80)・学習院高等科(男、一般のみ約20)・神田女学園(グローバル25+アドバンスト
+ * 25+キャリアデザイン50=100)・関東国際(普通60+外国語120=180)の8校は単一の↓共有クォータ
+ * ブロックで明瞭だったため収録。川村は「A推薦20」「B推薦①10・B推薦②↓」「一般・併優①
+ * 一般15・併優15」という3つの異なるブロックが並び、A/B推薦の加算可否および「一般15・併優15」
+ * が別建て30なのか併願優遇が一般15の内数(合計15)なのかの解釈で2つの独立した曖昧さが重なり
+ * 確証が持てないため今回は見送り。
  * 残り7校はWebSearchで個別調査し完全中高一貫(高校からの外部募集なし)と確認できたためスキップ:
  * 暁星・大妻・雙葉・共立女子(2006年度に高校募集停止)・三輪田学園・女子学院・白百合学園。
  * いずれも「女子御三家(女子学院・雙葉)」「男子伝統校(暁星)」等の著名中高一貫校で、
@@ -100,6 +108,89 @@ export const PRIVATE_SCHOOL_DETAIL_TOKYO: PrivateSchoolDetailFile = {
         { courseName: '国際英語(A推薦・B推薦・一般①・一般②共通枠。帰国は若干のため未算入)', capacity: 25 },
       ],
       totalCapacity: 125,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113320900036',
+      schoolName: '桜美林高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '国公立コース(推薦・併優・オープン共通枠)', capacity: 20 },
+        { courseName: '特別進学コース(推薦・併優・オープン共通枠)', capacity: 30 },
+        { courseName: '進学コース(推薦・併優・オープン共通枠)', capacity: 130 },
+      ],
+      totalCapacity: 180,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311100024',
+      schoolName: '大森学園高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '特選コース(推薦Ⅰ・推薦Ⅱ・一般①②③共通枠)', capacity: 20 },
+        { courseName: '選抜コース(推薦Ⅰ・推薦Ⅱ・一般①②③共通枠)', capacity: 40 },
+        { courseName: '総進コース(推薦Ⅰ・推薦Ⅱ・一般①②③共通枠)', capacity: 80 },
+        { courseName: '工業(男、推薦Ⅰ・推薦Ⅱ・一般①②③共通枠)', capacity: 40 },
+      ],
+      totalCapacity: 180,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311800018',
+      schoolName: '開成高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [{ courseName: '普通(男、一般のみ掲載)', capacity: 100 }],
+      totalCapacity: 100,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310800010',
+      schoolName: 'かえつ有明高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [{ courseName: '普通(一般、帰国生を含む)', capacity: 10 }],
+      totalCapacity: 10,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311200274',
+      schoolName: '科学技術学園高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '総合コース(男、推薦・一般A日程①②・B日程共通枠)', capacity: 60 },
+        { courseName: '特進コース(男、推薦・一般A日程・B日程共通枠)', capacity: 20 },
+      ],
+      totalCapacity: 80,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311600010',
+      schoolName: '学習院高等科',
+      fiscalYearLabel: '2026年度',
+      courses: [{ courseName: '普通(男、一般のみ掲載、約)', capacity: 20 }],
+      totalCapacity: 20,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310100026',
+      schoolName: '神田女学園高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: 'グローバルコース(単願推薦・併願推薦・併願優遇・一般共通枠)', capacity: 25 },
+        { courseName: 'アドバンストコース(単願推薦・併願推薦・併願優遇・一般共通枠)', capacity: 25 },
+        { courseName: 'キャリアデザインコース(単願推薦・併願推薦・併願優遇・一般共通枠)', capacity: 50 },
+      ],
+      totalCapacity: 100,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311300022',
+      schoolName: '関東国際高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(推薦・一般①②③共通枠、一般③は外国人生徒を含む)', capacity: 60 },
+        { courseName: '外国語(推薦・一般①②③共通枠)', capacity: 120 },
+      ],
+      totalCapacity: 180,
       source: IKUSHIN_TOKYO_SOURCE,
     },
   ],
