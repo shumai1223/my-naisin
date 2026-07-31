@@ -36,6 +36,25 @@ describe('PAST_SYSTEM_CHANGES（Λ+5・過去の制度変更履歴DB）', () => 
     expect(tokyoPref?.reverseCalc?.totalMaxScore).toBe(1020);
     expect(tokyoPref?.reverseCalc?.tokyoSettings?.esatjMaxScore).toBe(20);
   });
+
+  test('千葉県の前期/後期選抜一本化エントリはprefectures.tsの現行maxScore(135点満点)と矛盾しない(選抜回数の変更であり内申点計算式は不変)', () => {
+    const chiba = PAST_SYSTEM_CHANGES.find((c) => c.prefCode === 'chiba');
+    expect(chiba).toBeDefined();
+    expect(chiba?.effectiveYear).toBe('令和3年度（2021年度）入試');
+    expect(chiba?.category).toBe('selection-structure');
+    expect(chiba?.detail).toContain('一般入学者選抜');
+    expect(chiba?.detail).toContain('変更がなく');
+
+    const chibaPref = PREFECTURES.find((p) => p.code === 'chiba');
+    expect(chibaPref?.maxScore).toBe(135);
+  });
+
+  test('categoryは定義済みの4種類のいずれかのみ(型崩れ防止)', () => {
+    const validCategories = new Set(['scoring-input', 'selection-structure', 'weighting-formula', 'other']);
+    for (const c of PAST_SYSTEM_CHANGES) {
+      expect(validCategories.has(c.category)).toBe(true);
+    }
+  });
 });
 
 describe('getPastSystemChangesByPrefecture', () => {
