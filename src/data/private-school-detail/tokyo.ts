@@ -169,6 +169,15 @@
  * 通常の複数コース/推薦一般加算: 日本工業大学駒場210(特進35+総合進学105+文理未来70)・日本体育
  * 大学桜華100(アドバンスト15+総合進学35+総合スポーツ50)・新渡戸文化42(単一ブロック)・日本
  * 女子体育大学附属二階堂80(キャリアデザイン25+特別進学5+ダンス25+スポーツ25)。
+ * **16頁目(2026-07-31追記)**: 日本大学豊山(男、進学・特進・スポーツの3コース全てで「普通科計
+ * 120」が推薦ラウンドと併願優遇一般ラウンドの両方に反復=成立学園と同型のため学校全体で単一の120
+ * (加算せず)。日本大学豊山女子(女、A特進・N進学の2クラスで「A特進・N進学計100」が反復=100の
+ * 共有、理数40は独立)。日本大学鶴ヶ丘400(総進[推薦175+一般AB175]+特進[推薦10+一般AB40])・
+ * フェリシア280(女、推薦140+一般140)は推薦一般で同じ数値が繰り返されるが計Xラベルなしのプレーン
+ * 見出しのため4頁目の基本ルールで加算。八王子実践530は特進(推薦45[J特進5+特進40の合成]+一般
+ * 75[J特進15+特進60の合成])+選抜(110+120)+総合進学(90+90)、1セル内の複合表記(JX+特進Y)は
+ * 加算して1つの数値として扱った。その他は通常の複数コース加算: 八王子学園八王子90(5コースの
+ * 一般のみ、推薦の掲載なし)・羽田国際90・広尾学園25(帰国生は若干のため未算入)。
  * 残り7校はWebSearchで個別調査し完全中高一貫(高校からの外部募集なし)と確認できたためスキップ:
  * 暁星・大妻・雙葉・共立女子(2006年度に高校募集停止)・三輪田学園・女子学院・白百合学園。
  * いずれも「女子御三家(女子学院・雙葉)」「男子伝統校(暁星)」等の著名中高一貫校で、
@@ -1691,6 +1700,109 @@ export const PRIVATE_SCHOOL_DETAIL_TOKYO: PrivateSchoolDetailFile = {
         },
       ],
       totalCapacity: 150,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311500119',
+      schoolName: '日本大学鶴ヶ丘高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '総進コース(推薦)', capacity: 175 },
+        { courseName: '総進コース(一般A・B共通枠)', capacity: 175 },
+        { courseName: '特進コース(推薦)', capacity: 10 },
+        { courseName: '特進コース(一般A・B共通枠)', capacity: 40 },
+      ],
+      totalCapacity: 400,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310500184',
+      schoolName: '日本大学豊山高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        {
+          courseName: '進学コース・特進コース・スポーツコース(男、推薦・特別推薦(学業・スポーツ)・併願優遇・一般(学業・スポーツ)共通枠、普通科計)',
+          capacity: 120,
+        },
+      ],
+      totalCapacity: 120,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311900062',
+      schoolName: '日本大学豊山女子高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        {
+          courseName: 'A特進クラス・N進学クラス(女、A推薦・B推薦・一般①②共通枠、A特進・N進学計)',
+          capacity: 100,
+        },
+        { courseName: '理数(理数Sクラス)(女、A推薦・B推薦・一般①②共通枠)', capacity: 40 },
+      ],
+      totalCapacity: 140,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113320100061',
+      schoolName: '八王子学園八王子高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '文理コース(特選)(一般①②第一志望・併願共通枠)', capacity: 5 },
+        { courseName: '文理コース(特進)(一般①②第一志望・併願共通枠)', capacity: 20 },
+        { courseName: '文理コース(進学)(一般①②第一志望・併願共通枠)', capacity: 25 },
+        { courseName: '総合コース(リベラルアーツ・音楽美術系)(一般①②第一志望・併願共通枠)', capacity: 10 },
+        { courseName: 'アスリートコース(一般①第一志望のみ掲載)', capacity: 30 },
+      ],
+      totalCapacity: 90,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113320100070',
+      schoolName: '八王子実践高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '特進コース(推薦、J特進5・特進40)', capacity: 45 },
+        { courseName: '特進コース(一般A①②・B・C共通枠、J特進15・特進60)', capacity: 75 },
+        { courseName: '選抜コース(推薦)', capacity: 110 },
+        { courseName: '選抜コース(一般A①②・B・C共通枠)', capacity: 120 },
+        { courseName: '総合進学コース(推薦)', capacity: 90 },
+        { courseName: '総合進学コース(一般A①②・B・C共通枠)', capacity: 90 },
+      ],
+      totalCapacity: 530,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311100033',
+      schoolName: '羽田国際高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '特別進学コース(推薦・一般①②共通枠)', capacity: 18 },
+        { courseName: '総合進学コース(推薦・一般①②共通枠)', capacity: 54 },
+        { courseName: '幼児教育コース(女、推薦・一般①②共通枠)', capacity: 18 },
+      ],
+      totalCapacity: 90,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310300042',
+      schoolName: '広尾学園高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '医進・サイエンスコース(一般①②共通枠。帰国生は若干のため未算入)', capacity: 15 },
+        { courseName: 'インターナショナルコース(一般共通枠。帰国生は若干のため未算入)', capacity: 10 },
+      ],
+      totalCapacity: 25,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113320900054',
+      schoolName: 'フェリシア高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(女、推薦)', capacity: 140 },
+        { courseName: '普通(女、一般)', capacity: 140 },
+      ],
+      totalCapacity: 280,
       source: IKUSHIN_TOKYO_SOURCE,
     },
   ],
