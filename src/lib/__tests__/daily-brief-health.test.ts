@@ -1,27 +1,72 @@
-import { buildHealthSection, injectHealthSection, type EventHealthCounts } from '../daily-brief-health';
+import {
+  buildHealthSection,
+  injectHealthSection,
+  judgeHealth,
+  type EventHealthCounts,
+  type TruthCounts,
+} from '../daily-brief-health';
 
-const ALL_POSITIVE: EventHealthCounts = { cta_view: 120, lead_submit: 3, line_friend_click: 8, affiliate_click: 45 };
-const ONE_ZERO: EventHealthCounts = { cta_view: 120, lead_submit: 0, line_friend_click: 8, affiliate_click: 45 };
+const GA4_OK: EventHealthCounts = { cta_view: 120, lead_submit: 3, line_friend_click: 8, affiliate_click: 45 };
+/** 実測で頻発するパターン: 送信は成立しているのにGA4側だけ全部ゼロ（2026-07-27の実例）。 */
+const GA4_ALL_ZERO: EventHealthCounts = { cta_view: 0, lead_submit: 0, line_friend_click: 0, affiliate_click: 0 };
+const TRUTH_OK: TruthCounts = { statsSubmissions7d: 29, leads7d: 1, statsSubmissionsTotal: 179 };
+const TRUTH_DRY: TruthCounts = { statsSubmissions7d: 0, leads7d: 0, statsSubmissionsTotal: 179 };
+
+describe('judgeHealth', () => {
+  it('D1が健全でGA4も正なら ok', () => {
+    expect(judgeHealth({ ga4: GA4_OK, truth: TRUTH_OK })).toBe('ok');
+  });
+
+  it('★回帰防止: GA4が全ゼロでもD1が健全なら alert にしない（GA4の欠損を異常と誤認しない）', () => {
+    // 2026-07-27の実例: D1に25件入っているのにGA4のstats_submit_okは0件だった。
+    // 初版はこの状況で🔴を出し、6日間オオカミ少年になっていた。
+    expect(judgeHealth({ ga4: GA4_ALL_ZERO, truth: TRUTH_OK })).not.toBe('alert');
+  });
+
+  it('D1の7日窓で投稿がゼロなら alert（本物の流入停止）', () => {
+    expect(judgeHealth({ ga4: GA4_OK, truth: TRUTH_DRY })).toBe('alert');
+  });
+
+  it('D1が取得できない場合は caution 止まり（「分からない」を「異常」に丸めない）', () => {
+    expect(judgeHealth({ ga4: GA4_OK, truth: null })).toBe('caution');
+    expect(judgeHealth({ ga4: GA4_ALL_ZERO, truth: null })).toBe('caution');
+  });
+
+  it('D1が健全でも高頻度のcta_viewが前日ゼロなら caution', () => {
+    expect(judgeHealth({ ga4: { ...GA4_OK, cta_view: 0 }, truth: TRUTH_OK })).toBe('caution');
+  });
+});
 
 describe('buildHealthSection', () => {
-  it('全イベントが正の場合は🟢正常と表示する', () => {
-    const section = buildHealthSection(ALL_POSITIVE, '2026-07-28');
+  it('健全時は🟢と表示し、D1の確定値を載せる', () => {
+    const section = buildHealthSection({ ga4: GA4_OK, truth: TRUTH_OK }, '2026-07-28');
     expect(section).toContain('🟢 正常');
     expect(section).not.toContain('🔴');
-    expect(section).toContain('`cta_view`: 120件');
+    expect(section).toContain('**29件**');
+    expect(section).toContain('**179件**');
   });
 
-  it('いずれか1件でも0件なら🔴要確認と表示し、ゼロ件に警告マークを付ける', () => {
-    const section = buildHealthSection(ONE_ZERO, '2026-07-28');
-    expect(section).toContain('🔴 要確認');
-    expect(section).toContain('`lead_submit`: 0件 ⚠️ゼロ');
-    expect(section).not.toContain('`cta_view`: 120件 ⚠️ゼロ');
+  it('GA4の件数は「以上」（下限値）として表示する', () => {
+    const section = buildHealthSection({ ga4: GA4_OK, truth: TRUTH_OK }, '2026-07-28');
+    expect(section).toContain('`cta_view`: 120件以上');
+    expect(section).toContain('下限値');
   });
 
-  it('日付ラベルを見出しと本文の両方に埋め込む', () => {
-    const section = buildHealthSection(ALL_POSITIVE, '2026-08-01');
+  it('D1の投稿が7日ゼロなら🔴を出す', () => {
+    const section = buildHealthSection({ ga4: GA4_OK, truth: TRUTH_DRY }, '2026-07-28');
+    expect(section).toContain('🔴 異常');
+    expect(section).toContain('⚠️ゼロ');
+  });
+
+  it('D1が取得できない場合は🟡で保留と明示する', () => {
+    const section = buildHealthSection({ ga4: GA4_OK, truth: null }, '2026-07-28');
+    expect(section).toContain('🟡 要確認');
+    expect(section).toContain('D1から確定値を取得できなかった');
+  });
+
+  it('日付ラベルを見出しに埋め込む', () => {
+    const section = buildHealthSection({ ga4: GA4_OK, truth: TRUTH_OK }, '2026-08-01');
     expect(section).toContain('2026-08-01時点');
-    expect(section).toContain('前日2026-08-01のGA4実測');
   });
 });
 
