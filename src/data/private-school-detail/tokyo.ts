@@ -178,6 +178,16 @@
  * 75[J特進15+特進60の合成])+選抜(110+120)+総合進学(90+90)、1セル内の複合表記(JX+特進Y)は
  * 加算して1つの数値として扱った。その他は通常の複数コース加算: 八王子学園八王子90(5コースの
  * 一般のみ、推薦の掲載なし)・羽田国際90・広尾学園25(帰国生は若干のため未算入)。
+ * **17頁目(2026-07-31追記)**: 富士見丘(女、グローバル・アドバンストの2コースで「アドバンスト・
+ * グローバル計60(WILL推薦)」「アドバンスト・グローバル計20(帰国)」が両方一致反復=60+20=80の
+ * 共有、帰国は明示数値のため通常算入)・文教大学付属(スタンダード・アドバンスト・アルティメットの
+ * 3クラス全てで「普通科計70(推薦)・普通科計40(一般①②)・普通科計10(一般③)」が完全一致で反復=
+ * 70+40+10=120の共有)は複数コース反復パターンを適用。文化学園大学杉並150は進学(30、推薦併願は
+ * 若干のため未算入)+特進(推薦30+併優一般50)+ダブルディプロマ(推薦10+一般10)+2026年新設の
+ * イノベーションリーダーズ(推薦10+一般10)。法政大学92(推薦46+一般[男女共通枠]46)・宝仙学園
+ * 20(女子部こども教育コース、推薦10+一般10)は推薦一般で同じ数値が繰り返されるが計Xラベルなしの
+ * プレーン見出しのため4頁目の基本ルールで加算。その他は通常の複数コース加算: 藤村女子20(単一
+ * ブロック)・文京学院大学女子125(理数キャリアT25+理数キャリアA25+国際教養T25+国際教養A50)。
  * 残り7校はWebSearchで個別調査し完全中高一貫(高校からの外部募集なし)と確認できたためスキップ:
  * 暁星・大妻・雙葉・共立女子(2006年度に高校募集停止)・三輪田学園・女子学院・白百合学園。
  * いずれも「女子御三家(女子学院・雙葉)」「男子伝統校(暁星)」等の著名中高一貫校で、
@@ -1803,6 +1813,103 @@ export const PRIVATE_SCHOOL_DETAIL_TOKYO: PrivateSchoolDetailFile = {
         { courseName: '普通(女、一般)', capacity: 140 },
       ],
       totalCapacity: 280,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311300077',
+      schoolName: '富士見丘高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        {
+          courseName: 'グローバルコース・アドバンストコース(A・Bインター)(女、WILL推薦・一般①②③共通枠、アドバンスト・グローバル計)',
+          capacity: 60,
+        },
+        {
+          courseName: 'グローバルコース・アドバンストコース(A・Bインター)(女、帰国、アドバンスト・グローバル計)',
+          capacity: 20,
+        },
+      ],
+      totalCapacity: 80,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113320300041',
+      schoolName: '藤村女子高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [{ courseName: '普通(女、推薦・併願優遇・オープン・総合型共通枠)', capacity: 20 }],
+      totalCapacity: 20,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311500057',
+      schoolName: '文化学園大学杉並高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '進学コース(推薦第一志望・一般①②共通枠。推薦併願は若干のため未算入)', capacity: 30 },
+        { courseName: '特進コース(推薦第一志望)', capacity: 30 },
+        { courseName: '特進コース(併優一般①②共通枠)', capacity: 50 },
+        { courseName: 'ダブルディプロマコース(推薦第一志望)', capacity: 10 },
+        { courseName: 'ダブルディプロマコース(併優一般①共通枠)', capacity: 10 },
+        { courseName: 'イノベーションリーダーズコース(2026年新設、推薦第一志望)', capacity: 10 },
+        { courseName: 'イノベーションリーダーズコース(2026年新設、併優一般①共通枠)', capacity: 10 },
+      ],
+      totalCapacity: 150,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310500193',
+      schoolName: '文京学院大学女子高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '理数キャリアコースT(特進)クラス(女、A推薦・B推薦①②・一般①②③共通枠)', capacity: 25 },
+        { courseName: '理数キャリアコースA(進学)クラス(女、A推薦・B推薦①②・一般①②③共通枠)', capacity: 25 },
+        { courseName: '国際教養コースT(特進)クラス(女、A推薦・B推薦①②・一般①②③共通枠)', capacity: 25 },
+        { courseName: '国際教養コースA(進学)クラス(女、A推薦・B推薦①②・一般①②③共通枠)', capacity: 50 },
+      ],
+      totalCapacity: 125,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310900091',
+      schoolName: '文教大学付属高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        {
+          courseName: 'スタンダードクラス・アドバンストクラス・アルティメットクラス(推薦共通枠、普通科計)',
+          capacity: 70,
+        },
+        {
+          courseName: 'スタンダードクラス・アドバンストクラス・アルティメットクラス(一般①②共通枠、普通科計)',
+          capacity: 40,
+        },
+        {
+          courseName: 'スタンダードクラス・アドバンストクラス・アルティメットクラス(一般③、普通科計)',
+          capacity: 10,
+        },
+      ],
+      totalCapacity: 120,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113320400013',
+      schoolName: '法政大学高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(推薦)', capacity: 46 },
+        { courseName: '普通(一般、男女共通枠)', capacity: 46 },
+      ],
+      totalCapacity: 92,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311400058',
+      schoolName: '宝仙学園高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: 'こども教育コース(女子部、A・C推薦・B推薦共通枠)', capacity: 10 },
+        { courseName: 'こども教育コース(女子部、一般①・②共通枠)', capacity: 10 },
+      ],
+      totalCapacity: 20,
       source: IKUSHIN_TOKYO_SOURCE,
     },
   ],
