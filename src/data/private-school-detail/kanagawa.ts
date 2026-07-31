@@ -38,7 +38,10 @@
  * 浅野・聖光学院・フェリス女学院・横浜共立学園・横浜雙葉・サレジオ学院・栄光学園・
  * 清泉女学院・湘南白百合学園の9校が高校からの生徒募集を行わない完全中高一貫校と判明
  * (Wikipedia等の独立情報源で確認)。兵庫/京都で発見済みの「難関進学校ほど高校募集を廃止して
- * いる」パターンが神奈川でも再現。これらはskippedへ理由付きで記録。
+ * いる」パターンが神奈川でも再現。これらはskippedへ理由付きで記録。続けて神奈川学園・
+ * 横浜女学院・関東学院・青山学院横浜英和・公文国際学園・神奈川大学附属・洗足学園・
+ * カリタス女子・逗子開成の9校も同様に完全中高一貫と確認。清心女子・秀英の2校は通信制
+ * 高校のため全日制と同種の県別募集定員の性質に馴染まずスキップ(合計skipped21校)。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -677,6 +680,61 @@ export const PRIVATE_SCHOOL_DETAIL_KANAGAWA: PrivateSchoolDetailFile = {
       schoolCode: 'D114320500048',
       schoolName: '湘南白百合学園高等学校',
       reason: '中高完全一貫制のため高校からの外部募集なし(Wikipediaで確認)',
+    },
+    {
+      schoolCode: 'D114310000071',
+      schoolName: '神奈川学園高等学校',
+      reason: '2008年に高校募集を停止し完全中高一貫校化(Wikipediaで確認)',
+    },
+    {
+      schoolCode: 'D114310000133',
+      schoolName: '横浜女学院高等学校',
+      reason: 'Wikipediaで「完全一貫制」と明記・公式サイトにも帰国生入試要項のみで一般の高校入試要項PDFが見当たらない',
+    },
+    {
+      schoolCode: 'D114310000151',
+      schoolName: '関東学院高等学校',
+      reason: '1990年度を最後に高校からの一般募集を停止した完全中高一貫校(Wikipediaで確認)',
+    },
+    {
+      schoolCode: 'D114310000160',
+      schoolName: '青山学院横浜英和高等学校',
+      reason: '高等学校において生徒を募集しない完全中高一貫校(Wikipediaで確認)',
+    },
+    {
+      schoolCode: 'D114310000268',
+      schoolName: '公文国際学園高等部',
+      reason: '高等学校において生徒を募集しない完全中高一貫校(Wikipediaで確認)',
+    },
+    {
+      schoolCode: 'D114310000320',
+      schoolName: '神奈川大学附属高等学校',
+      reason: '高等学校において生徒を募集しない(転入学を除き)完全中高一貫校(Wikipediaで確認)',
+    },
+    {
+      schoolCode: 'D114310000384',
+      schoolName: '清心女子高等学校',
+      reason: '通信制高校のため全日制と同種の県別募集定員の性質に馴染まずスキップ',
+    },
+    {
+      schoolCode: 'D114310000393',
+      schoolName: '秀英高等学校',
+      reason: '通信制高校のため全日制と同種の県別募集定員の性質に馴染まずスキップ',
+    },
+    {
+      schoolCode: 'D114313000039',
+      schoolName: '洗足学園高等学校',
+      reason: '高等学校において生徒を募集しない完全中高一貫校(Wikipediaで確認)',
+    },
+    {
+      schoolCode: 'D114313000048',
+      schoolName: 'カリタス女子高等学校',
+      reason: '高校からの入学は募集しておらず中学からしか入学できない完全中高一貫校(公式関連情報で確認)',
+    },
+    {
+      schoolCode: 'D114320800027',
+      schoolName: '逗子開成高等学校',
+      reason: '高校からの募集を行わない完全中高一貫校(Wikipediaで確認)',
     },
   ],
 };
