@@ -1,0 +1,56 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  // ── Λ-0: ステージング環境専用のwrangler設定(2026-07-31新設)。 ──
+  // 本番(wrangler.jsonc)とは完全に分離したWorker名・D1データベースを使う。
+  // 本番のD1/Worker/バインディングには一切触れない設計(方向修正指示・修正4を厳守)。
+  // デプロイは `npx wrangler deploy --config wrangler.staging.jsonc` (loopが自由に実行可)。
+  // **本番反映(wrangler.jsonc・my-naishinへのdeploy)は引き続き👤専用**。
+  "main": ".open-next/worker.js",
+  "name": "my-naishin-staging",
+  "compatibility_date": "2024-12-30",
+  "compatibility_flags": [
+    "nodejs_compat",
+    "global_fetch_strictly_public"
+  ],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "services": [
+    {
+      "binding": "WORKER_SELF_REFERENCE",
+      "service": "my-naishin-staging"
+    }
+  ],
+  "vars": {
+    "NEXT_PUBLIC_ADVISOR_ENABLED": "1",
+    "NEXT_PUBLIC_JUKU_SAAS_ENABLED": "1"
+  },
+  // binding名は本番と同じ "LEADS_DB" にする(コードが常にこの名前で参照するため)。
+  // database_name/database_idは本番と別の専用DB(my-naishin-staging-leads・2026-07-31作成)。
+  "d1_databases": [
+    {
+      "binding": "LEADS_DB",
+      "database_name": "my-naishin-staging-leads",
+      "database_id": "e4b2a973-32c7-46fa-93f2-4d2f187dbffa"
+    }
+  ],
+  "observability": {
+    "enabled": false,
+    "head_sampling_rate": 1,
+    "logs": {
+      "enabled": true,
+      "head_sampling_rate": 1,
+      "persist": true,
+      "invocation_logs": true
+    },
+    "traces": {
+      "enabled": false,
+      "persist": true,
+      "head_sampling_rate": 1
+    }
+  }
+  //
+  // ── env変数はステージング用に別途 `wrangler secret put <NAME> --config wrangler.staging.jsonc` で設定 ──
+  //   (本番のsecretとは独立。未設定の機能は休眠するのみで安全に失敗する)
+}
