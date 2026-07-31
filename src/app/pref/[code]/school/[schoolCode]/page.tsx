@@ -6,24 +6,24 @@ import { ChevronRight, Home, GraduationCap, MapPin, AlertTriangle } from 'lucide
 import { getPrefectureByCode } from '@/lib/prefectures';
 import { COMPETITION_RATE_HISTORY_BY_PREFECTURE } from '@/data/competition-rate-history';
 import { selectNearbySchools, getSchoolCategoryTrends } from '@/lib/school-page-data';
-import { getPrefectureSchoolPageData } from '@/lib/school-page-lookup';
+import { getPrefectureSchoolPageData, INDEXED_SCHOOL_PAGE_PREFECTURE_CODES } from '@/lib/school-page-lookup';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 
 /**
- * 個別学校ページ（Λ-2・1県パイロット）。
+ * 個別学校ページ（Λ-2・分割公開の波ごとにインデックス解禁）。
  *
- * 👤裁定(2026-08-01・fable5-fullaccel-backlog-2026-07のΛ-2行)に基づく設計:
+ * 👤裁定(2026-08-01・fable5-fullaccel-backlog-2026-07のΛ-2行/loop-question-note)に基づく設計:
  *  - ①今季倍率(学校固有の一次データ)をページの主役に置く。実装済み。
- *  - ②(県内区分の多年度推移)③(近隣校リンク3本)実装済み。
- *  - **初期はnoindexで建設**（親layout.tsxが既にrobots:{index:false}を設定済み・
- *    本ページのgenerateMetadataでも明示して二重に安全側へ倒す）。
- *  - **1県パイロット**: generateStaticParamsはPILOT_PREFECTURE_CODESのみ静的生成する。
- *    他県は`dynamicParams`既定(true)によりオンデマンド描画にフォールバックする
- *    （school-page-data.tsは全県で動作するため、パイロット外県でもロジック自体は機能する。
- *    横展開判断が済むまで大量の静的ページを一括生成しないための安全策）。
+ *  - ②(県内区分の多年度推移)③(近隣校リンク3本・本数が学区の実態より少なくても正直に公開してよい=A案採用)実装済み。
+ *  - **INDEXED_SCHOOL_PAGE_PREFECTURE_CODES(school-page-lookup.ts)に載っている県のみindex解禁**。それ以外はdynamicParams
+ *    フォールバックで描画はされるがnoindexのまま（横展開判断前に検索露出しない安全策）。
+ *  - **分割公開**: 1波5県ずつ。波を出したら次の波を出す前にGSCで登録数・手動対策を確認する
+ *    ([[fable5-loop-protocol]]のΛ-2運用ルール)。
+ *  - **wave1(2026-08-01)**: tokyo(パイロット済み)+kanagawa/saitama/chiba/hyogo
+ *    （いずれもΛ-4多年度データ・Y-6今季倍率データとも揃っている大市場県）。
  */
 
-const PILOT_PREFECTURE_CODES = ['tokyo'];
+const PILOT_PREFECTURE_CODES = INDEXED_SCHOOL_PAGE_PREFECTURE_CODES;
 
 interface PageProps {
   params: Promise<{ code: string; schoolCode: string }>;
@@ -50,13 +50,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const title = `${school.schoolName}の入試倍率・募集人員 | My Naishin`;
   const description = `${school.schoolName}(${prefecture.name})の今季入試倍率${school.overallRate}倍・募集人員${school.totalQuota}名・応募者数${school.totalApplicants}名。教育委員会公表の一次データに基づく。`;
 
+  const isIndexed = INDEXED_SCHOOL_PAGE_PREFECTURE_CODES.includes(code);
+
   return {
     title,
     description,
-    // 建設中・①②③の品質ゲートは実装済みだが、③(近隣校リンク)は東京都実データで
-    // 55学区中42学区が3件未満と判明済み([[loop-question-note]]で👤判断待ち)のため、
-    // noindex解除の基準が確定するまで明示的にnoindexを維持する。
-    robots: { index: false, follow: false },
+    // 👤裁定(2026-08-01)で品質ゲート①②③は決着済み。INDEXED_PREFECTURE_CODESに
+    // 載っている波(wave)のみindex解禁し、未展開の県はdynamicParamsフォールバックで
+    // 描画はされてもnoindexのまま維持する。
+    robots: { index: isIndexed, follow: isIndexed },
     alternates: { canonical: `https://my-naishin.com/pref/${code}/school/${schoolCode}` },
   };
 }

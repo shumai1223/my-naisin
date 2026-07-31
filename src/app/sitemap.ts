@@ -8,6 +8,7 @@ import { STATIC_PAGES } from '@/lib/page-registry';
 import { SHINDAN_PURPOSE_CONTENTS } from '@/lib/shindan-purpose-content';
 import { NAISHIN_OMOMI_CODES } from '@/lib/naishin-omomi-content';
 import { REPORT_2026_DIGEST_CODES } from '@/lib/report-2026-digest-content';
+import { getPrefectureSchoolPageData, INDEXED_SCHOOL_PAGE_PREFECTURE_CODES } from '@/lib/school-page-lookup';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://my-naishin.com';
@@ -100,6 +101,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
+  // 10. 個別学校ページ（Λ-2・分割公開。INDEXED_SCHOOL_PAGE_PREFECTURE_CODESの波にsitemapも追従する）
+  const schoolPages = INDEXED_SCHOOL_PAGE_PREFECTURE_CODES.flatMap(code => {
+    const data = getPrefectureSchoolPageData(code);
+    if (!data) return [];
+    return data.schools.map(school => ({
+      url: `${baseUrl}/pref/${code}/school/${school.schoolCode}`,
+      lastModified,
+      changeFrequency: 'monthly' as const,
+      priority: 0.6,
+    }));
+  });
+
   return [
     ...staticPages,
     ...prefectureTopPages,
@@ -111,5 +124,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...shindanPurposePages,
     ...naishinOmomiPages,
     ...report2026DigestPages,
+    ...schoolPages,
   ];
 }
