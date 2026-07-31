@@ -58,6 +58,18 @@
  * 佼成学園(全コース計50=50、3コースで共有)。京華女子は特進/進学クラスとも複数の異なる数値
  * (クラブ特待15/推薦特待10・普通科計30/B推薦特待5・普通科計15/一般①特待10・普通科計50等)が
  * 入り組み構造が読み切れないため今回も見送り。
+ * **6頁目(2026-07-31追記)**: 駒込(理系先進/国際教養/特Sコース/Sコースの4コース全てで「普通科計
+ * 120」が繰り返される)・駒場学園(特別進学/国際/進学の3コース全てで「普通科計160」が繰り返される)
+ * の2校は、同一ラベルが3〜4コースにまたがって反復される強い証拠に基づき「学校全体で1つの共有
+ * クォータ」と判断(佼成学園の全コース計50と同型)。国士舘(選抜クラス/進学クラスの2コースで
+ * 「普通科計130」が反復)も同様の解釈を適用したが、2コースのみでの反復は4頁目で確立した「異なる
+ * 推薦/一般ラベルに同数値が来る場合は加算」ケースとの区別が本来難しく、駒込での4コース反復という
+ * より強い証拠が得られたことで初めて確信を持てた。国学院大学久我山は男女別学で推薦(男女共通枠50)
+ * と一般(男約60・女約35)が別ブロックのため加算(145)。國學院は推薦130+一般250=380(4頁目の基本
+ * ルール)。佼成学園女子(留学・SG15+特進35+進学30=80)・駒沢学園女子(進学120+特進100+英語100
+ * =320、いずれも一般②の「全クラス計20」という異なる数値は2次募集の補充枠と判断し未算入)・
+ * 駒澤大学(単一ブロック250)も収録。国際基督教大学は帰国生入試(推薦・書類選考・学力試験の複数
+ * ルート)が主体で一般枠も含め加算方法が特殊すぎるため今回は見送り。
  * 残り7校はWebSearchで個別調査し完全中高一貫(高校からの外部募集なし)と確認できたためスキップ:
  * 暁星・大妻・雙葉・共立女子(2006年度に高校募集停止)・三輪田学園・女子学院・白百合学園。
  * いずれも「女子御三家(女子学院・雙葉)」「男子伝統校(暁星)」等の著名中高一貫校で、
@@ -430,6 +442,98 @@ export const PRIVATE_SCHOOL_DETAIL_TOKYO: PrivateSchoolDetailFile = {
         },
       ],
       totalCapacity: 50,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311200069',
+      schoolName: '佼成学園女子高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '留学コース・スーパーグローバルコース(女、推薦・一般①②共通枠、留学10+スーパーグローバル5)', capacity: 15 },
+        { courseName: '特進コース(女、推薦・一般①②共通枠)', capacity: 35 },
+        { courseName: '進学コース(女、推薦・一般①②共通枠)', capacity: 30 },
+      ],
+      totalCapacity: 80,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311300031',
+      schoolName: '國學院高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(推薦)', capacity: 130 },
+        { courseName: '普通(一般①②③共通枠)', capacity: 250 },
+      ],
+      totalCapacity: 380,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311500048',
+      schoolName: '國學院大學久我山高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(推薦、男女共通枠)', capacity: 50 },
+        { courseName: '普通(一般、男、約)', capacity: 60 },
+        { courseName: '普通(一般、女、約)', capacity: 35 },
+      ],
+      totalCapacity: 145,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311200078',
+      schoolName: '国士舘高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '選抜クラス・進学クラス(推薦・一般①②共通枠、普通科計)', capacity: 130 },
+      ],
+      totalCapacity: 130,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310500111',
+      schoolName: '駒込高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        {
+          courseName: '理系先進コース・国際教養コース・特Sコース・Sコース(推薦Ⅰ・Ⅱ・併優・一般共通枠、普通科計)',
+          capacity: 120,
+        },
+      ],
+      totalCapacity: 120,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113322500018',
+      schoolName: '駒沢学園女子高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '進学クラス(女、推薦・一般①共通枠、全クラス計。一般②の若干枠は未算入)', capacity: 120 },
+        { courseName: '特進クラス(女、推薦・学特・一般①共通枠、全クラス計。一般②の若干枠は未算入)', capacity: 100 },
+        { courseName: '英語クラス(女、推薦・学特・一般①共通枠、全クラス計。一般②の若干枠は未算入)', capacity: 100 },
+      ],
+      totalCapacity: 320,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311200087',
+      schoolName: '駒澤大学高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [{ courseName: '普通(推薦・併優・一般共通枠)', capacity: 250 }],
+      totalCapacity: 250,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311200096',
+      schoolName: '駒場学園高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        {
+          courseName: '特別進学コース・国際コース・進学コース(推薦・一般・併優共通枠、普通科計)',
+          capacity: 160,
+        },
+        { courseName: '食物調理(推薦・一般①②共通枠)', capacity: 20 },
+      ],
+      totalCapacity: 180,
       source: IKUSHIN_TOKYO_SOURCE,
     },
   ],
