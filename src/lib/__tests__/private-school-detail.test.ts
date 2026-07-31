@@ -973,20 +973,20 @@ describe('PRIVATE_SCHOOL_DETAIL_AICHI(大都市圏5県の4県目・育伸社募�
   });
 });
 
-describe('PRIVATE_SCHOOL_DETAIL_TOKYO(大都市圏5県の最後・育伸社募集要項PDF全20ページ処理完了+個別公式サイト調査5弾(廃校・募集停止校4校含む)・上野学園/帝京を個別公式サイトで収録・241校中171校を収録・スキップ61校・残り9校は別チャネルで継続調査)', () => {
+describe('PRIVATE_SCHOOL_DETAIL_TOKYO(大都市圏5県の最後・育伸社募集要項PDF全20ページ処理完了+個別公式サイト調査5弾(廃校・募集停止校4校含む)+東京文華の公式PDF再訪で解決・241校中172校を収録・スキップ62校・残り7校は別チャネルで継続調査)', () => {
   it('収録した学校は全てcourses合計とtotalCapacityが一致する', () => {
     for (const school of PRIVATE_SCHOOL_DETAIL_TOKYO.schools) {
       expect(checkCourseCapacitySum(school)).toBe(true);
     }
   });
 
-  it('収録171校・スキップ61校で参照台帳241校のうち残り9校は未着手(重複なし)', () => {
+  it('収録172校・スキップ62校で参照台帳241校のうち残り7校は未着手(重複なし)', () => {
     const allCodes = SCHOOLS_PRIVATE_TOKYO.schools.map((s) => s.code);
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_TOKYO, allCodes);
     expect(result.duplicates).toEqual([]);
-    expect(result.missing).toHaveLength(9);
-    expect(PRIVATE_SCHOOL_DETAIL_TOKYO.schools.length).toBe(171);
-    expect(PRIVATE_SCHOOL_DETAIL_TOKYO.skipped.length).toBe(61);
+    expect(result.missing).toHaveLength(7);
+    expect(PRIVATE_SCHOOL_DETAIL_TOKYO.schools.length).toBe(172);
+    expect(PRIVATE_SCHOOL_DETAIL_TOKYO.skipped.length).toBe(62);
   });
 });
 
