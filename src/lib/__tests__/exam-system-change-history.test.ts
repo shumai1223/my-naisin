@@ -49,6 +49,18 @@ describe('PAST_SYSTEM_CHANGES（Λ+5・過去の制度変更履歴DB）', () => 
     expect(chibaPref?.maxScore).toBe(135);
   });
 
+  test('愛媛県の推薦入学者選抜→特色入学者選抜エントリはprefectures.tsの現行maxScore(135点満点)と矛盾しない(出願資格の変更であり内申点計算式は不変)', () => {
+    const ehime = PAST_SYSTEM_CHANGES.find((c) => c.prefCode === 'ehime');
+    expect(ehime).toBeDefined();
+    expect(ehime?.effectiveYear).toBe('令和7年度（2025年度）入試');
+    expect(ehime?.category).toBe('selection-structure');
+    expect(ehime?.detail).toContain('特色入学者選抜');
+
+    const ehimePref = PREFECTURES.find((p) => p.code === 'ehime');
+    expect(ehimePref?.maxScore).toBe(135);
+    expect(ehimePref?.practicalMultiplier).toBe(1);
+  });
+
   test('categoryは定義済みの4種類のいずれかのみ(型崩れ防止)', () => {
     const validCategories = new Set(['scoring-input', 'selection-structure', 'weighting-formula', 'other']);
     for (const c of PAST_SYSTEM_CHANGES) {
