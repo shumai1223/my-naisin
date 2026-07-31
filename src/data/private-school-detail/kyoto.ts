@@ -11,7 +11,9 @@
  * 京都芸術大学附属・京都文教大学附属宇治の6校はこのPDFに掲載が無い。
  * **2026-07-31追記**: 京都女子高等学校は育伸社PDFでの対応付けを断念していたが、公式サイト
  * (kgs.ed.jp)の2026年度生徒募集要項PDFに「募集定員」の直接記載(CSコース約35/藤華コース約55/
- * ウィステリア科約20)を発見し収録。京都共栄学園高等学校は引き続きskippedのまま(次回再訪候補)。
+ * ウィステリア科約20)を発見し収録。続けて京都共栄学園高等学校も公式サイト(kyoei.ed.jp)で
+ * 再挑戦し「募集コース・募集人数」の明瞭な一覧表(バタビア30/進学90/総合75)を発見し収録
+ * (ただし公式サイトが既に令和8年度分を令和9年度分へ更新済みのためfiscalYearLabelは令和9年度)。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -410,6 +412,22 @@ export const PRIVATE_SCHOOL_DETAIL_KYOTO: PrivateSchoolDetailFile = {
         fetchedAt: '2026-07-31',
       },
     },
+    {
+      schoolCode: 'D126310000282',
+      schoolName: '京都共栄学園高等学校',
+      fiscalYearLabel: '令和9年度',
+      courses: [
+        { courseName: 'バタビアコース', capacity: 30 },
+        { courseName: '進学コース', capacity: 90 },
+        { courseName: '総合コース(文理系・美術系・スポーツ系)', capacity: 75 },
+      ],
+      totalCapacity: 195,
+      source: {
+        url: 'https://www.kyoei.ed.jp/cms/wp-content/uploads/2026/07/1-2%E4%BB%A4%E5%92%8C9%E5%B9%B4%E5%BA%A6%E9%AB%98%E6%A0%A1%E7%94%9F%E5%BE%92%E5%8B%9F%E9%9B%86%E8%A6%81%E9%A0%85%EF%BC%88%E5%AD%A6%E6%8E%A8%E7%AD%89%E7%84%A1%E3%81%97%EF%BC%89-1.pdf',
+        docTitle: '京都共栄学園高等学校 令和9年度生徒募集要項(公式サイトが既に令和8年度分を令和9年度分へ更新済みのため最新公表値として収録)',
+        fetchedAt: '2026-07-31',
+      },
+    },
   ],
   skipped: [
     {
@@ -421,11 +439,6 @@ export const PRIVATE_SCHOOL_DETAIL_KYOTO: PrivateSchoolDetailFile = {
       schoolCode: 'D126310000148',
       schoolName: '一燈園高等学校',
       reason: '育伸社募集要項PDFに掲載が無く募集定員を確認できなかった',
-    },
-    {
-      schoolCode: 'D126310000282',
-      schoolName: '京都共栄学園高等学校',
-      reason: '育伸社募集要項PDF内の列レイアウトが複雑で校名とコース別数値の対応関係を確信できず今回は見送り(次回再訪の価値あり)',
     },
     {
       schoolCode: 'D126310000362',
