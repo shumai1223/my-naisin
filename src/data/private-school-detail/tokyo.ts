@@ -33,6 +33,17 @@
  * 一般15・併優15」という3つの異なるブロックが並び、A/B推薦の加算可否および「一般15・併優15」
  * が別建て30なのか併願優遇が一般15の内数(合計15)なのかの解釈で2つの独立した曖昧さが重なり
  * 確証が持てないため今回は見送り。
+ * **4頁目(2026-07-31追記)**: 解釈ルールを確立=「推薦ブロック(A/B推薦等が↓で内部共有)」の後に
+ * 続けて「一般ブロック(一般①/②等が↓で内部共有)」が別の数値(または偶然同じ数値)で始まる場合、
+ * 一般側は推薦側とは独立の加算対象クォータである(合算して学校/コースの総定員とする)。この解釈は
+ * 錦城学園高等学校で「令和7年度=推薦120名・一般120名の合計240名」というWebSearch独立情報源
+ * (3頁目時点では未反映)と本頁のikushinデータ(A推薦120・一般①120)が構造的に一致することで
+ * 検証できた。この解釈ルールに基づき関東第一(ハイパー80+アドバンスト240+アグレッシブ200+
+ * アスリート80=600)・北里大学附属順天(旧順天、理数25+英語25+特進40=90)・北豊島(女、
+ * インスパイアリング40+グローバル50+バリュアブル50=140)・共栄学園(未来探究15+国際共生15+
+ * 理数創造15+探究特進35+探究進学80=160)・共立女子第二(女、特別進学35+総合進学80+英語15=130)・
+ * 錦城(特進120は一般のみ掲載+進学330=推薦130+一般200=450)・錦城学園(推薦120+一般120=240)の
+ * 7校を新たに収録。このルール確立により、3頁目で見送った川村は次回この解釈で再訪する価値がある。
  * 残り7校はWebSearchで個別調査し完全中高一貫(高校からの外部募集なし)と確認できたためスキップ:
  * 暁星・大妻・雙葉・共立女子(2006年度に高校募集停止)・三輪田学園・女子学院・白百合学園。
  * いずれも「女子御三家(女子学院・雙葉)」「男子伝統校(暁星)」等の著名中高一貫校で、
@@ -191,6 +202,101 @@ export const PRIVATE_SCHOOL_DETAIL_TOKYO: PrivateSchoolDetailFile = {
         { courseName: '外国語(推薦・一般①②③共通枠)', capacity: 120 },
       ],
       totalCapacity: 180,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113312300039',
+      schoolName: '関東第一高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: 'ハイパーコース(A推薦・B推薦・一般①②共通枠)', capacity: 80 },
+        { courseName: 'アドバンストコース(A推薦・B推薦・一般①②共通枠)', capacity: 240 },
+        { courseName: 'アグレッシブコース(A・C推薦・B推薦・一般①②共通枠)', capacity: 200 },
+        { courseName: 'アスリートコース(男、A・C推薦のみ掲載)', capacity: 80 },
+      ],
+      totalCapacity: 600,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311700037',
+      schoolName: '北里大学附属順天高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '理数選抜類型(推薦Ⅰ・Ⅱ共通枠。帰国①②は若干のため未算入)', capacity: 10 },
+        { courseName: '理数選抜類型(一般①・②共通枠)', capacity: 15 },
+        { courseName: '英語選抜類型(推薦Ⅰ・Ⅱ共通枠。帰国①②は若干のため未算入)', capacity: 10 },
+        { courseName: '英語選抜類型(一般①・②共通枠)', capacity: 15 },
+        { courseName: '特進選抜類型(推薦Ⅰ・Ⅱ共通枠。帰国①②は若干のため未算入)', capacity: 10 },
+        { courseName: '特進選抜類型(一般①・②共通枠)', capacity: 30 },
+      ],
+      totalCapacity: 90,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311800027',
+      schoolName: '北豊島高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: 'インスパイアリング・プログラム(女、推薦A・B共通枠)', capacity: 20 },
+        { courseName: 'インスパイアリング・プログラム(女、一般)', capacity: 20 },
+        { courseName: 'グローバル・プログラム(女、推薦A・B共通枠)', capacity: 25 },
+        { courseName: 'グローバル・プログラム(女、一般)', capacity: 25 },
+        { courseName: 'バリュアブル・プログラム(女、推薦A・B共通枠)', capacity: 25 },
+        { courseName: 'バリュアブル・プログラム(女、一般)', capacity: 25 },
+      ],
+      totalCapacity: 140,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113312200012',
+      schoolName: '共栄学園高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '未来探究コース(A推薦・B推薦・一般・チャレンジ共通枠)', capacity: 15 },
+        { courseName: '国際共生コース(A推薦・B推薦・一般・チャレンジ共通枠)', capacity: 15 },
+        { courseName: '理数創造コース(A推薦・B推薦・一般・チャレンジ共通枠)', capacity: 15 },
+        { courseName: '探究特進コース(A推薦・B推薦・一般・チャレンジ共通枠)', capacity: 35 },
+        { courseName: '探究進学コース(A推薦・B推薦・一般・チャレンジ共通枠)', capacity: 80 },
+      ],
+      totalCapacity: 160,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113320100089',
+      schoolName: '共立女子第二高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '特別進学コース(女、推薦)', capacity: 20 },
+        { courseName: '特別進学コース(女、一般①・②共通枠)', capacity: 15 },
+        { courseName: '総合進学コース(女、推薦)', capacity: 50 },
+        { courseName: '総合進学コース(女、一般①・②共通枠)', capacity: 30 },
+        { courseName: '英語コース(女、推薦)', capacity: 10 },
+        { courseName: '英語コース(女、一般①・②共通枠)', capacity: 5 },
+      ],
+      totalCapacity: 130,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113321100014',
+      schoolName: '錦城高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '特進コース(一般①・②共通枠、推薦の掲載なし)', capacity: 120 },
+        { courseName: '進学コース(推薦)', capacity: 130 },
+        { courseName: '進学コース(一般)', capacity: 200 },
+      ],
+      totalCapacity: 450,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310100053',
+      schoolName: '錦城学園高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(A推薦・B推薦共通枠)', capacity: 120 },
+        { courseName: '普通(一般①・②共通枠)', capacity: 120 },
+      ],
+      totalCapacity: 240,
       source: IKUSHIN_TOKYO_SOURCE,
     },
   ],
