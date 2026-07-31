@@ -278,6 +278,23 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
         fetchedAt: '2026-07-31',
       },
     },
+    {
+      schoolCode: 'D127310000218',
+      schoolName: '桃山学院高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: 'S英数コース', capacity: 80 },
+        { courseName: '英数コース', capacity: 80 },
+        { courseName: '文理コース(文理クラス120+アスリートクラス40、アスリートクラスは男子専願)', capacity: 160 },
+        { courseName: '国際コース(短期留学・長期留学)', capacity: 80 },
+      ],
+      totalCapacity: 400,
+      source: {
+        url: 'https://www.momoyamagakuin-h.ed.jp/senior/admissions/application.html',
+        docTitle: '桃山学院高等学校 2026年度入試 募集要項ページ(合計400名は原資料の記載と一致・中高一貫コース生120名は別枠のため対象外)',
+        fetchedAt: '2026-07-31',
+      },
+    },
   ],
   skipped: [],
 };
