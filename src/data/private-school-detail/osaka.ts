@@ -353,6 +353,26 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
           '(30+30+150=210は公式サイト(osaka-shoin.ac.jp)由来のWebSearch要約と独立に数値一致確認)',
       },
     },
+    {
+      schoolCode: 'D127310000664',
+      schoolName: '精華高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: 'ニュースタンダードコース(専願・併願共通枠)', capacity: 120 },
+        { courseName: 'スーパーグローカルコース(専願・併願共通枠)', capacity: 20 },
+        { courseName: 'スポーツ&アートコース(専願のみ、強化クラブのみ)', capacity: 80 },
+        { courseName: 'i-Techコース(専願・併願共通枠)', capacity: 40 },
+        { courseName: '環境福祉コース(専願のみ)', capacity: 30 },
+        { courseName: 'フリーアカデミーコース(専願のみ)', capacity: 30 },
+      ],
+      totalCapacity: 320,
+      source: {
+        ...IKUSHIN_OSAKA_SOURCE,
+        docTitle:
+          IKUSHIN_OSAKA_SOURCE.docTitle +
+          '(普通科320名の6コース内訳は公式サイト(seika-h.ed.jp)由来のWebSearch要約と独立に完全一致確認)',
+      },
+    },
   ],
   skipped: [],
 };
