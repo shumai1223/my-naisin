@@ -8,6 +8,8 @@ import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { ParentWindowBridge } from '@/components/ParentWindowBridge';
 import { ParentCostBridge } from '@/components/ParentCostBridge';
 import { StatsOptIn } from '@/components/StatsOptIn';
+import { UnlockGate } from '@/components/UnlockGate';
+import { NationalPercentileReveal } from '@/components/NationalPercentileReveal';
 
 /**
  * /hensachi/gyakusan の結果連動フロー（C-15）。
@@ -57,6 +59,19 @@ export function HensachiGyakusanResultFlow() {
       <div className="mt-6">
         <StatsOptIn metric="hensachi" value={result?.currentHensachi} />
       </div>
+
+      {/* T-1: 紹介・解放機構。保護者に送る/LINE登録で全国統計の先行閲覧が解放される */}
+      {result && (
+        <div className="mt-6">
+          <UnlockGate
+            placement="hensachi-percentile"
+            tool="hensachi"
+            shareCtx={{ score: result.currentHensachi, target: result.targetHensachi, gap: result.gap, metricLabel: '偏差値' }}
+          >
+            <NationalPercentileReveal metric="hensachi" metricLabel="偏差値" value={result.currentHensachi} />
+          </UnlockGate>
+        </div>
+      )}
     </>
   );
 }
