@@ -1,4 +1,5 @@
-import { GraduationCap, TrendingDown, Sparkles } from 'lucide-react';
+import Link from 'next/link';
+import { GraduationCap, TrendingDown, Sparkles, Calculator } from 'lucide-react';
 
 import type { SnapshotMetric } from '@/lib/juku-saas-db';
 import { latestTrendDelta, type StudentTrendByMetric, type DeclineAlert } from '@/lib/juku-student-progress';
@@ -27,9 +28,11 @@ export interface DashboardViewProps {
   studentViews: DashboardStudentView[];
   /** デモ環境(ZZ-4e)であることを示すバナーを表示する。 */
   isDemo?: boolean;
+  /** 内申点シミュレーターへのリンク(Λ-8・招待トークン込みのURL)。無ければボタンを表示しない。 */
+  simulatorHref?: string;
 }
 
-export function DashboardView({ jukuName, studentViews, isDemo }: DashboardViewProps) {
+export function DashboardView({ jukuName, studentViews, isDemo, simulatorHref }: DashboardViewProps) {
   const totalAlerts = studentViews.reduce((sum, v) => sum + v.alerts.length, 0);
 
   return (
@@ -54,6 +57,15 @@ export function DashboardView({ jukuName, studentViews, isDemo }: DashboardViewP
               </p>
             </div>
           </div>
+          {simulatorHref && (
+            <Link
+              href={simulatorHref}
+              className="flex items-center gap-1.5 rounded-xl bg-blue-600 px-4 py-2 text-xs font-bold text-white shadow-sm hover:bg-blue-700"
+            >
+              <Calculator className="h-3.5 w-3.5" />
+              内申点シミュレーター
+            </Link>
+          )}
         </div>
 
         <div className="mt-6">

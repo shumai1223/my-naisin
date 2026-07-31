@@ -59,5 +59,11 @@ export default async function JukuDashboardPage({
     })
   );
 
-  return <DashboardView jukuName={account.name} studentViews={studentViews} />;
+  return (
+    <DashboardView
+      jukuName={account.name}
+      studentViews={studentViews}
+      simulatorHref={`/juku/dashboard/simulator?token=${encodeURIComponent(token!)}`}
+    />
+  );
 }
