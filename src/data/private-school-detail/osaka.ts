@@ -8,6 +8,10 @@
  * (大阪公立大学工業高専)は私立高校マスターに含まれないため対象外。
  * 1ページ目から着手し、対応関係が明瞭な11校を今回収録(参照台帳107校)。大阪府は参照台帳の規模が
  * 大きいため複数周回に分けて処理する方針(千葉/静岡/神奈川と同様)。
+ * **2026-07-31追記**: 2ページ目は校名と数値ブロックの対応が極めて複雑で、かつ「大阪商業大学
+ * 高等学校」「大阪商業大学堺高等学校」「大商学園高等学校」のように酷似した校名の別法人校が
+ * 複数存在し誤帰属リスクが高いため、育伸社PDFのブロック読解ではなく公式サイト個別確認に
+ * 切り替えて大阪商業大学堺高等学校を追加(神奈川終盤で確立した手法)。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -151,6 +155,23 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       ],
       totalCapacity: 400,
       source: IKUSHIN_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000860',
+      schoolName: '大阪商業大学堺高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '特進エキスパートコース', capacity: 30 },
+        { courseName: '特進アドバンスコース', capacity: 70 },
+        { courseName: '進学グローバルコース', capacity: 175 },
+        { courseName: 'スポーツコース(スポーツ推薦・専願のみ)', capacity: 100 },
+      ],
+      totalCapacity: 375,
+      source: {
+        url: 'https://www.shodaisakai.ac.jp/entrance',
+        docTitle: '大阪商業大学堺高等学校 令和8年度(2026年度)入試 募集要項ページ(合計375名は原資料の「普通科合計」表記と一致)',
+        fetchedAt: '2026-07-31',
+      },
     },
   ],
   skipped: [],
