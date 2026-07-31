@@ -239,6 +239,17 @@
  * いずれも「女子御三家(女子学院・雙葉)」「男子伝統校(暁星)」等の著名中高一貫校で、
  * 兵庫/京都/神奈川で確立した「難関進学校ほど高校募集を廃止している」パターンが東京でも
  * 強く再現している。
+ * **個別公式サイト調査・第3弾(2026-07-31)**: 残り52校のうちWebSearch+公式サイト直接確認で
+ * 17校が完全中高一貫(高校からの外部募集なし)と確認できた: 渋谷教育学園渋谷・山脇学園・
+ * 成城(2019年度〜)・早稲田(1993年度〜)・攻玉社(2012年度〜)・芝・品川女子学院・
+ * 聖心女子学院(転編入試験のみ)・普連土学園・香蘭女学校・実践女子学園・高輪(2014年度〜、
+ * 2013年度まではスポーツ推薦15名のみ実施)・恵泉女学園(1999年度〜)・光塩女子学院・
+ * 吉祥女子(2007年度〜)・三田国際科学学園・富士見(2011年度〜)(スキップ計37校)。
+ * 帝京高等学校は公式サイト入試要項ページで推薦「男女合計100名」・一般「男女合計100名」と
+ * 明記され、4頁目で確立した基本ルール(推薦/一般が別ラベルの独立ブロックなら加算)を適用し
+ * 200(推薦100+一般100)として収録。城西大学附属城西はACクラス推薦65+CS10・一般①AC35・
+ * 一般②AC35+CS30という、同じ「AC」ラベルが推薦と一般②の両方に現れ加算可否の確証が持てない
+ * 複雑な構造のため今回も保留。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -2329,6 +2340,21 @@ export const PRIVATE_SCHOOL_DETAIL_TOKYO: PrivateSchoolDetailFile = {
       totalCapacity: 60,
       source: IKUSHIN_TOKYO_SOURCE,
     },
+    {
+      schoolCode: 'D113311900044',
+      schoolName: '帝京高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '推薦(男女合計)', capacity: 100 },
+        { courseName: '一般(男女合計)', capacity: 100 },
+      ],
+      totalCapacity: 200,
+      source: {
+        url: 'https://www.teikyo.ed.jp/exam_s/outline_s/',
+        docTitle: '帝京中学校・高等学校 高等学校入試ガイド(入試要項)ページ',
+        fetchedAt: '2026-07-31',
+      },
+    },
   ],
   skipped: [
     {
@@ -2430,6 +2456,91 @@ export const PRIVATE_SCHOOL_DETAIL_TOKYO: PrivateSchoolDetailFile = {
       schoolCode: 'D113310300140',
       schoolName: '東洋英和女学院高等部',
       reason: '完全中高一貫校で高校からの入学を受け付けていないため(WebSearch要約による確認)',
+    },
+    {
+      schoolCode: 'D113311300059',
+      schoolName: '渋谷教育学園渋谷高等学校',
+      reason: '完全中高一貫校で高校からの外部募集を実施していないため(公式サイト募集要項ページ・Wikipediaの確認)',
+    },
+    {
+      schoolCode: 'D113310300131',
+      schoolName: '山脇学園高等学校',
+      reason: '完全中高一貫校で高校において生徒を募集していないため(WebSearch要約による確認)',
+    },
+    {
+      schoolCode: 'D113310400041',
+      schoolName: '成城高等学校',
+      reason: '2019年度入試より高校募集を停止し完全中高一貫校となったため(WebSearch要約による確認)',
+    },
+    {
+      schoolCode: 'D113310400078',
+      schoolName: '早稲田高等学校',
+      reason: '1993年度より高等学校生徒募集を停止し完全中高一貫校となったため(WebSearch要約による確認)',
+    },
+    {
+      schoolCode: 'D113310900028',
+      schoolName: '攻玉社高等学校',
+      reason: '2012年度に高校募集を停止し完全中高一貫校となったため(WebSearch要約による確認)',
+    },
+    {
+      schoolCode: 'D113310300033',
+      schoolName: '芝高等学校',
+      reason: '完全中高一貫校で高校からの外部募集を実施していないため(WebSearch要約による確認)',
+    },
+    {
+      schoolCode: 'D113310900037',
+      schoolName: '品川女子学院高等部',
+      reason: '完全中高一貫校で高校からの外部募集を実施していないため(WebSearch要約による確認)',
+    },
+    {
+      schoolCode: 'D113310300079',
+      schoolName: '聖心女子学院高等科',
+      reason: '完全中高一貫校で高等科への外部入学は転編入試験(若干名)のみのため(WebSearch要約による確認)',
+    },
+    {
+      schoolCode: 'D113310300113',
+      schoolName: '普連土学園高等学校',
+      reason: '完全中高一貫校で高校からの外部募集を実施していないため(WebSearch要約による確認)',
+    },
+    {
+      schoolCode: 'D113310900055',
+      schoolName: '香蘭女学校高等科',
+      reason: '完全中高一貫校で高校からの外部募集を実施していないため(WebSearch要約による確認)',
+    },
+    {
+      schoolCode: 'D113311300040',
+      schoolName: '実践女子学園高等学校',
+      reason: '完全中高一貫校で高校からの外部募集を実施していないため(公式サイト募集要項ページ・WebSearch要約による確認)',
+    },
+    {
+      schoolCode: 'D113310300088',
+      schoolName: '高輪高等学校',
+      reason: '2014年度以降高校からの募集(2013年度まではスポーツ推薦15名)を停止し完全中高一貫校となったため(WebSearch要約による確認)',
+    },
+    {
+      schoolCode: 'D113311200050',
+      schoolName: '恵泉女学園高等学校',
+      reason: '1999年度から高校募集を停止し完全中高一貫校となったため(WebSearch要約による確認)',
+    },
+    {
+      schoolCode: 'D113311500020',
+      schoolName: '光塩女子学院高等科',
+      reason: '高校募集を停止し現在は中等科からの内部進学のみの完全中高一貫校となったため(WebSearch要約による確認)',
+    },
+    {
+      schoolCode: 'D113320300023',
+      schoolName: '吉祥女子高等学校',
+      reason: '2007年度に高校募集を停止し完全中高一貫校となったため(WebSearch要約による確認)',
+    },
+    {
+      schoolCode: 'D113311200014',
+      schoolName: '三田国際科学学園高等学校',
+      reason: '高校募集を停止した完全中高一貫校のため(WebSearch要約による確認)',
+    },
+    {
+      schoolCode: 'D113312000032',
+      schoolName: '富士見高等学校',
+      reason: '2011年度から高校募集を停止し完全中高一貫校となったため(WebSearch要約による確認)',
     },
   ],
 };
