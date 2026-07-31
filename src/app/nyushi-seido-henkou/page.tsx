@@ -6,6 +6,7 @@ import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { ArticleSchema } from '@/components/StructuredData/ArticleSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { SITE_URL } from '@/lib/naishin-dataset';
+import { PAST_SYSTEM_CHANGES } from '@/lib/exam-system-change-history';
 
 // 各都道府県教育委員会が公式に発表済みの入試制度変更予告を集約するトラッキングページ（∞・継続更新型）。
 // 現時点の掲載内容は src/lib/total-score/registry.ts 内の source フィールドで既に出典確認済みの
@@ -135,9 +136,9 @@ export default function NyushiSeidoHenkouPage() {
       />
       <ArticleSchema
         title="公立高校入試 制度変更点まとめ"
-        description="各都道府県教育委員会が公式発表した公立高校入試の制度変更予告を都道府県別にまとめた継続更新ページ"
+        description="各都道府県教育委員会が公式発表した公立高校入試の制度変更予告と、過去に実際に反映された制度変更の履歴を都道府県別にまとめた継続更新ページ"
         datePublished="2026-07-23"
-        dateModified="2026-07-24"
+        dateModified="2026-08-01"
         author="しゅうまい"
       />
       <FAQPageSchema faqItems={FAQS} />
@@ -205,6 +206,46 @@ export default function NyushiSeidoHenkouPage() {
                 </Link>
               </div>
             ))}
+          </section>
+
+          <section className="mb-8">
+            <h2 className="mb-1 text-xl font-bold text-slate-900">過去の制度変更履歴（過去5年分）</h2>
+            <p className="mb-4 text-sm text-slate-500">
+              内申点の算出方法（配点・学年比率・実技傾斜等）に実際に影響した過去の制度変更を集めています。「今後の変更予告」とは異なり、既に選抜へ反映済みの変更のみを対象とします。
+            </p>
+            <div className="space-y-4">
+              {PAST_SYSTEM_CHANGES.map((c, i) => (
+                <div key={`${c.prefCode}-${i}`} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                  <div className="mb-2 flex flex-wrap items-center gap-2">
+                    <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-700">
+                      {c.prefName}
+                    </span>
+                    <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-600">
+                      {c.effectiveYear}〜
+                    </span>
+                  </div>
+                  <h3 className="mb-2 text-lg font-bold text-slate-800">{c.headline}</h3>
+                  <p className="mb-3 text-sm leading-relaxed text-slate-600">{c.detail}</p>
+                  <div className="flex flex-wrap items-center gap-3 text-xs text-slate-400">
+                    <a
+                      href={c.sourceUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1 text-indigo-600 hover:underline"
+                    >
+                      出典: {c.sourceTitle} <ExternalLink className="h-3 w-3" />
+                    </a>
+                    <span>確認日: {c.confirmedDate}</span>
+                  </div>
+                  <Link
+                    href={`/${c.prefCode}/naishin`}
+                    className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-indigo-600 hover:underline"
+                  >
+                    {c.prefName}の現行制度を確認する <ChevronRight className="h-3 w-3" />
+                  </Link>
+                </div>
+              ))}
+            </div>
           </section>
 
           <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
