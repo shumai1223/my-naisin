@@ -20,6 +20,7 @@ import {
   issuePartnerInviteToken,
   verifyPartnerInviteToken,
   listReferralsForPartner,
+  listActivePartnersForPublic,
 } from '../juku-matching-db';
 
 describe('isValidCommissionRateBps', () => {
@@ -182,5 +183,11 @@ describe('verifyPartnerInviteToken（D1未バインド環境=jest）', () => {
 describe('listReferralsForPartner（D1未バインド環境=jest）', () => {
   test('D1未バインドなら空配列(例外を投げない)', async () => {
     await expect(listReferralsForPartner(1)).resolves.toEqual([]);
+  });
+});
+
+describe('listActivePartnersForPublic（D1未バインド環境=jest・公開送客導線用）', () => {
+  test('D1未バインドなら空配列(例外を投げない・「準備中」表示にフォールバックできる)', async () => {
+    await expect(listActivePartnersForPublic()).resolves.toEqual([]);
   });
 });

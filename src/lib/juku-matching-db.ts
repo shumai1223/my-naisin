@@ -274,6 +274,31 @@ export async function listJukuPartners(): Promise<JukuPartnerRecord[]> {
   }
 }
 
+export interface PublicJukuPartner {
+  id: number;
+  name: string;
+}
+
+/**
+ * 公開の塾一覧（保護者向け送客ボタン導線・Λ-7残作業）で使う最小情報のみを返す。
+ * `status='active'`（👤が審査・承認済み）のみを対象とし、pending/suspendedは
+ * 一切公開に出さない。commissionRateBps等の内部ビジネス情報も渡さない。
+ * バインディング未設定・エラー時は空配列（例外を投げず、呼び出し側は「準備中」を表示する）。
+ */
+export async function listActivePartnersForPublic(): Promise<PublicJukuPartner[]> {
+  try {
+    const db = await getDb();
+    if (!db) return [];
+    const q = await db
+      .prepare(`SELECT id, name FROM juku_partners WHERE status = 'active' ORDER BY id ASC`)
+      .all<{ id: number; name: string }>();
+    return (q.results ?? []).map((r) => ({ id: r.id, name: r.name }));
+  } catch (err) {
+    console.error('listActivePartnersForPublic skipped:', err instanceof Error ? err.message : err);
+    return [];
+  }
+}
+
 export interface ReferralWithPartner {
   id: number;
   jukuPartnerId: number;

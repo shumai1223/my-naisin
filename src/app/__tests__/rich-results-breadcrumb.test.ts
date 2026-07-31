@@ -25,6 +25,7 @@ const BREADCRUMB_EXEMPT_ROUTES: Record<string, string> = {
   '/juku/dashboard/simulator': 'ZZ-4d系列：noindex・旗付きUI・招待トークン必須の内部ツール（リッチリザルト対象外・Λ-8）',
   '/juku/dashboard/report': 'ZZ-4d系列：noindex・旗付きUI・招待トークン必須の内部ツール（リッチリザルト対象外・Λ-8）',
   '/juku/matching/dashboard': 'noindex・旗付きUI・招待トークン必須の内部ツール（リッチリザルト対象外・Λ-7）',
+  '/juku/matching': 'noindex・旗付きUIの公開送客導線（提携塾一覧・リッチリザルト対象外・Λ-7残作業）',
   '/admin/report': 'noindex・トークン認証必須の内部ツール（リッチリザルト対象外）',
   '/admin/worklog': 'noindex・トークン認証必須の内部ツール（リッチリザルト対象外）',
   '/juku/dashboard': 'ZZ-4d：noindex・旗付きUI・招待トークン必須の内部ツール（リッチリザルト対象外）',

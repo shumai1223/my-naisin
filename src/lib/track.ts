@@ -102,6 +102,8 @@ export const EVENTS = {
   NAISHIN_TYPE_RESULT: 'naishin_type_result', // 診断結果が表示された（type_idパラメータでタイプ分布を見る・A/B実験ではないのでEXPERIMENT_IMPRESSIONと分離）
   // ── Λ-13: バイラル診断（内申点タイプ診断の友人間シェア・生徒クリックを拡散で回収） ──
   NAISHIN_TYPE_SHARE: 'naishin_type_share', // 診断結果カードを共有/保存した（type_id・mediumで面別に分解。優劣を煽らない設計のためSHARE_TO_PARENTとは意図的に分離）
+  // ── Λ-7: 直接マッチング市場（Ω-6）の公開送客導線 ──
+  JUKU_REFERRAL_REQUEST: 'juku_referral_request', // 保護者が提携塾へ紹介依頼ボタンを押した（送客成立の起点・パラメータにjuku_partner_idを載せる）
 } as const;
 
 export type AnalyticsEvent = (typeof EVENTS)[keyof typeof EVENTS];

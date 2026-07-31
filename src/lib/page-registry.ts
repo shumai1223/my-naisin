@@ -146,6 +146,8 @@ export const SITEMAP_EXCLUDED_ROUTES = [
   '/juku/dashboard/simulator',
   '/juku/dashboard/report',
   '/juku/matching/dashboard',
+  // Λ-7残作業：直接マッチング公開送客導線（同じ旗・実提携塾ゼロ件のためnoindex維持）。
+  '/juku/matching',
   // AA-2：パートナー統合デモ（NEXT_PUBLIC_PARTNER_DEMO_ENABLED='1'まではnotFound()・noindex・実ブランド名不使用の内部確認用）。
   '/partner-demo',
 ];
