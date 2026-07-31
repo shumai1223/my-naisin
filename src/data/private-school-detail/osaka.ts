@@ -207,6 +207,21 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
         fetchedAt: '2026-07-31',
       },
     },
+    {
+      schoolCode: 'D127310000502',
+      schoolName: '大阪薫英女学院高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '国際科(国際特進コース・国際進学コース、コース別内訳非公表)', capacity: 80 },
+        { courseName: '普通科(文理特進・英語進学・文理進学・総合進学・スポーツ特技の5コース計、コース別内訳非公表)', capacity: 120 },
+      ],
+      totalCapacity: 200,
+      source: {
+        url: 'https://www.kun-ei.jp/wp/wp-content/uploads/2025/09/bf63555017727e2e7287863dda20a87c.pdf',
+        docTitle: '大阪薫英女学院高等学校 令和8年度生徒募集要項(募集定員表に国際科80名・普通科120名と明記)',
+        fetchedAt: '2026-07-31',
+      },
+    },
   ],
   skipped: [],
 };
