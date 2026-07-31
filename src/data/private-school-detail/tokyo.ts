@@ -44,6 +44,20 @@
  * 理数創造15+探究特進35+探究進学80=160)・共立女子第二(女、特別進学35+総合進学80+英語15=130)・
  * 錦城(特進120は一般のみ掲載+進学330=推薦130+一般200=450)・錦城学園(推薦120+一般120=240)の
  * 7校を新たに収録。このルール確立により、3頁目で見送った川村は次回この解釈で再訪する価値がある。
+ * **5頁目(2026-07-31追記)**: ★解釈ルールをさらに精緻化=推薦/一般の行に「全コース計X」「進学・
+ * 特進計X」のように**同一の「○○計X」ラベルが複数行(または複数コース)にわたって繰り返される
+ * 場合はそれ自体が共有クォータの宣言であり合算しない**(佼成学園の3コースいずれも「全コース計50」
+ * と表記され学校全体で50が正しい・国本女子/京華の進学特進コースも同様)。一方、ラベルの繰り返しが
+ * 無く単に「推薦」「一般」という見出しに独立した数値が並ぶだけの場合(4頁目で確立した基本ルール)
+ * は加算対象。この2つの判別ルールを適用し10校を新たに収録: 国立音楽大学附属(普通60+音楽80=140、
+ * 大学名の「国立」は地名由来で私立大学であり国立学校ではない)・国本女子(総合進学75+ダブル
+ * ディプロマ75=150、共有クォータ)・慶應義塾女子(推薦30+一般70=100)・京華(進学・特進コース計
+ * 50[共有]+S特進25[推薦10+一般15]=75)・京華商業(70+80=150)・啓明学園(40+50=90)・
+ * 小石川淑徳学園(特別選抜40+選抜40=80、単一ブロック内の2ラベル併記で両方とも共有)・
+ * 工学院大学附属(先進文理70+文理70+インターナショナル20=160)・麹町学園女子(40+30=70)・
+ * 佼成学園(全コース計50=50、3コースで共有)。京華女子は特進/進学クラスとも複数の異なる数値
+ * (クラブ特待15/推薦特待10・普通科計30/B推薦特待5・普通科計15/一般①特待10・普通科計50等)が
+ * 入り組み構造が読み切れないため今回も見送り。
  * 残り7校はWebSearchで個別調査し完全中高一貫(高校からの外部募集なし)と確認できたためスキップ:
  * 暁星・大妻・雙葉・共立女子(2006年度に高校募集停止)・三輪田学園・女子学院・白百合学園。
  * いずれも「女子御三家(女子学院・雙葉)」「男子伝統校(暁星)」等の著名中高一貫校で、
@@ -297,6 +311,125 @@ export const PRIVATE_SCHOOL_DETAIL_TOKYO: PrivateSchoolDetailFile = {
         { courseName: '普通(一般①・②共通枠)', capacity: 120 },
       ],
       totalCapacity: 240,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113321500010',
+      schoolName: '国立音楽大学附属高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(推薦、約)', capacity: 30 },
+        { courseName: '普通(一般①、約)', capacity: 30 },
+        { courseName: '音楽(推薦、約)', capacity: 40 },
+        { courseName: '音楽(一般①、約)', capacity: 40 },
+      ],
+      totalCapacity: 140,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311200041',
+      schoolName: '国本女子高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '総合進学コース(女、A推薦・B推薦・一般オープン①②共通枠、全コース計)', capacity: 75 },
+        { courseName: 'ダブルディプロマコース(女、A推薦・B推薦・一般オープン①②共通枠、全コース計)', capacity: 75 },
+      ],
+      totalCapacity: 150,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310300024',
+      schoolName: '慶應義塾女子高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(女、推薦、約)', capacity: 30 },
+        { courseName: '普通(女、一般、約)', capacity: 70 },
+      ],
+      totalCapacity: 100,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310500068',
+      schoolName: '京華高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '進学コース・特進コース(男、A推薦・B推薦・一般①②共通枠、進学・特進計)', capacity: 50 },
+        { courseName: 'S特進コース(男、A推薦・B推薦共通枠)', capacity: 10 },
+        { courseName: 'S特進コース(男、一般①・②共通枠、帰国生を含む)', capacity: 15 },
+      ],
+      totalCapacity: 75,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310500086',
+      schoolName: '京華商業高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '商業(A推薦・得意技能特待・B推薦共通枠)', capacity: 70 },
+        { courseName: '商業(一般①・②共通枠)', capacity: 80 },
+      ],
+      totalCapacity: 150,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113320700010',
+      schoolName: '啓明学園高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(推薦特待・単願推薦・併願推薦共通枠)', capacity: 40 },
+        { courseName: '普通(一般①・②共通枠)', capacity: 50 },
+      ],
+      totalCapacity: 90,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310500120',
+      schoolName: '小石川淑徳学園高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '特別選抜コース(女、A・C推薦・B推薦・一般①②共通枠)', capacity: 40 },
+        { courseName: '選抜コース(女、A・C推薦・B推薦・一般①②共通枠)', capacity: 40 },
+      ],
+      totalCapacity: 80,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113320100043',
+      schoolName: '工学院大学附属高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '先進文理コース(推薦)', capacity: 30 },
+        { courseName: '先進文理コース(併優・一般①②共通枠)', capacity: 40 },
+        { courseName: '文理コース(推薦)', capacity: 40 },
+        { courseName: '文理コース(併優・一般①②共通枠)', capacity: 30 },
+        { courseName: 'インターナショナルコース(推薦)', capacity: 10 },
+        { courseName: 'インターナショナルコース(併優・一般①②共通枠)', capacity: 10 },
+      ],
+      totalCapacity: 160,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310100062',
+      schoolName: '麹町学園女子高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '東洋大学グローバルコース(女、推薦A・B共通枠)', capacity: 40 },
+        { courseName: '東洋大学グローバルコース(女、一般3教科・英語1教科共通枠)', capacity: 30 },
+      ],
+      totalCapacity: 70,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311500039',
+      schoolName: '佼成学園高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        {
+          courseName: '難関国公立コース・グローバルコース・総合進学コース(男、推薦・一般①②共通枠、全コース計)',
+          capacity: 50,
+        },
+      ],
+      totalCapacity: 50,
       source: IKUSHIN_TOKYO_SOURCE,
     },
   ],
