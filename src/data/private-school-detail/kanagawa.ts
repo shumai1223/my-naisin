@@ -44,7 +44,10 @@
  * 高校のため全日制と同種の県別募集定員の性質に馴染まずスキップ(合計skipped21校)。続けて
  * 鎌倉女学院・湘南学園も完全中高一貫と確認、厚木中央・鹿島山北も通信制と判明、湘南ライナス
  * 学園はWikipediaに「2012年廃校」の記載があり文科省学校コード一覧との整合性を確認できず
- * 不確実としてスキップ(合計skipped26校)。
+ * 不確実としてスキップ(合計skipped26校)。続けて向上高等学校(公式サイトPDF・4コース合計280)
+ * と湘南学院高等学校(公式サイトPDF・4コース合計445が原資料の「定員445名」と完全一致検算)を
+ * 収録(53校)。シュタイナー学園高等部は小中高一貫で外部転入は欠員時の若干名のみのため
+ * 固定定員が無くskippedへ(合計skipped27校)。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -632,6 +635,40 @@ export const PRIVATE_SCHOOL_DETAIL_KANAGAWA: PrivateSchoolDetailFile = {
         fetchedAt: '2026-07-31',
       },
     },
+    {
+      schoolCode: 'D114321400010',
+      schoolName: '向上高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: 'S特進コース(推薦10+一般10)', capacity: 20 },
+        { courseName: '特進コース(推薦15+一般15)', capacity: 30 },
+        { courseName: '選抜コース(推薦35+一般55)', capacity: 90 },
+        { courseName: '文理コース(推薦60+一般80)', capacity: 140 },
+      ],
+      totalCapacity: 280,
+      source: {
+        url: 'https://www.kj.kojo.ed.jp/wp-content/themes/kojo2025/images/pdf/app.pdf',
+        docTitle: '向上高等学校 令和8年度生徒募集要項(二次入試は全コース若干名で数値非公表のため未算入)',
+        fetchedAt: '2026-07-31',
+      },
+    },
+    {
+      schoolCode: 'D114320100015',
+      schoolName: '湘南学院高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: 'サイエンス(特進理数)コース(推薦10+一般10)', capacity: 20 },
+        { courseName: 'アドバンス(特進)コース(推薦30+一般70)', capacity: 100 },
+        { courseName: 'アビリティ(進学)コース(推薦60+一般80)', capacity: 140 },
+        { courseName: 'リベラルアーツ(総合)コース(推薦100+一般85)', capacity: 185 },
+      ],
+      totalCapacity: 445,
+      source: {
+        url: 'https://shonangakuin.ed.jp/files/pdf/entrance-examination/R08_requirements.pdf',
+        docTitle: '湘南学院高等学校 2026年度入試生徒募集要項(コース合計445名は原資料の「定員 全日制/普通科/445名」と完全一致検算済み)',
+        fetchedAt: '2026-07-31',
+      },
+    },
   ],
   skipped: [
     {
@@ -763,6 +800,11 @@ export const PRIVATE_SCHOOL_DETAIL_KANAGAWA: PrivateSchoolDetailFile = {
       schoolCode: 'D114320600038',
       schoolName: '湘南ライナス学園高等部',
       reason: 'Wikipediaに「2012年3月31日に廃校」との記載があり、文科省学校コード一覧(令和8年5月時点)に現存する記載との整合性を確認できなかったため、実在・募集状況とも不確実として正直にスキップ',
+    },
+    {
+      schoolCode: 'D114315000016',
+      schoolName: 'シュタイナー学園高等部',
+      reason: '小中高一貫校で大半の生徒はシュタイナー学園中等部から進学。外部からの転入・編入は欠員がある場合のみ若干名を受け入れる方式のため、固定の県別募集定員数が公表されていない',
     },
   ],
 };
