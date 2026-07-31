@@ -197,6 +197,17 @@
  * (TG25[一般のみ]+AG[推薦40+一般130]+SG[推薦60+一般140])・保善300(特別進学30+大進選抜60+
  * 大学進学210)・武蔵野160(特進ステージ30+進学ステージ130)・武蔵野大学110(ハイグレード35+
  * PBLインターナショナル30+本科45)・明治学院東村山120(推薦50[運動クラブ約10を含む]+一般70)。
+ * **19頁目(2026-07-31追記)**: 明星(SMGS・MGS・本科の3クラス全てで「全クラス計80(推薦)」
+ * 「全クラス計150(一般①②)」が両方一致反復=80+150=230の共有、駒込型)・明法(特別進学・総合進学の
+ * 2コースで「普通科計57(A推薦、GSP15含む)」「普通科計58(B推薦Ⅰ・Ⅱ・一般、GSP15含む)」が両方
+ * 一致反復=57+58=115の共有)・目黒日本大学(進学コース選抜・N進学の2クラスで「普通科計122
+ * (推薦)」「普通科計123(一般併優)」が両方一致反復=122+123=245の共有)は複数コース反復パターンを
+ * 適用。目黒学院は4コース全てで「全コース計約280(第一志望推薦)」が一般系ラウンドも含め全ての
+ * 行で完全一致して反復=目白研心の全4コースでも「普通科計100」が単願推薦・一般ともに完全一致で
+ * 反復=いずれも学校全体で単一のクォータ(280・100、加算せず)。明治大学付属中野165(男、推薦Ⅰ
+ * [総合]30+推薦Ⅱ[スポーツ特別]30+一般105)は3段階が全て異なる数値のため全加算。明治大学付属
+ * 八王子160・明治大学付属明治50は推薦一般で異なる数値(または偶然同じ数値)が繰り返されるが
+ * 計Xラベルなしのプレーン見出しのため4頁目の基本ルールで加算。
  * 残り7校はWebSearchで個別調査し完全中高一貫(高校からの外部募集なし)と確認できたためスキップ:
  * 暁星・大妻・雙葉・共立女子(2006年度に高校募集停止)・三輪田学園・女子学院・白百合学園。
  * いずれも「女子御三家(女子学院・雙葉)」「男子伝統校(暁星)」等の著名中高一貫校で、
@@ -2038,6 +2049,117 @@ export const PRIVATE_SCHOOL_DETAIL_TOKYO: PrivateSchoolDetailFile = {
         { courseName: '普通(一般)', capacity: 80 },
       ],
       totalCapacity: 160,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311400076',
+      schoolName: '明治大学付属中野高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(男、推薦Ⅰ[総合]、約)', capacity: 30 },
+        { courseName: '普通(男、推薦Ⅱ[スポーツ特別]、約)', capacity: 30 },
+        { courseName: '普通(男、一般、約)', capacity: 105 },
+      ],
+      totalCapacity: 165,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113320100098',
+      schoolName: '明治大学付属八王子高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(推薦、男女共通枠、約)', capacity: 80 },
+        { courseName: '普通(一般、男女共通枠、約。スポーツ文化20以内を含む)', capacity: 80 },
+      ],
+      totalCapacity: 160,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113320800019',
+      schoolName: '明治大学付属明治高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(推薦、男女共通枠、約。指定校を含む)', capacity: 20 },
+        { courseName: '普通(一般、男女共通枠、約)', capacity: 30 },
+      ],
+      totalCapacity: 50,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113320600011',
+      schoolName: '明星高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        {
+          courseName: 'SMGSクラス・MGSクラス・本科クラス(推薦共通枠、全クラス計)',
+          capacity: 80,
+        },
+        {
+          courseName: 'SMGSクラス・MGSクラス・本科クラス(一般①・②共通枠、全クラス計)',
+          capacity: 150,
+        },
+      ],
+      totalCapacity: 230,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113321300030',
+      schoolName: '明法高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        {
+          courseName: '特別進学コース・総合進学コース(A推薦共通枠、普通科計、GSP15を含む)',
+          capacity: 57,
+        },
+        {
+          courseName: '特別進学コース・総合進学コース(B推薦Ⅰ・Ⅱ・一般①②共通枠、普通科計、GSP15を含む)',
+          capacity: 58,
+        },
+      ],
+      totalCapacity: 115,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311000052',
+      schoolName: '目黒学院高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        {
+          courseName: 'スーパープレミアムコース・プレミアムコース・アドバンスコース・スタンダードキャリアコース(第一志望推薦・A/B日程・CB日程共通枠、全コース計、約)',
+          capacity: 280,
+        },
+      ],
+      totalCapacity: 280,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311000043',
+      schoolName: '目黒日本大学高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        {
+          courseName: '進学コース選抜クラス・進学コースN進学クラス(推薦共通枠、普通科計)',
+          capacity: 122,
+        },
+        {
+          courseName: '進学コース選抜クラス・進学コースN進学クラス(一般併優①②共通枠、普通科計)',
+          capacity: 123,
+        },
+      ],
+      totalCapacity: 245,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310400069',
+      schoolName: '目白研心高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        {
+          courseName: '特進コース・グローバルサイエンスコース(2026年新設)・スーパーイングリッシュコース・総合コース(単願推薦・併願推薦・一般①②共通枠、普通科計)',
+          capacity: 100,
+        },
+      ],
+      totalCapacity: 100,
       source: IKUSHIN_TOKYO_SOURCE,
     },
   ],
