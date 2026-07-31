@@ -25,6 +25,7 @@ const FAQ_EXEMPT_ROUTES: Record<string, string> = {
   '/about': '運営者情報ページ（Q&A形式のコンテンツなし）',
   '/about/editor-profile': '運営者プロフィールページ（Q&A形式のコンテンツなし）',
   '/admin/juku-reviews': 'noindex・トークン認証必須の内部ツール（リッチリザルト対象外・R-1第3弾）',
+  '/admin/juku-matching': 'noindex・トークン認証必須の内部ツール（リッチリザルト対象外・Λ-7 build-not-launch）',
   '/admin/report': 'noindex・トークン認証必須の内部ツール（リッチリザルト対象外）',
   '/admin/worklog': 'noindex・トークン認証必須の内部ツール（リッチリザルト対象外）',
   '/advisor': 'ZZ-3c：noindex・旗付きUI（決定論Q&Aツールで単発応答・リッチリザルト対象外）',

@@ -27,6 +27,7 @@ const HOWTO_EXEMPT_ROUTES: Record<string, string> = {
   '/about': '運営者情報ページ（手順コンテンツなし）',
   '/about/editor-profile': '運営者プロフィールページ（手順コンテンツなし）',
   '/admin/juku-reviews': 'noindex・トークン認証必須の内部ツール（リッチリザルト対象外・R-1第3弾）',
+  '/admin/juku-matching': 'noindex・トークン認証必須の内部ツール（リッチリザルト対象外・Λ-7 build-not-launch）',
   '/admin/report': 'noindex・トークン認証必須の内部ツール（リッチリザルト対象外）',
   '/admin/worklog': 'noindex・トークン認証必須の内部ツール（リッチリザルト対象外）',
   '/advisor': 'ZZ-3c：noindex・旗付きUI（決定論Q&Aツールで手順でなく単発の質問応答）',

@@ -204,6 +204,91 @@ export async function recordCommissionEntry(input: {
   }
 }
 
+/** 提携塾の一覧（新しい順）。管理画面(admin/juku-matching)の塾一覧・作成フォーム用。 */
+export async function listJukuPartners(): Promise<JukuPartnerRecord[]> {
+  try {
+    const db = await getDb();
+    if (!db) return [];
+    const q = await db
+      .prepare(`SELECT id, name, commission_rate_bps, status FROM juku_partners ORDER BY id DESC`)
+      .all<{ id: number; name: string; commission_rate_bps: number; status: string }>();
+    return (q.results ?? []).map((r) => ({
+      id: r.id,
+      name: r.name,
+      commissionRateBps: r.commission_rate_bps,
+      status: r.status as JukuPartnerStatus,
+    }));
+  } catch (err) {
+    console.error('listJukuPartners skipped:', err instanceof Error ? err.message : err);
+    return [];
+  }
+}
+
+export interface ReferralWithPartner {
+  id: number;
+  jukuPartnerId: number;
+  jukuPartnerName: string;
+  studentRef: string;
+  prefectureCode: string | null;
+  format: 'online' | 'in-person' | null;
+  status: JukuReferralStatus;
+  sentAt: string;
+}
+
+/**
+ * 送客ログの一覧(提携塾名を結合・新しい順)。管理画面(admin/juku-matching)の
+ * 「送客受信・成約報告UI」用（招待フロー未実装のため、現時点では塾側でなく管理者が代行操作する）。
+ * statusを指定すればその状態のみに絞る（例: 'sent'/'contacted'=未処理分だけ表示）。
+ */
+export async function listReferrals(status?: JukuReferralStatus, limit = 100): Promise<ReferralWithPartner[]> {
+  try {
+    const db = await getDb();
+    if (!db) return [];
+    const base = `SELECT r.id, r.juku_partner_id, p.name AS partner_name, r.student_ref, r.prefecture_code, r.format, r.status, r.sent_at
+       FROM juku_referrals r JOIN juku_partners p ON p.id = r.juku_partner_id`;
+    const q = status
+      ? await db
+          .prepare(`${base} WHERE r.status = ? ORDER BY r.id DESC LIMIT ?`)
+          .bind(status, limit)
+          .all<{
+            id: number;
+            juku_partner_id: number;
+            partner_name: string;
+            student_ref: string;
+            prefecture_code: string | null;
+            format: string | null;
+            status: string;
+            sent_at: string;
+          }>()
+      : await db
+          .prepare(`${base} ORDER BY r.id DESC LIMIT ?`)
+          .bind(limit)
+          .all<{
+            id: number;
+            juku_partner_id: number;
+            partner_name: string;
+            student_ref: string;
+            prefecture_code: string | null;
+            format: string | null;
+            status: string;
+            sent_at: string;
+          }>();
+    return (q.results ?? []).map((r) => ({
+      id: r.id,
+      jukuPartnerId: r.juku_partner_id,
+      jukuPartnerName: r.partner_name,
+      studentRef: r.student_ref,
+      prefectureCode: r.prefecture_code,
+      format: r.format as 'online' | 'in-person' | null,
+      status: r.status as JukuReferralStatus,
+      sentAt: r.sent_at,
+    }));
+  } catch (err) {
+    console.error('listReferrals skipped:', err instanceof Error ? err.message : err);
+    return [];
+  }
+}
+
 export interface CommissionLedgerEntry {
   id: number;
   referralId: number;

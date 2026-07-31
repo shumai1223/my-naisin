@@ -15,6 +15,8 @@ import {
   updateReferralStatus,
   recordCommissionEntry,
   getPartnerLedger,
+  listJukuPartners,
+  listReferrals,
 } from '../juku-matching-db';
 
 describe('isValidCommissionRateBps', () => {
@@ -135,5 +137,21 @@ describe('recordCommissionEntry（D1未バインド環境=jest）', () => {
 describe('getPartnerLedger（D1未バインド環境=jest）', () => {
   test('D1未バインドなら空配列', async () => {
     await expect(getPartnerLedger(1)).resolves.toEqual([]);
+  });
+});
+
+describe('listJukuPartners（D1未バインド環境=jest）', () => {
+  test('D1未バインドなら空配列(例外を投げない)', async () => {
+    await expect(listJukuPartners()).resolves.toEqual([]);
+  });
+});
+
+describe('listReferrals（D1未バインド環境=jest）', () => {
+  test('D1未バインドなら空配列(status指定あり・例外を投げない)', async () => {
+    await expect(listReferrals('sent')).resolves.toEqual([]);
+  });
+
+  test('D1未バインドなら空配列(status未指定・例外を投げない)', async () => {
+    await expect(listReferrals()).resolves.toEqual([]);
   });
 });
