@@ -127,6 +127,17 @@
  * (一般のみ掲載)・多摩大学目黒150(推薦30+一般120)・中央学院大学中央50(普通25+商業25、別課程の
  * ため加算)・中央大学(昼間定時制)95(推薦25+一般70、男女共通枠)・中央大学杉並300(一般公募推薦
  * 130+帰国20+一般150、帰国は明示数値のため国際系学校とは異なり通常の校と同様に算入)。
+ * **12頁目(2026-07-31追記)**: 東京家政学院(女、リベラルアーツ・アドバンストの2コースで
+ * 「普通科計80(単願推薦)・普通科計60(併優一般①)・普通科計20(併優一般②)」が完全一致で反復=
+ * 各ラウンドはコース間で共有だがラウンド間(80/60/20)は異なる数値のため加算し160)は複数コース
+ * 反復+ラウンド加算の複合パターン。帝京は特進・進学・インターナショナルの3コースと単独の
+ * アスリートコースの両方に「全コース計100」という同一ラベルが推薦・一般問わず繰り返され、
+ * ラウンド間で加算すべきか(200)コース全体で単一の100なのか原資料の解像度だけでは確証が持てない
+ * 複合的な曖昧さのため今回は見送り。その他は通常の複数コース/推薦一般加算: 中央大学附属200・
+ * 千代田100(研究20+開発80)・帝京大学60(単一ブロック)・帝京八王子70(2026年新設校、特進25+
+ * 進学45)・貞静学園125(特別進学15+総合進学60+幼児教育保育60)・東亜学園405(総合選抜[推薦179+
+ * 一般181]+特進[推薦10+一般35])・東海大学菅生140(医学難関大5+特進PBL15+進学120)・東海大学
+ * 付属高輪台170(単一ブロック)・東京270(推薦120+一般150)・東京音楽大学付属35(単一ブロック)。
  * 残り7校はWebSearchで個別調査し完全中高一貫(高校からの外部募集なし)と確認できたためスキップ:
  * 暁星・大妻・雙葉・共立女子(2006年度に高校募集停止)・三輪田学園・女子学院・白百合学園。
  * いずれも「女子御三家(女子学院・雙葉)」「男子伝統校(暁星)」等の著名中高一貫校で、
@@ -1212,6 +1223,134 @@ export const PRIVATE_SCHOOL_DETAIL_TOKYO: PrivateSchoolDetailFile = {
         { courseName: '普通(一般)', capacity: 150 },
       ],
       totalCapacity: 300,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113321000024',
+      schoolName: '中央大学附属高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(一般公募推薦、約)', capacity: 80 },
+        { courseName: '普通(一般、約)', capacity: 120 },
+      ],
+      totalCapacity: 200,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310100080',
+      schoolName: '千代田高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '研究コース(単願推薦・併願推薦・併優一般①②共通枠)', capacity: 20 },
+        { courseName: '開発コース(単願推薦・併願推薦・併優一般①②共通枠)', capacity: 80 },
+      ],
+      totalCapacity: 100,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113320100034',
+      schoolName: '帝京大学高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [{ courseName: '普通(推薦優遇・一般共通枠)', capacity: 60 }],
+      totalCapacity: 60,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113320100025',
+      schoolName: '帝京八王子高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '特進コース(推薦)', capacity: 5 },
+        { courseName: '特進コース(一般①・②共通枠)', capacity: 20 },
+        { courseName: '進学コース(推薦)', capacity: 15 },
+        { courseName: '進学コース(一般①・②共通枠)', capacity: 30 },
+      ],
+      totalCapacity: 70,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310500148',
+      schoolName: '貞静学園高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '特別進学コース(A推薦・B推薦・併優一般①②共通枠)', capacity: 15 },
+        { courseName: '総合進学コース(A推薦・B推薦・併優一般①②共通枠)', capacity: 60 },
+        { courseName: '幼児教育・保育系進学コース(A推薦・B推薦・併優一般①②共通枠)', capacity: 50 },
+      ],
+      totalCapacity: 125,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311400021',
+      schoolName: '東亜学園高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '総合選抜コース(推薦)', capacity: 179 },
+        { courseName: '総合選抜コース(一般①・②共通枠)', capacity: 181 },
+        { courseName: '特進コース(推薦)', capacity: 10 },
+        { courseName: '特進コース(一般①・②共通枠)', capacity: 35 },
+      ],
+      totalCapacity: 405,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113322800015',
+      schoolName: '東海大学菅生高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '医学・難関大コース(A・同窓生推薦・一般①②③共通枠)', capacity: 5 },
+        { courseName: '特進PBLコース(A・C・同窓生推薦・一般①②③共通枠)', capacity: 15 },
+        { courseName: '進学コース(A・C・同窓生推薦・一般①②③共通枠)', capacity: 120 },
+      ],
+      totalCapacity: 140,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310300097',
+      schoolName: '東海大学付属高輪台高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [{ courseName: '普通(推薦・一般共通枠)', capacity: 170 }],
+      totalCapacity: 170,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311100042',
+      schoolName: '東京高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通(推薦Ⅰ・Ⅱ共通枠)', capacity: 120 },
+        { courseName: '普通(併優一般①②③共通枠)', capacity: 150 },
+      ],
+      totalCapacity: 270,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311600092',
+      schoolName: '東京音楽大学付属高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [{ courseName: '音楽(推薦・一般共通枠)', capacity: 35 }],
+      totalCapacity: 35,
+      source: IKUSHIN_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310100099',
+      schoolName: '東京家政学院高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        {
+          courseName: 'リベラルアーツコース・アドバンストコース(女、単願推薦・併願推薦共通枠、普通科計)',
+          capacity: 80,
+        },
+        {
+          courseName: 'リベラルアーツコース・アドバンストコース(女、併優一般①共通枠、普通科計)',
+          capacity: 60,
+        },
+        {
+          courseName: 'リベラルアーツコース・アドバンストコース(女、併優一般②共通枠、普通科計)',
+          capacity: 20,
+        },
+      ],
+      totalCapacity: 160,
       source: IKUSHIN_TOKYO_SOURCE,
     },
   ],
