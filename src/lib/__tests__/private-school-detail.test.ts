@@ -896,7 +896,7 @@ describe('PRIVATE_SCHOOL_DETAIL_NARA(育伸社募集要項PDFで18校中12校を
   });
 });
 
-describe('PRIVATE_SCHOOL_DETAIL_KYOTO(大都市圏5県の初回着手・育伸社募集要項PDFをRead toolで直読みし44校中35校を収録)', () => {
+describe('PRIVATE_SCHOOL_DETAIL_KYOTO(大都市圏5県の初回着手・育伸社募集要項PDF+公式サイト個別確認で44校中36校を収録)', () => {
   it('収録した学校は全てcourses合計とtotalCapacityが一致する', () => {
     for (const school of PRIVATE_SCHOOL_DETAIL_KYOTO.schools) {
       expect(checkCourseCapacitySum(school)).toBe(true);
@@ -910,9 +910,9 @@ describe('PRIVATE_SCHOOL_DETAIL_KYOTO(大都市圏5県の初回着手・育伸�
     expect(result.missing).toEqual([]);
   });
 
-  it('収録35校+スキップ9校で参照台帳の44校と一致する', () => {
-    expect(PRIVATE_SCHOOL_DETAIL_KYOTO.schools.length).toBe(35);
-    expect(PRIVATE_SCHOOL_DETAIL_KYOTO.skipped.length).toBe(9);
+  it('収録36校+スキップ8校で参照台帳の44校と一致する', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_KYOTO.schools.length).toBe(36);
+    expect(PRIVATE_SCHOOL_DETAIL_KYOTO.skipped.length).toBe(8);
   });
 });
 

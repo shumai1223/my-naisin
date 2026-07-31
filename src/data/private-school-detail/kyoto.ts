@@ -9,6 +9,9 @@
  * 対応関係を確信できず今回は見送り(次回再訪の価値あり)。洛星は2013年に高校募集を停止し
  * 完全中高一貫校化(Wikipediaで確認)。一燈園・京都つくば開成・京都美山・京都長尾谷・
  * 京都芸術大学附属・京都文教大学附属宇治の6校はこのPDFに掲載が無い。
+ * **2026-07-31追記**: 京都女子高等学校は育伸社PDFでの対応付けを断念していたが、公式サイト
+ * (kgs.ed.jp)の2026年度生徒募集要項PDFに「募集定員」の直接記載(CSコース約35/藤華コース約55/
+ * ウィステリア科約20)を発見し収録。京都共栄学園高等学校は引き続きskippedのまま(次回再訪候補)。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -391,6 +394,22 @@ export const PRIVATE_SCHOOL_DETAIL_KYOTO: PrivateSchoolDetailFile = {
       totalCapacity: 144,
       source: IKUSHIN_KYOTO_SOURCE,
     },
+    {
+      schoolCode: 'D126310000166',
+      schoolName: '京都女子高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通科CSコース(約、A日程・B日程通算)', capacity: 35 },
+        { courseName: '普通科藤華コース(約、A日程・B日程通算)', capacity: 55 },
+        { courseName: '専門学科ウィステリア科(約、A日程・B日程通算)', capacity: 20 },
+      ],
+      totalCapacity: 110,
+      source: {
+        url: 'https://kgs.ed.jp/system/wp-content/themes/kyoto/asset/pdf/2026_yoko_high.pdf',
+        docTitle: '京都女子高等学校 2026(令和8)年度入試 生徒募集要項(募集定員は全て内部進学者を除く)',
+        fetchedAt: '2026-07-31',
+      },
+    },
   ],
   skipped: [
     {
@@ -402,11 +421,6 @@ export const PRIVATE_SCHOOL_DETAIL_KYOTO: PrivateSchoolDetailFile = {
       schoolCode: 'D126310000148',
       schoolName: '一燈園高等学校',
       reason: '育伸社募集要項PDFに掲載が無く募集定員を確認できなかった',
-    },
-    {
-      schoolCode: 'D126310000166',
-      schoolName: '京都女子高等学校',
-      reason: '育伸社募集要項PDF内の列レイアウトが複雑で校名とコース別数値の対応関係を確信できず今回は見送り(次回再訪の価値あり)',
     },
     {
       schoolCode: 'D126310000282',
