@@ -590,6 +590,23 @@ export const PRIVATE_SCHOOL_DETAIL_KANAGAWA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D114310000188',
+      schoolName: '横浜学園高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: 'クリエイティブコース(推薦30+一般20)', capacity: 50 },
+        { courseName: 'アカデミーコース(推薦130+一般140)', capacity: 270 },
+      ],
+      totalCapacity: 320,
+      source: {
+        url: 'https://www.yokogaku.ed.jp/entry/pdf/2025/2026yoko.pdf',
+        docTitle:
+          '横浜学園高等学校 令和8年度(2026年度)生徒募集要項' +
+          '(第二次入学試験は両コースとも若干名で数値非公表のため未算入。育伸社PDFでは横須賀学院と酷似したS選抜/A進学構成のブロックがあり確信が持てず見送っていたため本校公式サイトの一次資料を優先採用)',
+        fetchedAt: '2026-07-31',
+      },
+    },
+    {
       schoolCode: 'D114310000311',
       schoolName: '森村学園高等部',
       fiscalYearLabel: '2026年度',
