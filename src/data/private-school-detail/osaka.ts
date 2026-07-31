@@ -15,6 +15,10 @@
  * **2026-07-31further**: 中高一貫の名門校3校(大阪星光学院・大阪女学院・帝塚山学院)を個別確認した
  * ところ、いずれも「約X名」の概数表記のみで正確な定員が非公表、または実質的に外部募集を
  * 停止しており、Y-0憲法(公表値のみ・捏造ゼロ)に基づき3校ともスキップとして記録。
+ * **2026-07-31さらに続き**: 帝塚山学院泉ケ丘高等学校を公式PDF(1次入試「Ｓ特進コース・特進コース計
+ * 約120名」)から収録。出願時にコース選択せず1本の定員枠として運用されており、履正社等の
+ * 既存precedent(単一の約数字は高確度の一次情報として受容)と整合するため収録可とした。
+ * 大阪信愛学院高等学校は令和9年度(次サイクル)の概数のみで正確な定員が確認できずスキップ。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -376,6 +380,24 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
           '(普通科320名の6コース内訳は公式サイト(seika-h.ed.jp)由来のWebSearch要約と独立に完全一致確認)',
       },
     },
+    {
+      schoolCode: 'D127310000637',
+      schoolName: '帝塚山学院泉ケ丘高等学校',
+      fiscalYearLabel: '令和8年度(2026年度)',
+      courses: [
+        {
+          courseName: 'Ｓ特進コース・特進コース(計、出願時にコース選択せず判定点でコース決定)',
+          capacity: 120,
+        },
+      ],
+      totalCapacity: 120,
+      source: {
+        url: 'https://www.tezuka-i-h.jp/izumi-admin/wp-content/uploads/2025/09/2026kou_bosyuyoukou.pdf',
+        docTitle:
+          '帝塚山学院泉ヶ丘高等学校 令和8年度生徒募集要項(1次入試の募集人数「Ｓ特進コース・特進コース計 約120名」。帰国生入試分は同枠に含む)',
+        fetchedAt: '2026-07-31',
+      },
+    },
   ],
   skipped: [
     {
@@ -392,6 +414,11 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       schoolCode: 'D127310000236',
       schoolName: '帝塚山学院高等学校',
       reason: '公式サイトに「約40人」とのみ記載があり、コース別内訳を含め正確な定員数が公表されていないため見送り',
+    },
+    {
+      schoolCode: 'D127310000183',
+      schoolName: '大阪信愛学院高等学校',
+      reason: '公式サイトに令和9年度(2027年度)募集要項として「普通科(特進コース約60名+総合進学コース・看護医療コース約180名)合計約240名」との記載があるのみで、いずれも概数表記かつ次年度サイクルの情報のため正確な定員数として採用せず見送り',
     },
   ],
 };
