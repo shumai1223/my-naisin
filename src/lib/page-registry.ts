@@ -132,6 +132,7 @@ export const SITEMAP_EXCLUDED_ROUTES = [
   '/admin/worklog',
   '/admin/juku-reviews',
   '/admin/juku-matching',
+  '/admin/community-posts',
   // ZZ-8d：季節限定ページ（resolveSeason()がwinter/last-minuteの間だけ公開・それ以外はnotFound()）。
   // 公開解禁（11月〜）に合わせてSTATIC_PAGESへ移し、この行を削除すること。
   '/juken-chokuzen-check',

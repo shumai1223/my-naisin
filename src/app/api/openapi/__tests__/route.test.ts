@@ -36,6 +36,7 @@ const EXCLUDED_ROUTES = new Set<string>([
   '/api/admin/juku-matching/partner',
   '/api/admin/juku-matching/referral-status',
   '/api/admin/juku-matching/commission',
+  '/api/admin/community-posts/moderate',
   '/api/juku-reviews',
   '/api/juku-reviews/submit',
   '/api/stats/submit',
