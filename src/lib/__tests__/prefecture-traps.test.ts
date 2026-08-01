@@ -70,7 +70,7 @@ describe('getPrefectureTraps（手動キュレーション優先・動的生成�
   });
 
   test('topicタグ未設定(未検証)の県はgenerateDynamicTrapsの出力とそのまま一致する(回帰なし)', () => {
-    for (const code of ['aichi', 'hokkaido', 'saitama', 'chiba', 'hyogo', 'yamagata', 'tottori', 'fukui']) {
+    for (const code of ['aichi', 'saitama', 'chiba', 'hyogo', 'yamagata', 'tottori', 'fukui']) {
       const p = pref(code);
       expect(getPrefectureTraps(p)).toEqual(generateDynamicTraps(p));
     }
@@ -148,6 +148,24 @@ describe('getPrefectureTraps（手動キュレーション優先・動的生成�
     const titles = traps.map((t) => t.title);
     expect(titles).not.toContain('実技4教科は2倍計算');
     expect(titles).not.toContain('3年間が対象');
+  });
+
+  // 2026-08-01: 北海道を5県目として再検証・topicタグ付与。
+  // 北海道はtargetGrades=[1,2,3]・practicalMultiplier=coreMultiplier=1・maxScore=315のため
+  // dynamicTrapsは「3年間が対象」1件のみを返す（手動キュレーション側に同名entryが無いため
+  // dynamic側がそのまま採用される）。
+  test('北海道はtopicタグ付きの手動キュレーション2件(実技傾斜なし/3段階選抜)＋動的生成分を含む', () => {
+    expect(generateDynamicTraps(pref('hokkaido')).map((t) => t.title)).toEqual(['3年間が対象']);
+    const traps = getPrefectureTraps(pref('hokkaido'));
+    const titles = traps.map((t) => t.title);
+    expect(titles).toContain('実技教科は主要5教科と同じ配点(傾斜なし)');
+    expect(titles).toContain('3段階選抜(70%均等・15%学力重視・15%内申重視)');
+    expect(titles).toContain('3年間が対象');
+  });
+
+  test('北海道の事実誤りと判明した旧エントリ(特色検査の導入)は含まれない', () => {
+    const traps = getPrefectureTraps(pref('hokkaido'));
+    expect(traps.map((t) => t.title)).not.toContain('特色検査の導入');
   });
 
   test('topicタグを持つ手動キュレーションが1件も無い県(例: 愛媛)は動的生成のみになる', () => {
