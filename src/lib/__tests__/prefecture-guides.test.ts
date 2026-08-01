@@ -25,8 +25,12 @@ describe('VERIFIED_PITFALLS_PREFECTURE_CODES（事実確認済みの県のみ解
     expect(VERIFIED_PITFALLS_PREFECTURE_CODES.has('chiba')).toBe(true);
   });
 
-  test('未検証の他9県(手書きguideデータがある県のうち検証済み5県以外)はまだ解禁されていない', () => {
-    const verified = new Set(['tokyo', 'kanagawa', 'osaka', 'saitama', 'chiba']);
+  test('北海道は事実確認済みで解禁されている', () => {
+    expect(VERIFIED_PITFALLS_PREFECTURE_CODES.has('hokkaido')).toBe(true);
+  });
+
+  test('未検証の他8県(手書きguideデータがある県のうち検証済み6県以外)はまだ解禁されていない', () => {
+    const verified = new Set(['tokyo', 'kanagawa', 'osaka', 'saitama', 'chiba', 'hokkaido']);
     for (const code of PREFECTURES_WITH_GUIDE) {
       if (verified.has(code)) continue;
       expect(VERIFIED_PITFALLS_PREFECTURE_CODES.has(code)).toBe(false);
@@ -161,5 +165,20 @@ describe('千葉県のpitfalls(2026-08-01にWebSearchで個別に裏取り済み
     const item = guide.pitfalls.items.find((i) => i.includes('2日間'));
     expect(item).toContain('1日目');
     expect(item).toContain('2日目');
+  });
+});
+
+describe('北海道のpitfalls(2026-08-01にWebSearchで個別に裏取り済み)', () => {
+  test('学校裁量問題は2022年度に廃止済みと正確に記載されている(旧「裁量問題を出題する高校がある」の事実誤りを修正)', () => {
+    const guide = getPrefectureGuide('hokkaido');
+    const item = guide.pitfalls.items.find((i) => i.includes('学校裁量問題'));
+    expect(item).toContain('廃止');
+    expect(item).toContain('共通問題');
+  });
+
+  test('学区制は道内19学区と一次情報と一致する', () => {
+    const guide = getPrefectureGuide('hokkaido');
+    const item = guide.pitfalls.items.find((i) => i.includes('学区制'));
+    expect(item).toContain('19学区');
   });
 });

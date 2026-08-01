@@ -334,13 +334,17 @@ export const prefectureGuides: Record<string, PrefectureGuide> = {
       all4: '252点 / 315点満点',
       practicalPlus1: '193点（+4点）'
     },
+    // 2026-08-01: 5項目をWebSearchで個別に裏取り。①②③⑤は一次情報と一致し正確。④は
+    // 事実誤りと判明（「学校裁量問題」は2019年発表・2022年度入試から廃止され、現在は
+    // 全受験生が共通問題を解く。本日別作業(prefecture-traps.ts北海道復活)でも同じ事実を
+    // 確認済み）ため、廃止後の現行制度に合わせて修正。
     pitfalls: {
       title: '北海道の注意点',
       items: [
         '中1は2倍、中2は2倍、中3は3倍で計算される（315点満点）',
         '全教科が等倍（実技教科の傾斜配点なし）',
-        '学区制があり、通学区域による制限がある',
-        '裁量問題（応用問題）を出題する高校がある',
+        '学区制があり、通学区域による制限がある（普通科は道内19学区）',
+        '「学校裁量問題」は2022年度から廃止され、現在は全受験生が同一の共通問題（各教科100点）を解く',
         '推薦入試では面接・自己推薦書が重要'
       ]
     },
@@ -934,9 +938,11 @@ export const PREFECTURES_WITH_GUIDE = new Set(Object.keys(prefectureGuides));
  * 「I〜III」表記は誤りで正しくは「I〜V」の5段階だったため修正）。埼玉県も検証（学年比率の
  * 学校差・学校選択問題・加算点制度いずれも一次情報と一致・事実誤りなし）。千葉県も検証
  * （K値/2日日程は一次情報と一致・「自己表現が全校実施」は事実誤りで実際は面接/小論文/
- * 自己表現等7種類から1つ以上選ぶ学校設定検査だったため修正）。他9県はまだ未検証。
+ * 自己表現等7種類から1つ以上選ぶ学校設定検査だったため修正）。北海道も検証（学区制/推薦入試は
+ * 一次情報と一致・「裁量問題を出題する高校がある」は2022年度に廃止済みで事実誤りだったため
+ * 現行の共通問題制度に修正）。他8県はまだ未検証。
  */
-export const VERIFIED_PITFALLS_PREFECTURE_CODES = new Set(['tokyo', 'kanagawa', 'osaka', 'saitama', 'chiba']);
+export const VERIFIED_PITFALLS_PREFECTURE_CODES = new Set(['tokyo', 'kanagawa', 'osaka', 'saitama', 'chiba', 'hokkaido']);
 
 // 都道府県データから動的にFAQを生成する関数
 export function generateDynamicFAQ(prefectureCode: string, prefecture: PrefectureConfig): { question: string; answer: string }[] {
