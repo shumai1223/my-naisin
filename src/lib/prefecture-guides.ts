@@ -219,13 +219,16 @@ export const prefectureGuides: Record<string, PrefectureGuide> = {
       all4: '144点 / 180点満点',
       practicalPlus1: '112点（+4点）'
     },
+    // 2026-08-01: 5項目をWebSearchで個別に裏取り。全項目とも一次情報・prefectures.tsと一致し
+    // 事実誤りは見つからなかった（学年比率の学校差・加算点制度は本日のprefecture-traps.ts埼玉県
+    // 復活作業で既に確認済みの事実と一致。学校選択問題は数学・英語のみ対象で22校が実施と確認）。
     pitfalls: {
       title: '埼玉県の注意点',
       items: [
         '中1〜中3の3年間の成績が対象（学年比1:1:2が標準）',
         '高校によって学年比率が異なる（1:1:3や1:2:3もあり）',
         '実技4教科も5教科と同じ扱い（等倍）',
-        '学校選択問題実施校では数学・英語の難易度が高い',
+        '学校選択問題実施校（数学・英語のみ対象・22校）では難易度が高い',
         '加算点制度があり、部活動や資格検定が評価される場合がある'
       ]
     },
@@ -924,9 +927,10 @@ export const PREFECTURES_WITH_GUIDE = new Set(Object.keys(prefectureGuides));
  * 調査書確定時期と主体的態度の説明は誇張を修正）。神奈川県も検証（面接廃止の時期・S値比率の
  * 表記(旧「3項目」形式の誤りを2項目・合計10形式に修正)・特色検査実施校名を裏取り）。
  * 大阪府も検証（チャレンジテスト/英検読み替え率/C問題は一次情報と一致・選抜タイプの
- * 「I〜III」表記は誤りで正しくは「I〜V」の5段階だったため修正）。他11県はまだ未検証。
+ * 「I〜III」表記は誤りで正しくは「I〜V」の5段階だったため修正）。埼玉県も検証（学年比率の
+ * 学校差・学校選択問題・加算点制度いずれも一次情報と一致・事実誤りなし）。他10県はまだ未検証。
  */
-export const VERIFIED_PITFALLS_PREFECTURE_CODES = new Set(['tokyo', 'kanagawa', 'osaka']);
+export const VERIFIED_PITFALLS_PREFECTURE_CODES = new Set(['tokyo', 'kanagawa', 'osaka', 'saitama']);
 
 // 都道府県データから動的にFAQを生成する関数
 export function generateDynamicFAQ(prefectureCode: string, prefecture: PrefectureConfig): { question: string; answer: string }[] {

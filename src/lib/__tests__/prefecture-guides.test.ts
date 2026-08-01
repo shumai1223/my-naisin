@@ -17,9 +17,14 @@ describe('VERIFIED_PITFALLS_PREFECTURE_CODES（事実確認済みの県のみ解
     expect(VERIFIED_PITFALLS_PREFECTURE_CODES.has('osaka')).toBe(true);
   });
 
-  test('未検証の他11県(手書きguideデータがある県のうち東京都・神奈川県・大阪府以外)はまだ解禁されていない', () => {
+  test('埼玉県は事実確認済みで解禁されている', () => {
+    expect(VERIFIED_PITFALLS_PREFECTURE_CODES.has('saitama')).toBe(true);
+  });
+
+  test('未検証の他10県(手書きguideデータがある県のうち検証済み4県以外)はまだ解禁されていない', () => {
+    const verified = new Set(['tokyo', 'kanagawa', 'osaka', 'saitama']);
     for (const code of PREFECTURES_WITH_GUIDE) {
-      if (code === 'tokyo' || code === 'kanagawa' || code === 'osaka') continue;
+      if (verified.has(code)) continue;
       expect(VERIFIED_PITFALLS_PREFECTURE_CODES.has(code)).toBe(false);
     }
   });
@@ -118,5 +123,22 @@ describe('大阪府のpitfalls(2026-08-01にWebSearchで個別に裏取り済み
     const guide = getPrefectureGuide('osaka');
     const item = guide.pitfalls.items.find((i) => i.includes('チャレンジテスト'));
     expect(item).toContain('±0.3');
+  });
+});
+
+describe('埼玉県のpitfalls(2026-08-01にWebSearchで個別に裏取り済み・事実誤りなし)', () => {
+  test('学校選択問題は数学・英語のみ対象・22校実施と一次情報と一致する', () => {
+    const guide = getPrefectureGuide('saitama');
+    const item = guide.pitfalls.items.find((i) => i.includes('学校選択問題'));
+    expect(item).toContain('数学・英語');
+    expect(item).toContain('22校');
+  });
+
+  test('5項目すべてが非空文字列を持つ', () => {
+    const guide = getPrefectureGuide('saitama');
+    expect(guide.pitfalls.items).toHaveLength(5);
+    for (const item of guide.pitfalls.items) {
+      expect(item.length).toBeGreaterThan(0);
+    }
   });
 });
