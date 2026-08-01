@@ -70,7 +70,7 @@ describe('getPrefectureTraps（手動キュレーション優先・動的生成�
   });
 
   test('topicタグ未設定(未検証)の県はgenerateDynamicTrapsの出力とそのまま一致する(回帰なし)', () => {
-    for (const code of ['osaka', 'aichi', 'fukuoka', 'hokkaido', 'saitama', 'chiba', 'hyogo', 'yamagata', 'tottori', 'fukui']) {
+    for (const code of ['aichi', 'fukuoka', 'hokkaido', 'saitama', 'chiba', 'hyogo', 'yamagata', 'tottori', 'fukui']) {
       const p = pref(code);
       expect(getPrefectureTraps(p)).toEqual(generateDynamicTraps(p));
     }
@@ -97,6 +97,30 @@ describe('getPrefectureTraps（手動キュレーション優先・動的生成�
     const titles = traps.map((t) => t.title);
     expect(titles).not.toContain('2次選考の存在');
     expect(titles).not.toContain('主体的態度の評価');
+  });
+
+  // 2026-08-01: 大阪府を3県目として再検証・topicタグ付与。
+  // 大阪はtargetGrades=[1,2,3]・maxScore=450のためdynamicTrapsが「3年間が対象」
+  // 「高得点戦略が必要」の2件を返す（大阪はこの2トピックには手動キュレーションが無いため
+  // dynamic側がそのまま採用される）。
+  test('大阪府はtopicタグ付きの手動キュレーション3件(タイプⅠ〜Ⅴ/実技傾斜なし/素点方式)＋重複しない動的生成分を含む', () => {
+    expect(generateDynamicTraps(pref('osaka')).map((t) => t.title)).toEqual([
+      '3年間が対象',
+      '高得点戦略が必要'
+    ]);
+    const traps = getPrefectureTraps(pref('osaka'));
+    const titles = traps.map((t) => t.title);
+    expect(titles).toContain('学力:内申の比率「タイプⅠ〜Ⅴ」を学校ごとに選択');
+    expect(titles).toContain('実技教科は主要5教科と同じ配点(傾斜なし)');
+    expect(titles).toContain('素点方式で学年ごとに重みが異なる(中1:中2:中3=1:1:3)');
+    // 手動キュレーションにtopicタグが無い「3年間が対象」「高得点戦略が必要」は動的生成で補完される。
+    expect(titles).toContain('3年間が対象');
+    expect(titles).toContain('高得点戦略が必要');
+  });
+
+  test('大阪府の事実誤りと判明した旧エントリ(A方式とB方式の選択)は含まれない', () => {
+    const traps = getPrefectureTraps(pref('osaka'));
+    expect(traps.map((t) => t.title)).not.toContain('A方式とB方式の選択');
   });
 
   test('topicタグを持つ手動キュレーションが1件も無い県(例: 愛媛)は動的生成のみになる', () => {
