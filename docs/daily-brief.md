@@ -7,9 +7,9 @@
 
 ### 確定値（D1・判定はこちらで行う）
 
-- `stats_submissions`（7日）: **70件**
+- `stats_submissions`（7日）: **85件**
 - `leads`（7日）: **1件**
-- `stats_submissions`（累計）: **220件**
+- `stats_submissions`（累計）: **235件**
 
 ### 参考値（GA4・前日／**下限値**）
 
