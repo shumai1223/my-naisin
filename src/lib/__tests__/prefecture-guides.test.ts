@@ -41,8 +41,12 @@ describe('VERIFIED_PITFALLS_PREFECTURE_CODES（事実確認済みの県のみ解
     expect(VERIFIED_PITFALLS_PREFECTURE_CODES.has('hyogo')).toBe(true);
   });
 
-  test('未検証の他5県(手書きguideデータがある県のうち検証済み9県以外)はまだ解禁されていない', () => {
-    const verified = new Set(['tokyo', 'kanagawa', 'osaka', 'saitama', 'chiba', 'hokkaido', 'fukuoka', 'shizuoka', 'hyogo']);
+  test('広島県は事実確認済みで解禁されている', () => {
+    expect(VERIFIED_PITFALLS_PREFECTURE_CODES.has('hiroshima')).toBe(true);
+  });
+
+  test('未検証の他4県(手書きguideデータがある県のうち検証済み10県以外)はまだ解禁されていない', () => {
+    const verified = new Set(['tokyo', 'kanagawa', 'osaka', 'saitama', 'chiba', 'hokkaido', 'fukuoka', 'shizuoka', 'hyogo', 'hiroshima']);
     for (const code of PREFECTURES_WITH_GUIDE) {
       if (verified.has(code)) continue;
       expect(VERIFIED_PITFALLS_PREFECTURE_CODES.has(code)).toBe(false);
@@ -243,5 +247,21 @@ describe('兵庫県のpitfalls/faq(2026-08-01にWebSearchで個別に裏取り�
     const faqItem = guide.faq.find((f) => f.question.includes('複数志願選抜'));
     expect(faqItem?.answer).toContain('20〜30点');
     expect(faqItem?.answer).toContain('第2志望の判定にはこの加算点は適用されません');
+  });
+});
+
+describe('広島県のpitfalls(2026-08-01にWebSearchで個別に裏取り済み)', () => {
+  test('令和5年度の制度改革で一次選抜に一本化(6:2:2)と正確に記載されている(旧「選抜Ⅰ/選抜Ⅱ」の事実誤りを修正)', () => {
+    const guide = getPrefectureGuide('hiroshima');
+    const allText = guide.pitfalls.items.join('');
+    expect(allText).toContain('6:2:2');
+    expect(allText).not.toContain('選抜Ⅰ');
+    expect(allText).not.toContain('選抜Ⅱ');
+  });
+
+  test('自己表現は面談方式で全校実施と一次情報と一致する', () => {
+    const guide = getPrefectureGuide('hiroshima');
+    const item = guide.pitfalls.items.find((i) => i.includes('自己表現'));
+    expect(item).toContain('全校');
   });
 });

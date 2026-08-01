@@ -564,14 +564,18 @@ export const prefectureGuides: Record<string, PrefectureGuide> = {
       all4: '180点 / 225点満点',
       practicalPlus1: '139点（+4点）'
     },
+    // 2026-08-01: 5項目をWebSearchで個別に裏取り。①②③④は一次情報と一致し正確。⑤は
+    // 事実誤りと判明（「選抜Ⅰ(推薦)と選抜Ⅱ(一般)」は令和5(2023)年度の入試制度改革で
+    // 選抜Ⅰが廃止され「自己表現」を含む一次選抜に一本化された旧制度の記述だった）ため、
+    // 現行制度（学力検査:調査書:自己表現=6:2:2の一次選抜に統合）に修正。
     pitfalls: {
       title: '広島県の注意点',
       items: [
         '中1〜中3の3年間の成績が対象（学年比1:1:3）',
         '全教科が等倍（実技教科の傾斜配点なし）',
         '中3の成績が3倍で計算されるため中3が重要',
-        '自己表現が全校で実施される',
-        '選抜Ⅰ（推薦）と選抜Ⅱ（一般）で評価方法が異なる'
+        '自己表現（面談方式）が全校で実施される',
+        '令和5年度の制度改革で選抜が一次選抜に一本化され、学力検査:調査書:自己表現=6:2:2の比重で評価される'
       ]
     },
     faq: [
@@ -953,10 +957,11 @@ export const PREFECTURES_WITH_GUIDE = new Set(Object.keys(prefectureGuides));
  * 現行の共通問題制度に修正）。福岡県も検証（傾斜配点/特色化選抜/13学区いずれも一次情報と
  * 一致・事実誤りなし）。静岡県も検証（学校裁量枠50%/共通枠3段階75%・10%・15%/第2学期末までの
  * 対象期間いずれも一次情報と一致・事実誤りなし）。兵庫県も検証（pitfalls5項目は一次情報と一致・
- * 隣接するfaqの「加算点25点」は事実誤りで実際は学区により20〜30点だったため修正）。他5県は
- * まだ未検証。
+ * 隣接するfaqの「加算点25点」は事実誤りで実際は学区により20〜30点だったため修正）。広島県も
+ * 検証（「選抜Ⅰ(推薦)と選抜Ⅱ(一般)」は令和5年度の制度改革で廃止済みの旧制度の記述だったため
+ * 現行の一次選抜一本化・6:2:2比重に修正）。他4県はまだ未検証。
  */
-export const VERIFIED_PITFALLS_PREFECTURE_CODES = new Set(['tokyo', 'kanagawa', 'osaka', 'saitama', 'chiba', 'hokkaido', 'fukuoka', 'shizuoka', 'hyogo']);
+export const VERIFIED_PITFALLS_PREFECTURE_CODES = new Set(['tokyo', 'kanagawa', 'osaka', 'saitama', 'chiba', 'hokkaido', 'fukuoka', 'shizuoka', 'hyogo', 'hiroshima']);
 
 // 都道府県データから動的にFAQを生成する関数
 export function generateDynamicFAQ(prefectureCode: string, prefecture: PrefectureConfig): { question: string; answer: string }[] {
