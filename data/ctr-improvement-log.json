@@ -1,6 +1,12 @@
 [
   {
     "route": "/nara/naishin",
+    "changedAt": "2026-08-02",
+    "note": "CTR実験ではなく事実誤認の是正: 2026-07-11版のtitle/descriptionは「中1は含まれない！中2＋中3×2倍の135点満点」という旧制度を記述していたが、prefectures.tsは2026年3月17日発表の制度改定を反映しmaxScore=144/gradeMultipliers{1:0.6,2:0.6,3:2}へ既に更新済み(lastVerified:2026-07-17)だった。SERPのtitle/descriptionが実際のページ内容・制度と矛盾する状態を「中1・中2は『態度』評価で27点ずつ・144点満点」に修正。GSC実測(直近14日・7/15-7/29): imp959/CTR1.25%/pos8.5(直前のworse-inconclusive判定時と同値)。",
+    "ctrBefore": 0.01251303441084463
+  },
+  {
+    "route": "/nara/naishin",
     "changedAt": "2026-07-11",
     "note": "title/descriptionをcuriosity-gap型に変更（kanagawa「中1は入らない」型を横展開＝「中1は含まれない！中2＋中3×2倍」）。data/gsc-mining-2026-07-09.json時点でimp554/CTR1.99%/pos7.9・expectedMinCtr2%",
     "ctrBefore": 0.019855595667870037,
