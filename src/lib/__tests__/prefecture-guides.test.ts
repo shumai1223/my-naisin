@@ -9,9 +9,13 @@ describe('VERIFIED_PITFALLS_PREFECTURE_CODES（事実確認済みの県のみ解
     expect(VERIFIED_PITFALLS_PREFECTURE_CODES.has('tokyo')).toBe(true);
   });
 
-  test('未検証の他13県(手書きguideデータがある県のうち東京都以外)はまだ解禁されていない', () => {
+  test('神奈川県は事実確認済みで解禁されている', () => {
+    expect(VERIFIED_PITFALLS_PREFECTURE_CODES.has('kanagawa')).toBe(true);
+  });
+
+  test('未検証の他12県(手書きguideデータがある県のうち東京都・神奈川県以外)はまだ解禁されていない', () => {
     for (const code of PREFECTURES_WITH_GUIDE) {
-      if (code === 'tokyo') continue;
+      if (code === 'tokyo' || code === 'kanagawa') continue;
       expect(VERIFIED_PITFALLS_PREFECTURE_CODES.has(code)).toBe(false);
     }
   });
@@ -58,5 +62,35 @@ describe('東京都のpitfalls(2026-08-01にWebSearchで個別に裏取り済み
     const guide = getPrefectureGuide('tokyo');
     const timingItem = guide.pitfalls.items.find((i) => i.includes('2学期'));
     expect(timingItem).toContain('総合評価');
+  });
+});
+
+describe('神奈川県のpitfalls(2026-08-01にWebSearchで個別に裏取り済み)', () => {
+  test('面接廃止は令和6(2024)年度からと正確に記載されている', () => {
+    const guide = getPrefectureGuide('kanagawa');
+    const item = guide.pitfalls.items.find((i) => i.includes('面接の廃止'));
+    expect(item).toContain('令和6');
+  });
+
+  test('S値の比率は現行制度どおり2項目・合計10形式(旧「3項目」形式の事実誤りを修正)で記載されている', () => {
+    const guide = getPrefectureGuide('kanagawa');
+    const item = guide.pitfalls.items.find((i) => i.includes('S値の計算'));
+    expect(item).toContain('3:7');
+    expect(item).not.toContain('2:8:2');
+  });
+
+  test('裏取りできなかった頻度・傾向の断定(多発/極めて難しい)は削除されている', () => {
+    const guide = getPrefectureGuide('kanagawa');
+    const allText = guide.pitfalls.items.join('');
+    expect(allText).not.toContain('多発');
+    expect(allText).not.toContain('極めて難しい');
+  });
+
+  test('特色検査の実施校名(横浜翠嵐/柏陽/希望ケ丘)が一次情報と一致する', () => {
+    const guide = getPrefectureGuide('kanagawa');
+    const item = guide.pitfalls.items.find((i) => i.includes('特色検査の壁'));
+    expect(item).toContain('横浜翠嵐');
+    expect(item).toContain('柏陽');
+    expect(item).toContain('希望ケ丘');
   });
 });
