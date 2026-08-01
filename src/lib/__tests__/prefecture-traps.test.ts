@@ -70,7 +70,7 @@ describe('getPrefectureTraps（手動キュレーション優先・動的生成�
   });
 
   test('topicタグ未設定(未検証)の県はgenerateDynamicTrapsの出力とそのまま一致する(回帰なし)', () => {
-    for (const code of ['aichi', 'saitama', 'chiba', 'hyogo', 'yamagata', 'tottori', 'fukui']) {
+    for (const code of ['aichi', 'chiba', 'hyogo', 'yamagata', 'tottori', 'fukui']) {
       const p = pref(code);
       expect(getPrefectureTraps(p)).toEqual(generateDynamicTraps(p));
     }
@@ -166,6 +166,18 @@ describe('getPrefectureTraps（手動キュレーション優先・動的生成�
   test('北海道の事実誤りと判明した旧エントリ(特色検査の導入)は含まれない', () => {
     const traps = getPrefectureTraps(pref('hokkaido'));
     expect(traps.map((t) => t.title)).not.toContain('特色検査の導入');
+  });
+
+  // 2026-08-01: 埼玉県を6県目として再検証・topicタグ付与。事実誤りは無かったが、
+  // 学年比率の学校差(1:1:2/1:1:3/1:2:3)と特別活動・出欠加点という重要な新規事実を追加した。
+  test('埼玉県はtopicタグ付きの手動キュレーション3件(傾斜なし/学年比率の学校差/特別活動加点)＋動的生成分を含む', () => {
+    expect(generateDynamicTraps(pref('saitama')).map((t) => t.title)).toEqual(['3年間が対象']);
+    const traps = getPrefectureTraps(pref('saitama'));
+    const titles = traps.map((t) => t.title);
+    expect(titles).toContain('実技教科は主要5教科と同じ配点(傾斜なし)');
+    expect(titles).toContain('学年比率は学校ごとに1:1:2/1:1:3/1:2:3など異なる');
+    expect(titles).toContain('特別活動・出欠も内申点に加点される');
+    expect(titles).toContain('3年間が対象');
   });
 
   test('topicタグを持つ手動キュレーションが1件も無い県(例: 愛媛)は動的生成のみになる', () => {
