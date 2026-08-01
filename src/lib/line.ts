@@ -22,3 +22,13 @@ export type LineAudience = 'student' | 'parent';
 export function lineAddUrl(audience: LineAudience = 'student'): string {
   return audience === 'parent' ? PARENT_LINE_URL : STUDENT_LINE_URL;
 }
+
+/**
+ * 「いつでも解除できます」の具体的な手順（単一ソース）。
+ *
+ * 2026-08-01 Cowork実地UXテストで指摘: LINE登録への抵抗理由の1つとして「いつでも解除できます」
+ * という文言はあるが、その場に具体的な解除方法（ブロック/友だち削除の操作手順）が無く不安が残る、
+ * との指摘があった（今すぐ直せる項目として明記）。実際の追加ボタンの近くにこの一文を置く。
+ */
+export const LINE_UNFRIEND_HELP_TEXT =
+  'LINEのトーク画面でこのアカウントを長押し→「ブロック」、または友だちリストから削除すれば、いつでも解除できます。';

@@ -2,6 +2,7 @@ import { Shield, ArrowLeft, Cookie, Eye, BarChart3, ExternalLink, Users, Databas
 import Link from 'next/link';
 
 import { APP_NAME } from '@/lib/constants';
+import { LINE_UNFRIEND_HELP_TEXT } from '@/lib/line';
 
 export default function PrivacyPage() {
   const lastUpdated = '2026年7月12日';
@@ -168,7 +169,7 @@ export default function PrivacyPage() {
                 <li>• <strong>利用目的：</strong>受験情報・内申対策・志望校情報の配信のみ（同意した場合に限る）</li>
                 <li>• <strong>配信解除：</strong>各配信またはお問い合わせからいつでも解除できます</li>
                 <li>• <strong>第三者提供：</strong>本人の同意なく第三者へ提供・販売することはありません</li>
-                <li>• <strong>LINEでの受け取り：</strong>LINE公式アカウントを友だち追加された場合、LINEヤフー株式会社のプライバシーポリシーも適用されます</li>
+                <li>• <strong>LINEでの受け取り：</strong>LINE公式アカウントを友だち追加された場合、LINEヤフー株式会社のプライバシーポリシーも適用されます。{LINE_UNFRIEND_HELP_TEXT}</li>
               </ul>
             </div>
 

@@ -17,7 +17,7 @@ import {
 } from 'lucide-react';
 
 import { EVENTS, track } from '@/lib/track';
-import { lineAddUrl, type LineAudience } from '@/lib/line';
+import { lineAddUrl, LINE_UNFRIEND_HELP_TEXT, type LineAudience } from '@/lib/line';
 import { LIST_BENEFITS } from '@/lib/broadcast-templates';
 import { isValidEmail, openLeadMailtoFallback, submitLead, type LeadPayload, type LeadSource } from '@/lib/lead';
 import { buildLeadMagnet, defaultMetricLabel } from '@/lib/lead-magnet';
@@ -267,6 +267,7 @@ export function SaveResultCTA({
         </span>
         <span className="rounded-lg bg-white/20 px-2.5 py-1 text-xs font-bold">無料</span>
       </a>
+      <p className="mt-1.5 text-[11px] leading-relaxed text-slate-400">{LINE_UNFRIEND_HELP_TEXT}</p>
     </div>
   );
 

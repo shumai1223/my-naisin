@@ -4,7 +4,7 @@ import * as React from 'react';
 import { MessageCircle, X, BellRing } from 'lucide-react';
 
 import { EVENTS, track } from '@/lib/track';
-import { lineAddUrl } from '@/lib/line';
+import { lineAddUrl, LINE_UNFRIEND_HELP_TEXT } from '@/lib/line';
 
 /**
  * 退出インテントの最後の捕捉＝LINE名簿への一本釣り（名簿velocity直撃のKPI施策）。
@@ -166,6 +166,7 @@ export function ExitIntentLineModal() {
             <MessageCircle className="h-5 w-5" />
             LINEで友だち追加（無料）
           </a>
+          <p className="text-center text-[11px] leading-relaxed text-slate-400">{LINE_UNFRIEND_HELP_TEXT}</p>
           <button
             type="button"
             onClick={close}
