@@ -37,8 +37,12 @@ describe('VERIFIED_PITFALLS_PREFECTURE_CODES（事実確認済みの県のみ解
     expect(VERIFIED_PITFALLS_PREFECTURE_CODES.has('shizuoka')).toBe(true);
   });
 
-  test('未検証の他6県(手書きguideデータがある県のうち検証済み8県以外)はまだ解禁されていない', () => {
-    const verified = new Set(['tokyo', 'kanagawa', 'osaka', 'saitama', 'chiba', 'hokkaido', 'fukuoka', 'shizuoka']);
+  test('兵庫県は事実確認済みで解禁されている', () => {
+    expect(VERIFIED_PITFALLS_PREFECTURE_CODES.has('hyogo')).toBe(true);
+  });
+
+  test('未検証の他5県(手書きguideデータがある県のうち検証済み9県以外)はまだ解禁されていない', () => {
+    const verified = new Set(['tokyo', 'kanagawa', 'osaka', 'saitama', 'chiba', 'hokkaido', 'fukuoka', 'shizuoka', 'hyogo']);
     for (const code of PREFECTURES_WITH_GUIDE) {
       if (verified.has(code)) continue;
       expect(VERIFIED_PITFALLS_PREFECTURE_CODES.has(code)).toBe(false);
@@ -224,5 +228,20 @@ describe('静岡県のpitfalls(2026-08-01にWebSearchで個別に裏取り済み
     const guide = getPrefectureGuide('shizuoka');
     const item = guide.pitfalls.items.find((i) => i.includes('第2学期末'));
     expect(item).toBeDefined();
+  });
+});
+
+describe('兵庫県のpitfalls/faq(2026-08-01にWebSearchで個別に裏取り済み)', () => {
+  test('実技4教科7.5倍・5教科4倍(250点満点)が一次情報と一致する', () => {
+    const guide = getPrefectureGuide('hyogo');
+    const item = guide.pitfalls.items.find((i) => i.includes('7.5倍'));
+    expect(item).toContain('4倍');
+  });
+
+  test('複数志願選抜の加算点は学区により20〜30点と正確に記載されている(旧「25点」固定表記の事実誤りを修正)', () => {
+    const guide = getPrefectureGuide('hyogo');
+    const faqItem = guide.faq.find((f) => f.question.includes('複数志願選抜'));
+    expect(faqItem?.answer).toContain('20〜30点');
+    expect(faqItem?.answer).toContain('第2志望の判定にはこの加算点は適用されません');
   });
 });

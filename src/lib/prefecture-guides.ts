@@ -506,6 +506,10 @@ export const prefectureGuides: Record<string, PrefectureGuide> = {
       all4: '200点 / 250点満点',
       practicalPlus1: '157.5点（+7.5点）'
     },
+    // 2026-08-01: 5項目をWebSearchで個別に裏取り。pitfalls5項目は一次情報と一致し事実誤りは
+    // 無かったが、隣接するfaq（現状は未描画だが将来の参照に備え）の「加算点は25点」という
+    // 記載が事実誤りと判明（実際は学区により20/25/25/30/30点と幅があり、25点は第1・第3学区
+    // のみ）したため実態に合わせて修正した。
     pitfalls: {
       title: '兵庫県の注意点',
       items: [
@@ -531,7 +535,7 @@ export const prefectureGuides: Record<string, PrefectureGuide> = {
       },
       {
         question: '兵庫県の複数志願選抜とは何ですか？',
-        answer: '複数志願選抜は、第1志望と第2志望の2校に出願できる制度です。第1志望校には加算点（25点）が付与されるため、第1志望で有利になります。'
+        answer: '複数志願選抜は、第1志望と第2志望の2校に出願できる制度です。第1志望校の学力検査結果には学区ごとに定められた加算点(20〜30点。例: 第1学区25点)が付与されるため、第1志望で有利になります。ただし第2志望の判定にはこの加算点は適用されません。'
       }
     ],
     sources: [
@@ -948,9 +952,11 @@ export const PREFECTURES_WITH_GUIDE = new Set(Object.keys(prefectureGuides));
  * 一次情報と一致・「裁量問題を出題する高校がある」は2022年度に廃止済みで事実誤りだったため
  * 現行の共通問題制度に修正）。福岡県も検証（傾斜配点/特色化選抜/13学区いずれも一次情報と
  * 一致・事実誤りなし）。静岡県も検証（学校裁量枠50%/共通枠3段階75%・10%・15%/第2学期末までの
- * 対象期間いずれも一次情報と一致・事実誤りなし）。他6県はまだ未検証。
+ * 対象期間いずれも一次情報と一致・事実誤りなし）。兵庫県も検証（pitfalls5項目は一次情報と一致・
+ * 隣接するfaqの「加算点25点」は事実誤りで実際は学区により20〜30点だったため修正）。他5県は
+ * まだ未検証。
  */
-export const VERIFIED_PITFALLS_PREFECTURE_CODES = new Set(['tokyo', 'kanagawa', 'osaka', 'saitama', 'chiba', 'hokkaido', 'fukuoka', 'shizuoka']);
+export const VERIFIED_PITFALLS_PREFECTURE_CODES = new Set(['tokyo', 'kanagawa', 'osaka', 'saitama', 'chiba', 'hokkaido', 'fukuoka', 'shizuoka', 'hyogo']);
 
 // 都道府県データから動的にFAQを生成する関数
 export function generateDynamicFAQ(prefectureCode: string, prefecture: PrefectureConfig): { question: string; answer: string }[] {
