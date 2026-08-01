@@ -129,6 +129,19 @@ describe('matchSchoolNameToCode', () => {
       ];
       expect(matchSchoolNameToCode('広島工業', collidingMaster).reason).toBe('ambiguous');
     });
+
+    // 2026-08-02判明(2回目): niigata/aichiは市名も省いて「市立」だけ残す第3の流儀を使う。
+    test('市名を省き「市立」だけ残した形("市立万代")でも一致する', () => {
+      const result = matchSchoolNameToCode('市立万代', [rec('F1', '新潟市立万代高等学校')]);
+      expect(result.matchedCode).toBe('F1');
+      expect(result.reason).toBe('matched');
+    });
+
+    test('市名を省き「市立」だけ残した形("市立向陽")でも一致する(aichi)', () => {
+      const result = matchSchoolNameToCode('市立向陽', [rec('F2', '名古屋市立向陽高等学校')]);
+      expect(result.matchedCode).toBe('F2');
+      expect(result.reason).toBe('matched');
+    });
   });
 });
 

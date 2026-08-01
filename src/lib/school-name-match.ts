@@ -38,16 +38,17 @@ const PREFECTURE_NAMES_BY_LENGTH_DESC = [...new Set(PREFECTURES.map((p) => p.nam
  * 文字クラスではなく、**実在する47都道府県名の完全一致リスト**（長い順）を先頭から順に試すこと
  * （「京都府」は「京都府」自体が47都道府県名の1つとしてリストにあるため、部分的な"都"に
  * 惑わされず正しく1つの単位として一致する）。
- */
-/**
- * 都道府県立の学校は「除去した1形だけ」が正解だが、市区町村立の学校は
- * **除去する県と、市立ごと残す県の両方が実在する**（2026-08-02判明）。
- * 例: kyoto市立紫野高等学校の短縮表記は'紫野'（市立を除去する流儀）だが、
- * hiroshima市立基町高等学校の短縮表記は'広島市立基町'（市立を残す流儀）。
- * どちらの流儀かはcompetition-ratesのPDF側の慣習に依存し、県ごとに異なる
- * （osaka/aichi/hiroshima等は残す・kyoto等は除去する）ため、正規化を1形に
- * 決め打ちせず**両方の候補**を返し、突合側でどちらか一致すれば採用する
- * （あいまい一致ではなく「2つの確定候補のどちらかへの完全一致」であることに注意）。
+ *
+ * 都道府県立の学校は「除去した1形だけ」が正解だが、市区町村立の学校は**3つの流儀が実在する**
+ * （2026-08-02判明・2回に分けて発見）:
+ *  ①除去する流儀（kyoto市立紫野高等学校→'紫野'）
+ *  ②市名＋市立を残す流儀（hiroshima市立基町高等学校→'広島市立基町'）
+ *  ③市名を省き「市立」だけ残す流儀（niigata新潟市立万代高等学校→'市立万代'・aichi名古屋市立向陽
+ *    高等学校→'市立向陽'。県内の市立高校がほぼ単一市に集中している県で、文脈上市名が自明なため
+ *    省略されると見られる）
+ * どの流儀かはcompetition-ratesのPDF側の慣習に依存し県ごとに異なるため、正規化を1形に決め打ちせず
+ * **3つの候補すべて**を返し、突合側でいずれか一致すれば採用する（あいまい一致ではなく「複数の
+ * 確定候補のいずれかへの完全一致」であることに注意）。
  */
 function stripEstablishmentPrefixVariants(fullName: string): string[] {
   for (const prefName of PREFECTURE_NAMES_BY_LENGTH_DESC) {
@@ -57,7 +58,14 @@ function stripEstablishmentPrefixVariants(fullName: string): string[] {
     if (fullName.startsWith(prefName)) return [fullName.slice(prefName.length)];
   }
   const municipalMatch = fullName.match(MUNICIPAL_PREFIX_PATTERN);
-  if (municipalMatch) return [fullName.slice(municipalMatch[0].length), fullName];
+  if (municipalMatch) {
+    const establisherType = municipalMatch[1]; // '市立'|'区立'|'町立'|'村立'|'組合立'
+    return [
+      fullName.slice(municipalMatch[0].length), // ①除去
+      fullName, // ②市名+市立を残す
+      establisherType + fullName.slice(municipalMatch[0].length), // ③市名を省き「市立」だけ残す
+    ];
+  }
   return [fullName];
 }
 
