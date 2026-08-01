@@ -76,7 +76,12 @@ export function NationalPercentileReveal({
   }, [state, national, prefecture, metric, prefectureCode]);
 
   if (state === 'idle' || state === 'error') return null;
-  // 全国・県内の両方が不足でも「まだデータが足りない」ことは誠実に見せる（何も出さずに消えない）。
+  // ⚠️2026-08-01 変更: 全国・県内の両方が不足するときは**セクションごと出さない**。
+  // 以前は「まだデータが足りない」と誠実に見せる設計だったが、当時この上には解放ゲートがあり、
+  // 「行動させて解放したのに中身が空」という体験を生んでいた（実地検証で指摘）。ゲートは撤去
+  // したものの、中身の無い枠を残す意味は無いため非表示にする。匿名統計への協力の呼びかけは
+  // StatsOptIn（calc_complete→submitが実測65%と機能している）が別途担うので、導線は失われない。
+  if (state === 'ready' && !national && !prefecture) return null;
 
   const prefLabel = prefectureName ? `${prefectureName}内` : '県内';
 
