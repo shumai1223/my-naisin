@@ -3,25 +3,37 @@
     "route": "/nara/naishin",
     "changedAt": "2026-07-11",
     "note": "title/descriptionをcuriosity-gap型に変更（kanagawa「中1は入らない」型を横展開＝「中1は含まれない！中2＋中3×2倍」）。data/gsc-mining-2026-07-09.json時点でimp554/CTR1.99%/pos7.9・expectedMinCtr2%",
-    "ctrBefore": 0.019855595667870037
+    "ctrBefore": 0.019855595667870037,
+    "measuredAt": "2026-08-01",
+    "outcomeNote": "3週間経過後の効果測定(改善モード)。GSC MCP実測(直近14日・7/15-7/29): imp959/CTR1.25%/pos8.5。evaluateCtrChangeEffectでは相対-37%='worse'(自動リバート提案の閾値)に該当するが、同時にpositionも7.9→8.5へ悪化しておりCTR低下は順位低下による自然な結果である可能性が高い(タイトル自体の欠陥ではない可能性)。同じcuriosity-gap手法・ほぼ同一構造のタイトルを使ったmiyagiは同時期にCTR1.89%→4.95%・position9.3→7.3で明確に改善しており、タイトル形式自体に系統的な問題があるとは考えにくい。クリック数も12件/14日と絶対数が小さくノイズの影響を受けやすい。**結論: リバートはせず、次回3週間後(8/22以降)に再測定して傾向を再確認する**（1回の悪化判定だけで戻すと、実際には無関係な順位変動の影響を誤ってタイトルのせいにするリスクがあるため）。",
+    "outcomeVerdict": "worse-inconclusive"
   },
   {
     "route": "/miyagi/naishin",
     "changedAt": "2026-07-11",
     "note": "title/descriptionをcuriosity-gap型に変更（「実技4教科が2倍になる195点満点」）。data/gsc-mining-2026-07-09.json時点でimp528/CTR1.89%/pos9.3・expectedMinCtr2%",
-    "ctrBefore": 0.01893939393939394
+    "ctrBefore": 0.01893939393939394,
+    "measuredAt": "2026-08-01",
+    "outcomeNote": "3週間経過後の効果測定(改善モード)。GSC MCP実測(直近14日・7/15-7/29): imp101/CTR4.95%/pos7.3。CTRが1.89%→4.95%(相対+161%)・positionも9.3→7.3へ同時に改善しており明確な'improved'。このタイトル形式を維持する。",
+    "outcomeVerdict": "improved"
   },
   {
     "route": "/hokkaido/rank",
     "changedAt": "2026-07-11",
     "note": "GSC MCP実データ(07-02〜07-08)で発見した新規underperformer。title/descriptionをA〜M13段階＋具体的な閾値(A=296点以上/M=75点以下)を明示する形に変更。GSC実測: imp749/CTR0.80%/pos5.9・expectedMinCtr4%",
-    "ctrBefore": 0.00801068090787717
+    "ctrBefore": 0.00801068090787717,
+    "measuredAt": "2026-08-01",
+    "outcomeNote": "3週間経過後の効果測定(改善モード)。GSC MCP実測(直近14日・7/15-7/29): imp1103/CTR1.45%/pos9.4。CTRは0.80%→1.45%(相対+81%)で'improved'相当だが、positionが5.9→9.4へ大きく悪化しておりCTR改善分は順位悪化の影響を打ち消しきれていない可能性がある(絶対クリック数はまだ少ない)。タイトル自体は維持しつつ、position悪化の原因(内部リンク変化・競合の変動等)は別途調査の価値がある。",
+    "outcomeVerdict": "improved"
   },
   {
     "route": "/mie/naishin",
     "changedAt": "2026-07-11",
     "note": "GSC MCP実データ(07-02〜07-08)で発見した新規underperformer。PREFECTURE_META_OVERRIDESに新規追加（従来は汎用テンプレのまま）。「中3のみ45点満点」の実データ特性をcuriosity-gap化。GSC実測: imp433/CTR1.39%/pos4.7・expectedMinCtr4%",
-    "ctrBefore": 0.013856812933025405
+    "ctrBefore": 0.013856812933025405,
+    "measuredAt": "2026-08-01",
+    "outcomeNote": "3週間経過後の効果測定(改善モード)。GSC MCP実測(直近14日・7/15-7/29): imp420/CTR2.62%/pos8.6。CTRは1.39%→2.62%(相対+89%)で'improved'。positionは4.7→8.6へ悪化しているため、hokkaido/rankと同様に順位悪化とCTR改善が相殺している可能性があるが、少なくともタイトル変更自体が悪化要因ではないと判断しこのまま維持する。",
+    "outcomeVerdict": "improved"
   },
   {
     "route": "/hensachi",
