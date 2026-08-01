@@ -106,6 +106,31 @@ export function updateScoreValue(scores: Scores, key: SubjectKey, nextValue: num
   };
 }
 
+/**
+ * 都道府県別計算機（InteractiveCalculator）からトップページ（HomeClient）へ設定を引き継ぐための
+ * 軽量なURLエンコード/デコード。2026-08-01 Cowork実地UXテストで「詳細な分析はこちら」のリンクが
+ * ただの"/"で県別設定(満点/実技倍率)や入力済みの評定が引き継がれるか不明瞭との指摘を受けて新設
+ * （[[fable5-fullaccel-backlog-2026-07]]のΛ+2）。SUBJECTS順のカンマ区切り数値のみを扱う最小
+ * フォーマット（share.tsのbase64url JSON方式ほど汎用ではないが、9個の整数を運ぶだけなら十分）。
+ * 壊れた入力は例外を投げずnullを返す（外部入力を信用しない設計をshare.tsから踏襲）。
+ */
+export function encodeScoresQuery(scores: Scores): string {
+  return SUBJECTS.map((subject) => String(clamp(roundInt(scores[subject.key]), 1, 10))).join(',');
+}
+
+export function decodeScoresQuery(raw: string | null | undefined): Scores | null {
+  if (!raw) return null;
+  const parts = raw.split(',');
+  if (parts.length !== SUBJECTS.length) return null;
+  const next = {} as Scores;
+  for (let i = 0; i < SUBJECTS.length; i++) {
+    const n = Number(parts[i]);
+    if (!Number.isFinite(n)) return null;
+    next[SUBJECTS[i].key] = clamp(roundInt(n), 1, 10);
+  }
+  return next;
+}
+
 export function buildShareText(params: {
   appName: string;
   rankCode: string;

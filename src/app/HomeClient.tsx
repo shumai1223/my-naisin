@@ -21,6 +21,7 @@ import {
   calculateMaxScore,
   calculatePercent,
   calculateTotalScore,
+  decodeScoresQuery,
   getRankForPercent,
   updateScoreValue
 } from '@/lib/utils';
@@ -125,10 +126,32 @@ export default function HomeClient() {
 
     let restoredScores: Scores | null = null;
     let restoredPrefecture: string | null = null;
+
+    // 2026-08-01 Cowork実地UXテストで指摘: 都道府県別計算機の「詳細な分析はこちら」で
+    // トップページへ来ると県別設定(満点/実技倍率)や入力済みの評定が引き継がれるか不明瞭だった。
+    // ?pref=<都道府県コード>&scores=<カンマ区切り9教科> のクエリがあれば、
+    // localStorageの古い状態より優先して即座に反映する（[[fable5-fullaccel-backlog-2026-07]]のΛ+2）。
+    // next/navigationのuseSearchParams()はSuspense境界を要求し、ホームページ全体をラップすると
+    // 静的生成された初期HTMLがフォールバック表示のみになりSEOに影響しうる（本ページはサイト最大の
+    // 流入面のため回避）。window.location.searchを直接読む（このuseEffect自体がクライアント専用・
+    // マウント後1回のみ実行のため副作用は無く、他のwindow.localStorage呼び出しと同じ扱い）。
+    const initialQuery = new URLSearchParams(window.location.search);
+    const queryPref = initialQuery.get('pref');
+    const queryScores = decodeScoresQuery(initialQuery.get('scores'));
+    const handoffPrefecture = queryPref && getPrefectureByCode(queryPref) ? queryPref : null;
+    if (handoffPrefecture) {
+      restoredPrefecture = handoffPrefecture;
+      setPrefectureCode(handoffPrefecture);
+      if (queryScores) {
+        restoredScores = queryScores;
+        setScores(queryScores);
+      }
+    }
+
     try {
       const savedScores = window.localStorage.getItem('my-naishin:scores');
       const savedPrefecture = window.localStorage.getItem('my-naishin:prefecture');
-      if (savedScores) {
+      if (savedScores && !handoffPrefecture) {
         const parsed = JSON.parse(savedScores) as Partial<Record<SubjectKey, unknown>>;
         const next: Scores = { ...DEFAULT_SCORES };
         (Object.keys(next) as SubjectKey[]).forEach((key) => {
@@ -140,7 +163,7 @@ export default function HomeClient() {
         restoredScores = next;
         setScores(next);
       }
-      if (savedPrefecture) {
+      if (savedPrefecture && !handoffPrefecture) {
         restoredPrefecture = savedPrefecture;
         setPrefectureCode(savedPrefecture);
       }
@@ -161,7 +184,9 @@ export default function HomeClient() {
     // 初回ユーザーや空の入力では「目的を選ぶ」画面を維持して、空の結果画面を防ぐ。
     const hasMeaningfulHistory =
       history.length > 0 && (restoredScores ? scoresDifferFromDefault(restoredScores) : false);
-    if (hasMeaningfulHistory) {
+    // 都道府県別計算機からの引き継ぎ（?pref=）が来ている場合は、履歴の有無に関わらず
+    // 「目的を選ぶ」画面を飛ばして直接計算モードへ（引き継ぎの意図を尊重する）。
+    if (hasMeaningfulHistory || handoffPrefecture) {
       setNavigationMode('calculate');
     }
     // 自動で showResult=true にはしない（結果はユーザーが「結果を見る」を押すと表示）

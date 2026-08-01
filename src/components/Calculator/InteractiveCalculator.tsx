@@ -10,7 +10,7 @@ import {
 } from 'lucide-react';
 
 import { DEFAULT_SCORES } from '@/lib/constants';
-import { calculateMaxScore, calculateTotalScore, calculatePercent, getRankForPercent } from '@/lib/utils';
+import { calculateMaxScore, calculateTotalScore, calculatePercent, getRankForPercent, encodeScoresQuery } from '@/lib/utils';
 import { InputForm } from '@/components/Calculator/InputForm';
 import { ScoreGauge } from '@/components/Result/ScoreGauge';
 import { RankCard } from '@/components/Result/RankCard';
@@ -177,9 +177,10 @@ export function InteractiveCalculator({ prefectureCode, prefectureName, maxScore
                 <h4 className="mb-2 font-bold text-slate-800">さらに詳しい分析をご希望の方へ</h4>
                 <p className="mb-3 text-sm leading-relaxed text-slate-600">
                   メインページでは、成績推移グラフ、教科別の詳細分析、目標設定機能、勉強タイマーなど、より充実した機能をご利用いただけます。
+                  {prefectureName}・入力済みの評定はそのまま引き継がれます。
                 </p>
                 <Link
-                  href="/"
+                  href={`/?pref=${prefectureCode}&scores=${encodeScoresQuery(scores)}`}
                   className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 px-5 py-2.5 text-sm font-bold text-white shadow-md transition-all hover:shadow-lg hover:scale-105"
                 >
                   <Calculator className="h-4 w-4" />
