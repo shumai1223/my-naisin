@@ -276,14 +276,18 @@ export const prefectureGuides: Record<string, PrefectureGuide> = {
       all4: '108点 / 135点満点',
       practicalPlus1: '85点（+4点）'
     },
+    // 2026-08-01: 5項目をWebSearchで個別に裏取り。①②③④は一次情報と一致し正確。⑤は
+    // 「自己表現(面接・作文等)が全校で実施」という表現が事実誤りと判明（実際は面接/小論文/
+    // 自己表現/集団討論/適性検査/学校独自問題/作文等7種類の中から各校が1つ以上を選ぶ制度で、
+    // 「自己表現」は数ある選択肢の一つに過ぎない）ため実態に合わせて修正。
     pitfalls: {
       title: '千葉県の注意点',
       items: [
         '中1〜中3の3年間の成績が均等に評価される',
         '全教科が等倍（実技教科も5教科と同じ扱い）',
         'K値（0.5〜2）による換算がある高校がある',
-        '2日間の入試日程で実施される',
-        '自己表現（面接・作文等）が全校で実施される'
+        '2日間の入試日程で実施される（1日目は英語・数学・国語、2日目は理科・社会と学校設定検査）',
+        '学校設定検査（面接・小論文・自己表現・集団討論・作文等から1つ以上）が全校で実施される'
       ]
     },
     faq: [
@@ -928,9 +932,11 @@ export const PREFECTURES_WITH_GUIDE = new Set(Object.keys(prefectureGuides));
  * 表記(旧「3項目」形式の誤りを2項目・合計10形式に修正)・特色検査実施校名を裏取り）。
  * 大阪府も検証（チャレンジテスト/英検読み替え率/C問題は一次情報と一致・選抜タイプの
  * 「I〜III」表記は誤りで正しくは「I〜V」の5段階だったため修正）。埼玉県も検証（学年比率の
- * 学校差・学校選択問題・加算点制度いずれも一次情報と一致・事実誤りなし）。他10県はまだ未検証。
+ * 学校差・学校選択問題・加算点制度いずれも一次情報と一致・事実誤りなし）。千葉県も検証
+ * （K値/2日日程は一次情報と一致・「自己表現が全校実施」は事実誤りで実際は面接/小論文/
+ * 自己表現等7種類から1つ以上選ぶ学校設定検査だったため修正）。他9県はまだ未検証。
  */
-export const VERIFIED_PITFALLS_PREFECTURE_CODES = new Set(['tokyo', 'kanagawa', 'osaka', 'saitama']);
+export const VERIFIED_PITFALLS_PREFECTURE_CODES = new Set(['tokyo', 'kanagawa', 'osaka', 'saitama', 'chiba']);
 
 // 都道府県データから動的にFAQを生成する関数
 export function generateDynamicFAQ(prefectureCode: string, prefecture: PrefectureConfig): { question: string; answer: string }[] {

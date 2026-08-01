@@ -21,8 +21,12 @@ describe('VERIFIED_PITFALLS_PREFECTURE_CODES（事実確認済みの県のみ解
     expect(VERIFIED_PITFALLS_PREFECTURE_CODES.has('saitama')).toBe(true);
   });
 
-  test('未検証の他10県(手書きguideデータがある県のうち検証済み4県以外)はまだ解禁されていない', () => {
-    const verified = new Set(['tokyo', 'kanagawa', 'osaka', 'saitama']);
+  test('千葉県は事実確認済みで解禁されている', () => {
+    expect(VERIFIED_PITFALLS_PREFECTURE_CODES.has('chiba')).toBe(true);
+  });
+
+  test('未検証の他9県(手書きguideデータがある県のうち検証済み5県以外)はまだ解禁されていない', () => {
+    const verified = new Set(['tokyo', 'kanagawa', 'osaka', 'saitama', 'chiba']);
     for (const code of PREFECTURES_WITH_GUIDE) {
       if (verified.has(code)) continue;
       expect(VERIFIED_PITFALLS_PREFECTURE_CODES.has(code)).toBe(false);
@@ -140,5 +144,22 @@ describe('埼玉県のpitfalls(2026-08-01にWebSearchで個別に裏取り済み
     for (const item of guide.pitfalls.items) {
       expect(item.length).toBeGreaterThan(0);
     }
+  });
+});
+
+describe('千葉県のpitfalls(2026-08-01にWebSearchで個別に裏取り済み)', () => {
+  test('学校設定検査は面接・小論文・自己表現等7種類から1つ以上選ぶ制度と正確に記載されている(旧「自己表現が全校実施」の事実誤りを修正)', () => {
+    const guide = getPrefectureGuide('chiba');
+    const item = guide.pitfalls.items.find((i) => i.includes('から1つ以上'));
+    expect(item).toContain('面接');
+    expect(item).toContain('小論文');
+    expect(item).toContain('1つ以上');
+  });
+
+  test('2日間の入試日程の内訳(1日目英数国/2日目理社+学校設定検査)が一次情報と一致する', () => {
+    const guide = getPrefectureGuide('chiba');
+    const item = guide.pitfalls.items.find((i) => i.includes('2日間'));
+    expect(item).toContain('1日目');
+    expect(item).toContain('2日目');
   });
 });
