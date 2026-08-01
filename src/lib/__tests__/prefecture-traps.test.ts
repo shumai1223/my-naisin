@@ -70,10 +70,33 @@ describe('getPrefectureTraps（手動キュレーション優先・動的生成�
   });
 
   test('topicタグ未設定(未検証)の県はgenerateDynamicTrapsの出力とそのまま一致する(回帰なし)', () => {
-    for (const code of ['kanagawa', 'osaka', 'aichi', 'fukuoka', 'hokkaido', 'saitama', 'chiba', 'hyogo', 'yamagata', 'tottori', 'fukui']) {
+    for (const code of ['osaka', 'aichi', 'fukuoka', 'hokkaido', 'saitama', 'chiba', 'hyogo', 'yamagata', 'tottori', 'fukui']) {
       const p = pref(code);
       expect(getPrefectureTraps(p)).toEqual(generateDynamicTraps(p));
     }
+  });
+
+  // 2026-08-01: 神奈川県を2県目として再検証・topicタグ付与。
+  // 神奈川はtargetGrades=[2,3]・practicalMultiplier=coreMultiplier=1・maxScore=135のため
+  // generateDynamicTrapsが0件を返す県（＝手動キュレーションが無いと注意点が空になっていた）。
+  test('神奈川県はdynamicTrapsが0件を返す県で、手動キュレーション5件がそのまま表示される', () => {
+    expect(generateDynamicTraps(pref('kanagawa'))).toEqual([]);
+    const traps = getPrefectureTraps(pref('kanagawa'));
+    const titles = traps.map((t) => t.title);
+    expect(titles).toEqual([
+      'S値方式の複雑さ',
+      '特色検査の影響',
+      '換算内申の係数',
+      '重点化の有無',
+      '第2次選考の判定基準'
+    ]);
+  });
+
+  test('神奈川県の事実誤りと判明した旧エントリ(2次選考=面接・作文/主体的態度の評価)は含まれない', () => {
+    const traps = getPrefectureTraps(pref('kanagawa'));
+    const titles = traps.map((t) => t.title);
+    expect(titles).not.toContain('2次選考の存在');
+    expect(titles).not.toContain('主体的態度の評価');
   });
 
   test('topicタグを持つ手動キュレーションが1件も無い県(例: 愛媛)は動的生成のみになる', () => {
