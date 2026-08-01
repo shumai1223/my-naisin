@@ -45,8 +45,12 @@ describe('VERIFIED_PITFALLS_PREFECTURE_CODES（事実確認済みの県のみ解
     expect(VERIFIED_PITFALLS_PREFECTURE_CODES.has('hiroshima')).toBe(true);
   });
 
-  test('未検証の他4県(手書きguideデータがある県のうち検証済み10県以外)はまだ解禁されていない', () => {
-    const verified = new Set(['tokyo', 'kanagawa', 'osaka', 'saitama', 'chiba', 'hokkaido', 'fukuoka', 'shizuoka', 'hyogo', 'hiroshima']);
+  test('愛知県は事実確認済みで解禁されている', () => {
+    expect(VERIFIED_PITFALLS_PREFECTURE_CODES.has('aichi')).toBe(true);
+  });
+
+  test('未検証の他3県(手書きguideデータがある県のうち検証済み11県以外)はまだ解禁されていない', () => {
+    const verified = new Set(['tokyo', 'kanagawa', 'osaka', 'saitama', 'chiba', 'hokkaido', 'fukuoka', 'shizuoka', 'hyogo', 'hiroshima', 'aichi']);
     for (const code of PREFECTURES_WITH_GUIDE) {
       if (verified.has(code)) continue;
       expect(VERIFIED_PITFALLS_PREFECTURE_CODES.has(code)).toBe(false);
@@ -263,5 +267,20 @@ describe('広島県のpitfalls(2026-08-01にWebSearchで個別に裏取り済み
     const guide = getPrefectureGuide('hiroshima');
     const item = guide.pitfalls.items.find((i) => i.includes('自己表現'));
     expect(item).toContain('全校');
+  });
+});
+
+describe('愛知県のpitfalls(2026-08-01にWebSearchで個別に裏取り済み)', () => {
+  test('校内順位は5つの計算式Ⅰ〜Ⅴと正確に記載されている(旧「3タイプ(I型・II型・III型)」の事実誤りを修正)', () => {
+    const guide = getPrefectureGuide('aichi');
+    const item = guide.pitfalls.items.find((i) => i.includes('校内順位'));
+    expect(item).toContain('Ⅰ〜Ⅴ');
+    expect(item).not.toContain('3タイプ（I型・II型・III型）');
+  });
+
+  test('全国唯一のA・Bグループ2校受験(複合選抜)が一次情報と一致する', () => {
+    const guide = getPrefectureGuide('aichi');
+    const item = guide.pitfalls.items.find((i) => i.includes('A・Bグループ'));
+    expect(item).toContain('全国唯一');
   });
 });
