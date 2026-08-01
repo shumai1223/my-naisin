@@ -206,7 +206,7 @@ export const EXPERIMENTS: ExperimentDef[] = [
       },
     ],
     primaryMetric: 'unlock_granted',
-    note: 'UnlockGateのteaserTitle/teaserBody未指定時（=全設置面共通）の既定文言を差し替える。分母となるunlock_teaser_viewも同時計測。送信先・解放条件（共有 or LINE追加）は3アームとも同一。',
+    note: 'UnlockGateのteaserTitle/teaserBody未指定時（=全設置面共通）の既定文言を差し替える。分母となるunlock_teaser_viewも同時計測。送信先・解放条件（共有 or LINE追加）は3アームとも同一。**🚨2026-08-01 Q-3ファネル診断で低頻度懸念を発見**: GA4実測(直近28日)でunlock_teaser_view=393ユーザーに対しunlock_granted=2件のみ(source末尾"-unlock"のline_friend_click 2件と完全一致・トラッキング自体は正常と確認済み)。実質コンバージョン率0.5%程度と極めて低く、lead-copy-2026(月1件)と同型の「3アーム合計でもminSample=100/アームに到達するのに現在の頻度だと数年かかる」構造的懸念がある。まだ20日目(30日超過はしていない)だが、明日以降checkExperimentPortfolioHealthのoverdueForRotation(21日)に載った際は、判定不能を理由に安易に停止せず、まず「absolute数が少なすぎて判定不能なまま延長しても意味がない」点を踏まえた判断(停止してcontrol確定、または母数を稼ぐ設置面拡大の検討)をすること。',
     startedAt: '2026-07-12',
   },
   {
