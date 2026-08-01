@@ -70,7 +70,7 @@ describe('getPrefectureTraps（手動キュレーション優先・動的生成�
   });
 
   test('topicタグ未設定(未検証)の県はgenerateDynamicTrapsの出力とそのまま一致する(回帰なし)', () => {
-    for (const code of ['aichi', 'fukuoka', 'hokkaido', 'saitama', 'chiba', 'hyogo', 'yamagata', 'tottori', 'fukui']) {
+    for (const code of ['aichi', 'hokkaido', 'saitama', 'chiba', 'hyogo', 'yamagata', 'tottori', 'fukui']) {
       const p = pref(code);
       expect(getPrefectureTraps(p)).toEqual(generateDynamicTraps(p));
     }
@@ -121,6 +121,33 @@ describe('getPrefectureTraps（手動キュレーション優先・動的生成�
   test('大阪府の事実誤りと判明した旧エントリ(A方式とB方式の選択)は含まれない', () => {
     const traps = getPrefectureTraps(pref('osaka'));
     expect(traps.map((t) => t.title)).not.toContain('A方式とB方式の選択');
+  });
+
+  // 2026-08-01: 福岡県を4県目として再検証・topicタグ付与。
+  // 福岡はtargetGrades=[3]・maxScore=45のためdynamicTrapsが「中3のみが対象」「1点差が大きい」
+  // の2件を返す。旧「実技4教科は2倍計算」「3年間が対象」はprefectures.tsの実データ
+  // （practicalMultiplier=1・targetGrades=[3]）と直接矛盾する事実誤りだったため訂正した。
+  test('福岡県はtopicタグ付きの手動キュレーション4件(満点45/傾斜なし/当日重視/中3のみ)を含む', () => {
+    expect(generateDynamicTraps(pref('fukuoka')).map((t) => t.title)).toEqual([
+      '中3のみが対象',
+      '1点差が大きい'
+    ]);
+    const traps = getPrefectureTraps(pref('fukuoka'));
+    const titles = traps.map((t) => t.title);
+    expect(titles).toContain('満点が45点と非常に低い');
+    expect(titles).toContain('実技教科は原則傾斜なし(一部高校のみ例外あり)');
+    expect(titles).toContain('当日点の比重が圧倒的に高い(学力300点:内申45点)');
+    expect(titles).toContain('中3のみが対象');
+    // 手動キュレーション(topic:'max-score')が動的生成の「1点差が大きい」を上書きするため重複しない。
+    expect(titles.filter((t) => t === '1点差が大きい')).toHaveLength(0);
+    expect(titles.filter((t) => t === '中3のみが対象')).toHaveLength(1);
+  });
+
+  test('福岡県の事実誤りと判明した旧エントリ(実技4教科は2倍計算/3年間が対象)は含まれない', () => {
+    const traps = getPrefectureTraps(pref('fukuoka'));
+    const titles = traps.map((t) => t.title);
+    expect(titles).not.toContain('実技4教科は2倍計算');
+    expect(titles).not.toContain('3年間が対象');
   });
 
   test('topicタグを持つ手動キュレーションが1件も無い県(例: 愛媛)は動的生成のみになる', () => {
