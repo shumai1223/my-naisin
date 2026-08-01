@@ -1,8 +1,10 @@
-import { resolveCategoryLabel, TOKYO_DEPARTMENT_TO_CATEGORY_LABEL, HIROSHIMA_DEPARTMENT_TO_CATEGORY_LABEL } from '../school-department-category';
+import { resolveCategoryLabel, TOKYO_DEPARTMENT_TO_CATEGORY_LABEL, HIROSHIMA_DEPARTMENT_TO_CATEGORY_LABEL, SAITAMA_DEPARTMENT_TO_CATEGORY_LABEL } from '../school-department-category';
 import { TOKYO_COMPETITION_RATES } from '@/data/competition-rates/tokyo';
 import { TOKYO_COMPETITION_RATE_HISTORY } from '@/data/competition-rate-history/tokyo';
 import { HIROSHIMA_COMPETITION_RATES } from '@/data/competition-rates/hiroshima';
 import { HIROSHIMA_COMPETITION_RATE_HISTORY } from '@/data/competition-rate-history/hiroshima';
+import { SAITAMA_COMPETITION_RATES } from '@/data/competition-rates/saitama';
+import { SAITAMA_COMPETITION_RATE_HISTORY } from '@/data/competition-rate-history/saitama';
 
 describe('resolveCategoryLabel', () => {
   test('対応表が無い都道府県はnullを返す(あいまいな推測をしない)', () => {
@@ -64,5 +66,39 @@ describe('広島県の対応表クロス検証（実データ整合性・2026-08
       expect(departmentsInUse.has(dept)).toBe(true);
       expect(dept in HIROSHIMA_DEPARTMENT_TO_CATEGORY_LABEL).toBe(false);
     }
+  });
+});
+
+describe('埼玉県の対応表クロス検証（実データ整合性・2026-08-02判明・PDF区分見出しの直接読取りによる完全収録）', () => {
+  test('埼玉県の普通科は正しいΛ-4カテゴリ名(計付き)に対応する', () => {
+    expect(resolveCategoryLabel('saitama', '普通科')).toBe('普通科計');
+  });
+
+  test('伊奈学園総合の特殊な学科表記(普通・スポーツ科学・芸術の合算)も普通科計に対応する', () => {
+    expect(resolveCategoryLabel('saitama', '普通科（普通・スポーツ科学・芸術の合算）')).toBe('普通科計');
+  });
+
+  test('令和8年度に改称された国際関係科(旧・国際文化科)の学科表記に対応する', () => {
+    expect(resolveCategoryLabel('saitama', '国際教養科')).toBe('国際関係科計');
+    expect(resolveCategoryLabel('saitama', '国際科')).toBe('国際関係科計');
+  });
+
+  test('商業科に属する国際流通科(所沢商業)を国際関係科と混同しない', () => {
+    expect(resolveCategoryLabel('saitama', '国際流通科')).toBe('商業科計');
+  });
+
+  test('competition-ratesに現れる全departmentが対応表でカバーされている(PDFの区分見出しを1件ずつ直接確認済みの完全収録表であること)', () => {
+    const departmentsInUse = new Set(SAITAMA_COMPETITION_RATES.records.map((r) => r.department));
+    const uncovered = [...departmentsInUse].filter((d) => !(d in SAITAMA_DEPARTMENT_TO_CATEGORY_LABEL));
+    expect(uncovered).toEqual([]);
+  });
+
+  test('対応表が指す全カテゴリラベルが、Λ-4(competition-rate-history)のいずれかの年度に実在する', () => {
+    const categoryLabelsInHistory = new Set(
+      SAITAMA_COMPETITION_RATE_HISTORY.years.flatMap((y) => y.categories.map((c) => c.label))
+    );
+    const mappedLabels = [...new Set(Object.values(SAITAMA_DEPARTMENT_TO_CATEGORY_LABEL))];
+    const missing = mappedLabels.filter((label) => !categoryLabelsInHistory.has(label));
+    expect(missing).toEqual([]);
   });
 });

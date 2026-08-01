@@ -191,7 +191,9 @@ describe('getSchoolCategoryTrends', () => {
   test('department対応表もgrand-total-only年度も無い県は空配列を返す(誤った推測をしない)', () => {
     const school = schoolData({ schoolCode: 'X', departmentRates: [rate('X', '普通科', 100, 100, 1.0)] });
     const history: PrefectureRateHistoryFile = {
-      prefectureCode: 'saitama',
+      // osakaはDEPARTMENT_TO_CATEGORY_LABEL_BY_PREFECTUREに未登録の県として使う
+      // (tokyo/hiroshima/saitamaは2026-08-02時点で登録済みのため、このテストの前提が崩れる)。
+      prefectureCode: 'osaka',
       years: [
         {
           fiscalYear: '令和7年度（2025年度）',
@@ -205,9 +207,9 @@ describe('getSchoolCategoryTrends', () => {
         } satisfies YearSnapshot,
       ],
     };
-    // saitamaはDEPARTMENT_TO_CATEGORY_LABEL_BY_PREFECTUREに未登録のためcategoryLabelsは空、
+    // osakaはDEPARTMENT_TO_CATEGORY_LABEL_BY_PREFECTUREに未登録のためcategoryLabelsは空、
     // かつ当該年度はgrand-total-onlyでもないためフォールバックも発動しない。
-    expect(getSchoolCategoryTrends('saitama', school, history)).toEqual([]);
+    expect(getSchoolCategoryTrends('osaka', school, history)).toEqual([]);
   });
 });
 
