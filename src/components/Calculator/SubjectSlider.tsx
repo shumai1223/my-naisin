@@ -13,9 +13,11 @@ export interface SubjectSliderProps {
   value: number;
   onChange: (nextValue: number) => void;
   maxGrade?: number;
+  /** 2026-08-01 Cowork指摘: まだ一度も操作されていない（初期値のまま気づかれていない可能性がある）教科。 */
+  isUnconfirmed?: boolean;
 }
 
-export function SubjectSlider({ subject, prefectureCode, value, onChange, maxGrade = 5 }: SubjectSliderProps) {
+export function SubjectSlider({ subject, prefectureCode, value, onChange, maxGrade = 5, isUnconfirmed = false }: SubjectSliderProps) {
   const weight = getSubjectWeight(prefectureCode, subject.category);
   const isPractical = subject.category === 'practical';
 
@@ -28,7 +30,13 @@ export function SubjectSlider({ subject, prefectureCode, value, onChange, maxGra
 
   return (
     // data-no-rage: ステッパー/スライダー/クイック選択の連打はすべて正当な操作なので、カード全体を rage_click から除外（偽陽性の根絶）。
-    <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition-shadow hover:shadow-md" data-no-rage>
+    <div
+      className={cn(
+        'rounded-xl border bg-white p-4 shadow-sm transition-shadow hover:shadow-md',
+        isUnconfirmed ? 'border-dashed border-amber-300' : 'border-slate-200'
+      )}
+      data-no-rage
+    >
       {/* ヘッダー */}
       <div className="mb-3 flex items-center justify-between gap-3">
         <div className="min-w-0 flex-1">
@@ -37,6 +45,11 @@ export function SubjectSlider({ subject, prefectureCode, value, onChange, maxGra
             {weight > 1 && (
               <span className="rounded bg-blue-100 px-1.5 py-0.5 text-[10px] font-semibold text-blue-600">
                 ×{weight}
+              </span>
+            )}
+            {isUnconfirmed && (
+              <span className="rounded bg-amber-100 px-1.5 py-0.5 text-[10px] font-semibold text-amber-700">
+                未確認
               </span>
             )}
           </div>
