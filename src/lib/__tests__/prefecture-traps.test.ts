@@ -69,12 +69,9 @@ describe('getPrefectureTraps（手動キュレーション優先・動的生成�
     expect(titles).not.toContain('特色検査の有無');
   });
 
-  test('topicタグ未設定(未検証)の県はgenerateDynamicTrapsの出力とそのまま一致する(回帰なし)', () => {
-    for (const code of ['aichi', 'chiba', 'hyogo', 'yamagata', 'tottori', 'fukui']) {
-      const p = pref(code);
-      expect(getPrefectureTraps(p)).toEqual(generateDynamicTraps(p));
-    }
-  });
+  // 2026-08-01: PREFECTURE_TRAPSに存在する全12県の再検証が完了したため、
+  // 「topicタグ未設定の県」というカテゴリはもう存在しない（PREFECTURE_TRAPSに無い
+  // 県はオブジェクト自体にキーが無いため、別テスト「愛媛県」でカバー）。
 
   // 2026-08-01: 神奈川県を2県目として再検証・topicタグ付与。
   // 神奈川はtargetGrades=[2,3]・practicalMultiplier=coreMultiplier=1・maxScore=135のため
@@ -178,6 +175,81 @@ describe('getPrefectureTraps（手動キュレーション優先・動的生成�
     expect(titles).toContain('学年比率は学校ごとに1:1:2/1:1:3/1:2:3など異なる');
     expect(titles).toContain('特別活動・出欠も内申点に加点される');
     expect(titles).toContain('3年間が対象');
+  });
+
+  // 2026-08-01: 千葉県を7県目として再検証・topicタグ付与。事実誤りは無かったが、
+  // 千葉県で最も特徴的な「K値」制度が一切キュレーションされていなかったため新規追加した。
+  test('千葉県はtopicタグ付きの手動キュレーション2件(K値/傾斜なし)＋動的生成分を含む', () => {
+    expect(generateDynamicTraps(pref('chiba')).map((t) => t.title)).toEqual(['3年間が対象']);
+    const traps = getPrefectureTraps(pref('chiba'));
+    const titles = traps.map((t) => t.title);
+    expect(titles).toContain('K値(0.5〜2倍)で学校ごとに内申点の重みが激変する');
+    expect(titles).toContain('実技教科は主要5教科と同じ配点(傾斜なし)');
+    expect(titles).toContain('3年間が対象');
+  });
+
+  // 2026-08-01: 兵庫県を8県目として再検証・topicタグ付与。「実技教科は主要5教科と同等」は
+  // **重大な事実誤り**と判明（実際は実技4教科が内申点250点満点の60%を占める全国屈指の
+  // 傾斜配点県。coreMultiplier=4・practicalMultiplier=7.5）。
+  test('兵庫県はtopicタグ付きの手動キュレーション1件(実技60%)＋動的生成分(中3のみ/傾斜配点/特殊倍率)を含む', () => {
+    const dynamicTitles = generateDynamicTraps(pref('hyogo')).map((t) => t.title);
+    expect(dynamicTitles).toContain('中3のみが対象');
+    expect(dynamicTitles).toContain('特殊な倍率設定');
+    const traps = getPrefectureTraps(pref('hyogo'));
+    const titles = traps.map((t) => t.title);
+    expect(titles).toContain('実技4教科が内申点の60%を占める(全国屈指の傾斜配点)');
+    // 手動キュレーション(topic:'practical-weight')が動的生成の「実技教科が傾斜配点」を上書きする。
+    expect(titles.filter((t) => t === '実技教科が傾斜配点')).toHaveLength(0);
+  });
+
+  test('兵庫県の事実誤りと判明した旧エントリ(実技教科の配点=同等の重要性)は含まれない', () => {
+    const traps = getPrefectureTraps(pref('hyogo'));
+    expect(traps.map((t) => t.title)).not.toContain('実技教科の配点');
+  });
+
+  // 2026-08-01: 山形県を9県目として再検証・topicタグ付与。「内申点の比重」（合否に大きな影響）は
+  // 実態と逆（多くの高校で学力検査重視）と判明し訂正した。
+  test('山形県はtopicタグ付きの手動キュレーション3件(傾斜なし/学力重視の比率/提出物)＋動的生成分を含む', () => {
+    const dynamicTitles = generateDynamicTraps(pref('yamagata')).map((t) => t.title);
+    expect(dynamicTitles).toEqual(['中3のみが対象', '1点差が大きい']);
+    const traps = getPrefectureTraps(pref('yamagata'));
+    const titles = traps.map((t) => t.title);
+    expect(titles).toContain('内申:学力の比率は学校ごとに3:7〜7:3から選択(多くは学力重視)');
+    expect(titles).toContain('提出物の重要性');
+    expect(titles).not.toContain('内申点の比重');
+  });
+
+  // 2026-08-01: 鳥取県を10県目として再検証・topicタグ付与。「実技教科の配点=同等の重要性」は
+  // 事実誤り（実際は実技2倍、かつ高校により内申点全体をさらに2〜3倍換算）と判明し訂正した。
+  test('鳥取県はtopicタグ付きの手動キュレーション2件(実技2倍+追加倍率/幅広い比率)＋動的生成分を含む', () => {
+    const dynamicTitles = generateDynamicTraps(pref('tottori')).map((t) => t.title);
+    expect(dynamicTitles).toContain('実技教科が傾斜配点');
+    const traps = getPrefectureTraps(pref('tottori'));
+    const titles = traps.map((t) => t.title);
+    expect(titles).toContain('実技4教科は2倍計算・さらに高校ごとに追加倍率も');
+    expect(titles).toContain('内申:学力の比率は学校ごとに8:2〜2:8と極端に幅広い');
+    expect(titles).not.toContain('実技教科の配点');
+    expect(titles.filter((t) => t === '実技教科が傾斜配点')).toHaveLength(0);
+  });
+
+  // 2026-08-01: 福井県を11県目として再検証・topicタグ付与。事実誤りは無かったが表現を明確化。
+  test('福井県はtopicタグ付きの手動キュレーション1件(傾斜なし)＋動的生成分を含む', () => {
+    const traps = getPrefectureTraps(pref('fukui'));
+    const titles = traps.map((t) => t.title);
+    expect(titles).toContain('実技教科は主要5教科と同じ配点(傾斜なし)');
+    expect(titles).toContain('中3のみが対象');
+  });
+
+  // 2026-08-01: 愛知県を12県目(最後)として再検証・topicタグ付与。「特色検査の導入」は
+  // 実在しない用語（正しくは「特色選抜」で学力検査自体を行わない別選抜方式）だった。
+  test('愛知県はtopicタグ付きの手動キュレーション3件(全教科2倍/満点90/特色選抜)＋動的生成分を含む', () => {
+    expect(generateDynamicTraps(pref('aichi')).map((t) => t.title)).toEqual(['中3のみが対象']);
+    const traps = getPrefectureTraps(pref('aichi'));
+    const titles = traps.map((t) => t.title);
+    expect(titles).toContain('全教科×2倍計算(実技教科への傾斜ではない)');
+    expect(titles).toContain('満点が90点と低め');
+    expect(titles).toContain('特色選抜(学力検査なし)が2028年度に全校拡大予定');
+    expect(titles).not.toContain('特色検査の導入');
   });
 
   test('topicタグを持つ手動キュレーションが1件も無い県(例: 愛媛)は動的生成のみになる', () => {
