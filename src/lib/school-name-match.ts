@@ -39,16 +39,26 @@ const PREFECTURE_NAMES_BY_LENGTH_DESC = [...new Set(PREFECTURES.map((p) => p.nam
  * （「京都府」は「京都府」自体が47都道府県名の1つとしてリストにあるため、部分的な"都"に
  * 惑わされず正しく1つの単位として一致する）。
  */
-function stripEstablishmentPrefix(fullName: string): string {
+/**
+ * 都道府県立の学校は「除去した1形だけ」が正解だが、市区町村立の学校は
+ * **除去する県と、市立ごと残す県の両方が実在する**（2026-08-02判明）。
+ * 例: kyoto市立紫野高等学校の短縮表記は'紫野'（市立を除去する流儀）だが、
+ * hiroshima市立基町高等学校の短縮表記は'広島市立基町'（市立を残す流儀）。
+ * どちらの流儀かはcompetition-ratesのPDF側の慣習に依存し、県ごとに異なる
+ * （osaka/aichi/hiroshima等は残す・kyoto等は除去する）ため、正規化を1形に
+ * 決め打ちせず**両方の候補**を返し、突合側でどちらか一致すれば採用する
+ * （あいまい一致ではなく「2つの確定候補のどちらかへの完全一致」であることに注意）。
+ */
+function stripEstablishmentPrefixVariants(fullName: string): string[] {
   for (const prefName of PREFECTURE_NAMES_BY_LENGTH_DESC) {
-    if (fullName.startsWith(prefName + '立')) return fullName.slice(prefName.length + 1);
+    if (fullName.startsWith(prefName + '立')) return [fullName.slice(prefName.length + 1)];
   }
   for (const prefName of PREFECTURE_NAMES_BY_LENGTH_DESC) {
-    if (fullName.startsWith(prefName)) return fullName.slice(prefName.length);
+    if (fullName.startsWith(prefName)) return [fullName.slice(prefName.length)];
   }
   const municipalMatch = fullName.match(MUNICIPAL_PREFIX_PATTERN);
-  if (municipalMatch) return fullName.slice(municipalMatch[0].length);
-  return fullName;
+  if (municipalMatch) return [fullName.slice(municipalMatch[0].length), fullName];
+  return [fullName];
 }
 
 /**
@@ -63,15 +73,25 @@ function stripEstablishmentPrefix(fullName: string): string {
 const SCHOOL_TYPE_TOKEN_PATTERN = /(高等学校|高校)/g;
 
 /**
+ * 学校の正式名称から、突合対象になりうる正規化候補をすべて返す（純粋関数）。
+ * 都道府県立は1候補のみ。市区町村立は「市立を除去した形」「市立を残した形」の2候補を返す
+ * （上記stripEstablishmentPrefixVariantsのコメント参照）。
+ */
+function candidateNormalizedNames(fullName: string): string[] {
+  const trimmed = fullName.trim();
+  const variants = stripEstablishmentPrefixVariants(trimmed);
+  return [...new Set(variants.map((v) => v.replace(SCHOOL_TYPE_TOKEN_PATTERN, '').trim()))];
+}
+
+/**
  * 学校の正式名称を突合用に正規化する（純粋関数）。
  * 例: '東京都立日比谷高等学校' → '日比谷'。設置者接頭辞・学校種別トークンのみを除去し、
  * それ以外の表記はそのまま保持する（過剰な正規化で誤マッチを起こさないため）。
+ * 市区町村立で2候補ある場合は「除去した形」（先頭候補）を返す。両方を試したい場合は
+ * matchSchoolNameToCode/matchSchoolNamesを使うこと（内部でcandidateNormalizedNamesを使う）。
  */
 export function normalizeSchoolNameForMatch(fullName: string): string {
-  let result = fullName.trim();
-  result = stripEstablishmentPrefix(result);
-  result = result.replace(SCHOOL_TYPE_TOKEN_PATTERN, '');
-  return result.trim();
+  return candidateNormalizedNames(fullName)[0];
 }
 
 export interface SchoolCodeMatchResult {
@@ -92,7 +112,7 @@ export interface SchoolCodeMatchResult {
  */
 export function matchSchoolNameToCode(schoolName: string, masterRecords: SchoolRecord[]): SchoolCodeMatchResult {
   const target = schoolName.trim();
-  const candidates = masterRecords.filter((r) => normalizeSchoolNameForMatch(r.name) === target);
+  const candidates = masterRecords.filter((r) => candidateNormalizedNames(r.name).includes(target));
 
   if (candidates.length === 0) {
     return { inputName: schoolName, matchedCode: null, matchedFullName: null, reason: 'no-match' };

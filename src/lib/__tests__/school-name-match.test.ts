@@ -103,6 +103,33 @@ describe('matchSchoolNameToCode', () => {
     expect(result.reason).toBe('ambiguous');
     void ambiguousMaster; // 上のコメント用ダミー(未使用警告回避)
   });
+
+  // 2026-08-02判明: hiroshima等では市立学校の短縮表記が「市立を残した形」("広島市立基町")で
+  // 記録されており、市立を除去した形("基町")では一致しなかった(実データで8校のno-matchを確認)。
+  // 県ごとにどちらの流儀か異なる(kyotoは除去・hiroshima/osaka/aichiは残す)ため、両方を候補にする。
+  describe('市立学校の「市立を残す」流儀への対応(2026-08-02)', () => {
+    const municipalMaster: SchoolRecord[] = [rec('D1', '広島市立基町高等学校')];
+
+    test('市立を残した形("広島市立基町")でも一致する', () => {
+      const result = matchSchoolNameToCode('広島市立基町', municipalMaster);
+      expect(result.matchedCode).toBe('D1');
+      expect(result.reason).toBe('matched');
+    });
+
+    test('市立を除去した形("基町")でも引き続き一致する(kyoto等の従来流儀を壊さない)', () => {
+      const result = matchSchoolNameToCode('基町', municipalMaster);
+      expect(result.matchedCode).toBe('D1');
+      expect(result.reason).toBe('matched');
+    });
+
+    test('県立と市立で同名の学校が実在する場合は、どちらの表記で入力してもambiguousのまま(誤紐付け防止)', () => {
+      const collidingMaster: SchoolRecord[] = [
+        rec('E1', '広島県立広島工業高等学校'),
+        rec('E2', '広島市立広島工業高等学校'),
+      ];
+      expect(matchSchoolNameToCode('広島工業', collidingMaster).reason).toBe('ambiguous');
+    });
+  });
 });
 
 describe('matchSchoolNames', () => {
