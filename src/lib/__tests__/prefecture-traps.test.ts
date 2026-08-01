@@ -1,4 +1,4 @@
-import { generateDynamicTraps } from '../prefecture-traps';
+import { generateDynamicTraps, getPrefectureTraps, PREFECTURE_TRAPS } from '../prefecture-traps';
 import { PREFECTURES } from '../prefectures';
 
 function pref(code: string) {
@@ -40,5 +40,56 @@ describe('generateDynamicTraps', () => {
         expect(['high', 'medium', 'low']).toContain(t.impact);
       }
     }
+  });
+});
+
+// 2026-08-01: PrefectureMinimumContent.tsxが`const traps = dynamicTraps`で手動キュレーション
+// (PREFECTURE_TRAPS)を完全に無視していた死んだコード問題を修正した際に追加。
+// topicタグを持つ手動キュレーション分を優先し、同トピックの動的生成分と重複させない設計。
+describe('getPrefectureTraps（手動キュレーション優先・動的生成で補完・重複除去）', () => {
+  test('東京都はtopicタグ付きの手動キュレーション3件(ESAT-J/実技/学年)＋重複しない動的生成分を含む', () => {
+    const traps = getPrefectureTraps(pref('tokyo'));
+    const titles = traps.map((t) => t.title);
+    expect(titles).toContain('ESAT-Jの影響');
+    expect(titles).toContain('実技4教科は2倍計算');
+    expect(titles).toContain('中3のみが対象');
+    // 動的生成の同トピック版（generateDynamicTrapsの「中3のみが対象」「実技教科が傾斜配点」）は
+    // 手動キュレーション側が優先されるため重複して出ない。
+    expect(titles.filter((t) => t === '中3のみが対象')).toHaveLength(1);
+    expect(titles.some((t) => t === '実技教科が傾斜配点')).toBe(false);
+    // 手動キュレーションに無いトピック(multiplier)は動的生成で補完される
+    // (東京はpracticalMultiplier=2>coreMultiplier=1のため「特殊な倍率設定」が該当)。
+    expect(titles).toContain('特殊な倍率設定');
+  });
+
+  test('事実誤りと判明した旧エントリ(満点が比較的高い/特色検査の有無)はtopicタグが無く含まれない', () => {
+    const traps = getPrefectureTraps(pref('tokyo'));
+    const titles = traps.map((t) => t.title);
+    expect(titles).not.toContain('満点が比較的高い');
+    expect(titles).not.toContain('特色検査の有無');
+  });
+
+  test('topicタグ未設定(未検証)の県はgenerateDynamicTrapsの出力とそのまま一致する(回帰なし)', () => {
+    for (const code of ['kanagawa', 'osaka', 'aichi', 'fukuoka', 'hokkaido', 'saitama', 'chiba', 'hyogo', 'yamagata', 'tottori', 'fukui']) {
+      const p = pref(code);
+      expect(getPrefectureTraps(p)).toEqual(generateDynamicTraps(p));
+    }
+  });
+
+  test('topicタグを持つ手動キュレーションが1件も無い県(例: 愛媛)は動的生成のみになる', () => {
+    const p = pref('ehime');
+    expect(getPrefectureTraps(p)).toEqual(generateDynamicTraps(p));
+  });
+
+  test('どの県でも同一topicの手動+動的が同時に表示されることはない(重複防止の一般検証・uniqueは複数あってよい)', () => {
+    for (const p of PREFECTURES) {
+      const traps = getPrefectureTraps(p);
+      const topics = traps.map((t) => t.topic).filter((t): t is NonNullable<typeof t> => Boolean(t) && t !== 'unique');
+      expect(new Set(topics).size).toBe(topics.length);
+    }
+  });
+
+  test('東京都の手動キュレーション件数は3件(事実誤り2件を削除済み)', () => {
+    expect(PREFECTURE_TRAPS.tokyo).toHaveLength(3);
   });
 });

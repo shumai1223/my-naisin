@@ -1,6 +1,6 @@
 import { AlertTriangle, BookOpen, ExternalLink, Calendar, Calculator, TrendingUp } from 'lucide-react';
 import { getPrefectureByCode } from '@/lib/prefectures';
-import { PREFECTURE_TRAPS, generateDynamicTraps } from '@/lib/prefecture-traps';
+import { getPrefectureTraps } from '@/lib/prefecture-traps';
 import { PREFECTURE_SOURCES } from '@/lib/prefecture-sources';
 import { getPrefectureGuide, generateDynamicFAQ } from '@/lib/prefecture-guides';
 import { TrustInfo } from '@/components/TrustInfo';
@@ -46,10 +46,9 @@ export function PrefectureMinimumContent({ prefectureCode }: PrefectureMinimumCo
     }
   ];
 
-  // 県別の罠（動的生成を優先）
-  const staticTraps = PREFECTURE_TRAPS[prefectureCode as keyof typeof PREFECTURE_TRAPS] || [];
-  const dynamicTraps = generateDynamicTraps(prefecture);
-  const traps = dynamicTraps; // 常に動的生成を使用
+  // 県別の罠（2026-08-01: 手動キュレーション(topicタグ付き分のみ)を優先し、動的生成で補完する。
+  // 詳細はgetPrefectureTraps(prefecture-traps.ts)のコメント参照。
+  const traps = getPrefectureTraps(prefecture);
 
   // 詳細な根拠データ
   const sources = PREFECTURE_SOURCES[prefectureCode as keyof typeof PREFECTURE_SOURCES] || [];

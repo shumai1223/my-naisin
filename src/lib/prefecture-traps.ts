@@ -1,6 +1,21 @@
 // 都道府県別の罠・注意点データ（県固有3〜7個）
+//
+// **重要（2026-08-01）**: このPREFECTURE_TRAPSは長らく`PrefectureMinimumContent.tsx`で
+// 読み込まれるだけで実際には描画に使われていない死んだコードだった（`const traps = dynamicTraps`
+// で常に上書き）。復活させるにあたり内容の再検証を行ったところ、東京都の「満点が比較的高い」
+// （満点65点は実際には全国でも低い部類=誤り）と「特色検査の有無」（"特色検査"は神奈川県の
+// 制度名で東京都には無い用語=おそらく他県からのコピペ由来の誤り）の2件が事実誤りと判明し削除した。
+// `topic`フィールドを持つエントリのみがgenerateDynamicTrapsの同トピック分と重複除去されて
+// 表示される（getPrefectureTraps参照）。topicが無いエントリ（tokyo以外の11県）はまだ内容の
+// 再検証が済んでいないため、意図的に非表示のまま据え置く（1県ずつ検証してから解禁する方針）。
 
 import { PrefectureConfig } from './prefectures';
+
+/**
+ * 'unique'=動的生成と重複しない検証済み固有トピック（重複除去の対象にはしないが表示は許可する）。
+ * それ以外はgenerateDynamicTrapsの対応するトピックと重複除去される。
+ */
+export type TrapTopic = 'grade-scope' | 'practical-weight' | 'max-score' | 'multiplier' | 'unique';
 
 export const PREFECTURE_TRAPS = {
   tokyo: [
@@ -8,34 +23,25 @@ export const PREFECTURE_TRAPS = {
       title: '実技4教科は2倍計算',
       description: '音楽・美術・保健体育・技術家庭の評定が2倍で計算されます。主要5教科と同じくらい重要です。',
       impact: 'high',
-      solution: '実技教科の評定を4以上に保つことで、大幅な内申点向上が可能です。'
+      solution: '実技教科の評定を4以上に保つことで、大幅な内申点向上が可能です。',
+      topic: 'practical-weight'
     },
     {
       title: 'ESAT-Jの影響',
-      description: '英語スピーキングテスト（ESAT-J）が20点満点で加算される場合があります。実施しない学校・コースもあります。',
+      description: '英語スピーキングテスト（ESAT-J）が20点満点で加算されます（総合得点1020点中）。私立・国立中学の生徒や、分割後期募集・第二次募集以降では活用されません。',
       impact: 'medium',
-      solution: '志望校のESAT-J実施有無を確認し、必要であればスピーキング練習を始めましょう。'
+      solution: '自分の受検区分でESAT-Jが活用されるか確認し、対象であればスピーキング練習を始めましょう。',
+      topic: 'unique'
     },
     {
       title: '中3のみが対象',
       description: '東京都立高校入試では中3の成績のみが対象です。中1・中2の成績は一切関係ありません。',
       impact: 'high',
-      solution: '中3の2学期・3学期の成績が最も重要です。中3から本格的に対策を始めましょう。'
-    },
-    {
-      title: '満点が比較的高い',
-      description: '満点65点は全国でも高い部類です。実技4教科が2倍計算されるため、他県と比較すると内申点の比重が高い傾向があります。',
-      impact: 'medium',
-      solution: '当日点の比重も高いので、内申点と学力検査のバランスが重要です。'
-    },
-    {
-      title: '特色検査の有無',
-      description: '一部の学校で特色検査が実施されます。当日点に加算される場合があります。',
-      impact: 'low',
-      solution: '志望校の特色検査有無を確認し、必要であれば対策講座を受講しましょう。'
+      solution: '中3の2学期・3学期の成績が最も重要です。中3から本格的に対策を始めましょう。',
+      topic: 'grade-scope'
     }
   ],
-  
+
   kanagawa: [
     {
       title: 'S値方式の複雑さ',
@@ -329,60 +335,66 @@ export const PREFECTURE_TRAPS = {
 };
 
 // 都道府県データから動的に注意点を生成する関数
-export function generateDynamicTraps(prefecture: PrefectureConfig): { title: string; description: string; impact: 'high' | 'medium' | 'low'; solution: string }[] {
-  const traps: { title: string; description: string; impact: 'high' | 'medium' | 'low'; solution: string }[] = [];
-  
+export function generateDynamicTraps(prefecture: PrefectureConfig): PrefectureTrap[] {
+  const traps: PrefectureTrap[] = [];
+
   // 対象学年に関する注意点
   if (prefecture.targetGrades.length === 1 && prefecture.targetGrades[0] === 3) {
     traps.push({
       title: '中3のみが対象',
       description: '中学3年生の成績のみが内申点として使われます。中1・中2の成績は含まれません。',
       impact: 'high' as const,
-      solution: '中3の成績が最も重要です。中3から本格的に対策を始めましょう。'
+      solution: '中3の成績が最も重要です。中3から本格的に対策を始めましょう。',
+      topic: 'grade-scope'
     });
   } else if (prefecture.targetGrades.length === 3) {
     traps.push({
       title: '3年間が対象',
       description: '中学1年生から3年生までの3年間の成績が対象です。早期からの対策が有利です。',
       impact: 'medium' as const,
-      solution: '中1からコツコツと成績を積み上げることが、合格への近道です。'
+      solution: '中1からコツコツと成績を積み上げることが、合格への近道です。',
+      topic: 'grade-scope'
     });
   }
-  
+
   // 実技教科の傾斜に関する注意点
   if (prefecture.practicalMultiplier > prefecture.coreMultiplier) {
     traps.push({
       title: '実技教科が傾斜配点',
       description: `実技4教科は${prefecture.practicalMultiplier}倍で計算され、主要5教科より重要です。`,
       impact: 'high' as const,
-      solution: '実技教科の評定を4以上に保つことで、大幅な内申点向上が可能です。'
+      solution: '実技教科の評定を4以上に保つことで、大幅な内申点向上が可能です。',
+      topic: 'practical-weight'
     });
   }
-  
+
   // 満点に関する注意点
   if (prefecture.maxScore <= 50) {
     traps.push({
       title: '1点差が大きい',
       description: `満点${prefecture.maxScore}点は比較的低く、1点の差が合否に大きく影響します。`,
       impact: 'medium' as const,
-      solution: '全教科で安定した評定を目指し、失点を最小限に抑えましょう。'
+      solution: '全教科で安定した評定を目指し、失点を最小限に抑えましょう。',
+      topic: 'max-score'
     });
   } else if (prefecture.maxScore >= 400) {
     traps.push({
       title: '高得点戦略が必要',
       description: `満点${prefecture.maxScore}点は比較的高く、効率的な得点アップが重要です。`,
       impact: 'medium' as const,
-      solution: '得意教科で高評定を取りつつ、苦手教科を減らす戦略が有効です。'
+      solution: '得意教科で高評定を取りつつ、苦手教科を減らす戦略が有効です。',
+      topic: 'max-score'
     });
   }
-  
+
   // 特殊な倍率に関する注意点
   if (prefecture.coreMultiplier !== 1 || prefecture.practicalMultiplier !== 1) {
     traps.push({
       title: '特殊な倍率設定',
       description: `5教科×${prefecture.coreMultiplier}倍、実技4教科×${prefecture.practicalMultiplier}倍の計算です。`,
       impact: 'medium' as const,
-      solution: '倍率の仕組みを理解し、戦略的に成績を上げましょう。'
+      solution: '倍率の仕組みを理解し、戦略的に成績を上げましょう。',
+      topic: 'multiplier'
     });
   }
 
@@ -408,6 +420,27 @@ export type PrefectureTrap = {
   description: string;
   impact: 'high' | 'medium' | 'low';
   solution: string;
+  /** 動的生成トラップとの重複除去に使うトピック（手動キュレーション側のみ・任意）。 */
+  topic?: TrapTopic;
 };
 
 export type PrefectureTraps = Record<string, PrefectureTrap[]>;
+
+/**
+ * 表示用の注意点一覧を組み立てる（手動キュレーション優先・動的生成で補完）。
+ *
+ * `topic`タグを持つ手動キュレーション分をすべて採用し、動的生成分は同じtopicが手動側に
+ * 既に無いものだけを追加する（同一トピックの重複表示を防ぐ）。`topic`タグが無い手動
+ * キュレーション分（再検証未実施の11県）は採用しない＝これまで通り動的生成のみが表示される
+ * （2026-08-01: 東京都のみ再検証・topicタグ付けを実施。他県は今後1県ずつ検証してから解禁する）。
+ */
+export function getPrefectureTraps(prefecture: PrefectureConfig): PrefectureTrap[] {
+  const curated = (PREFECTURE_TRAPS[prefecture.code as keyof typeof PREFECTURE_TRAPS] ?? []) as PrefectureTrap[];
+  const curatedWithTopic = curated.filter((t): t is PrefectureTrap & { topic: TrapTopic } => Boolean(t.topic));
+  // 'unique'は動的生成と重複しない検証済みトピックのため、重複除去の対象(coveredTopics)には含めない。
+  const coveredTopics: Set<TrapTopic> = new Set(curatedWithTopic.map((t) => t.topic).filter((topic) => topic !== 'unique'));
+
+  const dynamic = generateDynamicTraps(prefecture).filter((t) => !t.topic || !coveredTopics.has(t.topic));
+
+  return [...curatedWithTopic, ...dynamic];
+}
