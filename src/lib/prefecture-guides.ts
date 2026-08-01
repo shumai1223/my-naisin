@@ -448,6 +448,9 @@ export const prefectureGuides: Record<string, PrefectureGuide> = {
       all4: '36点 / 45点満点',
       practicalPlus1: '31点（+4点）'
     },
+    // 2026-08-01: 5項目をWebSearchで個別に裏取り。全項目とも一次情報と完全一致し事実誤りは
+    // 見つからなかった（第2学期末までの対象期間・学校裁量枠50%以内・共通枠3段階の75%/10%/15%
+    // という具体的な割合・面接が全員対象、いずれも複数の一次情報源で確認済み）。
     pitfalls: {
       title: '静岡県の注意点',
       items: [
@@ -944,9 +947,10 @@ export const PREFECTURES_WITH_GUIDE = new Set(Object.keys(prefectureGuides));
  * 自己表現等7種類から1つ以上選ぶ学校設定検査だったため修正）。北海道も検証（学区制/推薦入試は
  * 一次情報と一致・「裁量問題を出題する高校がある」は2022年度に廃止済みで事実誤りだったため
  * 現行の共通問題制度に修正）。福岡県も検証（傾斜配点/特色化選抜/13学区いずれも一次情報と
- * 一致・事実誤りなし）。他7県はまだ未検証。
+ * 一致・事実誤りなし）。静岡県も検証（学校裁量枠50%/共通枠3段階75%・10%・15%/第2学期末までの
+ * 対象期間いずれも一次情報と一致・事実誤りなし）。他6県はまだ未検証。
  */
-export const VERIFIED_PITFALLS_PREFECTURE_CODES = new Set(['tokyo', 'kanagawa', 'osaka', 'saitama', 'chiba', 'hokkaido', 'fukuoka']);
+export const VERIFIED_PITFALLS_PREFECTURE_CODES = new Set(['tokyo', 'kanagawa', 'osaka', 'saitama', 'chiba', 'hokkaido', 'fukuoka', 'shizuoka']);
 
 // 都道府県データから動的にFAQを生成する関数
 export function generateDynamicFAQ(prefectureCode: string, prefecture: PrefectureConfig): { question: string; answer: string }[] {

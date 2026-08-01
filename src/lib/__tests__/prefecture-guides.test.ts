@@ -33,8 +33,12 @@ describe('VERIFIED_PITFALLS_PREFECTURE_CODES（事実確認済みの県のみ解
     expect(VERIFIED_PITFALLS_PREFECTURE_CODES.has('fukuoka')).toBe(true);
   });
 
-  test('未検証の他7県(手書きguideデータがある県のうち検証済み7県以外)はまだ解禁されていない', () => {
-    const verified = new Set(['tokyo', 'kanagawa', 'osaka', 'saitama', 'chiba', 'hokkaido', 'fukuoka']);
+  test('静岡県は事実確認済みで解禁されている', () => {
+    expect(VERIFIED_PITFALLS_PREFECTURE_CODES.has('shizuoka')).toBe(true);
+  });
+
+  test('未検証の他6県(手書きguideデータがある県のうち検証済み8県以外)はまだ解禁されていない', () => {
+    const verified = new Set(['tokyo', 'kanagawa', 'osaka', 'saitama', 'chiba', 'hokkaido', 'fukuoka', 'shizuoka']);
     for (const code of PREFECTURES_WITH_GUIDE) {
       if (verified.has(code)) continue;
       expect(VERIFIED_PITFALLS_PREFECTURE_CODES.has(code)).toBe(false);
@@ -198,5 +202,27 @@ describe('福岡県のpitfalls(2026-08-01にWebSearchで個別に裏取り済み
     const guide = getPrefectureGuide('fukuoka');
     const item = guide.pitfalls.items.find((i) => i.includes('学区制'));
     expect(item).toContain('第13学区');
+  });
+});
+
+describe('静岡県のpitfalls(2026-08-01にWebSearchで個別に裏取り済み・事実誤りなし)', () => {
+  test('共通枠3段階審査の割合(75%/10%/15%)が一次情報と一致する', () => {
+    const guide = getPrefectureGuide('shizuoka');
+    const item = guide.pitfalls.items.find((i) => i.includes('共通枠'));
+    expect(item).toContain('75%');
+    expect(item).toContain('10%');
+    expect(item).toContain('15%');
+  });
+
+  test('学校裁量枠は定員の50%以内と一次情報と一致する', () => {
+    const guide = getPrefectureGuide('shizuoka');
+    const item = guide.pitfalls.items.find((i) => i.includes('学校裁量枠'));
+    expect(item).toContain('50%');
+  });
+
+  test('内申点の対象期間が第2学期末までと一次情報と一致する', () => {
+    const guide = getPrefectureGuide('shizuoka');
+    const item = guide.pitfalls.items.find((i) => i.includes('第2学期末'));
+    expect(item).toBeDefined();
   });
 });
