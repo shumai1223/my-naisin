@@ -239,23 +239,35 @@ export function SaveResultCTA({
   const done = status === 'success' || status === 'fallback';
 
   // 受け皿1：LINE（プッシュ可能な“溶けない名簿”）。T-2：コピー/表示タイミングA/Bをここで反映。
-  const lineBlock = LINE_ADD_URL && lineVisible && (
-    <a
-      href={LINE_ADD_URL}
-      target="_blank"
-      rel="noopener noreferrer"
-      onClick={onLineClick}
-      className="flex items-center justify-between gap-3 rounded-2xl border-2 border-[#06C755] bg-[#06C755] px-5 py-3.5 text-left text-white shadow-md transition-all hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.99]"
+  // 2026-08-01 Cowork実地UXテストで発覚した誤タップ事故の是正: timing='delayed'アームは以前
+  // lineVisible=falseの間このブロック自体をJSXから外す(mount/unmount)実装だったため、1.2秒後に
+  // 突然要素が挿入され下流のParentWindowBridge/ParentCostBridge/ShindanEntryLinkが数十px押し下げ
+  // られ、その瞬間のタップが無関係なリンクに命中する事故を招いていた。ラッパーは常時マウントして
+  // 高さを予約し(AdSlot.tsxのCLS対策パターンを踏襲)、可視/不可視はopacity+pointer-eventsの
+  // トランジションのみで切り替える(DOMの挿入・削除を伴わない=後続要素は一切動かない)。
+  const lineBlock = LINE_ADD_URL && (
+    <div
+      aria-hidden={!lineVisible}
+      className={`transition-opacity duration-300 ${lineVisible ? 'opacity-100' : 'pointer-events-none opacity-0'}`}
     >
-      <span className="flex items-center gap-2.5">
-        <MessageCircle className="h-5 w-5" />
-        <span>
-          <span className="block text-sm font-bold">LINEで受験情報を受け取る</span>
-          <span className="block text-xs text-white/85">{lineSubtitle}</span>
+      <a
+        href={LINE_ADD_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={onLineClick}
+        tabIndex={lineVisible ? 0 : -1}
+        className="flex items-center justify-between gap-3 rounded-2xl border-2 border-[#06C755] bg-[#06C755] px-5 py-3.5 text-left text-white shadow-md transition-all hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.99]"
+      >
+        <span className="flex items-center gap-2.5">
+          <MessageCircle className="h-5 w-5" />
+          <span>
+            <span className="block text-sm font-bold">LINEで受験情報を受け取る</span>
+            <span className="block text-xs text-white/85">{lineSubtitle}</span>
+          </span>
         </span>
-      </span>
-      <span className="rounded-lg bg-white/20 px-2.5 py-1 text-xs font-bold">無料</span>
-    </a>
+        <span className="rounded-lg bg-white/20 px-2.5 py-1 text-xs font-bold">無料</span>
+      </a>
+    </div>
   );
 
   // 受け皿2：メール（会員化の入口・文脈付きセグメント名簿）。

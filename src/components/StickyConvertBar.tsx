@@ -61,7 +61,7 @@ export function StickyConvertBar() {
     return () => window.removeEventListener('scroll', onScroll, { capture: true } as EventListenerOptions);
   }, [eligible, pathname]);
 
-  if (!eligible || dismissed || !visible) return null;
+  if (!eligible) return null;
 
   const close = () => {
     setDismissed(true);
@@ -76,8 +76,19 @@ export function StickyConvertBar() {
     track('line_friend_click', { source: 'sticky-bar', pref: 'none', page: pathname ?? 'none' });
   };
 
+  // 2026-08-01 Cowork実地UXテストで指摘された「操作中に突然バーが現れてタップ対象が変わる」事故の
+  // 是正: 従来はvisible/dismissedの条件でreturn nullする=タップの瞬間に予告なくDOMへ挿入されていた。
+  // 常時マウントしtranslate-y+opacityのトランジションで滑らかに出す(fixed要素のため他要素は動かない
+  // が、突然の出現によるタップ対象の差し替えを避ける)。
+  const show = visible && !dismissed;
+
   return (
-    <div className="fixed inset-x-0 bottom-0 z-40 border-t border-emerald-200 bg-white/95 px-3 py-2.5 shadow-[0_-4px_16px_rgba(0,0,0,0.08)] backdrop-blur supports-[backdrop-filter]:bg-white/80">
+    <div
+      aria-hidden={!show}
+      className={`fixed inset-x-0 bottom-0 z-40 border-t border-emerald-200 bg-white/95 px-3 py-2.5 shadow-[0_-4px_16px_rgba(0,0,0,0.08)] backdrop-blur transition-all duration-300 supports-[backdrop-filter]:bg-white/80 ${
+        show ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-full opacity-0'
+      }`}
+    >
       <div className="mx-auto flex max-w-3xl items-center gap-2">
         <p className="hidden flex-1 text-xs font-medium leading-tight text-slate-600 sm:block">
           <span className="font-bold text-slate-800">志望校に届くか不安？</span>
@@ -89,6 +100,7 @@ export function StickyConvertBar() {
           target="_blank"
           rel="noopener noreferrer"
           onClick={onLine}
+          tabIndex={show ? 0 : -1}
           className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-[#06C755] px-4 py-3 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.99] sm:flex-none sm:px-6"
         >
           <MessageCircle className="h-5 w-5 shrink-0" />
@@ -99,6 +111,7 @@ export function StickyConvertBar() {
           type="button"
           onClick={close}
           aria-label="閉じる"
+          tabIndex={show ? 0 : -1}
           className="grid h-9 w-9 shrink-0 place-items-center rounded-full text-slate-400 hover:bg-slate-100 hover:text-slate-600"
         >
           <X className="h-4 w-4" />
