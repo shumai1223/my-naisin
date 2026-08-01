@@ -39,6 +39,7 @@ import { EXAM_SCORE_STATISTICS_TOKUSHIMA } from '@/data/exam-score-statistics/to
 import { EXAM_SCORE_STATISTICS_TOTTORI } from '@/data/exam-score-statistics/tottori';
 import { EXAM_SCORE_STATISTICS_SHIMANE } from '@/data/exam-score-statistics/shimane';
 import { EXAM_SCORE_STATISTICS_OSAKA } from '@/data/exam-score-statistics/osaka';
+import { EXAM_SCORE_STATISTICS_TOYAMA } from '@/data/exam-score-statistics/toyama';
 import { EXAM_SCORE_STATISTICS_BY_PREFECTURE, EXAM_SCORE_STATISTICS_FILES } from '@/data/exam-score-statistics';
 
 describe('isPlausibleSubjectSum', () => {
@@ -977,8 +978,36 @@ describe('EXAM_SCORE_STATISTICS_OSAKA(パイロット実データ・合格者の
   });
 });
 
+describe('EXAM_SCORE_STATISTICS_TOYAMA(パイロット実データ・教育長談話の参考表・WebSearch要約と完全一致でクロス検証済み)', () => {
+  it('2年度分(令和7〜8年度)が収録されている', () => {
+    expect(EXAM_SCORE_STATISTICS_TOYAMA.years).toHaveLength(2);
+  });
+
+  it('各教科100点満点・5教科の内訳を持ちtest-takersで統一されている', () => {
+    for (const year of EXAM_SCORE_STATISTICS_TOYAMA.years) {
+      expect(year.averageType).toBe('test-takers');
+      expect(year.subjects).toHaveLength(5);
+      for (const s of year.subjects) expect(s.maxScore).toBe(100);
+    }
+  });
+
+  it('原資料の「総平均点」は5教科の相加平均(合計ではない)のためtotalAverageは未設定', () => {
+    for (const year of EXAM_SCORE_STATISTICS_TOYAMA.years) {
+      expect(year.totalAverage).toBeUndefined();
+      expect(isPlausibleSubjectSum(year)).toBe(true);
+    }
+  });
+
+  it('令和8年度分のみ受検者数(4,471人)が明記されている', () => {
+    const r8 = EXAM_SCORE_STATISTICS_TOYAMA.years.find((y) => y.fiscalYearLabel === '令和8年度');
+    expect(r8?.testTakerCount).toBe(4471);
+    const r7 = EXAM_SCORE_STATISTICS_TOYAMA.years.find((y) => y.fiscalYearLabel === '令和7年度');
+    expect(r7?.testTakerCount).toBeUndefined();
+  });
+});
+
 describe('exam-score-statistics index', () => {
-  it('kochi/saitama/chiba/tokyo/nara/hyogo/niigata/gunma/miyagi/hokkaido/fukushima/aomori/iwate/akita/nagano/shizuoka/fukuoka/hiroshima/aichi/kanagawa/ibaraki/gifu/mie/wakayama/shiga/okayama/yamaguchi/kagawa/ehime/oita/kumamoto/kagoshima/okinawa/ishikawa/yamanashi/saga/tokushima/tottori/shimane/osakaの40県が集約されている', () => {
+  it('kochi/saitama/chiba/tokyo/nara/hyogo/niigata/gunma/miyagi/hokkaido/fukushima/aomori/iwate/akita/nagano/shizuoka/fukuoka/hiroshima/aichi/kanagawa/ibaraki/gifu/mie/wakayama/shiga/okayama/yamaguchi/kagawa/ehime/oita/kumamoto/kagoshima/okinawa/ishikawa/yamanashi/saga/tokushima/tottori/shimane/osaka/toyamaの41県が集約されている', () => {
     expect(Object.keys(EXAM_SCORE_STATISTICS_BY_PREFECTURE).sort()).toEqual([
       'aichi',
       'akita',
@@ -1017,10 +1046,11 @@ describe('exam-score-statistics index', () => {
       'tokushima',
       'tokyo',
       'tottori',
+      'toyama',
       'wakayama',
       'yamaguchi',
       'yamanashi',
     ]);
-    expect(EXAM_SCORE_STATISTICS_FILES).toHaveLength(40);
+    expect(EXAM_SCORE_STATISTICS_FILES).toHaveLength(41);
   });
 });
