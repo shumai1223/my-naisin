@@ -29,8 +29,12 @@ describe('VERIFIED_PITFALLS_PREFECTURE_CODES（事実確認済みの県のみ解
     expect(VERIFIED_PITFALLS_PREFECTURE_CODES.has('hokkaido')).toBe(true);
   });
 
-  test('未検証の他8県(手書きguideデータがある県のうち検証済み6県以外)はまだ解禁されていない', () => {
-    const verified = new Set(['tokyo', 'kanagawa', 'osaka', 'saitama', 'chiba', 'hokkaido']);
+  test('福岡県は事実確認済みで解禁されている', () => {
+    expect(VERIFIED_PITFALLS_PREFECTURE_CODES.has('fukuoka')).toBe(true);
+  });
+
+  test('未検証の他7県(手書きguideデータがある県のうち検証済み7県以外)はまだ解禁されていない', () => {
+    const verified = new Set(['tokyo', 'kanagawa', 'osaka', 'saitama', 'chiba', 'hokkaido', 'fukuoka']);
     for (const code of PREFECTURES_WITH_GUIDE) {
       if (verified.has(code)) continue;
       expect(VERIFIED_PITFALLS_PREFECTURE_CODES.has(code)).toBe(false);
@@ -180,5 +184,19 @@ describe('北海道のpitfalls(2026-08-01にWebSearchで個別に裏取り済み
     const guide = getPrefectureGuide('hokkaido');
     const item = guide.pitfalls.items.find((i) => i.includes('学区制'));
     expect(item).toContain('19学区');
+  });
+});
+
+describe('福岡県のpitfalls(2026-08-01にWebSearchで個別に裏取り済み・事実誤りなし)', () => {
+  test('特色化選抜は全員面接+一部学科で作文・実技と一次情報と一致する', () => {
+    const guide = getPrefectureGuide('fukuoka');
+    const item = guide.pitfalls.items.find((i) => i.includes('特色化選抜'));
+    expect(item).toContain('全員に面接');
+  });
+
+  test('学区制は第1〜第13学区と一次情報と一致する', () => {
+    const guide = getPrefectureGuide('fukuoka');
+    const item = guide.pitfalls.items.find((i) => i.includes('学区制'));
+    expect(item).toContain('第13学区');
   });
 });

@@ -392,13 +392,16 @@ export const prefectureGuides: Record<string, PrefectureGuide> = {
       all4: '36点 / 45点満点',
       practicalPlus1: '31点（+4点）'
     },
+    // 2026-08-01: 5項目をWebSearchで個別に裏取り。全項目とも一次情報・prefectures.tsと
+    // 一致し事実誤りは見つからなかった（③傾斜配点・④特色化選抜は本日のprefecture-traps.ts
+    // 福岡県復活作業で確認済みの事実と一致。⑤13学区も福岡県教委の現行区分と一致）。
     pitfalls: {
       title: '福岡県の注意点',
       items: [
         '中3の成績のみが対象（中1・中2は含まれない）',
         '全教科が等倍で計算される（45点満点）',
         '一部の高校では特定教科に傾斜配点がある場合がある',
-        '特色化選抜では面接・作文・実技などが課される',
+        '特色化選抜では全員に面接、一部の学科で作文・実技が課される',
         '学区制があり、第1〜第13学区に分かっている'
       ]
     },
@@ -940,9 +943,10 @@ export const PREFECTURES_WITH_GUIDE = new Set(Object.keys(prefectureGuides));
  * （K値/2日日程は一次情報と一致・「自己表現が全校実施」は事実誤りで実際は面接/小論文/
  * 自己表現等7種類から1つ以上選ぶ学校設定検査だったため修正）。北海道も検証（学区制/推薦入試は
  * 一次情報と一致・「裁量問題を出題する高校がある」は2022年度に廃止済みで事実誤りだったため
- * 現行の共通問題制度に修正）。他8県はまだ未検証。
+ * 現行の共通問題制度に修正）。福岡県も検証（傾斜配点/特色化選抜/13学区いずれも一次情報と
+ * 一致・事実誤りなし）。他7県はまだ未検証。
  */
-export const VERIFIED_PITFALLS_PREFECTURE_CODES = new Set(['tokyo', 'kanagawa', 'osaka', 'saitama', 'chiba', 'hokkaido']);
+export const VERIFIED_PITFALLS_PREFECTURE_CODES = new Set(['tokyo', 'kanagawa', 'osaka', 'saitama', 'chiba', 'hokkaido', 'fukuoka']);
 
 // 都道府県データから動的にFAQを生成する関数
 export function generateDynamicFAQ(prefectureCode: string, prefecture: PrefectureConfig): { question: string; answer: string }[] {
