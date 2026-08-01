@@ -1,8 +1,9 @@
 /**
  * My Naishin - 全国47都道府県 公立高校入試ボーダーラインデータ
  * 2026年度（令和8年度）入試対応
- * データソース：教育委員会公式資料、進学塾公開データ、OPENLANE等
- *              進研ゼミ合格者アンケート、じゅけラボ予備校、各都道府県教育委員会公式HP
+ * データソース：進学塾公開データ、OPENLANE等の進学塾・受験情報サイト、
+ *              進研ゼミ合格者アンケート、じゅけラボ予備校（いずれも二次情報。教育委員会の
+ *              一次資料そのものではない＝classifyHighSchoolSourceTier参照）
  */
 
 export interface HighSchoolData {
@@ -14,6 +15,26 @@ export interface HighSchoolData {
   totalScore?: number | null;
   notes?: string;
   source: string;
+}
+
+/**
+ * このボーダーライン一覧の各行`source`が指す出典の重み付け。
+ *
+ * 2026-08-01 Cowork実地UXテストで「出典表記が小さく、進学塾等の非公式な二次情報が
+ * 公式データに見える」との指摘を受けて新設（[[fable5-fullaccel-backlog-2026-07]]のΛ+2）。
+ * 全398行のsource文字列を機械集計した結果、教育委員会名を直接名指しする行は0件で、
+ * 226行が「推計」（当サイト独自算出）、残り172行は進研ゼミ・都立合格ナビ・塾選等の
+ * 進学塾/受験情報サイトの二次情報だった。手動での全行監査（sourceTierを1件ずつ
+ * 判定）は本タスクの範囲を超える別規模の作業のため、既存source文字列から機械的に
+ * 判定する（当て推量で'primary'にしない＝捏造ゼロ原則）。
+ */
+export type HighSchoolSourceTier = 'primary' | 'secondary';
+
+const PRIMARY_SOURCE_PATTERN = /教育委員会|道教委|都教委|府教委|県教委/;
+
+/** sourceの文字列から出典の重みを機械判定する（当て推量なし・教委名を直接含む場合のみ'primary'）。 */
+export function classifyHighSchoolSourceTier(source: string): HighSchoolSourceTier {
+  return PRIMARY_SOURCE_PATTERN.test(source) ? 'primary' : 'secondary';
 }
 
 export interface PrefectureRules {

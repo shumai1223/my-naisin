@@ -8,7 +8,7 @@ import {
   TrendingUp,
   Award
 } from 'lucide-react';
-import { PREFECTURE_HIGH_SCHOOL_DATA } from '@/lib/prefecture-high-school-data';
+import { classifyHighSchoolSourceTier, PREFECTURE_HIGH_SCHOOL_DATA } from '@/lib/prefecture-high-school-data';
 
 interface HighSchoolBorderlineTableProps {
   prefectureCode: string;
@@ -96,8 +96,15 @@ export function HighSchoolBorderlineTable({ prefectureCode, prefectureName }: Hi
                     </div>
                   </td>
                   <td className="px-6 py-4 text-right">
-                    <div className="text-[10px] font-bold text-slate-400 bg-slate-50 px-2 py-1 rounded inline-block">
-                      {school.source}
+                    <div className="flex flex-col items-end gap-1">
+                      <div className="text-xs font-bold text-slate-600 bg-slate-50 px-2 py-1 rounded inline-block">
+                        {school.source}
+                      </div>
+                      {classifyHighSchoolSourceTier(school.source) === 'secondary' && (
+                        <span className="text-[10px] font-bold text-amber-700 bg-amber-50 px-1.5 py-0.5 rounded">
+                          非公式・参考情報
+                        </span>
+                      )}
                     </div>
                   </td>
                 </tr>
@@ -146,7 +153,8 @@ export function HighSchoolBorderlineTable({ prefectureCode, prefectureName }: Hi
           データ引用・信頼性について
         </div>
         <p>
-          ※本データは、各進学塾の追跡調査結果および教育委員会公開資料を元に、当サイト運営チームが独自に算出した目標値です。
+          ※本データは、各進学塾・受験情報サイトが公開する追跡調査結果（表内「非公式・参考情報」表示のとおり、
+          教育委員会が公表する一次資料そのものではありません）を元に、当サイト運営チームが独自に算出した目標値です。
           合格を保証するものではありません。実際の入試難易度は年度ごとの倍率や問題難易度によって変動します。
           最新の募集要項および進路指導の先生によるアドバイスを必ず優先してください。
         </p>
