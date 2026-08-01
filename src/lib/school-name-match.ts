@@ -16,9 +16,40 @@
  *    判定しnullを返す**（間違った学校に紐付けるより、紐付けないほうが安全）。
  */
 import type { SchoolRecord } from '@/lib/school-master';
+import { PREFECTURES } from '@/lib/prefectures';
 
-/** 設置者接頭辞（都道府県立・市立等）。長い候補から先に試すこと（誤短縮防止）。 */
-const ESTABLISHMENT_PREFIX_PATTERN = /^.+?(都立|道立|府立|県立|市立|区立|町立|村立|組合立)/;
+/** 市区町村立の接頭辞（設置者名は都道府県名リストで判定できないため、従来どおり総称パターンで除去）。 */
+const MUNICIPAL_PREFIX_PATTERN = /^.+?(市立|区立|町立|村立|組合立)/;
+
+/**
+ * 都道府県名（例:'東京都'・'京都府'・'宮城県'）を長い順に並べたもの。
+ * 接頭辞除去で「都道府県フルネームの完全一致」だけを候補にするために使う（下記参照）。
+ */
+const PREFECTURE_NAMES_BY_LENGTH_DESC = [...new Set(PREFECTURES.map((p) => p.name))].sort((a, b) => b.length - a.length);
+
+/**
+ * 設置者接頭辞（都道府県立・市立等）を除去する。
+ * **2026-08-02判明・修正**: school-master(Y-1・MEXT学校コード一覧)の正式名称は、都道府県によって
+ * 「宮城県仙台第二高等学校」「北海道札幌西高等学校」のように**「立」を伴わない**表記を採用する
+ * ケースがある（miyagi/nagano/hokkaidoで実データ確認）。当初は正規表現に裸の`都|道|府|県`を
+ * 1文字フォールバックとして追加したが、**「京都府」のように都道府県名の内部に別の都道府県型
+ * 文字を含むケース（「京都」の"都"）で、"府立"に到達する前に"都"だけで誤って短く一致してしまい
+ * kyotoの正規化が全滅する事故を引き起こした**（match率87%→0%）。安全な修正は、正規表現の
+ * 文字クラスではなく、**実在する47都道府県名の完全一致リスト**（長い順）を先頭から順に試すこと
+ * （「京都府」は「京都府」自体が47都道府県名の1つとしてリストにあるため、部分的な"都"に
+ * 惑わされず正しく1つの単位として一致する）。
+ */
+function stripEstablishmentPrefix(fullName: string): string {
+  for (const prefName of PREFECTURE_NAMES_BY_LENGTH_DESC) {
+    if (fullName.startsWith(prefName + '立')) return fullName.slice(prefName.length + 1);
+  }
+  for (const prefName of PREFECTURE_NAMES_BY_LENGTH_DESC) {
+    if (fullName.startsWith(prefName)) return fullName.slice(prefName.length);
+  }
+  const municipalMatch = fullName.match(MUNICIPAL_PREFIX_PATTERN);
+  if (municipalMatch) return fullName.slice(municipalMatch[0].length);
+  return fullName;
+}
 
 /** 学校種別の接尾辞。長い候補から先に試すこと（'高等学校'を先に剥がさないと'高校'が残らない等の事故を防ぐ）。 */
 const SCHOOL_TYPE_SUFFIX_PATTERN = /(高等学校|高校)$/;
@@ -30,7 +61,7 @@ const SCHOOL_TYPE_SUFFIX_PATTERN = /(高等学校|高校)$/;
  */
 export function normalizeSchoolNameForMatch(fullName: string): string {
   let result = fullName.trim();
-  result = result.replace(ESTABLISHMENT_PREFIX_PATTERN, '');
+  result = stripEstablishmentPrefix(result);
   result = result.replace(SCHOOL_TYPE_SUFFIX_PATTERN, '');
   return result.trim();
 }
