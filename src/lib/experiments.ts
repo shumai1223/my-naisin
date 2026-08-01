@@ -415,14 +415,15 @@ export const EXPERIMENTS: ExperimentDef[] = [
   {
     id: 'hiyou-third-round-copy-2026',
     hypothesis: 'hiyou面で「高校3年間で約◯万円」と具体額を見出しに出すと、一般論の既定コピーより cta_view→affiliate_click が伸びる（copy A/B・hiyou系ローテーション3巡目）。',
-    status: 'queued',
+    status: 'running',
     arms: [
       { id: 'control', label: '既定コピー（一般論フレーム）' },
       { id: 'concrete-yen', label: '具体額フレーム（動的差し込み）', heading: '高校3年間で必要な金額、今すぐ目安を確認' },
     ],
     primaryMetric: 'affiliate_click',
     placement: 'hiyou',
-    note: 'hiyou-copy-2026・fp-offer-2026に続く3巡目候補。concrete-yenはeducation-cost enginで算出した実測レンジを差し込む。',
+    note: 'hiyou-copy-2026・fp-offer-2026に続く3巡目候補。concrete-yenはeducation-cost enginで算出した実測レンジを差し込む(将来動的化の余地あり・現状は静的heading文言のみで検証)。**2026-08-01活性化**: hiyou-copy-2026が停止(experiment_id未登録による判定不能・別途修正待ち)しhiyouプレースメントの実験カバレッジが空になったため、次点候補として/hiyouページのexperimentIdを本IDへ差し替えてローテーション。',
+    startedAt: '2026-08-01',
   },
   {
     id: 'parent-lp-order-2026',

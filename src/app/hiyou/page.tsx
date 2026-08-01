@@ -167,8 +167,9 @@ export default function HiyouHubPage() {
             })}
           </section>
 
-          {/* 保護者リード（hiyou-copy-2026・2026-06-17running開始も配線漏れで無データだったA/Bを2026-07-24接続） */}
-          <ParentLeadCTAExperiment experimentId="hiyou-copy-2026" placement="hiyou" className="mb-10" />
+          {/* 保護者リード（hiyou系ローテーション3巡目=hiyou-third-round-copy-2026・2026-08-01切替。
+              前身のhiyou-copy-2026はGA4 experiment_id未登録により45日判定不能のため停止済み） */}
+          <ParentLeadCTAExperiment experimentId="hiyou-third-round-copy-2026" placement="hiyou" className="mb-10" />
 
           {/* なぜ早めに把握するか */}
           <section className="mb-10 rounded-2xl border border-indigo-100 bg-indigo-50/40 p-6">
