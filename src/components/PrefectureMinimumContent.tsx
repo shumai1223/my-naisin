@@ -2,7 +2,7 @@ import { AlertTriangle, BookOpen, ExternalLink, Calendar, Calculator, TrendingUp
 import { getPrefectureByCode } from '@/lib/prefectures';
 import { getPrefectureTraps } from '@/lib/prefecture-traps';
 import { PREFECTURE_SOURCES } from '@/lib/prefecture-sources';
-import { getPrefectureGuide, generateDynamicFAQ } from '@/lib/prefecture-guides';
+import { getPrefectureGuide, generateDynamicFAQ, VERIFIED_PITFALLS_PREFECTURE_CODES } from '@/lib/prefecture-guides';
 import { TrustInfo } from '@/components/TrustInfo';
 
 interface PrefectureMinimumContentProps {
@@ -57,6 +57,9 @@ export function PrefectureMinimumContent({ prefectureCode }: PrefectureMinimumCo
   const guide = getPrefectureGuide(prefectureCode);
   const dynamicFAQ = generateDynamicFAQ(prefectureCode, prefecture);
   const faq = dynamicFAQ; // 常に動的生成を使用
+
+  // 詳しい解説（2026-08-01: 事実確認済みの県のみ表示。prefecture-guides.tsのコメント参照）。
+  const showPitfallsGuide = VERIFIED_PITFALLS_PREFECTURE_CODES.has(prefectureCode);
 
   return (
     <>
@@ -158,6 +161,25 @@ export function PrefectureMinimumContent({ prefectureCode }: PrefectureMinimumCo
           ))}
         </ul>
       </div>
+
+      {/* 詳しい解説（事実確認済みの県のみ・prefecture-guides.tsのpitfalls） */}
+      {showPitfallsGuide && (
+        <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <h3 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
+            <BookOpen className="h-5 w-5 text-indigo-500" />
+            {guide.pitfalls.title}
+          </h3>
+          <ul className="space-y-3">
+            {guide.pitfalls.items.map((item, index) => (
+              <li
+                key={index}
+                className="rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm leading-relaxed text-slate-700"
+                dangerouslySetInnerHTML={{ __html: item }}
+              />
+            ))}
+          </ul>
+        </div>
+      )}
 
       {/* FAQ */}
       <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
