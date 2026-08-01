@@ -1,6 +1,6 @@
 {
   "asOf": "2026-08-02",
-  "notes": "X'-1送信キューv1。docs各所に散在する宛先を統合する作業の第一段(教委22県+教育メディア9件[email]+5件[form]=36件をqueued化)。X-2地方紙残り31県/X-6 NPO/X-7個人塾/X-19学術/X-21オープンデータ/X-23/X-27/X-29/X-33等、他の複数docsに残る宛先は未統合(次回以降に追加)。統合済みの母数はkyoiku-i-contact-directory-2026-08-01.md(教委)とoutreach-triage-2026-08-01.md(メディア)のCowork実地確認結果を単一の真実源とし、文面はx5-government-source-reference-2026-07.md/media-outreach-2026-08.mdから転記(新規の事実確認・捏造なし)。loopは1件も送信しない。",
+  "notes": "X'-1送信キューv1。docs各所に散在する宛先を統合する作業の第一段(教委22県[email]+教育メディア9件[email]+5件[form]+個人塾4件[line]=40件をqueued化)。個人塾4件はX-7でフォームが生徒募集用で送信不可と判明済みだったが、併記された公式LINEアカウント(自由記述・PII不要)へ切り替えて追加(👤指示「line最優先・今すぐ送れる」に対応)。X-2地方紙残り31県/X-6 NPO/X-19学術/X-21オープンデータ/X-23/X-27/X-29/X-33等、他の複数docsに残る宛先は未統合(次回以降に追加)。統合済みの母数はkyoiku-i-contact-directory-2026-08-01.md(教委)・outreach-triage-2026-08-01.md(メディア)・x7-mutual-link-outreach-2026-07.md(個人塾)のCowork実地確認/既存調査結果を単一の真実源とし、文面は各docsから転記(新規の事実確認・捏造なし)。loopは1件も送信しない。",
   "entries": [
     {
       "id": "kyoiku-tokyo",
@@ -395,6 +395,50 @@
       "body": "docs/media-outreach-paste-blocks-2026-08-02.md#5に貼るだけの本文を用意済み",
       "status": "queued",
       "sourceDoc": "docs/media-outreach-paste-blocks-2026-08-02.md"
+    },
+    {
+      "id": "mutual-link-kyosou-line",
+      "org": "京都総合学習塾（kyosou.net）",
+      "lane": "mutual-link",
+      "channel": "line",
+      "contact": "https://lin.ee/wYOy7xO",
+      "body": "はじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」（https://my-naishin.com）を運営しております、現役中学生エンジニアのしゅうまいと申します。\n\n貴サイトの京都府公立高校（前期・中期選抜）向け内申点自動計算ツールを拝見し、2027年度以降の新制度にも早くから対応されている点に感銘を受けご連絡いたしました。\n\nMy Naishinは全国47都道府県の内申点計算に対応しておりますが、京都府のように地域に根差した入試傾向・合格実績までは把握しておりません。もしよろしければ、貴サイトの京都府ページから「他の都道府県の受験生の方はこちら」としてMy Naishinをご紹介いただき、当サイトの京都府ページからも「京都府の詳しい入試対策は京都総合学習塾さんへ」とご紹介する形で、対等な相互紹介をさせていただけないかと思いご連絡いたしました。押し売りする意図はなく、ご興味があればまずは詳しい資料をお送りする形でも構いません。\n\nお忙しいところ恐縮ですが、ご検討いただければ幸いです。\n\nしゅうまい / My Naishin 運営\nhttps://my-naishin.com　naishin.dev@gmail.com",
+      "status": "queued",
+      "sourceDoc": "docs/x7-mutual-link-outreach-2026-07.md#対象1",
+      "note": "問い合わせフォーム(kyosou.net/contact/)は生徒募集用で子どもの氏名等が必須のため送信不可と2026-08-01に判明済み。併記されたLINE窓口(自由記述・PII不要)に切り替えてqueued化。"
+    },
+    {
+      "id": "mutual-link-willbe-line",
+      "org": "進学個別指導塾Willbe（ako-juku.com・光庵良仁塾長）",
+      "lane": "mutual-link",
+      "channel": "line",
+      "contact": "https://lin.ee/mqK1qDC",
+      "body": "はじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」（https://my-naishin.com）を運営しております、現役中学生エンジニアのしゅうまいと申します。\n\n光庵塾長のブログを拝見し、姫路西高校・姫路東高校等の合格者平均内申点や倍率推移を長年蓄積されている点、また「内申点に固執せず実力育成を重視する」という教育哲学に強く共感しご連絡いたしました。\n\nMy Naishinは全国47都道府県の内申点計算に対応しておりますが、兵庫県第4学区のような地域固有の合格実績データまでは持ち合わせておりません。もしよろしければ、貴サイトの内申点計算ページから「他の都道府県の方はこちら」としてMy Naishinをご紹介いただき、当サイトの兵庫県ページからも「姫路・赤穂エリアの詳しい合格実績データはWillbeさんへ」とご紹介する形で、対等な相互紹介をさせていただけないかと思いご連絡いたしました。\n\nお忙しいところ恐縮ですが、ご検討いただければ幸いです。\n\nしゅうまい / My Naishin 運営\nhttps://my-naishin.com　naishin.dev@gmail.com",
+      "status": "queued",
+      "sourceDoc": "docs/x7-mutual-link-outreach-2026-07.md#対象2",
+      "note": "問い合わせフォーム(ako-juku.com/contact/)は生徒氏名/学年/学校名/電話番号必須+reCAPTCHAで送信不可と2026-08-01に判明済み。併記されたLINE窓口に切り替えてqueued化。"
+    },
+    {
+      "id": "mutual-link-plusgym-line",
+      "org": "個別指導プラスジム（plusgym.jp・はら塾長）",
+      "lane": "mutual-link",
+      "channel": "line",
+      "contact": "https://line.me/R/ti/p/%40zve5937l",
+      "body": "はじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」（https://my-naishin.com）を運営しております、現役中学生エンジニアのしゅうまいと申します。\n\n貴サイトの「内申点×志望校から目標点を逆算するツール」と、過去17年分という受験者平均点データの蓄積に感銘を受けご連絡いたしました。都立高校受験の情報としてこれほど長期のデータをお持ちのサイトは少なく、大変勉強になります。\n\nMy Naishinは全国47都道府県対応のツールとして運営しており、都立高校については貴サイトほど長期のデータ蓄積はございません。もし差し支えなければ、貴サイトから「東京都以外の受験生の方はこちら」としてMy Naishin（47都道府県対応）をご紹介いただく形での一方向のご紹介でも構いませんので、ご検討いただけないかと思いご連絡いたしました（同じ都立高校向けツールをお持ちのため、無理のない範囲でご判断いただければ幸いです）。\n\nお忙しいところ恐縮ですが、よろしくお願いいたします。\n\nしゅうまい / My Naishin 運営\nhttps://my-naishin.com　naishin.dev@gmail.com",
+      "reviewTier": "full-review",
+      "status": "queued",
+      "sourceDoc": "docs/x7-mutual-link-outreach-2026-07.md#対象4",
+      "note": "唯一の直接競合(東京都・逆算ツール)のため一方向提案の慎重な文面。元docsの注記どおりreviewTierをmutual-link既定のspot-checkからfull-reviewへ個別に引き上げ、送信可否は👤の裁量に委ねる。"
+    },
+    {
+      "id": "mutual-link-bengal-line",
+      "org": "学習塾ベンガル（bengal.okinawa・安東氏）",
+      "lane": "mutual-link",
+      "channel": "line",
+      "contact": "https://lin.ee/5hm7NcI",
+      "body": "はじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」（https://my-naishin.com）を運営しております、現役中学生エンジニアのしゅうまいと申します。\n\n貴サイトの沖縄県公立高校入試向け内申点自動計算ツールと、高校別大学進学実績・合格体験記まで充実した地域密着コンテンツを拝見しご連絡いたしました。\n\nMy Naishinは全国47都道府県の内申点計算に対応しておりますが、沖縄県のような地域固有の進学実績データまでは持ち合わせておりません。もしよろしければ、貴サイトの内申点計算ページから「他の都道府県の方はこちら」としてMy Naishinをご紹介いただき、当サイトの沖縄県ページからも「沖縄の詳しい進学実績は学習塾ベンガルさんへ」とご紹介する形で、対等な相互紹介をさせていただけないかと思いご連絡いたしました。\n\nお忙しいところ恐縮ですが、ご検討いただければ幸いです。\n\nしゅうまい / My Naishin 運営\nhttps://my-naishin.com　naishin.dev@gmail.com",
+      "status": "queued",
+      "sourceDoc": "docs/x7-mutual-link-outreach-2026-07.md#対象5"
     },
     {
       "id": "kyoiku-excluded-phone-only",

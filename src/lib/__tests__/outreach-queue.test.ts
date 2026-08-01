@@ -108,7 +108,15 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     }
   });
 
-  it('36件がqueued(教委22+メディアemail9+メディアform5)', () => {
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(36);
+  it('40件がqueued(教委22+メディアemail9+メディアform5+個人塾line4)', () => {
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(40);
+  });
+
+  it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {
+    const lineEntries = raw.entries.filter((e) => e.status === 'queued' && e.channel === 'line');
+    expect(lineEntries).toHaveLength(4);
+    for (const e of lineEntries) expect(e.lane).toBe('mutual-link');
+    const plusgym = lineEntries.find((e) => e.id === 'mutual-link-plusgym-line');
+    expect(plusgym?.reviewTier).toBe('full-review');
   });
 });
