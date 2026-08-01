@@ -1,4 +1,5 @@
 import {
+  buildDiscordMessage,
   buildHealthSection,
   injectHealthSection,
   judgeHealth,
@@ -67,6 +68,32 @@ describe('buildHealthSection', () => {
   it('日付ラベルを見出しに埋め込む', () => {
     const section = buildHealthSection({ ga4: GA4_OK, truth: TRUTH_OK }, '2026-08-01');
     expect(section).toContain('2026-08-01時点');
+  });
+});
+
+describe('buildDiscordMessage', () => {
+  it('健全時は🟢を含む短いメッセージを返す', () => {
+    const msg = buildDiscordMessage({ ga4: GA4_OK, truth: TRUTH_OK }, '2026-08-01');
+    expect(msg).toContain('🟢 正常');
+    expect(msg).toContain('2026-08-01時点');
+    expect(msg).toContain('stats_submissions(7日)=29件');
+  });
+
+  it('★回帰防止: GA4が全ゼロでもD1が健全ならalertにしない（judgeHealthと同じ基準を再利用）', () => {
+    // Λ-21のバックログ本文にある「GA4いずれかゼロで赤」という古い判定条件は
+    // Λ-1が2026-07-31に誤検知と認定して撤回済み。ここで別の基準を再実装しない。
+    const msg = buildDiscordMessage({ ga4: GA4_ALL_ZERO, truth: TRUTH_OK }, '2026-08-01');
+    expect(msg).not.toContain('🔴');
+  });
+
+  it('D1の投稿が7日ゼロなら🔴を含む', () => {
+    const msg = buildDiscordMessage({ ga4: GA4_OK, truth: TRUTH_DRY }, '2026-08-01');
+    expect(msg).toContain('🔴 異常');
+  });
+
+  it('D1が取得できない場合はその旨を明記する', () => {
+    const msg = buildDiscordMessage({ ga4: GA4_OK, truth: null }, '2026-08-01');
+    expect(msg).toContain('D1から確定値を取得できず');
   });
 });
 

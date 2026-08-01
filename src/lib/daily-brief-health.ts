@@ -117,6 +117,29 @@ export function buildHealthSection(input: HealthInput, dateLabel: string): strin
   ].join('\n');
 }
 
+/**
+ * Λ-21（留守番モード・第1層）向けのDiscord通知本文を組み立てる純関数。
+ *
+ * ⚠️重要: Λ-21のバックログ本文には「前日のcta_view等のいずれかがゼロなら赤」という
+ * 古い判定条件が書かれているが、これはΛ-1が2026-07-31に自ら誤検知（オオカミ少年）と
+ * 認定して撤回した判定方式そのもの（[[ga4-undercounts-conversions]]・
+ * fable5-loop-protocolの「GA4のゼロをアラート条件に使わない」教訓）。ここでは古い
+ * バックログ記述より新しい教訓を優先し、既存のjudgeHealth()（D1真値ベース・GA4は
+ * 参考値止まり）をそのまま再利用する。二重の判定基準を作らない。
+ */
+export function buildDiscordMessage(input: HealthInput, dateLabel: string): string {
+  const status = judgeHealth(input);
+  const { truth } = input;
+  const truthLine = truth
+    ? `stats_submissions(7日)=${truth.statsSubmissions7d}件 / leads(7日)=${truth.leads7d}件`
+    : 'D1から確定値を取得できず（判定保留）';
+  return [
+    `${STATUS_LABEL[status]}（${dateLabel}時点・My Naishin 収益導線監視）`,
+    truthLine,
+    '詳細: docs/daily-brief.md',
+  ].join('\n');
+}
+
 const SECTION_START = '<!-- LAMBDA1_HEALTH_START -->';
 const SECTION_END = '<!-- LAMBDA1_HEALTH_END -->';
 

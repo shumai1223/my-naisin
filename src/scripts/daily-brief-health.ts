@@ -19,12 +19,14 @@ import { execFileSync } from 'node:child_process';
 import { analyticsdata } from '@googleapis/analyticsdata';
 import { getAuthedClient, getPropertyId } from '../../scripts/lib/ga4-client.mjs';
 import {
+  buildDiscordMessage,
   buildHealthSection,
   injectHealthSection,
   HEALTH_EVENT_NAMES,
   type EventHealthCounts,
   type TruthCounts,
 } from '@/lib/daily-brief-health';
+import { postDiscordWebhook } from '@/lib/discord-notify';
 
 /**
  * D1（本番・読み取り専用）から確定値を取る。
@@ -115,6 +117,18 @@ async function main() {
   fs.writeFileSync(filePath, updated, 'utf8');
 
   console.log(section);
+
+  // Λ-21第1層（Discord通知）: DISCORD_WEBHOOK_URL未設定の間は自動でskipされる
+  // （👤がDiscord側でwebhookを発行し設定するまでは本番挙動への影響ゼロ）。
+  const discordMessage = buildDiscordMessage({ ga4, truth }, date);
+  const discordResult = await postDiscordWebhook(process.env.DISCORD_WEBHOOK_URL, discordMessage);
+  if (discordResult.skipped) {
+    console.log('Discord通知: DISCORD_WEBHOOK_URL未設定のためskip');
+  } else if (!discordResult.ok) {
+    console.error('Discord通知に失敗（監視自体は続行）:', discordResult.error);
+  } else {
+    console.log('Discord通知: 送信済み');
+  }
 }
 
 main().catch((e) => {
