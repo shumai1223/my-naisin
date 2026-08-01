@@ -45,6 +45,10 @@ import { YAMAGATA_COMPETITION_RATE_HISTORY } from './yamagata';
 import { YAMAGUCHI_COMPETITION_RATE_HISTORY } from './yamaguchi';
 import { YAMANASHI_COMPETITION_RATE_HISTORY } from './yamanashi';
 import { HIROSHIMA_COMPETITION_RATE_HISTORY } from './hiroshima';
+import { AICHI_COMPETITION_RATE_HISTORY } from './aichi';
+import { OSAKA_COMPETITION_RATE_HISTORY } from './osaka';
+import { SHIZUOKA_COMPETITION_RATE_HISTORY } from './shizuoka';
+import { TOCHIGI_COMPETITION_RATE_HISTORY } from './tochigi';
 
 export const COMPETITION_RATE_HISTORY_BY_PREFECTURE: Partial<Record<string, PrefectureRateHistoryFile>> = {
   tokyo: TOKYO_COMPETITION_RATE_HISTORY,
@@ -89,6 +93,10 @@ export const COMPETITION_RATE_HISTORY_BY_PREFECTURE: Partial<Record<string, Pref
   yamanashi: YAMANASHI_COMPETITION_RATE_HISTORY,
   saitama: SAITAMA_COMPETITION_RATE_HISTORY,
   hiroshima: HIROSHIMA_COMPETITION_RATE_HISTORY,
+  aichi: AICHI_COMPETITION_RATE_HISTORY,
+  osaka: OSAKA_COMPETITION_RATE_HISTORY,
+  shizuoka: SHIZUOKA_COMPETITION_RATE_HISTORY,
+  tochigi: TOCHIGI_COMPETITION_RATE_HISTORY,
 };
 
 export const COMPETITION_RATE_HISTORY_FILES: PrefectureRateHistoryFile[] = Object.values(
