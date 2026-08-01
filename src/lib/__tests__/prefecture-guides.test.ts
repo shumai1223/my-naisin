@@ -13,9 +13,13 @@ describe('VERIFIED_PITFALLS_PREFECTURE_CODES（事実確認済みの県のみ解
     expect(VERIFIED_PITFALLS_PREFECTURE_CODES.has('kanagawa')).toBe(true);
   });
 
-  test('未検証の他12県(手書きguideデータがある県のうち東京都・神奈川県以外)はまだ解禁されていない', () => {
+  test('大阪府は事実確認済みで解禁されている', () => {
+    expect(VERIFIED_PITFALLS_PREFECTURE_CODES.has('osaka')).toBe(true);
+  });
+
+  test('未検証の他11県(手書きguideデータがある県のうち東京都・神奈川県・大阪府以外)はまだ解禁されていない', () => {
     for (const code of PREFECTURES_WITH_GUIDE) {
-      if (code === 'tokyo' || code === 'kanagawa') continue;
+      if (code === 'tokyo' || code === 'kanagawa' || code === 'osaka') continue;
       expect(VERIFIED_PITFALLS_PREFECTURE_CODES.has(code)).toBe(false);
     }
   });
@@ -92,5 +96,27 @@ describe('神奈川県のpitfalls(2026-08-01にWebSearchで個別に裏取り済
     expect(item).toContain('横浜翠嵐');
     expect(item).toContain('柏陽');
     expect(item).toContain('希望ケ丘');
+  });
+});
+
+describe('大阪府のpitfalls(2026-08-01にWebSearchで個別に裏取り済み)', () => {
+  test('選抜タイプは正しく「I〜V」の5段階と記載されている(旧「I〜III」表記の事実誤りを修正)', () => {
+    const guide = getPrefectureGuide('osaka');
+    const item = guide.pitfalls.items.find((i) => i.includes('選抜タイプ'));
+    expect(item).toContain('Ⅰ〜Ⅴ');
+    expect(item).not.toContain('I〜III');
+  });
+
+  test('英検読み替え率(2級80%/準1級以上100%)が一次情報と一致する', () => {
+    const guide = getPrefectureGuide('osaka');
+    const item = guide.pitfalls.items.find((i) => i.includes('英語外部検定'));
+    expect(item).toContain('80%');
+    expect(item).toContain('100%');
+  });
+
+  test('チャレンジテストの評定平均範囲(目安±0.3)が一次情報と一致する', () => {
+    const guide = getPrefectureGuide('osaka');
+    const item = guide.pitfalls.items.find((i) => i.includes('チャレンジテスト'));
+    expect(item).toContain('±0.3');
   });
 });
