@@ -53,8 +53,12 @@ describe('VERIFIED_PITFALLS_PREFECTURE_CODES（事実確認済みの県のみ解
     expect(VERIFIED_PITFALLS_PREFECTURE_CODES.has('aomori')).toBe(true);
   });
 
-  test('未検証の他2県(手書きguideデータがある県のうち検証済み12県以外)はまだ解禁されていない', () => {
-    const verified = new Set(['tokyo', 'kanagawa', 'osaka', 'saitama', 'chiba', 'hokkaido', 'fukuoka', 'shizuoka', 'hyogo', 'hiroshima', 'aichi', 'aomori']);
+  test('岩手県は事実確認済みで解禁されている', () => {
+    expect(VERIFIED_PITFALLS_PREFECTURE_CODES.has('iwate')).toBe(true);
+  });
+
+  test('未検証の他1県(手書きguideデータがある県のうち検証済み13県以外)はまだ解禁されていない', () => {
+    const verified = new Set(['tokyo', 'kanagawa', 'osaka', 'saitama', 'chiba', 'hokkaido', 'fukuoka', 'shizuoka', 'hyogo', 'hiroshima', 'aichi', 'aomori', 'iwate']);
     for (const code of PREFECTURES_WITH_GUIDE) {
       if (verified.has(code)) continue;
       expect(VERIFIED_PITFALLS_PREFECTURE_CODES.has(code)).toBe(false);
@@ -305,5 +309,24 @@ describe('青森県のpitfalls(2026-08-01にWebSearchで個別に裏取り済み
     const guide = getPrefectureGuide('aomori');
     const item = guide.pitfalls.items.find((i) => i.includes('1:1:1'));
     expect(item).toBeDefined();
+  });
+});
+
+describe('岩手県のpitfalls(2026-08-01にWebSearchで個別に裏取り済み)', () => {
+  test('実技3倍・5教科2倍・学年比1:2:3・660→440換算がprefectures.tsと一致する', () => {
+    const guide = getPrefectureGuide('iwate');
+    const allText = guide.pitfalls.items.join('');
+    expect(allText).toContain('評定×3倍');
+    expect(allText).toContain('評定×2倍');
+    expect(allText).toContain('1：2：3');
+    expect(allText).toContain('440点満点');
+  });
+
+  test('A選考・B選考・C選考は一般選抜の学力:調査書比率タイプと正確に記載されている(旧「推薦入試の区分」という事実誤りを修正)', () => {
+    const guide = getPrefectureGuide('iwate');
+    const item = guide.pitfalls.items.find((i) => i.includes('A選考・B選考・C選考'));
+    expect(item).toContain('5:5');
+    expect(item).toContain('特色選抜');
+    expect(item).not.toContain('通学区域内の生徒が対象のA選考');
   });
 });
