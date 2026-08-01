@@ -180,36 +180,6 @@ export const EXPERIMENTS: ExperimentDef[] = [
     startedAt: '2026-07-12',
   },
   {
-    // U-3（2026-07-12）：紹介・解放機構（T-1・UnlockGate）のティザー文言A/B。3アーム。
-    // 好奇心訴求（現行・control）vs 損失回避訴求 vs 具体的ベネフィット訴求で unlock_granted（分母=unlock_teaser_view）を比較する。
-    id: 'unlock-teaser-copy-2026',
-    hypothesis: '解放ゲートのティザー文言を「見れていない」型の損失回避訴求、または「順位がわかる」型の具体的ベネフィット訴求にすると、現行の好奇心訴求より unlock_granted（共有/LINE追加による解放）が上がる。',
-    status: 'running',
-    arms: [
-      {
-        id: 'control',
-        label: '好奇心訴求（現行）',
-        heading: '全国の協力者と比べてみませんか？',
-        body: 'おうちの人に結果を送るか、保護者向けLINEに登録すると、全国の協力者データと比べた「あなたの立ち位置」が見られるようになります。',
-      },
-      {
-        id: 'loss',
-        label: '損失回避訴求',
-        heading: 'あなたの立ち位置、まだ見れていません',
-        body: 'おうちの人に送るかLINE登録をするまで、全国の協力者データと比べた「あなたの立ち位置」は見られないままです。',
-      },
-      {
-        id: 'benefit',
-        label: '具体的ベネフィット訴求',
-        heading: '同学年・同都道府県との差が、数字でわかります',
-        body: 'おうちの人に送るかLINE登録をすると、同学年・同都道府県の受験生と比べた実際の順位（パーセンタイル）がすぐにわかります。',
-      },
-    ],
-    primaryMetric: 'unlock_granted',
-    note: 'UnlockGateのteaserTitle/teaserBody未指定時（=全設置面共通）の既定文言を差し替える。分母となるunlock_teaser_viewも同時計測。送信先・解放条件（共有 or LINE追加）は3アームとも同一。**🚨2026-08-01 Q-3ファネル診断で低頻度懸念を発見**: GA4実測(直近28日)でunlock_teaser_view=393ユーザーに対しunlock_granted=2件のみ(source末尾"-unlock"のline_friend_click 2件と完全一致・トラッキング自体は正常と確認済み)。実質コンバージョン率0.5%程度と極めて低く、lead-copy-2026(月1件)と同型の「3アーム合計でもminSample=100/アームに到達するのに現在の頻度だと数年かかる」構造的懸念がある。まだ20日目(30日超過はしていない)だが、明日以降checkExperimentPortfolioHealthのoverdueForRotation(21日)に載った際は、判定不能を理由に安易に停止せず、まず「absolute数が少なすぎて判定不能なまま延長しても意味がない」点を踏まえた判断(停止してcontrol確定、または母数を稼ぐ設置面拡大の検討)をすること。',
-    startedAt: '2026-07-12',
-  },
-  {
     // ZZ-1c（2026-07-24）：匿名統計オプトインの価値交換コピーA/B。StatsOptInが参照。
     // ZZ-1b（NationalPercentileReveal）で「投稿すると立ち位置が見える」体験を実装したので、
     // オプトイン時点の文言でもその見返りを先出しで明示すれば同意率が上がるはずという仮説。
