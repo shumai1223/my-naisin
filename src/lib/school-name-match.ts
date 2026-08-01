@@ -51,18 +51,26 @@ function stripEstablishmentPrefix(fullName: string): string {
   return fullName;
 }
 
-/** 学校種別の接尾辞。長い候補から先に試すこと（'高等学校'を先に剥がさないと'高校'が残らない等の事故を防ぐ）。 */
-const SCHOOL_TYPE_SUFFIX_PATTERN = /(高等学校|高校)$/;
+/**
+ * 学校種別トークン。長い候補から先に試すこと（'高等学校'を先に剥がさないと'高校'が残らない等の事故を防ぐ）。
+ * **2026-08-02判明**: 分校（例:'長野県篠ノ井高等学校犀峡校'）は「高等学校」が末尾ではなく
+ * 本校名と分校名の**間**に埋め込まれる（本校名+高等学校+分校名、例:'篠ノ井'+'高等学校'+'犀峡校'）。
+ * competition-ratesの短縮表記側は分校名を残したまま「高等学校」だけを省く（例:'篠ノ井犀峡校'）ため、
+ * 末尾アンカー($)の除去だけでは分校が一律no-matchになっていた（nagano実データで2件確認）。
+ * 「高等学校」「高校」という4-2文字のトークンは学校の正式名称の他の部分に偶然出現することは
+ * 現実的に無い（設置者種別を表す固定語のため）ので、**出現位置を問わず全て**除去する。
+ */
+const SCHOOL_TYPE_TOKEN_PATTERN = /(高等学校|高校)/g;
 
 /**
  * 学校の正式名称を突合用に正規化する（純粋関数）。
- * 例: '東京都立日比谷高等学校' → '日比谷'。設置者接頭辞・学校種別接尾辞のみを除去し、
+ * 例: '東京都立日比谷高等学校' → '日比谷'。設置者接頭辞・学校種別トークンのみを除去し、
  * それ以外の表記はそのまま保持する（過剰な正規化で誤マッチを起こさないため）。
  */
 export function normalizeSchoolNameForMatch(fullName: string): string {
   let result = fullName.trim();
   result = stripEstablishmentPrefix(result);
-  result = result.replace(SCHOOL_TYPE_SUFFIX_PATTERN, '');
+  result = result.replace(SCHOOL_TYPE_TOKEN_PATTERN, '');
   return result.trim();
 }
 

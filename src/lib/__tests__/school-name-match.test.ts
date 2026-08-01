@@ -50,6 +50,15 @@ describe('normalizeSchoolNameForMatch', () => {
   test('京都市立の学校も引き続き正しく除去する', () => {
     expect(normalizeSchoolNameForMatch('京都市立紫野高等学校')).toBe('紫野');
   });
+
+  // 2026-08-02判明: 分校は「本校名+高等学校+分校名」の順で「高等学校」が末尾でなく中間に来る。
+  test('分校名(本校名+高等学校+分校名)は中間の「高等学校」も除去する', () => {
+    expect(normalizeSchoolNameForMatch('長野県篠ノ井高等学校犀峡校')).toBe('篠ノ井犀峡校');
+  });
+
+  test('分校名(戸隠分校のような「分校」表記)でも同様に除去する', () => {
+    expect(normalizeSchoolNameForMatch('長野県長野吉田高等学校戸隠分校')).toBe('長野吉田戸隠分校');
+  });
 });
 
 function rec(code: string, name: string): SchoolRecord {
