@@ -428,14 +428,15 @@ export const EXPERIMENTS: ExperimentDef[] = [
   {
     id: 'parent-lp-order-2026',
     hypothesis: '/hogoshaでCTAをページ最上部（ファーストビュー）に出すと、記事末配置の既定より cta_view が伸びる（配置順A/B・parent-lp系ローテーション2巡目）。',
-    status: 'queued',
+    status: 'running',
     arms: [
       { id: 'control', label: '既定の配置（記事末）' },
-      { id: 'above-fold', label: 'ファーストビューに配置', body: 'placement-order:above-fold' },
+      { id: 'above-fold', label: 'ファーストビューに配置', body: 'internal-marker:position=above-fold(表示テキストではない・重複防止テスト用)' },
     ],
     primaryMetric: 'cta_view',
     placement: 'parent-lp',
-    note: 'hogosha-cta-text-2026（コピーA/B）とは別軸（配置順）。両実験は同時に走らせず順番に検証する。',
+    note: 'hogosha-cta-text-2026（コピーA/B）とは別軸（配置順）。両実験は同時に走らせず順番に検証する。**2026-08-01活性化**: このIDはコピーではなく「DOM上のどちらの位置に表示するか」自体をswitchする特殊な実験のため、ParentLeadCTAExperimentではなく専用のParentLeadCTAPositionSlot/ParentLeadCTAPositionProvider(src/components/ParentLeadCTAPositionSlot.tsx)がidのみを見て判定する(bodyは実際には描画されない・コピペ重複防止テストのための識別用ダミー値)。/hogoshaに配線済み。',
+    startedAt: '2026-08-01',
   },
   {
     id: 'blog-offer-2026',

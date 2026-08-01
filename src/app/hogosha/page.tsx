@@ -19,7 +19,7 @@ import {
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
-import { ParentLeadCTAExperiment } from '@/components/ParentLeadCTAExperiment';
+import { ParentLeadCTAPositionProvider, ParentLeadCTAPositionSlot } from '@/components/ParentLeadCTAPositionSlot';
 import { ParentShareBanner } from '@/components/ParentShareBanner';
 import { HogoshaLeadCTA } from '@/components/HogoshaLeadCTA';
 import { RelatedToolsSection } from '@/components/RelatedToolsSection';
@@ -190,6 +190,7 @@ export default function HogoshaPage() {
       />
       <FAQPageSchema faqItems={PARENT_FAQS} />
 
+      <ParentLeadCTAPositionProvider>
       <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
           {/* Breadcrumb */}
@@ -227,6 +228,16 @@ export default function HogoshaPage() {
           <Suspense fallback={<ParentLeadCTA placement="parent-lp" className="mb-10" />}>
             <HogoshaLeadCTA className="mb-10" />
           </Suspense>
+
+          {/* 配置順A/B(parent-lp-order-2026)がabove-foldを選んだクライアントのみ、ここに
+              コピーA/B(hogosha-cta-text-2026)のCTAをもう1つ表示する（controlは記事末に表示）。 */}
+          <ParentLeadCTAPositionSlot
+            slot="above-fold"
+            copyExperimentId="hogosha-cta-text-2026"
+            placement="parent-lp"
+            className="mb-10"
+            auditHide
+          />
 
           {/* 保護者ができる3つのこと */}
           <section className="mb-10">
@@ -331,8 +342,14 @@ export default function HogoshaPage() {
             </div>
           </section>
 
-          {/* 保護者向けリード（最下部・読了者）。CTA文言をA/Bテスト（自作A/B基盤） */}
-          <ParentLeadCTAExperiment experimentId="hogosha-cta-text-2026" placement="parent-lp" auditHide />
+          {/* 保護者向けリード（記事末・読了者向け既定位置）。位置A/B(parent-lp-order-2026)がabove-foldを
+              選んだクライアントではここには出さずヘッダー直後に表示する（重複防止はProviderで排他制御済み）。 */}
+          <ParentLeadCTAPositionSlot
+            slot="article-end"
+            copyExperimentId="hogosha-cta-text-2026"
+            placement="parent-lp"
+            auditHide
+          />
 
           <p className="mt-8 flex items-center justify-center gap-1.5 text-center text-xs text-slate-400">
             <ShieldCheck className="h-3.5 w-3.5" />
@@ -340,6 +357,7 @@ export default function HogoshaPage() {
           </p>
         </div>
       </div>
+      </ParentLeadCTAPositionProvider>
     </>
   );
 }
