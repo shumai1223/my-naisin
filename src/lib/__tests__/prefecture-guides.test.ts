@@ -49,8 +49,12 @@ describe('VERIFIED_PITFALLS_PREFECTURE_CODES（事実確認済みの県のみ解
     expect(VERIFIED_PITFALLS_PREFECTURE_CODES.has('aichi')).toBe(true);
   });
 
-  test('未検証の他3県(手書きguideデータがある県のうち検証済み11県以外)はまだ解禁されていない', () => {
-    const verified = new Set(['tokyo', 'kanagawa', 'osaka', 'saitama', 'chiba', 'hokkaido', 'fukuoka', 'shizuoka', 'hyogo', 'hiroshima', 'aichi']);
+  test('青森県は事実確認済みで解禁されている', () => {
+    expect(VERIFIED_PITFALLS_PREFECTURE_CODES.has('aomori')).toBe(true);
+  });
+
+  test('未検証の他2県(手書きguideデータがある県のうち検証済み12県以外)はまだ解禁されていない', () => {
+    const verified = new Set(['tokyo', 'kanagawa', 'osaka', 'saitama', 'chiba', 'hokkaido', 'fukuoka', 'shizuoka', 'hyogo', 'hiroshima', 'aichi', 'aomori']);
     for (const code of PREFECTURES_WITH_GUIDE) {
       if (verified.has(code)) continue;
       expect(VERIFIED_PITFALLS_PREFECTURE_CODES.has(code)).toBe(false);
@@ -282,5 +286,24 @@ describe('愛知県のpitfalls(2026-08-01にWebSearchで個別に裏取り済み
     const guide = getPrefectureGuide('aichi');
     const item = guide.pitfalls.items.find((i) => i.includes('A・Bグループ'));
     expect(item).toContain('全国唯一');
+  });
+});
+
+describe('青森県のpitfalls(2026-08-01にWebSearchで個別に裏取り済み)', () => {
+  test('一般選抜は固定635点満点(500+135)と正確に記載されている(旧「学校ごとに比率選択」の事実誤りを修正)', () => {
+    const guide = getPrefectureGuide('aomori');
+    const item = guide.pitfalls.items.find((i) => i.includes('635点満点'));
+    expect(item).toBeDefined();
+    expect(item).toContain('500点満点');
+    expect(item).toContain('135点満点');
+    const allText = guide.pitfalls.items.join('');
+    expect(allText).not.toContain('7:3');
+    expect(allText).not.toContain('5:5');
+  });
+
+  test('学年比率1:1:1均等が一次情報(prefectures.ts)と一致する', () => {
+    const guide = getPrefectureGuide('aomori');
+    const item = guide.pitfalls.items.find((i) => i.includes('1:1:1'));
+    expect(item).toBeDefined();
   });
 });
