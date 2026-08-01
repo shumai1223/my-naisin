@@ -57,11 +57,14 @@ describe('VERIFIED_PITFALLS_PREFECTURE_CODES（事実確認済みの県のみ解
     expect(VERIFIED_PITFALLS_PREFECTURE_CODES.has('iwate')).toBe(true);
   });
 
-  test('未検証の他1県(手書きguideデータがある県のうち検証済み13県以外)はまだ解禁されていない', () => {
-    const verified = new Set(['tokyo', 'kanagawa', 'osaka', 'saitama', 'chiba', 'hokkaido', 'fukuoka', 'shizuoka', 'hyogo', 'hiroshima', 'aichi', 'aomori', 'iwate']);
+  test('宮城県は事実確認済みで解禁されている(最後の1県・これでPREFECTURES_WITH_GUIDE全県が解禁される)', () => {
+    expect(VERIFIED_PITFALLS_PREFECTURE_CODES.has('miyagi')).toBe(true);
+  });
+
+  test('VERIFIED_PITFALLS_PREFECTURE_CODESはPREFECTURES_WITH_GUIDEと完全に一致する(全14県が検証済み)', () => {
+    expect(VERIFIED_PITFALLS_PREFECTURE_CODES.size).toBe(PREFECTURES_WITH_GUIDE.size);
     for (const code of PREFECTURES_WITH_GUIDE) {
-      if (verified.has(code)) continue;
-      expect(VERIFIED_PITFALLS_PREFECTURE_CODES.has(code)).toBe(false);
+      expect(VERIFIED_PITFALLS_PREFECTURE_CODES.has(code)).toBe(true);
     }
   });
 
@@ -328,5 +331,29 @@ describe('岩手県のpitfalls(2026-08-01にWebSearchで個別に裏取り済み
     expect(item).toContain('5:5');
     expect(item).toContain('特色選抜');
     expect(item).not.toContain('通学区域内の生徒が対象のA選考');
+  });
+});
+
+describe('宮城県のpitfalls(2026-08-01にWebSearchで個別に裏取り済み・最後の1県)', () => {
+  test('共通選抜・特色選抜の募集割合は高校ごとに50〜90%/10〜50%の幅があると正確に記載されている(旧「70%/30%」固定表記の事実誤りを修正)', () => {
+    const guide = getPrefectureGuide('miyagi');
+    const item = guide.pitfalls.items.find((i) => i.includes('募集割合は高校ごとに違う'));
+    expect(item).toContain('50〜90%');
+    expect(item).toContain('10〜50%');
+    const allText = guide.pitfalls.items.join('');
+    expect(allText).not.toContain('共通選抜（70%）');
+  });
+
+  test('トップ校の学力検査比率は確定できない数値のため断定を避けて記載されている(情報源間で3:7/6:4の不一致があったため)', () => {
+    const guide = getPrefectureGuide('miyagi');
+    const item = guide.pitfalls.items.find((i) => i.includes('トップ校は当日点重視'));
+    expect(item).not.toContain('3:7');
+  });
+
+  test('実技2倍・195点満点・学年均等がprefectures.tsと一致する', () => {
+    const guide = getPrefectureGuide('miyagi');
+    const allText = guide.pitfalls.items.join('');
+    expect(allText).toContain('2倍');
+    expect(allText).toContain('195点満点');
   });
 });
