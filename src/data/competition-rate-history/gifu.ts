@@ -23,7 +23,25 @@ const REIWA_7: YearSnapshot = {
   grandTotal: { label: '全日制の課程 総計（第一次選抜＋連携型選抜込み）', quota: 12885, applicants: 12376, rate: 0.96 },
 };
 
+/**
+ * 令和6年度（2024年度）: 同一資料シリーズの令和6年度版（2024-02-20正午締切時公表）を発見。
+ * 「Ⅰ第一次選抜 1 全日制の課程」の「総計」行（定員13,121・出願者数12,829・倍率0.98）を
+ * 直接転記。分野別11区分の内訳合計も総計と完全一致することを手計算で確認済み（R7と同じ
+ * granularity='grand-total-only'に揃えた・区分別内訳は将来必要になれば追加できる）。
+ * 出願者数12,829人はWebSearchで見つかった独立記事の要約（全日制12,829人）とも一致。
+ */
+const REIWA_6: YearSnapshot = {
+  fiscalYear: '令和6年度（2024年度）',
+  sourceUrl: 'https://www.pref.gifu.lg.jp/uploaded/attachment/407489.pdf',
+  sourceTitle: '岐阜県教育委員会高校教育課 令和6年度岐阜県公立高等学校第一次・連携型選抜 変更後出願者数総括表',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制の課程 総計（第一次選抜＋連携型選抜込み）', quota: 13121, applicants: 12829, rate: 0.98 },
+};
+
 export const GIFU_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'gifu',
-  years: [REIWA_7],
+  years: [REIWA_7, REIWA_6],
 };
