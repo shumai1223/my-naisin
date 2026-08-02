@@ -41,7 +41,26 @@ const REIWA_6: YearSnapshot = {
   grandTotal: { label: '全日制の課程 総計（第一次選抜＋連携型選抜込み）', quota: 13121, applicants: 12829, rate: 0.98 },
 };
 
+/**
+ * 令和5年度（2023年度）: 同一資料シリーズの令和5年度版原本PDF（attachment/339539.pdf）への
+ * 直接アクセスは404で失効済みのため、教委発表を報じたリセモム確定記事（2023年2月22日発表）を
+ * 採用。全日制の課程「総計」: 定員13,121・出願者数12,729・倍率0.97（12729/13121=0.9701…
+ * ≈0.97で整合。学習塾サイト「同学塾」の独立記事要約でも出願者数12,729人が一致）。R6と定員が
+ * 同一の13,121人である点は独立2ソースで確認済みのため誤記ではない。
+ */
+const REIWA_5: YearSnapshot = {
+  fiscalYear: '令和5年度（2023年度）',
+  sourceUrl: 'https://resemom.jp/article/2023/02/22/71077.html',
+  sourceTitle:
+    'リセモム「岐阜県公立高、第1次選抜の出願状況（確定）」（岐阜県教育委員会 令和5年度第一次選抜変更後出願者数総括表の発表を引用）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制の課程 総計（第一次選抜＋連携型選抜込み）', quota: 13121, applicants: 12729, rate: 0.97 },
+};
+
 export const GIFU_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'gifu',
-  years: [REIWA_7, REIWA_6],
+  years: [REIWA_7, REIWA_6, REIWA_5],
 };

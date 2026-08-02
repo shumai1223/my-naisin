@@ -4,12 +4,13 @@ import { GIFU_COMPETITION_RATE_HISTORY } from '../gifu';
  * Λ-4（多年度アーカイブ・岐阜県）DoD検証: 令和7・令和6年度の「全日制の課程 総計」行の数値を
  * 一次資料（岐阜県教育委員会高校教育課の変更後出願者数総括表PDF）の固定値で確認する。
  */
-describe('岐阜県 多年度アーカイブ（Λ-4・令和7/令和6の2年度分・grand-total-only）', () => {
-  it('2年度分（令和7年度・令和6年度）を収録している', () => {
-    expect(GIFU_COMPETITION_RATE_HISTORY.years).toHaveLength(2);
+describe('岐阜県 多年度アーカイブ（Λ-4・令和7/令和6/令和5の3年度分・grand-total-only）', () => {
+  it('3年度分（令和7年度・令和6年度・令和5年度）を収録している', () => {
+    expect(GIFU_COMPETITION_RATE_HISTORY.years).toHaveLength(3);
     expect(GIFU_COMPETITION_RATE_HISTORY.years.map((y) => y.fiscalYear)).toEqual([
       '令和7年度（2025年度）',
       '令和6年度（2024年度）',
+      '令和5年度（2023年度）',
     ]);
   });
 
@@ -31,5 +32,12 @@ describe('岐阜県 多年度アーカイブ（Λ-4・令和7/令和6の2年度�
     expect(r6.grandTotal.quota).toBe(13121);
     expect(r6.grandTotal.applicants).toBe(12829);
     expect(r6.grandTotal.rate).toBeCloseTo(0.98, 2);
+  });
+
+  it('令和5年度の全日制の課程総計は一次資料と一致する(募集13,121・志願12,729・倍率0.97)', () => {
+    const r5 = GIFU_COMPETITION_RATE_HISTORY.years[2];
+    expect(r5.grandTotal.quota).toBe(13121);
+    expect(r5.grandTotal.applicants).toBe(12729);
+    expect(r5.grandTotal.rate).toBeCloseTo(0.97, 2);
   });
 });
