@@ -60,7 +60,25 @@ const REIWA_5: YearSnapshot = {
   grandTotal: { label: '全日制の課程 総計（第一次選抜＋連携型選抜込み）', quota: 13121, applicants: 12729, rate: 0.97 },
 };
 
+/**
+ * 令和4年度（2022年度）: 同一資料シリーズの令和4年度版原本PDFも同様に失効している可能性が
+ * 高いため、教委発表を報じたリセモム確定記事（2022年2月22日発表）をWebSearch要約と
+ * WebFetch直接引用の2回で確認して採用。全日制の課程「総計」: 定員13,301・出願者数13,284・
+ * 倍率1.0（13284/13301=0.9987…≈1.00で整合）。
+ */
+const REIWA_4: YearSnapshot = {
+  fiscalYear: '令和4年度（2022年度）',
+  sourceUrl: 'https://resemom.jp/article/2022/02/22/65921.html',
+  sourceTitle:
+    'リセモム「岐阜県公立高、第1次選抜の出願状況（確定）」（岐阜県教育委員会 令和4年度第一次選抜変更後出願者数総括表の発表を引用）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制の課程 総計（第一次選抜＋連携型選抜込み）', quota: 13301, applicants: 13284, rate: 1.0 },
+};
+
 export const GIFU_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'gifu',
-  years: [REIWA_7, REIWA_6, REIWA_5],
+  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4],
 };
