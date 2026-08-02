@@ -48,16 +48,28 @@ export interface PrefectureSchoolPageDataResult {
 /**
  * 1県分の学校マスターと今季倍率レコードから、個別学校ページに必要なデータを組み立てる（純粋関数）。
  * 学校名→schoolCodeの突合ができない学校は正直にskippedへ回す（誤った紐付けをしない）。
+ * nameAliases: 県独自の略称慣習（miyagiの「工業→工」等・school-name-aliases.ts参照）を
+ * 明示的な対応表として適用する。表示・レコード紐付けは常に元のschoolName(競争率データ側の
+ * 生の表記)を使い、aliasは突合のためだけに使う（結果が壊れないよう突合後に元名へ戻す）。
  */
 export function buildSchoolPageDataForPrefecture(
   masterRecords: SchoolRecord[],
-  rateRecords: CompetitionRateRecord[]
+  rateRecords: CompetitionRateRecord[],
+  nameAliases: Record<string, string> = {}
 ): PrefectureSchoolPageDataResult {
   const schoolNames = rateRecords.map((r) => r.schoolName);
-  const matchSummary = matchSchoolNames(schoolNames, masterRecords);
+  const aliasedNames = schoolNames.map((n) => nameAliases[n] ?? n);
+  const matchSummary = matchSchoolNames(aliasedNames, masterRecords);
+
+  const matchByAliasedName = new Map<string, SchoolCodeMatchResult>();
+  for (const result of matchSummary.results) matchByAliasedName.set(result.inputName, result);
 
   const matchByName = new Map<string, SchoolCodeMatchResult>();
-  for (const result of matchSummary.results) matchByName.set(result.inputName, result);
+  for (const original of new Set(schoolNames)) {
+    const aliased = nameAliases[original] ?? original;
+    const result = matchByAliasedName.get(aliased);
+    if (result) matchByName.set(original, { ...result, inputName: original });
+  }
 
   const recordsByName = new Map<string, CompetitionRateRecord[]>();
   for (const rec of rateRecords) {

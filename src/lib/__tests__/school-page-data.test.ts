@@ -84,6 +84,39 @@ describe('buildSchoolPageDataForPrefecture', () => {
     expect(result.skipped).toEqual([{ schoolName: '大森', reason: 'ambiguous' }]);
   });
 
+  // 2026-08-02判明: miyagi等、県独自の略称慣習(school-name-aliases.ts)を使う県はnameAliasesで
+  // 突合前に正式表記へ変換する。表示・レコード紐付けは元のschoolNameのまま維持されることを確認する。
+  describe('nameAliasesによる県独自略称への対応(2026-08-02)', () => {
+    test('aliasで指定した略称は正規化後の正式表記と突合される', () => {
+      const master = [rec('M1', '宮城県白石工業高等学校')];
+      const rates = [rate('白石工', '機械科', 40, 50, 1.25)];
+      const result = buildSchoolPageDataForPrefecture(master, rates, { 白石工: '白石工業' });
+      expect(result.skipped).toHaveLength(0);
+      expect(result.schools).toHaveLength(1);
+      expect(result.schools[0].schoolCode).toBe('M1');
+    });
+
+    test('突合後もschoolNameは元の生の表記に基づいてグルーピングされる(alias値そのものに置き換わらない)', () => {
+      const master = [rec('M1', '宮城県白石工業高等学校')];
+      const rates = [
+        rate('白石工', '機械科', 40, 50, 1.25),
+        rate('白石工', '電気科', 40, 30, 0.75),
+      ];
+      const result = buildSchoolPageDataForPrefecture(master, rates, { 白石工: '白石工業' });
+      expect(result.schools).toHaveLength(1);
+      expect(result.schools[0].departmentRates).toHaveLength(2);
+      expect(result.schools[0].totalQuota).toBe(80);
+    });
+
+    test('aliasが無い学校名は従来どおり正規化のみで突合される(alias指定県でも他校は影響を受けない)', () => {
+      const master = [rec('M1', '宮城県白石工業高等学校'), rec('M2', '宮城県白石高等学校')];
+      const rates = [rate('白石工', '機械科', 40, 50, 1.25), rate('白石', '普通科', 200, 210, 1.05)];
+      const result = buildSchoolPageDataForPrefecture(master, rates, { 白石工: '白石工業' });
+      expect(result.skipped).toHaveLength(0);
+      expect(result.schools.map((s) => s.schoolCode).sort()).toEqual(['M1', 'M2']);
+    });
+  });
+
   test('募集人員0の学校はoverallRateを0にする(0除算を起こさない)', () => {
     const master = [rec('Z1', '東京都立ゼロ高等学校')];
     const rates: CompetitionRateRecord[] = [];

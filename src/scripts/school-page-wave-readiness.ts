@@ -15,6 +15,7 @@ import { COMPETITION_RATE_HISTORY_BY_PREFECTURE } from '@/data/competition-rate-
 import { matchSchoolNames } from '@/lib/school-name-match';
 import { DEPARTMENT_TO_CATEGORY_LABEL_BY_PREFECTURE } from '@/lib/school-department-category';
 import { INDEXED_SCHOOL_PAGE_PREFECTURE_CODES } from '@/lib/school-page-lookup';
+import { SCHOOL_NAME_ALIASES_BY_PREFECTURE } from '@/lib/school-name-aliases';
 import { PREFECTURES } from '@/lib/prefectures';
 
 interface ReadinessRow {
@@ -37,7 +38,8 @@ function evaluate(code: string): ReadinessRow | null {
   const name = PREFECTURES.find((p) => p.code === code)?.name ?? code;
   if (!master || !rates) return null;
 
-  const schoolNames = rates.records.map((r) => r.schoolName);
+  const aliases = SCHOOL_NAME_ALIASES_BY_PREFECTURE[code] ?? {};
+  const schoolNames = rates.records.map((r) => aliases[r.schoolName] ?? r.schoolName);
   const summary = matchSchoolNames(schoolNames, master.schools);
   const matchRate = summary.results.length > 0 ? summary.matchedCount / summary.results.length : 0;
 

@@ -6,6 +6,7 @@
 import { SCHOOL_MASTER_BY_PREFECTURE } from '@/data/schools';
 import { COMPETITION_RATE_BY_PREFECTURE } from '@/data/competition-rates';
 import { buildSchoolPageDataForPrefecture, type SchoolPageData } from '@/lib/school-page-data';
+import { SCHOOL_NAME_ALIASES_BY_PREFECTURE } from '@/lib/school-name-aliases';
 
 /**
  * index解禁済みの県（分割公開の波・👤裁定2026-08-01）。
@@ -19,6 +20,10 @@ export function getPrefectureSchoolPageData(code: string): { schools: SchoolPage
   const master = SCHOOL_MASTER_BY_PREFECTURE[code];
   const rates = COMPETITION_RATE_BY_PREFECTURE[code];
   if (!master || !rates) return null;
-  const { schools } = buildSchoolPageDataForPrefecture(master.schools, rates.records);
+  const { schools } = buildSchoolPageDataForPrefecture(
+    master.schools,
+    rates.records,
+    SCHOOL_NAME_ALIASES_BY_PREFECTURE[code] ?? {}
+  );
   return { schools };
 }
