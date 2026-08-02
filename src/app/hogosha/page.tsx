@@ -261,6 +261,28 @@ export default function HogoshaPage() {
             </div>
           </section>
 
+          {/* TIER Σ-2（2026-08-02）: 「①結果 ②意味 ③次にやること ④費用の現実」の④に当たる
+              費用リンク集を、従来の「ツール/保存」の後(6番目)からここ(③の直後)へ前倒し。
+              保護者は子の結果を見に来るのであって塾を探しに来るのではない＝費用の現実を
+              早めに見せる方が「次にやること」の文脈と繋がる。新規リンクは足していない。 */}
+          <RelatedToolsSection
+            className="mb-10"
+            links={[
+              { href: '/hiyou', title: 'お金・費用まとめ', desc: '教育費・高校学費・塾代・高校無償化を一括で把握' },
+              { href: '/kyouiku-hi', title: '教育費シミュレーター', desc: '中学〜高校卒業までの総額を内訳つきで試算' },
+              { href: '/shougakukin', title: '高校無償化・就学支援金ガイド', desc: '公立・私立別の支援額と世帯年収の目安' },
+              { href: '/comparison', title: '都道府県の入試制度を比較', desc: '内申比率・配点方式を地域ごとに比較' },
+              { href: '/mendan', title: '三者面談の準備チェックリスト', desc: '先生に聞くこと・持ち物・面談前に確認する数値' },
+              { href: '/blog', title: '受験攻略コラム', desc: '内申点の上げ方・副教科で5を取る戦略など' },
+              {
+                href: 'https://my-shingaku.com',
+                title: '大学進学の費用を調べる（姉妹サイト）',
+                desc: '一人暮らし・学費・奨学金の目安（My Shingaku）',
+                external: true,
+              },
+            ]}
+          />
+
           {/* ツール導線 */}
           <section className="mb-10">
             <h2 className="mb-5 text-xl font-bold text-slate-800">無料で使えるツール</h2>
@@ -297,25 +319,6 @@ export default function HogoshaPage() {
             heading="お子さまの受験情報を、受験本番まで無料で受け取りませんか？"
             body="内申点アップのコツ・出願スケジュール・志望校の最新情報を、保護者の方へお届けします。LINEまたはメールで、いつでも解除できます。"
             className="mb-10"
-          />
-
-          {/* 次の一手（評価を稼ぎ頭・姉妹サイトへ流す） */}
-          <RelatedToolsSection
-            className="mb-10"
-            links={[
-              { href: '/hiyou', title: 'お金・費用まとめ', desc: '教育費・高校学費・塾代・高校無償化を一括で把握' },
-              { href: '/kyouiku-hi', title: '教育費シミュレーター', desc: '中学〜高校卒業までの総額を内訳つきで試算' },
-              { href: '/shougakukin', title: '高校無償化・就学支援金ガイド', desc: '公立・私立別の支援額と世帯年収の目安' },
-              { href: '/comparison', title: '都道府県の入試制度を比較', desc: '内申比率・配点方式を地域ごとに比較' },
-              { href: '/mendan', title: '三者面談の準備チェックリスト', desc: '先生に聞くこと・持ち物・面談前に確認する数値' },
-              { href: '/blog', title: '受験攻略コラム', desc: '内申点の上げ方・副教科で5を取る戦略など' },
-              {
-                href: 'https://my-shingaku.com',
-                title: '大学進学の費用を調べる（姉妹サイト）',
-                desc: '一人暮らし・学費・奨学金の目安（My Shingaku）',
-                external: true,
-              },
-            ]}
           />
 
           {/* 保護者FAQ */}

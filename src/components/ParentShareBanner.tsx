@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { useSearchParams } from 'next/navigation';
-import { Inbox, Target, PartyPopper } from 'lucide-react';
+import { Inbox, Target, PartyPopper, TrendingUp } from 'lucide-react';
 
 import { EVENTS, track } from '@/lib/track';
 import { beaconParentFunnelEvent } from '@/lib/parent-funnel-beacon';
@@ -17,6 +17,12 @@ import { parseParentShare, encodeSharePayload } from '@/lib/share';
  *
  * useSearchParams をこのコンポーネント内に閉じ込め、/hogosha は静的（SSG）のまま維持する。
  * 呼び出し側で <Suspense fallback={null}> に包むこと（Next 15 の要件）。
+ *
+ * TIER Σ-2（2026-08-02）: 「①子の結果 ②この点数の意味（全国/県内位置） ③次にやること ④費用の現実」の
+ * ②が抜けていた（share.percentile/percentileScopeはshare.tsのペイロードに元々存在するが、この
+ * コンポーネントは描画していなかった＝送り手側（SaveResultCTA経由）で計測済みのk-匿名性ガード後の
+ * 実測値をそのまま転記するだけで新たな計算はしない・捏造ゼロ）。値が無い（未計測/n不足）ときは
+ * セクションごと出さない。
  */
 export function ParentShareBanner() {
   const sp = useSearchParams();
@@ -43,13 +49,15 @@ export function ParentShareBanner() {
 
   if (!share.isShare) return null;
 
-  const { prefectureName, score, max, target, gap, label, grade } = share;
+  const { prefectureName, score, max, target, gap, label, grade, percentile, percentileScope } = share;
   const hasScore = typeof score === 'number';
   const hasGap = typeof gap === 'number';
   const met = hasGap && (gap as number) <= 0;
   const targetWord = label || '目標';
   const metric = share.metricLabel || '内申点';
   const gradeLead = typeof grade === 'number' ? `中${grade}の今からなら、まだ十分に間に合います。` : '';
+  const hasPercentile = typeof percentile === 'number';
+  const percentileScopeLabel = percentileScope === 'prefecture' ? (prefectureName ? `${prefectureName}内` : '県内') : '全国';
 
   // お子さまが共有した成績レポート画像（/api/card）。サーバー生成SVGなので確実に表示できる。
   const cardSrc = hasScore
@@ -101,6 +109,17 @@ export function ParentShareBanner() {
                 <div className="text-lg font-black">
                   {met ? `目標を ${Math.abs(gap as number)}点 達成` : `あと ${gap}点`}
                 </div>
+              </div>
+            </div>
+          )}
+
+          {/* ②この点数の意味（全国/県内位置）。k-匿名性ガード後の実測値のみ表示・未計測時は出さない。 */}
+          {hasPercentile && (
+            <div className="flex items-center gap-2 rounded-xl border-2 border-indigo-200 bg-indigo-50/70 px-4 py-2.5 text-indigo-800">
+              <TrendingUp className="h-5 w-5" />
+              <div>
+                <div className="text-[11px] font-bold opacity-80">{percentileScopeLabel}での位置</div>
+                <div className="text-lg font-black">上位 {Math.max(1, 100 - (percentile as number))}%相当</div>
               </div>
             </div>
           )}
