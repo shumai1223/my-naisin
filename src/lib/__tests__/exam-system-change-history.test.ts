@@ -74,6 +74,21 @@ describe('PAST_SYSTEM_CHANGES（Λ+5・過去の制度変更履歴DB）', () => 
     expect(hiroshimaPref?.maxScore).toBe(225);
   });
 
+  test('秋田県の調査書対象学年拡大エントリはprefectures.tsの現行値(1〜3年生・195点満点)と一致する', () => {
+    const akita = PAST_SYSTEM_CHANGES.find((c) => c.prefCode === 'akita');
+    expect(akita).toBeDefined();
+    expect(akita?.effectiveYear).toBe('令和5年度（2023年度）入試');
+    expect(akita?.category).toBe('weighting-formula');
+    expect(akita?.detail).toContain('中学3年生の評定のみ（65点満点）');
+    expect(akita?.detail).toContain('195点満点');
+
+    const akitaPref = PREFECTURES.find((p) => p.code === 'akita');
+    expect(akitaPref?.targetGrades).toEqual([1, 2, 3]);
+    expect(akitaPref?.gradeMultipliers).toEqual({ 1: 1, 2: 1, 3: 1 });
+    expect(akitaPref?.practicalMultiplier).toBe(2);
+    expect(akitaPref?.maxScore).toBe(195);
+  });
+
   test('categoryは定義済みの4種類のいずれかのみ(型崩れ防止)', () => {
     const validCategories = new Set(['scoring-input', 'selection-structure', 'weighting-formula', 'other']);
     for (const c of PAST_SYSTEM_CHANGES) {

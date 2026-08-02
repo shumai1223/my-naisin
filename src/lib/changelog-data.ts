@@ -15,6 +15,15 @@ export interface ChangeLogEntry {
 export const CHANGELOG: ChangeLogEntry[] = [
   {
     date: '2026-08-02',
+    prefectureCode: 'akita',
+    type: 'add',
+    category: 'content',
+    title: '「入試制度の変更履歴」に秋田県の調査書対象学年拡大を追加',
+    description:
+      '秋田県の公立高校入試が令和5年度(2023年度)から、一般選抜の調査書(内申点)の対象を中学3年生のみから中学1〜3年生の3年間に拡大した経緯を追加しました。',
+  },
+  {
+    date: '2026-08-02',
     prefectureCode: 'hiroshima',
     type: 'add',
     category: 'content',
