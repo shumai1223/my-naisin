@@ -34,7 +34,27 @@ const REIWA_7: YearSnapshot = {
   grandTotal: { label: '全日制127校 計（同スコープ・前年度実績）', schoolCount: 127, quota: 21252, applicants: 21596, rate: 1.02 },
 };
 
+/**
+ * 令和6年度（2024年度）: R7年度に公表された「令和7年度兵庫県公立高等学校入学者選抜出願状況
+ * （特別出願後確定数）」PDF（令和7年3月4日確定・R8版と同じ構成）の1頁目「1 志願者数等」表に、
+ * 令和7年度と令和6年度（前年度）の全日制/定時制の定員・志願者数・倍率が並記されている
+ * （東京都・本ファイルのR7エントリと同じ「当年度＋前年度併記」形式）。全日制列: 定員21,889・
+ * 志願者数22,677・倍率1.04（22677/21889=1.0360…≈1.04で印字済み値と整合）。R7エントリの
+ * 定員21,252/志願者数21,596/倍率1.02が本PDFの令和7年度列と完全一致することも確認済み
+ * （＝本PDFが正しい一次資料であることの裏取り）。
+ */
+const REIWA_6: YearSnapshot = {
+  fiscalYear: '令和6年度（2024年度）',
+  sourceUrl: 'https://www2.hyogo-c.ed.jp/hpe/uploads/sites/10/2025/03/R7gakuryokusiganhenkousaisyuubi.pdf',
+  sourceTitle: '兵庫県教育委員会 令和7年度兵庫県公立高等学校入学者選抜出願状況（特別出願後確定数）',
+  fetchedAt: '2026-08-03',
+  origin: 'prior-year-parenthetical',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制 計（同スコープ・前年度実績）', quota: 21889, applicants: 22677, rate: 1.04 },
+};
+
 export const HYOGO_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'hyogo',
-  years: [REIWA_7],
+  years: [REIWA_7, REIWA_6],
 };
