@@ -42,7 +42,26 @@ const REIWA_6: YearSnapshot = {
   grandTotal: { label: '一般選抜 全日制課程（実質募集定員）', quota: 3048, applicants: 2648, rate: 0.87 },
 };
 
+/**
+ * 令和5年度（2023年度）: 鳥取県教育委員会高等学校課の一次資料「令和5年度県立高等学校一般
+ * 入学者選抜最終志願者数等について」（2023年2月24日資料提供・全8頁）を教委の年度別ハブページ
+ * (295710.htm)経由でWebSearchにより発見。Read toolで全頁直読み成功。全日制課程「県計」行
+ * （実質募集定員3,040・志願変更締切後の最終志願者数2,757・競争率0.91）を転記
+ * （2757/3040=0.9069…≈0.91で印字済み値と整合）。R6/R7と同じ「一般選抜（特色選抜等を除く）」
+ * のスコープ。定時制課程はR6/R7と同じ理由でスコープ外。
+ */
+const REIWA_5: YearSnapshot = {
+  fiscalYear: '令和5年度（2023年度）',
+  sourceUrl: 'https://www.pref.tottori.lg.jp/secure/1311267/R5ippannsaisyuushigan.pdf',
+  sourceTitle: '鳥取県教育委員会高等学校課 令和5年度県立高等学校一般入学者選抜最終志願者数等について',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '一般選抜 全日制課程（実質募集定員）', quota: 3040, applicants: 2757, rate: 0.91 },
+};
+
 export const TOTTORI_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'tottori',
-  years: [REIWA_7, REIWA_6],
+  years: [REIWA_7, REIWA_6, REIWA_5],
 };
