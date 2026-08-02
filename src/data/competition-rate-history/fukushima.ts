@@ -24,7 +24,25 @@ const REIWA_7: YearSnapshot = {
   grandTotal: { label: '全日制 合計', quota: 1603, applicants: 175, rate: 0.11 },
 };
 
+/**
+ * 令和6年度（2024年度）: 同一資料シリーズの令和6年度版（別紙2・令和6年3月19日公表・
+ * テキスト層ありPDF・全2頁）を福島県公式サイトのR6年度入学者選抜ページから発見。
+ * 巻末サマリー表「全日制 合計」（後期選抜募集定員1,484・志願者数(出願先変更後)230）を
+ * 直接転記。倍率は資料に印字が無いため自前算出（230/1484=0.1550…→0.15、R7と同じ計算方針）。
+ * 前期選抜・連携型選抜・定時制課程はR7と同じ理由でスコープ外。
+ */
+const REIWA_6: YearSnapshot = {
+  fiscalYear: '令和6年度（2024年度）',
+  sourceUrl: 'https://www.pref.fukushima.lg.jp/uploaded/attachment/621430.pdf',
+  sourceTitle: '福島県教育委員会 令和6年度福島県立高等学校入学者選抜後期選抜志願状況（出願先変更後）について',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制 合計', quota: 1484, applicants: 230, rate: 0.15 },
+};
+
 export const FUKUSHIMA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'fukushima',
-  years: [REIWA_7],
+  years: [REIWA_7, REIWA_6],
 };
