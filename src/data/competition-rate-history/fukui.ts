@@ -44,7 +44,25 @@ const REIWA_6: YearSnapshot = {
   grandTotal: { label: '全日制 合計', quota: 3578, applicants: 3577, rate: 1.0 },
 };
 
+/**
+ * 令和5年度（2023年度）: ディレクトリ名がR6/R7とも異なる（"r5ittupan_d"）ため単純な年度桁
+ * 置換では404となり、教委の年度別ハブページ（r5ittupan.html）経由でR5henkou3.pdf（2月10日
+ * 変更最終日・全3頁）を特定（Read toolで直読み成功）。全日制「合計」行を直接転記: 一般選抜
+ * 募集人員(C)=3,606・変更後第一志望出願者数=3,694・変更後第一志望倍率=1.02
+ * （3694/3606=1.0244…≈1.02で整合）。定時制課程は他県と同じ理由でスコープ外。
+ */
+const REIWA_5: YearSnapshot = {
+  fiscalYear: '令和5年度（2023年度）',
+  sourceUrl: 'https://www.pref.fukui.lg.jp/doc/koukou/nyugaku/r5ittupan_d/fil/R5henkou3.pdf',
+  sourceTitle: '福井県教育委員会 令和5年度福井県立高等学校一般入学者選抜志願変更状況（2月10日変更最終日）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制 合計', quota: 3606, applicants: 3694, rate: 1.02 },
+};
+
 export const FUKUI_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'fukui',
-  years: [REIWA_7, REIWA_6],
+  years: [REIWA_7, REIWA_6, REIWA_5],
 };
