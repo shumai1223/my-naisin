@@ -57,7 +57,26 @@ const REIWA_5: YearSnapshot = {
   grandTotal: { label: '全日制総計', schoolCount: 53, quota: 6945, applicants: 7373, rate: 1.06 },
 };
 
+/**
+ * 令和4年度（2022年度）: 教委サイトの令和4年度入学者選抜ページ(ci600015405.htm)経由で
+ * WebSearchにより同一シリーズR4版一次PDF（001003798.pdf・令和4年3月4日発表・全5頁）を
+ * 発見・Read toolで全頁直読み成功。全日制課程「総計」行（入学定員10,880・後期選抜募集人数
+ * 7,149・志願者数7,693・志願倍率1.08）を転記（7693/7149=1.0761…≈1.08で印字済み値と整合）。
+ * 学校数53校（R5と同一）はWebSearchの独立要約（「53校120学科・コース」）でも確認済み。
+ * 定時制・通信制課程はR5/R6/R7と同じ理由でスコープ外。
+ */
+const REIWA_4: YearSnapshot = {
+  fiscalYear: '令和4年度（2022年度）',
+  sourceUrl: 'https://www.pref.mie.lg.jp/common/content/001003798.pdf',
+  sourceTitle: '三重県教育委員会 令和4年度三重県立高等学校後期選抜志願状況（最終）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制総計', schoolCount: 53, quota: 7149, applicants: 7693, rate: 1.08 },
+};
+
 export const MIE_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'mie',
-  years: [REIWA_7, REIWA_6, REIWA_5],
+  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4],
 };
