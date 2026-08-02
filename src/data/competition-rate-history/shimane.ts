@@ -26,7 +26,29 @@ const REIWA_7: YearSnapshot = {
   grandTotal: { label: '全日制 本校（35校＝県立34校＋市立1校）', quota: 3217, applicants: 2667, rate: 0.83 },
 };
 
+/**
+ * 令和6年度（2024年度）: R7と同一シリーズの一次PDF（01_R6ippansenbatu_henkougo.pdf・
+ * 令和6年2月14日17:00現在）をWebSearchで直接発見。全19頁規模の多段見出し表（Osaka型の誤読
+ * リスクに該当）のためRead toolでの直読み結果を単独採用せず、独立した二次ソース（リセモム
+ * 確定記事2024年2月16日発表）をWebSearch要約とWebFetch直接引用の2回で突合し、PDF内の
+ * 「全日制　計」（県立34校＋松江市立1校＝35校、R7の「本校35」と同一スコープ）行の印字値と
+ * 完全一致することを確認して採用: 一般選抜募集定員4,169・出願者数（志願変更後）3,481・
+ * 志願倍率0.83（3481/4169=0.8351…だが印字値0.83をそのまま採用）。
+ */
+const REIWA_6: YearSnapshot = {
+  fiscalYear: '令和6年度（2024年度）',
+  sourceUrl:
+    'https://www.pref.shimane.lg.jp/education/kyoiku/senbatsu/senbatsu_info/index.data/01_R6ippansenbatu_henkougo.pdf',
+  sourceTitle:
+    '島根県教育委員会 令和6年度島根県公立高等学校入学者選抜における一般選抜出願者数（志願変更後）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制 本校（35校＝県立34校＋市立1校）', quota: 4169, applicants: 3481, rate: 0.83 },
+};
+
 export const SHIMANE_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'shimane',
-  years: [REIWA_7],
+  years: [REIWA_7, REIWA_6],
 };
