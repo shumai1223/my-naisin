@@ -1,0 +1,35 @@
+import { TOKUSHIMA_COMPETITION_RATE_HISTORY } from '../tokushima';
+
+/**
+ * 徳島県 多年度アーカイブ（Λ-4）DoD検証: 令和7・令和6年度の一般選抜(全日制)合計の数値を
+ * リセモム記事（教委発表の引用）の固定値で確認する。
+ */
+describe('徳島県 多年度アーカイブ（Λ-4・令和7/令和6の2年度分・grand-total-only）', () => {
+  it('2年度分（令和7年度・令和6年度）を収録している', () => {
+    expect(TOKUSHIMA_COMPETITION_RATE_HISTORY.years).toHaveLength(2);
+    expect(TOKUSHIMA_COMPETITION_RATE_HISTORY.years.map((y) => y.fiscalYear)).toEqual([
+      '令和7年度（2025年度）',
+      '令和6年度（2024年度）',
+    ]);
+  });
+
+  it('全年度でcategoriesは空(学校別内訳は未収録と正直に記録)', () => {
+    for (const y of TOKUSHIMA_COMPETITION_RATE_HISTORY.years) {
+      expect(y.categories).toHaveLength(0);
+    }
+  });
+
+  it('令和7年度の合計は一次資料と一致する(募集人員4,102・志願者数4,062・倍率0.99)', () => {
+    const r7 = TOKUSHIMA_COMPETITION_RATE_HISTORY.years[0];
+    expect(r7.grandTotal.quota).toBe(4102);
+    expect(r7.grandTotal.applicants).toBe(4062);
+    expect(r7.grandTotal.rate).toBeCloseTo(0.99, 2);
+  });
+
+  it('令和6年度の合計は一次資料と一致する(募集人員4,211・志願者数4,232・倍率1.00)', () => {
+    const r6 = TOKUSHIMA_COMPETITION_RATE_HISTORY.years[1];
+    expect(r6.grandTotal.quota).toBe(4211);
+    expect(r6.grandTotal.applicants).toBe(4232);
+    expect(r6.grandTotal.rate).toBeCloseTo(1.0, 2);
+  });
+});
