@@ -27,7 +27,7 @@ import {
   yen,
 } from '@/lib/affiliate-economics';
 import { AFFILIATES, type AffiliateId } from '@/lib/affiliates';
-import { getParentFunnelReach, getParentFunnelShareByMedium } from '@/lib/parent-funnel-db';
+import { getParentFunnelReach, getParentFunnelShareByMedium, getParentFunnelRevisitBuckets } from '@/lib/parent-funnel-db';
 import { TrendChart } from '@/components/admin/TrendChart';
 import { STATS_METRICS, STATS_MIN_SAMPLE_SIZE, computeAggregate, type StatsMetric } from '@/lib/stats-aggregation';
 import { getStatsValues } from '@/lib/stats-db';
@@ -224,6 +224,7 @@ export default async function AdminReportPage({
     adoptionDomains,
     parentFunnelReach,
     parentFunnelShareByMedium,
+    parentFunnelRevisitBuckets,
   ] = await Promise.all([
     getClickSummary(days, to),
     getClickTrend(trendDays, trendView, to),
@@ -241,6 +242,7 @@ export default async function AdminReportPage({
     getAdoptionDomainSummary(days),
     getParentFunnelReach(days),
     getParentFunnelShareByMedium(days),
+    getParentFunnelRevisitBuckets(days),
   ]);
 
   // 匿名統計（S-1）の収集状況：件数のみ（k-匿名性のため集計値そのものはここでは出さない）。
@@ -648,6 +650,29 @@ export default async function AdminReportPage({
                   {m.medium}: {m.count.toLocaleString('ja-JP')}
                 </span>
               ))}
+            </div>
+          )}
+
+          {/* TIER Σ-5（2026-08-02）: 送信から着地までの経過時間分布。「親はあとで見る」を前提に、
+              即時CVだけ見ていると保護者導線の価値を過小評価するため、遅延着地も可視化する。
+              sentAtの無い古い共有リンク経由の着地はここに含まれない（hours_since_sent IS NOT NULLのみ集計）。 */}
+          {parentFunnelRevisitBuckets.length > 0 && (
+            <div className="mt-3">
+              <div className="text-[11px] font-bold text-slate-500">送信→着地の経過時間分布（②の内訳）</div>
+              <div className="mt-1 flex flex-wrap gap-2">
+                {parentFunnelRevisitBuckets.map((b) => (
+                  <span
+                    key={b.bucket}
+                    className={`rounded-full border px-2.5 py-1 text-[11px] font-semibold ${
+                      b.bucket === '24-72時間' || b.bucket === '72時間以上'
+                        ? 'border-indigo-200 bg-indigo-50 text-indigo-700'
+                        : 'border-slate-200 bg-slate-50 text-slate-600'
+                    }`}
+                  >
+                    {b.bucket}: {b.count.toLocaleString('ja-JP')}
+                  </span>
+                ))}
+              </div>
             </div>
           )}
           <p className="mt-2 text-[11px] leading-relaxed text-slate-400">

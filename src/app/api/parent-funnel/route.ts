@@ -68,7 +68,7 @@ export async function POST(request: NextRequest) {
     return new NextResponse(null, { status: 400 });
   }
 
-  const { event, medium, prefectureCode } = (body ?? {}) as Record<string, unknown>;
+  const { event, medium, prefectureCode, hoursSinceSent } = (body ?? {}) as Record<string, unknown>;
   if (typeof event !== 'string' || !VALID_EVENTS.has(event as ParentFunnelEvent)) {
     return new NextResponse(null, { status: 400 });
   }
@@ -78,12 +78,20 @@ export async function POST(request: NextRequest) {
   if (prefectureCode !== undefined && typeof prefectureCode !== 'string') {
     return new NextResponse(null, { status: 400 });
   }
+  // TIER Σ-5: 送信から着地までの経過時間（時間）。異常値（負・非有限・数万時間超）は素通しせず弾く。
+  if (
+    hoursSinceSent !== undefined &&
+    (typeof hoursSinceSent !== 'number' || !Number.isFinite(hoursSinceSent) || hoursSinceSent < 0 || hoursSinceSent > 8760)
+  ) {
+    return new NextResponse(null, { status: 400 });
+  }
 
   try {
     await persistParentFunnelEvent({
       event: event as ParentFunnelEvent,
       medium: medium as ParentFunnelMedium | undefined,
       prefectureCode: prefectureCode as string | undefined,
+      hoursSinceSent: hoursSinceSent as number | undefined,
     });
   } catch {
     /* no-op：計測はベストエフォート */

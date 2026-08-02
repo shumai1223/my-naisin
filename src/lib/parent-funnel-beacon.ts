@@ -7,7 +7,7 @@ import type { ParentFunnelEvent, ParentFunnelMedium } from '@/lib/parent-funnel-
  */
 export function beaconParentFunnelEvent(
   event: ParentFunnelEvent,
-  opts: { medium?: ParentFunnelMedium; prefectureCode?: string } = {}
+  opts: { medium?: ParentFunnelMedium; prefectureCode?: string; hoursSinceSent?: number } = {}
 ): void {
   try {
     fetch('/api/parent-funnel', {

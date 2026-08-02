@@ -112,7 +112,7 @@ export function ParentShareLinkButton({
 
   const onShare = React.useCallback(async () => {
     const origin = typeof window !== 'undefined' ? window.location.origin : 'https://my-naishin.com';
-    const url = buildParentShareUrl(origin, ctx);
+    const url = buildParentShareUrl(origin, { ...ctx, sentAt: Date.now() });
     const text = buildParentShareMessage(ctx, shareFrame);
 
     // ZZ-5b：Web Share API自体はどのアプリが選ばれたかを教えないため、'native'は
@@ -162,7 +162,7 @@ export function ParentShareLinkButton({
   // medium('line'/'x')を正確に計測できる（共有率の面別分解の精度を上げる導線）。
   const onShareLine = React.useCallback(() => {
     const origin = typeof window !== 'undefined' ? window.location.origin : 'https://my-naishin.com';
-    const url = buildParentShareUrl(origin, ctx);
+    const url = buildParentShareUrl(origin, { ...ctx, sentAt: Date.now() });
     const text = buildParentShareMessage(ctx, shareFrame);
     track(EVENTS.SHARE_TO_PARENT, {
       pref: ctx.prefectureCode ?? 'none',
@@ -179,7 +179,7 @@ export function ParentShareLinkButton({
 
   const onShareX = React.useCallback(() => {
     const origin = typeof window !== 'undefined' ? window.location.origin : 'https://my-naishin.com';
-    const url = buildParentShareUrl(origin, ctx);
+    const url = buildParentShareUrl(origin, { ...ctx, sentAt: Date.now() });
     const text = buildParentShareMessage(ctx, shareFrame);
     track(EVENTS.SHARE_TO_PARENT, {
       pref: ctx.prefectureCode ?? 'none',
@@ -204,7 +204,7 @@ export function ParentShareLinkButton({
       return;
     }
     const origin = typeof window !== 'undefined' ? window.location.origin : 'https://my-naishin.com';
-    const targetUrl = buildParentShareUrl(origin, ctx);
+    const targetUrl = buildParentShareUrl(origin, { ...ctx, sentAt: Date.now() });
     qrToDataURL(targetUrl, { width: 200, margin: 1 })
       .then((dataUrl) => setQrUrl(dataUrl))
       .catch(() => setQrUrl(null));

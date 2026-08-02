@@ -36,6 +36,12 @@ export interface ParentShareContext {
   percentile?: number | null;
   /** percentileの集計範囲。'prefecture'（県内）を優先し、無ければ'national'（全国）。 */
   percentileScope?: 'prefecture' | 'national' | null;
+  /**
+   * 送信時刻（unix ms・TIER Σ-5）。生徒が「送る」を押した瞬間の Date.now() を呼び出し側が埋める
+   * （本関数群自体はDate非依存の純関数のまま維持するため、時刻の取得は副作用のある呼び出し元の責務）。
+   * 保護者が「あとで見る」場合の遅延着地（送信から24-72時間後の再訪等）をD1で追うために使う。
+   */
+  sentAt?: number | null;
 }
 
 function isNum(v: number | null | undefined): v is number {
@@ -76,6 +82,10 @@ function bytesToUtf8(bytes: Uint8Array): string {
   return Buffer.from(bytes).toString('utf8');
 }
 
+/** sentAt（unix ms）の妥当範囲。2020-01-01〜2035-01-01の外は壊れた/悪意ある値として捨てる。 */
+const SENT_AT_MIN_MS = 1_577_836_800_000; // 2020-01-01T00:00:00Z
+const SENT_AT_MAX_MS = 2_051_222_400_000; // 2035-01-01T00:00:00Z
+
 /** 共有文脈を base64url のJSONに畳む（?d= 用）。 */
 export function encodeSharePayload(ctx: ParentShareContext): string {
   const obj: Record<string, string | number> = {
@@ -93,6 +103,7 @@ export function encodeSharePayload(ctx: ParentShareContext): string {
   if (ctx.percentileScope === 'prefecture' || ctx.percentileScope === 'national') {
     obj.ps = ctx.percentileScope === 'prefecture' ? 'p' : 'n';
   }
+  if (isNum(ctx.sentAt)) obj.sa = Math.round(ctx.sentAt);
   return bytesToBase64Url(utf8ToBytes(JSON.stringify(obj)));
 }
 
@@ -123,6 +134,7 @@ export function decodeSharePayload(d: string | undefined): ParsedParentShare | n
       metricLabel: str(o.ml)?.slice(0, 16),
       percentile: clampInt(o.pc, 0, 100),
       percentileScope: o.ps === 'p' ? 'prefecture' : o.ps === 'n' ? 'national' : undefined,
+      sentAt: clampInt(o.sa, SENT_AT_MIN_MS, SENT_AT_MAX_MS),
     };
   } catch {
     return null;
@@ -149,6 +161,7 @@ export function buildParentSharePath(ctx: Omit<ParentShareContext, 'max'> & { ma
   if (ctx.metricLabel) q.set('ml', ctx.metricLabel);
   if (isNum(ctx.percentile)) q.set('pc', String(Math.round(ctx.percentile)));
   if (ctx.percentileScope === 'prefecture' || ctx.percentileScope === 'national') q.set('ps', ctx.percentileScope === 'prefecture' ? 'p' : 'n');
+  if (isNum(ctx.sentAt)) q.set('ts', String(Math.round(ctx.sentAt)));
   return `/hogosha?${q.toString()}`;
 }
 
@@ -210,6 +223,8 @@ export interface ParsedParentShare {
   metricLabel?: string;
   percentile?: number;
   percentileScope?: 'prefecture' | 'national';
+  /** 送信時刻（unix ms・TIER Σ-5）。着地時に経過時間を計算し遅延着地を捕捉するために使う。 */
+  sentAt?: number;
 }
 
 type RawParams = Record<string, string | string[] | undefined>;
@@ -258,5 +273,6 @@ export function parseParentShare(params: RawParams): ParsedParentShare {
       firstStr(params.ps) === 'p' ? 'prefecture' : firstStr(params.ps) === 'n' ? 'national' : undefined,
       decoded?.percentileScope
     ),
+    sentAt: pick(safeInt(params.ts, SENT_AT_MIN_MS, SENT_AT_MAX_MS), decoded?.sentAt),
   };
 }

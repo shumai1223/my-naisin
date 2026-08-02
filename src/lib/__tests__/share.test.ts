@@ -60,6 +60,25 @@ describe('buildParentSharePath / Url', () => {
     expect(q.has('pc')).toBe(false);
     expect(q.has('ps')).toBe(false);
   });
+
+  test('sentAt（TIER Σ-5）をtsクエリに載せる', () => {
+    const path = buildParentSharePath({ score: 40, max: 65, sentAt: 1_700_000_000_000 });
+    const q = new URLSearchParams(path.split('?')[1]);
+    expect(q.get('ts')).toBe('1700000000000');
+  });
+
+  test('sentAt未指定ならtsを載せない', () => {
+    const path = buildParentSharePath({ score: 40, max: 65 });
+    const q = new URLSearchParams(path.split('?')[1]);
+    expect(q.has('ts')).toBe(false);
+  });
+
+  test('maxを省略できる（満点の無い指標向け・NaNを紛れ込ませない）', () => {
+    const path = buildParentSharePath({ score: 68 });
+    const q = new URLSearchParams(path.split('?')[1]);
+    expect(q.get('score')).toBe('68');
+    expect(q.has('max')).toBe(false);
+  });
 });
 
 describe('buildParentShareMessage', () => {
@@ -157,6 +176,17 @@ describe('encode/decodeSharePayload（?d= compact・UTF-8安全・壊れた入�
     expect(dec?.percentileScope).toBeUndefined();
   });
 
+  test('sentAt（TIER Σ-5）をroundtripできる', () => {
+    const enc = encodeSharePayload({ score: 40, max: 65, sentAt: 1_700_000_000_000 });
+    const dec = decodeSharePayload(enc);
+    expect(dec?.sentAt).toBe(1_700_000_000_000);
+  });
+
+  test('妥当範囲外のsentAtは範囲内にクランプする（他フィールドと同じ既定動作・壊れた/悪意ある入力の保険）', () => {
+    const enc = encodeSharePayload({ score: 40, max: 65, sentAt: 1 }); // 1970年付近=妥当範囲外
+    expect(decodeSharePayload(enc)?.sentAt).toBe(1_577_836_800_000); // SENT_AT_MIN_MSにクランプ
+  });
+
   test('parseParentShare は ?d= を復元し、個別クエリが上書きする', () => {
     const d = encodeSharePayload({ prefectureCode: 'hyogo', score: 30, max: 45, grade: 2 });
     const p = parseParentShare({ d });
@@ -196,6 +226,16 @@ describe('parseParentShare（受け手＝保護者ページ側・外部入力を
       gap: 4,
       label: '日比谷の目安',
     });
+  });
+
+  test('ts（sentAt・TIER Σ-5）を復元する', () => {
+    const p = parseParentShare({ from: 'share', score: '58', ts: '1700000000000' });
+    expect(p.sentAt).toBe(1700000000000);
+  });
+
+  test('tsが非数値ならsentAtは無視され、範囲外の数値はクランプされる', () => {
+    expect(parseParentShare({ from: 'share', score: '58', ts: 'abc' }).sentAt).toBeUndefined();
+    expect(parseParentShare({ from: 'share', score: '58', ts: '1' }).sentAt).toBe(1_577_836_800_000);
   });
 
   test('範囲外・非数値・配列はクランプ/無視（信頼の堀）', () => {

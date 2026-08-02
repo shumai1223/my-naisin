@@ -50,6 +50,12 @@ export interface ParentFunnelEventInput {
   /** share_to_parentのみ意味を持つ。省略可。 */
   medium?: ParentFunnelMedium;
   prefectureCode?: string;
+  /**
+   * 送信(share_to_parent)から着地(parent_landing_view)までの経過時間（時間・整数・TIER Σ-5）。
+   * 共有リンクにsentAtが埋め込まれていた場合のみ算出できる（無ければ省略）。「親はあとで見る」を
+   * 前提に、即時CVだけでなく24-72時間後等の遅延着地をD1で可視化するための列。
+   */
+  hoursSinceSent?: number;
 }
 
 function s(v: string | undefined, max: number): string | undefined {
@@ -65,12 +71,16 @@ export async function persistParentFunnelEvent(input: ParentFunnelEventInput): P
   try {
     const db = await getDb();
     if (!db) return false;
+    const hours =
+      typeof input.hoursSinceSent === 'number' && Number.isFinite(input.hoursSinceSent)
+        ? Math.max(0, Math.round(input.hoursSinceSent))
+        : null;
     await db
       .prepare(
-        `INSERT INTO parent_funnel_events (event, medium, prefecture_code, created_at)
-         VALUES (?, ?, ?, datetime('now'))`
+        `INSERT INTO parent_funnel_events (event, medium, prefecture_code, hours_since_sent, created_at)
+         VALUES (?, ?, ?, ?, datetime('now'))`
       )
-      .bind(input.event, s(input.medium, 20) ?? null, s(input.prefectureCode, 40) ?? null)
+      .bind(input.event, s(input.medium, 20) ?? null, s(input.prefectureCode, 40) ?? null, hours)
       .run();
     return true;
   } catch (err) {
@@ -128,6 +138,51 @@ export async function getParentFunnelShareByMedium(
     return results ?? [];
   } catch (err) {
     console.error('getParentFunnelShareByMedium skipped:', err instanceof Error ? err.message : err);
+    return [];
+  }
+}
+
+/** 送信から着地までの経過時間バケット（TIER Σ-5）。 */
+export type HoursSinceSentBucket = '1h未満' | '1-24時間' | '24-72時間' | '72時間以上';
+
+/** 純粋関数：経過時間（時間）をバケットに分類する。負値は0扱い（不正値の保険）。 */
+export function bucketHoursSinceSent(hours: number): HoursSinceSentBucket {
+  const h = Math.max(0, hours);
+  if (h < 1) return '1h未満';
+  if (h < 24) return '1-24時間';
+  if (h < 72) return '24-72時間';
+  return '72時間以上';
+}
+
+/**
+ * 直近N日のparent_landing_viewをsentAtからの経過時間バケット別に分解する（TIER Σ-5）。
+ * hours_since_sentが記録されている行のみが対象（sentAtの無い古い共有リンク経由の着地は含まれない）。
+ * 「即時CVだけ見ていると保護者導線の価値を過小評価する」という診断に対する直接の計器。
+ */
+export async function getParentFunnelRevisitBuckets(
+  days = 30
+): Promise<{ bucket: HoursSinceSentBucket; count: number }[]> {
+  try {
+    const db = await getDb();
+    if (!db) return [];
+    const since = Math.max(1, Math.min(365, Math.round(days)));
+    const { results } = await db
+      .prepare(
+        `SELECT hours_since_sent
+         FROM parent_funnel_events
+         WHERE event = 'parent_landing_view' AND hours_since_sent IS NOT NULL AND created_at >= datetime('now', ?)`
+      )
+      .bind(`-${since} days`)
+      .all<{ hours_since_sent: number }>();
+    const counts = new Map<HoursSinceSentBucket, number>();
+    for (const row of results ?? []) {
+      const bucket = bucketHoursSinceSent(row.hours_since_sent);
+      counts.set(bucket, (counts.get(bucket) ?? 0) + 1);
+    }
+    const order: HoursSinceSentBucket[] = ['1h未満', '1-24時間', '24-72時間', '72時間以上'];
+    return order.filter((b) => counts.has(b)).map((bucket) => ({ bucket, count: counts.get(bucket) as number }));
+  } catch (err) {
+    console.error('getParentFunnelRevisitBuckets skipped:', err instanceof Error ? err.message : err);
     return [];
   }
 }

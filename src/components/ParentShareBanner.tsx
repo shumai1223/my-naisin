@@ -23,6 +23,11 @@ import { parseParentShare, encodeSharePayload } from '@/lib/share';
  * コンポーネントは描画していなかった＝送り手側（SaveResultCTA経由）で計測済みのk-匿名性ガード後の
  * 実測値をそのまま転記するだけで新たな計算はしない・捏造ゼロ）。値が無い（未計測/n不足）ときは
  * セクションごと出さない。
+ *
+ * TIER Σ-5（2026-08-02）: 「親はあとで見る」を前提に、送信(sentAt)から着地までの経過時間を
+ * D1へ記録する（即時CVだけ見ていると保護者導線の価値を過小評価するため）。sentAtは共有リンク生成時
+ * （ParentShareLinkButton/ParentShareInvite）にDate.now()で埋め込まれる。古い共有リンク（sentAt無し）
+ * は経過時間なしでイベントのみ記録する（後方互換）。
  */
 export function ParentShareBanner() {
   const sp = useSearchParams();
@@ -37,13 +42,16 @@ export function ParentShareBanner() {
 
   React.useEffect(() => {
     if (!share.isShare) return;
+    const hoursSinceSent =
+      typeof share.sentAt === 'number' ? Math.max(0, (Date.now() - share.sentAt) / 3_600_000) : undefined;
     track(EVENTS.PARENT_LANDING_VIEW, {
       pref: share.prefectureCode ?? 'none',
       metric: share.metricLabel ?? '内申点',
       has_target: typeof share.target === 'number',
       ...(typeof share.gap === 'number' ? { gap: share.gap } : {}),
+      ...(hoursSinceSent !== undefined ? { hours_since_sent: Math.round(hoursSinceSent) } : {}),
     });
-    beaconParentFunnelEvent('parent_landing_view', { prefectureCode: share.prefectureCode });
+    beaconParentFunnelEvent('parent_landing_view', { prefectureCode: share.prefectureCode, hoursSinceSent });
     // 着地時点で一度だけ。share は query 由来で実質不変なので二重発火しない。
   }, [share]);
 

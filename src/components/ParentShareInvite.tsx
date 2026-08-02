@@ -69,7 +69,7 @@ export function ParentShareInvite({
     });
     beaconParentFunnelEvent('share_to_parent', { medium, prefectureCode: shareCtx.prefectureCode });
     const origin = typeof window !== 'undefined' ? window.location.origin : 'https://my-naishin.com';
-    const url = buildParentShareUrl(origin, shareCtx);
+    const url = buildParentShareUrl(origin, { ...shareCtx, sentAt: Date.now() });
     const text = buildParentShareMessage(shareCtx, shareFrame);
     if (typeof navigator !== 'undefined' && typeof navigator.share === 'function') {
       try {
