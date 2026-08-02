@@ -41,7 +41,24 @@ const REIWA_6: YearSnapshot = {
   grandTotal: { label: '全日制計', quota: 17040, applicants: 16742, rate: 0.98 },
 };
 
+/**
+ * 令和5年度（2023年度）: 教委の年度別記事ページ(post-24145)から同一資料シリーズのR5版を発見
+ * （全5頁・Read toolで直読み成功）。R6/R7と同じ「全日制計」行を直接転記（募集定員17,443・
+ * 志願者数17,246・倍率0.99・17246/17443=0.9887…≈0.99で印字済み値と整合）。「全日制総計」
+ * （附属中学校からの入学予定者267名を外数加算した17,710／17,513）はR6/R7と同じ理由で不採用。
+ */
+const REIWA_5: YearSnapshot = {
+  fiscalYear: '令和5年度（2023年度）',
+  sourceUrl: 'https://kyoiku.pref.ibaraki.jp/wp-content/uploads/2023/04/d9dec4444017129c95ed8f3cdd9062e4.pdf',
+  sourceTitle: '茨城県教育委員会 令和5年度茨城県立高等学校第1学年入学志願者数等（志願先変更後）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制計', quota: 17443, applicants: 17246, rate: 0.99 },
+};
+
 export const IBARAKI_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'ibaraki',
-  years: [REIWA_7, REIWA_6],
+  years: [REIWA_7, REIWA_6, REIWA_5],
 };
