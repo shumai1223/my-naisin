@@ -24,7 +24,24 @@ const REIWA_7: YearSnapshot = {
   grandTotal: { label: '合計', quota: 8590, applicants: 7898, rate: 0.92 },
 };
 
+/**
+ * 令和6年度（2024年度）: 同一URL体系（/koukou/nyuusi/r06nyuusi/r06isi_ato/atozenniti.pdf）で
+ * R6版に直接アクセスできた（R7と異なりURLの年度桁単純置換で404にならなかった）。末尾の
+ * 「合計」行を直接転記: 定員(A)8,765・入学志願者数(B)7,619・倍率(B/A)0.87
+ * （7619/8765=0.8693…≈0.87で整合）。定時制課程は他県と同じ理由でスコープ外。
+ */
+const REIWA_6: YearSnapshot = {
+  fiscalYear: '令和6年度（2024年度）',
+  sourceUrl: 'https://ehime-c.esnet.ed.jp/koukou/nyuusi/r06nyuusi/r06isi_ato/atozenniti.pdf',
+  sourceTitle: '愛媛県教育委員会 令和6年度県立高等学校学科別入学志願者数（全日制）（志願変更後）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '合計', quota: 8765, applicants: 7619, rate: 0.87 },
+};
+
 export const EHIME_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'ehime',
-  years: [REIWA_7],
+  years: [REIWA_7, REIWA_6],
 };
