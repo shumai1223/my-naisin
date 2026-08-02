@@ -25,7 +25,27 @@ const REIWA_7: YearSnapshot = {
   grandTotal: { label: '合計（59校113学科）', quota: 8382, applicants: 6684, rate: 0.8 },
 };
 
+/**
+ * 令和6年度（2024年度）: 同一資料シリーズの令和6年度版（令和6年2月21日発表・全4頁＜全日制
+ * ＋定時制＞・テキスト埋め込み型PDF）をWebSearch経由で直接発見（URL末尾が"tyouseigo"で
+ * R7の"tyoseigo"と1文字違いの表記揺れ、既存Y-6の罠と同型）。全日制「合計」行（61校117学科・
+ * 学系・コース）を直接転記: 実質定員(quota)=7,862・調整後志願者数(applicants)=6,281・
+ * 実質志願倍率(rate)=0.80（印字済み値をそのまま採用・6281/7862=0.7989…≈0.80で整合）。
+ * 定時制課程はR7と同じ理由でスコープ外。
+ */
+const REIWA_6: YearSnapshot = {
+  fiscalYear: '令和6年度（2024年度）',
+  sourceUrl:
+    'https://www.pref.iwate.jp/_res/projects/default_project/_page_/001/071/366/r6_ippan_sigansya_tyouseigo.pdf',
+  sourceTitle: '岩手県教育委員会 令和6年度岩手県立高等学校入学者選抜 志願者数一覧表（調整後）＜全日制＞',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '合計（61校117学科）', quota: 7862, applicants: 6281, rate: 0.8 },
+};
+
 export const IWATE_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'iwate',
-  years: [REIWA_7],
+  years: [REIWA_7, REIWA_6],
 };
