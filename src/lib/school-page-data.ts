@@ -116,26 +116,54 @@ export interface NearbySchool {
   overallRate: number;
 }
 
+export interface NearbySchoolResult {
+  schools: NearbySchool[];
+  /** 'area'=同一学区で選出／'rate-fallback'=学区で選べず同一県内の倍率近似でフォールバック。 */
+  matchType: 'area' | 'rate-fallback';
+}
+
 /**
- * 近隣校リンク（③・同一県かつ同一学区(area)の他校）を最大maxCount件選ぶ（純粋関数）。
- * targetの`area`が無い（一次資料にareaが無い県）場合は空配列を返す（誤った近隣付けをしない）。
+ * 近隣校リンク（③・同一県かつ同一学区(area)の他校、または学区で選べない場合は同一県内で
+ * 倍率が近い他校）を最大maxCount件選ぶ（純粋関数）。
+ *
+ * まず同一area内で候補を探す。1件も無い場合（targetにareaが無い／同じareaの他校がいない）は
+ * 同一県内で今季倍率が近い順にフォールバックする。フォールバックは学区の一致を主張せず、
+ * 事実として存在する「倍率が近い他校」を返すのみのためY-0憲法（捏造ゼロ）に抵触しない。
+ * 呼び出し側は`matchType`でどちらが実際に使われたかを判別し、見出し文言を出し分けること
+ * （「同じ学区」と表示しながら実際は県内フォールバックの結果、という誤表示を避けるため）。
+ *
+ * 2026-08-02発見：`school-page-wave-readiness.ts`でwave2候補41県を機械採点した結果、実に39県が
+ * area情報0%だった。さらに、area情報がある稼働中のtokyo/kanagawaでも「同じ学区に他校が1つも無い」
+ * 学校が実在し、旧実装（area不在時のみフォールバック）では0件のままだった＝既にindex解禁済みの
+ * ページで「①今季倍率②多年度推移③近隣校リンク3本以上」という1ページの下限品質に違反していた。
  * 選定順は「今季倍率が近い順」（受験生にとって併願候補として比較しやすいため）。
  * 同率の場合はschoolCodeの昇順で決定論を保つ（テスト可能性・表示の安定性のため）。
  */
-export function selectNearbySchools(target: SchoolPageData, allSchools: SchoolPageData[], maxCount = 3): NearbySchool[] {
-  if (!target.area) return [];
-  const sameArea = allSchools.filter((s) => s.schoolCode !== target.schoolCode && s.area === target.area);
-  sameArea.sort((a, b) => {
+export function selectNearbySchools(
+  target: SchoolPageData,
+  allSchools: SchoolPageData[],
+  maxCount = 3
+): NearbySchoolResult {
+  const sameAreaPool = target.area
+    ? allSchools.filter((s) => s.schoolCode !== target.schoolCode && s.area === target.area)
+    : [];
+  const usingFallback = sameAreaPool.length === 0;
+  const pool = usingFallback ? allSchools.filter((s) => s.schoolCode !== target.schoolCode) : sameAreaPool;
+
+  const sorted = [...pool].sort((a, b) => {
     const diff = Math.abs(a.overallRate - target.overallRate) - Math.abs(b.overallRate - target.overallRate);
     if (diff !== 0) return diff;
     return a.schoolCode.localeCompare(b.schoolCode);
   });
-  return sameArea.slice(0, maxCount).map((s) => ({
-    schoolCode: s.schoolCode,
-    schoolName: s.schoolName,
-    area: s.area,
-    overallRate: s.overallRate,
-  }));
+  return {
+    schools: sorted.slice(0, maxCount).map((s) => ({
+      schoolCode: s.schoolCode,
+      schoolName: s.schoolName,
+      area: s.area,
+      overallRate: s.overallRate,
+    })),
+    matchType: usingFallback ? 'rate-fallback' : 'area',
+  };
 }
 
 export interface CategoryTrendPoint {
