@@ -2,6 +2,7 @@
  * 埼玉県 多年度アーカイブ（Λ-4・41県目）。
  *
  * 一次ソース: 埼玉県教育委員会「埼玉県公立高等学校における入学志願（確定）者数」全日制。
+ * 令和6年度: https://www.pref.saitama.lg.jp/documents/222625/r6nyuushikakuteisyasu.pdf（2026-08-03追加）
  * 令和7年度: https://www.pref.saitama.lg.jp/documents/241544/r7shigansha0220.pdf
  * 令和8年度: https://www.pref.saitama.lg.jp/documents/268192/r802101430shigansha.pdf
  *
@@ -27,6 +28,46 @@
  * 正直な転記であり、集計上の矛盾ではない。
  */
 import type { PrefectureRateHistoryFile, YearSnapshot } from '@/lib/competition-rate-history';
+
+/**
+ * 令和6年度（2024年度）: 埼玉県教育委員会「令和6年度埼玉県公立高等学校における入学志願確定者数」
+ * （報道発表ページ https://www.pref.saitama.lg.jp/f2208/r6nyuushi-jouhou.html から直接リンクされる
+ * 学科別詳細PDF・全9ページ・2026-08-03取得）。各学科区分の「計」行（入学許可予定者数A・
+ * 志願確定者数B・倍率B÷A）をそのまま転記。令和7・8年度と異なり「情報科」区分はまだ存在しない
+ * （令和8年度に新設・saitama.ts冒頭コメント参照）。区分合計の積み上げ（quota 35,130・
+ * applicants 39,414）が「全日制 普通・専門・総合学科計」行と完全一致することを手計算でも
+ * 確認済み（__tests__/saitama.test.ts のcheckYearTotalで機械的にも検証）。
+ */
+const REIWA_6: YearSnapshot = {
+  fiscalYear: '令和6年度（2024年度）',
+  sourceUrl: 'https://www.pref.saitama.lg.jp/documents/222625/r6nyuushikakuteisyasu.pdf',
+  sourceTitle: '埼玉県教育委員会 令和6年度埼玉県公立高等学校における入学志願確定者数（全日制）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'category-detail',
+  categories: [
+    { label: '普通科計', quota: 26007, applicants: 30146, rate: 1.16 },
+    { label: '農業科計', quota: 795, applicants: 753, rate: 0.95 },
+    { label: '工業科計', quota: 2382, applicants: 2124, rate: 0.89 },
+    { label: '商業科計', quota: 2285, applicants: 2406, rate: 1.05 },
+    { label: '家庭科計', quota: 319, applicants: 310, rate: 0.97 },
+    { label: '看護科計', quota: 80, applicants: 91, rate: 1.14 },
+    { label: '外国語科計', quota: 319, applicants: 427, rate: 1.34 },
+    { label: '美術科計', quota: 120, applicants: 155, rate: 1.29 },
+    { label: '音楽科計', quota: 120, applicants: 91, rate: 0.76 },
+    { label: '書道科計', quota: 40, applicants: 41, rate: 1.03 },
+    { label: '体育科計', quota: 160, applicants: 158, rate: 0.99 },
+    { label: '理数科計', quota: 280, applicants: 479, rate: 1.71 },
+    { label: '福祉科計', quota: 80, applicants: 34, rate: 0.43 },
+    { label: '人文科計', quota: 40, applicants: 47, rate: 1.18 },
+    { label: '国際文化科計', quota: 40, applicants: 60, rate: 1.50 },
+    { label: '映像芸術科計', quota: 40, applicants: 50, rate: 1.25 },
+    { label: '舞台芸術科計', quota: 40, applicants: 30, rate: 0.75 },
+    { label: '生物系・環境系計', quota: 238, applicants: 259, rate: 1.09 },
+    { label: '総合学科計', quota: 1745, applicants: 1753, rate: 1.00 },
+  ],
+  grandTotal: { label: '全日制 普通・専門・総合学科計', quota: 35130, applicants: 39414, rate: 1.12 },
+};
 
 const REIWA_7: YearSnapshot = {
   fiscalYear: '令和7年度（2025年度）',
@@ -93,5 +134,5 @@ const REIWA_8: YearSnapshot = {
 
 export const SAITAMA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'saitama',
-  years: [REIWA_7, REIWA_8],
+  years: [REIWA_6, REIWA_7, REIWA_8],
 };

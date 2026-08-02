@@ -7,10 +7,11 @@ import { SAITAMA_COMPETITION_RATE_HISTORY } from '../saitama';
  * 機械的に突合する。埼玉県は当初、募集人員相当の公表値(入学許可予定者数)が見つからず
  * 見送っていたが、県公式サイトの学校別入学志願確定者数PDFから解決できた（2026-07-31）。
  */
-describe('埼玉県 多年度アーカイブ（Λ-4・41県目・令和7〜令和8の2年度分）', () => {
-  it('2年度分（令和7・令和8年度）を収録している', () => {
-    expect(SAITAMA_COMPETITION_RATE_HISTORY.years).toHaveLength(2);
+describe('埼玉県 多年度アーカイブ（Λ-4・41県目・令和6〜令和8の3年度分）', () => {
+  it('3年度分（令和6・7・8年度）を収録している', () => {
+    expect(SAITAMA_COMPETITION_RATE_HISTORY.years).toHaveLength(3);
     expect(SAITAMA_COMPETITION_RATE_HISTORY.years.map((y) => y.fiscalYear)).toEqual([
+      '令和6年度（2024年度）',
       '令和7年度（2025年度）',
       '令和8年度（2026年度）',
     ]);
@@ -24,9 +25,15 @@ describe('埼玉県 多年度アーカイブ（Λ-4・41県目・令和7〜令�
   });
 
   it('令和7年度の全日制合計は報道発表値(志願確定者数38,587人・倍率1.10倍)と一致する', () => {
-    const r7 = SAITAMA_COMPETITION_RATE_HISTORY.years[0];
+    const r7 = SAITAMA_COMPETITION_RATE_HISTORY.years.find((y) => y.fiscalYear === '令和7年度（2025年度）')!;
     expect(r7.grandTotal.applicants).toBe(38587);
     expect(r7.grandTotal.rate).toBeCloseTo(1.1, 2);
+  });
+
+  it('令和6年度の全日制合計は報道発表値(志願確定者数39,414人・倍率1.12倍)と一致する', () => {
+    const r6 = SAITAMA_COMPETITION_RATE_HISTORY.years.find((y) => y.fiscalYear === '令和6年度（2024年度）')!;
+    expect(r6.grandTotal.applicants).toBe(39414);
+    expect(r6.grandTotal.rate).toBeCloseTo(1.12, 2);
   });
 
   it.each(SAITAMA_COMPETITION_RATE_HISTORY.years)('$fiscalYear: 普通科計を除いた専門学科15区分+総合学科の合計が専門学科計+総合学科計と一致する', (snapshot) => {
