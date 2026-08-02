@@ -1,7 +1,7 @@
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { CtaViewTracker } from '@/components/Affiliate/CtaViewTracker';
-import type { AffiliateId } from '@/lib/affiliates';
-import { selectLeadOffer, selectSecondaryLeadOffer, type LeadPlacement } from '@/lib/lead-config';
+import { isLiveAffiliate, type AffiliateId } from '@/lib/affiliates';
+import { programPreset, selectLeadOffer, selectSecondaryLeadOffer, type LeadPlacement } from '@/lib/lead-config';
 import { ShieldCheck, FileText, Plus } from 'lucide-react';
 
 interface ParentLeadCTAProps {
@@ -24,6 +24,10 @@ interface ParentLeadCTAProps {
   placement?: LeadPlacement;
   /** A/Bバリアント（ParentLeadCTAExperiment経由のとき）。cta_view/affiliate_clickに載せてGA4で勝敗分解する（S-6）。 */
   variant?: string;
+  /** 副オファーの送客先を明示指定（副オファー専用A/B用）。未指定なら面ごとの既定値（PLACEMENT_SECONDARY_OFFER）を使う。 */
+  secondaryAffiliateId?: AffiliateId;
+  /** 副オファーのA/Bバリアント。副オファーのAffiliateAdにdata-variantとして載せ、affiliate_clickの勝敗分解に使う。 */
+  secondaryVariant?: string;
 }
 
 /**
@@ -33,7 +37,7 @@ interface ParentLeadCTAProps {
  * 「契約の意思決定者＝保護者」に向けて、無料資料請求（高単価リード）へ誘導する。
  * 実リンク・トラッキング・rel/PR表記は AffiliateAd に集約してコンプラを担保。
  */
-export function ParentLeadCTA({ heading, body, className = '', auditHide = false, affiliateId, note, ctaText, prefectureCode, placement, variant }: ParentLeadCTAProps) {
+export function ParentLeadCTA({ heading, body, className = '', auditHide = false, affiliateId, note, ctaText, prefectureCode, placement, variant, secondaryAffiliateId, secondaryVariant }: ParentLeadCTAProps) {
   // AdSense撤退（2026-07）で審査モードは廃止。auditHide は後方互換で受けるが、もう隠さない
   // （＝これまで NEXT_PUBLIC_ADSENSE_AUDIT=1 で休眠していた保護者リードCTAを全面点灯＝換金導線の解凍）。
   void auditHide;
@@ -46,9 +50,21 @@ export function ParentLeadCTA({ heading, body, className = '', auditHide = false
   const resolvedNote = note ?? offer.note;
   const resolvedCtaText = ctaText ?? offer.ctaText;
 
-  // 副オファー（1ページの換金機会を増やす相補ペア）。主と被る／pending のときは null。
-  // 明示 affiliateId で主を差し替えている場合は、副が主と重複しうるので出さない（安全側）。
-  const secondary = affiliateId ? null : selectSecondaryLeadOffer({ prefectureCode, placement });
+  // 副オファー（1ページの換金機会を増やす相補ペア）。主と同一プログラムのときだけ出さない（重複回避）。
+  // secondaryAffiliateId明示時（副オファー専用A/B用）はそれを優先し、未指定なら面ごとの既定値を解決する。
+  // 2026-08-02修正: 従来は「主をaffiliateIdで明示差替え中は副を一律非表示」だったが、これは
+  // hensachi/hyotei-heikin（主=atama-text固定）で副(fp-soudan)が一度も描画されない死んだ設定に
+  // なっていた（[[loop-question-note]]TIER Σ-0参照）。実際に同一プログラムになる場合のみ抑止する。
+  const secondaryOverride =
+    secondaryAffiliateId && isLiveAffiliate(secondaryAffiliateId)
+      ? {
+          affiliateId: secondaryAffiliateId,
+          note: programPreset(secondaryAffiliateId)?.note ?? '',
+          ctaText: programPreset(secondaryAffiliateId)?.ctaText ?? 'くわしく見る',
+        }
+      : undefined;
+  const secondaryBase = secondaryOverride ?? selectSecondaryLeadOffer({ prefectureCode, placement });
+  const secondary = secondaryBase && secondaryBase.affiliateId !== resolvedAffiliateId ? secondaryBase : null;
 
   return (
     <section
@@ -95,6 +111,7 @@ export function ParentLeadCTA({ heading, body, className = '', auditHide = false
             ctaText={secondary.ctaText}
             pref={prefectureCode}
             placement={placement}
+            variant={secondaryVariant}
             linkClassName="inline-flex items-center gap-1.5 text-sm font-bold text-emerald-700 underline underline-offset-2 transition-colors hover:text-emerald-800"
           />
           <span className="text-xs text-slate-400">{secondary.note}</span>

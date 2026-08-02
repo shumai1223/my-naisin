@@ -13,6 +13,8 @@ import { ShindanEntryLink } from '@/components/ShindanEntryLink';
 import { StatsOptIn } from '@/components/StatsOptIn';
 import { UnlockGate } from '@/components/UnlockGate';
 import { NationalPercentileReveal } from '@/components/NationalPercentileReveal';
+import { useExperiment } from '@/components/ab/useExperiment';
+import type { AffiliateId } from '@/lib/affiliates';
 
 /**
  * /hensachi（全流入の約41%）の結果連動 換金フロー。
@@ -34,6 +36,11 @@ export function HensachiResultFlow() {
     setTarget(t);
     setGap(g);
   }, []);
+
+  // TIER Σ-0: 副オファー(FP無料相談)のA/B。主(atama-text)は不変・副だけfp-soudan⇔findit-fp-soudanを切替。
+  const secondaryVariant = useExperiment('hensachi-fp-secondary-2026', [{ id: 'control' }, { id: 'findit' }]);
+  const secondaryAffiliateId: AffiliateId | undefined =
+    secondaryVariant === 'findit' ? 'findit-fp-soudan' : undefined;
 
   return (
     <>
@@ -73,6 +80,8 @@ export function HensachiResultFlow() {
           affiliateId="atama-text"
           ctaText="無料で資料・体験を申し込む"
           note="【atama＋ オンライン塾】の資料請求・無料体験（PR）"
+          secondaryAffiliateId={secondaryAffiliateId}
+          secondaryVariant={secondaryVariant}
         />
       </div>
 

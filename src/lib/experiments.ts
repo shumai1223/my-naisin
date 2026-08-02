@@ -822,6 +822,41 @@ export const EXPERIMENTS: ExperimentDef[] = [
     placement: 'home',
     note: 'home-cta-color-2026・home-social-proof-2026・home-concise-2026とは別軸。',
   },
+  /* ────────────────────────────────────────────────────────────────────
+   * TIER Σ-0（2026-08-02）: 副オファー（PLACEMENT_SECONDARY_OFFER）専用のA/B。
+   * findit-fp-soudan（A8・CPA¥13,000・公開EPC222円=現行最大流入面のそら塾EV¥84/clickの2.6倍）が
+   * 2026-07-16承認以降どのページにも配置されていなかったため、最大流入2面の副オファーとして
+   * 既存fp-soudanとA/Bで載せる。ParentLeadCTAExperiment（主オファー差替え専用）は使わず、
+   * HensachiResultFlow/HyoteiResultFlow内でuseExperimentを直接呼びsecondaryAffiliateIdへ渡す方式
+   * （主オファーはatama-textで固定のまま・面を増やさない）。
+   * ⚠️夏(7-8月)は30PV/日規模でA/B判定をしない方針（偽陽性を掴むため）。startedAtは意図的に
+   * 付与しない（checkExperimentPortfolioHealthのoverdueForRotation判定はstartedAt無しを対象外と
+   * する設計を利用し、11月の判定まで誤ったローテーション警告を出さない）。
+   * ──────────────────────────────────────────────────────────────────── */
+  {
+    id: 'hensachi-fp-secondary-2026',
+    hypothesis: '/hensachiの副オファー(FP無料相談)をfp-soudan(もしも)からfindit-fp-soudan(A8・EPC222円)へ差し替えると、affiliate_clickが伸びる。',
+    status: 'running',
+    arms: [
+      { id: 'control', label: 'fp-soudan（もしも・保険トータルプロフェッショナル・現行の既定）', affiliateId: 'fp-soudan' },
+      { id: 'findit', label: 'findit-fp-soudan（A8・ファインドイット・EPC222円）', affiliateId: 'findit-fp-soudan' },
+    ],
+    primaryMetric: 'affiliate_click',
+    placement: 'hensachi',
+    note: '判定は2026年11月（夏はA/B判定をしない方針のためstartedAt未設定＝ローテーション警告対象外）。主オファー(atama-text)は不変。',
+  },
+  {
+    id: 'hyotei-heikin-fp-secondary-2026',
+    hypothesis: '/hyotei-heikinの副オファー(FP無料相談)をfp-soudan(もしも)からfindit-fp-soudan(A8・EPC222円)へ差し替えると、affiliate_clickが伸びる。',
+    status: 'running',
+    arms: [
+      { id: 'control', label: 'fp-soudan（もしも・保険トータルプロフェッショナル・現行の既定）', affiliateId: 'fp-soudan' },
+      { id: 'findit', label: 'findit-fp-soudan（A8・ファインドイット・EPC222円）', affiliateId: 'findit-fp-soudan' },
+    ],
+    primaryMetric: 'affiliate_click',
+    placement: 'hyotei-heikin',
+    note: '判定は2026年11月（夏はA/B判定をしない方針のためstartedAt未設定＝ローテーション警告対象外）。主オファー(atama-text)は不変。',
+  },
 ];
 
 /** id から実験定義を引く。 */
