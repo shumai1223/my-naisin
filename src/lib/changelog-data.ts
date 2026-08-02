@@ -15,6 +15,15 @@ export interface ChangeLogEntry {
 export const CHANGELOG: ChangeLogEntry[] = [
   {
     date: '2026-08-02',
+    prefectureCode: 'hiroshima',
+    type: 'add',
+    category: 'content',
+    title: '「入試制度の変更履歴」に広島県の配点比率変更を追加',
+    description:
+      '広島県の公立高校入試が令和5年度(2023年度)から、学年別内申点の倍率や学力検査・調査書・自己表現の配点比率を変更した経緯を追加しました。',
+  },
+  {
+    date: '2026-08-02',
     type: 'add',
     category: 'content',
     title: '学校別入試倍率ページに内申点のしくみの解説を追加',

@@ -61,6 +61,19 @@ describe('PAST_SYSTEM_CHANGES（Λ+5・過去の制度変更履歴DB）', () => 
     expect(ehimePref?.practicalMultiplier).toBe(1);
   });
 
+  test('広島県の配点比率・学年別倍率変更エントリはprefectures.tsの現行値(学年比1:1:3・225点満点)と一致する', () => {
+    const hiroshima = PAST_SYSTEM_CHANGES.find((c) => c.prefCode === 'hiroshima');
+    expect(hiroshima).toBeDefined();
+    expect(hiroshima?.effectiveYear).toBe('令和5年度（2023年度）入試');
+    expect(hiroshima?.category).toBe('weighting-formula');
+    expect(hiroshima?.detail).toContain('6：2：2');
+    expect(hiroshima?.detail).toContain('1：1：3');
+
+    const hiroshimaPref = PREFECTURES.find((p) => p.code === 'hiroshima');
+    expect(hiroshimaPref?.gradeMultipliers).toEqual({ 1: 1, 2: 1, 3: 3 });
+    expect(hiroshimaPref?.maxScore).toBe(225);
+  });
+
   test('categoryは定義済みの4種類のいずれかのみ(型崩れ防止)', () => {
     const validCategories = new Set(['scoring-input', 'selection-structure', 'weighting-formula', 'other']);
     for (const c of PAST_SYSTEM_CHANGES) {
