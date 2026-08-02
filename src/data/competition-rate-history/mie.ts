@@ -40,7 +40,24 @@ const REIWA_6: YearSnapshot = {
   grandTotal: { label: '全日制総計', schoolCount: 52, quota: 6819, applicants: 7360, rate: 1.08 },
 };
 
+/**
+ * 令和5年度（2023年度）: 同一資料シリーズの令和5年度版ページ本文「53校120学科・コース
+ * 6,945人 7,373人 1.06倍」を直接引用（WebSearchのスニペットとWebFetch本文抽出の両方で
+ * 同一数値を確認済み・7373/6945=1.0616…≈1.06で整合）。学校数が53校（R6/R7は52校）と
+ * 1校差があるが、統廃合等による正当な変動として学校数はそのまま記録する。
+ */
+const REIWA_5: YearSnapshot = {
+  fiscalYear: '令和5年度（2023年度）',
+  sourceUrl: 'https://www.pref.mie.lg.jp/TOPICS/m0045100344.htm',
+  sourceTitle: '三重県教育委員会 令和5年度三重県立高等学校後期選抜志願状況（最終）を取りまとめました',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制総計', schoolCount: 53, quota: 6945, applicants: 7373, rate: 1.06 },
+};
+
 export const MIE_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'mie',
-  years: [REIWA_7, REIWA_6],
+  years: [REIWA_7, REIWA_6, REIWA_5],
 };
