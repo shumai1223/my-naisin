@@ -247,7 +247,7 @@ describe('getSchoolCategoryTrends', () => {
 });
 
 describe('selectNearbySchools', () => {
-  test('同一areaの他校を倍率が近い順に最大3件返す(matchType=area)', () => {
+  test('同一areaの他校を倍率が近い順に最大3件返す', () => {
     const target = schoolData({ schoolCode: 'A', area: '千代田', overallRate: 2.0 });
     const all = [
       target,
@@ -257,46 +257,24 @@ describe('selectNearbySchools', () => {
       schoolData({ schoolCode: 'E', area: '港', overallRate: 2.0 }), // 別学区なので対象外
     ];
     const result = selectNearbySchools(target, all, 3);
-    expect(result.matchType).toBe('area');
-    expect(result.schools.map((r) => r.schoolCode)).toEqual(['B', 'D', 'C']); // 差0.1同率はschoolCode昇順
+    expect(result.map((r) => r.schoolCode)).toEqual(['B', 'D', 'C']); // 差0.1同率はschoolCode昇順
   });
 
-  test('areaが無い県(target自体にareaが無い)は同一県内で倍率が近い順にフォールバックする(matchType=rate-fallback・2026-08-02追加)', () => {
+  test('areaが無い学校は空配列を返す(誤った近隣付けをしない・2026-08-01 👤裁定=A案で確定・県内フォールバックは不採択)', () => {
     const target = schoolData({ schoolCode: 'A', overallRate: 2.0 });
-    const all = [
-      target,
-      schoolData({ schoolCode: 'B', overallRate: 1.9 }), // 差0.1
-      schoolData({ schoolCode: 'C', overallRate: 1.0 }), // 差1.0
-      schoolData({ schoolCode: 'D', overallRate: 2.1 }), // 差0.1
-    ];
-    const result = selectNearbySchools(target, all, 3);
-    expect(result.matchType).toBe('rate-fallback');
-    expect(result.schools.map((r) => r.schoolCode)).toEqual(['B', 'D', 'C']); // 差0.1同率はschoolCode昇順
+    const all = [target, schoolData({ schoolCode: 'B', area: '千代田', overallRate: 2.0 })];
+    expect(selectNearbySchools(target, all)).toEqual([]);
   });
 
-  test('同一areaの他校が0件でも同一県内の倍率近似へフォールバックする(matchType=rate-fallback・2026-08-02追加)', () => {
-    // tokyo/kanagawa等area情報がある稼働中の県でも実在する「学区に他校が1つも無い学校」のケース。
-    // 旧実装はここで空配列を返し、既にindex解禁済みのページで近隣校リンク0本のまま出荷していた。
+  test('同一areaの他校が0件なら空配列を返す(存在しない候補を作らない)', () => {
     const target = schoolData({ schoolCode: 'A', area: '千代田', overallRate: 2.0 });
-    const all = [
-      target,
-      schoolData({ schoolCode: 'B', area: '港', overallRate: 1.9 }), // 差0.1・別学区だがフォールバック対象
-      schoolData({ schoolCode: 'C', area: '港', overallRate: 3.0 }), // 差1.0
-    ];
-    const result = selectNearbySchools(target, all, 3);
-    expect(result.matchType).toBe('rate-fallback');
-    expect(result.schools.map((r) => r.schoolCode)).toEqual(['B', 'C']);
-  });
-
-  test('候補が0件(自校のみ)なら空配列を返す(存在しない候補を作らない)', () => {
-    const target = schoolData({ schoolCode: 'A', area: '千代田', overallRate: 2.0 });
-    const result = selectNearbySchools(target, [target]);
-    expect(result.schools).toEqual([]);
+    const all = [target, schoolData({ schoolCode: 'B', area: '港', overallRate: 2.0 })];
+    expect(selectNearbySchools(target, all)).toEqual([]);
   });
 
   test('自分自身は候補から除外される', () => {
     const target = schoolData({ schoolCode: 'A', area: '千代田', overallRate: 2.0 });
     const all = [target];
-    expect(selectNearbySchools(target, all).schools).toEqual([]);
+    expect(selectNearbySchools(target, all)).toEqual([]);
   });
 });

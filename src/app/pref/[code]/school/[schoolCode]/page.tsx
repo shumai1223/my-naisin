@@ -75,7 +75,7 @@ export default async function SchoolPage({ params }: PageProps) {
     notFound();
   }
 
-  const { schools: nearbySchools, matchType: nearbyMatchType } = selectNearbySchools(school, data.schools, 3);
+  const nearbySchools = selectNearbySchools(school, data.schools, 3);
   const categoryTrends = getSchoolCategoryTrends(code, school, COMPETITION_RATE_HISTORY_BY_PREFECTURE[code]);
 
   return (
@@ -214,7 +214,7 @@ export default async function SchoolPage({ params }: PageProps) {
           {nearbySchools.length > 0 && (
             <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
               <h2 className="mb-4 text-lg font-bold text-slate-800">
-                {nearbyMatchType === 'area' ? `同じ学区（${school.area}）の高校` : `${prefecture.name}内で倍率が近い高校`}
+                {school.area ? `同じ学区（${school.area}）の高校` : '近隣の高校'}
               </h2>
               <ul className="grid gap-2 sm:grid-cols-1">
                 {nearbySchools.map((n) => (
