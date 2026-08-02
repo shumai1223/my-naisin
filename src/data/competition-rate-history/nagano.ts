@@ -57,7 +57,26 @@ const REIWA_5: YearSnapshot = {
   grandTotal: { label: '全日制計', quota: 10070, applicants: 9698, rate: 0.96 },
 };
 
+/**
+ * 令和4年度（2022年度）: 教委の年度別発表ページ(r4nyushi1.html)から同一資料シリーズのR4版
+ * （②・令和4年3月3日発表・全8頁）を発見・Read toolで全頁直読み成功。R5/R6/R7と同じ
+ * 【公立全日制課程】「計」行を直接転記（募集人員10,203・志願数9,944・倍率0.97・
+ * 9944/10203=0.9746…≈0.97で印字済み値と整合）。本文冒頭にも同じ9,944人・0.97倍の記述が
+ * あり資料内で二重に確認できる。定時制課程（多部制・単位制含む）はR5/R6/R7と同じ理由で
+ * スコープ外。
+ */
+const REIWA_4: YearSnapshot = {
+  fiscalYear: '令和4年度（2022年度）',
+  sourceUrl: 'https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r4/documents/20200303press-r4koki2.pdf',
+  sourceTitle: '長野県教育委員会 令和4年度長野県公立高等学校入学者後期選抜志願者数②（志望変更受付締切後の集計結果）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制計', quota: 10203, applicants: 9944, rate: 0.97 },
+};
+
 export const NAGANO_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'nagano',
-  years: [REIWA_7, REIWA_6, REIWA_5],
+  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4],
 };
