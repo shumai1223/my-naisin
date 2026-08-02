@@ -23,5 +23,7 @@ export function shouldShowStickyBar(pathname: string | null | undefined): boolea
   }
   // 県別ツール（/{pref}/naishin, /{pref}/total-score, /{pref}/s-value, /{pref}/rank）
   if (/^\/[a-z]+\/(naishin|total-score|s-value|rank)(\/|$)/.test(pathname)) return true;
+  // 学校別ページ（/pref/{code}/school/{schoolCode}・Λ-2）＝倍率を見て終わる離脱を防ぐ換金導線
+  if (/^\/pref\/[a-z]+\/school\//.test(pathname)) return true;
   return false;
 }

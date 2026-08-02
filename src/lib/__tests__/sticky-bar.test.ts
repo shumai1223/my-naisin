@@ -20,6 +20,8 @@ describe('shouldShowStickyBar', () => {
       '/hokkaido/rank',
       '/koukou-hiyou',
       '/hiyou',
+      '/pref/tokyo/school/131234',
+      '/pref/hokkaido/school/abc',
     ]) {
       expect(shouldShowStickyBar(p)).toBe(true);
     }

@@ -14,6 +14,14 @@ export interface ChangeLogEntry {
 
 export const CHANGELOG: ChangeLogEntry[] = [
   {
+    date: '2026-08-02',
+    type: 'add',
+    category: 'feature',
+    title: '学校別入試倍率ページに次のアクション導線を追加',
+    description:
+      '学校別の入試倍率ページに、志望校から必要な当日点を逆算するツールや条件に合う塾の無料診断、受験情報を受け取れるLINEへの案内を追加しました。',
+  },
+  {
     date: '2026-07-17',
     type: 'fix',
     category: 'calculation',
