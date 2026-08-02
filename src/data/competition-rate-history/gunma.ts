@@ -25,7 +25,27 @@ const REIWA_7: YearSnapshot = {
   grandTotal: { label: '公立全日制・フレックススクール合計', quota: 11435, applicants: 11525, rate: 1.01 },
 };
 
+/**
+ * 令和6年度（2024年度）: 同一資料シリーズの令和6年度版「第２回志願先変更後の全日制課程選抜、
+ * フレックススクール選抜志願状況」（群馬県公式サイトのR6志願状況ページから発見・全3頁・
+ * テキスト埋め込み型PDF）を直接転記。末尾「公立全日制・ﾌﾚｯｸｽｽｸｰﾙ合計」行の学校別募集定員(A)
+ * =11,757（括弧内11,889は市立太田・利根商業の内部進学者/県外募集を含めた学科等別定員合計で
+ * R7と同じ理由により不採用）・学校別志願者数(D)=11,744・学校別倍率(D/A)=1.00
+ * （11744/11757=0.9989…≈1.00で整合）。定時制課程選抜・連携型選抜実施校志願状況は別表のため
+ * R7と同じ理由でスコープ外。
+ */
+const REIWA_6: YearSnapshot = {
+  fiscalYear: '令和6年度（2024年度）',
+  sourceUrl: 'https://www.pref.gunma.jp/uploaded/attachment/616847.pdf',
+  sourceTitle: '群馬県教育委員会 令和6年度群馬県公立高等学校入学者選抜 第2回志願先変更後の全日制課程選抜、フレックススクール選抜志願状況',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '公立全日制・フレックススクール合計', quota: 11757, applicants: 11744, rate: 1.0 },
+};
+
 export const GUNMA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'gunma',
-  years: [REIWA_7],
+  years: [REIWA_7, REIWA_6],
 };
