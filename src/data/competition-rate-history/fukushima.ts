@@ -42,7 +42,25 @@ const REIWA_6: YearSnapshot = {
   grandTotal: { label: '全日制 合計', quota: 1484, applicants: 230, rate: 0.15 },
 };
 
+/**
+ * 令和5年度（2023年度）: 同一資料シリーズの令和5年度版（令和5年3月20日公表・画像スキャンPDF・
+ * 全3頁）を福島県公式サイトのR5年度入学者選抜ページから発見。3頁目の全日制サマリー表
+ * （実施学校数44校・後期選抜募集定員1,675人・志願者数(出願先変更後)203人）を直接転記。
+ * 倍率は資料に印字が無いため自前算出（203/1675=0.1212…→0.12、R6/R7と同じ計算方針）。
+ * 前期選抜・連携型選抜・定時制課程はR6/R7と同じ理由でスコープ外。
+ */
+const REIWA_5: YearSnapshot = {
+  fiscalYear: '令和5年度（2023年度）',
+  sourceUrl: 'https://www.pref.fukushima.lg.jp/uploaded/attachment/562892.pdf',
+  sourceTitle: '福島県教育委員会 令和5年度福島県立高等学校入学者選抜後期選抜志願状況（出願先変更後）について',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制 合計', quota: 1675, applicants: 203, rate: 0.12 },
+};
+
 export const FUKUSHIMA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'fukushima',
-  years: [REIWA_7, REIWA_6],
+  years: [REIWA_7, REIWA_6, REIWA_5],
 };
