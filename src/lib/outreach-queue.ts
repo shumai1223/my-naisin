@@ -32,6 +32,10 @@ export interface QueueEntry {
   note?: string;
   sourceDoc: string;
   addedAt: string;
+  /** Gmail下書きを作成済みの場合のdraftId(gmail_create_draftの戻り値)。二重下書き作成を防ぐための目印。 */
+  draftId?: string;
+  /** 下書き作成日時(ISO)。draftId同様、二重作成防止用。 */
+  draftedAt?: string;
 }
 
 /** チャンネルの優先順位（👤の手間が小さい順）。X'-1本文の実測に基づく: line最優先→email→form。 */
