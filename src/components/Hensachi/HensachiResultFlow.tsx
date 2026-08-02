@@ -48,17 +48,10 @@ export function HensachiResultFlow() {
         <HensachiCalculator onResult={setValue} resultFooter={<HensachiResultActions value={value} />} />
       </div>
 
-      {/* A-9: 偏差値+5(チャレンジ帯)を既定目標にした週次計画ジェネレータ。target/gapはLINE保存CTAへ渡す */}
-      <div className="mt-6">
-        <HensachiGapToTarget value={value} onTargetChange={handleTargetChange} />
-      </div>
-
-      {/* S-1: 匿名統計オプトイン。同意済みなら偏差値の実測値を匿名で自動送信 */}
-      <div className="mt-6">
-        <StatsOptIn metric="hensachi" value={value} />
-      </div>
-
-      {/* T-1: 紹介・解放機構。保護者に送る/LINE登録で全国統計の先行閲覧が解放される */}
+      {/* TIER Σ-1（2026-08-02）: 保護者への共有導線を結果直後の最優先位置へ。
+          従来は週次計画→統計オプトインの後(4番目)に埋もれており、share_to_parentが
+          結果閲覧の0.99%に留まっていた。新規CTAは足さず、既存のT-1(UnlockGate)ブロックを
+          そのままここへ移動しただけ（序列の組み替え）。 */}
       {has && (
         <div className="mt-6">
           <UnlockGate
@@ -70,6 +63,16 @@ export function HensachiResultFlow() {
           </UnlockGate>
         </div>
       )}
+
+      {/* A-9: 偏差値+5(チャレンジ帯)を既定目標にした週次計画ジェネレータ。target/gapはLINE保存CTAへ渡す */}
+      <div className="mt-6">
+        <HensachiGapToTarget value={value} onTargetChange={handleTargetChange} />
+      </div>
+
+      {/* S-1: 匿名統計オプトイン。同意済みなら偏差値の実測値を匿名で自動送信 */}
+      <div className="mt-6">
+        <StatsOptIn metric="hensachi" value={value} />
+      </div>
 
       {/* 即効レバー：最高CTRページの結果直後に保護者リード（決裁者＝保護者へ高単価送客） */}
       <div className="mt-6">

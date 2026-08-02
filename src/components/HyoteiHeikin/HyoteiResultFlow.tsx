@@ -5,6 +5,7 @@ import * as React from 'react';
 import { HyoteiHeikinCalculator } from '@/components/HyoteiHeikin/HyoteiHeikinCalculator';
 import { HyoteiResultActions } from '@/components/HyoteiHeikin/HyoteiResultActions';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
+import { ParentShareInvite } from '@/components/ParentShareInvite';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { ParentWindowBridge } from '@/components/ParentWindowBridge';
 import { ShindanEntryLink } from '@/components/ShindanEntryLink';
@@ -28,6 +29,20 @@ export function HyoteiResultFlow() {
   return (
     <>
       <HyoteiHeikinCalculator onResult={setValue} resultFooter={<HyoteiResultActions value={value} />} />
+
+      {/* TIER Σ-1（2026-08-02）: 保護者への共有導線。/hensachiでは既にT-1(UnlockGate)経由で
+          存在していたが、/hyotei-heikinには結果直後の常設共有CTAが1つも無かった
+          （ParentWindowBridgeの共有ボタンは面談/出願期のみ点灯・現在季節外で非表示）。
+          新しいCTA種別は作らず、既存のParentShareInvite（UnlockGateから抽出済み）をそのまま使う。 */}
+      {has && (
+        <div className="mt-6">
+          <ParentShareInvite
+            placement="hyotei-heikin"
+            tool="hyotei-heikin"
+            shareCtx={{ score: value as number, metricLabel: '評定平均' }}
+          />
+        </div>
+      )}
 
       {/* 即効レバー：最高CTRページの結果直後に保護者リード（決裁者＝保護者へ高単価送客） */}
       <div className="mt-6">
