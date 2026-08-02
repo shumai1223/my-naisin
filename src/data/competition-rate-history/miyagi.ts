@@ -39,7 +39,27 @@ const REIWA_6: YearSnapshot = {
   grandTotal: { label: '全日制課程・第一次募集', quota: 13640, applicants: 13609, rate: 1.0 },
 };
 
+/**
+ * 令和5年度（2023年度）: 令和6年度の「結果について」記者発表資料（2024-04-25公表・
+ * https://www.pref.miyagi.jp/documents/51922/press_r6_kekka.pdf）の「１ 総括」表に
+ * 令和6年度・令和5年度が併記されている。令和6年度分の数値（quota13,640/applicants13,609/
+ * rate1.00）が既存REIWA_6と完全一致することを確認済み（独立した2つの記者発表資料が同じ
+ * 令和6年度実績を報じている＝令和6年度分に限り相互クロスチェック成立）。令和5年度（募集定員
+ * 13,760・出願者数14,095・出願倍率1.02）はこの1資料の前年度欄のみが根拠で、独立した第2資料
+ * でのクロスチェックはできていない（正直に記録・将来R5年度自体の一次発表を発見できれば追加確認する）。
+ */
+const REIWA_5: YearSnapshot = {
+  fiscalYear: '令和5年度（2023年度）',
+  sourceUrl: 'https://www.pref.miyagi.jp/documents/51922/press_r6_kekka.pdf',
+  sourceTitle: '宮城県教育庁高校教育課 令和6年度宮城県公立高等学校入学者選抜の結果について（総括表・前年度=令和5年度欄）',
+  fetchedAt: '2026-08-03',
+  origin: 'prior-year-parenthetical',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制課程・第一次募集', quota: 13760, applicants: 14095, rate: 1.02 },
+};
+
 export const MIYAGI_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'miyagi',
-  years: [REIWA_7, REIWA_6],
+  years: [REIWA_7, REIWA_6, REIWA_5],
 };
