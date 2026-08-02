@@ -16,6 +16,14 @@ export const CHANGELOG: ChangeLogEntry[] = [
   {
     date: '2026-08-02',
     type: 'add',
+    category: 'content',
+    title: '学校別入試倍率ページに内申点のしくみの解説を追加',
+    description:
+      '学校別の入試倍率ページに、その都道府県の内申点の満点・対象学年・学年ごとの比重をまとめた解説を追加しました。内申点計算ツールへのリンクつきです。',
+  },
+  {
+    date: '2026-08-02',
+    type: 'add',
     category: 'feature',
     title: '学校別入試倍率ページに次のアクション導線を追加',
     description:

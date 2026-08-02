@@ -9,6 +9,7 @@ import { selectNearbySchools, getSchoolCategoryTrends } from '@/lib/school-page-
 import { getPrefectureSchoolPageData, INDEXED_SCHOOL_PAGE_PREFECTURE_CODES } from '@/lib/school-page-lookup';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { SchoolPageConvertCTA } from '@/components/SchoolPageConvertCTA';
+import { SchoolPageNaishinNote } from '@/components/SchoolPageNaishinNote';
 
 /**
  * 個別学校ページ（Λ-2・分割公開の波ごとにインデックス解禁）。
@@ -207,6 +208,8 @@ export default async function SchoolPage({ params }: PageProps) {
               </div>
             </section>
           )}
+
+          <SchoolPageNaishinNote schoolName={school.schoolName} prefecture={prefecture} />
 
           {nearbySchools.length > 0 && (
             <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
