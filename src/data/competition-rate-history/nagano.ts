@@ -23,7 +23,23 @@ const REIWA_7: YearSnapshot = {
   grandTotal: { label: '全日制計', quota: 8806, applicants: 8250, rate: 0.94 },
 };
 
+/**
+ * 令和6年度（2024年度）: 同一資料シリーズの令和6年度版（2024-02-29公表）を発見。
+ * 別紙１【公立全日制課程】の「計」行を直接転記（募集人員9,945・志願数9,312・倍率0.94）。
+ * 本文冒頭にも同じ9,312人・0.94倍の記述があり、資料内で二重に確認できる。
+ */
+const REIWA_6: YearSnapshot = {
+  fiscalYear: '令和6年度（2024年度）',
+  sourceUrl: 'https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r6/documents/20240229press.pdf',
+  sourceTitle: '長野県教育委員会 令和6年度長野県公立高等学校入学者後期選抜志願者数②（志望変更受付締切後の集計結果）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制計', quota: 9945, applicants: 9312, rate: 0.94 },
+};
+
 export const NAGANO_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'nagano',
-  years: [REIWA_7],
+  years: [REIWA_7, REIWA_6],
 };
