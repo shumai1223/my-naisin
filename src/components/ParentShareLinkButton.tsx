@@ -7,12 +7,20 @@ import { toDataURL as qrToDataURL } from 'qrcode';
 import { EVENTS, track } from '@/lib/track';
 import { beaconParentFunnelEvent } from '@/lib/parent-funnel-beacon';
 import { APP_NAME } from '@/lib/constants';
+import { useExperiment } from '@/components/ab/useExperiment';
 import {
   buildParentShareUrl,
   buildParentShareMessage,
   encodeSharePayload,
   type ParentShareContext,
+  type ShareMessageFrame,
 } from '@/lib/share';
+
+const SHARE_FRAME_ARMS: { id: ShareMessageFrame }[] = [
+  { id: 'control' },
+  { id: 'social-proof' },
+  { id: 'value-exchange' },
+];
 
 /**
  * 橋②（生徒→保護者バトン）の軽量な送り手ボタン。
@@ -87,6 +95,9 @@ export function ParentShareLinkButton({
   const fileRef = React.useRef<File | null>(null);
   const payload = React.useMemo(() => encodeSharePayload(ctx), [ctx]);
 
+  // TIER Σ-4: 「送りたくなる理由」のフレームA/B（判定は秋以降・夏は母数を稼ぐだけ）。
+  const shareFrame = useExperiment<ShareMessageFrame>('share-message-frame-2026', SHARE_FRAME_ARMS);
+
   React.useEffect(() => {
     if (!withImage) return;
     let cancelled = false;
@@ -102,7 +113,7 @@ export function ParentShareLinkButton({
   const onShare = React.useCallback(async () => {
     const origin = typeof window !== 'undefined' ? window.location.origin : 'https://my-naishin.com';
     const url = buildParentShareUrl(origin, ctx);
-    const text = buildParentShareMessage(ctx);
+    const text = buildParentShareMessage(ctx, shareFrame);
 
     // ZZ-5b：Web Share API自体はどのアプリが選ばれたかを教えないため、'native'は
     // 「OSの共有シートを開いた」までの精度（実際の送り先はLINE/Messages等が混在する）。
@@ -111,6 +122,7 @@ export function ParentShareLinkButton({
       pref: ctx.prefectureCode ?? 'none',
       metric: ctx.metricLabel ?? '内申点',
       medium,
+      variant: shareFrame,
       ...(tool ? { tool } : {}),
     });
     beaconParentFunnelEvent('share_to_parent', { medium, prefectureCode: ctx.prefectureCode });
@@ -144,41 +156,43 @@ export function ParentShareLinkButton({
     } catch {
       // クリップボードも不可なら何もしない（最低限ボタンは壊さない）。
     }
-  }, [ctx, tool, onShared]);
+  }, [ctx, tool, onShared, shareFrame]);
 
   // ZZ-5b：LINE/X個別共有リンク。navigator.share()と違い送り先が確定しているため
   // medium('line'/'x')を正確に計測できる（共有率の面別分解の精度を上げる導線）。
   const onShareLine = React.useCallback(() => {
     const origin = typeof window !== 'undefined' ? window.location.origin : 'https://my-naishin.com';
     const url = buildParentShareUrl(origin, ctx);
-    const text = buildParentShareMessage(ctx);
+    const text = buildParentShareMessage(ctx, shareFrame);
     track(EVENTS.SHARE_TO_PARENT, {
       pref: ctx.prefectureCode ?? 'none',
       metric: ctx.metricLabel ?? '内申点',
       medium: 'line',
+      variant: shareFrame,
       ...(tool ? { tool } : {}),
     });
     beaconParentFunnelEvent('share_to_parent', { medium: 'line', prefectureCode: ctx.prefectureCode });
     onShared?.();
     const lineUrl = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
     window.open(lineUrl, '_blank', 'noopener,noreferrer');
-  }, [ctx, tool, onShared]);
+  }, [ctx, tool, onShared, shareFrame]);
 
   const onShareX = React.useCallback(() => {
     const origin = typeof window !== 'undefined' ? window.location.origin : 'https://my-naishin.com';
     const url = buildParentShareUrl(origin, ctx);
-    const text = buildParentShareMessage(ctx);
+    const text = buildParentShareMessage(ctx, shareFrame);
     track(EVENTS.SHARE_TO_PARENT, {
       pref: ctx.prefectureCode ?? 'none',
       metric: ctx.metricLabel ?? '内申点',
       medium: 'x',
+      variant: shareFrame,
       ...(tool ? { tool } : {}),
     });
     beaconParentFunnelEvent('share_to_parent', { medium: 'x', prefectureCode: ctx.prefectureCode });
     onShared?.();
     const xUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
     window.open(xUrl, '_blank', 'noopener,noreferrer');
-  }, [ctx, tool, onShared]);
+  }, [ctx, tool, onShared, shareFrame]);
 
   // その場（同じ部屋）にいる保護者にスマホで直接読み取ってもらうQRコード。
   // parent_landing_view がほぼ0という実測（リンク共有は後で開かれずに流れがち）への

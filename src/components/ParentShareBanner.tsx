@@ -60,21 +60,26 @@ export function ParentShareBanner() {
   const percentileScopeLabel = percentileScope === 'prefecture' ? (prefectureName ? `${prefectureName}内` : '県内') : '全国';
 
   // お子さまが共有した成績レポート画像（/api/card）。サーバー生成SVGなので確実に表示できる。
-  const cardSrc = hasScore
-    ? `/api/card?d=${encodeURIComponent(
-        encodeSharePayload({
-          score: score as number,
-          max: typeof max === 'number' ? max : 45,
-          target: typeof target === 'number' ? target : null,
-          gap: typeof gap === 'number' ? gap : null,
-          prefectureCode: share.prefectureCode,
-          prefectureName,
-          grade: typeof grade === 'number' ? grade : null,
-          label,
-          metricLabel: share.metricLabel,
-        })
-      )}`
-    : null;
+  // 2026-08-02（TIER Σ-4）: 満点の無い指標（偏差値等・maxが届かない共有経路）で「45」を
+  // 決め打ちしていたのは捏造リスク（例: 偏差値68を「68/45」と誤表示しかねない）。
+  // maxが実際に届いた場合のみカード画像を生成し、無ければ上のプレーンな数値表示のみに留める。
+  const hasMax = typeof max === 'number';
+  const cardSrc =
+    hasScore && hasMax
+      ? `/api/card?d=${encodeURIComponent(
+          encodeSharePayload({
+            score: score as number,
+            max: max as number,
+            target: typeof target === 'number' ? target : null,
+            gap: typeof gap === 'number' ? gap : null,
+            prefectureCode: share.prefectureCode,
+            prefectureName,
+            grade: typeof grade === 'number' ? grade : null,
+            label,
+            metricLabel: share.metricLabel,
+          })
+        )}`
+      : null;
 
   return (
     <section className="mb-8 overflow-hidden rounded-2xl border-2 border-blue-200 bg-gradient-to-br from-blue-50 via-indigo-50/70 to-white p-6 shadow-sm md:p-7">

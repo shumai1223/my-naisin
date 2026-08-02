@@ -12,6 +12,7 @@
 
 import type { LeadPlacement } from '@/lib/lead-config';
 import type { AffiliateId } from '@/lib/affiliates';
+import type { ShareMessageFrame } from '@/lib/share';
 
 /**
  * 'queued'（TIER L-4追加）: まだどのコンポーネントにも配線していない候補実験。
@@ -40,6 +41,8 @@ export interface ExperimentArm {
   ctaColorClass?: string;
   /** CTA表示までの遅延ms（timing A/B・TIER L-4追加。0=即時表示）。 */
   revealDelayMs?: number;
+  /** 保護者への共有本文のフレーム差し替え（TIER Σ-4・buildParentShareMessageの第2引数に渡す）。 */
+  shareFrame?: ShareMessageFrame;
 }
 
 export interface ExperimentDef {
@@ -57,7 +60,8 @@ export interface ExperimentDef {
     | 'line_friend_click'
     | 'unlock_granted'
     | 'stats_optin_grant'
-    | 'lead_magnet_next';
+    | 'lead_magnet_next'
+    | 'share_to_parent';
   /** 関係する設置面（勝者を lead-config に昇格させる際の対象）。 */
   placement?: LeadPlacement;
   /** decided のとき採用したアーム。 */
@@ -856,6 +860,20 @@ export const EXPERIMENTS: ExperimentDef[] = [
     primaryMetric: 'affiliate_click',
     placement: 'hyotei-heikin',
     note: '判定は2026年11月（夏はA/B判定をしない方針のためstartedAt未設定＝ローテーション警告対象外）。主オファー(atama-text)は不変。',
+  },
+  {
+    // TIER Σ-4（2026-08-02）: 「送りたくなる理由」の候補3本。share_to_parentが結果閲覧の0.99%
+    // しかない実測を受け、生徒が親に送る動機のフレームを比較する（buildParentShareMessageのshareFrame）。
+    id: 'share-message-frame-2026',
+    hypothesis: '共有文の文脈を「①目標差分」から「②学校の先生の代替」「③親が得する情報」に変えると、share_to_parentが伸びる。',
+    status: 'running',
+    arms: [
+      { id: 'control', label: '①目標達成の可視化（既定・目標まであと◯点）', shareFrame: 'control' },
+      { id: 'social-proof', label: '②学校の先生に聞く前に自分で確認したフレーム（第三者の裏付けの代替）', shareFrame: 'social-proof' },
+      { id: 'value-exchange', label: '③塾代の相場・就学支援金の対象かも一緒に確認できるフレーム', shareFrame: 'value-exchange' },
+    ],
+    primaryMetric: 'share_to_parent',
+    note: 'ParentShareLinkButton/ParentShareInvite双方の共有本文に配線。判定は2026年11月（夏はA/B判定をしない方針のためstartedAt未設定＝ローテーション警告対象外）。実在しない教師の発言は捏造しない（②はあくまで「先生に聞く前に自分で確認した」という代替フレーム）。',
   },
 ];
 

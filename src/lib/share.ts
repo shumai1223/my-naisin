@@ -129,14 +129,19 @@ export function decodeSharePayload(d: string | undefined): ParsedParentShare | n
   }
 }
 
-/** 共有リンクのパス（/hogosha?from=share&...）。決裁者を保護者ページへ、文脈付きで運ぶ。 */
-export function buildParentSharePath(ctx: ParentShareContext): string {
+/**
+ * 共有リンクのパス（/hogosha?from=share&...）。決裁者を保護者ページへ、文脈付きで運ぶ。
+ * max は満点の無い指標（偏差値等）では省略できる（Omit型を受け付ける・2026-08-02 TIER Σ-4修正）。
+ * 従来は max を必須扱いで無条件に q.set していたため、満点の無い呼び出し元（ParentShareInvite の
+ * 素の共有パス）が本関数を使うと NaN が紛れ込むおそれがあった＝他フィールドと同じ isNum ガードに揃えた。
+ */
+export function buildParentSharePath(ctx: Omit<ParentShareContext, 'max'> & { max?: number | null }): string {
   const q = new URLSearchParams();
   q.set('from', 'share');
   if (ctx.prefectureCode) q.set('pref', ctx.prefectureCode);
   if (ctx.prefectureName) q.set('pn', ctx.prefectureName);
   q.set('score', String(Math.round(ctx.score)));
-  q.set('max', String(Math.round(ctx.max)));
+  if (isNum(ctx.max)) q.set('max', String(Math.round(ctx.max)));
   if (isNum(ctx.target)) q.set('target', String(Math.round(ctx.target)));
   if (isNum(ctx.gap)) q.set('gap', String(Math.round(ctx.gap)));
   if (isNum(ctx.grade)) q.set('grade', String(Math.round(ctx.grade)));
@@ -148,24 +153,48 @@ export function buildParentSharePath(ctx: ParentShareContext): string {
 }
 
 /** 絶対URL版（共有シート/コピー用）。origin は末尾スラッシュ無しを想定。 */
-export function buildParentShareUrl(origin: string, ctx: ParentShareContext): string {
+export function buildParentShareUrl(origin: string, ctx: Omit<ParentShareContext, 'max'> & { max?: number | null }): string {
   const base = origin.replace(/\/$/, '');
   return `${base}${buildParentSharePath(ctx)}`;
 }
 
 /**
- * 共有に添える本文（自慢ではなく「相談したい」動機に寄せる＝保護者が開く理由を作る）。
- * 目標の有無・到達/未達でメッセージを出し分ける。
+ * 「送りたくなる理由」のフレーム（TIER Σ-4・2026-08-02）。
+ *  - control: 既存の目標差分フレーム（①目標達成の可視化）。
+ *  - social-proof: ②第三者の裏付けの代替（「学校の先生に聞く前に、まず数字で確認した」という
+ *    客観データが後ろ盾になる伝え方。実在しない教師の発言を捏造しない＝あくまで代替であることを明示）。
+ *  - value-exchange: ③親に見せると得すること（塾代の相場・就学支援金の対象かも一緒に確認できる）。
+ * 夏はサンプルが少なくA/B判定をしない方針（[[Λ+4]]の教訓）のため、ここでは候補を用意して
+ * useExperiment経由で母数を稼ぐだけに留め、判定は秋以降に行う。
  */
-export function buildParentShareMessage(ctx: Pick<ParentShareContext, 'target' | 'gap' | 'label'>): string {
+export type ShareMessageFrame = 'control' | 'social-proof' | 'value-exchange';
+
+/**
+ * 共有に添える本文（自慢ではなく「相談したい」動機に寄せる＝保護者が開く理由を作る）。
+ * control（既定）は目標の有無・到達/未達でメッセージを出し分ける（①目標達成の可視化）。
+ * metricLabel未指定時は「内申点」を既定表記にする（既存の呼び出し元との後方互換）。
+ */
+export function buildParentShareMessage(
+  ctx: Pick<ParentShareContext, 'target' | 'gap' | 'label' | 'metricLabel'>,
+  frame: ShareMessageFrame = 'control'
+): string {
+  const metric = ctx.metricLabel || '内申点';
+
+  if (frame === 'social-proof') {
+    return `${metric}の成績レポートを送ります。学校の先生に聞く前に、まず自分で数字を確認してみたので見てほしくて。`;
+  }
+  if (frame === 'value-exchange') {
+    return `${metric}の結果と一緒に、塾代の相場や就学支援金の対象かどうかも確認できるページを送ります。`;
+  }
+
   if (isNum(ctx.gap) && ctx.gap > 0) {
     const where = ctx.label ? `${ctx.label}` : '目標';
-    return `内申点の成績レポートを送ります。${where}まであと${Math.round(ctx.gap)}点。受験のこと、おうちの人に相談したくて。`;
+    return `${metric}の成績レポートを送ります。${where}まであと${Math.round(ctx.gap)}点。受験のこと、おうちの人に相談したくて。`;
   }
   if (isNum(ctx.gap) && ctx.gap <= 0 && isNum(ctx.target)) {
-    return '内申点の成績レポートを送ります。今のところ目標に届いてた！この調子で続けたいから見てね。';
+    return `${metric}の成績レポートを送ります。今のところ目標に届いてた！この調子で続けたいから見てね。`;
   }
-  return '内申点の成績レポートを送ります。受験のこと、一緒に考えてほしくて。';
+  return `${metric}の成績レポートを送ります。受験のこと、一緒に考えてほしくて。`;
 }
 
 export interface ParsedParentShare {

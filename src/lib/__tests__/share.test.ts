@@ -78,6 +78,36 @@ describe('buildParentShareMessage', () => {
     const msg = buildParentShareMessage({ target: null, gap: null });
     expect(msg).toContain('一緒に考えてほしくて');
   });
+
+  test('metricLabel指定時はそのまま反映される（既定は内申点固定だった）', () => {
+    const msg = buildParentShareMessage({ target: null, gap: null, metricLabel: '偏差値' });
+    expect(msg).toContain('偏差値の成績レポート');
+    expect(msg).not.toContain('内申点');
+  });
+});
+
+describe('buildParentShareMessage（TIER Σ-4・送りたくなる理由のフレーム候補）', () => {
+  test('social-proofフレームは学校の先生の代替という文脈を含み、実在の教師発言は捏造しない', () => {
+    const msg = buildParentShareMessage({ target: 62, gap: 4, label: '日比谷の目安' }, 'social-proof');
+    expect(msg).toContain('学校の先生に聞く前に');
+    expect(msg).not.toContain('あと4点');
+  });
+
+  test('value-exchangeフレームは費用・支援金の文脈を含む', () => {
+    const msg = buildParentShareMessage({ target: null, gap: null }, 'value-exchange');
+    expect(msg).toContain('塾代の相場');
+    expect(msg).toContain('就学支援金');
+  });
+
+  test('control（既定）は従来どおり目標差分フレーム', () => {
+    const msg = buildParentShareMessage({ target: 62, gap: 4, label: '日比谷の目安' }, 'control');
+    expect(msg).toContain('日比谷の目安まであと4点');
+  });
+
+  test('social-proof/value-exchangeもmetricLabelを反映する', () => {
+    expect(buildParentShareMessage({ target: null, gap: null, metricLabel: '評定平均' }, 'social-proof')).toContain('評定平均の成績レポート');
+    expect(buildParentShareMessage({ target: null, gap: null, metricLabel: '評定平均' }, 'value-exchange')).toContain('評定平均の結果');
+  });
 });
 
 describe('encode/decodeSharePayload（?d= compact・UTF-8安全・壊れた入力は無視）', () => {

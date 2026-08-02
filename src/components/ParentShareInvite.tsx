@@ -4,10 +4,18 @@ import * as React from 'react';
 import { MessageCircle, Share2, Check } from 'lucide-react';
 
 import { EVENTS, track } from '@/lib/track';
+import { beaconParentFunnelEvent } from '@/lib/parent-funnel-beacon';
 import { lineAddUrl } from '@/lib/line';
 import { APP_NAME } from '@/lib/constants';
+import { useExperiment } from '@/components/ab/useExperiment';
 import { ParentShareLinkButton } from '@/components/ParentShareLinkButton';
-import type { ParentShareContext } from '@/lib/share';
+import { buildParentShareMessage, buildParentShareUrl, type ParentShareContext, type ShareMessageFrame } from '@/lib/share';
+
+const SHARE_FRAME_ARMS: { id: ShareMessageFrame }[] = [
+  { id: 'control' },
+  { id: 'social-proof' },
+  { id: 'value-exchange' },
+];
 
 function isNum(v: number | null | undefined): v is number {
   return typeof v === 'number' && Number.isFinite(v);
@@ -39,22 +47,30 @@ export function ParentShareInvite({
 }) {
   const [copied, setCopied] = React.useState(false);
 
+  // TIER Σ-4: 「送りたくなる理由」のフレームA/B（判定は秋以降・夏は母数を稼ぐだけ）。
+  const shareFrame = useExperiment<ShareMessageFrame>('share-message-frame-2026', SHARE_FRAME_ARMS);
+
   const onLineClick = React.useCallback(() => {
     track(EVENTS.LINE_FRIEND_CLICK, { source: `${placement}-unlock`, pref: shareCtx.prefectureCode ?? 'none' });
   }, [placement, shareCtx.prefectureCode]);
 
   // 満点の無い指標（偏差値等）向けの素の共有（スコアカードなし・数値の分母を捏造しない）。
+  // 2026-08-02（TIER Σ-4）: 従来は固定文言・文脈なしURL(素の/hogosha)だったためtarget/gap/percentile
+  // が着地側(ParentShareBanner)に一切渡らず①②が反映されていなかった。ParentShareLinkButtonと同じ
+  // buildParentShareMessage()/buildParentShareUrl()に統一（maxはisNumガードで省略され捏造しない）。
   const onPlainShare = React.useCallback(async () => {
     const medium = typeof navigator !== 'undefined' && typeof navigator.share === 'function' ? 'native' : 'copy';
     track(EVENTS.SHARE_TO_PARENT, {
       pref: shareCtx.prefectureCode ?? 'none',
       metric: shareCtx.metricLabel ?? '内申点',
       medium,
+      variant: shareFrame,
       ...(tool ? { tool } : {}),
     });
+    beaconParentFunnelEvent('share_to_parent', { medium, prefectureCode: shareCtx.prefectureCode });
     const origin = typeof window !== 'undefined' ? window.location.origin : 'https://my-naishin.com';
-    const url = `${origin}/hogosha`;
-    const text = '受験対策について、おうちの人に相談したくて。いまの状況をまとめたページを送ります。';
+    const url = buildParentShareUrl(origin, shareCtx);
+    const text = buildParentShareMessage(shareCtx, shareFrame);
     if (typeof navigator !== 'undefined' && typeof navigator.share === 'function') {
       try {
         await navigator.share({ title: APP_NAME, text, url });
@@ -70,7 +86,7 @@ export function ParentShareInvite({
     } catch {
       // クリップボードも不可なら何もしない（最低限ボタンは壊さない）。
     }
-  }, [shareCtx.prefectureCode, shareCtx.metricLabel, tool]);
+  }, [shareCtx, tool, shareFrame]);
 
   const hasCard = isNum(shareCtx.max);
 

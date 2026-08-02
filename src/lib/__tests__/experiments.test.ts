@@ -76,7 +76,8 @@ describe('experiments registry', () => {
           arm.body !== control.body ||
           arm.ctaPrefix !== control.ctaPrefix ||
           arm.ctaColorClass !== control.ctaColorClass ||
-          arm.revealDelayMs !== control.revealDelayMs;
+          arm.revealDelayMs !== control.revealDelayMs ||
+          arm.shareFrame !== control.shareFrame;
         expect(hasAnyDiff).toBe(true);
 
         // 両アームが同じフィールドを定義している場合、値そのものが一致していないことも確認する
