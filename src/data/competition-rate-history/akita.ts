@@ -26,7 +26,25 @@ const REIWA_7: YearSnapshot = {
   grandTotal: { label: '全日制の課程 県合計', quota: 6495, applicants: 5587, rate: 0.86 },
 };
 
+/**
+ * 令和6年度（2024年度）: 同一資料シリーズの令和6年度版「公－２」（美の国あきたネット
+ * archive/79409から発見・全2頁）の「県合計」行（募集定員6,604・総志願者5,753・
+ * 志願倍率0.87）を直接転記（5753/6604=0.8712…≈0.87で整合）。注3に中高一貫進学者を
+ * 含めた場合6,781名となる旨の注記があるが、R7と同じ理由（印字済み倍率の分母と不一致）
+ * で不採用。定時制課程は他県と同じ理由でスコープ外。
+ */
+const REIWA_6: YearSnapshot = {
+  fiscalYear: '令和6年度（2024年度）',
+  sourceUrl: 'https://www.pref.akita.lg.jp/uploads/public/archive_0000079409_00/kou02_20240213.pdf',
+  sourceTitle: '秋田県教育委員会 令和6年度秋田県公立高等学校入学者選抜1次募集 志願者数（志願先変更後）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制の課程 県合計', quota: 6604, applicants: 5753, rate: 0.87 },
+};
+
 export const AKITA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'akita',
-  years: [REIWA_7],
+  years: [REIWA_7, REIWA_6],
 };
