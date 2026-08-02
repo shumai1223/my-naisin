@@ -136,7 +136,7 @@ export default async function SchoolPage({ params }: PageProps) {
             </div>
           </section>
 
-          <SchoolPageConvertCTA schoolName={school.schoolName} prefectureCode={prefecture.code} />
+          <SchoolPageConvertCTA schoolName={school.schoolName} prefectureCode={prefecture.code} schoolCode={schoolCode} />
 
           {school.departmentRates.length > 1 && (
             <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">

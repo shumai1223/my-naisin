@@ -29,6 +29,7 @@ const EXCLUDED_ROUTES = new Set<string>([
   '/api/push/subscribe',
   '/api/push/unsubscribe',
   '/api/lead',
+  '/api/school-click',
   '/api/billing/checkout',
   '/api/stripe/webhook',
   '/api/resend/webhook',
