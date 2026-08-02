@@ -60,7 +60,25 @@ const REIWA_5: YearSnapshot = {
   grandTotal: { label: '全日制 合計', quota: 1675, applicants: 203, rate: 0.12 },
 };
 
+/**
+ * 令和4年度（2022年度）: 同一資料シリーズの令和4年度版（令和4年3月17日公表・画像スキャン
+ * PDF・全3頁）を福島県公式サイトのR4年度入学者選抜ページから発見。3頁目の全日制サマリー表
+ * （実施学校数48校・後期選抜募集定員1,825人・志願者数(出願先変更後)228人）を直接転記。倍率は
+ * 資料に印字が無いため自前算出（228/1825=0.1249…→0.12、R5〜R7と同じ計算方針）。前期選抜・
+ * 連携型選抜・定時制課程はR5〜R7と同じ理由でスコープ外。
+ */
+const REIWA_4: YearSnapshot = {
+  fiscalYear: '令和4年度（2022年度）',
+  sourceUrl: 'https://www.pref.fukushima.lg.jp/uploaded/attachment/500729.pdf',
+  sourceTitle: '福島県教育委員会 令和4年度福島県立高等学校入学者選抜後期選抜志願状況（出願先変更後）について',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制 合計', quota: 1825, applicants: 228, rate: 0.12 },
+};
+
 export const FUKUSHIMA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'fukushima',
-  years: [REIWA_7, REIWA_6, REIWA_5],
+  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4],
 };
