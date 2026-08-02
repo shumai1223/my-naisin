@@ -61,7 +61,25 @@ const REIWA_5: YearSnapshot = {
   grandTotal: { label: '一般選抜 全日制課程（実質募集定員）', quota: 3040, applicants: 2757, rate: 0.91 },
 };
 
+/**
+ * 令和4年度（2022年度）: R4年度の一次資料への直接アクセスは失効していたが、令和5年度資料
+ * （R5ippannsaisyuushigan.pdf・本ファイルREIWA_5と同一PDF）の県計行に「R4年度」列が並記
+ * されており、そこから抽出（東京都等と同じ「当年度＋前年度併記」形式）: 一般入試実質募集定員
+ * 3,381・志願変更締切後の最終志願者数3,139・競争率0.93（3139/3381=0.9284…≈0.93で印字済み値
+ * と整合）。R5/R6/R7と同じ「一般選抜（特色選抜等を除く）」のスコープ。
+ */
+const REIWA_4: YearSnapshot = {
+  fiscalYear: '令和4年度（2022年度）',
+  sourceUrl: 'https://www.pref.tottori.lg.jp/secure/1311267/R5ippannsaisyuushigan.pdf',
+  sourceTitle: '鳥取県教育委員会高等学校課 令和5年度県立高等学校一般入学者選抜最終志願者数等について（前年度＝令和4年度欄）',
+  fetchedAt: '2026-08-03',
+  origin: 'prior-year-parenthetical',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '一般選抜 全日制課程（実質募集定員）', quota: 3381, applicants: 3139, rate: 0.93 },
+};
+
 export const TOTTORI_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'tottori',
-  years: [REIWA_7, REIWA_6, REIWA_5],
+  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4],
 };
