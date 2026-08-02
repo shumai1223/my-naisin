@@ -104,6 +104,9 @@ export const EVENTS = {
   NAISHIN_TYPE_SHARE: 'naishin_type_share', // 診断結果カードを共有/保存した（type_id・mediumで面別に分解。優劣を煽らない設計のためSHARE_TO_PARENTとは意図的に分離）
   // ── Λ-7: 直接マッチング市場（Ω-6）の公開送客導線 ──
   JUKU_REFERRAL_REQUEST: 'juku_referral_request', // 保護者が提携塾へ紹介依頼ボタンを押した（送客成立の起点・パラメータにjuku_partner_idを載せる）
+  // ── TIER Σ-7: hyotei-heikinの対象混在(GSC実測で確定)を踏まえた学年自己申告ブリッジ ──
+  GRADE_SELF_IDENTIFY: 'grade_self_identify', // 「中学生/高校生」を自己申告（分母。gradeパラメータで分解）
+  UNIVERSITY_BRIDGE_CLICK: 'university_bridge_click', // 高校生を選んだ後、大学受験導線(my-shingaku)をクリック
 } as const;
 
 export type AnalyticsEvent = (typeof EVENTS)[keyof typeof EVENTS];

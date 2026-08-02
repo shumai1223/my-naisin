@@ -4,6 +4,7 @@ import * as React from 'react';
 
 import { HyoteiHeikinCalculator } from '@/components/HyoteiHeikin/HyoteiHeikinCalculator';
 import { HyoteiResultActions } from '@/components/HyoteiHeikin/HyoteiResultActions';
+import { HyoteiUniversityBridge } from '@/components/HyoteiHeikin/HyoteiUniversityBridge';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { ParentShareInvite } from '@/components/ParentShareInvite';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
@@ -72,6 +73,11 @@ export function HyoteiResultFlow() {
           }
         />
       </div>
+
+      {/* TIER Σ-7（2026-08-03）: Σ-6の実測診断で対象は「高校生専用ではなく中学生/高校生の混在」と
+          確定したため、ページ本体は作り替えず学年自己申告で高校生のみに大学受験導線を追加する。
+          自己申告なし（大多数）はここは表示されるが選択されるまで既存導線に影響しない。 */}
+      {has && <HyoteiUniversityBridge value={value} />}
 
       {/* 保護者ウィンドウ（三者面談・出願期だけ点灯）：評定平均の現在地を面談へ持って行く導線 */}
       <ParentWindowBridge className="mt-6" metricLabel="評定平均" score={typeof value === 'number' ? value : undefined} />
