@@ -64,7 +64,35 @@ const REIWA_7: YearSnapshot = {
   grandTotal: { label: '全日制本校 小計', quota: 14668, applicants: 14780, rate: 1.01 },
 };
 
+/**
+ * 令和6年度（2024年度）: 「2月20日最終志願者数」（志願変更後の確定値・R8と同じ粒度）を採用。
+ * R7/R8に存在する「地域社会学科」区分がこの年度にはまだ無い（10区分のみ）。これは学科新設に
+ * 伴う正直な差分であり、区分別内訳合計（quota 14,660・applicants 14,739）が原資料の
+ * 「全日制本校 小計」行と完全一致することを確認済み（__tests__/hiroshima.test.ts）。
+ */
+const REIWA_6: YearSnapshot = {
+  fiscalYear: '令和6年度（2024年度）',
+  sourceUrl: 'https://www.pref.hiroshima.lg.jp/uploaded/attachment/565763.pdf',
+  sourceTitle: '広島県教育委員会 令和6年度公立高等学校入学者選抜一次選抜等の志願状況について（2月20日最終志願者数）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'category-detail',
+  categories: [
+    { label: '普通科', quota: 8832, applicants: 9401, rate: 1.06 },
+    { label: '農業科', quota: 588, applicants: 414, rate: 0.70 },
+    { label: '工業科', quota: 1440, applicants: 1084, rate: 0.75 },
+    { label: '商業科', quota: 1160, applicants: 1156, rate: 1.00 },
+    { label: '家庭科', quota: 240, applicants: 194, rate: 0.81 },
+    { label: '看護科', quota: 40, applicants: 48, rate: 1.20 },
+    { label: '福祉科', quota: 40, applicants: 16, rate: 0.40 },
+    { label: '体育科', quota: 80, applicants: 80, rate: 1.00 },
+    { label: '国際科', quota: 40, applicants: 41, rate: 1.03 },
+    { label: '総合学科', quota: 2200, applicants: 2305, rate: 1.05 },
+  ],
+  grandTotal: { label: '全日制本校 小計', quota: 14660, applicants: 14739, rate: 1.01 },
+};
+
 export const HIROSHIMA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'hiroshima',
-  years: [REIWA_8, REIWA_7],
+  years: [REIWA_8, REIWA_7, REIWA_6],
 };
