@@ -25,7 +25,25 @@ const REIWA_7: YearSnapshot = {
   grandTotal: { label: '全日制 合計（県立計＋市立計）', quota: 4949, applicants: 3399, rate: 0.69 },
 };
 
+/**
+ * 令和6年度（2024年度）: R7と同一シリーズのハブページ(r6_siganjokyo)から同種の学校別一覧表
+ * ［確定］PDF(令和6年2月22日発表・全2頁)を発見。全日制「合計」行（県立計4,810/4,644/3,186＋
+ * 市立計280/280/357＝合計5,090/4,924/3,543）のうち募集定員・第1志望者数・志願率を転記:
+ * quota=4,924・applicants=3,543・rate=0.72（3543/4924=0.7195…≈0.72で整合）。独立ソース
+ * (WebSearchで拾えたR7発表比較文「令和6年度は0.72倍」)でも同一値を確認済み。
+ */
+const REIWA_6: YearSnapshot = {
+  fiscalYear: '令和6年度（2024年度）',
+  sourceUrl: 'https://www.pref.kochi.lg.jp/doc/r6_siganjokyo/file_contents/060222_Anittei_henkogo.pdf',
+  sourceTitle: '高知県教育委員会 令和6年度Ａ日程等志願先変更後の状況（学校別）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制 合計（県立計＋市立計）', quota: 4924, applicants: 3543, rate: 0.72 },
+};
+
 export const KOCHI_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'kochi',
-  years: [REIWA_7],
+  years: [REIWA_7, REIWA_6],
 };
