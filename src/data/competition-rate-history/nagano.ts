@@ -39,7 +39,25 @@ const REIWA_6: YearSnapshot = {
   grandTotal: { label: '全日制計', quota: 9945, applicants: 9312, rate: 0.94 },
 };
 
+/**
+ * 令和5年度（2023年度）: 教委の年度別発表ページ(happyou/20230301press.html)から同一資料
+ * シリーズのR5版を発見（別紙１＝全6頁・Read toolで直読み成功）。R6/R7と同じ【公立全日制課程】
+ * 「計」行を直接転記（募集人員10,070・志願数9,698・倍率0.96・9698/10070=0.9631…≈0.96で
+ * 印字済み値と整合）。本文冒頭にも同じ9,698人・0.96倍の記述があり資料内で二重に確認できる。
+ * 定時制課程（多部制・単位制含む）はR6/R7と同じ理由でスコープ外。
+ */
+const REIWA_5: YearSnapshot = {
+  fiscalYear: '令和5年度（2023年度）',
+  sourceUrl: 'https://www.pref.nagano.lg.jp/kyoiku/koko/happyou/documents/20230301bessi1.pdf',
+  sourceTitle: '長野県教育委員会 令和5年度長野県公立高等学校入学者後期選抜志願者数②（志望変更受付締切後の集計結果）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制計', quota: 10070, applicants: 9698, rate: 0.96 },
+};
+
 export const NAGANO_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'nagano',
-  years: [REIWA_7, REIWA_6],
+  years: [REIWA_7, REIWA_6, REIWA_5],
 };
