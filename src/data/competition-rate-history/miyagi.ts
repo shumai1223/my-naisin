@@ -59,7 +59,27 @@ const REIWA_5: YearSnapshot = {
   grandTotal: { label: '全日制課程・第一次募集', quota: 13760, applicants: 14095, rate: 1.02 },
 };
 
+/**
+ * 令和4年度（2022年度）: 令和5年度分の一次資料（教委発表）を直接発見できなかったため、
+ * リセモム確定記事（2022年2月18日発表）をWebSearch要約とWebFetch直接引用の2回で確認して
+ * 採用。全日制課程・第一次募集全体: 募集定員13,880・出願者数14,005・出願倍率1.01
+ * （14005/13880=1.0090…≈1.01で整合）。R5年度記事本文の「前年度比0.01ポイント増の1.02倍」
+ * （＝前年度=令和4年度が1.01倍）という記述とも整合し、独立した2記事間でのクロスチェックが
+ * 成立している。
+ */
+const REIWA_4: YearSnapshot = {
+  fiscalYear: '令和4年度（2022年度）',
+  sourceUrl: 'https://resemom.jp/article/2022/02/18/65862.html',
+  sourceTitle:
+    'リセモム「宮城県公立高、第一次募集出願状況（確定）」（宮城県教育庁 令和4年度第一次募集出願状況の発表を引用）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制課程・第一次募集', quota: 13880, applicants: 14005, rate: 1.01 },
+};
+
 export const MIYAGI_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'miyagi',
-  years: [REIWA_7, REIWA_6, REIWA_5],
+  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4],
 };

@@ -4,13 +4,14 @@ import { MIYAGI_COMPETITION_RATE_HISTORY } from '../miyagi';
  * Λ-4（多年度アーカイブ・宮城県）DoD検証: 令和7・令和6年度の全日制課程・第一次募集の合計を
  * 一次資料（宮城県教育庁「総括」表）の固定値で確認する。
  */
-describe('宮城県 多年度アーカイブ（Λ-4・令和7/令和6/令和5の3年度分・grand-total-only）', () => {
-  it('3年度分（令和7年度・令和6年度・令和5年度）を収録している', () => {
-    expect(MIYAGI_COMPETITION_RATE_HISTORY.years).toHaveLength(3);
+describe('宮城県 多年度アーカイブ（Λ-4・令和7/令和6/令和5/令和4の4年度分・grand-total-only）', () => {
+  it('4年度分（令和7年度・令和6年度・令和5年度・令和4年度）を収録している', () => {
+    expect(MIYAGI_COMPETITION_RATE_HISTORY.years).toHaveLength(4);
     expect(MIYAGI_COMPETITION_RATE_HISTORY.years.map((y) => y.fiscalYear)).toEqual([
       '令和7年度（2025年度）',
       '令和6年度（2024年度）',
       '令和5年度（2023年度）',
+      '令和4年度（2022年度）',
     ]);
   });
 
@@ -39,5 +40,12 @@ describe('宮城県 多年度アーカイブ（Λ-4・令和7/令和6/令和5の
     expect(r5.grandTotal.quota).toBe(13760);
     expect(r5.grandTotal.applicants).toBe(14095);
     expect(r5.grandTotal.rate).toBeCloseTo(1.02, 2);
+  });
+
+  it('令和4年度の全日制課程・第一次募集はリセモム確定記事と一致する(募集13,880・出願14,005・倍率1.01)', () => {
+    const r4 = MIYAGI_COMPETITION_RATE_HISTORY.years[3];
+    expect(r4.grandTotal.quota).toBe(13880);
+    expect(r4.grandTotal.applicants).toBe(14005);
+    expect(r4.grandTotal.rate).toBeCloseTo(1.01, 2);
   });
 });
