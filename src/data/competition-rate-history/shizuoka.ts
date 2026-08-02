@@ -23,7 +23,26 @@ const REIWA_8: YearSnapshot = {
   grandTotal: { label: '公立合計', quota: 16954, applicants: 16895, rate: 1.0 },
 };
 
+/**
+ * 令和7年度（2025年度）: R8と同一シリーズの一次PDF（r7sigansyasuuhenkougo.pdf・全12頁）を
+ * R7年度発表資料ハブページ経由でWebSearchにより発見。全日制の全12頁をRead toolで直読みし、
+ * 9頁目末尾「公立合計」行（募集定員17,084・志願者数（変更後）18,183・志願倍率1.06）を転記
+ * （18183/17084=1.0643…≈1.06で印字済み倍率と整合）。独立したリセモム確定記事（2025年2月27日
+ * 発表）でも同一の3数値（17,084/18,183/1.06）を確認済み。
+ */
+const REIWA_7: YearSnapshot = {
+  fiscalYear: '令和7年度（2025年度）',
+  sourceUrl:
+    'https://www.pref.shizuoka.jp/_res/projects/default_project/_page_/001/063/460/r7sigansyasuuhenkougo.pdf',
+  sourceTitle: '静岡県教育委員会 令和7年度静岡県公立高等学校入学者選抜 志願者数一覧（変更後）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '公立合計', quota: 17084, applicants: 18183, rate: 1.06 },
+};
+
 export const SHIZUOKA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'shizuoka',
-  years: [REIWA_8],
+  years: [REIWA_8, REIWA_7],
 };
