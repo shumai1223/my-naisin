@@ -48,7 +48,28 @@ const REIWA_6: YearSnapshot = {
   grandTotal: { label: '全日制の課程（一般入学者選抜・志願者確定数）', quota: 30680, applicants: 34478, rate: 1.12 },
 };
 
+/**
+ * 令和5年度（2023年度）: 千葉県教育委員会の公式ページ2件（PDFではなくHTML本文・ビジョン解析なし）
+ * から同一の数値（募集人員30,960・志願者確定数34,793）を確認。
+ *  - 一次発表（2023-02-17公表）: https://www.pref.chiba.lg.jp/kyouiku/shidou/press/2022/koukou/r050217sigannsyakakutei.html
+ *  - 選抜結果まとめ（2023-05-17公表・独立した後発ページで同数値を再掲）:
+ *    https://www.pref.chiba.lg.jp/kyouiku/shidou/press/2023/koukou/050517nyuushikekka.html
+ * 倍率1.12は34,793÷30,960の算出値（教委発表に倍率の直接記載はないが、R6/R7と同じ「志願者数÷募集人員」
+ * の定義で計算した値・小数第3位を四捨五入）。2026-08-03取得。
+ */
+const REIWA_5: YearSnapshot = {
+  fiscalYear: '令和5年度（2023年度）',
+  sourceUrl: 'https://www.pref.chiba.lg.jp/kyouiku/shidou/press/2022/koukou/r050217sigannsyakakutei.html',
+  sourceTitle:
+    '千葉県教育委員会 令和5年度千葉県公立高等学校「一般入学者選抜」等の入学志願者確定数について（結果まとめページで再確認済み）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制の課程（一般入学者選抜・志願者確定数）', quota: 30960, applicants: 34793, rate: 1.12 },
+};
+
 export const CHIBA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'chiba',
-  years: [REIWA_7, REIWA_6],
+  years: [REIWA_7, REIWA_6, REIWA_5],
 };
