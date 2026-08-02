@@ -10,14 +10,15 @@ const GRAND_TOTAL_ONLY_YEARS = TOKYO_COMPETITION_RATE_HISTORY.years.filter((y) =
  * 令和5・令和4年度は原資料に訂正履歴があり区分内訳の転記精度に自信が持てなかったため
  * grand-total-only（全日制合計のみ・二次情報源でクロスチェック済み）として別枠で検証する。
  */
-describe('東京都 多年度アーカイブ（Λ-4パイロット・令和7〜令和4の4年度分）', () => {
-  it('4年度分（令和7〜令和4年度）を収録している', () => {
-    expect(TOKYO_COMPETITION_RATE_HISTORY.years).toHaveLength(4);
+describe('東京都 多年度アーカイブ（Λ-4パイロット・令和7〜令和3の5年度分）', () => {
+  it('5年度分（令和7〜令和3年度）を収録している', () => {
+    expect(TOKYO_COMPETITION_RATE_HISTORY.years).toHaveLength(5);
     expect(TOKYO_COMPETITION_RATE_HISTORY.years.map((y) => y.fiscalYear)).toEqual([
       '令和7年度（2025年度）',
       '令和6年度（2024年度）',
       '令和5年度（2023年度）',
       '令和4年度（2022年度）',
+      '令和3年度（2021年度）',
     ]);
   });
 
@@ -72,7 +73,7 @@ describe('東京都 多年度アーカイブ（Λ-4パイロット・令和7〜�
     });
   });
 
-  describe('grand-total-only年度（令和5・令和4・二次情報源クロスチェック済み）', () => {
+  describe('grand-total-only年度（令和5・令和4・令和3）', () => {
     it.each(GRAND_TOTAL_ONLY_YEARS)('$fiscalYear: categoriesは空(内訳は未収録と正直に記録)', (snapshot) => {
       expect(snapshot.categories).toHaveLength(0);
     });
@@ -89,6 +90,13 @@ describe('東京都 多年度アーカイブ（Λ-4パイロット・令和7〜�
       expect(r4.grandTotal.quota).toBe(30306);
       expect(r4.grandTotal.applicants).toBe(41489);
       expect(r4.grandTotal.rate).toBeCloseTo(1.37, 2);
+    });
+
+    it('令和3年度の全日制合計は令和4年度総括表の前年度欄と一致する(募集29,509・応募39,785・倍率1.35)', () => {
+      const r3 = GRAND_TOTAL_ONLY_YEARS[2];
+      expect(r3.grandTotal.quota).toBe(29509);
+      expect(r3.grandTotal.applicants).toBe(39785);
+      expect(r3.grandTotal.rate).toBeCloseTo(1.35, 2);
     });
   });
 });

@@ -124,7 +124,25 @@ const REIWA_4: YearSnapshot = {
   grandTotal: { label: '全日制合計', quota: 30306, applicants: 41489, rate: 1.37 },
 };
 
+/**
+ * 令和3年度（2021年度）: 令和4年度総括表PDF（documents/d/kyoiku/01_90・教委公式サイトの
+ * 「過去の応募状況（過去5年分）」ページ経由でWebSearchにより発見・Read toolで直読み成功）の
+ * 「（　）は昨年度の数値である」括弧内欄（前年度＝令和3年度）から抽出。全日制合計:
+ * 募集人員29,509・最終応募人員39,785・最終応募倍率1.35（39785/29509=1.3483…≈1.35で
+ * 印字済み値と整合）。R4/R5と同じ理由で区分別内訳（categories）は省略しgrand-total-onlyとした。
+ */
+const REIWA_3: YearSnapshot = {
+  fiscalYear: '令和3年度（2021年度）',
+  sourceUrl: 'https://www.kyoiku.metro.tokyo.lg.jp/documents/d/kyoiku/01_90',
+  sourceTitle: '東京都教育委員会 令和4年度東京都立高等学校入学者選抜応募状況総括表（全日制）',
+  fetchedAt: '2026-08-03',
+  origin: 'prior-year-parenthetical',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制合計', schoolCount: 168, quota: 29509, applicants: 39785, rate: 1.35 },
+};
+
 export const TOKYO_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'tokyo',
-  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4],
+  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
 };
