@@ -26,7 +26,29 @@ const REIWA_8: YearSnapshot = {
   grandTotal: { label: '全日制計（一般選抜定員ベース）', schoolCount: 57, quota: 7259, applicants: 7602, rate: 1.05 },
 };
 
+/**
+ * 令和7年度（2025年度）: R8の「出願変更状況（変更後）」PDFに対応するR7版のハブページ
+ * （r07shutugannhennkoujoukyoufurekkusushutugannjoukyou.html）は現在404で削除済みのため、
+ * 同一年度の「出願状況（2/20時点・出願変更前）」一次PDF（全58校・No.1〜3）を代わりに採用
+ * （⚠️R8が「変更後」なのに対しR7は「変更前」でスコープが厳密には異なる点に注意。ただし
+ * 教委の別資料「令和7(2025)年度県立高等学校入学者選抜の結果について」に掲載の最終確定
+ * 受検倍率（受検人員8,287÷一般選抜定員7,486=1.1069…≈1.11）が本PDFの出願倍率1.11と一致
+ * しており、変更前後で総数がほぼ変動していないことを確認済み）。全日制「合計」行を転記:
+ * 一般選抜定員=7,486・出願人員=8,338・出願倍率=1.11（8338/7486=1.1138…≈1.11で整合）。
+ */
+const REIWA_7: YearSnapshot = {
+  fiscalYear: '令和7年度（2025年度）',
+  sourceUrl: 'https://www.pref.tochigi.lg.jp/m04/r07/documents/r7zennitiseiippansennbatsusyutuganjokyo.pdf',
+  sourceTitle:
+    '栃木県教育委員会 令和7（2025）年度県立高等学校入学者選抜一般選抜出願状況（全日制課程・2/20時点）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制計（一般選抜定員ベース・出願変更前2/20時点）', schoolCount: 58, quota: 7486, applicants: 8338, rate: 1.11 },
+};
+
 export const TOCHIGI_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'tochigi',
-  years: [REIWA_8],
+  years: [REIWA_8, REIWA_7],
 };
