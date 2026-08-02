@@ -80,15 +80,52 @@ function stripEstablishmentPrefixVariants(fullName: string): string[] {
  */
 const SCHOOL_TYPE_TOKEN_PATTERN = /(高等学校|高校)/g;
 
+/** 本校名と分校・校舎・学舎名を分離する正規表現（'高等学校'/'高校'の直後が分校名の開始位置）。 */
+const SCHOOL_TYPE_TOKEN_SPLIT_PATTERN = /^(.+?)(高等学校|高校)(.*)$/;
+
+/** 分校・校舎・学舎の呼称につく末尾の型トークン（短縮形の生成に使う）。 */
+const BRANCH_LABEL_TRAILING_PATTERN = /(分校|学舎|校舎|校)$/;
+
+/**
+ * 分校・校舎の全角/半角括弧表記（2026-08-02判明）に対応した追加候補を返す（純粋関数）。
+ * competition-ratesの分校表記はY-1(school-master)の正式名称と別の慣習を使う県が複数ある:
+ *  - mie/kyoto: '本校名（分校・校舎の正式suffix）'（例:'南伊勢（度会校舎）'←'南伊勢高等学校　度会校舎'）
+ *  - ehime/kyoto: '本校名（分校名のみ・「分校」を省略）'（例:'松山南（砥部）'←'…砥部分校'）
+ *  - ehime: 分校が無い本校側は'本校名（本校）'という対の表記を使う（例:'松山南（本校）'）
+ *  - kochi/yamaguchi: 本校名を省き分校名（'分校'を含む/含まない両方）のみで表記
+ *    （例:'吾北'←'高知追手前高等学校吾北分校'・'坂上分校'←'岩国高等学校坂上分校'）
+ *  - tokushima: '本校名・分校名（"校"を省略した短縮形）'（例:'富岡東・羽ノ浦'←'…羽ノ浦校'）
+ * いずれも本校名・分校名の対応関係はY-1側の正式名称から一意に読み取れる表記ゆれであり、
+ * 異なる学校を誤って同一視するリスクは無い（あいまい一致にはならず、単に候補が増えるだけ）。
+ */
+function campusNotationVariants(nameAfterPrefixStrip: string): string[] {
+  const match = nameAfterPrefixStrip.match(SCHOOL_TYPE_TOKEN_SPLIT_PATTERN);
+  if (!match) return [];
+  const base = match[1];
+  const suffix = match[3].trim();
+  if (suffix.length === 0) {
+    return [`${base}（本校）`, `${base}(本校)`];
+  }
+  const variants = [`${base}（${suffix}）`, `${base}(${suffix})`, suffix];
+  const shortSuffix = suffix.replace(BRANCH_LABEL_TRAILING_PATTERN, '');
+  if (shortSuffix.length > 0 && shortSuffix !== suffix) {
+    variants.push(`${base}（${shortSuffix}）`, `${base}(${shortSuffix})`, `${base}・${shortSuffix}`, shortSuffix);
+  }
+  return variants;
+}
+
 /**
  * 学校の正式名称から、突合対象になりうる正規化候補をすべて返す（純粋関数）。
  * 都道府県立は1候補のみ。市区町村立は「市立を除去した形」「市立を残した形」の2候補を返す
- * （上記stripEstablishmentPrefixVariantsのコメント参照）。
+ * （上記stripEstablishmentPrefixVariantsのコメント参照）。分校・校舎を持つ学校はさらに
+ * campusNotationVariantsで括弧・中点表記の候補も加える。
  */
 function candidateNormalizedNames(fullName: string): string[] {
   const trimmed = fullName.trim();
   const variants = stripEstablishmentPrefixVariants(trimmed);
-  return [...new Set(variants.map((v) => v.replace(SCHOOL_TYPE_TOKEN_PATTERN, '').trim()))];
+  const typeStripped = variants.map((v) => v.replace(SCHOOL_TYPE_TOKEN_PATTERN, '').trim());
+  const campusVariants = variants.flatMap((v) => campusNotationVariants(v));
+  return [...new Set([...typeStripped, ...campusVariants])];
 }
 
 /**

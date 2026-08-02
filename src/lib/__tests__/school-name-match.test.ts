@@ -143,6 +143,67 @@ describe('matchSchoolNameToCode', () => {
       expect(result.reason).toBe('matched');
     });
   });
+
+  // 2026-08-02判明: 分校・校舎はcompetition-rates側で県ごとに異なる括弧・中点表記を使う。
+  // Y-1(school-master)の正式名称は「本校名+高等学校+分校/校舎名」で一貫しているため、
+  // その正式名称から複数の候補表記を機械的に導出する（誤った紐付けにはならない）。
+  describe('分校・校舎の括弧/中点表記への対応(2026-08-02)', () => {
+    test('本校名（分校の正式suffixそのまま）で一致する(mie・全角スペース区切り)', () => {
+      const result = matchSchoolNameToCode('南伊勢（度会校舎）', [rec('G1', '三重県立南伊勢高等学校　度会校舎')]);
+      expect(result.matchedCode).toBe('G1');
+      expect(result.reason).toBe('matched');
+    });
+
+    test('本校名（分校の正式suffixそのまま）で一致する(mie・区切りなし)', () => {
+      const result = matchSchoolNameToCode('熊野青藍（木本校舎）', [rec('G2', '三重県立熊野青藍高等学校木本校舎')]);
+      expect(result.matchedCode).toBe('G2');
+      expect(result.reason).toBe('matched');
+    });
+
+    test('本校名（"分校"を省いた短縮形）で一致する(ehime)', () => {
+      const result = matchSchoolNameToCode('松山南（砥部）', [rec('G3', '愛媛県立松山南高等学校砥部分校')]);
+      expect(result.matchedCode).toBe('G3');
+      expect(result.reason).toBe('matched');
+    });
+
+    test('分校を持たない本校側は「本校名（本校）」でも一致する(ehime)', () => {
+      const result = matchSchoolNameToCode('松山南（本校）', [rec('G4', '愛媛県立松山南高等学校')]);
+      expect(result.matchedCode).toBe('G4');
+      expect(result.reason).toBe('matched');
+    });
+
+    test('半角括弧・"分校"省略形でも一致する(kyoto)', () => {
+      const result = matchSchoolNameToCode('京都八幡(南)', [rec('G5', '京都府立京都八幡高等学校南分校')]);
+      expect(result.matchedCode).toBe('G5');
+      expect(result.reason).toBe('matched');
+    });
+
+    test('本校名を省いた分校名のみ("分校"を含む)でも一致する(yamaguchi)', () => {
+      const result = matchSchoolNameToCode('坂上分校', [rec('G6', '山口県立岩国高等学校坂上分校')]);
+      expect(result.matchedCode).toBe('G6');
+      expect(result.reason).toBe('matched');
+    });
+
+    test('本校名を省いた分校名のみ("分校"を省略)でも一致する(kochi)', () => {
+      const result = matchSchoolNameToCode('吾北', [rec('G7', '高知県立高知追手前高等学校吾北分校')]);
+      expect(result.matchedCode).toBe('G7');
+      expect(result.reason).toBe('matched');
+    });
+
+    test('中点区切り+"校"省略形でも一致する(tokushima)', () => {
+      const result = matchSchoolNameToCode('富岡東・羽ノ浦', [rec('G8', '徳島県立富岡東高等学校羽ノ浦校')]);
+      expect(result.matchedCode).toBe('G8');
+      expect(result.reason).toBe('matched');
+    });
+
+    test('本校と分校が両方存在する場合、本校名だけの入力は本校側に一意にマッチする(誤紐付け防止)', () => {
+      const master: SchoolRecord[] = [rec('G9', '愛媛県立内子高等学校'), rec('G10', '愛媛県立内子高等学校小田分校')];
+      const honko = matchSchoolNameToCode('内子（本校）', master);
+      expect(honko.matchedCode).toBe('G9');
+      const bunko = matchSchoolNameToCode('内子（小田）', master);
+      expect(bunko.matchedCode).toBe('G10');
+    });
+  });
 });
 
 describe('matchSchoolNames', () => {
