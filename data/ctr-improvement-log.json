@@ -1,5 +1,11 @@
 [
   {
+    "route": "/hokkaido/rank",
+    "changedAt": "2026-08-02",
+    "note": "title/descriptionをcuriosity-gap型に変更(「なぜ北海道だけ内申ランク?」)。GSC実測(直近28日・7/2-7/30): imp2571/CTR1.09%/pos7.87。クエリ別内訳で最大の識別可能クエリ「内申ランク 北海道だけ」(154imp/CTR1.9%/pos8.4)が現在のtitleに反映されていないと判断し、glossary-terms.tsで確認済みの事実(「北海道のみで採用されている47都道府県で唯一の方式」)に基づき、その好奇心に直接応える見出しへ変更。本文にも同じ事実を1文追加し、FAQも1件追加してtitle/description/本文/FAQを一致させた(title/content不一致の既知の罠を回避)。",
+    "ctrBefore": 0.010890704006223259
+  },
+  {
     "route": "/nara/naishin",
     "changedAt": "2026-08-02",
     "note": "CTR実験ではなく事実誤認の是正: 2026-07-11版のtitle/descriptionは「中1は含まれない！中2＋中3×2倍の135点満点」という旧制度を記述していたが、prefectures.tsは2026年3月17日発表の制度改定を反映しmaxScore=144/gradeMultipliers{1:0.6,2:0.6,3:2}へ既に更新済み(lastVerified:2026-07-17)だった。SERPのtitle/descriptionが実際のページ内容・制度と矛盾する状態を「中1・中2は『態度』評価で27点ずつ・144点満点」に修正。GSC実測(直近14日・7/15-7/29): imp959/CTR1.25%/pos8.5(直前のworse-inconclusive判定時と同値)。",

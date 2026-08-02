@@ -20,6 +20,11 @@ const HOKKAIDO_SOURCE_URL =
 // 可視の「よくある質問」セクションと完全一致させた FAQ（FAQ リッチリザルト用）
 const HOKKAIDO_RANK_FAQS = [
   {
+    question: '内申ランクは北海道だけの制度ですか？',
+    answer:
+      'はい。内申点をA〜Mのようなアルファベットのランクに変換して合否判定に使う方式は、47都道府県の中で北海道だけが採用している独自の制度です。他の都府県は内申点の素点や、県独自の計算式で換算した点数をそのまま使用します。',
+  },
+  {
     question: '内申ランクとは何ですか？',
     answer:
       '内申ランクとは、北海道公立高校入試で使われる内申点（315点満点）を20点刻みでA〜Mの13段階に分類した指標です。Aランクが最上位（296〜315点）、Mランクが最下位（0〜75点）。志望校の合格判定にランクと学力検査の組み合わせが使われます。',
@@ -37,14 +42,14 @@ const HOKKAIDO_RANK_FAQS = [
 ];
 
 export const metadata: Metadata = {
-  title: '北海道の内申ランク判定｜315点満点をA〜M全13段階に自動変換【無料・2026】 | My Naishin',
-  description: '【無料】北海道の内申点（中1:中2:中3=2:2:3で合算した315点満点）から、A（296点以上）〜M（75点以下）の内申ランクを30秒で自動判定。学力検査点とあわせて札幌南・札幌北など主要校の合格目安とも比較できます。2026年度入試対応。',
+  title: '内申ランクA〜M判定【北海道だけの制度】315点満点を自動変換 | My Naishin',
+  description: '「なぜ北海道だけ内申ランク?」他都府県は点数制ですが、北海道はA(296点)〜M(75点以下)の13段階ランク制。315点満点の内申点から30秒で自動判定し、札幌南・北など主要校の合格目安も比較できます。2026年度入試対応。',
   keywords: ['北海道 内申ランク', '北海道 ランク 計算', '北海道 公立高校', 'Aランク', 'Bランク', '札幌南', '札幌北', '内申点 北海道'],
   alternates: {
     canonical: 'https://my-naishin.com/hokkaido/rank',
   },
   openGraph: {
-    title: '北海道の内申ランク判定｜315点満点をA〜M全13段階に自動変換【無料・2026】 | My Naishin',
+    title: '内申ランクA〜M判定【北海道だけの制度】315点満点を自動変換 | My Naishin',
     description: '北海道公立高校入試の内申ランクを瞬時に判定。主要校の合格目安と比較可能。',
     url: 'https://my-naishin.com/hokkaido/rank',
   },
@@ -123,7 +128,7 @@ export default function HokkaidoRankPage() {
               北海道の内申ランクA〜Mとは？
             </h2>
             <p className="text-sm text-slate-600 leading-relaxed mb-4">
-              北海道公立高校入試では、内申点（315点満点）をAランク〜Mランクの13段階に分類し、志望校の合否判定に使います。<strong>Aランクが最上位、Mランクが最下位</strong>で、各ランクは20点刻みで区切られています。学力検査（300点満点）と合わせた総合点で合否が判定されます。
+              北海道公立高校入試では、内申点（315点満点）をAランク〜Mランクの13段階に分類し、志望校の合否判定に使います。<strong>Aランクが最上位、Mランクが最下位</strong>で、各ランクは20点刻みで区切られています。学力検査（300点満点）と合わせた総合点で合否が判定されます。<strong>このアルファベット表記のランク制度は、47都道府県の中で北海道だけが採用している独自の方式</strong>です（他の都府県は内申点の素点や換算点をそのまま使用）。
             </p>
 
             <div className="overflow-x-auto">
@@ -214,6 +219,12 @@ export default function HokkaidoRankPage() {
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
             <div className="space-y-4">
+              <div>
+                <div className="font-bold text-slate-800 text-sm">Q. 内申ランクは北海道だけの制度ですか？</div>
+                <p className="mt-1 text-sm text-slate-600 leading-relaxed">
+                  はい。内申点をA〜Mのようなアルファベットのランクに変換して合否判定に使う方式は、47都道府県の中で<strong>北海道だけ</strong>が採用している独自の制度です。他の都府県は内申点の素点や、県独自の計算式で換算した点数をそのまま使用します。
+                </p>
+              </div>
               <div>
                 <div className="font-bold text-slate-800 text-sm">Q. 内申ランクとは何ですか？</div>
                 <p className="mt-1 text-sm text-slate-600 leading-relaxed">
