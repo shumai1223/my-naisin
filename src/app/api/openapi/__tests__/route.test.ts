@@ -30,6 +30,7 @@ const EXCLUDED_ROUTES = new Set<string>([
   '/api/push/unsubscribe',
   '/api/lead',
   '/api/school-click',
+  '/api/parent-funnel',
   '/api/billing/checkout',
   '/api/stripe/webhook',
   '/api/resend/webhook',

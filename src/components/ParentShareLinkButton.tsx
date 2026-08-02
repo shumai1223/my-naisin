@@ -5,6 +5,7 @@ import { Share2, Check, QrCode } from 'lucide-react';
 import { toDataURL as qrToDataURL } from 'qrcode';
 
 import { EVENTS, track } from '@/lib/track';
+import { beaconParentFunnelEvent } from '@/lib/parent-funnel-beacon';
 import { APP_NAME } from '@/lib/constants';
 import {
   buildParentShareUrl,
@@ -112,6 +113,7 @@ export function ParentShareLinkButton({
       medium,
       ...(tool ? { tool } : {}),
     });
+    beaconParentFunnelEvent('share_to_parent', { medium, prefectureCode: ctx.prefectureCode });
     onShared?.();
 
     // スマホ＝ネイティブ共有シート（LINE等）。可能なら成績レポート画像も添付。
@@ -156,6 +158,7 @@ export function ParentShareLinkButton({
       medium: 'line',
       ...(tool ? { tool } : {}),
     });
+    beaconParentFunnelEvent('share_to_parent', { medium: 'line', prefectureCode: ctx.prefectureCode });
     onShared?.();
     const lineUrl = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
     window.open(lineUrl, '_blank', 'noopener,noreferrer');
@@ -171,6 +174,7 @@ export function ParentShareLinkButton({
       medium: 'x',
       ...(tool ? { tool } : {}),
     });
+    beaconParentFunnelEvent('share_to_parent', { medium: 'x', prefectureCode: ctx.prefectureCode });
     onShared?.();
     const xUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
     window.open(xUrl, '_blank', 'noopener,noreferrer');

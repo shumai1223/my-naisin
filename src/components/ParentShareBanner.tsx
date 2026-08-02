@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import { Inbox, Target, PartyPopper } from 'lucide-react';
 
 import { EVENTS, track } from '@/lib/track';
+import { beaconParentFunnelEvent } from '@/lib/parent-funnel-beacon';
 import { parseParentShare, encodeSharePayload } from '@/lib/share';
 
 /**
@@ -36,6 +37,7 @@ export function ParentShareBanner() {
       has_target: typeof share.target === 'number',
       ...(typeof share.gap === 'number' ? { gap: share.gap } : {}),
     });
+    beaconParentFunnelEvent('parent_landing_view', { prefectureCode: share.prefectureCode });
     // 着地時点で一度だけ。share は query 由来で実質不変なので二重発火しない。
   }, [share]);
 

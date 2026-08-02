@@ -27,6 +27,7 @@ import {
   yen,
 } from '@/lib/affiliate-economics';
 import { AFFILIATES, type AffiliateId } from '@/lib/affiliates';
+import { getParentFunnelReach, getParentFunnelShareByMedium } from '@/lib/parent-funnel-db';
 import { TrendChart } from '@/components/admin/TrendChart';
 import { STATS_METRICS, STATS_MIN_SAMPLE_SIZE, computeAggregate, type StatsMetric } from '@/lib/stats-aggregation';
 import { getStatsValues } from '@/lib/stats-db';
@@ -221,6 +222,8 @@ export default async function AdminReportPage({
     apiFunnel,
     statsValuesByMetric,
     adoptionDomains,
+    parentFunnelReach,
+    parentFunnelShareByMedium,
   ] = await Promise.all([
     getClickSummary(days, to),
     getClickTrend(trendDays, trendView, to),
@@ -236,6 +239,8 @@ export default async function AdminReportPage({
     getFreemiumFunnel(),
     Promise.all(STATS_METRICS.map((metric) => getStatsValues(metric))),
     getAdoptionDomainSummary(days),
+    getParentFunnelReach(days),
+    getParentFunnelShareByMedium(days),
   ]);
 
   // 匿名統計（S-1）の収集状況：件数のみ（k-匿名性のため集計値そのものはここでは出さない）。
@@ -598,6 +603,56 @@ export default async function AdminReportPage({
               )}
             </div>
           )}
+        </div>
+
+        {/* 保護者ファネル到達率（TIER Σ-3・2026-08-02新設・D1一次記録＝GA4非依存） */}
+        <div className="mt-6">
+          <h2 className={sectionTitle}>保護者ファネル到達率 — share_to_parent → landing → affiliate_click</h2>
+          <p className="mt-0.5 text-[11px] leading-relaxed text-slate-400">
+            GA4は約14倍undercountするため判定に使えない（直近実測: D1 25件に対しGA4 0件等）。上のファネル常設計器と違い、
+            この段はD1に一次記録している（/api/parent-funnelビーコン・affiliate_clickはclicksテーブルのplacement=&apos;parent-lp&apos;を流用）ので、
+            URLへの手貼り不要でこのページを開くだけで実数が出る。
+          </p>
+          <div className="mt-2 space-y-2 rounded-xl border border-slate-200 bg-white p-3 shadow-sm">
+            {(
+              [
+                { label: '① 生徒が保護者へ送信 (share_to_parent)', count: parentFunnelReach.shareToParent },
+                { label: '② 保護者が着地 (parent_landing_view)', count: parentFunnelReach.parentLandingView },
+                { label: '③ 保護者面での送客クリック (affiliate_click)', count: parentFunnelReach.affiliateClick },
+              ] as const
+            ).map((s, i, arr) => (
+              <div key={s.label} className="flex items-center gap-3 text-sm">
+                <span className="w-72 shrink-0 truncate font-medium text-slate-700">{s.label}</span>
+                <div className="flex-1">
+                  <Bar value={s.count} max={Math.max(1, ...arr.map((x) => x.count))} className="bg-indigo-500" />
+                </div>
+                <span className="w-16 shrink-0 text-right font-bold tabular-nums text-slate-800">{s.count.toLocaleString('ja-JP')}</span>
+                {i > 0 && (
+                  <span className="w-24 shrink-0 text-right text-xs font-bold text-slate-400">
+                    {i === 1
+                      ? parentFunnelReach.shareToLandingRate !== null
+                        ? `到達率${parentFunnelReach.shareToLandingRate}%`
+                        : '分母0'
+                      : parentFunnelReach.landingToClickRate !== null
+                        ? `到達率${parentFunnelReach.landingToClickRate}%`
+                        : '分母0'}
+                  </span>
+                )}
+              </div>
+            ))}
+          </div>
+          {parentFunnelShareByMedium.length > 0 && (
+            <div className="mt-2 flex flex-wrap gap-2">
+              {parentFunnelShareByMedium.map((m) => (
+                <span key={m.medium} className="rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1 text-[11px] font-semibold text-slate-600">
+                  {m.medium}: {m.count.toLocaleString('ja-JP')}
+                </span>
+              ))}
+            </div>
+          )}
+          <p className="mt-2 text-[11px] leading-relaxed text-slate-400">
+            ※ 夏(7-8月)はトラフィックの谷でサンプルが少なく、率の変動が大きい。判定は11月以降にまとめて行う方針。
+          </p>
         </div>
 
         {/* 能動運用ロードマップ G1〜G6（2026-07-11収益試算v2・努力/最高シナリオへの目盛り） */}
