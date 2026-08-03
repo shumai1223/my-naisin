@@ -554,6 +554,19 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000316',
+      schoolName: '宣真高等学校',
+      fiscalYearLabel: '令和8年度(2026年度)',
+      courses: [],
+      totalCapacity: 280,
+      source: {
+        url: 'https://senshin-gakuen.jp/requirements/',
+        docTitle: '生徒募集要項（宣真高等学校）募集人員（普通科女子）',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000307',
       schoolName: '箕面自由学園高等学校',
       fiscalYearLabel: '2026年度（令和8年度）',
