@@ -554,6 +554,22 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000441',
+      schoolName: '清教学園高等学校',
+      fiscalYearLabel: '2026年度（令和8年度）',
+      courses: [
+        { courseName: '普通科 S特進コース 理系（3年コース・外部募集）', capacity: 80 },
+        { courseName: '普通科 S特進コース 文系（3年コース・外部募集）', capacity: 120 },
+      ],
+      totalCapacity: 200,
+      source: {
+        url: 'https://www.seikyo.ed.jp/wp/wp-content/uploads/2026/01/2026-3youkou.pdf',
+        docTitle: '2026年度 高等学校入学試験要項（清教学園高等学校）募集人員',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000423',
       schoolName: '同志社香里高等学校',
       fiscalYearLabel: '令和8年度(2026年度)（約）',
