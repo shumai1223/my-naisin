@@ -95,7 +95,25 @@ const REIWA_3: YearSnapshot = {
   grandTotal: { label: '全日制課程・後期（一般）選抜 計', quota: 8785, applicants: 7411, rate: 0.84 },
 };
 
+/**
+ * 令和2年度（2020年度）: 5年→6年横展開。R3〜R7と同一シリーズのリセモム確定記事（2020年2月26日
+ * 発表）をWebSearch要約とWebFetch直接引用の2回で同一数値を確認して採用。全日制課程「後期
+ * （一般）選抜の募集人員8,743人に対し、8,041人が志願し、倍率は0.92倍」と明記
+ * （8041/8743=0.9197…≈0.92で印字済み値と整合）。
+ */
+const REIWA_2: YearSnapshot = {
+  fiscalYear: '令和2年度（2020年度）',
+  sourceUrl: 'https://resemom.jp/article/2020/02/26/54964.html',
+  sourceTitle:
+    'リセモム「【高校受験2020】熊本県公立高入試、後期（一般）選抜の出願状況・倍率（確定）熊本1.46倍」（熊本県教育委員会 令和2年度後期（一般）選抜出願状況の発表を引用）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制課程・後期（一般）選抜 計', quota: 8743, applicants: 8041, rate: 0.92 },
+};
+
 export const KUMAMOTO_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'kumamoto',
-  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
+  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3, REIWA_2],
 };

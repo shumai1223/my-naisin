@@ -6,15 +6,16 @@ import { KUMAMOTO_COMPETITION_RATE_HISTORY } from '../kumamoto';
  * (倍率0.92)の二重検証済み。R6はネイティブ文書の「計」行とWebSearch独立記事(倍率0.94)の
  * 二重検証済み。
  */
-describe('熊本県 多年度アーカイブ（Λ-4・令和7/令和6/令和5/令和4/令和3の5年度分・grand-total-only）', () => {
-  it('5年度分（令和7年度・令和6年度・令和5年度・令和4年度・令和3年度）を収録している', () => {
-    expect(KUMAMOTO_COMPETITION_RATE_HISTORY.years).toHaveLength(5);
+describe('熊本県 多年度アーカイブ（Λ-4・令和7/令和6/令和5/令和4/令和3/令和2の6年度分・grand-total-only）', () => {
+  it('6年度分（令和7年度・令和6年度・令和5年度・令和4年度・令和3年度・令和2年度）を収録している', () => {
+    expect(KUMAMOTO_COMPETITION_RATE_HISTORY.years).toHaveLength(6);
     expect(KUMAMOTO_COMPETITION_RATE_HISTORY.years.map((y) => y.fiscalYear)).toEqual([
       '令和7年度（2025年度）',
       '令和6年度（2024年度）',
       '令和5年度（2023年度）',
       '令和4年度（2022年度）',
       '令和3年度（2021年度）',
+      '令和2年度（2020年度）',
     ]);
   });
 
@@ -57,5 +58,12 @@ describe('熊本県 多年度アーカイブ（Λ-4・令和7/令和6/令和5/�
     expect(r3.grandTotal.quota).toBe(8785);
     expect(r3.grandTotal.applicants).toBe(7411);
     expect(r3.grandTotal.rate).toBeCloseTo(0.84, 2);
+  });
+
+  it('令和2年度の全日制課程・後期(一般)選抜の合計はリセモム記事と一致する(募集8,743・出願8,041・倍率0.92)', () => {
+    const r2 = KUMAMOTO_COMPETITION_RATE_HISTORY.years[5];
+    expect(r2.grandTotal.quota).toBe(8743);
+    expect(r2.grandTotal.applicants).toBe(8041);
+    expect(r2.grandTotal.rate).toBeCloseTo(0.92, 2);
   });
 });
