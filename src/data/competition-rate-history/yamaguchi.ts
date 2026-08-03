@@ -60,7 +60,24 @@ const REIWA_5: YearSnapshot = {
   grandTotal: { label: '全日制課程 第1次募集', quota: 5675, applicants: 6079, rate: 1.07 },
 };
 
+/**
+ * 令和4年度（2022年度）: R5/R6/R7と同一シリーズのリセモム確定記事（2022年2月25日発表）を
+ * WebFetchで直接引用。全日制課程第1次募集全体: 定員5,650・出願者数6,121・確定出願倍率1.08
+ * （6121/5650=1.0834…≈1.08で整合。記事本文にも同数値が明記）。
+ */
+const REIWA_4: YearSnapshot = {
+  fiscalYear: '令和4年度（2022年度）',
+  sourceUrl: 'https://resemom.jp/article/2022/02/25/65985.html',
+  sourceTitle:
+    'リセモム「【高校受験2022】山口県公立高、第1次募集志願状況（確定）徳山（理数）1.6倍」（山口県教育委員会 令和4年度第1次募集入学志願者数の発表を引用）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制課程 第1次募集', quota: 5650, applicants: 6121, rate: 1.08 },
+};
+
 export const YAMAGUCHI_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'yamaguchi',
-  years: [REIWA_7, REIWA_6, REIWA_5],
+  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4],
 };
