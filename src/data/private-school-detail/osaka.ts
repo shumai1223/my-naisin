@@ -554,6 +554,20 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000520',
+      schoolName: '清風南海高等学校',
+      fiscalYearLabel: '2026年度（令和8年度）（約・外部募集は「3か年特進コース」のみ）',
+      courses: [{ courseName: '普通科 3か年特進コース（男女・外部募集）', capacity: 40 }],
+      totalCapacity: 40,
+      source: {
+        url: 'https://www.seifunankai.ac.jp/jukensei/high/',
+        docTitle:
+          '2026年度 生徒募集要項（清風南海高等学校）募集定員（js88.com掲載の在籍数統計〈男20+女17=37名〉と概ね整合）',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'secondary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000511',
       schoolName: '羽衣学園高等学校',
       fiscalYearLabel: '2026年度（令和8年度）（約・2024年度入試も同水準を確認済み）',
