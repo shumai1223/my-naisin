@@ -44,7 +44,25 @@ const REIWA_6: YearSnapshot = {
   grandTotal: { label: '全日制公立合計', quota: 5729, applicants: 4518, rate: 0.79 },
 };
 
+/**
+ * 令和5年度（2023年度）: R6/R7と同一シリーズの一次PDF（r5ippanbairitsu.pdf・令和5年2月21日
+ * 発表・全5頁）を教委のR5年度用ハブページ経由で発見・Read toolで全頁直読み成功。「全日制公立
+ * 合計」行（一般選抜定員5,948・一般選抜志願者数4,869・一般選抜志願倍率0.82）を直接転記
+ * （4869/5948=0.8186…≈0.82で印字済み値と整合・R6/R7と同じ「全日制公立合計」スコープ）。
+ * 定時制課程はR6/R7と同じ理由でスコープ外。
+ */
+const REIWA_5: YearSnapshot = {
+  fiscalYear: '令和5年度（2023年度）',
+  sourceUrl: 'https://www.pref.yamagata.jp/documents/25535/r5ippanbairitsu.pdf',
+  sourceTitle: '山形県教育委員会 令和5年度山形県公立高等学校入学者選抜 一般入学者選抜 志願状況',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制公立合計', quota: 5948, applicants: 4869, rate: 0.82 },
+};
+
 export const YAMAGATA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'yamagata',
-  years: [REIWA_7, REIWA_6],
+  years: [REIWA_7, REIWA_6, REIWA_5],
 };

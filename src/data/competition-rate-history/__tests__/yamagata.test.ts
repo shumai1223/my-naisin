@@ -4,12 +4,13 @@ import { YAMAGATA_COMPETITION_RATE_HISTORY } from '../yamagata';
  * 山形県 多年度アーカイブ（Λ-4）DoD検証: 令和7・令和6年度の全日制公立合計の数値を
  * 一次資料の固定値で確認する。
  */
-describe('山形県 多年度アーカイブ（Λ-4・令和7/令和6の2年度分・grand-total-only）', () => {
-  it('2年度分（令和7年度・令和6年度）を収録している', () => {
-    expect(YAMAGATA_COMPETITION_RATE_HISTORY.years).toHaveLength(2);
+describe('山形県 多年度アーカイブ（Λ-4・令和7/令和6/令和5の3年度分・grand-total-only）', () => {
+  it('3年度分（令和7年度・令和6年度・令和5年度）を収録している', () => {
+    expect(YAMAGATA_COMPETITION_RATE_HISTORY.years).toHaveLength(3);
     expect(YAMAGATA_COMPETITION_RATE_HISTORY.years.map((y) => y.fiscalYear)).toEqual([
       '令和7年度（2025年度）',
       '令和6年度（2024年度）',
+      '令和5年度（2023年度）',
     ]);
   });
 
@@ -31,5 +32,12 @@ describe('山形県 多年度アーカイブ（Λ-4・令和7/令和6の2年度�
     expect(r6.grandTotal.quota).toBe(5729);
     expect(r6.grandTotal.applicants).toBe(4518);
     expect(r6.grandTotal.rate).toBeCloseTo(0.79, 2);
+  });
+
+  it('令和5年度の合計は一次資料と一致する(一般選抜定員5,948・志願者数4,869・倍率0.82)', () => {
+    const r5 = YAMAGATA_COMPETITION_RATE_HISTORY.years[2];
+    expect(r5.grandTotal.quota).toBe(5948);
+    expect(r5.grandTotal.applicants).toBe(4869);
+    expect(r5.grandTotal.rate).toBeCloseTo(0.82, 2);
   });
 });
