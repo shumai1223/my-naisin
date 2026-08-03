@@ -63,7 +63,24 @@ const REIWA_5: YearSnapshot = {
   grandTotal: { label: '一般選抜 全日制課程（旧制度・推薦/特色選抜等を除く）', quota: 6286, applicants: 6689, rate: 1.06 },
 };
 
+/**
+ * 令和4年度（2022年度）: R5/R6/R7と同じ旧制度下でのリセモム確定記事（2022年3月7日発表）を
+ * WebFetchで直接引用。全日制課程「一般選抜」全体: 学力検査定員6,308・出願者数6,912・
+ * 出願倍率1.09（6912/6308=1.0958…≈1.09で整合。記事本文にも同数値が明記）。
+ */
+const REIWA_4: YearSnapshot = {
+  fiscalYear: '令和4年度（2022年度）',
+  sourceUrl: 'https://resemom.jp/article/2022/03/07/66110.html',
+  sourceTitle:
+    'リセモム「【高校受験2022】滋賀県立高、一般選抜の出願状況（確定）膳所1.56倍」（滋賀県教育委員会 令和4年度一般選抜確定出願状況の発表を引用）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '一般選抜 全日制課程（旧制度・推薦/特色選抜等を除く）', quota: 6308, applicants: 6912, rate: 1.09 },
+};
+
 export const SHIGA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'shiga',
-  years: [REIWA_7, REIWA_6, REIWA_5],
+  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4],
 };
