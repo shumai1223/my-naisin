@@ -4,12 +4,13 @@ import { SHIZUOKA_COMPETITION_RATE_HISTORY } from '../shizuoka';
  * 静岡県 多年度アーカイブ（Λ-4）DoD検証: 令和8・令和7年度の「公立合計」の数値を
  * 一次資料/リセモム記事の固定値で確認する。
  */
-describe('静岡県 多年度アーカイブ（Λ-4・令和8/令和7の2年度分・grand-total-only）', () => {
-  it('2年度分（令和8年度・令和7年度）を収録している', () => {
-    expect(SHIZUOKA_COMPETITION_RATE_HISTORY.years).toHaveLength(2);
+describe('静岡県 多年度アーカイブ（Λ-4・令和8/令和7/令和6の3年度分・grand-total-only）', () => {
+  it('3年度分（令和8年度・令和7年度・令和6年度）を収録している', () => {
+    expect(SHIZUOKA_COMPETITION_RATE_HISTORY.years).toHaveLength(3);
     expect(SHIZUOKA_COMPETITION_RATE_HISTORY.years.map((y) => y.fiscalYear)).toEqual([
       '令和8年度（2026年度）',
       '令和7年度（2025年度）',
+      '令和6年度（2024年度）',
     ]);
   });
 
@@ -31,5 +32,12 @@ describe('静岡県 多年度アーカイブ（Λ-4・令和8/令和7の2年度�
     expect(r7.grandTotal.quota).toBe(17084);
     expect(r7.grandTotal.applicants).toBe(18183);
     expect(r7.grandTotal.rate).toBeCloseTo(1.06, 2);
+  });
+
+  it('令和6年度の公立合計はリセモム記事と一致する(募集定員17,699・志願者数18,702・倍率1.06)', () => {
+    const r6 = SHIZUOKA_COMPETITION_RATE_HISTORY.years[2];
+    expect(r6.grandTotal.quota).toBe(17699);
+    expect(r6.grandTotal.applicants).toBe(18702);
+    expect(r6.grandTotal.rate).toBeCloseTo(1.06, 2);
   });
 });
