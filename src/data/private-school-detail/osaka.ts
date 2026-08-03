@@ -475,6 +475,20 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000174',
+      schoolName: 'プール学院高等学校',
+      fiscalYearLabel: '（年度非特定・複数回のWebSearchで一貫して同数値を確認）',
+      courses: [],
+      totalCapacity: 210,
+      source: {
+        url: 'https://poole.ed.jp/wp/wp-content/themes/poole/assets/img/exam/hs2027.pdf',
+        docTitle:
+          'プール学院高等学校生徒募集要項（公式PDFは空白レンダリング不良で直読み不可のためWebSearch要約2回で「スーパー特進・特進・国際・総合芸術の4コース合計210名(女子・内部進学者含む)」を確認）',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'secondary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000637',
       schoolName: '帝塚山学院泉ケ丘高等学校',
       fiscalYearLabel: '令和8年度(2026年度)',
