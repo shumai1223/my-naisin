@@ -103,7 +103,27 @@ const REIWA_4: YearSnapshot = {
   grandTotal: { label: '全日制計（一般選抜定員ベース・出願変更前2/21時点）', schoolCount: 58, quota: 7986, applicants: 9021, rate: 1.13 },
 };
 
+/**
+ * 令和3年度（2021年度）: 5年→6年横展開。教委のR3年度ハブページ（h32koukounyuusi/r03kokonyushi/
+ * r03oshirase.html・年度表記がh32フォルダである点に注意）経由で「一般選抜出願変更状況」PDF
+ * （全3頁）を発見・Read toolで直読み。R4〜R7と同じ理由で出願変更前（2/22時点）の列を採用。
+ * 3頁目末尾の「合計」行を転記: 一般選抜定員=8,093・出願人員(2/22)=9,102・出願倍率(2/22)=1.12
+ * （9102/8093=1.1247…≈1.12で印字済み値と整合）。
+ */
+const REIWA_3: YearSnapshot = {
+  fiscalYear: '令和3年度（2021年度）',
+  sourceUrl:
+    'https://www.pref.tochigi.lg.jp/m04/h32koukounyuusi/r03kokonyushi/documents/r03ippanbkaigaisyutuganhenkou.pdf',
+  sourceTitle:
+    '栃木県教育委員会 令和3（2021）年度県立高等学校入学者選抜一般選抜出願変更状況（全日制課程・2/22時点）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制計（一般選抜定員ベース・出願変更前2/22時点）', schoolCount: 59, quota: 8093, applicants: 9102, rate: 1.12 },
+};
+
 export const TOCHIGI_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'tochigi',
-  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4],
+  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
 };
