@@ -554,6 +554,22 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000511',
+      schoolName: '羽衣学園高等学校',
+      fiscalYearLabel: '2026年度（令和8年度）（約・2024年度入試も同水準を確認済み）',
+      courses: [
+        { courseName: '普通科 文理特進Ⅰ類・Ⅱ類コース（合計・約）', capacity: 170 },
+        { courseName: '普通科 進学コース（約）', capacity: 170 },
+      ],
+      totalCapacity: 340,
+      source: {
+        url: 'https://hagoromogakuen.ed.jp/cms/wp-content/uploads/2025/07/2026_oosaka_sd.pdf',
+        docTitle: '生徒募集要項＆出願情報登録の手引き 2026年度入試 大阪入試（羽衣学園高等学校）募集人員',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000496',
       schoolName: '東大阪大学柏原高等学校',
       fiscalYearLabel: '2026年度（令和8年度）（2027年度以降は生徒募集停止発表済み）',
