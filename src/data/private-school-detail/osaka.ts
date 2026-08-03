@@ -489,6 +489,23 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000192',
+      schoolName: '大谷高等学校',
+      fiscalYearLabel: '令和9年度(2027年度)',
+      courses: [
+        { courseName: '全日制普通科 プレミアム文理コース（女子・内部進学者を除く）', capacity: 40 },
+        { courseName: '全日制普通科 アドバンス文理コース（女子・内部進学者を除く）', capacity: 40 },
+      ],
+      totalCapacity: 80,
+      source: {
+        url: 'https://www.osk-ohtani.ed.jp/web/wp-content/themes/202311ohtani/images/common/High-school-recruitment-guideline_2027.pdf',
+        docTitle:
+          '令和9年度(2027年度)入試 大谷高等学校 生徒募集要項「1.募集人員」（学校法人大谷学園。京都市の別法人校「大谷高等学校」(otani.ed.jp)との混同に注意し住所照合済み）',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000637',
       schoolName: '帝塚山学院泉ケ丘高等学校',
       fiscalYearLabel: '令和8年度(2026年度)',
