@@ -59,7 +59,23 @@ const REIWA_6: YearSnapshot = {
   grandTotal: { label: '公立合計', quota: 17699, applicants: 18702, rate: 1.06 },
 };
 
+/**
+ * 令和5年度（2023年度）: R6/R7/R8と同一シリーズのリセモム確定記事（2023年2月24日発表・
+ * 志願変更後）をWebFetchで直接引用。全日制「公立合計」: 募集定員18,598・志願者数19,284・
+ * 志願倍率1.04（19284/18598=1.0369…≈1.04で整合。記事本文にも同数値が明記）。
+ */
+const REIWA_5: YearSnapshot = {
+  fiscalYear: '令和5年度（2023年度）',
+  sourceUrl: 'https://resemom.jp/article/2023/02/24/71106.html',
+  sourceTitle: 'リセモム「【高校受験2023】静岡県公立高、一般選抜志願状況（確定）静岡1.14倍」（静岡県教育委員会 令和5年度一般選抜志願状況の発表を引用）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '公立合計', quota: 18598, applicants: 19284, rate: 1.04 },
+};
+
 export const SHIZUOKA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'shizuoka',
-  years: [REIWA_8, REIWA_7, REIWA_6],
+  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5],
 };
