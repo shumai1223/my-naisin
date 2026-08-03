@@ -105,6 +105,28 @@ export const PRIVATE_SCHOOL_DETAIL_OKAYAMA: PrivateSchoolDetailFile = {
         sourceTier: 'primary' as const,
       },
     },
+    {
+      schoolCode: 'D133310000176',
+      schoolName: 'おかやま山陽高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [
+        {
+          courseName: '普通科（特別進学・総合進学・公務員・ビューティ・IT・音楽・スポーツの7コース合算）',
+          capacity: 160,
+        },
+        { courseName: '専門科 機械科', capacity: 40 },
+        { courseName: '専門科 自動車科', capacity: 40 },
+        { courseName: '専門科 調理科', capacity: 45 },
+        { courseName: '専門科 製菓科', capacity: 40 },
+      ],
+      totalCapacity: 325,
+      source: {
+        url: 'https://www.okayama-sanyo-hs.ed.jp/wp/wp-content/uploads/2025/09/54636e2610780a2511f3d659e3571788.pdf',
+        docTitle: '生徒募集要項（おかやま山陽高等学校）「1.募集定員 325名[男女共学]」',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
   ],
   skipped: [],
 };
