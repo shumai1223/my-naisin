@@ -79,7 +79,27 @@ const REIWA_4: YearSnapshot = {
   grandTotal: { label: '一般選抜 全日制課程（特色化選抜合格内定者数を除く）', quota: 12841, applicants: 13324, rate: 1.03 },
 };
 
+/**
+ * 令和3年度（2021年度）: 4年→5年横展開。R4〜R7と同一シリーズのリセモム確定記事（2021年2月26日
+ * 発表）をWebFetchで直接引用。全日制課程「一般選抜」全体: 募集人数12,552・志願者数13,289・
+ * 平均志願倍率1.05（教委発表の印字済み値をそのまま採用）。⚠️注記: 13289/12552を単純計算すると
+ * 1.0587…となり通常の四捨五入では1.06になるが印字済み倍率は1.05（yamanashi R4エントリで
+ * 既知の「単純計算と印字値の不一致」パターンと同型）と推測し、自前で丸め直さず印字済みの
+ * 確定値をそのまま正直に転記した。
+ */
+const REIWA_3: YearSnapshot = {
+  fiscalYear: '令和3年度（2021年度）',
+  sourceUrl: 'https://resemom.jp/article/2021/03/01/60703.html',
+  sourceTitle:
+    'リセモム「【高校受験2021】新潟県公立高、一般選抜の志願状況（確定）新潟（理数）1.91倍」（新潟県教育委員会 令和3年度一般選抜志願状況の発表を引用）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '一般選抜 全日制課程（特色化選抜合格内定者数を除く）', quota: 12552, applicants: 13289, rate: 1.05 },
+};
+
 export const NIIGATA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'niigata',
-  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4],
+  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
 };
