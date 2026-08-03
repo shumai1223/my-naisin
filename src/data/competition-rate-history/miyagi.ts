@@ -79,7 +79,25 @@ const REIWA_4: YearSnapshot = {
   grandTotal: { label: '全日制課程・第一次募集', quota: 13880, applicants: 14005, rate: 1.01 },
 };
 
+/**
+ * 令和3年度（2021年度）: 4年→5年横展開。R4と同じ理由（一次資料未発見）でR4〜R7と同一シリーズの
+ * リセモム確定記事（2021年2月18日発表）をWebFetchで直接引用。全日制課程・第一次募集全体:
+ * 募集定員14,200・出願者数13,685・出願倍率0.96（13685/14200=0.9637…≈0.96で整合。記事本文にも
+ * 同数値が明記）。
+ */
+const REIWA_3: YearSnapshot = {
+  fiscalYear: '令和3年度（2021年度）',
+  sourceUrl: 'https://resemom.jp/article/2021/02/19/60549.html',
+  sourceTitle:
+    'リセモム「【高校受験2021】宮城県公立高、第一次募集出願状況（確定）宮城一1.48倍」（宮城県教育庁 令和3年度第一次募集出願状況の発表を引用）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制課程・第一次募集', quota: 14200, applicants: 13685, rate: 0.96 },
+};
+
 export const MIYAGI_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'miyagi',
-  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4],
+  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
 };
