@@ -76,7 +76,25 @@ const REIWA_4: YearSnapshot = {
   grandTotal: { label: '全日制総計', schoolCount: 53, quota: 7149, applicants: 7693, rate: 1.08 },
 };
 
+/**
+ * 令和3年度（2021年度）: 4年→5年横展開。教委の後期選抜志願状況ページアーカイブに該当年度分が
+ * 見当たらなかったため、R4/R5/R6/R7と同一シリーズのリセモム確定記事（2021年3月6日発表）を
+ * WebFetchで直接引用。全日制全体: 募集人数7,017・志願者数7,566・志願倍率1.08
+ * （7566/7017=1.0783…≈1.08で整合。記事本文にも同数値が明記）。
+ */
+const REIWA_3: YearSnapshot = {
+  fiscalYear: '令和3年度（2021年度）',
+  sourceUrl: 'https://resemom.jp/article/2021/03/08/60826.html',
+  sourceTitle:
+    'リセモム「【高校受験2021】三重県立高、後期選抜の志願状況（確定）桑名（理数）3.03倍」（三重県教育委員会 令和3年度後期選抜志願状況（最終）の発表を引用）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制総計', quota: 7017, applicants: 7566, rate: 1.08 },
+};
+
 export const MIE_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'mie',
-  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4],
+  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
 };
