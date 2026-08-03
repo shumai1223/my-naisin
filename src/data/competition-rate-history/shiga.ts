@@ -97,7 +97,27 @@ const REIWA_3: YearSnapshot = {
   grandTotal: { label: '一般選抜 全日制課程（旧制度・推薦/特色選抜等を除く）', quota: 6004, applicants: 6602, rate: 1.1 },
 };
 
+/**
+ * 令和2年度（2020年度）: 5年→6年横展開。教委サイトのアーカイブページ（senbatsu/325134.html）
+ * 経由で一次PDF「令和2年度滋賀県立高等学校入学者選抜（一般選抜）学力検査に関する確定出願状況
+ * について」（令和2年3月6日発表・全3頁）を発見・Read toolで直読み成功。R3〜R7と同じ旧制度
+ * （推薦選抜・特色選抜・スポーツ文化芸術推薦選抜＋一般選抜）下での全日制「合計」行（学力検査
+ * 定員6,379・確定出願者数6,928・確定出願倍率1.09）を転記（6928/6379=1.0861…≈1.09で印字済み
+ * 値と整合）。本文(3)の総括表と3頁目末尾の学校別内訳「計」行の両方で完全一致し、資料内二重
+ * 検証が取れている（教委一次PDF直接発見のためリセモム経由より高精度）。
+ */
+const REIWA_2: YearSnapshot = {
+  fiscalYear: '令和2年度（2020年度）',
+  sourceUrl: 'https://www.pref.shiga.lg.jp/file/attachment/5159573.pdf',
+  sourceTitle: '滋賀県教育委員会 令和2年度滋賀県立高等学校入学者選抜（一般選抜）学力検査に関する確定出願状況について',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '一般選抜 全日制課程（旧制度・推薦/特色選抜等を除く）', quota: 6379, applicants: 6928, rate: 1.09 },
+};
+
 export const SHIGA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'shiga',
-  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
+  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3, REIWA_2],
 };
