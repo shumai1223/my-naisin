@@ -554,6 +554,20 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000423',
+      schoolName: '同志社香里高等学校',
+      fiscalYearLabel: '令和8年度(2026年度)（約）',
+      courses: [{ courseName: '全日制課程 普通科（男子約20名・女子約20名）', capacity: 40 }],
+      totalCapacity: 40,
+      source: {
+        url: 'https://www.kori.doshisha.ac.jp/wp-content/uploads/2025/08/6a67e0bcb465c5a5ca38083cb148d1e8.pdf',
+        docTitle:
+          '2026年度入試 説明会資料（同志社香里高等学校）募集人員（「約」表記・edu-news.info/studyh.jpと一致確認済み）',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'secondary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000414',
       schoolName: '香里ヌヴェール学院高等学校',
       fiscalYearLabel: '2026年度（令和8年度）',
