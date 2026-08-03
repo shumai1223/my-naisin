@@ -30,6 +30,48 @@
 import type { PrefectureRateHistoryFile, YearSnapshot } from '@/lib/competition-rate-history';
 
 /**
+ * 令和5年度（2023年度）: 埼玉県教育委員会「令和5年度埼玉県公立高等学校における入学志願確定者数」
+ * （報道発表ページ https://www.pref.saitama.lg.jp/f2208/r5nyuushi-jouhou.html から直接リンクされる
+ * 学科別詳細PDF・全11ページ・2026-08-03取得）。前回セッション(2026-08-03早朝)ではこのPDFの
+ * pages指定読み込みがpoppler未導入エラーで失敗していたが、本セッションで再試行したところ
+ * `pages: "1-11"`が問題なく成功した（[[fable5-loop-protocol]]の「PDF内部構造により成否が
+ * 分かれる」教訓どおり、一律に失敗するわけではなかった）。各学科区分の「計」行（入学許可予定者数A・
+ * 志願確定者数B・倍率B÷A）をそのまま転記。区分合計の積み上げ（quota 36,002・applicants 39,921）が
+ * 「全日制 普通・専門・総合学科計」行と完全一致することを手計算でも確認済み
+ * （__tests__/saitama.test.ts のcheckYearTotalで機械的にも検証）。
+ */
+const REIWA_5: YearSnapshot = {
+  fiscalYear: '令和5年度（2023年度）',
+  sourceUrl: 'https://www.pref.saitama.lg.jp/documents/214401/r50217shigankakuteisyasu.pdf',
+  sourceTitle: '埼玉県教育委員会 令和5年度埼玉県公立高等学校における入学志願確定者数（全日制）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'category-detail',
+  categories: [
+    { label: '普通科計', quota: 26562, applicants: 30879, rate: 1.16 },
+    { label: '農業科計', quota: 795, applicants: 725, rate: 0.91 },
+    { label: '工業科計', quota: 2580, applicants: 2253, rate: 0.87 },
+    { label: '商業科計', quota: 2404, applicants: 2191, rate: 0.91 },
+    { label: '家庭科計', quota: 319, applicants: 321, rate: 1.01 },
+    { label: '看護科計', quota: 80, applicants: 82, rate: 1.03 },
+    { label: '外国語科計', quota: 319, applicants: 383, rate: 1.20 },
+    { label: '美術科計', quota: 120, applicants: 150, rate: 1.25 },
+    { label: '音楽科計', quota: 120, applicants: 69, rate: 0.58 },
+    { label: '書道科計', quota: 40, applicants: 34, rate: 0.85 },
+    { label: '体育科計', quota: 160, applicants: 169, rate: 1.06 },
+    { label: '理数科計', quota: 280, applicants: 512, rate: 1.83 },
+    { label: '福祉科計', quota: 80, applicants: 42, rate: 0.53 },
+    { label: '人文科計', quota: 40, applicants: 30, rate: 0.75 },
+    { label: '国際文化科計', quota: 40, applicants: 46, rate: 1.15 },
+    { label: '映像芸術科計', quota: 40, applicants: 42, rate: 1.05 },
+    { label: '舞台芸術科計', quota: 40, applicants: 37, rate: 0.93 },
+    { label: '生物系・環境系計', quota: 238, applicants: 299, rate: 1.26 },
+    { label: '総合学科計', quota: 1745, applicants: 1657, rate: 0.95 },
+  ],
+  grandTotal: { label: '全日制 普通・専門・総合学科計', quota: 36002, applicants: 39921, rate: 1.11 },
+};
+
+/**
  * 令和6年度（2024年度）: 埼玉県教育委員会「令和6年度埼玉県公立高等学校における入学志願確定者数」
  * （報道発表ページ https://www.pref.saitama.lg.jp/f2208/r6nyuushi-jouhou.html から直接リンクされる
  * 学科別詳細PDF・全9ページ・2026-08-03取得）。各学科区分の「計」行（入学許可予定者数A・
@@ -134,5 +176,5 @@ const REIWA_8: YearSnapshot = {
 
 export const SAITAMA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'saitama',
-  years: [REIWA_6, REIWA_7, REIWA_8],
+  years: [REIWA_5, REIWA_6, REIWA_7, REIWA_8],
 };
