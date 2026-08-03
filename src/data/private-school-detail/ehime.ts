@@ -121,5 +121,17 @@ export const PRIVATE_SCHOOL_DETAIL_EHIME: PrivateSchoolDetailFile = {
       reason:
         '公式サイトの募集予定人数表(nitta.ac.jp/admission/examination/#cont_03)がHTML→テキスト変換で推薦/一般の数値が矛盾して抽出され確度高く読み取れず、募集要項の直接PDFリンクも特定できなかったため見送り。',
     },
+    {
+      schoolCode: 'D138320100071',
+      schoolName: '松山聖陵高等学校',
+      reason:
+        '令和8年度募集要項ページ(matsuyamaseiryo-h.ed.jp/exam/reiwa8youkou/)は404、令和9年度ページ(同/exam/reiwa9youkou)は「準備中」表示のみで、学校案内パンフレットPDFは10MB超でWebFetch取得不可のため現行の募集定員が確認できず見送り。',
+    },
+    {
+      schoolCode: 'D138320100080',
+      schoolName: '未来高等学校',
+      reason:
+        '広域通信制高校のため公式サイト(mirai-hs.kawahara.ac.jp)・運営元ポータル(mirai.gakurinsha.co.jp)ともにコース案内はあるが松山本校固有の募集定員数値は掲載されておらず(全国共通ページに他キャンパスの定員例が出るのみ)、募集要項PDFへの直接リンクも特定できなかったため見送り。',
+    },
   ],
 };
