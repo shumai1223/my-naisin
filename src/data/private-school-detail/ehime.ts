@@ -94,6 +94,19 @@ export const PRIVATE_SCHOOL_DETAIL_EHIME: PrivateSchoolDetailFile = {
         sourceTier: 'primary' as const,
       },
     },
+    {
+      schoolCode: 'D138320100035',
+      schoolName: '松山東雲高等学校',
+      fiscalYearLabel: '令和8年度（2026年度）',
+      courses: [{ courseName: '普通科', capacity: 90 }],
+      totalCapacity: 90,
+      source: {
+        url: 'https://highschool.shinonome.ac.jp/wp-content/uploads/2025/10/e87b2da24be7945a01b1d6c5ac98ddee.pdf',
+        docTitle: '令和8年度 生徒募集要項・出願書類（松山東雲高等学校）',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
   ],
   skipped: [
     {
