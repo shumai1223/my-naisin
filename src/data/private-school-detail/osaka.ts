@@ -554,6 +554,19 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000496',
+      schoolName: '東大阪大学柏原高等学校',
+      fiscalYearLabel: '2026年度（令和8年度）（2027年度以降は生徒募集停止発表済み）',
+      courses: [],
+      totalCapacity: 300,
+      source: {
+        url: 'https://kashiwara.ed.jp/wp/wp-content/themes/kashiwara2022/pdf/R7bosyu.pdf',
+        docTitle: '2026年度 生徒募集要項（東大阪大学柏原高等学校）募集定員（普通科全日制男子）',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000487',
       schoolName: '関西福祉科学大学高等学校',
       fiscalYearLabel: '令和9年度(2027年度)',
