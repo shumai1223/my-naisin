@@ -554,6 +554,24 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000414',
+      schoolName: '香里ヌヴェール学院高等学校',
+      fiscalYearLabel: '2026年度（令和8年度）',
+      courses: [
+        {
+          courseName: '全日制普通科（スーパーアカデミーコース・グローバルサイエンスコース合計）',
+          capacity: 180,
+        },
+      ],
+      totalCapacity: 180,
+      source: {
+        url: 'https://www.seibo.ed.jp/nevers-hs/img/2025/09/hyoukou_26.pdf',
+        docTitle: '2026年度 募集要項（香里ヌヴェール学院高等学校）募集人員',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000398',
       schoolName: '関西大倉高等学校',
       fiscalYearLabel: '2026年度（令和8年度）（約）',
