@@ -83,7 +83,27 @@ const REIWA_5: YearSnapshot = {
   grandTotal: { label: '全日制計（一般選抜定員ベース・出願変更前2/21時点）', schoolCount: 58, quota: 8017, applicants: 8715, rate: 1.09 },
 };
 
+/**
+ * 令和4年度（2022年度）: 5年目横展開。教委のR4年度ハブページ（m04/r03/r04_kokonyuosirase.html）
+ * 経由で「一般選抜出願変更状況」PDF（全3頁）を発見・Read toolで直読み。R5/R6/R7と同じ理由で
+ * 出願変更前（2/21時点）の列を採用（出願変更後2/25の変更後出願人員8,949/倍率1.12も併記されて
+ * いるが、R5/R6/R7が同じ「出願変更前2/21時点」列を採用しているためスコープを揃える）。3頁目
+ * 末尾の「合計」行を転記: 一般選抜定員=7,986・出願人員(2/21)=9,021・出願倍率(2/21)=1.13
+ * （9021/7986=1.1296…≈1.13で印字済み値と整合）。
+ */
+const REIWA_4: YearSnapshot = {
+  fiscalYear: '令和4年度（2022年度）',
+  sourceUrl: 'https://www.pref.tochigi.lg.jp/m04/r03/documents/r04ippanbkaigaisyutuganhenkou_1.pdf',
+  sourceTitle:
+    '栃木県教育委員会 令和4（2022）年度県立高等学校入学者選抜一般選抜出願変更状況（全日制課程・2/21時点）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制計（一般選抜定員ベース・出願変更前2/21時点）', schoolCount: 58, quota: 7986, applicants: 9021, rate: 1.13 },
+};
+
 export const TOCHIGI_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'tochigi',
-  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5],
+  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4],
 };
