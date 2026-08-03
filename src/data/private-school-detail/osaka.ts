@@ -554,6 +554,19 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000076',
+      schoolName: 'ヴェリタス城星学園高等学校',
+      fiscalYearLabel: '令和7年度(2025年度)',
+      courses: [],
+      totalCapacity: 140,
+      source: {
+        url: 'https://www.veritas.josei.ed.jp/wp-content/uploads/description2025-1.pdf',
+        docTitle: '2025年度入試 募集要項（ヴェリタス城星学園高等学校）募集人数',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000049',
       schoolName: '昇陽高等学校',
       fiscalYearLabel: '令和9年度（2027年度）',
