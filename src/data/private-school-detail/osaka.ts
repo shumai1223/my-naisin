@@ -389,6 +389,23 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000101',
+      schoolName: '清風高等学校',
+      fiscalYearLabel: '2026年度（令和8年度）',
+      courses: [
+        { courseName: '普通科 理Ⅲ6か年編入コース（男子）', capacity: 80 },
+        { courseName: '普通科 理数コース（男子）', capacity: 80 },
+        { courseName: '普通科 文理コース（男子・特技コース50名を含む）', capacity: 90 },
+      ],
+      totalCapacity: 250,
+      source: {
+        url: 'https://www.seifu.ac.jp/2025/wp-content/themes/seifu/assets/pdf/studentrecruitment2026_high.pdf',
+        docTitle: '2026年度（令和8年度）入学試験 生徒募集要項「1.募集人員」（清風高等学校）',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000637',
       schoolName: '帝塚山学院泉ケ丘高等学校',
       fiscalYearLabel: '令和8年度(2026年度)',
