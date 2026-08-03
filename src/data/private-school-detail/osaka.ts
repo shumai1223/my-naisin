@@ -506,6 +506,24 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000209',
+      schoolName: '東大谷高等学校',
+      fiscalYearLabel: '（年度非特定・公式サイトはR9未公開のためWebSearch2回で確認した直近実績値）',
+      courses: [
+        { courseName: '普通科 特進コース（男女）', capacity: 80 },
+        { courseName: '普通科 国際コース（男女）', capacity: 40 },
+        { courseName: '普通科 進学コース（男女）', capacity: 160 },
+      ],
+      totalCapacity: 280,
+      source: {
+        url: 'https://higashiohtani.ac.jp/admissions/examination',
+        docTitle:
+          '東大谷高等学校 入試情報（公式サイトは令和9年度分が作成中で未公開。特進80名/国際40名/進学160名をWebSearch2回で独立確認）',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'secondary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000637',
       schoolName: '帝塚山学院泉ケ丘高等学校',
       fiscalYearLabel: '令和8年度(2026年度)',
