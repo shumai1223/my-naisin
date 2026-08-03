@@ -95,7 +95,26 @@ const REIWA_3: YearSnapshot = {
   grandTotal: { label: '全日制計', quota: 10062, applicants: 9752, rate: 0.97 },
 };
 
+/**
+ * 令和2年度（2020年度）: 5年→6年横展開。教委の年度別発表ページ(h32/h32nyusi.html・年度表記
+ * がh32=平成32年フォルダである点に注意)経由で同一資料シリーズのR2版（訂正版・全8頁）を発見・
+ * Read toolで直読み成功。本文冒頭の記述「全日制課程の志望変更受付締切後の最終的な志願者は
+ * 10,184人で...志望変更後の志願倍率は0.99倍」および別紙１【公立全日制課程】の「計」行
+ * （募集人員10,302・志願数10,184・倍率0.99）の両方で確認できる（10184/10302=0.9886…≈0.99で
+ * 印字済み値と整合）。定時制課程（多部制・単位制含む）はR3〜R7と同じ理由でスコープ外。
+ */
+const REIWA_2: YearSnapshot = {
+  fiscalYear: '令和2年度（2020年度）',
+  sourceUrl: 'https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/h32/documents/press.pdf',
+  sourceTitle: '長野県教育委員会 令和2年度長野県公立高等学校入学者後期選抜志願者数②（志望変更受付締切後の集計結果・訂正版）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制計', quota: 10302, applicants: 10184, rate: 0.99 },
+};
+
 export const NAGANO_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'nagano',
-  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
+  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3, REIWA_2],
 };
