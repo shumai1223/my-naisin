@@ -554,6 +554,24 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000628',
+      schoolName: '金光大阪高等学校',
+      fiscalYearLabel: '令和8年度(2026年度)（内部進学生を含む・2027年度版と同一数値でクロスチェック済み）',
+      courses: [
+        { courseName: '普通科 特進Ⅰコース', capacity: 80 },
+        { courseName: '普通科 特進Ⅱコース', capacity: 80 },
+        { courseName: '普通科 進学コース', capacity: 200 },
+      ],
+      totalCapacity: 360,
+      source: {
+        url: 'https://www.kohs.ed.jp/wp-content/themes/konko-osaka_2025/pdf/application-guidelines-sh_2027.pdf',
+        docTitle:
+          '2027年度入試 生徒募集要項（金光大阪高等学校）募集人員（令和8年度版は非掲載のためjs88.comの2026年度入試結果ページで同数値をクロスチェック）',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'secondary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000584',
       schoolName: '近畿大学泉州高等学校',
       fiscalYearLabel: '令和8年度(2026年度)',
