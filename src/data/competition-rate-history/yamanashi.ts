@@ -88,7 +88,25 @@ const REIWA_4: YearSnapshot = {
   grandTotal: { label: '全日制後期募集', quota: 3692, applicants: 3538, rate: 0.95 },
 };
 
+/**
+ * 令和3年度（2021年度）: R4-R7と同一シリーズのリセモム確定記事（2021年2月26日発表・タイトルに
+ * 「確定」と明記）をWebSearch要約とWebFetch直接引用の2回で同一数値を確認して採用。全日制後期
+ * 募集全体: 募集定員3,684・志願者数3,606・志願倍率0.98（3606/3684=0.9788…≈0.98で印字済み値と
+ * 整合・R4/R5と異なりこの年度は単純計算と印字値の不一致は発生していない）。
+ */
+const REIWA_3: YearSnapshot = {
+  fiscalYear: '令和3年度（2021年度）',
+  sourceUrl: 'https://resemom.jp/article/2021/02/26/60670.html',
+  sourceTitle:
+    'リセモム「【高校受験2021】山梨県公立高、後期募集の志願状況（確定）甲府南（理数）1.36倍」（山梨県教育委員会 令和3年度全日制後期募集の最終志願状況の発表を引用）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制後期募集', quota: 3684, applicants: 3606, rate: 0.98 },
+};
+
 export const YAMANASHI_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'yamanashi',
-  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4],
+  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
 };
