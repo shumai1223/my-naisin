@@ -554,6 +554,19 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000272',
+      schoolName: '城南学園高等学校',
+      fiscalYearLabel: '令和8年度(2026年度)',
+      courses: [{ courseName: '普通科（内部進学者含む）', capacity: 230 }],
+      totalCapacity: 230,
+      source: {
+        url: 'https://www.jonan.ac.jp/senior/exam/guideline/',
+        docTitle: '令和8年度生徒募集要項（城南学園高等学校）募集人員',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000263',
       schoolName: '建国高等学校',
       fiscalYearLabel: '2026年度（令和8年度）',
