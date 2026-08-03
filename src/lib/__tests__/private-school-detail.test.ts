@@ -45,6 +45,7 @@ import { PRIVATE_SCHOOL_DETAIL_KANAGAWA } from '@/data/private-school-detail/kan
 import { PRIVATE_SCHOOL_DETAIL_OSAKA } from '@/data/private-school-detail/osaka';
 import { PRIVATE_SCHOOL_DETAIL_AICHI } from '@/data/private-school-detail/aichi';
 import { PRIVATE_SCHOOL_DETAIL_TOKYO } from '@/data/private-school-detail/tokyo';
+import { PRIVATE_SCHOOL_DETAIL_EHIME } from '@/data/private-school-detail/ehime';
 import { PRIVATE_SCHOOL_DETAIL_BY_PREFECTURE, PRIVATE_SCHOOL_DETAIL_FILES } from '@/data/private-school-detail';
 import { SCHOOLS_PRIVATE_TOTTORI } from '@/data/schools-private/tottori';
 import { SCHOOLS_PRIVATE_FUKUI } from '@/data/schools-private/fukui';
@@ -90,6 +91,7 @@ import { SCHOOLS_PRIVATE_KANAGAWA } from '@/data/schools-private/kanagawa';
 import { SCHOOLS_PRIVATE_OSAKA } from '@/data/schools-private/osaka';
 import { SCHOOLS_PRIVATE_AICHI } from '@/data/schools-private/aichi';
 import { SCHOOLS_PRIVATE_TOKYO } from '@/data/schools-private/tokyo';
+import { SCHOOLS_PRIVATE_EHIME } from '@/data/schools-private/ehime';
 
 describe('checkCourseCapacitySum', () => {
   const base: PrivateSchoolDetail = {
@@ -1013,12 +1015,13 @@ describe('PRIVATE_SCHOOL_DETAIL_FUKUSHIMA(福島県庁「私立学校名簿」1P
 });
 
 describe('private-school-detail index', () => {
-  it('aichi/akita/aomori/chiba/fukui/fukuoka/fukushima/gifu/gunma/hiroshima/hyogo/ibaraki/ishikawa/iwate/kagawa/kagoshima/kanagawa/kochi/kumamoto/kyoto/mie/miyagi/miyazaki/nagano/nagasaki/nara/niigata/oita/okayama/okinawa/osaka/saga/saitama/shiga/shimane/shizuoka/tochigi/tokushima/tokyo/tottori/toyama/wakayama/yamagata/yamaguchi/yamanashiの45都県が集約されている', () => {
+  it('aichi/akita/aomori/chiba/ehime/fukui/fukuoka/fukushima/gifu/gunma/hiroshima/hyogo/ibaraki/ishikawa/iwate/kagawa/kagoshima/kanagawa/kochi/kumamoto/kyoto/mie/miyagi/miyazaki/nagano/nagasaki/nara/niigata/oita/okayama/okinawa/osaka/saga/saitama/shiga/shimane/shizuoka/tochigi/tokushima/tokyo/tottori/toyama/wakayama/yamagata/yamaguchi/yamanashiの46都県が集約されている', () => {
     expect(Object.keys(PRIVATE_SCHOOL_DETAIL_BY_PREFECTURE).sort()).toEqual([
       'aichi',
       'akita',
       'aomori',
       'chiba',
+      'ehime',
       'fukui',
       'fukuoka',
       'fukushima',
@@ -1061,6 +1064,23 @@ describe('private-school-detail index', () => {
       'yamaguchi',
       'yamanashi',
     ]);
-    expect(PRIVATE_SCHOOL_DETAIL_FILES).toHaveLength(45);
+    expect(PRIVATE_SCHOOL_DETAIL_FILES).toHaveLength(46);
+  });
+});
+
+describe('PRIVATE_SCHOOL_DETAIL_EHIME(新規着手・愛光高等学校のみ収録・残り13校は未着手)', () => {
+  it('収録した学校は全てcourses合計とtotalCapacityが一致する', () => {
+    for (const school of PRIVATE_SCHOOL_DETAIL_EHIME.schools) {
+      expect(checkCourseCapacitySum(school)).toBe(true);
+    }
+  });
+
+  it('収録1校・スキップ1校で参照台帳14校のうち残り12校は未着手(重複なし)', () => {
+    const allCodes = SCHOOLS_PRIVATE_EHIME.schools.map((s) => s.code);
+    const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_EHIME, allCodes);
+    expect(result.duplicates).toEqual([]);
+    expect(result.missing).toHaveLength(12);
+    expect(PRIVATE_SCHOOL_DETAIL_EHIME.schools.length).toBe(1);
+    expect(PRIVATE_SCHOOL_DETAIL_EHIME.skipped.length).toBe(1);
   });
 });
