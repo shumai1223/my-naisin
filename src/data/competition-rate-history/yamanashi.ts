@@ -45,7 +45,30 @@ const REIWA_6: YearSnapshot = {
   grandTotal: { label: '全日制後期募集（26校48学科）', quota: 3537, applicants: 3374, rate: 0.95 },
 };
 
+/**
+ * 令和5年度（2023年度）: R6/R7と同一シリーズのリセモム確定記事（2023年2月28日発表・タイトル
+ * 本文双方に「確定」と明記）を2回のWebFetchで再確認して採用。全日制後期募集「26校48学科」
+ * 全体: 募集定員3,601・最終志願者数3,489・志願倍率0.96（教委発表の印字済み値をそのまま採用）。
+ * ⚠️注記: 3489/3601を単純計算すると0.97となり印字済み倍率0.96とは小数第2位で一致しない
+ * （既存のR6/R7エントリはこの自己整合性が取れているのに対しR5のみ不一致）。同一記事を独立に
+ * 2回WebFetchしても同じ3数値が再現されたため転記ミスの可能性は低く、教委発表側の倍率算出方法
+ * （学科別倍率の単純平均等、単純な総志願者数÷総募集定員とは異なる算出方式である可能性）に
+ * 起因すると推測し、印字済みの確定値をそのまま正直に転記した（自前で丸め直して0.97に補正する
+ * ことはしていない）。
+ */
+const REIWA_5: YearSnapshot = {
+  fiscalYear: '令和5年度（2023年度）',
+  sourceUrl: 'https://resemom.jp/article/2023/02/28/71154.html',
+  sourceTitle:
+    'リセモム「【高校受験2023】山梨県公立高、後期選抜の志願状況（確定）甲府南（理数）1.36倍」（山梨県教育委員会 令和5年度全日制後期募集の最終志願状況の発表を引用）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制後期募集（26校48学科）', quota: 3601, applicants: 3489, rate: 0.96 },
+};
+
 export const YAMANASHI_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'yamanashi',
-  years: [REIWA_7, REIWA_6],
+  years: [REIWA_7, REIWA_6, REIWA_5],
 };

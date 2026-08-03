@@ -4,12 +4,13 @@ import { YAMANASHI_COMPETITION_RATE_HISTORY } from '../yamanashi';
  * 山梨県 多年度アーカイブ（Λ-4）DoD検証: 令和7・令和6年度の全日制後期募集（26校48学科）
  * 合計の数値をリセモム記事（教委発表の引用）の固定値で確認する。
  */
-describe('山梨県 多年度アーカイブ（Λ-4・令和7/令和6の2年度分・grand-total-only）', () => {
-  it('2年度分（令和7年度・令和6年度）を収録している', () => {
-    expect(YAMANASHI_COMPETITION_RATE_HISTORY.years).toHaveLength(2);
+describe('山梨県 多年度アーカイブ（Λ-4・令和7/令和6/令和5の3年度分・grand-total-only）', () => {
+  it('3年度分（令和7年度・令和6年度・令和5年度）を収録している', () => {
+    expect(YAMANASHI_COMPETITION_RATE_HISTORY.years).toHaveLength(3);
     expect(YAMANASHI_COMPETITION_RATE_HISTORY.years.map((y) => y.fiscalYear)).toEqual([
       '令和7年度（2025年度）',
       '令和6年度（2024年度）',
+      '令和5年度（2023年度）',
     ]);
   });
 
@@ -31,5 +32,12 @@ describe('山梨県 多年度アーカイブ（Λ-4・令和7/令和6の2年度�
     expect(r6.grandTotal.quota).toBe(3537);
     expect(r6.grandTotal.applicants).toBe(3374);
     expect(r6.grandTotal.rate).toBeCloseTo(0.95, 2);
+  });
+
+  it('令和5年度の合計はリセモム記事(確定)と一致する(募集定員3,601・志願者数3,489・倍率0.96)', () => {
+    const r5 = YAMANASHI_COMPETITION_RATE_HISTORY.years[2];
+    expect(r5.grandTotal.quota).toBe(3601);
+    expect(r5.grandTotal.applicants).toBe(3489);
+    expect(r5.grandTotal.rate).toBeCloseTo(0.96, 2);
   });
 });
