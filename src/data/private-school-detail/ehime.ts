@@ -58,6 +58,22 @@ export const PRIVATE_SCHOOL_DETAIL_EHIME: PrivateSchoolDetailFile = {
         sourceTier: 'primary' as const,
       },
     },
+    {
+      schoolCode: 'D138320200034',
+      schoolName: '今治精華高等学校',
+      fiscalYearLabel: '令和9年度（2027年度）',
+      courses: [
+        { courseName: '普通科（普通科IIを含む）', capacity: 120 },
+        { courseName: '調理科', capacity: 40 },
+      ],
+      totalCapacity: 160,
+      source: {
+        url: 'https://highschool.imabariseika.ac.jp/entrance-information/youkou/',
+        docTitle: '入試要項（令和9年度）（今治精華高等学校）',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
   ],
   skipped: [
     {
