@@ -46,7 +46,29 @@ const REIWA_6: YearSnapshot = {
   grandTotal: { label: '県立 合計（全日制）', quota: 6123, applicants: 5432, rate: 0.89 },
 };
 
+/**
+ * 令和5年度（2023年度）: R6/R7と同一シリーズの一次PDF（05honshutsugan.pdf・令和5年3月3日
+ * 現在・全2頁）を教委のR5年度用ハブページ経由で発見・Read toolで直読み。県立「合計」行
+ * （入学者枠数A=6,131・スポーツ推薦本出願者数D=110・一般選抜本出願者数E=5,332・本出願倍率
+ * (D+E)/A=0.89）を転記（applicants=D+E=5,442・5442/6131=0.8876…≈0.89で印字済み値と整合・
+ * Y-6/R6/R7と同じD+E合算スコープ）。数値はリセモム確定記事（2023年3月3日発表・「入学者枠数
+ * 6,131人に対し志願者数5,442人・出願倍率0.89倍」）でも独立確認済み。2頁目の大学科別状況の
+ * 合計行とも完全一致し、資料内でも二重検証が取れている。市立高校・定時制課程はR6/R7と同じ
+ * 理由でスコープ外。
+ */
+const REIWA_5: YearSnapshot = {
+  fiscalYear: '令和5年度（2023年度）',
+  sourceUrl: 'https://www.pref.wakayama.lg.jp/prefg/500200/d00210122_d/fil/05honshutsugan.pdf',
+  sourceTitle:
+    '和歌山県教育委員会 令和5年度和歌山県立高等学校入学者選抜実施状況（一般選抜・スポーツ推薦本出願状況）学校別・学科別状況(全日制)',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '県立 合計（全日制）', quota: 6131, applicants: 5442, rate: 0.89 },
+};
+
 export const WAKAYAMA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'wakayama',
-  years: [REIWA_7, REIWA_6],
+  years: [REIWA_7, REIWA_6, REIWA_5],
 };
