@@ -554,6 +554,25 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000307',
+      schoolName: '箕面自由学園高等学校',
+      fiscalYearLabel: '2026年度（令和8年度）',
+      courses: [
+        { courseName: 'SS特進コース', capacity: 80 },
+        { courseName: 'S特進コース', capacity: 120 },
+        { courseName: '特進コース', capacity: 160 },
+        { courseName: '文理探究コース', capacity: 120 },
+        { courseName: 'クラブ探究コース（専願のみ）', capacity: 80 },
+      ],
+      totalCapacity: 560,
+      source: {
+        url: 'https://mino-jiyu.ed.jp/hs/entry/guideline.html',
+        docTitle: '2026年度 生徒募集要項（箕面自由学園高等学校）募集人員',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000290',
       schoolName: '梅花高等学校',
       fiscalYearLabel: '令和9年度(2027年度)（学内進学者約90名を含む）',
