@@ -554,6 +554,19 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000030',
+      schoolName: '英風高等学校',
+      fiscalYearLabel: '令和8年度(2026年度)',
+      courses: [{ courseName: '通信制課程 普通科', capacity: 160 }],
+      totalCapacity: 160,
+      source: {
+        url: 'https://www.eifu.ed.jp/boshu-yoko/',
+        docTitle: '募集要項（英風高等学校）募集人数',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000012',
       schoolName: '東朋学園高等学校',
       fiscalYearLabel: '2026年度（令和8年度）',
