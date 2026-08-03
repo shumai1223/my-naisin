@@ -794,5 +794,10 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       schoolName: '金蘭千里高等学校',
       reason: '高等学校において生徒を募集しない完全中高一貫校(Wikipediaでも同旨記載・募集要項PDFの応募資格に「金蘭千里高等学校に進学を希望する者」と明記=完全内部進学前提)のため、高校段階の外部募集定員自体が存在せず見送り',
     },
+    {
+      schoolCode: 'D127310000352',
+      schoolName: '高槻高等学校',
+      reason: '2004年に高校からの生徒募集を停止し完全中高一貫校化(Wikipedia・複数の受験情報サイトで独立に一致確認・公式サイトも高校入試情報を掲載せず)のため、高校段階の外部募集定員自体が存在せず見送り',
+    },
   ],
 };
