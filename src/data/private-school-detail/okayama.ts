@@ -88,6 +88,23 @@ export const PRIVATE_SCHOOL_DETAIL_OKAYAMA: PrivateSchoolDetailFile = {
         sourceTier: 'primary' as const,
       },
     },
+    {
+      schoolCode: 'D133310000149',
+      schoolName: '興譲館高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [
+        { courseName: '普通科 進学チャレンジコース', capacity: 25 },
+        { courseName: '普通科 キャリアコース（商業系・工業系）', capacity: 40 },
+        { courseName: '普通科 アスリートコース', capacity: 25 },
+      ],
+      totalCapacity: 90,
+      source: {
+        url: 'https://kojokan-h.ed.jp/wp-content/uploads/2025/10/令和8年度募集要項.pdf',
+        docTitle: '令和8年度 生徒募集要項（興譲館高等学校）',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
   ],
   skipped: [],
 };
