@@ -22,6 +22,25 @@ export const PRIVATE_SCHOOL_DETAIL_EHIME: PrivateSchoolDetailFile = {
         sourceTier: 'primary' as const,
       },
     },
+    {
+      schoolCode: 'D138320100026',
+      schoolName: '聖カタリナ学園高等学校',
+      fiscalYearLabel: '令和8年度（2026年度）',
+      courses: [
+        {
+          courseName: '普通科（文理特進・国際特進・スポーツ・総合の4コース合算）',
+          capacity: 400,
+        },
+        { courseName: '看護科', capacity: 80 },
+      ],
+      totalCapacity: 480,
+      source: {
+        url: 'https://catalina.ed.jp/wp-content/themes/catalina-hs/pdf/bosyuyoukou202510.pdf',
+        docTitle: '令和8年度 募集要項（聖カタリナ学園高等学校）',
+        fetchedAt: '2026-08-03',
+        sourceTier: 'primary' as const,
+      },
+    },
   ],
   skipped: [
     {
@@ -29,6 +48,12 @@ export const PRIVATE_SCHOOL_DETAIL_EHIME: PrivateSchoolDetailFile = {
       schoolName: '済美高等学校',
       reason:
         '公式サイトの受験案内ページ(saibi.ac.jp/entrance/exam-info/)に募集人員の記載はあるが画像(SVG)形式で埋め込まれておりテキスト抽出できず、募集要項の直接PDFも特定できなかったため見送り。',
+    },
+    {
+      schoolCode: 'D138320100053',
+      schoolName: '新田高等学校',
+      reason:
+        '公式サイトの募集予定人数表(nitta.ac.jp/admission/examination/#cont_03)がHTML→テキスト変換で推薦/一般の数値が矛盾して抽出され確度高く読み取れず、募集要項の直接PDFリンクも特定できなかったため見送り。',
     },
   ],
 };
