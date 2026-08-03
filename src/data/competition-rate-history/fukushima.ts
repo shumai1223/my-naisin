@@ -98,7 +98,27 @@ const REIWA_3: YearSnapshot = {
   grandTotal: { label: '全日制 合計', quota: 1882, applicants: 244, rate: 0.13 },
 };
 
+/**
+ * 令和2年度（2020年度）: 5年→6年横展開。教委サイトのR2年度入学者選抜アーカイブページ
+ * （site/edu/r1koukounyushi.html・注記: URL上のr1表記だが本文は「令和２年度」）経由で
+ * 同一シリーズの一次PDF（訂正版・376950.pdf・令和2年3月23日公表・全3頁）を発見・Read toolで
+ * 直読み成功。3頁目の全日制/定時制サマリー表（実施学校数59校・実施学科コース数110・後期選抜
+ * 募集定員1,671人・志願者数(二次・出願先変更後)263人）を転記。倍率は資料に印字が無いため
+ * 自前算出（263/1671=0.1574…→0.16、R3〜R7と同じ計算方針）。前期選抜・連携型選抜・定時制
+ * 課程はR3〜R7と同じ理由でスコープ外。
+ */
+const REIWA_2: YearSnapshot = {
+  fiscalYear: '令和2年度（2020年度）',
+  sourceUrl: 'https://www.pref.fukushima.lg.jp/uploaded/attachment/376950.pdf',
+  sourceTitle: '福島県教育委員会 令和2年度福島県立高等学校入学者選抜後期選抜志願状況（出願先変更後・訂正版）について',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制 合計', quota: 1671, applicants: 263, rate: 0.16 },
+};
+
 export const FUKUSHIMA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'fukushima',
-  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
+  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3, REIWA_2],
 };
