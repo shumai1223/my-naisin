@@ -524,6 +524,23 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000245',
+      schoolName: '清明学院高等学校',
+      fiscalYearLabel: '2026年度（令和8年度）',
+      courses: [
+        { courseName: '普通科 特進コース（文系・理系・看護・医療系合計）', capacity: 120 },
+        { courseName: '普通科 進学コース', capacity: 120 },
+        { courseName: '普通科 総合コース', capacity: 120 },
+      ],
+      totalCapacity: 360,
+      source: {
+        url: 'https://www.seimei.ed.jp/admissions/',
+        docTitle: '入試情報［生徒募集要項］（清明学院高等学校）コース別定員',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000637',
       schoolName: '帝塚山学院泉ケ丘高等学校',
       fiscalYearLabel: '令和8年度(2026年度)',
