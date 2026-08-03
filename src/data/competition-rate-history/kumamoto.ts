@@ -42,7 +42,24 @@ const REIWA_6: YearSnapshot = {
   grandTotal: { label: '全日制課程・後期（一般）選抜 計', quota: 8250, applicants: 7760, rate: 0.94 },
 };
 
+/**
+ * 令和5年度（2023年度）: R6/R7と同一シリーズのハブページ(163133.html)から後期（一般）選抜
+ * 出願者数PDF(令和5年2月7日発表・全5頁)を発見。全日制課程「計」行（後期選抜の募集人員8,362・
+ * 出願者数7,985・倍率0.95）を直接転記（7985/8362=0.9549…≈0.95で印字済み倍率と整合）。
+ * 定時制課程はR6/R7と同じ理由でスコープ外。
+ */
+const REIWA_5: YearSnapshot = {
+  fiscalYear: '令和5年度（2023年度）',
+  sourceUrl: 'https://www.pref.kumamoto.jp/uploaded/life/163133_377178_misc.pdf',
+  sourceTitle: '熊本県教育委員会 令和5年度（2023年度）熊本県公立高等学校入学者選抜における後期（一般）選抜出願者数',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制課程・後期（一般）選抜 計', quota: 8362, applicants: 7985, rate: 0.95 },
+};
+
 export const KUMAMOTO_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'kumamoto',
-  years: [REIWA_7, REIWA_6],
+  years: [REIWA_7, REIWA_6, REIWA_5],
 };

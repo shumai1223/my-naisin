@@ -6,12 +6,13 @@ import { KUMAMOTO_COMPETITION_RATE_HISTORY } from '../kumamoto';
  * (倍率0.92)の二重検証済み。R6はネイティブ文書の「計」行とWebSearch独立記事(倍率0.94)の
  * 二重検証済み。
  */
-describe('熊本県 多年度アーカイブ（Λ-4・令和7/令和6の2年度分・grand-total-only）', () => {
-  it('2年度分（令和7年度・令和6年度）を収録している', () => {
-    expect(KUMAMOTO_COMPETITION_RATE_HISTORY.years).toHaveLength(2);
+describe('熊本県 多年度アーカイブ（Λ-4・令和7/令和6/令和5の3年度分・grand-total-only）', () => {
+  it('3年度分（令和7年度・令和6年度・令和5年度）を収録している', () => {
+    expect(KUMAMOTO_COMPETITION_RATE_HISTORY.years).toHaveLength(3);
     expect(KUMAMOTO_COMPETITION_RATE_HISTORY.years.map((y) => y.fiscalYear)).toEqual([
       '令和7年度（2025年度）',
       '令和6年度（2024年度）',
+      '令和5年度（2023年度）',
     ]);
   });
 
@@ -33,5 +34,12 @@ describe('熊本県 多年度アーカイブ（Λ-4・令和7/令和6の2年度�
     expect(r6.grandTotal.quota).toBe(8250);
     expect(r6.grandTotal.applicants).toBe(7760);
     expect(r6.grandTotal.rate).toBeCloseTo(0.94, 2);
+  });
+
+  it('令和5年度の全日制課程・後期(一般)選抜の合計は一次資料の「計」行と一致する(募集8,362・出願7,985・倍率0.95)', () => {
+    const r5 = KUMAMOTO_COMPETITION_RATE_HISTORY.years[2];
+    expect(r5.grandTotal.quota).toBe(8362);
+    expect(r5.grandTotal.applicants).toBe(7985);
+    expect(r5.grandTotal.rate).toBeCloseTo(0.95, 2);
   });
 });
