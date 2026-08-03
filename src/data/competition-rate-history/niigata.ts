@@ -43,7 +43,24 @@ const REIWA_6: YearSnapshot = {
   grandTotal: { label: '一般選抜 全日制課程（特色化選抜合格内定者数を除く）', quota: 12168, applicants: 12551, rate: 1.03 },
 };
 
+/**
+ * 令和5年度（2023年度）: R6/R7と同じスコープ（特色化選抜合格内定者数を除く一般選抜）の
+ * リセモム確定記事（2023年3月1日発表）をWebFetchで直接引用。全日制課程「一般選抜」全体:
+ * 募集人数12,366・志願者数12,893・志願倍率1.04（12893/12366=1.0426…≈1.04で整合）。
+ */
+const REIWA_5: YearSnapshot = {
+  fiscalYear: '令和5年度（2023年度）',
+  sourceUrl: 'https://resemom.jp/article/2023/03/01/71176.html',
+  sourceTitle:
+    'リセモム「【高校受験2023】新潟県公立高、一般選抜の志願状況（確定）新潟（理数）1.85倍」（新潟県教育委員会 令和5年度一般選抜志願状況の発表を引用）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '一般選抜 全日制課程（特色化選抜合格内定者数を除く）', quota: 12366, applicants: 12893, rate: 1.04 },
+};
+
 export const NIIGATA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'niigata',
-  years: [REIWA_7, REIWA_6],
+  years: [REIWA_7, REIWA_6, REIWA_5],
 };
