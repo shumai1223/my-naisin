@@ -94,7 +94,26 @@ const REIWA_3: YearSnapshot = {
   grandTotal: { label: '全日制課程 第1次募集', quota: 5577, applicants: 6143, rate: 1.1 },
 };
 
+/**
+ * 令和2年度（2020年度）: 5年→6年横展開。教委サイトのR2年度発表ページ（soshiki/180/26408.html）
+ * 経由で一次PDF「令和2年度山口県公立高等学校入学志願者数」（令和2年2月21日午前10時締切・
+ * 全3頁）を発見・Read toolで直読み成功。3頁目末尾の「全日制計」行（第一次募集の定員
+ * C=A-B=5,761・第一志願者数D=6,601・志願倍率D/C=1.15）を転記（6601/5761=1.1458…≈1.15で
+ * 印字済み値と整合。R3〜R7と同じ「全日制課程 第1次募集」定義=推薦入学等合格内定者数を除いた
+ * 定員に対する第一志望者数のスコープ）。
+ */
+const REIWA_2: YearSnapshot = {
+  fiscalYear: '令和2年度（2020年度）',
+  sourceUrl: 'https://www.pref.yamaguchi.lg.jp/uploaded/attachment/76353.pdf',
+  sourceTitle: '山口県教育委員会 令和2年度山口県公立高等学校入学志願者数（全日制・令和2年2月21日午前10時締切）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制課程 第1次募集', quota: 5761, applicants: 6601, rate: 1.15 },
+};
+
 export const YAMAGUCHI_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'yamaguchi',
-  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
+  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3, REIWA_2],
 };
