@@ -554,6 +554,19 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000325',
+      schoolName: '関西大学第一高等学校',
+      fiscalYearLabel: '令和9年度(2027年度)（内部進学予定者を含む）',
+      courses: [],
+      totalCapacity: 400,
+      source: {
+        url: 'https://www.kansai-u.ac.jp/dai-ichi/high/exam/index.html',
+        docTitle: '入試情報（関西大学第一高等学校）生徒募集概要',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000316',
       schoolName: '宣真高等学校',
       fiscalYearLabel: '令和8年度(2026年度)',
