@@ -554,6 +554,25 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000548',
+      schoolName: '近畿大学附属高等学校',
+      fiscalYearLabel: '令和8年度(2026年度)（内部進学約270名を除く外部募集分）',
+      courses: [
+        { courseName: '普通科 Super文理コース', capacity: 70 },
+        { courseName: '普通科 特進文理コースⅠ', capacity: 35 },
+        { courseName: '普通科 特進文理コースⅡ', capacity: 70 },
+        { courseName: '普通科 英語特化コース', capacity: 35 },
+        { courseName: '普通科 進学コース', capacity: 440 },
+      ],
+      totalCapacity: 650,
+      source: {
+        url: 'https://www.jsh.kindai.ac.jp/hs/eco/2026_erl_hs.pdf',
+        docTitle: '令和8年度 入学試験要項（近畿大学附属高等学校）募集人員',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000520',
       schoolName: '清風南海高等学校',
       fiscalYearLabel: '2026年度（令和8年度）（約・外部募集は「3か年特進コース」のみ）',
