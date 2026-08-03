@@ -554,6 +554,23 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000370',
+      schoolName: '常翔啓光学園高等学校',
+      fiscalYearLabel: '2026年度（令和8年度）',
+      courses: [
+        { courseName: '特進コースⅠ類〔選抜〕', capacity: 40 },
+        { courseName: '特進コースⅡ類', capacity: 120 },
+        { courseName: '進学コース', capacity: 160 },
+      ],
+      totalCapacity: 320,
+      source: {
+        url: 'https://www.keiko.josho.ac.jp/_sys/wp-content/uploads/2025/11/2026seniornyushiyoko.pdf',
+        docTitle: '2026年度 高等学校 生徒募集要項（常翔啓光学園高等学校）募集人員',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000325',
       schoolName: '関西大学第一高等学校',
       fiscalYearLabel: '令和9年度(2027年度)（内部進学予定者を含む）',
