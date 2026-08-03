@@ -43,7 +43,25 @@ const REIWA_6: YearSnapshot = {
   grandTotal: { label: '全日制 合計（県立計＋市立計）', quota: 4924, applicants: 3543, rate: 0.72 },
 };
 
+/**
+ * 令和5年度（2023年度）: R6/R7と同一シリーズのハブページ(r5_siganjokyo)から同種の学校別
+ * 一覧表［確定］PDF(令和5年2月10日発表・全2頁)を発見。全日制「合計」行（県立計4,810
+ * (A日程募集定員4,621)/3,109＋市立計280/333＝合計5,090(4,901)/3,442）のうち、R6/R7と同じ
+ * 列定義（括弧内のA日程募集定員を分母とする志願率）で quota=4,901・applicants=3,442・
+ * rate=0.70を転記（3442/4901=0.7023…≈0.70で印字済み値と整合）。
+ */
+const REIWA_5: YearSnapshot = {
+  fiscalYear: '令和5年度（2023年度）',
+  sourceUrl: 'https://www.pref.kochi.lg.jp/doc/r5_siganjokyo/file_contents/050210_Anittei_henkogo.pdf',
+  sourceTitle: '高知県教育委員会 令和5年度Ａ日程等志願先変更後の状況（学校別）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制 合計（県立計＋市立計）', quota: 4901, applicants: 3442, rate: 0.7 },
+};
+
 export const KOCHI_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'kochi',
-  years: [REIWA_7, REIWA_6],
+  years: [REIWA_7, REIWA_6, REIWA_5],
 };
