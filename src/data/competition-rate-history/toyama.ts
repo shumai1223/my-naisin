@@ -44,7 +44,26 @@ const REIWA_6: YearSnapshot = {
   grandTotal: { label: '合計（34校82学科）', quota: 5188, applicants: 5248, rate: 1.01 },
 };
 
+/**
+ * 令和5年度（2023年度）: 教委旧サイト（kengaku.tym.ed.jp）のR5アーカイブページ経由で
+ * 同一シリーズの一次PDF（r050227.pdf・令和5年2月27日正午現在・全3頁）を発見・Read toolで
+ * 直読み成功。「合計 34校82学科」行（推薦入学内定者数を除いた募集人数5,226・志願者数5,327・
+ * 倍率1.02）を転記（5327/5226=1.0193…≈1.02で印字済み値と整合）。3頁目の大学科別内訳表の
+ * 合計行（募集定員6,188/推薦内定962/募集人数5,226/志願者数5,327/倍率1.02）とも完全一致し、
+ * 同一資料内の二重検証が取れている。定時制・通信制課程はR6/R7と同じ理由でスコープ外。
+ */
+const REIWA_5: YearSnapshot = {
+  fiscalYear: '令和5年度（2023年度）',
+  sourceUrl: 'https://www.kengaku.tym.ed.jp/wp-content/uploads/2023/04/r050227.pdf',
+  sourceTitle: '富山県教育委員会 令和5年度富山県立高等学校入学者選抜 全日制の課程一般入学者選抜志願状況（令和5年2月27日正午現在）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '合計（34校82学科）', quota: 5226, applicants: 5327, rate: 1.02 },
+};
+
 export const TOYAMA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'toyama',
-  years: [REIWA_7, REIWA_6],
+  years: [REIWA_7, REIWA_6, REIWA_5],
 };
