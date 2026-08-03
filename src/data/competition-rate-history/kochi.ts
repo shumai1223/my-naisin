@@ -79,7 +79,25 @@ const REIWA_4: YearSnapshot = {
   grandTotal: { label: '全日制 合計（県立計＋市立計）', quota: 4875, applicants: 3555, rate: 0.73 },
 };
 
+/**
+ * 令和3年度（2021年度）: 4年→5年横展開。教委の年度別ハブページ(soshiki/311701/r3_siganjokyo.html)
+ * 経由で同種の学校別一覧表［確定］PDF(令和3年2月12日発表・全2頁)を発見・Read toolで直読み。
+ * 全日制「合計」行（県立計4,810(A日程募集定員4,601)/3,196＋市立計280/325＝合計5,090
+ * (4,881)/3,521）のうち、R4/R5/R6/R7と同じ列定義（括弧内のA日程募集定員を分母とする志願率）
+ * でquota=4,881・applicants=3,521・rate=0.72を転記（3521/4881=0.7215…≈0.72で印字済み値と整合）。
+ */
+const REIWA_3: YearSnapshot = {
+  fiscalYear: '令和3年度（2021年度）',
+  sourceUrl: 'https://www.pref.kochi.lg.jp/doc/r3_siganjokyo/file_contents/030212_Anittei_henkogo.pdf',
+  sourceTitle: '高知県教育委員会 令和3年度Ａ日程等志願先変更後の状況（学校別）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制 合計（県立計＋市立計）', quota: 4881, applicants: 3521, rate: 0.72 },
+};
+
 export const KOCHI_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'kochi',
-  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4],
+  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
 };
