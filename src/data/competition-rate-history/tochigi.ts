@@ -48,7 +48,25 @@ const REIWA_7: YearSnapshot = {
   grandTotal: { label: '全日制計（一般選抜定員ベース・出願変更前2/20時点）', schoolCount: 58, quota: 7486, applicants: 8338, rate: 1.11 },
 };
 
+/**
+ * 令和6年度（2024年度）: R6の「出願変更後」版ハブページは発見できなかったため、R7と同じ理由で
+ * 「出願状況（2/21時点・出願変更前）」一次PDF（全58校・No.1〜3）を採用（R7と同じスコープの
+ * 揺れ）。全日制「合計」行を転記: 一般選抜定員=7,679・出願人員=8,479・出願倍率=1.10
+ * （8479/7679=1.1042…≈1.10で印字済み値と整合）。
+ */
+const REIWA_6: YearSnapshot = {
+  fiscalYear: '令和6年度（2024年度）',
+  sourceUrl: 'https://www.pref.tochigi.lg.jp/m04/r06/documents/r6ippansyutsuganjyokyo.pdf',
+  sourceTitle:
+    '栃木県教育委員会 令和6（2024）年度県立高等学校入学者選抜一般選抜出願状況（全日制課程・2/21時点）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制計（一般選抜定員ベース・出願変更前2/21時点）', schoolCount: 58, quota: 7679, applicants: 8479, rate: 1.1 },
+};
+
 export const TOCHIGI_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'tochigi',
-  years: [REIWA_8, REIWA_7],
+  years: [REIWA_8, REIWA_7, REIWA_6],
 };
