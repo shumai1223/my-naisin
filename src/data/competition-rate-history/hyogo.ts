@@ -113,7 +113,26 @@ const REIWA_3: YearSnapshot = {
   grandTotal: { label: '全日制 計（同スコープ）', quota: 21320, applicants: 22243, rate: 1.04 },
 };
 
+/**
+ * 令和2年度（2020年度）: 5年→6年横展開。教委サイトのR2年度選抜ページ（R2senbatu.html）経由で
+ * 一次PDF（020228shigansyafinal.pdf・令和2年2月28日確定・全10頁）を発見・Read toolで直読み
+ * 成功。1頁目「1 志願者数等」表の全日制最終日列（定員22,366・志願者数23,765・倍率1.06）を
+ * 転記（23765/22366=1.0625…≈1.06で印字済み値と整合）。6頁目末尾の学科別一覧「全日制 計」行
+ * （22366/23765/1.06）とも完全一致し、同一資料内の二重検証が取れている。定時制課程はR3〜R7と
+ * 同じ理由でスコープ外。
+ */
+const REIWA_2: YearSnapshot = {
+  fiscalYear: '令和2年度（2020年度）',
+  sourceUrl: 'https://www.hyogo-c.ed.jp/~koko-bo/R2senbatu/020228shigansyafinal.pdf',
+  sourceTitle: '兵庫県教育委員会 令和2年度兵庫県公立高等学校入学者選抜出願状況（特別出願後確定数）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制 計（同スコープ）', quota: 22366, applicants: 23765, rate: 1.06 },
+};
+
 export const HYOGO_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'hyogo',
-  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
+  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3, REIWA_2],
 };
