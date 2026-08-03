@@ -50,6 +50,25 @@ export const PRIVATE_SCHOOL_DETAIL_OKAYAMA: PrivateSchoolDetailFile = {
         sourceTier: 'primary' as const,
       },
     },
+    {
+      schoolCode: 'D133310000078',
+      schoolName: '倉敷高等学校',
+      fiscalYearLabel: '令和8年度（2026年度）',
+      courses: [
+        {
+          courseName: '普通科（特進国大(S)コース・特進アドバンス(A)コース・進学チャレンジコース・総合探究コースの4コース合算）',
+          capacity: 260,
+        },
+        { courseName: '商業科', capacity: 70 },
+      ],
+      totalCapacity: 330,
+      source: {
+        url: 'https://www.kurashiki.ac.jp/pdf/r8/R8bosyuyoukou.pdf',
+        docTitle: '生徒募集要項 令和8年度（2026年度）入試（倉敷高等学校）',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
   ],
   skipped: [],
 };
