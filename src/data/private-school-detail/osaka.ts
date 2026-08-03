@@ -440,6 +440,19 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000147',
+      schoolName: '金蘭会高等学校',
+      fiscalYearLabel: '2027年（令和9年度）',
+      courses: [{ courseName: '全日制普通科（女子・内部進学生約25人含む）', capacity: 210 }],
+      totalCapacity: 210,
+      source: {
+        url: 'https://kinran.ed.jp/wp-content/uploads/2026/07/4fd671e62bf35ca29cc84359ff5340d4.pdf',
+        docTitle: '2027(令和9)年度入試 金蘭会高等学校 生徒募集要項「1.募集人員」',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000637',
       schoolName: '帝塚山学院泉ケ丘高等学校',
       fiscalYearLabel: '令和8年度(2026年度)',
