@@ -615,13 +615,13 @@ describe('PRIVATE_SCHOOL_DETAIL_NAGANO(県プレスリリースで26校中16校�
     }
   });
 
-  it('収録16校・スキップ3校(長野女子=2026年3月閉校/ステップ・信濃むつみ=通信制で定員非公開)で残り7校は未着手(重複なし)', () => {
+  it('収録16校・スキップ4校(長野女子=2026年3月閉校/ステップ・信濃むつみ・さくら国際=通信制で定員非公開)で残り6校は未着手(重複なし)', () => {
     const allCodes = SCHOOLS_PRIVATE_NAGANO.schools.map((s) => s.code);
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_NAGANO, allCodes);
     expect(result.duplicates).toEqual([]);
-    expect(result.missing).toHaveLength(7);
+    expect(result.missing).toHaveLength(6);
     expect(PRIVATE_SCHOOL_DETAIL_NAGANO.schools.length).toBe(16);
-    expect(PRIVATE_SCHOOL_DETAIL_NAGANO.skipped.length).toBe(3);
+    expect(PRIVATE_SCHOOL_DETAIL_NAGANO.skipped.length).toBe(4);
     const grandTotal = PRIVATE_SCHOOL_DETAIL_NAGANO.schools.reduce((acc, s) => acc + s.totalCapacity, 0);
     expect(grandTotal).toBe(3440);
   });
