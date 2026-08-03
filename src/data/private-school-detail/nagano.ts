@@ -240,6 +240,25 @@ export const PRIVATE_SCHOOL_DETAIL_NAGANO: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D120321700028',
+      schoolName: '地球環境高等学校',
+      fiscalYearLabel: '令和8年度（2026年度）',
+      courses: [
+        {
+          courseName: '普通科（広域通信制単位制）週1日型・集中型 新入生・編入生・転入生（総定員480名の内数）',
+          capacity: 160,
+        },
+        { courseName: '普通科（広域通信制単位制）週3日型（佐久本校・令和8年度は4月生のみ募集）', capacity: 30 },
+      ],
+      totalCapacity: 190,
+      source: {
+        url: 'https://earth.ac.jp/pages/34/',
+        docTitle: '募集要項（地球環境高等学校）「設置学科・募集定員」表',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
       schoolCode: 'D120332100012',
       schoolName: 'ユナイテッド・ワールド・カレッジＩＳＡＫジャパン',
       fiscalYearLabel: '令和8年度',
