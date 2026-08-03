@@ -94,7 +94,26 @@ const REIWA_4: YearSnapshot = {
   grandTotal: { label: '全日制 計（同スコープ・前年度実績）', quota: 21815, applicants: 22913, rate: 1.05 },
 };
 
+/**
+ * 令和3年度（2021年度）: 4年→5年横展開。教委サイトのR3年度選抜ページ（r3senbatu.html）経由で
+ * 一次PDF（r3shiganshasuu0304.pdf・令和3年3月4日確定・全9頁）を発見・Read toolで直読み成功。
+ * 1頁目「1 志願者数等」表の全日制列（定員21,320・志願者数22,243・倍率1.04）を転記
+ * （22243/21320=1.0433…≈1.04で印字済み値と整合）。5頁目末尾の学校別一覧「全日制 計」行
+ * （21320/22243/1.04）とも完全一致し、同一資料内の二重検証が取れている。定時制課程は
+ * R4〜R7と同じ理由でスコープ外。
+ */
+const REIWA_3: YearSnapshot = {
+  fiscalYear: '令和3年度（2021年度）',
+  sourceUrl: 'https://www.hyogo-c.ed.jp/~koko-bo/02nyuushi/r3senbatu/r3shiganshasuu0304.pdf',
+  sourceTitle: '兵庫県教育委員会 令和3年度兵庫県公立高等学校入学者選抜出願状況（特別出願後確定数）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制 計（同スコープ）', quota: 21320, applicants: 22243, rate: 1.04 },
+};
+
 export const HYOGO_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'hyogo',
-  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4],
+  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
 };
