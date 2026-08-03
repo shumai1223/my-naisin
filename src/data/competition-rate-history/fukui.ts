@@ -82,7 +82,26 @@ const REIWA_4: YearSnapshot = {
   grandTotal: { label: '全日制 合計', quota: 3732, applicants: 3843, rate: 1.03 },
 };
 
+/**
+ * 令和3年度（2021年度）: 4年→5年横展開。教委の年度別ハブページ（さらに異なるURL体系の
+ * 可能性が高い）は探索コストが跳ね上がるため、R4〜R7と同一シリーズのリセモム確定記事
+ * （2021年2月16日発表）をWebFetchで直接引用。全日制: 一般選抜募集人員3,791・第一志望
+ * 出願者数3,836・第一志望倍率1.01（3836/3791=1.0119…≈1.01で整合。記事本文にも同数値が
+ * 明記）。
+ */
+const REIWA_3: YearSnapshot = {
+  fiscalYear: '令和3年度（2021年度）',
+  sourceUrl: 'https://resemom.jp/article/2021/03/02/60726.html',
+  sourceTitle:
+    'リセモム「【高校受験2021】福井県立高、一般選抜の出願状況（確定）高志1.72倍」（福井県教育委員会 令和3年度一般入学者選抜志願変更状況の発表を引用）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制 合計', quota: 3791, applicants: 3836, rate: 1.01 },
+};
+
 export const FUKUI_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'fukui',
-  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4],
+  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
 };
