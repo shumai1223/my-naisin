@@ -58,7 +58,24 @@ const REIWA_5: YearSnapshot = {
   grandTotal: { label: '一般選抜 全日制の課程', quota: 4187, applicants: 4174, rate: 1.0 },
 };
 
+/**
+ * 令和4年度（2022年度）: R5/R6/R7と同一シリーズのリセモム確定記事（2022年3月3日発表）を
+ * WebFetchで直接引用。全日制の課程「一般選抜」全体: 一般選抜募集人員4,314・志願者数4,376・
+ * 志願倍率1.01（4376/4314=1.0144…≈1.01で整合。WebSearch要約とも独立一致）。
+ */
+const REIWA_4: YearSnapshot = {
+  fiscalYear: '令和4年度（2022年度）',
+  sourceUrl: 'https://resemom.jp/article/2022/03/03/66078.html',
+  sourceTitle:
+    'リセモム「【高校受験2022】徳島県公立高入試の志願状況（確定）徳島市立（理数）1.03倍」（徳島県教育委員会 令和4年度一般選抜出願状況の発表を引用）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '一般選抜 全日制の課程', quota: 4314, applicants: 4376, rate: 1.01 },
+};
+
 export const TOKUSHIMA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'tokushima',
-  years: [REIWA_7, REIWA_6, REIWA_5],
+  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4],
 };
