@@ -554,6 +554,25 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000049',
+      schoolName: '昇陽高等学校',
+      fiscalYearLabel: '令和9年度（2027年度）',
+      courses: [
+        {
+          courseName: '普通科（特進/進学[標準進学・看護医療進学・幼児教育進学・アスリート進学]/ITフロンティア/ビジネス・公務員/パティシエ 合計）',
+          capacity: 270,
+        },
+        { courseName: '福祉科（福祉コース）', capacity: 30 },
+      ],
+      totalCapacity: 300,
+      source: {
+        url: 'https://www.oskshoyo.ed.jp/wp/wp-content/uploads/2026/07/a17b19793bb235fde629c1e02bf8bbaa.pdf',
+        docTitle: '令和9年(2027年)度 生徒募集要項（昇陽高等学校）募集人員',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000030',
       schoolName: '英風高等学校',
       fiscalYearLabel: '令和8年度(2026年度)',
