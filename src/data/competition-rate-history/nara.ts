@@ -45,7 +45,24 @@ const REIWA_6: YearSnapshot = {
   grandTotal: { label: '一般選抜 全日制課程（旧制度・特色選抜合格者を除く）', quota: 4440, applicants: 4702, rate: 1.06 },
 };
 
+/**
+ * 令和5年度（2023年度）: R6/R7と同じ旧制度（特色選抜＋一般選抜の2段階）下でのリセモム確定
+ * 記事（2023年3月7日発表）をWebFetchで直接引用。全日制課程「一般選抜」全体: 募集人員4,432・
+ * 志願者数5,062・競争倍率1.14（5062/4432=1.1422…≈1.14で整合）。
+ */
+const REIWA_5: YearSnapshot = {
+  fiscalYear: '令和5年度（2023年度）',
+  sourceUrl: 'https://resemom.jp/article/2023/03/07/71272.html',
+  sourceTitle:
+    'リセモム「【高校受験2023】奈良県公立高、一般選抜の志願状況（確定）奈良1.11倍」（奈良県教育委員会 令和5年度一般選抜出願状況の発表を引用）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '一般選抜 全日制課程（旧制度・特色選抜合格者を除く）', quota: 4432, applicants: 5062, rate: 1.14 },
+};
+
 export const NARA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'nara',
-  years: [REIWA_7, REIWA_6],
+  years: [REIWA_7, REIWA_6, REIWA_5],
 };
