@@ -554,6 +554,22 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000263',
+      schoolName: '建国高等学校',
+      fiscalYearLabel: '2026年度（令和8年度）',
+      courses: [
+        { courseName: '普通科 特別進学コース', capacity: 30 },
+        { courseName: '普通科 総合コース（韓国文化専攻・英米文化専攻・日本文化専攻）', capacity: 50 },
+      ],
+      totalCapacity: 80,
+      source: {
+        url: 'https://keonguk.ac.jp/high_school/candidates/',
+        docTitle: '入試情報（建国高等学校）募集人員',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000254',
       schoolName: '浪速高等学校',
       fiscalYearLabel: '令和9年度(2027年度)',
