@@ -41,6 +41,23 @@ export const PRIVATE_SCHOOL_DETAIL_EHIME: PrivateSchoolDetailFile = {
         sourceTier: 'primary' as const,
       },
     },
+    {
+      schoolCode: 'D138320700011',
+      schoolName: '帝京第五高等学校',
+      fiscalYearLabel: '令和8年度（2026年度）',
+      courses: [
+        { courseName: '普通科', capacity: 40 },
+        { courseName: '看護科', capacity: 40 },
+        { courseName: '総合学科', capacity: 120 },
+      ],
+      totalCapacity: 200,
+      source: {
+        url: 'https://teikyo5-h.ed.jp/wp-content/uploads/2026/05/yoko2026.pdf',
+        docTitle: '2026(令和8)年度 入学試験要項（Web出願）（帝京第五高等学校）',
+        fetchedAt: '2026-08-03',
+        sourceTier: 'primary' as const,
+      },
+    },
   ],
   skipped: [
     {

@@ -1068,19 +1068,19 @@ describe('private-school-detail index', () => {
   });
 });
 
-describe('PRIVATE_SCHOOL_DETAIL_EHIME(愛光高等学校+聖カタリナ学園高等学校の2校を収録・残り10校は未着手)', () => {
+describe('PRIVATE_SCHOOL_DETAIL_EHIME(愛光高等学校+聖カタリナ学園高等学校+帝京第五高等学校の3校を収録・残り9校は未着手)', () => {
   it('収録した学校は全てcourses合計とtotalCapacityが一致する', () => {
     for (const school of PRIVATE_SCHOOL_DETAIL_EHIME.schools) {
       expect(checkCourseCapacitySum(school)).toBe(true);
     }
   });
 
-  it('収録2校・スキップ2校で参照台帳14校のうち残り10校は未着手(重複なし)', () => {
+  it('収録3校・スキップ2校で参照台帳14校のうち残り9校は未着手(重複なし)', () => {
     const allCodes = SCHOOLS_PRIVATE_EHIME.schools.map((s) => s.code);
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_EHIME, allCodes);
     expect(result.duplicates).toEqual([]);
-    expect(result.missing).toHaveLength(10);
-    expect(PRIVATE_SCHOOL_DETAIL_EHIME.schools.length).toBe(2);
+    expect(result.missing).toHaveLength(9);
+    expect(PRIVATE_SCHOOL_DETAIL_EHIME.schools.length).toBe(3);
     expect(PRIVATE_SCHOOL_DETAIL_EHIME.skipped.length).toBe(2);
   });
 });
