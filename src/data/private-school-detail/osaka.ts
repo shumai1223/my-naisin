@@ -554,6 +554,23 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000398',
+      schoolName: '関西大倉高等学校',
+      fiscalYearLabel: '2026年度（令和8年度）（約）',
+      courses: [
+        { courseName: '特進Ｓコース（男女・約）', capacity: 35 },
+        { courseName: '特進コース（男女・約）', capacity: 280 },
+      ],
+      totalCapacity: 315,
+      source: {
+        url: 'https://www.kankura.jp/exam/boshu-h/',
+        docTitle:
+          '2026年度高校募集要項（関西大倉高等学校）募集人員（「約」表記・公式サイト+edu-news.info+studyh.jpの3系統で同一数値をクロスチェック済み）',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'secondary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000370',
       schoolName: '常翔啓光学園高等学校',
       fiscalYearLabel: '2026年度（令和8年度）',
