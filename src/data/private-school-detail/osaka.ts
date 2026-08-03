@@ -554,6 +554,19 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000254',
+      schoolName: '浪速高等学校',
+      fiscalYearLabel: '令和9年度(2027年度)',
+      courses: [],
+      totalCapacity: 960,
+      source: {
+        url: 'https://www.naniwa.ed.jp/high/wp-content/uploads/sites/3/2027koukouboshuuyoukou.pdf',
+        docTitle: '令和9年度 生徒募集要項（浪速高等学校）募集人員',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000129',
       schoolName: '大阪夕陽丘学園高等学校',
       fiscalYearLabel: '令和8年度(2026年度)',
