@@ -85,7 +85,28 @@ const REIWA_4: YearSnapshot = {
   grandTotal: { label: '全県合計・全日制一般入学', schoolCount: 40, quota: 6933, applicants: 6927, rate: 1.0 },
 };
 
+/**
+ * 令和3年度（2021年度）: 4年→5年横展開。教委の記者発表資料アーカイブ（kisya/r2kyoui/
+ * 3gatukyoui.html＝令和3年3月分）から「令和3年度石川県公立高等学校一般入学(全日制)の
+ * 受検状況（3月9日）」（全3頁・修正版・テキスト埋め込み型PDF）を発見・Read toolで直読み。
+ * R4/R5/R6と同じ理由（印字済み「受検倍率」J/Cは受検者数=出願者数-欠席者数を分母にした
+ * 出席ベースの倍率でR7とscopeが異なる）で、全県合計行の一般入学枠(C=A-B)=6,731・出願者数
+ * (H)=6,725を用いて6725/6731=0.9991…→1.00を自前算出した（R4/R5/R6と同じ計算方針）。
+ * 1頁目総括表と3頁目学校別内訳表の合計行が完全一致することで内部整合性を確認済み。
+ * 学校数40校（40校65学科9コース）はR4/R5/R6/R7と同一。
+ */
+const REIWA_3: YearSnapshot = {
+  fiscalYear: '令和3年度（2021年度）',
+  sourceUrl: 'https://www.pref.ishikawa.lg.jp/kisya/r2kyoui/documents/21210309c.pdf',
+  sourceTitle: '石川県教育委員会 令和3年度石川県公立高等学校一般入学(全日制)の受検状況（3月9日・修正版）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全県合計・全日制一般入学', schoolCount: 40, quota: 6731, applicants: 6725, rate: 1.0 },
+};
+
 export const ISHIKAWA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'ishikawa',
-  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4],
+  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
 };
