@@ -97,7 +97,25 @@ const REIWA_3: YearSnapshot = {
   grandTotal: { label: '一般選抜 全日制課程（旧制度・特色選抜合格者を除く）', quota: 4934, applicants: 4740, rate: 0.96 },
 };
 
+/**
+ * 令和2年度（2020年度）: 5年→6年横展開。R3〜R7と同じ旧制度（特色選抜＋一般選抜の2段階）下での
+ * リセモム確定記事（2020年3月5日発表）をWebSearch要約とWebFetch直接引用の2回で同一数値を
+ * 確認して採用。全日制課程「一般選抜」全体: 募集人員5,552・志願者数5,197・競争倍率0.94
+ * （5197/5552=0.9361…≈0.94で整合。記事本文にも同数値が明記）。
+ */
+const REIWA_2: YearSnapshot = {
+  fiscalYear: '令和2年度（2020年度）',
+  sourceUrl: 'https://resemom.jp/article/2020/03/06/55191.html',
+  sourceTitle:
+    'リセモム「【高校受験2020】奈良県公立高、一般選抜の志願状況（確定）奈良（普通）1.16倍など」（奈良県教育委員会 令和2年度一般選抜出願状況の発表を引用）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '一般選抜 全日制課程（旧制度・特色選抜合格者を除く）', quota: 5552, applicants: 5197, rate: 0.94 },
+};
+
 export const NARA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'nara',
-  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
+  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3, REIWA_2],
 };

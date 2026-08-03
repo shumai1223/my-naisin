@@ -4,15 +4,16 @@ import { NARA_COMPETITION_RATE_HISTORY } from '../nara';
  * 奈良県 多年度アーカイブ（Λ-4）DoD検証: 令和7・令和6年度（いずれも旧制度・一般選抜）の
  * 全日制課程合計の数値をリセモム記事（教委発表の引用）の固定値で確認する。
  */
-describe('奈良県 多年度アーカイブ（Λ-4・令和7/令和6/令和5/令和4/令和3の5年度分・grand-total-only）', () => {
-  it('5年度分（令和7年度・令和6年度・令和5年度・令和4年度・令和3年度）を収録している', () => {
-    expect(NARA_COMPETITION_RATE_HISTORY.years).toHaveLength(5);
+describe('奈良県 多年度アーカイブ（Λ-4・令和7/令和6/令和5/令和4/令和3/令和2の6年度分・grand-total-only）', () => {
+  it('6年度分（令和7年度・令和6年度・令和5年度・令和4年度・令和3年度・令和2年度）を収録している', () => {
+    expect(NARA_COMPETITION_RATE_HISTORY.years).toHaveLength(6);
     expect(NARA_COMPETITION_RATE_HISTORY.years.map((y) => y.fiscalYear)).toEqual([
       '令和7年度（2025年度）',
       '令和6年度（2024年度）',
       '令和5年度（2023年度）',
       '令和4年度（2022年度）',
       '令和3年度（2021年度）',
+      '令和2年度（2020年度）',
     ]);
   });
 
@@ -55,5 +56,12 @@ describe('奈良県 多年度アーカイブ（Λ-4・令和7/令和6/令和5/�
     expect(r3.grandTotal.quota).toBe(4934);
     expect(r3.grandTotal.applicants).toBe(4740);
     expect(r3.grandTotal.rate).toBeCloseTo(0.96, 2);
+  });
+
+  it('令和2年度の合計はリセモム記事と一致する(募集人員5,552・志願者数5,197・倍率0.94)', () => {
+    const r2 = NARA_COMPETITION_RATE_HISTORY.years[5];
+    expect(r2.grandTotal.quota).toBe(5552);
+    expect(r2.grandTotal.applicants).toBe(5197);
+    expect(r2.grandTotal.rate).toBeCloseTo(0.94, 2);
   });
 });
