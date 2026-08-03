@@ -61,7 +61,24 @@ const REIWA_5: YearSnapshot = {
   grandTotal: { label: '一般選抜 全日制課程（自己推薦選抜合格者等除く）', quota: 4609, applicants: 5299, rate: 1.15 },
 };
 
+/**
+ * 令和4年度（2022年度）: R5/R6/R7と同一シリーズのリセモム記事（2022年2月24日・志願変更締切後
+ * 確定）をWebFetchで直接引用。全日制課程全体「入学定員（自己推薦選抜合格者等除く）4,907人・
+ * 出願者数5,538人・出願倍率1.13倍」を転記（5538/4907=1.1286…≈1.13で整合）。
+ */
+const REIWA_4: YearSnapshot = {
+  fiscalYear: '令和4年度（2022年度）',
+  sourceUrl: 'https://resemom.jp/article/2022/02/24/65953.html',
+  sourceTitle:
+    'リセモム「【高校受験2022】香川県公立高の出願状況（確定）高松（普通）1.15倍」（香川県教育委員会 令和4年度香川県公立高等学校一般選抜出願者数の発表を引用）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '一般選抜 全日制課程（自己推薦選抜合格者等除く）', quota: 4907, applicants: 5538, rate: 1.13 },
+};
+
 export const KAGAWA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'kagawa',
-  years: [REIWA_7, REIWA_6, REIWA_5],
+  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4],
 };
