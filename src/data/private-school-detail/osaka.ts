@@ -554,6 +554,24 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000129',
+      schoolName: '大阪夕陽丘学園高等学校',
+      fiscalYearLabel: '令和8年度(2026年度)',
+      courses: [
+        { courseName: '普通科 特進コース', capacity: 80 },
+        { courseName: '普通科 PBL（旧英語国際）コース', capacity: 80 },
+        { courseName: '普通科 進学コース', capacity: 160 },
+        { courseName: '普通科 音楽・美術コース', capacity: 60 },
+      ],
+      totalCapacity: 380,
+      source: {
+        url: 'https://www.oyg.ed.jp/_assets/exam/descriptio/requirements.pdf',
+        docTitle: '令和8年度 入試要項（大阪夕陽丘学園高等学校）募集人員',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000076',
       schoolName: 'ヴェリタス城星学園高等学校',
       fiscalYearLabel: '令和7年度(2025年度)',
