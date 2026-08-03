@@ -63,7 +63,27 @@ const REIWA_5: YearSnapshot = {
   grandTotal: { label: '合計（34校82学科）', quota: 5226, applicants: 5327, rate: 1.02 },
 };
 
+/**
+ * 令和4年度（2022年度）: 教委旧サイト（kengaku.tym.ed.jp）のR4発表資料アーカイブページ
+ * （archives/401）経由で同一シリーズの一次PDF（r040225.pdf・令和4年2月25日正午現在・全3頁）
+ * を発見・Read toolで直読み成功。「合計 34校82学科」行（推薦入学内定者数1,019を除いた
+ * 募集人数5,359・志願者数5,594・倍率1.04）を転記（5594/5359=1.0439…≈1.04で印字済み値と
+ * 整合）。3頁目の大学科別内訳表の合計行（募集定員6,378/推薦内定1,019/募集人数5,359/
+ * 志願者数5,594/倍率1.04）とも完全一致し、同一資料内の二重検証が取れている。定時制・
+ * 通信制課程はR5/R6/R7と同じ理由でスコープ外。
+ */
+const REIWA_4: YearSnapshot = {
+  fiscalYear: '令和4年度（2022年度）',
+  sourceUrl: 'https://www.kengaku.tym.ed.jp/wp-content/uploads/2022/03/r040225.pdf',
+  sourceTitle: '富山県教育委員会 令和4年度富山県立高等学校入学者選抜 全日制の課程一般入学者選抜志願状況（令和4年2月25日正午現在）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '合計（34校82学科）', quota: 5359, applicants: 5594, rate: 1.04 },
+};
+
 export const TOYAMA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'toyama',
-  years: [REIWA_7, REIWA_6, REIWA_5],
+  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4],
 };

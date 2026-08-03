@@ -4,13 +4,14 @@ import { TOYAMA_COMPETITION_RATE_HISTORY } from '../toyama';
  * 富山県 多年度アーカイブ（Λ-4）DoD検証: 令和7・令和6年度の全日制の課程一般入学者選抜
  * 合計（34校82学科）の数値を一次資料の固定値で確認する。
  */
-describe('富山県 多年度アーカイブ（Λ-4・令和7/令和6/令和5の3年度分・grand-total-only）', () => {
-  it('3年度分（令和7年度・令和6年度・令和5年度）を収録している', () => {
-    expect(TOYAMA_COMPETITION_RATE_HISTORY.years).toHaveLength(3);
+describe('富山県 多年度アーカイブ（Λ-4・令和7/令和6/令和5/令和4の4年度分・grand-total-only）', () => {
+  it('4年度分（令和7年度・令和6年度・令和5年度・令和4年度）を収録している', () => {
+    expect(TOYAMA_COMPETITION_RATE_HISTORY.years).toHaveLength(4);
     expect(TOYAMA_COMPETITION_RATE_HISTORY.years.map((y) => y.fiscalYear)).toEqual([
       '令和7年度（2025年度）',
       '令和6年度（2024年度）',
       '令和5年度（2023年度）',
+      '令和4年度（2022年度）',
     ]);
   });
 
@@ -39,5 +40,12 @@ describe('富山県 多年度アーカイブ（Λ-4・令和7/令和6/令和5の
     expect(r5.grandTotal.quota).toBe(5226);
     expect(r5.grandTotal.applicants).toBe(5327);
     expect(r5.grandTotal.rate).toBeCloseTo(1.02, 2);
+  });
+
+  it('令和4年度の合計は一次資料と一致する(募集人数5,359・志願者数5,594・倍率1.04)', () => {
+    const r4 = TOYAMA_COMPETITION_RATE_HISTORY.years[3];
+    expect(r4.grandTotal.quota).toBe(5359);
+    expect(r4.grandTotal.applicants).toBe(5594);
+    expect(r4.grandTotal.rate).toBeCloseTo(1.04, 2);
   });
 });
