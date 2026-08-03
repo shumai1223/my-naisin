@@ -99,7 +99,25 @@ const REIWA_3: YearSnapshot = {
   grandTotal: { label: '一般選抜 全日制課程（特色化選抜合格内定者数を除く）', quota: 12552, applicants: 13289, rate: 1.05 },
 };
 
+/**
+ * 令和2年度（2020年度）: 5年→6年横展開。R3〜R7と同じスコープ（一般選抜）のリセモム確定記事
+ * （2020年3月2日発表）をWebSearch要約とWebFetch直接引用の2回で同一数値を確認して採用。
+ * 全日制課程「一般選抜」全体: 募集人員13,172・志願者数14,121・志願倍率1.07
+ * （14121/13172=1.0721…≈1.07で整合。記事本文にも同数値が明記）。
+ */
+const REIWA_2: YearSnapshot = {
+  fiscalYear: '令和2年度（2020年度）',
+  sourceUrl: 'https://resemom.jp/article/2020/03/02/55067.html',
+  sourceTitle:
+    'リセモム「【高校受験2020】新潟県公立高、一般選抜の志願状況・倍率（確定）新潟南（理数コース）2.05倍」（新潟県教育委員会 令和2年度一般選抜志願状況の発表を引用）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '一般選抜 全日制課程（特色化選抜合格内定者数を除く）', quota: 13172, applicants: 14121, rate: 1.07 },
+};
+
 export const NIIGATA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'niigata',
-  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
+  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3, REIWA_2],
 };
