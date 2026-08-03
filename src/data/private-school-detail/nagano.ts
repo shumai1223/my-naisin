@@ -259,6 +259,19 @@ export const PRIVATE_SCHOOL_DETAIL_NAGANO: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D120320300033',
+      schoolName: 'コードアカデミー高等学校',
+      fiscalYearLabel: '（学年定員として通年公表・年度表記なし）',
+      courses: [{ courseName: '普通科（通信制・各学年定員相当・全学年合計定員240人の1/3）', capacity: 80 }],
+      totalCapacity: 80,
+      source: {
+        url: 'https://www.code.ac.jp/what-we-do',
+        docTitle: '特色・入学案内（コードアカデミー高等学校）「定員240人 各学年80人相当の少人数教育」',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
       schoolCode: 'D120332100012',
       schoolName: 'ユナイテッド・ワールド・カレッジＩＳＡＫジャパン',
       fiscalYearLabel: '令和8年度',

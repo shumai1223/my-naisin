@@ -608,22 +608,27 @@ describe('PRIVATE_SCHOOL_DETAIL_HYOGO(55校中43校を収録・残り12校は完
   });
 });
 
-describe('PRIVATE_SCHOOL_DETAIL_NAGANO(県プレスリリースの全日制16校+天龍興譲・地球環境を追加収録・26校中18校)', () => {
+describe('PRIVATE_SCHOOL_DETAIL_NAGANO(県プレスリリースの全日制16校+天龍興譲・地球環境・コードアカデミーを追加収録・26校中19校)', () => {
   it('収録した学校は全てcourses合計とtotalCapacityが一致する', () => {
     for (const school of PRIVATE_SCHOOL_DETAIL_NAGANO.schools) {
       expect(checkCourseCapacitySum(school)).toBe(true);
     }
   });
 
-  it('収録18校・スキップ6校(長野女子=2026年3月閉校/ステップ・信濃むつみ・さくら国際・緑誠蘭・つくば開成学園=通信制で定員非公開)で残り2校は未着手(重複なし)', () => {
+  it('収録19校・スキップ6校(長野女子=2026年3月閉校/ステップ・信濃むつみ・さくら国際・緑誠蘭・つくば開成学園=通信制で定員非公開)で残り1校は未着手(重複なし)', () => {
     const allCodes = SCHOOLS_PRIVATE_NAGANO.schools.map((s) => s.code);
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_NAGANO, allCodes);
     expect(result.duplicates).toEqual([]);
-    expect(result.missing).toHaveLength(2);
-    expect(PRIVATE_SCHOOL_DETAIL_NAGANO.schools.length).toBe(18);
+    expect(result.missing).toHaveLength(1);
+    expect(PRIVATE_SCHOOL_DETAIL_NAGANO.schools.length).toBe(19);
     expect(PRIVATE_SCHOOL_DETAIL_NAGANO.skipped.length).toBe(6);
     const pressReleaseTotal = PRIVATE_SCHOOL_DETAIL_NAGANO.schools
-      .filter((s) => s.schoolCode !== 'D120341300011' && s.schoolCode !== 'D120321700028')
+      .filter(
+        (s) =>
+          s.schoolCode !== 'D120341300011' &&
+          s.schoolCode !== 'D120321700028' &&
+          s.schoolCode !== 'D120320300033'
+      )
       .reduce((acc, s) => acc + s.totalCapacity, 0);
     expect(pressReleaseTotal).toBe(3440);
   });
