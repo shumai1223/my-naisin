@@ -78,7 +78,25 @@ const REIWA_4: YearSnapshot = {
   grandTotal: { label: '全日制の課程 総計（第一次選抜＋連携型選抜込み）', quota: 13301, applicants: 13284, rate: 1.0 },
 };
 
+/**
+ * 令和3年度（2021年度）: 4年→5年横展開（tokyoに続く2県目）。R4/R5/R6/R7と同一シリーズの
+ * リセモム確定記事（2021年2月22日発表）をWebFetchで直接引用。全日制の課程「総計」: 定員
+ * 13,141・出願者数13,007・倍率0.99（13007/13141=0.9898…≈0.99で整合。記事本文にも同数値が
+ * 明記）。
+ */
+const REIWA_3: YearSnapshot = {
+  fiscalYear: '令和3年度（2021年度）',
+  sourceUrl: 'https://resemom.jp/article/2021/02/22/60598.html',
+  sourceTitle:
+    'リセモム「【高校受験2021】岐阜県公立高、第1次選抜の出願状況（確定）岐阜1.18倍」（岐阜県教育委員会 令和3年度第一次選抜変更後出願者数総括表の発表を引用）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制の課程 総計（第一次選抜＋連携型選抜込み）', quota: 13141, applicants: 13007, rate: 0.99 },
+};
+
 export const GIFU_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'gifu',
-  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4],
+  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
 };
