@@ -106,7 +106,27 @@ const REIWA_3: YearSnapshot = {
   grandTotal: { label: '全日制後期募集', quota: 3684, applicants: 3606, rate: 0.98 },
 };
 
+/**
+ * 令和2年度（2020年度）: 5年→6年横展開。教委公式サイト「過去の入試状況」ページ経由で一次PDF
+ * 「令和2年度山梨県公立高等学校入学者選抜 全日制後期募集及び定時制課程の最終志願状況」
+ * （令和2年2月27日発表・全7頁）を発見・Read toolで直読み成功。1頁目サマリーの「(1) 全日制
+ * 後期募集」計行（後期募集人員3,865・最終志願者数3,947・倍率1.02）を転記
+ * （3947/3865=1.0212…≈1.02で印字済み値と整合）。3頁目「全日制課程計」行（県立高校計3,785＋
+ * 市立高校計162＝3,947）とも完全一致し、資料内二重検証が取れている。R3〜R7と同じ「全日制
+ * 後期募集」スコープ。
+ */
+const REIWA_2: YearSnapshot = {
+  fiscalYear: '令和2年度（2020年度）',
+  sourceUrl: 'https://www.pref.yamanashi.jp/documents/7061/r2_nyushi_saishushigansha.pdf',
+  sourceTitle: '山梨県教育委員会 令和2年度山梨県公立高等学校入学者選抜 全日制後期募集及び定時制課程の最終志願状況',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制後期募集', quota: 3865, applicants: 3947, rate: 1.02 },
+};
+
 export const YAMANASHI_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'yamanashi',
-  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
+  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3, REIWA_2],
 };
