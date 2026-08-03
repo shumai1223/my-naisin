@@ -85,7 +85,25 @@ const REIWA_4: YearSnapshot = {
   grandTotal: { label: '全日制 本校（35校＝県立34校＋市立1校）', quota: 4246, applicants: 3842, rate: 0.90 },
 };
 
+/**
+ * 令和3年度（2021年度）: 4年→5年横展開。R4/R5と同じ理由（一次PDFが多段見出し表でOsaka型
+ * 誤読リスクに該当）でR4/R5/R6/R7と同一シリーズのリセモム確定記事（2021年2月19日発表）を
+ * WebFetchで直接引用。全日制全体: 募集定員4,140・出願者数3,755・志願倍率0.91
+ * （3755/4140=0.9070…≈0.91で整合。記事本文にも同数値が明記）。
+ */
+const REIWA_3: YearSnapshot = {
+  fiscalYear: '令和3年度（2021年度）',
+  sourceUrl: 'https://resemom.jp/article/2021/02/19/60552.html',
+  sourceTitle:
+    'リセモム「【高校受験2021】島根県公立高、一般選抜の志願倍率（確定）松江北（理数）1.38倍」（島根県教育委員会 令和3年度一般選抜出願状況の発表を引用）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制 本校（35校＝県立34校＋市立1校）', quota: 4140, applicants: 3755, rate: 0.91 },
+};
+
 export const SHIMANE_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'shimane',
-  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4],
+  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
 };
