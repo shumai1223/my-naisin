@@ -163,6 +163,23 @@ export const PRIVATE_SCHOOL_DETAIL_OKAYAMA: PrivateSchoolDetailFile = {
         sourceTier: 'primary' as const,
       },
     },
+    {
+      schoolCode: 'D133310000112',
+      schoolName: '作陽学園高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [
+        { courseName: '普通科 Proudコース', capacity: 50 },
+        { courseName: '普通科 Progressコース', capacity: 110 },
+        { courseName: '普通科 Professionalコース', capacity: 80 },
+      ],
+      totalCapacity: 240,
+      source: {
+        url: 'https://www.sakuyo-h.ed.jp/wp-content/uploads/2025/09/R8_bosyuyoko_HP.pdf',
+        docTitle: '令和8年度 生徒募集要項（作陽学園高等学校）',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
   ],
   skipped: [],
 };
