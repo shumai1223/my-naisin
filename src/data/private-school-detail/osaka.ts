@@ -554,6 +554,24 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000487',
+      schoolName: '関西福祉科学大学高等学校',
+      fiscalYearLabel: '令和9年度(2027年度)',
+      courses: [
+        { courseName: '普通科 特別進学Ⅰコース（男女共学）', capacity: 30 },
+        { courseName: '普通科 特別進学Ⅱコース（男女共学）', capacity: 70 },
+        { courseName: '普通科 進学コース（男女共学）', capacity: 140 },
+        { courseName: '普通科 保育進学コース（女子のみ）', capacity: 30 },
+      ],
+      totalCapacity: 270,
+      source: {
+        url: 'https://www.hs.fuksi-kagk-u.ac.jp/wp/wp-content/themes/fuksi-kagk-u/images/nyuushi/requirements2027.pdf',
+        docTitle: '生徒募集要項（2027年度入試）（関西福祉科学大学高等学校）募集人数',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000450',
       schoolName: '四條畷学園高等学校',
       fiscalYearLabel: '令和8年度(2026年度)（外部約450名+内部進学約30名で全体約480名）',
