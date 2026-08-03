@@ -554,6 +554,23 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000575',
+      schoolName: '賢明学院高等学校',
+      fiscalYearLabel: '2026年度（令和8年度）（内部進学者約60名を含む）',
+      courses: [
+        { courseName: '関西学院大学特進サイエンスコース', capacity: 70 },
+        { courseName: '特進エグゼコース', capacity: 50 },
+        { courseName: '特進コース', capacity: 100 },
+      ],
+      totalCapacity: 220,
+      source: {
+        url: 'https://kenmei.jp/highschool/admission/high_entry/',
+        docTitle: '2026年度 賢明学院高等学校生徒募集要項 募集定員',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000548',
       schoolName: '近畿大学附属高等学校',
       fiscalYearLabel: '令和8年度(2026年度)（内部進学約270名を除く外部募集分）',
