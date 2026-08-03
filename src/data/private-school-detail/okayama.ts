@@ -69,6 +69,25 @@ export const PRIVATE_SCHOOL_DETAIL_OKAYAMA: PrivateSchoolDetailFile = {
         sourceTier: 'primary' as const,
       },
     },
+    {
+      schoolCode: 'D133310000130',
+      schoolName: '岡山学芸館高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [
+        {
+          courseName: '普通科（清秀高等部・医進サイエンスコース・スーパーVコース・特別進学コース・進学コースの5区分合算・内訳は非公開）',
+          capacity: 400,
+        },
+        { courseName: '英語科', capacity: 25 },
+      ],
+      totalCapacity: 425,
+      source: {
+        url: 'https://www.gakugeikan.ed.jp/up_load_files/freetext/prospective_pamphlet/file/bosyuyoukouR8.pdf',
+        docTitle: '令和8年度 生徒募集要項（全日制課程）（岡山学芸館高等学校）',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
   ],
   skipped: [],
 };
