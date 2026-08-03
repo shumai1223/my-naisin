@@ -99,7 +99,25 @@ const REIWA_3: YearSnapshot = {
   grandTotal: { label: '合計（62校）', quota: 8068, applicants: 6590, rate: 0.82 },
 };
 
+/**
+ * 令和2年度（2020年度）: 5年→6年横展開。R3〜R7と同一シリーズの一般選抜確定志願状況を報じた
+ * リセモム記事（2020年2月21日発表）をWebSearch要約とWebFetch直接引用の2回で同一数値を確認
+ * して採用。「全日制合計62校の実質定員8,115人に対し7,088人が志願し、実質志願倍率は0.87倍」
+ * と明記（7088/8115=0.8734…≈0.87で整合）。
+ */
+const REIWA_2: YearSnapshot = {
+  fiscalYear: '令和2年度（2020年度）',
+  sourceUrl: 'https://resemom.jp/article/2020/02/21/54923.html',
+  sourceTitle:
+    'リセモム「【高校受験2020】岩手県立高、一般選抜の志願状況・倍率（確定）盛岡第一1.17倍など」（岩手県教育委員会 令和2年度一般選抜確定志願状況の発表を引用）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '合計（62校）', quota: 8115, applicants: 7088, rate: 0.87 },
+};
+
 export const IWATE_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'iwate',
-  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
+  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3, REIWA_2],
 };
