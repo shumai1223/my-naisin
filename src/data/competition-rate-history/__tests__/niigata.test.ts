@@ -4,13 +4,14 @@ import { NIIGATA_COMPETITION_RATE_HISTORY } from '../niigata';
  * 新潟県 多年度アーカイブ（Λ-4）DoD検証: 令和7・令和6年度の一般選抜(全日制課程)合計の数値を
  * リセモム記事（教委発表の引用）の固定値で確認する。
  */
-describe('新潟県 多年度アーカイブ（Λ-4・令和7/令和6/令和5の3年度分・grand-total-only）', () => {
-  it('3年度分（令和7年度・令和6年度・令和5年度）を収録している', () => {
-    expect(NIIGATA_COMPETITION_RATE_HISTORY.years).toHaveLength(3);
+describe('新潟県 多年度アーカイブ（Λ-4・令和7/令和6/令和5/令和4の4年度分・grand-total-only）', () => {
+  it('4年度分（令和7年度・令和6年度・令和5年度・令和4年度）を収録している', () => {
+    expect(NIIGATA_COMPETITION_RATE_HISTORY.years).toHaveLength(4);
     expect(NIIGATA_COMPETITION_RATE_HISTORY.years.map((y) => y.fiscalYear)).toEqual([
       '令和7年度（2025年度）',
       '令和6年度（2024年度）',
       '令和5年度（2023年度）',
+      '令和4年度（2022年度）',
     ]);
   });
 
@@ -39,5 +40,12 @@ describe('新潟県 多年度アーカイブ（Λ-4・令和7/令和6/令和5の
     expect(r5.grandTotal.quota).toBe(12366);
     expect(r5.grandTotal.applicants).toBe(12893);
     expect(r5.grandTotal.rate).toBeCloseTo(1.04, 2);
+  });
+
+  it('令和4年度の合計は一次資料と一致する(募集人数12,841・志願者数13,324・倍率1.03)', () => {
+    const r4 = NIIGATA_COMPETITION_RATE_HISTORY.years[3];
+    expect(r4.grandTotal.quota).toBe(12841);
+    expect(r4.grandTotal.applicants).toBe(13324);
+    expect(r4.grandTotal.rate).toBeCloseTo(1.03, 2);
   });
 });

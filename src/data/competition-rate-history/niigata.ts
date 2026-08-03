@@ -60,7 +60,26 @@ const REIWA_5: YearSnapshot = {
   grandTotal: { label: '一般選抜 全日制課程（特色化選抜合格内定者数を除く）', quota: 12366, applicants: 12893, rate: 1.04 },
 };
 
+/**
+ * 令和4年度（2022年度）: 教委のR4年度用ハブページ経由で同一シリーズの一次PDF（令和4年度
+ * 一般選抜志願変更後の志願状況発表資料・令和4年2月25日発表・全6頁）を発見・Read toolで
+ * 直読み。「全日制合計」行（募集人数326学級/12,841・志願者数13,324・倍率1.03）を転記
+ * （倍率は教委の注記通り小数第3位以下切り捨てのため13324/12841=1.0376…を切り捨てると1.03
+ * で印字済み値と整合。標準的な四捨五入では1.04になる点に注意）。R6/R7と同じ「特色化選抜
+ * 合格内定者数を除く一般選抜」のスコープ。
+ */
+const REIWA_4: YearSnapshot = {
+  fiscalYear: '令和4年度（2022年度）',
+  sourceUrl: 'https://www.pref.niigata.lg.jp/uploaded/attachment/305241.pdf',
+  sourceTitle: '新潟県教育委員会 令和4年度新潟県公立高等学校入学者選抜一般選抜志願変更後の志願状況発表資料',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '一般選抜 全日制課程（特色化選抜合格内定者数を除く）', quota: 12841, applicants: 13324, rate: 1.03 },
+};
+
 export const NIIGATA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'niigata',
-  years: [REIWA_7, REIWA_6, REIWA_5],
+  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4],
 };
