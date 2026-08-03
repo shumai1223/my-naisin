@@ -74,7 +74,27 @@ const REIWA_5: YearSnapshot = {
   grandTotal: { label: '全日制 計（同スコープ・前年度実績）', quota: 21903, applicants: 22663, rate: 1.03 },
 };
 
+/**
+ * 令和4年度（2022年度）: R5エントリと同じ一次資料（令和5年度出願状況・特別出願後確定数・
+ * 令和5年3月2日確定）の1頁目「1 志願者数等」表に、令和5年度と令和4年度（前年度）の全日制/
+ * 定時制の定員・志願者数・倍率が並記されている。全日制列: 定員21,815・志願者数22,913・倍率1.05
+ * （22913/21815=1.0504…≈1.05で印字済み値と整合）。同表のR5年度列（定員21,903・志願者数22,663・
+ * 倍率1.03）が既存REIWA_5エントリと完全一致することも確認済み（＝本PDFが正しい一次資料である
+ * ことの裏取り）。教委の年度別ハブページ（senbatsu2023）経由で取得。
+ */
+const REIWA_4: YearSnapshot = {
+  fiscalYear: '令和4年度（2022年度）',
+  sourceUrl:
+    'https://www2.hyogo-c.ed.jp/hpe/uploads/sites/10/2023/03/【確定】R5_全日制・定時制-志願者確定数（３月２日）.pdf',
+  sourceTitle: '兵庫県教育委員会 令和5年度兵庫県公立高等学校入学者選抜出願状況（特別出願後確定数）',
+  fetchedAt: '2026-08-03',
+  origin: 'prior-year-parenthetical',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制 計（同スコープ・前年度実績）', quota: 21815, applicants: 22913, rate: 1.05 },
+};
+
 export const HYOGO_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'hyogo',
-  years: [REIWA_7, REIWA_6, REIWA_5],
+  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4],
 };
