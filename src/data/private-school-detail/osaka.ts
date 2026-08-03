@@ -541,6 +541,19 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000021',
+      schoolName: '大阪つくば開成高等学校',
+      fiscalYearLabel: '2026年度（令和8年度）',
+      courses: [],
+      totalCapacity: 500,
+      source: {
+        url: 'https://otk.ed.jp/wp-content/themes/tsukuba-osaka2019/assets/files/boshuu2025_7-2.pdf',
+        docTitle: '2026年度 募集要項（大阪つくば開成高等学校）定員',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000012',
       schoolName: '東朋学園高等学校',
       fiscalYearLabel: '2026年度（令和8年度）',
