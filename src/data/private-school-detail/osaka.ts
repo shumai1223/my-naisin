@@ -453,6 +453,28 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000165',
+      schoolName: '大阪成蹊女子高等学校',
+      fiscalYearLabel: '2027年度（令和9年度・2025年度〈令和7年度〉と同数値をWebSearchでクロスチェック済み）',
+      courses: [
+        { courseName: '普通科 特進コース', capacity: 30 },
+        { courseName: '普通科 看護医療進学コース', capacity: 30 },
+        { courseName: '普通科 英語コース', capacity: 30 },
+        { courseName: '普通科 総合キャリアコース', capacity: 130 },
+        { courseName: '普通科 スポーツコース', capacity: 30 },
+        { courseName: '普通科 幼児教育コース', capacity: 60 },
+        { courseName: '普通科 音楽コース', capacity: 30 },
+        { courseName: '美術科 アート・イラスト・アニメーションコース', capacity: 60 },
+      ],
+      totalCapacity: 400,
+      source: {
+        url: 'https://high.osaka-seikei.jp/ex_info/bosyu.html',
+        docTitle: '募集要項・特待生制度（大阪成蹊女子高等学校）コース別定員表',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000637',
       schoolName: '帝塚山学院泉ケ丘高等学校',
       fiscalYearLabel: '令和8年度(2026年度)',
