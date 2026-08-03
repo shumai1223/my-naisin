@@ -147,6 +147,22 @@ export const PRIVATE_SCHOOL_DETAIL_OKAYAMA: PrivateSchoolDetailFile = {
         sourceTier: 'primary' as const,
       },
     },
+    {
+      schoolCode: 'D133310000194',
+      schoolName: '川崎医科大学附属高等学校',
+      fiscalYearLabel: '令和9年度（2027年度）',
+      courses: [
+        { courseName: '普通科 専願入試（総合判定型・学科試験型合算・約）', capacity: 25 },
+        { courseName: '普通科 一般入試（約）', capacity: 10 },
+      ],
+      totalCapacity: 35,
+      source: {
+        url: 'https://s.kawasaki-m.ac.jp/exam/youkou.pdf',
+        docTitle: '令和9年度 生徒募集要項「募集人員・出願」（川崎医科大学附属高等学校）',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
   ],
   skipped: [],
 };
