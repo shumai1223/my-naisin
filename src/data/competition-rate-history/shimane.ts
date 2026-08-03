@@ -103,7 +103,29 @@ const REIWA_3: YearSnapshot = {
   grandTotal: { label: '全日制 本校（35校＝県立34校＋市立1校）', quota: 4140, applicants: 3755, rate: 0.91 },
 };
 
+/**
+ * 令和2年度（2020年度）: 5年→6年横展開。教委の過年度アーカイブページ（kanendosenbatsu.html）
+ * 経由で一次PDF「令和2年度島根県公立高等学校入学者選抜 一般選抜出願者数（志願変更後）」
+ * （令和2年2月18日17:00現在）を発見・Read toolで直読み成功。多段見出し表（R5/R6と同じ
+ * Osaka型誤読リスクの構造）だが、末尾の「合計」行（県立高校計129学級4,319/3,917＋松江市立
+ * 皆美が丘女子高校4学級103/67＝合計133学級・一般選抜募集定員4,422・出願者数合計(志願変更後)
+ * 3,983・対募集定員競争率0.90）は独立に加算しても一致する集計行であり、R7の「本校35校＝
+ * 県立34校＋市立1校」と同一スコープ（3983/4422=0.9007…≈0.90で印字済み値と整合）。
+ */
+const REIWA_2: YearSnapshot = {
+  fiscalYear: '令和2年度（2020年度）',
+  sourceUrl:
+    'https://www.pref.shimane.lg.jp/education/kyoiku/senbatsu/senbatsu_info/index.data/02_shiganhenkougo_itiran.pdf',
+  sourceTitle:
+    '島根県教育委員会 令和2年度島根県公立高等学校入学者選抜 一般選抜出願者数（志願変更後）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制 本校（35校＝県立34校＋市立1校）', quota: 4422, applicants: 3983, rate: 0.9 },
+};
+
 export const SHIMANE_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'shimane',
-  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
+  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3, REIWA_2],
 };
