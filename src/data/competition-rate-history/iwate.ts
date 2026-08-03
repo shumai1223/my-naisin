@@ -45,7 +45,25 @@ const REIWA_6: YearSnapshot = {
   grandTotal: { label: '合計（61校117学科）', quota: 7862, applicants: 6281, rate: 0.8 },
 };
 
+/**
+ * 令和5年度（2023年度）: 教委の令和5年度用サイトが令和6年度以降に閉鎖され原本PDFへの直接
+ * アクセスに至らなかったため、R6/R7と同一シリーズの一般選抜確定志願状況を報じたリセモム記事
+ * （2023年2月24日発表）をWebFetchで直接引用。「全日制62校117学科の実質定員7,881人に対し
+ * 6,424人が志願、実質志願倍率は0.82倍」と明記（6424/7881=0.8153…≈0.82で整合）。
+ */
+const REIWA_5: YearSnapshot = {
+  fiscalYear: '令和5年度（2023年度）',
+  sourceUrl: 'https://resemom.jp/article/2023/02/24/71088.html',
+  sourceTitle:
+    'リセモム「【高校受験2023】岩手県公立高、一般選抜の志願状況（確定）盛岡第一1.19倍」（岩手県教育委員会 令和5年度一般選抜確定志願状況の発表を引用）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '合計（62校117学科）', quota: 7881, applicants: 6424, rate: 0.82 },
+};
+
 export const IWATE_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'iwate',
-  years: [REIWA_7, REIWA_6],
+  years: [REIWA_7, REIWA_6, REIWA_5],
 };
