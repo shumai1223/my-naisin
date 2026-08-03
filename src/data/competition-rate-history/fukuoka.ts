@@ -77,7 +77,25 @@ const REIWA_4: YearSnapshot = {
   grandTotal: { label: '県立全日制（一般入試・確定志願状況）', quota: 21800, applicants: 24808, rate: 1.14 },
 };
 
+/**
+ * 令和3年度（2021年度）: 4年→5年横展開。R4/R5/R6/R7と同一シリーズのリセモム確定記事
+ * （2021年3月2日発表）をWebFetchで直接引用。県立全日制（一般入試・確定志願状況）: 入学定員
+ * 21,200・志願者数23,980・志願倍率1.13（23980/21200=1.1311…≈1.13で整合）。市組合立分は
+ * R4/R5/R6/R7と同じ理由（原資料未発見）でスコープ外。
+ */
+const REIWA_3: YearSnapshot = {
+  fiscalYear: '令和3年度（2021年度）',
+  sourceUrl: 'https://resemom.jp/article/2021/03/03/60740.html',
+  sourceTitle:
+    'リセモム「【高校受験2021】福岡県公立高、一般入試の志願状況（確定）修猷館1.64倍」（福岡県教育委員会 令和3年度公立高等学校一般入試確定志願状況の発表を引用）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '県立全日制（一般入試・確定志願状況）', quota: 21200, applicants: 23980, rate: 1.13 },
+};
+
 export const FUKUOKA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'fukuoka',
-  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4],
+  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
 };
