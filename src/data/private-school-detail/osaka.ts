@@ -554,6 +554,19 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000290',
+      schoolName: '梅花高等学校',
+      fiscalYearLabel: '令和9年度(2027年度)（学内進学者約90名を含む）',
+      courses: [],
+      totalCapacity: 280,
+      source: {
+        url: 'http://www.baika-jh.ed.jp/high-school/exam/points/',
+        docTitle: '入学試験実施要項（梅花高等学校）募集人員',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000281',
       schoolName: '香ヶ丘リベルテ高等学校',
       fiscalYearLabel: '2026年度（令和8年度）',
