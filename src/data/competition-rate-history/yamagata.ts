@@ -80,7 +80,27 @@ const REIWA_4: YearSnapshot = {
   grandTotal: { label: '全日制公立合計', quota: 6067, applicants: 5072, rate: 0.84 },
 };
 
+/**
+ * 令和3年度（2021年度）: R4-R7と同一シリーズの一次PDF（r3siganjoukyou.pdf・令和3年2月26日
+ * 発表・全4頁）を教委の年度別ハブページ（r3nyuusennkannkei.html）経由でWebSearchにより発見。
+ * Read toolで全頁直読み成功。「全日制公立合計」行（一般選抜定員6,227・一般選抜志願者数5,351・
+ * 一般選抜志願倍率0.86）を直接転記（5351/6227=0.8593…≈0.86で印字済み値と整合・「全日制県立
+ * 合計」6,011/5,077と「全日制市立合計」216/274の内訳合算(quota=6011+216=6227・
+ * applicants=5077+274=5351)とも完全一致し資料内二重検証済み・R4/R5/R6/R7と同じ「全日制公立
+ * 合計」スコープ）。定時制課程はR4-R7と同じ理由でスコープ外。
+ */
+const REIWA_3: YearSnapshot = {
+  fiscalYear: '令和3年度（2021年度）',
+  sourceUrl: 'https://www.pref.yamagata.jp/documents/5056/r3siganjoukyou.pdf',
+  sourceTitle: '山形県教育委員会 令和3年度山形県公立高等学校入学者選抜 一般入学者選抜 志願状況',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制公立合計', quota: 6227, applicants: 5351, rate: 0.86 },
+};
+
 export const YAMAGATA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'yamagata',
-  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4],
+  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
 };
