@@ -554,6 +554,24 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000584',
+      schoolName: '近畿大学泉州高等学校',
+      fiscalYearLabel: '令和8年度(2026年度)',
+      courses: [
+        { courseName: '普通科 英数特進', capacity: 70 },
+        { courseName: '普通科 進学Ⅰ類', capacity: 70 },
+        { courseName: '普通科 進学Ⅱ類', capacity: 70 },
+      ],
+      totalCapacity: 210,
+      source: {
+        url: 'https://www.osaka-shigaku.gr.jp/news/images/R8_h_bosyu2.pdf',
+        docTitle:
+          '令和8年度 大阪私立高等学校生徒募集状況一覧（大阪私立中学校高等学校連合会）近畿大学泉州高等学校（学校公式サイトは令和6年度版のみ現存のため業界団体調べを採用・複数の受験情報サイトの令和7年度分スニペットとも一致確認）',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'secondary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000575',
       schoolName: '賢明学院高等学校',
       fiscalYearLabel: '2026年度（令和8年度）（内部進学者約60名を含む）',
