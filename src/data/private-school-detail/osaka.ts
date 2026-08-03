@@ -424,6 +424,22 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000058',
+      schoolName: '相愛高等学校',
+      fiscalYearLabel: '（年度非表記の学校公式PDF）',
+      courses: [
+        { courseName: '普通科（専願・併願可）', capacity: 120 },
+        { courseName: '音楽科（専願・併願可・内部進学者約10名を含む）', capacity: 30 },
+      ],
+      totalCapacity: 150,
+      source: {
+        url: 'https://www.soai.ed.jp/examinee/pdf/guidelines_h_2026.pdf',
+        docTitle: '入学試験募集要項（相愛高等学校）「普通科120名〈専願・併願可〉」「音楽科30名〈専願・併願可〉」',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000637',
       schoolName: '帝塚山学院泉ケ丘高等学校',
       fiscalYearLabel: '令和8年度(2026年度)',
