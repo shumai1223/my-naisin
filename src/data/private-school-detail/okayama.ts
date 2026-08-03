@@ -127,6 +127,26 @@ export const PRIVATE_SCHOOL_DETAIL_OKAYAMA: PrivateSchoolDetailFile = {
         sourceTier: 'primary' as const,
       },
     },
+    {
+      schoolCode: 'D133310000167',
+      schoolName: '清心女子高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        {
+          courseName: '普通科 特別進学コース（難関系・国公立系・文理総合系・国際系の4系合算）',
+          capacity: 95,
+        },
+        { courseName: '普通科 生命科学コース', capacity: 25 },
+        { courseName: '普通科 NDSU進学コース', capacity: 40 },
+      ],
+      totalCapacity: 160,
+      source: {
+        url: 'https://www.nd-seishin.ac.jp/assets/file/entrance/pdf/r8/2026_highschool_entrance_detail.pdf',
+        docTitle: '生徒募集要項 詳細（ネット出願）「1.募集学科・定員」（清心女子高等学校）',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
   ],
   skipped: [],
 };
