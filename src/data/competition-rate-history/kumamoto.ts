@@ -76,7 +76,26 @@ const REIWA_4: YearSnapshot = {
   grandTotal: { label: '全日制課程・後期（一般）選抜 計', quota: 8569, applicants: 7691, rate: 0.9 },
 };
 
+/**
+ * 令和3年度（2021年度）: 4年→5年横展開。教委のR3年度ハブページ(kyouiku/86706.html)経由で
+ * 「令和3年度熊本県公立高等学校入学者選抜後期(一般)選抜における出願変更状況」PDF(令和3年2月22日
+ * 発表・全5頁)を発見・Read toolで直読み。5頁目末尾の全日制課程「計」行（募集人員8,785・
+ * 出願確定者数7,411・倍率0.84）を転記（7411/8785=0.8434…≈0.84で印字済み値と整合）。
+ * R4〜R7と同一シリーズのリセモム確定記事（2021年2月24日発表）でも同一の3数値を独立確認済み。
+ * 定時制課程はR4〜R7と同じ理由でスコープ外。
+ */
+const REIWA_3: YearSnapshot = {
+  fiscalYear: '令和3年度（2021年度）',
+  sourceUrl: 'https://www.pref.kumamoto.jp/uploaded/life/86706_117052_misc.pdf',
+  sourceTitle: '熊本県教育委員会 令和3年度（2021年度）熊本県公立高等学校入学者選抜後期（一般）選抜における出願変更状況',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制課程・後期（一般）選抜 計', quota: 8785, applicants: 7411, rate: 0.84 },
+};
+
 export const KUMAMOTO_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'kumamoto',
-  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4],
+  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
 };
