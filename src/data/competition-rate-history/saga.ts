@@ -39,7 +39,23 @@ const REIWA_6: YearSnapshot = {
   grandTotal: { label: '全日制 合計', quota: 4667, applicants: 4880, rate: 1.05 },
 };
 
+/**
+ * 令和5年度（2023年度）: R6/R7と同一シリーズのリセモム確定記事（2023年3月1日発表・志願変更後）
+ * をWebFetchで直接引用。全日制課程の一般選抜: 募集人員4,744・出願者数4,899・出願倍率1.03
+ * （4899/4744=1.0327…≈1.03で整合）。
+ */
+const REIWA_5: YearSnapshot = {
+  fiscalYear: '令和5年度（2023年度）',
+  sourceUrl: 'https://resemom.jp/article/2023/03/01/71178.html',
+  sourceTitle: 'リセモム「【高校受験2023】佐賀県立高、一般選抜の出願状況（確定）佐賀西1.15倍」（佐賀県教育委員会 令和5年度一般選抜志願状況の発表を引用）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制 合計', quota: 4744, applicants: 4899, rate: 1.03 },
+};
+
 export const SAGA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'saga',
-  years: [REIWA_7, REIWA_6],
+  years: [REIWA_7, REIWA_6, REIWA_5],
 };
