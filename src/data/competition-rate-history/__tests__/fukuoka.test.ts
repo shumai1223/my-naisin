@@ -3,13 +3,14 @@ import { FUKUOKA_COMPETITION_RATE_HISTORY } from '../fukuoka';
 /**
  * Λ-4（多年度アーカイブ・福岡県）DoD検証: 令和7・令和6年度の県立全日制合計の数値を固定値で確認する。
  */
-describe('福岡県 多年度アーカイブ（Λ-4・令和7/令和6/令和5の3年度分・県立全日制のみ・grand-total-only）', () => {
-  it('3年度分（令和7年度・令和6年度・令和5年度）を収録している', () => {
-    expect(FUKUOKA_COMPETITION_RATE_HISTORY.years).toHaveLength(3);
+describe('福岡県 多年度アーカイブ（Λ-4・令和7/令和6/令和5/令和4の4年度分・県立全日制のみ・grand-total-only）', () => {
+  it('4年度分（令和7年度・令和6年度・令和5年度・令和4年度）を収録している', () => {
+    expect(FUKUOKA_COMPETITION_RATE_HISTORY.years).toHaveLength(4);
     expect(FUKUOKA_COMPETITION_RATE_HISTORY.years.map((y) => y.fiscalYear)).toEqual([
       '令和7年度（2025年度）',
       '令和6年度（2024年度）',
       '令和5年度（2023年度）',
+      '令和4年度（2022年度）',
     ]);
   });
 
@@ -38,5 +39,12 @@ describe('福岡県 多年度アーカイブ（Λ-4・令和7/令和6/令和5の
     expect(r5.grandTotal.quota).toBe(22200);
     expect(r5.grandTotal.applicants).toBe(25260);
     expect(r5.grandTotal.rate).toBeCloseTo(1.14, 2);
+  });
+
+  it('令和4年度の県立全日制合計はリセモム記事と一致する(定員21,800・志願24,808・倍率1.14)', () => {
+    const r4 = FUKUOKA_COMPETITION_RATE_HISTORY.years[3];
+    expect(r4.grandTotal.quota).toBe(21800);
+    expect(r4.grandTotal.applicants).toBe(24808);
+    expect(r4.grandTotal.rate).toBeCloseTo(1.14, 2);
   });
 });
