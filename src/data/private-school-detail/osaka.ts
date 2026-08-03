@@ -554,6 +554,24 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000450',
+      schoolName: '四條畷学園高等学校',
+      fiscalYearLabel: '令和8年度(2026年度)（外部約450名+内部進学約30名で全体約480名）',
+      courses: [
+        { courseName: '普通科 総合キャリアコース', capacity: 280 },
+        { courseName: '普通科 発展キャリアコース', capacity: 160 },
+        { courseName: '普通科 特別シンガクコース', capacity: 40 },
+      ],
+      totalCapacity: 480,
+      source: {
+        url: 'https://hs.shijonawate-gakuen.ac.jp/entrance/guidelines/',
+        docTitle:
+          '生徒募集要項（四條畷学園高等学校）募集人員（検索キャッシュで令和8年度値を確認・school.js88.comと概ね一致・studyh.jpは不整合のため不採用）',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'secondary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000441',
       schoolName: '清教学園高等学校',
       fiscalYearLabel: '2026年度（令和8年度）',
