@@ -95,7 +95,25 @@ const REIWA_3: YearSnapshot = {
   grandTotal: { label: '合計', quota: 9145, applicants: 7554, rate: 0.83 },
 };
 
+/**
+ * 令和2年度（2020年度）: 5年→6年横展開。R3-R7と同一シリーズのリセモム確定記事（2020年3月4日
+ * 発表）をWebSearch要約とWebFetch直接引用の2回で同一数値を確認して採用。全日制課程全体:
+ * 定員9,185・志願者数8,030（推薦入学確約者数を含む）・志願倍率0.87
+ * （8030/9185=0.8743…≈0.87で印字済み値と整合。記事本文にも同数値が明記）。
+ */
+const REIWA_2: YearSnapshot = {
+  fiscalYear: '令和2年度（2020年度）',
+  sourceUrl: 'https://resemom.jp/article/2020/03/05/55166.html',
+  sourceTitle:
+    'リセモム「【高校受験2020】愛媛県公立高、志願状況（確定）松山東（普通）1.09倍など」（愛媛県教育委員会 令和2年度志願状況の発表を引用）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '合計', quota: 9185, applicants: 8030, rate: 0.87 },
+};
+
 export const EHIME_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'ehime',
-  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
+  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3, REIWA_2],
 };
