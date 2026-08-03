@@ -78,7 +78,27 @@ const REIWA_4: YearSnapshot = {
   grandTotal: { label: '全日制 合計', quota: 1825, applicants: 228, rate: 0.12 },
 };
 
+/**
+ * 令和3年度（2021年度）: 4年→5年横展開。教委サイトのR3年度入学者選抜アーカイブページ
+ * （site/edu/r3koukounyushi.html）経由で同一シリーズの一次PDF（435913.pdf・令和3年3月18日
+ * 公表・全3頁）を発見・Read toolで直読み成功。2頁目末尾の全日制合計行（実施学校数52校・
+ * 後期選抜募集定員1,882人・志願者数(出願先変更後)244人）を転記し、3頁目の全日制/定時制
+ * サマリー表とも完全一致することを確認済み。倍率は資料に印字が無いため自前算出
+ * （244/1882=0.1296…→0.13、R4〜R7と同じ計算方針）。前期選抜・連携型選抜・定時制課程は
+ * R4〜R7と同じ理由でスコープ外。
+ */
+const REIWA_3: YearSnapshot = {
+  fiscalYear: '令和3年度（2021年度）',
+  sourceUrl: 'https://www.pref.fukushima.lg.jp/uploaded/attachment/435913.pdf',
+  sourceTitle: '福島県教育委員会 令和3年度福島県立高等学校入学者選抜後期選抜志願状況（出願先変更後）について',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制 合計', quota: 1882, applicants: 244, rate: 0.13 },
+};
+
 export const FUKUSHIMA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'fukushima',
-  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4],
+  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
 };
