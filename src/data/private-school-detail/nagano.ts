@@ -238,5 +238,12 @@ export const PRIVATE_SCHOOL_DETAIL_NAGANO: PrivateSchoolDetailFile = {
       },
     },
   ],
-  skipped: [],
+  skipped: [
+    {
+      schoolCode: 'D120320100026',
+      schoolName: '長野女子高等学校',
+      reason:
+        'Wikipediaで2026年3月31日付の閉校(学校法人長野家政学園→2023年に学校法人長聖へ変更後、閉校)が確認された。閉校前の最終学年が2025年度(令和7年度)在籍者のみで令和8年度入学生の募集自体が存在しないため、長野県のR8全日制私立高校募集定員プレスリリースにも掲載が無いのは整合的。データなしとして正直にスキップ。',
+    },
+  ],
 };
