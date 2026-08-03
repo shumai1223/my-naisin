@@ -48,7 +48,26 @@ const REIWA_6: YearSnapshot = {
   grandTotal: { label: '全日制 本校（35校＝県立34校＋市立1校）', quota: 4169, applicants: 3481, rate: 0.83 },
 };
 
+/**
+ * 令和5年度（2023年度）: R6と同じ理由（一次PDFが多段見出し表でOsaka型誤読リスクに該当する
+ * 可能性）を踏まえ、R6/R7と同一シリーズのリセモム確定記事（2023年2月17日発表・志願変更後）
+ * をWebFetchで直接引用。全日制全体: 募集定員4,227・志願変更後出願者数3,873・対募集定員
+ * 競争率0.92（3873/4227=0.9162…≈0.92で整合。記事では学校数の明記は無いがR6/R7と同一の
+ * 「全日制全体」スコープであることを記事の文脈から確認）。
+ */
+const REIWA_5: YearSnapshot = {
+  fiscalYear: '令和5年度（2023年度）',
+  sourceUrl: 'https://resemom.jp/article/2023/02/17/70972.html',
+  sourceTitle:
+    'リセモム「【高校受験2023】島根県公立高、志願倍率（確定）松江北（理数）1.33倍」（島根県教育委員会 令和5年度一般選抜出願状況の発表を引用）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制 本校（35校＝県立34校＋市立1校）', quota: 4227, applicants: 3873, rate: 0.92 },
+};
+
 export const SHIMANE_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'shimane',
-  years: [REIWA_7, REIWA_6],
+  years: [REIWA_7, REIWA_6, REIWA_5],
 };
