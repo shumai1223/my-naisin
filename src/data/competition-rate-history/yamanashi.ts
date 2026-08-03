@@ -68,7 +68,27 @@ const REIWA_5: YearSnapshot = {
   grandTotal: { label: '全日制後期募集（26校48学科）', quota: 3601, applicants: 3489, rate: 0.96 },
 };
 
+/**
+ * 令和4年度（2022年度）: R5/R6/R7と同一シリーズのリセモム確定記事（2022年2月28日発表）を
+ * WebFetchで直接引用。全日制後期募集全体: 募集人員3,692・志願者数3,538・志願倍率0.95
+ * （教委発表の印字済み値をそのまま採用）。⚠️注記: 3538/3692を単純計算すると0.9583…となり
+ * 通常の四捨五入では0.96になるが印字済み倍率は0.95（R5エントリで既知の「単純計算と印字値の
+ * 不一致」パターンが本年度も再現。R5と同じ理由=教委側の倍率算出方式が単純な総志願者数÷総
+ * 募集人員とは異なる可能性）と推測し、自前で丸め直さず印字済みの確定値をそのまま正直に転記した。
+ */
+const REIWA_4: YearSnapshot = {
+  fiscalYear: '令和4年度（2022年度）',
+  sourceUrl: 'https://resemom.jp/article/2022/02/28/66012.html',
+  sourceTitle:
+    'リセモム「【高校受験2022】山梨県公立高、後期選抜の志願状況（確定）甲府南（理数）1.46倍」（山梨県教育委員会 令和4年度全日制後期募集の最終志願状況の発表を引用）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制後期募集', quota: 3692, applicants: 3538, rate: 0.95 },
+};
+
 export const YAMANASHI_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'yamanashi',
-  years: [REIWA_7, REIWA_6, REIWA_5],
+  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4],
 };
