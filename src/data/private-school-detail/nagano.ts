@@ -6,7 +6,9 @@
  * 「3,440」と完全一致することを検算済み。schools-private/nagano.tsの残り10校
  * (長野女子/ステップ/信濃むつみ/さくら国際/コードアカデミー/地球環境/ID学園/つくば開成学園/
  * 天龍興譲/緑誠蘭)は本プレスリリース(全日制向け)に掲載が無く、通信制・広域通信制の
- * 可能性があるため未着手のまま残す(校名からの推測でのスキップ理由付けは行わない)。
+ * 可能性が高いため1校ずつ個別に公式サイトで在籍状況・募集定員の公表有無を確認していく
+ * (長野女子=2026年3月閉校/ステップ・信濃むつみ・さくら国際=通信制で定員非公開と判明・
+ * 天龍興譲=広域通信制だが公式サイトに「募集定員50名」と明記されており収録)。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -221,6 +223,19 @@ export const PRIVATE_SCHOOL_DETAIL_NAGANO: PrivateSchoolDetailFile = {
         url: 'https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/boshu2026.pdf',
         docTitle: '令和8年度私立高等学校(全日制)の募集定員をお知らせします｜長野県県民文化部(注記「募集定員80名のうち、県内生徒を対象とする総合コースの定員を記載」・原資料の30がそのままcoursesと一致)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
+      schoolCode: 'D120341300011',
+      schoolName: '天龍興譲高等学校',
+      fiscalYearLabel: '令和8年度（2026年度）',
+      courses: [{ courseName: '普通科（広域通信制単位制）', capacity: 50 }],
+      totalCapacity: 50,
+      source: {
+        url: 'https://www.donguri-gakuen.jp/entry-2/',
+        docTitle: '天龍興譲高等学校募集要項（学校法人どんぐり向方学園）「募集定員50名」',
+        fetchedAt: '2026-08-04',
         sourceTier: 'primary' as const,
       },
     },

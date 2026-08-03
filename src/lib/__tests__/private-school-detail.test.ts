@@ -608,22 +608,24 @@ describe('PRIVATE_SCHOOL_DETAIL_HYOGO(55校中43校を収録・残り12校は完
   });
 });
 
-describe('PRIVATE_SCHOOL_DETAIL_NAGANO(県プレスリリースで26校中16校を完全収録・合計3,440と完全一致検算済み)', () => {
+describe('PRIVATE_SCHOOL_DETAIL_NAGANO(県プレスリリースの全日制16校+天龍興譲を追加収録・26校中17校)', () => {
   it('収録した学校は全てcourses合計とtotalCapacityが一致する', () => {
     for (const school of PRIVATE_SCHOOL_DETAIL_NAGANO.schools) {
       expect(checkCourseCapacitySum(school)).toBe(true);
     }
   });
 
-  it('収録16校・スキップ4校(長野女子=2026年3月閉校/ステップ・信濃むつみ・さくら国際=通信制で定員非公開)で残り6校は未着手(重複なし)', () => {
+  it('収録17校・スキップ4校(長野女子=2026年3月閉校/ステップ・信濃むつみ・さくら国際=通信制で定員非公開)で残り5校は未着手(重複なし)', () => {
     const allCodes = SCHOOLS_PRIVATE_NAGANO.schools.map((s) => s.code);
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_NAGANO, allCodes);
     expect(result.duplicates).toEqual([]);
-    expect(result.missing).toHaveLength(6);
-    expect(PRIVATE_SCHOOL_DETAIL_NAGANO.schools.length).toBe(16);
+    expect(result.missing).toHaveLength(5);
+    expect(PRIVATE_SCHOOL_DETAIL_NAGANO.schools.length).toBe(17);
     expect(PRIVATE_SCHOOL_DETAIL_NAGANO.skipped.length).toBe(4);
-    const grandTotal = PRIVATE_SCHOOL_DETAIL_NAGANO.schools.reduce((acc, s) => acc + s.totalCapacity, 0);
-    expect(grandTotal).toBe(3440);
+    const pressReleaseTotal = PRIVATE_SCHOOL_DETAIL_NAGANO.schools
+      .filter((s) => s.schoolCode !== 'D120341300011')
+      .reduce((acc, s) => acc + s.totalCapacity, 0);
+    expect(pressReleaseTotal).toBe(3440);
   });
 });
 
