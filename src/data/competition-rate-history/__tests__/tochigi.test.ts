@@ -4,13 +4,14 @@ import { TOCHIGI_COMPETITION_RATE_HISTORY } from '../tochigi';
  * 栃木県 多年度アーカイブ（Λ-4）DoD検証: 令和8・令和7年度の「全日制計（一般選抜定員ベース）」
  * の数値を一次資料の固定値で確認する。
  */
-describe('栃木県 多年度アーカイブ（Λ-4・令和8/令和7/令和6の3年度分・grand-total-only）', () => {
-  it('3年度分（令和8年度・令和7年度・令和6年度）を収録している', () => {
-    expect(TOCHIGI_COMPETITION_RATE_HISTORY.years).toHaveLength(3);
+describe('栃木県 多年度アーカイブ（Λ-4・令和8/令和7/令和6/令和5の4年度分・grand-total-only）', () => {
+  it('4年度分（令和8年度・令和7年度・令和6年度・令和5年度）を収録している', () => {
+    expect(TOCHIGI_COMPETITION_RATE_HISTORY.years).toHaveLength(4);
     expect(TOCHIGI_COMPETITION_RATE_HISTORY.years.map((y) => y.fiscalYear)).toEqual([
       '令和8年度（2026年度）',
       '令和7年度（2025年度）',
       '令和6年度（2024年度）',
+      '令和5年度（2023年度）',
     ]);
   });
 
@@ -39,5 +40,12 @@ describe('栃木県 多年度アーカイブ（Λ-4・令和8/令和7/令和6の
     expect(r6.grandTotal.quota).toBe(7679);
     expect(r6.grandTotal.applicants).toBe(8479);
     expect(r6.grandTotal.rate).toBeCloseTo(1.1, 2);
+  });
+
+  it('令和5年度の合計は一次資料と一致する(一般選抜定員8,017・出願人員8,715・倍率1.09)', () => {
+    const r5 = TOCHIGI_COMPETITION_RATE_HISTORY.years[3];
+    expect(r5.grandTotal.quota).toBe(8017);
+    expect(r5.grandTotal.applicants).toBe(8715);
+    expect(r5.grandTotal.rate).toBeCloseTo(1.09, 2);
   });
 });
