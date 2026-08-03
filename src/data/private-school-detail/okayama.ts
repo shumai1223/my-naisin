@@ -180,6 +180,25 @@ export const PRIVATE_SCHOOL_DETAIL_OKAYAMA: PrivateSchoolDetailFile = {
         sourceTier: 'primary' as const,
       },
     },
+    {
+      schoolCode: 'D133310000087',
+      schoolName: '岡山理科大学附属高等学校',
+      fiscalYearLabel: '令和8年度（2026年度）',
+      courses: [
+        { courseName: '普通科 グローバルサイエンスコース 特別進学（医・獣・薬）クラス', capacity: 20 },
+        { courseName: '普通科 グローバルサイエンスコース 進学（文・理）クラス', capacity: 80 },
+        { courseName: '普通科 総合進学コース', capacity: 200 },
+        { courseName: '普通科 スポーツサイエンスコース', capacity: 80 },
+        { courseName: '普通科 国際バカロレアコース', capacity: 20 },
+      ],
+      totalCapacity: 400,
+      source: {
+        url: 'https://okayama.ridaifu.net/wp/wp-content/themes/ridaifu/assets/pdf/boshu2026.pdf',
+        docTitle: '生徒募集要項 2026年（令和8年度）（岡山理科大学附属高等学校）',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
   ],
   skipped: [],
 };
