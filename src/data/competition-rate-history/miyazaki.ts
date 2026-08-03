@@ -24,7 +24,24 @@ const REIWA_7: YearSnapshot = {
   grandTotal: { label: '全日制合計', quota: 3862, applicants: 3159, rate: 0.82 },
 };
 
+/**
+ * 令和6年度（2024年度）: R7と同一シリーズのリセモム確定記事（2024年2月27日発表・志願変更後）
+ * をWebFetchで直接引用。全日制課程一般入学者選抜全体: 募集人員3,948・志願者数3,190・
+ * 志願倍率0.81（3190/3948=0.8081…≈0.81で整合。記事本文にも同数値が明記）。
+ */
+const REIWA_6: YearSnapshot = {
+  fiscalYear: '令和6年度（2024年度）',
+  sourceUrl: 'https://resemom.jp/article/2024/02/27/76145.html',
+  sourceTitle:
+    'リセモム「【高校受験2024】宮崎県立高、一般入試の志願状況（確定）宮崎西（理数）2.44倍」（宮崎県教育委員会 令和6年度一般入学者選抜志願状況の発表を引用）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制合計', quota: 3948, applicants: 3190, rate: 0.81 },
+};
+
 export const MIYAZAKI_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'miyazaki',
-  years: [REIWA_7],
+  years: [REIWA_7, REIWA_6],
 };
