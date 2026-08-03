@@ -96,7 +96,25 @@ const REIWA_3: YearSnapshot = {
   grandTotal: { label: '全日制の課程 総計（第一次選抜＋連携型選抜込み）', quota: 13141, applicants: 13007, rate: 0.99 },
 };
 
+/**
+ * 令和2年度（2020年度）: 5年→6年横展開（初の6年目挑戦）。R3-R7と同一シリーズのリセモム確定
+ * 記事（2020年3月4日発表）をWebSearch要約とWebFetch直接引用の2回で同一数値を確認して採用。
+ * 全日制の課程「総計」: 定員13,466・出願者数13,502・倍率1.00（13502/13466=1.0027…≈1.00で
+ * 印字済み値と整合。記事本文にも同数値が明記）。
+ */
+const REIWA_2: YearSnapshot = {
+  fiscalYear: '令和2年度（2020年度）',
+  sourceUrl: 'https://resemom.jp/article/2020/03/04/55127.html',
+  sourceTitle:
+    'リセモム「【高校受験2020】岐阜県公立高、第一次選抜の出願状況・倍率（確定）恵那（理数）1.41倍など」（岐阜県教育委員会 令和2年度第一次選抜変更後出願者数総括表の発表を引用）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制の課程 総計（第一次選抜＋連携型選抜込み）', quota: 13466, applicants: 13502, rate: 1.0 },
+};
+
 export const GIFU_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'gifu',
-  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
+  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3, REIWA_2],
 };
