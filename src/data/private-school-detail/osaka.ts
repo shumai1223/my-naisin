@@ -554,6 +554,25 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000281',
+      schoolName: '香ヶ丘リベルテ高等学校',
+      fiscalYearLabel: '2026年度（令和8年度）',
+      courses: [
+        { courseName: 'ファッションビジネス／フィジカル Ⅰ類・Ⅱ類（専願のみ）', capacity: 70 },
+        {
+          courseName: '美容芸術／幼児教育／ライフデザイン／クッキングエキスパート／アンダンテ（専願・併願）',
+          capacity: 152,
+        },
+      ],
+      totalCapacity: 222,
+      source: {
+        url: 'https://liberte.ed.jp/wp/wp-content/uploads/2025/10/25_web_tebiki.pdf',
+        docTitle: '2026年度（令和8年度）入試 生徒募集要項（香ヶ丘リベルテ高等学校）募集人員',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000272',
       schoolName: '城南学園高等学校',
       fiscalYearLabel: '令和8年度(2026年度)',
