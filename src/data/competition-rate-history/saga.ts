@@ -55,7 +55,23 @@ const REIWA_5: YearSnapshot = {
   grandTotal: { label: '全日制 合計', quota: 4744, applicants: 4899, rate: 1.03 },
 };
 
+/**
+ * 令和4年度（2022年度）: R5/R6/R7と同一シリーズのリセモム確定記事（2022年3月2日発表・
+ * 志願変更後）をWebFetchで直接引用。全日制課程の一般選抜: 募集人員4,742・出願者数4,919・
+ * 出願倍率1.04（4919/4742=1.0373…≈1.04で整合。記事本文にも「前年度と同じ1.04倍」と明記）。
+ */
+const REIWA_4: YearSnapshot = {
+  fiscalYear: '令和4年度（2022年度）',
+  sourceUrl: 'https://resemom.jp/article/2022/03/02/66051.html',
+  sourceTitle: 'リセモム「【高校受験2022】佐賀県立高、一般選抜の出願状況（確定）佐賀西1.17倍」（佐賀県教育委員会 令和4年度一般選抜志願状況の発表を引用）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制 合計', quota: 4742, applicants: 4919, rate: 1.04 },
+};
+
 export const SAGA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'saga',
-  years: [REIWA_7, REIWA_6, REIWA_5],
+  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4],
 };

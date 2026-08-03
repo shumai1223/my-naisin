@@ -4,13 +4,14 @@ import { SAGA_COMPETITION_RATE_HISTORY } from '../saga';
  * 佐賀県 多年度アーカイブ（Λ-4）DoD検証: 令和7・令和6年度の全日制合計の数値を
  * 一次資料/リセモム記事の固定値で確認する。
  */
-describe('佐賀県 多年度アーカイブ（Λ-4・令和7/令和6/令和5の3年度分・grand-total-only）', () => {
-  it('3年度分（令和7年度・令和6年度・令和5年度）を収録している', () => {
-    expect(SAGA_COMPETITION_RATE_HISTORY.years).toHaveLength(3);
+describe('佐賀県 多年度アーカイブ（Λ-4・令和7/令和6/令和5/令和4の4年度分・grand-total-only）', () => {
+  it('4年度分（令和7年度・令和6年度・令和5年度・令和4年度）を収録している', () => {
+    expect(SAGA_COMPETITION_RATE_HISTORY.years).toHaveLength(4);
     expect(SAGA_COMPETITION_RATE_HISTORY.years.map((y) => y.fiscalYear)).toEqual([
       '令和7年度（2025年度）',
       '令和6年度（2024年度）',
       '令和5年度（2023年度）',
+      '令和4年度（2022年度）',
     ]);
   });
 
@@ -39,5 +40,12 @@ describe('佐賀県 多年度アーカイブ（Λ-4・令和7/令和6/令和5の
     expect(r5.grandTotal.quota).toBe(4744);
     expect(r5.grandTotal.applicants).toBe(4899);
     expect(r5.grandTotal.rate).toBeCloseTo(1.03, 2);
+  });
+
+  it('令和4年度の合計はリセモム記事と一致する(募集人員4,742・出願者数4,919・倍率1.04)', () => {
+    const r4 = SAGA_COMPETITION_RATE_HISTORY.years[3];
+    expect(r4.grandTotal.quota).toBe(4742);
+    expect(r4.grandTotal.applicants).toBe(4919);
+    expect(r4.grandTotal.rate).toBeCloseTo(1.04, 2);
   });
 });
