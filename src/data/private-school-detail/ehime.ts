@@ -74,6 +74,26 @@ export const PRIVATE_SCHOOL_DETAIL_EHIME: PrivateSchoolDetailFile = {
         sourceTier: 'primary' as const,
       },
     },
+    {
+      schoolCode: 'D138320100044',
+      schoolName: '松山学院高等学校',
+      fiscalYearLabel: '令和8年度（2026年度）',
+      courses: [
+        { courseName: '普通科 進学コース', capacity: 80 },
+        { courseName: '普通科 情報コース', capacity: 25 },
+        { courseName: '普通科 総合コース', capacity: 30 },
+        { courseName: '普通科 スポーツコース', capacity: 25 },
+        { courseName: '普通科 Newコース', capacity: 110 },
+        { courseName: '調理科', capacity: 10 },
+      ],
+      totalCapacity: 280,
+      source: {
+        url: 'https://mg-h.ed.jp/admissions/requirements/',
+        docTitle: '募集要項（松山学院高等学校）',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
   ],
   skipped: [
     {
