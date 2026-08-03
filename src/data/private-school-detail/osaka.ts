@@ -406,6 +406,24 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000110',
+      schoolName: '四天王寺高等学校',
+      fiscalYearLabel: '令和8年度(2026年度)',
+      courses: [
+        { courseName: '文理選抜コース(女子・内部進学を除く・約)', capacity: 35 },
+        { courseName: '文理コース(女子・約)', capacity: 90 },
+        { courseName: '文化・スポーツコース(女子・約)', capacity: 30 },
+      ],
+      totalCapacity: 155,
+      source: {
+        url: 'https://www.edu-news.info/page-c-shitennoji-a.html',
+        docTitle:
+          '四天王寺高等学校・四天王寺中学校 2026年度入試要項まとめ(「約」表記は学校公式資料の一貫した表記で、平成30年度〜令和7年度まで同水準の数値(理数35/英数90/スポーツ・芸術30→コース名改編後も同数)が継続していることをWebSearchで複数年度分クロスチェック済み)',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'secondary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000637',
       schoolName: '帝塚山学院泉ケ丘高等学校',
       fiscalYearLabel: '令和8年度(2026年度)',
