@@ -100,7 +100,27 @@ const REIWA_3: YearSnapshot = {
   grandTotal: { label: '全日制公立合計', quota: 6227, applicants: 5351, rate: 0.86 },
 };
 
+/**
+ * 令和2年度（2020年度）: 5年→6年横展開。R3〜R7と同一シリーズのリセモム確定記事（2020年2月27日
+ * 発表）をWebFetchで直接引用。「全日制課程の一般選抜定員6,143人に対し、5,710人が志願し、
+ * 志願倍率は0.93倍」と明記（5710/6143=0.9295…≈0.93で整合）。「全日制県立の合計」5,924/5,407
+ * と「全日制市立（山形市立商業）の合計」219/303の内訳合算(quota=5924+219=6143・
+ * applicants=5407+303=5710)とも完全一致し、記事内二重検証が取れている。R3〜R7と同じ「全日制
+ * 公立合計」スコープ。
+ */
+const REIWA_2: YearSnapshot = {
+  fiscalYear: '令和2年度（2020年度）',
+  sourceUrl: 'https://resemom.jp/article/2020/02/27/54995.html',
+  sourceTitle:
+    'リセモム「【高校受験2020】山形県公立高、一般選抜の志願状況（確定）山形東（探究）2.49倍など」（山形県教育委員会 令和2年度一般入学者選抜志願状況の発表を引用）',
+  fetchedAt: '2026-08-03',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制公立合計', quota: 6143, applicants: 5710, rate: 0.93 },
+};
+
 export const YAMAGATA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'yamagata',
-  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
+  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3, REIWA_2],
 };
