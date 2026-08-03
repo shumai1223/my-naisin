@@ -4,13 +4,14 @@ import { KOCHI_COMPETITION_RATE_HISTORY } from '../kochi';
  * 高知県 多年度アーカイブ（Λ-4）DoD検証: 令和7・令和6年度の全日制合計（県立計＋市立計）の
  * 数値を一次資料（高知県教育委員会のＡ日程等志願先変更後の状況）の固定値で確認する。
  */
-describe('高知県 多年度アーカイブ（Λ-4・令和7/令和6/令和5の3年度分・grand-total-only）', () => {
-  it('3年度分（令和7年度・令和6年度・令和5年度）を収録している', () => {
-    expect(KOCHI_COMPETITION_RATE_HISTORY.years).toHaveLength(3);
+describe('高知県 多年度アーカイブ（Λ-4・令和7/令和6/令和5/令和4の4年度分・grand-total-only）', () => {
+  it('4年度分（令和7年度・令和6年度・令和5年度・令和4年度）を収録している', () => {
+    expect(KOCHI_COMPETITION_RATE_HISTORY.years).toHaveLength(4);
     expect(KOCHI_COMPETITION_RATE_HISTORY.years.map((y) => y.fiscalYear)).toEqual([
       '令和7年度（2025年度）',
       '令和6年度（2024年度）',
       '令和5年度（2023年度）',
+      '令和4年度（2022年度）',
     ]);
   });
 
@@ -39,5 +40,12 @@ describe('高知県 多年度アーカイブ（Λ-4・令和7/令和6/令和5の
     expect(r5.grandTotal.quota).toBe(4901);
     expect(r5.grandTotal.applicants).toBe(3442);
     expect(r5.grandTotal.rate).toBeCloseTo(0.7, 2);
+  });
+
+  it('令和4年度の合計は一次資料と一致する(募集定員4,875・第1志望者数3,555・志願率0.73)', () => {
+    const r4 = KOCHI_COMPETITION_RATE_HISTORY.years[3];
+    expect(r4.grandTotal.quota).toBe(4875);
+    expect(r4.grandTotal.applicants).toBe(3555);
+    expect(r4.grandTotal.rate).toBeCloseTo(0.73, 2);
   });
 });
