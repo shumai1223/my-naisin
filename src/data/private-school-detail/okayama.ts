@@ -221,6 +221,24 @@ export const PRIVATE_SCHOOL_DETAIL_OKAYAMA: PrivateSchoolDetailFile = {
         sourceTier: 'primary' as const,
       },
     },
+    {
+      schoolCode: 'D133310000041',
+      schoolName: '就実高等学校',
+      fiscalYearLabel: '令和8年度（2026年度）',
+      courses: [
+        { courseName: '特別進学コース(男女共学) ハイグレードクラス', capacity: 20 },
+        { courseName: '特別進学コース(男女共学) アドバンスクラス', capacity: 130 },
+        { courseName: '特別進学チャレンジコース(男女共学)', capacity: 200 },
+        { courseName: '総合進学コース(女子)', capacity: 100 },
+      ],
+      totalCapacity: 450,
+      source: {
+        url: 'https://www.shujitsu-h.ed.jp/admin/wp-content/uploads/2025/11/bosyuuyoukou.pdf',
+        docTitle: '令和8年度 就実高等学校 生徒募集要項',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
   ],
   skipped: [],
 };
