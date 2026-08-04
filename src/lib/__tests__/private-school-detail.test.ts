@@ -654,20 +654,20 @@ describe('PRIVATE_SCHOOL_DETAIL_GIFU(私学振興会一覧で全21校を完全�
   });
 });
 
-describe('PRIVATE_SCHOOL_DETAIL_MIE(私学協会一覧で全日制13校+通信制5校=18校を収録・残り3校(広域通信制)は未着手)', () => {
+describe('PRIVATE_SCHOOL_DETAIL_MIE(私学協会一覧で全日制13校+通信制5校=18校を収録・参照台帳21校を完全網羅)', () => {
   it('収録した学校は全てcourses合計とtotalCapacityが一致する', () => {
     for (const school of PRIVATE_SCHOOL_DETAIL_MIE.schools) {
       expect(checkCourseCapacitySum(school)).toBe(true);
     }
   });
 
-  it('収録18校・スキップ0件で残り3校(広域通信制)は未着手(重複なし)', () => {
+  it('収録18校・スキップ3校で参照台帳21校を完全網羅(重複・欠落なし)', () => {
     const allCodes = SCHOOLS_PRIVATE_MIE.schools.map((s) => s.code);
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_MIE, allCodes);
     expect(result.duplicates).toEqual([]);
-    expect(result.missing).toHaveLength(3);
+    expect(result.missing).toHaveLength(0);
     expect(PRIVATE_SCHOOL_DETAIL_MIE.schools.length).toBe(18);
-    expect(PRIVATE_SCHOOL_DETAIL_MIE.skipped.length).toBe(0);
+    expect(PRIVATE_SCHOOL_DETAIL_MIE.skipped.length).toBe(3);
   });
 
   it('全日制13校の合計は原資料の合計欄3,760と完全一致', () => {

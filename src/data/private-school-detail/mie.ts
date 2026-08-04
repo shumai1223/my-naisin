@@ -259,5 +259,21 @@ export const PRIVATE_SCHOOL_DETAIL_MIE: PrivateSchoolDetailFile = {
       },
     },
   ],
-  skipped: [],
+  skipped: [
+    {
+      schoolCode: 'D124310059051',
+      schoolName: '代々木高等学校',
+      reason: '広域通信制高校のため三重県私学協会の通信制表(合計855・6校)に掲載が無く、公式サイト(yoyogi.ed.jp/shima.yoyogi.ed.jp)にも募集定員の数値記載が確認できなかったため見送り。',
+    },
+    {
+      schoolCode: 'D124310059060',
+      schoolName: '神村学園高等部伊賀分校',
+      reason: '単位制・通信制高校のため三重県私学協会の通信制表に掲載が無く、公式サイト(angel.kamimura.ac.jp/koiki/iga/)にも募集定員の数値記載が確認できなかったため見送り。',
+    },
+    {
+      schoolCode: 'D124310059089',
+      schoolName: 'みえ大台おおぞら高等学校（広域通信制）',
+      reason: '報道記事(中日新聞2023年12月)に「定員1万人」との記載があったが、これはKTC学園グループの収容定員(在籍総数上限)である可能性が高く当該年度の募集定員(新規入学枠)とは性質が異なるため不採用(nagano/okayama県で確立した収容定員vs募集定員の区別を適用)。公式サイトの入学案内PDF(12頁)はpdftoppm未導入のためpages指定でも読めず、募集要項本文で正確な募集定員を確認できなかったため見送り。',
+    },
+  ],
 };
