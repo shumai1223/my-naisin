@@ -714,6 +714,27 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000851',
+      schoolName: '利晶学園大阪立命館高等学校',
+      fiscalYearLabel: '令和8年度(2026年度)（内部進学を含む）',
+      courses: [
+        { courseName: '普通科 アドバンストSPコース(α・β計・専願/併願)', capacity: 120 },
+        { courseName: '普通科 スーペリアコース(α・β計・専願/併願)', capacity: 120 },
+        {
+          courseName: '普通科 立命館コース(理系クラス/RSSクラス含む・専願/併願)',
+          capacity: 120,
+        },
+        { courseName: '体育科(特別専願のみ)', capacity: 40 },
+      ],
+      totalCapacity: 400,
+      source: {
+        url: 'https://www.rishogakuen.ed.jp/ritsumeikan/nyushi/pdf/2026_h-information.pdf',
+        docTitle: '2026年度入試 大阪立命館高等学校 生徒募集要項',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000815',
       schoolName: '金光藤蔭高等学校',
       fiscalYearLabel: '令和9年度(2027年度)',
