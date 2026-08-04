@@ -75,7 +75,26 @@ const REIWA_5: YearSnapshot = {
   grandTotal: { label: '公立合計', quota: 18598, applicants: 19284, rate: 1.04 },
 };
 
+/**
+ * 令和4年度（2022年度）: R5/R6/R7/R8と同一シリーズのリセモム確定記事（2022年2月24日発表・
+ * 志願変更後）をWebFetchで直接引用。全日制「一般選抜」全体: 募集定員18,874・志願者数19,289・
+ * 志願倍率1.02（19289/18874=1.0220…≈1.02で整合。記事本文に「募集定員1万8,874人に対し、
+ * 志願者数は1万9,289人、志願倍率は1.02倍」と明記）。独立した第2ソース（教委一次PDF・他媒体
+ * 記事）は複数回のWebSearchで発見できなかったため、正直にリセモム単一ソースとして収録
+ * （捏造なし）。これでshizuokaは5年連続（R4〜R8）収録で満了。
+ */
+const REIWA_4: YearSnapshot = {
+  fiscalYear: '令和4年度（2022年度）',
+  sourceUrl: 'https://resemom.jp/article/2022/02/24/65961.html',
+  sourceTitle: 'リセモム「【高校受験2022】静岡県公立高、一般選抜志願状況（確定）静岡1.20倍」（静岡県教育委員会 令和4年度一般選抜志願状況の発表を引用）',
+  fetchedAt: '2026-08-05',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '一般選抜 全日制（公立合計相当）', quota: 18874, applicants: 19289, rate: 1.02 },
+};
+
 export const SHIZUOKA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'shizuoka',
-  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5],
+  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4],
 };
