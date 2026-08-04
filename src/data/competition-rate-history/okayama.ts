@@ -27,6 +27,24 @@
  */
 import type { PrefectureRateHistoryFile, YearSnapshot } from '@/lib/competition-rate-history';
 
+/**
+ * **2026-08-05追記(令和8年度追加)**: リセマム記事(2026-02-27付「岡山県公立高、一般選抜志願状況
+ * （確定）岡山朝日0.93倍」)を採用: 県立全日制・募集人員5,698/志願者数5,650/志願倍率0.99
+ * (5650/5698=0.9916…≈0.99で内部整合)。記事内に「市立全日制」の記述は見当たらなかったが、
+ * R5-R7と同じ「一般選抜」「県立」の枠組みで報じられている記事であることを確認したうえで採用
+ * （schoolCountは記事内に明確な県立校数の記載が無いため今回は未設定=R5と同じ扱い）。
+ */
+const REIWA_8: YearSnapshot = {
+  fiscalYear: '令和8年度（2026年度）',
+  sourceUrl: 'https://resemom.jp/article/2026/02/27/85269.html',
+  sourceTitle: 'リセマム「【高校受験2026】岡山県公立高、一般選抜志願状況（確定）岡山朝日0.93倍」(2026-02-27)',
+  fetchedAt: '2026-08-05',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '県立全日制・一般入学', quota: 5698, applicants: 5650, rate: 0.99 },
+};
+
 const REIWA_6: YearSnapshot = {
   fiscalYear: '令和6年度（2024年度）',
   sourceUrl: 'https://resemom.jp/article/2024/02/27/76142.html',
@@ -62,5 +80,5 @@ const REIWA_5: YearSnapshot = {
 
 export const OKAYAMA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'okayama',
-  years: [REIWA_7, REIWA_6, REIWA_5],
+  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5],
 };
