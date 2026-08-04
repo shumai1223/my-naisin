@@ -23,6 +23,11 @@
  * スコープ自体はR8と同一（定時制は別シート=対象外）。WebSearch経由のリセマム記事
  * (2025-03-10「大阪府公立高、一般選抜の出願倍率（確定）」)が独立に報じた表1・表3相当の数値
  * (20075/20271・8441/9368)と完全一致することも確認済み。
+ *
+ * **2026-08-05追記(令和6年度追加)**: 同じxlsx直読み手法で令和6年度
+ * (r06_ippan_sigansya_0306.xlsx)も収録。5表構成はR7と同型（①普通科(単位制除く)=20884/21612
+ * ②普通科単位制=1080/1093 ③専門学科のみ設置校=9006/9947 ④総合学科(除くクリエイティブ)=3585/3505
+ * ⑤総合学科クリエイティブ=234/222）。5表合計quota34789・applicants36379・rate1.05。
  */
 import type { PrefectureRateHistoryFile, YearSnapshot } from '@/lib/competition-rate-history';
 
@@ -50,7 +55,19 @@ const REIWA_7: YearSnapshot = {
   grandTotal: { label: '全体合計（表1+表2+表3+表4+表5）', quota: 33250, applicants: 34003, rate: 1.02 },
 };
 
+const REIWA_6: YearSnapshot = {
+  fiscalYear: '令和6年度（2024年度）',
+  sourceUrl: 'https://www.pref.osaka.lg.jp/documents/62075/r06_ippan_sigansya_0306.xlsx',
+  sourceTitle:
+    '大阪府教育委員会 令和6年度大阪府公立高等学校 一般入学者選抜（全日制の課程）の志願者数（令和6年3月6日午後2時（締切数））表1〜5全体',
+  fetchedAt: '2026-08-05',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全体合計（表1+表2+表3+表4+表5）', quota: 34789, applicants: 36379, rate: 1.05 },
+};
+
 export const OSAKA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'osaka',
-  years: [REIWA_8, REIWA_7],
+  years: [REIWA_8, REIWA_7, REIWA_6],
 };
