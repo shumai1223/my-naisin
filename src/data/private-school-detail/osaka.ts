@@ -663,6 +663,24 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000762',
+      schoolName: '好文学園女子高等学校',
+      fiscalYearLabel: '令和9年度(2027年度)（女子校）',
+      courses: [
+        {
+          courseName: '普通科(総合進学エリア・キャリア進学エリア・メディア芸術エリアの9コース計)',
+          capacity: 270,
+        },
+      ],
+      totalCapacity: 270,
+      source: {
+        url: 'https://koubun.ed.jp/exp/examination.html',
+        docTitle: '募集要項（好文学園女子高等学校）令和9年度入試',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000744',
       schoolName: '堺リベラル高等学校',
       fiscalYearLabel: '令和9年度(2027年度)',
