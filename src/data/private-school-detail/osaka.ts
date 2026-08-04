@@ -847,6 +847,24 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310001048',
+      schoolName: 'ＹＭＣＡ学院高等学校',
+      fiscalYearLabel: '令和9年度(2027年度)（新入学・通信制課程）',
+      courses: [
+        {
+          courseName: '全コース計(Yチャレンジ/マイスペース朝・昼/スタンダード/Yリンク/トランスリンガルの各コースへ概数配分)',
+          capacity: 200,
+        },
+      ],
+      totalCapacity: 200,
+      source: {
+        url: 'https://www.ymcagakuin.ac.jp/newer/',
+        docTitle: '募集要項・学費（YMCA学院高等学校）新入学の方へ',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310001002',
       schoolName: '向陽台高等学校',
       fiscalYearLabel: '令和9年度(2027年度)（新卒生用・通信制課程）',
