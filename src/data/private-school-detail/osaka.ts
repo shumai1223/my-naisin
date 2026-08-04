@@ -754,6 +754,24 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000904',
+      schoolName: '東大阪大学敬愛高等学校',
+      fiscalYearLabel: '令和9年度(2027年度)',
+      courses: [
+        { courseName: '普通科 総合キャリアコース', capacity: 150 },
+        { courseName: '普通科 調理・製菓コース', capacity: 90 },
+        { courseName: '普通科 ステップアップコース(専願生のみ)', capacity: 60 },
+        { courseName: '普通科 スーパーアスリートコース(専願生のみ)', capacity: 60 },
+      ],
+      totalCapacity: 360,
+      source: {
+        url: 'https://www.higashiosaka-hs.ac.jp/keiai/requirements',
+        docTitle: '募集要項（東大阪大学敬愛高等学校）2027年度',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000815',
       schoolName: '金光藤蔭高等学校',
       fiscalYearLabel: '令和9年度(2027年度)',
