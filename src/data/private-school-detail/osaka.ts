@@ -554,6 +554,22 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000646',
+      schoolName: '東海大学付属大阪仰星高等学校',
+      fiscalYearLabel: '令和8年度(2026年度)（内部進学予定約105名を除く一般募集分）',
+      courses: [
+        { courseName: '英数特進コース', capacity: 45 },
+        { courseName: '総合進学コース', capacity: 190 },
+      ],
+      totalCapacity: 235,
+      source: {
+        url: 'https://www.tokai-gyosei.ed.jp/exam/h-school/',
+        docTitle: '令和8年度 高校入学試験要項（東海大学付属大阪仰星高等学校）募集定員',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000628',
       schoolName: '金光大阪高等学校',
       fiscalYearLabel: '令和8年度(2026年度)（内部進学生を含む・2027年度版と同一数値でクロスチェック済み）',
