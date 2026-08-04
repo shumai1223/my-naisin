@@ -513,20 +513,20 @@ describe('PRIVATE_SCHOOL_DETAIL_CHIBA(62校中52校を収録・広域通信制5�
   });
 });
 
-describe('PRIVATE_SCHOOL_DETAIL_OKAYAMA(27校中22校を収録・スキップ1件・進行中)', () => {
+describe('PRIVATE_SCHOOL_DETAIL_OKAYAMA(27校中22校を収録・スキップ2件・進行中)', () => {
   it('収録した学校は全てcourses合計とtotalCapacityが一致する', () => {
     for (const school of PRIVATE_SCHOOL_DETAIL_OKAYAMA.schools) {
       expect(checkCourseCapacitySum(school)).toBe(true);
     }
   });
 
-  it('収録22校・スキップ1件で残り4校は未着手(重複なし)', () => {
+  it('収録22校・スキップ2件で残り3校は未着手(重複なし)', () => {
     const allCodes = SCHOOLS_PRIVATE_OKAYAMA.schools.map((s) => s.code);
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_OKAYAMA, allCodes);
     expect(result.duplicates).toEqual([]);
-    expect(result.missing).toHaveLength(4);
+    expect(result.missing).toHaveLength(3);
     expect(PRIVATE_SCHOOL_DETAIL_OKAYAMA.schools.length).toBe(22);
-    expect(PRIVATE_SCHOOL_DETAIL_OKAYAMA.skipped.length).toBe(1);
+    expect(PRIVATE_SCHOOL_DETAIL_OKAYAMA.skipped.length).toBe(2);
   });
 });
 
