@@ -13,8 +13,23 @@ import { SCHOOL_NAME_ALIASES_BY_PREFECTURE } from '@/lib/school-name-aliases';
  * ページ側(generateStaticParams/robots)とsitemap.ts双方の単一ソース。
  * 新しい波を出す時はここに県コードを追加する（GSC確認後に次の波を追加すること）。
  * wave1(2026-08-01): tokyo(パイロット)+kanagawa/saitama/chiba/hyogo。
+ * wave2(2026-08-04): tottori/kochi/saga/yamanashi/shimane
+ *   (SERP実測2026-08-02で「地方中規模校=学校公式サイト/Wikipediaが上位に入り込み倍率の実数値を
+ *   出しているページが競合に無い=空白地帯」と判定された県を優先。特にtottori/yamanashiは
+ *   上位5件のどのページにも倍率の実数値が無い競合ゼロ状態と実測済み)。
  */
-export const INDEXED_SCHOOL_PAGE_PREFECTURE_CODES = ['tokyo', 'kanagawa', 'saitama', 'chiba', 'hyogo'];
+export const INDEXED_SCHOOL_PAGE_PREFECTURE_CODES = [
+  'tokyo',
+  'kanagawa',
+  'saitama',
+  'chiba',
+  'hyogo',
+  'tottori',
+  'kochi',
+  'saga',
+  'yamanashi',
+  'shimane',
+];
 
 export function getPrefectureSchoolPageData(code: string): { schools: SchoolPageData[] } | null {
   const master = SCHOOL_MASTER_BY_PREFECTURE[code];
