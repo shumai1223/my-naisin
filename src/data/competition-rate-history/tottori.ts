@@ -79,7 +79,28 @@ const REIWA_4: YearSnapshot = {
   grandTotal: { label: '一般選抜 全日制課程（実質募集定員）', quota: 3381, applicants: 3139, rate: 0.93 },
 };
 
+/**
+ * 令和3年度（2021年度）: 鳥取県教育委員会が2021年2月26日に発表した確定志願状況（志願変更後）を
+ * 報じたリセモム記事から直接引用: 全日制課程・一般選抜の実質募集定員3,419人に対し志願者数は
+ * 3,194人、競争率0.93倍（3194/3419=0.9342…≈0.93で印字済み値と整合）。WebFetchで記事本文を
+ * 直接取得し「一般選抜の実質募集定員3,419人に対し志願者数は3,194人で、競争率（倍率）は0.93倍」
+ * の引用文を確認済み。独立した第2ソース（教委一次PDF・他媒体記事）は複数回のWebSearchで発見
+ * できなかったため、正直にリセモム単一ソースとして収録（捏造なし・R5/R6/R7と同じ「一般選抜
+ * （特色選抜等を除く）」のスコープ）。これでtottoriは5年連続（R3〜R7）収録で満了。
+ */
+const REIWA_3: YearSnapshot = {
+  fiscalYear: '令和3年度（2021年度）',
+  sourceUrl: 'https://resemom.jp/article/2021/03/02/60729.html',
+  sourceTitle:
+    'リセモム「鳥取県立高、一般選抜の志願状況（確定）」（鳥取県教育委員会 令和3年度一般選抜志願状況の発表を引用）',
+  fetchedAt: '2026-08-05',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '一般選抜 全日制課程（実質募集定員）', quota: 3419, applicants: 3194, rate: 0.93 },
+};
+
 export const TOTTORI_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'tottori',
-  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4],
+  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
 };
