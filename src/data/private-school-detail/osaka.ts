@@ -1419,6 +1419,11 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
   ],
   skipped: [
     {
+      schoolCode: 'D127310001020',
+      schoolName: '長尾谷高等学校',
+      reason: '通信制・単位制高校で公式サイトの入学案内ページに学年定員に相当する募集人員の記載が無く見送り',
+    },
+    {
       schoolCode: 'D127310001011',
       schoolName: '八洲学園高等学校',
       reason: '広域通信制・単位制高校で毎月出願を受け付ける通年募集方式のため、公式サイトの募集要項ページに学年定員に相当する募集人員の記載が無く見送り',
