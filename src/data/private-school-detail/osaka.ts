@@ -865,6 +865,19 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310001093',
+      schoolName: '近畿大阪高等学校',
+      fiscalYearLabel: '令和8年度(2026年度)（通信制課程）',
+      courses: [{ courseName: '通信制課程 普通科', capacity: 145 }],
+      totalCapacity: 145,
+      source: {
+        url: 'https://koutoku.ac.jp/kinkiosaka/guide/admission/',
+        docTitle: '入学者選抜案内（近畿大阪高等学校）定員',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310001084',
       schoolName: '明浄学院高等学校',
       fiscalYearLabel: '令和8年度(2026年度)',
