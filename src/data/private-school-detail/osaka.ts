@@ -771,6 +771,25 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000931',
+      schoolName: '大阪電気通信大学高等学校',
+      fiscalYearLabel: '令和9年度(2027年度)',
+      courses: [
+        {
+          courseName: '普通科(アドバンスコース・進学探究コース・健康スポーツコース(専願のみ)の3コース計)',
+          capacity: 160,
+        },
+        { courseName: '工学科(工学特進コース・工学連携コースの2コース計)', capacity: 160 },
+      ],
+      totalCapacity: 320,
+      source: {
+        url: 'https://www.dentsu.ed.jp/examination/outline/',
+        docTitle: '入学試験概要（大阪電気通信大学高等学校）2027年度',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000904',
       schoolName: '東大阪大学敬愛高等学校',
       fiscalYearLabel: '令和9年度(2027年度)',
