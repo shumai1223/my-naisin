@@ -693,6 +693,27 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000842',
+      schoolName: '大阪学芸高等学校',
+      fiscalYearLabel: '令和9年度(2027年度)（附属中学校からの内部進学者を含む）',
+      courses: [
+        { courseName: '普通科 選抜特進コース', capacity: 60 },
+        { courseName: '普通科 特進コース(Ⅰ類・Ⅱ類)', capacity: 200 },
+        { courseName: '普通科 特進看護コース', capacity: 40 },
+        { courseName: '普通科 進学コース', capacity: 160 },
+        { courseName: '普通科 特技コース(専願のみ)', capacity: 60 },
+        { courseName: '国際科 ダブルディプロマコース', capacity: 20 },
+        { courseName: '国際科 1年留学コース・グローバルコース(2コース計)', capacity: 60 },
+      ],
+      totalCapacity: 600,
+      source: {
+        url: 'https://www.osakagakugei.ac.jp/uploads/senior/sites/3/2024/10/2024_jinin_01.jpg',
+        docTitle: '大阪学芸高等学校 2027年度入試 募集要項 募集人員表',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000815',
       schoolName: '金光藤蔭高等学校',
       fiscalYearLabel: '令和9年度(2027年度)',
