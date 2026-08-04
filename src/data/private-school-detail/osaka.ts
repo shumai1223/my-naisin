@@ -807,6 +807,25 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000959',
+      schoolName: '太成学院大学高等学校',
+      fiscalYearLabel: '令和8年度(2026年度)',
+      courses: [
+        {
+          courseName: '普通科(特進セレクト・ライフデザイン・製菓パティスリーの3コース計)',
+          capacity: 240,
+        },
+        { courseName: 'スポーツ科(スポーツ進学・アスリートの2コース計)', capacity: 80 },
+      ],
+      totalCapacity: 320,
+      source: {
+        url: 'https://www.taisei-hs.ac.jp/hs/examinfo/',
+        docTitle: '2026年度 募集要項（太成学院大学高等学校）募集人員表',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000904',
       schoolName: '東大阪大学敬愛高等学校',
       fiscalYearLabel: '令和9年度(2027年度)',
