@@ -5,13 +5,14 @@ import { KANAGAWA_COMPETITION_RATE_HISTORY } from '../kanagawa';
  * （カナロコ報道記事・令和8年度別紙1の前年度列・令和7年度別紙1の前年度列・リセマム確定記事）と
  * 一致することを固定値で確認する。
  */
-describe('神奈川県 多年度アーカイブ（Λ-4・令和7/令和6/令和5年度分・grand-total-only）', () => {
-  it('3年度分（令和7年度・令和6年度・令和5年度）を収録している', () => {
-    expect(KANAGAWA_COMPETITION_RATE_HISTORY.years).toHaveLength(3);
+describe('神奈川県 多年度アーカイブ（Λ-4・令和7/令和6/令和5/令和4年度分・grand-total-only）', () => {
+  it('4年度分（令和7年度・令和6年度・令和5年度・令和4年度）を収録している', () => {
+    expect(KANAGAWA_COMPETITION_RATE_HISTORY.years).toHaveLength(4);
     expect(KANAGAWA_COMPETITION_RATE_HISTORY.years.map((y) => y.fiscalYear)).toEqual([
       '令和7年度（2025年度）',
       '令和6年度（2024年度）',
       '令和5年度（2023年度）',
+      '令和4年度（2022年度）',
     ]);
   });
 
@@ -43,5 +44,13 @@ describe('神奈川県 多年度アーカイブ（Λ-4・令和7/令和6/令和5
     expect(r5.grandTotal.applicants).toBe(48082);
     expect(r5.grandTotal.rate).toBeCloseTo(1.17, 2);
     expect(r5.grandTotal.schoolCount).toBe(146);
+  });
+
+  it('令和4年度の全日制合計はリセマム確定記事・よみうり進学メディアの2ソースと一致する(募集40,530・志願47,513・倍率1.17)', () => {
+    const r4 = KANAGAWA_COMPETITION_RATE_HISTORY.years[3];
+    expect(r4.grandTotal.quota).toBe(40530);
+    expect(r4.grandTotal.applicants).toBe(47513);
+    expect(r4.grandTotal.rate).toBeCloseTo(1.17, 2);
+    expect(r4.grandTotal.schoolCount).toBe(146);
   });
 });

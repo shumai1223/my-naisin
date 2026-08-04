@@ -39,6 +39,15 @@
  * 同じ「最終確定値を採録する」方針を維持。学校数はリセマム記事に県全体の記載が無く、
  * 令和6年度別紙1の前年度注記「（前年度146校）」により全日制146校のみ確認（県立/市立
  * 内訳は不明のため未記載）。
+ *
+ * **令和4年度（2026-08-04追加）**: 県公式ページ（r6969952.html）は他県のR4版と同型で404。
+ * ①リセマム確定記事（2022-02-08付「神奈川県公立高、志願倍率（確定）横浜翠嵐2.25倍」・
+ * 全日制確定＝募集人員40,530人/志願者数47,513人/倍率1.17倍）と②よみうり進学メディア
+ * （2022年2月1日付「神奈川県公立高校『出願倍率（2月1日付け）』」・全日制146校・募集人員
+ * 40,530人/志願者数47,561人・2/1時点の倍率1.17倍）の独立2ソースでクロスチェック。募集人員
+ * は両ソースで完全一致（誤読リスクなし）。志願者数の差48人（47,561→47,513）はR5/R6と同型の
+ * 志願変更による減少で説明可能。**リセマムの明示的「確定」値47,513人を採用**、学校数は
+ * よみうり進学メディアの146校（R5と同数のため制度的整合性あり）を採用。
  */
 import type { PrefectureRateHistoryFile, YearSnapshot } from '@/lib/competition-rate-history';
 
@@ -75,7 +84,18 @@ const REIWA_5: YearSnapshot = {
   grandTotal: { label: '全日制の課程（特別募集・中途退学者募集を除く）', schoolCount: 146, quota: 40930, applicants: 48082, rate: 1.17 },
 };
 
+const REIWA_4: YearSnapshot = {
+  fiscalYear: '令和4年度（2022年度）',
+  sourceUrl: 'https://resemom.jp/article/2022/02/08/65680.html',
+  sourceTitle: 'リセマム「【高校受験2022】神奈川県公立高、志願倍率（確定）横浜翠嵐2.25倍」（2022-02-08付・県公式ページ404のため二次ソース採用）',
+  fetchedAt: '2026-08-04',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制の課程（特別募集・中途退学者募集を除く）', schoolCount: 146, quota: 40530, applicants: 47513, rate: 1.17 },
+};
+
 export const KANAGAWA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'kanagawa',
-  years: [REIWA_7, REIWA_6, REIWA_5],
+  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4],
 };
