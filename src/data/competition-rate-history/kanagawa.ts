@@ -48,6 +48,13 @@
  * は両ソースで完全一致（誤読リスクなし）。志願者数の差48人（47,561→47,513）はR5/R6と同型の
  * 志願変更による減少で説明可能。**リセマムの明示的「確定」値47,513人を採用**、学校数は
  * よみうり進学メディアの146校（R5と同数のため制度的整合性あり）を採用。
+ *
+ * **令和3年度（2026-08-04追加・5年満了）**: ①リセマム確定記事（2021-02-09付「神奈川県公立高、
+ * 志願倍率（確定）横浜翠嵐2.07倍」）と②よみうり進学メディア「一般募集志願者数（速報）」
+ * （2021年度入試）の独立2ソースが共に募集人員39,730人/志願者数46,714人/倍率1.18倍で
+ * 完全一致（同一の教委発表を独立して転記した2媒体が一致＝誤読リスクなし）。学校数は
+ * 両ソースとも記載が無く、検索でも確認できなかったため正直に未記録（型がoptionalのため
+ * 捏造せず省略）。これで目標235県年のうちkanagawaは5年分（令和4〜8年度=Y-6分含む）を満了。
  */
 import type { PrefectureRateHistoryFile, YearSnapshot } from '@/lib/competition-rate-history';
 
@@ -95,7 +102,18 @@ const REIWA_4: YearSnapshot = {
   grandTotal: { label: '全日制の課程（特別募集・中途退学者募集を除く）', schoolCount: 146, quota: 40530, applicants: 47513, rate: 1.17 },
 };
 
+const REIWA_3: YearSnapshot = {
+  fiscalYear: '令和3年度（2021年度）',
+  sourceUrl: 'https://resemom.jp/article/2021/02/09/60377.html',
+  sourceTitle: 'リセマム「【高校受験2021】神奈川県公立高、志願倍率（確定）横浜翠嵐2.07倍」（2021-02-09付・県公式ページ404のため二次ソース採用）',
+  fetchedAt: '2026-08-04',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制の課程（特別募集・中途退学者募集を除く）', quota: 39730, applicants: 46714, rate: 1.18 },
+};
+
 export const KANAGAWA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'kanagawa',
-  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4],
+  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
 };
