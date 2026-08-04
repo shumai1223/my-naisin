@@ -376,6 +376,29 @@ export const PRIVATE_SCHOOL_DETAIL_OKAYAMA: PrivateSchoolDetailFile = {
         sourceTier: 'primary' as const,
       },
     },
+    {
+      schoolCode: 'D133310000014',
+      schoolName: '関西高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [
+        { courseName: '普通科 国立進学コース', capacity: 15 },
+        { courseName: '普通科 サイエンスフロンティアコース', capacity: 15 },
+        { courseName: '普通科 アドバンスコース(スタンダード系・ハイグレード系計)', capacity: 110 },
+        { courseName: '普通科 体育進学コース', capacity: 80 },
+        { courseName: 'ITビジネス科(ビジネスコース・アドバンスコース計)', capacity: 100 },
+        {
+          courseName: 'EIエンジニア科(システムコース・ICTクリエイターコース・アスリートコース計)',
+          capacity: 100,
+        },
+      ],
+      totalCapacity: 420,
+      source: {
+        url: 'https://kanzei.ac.jp/wp-content/uploads/2025/08/R8-2026-kanzei-hs-bosyuyoukou.pdf',
+        docTitle: '令和8年度 募集要項（関西高等学校）',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
   ],
   skipped: [],
 };
