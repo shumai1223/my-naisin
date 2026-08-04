@@ -84,7 +84,28 @@ const REIWA_4: YearSnapshot = {
   grandTotal: { label: '全日制計', quota: 6424, applicants: 6414, rate: 1.0 },
 };
 
+/**
+ * 令和3年度（2021年度）: R4-R7と同一シリーズの広報資料
+ * （https://www.kyoto-be.ne.jp/koukyou/cms/?p=2173 経由・令和3年3月3日発表・全5頁）をRead
+ * toolで直読み成功。R4-R7と同じ列定義（全日制「計」行の中期選抜募集人員C=A-B・志願者数D・
+ * 倍率D/C）でquota=6,535・applicants=6,314・rate=6314/6535=0.9662…→0.97（資料内印字済み
+ * 倍率と一致）。1頁目「1 出願状況」表、2頁目総括表、4頁目末尾「全日制計」行の3箇所全てで
+ * 完全一致することを確認済み。定時制課程はR4-R7と同じ理由でスコープ外。これでkyotoは5年連続
+ * （R3〜R7）収録で満了。
+ */
+const REIWA_3: YearSnapshot = {
+  fiscalYear: '令和3年度（2021年度）',
+  sourceUrl:
+    'https://www.kyoto-be.ne.jp/koukyou/cms/wp-content/uploads/2023/01/21-%E4%BB%A4%E5%92%8C%EF%BC%93%E5%B9%B4%E5%BA%A6%EF%BC%88%E5%BA%83%E5%A0%B1%E8%B3%87%E6%96%99%EF%BC%89%E4%B8%AD%E6%9C%9F%E9%81%B8%E6%8A%9C%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B0.pdf',
+  sourceTitle: '京都府教育委員会 令和3年度京都府公立高等学校入学者選抜 中期選抜志願者数等一覧表',
+  fetchedAt: '2026-08-05',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制計', quota: 6535, applicants: 6314, rate: 0.97 },
+};
+
 export const KYOTO_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'kyoto',
-  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4],
+  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
 };

@@ -4,14 +4,15 @@ import { KYOTO_COMPETITION_RATE_HISTORY } from '../kyoto';
  * Λ-4（多年度アーカイブ・京都府）DoD検証: 令和7・令和6・令和5年度の「中期選抜 全日制計」
  * （中期選抜募集人員C=A-B・志願者数D・倍率D/C）を一次資料の固定値で確認する。
  */
-describe('京都府 多年度アーカイブ（Λ-4・令和7/令和6/令和5/令和4の4年度分・grand-total-only）', () => {
-  it('4年度分（令和7年度・令和6年度・令和5年度・令和4年度）を収録している', () => {
-    expect(KYOTO_COMPETITION_RATE_HISTORY.years).toHaveLength(4);
+describe('京都府 多年度アーカイブ（Λ-4・令和7〜令和3の5年度分・満了・grand-total-only）', () => {
+  it('5年度分（令和7年度〜令和3年度）を収録している', () => {
+    expect(KYOTO_COMPETITION_RATE_HISTORY.years).toHaveLength(5);
     expect(KYOTO_COMPETITION_RATE_HISTORY.years.map((y) => y.fiscalYear)).toEqual([
       '令和7年度（2025年度）',
       '令和6年度（2024年度）',
       '令和5年度（2023年度）',
       '令和4年度（2022年度）',
+      '令和3年度（2021年度）',
     ]);
   });
 
@@ -47,6 +48,13 @@ describe('京都府 多年度アーカイブ（Λ-4・令和7/令和6/令和5/�
     expect(r4.grandTotal.quota).toBe(6424);
     expect(r4.grandTotal.applicants).toBe(6414);
     expect(r4.grandTotal.rate).toBeCloseTo(1.0, 2);
+  });
+
+  it('令和3年度は一次資料と一致する(中期選抜募集人員6,535・志願6,314・倍率0.97)', () => {
+    const r3 = KYOTO_COMPETITION_RATE_HISTORY.years[4];
+    expect(r3.grandTotal.quota).toBe(6535);
+    expect(r3.grandTotal.applicants).toBe(6314);
+    expect(r3.grandTotal.rate).toBeCloseTo(0.97, 2);
   });
 
   it('内部整合性: 全年度で志願者数÷募集人員が公表倍率とおおむね一致する', () => {
