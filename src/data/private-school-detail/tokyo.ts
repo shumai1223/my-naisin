@@ -2455,6 +2455,24 @@ export const PRIVATE_SCHOOL_DETAIL_TOKYO: PrivateSchoolDetailFile = {
         sourceTier: 'primary' as const,
       },
     },
+    {
+      schoolCode: 'D113321000033',
+      schoolName: '国際基督教大学高等学校',
+      fiscalYearLabel: '2026年度4月入学試験（公式サイトの入試日程ページに掲載中の値。合計240名は独立した第三者記事(note.com掲載の入試情報まとめ)の「募集人数合計240名」とも一致）',
+      courses: [
+        { courseName: '帰国生徒入試', capacity: 60 },
+        { courseName: '書類選考入試', capacity: 90 },
+        { courseName: '学力試験入試', capacity: 10 },
+        { courseName: '一般入試(国際生徒枠を含む)', capacity: 80 },
+      ],
+      totalCapacity: 240,
+      source: {
+        url: 'https://icu-h.ed.jp/admin/exam_schedule.html',
+        docTitle: '国際基督教大学高等学校 入試日程・入試結果ページ',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
   ],
   skipped: [
     {
@@ -2771,6 +2789,11 @@ export const PRIVATE_SCHOOL_DETAIL_TOKYO: PrivateSchoolDetailFile = {
       schoolCode: 'D113310500040',
       schoolName: '郁文館グローバル高等学校',
       reason: '公式2027年度入試生徒募集概要PDF(速報版・郁文館高等学校とは別PDF)に入試日程・出願資格・英語資格優遇制度の記載はあるが募集人数(定員)の記載自体が無いため(募集要項本体は10月上旬公開予定)',
+    },
+    {
+      schoolCode: 'D113311100051',
+      schoolName: '東京実業高等学校',
+      reason: '公式募集要項PDF(16頁)はpages指定・pdftoppm未導入により読めず。二次情報源のJS日本の学校(推薦/併願I・II/フェニックス各ラウンド別の値・合算で合計300名)とみんなの高校情報(41〜50の8値、数値の粒度からコース別偏差値を募集定員と誤認した疑いが強い)が一致せず、確度の高い単一の値を確定できないため(潤徳女子高等学校と同型のケース・捏造ゼロ原則によりスキップ)',
     },
   ],
 };
