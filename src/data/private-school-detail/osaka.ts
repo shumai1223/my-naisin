@@ -554,6 +554,25 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000691',
+      schoolName: '金光八尾高等学校',
+      fiscalYearLabel: '令和8年度(2026年度)（約・内部進学者を含む）',
+      courses: [
+        { courseName: '普通科 S特進コース（約）', capacity: 35 },
+        { courseName: '普通科 特進コース（約）', capacity: 80 },
+        { courseName: '普通科 総合進学コース（約）', capacity: 80 },
+        { courseName: '美術コース（約）', capacity: 25 },
+      ],
+      totalCapacity: 220,
+      source: {
+        url: 'https://www.osaka-shigaku.gr.jp/news/images/R8_h_bosyu2.pdf',
+        docTitle:
+          '令和8年度 大阪私立高等学校生徒募集状況一覧（大阪私立中学校高等学校連合会）金光八尾高等学校（公式サイトの令和9年度版〈コース名は「未来創造コース」に改称の可能性〉でも同一人数構成を確認しクロスチェック済み）',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'secondary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000682',
       schoolName: '利晶学園高等学校',
       fiscalYearLabel: '令和8年度(2026年度)（約・内部進学予定約67名+外部募集123名の合計）',
