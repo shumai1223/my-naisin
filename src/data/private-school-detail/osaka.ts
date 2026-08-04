@@ -865,6 +865,18 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310001084',
+      schoolName: '明浄学院高等学校',
+      fiscalYearLabel: '令和8年度(2026年度)',
+      courses: [
+        { courseName: '総合キャリアコース', capacity: 120 },
+        { courseName: '看護メディカルコース', capacity: 80 },
+        { courseName: '衛生看護コース', capacity: 120 },
+      ],
+      totalCapacity: 320,
+      source: IKUSHIN_OSAKA_SOURCE,
+    },
+    {
       schoolCode: 'D127310001075',
       schoolName: '神須学園高等学校',
       fiscalYearLabel: '令和8年度(2026年度)（通信制課程）',
