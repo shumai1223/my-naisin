@@ -13,6 +13,26 @@
  */
 import type { PrefectureRateHistoryFile, YearSnapshot } from '@/lib/competition-rate-history';
 
+/**
+ * 令和8年度（2026年度）: 教委公式ページ経由でPDF（99874_20260224160129-1.pdf・
+ * 「志願変更後」確定版・2026年2月24日発表・全3頁）を発見しRead toolで直読み。
+ * WebSearchで先に見つかった2/18時点の「志願変更前」速報値(quota3873/applicants2814)は
+ * 未確定のため不採用とし、確定版のみ使用（教訓: 速報と確定を混同しない）。3頁目末尾の
+ * 「全日制合計」行を直接転記: 一般入学募集人員(quota)=3,873・一般入学者選抜「最終」
+ * 志願者数(applicants)=2,767・倍率(rate)=0.71（2767/3873=0.7145…≈0.71で印字済み値と整合）。
+ * R5-R7と同じ列定義（推薦入学は対象外）。定時制課程はR5-R7と同じ理由でスコープ外。
+ */
+const REIWA_8: YearSnapshot = {
+  fiscalYear: '令和8年度（2026年度）',
+  sourceUrl: 'https://www.pref.miyazaki.lg.jp/documents/99874/99874_20260224160129-1.pdf',
+  sourceTitle: '宮崎県教育委員会 令和8年度宮崎県立高等学校入学者選抜（課程別）一般入学者選抜「最終」志願状況',
+  fetchedAt: '2026-08-05',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制合計', quota: 3873, applicants: 2767, rate: 0.71 },
+};
+
 const REIWA_7: YearSnapshot = {
   fiscalYear: '令和7年度（2025年度）',
   sourceUrl: 'https://www.pref.miyazaki.lg.jp/documents/89488/89488_20250225152347-1.pdf',
@@ -61,5 +81,5 @@ const REIWA_5: YearSnapshot = {
 
 export const MIYAZAKI_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'miyazaki',
-  years: [REIWA_7, REIWA_6, REIWA_5],
+  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5],
 };
