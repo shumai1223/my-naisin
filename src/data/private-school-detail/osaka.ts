@@ -643,6 +643,20 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000735',
+      schoolName: '四天王寺東高等学校',
+      fiscalYearLabel: '令和8年度(2026年度)（内部進学生は除く）',
+      courses: [],
+      totalCapacity: 175,
+      source: {
+        url: 'https://www.shitennojigakuen.ed.jp/higashi/e_examination/e_briefing/images/highs_guidelines_2026.pdf',
+        docTitle:
+          '令和8年度 生徒募集要項（四天王寺東高等学校）募集人員（edu-news.infoと同一数値で一致確認済み）',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000726',
       schoolName: '関西大学高等部',
       fiscalYearLabel: '令和8年度(2026年度)（約・専願併願合計）',
