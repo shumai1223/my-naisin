@@ -2424,6 +2424,21 @@ export const PRIVATE_SCHOOL_DETAIL_TOKYO: PrivateSchoolDetailFile = {
         sourceTier: 'primary' as const,
       },
     },
+    {
+      schoolCode: 'D113310500031',
+      schoolName: '郁文館高等学校',
+      fiscalYearLabel: '2027年度（募集要項は10月上旬完成予定の速報版・進学/特進/国立選抜(iP class)全クラスで共有する単一枠のため課程別内訳なし）',
+      courses: [
+        { courseName: '進学・特進・国立選抜(iP class【東大専科】)全クラス共有枠(うち推薦50)', capacity: 100 },
+      ],
+      totalCapacity: 100,
+      source: {
+        url: 'http://www.ikubunkan.ed.jp/wp/wp-content/uploads/2026/06/郁文館高等学校2027年度入試-生徒募集概要.pdf',
+        docTitle: '郁文館高等学校 2027年度入試 生徒募集概要PDF(速報版)',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
   ],
   skipped: [
     {
@@ -2735,6 +2750,11 @@ export const PRIVATE_SCHOOL_DETAIL_TOKYO: PrivateSchoolDetailFile = {
       schoolCode: 'D113312100022',
       schoolName: '潤徳女子高等学校',
       reason: '特進コースの推薦B/一般の定員が第三者要約間で「18名」「35名」と食い違い、美術デザインコースの定員も確認できず確度の高い単一の値を確定できないため(捏造ゼロ原則によりスキップ)',
+    },
+    {
+      schoolCode: 'D113310500040',
+      schoolName: '郁文館グローバル高等学校',
+      reason: '公式2027年度入試生徒募集概要PDF(速報版・郁文館高等学校とは別PDF)に入試日程・出願資格・英語資格優遇制度の記載はあるが募集人数(定員)の記載自体が無いため(募集要項本体は10月上旬公開予定)',
     },
   ],
 };
