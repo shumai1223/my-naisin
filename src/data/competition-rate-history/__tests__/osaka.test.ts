@@ -1,16 +1,17 @@
 import { OSAKA_COMPETITION_RATE_HISTORY } from '../osaka';
 
 /**
- * Λ-4（多年度アーカイブ・大阪府）DoD検証: 令和8・令和7・令和6年度の「全体合計」行の数値を
- * 一次資料(xlsx・Node標準zlibで自前パース)の固定値で確認する。
+ * Λ-4（多年度アーカイブ・大阪府）DoD検証: 令和8・令和7・令和6・令和5年度の「全体合計」行の
+ * 数値を一次資料(xlsx・Node標準zlibで自前パース)の固定値で確認する。
  */
-describe('大阪府 多年度アーカイブ（Λ-4・令和8/令和7/令和6の3年度分・grand-total-only）', () => {
-  it('3年度分（令和8年度・令和7年度・令和6年度）を収録している', () => {
-    expect(OSAKA_COMPETITION_RATE_HISTORY.years).toHaveLength(3);
+describe('大阪府 多年度アーカイブ（Λ-4・令和8/令和7/令和6/令和5の4年度分・grand-total-only）', () => {
+  it('4年度分（令和8年度・令和7年度・令和6年度・令和5年度）を収録している', () => {
+    expect(OSAKA_COMPETITION_RATE_HISTORY.years).toHaveLength(4);
     expect(OSAKA_COMPETITION_RATE_HISTORY.years.map((y) => y.fiscalYear)).toEqual([
       '令和8年度（2026年度）',
       '令和7年度（2025年度）',
       '令和6年度（2024年度）',
+      '令和5年度（2023年度）',
     ]);
   });
 
@@ -39,5 +40,12 @@ describe('大阪府 多年度アーカイブ（Λ-4・令和8/令和7/令和6の
     expect(r6.grandTotal.quota).toBe(34789);
     expect(r6.grandTotal.applicants).toBe(36379);
     expect(r6.grandTotal.rate).toBeCloseTo(1.05, 2);
+  });
+
+  it('令和5年度の合計は一次資料(xlsx表1〜5・訂正版)と一致する(募集定員34,280・志願38,754・倍率1.13)', () => {
+    const r5 = OSAKA_COMPETITION_RATE_HISTORY.years[3];
+    expect(r5.grandTotal.quota).toBe(34280);
+    expect(r5.grandTotal.applicants).toBe(38754);
+    expect(r5.grandTotal.rate).toBeCloseTo(1.13, 2);
   });
 });
