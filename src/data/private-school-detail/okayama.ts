@@ -322,6 +322,26 @@ export const PRIVATE_SCHOOL_DETAIL_OKAYAMA: PrivateSchoolDetailFile = {
         sourceTier: 'primary' as const,
       },
     },
+    {
+      schoolCode: 'D133310000069',
+      schoolName: '明誠学院高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [
+        { courseName: '普通科 特別進学コースⅢ類', capacity: 20 },
+        { courseName: '普通科 特別進学コースⅠ類', capacity: 70 },
+        { courseName: '普通科 進創エクシードコース', capacity: 105 },
+        { courseName: '普通科 特別進学コースⅡ類', capacity: 70 },
+        { courseName: '普通科 特別芸術コース', capacity: 30 },
+        { courseName: '普通科 新情報コース', capacity: 75 },
+      ],
+      totalCapacity: 370,
+      source: {
+        url: 'https://www.oka-shigaku.gr.jp/pdf/examguide/highschool2026.pdf',
+        docTitle: '令和8年度岡山県私立高等学校(全日制)入試要項一覧｜岡山県私学協会(明誠学院：特別進学Ⅲ類20/Ⅰ類70/進創エクシード105/Ⅱ類70/特別芸術30/新情報75)',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
   ],
   skipped: [],
 };
