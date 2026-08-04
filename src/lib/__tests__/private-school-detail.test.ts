@@ -1075,19 +1075,19 @@ describe('private-school-detail index', () => {
   });
 });
 
-describe('PRIVATE_SCHOOL_DETAIL_EHIME(愛光高等学校+聖カタリナ学園高等学校+帝京第五高等学校+今治精華高等学校+松山学院高等学校+松山東雲高等学校+ＦＣ今治高等学校里山校の7校を収録・残り2校は未着手)', () => {
+describe('PRIVATE_SCHOOL_DETAIL_EHIME(愛光高等学校+聖カタリナ学園高等学校+帝京第五高等学校+今治精華高等学校+松山学院高等学校+松山東雲高等学校+ＦＣ今治高等学校里山校の7校を収録・参照台帳14校を完全網羅)', () => {
   it('収録した学校は全てcourses合計とtotalCapacityが一致する', () => {
     for (const school of PRIVATE_SCHOOL_DETAIL_EHIME.schools) {
       expect(checkCourseCapacitySum(school)).toBe(true);
     }
   });
 
-  it('収録7校・スキップ5校で参照台帳14校のうち残り2校は未着手(重複なし)', () => {
+  it('収録7校・スキップ7校で参照台帳14校を完全網羅(重複・欠落なし)', () => {
     const allCodes = SCHOOLS_PRIVATE_EHIME.schools.map((s) => s.code);
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_EHIME, allCodes);
     expect(result.duplicates).toEqual([]);
-    expect(result.missing).toHaveLength(2);
+    expect(result.missing).toHaveLength(0);
     expect(PRIVATE_SCHOOL_DETAIL_EHIME.schools.length).toBe(7);
-    expect(PRIVATE_SCHOOL_DETAIL_EHIME.skipped.length).toBe(5);
+    expect(PRIVATE_SCHOOL_DETAIL_EHIME.skipped.length).toBe(7);
   });
 });
