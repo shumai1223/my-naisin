@@ -45,7 +45,27 @@ const REIWA_6: YearSnapshot = {
   grandTotal: { label: '全日制 合計', quota: 10957, applicants: 9205, rate: 0.84 },
 };
 
+/**
+ * 令和5年度（2023年度）: R6/R7と同一シリーズの一次PDF（104440_20230221160804-1.pdf・全7頁）を
+ * 教委のR3年度用ハブページ（r5saisyuushutugannsyasuu.html・URLパスはr3配下だがタイトルはr5、
+ * 年度とディレクトリが一致しない罠に注意）経由で発見・Read toolで直読み。1頁目の総括表「計」行
+ * （学力検査定員(quota)=11,094・最終出願者数(applicants)=9,025・倍率(rate)=0.81）を転記
+ * （9025/11094=0.8135…≈0.81で印字済み値と整合）。6頁目末尾の「全日制 合計」行とも完全一致
+ * し、同一資料内の二重検証が取れている。R6/R7と同じ理由で定時制課程はスコープ外。
+ */
+const REIWA_5: YearSnapshot = {
+  fiscalYear: '令和5年度（2023年度）',
+  sourceUrl:
+    'https://www.pref.kagoshima.jp/ba05/kyoiku-bunka/school/koukou/nyushi/r3/documents/104440_20230221160804-1.pdf',
+  sourceTitle: '鹿児島県教育委員会 令和5年度鹿児島県公立高等学校入学最終出願者数',
+  fetchedAt: '2026-08-04',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制 合計', quota: 11094, applicants: 9025, rate: 0.81 },
+};
+
 export const KAGOSHIMA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'kagoshima',
-  years: [REIWA_7, REIWA_6],
+  years: [REIWA_7, REIWA_6, REIWA_5],
 };
