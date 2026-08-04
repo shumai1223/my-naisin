@@ -5,12 +5,13 @@ import { AICHI_COMPETITION_RATE_HISTORY } from '../aichi';
  * （募集人員quota・志願者数applicants）を一次資料/独立ソースの固定値で確認する。
  * 愛知県は1人が最大2校に併願できる制度のため、倍率が1.0を大きく超える点に注意。
  */
-describe('愛知県 多年度アーカイブ（Λ-4・令和8/令和7の2年度分・grand-total-only）', () => {
-  it('2年度分（令和8年度・令和7年度）を収録している', () => {
-    expect(AICHI_COMPETITION_RATE_HISTORY.years).toHaveLength(2);
+describe('愛知県 多年度アーカイブ（Λ-4・令和8/令和7/令和6の3年度分・grand-total-only）', () => {
+  it('3年度分（令和8年度・令和7年度・令和6年度）を収録している', () => {
+    expect(AICHI_COMPETITION_RATE_HISTORY.years).toHaveLength(3);
     expect(AICHI_COMPETITION_RATE_HISTORY.years.map((y) => y.fiscalYear)).toEqual([
       '令和8年度（2026年度）',
       '令和7年度（2025年度）',
+      '令和6年度（2024年度）',
     ]);
   });
 
@@ -32,6 +33,13 @@ describe('愛知県 多年度アーカイブ（Λ-4・令和8/令和7の2年度�
     expect(r7.grandTotal.quota).toBe(30781);
     expect(r7.grandTotal.applicants).toBe(56928);
     expect(r7.grandTotal.rate).toBeCloseTo(1.85, 2);
+  });
+
+  it('令和6年度は独立した2ソースと一致する(募集人員31,417・志願者数59,007・倍率1.88)', () => {
+    const r6 = AICHI_COMPETITION_RATE_HISTORY.years[2];
+    expect(r6.grandTotal.quota).toBe(31417);
+    expect(r6.grandTotal.applicants).toBe(59007);
+    expect(r6.grandTotal.rate).toBeCloseTo(1.88, 2);
   });
 
   it('内部整合性: 全年度で志願者数÷募集人員が公表倍率とおおむね一致する', () => {

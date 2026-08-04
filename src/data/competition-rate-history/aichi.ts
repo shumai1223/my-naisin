@@ -46,7 +46,25 @@ const REIWA_7: YearSnapshot = {
   grandTotal: { label: '合計', quota: 30781, applicants: 56928, rate: 1.85 },
 };
 
+/**
+ * 令和6年度（2024年度）: 教委の一次PDF（497269.pdf・全日制一般選抜等志願変更後の志願者数・
+ * 全11頁・学校別内訳のみで合計行なし）はOsaka型の手動合算リスクに該当するため使わず、R7と
+ * 同じ二次資料クロスチェック方針を採用。WebSearch要約とmgk-komaki.com記事(2024-02-15付
+ * 「令和6年度愛知県公立高校入試最終倍率徹底分析」)の2つの独立ソースで募集人員31,417・
+ * 志願者総数59,007が完全一致することを確認（59007/31417=1.8785…≈1.88）。
+ */
+const REIWA_6: YearSnapshot = {
+  fiscalYear: '令和6年度（2024年度）',
+  sourceUrl: 'https://mgk-komaki.com/2024/02/15/2024-aichi-bairitsu/',
+  sourceTitle: '未来義塾小牧校「令和6年度(2024年度)愛知県公立高校入試 最終倍率徹底分析」（愛知県教育委員会発表を引用）',
+  fetchedAt: '2026-08-04',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '合計', quota: 31417, applicants: 59007, rate: 1.88 },
+};
+
 export const AICHI_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'aichi',
-  years: [REIWA_8, REIWA_7],
+  years: [REIWA_8, REIWA_7, REIWA_6],
 };
