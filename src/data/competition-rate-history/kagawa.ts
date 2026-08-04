@@ -14,6 +14,23 @@
  */
 import type { PrefectureRateHistoryFile, YearSnapshot } from '@/lib/competition-rate-history';
 
+/**
+ * 令和8年度（2026年度）: R4-R7と同一シリーズのリセモム記事（2026年2月24日・志願変更締切後確定）を
+ * WebFetchで直接引用。全日制課程全体「入学定員（自己推薦選抜合格者等除く）4,208人・出願者数
+ * 4,296人・出願倍率1.02倍」を転記（4296/4208=1.0209…≈1.02で整合。WebSearch要約とも独立一致）。
+ */
+const REIWA_8: YearSnapshot = {
+  fiscalYear: '令和8年度（2026年度）',
+  sourceUrl: 'https://resemom.jp/article/2026/02/24/85197.html',
+  sourceTitle:
+    'リセモム「【高校受験2026】香川県公立高の出願状況（確定）高松（普通）1.09倍」（香川県教育委員会 令和8年度香川県公立高等学校一般選抜出願者数の発表を引用）',
+  fetchedAt: '2026-08-05',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '一般選抜 全日制課程（自己推薦選抜合格者等除く）', quota: 4208, applicants: 4296, rate: 1.02 },
+};
+
 const REIWA_7: YearSnapshot = {
   fiscalYear: '令和7年度（2025年度）',
   sourceUrl: 'https://resemom.jp/article/2025/02/26/80995.html',
@@ -80,5 +97,5 @@ const REIWA_4: YearSnapshot = {
 
 export const KAGAWA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'kagawa',
-  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4],
+  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4],
 };
