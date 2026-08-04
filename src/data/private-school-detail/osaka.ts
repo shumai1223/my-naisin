@@ -643,6 +643,19 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000708',
+      schoolName: '大阪金剛インターナショナル高等学校',
+      fiscalYearLabel: '2027年度(令和9年度)',
+      courses: [],
+      totalCapacity: 40,
+      source: {
+        url: 'https://www.kongogakuen.ed.jp/wp-content/uploads/2026/06/2027-年度生徒募集要項【高校】.pdf',
+        docTitle: '2027年度 生徒募集要項【高校】（大阪金剛インターナショナル高等学校）募集人員',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000628',
       schoolName: '金光大阪高等学校',
       fiscalYearLabel: '令和8年度(2026年度)（内部進学生を含む・2027年度版と同一数値でクロスチェック済み）',
