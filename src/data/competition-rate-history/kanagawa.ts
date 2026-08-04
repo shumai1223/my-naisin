@@ -27,6 +27,18 @@
  * リスクなし）。**確定値として2/7時点（志願変更締切時）の47,330人を採用**し、1/31速報値
  * 47,349人は不採用（R7年度の記録方針＝志願変更締切時データに統一するため）。学校数は
  * 両ソースとも全日制145校[県立131 市立14]で一致。
+ *
+ * **令和5年度（2026-08-04追加）**: 県公式ページの令和5年度専用ページ（r1913978.html・
+ * r5.html）は404（chiba/ibaraki/miyazaki/kagoshimaのR4版と同型の、教委が旧年度ページを
+ * 整理・削除するパターン）。そのため①令和6年度別紙1に埋め込まれた「前年度」列（2月1日
+ * 時点・募集人員40,930人/志願者数48,133人）と②リセマム確定記事（2023-02-08付「神奈川県
+ * 公立高、志願倍率（確定）」・募集人員4万930人/出願者数4万8,082人/倍率1.17倍）の独立2
+ * ソースでクロスチェック。募集人員は両ソースで完全一致（誤読リスクなし）。志願者数は
+ * 48,133人（2/1速報）と48,082人（確定・リセマムの明言する「確定」版）の差51人は志願変更
+ * による減少で説明可能。**リセマムが明示的に「確定」と明記する48,082人を採用**し、R6/R7と
+ * 同じ「最終確定値を採録する」方針を維持。学校数はリセマム記事に県全体の記載が無く、
+ * 令和6年度別紙1の前年度注記「（前年度146校）」により全日制146校のみ確認（県立/市立
+ * 内訳は不明のため未記載）。
  */
 import type { PrefectureRateHistoryFile, YearSnapshot } from '@/lib/competition-rate-history';
 
@@ -52,7 +64,18 @@ const REIWA_6: YearSnapshot = {
   grandTotal: { label: '全日制の課程（特別募集・中途退学者募集を除く）', schoolCount: 145, quota: 39947, applicants: 47330, rate: 1.18 },
 };
 
+const REIWA_5: YearSnapshot = {
+  fiscalYear: '令和5年度（2023年度）',
+  sourceUrl: 'https://resemom.jp/article/2023/02/08/70817.html',
+  sourceTitle: 'リセマム「【高校受験2023】神奈川県公立高、志願倍率（確定）横浜翠嵐1.98倍」（2023-02-08付・県公式ページ404のため二次ソース採用）',
+  fetchedAt: '2026-08-04',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制の課程（特別募集・中途退学者募集を除く）', schoolCount: 146, quota: 40930, applicants: 48082, rate: 1.17 },
+};
+
 export const KANAGAWA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'kanagawa',
-  years: [REIWA_7, REIWA_6],
+  years: [REIWA_7, REIWA_6, REIWA_5],
 };
