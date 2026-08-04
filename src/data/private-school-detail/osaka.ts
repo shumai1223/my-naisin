@@ -643,6 +643,19 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000744',
+      schoolName: '堺リベラル高等学校',
+      fiscalYearLabel: '令和9年度(2027年度)',
+      courses: [{ courseName: '表現教育科（専願のみ）', capacity: 74 }],
+      totalCapacity: 74,
+      source: {
+        url: 'https://www.liberal.ed.jp/s-highschool/admissions/',
+        docTitle: '入試要項（堺リベラル高等学校）募集定員',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000735',
       schoolName: '四天王寺東高等学校',
       fiscalYearLabel: '令和8年度(2026年度)（内部進学生は除く）',
