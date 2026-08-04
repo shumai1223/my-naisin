@@ -2439,6 +2439,22 @@ export const PRIVATE_SCHOOL_DETAIL_TOKYO: PrivateSchoolDetailFile = {
         sourceTier: 'primary' as const,
       },
     },
+    {
+      schoolCode: 'D113310500077',
+      schoolName: '京華女子高等学校',
+      fiscalYearLabel: '令和8年度（2026年度）',
+      courses: [
+        { courseName: '特奨コース(A推薦10+クラブ得意技能特待+B推薦5+一般第1回10+第2回5)', capacity: 30 },
+        { courseName: '特進・進学コース(A推薦30+クラブ得意技能特待15+B推薦15+一般第1回50+第2回10)', capacity: 130 },
+      ],
+      totalCapacity: 160,
+      source: {
+        url: 'https://www.keika-g.ed.jp/s-requirements/',
+        docTitle: '京華女子中学・高等学校 高校募集要項ページ(令和8年度)',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
   ],
   skipped: [
     {
