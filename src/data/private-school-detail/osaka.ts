@@ -1403,6 +1403,11 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
   ],
   skipped: [
     {
+      schoolCode: 'D127310000986',
+      schoolName: '関西学院千里国際高等部',
+      reason: '高等部は帰国生のみを対象とし(一般生・国際生の高等部募集は無し)、公式サイトおよび育伸社入試結果PDFいずれも帰国生入試の募集人員を「定員を定めない」としており、数値化された定員が存在しないため見送り',
+    },
+    {
       schoolCode: 'D127310000138',
       schoolName: '大阪星光学院高等学校',
       reason: '完全中高一貫化により高校からの外部募集を停止(2015年度以降)、または実施していても若干名のみで公式な定員数が確認できないため見送り(WebSearch要約による)',
