@@ -304,6 +304,24 @@ export const PRIVATE_SCHOOL_DETAIL_OKAYAMA: PrivateSchoolDetailFile = {
         sourceTier: 'primary' as const,
       },
     },
+    {
+      schoolCode: 'D133310000158',
+      schoolName: '方谷學舎高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [
+        {
+          courseName: '普通科(日本文化コース・進学コース(特別進学系/総合進学系)・アスリートコース・美容コース計)',
+          capacity: 80,
+        },
+      ],
+      totalCapacity: 80,
+      source: {
+        url: 'https://www.oka-shigaku.gr.jp/pdf/examguide/highschool2026.pdf',
+        docTitle: '令和8年度岡山県私立高等学校(全日制)入試要項一覧｜岡山県私学協会(方谷學舎：普通科計80)',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
   ],
   skipped: [],
 };
