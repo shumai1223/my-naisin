@@ -1437,6 +1437,11 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
   ],
   skipped: [
     {
+      schoolCode: 'D127310001057',
+      schoolName: '秋桜高等学校',
+      reason: '通信制高校で公式サイト募集要項ページに「募集人員 約90名」とのみ記載があり、概数表記のみで正確な定員数が公表されていないため見送り',
+    },
+    {
       schoolCode: 'D127310001039',
       schoolName: '天王寺学館高等学校',
       reason: '通信制・単位制高校で公式サイトに学年定員に相当する募集人員の記載が無く見送り',
