@@ -554,6 +554,24 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000655',
+      schoolName: '大阪青凌高等学校',
+      fiscalYearLabel: '令和9年度(2027年度)（内部進学者を含む）',
+      courses: [
+        { courseName: '普通科 特進Sコース', capacity: 40 },
+        { courseName: '普通科 特進コース', capacity: 80 },
+        { courseName: '普通科 進学コース', capacity: 160 },
+      ],
+      totalCapacity: 280,
+      source: {
+        url: 'https://osakaseiryo.jp/hs/application/',
+        docTitle:
+          '2027年度 生徒募集要項（大阪青凌高等学校）募集定員（大阪府私立中高連調べの外部募集実績は2025年度267名/2026年度257名で近似・コース別内訳の年度別裏付けは未確認）',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'secondary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000646',
       schoolName: '東海大学付属大阪仰星高等学校',
       fiscalYearLabel: '令和8年度(2026年度)（内部進学予定約105名を除く一般募集分）',
