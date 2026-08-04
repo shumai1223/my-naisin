@@ -399,6 +399,32 @@ export const PRIVATE_SCHOOL_DETAIL_OKAYAMA: PrivateSchoolDetailFile = {
         sourceTier: 'primary' as const,
       },
     },
+    {
+      schoolCode: 'D133310000050',
+      schoolName: '創志学園高等学校',
+      fiscalYearLabel: '令和8年度(2026年度)（男女共学）',
+      courses: [
+        {
+          courseName: '普通科 理数特別コース・選抜特進コース・特別進学コースの3コース計',
+          capacity: 110,
+        },
+        { courseName: '普通科 創造進学コース(人文・社会系・スポーツ系計)', capacity: 60 },
+        { courseName: '看護科', capacity: 40 },
+      ],
+      totalCapacity: 210,
+      source: {
+        url: 'https://soshigakuen.ed.jp/wp-content/uploads/2025/08/8a5ba830ab9a79d2c39c45c6283511d7.pdf',
+        docTitle: '令和8年度 生徒募集要項（創志学園高等学校）募集定員(男女共学210名)',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
   ],
-  skipped: [],
+  skipped: [
+    {
+      schoolCode: 'D133310000274',
+      schoolName: '創志学園高等学校',
+      reason: '本校(D133310000050)とは別に登録された分校(branch)扱いのエントリで、公式サイト・私学協会PDFいずれも本校とまとめた単一の募集定員(210名)のみを掲載しており分校単独の定員が確認できないため見送り',
+    },
+  ],
 };
