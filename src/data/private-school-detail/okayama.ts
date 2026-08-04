@@ -283,6 +283,27 @@ export const PRIVATE_SCHOOL_DETAIL_OKAYAMA: PrivateSchoolDetailFile = {
         sourceTier: 'primary' as const,
       },
     },
+    {
+      schoolCode: 'D133310000121',
+      schoolName: '岡山龍谷高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [
+        {
+          courseName: '普通科 特別進学コース(Ⅲ類・Ⅱ類・探究の3区分計)',
+          capacity: 20,
+        },
+        { courseName: '普通科 選択選抜コース', capacity: 50 },
+        { courseName: '普通科 進学教養コース', capacity: 80 },
+        { courseName: '情報科 情報コース', capacity: 50 },
+      ],
+      totalCapacity: 200,
+      source: {
+        url: 'https://www.oka-shigaku.gr.jp/pdf/examguide/highschool2026.pdf',
+        docTitle: '令和8年度岡山県私立高等学校(全日制)入試要項一覧｜岡山県私学協会(岡山龍谷：特別進学コース20・選択選抜コース50・進学教養コース80・情報科50)',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
   ],
   skipped: [],
 };
