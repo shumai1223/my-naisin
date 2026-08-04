@@ -718,6 +718,28 @@ export const PRIVATE_SCHOOL_DETAIL_KANAGAWA: PrivateSchoolDetailFile = {
         sourceTier: 'primary' as const,
       },
     },
+    {
+      schoolCode: 'D114315000043',
+      schoolName: '相模原高等学校',
+      fiscalYearLabel: '2026年度（正式名称：光明学園相模原高等学校。県立相模原高等学校とは別法人の私立校のため住所照合済み）',
+      courses: [
+        { courseName: '総合コース(推薦入試)', capacity: 155 },
+        { courseName: '総合コース(一般入試・一次書類選考含む)', capacity: 150 },
+        { courseName: '総合コース(オープン入試)', capacity: 5 },
+        { courseName: '体育科学コース(推薦入試)', capacity: 35 },
+        { courseName: '体育科学コース(一般入試)', capacity: 35 },
+        { courseName: '文理コース(推薦入試)', capacity: 30 },
+        { courseName: '文理コース(一般入試・一次書類選考含む)', capacity: 25 },
+        { courseName: '文理コース(オープン入試)', capacity: 5 },
+      ],
+      totalCapacity: 440,
+      source: {
+        url: 'https://school.js88.com/scl_h/22042700?page=9',
+        docTitle: 'JS日本の学校（光明学園相模原高等学校）2026年度募集人員。公式PDF(komyo.ed.jp)はフォント埋め込み異常(Adobe-Japan1文字コレクション不明)によりpdftotext/WebFetch/Read全手法でテキスト抽出不能のため二次情報源で代替',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'secondary' as const,
+      },
+    },
   ],
   skipped: [
     {
