@@ -18,6 +18,15 @@
  * 6,733/学科別倍率0.94（6733/7137=0.9434…≈0.94で整合）。独立した二次情報源のリセマム
  * 確定記事（2024-02-20付「青森県立高、一般選抜の志願状況（確定）」・募集人員7,137/出願
  * 6,733/倍率0.94）と完全一致（誤読リスクなし）。R7と同じ列（入学者選抜募集人員）を採用。
+ *
+ * **令和5年度（2026-08-04追加）**: 県公式ページ（senbatsu2023.html・shutsugansyasuu2023_koukou.html
+ * とも試したが404、R3以前と同型の旧ページ削除パターン）。リセマム確定記事（2023-02-21付
+ * 「青森県立高、一般選抜の志願状況（確定）青森0.95倍」・全日制全体の募集人員7,245人/志願者数
+ * 6,853人/倍率0.95倍、6853/7245=0.9459…≈0.95で自己整合）を採用。**独立した第2ソースを
+ * 複数探索（陸奥新報・東奥日報・青森県高校受験情報サイト等）したが、県全体合計を明記する
+ * 別記事は見つからなかった（正直に単一ソースと明記・捏造なし）**。数値自体はリセマムが
+ * 明示的に「確定」と報じており、R6/R7と同じ出典系列（青森県教育委員会発表の直接引用）である
+ * ため採用する。
  */
 import type { PrefectureRateHistoryFile, YearSnapshot } from '@/lib/competition-rate-history';
 
@@ -43,7 +52,18 @@ const REIWA_6: YearSnapshot = {
   grandTotal: { label: '全日制の課程合計', quota: 7137, applicants: 6733, rate: 0.94 },
 };
 
+const REIWA_5: YearSnapshot = {
+  fiscalYear: '令和5年度（2023年度）',
+  sourceUrl: 'https://resemom.jp/article/2023/02/21/71024.html',
+  sourceTitle: 'リセマム「【高校受験2023】青森県立高、一般選抜の志願状況（確定）青森0.95倍」（2023-02-21付・県公式ページ404のため二次ソース採用・独立第2ソース未発見のため単一ソース）',
+  fetchedAt: '2026-08-04',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制の課程合計', quota: 7245, applicants: 6853, rate: 0.95 },
+};
+
 export const AOMORI_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'aomori',
-  years: [REIWA_7, REIWA_6],
+  years: [REIWA_7, REIWA_6, REIWA_5],
 };
