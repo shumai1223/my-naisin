@@ -1437,6 +1437,11 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
   ],
   skipped: [
     {
+      schoolCode: 'D127310001066',
+      schoolName: 'ルネサンス大阪高等学校',
+      reason: '通信制高校(株式会社立)で公式サイトの募集要項ページに学年定員に相当する募集人員の記載が無く見送り',
+    },
+    {
       schoolCode: 'D127310001057',
       schoolName: '秋桜高等学校',
       reason: '通信制高校で公式サイト募集要項ページに「募集人員 約90名」とのみ記載があり、概数表記のみで正確な定員数が公表されていないため見送り',
