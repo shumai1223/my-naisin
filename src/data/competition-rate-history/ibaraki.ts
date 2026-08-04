@@ -13,6 +13,24 @@
  */
 import type { PrefectureRateHistoryFile, YearSnapshot } from '@/lib/competition-rate-history';
 
+/**
+ * 令和8年度（2026年度）: 教委公式ハブページ（highschool/page-38831）経由でR8版
+ * （shigansha20260218.pdf・全5頁）を発見・Read toolで直読み。R6/R7と同じ「全日制計」行を
+ * 直接転記（募集定員16,647・志願者数15,211・倍率0.91・15211/16647=0.9137…≈0.91で整合）。
+ * 「全日制総計」（附属中学校からの入学予定者503名を外数加算した17,150／15,714）はR5-R7と
+ * 同じ理由で不採用。定時制課程・連携型入学者選抜はR5-R7と同じ理由でスコープ外。
+ */
+const REIWA_8: YearSnapshot = {
+  fiscalYear: '令和8年度（2026年度）',
+  sourceUrl: 'https://kyoiku.pref.ibaraki.jp/wp-content/uploads/2026/02/shigansha20260218.pdf',
+  sourceTitle: '茨城県教育委員会 令和8年度茨城県立高等学校第1学年入学志願者数等（志願先変更後）',
+  fetchedAt: '2026-08-05',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制計', quota: 16647, applicants: 15211, rate: 0.91 },
+};
+
 const REIWA_7: YearSnapshot = {
   fiscalYear: '令和7年度（2025年度）',
   sourceUrl: 'https://kyoiku.pref.ibaraki.jp/wp-content/uploads/2025/02/shigansha2025.pdf',
@@ -60,5 +78,5 @@ const REIWA_5: YearSnapshot = {
 
 export const IBARAKI_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'ibaraki',
-  years: [REIWA_7, REIWA_6, REIWA_5],
+  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5],
 };
