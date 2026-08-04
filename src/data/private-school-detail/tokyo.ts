@@ -2473,6 +2473,22 @@ export const PRIVATE_SCHOOL_DETAIL_TOKYO: PrivateSchoolDetailFile = {
         sourceTier: 'primary' as const,
       },
     },
+    {
+      schoolCode: 'D113311600047',
+      schoolName: '城西大学附属城西高等学校',
+      fiscalYearLabel: '2027（令和9）年度（簡易版・詳細版は9月発行予定）',
+      courses: [
+        { courseName: 'ACクラス(推薦65+一般第1回35+一般第2回35、二次入試若干名は未算入)', capacity: 135 },
+        { courseName: 'CSクラス(推薦10+一般第2回30)', capacity: 40 },
+      ],
+      totalCapacity: 175,
+      source: {
+        url: 'https://josaigakuen.ac.jp/wordpress/wp-content/uploads/2026/05/2027令和9年度高校入試要項簡易版.pdf',
+        docTitle: '城西大学附属城西高等学校 2027(令和9)年度高等学校入学試験について(簡易版)PDF',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
   ],
   skipped: [
     {
