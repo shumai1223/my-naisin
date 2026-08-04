@@ -107,6 +107,19 @@ export const PRIVATE_SCHOOL_DETAIL_EHIME: PrivateSchoolDetailFile = {
         sourceTier: 'primary' as const,
       },
     },
+    {
+      schoolCode: 'D138320200025',
+      schoolName: 'ＦＣ今治高等学校里山校',
+      fiscalYearLabel: '2026年度',
+      courses: [{ courseName: '前期(推薦)・後期(一般)共通枠', capacity: 80 }],
+      totalCapacity: 80,
+      source: {
+        url: 'https://api.fcihs-satoyama.ed.jp/assets/files/4%EF%BC%8E2026%E5%B9%B4%E5%BA%A6%EF%BC%A6%EF%BC%A3%E4%BB%8A%E6%B2%BB%E9%AB%98%E7%AD%89%E5%AD%A6%E6%A0%A1_%E9%87%8C%E5%B1%B1%E6%A0%A1_%E5%85%A5%E8%A9%A6%E8%A6%81%E9%A0%855.pdf',
+        docTitle: '2026年度FC今治高等学校 里山校 入試要項PDF',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
   ],
   skipped: [
     {
