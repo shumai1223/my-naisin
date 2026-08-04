@@ -260,6 +260,29 @@ export const PRIVATE_SCHOOL_DETAIL_OKAYAMA: PrivateSchoolDetailFile = {
         sourceTier: 'primary' as const,
       },
     },
+    {
+      schoolCode: 'D133310000103',
+      schoolName: '岡山県美作高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [
+        { courseName: 'ハイグレードコース', capacity: 30 },
+        { courseName: '進学コース(美作大学コース・アドバンスコース)', capacity: 60 },
+        {
+          courseName: '探究コース(アドバンスコース・ITスペシャリストコース・クリエイトコース)',
+          capacity: 110,
+        },
+        { courseName: '福祉医療コース', capacity: 30 },
+        { courseName: 'アスリートコース', capacity: 20 },
+        { courseName: 'Bloomコース(不登校特例校・程度)', capacity: 20 },
+      ],
+      totalCapacity: 270,
+      source: {
+        url: 'https://www.mimasaka.ed.jp/img/pdf/R8boshuyoukou.pdf',
+        docTitle: '生徒募集要項(全日制課程)（岡山県美作高等学校）令和8年度',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
   ],
   skipped: [],
 };
