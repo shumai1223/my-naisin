@@ -865,6 +865,19 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000968',
+      schoolName: '早稲田大阪高等学校',
+      fiscalYearLabel: '令和8年度(2026年度)',
+      courses: [
+        { courseName: '早稲田コース(本校専願/併願・大宮/所沢外部会場含む)', capacity: 74 },
+        { courseName: '文理コース', capacity: 70 },
+        { courseName: '総合コース', capacity: 105 },
+        { courseName: '総合コース(吹奏楽クラス・女子)', capacity: 35 },
+      ],
+      totalCapacity: 284,
+      source: IKUSHIN_OSAKA_SOURCE,
+    },
+    {
       schoolCode: 'D127310001093',
       schoolName: '近畿大阪高等学校',
       fiscalYearLabel: '令和8年度(2026年度)（通信制課程）',
