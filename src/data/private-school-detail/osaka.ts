@@ -680,6 +680,24 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000815',
+      schoolName: '金光藤蔭高等学校',
+      fiscalYearLabel: '令和9年度(2027年度)',
+      courses: [
+        {
+          courseName: '普通科(スタンダード・エンカレッジ・アートアニメミュージック・トップアスリートの4コース計)',
+          capacity: 280,
+        },
+      ],
+      totalCapacity: 280,
+      source: {
+        url: 'https://konkoutouin.ed.jp/examwp/',
+        docTitle: '募集要項（金光藤蔭高等学校）2027年度',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000762',
       schoolName: '好文学園女子高等学校',
       fiscalYearLabel: '令和9年度(2027年度)（女子校）',
