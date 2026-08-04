@@ -554,6 +554,24 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000682',
+      schoolName: '利晶学園高等学校',
+      fiscalYearLabel: '令和8年度(2026年度)（約・内部進学予定約67名+外部募集123名の合計）',
+      courses: [
+        { courseName: '普通科 文理Ⅲ（約）', capacity: 80 },
+        { courseName: '普通科 文理Ⅱ（約）', capacity: 70 },
+        { courseName: '普通科 文理Ⅰ（約）', capacity: 40 },
+      ],
+      totalCapacity: 190,
+      source: {
+        url: 'https://www.osaka-shigaku.gr.jp/news/images/R8_h_bosyu2.pdf',
+        docTitle:
+          '令和8年度 大阪私立高等学校生徒募集状況一覧（大阪私立中学校高等学校連合会）利晶学園（現：初芝富田林）（学校公式サイトは「情報が確定次第、掲載」で未公開のため業界団体調べを採用。系列校「利晶学園大阪立命館高等学校」とは別行で明確に区別）',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'secondary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000673',
       schoolName: '大阪桐蔭高等学校',
       fiscalYearLabel: '2026年度（令和8年度）（内部進学生を除く）',
