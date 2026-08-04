@@ -643,6 +643,19 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000726',
+      schoolName: '関西大学高等部',
+      fiscalYearLabel: '令和8年度(2026年度)（約・専願併願合計）',
+      courses: [{ courseName: '全日制課程 普通科（専願・併願）', capacity: 50 }],
+      totalCapacity: 50,
+      source: {
+        url: 'https://www.kansai-u.ac.jp/senior/admission/index.html',
+        docTitle: '令和8年度 入学試験要項（関西大学高等部）募集人員',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000708',
       schoolName: '大阪金剛インターナショナル高等学校',
       fiscalYearLabel: '2027年度(令和9年度)',
