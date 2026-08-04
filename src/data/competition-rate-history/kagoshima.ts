@@ -85,7 +85,26 @@ const REIWA_5: YearSnapshot = {
   grandTotal: { label: '全日制 合計', quota: 11094, applicants: 9025, rate: 0.81 },
 };
 
+/**
+ * 令和4年度（2022年度）: 教委公式ページ(r4syutugansyasu.html)は404だったため、リセモム確定記事
+ * （2022年2月25日発表・「県立・市立合計」で報道）をWebFetchで直接引用。学力検査定員(quota)=
+ * 11,260・出願者数(applicants)=9,187・倍率(rate)=0.82（9187/11260=0.8159…≈0.82で整合）。
+ * R5-R8の「全日制 合計」（県立+市立combined）と同一スコープであることを記事の「県立・市立合計」
+ * という明記で確認済み。
+ */
+const REIWA_4: YearSnapshot = {
+  fiscalYear: '令和4年度（2022年度）',
+  sourceUrl: 'https://resemom.jp/article/2022/02/25/65975.html',
+  sourceTitle:
+    'リセモム「【高校受験2022】鹿児島県公立高、一般選抜の出願状況（確定）鶴丸1.45倍」（鹿児島県教育委員会 令和4年度公立高等学校入学者選抜学力検査確定出願状況の発表を引用）',
+  fetchedAt: '2026-08-05',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制 合計', quota: 11260, applicants: 9187, rate: 0.82 },
+};
+
 export const KAGOSHIMA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'kagoshima',
-  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5],
+  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4],
 };

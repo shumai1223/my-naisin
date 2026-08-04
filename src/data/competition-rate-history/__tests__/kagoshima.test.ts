@@ -4,15 +4,23 @@ import { KAGOSHIMA_COMPETITION_RATE_HISTORY } from '../kagoshima';
  * Λ-4（多年度アーカイブ・鹿児島県）DoD検証: 令和8・令和7・令和6・令和5年度の「全日制 合計」
  * （学力検査定員quota・最終出願者数applicants）を一次資料の固定値で確認する。
  */
-describe('鹿児島県 多年度アーカイブ（Λ-4・令和8/令和7/令和6/令和5の4年度分・grand-total-only）', () => {
-  it('4年度分（令和8年度・令和7年度・令和6年度・令和5年度）を収録している', () => {
-    expect(KAGOSHIMA_COMPETITION_RATE_HISTORY.years).toHaveLength(4);
+describe('鹿児島県 多年度アーカイブ（Λ-4・令和8/令和7/令和6/令和5/令和4の5年度分・grand-total-only）', () => {
+  it('5年度分（令和8年度・令和7年度・令和6年度・令和5年度・令和4年度）を収録している', () => {
+    expect(KAGOSHIMA_COMPETITION_RATE_HISTORY.years).toHaveLength(5);
     expect(KAGOSHIMA_COMPETITION_RATE_HISTORY.years.map((y) => y.fiscalYear)).toEqual([
       '令和8年度（2026年度）',
       '令和7年度（2025年度）',
       '令和6年度（2024年度）',
       '令和5年度（2023年度）',
+      '令和4年度（2022年度）',
     ]);
+  });
+
+  it('令和4年度はリセモム記事と一致する(学力検査定員11,260・出願者数9,187・倍率0.82)', () => {
+    const r4 = KAGOSHIMA_COMPETITION_RATE_HISTORY.years[4];
+    expect(r4.grandTotal.quota).toBe(11260);
+    expect(r4.grandTotal.applicants).toBe(9187);
+    expect(r4.grandTotal.rate).toBeCloseTo(0.82, 2);
   });
 
   it('令和8年度は一次資料と一致する(学力検査定員10,349・最終出願者数7,948・倍率0.77)', () => {
