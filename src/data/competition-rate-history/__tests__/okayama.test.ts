@@ -5,12 +5,13 @@ import { OKAYAMA_COMPETITION_RATE_HISTORY } from '../okayama';
  * 一次資料/リセマム記事の固定値で確認する。既存Y-6と同一の列定義(quota=一般入学
  * 募集人員・applicants=一般入学志願者数)。
  */
-describe('岡山県 多年度アーカイブ（Λ-4・令和7/令和6の2年度分・grand-total-only）', () => {
-  it('2年度分（令和7年度・令和6年度）を収録している', () => {
-    expect(OKAYAMA_COMPETITION_RATE_HISTORY.years).toHaveLength(2);
+describe('岡山県 多年度アーカイブ（Λ-4・令和7/令和6/令和5の3年度分・grand-total-only）', () => {
+  it('3年度分（令和7年度・令和6年度・令和5年度）を収録している', () => {
+    expect(OKAYAMA_COMPETITION_RATE_HISTORY.years).toHaveLength(3);
     expect(OKAYAMA_COMPETITION_RATE_HISTORY.years.map((y) => y.fiscalYear)).toEqual([
       '令和7年度（2025年度）',
       '令和6年度（2024年度）',
+      '令和5年度（2023年度）',
     ]);
   });
 
@@ -34,5 +35,12 @@ describe('岡山県 多年度アーカイブ（Λ-4・令和7/令和6の2年度�
     expect(r6.grandTotal.applicants).toBe(6263);
     expect(r6.grandTotal.rate).toBeCloseTo(1.09, 2);
     expect(r6.grandTotal.schoolCount).toBe(50);
+  });
+
+  it('令和5年度の県立全日制・一般入学はリセマム記事(山陽新聞デジタル見出しでも倍率一致)と一致する(募集人員6,099・志願者数6,810・倍率1.12)', () => {
+    const r5 = OKAYAMA_COMPETITION_RATE_HISTORY.years[2];
+    expect(r5.grandTotal.quota).toBe(6099);
+    expect(r5.grandTotal.applicants).toBe(6810);
+    expect(r5.grandTotal.rate).toBeCloseTo(1.12, 2);
   });
 });

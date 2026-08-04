@@ -16,6 +16,14 @@
  * 50校(既存R7と学校数一致)・募集人員5,750・志願者数6,263・志願倍率1.09(6263/5750=1.089…≈1.09で
  * 内部整合を確認)。記事内で市立全日制(募集68・志願53・倍率0.78)が明確に別枠として記載されており、
  * 県立のみを抽出したことをスコープ面でも確認済み。
+ *
+ * **2026-08-05追記(令和5年度追加)**: リセマム記事(2023-02-27付「岡山県公立高、一般入学（第Ｉ期）
+ * 志願状況（確定）岡山城東1.47倍」)を採用: 県立全日制・募集人員6,099/志願者数6,810/志願倍率
+ * 1.12(6810/6099=1.1166…≈1.12で内部整合)。市立全日制(募集111・志願55・倍率0.50)が記事内で
+ * 明確に別枠記載されておりR6と同じスコープ(県立のみ)一致を確認済み。独立した二次情報源として
+ * 山陽新聞デジタル「県立高一般入試競争率１.１２倍　２３年度出願状況、２年連続上昇」の見出しでも
+ * 同一倍率1.12倍が確認できた(本文は404で全文確認不能だが見出しの倍率一致で誤読リスクは低いと
+ * 判断・絶対数の突合はリセマム単独)。
  */
 import type { PrefectureRateHistoryFile, YearSnapshot } from '@/lib/competition-rate-history';
 
@@ -41,7 +49,18 @@ const REIWA_7: YearSnapshot = {
   grandTotal: { label: '県立全日制・一般入学', schoolCount: 50, quota: 5729, applicants: 5968, rate: 1.04 },
 };
 
+const REIWA_5: YearSnapshot = {
+  fiscalYear: '令和5年度（2023年度）',
+  sourceUrl: 'https://resemom.jp/article/2023/02/27/71134.html',
+  sourceTitle: 'リセマム「【高校受験2023】岡山県公立高、一般入学（第Ｉ期）志願状況（確定）岡山城東1.47倍」（2023-02-27付・県立全日制のみ）',
+  fetchedAt: '2026-08-05',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '県立全日制・一般入学', quota: 6099, applicants: 6810, rate: 1.12 },
+};
+
 export const OKAYAMA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'okayama',
-  years: [REIWA_7, REIWA_6],
+  years: [REIWA_7, REIWA_6, REIWA_5],
 };
