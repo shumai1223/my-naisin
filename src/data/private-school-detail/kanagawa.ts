@@ -675,6 +675,31 @@ export const PRIVATE_SCHOOL_DETAIL_KANAGAWA: PrivateSchoolDetailFile = {
         sourceTier: 'primary' as const,
       },
     },
+    {
+      schoolCode: 'D114310000053',
+      schoolName: '法政大学国際高等学校',
+      fiscalYearLabel: '令和8年度(2026年度)',
+      courses: [
+        { courseName: 'グローバル探究コース A書類選考', capacity: 210 },
+        { courseName: 'グローバル探究コース B学科試験', capacity: 50 },
+        { courseName: 'グローバル探究コース C思考力入試(概数)', capacity: 10 },
+        {
+          courseName: 'グローバル探究コース D帰国生・海外生入試(Ⅰ期/Ⅱ期/同時審査計・概数)',
+          capacity: 10,
+        },
+        {
+          courseName: 'IBコース D帰国生・海外生入試(IB)・E IB入試の合計(概数)',
+          capacity: 20,
+        },
+      ],
+      totalCapacity: 300,
+      source: {
+        url: 'https://kokusai-high.ws.hosei.ac.jp/admission/result',
+        docTitle: '入試情報(過去の入試結果)（法政大学国際高等学校）2026(令和8)年度募集人数表',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
   ],
   skipped: [
     {
