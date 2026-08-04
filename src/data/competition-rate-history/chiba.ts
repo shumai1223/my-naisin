@@ -19,6 +19,29 @@
  */
 import type { PrefectureRateHistoryFile, YearSnapshot } from '@/lib/competition-rate-history';
 
+/**
+ * 令和8年度（2026年度）: 教委公式ページ(r8kakuteiitiran.html)経由でPDF
+ * (documents/r8kakutei.pdf・2026年2月13日公表・全7頁)を発見しRead toolで直読み。
+ * 「全体的な実施状況」注記に「募集人員、志願者数及び志願者確定数には特別入学者選抜及び
+ * 地域連携アクティブスクールの入学者選抜のものも含みます」と明記されており、これはR5-R7の
+ * 既存収録スコープ（quota/applicantsの実測値がR7=29,720/33,854で完全一致）と同一と確認済み。
+ * 全日制の課程「志願者確定数〔2/12〕」=32,008・募集人員=28,880・志願確定倍率〔2/12〕=1.11倍
+ * を転記（32008/28880=1.1084…≈1.11で印字済み値と整合）。同PDF内の令和7年度比較値
+ * （29,720人・33,854人）も既存REIWA_7の値と完全一致し内部整合性を確認済み。なお同時期に
+ * 公表された2/5時点の「入学志願状況」PDF(訂正版)は特別選抜等を含む広いスコープの初期値
+ * （未確定）であり、今回は使用していない（確定数のみ採用）。
+ */
+const REIWA_8: YearSnapshot = {
+  fiscalYear: '令和8年度（2026年度）',
+  sourceUrl: 'https://www.pref.chiba.lg.jp/kyouiku/shidou/nyuushi/koukou/r8/documents/r8kakutei.pdf',
+  sourceTitle: '千葉県教育委員会 令和8年度千葉県公立高等学校入学者選抜「一般入学者選抜」等 入学志願者確定数について',
+  fetchedAt: '2026-08-05',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制の課程（一般入学者選抜・志願者確定数）', quota: 28880, applicants: 32008, rate: 1.11 },
+};
+
 const SOURCE = {
   sourceUrl: 'https://ysmedia.jp/admissions/24240/',
   sourceTitle: 'よみうり進学メディア「〈2025年度〉千葉県 公立高校「志願者確定数（2月14日付）」倍率1.14倍-令和7年度」（千葉県教育委員会 令和7年度入学志願者確定数の報道発表を引用）',
@@ -71,5 +94,5 @@ const REIWA_5: YearSnapshot = {
 
 export const CHIBA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'chiba',
-  years: [REIWA_7, REIWA_6, REIWA_5],
+  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5],
 };
