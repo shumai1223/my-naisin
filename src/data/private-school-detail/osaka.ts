@@ -680,6 +680,19 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000824',
+      schoolName: '開明高等学校',
+      fiscalYearLabel: '令和9年度(2027年度)（中高一貫校の高校外部募集枠のみ）',
+      courses: [{ courseName: '普通科 6年文理編入コース(外部募集)', capacity: 80 }],
+      totalCapacity: 80,
+      source: {
+        url: 'https://kaimei.ed.jp/pdf/r9koukou_3.pdf',
+        docTitle: '開明高等学校 令和9年度 生徒募集要項',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000815',
       schoolName: '金光藤蔭高等学校',
       fiscalYearLabel: '令和9年度(2027年度)',
