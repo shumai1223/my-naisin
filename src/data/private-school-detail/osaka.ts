@@ -1419,6 +1419,11 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
   ],
   skipped: [
     {
+      schoolCode: 'D127310001011',
+      schoolName: '八洲学園高等学校',
+      reason: '広域通信制・単位制高校で毎月出願を受け付ける通年募集方式のため、公式サイトの募集要項ページに学年定員に相当する募集人員の記載が無く見送り',
+    },
+    {
       schoolCode: 'D127310000986',
       schoolName: '関西学院千里国際高等部',
       reason: '高等部は帰国生のみを対象とし(一般生・国際生の高等部募集は無し)、公式サイトおよび育伸社入試結果PDFいずれも帰国生入試の募集人員を「定員を定めない」としており、数値化された定員が存在しないため見送り',
