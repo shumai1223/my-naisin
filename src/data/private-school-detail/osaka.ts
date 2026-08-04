@@ -643,6 +643,26 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000753',
+      schoolName: '興國高等学校',
+      fiscalYearLabel: '令和8年度(2026年度)（男子校）',
+      courses: [
+        { courseName: '普通科 アドバンスコース スーパーアドバンス', capacity: 110 },
+        { courseName: '普通科 アドバンスコース プレミアムアドバンス', capacity: 80 },
+        { courseName: '普通科 アスリートアドバンスコース', capacity: 120 },
+        { courseName: '普通科 アカデミアコース', capacity: 120 },
+        { courseName: '普通科 キャリアトライコース', capacity: 40 },
+        { courseName: 'ITビジネス科', capacity: 120 },
+      ],
+      totalCapacity: 590,
+      source: {
+        url: 'https://kokoku.ed.jp/examination/',
+        docTitle: '令和8年度 入学試験要項（興國高等学校）募集人員',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000744',
       schoolName: '堺リベラル高等学校',
       fiscalYearLabel: '令和9年度(2027年度)',
