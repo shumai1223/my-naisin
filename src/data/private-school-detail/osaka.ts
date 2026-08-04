@@ -735,6 +735,25 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000897',
+      schoolName: '大阪体育大学浪商高等学校',
+      fiscalYearLabel: '令和8年度(2026年度)',
+      courses: [
+        { courseName: '進学アドバンスコース', capacity: 25 },
+        { courseName: '進学グローバルコース', capacity: 30 },
+        { courseName: '探究キャリアコース', capacity: 70 },
+        { courseName: '進学スポーツコース', capacity: 70 },
+        { courseName: '探究スポーツコース(スポーツ推薦生・専願のみ)', capacity: 70 },
+      ],
+      totalCapacity: 265,
+      source: {
+        url: 'https://www.ouhs-school.jp/namisho/examination/',
+        docTitle: '入試情報（大阪体育大学浪商高等学校）2026年度募集定員',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000815',
       schoolName: '金光藤蔭高等学校',
       fiscalYearLabel: '令和9年度(2027年度)',
