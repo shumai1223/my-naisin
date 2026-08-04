@@ -865,6 +865,22 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310001075',
+      schoolName: '神須学園高等学校',
+      fiscalYearLabel: '令和8年度(2026年度)（通信制課程）',
+      courses: [
+        { courseName: 'アシストコース', capacity: 100 },
+        { courseName: 'スタンダードコース', capacity: 100 },
+      ],
+      totalCapacity: 200,
+      source: {
+        url: 'https://www.kozu-gakuen.ed.jp/guidance/',
+        docTitle: '入学案内（神須学園高等学校）定員',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310001002',
       schoolName: '向陽台高等学校',
       fiscalYearLabel: '令和9年度(2027年度)（新卒生用・通信制課程）',
