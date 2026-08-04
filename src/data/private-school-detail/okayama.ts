@@ -342,6 +342,22 @@ export const PRIVATE_SCHOOL_DETAIL_OKAYAMA: PrivateSchoolDetailFile = {
         sourceTier: 'primary' as const,
       },
     },
+    {
+      schoolCode: 'D133310000185',
+      schoolName: '金光学園高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [
+        { courseName: '普通科 特別進学クラス', capacity: 40 },
+        { courseName: '普通科 総合進学クラス', capacity: 140 },
+      ],
+      totalCapacity: 180,
+      source: {
+        url: 'https://www.oka-shigaku.gr.jp/pdf/examguide/highschool2026.pdf',
+        docTitle: '令和8年度岡山県私立高等学校(全日制)入試要項一覧｜岡山県私学協会(金光学園：特別進学クラス40・総合進学クラス140)',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
   ],
   skipped: [],
 };
