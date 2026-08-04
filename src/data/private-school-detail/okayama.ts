@@ -358,6 +358,24 @@ export const PRIVATE_SCHOOL_DETAIL_OKAYAMA: PrivateSchoolDetailFile = {
         sourceTier: 'primary' as const,
       },
     },
+    {
+      schoolCode: 'D133310000229',
+      schoolName: '岡山高等学校',
+      fiscalYearLabel: '令和8年度（岡山中学校からの内部進学者を含む）',
+      courses: [
+        {
+          courseName: '普通科 東大・国立医学部コース・難関大コース(メディカル系・探究系)の外部募集計',
+          capacity: 160,
+        },
+      ],
+      totalCapacity: 160,
+      source: {
+        url: 'https://www.oka-shigaku.gr.jp/pdf/examguide/highschool2026.pdf',
+        docTitle: '令和8年度岡山県私立高等学校(全日制)入試要項一覧｜岡山県私学協会(岡山：東大国立医学部コース・難関大コース計160)',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
   ],
   skipped: [],
 };
