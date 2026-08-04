@@ -4,14 +4,15 @@ import { AOMORI_COMPETITION_RATE_HISTORY } from '../aomori';
  * Λ-4（多年度アーカイブ・青森県）DoD検証: 「全日制の課程合計」行の数値が一次資料
  * （令和6年度は独立した二次情報源のリセマム確定記事とも一致）であることを固定値で確認する。
  */
-describe('青森県 多年度アーカイブ（Λ-4・令和7/令和6/令和5/令和4年度分・grand-total-only）', () => {
-  it('4年度分（令和7年度・令和6年度・令和5年度・令和4年度）を収録している', () => {
-    expect(AOMORI_COMPETITION_RATE_HISTORY.years).toHaveLength(4);
+describe('青森県 多年度アーカイブ（Λ-4・令和7〜令和3の5年度分・満了・grand-total-only）', () => {
+  it('5年度分（令和7年度〜令和3年度）を収録している', () => {
+    expect(AOMORI_COMPETITION_RATE_HISTORY.years).toHaveLength(5);
     expect(AOMORI_COMPETITION_RATE_HISTORY.years.map((y) => y.fiscalYear)).toEqual([
       '令和7年度（2025年度）',
       '令和6年度（2024年度）',
       '令和5年度（2023年度）',
       '令和4年度（2022年度）',
+      '令和3年度（2021年度）',
     ]);
   });
 
@@ -47,5 +48,12 @@ describe('青森県 多年度アーカイブ（Λ-4・令和7/令和6/令和5/�
     expect(r4.grandTotal.quota).toBe(7290);
     expect(r4.grandTotal.applicants).toBe(7199);
     expect(r4.grandTotal.rate).toBeCloseTo(0.99, 2);
+  });
+
+  it('令和3年度の全日制の課程合計はリセマム確定記事と一致する(募集7,319・志願7,285・倍率1.00・単一ソース)', () => {
+    const r3 = AOMORI_COMPETITION_RATE_HISTORY.years[4];
+    expect(r3.grandTotal.quota).toBe(7319);
+    expect(r3.grandTotal.applicants).toBe(7285);
+    expect(r3.grandTotal.rate).toBeCloseTo(1.0, 2);
   });
 });

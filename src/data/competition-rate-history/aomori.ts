@@ -33,6 +33,13 @@
  * 引用。全日制全体の募集人員7,290人/志願者数7,199人/倍率0.99倍（7199/7290=0.9875…≈0.99で
  * 自己整合）を採用。独立した第2ソース（陸奥新報・東奥日報）を探索したが2022年当時の県全体
  * 合計を明記する記事は見つからず、正直に単一ソースと明記して収録（捏造なし）。
+ *
+ * **令和3年度（2026-08-05追加）**: 県公式ページは同様に404のため、R4-R6と同じくリセマム確定
+ * 記事（2021-02-24付「青森県立高入試の出願状況（確定）青森1.20倍」）をWebFetchで直接引用。
+ * 全日制全体の募集人員7,319人/志願者数7,285人/倍率1.00倍（7285/7319=0.9954…≈1.00で自己
+ * 整合）を採用。独立した第2ソース（東奥日報）を探索したが2021年当時の県全体合計を明記する
+ * 記事は見つからず、正直に単一ソースと明記して収録（捏造なし）。これでaomoriは5年連続
+ * （R3〜R7）収録で満了。
  */
 import type { PrefectureRateHistoryFile, YearSnapshot } from '@/lib/competition-rate-history';
 
@@ -80,7 +87,18 @@ const REIWA_4: YearSnapshot = {
   grandTotal: { label: '全日制の課程合計', quota: 7290, applicants: 7199, rate: 0.99 },
 };
 
+const REIWA_3: YearSnapshot = {
+  fiscalYear: '令和3年度（2021年度）',
+  sourceUrl: 'https://resemom.jp/article/2021/02/24/60612.html',
+  sourceTitle: 'リセマム「【高校受験2021】青森県立高入試の出願状況（確定）青森1.20倍」（2021-02-24付・県公式ページ404のため二次ソース採用・独立第2ソース未発見のため単一ソース）',
+  fetchedAt: '2026-08-05',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制の課程合計', quota: 7319, applicants: 7285, rate: 1.0 },
+};
+
 export const AOMORI_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'aomori',
-  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4],
+  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
 };
