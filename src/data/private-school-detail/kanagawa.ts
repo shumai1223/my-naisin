@@ -700,6 +700,24 @@ export const PRIVATE_SCHOOL_DETAIL_KANAGAWA: PrivateSchoolDetailFile = {
         sourceTier: 'primary' as const,
       },
     },
+    {
+      schoolCode: 'D114315000034',
+      schoolName: '相模女子大学高等部',
+      fiscalYearLabel: '2026年度（女子・オープン入試分は定員非公表のため含まず）',
+      courses: [
+        { courseName: '特進コース(推薦入試)', capacity: 25 },
+        { courseName: '特進コース(一般入試・書類選考)', capacity: 35 },
+        { courseName: '進学コース(推薦入試)', capacity: 100 },
+        { courseName: '進学コース(一般入試・書類選考)', capacity: 100 },
+      ],
+      totalCapacity: 260,
+      source: {
+        url: 'https://www.sagami-wu.ac.jp/chukou/wp/wp-content/uploads/2025/09/0f3f7520143a6dd17081ce2ba2bfe78c.pdf',
+        docTitle: '2026年度 生徒募集要項（相模女子大学高等部）入学試験概要',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
   ],
   skipped: [
     {
