@@ -847,6 +847,22 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310001002',
+      schoolName: '向陽台高等学校',
+      fiscalYearLabel: '令和9年度(2027年度)（新卒生用・通信制課程）',
+      courses: [
+        { courseName: '普通科 ステップアップコース(専願のみ)', capacity: 60 },
+        { courseName: '普通科 ベーシックコース(併願可)', capacity: 250 },
+      ],
+      totalCapacity: 310,
+      source: {
+        url: 'https://www.koyodai.ed.jp/upload/files/24.pdf',
+        docTitle: '2027（令和9）年度 新卒生用 向陽台高等学校 生徒募集要項',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000904',
       schoolName: '東大阪大学敬愛高等学校',
       fiscalYearLabel: '令和9年度(2027年度)',
