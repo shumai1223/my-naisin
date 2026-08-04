@@ -826,6 +826,27 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000977',
+      schoolName: '星翔高等学校',
+      fiscalYearLabel: '令和8年度(2026年度)',
+      courses: [
+        {
+          courseName: '工業技術系(機械工学科・電子機械工学科・電気工学科・コミュニケーションシステム工学科の一括募集)',
+          capacity: 140,
+        },
+        { courseName: '普通科 特進アドバンスコース', capacity: 20 },
+        { courseName: '普通科 総合キャリアコース', capacity: 105 },
+        { courseName: '普通科 アスリートコース(専願のみ)', capacity: 70 },
+      ],
+      totalCapacity: 335,
+      source: {
+        url: 'https://www.osaka-seisho.ed.jp/_file/ja/article/27/pdf/2/令和8年度生徒募集要項.pdf',
+        docTitle: '令和8年度 生徒募集要項（星翔高等学校）',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000904',
       schoolName: '東大阪大学敬愛高等学校',
       fiscalYearLabel: '令和9年度(2027年度)',
