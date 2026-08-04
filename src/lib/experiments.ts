@@ -82,15 +82,15 @@ export const EXPERIMENTS: ExperimentDef[] = [
   {
     id: 'hogosha-cta-text-2026',
     hypothesis: 'CTA文言に「今すぐ」で緊急性を足すと、保護者リードのクリック率（affiliate_click）が上がる。',
-    status: 'paused',
+    status: 'running',
     arms: [
       { id: 'control', label: '出し分けエンジンの既定文言' },
       { id: 'urgent', label: '「今すぐ＋（既定文言）」で緊急性を付与', ctaPrefix: '今すぐ' },
     ],
     primaryMetric: 'affiliate_click',
     placement: 'parent-lp',
-    note: '送客先（affiliateId）は固定し、純粋にコピーの効きだけを測る。最大流入の県別47面に設置して母数を稼ぐ。**🚨2026-08-01停止**: GA4に`experiment_id`カスタムディメンションが未登録のまま45日稼働し判定不能だったため停止(蓄積データは破棄)。👤が2026-08-01に`experiment_id`を登録済み。GA4で実際にクエリできることを確認してから、startedAtをリセットして再開する（primaryMetricは元々affiliate_clickで妥当なため変更不要）。',
-    startedAt: '2026-06-16',
+    note: '送客先（affiliateId）は固定し、純粋にコピーの効きだけを測る。最大流入の県別47面に設置して母数を稼ぐ。**2026-08-01停止**: GA4に`experiment_id`カスタムディメンションが未登録のまま45日稼働し判定不能だったため停止(蓄積データは破棄)。**2026-08-04再開**: GA4管理画面登録後にga4_run_reportで`customEvent:experiment_id`が実データ(他実験IDで非"(not set)"の値)を返すことを確認できたため、startedAtをリセットして再開（primaryMetricは元々affiliate_clickで妥当なため変更なし）。',
+    startedAt: '2026-08-04',
   },
   {
     // 実験1（H8）：result面の送客オファーA/B。そら塾（現状）vs e-Live（もしも live）。
