@@ -19,8 +19,24 @@
  * 6,081とほぼ一致)ともクロスチェックできたため採用。育伸社の学校別詳細PDF(04344.pdf・2024年度)
  * は全70行超の学校別内訳のみで合計行が無くOsaka型の手動合算リスクに該当するため合算には使わず、
  * TOSオンラインの明示的な合計値のみを転記した。
+ *
+ * **2026-08-05追記(令和8年度追加)**: 教委公式ページ(r08ichijisaisyuu.html)経由でPDF
+ * (attachment/2261572.pdf・全4頁)を発見しRead toolで直読み。4頁目末尾の「県立高校全日制課程合計」
+ * 行を直接転記(募集人員5,806・最終志願者数5,969)。倍率は資料に印字が無いため自前算出
+ * (5969/5806=1.0281…→finalRate=1.03)。定時制課程(合計65人)はY-6と同じ理由でスコープ外。
  */
 import type { PrefectureRateHistoryFile, YearSnapshot } from '@/lib/competition-rate-history';
+
+const REIWA_8: YearSnapshot = {
+  fiscalYear: '令和8年度（2026年度）',
+  sourceUrl: 'https://www.pref.oita.jp/uploaded/attachment/2261572.pdf',
+  sourceTitle: '大分県教育委員会 令和8年度大分県立高等学校第一次入学者選抜第一志願最終志願状況',
+  fetchedAt: '2026-08-05',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '県立高校全日制課程合計', quota: 5806, applicants: 5969, rate: 1.03 },
+};
 
 const REIWA_6: YearSnapshot = {
   fiscalYear: '令和6年度（2024年度）',
@@ -46,5 +62,5 @@ const REIWA_7: YearSnapshot = {
 
 export const OITA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'oita',
-  years: [REIWA_7, REIWA_6],
+  years: [REIWA_8, REIWA_7, REIWA_6],
 };
