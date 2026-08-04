@@ -754,6 +754,23 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000913',
+      schoolName: '常翔学園高等学校',
+      fiscalYearLabel: '令和9年度(2027年度)',
+      courses: [
+        { courseName: '普通科 スーパーコース', capacity: 40 },
+        { courseName: '普通科 アカデミックコースⅠ', capacity: 200 },
+        { courseName: '普通科 アカデミックコースⅡ(アスリートコース1クラス含む)', capacity: 240 },
+      ],
+      totalCapacity: 480,
+      source: {
+        url: 'https://www.highs.josho.ac.jp/josho_info/wp-content/uploads/2026/06/sh_requirements_2027.pdf',
+        docTitle: '2027年度 帰国生徒入試 募集要項（常翔学園高等学校）募集コースおよび外部募集人数表',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000904',
       schoolName: '東大阪大学敬愛高等学校',
       fiscalYearLabel: '令和9年度(2027年度)',
