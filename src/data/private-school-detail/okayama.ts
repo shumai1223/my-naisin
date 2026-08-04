@@ -199,6 +199,28 @@ export const PRIVATE_SCHOOL_DETAIL_OKAYAMA: PrivateSchoolDetailFile = {
         sourceTier: 'primary' as const,
       },
     },
+    {
+      schoolCode: 'D133310000032',
+      schoolName: '山陽学園高等学校',
+      fiscalYearLabel: '令和8年度（2026年度）',
+      courses: [
+        {
+          courseName: '普通科 特別進学コース(選抜/発展/標準プログラム)・進学コース計',
+          capacity: 115,
+        },
+        {
+          courseName: '普通科 Musicコース(音楽実技系/ミュージカル系/吹奏楽系/幼児教育系計)',
+          capacity: 135,
+        },
+      ],
+      totalCapacity: 250,
+      source: {
+        url: 'https://www.sanyogakuen.ed.jp/sg/wp-content/uploads/2025/09/senior_highschool_application_guidelines.pdf',
+        docTitle: '2026年度(令和8年度) 生徒募集要項（山陽学園高等学校）募集定員とコースの概要',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
   ],
   skipped: [],
 };
