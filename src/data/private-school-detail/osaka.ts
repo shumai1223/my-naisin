@@ -663,6 +663,23 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000771',
+      schoolName: '関西大学北陽高等学校',
+      fiscalYearLabel: '令和9年度(2027年度)（関西大学北陽中学校からの内部進学予定者を含む）',
+      courses: [
+        { courseName: '普通科 特進アドバンスコース(専願・併願)', capacity: 40 },
+        { courseName: '普通科 文理コース(専願・併願)', capacity: 265 },
+        { courseName: '普通科 進学アスリートコース(専願のみ・2クラス)', capacity: 80 },
+      ],
+      totalCapacity: 385,
+      source: {
+        url: 'https://www.kansai-u.ac.jp/hokuyo/admission/capacity.html',
+        docTitle: '2027年度 関西大学北陽高等学校 入学試験募集人員',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000762',
       schoolName: '好文学園女子高等学校',
       fiscalYearLabel: '令和9年度(2027年度)（女子校）',
