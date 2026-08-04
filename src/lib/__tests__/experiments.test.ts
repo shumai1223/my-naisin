@@ -55,8 +55,8 @@ describe('experiments registry', () => {
     expect(copy?.arms.find((a) => a.id === 'reward')?.ctaPrefix).toBeTruthy();
   });
 
-  it('2026-08-01に停止した4実験のうちresult-offer-2026/hiyou-copy-2026/lead-copy-2026は依然pausedで、停止理由がnoteに記録されている', () => {
-    const stillPausedIds = ['result-offer-2026', 'hiyou-copy-2026', 'lead-copy-2026'];
+  it('2026-08-01に停止した4実験のうちhiyou-copy-2026/lead-copy-2026は依然pausedで、停止理由がnoteに記録されている', () => {
+    const stillPausedIds = ['hiyou-copy-2026', 'lead-copy-2026'];
     for (const id of stillPausedIds) {
       const e = getExperiment(id);
       expect(e?.status).toBe('paused');
@@ -64,11 +64,13 @@ describe('experiments registry', () => {
     }
   });
 
-  it('hogosha-cta-text-2026はGA4 experiment_idの実データ確認後、2026-08-04にstartedAtリセットで再開済み', () => {
-    const e = getExperiment('hogosha-cta-text-2026');
-    expect(e?.status).toBe('running');
-    expect(e?.startedAt).toBe('2026-08-04');
-    expect(e?.note).toContain('2026-08-04再開');
+  it('hogosha-cta-text-2026とresult-offer-2026はGA4 experiment_idの実データ確認後、2026-08-04にstartedAtリセットで再開済み', () => {
+    for (const id of ['hogosha-cta-text-2026', 'result-offer-2026']) {
+      const e = getExperiment(id);
+      expect(e?.status).toBe('running');
+      expect(e?.startedAt).toBe('2026-08-04');
+      expect(e?.note).toContain('2026-08-04再開');
+    }
   });
 
   // scaled-contentゲート（H-5）：A/B実験も「コピペで同じ物を2アーム分」という重複バグが起こり得る面。

@@ -96,15 +96,15 @@ export const EXPERIMENTS: ExperimentDef[] = [
     // 実験1（H8）：result面の送客オファーA/B。そら塾（現状）vs e-Live（もしも live）。
     id: 'result-offer-2026',
     hypothesis: 'result面で、個別指導塾（そら塾）よりオンライン家庭教師（e-Live）の方が affiliate_click/CVR が高い。',
-    status: 'paused',
+    status: 'running',
     arms: [
       { id: 'control', label: 'そら塾（オンライン個別指導・現状の既定）', affiliateId: 'sora-juku-text' },
       { id: 'elive', label: 'e-Live（小中高オンライン家庭教師）', affiliateId: 'moshimo-e-live' },
     ],
     primaryMetric: 'affiliate_click',
     placement: 'result',
-    note: 'コピーは同一・送客先だけを差し替えて純粋にオファーの効きを測る。両アームとも live。勝者を lead-config の result面に固定する。**🚨2026-08-01停止**: GA4 experiment_id未登録で44日判定不能に加え、D1一次ログで代替判定を試みたところ2アームの配置自体が分離していた(e-Live=mendan/shindan経由・そら塾=naishin-up経由で同一面比較になっていない=実験の体をなしていない・n=5)。**再開前に配置を揃える設計修正が必須**(同一面で送客先(affiliateId)だけを差し替える設計に直すこと。次回どのコンポーネント/面でこの実験を張るか要調査)。',
-    startedAt: '2026-06-17',
+    note: 'コピーは同一・送客先だけを差し替えて純粋にオファーの効きを測る。両アームとも live。勝者を lead-config の result面に固定する。**2026-08-01停止**: GA4 experiment_id未登録で44日判定不能に加え、D1一次ログで代替判定を試みたところ2アームの配置自体が分離していた(e-Live=mendan/shindan経由・そら塾=naishin-up経由で同一面比較になっていない=実験の体をなしていない・n=5)。**2026-08-04再開**: grepで実配線を確認したところ`src/app/plan/page.tsx`と`src/app/reverse/ReverseClient.tsx`の両方が同一のParentLeadCTAExperiment(experimentId=result-offer-2026・placement=result)を経由するよう既に統合されており、配置分離バグは解消済みと確認(コードの一般的な進化で偶発的に解決していた)。GA4 experiment_idも稼働確認済みのためstartedAtをリセットして再開。',
+    startedAt: '2026-08-04',
   },
   {
     // 実験2（H8）：hiyou面のコピーA/B。FP相談の訴求 vs ツール文脈（計算する）。送客先は同一（fp-soudan）。
