@@ -4,13 +4,14 @@ import { AKITA_COMPETITION_RATE_HISTORY } from '../akita';
  * Λ-4（多年度アーカイブ・秋田県）DoD検証: 令和7・令和6年度の「全日制の課程 県合計」の
  * 数値を一次資料（秋田県教育委員会「1次募集 志願者数（志願先変更後）」公－２）の固定値で確認する。
  */
-describe('秋田県 多年度アーカイブ（Λ-4・令和7/令和6/令和5の3年度分・grand-total-only）', () => {
-  it('3年度分（令和7年度・令和6年度・令和5年度）を収録している', () => {
-    expect(AKITA_COMPETITION_RATE_HISTORY.years).toHaveLength(3);
+describe('秋田県 多年度アーカイブ（Λ-4・令和7/令和6/令和5/令和4の4年度分・grand-total-only）', () => {
+  it('4年度分（令和7年度・令和6年度・令和5年度・令和4年度）を収録している', () => {
+    expect(AKITA_COMPETITION_RATE_HISTORY.years).toHaveLength(4);
     expect(AKITA_COMPETITION_RATE_HISTORY.years.map((y) => y.fiscalYear)).toEqual([
       '令和7年度（2025年度）',
       '令和6年度（2024年度）',
       '令和5年度（2023年度）',
+      '令和4年度（2022年度）',
     ]);
   });
 
@@ -39,5 +40,12 @@ describe('秋田県 多年度アーカイブ（Λ-4・令和7/令和6/令和5の
     expect(r5.grandTotal.quota).toBe(6752);
     expect(r5.grandTotal.applicants).toBe(5912);
     expect(r5.grandTotal.rate).toBeCloseTo(0.88, 2);
+  });
+
+  it('令和4年度の県合計は一次資料と一致する(前期選抜後の募集人数5,597・志願4,959・倍率0.89)', () => {
+    const r4 = AKITA_COMPETITION_RATE_HISTORY.years[3];
+    expect(r4.grandTotal.quota).toBe(5597);
+    expect(r4.grandTotal.applicants).toBe(4959);
+    expect(r4.grandTotal.rate).toBeCloseTo(0.89, 2);
   });
 });
