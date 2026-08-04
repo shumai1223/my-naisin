@@ -790,6 +790,23 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000940',
+      schoolName: '阪南大学高等学校',
+      fiscalYearLabel: '令和9年度(2027年度)',
+      courses: [
+        { courseName: '普通科 特進コースS', capacity: 40 },
+        { courseName: '普通科 特進コースA', capacity: 80 },
+        { courseName: '普通科 総合進学コース', capacity: 320 },
+      ],
+      totalCapacity: 440,
+      source: {
+        url: 'https://www.hdk.ed.jp/entrance/',
+        docTitle: '入試情報（阪南大学高等学校）2027年度募集人員',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000904',
       schoolName: '東大阪大学敬愛高等学校',
       fiscalYearLabel: '令和9年度(2027年度)',
