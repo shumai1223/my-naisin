@@ -419,6 +419,31 @@ export const PRIVATE_SCHOOL_DETAIL_OKAYAMA: PrivateSchoolDetailFile = {
         sourceTier: 'primary' as const,
       },
     },
+    {
+      schoolCode: 'D133310000023',
+      schoolName: '岡山商科大学附属高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [
+        { courseName: '総合学科 進学系列 総合進学コース', capacity: 45 },
+        { courseName: '総合学科 進学系列 ITデザインコース', capacity: 15 },
+        { courseName: '総合学科 情報・ビジネス系列 商大コース', capacity: 20 },
+        { courseName: '総合学科 工業系列 工業技術コース', capacity: 40 },
+        { courseName: '総合学科 進学系列 特別進学コース', capacity: 15 },
+        { courseName: '総合学科 健康スポーツコース', capacity: 45 },
+        {
+          courseName: '総合学科 情報・ビジネス系列 情報コース・ビジネスコース',
+          capacity: 50,
+        },
+        { courseName: '自動車科', capacity: 40 },
+      ],
+      totalCapacity: 270,
+      source: {
+        url: 'https://www.oka-shigaku.gr.jp/pdf/examguide/highschool2026.pdf',
+        docTitle: '令和8年度岡山県私立高等学校(全日制)入試要項一覧｜岡山県私学協会(岡山商科大学附属：総合学科7コース+自動車科)',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
   ],
   skipped: [
     {
