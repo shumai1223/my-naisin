@@ -64,7 +64,27 @@ const REIWA_5: YearSnapshot = {
   grandTotal: { label: '全日制計', quota: 6096, applicants: 5935, rate: 0.97 },
 };
 
+/**
+ * 令和4年度（2022年度）: R5-R7と同一シリーズの広報資料
+ * （https://www.kyoto-be.ne.jp/koukyou/cms/?p=1262 経由・令和4年3月3日発表・全5頁）を発見。
+ * R5-R7と同じ列定義（全日制「計」行の中期選抜募集人員C=A-B・志願者数D・倍率D/C）で
+ * quota=6,424・applicants=6,414・rate=6414/6424=0.9984…→1.00（資料内印字済み倍率と一致）。
+ * 1頁目総括表と4頁目末尾行の両方で完全一致することを確認済み。定時制課程はR5-R7と
+ * 同じ理由でスコープ外。
+ */
+const REIWA_4: YearSnapshot = {
+  fiscalYear: '令和4年度（2022年度）',
+  sourceUrl:
+    'https://www.kyoto-be.ne.jp/koukyou/cms/wp-content/uploads/2022/12/01-【広報資料】-令和４年度中期選抜志願者数.pdf',
+  sourceTitle: '京都府教育委員会 令和4年度京都府公立高等学校入学者選抜 中期選抜志願者数等一覧表',
+  fetchedAt: '2026-08-04',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制計', quota: 6424, applicants: 6414, rate: 1.0 },
+};
+
 export const KYOTO_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'kyoto',
-  years: [REIWA_7, REIWA_6, REIWA_5],
+  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4],
 };
