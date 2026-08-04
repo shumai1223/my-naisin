@@ -1478,6 +1478,11 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
   ],
   skipped: [
     {
+      schoolCode: 'D127310001100',
+      schoolName: '甲英高等学校',
+      reason: '通信制高校(西宮本校・複数サポートキャンパス)で公式サイトに学年定員に相当する募集人員の記載が無く見送り',
+    },
+    {
       schoolCode: 'D127310001066',
       schoolName: 'ルネサンス大阪高等学校',
       reason: '通信制高校(株式会社立)で公式サイトの募集要項ページに学年定員に相当する募集人員の記載が無く見送り',
