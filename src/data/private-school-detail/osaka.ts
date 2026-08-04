@@ -554,6 +554,24 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
       },
     },
     {
+      schoolCode: 'D127310000673',
+      schoolName: '大阪桐蔭高等学校',
+      fiscalYearLabel: '2026年度（令和8年度）（内部進学生を除く）',
+      courses: [
+        { courseName: 'Ⅰ類エクシードコース', capacity: 40 },
+        { courseName: 'Ⅰ類特進コース', capacity: 160 },
+        { courseName: 'Ⅲ類体育芸術コース', capacity: 200 },
+      ],
+      totalCapacity: 400,
+      source: {
+        url: 'https://www.osakatoin.ed.jp/examination/indexsr.php',
+        docTitle:
+          '入試結果ページ（大阪桐蔭高等学校）2026年度募集定員（school.js88.comと同一内訳で一致確認済み）',
+        fetchedAt: '2026-08-04',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
       schoolCode: 'D127310000655',
       schoolName: '大阪青凌高等学校',
       fiscalYearLabel: '令和9年度(2027年度)（内部進学者を含む）',
