@@ -229,6 +229,14 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。既存記載(targetGrades[1,2,3]・gradeMultipliers{1,2,3の中3のみ3倍}・実技倍率なし・maxScore225=中1中2各45点+中3×3倍135点)を、WebSearch要約とedu-netz.comの2独立ソースでクロスチェックし変更が無いことを確認した(45+45+135=225で完全一致)。副次的な発見: 一般枠は傾斜配点なしだが、基町高校等一部の特色枠選抜校では学校独自に副教科2倍の傾斜を課すケースがあると判明。ただしこれは学校単位の例外でありprefectures.tsの県レベル基準値の設計方針(学校別の独自傾斜は対象外)とは矛盾しないため変更不要と判断。',
     },
   ],
+  kagawa: [
+    {
+      date: '2026-08-05',
+      sourceUrl: 'https://jyuke-labo.com/koukoujyukentaisaku/kagawa/',
+      sourceTitle: '受験ラボ「香川県高校入試情報」＋WebSearch要約（複数教育系サイトの記述比較）',
+      note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。既存記載は「簡易計算(coreMultiplier2・practicalMultiplier4を3学年均等適用=390点満点)・note欄に実選抜の真の計算(中1中2は倍率なしの各45点+中3のみ5教科×2倍+実技4教科×4倍=130点で合計220点満点)」という2段構造。今回、WebSearch要約とjyuke-labo.comの2独立ソースでこの「中1中2は倍率なし・中3のみ2倍/4倍で220点満点」という実選抜側の計算方式を直接クロスチェックし、既存note記載と完全一致(45+45+100+80=220)することを確認した。simplifiedCalc=trueの設計上の妥協(3学年に一律で2倍/4倍をかけた390点という簡易表示)自体は変更不要と判断。',
+    },
+  ],
 };
 
 export function getSourceHistory(code: string): SourceSnapshot[] {
