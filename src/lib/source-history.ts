@@ -205,6 +205,14 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。既存記載(中期選抜スコープ・targetGrades[1,2,3]・全学年等倍・coreMultiplier1・practicalMultiplier2・maxScore195=各学年65点×3)を、WebSearch要約とkobetsukan.jpの2独立ソースでクロスチェックし変更が無いことを確認した。noteフィールドの「前期選抜は135点満点」は今回参照した2ソースいずれも前期選抜に言及が無く独立再確認はできなかったが、否定する記述も無いため現状維持（前期選抜の値自体は今回変更していない）。',
     },
   ],
+  kumamoto: [
+    {
+      date: '2026-08-05',
+      sourceUrl: 'https://jyuke-labo.com/koukoujyukentaisaku/kumamoto/',
+      sourceTitle: '受験ラボ「熊本県高校入試情報」＋WebSearch要約（複数教育系サイトの記述比較）',
+      note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。既存記載(targetGrades[1,2,3]・gradeMultipliers{1,2,3の中3のみ2倍}・実技倍率なし・maxScore180=中1中2各45点+中3×2倍90点)を、WebSearch要約・axis-kobetsu.jp(180点満点のみ確認)・jyuke-labo.com(学年別詳細内訳)の3ソースでクロスチェックし変更が無いことを確認した。',
+    },
+  ],
 };
 
 export function getSourceHistory(code: string): SourceSnapshot[] {
