@@ -181,6 +181,14 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。既存記載(targetGrades[1,2,3]・gradeMultipliers{1,2,3の中3のみ2倍}・coreMultiplier1・practicalMultiplier1・maxScore180=中1中2各45点+中3×2倍90点)を、WebSearch要約(複数サイト集約)とjyuke-labo.comの2ソースでクロスチェックし変更が無いことを確認した。**途中でnaishinten.com(内申点自動計算ツールサイト)が「全学年等倍・135点満点(中3の2倍なし)」という既存記載と相反する情報を返したため一時保留したが**、WebSearch要約・jyuke-labo.comの計3ソースが揃って180点/中3×2倍を支持しており多数決でnaishinten.com側を採用しない判断とした。naishinten.comは他県ページでも参照される汎用ツールサイトのため、別の県の再検証時にこのサイトの記載と既存データが食い違った場合は同様に多数ソースでの裏取りを優先すること。',
     },
   ],
+  miyazaki: [
+    {
+      date: '2026-08-05',
+      sourceUrl: 'https://www.edu-netz.com/admission-information2026/miyazaki-info-r8',
+      sourceTitle: '対話式進学塾1対1ネッツ「宮崎県の高校入試情報2026(令和8年度)」＋WebSearch要約',
+      note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。既存記載(targetGrades[1,2,3]・全学年等倍・coreMultiplier1・practicalMultiplier1・maxScore135=9教科×5段階×3学年、学力検査等との比率は非公表で学校ごとに傾斜配点)を、WebSearch要約とedu-netz.comの2独立ソースでクロスチェックし変更が無いことを確認した(実際の配点は学校により70〜300点と幅がある旨も既存noteと整合)。',
+    },
+  ],
 };
 
 export function getSourceHistory(code: string): SourceSnapshot[] {
