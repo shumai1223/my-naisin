@@ -160,6 +160,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '大阪府教育庁 入試情報（令和8年度公立高等学校入学者選抜）',
       note: 'ZZ-9b再検証優先度キュー(最終確認日2026-04-22で最古グループ)により選定・再検証。一般入学者選抜で中1・中2の評定を2倍(各90点満点)・中3の評定を6倍(270点満点)とし合計450点満点とする計算方式を、教育系情報サイト複数(進研ゼミ/塾ジャーナル系)で独立にクロスチェックし、変更が無いことを確認した。数値・比率は既存記載(gradeMultipliers 1:2/2:2/3:6・maxScore 450)と完全一致',
     },
+    {
+      date: '2026-08-05',
+      sourceUrl: 'https://axis-kobetsu.jp/outline/juni/exam-info/report-card/osaka',
+      sourceTitle: '個別指導Axis「大阪府公立高校入試の内申点システム」＋WebSearch要約の2独立ソース',
+      note: 'ZZ-9b再検証優先度キューにより選定・再検証(前回2026-07-24からdaysSinceVerified12日で最古グループに再浮上)。タイプI〜Vの複雑な比率換算方式を持つ県のため慎重に確認。既存記載(gradeMultipliers 1:2/2:2/3:6・maxScore450・タイプI〜Vの5段階比率30/40/50/60/70)のうち、コアとなる学年別倍率・満点をWebSearch要約とaxis-kobetsu.jpの2独立ソースでクロスチェックし完全一致確認(両ソースとも中1・中2×2倍(各90点)+中3×6倍(270点)=450点満点で一致)。タイプI〜Vの詳細比率(examMultiplier/naishinMultiplier)については今回参照した2ソースに掲載が無く、前回2026-07-24時点の確認結果をそのまま維持(変更を示唆する情報は今回も見当たらず)。',
+    },
   ],
   ehime: [
     {
