@@ -365,6 +365,14 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。既存記載(全学年等倍・9教科×5段階×3年=135点満点・note欄「高校により500点満点などに換算」)を、WebSearch要約とwasedazemi.comの2独立ソースでクロスチェックし変更が無いことを確認した(両ソースとも「135点満点(3×9×5)」+「一般選抜では500点に換算(評定合計÷135×500)」を報告・既存note欄の記述と完全一致)。',
     },
   ],
+  toyama: [
+    {
+      date: '2026-08-05',
+      sourceUrl: 'https://bibroom.com/naishinten-calculation/',
+      sourceTitle: 'Bibroom「高校受験の内申点とは？計算方法を都道府県別に」＋WebSearch要約の2独立ソース',
+      note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。既存記載(targetGrades[2,3]・中1は対象外・gradeMultipliers{1:0,2:1,3:2}・maxScore135・note欄「特別活動等の15点が加算され150点満点となる場合がある」)を、WebSearch要約とbibroom.comの2独立ソースでクロスチェックし変更が無いことを確認した(両ソースとも「中1対象外・中2は45点・中3は2倍で90点=学習の記録135点満点+特別活動15点=合計150点満点」を報告・既存記載と完全一致)。',
+    },
+  ],
 };
 
 export function getSourceHistory(code: string): SourceSnapshot[] {
