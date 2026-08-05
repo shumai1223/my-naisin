@@ -261,6 +261,14 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。既存記載(targetGrades[3]のみ・9教科×5段階=45点満点)を、WebSearch要約とjyuke-labo.comの2独立ソースでクロスチェックし変更が無いことを確認した(「中3のみが対象で9教科5段階評定45点満点」で完全一致)。',
     },
   ],
+  yamaguchi: [
+    {
+      date: '2026-08-05',
+      sourceUrl: 'https://jyuku-online.com/blog/jj-yamaguchinaisin/',
+      sourceTitle: '塾オンラインドットコム「山口県の公立高校入試の内申点とは？」＋WebSearch要約',
+      note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。既存記載(全学年等倍・実技倍率なし・9教科×5段階×3年=135点満点)を、WebSearch要約とjyuku-online.comの2独立ソースでクロスチェックし変更が無いことを確認した。2026年度からの推薦入学廃止(校長推薦必須→自己出願の特色選抜へ・本セッション今朝のX-30調査で発見済み)は選抜方式(出願資格)の変更であり、内申点算出方法自体(135点満点の計算式)には影響しないことを両ソースで確認できた。',
+    },
+  ],
 };
 
 export function getSourceHistory(code: string): SourceSnapshot[] {
