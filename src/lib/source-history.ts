@@ -213,6 +213,14 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。既存記載(targetGrades[1,2,3]・gradeMultipliers{1,2,3の中3のみ2倍}・実技倍率なし・maxScore180=中1中2各45点+中3×2倍90点)を、WebSearch要約・axis-kobetsu.jp(180点満点のみ確認)・jyuke-labo.com(学年別詳細内訳)の3ソースでクロスチェックし変更が無いことを確認した。',
     },
   ],
+  gunma: [
+    {
+      date: '2026-08-05',
+      sourceUrl: 'https://www.wasedazemi.com/column/entrance-exam/gunma-naishinten/',
+      sourceTitle: 'W早稲田ゼミ「群馬県の公立高校受験で必要な内申点の計算方法」＋WebSearch要約',
+      note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。既存記載(targetGrades[1,2,3]・全学年等倍・実技倍率なし・maxScore135=中1〜中3の9教科×5段階を単純合算)を、WebSearch要約とwasedazemi.comの2独立ソースでクロスチェックし変更が無いことを確認した(「3年間オール5であれば満点135点」という記述で完全一致)。2024年度からの前期後期選抜廃止(特色型/総合型への再編)は選抜方式の変更であり、内申点の算出方法自体には影響していないことも両ソースで確認できた。',
+    },
+  ],
 };
 
 export function getSourceHistory(code: string): SourceSnapshot[] {
