@@ -110,7 +110,7 @@ export const EXPERIMENTS: ExperimentDef[] = [
     // 実験2（H8）：hiyou面のコピーA/B。FP相談の訴求 vs ツール文脈（計算する）。送客先は同一（fp-soudan）。
     id: 'hiyou-copy-2026',
     hypothesis: 'hiyou面で「高校3年間でいくら必要か計算する」（ツール文脈）の方が、FP相談の直接訴求より cta_view→affiliate_click が伸びる。',
-    status: 'running',
+    status: 'paused',
     arms: [
       { id: 'control', label: '教育資金をFPに相談（現状の既定コピー）' },
       {
@@ -122,8 +122,8 @@ export const EXPERIMENTS: ExperimentDef[] = [
     ],
     primaryMetric: 'affiliate_click',
     placement: 'hiyou',
-    note: '送客先（fp-soudan）は固定。直接訴求 vs ツール文脈で「保護者の入り口」の効きを比較する。**🚨2026-08-01停止**: GA4に`experiment_id`カスタムディメンションが未登録のまま44日稼働し判定不能だったため停止(蓄積データは破棄)。**2026-08-05再開**: ga4_run_report(customEvent:experiment_id・直近7日)で他実験ID(line-cta-copy-2026等)が非"(not set)"の実データを返すことを確認できたため、startedAtをリセットして再開（primaryMetricは元々affiliate_clickで妥当なため変更なし）。',
-    startedAt: '2026-08-05',
+    note: '送客先（fp-soudan）は固定。直接訴求 vs ツール文脈で「保護者の入り口」の効きを比較する。**🚨2026-08-01停止**: GA4に`experiment_id`カスタムディメンションが未登録のまま44日稼働し判定不能だったため停止(蓄積データは破棄)。**⚠️2026-08-04/08-05に2度再開を試みたが取り消し**: GA4のexperiment_id自体は機能確認済みだが、`src/app/hiyou/page.tsx`の実配線が既にhiyou-third-round-copy-2026（2026-08-01切替の後継実験）へ置き換わっており、hiyou-copy-2026を再開してもトラフィックが一切乗らないzombie running実験になるため。**この実験を再開する場合はstatusを戻すだけでなく、まずhiyou/page.tsxの配線をhiyou-copy-2026に戻すか、後継のhiyou-third-round-copy-2026側で仮説を再設計するかを決める必要がある（👤判断が要る設計変更）。単純なstartedAtリセットでは再開不可**。',
+    startedAt: '2026-06-17',
   },
   {
     // 実験4（A6/K1）：名簿登録ボタンのコピーA/B。これが初の primaryMetric='lead_submit' 実験。
