@@ -189,6 +189,14 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。既存記載(targetGrades[1,2,3]・全学年等倍・coreMultiplier1・practicalMultiplier1・maxScore135=9教科×5段階×3学年、学力検査等との比率は非公表で学校ごとに傾斜配点)を、WebSearch要約とedu-netz.comの2独立ソースでクロスチェックし変更が無いことを確認した(実際の配点は学校により70〜300点と幅がある旨も既存noteと整合)。',
     },
   ],
+  miyagi: [
+    {
+      date: '2026-08-05',
+      sourceUrl: 'https://jyuke-labo.com/koukoujyukentaisaku/miyagi/',
+      sourceTitle: '受験ラボ「宮城県高校入試情報」＋WebSearch要約（複数教育系サイトの記述比較）',
+      note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。既存記載(targetGrades[1,2,3]・全学年等倍・coreMultiplier1・practicalMultiplier2・maxScore195=5教科そのまま+実技4教科×2倍・各学年65点×3=195点満点、共通選抜のスコープ)を、WebSearch要約とjyuke-labo.comの2独立ソースでクロスチェックし変更が無いことを確認した。特色選抜は高校ごとに0.25〜4.0倍の独自換算率を用いる別制度である旨も両ソースで一致（既存の「共通選抜195点固定・特色選抜は各校独自換算率」という理解と整合）。',
+    },
+  ],
 };
 
 export function getSourceHistory(code: string): SourceSnapshot[] {
