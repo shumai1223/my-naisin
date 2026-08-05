@@ -33,7 +33,7 @@ export const post: BlogPost = {
   <ul>
     <li><a href="#section-data">データの前提と出典</a></li>
     <li><a href="#fact-1">事実1：満点は県によって最大14.7倍も違う</a></li>
-    <li><a href="#fact-2">事実2：中1の成績から見る県が33、中3だけの県が11</a></li>
+    <li><a href="#fact-2">事実2：中1の成績から見る県が34、中3だけの県が11</a></li>
     <li><a href="#fact-3">事実3：実技4教科を「冷遇」する県は1つもない</a></li>
     <li><a href="#fact-4">事実4：いちばん極端なのは鹿児島県（実技が主要の10倍重い）</a></li>
     <li><a href="#fact-5">事実5：満点が大きい＝内申点が重い、とは限らない</a></li>
