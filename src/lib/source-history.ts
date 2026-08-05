@@ -91,6 +91,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '福井県教育委員会「令和8年度福井県立高等学校入学者選抜に関する実施要項」',
       note: 'ZZ-9b再検証優先度キュー(最終確認日2026-04-22で最古グループ)により選定・再検証。中3の評定のみを対象(9教科×5段階=45点満点)とし学力検査点500点満点と合算する内申点計算方式を、教育系情報サイトでクロスチェックし、45点満点という配点自体に変更が無いことを確認した。数値は既存記載(targetGrades [3]・maxScore 45)と完全一致',
     },
+    {
+      date: '2026-08-05',
+      sourceUrl: 'https://jyuku-online.com/blog/jj-fukui/',
+      sourceTitle: '塾オンラインドットコム「福井県内申点」＋WebSearch要約の2独立ソース',
+      note: 'ZZ-9b再検証優先度キューにより選定・再検証(前回2026-07-24からdaysSinceVerified12日で最古グループに再浮上)。既存記載(中3のみ・9教科×5段階=45点満点)をWebSearch要約とjyuku-online.comの2独立ソースでクロスチェックし変更なしと確認(両ソースとも45点満点で一致)。',
+    },
   ],
   yamagata: [
     {
