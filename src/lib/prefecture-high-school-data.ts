@@ -2031,12 +2031,12 @@ export const PREFECTURE_HIGH_SCHOOL_DATA: Record<string, PrefectureData> = {
     rules: {
       targetGrades: "中学1年生〜中学3年生（3年間）",
       practicalMultiplier: "等倍（各学年9教科×5段階評価が記載。選抜資料として参考使用）",
-      maxScore: 135,
+      maxScore: 180,
       scoreRatio: "学力検査500点：内申点は各高校の判断で設定（合否への影響度は非公開）",
       hasRecommendation: true,
       hasInterview: true,
       uniqueRules: [
-        "石川県の内申点は中1〜中3の9教科×5段階評価が調査書に記載（各学年45点満点×3学年＝135点満点）",
+        "石川県の内申点は中1・中2は各45点満点、中3は2倍の90点満点で合計180点満点（9教科×5段階評価が調査書に記載）",
         "合否判定において調査書の評定がどのように扱われるかは公開されていない（非公表）",
         "ただし実態として内申点は合否に強く影響するとされる",
         "学力検査は5教科500点満点",

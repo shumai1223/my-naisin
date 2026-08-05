@@ -280,7 +280,7 @@ export const post: BlogPost = {
       <tr><td>神奈川</td><td>135点</td><td>中3が2倍、実技は等倍</td></tr>
       <tr><td rowspan="9">中部</td><td>新潟</td><td>135点</td><td>等倍</td></tr>
       <tr><td>富山</td><td>135点</td><td>等倍（中2・中3のみ対象、+特別活動15点の場合あり）</td></tr>
-      <tr><td>石川</td><td>135点</td><td>等倍</td></tr>
+      <tr><td>石川</td><td>180点</td><td>等倍（中1・中2は各45点、中3は2倍の90点）</td></tr>
       <tr><td>福井</td><td>45点</td><td>中3のみ等倍</td></tr>
       <tr><td>山梨</td><td>330点</td><td>実技×3倍（主要は2倍）、+特別活動30点の場合あり</td></tr>
       <tr><td>長野</td><td>45点</td><td>中3のみ等倍</td></tr>
