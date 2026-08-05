@@ -238,6 +238,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '岡山県 県立高等学校の入学者選抜',
       note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16グループ)により選定・再検証。既存記載が自ら「簡易計算」と明記している通り、実際は中1・中2各45点+中3が110点(主要5教科×2倍=50点+実技4教科×3倍=60点)の合計200点満点(学力検査350点満点)という、単純な学年×教科倍率では表現しきれない構造であることを教育系情報サイト複数(塾選/エデュネッツ/KSB)で改めて確認した。ツール側の簡易表現(gradeMultipliers全学年1・practicalMultiplier 2・maxScore 195/actualMaxScore 200)・既存noteの注記内容ともに変更不要と判断',
     },
+    {
+      date: '2026-08-05',
+      sourceUrl: 'https://jyuku-online.com/blog/jj-okayama/',
+      sourceTitle: '塾オンラインドットコム「岡山県内申点」＋WebSearch要約の2独立ソース',
+      note: 'ZZ-9b再検証優先度キューにより選定・再検証(前回2026-07-26からdaysSinceVerified10日で最古グループに再浮上)。simplifiedCalc=trueで実際の計算がnoteに別記されている複雑な県のため慎重に確認。既存note(中1中2各45点+中3が110点=200点満点)の内訳をWebSearch要約とjyuku-online.comの2独立ソースでクロスチェックし完全一致確認(両ソースとも中3=主要5教科×2倍50点+実技4教科×3倍60点=110点で一致)。',
+    },
   ],
   chiba: [
     {
