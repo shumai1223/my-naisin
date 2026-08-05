@@ -221,6 +221,14 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。既存記載(targetGrades[1,2,3]・全学年等倍・実技倍率なし・maxScore135=中1〜中3の9教科×5段階を単純合算)を、WebSearch要約とwasedazemi.comの2独立ソースでクロスチェックし変更が無いことを確認した(「3年間オール5であれば満点135点」という記述で完全一致)。2024年度からの前期後期選抜廃止(特色型/総合型への再編)は選抜方式の変更であり、内申点の算出方法自体には影響していないことも両ソースで確認できた。',
     },
   ],
+  hiroshima: [
+    {
+      date: '2026-08-05',
+      sourceUrl: 'https://www.edu-netz.com/admission-information2026/hiroshima-info-r8',
+      sourceTitle: '対話式進学塾1対1ネッツ「広島県の高校入試情報2026(令和8年度)」＋WebSearch要約',
+      note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。既存記載(targetGrades[1,2,3]・gradeMultipliers{1,2,3の中3のみ3倍}・実技倍率なし・maxScore225=中1中2各45点+中3×3倍135点)を、WebSearch要約とedu-netz.comの2独立ソースでクロスチェックし変更が無いことを確認した(45+45+135=225で完全一致)。副次的な発見: 一般枠は傾斜配点なしだが、基町高校等一部の特色枠選抜校では学校独自に副教科2倍の傾斜を課すケースがあると判明。ただしこれは学校単位の例外でありprefectures.tsの県レベル基準値の設計方針(学校別の独自傾斜は対象外)とは矛盾しないため変更不要と判断。',
+    },
+  ],
 };
 
 export function getSourceHistory(code: string): SourceSnapshot[] {
