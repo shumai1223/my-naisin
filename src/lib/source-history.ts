@@ -293,6 +293,14 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。**重大な警報が一度発生した**: 最初のWebSearch要約が「2026年度から中1中2は『主体的に学習に取り組む態度』を3段階評価する27点満点方式へ変更・中3は9教科×5段階×2倍で90点・合計144点満点」という既存記載(195点満点)と全く異なる制度改革を報告し、本物の変更である可能性を疑って詳細調査した。しかしbestjuku.comとaxis-kobetsu.jpへ個別に直接WebFetchした結果、**両方とも既存記載どおり「5教科そのまま+実技4教科×2倍・各学年65点×3=195点満点」を独立に確認し、144点や態度評価方式への言及は一切無かった**。2対1の多数決および直接fetchの信頼度の高さから、WebSearch要約側が生成時に別の情報(behavioral-record削除系の別県改革等)と混同し実在しない「144点満点」を作話したものと判断し、既存の195点満点を維持。**教訓**: WebSearchツール自身が複数の検索結果を要約する際に、search resultには無い具体的な数値(144点等)を作話することがあると実例で確認した。特に数値が絡む重要な検証では、要約だけで判断せず必ず個別ページへの直接WebFetchで実際の記載を確認すること。',
     },
   ],
+  niigata: [
+    {
+      date: '2026-08-05',
+      sourceUrl: 'https://axis-kobetsu.jp/outline/juni/exam-info/general-info/niigata/',
+      sourceTitle: '個別指導Axis「新潟県の公立高校入試概要」＋jyuke-labo.comの2直接WebFetch（akitaの教訓を踏まえWebSearch要約に頼らず個別ページを直接確認）',
+      note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。既存記載(全学年等倍・実技倍率なし・9教科×5段階×3年=135点満点)を、axis-kobetsu.jpとjyuke-labo.comへの2件の直接WebFetch(WebSearch要約は参考程度に留め、必ず個別ページ本文で裏取りする方針をakitaの教訓後に適用)でクロスチェックし変更が無いことを確認した(両ソースとも「中1 45点・中2 45点・中3 45点=135点満点・全学年等倍」で完全一致)。',
+    },
+  ],
 };
 
 export function getSourceHistory(code: string): SourceSnapshot[] {
