@@ -173,6 +173,14 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。**計算に使う中核数値(targetGrades[1,2,3]・gradeMultipliers{1,2,3}・coreMultiplier2・practicalMultiplier3・maxScore660)自体は複数ソースで660点満点という総量が一致し変更なしと確認できた**。一方、noteフィールドに記載の「実際の選抜では440点満点に換算される場合がある」という圧縮後の点数については、WebSearch要約が「2025年度入試より500点に圧縮」と述べる一方、jyuke-labo.comは「270点×2/3で440点満点」という既存noteと異なる計算過程(9教科合計×学年比のみ・実技倍率の記述なし)を示しており、2次情報源間で440/500が食い違い、算出根拠の記述も相互に整合しない。このnoteフィールドは実際の計算エンジン(coreMultiplier等)には使われない補足情報であり、着手前の状態から変更していないため実害はないが、圧縮後点数の真値は今回のセッションでは確定できなかった。捏造ゼロ原則により440→500等への書き換えは行わず現状維持のまま、次に手が空いた際に岩手県教育委員会の地区別実施概要PDF(盛岡地区等)を直接確認することを推奨する。',
     },
   ],
+  gifu: [
+    {
+      date: '2026-08-05',
+      sourceUrl: 'https://jyuke-labo.com/koukoujyukentaisaku/gifu/',
+      sourceTitle: '受験ラボ「岐阜県高校入試情報」＋WebSearch要約（複数教育系サイトの記述比較）',
+      note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。既存記載(targetGrades[1,2,3]・gradeMultipliers{1,2,3の中3のみ2倍}・coreMultiplier1・practicalMultiplier1・maxScore180=中1中2各45点+中3×2倍90点)を、WebSearch要約(複数サイト集約)とjyuke-labo.comの2ソースでクロスチェックし変更が無いことを確認した。**途中でnaishinten.com(内申点自動計算ツールサイト)が「全学年等倍・135点満点(中3の2倍なし)」という既存記載と相反する情報を返したため一時保留したが**、WebSearch要約・jyuke-labo.comの計3ソースが揃って180点/中3×2倍を支持しており多数決でnaishinten.com側を採用しない判断とした。naishinten.comは他県ページでも参照される汎用ツールサイトのため、別の県の再検証時にこのサイトの記載と既存データが食い違った場合は同様に多数ソースでの裏取りを優先すること。',
+    },
+  ],
 };
 
 export function getSourceHistory(code: string): SourceSnapshot[] {
