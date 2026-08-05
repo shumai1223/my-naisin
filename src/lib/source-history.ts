@@ -349,6 +349,14 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。既存記載(gradeMultipliers{1:1,2:1,3:2}・maxScore180=中1中2各45点+中3×2倍90点・note欄「実選抜では51点満点に換算後、特別活動9点を加算し60点満点」)を、WebSearch要約とjyuku-online.comの2独立ソースでクロスチェックし変更が無いことを確認した(両ソースとも「素点180点×51/180=51点」+「特別活動6〜9点」=60点満点という同一の換算式を報告・完全一致)。',
     },
   ],
+  tokushima: [
+    {
+      date: '2026-08-05',
+      sourceUrl: 'https://www.deskstyle.info/eria/tokushima/juken.html',
+      sourceTitle: 'WebSearch要約＋jyuku-online.com＋deskstyle.infoの3ソース',
+      note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。既存記載(全学年等倍・実技4教科×2倍・各学年65点×3=195点満点)をWebSearch要約でクロスチェックし完全一致(195点)を確認。jyuku-online.comは計算式(主要5教科+実技4教科×2=各学年65点)自体は既存と一致したが、最終合計を「165点」と記載しており自己矛盾(65×3=195のはずが165と誤記)があったため、この点はソース側の単純な誤記と判断し不採用。deskstyle.infoで実技全学年2倍という構造要素を追加確認し、既存の195点満点を維持。',
+    },
+  ],
 };
 
 export function getSourceHistory(code: string): SourceSnapshot[] {
