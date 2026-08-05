@@ -62,7 +62,7 @@ export const PREFECTURE_SOURCES = {
       lastChecked: '2026年5月28日',
       pageNumber: '実施要綱掲載ページ',
       sectionName: '第2章 調査書の取扱い',
-      description: 'A方式とB方式の選択について'
+      description: 'タイプⅠ〜Ⅴ（学力検査と内申点の比率が異なる5区分）の選択について'
     },
     {
       sourceUrl: 'https://www.pref.osaka.lg.jp/o180040/kotogakko/gakuji-g3/r08_kokosenbatsu.html',
@@ -116,7 +116,7 @@ export const PREFECTURE_SOURCES = {
       lastChecked: '2026年5月28日',
       pageNumber: '公式サイト',
       sectionName: '第2章 調査書の取扱い',
-      description: '実技教科の2倍計算と満点45点について'
+      description: '調査書点の算出方法と満点45点について'
     },
     {
       sourceUrl: 'https://www.pref.fukuoka.lg.jp/kyouiku/',
