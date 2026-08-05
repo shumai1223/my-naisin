@@ -47,21 +47,19 @@ describe('experiments registry', () => {
   // （hogosha-cta-text-2026/result-offer-2026/hiyou-copy-2026/lead-copy-2026）が
   // 41〜45日間判定不能のまま稼働し続けていたため停止した（[[fable5-fullaccel-backlog-2026-07]]
   // Λ-2の次の追加指示・②-a）。再開は個別に検証してから行う。
-  it('lead-copy-2026はGA4 experiment_id未登録+月1件の低頻度で判定不能だったため停止済み(pausedかつcontrolのまま)', () => {
+  it('lead-copy-2026はGA4 experiment_id未登録+月1件の低頻度で判定不能だったため2026-08-05にdecidedへ格下げ・controlを正式採用', () => {
     const copy = getExperiment('lead-copy-2026');
-    expect(copy?.status).toBe('paused');
+    expect(copy?.status).toBe('decided');
     expect(copy?.primaryMetric).toBe('lead_submit');
-    // SaveResultCTA が参照するコピーA/B。reward アームは ctaPrefix を持つ（停止中でもレジストリの形は維持）。
+    // SaveResultCTA が参照するコピーA/B。reward アームは ctaPrefix を持つ（decided後もレジストリの形は維持）。
     expect(copy?.arms.find((a) => a.id === 'reward')?.ctaPrefix).toBeTruthy();
+    expect(copy?.note).toContain('decidedへ格下げ確定');
   });
 
-  it('2026-08-01に停止した4実験のうちhiyou-copy-2026/lead-copy-2026は依然pausedで、停止理由がnoteに記録されている', () => {
-    const stillPausedIds = ['hiyou-copy-2026', 'lead-copy-2026'];
-    for (const id of stillPausedIds) {
-      const e = getExperiment(id);
-      expect(e?.status).toBe('paused');
-      expect(e?.note).toContain('2026-08-01停止');
-    }
+  it('2026-08-01に停止した4実験のうちhiyou-copy-2026は依然pausedで、停止理由がnoteに記録されている', () => {
+    const e = getExperiment('hiyou-copy-2026');
+    expect(e?.status).toBe('paused');
+    expect(e?.note).toContain('2026-08-01停止');
   });
 
   it('hogosha-cta-text-2026とresult-offer-2026はGA4 experiment_idの実データ確認後、2026-08-04にstartedAtリセットで再開済み', () => {

@@ -131,14 +131,14 @@ export const EXPERIMENTS: ExperimentDef[] = [
     // 送信先・フォームは同一。ボタン文言だけを差し替えて純粋にコピーの効きを測る（SaveResultCTAが参照）。
     id: 'lead-copy-2026',
     hypothesis: '名簿登録ボタンを「結果カードを無料でもらう」と見返りで名指しすると、汎用の「無料で受け取る」より lead_submit が上がる。',
-    status: 'paused',
+    status: 'decided',
     arms: [
       { id: 'control', label: '無料で受け取る（汎用）' },
       { id: 'reward', label: '結果カードを無料でもらう（見返りを名指し）', ctaPrefix: '結果カードを' },
     ],
     primaryMetric: 'lead_submit',
     placement: 'result',
-    note: '最高インテント面（result/gap-target）で母数を稼ぐ。勝者が出たら SaveResultCTA の既定ボタン文言を昇格させる。**🚨2026-08-01停止・他の3実験とは事情が異なる**: GA4 experiment_id未登録に加え、lead_submit自体が月1件しかなく41日でも判定不能だった。**この実験は`cta_view`/`form_start`等の上流指標に差し替えても解決しない**（変えているのは送信ボタンの文言そのものであり、フォーム表示(SAVE_RESULT_CTA_VIEW)や入力開始(form_start)はボタン文言を見る前のタイミングで発生するため、上流イベントには原理的にこの変数の効果が乗らない）。**次周回への申し送り**: 単純な`startedAt`リセット再開は同じ判定不能を繰り返すだけなので推奨しない。「根拠ゼロで挙動を変えない」原則に従い、このままcontrol（現状の「無料で受け取る」）を正式採用してdecidedへ格下げする案が妥当（👤確認推奨）。再挑戦する場合は、ボタン文言でなく、より上流（フォーム表示前のCTA自体の見出し等）でA/Bを組み直す設計変更が必要。',
+    note: '最高インテント面（result/gap-target）で母数を稼ぐ。勝者が出たら SaveResultCTA の既定ボタン文言を昇格させる。**🚨2026-08-01停止・他の3実験とは事情が異なる**: GA4 experiment_id未登録に加え、lead_submit自体が月1件しかなく41日でも判定不能だった。**この実験は`cta_view`/`form_start`等の上流指標に差し替えても解決しない**（変えているのは送信ボタンの文言そのものであり、フォーム表示(SAVE_RESULT_CTA_VIEW)や入力開始(form_start)はボタン文言を見る前のタイミングで発生するため、上流イベントには原理的にこの変数の効果が乗らない）。**2026-08-05decidedへ格下げ確定**: loop-question-noteに08-04時点で記録された「単純なstartedAtリセット再開は同じ判定不能を繰り返すだけなので推奨しない」という申し送りに従い、根拠ゼロで挙動を変えない原則のもとcontrol（現状の「無料で受け取る」）を正式採用。再挑戦する場合は、ボタン文言でなく、より上流（フォーム表示前のCTA自体の見出し等）でA/Bを組み直す設計変更が必要（👤判断が要る）。',
     startedAt: '2026-06-20',
   },
   {
