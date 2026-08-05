@@ -309,6 +309,14 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。既存記載(targetGrades[3]のみ・実技倍率なし・9教科×5段階=45点満点)を、jyuku-online.comとjyuke-labo.comへの2件の直接WebFetchでクロスチェックし変更が無いことを確認した(両ソースとも「中3のみ対象・9教科5段階評定合計45点満点・実技教科に特別倍率なし」で完全一致)。shizu-in.comは対象URLがゲーム関連サイトへドメイン転用されており使用不可だったため別ソースに切替。',
     },
   ],
+  ishikawa: [
+    {
+      date: '2026-08-05',
+      sourceUrl: 'https://www.deskstyle.info/eria/ishikawa/juken.html',
+      sourceTitle: '5独立ソース(WebSearch要約×2/jyuku-online.com/bibroom.com/axis-kobetsu.jp/deskstyle.info)+社内total-score/explainers.tsとの突合',
+      note: '**🚨ZZ-9bで実データの誤りを発見・修正した唯一のケース（他は全て変更なし）**。既存記載(全学年等倍・135点満点)を確認しようとWebSearch要約を見たところ「中1中2各45点+中3のみ×2倍で90点=180点満点」という既存とは異なる構造が返り、akitaの教訓に従いjyuku-online.com/bibroom.com/axis-kobetsu.jp/deskstyle.infoの4件を個別に直接WebFetchで裏取りしたところ**全て180点満点(中3×2倍)を独立に確認**し、既存の135点(均等)は誤りである可能性が極めて高いと判断した。決め手は社内の別ファイル`src/lib/total-score/explainers.ts`のishikawaエントリ(相関図方式の総合得点エンジン)が、prefectures.tsとは独立に「中1・中2各45点、中3＝×2＝90点、合計180点」という**一致する値を既に保持していた**こと(caveatに「令和7年度版・令和8年度版の公表後に配点を要再確認」と記載があり未反映のまま放置されていた形跡)。5件の外部ソース全てと社内の独立ファイルが一致して180点を支持し、135点を支持する情報源はprefectures.tsの既存値とそこから機械的に生成された`naishin-omomi-content.ts`の記述(独立検証ではなく単なる転記)のみだったため、**prefectures.ts(gradeMultipliers{1:1,2:1,3:2}・maxScore180に修正)・naishin-omomi-content.ts(ishikawaエントリ内の「均等」「135点」記述を複数箇所修正)・naishin-target-grades-by-prefecture.ts(1箇所)・naishin-47-prefectures-comparison.ts(1箇所)・total-score/explainers.tsのcaveat/source(令和8年度確認済みに更新)**の計5ファイルを修正した。tsc/jestフル242suites/3705tests全green。**この修正は他の「変更なし確認」と性質が異なる実データ訂正のため、loop-question-noteにも念のため記録し👤の目視確認を仰ぐ。**',
+    },
+  ],
 };
 
 export function getSourceHistory(code: string): SourceSnapshot[] {

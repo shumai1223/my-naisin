@@ -162,7 +162,7 @@ export const post: BlogPost = {
       <tr>
         <td><strong>石川県</strong></td>
         <td>中1・中2・中3</td>
-        <td>3学年合計135点満点（均等）</td>
+        <td>中1・中2は各45点、中3は2倍で90点満点（計180点）</td>
       </tr>
       <tr>
         <td><strong>福井県</strong></td>

@@ -164,7 +164,7 @@ export const post: BlogPost = {
       <tr><td>神奈川県</td><td>135点</td><td>中2〜中3</td><td>1倍</td><td>1倍</td></tr>
       <tr><td>新潟県</td><td>135点</td><td>中1〜中3</td><td>1倍</td><td>1倍</td></tr>
       <tr><td>富山県</td><td>135点</td><td>中2〜中3</td><td>1倍</td><td>1倍</td></tr>
-      <tr><td>石川県</td><td>135点</td><td>中1〜中3</td><td>1倍</td><td>1倍</td></tr>
+      <tr><td>石川県</td><td>180点</td><td>中1〜中3</td><td>1倍</td><td>1倍</td></tr>
       <tr><td>滋賀県</td><td>135点</td><td>中1〜中3</td><td>1倍</td><td>1倍</td></tr>
       <tr><td>奈良県</td><td>144点<sup>※標準</sup></td><td>中1〜中3<sup>※学校差あり</sup></td><td>1倍</td><td>1倍</td></tr>
       <tr><td>山口県</td><td>135点</td><td>中1〜中3</td><td>1倍</td><td>1倍</td></tr>
