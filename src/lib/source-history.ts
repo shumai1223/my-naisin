@@ -341,6 +341,14 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。既存記載(targetGrades[3]のみ・実技倍率なし・9教科×5段階=45点満点)を、axis-kobetsu.jpとbibroom.comへの2件の直接WebFetchでクロスチェックし変更が無いことを確認した(両ソースとも「中3のみ対象・45点満点・実技教科に特別倍率なし」で完全一致)。',
     },
   ],
+  shimane: [
+    {
+      date: '2026-08-05',
+      sourceUrl: 'https://jyuku-online.com/blog/jj-simane/',
+      sourceTitle: '塾オンラインドットコム「島根県の内申点の計算方法」＋WebSearch要約の2独立ソース',
+      note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。既存記載(gradeMultipliers{1:1,2:1,3:2}・maxScore180=中1中2各45点+中3×2倍90点・note欄「実選抜では51点満点に換算後、特別活動9点を加算し60点満点」)を、WebSearch要約とjyuku-online.comの2独立ソースでクロスチェックし変更が無いことを確認した(両ソースとも「素点180点×51/180=51点」+「特別活動6〜9点」=60点満点という同一の換算式を報告・完全一致)。',
+    },
+  ],
 };
 
 export function getSourceHistory(code: string): SourceSnapshot[] {
