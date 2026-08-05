@@ -150,6 +150,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '東京都教育委員会「令和8年度入学者選抜実施要綱」',
       note: 'ZZ-9b再検証優先度キュー(最終確認日2026-04-22で最古グループ)により選定・再検証。中3のみが対象で、5教科の評定合計をそのまま・実技4教科の評定合計を2倍にして合算した65点満点の換算内申(学力検査700点+調査書300点+ESAT-J20点=総合1020点満点のうち300点分に換算)という計算方式を、教育系情報サイト複数(栄光ゼミナール/進研ゼミ/都立高のトリセツ等)で独立にクロスチェックし、変更が無いことを確認した。数値・比率は既存記載(coreMultiplier 1・practicalMultiplier 2・maxScore 65・reverseCalc.totalMaxScore 1020)と完全一致',
     },
+    {
+      date: '2026-08-05',
+      sourceUrl: 'https://tokyo-metropolitan-high-school.com/contents/kansan-naishin/',
+      sourceTitle: '都立高のトリセツ「都立高校受験の内申点計算方法」＋WebSearch要約の2独立ソース',
+      note: 'ZZ-9b再検証優先度キューにより選定・再検証(前回2026-07-24からdaysSinceVerified12日で最古グループに再浮上)。Λ-2パイロット県(公開済み・品質ゲート確立の起点)のため特に慎重に確認。既存記載(中3のみ・5教科×1倍25点+実技4教科×2倍40点=65点満点)をWebSearch要約とtokyo-metropolitan-high-school.comの2独立ソースでクロスチェックし完全一致確認(両ソースとも同一の内訳・「換算内申点÷65×300」で300点満点へ換算する式も既存reverseCalcと整合)。',
+    },
   ],
   hyogo: [
     {
