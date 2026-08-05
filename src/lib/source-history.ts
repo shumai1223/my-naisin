@@ -301,6 +301,14 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。既存記載(全学年等倍・実技倍率なし・9教科×5段階×3年=135点満点)を、axis-kobetsu.jpとjyuke-labo.comへの2件の直接WebFetch(WebSearch要約は参考程度に留め、必ず個別ページ本文で裏取りする方針をakitaの教訓後に適用)でクロスチェックし変更が無いことを確認した(両ソースとも「中1 45点・中2 45点・中3 45点=135点満点・全学年等倍」で完全一致)。',
     },
   ],
+  shizuoka: [
+    {
+      date: '2026-08-05',
+      sourceUrl: 'https://jyuku-online.com/blog/jj-sizuoka/',
+      sourceTitle: '塾オンラインドットコム「静岡県の内申点計算方法」＋jyuke-labo.comの2直接WebFetch',
+      note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。既存記載(targetGrades[3]のみ・実技倍率なし・9教科×5段階=45点満点)を、jyuku-online.comとjyuke-labo.comへの2件の直接WebFetchでクロスチェックし変更が無いことを確認した(両ソースとも「中3のみ対象・9教科5段階評定合計45点満点・実技教科に特別倍率なし」で完全一致)。shizu-in.comは対象URLがゲーム関連サイトへドメイン転用されており使用不可だったため別ソースに切替。',
+    },
+  ],
 };
 
 export function getSourceHistory(code: string): SourceSnapshot[] {
