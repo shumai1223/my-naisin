@@ -333,6 +333,14 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。既存記載(全学年等倍・実技倍率なし・9教科×5段階×3年=135点満点)を、WebSearch要約とjyuke-labo.comへの直接WebFetchの2独立ソースでクロスチェックし変更が無いことを確認した(「中1 45点・中2 45点・中3 45点=135点満点」で完全一致)。2025年度からの選抜制度改革(前期/後期→特別選抜/一般選抜/チャレンジ選抜の3区分へ再編・本セッション今朝のX-30調査で発見済み)は選抜方式の変更であり内申点算出方法自体には影響しないことを確認。',
     },
   ],
+  nagano: [
+    {
+      date: '2026-08-05',
+      sourceUrl: 'https://axis-kobetsu.jp/outline/juni/exam-info/general-info/nagano',
+      sourceTitle: '個別指導Axis「長野県の公立高校入試概要」＋bibroom.comの2直接WebFetch',
+      note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。既存記載(targetGrades[3]のみ・実技倍率なし・9教科×5段階=45点満点)を、axis-kobetsu.jpとbibroom.comへの2件の直接WebFetchでクロスチェックし変更が無いことを確認した(両ソースとも「中3のみ対象・45点満点・実技教科に特別倍率なし」で完全一致)。',
+    },
+  ],
 };
 
 export function getSourceHistory(code: string): SourceSnapshot[] {
