@@ -298,6 +298,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '受験ラボ「宮城県高校入試情報」＋WebSearch要約（複数教育系サイトの記述比較）',
       note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。既存記載(targetGrades[1,2,3]・全学年等倍・coreMultiplier1・practicalMultiplier2・maxScore195=5教科そのまま+実技4教科×2倍・各学年65点×3=195点満点、共通選抜のスコープ)を、WebSearch要約とjyuke-labo.comの2独立ソースでクロスチェックし変更が無いことを確認した。特色選抜は高校ごとに0.25〜4.0倍の独自換算率を用いる別制度である旨も両ソースで一致（既存の「共通選抜195点固定・特色選抜は各校独自換算率」という理解と整合）。',
     },
+    {
+      date: '2026-08-06',
+      sourceUrl: 'https://www.pref.miyagi.jp/site/sub-jigyou/list680.html',
+      sourceTitle: '宮城県教育委員会 入試・入学関連＋WebSearch要約（jyuke-labo.com/jyuku-online.com等の記述集約）',
+      note: 'Λ+5探索の過程で前期/後期選抜廃止(令和3年度説と令和2年度説で情報源間に矛盾があり施行年度は未確定のまま)を調査していたところ、2026-08-05のZZ-9b再検証で既に確認済みだった「共通選抜195点固定・特色選抜は各校独自換算率(5教科0.25〜2.0倍・実技4教科0.5〜4.0倍)」という理解が、prefectures.tsのnoteフィールドには一度も反映されていなかったと判明。この既に検証済みの事実をprefectures.ts側に追記(note追加のみ・maxScore/gradeMultipliers/practicalMultiplier等の計算値は無変更)。前期/後期選抜廃止の施行年度自体は依然未確定のためexam-system-change-history.tsへの追加はまだ見送り。',
+    },
   ],
   kyoto: [
     {

@@ -164,6 +164,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     practicalMultiplier: 2,
     maxScore: 195,
     description: '5教科×1倍、実技4教科×2倍（195点満点）',
+    note: 'この計算は募集の大半を占める「共通選抜」の方式です。一部の募集枠（10〜50%程度）を占める「特色選抜」では、学力検査・調査書の得点に高校・学科ごとに異なる換算率（5教科0.25〜2.0倍、実技4教科0.5〜4.0倍）を用いるため、学校によって実際の計算方法が異なります。',
     sourceUrl: 'https://www.pref.miyagi.jp/site/sub-jigyou/list680.html',
     sourceUrl2: 'https://czemi.benesse.ne.jp/open/nyushi/exam/04/feature/1273766_2678.html',
     sourceTitle: '宮城県教育委員会 入試・入学関連',
