@@ -88,6 +88,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '山形県教育委員会「令和8年度山形県公立高等学校入学者選抜実施要項」',
       note: 'ZZ-9b再検証優先度キュー(最終確認日2026-04-22で最古グループ)により選定・再検証。中3の評定のみを対象(9教科×5段階=45点満点)とする内申点計算方式(調査書と学力検査の比率は3:7〜7:3の中から高校が選択)を、教育系情報サイトで独立にクロスチェックし、変更が無いことを確認した。数値は既存記載(targetGrades [3]・maxScore 45)と完全一致',
     },
+    {
+      date: '2026-08-05',
+      sourceUrl: 'https://axis-kobetsu.jp/outline/juni/exam-info/general-info/yamagata',
+      sourceTitle: '個別指導Axis「山形県公立高校入試概要」＋WebSearch要約の2独立ソース',
+      note: 'ZZ-9b再検証優先度キューにより選定・再検証(前回2026-07-24からdaysSinceVerified12日で最古グループに再浮上)。既存記載(中3のみ対象・9教科×5段階=45点満点)をWebSearch要約とaxis-kobetsu.jpの2独立ソースでクロスチェックし変更なしと確認(両ソースとも「調査書45点満点・500点満点へ換算・評定:学力検査=3:7〜5:5の範囲で高校ごとに設定」で一致)。',
+    },
   ],
   aomori: [
     {
