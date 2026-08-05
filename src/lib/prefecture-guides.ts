@@ -107,9 +107,9 @@ export const prefectureGuides: Record<string, PrefectureGuide> = {
       maxScore: '135点満点（中3は2倍換算される）'
     },
     examples: {
-      all3: '90点（中堅校の平均レベル）',
-      all4: '120点（横浜翠嵐・湘南などのトップ校必須レベル）',
-      practicalPlus1: '94点（中3で1つ上げると3点アップ）'
+      all3: '81点（中堅校の平均レベル）',
+      all4: '108点（横浜翠嵐・湘南などのトップ校必須レベル）',
+      practicalPlus1: '83点（中3で1つ上げると2点アップ）'
     },
     // 2026-08-01: 5項目をWebSearchで個別に裏取り。①②は一次情報・prefectures.tsと一致し
     // 正確。③⑤の「多発」「極めて難しい」という頻度・傾向の断定は裏付けが取れず削除。
