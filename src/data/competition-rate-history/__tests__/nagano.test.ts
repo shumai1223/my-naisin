@@ -6,8 +6,9 @@ import { NAGANO_COMPETITION_RATE_HISTORY } from '../nagano';
  */
 describe('長野県 多年度アーカイブ（Λ-4・令和7/令和6/令和5/令和4/令和3/令和2の6年度分・grand-total-only）', () => {
   it('6年度分（令和7年度・令和6年度・令和5年度・令和4年度・令和3年度・令和2年度）を収録している', () => {
-    expect(NAGANO_COMPETITION_RATE_HISTORY.years).toHaveLength(6);
+    expect(NAGANO_COMPETITION_RATE_HISTORY.years).toHaveLength(7);
     expect(NAGANO_COMPETITION_RATE_HISTORY.years.map((y) => y.fiscalYear)).toEqual([
+      '令和8年度（2026年度）',
       '令和7年度（2025年度）',
       '令和6年度（2024年度）',
       '令和5年度（2023年度）',
@@ -23,43 +24,50 @@ describe('長野県 多年度アーカイブ（Λ-4・令和7/令和6/令和5/�
     }
   });
 
+  it('令和8年度はY-6既存確定値と一致する(全日制計・募集8,807・志願7,795・倍率0.89)', () => {
+    const r8 = NAGANO_COMPETITION_RATE_HISTORY.years[0];
+    expect(r8.grandTotal.quota).toBe(8807);
+    expect(r8.grandTotal.applicants).toBe(7795);
+    expect(r8.grandTotal.rate).toBeCloseTo(0.89, 2);
+  });
+
   it('令和7年度の全日制計は一次資料の本文・別紙１表と一致する(募集人員8,806・志願者数8,250・倍率0.94)', () => {
-    const r7 = NAGANO_COMPETITION_RATE_HISTORY.years[0];
+    const r7 = NAGANO_COMPETITION_RATE_HISTORY.years[1];
     expect(r7.grandTotal.quota).toBe(8806);
     expect(r7.grandTotal.applicants).toBe(8250);
     expect(r7.grandTotal.rate).toBeCloseTo(0.94, 2);
   });
 
   it('令和6年度の全日制計は一次資料の本文・別紙１表と一致する(募集人員9,945・志願者数9,312・倍率0.94)', () => {
-    const r6 = NAGANO_COMPETITION_RATE_HISTORY.years[1];
+    const r6 = NAGANO_COMPETITION_RATE_HISTORY.years[2];
     expect(r6.grandTotal.quota).toBe(9945);
     expect(r6.grandTotal.applicants).toBe(9312);
     expect(r6.grandTotal.rate).toBeCloseTo(0.94, 2);
   });
 
   it('令和5年度の全日制計は一次資料の本文・別紙１表と一致する(募集人員10,070・志願者数9,698・倍率0.96)', () => {
-    const r5 = NAGANO_COMPETITION_RATE_HISTORY.years[2];
+    const r5 = NAGANO_COMPETITION_RATE_HISTORY.years[3];
     expect(r5.grandTotal.quota).toBe(10070);
     expect(r5.grandTotal.applicants).toBe(9698);
     expect(r5.grandTotal.rate).toBeCloseTo(0.96, 2);
   });
 
   it('令和4年度の全日制計は一次資料の本文・別紙１表と一致する(募集人員10,203・志願者数9,944・倍率0.97)', () => {
-    const r4 = NAGANO_COMPETITION_RATE_HISTORY.years[3];
+    const r4 = NAGANO_COMPETITION_RATE_HISTORY.years[4];
     expect(r4.grandTotal.quota).toBe(10203);
     expect(r4.grandTotal.applicants).toBe(9944);
     expect(r4.grandTotal.rate).toBeCloseTo(0.97, 2);
   });
 
   it('令和3年度の全日制計は一次資料の本文・別紙１表と一致する(募集人員10,062・志願者数9,752・倍率0.97)', () => {
-    const r3 = NAGANO_COMPETITION_RATE_HISTORY.years[4];
+    const r3 = NAGANO_COMPETITION_RATE_HISTORY.years[5];
     expect(r3.grandTotal.quota).toBe(10062);
     expect(r3.grandTotal.applicants).toBe(9752);
     expect(r3.grandTotal.rate).toBeCloseTo(0.97, 2);
   });
 
   it('令和2年度の全日制計は一次資料の本文・別紙１表と一致する(募集人員10,302・志願者数10,184・倍率0.99)', () => {
-    const r2 = NAGANO_COMPETITION_RATE_HISTORY.years[5];
+    const r2 = NAGANO_COMPETITION_RATE_HISTORY.years[6];
     expect(r2.grandTotal.quota).toBe(10302);
     expect(r2.grandTotal.applicants).toBe(10184);
     expect(r2.grandTotal.rate).toBeCloseTo(0.99, 2);

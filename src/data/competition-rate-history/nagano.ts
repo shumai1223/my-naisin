@@ -12,6 +12,20 @@
  */
 import type { PrefectureRateHistoryFile, YearSnapshot } from '@/lib/competition-rate-history';
 
+/**
+ * 令和8年度（2026年度）: 既存Y-6 competition-rates/nagano.tsが確定済みのofficialSubtotals「全日制計」行をそのまま転記（新規リサーチ不要・2026-08-05発見）。
+ */
+const REIWA_8: YearSnapshot = {
+  fiscalYear: '令和8年度（2026年度）',
+  sourceUrl: 'https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/20260305web-teisei.pdf',
+  sourceTitle: '長野県教育委員会 令和8年度公立高等学校入学者後期選抜志願者数②（志望変更受付締切後の集計結果）',
+  fetchedAt: '2026-08-05',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制計', quota: 8807, applicants: 7795, rate: 0.89 },
+};
+
 const REIWA_7: YearSnapshot = {
   fiscalYear: '令和7年度（2025年度）',
   sourceUrl: 'https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r7/documents/20250305web2.pdf',
@@ -116,5 +130,5 @@ const REIWA_2: YearSnapshot = {
 
 export const NAGANO_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'nagano',
-  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3, REIWA_2],
+  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3, REIWA_2],
 };

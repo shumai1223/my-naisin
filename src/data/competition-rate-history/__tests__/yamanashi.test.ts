@@ -6,8 +6,9 @@ import { YAMANASHI_COMPETITION_RATE_HISTORY } from '../yamanashi';
  */
 describe('山梨県 多年度アーカイブ（Λ-4・令和7/令和6/令和5/令和4/令和3/令和2の6年度分・grand-total-only）', () => {
   it('6年度分（令和7年度・令和6年度・令和5年度・令和4年度・令和3年度・令和2年度）を収録している', () => {
-    expect(YAMANASHI_COMPETITION_RATE_HISTORY.years).toHaveLength(6);
+    expect(YAMANASHI_COMPETITION_RATE_HISTORY.years).toHaveLength(7);
     expect(YAMANASHI_COMPETITION_RATE_HISTORY.years.map((y) => y.fiscalYear)).toEqual([
+      '令和8年度（2026年度）',
       '令和7年度（2025年度）',
       '令和6年度（2024年度）',
       '令和5年度（2023年度）',
@@ -23,43 +24,50 @@ describe('山梨県 多年度アーカイブ（Λ-4・令和7/令和6/令和5/�
     }
   });
 
+  it('令和8年度はY-6既存確定値と一致する(全日制課程計・募集3,356・志願3,037・倍率0.90)', () => {
+    const r8 = YAMANASHI_COMPETITION_RATE_HISTORY.years[0];
+    expect(r8.grandTotal.quota).toBe(3356);
+    expect(r8.grandTotal.applicants).toBe(3037);
+    expect(r8.grandTotal.rate).toBeCloseTo(0.9, 2);
+  });
+
   it('令和7年度の合計は一次資料と一致する(募集人員3,395・志願者数3,227・倍率0.95)', () => {
-    const r7 = YAMANASHI_COMPETITION_RATE_HISTORY.years[0];
+    const r7 = YAMANASHI_COMPETITION_RATE_HISTORY.years[1];
     expect(r7.grandTotal.quota).toBe(3395);
     expect(r7.grandTotal.applicants).toBe(3227);
     expect(r7.grandTotal.rate).toBeCloseTo(0.95, 2);
   });
 
   it('令和6年度の合計は一次資料と一致する(募集人員3,537・志願者数3,374・倍率0.95)', () => {
-    const r6 = YAMANASHI_COMPETITION_RATE_HISTORY.years[1];
+    const r6 = YAMANASHI_COMPETITION_RATE_HISTORY.years[2];
     expect(r6.grandTotal.quota).toBe(3537);
     expect(r6.grandTotal.applicants).toBe(3374);
     expect(r6.grandTotal.rate).toBeCloseTo(0.95, 2);
   });
 
   it('令和5年度の合計はリセモム記事(確定)と一致する(募集定員3,601・志願者数3,489・倍率0.96)', () => {
-    const r5 = YAMANASHI_COMPETITION_RATE_HISTORY.years[2];
+    const r5 = YAMANASHI_COMPETITION_RATE_HISTORY.years[3];
     expect(r5.grandTotal.quota).toBe(3601);
     expect(r5.grandTotal.applicants).toBe(3489);
     expect(r5.grandTotal.rate).toBeCloseTo(0.96, 2);
   });
 
   it('令和4年度の合計はリセモム記事(確定)と一致する(募集人員3,692・志願者数3,538・倍率0.95)', () => {
-    const r4 = YAMANASHI_COMPETITION_RATE_HISTORY.years[3];
+    const r4 = YAMANASHI_COMPETITION_RATE_HISTORY.years[4];
     expect(r4.grandTotal.quota).toBe(3692);
     expect(r4.grandTotal.applicants).toBe(3538);
     expect(r4.grandTotal.rate).toBeCloseTo(0.95, 2);
   });
 
   it('令和3年度の合計はリセモム記事(確定)と一致する(募集定員3,684・志願者数3,606・倍率0.98)', () => {
-    const r3 = YAMANASHI_COMPETITION_RATE_HISTORY.years[4];
+    const r3 = YAMANASHI_COMPETITION_RATE_HISTORY.years[5];
     expect(r3.grandTotal.quota).toBe(3684);
     expect(r3.grandTotal.applicants).toBe(3606);
     expect(r3.grandTotal.rate).toBeCloseTo(0.98, 2);
   });
 
   it('令和2年度の合計は一次資料と一致する(募集人員3,865・志願者数3,947・倍率1.02)', () => {
-    const r2 = YAMANASHI_COMPETITION_RATE_HISTORY.years[5];
+    const r2 = YAMANASHI_COMPETITION_RATE_HISTORY.years[6];
     expect(r2.grandTotal.quota).toBe(3865);
     expect(r2.grandTotal.applicants).toBe(3947);
     expect(r2.grandTotal.rate).toBeCloseTo(1.02, 2);

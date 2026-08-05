@@ -7,8 +7,9 @@ import { ISHIKAWA_COMPETITION_RATE_HISTORY } from '../ishikawa';
  */
 describe('石川県 多年度アーカイブ（Λ-4・令和7/令和6/令和5/令和4/令和3/令和2の6年度分・grand-total-only）', () => {
   it('6年度分（令和7年度・令和6年度・令和5年度・令和4年度・令和3年度・令和2年度）を収録している', () => {
-    expect(ISHIKAWA_COMPETITION_RATE_HISTORY.years).toHaveLength(6);
+    expect(ISHIKAWA_COMPETITION_RATE_HISTORY.years).toHaveLength(7);
     expect(ISHIKAWA_COMPETITION_RATE_HISTORY.years.map((y) => y.fiscalYear)).toEqual([
+      '令和8年度（2026年度）',
       '令和7年度（2025年度）',
       '令和6年度（2024年度）',
       '令和5年度（2023年度）',
@@ -24,8 +25,15 @@ describe('石川県 多年度アーカイブ（Λ-4・令和7/令和6/令和5/�
     }
   });
 
+  it('令和8年度はY-6既存確定値と一致する(全県合計・募集6,566・志願6,076・倍率0.93)', () => {
+    const r8 = ISHIKAWA_COMPETITION_RATE_HISTORY.years[0];
+    expect(r8.grandTotal.quota).toBe(6566);
+    expect(r8.grandTotal.applicants).toBe(6076);
+    expect(r8.grandTotal.rate).toBeCloseTo(0.93, 2);
+  });
+
   it('令和7年度の全県合計は報道記事と一致し、学校数は既存Y-6のofficialSubtotalsと一致する(40校・募集6,666・出願6,409・倍率0.96)', () => {
-    const r7 = ISHIKAWA_COMPETITION_RATE_HISTORY.years[0];
+    const r7 = ISHIKAWA_COMPETITION_RATE_HISTORY.years[1];
     expect(r7.grandTotal.schoolCount).toBe(40);
     expect(r7.grandTotal.quota).toBe(6666);
     expect(r7.grandTotal.applicants).toBe(6409);
@@ -33,7 +41,7 @@ describe('石川県 多年度アーカイブ（Λ-4・令和7/令和6/令和5/�
   });
 
   it('令和6年度の全県合計は一次資料と一致する(40校・一般入学枠6,775・出願6,650・倍率0.98)', () => {
-    const r6 = ISHIKAWA_COMPETITION_RATE_HISTORY.years[1];
+    const r6 = ISHIKAWA_COMPETITION_RATE_HISTORY.years[2];
     expect(r6.grandTotal.schoolCount).toBe(40);
     expect(r6.grandTotal.quota).toBe(6775);
     expect(r6.grandTotal.applicants).toBe(6650);
@@ -41,7 +49,7 @@ describe('石川県 多年度アーカイブ（Λ-4・令和7/令和6/令和5/�
   });
 
   it('令和5年度の全県合計は一次資料と一致する(40校・一般入学枠7,003・出願7,067・倍率1.01)', () => {
-    const r5 = ISHIKAWA_COMPETITION_RATE_HISTORY.years[2];
+    const r5 = ISHIKAWA_COMPETITION_RATE_HISTORY.years[3];
     expect(r5.grandTotal.schoolCount).toBe(40);
     expect(r5.grandTotal.quota).toBe(7003);
     expect(r5.grandTotal.applicants).toBe(7067);
@@ -49,7 +57,7 @@ describe('石川県 多年度アーカイブ（Λ-4・令和7/令和6/令和5/�
   });
 
   it('令和4年度の全県合計は一次資料と一致する(40校・一般入学枠6,933・出願6,927・倍率1.00)', () => {
-    const r4 = ISHIKAWA_COMPETITION_RATE_HISTORY.years[3];
+    const r4 = ISHIKAWA_COMPETITION_RATE_HISTORY.years[4];
     expect(r4.grandTotal.schoolCount).toBe(40);
     expect(r4.grandTotal.quota).toBe(6933);
     expect(r4.grandTotal.applicants).toBe(6927);
@@ -57,7 +65,7 @@ describe('石川県 多年度アーカイブ（Λ-4・令和7/令和6/令和5/�
   });
 
   it('令和3年度の全県合計は一次資料と一致する(40校・一般入学枠6,731・出願6,725・倍率1.00)', () => {
-    const r3 = ISHIKAWA_COMPETITION_RATE_HISTORY.years[4];
+    const r3 = ISHIKAWA_COMPETITION_RATE_HISTORY.years[5];
     expect(r3.grandTotal.schoolCount).toBe(40);
     expect(r3.grandTotal.quota).toBe(6731);
     expect(r3.grandTotal.applicants).toBe(6725);
@@ -65,7 +73,7 @@ describe('石川県 多年度アーカイブ（Λ-4・令和7/令和6/令和5/�
   });
 
   it('令和2年度の全県合計は一次資料と一致する(40校・一般入学枠6,841・出願7,060・倍率1.03)', () => {
-    const r2 = ISHIKAWA_COMPETITION_RATE_HISTORY.years[5];
+    const r2 = ISHIKAWA_COMPETITION_RATE_HISTORY.years[6];
     expect(r2.grandTotal.schoolCount).toBe(40);
     expect(r2.grandTotal.quota).toBe(6841);
     expect(r2.grandTotal.applicants).toBe(7060);

@@ -14,6 +14,20 @@
  */
 import type { PrefectureRateHistoryFile, YearSnapshot } from '@/lib/competition-rate-history';
 
+/**
+ * 令和8年度（2026年度）: 既存Y-6 competition-rates/toyama.tsが確定済みのofficialSubtotals「全日制計」行(34校・R7と同一校数)をそのまま転記（新規リサーチ不要・2026-08-05発見）。
+ */
+const REIWA_8: YearSnapshot = {
+  fiscalYear: '令和8年度（2026年度）',
+  sourceUrl: 'https://www.pref.toyama.jp/documents/47208/080224.pdf',
+  sourceTitle: '富山県教育委員会 令和8年度富山県立高等学校入学者選抜 全日制の課程一般入学者選抜志願状況（令和8年2月24日正午現在）',
+  fetchedAt: '2026-08-05',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '合計（34校82学科）', quota: 5020, applicants: 4482, rate: 0.89 },
+};
+
 const REIWA_7: YearSnapshot = {
   fiscalYear: '令和7年度（2025年度）',
   sourceUrl: 'https://www.pref.toyama.jp/documents/41799/070225.pdf',
@@ -125,5 +139,5 @@ const REIWA_2: YearSnapshot = {
 
 export const TOYAMA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'toyama',
-  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3, REIWA_2],
+  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3, REIWA_2],
 };

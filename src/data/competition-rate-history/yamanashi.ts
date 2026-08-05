@@ -15,6 +15,20 @@
  */
 import type { PrefectureRateHistoryFile, YearSnapshot } from '@/lib/competition-rate-history';
 
+/**
+ * 令和8年度（2026年度）: 既存Y-6 competition-rates/yamanashi.tsが確定済みのofficialSubtotals「全日制課程計」行をそのまま転記（新規リサーチ不要・2026-08-05発見）。
+ */
+const REIWA_8: YearSnapshot = {
+  fiscalYear: '令和8年度（2026年度）',
+  sourceUrl: 'https://www.pref.yamanashi.jp/documents/7061/r8saisyuusigansyasuu1.pdf',
+  sourceTitle: '山梨県教育委員会 令和8年度山梨県公立高等学校入学者選抜 全日制後期募集及び定時制課程の最終志願状況について',
+  fetchedAt: '2026-08-05',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制課程計', quota: 3356, applicants: 3037, rate: 0.9 },
+};
+
 const REIWA_7: YearSnapshot = {
   fiscalYear: '令和7年度（2025年度）',
   sourceUrl: 'https://resemom.jp/article/2025/02/27/81028.html',
@@ -128,5 +142,5 @@ const REIWA_2: YearSnapshot = {
 
 export const YAMANASHI_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'yamanashi',
-  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3, REIWA_2],
+  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3, REIWA_2],
 };

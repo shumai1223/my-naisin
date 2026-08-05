@@ -6,8 +6,9 @@ import { YAMAGUCHI_COMPETITION_RATE_HISTORY } from '../yamaguchi';
  */
 describe('山口県 多年度アーカイブ（Λ-4・令和7/令和6/令和5/令和4/令和3/令和2の6年度分・grand-total-only）', () => {
   it('6年度分（令和7年度・令和6年度・令和5年度・令和4年度・令和3年度・令和2年度）を収録している', () => {
-    expect(YAMAGUCHI_COMPETITION_RATE_HISTORY.years).toHaveLength(6);
+    expect(YAMAGUCHI_COMPETITION_RATE_HISTORY.years).toHaveLength(7);
     expect(YAMAGUCHI_COMPETITION_RATE_HISTORY.years.map((y) => y.fiscalYear)).toEqual([
+      '令和8年度（2026年度）',
       '令和7年度（2025年度）',
       '令和6年度（2024年度）',
       '令和5年度（2023年度）',
@@ -23,43 +24,50 @@ describe('山口県 多年度アーカイブ（Λ-4・令和7/令和6/令和5/�
     }
   });
 
+  it('令和8年度はY-6既存確定値と一致する(全日制計・募集4,893・志願4,677・倍率0.96)', () => {
+    const r8 = YAMAGUCHI_COMPETITION_RATE_HISTORY.years[0];
+    expect(r8.grandTotal.quota).toBe(4893);
+    expect(r8.grandTotal.applicants).toBe(4677);
+    expect(r8.grandTotal.rate).toBeCloseTo(0.96, 2);
+  });
+
   it('令和7年度の合計は一次資料と一致する(定員5,533・出願者数5,612・倍率1.01)', () => {
-    const r7 = YAMAGUCHI_COMPETITION_RATE_HISTORY.years[0];
+    const r7 = YAMAGUCHI_COMPETITION_RATE_HISTORY.years[1];
     expect(r7.grandTotal.quota).toBe(5533);
     expect(r7.grandTotal.applicants).toBe(5612);
     expect(r7.grandTotal.rate).toBeCloseTo(1.01, 2);
   });
 
   it('令和6年度の合計は一次資料と一致する(定員5,584・出願者数5,811・倍率1.04)', () => {
-    const r6 = YAMAGUCHI_COMPETITION_RATE_HISTORY.years[1];
+    const r6 = YAMAGUCHI_COMPETITION_RATE_HISTORY.years[2];
     expect(r6.grandTotal.quota).toBe(5584);
     expect(r6.grandTotal.applicants).toBe(5811);
     expect(r6.grandTotal.rate).toBeCloseTo(1.04, 2);
   });
 
   it('令和5年度の合計はリセモム記事と一致する(定員5,675・出願者数6,079・倍率1.07)', () => {
-    const r5 = YAMAGUCHI_COMPETITION_RATE_HISTORY.years[2];
+    const r5 = YAMAGUCHI_COMPETITION_RATE_HISTORY.years[3];
     expect(r5.grandTotal.quota).toBe(5675);
     expect(r5.grandTotal.applicants).toBe(6079);
     expect(r5.grandTotal.rate).toBeCloseTo(1.07, 2);
   });
 
   it('令和4年度の合計はリセモム記事と一致する(定員5,650・出願者数6,121・倍率1.08)', () => {
-    const r4 = YAMAGUCHI_COMPETITION_RATE_HISTORY.years[3];
+    const r4 = YAMAGUCHI_COMPETITION_RATE_HISTORY.years[4];
     expect(r4.grandTotal.quota).toBe(5650);
     expect(r4.grandTotal.applicants).toBe(6121);
     expect(r4.grandTotal.rate).toBeCloseTo(1.08, 2);
   });
 
   it('令和3年度の合計はリセモム記事と一致する(定員5,577・出願者数6,143・倍率1.10)', () => {
-    const r3 = YAMAGUCHI_COMPETITION_RATE_HISTORY.years[4];
+    const r3 = YAMAGUCHI_COMPETITION_RATE_HISTORY.years[5];
     expect(r3.grandTotal.quota).toBe(5577);
     expect(r3.grandTotal.applicants).toBe(6143);
     expect(r3.grandTotal.rate).toBeCloseTo(1.1, 2);
   });
 
   it('令和2年度の合計は一次資料と一致する(定員5,761・出願者数6,601・倍率1.15)', () => {
-    const r2 = YAMAGUCHI_COMPETITION_RATE_HISTORY.years[5];
+    const r2 = YAMAGUCHI_COMPETITION_RATE_HISTORY.years[6];
     expect(r2.grandTotal.quota).toBe(5761);
     expect(r2.grandTotal.applicants).toBe(6601);
     expect(r2.grandTotal.rate).toBeCloseTo(1.15, 2);

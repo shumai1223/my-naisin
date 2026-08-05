@@ -21,6 +21,20 @@ const SOURCE = {
   fetchedAt: '2026-07-29',
 };
 
+/**
+ * 令和8年度（2026年度）: 既存Y-6 competition-rates/miyagi.tsが確定済みのofficialSubtotals「全日制合計」行(第一次募集スコープ・R7と同一)をそのまま転記（新規リサーチ不要・2026-08-05発見）。
+ */
+const REIWA_8: YearSnapshot = {
+  fiscalYear: '令和8年度（2026年度）',
+  sourceUrl: 'https://www.pref.miyagi.jp/documents/63612/0213_r8kouritukoukou_nyuugakusyasenbatsu_gakuryokukensa.pdf',
+  sourceTitle: '宮城県教育庁高校教育課 令和8年度宮城県公立高等学校入学者選抜に係る第一次募集出願状況について（学校・学科別出願状況）',
+  fetchedAt: '2026-08-05',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制合計（第一次募集）', quota: 13400, applicants: 12516, rate: 0.93 },
+};
+
 const REIWA_7: YearSnapshot = {
   fiscalYear: '令和7年度（2025年度）',
   ...SOURCE,
@@ -117,5 +131,5 @@ const REIWA_2: YearSnapshot = {
 
 export const MIYAGI_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'miyagi',
-  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3, REIWA_2],
+  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3, REIWA_2],
 };

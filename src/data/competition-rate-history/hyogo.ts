@@ -10,12 +10,17 @@
  * 5ページ目の「全日制127校 計」行（21150/20567/20567/0/0.97/1.02）で機械集計との
  * 完全一致も確認できる。この「全日制127校 計」の定員21150・志願者数20567・倍率0.97は
  * Y-6のhyogo.ts（令和8年度・学校粒度127校190レコード）が転記した公式グランドトータルと
- * 完全一致するため、令和7年度分（本ファイルに収録するのはこちら）もY-2/Y-6と同一の
- * 集計方法・スコープ（全日制のみ・定時制/通信制/多部制は対象外）であることを確認済み。
- * 令和8年度分は既存のsrc/data/competition-rates/hyogo.ts（学校粒度・より高精度）で
- * カバー済みのため本ファイルでは二重管理せず、令和7年度（前年度列）のみを収録する
- * （tokyo/kanagawa/chiba/fukuokaの各historyファイルと同じ設計方針）。ビジョン解析ではなく
- * PDFのテキスト抽出が明瞭に成功したため転記精度の懸念は無い。
+ * 完全一致するため、令和7年度分もY-2/Y-6と同一の集計方法・スコープ（全日制のみ・
+ * 定時制/通信制/多部制は対象外）であることを確認済み。ビジョン解析ではなくPDFのテキスト
+ * 抽出が明瞭に成功したため転記精度の懸念は無い。
+ *
+ * **2026-08-05訂正**: 「令和8年度分はY-6でカバー済みのため本ファイルでは二重管理せず
+ * 令和7年度のみ収録する」という当初の設計方針は撤回した。tokyo.ts自身のヘッダコメントが
+ * 明記するとおり、本ファイル（県/学科区分の多年度推移）とcompetition-rates（学校粒度の
+ * 今季倍率）は粒度が異なるため二重管理ではなく相互補完の関係であり、あえて令和8年度を
+ * 除外する理由が無いと判断（chiba/fukuokaも同日中にR8を追加済みで足並みを揃えた）。
+ * 令和8年度はcompetition-rates/hyogo.tsのofficialSubtotals「全日制127校 計」を
+ * そのまま転記した（新規リサーチ不要）。
  */
 import type { PrefectureRateHistoryFile, YearSnapshot } from '@/lib/competition-rate-history';
 
@@ -23,6 +28,20 @@ const SOURCE = {
   sourceUrl: 'https://www.kobe-c.ed.jp/_view/sir-ms/attach/get2/995/0',
   sourceTitle: '兵庫県教育委員会 令和8年度兵庫県公立高等学校入学者選抜出願状況（特別出願後確定数）',
   fetchedAt: '2026-07-29',
+};
+
+/**
+ * 令和8年度（2026年度）: 既存Y-6 competition-rates/hyogo.tsが機械集計しPDF記載のグランドトータルと完全一致確認済みの全日制127校計をそのまま転記（新規リサーチ不要・2026-08-05発見）。
+ */
+const REIWA_8: YearSnapshot = {
+  fiscalYear: '令和8年度（2026年度）',
+  sourceUrl: 'https://www2.hyogo-c.ed.jp/hpe/uploads/sites/10/2026/03/【確定】修正_03-R8_３月選抜志願者数.pdf',
+  sourceTitle: '兵庫県教育委員会 令和8年度兵庫県公立高等学校入学者選抜出願状況（特別出願後確定数）',
+  fetchedAt: '2026-08-05',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制127校 計', quota: 21150, schoolCount: 127, applicants: 20567, rate: 0.97 },
 };
 
 const REIWA_7: YearSnapshot = {
@@ -134,5 +153,5 @@ const REIWA_2: YearSnapshot = {
 
 export const HYOGO_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'hyogo',
-  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3, REIWA_2],
+  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3, REIWA_2],
 };

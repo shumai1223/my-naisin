@@ -13,6 +13,20 @@
  */
 import type { PrefectureRateHistoryFile, YearSnapshot } from '@/lib/competition-rate-history';
 
+/**
+ * 令和8年度（2026年度）: 既存Y-6 competition-rates/ishikawa.tsが確定済みのofficialSubtotals「全県合計」行をそのまま転記（新規リサーチ不要・2026-08-05発見）。
+ */
+const REIWA_8: YearSnapshot = {
+  fiscalYear: '令和8年度（2026年度）',
+  sourceUrl: 'https://www.pref.ishikawa.lg.jp/kisya/r7kyoui/documents/20260224.pdf',
+  sourceTitle: '石川県教育委員会 令和8年度石川県公立高等学校一般入学(全日制)の出願状況（2月24日）',
+  fetchedAt: '2026-08-05',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全県合計', quota: 6566, applicants: 6076, rate: 0.93 },
+};
+
 const REIWA_7: YearSnapshot = {
   fiscalYear: '令和7年度（2025年度）',
   sourceUrl: 'https://resemom.jp/article/2025/03/06/81145.html',
@@ -129,5 +143,5 @@ const REIWA_2: YearSnapshot = {
 
 export const ISHIKAWA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'ishikawa',
-  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3, REIWA_2],
+  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3, REIWA_2],
 };

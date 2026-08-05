@@ -12,6 +12,20 @@
  */
 import type { PrefectureRateHistoryFile, YearSnapshot } from '@/lib/competition-rate-history';
 
+/**
+ * 令和8年度（2026年度）: 既存Y-6 competition-rates/fukuoka.tsが確定済みのofficialSubtotals「県立全日制合計」行(R7と同じ県立のみスコープ)をそのまま転記（新規リサーチ不要・2026-08-05発見）。
+ */
+const REIWA_8: YearSnapshot = {
+  fiscalYear: '令和8年度（2026年度）',
+  sourceUrl: 'https://www.pref.fukuoka.lg.jp/site/kyouiku/nyushi8.html',
+  sourceTitle: '福岡県教育委員会 令和8年度公立高等学校一般入試志願状況（県立分PDF: uploaded/life/806459_62802786_misc.pdf）',
+  fetchedAt: '2026-08-05',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '県立全日制合計', quota: 22200, applicants: 22854, rate: 1.03 },
+};
+
 const REIWA_7: YearSnapshot = {
   fiscalYear: '令和7年度（2025年度）',
   sourceUrl: 'https://resemom.jp/article/2025/02/21/80929.html',
@@ -116,5 +130,5 @@ const REIWA_2: YearSnapshot = {
 
 export const FUKUOKA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'fukuoka',
-  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3, REIWA_2],
+  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3, REIWA_2],
 };

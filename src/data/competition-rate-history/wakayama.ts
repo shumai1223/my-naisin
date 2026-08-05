@@ -14,6 +14,20 @@
  */
 import type { PrefectureRateHistoryFile, YearSnapshot } from '@/lib/competition-rate-history';
 
+/**
+ * 令和8年度（2026年度）: 既存Y-6 competition-rates/wakayama.tsが確定済みのofficialSubtotals「合計」行をそのまま転記（新規リサーチ不要・2026-08-05発見）。
+ */
+const REIWA_8: YearSnapshot = {
+  fiscalYear: '令和8年度（2026年度）',
+  sourceUrl: 'https://www.pref.wakayama.lg.jp/prefg/500200/d00219915_d/fil/08honsyutugan.pdf',
+  sourceTitle: '和歌山県教育委員会 令和８年度和歌山県立高等学校入学者選抜実施状況（一般選抜・スポーツ推薦本出願状況）学校別・学科別状況(全日制)',
+  fetchedAt: '2026-08-05',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '県立 合計（全日制）', quota: 5761, applicants: 4891, rate: 0.85 },
+};
+
 const REIWA_7: YearSnapshot = {
   fiscalYear: '令和7年度（2025年度）',
   sourceUrl: 'https://www.pref.wakayama.lg.jp/prefg/500200/d00216812_d/fil/07honshutsugan.pdf',
@@ -131,5 +145,5 @@ const REIWA_2: YearSnapshot = {
 
 export const WAKAYAMA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'wakayama',
-  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3, REIWA_2],
+  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3, REIWA_2],
 };

@@ -6,8 +6,9 @@ import { TOYAMA_COMPETITION_RATE_HISTORY } from '../toyama';
  */
 describe('富山県 多年度アーカイブ（Λ-4・令和7/令和6/令和5/令和4/令和3/令和2の6年度分・grand-total-only）', () => {
   it('6年度分（令和7年度・令和6年度・令和5年度・令和4年度・令和3年度・令和2年度）を収録している', () => {
-    expect(TOYAMA_COMPETITION_RATE_HISTORY.years).toHaveLength(6);
+    expect(TOYAMA_COMPETITION_RATE_HISTORY.years).toHaveLength(7);
     expect(TOYAMA_COMPETITION_RATE_HISTORY.years.map((y) => y.fiscalYear)).toEqual([
+      '令和8年度（2026年度）',
       '令和7年度（2025年度）',
       '令和6年度（2024年度）',
       '令和5年度（2023年度）',
@@ -23,43 +24,50 @@ describe('富山県 多年度アーカイブ（Λ-4・令和7/令和6/令和5/�
     }
   });
 
+  it('令和8年度はY-6既存確定値と一致する(合計（34校82学科）・募集5,020・志願4,482・倍率0.89)', () => {
+    const r8 = TOYAMA_COMPETITION_RATE_HISTORY.years[0];
+    expect(r8.grandTotal.quota).toBe(5020);
+    expect(r8.grandTotal.applicants).toBe(4482);
+    expect(r8.grandTotal.rate).toBeCloseTo(0.89, 2);
+  });
+
   it('令和7年度の合計は一次資料と一致する(募集人数5,097・志願者数5,044・倍率0.99)', () => {
-    const r7 = TOYAMA_COMPETITION_RATE_HISTORY.years[0];
+    const r7 = TOYAMA_COMPETITION_RATE_HISTORY.years[1];
     expect(r7.grandTotal.quota).toBe(5097);
     expect(r7.grandTotal.applicants).toBe(5044);
     expect(r7.grandTotal.rate).toBeCloseTo(0.99, 2);
   });
 
   it('令和6年度の合計は一次資料と一致する(募集人数5,188・志願者数5,248・倍率1.01)', () => {
-    const r6 = TOYAMA_COMPETITION_RATE_HISTORY.years[1];
+    const r6 = TOYAMA_COMPETITION_RATE_HISTORY.years[2];
     expect(r6.grandTotal.quota).toBe(5188);
     expect(r6.grandTotal.applicants).toBe(5248);
     expect(r6.grandTotal.rate).toBeCloseTo(1.01, 2);
   });
 
   it('令和5年度の合計は一次資料と一致する(募集人数5,226・志願者数5,327・倍率1.02)', () => {
-    const r5 = TOYAMA_COMPETITION_RATE_HISTORY.years[2];
+    const r5 = TOYAMA_COMPETITION_RATE_HISTORY.years[3];
     expect(r5.grandTotal.quota).toBe(5226);
     expect(r5.grandTotal.applicants).toBe(5327);
     expect(r5.grandTotal.rate).toBeCloseTo(1.02, 2);
   });
 
   it('令和4年度の合計は一次資料と一致する(募集人数5,359・志願者数5,594・倍率1.04)', () => {
-    const r4 = TOYAMA_COMPETITION_RATE_HISTORY.years[3];
+    const r4 = TOYAMA_COMPETITION_RATE_HISTORY.years[4];
     expect(r4.grandTotal.quota).toBe(5359);
     expect(r4.grandTotal.applicants).toBe(5594);
     expect(r4.grandTotal.rate).toBeCloseTo(1.04, 2);
   });
 
   it('令和3年度の合計は一次資料と一致する(募集人数5,440・志願者数5,842・倍率1.07)', () => {
-    const r3 = TOYAMA_COMPETITION_RATE_HISTORY.years[4];
+    const r3 = TOYAMA_COMPETITION_RATE_HISTORY.years[5];
     expect(r3.grandTotal.quota).toBe(5440);
     expect(r3.grandTotal.applicants).toBe(5842);
     expect(r3.grandTotal.rate).toBeCloseTo(1.07, 2);
   });
 
   it('令和2年度の合計は一次資料と一致する(募集人数5,544・志願者数5,928・倍率1.07)', () => {
-    const r2 = TOYAMA_COMPETITION_RATE_HISTORY.years[5];
+    const r2 = TOYAMA_COMPETITION_RATE_HISTORY.years[6];
     expect(r2.grandTotal.quota).toBe(5544);
     expect(r2.grandTotal.applicants).toBe(5928);
     expect(r2.grandTotal.rate).toBeCloseTo(1.07, 2);

@@ -6,8 +6,9 @@ import { FUKUSHIMA_COMPETITION_RATE_HISTORY } from '../fukushima';
  */
 describe('福島県 多年度アーカイブ（Λ-4・令和7/令和6/令和5/令和4/令和3/令和2の6年度分・grand-total-only）', () => {
   it('6年度分（令和7年度・令和6年度・令和5年度・令和4年度・令和3年度・令和2年度）を収録している', () => {
-    expect(FUKUSHIMA_COMPETITION_RATE_HISTORY.years).toHaveLength(6);
+    expect(FUKUSHIMA_COMPETITION_RATE_HISTORY.years).toHaveLength(7);
     expect(FUKUSHIMA_COMPETITION_RATE_HISTORY.years.map((y) => y.fiscalYear)).toEqual([
+      '令和8年度（2026年度）',
       '令和7年度（2025年度）',
       '令和6年度（2024年度）',
       '令和5年度（2023年度）',
@@ -23,43 +24,50 @@ describe('福島県 多年度アーカイブ（Λ-4・令和7/令和6/令和5/�
     }
   });
 
+  it('令和8年度はY-6既存確定値と一致する(全日制 合計・募集1,686・志願106・倍率0.06)', () => {
+    const r8 = FUKUSHIMA_COMPETITION_RATE_HISTORY.years[0];
+    expect(r8.grandTotal.quota).toBe(1686);
+    expect(r8.grandTotal.applicants).toBe(106);
+    expect(r8.grandTotal.rate).toBeCloseTo(0.06, 2);
+  });
+
   it('令和7年度の全日制合計は一次資料と一致する(後期選抜募集定員1,603・志願175・倍率0.11)', () => {
-    const r7 = FUKUSHIMA_COMPETITION_RATE_HISTORY.years[0];
+    const r7 = FUKUSHIMA_COMPETITION_RATE_HISTORY.years[1];
     expect(r7.grandTotal.quota).toBe(1603);
     expect(r7.grandTotal.applicants).toBe(175);
     expect(r7.grandTotal.rate).toBeCloseTo(0.11, 2);
   });
 
   it('令和6年度の全日制合計は一次資料と一致する(後期選抜募集定員1,484・志願230・倍率0.15)', () => {
-    const r6 = FUKUSHIMA_COMPETITION_RATE_HISTORY.years[1];
+    const r6 = FUKUSHIMA_COMPETITION_RATE_HISTORY.years[2];
     expect(r6.grandTotal.quota).toBe(1484);
     expect(r6.grandTotal.applicants).toBe(230);
     expect(r6.grandTotal.rate).toBeCloseTo(0.15, 2);
   });
 
   it('令和5年度の全日制合計は一次資料と一致する(後期選抜募集定員1,675・志願203・倍率0.12)', () => {
-    const r5 = FUKUSHIMA_COMPETITION_RATE_HISTORY.years[2];
+    const r5 = FUKUSHIMA_COMPETITION_RATE_HISTORY.years[3];
     expect(r5.grandTotal.quota).toBe(1675);
     expect(r5.grandTotal.applicants).toBe(203);
     expect(r5.grandTotal.rate).toBeCloseTo(0.12, 2);
   });
 
   it('令和4年度の全日制合計は一次資料と一致する(後期選抜募集定員1,825・志願228・倍率0.12)', () => {
-    const r4 = FUKUSHIMA_COMPETITION_RATE_HISTORY.years[3];
+    const r4 = FUKUSHIMA_COMPETITION_RATE_HISTORY.years[4];
     expect(r4.grandTotal.quota).toBe(1825);
     expect(r4.grandTotal.applicants).toBe(228);
     expect(r4.grandTotal.rate).toBeCloseTo(0.12, 2);
   });
 
   it('令和3年度の全日制合計は一次資料と一致する(後期選抜募集定員1,882・志願244・倍率0.13)', () => {
-    const r3 = FUKUSHIMA_COMPETITION_RATE_HISTORY.years[4];
+    const r3 = FUKUSHIMA_COMPETITION_RATE_HISTORY.years[5];
     expect(r3.grandTotal.quota).toBe(1882);
     expect(r3.grandTotal.applicants).toBe(244);
     expect(r3.grandTotal.rate).toBeCloseTo(0.13, 2);
   });
 
   it('令和2年度の全日制合計は一次資料と一致する(後期選抜募集定員1,671・志願263・倍率0.16)', () => {
-    const r2 = FUKUSHIMA_COMPETITION_RATE_HISTORY.years[5];
+    const r2 = FUKUSHIMA_COMPETITION_RATE_HISTORY.years[6];
     expect(r2.grandTotal.quota).toBe(1671);
     expect(r2.grandTotal.applicants).toBe(263);
     expect(r2.grandTotal.rate).toBeCloseTo(0.16, 2);
