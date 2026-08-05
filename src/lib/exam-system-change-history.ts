@@ -142,6 +142,18 @@ export const PAST_SYSTEM_CHANGES: PastSystemChange[] = [
     sourceTitle: '秋田県家庭教師協会・KATEKYO学院「令和5年度から公立高校入試が変わります！」',
     confirmedDate: '2026-08-02',
   },
+  {
+    prefCode: 'gunma',
+    prefName: '群馬県',
+    effectiveYear: '令和6年度（2024年度）入試',
+    category: 'selection-structure',
+    headline: '「前期選抜」「後期選抜」の2回選抜を廃止し、1回の検査を「特色型」「総合型」で評価する新方式へ統合',
+    detail:
+      '群馬県教育委員会は令和6(2024)年度入試から、従来2回に分かれていた「前期選抜（3教科・2月上旬）」「後期選抜（5教科・3月上旬、前期不合格者が再挑戦可能）」という二段階方式を廃止し、2月中旬〜下旬の2日間で実施する単一の検査に一本化した。各高校が「特色型」（調査書・面接等を重視した多面的評価）または「総合型」（学力検査を重視した評価）のいずれかを採用して選抜方法を定め、志願理由書に代わり高校生活のビジョンや活動歴を記載する「エントリーシート」の提出が全受検者に求められるようになった。内申点そのものの計算方式（9教科×5段階＝135点満点、実技教科への傾斜配点なし）は変更前後で変わっておらず、選抜の回数・段階という制度の骨組みが変わった点が本変更の核心（千葉県の前期/後期一本化と同型のパターン）。',
+    sourceUrl: 'https://www.wasedazemi.com/column/gunma-touitsu-test/',
+    sourceTitle: '早稲田ゼミ「2024年度の高校入試から前期・後期選抜廃止。群馬県統一テストで本番力を身に付けよう」（群馬県教育委員会発表を引用）',
+    confirmedDate: '2026-08-05',
+  },
 ];
 
 export function getPastSystemChangesByPrefecture(prefCode: string): PastSystemChange[] {

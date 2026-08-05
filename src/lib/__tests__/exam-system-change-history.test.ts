@@ -89,6 +89,20 @@ describe('PAST_SYSTEM_CHANGES（Λ+5・過去の制度変更履歴DB）', () => 
     expect(akitaPref?.maxScore).toBe(195);
   });
 
+  test('群馬県の前期/後期選抜廃止エントリはprefectures.tsの現行maxScore(135点満点)と矛盾しない(選抜方式の変更であり内申点計算式は不変)', () => {
+    const gunma = PAST_SYSTEM_CHANGES.find((c) => c.prefCode === 'gunma');
+    expect(gunma).toBeDefined();
+    expect(gunma?.effectiveYear).toBe('令和6年度（2024年度）入試');
+    expect(gunma?.category).toBe('selection-structure');
+    expect(gunma?.detail).toContain('特色型');
+    expect(gunma?.detail).toContain('総合型');
+    expect(gunma?.detail).toContain('変わっておらず');
+
+    const gunmaPref = PREFECTURES.find((p) => p.code === 'gunma');
+    expect(gunmaPref?.maxScore).toBe(135);
+    expect(gunmaPref?.practicalMultiplier).toBe(1);
+  });
+
   test('categoryは定義済みの4種類のいずれかのみ(型崩れ防止)', () => {
     const validCategories = new Set(['scoring-input', 'selection-structure', 'weighting-formula', 'other']);
     for (const c of PAST_SYSTEM_CHANGES) {
