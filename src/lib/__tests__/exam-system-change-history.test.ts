@@ -103,6 +103,19 @@ describe('PAST_SYSTEM_CHANGES（Λ+5・過去の制度変更履歴DB）', () => 
     expect(gunmaPref?.practicalMultiplier).toBe(1);
   });
 
+  test('長崎県の3選抜制度再編エントリはprefectures.tsの現行maxScore(135点満点)と矛盾しない(選抜制度の再編であり内申点計算式は不変)', () => {
+    const nagasaki = PAST_SYSTEM_CHANGES.find((c) => c.prefCode === 'nagasaki');
+    expect(nagasaki).toBeDefined();
+    expect(nagasaki?.effectiveYear).toBe('令和7年度（2025年度）入試');
+    expect(nagasaki?.category).toBe('selection-structure');
+    expect(nagasaki?.detail).toContain('特別選抜');
+    expect(nagasaki?.detail).toContain('チャレンジ選抜');
+
+    const nagasakiPref = PREFECTURES.find((p) => p.code === 'nagasaki');
+    expect(nagasakiPref?.maxScore).toBe(135);
+    expect(nagasakiPref?.practicalMultiplier).toBe(1);
+  });
+
   test('categoryは定義済みの4種類のいずれかのみ(型崩れ防止)', () => {
     const validCategories = new Set(['scoring-input', 'selection-structure', 'weighting-formula', 'other']);
     for (const c of PAST_SYSTEM_CHANGES) {

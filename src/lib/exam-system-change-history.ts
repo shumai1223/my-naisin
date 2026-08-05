@@ -154,6 +154,18 @@ export const PAST_SYSTEM_CHANGES: PastSystemChange[] = [
     sourceTitle: '早稲田ゼミ「2024年度の高校入試から前期・後期選抜廃止。群馬県統一テストで本番力を身に付けよう」（群馬県教育委員会発表を引用）',
     confirmedDate: '2026-08-05',
   },
+  {
+    prefCode: 'nagasaki',
+    prefName: '長崎県',
+    effectiveYear: '令和7年度（2025年度）入試',
+    category: 'selection-structure',
+    headline: '「前期選抜」「後期選抜」を廃止し、「特別選抜」「一般選抜」「チャレンジ選抜」の3制度へ再編',
+    detail:
+      '長崎県教育委員会は令和7(2025)年度入試から、従来の「前期選抜」「後期選抜」を廃止し、①「特別選抜」（文化・スポーツ等の顕著な実績を持つ生徒対象・面接またはプレゼンテーション・募集割合は原則全募集定員の15%以内・1月31日合格発表）、②「一般選抜」（国語・社会・数学・理科・英語の5教科各100点・学校によって特定教科を1.5〜2倍に重視する傾斜配点あり・2月18-19日実施）、③「チャレンジ選抜」（主に離島・半島部の全日制高校対象・面接・3月12日実施）の3制度へ再編した。調査書（内申点）自体は「主体的に学習に取り組む態度」の比重を高める運用変更や記載項目の削減（卒業後の状況・海外での教育歴等6項目の削除）はあったが、評定計算の骨格（9教科×5段階×3学年＝135点満点・実技教科への傾斜配点なし）はprefectures.tsの現行値と一致しており、選抜制度の再編と傾斜配点はいずれも学力検査側の変更であって内申点の点数計算式自体を変えるものではない。',
+    sourceUrl: 'https://www.edu-netz.com/admission-information2025/nagasaki-info-r7',
+    sourceTitle: '対話式進学塾1対1ネッツ「長崎県の高校入試情報2025(令和7年度)」（長崎県教育委員会発表を引用）',
+    confirmedDate: '2026-08-05',
+  },
 ];
 
 export function getPastSystemChangesByPrefecture(prefCode: string): PastSystemChange[] {
