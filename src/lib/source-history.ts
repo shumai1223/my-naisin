@@ -224,6 +224,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '茨城県教育委員会 入学者選抜実施要項',
       note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16グループ)により選定・再検証。中1・中2・中3の評定を均等に合算する135点満点の内申点計算方式(実技傾斜なし)を、教育系情報サイト複数(進研ゼミ/塾ラボ/いばらき受験ナビ)で独立にクロスチェックし、変更が無いことを確認した。数値は既存記載(gradeMultipliers全学年1・practicalMultiplier 1・maxScore 135)と完全一致',
     },
+    {
+      date: '2026-08-05',
+      sourceUrl: 'https://axis-kobetsu.jp/outline/juni/exam-info/general-info/ibaraki',
+      sourceTitle: '個別指導Axis「茨城県公立高校入試概要」＋WebSearch要約の2独立ソース',
+      note: 'ZZ-9b再検証優先度キューにより選定・再検証(前回2026-07-26からdaysSinceVerified10日で最古グループに再浮上)。Λ-2 wave3候補で学校数上位(85校)の県のため慎重に確認。既存記載(全学年等倍・135点満点)をWebSearch要約とaxis-kobetsu.jpの2独立ソースでクロスチェックし変更なしと確認(両ソースとも共通選抜135点満点で一致・特別選抜は高校ごとに換算方式が異なる旨も既存理解と整合)。',
+    },
   ],
   okayama: [
     {
