@@ -151,14 +151,14 @@ export const post: BlogPost = {
         <td><strong>岩手県</strong></td>
         <td>中1〜中3</td>
         <td>5教科の1.5倍（中3は9倍）</td>
-        <td>440点</td>
+        <td>660点（実選抜換算440点）</td>
         <td>◎ 非常に有利</td>
       </tr>
       <tr>
         <td><strong>香川県</strong></td>
         <td>中1〜中3</td>
-        <td>中3：4倍（5教科は2倍）</td>
-        <td>220点</td>
+        <td>4倍（5教科は2倍・全学年共通）</td>
+        <td>390点（実選抜換算220点）</td>
         <td>○ 有利</td>
       </tr>
       <tr>
