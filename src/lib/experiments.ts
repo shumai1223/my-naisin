@@ -110,7 +110,7 @@ export const EXPERIMENTS: ExperimentDef[] = [
     // 実験2（H8）：hiyou面のコピーA/B。FP相談の訴求 vs ツール文脈（計算する）。送客先は同一（fp-soudan）。
     id: 'hiyou-copy-2026',
     hypothesis: 'hiyou面で「高校3年間でいくら必要か計算する」（ツール文脈）の方が、FP相談の直接訴求より cta_view→affiliate_click が伸びる。',
-    status: 'paused',
+    status: 'running',
     arms: [
       { id: 'control', label: '教育資金をFPに相談（現状の既定コピー）' },
       {
@@ -122,8 +122,8 @@ export const EXPERIMENTS: ExperimentDef[] = [
     ],
     primaryMetric: 'affiliate_click',
     placement: 'hiyou',
-    note: '送客先（fp-soudan）は固定。直接訴求 vs ツール文脈で「保護者の入り口」の効きを比較する。**🚨2026-08-01停止**: GA4に`experiment_id`カスタムディメンションが未登録のまま44日稼働し判定不能だったため停止(蓄積データは破棄)。GA4で`experiment_id`が実際にクエリできることを確認してから、startedAtをリセットして再開する(primaryMetricは元々affiliate_clickで妥当なため変更不要)。',
-    startedAt: '2026-06-17',
+    note: '送客先（fp-soudan）は固定。直接訴求 vs ツール文脈で「保護者の入り口」の効きを比較する。**🚨2026-08-01停止**: GA4に`experiment_id`カスタムディメンションが未登録のまま44日稼働し判定不能だったため停止(蓄積データは破棄)。**2026-08-05再開**: ga4_run_report(customEvent:experiment_id・直近7日)で他実験ID(line-cta-copy-2026等)が非"(not set)"の実データを返すことを確認できたため、startedAtをリセットして再開（primaryMetricは元々affiliate_clickで妥当なため変更なし）。',
+    startedAt: '2026-08-05',
   },
   {
     // 実験4（A6/K1）：名簿登録ボタンのコピーA/B。これが初の primaryMetric='lead_submit' 実験。

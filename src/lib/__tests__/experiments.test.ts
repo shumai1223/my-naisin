@@ -55,8 +55,8 @@ describe('experiments registry', () => {
     expect(copy?.arms.find((a) => a.id === 'reward')?.ctaPrefix).toBeTruthy();
   });
 
-  it('2026-08-01に停止した4実験のうちhiyou-copy-2026/lead-copy-2026は依然pausedで、停止理由がnoteに記録されている', () => {
-    const stillPausedIds = ['hiyou-copy-2026', 'lead-copy-2026'];
+  it('2026-08-01に停止した4実験のうちlead-copy-2026は依然pausedで、停止理由がnoteに記録されている', () => {
+    const stillPausedIds = ['lead-copy-2026'];
     for (const id of stillPausedIds) {
       const e = getExperiment(id);
       expect(e?.status).toBe('paused');
@@ -71,6 +71,13 @@ describe('experiments registry', () => {
       expect(e?.startedAt).toBe('2026-08-04');
       expect(e?.note).toContain('2026-08-04再開');
     }
+  });
+
+  it('hiyou-copy-2026はGA4 experiment_idの実データ確認後、2026-08-05にstartedAtリセットで再開済み', () => {
+    const e = getExperiment('hiyou-copy-2026');
+    expect(e?.status).toBe('running');
+    expect(e?.startedAt).toBe('2026-08-05');
+    expect(e?.note).toContain('2026-08-05再開');
   });
 
   // scaled-contentゲート（H-5）：A/B実験も「コピペで同じ物を2アーム分」という重複バグが起こり得る面。
@@ -112,7 +119,6 @@ describe('isExperimentRunning（2026-08-01追加・useExperimentがトラフィ�
   });
 
   it('status=pausedの実験はfalse(2026-08-01停止分のうち再開していないもの)', () => {
-    expect(isExperimentRunning('hiyou-copy-2026')).toBe(false);
     expect(isExperimentRunning('lead-copy-2026')).toBe(false);
   });
 
