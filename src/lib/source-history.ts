@@ -157,6 +157,14 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       note: '令和9(2027)年度入試から、学力検査の国語「話すこと・聞くこと」領域の出題方法が変更（従来の放送による聞き取り検査→話し合いの場面等を設定した文章による出題）。調査書関連の改善（総合的な学習の時間の記録・出欠の記録・行動の記録(第3学年)・総合所見の4項目削除）は令和8(2026)年度入試から既に実施済みで、確認時点(2026-07-24)ではもう「予告」段階ではなく施行済み。K値・内申点の算出方法自体（K値による傾斜配点方式）には変更ありと明記された記述は見当たらず、確認できたのは上記の学力検査出題方法・調査書記載事項の変更のみ',
     },
   ],
+  okinawa: [
+    {
+      date: '2026-08-05',
+      sourceUrl: 'https://jyuku-online.com/blog/jj-okinawa/',
+      sourceTitle: '沖縄県内申点計算方法のまとめ記事（学習塾ベンガル記事群の要約含む・2026年度入試版）',
+      note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。中1〜中3の3年間すべて対象・5教科(国数英理社)そのまま+実技4教科(音楽・美術・保健体育・技術家庭)を1.5倍・1学年55点満点×3年=165点満点の計算方式を、独立した教育系情報サイト2件(WebSearch要約+jyuku-online.comの詳細配点内訳)でクロスチェックし変更が無いことを確認した。数値は既存記載(targetGrades[1,2,3]・gradeMultipliers全学年1・coreMultiplier1・practicalMultiplier1.5・maxScore165)と完全一致',
+    },
+  ],
 };
 
 export function getSourceHistory(code: string): SourceSnapshot[] {
