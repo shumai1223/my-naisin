@@ -176,6 +176,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '兵庫県教育委員会 入学者選抜（令和8年度公立高等学校入学者選抜）',
       note: 'ZZ-9b再検証優先度キュー(最終確認日2026-04-22で最古グループ)により選定・再検証。中3のみが対象で、主要5教科の評定合計(25点満点)を4倍・実技4教科の評定合計(20点満点)を7.5倍し、調査書点250点満点(学力検査250点満点と合わせ総合500点満点)とする計算方式を、教育系情報サイト複数で独立にクロスチェックし、変更が無いことを確認した。数値・比率は既存記載(coreMultiplier 4・practicalMultiplier 7.5・maxScore 250)と完全一致',
     },
+    {
+      date: '2026-08-05',
+      sourceUrl: 'https://jyuku-online.com/blog/jj-hyogo/',
+      sourceTitle: '塾オンラインドットコム「兵庫県内申点」＋WebSearch要約の2独立ソース',
+      note: 'ZZ-9b再検証優先度キューにより選定・再検証(前回2026-07-24からdaysSinceVerified12日で最古グループに再浮上)。既にΛ-2 wave1で公開済み・実技7.5倍という特異な数値を持つ県のため慎重に確認。既存記載(coreMultiplier4・practicalMultiplier7.5・maxScore250)をWebSearch要約とjyuku-online.comの2独立ソースでクロスチェックし完全一致確認(両ソースとも5教科×4倍=100点+実技4教科×7.5倍=150点=250点満点で一致)。',
+    },
   ],
   osaka: [
     {
