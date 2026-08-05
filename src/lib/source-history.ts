@@ -55,6 +55,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '鹿児島県教育委員会 入学者選抜（令和8年度県立高等学校入学者選抜）',
       note: 'ZZ-9b再検証優先度キュー(最終確認日2026-04-22で最古グループ)により選定・再検証。白書2026・英語版で「全国最大の実技傾斜」として言及している最重要データのため特に慎重に確認。中3の評定のみを対象とし、5教科(国数英理社)を2倍(5段階×2倍×5教科=50点満点)・実技4教科(音楽・美術・保健体育・技術家庭)を20倍(5段階×20倍×4教科=400点満点)で合算する450点満点の内申点計算方式(学力検査も450点満点)を、教育系情報サイトで独立にクロスチェックし、変更が無いことを確認した。数値は既存記載(coreMultiplier 2・practicalMultiplier 20・maxScore 450)と完全一致',
     },
+    {
+      date: '2026-08-05',
+      sourceUrl: 'https://jyuku-online.com/blog/jj-kagoshima/',
+      sourceTitle: '塾オンラインドットコム「鹿児島県内申点」＋WebSearch要約の2独立ソース',
+      note: 'ZZ-9b再検証優先度キューにより選定・再検証(前回2026-07-24からdaysSinceVerified12日で最古グループに再浮上)。全国最大級の実技傾斜(実技4教科×20倍・全体の約9割)という特異な数値のため特に慎重に再確認。既存記載(coreMultiplier2・practicalMultiplier20・maxScore450)をWebSearch要約とjyuku-online.comの2独立ソースでクロスチェックし変更なしと完全一致確認(両ソースとも「5教科×2倍=50点+実技4教科×20倍=400点=450点満点」で一致)。',
+    },
   ],
   fukuoka: [
     {
