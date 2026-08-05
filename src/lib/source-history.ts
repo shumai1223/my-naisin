@@ -325,6 +325,14 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。既存記載(simplifiedCalc=true・簡易520点表示・note欄の実選抜真値260点=中1中2各65点(核5×1+実技4×2)+中3130点(核5×2+実技4×4))を、WebSearch要約とyume-kanal-oita.comの2独立ソースでクロスチェックし変更が無いことを確認した(両ソースとも「1・2年次各65点(主要25+実技40)・3年次130点(主要50+実技80)・合計260点」で完全一致)。ishikawaのような構造的な食い違いは無かった。',
     },
   ],
+  nagasaki: [
+    {
+      date: '2026-08-05',
+      sourceUrl: 'https://jyuke-labo.com/koukoujyukentaisaku/nagasaki/',
+      sourceTitle: '受験ラボ「長崎県高校入試情報」＋WebSearch要約（複数教育系サイトの記述比較）',
+      note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。既存記載(全学年等倍・実技倍率なし・9教科×5段階×3年=135点満点)を、WebSearch要約とjyuke-labo.comへの直接WebFetchの2独立ソースでクロスチェックし変更が無いことを確認した(「中1 45点・中2 45点・中3 45点=135点満点」で完全一致)。2025年度からの選抜制度改革(前期/後期→特別選抜/一般選抜/チャレンジ選抜の3区分へ再編・本セッション今朝のX-30調査で発見済み)は選抜方式の変更であり内申点算出方法自体には影響しないことを確認。',
+    },
+  ],
 };
 
 export function getSourceHistory(code: string): SourceSnapshot[] {
