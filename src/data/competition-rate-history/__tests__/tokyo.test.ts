@@ -11,9 +11,10 @@ const GRAND_TOTAL_ONLY_YEARS = TOKYO_COMPETITION_RATE_HISTORY.years.filter((y) =
  * grand-total-only（全日制合計のみ・二次情報源でクロスチェック済み）として別枠で検証する。
  */
 describe('東京都 多年度アーカイブ（Λ-4パイロット・令和7〜令和3の5年度分）', () => {
-  it('5年度分（令和7〜令和3年度）を収録している', () => {
-    expect(TOKYO_COMPETITION_RATE_HISTORY.years).toHaveLength(5);
+  it('6年度分（令和8〜令和3年度）を収録している', () => {
+    expect(TOKYO_COMPETITION_RATE_HISTORY.years).toHaveLength(6);
     expect(TOKYO_COMPETITION_RATE_HISTORY.years.map((y) => y.fiscalYear)).toEqual([
+      '令和8年度（2026年度）',
       '令和7年度（2025年度）',
       '令和6年度（2024年度）',
       '令和5年度（2023年度）',
@@ -22,7 +23,7 @@ describe('東京都 多年度アーカイブ（Λ-4パイロット・令和7〜�
     ]);
   });
 
-  describe('category-detail年度（令和7・令和6）', () => {
+  describe('category-detail年度（令和8・令和7・令和6）', () => {
     it.each(CATEGORY_DETAIL_YEARS)('$fiscalYear: 全区分の合計が公式「全日制合計」と完全一致する', (snapshot) => {
       const result = checkYearTotal(snapshot, snapshot.grandTotal, () => true);
       expect(result.matches).toBe(true);
@@ -30,47 +31,68 @@ describe('東京都 多年度アーカイブ（Λ-4パイロット・令和7〜�
       expect(result.actualApplicants).toBe(snapshot.grandTotal.applicants);
     });
 
+    it('令和8年度の全日制合計は一次PDF直読み値(募集30,439・応募38,148・倍率1.25)と一致する', () => {
+      const r8 = CATEGORY_DETAIL_YEARS[0];
+      expect(r8.grandTotal.quota).toBe(30439);
+      expect(r8.grandTotal.applicants).toBe(38148);
+      expect(r8.grandTotal.rate).toBeCloseTo(1.25, 2);
+    });
+
     it('令和7年度の全日制合計は報道発表値(募集30,078・応募38,718・倍率1.29)と一致する', () => {
-      const r7 = CATEGORY_DETAIL_YEARS[0];
+      const r7 = CATEGORY_DETAIL_YEARS[1];
       expect(r7.grandTotal.quota).toBe(30078);
       expect(r7.grandTotal.applicants).toBe(38718);
       expect(r7.grandTotal.rate).toBeCloseTo(1.29, 2);
     });
 
-    it.each(CATEGORY_DETAIL_YEARS)('$fiscalYear: 普通科5区分の合計が普通科合計相当(令和7=23,999/令和6=24,219)と一致する', (snapshot) => {
-      const isR7 = snapshot.fiscalYear.startsWith('令和7');
-      const generalLabels = new Set([
-        '普通科(コース、単位制、島しょ、海外帰国生徒対象以外)計',
-        '普通科(島しょ)計',
-        'コース制計',
-        '単位制計',
-        '海外帰国生徒対象計',
-      ]);
-      const result = checkYearTotal(
-        snapshot,
-        { label: '普通科合計', quota: isR7 ? 23999 : 24219, applicants: isR7 ? 32177 : 35204, rate: 0 },
-        (c) => generalLabels.has(c.label)
-      );
-      expect(result.matches).toBe(true);
-    });
+    it.each(CATEGORY_DETAIL_YEARS)(
+      '$fiscalYear: 普通科5区分の合計が普通科合計相当(令和8=24,304/令和7=23,999/令和6=24,219)と一致する',
+      (snapshot) => {
+        const generalLabels = new Set([
+          '普通科(コース、単位制、島しょ、海外帰国生徒対象以外)計',
+          '普通科(島しょ)計',
+          'コース制計',
+          '単位制計',
+          '海外帰国生徒対象計',
+        ]);
+        const expected = snapshot.fiscalYear.startsWith('令和8')
+          ? { quota: 24304, applicants: 31950 }
+          : snapshot.fiscalYear.startsWith('令和7')
+            ? { quota: 23999, applicants: 32177 }
+            : { quota: 24219, applicants: 35204 };
+        const result = checkYearTotal(
+          snapshot,
+          { label: '普通科合計', ...expected, rate: 0 },
+          (c) => generalLabels.has(c.label)
+        );
+        expect(result.matches).toBe(true);
+      }
+    );
 
-    it.each(CATEGORY_DETAIL_YEARS)('$fiscalYear: 専門学科16学科の合計が専門学科合計相当(令和7=4,453/令和6=4,498)と一致する', (snapshot) => {
-      const isR7 = snapshot.fiscalYear.startsWith('令和7');
-      const excluded = new Set([
-        '普通科(コース、単位制、島しょ、海外帰国生徒対象以外)計',
-        '普通科(島しょ)計',
-        'コース制計',
-        '単位制計',
-        '海外帰国生徒対象計',
-        '総合学科',
-      ]);
-      const result = checkYearTotal(
-        snapshot,
-        { label: '専門学科合計', quota: isR7 ? 4453 : 4498, applicants: isR7 ? 4505 : 4658, rate: 0 },
-        (c) => !excluded.has(c.label)
-      );
-      expect(result.matches).toBe(true);
-    });
+    it.each(CATEGORY_DETAIL_YEARS)(
+      '$fiscalYear: 専門学科16学科の合計が専門学科合計相当(令和8=4,509/令和7=4,453/令和6=4,498)と一致する',
+      (snapshot) => {
+        const excluded = new Set([
+          '普通科(コース、単位制、島しょ、海外帰国生徒対象以外)計',
+          '普通科(島しょ)計',
+          'コース制計',
+          '単位制計',
+          '海外帰国生徒対象計',
+          '総合学科',
+        ]);
+        const expected = snapshot.fiscalYear.startsWith('令和8')
+          ? { quota: 4509, applicants: 4214 }
+          : snapshot.fiscalYear.startsWith('令和7')
+            ? { quota: 4453, applicants: 4505 }
+            : { quota: 4498, applicants: 4658 };
+        const result = checkYearTotal(
+          snapshot,
+          { label: '専門学科合計', ...expected, rate: 0 },
+          (c) => !excluded.has(c.label)
+        );
+        expect(result.matches).toBe(true);
+      }
+    );
   });
 
   describe('grand-total-only年度（令和5・令和4・令和3）', () => {

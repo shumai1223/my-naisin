@@ -167,7 +167,7 @@ describe('getSchoolCategoryTrends', () => {
     expect(getSchoolCategoryTrends('tokyo', school, history)).toEqual([]);
   });
 
-  test('実データ(東京都日比谷・普通科)でΛ-4の多年度推移(令和4〜7年度)を正しく解決する', () => {
+  test('実データ(東京都日比谷・普通科)でΛ-4の多年度推移(令和4〜8年度)を正しく解決する', () => {
     const { schools } = buildSchoolPageDataForPrefecture(SCHOOLS_TOKYO.schools, TOKYO_COMPETITION_RATES.records);
     const hibiya = schools.find((s) => s.schoolName.includes('日比谷'));
     expect(hibiya).toBeDefined();
@@ -176,9 +176,10 @@ describe('getSchoolCategoryTrends', () => {
     expect(trends).toHaveLength(1);
     expect(trends[0].categoryLabel).toBe('普通科(コース、単位制、島しょ、海外帰国生徒対象以外)計');
     // 令和5・4年度分はgranularity='grand-total-only'(区分内訳を持たない)なのでpointsは
-    // category-detail年度(令和7・6)の2件のみになるのが正しい(欠測を捏造しない)。
-    expect(trends[0].points).toHaveLength(2);
-    expect(trends[0].points[0]).toEqual({ fiscalYear: '令和7年度（2025年度）', rate: 1.36 });
+    // category-detail年度(令和8・7・6)の3件のみになるのが正しい(欠測を捏造しない)。
+    expect(trends[0].points).toHaveLength(3);
+    expect(trends[0].points[0]).toEqual({ fiscalYear: '令和8年度（2026年度）', rate: 1.33 });
+    expect(trends[0].points[1]).toEqual({ fiscalYear: '令和7年度（2025年度）', rate: 1.36 });
   });
 
   test('複数学科を持つ学校は解決できたカテゴリを重複排除してすべて返す', () => {

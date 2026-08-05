@@ -28,6 +28,51 @@ const SOURCE = {
   fetchedAt: '2026-07-29',
 };
 
+/**
+ * 令和8年度総括表PDF（https://www.kyoiku.metro.tokyo.lg.jp/documents/d/kyoiku/01-v2・
+ * 教委公式サイト「過去の応募状況（過去5年分）」ハブページ経由でWebSearchにより発見・Read toolで
+ * 直読み・2026-08-05）。区分ラベルは令和7年度版と完全に同一（新粒度への変更なし）。
+ * 校数は「[　]併設校を含めた延学校数／内側の数値=主たる学科としての校数」の2値が併記される行が
+ * あるため、主たる学科としての校数（内側の数値）を採用する方針とした——これは普通科合計(119)・
+ * 専門学科合計(38)・総合学科(10)・全日制合計(167)いずれも各区分の主たる学科校数の単純合計と
+ * 完全一致することで機械的に検証済み（延学校数を使うと不一致になる）。
+ * quota/applicants/rateは3階層（各区分→普通科合計/専門学科合計→全日制合計）すべてで
+ * sumCategories相当の突合が完全一致することを確認済み。
+ */
+const REIWA_8: YearSnapshot = {
+  fiscalYear: '令和8年度（2026年度）',
+  sourceUrl: 'https://www.kyoiku.metro.tokyo.lg.jp/documents/d/kyoiku/01-v2',
+  sourceTitle: '東京都教育委員会 令和8年度東京都立高等学校入学者選抜応募状況総括表（全日制）',
+  fetchedAt: '2026-08-05',
+  origin: 'current-year-column',
+  granularity: 'category-detail',
+  categories: [
+    { label: '普通科(コース、単位制、島しょ、海外帰国生徒対象以外)計', schoolCount: 101, quota: 21432, applicants: 28556, rate: 1.33 },
+    { label: '普通科(島しょ)計', schoolCount: 6, quota: 310, applicants: 100, rate: 0.32 },
+    { label: 'コース制計', schoolCount: 0, quota: 224, applicants: 279, rate: 1.25 },
+    { label: '単位制計', schoolCount: 12, quota: 2276, applicants: 2948, rate: 1.30 },
+    { label: '海外帰国生徒対象計', schoolCount: 0, quota: 62, applicants: 67, rate: 1.08 },
+    { label: '商業科', schoolCount: 7, quota: 798, applicants: 717, rate: 0.90 },
+    { label: 'ビジネスコミュニケーション科', schoolCount: 2, quota: 231, applicants: 227, rate: 0.98 },
+    { label: '工業科(単位制以外)', schoolCount: 15, quota: 1594, applicants: 1147, rate: 0.72 },
+    { label: '工業科(単位制)', schoolCount: 1, quota: 96, applicants: 72, rate: 0.75 },
+    { label: '科学技術科', schoolCount: 2, quota: 254, applicants: 287, rate: 1.13 },
+    { label: '農業科', schoolCount: 5, quota: 413, applicants: 450, rate: 1.09 },
+    { label: '水産科', schoolCount: 1, quota: 42, applicants: 57, rate: 1.36 },
+    { label: '家庭科(単位制以外)', schoolCount: 1, quota: 222, applicants: 222, rate: 1.00 },
+    { label: '家庭科(単位制)', schoolCount: 0, quota: 49, applicants: 54, rate: 1.10 },
+    { label: '福祉科', schoolCount: 0, quota: 54, applicants: 34, rate: 0.63 },
+    { label: '理数科', schoolCount: 0, quota: 71, applicants: 210, rate: 2.96 },
+    { label: '芸術科', schoolCount: 1, quota: 112, applicants: 182, rate: 1.63 },
+    { label: '体育科', schoolCount: 0, quota: 56, applicants: 62, rate: 1.11 },
+    { label: '国際科', schoolCount: 1, quota: 138, applicants: 250, rate: 1.81 },
+    { label: '併合科', schoolCount: 0, quota: 105, applicants: 16, rate: 0.15 },
+    { label: '産業科', schoolCount: 2, quota: 274, applicants: 227, rate: 0.83 },
+    { label: '総合学科', schoolCount: 10, quota: 1626, applicants: 1984, rate: 1.22 },
+  ],
+  grandTotal: { label: '全日制合計', schoolCount: 167, quota: 30439, applicants: 38148, rate: 1.25 },
+};
+
 const REIWA_7: YearSnapshot = {
   fiscalYear: '令和7年度（2025年度）',
   ...SOURCE,
@@ -144,5 +189,5 @@ const REIWA_3: YearSnapshot = {
 
 export const TOKYO_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'tokyo',
-  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
+  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
 };
