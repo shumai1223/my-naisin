@@ -269,6 +269,14 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。既存記載(全学年等倍・実技倍率なし・9教科×5段階×3年=135点満点)を、WebSearch要約とjyuku-online.comの2独立ソースでクロスチェックし変更が無いことを確認した。2026年度からの推薦入学廃止(校長推薦必須→自己出願の特色選抜へ・本セッション今朝のX-30調査で発見済み)は選抜方式(出願資格)の変更であり、内申点算出方法自体(135点満点の計算式)には影響しないことを両ソースで確認できた。',
     },
   ],
+  yamanashi: [
+    {
+      date: '2026-08-05',
+      sourceUrl: 'https://axis-kobetsu.jp/outline/juni/exam-info/general-info/yamanashi/',
+      sourceTitle: '個別指導Axis「山梨県の公立高校入試概要」＋WebSearch要約（複数教育系サイトの記述比較）',
+      note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。既存記載(5教科×2倍+実技4教科×3倍・全学年等倍・maxScore330・note欄「特別活動等で+30点」=合計360)を、WebSearch要約とaxis-kobetsu.jpの2独立ソースが揃って「360点満点(特別活動30点を含む)」と報告し完全一致で確認できた。**一方でjyuke-labo.comが「中1中2各45点+中3のみ×3倍で135点=225点満点+特別活動30点」という既存とは全く異なる構造(gifu/kumamoto等と同型の学年3のみ傾斜パターン)を返した**が、この主張の合計(225+30=255)は他2ソースが一致する360と算術的に矛盾するため、jyuke-labo.com側の誤り(他県との混同の可能性)と判断し不採用。既存の330(内訳は2倍/3倍を3学年均等適用)+30=360という構造を維持。',
+    },
+  ],
 };
 
 export function getSourceHistory(code: string): SourceSnapshot[] {
