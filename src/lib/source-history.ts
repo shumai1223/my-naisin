@@ -381,6 +381,14 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。既存記載(全学年等倍・実技4教科×2倍・195点満点)を、WebSearch要約とjyuku-online.comの2独立ソースでクロスチェックし変更が無いことを確認した。WebSearch要約は既存と同じ「(5科×1)+(4科×2)=各学年65点」の構造を報告。jyuku-online.comは「9教科45点+実技4教科20点=65点」という異なる分解方法で説明していたが、算術的に25+40=65と45+20=65は同じ「実技のみ実質2倍加重」構造を指しており、最終数値(195点)自体は完全一致するため実質的な矛盾ではないと判断した。',
     },
   ],
+  wakayama: [
+    {
+      date: '2026-08-05',
+      sourceUrl: 'https://jyuke-labo.com/koukoujyukentaisaku/wakayama/',
+      sourceTitle: '受験ラボ「和歌山県高校入試情報」＋axis-kobetsu.jpの2直接WebFetch',
+      note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。**akitaに続き2件目のWebSearch要約ハルシネーション事例**: WebSearch要約が「2026年度から中1中2は態度評価3段階27点満点方式へ変更・合計144点満点」という既存記載(180点満点)と異なる記述をしたが、**同じ要約の中で直後に「内申点は180点で評価」と自己矛盾**していた。akitaの教訓に従いaxis-kobetsu.jpとjyuke-labo.comへ個別に直接WebFetchしたところ、**両方とも「144点」「態度評価」への言及が一切無く、既存どおり中1・中2各45点+中3×2倍90点=180点満点を明確に否定的に確認**した(jyuke-labo.comは明示的に「144点という数値は記載されていません」と回答)。既存の180点満点を維持。教訓の強化: WebSearchの要約が「態度評価3段階27点満点」という特定のフレーズパターンで既存の点数と異なる主張をした場合、それ自体がハルシネーションの強いシグナルである可能性が高い(akita・wakayamaで2回連続再現)。',
+    },
+  ],
 };
 
 export function getSourceHistory(code: string): SourceSnapshot[] {
