@@ -245,6 +245,14 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。既存記載(5段階換算195点満点・practicalMultiplier2・note欄に「中3の実際の評定は10段階評価で260点満点」)を、WebSearch要約とjyuke-labo.comの2独立ソースでクロスチェックし変更が無いことを確認した。jyuke-labo.comは中1中2各65点(5段階)+中3130点(10段階)=真の260点満点という同じ構造を独立に報告しており、既存noteの「10段階評価で260点満点」という記述と整合。',
     },
   ],
+  saga: [
+    {
+      date: '2026-08-05',
+      sourceUrl: 'https://www.edu-netz.com/admission-information2026/saga-info-r8',
+      sourceTitle: '対話式進学塾1対1ネッツ「佐賀県の高校入試情報2026(令和8年度)」＋WebSearch要約',
+      note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。既存記載(全学年等倍・実技倍率なし・9教科×5段階×3年=135点満点)を、WebSearch要約とedu-netz.comの2独立ソースでクロスチェックし変更が無いことを確認した(「中1 45点・中2 45点・中3 45点=135点満点」で完全一致)。2028年度からの選抜制度改革(特別選抜廃止+一般選抜一本化・本セッション今朝のX-30調査で発見済み)は未施行かつ選抜方式のみの変更であり、内申点算出方法自体には影響しないことを確認。',
+    },
+  ],
 };
 
 export function getSourceHistory(code: string): SourceSnapshot[] {
