@@ -64,7 +64,27 @@ const REIWA_6: YearSnapshot = {
   grandTotal: { label: '合計', quota: 31417, applicants: 59007, rate: 1.88 },
 };
 
+/**
+ * 令和5年度（2023年度）: 教委公式ページ（r5shiganjokyo.html）から一次PDF
+ * （447859.pdf・「令和5年度愛知県公立高等学校入学者選抜（全日制課程）における一般選抜等の
+ * 志願変更後の志願者数（最終）について」・全11頁・R7/R8と同一シリーズの資料）をRead toolで
+ * 直読み。1頁目「合計」行を直接転記: 一般選抜等募集人員(quota)=32,002・志願者総数(applicants)
+ * =59,129・最終倍率(rate)=1.85（59129/32002=1.8477…≈1.85で印字済み値と整合）。学校数は
+ * 「2 実施校」に「一般選抜156校1校舎（県立143校1校舎、名古屋市立13校）」と明記されR8と同数。
+ */
+const REIWA_5: YearSnapshot = {
+  fiscalYear: '令和5年度（2023年度）',
+  sourceUrl: 'https://www.pref.aichi.jp/uploaded/attachment/447859.pdf',
+  sourceTitle:
+    '愛知県教育委員会高等学校教育課 令和5年度愛知県公立高等学校入学者選抜（全日制課程）における一般選抜等の志願変更後の志願者数（最終）について',
+  fetchedAt: '2026-08-05',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '合計', schoolCount: 156, quota: 32002, applicants: 59129, rate: 1.85 },
+};
+
 export const AICHI_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'aichi',
-  years: [REIWA_8, REIWA_7, REIWA_6],
+  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5],
 };
