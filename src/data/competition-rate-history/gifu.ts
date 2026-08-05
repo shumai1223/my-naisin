@@ -12,6 +12,23 @@
  */
 import type { PrefectureRateHistoryFile, YearSnapshot } from '@/lib/competition-rate-history';
 
+/**
+ * 令和8年度（2026年度）: 同一資料シリーズの令和8年度版総括表（2026年2月17日正午締切時・
+ * attachment/485858.pdf）をRead toolで直読み。「全日制の課程の出願者数には、連携型選抜の
+ * 出願者数を含む。」という既存年度と同一のスコープ注記を確認したうえで「計」行（県立+市立
+ * 総計・定員12,925・出願者数12,009・倍率0.93）を転記（12009/12925=0.9291…≈0.93で整合）。
+ */
+const REIWA_8: YearSnapshot = {
+  fiscalYear: '令和8年度（2026年度）',
+  sourceUrl: 'https://www.pref.gifu.lg.jp/uploaded/attachment/485858.pdf',
+  sourceTitle: '岐阜県教育委員会高校教育課 令和8年度岐阜県公立高等学校第一次・連携型選抜、通信制前期選抜 変更後出願者数総括表',
+  fetchedAt: '2026-08-05',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制の課程 総計（第一次選抜＋連携型選抜込み）', quota: 12925, applicants: 12009, rate: 0.93 },
+};
+
 const REIWA_7: YearSnapshot = {
   fiscalYear: '令和7年度（2025年度）',
   sourceUrl: 'https://www.pref.gifu.lg.jp/uploaded/attachment/433066.pdf',
@@ -116,5 +133,5 @@ const REIWA_2: YearSnapshot = {
 
 export const GIFU_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'gifu',
-  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3, REIWA_2],
+  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3, REIWA_2],
 };
