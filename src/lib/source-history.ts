@@ -210,6 +210,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '愛媛県教育委員会 県立学校入学者選抜等関連情報',
       note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16グループ)により選定・再検証。中1・中2・中3の評定を均等に合算する135点満点の内申点計算方式(実技傾斜なし・学力検査500点満点)を、教育系情報サイト複数(アルファ家庭教師/塾選/愛大研等)で独立にクロスチェックし、変更が無いことを確認した。数値は既存記載(gradeMultipliers全学年1・practicalMultiplier 1・maxScore 135)と完全一致',
     },
+    {
+      date: '2026-08-05',
+      sourceUrl: 'https://jyuku-online.com/blog/jj-ehime/',
+      sourceTitle: '塾オンラインドットコム「愛媛県内申点」＋WebSearch要約の2独立ソース',
+      note: 'ZZ-9b再検証優先度キューにより選定・再検証(前回2026-07-26からdaysSinceVerified10日で最古グループに再浮上)。既存記載(全学年等倍・135点満点)をWebSearch要約とjyuku-online.comの2独立ソースでクロスチェックし変更なしと確認(両ソースとも各学年45点満点×3年=135点満点で一致)。',
+    },
   ],
   ibaraki: [
     {
