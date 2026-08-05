@@ -43,6 +43,22 @@
  */
 import type { PrefectureRateHistoryFile, YearSnapshot } from '@/lib/competition-rate-history';
 
+/**
+ * 令和8年度（2026年度）: 既存Y-6 competition-rates/aomori.tsが一次ソースPDF(R8senbatsu_syutsugan-
+ * zennitisei.pdf)から確定済みのofficialSubtotals「全日制の課程合計」行(募集人員6,980・出願者数
+ * 6,436・倍率0.92)をそのまま転記（新規リサーチ不要・2026-08-05発見）。
+ */
+const REIWA_8: YearSnapshot = {
+  fiscalYear: '令和8年度（2026年度）',
+  sourceUrl: 'https://www.pref.aomori.lg.jp/soshiki/kyoiku/e-gakyo/files/R8senbatsu_syutsugan-zennitisei.pdf',
+  sourceTitle: '青森県教育委員会 令和8年度青森県立高等学校入学者選抜出願状況等（全日制の課程）',
+  fetchedAt: '2026-08-05',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制の課程合計', quota: 6980, applicants: 6436, rate: 0.92 },
+};
+
 const REIWA_7: YearSnapshot = {
   fiscalYear: '令和7年度（2025年度）',
   sourceUrl: 'https://www.pref.aomori.lg.jp/soshiki/kyoiku/e-gakyo/files/R7senbatsu_syutsugan-zennitisei.pdf',
@@ -100,5 +116,5 @@ const REIWA_3: YearSnapshot = {
 
 export const AOMORI_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'aomori',
-  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
+  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
 };

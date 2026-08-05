@@ -14,6 +14,23 @@
  */
 import type { PrefectureRateHistoryFile, YearSnapshot } from '@/lib/competition-rate-history';
 
+/**
+ * 令和8年度（2026年度）: 既存Y-6 competition-rates/akita.tsが一次ソースPDF(archive_0000093860_00)
+ * から確定済みのofficialSubtotals「県合計」行(募集定員6,268・総志願者5,237・志願倍率0.84)を
+ * そのまま転記（新規リサーチ不要・Y-6側で機械集計と完全一致済み・2026-08-05発見）。
+ */
+const REIWA_8: YearSnapshot = {
+  fiscalYear: '令和8年度（2026年度）',
+  sourceUrl:
+    'https://www.pref.akita.lg.jp/uploads/public/archive_0000093860_00/20260212_%EF%BC%91%E6%AC%A1%E5%8B%9F%E9%9B%86%E3%80%80%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B0%EF%BC%88%E5%BF%97%E9%A1%98%E5%85%88%E5%A4%89%E6%9B%B4%E5%BE%8C%EF%BC%89%EF%BC%88%E5%85%AC%E2%80%95%EF%BC%92%EF%BC%89.pdf',
+  sourceTitle: '秋田県教育委員会 令和8年度秋田県公立高等学校入学者選抜１次募集 志願者数（志願先変更後）',
+  fetchedAt: '2026-08-05',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制の課程 県合計', quota: 6268, applicants: 5237, rate: 0.84 },
+};
+
 const REIWA_7: YearSnapshot = {
   fiscalYear: '令和7年度（2025年度）',
   sourceUrl:
@@ -107,5 +124,5 @@ const REIWA_3: YearSnapshot = {
 
 export const AKITA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'akita',
-  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
+  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
 };
