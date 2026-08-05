@@ -17,6 +17,9 @@ import { SCHOOL_NAME_ALIASES_BY_PREFECTURE } from '@/lib/school-name-aliases';
  *   (SERP実測2026-08-02で「地方中規模校=学校公式サイト/Wikipediaが上位に入り込み倍率の実数値を
  *   出しているページが競合に無い=空白地帯」と判定された県を優先。特にtottori/yamanashiは
  *   上位5件のどのページにも倍率の実数値が無い競合ゼロ状態と実測済み)。
+ * wave3(2026-08-06): fukui/nara/kagawa/tokushima/wakayama
+ *   (wave2に続き学校数最小クラスの地方県を優先・school-page-wave-readiness.tsで
+ *   残り36県全て即座解禁可能=0県未準備と再確認済み。2〜3日おきの分割公開ペースを維持)。
  */
 export const INDEXED_SCHOOL_PAGE_PREFECTURE_CODES = [
   'tokyo',
@@ -29,6 +32,11 @@ export const INDEXED_SCHOOL_PAGE_PREFECTURE_CODES = [
   'saga',
   'yamanashi',
   'shimane',
+  'fukui',
+  'nara',
+  'kagawa',
+  'tokushima',
+  'wakayama',
 ];
 
 export function getPrefectureSchoolPageData(code: string): { schools: SchoolPageData[] } | null {
