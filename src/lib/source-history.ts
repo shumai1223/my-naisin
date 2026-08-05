@@ -165,6 +165,14 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。中1〜中3の3年間すべて対象・5教科(国数英理社)そのまま+実技4教科(音楽・美術・保健体育・技術家庭)を1.5倍・1学年55点満点×3年=165点満点の計算方式を、独立した教育系情報サイト2件(WebSearch要約+jyuku-online.comの詳細配点内訳)でクロスチェックし変更が無いことを確認した。数値は既存記載(targetGrades[1,2,3]・gradeMultipliers全学年1・coreMultiplier1・practicalMultiplier1.5・maxScore165)と完全一致',
     },
   ],
+  iwate: [
+    {
+      date: '2026-08-05',
+      sourceUrl: 'https://jyuke-labo.com/koukoujyukentaisaku/iwate/',
+      sourceTitle: '受験ラボ「岩手県高校入試情報」＋WebSearch要約（複数教育系サイトの記述比較）',
+      note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。**計算に使う中核数値(targetGrades[1,2,3]・gradeMultipliers{1,2,3}・coreMultiplier2・practicalMultiplier3・maxScore660)自体は複数ソースで660点満点という総量が一致し変更なしと確認できた**。一方、noteフィールドに記載の「実際の選抜では440点満点に換算される場合がある」という圧縮後の点数については、WebSearch要約が「2025年度入試より500点に圧縮」と述べる一方、jyuke-labo.comは「270点×2/3で440点満点」という既存noteと異なる計算過程(9教科合計×学年比のみ・実技倍率の記述なし)を示しており、2次情報源間で440/500が食い違い、算出根拠の記述も相互に整合しない。このnoteフィールドは実際の計算エンジン(coreMultiplier等)には使われない補足情報であり、着手前の状態から変更していないため実害はないが、圧縮後点数の真値は今回のセッションでは確定できなかった。捏造ゼロ原則により440→500等への書き換えは行わず現状維持のまま、次に手が空いた際に岩手県教育委員会の地区別実施概要PDF(盛岡地区等)を直接確認することを推奨する。',
+    },
+  ],
 };
 
 export function getSourceHistory(code: string): SourceSnapshot[] {
