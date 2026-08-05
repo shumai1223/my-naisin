@@ -12,6 +12,26 @@
  */
 import type { PrefectureRateHistoryFile, YearSnapshot } from '@/lib/competition-rate-history';
 
+/**
+ * 令和8年度（2026年度）: 教委公式ページ(?p=7836)経由でPDF（令和8年3月4日発表・全4頁）を
+ * 発見しRead toolで直読み。1頁目「1 出願状況」表・3頁目総括表・4頁目末尾「全日制計」行の
+ * 3箇所全てで完全一致確認: 中期選抜募集人員(quota)=6,048・志願者数(applicants)=5,160
+ * （第1志望第1順位人数）・倍率(rate)=0.85（印字済み値・5160/6048=0.8531…≈0.85で整合）。
+ * R3-R7と同じ列定義。定時制課程はR3-R7と同じ理由でスコープ外。これでkyotoは6年連続
+ * （R3〜R8）に到達。
+ */
+const REIWA_8: YearSnapshot = {
+  fiscalYear: '令和8年度（2026年度）',
+  sourceUrl:
+    'https://www.kyoto-be.ne.jp/koukyou/cms/wp-content/uploads/2025/05/%E4%BB%A4%E5%92%8C%EF%BC%98%E5%B9%B4%E5%BA%A6%E4%B8%AD%E6%9C%9F%E9%81%B8%E6%8A%9C-%E5%BA%83%E5%A0%B1%E8%B3%87%E6%96%99%EF%BC%88%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B0%EF%BC%89.pdf',
+  sourceTitle: '京都府教育委員会 令和8年度京都府公立高等学校入学者選抜 中期選抜志願者数等一覧表',
+  fetchedAt: '2026-08-05',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制計', quota: 6048, applicants: 5160, rate: 0.85 },
+};
+
 const REIWA_7: YearSnapshot = {
   fiscalYear: '令和7年度（2025年度）',
   sourceUrl:
@@ -107,5 +127,5 @@ const REIWA_3: YearSnapshot = {
 
 export const KYOTO_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'kyoto',
-  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
+  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
 };
