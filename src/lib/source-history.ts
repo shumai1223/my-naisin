@@ -373,6 +373,14 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。既存記載(targetGrades[2,3]・中1は対象外・gradeMultipliers{1:0,2:1,3:2}・maxScore135・note欄「特別活動等の15点が加算され150点満点となる場合がある」)を、WebSearch要約とbibroom.comの2独立ソースでクロスチェックし変更が無いことを確認した(両ソースとも「中1対象外・中2は45点・中3は2倍で90点=学習の記録135点満点+特別活動15点=合計150点満点」を報告・既存記載と完全一致)。',
     },
   ],
+  fukushima: [
+    {
+      date: '2026-08-05',
+      sourceUrl: 'https://jyuku-online.com/blog/jj-fukushima/',
+      sourceTitle: '塾オンラインドットコム「福島県の内申点の計算方法」＋WebSearch要約の2独立ソース',
+      note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。既存記載(全学年等倍・実技4教科×2倍・195点満点)を、WebSearch要約とjyuku-online.comの2独立ソースでクロスチェックし変更が無いことを確認した。WebSearch要約は既存と同じ「(5科×1)+(4科×2)=各学年65点」の構造を報告。jyuku-online.comは「9教科45点+実技4教科20点=65点」という異なる分解方法で説明していたが、算術的に25+40=65と45+20=65は同じ「実技のみ実質2倍加重」構造を指しており、最終数値(195点)自体は完全一致するため実質的な矛盾ではないと判断した。',
+    },
+  ],
 };
 
 export function getSourceHistory(code: string): SourceSnapshot[] {
