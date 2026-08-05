@@ -317,6 +317,14 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       note: '**🚨ZZ-9bで実データの誤りを発見・修正した唯一のケース（他は全て変更なし）**。既存記載(全学年等倍・135点満点)を確認しようとWebSearch要約を見たところ「中1中2各45点+中3のみ×2倍で90点=180点満点」という既存とは異なる構造が返り、akitaの教訓に従いjyuku-online.com/bibroom.com/axis-kobetsu.jp/deskstyle.infoの4件を個別に直接WebFetchで裏取りしたところ**全て180点満点(中3×2倍)を独立に確認**し、既存の135点(均等)は誤りである可能性が極めて高いと判断した。決め手は社内の別ファイル`src/lib/total-score/explainers.ts`のishikawaエントリ(相関図方式の総合得点エンジン)が、prefectures.tsとは独立に「中1・中2各45点、中3＝×2＝90点、合計180点」という**一致する値を既に保持していた**こと(caveatに「令和7年度版・令和8年度版の公表後に配点を要再確認」と記載があり未反映のまま放置されていた形跡)。5件の外部ソース全てと社内の独立ファイルが一致して180点を支持し、135点を支持する情報源はprefectures.tsの既存値とそこから機械的に生成された`naishin-omomi-content.ts`の記述(独立検証ではなく単なる転記)のみだったため、**prefectures.ts(gradeMultipliers{1:1,2:1,3:2}・maxScore180に修正)・naishin-omomi-content.ts(ishikawaエントリ内の「均等」「135点」記述を複数箇所修正)・naishin-target-grades-by-prefecture.ts(1箇所)・naishin-47-prefectures-comparison.ts(1箇所)・total-score/explainers.tsのcaveat/source(令和8年度確認済みに更新)**の計5ファイルを修正した。tsc/jestフル242suites/3705tests全green。**この修正は他の「変更なし確認」と性質が異なる実データ訂正のため、loop-question-noteにも念のため記録し👤の目視確認を仰ぐ。**',
     },
   ],
+  oita: [
+    {
+      date: '2026-08-05',
+      sourceUrl: 'https://yume-kanal-oita.com/naishinkeisan/',
+      sourceTitle: '大分市夢進学塾kanaL「大分県公立高校入試の内申点の計算」＋jyuke-labo.com(WebSearch経由)の2独立ソース',
+      note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。既存記載(simplifiedCalc=true・簡易520点表示・note欄の実選抜真値260点=中1中2各65点(核5×1+実技4×2)+中3130点(核5×2+実技4×4))を、WebSearch要約とyume-kanal-oita.comの2独立ソースでクロスチェックし変更が無いことを確認した(両ソースとも「1・2年次各65点(主要25+実技40)・3年次130点(主要50+実技80)・合計260点」で完全一致)。ishikawaのような構造的な食い違いは無かった。',
+    },
+  ],
 };
 
 export function getSourceHistory(code: string): SourceSnapshot[] {
