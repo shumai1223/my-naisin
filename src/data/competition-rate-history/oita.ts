@@ -24,6 +24,12 @@
  * (attachment/2261572.pdf・全4頁)を発見しRead toolで直読み。4頁目末尾の「県立高校全日制課程合計」
  * 行を直接転記(募集人員5,806・最終志願者数5,969)。倍率は資料に印字が無いため自前算出
  * (5969/5806=1.0281…→finalRate=1.03)。定時制課程(合計65人)はY-6と同じ理由でスコープ外。
+ *
+ * **2026-08-06追記(令和5/4/3年度追加)**: 教委公式サイトの旧年度ページ(r03/r04/r05ichijisaisyuu.html)は
+ * いずれも404(削除済み)のため、報道系サイトの本文直読みで確認(要約転記ではない)。令和5・令和4年度は
+ * リセモム記事＋個別指導NEXTAブログの2独立ソースが完全一致。令和3年度はリセモム記事1件のみ発見
+ * (NEXTAの同年ブログは大分市内個別校の倍率のみで県全体合計の記載が無くクロスチェック不可だった)。
+ * 3年度とも「志願者数÷募集人員」が発表倍率と近似することを検算済み。
  */
 import type { PrefectureRateHistoryFile, YearSnapshot } from '@/lib/competition-rate-history';
 
@@ -60,7 +66,41 @@ const REIWA_7: YearSnapshot = {
   grandTotal: { label: '県立高校全日制課程合計', quota: 5666, applicants: 5783, rate: 1.02 },
 };
 
+const REIWA_5: YearSnapshot = {
+  fiscalYear: '令和5年度（2023年度）',
+  sourceUrl: 'https://resemom.jp/article/2023/02/24/71107.html',
+  sourceTitle: 'リセモム「【高校受験2023】大分県立高、一次入試出願状況（確定）」(個別指導NEXTAブログと一致確認済み)',
+  fetchedAt: '2026-08-06',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '県立高校全日制課程合計', quota: 5825, applicants: 6134, rate: 1.05 },
+};
+
+const REIWA_4: YearSnapshot = {
+  fiscalYear: '令和4年度（2022年度）',
+  sourceUrl: 'https://resemom.jp/article/2022/02/25/65994.html',
+  sourceTitle: 'リセモム「【高校受験2022】大分県立高、一次入試出願状況（確定）」(個別指導NEXTAブログと一致確認済み)',
+  fetchedAt: '2026-08-06',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '県立高校全日制課程合計', quota: 5889, applicants: 6181, rate: 1.05 },
+};
+
+/** 独立ソース1件のみ(リセモムのみ・NEXTAの同年ブログは個別校倍率のみで県全体合計の記載なし)。 */
+const REIWA_3: YearSnapshot = {
+  fiscalYear: '令和3年度（2021年度）',
+  sourceUrl: 'https://resemom.jp/article/2021/03/09/60849.html',
+  sourceTitle: 'リセモム「【高校受験2021】大分県公立高入試、TV・Web解答速報」(大分県教育委員会2月26日発表の再掲引用)',
+  fetchedAt: '2026-08-06',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '県立高校全日制課程合計', quota: 5635, applicants: 6070, rate: 1.08 },
+};
+
 export const OITA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'oita',
-  years: [REIWA_8, REIWA_7, REIWA_6],
+  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
 };
