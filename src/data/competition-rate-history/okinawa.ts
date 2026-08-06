@@ -17,8 +17,29 @@
  * 機械的に減算した全日制のみの値を採用（募集人員14,157・志願者13,262・倍率13262/14157=
  * 0.9368…→0.94）。Y-0憲法②「1データ点=1出典」の精神に沿い印字値からの単純減算のみで
  * 捏造は含まない（Y-6と同型の算出方針）。
+ *
+ * **2026-08-06追記(令和8年度追加)**: 令和6〜3年度への遡及は教委公式サイトが直近2年度分の
+ * PDFしか残しておらず確度不足のため断念済み(詳細はokinawa.test.tsのコメント参照)だったが、
+ * 逆方向(最新年度への前進)を試したところ令和8年度（令和7年度実施・r07saisyu.pdf）が既に
+ * 公表済みと判明。Y-6 okinawa.tsが同一PDFから独立に機械集計した全日制計（募集人員14,084・
+ * 志願者13,522・58校156レコード）と、本ファイルが定時制6箇所を手動で機械的に減算して算出した
+ * 値が完全一致（クロスチェック成立）。定時制内訳: コザ定時商業40/17・那覇工業定時2科80/18・
+ * 北部農林定時農業40/7・中部農林定時農業40/18・八重山商工定時商業40/13・泊(定時制単独校)
+ * 160/89＝定時制合計募集人員400・志願者162。
  */
 import type { PrefectureRateHistoryFile, YearSnapshot } from '@/lib/competition-rate-history';
+
+const REIWA_8: YearSnapshot = {
+  fiscalYear: '令和8年度（2026年度）',
+  sourceUrl:
+    'https://www.pref.okinawa.lg.jp/_res/projects/default_project/_page_/001/038/168/r07saisyu.pdf',
+  sourceTitle: '沖縄県教育委員会 令和8年度（令和7年度実施）県立高等学校入学者選抜 一般選抜等最終志願状況',
+  fetchedAt: '2026-08-06',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制のみ（総計から定時制6箇所を減算）', quota: 14084, applicants: 13522, rate: 0.96 },
+};
 
 const REIWA_7: YearSnapshot = {
   fiscalYear: '令和7年度（2025年度）',
@@ -34,5 +55,5 @@ const REIWA_7: YearSnapshot = {
 
 export const OKINAWA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'okinawa',
-  years: [REIWA_7],
+  years: [REIWA_8, REIWA_7],
 };

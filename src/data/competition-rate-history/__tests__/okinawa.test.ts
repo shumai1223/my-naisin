@@ -1,16 +1,18 @@
 import { OKINAWA_COMPETITION_RATE_HISTORY } from '../okinawa';
 
 /**
- * Λ-4（多年度アーカイブ・沖縄県）DoD検証: 令和7年度の「全日制のみ」合計行の数値を
+ * Λ-4（多年度アーカイブ・沖縄県）DoD検証: 令和7〜8年度の「全日制のみ」合計行の数値を
  * 一次資料（沖縄県教育委員会PDF・総計から定時制6箇所を機械的に減算した値）で確認する。
  * 令和6〜3年度は2026-08-06に調査したが、教委公式サイトが直近2年度分しかPDFを残しておらず、
  * 報道記事では募集人員/志願者数の実数を確度高く確認できなかったため未収録（詳細は
- * worklog 2026-08-06 08:17参照）。
+ * worklog 2026-08-06 08:17参照）。**同日17:39追記**: 逆方向(最新年度)への前進を試し
+ * 令和8年度を追加(Y-6 okinawa.tsの独立機械集計と完全一致でクロスチェック済み)。
  */
-describe('沖縄県 多年度アーカイブ（Λ-4・令和7年度のみ1年分・grand-total-only）', () => {
-  it('1年度分（令和7年度）のみを収録している(令和6〜3年度は確度不足のため未収録と正直に記録)', () => {
-    expect(OKINAWA_COMPETITION_RATE_HISTORY.years).toHaveLength(1);
+describe('沖縄県 多年度アーカイブ（Λ-4・令和7〜8年度の2年分・grand-total-only）', () => {
+  it('2年度分（令和7〜8年度）を収録している(令和6〜3年度は確度不足のため未収録と正直に記録)', () => {
+    expect(OKINAWA_COMPETITION_RATE_HISTORY.years).toHaveLength(2);
     expect(OKINAWA_COMPETITION_RATE_HISTORY.years.map((y) => y.fiscalYear)).toEqual([
+      '令和8年度（2026年度）',
       '令和7年度（2025年度）',
     ]);
   });
@@ -22,10 +24,17 @@ describe('沖縄県 多年度アーカイブ（Λ-4・令和7年度のみ1年分
   });
 
   it('令和7年度の合計は一次資料の総計から定時制6箇所を機械的に減算した値と一致する(募集人員14,157・志願者13,262・倍率0.94)', () => {
-    const r7 = OKINAWA_COMPETITION_RATE_HISTORY.years[0];
+    const r7 = OKINAWA_COMPETITION_RATE_HISTORY.years[1];
     expect(r7.grandTotal.quota).toBe(14157);
     expect(r7.grandTotal.applicants).toBe(13262);
     expect(r7.grandTotal.rate).toBeCloseTo(0.94, 2);
+  });
+
+  it('令和8年度の合計は一次資料の総計から定時制6箇所を機械的に減算した値と一致し、Y-6 okinawa.tsの独立機械集計とも一致する(募集人員14,084・志願者13,522・倍率0.96)', () => {
+    const r8 = OKINAWA_COMPETITION_RATE_HISTORY.years[0];
+    expect(r8.grandTotal.quota).toBe(14084);
+    expect(r8.grandTotal.applicants).toBe(13522);
+    expect(r8.grandTotal.rate).toBeCloseTo(0.96, 2);
   });
 
   it('内部整合性: 志願者数÷募集人員が公表倍率とおおむね一致する', () => {
