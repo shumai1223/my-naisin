@@ -76,7 +76,35 @@ const REIWA_5: YearSnapshot = {
   grandTotal: { label: '全日制計', quota: 17443, applicants: 17246, rate: 0.99 },
 };
 
+/**
+ * 令和4年度（2022年度）: R5-R8と同じ「志願先変更後」shigansha系PDFの当該年度版は教委サイトに
+ * 現存せず（2026-08-06調査時点）、代わりに教委「令和4年度茨城県立高等学校入学者選抜実施状況
+ * 報告書」（令和4年5月公表・全45頁）を発見（kyoiku.pref.ibaraki.jp/wp-content/uploads/2023/02/
+ * 0610houkoku.pdf）。P2の「一般入学」計行は募集定員17,750・志願者数18,033・倍率1.02だが、
+ * P1脚注3「募集定員には、日立第一高校への入学志願者のうち附属中学校からの入学予定者80人を含む」
+ * およびP2脚注1により、この計行はR5-R8の「全日制計」（附属中学校分を除いた値）とはスコープが
+ * 異なり、R5-R8の「全日制総計」（附属中学校分を外数加算した値）に相当すると判明。P4「学校別の
+ * 状況」の日立第一高校の行で、一般入学志願者数が上段224・下段80（脚注2「下段の数は附属中学校
+ * からの入学者を示している」）と明記されており、この80が計行に含まれる附属中学校分と正確に
+ * 特定できた。R5-R8と同じ「全日制計」相当に揃えるため80を機械的に減算（募集定員17,750-80=
+ * 17,670・志願者数18,033-80=17,953・倍率17953/17670=1.0160…≈1.02）。リセマム記事
+ * （2022-02-21・「志願先変更後の確定値」と明記）が独立に報じた募集定員17,750・志願者数18,031
+ * （報告書と2名差・時点差による軽微な後日修正の可能性）でも同一のスコープ（附属中80人を含む
+ * 総計相当）と整合しており、内部整合性を確認済み。
+ * https://resemom.jp/article/2022/02/21/65882.html
+ */
+const REIWA_4: YearSnapshot = {
+  fiscalYear: '令和4年度（2022年度）',
+  sourceUrl: 'https://kyoiku.pref.ibaraki.jp/wp-content/uploads/2023/02/0610houkoku.pdf',
+  sourceTitle: '茨城県教育委員会 令和4年度茨城県立高等学校入学者選抜実施状況報告書',
+  fetchedAt: '2026-08-06',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制計（報告書の計17,750/18,033から日立第一附属中学校分80人を除いた値）', quota: 17670, applicants: 17953, rate: 1.02 },
+};
+
 export const IBARAKI_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'ibaraki',
-  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5],
+  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4],
 };
