@@ -69,13 +69,19 @@
     "route": "/hensachi",
     "changedAt": "2026-07-17",
     "note": "【ガード違反での追記・要注意】V-1(2026-07-15)から2日後に3週間隔ガードを未確認のままdescription/og:descriptionへ「（偏差値シミュレーター）」を追記(W-16)。GSC実測: query=偏差値シュミレーター imp799/CTR0.63%/pos9.1(28日)。titleは不変更(主力語への影響を避けた)。このエントリでchangedAtを更新し次回編集可能日を2026-08-07以降に延長。findRoutesDueForMeasurementは今後この日付を基準に判定される。",
-    "ctrBefore": 0.0063
+    "ctrBefore": 0.0063,
+    "measuredAt": "2026-08-07",
+    "outcomeNote": "21日経過後の効果測定(改善モード)。GSC MCP実測(直近28日・7/6-8/3): query=偏差値シュミレーター clicks2/imp387/CTR0.52%/pos9.75。CTRは0.63%→0.52%(相対-18%)でevaluateCtrChangeEffect基準では'worse'。ただしpositionも9.1→9.75へ同時に悪化しておりCTR単独の劣化と断定できない(2026-08-01のnara/naishin判定と同型の確認事項)。加えてこのクエリのimpression自体が799→387へほぼ半減しており、ページ全体(/hensachi)でもimpressionが60046→39415(-34%)と同期して落ち込んでいる一方、ページ全体CTRはむしろ4.30%→4.45%へ微改善(clicksは2584→1752だがCTRは維持〜微増)している。これは説明文変更由来のCTR劣化ではなく、対象クエリの検索露出自体が縮小した(季節要因の可能性が高い・夏休み期の検索ボリューム変動と整合)ことが主因と判断できる。**結論: 悪化判定だが自動リバートはせず現状維持**(記述追加が実害を及ぼしている確証がなく、ページ全体のCTRはむしろ健全なため)。次回3週間後に再測定し、傾向が継続するか確認する。",
+    "outcomeVerdict": "worse"
   },
   {
     "route": "/naishin-oru/3",
     "changedAt": "2026-07-17",
     "note": "【ガード違反での追記・要注意】V-2(2026-07-15)から2日後に3週間隔ガードを未確認のままFAQに「オール3で私立高校に行けますか」項目を追加(W-16)。既存のall-3-high-school-options-2026-updateブログ記事の併願優遇/確約制度の説明と整合させただけで新規数値の追加なし。title/descriptionは不変更。このエントリでchangedAtを更新し次回編集可能日を2026-08-07以降に延長。",
-    "ctrBefore": 0
+    "ctrBefore": 0,
+    "measuredAt": "2026-08-07",
+    "outcomeNote": "21日経過後の効果測定(改善モード)。GSC MCP実測(直近28日・7/6-8/3): /naishin-oru/3ページ全体でclicks0/imp47/CTR0%/pos8.96と、2026-08-05測定時(clicks0/imp46/CTR0%/pos8.96)からほぼ変化なし。ctrBefore=0/ctrAfter=0のため機械的には'flat'。FAQ追加はCTRに寄与も悪化もしておらず実害なし。真の判定材料はblog側(all-3-high-school-options-2026-update)のクエリ群CTR変化と/naishin-oru/3への遷移有無だが、今回もそちらの再測定日(2026-08-22)には未到達のため保留を継続。",
+    "outcomeVerdict": "flat"
   },
   {
     "route": "/blog/tokyo-kansan-naishin-guide",
