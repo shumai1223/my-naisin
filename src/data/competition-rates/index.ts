@@ -3,6 +3,7 @@
  * Y-1のsrc/data/schools/index.tsと同じ設計（県ごとの静的importでedge runtime対応）。
  */
 import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
+import { HOKKAIDO_COMPETITION_RATES } from './hokkaido';
 import { TOKYO_COMPETITION_RATES } from './tokyo';
 import { KANAGAWA_COMPETITION_RATES } from './kanagawa';
 import { OSAKA_COMPETITION_RATES } from './osaka';
@@ -97,6 +98,7 @@ export const COMPETITION_RATE_BY_PREFECTURE: Partial<Record<string, PrefectureCo
   shimane: SHIMANE_COMPETITION_RATES,
   shiga: SHIGA_COMPETITION_RATES,
   fukushima: FUKUSHIMA_COMPETITION_RATES,
+  hokkaido: HOKKAIDO_COMPETITION_RATES,
 };
 
 export const COMPETITION_RATE_FILES: PrefectureCompetitionRateFile[] = Object.values(
