@@ -244,7 +244,27 @@ const REIWA_8: YearSnapshot = {
   grandTotal: { label: '全日制 普通・専門・総合学科計', quota: 34603, applicants: 36264, rate: 1.05 },
 };
 
+/**
+ * 令和2年度（2020年度）: 2026-08-06にΛ-4深掘り(7年目)で追加。R3と同型のリセモム確定記事
+ * （2020-02-25「【高校受験2020】埼玉県公立高入試、志願状況・倍率（確定）県立浦和（普通）
+ * 1.49倍」・https://resemom.jp/article/2020/02/25/54946.html）をWebFetchで直接確認。「全日制の
+ * 普通・専門・総合学科の合計で、入学許可予定者数3万6,880人に対し、志願者数は4万1,393人で、
+ * 倍率は1.12倍だった」と本文に明記（41393/36880=1.1224…≈1.12で整合）。R3(36,040)と近い規模で
+ * スコープ継続性を確認。R3と同じ理由でgrand-total-only（学科別内訳は本記事に記載なし）。
+ */
+const REIWA_2: YearSnapshot = {
+  fiscalYear: '令和2年度（2020年度）',
+  sourceUrl: 'https://resemom.jp/article/2020/02/25/54946.html',
+  sourceTitle:
+    'リセモム「【高校受験2020】埼玉県公立高入試、志願状況・倍率（確定）県立浦和（普通）1.49倍」（埼玉県教育委員会 令和2年度入学志願確定者数の発表を引用）',
+  fetchedAt: '2026-08-06',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制 普通・専門・総合学科計', quota: 36880, applicants: 41393, rate: 1.12 },
+};
+
 export const SAITAMA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'saitama',
-  years: [REIWA_3, REIWA_4, REIWA_5, REIWA_6, REIWA_7, REIWA_8],
+  years: [REIWA_2, REIWA_3, REIWA_4, REIWA_5, REIWA_6, REIWA_7, REIWA_8],
 };

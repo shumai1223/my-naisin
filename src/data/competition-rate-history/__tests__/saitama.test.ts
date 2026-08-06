@@ -7,10 +7,11 @@ import { SAITAMA_COMPETITION_RATE_HISTORY } from '../saitama';
  * 機械的に突合する。埼玉県は当初、募集人員相当の公表値(入学許可予定者数)が見つからず
  * 見送っていたが、県公式サイトの学校別入学志願確定者数PDFから解決できた（2026-07-31）。
  */
-describe('埼玉県 多年度アーカイブ（Λ-4・41県目・令和3〜令和8の6年度分・令和3のみgrand-total-only）', () => {
-  it('6年度分（令和3・4・5・6・7・8年度）を収録している', () => {
-    expect(SAITAMA_COMPETITION_RATE_HISTORY.years).toHaveLength(6);
+describe('埼玉県 多年度アーカイブ（Λ-4・41県目・令和2〜令和8の7年度分・令和2/令和3のみgrand-total-only）', () => {
+  it('7年度分（令和2・3・4・5・6・7・8年度）を収録している', () => {
+    expect(SAITAMA_COMPETITION_RATE_HISTORY.years).toHaveLength(7);
     expect(SAITAMA_COMPETITION_RATE_HISTORY.years.map((y) => y.fiscalYear)).toEqual([
+      '令和2年度（2020年度）',
       '令和3年度（2021年度）',
       '令和4年度（2022年度）',
       '令和5年度（2023年度）',
@@ -18,6 +19,15 @@ describe('埼玉県 多年度アーカイブ（Λ-4・41県目・令和3〜令�
       '令和7年度（2025年度）',
       '令和8年度（2026年度）',
     ]);
+  });
+
+  it('令和2年度の全日制合計はリセモム記事(教委発表引用)と一致する(入学許可予定者数36,880人・志願者数41,393人・倍率1.12倍)', () => {
+    const r2 = SAITAMA_COMPETITION_RATE_HISTORY.years.find((y) => y.fiscalYear === '令和2年度（2020年度）')!;
+    expect(r2.granularity).toBe('grand-total-only');
+    expect(r2.categories).toHaveLength(0);
+    expect(r2.grandTotal.quota).toBe(36880);
+    expect(r2.grandTotal.applicants).toBe(41393);
+    expect(r2.grandTotal.rate).toBeCloseTo(1.12, 2);
   });
 
   it('令和3年度の全日制合計はリセモム記事(教委発表引用)と一致する(入学許可予定者数36,040人・志願確定者数39,305人・倍率1.09倍)', () => {
