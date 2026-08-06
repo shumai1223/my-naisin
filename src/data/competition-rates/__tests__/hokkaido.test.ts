@@ -1,22 +1,22 @@
 import { HOKKAIDO_COMPETITION_RATES } from '../hokkaido';
 
 /**
- * Y-6 DoD検証（北海道・coverage='partial'・空知地区のみ）。
+ * Y-6 DoD検証（北海道・coverage='partial'・空知地区+石狩地区(全日制普通科)）。
  *
  * 北海道は2026-08-06までΛ-4・Y-6いずれも恒久ブロック扱いだったが、教委公式ページの
- * 別シリーズ資料を発見し空知地区分のみ着手した（詳細はhokkaido.tsのコメント参照）。
+ * 別シリーズ資料を発見し空知地区・石狩地区(普通科)分に着手した（詳細はhokkaido.tsのコメント参照）。
  * 各行「finalApplicants ÷ quota ≒ finalRate」の内部整合性のみを検証する
  * （公式グランドトータル行は原資料に印字されておらず突合対象が無いため）。
  */
-describe('北海道 倍率パイプラインα（Y-6・空知地区29レコード・coverage=partial）', () => {
+describe('北海道 倍率パイプラインα（Y-6・空知29+石狩31=60レコード・coverage=partial）', () => {
   const { records } = HOKKAIDO_COMPETITION_RATES;
 
   it('coverageがpartialを示している', () => {
     expect(HOKKAIDO_COMPETITION_RATES.coverage.status).toBe('partial');
   });
 
-  it('29レコードが収録されている', () => {
-    expect(records.length).toBe(29);
+  it('60レコードが収録されている', () => {
+    expect(records.length).toBe(60);
   });
 
   it('全レコードのquota>0・finalApplicants>=0・finalRateが自前算出値(applicants/quota)と整合する', () => {
@@ -43,5 +43,12 @@ describe('北海道 倍率パイプラインα（Y-6・空知地区29レコー�
     expect(schools.has('岩見沢東')).toBe(true);
     expect(schools.has('滝川')).toBe(true);
     expect(schools.has('岩見沢農業')).toBe(true);
+  });
+
+  it('石狩地区の学校が含まれる(札幌東・札幌国際情報・恵庭北等)', () => {
+    const schools = new Set(records.map((r) => r.schoolName));
+    expect(schools.has('札幌東')).toBe(true);
+    expect(schools.has('札幌国際情報')).toBe(true);
+    expect(schools.has('恵庭北')).toBe(true);
   });
 });
