@@ -4,9 +4,9 @@ import { TOTTORI_COMPETITION_RATE_HISTORY } from '../tottori';
  * Λ-4（多年度アーカイブ・鳥取県）DoD検証: 令和7・令和6年度の「一般選抜 全日制課程
  * （実質募集定員）」の数値を一次資料の固定値で確認する。
  */
-describe('鳥取県 多年度アーカイブ（Λ-4・令和8〜令和3の6年度分・grand-total-only）', () => {
-  it('6年度分（令和8年度〜令和3年度）を収録している', () => {
-    expect(TOTTORI_COMPETITION_RATE_HISTORY.years).toHaveLength(6);
+describe('鳥取県 多年度アーカイブ（Λ-4・令和8〜令和2の7年度分・grand-total-only）', () => {
+  it('7年度分（令和8年度〜令和2年度）を収録している', () => {
+    expect(TOTTORI_COMPETITION_RATE_HISTORY.years).toHaveLength(7);
     expect(TOTTORI_COMPETITION_RATE_HISTORY.years.map((y) => y.fiscalYear)).toEqual([
       '令和8年度（2026年度）',
       '令和7年度（2025年度）',
@@ -14,6 +14,7 @@ describe('鳥取県 多年度アーカイブ（Λ-4・令和8〜令和3の6年�
       '令和5年度（2023年度）',
       '令和4年度（2022年度）',
       '令和3年度（2021年度）',
+      '令和2年度（2020年度）',
     ]);
   });
 
@@ -63,5 +64,12 @@ describe('鳥取県 多年度アーカイブ（Λ-4・令和8〜令和3の6年�
     expect(r3.grandTotal.quota).toBe(3419);
     expect(r3.grandTotal.applicants).toBe(3194);
     expect(r3.grandTotal.rate).toBeCloseTo(0.93, 2);
+  });
+
+  it('令和2年度はリセモム確定記事と一致する(実質募集定員3,475・志願3,267・倍率0.94)', () => {
+    const r2 = TOTTORI_COMPETITION_RATE_HISTORY.years[6];
+    expect(r2.grandTotal.quota).toBe(3475);
+    expect(r2.grandTotal.applicants).toBe(3267);
+    expect(r2.grandTotal.rate).toBeCloseTo(0.94, 2);
   });
 });

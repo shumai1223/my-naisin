@@ -118,7 +118,27 @@ const REIWA_3: YearSnapshot = {
   grandTotal: { label: '一般選抜 全日制課程（実質募集定員）', quota: 3419, applicants: 3194, rate: 0.93 },
 };
 
+/**
+ * 令和2年度（2020年度）: 2026-08-06にΛ-4深掘り(7年目)で追加。R3と同型のリセモム確定記事
+ * （2020-03-03「【高校受験2020】鳥取県立高、一般選抜の志願状況・倍率（確定）米子東（普通・
+ * 生命科学）1.50倍など」・https://resemom.jp/article/2020/03/03/55112.html）をWebFetchで
+ * 直接確認。「一般選抜の実質募集定員3,475人に対し志願者数は3,267人、競争率（倍率）は0.94倍」
+ * と本文に明記（3267/3475=0.9401…≈0.94で整合）。R3〜R7と同じ「一般選抜（特色選抜等を除く）」
+ * のスコープ。独立した第2ソースは発見できなかったためR3と同じ理由で単一ソースとして収録。
+ */
+const REIWA_2: YearSnapshot = {
+  fiscalYear: '令和2年度（2020年度）',
+  sourceUrl: 'https://resemom.jp/article/2020/03/03/55112.html',
+  sourceTitle:
+    'リセモム「【高校受験2020】鳥取県立高、一般選抜の志願状況・倍率（確定）米子東（普通・生命科学）1.50倍など」（鳥取県教育委員会 令和2年度一般選抜志願状況の発表を引用）',
+  fetchedAt: '2026-08-06',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '一般選抜 全日制課程（実質募集定員）', quota: 3475, applicants: 3267, rate: 0.94 },
+};
+
 export const TOTTORI_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'tottori',
-  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
+  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3, REIWA_2],
 };
