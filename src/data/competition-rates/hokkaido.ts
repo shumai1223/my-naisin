@@ -1,7 +1,7 @@
 /**
  * 北海道 公立高等学校 倍率パイプラインα（Y-6・coverage='partial'・空知地区+石狩地区(全日制普通科)
  * +札幌市(市立高校・全日制)+後志地区(全日制普通科)+胆振地区(全日制普通科)+日高地区(全日制)
- * +渡島地区(全日制)+檜山地区(全日制)+上川地区(全日制)のみ）。
+ * +渡島地区(全日制)+檜山地区(全日制)+上川地区(全日制)+留萌地区(全日制)+宗谷地区(全日制)のみ）。
  *
  * 一次ソース: 北海道教育委員会「R8入学者選抜状況報告書 §3 学校別受検者数及び合格者数」
  * （令和8年度＝2026年度入学者選抜・全14頁・管内(空知/石狩/後志/胆振/日高/渡島/檜山/上川/
@@ -64,6 +64,8 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '渡島地区・全日制「普通教育を主とする学科」（10レコード・知内高校含む）＋「専門教育を主とする学科及び総合学科」（19レコード・資料p16掲載）',
       '檜山地区・全日制「普通教育を主とする学科」（3レコード）＋「総合学科」（1レコード・檜山北高校）',
       '上川地区・全日制「普通教育を主とする学科」（14レコード、資料p17上表）＋「専門教育を主とする学科及び総合学科」（23レコード、資料p17下表）',
+      '留萌地区・全日制「普通教育を主とする学科」（3レコード）＋「専門教育を主とする学科」（4レコード、資料p18掲載）',
+      '宗谷地区・全日制「普通教育を主とする学科」（6レコード）＋「専門教育を主とする学科」（2レコード、資料p18掲載）',
     ],
     pendingDepartments: [
       '石狩地区・全日制「専門教育を主とする学科及び総合学科」（学校名が複数学科行にまたがる結合セルのため今回は見送り・26レコード分）',
@@ -72,7 +74,7 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '胆振地区・鵡川高校「普通科（連携型）」（出願者数/倍率の列が無い別選抜方式のためスキーマ不一致・スコープ外）',
       '日高地区・えりも高校「普通科（連携型）」（同上の理由でスキーマ不一致・スコープ外）',
       '上川地区・上川高校「普通科（連携型）」（同上の理由でスキーマ不一致・スコープ外・資料p17中表）',
-      '留萌地区・宗谷地区・オホーツク地区・十勝地区・釧路地区・根室地区（いずれも未着手）',
+      'オホーツク地区・十勝地区・釧路地区・根室地区（いずれも未着手）',
       '空知地区・滝川西高校「情報マネジメント科」（検算式で数値の対応関係を特定できず見送り）',
       '札幌市・市立札幌大通「定時制」（他県のY-6と同じ理由でスコープ外）',
       '後志地区・定時制（小樽潮陵・真狩・留寿都・小樽未来創造。他県のY-6と同じ理由でスコープ外）',
@@ -90,7 +92,9 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '行順突合した(結合セルなし・簡潔な構造のため空知と同水準の確度)。上川地区(資料p17)は' +
       'pdftoppm -r 600によるさらに高解像度のレンダリング(600dpi)＋ffmpegでの部分クロップ拡大で' +
       '「富良野・園芸観光デザイン」等の微小フォント学科名まで確認し、pdftotext -layoutの数値列と' +
-      '全37行を行順突合した(結合セルなし・空知と同水準の確度)。',
+      '全37行を行順突合した(結合セルなし・空知と同水準の確度)。留萌地区・宗谷地区(資料p18)は' +
+      'pdftoppm -r 300による300dpi高解像度レンダリングで学科名を確認し、pdftotext -layoutの数値列と' +
+      '全15行を行順突合した(結合セルなし・空知と同水準の確度)。',
   },
   officialSubtotals: [],
   records: [
@@ -257,5 +261,20 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '下川商業', department: '商業', quota: 40, finalApplicants: 11, finalRate: 0.28 },
     { schoolName: '旭川南', department: '総合', quota: 200, finalApplicants: 196, finalRate: 0.98 },
     { schoolName: '剣淵', department: '総合', quota: 40, finalApplicants: 11, finalRate: 0.28 },
+    { schoolName: '留萌', department: '普通', quota: 160, finalApplicants: 108, finalRate: 0.68 },
+    { schoolName: '羽幌', department: '普通', quota: 80, finalApplicants: 66, finalRate: 0.83 },
+    { schoolName: '天塩', department: '普通', quota: 40, finalApplicants: 18, finalRate: 0.45 },
+    { schoolName: '遠別農業', department: '生産科学', quota: 40, finalApplicants: 20, finalRate: 0.5 },
+    { schoolName: '留萌', department: '電気・建築', quota: 40, finalApplicants: 8, finalRate: 0.2 },
+    { schoolName: '留萌', department: '情報ビジネス', quota: 40, finalApplicants: 12, finalRate: 0.3 },
+    { schoolName: '苫前商業', department: '商業', quota: 40, finalApplicants: 25, finalRate: 0.63 },
+    { schoolName: '稚内', department: '普通', quota: 120, finalApplicants: 95, finalRate: 0.79 },
+    { schoolName: '豊富', department: '普通', quota: 40, finalApplicants: 12, finalRate: 0.3 },
+    { schoolName: '浜頓別', department: '普通', quota: 40, finalApplicants: 17, finalRate: 0.43 },
+    { schoolName: '枝幸', department: '普通', quota: 40, finalApplicants: 17, finalRate: 0.43 },
+    { schoolName: '利尻', department: '普通', quota: 40, finalApplicants: 14, finalRate: 0.35 },
+    { schoolName: '礼文', department: '普通', quota: 40, finalApplicants: 14, finalRate: 0.35 },
+    { schoolName: '稚内商業', department: '商業', quota: 40, finalApplicants: 37, finalRate: 0.93 },
+    { schoolName: '稚内', department: '衛生看護', quota: 40, finalApplicants: 15, finalRate: 0.38 },
   ],
 };

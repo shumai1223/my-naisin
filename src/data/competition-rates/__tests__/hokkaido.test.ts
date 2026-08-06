@@ -2,23 +2,25 @@ import { HOKKAIDO_COMPETITION_RATES } from '../hokkaido';
 
 /**
  * Y-6 DoD検証（北海道・coverage='partial'・空知+石狩(全日制普通科)+札幌市(市立高校)
- * +後志(全日制普通科)+胆振(全日制普通科)+日高(全日制)+渡島(全日制)+檜山(全日制)+上川(全日制)）。
+ * +後志(全日制普通科)+胆振(全日制普通科)+日高(全日制)+渡島(全日制)+檜山(全日制)+上川(全日制)
+ * +留萌(全日制)+宗谷(全日制)）。
  *
  * 北海道は2026-08-06までΛ-4・Y-6いずれも恒久ブロック扱いだったが、教委公式ページの
  * 別シリーズ資料を発見し空知地区・石狩地区(普通科)・札幌市(市立)・後志地区(普通科)・
- * 胆振地区(普通科)・日高地区(全日制)・渡島地区(全日制)・檜山地区(全日制)・上川地区(全日制)分に
- * 着手した（詳細はhokkaido.tsのコメント参照）。各行「finalApplicants ÷ quota ≒ finalRate」の
- * 内部整合性のみを検証する（公式グランドトータル行は原資料に印字されておらず突合対象が無いため）。
+ * 胆振地区(普通科)・日高地区(全日制)・渡島地区(全日制)・檜山地区(全日制)・上川地区(全日制)・
+ * 留萌地区(全日制)・宗谷地区(全日制)分に着手した（詳細はhokkaido.tsのコメント参照）。各行
+ * 「finalApplicants ÷ quota ≒ finalRate」の内部整合性のみを検証する（公式グランドトータル行は
+ * 原資料に印字されておらず突合対象が無いため）。
  */
-describe('北海道 倍率パイプラインα（Y-6・空知29+石狩31+札幌市9+後志6+胆振11+日高7+渡島29+檜山4+上川37=163レコード・coverage=partial）', () => {
+describe('北海道 倍率パイプラインα（Y-6・空知29+石狩31+札幌市9+後志6+胆振11+日高7+渡島29+檜山4+上川37+留萌7+宗谷8=178レコード・coverage=partial）', () => {
   const { records } = HOKKAIDO_COMPETITION_RATES;
 
   it('coverageがpartialを示している', () => {
     expect(HOKKAIDO_COMPETITION_RATES.coverage.status).toBe('partial');
   });
 
-  it('163レコードが収録されている', () => {
-    expect(records.length).toBe(163);
+  it('178レコードが収録されている', () => {
+    expect(records.length).toBe(178);
   });
 
   it('全レコードのquota>0・finalApplicants>=0・finalRateが自前算出値(applicants/quota)と整合する', () => {
@@ -106,5 +108,21 @@ describe('北海道 倍率パイプラインα（Y-6・空知29+石狩31+札幌�
     expect(schools.has('旭川農業')).toBe(true);
     expect(schools.has('旭川商業')).toBe(true);
     expect(schools.has('剣淵')).toBe(true);
+  });
+
+  it('留萌地区の学校が含まれる(留萌・羽幌・遠別農業・苫前商業)', () => {
+    const schools = new Set(records.map((r) => r.schoolName));
+    expect(schools.has('留萌')).toBe(true);
+    expect(schools.has('羽幌')).toBe(true);
+    expect(schools.has('遠別農業')).toBe(true);
+    expect(schools.has('苫前商業')).toBe(true);
+  });
+
+  it('宗谷地区の学校が含まれる(稚内・利尻・礼文・稚内商業)', () => {
+    const schools = new Set(records.map((r) => r.schoolName));
+    expect(schools.has('稚内')).toBe(true);
+    expect(schools.has('利尻')).toBe(true);
+    expect(schools.has('礼文')).toBe(true);
+    expect(schools.has('稚内商業')).toBe(true);
   });
 });
