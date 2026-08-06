@@ -2,7 +2,7 @@
  * 北海道 公立高等学校 倍率パイプラインα（Y-6・coverage='partial'・空知地区+石狩地区(全日制普通科)
  * +札幌市(市立高校・全日制)+後志地区(全日制普通科)+胆振地区(全日制普通科)+日高地区(全日制)
  * +渡島地区(全日制)+檜山地区(全日制)+上川地区(全日制)+留萌地区(全日制)+宗谷地区(全日制)
- * +オホーツク地区(全日制)+十勝地区(全日制)のみ）。
+ * +オホーツク地区(全日制)+十勝地区(全日制)+釧路地区(全日制)のみ）。
  *
  * 一次ソース: 北海道教育委員会「R8入学者選抜状況報告書 §3 学校別受検者数及び合格者数」
  * （令和8年度＝2026年度入学者選抜・全14頁・管内(空知/石狩/後志/胆振/日高/渡島/檜山/上川/
@@ -69,6 +69,7 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '宗谷地区・全日制「普通教育を主とする学科」（6レコード）＋「専門教育を主とする学科」（2レコード、資料p18掲載）',
       'オホーツク地区・全日制「普通教育を主とする学科」（16レコード）＋「専門教育を主とする学科及び総合学科」（15レコード、資料p19掲載）',
       '十勝地区・全日制「普通教育を主とする学科」（12レコード）＋「専門教育を主とする学科及び総合学科」（16レコード、資料p20掲載）',
+      '釧路地区・全日制「普通教育を主とする学科」（9レコード）＋「専門教育を主とする学科及び総合学科」（12レコード、資料p21掲載・連携型テーブルなし）',
     ],
     pendingDepartments: [
       '石狩地区・全日制「専門教育を主とする学科及び総合学科」（学校名が複数学科行にまたがる結合セルのため今回は見送り・26レコード分）',
@@ -79,7 +80,7 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '上川地区・上川高校「普通科（連携型）」（同上の理由でスキーマ不一致・スコープ外・資料p17中表）',
       'オホーツク地区・湧別高校「普通科（連携型）」（同上の理由でスキーマ不一致・スコープ外・資料p19中表）',
       '十勝地区・鹿追高校＋広尾高校「普通科（連携型）」（同上の理由でスキーマ不一致・スコープ外・資料p20中表）',
-      '釧路地区・根室地区（いずれも未着手）',
+      '根室地区（未着手・資料p22・全14頁の最終地区）',
       '空知地区・滝川西高校「情報マネジメント科」（検算式で数値の対応関係を特定できず見送り）',
       '札幌市・市立札幌大通「定時制」（他県のY-6と同じ理由でスコープ外）',
       '後志地区・定時制（小樽潮陵・真狩・留寿都・小樽未来創造。他県のY-6と同じ理由でスコープ外）',
@@ -101,9 +102,9 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       'pdftoppm -r 300による300dpi高解像度レンダリングで学科名を確認し、pdftotext -layoutの数値列と' +
       '全15行を行順突合した(結合セルなし・空知と同水準の確度)。オホーツク地区(資料p19)は' +
       'pdftoppm -r 300による300dpi高解像度レンダリングで学科名を確認し、pdftotext -layoutの数値列と' +
-      '全31行を行順突合した(結合セルなし・空知と同水準の確度)。十勝地区(資料p20)も同じくpdftoppm ' +
-      '-r 300による300dpi高解像度レンダリングで学科名を確認し、pdftotext -layoutの数値列と全28行を' +
-      '行順突合した(結合セルなし・空知と同水準の確度)。',
+      '全31行を行順突合した(結合セルなし・空知と同水準の確度)。十勝地区(資料p20・28行)・釧路地区' +
+      '(資料p21・21行、連携型テーブルなし)も同じくpdftoppm -r 300による300dpi高解像度レンダリングで' +
+      '学科名を確認し、pdftotext -layoutの数値列と全行を行順突合した(結合セルなし・空知と同水準の確度)。',
   },
   officialSubtotals: [],
   records: [
@@ -344,5 +345,26 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '帯広南商業', department: '商業', quota: 200, finalApplicants: 246, finalRate: 1.23 },
     { schoolName: '清水', department: '総合', quota: 120, finalApplicants: 63, finalRate: 0.53 },
     { schoolName: '池田', department: '総合', quota: 40, finalApplicants: 35, finalRate: 0.88 },
+    { schoolName: '釧路湖陵', department: '文理探究', quota: 160, finalApplicants: 187, finalRate: 1.17 },
+    { schoolName: '釧路江南', department: '普通', quota: 200, finalApplicants: 206, finalRate: 1.03 },
+    { schoolName: '釧路東', department: '普通', quota: 80, finalApplicants: 61, finalRate: 0.76 },
+    { schoolName: '阿寒', department: '普通', quota: 40, finalApplicants: 28, finalRate: 0.7 },
+    { schoolName: '白糠', department: '普通', quota: 40, finalApplicants: 32, finalRate: 0.8 },
+    { schoolName: '弟子屈', department: '普通', quota: 40, finalApplicants: 20, finalRate: 0.5 },
+    { schoolName: '厚岸翔洋', department: '普通', quota: 40, finalApplicants: 9, finalRate: 0.23 },
+    { schoolName: '釧路北陽', department: '普通', quota: 200, finalApplicants: 204, finalRate: 1.02 },
+    { schoolName: '霧多布', department: '普通', quota: 60, finalApplicants: 15, finalRate: 0.25 },
+    { schoolName: '釧路湖陵', department: '理数探究', quota: 40, finalApplicants: 46, finalRate: 1.15 },
+    { schoolName: '釧路工業', department: '電子機械', quota: 40, finalApplicants: 47, finalRate: 1.18 },
+    { schoolName: '釧路工業', department: '電気', quota: 40, finalApplicants: 18, finalRate: 0.45 },
+    { schoolName: '釧路工業', department: '建築', quota: 40, finalApplicants: 35, finalRate: 0.88 },
+    { schoolName: '釧路工業', department: '土木', quota: 40, finalApplicants: 24, finalRate: 0.6 },
+    { schoolName: '釧路工業', department: '工業化学', quota: 40, finalApplicants: 12, finalRate: 0.3 },
+    { schoolName: '釧路商業', department: '流通マネジメント', quota: 40, finalApplicants: 40, finalRate: 1.0 },
+    { schoolName: '釧路商業', department: '会計マネジメント', quota: 40, finalApplicants: 39, finalRate: 0.98 },
+    { schoolName: '釧路商業', department: '情報マネジメント', quota: 40, finalApplicants: 39, finalRate: 0.98 },
+    { schoolName: '厚岸翔洋', department: '海洋資源', quota: 40, finalApplicants: 15, finalRate: 0.38 },
+    { schoolName: '釧路明輝', department: '総合', quota: 160, finalApplicants: 198, finalRate: 1.24 },
+    { schoolName: '標茶', department: '総合', quota: 80, finalApplicants: 43, finalRate: 0.54 },
   ],
 };
