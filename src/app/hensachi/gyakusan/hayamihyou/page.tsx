@@ -7,18 +7,31 @@ import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { SITE_URL } from '@/lib/naishin-dataset';
 import {
   buildHensachiScoreLookupTable,
+  calcHensachi,
+  roundHensachi,
   GYAKUSAN_HAYAMIHYOU_ASSUMED_FULL_SCORE,
   GYAKUSAN_HAYAMIHYOU_ASSUMED_AVERAGE,
   GYAKUSAN_HAYAMIHYOU_ASSUMED_STDDEV,
 } from '@/lib/hensachi';
 
 const FAQ_HENSACHI_VALUES = [40, 45, 50, 55, 60, 65, 70];
+const FAQ_SCORE_VALUES = [130, 160, 190, 220, 250, 280, 340, 370];
 
 export const metadata: Metadata = {
-  title: '偏差値ごとの目安点数 早見表【5教科500点満点】| My Naishin',
+  title: '偏差値↔点数 早見表【5教科500点満点】点数から偏差値もわかる | My Naishin',
   description:
-    '「偏差値40は5教科何点？」など、偏差値ごとの目安点数を500点満点（平均250・標準偏差75の一般的な仮定）で一覧化。実際のテストで正確な点数を出すには、平均点・標準偏差を入力する逆算計算機を使えます。',
-  keywords: ['偏差値 何点', '偏差値40 5教科 何点', '偏差値50 5教科 何点', '偏差値60 5教科 何点', '偏差値 早見表'],
+    '「250点は偏差値いくつ？」「偏差値40は5教科何点？」のどちらも一発でわかる早見表（500点満点・平均250・標準偏差75の一般的な仮定）。実際のテストで正確な値を出すには、平均点・標準偏差を入力する逆算計算機を使えます。',
+  keywords: [
+    '偏差値 何点',
+    '偏差値40 5教科 何点',
+    '偏差値50 5教科 何点',
+    '偏差値60 5教科 何点',
+    '偏差値 早見表',
+    '250点 偏差値',
+    '5教科250点 偏差値',
+    '160点 偏差値',
+    '点数から偏差値',
+  ],
   alternates: { canonical: `${SITE_URL}/hensachi/gyakusan/hayamihyou` },
 };
 
@@ -26,13 +39,21 @@ export default function HensachiGyakusanHayamihyouPage() {
   const url = `${SITE_URL}/hensachi/gyakusan/hayamihyou`;
   const table = buildHensachiScoreLookupTable();
 
-  const faqItems = FAQ_HENSACHI_VALUES.map((h) => {
-    const row = table.find((r) => r.hensachi === h);
+  const faqItems = FAQ_SCORE_VALUES.map((score) => {
+    const h = calcHensachi(score, GYAKUSAN_HAYAMIHYOU_ASSUMED_AVERAGE, GYAKUSAN_HAYAMIHYOU_ASSUMED_STDDEV);
     return {
-      question: `偏差値${h}は5教科何点ですか？`,
-      answer: `5教科合計${GYAKUSAN_HAYAMIHYOU_ASSUMED_FULL_SCORE}点満点・平均${GYAKUSAN_HAYAMIHYOU_ASSUMED_AVERAGE}点・標準偏差${GYAKUSAN_HAYAMIHYOU_ASSUMED_STDDEV}点という一般的な仮定では、偏差値${h}はおよそ${row?.requiredScore ?? '-'}点が目安です。ただし実際のテストの平均点・標準偏差はテストごとに異なるため、正確な点数を知るには自分のテストの平均点・標準偏差を使って計算する必要があります。`,
+      question: `5教科${score}点は偏差値いくつですか？`,
+      answer: `5教科合計${GYAKUSAN_HAYAMIHYOU_ASSUMED_FULL_SCORE}点満点・平均${GYAKUSAN_HAYAMIHYOU_ASSUMED_AVERAGE}点・標準偏差${GYAKUSAN_HAYAMIHYOU_ASSUMED_STDDEV}点という一般的な仮定では、${score}点はおよそ偏差値${h !== null ? roundHensachi(h) : '-'}が目安です。ただし実際のテストの平均点・標準偏差はテストごとに異なるため、正確な偏差値を知るには自分のテストの平均点・標準偏差を使って計算する必要があります。`,
     };
-  }).concat([
+  }).concat(
+    FAQ_HENSACHI_VALUES.map((h) => {
+      const row = table.find((r) => r.hensachi === h);
+      return {
+        question: `偏差値${h}は5教科何点ですか？`,
+        answer: `5教科合計${GYAKUSAN_HAYAMIHYOU_ASSUMED_FULL_SCORE}点満点・平均${GYAKUSAN_HAYAMIHYOU_ASSUMED_AVERAGE}点・標準偏差${GYAKUSAN_HAYAMIHYOU_ASSUMED_STDDEV}点という一般的な仮定では、偏差値${h}はおよそ${row?.requiredScore ?? '-'}点が目安です。ただし実際のテストの平均点・標準偏差はテストごとに異なるため、正確な点数を知るには自分のテストの平均点・標準偏差を使って計算する必要があります。`,
+      };
+    })
+  ).concat([
     {
       question: 'この早見表の点数はどうやって計算していますか？',
       answer: `偏差値の計算式「偏差値 = 50 + 10 ×（点数 − 平均点）÷ 標準偏差」を点数について逆算しています。この早見表では、5教科合計${GYAKUSAN_HAYAMIHYOU_ASSUMED_FULL_SCORE}点満点のテストで平均点が${GYAKUSAN_HAYAMIHYOU_ASSUMED_AVERAGE}点（満点の50%）・標準偏差が${GYAKUSAN_HAYAMIHYOU_ASSUMED_STDDEV}点（満点の15%）という一般的な仮定を置いて計算しています。`,
@@ -51,7 +72,7 @@ export default function HensachiGyakusanHayamihyouPage() {
           { name: 'ホーム', url: `${SITE_URL}/` },
           { name: '偏差値計算', url: `${SITE_URL}/hensachi` },
           { name: '目標偏差値まであと何点？逆算', url: `${SITE_URL}/hensachi/gyakusan` },
-          { name: '偏差値ごとの目安点数 早見表', url },
+          { name: '偏差値↔点数 早見表', url },
         ]}
       />
       <FAQPageSchema faqItems={faqItems} />
@@ -72,9 +93,9 @@ export default function HensachiGyakusanHayamihyouPage() {
           </nav>
 
           <header className="mb-8 text-center">
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">偏差値ごとの目安点数 早見表</h1>
+            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">偏差値↔点数 早見表</h1>
             <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-slate-600">
-              「偏差値40は5教科何点？」のような疑問に、一般的な仮定（5教科合計{GYAKUSAN_HAYAMIHYOU_ASSUMED_FULL_SCORE}点満点・平均{GYAKUSAN_HAYAMIHYOU_ASSUMED_AVERAGE}点・標準偏差{GYAKUSAN_HAYAMIHYOU_ASSUMED_STDDEV}点）で答えた早見表です。
+              「250点は偏差値いくつ？」「偏差値40は5教科何点？」のどちらの疑問にも、一般的な仮定（5教科合計{GYAKUSAN_HAYAMIHYOU_ASSUMED_FULL_SCORE}点満点・平均{GYAKUSAN_HAYAMIHYOU_ASSUMED_AVERAGE}点・標準偏差{GYAKUSAN_HAYAMIHYOU_ASSUMED_STDDEV}点）で答えた早見表です。下の表は「偏差値」列でも「目安点数」列でも探せます。
             </p>
           </header>
 
@@ -89,7 +110,7 @@ export default function HensachiGyakusanHayamihyouPage() {
 
           <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="mb-4 border-l-4 border-purple-500 pl-3 text-lg font-bold text-slate-800">
-              偏差値ごとの目安点数（{GYAKUSAN_HAYAMIHYOU_ASSUMED_FULL_SCORE}点満点）
+              偏差値↔点数 対応表（{GYAKUSAN_HAYAMIHYOU_ASSUMED_FULL_SCORE}点満点）
             </h2>
             <div className="overflow-x-auto">
               <table className="w-full min-w-[280px] text-sm">
