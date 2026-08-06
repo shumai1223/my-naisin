@@ -114,7 +114,26 @@ const REIWA_4: YearSnapshot = {
   grandTotal: { label: '一般選抜 全日制（公立合計相当）', quota: 18874, applicants: 19289, rate: 1.02 },
 };
 
+/**
+ * 令和2年度（2020年度）: 2026-08-06にΛ-4深掘り(7年目)で追加。R3と同型のリセモム確定記事
+ * （2020-02-28「【高校受験2020】静岡県公立高、一般選抜の志願倍率（確定）静岡1.11倍」・
+ * https://resemom.jp/article/2020/02/28/55024.html）をWebFetchで直接確認。「全日制は公立合計
+ * 2万140人の募集定員に対し、志願者数は2万571人で、志願倍率は1.02倍だった」と本文に明記
+ * （20571/20140=1.0214…≈1.02で整合。「公立合計」の表現も既存年度と同一）。独立した第2ソースは
+ * R4と同じ理由で発見できず単一ソースとして収録。
+ */
+const REIWA_2: YearSnapshot = {
+  fiscalYear: '令和2年度（2020年度）',
+  sourceUrl: 'https://resemom.jp/article/2020/02/28/55024.html',
+  sourceTitle: 'リセモム「【高校受験2020】静岡県公立高、一般選抜の志願倍率（確定）静岡1.11倍」（静岡県教育委員会 令和2年度一般選抜志願状況の発表を引用）',
+  fetchedAt: '2026-08-06',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '公立合計', quota: 20140, applicants: 20571, rate: 1.02 },
+};
+
 export const SHIZUOKA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'shizuoka',
-  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
+  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3, REIWA_2],
 };
