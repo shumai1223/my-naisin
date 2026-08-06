@@ -20,8 +20,26 @@
  * ⚠️令和5年度・令和4年度は志願者数がいずれも4,277人で完全に同一（募集定員は異なる）。
  * 2回別々にリセモム記事本文を直接取得し、それぞれ引用文中に同じ数値が明記されているのを
  * 確認したため転記ミスではないと判断したが、珍しい一致であることを記録として残す。
+ *
+ * **令和8年度（2026-08-06追加）**: R7と同型のリセモム確定記事（2026-02-09発表・
+ * https://resemom.jp/article/2026/02/09/84979.html）をWebFetchで直接確認。全体の募集人員
+ * 8,760人から特別選抜等合格者数1,472人を除いた一般選抜定員7,288人、志願者数5,794人、
+ * 倍率0.80倍（5794/7288=0.7950…≈0.80で整合・記事本文の「志願倍率は0.80倍」とも一致）。
+ * R7と同じ列定義（全募集定員－特別選抜等合格者数＝一般選抜定員）を踏襲。
  */
 import type { PrefectureRateHistoryFile, YearSnapshot } from '@/lib/competition-rate-history';
+
+const REIWA_8: YearSnapshot = {
+  fiscalYear: '令和8年度（2026年度）',
+  sourceUrl: 'https://resemom.jp/article/2026/02/09/84979.html',
+  sourceTitle:
+    'リセモム「【高校受験2026】長崎県公立高、一般選抜の倍率（確定）長崎西（理系）2.2倍」（長崎県教育委員会 令和8年度一般選抜志願状況の発表を引用）',
+  fetchedAt: '2026-08-06',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '一般選抜 全日制（全募集定員－特別選抜等合格者数）', quota: 7288, applicants: 5794, rate: 0.8 },
+};
 
 const REIWA_7: YearSnapshot = {
   fiscalYear: '令和7年度（2025年度）',
@@ -81,5 +99,5 @@ const REIWA_3: YearSnapshot = {
 
 export const NAGASAKI_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'nagasaki',
-  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
+  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
 };
