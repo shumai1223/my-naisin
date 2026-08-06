@@ -14,15 +14,15 @@ import { HOKKAIDO_COMPETITION_RATES } from '../hokkaido';
  * 「finalApplicants ÷ quota ≒ finalRate」の内部整合性のみを検証する（公式グランドトータル行は
  * 原資料に印字されておらず突合対象が無いため）。
  */
-describe('北海道 倍率パイプラインα（Y-6・空知29+石狩31+札幌市9+後志6+後志専門12+胆振11+日高7+渡島29+檜山4+上川37+留萌7+宗谷8+オホーツク31+十勝28+釧路21+根室11=281レコード・coverage=partial・全14管内着手済み）', () => {
+describe('北海道 倍率パイプラインα（Y-6・空知29+石狩31+石狩専門26+札幌市9+後志6+後志専門12+胆振11+日高7+渡島29+檜山4+上川37+留萌7+宗谷8+オホーツク31+十勝28+釧路21+根室11=307レコード・coverage=partial・全14管内着手済み）', () => {
   const { records } = HOKKAIDO_COMPETITION_RATES;
 
   it('coverageがpartialを示している', () => {
     expect(HOKKAIDO_COMPETITION_RATES.coverage.status).toBe('partial');
   });
 
-  it('281レコードが収録されている', () => {
-    expect(records.length).toBe(281);
+  it('307レコードが収録されている', () => {
+    expect(records.length).toBe(307);
   });
 
   it('全レコードのquota>0・finalApplicants>=0・finalRateが自前算出値(applicants/quota)と整合する', () => {
@@ -56,6 +56,20 @@ describe('北海道 倍率パイプラインα（Y-6・空知29+石狩31+札幌�
     expect(schools.has('札幌東')).toBe(true);
     expect(schools.has('札幌国際情報')).toBe(true);
     expect(schools.has('恵庭北')).toBe(true);
+  });
+
+  it('石狩地区の専門教育学科の学校が含まれる(札幌工業・札幌琴似工業・札幌東商業・石狩翔陽)', () => {
+    const schools = new Set(records.map((r) => r.schoolName));
+    expect(schools.has('札幌工業')).toBe(true);
+    expect(schools.has('札幌琴似工業')).toBe(true);
+    expect(schools.has('札幌東商業')).toBe(true);
+    expect(schools.has('石狩翔陽')).toBe(true);
+  });
+
+  it('千歳高校が普通科と2つの専門学科(国際教養・国際流通)を別レコードで持つ(結合セル誤読の再発防止)', () => {
+    const chitose = records.filter((r) => r.schoolName === '千歳');
+    const departments = chitose.map((r) => r.department).sort();
+    expect(departments).toEqual(['国際教養', '国際流通', '普通']);
   });
 
   it('札幌市(市立高校)の学校が含まれる(市立札幌旭丘・市立札幌新川・市立札幌啓北商業等)', () => {

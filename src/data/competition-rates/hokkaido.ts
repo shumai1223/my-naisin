@@ -3,7 +3,7 @@
  * +札幌市(市立高校・全日制)+後志地区(全日制普通科)+胆振地区(全日制普通科)+日高地区(全日制)
  * +渡島地区(全日制)+檜山地区(全日制)+上川地区(全日制)+留萌地区(全日制)+宗谷地区(全日制)
  * +オホーツク地区(全日制)+十勝地区(全日制)+釧路地区(全日制)+根室地区(全日制)＝
- * 全14管内すべてに着手済み。ただし石狩/後志/胆振の専門教育学科の一部と各地区の連携型は
+ * 全14管内すべてに着手済み。ただし胆振地区の専門教育学科の一部と各地区の連携型は
  * スキーマ制約で見送りのためstatus='partial'のまま）。
  *
  * 一次ソース: 北海道教育委員会「R8入学者選抜状況報告書 §3 学校別受検者数及び合格者数」
@@ -59,7 +59,7 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     status: 'partial',
     includedDepartments: [
       '空知地区・全日制（29レコード）',
-      '石狩地区・全日制「普通教育を主とする学科」（31レコード）',
+      '石狩地区・全日制「普通教育を主とする学科」（31レコード）＋「専門教育を主とする学科及び総合学科」（26レコード、資料p11・2026-08-07にビジョン解析で再確認し収録）',
       '札幌市・全日制（市立高校6校・9レコード）',
       '後志地区・全日制「普通教育を主とする学科」（6レコード）＋「専門教育を主とする学科及び総合学科」（12レコード、資料p13中表・2026-08-07にpdftoppm 600dpi+ffmpegクロップで微小フォント学科名を再確認し収録）',
       '胆振地区・全日制「普通教育を主とする学科」（11レコード）',
@@ -75,7 +75,6 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '根室地区・全日制「普通教育を主とする学科」（5レコード）＋「専門教育を主とする学科」（6レコード、資料p22掲載・全14頁の最終地区）',
     ],
     pendingDepartments: [
-      '石狩地区・全日制「専門教育を主とする学科及び総合学科」（学校名が複数学科行にまたがる結合セルのため今回は見送り・26レコード分）',
       '胆振地区・全日制「専門教育を主とする学科及び総合学科」（室蘭工業・苫小牧工業・苫小牧総合経済が複数学科の結合セル形式のため今回は見送り・16レコード分）',
       '胆振地区・鵡川高校「普通科（連携型）」（出願者数/倍率の列が無い別選抜方式のためスキーマ不一致・スコープ外）',
       '日高地区・えりも高校「普通科（連携型）」（同上の理由でスキーマ不一致・スコープ外）',
@@ -113,9 +112,20 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '小樽水産の学科名が微小フォントで判読不確実」として見送っていたが、pdftoppm -r 600(600dpi)＋' +
       'ffmpegでの部分クロップ拡大で再検証したところ「機械電気システム」「建設システム」「情報会計' +
       'マネジメント」等の学科名が明確に判読可能と判明し、pdftotext -layoutの数値列と全12行を行順' +
-      '突合のうえ収録した(結合セルなし・空知と同水準の確度)。石狩・胆振の見送り分は結合セル(1つの' +
-      'セルに複数学科が記載され行対応が一意に定まらない)という別種の問題であり、この解像度向上技法' +
-      'では解決しないため見送りを継続する。',
+      '突合のうえ収録した(結合セルなし・空知と同水準の確度)。' +
+      '⚠️2026-08-07追記2: 石狩地区・専門教育学科(資料p11・26レコード)も再挑戦し全件収録した。' +
+      '2026-08-06時点では「学校名セルが複数学科行にまたがる結合セルで列ズレ誤読リスクが高い」として' +
+      '見送っていたが、実際に300dpi/600dpiでビジョン解析したところ罫線は明瞭で学校名(1校が複数行の' +
+      '学科を持つ場合も罫線で区切られる)と学科名の対応は一意に読み取れた。判明した真因: pdftotext ' +
+      '-layoutの数値列抽出順序が、学校名セルが複数行にまたがる箇所で入れ替わり(quotaの値が対応する' +
+      'データ行より前にまとめて出力される)、pdftotext側の機械的な数値列とビジョン解析の行順が単純な' +
+      '1対1突合では合わなくなる問題であり、学校名・学科名の判読自体は曖昧ではなかった。念のため' +
+      '「千歳」高校の2学科(国際教養科・国際流通科)は600dpiクロップで学校名分割の誤読(「千歳国際」+' +
+      '「流通」等)が無いか個別に再確認した。今回はpdftotext数値列との自動突合を行わず、300dpi/600dpi' +
+      '画像から出願者数・受検者数・倍率・合格者数を直接目視転記し、各行の受検者数÷募集人員≒印字済み' +
+      '倍率の検算のみで整合性を確認した(全26行一致)。胆振地区の見送り分(室蘭工業等)は学科名だけでなく' +
+      '実際に1つのセルに複数の学科名が併記され罫線でも分離されていない真の結合セルであり、今回のように' +
+      '解決可能なケースとは異なるため見送りを継続する。',
   },
   officialSubtotals: [],
   records: [
@@ -179,6 +189,32 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '当別', department: '普通', quota: 40, finalApplicants: 15, finalRate: 0.38 },
     { schoolName: '恵庭南', department: '普通', quota: 200, finalApplicants: 130, finalRate: 0.65 },
     { schoolName: '恵庭北', department: '普通', quota: 240, finalApplicants: 204, finalRate: 0.85 },
+    { schoolName: '札幌啓成', department: '理数', quota: 40, finalApplicants: 69, finalRate: 1.73 },
+    { schoolName: '恵庭南', department: '体育', quota: 80, finalApplicants: 76, finalRate: 0.95 },
+    { schoolName: '札幌国際情報', department: '国際文化', quota: 80, finalApplicants: 95, finalRate: 1.19 },
+    { schoolName: '千歳', department: '国際教養', quota: 40, finalApplicants: 36, finalRate: 0.9 },
+    { schoolName: '当別', department: '園芸デザイン', quota: 40, finalApplicants: 23, finalRate: 0.58 },
+    { schoolName: '札幌工業', department: '機械', quota: 80, finalApplicants: 87, finalRate: 1.09 },
+    { schoolName: '札幌工業', department: '電気', quota: 80, finalApplicants: 86, finalRate: 1.08 },
+    { schoolName: '札幌工業', department: '建築', quota: 80, finalApplicants: 76, finalRate: 0.95 },
+    { schoolName: '札幌工業', department: '土木', quota: 80, finalApplicants: 58, finalRate: 0.73 },
+    { schoolName: '札幌琴似工業', department: '電子機械', quota: 80, finalApplicants: 83, finalRate: 1.04 },
+    { schoolName: '札幌琴似工業', department: '電気', quota: 80, finalApplicants: 72, finalRate: 0.9 },
+    { schoolName: '札幌琴似工業', department: '情報技術', quota: 80, finalApplicants: 67, finalRate: 0.84 },
+    { schoolName: '札幌琴似工業', department: '環境化学', quota: 80, finalApplicants: 57, finalRate: 0.71 },
+    { schoolName: '札幌国際情報', department: '理数工学', quota: 40, finalApplicants: 51, finalRate: 1.28 },
+    { schoolName: '札幌東商業', department: '流通経済', quota: 80, finalApplicants: 102, finalRate: 1.28 },
+    { schoolName: '札幌東商業', department: '国際経済', quota: 80, finalApplicants: 89, finalRate: 1.11 },
+    { schoolName: '札幌東商業', department: '会計ビジネス', quota: 80, finalApplicants: 76, finalRate: 0.95 },
+    { schoolName: '札幌東商業', department: '情報処理', quota: 80, finalApplicants: 94, finalRate: 1.18 },
+    { schoolName: '札幌国際情報', department: 'グローバルビジネス', quota: 120, finalApplicants: 137, finalRate: 1.14 },
+    { schoolName: '江別', department: '事務情報', quota: 40, finalApplicants: 40, finalRate: 1.0 },
+    { schoolName: '千歳', department: '国際流通', quota: 80, finalApplicants: 83, finalRate: 1.04 },
+    { schoolName: '江別', department: '生活デザイン', quota: 40, finalApplicants: 41, finalRate: 1.03 },
+    { schoolName: '当別', department: '家政', quota: 40, finalApplicants: 19, finalRate: 0.48 },
+    { schoolName: '石狩翔陽', department: '総合', quota: 320, finalApplicants: 348, finalRate: 1.09 },
+    { schoolName: '札幌厚別', department: '総合', quota: 280, finalApplicants: 293, finalRate: 1.05 },
+    { schoolName: '千歳北陽', department: '総合', quota: 160, finalApplicants: 121, finalRate: 0.76 },
     { schoolName: '市立札幌旭丘', department: '普通', quota: 240, finalApplicants: 351, finalRate: 1.46 },
     { schoolName: '市立札幌藻岩', department: '普通', quota: 240, finalApplicants: 301, finalRate: 1.25 },
     { schoolName: '市立札幌平岸', department: '普通', quota: 280, finalApplicants: 388, finalRate: 1.39 },
