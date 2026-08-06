@@ -95,7 +95,28 @@ const REIWA_4: YearSnapshot = {
   grandTotal: { label: '一般選抜 全日制課程（自己推薦選抜合格者等除く）', quota: 4907, applicants: 5538, rate: 1.13 },
 };
 
+/**
+ * 令和3年度（2021年度）: 5年→6年横展開。教委公式PDF(documents/15088/syutugan3-5.pdf)は
+ * 現行サイトから削除済み(404)のため、Wayback Machine経由でダウンロードしRead toolで直読み。
+ * 脚注に「競争率＝出願者数／（入学定員－自己推薦選抜合格者等数）」と明記されており、既存年度
+ * (R4〜R8)と完全に同一のスコープ定義であることを確認済み。入学定員4,899・出願者数5,710・
+ * 倍率1.17（5710/4899=1.1655…≈1.17で整合）。resemom速報記事(2/17締切時点・4899/5711/1.17)
+ * とも出願者数1名差(志願変更期間中の減)を除きほぼ一致し、令和4年度記事の「前年度比0.04
+ * ポイント低下」(1.13+0.04=1.17)という言及とも整合することを確認済み。
+ */
+const REIWA_3: YearSnapshot = {
+  fiscalYear: '令和3年度（2021年度）',
+  sourceUrl: 'https://web.archive.org/web/20210225122257/https://www.pref.kagawa.lg.jp/documents/15088/syutugan3-5.pdf',
+  sourceTitle:
+    '香川県教育委員会「（１１－１）令和３年度香川県公立高等学校 一般選抜 出願者数（全日制課程小学科・コース別）」（Wayback Machine経由・原本ページは現行サイトから削除済み）',
+  fetchedAt: '2026-08-06',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '一般選抜 全日制課程（自己推薦選抜合格者等除く）', quota: 4899, applicants: 5710, rate: 1.17 },
+};
+
 export const KAGAWA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'kagawa',
-  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4],
+  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
 };
