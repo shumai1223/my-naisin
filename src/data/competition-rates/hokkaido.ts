@@ -1,5 +1,6 @@
 /**
- * 北海道 公立高等学校 倍率パイプラインα（Y-6・coverage='partial'・空知地区+石狩地区（全日制普通科）のみ）。
+ * 北海道 公立高等学校 倍率パイプラインα（Y-6・coverage='partial'・空知地区+石狩地区(全日制普通科)
+ * +札幌市(市立高校・全日制)のみ）。
  *
  * 一次ソース: 北海道教育委員会「R8入学者選抜状況報告書 §3 学校別受検者数及び合格者数」
  * （令和8年度＝2026年度入学者選抜・全14頁・管内(空知/石狩/後志/胆振/日高/渡島/檜山/上川/
@@ -20,11 +21,13 @@
  * 分子にしており他県との定義が異なるため採用しない）。
  *
  * coverage.status='partial': 空知地区（全日制・29レコード）＋石狩地区・全日制「普通教育を主とする
- * 学科」（31レコード、資料p10掲載）を収録。石狩地区の「専門教育を主とする学科及び総合学科」
- * （資料p11上表・26レコード）は学校名セルが複数学科行にまたがる結合セル形式で列ズレ誤読リスクが
- * 高いため今回は見送り、pendingDepartmentsに記録した。残り13地区（後志/胆振/日高/渡島/檜山/上川/
- * 留萌/宗谷/オホーツク/十勝/釧路/根室/札幌市）は次回以降のセッションで地区単位に追加していく
- * （1地区=1コミット目安）。
+ * 学科」（31レコード、資料p10掲載）＋札幌市（市立高校・全日制・9レコード、資料p12掲載）を収録。
+ * 「札幌市」は道立高校の石狩地区とは別の管理者（市立＝札幌市教育委員会所管）のため報告書上も
+ * 独立した地区として扱われている（市立札幌旭丘・藻岩・平岸・清田・新川・啓北商業の6校）。
+ * 石狩地区の「専門教育を主とする学科及び総合学科」（資料p11上表・26レコード）は学校名セルが
+ * 複数学科行にまたがる結合セル形式で列ズレ誤読リスクが高いため今回は見送り、pendingDepartments
+ * に記録した。残り12地区（後志/胆振/日高/渡島/檜山/上川/留萌/宗谷/オホーツク/十勝/釧路/根室）
+ * は次回以降のセッションで地区単位に追加していく（1地区=1コミット目安）。
  */
 import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
 
@@ -43,19 +46,22 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     includedDepartments: [
       '空知地区・全日制（29レコード）',
       '石狩地区・全日制「普通教育を主とする学科」（31レコード）',
+      '札幌市・全日制（市立高校6校・9レコード）',
     ],
     pendingDepartments: [
       '石狩地区・全日制「専門教育を主とする学科及び総合学科」（学校名が複数学科行にまたがる結合セルのため今回は見送り・26レコード分）',
-      '後志地区・胆振地区・日高地区・渡島地区・檜山地区・上川地区・留萌地区・宗谷地区・オホーツク地区・十勝地区・釧路地区・根室地区・札幌市（いずれも未着手）',
+      '後志地区・胆振地区・日高地区・渡島地区・檜山地区・上川地区・留萌地区・宗谷地区・オホーツク地区・十勝地区・釧路地区・根室地区（いずれも未着手）',
       '空知地区・滝川西高校「情報マネジメント科」（検算式で数値の対応関係を特定できず見送り）',
+      '札幌市・市立札幌大通「定時制」（他県のY-6と同じ理由でスコープ外）',
       '定時制課程・有朋単位制（他県のY-6と同じ理由でスコープ外）',
     ],
     note:
       '空知地区の全日制29レコードは各行「受検者数÷募集人員≒印字済み倍率」の検算で全件一致を確認済み。' +
-      '石狩地区・全日制普通科の31レコードもRead toolのビジョン解析(資料p10の表)とpdftotext -layout' +
-      '(同頁の数値列)を独立に突合し全件一致を確認した(学校名セルが1行1校で結合セルが無いため空知' +
-      'と同水準の確度)。pdftotext -layoutで数値を正確抽出し、学校名・学科名はRead toolのビジョン' +
-      '解析で行順突合した。',
+      '石狩地区・全日制普通科の31レコード、札幌市・全日制の9レコードもRead toolのビジョン解析' +
+      '(資料p10/p12の表・p12は400dpi高解像度レンダリングで学科名の小さい文字も確認)とpdftotext ' +
+      '-layout(同頁の数値列)を独立に突合し全件一致を確認した(学校名セルが1行1校または結合セルが' +
+      '無い簡潔な構造のため空知と同水準の確度)。pdftotext -layoutで数値を正確抽出し、学校名・学科名' +
+      'はRead toolのビジョン解析で行順突合した。',
   },
   officialSubtotals: [],
   records: [
@@ -119,5 +125,14 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '当別', department: '普通', quota: 40, finalApplicants: 15, finalRate: 0.38 },
     { schoolName: '恵庭南', department: '普通', quota: 200, finalApplicants: 130, finalRate: 0.65 },
     { schoolName: '恵庭北', department: '普通', quota: 240, finalApplicants: 204, finalRate: 0.85 },
+    { schoolName: '市立札幌旭丘', department: '普通', quota: 240, finalApplicants: 351, finalRate: 1.46 },
+    { schoolName: '市立札幌藻岩', department: '普通', quota: 240, finalApplicants: 301, finalRate: 1.25 },
+    { schoolName: '市立札幌平岸', department: '普通', quota: 280, finalApplicants: 388, finalRate: 1.39 },
+    { schoolName: '市立札幌平岸', department: 'デザインアート', quota: 40, finalApplicants: 50, finalRate: 1.25 },
+    { schoolName: '市立札幌清田', department: '普通', quota: 200, finalApplicants: 251, finalRate: 1.25 },
+    { schoolName: '市立札幌清田', department: 'グローバル', quota: 40, finalApplicants: 27, finalRate: 0.68 },
+    { schoolName: '市立札幌新川', department: '普通', quota: 320, finalApplicants: 403, finalRate: 1.26 },
+    { schoolName: '市立札幌旭丘', department: '数理データサイエンス', quota: 80, finalApplicants: 90, finalRate: 1.13 },
+    { schoolName: '市立札幌啓北商業', department: '未来商学', quota: 240, finalApplicants: 191, finalRate: 0.8 },
   ],
 };
