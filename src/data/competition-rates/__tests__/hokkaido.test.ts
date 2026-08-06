@@ -1,22 +1,24 @@
 import { HOKKAIDO_COMPETITION_RATES } from '../hokkaido';
 
 /**
- * Y-6 DoD検証（北海道・coverage='partial'・空知+石狩(全日制普通科)+札幌市(市立高校)+後志(全日制普通科)）。
+ * Y-6 DoD検証（北海道・coverage='partial'・空知+石狩(全日制普通科)+札幌市(市立高校)
+ * +後志(全日制普通科)+胆振(全日制普通科)）。
  *
  * 北海道は2026-08-06までΛ-4・Y-6いずれも恒久ブロック扱いだったが、教委公式ページの
- * 別シリーズ資料を発見し空知地区・石狩地区(普通科)・札幌市(市立)・後志地区(普通科)分に着手した
- * （詳細はhokkaido.tsのコメント参照）。各行「finalApplicants ÷ quota ≒ finalRate」の
- * 内部整合性のみを検証する（公式グランドトータル行は原資料に印字されておらず突合対象が無いため）。
+ * 別シリーズ資料を発見し空知地区・石狩地区(普通科)・札幌市(市立)・後志地区(普通科)・
+ * 胆振地区(普通科)分に着手した（詳細はhokkaido.tsのコメント参照）。各行
+ * 「finalApplicants ÷ quota ≒ finalRate」の内部整合性のみを検証する
+ * （公式グランドトータル行は原資料に印字されておらず突合対象が無いため）。
  */
-describe('北海道 倍率パイプラインα（Y-6・空知29+石狩31+札幌市9+後志6=75レコード・coverage=partial）', () => {
+describe('北海道 倍率パイプラインα（Y-6・空知29+石狩31+札幌市9+後志6+胆振11=86レコード・coverage=partial）', () => {
   const { records } = HOKKAIDO_COMPETITION_RATES;
 
   it('coverageがpartialを示している', () => {
     expect(HOKKAIDO_COMPETITION_RATES.coverage.status).toBe('partial');
   });
 
-  it('75レコードが収録されている', () => {
-    expect(records.length).toBe(75);
+  it('86レコードが収録されている', () => {
+    expect(records.length).toBe(86);
   });
 
   it('全レコードのquota>0・finalApplicants>=0・finalRateが自前算出値(applicants/quota)と整合する', () => {
@@ -64,5 +66,12 @@ describe('北海道 倍率パイプラインα（Y-6・空知29+石狩31+札幌�
     expect(schools.has('小樽潮陵')).toBe(true);
     expect(schools.has('倶知安')).toBe(true);
     expect(schools.has('岩内')).toBe(true);
+  });
+
+  it('胆振地区の学校が含まれる(室蘭栄・苫小牧東・伊達開来等)', () => {
+    const schools = new Set(records.map((r) => r.schoolName));
+    expect(schools.has('室蘭栄')).toBe(true);
+    expect(schools.has('苫小牧東')).toBe(true);
+    expect(schools.has('伊達開来')).toBe(true);
   });
 });
