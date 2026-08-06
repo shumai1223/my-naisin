@@ -11,6 +11,26 @@
  */
 import type { PrefectureRateHistoryFile, YearSnapshot } from '@/lib/competition-rate-history';
 
+/**
+ * 令和3年度（2021年度）: Λ-4深掘り(5年満了県の6年目)で2026-08-06追加。R4と同型のリセモム
+ * 確定記事（2021年2月26日発表・志願変更後）をWebFetchで直接引用。全日制「募集定員1万9,015人に
+ * 対して、志願者数1万8,868人。志願倍率は0.99倍」と本文に明記（18868/19015=0.9923…≈0.99で
+ * 整合）。静岡県高校受験情報サイト(shizuoka-koko-jyuken.com)にも地区別の詳細データはあるが
+ * 全県合計の総括値は無く、独立した第2ソースでの数値クロスチェックはできなかったため、R4と
+ * 同じく正直にリセモム単一ソースとして収録する（捏造なし）。
+ */
+const REIWA_3: YearSnapshot = {
+  fiscalYear: '令和3年度（2021年度）',
+  sourceUrl: 'https://resemom.jp/article/2021/02/26/60664.html',
+  sourceTitle:
+    'リセモム「【高校受験2021】静岡県公立高、一般選抜志願状況（確定）静岡1.28倍」（静岡県教育委員会 令和3年度一般選抜志願状況の発表を引用）',
+  fetchedAt: '2026-08-06',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '一般選抜 全日制（公立合計相当）', quota: 19015, applicants: 18868, rate: 0.99 },
+};
+
 const REIWA_8: YearSnapshot = {
   fiscalYear: '令和8年度（2026年度）',
   sourceUrl:
@@ -96,5 +116,5 @@ const REIWA_4: YearSnapshot = {
 
 export const SHIZUOKA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'shizuoka',
-  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4],
+  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
 };
