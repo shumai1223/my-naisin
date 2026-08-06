@@ -1,6 +1,6 @@
 /**
  * 北海道 公立高等学校 倍率パイプラインα（Y-6・coverage='partial'・空知地区+石狩地区(全日制普通科)
- * +札幌市(市立高校・全日制)のみ）。
+ * +札幌市(市立高校・全日制)+後志地区(全日制普通科)のみ）。
  *
  * 一次ソース: 北海道教育委員会「R8入学者選抜状況報告書 §3 学校別受検者数及び合格者数」
  * （令和8年度＝2026年度入学者選抜・全14頁・管内(空知/石狩/後志/胆振/日高/渡島/檜山/上川/
@@ -26,8 +26,11 @@
  * 独立した地区として扱われている（市立札幌旭丘・藻岩・平岸・清田・新川・啓北商業の6校）。
  * 石狩地区の「専門教育を主とする学科及び総合学科」（資料p11上表・26レコード）は学校名セルが
  * 複数学科行にまたがる結合セル形式で列ズレ誤読リスクが高いため今回は見送り、pendingDepartments
- * に記録した。残り12地区（後志/胆振/日高/渡島/檜山/上川/留萌/宗谷/オホーツク/十勝/釧路/根室）
- * は次回以降のセッションで地区単位に追加していく（1地区=1コミット目安）。
+ * に記録した。後志地区・全日制「普通教育を主とする学科」（6レコード、資料p13上表）も収録。後志
+ * 地区の「専門教育を主とする学科及び総合学科」（資料p13中表・12レコード）は小樽未来創造・小樽
+ * 水産の学科名が微小フォントで確実な判読ができないため今回は見送った。残り11地区（胆振/日高/
+ * 渡島/檜山/上川/留萌/宗谷/オホーツク/十勝/釧路/根室）は次回以降のセッションで地区単位に追加
+ * していく（1地区=1コミット目安）。
  */
 import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
 
@@ -47,12 +50,15 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '空知地区・全日制（29レコード）',
       '石狩地区・全日制「普通教育を主とする学科」（31レコード）',
       '札幌市・全日制（市立高校6校・9レコード）',
+      '後志地区・全日制「普通教育を主とする学科」（6レコード）',
     ],
     pendingDepartments: [
       '石狩地区・全日制「専門教育を主とする学科及び総合学科」（学校名が複数学科行にまたがる結合セルのため今回は見送り・26レコード分）',
-      '後志地区・胆振地区・日高地区・渡島地区・檜山地区・上川地区・留萌地区・宗谷地区・オホーツク地区・十勝地区・釧路地区・根室地区（いずれも未着手）',
+      '後志地区・全日制「専門教育を主とする学科及び総合学科」（小樽未来創造・小樽水産の学科名が微小フォントで判読不確実のため今回は見送り・12レコード分）',
+      '胆振地区・日高地区・渡島地区・檜山地区・上川地区・留萌地区・宗谷地区・オホーツク地区・十勝地区・釧路地区・根室地区（いずれも未着手）',
       '空知地区・滝川西高校「情報マネジメント科」（検算式で数値の対応関係を特定できず見送り）',
       '札幌市・市立札幌大通「定時制」（他県のY-6と同じ理由でスコープ外）',
+      '後志地区・定時制（小樽潮陵・真狩・留寿都・小樽未来創造。他県のY-6と同じ理由でスコープ外）',
       '定時制課程・有朋単位制（他県のY-6と同じ理由でスコープ外）',
     ],
     note:
@@ -134,5 +140,11 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '市立札幌新川', department: '普通', quota: 320, finalApplicants: 403, finalRate: 1.26 },
     { schoolName: '市立札幌旭丘', department: '数理データサイエンス', quota: 80, finalApplicants: 90, finalRate: 1.13 },
     { schoolName: '市立札幌啓北商業', department: '未来商学', quota: 240, finalApplicants: 191, finalRate: 0.8 },
+    { schoolName: '小樽潮陵', department: '普通', quota: 200, finalApplicants: 205, finalRate: 1.02 },
+    { schoolName: '小樽桜陽', department: '普通', quota: 200, finalApplicants: 176, finalRate: 0.88 },
+    { schoolName: '岩内', department: '普通', quota: 80, finalApplicants: 61, finalRate: 0.76 },
+    { schoolName: '寿都', department: '普通', quota: 40, finalApplicants: 17, finalRate: 0.43 },
+    { schoolName: '蘭越', department: '普通', quota: 40, finalApplicants: 23, finalRate: 0.57 },
+    { schoolName: '倶知安', department: '普通', quota: 160, finalApplicants: 108, finalRate: 0.68 },
   ],
 };
