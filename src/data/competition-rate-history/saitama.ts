@@ -26,8 +26,37 @@
  * 令和8年度は「国際関係科」新設＋外国語科の対象校減、令和8年度に「情報科」新設等）。これは
  * 高校の学科改編（八潮南→八潮フロンティア、越生→越生翔桜等の校名変更含む）を反映した
  * 正直な転記であり、集計上の矛盾ではない。
+ *
+ * 令和3年度（2021年度）: Λ-4深掘り(5年満了県の6年目)で2026-08-06追加。教委公式サイトに
+ * 当時のPDFは残っておらず、学科別内訳の一次資料には到達できなかったため
+ * granularity: 'grand-total-only'（categories: []）で全日制合計のみを収録する。
+ * 一次ソースはリセモム「【高校受験2021】埼玉県公立高、一般選抜の志願状況（確定）」
+ * （埼玉県教育委員会発表を引用・入学許可予定者数36,040・志願確定者数39,305・倍率1.09を
+ * WebFetchで本文直接確認）。saitama-koko-jyuken.com（個別高校の学科別一覧・概数）でも
+ * 学科ごとの倍率のオーダーが同水準であることを副次的に確認したが、この情報源は個別高校の
+ * 積み上げが必要かつ数値が概数のため、category-detailとしての採用は見送った。
  */
 import type { PrefectureRateHistoryFile, YearSnapshot } from '@/lib/competition-rate-history';
+
+/**
+ * 令和3年度（2021年度）: リセモム「【高校受験2021】埼玉県公立高、一般選抜の志願状況（確定）
+ * 大宮（理数）2.35倍」（https://resemom.jp/article/2021/02/22/60589.html・埼玉県教育委員会
+ * 発表の引用・「確定」時点の数値）をWebFetchで直接確認。全日制合計: 入学許可予定者数36,040・
+ * 志願確定者数39,305・倍率1.09（36,040÷39,305=1.0906で記事記載の1.09と一致・検算OK）。
+ * 学科別内訳は記事に一部の倍率のみ記載され募集人員・志願者数の学科ごとの内訳が無いため、
+ * granularity: 'grand-total-only'として全日制合計のみを収録する。
+ */
+const REIWA_3: YearSnapshot = {
+  fiscalYear: '令和3年度（2021年度）',
+  sourceUrl: 'https://resemom.jp/article/2021/02/22/60589.html',
+  sourceTitle:
+    'リセモム「【高校受験2021】埼玉県公立高、一般選抜の志願状況（確定）大宮（理数）2.35倍」（埼玉県教育委員会発表の引用）',
+  fetchedAt: '2026-08-06',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制 普通・専門・総合学科計', quota: 36040, applicants: 39305, rate: 1.09 },
+};
 
 /**
  * 令和4年度（2022年度）: 埼玉県教育委員会「令和4年度埼玉県公立高等学校入学者選抜志願確定者数
@@ -217,5 +246,5 @@ const REIWA_8: YearSnapshot = {
 
 export const SAITAMA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'saitama',
-  years: [REIWA_4, REIWA_5, REIWA_6, REIWA_7, REIWA_8],
+  years: [REIWA_3, REIWA_4, REIWA_5, REIWA_6, REIWA_7, REIWA_8],
 };
