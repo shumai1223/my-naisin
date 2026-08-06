@@ -6,9 +6,9 @@ import { KANAGAWA_COMPETITION_RATE_HISTORY } from '../kanagawa';
  * 確認する。**令和7年度の値は2026-08-06に46,104→46,075へ再訂正済み**（2026-07-29の
  * 「誤読修正」が実際には誤りだった。詳細はkanagawa.tsの令和7年度コメント参照）。
  */
-describe('神奈川県 多年度アーカイブ（Λ-4・令和8/令和7/令和6/令和5/令和4/令和3年度分・grand-total-only）', () => {
-  it('6年度分（令和8〜令和3年度）を収録している', () => {
-    expect(KANAGAWA_COMPETITION_RATE_HISTORY.years).toHaveLength(6);
+describe('神奈川県 多年度アーカイブ（Λ-4・令和8〜令和2年度分・grand-total-only）', () => {
+  it('7年度分（令和8〜令和2年度）を収録している', () => {
+    expect(KANAGAWA_COMPETITION_RATE_HISTORY.years).toHaveLength(7);
     expect(KANAGAWA_COMPETITION_RATE_HISTORY.years.map((y) => y.fiscalYear)).toEqual([
       '令和8年度（2026年度）',
       '令和7年度（2025年度）',
@@ -16,6 +16,7 @@ describe('神奈川県 多年度アーカイブ（Λ-4・令和8/令和7/令和6
       '令和5年度（2023年度）',
       '令和4年度（2022年度）',
       '令和3年度（2021年度）',
+      '令和2年度（2020年度）',
     ]);
   });
 
@@ -70,5 +71,12 @@ describe('神奈川県 多年度アーカイブ（Λ-4・令和8/令和7/令和6
     expect(r3.grandTotal.quota).toBe(39730);
     expect(r3.grandTotal.applicants).toBe(46714);
     expect(r3.grandTotal.rate).toBeCloseTo(1.18, 2);
+  });
+
+  it('令和2年度の全日制合計はリセマム確定記事と一致する(募集41,280・志願48,275・倍率1.17)', () => {
+    const r2 = KANAGAWA_COMPETITION_RATE_HISTORY.years[6];
+    expect(r2.grandTotal.quota).toBe(41280);
+    expect(r2.grandTotal.applicants).toBe(48275);
+    expect(r2.grandTotal.rate).toBeCloseTo(1.17, 2);
   });
 });

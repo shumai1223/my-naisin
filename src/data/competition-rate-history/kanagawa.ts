@@ -148,7 +148,27 @@ const REIWA_3: YearSnapshot = {
   grandTotal: { label: '全日制の課程（特別募集・中途退学者募集を除く）', quota: 39730, applicants: 46714, rate: 1.18 },
 };
 
+/**
+ * 令和2年度（2020年度）: 2026-08-06にΛ-4深掘り(7年目)で追加。R3-R5と同型のリセマム確定記事
+ * （2020-02-07「【高校受験2020】神奈川県公立高、志願倍率（確定）横浜翠嵐1.97倍など」・
+ * https://resemom.jp/article/2020/02/07/54660.html）をWebFetchで直接確認。全日制の課程
+ * （特別募集・中途退学者募集を除く）: 募集人員41,280人・志願者数48,275人・競争率1.17倍
+ * （48275/41280=1.1694…≈1.17で整合）。R3(39,730)以降の定員推移と整合する規模。県公式ページの
+ * R3年度専用ページ(r5525215.html等)を複数試したがいずれも404のため、独立した第2ソースは発見
+ * できずR3-R5と同じ理由で単一ソースとして収録。
+ */
+const REIWA_2: YearSnapshot = {
+  fiscalYear: '令和2年度（2020年度）',
+  sourceUrl: 'https://resemom.jp/article/2020/02/07/54660.html',
+  sourceTitle: 'リセマム「【高校受験2020】神奈川県公立高、志願倍率（確定）横浜翠嵐1.97倍など」（2020-02-07付・県公式ページ404のため二次ソース採用）',
+  fetchedAt: '2026-08-06',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制の課程（特別募集・中途退学者募集を除く）', quota: 41280, applicants: 48275, rate: 1.17 },
+};
+
 export const KANAGAWA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'kanagawa',
-  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
+  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3, REIWA_2],
 };
