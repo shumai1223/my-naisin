@@ -49,8 +49,10 @@ import { AICHI_COMPETITION_RATE_HISTORY } from './aichi';
 import { OSAKA_COMPETITION_RATE_HISTORY } from './osaka';
 import { SHIZUOKA_COMPETITION_RATE_HISTORY } from './shizuoka';
 import { TOCHIGI_COMPETITION_RATE_HISTORY } from './tochigi';
+import { HOKKAIDO_COMPETITION_RATE_HISTORY } from './hokkaido';
 
 export const COMPETITION_RATE_HISTORY_BY_PREFECTURE: Partial<Record<string, PrefectureRateHistoryFile>> = {
+  hokkaido: HOKKAIDO_COMPETITION_RATE_HISTORY,
   tokyo: TOKYO_COMPETITION_RATE_HISTORY,
   kanagawa: KANAGAWA_COMPETITION_RATE_HISTORY,
   chiba: CHIBA_COMPETITION_RATE_HISTORY,
