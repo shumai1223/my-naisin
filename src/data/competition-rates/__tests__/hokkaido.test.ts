@@ -14,16 +14,16 @@ import { HOKKAIDO_COMPETITION_RATES } from '../hokkaido';
  * 「finalApplicants ÷ quota ≒ finalRate」の内部整合性のみを検証する（公式グランドトータル行は
  * 原資料に印字されておらず突合対象が無いため）。
  */
-describe('北海道 倍率パイプラインα（Y-6・R8=323レコード＋掛-1第1弾:空知R7=31レコード＝354レコード・coverage=partial・全14管内着手済み）', () => {
+describe('北海道 倍率パイプラインα（Y-6・R8=323レコード＋掛-1(空知+石狩):R7=88レコード＝411レコード・coverage=partial・全14管内着手済み）', () => {
   const { records } = HOKKAIDO_COMPETITION_RATES;
 
   it('coverageがpartialを示している', () => {
     expect(HOKKAIDO_COMPETITION_RATES.coverage.status).toBe('partial');
   });
 
-  it('354レコードが収録されている(R8年度323+R7年度31)', () => {
-    expect(records.length).toBe(354);
-    expect(records.filter((r) => r.fiscalYear === '令和7年度（2025年度）').length).toBe(31);
+  it('411レコードが収録されている(R8年度323+R7年度88)', () => {
+    expect(records.length).toBe(411);
+    expect(records.filter((r) => r.fiscalYear === '令和7年度（2025年度）').length).toBe(88);
     expect(records.filter((r) => !r.fiscalYear).length).toBe(323);
   });
 
@@ -70,7 +70,7 @@ describe('北海道 倍率パイプラインα（Y-6・R8=323レコード＋掛-
 
   it('千歳高校が普通科と2つの専門学科(国際教養・国際流通)を別レコードで持つ(結合セル誤読の再発防止)', () => {
     const chitose = records.filter((r) => r.schoolName === '千歳');
-    const departments = chitose.map((r) => r.department).sort();
+    const departments = [...new Set(chitose.map((r) => r.department))].sort();
     expect(departments).toEqual(['国際教養', '国際流通', '普通']);
   });
 
