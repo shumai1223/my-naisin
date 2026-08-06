@@ -2,7 +2,7 @@
  * 北海道 公立高等学校 倍率パイプラインα（Y-6・coverage='partial'・空知地区+石狩地区(全日制普通科)
  * +札幌市(市立高校・全日制)+後志地区(全日制普通科)+胆振地区(全日制普通科)+日高地区(全日制)
  * +渡島地区(全日制)+檜山地区(全日制)+上川地区(全日制)+留萌地区(全日制)+宗谷地区(全日制)
- * +オホーツク地区(全日制)のみ）。
+ * +オホーツク地区(全日制)+十勝地区(全日制)のみ）。
  *
  * 一次ソース: 北海道教育委員会「R8入学者選抜状況報告書 §3 学校別受検者数及び合格者数」
  * （令和8年度＝2026年度入学者選抜・全14頁・管内(空知/石狩/後志/胆振/日高/渡島/檜山/上川/
@@ -68,6 +68,7 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '留萌地区・全日制「普通教育を主とする学科」（3レコード）＋「専門教育を主とする学科」（4レコード、資料p18掲載）',
       '宗谷地区・全日制「普通教育を主とする学科」（6レコード）＋「専門教育を主とする学科」（2レコード、資料p18掲載）',
       'オホーツク地区・全日制「普通教育を主とする学科」（16レコード）＋「専門教育を主とする学科及び総合学科」（15レコード、資料p19掲載）',
+      '十勝地区・全日制「普通教育を主とする学科」（12レコード）＋「専門教育を主とする学科及び総合学科」（16レコード、資料p20掲載）',
     ],
     pendingDepartments: [
       '石狩地区・全日制「専門教育を主とする学科及び総合学科」（学校名が複数学科行にまたがる結合セルのため今回は見送り・26レコード分）',
@@ -77,7 +78,8 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '日高地区・えりも高校「普通科（連携型）」（同上の理由でスキーマ不一致・スコープ外）',
       '上川地区・上川高校「普通科（連携型）」（同上の理由でスキーマ不一致・スコープ外・資料p17中表）',
       'オホーツク地区・湧別高校「普通科（連携型）」（同上の理由でスキーマ不一致・スコープ外・資料p19中表）',
-      '十勝地区・釧路地区・根室地区（いずれも未着手）',
+      '十勝地区・鹿追高校＋広尾高校「普通科（連携型）」（同上の理由でスキーマ不一致・スコープ外・資料p20中表）',
+      '釧路地区・根室地区（いずれも未着手）',
       '空知地区・滝川西高校「情報マネジメント科」（検算式で数値の対応関係を特定できず見送り）',
       '札幌市・市立札幌大通「定時制」（他県のY-6と同じ理由でスコープ外）',
       '後志地区・定時制（小樽潮陵・真狩・留寿都・小樽未来創造。他県のY-6と同じ理由でスコープ外）',
@@ -99,7 +101,9 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       'pdftoppm -r 300による300dpi高解像度レンダリングで学科名を確認し、pdftotext -layoutの数値列と' +
       '全15行を行順突合した(結合セルなし・空知と同水準の確度)。オホーツク地区(資料p19)は' +
       'pdftoppm -r 300による300dpi高解像度レンダリングで学科名を確認し、pdftotext -layoutの数値列と' +
-      '全31行を行順突合した(結合セルなし・空知と同水準の確度)。',
+      '全31行を行順突合した(結合セルなし・空知と同水準の確度)。十勝地区(資料p20)も同じくpdftoppm ' +
+      '-r 300による300dpi高解像度レンダリングで学科名を確認し、pdftotext -layoutの数値列と全28行を' +
+      '行順突合した(結合セルなし・空知と同水準の確度)。',
   },
   officialSubtotals: [],
   records: [
@@ -312,5 +316,33 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '置戸', department: '福祉', quota: 40, finalApplicants: 25, finalRate: 0.63 },
     { schoolName: '斜里', department: '総合', quota: 40, finalApplicants: 9, finalRate: 0.23 },
     { schoolName: '大空', department: '総合', quota: 36, finalApplicants: 45, finalRate: 1.25 },
+    { schoolName: '帯広柏葉', department: '普通', quota: 240, finalApplicants: 280, finalRate: 1.17 },
+    { schoolName: '帯広三条', department: '普通', quota: 240, finalApplicants: 263, finalRate: 1.1 },
+    { schoolName: '帯広緑陽', department: '普通', quota: 160, finalApplicants: 195, finalRate: 1.22 },
+    { schoolName: '音更', department: '普通', quota: 120, finalApplicants: 60, finalRate: 0.5 },
+    { schoolName: '上士幌', department: '普通', quota: 80, finalApplicants: 60, finalRate: 0.75 },
+    { schoolName: '芽室', department: '普通', quota: 160, finalApplicants: 218, finalRate: 1.36 },
+    { schoolName: '幕別清陵', department: '普通', quota: 120, finalApplicants: 112, finalRate: 0.93 },
+    { schoolName: '鹿追', department: '普通', quota: 80, finalApplicants: 50, finalRate: 0.63 },
+    { schoolName: '大樹', department: '地域探究', quota: 40, finalApplicants: 19, finalRate: 0.48 },
+    { schoolName: '広尾', department: '普通', quota: 40, finalApplicants: 27, finalRate: 0.68 },
+    { schoolName: '本別', department: '普通', quota: 40, finalApplicants: 32, finalRate: 0.8 },
+    { schoolName: '足寄', department: '普通', quota: 80, finalApplicants: 46, finalRate: 0.58 },
+    { schoolName: '帯広農業', department: '農業科学', quota: 40, finalApplicants: 35, finalRate: 0.88 },
+    { schoolName: '帯広農業', department: '酪農科学', quota: 40, finalApplicants: 40, finalRate: 1.0 },
+    { schoolName: '帯広農業', department: '食品科学', quota: 40, finalApplicants: 41, finalRate: 1.03 },
+    { schoolName: '帯広農業', department: '農業土木工学', quota: 40, finalApplicants: 42, finalRate: 1.05 },
+    { schoolName: '帯広農業', department: '森林科学', quota: 40, finalApplicants: 40, finalRate: 1.0 },
+    { schoolName: '更別農業', department: '農業', quota: 40, finalApplicants: 26, finalRate: 0.65 },
+    { schoolName: '更別農業', department: '生活科学', quota: 40, finalApplicants: 6, finalRate: 0.15 },
+    { schoolName: '士幌', department: 'アグリビジネス', quota: 40, finalApplicants: 13, finalRate: 0.33 },
+    { schoolName: '士幌', department: 'フードシステム', quota: 40, finalApplicants: 26, finalRate: 0.65 },
+    { schoolName: '帯広工業', department: '電子機械', quota: 40, finalApplicants: 49, finalRate: 1.23 },
+    { schoolName: '帯広工業', department: '電気', quota: 40, finalApplicants: 40, finalRate: 1.0 },
+    { schoolName: '帯広工業', department: '建築', quota: 40, finalApplicants: 45, finalRate: 1.13 },
+    { schoolName: '帯広工業', department: '環境土木', quota: 40, finalApplicants: 51, finalRate: 1.28 },
+    { schoolName: '帯広南商業', department: '商業', quota: 200, finalApplicants: 246, finalRate: 1.23 },
+    { schoolName: '清水', department: '総合', quota: 120, finalApplicants: 63, finalRate: 0.53 },
+    { schoolName: '池田', department: '総合', quota: 40, finalApplicants: 35, finalRate: 0.88 },
   ],
 };
