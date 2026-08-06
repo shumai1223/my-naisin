@@ -114,7 +114,26 @@ const REIWA_3: YearSnapshot = {
   grandTotal: { label: '全日制の課程合計', quota: 7319, applicants: 7285, rate: 1.0 },
 };
 
+/**
+ * 令和2年度（2020年度）: 2026-08-06にΛ-4深掘り(7年目)で追加。R3-R5と同型のリセマム確定記事
+ * （2020-02-26「【高校受験2020】青森県公立高入試出願状況（確定）青森（普通）1.10倍など」・
+ * https://resemom.jp/article/2020/02/26/54963.html）をWebFetchで直接確認。「全日制課程の
+ * 募集人員7,828人に対して7,973人が出願し、出願倍率は1.02倍」と本文に明記（7973/7828=1.0185…
+ * ≈1.02で整合）。R3(7,319)以降の定員漸減トレンドと整合する規模。独立した第2ソースは
+ * R3-R5と同じ理由で発見できず、単一ソースとして正直に収録（捏造なし）。
+ */
+const REIWA_2: YearSnapshot = {
+  fiscalYear: '令和2年度（2020年度）',
+  sourceUrl: 'https://resemom.jp/article/2020/02/26/54963.html',
+  sourceTitle: 'リセマム「【高校受験2020】青森県公立高入試出願状況（確定）青森（普通）1.10倍など」（青森県教育委員会 令和2年度出願状況の発表を引用・独立第2ソース未発見のため単一ソース）',
+  fetchedAt: '2026-08-06',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制の課程合計', quota: 7828, applicants: 7973, rate: 1.02 },
+};
+
 export const AOMORI_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'aomori',
-  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
+  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3, REIWA_2],
 };
