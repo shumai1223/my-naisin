@@ -104,7 +104,30 @@ const REIWA_4: YearSnapshot = {
   grandTotal: { label: '全日制 合計', quota: 11260, applicants: 9187, rate: 0.82 },
 };
 
+/**
+ * 令和3年度（2021年度）: 5年→6年横展開。教委公式サイトは現行/Wayback Machine上のHTMLハブ
+ * ページ共に404だったため、Wayback Machine経由で一次PDF(documents/86260_20210216125458-1.pdf
+ * ・全7頁・2021年2月16日発表)を発見しRead toolで直読み。全日制合計（県立9,782+市立1,429=
+ * 11,211）に対し出願者数（県立7,926+市立1,138=9,064）・倍率0.81（9064/11211=0.8085…≈0.81で
+ * 整合）。⚠️注記: R4-R8には「出願者数」発表後の志願変更期間を経た別立ての「最終出願者数」
+ * ページが存在するが、R3はCDX API調査の範囲でそうした別ページが見つからず、2021年2月16日の
+ * 「出願者数」ページが唯一の公式発表だった（実質的な確定値と考えられるが、他年度のような
+ * 明示的な「最終」の文言は使われていない）。
+ */
+const REIWA_3: YearSnapshot = {
+  fiscalYear: '令和3年度（2021年度）',
+  sourceUrl:
+    'https://web.archive.org/web/20210216065741/https://www.pref.kagoshima.jp/ba05/kyoiku-bunka/school/koukou/nyushi/r3/documents/86260_20210216125458-1.pdf',
+  sourceTitle:
+    '鹿児島県教育委員会 令和3年度鹿児島県公立高等学校入学出願者数（Wayback Machine経由・原本ページは現行サイトから削除済み・「最終」の明示的な後続版は発見できず）',
+  fetchedAt: '2026-08-06',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制 合計', quota: 11211, applicants: 9064, rate: 0.81 },
+};
+
 export const KAGOSHIMA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'kagoshima',
-  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4],
+  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
 };
