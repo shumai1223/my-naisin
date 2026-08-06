@@ -1,7 +1,7 @@
 /**
  * 北海道 公立高等学校 倍率パイプラインα（Y-6・coverage='partial'・空知地区+石狩地区(全日制普通科)
  * +札幌市(市立高校・全日制)+後志地区(全日制普通科)+胆振地区(全日制普通科)+日高地区(全日制)
- * +渡島地区(全日制普通科)のみ）。
+ * +渡島地区(全日制)+檜山地区(全日制)のみ）。
  *
  * 一次ソース: 北海道教育委員会「R8入学者選抜状況報告書 §3 学校別受検者数及び合格者数」
  * （令和8年度＝2026年度入学者選抜・全14頁・管内(空知/石狩/後志/胆振/日高/渡島/檜山/上川/
@@ -61,7 +61,8 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '後志地区・全日制「普通教育を主とする学科」（6レコード）',
       '胆振地区・全日制「普通教育を主とする学科」（11レコード）',
       '日高地区・全日制「普通教育を主とする学科」（4レコード）＋「専門教育を主とする学科及び総合学科」（3レコード）',
-      '渡島地区・全日制「普通教育を主とする学科」（10レコード・知内高校含む）',
+      '渡島地区・全日制「普通教育を主とする学科」（10レコード・知内高校含む）＋「専門教育を主とする学科及び総合学科」（19レコード・資料p16掲載）',
+      '檜山地区・全日制「普通教育を主とする学科」（3レコード）＋「総合学科」（1レコード・檜山北高校）',
     ],
     pendingDepartments: [
       '石狩地区・全日制「専門教育を主とする学科及び総合学科」（学校名が複数学科行にまたがる結合セルのため今回は見送り・26レコード分）',
@@ -69,8 +70,7 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '胆振地区・全日制「専門教育を主とする学科及び総合学科」（室蘭工業・苫小牧工業・苫小牧総合経済が複数学科の結合セル形式のため今回は見送り・16レコード分）',
       '胆振地区・鵡川高校「普通科（連携型）」（出願者数/倍率の列が無い別選抜方式のためスキーマ不一致・スコープ外）',
       '日高地区・えりも高校「普通科（連携型）」（同上の理由でスキーマ不一致・スコープ外）',
-      '渡島地区・全日制「専門教育を主とする学科及び総合学科」（次ページ以降・未確認）',
-      '檜山地区・上川地区・留萌地区・宗谷地区・オホーツク地区・十勝地区・釧路地区・根室地区（いずれも未着手）',
+      '上川地区・留萌地区・宗谷地区・オホーツク地区・十勝地区・釧路地区・根室地区（いずれも未着手）',
       '空知地区・滝川西高校「情報マネジメント科」（検算式で数値の対応関係を特定できず見送り）',
       '札幌市・市立札幌大通「定時制」（他県のY-6と同じ理由でスコープ外）',
       '後志地区・定時制（小樽潮陵・真狩・留寿都・小樽未来創造。他県のY-6と同じ理由でスコープ外）',
@@ -83,7 +83,9 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '(資料p10/p12の表・p12は400dpi高解像度レンダリングで学科名の小さい文字も確認)とpdftotext ' +
       '-layout(同頁の数値列)を独立に突合し全件一致を確認した(学校名セルが1行1校または結合セルが' +
       '無い簡潔な構造のため空知と同水準の確度)。pdftotext -layoutで数値を正確抽出し、学校名・学科名' +
-      'はRead toolのビジョン解析で行順突合した。',
+      'はRead toolのビジョン解析で行順突合した。渡島地区・専門/総合学科(資料p16)と檜山地区(同頁)は' +
+      'pdftoppm -r 300による300dpi高解像度レンダリングで学科名を確認し、pdftotext -layoutの数値列と' +
+      '行順突合した(結合セルなし・簡潔な構造のため空知と同水準の確度)。',
   },
   officialSubtotals: [],
   records: [
@@ -190,5 +192,28 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '長万部', department: '普通', quota: 40, finalApplicants: 24, finalRate: 0.6 },
     { schoolName: '市立函館', department: '普通', quota: 200, finalApplicants: 283, finalRate: 1.42 },
     { schoolName: '知内', department: '普通', quota: 80, finalApplicants: 71, finalRate: 0.89 },
+    { schoolName: '函館中部', department: '理数', quota: 40, finalApplicants: 39, finalRate: 0.98 },
+    { schoolName: '大野農業', department: '農業科学', quota: 40, finalApplicants: 15, finalRate: 0.38 },
+    { schoolName: '大野農業', department: '園芸福祉', quota: 40, finalApplicants: 18, finalRate: 0.45 },
+    { schoolName: '大野農業', department: '食品科学', quota: 40, finalApplicants: 41, finalRate: 1.03 },
+    { schoolName: '函館工業', department: '電子機械', quota: 40, finalApplicants: 50, finalRate: 1.25 },
+    { schoolName: '函館工業', department: '電気情報工学', quota: 40, finalApplicants: 47, finalRate: 1.18 },
+    { schoolName: '函館工業', department: '建築', quota: 40, finalApplicants: 51, finalRate: 1.28 },
+    { schoolName: '函館工業', department: '環境土木', quota: 40, finalApplicants: 44, finalRate: 1.1 },
+    { schoolName: '函館工業', department: '工業化学', quota: 40, finalApplicants: 43, finalRate: 1.08 },
+    { schoolName: '函館商業', department: '流通ビジネス', quota: 40, finalApplicants: 51, finalRate: 1.28 },
+    { schoolName: '函館商業', department: '国際経済', quota: 40, finalApplicants: 49, finalRate: 1.23 },
+    { schoolName: '函館商業', department: '会計ビジネス', quota: 40, finalApplicants: 46, finalRate: 1.15 },
+    { schoolName: '函館商業', department: '情報処理', quota: 40, finalApplicants: 56, finalRate: 1.4 },
+    { schoolName: '福島商業', department: '商業', quota: 40, finalApplicants: 15, finalRate: 0.38 },
+    { schoolName: '八雲', department: '総合ビジネス', quota: 40, finalApplicants: 5, finalRate: 0.13 },
+    { schoolName: '函館水産', department: '海洋技術', quota: 40, finalApplicants: 33, finalRate: 0.83 },
+    { schoolName: '函館水産', department: '食品創造', quota: 40, finalApplicants: 36, finalRate: 0.9 },
+    { schoolName: '函館水産', department: '機関工学', quota: 40, finalApplicants: 38, finalRate: 0.95 },
+    { schoolName: '森', department: '総合', quota: 40, finalApplicants: 31, finalRate: 0.78 },
+    { schoolName: '江差', department: '普通', quota: 80, finalApplicants: 35, finalRate: 0.44 },
+    { schoolName: '上ノ国', department: '普通', quota: 40, finalApplicants: 26, finalRate: 0.65 },
+    { schoolName: '奥尻', department: '普通', quota: 40, finalApplicants: 11, finalRate: 0.28 },
+    { schoolName: '檜山北', department: '総合', quota: 80, finalApplicants: 55, finalRate: 0.69 },
   ],
 };
