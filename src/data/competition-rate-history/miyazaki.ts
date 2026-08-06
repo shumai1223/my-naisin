@@ -79,7 +79,43 @@ const REIWA_5: YearSnapshot = {
   grandTotal: { label: '全日制合計', quota: 4106, applicants: 3514, rate: 0.86 },
 };
 
+/**
+ * 令和4年度（2022年度）: 教委公式PDF（61565_20220228162524-1.pdf・「一般入学者選抜『最終』
+ * 志願状況」・2022年2月25日発表）をWebFetchで直接確認。表は「推薦入学」列と「一般入学」列が
+ * 明確に分離され、脚注に「一般入学者選抜の募集人員は、募集定員から推薦入学者選抜及び連携型
+ * 入学者選抜の内定者数の合計を減じたものとします」と明記されており、既存年度と同一スコープと
+ * 追加確認済み。志願変更前の速報版(2月21日発表・「最終」の文言なし)は不採用。
+ */
+const REIWA_4: YearSnapshot = {
+  fiscalYear: '令和4年度（2022年度）',
+  sourceUrl: 'https://www.pref.miyazaki.lg.jp/documents/61565/61565_20220228162524-1.pdf',
+  sourceTitle: '宮崎県教育委員会 令和4年度宮崎県立高等学校入学者選抜（課程別）一般入学者選抜「最終」志願状況',
+  fetchedAt: '2026-08-06',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制合計', quota: 4301, applicants: 3521, rate: 0.82 },
+};
+
+/**
+ * 令和3年度（2021年度）: 教委公式PDF(53217_20210224151758-1.pdf)は現在404・Wayback未収録の
+ * ため、リセモム確定記事(2021年2月24日発表を報じる・本文直接引用「全日制の一般入学募集人員
+ * 5,273人に対し、志願者数は4,332人、志願倍率は0.82倍」)を採用。同日発表の教委専用資料の存在
+ * (URL・発表日)自体は公式サイト上で確認済み。
+ */
+const REIWA_3: YearSnapshot = {
+  fiscalYear: '令和3年度（2021年度）',
+  sourceUrl: 'https://resemom.jp/article/2021/02/24/60626.html',
+  sourceTitle:
+    'リセモム「【高校受験2021】宮崎県立高、一般入試の志願状況（確定）宮崎西（理数）1.64倍」（宮崎県教育委員会 令和3年度一般入学者選抜志願状況の発表を引用）',
+  fetchedAt: '2026-08-06',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制合計', quota: 5273, applicants: 4332, rate: 0.82 },
+};
+
 export const MIYAZAKI_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'miyazaki',
-  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5],
+  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
 };
