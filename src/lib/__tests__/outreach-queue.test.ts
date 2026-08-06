@@ -108,8 +108,8 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     }
   });
 
-  it('47件がqueued(教委29[email23+form6]+メディアemail9+メディアform5+個人塾line4)', () => {
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(47);
+  it('48件がqueued(教委30[email23+form7]+メディアemail9+メディアform5+個人塾line4)', () => {
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(48);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {
