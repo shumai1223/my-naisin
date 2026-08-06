@@ -125,7 +125,27 @@ const REIWA_3: YearSnapshot = {
   grandTotal: { label: '全日制計', quota: 6535, applicants: 6314, rate: 0.97 },
 };
 
+/**
+ * 令和2年度（2020年度）: 2026-08-06にΛ-4深掘り(7年目)で追加。教委公式サイトの過去分ハブ
+ * ページ・広報資料PDFいずれも発見できなかったため、リセモム確定記事（2020-03-04発表・
+ * https://resemom.jp/article/2020/03/04/55130.html）をWebFetchで直接引用。「全日制における
+ * 合計は、中期選抜募集人員6,577人に対し、志願者数6,343人で、倍率は0.96倍だった」と本文に
+ * 明記（6343/6577=0.9644…≈0.96で整合）。独立した第2ソースは複数回のWebSearchで発見できな
+ * かったため、shizuoka R4等と同じ理由で正直にリセモム単一ソースとして収録する（捏造なし）。
+ */
+const REIWA_2: YearSnapshot = {
+  fiscalYear: '令和2年度（2020年度）',
+  sourceUrl: 'https://resemom.jp/article/2020/03/04/55130.html',
+  sourceTitle:
+    'リセモム「【高校受験2020】京都府公立高入試、中期選抜志願状況・倍率（確定）嵯峨野（普通）1.58倍など」（京都府教育庁指導部高校教育課 令和2年度中期選抜志願者数の発表を引用）',
+  fetchedAt: '2026-08-06',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制計', quota: 6577, applicants: 6343, rate: 0.96 },
+};
+
 export const KYOTO_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'kyoto',
-  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
+  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3, REIWA_2],
 };
