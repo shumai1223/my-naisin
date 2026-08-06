@@ -122,7 +122,30 @@ const REIWA_3: YearSnapshot = {
   grandTotal: { label: '全日制の課程 県合計', quota: 5675, applicants: 4933, rate: 0.87 },
 };
 
+/**
+ * 令和2年度（2020年度）: 2026-08-06にΛ-4深掘り(7年目)で追加。教委公式サイトの当時のPDF・
+ * 年度別ハブページ(pages/archive/47053)がいずれも404で直接確認できなかったため、リセモム
+ * 確定記事（2020-02-25「【高校受験2020】秋田県公立高入試、一般選抜志願状況（確定）秋田
+ * （普通・理数）1.11倍」・https://resemom.jp/article/2020/02/25/54941.html）をWebFetchで
+ * 直接確認。「一般選抜における全日制課程の募集人数5,692人に対して5,196人が志願し、志願倍率は
+ * 0.91倍」と本文に明記（5196/5692=0.9129…≈0.91で整合）。R3/R4と同じ「一般選抜」表記の年度
+ * （R5以降の「1次募集」表記とは呼称が異なるが、募集規模(5,600〜5,700人台)がR3(5,675)・
+ * R4(5,597)と近く同一スコープの継続と判断）。独立した第2ソースは複数回のWebSearchで発見
+ * できなかったため、shizuoka R4・kyoto R2等と同じ理由で正直にリセモム単一ソースとして収録。
+ */
+const REIWA_2: YearSnapshot = {
+  fiscalYear: '令和2年度（2020年度）',
+  sourceUrl: 'https://resemom.jp/article/2020/02/25/54941.html',
+  sourceTitle:
+    'リセモム「【高校受験2020】秋田県公立高入試、一般選抜志願状況（確定）秋田（普通・理数）1.11倍」（秋田県教育委員会 令和2年度一般選抜志願状況の発表を引用）',
+  fetchedAt: '2026-08-06',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制の課程 県合計', quota: 5692, applicants: 5196, rate: 0.91 },
+};
+
 export const AKITA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'akita',
-  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
+  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3, REIWA_2],
 };
