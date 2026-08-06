@@ -16,6 +16,13 @@
  * https://ysmedia.jp/admissions/24240/
  * 教委自身の一次配布資料ページ:
  * https://www.pref.chiba.lg.jp/kyouiku/shidou/press/2024/koukou/r7sigakakuitiran.html
+ *
+ * **令和2年度（2020年度）は恒久的に見送り（2026-08-06調査済み・再挑戦不要）**: リセマム記事
+ * （2020-02-25「後期選抜の志願状況・倍率」）を確認したところ、令和2年度は「前期選抜／後期選抜」の
+ * 二段階制度下にあり、既存R3-R8が採用する「一般入学者選抜」（一本化後の制度）とは母数の性質が
+ * 異なる（hiroshima令和4年度と同型の制度改編によるスコープ不整合）。R3(2021年度)の一次資料は
+ * 既に「一般入学者選抜」の名称で発表されており、制度改編は令和2→3年度の間に行われたと確認できる。
+ * gunma/hiroshima/nagasakiと同じ理由で恒久見送りとする。
  */
 import type { PrefectureRateHistoryFile, YearSnapshot } from '@/lib/competition-rate-history';
 
