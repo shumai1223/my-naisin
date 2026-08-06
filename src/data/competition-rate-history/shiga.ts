@@ -16,6 +16,29 @@
  */
 import type { PrefectureRateHistoryFile, YearSnapshot } from '@/lib/competition-rate-history';
 
+/**
+ * 令和8年度（2026年度）: 2026-08-06にΛ-4深掘りで追加。**R2〜R7とは選抜制度が異なる年度**
+ * （冒頭コメント参照・滋賀県は令和8年度より「学校独自型選抜」＋「一般型選抜」の二本立てに
+ * 再編。一般型選抜の出願者数は学校独自型選抜を併願している者を含むため、R2〜R7の「一般選抜
+ * のみ（推薦/特色選抜等を除く）」とは母集団の定義自体が異なる）。既存Y-6 competition-rates/
+ * shiga.tsによれば、一般型選抜のみの「計」行は資料に印字が無く自己集計値（quota6,016・
+ * applicants9,333）のため単独では未検証。一方、学校独自型＋一般型の合算「計①」（募集人数
+ * 9,230・確定出願者数12,201・倍率1.32）は資料に印字済みで、外部二次情報（ベネッセ進研ゼミ
+ * 高校入試情報サイト）が報じる同一年度の同一数値と一致することを確認済み。本エントリは
+ * この検証済みの合算値「計①」を採用し、labelに「学校独自型選抜＋一般型選抜 合算」と明記して
+ * R2〜R7の「一般選抜のみ」とは範囲が異なることを示す（gunma/naraの制度変更時と同じ扱い）。
+ */
+const REIWA_8: YearSnapshot = {
+  fiscalYear: '令和8年度（2026年度）',
+  sourceUrl: 'https://www.pref.shiga.lg.jp/file/attachment/5591236.pdf',
+  sourceTitle: '滋賀県教育委員会 令和8年度滋賀県立高等学校入学者選抜の一次募集に係る公表資料（一次募集確定出願者数・「計①」行）',
+  fetchedAt: '2026-08-06',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '学校独自型選抜＋一般型選抜 合算（新制度・旧「一般選抜のみ」とは範囲が異なる）', quota: 9230, applicants: 12201, rate: 1.32 },
+};
+
 const REIWA_7: YearSnapshot = {
   fiscalYear: '令和7年度（2025年度）',
   sourceUrl: 'https://resemom.jp/article/2025/03/03/81057.html',
@@ -119,5 +142,5 @@ const REIWA_2: YearSnapshot = {
 
 export const SHIGA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'shiga',
-  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3, REIWA_2],
+  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3, REIWA_2],
 };
