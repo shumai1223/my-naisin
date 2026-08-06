@@ -2,7 +2,9 @@
  * 北海道 公立高等学校 倍率パイプラインα（Y-6・coverage='partial'・空知地区+石狩地区(全日制普通科)
  * +札幌市(市立高校・全日制)+後志地区(全日制普通科)+胆振地区(全日制普通科)+日高地区(全日制)
  * +渡島地区(全日制)+檜山地区(全日制)+上川地区(全日制)+留萌地区(全日制)+宗谷地区(全日制)
- * +オホーツク地区(全日制)+十勝地区(全日制)+釧路地区(全日制)のみ）。
+ * +オホーツク地区(全日制)+十勝地区(全日制)+釧路地区(全日制)+根室地区(全日制)＝
+ * 全14管内すべてに着手済み。ただし石狩/後志/胆振の専門教育学科の一部と各地区の連携型は
+ * スキーマ制約で見送りのためstatus='partial'のまま）。
  *
  * 一次ソース: 北海道教育委員会「R8入学者選抜状況報告書 §3 学校別受検者数及び合格者数」
  * （令和8年度＝2026年度入学者選抜・全14頁・管内(空知/石狩/後志/胆振/日高/渡島/檜山/上川/
@@ -48,7 +50,7 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
   sources: [
     {
       url: 'https://www.dokyoi.pref.hokkaido.lg.jp/fs/1/3/1/7/8/5/5/0/_/05_p9-p22.pdf',
-      docTitle: '北海道教育委員会 R8入学者選抜状況報告書「§3 学校別受検者数及び合格者数」（全14頁中・空知地区掲載頁）',
+      docTitle: '北海道教育委員会 R8入学者選抜状況報告書「§3 学校別受検者数及び合格者数」（全14頁・空知〜根室の全14管内を収録）',
       fiscalYear: '令和8年度（2026年度）',
       fetchedAt: '2026-08-06',
     },
@@ -70,6 +72,7 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       'オホーツク地区・全日制「普通教育を主とする学科」（16レコード）＋「専門教育を主とする学科及び総合学科」（15レコード、資料p19掲載）',
       '十勝地区・全日制「普通教育を主とする学科」（12レコード）＋「専門教育を主とする学科及び総合学科」（16レコード、資料p20掲載）',
       '釧路地区・全日制「普通教育を主とする学科」（9レコード）＋「専門教育を主とする学科及び総合学科」（12レコード、資料p21掲載・連携型テーブルなし）',
+      '根室地区・全日制「普通教育を主とする学科」（5レコード）＋「専門教育を主とする学科」（6レコード、資料p22掲載・全14頁の最終地区）',
     ],
     pendingDepartments: [
       '石狩地区・全日制「専門教育を主とする学科及び総合学科」（学校名が複数学科行にまたがる結合セルのため今回は見送り・26レコード分）',
@@ -80,7 +83,7 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '上川地区・上川高校「普通科（連携型）」（同上の理由でスキーマ不一致・スコープ外・資料p17中表）',
       'オホーツク地区・湧別高校「普通科（連携型）」（同上の理由でスキーマ不一致・スコープ外・資料p19中表）',
       '十勝地区・鹿追高校＋広尾高校「普通科（連携型）」（同上の理由でスキーマ不一致・スコープ外・資料p20中表）',
-      '根室地区（未着手・資料p22・全14頁の最終地区）',
+      '根室地区・羅臼高校「普通科（連携型）」（同上の理由でスキーマ不一致・スコープ外・資料p22中表）',
       '空知地区・滝川西高校「情報マネジメント科」（検算式で数値の対応関係を特定できず見送り）',
       '札幌市・市立札幌大通「定時制」（他県のY-6と同じ理由でスコープ外）',
       '後志地区・定時制（小樽潮陵・真狩・留寿都・小樽未来創造。他県のY-6と同じ理由でスコープ外）',
@@ -103,8 +106,10 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '全15行を行順突合した(結合セルなし・空知と同水準の確度)。オホーツク地区(資料p19)は' +
       'pdftoppm -r 300による300dpi高解像度レンダリングで学科名を確認し、pdftotext -layoutの数値列と' +
       '全31行を行順突合した(結合セルなし・空知と同水準の確度)。十勝地区(資料p20・28行)・釧路地区' +
-      '(資料p21・21行、連携型テーブルなし)も同じくpdftoppm -r 300による300dpi高解像度レンダリングで' +
-      '学科名を確認し、pdftotext -layoutの数値列と全行を行順突合した(結合セルなし・空知と同水準の確度)。',
+      '(資料p21・21行、連携型テーブルなし)・根室地区(資料p22・11行、全14頁の最終頁)も同じくpdftoppm ' +
+      '-r 300による300dpi高解像度レンダリングで学科名を確認し、pdftotext -layoutの数値列と全行を' +
+      '行順突合した(結合セルなし・空知と同水準の確度)。これで全14頁(空知〜根室の14管内)の一次読み込みが' +
+      '完了した(石狩/後志/胆振の専門教育学科の一部と各地区の連携型はスキーマ制約により見送り継続)。',
   },
   officialSubtotals: [],
   records: [
@@ -366,5 +371,16 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '厚岸翔洋', department: '海洋資源', quota: 40, finalApplicants: 15, finalRate: 0.38 },
     { schoolName: '釧路明輝', department: '総合', quota: 160, finalApplicants: 198, finalRate: 1.24 },
     { schoolName: '標茶', department: '総合', quota: 80, finalApplicants: 43, finalRate: 0.54 },
+    { schoolName: '根室', department: '普通', quota: 120, finalApplicants: 84, finalRate: 0.7 },
+    { schoolName: '別海', department: '普通', quota: 120, finalApplicants: 61, finalRate: 0.51 },
+    { schoolName: '中標津', department: '普通', quota: 160, finalApplicants: 121, finalRate: 0.76 },
+    { schoolName: '標津', department: '普通', quota: 40, finalApplicants: 32, finalRate: 0.8 },
+    { schoolName: '羅臼', department: '普通', quota: 40, finalApplicants: 12, finalRate: 0.3 },
+    { schoolName: '別海', department: '酪農経営', quota: 40, finalApplicants: 11, finalRate: 0.28 },
+    { schoolName: '中標津農業', department: '生産技術', quota: 40, finalApplicants: 13, finalRate: 0.33 },
+    { schoolName: '中標津農業', department: '食品ビジネス', quota: 40, finalApplicants: 10, finalRate: 0.25 },
+    { schoolName: '根室', department: '商業', quota: 40, finalApplicants: 20, finalRate: 0.5 },
+    { schoolName: '根室', department: '事務情報', quota: 40, finalApplicants: 5, finalRate: 0.13 },
+    { schoolName: '中標津', department: '総合ビジネス', quota: 40, finalApplicants: 23, finalRate: 0.58 },
   ],
 };
