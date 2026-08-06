@@ -29,13 +29,22 @@
  * ②普通科単位制=1080/1093 ③専門学科のみ設置校=9006/9947 ④総合学科(除くクリエイティブ)=3585/3505
  * ⑤総合学科クリエイティブ=234/222）。5表合計quota34789・applicants36379・rate1.05。
  *
- * **2026-08-05追記(令和5年度追加・5年満了)**: 同じxlsx直読み手法で令和5年度
+ * **2026-08-05追記(令和5年度追加)**: 同じxlsx直読み手法で令和5年度
  * (r05_ippan_sigansya_0307_2.xlsx・「令和5年3月9日訂正」版=最終確定版)も収録。5表構成は
  * R6/R7と同型（①普通科(単位制除く)=20567/23347 ②普通科単位制=1080/1217
  * ③専門学科のみ設置校=8895/10070 ④総合学科(除くクリエイティブ)=3504/3864
  * ⑤総合学科クリエイティブ=234/256）。5表合計quota34280・applicants38754・rate1.13。
- * これでosakaはR5〜R8の4年度分＝Λ-4の5年満了目標に対し4/5年に到達（R4のxlsxは
- * ハブページ上で確認できず未発見のため、5年目は別セッションで再挑戦）。
+ *
+ * **2026-08-06追記(令和4年度追加・5年満了)**: 令和4年度分のxlsxは公式サイト（現行/Wayback
+ * Machineとも）で発見できず未発見のままだが、教委が公表したPDF版（Wayback Machine経由で
+ * 取得: web.archive.org/web/2022id_/https://www.pref.osaka.lg.jp/attach/6221/00420647/
+ * R04_ippan_sigansya_0304.pdf・全5頁・令和4年3月4日午後2時締切数）をRead toolで直読みした
+ * ところ、xlsx版と全く同じ5表構成で各表末尾に印字済み「合計」行が存在することを確認できた
+ * （①普通科(単位制除く)=20896/23380 ②普通科単位制=1040/1272 ③専門学科のみ設置校=8963/10079
+ * ④総合学科(除くクリエイティブ)=3519/3809 ⑤総合学科クリエイティブ=234/237）。R5-R8と同じく
+ * 各表の印字済み合計行をそのまま転記しただけで、学校別の手動積み上げは一切行っていない。
+ * 5表合計quota34652・applicants38777・rate1.12（38777/34652=1.1190…≈1.12で整合）。
+ * これでosakaはR4〜R8の5年度分＝Λ-4の5年満了目標を達成。
  */
 import type { PrefectureRateHistoryFile, YearSnapshot } from '@/lib/competition-rate-history';
 
@@ -87,7 +96,19 @@ const REIWA_5: YearSnapshot = {
   grandTotal: { label: '全体合計（表1+表2+表3+表4+表5）', quota: 34280, applicants: 38754, rate: 1.13 },
 };
 
+const REIWA_4: YearSnapshot = {
+  fiscalYear: '令和4年度（2022年度）',
+  sourceUrl: 'https://web.archive.org/web/2022id_/https://www.pref.osaka.lg.jp/attach/6221/00420647/R04_ippan_sigansya_0304.pdf',
+  sourceTitle:
+    '大阪府教育委員会 令和4年度大阪府公立高等学校 一般入学者選抜（全日制の課程）の志願者数（令和4年3月4日午後2時（締切数））表1〜5全体（Wayback Machine経由・原本ページは現行サイトから削除済み）',
+  fetchedAt: '2026-08-06',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全体合計（表1+表2+表3+表4+表5）', quota: 34652, applicants: 38777, rate: 1.12 },
+};
+
 export const OSAKA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'osaka',
-  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5],
+  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4],
 };
