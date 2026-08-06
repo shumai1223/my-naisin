@@ -27,6 +27,12 @@ export interface CompetitionRateRecord {
   finalApplicants: number;
   /** 最終応募倍率（公表値をそのまま転記。四捨五入方式は県により異なるため独自計算はしない）。 */
   finalRate: number;
+  /**
+   * 掛-1（学校別×多年度）用。省略時はそのファイルの`sources[0].fiscalYear`（従来どおりの
+   * 単一年度）を指すものとして扱う後方互換フィールド。2年目以降のデータを追加する場合のみ
+   * 明記する（例: '令和7年度（2025年度）'）。既存46都道府県ファイルは無改修のまま動作する。
+   */
+  fiscalYear?: string;
 }
 
 export interface OfficialSubtotal {

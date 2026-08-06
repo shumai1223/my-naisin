@@ -14,15 +14,17 @@ import { HOKKAIDO_COMPETITION_RATES } from '../hokkaido';
  * 「finalApplicants ÷ quota ≒ finalRate」の内部整合性のみを検証する（公式グランドトータル行は
  * 原資料に印字されておらず突合対象が無いため）。
  */
-describe('北海道 倍率パイプラインα（Y-6・空知29+石狩31+石狩専門26+札幌市9+後志6+後志専門12+胆振11+胆振専門16+日高7+渡島29+檜山4+上川37+留萌7+宗谷8+オホーツク31+十勝28+釧路21+根室11=323レコード・coverage=partial・全14管内着手済み）', () => {
+describe('北海道 倍率パイプラインα（Y-6・R8=323レコード＋掛-1第1弾:空知R7=31レコード＝354レコード・coverage=partial・全14管内着手済み）', () => {
   const { records } = HOKKAIDO_COMPETITION_RATES;
 
   it('coverageがpartialを示している', () => {
     expect(HOKKAIDO_COMPETITION_RATES.coverage.status).toBe('partial');
   });
 
-  it('323レコードが収録されている', () => {
-    expect(records.length).toBe(323);
+  it('354レコードが収録されている(R8年度323+R7年度31)', () => {
+    expect(records.length).toBe(354);
+    expect(records.filter((r) => r.fiscalYear === '令和7年度（2025年度）').length).toBe(31);
+    expect(records.filter((r) => !r.fiscalYear).length).toBe(323);
   });
 
   it('全レコードのquota>0・finalApplicants>=0・finalRateが自前算出値(applicants/quota)と整合する', () => {
@@ -33,11 +35,11 @@ describe('北海道 倍率パイプラインα（Y-6・空知29+石狩31+石狩�
     }
   });
 
-  it('学校名+学科名の重複が無い', () => {
+  it('学校名+学科名+年度(掛-1・省略時は既定年度扱い)の重複が無い', () => {
     const seen = new Set<string>();
     const dupes: string[] = [];
     for (const r of records) {
-      const key = `${r.schoolName}|${r.department}`;
+      const key = `${r.schoolName}|${r.department}|${r.fiscalYear ?? 'default'}`;
       if (seen.has(key)) dupes.push(key);
       seen.add(key);
     }
