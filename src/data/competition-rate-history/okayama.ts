@@ -96,7 +96,25 @@ const REIWA_4: YearSnapshot = {
   grandTotal: { label: '県立全日制・一般入学', quota: 7360, applicants: 7975, rate: 1.08 },
 };
 
+/**
+ * 令和3年度（2021年度）: 5年→6年横展開。リセモム確定記事（2021-02-26付「岡山県公立高、
+ * 一般入学（第i期）志願状況（確定）岡山朝日1.05倍」）をWebFetchで直接引用: 県立全日制・
+ * 募集人員7,520/志願者数7,761/志願倍率1.03（7761/7520=1.0320…≈1.03で内部整合）。記事内で
+ * 市立全日制(募集105・志願60・倍率0.57)が明確に別枠記載されておりR4-R8と同じスコープ
+ * (県立のみ)一致を確認済み。
+ */
+const REIWA_3: YearSnapshot = {
+  fiscalYear: '令和3年度（2021年度）',
+  sourceUrl: 'https://resemom.jp/article/2021/02/26/60690.html',
+  sourceTitle: 'リセマム「【高校受験2021】岡山県公立高、一般入学（第i期）志願状況（確定）岡山朝日1.05倍」(2021-02-26)',
+  fetchedAt: '2026-08-06',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '県立全日制・一般入学', quota: 7520, applicants: 7761, rate: 1.03 },
+};
+
 export const OKAYAMA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'okayama',
-  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4],
+  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
 };
