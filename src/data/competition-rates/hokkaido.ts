@@ -54,7 +54,7 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '空知地区・全日制（令和8年度29レコード＋令和7年度31レコード＝掛-1第1弾・学校別×多年度の試験実装）',
       '石狩地区・全日制「普通教育を主とする学科」（令和8年度31レコード）＋「専門教育を主とする学科及び総合学科」（令和8年度26レコード、資料p11・2026-08-07にビジョン解析で再確認し収録）＋令和7年度分57レコード（普通31+専門26・掛-1第2弾）',
       '札幌市・全日制（市立高校6校・令和8年度9レコード＋令和7年度分9レコード＝掛-1第3弾）',
-      '後志地区・全日制「普通教育を主とする学科」（6レコード）＋「専門教育を主とする学科及び総合学科」（12レコード、資料p13中表・2026-08-07にpdftoppm 600dpi+ffmpegクロップで微小フォント学科名を再確認し収録）',
+      '後志地区・全日制「普通教育を主とする学科」（令和8年度6レコード）＋「専門教育を主とする学科及び総合学科」（令和8年度11レコード、資料p13中表・2026-08-07にpdftoppm 600dpi+ffmpegクロップで微小フォント学科名を再確認し収録）＋令和7年度分17レコード（普通6+専門/総合11・掛-1第4弾）',
       '胆振地区・全日制「普通教育を主とする学科」（11レコード）＋「専門教育を主とする学科及び総合学科」（16レコード、資料p14上表・2026-08-07に石狩と同じ理由で見送り撤回のうえ収録）',
       '日高地区・全日制「普通教育を主とする学科」（4レコード）＋「専門教育を主とする学科及び総合学科」（3レコード）',
       '渡島地区・全日制「普通教育を主とする学科」（10レコード・知内高校含む）＋「専門教育を主とする学科及び総合学科」（19レコード・資料p16掲載）',
@@ -141,7 +141,14 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       'ページ12)。R7のR8からの頁ズレは無く(PDF頁1=空知/2=石狩普通/3=石狩専門/4=札幌市...という' +
       'R8と同一の頁順序をそのまま維持)、市立札幌旭丘・藻岩・平岸(2学科)・清田(2学科)・新川・' +
       '啓北商業の6校9レコードをpdftoppm 300dpiのビジョン解析で収録した(結合セルなし・空知と同水準' +
-      'の確度)。',
+      'の確度)。' +
+      '⚠️2026-08-07追記7(掛-1第4弾): 後志地区のR7分17レコード(普通6+専門/総合11)も追加した' +
+      '(PDF内部頁5=印字ページ13)。頁順序は引き続きR8と同一。専門/総合学科の学校名(小樽未来創造・' +
+      '小樽水産の複数学科)もR7では600dpi等の高解像度化なしの300dpiで明確に判読でき(R8で微小フォント' +
+      'に苦労した箇所だが、R7版のPDFは文字がやや大きく印字されている可能性がある)、pdftotext -layout' +
+      'の数値列と全17行を行順突合した(結合セルなし)。なお既存R8のcoverage.includedDepartmentsで' +
+      '「12レコード」としていた後志専門/総合の件数表記は、実際のrecords配列を数えると11レコードで' +
+      'あり従来から軽微な誤記だったため、この追記と合わせて正しい件数(11レコード)に訂正した。',
   },
   officialSubtotals: [],
   records: [
@@ -568,5 +575,23 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '市立札幌新川', department: '普通', quota: 320, finalApplicants: 392, finalRate: 1.23, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '市立札幌旭丘', department: '数理データサイエンス', quota: 80, finalApplicants: 70, finalRate: 0.88, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '市立札幌啓北商業', department: '未来商学', quota: 240, finalApplicants: 257, finalRate: 1.07, fiscalYear: '令和7年度（2025年度）' },
+    // 掛-1第4弾: 後志地区・令和7年度（2025年度）分。
+    { schoolName: '小樽潮陵', department: '普通', quota: 200, finalApplicants: 210, finalRate: 1.05, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '小樽桜陽', department: '普通', quota: 200, finalApplicants: 218, finalRate: 1.09, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '岩内', department: '普通', quota: 80, finalApplicants: 58, finalRate: 0.73, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '寿都', department: '普通', quota: 40, finalApplicants: 28, finalRate: 0.7, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '蘭越', department: '普通', quota: 40, finalApplicants: 17, finalRate: 0.43, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '倶知安', department: '普通', quota: 160, finalApplicants: 127, finalRate: 0.79, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '倶知安農業', department: '生産科学', quota: 40, finalApplicants: 24, finalRate: 0.6, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '小樽未来創造', department: '機械電気システム', quota: 40, finalApplicants: 38, finalRate: 0.95, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '小樽未来創造', department: '建設システム', quota: 40, finalApplicants: 36, finalRate: 0.9, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '小樽未来創造', department: '流通マネジメント', quota: 40, finalApplicants: 42, finalRate: 1.05, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '小樽未来創造', department: '情報会計マネジメント', quota: 40, finalApplicants: 36, finalRate: 0.9, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '岩内', department: '地域産業ビジネス', quota: 40, finalApplicants: 4, finalRate: 0.1, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '小樽水産', department: '海洋漁業', quota: 40, finalApplicants: 36, finalRate: 0.9, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '小樽水産', department: '水産食品', quota: 40, finalApplicants: 36, finalRate: 0.9, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '小樽水産', department: '栽培漁業', quota: 40, finalApplicants: 27, finalRate: 0.68, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '小樽水産', department: '情報通信', quota: 40, finalApplicants: 12, finalRate: 0.3, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '余市紅志', department: '総合', quota: 40, finalApplicants: 24, finalRate: 0.6, fiscalYear: '令和7年度（2025年度）' },
   ],
 };
