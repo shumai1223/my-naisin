@@ -127,7 +127,31 @@ const REIWA_3: YearSnapshot = {
   grandTotal: { label: '全日制 合計', quota: 11211, applicants: 9064, rate: 0.81 },
 };
 
+/**
+ * 令和2年度（2020年度）: 2026-08-06にΛ-4深掘り(7年目)で追加。教委公式サイトの当時のハブページ
+ * (r2saisyuushutugannsyasuu.html)は404・Wayback Machine経由のアクセスもこの環境でWebFetchが
+ * web.archive.orgを一律ブロックするため到達できず、リセモム確定記事（2020-02-26「【高校受験2020】
+ * 鹿児島県公立高、一般選抜の出願状況・倍率（確定）鶴丸（普通）1.34倍など」・
+ * https://resemom.jp/article/2020/02/26/54979.html）をWebFetchで直接確認。記事は「学力検査の
+ * 最終出願状況」として県立(9,807/8,279)・市立(1,414/1,197)・「県立と市立の合計は、1万1,221人の
+ * 学力検査定員に対し、9,476人が出願し、出願倍率は0.84倍」の3段階で報じており、既存年度と同じ
+ * 「全日制 合計」（県立+市立）スコープに明確に一致する県立市立合計の値を採用（9476/11221=
+ * 0.8445…≈0.84で整合。9807+1414=11221・8279+1197=9476の内訳合算も完全一致）。記事冒頭に
+ * 記載された別の総数(11,300/9,520)は文脈上いずれのスコープにも一致せず不採用とした。
+ */
+const REIWA_2: YearSnapshot = {
+  fiscalYear: '令和2年度（2020年度）',
+  sourceUrl: 'https://resemom.jp/article/2020/02/26/54979.html',
+  sourceTitle:
+    'リセモム「【高校受験2020】鹿児島県公立高、一般選抜の出願状況・倍率（確定）鶴丸（普通）1.34倍など」（鹿児島県教育委員会 令和2年度学力検査最終出願状況の発表を引用・県立市立合計）',
+  fetchedAt: '2026-08-06',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制 合計', quota: 11221, applicants: 9476, rate: 0.84 },
+};
+
 export const KAGOSHIMA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'kagoshima',
-  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
+  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3, REIWA_2],
 };
