@@ -14,15 +14,15 @@ import { HOKKAIDO_COMPETITION_RATES } from '../hokkaido';
  * 「finalApplicants ÷ quota ≒ finalRate」の内部整合性のみを検証する（公式グランドトータル行は
  * 原資料に印字されておらず突合対象が無いため）。
  */
-describe('北海道 倍率パイプラインα（Y-6・空知29+石狩31+札幌市9+後志6+胆振11+日高7+渡島29+檜山4+上川37+留萌7+宗谷8+オホーツク31+十勝28+釧路21+根室11=269レコード・coverage=partial・全14管内着手済み）', () => {
+describe('北海道 倍率パイプラインα（Y-6・空知29+石狩31+札幌市9+後志6+後志専門12+胆振11+日高7+渡島29+檜山4+上川37+留萌7+宗谷8+オホーツク31+十勝28+釧路21+根室11=281レコード・coverage=partial・全14管内着手済み）', () => {
   const { records } = HOKKAIDO_COMPETITION_RATES;
 
   it('coverageがpartialを示している', () => {
     expect(HOKKAIDO_COMPETITION_RATES.coverage.status).toBe('partial');
   });
 
-  it('269レコードが収録されている', () => {
-    expect(records.length).toBe(269);
+  it('281レコードが収録されている', () => {
+    expect(records.length).toBe(281);
   });
 
   it('全レコードのquota>0・finalApplicants>=0・finalRateが自前算出値(applicants/quota)と整合する', () => {
@@ -70,6 +70,14 @@ describe('北海道 倍率パイプラインα（Y-6・空知29+石狩31+札幌�
     expect(schools.has('小樽潮陵')).toBe(true);
     expect(schools.has('倶知安')).toBe(true);
     expect(schools.has('岩内')).toBe(true);
+  });
+
+  it('後志地区の専門教育学科の学校が含まれる(小樽未来創造・小樽水産・余市紅志・ニセコ国際)', () => {
+    const schools = new Set(records.map((r) => r.schoolName));
+    expect(schools.has('小樽未来創造')).toBe(true);
+    expect(schools.has('小樽水産')).toBe(true);
+    expect(schools.has('余市紅志')).toBe(true);
+    expect(schools.has('ニセコ国際')).toBe(true);
   });
 
   it('胆振地区の学校が含まれる(室蘭栄・苫小牧東・伊達開来等)', () => {

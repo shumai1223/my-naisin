@@ -61,7 +61,7 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '空知地区・全日制（29レコード）',
       '石狩地区・全日制「普通教育を主とする学科」（31レコード）',
       '札幌市・全日制（市立高校6校・9レコード）',
-      '後志地区・全日制「普通教育を主とする学科」（6レコード）',
+      '後志地区・全日制「普通教育を主とする学科」（6レコード）＋「専門教育を主とする学科及び総合学科」（12レコード、資料p13中表・2026-08-07にpdftoppm 600dpi+ffmpegクロップで微小フォント学科名を再確認し収録）',
       '胆振地区・全日制「普通教育を主とする学科」（11レコード）',
       '日高地区・全日制「普通教育を主とする学科」（4レコード）＋「専門教育を主とする学科及び総合学科」（3レコード）',
       '渡島地区・全日制「普通教育を主とする学科」（10レコード・知内高校含む）＋「専門教育を主とする学科及び総合学科」（19レコード・資料p16掲載）',
@@ -76,7 +76,6 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     ],
     pendingDepartments: [
       '石狩地区・全日制「専門教育を主とする学科及び総合学科」（学校名が複数学科行にまたがる結合セルのため今回は見送り・26レコード分）',
-      '後志地区・全日制「専門教育を主とする学科及び総合学科」（小樽未来創造・小樽水産の学科名が微小フォントで判読不確実のため今回は見送り・12レコード分）',
       '胆振地区・全日制「専門教育を主とする学科及び総合学科」（室蘭工業・苫小牧工業・苫小牧総合経済が複数学科の結合セル形式のため今回は見送り・16レコード分）',
       '胆振地区・鵡川高校「普通科（連携型）」（出願者数/倍率の列が無い別選抜方式のためスキーマ不一致・スコープ外）',
       '日高地区・えりも高校「普通科（連携型）」（同上の理由でスキーマ不一致・スコープ外）',
@@ -109,7 +108,14 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '(資料p21・21行、連携型テーブルなし)・根室地区(資料p22・11行、全14頁の最終頁)も同じくpdftoppm ' +
       '-r 300による300dpi高解像度レンダリングで学科名を確認し、pdftotext -layoutの数値列と全行を' +
       '行順突合した(結合セルなし・空知と同水準の確度)。これで全14頁(空知〜根室の14管内)の一次読み込みが' +
-      '完了した(石狩/後志/胆振の専門教育学科の一部と各地区の連携型はスキーマ制約により見送り継続)。',
+      '完了した(石狩/後志/胆振の専門教育学科の一部と各地区の連携型はスキーマ制約により見送り継続)。' +
+      '⚠️2026-08-07追記: 後志地区・専門教育学科(資料p13中表)は2026-08-06時点で「小樽未来創造・' +
+      '小樽水産の学科名が微小フォントで判読不確実」として見送っていたが、pdftoppm -r 600(600dpi)＋' +
+      'ffmpegでの部分クロップ拡大で再検証したところ「機械電気システム」「建設システム」「情報会計' +
+      'マネジメント」等の学科名が明確に判読可能と判明し、pdftotext -layoutの数値列と全12行を行順' +
+      '突合のうえ収録した(結合セルなし・空知と同水準の確度)。石狩・胆振の見送り分は結合セル(1つの' +
+      'セルに複数学科が記載され行対応が一意に定まらない)という別種の問題であり、この解像度向上技法' +
+      'では解決しないため見送りを継続する。',
   },
   officialSubtotals: [],
   records: [
@@ -188,6 +194,18 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '寿都', department: '普通', quota: 40, finalApplicants: 17, finalRate: 0.43 },
     { schoolName: '蘭越', department: '普通', quota: 40, finalApplicants: 23, finalRate: 0.57 },
     { schoolName: '倶知安', department: '普通', quota: 160, finalApplicants: 108, finalRate: 0.68 },
+    { schoolName: '倶知安農業', department: '生産科学', quota: 40, finalApplicants: 17, finalRate: 0.43 },
+    { schoolName: '小樽未来創造', department: '機械電気システム', quota: 40, finalApplicants: 28, finalRate: 0.7 },
+    { schoolName: '小樽未来創造', department: '建設システム', quota: 40, finalApplicants: 25, finalRate: 0.63 },
+    { schoolName: '小樽未来創造', department: '流通マネジメント', quota: 40, finalApplicants: 42, finalRate: 1.05 },
+    { schoolName: '小樽未来創造', department: '情報会計マネジメント', quota: 40, finalApplicants: 36, finalRate: 0.9 },
+    { schoolName: '岩内', department: '地域産業ビジネス', quota: 40, finalApplicants: 12, finalRate: 0.3 },
+    { schoolName: '小樽水産', department: '海洋漁業', quota: 40, finalApplicants: 40, finalRate: 1.0 },
+    { schoolName: '小樽水産', department: '水産食品', quota: 40, finalApplicants: 33, finalRate: 0.83 },
+    { schoolName: '小樽水産', department: '栽培漁業', quota: 40, finalApplicants: 39, finalRate: 0.98 },
+    { schoolName: '小樽水産', department: '情報通信', quota: 40, finalApplicants: 27, finalRate: 0.68 },
+    { schoolName: '余市紅志', department: '総合', quota: 40, finalApplicants: 29, finalRate: 0.73 },
+    { schoolName: 'ニセコ国際', department: '総合', quota: 70, finalApplicants: 59, finalRate: 0.84 },
     { schoolName: '室蘭栄', department: '普通', quota: 120, finalApplicants: 134, finalRate: 1.12 },
     { schoolName: '室蘭清水丘', department: '普通', quota: 160, finalApplicants: 132, finalRate: 0.83 },
     { schoolName: '登別青嶺', department: '普通', quota: 120, finalApplicants: 62, finalRate: 0.52 },
