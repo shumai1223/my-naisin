@@ -28,13 +28,13 @@ const FAQS = [
 ];
 
 export const metadata: Metadata = {
-  title: '得点を1000点満点に換算する計算機【任意の満点対応】| My Naishin',
-  description: '内申点・学力検査・模試などの得点を、1000点満点・100点満点（または任意の満点）に無料で換算。得点÷元の満点×換算後の満点の比例計算で、入力するだけで即結果表示。登録不要。',
-  keywords: ['1000点換算', '1000点満点 換算', '得点 1000点 換算 計算', '点数 換算 計算機', '100点換算', '100点満点 換算 サイト'],
+  title: '得点を100点・1000点など好きな満点に換算する計算機 | My Naishin',
+  description: '内申点・学力検査・模試などの得点を、100点満点・1000点満点（または任意の満点）に無料で換算。得点÷元の満点×換算後の満点の比例計算で、入力するだけで即結果表示。登録不要。',
+  keywords: ['1000点換算', '1000点満点 換算', '得点 1000点 換算 計算', '点数 換算 計算機', '100点換算', '100点満点 換算 サイト', '満点換算'],
   alternates: { canonical: `${SITE_URL}/total-score/mantenkan` },
   openGraph: {
-    title: '得点を1000点満点に換算する計算機【任意の満点対応】| My Naishin',
-    description: '内申点・学力検査・模試などの得点を、1000点満点（または任意の満点）に無料で換算する計算機。',
+    title: '得点を100点・1000点など好きな満点に換算する計算機 | My Naishin',
+    description: '内申点・学力検査・模試などの得点を、100点満点・1000点満点（または任意の満点）に無料で換算する計算機。',
     url: `${SITE_URL}/total-score/mantenkan`,
     type: 'article',
   },
@@ -47,12 +47,12 @@ export default function TotalScoreMantenkanPage() {
         items={[
           { name: 'ホーム', url: `${SITE_URL}/` },
           { name: '都道府県別 総合得点の仕組み', url: `${SITE_URL}/total-score` },
-          { name: '1000点満点換算', url: `${SITE_URL}/total-score/mantenkan` },
+          { name: '満点換算', url: `${SITE_URL}/total-score/mantenkan` },
         ]}
       />
       <WebApplicationSchema
-        name="得点を1000点満点に換算する計算機"
-        description="内申点・学力検査・模試などの得点を1000点満点（または任意の満点）に換算する無料ツール"
+        name="得点を100点・1000点など好きな満点に換算する計算機"
+        description="内申点・学力検査・模試などの得点を100点満点・1000点満点（または任意の満点）に換算する無料ツール"
         url={`${SITE_URL}/total-score/mantenkan`}
       />
       <FAQPageSchema faqItems={FAQS} />
@@ -67,16 +67,16 @@ export default function TotalScoreMantenkanPage() {
             <ChevronRight className="h-4 w-4" />
             <Link href="/total-score" className="hover:text-blue-600">都道府県別 総合得点の仕組み</Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">1000点満点換算</span>
+            <span className="text-slate-700">満点換算</span>
           </nav>
 
           <header className="mb-8 text-center">
             <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 text-white shadow-xl">
               <ArrowLeftRight className="h-8 w-8" />
             </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">得点を1000点満点に換算する計算機</h1>
+            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">得点を100点・1000点など好きな満点に換算する計算機</h1>
             <p className="mx-auto mt-4 max-w-xl leading-relaxed text-slate-600">
-              内申点・学力検査・模試など、<strong>満点がバラバラな得点</strong>を1000点満点（または任意の満点）にそろえて比較できます。
+              内申点・学力検査・模試など、<strong>満点がバラバラな得点</strong>を100点満点・1000点満点（または任意の満点）にそろえて比較できます。
             </p>
           </header>
 
