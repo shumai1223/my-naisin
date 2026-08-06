@@ -29,8 +29,8 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
   prefectureCode: 'hokkaido',
   sources: [
     {
-      url: 'https://www.dokyoi.pref.hokkaido.lg.jp/fs/1/3/1/7/8/5/6/0/_/03_p2-p6.pdf',
-      docTitle: '北海道教育委員会 R8入学者選抜状況報告書「§3 学校別受検者数及び合格者数」（空知地区）',
+      url: 'https://www.dokyoi.pref.hokkaido.lg.jp/fs/1/3/1/7/8/5/5/0/_/05_p9-p22.pdf',
+      docTitle: '北海道教育委員会 R8入学者選抜状況報告書「§3 学校別受検者数及び合格者数」（全14頁中・空知地区掲載頁）',
       fiscalYear: '令和8年度（2026年度）',
       fetchedAt: '2026-08-06',
     },
