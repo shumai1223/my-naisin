@@ -1,6 +1,7 @@
 /**
  * 北海道 公立高等学校 倍率パイプラインα（Y-6・coverage='partial'・空知地区+石狩地区(全日制普通科)
- * +札幌市(市立高校・全日制)+後志地区(全日制普通科)+胆振地区(全日制普通科)+日高地区(全日制)のみ）。
+ * +札幌市(市立高校・全日制)+後志地区(全日制普通科)+胆振地区(全日制普通科)+日高地区(全日制)
+ * +渡島地区(全日制普通科)のみ）。
  *
  * 一次ソース: 北海道教育委員会「R8入学者選抜状況報告書 §3 学校別受検者数及び合格者数」
  * （令和8年度＝2026年度入学者選抜・全14頁・管内(空知/石狩/後志/胆振/日高/渡島/檜山/上川/
@@ -31,9 +32,13 @@
  * 主とする学科及び総合学科」（資料p13中表・12レコード）は小樽未来創造・小樽水産の学科名が微小
  * フォントで確実な判読ができないため見送り、胆振地区の同種テーブル（資料p14上表・16レコード）
  * も室蘭工業・苫小牧工業・苫小牧総合経済が複数学科の結合セル形式のため同様に見送った。日高地区
- * （4レコード、資料p14下表）は全日制が普通科のみの小規模地区で専門/総合学科自体が存在しない。
- * 残り9地区（渡島/檜山/上川/留萌/宗谷/オホーツク/十勝/釧路/根室）は次回以降のセッションで地区
- * 単位に追加していく（1地区=1コミット目安）。
+ * は全日制「普通教育を主とする学科」（4レコード、資料p14下表）に加え「専門教育を主とする学科
+ * 及び総合学科」（静内農業2学科＋浦河総合・3レコード、資料p15上表）も収録（⚠️前回セッションで
+ * 「日高地区は専門/総合学科が存在しない」と誤って記録したが、実際は次ページに続いていただけ
+ * だったと判明・修正済み）。渡島地区・全日制「普通教育を主とする学科」（10レコード、資料p15
+ * 下表・知内高校は別枠の小表だが同一区分のため合算）も収録。残り8地区（檜山/上川/留萌/宗谷/
+ * オホーツク/十勝/釧路/根室）は次回以降のセッションで地区単位に追加していく
+ * （1地区=1コミット目安）。
  */
 import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
 
@@ -55,7 +60,8 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '札幌市・全日制（市立高校6校・9レコード）',
       '後志地区・全日制「普通教育を主とする学科」（6レコード）',
       '胆振地区・全日制「普通教育を主とする学科」（11レコード）',
-      '日高地区・全日制「普通教育を主とする学科」（4レコード）',
+      '日高地区・全日制「普通教育を主とする学科」（4レコード）＋「専門教育を主とする学科及び総合学科」（3レコード）',
+      '渡島地区・全日制「普通教育を主とする学科」（10レコード・知内高校含む）',
     ],
     pendingDepartments: [
       '石狩地区・全日制「専門教育を主とする学科及び総合学科」（学校名が複数学科行にまたがる結合セルのため今回は見送り・26レコード分）',
@@ -63,7 +69,8 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '胆振地区・全日制「専門教育を主とする学科及び総合学科」（室蘭工業・苫小牧工業・苫小牧総合経済が複数学科の結合セル形式のため今回は見送り・16レコード分）',
       '胆振地区・鵡川高校「普通科（連携型）」（出願者数/倍率の列が無い別選抜方式のためスキーマ不一致・スコープ外）',
       '日高地区・えりも高校「普通科（連携型）」（同上の理由でスキーマ不一致・スコープ外）',
-      '渡島地区・檜山地区・上川地区・留萌地区・宗谷地区・オホーツク地区・十勝地区・釧路地区・根室地区（いずれも未着手）',
+      '渡島地区・全日制「専門教育を主とする学科及び総合学科」（次ページ以降・未確認）',
+      '檜山地区・上川地区・留萌地区・宗谷地区・オホーツク地区・十勝地区・釧路地区・根室地区（いずれも未着手）',
       '空知地区・滝川西高校「情報マネジメント科」（検算式で数値の対応関係を特定できず見送り）',
       '札幌市・市立札幌大通「定時制」（他県のY-6と同じ理由でスコープ外）',
       '後志地区・定時制（小樽潮陵・真狩・留寿都・小樽未来創造。他県のY-6と同じ理由でスコープ外）',
@@ -170,5 +177,18 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '富川', department: '普通', quota: 40, finalApplicants: 24, finalRate: 0.6 },
     { schoolName: '静内', department: '普通', quota: 200, finalApplicants: 152, finalRate: 0.76 },
     { schoolName: 'えりも', department: '普通', quota: 70, finalApplicants: 28, finalRate: 0.4 },
+    { schoolName: '静内農業', department: '食品科学', quota: 40, finalApplicants: 32, finalRate: 0.8 },
+    { schoolName: '静内農業', department: '生産科学', quota: 40, finalApplicants: 46, finalRate: 1.15 },
+    { schoolName: '浦河総合', department: '総合', quota: 120, finalApplicants: 87, finalRate: 0.73 },
+    { schoolName: '函館中部', department: '普通', quota: 160, finalApplicants: 186, finalRate: 1.16 },
+    { schoolName: '函館西', department: '普通', quota: 240, finalApplicants: 301, finalRate: 1.25 },
+    { schoolName: '南茅部', department: '普通', quota: 40, finalApplicants: 9, finalRate: 0.23 },
+    { schoolName: '上磯', department: '普通', quota: 40, finalApplicants: 27, finalRate: 0.68 },
+    { schoolName: '七飯', department: '普通', quota: 120, finalApplicants: 100, finalRate: 0.83 },
+    { schoolName: '松前', department: '普通', quota: 40, finalApplicants: 25, finalRate: 0.63 },
+    { schoolName: '八雲', department: '普通', quota: 80, finalApplicants: 65, finalRate: 0.81 },
+    { schoolName: '長万部', department: '普通', quota: 40, finalApplicants: 24, finalRate: 0.6 },
+    { schoolName: '市立函館', department: '普通', quota: 200, finalApplicants: 283, finalRate: 1.42 },
+    { schoolName: '知内', department: '普通', quota: 80, finalApplicants: 71, finalRate: 0.89 },
   ],
 };
