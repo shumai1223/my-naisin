@@ -644,13 +644,15 @@
       "sourceDoc": "docs/x5-government-source-reference-2026-07.md#対象18 (電話取材メモのみだったが2026-08-07にWebFetchで高校教育課専用フォームURLを新規発見)"
     },
     {
-      "id": "kyoiku-excluded-form-needs-url",
-      "org": "教委・フォーム可だが具体URL未確定1県（熊本県）※北海道・神奈川県・群馬県・岡山県・福島県・新潟県・広島県・山口県・愛媛県はフォーム、岩手県はメールで個別解決済み",
+      "id": "kyoiku-kumamoto-form",
+      "org": "熊本県教育委員会 高校教育課 高等学校教育指導班（sec_sec1=130専用お問い合わせフォーム）",
       "lane": "kyoiku-i",
       "channel": "form",
-      "status": "excluded",
-      "excludeReason": "kyoiku-i-contact-directory-2026-08-01.mdは「フォーム可」と分類のみでフォームの具体URLが未記載(「各URLは調査元の表を参照」とあるが参照先が本ファイル内に見当たらない)。URLを推測で埋めると捏造になるため、実際のフォームURLを再調査してから次バッチでqueued化する。",
-      "sourceDoc": "docs/kyoiku-i-contact-directory-2026-08-01.md"
+      "contact": "https://www.pref.kumamoto.jp/form/detail.php?sec_sec1=130",
+      "body": "熊本県教育委員会 高校教育課 高等学校教育指導班 ご担当者様\n\n突然のご連絡失礼いたします。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します（中学生が個人で運営しております）。\n\n貴班が公表されている熊本県立高等学校入学者選抜要項を一次資料として活用させていただき、当サイト内の該当ページ（https://my-naishin.com/pref/kumamoto）にて、中1・中2は等倍、中3のみ2倍で計算する180点満点の制度をご説明する形で、出典を明記の上ご紹介させていただいております。\n\n本連絡は、貴班の公表資料を実際にこのように活用させていただいている旨のご報告と、もし差し支えなければ貴班公式サイトの関連ページから当サイトへの参照が可能かどうかについてご相談させていただきたく、ご連絡いたしました。ご検討いただけますと幸いです。\n\nしゅうまい / My Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com　naishin.dev@gmail.com",
+      "note": "高校教育課ページ(soshiki/130)の「お問い合わせフォーム」リンク先(sec_sec1=130・特定班への直通メールアドレスは本文に記載なしと確認済み)。フォーム自体はgunma/okayama/fukushima/niigata/hiroshima/yamaguchi/ehimeと同じCMS(Cookie必須)でWebFetchでは中身を検証できず、氏名/年齢確認等の必須項目は2026-08-07時点で未確認。👤が実ブラウザでこのフォームを開いて内容を確認してから送信すること。",
+      "status": "queued",
+      "sourceDoc": "docs/x5-government-source-reference-2026-07.md#対象44 (電話取材メモのみだったが2026-08-07にWebFetchで高校教育課専用フォームURLを新規発見・これでkyoiku-i-contact-directory-2026-08-01.mdの「フォーム可」12県全てのURL確定が完了)"
     },
     {
       "id": "media-excluded-not-sendable",
