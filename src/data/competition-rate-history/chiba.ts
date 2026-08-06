@@ -92,7 +92,42 @@ const REIWA_5: YearSnapshot = {
   grandTotal: { label: '全日制の課程（一般入学者選抜・志願者確定数）', quota: 30960, applicants: 34793, rate: 1.12 },
 };
 
+/**
+ * 令和4年度（2022年度）: 教委公式サイトの該当ページは404で直接確認できなかったため、
+ * 既存データで実績のある独立2媒体（よみうり進学メディア・リセモム）を本文直接WebFetchで
+ * 確認し完全一致（募集人員31,320・志願者確定数34,637・倍率1.11）。リセモム記事の
+ * 「前年度より0.03ポイント増」という記述もR3年度1.08倍→R4年度1.11倍(差0.03)と整合。
+ */
+const REIWA_4: YearSnapshot = {
+  fiscalYear: '令和4年度（2022年度）',
+  sourceUrl: 'https://ysmedia.jp/admissions/8984/',
+  sourceTitle:
+    'よみうり進学メディア「〈2022年度入試〉千葉県 公立高校「一般選抜志願者数確定（2月21日付）」倍率1.11倍-令和4年度」(リセモム記事とも完全一致確認済み)',
+  fetchedAt: '2026-08-06',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制の課程（一般入学者選抜・志願者確定数）', quota: 31320, applicants: 34637, rate: 1.11 },
+};
+
+/**
+ * 令和3年度（2021年度）: 教委公式サイトの該当ページは404で直接確認できなかったため、
+ * 独立2媒体（よみうり進学メディア・リセモム）を本文直接WebFetchで確認し完全一致
+ * （募集人員30,920・志願者確定数33,517・倍率1.08）。
+ */
+const REIWA_3: YearSnapshot = {
+  fiscalYear: '令和3年度（2021年度）',
+  sourceUrl: 'https://ysmedia.jp/admissions/4327/',
+  sourceTitle:
+    'よみうり進学メディア「〈2021年度入試〉千葉県 公立高校「一般入学者選抜 志願状況（最終）」-令和3年度」(リセモム記事とも完全一致確認済み)',
+  fetchedAt: '2026-08-06',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制の課程（一般入学者選抜・志願者確定数）', quota: 30920, applicants: 33517, rate: 1.08 },
+};
+
 export const CHIBA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'chiba',
-  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5],
+  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
 };

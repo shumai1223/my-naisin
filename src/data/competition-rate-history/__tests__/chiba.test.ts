@@ -4,14 +4,16 @@ import { CHIBA_COMPETITION_RATE_HISTORY } from '../chiba';
  * Λ-4（多年度アーカイブ・千葉県）DoD検証: 報道記事から取得した全日制合計の数値を固定値で確認する。
  * 令和6年度分は別の独立記事(2月16日付発表を報じた記事)とも一致することを実測確認済み。
  */
-describe('千葉県 多年度アーカイブ（Λ-4・令和8/令和7/令和6/令和5の4年度分・grand-total-only）', () => {
-  it('4年度分（令和8年度・令和7年度・令和6年度・令和5年度）を収録している', () => {
-    expect(CHIBA_COMPETITION_RATE_HISTORY.years).toHaveLength(4);
+describe('千葉県 多年度アーカイブ（Λ-4・令和8〜令和3の6年度分・grand-total-only）', () => {
+  it('6年度分（令和8年度〜令和3年度）を収録している', () => {
+    expect(CHIBA_COMPETITION_RATE_HISTORY.years).toHaveLength(6);
     expect(CHIBA_COMPETITION_RATE_HISTORY.years.map((y) => y.fiscalYear)).toEqual([
       '令和8年度（2026年度）',
       '令和7年度（2025年度）',
       '令和6年度（2024年度）',
       '令和5年度（2023年度）',
+      '令和4年度（2022年度）',
+      '令和3年度（2021年度）',
     ]);
   });
 
@@ -47,5 +49,19 @@ describe('千葉県 多年度アーカイブ（Λ-4・令和8/令和7/令和6/�
     expect(r5.grandTotal.quota).toBe(30960);
     expect(r5.grandTotal.applicants).toBe(34793);
     expect(r5.grandTotal.rate).toBeCloseTo(1.12, 2);
+  });
+
+  it('令和4年度の全日制合計は独立2媒体(よみうり進学メディア・リセモム)双方と一致する(募集31,320・志願34,637・倍率1.11)', () => {
+    const r4 = CHIBA_COMPETITION_RATE_HISTORY.years[4];
+    expect(r4.grandTotal.quota).toBe(31320);
+    expect(r4.grandTotal.applicants).toBe(34637);
+    expect(r4.grandTotal.rate).toBeCloseTo(1.11, 2);
+  });
+
+  it('令和3年度の全日制合計は独立2媒体(よみうり進学メディア・リセモム)双方と一致する(募集30,920・志願33,517・倍率1.08)', () => {
+    const r3 = CHIBA_COMPETITION_RATE_HISTORY.years[5];
+    expect(r3.grandTotal.quota).toBe(30920);
+    expect(r3.grandTotal.applicants).toBe(33517);
+    expect(r3.grandTotal.rate).toBeCloseTo(1.08, 2);
   });
 });
