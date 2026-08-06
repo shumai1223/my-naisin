@@ -115,7 +115,27 @@ const REIWA_3: YearSnapshot = {
   grandTotal: { label: '全日制合計', quota: 5273, applicants: 4332, rate: 0.82 },
 };
 
+/**
+ * 令和2年度（2020年度）: 2026-08-06にΛ-4深掘り(7年目)で追加。R3と同型のリセモム確定記事
+ * （2020-02-26「【高校受験2020】宮崎県立高、一般入試の志願状況（確定）宮崎西（理数）1.47倍」・
+ * https://resemom.jp/article/2020/02/26/54961.html）をWebFetchで直接確認。「全日制の課程の
+ * 合計募集人員5,331人に対し、志願者数は4,813人、志願倍率は0.90倍だった」と本文に明記
+ * （4813/5331=0.9028…≈0.90で整合）。独立した第2ソースは発見できずR3と同じ理由で単一ソース
+ * として収録。
+ */
+const REIWA_2: YearSnapshot = {
+  fiscalYear: '令和2年度（2020年度）',
+  sourceUrl: 'https://resemom.jp/article/2020/02/26/54961.html',
+  sourceTitle:
+    'リセモム「【高校受験2020】宮崎県立高、一般入試の志願状況（確定）宮崎西（理数）1.47倍」（宮崎県教育委員会 令和2年度一般入学者選抜志願状況の発表を引用）',
+  fetchedAt: '2026-08-06',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制合計', quota: 5331, applicants: 4813, rate: 0.9 },
+};
+
 export const MIYAZAKI_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'miyazaki',
-  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
+  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3, REIWA_2],
 };

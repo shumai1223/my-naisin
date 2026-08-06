@@ -4,9 +4,9 @@ import { MIYAZAKI_COMPETITION_RATE_HISTORY } from '../miyazaki';
  * Λ-4（多年度アーカイブ・宮崎県）DoD検証: 令和7・令和6・令和5年度の「全日制合計」
  * （一般入学募集人員quota・志願者数applicants）を一次資料の固定値で確認する。
  */
-describe('宮崎県 多年度アーカイブ（Λ-4・令和8〜令和3の6年度分・grand-total-only）', () => {
-  it('6年度分（令和8年度〜令和3年度）を収録している', () => {
-    expect(MIYAZAKI_COMPETITION_RATE_HISTORY.years).toHaveLength(6);
+describe('宮崎県 多年度アーカイブ（Λ-4・令和8〜令和2の7年度分・grand-total-only）', () => {
+  it('7年度分（令和8年度〜令和2年度）を収録している', () => {
+    expect(MIYAZAKI_COMPETITION_RATE_HISTORY.years).toHaveLength(7);
     expect(MIYAZAKI_COMPETITION_RATE_HISTORY.years.map((y) => y.fiscalYear)).toEqual([
       '令和8年度（2026年度）',
       '令和7年度（2025年度）',
@@ -14,6 +14,7 @@ describe('宮崎県 多年度アーカイブ（Λ-4・令和8〜令和3の6年�
       '令和5年度（2023年度）',
       '令和4年度（2022年度）',
       '令和3年度（2021年度）',
+      '令和2年度（2020年度）',
     ]);
   });
 
@@ -63,6 +64,13 @@ describe('宮崎県 多年度アーカイブ（Λ-4・令和8〜令和3の6年�
     expect(r3.grandTotal.quota).toBe(5273);
     expect(r3.grandTotal.applicants).toBe(4332);
     expect(r3.grandTotal.rate).toBeCloseTo(0.82, 2);
+  });
+
+  it('令和2年度はリセモム記事と一致する(募集人員5,331・志願者数4,813・倍率0.90)', () => {
+    const r2 = MIYAZAKI_COMPETITION_RATE_HISTORY.years[6];
+    expect(r2.grandTotal.quota).toBe(5331);
+    expect(r2.grandTotal.applicants).toBe(4813);
+    expect(r2.grandTotal.rate).toBeCloseTo(0.9, 2);
   });
 
   it('内部整合性: 全年度で志願者数÷募集人員が公表倍率とおおむね一致する', () => {
