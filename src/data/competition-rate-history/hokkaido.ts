@@ -32,6 +32,38 @@
  */
 import type { PrefectureRateHistoryFile, YearSnapshot } from '@/lib/competition-rate-history';
 
+/**
+ * 令和6年度（2024年度）: R6版報告書(hk/gks/193247.html「R6入学者選抜状況報告書（全体版）」・
+ * 令和7年7月29日訂正版)の同一シリーズ「出願者の状況」PDF(第1表)から令和7年度と同じ方法で
+ * 収録。学科区分14種の合計はquota=29,730・applicants=28,756で全日制「合計」行と完全一致
+ * （sumCategories突合済み）。
+ */
+const REIWA_6: YearSnapshot = {
+  fiscalYear: '令和6年度（2024年度）',
+  sourceUrl: 'https://www.dokyoi.pref.hokkaido.lg.jp/fs/1/2/0/0/0/0/8/9/_/p02-06_syutugansyanozyoukyou(%E4%BF%AE%E6%AD%A3%E7%89%88).pdf',
+  sourceTitle: '北海道教育委員会 R6入学者選抜状況報告書「§1 出願者の状況 第1表 課程・学科別出願者の状況」',
+  fetchedAt: '2026-08-06',
+  origin: 'current-year-column',
+  granularity: 'category-detail',
+  categories: [
+    { label: '普通', quota: 19930, applicants: 19973, rate: 1.0 },
+    { label: '農業', quota: 1440, applicants: 964, rate: 0.67 },
+    { label: '工業', quota: 2320, applicants: 2033, rate: 0.88 },
+    { label: '商業', quota: 2720, applicants: 2620, rate: 0.96 },
+    { label: '水産', quota: 360, applicants: 277, rate: 0.77 },
+    { label: '家庭', quota: 120, applicants: 103, rate: 0.86 },
+    { label: '看護', quota: 120, applicants: 58, rate: 0.48 },
+    { label: '福祉', quota: 40, applicants: 9, rate: 0.23 },
+    { label: '理数', quota: 320, applicants: 365, rate: 1.14 },
+    { label: '体育', quota: 80, applicants: 103, rate: 1.29 },
+    { label: '外国語', quota: 120, applicants: 143, rate: 1.19 },
+    { label: '工芸', quota: 40, applicants: 40, rate: 1.0 },
+    { label: '数理データサイエンス', quota: 80, applicants: 82, rate: 1.02 },
+    { label: '総合', quota: 2040, applicants: 1986, rate: 0.97 },
+  ],
+  grandTotal: { label: '全日制計（第１次出願者数）', quota: 29730, applicants: 28756, rate: 0.97 },
+};
+
 const REIWA_7: YearSnapshot = {
   fiscalYear: '令和7年度（2025年度）',
   sourceUrl: 'https://www.dokyoi.pref.hokkaido.lg.jp/fs/1/2/0/5/0/3/1/8/_/p02-06_syutugansyanozyoukyou.pdf',
@@ -60,5 +92,5 @@ const REIWA_7: YearSnapshot = {
 
 export const HOKKAIDO_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'hokkaido',
-  years: [REIWA_7],
+  years: [REIWA_7, REIWA_6],
 };

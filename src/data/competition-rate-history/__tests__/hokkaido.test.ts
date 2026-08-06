@@ -4,15 +4,16 @@ import { HOKKAIDO_COMPETITION_RATE_HISTORY } from '../hokkaido';
 /**
  * Λ-4（多年度アーカイブ・北海道）DoD検証: 学科区分別（普通/農業/工業/商業/水産/家庭/看護/
  * 福祉/理数/体育/外国語/工芸/数理データサイエンス/総合）の内訳を積み上げた合計が、
- * 一次ソース(R7入学者選抜状況報告書 第1表)の全日制「合計」行と完全一致することを機械的に
+ * 一次ソース(R6/R7入学者選抜状況報告書 第1表)の全日制「合計」行と完全一致することを機械的に
  * 突合する。北海道は2026-08-06まで教委公式ページのリンク切れにより恒久ブロック扱いだったが、
- * 別ページ経由でR7年度分のデータを新規発見・収録した(詳細はhokkaido.tsのコメント参照)。
+ * 別ページ経由でR6・R7年度分のデータを新規発見・収録した(詳細はhokkaido.tsのコメント参照)。
  */
-describe('北海道 多年度アーカイブ（Λ-4・令和7年度のみ1年分・category-detail）', () => {
-  it('1年度分（令和7年度）を収録している', () => {
-    expect(HOKKAIDO_COMPETITION_RATE_HISTORY.years).toHaveLength(1);
+describe('北海道 多年度アーカイブ（Λ-4・令和7〜6年度の2年分・category-detail）', () => {
+  it('2年度分（令和7年度・令和6年度）を収録している', () => {
+    expect(HOKKAIDO_COMPETITION_RATE_HISTORY.years).toHaveLength(2);
     expect(HOKKAIDO_COMPETITION_RATE_HISTORY.years.map((y) => y.fiscalYear)).toEqual([
       '令和7年度（2025年度）',
+      '令和6年度（2024年度）',
     ]);
   });
 
@@ -30,13 +31,21 @@ describe('北海道 多年度アーカイブ（Λ-4・令和7年度のみ1年分
     expect(r7.grandTotal.rate).toBeCloseTo(0.96, 2);
   });
 
-  it('学科区分は14種を収録している(普通/農業/工業/商業/水産/家庭/看護/福祉/理数/体育/外国語/工芸/数理データサイエンス/総合)', () => {
-    const r7 = HOKKAIDO_COMPETITION_RATE_HISTORY.years[0];
-    expect(r7.categories).toHaveLength(14);
-    expect(r7.categories.map((c) => c.label)).toEqual([
-      '普通', '農業', '工業', '商業', '水産', '家庭', '看護', '福祉',
-      '理数', '体育', '外国語', '工芸', '数理データサイエンス', '総合',
-    ]);
+  it('令和6年度の全日制計は一次資料と一致する(募集29,730・出願28,756・倍率0.97)', () => {
+    const r6 = HOKKAIDO_COMPETITION_RATE_HISTORY.years[1];
+    expect(r6.grandTotal.quota).toBe(29730);
+    expect(r6.grandTotal.applicants).toBe(28756);
+    expect(r6.grandTotal.rate).toBeCloseTo(0.97, 2);
+  });
+
+  it('全年度で学科区分は14種を収録している(普通/農業/工業/商業/水産/家庭/看護/福祉/理数/体育/外国語/工芸/数理データサイエンス/総合)', () => {
+    for (const y of HOKKAIDO_COMPETITION_RATE_HISTORY.years) {
+      expect(y.categories).toHaveLength(14);
+      expect(y.categories.map((c) => c.label)).toEqual([
+        '普通', '農業', '工業', '商業', '水産', '家庭', '看護', '福祉',
+        '理数', '体育', '外国語', '工芸', '数理データサイエンス', '総合',
+      ]);
+    }
   });
 
   it('内部整合性: 各区分の志願者数÷募集人員が記録された倍率とおおむね一致する', () => {
