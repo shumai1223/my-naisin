@@ -33,6 +33,39 @@
 import type { PrefectureRateHistoryFile, YearSnapshot } from '@/lib/competition-rate-history';
 
 /**
+ * 令和8年度（2026年度）: 当初「R5入学者選抜状況報告書」としてWebSearchでヒットしたURL
+ * (hk/gks/156952.html)を開いたところ、実際のページタイトルは「R8入学者選抜状況報告書」で
+ * あり検索結果のタイトルが古い/誤っていたと判明(令和2年度当時のURLをR8年度分が再利用して
+ * いる可能性)。R5は収録できなかったが、代わりに最新のR8年度分を新規収録できた。学科区分14種の
+ * 合計はquota=29,116・applicants=27,126で全日制「合計」行と完全一致（sumCategories突合済み）。
+ */
+const REIWA_8: YearSnapshot = {
+  fiscalYear: '令和8年度（2026年度）',
+  sourceUrl: 'https://www.dokyoi.pref.hokkaido.lg.jp/fs/1/3/1/7/8/5/6/0/_/03_p2-p6.pdf',
+  sourceTitle: '北海道教育委員会 R8入学者選抜状況報告書「§1 出願者の状況 第1表 課程・学科別出願者の状況」',
+  fetchedAt: '2026-08-06',
+  origin: 'current-year-column',
+  granularity: 'category-detail',
+  categories: [
+    { label: '普通', quota: 19490, applicants: 19014, rate: 0.98 },
+    { label: '農業', quota: 1440, applicants: 983, rate: 0.68 },
+    { label: '工業', quota: 2280, applicants: 1941, rate: 0.85 },
+    { label: '商業', quota: 2600, applicants: 2235, rate: 0.86 },
+    { label: '水産', quota: 320, applicants: 261, rate: 0.82 },
+    { label: '家庭', quota: 120, applicants: 112, rate: 0.93 },
+    { label: '看護', quota: 120, applicants: 59, rate: 0.49 },
+    { label: '福祉', quota: 40, applicants: 25, rate: 0.63 },
+    { label: '理数', quota: 320, applicants: 347, rate: 1.08 },
+    { label: '体育', quota: 80, applicants: 76, rate: 0.95 },
+    { label: '外国語', quota: 120, applicants: 131, rate: 1.09 },
+    { label: '工芸', quota: 40, applicants: 37, rate: 0.93 },
+    { label: '数理データサイエンス', quota: 80, applicants: 90, rate: 1.13 },
+    { label: '総合', quota: 2066, applicants: 1815, rate: 0.88 },
+  ],
+  grandTotal: { label: '全日制計（第１次出願者数）', quota: 29116, applicants: 27126, rate: 0.93 },
+};
+
+/**
  * 令和6年度（2024年度）: R6版報告書(hk/gks/193247.html「R6入学者選抜状況報告書（全体版）」・
  * 令和7年7月29日訂正版)の同一シリーズ「出願者の状況」PDF(第1表)から令和7年度と同じ方法で
  * 収録。学科区分14種の合計はquota=29,730・applicants=28,756で全日制「合計」行と完全一致
@@ -92,5 +125,5 @@ const REIWA_7: YearSnapshot = {
 
 export const HOKKAIDO_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'hokkaido',
-  years: [REIWA_7, REIWA_6],
+  years: [REIWA_8, REIWA_7, REIWA_6],
 };
