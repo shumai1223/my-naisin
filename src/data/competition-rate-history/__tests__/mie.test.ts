@@ -4,9 +4,9 @@ import { MIE_COMPETITION_RATE_HISTORY } from '../mie';
  * Λ-4（多年度アーカイブ・三重県）DoD検証: 令和7・令和6年度の「全日制総計」の数値を
  * 一次資料（三重県教育委員会の後期選抜志願状況ページ本文）の固定値で確認する。
  */
-describe('三重県 多年度アーカイブ（Λ-4・令和8/令和7/令和6/令和5/令和4/令和3の6年度分・grand-total-only）', () => {
-  it('6年度分（令和8年度・令和7年度・令和6年度・令和5年度・令和4年度・令和3年度）を収録している', () => {
-    expect(MIE_COMPETITION_RATE_HISTORY.years).toHaveLength(6);
+describe('三重県 多年度アーカイブ（Λ-4・令和8〜令和2の7年度分・grand-total-only）', () => {
+  it('7年度分（令和8年度〜令和2年度）を収録している', () => {
+    expect(MIE_COMPETITION_RATE_HISTORY.years).toHaveLength(7);
     expect(MIE_COMPETITION_RATE_HISTORY.years.map((y) => y.fiscalYear)).toEqual([
       '令和8年度（2026年度）',
       '令和7年度（2025年度）',
@@ -14,6 +14,7 @@ describe('三重県 多年度アーカイブ（Λ-4・令和8/令和7/令和6/�
       '令和5年度（2023年度）',
       '令和4年度（2022年度）',
       '令和3年度（2021年度）',
+      '令和2年度（2020年度）',
     ]);
   });
 
@@ -68,5 +69,13 @@ describe('三重県 多年度アーカイブ（Λ-4・令和8/令和7/令和6/�
     expect(r3.grandTotal.quota).toBe(7017);
     expect(r3.grandTotal.applicants).toBe(7566);
     expect(r3.grandTotal.rate).toBeCloseTo(1.08, 2);
+  });
+
+  it('令和2年度の全日制総計は一次資料と一致する(53校・募集7,444・志願8,012・倍率1.08)', () => {
+    const r2 = MIE_COMPETITION_RATE_HISTORY.years[6];
+    expect(r2.grandTotal.schoolCount).toBe(53);
+    expect(r2.grandTotal.quota).toBe(7444);
+    expect(r2.grandTotal.applicants).toBe(8012);
+    expect(r2.grandTotal.rate).toBeCloseTo(1.08, 2);
   });
 });

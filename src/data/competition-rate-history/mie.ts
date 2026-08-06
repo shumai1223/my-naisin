@@ -111,7 +111,27 @@ const REIWA_3: YearSnapshot = {
   grandTotal: { label: '全日制総計', quota: 7017, applicants: 7566, rate: 1.08 },
 };
 
+/**
+ * 令和2年度（2020年度）: 2026-08-06にΛ-4深掘り(7年目)で再挑戦し発見。前回セッション(14:56)は
+ * リセモム記事のURLを特定できず見送っていたが、同一シリーズの県公式ページURL連番
+ * （m0045100XXX形式・R2の前期選抜等志願状況ページ=m0045100208から近傍IDを直接WebFetchで
+ * 走査）で「令和2年度三重県立高等学校後期選抜志願状況（最終）を取りまとめました」
+ * （m0045100214.htm）を発見。全日制課程「令和　２年度　５３校１２３学科・コース
+ * ７，４４４人　８，０１２人　１．０８倍」を本文から直接引用（8012/7444=1.0763…≈1.08で
+ * 整合）。R5-R8と同じ一次資料形式・学校数53校（R5と同数）。
+ */
+const REIWA_2: YearSnapshot = {
+  fiscalYear: '令和2年度（2020年度）',
+  sourceUrl: 'https://www.pref.mie.lg.jp/TOPICS/m0045100214.htm',
+  sourceTitle: '三重県教育委員会 令和2年度三重県立高等学校後期選抜志願状況（最終）を取りまとめました',
+  fetchedAt: '2026-08-06',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制総計', schoolCount: 53, quota: 7444, applicants: 8012, rate: 1.08 },
+};
+
 export const MIE_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'mie',
-  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
+  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3, REIWA_2],
 };
