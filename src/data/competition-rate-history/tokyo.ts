@@ -187,7 +187,30 @@ const REIWA_3: YearSnapshot = {
   grandTotal: { label: '全日制合計', schoolCount: 168, quota: 29509, applicants: 39785, rate: 1.35 },
 };
 
+/**
+ * 令和2年度（2020年度）: 2026-08-06にΛ-4深掘り(7年目)で追加。令和3年度自身の公式報道発表PDF
+ * （press_release/2021/files/release20210215/doc_1.pdf・curl+Read toolで直接取得）の
+ * 「（　）は昨年度の数値である」括弧内欄（前年度＝令和2年度）から抽出。全日制合計:
+ * 募集人員30,501・最終応募人員42,577・最終応募倍率1.40（42577/30501=1.3959…≈1.40で
+ * 整合）。この数値は同PDFの当該年度欄(令和3年度: 29,509/39,785/1.35)が既存REIWA_3の値と
+ * 完全一致することで、この読み取り自体の信頼性も裏付けられている。さらに独立した
+ * リセモム確定記事（2021-02-14「【高校受験2020】東京都立高、志願状況・倍率（最終）
+ * 日比谷2.15倍など」・https://resemom.jp/article/2020/02/14/54771.html）も同一の3数値
+ * （30,501/42,577/1.40）を報じており2ソースで完全一致。区分別内訳は括弧内に全区分分
+ * 存在するが、R3/R4/R5と同じ理由（転記精度優先）でgrand-total-onlyとした。
+ */
+const REIWA_2: YearSnapshot = {
+  fiscalYear: '令和2年度（2020年度）',
+  sourceUrl: 'https://www.kyoiku.metro.tokyo.lg.jp/press/press_release/2021/files/release20210215/doc_1.pdf',
+  sourceTitle: '東京都教育委員会 令和3年度東京都立高等学校入学者選抜応募状況（全日制）前年度列（令和2年度）',
+  fetchedAt: '2026-08-06',
+  origin: 'prior-year-parenthetical',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制合計', quota: 30501, applicants: 42577, rate: 1.4 },
+};
+
 export const TOKYO_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'tokyo',
-  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
+  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3, REIWA_2],
 };
