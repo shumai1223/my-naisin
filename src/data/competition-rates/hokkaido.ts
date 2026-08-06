@@ -3,8 +3,8 @@
  * +札幌市(市立高校・全日制)+後志地区(全日制普通科)+胆振地区(全日制普通科)+日高地区(全日制)
  * +渡島地区(全日制)+檜山地区(全日制)+上川地区(全日制)+留萌地区(全日制)+宗谷地区(全日制)
  * +オホーツク地区(全日制)+十勝地区(全日制)+釧路地区(全日制)+根室地区(全日制)＝
- * 全14管内すべてに着手済み。ただし胆振地区の専門教育学科の一部と各地区の連携型は
- * スキーマ制約で見送りのためstatus='partial'のまま）。
+ * 全14管内すべてに着手済み。ただし各地区の連携型（別選抜方式でスキーマ不一致）のみ
+ * スコープ外のためstatus='partial'のまま）。
  *
  * 一次ソース: 北海道教育委員会「R8入学者選抜状況報告書 §3 学校別受検者数及び合格者数」
  * （令和8年度＝2026年度入学者選抜・全14頁・管内(空知/石狩/後志/胆振/日高/渡島/檜山/上川/
@@ -24,24 +24,11 @@
  * 出願者数」の定義）、finalRate=finalApplicants/quotaを自前算出（原資料の印字倍率は受検者数を
  * 分子にしており他県との定義が異なるため採用しない）。
  *
- * coverage.status='partial': 空知地区（全日制・29レコード）＋石狩地区・全日制「普通教育を主とする
- * 学科」（31レコード、資料p10掲載）＋札幌市（市立高校・全日制・9レコード、資料p12掲載）を収録。
- * 「札幌市」は道立高校の石狩地区とは別の管理者（市立＝札幌市教育委員会所管）のため報告書上も
- * 独立した地区として扱われている（市立札幌旭丘・藻岩・平岸・清田・新川・啓北商業の6校）。
- * 石狩地区の「専門教育を主とする学科及び総合学科」（資料p11上表・26レコード）は学校名セルが
- * 複数学科行にまたがる結合セル形式で列ズレ誤読リスクが高いため今回は見送り、pendingDepartments
- * に記録した。後志地区・全日制「普通教育を主とする学科」（6レコード、資料p13上表）＋胆振地区・
- * 全日制「普通教育を主とする学科」（11レコード、資料p13下表）も収録。後志地区の「専門教育を
- * 主とする学科及び総合学科」（資料p13中表・12レコード）は小樽未来創造・小樽水産の学科名が微小
- * フォントで確実な判読ができないため見送り、胆振地区の同種テーブル（資料p14上表・16レコード）
- * も室蘭工業・苫小牧工業・苫小牧総合経済が複数学科の結合セル形式のため同様に見送った。日高地区
- * は全日制「普通教育を主とする学科」（4レコード、資料p14下表）に加え「専門教育を主とする学科
- * 及び総合学科」（静内農業2学科＋浦河総合・3レコード、資料p15上表）も収録（⚠️前回セッションで
- * 「日高地区は専門/総合学科が存在しない」と誤って記録したが、実際は次ページに続いていただけ
- * だったと判明・修正済み）。渡島地区・全日制「普通教育を主とする学科」（10レコード、資料p15
- * 下表・知内高校は別枠の小表だが同一区分のため合算）も収録。残り8地区（檜山/上川/留萌/宗谷/
- * オホーツク/十勝/釧路/根室）は次回以降のセッションで地区単位に追加していく
- * （1地区=1コミット目安）。
+ * coverage.status='partial': 全14管内（空知/石狩/後志/胆振/日高/渡島/檜山/上川/留萌/宗谷/
+ * オホーツク/十勝/釧路/根室/札幌市）の「普通教育を主とする学科」「専門教育を主とする学科及び
+ * 総合学科」を収録。「札幌市」は道立高校の石狩地区とは別の管理者（市立＝札幌市教育委員会所管）
+ * のため報告書上も独立した地区として扱われている（市立札幌旭丘・藻岩・平岸・清田・新川・
+ * 啓北商業の6校）。各地区の詳細な収録経緯・技法・見送り理由は下記coverage.note参照。
  */
 import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
 
@@ -62,7 +49,7 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '石狩地区・全日制「普通教育を主とする学科」（31レコード）＋「専門教育を主とする学科及び総合学科」（26レコード、資料p11・2026-08-07にビジョン解析で再確認し収録）',
       '札幌市・全日制（市立高校6校・9レコード）',
       '後志地区・全日制「普通教育を主とする学科」（6レコード）＋「専門教育を主とする学科及び総合学科」（12レコード、資料p13中表・2026-08-07にpdftoppm 600dpi+ffmpegクロップで微小フォント学科名を再確認し収録）',
-      '胆振地区・全日制「普通教育を主とする学科」（11レコード）',
+      '胆振地区・全日制「普通教育を主とする学科」（11レコード）＋「専門教育を主とする学科及び総合学科」（16レコード、資料p14上表・2026-08-07に石狩と同じ理由で見送り撤回のうえ収録）',
       '日高地区・全日制「普通教育を主とする学科」（4レコード）＋「専門教育を主とする学科及び総合学科」（3レコード）',
       '渡島地区・全日制「普通教育を主とする学科」（10レコード・知内高校含む）＋「専門教育を主とする学科及び総合学科」（19レコード・資料p16掲載）',
       '檜山地区・全日制「普通教育を主とする学科」（3レコード）＋「総合学科」（1レコード・檜山北高校）',
@@ -75,7 +62,6 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '根室地区・全日制「普通教育を主とする学科」（5レコード）＋「専門教育を主とする学科」（6レコード、資料p22掲載・全14頁の最終地区）',
     ],
     pendingDepartments: [
-      '胆振地区・全日制「専門教育を主とする学科及び総合学科」（室蘭工業・苫小牧工業・苫小牧総合経済が複数学科の結合セル形式のため今回は見送り・16レコード分）',
       '胆振地区・鵡川高校「普通科（連携型）」（出願者数/倍率の列が無い別選抜方式のためスキーマ不一致・スコープ外）',
       '日高地区・えりも高校「普通科（連携型）」（同上の理由でスキーマ不一致・スコープ外）',
       '上川地区・上川高校「普通科（連携型）」（同上の理由でスキーマ不一致・スコープ外・資料p17中表）',
@@ -123,9 +109,14 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '「千歳」高校の2学科(国際教養科・国際流通科)は600dpiクロップで学校名分割の誤読(「千歳国際」+' +
       '「流通」等)が無いか個別に再確認した。今回はpdftotext数値列との自動突合を行わず、300dpi/600dpi' +
       '画像から出願者数・受検者数・倍率・合格者数を直接目視転記し、各行の受検者数÷募集人員≒印字済み' +
-      '倍率の検算のみで整合性を確認した(全26行一致)。胆振地区の見送り分(室蘭工業等)は学科名だけでなく' +
-      '実際に1つのセルに複数の学科名が併記され罫線でも分離されていない真の結合セルであり、今回のように' +
-      '解決可能なケースとは異なるため見送りを継続する。',
+      '倍率の検算のみで整合性を確認した(全26行一致)。' +
+      '⚠️2026-08-07追記3【自己訂正】: 直前の追記2で「胆振地区の見送り分(室蘭工業等)は1つのセルに' +
+      '複数の学科名が併記され罫線でも分離されていない真の結合セルであり解決しない」と記録したが、' +
+      'これは検証せずに旧セッションの判定を鵜呑みにした誤り。実際に資料p14上表を300dpiでビジョン' +
+      '解析したところ石狩と全く同様に罫線は明瞭で学校名・学科名は一意に読み取れ、pdftotext -layoutの' +
+      '数値列とも(石狩と異なりこちらは順序の乱れも無く)全16行が問題なく突合できたため、そのまま' +
+      '全件収録した。**教訓: 「結合セルで見送り」という過去の判定文言を見た場合、鵜呑みにせず必ず' +
+      '実際に画像を見て検証すること(石狩・胆振の2件連続でこのパターンが再現した)**。',
   },
   officialSubtotals: [],
   records: [
@@ -253,6 +244,22 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '追分', department: '普通', quota: 40, finalApplicants: 33, finalRate: 0.83 },
     { schoolName: '厚真', department: '普通', quota: 40, finalApplicants: 16, finalRate: 0.4 },
     { schoolName: '鵡川', department: '普通', quota: 80, finalApplicants: 49, finalRate: 0.61 },
+    { schoolName: '室蘭栄', department: '理数', quota: 80, finalApplicants: 69, finalRate: 0.86 },
+    { schoolName: '壮瞥', department: '地域農業', quota: 40, finalApplicants: 23, finalRate: 0.58 },
+    { schoolName: '室蘭工業', department: '電子機械', quota: 40, finalApplicants: 27, finalRate: 0.68 },
+    { schoolName: '室蘭工業', department: '電気', quota: 40, finalApplicants: 26, finalRate: 0.65 },
+    { schoolName: '室蘭工業', department: '建設', quota: 40, finalApplicants: 31, finalRate: 0.78 },
+    { schoolName: '苫小牧工業', department: '電子機械', quota: 40, finalApplicants: 38, finalRate: 0.95 },
+    { schoolName: '苫小牧工業', department: '電気', quota: 40, finalApplicants: 40, finalRate: 1.0 },
+    { schoolName: '苫小牧工業', department: '情報技術', quota: 40, finalApplicants: 41, finalRate: 1.03 },
+    { schoolName: '苫小牧工業', department: '建築', quota: 40, finalApplicants: 39, finalRate: 0.98 },
+    { schoolName: '苫小牧工業', department: '土木', quota: 40, finalApplicants: 45, finalRate: 1.13 },
+    { schoolName: '苫小牧工業', department: '環境化学', quota: 40, finalApplicants: 44, finalRate: 1.1 },
+    { schoolName: '虻田', department: '事務情報', quota: 40, finalApplicants: 13, finalRate: 0.33 },
+    { schoolName: '苫小牧総合経済', department: '流通経済', quota: 40, finalApplicants: 39, finalRate: 0.98 },
+    { schoolName: '苫小牧総合経済', department: '国際経済', quota: 40, finalApplicants: 41, finalRate: 1.03 },
+    { schoolName: '苫小牧総合経済', department: '情報処理', quota: 40, finalApplicants: 32, finalRate: 0.8 },
+    { schoolName: '室蘭東翔', department: '総合', quota: 160, finalApplicants: 155, finalRate: 0.97 },
     { schoolName: '平取', department: '普通', quota: 40, finalApplicants: 33, finalRate: 0.83 },
     { schoolName: '富川', department: '普通', quota: 40, finalApplicants: 24, finalRate: 0.6 },
     { schoolName: '静内', department: '普通', quota: 200, finalApplicants: 152, finalRate: 0.76 },

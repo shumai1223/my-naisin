@@ -14,15 +14,15 @@ import { HOKKAIDO_COMPETITION_RATES } from '../hokkaido';
  * 「finalApplicants ÷ quota ≒ finalRate」の内部整合性のみを検証する（公式グランドトータル行は
  * 原資料に印字されておらず突合対象が無いため）。
  */
-describe('北海道 倍率パイプラインα（Y-6・空知29+石狩31+石狩専門26+札幌市9+後志6+後志専門12+胆振11+日高7+渡島29+檜山4+上川37+留萌7+宗谷8+オホーツク31+十勝28+釧路21+根室11=307レコード・coverage=partial・全14管内着手済み）', () => {
+describe('北海道 倍率パイプラインα（Y-6・空知29+石狩31+石狩専門26+札幌市9+後志6+後志専門12+胆振11+胆振専門16+日高7+渡島29+檜山4+上川37+留萌7+宗谷8+オホーツク31+十勝28+釧路21+根室11=323レコード・coverage=partial・全14管内着手済み）', () => {
   const { records } = HOKKAIDO_COMPETITION_RATES;
 
   it('coverageがpartialを示している', () => {
     expect(HOKKAIDO_COMPETITION_RATES.coverage.status).toBe('partial');
   });
 
-  it('307レコードが収録されている', () => {
-    expect(records.length).toBe(307);
+  it('323レコードが収録されている', () => {
+    expect(records.length).toBe(323);
   });
 
   it('全レコードのquota>0・finalApplicants>=0・finalRateが自前算出値(applicants/quota)と整合する', () => {
@@ -99,6 +99,14 @@ describe('北海道 倍率パイプラインα（Y-6・空知29+石狩31+石狩�
     expect(schools.has('室蘭栄')).toBe(true);
     expect(schools.has('苫小牧東')).toBe(true);
     expect(schools.has('伊達開来')).toBe(true);
+  });
+
+  it('胆振地区の専門教育学科の学校が含まれる(室蘭工業・苫小牧工業・苫小牧総合経済・室蘭東翔)', () => {
+    const schools = new Set(records.map((r) => r.schoolName));
+    expect(schools.has('室蘭工業')).toBe(true);
+    expect(schools.has('苫小牧工業')).toBe(true);
+    expect(schools.has('苫小牧総合経済')).toBe(true);
+    expect(schools.has('室蘭東翔')).toBe(true);
   });
 
   it('日高地区の学校が含まれる(静内・平取・えりも・浦河総合等)', () => {
