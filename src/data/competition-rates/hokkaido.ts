@@ -55,7 +55,7 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '石狩地区・全日制「普通教育を主とする学科」（令和8年度31レコード）＋「専門教育を主とする学科及び総合学科」（令和8年度26レコード、資料p11・2026-08-07にビジョン解析で再確認し収録）＋令和7年度分57レコード（普通31+専門26・掛-1第2弾）',
       '札幌市・全日制（市立高校6校・令和8年度9レコード＋令和7年度分9レコード＝掛-1第3弾）',
       '後志地区・全日制「普通教育を主とする学科」（令和8年度6レコード）＋「専門教育を主とする学科及び総合学科」（令和8年度11レコード、資料p13中表・2026-08-07にpdftoppm 600dpi+ffmpegクロップで微小フォント学科名を再確認し収録）＋令和7年度分17レコード（普通6+専門/総合11・掛-1第4弾）',
-      '胆振地区・全日制「普通教育を主とする学科」（11レコード）＋「専門教育を主とする学科及び総合学科」（16レコード、資料p14上表・2026-08-07に石狩と同じ理由で見送り撤回のうえ収録）',
+      '胆振地区・全日制「普通教育を主とする学科」（令和8年度11レコード）＋「専門教育を主とする学科及び総合学科」（令和8年度16レコード、資料p14上表・2026-08-07に石狩と同じ理由で見送り撤回のうえ収録）＋令和7年度分27レコード（普通11+専門/総合16・掛-1第5弾）',
       '日高地区・全日制「普通教育を主とする学科」（4レコード）＋「専門教育を主とする学科及び総合学科」（3レコード）',
       '渡島地区・全日制「普通教育を主とする学科」（10レコード・知内高校含む）＋「専門教育を主とする学科及び総合学科」（19レコード・資料p16掲載）',
       '檜山地区・全日制「普通教育を主とする学科」（3レコード）＋「総合学科」（1レコード・檜山北高校）',
@@ -148,7 +148,15 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       'に苦労した箇所だが、R7版のPDFは文字がやや大きく印字されている可能性がある)、pdftotext -layout' +
       'の数値列と全17行を行順突合した(結合セルなし)。なお既存R8のcoverage.includedDepartmentsで' +
       '「12レコード」としていた後志専門/総合の件数表記は、実際のrecords配列を数えると11レコードで' +
-      'あり従来から軽微な誤記だったため、この追記と合わせて正しい件数(11レコード)に訂正した。',
+      'あり従来から軽微な誤記だったため、この追記と合わせて正しい件数(11レコード)に訂正した。' +
+      '⚠️2026-08-07追記8(掛-1第5弾): 胆振地区のR7分27レコード(普通11+専門/総合16)も追加した' +
+      '(PDF内部頁5後半〜頁6=印字ページ13〜14)。学校名・学科構成はR8と完全に一致(室蘭栄・室蘭清水丘・' +
+      '登別青嶺・伊達開来・苫小牧東西南・白老東・追分・厚真・鵡川の11校、専門は室蘭栄(理数)・' +
+      '壮瞥(地域農業)・室蘭工業(3学科)・苫小牧工業(6学科)・虻田(事務情報)・苫小牧総合経済(3学科)・' +
+      '室蘭東翔(総合)の7校16レコード)だが募集人員が年度により変動する行がある(例:伊達開来160→200)。' +
+      'pdftotext -layoutの数値列と全27行を行順突合した(結合セルなし・300dpiで学科名は明瞭)。同頁に' +
+      '鵡川高校「普通科(連携型)」の別表も再度確認したが、R8と同様に出願者数/倍率の列が無く' +
+      'スキーマ不一致のためスコープ外(pendingDepartments既存記載どおり)。',
   },
   officialSubtotals: [],
   records: [
@@ -593,5 +601,33 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '小樽水産', department: '栽培漁業', quota: 40, finalApplicants: 27, finalRate: 0.68, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '小樽水産', department: '情報通信', quota: 40, finalApplicants: 12, finalRate: 0.3, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '余市紅志', department: '総合', quota: 40, finalApplicants: 24, finalRate: 0.6, fiscalYear: '令和7年度（2025年度）' },
+    // 掛-1第5弾: 胆振地区・令和7年度（2025年度）分。
+    { schoolName: '室蘭栄', department: '普通', quota: 120, finalApplicants: 138, finalRate: 1.15, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '室蘭清水丘', department: '普通', quota: 160, finalApplicants: 134, finalRate: 0.84, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '登別青嶺', department: '普通', quota: 120, finalApplicants: 89, finalRate: 0.74, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '伊達開来', department: '普通', quota: 200, finalApplicants: 136, finalRate: 0.68, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '苫小牧東', department: '普通', quota: 240, finalApplicants: 349, finalRate: 1.45, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '苫小牧西', department: '普通', quota: 160, finalApplicants: 182, finalRate: 1.14, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '苫小牧南', department: '普通', quota: 160, finalApplicants: 181, finalRate: 1.13, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '白老東', department: '普通', quota: 80, finalApplicants: 62, finalRate: 0.78, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '追分', department: '普通', quota: 40, finalApplicants: 27, finalRate: 0.68, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '厚真', department: '普通', quota: 40, finalApplicants: 31, finalRate: 0.78, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '鵡川', department: '普通', quota: 80, finalApplicants: 42, finalRate: 0.53, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '室蘭栄', department: '理数', quota: 80, finalApplicants: 83, finalRate: 1.04, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '壮瞥', department: '地域農業', quota: 40, finalApplicants: 13, finalRate: 0.33, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '室蘭工業', department: '電子機械', quota: 40, finalApplicants: 22, finalRate: 0.55, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '室蘭工業', department: '電気', quota: 40, finalApplicants: 24, finalRate: 0.6, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '室蘭工業', department: '建設', quota: 40, finalApplicants: 27, finalRate: 0.68, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '苫小牧工業', department: '電子機械', quota: 40, finalApplicants: 45, finalRate: 1.13, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '苫小牧工業', department: '電気', quota: 40, finalApplicants: 38, finalRate: 0.95, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '苫小牧工業', department: '情報技術', quota: 40, finalApplicants: 44, finalRate: 1.1, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '苫小牧工業', department: '建築', quota: 40, finalApplicants: 39, finalRate: 0.98, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '苫小牧工業', department: '土木', quota: 40, finalApplicants: 39, finalRate: 0.98, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '苫小牧工業', department: '環境化学', quota: 40, finalApplicants: 41, finalRate: 1.03, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '虻田', department: '事務情報', quota: 40, finalApplicants: 12, finalRate: 0.3, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '苫小牧総合経済', department: '流通経済', quota: 40, finalApplicants: 55, finalRate: 1.38, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '苫小牧総合経済', department: '国際経済', quota: 40, finalApplicants: 35, finalRate: 0.88, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '苫小牧総合経済', department: '情報処理', quota: 40, finalApplicants: 46, finalRate: 1.15, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '室蘭東翔', department: '総合', quota: 160, finalApplicants: 169, finalRate: 1.06, fiscalYear: '令和7年度（2025年度）' },
   ],
 };
