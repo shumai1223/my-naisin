@@ -15,6 +15,28 @@
  */
 import type { PrefectureRateHistoryFile, YearSnapshot } from '@/lib/competition-rate-history';
 
+/**
+ * 令和8年度（2026年度）: 2026-08-06にΛ-4深掘りで追加。**R2〜R7とは選抜制度が異なる年度**
+ * （冒頭コメント参照・奈良県は令和8年度より特色選抜と一般選抜を一本化した「一次選抜」に移行）。
+ * 既存Y-6 competition-rates/nara.tsが一次ソースPDF(r8_itijisennbatu_dainisyutugannkikann_
+ * syutugannsyasuu.pdf)から確定済みの「合計（第一出願期間）」行(募集人員6,896・第一出願期間
+ * 出願者数6,276)をそのまま転記（新規リサーチ不要）。倍率6276/6896=0.9101…≈0.91は、Y-6側で
+ * 既に外部報道（リセモム「全日制課程一次選抜の募集人員は6,896人、第一出願期間出願者数は
+ * 6,276人、競争倍率は0.91倍」）と完全一致確認済み。第二出願期間（未充足学科への第2希望受付）
+ * は他県の第2志望と同じ理由でスコープ外。R2〜R7の「一般選抜（旧制度）」とは制度が異なるため
+ * labelを明確に区別し、単純な経年比較を避ける（gunma/nagasakiの制度変更時と同じ扱い）。
+ */
+const REIWA_8: YearSnapshot = {
+  fiscalYear: '令和8年度（2026年度）',
+  sourceUrl: 'https://www.pref.nara.lg.jp/documents/5981/r8_itijisennbatu_dainisyutugannkikann_syutugannsyasuu.pdf',
+  sourceTitle: '奈良県教育委員会 令和8年度奈良県公立高等学校入学者一次選抜等出願状況（第二出願期間・「合計」行は第一出願期間の出願者数）',
+  fetchedAt: '2026-08-06',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '一次選抜 全日制課程（新制度・第一出願期間のみ）', schoolCount: 29, quota: 6896, applicants: 6276, rate: 0.91 },
+};
+
 const REIWA_7: YearSnapshot = {
   fiscalYear: '令和7年度（2025年度）',
   sourceUrl: 'https://resemom.jp/article/2025/03/06/81148.html',
@@ -117,5 +139,5 @@ const REIWA_2: YearSnapshot = {
 
 export const NARA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'nara',
-  years: [REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3, REIWA_2],
+  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3, REIWA_2],
 };
