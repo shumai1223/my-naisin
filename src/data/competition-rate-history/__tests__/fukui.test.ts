@@ -4,9 +4,9 @@ import { FUKUI_COMPETITION_RATE_HISTORY } from '../fukui';
  * Λ-4（多年度アーカイブ・福井県）DoD検証: 令和7・令和6年度の「全日制 合計」行の数値を
  * 一次資料（福井県教育委員会の志願変更状況PDF・変更最終日）の固定値で確認する。
  */
-describe('福井県 多年度アーカイブ（Λ-4・令和8/令和7/令和6/令和5/令和4/令和3の6年度分・grand-total-only）', () => {
-  it('6年度分（令和8年度・令和7年度・令和6年度・令和5年度・令和4年度・令和3年度）を収録している', () => {
-    expect(FUKUI_COMPETITION_RATE_HISTORY.years).toHaveLength(6);
+describe('福井県 多年度アーカイブ（Λ-4・令和8/令和7/令和6/令和5/令和4/令和3/令和2の7年度分・grand-total-only）', () => {
+  it('7年度分（令和8年度〜令和2年度）を収録している', () => {
+    expect(FUKUI_COMPETITION_RATE_HISTORY.years).toHaveLength(7);
     expect(FUKUI_COMPETITION_RATE_HISTORY.years.map((y) => y.fiscalYear)).toEqual([
       '令和8年度（2026年度）',
       '令和7年度（2025年度）',
@@ -14,6 +14,7 @@ describe('福井県 多年度アーカイブ（Λ-4・令和8/令和7/令和6/�
       '令和5年度（2023年度）',
       '令和4年度（2022年度）',
       '令和3年度（2021年度）',
+      '令和2年度（2020年度）',
     ]);
   });
 
@@ -63,5 +64,12 @@ describe('福井県 多年度アーカイブ（Λ-4・令和8/令和7/令和6/�
     expect(r3.grandTotal.quota).toBe(3791);
     expect(r3.grandTotal.applicants).toBe(3836);
     expect(r3.grandTotal.rate).toBeCloseTo(1.01, 2);
+  });
+
+  it('令和2年度の全日制合計は県公式ページ出典の第三者集計と一致する(募集人員3,963・志願3,884・倍率0.98)', () => {
+    const r2 = FUKUI_COMPETITION_RATE_HISTORY.years[6];
+    expect(r2.grandTotal.quota).toBe(3963);
+    expect(r2.grandTotal.applicants).toBe(3884);
+    expect(r2.grandTotal.rate).toBeCloseTo(0.98, 2);
   });
 });

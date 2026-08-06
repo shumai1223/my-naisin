@@ -117,7 +117,30 @@ const REIWA_3: YearSnapshot = {
   grandTotal: { label: '全日制 合計', quota: 3791, applicants: 3836, rate: 1.01 },
 };
 
+/**
+ * 令和2年度（2020年度）: 2026-08-06にΛ-4深掘り(7年目)で追加。教委公式サイトの当時のPDF・
+ * 年度別ハブページはいずれも直接発見できなかったため、福井県公式ホームページを出典として
+ * 明記する第三者集計ブログ（https://best-man.net/blog/representation-84/「【2020年度】
+ * 福井県立高校志願者状況及び最終倍率【過去３年比較】【確定倍率】」）をWebFetchで直接確認。
+ * 全日制の一般定員3,963人に対し志願者3,884人・倍率0.98倍（3884/3963=0.9801…≈0.98で
+ * 整合）。R3(3,791)より高い水準だが、R3→R4→R5と定員が漸減する既存トレンド(3,791→3,732→
+ * 3,606)と整合的な位置にあり、規模の桁が既存年度と一致することを確認済み。独立した第2
+ * ソース（リセモム等）は複数回のWebSearchで発見できなかったため、akita R2等と同じ理由で
+ * 正直に単一ソースとして収録する（捏造なし）。
+ */
+const REIWA_2: YearSnapshot = {
+  fiscalYear: '令和2年度（2020年度）',
+  sourceUrl: 'https://best-man.net/blog/representation-84/',
+  sourceTitle:
+    '「【2020年度】福井県立高校志願者状況及び最終倍率【過去３年比較】【確定倍率】」（福井県公式ホームページの令和2年度一般入学者選抜志願状況を出典として引用）',
+  fetchedAt: '2026-08-06',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '全日制 合計', quota: 3963, applicants: 3884, rate: 0.98 },
+};
+
 export const FUKUI_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'fukui',
-  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
+  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3, REIWA_2],
 };
