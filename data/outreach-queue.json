@@ -600,8 +600,19 @@
       "sourceDoc": "docs/x5-government-source-reference-2026-07.md#対象32 (電話窓口のみだったが2026-08-06にsection専用フォームを新規発見)"
     },
     {
+      "id": "kyoiku-niigata-form",
+      "org": "新潟県教育庁 高等学校教育課 指導第1係（sec_sec1=248&inq=04専用フォーム）",
+      "lane": "kyoiku-i",
+      "channel": "form",
+      "contact": "https://www.pref.niigata.lg.jp/form/detail.php?sec_sec1=248&inq=04",
+      "body": "新潟県教育庁 高等学校教育課 指導第1係 ご担当者様\n\n突然のご連絡失礼いたします。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します（中学生が個人で運営しております）。\n\n貴係が公表されている新潟県公立高等学校入学者選抜要項を一次資料として活用させていただき、当サイト内の該当ページ（https://my-naishin.com/pref/niigata）にて、中1〜中3の9教科×5段階均等評価による135点満点の制度をご説明する形で、出典を明記の上ご紹介させていただいております。\n\n本連絡は、貴係の公表資料を実際にこのように活用させていただいている旨のご報告と、もし差し支えなければ貴係公式サイトの関連ページから当サイトへの参照が可能かどうかについてご相談させていただきたく、ご連絡いたしました。ご検討いただけますと幸いです。\n\nしゅうまい / My Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com　naishin.dev@gmail.com",
+      "note": "高等学校教育課ページの「指導第1係(入学者選抜担当)Tel：025-280-5611 メールでのお問い合わせはこちら」リンク先。gunma/okayama/fukushimaと同じCMS(Cookie必須の可能性)でWebFetchでは中身を未検証。👤が実ブラウザで開いて内容を確認してから送信すること。",
+      "status": "queued",
+      "sourceDoc": "docs/x5-government-source-reference-2026-07.md#対象20 (電話窓口のみだったが2026-08-06に係専用フォームを新規発見)"
+    },
+    {
       "id": "kyoiku-excluded-form-needs-url",
-      "org": "教委・フォーム可だが具体URL未確定5県（新潟県/広島県/山口県/愛媛県/熊本県）※北海道・神奈川県・群馬県・岡山県・福島県はフォーム、岩手県はメールで2026-08-06に個別解決済み",
+      "org": "教委・フォーム可だが具体URL未確定4県（広島県/山口県/愛媛県/熊本県）※北海道・神奈川県・群馬県・岡山県・福島県・新潟県はフォーム、岩手県はメールで2026-08-06に個別解決済み",
       "lane": "kyoiku-i",
       "channel": "form",
       "status": "excluded",
