@@ -44,6 +44,16 @@
  * スクール一覧が田奈・大井の代わりに小田原北を含む理由と整合）。県立普通科(87)+市立(6)の
  * 合計は印字済み「合計」27,066/32,929と完全一致。sheet1(普通科・クリエイティブ)はこれで完結。
  * sheet2(専門学科)・sheet3(単位制)は次回以降のセッションで横展開する。
+ *
+ * **2026-08-07追記(掛-1第3弾)**: sheet2「専門学科」(農業/工業/商業/水産/家庭/福祉/理数/体育/美術/
+ * 国際の10学科・33校)を追加。複数コース設置校は学校の「計」行の値をそのまま1校1レコードとして
+ * 採用（tokyo/hokkaidoで確立した「計行採用方式」を踏襲）。単一コース校は該当行をそのまま採用。
+ * area(所在地)はR8のkanagawa.tsに同一学校名が存在するものは値を継承し、R8に無い学校
+ * （小田原城北工業＝R8では大井高校と統合し「小田原北」に改編済み）はWebSearchで所在地
+ * （神奈川県小田原市栢山200）を裏取りしてarea='小田原市'とした。10学科全ての印字済み小計
+ * （農業470/508・工業2198/2006・商業1030/1060・水産156/161・家庭39/49・福祉194/144・理数39/39・
+ * 体育78/104・美術78/99・国際74/103）と完全一致（node.js機械計算）。これでbessi3.xlsxの
+ * sheet1+sheet2が完結。sheet3(単位制)は次回以降のセッションで横展開する。
  */
 import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
 
@@ -437,5 +447,50 @@ export const KANAGAWA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '横須賀南', area: '横須賀市', department: '普通科（クリエイティブスクール）', quota: 118, finalApplicants: 134, finalRate: 1.14, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '大井', area: '大井町', department: '普通科（クリエイティブスクール）', quota: 79, finalApplicants: 60, finalRate: 0.76, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '大和東', area: '大和市', department: '普通科（クリエイティブスクール）', quota: 239, finalApplicants: 242, finalRate: 1.01, fiscalYear: '令和7年度（2025年度）' },
+
+    // ===== 掛-1(学校別×多年度)横展開: R7分・sheet2「専門学科」（学校の「計」行採用方式） =====
+    // --- 専門学科（農業・3校） ---
+    { schoolName: '平塚農商', area: '平塚', department: '農業科', quota: 156, finalApplicants: 169, finalRate: 1.08, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '相原', area: '相模原', department: '農業科', quota: 117, finalApplicants: 118, finalRate: 1.01, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '中央農業', area: '海老名', department: '農業科', quota: 197, finalApplicants: 221, finalRate: 1.12, fiscalYear: '令和7年度（2025年度）' },
+    // --- 専門学科（工業・10校） ---
+    { schoolName: '神奈川工業', area: '横浜市', department: '工業科', quota: 316, finalApplicants: 391, finalRate: 1.24, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '商工', area: '藤沢市', department: '工業科', quota: 119, finalApplicants: 138, finalRate: 1.16, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '磯子工業', area: '横浜市', department: '工業科', quota: 232, finalApplicants: 179, finalRate: 0.77, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '川崎工科', area: '川崎市', department: '工業科', quota: 238, finalApplicants: 162, finalRate: 0.68, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '向の岡工業', area: '川崎市', department: '工業科', quota: 234, finalApplicants: 202, finalRate: 0.86, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '横須賀工業', area: '横須賀市', department: '工業科', quota: 236, finalApplicants: 175, finalRate: 0.74, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '平塚工科', area: '平塚市', department: '工業科', quota: 238, finalApplicants: 193, finalRate: 0.81, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '藤沢工科', area: '藤沢市', department: '工業科', quota: 238, finalApplicants: 207, finalRate: 0.87, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '小田原城北工業', area: '小田原市', department: '工業科', quota: 152, finalApplicants: 109, finalRate: 0.72, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '川崎市立川崎総合科学', area: '川崎市立', department: '工業科', quota: 195, finalApplicants: 250, finalRate: 1.28, fiscalYear: '令和7年度（2025年度）' },
+    // --- 専門学科（商業・7校） ---
+    { schoolName: '商工', area: '藤沢市', department: '商業科', quota: 119, finalApplicants: 144, finalRate: 1.21, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '平塚農商', area: '平塚', department: '商業科', quota: 159, finalApplicants: 133, finalRate: 0.84, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '小田原東', area: '県西', department: '商業科', quota: 118, finalApplicants: 58, finalRate: 0.49, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '相原', area: '相模原', department: '商業科', quota: 119, finalApplicants: 126, finalRate: 1.06, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '厚木王子', area: '県央', department: '商業科', quota: 159, finalApplicants: 160, finalRate: 1.01, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '横浜市立横浜商業', area: '横浜市立', department: '商業科', quota: 238, finalApplicants: 270, finalRate: 1.13, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '川崎市立幸', area: '川崎市立', department: '商業科', quota: 118, finalApplicants: 169, finalRate: 1.43, fiscalYear: '令和7年度（2025年度）' },
+    // --- 専門学科（水産・1校） ---
+    { schoolName: '海洋科学', area: '横須賀市', department: '水産科', quota: 156, finalApplicants: 161, finalRate: 1.03, fiscalYear: '令和7年度（2025年度）' },
+    // --- 専門学科（家庭・1校） ---
+    { schoolName: '川崎市立川崎', area: '川崎市立', department: '家庭科', quota: 39, finalApplicants: 49, finalRate: 1.26, fiscalYear: '令和7年度（2025年度）' },
+    // --- 専門学科（福祉・4校） ---
+    { schoolName: '二俣川看護福祉', area: '横浜中', department: '福祉科', quota: 39, finalApplicants: 36, finalRate: 0.92, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '横須賀南', area: '横須賀市', department: '福祉科', quota: 78, finalApplicants: 52, finalRate: 0.67, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '津久井', area: '相模原', department: '福祉科', quota: 38, finalApplicants: 25, finalRate: 0.66, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '川崎市立川崎', area: '川崎市立', department: '福祉科', quota: 39, finalApplicants: 31, finalRate: 0.79, fiscalYear: '令和7年度（2025年度）' },
+    // --- 専門学科（理数・1校） ---
+    { schoolName: '川崎市立川崎総合科学', area: '川崎市立', department: '理数科', quota: 39, finalApplicants: 39, finalRate: 1.0, fiscalYear: '令和7年度（2025年度）' },
+    // --- 専門学科（体育・2校） ---
+    { schoolName: '厚木北', area: '県央', department: '体育科', quota: 39, finalApplicants: 49, finalRate: 1.26, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '川崎市立橘', area: '川崎市立', department: '体育科', quota: 39, finalApplicants: 55, finalRate: 1.41, fiscalYear: '令和7年度（2025年度）' },
+    // --- 専門学科（美術・2校） ---
+    { schoolName: '白山', area: '横浜北', department: '美術科', quota: 39, finalApplicants: 47, finalRate: 1.21, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '上矢部', area: '横浜中', department: '美術科', quota: 39, finalApplicants: 52, finalRate: 1.33, fiscalYear: '令和7年度（2025年度）' },
+    // --- 専門学科（国際・2校） ---
+    { schoolName: '横浜市立横浜商業', area: '横浜市立', department: '国際科', quota: 35, finalApplicants: 36, finalRate: 1.03, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '川崎市立橘', area: '川崎市立', department: '国際科', quota: 39, finalApplicants: 67, finalRate: 1.72, fiscalYear: '令和7年度（2025年度）' },
   ],
 };

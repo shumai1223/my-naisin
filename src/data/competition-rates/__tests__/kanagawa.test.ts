@@ -42,7 +42,7 @@ describe('神奈川県 倍率パイプラインα（Y-2・全日制の突合テ�
       ['専門学科（国際）合計', '国際科'],
     ];
     for (const [label, department] of checks) {
-      const result = checkAgainstSubtotal(records, findSubtotal(label), (r) => r.department === department);
+      const result = checkAgainstSubtotal(records, findSubtotal(label), (r) => r.department === department && !r.fiscalYear);
       expect(result.matches).toBe(true);
     }
   });
@@ -78,9 +78,9 @@ describe('神奈川県 倍率パイプラインα（Y-2・全日制の突合テ�
     expect(result.actualApplicants).toBe(43821);
   });
 
-  it('掛-1(学校別×多年度): 令和7年度(R7)分レコードが98件収録され、普通科(県立+市立)の合計が印字済み「合計」27,066/32,929と完全一致する', () => {
+  it('掛-1(学校別×多年度): 令和7年度(R7)分レコードが131件収録され、普通科(県立+市立)の合計が印字済み「合計」27,066/32,929と完全一致する', () => {
     const r7 = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
-    expect(r7.length).toBe(98);
+    expect(r7.length).toBe(131);
     const futsuka = r7.filter((r) => r.department === '普通科');
     const sumQuota = futsuka.reduce((a, r) => a + r.quota, 0);
     const sumApplicants = futsuka.reduce((a, r) => a + r.finalApplicants, 0);
@@ -90,6 +90,12 @@ describe('神奈川県 倍率パイプラインα（Y-2・全日制の突合テ�
     expect(creative.length).toBe(5);
     expect(creative.reduce((a, r) => a + r.quota, 0)).toBe(832);
     expect(creative.reduce((a, r) => a + r.finalApplicants, 0)).toBe(732);
+    const senmon = r7.filter(
+      (r) => r.department !== '普通科' && r.department !== '普通科（クリエイティブスクール）'
+    );
+    expect(senmon.length).toBe(33);
+    expect(senmon.reduce((a, r) => a + r.quota, 0)).toBe(4356);
+    expect(senmon.reduce((a, r) => a + r.finalApplicants, 0)).toBe(4273);
     const seen = new Set<string>();
     for (const r of r7) {
       const key = `${r.area}|${r.schoolName}|${r.department}`;
