@@ -154,7 +154,7 @@ describe('東京都 倍率パイプラインα（Y-2・普通科119校の突合�
   });
 
   it('掛-1(学校別×多年度・R6第1〜3弾・個票PDF1完結): 令和6年度(R6)分の普通科(コース単位制以外+島しょ)108校が収録され、区市町村+学校名+学科の重複が無い。世田谷「深沢」はR7と同様まだ単位制へ分類変更される前の通常表に含まれる', () => {
-    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）' && r.department === '普通科');
     expect(r6.length).toBe(108);
     expect(r6.reduce((a, r) => a + r.quota, 0)).toBe(21787);
     expect(r6.reduce((a, r) => a + r.finalApplicants, 0)).toBe(31642);
@@ -190,6 +190,35 @@ describe('東京都 倍率パイプラインα（Y-2・普通科119校の突合�
     expect(shimasho.length).toBe(6);
     expect(shimasho.reduce((a, r) => a + r.quota, 0)).toBe(306);
     expect(shimasho.reduce((a, r) => a + r.finalApplicants, 0)).toBe(91);
+  });
+
+  it('掛-1(学校別×多年度・R6第4弾・普通科119校完結): 令和6年度(R6)分に「3[コース制]・4[単位制]・5[海外帰国生徒対象]」21件を追加した合計129件が収録され、区市町村+学校名+学科の重複が無い。普通科計(quota24,219・applicants35,204)がコース単位制以外+島しょ+コース制+単位制+海外帰国生徒対象の5区分合計と完全一致する', () => {
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    expect(r6.length).toBe(129);
+    expect(r6.reduce((a, r) => a + r.quota, 0)).toBe(24219);
+    expect(r6.reduce((a, r) => a + r.finalApplicants, 0)).toBe(35204);
+
+    const seen = new Set<string>();
+    for (const r of r6) {
+      const key = `${r.area}|${r.schoolName}|${r.department}`;
+      expect(seen.has(key)).toBe(false);
+      seen.add(key);
+    }
+
+    const kousei = r6.filter((r) => r.department.startsWith('普通科（コース制'));
+    expect(kousei.length).toBe(4);
+    expect(kousei.reduce((a, r) => a + r.quota, 0)).toBe(224);
+    expect(kousei.reduce((a, r) => a + r.finalApplicants, 0)).toBe(364);
+
+    const tannisei = r6.filter((r) => r.department === '普通科（単位制）');
+    expect(tannisei.length).toBe(11);
+    expect(tannisei.reduce((a, r) => a + r.quota, 0)).toBe(2146);
+    expect(tannisei.reduce((a, r) => a + r.finalApplicants, 0)).toBe(3131);
+
+    const kaigai = r6.filter((r) => r.department.startsWith('普通科（海外帰国生徒対象'));
+    expect(kaigai.length).toBe(6);
+    expect(kaigai.reduce((a, r) => a + r.quota, 0)).toBe(62);
+    expect(kaigai.reduce((a, r) => a + r.finalApplicants, 0)).toBe(67);
   });
 
   it('全レコードのquota>0・finalApplicants>=0・finalRateが概算で整合する', () => {
