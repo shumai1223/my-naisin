@@ -62,16 +62,17 @@ const SCHOOL_LEVEL_TOTALS: Record<string, { quota: number; applicants: number }>
 
 describe('三重県 倍率パイプラインα（Y-6・全日制52校108レコードの完全収録テスト）', () => {
   const { records, officialSubtotals } = MIE_COMPETITION_RATES;
+  const r8 = records.filter((r) => !r.fiscalYear);
 
   it('全日制の全レコード合計が全日制総計（quota6,419・applicants6,636・倍率1.03）と完全一致する', () => {
     const grandTotal = officialSubtotals.find((s) => s.label === '全日制総計')!;
-    const result = checkAgainstSubtotal(records, grandTotal, () => true);
+    const result = checkAgainstSubtotal(records, grandTotal, (r) => !r.fiscalYear);
     expect(result.matches).toBe(true);
   });
 
   it('各校の学科別内訳合計がPDF記載の「学校計」行と完全一致する（単独校50校全件）', () => {
     for (const [schoolName, expected] of Object.entries(SCHOOL_LEVEL_TOTALS)) {
-      const schoolRecords = records.filter((r) => r.schoolName === schoolName);
+      const schoolRecords = r8.filter((r) => r.schoolName === schoolName);
       const quotaSum = schoolRecords.reduce((acc, r) => acc + r.quota, 0);
       const applicantsSum = schoolRecords.reduce((acc, r) => acc + r.finalApplicants, 0);
       expect(quotaSum).toBe(expected.quota);
@@ -80,8 +81,8 @@ describe('三重県 倍率パイプラインα（Y-6・全日制52校108レコ�
   });
 
   it('熊野青藍（木本校舎+紀南校舎の2校舎合計）がPDF記載の「学校計」行（quota173・applicants160）と完全一致する', () => {
-    const kimoto = records.filter((r) => r.schoolName === '熊野青藍（木本校舎）');
-    const kinan = records.filter((r) => r.schoolName === '熊野青藍（紀南校舎）');
+    const kimoto = r8.filter((r) => r.schoolName === '熊野青藍（木本校舎）');
+    const kinan = r8.filter((r) => r.schoolName === '熊野青藍（紀南校舎）');
     const quotaSum = [...kimoto, ...kinan].reduce((acc, r) => acc + r.quota, 0);
     const applicantsSum = [...kimoto, ...kinan].reduce((acc, r) => acc + r.finalApplicants, 0);
     expect(quotaSum).toBe(173);
@@ -96,11 +97,11 @@ describe('三重県 倍率パイプラインα（Y-6・全日制52校108レコ�
     }
   });
 
-  it('学校名+学科名の重複が無い', () => {
+  it('学校名+学科名+年度の重複が無い', () => {
     const seen = new Set<string>();
     const dupes: string[] = [];
     for (const r of records) {
-      const key = `${r.schoolName}|${r.department}`;
+      const key = `${r.schoolName}|${r.department}|${r.fiscalYear ?? ''}`;
       if (seen.has(key)) dupes.push(key);
       seen.add(key);
     }
@@ -112,13 +113,13 @@ describe('三重県 倍率パイプラインα（Y-6・全日制52校108レコ�
   });
 
   it('108レコード・52校が収録されている', () => {
-    expect(records.length).toBe(108);
-    const distinctSchools = new Set(records.map((r) => r.schoolName));
+    expect(r8.length).toBe(108);
+    const distinctSchools = new Set(r8.map((r) => r.schoolName));
     expect(distinctSchools.size).toBe(52);
   });
 
   it('くくり募集（複数学科・コースが後期選抜募集人数を共有）が正しく収録されている', () => {
-    const kuwanaKogyo1 = records.find((r) => r.schoolName === '桑名工業' && r.department.includes('機械'));
+    const kuwanaKogyo1 = r8.find((r) => r.schoolName === '桑名工業' && r.department.includes('機械'));
     expect(kuwanaKogyo1).toEqual({
       schoolName: '桑名工業',
       department: '機械・材料技術（くくり募集）',
@@ -126,7 +127,7 @@ describe('三重県 倍率パイプラインα（Y-6・全日制52校108レコ�
       finalApplicants: 37,
       finalRate: 1.03,
     });
-    const igahoo1 = records.find((r) => r.schoolName === '伊賀白鳳' && r.department.includes('機械'));
+    const igahoo1 = r8.find((r) => r.schoolName === '伊賀白鳳' && r.department.includes('機械'));
     expect(igahoo1).toEqual({
       schoolName: '伊賀白鳳',
       department: '機械・電子機械・建築デザイン（くくり募集）',
@@ -134,6 +135,19 @@ describe('三重県 倍率パイプラインα（Y-6・全日制52校108レコ�
       finalApplicants: 37,
       finalRate: 0.77,
     });
+  });
+
+  it('掛-1(学校別×多年度): 令和7年度(R7)分レコードが105件収録され、全日制総計(quota6,589・applicants7,230)と完全一致する。伊賀白鳳のくくり構成がR7(7学科が単一quota110を共有)→R8(4レコードに再編)で変化していることを確認した', () => {
+    const r7 = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
+    expect(r7.length).toBe(105);
+    expect(r7.reduce((a, r) => a + r.quota, 0)).toBe(6589);
+    expect(r7.reduce((a, r) => a + r.finalApplicants, 0)).toBe(7230);
+
+    const igahoR7 = r7.filter((r) => r.schoolName === '伊賀白鳳');
+    expect(igahoR7).toHaveLength(1);
+    expect(igahoR7[0].quota).toBe(110);
+    const igahoR8 = r8.filter((r) => r.schoolName === '伊賀白鳳');
+    expect(igahoR8).toHaveLength(4);
   });
 
   it('sourcesが公式PDF URLを正しく記録している', () => {
