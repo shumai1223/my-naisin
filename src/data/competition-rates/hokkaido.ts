@@ -65,7 +65,7 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       'オホーツク地区・全日制「普通教育を主とする学科」（令和8年度16レコード）＋「専門教育を主とする学科及び総合学科」（令和8年度15レコード、資料p19掲載）＋令和7年度分31レコード（普通16+専門/総合15・掛-1第10弾・学校構成はR8と完全一致）',
       '十勝地区・全日制「普通教育を主とする学科」（令和8年度12レコード）＋「専門教育を主とする学科及び総合学科」（令和8年度16レコード、資料p20掲載）＋令和7年度分28レコード（普通12+専門/総合16・掛-1第11弾・学校構成はR8と完全一致）',
       '釧路地区・全日制「普通教育を主とする学科」（令和8年度9レコード）＋「専門教育を主とする学科及び総合学科」（令和8年度12レコード、資料p21掲載・連携型テーブルなし）＋令和7年度分21レコード（普通9+専門/総合12・掛-1第12弾・学校構成はR8と完全一致）',
-      '根室地区・全日制「普通教育を主とする学科」（5レコード）＋「専門教育を主とする学科」（6レコード、資料p22掲載・全14頁の最終地区）',
+      '根室地区・全日制「普通教育を主とする学科」（令和8年度5レコード）＋「専門教育を主とする学科」（令和8年度6レコード、資料p22掲載・全14頁の最終地区）＋令和7年度分11レコード（普通5+専門6・掛-1第13弾・これでhokkaido全14管内のR7完走）',
     ],
     pendingDepartments: [
       '胆振地区・鵡川高校「普通科（連携型）」（出願者数/倍率の列が無い別選抜方式のためスキーマ不一致・スコープ外）',
@@ -201,7 +201,16 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '釧路東・阿寒・白糠・弟子屈・厚岸翔洋・釧路北陽・霧多布、専門/総合12レコード=釧路湖陵理数探究・' +
       '釧路工業5学科・釧路商業3学科・厚岸翔洋海洋資源・釧路明輝総合・標茶総合)。釧路地区は他地区と' +
       '異なり連携型テーブルが無くR7も全レコードをスコープ内で収録できた。pdftotext -layoutの数値列と' +
-      '全21行を行順突合した(結合セルなし)。',
+      '全21行を行順突合した(結合セルなし)。' +
+      '⚠️2026-08-07追記16(掛-1第13弾・hokkaido全14管内R7完走): 根室地区(全14頁の最終頁)のR7分' +
+      '11レコード(普通5+専門6)を追加し、**これでhokkaido全14管内(空知/石狩/札幌市/後志/胆振/日高/' +
+      '渡島/檜山/上川/留萌/宗谷/オホーツク/十勝/釧路/根室)のR7完走を達成した**(R7合計325レコード・' +
+      'R8の323レコードとほぼ同規模)。学校・学科構成はR8と完全一致(普通5校=根室・別海・中標津・標津・' +
+      '羅臼、専門6レコード=別海酪農経営・中標津農業生産技術/食品ビジネス・根室商業/事務情報・中標津' +
+      '総合ビジネス)。羅臼高校の普通科(連携型)もR8同様スコープ外のまま。pdftotext -layoutの数値列と' +
+      '全11行を行順突合した(結合セルなし)。**掛-1(学校別×多年度)の技法確立フェーズはこれで完了**。' +
+      '次はhokkaidoで確立した「R8報告書ページと同一構造のR7版ページを教委サイトで探す」技法を他県' +
+      '(tokyo/hiroshima/saitama等のcategory-detail粒度県が候補)へ横展開する段階に移る。',
   },
   officialSubtotals: [],
   records: [
@@ -861,5 +870,17 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '厚岸翔洋', department: '海洋資源', quota: 40, finalApplicants: 21, finalRate: 0.53, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '釧路明輝', department: '総合', quota: 160, finalApplicants: 175, finalRate: 1.09, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '標茶', department: '総合', quota: 80, finalApplicants: 57, finalRate: 0.71, fiscalYear: '令和7年度（2025年度）' },
+    // 掛-1第13弾: 根室地区(全14頁の最終頁)・令和7年度（2025年度）分。これでhokkaido全14管内のR7完走。
+    { schoolName: '根室', department: '普通', quota: 120, finalApplicants: 85, finalRate: 0.71, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '別海', department: '普通', quota: 120, finalApplicants: 91, finalRate: 0.76, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '中標津', department: '普通', quota: 160, finalApplicants: 120, finalRate: 0.75, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '標津', department: '普通', quota: 40, finalApplicants: 35, finalRate: 0.88, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '羅臼', department: '普通', quota: 40, finalApplicants: 17, finalRate: 0.43, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '別海', department: '酪農経営', quota: 40, finalApplicants: 4, finalRate: 0.1, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '中標津農業', department: '生産技術', quota: 40, finalApplicants: 10, finalRate: 0.25, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '中標津農業', department: '食品ビジネス', quota: 40, finalApplicants: 23, finalRate: 0.58, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '根室', department: '商業', quota: 40, finalApplicants: 29, finalRate: 0.73, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '根室', department: '事務情報', quota: 40, finalApplicants: 3, finalRate: 0.08, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '中標津', department: '総合ビジネス', quota: 40, finalApplicants: 28, finalRate: 0.7, fiscalYear: '令和7年度（2025年度）' },
   ],
 };
