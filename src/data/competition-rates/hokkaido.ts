@@ -63,7 +63,7 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '留萌地区・全日制「普通教育を主とする学科」（令和8年度3レコード）＋「専門教育を主とする学科」（令和8年度4レコード、資料p18掲載）＋令和7年度分7レコード（掛-1第9弾）',
       '宗谷地区・全日制「普通教育を主とする学科」（令和8年度6レコード）＋「専門教育を主とする学科」（令和8年度2レコード、資料p18掲載）＋令和7年度分8レコード（掛-1第9弾）',
       'オホーツク地区・全日制「普通教育を主とする学科」（令和8年度16レコード）＋「専門教育を主とする学科及び総合学科」（令和8年度15レコード、資料p19掲載）＋令和7年度分31レコード（普通16+専門/総合15・掛-1第10弾・学校構成はR8と完全一致）',
-      '十勝地区・全日制「普通教育を主とする学科」（12レコード）＋「専門教育を主とする学科及び総合学科」（16レコード、資料p20掲載）',
+      '十勝地区・全日制「普通教育を主とする学科」（令和8年度12レコード）＋「専門教育を主とする学科及び総合学科」（令和8年度16レコード、資料p20掲載）＋令和7年度分28レコード（普通12+専門/総合16・掛-1第11弾・学校構成はR8と完全一致）',
       '釧路地区・全日制「普通教育を主とする学科」（9レコード）＋「専門教育を主とする学科及び総合学科」（12レコード、資料p21掲載・連携型テーブルなし）',
       '根室地区・全日制「普通教育を主とする学科」（5レコード）＋「専門教育を主とする学科」（6レコード、資料p22掲載・全14頁の最終地区）',
     ],
@@ -189,7 +189,13 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '湧別・紋別・興部・雄武、専門/総合15レコード=北見北斗理数・美幌未来農業・北見工業3学科・' +
       '紋別電子機械/総合ビジネス・北見商業3学科・網走桂陽商業/事務情報・置戸福祉・斜里総合・' +
       '大空総合)。湧別高校の普通科(連携型)もR8同様スキーマ不一致でスコープ外のまま。pdftotext ' +
-      '-layoutの数値列と全31行を行順突合した(結合セルなし)。',
+      '-layoutの数値列と全31行を行順突合した(結合セルなし)。' +
+      '⚠️2026-08-07追記14(掛-1第11弾): 十勝地区のR7分28レコード(普通12+専門/総合16)も追加した' +
+      '(PDF内部頁12=印字ページ20)。学校・学科構成はR8と完全一致(普通12校=帯広柏葉/三条/緑陽・' +
+      '音更・上士幌・芽室・幕別清陵・鹿追・大樹(地域探究)・広尾・本別・足寄、専門/総合16レコード=' +
+      '帯広農業5学科・更別農業2学科・士幌2学科・帯広工業4学科・帯広南商業商業・清水総合・池田総合)。' +
+      '鹿追高校+広尾高校の普通科(連携型)もR8同様スコープ外のまま。pdftotext -layoutの数値列と全28行' +
+      'を行順突合した(結合セルなし)。',
   },
   officialSubtotals: [],
   records: [
@@ -796,5 +802,35 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '置戸', department: '福祉', quota: 40, finalApplicants: 14, finalRate: 0.35, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '斜里', department: '総合', quota: 40, finalApplicants: 25, finalRate: 0.63, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '大空', department: '総合', quota: 36, finalApplicants: 29, finalRate: 0.81, fiscalYear: '令和7年度（2025年度）' },
+    // 掛-1第11弾: 十勝地区・全日制普通科・令和7年度（2025年度）分。
+    { schoolName: '帯広柏葉', department: '普通', quota: 240, finalApplicants: 283, finalRate: 1.18, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '帯広三条', department: '普通', quota: 240, finalApplicants: 290, finalRate: 1.21, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '帯広緑陽', department: '普通', quota: 160, finalApplicants: 204, finalRate: 1.28, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '音更', department: '普通', quota: 120, finalApplicants: 92, finalRate: 0.77, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '上士幌', department: '普通', quota: 80, finalApplicants: 45, finalRate: 0.56, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '芽室', department: '普通', quota: 160, finalApplicants: 201, finalRate: 1.26, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '幕別清陵', department: '普通', quota: 120, finalApplicants: 146, finalRate: 1.22, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '鹿追', department: '普通', quota: 80, finalApplicants: 91, finalRate: 1.14, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '大樹', department: '地域探究', quota: 40, finalApplicants: 28, finalRate: 0.7, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '広尾', department: '普通', quota: 80, finalApplicants: 32, finalRate: 0.4, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '本別', department: '普通', quota: 40, finalApplicants: 22, finalRate: 0.55, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '足寄', department: '普通', quota: 80, finalApplicants: 46, finalRate: 0.58, fiscalYear: '令和7年度（2025年度）' },
+    // 掛-1第11弾: 十勝地区・専門教育を主とする学科及び総合学科・令和7年度（2025年度）分。
+    { schoolName: '帯広農業', department: '農業科学', quota: 40, finalApplicants: 43, finalRate: 1.08, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '帯広農業', department: '酪農科学', quota: 40, finalApplicants: 39, finalRate: 0.98, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '帯広農業', department: '食品科学', quota: 40, finalApplicants: 46, finalRate: 1.15, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '帯広農業', department: '農業土木工学', quota: 40, finalApplicants: 41, finalRate: 1.03, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '帯広農業', department: '森林科学', quota: 40, finalApplicants: 43, finalRate: 1.08, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '更別農業', department: '農業', quota: 40, finalApplicants: 23, finalRate: 0.58, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '更別農業', department: '生活科学', quota: 40, finalApplicants: 17, finalRate: 0.43, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '士幌', department: 'アグリビジネス', quota: 40, finalApplicants: 17, finalRate: 0.43, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '士幌', department: 'フードシステム', quota: 40, finalApplicants: 22, finalRate: 0.55, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '帯広工業', department: '電子機械', quota: 40, finalApplicants: 57, finalRate: 1.43, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '帯広工業', department: '電気', quota: 40, finalApplicants: 45, finalRate: 1.13, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '帯広工業', department: '建築', quota: 40, finalApplicants: 45, finalRate: 1.13, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '帯広工業', department: '環境土木', quota: 40, finalApplicants: 43, finalRate: 1.08, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '帯広南商業', department: '商業', quota: 200, finalApplicants: 226, finalRate: 1.13, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '清水', department: '総合', quota: 120, finalApplicants: 57, finalRate: 0.48, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '池田', department: '総合', quota: 40, finalApplicants: 17, finalRate: 0.43, fiscalYear: '令和7年度（2025年度）' },
   ],
 };
