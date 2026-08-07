@@ -132,6 +132,23 @@ describe('山口県 倍率パイプラインα（Y-6・全日制43校98レコー
     expect(distinctSchools.size).toBe(49);
   });
 
+  it('掛-1第4弾(5年度目=掛-1「学校別×5年」目標達成): 令和4年度(R4)分レコードが109件収録され、「全日制」計行(quota5,650・applicants6,121)と完全一致する。広瀬分校(岩国)・佐波分校(防府)・徳佐分校(山口)の3分校はR4時点は存在するがR5以降には一切存在しない実在の閉校', () => {
+    const r4 = records.filter((r) => r.fiscalYear === '令和4年度（2022年度）');
+    expect(r4.length).toBe(109);
+    expect(r4.reduce((a, r) => a + r.quota, 0)).toBe(5650);
+    expect(r4.reduce((a, r) => a + r.finalApplicants, 0)).toBe(6121);
+
+    for (const branch of ['広瀬分校', '佐波分校', '徳佐分校']) {
+      expect(r4.some((r) => r.schoolName === branch)).toBe(true);
+      const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+      expect(r5.some((r) => r.schoolName === branch)).toBe(false);
+      expect(r8.some((r) => r.schoolName === branch)).toBe(false);
+    }
+
+    const distinctSchools = new Set(r4.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(52);
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of YAMAGUCHI_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.pref\.yamaguchi\.lg\.jp\//);
