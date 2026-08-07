@@ -61,6 +61,13 @@ export const TOKYO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       fiscalYear: '令和7年度（2025年度）',
       fetchedAt: '2026-08-07',
     },
+    {
+      url: 'https://www.kyoiku.metro.tokyo.lg.jp/documents/d/kyoiku/2025-02-13-004',
+      docTitle:
+        '東京都教育委員会 令和7年度東京都立高等学校入学者選抜応募状況（最終応募状況）6〜22[専門学科13学科・総合学科]（全8頁・掛-1・tokyo横展開第5弾）',
+      fiscalYear: '令和7年度（2025年度）',
+      fetchedAt: '2026-08-07',
+    },
   ],
   coverage: {
     status: 'complete',
@@ -110,7 +117,13 @@ export const TOKYO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       'node.jsで機械計算し確認)。海外帰国生徒対象6校(帰国生3+引揚者3)もR8と学校構成・quota額が' +
       '完全一致(引揚者3校は3年ともapplicants0)。これでPDF「1〜5」(区部/多摩部/島しょ/コース制/' +
       '単位制/海外帰国生徒対象=普通科129校相当のうちR7では128校)が完結。次回は専門学科13学科・' +
-      '総合学科(03-3-v2のR7版)を探索する。',
+      '総合学科(03-3-v2のR7版)を探索する。' +
+      '⚠️追記(掛-1第5弾): R7版の専門学科13学科・総合学科は個票PDF「2025-02-13-004」(全8頁)に' +
+      'まとまっていると確認した(R8では03-3-v2という1本のPDFに相当)。1頁目「6[商業に関する学科]」' +
+      '7校＋「7[ビジネスコミュニケーション科]」2校を追加した。学校構成はR8と完全一致し、印字小計' +
+      '「商業計792/777/0.98」「ビジネスコミュニケーション科計231/245/1.06」ともquota/applicants' +
+      '合計が完全一致(node.jsで機械計算し確認)。残り7頁(工業/科学技術/農業/水産/家庭/福祉/理数/' +
+      '芸術/体育/国際/併合/産業の11学科＋総合学科)は次回以降のセッションで継続する。',
   },
   officialSubtotals: [
     { label: '区部計', schoolCount: 57, quota: 12088, finalApplicants: 16926, finalRate: 1.4 },
@@ -517,5 +530,15 @@ export const TOKYO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '深川', area: '江東', department: '普通科（海外帰国生徒対象・引揚者）', quota: 6, finalApplicants: 0, finalRate: 0, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '光丘', area: '練馬', department: '普通科（海外帰国生徒対象・引揚者）', quota: 6, finalApplicants: 0, finalRate: 0, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '富士森', area: '八王子', department: '普通科（海外帰国生徒対象・引揚者）', quota: 6, finalApplicants: 0, finalRate: 0, fiscalYear: '令和7年度（2025年度）' },
+    // 掛-1横展開第5弾: R7分・個票PDF004の1頁目(商業7校+ビジネスコミュニケーション科2校=9校)。
+    { schoolName: '芝商業', area: '港', department: '商業科', quota: 99, finalApplicants: 105, finalRate: 1.06, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '江東商業', area: '江東', department: '商業科', quota: 105, finalApplicants: 93, finalRate: 0.89, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '第三商業', area: '江東', department: '商業科', quota: 105, finalApplicants: 92, finalRate: 0.88, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '第一商業', area: '渋谷', department: '商業科', quota: 126, finalApplicants: 110, finalRate: 0.87, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '第四商業', area: '練馬', department: '商業科', quota: 105, finalApplicants: 73, finalRate: 0.7, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '葛飾商業', area: '葛飾', department: '商業科', quota: 126, finalApplicants: 140, finalRate: 1.11, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '第五商業', area: '国立', department: '商業科', quota: 126, finalApplicants: 164, finalRate: 1.3, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '大田桜台', area: '大田', department: 'ビジネスコミュニケーション科', quota: 105, finalApplicants: 81, finalRate: 0.77, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '千早', area: '豊島', department: 'ビジネスコミュニケーション科', quota: 126, finalApplicants: 164, finalRate: 1.3, fiscalYear: '令和7年度（2025年度）' },
   ],
 };
