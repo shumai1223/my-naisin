@@ -51,23 +51,35 @@ describe('神奈川県 倍率パイプラインα（Y-2・全日制の突合テ�
     const result = checkAgainstSubtotal(
       records,
       findSubtotal('単位制普通科合計'),
-      (r) => r.department === '普通科（単位制）' || r.department === '普通科（単位制・一般コース）'
+      (r) => (r.department === '普通科（単位制）' || r.department === '普通科（単位制・一般コース）') && !r.fiscalYear
     );
     expect(result.matches).toBe(true);
   });
 
   it('単位制総合学科（クリエイティブ除く）7校の合計が公式値と一致する', () => {
-    const result = checkAgainstSubtotal(records, findSubtotal('単位制総合学科（クリエイティブ除く）合計'), (r) => r.department === '総合学科（単位制）');
+    const result = checkAgainstSubtotal(
+      records,
+      findSubtotal('単位制総合学科（クリエイティブ除く）合計'),
+      (r) => r.department === '総合学科（単位制）' && !r.fiscalYear
+    );
     expect(result.matches).toBe(true);
   });
 
   it('単位制専門学科（農業）2校の合計が公式値と一致する', () => {
-    const result = checkAgainstSubtotal(records, findSubtotal('単位制専門学科（農業）合計'), (r) => r.department === '農業科（単位制）');
+    const result = checkAgainstSubtotal(
+      records,
+      findSubtotal('単位制専門学科（農業）合計'),
+      (r) => r.department === '農業科（単位制）' && !r.fiscalYear
+    );
     expect(result.matches).toBe(true);
   });
 
   it('単位制専門学科（国際関係）の合計が公式値と一致する', () => {
-    const result = checkAgainstSubtotal(records, findSubtotal('単位制専門学科（国際関係）計'), (r) => r.department === '国際科（単位制）');
+    const result = checkAgainstSubtotal(
+      records,
+      findSubtotal('単位制専門学科（国際関係）計'),
+      (r) => r.department === '国際科（単位制）' && !r.fiscalYear
+    );
     expect(result.matches).toBe(true);
   });
 
@@ -78,9 +90,9 @@ describe('神奈川県 倍率パイプラインα（Y-2・全日制の突合テ�
     expect(result.actualApplicants).toBe(43821);
   });
 
-  it('掛-1(学校別×多年度): 令和7年度(R7)分レコードが131件収録され、普通科(県立+市立)の合計が印字済み「合計」27,066/32,929と完全一致する', () => {
+  it('掛-1(学校別×多年度): 令和7年度(R7)分レコードが168件収録され(bessi3.xlsx sheet1〜3完結)、普通科(県立+市立)の合計が印字済み「合計」27,066/32,929と完全一致する', () => {
     const r7 = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
-    expect(r7.length).toBe(131);
+    expect(r7.length).toBe(168);
     const futsuka = r7.filter((r) => r.department === '普通科');
     const sumQuota = futsuka.reduce((a, r) => a + r.quota, 0);
     const sumApplicants = futsuka.reduce((a, r) => a + r.finalApplicants, 0);
@@ -93,9 +105,10 @@ describe('神奈川県 倍率パイプラインα（Y-2・全日制の突合テ�
     const senmon = r7.filter(
       (r) => r.department !== '普通科' && r.department !== '普通科（クリエイティブスクール）'
     );
-    expect(senmon.length).toBe(33);
-    expect(senmon.reduce((a, r) => a + r.quota, 0)).toBe(4356);
-    expect(senmon.reduce((a, r) => a + r.finalApplicants, 0)).toBe(4273);
+    // sheet2(専門学科・全日制) 33件 + sheet3(単位制・連携募集を含む) 37件
+    expect(senmon.length).toBe(70);
+    expect(senmon.reduce((a, r) => a + r.quota, 0)).toBe(4356 + 7141);
+    expect(senmon.reduce((a, r) => a + r.finalApplicants, 0)).toBe(4273 + 8141);
     const seen = new Set<string>();
     for (const r of r7) {
       const key = `${r.area}|${r.schoolName}|${r.department}`;

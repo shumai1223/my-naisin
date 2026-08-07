@@ -54,6 +54,16 @@
  * （農業470/508・工業2198/2006・商業1030/1060・水産156/161・家庭39/49・福祉194/144・理数39/39・
  * 体育78/104・美術78/99・国際74/103）と完全一致（node.js機械計算）。これでbessi3.xlsxの
  * sheet1+sheet2が完結。sheet3(単位制)は次回以降のセッションで横展開する。
+ *
+ * **2026-08-07追記(掛-1第4弾・kanagawa完結)**: sheet3「単位制」（普通科16校+音楽コース1校+
+ * 総合学科8校+専門学科11校+連携募集2校=計37レコード）を追加。総合学科の麻生総合は令和8年度に
+ * 田奈と統合し「青葉総合」に改編されたため単独ではR8に存在しない（sheet1のクリエイティブ
+ * スクール節で判明した学校再編と同根）。国際科（単位制）は横浜国際の「国際科」＋「国際科国際
+ * バカロレアコース」を印字済み「計」行で1レコードに集約。全ての印字済み小計・合計
+ * （普通科単位制4,067/4,578・総合学科単位制2,017/2,272・農業152/101・連携募集85/83等）が
+ * 完全一致（node.js機械計算）。**これでbessi3.xlsx全体（sheet1〜3）が完結し、
+ * kanagawaのR7学校粒度データが確定した。** 次回セッションでは掛-1の対象県をkanagawa以外
+ * （hokkaido/tokyo/osaka/kanagawa以外の43県）へ横展開するフェーズに進む。
  */
 import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
 
@@ -492,5 +502,57 @@ export const KANAGAWA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     // --- 専門学科（国際・2校） ---
     { schoolName: '横浜市立横浜商業', area: '横浜市立', department: '国際科', quota: 35, finalApplicants: 36, finalRate: 1.03, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '川崎市立橘', area: '川崎市立', department: '国際科', quota: 39, finalApplicants: 67, finalRate: 1.72, fiscalYear: '令和7年度（2025年度）' },
+
+    // ===== 掛-1(学校別×多年度)横展開: R7分・sheet3「単位制」（学校の「計」行採用方式） =====
+    // --- 単位制 普通科（16校。神奈川総合は2コース・横浜市立戸塚は一般コースのみここに含む） ---
+    { schoolName: '神奈川総合', area: '横浜市', department: '普通科（単位制）', quota: 208, finalApplicants: 327, finalRate: 1.57, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '横浜緑園', area: '横浜市', department: '普通科（単位制）', quota: 279, finalApplicants: 301, finalRate: 1.08, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '横浜桜陽', area: '横浜市', department: '普通科（単位制）', quota: 270, finalApplicants: 264, finalRate: 0.98, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '横浜清陵', area: '横浜市', department: '普通科（単位制）', quota: 266, finalApplicants: 358, finalRate: 1.35, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '横浜栄', area: '横浜市', department: '普通科（単位制）', quota: 319, finalApplicants: 394, finalRate: 1.24, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '川崎', area: '川崎市', department: '普通科（単位制）', quota: 223, finalApplicants: 273, finalRate: 1.22, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '大師', area: '川崎市', department: '普通科（単位制）', quota: 228, finalApplicants: 173, finalRate: 0.76, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '三浦初声', area: '三浦市', department: '普通科（単位制）', quota: 198, finalApplicants: 145, finalRate: 0.73, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '藤沢清流', area: '藤沢市', department: '普通科（単位制）', quota: 279, finalApplicants: 346, finalRate: 1.24, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '平塚湘風', area: '平塚市', department: '普通科（単位制）', quota: 238, finalApplicants: 192, finalRate: 0.81, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '小田原', area: '小田原市', department: '普通科（単位制）', quota: 319, finalApplicants: 395, finalRate: 1.24, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '厚木清南', area: '県央', department: '普通科（単位制）', quota: 230, finalApplicants: 205, finalRate: 0.89, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '相模原城山', area: '相模原', department: '普通科（単位制）', quota: 279, finalApplicants: 292, finalRate: 1.05, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '相模原弥栄', area: '相模原', department: '普通科（単位制）', quota: 184, finalApplicants: 254, finalRate: 1.38, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '横浜市立東', area: '横浜市立', department: '普通科（単位制）', quota: 268, finalApplicants: 362, finalRate: 1.35, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '横浜市立戸塚', area: '横浜市立', department: '普通科（単位制・一般コース）', quota: 279, finalApplicants: 297, finalRate: 1.06, fiscalYear: '令和7年度（2025年度）' },
+    // --- 単位制 普通科専門コース（1校） ---
+    { schoolName: '横浜市立戸塚', area: '横浜市立', department: '普通科（単位制・音楽コース）', quota: 39, finalApplicants: 44, finalRate: 1.13, fiscalYear: '令和7年度（2025年度）' },
+    // --- 単位制 総合学科（8校。麻生総合はR8で田奈と統合し「青葉総合」に改編済みのため単独では消滅） ---
+    { schoolName: '鶴見総合', area: '横浜市', department: '総合学科（単位制）', quota: 259, finalApplicants: 306, finalRate: 1.18, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '金沢総合', area: '横浜市', department: '総合学科（単位制）', quota: 279, finalApplicants: 352, finalRate: 1.26, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '麻生総合', area: '川崎市', department: '総合学科（単位制）', quota: 190, finalApplicants: 94, finalRate: 0.49, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '藤沢総合', area: '藤沢市', department: '総合学科（単位制）', quota: 269, finalApplicants: 320, finalRate: 1.19, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '秦野総合', area: '秦野市', department: '総合学科（単位制）', quota: 239, finalApplicants: 230, finalRate: 0.96, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '座間総合', area: '座間市', department: '総合学科（単位制）', quota: 229, finalApplicants: 269, finalRate: 1.17, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '横浜市立みなと総合', area: '横浜市立', department: '総合学科（単位制）', quota: 232, finalApplicants: 283, finalRate: 1.22, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '横須賀市立横須賀総合', area: '横須賀市立', department: '総合学科（単位制）', quota: 320, finalApplicants: 418, finalRate: 1.31, fiscalYear: '令和7年度（2025年度）' },
+    // --- 単位制 専門学科（農業・2校） ---
+    { schoolName: '三浦初声', area: '三浦市', department: '農業科（単位制）', quota: 38, finalApplicants: 24, finalRate: 0.63, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '吉田島', area: '開成町', department: '農業科（単位制）', quota: 114, finalApplicants: 77, finalRate: 0.68, fiscalYear: '令和7年度（2025年度）' },
+    // --- 単位制 専門学科（家庭・1校） ---
+    { schoolName: '吉田島', area: '開成町', department: '家庭科（単位制）', quota: 38, finalApplicants: 32, finalRate: 0.84, fiscalYear: '令和7年度（2025年度）' },
+    // --- 単位制 専門学科（理数・1校） ---
+    { schoolName: '横浜サイエンスフロンティア', area: '横浜市立', department: '理数科（単位制）', quota: 158, finalApplicants: 243, finalRate: 1.54, fiscalYear: '令和7年度（2025年度）' },
+    // --- 単位制 専門学科（体育・1校） ---
+    { schoolName: '相模原弥栄', area: '相模原', department: '体育科（単位制）', quota: 79, finalApplicants: 125, finalRate: 1.58, fiscalYear: '令和7年度（2025年度）' },
+    // --- 単位制 専門学科（音楽・1校） ---
+    { schoolName: '相模原弥栄', area: '相模原', department: '音楽科（単位制）', quota: 39, finalApplicants: 52, finalRate: 1.33, fiscalYear: '令和7年度（2025年度）' },
+    // --- 単位制 専門学科（美術・1校） ---
+    { schoolName: '相模原弥栄', area: '相模原', department: '美術科（単位制）', quota: 39, finalApplicants: 61, finalRate: 1.56, fiscalYear: '令和7年度（2025年度）' },
+    // --- 単位制 専門学科（国際関係・1校。国際科+国際バカロレアコースを計行で集約） ---
+    { schoolName: '横浜国際', area: '横浜市', department: '国際科（単位制）', quota: 159, finalApplicants: 231, finalRate: 1.45, fiscalYear: '令和7年度（2025年度）' },
+    // --- 単位制 専門学科（総合産業・1校） ---
+    { schoolName: '神奈川総合産業', area: '横浜市立', department: '総合産業科（単位制）', quota: 239, finalApplicants: 262, finalRate: 1.1, fiscalYear: '令和7年度（2025年度）' },
+    // --- 単位制 専門学科（舞台芸術・1校） ---
+    { schoolName: '神奈川総合', area: '横浜市', department: '舞台芸術科（単位制）', quota: 30, finalApplicants: 57, finalRate: 1.9, fiscalYear: '令和7年度（2025年度）' },
+    // --- 連携募集（2校・既存校への追加募集枠。志願変更を行わないため1/30の値=最終値） ---
+    { schoolName: '光陵', area: '横浜中', department: '普通科（連携募集）', quota: 40, finalApplicants: 40, finalRate: 1.0, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '愛川', area: '県央', department: '普通科（連携募集）', quota: 45, finalApplicants: 43, finalRate: 0.96, fiscalYear: '令和7年度（2025年度）' },
   ],
 };
