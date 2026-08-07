@@ -261,7 +261,7 @@ describe('東京都 倍率パイプラインα（Y-2・普通科119校の突合�
   });
 
   it('掛-1(学校別×多年度・R5第1弾): 令和5年度(R5)分の普通科(区部)58校が収録され、区市町村+学校名+学科の重複が無い。杉並「西」は令和5年2月21日訂正後の値(女230・計463)を採用', () => {
-    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）' && r.department === '普通科' && TOKYO_23_WARDS.has(r.area ?? ''));
     expect(r5.length).toBe(58);
     expect(r5.reduce((a, r) => a + r.quota, 0)).toBe(12531);
     expect(r5.reduce((a, r) => a + r.finalApplicants, 0)).toBe(19195);
@@ -282,9 +282,40 @@ describe('東京都 倍率パイプラインα（Y-2・普通科119校の突合�
       finalRate: 1.83,
       fiscalYear: '令和5年度（2023年度）',
     });
+  });
 
-    const kuBu = r5.filter((r) => TOKYO_23_WARDS.has(r.area ?? ''));
-    expect(kuBu.length).toBe(58);
+  it('掛-1(学校別×多年度・R5第2弾・個票PDF1完結): 令和5年度(R5)分の普通科(コース単位制以外+島しょ)108校が収録され、区市町村+学校名+学科の重複が無い。新島は令和5年2月21日訂正後の値(計10・倍率0.25)を採用', () => {
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）' && r.department === '普通科');
+    expect(r5.length).toBe(108);
+    expect(r5.reduce((a, r) => a + r.quota, 0)).toBe(22226);
+    expect(r5.reduce((a, r) => a + r.finalApplicants, 0)).toBe(32103);
+
+    const seen = new Set<string>();
+    for (const r of r5) {
+      const key = `${r.area}|${r.schoolName}|${r.department}`;
+      expect(seen.has(key)).toBe(false);
+      seen.add(key);
+    }
+
+    expect(r5.find((r) => r.schoolName === '新島')).toEqual({
+      schoolName: '新島',
+      area: '新島',
+      department: '普通科',
+      quota: 40,
+      finalApplicants: 10,
+      finalRate: 0.25,
+      fiscalYear: '令和5年度（2023年度）',
+    });
+
+    const tamaBu = r5.filter((r) => !TOKYO_23_WARDS.has(r.area ?? '') && !ISLAND_AREAS.has(r.area ?? ''));
+    expect(tamaBu.length).toBe(44);
+    expect(tamaBu.reduce((a, r) => a + r.quota, 0)).toBe(9388);
+    expect(tamaBu.reduce((a, r) => a + r.finalApplicants, 0)).toBe(12778);
+
+    const shimasho = r5.filter((r) => ISLAND_AREAS.has(r.area ?? ''));
+    expect(shimasho.length).toBe(6);
+    expect(shimasho.reduce((a, r) => a + r.quota, 0)).toBe(307);
+    expect(shimasho.reduce((a, r) => a + r.finalApplicants, 0)).toBe(130);
   });
 
   it('全レコードのquota>0・finalApplicants>=0・finalRateが概算で整合する', () => {
