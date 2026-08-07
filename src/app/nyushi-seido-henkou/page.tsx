@@ -91,6 +91,17 @@ const UPCOMING_CHANGES: UpcomingChange[] = [
     sourceTitle: '千葉県教育委員会「千葉県公立高等学校入学者選抜の改善点について」',
     confirmedDate: '2026-07-24',
   },
+  {
+    prefCode: 'ishikawa',
+    prefName: '石川県',
+    effectiveYear: '令和9年度（2027年度）',
+    headline: '学力検査に傾斜配点が導入される予定（2教科まで・最大2倍）',
+    detail:
+      '石川県教育委員会は令和9(2027)年度入試から、学校・学科（コース）ごとに学力検査の一部教科に傾斜配点を実施できる制度を導入すると発表しました。傾斜できる教科は最大2教科まで、倍率は2倍を超えない範囲で学校が設定します。これにより、学力検査の合計満点が従来の5教科×100点=500点ちょうどではない学校・学科が令和9年度以降に登場することになります。**内申点（調査書点・180点満点）の算出方法自体に変更は確認できていません**。',
+    sourceUrl: 'https://www.pref.ishikawa.lg.jp/kyoiku/gakkou/senbatu/documents/r9housin.pdf',
+    sourceTitle: '石川県教育委員会「令和9年度石川県公立高等学校入学者選抜の基本方針」',
+    confirmedDate: '2026-08-06',
+  },
 ];
 
 const FAQS = [
