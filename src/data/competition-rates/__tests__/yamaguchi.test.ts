@@ -91,6 +91,30 @@ describe('山口県 倍率パイプラインα（Y-6・全日制43校98レコー
     expect(distinctSchools.size).toBe(47);
   });
 
+  it('掛-1第2弾(3年度目): 令和6年度(R6)分レコードが105件収録され、「全日制」計行(quota5,584・applicants5,811)と完全一致する。田部高校(普通・総合生活)はR6時点は存在するがR7/R8には存在しない実在の統廃合、岩国・山口・徳山はR6時点はまだ文理探究くくりを導入前(普通+理数の2学科構成)だった', () => {
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    expect(r6.length).toBe(105);
+    expect(r6.reduce((a, r) => a + r.quota, 0)).toBe(5584);
+    expect(r6.reduce((a, r) => a + r.finalApplicants, 0)).toBe(5811);
+
+    expect(r6.some((r) => r.schoolName === '田部')).toBe(true);
+    const r7 = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
+    expect(r7.some((r) => r.schoolName === '田部')).toBe(false);
+    expect(r8.some((r) => r.schoolName === '田部')).toBe(false);
+
+    expect(r6.find((r) => r.schoolName === '岩国' && r.department === '理数')).toEqual({
+      schoolName: '岩国',
+      department: '理数',
+      quota: 28,
+      finalApplicants: 47,
+      finalRate: 1.7,
+      fiscalYear: '令和6年度（2024年度）',
+    });
+
+    const distinctSchools = new Set(r6.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(48);
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of YAMAGUCHI_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.pref\.yamaguchi\.lg\.jp\//);
