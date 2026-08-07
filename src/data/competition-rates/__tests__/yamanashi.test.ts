@@ -10,10 +10,11 @@ import { YAMANASHI_COMPETITION_RATES } from '../yamanashi';
  */
 describe('山梨県 倍率パイプラインα（Y-6・全日制26校48学科の完全収録テスト）', () => {
   const { records, officialSubtotals } = YAMANASHI_COMPETITION_RATES;
+  const r8 = records.filter((r) => !r.fiscalYear);
 
   it('全日制の全レコード合計が「全日制課程計」行（quota3,356・applicants3,037）と完全一致する', () => {
     const grandTotal = officialSubtotals.find((s) => s.label === '全日制課程計')!;
-    const result = checkAgainstSubtotal(records, grandTotal, () => true);
+    const result = checkAgainstSubtotal(records, grandTotal, (r) => !r.fiscalYear);
     expect(result.matches).toBe(true);
   });
 
@@ -25,11 +26,11 @@ describe('山梨県 倍率パイプラインα（Y-6・全日制26校48学科の
     }
   });
 
-  it('学校名+学科名の重複が無い', () => {
+  it('学校名+学科名+年度の重複が無い', () => {
     const seen = new Set<string>();
     const dupes: string[] = [];
     for (const r of records) {
-      const key = `${r.schoolName}|${r.department}`;
+      const key = `${r.schoolName}|${r.department}|${r.fiscalYear ?? ''}`;
       if (seen.has(key)) dupes.push(key);
       seen.add(key);
     }
@@ -41,9 +42,27 @@ describe('山梨県 倍率パイプラインα（Y-6・全日制26校48学科の
   });
 
   it('48レコード・26校が収録されている（資料が明記する「26校48学科」と一致）', () => {
-    expect(records.length).toBe(48);
-    const distinctSchools = new Set(records.map((r) => r.schoolName));
+    expect(r8.length).toBe(48);
+    const distinctSchools = new Set(r8.map((r) => r.schoolName));
     expect(distinctSchools.size).toBe(26);
+  });
+
+  it('掛-1(学校別×多年度): 令和7年度(R7)分レコードが48件・26校収録され、公式「全日制課程計」3,395/3,227と完全一致し、R8と学校名+学科名の組み合わせが完全一致する(学校再編なし)', () => {
+    const r7 = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
+    expect(r7.length).toBe(48);
+    const distinctSchools = new Set(r7.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(26);
+    const sumQuota = r7.reduce((a, r) => a + r.quota, 0);
+    const sumApplicants = r7.reduce((a, r) => a + r.finalApplicants, 0);
+    expect(sumQuota).toBe(3395);
+    expect(sumApplicants).toBe(3227);
+
+    const r8Keys = new Set(r8.map((r) => `${r.schoolName}|${r.department}`));
+    const r7Keys = new Set(r7.map((r) => `${r.schoolName}|${r.department}`));
+    expect(r7Keys.size).toBe(r8Keys.size);
+    for (const key of r7Keys) {
+      expect(r8Keys.has(key)).toBe(true);
+    }
   });
 
   it('教委が公式に一括募集と定める学科群（韮崎工業・工業一括）が単一レコードとして収録されている', () => {
