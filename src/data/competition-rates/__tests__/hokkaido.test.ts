@@ -14,16 +14,16 @@ import { HOKKAIDO_COMPETITION_RATES } from '../hokkaido';
  * 「finalApplicants ÷ quota ≒ finalRate」の内部整合性のみを検証する（公式グランドトータル行は
  * 原資料に印字されておらず突合対象が無いため）。
  */
-describe('北海道 倍率パイプラインα（Y-6・R8=323レコード＋掛-1(空知+石狩+札幌市+後志+胆振+日高+渡島+檜山):R7=182レコード＝505レコード・coverage=partial・全14管内着手済み）', () => {
+describe('北海道 倍率パイプラインα（Y-6・R8=323レコード＋掛-1(空知+石狩+札幌市+後志+胆振+日高+渡島+檜山+上川):R7=219レコード＝542レコード・coverage=partial・全14管内着手済み）', () => {
   const { records } = HOKKAIDO_COMPETITION_RATES;
 
   it('coverageがpartialを示している', () => {
     expect(HOKKAIDO_COMPETITION_RATES.coverage.status).toBe('partial');
   });
 
-  it('505レコードが収録されている(R8年度323+R7年度182)', () => {
-    expect(records.length).toBe(505);
-    expect(records.filter((r) => r.fiscalYear === '令和7年度（2025年度）').length).toBe(182);
+  it('542レコードが収録されている(R8年度323+R7年度219)', () => {
+    expect(records.length).toBe(542);
+    expect(records.filter((r) => r.fiscalYear === '令和7年度（2025年度）').length).toBe(219);
     expect(records.filter((r) => !r.fiscalYear).length).toBe(323);
   });
 

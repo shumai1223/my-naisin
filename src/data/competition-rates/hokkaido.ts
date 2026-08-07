@@ -59,7 +59,7 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '日高地区・全日制「普通教育を主とする学科」（令和8年度4レコード）＋「専門教育を主とする学科及び総合学科」（令和8年度3レコード）＋令和7年度分7レコード（普通4+専門/総合3・掛-1第6弾）',
       '渡島地区・全日制「普通教育を主とする学科」（令和8年度10レコード・知内高校含む）＋「専門教育を主とする学科及び総合学科」（令和8年度19レコード・資料p16掲載）＋令和7年度分普通10レコード＋専門/総合20レコード（掛-1第6弾+第7弾）',
       '檜山地区・全日制「普通教育を主とする学科」（令和8年度3レコード）＋「総合学科」（令和8年度1レコード・檜山北高校）＋令和7年度分4レコード（掛-1第7弾）',
-      '上川地区・全日制「普通教育を主とする学科」（14レコード、資料p17上表）＋「専門教育を主とする学科及び総合学科」（23レコード、資料p17下表）',
+      '上川地区・全日制「普通教育を主とする学科」（令和8年度14レコード、資料p17上表）＋「専門教育を主とする学科及び総合学科」（令和8年度23レコード、資料p17下表）＋令和7年度分37レコード（普通14+専門/総合23・掛-1第8弾・学校構成はR8と完全一致）',
       '留萌地区・全日制「普通教育を主とする学科」（3レコード）＋「専門教育を主とする学科」（4レコード、資料p18掲載）',
       '宗谷地区・全日制「普通教育を主とする学科」（6レコード）＋「専門教育を主とする学科」（2レコード、資料p18掲載）',
       'オホーツク地区・全日制「普通教育を主とする学科」（16レコード）＋「専門教育を主とする学科及び総合学科」（15レコード、資料p19掲載）',
@@ -170,7 +170,14 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '令和8年度にかけて学科再編(水産食品+品質管理流通の統合等)があったと考えられる・他校の学科' +
       '構成はR7=R8で一致)。残る19校(函館中部理数・大野農業3学科・函館工業5学科・函館商業4学科・' +
       '福島商業・八雲総合ビジネス・森総合)はR8と完全一致。檜山地区(江差・上ノ国・奥尻・檜山北)も' +
-      '学校構成はR8と完全一致。pdftotext -layoutの数値列と全24行を行順突合した(結合セルなし)。',
+      '学校構成はR8と完全一致。pdftotext -layoutの数値列と全24行を行順突合した(結合セルなし)。' +
+      '⚠️2026-08-07追記11(掛-1第8弾): 上川地区のR7分37レコード(普通14+専門/総合23)も追加した' +
+      '(PDF内部頁9=印字ページ17)。学校・学科構成はR8と完全一致(普通14校=旭川東西北永嶺・鷹栖・' +
+      '東川・美瑛・上川・富良野・上富良野・南富良野・士別翔雲・名寄・美深、専門/総合23レコード=' +
+      '旭川西理数・おといねっぷ美術工芸・旭川農業4学科・富良野2学科・旭川工業6学科・名寄情報技術・' +
+      '旭川商業4学科・士別翔雲総合ビジネス・下川商業・旭川南総合・剣淵総合)。上川高校の普通科' +
+      '(連携型)もR8同様出願者数/倍率列なしでスコープ外のまま。pdftotext -layoutの数値列と全37行を' +
+      '行順突合した(結合セルなし・300dpiで学科名明瞭)。',
   },
   officialSubtotals: [],
   records: [
@@ -688,5 +695,44 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '上ノ国', department: '普通', quota: 40, finalApplicants: 16, finalRate: 0.4, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '奥尻', department: '普通', quota: 40, finalApplicants: 18, finalRate: 0.45, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '檜山北', department: '総合', quota: 80, finalApplicants: 53, finalRate: 0.66, fiscalYear: '令和7年度（2025年度）' },
+    // 掛-1第8弾: 上川地区・全日制普通科・令和7年度（2025年度）分。
+    { schoolName: '旭川東', department: '普通', quota: 240, finalApplicants: 293, finalRate: 1.22, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '旭川西', department: '普通', quota: 160, finalApplicants: 185, finalRate: 1.16, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '旭川北', department: '普通', quota: 200, finalApplicants: 213, finalRate: 1.07, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '旭川永嶺', department: '普通', quota: 200, finalApplicants: 264, finalRate: 1.32, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '鷹栖', department: '普通', quota: 40, finalApplicants: 22, finalRate: 0.55, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '東川', department: '普通', quota: 80, finalApplicants: 72, finalRate: 0.9, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '美瑛', department: '普通', quota: 40, finalApplicants: 16, finalRate: 0.4, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '上川', department: '普通', quota: 40, finalApplicants: 18, finalRate: 0.45, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '富良野', department: '普通', quota: 120, finalApplicants: 106, finalRate: 0.88, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '上富良野', department: '普通', quota: 40, finalApplicants: 21, finalRate: 0.53, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '南富良野', department: '普通', quota: 40, finalApplicants: 26, finalRate: 0.65, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '士別翔雲', department: '普通', quota: 120, finalApplicants: 82, finalRate: 0.68, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '名寄', department: '普通', quota: 160, finalApplicants: 109, finalRate: 0.68, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '美深', department: '普通', quota: 40, finalApplicants: 27, finalRate: 0.68, fiscalYear: '令和7年度（2025年度）' },
+    // 掛-1第8弾: 上川地区・専門教育を主とする学科及び総合学科・令和7年度（2025年度）分。
+    { schoolName: '旭川西', department: '理数', quota: 40, finalApplicants: 50, finalRate: 1.25, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: 'おといねっぷ美術工芸', department: '工芸', quota: 40, finalApplicants: 53, finalRate: 1.33, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '旭川農業', department: '農業科学', quota: 40, finalApplicants: 51, finalRate: 1.28, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '旭川農業', department: '食品科学', quota: 40, finalApplicants: 38, finalRate: 0.95, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '旭川農業', department: '森林科学', quota: 40, finalApplicants: 47, finalRate: 1.18, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '旭川農業', department: '生活科学', quota: 40, finalApplicants: 37, finalRate: 0.93, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '富良野', department: '園芸観光デザイン', quota: 40, finalApplicants: 24, finalRate: 0.6, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '旭川工業', department: '電子機械', quota: 40, finalApplicants: 44, finalRate: 1.1, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '旭川工業', department: '電気', quota: 40, finalApplicants: 46, finalRate: 1.15, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '旭川工業', department: '情報技術', quota: 40, finalApplicants: 43, finalRate: 1.08, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '旭川工業', department: '建築', quota: 40, finalApplicants: 48, finalRate: 1.2, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '旭川工業', department: '土木', quota: 40, finalApplicants: 51, finalRate: 1.28, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '旭川工業', department: '工業化学', quota: 40, finalApplicants: 46, finalRate: 1.15, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '名寄', department: '情報技術', quota: 40, finalApplicants: 19, finalRate: 0.48, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '富良野', department: '電気情報システム', quota: 40, finalApplicants: 21, finalRate: 0.53, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '旭川商業', department: '流通ビジネス', quota: 80, finalApplicants: 84, finalRate: 1.05, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '旭川商業', department: '国際ビジネス', quota: 40, finalApplicants: 30, finalRate: 0.75, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '旭川商業', department: '会計', quota: 40, finalApplicants: 44, finalRate: 1.1, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '旭川商業', department: '情報処理', quota: 40, finalApplicants: 42, finalRate: 1.05, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '士別翔雲', department: '総合ビジネス', quota: 40, finalApplicants: 16, finalRate: 0.4, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '下川商業', department: '商業', quota: 40, finalApplicants: 32, finalRate: 0.8, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '旭川南', department: '総合', quota: 200, finalApplicants: 259, finalRate: 1.3, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '剣淵', department: '総合', quota: 40, finalApplicants: 18, finalRate: 0.45, fiscalYear: '令和7年度（2025年度）' },
   ],
 };
