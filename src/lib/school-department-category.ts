@@ -184,6 +184,7 @@ export const SAITAMA_DEPARTMENT_TO_CATEGORY_LABEL: Record<string, string> = {
   人文科: '人文科計',
   国際教養科: '国際関係科計',
   国際科: '国際関係科計',
+  国際文化科: '国際関係科計',
   映像芸術科: '映像芸術科計',
   舞台芸術科: '舞台芸術科計',
   生物系: '生物系・環境系計',
