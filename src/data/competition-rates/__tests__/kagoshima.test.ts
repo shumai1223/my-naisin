@@ -6,10 +6,11 @@ import { KAGOSHIMA_COMPETITION_RATES } from '../kagoshima';
  */
 describe('鹿児島県 倍率パイプラインα（Y-6・全日制68校156レコードの完全収録テスト）', () => {
   const { records, officialSubtotals } = KAGOSHIMA_COMPETITION_RATES;
+  const r8 = records.filter((r) => !r.fiscalYear);
 
   it('全日制の全レコード合計が「全日制合計」行（quota10,349・applicants7,948）と完全一致する', () => {
     const grandTotal = officialSubtotals.find((s) => s.label === '全日制合計')!;
-    const result = checkAgainstSubtotal(records, grandTotal, () => true);
+    const result = checkAgainstSubtotal(records, grandTotal, (r) => !r.fiscalYear);
     expect(result.matches).toBe(true);
   });
 
@@ -21,11 +22,11 @@ describe('鹿児島県 倍率パイプラインα（Y-6・全日制68校156レ�
     }
   });
 
-  it('学校名+学科名の重複が無い', () => {
+  it('学校名+学科名+年度の重複が無い', () => {
     const seen = new Set<string>();
     const dupes: string[] = [];
     for (const r of records) {
-      const key = `${r.schoolName}|${r.department}`;
+      const key = `${r.schoolName}|${r.department}|${r.fiscalYear ?? ''}`;
       if (seen.has(key)) dupes.push(key);
       seen.add(key);
     }
@@ -37,8 +38,8 @@ describe('鹿児島県 倍率パイプラインα（Y-6・全日制68校156レ�
   });
 
   it('156レコード・68校が収録されている', () => {
-    expect(records.length).toBe(156);
-    const distinctSchools = new Set(records.map((r) => r.schoolName));
+    expect(r8.length).toBe(156);
+    const distinctSchools = new Set(r8.map((r) => r.schoolName));
     expect(distinctSchools.size).toBe(68);
   });
 
@@ -74,6 +75,22 @@ describe('鹿児島県 倍率パイプラインα（Y-6・全日制68校156レ�
       finalApplicants: 33,
       finalRate: 0.85,
     });
+  });
+
+  it('掛-1(学校別×多年度): 令和7年度(R7)分レコードが156件収録され、「全日制合計」(quota10,398・applicants8,455)と完全一致する。学校名のキー集合はR8と完全一致(統廃合なし)。楠隼・喜界(商業)もR7時点で最終出願者数0だった', () => {
+    const r7 = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
+    expect(r7.length).toBe(156);
+    expect(r7.reduce((a, r) => a + r.quota, 0)).toBe(10398);
+    expect(r7.reduce((a, r) => a + r.finalApplicants, 0)).toBe(8455);
+
+    expect(r7.find((r) => r.schoolName === '与論')).toMatchObject({ finalApplicants: 1 });
+    expect(r7.find((r) => r.schoolName === '楠隼')).toMatchObject({ finalApplicants: 0 });
+    expect(r7.find((r) => r.schoolName === '喜界' && r.department === '商業')).toMatchObject({ finalApplicants: 0 });
+
+    const r7Schools = new Set(r7.map((r) => r.schoolName));
+    const r8Schools = new Set(r8.map((r) => r.schoolName));
+    expect(r7Schools.size).toBe(68);
+    expect([...r7Schools].every((s) => r8Schools.has(s))).toBe(true);
   });
 
   it('sourcesが公式PDF URLを正しく記録している', () => {
