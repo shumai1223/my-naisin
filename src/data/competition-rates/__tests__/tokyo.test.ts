@@ -357,6 +357,45 @@ describe('東京都 倍率パイプラインα（Y-2・普通科119校の突合�
     expect(kaigai.reduce((a, r) => a + r.finalApplicants, 0)).toBe(51);
   });
 
+  it('掛-1(学校別×多年度・R5第4弾・tokyo R5(167校)完結): 令和5年度(R5)分に専門学科13学科・総合学科59件を追加した合計188件が収録され、区市町村+学校名+学科の重複が無い。17区分の印字小計と完全一致する', () => {
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    expect(r5.length).toBe(188);
+
+    const seen = new Set<string>();
+    for (const r of r5) {
+      const key = `${r.area}|${r.schoolName}|${r.department}`;
+      expect(seen.has(key)).toBe(false);
+      seen.add(key);
+    }
+
+    const sumOf = (dept: string) => {
+      const rs = r5.filter((r) => r.department === dept);
+      return { count: rs.length, quota: rs.reduce((a, r) => a + r.quota, 0), applicants: rs.reduce((a, r) => a + r.finalApplicants, 0) };
+    };
+
+    expect(sumOf('商業科')).toEqual({ count: 7, quota: 829, applicants: 798 });
+    expect(sumOf('ビジネスコミュニケーション科')).toEqual({ count: 2, quota: 233, applicants: 227 });
+    expect(sumOf('工業科')).toEqual({ count: 15, quota: 1568, applicants: 1159 });
+    expect(sumOf('工業科（単位制）')).toEqual({ count: 1, quota: 118, applicants: 67 });
+    expect(sumOf('科学技術科')).toEqual({ count: 2, quota: 273, applicants: 502 });
+    expect(sumOf('農業科')).toEqual({ count: 5, quota: 419, applicants: 490 });
+    expect(sumOf('水産科')).toEqual({ count: 1, quota: 42, applicants: 28 });
+    expect(sumOf('家庭科')).toEqual({ count: 3, quota: 222, applicants: 223 });
+    expect(sumOf('家庭科（単位制）')).toEqual({ count: 1, quota: 49, applicants: 46 });
+    expect(sumOf('福祉科')).toEqual({ count: 2, quota: 51, applicants: 31 });
+    expect(sumOf('理数科')).toEqual({ count: 1, quota: 35, applicants: 128 });
+    expect(sumOf('芸術科')).toEqual({ count: 1, quota: 112, applicants: 193 });
+    expect(sumOf('体育科')).toEqual({ count: 2, quota: 52, applicants: 70 });
+    expect(sumOf('国際科')).toEqual({ count: 1, quota: 138, applicants: 338 });
+    expect(sumOf('産業科')).toEqual({ count: 2, quota: 295, applicants: 298 });
+    expect(sumOf('総合学科')).toEqual({ count: 10, quota: 1626, applicants: 2088 });
+
+    const heigou = r5.filter((r) => r.department.startsWith('併合科'));
+    expect(heigou.length).toBe(3);
+    expect(heigou.reduce((a, r) => a + r.quota, 0)).toBe(105);
+    expect(heigou.reduce((a, r) => a + r.finalApplicants, 0)).toBe(22);
+  });
+
   it('全レコードのquota>0・finalApplicants>=0・finalRateが概算で整合する', () => {
     for (const r of records) {
       expect(r.quota).toBeGreaterThan(0);
