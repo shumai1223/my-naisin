@@ -2,17 +2,18 @@ import { checkAgainstSubtotal } from '@/lib/competition-rate';
 import { NAGANO_COMPETITION_RATES } from '../nagano';
 
 /**
- * Y-6 DoD検証（長野県・10県目・全日制完全達成）。
+ * Y-6 DoD検証（長野県・10県目・全日制完全達成／掛-1・R7多年度対応済）。
  *
  * 全県計に加え4通学区（北信/東信/南信/中信）ごとの合計行が別紙内に明記されているため、
  * 地区別の突合と全県計の突合の両方をDoDとして検証する。
  */
 describe('長野県 倍率パイプラインα（Y-6・全日制77校129レコードの完全収録テスト）', () => {
   const { records, officialSubtotals } = NAGANO_COMPETITION_RATES;
+  const r8 = records.filter((r) => !r.fiscalYear);
 
   it('全日制の全レコード合計が全県計（quota8,807・applicants7,795・倍率0.89）と完全一致する', () => {
     const grandTotal = officialSubtotals.find((s) => s.label === '全日制計')!;
-    const result = checkAgainstSubtotal(records, grandTotal, () => true);
+    const result = checkAgainstSubtotal(records, grandTotal, (r) => !r.fiscalYear);
     expect(result.matches).toBe(true);
   });
 
@@ -23,7 +24,7 @@ describe('長野県 倍率パイプラインα（Y-6・全日制77校129レコ�
     ['第4通学区（中信地区）計', '中信'],
   ])('%sが別紙記載の地区合計と完全一致する', (label, area) => {
     const subtotal = officialSubtotals.find((s) => s.label === label)!;
-    const result = checkAgainstSubtotal(records, subtotal, (r) => r.area === area);
+    const result = checkAgainstSubtotal(records, subtotal, (r) => !r.fiscalYear && r.area === area);
     expect(result.matches).toBe(true);
   });
 
@@ -35,11 +36,11 @@ describe('長野県 倍率パイプラインα（Y-6・全日制77校129レコ�
     }
   });
 
-  it('学校名+学科名の重複が無い', () => {
+  it('学校名+学科名+年度の重複が無い', () => {
     const seen = new Set<string>();
     const dupes: string[] = [];
     for (const r of records) {
-      const key = `${r.schoolName}|${r.department}`;
+      const key = `${r.schoolName}|${r.department}|${r.fiscalYear ?? ''}`;
       if (seen.has(key)) dupes.push(key);
       seen.add(key);
     }
@@ -51,8 +52,8 @@ describe('長野県 倍率パイプラインα（Y-6・全日制77校129レコ�
   });
 
   it('129レコード・77校が収録されている', () => {
-    expect(records.length).toBe(129);
-    const distinctSchools = new Set(records.map((r) => r.schoolName));
+    expect(r8.length).toBe(129);
+    const distinctSchools = new Set(r8.map((r) => r.schoolName));
     expect(distinctSchools.size).toBe(77);
   });
 
@@ -78,9 +79,33 @@ describe('長野県 倍率パイプラインα（Y-6・全日制77校129レコ�
       },
     ];
     for (const c of cases) {
-      const rec = records.find((r) => r.schoolName === c.schoolName && r.department === c.department);
+      const rec = r8.find((r) => r.schoolName === c.schoolName && r.department === c.department);
       expect(rec).toEqual(c);
     }
+  });
+
+  it('掛-1(学校別×多年度): 令和7年度(R7)分レコードが126件収録され、全県計と4通学区すべての合計行と完全一致する。小諸(普通・音楽)+小諸商業(商業)がR8では統合し「小諸義塾」になった実在の学校統合と、岡谷工業のくくり募集構成の変化(R7=5学科共有定員→R8=環境化学廃止し4学科独立定員)を確認した', () => {
+    const r7 = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
+    expect(r7.length).toBe(126);
+    expect(r7.reduce((a, r) => a + r.quota, 0)).toBe(8806);
+    expect(r7.reduce((a, r) => a + r.finalApplicants, 0)).toBe(8250);
+
+    const areaTotals: Record<string, { count: number; quota: number; applicants: number }> = {
+      北信: { count: 37, quota: 2597, applicants: 2468 },
+      東信: { count: 25, quota: 1851, applicants: 1761 },
+      南信: { count: 37, quota: 2321, applicants: 2152 },
+      中信: { count: 27, quota: 2037, applicants: 1869 },
+    };
+    for (const [area, expected] of Object.entries(areaTotals)) {
+      const rs = r7.filter((r) => r.area === area);
+      expect(rs.length).toBe(expected.count);
+      expect(rs.reduce((a, r) => a + r.quota, 0)).toBe(expected.quota);
+      expect(rs.reduce((a, r) => a + r.finalApplicants, 0)).toBe(expected.applicants);
+    }
+
+    expect(r7.find((r) => r.schoolName === '小諸商業')).toBeTruthy();
+    expect(r7.find((r) => r.schoolName === '小諸義塾')).toBeUndefined();
+    expect(r8.find((r) => r.schoolName === '小諸義塾')).toBeTruthy();
   });
 
   it('sourcesが公式PDF URLを正しく記録している', () => {

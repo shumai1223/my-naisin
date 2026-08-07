@@ -1,5 +1,5 @@
 /**
- * 長野県 公立高等学校 倍率パイプラインα（Y-6・10県目・全日制完全達成）。
+ * 長野県 公立高等学校 倍率パイプラインα（Y-6・10県目・全日制完全達成／掛-1・R7多年度対応済）。
  *
  * 一次ソース: 長野県教育委員会「令和8年度公立高等学校入学者後期選抜志願者数②（志望変更受付
  * 締切後の集計結果）」（3月5日公表・全8ページ）。
@@ -23,6 +23,21 @@
  * 機械集計（quota8,807・applicants7,795・倍率0.89、77校129レコード）が全県計・4地区合計の
  * 両方と完全一致した（4地区とも初回転記で一致・再修正なし）。定時制課程（普通・多部制単位制含む）
  * は他県と同じ理由でスコープ外。
+ *
+ * ⚠️掛-1（R7追加時の年度差）: R7（令和7年3月5日発表・訂正版・同一シリーズ）はテキスト埋め込み型
+ * ながら日本語のToUnicodeマッピングが欠落しておりpdftotextでは数値のみ取得可（学校名・学科名は
+ * 全て空欄）だったため、pdftoppm 300dpiビジョン解析で全126レコードを転記した。全県計
+ * （quota8,806・applicants8,250・倍率0.94）・4通学区の合計行（北信2,597/2,468・東信1,851/1,761・
+ * 南信2,321/2,152・中信2,037/1,869）の5段階すべての公式小計とnode.js機械集計が完全一致した
+ * （初回転記で一致・再修正なし）。**学校統合を1件確認**: 「小諸」（普通・音楽）と「小諸商業」
+ * （商業＝商業・会計システムのくくり募集）はR7時点で別々の県立高校だったが、令和8年4月に両校が
+ * 統合し「小諸義塾」（普通・ビジネス・音楽の3科融合の新設校）として開校したことをWebSearchで確認
+ * 済み（誤読ではなく実在の統合）。**岡谷工業の学科構成変更も確認**: R7は機械・電気・環境化学・
+ * 電子機械・情報技術の5学科が共有定員のくくり募集（quota64）だったが、R8では環境化学が姿を消し
+ * 残り4学科がそれぞれ独立定員（quota24+21+18+16=79）に再編されている（表の罫線の結合状態から
+ * くくり募集の有無を判別）。上伊那農業も学科名（生物生産・生命探究・アグリデザイン・
+ * コミュニティデザイン→つくるマネジメント・流通マネジメント・くらしマネジメント）と定員
+ * （64→48）がR7/R8で変化しており、印字どおりに転記した（学科改編）。
  */
 import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
 
@@ -34,6 +49,12 @@ export const NAGANO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       docTitle: '長野県教育委員会 令和8年度公立高等学校入学者後期選抜志願者数②（志望変更受付締切後の集計結果）',
       fiscalYear: '令和8年度（2026年度）',
       fetchedAt: '2026-07-25',
+    },
+    {
+      url: 'https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r7/documents/20250305web2.pdf',
+      docTitle: '長野県教育委員会 令和7年度公立高等学校入学者後期選抜志願者数②（志望変更受付締切後の集計結果）（訂正版）',
+      fiscalYear: '令和7年度（2025年度）',
+      fetchedAt: '2026-08-07',
     },
   ],
   coverage: {
@@ -201,5 +222,131 @@ export const NAGANO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '大町岳陽', area: '中信', department: '学究', quota: 31, finalApplicants: 0, finalRate: 0.0 },
     { schoolName: '白馬', area: '中信', department: '普通', quota: 29, finalApplicants: 0, finalRate: 0.0 },
     { schoolName: '白馬', area: '中信', department: '国際観光', quota: 10, finalApplicants: 12, finalRate: 1.2 },
+    { schoolName: '飯山', area: '北信', department: '普通', quota: 28, finalApplicants: 23, finalRate: 0.82, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '飯山', area: '北信', department: '自然科学探究・人文科学探究（くくり募集）', quota: 32, finalApplicants: 15, finalRate: 0.47, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '飯山', area: '北信', department: 'スポーツ科学', quota: 10, finalApplicants: 0, finalRate: 0, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '下高井農林', area: '北信', department: '地域創造農学', quota: 52, finalApplicants: 10, finalRate: 0.19, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '中野立志館', area: '北信', department: '総合', quota: 99, finalApplicants: 62, finalRate: 0.63, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '中野西', area: '北信', department: '普通', quota: 80, finalApplicants: 67, finalRate: 0.84, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '須坂東', area: '北信', department: '普通', quota: 62, finalApplicants: 46, finalRate: 0.74, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '須坂', area: '北信', department: '普通', quota: 240, finalApplicants: 228, finalRate: 0.95, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '須坂創成', area: '北信', department: '農業（園芸農学・食品科学・環境造園）', quota: 48, finalApplicants: 67, finalRate: 1.4, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '須坂創成', area: '北信', department: '工業（創造工学）', quota: 16, finalApplicants: 21, finalRate: 1.31, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '須坂創成', area: '北信', department: '商業', quota: 32, finalApplicants: 43, finalRate: 1.34, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '北部', area: '北信', department: '普通', quota: 40, finalApplicants: 13, finalRate: 0.33, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '長野吉田', area: '北信', department: '普通', quota: 240, finalApplicants: 284, finalRate: 1.18, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '長野', area: '北信', department: '普通', quota: 280, finalApplicants: 310, finalRate: 1.11, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '長野西', area: '北信', department: '普通', quota: 200, finalApplicants: 221, finalRate: 1.11, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '長野西', area: '北信', department: '国際教養', quota: 11, finalApplicants: 7, finalRate: 0.64, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '長野商業', area: '北信', department: '商業・会計（くくり募集）', quota: 80, finalApplicants: 92, finalRate: 1.15, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '長野東', area: '北信', department: '普通', quota: 112, finalApplicants: 113, finalRate: 1.01, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '長野工業', area: '北信', department: '機械工学', quota: 16, finalApplicants: 16, finalRate: 1.0, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '長野工業', area: '北信', department: '電気電子工学', quota: 16, finalApplicants: 15, finalRate: 0.94, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '長野工業', area: '北信', department: '物質化学', quota: 16, finalApplicants: 13, finalRate: 0.81, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '長野工業', area: '北信', department: '情報工学', quota: 16, finalApplicants: 17, finalRate: 1.06, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '長野工業', area: '北信', department: '土木工学', quota: 16, finalApplicants: 18, finalRate: 1.13, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '長野工業', area: '北信', department: '建築学', quota: 16, finalApplicants: 13, finalRate: 0.81, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '長野西中条校', area: '北信', department: '普通', quota: 22, finalApplicants: 5, finalRate: 0.23, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '篠ノ井犀峡校', area: '北信', department: '普通', quota: 29, finalApplicants: 2, finalRate: 0.07, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '市立長野', area: '北信', department: '総合', quota: 41, finalApplicants: 53, finalRate: 1.29, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '長野南', area: '北信', department: '普通', quota: 96, finalApplicants: 104, finalRate: 1.08, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '篠ノ井', area: '北信', department: '普通', quota: 240, finalApplicants: 236, finalRate: 0.98, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '更級農業', area: '北信', department: '地域園芸・植物活用・食農科学（くくり募集）', quota: 48, finalApplicants: 56, finalRate: 1.17, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '松代', area: '北信', department: '普通', quota: 57, finalApplicants: 24, finalRate: 0.42, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '松代', area: '北信', department: '商業', quota: 22, finalApplicants: 14, finalRate: 0.64, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '屋代', area: '北信', department: '普通', quota: 160, finalApplicants: 172, finalRate: 1.08, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '屋代', area: '北信', department: '理数', quota: 12, finalApplicants: 20, finalRate: 1.67, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '屋代南', area: '北信', department: '普通', quota: 48, finalApplicants: 33, finalRate: 0.69, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '屋代南', area: '北信', department: '家庭（ライフデザイン）', quota: 16, finalApplicants: 13, finalRate: 0.81, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '坂城', area: '北信', department: '普通', quota: 48, finalApplicants: 22, finalRate: 0.46, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '上田千曲', area: '東信', department: '工業（メカニカル工学）', quota: 16, finalApplicants: 13, finalRate: 0.81, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '上田千曲', area: '東信', department: '工業（電気）', quota: 16, finalApplicants: 18, finalRate: 1.13, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '上田千曲', area: '東信', department: '工業（建築）', quota: 16, finalApplicants: 17, finalRate: 1.06, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '上田千曲', area: '東信', department: '商業', quota: 16, finalApplicants: 21, finalRate: 1.31, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '上田千曲', area: '東信', department: '家庭（生活福祉）', quota: 16, finalApplicants: 18, finalRate: 1.13, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '上田千曲', area: '東信', department: '家庭（食物栄養）', quota: 16, finalApplicants: 17, finalRate: 1.06, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '上田', area: '東信', department: '普通', quota: 280, finalApplicants: 291, finalRate: 1.04, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '上田染谷丘', area: '東信', department: '普通', quota: 240, finalApplicants: 289, finalRate: 1.2, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '上田染谷丘', area: '東信', department: '国際教養', quota: 8, finalApplicants: 8, finalRate: 1.0, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '上田東', area: '東信', department: '普通', quota: 240, finalApplicants: 243, finalRate: 1.01, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '丸子修学館', area: '東信', department: '総合', quota: 86, finalApplicants: 47, finalRate: 0.55, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '蓼科', area: '東信', department: '普通', quota: 51, finalApplicants: 8, finalRate: 0.16, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '小諸商業', area: '東信', department: '商業（商業・会計システム）', quota: 48, finalApplicants: 51, finalRate: 1.06, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '小諸', area: '東信', department: '普通', quota: 60, finalApplicants: 67, finalRate: 1.12, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '小諸', area: '東信', department: '音楽', quota: 16, finalApplicants: 0, finalRate: 0, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '軽井沢', area: '東信', department: '普通', quota: 37, finalApplicants: 12, finalRate: 0.32, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '佐久平総合技術', area: '東信', department: '農業（食料マネジメント・生物サービス・食農クリエイト）', quota: 48, finalApplicants: 59, finalRate: 1.23, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '佐久平総合技術', area: '東信', department: '工業（機械システム）', quota: 16, finalApplicants: 9, finalRate: 0.56, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '佐久平総合技術', area: '東信', department: '工業（電気情報）', quota: 16, finalApplicants: 15, finalRate: 0.94, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '佐久平総合技術', area: '東信', department: '創造実践', quota: 40, finalApplicants: 12, finalRate: 0.3, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '岩村田', area: '東信', department: '普通', quota: 200, finalApplicants: 195, finalRate: 0.98, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '野沢北', area: '東信', department: '普通', quota: 160, finalApplicants: 148, finalRate: 0.93, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '野沢北', area: '東信', department: '理数', quota: 4, finalApplicants: 17, finalRate: 4.25, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '野沢南', area: '東信', department: '普通', quota: 160, finalApplicants: 177, finalRate: 1.11, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '小海', area: '東信', department: '普通', quota: 45, finalApplicants: 9, finalRate: 0.2, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '富士見', area: '南信', department: '普通', quota: 17, finalApplicants: 15, finalRate: 0.88, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '富士見', area: '南信', department: '農業（園芸）', quota: 16, finalApplicants: 23, finalRate: 1.44, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '茅野', area: '南信', department: '普通', quota: 64, finalApplicants: 22, finalRate: 0.34, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '諏訪実業', area: '南信', department: '商業（商業・会計情報）', quota: 32, finalApplicants: 13, finalRate: 0.41, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '諏訪実業', area: '南信', department: '家庭（服飾）', quota: 22, finalApplicants: 2, finalRate: 0.09, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '諏訪清陵', area: '南信', department: '普通', quota: 161, finalApplicants: 176, finalRate: 1.09, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '諏訪二葉', area: '南信', department: '普通', quota: 200, finalApplicants: 204, finalRate: 1.02, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '下諏訪向陽', area: '南信', department: '普通', quota: 100, finalApplicants: 34, finalRate: 0.34, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '岡谷東', area: '南信', department: '普通', quota: 48, finalApplicants: 53, finalRate: 1.1, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '岡谷南', area: '南信', department: '普通', quota: 160, finalApplicants: 179, finalRate: 1.12, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '岡谷工業', area: '南信', department: '工業（機械・電気・環境化学・電子機械・情報技術）', quota: 64, finalApplicants: 44, finalRate: 0.69, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '辰野', area: '南信', department: '普通', quota: 32, finalApplicants: 38, finalRate: 1.19, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '辰野', area: '南信', department: '商業', quota: 16, finalApplicants: 10, finalRate: 0.63, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '上伊那農業', area: '南信', department: '農業（生物生産・生命探究・アグリデザイン・コミュニティデザイン）', quota: 64, finalApplicants: 73, finalRate: 1.14, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '高遠', area: '南信', department: '普通', quota: 32, finalApplicants: 31, finalRate: 0.97, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '伊那北', area: '南信', department: '普通', quota: 200, finalApplicants: 202, finalRate: 1.01, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '伊那北', area: '南信', department: '理数', quota: 4, finalApplicants: 10, finalRate: 2.5, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '伊那弥生ヶ丘', area: '南信', department: '普通', quota: 200, finalApplicants: 204, finalRate: 1.02, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '赤穂', area: '南信', department: '普通', quota: 120, finalApplicants: 114, finalRate: 0.95, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '赤穂', area: '南信', department: '商業', quota: 32, finalApplicants: 31, finalRate: 0.97, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '駒ケ根工業', area: '南信', department: '工業（機械・電気・情報技術）', quota: 48, finalApplicants: 40, finalRate: 0.83, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '松川', area: '南信', department: '普通', quota: 40, finalApplicants: 40, finalRate: 1.0, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '飯田', area: '南信', department: '普通', quota: 200, finalApplicants: 208, finalRate: 1.04, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '飯田', area: '南信', department: '理数', quota: 12, finalApplicants: 16, finalRate: 1.33, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '飯田風越', area: '南信', department: '普通', quota: 160, finalApplicants: 134, finalRate: 0.84, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '飯田風越', area: '南信', department: '国際教養', quota: 4, finalApplicants: 2, finalRate: 0.5, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '飯田OIDE長姫', area: '南信', department: '機械工学', quota: 16, finalApplicants: 17, finalRate: 1.06, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '飯田OIDE長姫', area: '南信', department: '電子機械工学', quota: 19, finalApplicants: 18, finalRate: 0.95, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '飯田OIDE長姫', area: '南信', department: '電気電子工学', quota: 16, finalApplicants: 19, finalRate: 1.19, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '飯田OIDE長姫', area: '南信', department: '社会基盤工学', quota: 16, finalApplicants: 18, finalRate: 1.13, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '飯田OIDE長姫', area: '南信', department: '建築学', quota: 16, finalApplicants: 19, finalRate: 1.19, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '飯田OIDE長姫', area: '南信', department: '商業', quota: 32, finalApplicants: 31, finalRate: 0.97, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '下伊那農業', area: '南信', department: '栽培科学', quota: 16, finalApplicants: 14, finalRate: 0.88, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '下伊那農業', area: '南信', department: '地域資源', quota: 16, finalApplicants: 17, finalRate: 1.06, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '下伊那農業', area: '南信', department: '生物活用', quota: 16, finalApplicants: 16, finalRate: 1.0, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '阿智', area: '南信', department: '普通', quota: 48, finalApplicants: 47, finalRate: 0.98, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '阿南', area: '南信', department: '普通', quota: 62, finalApplicants: 18, finalRate: 0.29, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '蘇南', area: '中信', department: '総合', quota: 61, finalApplicants: 3, finalRate: 0.05, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '木曽青峰', area: '中信', department: '普通', quota: 40, finalApplicants: 28, finalRate: 0.7, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '木曽青峰', area: '中信', department: '農業（森林環境）', quota: 16, finalApplicants: 9, finalRate: 0.56, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '木曽青峰', area: '中信', department: '工業（インテリア）', quota: 19, finalApplicants: 3, finalRate: 0.16, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '木曽青峰', area: '中信', department: '理数', quota: 19, finalApplicants: 1, finalRate: 0.05, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '塩尻志学館', area: '中信', department: '総合', quota: 80, finalApplicants: 68, finalRate: 0.85, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '田川', area: '中信', department: '普通', quota: 79, finalApplicants: 43, finalRate: 0.54, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '梓川', area: '中信', department: '普通', quota: 48, finalApplicants: 30, finalRate: 0.63, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '松本工業', area: '中信', department: '機械', quota: 32, finalApplicants: 19, finalRate: 0.59, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '松本工業', area: '中信', department: '電気', quota: 16, finalApplicants: 13, finalRate: 0.81, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '松本工業', area: '中信', department: '電子工業', quota: 32, finalApplicants: 11, finalRate: 0.34, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '松本県ケ丘', area: '中信', department: '普通', quota: 240, finalApplicants: 276, finalRate: 1.15, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '松本県ケ丘', area: '中信', department: '自然探究・国際探究（くくり募集）', quota: 16, finalApplicants: 39, finalRate: 2.44, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '松本美須々ケ丘', area: '中信', department: '普通', quota: 280, finalApplicants: 309, finalRate: 1.1, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '松本深志', area: '中信', department: '普通', quota: 280, finalApplicants: 322, finalRate: 1.15, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '松本蟻ケ崎', area: '中信', department: '普通', quota: 280, finalApplicants: 332, finalRate: 1.19, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '明科', area: '中信', department: '普通', quota: 40, finalApplicants: 24, finalRate: 0.6, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '豊科', area: '中信', department: '普通', quota: 200, finalApplicants: 189, finalRate: 0.95, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '南安曇農業', area: '中信', department: 'グリーンサイエンス', quota: 16, finalApplicants: 14, finalRate: 0.88, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '南安曇農業', area: '中信', department: '環境クリエイト', quota: 16, finalApplicants: 9, finalRate: 0.56, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '南安曇農業', area: '中信', department: '生物工学', quota: 16, finalApplicants: 19, finalRate: 1.19, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '穂高商業', area: '中信', department: '商業（商業・情報マネジメント）', quota: 32, finalApplicants: 27, finalRate: 0.84, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '池田工業', area: '中信', department: '工業（機械・電気学・建築学）', quota: 40, finalApplicants: 5, finalRate: 0.13, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '大町岳陽', area: '中信', department: '普通', quota: 72, finalApplicants: 45, finalRate: 0.63, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '大町岳陽', area: '中信', department: '学究', quota: 37, finalApplicants: 7, finalRate: 0.19, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '白馬', area: '中信', department: '普通', quota: 20, finalApplicants: 10, finalRate: 0.5, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '白馬', area: '中信', department: '国際観光', quota: 10, finalApplicants: 14, finalRate: 1.4, fiscalYear: '令和7年度（2025年度）' },
   ],
 };
