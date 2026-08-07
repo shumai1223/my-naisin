@@ -12,10 +12,11 @@ import { GIFU_COMPETITION_RATES } from '../gifu';
  */
 describe('岐阜県 倍率パイプラインα（Y-6・全日制63校134レコードの完全収録テスト）', () => {
   const { records, officialSubtotals } = GIFU_COMPETITION_RATES;
+  const r8 = records.filter((r) => !r.fiscalYear);
 
   it('全日制の全レコード合計が総括表記載の全日制計（quota12,925・applicants12,009・倍率0.93）と完全一致する', () => {
     const grandTotal = officialSubtotals.find((s) => s.label === '全日制計')!;
-    const result = checkAgainstSubtotal(records, grandTotal, () => true);
+    const result = checkAgainstSubtotal(records, grandTotal, (r) => !r.fiscalYear);
     expect(result.matches).toBe(true);
   });
 
@@ -27,11 +28,11 @@ describe('岐阜県 倍率パイプラインα（Y-6・全日制63校134レコ�
     }
   });
 
-  it('学校名+学科名の重複が無い', () => {
+  it('学校名+学科名+年度の重複が無い', () => {
     const seen = new Set<string>();
     const dupes: string[] = [];
     for (const r of records) {
-      const key = `${r.schoolName}|${r.department}`;
+      const key = `${r.schoolName}|${r.department}|${r.fiscalYear ?? ''}`;
       if (seen.has(key)) dupes.push(key);
       seen.add(key);
     }
@@ -43,9 +44,22 @@ describe('岐阜県 倍率パイプラインα（Y-6・全日制63校134レコ�
   });
 
   it('134レコード・63校が収録されている（総括表の県立61校＋市立2校と一致）', () => {
-    expect(records.length).toBe(134);
-    const distinctSchools = new Set(records.map((r) => r.schoolName));
+    expect(r8.length).toBe(134);
+    const distinctSchools = new Set(r8.map((r) => r.schoolName));
     expect(distinctSchools.size).toBe(63);
+  });
+
+  it('掛-1(学校別×多年度): 令和7年度(R7)分レコードが137件収録され、総括表記載の全日制計(quota12,885・applicants12,376)と完全一致する。高山工業のくくり募集構成の変化(R7=機械工学・電子機械工学・電気工学・建築インテリア工学の4学科独立定員→R8=総合工学科群という単一くくり募集に統合)を確認した', () => {
+    const r7 = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
+    expect(r7.length).toBe(137);
+    expect(r7.reduce((a, r) => a + r.quota, 0)).toBe(12885);
+    expect(r7.reduce((a, r) => a + r.finalApplicants, 0)).toBe(12376);
+
+    const distinctSchools = new Set(r7.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(63);
+
+    expect(r7.filter((r) => r.schoolName === '高山工業')).toHaveLength(4);
+    expect(r8.filter((r) => r.schoolName === '高山工業')).toHaveLength(1);
   });
 
   it('複数学科校が正しく収録されている', () => {
@@ -86,7 +100,7 @@ describe('岐阜県 倍率パイプラインα（Y-6・全日制63校134レコ�
       関商工: 4,
     };
     for (const [name, count] of Object.entries(multiDeptSchools)) {
-      const schoolRecords = records.filter((r) => r.schoolName === name);
+      const schoolRecords = r8.filter((r) => r.schoolName === name);
       expect(schoolRecords.length).toBe(count);
     }
   });
