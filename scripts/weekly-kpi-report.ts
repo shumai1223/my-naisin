@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+﻿#!/usr/bin/env node
 /**
  * 週次KPI 1枚メール（I-1）＝ga4-weekly + gsc-weekly + 7/20ゲート + トリップワイヤー4本を統合し、
  * 月曜に読むだけで済む1通にまとめる（本人タスク⑬）。
@@ -77,12 +77,28 @@ import { fileURLToPath } from 'node:url';
 import { google } from 'googleapis';
 
 import { formatWeeklyKpiEmail, type WeeklyKpiData } from '@/lib/weekly-kpi-report';
+import { latestEntry, type LineFriendsEntry } from '@/lib/line-friends';
 import type { FunnelStage, PlacementFunnel } from '@/lib/velocity';
 import type { ArmResult } from '@/lib/experiments';
 import { CONTACT_EMAIL } from '@/lib/contact';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPORTS_DIR = path.resolve(__dirname, '..', 'reports');
+
+/**
+ * data/line-friends.json から最新の友だち数を読む。
+ * ファイルが無い/壊れている場合は undefined を返し、G1/G5は `unmeasured` に落ちる
+ * （推定で埋めない＝誤った数字で判定するより「測れていない」方が安全）。
+ */
+function readLatestLineFriends(): number | undefined {
+  try {
+    const p = path.resolve(__dirname, '..', 'data', 'line-friends.json');
+    const raw = JSON.parse(fs.readFileSync(p, 'utf8')) as { entries?: LineFriendsEntry[] };
+    return latestEntry({ entries: raw.entries ?? [] })?.friends;
+  } catch {
+    return undefined;
+  }
+}
 const RESEND_ENDPOINT = 'https://api.resend.com/emails';
 
 const SITE_URL = process.env.GSC_SITE_URL || 'sc-domain:my-naishin.com';
@@ -359,6 +375,10 @@ async function main() {
     affiliateClicks: num(args['affiliate-clicks']),
     confirmedConversions: num(args.conversions),
     roadmapGateActuals: {
+      // data/line-friends.json（👤が手動転記）から最新の友だち数を読む。
+      // G1/G5の「名簿N」はこれとD1 leadsの合算で判定するため、欠けると unmeasured になる
+      // （片方だけで判定すると実態の約1/10で behind が誤発火する・2026-08-07修正）。
+      lineFriends: readLatestLineFriends(),
       cpThisMonth: args['cp-this-month'] !== undefined ? num(args['cp-this-month']) : undefined,
       contractCount: args['contract-count'] !== undefined ? num(args['contract-count']) : undefined,
       contractsMrr: args['contracts-mrr'] !== undefined ? num(args['contracts-mrr']) : undefined,

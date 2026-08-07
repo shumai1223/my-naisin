@@ -23,8 +23,24 @@ export type GateStatus =
   | 'unmeasured'; // 判定日到達だが実測値が渡されていない
 
 export interface RoadmapGateActuals {
-  /** 名簿累計（D1 leads総数・unsubscribed除く）。G1/G4/G5で使用。 */
+  /**
+   * D1 leads の累計（unsubscribed除く）。**これ単独では「名簿」ではない**。
+   *
+   * ⚠️2026-08-07修正: 以前はこの値だけでG1/G5の「名簿N」を判定していたが、
+   * 実運用の名簿の大半は**LINE友だち**であり、D1 leadsはごく一部（2026-08-07実測で
+   * LINE 55人に対しD1 leads 6件）。この状態でG1を判定すると `N=6` で `behind` となり、
+   * missedAction「Aレバー（名簿）縮小・B（直接契約）へ重心移動」＝**実際には伸びている
+   * チャネルを畳む戦略転換が誤発火する**。G1/G5は必ず lineFriends と合算して判定する。
+   */
   rosterN?: number;
+  /**
+   * LINE公式アカウントの友だち数（累計・ブロック除く）。G1/G5で rosterN と合算する。
+   *
+   * LINE Messaging APIでは自動取得できない指標のため、👤が手動で `data/line-friends.json`
+   * に記録する（[[roster-line-friends]]）。**未記録のまま判定に進まないこと**——
+   * 欠けている場合は `behind` ではなく `unmeasured` を返す設計にしてある。
+   */
+  lineFriends?: number;
   /** 当月のASP発生件数（絶対条件・G4）。0件明示のみ measured=trueとして扱う。 */
   conversionsThisMonth?: number;
   /** 当月のC_p（保護者起点クリック=parent_landing_view）合計。G4。 */
@@ -56,13 +72,37 @@ export interface RoadmapGateDefinition {
   missedAction: string;
 }
 
+/**
+ * G1/G5の「名簿N」＝ LINE友だち数 ＋ D1 leads累計。
+ *
+ * **どちらか一方でも欠けていたら null を返す**のが本関数の要点。片方だけの数字で判定すると
+ * 実態の1/10で `behind` を出し、missedAction（名簿レバー縮小）が誤発火するため
+ * （2026-08-07の実測: LINE 55 / D1 leads 6 ＝ D1だけ見ると実態の11%）。
+ */
+export function rosterTotalOf(actuals: RoadmapGateActuals): { total: number; breakdown: string } | null {
+  const { lineFriends, rosterN } = actuals;
+  if (lineFriends === undefined || rosterN === undefined) return null;
+  return {
+    total: lineFriends + rosterN,
+    breakdown: `（LINE${lineFriends}＋D1 leads${rosterN}）`,
+  };
+}
+
+/** 名簿Nが判定不能なときに、どちらが欠けているかを明示する。 */
+export function unmeasuredRosterDetail(actuals: RoadmapGateActuals): string {
+  const missing: string[] = [];
+  if (actuals.lineFriends === undefined) missing.push('LINE友だち数（data/line-friends.jsonに👤が記録）');
+  if (actuals.rosterN === undefined) missing.push('D1 leads累計');
+  return `名簿Nが未計測＝${missing.join(' / ')}が不足。**片方だけで判定しない**（実態の約1/10で誤ってbehindになるため）`;
+}
+
 /** 目盛りゲート G1〜G6（正準・単一ソース。2026-07-11ロードマップ artifact と同一の日付・数値）。 */
 export const ROADMAP_GATES: RoadmapGateDefinition[] = [
   {
     id: 'g1-roster-velocity',
     dateIso: '2026-08-31',
     label: 'G1 名簿velocity',
-    metricLabel: '名簿累計N（D1 leads総数）',
+    metricLabel: '名簿累計N（LINE友だち数 ＋ D1 leads総数）',
     effortTargetLabel: 'N ≥ 100（≈20/週ペース）',
     maxTargetLabel: 'N ≥ 150（≈40/週ペース）',
     missedAction: 'Aレバー（名簿）縮小・B（直接契約）へ重心移動',
@@ -202,11 +242,12 @@ function evaluateGate(def: RoadmapGateDefinition, actuals: RoadmapGateActuals, n
 
   switch (def.id) {
     case 'g1-roster-velocity': {
-      if (actuals.rosterN === undefined) return { ...base, status: 'unmeasured', detail: '名簿累計Nが未計測（D1 leads総数を渡してください）' };
-      const n = actuals.rosterN;
-      if (n >= 150) return { ...base, status: 'on-track-max', detail: `名簿N=${n}（最高軌道の目安150以上）` };
-      if (n >= 100) return { ...base, status: 'on-track-effort', detail: `名簿N=${n}（努力軌道の目安100以上・最高には未達）` };
-      return { ...base, status: 'behind', detail: `名簿N=${n}（努力軌道の目安100未満）＝${def.missedAction}` };
+      const roster = rosterTotalOf(actuals);
+      if (!roster) return { ...base, status: 'unmeasured', detail: unmeasuredRosterDetail(actuals) };
+      const { total: n, breakdown } = roster;
+      if (n >= 150) return { ...base, status: 'on-track-max', detail: `名簿N=${n}${breakdown}（最高軌道の目安150以上）` };
+      if (n >= 100) return { ...base, status: 'on-track-effort', detail: `名簿N=${n}${breakdown}（努力軌道の目安100以上・最高には未達）` };
+      return { ...base, status: 'behind', detail: `名簿N=${n}${breakdown}（努力軌道の目安100未満）＝${def.missedAction}` };
     }
     case 'g2-winter-prep': {
       const winterSummary = winterAffiliateReadinessSummary();
@@ -246,10 +287,12 @@ function evaluateGate(def: RoadmapGateDefinition, actuals: RoadmapGateActuals, n
       return { ...base, status: 'behind', detail: `C_p=${cp}/月（努力軌道の目安40未満）` };
     }
     case 'g5-december-close': {
-      if (actuals.rosterN === undefined || actuals.cumulativeConfirmedYen === undefined) {
-        return { ...base, status: 'unmeasured', detail: '名簿N・シーズン累計確定額のいずれかが未計測' };
+      const roster5 = rosterTotalOf(actuals);
+      if (!roster5 || actuals.cumulativeConfirmedYen === undefined) {
+        const missing = !roster5 ? unmeasuredRosterDetail(actuals) : 'シーズン累計確定額が未計測';
+        return { ...base, status: 'unmeasured', detail: missing };
       }
-      const n = actuals.rosterN;
+      const n = roster5.total;
       const yen = actuals.cumulativeConfirmedYen;
       const mrr = (actuals.contractsMrr ?? 0) + (actuals.apiMrr ?? 0);
       if (n >= 880 && yen >= 620_000) return { ...base, status: 'on-track-max', detail: `名簿N=${n}・MRR計¥${mrr.toLocaleString('ja-JP')}・累計¥${yen.toLocaleString('ja-JP')}＝最高軌道` };

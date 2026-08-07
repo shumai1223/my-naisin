@@ -50,14 +50,38 @@ describe('G1 名簿velocity（8/31）', () => {
   it('未計測ならunmeasured', () => {
     expect(evalG1({}).status).toBe('unmeasured');
   });
+
+  // ★★回帰防止（2026-08-07）: 名簿Nは LINE友だち数 + D1 leads の合算。
+  // 以前はD1 leads単独で判定しており、実測（LINE55 / D1 leads6）だと N=6 → behind となり
+  // missedAction「Aレバー（名簿）縮小・B（直接契約）へ重心移動」が誤発火する状態だった。
+  // 伸びているチャネルを実態の11%の数字で畳む事故になるため、片方だけでは判定させない。
+  it('★D1 leadsだけ渡してもbehindにしない（unmeasuredに落とす）', () => {
+    const r = evalG1({ rosterN: 6 });
+    expect(r.status).toBe('unmeasured');
+    expect(r.status).not.toBe('behind');
+    expect(r.detail).toContain('LINE友だち数');
+  });
+  it('★LINEだけ渡してもbehindにしない（unmeasuredに落とす）', () => {
+    const r = evalG1({ lineFriends: 55 });
+    expect(r.status).toBe('unmeasured');
+    expect(r.detail).toContain('D1 leads');
+  });
+  it('★両方そろって初めて判定し、内訳を明示する', () => {
+    const r = evalG1({ lineFriends: 55, rosterN: 6 });
+    expect(r.status).toBe('behind'); // 61 < 100（2026-08-07時点の実測に基づく想定値）
+    expect(r.detail).toContain('名簿N=61');
+    expect(r.detail).toContain('LINE55');
+    expect(r.detail).toContain('D1 leads6');
+  });
+
   it('N=150以上でon-track-max', () => {
-    expect(evalG1({ rosterN: 150 }).status).toBe('on-track-max');
+    expect(evalG1({ lineFriends: 145, rosterN: 5 }).status).toBe('on-track-max');
   });
   it('N=100〜149でon-track-effort', () => {
-    expect(evalG1({ rosterN: 120 }).status).toBe('on-track-effort');
+    expect(evalG1({ lineFriends: 110, rosterN: 10 }).status).toBe('on-track-effort');
   });
   it('N=100未満でbehind', () => {
-    const r = evalG1({ rosterN: 40 });
+    const r = evalG1({ lineFriends: 35, rosterN: 5 });
     expect(r.status).toBe('behind');
     expect(r.detail).toContain('Aレバー');
   });
@@ -181,11 +205,20 @@ describe('G5 窓フル回収（12/25・名簿Nと累計¥の両方が閾値を�
 
   it('片方だけ最高軌道でも到達しなければon-track-effort以下', () => {
     // N=900(最高超)だが累計¥が努力線未満 → behind（AND条件）
-    const r = evalG5({ rosterN: 900, cumulativeConfirmedYen: 100_000 });
+    const r = evalG5({ lineFriends: 850, rosterN: 50, cumulativeConfirmedYen: 100_000 });
     expect(r.status).toBe('behind');
   });
   it('N>=880かつ累計>=62万でon-track-max', () => {
-    expect(evalG5({ rosterN: 900, cumulativeConfirmedYen: 650_000 }).status).toBe('on-track-max');
+    expect(evalG5({ lineFriends: 850, rosterN: 50, cumulativeConfirmedYen: 650_000 }).status).toBe('on-track-max');
+  });
+
+  // ★回帰防止（2026-08-07）: G5もG1と同じく名簿NはLINE+D1 leadsの合算。
+  // 12月判定の閾値は N>=540/880 で、D1 leads単独では到達しえない水準（8月実測で6件）。
+  // 片方だけで判定させると確実に behind が誤発火するため unmeasured に落とす。
+  it('★D1 leadsだけではbehindにせずunmeasured', () => {
+    const r = evalG5({ rosterN: 900, cumulativeConfirmedYen: 650_000 });
+    expect(r.status).toBe('unmeasured');
+    expect(r.detail).toContain('LINE友だち数');
   });
 });
 

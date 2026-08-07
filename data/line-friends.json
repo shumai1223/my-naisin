@@ -1,0 +1,39 @@
+{
+  "_comment": "LINE公式アカウントの友だち数の日次記録。LINE Messaging APIでは友だち数を自動取得できないため、👤がLINE Official Account Managerの『友だち数』画面から手動で転記する。G1/G5の『名簿N』はこの値とD1 leads累計の合算で判定する（roadmap-gates.ts）。片方だけで判定すると実態の約1/10でbehindが誤発火するため、必ず両方そろえること。",
+  "_columns": {
+    "date": "YYYY-MM-DD",
+    "friends": "友だち数（累計）",
+    "active": "有効友だち数（ブロック除く）",
+    "blocked": "ブロック数"
+  },
+  "_source": "LINE Official Account Manager > 分析 > 友だち",
+  "_lastManualUpdate": "2026-08-07",
+  "entries": [
+    { "date": "2026-07-13", "friends": 10, "active": 10, "blocked": 0 },
+    { "date": "2026-07-14", "friends": 13, "active": 13, "blocked": 0 },
+    { "date": "2026-07-15", "friends": 15, "active": 15, "blocked": 0 },
+    { "date": "2026-07-16", "friends": 16, "active": 16, "blocked": 0 },
+    { "date": "2026-07-17", "friends": 25, "active": 25, "blocked": 0 },
+    { "date": "2026-07-18", "friends": 27, "active": 27, "blocked": 0 },
+    { "date": "2026-07-19", "friends": 28, "active": 28, "blocked": 0 },
+    { "date": "2026-07-20", "friends": 29, "active": 29, "blocked": 0 },
+    { "date": "2026-07-21", "friends": 29, "active": 29, "blocked": 0 },
+    { "date": "2026-07-22", "friends": 35, "active": 35, "blocked": 0 },
+    { "date": "2026-07-23", "friends": 35, "active": 35, "blocked": 0 },
+    { "date": "2026-07-24", "friends": 38, "active": 38, "blocked": 0 },
+    { "date": "2026-07-25", "friends": 38, "active": 38, "blocked": 0 },
+    { "date": "2026-07-26", "friends": 38, "active": 38, "blocked": 0 },
+    { "date": "2026-07-27", "friends": 39, "active": 39, "blocked": 0 },
+    { "date": "2026-07-28", "friends": 41, "active": 41, "blocked": 0 },
+    { "date": "2026-07-29", "friends": 45, "active": 45, "blocked": 0 },
+    { "date": "2026-07-30", "friends": 46, "active": 46, "blocked": 0 },
+    { "date": "2026-07-31", "friends": 47, "active": 47, "blocked": 0 },
+    { "date": "2026-08-01", "friends": 48, "active": 48, "blocked": 0 },
+    { "date": "2026-08-02", "friends": 51, "active": 51, "blocked": 0 },
+    { "date": "2026-08-03", "friends": 52, "active": 52, "blocked": 0 },
+    { "date": "2026-08-04", "friends": 53, "active": 53, "blocked": 0 },
+    { "date": "2026-08-05", "friends": 54, "active": 54, "blocked": 0 },
+    { "date": "2026-08-06", "friends": 55, "active": 55, "blocked": 0 },
+    { "date": "2026-08-07", "friends": 55, "active": 55, "blocked": 0 }
+  ]
+}
