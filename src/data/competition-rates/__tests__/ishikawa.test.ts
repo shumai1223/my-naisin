@@ -2,14 +2,15 @@ import { checkAgainstSubtotal } from '@/lib/competition-rate';
 import { ISHIKAWA_COMPETITION_RATES } from '../ishikawa';
 
 /**
- * Y-6 DoD検証（石川県・14県目・全日制完全達成）。
+ * Y-6 DoD検証（石川県・14県目・全日制完全達成／掛-1・R7多年度対応済）。
  */
 describe('石川県 倍率パイプラインα（Y-6・全日制40校70レコードの完全収録テスト）', () => {
   const { records, officialSubtotals } = ISHIKAWA_COMPETITION_RATES;
+  const r8 = records.filter((r) => !r.fiscalYear);
 
   it('全日制の全レコード合計が「全県合計」行（quota6,566・applicants6,076・倍率0.93）と完全一致する', () => {
     const grandTotal = officialSubtotals.find((s) => s.label === '全県合計')!;
-    const result = checkAgainstSubtotal(records, grandTotal, () => true);
+    const result = checkAgainstSubtotal(records, grandTotal, (r) => !r.fiscalYear);
     expect(result.matches).toBe(true);
   });
 
@@ -21,11 +22,11 @@ describe('石川県 倍率パイプラインα（Y-6・全日制40校70レコー
     }
   });
 
-  it('学校名+学科名の重複が無い', () => {
+  it('学校名+学科名+年度の重複が無い', () => {
     const seen = new Set<string>();
     const dupes: string[] = [];
     for (const r of records) {
-      const key = `${r.schoolName}|${r.department}`;
+      const key = `${r.schoolName}|${r.department}|${r.fiscalYear ?? ''}`;
       if (seen.has(key)) dupes.push(key);
       seen.add(key);
     }
@@ -37,13 +38,13 @@ describe('石川県 倍率パイプラインα（Y-6・全日制40校70レコー
   });
 
   it('70レコード・40校が収録されている', () => {
-    expect(records.length).toBe(70);
-    const distinctSchools = new Set(records.map((r) => r.schoolName));
+    expect(r8.length).toBe(70);
+    const distinctSchools = new Set(r8.map((r) => r.schoolName));
     expect(distinctSchools.size).toBe(40);
   });
 
   it('併願制度(小松・金沢泉丘・七尾)が単一レコードに正しく合算されている', () => {
-    const komatsu = records.find((r) => r.schoolName === '小松');
+    const komatsu = r8.find((r) => r.schoolName === '小松');
     expect(komatsu).toEqual({
       schoolName: '小松',
       department: '普通・理数（併願あり・合算）',
@@ -51,8 +52,26 @@ describe('石川県 倍率パイプラインα（Y-6・全日制40校70レコー
       finalApplicants: 377,
       finalRate: 1.18,
     });
-    expect(records.filter((r) => r.schoolName === '金沢泉丘')).toHaveLength(1);
-    expect(records.filter((r) => r.schoolName === '七尾')).toHaveLength(1);
+    expect(r8.filter((r) => r.schoolName === '金沢泉丘')).toHaveLength(1);
+    expect(r8.filter((r) => r.schoolName === '七尾')).toHaveLength(1);
+  });
+
+  it('掛-1(学校別×多年度): 令和7年度(R7)分レコードが70件・40校収録され、公式「全県合計」6,666/6,409と完全一致する。併願制度3校(小松・金沢泉丘・七尾)もR7側で同型に合算収録し、学校名+学科名の集合がR8と完全に一致する（新設・廃止学科なし）', () => {
+    const r7 = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
+    expect(r7.length).toBe(70);
+    const distinctSchools = new Set(r7.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(40);
+    const sumQuota = r7.reduce((a, r) => a + r.quota, 0);
+    const sumApplicants = r7.reduce((a, r) => a + r.finalApplicants, 0);
+    expect(sumQuota).toBe(6666);
+    expect(sumApplicants).toBe(6409);
+
+    const r8Keys = new Set(r8.map((r) => `${r.schoolName}|${r.department}`));
+    const r7Keys = new Set(r7.map((r) => `${r.schoolName}|${r.department}`));
+    expect(r7Keys.size).toBe(r8Keys.size);
+    for (const key of r7Keys) {
+      expect(r8Keys.has(key)).toBe(true);
+    }
   });
 
   it('sourcesが公式PDF URLを正しく記録している', () => {
