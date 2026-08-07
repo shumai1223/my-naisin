@@ -13,10 +13,11 @@ import { MIYAGI_COMPETITION_RATES } from '../miyagi';
  */
 describe('宮城県 倍率パイプラインα（Y-6・全日制68校129レコードの完全収録テスト）', () => {
   const { records, officialSubtotals } = MIYAGI_COMPETITION_RATES;
+  const r8 = records.filter((r) => !r.fiscalYear);
 
   it('全日制の全レコード合計がPDF末尾のグランドトータル（全日制合計・quota13,400・applicants12,516・倍率0.93）と完全一致する', () => {
     const grandTotal = officialSubtotals.find((s) => s.label === '全日制合計')!;
-    const result = checkAgainstSubtotal(records, grandTotal, () => true);
+    const result = checkAgainstSubtotal(records, grandTotal, (r) => !r.fiscalYear);
     expect(result.matches).toBe(true);
   });
 
@@ -28,11 +29,11 @@ describe('宮城県 倍率パイプラインα（Y-6・全日制68校129レコ�
     }
   });
 
-  it('学校名+学科名の重複が無い', () => {
+  it('学校名+学科名+年度の重複が無い', () => {
     const seen = new Set<string>();
     const dupes: string[] = [];
     for (const r of records) {
-      const key = `${r.schoolName}|${r.department}`;
+      const key = `${r.schoolName}|${r.department}|${r.fiscalYear ?? ''}`;
       if (seen.has(key)) dupes.push(key);
       seen.add(key);
     }
@@ -44,9 +45,29 @@ describe('宮城県 倍率パイプラインα（Y-6・全日制68校129レコ�
   });
 
   it('129レコード・68校が収録されている（PDF冒頭の概要と一致）', () => {
-    expect(records.length).toBe(129);
-    const distinctSchools = new Set(records.map((r) => r.schoolName));
+    expect(r8.length).toBe(129);
+    const distinctSchools = new Set(r8.map((r) => r.schoolName));
     expect(distinctSchools.size).toBe(68);
+  });
+
+  it('掛-1(学校別×多年度): 令和7年度(R7)分レコードが130件収録され、公式「全日制合計」13,440/13,349と完全一致する。岩ヶ崎のみR7では文系教養/理系教養の2コースだったがR8で普通科1レコードに統合(quota計80は不変・誤読ではなく実際のコース統合)のためこの1校を除けばR7/R8で学校名+学科名が完全一致する', () => {
+    const r7 = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
+    expect(r7.length).toBe(130);
+    const distinctSchools = new Set(r7.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(68);
+    const sumQuota = r7.reduce((a, r) => a + r.quota, 0);
+    const sumApplicants = r7.reduce((a, r) => a + r.finalApplicants, 0);
+    expect(sumQuota).toBe(13440);
+    expect(sumApplicants).toBe(13349);
+
+    expect(r7.filter((r) => r.schoolName === '岩ヶ崎')).toHaveLength(2);
+    expect(r8.filter((r) => r.schoolName === '岩ヶ崎')).toHaveLength(1);
+    const r8Keys = new Set(r8.filter((r) => r.schoolName !== '岩ヶ崎').map((r) => `${r.schoolName}|${r.department}`));
+    const r7Keys = new Set(r7.filter((r) => r.schoolName !== '岩ヶ崎').map((r) => `${r.schoolName}|${r.department}`));
+    expect(r7Keys.size).toBe(r8Keys.size);
+    for (const key of r7Keys) {
+      expect(r8Keys.has(key)).toBe(true);
+    }
   });
 
   it('複数学科校が正しく収録されている', () => {
@@ -84,7 +105,7 @@ describe('宮城県 倍率パイプラインα（Y-6・全日制68校129レコ�
       気仙沼向洋: 3,
     };
     for (const [name, count] of Object.entries(multiDeptSchools)) {
-      const schoolRecords = records.filter((r) => r.schoolName === name);
+      const schoolRecords = r8.filter((r) => r.schoolName === name);
       expect(schoolRecords.length).toBe(count);
     }
   });
