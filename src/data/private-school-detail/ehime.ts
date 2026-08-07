@@ -3,6 +3,15 @@
  * schools-private/ehime.ts（第一段・機械生成の参照台帳）14校のうち、
  * 公式募集要項PDFで最新年度の定員を確度高く確認できた学校のみ収録。
  * 残りは正直にスキップ台帳へ（[[fable5-fullaccel-backlog-2026-07]]のΛ-5進捗ノート参照）。
+ *
+ * **2026-08-07クローズ**: 「愛媛県私立学校名簿」の「定員」欄は凡例・脚注が一切なく、
+ * 決定的な傍証（同名簿の大学ページで岡山理科大の入学定員×修業年数＝収容定員と完全一致）
+ * から収容定員と確定した。収容定員÷3で募集定員として載せるのは推定値になり
+ * Y-0憲法（独自推定は永久禁止）に反するため、この名簿を代替情報源として使うのは不採用。
+ * 学校ごとの公式募集要項を個別に確認する現行の収集方針（本ファイル）が正しいアプローチと
+ * 確定し、このタスクをクローズする。済美高等学校は当初SVG画像でテキスト抽出できず
+ * スキップしていたが、公式ページの画像表を目視で読み取り募集人員を確認できたため収録済みに
+ * 昇格（一般入試枠単独の数値は非公表のため、学校全体の募集人員として収録）。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -120,14 +129,24 @@ export const PRIVATE_SCHOOL_DETAIL_EHIME: PrivateSchoolDetailFile = {
         sourceTier: 'primary' as const,
       },
     },
-  ],
-  skipped: [
     {
       schoolCode: 'D138320100017',
       schoolName: '済美高等学校',
-      reason:
-        '公式サイトの受験案内ページ(saibi.ac.jp/entrance/exam-info/)に募集人員の記載はあるが画像(SVG)形式で埋め込まれておりテキスト抽出できず、募集要項の直接PDFも特定できなかったため見送り。',
+      fiscalYearLabel: '令和8年度（2026年度）',
+      courses: [
+        { courseName: '普通科', capacity: 685 },
+        { courseName: '美術科', capacity: 80 },
+      ],
+      totalCapacity: 765,
+      source: {
+        url: 'https://saibi.ac.jp/entrance/exam-info/',
+        docTitle: '受験案内（済美高等学校・画像表を目視で判読）',
+        fetchedAt: '2026-08-06',
+        sourceTier: 'primary' as const,
+      },
     },
+  ],
+  skipped: [
     {
       schoolCode: 'D138320100053',
       schoolName: '新田高等学校',
