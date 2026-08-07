@@ -318,6 +318,45 @@ describe('東京都 倍率パイプラインα（Y-2・普通科119校の突合�
     expect(shimasho.reduce((a, r) => a + r.finalApplicants, 0)).toBe(130);
   });
 
+  it('掛-1(学校別×多年度・R5第3弾・普通科129校完結): 令和5年度(R5)分に「3[コース制]・4[単位制]・5[海外帰国生徒対象]」21件を追加した合計129件が収録され、区市町村+学校名+学科の重複が無い。新宿(単位制)は令和5年2月21日訂正後の値(女337・計637)を採用。普通科計(quota24,658・applicants35,530)がコース単位制以外+島しょ+コース制+単位制+海外帰国生徒対象の5区分合計と完全一致する', () => {
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）' && r.department.startsWith('普通科'));
+    expect(r5.length).toBe(129);
+    expect(r5.reduce((a, r) => a + r.quota, 0)).toBe(24658);
+    expect(r5.reduce((a, r) => a + r.finalApplicants, 0)).toBe(35530);
+
+    const seen = new Set<string>();
+    for (const r of r5) {
+      const key = `${r.area}|${r.schoolName}|${r.department}`;
+      expect(seen.has(key)).toBe(false);
+      seen.add(key);
+    }
+
+    expect(r5.find((r) => r.schoolName === '新宿' && r.department === '普通科（単位制）')).toEqual({
+      schoolName: '新宿',
+      area: '新宿',
+      department: '普通科（単位制）',
+      quota: 284,
+      finalApplicants: 637,
+      finalRate: 2.24,
+      fiscalYear: '令和5年度（2023年度）',
+    });
+
+    const kousei = r5.filter((r) => r.department.startsWith('普通科（コース制'));
+    expect(kousei.length).toBe(4);
+    expect(kousei.reduce((a, r) => a + r.quota, 0)).toBe(224);
+    expect(kousei.reduce((a, r) => a + r.finalApplicants, 0)).toBe(328);
+
+    const tannisei = r5.filter((r) => r.department === '普通科（単位制）');
+    expect(tannisei.length).toBe(11);
+    expect(tannisei.reduce((a, r) => a + r.quota, 0)).toBe(2146);
+    expect(tannisei.reduce((a, r) => a + r.finalApplicants, 0)).toBe(3048);
+
+    const kaigai = r5.filter((r) => r.department.startsWith('普通科（海外帰国生徒対象'));
+    expect(kaigai.length).toBe(6);
+    expect(kaigai.reduce((a, r) => a + r.quota, 0)).toBe(62);
+    expect(kaigai.reduce((a, r) => a + r.finalApplicants, 0)).toBe(51);
+  });
+
   it('全レコードのquota>0・finalApplicants>=0・finalRateが概算で整合する', () => {
     for (const r of records) {
       expect(r.quota).toBeGreaterThan(0);
