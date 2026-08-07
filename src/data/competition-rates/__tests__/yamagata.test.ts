@@ -6,10 +6,11 @@ import { YAMAGATA_COMPETITION_RATES } from '../yamagata';
  */
 describe('山形県 倍率パイプラインα（Y-6・全日制42校90レコードの完全収録テスト）', () => {
   const { records, officialSubtotals } = YAMAGATA_COMPETITION_RATES;
+  const r8 = records.filter((r) => !r.fiscalYear);
 
   it('全日制の全レコード合計が「全日制公立合計」行（quota4,404・applicants2,973）と完全一致する', () => {
     const grandTotal = officialSubtotals.find((s) => s.label === '全日制公立合計')!;
-    const result = checkAgainstSubtotal(records, grandTotal, () => true);
+    const result = checkAgainstSubtotal(records, grandTotal, (r) => !r.fiscalYear);
     expect(result.matches).toBe(true);
   });
 
@@ -21,11 +22,11 @@ describe('山形県 倍率パイプラインα（Y-6・全日制42校90レコー
     }
   });
 
-  it('学校名+学科名の重複が無い', () => {
+  it('学校名+学科名+年度の重複が無い', () => {
     const seen = new Set<string>();
     const dupes: string[] = [];
     for (const r of records) {
-      const key = `${r.schoolName}|${r.department}`;
+      const key = `${r.schoolName}|${r.department}|${r.fiscalYear ?? ''}`;
       if (seen.has(key)) dupes.push(key);
       seen.add(key);
     }
@@ -37,13 +38,13 @@ describe('山形県 倍率パイプラインα（Y-6・全日制42校90レコー
   });
 
   it('90レコード・42校が収録されている', () => {
-    expect(records.length).toBe(90);
-    const distinctSchools = new Set(records.map((r) => r.schoolName));
+    expect(r8.length).toBe(90);
+    const distinctSchools = new Set(r8.map((r) => r.schoolName));
     expect(distinctSchools.size).toBe(42);
   });
 
   it('理数探究科・国際探究科をあわせた「探究科」が単一レコードとして正しく収録されている（山形東）', () => {
-    expect(records.find((r) => r.schoolName === '山形東' && r.department.includes('探究'))).toEqual({
+    expect(r8.find((r) => r.schoolName === '山形東' && r.department.includes('探究'))).toEqual({
       schoolName: '山形東',
       department: '探究(理数探究,国際探究)',
       quota: 76,
@@ -53,13 +54,33 @@ describe('山形県 倍率パイプラインα（Y-6・全日制42校90レコー
   });
 
   it('applicants=0の学科（村山産業・流通ビジネス/小国・普通）も正しく収録されている', () => {
-    expect(records.find((r) => r.schoolName === '小国')).toEqual({
+    expect(r8.find((r) => r.schoolName === '小国')).toEqual({
       schoolName: '小国',
       department: '普通',
       quota: 25,
       finalApplicants: 0,
       finalRate: 0,
     });
+  });
+
+  it('掛-1(学校別×多年度): 令和7年度(R7)分レコードが91件・43校収録され、公式「全日制公立合計」5,609/4,505と完全一致する。新庄北+新庄南は令和8年4月の実在の統合(WebSearchで山形県公式発表を確認)により「新庄志誠館」に再編され、新庄神室産業金山校もR8で新設されているため、これらの学校再編差分を除けばR7/R8で学校名+学科名が完全一致する', () => {
+    const r7 = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
+    expect(r7.length).toBe(91);
+    const distinctSchools = new Set(r7.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(43);
+    const sumQuota = r7.reduce((a, r) => a + r.quota, 0);
+    const sumApplicants = r7.reduce((a, r) => a + r.finalApplicants, 0);
+    expect(sumQuota).toBe(5609);
+    expect(sumApplicants).toBe(4505);
+
+    const r7OnlySchools = new Set(['新庄北', '新庄北最上校', '新庄南', '新庄南金山校']);
+    const r8OnlySchools = new Set(['新庄志誠館', '新庄志誠館最上校', '新庄神室産業金山校']);
+    const r8Keys = new Set(r8.filter((r) => !r8OnlySchools.has(r.schoolName)).map((r) => `${r.schoolName}|${r.department}`));
+    const r7Keys = new Set(r7.filter((r) => !r7OnlySchools.has(r.schoolName)).map((r) => `${r.schoolName}|${r.department}`));
+    expect(r7Keys.size).toBe(r8Keys.size);
+    for (const key of r7Keys) {
+      expect(r8Keys.has(key)).toBe(true);
+    }
   });
 
   it('sourcesが公式PDF URLを正しく記録している', () => {
