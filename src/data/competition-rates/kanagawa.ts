@@ -34,6 +34,16 @@
  * 今回は「普通科（クリエイティブスクールを除く）」の県立87校のみを収録し、印字済み
  * 「県立計」小計(25,798/31,262)と完全一致を確認(node.js機械計算)。市立普通科・
  * クリエイティブスクール・専門学科(sheet2)・単位制(sheet3)は次回以降のセッションで横展開する。
+ *
+ * **2026-08-07追記(掛-1第2弾)**: sheet1の残り区分「市立普通科6校」「普通科クリエイティブ
+ * スクール5校」を追加。市立は横浜市立3校(桜丘/南/金沢)+川崎市立3校(橘/高津/幸)で、印字済み
+ * 「市立計」1,268/1,667と完全一致（R8では横浜市立南が非掲載＝6→5校に統合された可能性）。
+ * クリエイティブスクールは5校(田奈/釜利谷/横須賀南/大井/大和東)で印字済み「合計」832/732と
+ * 完全一致。WebSearchで実在校を裏取りしたところ、田奈は令和8年度に麻生総合と統合し「青葉総合」
+ * へ、大井は小田原城北工業と統合し「小田原北」へ改編されることが判明（R8のクリエイティブ
+ * スクール一覧が田奈・大井の代わりに小田原北を含む理由と整合）。県立普通科(87)+市立(6)の
+ * 合計は印字済み「合計」27,066/32,929と完全一致。sheet1(普通科・クリエイティブ)はこれで完結。
+ * sheet2(専門学科)・sheet3(単位制)は次回以降のセッションで横展開する。
  */
 import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
 
@@ -50,7 +60,7 @@ export const KANAGAWA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     {
       url: 'https://www.pref.kanagawa.jp/documents/118051/bessi3.xlsx',
       docTitle:
-        '神奈川県教育委員会 令和7年度神奈川県公立高等学校入学者選抜一般募集共通選抜等志願変更締切時志願状況（別紙3・普通科（クリエイティブスクールを除く）県立87校のみ収録・掛-1・kanagawa横展開第1弾）',
+        '神奈川県教育委員会 令和7年度神奈川県公立高等学校入学者選抜一般募集共通選抜等志願変更締切時志願状況（別紙3・sheet1「普通科・クリエイティブ」完全収録・掛-1・kanagawa横展開第1〜2弾）',
       fiscalYear: '令和7年度（2025年度）',
       fetchedAt: '2026-08-07',
     },
@@ -414,5 +424,18 @@ export const KANAGAWA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '橋本', area: '相模原', department: '普通科', quota: 269, finalApplicants: 306, finalRate: 1.14, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '相模田名', area: '相模原', department: '普通科', quota: 279, finalApplicants: 264, finalRate: 0.95, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '津久井', area: '相模原', department: '普通科', quota: 158, finalApplicants: 89, finalRate: 0.56, fiscalYear: '令和7年度（2025年度）' },
+    // --- 普通科（共通選抜・市立6校） ---
+    { schoolName: '横浜市立桜丘', area: '横浜市立', department: '普通科', quota: 318, finalApplicants: 388, finalRate: 1.22, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '横浜市立南', area: '横浜市立', department: '普通科', quota: 38, finalApplicants: 48, finalRate: 1.26, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '横浜市立金沢', area: '横浜市立', department: '普通科', quota: 318, finalApplicants: 433, finalRate: 1.36, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '川崎市立橘', area: '川崎市立', department: '普通科', quota: 198, finalApplicants: 306, finalRate: 1.55, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '川崎市立高津', area: '川崎市立', department: '普通科', quota: 278, finalApplicants: 345, finalRate: 1.24, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '川崎市立幸', area: '川崎市立', department: '普通科', quota: 118, finalApplicants: 147, finalRate: 1.25, fiscalYear: '令和7年度（2025年度）' },
+    // --- 普通科（クリエイティブスクール・5校） ---
+    { schoolName: '田奈', area: '横浜市', department: '普通科（クリエイティブスクール）', quota: 158, finalApplicants: 99, finalRate: 0.63, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '釜利谷', area: '横浜市', department: '普通科（クリエイティブスクール）', quota: 238, finalApplicants: 197, finalRate: 0.83, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '横須賀南', area: '横須賀市', department: '普通科（クリエイティブスクール）', quota: 118, finalApplicants: 134, finalRate: 1.14, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '大井', area: '大井町', department: '普通科（クリエイティブスクール）', quota: 79, finalApplicants: 60, finalRate: 0.76, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '大和東', area: '大和市', department: '普通科（クリエイティブスクール）', quota: 239, finalApplicants: 242, finalRate: 1.01, fiscalYear: '令和7年度（2025年度）' },
   ],
 };
