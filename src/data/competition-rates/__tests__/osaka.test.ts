@@ -39,25 +39,44 @@ describe('大阪府 倍率パイプラインα（Y-2・全6表の突合テスト
   });
 
   it('表2（単位制普通科4校）の合計が公式値と一致する', () => {
-    const result = checkAgainstSubtotal(records, findSubtotal('表2 合計'), (r) => r.department === '普通科（単位制）');
+    const result = checkAgainstSubtotal(records, findSubtotal('表2 合計'), (r) => r.department === '普通科（単位制）' && !r.fiscalYear);
     expect(result.matches).toBe(true);
   });
 
   it('表3（文理探究科2校）の合計が公式値と一致する', () => {
-    const result = checkAgainstSubtotal(records, findSubtotal('表3 合計'), (r) => r.department === '文理探究科');
+    const result = checkAgainstSubtotal(records, findSubtotal('表3 合計'), (r) => r.department === '文理探究科' && !r.fiscalYear);
     expect(result.matches).toBe(true);
   });
 
   it('表6（総合学科クリエイティブスクール）の合計が公式値と一致する', () => {
-    const result = checkAgainstSubtotal(records, findSubtotal('表6 合計'), (r) => r.department === '総合学科（クリエイティブスクール）');
+    const result = checkAgainstSubtotal(
+      records,
+      findSubtotal('表6 合計'),
+      (r) => r.department === '総合学科（クリエイティブスクール）' && !r.fiscalYear
+    );
     expect(result.matches).toBe(true);
   });
 
   it('全165レコードの合計が公式「全体合計」31,847/33,422と完全一致する（Y-2大阪府の最終DoD）', () => {
-    const result = checkAgainstSubtotal(records, findSubtotal('全体合計（表1+表2+表3+表4+表5+表6）'), () => true);
+    const result = checkAgainstSubtotal(records, findSubtotal('全体合計（表1+表2+表3+表4+表5+表6）'), (r) => !r.fiscalYear);
     expect(result.matches).toBe(true);
     expect(result.actualQuota).toBe(31847);
     expect(result.actualApplicants).toBe(33422);
+  });
+
+  it('掛-1(学校別×多年度): 令和7年度(R7)分レコードが167件収録され、5表合計が公式値33,250/34,003と完全一致する', () => {
+    const r7 = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
+    expect(r7.length).toBe(167);
+    const sumQuota = r7.reduce((a, r) => a + r.quota, 0);
+    const sumApplicants = r7.reduce((a, r) => a + r.finalApplicants, 0);
+    expect(sumQuota).toBe(33250);
+    expect(sumApplicants).toBe(34003);
+    const seen = new Set<string>();
+    for (const r of r7) {
+      const key = `${r.schoolName}|${r.department}`;
+      expect(seen.has(key)).toBe(false);
+      seen.add(key);
+    }
   });
 
   it('前回のPDF読み取りで見落とした「桜塚」・修正した「豊島」「北千里」が正しい値で入っている', () => {
@@ -79,11 +98,11 @@ describe('大阪府 倍率パイプラインα（Y-2・全6表の突合テスト
     }
   });
 
-  it('学校コード（重複するschoolName+department組み合わせ）が無い', () => {
+  it('学校コード（同一年度内でのschoolName+department組み合わせ重複）が無い', () => {
     const seen = new Set<string>();
     const dupes: string[] = [];
     for (const r of records) {
-      const key = `${r.schoolName}|${r.department}`;
+      const key = `${r.fiscalYear ?? '(R8)'}|${r.schoolName}|${r.department}`;
       if (seen.has(key)) dupes.push(key);
       seen.add(key);
     }
