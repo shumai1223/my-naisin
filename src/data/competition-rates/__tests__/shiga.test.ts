@@ -10,10 +10,11 @@ import { SHIGA_COMPETITION_RATES } from '../shiga';
  */
 describe('滋賀県 倍率パイプラインα（Y-6・全日制44校61レコードの完全収録テスト）', () => {
   const { records, officialSubtotals } = SHIGA_COMPETITION_RATES;
+  const r8 = records.filter((r) => !r.fiscalYear);
 
   it('全レコード合計が自己集計値（quota6,016・applicants9,333）と一致する（回帰ガード）', () => {
     const subtotal = officialSubtotals.find((s) => s.label === '一般型選抜のみ自己集計')!;
-    const result = checkAgainstSubtotal(records, subtotal, () => true);
+    const result = checkAgainstSubtotal(records, subtotal, (r) => !r.fiscalYear);
     expect(result.matches).toBe(true);
   });
 
@@ -25,11 +26,11 @@ describe('滋賀県 倍率パイプラインα（Y-6・全日制44校61レコー
     }
   });
 
-  it('学校名+学科名の重複が無い', () => {
+  it('学校名+学科名+年度の重複が無い', () => {
     const seen = new Set<string>();
     const dupes: string[] = [];
     for (const r of records) {
-      const key = `${r.schoolName}|${r.department}`;
+      const key = `${r.schoolName}|${r.department}|${r.fiscalYear ?? ''}`;
       if (seen.has(key)) dupes.push(key);
       seen.add(key);
     }
@@ -41,17 +42,29 @@ describe('滋賀県 倍率パイプラインα（Y-6・全日制44校61レコー
   });
 
   it('61レコード・44校が収録されている', () => {
-    expect(records.length).toBe(61);
-    const distinctSchools = new Set(records.map((r) => r.schoolName));
+    expect(r8.length).toBe(61);
+    const distinctSchools = new Set(r8.map((r) => r.schoolName));
     expect(distinctSchools.size).toBe(44);
   });
 
   it('「両方の学科」併願枠を含む5校が統合レコードとして収録されている', () => {
     for (const school of ['膳所', '草津東', '守山北', '高島', '米原']) {
-      const rec = records.find((r) => r.schoolName === school);
+      const rec = r8.find((r) => r.schoolName === school);
       expect(rec).toBeDefined();
       expect(rec!.department).toContain('両方の学科含む');
     }
+  });
+
+  it('掛-1(学校別×多年度): 令和7年度(R7)分レコードが62件収録され、旧制度の全日制「計①」行(quota6,253・applicants6,563)と完全一致する。R7は栗東を含む6校が「両方の学科」統合校だったが、R8では栗東の統合が解除され美術科が掲載されなくなったことを確認した', () => {
+    const r7 = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
+    expect(r7.length).toBe(62);
+    expect(r7.reduce((a, r) => a + r.quota, 0)).toBe(6253);
+    expect(r7.reduce((a, r) => a + r.finalApplicants, 0)).toBe(6563);
+
+    const rittoR7 = r7.find((r) => r.schoolName === '栗東');
+    expect(rittoR7?.department).toContain('美術');
+    const rittoR8 = r8.find((r) => r.schoolName === '栗東');
+    expect(rittoR8?.department).toBe('普通');
   });
 
   it('sourcesが公式PDF URLを正しく記録している', () => {
