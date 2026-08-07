@@ -10,10 +10,11 @@ import { YAMAGUCHI_COMPETITION_RATES } from '../yamaguchi';
  */
 describe('山口県 倍率パイプラインα（Y-6・全日制43校98レコードの完全収録テスト）', () => {
   const { records, officialSubtotals } = YAMAGUCHI_COMPETITION_RATES;
+  const r8 = records.filter((r) => !r.fiscalYear);
 
   it('全日制の全レコード合計が「全日制計」行（quota4,893・applicants4,677）と完全一致する', () => {
     const grandTotal = officialSubtotals.find((s) => s.label === '全日制計')!;
-    const result = checkAgainstSubtotal(records, grandTotal, () => true);
+    const result = checkAgainstSubtotal(records, grandTotal, (r) => !r.fiscalYear);
     expect(result.matches).toBe(true);
   });
 
@@ -25,11 +26,11 @@ describe('山口県 倍率パイプラインα（Y-6・全日制43校98レコー
     }
   });
 
-  it('学校名+学科名の重複が無い', () => {
+  it('学校名+学科名+年度の重複が無い', () => {
     const seen = new Set<string>();
     const dupes: string[] = [];
     for (const r of records) {
-      const key = `${r.schoolName}|${r.department}`;
+      const key = `${r.schoolName}|${r.department}|${r.fiscalYear ?? ''}`;
       if (seen.has(key)) dupes.push(key);
       seen.add(key);
     }
@@ -41,8 +42,8 @@ describe('山口県 倍率パイプラインα（Y-6・全日制43校98レコー
   });
 
   it('98レコード・43校が収録されている', () => {
-    expect(records.length).toBe(98);
-    const distinctSchools = new Set(records.map((r) => r.schoolName));
+    expect(r8.length).toBe(98);
+    const distinctSchools = new Set(r8.map((r) => r.schoolName));
     expect(distinctSchools.size).toBe(43);
   });
 
@@ -71,6 +72,23 @@ describe('山口県 倍率パイプラインα（Y-6・全日制43校98レコー
       finalApplicants: 59,
       finalRate: 2.1,
     });
+  });
+
+  it('掛-1(学校別×多年度): 令和7年度(R7)分レコードが104件収録され、「全日制計」(quota5,533・applicants5,612)と完全一致する。周防大島高校(普通37・地域創生25)はR7時点は県立だが令和8年4月に設置者が山口県立大学へ移管され山口県立大学附属周防大島高等学校に改称、柳井・柳井商工・熊毛南・田布施農工・熊毛北の5校は同時期に新設2校(柳井/田布施農工の校地を継承)へ再編統合された実在の変化により、柳井商工・熊毛南・熊毛北はR8には存在しない', () => {
+    const r7 = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
+    expect(r7.length).toBe(104);
+    expect(r7.reduce((a, r) => a + r.quota, 0)).toBe(5533);
+    expect(r7.reduce((a, r) => a + r.finalApplicants, 0)).toBe(5612);
+
+    expect(r7.some((r) => r.schoolName === '周防大島' && r.department === '普通')).toBe(true);
+    expect(r8.some((r) => r.schoolName === '周防大島')).toBe(false);
+    for (const merged of ['柳井商工', '熊毛南', '熊毛北']) {
+      expect(r7.some((r) => r.schoolName === merged)).toBe(true);
+      expect(r8.some((r) => r.schoolName === merged)).toBe(false);
+    }
+
+    const distinctSchools = new Set(r7.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(47);
   });
 
   it('sourcesが公式PDF URLを正しく記録している', () => {
