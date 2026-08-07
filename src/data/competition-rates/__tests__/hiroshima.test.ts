@@ -14,10 +14,11 @@ import { HIROSHIMA_COMPETITION_RATES } from '../hiroshima';
  */
 describe('広島県 倍率パイプラインα（Y-6・全日制85校138レコードの完全収録テスト）', () => {
   const { records, officialSubtotals } = HIROSHIMA_COMPETITION_RATES;
+  const r8 = records.filter((r) => !r.fiscalYear);
 
   it('全日制の全レコード合計がPDF末尾のグランドトータル（全日制本校＋分校・quota14,703・applicants13,759・倍率0.94）と完全一致する', () => {
     const grandTotal = officialSubtotals.find((s) => s.label === '全日制（本校＋分校）')!;
-    const result = checkAgainstSubtotal(records, grandTotal, () => true);
+    const result = checkAgainstSubtotal(records, grandTotal, (r) => !r.fiscalYear);
     expect(result.matches).toBe(true);
   });
 
@@ -29,11 +30,11 @@ describe('広島県 倍率パイプラインα（Y-6・全日制85校138レコ�
     }
   });
 
-  it('学校名+学科名の重複が無い', () => {
+  it('学校名+学科名+年度の重複が無い', () => {
     const seen = new Set<string>();
     const dupes: string[] = [];
     for (const r of records) {
-      const key = `${r.schoolName}|${r.department}`;
+      const key = `${r.schoolName}|${r.department}|${r.fiscalYear ?? ''}`;
       if (seen.has(key)) dupes.push(key);
       seen.add(key);
     }
@@ -45,8 +46,8 @@ describe('広島県 倍率パイプラインα（Y-6・全日制85校138レコ�
   });
 
   it('138レコード・85校が収録されている（全日制本校84校＋分校1校）', () => {
-    expect(records.length).toBe(138);
-    const distinctSchools = new Set(records.map((r) => r.schoolName));
+    expect(r8.length).toBe(138);
+    const distinctSchools = new Set(r8.map((r) => r.schoolName));
     expect(distinctSchools.size).toBe(85);
   });
 
@@ -81,7 +82,7 @@ describe('広島県 倍率パイプラインα（Y-6・全日制85校138レコ�
       油木: 2,
     };
     for (const [name, count] of Object.entries(multiDeptSchools)) {
-      const schoolRecords = records.filter((r) => r.schoolName === name);
+      const schoolRecords = r8.filter((r) => r.schoolName === name);
       expect(schoolRecords.length).toBe(count);
     }
   });
@@ -95,9 +96,23 @@ describe('広島県 倍率パイプラインα（Y-6・全日制85校138レコ�
       '建築・インテリア',
     ];
     for (const dept of kukuriNames) {
-      const matches = records.filter((r) => r.department === dept);
+      const matches = r8.filter((r) => r.department === dept);
       expect(matches.length).toBe(1);
     }
+  });
+
+  it('掛-1(学校別×多年度): 令和7年度(R7)分レコードが138件収録され、全日制計(quota14,701・applicants14,438)と完全一致する。学校名・学科名のキー集合はR8と完全一致し、統廃合・学科再編は無かった', () => {
+    const r7 = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
+    expect(r7.length).toBe(138);
+    expect(r7.reduce((a, r) => a + r.quota, 0)).toBe(14701);
+    expect(r7.reduce((a, r) => a + r.finalApplicants, 0)).toBe(14438);
+
+    const r7Keys = new Set(r7.map((r) => `${r.schoolName}|${r.department}`));
+    const r8Keys = new Set(r8.map((r) => `${r.schoolName}|${r.department}`));
+    expect(r7Keys).toEqual(r8Keys);
+
+    const distinctSchools = new Set(r7.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(85);
   });
 
   it('sourcesが公式PDF URLを正しく記録している', () => {
