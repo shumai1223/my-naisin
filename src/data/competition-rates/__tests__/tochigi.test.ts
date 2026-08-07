@@ -9,10 +9,11 @@ import { TOCHIGI_COMPETITION_RATES } from '../tochigi';
  */
 describe('栃木県 倍率パイプラインα（Y-6・全日制57校107レコードの完全収録テスト）', () => {
   const { records, officialSubtotals } = TOCHIGI_COMPETITION_RATES;
+  const r8 = records.filter((r) => !r.fiscalYear);
 
   it('全日制の全レコード合計がPDF末尾の合計行（quota7,259・applicants7,602・倍率1.05）と完全一致する', () => {
     const grandTotal = officialSubtotals.find((s) => s.label === '全日制計')!;
-    const result = checkAgainstSubtotal(records, grandTotal, () => true);
+    const result = checkAgainstSubtotal(records, grandTotal, (r) => !r.fiscalYear);
     expect(result.matches).toBe(true);
   });
 
@@ -24,11 +25,11 @@ describe('栃木県 倍率パイプラインα（Y-6・全日制57校107レコ�
     }
   });
 
-  it('学校名+学科名の重複が無い', () => {
+  it('学校名+学科名+年度の重複が無い', () => {
     const seen = new Set<string>();
     const dupes: string[] = [];
     for (const r of records) {
-      const key = `${r.schoolName}|${r.department}`;
+      const key = `${r.schoolName}|${r.department}|${r.fiscalYear ?? ''}`;
       if (seen.has(key)) dupes.push(key);
       seen.add(key);
     }
@@ -40,10 +41,10 @@ describe('栃木県 倍率パイプラインα（Y-6・全日制57校107レコ�
   });
 
   it('107レコード・57校が収録されている（一般選抜非実施の宇都宮東は対象外）', () => {
-    expect(records.length).toBe(107);
-    const distinctSchools = new Set(records.map((r) => r.schoolName));
+    expect(r8.length).toBe(107);
+    const distinctSchools = new Set(r8.map((r) => r.schoolName));
     expect(distinctSchools.size).toBe(57);
-    expect(records.some((r) => r.schoolName === '宇都宮東')).toBe(false);
+    expect(r8.some((r) => r.schoolName === '宇都宮東')).toBe(false);
   });
 
   it('複数学科校が正しく収録されている', () => {
@@ -74,8 +75,33 @@ describe('栃木県 倍率パイプラインα（Y-6・全日制57校107レコ�
       高根沢: 2,
     };
     for (const [name, count] of Object.entries(multiDeptSchools)) {
-      const schoolRecords = records.filter((r) => r.schoolName === name);
+      const schoolRecords = r8.filter((r) => r.schoolName === name);
       expect(schoolRecords.length).toBe(count);
+    }
+  });
+
+  it('掛-1(学校別×多年度): 令和7年度(R7)分レコードが112件収録され、公式「計」行7,486/8,330と完全一致する。宇都宮東はR7では一般選抜定員7で1レコード存在するがR8では非実施のため対象外(学校の状況が年度で変化)。栃木農業/真岡工業/矢板の3校はR7→R8で学科が統合されているため学科数が異なる(実際の学科再編と判断・誤読ではない)', () => {
+    const r7 = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
+    expect(r7.length).toBe(112);
+    const distinctSchools = new Set(r7.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(58);
+    const sumQuota = r7.reduce((a, r) => a + r.quota, 0);
+    const sumApplicants = r7.reduce((a, r) => a + r.finalApplicants, 0);
+    expect(sumQuota).toBe(7486);
+    expect(sumApplicants).toBe(8330);
+
+    expect(r7.filter((r) => r.schoolName === '宇都宮東')).toHaveLength(1);
+    expect(r7.filter((r) => r.schoolName === '栃木農業')).toHaveLength(4);
+    expect(r7.filter((r) => r.schoolName === '真岡工業')).toHaveLength(4);
+    expect(r7.filter((r) => r.schoolName === '矢板')).toHaveLength(5);
+
+    // 上記4校を除けば学校名+学科名の組み合わせはR8と完全一致する(学校再編なし)
+    const reorganizedSchools = new Set(['宇都宮東', '栃木農業', '真岡工業', '矢板']);
+    const r8Keys = new Set(r8.filter((r) => !reorganizedSchools.has(r.schoolName)).map((r) => `${r.schoolName}|${r.department}`));
+    const r7Keys = new Set(r7.filter((r) => !reorganizedSchools.has(r.schoolName)).map((r) => `${r.schoolName}|${r.department}`));
+    expect(r7Keys.size).toBe(r8Keys.size);
+    for (const key of r7Keys) {
+      expect(r8Keys.has(key)).toBe(true);
     }
   });
 
