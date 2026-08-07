@@ -24,7 +24,7 @@ describe('埼玉県 倍率パイプラインα（Y-2・全日制の突合テス�
   });
 
   it('総合学科の合計が公式値と完全一致する', () => {
-    const result = checkAgainstSubtotal(records, findSubtotal('総合学科計'), (r) => r.department === '総合学科');
+    const result = checkAgainstSubtotal(records, findSubtotal('総合学科計'), (r) => r.department === '総合学科' && !r.fiscalYear);
     expect(result.matches).toBe(true);
   });
 
@@ -115,13 +115,13 @@ describe('埼玉県 倍率パイプラインα（Y-2・全日制の突合テス�
     expect(records.some((r) => r.schoolName === '越生翔陽')).toBe(false);
   });
 
-  it('掛-1(学校別×多年度): 令和7年度(R7)分レコードが231件収録され(1〜7頁目完了・普通科+専門学科が完結)、区市町村+学校名+学科の重複が無い', () => {
+  it('掛-1(学校別×多年度): 令和7年度(R7)分レコードが240件収録され(1〜8頁目完了・全日制が完結)、区市町村+学校名+学科の重複が無い', () => {
     const r7 = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
-    expect(r7.length).toBe(231);
+    expect(r7.length).toBe(240);
     const sumQuota = r7.reduce((a, r) => a + r.quota, 0);
     const sumApplicants = r7.reduce((a, r) => a + r.finalApplicants, 0);
-    expect(sumQuota).toBe(33256);
-    expect(sumApplicants).toBe(37000);
+    expect(sumQuota).toBe(35001);
+    expect(sumApplicants).toBe(38587);
     const seen = new Set<string>();
     for (const r of r7) {
       const key = `${r.schoolName}|${r.department}`;

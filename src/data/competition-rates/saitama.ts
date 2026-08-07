@@ -83,6 +83,15 @@
  * （A列=119、他の全学科と同じくquotaとして採用すべき値）が異なる稀な例で、当初D列の120を
  * 誤って採用しjestの整合性チェック（quota×rate≈applicants）で発覚・119に修正した。
  * 次頁（8頁目）以降は総合学科が続く見込み。
+ *
+ * **2026-08-07追記(掛-1第8弾・全日制完結)**: 8頁目「総合学科」9校9レコードを追加。頁末尾の
+ * 印字済み「総合学科計」小計（quota1,745・applicants1,587・倍率0.91）と完全一致
+ * （node.js機械計算）。これでR7の学校別データは240レコード・quota35,001・applicants38,587＝
+ * 頁末尾の印字済み「全日制 普通・専門・総合学科 計」35,001/38,587/1.10と完全一致し、
+ * 全日制（普通科＋専門学科＋総合学科）が全て完結した。念のため9頁目（定時制）も画像確認した
+ * ところ「定時制 普通・専門・総合学科 計」quota1,980/applicants1,102で、35,001+1,980=36,981＝
+ * 「全日制・定時制の総計」の予定者数(A)欄36,981と一致することを確認済み（定時制は既存の
+ * tokyo/kanagawa/chibaと同じ理由でスコープ外のまま）。これでsaitamaのR7学校別データ収集は完了。
  */
 import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
 
@@ -97,7 +106,7 @@ export const SAITAMA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     },
     {
       url: 'https://www.pref.saitama.lg.jp/documents/241544/r7shigansha0220.pdf',
-      docTitle: '埼玉県教育委員会 令和7年度埼玉県公立高等学校における入学志願確定者数（全日制・定時制）（1〜7/9頁・普通科+専門学科が完結・掛-1・saitama横展開第1〜7弾）',
+      docTitle: '埼玉県教育委員会 令和7年度埼玉県公立高等学校における入学志願確定者数（全日制・定時制）（1〜8/9頁・全日制が完結・定時制はスコープ外・掛-1・saitama横展開第1〜8弾）',
       fiscalYear: '令和7年度（2025年度）',
       fetchedAt: '2026-08-07',
     },
@@ -660,5 +669,16 @@ export const SAITAMA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '芸術総合', department: '舞台芸術科', quota: 40, finalApplicants: 33, finalRate: 0.83, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: 'いずみ', department: '生物系', quota: 119, finalApplicants: 131, finalRate: 1.1, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: 'いずみ', department: '環境系', quota: 119, finalApplicants: 134, finalRate: 1.13, fiscalYear: '令和7年度（2025年度）' },
+    // ===== 8頁目「全日制 総合学科」9校（頁末尾「総合学科計」1745/1587/0.91と完全一致・
+    // 「全日制 普通・専門・総合学科 計」35001/38587/1.10で全日制全区分が完結）=====
+    { schoolName: '小鹿野', department: '総合学科', quota: 119, finalApplicants: 29, finalRate: 0.24, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '川越総合', department: '総合学科', quota: 238, finalApplicants: 278, finalRate: 1.17, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '久喜北陽', department: '総合学科', quota: 318, finalApplicants: 325, finalRate: 1.02, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '幸手桜', department: '総合学科', quota: 198, finalApplicants: 164, finalRate: 0.83, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '進修館', department: '総合学科', quota: 198, finalApplicants: 182, finalRate: 0.92, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '誠和福祉', department: '総合学科', quota: 79, finalApplicants: 32, finalRate: 0.41, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '滑川総合', department: '総合学科', quota: 278, finalApplicants: 292, finalRate: 1.05, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '吉川美南', department: '総合学科', quota: 119, finalApplicants: 120, finalRate: 1.01, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '寄居城北', department: '総合学科', quota: 198, finalApplicants: 165, finalRate: 0.83, fiscalYear: '令和7年度（2025年度）' },
   ],
 };
