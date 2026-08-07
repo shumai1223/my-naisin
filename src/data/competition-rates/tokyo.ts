@@ -54,6 +54,13 @@ export const TOKYO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       fiscalYear: '令和7年度（2025年度）',
       fetchedAt: '2026-08-07',
     },
+    {
+      url: 'https://www.kyoiku.metro.tokyo.lg.jp/documents/d/kyoiku/2025-02-13-003',
+      docTitle:
+        '東京都教育委員会 令和7年度東京都立高等学校入学者選抜応募状況（最終応募状況）3[普通科（コース制の学校）]・4[普通科（単位制の学校）]・5[普通科（海外帰国生徒対象）]（掛-1・tokyo横展開第4弾）',
+      fiscalYear: '令和7年度（2025年度）',
+      fetchedAt: '2026-08-07',
+    },
   ],
   coverage: {
     status: 'complete',
@@ -93,7 +100,17 @@ export const TOKYO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '両方とも完全一致(9219/11703・node.jsで機械計算し確認)。多摩部44校という数もR8の多摩部44校と' +
       '完全一致し、区部(深沢の分類差1校を除き)・多摩部・島しょいずれも学校数の整合が取れている。' +
       '次回は002以外のPDF(コース制/単位制/海外帰国生徒対象=003、専門学科13学科・総合学科=03-3-v2)' +
-      'のR7版を同じ過去ページから探して横展開する。',
+      'のR7版を同じ過去ページから探して横展開する。' +
+      '⚠️追記(掛-1第4弾): PDF「3[コース制]・4[単位制]・5[海外帰国生徒対象]」(2025-02-13-003)を' +
+      '追加した。コース制4校(深川外国語・片倉造形美術・松が谷外国語・小平外国語)はR8と学校構成が' +
+      '完全一致、印字小計「コース制計224/276/1.23」ともquota/applicants合計が一致(224/276)。' +
+      '**単位制は11校のみ(R8は12校)**——R8で唯一の相違点は「深沢」で、これは1頁目で発見済みの' +
+      '深沢の分類変更(R7では普通科の通常表に掲載・単位制表には未掲載)と完全に整合する追加の証拠に' +
+      'なった。印字小計「単位制計2,151/2,883/1.34」ともquota/applicants合計が一致(2151/2883・' +
+      'node.jsで機械計算し確認)。海外帰国生徒対象6校(帰国生3+引揚者3)もR8と学校構成・quota額が' +
+      '完全一致(引揚者3校は3年ともapplicants0)。これでPDF「1〜5」(区部/多摩部/島しょ/コース制/' +
+      '単位制/海外帰国生徒対象=普通科129校相当のうちR7では128校)が完結。次回は専門学科13学科・' +
+      '総合学科(03-3-v2のR7版)を探索する。',
   },
   officialSubtotals: [
     { label: '区部計', schoolCount: 57, quota: 12088, finalApplicants: 16926, finalRate: 1.4 },
@@ -478,5 +495,27 @@ export const TOKYO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '三宅', area: '三宅', department: '普通科', quota: 40, finalApplicants: 6, finalRate: 0.15, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '八丈', area: '八丈', department: '普通科', quota: 77, finalApplicants: 28, finalRate: 0.36, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '小笠原', area: '小笠原', department: '普通科', quota: 30, finalApplicants: 16, finalRate: 0.53, fiscalYear: '令和7年度（2025年度）' },
+    // 掛-1横展開第4弾: R7分・個票PDF003(コース制4校+単位制11校+海外帰国生徒対象6校=21校)。
+    { schoolName: '深川', area: '江東', department: '普通科（コース制・外国語）', quota: 56, finalApplicants: 95, finalRate: 1.7, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '片倉', area: '八王子', department: '普通科（コース制・造形美術）', quota: 56, finalApplicants: 53, finalRate: 0.95, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '松が谷', area: '八王子', department: '普通科（コース制・外国語）', quota: 56, finalApplicants: 59, finalRate: 1.05, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '小平', area: '小平', department: '普通科（コース制・外国語）', quota: 56, finalApplicants: 69, finalRate: 1.23, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '新宿', area: '新宿', department: '普通科（単位制）', quota: 284, finalApplicants: 551, finalRate: 1.94, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '忍岡', area: '台東', department: '普通科（単位制）', quota: 124, finalApplicants: 115, finalRate: 0.93, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '墨田川', area: '墨田', department: '普通科（単位制）', quota: 252, finalApplicants: 278, finalRate: 1.1, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '美原', area: '大田', department: '普通科（単位制）', quota: 156, finalApplicants: 153, finalRate: 0.98, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '芦花', area: '世田谷', department: '普通科（単位制）', quota: 220, finalApplicants: 445, finalRate: 2.02, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '飛鳥', area: '北', department: '普通科（単位制）', quota: 170, finalApplicants: 179, finalRate: 1.05, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '板橋有徳', area: '板橋', department: '普通科（単位制）', quota: 156, finalApplicants: 155, finalRate: 0.99, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '大泉桜', area: '練馬', department: '普通科（単位制）', quota: 156, finalApplicants: 191, finalRate: 1.22, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '翔陽', area: '八王子', department: '普通科（単位制）', quota: 193, finalApplicants: 147, finalRate: 0.76, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '国分寺', area: '国分寺', department: '普通科（単位制）', quota: 252, finalApplicants: 421, finalRate: 1.67, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '上水', area: '武蔵村山', department: '普通科（単位制）', quota: 188, finalApplicants: 248, finalRate: 1.32, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '三田', area: '港', department: '普通科（海外帰国生徒対象・帰国生）', quota: 18, finalApplicants: 33, finalRate: 1.83, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '竹早', area: '文京', department: '普通科（海外帰国生徒対象・帰国生）', quota: 13, finalApplicants: 21, finalRate: 1.62, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '日野台', area: '日野', department: '普通科（海外帰国生徒対象・帰国生）', quota: 13, finalApplicants: 11, finalRate: 0.85, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '深川', area: '江東', department: '普通科（海外帰国生徒対象・引揚者）', quota: 6, finalApplicants: 0, finalRate: 0, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '光丘', area: '練馬', department: '普通科（海外帰国生徒対象・引揚者）', quota: 6, finalApplicants: 0, finalRate: 0, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '富士森', area: '八王子', department: '普通科（海外帰国生徒対象・引揚者）', quota: 6, finalApplicants: 0, finalRate: 0, fiscalYear: '令和7年度（2025年度）' },
   ],
 };
