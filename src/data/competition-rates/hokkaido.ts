@@ -62,7 +62,7 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '上川地区・全日制「普通教育を主とする学科」（令和8年度14レコード、資料p17上表）＋「専門教育を主とする学科及び総合学科」（令和8年度23レコード、資料p17下表）＋令和7年度分37レコード（普通14+専門/総合23・掛-1第8弾・学校構成はR8と完全一致）',
       '留萌地区・全日制「普通教育を主とする学科」（令和8年度3レコード）＋「専門教育を主とする学科」（令和8年度4レコード、資料p18掲載）＋令和7年度分7レコード（掛-1第9弾）',
       '宗谷地区・全日制「普通教育を主とする学科」（令和8年度6レコード）＋「専門教育を主とする学科」（令和8年度2レコード、資料p18掲載）＋令和7年度分8レコード（掛-1第9弾）',
-      'オホーツク地区・全日制「普通教育を主とする学科」（16レコード）＋「専門教育を主とする学科及び総合学科」（15レコード、資料p19掲載）',
+      'オホーツク地区・全日制「普通教育を主とする学科」（令和8年度16レコード）＋「専門教育を主とする学科及び総合学科」（令和8年度15レコード、資料p19掲載）＋令和7年度分31レコード（普通16+専門/総合15・掛-1第10弾・学校構成はR8と完全一致）',
       '十勝地区・全日制「普通教育を主とする学科」（12レコード）＋「専門教育を主とする学科及び総合学科」（16レコード、資料p20掲載）',
       '釧路地区・全日制「普通教育を主とする学科」（9レコード）＋「専門教育を主とする学科及び総合学科」（12レコード、資料p21掲載・連携型テーブルなし）',
       '根室地区・全日制「普通教育を主とする学科」（5レコード）＋「専門教育を主とする学科」（6レコード、資料p22掲載・全14頁の最終地区）',
@@ -182,7 +182,14 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       'レコード(普通6+専門2)も追加した(PDF内部頁10=印字ページ18)。学校・学科構成はR8と完全一致' +
       '(留萌普通=留萌・羽幌・天塩、専門=遠別農業生産科学・留萌電気建築/情報ビジネス・苫前商業。' +
       '宗谷普通=稚内・豊富・浜頓別・枝幸・利尻・礼文、専門=稚内商業・衛生看護)。pdftotext -layout' +
-      'の数値列と全15行を行順突合した(結合セルなし)。',
+      'の数値列と全15行を行順突合した(結合セルなし)。' +
+      '⚠️2026-08-07追記13(掛-1第10弾): オホーツク地区のR7分31レコード(普通16+専門/総合15)も' +
+      '追加した(PDF内部頁11=印字ページ19)。学校・学科構成はR8と完全一致(普通16校=北見北斗・' +
+      '北見柏陽・北見緑陵・常呂・美幌・津別・訓子府・佐呂間・網走南ケ丘・網走桂陽・清里・遠軽・' +
+      '湧別・紋別・興部・雄武、専門/総合15レコード=北見北斗理数・美幌未来農業・北見工業3学科・' +
+      '紋別電子機械/総合ビジネス・北見商業3学科・網走桂陽商業/事務情報・置戸福祉・斜里総合・' +
+      '大空総合)。湧別高校の普通科(連携型)もR8同様スキーマ不一致でスコープ外のまま。pdftotext ' +
+      '-layoutの数値列と全31行を行順突合した(結合セルなし)。',
   },
   officialSubtotals: [],
   records: [
@@ -756,5 +763,38 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '礼文', department: '普通', quota: 40, finalApplicants: 17, finalRate: 0.43, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '稚内', department: '商業', quota: 40, finalApplicants: 27, finalRate: 0.68, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '稚内', department: '衛生看護', quota: 40, finalApplicants: 16, finalRate: 0.4, fiscalYear: '令和7年度（2025年度）' },
+    // 掛-1第10弾: オホーツク地区・全日制普通科・令和7年度（2025年度）分。
+    { schoolName: '北見北斗', department: '普通', quota: 200, finalApplicants: 209, finalRate: 1.05, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '北見柏陽', department: '普通', quota: 200, finalApplicants: 227, finalRate: 1.14, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '北見緑陵', department: '普通', quota: 120, finalApplicants: 131, finalRate: 1.09, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '常呂', department: '普通', quota: 40, finalApplicants: 10, finalRate: 0.25, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '美幌', department: '普通', quota: 80, finalApplicants: 23, finalRate: 0.29, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '津別', department: '普通', quota: 40, finalApplicants: 18, finalRate: 0.45, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '訓子府', department: '普通', quota: 40, finalApplicants: 37, finalRate: 0.93, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '佐呂間', department: '普通', quota: 40, finalApplicants: 21, finalRate: 0.53, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '網走南ケ丘', department: '普通', quota: 160, finalApplicants: 170, finalRate: 1.06, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '網走桂陽', department: '普通', quota: 80, finalApplicants: 57, finalRate: 0.71, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '清里', department: '普通', quota: 40, finalApplicants: 24, finalRate: 0.6, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '遠軽', department: '普通', quota: 200, finalApplicants: 184, finalRate: 0.92, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '湧別', department: '普通', quota: 80, finalApplicants: 35, finalRate: 0.44, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '紋別', department: '普通', quota: 120, finalApplicants: 85, finalRate: 0.71, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '興部', department: '普通', quota: 40, finalApplicants: 10, finalRate: 0.25, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '雄武', department: '普通', quota: 40, finalApplicants: 14, finalRate: 0.35, fiscalYear: '令和7年度（2025年度）' },
+    // 掛-1第10弾: オホーツク地区・専門教育を主とする学科及び総合学科・令和7年度（2025年度）分。
+    { schoolName: '北見北斗', department: '理数', quota: 40, finalApplicants: 39, finalRate: 0.98, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '美幌', department: '未来農業', quota: 40, finalApplicants: 13, finalRate: 0.33, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '北見工業', department: '電子機械', quota: 40, finalApplicants: 24, finalRate: 0.6, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '北見工業', department: '電気', quota: 40, finalApplicants: 18, finalRate: 0.45, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '北見工業', department: '建設', quota: 40, finalApplicants: 24, finalRate: 0.6, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '紋別', department: '電子機械', quota: 40, finalApplicants: 13, finalRate: 0.33, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '北見商業', department: '商業', quota: 40, finalApplicants: 36, finalRate: 0.9, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '北見商業', department: '流通経済', quota: 40, finalApplicants: 51, finalRate: 1.28, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '北見商業', department: '情報処理', quota: 40, finalApplicants: 29, finalRate: 0.73, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '網走桂陽', department: '商業', quota: 40, finalApplicants: 30, finalRate: 0.75, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '網走桂陽', department: '事務情報', quota: 40, finalApplicants: 14, finalRate: 0.35, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '紋別', department: '総合ビジネス', quota: 40, finalApplicants: 19, finalRate: 0.48, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '置戸', department: '福祉', quota: 40, finalApplicants: 14, finalRate: 0.35, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '斜里', department: '総合', quota: 40, finalApplicants: 25, finalRate: 0.63, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '大空', department: '総合', quota: 36, finalApplicants: 29, finalRate: 0.81, fiscalYear: '令和7年度（2025年度）' },
   ],
 };
