@@ -57,8 +57,8 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '後志地区・全日制「普通教育を主とする学科」（令和8年度6レコード）＋「専門教育を主とする学科及び総合学科」（令和8年度11レコード、資料p13中表・2026-08-07にpdftoppm 600dpi+ffmpegクロップで微小フォント学科名を再確認し収録）＋令和7年度分17レコード（普通6+専門/総合11・掛-1第4弾）',
       '胆振地区・全日制「普通教育を主とする学科」（令和8年度11レコード）＋「専門教育を主とする学科及び総合学科」（令和8年度16レコード、資料p14上表・2026-08-07に石狩と同じ理由で見送り撤回のうえ収録）＋令和7年度分27レコード（普通11+専門/総合16・掛-1第5弾）',
       '日高地区・全日制「普通教育を主とする学科」（令和8年度4レコード）＋「専門教育を主とする学科及び総合学科」（令和8年度3レコード）＋令和7年度分7レコード（普通4+専門/総合3・掛-1第6弾）',
-      '渡島地区・全日制「普通教育を主とする学科」（令和8年度10レコード・知内高校含む）＋「専門教育を主とする学科及び総合学科」（令和8年度19レコード・資料p16掲載）＋令和7年度分普通10レコード（掛-1第6弾・専門/総合は次回）',
-      '檜山地区・全日制「普通教育を主とする学科」（3レコード）＋「総合学科」（1レコード・檜山北高校）',
+      '渡島地区・全日制「普通教育を主とする学科」（令和8年度10レコード・知内高校含む）＋「専門教育を主とする学科及び総合学科」（令和8年度19レコード・資料p16掲載）＋令和7年度分普通10レコード＋専門/総合20レコード（掛-1第6弾+第7弾）',
+      '檜山地区・全日制「普通教育を主とする学科」（令和8年度3レコード）＋「総合学科」（令和8年度1レコード・檜山北高校）＋令和7年度分4レコード（掛-1第7弾）',
       '上川地区・全日制「普通教育を主とする学科」（14レコード、資料p17上表）＋「専門教育を主とする学科及び総合学科」（23レコード、資料p17下表）',
       '留萌地区・全日制「普通教育を主とする学科」（3レコード）＋「専門教育を主とする学科」（4レコード、資料p18掲載）',
       '宗谷地区・全日制「普通教育を主とする学科」（6レコード）＋「専門教育を主とする学科」（2レコード、資料p18掲載）',
@@ -162,7 +162,15 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '(食品科学・生産科学)+浦河総合の3レコードでR8と完全一致。渡島普通は函館中部・函館西・南茅部・' +
       '上磯・七飯・松前・八雲・長万部・市立函館・知内の10校でR8と完全一致(知内は独立の小表だが同一' +
       '区分として合算済み)。渡島の専門/総合(19レコード・資料p16相当)は次回に持ち越し。pdftotext ' +
-      '-layoutの数値列と全17行を行順突合した(結合セルなし)。',
+      '-layoutの数値列と全17行を行順突合した(結合セルなし)。' +
+      '⚠️2026-08-07追記10(掛-1第7弾): 渡島地区の専門/総合R7分20レコードと檜山地区R7分4レコードを' +
+      '追加した(PDF内部頁8=印字ページ16)。**函館水産のみR8(3学科:海洋技術/食品創造/機関工学)と' +
+      'R7(4学科:海洋技術/水産食品/品質管理流通/機関工学)で学科構成が異なる**ことを検出した(誤読では' +
+      'なく、画像上で4学科分の独立した行(各募集人員40・推薦枠36)が明瞭に区切られており、令和7→' +
+      '令和8年度にかけて学科再編(水産食品+品質管理流通の統合等)があったと考えられる・他校の学科' +
+      '構成はR7=R8で一致)。残る19校(函館中部理数・大野農業3学科・函館工業5学科・函館商業4学科・' +
+      '福島商業・八雲総合ビジネス・森総合)はR8と完全一致。檜山地区(江差・上ノ国・奥尻・檜山北)も' +
+      '学校構成はR8と完全一致。pdftotext -layoutの数値列と全24行を行順突合した(結合セルなし)。',
   },
   officialSubtotals: [],
   records: [
@@ -654,5 +662,31 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '長万部', department: '普通', quota: 40, finalApplicants: 7, finalRate: 0.18, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '市立函館', department: '普通', quota: 200, finalApplicants: 259, finalRate: 1.3, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '知内', department: '普通', quota: 80, finalApplicants: 31, finalRate: 0.39, fiscalYear: '令和7年度（2025年度）' },
+    // 掛-1第7弾: 渡島地区・専門教育を主とする学科及び総合学科・令和7年度（2025年度）分。
+    { schoolName: '函館中部', department: '理数', quota: 40, finalApplicants: 40, finalRate: 1.0, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '大野農業', department: '農業科学', quota: 40, finalApplicants: 18, finalRate: 0.45, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '大野農業', department: '園芸福祉', quota: 40, finalApplicants: 15, finalRate: 0.38, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '大野農業', department: '食品科学', quota: 40, finalApplicants: 34, finalRate: 0.85, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '函館工業', department: '電子機械', quota: 40, finalApplicants: 60, finalRate: 1.5, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '函館工業', department: '電気情報工学', quota: 40, finalApplicants: 54, finalRate: 1.35, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '函館工業', department: '建築', quota: 40, finalApplicants: 55, finalRate: 1.38, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '函館工業', department: '環境土木', quota: 40, finalApplicants: 52, finalRate: 1.3, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '函館工業', department: '工業化学', quota: 40, finalApplicants: 38, finalRate: 0.95, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '函館商業', department: '流通ビジネス', quota: 40, finalApplicants: 67, finalRate: 1.68, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '函館商業', department: '国際経済', quota: 40, finalApplicants: 42, finalRate: 1.05, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '函館商業', department: '会計ビジネス', quota: 40, finalApplicants: 45, finalRate: 1.13, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '函館商業', department: '情報処理', quota: 40, finalApplicants: 44, finalRate: 1.1, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '福島商業', department: '商業', quota: 40, finalApplicants: 20, finalRate: 0.5, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '八雲', department: '総合ビジネス', quota: 40, finalApplicants: 7, finalRate: 0.18, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '函館水産', department: '海洋技術', quota: 40, finalApplicants: 37, finalRate: 0.93, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '函館水産', department: '水産食品', quota: 40, finalApplicants: 37, finalRate: 0.93, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '函館水産', department: '品質管理流通', quota: 40, finalApplicants: 16, finalRate: 0.4, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '函館水産', department: '機関工学', quota: 40, finalApplicants: 29, finalRate: 0.73, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '森', department: '総合', quota: 40, finalApplicants: 28, finalRate: 0.7, fiscalYear: '令和7年度（2025年度）' },
+    // 掛-1第7弾: 檜山地区・令和7年度（2025年度）分。
+    { schoolName: '江差', department: '普通', quota: 80, finalApplicants: 47, finalRate: 0.59, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '上ノ国', department: '普通', quota: 40, finalApplicants: 16, finalRate: 0.4, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '奥尻', department: '普通', quota: 40, finalApplicants: 18, finalRate: 0.45, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '檜山北', department: '総合', quota: 80, finalApplicants: 53, finalRate: 0.66, fiscalYear: '令和7年度（2025年度）' },
   ],
 };
