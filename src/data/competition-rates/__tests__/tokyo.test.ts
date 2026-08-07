@@ -153,11 +153,9 @@ describe('東京都 倍率パイプラインα（Y-2・普通科119校の突合�
     }
   });
 
-  it('掛-1(学校別×多年度・R6第1弾): 令和6年度(R6)分の1頁目43校が収録され、区市町村+学校名+学科の重複が無い。世田谷「深沢」はR7と同様まだ単位制へ分類変更される前の通常表に含まれる', () => {
+  it('掛-1(学校別×多年度・R6第1〜2弾): 令和6年度(R6)分の1〜2頁目88校(区部58+多摩部30)が収録され、区市町村+学校名+学科の重複が無い。世田谷「深沢」はR7と同様まだ単位制へ分類変更される前の通常表に含まれる', () => {
     const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
-    expect(r6.length).toBe(43);
-    expect(r6.reduce((a, r) => a + r.quota, 0)).toBe(9060);
-    expect(r6.reduce((a, r) => a + r.finalApplicants, 0)).toBe(14579);
+    expect(r6.length).toBe(88);
 
     const seen = new Set<string>();
     for (const r of r6) {
@@ -175,6 +173,11 @@ describe('東京都 倍率パイプラインα（Y-2・普通科119校の突合�
       finalRate: 0.87,
       fiscalYear: '令和6年度（2024年度）',
     });
+
+    const kuBu = r6.filter((r) => TOKYO_23_WARDS.has(r.area ?? ''));
+    expect(kuBu.length).toBe(58);
+    expect(kuBu.reduce((a, r) => a + r.quota, 0)).toBe(12172);
+    expect(kuBu.reduce((a, r) => a + r.finalApplicants, 0)).toBe(18828);
   });
 
   it('全レコードのquota>0・finalApplicants>=0・finalRateが概算で整合する', () => {

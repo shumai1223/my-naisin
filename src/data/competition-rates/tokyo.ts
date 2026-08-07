@@ -32,6 +32,13 @@
  * 残り（足立/葛飾/江戸川の区部15校＋多摩部44校＋島しょ6校＋コース制/単位制/海外帰国生徒対象＋
  * 専門学科13学科＋総合学科）はR7と同じくtokyoのURLパターンに沿って次回以降のセッションで
  * 横展開を継続する（R7は第1弾〜第10弾の10回に分けて完結させた前例に倣う）。
+ *
+ * ⚠️掛-1（R6追加・第2弾）: 2頁目（区部残り15校=足立7・葛飾2・江戸川6＋多摩部30校=八王子5・
+ * 立川1・武蔵野1・青梅1・府中3・昭島2・調布3・町田5・小金井1・小平3・日野3・東村山2）を追加した。
+ * この頁末尾に印字されたページ内小計「区部計12,172/18,828/1.55」が、1頁目43校(quota9,060・
+ * applicants14,579)+2頁目区部残り15校(quota3,112・applicants4,249)=58校の合計と完全一致（node.js
+ * で機械計算し確認）。R7と同じく深沢を含めて区部58校（R8基準の57校+1）で説明がつく。多摩部30校は
+ * 継続中（頁末尾の小計はまだ印字されない・3頁目の残り14校を待つ）。
  */
 import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
 
@@ -83,7 +90,7 @@ export const TOKYO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     {
       url: 'https://www.kyoiku.metro.tokyo.lg.jp/documents/d/kyoiku/4_35',
       docTitle:
-        '東京都教育委員会 令和6年度東京都立高等学校入学者選抜応募状況（最終応募状況）1[普通科（コース、単位制以外の学校）]（掛-1・tokyo横展開R6第1弾・1頁目のみ）',
+        '東京都教育委員会 令和6年度東京都立高等学校入学者選抜応募状況（最終応募状況）1[普通科（コース、単位制以外の学校）]（掛-1・tokyo横展開R6第1〜2弾・1〜2頁目）',
       fiscalYear: '令和6年度（2024年度）',
       fetchedAt: '2026-08-08',
     },
@@ -705,5 +712,50 @@ export const TOKYO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '田柄', area: '練馬', department: '普通科', quota: 134, finalApplicants: 117, finalRate: 0.87, fiscalYear: '令和6年度（2024年度）' },
     { schoolName: '練馬', area: '練馬', department: '普通科', quota: 189, finalApplicants: 255, finalRate: 1.35, fiscalYear: '令和6年度（2024年度）' },
     { schoolName: '光丘', area: '練馬', department: '普通科', quota: 185, finalApplicants: 186, finalRate: 1.01, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '青井', area: '足立', department: '普通科', quota: 137, finalApplicants: 169, finalRate: 1.23, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '足立', area: '足立', department: '普通科', quota: 252, finalApplicants: 338, finalRate: 1.34, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '足立新田', area: '足立', department: '普通科', quota: 209, finalApplicants: 243, finalRate: 1.16, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '足立西', area: '足立', department: '普通科', quota: 156, finalApplicants: 180, finalRate: 1.15, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '足立東', area: '足立', department: '普通科', quota: 122, finalApplicants: 162, finalRate: 1.33, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '江北', area: '足立', department: '普通科', quota: 252, finalApplicants: 386, finalRate: 1.53, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '淵江', area: '足立', department: '普通科', quota: 179, finalApplicants: 229, finalRate: 1.28, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '葛飾野', area: '葛飾', department: '普通科', quota: 253, finalApplicants: 345, finalRate: 1.36, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '南葛飾', area: '葛飾', department: '普通科', quota: 161, finalApplicants: 226, finalRate: 1.4, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '江戸川', area: '江戸川', department: '普通科', quota: 253, finalApplicants: 433, finalRate: 1.71, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '葛西南', area: '江戸川', department: '普通科', quota: 190, finalApplicants: 195, finalRate: 1.03, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '小岩', area: '江戸川', department: '普通科', quota: 284, finalApplicants: 471, finalRate: 1.66, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '小松川', area: '江戸川', department: '普通科', quota: 253, finalApplicants: 321, finalRate: 1.27, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '篠崎', area: '江戸川', department: '普通科', quota: 222, finalApplicants: 267, finalRate: 1.2, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '紅葉川', area: '江戸川', department: '普通科', quota: 189, finalApplicants: 284, finalRate: 1.5, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '片倉', area: '八王子', department: '普通科', quota: 189, finalApplicants: 230, finalRate: 1.22, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '八王子北', area: '八王子', department: '普通科', quota: 158, finalApplicants: 181, finalRate: 1.15, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '八王子東', area: '八王子', department: '普通科', quota: 252, finalApplicants: 342, finalRate: 1.36, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '富士森', area: '八王子', department: '普通科', quota: 249, finalApplicants: 297, finalRate: 1.19, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '松が谷', area: '八王子', department: '普通科', quota: 220, finalApplicants: 300, finalRate: 1.36, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '立川', area: '立川', department: '普通科', quota: 220, finalApplicants: 318, finalRate: 1.45, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '武蔵野北', area: '武蔵野', department: '普通科', quota: 189, finalApplicants: 255, finalRate: 1.35, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '多摩', area: '青梅', department: '普通科', quota: 157, finalApplicants: 109, finalRate: 0.69, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '府中', area: '府中', department: '普通科', quota: 220, finalApplicants: 418, finalRate: 1.9, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '府中西', area: '府中', department: '普通科', quota: 235, finalApplicants: 288, finalRate: 1.23, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '府中東', area: '府中', department: '普通科', quota: 240, finalApplicants: 361, finalRate: 1.5, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '昭和', area: '昭島', department: '普通科', quota: 252, finalApplicants: 379, finalRate: 1.5, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '拝島', area: '昭島', department: '普通科', quota: 221, finalApplicants: 267, finalRate: 1.21, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '神代', area: '調布', department: '普通科', quota: 252, finalApplicants: 456, finalRate: 1.81, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '調布北', area: '調布', department: '普通科', quota: 188, finalApplicants: 298, finalRate: 1.59, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '調布南', area: '調布', department: '普通科', quota: 189, finalApplicants: 327, finalRate: 1.73, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '小川', area: '町田', department: '普通科', quota: 252, finalApplicants: 312, finalRate: 1.24, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '成瀬', area: '町田', department: '普通科', quota: 221, finalApplicants: 249, finalRate: 1.13, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '野津田', area: '町田', department: '普通科', quota: 99, finalApplicants: 60, finalRate: 0.61, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '町田', area: '町田', department: '普通科', quota: 253, finalApplicants: 359, finalRate: 1.42, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '山崎', area: '町田', department: '普通科', quota: 138, finalApplicants: 155, finalRate: 1.12, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '小金井北', area: '小金井', department: '普通科', quota: 189, finalApplicants: 317, finalRate: 1.68, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '小平', area: '小平', department: '普通科', quota: 189, finalApplicants: 264, finalRate: 1.4, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '小平西', area: '小平', department: '普通科', quota: 222, finalApplicants: 313, finalRate: 1.41, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '小平南', area: '小平', department: '普通科', quota: 221, finalApplicants: 363, finalRate: 1.64, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '日野', area: '日野', department: '普通科', quota: 253, finalApplicants: 430, finalRate: 1.7, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '日野台', area: '日野', department: '普通科', quota: 241, finalApplicants: 335, finalRate: 1.39, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '南平', area: '日野', department: '普通科', quota: 253, finalApplicants: 398, finalRate: 1.57, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '東村山', area: '東村山', department: '普通科', quota: 116, finalApplicants: 166, finalRate: 1.43, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '東村山西', area: '東村山', department: '普通科', quota: 189, finalApplicants: 210, finalRate: 1.11, fiscalYear: '令和6年度（2024年度）' },
   ],
 };
