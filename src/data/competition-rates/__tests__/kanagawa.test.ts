@@ -16,7 +16,7 @@ describe('神奈川県 倍率パイプラインα（Y-2・全日制の突合テ�
   };
 
   it('普通科（共通選抜）県立87校+市立5校=92校の合計が公式値と一致する', () => {
-    const result = checkAgainstSubtotal(records, findSubtotal('普通科（共通選抜）合計'), (r) => r.department === '普通科');
+    const result = checkAgainstSubtotal(records, findSubtotal('普通科（共通選抜）合計'), (r) => r.department === '普通科' && !r.fiscalYear);
     expect(result.matches).toBe(true);
     expect(result.actualQuota).toBeGreaterThan(0);
   });
@@ -72,10 +72,25 @@ describe('神奈川県 倍率パイプラインα（Y-2・全日制の突合テ�
   });
 
   it('全レコードの合計が公式「一般募集共通選抜(全日制)+連携募集 全体」39,431/43,821と完全一致する（Y-2神奈川県の最終DoD）', () => {
-    const result = checkAgainstSubtotal(records, findSubtotal('一般募集共通選抜（全日制）+連携募集 全体'), () => true);
+    const result = checkAgainstSubtotal(records, findSubtotal('一般募集共通選抜（全日制）+連携募集 全体'), (r) => !r.fiscalYear);
     expect(result.matches).toBe(true);
     expect(result.actualQuota).toBe(39431);
     expect(result.actualApplicants).toBe(43821);
+  });
+
+  it('掛-1(学校別×多年度): 令和7年度(R7)分レコードが87件収録され、県立普通科の合計が印字済み「県立計」25,798/31,262と完全一致する', () => {
+    const r7 = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
+    expect(r7.length).toBe(87);
+    const sumQuota = r7.reduce((a, r) => a + r.quota, 0);
+    const sumApplicants = r7.reduce((a, r) => a + r.finalApplicants, 0);
+    expect(sumQuota).toBe(25798);
+    expect(sumApplicants).toBe(31262);
+    const seen = new Set<string>();
+    for (const r of r7) {
+      const key = `${r.area}|${r.schoolName}|${r.department}`;
+      expect(seen.has(key)).toBe(false);
+      seen.add(key);
+    }
   });
 
   it('全レコードのquota>0・finalApplicants>=0・finalRateが概算で整合する', () => {
