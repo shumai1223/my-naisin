@@ -70,12 +70,76 @@ const SCHOOL_LEVEL_APPLICANTS: Record<string, number> = {
   利根商業: 36,
 };
 
+const R7_SCHOOL_LEVEL_APPLICANTS: Record<string, number> = {
+  前橋: 313,
+  前橋南: 208,
+  前橋西: 153,
+  前橋女子: 335,
+  前橋東: 227,
+  勢多農林: 211,
+  前橋工業: 244,
+  前橋商業: 322,
+  前橋清陵: 121,
+  高崎: 368,
+  高崎東: 182,
+  高崎北: 283,
+  榛名: 51,
+  高崎女子: 325,
+  吉井: 106,
+  高崎工業: 281,
+  高崎商業: 352,
+  桐生: 358,
+  桐生清桜: 236,
+  桐生工業: 152,
+  伊勢崎: 308,
+  伊勢崎清明: 216,
+  伊勢崎興陽: 226,
+  伊勢崎工業: 207,
+  伊勢崎商業: 236,
+  太田: 289,
+  太田東: 256,
+  太田女子: 255,
+  新田暁: 155,
+  太田工業: 129,
+  太田フレックス: 138,
+  沼田: 223,
+  利根実業: 118,
+  館林: 196,
+  館林女子: 187,
+  渋川: 172,
+  渋川女子: 190,
+  渋川青翠: 115,
+  渋川工業: 142,
+  藤岡中央: 164,
+  藤岡北: 101,
+  藤岡工業: 54,
+  富岡: 211,
+  富岡実業: 122,
+  松井田: 31,
+  安中総合学園: 198,
+  大間々: 104,
+  下仁田: 31,
+  吾妻中央: 145,
+  長野原: 33,
+  玉村: 55,
+  板倉: 52,
+  館林商工: 146,
+  西邑楽: 179,
+  大泉: 144,
+  市立前橋: 293,
+  高崎経済大学附属: 324,
+  桐生市立商業: 246,
+  市立太田: 161,
+  利根商業: 45,
+};
+
 describe('群馬県 倍率パイプラインα（Y-6・全日制+フレックス60校106レコード・coverage=partial）', () => {
   const { records } = GUNMA_COMPETITION_RATES;
+  const r8 = records.filter((r) => !r.fiscalYear);
 
   it('各校の学科別内訳合計がPDF記載の学校別志願者数(D列)と完全一致する（60校全件）', () => {
     for (const [schoolName, expectedApplicants] of Object.entries(SCHOOL_LEVEL_APPLICANTS)) {
-      const sum = records.filter((r) => r.schoolName === schoolName).reduce((acc, r) => acc + r.finalApplicants, 0);
+      const sum = r8.filter((r) => r.schoolName === schoolName).reduce((acc, r) => acc + r.finalApplicants, 0);
       expect(sum).toBe(expectedApplicants);
     }
   });
@@ -88,11 +152,11 @@ describe('群馬県 倍率パイプラインα（Y-6・全日制+フレックス
     }
   });
 
-  it('学校名+学科名の重複が無い', () => {
+  it('学校名+学科名+年度の重複が無い', () => {
     const seen = new Set<string>();
     const dupes: string[] = [];
     for (const r of records) {
-      const key = `${r.schoolName}|${r.department}`;
+      const key = `${r.schoolName}|${r.department}|${r.fiscalYear ?? ''}`;
       if (seen.has(key)) dupes.push(key);
       seen.add(key);
     }
@@ -104,11 +168,27 @@ describe('群馬県 倍率パイプラインα（Y-6・全日制+フレックス
   });
 
   it('106レコード・60校が収録されている（連携型選抜実施校の尾瀬・万場・嬬恋は対象外）', () => {
-    expect(records.length).toBe(106);
-    const distinctSchools = new Set(records.map((r) => r.schoolName));
+    expect(r8.length).toBe(106);
+    const distinctSchools = new Set(r8.map((r) => r.schoolName));
     expect(distinctSchools.size).toBe(60);
     for (const excluded of ['尾瀬', '万場', '嬬恋']) {
-      expect(records.some((r) => r.schoolName === excluded)).toBe(false);
+      expect(r8.some((r) => r.schoolName === excluded)).toBe(false);
+    }
+  });
+
+  it('掛-1(学校別×多年度): 令和7年度(R7)分レコードが106件・60校収録され、各校のD列合計が完全一致する。太田工業のみ機械・電子機械がくくり募集(quota120)のため単一レコードに統合(R8では機械単独quota80で規模が異なるが誤読ではなくそのまま転記)。連携型選抜実施校3校(尾瀬・万場・嬬恋)はR7でも対象外だが、機械集計との差分(quota152・applicants42)が3校の内訳(尾瀬64/21・万場44/11・嬬恋44/10)と完全一致することを確認済み(捏造なしにquotaを分離できないためR8と同じ理由で収録を見送った)', () => {
+    const r7 = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
+    expect(r7.length).toBe(106);
+    const distinctSchools = new Set(r7.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(60);
+    const sumQuota = r7.reduce((a, r) => a + r.quota, 0);
+    const sumApplicants = r7.reduce((a, r) => a + r.finalApplicants, 0);
+    expect(sumQuota).toBe(11283);
+    expect(sumApplicants).toBe(11425);
+
+    for (const [schoolName, expectedApplicants] of Object.entries(R7_SCHOOL_LEVEL_APPLICANTS)) {
+      const sum = r7.filter((r) => r.schoolName === schoolName).reduce((acc, r) => acc + r.finalApplicants, 0);
+      expect(sum).toBe(expectedApplicants);
     }
   });
 
