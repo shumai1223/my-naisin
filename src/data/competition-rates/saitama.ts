@@ -48,6 +48,10 @@
  * 完全一致（node.js機械計算）。◯印の市立高校（市立川越/市立浦和/市立浦和南/市立大宮北/
  * 川口市立）はR8と同じ「市立」接頭辞込みの学校名で収録。これで「全日制 普通科」区分が完結。
  * 次頁（3頁目）以降は専門学科（農業・工業・商業等）が続く見込み。
+ *
+ * **2026-08-07追記(掛-1第3弾)**: 3頁目「専門学科・農業に関する学科」6校18レコードを追加。
+ * 頁末尾の印字済み「農業科計」小計（quota796・applicants641・倍率0.81）と完全一致
+ * （node.js機械計算）。次頁（4頁目）以降は専門学科の他学科（工業・商業等）が続く見込み。
  */
 import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
 
@@ -62,7 +66,7 @@ export const SAITAMA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     },
     {
       url: 'https://www.pref.saitama.lg.jp/documents/241544/r7shigansha0220.pdf',
-      docTitle: '埼玉県教育委員会 令和7年度埼玉県公立高等学校における入学志願確定者数（全日制・定時制）（1〜2/9頁・普通科完結・掛-1・saitama横展開第1〜2弾）',
+      docTitle: '埼玉県教育委員会 令和7年度埼玉県公立高等学校における入学志願確定者数（全日制・定時制）（1〜3/9頁・普通科完結+専門学科(農業)・掛-1・saitama横展開第1〜3弾）',
       fiscalYear: '令和7年度（2025年度）',
       fetchedAt: '2026-08-07',
     },
@@ -487,5 +491,24 @@ export const SAITAMA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '市立大宮北', department: '普通科', quota: 280, finalApplicants: 413, finalRate: 1.48, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '川口市立', department: '普通科', quota: 240, finalApplicants: 402, finalRate: 1.68, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '川口市立', department: 'スポーツ科学コース', quota: 80, finalApplicants: 114, finalRate: 1.43, fiscalYear: '令和7年度（2025年度）' },
+    // ===== 3頁目「全日制 専門学科・農業に関する学科」18レコード（頁末尾「農業科計」796/641/0.81と完全一致） =====
+    { schoolName: '熊谷農業', department: '食品科学科', quota: 40, finalApplicants: 43, finalRate: 1.08, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '熊谷農業', department: '生物生産工学科', quota: 79, finalApplicants: 72, finalRate: 0.91, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '熊谷農業', department: '生活技術科', quota: 40, finalApplicants: 31, finalRate: 0.78, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '熊谷農業', department: '生物生産技術科', quota: 80, finalApplicants: 59, finalRate: 0.74, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '児玉', department: '生物資源科', quota: 39, finalApplicants: 37, finalRate: 0.95, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '児玉', department: '環境デザイン科', quota: 40, finalApplicants: 20, finalRate: 0.5, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '杉戸農業', department: '生物生産工学科', quota: 40, finalApplicants: 22, finalRate: 0.55, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '杉戸農業', department: '園芸科', quota: 40, finalApplicants: 42, finalRate: 1.05, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '杉戸農業', department: '造園科', quota: 39, finalApplicants: 20, finalRate: 0.51, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '杉戸農業', department: '食品流通科', quota: 40, finalApplicants: 44, finalRate: 1.1, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '杉戸農業', department: '生活技術科', quota: 40, finalApplicants: 44, finalRate: 1.1, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '杉戸農業', department: '生物生産技術科', quota: 40, finalApplicants: 41, finalRate: 1.03, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '秩父農工科学', department: '農業科', quota: 40, finalApplicants: 45, finalRate: 1.13, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '秩父農工科学', department: '食品化学科', quota: 39, finalApplicants: 24, finalRate: 0.62, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '秩父農工科学', department: '森林科学科', quota: 40, finalApplicants: 16, finalRate: 0.4, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '鳩ケ谷', department: '園芸デザイン科', quota: 40, finalApplicants: 44, finalRate: 1.1, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '羽生実業', department: '園芸科', quota: 40, finalApplicants: 16, finalRate: 0.4, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '羽生実業', department: '農業経済科', quota: 40, finalApplicants: 21, finalRate: 0.53, fiscalYear: '令和7年度（2025年度）' },
   ],
 };
