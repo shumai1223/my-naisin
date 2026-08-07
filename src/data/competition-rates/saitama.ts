@@ -65,6 +65,13 @@
  * （node.js機械計算）。「八潮南」もR8データに対応する学校が見当たらず（既存test.tsのR8学校
  * リストには「八潮フロンティア」が代わりに存在＝改称の可能性）、大宮工業と同様R7時点の
  * 実在記録としてそのまま収録した。次頁（6頁目）以降は専門学科の残り学科＋総合学科が続く見込み。
+ *
+ * **2026-08-07追記(掛-1第6弾)**: 6頁目「専門学科・家庭/看護/外国語/美術/音楽/書道/体育に関する
+ * 学科」計25レコードを追加。7つの学科区分それぞれの頁内小計（家庭320/304・看護80/95・
+ * 外国語319/384・美術120/132・音楽120/66・書道40/40・体育160/186）全てと完全一致
+ * （node.js機械計算）。外国語科は「越谷南」（R7）↔「越谷北」（R8）のように学校間で開設が
+ * 移動している例があるが、これも年度ごとの実際の開設状況としてそのまま収録した。次頁
+ * （7頁目）以降は専門学科の残り＋総合学科が続く見込み。
  */
 import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
 
@@ -79,7 +86,7 @@ export const SAITAMA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     },
     {
       url: 'https://www.pref.saitama.lg.jp/documents/241544/r7shigansha0220.pdf',
-      docTitle: '埼玉県教育委員会 令和7年度埼玉県公立高等学校における入学志願確定者数（全日制・定時制）（1〜5/9頁・普通科完結+専門学科(農業・工業・商業)・掛-1・saitama横展開第1〜5弾）',
+      docTitle: '埼玉県教育委員会 令和7年度埼玉県公立高等学校における入学志願確定者数（全日制・定時制）（1〜6/9頁・普通科完結+専門学科(農業・工業・商業・家庭・看護・外国語・美術・音楽・書道・体育)・掛-1・saitama横展開第1〜6弾）',
       fiscalYear: '令和7年度（2025年度）',
       fetchedAt: '2026-08-07',
     },
@@ -599,5 +606,31 @@ export const SAITAMA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '八潮南', department: '情報処理科', quota: 80, finalApplicants: 49, finalRate: 0.61, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '市立川越', department: '国際経済科', quota: 70, finalApplicants: 110, finalRate: 1.57, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '市立川越', department: '情報処理科', quota: 70, finalApplicants: 104, finalRate: 1.49, fiscalYear: '令和7年度（2025年度）' },
+    // ===== 6頁目「全日制 専門学科・家庭/看護/外国語/美術/音楽/書道/体育に関する学科」25レコード（各学科の頁内小計と完全一致）=====
+    { schoolName: '鴻巣女子', department: '保育科', quota: 40, finalApplicants: 26, finalRate: 0.65, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '鴻巣女子', department: '家政科学科', quota: 40, finalApplicants: 45, finalRate: 1.13, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '越谷総合技術', department: '服飾デザイン科', quota: 39, finalApplicants: 31, finalRate: 0.79, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '越谷総合技術', department: '食物調理科', quota: 40, finalApplicants: 52, finalRate: 1.3, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '秩父農工科学', department: 'ライフデザイン科', quota: 40, finalApplicants: 18, finalRate: 0.45, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '秩父農工科学', department: 'フードデザイン科', quota: 40, finalApplicants: 43, finalRate: 1.08, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '新座総合技術', department: '服飾デザイン科', quota: 40, finalApplicants: 40, finalRate: 1.0, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '新座総合技術', department: '食物調理科', quota: 40, finalApplicants: 49, finalRate: 1.23, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '常盤', department: '看護科', quota: 80, finalApplicants: 95, finalRate: 1.19, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '春日部女子', department: '外国語科', quota: 40, finalApplicants: 35, finalRate: 0.88, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '越谷南', department: '外国語科', quota: 40, finalApplicants: 60, finalRate: 1.5, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '坂戸', department: '外国語科', quota: 40, finalApplicants: 41, finalRate: 1.03, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '草加南', department: '外国語科', quota: 40, finalApplicants: 45, finalRate: 1.13, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '南稜', department: '外国語科', quota: 40, finalApplicants: 48, finalRate: 1.2, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '和光国際', department: '外国語科', quota: 79, finalApplicants: 98, finalRate: 1.24, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '蕨', department: '外国語科', quota: 40, finalApplicants: 57, finalRate: 1.43, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '大宮光陵', department: '美術科', quota: 40, finalApplicants: 58, finalRate: 1.45, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '越生', department: '美術科', quota: 40, finalApplicants: 23, finalRate: 0.58, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '芸術総合', department: '美術科', quota: 40, finalApplicants: 51, finalRate: 1.28, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '大宮光陵', department: '音楽科', quota: 40, finalApplicants: 28, finalRate: 0.7, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '芸術総合', department: '音楽科', quota: 40, finalApplicants: 16, finalRate: 0.4, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '松伏', department: '音楽科', quota: 40, finalApplicants: 22, finalRate: 0.55, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '大宮光陵', department: '書道科', quota: 40, finalApplicants: 40, finalRate: 1.0, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '大宮東', department: '体育科', quota: 80, finalApplicants: 104, finalRate: 1.3, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: 'ふじみ野', department: 'スポーツサイエンス科', quota: 80, finalApplicants: 82, finalRate: 1.03, fiscalYear: '令和7年度（2025年度）' },
   ],
 };
