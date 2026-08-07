@@ -34,6 +34,14 @@
  * 定時制は東京都・神奈川県・千葉県と同じ理由でスコープ外（全日制の外側の別課程のため
  * 対象外として明示的に除外）。伊奈学園総合高等学校の「普通科」は同校の普通・スポーツ科学・
  * 芸術の合算値（資料の注記通りそのまま1レコードとして収録・内訳への分解は資料上できない）。
+ *
+ * **2026-08-07追記(掛-1・学校別×多年度・hokkaido/tokyo/osaka/kanagawaに続く5県目)**: R7(令和7年度)版
+ * (documents/241544/r7shigansha0220.pdf・全9頁)を発見。xlsxは提供されておらずWebFetchのテキスト
+ * 抽出も学校名部分が空になる（埋め込みフォント欠落・tokyo/hokkaidoと同型の問題）ため、
+ * `pdftoppm -r 300`でビジョン解析する方式を採用（1頁目は罫線・文字とも極めて明瞭で判読リスク低）。
+ * 列は「募集人員」「入学許可予定者数(A)」「志願確定者数(B)」の3本立てで、R8と同じくA=quota・
+ * B=finalApplicants採用。1頁目「全日制 普通科」56校（伊奈学園総合1校＋大宮光陵の外国語コースを
+ * 含む）を収録。残り8頁（普通科続き＋専門学科＋総合学科）は次回以降のセッションで継続する。
  */
 import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
 
@@ -45,6 +53,12 @@ export const SAITAMA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       docTitle: '埼玉県教育委員会 令和8年度埼玉県公立高等学校における入学志願確定者数（全日制・定時制）',
       fiscalYear: '令和8年度（2026年度）',
       fetchedAt: '2026-07-24',
+    },
+    {
+      url: 'https://www.pref.saitama.lg.jp/documents/241544/r7shigansha0220.pdf',
+      docTitle: '埼玉県教育委員会 令和7年度埼玉県公立高等学校における入学志願確定者数（全日制・定時制）（1/9頁・普通科・掛-1・saitama横展開第1弾）',
+      fiscalYear: '令和7年度（2025年度）',
+      fetchedAt: '2026-08-07',
     },
   ],
   coverage: {
@@ -362,5 +376,63 @@ export const SAITAMA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '滑川総合', department: '総合学科', quota: 278, finalApplicants: 266, finalRate: 0.96 },
     { schoolName: '吉川美南', department: '総合学科', quota: 118, finalApplicants: 115, finalRate: 0.97 },
     { schoolName: '寄居城北', department: '総合学科', quota: 198, finalApplicants: 196, finalRate: 0.99 },
+
+    // ===== 掛-1(学校別×多年度)横展開: R7分・1頁目「全日制 普通科」56校 =====
+    { schoolName: '上尾', department: '普通科', quota: 238, finalApplicants: 309, finalRate: 1.3, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '上尾鷹の台', department: '普通科', quota: 198, finalApplicants: 201, finalRate: 1.02, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '上尾橘', department: '普通科', quota: 158, finalApplicants: 62, finalRate: 0.39, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '上尾南', department: '普通科', quota: 238, finalApplicants: 250, finalRate: 1.05, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '朝霞', department: '普通科', quota: 318, finalApplicants: 428, finalRate: 1.35, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '朝霞西', department: '普通科', quota: 318, finalApplicants: 354, finalRate: 1.11, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '伊奈学園総合', department: '普通科（普通・スポーツ科学・芸術の合算）', quota: 716, finalApplicants: 855, finalRate: 1.19, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '入間向陽', department: '普通科', quota: 318, finalApplicants: 377, finalRate: 1.19, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '岩槻', department: '普通科', quota: 278, finalApplicants: 298, finalRate: 1.07, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '浦和', department: '普通科', quota: 358, finalApplicants: 526, finalRate: 1.47, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '浦和北', department: '普通科', quota: 318, finalApplicants: 372, finalRate: 1.17, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '浦和第一女子', department: '普通科', quota: 358, finalApplicants: 469, finalRate: 1.31, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '浦和西', department: '普通科', quota: 358, finalApplicants: 518, finalRate: 1.45, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '浦和東', department: '普通科', quota: 318, finalApplicants: 421, finalRate: 1.32, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '大宮', department: '普通科', quota: 318, finalApplicants: 481, finalRate: 1.51, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '大宮光陵', department: '普通科', quota: 198, finalApplicants: 224, finalRate: 1.13, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '大宮光陵', department: '外国語コース', quota: 40, finalApplicants: 46, finalRate: 1.15, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '大宮東', department: '普通科', quota: 238, finalApplicants: 276, finalRate: 1.16, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '大宮南', department: '普通科', quota: 358, finalApplicants: 481, finalRate: 1.34, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '大宮武蔵野', department: '普通科', quota: 238, finalApplicants: 246, finalRate: 1.03, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '小川', department: '普通科', quota: 198, finalApplicants: 214, finalRate: 1.08, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '桶川', department: '普通科', quota: 278, finalApplicants: 282, finalRate: 1.01, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '桶川西', department: '普通科', quota: 158, finalApplicants: 100, finalRate: 0.63, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '越生', department: '普通科', quota: 79, finalApplicants: 58, finalRate: 0.73, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '春日部', department: '普通科', quota: 358, finalApplicants: 494, finalRate: 1.38, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '春日部女子', department: '普通科', quota: 238, finalApplicants: 248, finalRate: 1.04, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '春日部東', department: '普通科', quota: 318, finalApplicants: 339, finalRate: 1.07, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '川口', department: '普通科', quota: 318, finalApplicants: 401, finalRate: 1.26, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '川口北', department: '普通科', quota: 358, finalApplicants: 458, finalRate: 1.28, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '川口青陵', department: '普通科', quota: 278, finalApplicants: 306, finalRate: 1.1, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '川口東', department: '普通科', quota: 278, finalApplicants: 324, finalRate: 1.17, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '川越', department: '普通科', quota: 358, finalApplicants: 526, finalRate: 1.47, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '川越女子', department: '普通科', quota: 358, finalApplicants: 421, finalRate: 1.18, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '川越西', department: '普通科', quota: 318, finalApplicants: 328, finalRate: 1.03, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '川越初雁', department: '普通科', quota: 198, finalApplicants: 190, finalRate: 0.96, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '川越南', department: '普通科', quota: 358, finalApplicants: 531, finalRate: 1.48, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '北本', department: '普通科', quota: 158, finalApplicants: 96, finalRate: 0.61, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '久喜', department: '普通科', quota: 278, finalApplicants: 307, finalRate: 1.1, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '熊谷', department: '普通科', quota: 318, finalApplicants: 335, finalRate: 1.05, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '熊谷女子', department: '普通科', quota: 318, finalApplicants: 323, finalRate: 1.02, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '熊谷西', department: '普通科', quota: 278, finalApplicants: 284, finalRate: 1.02, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '栗橋北彩', department: '普通科', quota: 158, finalApplicants: 113, finalRate: 0.72, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '鴻巣', department: '普通科', quota: 198, finalApplicants: 202, finalRate: 1.02, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '鴻巣女子', department: '普通科', quota: 79, finalApplicants: 55, finalRate: 0.7, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '越ケ谷', department: '普通科', quota: 318, finalApplicants: 428, finalRate: 1.35, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '越谷北', department: '普通科', quota: 318, finalApplicants: 405, finalRate: 1.27, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '越谷西', department: '普通科', quota: 318, finalApplicants: 323, finalRate: 1.02, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '越谷東', department: '普通科', quota: 278, finalApplicants: 307, finalRate: 1.1, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '越谷南', department: '普通科', quota: 318, finalApplicants: 457, finalRate: 1.44, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '児玉', department: '普通科', quota: 79, finalApplicants: 51, finalRate: 0.65, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '坂戸', department: '普通科', quota: 318, finalApplicants: 360, finalRate: 1.13, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '坂戸西', department: '普通科', quota: 318, finalApplicants: 311, finalRate: 0.98, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '狭山清陵', department: '普通科', quota: 198, finalApplicants: 182, finalRate: 0.92, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '志木', department: '普通科', quota: 238, finalApplicants: 300, finalRate: 1.26, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '庄和', department: '普通科', quota: 158, finalApplicants: 178, finalRate: 1.13, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '白岡', department: '普通科', quota: 158, finalApplicants: 166, finalRate: 1.05, fiscalYear: '令和7年度（2025年度）' },
   ],
 };

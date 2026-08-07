@@ -19,7 +19,7 @@ describe('埼玉県 倍率パイプラインα（Y-2・全日制の突合テス�
   };
 
   it('全日制の全レコード合計がPDF末尾のグランドトータル（quota34,603・applicants35,976・倍率1.04）と完全一致する', () => {
-    const result = checkAgainstSubtotal(records, findSubtotal('全日制合計'), () => true);
+    const result = checkAgainstSubtotal(records, findSubtotal('全日制合計'), (r) => !r.fiscalYear);
     expect(result.matches).toBe(true);
   });
 
@@ -88,7 +88,7 @@ describe('埼玉県 倍率パイプラインα（Y-2・全日制の突合テス�
   });
 
   it('普通科の合計が公式値と完全一致する（熊谷西/越谷西/南稜/ふじみ野の転記ミス修正済み）', () => {
-    const futsuka = records.filter((r) => r.department.includes('普通科') || r.department.includes('コース'));
+    const futsuka = records.filter((r) => (r.department.includes('普通科') || r.department.includes('コース')) && !r.fiscalYear);
     const sums = sumRecords(futsuka);
     const official = findSubtotal('普通科計');
     expect(sums.quota).toBe(official.quota);
@@ -113,6 +113,21 @@ describe('埼玉県 倍率パイプラインα（Y-2・全日制の突合テス�
     const ogoseShoo = records.filter((r) => r.schoolName === '越生翔桜');
     expect(ogoseShoo.length).toBeGreaterThan(0);
     expect(records.some((r) => r.schoolName === '越生翔陽')).toBe(false);
+  });
+
+  it('掛-1(学校別×多年度): 令和7年度(R7)分レコードが56件収録され(1頁目「普通科」)、区市町村+学校名+学科の重複が無い', () => {
+    const r7 = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
+    expect(r7.length).toBe(56);
+    const sumQuota = r7.reduce((a, r) => a + r.quota, 0);
+    const sumApplicants = r7.reduce((a, r) => a + r.finalApplicants, 0);
+    expect(sumQuota).toBe(15131);
+    expect(sumApplicants).toBe(17597);
+    const seen = new Set<string>();
+    for (const r of r7) {
+      const key = `${r.schoolName}|${r.department}`;
+      expect(seen.has(key)).toBe(false);
+      seen.add(key);
+    }
   });
 
   it('全レコードのquota>0・finalApplicants>=0・finalRateが概算で整合する', () => {
