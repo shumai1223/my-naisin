@@ -79,6 +79,21 @@ describe('大阪府 倍率パイプラインα（Y-2・全6表の突合テスト
     }
   });
 
+  it('掛-1(学校別×多年度): 令和6年度(R6)分レコードが170件収録され、5表合計が公式値34,789/36,379と完全一致する', () => {
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    expect(r6.length).toBe(170);
+    const sumQuota = r6.reduce((a, r) => a + r.quota, 0);
+    const sumApplicants = r6.reduce((a, r) => a + r.finalApplicants, 0);
+    expect(sumQuota).toBe(34789);
+    expect(sumApplicants).toBe(36379);
+    const seen = new Set<string>();
+    for (const r of r6) {
+      const key = `${r.schoolName}|${r.department}`;
+      expect(seen.has(key)).toBe(false);
+      seen.add(key);
+    }
+  });
+
   it('前回のPDF読み取りで見落とした「桜塚」・修正した「豊島」「北千里」が正しい値で入っている', () => {
     const sakuratsuka = records.find((r) => r.schoolName === '桜塚');
     expect(sakuratsuka).toEqual({ schoolName: '桜塚', department: '普通科', quota: 360, finalApplicants: 419, finalRate: 1.16 });
