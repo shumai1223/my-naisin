@@ -10,10 +10,11 @@ import { OKINAWA_COMPETITION_RATES } from '../okinawa';
  */
 describe('沖縄県 倍率パイプラインα（Y-6・全日制58校156レコードの完全収録テスト）', () => {
   const { records, officialSubtotals } = OKINAWA_COMPETITION_RATES;
+  const r8 = records.filter((r) => !r.fiscalYear);
 
   it('全日制の全レコード合計が「全日制計（自己算出）」行（quota14,084・applicants13,522）と完全一致する', () => {
     const subtotal = officialSubtotals.find((s) => s.label === '全日制計（自己算出）')!;
-    const result = checkAgainstSubtotal(records, subtotal, () => true);
+    const result = checkAgainstSubtotal(records, subtotal, (r) => !r.fiscalYear);
     expect(result.matches).toBe(true);
   });
 
@@ -25,11 +26,11 @@ describe('沖縄県 倍率パイプラインα（Y-6・全日制58校156レコ�
     }
   });
 
-  it('学校名+学科名の重複が無い', () => {
+  it('学校名+学科名+年度の重複が無い', () => {
     const seen = new Set<string>();
     const dupes: string[] = [];
     for (const r of records) {
-      const key = `${r.schoolName}|${r.department}`;
+      const key = `${r.schoolName}|${r.department}|${r.fiscalYear ?? ''}`;
       if (seen.has(key)) dupes.push(key);
       seen.add(key);
     }
@@ -41,13 +42,13 @@ describe('沖縄県 倍率パイプラインα（Y-6・全日制58校156レコ�
   });
 
   it('156レコード・58校が収録されている', () => {
-    expect(records.length).toBe(156);
-    const distinctSchools = new Set(records.map((r) => r.schoolName));
+    expect(r8.length).toBe(156);
+    const distinctSchools = new Set(r8.map((r) => r.schoolName));
     expect(distinctSchools.size).toBe(58);
   });
 
   it('定時制と全日制が併設する学校は全日制分のみ収録されている（那覇工業=全日5学科のみ・定時機械/電気は含まれない）', () => {
-    const naha = records.filter((r) => r.schoolName === '那覇工業');
+    const naha = r8.filter((r) => r.schoolName === '那覇工業');
     expect(naha.length).toBe(5);
     expect(naha.some((r) => r.department === '機械' && r.quota === 40 && r.finalApplicants === 9)).toBe(false);
   });
@@ -62,9 +63,21 @@ describe('沖縄県 倍率パイプラインα（Y-6・全日制58校156レコ�
     });
   });
 
+  it('掛-1(学校別×多年度): 令和7年度(R7)分レコードが159件収録され、総計から定時制6箇所を差し引いた自己算出値(quota14,157・applicants13,262)と完全一致する。学校名のキー集合はR8と完全一致(統廃合なし)。沖縄県は「実施年度」命名のため、R8相当の資料は県サイト上で「令和7年度実施」、R7相当は「令和6年度実施」と表示される点に注意', () => {
+    const r7 = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
+    expect(r7.length).toBe(159);
+    expect(r7.reduce((a, r) => a + r.quota, 0)).toBe(14157);
+    expect(r7.reduce((a, r) => a + r.finalApplicants, 0)).toBe(13262);
+
+    const r7Schools = new Set(r7.map((r) => r.schoolName));
+    const r8Schools = new Set(r8.map((r) => r.schoolName));
+    expect(r7Schools.size).toBe(58);
+    expect([...r7Schools].every((s) => r8Schools.has(s))).toBe(true);
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of OKINAWA_COMPETITION_RATES.sources) {
-      expect(s.url).toMatch(/^https:\/\/www\.pref\.okinawa\.jp\//);
+      expect(s.url).toMatch(/^https:\/\/www\.pref\.okinawa\.(jp|lg\.jp)\//);
     }
   });
 });
