@@ -47,6 +47,13 @@ export const TOKYO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       fiscalYear: '令和8年度（2026年度）',
       fetchedAt: '2026-07-24',
     },
+    {
+      url: 'https://www.kyoiku.metro.tokyo.lg.jp/documents/d/kyoiku/2025-02-13-002',
+      docTitle:
+        '東京都教育委員会 令和7年度東京都立高等学校入学者選抜応募状況（最終応募状況）1[普通科（コース、単位制以外の学校）]（掛-1・学校別×多年度のtokyo横展開第1弾）',
+      fiscalYear: '令和7年度（2025年度）',
+      fetchedAt: '2026-08-07',
+    },
   ],
   coverage: {
     status: 'complete',
@@ -61,7 +68,19 @@ export const TOKYO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     ],
     pendingDepartments: [],
     note:
-      '全日制167校（普通科119＋専門学科38＋総合学科10）を全て取り込み済み。定時制課程（チャレンジスクール等）・在京外国人生徒等対象選抜は全日制の外側の別集計のため対象外（スコープ外として明示的に除外）。',
+      '全日制167校（普通科119＋専門学科38＋総合学科10）を全て取り込み済み。定時制課程（チャレンジスクール等）・在京外国人生徒等対象選抜は全日制の外側の別集計のため対象外（スコープ外として明示的に除外）。' +
+      '⚠️2026-08-07(掛-1横展開・hokkaidoで確立した技法をtokyoに横展開する第1弾): R7(令和7年度)版の' +
+      '個票PDF「1[普通科(コース、単位制以外の学校)]」(documents/d/kyoiku/2025-02-13-002)が' +
+      '東京都教育委員会の過去ページ(admission/high_school/past/first_application/2025021301)から' +
+      '発見でき、hokkaidoと同型の埋め込みフォント欠落(pdftotext -layoutは数値列のみ抽出可・学校名は' +
+      'ビジョン解析が必要)を確認したうえで、1頁目(千代田〜練馬の18区・43校)を収録した。' +
+      '⚠️発見: 世田谷区「深沢」高校はR8ではdepartment"普通科(単位制)"に分類されているが、R7の' +
+      'このPDFでは通常の「普通科(コース、単位制以外)」表に掲載されていた(quota142→130、' +
+      'applicants123→82と規模も縮小)。誤読ではなく、深沢高校が令和7→8年度にかけて単位制に' +
+      '移行したことを示す実在の制度変更と考えられるため、R7レコードのdepartmentは"普通科"' +
+      '(このPDFの表どおり)のまま記録した。区部57校のうち残り(足立/葛飾/江戸川)・多摩部44校・' +
+      '島しょ6校、およびコース制/単位制/海外帰国生徒対象(002以外のPDF)・専門学科13学科・総合学科' +
+      'は次回以降のセッションで横展開を継続する。',
   },
   officialSubtotals: [
     { label: '区部計', schoolCount: 57, quota: 12088, finalApplicants: 16926, finalRate: 1.4 },
@@ -335,5 +354,49 @@ export const TOKYO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '町田総合', area: '町田', department: '総合学科', quota: 164, finalApplicants: 165, finalRate: 1.01 },
     { schoolName: '東久留米総合', area: '東久留米', department: '総合学科', quota: 164, finalApplicants: 217, finalRate: 1.32 },
     { schoolName: '若葉総合', area: '稲城', department: '総合学科', quota: 164, finalApplicants: 138, finalRate: 0.84 },
+    // 掛-1(学校別×多年度)横展開第1弾: R7(令和7年度)分・個票PDF1頁目(千代田〜練馬の18区・43校)。
+    { schoolName: '日比谷', area: '千代田', department: '普通科', quota: 253, finalApplicants: 507, finalRate: 2.0, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '三田', area: '港', department: '普通科', quota: 204, finalApplicants: 354, finalRate: 1.74, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '戸山', area: '新宿', department: '普通科', quota: 252, finalApplicants: 526, finalRate: 2.09, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '竹早', area: '文京', department: '普通科', quota: 209, finalApplicants: 320, finalRate: 1.53, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '向丘', area: '文京', department: '普通科', quota: 220, finalApplicants: 347, finalRate: 1.58, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '上野', area: '台東', department: '普通科', quota: 252, finalApplicants: 481, finalRate: 1.91, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '日本橋', area: '墨田', department: '普通科', quota: 179, finalApplicants: 216, finalRate: 1.21, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '本所', area: '墨田', department: '普通科', quota: 189, finalApplicants: 285, finalRate: 1.51, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '城東', area: '江東', department: '普通科', quota: 252, finalApplicants: 374, finalRate: 1.48, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '東', area: '江東', department: '普通科', quota: 189, finalApplicants: 290, finalRate: 1.53, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '深川', area: '江東', department: '普通科', quota: 185, finalApplicants: 335, finalRate: 1.81, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '大崎', area: '品川', department: '普通科', quota: 221, finalApplicants: 339, finalRate: 1.53, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '小山台', area: '品川', department: '普通科', quota: 252, finalApplicants: 368, finalRate: 1.46, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '八潮', area: '品川', department: '普通科', quota: 168, finalApplicants: 128, finalRate: 0.76, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '駒場', area: '目黒', department: '普通科', quota: 220, finalApplicants: 423, finalRate: 1.92, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '目黒', area: '目黒', department: '普通科', quota: 189, finalApplicants: 265, finalRate: 1.4, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '大森', area: '大田', department: '普通科', quota: 130, finalApplicants: 58, finalRate: 0.45, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '蒲田', area: '大田', department: '普通科', quota: 85, finalApplicants: 93, finalRate: 1.09, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '田園調布', area: '大田', department: '普通科', quota: 176, finalApplicants: 248, finalRate: 1.41, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '雪谷', area: '大田', department: '普通科', quota: 221, finalApplicants: 358, finalRate: 1.62, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '桜町', area: '世田谷', department: '普通科', quota: 252, finalApplicants: 290, finalRate: 1.15, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '千歳丘', area: '世田谷', department: '普通科', quota: 221, finalApplicants: 252, finalRate: 1.14, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '深沢', area: '世田谷', department: '普通科', quota: 142, finalApplicants: 123, finalRate: 0.87, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '松原', area: '世田谷', department: '普通科', quota: 156, finalApplicants: 219, finalRate: 1.4, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '青山', area: '渋谷', department: '普通科', quota: 221, finalApplicants: 433, finalRate: 1.96, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '広尾', area: '渋谷', department: '普通科', quota: 185, finalApplicants: 331, finalRate: 1.79, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '鷺宮', area: '中野', department: '普通科', quota: 220, finalApplicants: 362, finalRate: 1.65, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '武蔵丘', area: '中野', department: '普通科', quota: 253, finalApplicants: 391, finalRate: 1.55, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '杉並', area: '杉並', department: '普通科', quota: 253, finalApplicants: 323, finalRate: 1.28, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '豊多摩', area: '杉並', department: '普通科', quota: 252, finalApplicants: 538, finalRate: 2.13, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '西', area: '杉並', department: '普通科', quota: 252, finalApplicants: 407, finalRate: 1.62, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '豊島', area: '豊島', department: '普通科', quota: 252, finalApplicants: 534, finalRate: 2.12, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '文京', area: '豊島', department: '普通科', quota: 284, finalApplicants: 381, finalRate: 1.34, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '竹台', area: '荒川', department: '普通科', quota: 155, finalApplicants: 229, finalRate: 1.48, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '板橋', area: '板橋', department: '普通科', quota: 221, finalApplicants: 315, finalRate: 1.43, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '大山', area: '板橋', department: '普通科', quota: 137, finalApplicants: 99, finalRate: 0.72, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '北園', area: '板橋', department: '普通科', quota: 253, finalApplicants: 465, finalRate: 1.84, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '高島', area: '板橋', department: '普通科', quota: 252, finalApplicants: 273, finalRate: 1.08, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '井草', area: '練馬', department: '普通科', quota: 221, finalApplicants: 318, finalRate: 1.44, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '石神井', area: '練馬', department: '普通科', quota: 220, finalApplicants: 407, finalRate: 1.85, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '田柄', area: '練馬', department: '普通科', quota: 129, finalApplicants: 107, finalRate: 0.83, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '練馬', area: '練馬', department: '普通科', quota: 189, finalApplicants: 209, finalRate: 1.11, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '光丘', area: '練馬', department: '普通科', quota: 185, finalApplicants: 139, finalRate: 0.75, fiscalYear: '令和7年度（2025年度）' },
   ],
 };

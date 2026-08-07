@@ -20,18 +20,22 @@ describe('東京都 倍率パイプラインα（Y-2・普通科119校の突合�
     return s;
   };
 
-  it('取り込み件数は189レコード（普通科129 + 専門学科50 + 総合学科10）', () => {
-    expect(records).toHaveLength(189);
+  // ⚠️2026-08-07(掛-1横展開): 全predicateに`!r.fiscalYear`を追加し、officialSubtotals(R8のみを
+  // 集計した公式資料の「計」行)と、新規追加されたfiscalYear付きR7レコードが混ざらないようにする。
+  const isR8 = (r: (typeof records)[number]) => !r.fiscalYear;
+
+  it('R8(令和8年度・fiscalYear省略)の取り込み件数は189レコード（普通科129 + 専門学科50 + 総合学科10）', () => {
+    expect(records.filter(isR8)).toHaveLength(189);
   });
 
   it('区部57校（department=普通科）の合計が公式「区部計」と一致する', () => {
-    const result = checkAgainstSubtotal(records, findSubtotal('区部計'), (r) => r.department === '普通科' && TOKYO_23_WARDS.has(r.area ?? ''));
+    const result = checkAgainstSubtotal(records, findSubtotal('区部計'), (r) => isR8(r) && r.department === '普通科' && TOKYO_23_WARDS.has(r.area ?? ''));
     expect(result.matches).toBe(true);
-    expect(sumRecords(records.filter((r) => r.department === '普通科' && TOKYO_23_WARDS.has(r.area ?? ''))).schoolCount).toBe(57);
+    expect(sumRecords(records.filter((r) => isR8(r) && r.department === '普通科' && TOKYO_23_WARDS.has(r.area ?? ''))).schoolCount).toBe(57);
   });
 
   it('島しょ6校（department=普通科）の合計が公式「島しょ計」と一致する', () => {
-    const result = checkAgainstSubtotal(records, findSubtotal('島しょ計'), (r) => r.department === '普通科' && ISLAND_AREAS.has(r.area ?? ''));
+    const result = checkAgainstSubtotal(records, findSubtotal('島しょ計'), (r) => isR8(r) && r.department === '普通科' && ISLAND_AREAS.has(r.area ?? ''));
     expect(result.matches).toBe(true);
   });
 
@@ -39,7 +43,7 @@ describe('東京都 倍率パイプラインα（Y-2・普通科119校の突合�
     const result = checkAgainstSubtotal(
       records,
       findSubtotal('多摩部計'),
-      (r) => r.department === '普通科' && !TOKYO_23_WARDS.has(r.area ?? '') && !ISLAND_AREAS.has(r.area ?? '')
+      (r) => isR8(r) && r.department === '普通科' && !TOKYO_23_WARDS.has(r.area ?? '') && !ISLAND_AREAS.has(r.area ?? '')
     );
     expect(result.matches).toBe(true);
   });
@@ -48,53 +52,53 @@ describe('東京都 倍率パイプラインα（Y-2・普通科119校の突合�
     const result = checkAgainstSubtotal(
       records,
       findSubtotal('普通科（コース、単位制、海外帰国生徒対象以外）計＋普通科（島しょ）計'),
-      (r) => r.department === '普通科'
+      (r) => isR8(r) && r.department === '普通科'
     );
     expect(result.matches).toBe(true);
-    expect(sumRecords(records.filter((r) => r.department === '普通科')).schoolCount).toBe(107);
+    expect(sumRecords(records.filter((r) => isR8(r) && r.department === '普通科')).schoolCount).toBe(107);
   });
 
   it('コース制4校の合計が公式「コース制計」と一致する', () => {
-    const result = checkAgainstSubtotal(records, findSubtotal('コース制計'), (r) => r.department.startsWith('普通科（コース制'));
+    const result = checkAgainstSubtotal(records, findSubtotal('コース制計'), (r) => isR8(r) && r.department.startsWith('普通科（コース制'));
     expect(result.matches).toBe(true);
   });
 
   it('単位制12校の合計が公式「単位制計」と一致する', () => {
-    const result = checkAgainstSubtotal(records, findSubtotal('単位制計'), (r) => r.department === '普通科（単位制）');
+    const result = checkAgainstSubtotal(records, findSubtotal('単位制計'), (r) => isR8(r) && r.department === '普通科（単位制）');
     expect(result.matches).toBe(true);
   });
 
   it('海外帰国生徒対象6校（帰国3+引揚3）の合計が公式「海外帰国生徒対象計」と一致する', () => {
-    const result = checkAgainstSubtotal(records, findSubtotal('海外帰国生徒対象計'), (r) => r.department.startsWith('普通科（海外帰国生徒対象'));
+    const result = checkAgainstSubtotal(records, findSubtotal('海外帰国生徒対象計'), (r) => isR8(r) && r.department.startsWith('普通科（海外帰国生徒対象'));
     expect(result.matches).toBe(true);
   });
 
   it('帰国対象3校・引揚対象3校それぞれの内訳も公式値と一致する', () => {
-    const kikoku = checkAgainstSubtotal(records, findSubtotal('帰国対象計'), (r) => r.department === '普通科（海外帰国生徒対象・帰国生）');
-    const hikiage = checkAgainstSubtotal(records, findSubtotal('引揚対象計'), (r) => r.department === '普通科（海外帰国生徒対象・引揚者）');
+    const kikoku = checkAgainstSubtotal(records, findSubtotal('帰国対象計'), (r) => isR8(r) && r.department === '普通科（海外帰国生徒対象・帰国生）');
+    const hikiage = checkAgainstSubtotal(records, findSubtotal('引揚対象計'), (r) => isR8(r) && r.department === '普通科（海外帰国生徒対象・引揚者）');
     expect(kikoku.matches).toBe(true);
     expect(hikiage.matches).toBe(true);
   });
 
   it('普通科119校（department先頭が"普通科"の129レコード）が公式「普通科計」と一致する', () => {
-    const result = checkAgainstSubtotal(records, findSubtotal('普通科計'), (r) => r.department.startsWith('普通科'));
+    const result = checkAgainstSubtotal(records, findSubtotal('普通科計'), (r) => isR8(r) && r.department.startsWith('普通科'));
     expect(result.matches).toBe(true);
   });
 
   it('専門学科13学科・合計38校の各カテゴリが公式の「計」行と一致する', () => {
     const checks: Array<[string, (r: (typeof records)[number]) => boolean]> = [
-      ['商業計', (r) => r.department === '商業科'],
-      ['ビジネスコミュニケーション科計', (r) => r.department === 'ビジネスコミュニケーション科'],
-      ['科学技術科計', (r) => r.department === '科学技術科'],
-      ['農業計', (r) => r.department === '農業科'],
-      ['水産計', (r) => r.department === '水産科'],
-      ['福祉計', (r) => r.department === '福祉科'],
-      ['理数計', (r) => r.department === '理数科'],
-      ['芸術計', (r) => r.department === '芸術科'],
-      ['体育計', (r) => r.department === '体育科'],
-      ['国際計', (r) => r.department === '国際科'],
-      ['併合科計', (r) => r.department.startsWith('併合科')],
-      ['産業科計', (r) => r.department === '産業科'],
+      ['商業計', (r) => isR8(r) && r.department === '商業科'],
+      ['ビジネスコミュニケーション科計', (r) => isR8(r) && r.department === 'ビジネスコミュニケーション科'],
+      ['科学技術科計', (r) => isR8(r) && r.department === '科学技術科'],
+      ['農業計', (r) => isR8(r) && r.department === '農業科'],
+      ['水産計', (r) => isR8(r) && r.department === '水産科'],
+      ['福祉計', (r) => isR8(r) && r.department === '福祉科'],
+      ['理数計', (r) => isR8(r) && r.department === '理数科'],
+      ['芸術計', (r) => isR8(r) && r.department === '芸術科'],
+      ['体育計', (r) => isR8(r) && r.department === '体育科'],
+      ['国際計', (r) => isR8(r) && r.department === '国際科'],
+      ['併合科計', (r) => isR8(r) && r.department.startsWith('併合科')],
+      ['産業科計', (r) => isR8(r) && r.department === '産業科'],
     ];
     for (const [label, predicate] of checks) {
       const result = checkAgainstSubtotal(records, findSubtotal(label), predicate);
@@ -103,12 +107,12 @@ describe('東京都 倍率パイプラインα（Y-2・普通科119校の突合�
   });
 
   it('工業科（単位制以外15校+単位制1校=16校）の合計が公式「工業計」と一致する', () => {
-    const result = checkAgainstSubtotal(records, findSubtotal('工業計'), (r) => r.department === '工業科' || r.department === '工業科（単位制）');
+    const result = checkAgainstSubtotal(records, findSubtotal('工業計'), (r) => isR8(r) && (r.department === '工業科' || r.department === '工業科（単位制）'));
     expect(result.matches).toBe(true);
   });
 
   it('家庭科（単位制以外3校+単位制1校=4校）の合計が公式「家庭合計」と一致する', () => {
-    const result = checkAgainstSubtotal(records, findSubtotal('家庭合計'), (r) => r.department === '家庭科' || r.department === '家庭科（単位制）');
+    const result = checkAgainstSubtotal(records, findSubtotal('家庭合計'), (r) => isR8(r) && (r.department === '家庭科' || r.department === '家庭科（単位制）'));
     expect(result.matches).toBe(true);
   });
 
@@ -120,22 +124,33 @@ describe('東京都 倍率パイプラインα（Y-2・普通科119校の突合�
     const result = checkAgainstSubtotal(
       records,
       findSubtotal('専門学科合計'),
-      (r) => SENMON_DEPARTMENTS.has(r.department) || r.department.startsWith('併合科')
+      (r) => isR8(r) && (SENMON_DEPARTMENTS.has(r.department) || r.department.startsWith('併合科'))
     );
     expect(result.matches).toBe(true);
   });
 
   it('総合学科10校の合計が公式「総合学科計」と一致する', () => {
-    const result = checkAgainstSubtotal(records, findSubtotal('総合学科計'), (r) => r.department === '総合学科');
+    const result = checkAgainstSubtotal(records, findSubtotal('総合学科計'), (r) => isR8(r) && r.department === '総合学科');
     expect(result.matches).toBe(true);
-    expect(sumRecords(records.filter((r) => r.department === '総合学科')).schoolCount).toBe(10);
+    expect(sumRecords(records.filter((r) => isR8(r) && r.department === '総合学科')).schoolCount).toBe(10);
   });
 
-  it('全189レコードの合計が公式「全日制合計」167校・30,439・38,148と完全一致する（Y-2東京都の最終DoD）', () => {
-    const result = checkAgainstSubtotal(records, findSubtotal('全日制合計'), () => true);
+  it('R8の全189レコードの合計が公式「全日制合計」167校・30,439・38,148と完全一致する（Y-2東京都の最終DoD）', () => {
+    const result = checkAgainstSubtotal(records, findSubtotal('全日制合計'), isR8);
     expect(result.matches).toBe(true);
     expect(result.actualQuota).toBe(30439);
     expect(result.actualApplicants).toBe(38148);
+  });
+
+  it('掛-1(学校別×多年度): 令和7年度(R7)分レコードが43件収録され、区市町村+学校名+学科の重複が無い', () => {
+    const r7 = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
+    expect(r7.length).toBe(43);
+    const seen = new Set<string>();
+    for (const r of r7) {
+      const key = `${r.area}|${r.schoolName}|${r.department}`;
+      expect(seen.has(key)).toBe(false);
+      seen.add(key);
+    }
   });
 
   it('全レコードのquota>0・finalApplicants>=0・finalRateが概算で整合する', () => {
