@@ -6,10 +6,11 @@ import { OITA_COMPETITION_RATES } from '../oita';
  */
 describe('大分県 倍率パイプラインα（Y-6・全日制39校81レコードの完全収録テスト）', () => {
   const { records, officialSubtotals } = OITA_COMPETITION_RATES;
+  const r8 = records.filter((r) => !r.fiscalYear);
 
   it('全日制の全レコード合計が「県立高校全日制課程合計」行（quota5,806・applicants5,969）と完全一致する', () => {
     const grandTotal = officialSubtotals.find((s) => s.label === '全日制計')!;
-    const result = checkAgainstSubtotal(records, grandTotal, () => true);
+    const result = checkAgainstSubtotal(records, grandTotal, (r) => !r.fiscalYear);
     expect(result.matches).toBe(true);
   });
 
@@ -21,11 +22,11 @@ describe('大分県 倍率パイプラインα（Y-6・全日制39校81レコー
     }
   });
 
-  it('学校名+学科名の重複が無い', () => {
+  it('学校名+学科名+年度の重複が無い', () => {
     const seen = new Set<string>();
     const dupes: string[] = [];
     for (const r of records) {
-      const key = `${r.schoolName}|${r.department}`;
+      const key = `${r.schoolName}|${r.department}|${r.fiscalYear ?? ''}`;
       if (seen.has(key)) dupes.push(key);
       seen.add(key);
     }
@@ -37,8 +38,8 @@ describe('大分県 倍率パイプラインα（Y-6・全日制39校81レコー
   });
 
   it('81レコード・39校が収録されている', () => {
-    expect(records.length).toBe(81);
-    const distinctSchools = new Set(records.map((r) => r.schoolName));
+    expect(r8.length).toBe(81);
+    const distinctSchools = new Set(r8.map((r) => r.schoolName));
     expect(distinctSchools.size).toBe(39);
   });
 
@@ -70,6 +71,21 @@ describe('大分県 倍率パイプラインα（Y-6・全日制39校81レコー
       finalApplicants: 0,
       finalRate: 0,
     });
+  });
+
+  it('掛-1(学校別×多年度): 令和7年度(R7)分レコードが82件収録され、「県立高校全日制課程合計」(quota5,666・applicants5,783)と完全一致する。学校名のキー集合はR8と完全一致(統廃合なし)。大分東はR7時点は普通・園芸ビジネス・園芸デザインの3学科すべてに独立した数値が公表されておりくくり募集ではなかった(R8は園芸ビジネス・園芸デザインのみくくり募集化した実際のPDFレイアウト差で、R7が39校82レコードとR8の81レコードより1件多い理由)', () => {
+    const r7 = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
+    expect(r7.length).toBe(82);
+    expect(r7.reduce((a, r) => a + r.quota, 0)).toBe(5666);
+    expect(r7.reduce((a, r) => a + r.finalApplicants, 0)).toBe(5783);
+
+    expect(r7.some((r) => r.schoolName === '大分東' && r.department === '園芸ビジネス')).toBe(true);
+    expect(r7.some((r) => r.schoolName === '大分東' && r.department === '園芸デザイン')).toBe(true);
+
+    const r7Schools = new Set(r7.map((r) => r.schoolName));
+    const r8Schools = new Set(r8.map((r) => r.schoolName));
+    expect(r7Schools.size).toBe(39);
+    expect([...r7Schools].every((s) => r8Schools.has(s))).toBe(true);
   });
 
   it('sourcesが公式PDF URLを正しく記録している', () => {
