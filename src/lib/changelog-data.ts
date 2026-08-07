@@ -14,6 +14,14 @@ export interface ChangeLogEntry {
 
 export const CHANGELOG: ChangeLogEntry[] = [
   {
+    date: '2026-08-07',
+    type: 'add',
+    category: 'content',
+    title: '不登校の記事に「この先は誰に相談すればいいか」の参考リンクを追加',
+    description:
+      '当サイトは内申点の計算に特化しており、学習支援や心理面のサポートそのものは扱っていません。制度を理解したあとに支援先を探す段階の方に向けて、不登校・発達障害を専門とする外部サイトの解説記事を参考リンクとして追加しました。',
+  },
+  {
     date: '2026-08-02',
     prefectureCode: 'akita',
     type: 'add',
