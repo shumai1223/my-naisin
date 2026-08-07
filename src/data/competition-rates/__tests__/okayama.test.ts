@@ -2,7 +2,7 @@ import { checkAgainstSubtotal } from '@/lib/competition-rate';
 import { OKAYAMA_COMPETITION_RATES } from '../okayama';
 
 /**
- * Y-6 DoD検証（岡山県・7県目・全日制完全達成）。
+ * Y-6 DoD検証（岡山県・7県目・全日制完全達成／掛-1・R7多年度対応済）。
  *
  * 県立全日制（49校106レコード）と市立全日制（岡山後楽館・玉野商工の2校3レコード）の両方が
  * PDF1ページ目「総括表（全国募集を除く）」記載のグランドトータルと完全一致する。くくり募集
@@ -12,16 +12,17 @@ const OKAYAMA_MUNICIPAL_SCHOOLS = ['岡山後楽館', '玉野商工'];
 
 describe('岡山県 倍率パイプラインα（Y-6・全日制49校+2校＝109レコードの完全収録テスト）', () => {
   const { records, officialSubtotals } = OKAYAMA_COMPETITION_RATES;
+  const r8 = records.filter((r) => !r.fiscalYear);
 
   it('県立全日制の合計が総括表記載のグランドトータル（quota5,698・applicants5,650・倍率0.99）と完全一致する', () => {
     const grandTotal = officialSubtotals.find((s) => s.label === '県立全日制計')!;
-    const result = checkAgainstSubtotal(records, grandTotal, (r) => !OKAYAMA_MUNICIPAL_SCHOOLS.includes(r.schoolName));
+    const result = checkAgainstSubtotal(records, grandTotal, (r) => !r.fiscalYear && !OKAYAMA_MUNICIPAL_SCHOOLS.includes(r.schoolName));
     expect(result.matches).toBe(true);
   });
 
   it('市立全日制の合計が総括表記載のグランドトータル（quota63・applicants54・倍率0.86）と完全一致する', () => {
     const grandTotal = officialSubtotals.find((s) => s.label === '市立全日制計')!;
-    const result = checkAgainstSubtotal(records, grandTotal, (r) => OKAYAMA_MUNICIPAL_SCHOOLS.includes(r.schoolName));
+    const result = checkAgainstSubtotal(records, grandTotal, (r) => !r.fiscalYear && OKAYAMA_MUNICIPAL_SCHOOLS.includes(r.schoolName));
     expect(result.matches).toBe(true);
   });
 
@@ -33,11 +34,11 @@ describe('岡山県 倍率パイプラインα（Y-6・全日制49校+2校＝109
     }
   });
 
-  it('学校名+学科名の重複が無い', () => {
+  it('学校名+学科名+年度の重複が無い', () => {
     const seen = new Set<string>();
     const dupes: string[] = [];
     for (const r of records) {
-      const key = `${r.schoolName}|${r.department}`;
+      const key = `${r.schoolName}|${r.department}|${r.fiscalYear ?? ''}`;
       if (seen.has(key)) dupes.push(key);
       seen.add(key);
     }
@@ -49,8 +50,8 @@ describe('岡山県 倍率パイプラインα（Y-6・全日制49校+2校＝109
   });
 
   it('109レコード・51校が収録されている（県立49校＋市立2校）', () => {
-    expect(records.length).toBe(109);
-    const distinctSchools = new Set(records.map((r) => r.schoolName));
+    expect(r8.length).toBe(109);
+    const distinctSchools = new Set(r8.map((r) => r.schoolName));
     expect(distinctSchools.size).toBe(51);
   });
 
@@ -66,15 +67,15 @@ describe('岡山県 倍率パイプラインα（Y-6・全日制49校+2校＝109
       { schoolName: '津山商業', department: '地域ビジネス・情報ビジネス（くくり募集）', quota: 37, finalApplicants: 29, finalRate: 0.78 },
     ];
     for (const c of cases) {
-      const rec = records.find((r) => r.schoolName === c.schoolName && r.department === c.department);
+      const rec = r8.find((r) => r.schoolName === c.schoolName && r.department === c.department);
       expect(rec).toEqual(c);
     }
   });
 
   it('学校名なしで出現しやすい罠のあった津山東・玉野光南の学科が正しく収録されている', () => {
-    expect(records.filter((r) => r.schoolName === '津山東')).toHaveLength(3);
-    expect(records.filter((r) => r.schoolName === '玉野光南')).toHaveLength(2);
-    const tsuyamaHigashiFutsu = records.find((r) => r.schoolName === '津山東' && r.department === '普通');
+    expect(r8.filter((r) => r.schoolName === '津山東')).toHaveLength(3);
+    expect(r8.filter((r) => r.schoolName === '玉野光南')).toHaveLength(2);
+    const tsuyamaHigashiFutsu = r8.find((r) => r.schoolName === '津山東' && r.department === '普通');
     expect(tsuyamaHigashiFutsu).toEqual({ schoolName: '津山東', department: '普通', quota: 120, finalApplicants: 118, finalRate: 0.98 });
   });
 
@@ -108,8 +109,31 @@ describe('岡山県 倍率パイプラインα（Y-6・全日制49校+2校＝109
       玉野商工: 2,
     };
     for (const [name, count] of Object.entries(multiDeptSchools)) {
-      const schoolRecords = records.filter((r) => r.schoolName === name);
+      const schoolRecords = r8.filter((r) => r.schoolName === name);
       expect(schoolRecords.length).toBe(count);
+    }
+  });
+
+  it('掛-1(学校別×多年度): 令和7年度(R7)分レコードが112件・52校収録され、県立全日制/市立全日制それぞれ公式グランドトータル(5,729/5,968・73/42)と完全一致する。岡山御津・井原グリーンライフ(R7のみ実在)・津山理数(R7は0で除外)・興陽家政+被服デザイン(R8でライフデザインへ統合)の5件を除けばR7/R8で学校名+学科名が完全一致する', () => {
+    const r7 = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
+    expect(r7.length).toBe(112);
+    const distinctSchools = new Set(r7.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(52);
+
+    const r7Pref = r7.filter((r) => !OKAYAMA_MUNICIPAL_SCHOOLS.includes(r.schoolName));
+    const r7City = r7.filter((r) => OKAYAMA_MUNICIPAL_SCHOOLS.includes(r.schoolName));
+    expect(r7Pref.reduce((a, r) => a + r.quota, 0)).toBe(5729);
+    expect(r7Pref.reduce((a, r) => a + r.finalApplicants, 0)).toBe(5968);
+    expect(r7City.reduce((a, r) => a + r.quota, 0)).toBe(73);
+    expect(r7City.reduce((a, r) => a + r.finalApplicants, 0)).toBe(42);
+
+    const r7OnlyKeys = new Set(['興陽|家政', '興陽|被服デザイン', '岡山御津|キャリアデザイン', '津山|普通', '井原|地域生活＜グリーンライフ＞']);
+    const r8OnlyKeys = new Set(['興陽|ライフデザイン', '津山|普通・理数（くくり募集）']);
+    const r8Keys = new Set(r8.map((r) => `${r.schoolName}|${r.department}`).filter((k) => !r8OnlyKeys.has(k)));
+    const r7Keys = new Set(r7.map((r) => `${r.schoolName}|${r.department}`).filter((k) => !r7OnlyKeys.has(k)));
+    expect(r7Keys.size).toBe(r8Keys.size);
+    for (const key of r7Keys) {
+      expect(r8Keys.has(key)).toBe(true);
     }
   });
 
