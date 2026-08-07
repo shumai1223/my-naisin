@@ -123,7 +123,15 @@ export const TOKYO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '7校＋「7[ビジネスコミュニケーション科]」2校を追加した。学校構成はR8と完全一致し、印字小計' +
       '「商業計792/777/0.98」「ビジネスコミュニケーション科計231/245/1.06」ともquota/applicants' +
       '合計が完全一致(node.jsで機械計算し確認)。残り7頁(工業/科学技術/農業/水産/家庭/福祉/理数/' +
-      '芸術/体育/国際/併合/産業の11学科＋総合学科)は次回以降のセッションで継続する。',
+      '芸術/体育/国際/併合/産業の11学科＋総合学科)は次回以降のセッションで継続する。' +
+      '⚠️追記(掛-1第6弾): 2頁目「8[工業に関する学科(単位制以外の学校)]」11校を追加した。この頁は' +
+      '学校ごとに複数の学科・コース(例: 工芸=マシンクラフト/アートクラフト/インテリア/デザイン/' +
+      'グラフィックアーツの5コース)に分かれ、頁内に学校ごとの「計」行が印字されている。R8のtokyo.ts' +
+      'は各校を1レコードに集約(学校名+department"工業科"の単一レコードでコース別内訳は持たない)して' +
+      'いるため、R7もこの「計」行の値をそのまま1校1レコードとして収録した(コース別の内訳は非収録)。' +
+      '11校(工芸・蔵前工科・墨田工科・総合工科・中野工科・杉並工科・荒川工科・北豊島工科・練馬工科・' +
+      '足立工科・葛西工科)全てR8と学校構成が一致。工業科は全15校のためR8にある残り4校(府中工科・' +
+      '町田工科・多摩工科・田無工科)は次頁(3頁目)に続く見込み。',
   },
   officialSubtotals: [
     { label: '区部計', schoolCount: 57, quota: 12088, finalApplicants: 16926, finalRate: 1.4 },
@@ -540,5 +548,17 @@ export const TOKYO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '第五商業', area: '国立', department: '商業科', quota: 126, finalApplicants: 164, finalRate: 1.3, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '大田桜台', area: '大田', department: 'ビジネスコミュニケーション科', quota: 105, finalApplicants: 81, finalRate: 0.77, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '千早', area: '豊島', department: 'ビジネスコミュニケーション科', quota: 126, finalApplicants: 164, finalRate: 1.3, fiscalYear: '令和7年度（2025年度）' },
+    // 掛-1横展開第6弾: R7分・個票PDF004の2頁目(工業に関する学科・単位制以外11校・学校ごとの計行を採用)。
+    { schoolName: '工芸', area: '文京', department: '工業科', quota: 125, finalApplicants: 203, finalRate: 1.62, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '蔵前工科', area: '台東', department: '工業科', quota: 111, finalApplicants: 79, finalRate: 0.71, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '墨田工科', area: '江東', department: '工業科', quota: 119, finalApplicants: 84, finalRate: 0.71, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '総合工科', area: '世田谷', department: '工業科', quota: 105, finalApplicants: 61, finalRate: 0.58, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '中野工科', area: '中野', department: '工業科', quota: 63, finalApplicants: 55, finalRate: 0.87, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '杉並工科', area: '杉並', department: '工業科', quota: 118, finalApplicants: 31, finalRate: 0.26, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '荒川工科', area: '荒川', department: '工業科', quota: 112, finalApplicants: 53, finalRate: 0.47, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '北豊島工科', area: '板橋', department: '工業科', quota: 97, finalApplicants: 48, finalRate: 0.49, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '練馬工科', area: '練馬', department: '工業科', quota: 88, finalApplicants: 53, finalRate: 0.6, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '足立工科', area: '足立', department: '工業科', quota: 101, finalApplicants: 83, finalRate: 0.82, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '葛西工科', area: '江戸川', department: '工業科', quota: 115, finalApplicants: 79, finalRate: 0.69, fiscalYear: '令和7年度（2025年度）' },
   ],
 };

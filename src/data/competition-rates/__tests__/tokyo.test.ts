@@ -142,9 +142,9 @@ describe('東京都 倍率パイプラインα（Y-2・普通科119校の突合�
     expect(result.actualApplicants).toBe(38148);
   });
 
-  it('掛-1(学校別×多年度): 令和7年度(R7)分レコードが138件収録され、区市町村+学校名+学科の重複が無い', () => {
+  it('掛-1(学校別×多年度): 令和7年度(R7)分レコードが149件収録され、区市町村+学校名+学科の重複が無い', () => {
     const r7 = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
-    expect(r7.length).toBe(138);
+    expect(r7.length).toBe(149);
     const seen = new Set<string>();
     for (const r of r7) {
       const key = `${r.area}|${r.schoolName}|${r.department}`;
