@@ -86,8 +86,14 @@ export const TOKYO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       'ページ内小計「区部計 12,036/17,140/1.42」が印字されており、1頁目(43校)+2頁目区部残り(15校・' +
       '深沢含む)=58校のquota合計8951+3085=12036・applicants合計13460+3680=17140と両方とも完全一致' +
       '(node.jsで機械計算し確認)。**この58という数はR8の区部57校+1(深沢が単位制へ移行する前のR7時点' +
-      'ではまだ区部の通常表に含まれていたため)で説明がつき、転記精度の傍証になる**。多摩部は次回3頁目' +
-      'で完結見込み。',
+      'ではまだ区部の通常表に含まれていたため)で説明がつき、転記精度の傍証になる**。' +
+      '⚠️追記(3頁目・多摩部残り14校+島しょ6校=20校): これで個票PDF「1[普通科(コース、単位制以外の' +
+      '学校)]」(2025-02-13-002)は完結(区部58+多摩部44+島しょ6=108校)。頁末尾の「多摩部計' +
+      '9,219/11,703/1.27」小計と、2頁目多摩部30校+3頁目多摩部14校=44校のquota/applicants合計が' +
+      '両方とも完全一致(9219/11703・node.jsで機械計算し確認)。多摩部44校という数もR8の多摩部44校と' +
+      '完全一致し、区部(深沢の分類差1校を除き)・多摩部・島しょいずれも学校数の整合が取れている。' +
+      '次回は002以外のPDF(コース制/単位制/海外帰国生徒対象=003、専門学科13学科・総合学科=03-3-v2)' +
+      'のR7版を同じ過去ページから探して横展開する。',
   },
   officialSubtotals: [
     { label: '区部計', schoolCount: 57, quota: 12088, finalApplicants: 16926, finalRate: 1.4 },
@@ -451,5 +457,26 @@ export const TOKYO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '南平', area: '日野', department: '普通科', quota: 253, finalApplicants: 364, finalRate: 1.44, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '東村山', area: '東村山', department: '普通科', quota: 116, finalApplicants: 178, finalRate: 1.53, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '東村山西', area: '東村山', department: '普通科', quota: 189, finalApplicants: 166, finalRate: 0.88, fiscalYear: '令和7年度（2025年度）' },
+    // 掛-1横展開第3弾: R7分・個票PDF3頁目(多摩部残り14校+島しょ6校=20校)。個票PDF002はこれで完結。
+    { schoolName: '国立', area: '国立', department: '普通科', quota: 252, finalApplicants: 386, finalRate: 1.53, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '福生', area: '福生', department: '普通科', quota: 221, finalApplicants: 255, finalRate: 1.15, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '狛江', area: '狛江', department: '普通科', quota: 253, finalApplicants: 459, finalRate: 1.81, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '東大和', area: '東大和', department: '普通科', quota: 221, finalApplicants: 221, finalRate: 1.0, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '東大和南', area: '東大和', department: '普通科', quota: 220, finalApplicants: 288, finalRate: 1.31, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '清瀬', area: '清瀬', department: '普通科', quota: 220, finalApplicants: 264, finalRate: 1.2, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '久留米西', area: '東久留米', department: '普通科', quota: 188, finalApplicants: 221, finalRate: 1.18, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '武蔵村山', area: '武蔵村山', department: '普通科', quota: 221, finalApplicants: 256, finalRate: 1.16, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '永山', area: '多摩', department: '普通科', quota: 243, finalApplicants: 235, finalRate: 0.97, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '羽村', area: '羽村', department: '普通科', quota: 172, finalApplicants: 125, finalRate: 0.73, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '秋留台', area: 'あきる野', department: '普通科', quota: 136, finalApplicants: 117, finalRate: 0.86, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '五日市', area: 'あきる野', department: '普通科', quota: 127, finalApplicants: 58, finalRate: 0.46, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '田無', area: '西東京', department: '普通科', quota: 252, finalApplicants: 305, finalRate: 1.21, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '保谷', area: '西東京', department: '普通科', quota: 253, finalApplicants: 355, finalRate: 1.4, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '大島', area: '大島', department: '普通科', quota: 80, finalApplicants: 29, finalRate: 0.36, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '新島', area: '新島', department: '普通科', quota: 40, finalApplicants: 17, finalRate: 0.43, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '神津', area: '神津島', department: '普通科', quota: 40, finalApplicants: 14, finalRate: 0.35, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '三宅', area: '三宅', department: '普通科', quota: 40, finalApplicants: 6, finalRate: 0.15, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '八丈', area: '八丈', department: '普通科', quota: 77, finalApplicants: 28, finalRate: 0.36, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '小笠原', area: '小笠原', department: '普通科', quota: 30, finalApplicants: 16, finalRate: 0.53, fiscalYear: '令和7年度（2025年度）' },
   ],
 };
