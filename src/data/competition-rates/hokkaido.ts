@@ -60,8 +60,8 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '渡島地区・全日制「普通教育を主とする学科」（令和8年度10レコード・知内高校含む）＋「専門教育を主とする学科及び総合学科」（令和8年度19レコード・資料p16掲載）＋令和7年度分普通10レコード＋専門/総合20レコード（掛-1第6弾+第7弾）',
       '檜山地区・全日制「普通教育を主とする学科」（令和8年度3レコード）＋「総合学科」（令和8年度1レコード・檜山北高校）＋令和7年度分4レコード（掛-1第7弾）',
       '上川地区・全日制「普通教育を主とする学科」（令和8年度14レコード、資料p17上表）＋「専門教育を主とする学科及び総合学科」（令和8年度23レコード、資料p17下表）＋令和7年度分37レコード（普通14+専門/総合23・掛-1第8弾・学校構成はR8と完全一致）',
-      '留萌地区・全日制「普通教育を主とする学科」（3レコード）＋「専門教育を主とする学科」（4レコード、資料p18掲載）',
-      '宗谷地区・全日制「普通教育を主とする学科」（6レコード）＋「専門教育を主とする学科」（2レコード、資料p18掲載）',
+      '留萌地区・全日制「普通教育を主とする学科」（令和8年度3レコード）＋「専門教育を主とする学科」（令和8年度4レコード、資料p18掲載）＋令和7年度分7レコード（掛-1第9弾）',
+      '宗谷地区・全日制「普通教育を主とする学科」（令和8年度6レコード）＋「専門教育を主とする学科」（令和8年度2レコード、資料p18掲載）＋令和7年度分8レコード（掛-1第9弾）',
       'オホーツク地区・全日制「普通教育を主とする学科」（16レコード）＋「専門教育を主とする学科及び総合学科」（15レコード、資料p19掲載）',
       '十勝地区・全日制「普通教育を主とする学科」（12レコード）＋「専門教育を主とする学科及び総合学科」（16レコード、資料p20掲載）',
       '釧路地区・全日制「普通教育を主とする学科」（9レコード）＋「専門教育を主とする学科及び総合学科」（12レコード、資料p21掲載・連携型テーブルなし）',
@@ -177,7 +177,12 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '旭川西理数・おといねっぷ美術工芸・旭川農業4学科・富良野2学科・旭川工業6学科・名寄情報技術・' +
       '旭川商業4学科・士別翔雲総合ビジネス・下川商業・旭川南総合・剣淵総合)。上川高校の普通科' +
       '(連携型)もR8同様出願者数/倍率列なしでスコープ外のまま。pdftotext -layoutの数値列と全37行を' +
-      '行順突合した(結合セルなし・300dpiで学科名明瞭)。',
+      '行順突合した(結合セルなし・300dpiで学科名明瞭)。' +
+      '⚠️2026-08-07追記12(掛-1第9弾): 留萌地区のR7分7レコード(普通3+専門4)と宗谷地区のR7分8' +
+      'レコード(普通6+専門2)も追加した(PDF内部頁10=印字ページ18)。学校・学科構成はR8と完全一致' +
+      '(留萌普通=留萌・羽幌・天塩、専門=遠別農業生産科学・留萌電気建築/情報ビジネス・苫前商業。' +
+      '宗谷普通=稚内・豊富・浜頓別・枝幸・利尻・礼文、専門=稚内商業・衛生看護)。pdftotext -layout' +
+      'の数値列と全15行を行順突合した(結合セルなし)。',
   },
   officialSubtotals: [],
   records: [
@@ -734,5 +739,22 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '下川商業', department: '商業', quota: 40, finalApplicants: 32, finalRate: 0.8, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '旭川南', department: '総合', quota: 200, finalApplicants: 259, finalRate: 1.3, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '剣淵', department: '総合', quota: 40, finalApplicants: 18, finalRate: 0.45, fiscalYear: '令和7年度（2025年度）' },
+    // 掛-1第9弾: 留萌地区・令和7年度（2025年度）分。
+    { schoolName: '留萌', department: '普通', quota: 160, finalApplicants: 102, finalRate: 0.64, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '羽幌', department: '普通', quota: 80, finalApplicants: 41, finalRate: 0.51, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '天塩', department: '普通', quota: 40, finalApplicants: 15, finalRate: 0.38, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '遠別農業', department: '生産科学', quota: 40, finalApplicants: 17, finalRate: 0.43, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '留萌', department: '電気・建築', quota: 40, finalApplicants: 13, finalRate: 0.33, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '留萌', department: '情報ビジネス', quota: 40, finalApplicants: 10, finalRate: 0.25, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '苫前商業', department: '商業', quota: 40, finalApplicants: 32, finalRate: 0.8, fiscalYear: '令和7年度（2025年度）' },
+    // 掛-1第9弾: 宗谷地区・令和7年度（2025年度）分。
+    { schoolName: '稚内', department: '普通', quota: 120, finalApplicants: 106, finalRate: 0.88, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '豊富', department: '普通', quota: 40, finalApplicants: 27, finalRate: 0.68, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '浜頓別', department: '普通', quota: 40, finalApplicants: 19, finalRate: 0.48, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '枝幸', department: '普通', quota: 80, finalApplicants: 32, finalRate: 0.4, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '利尻', department: '普通', quota: 40, finalApplicants: 16, finalRate: 0.4, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '礼文', department: '普通', quota: 40, finalApplicants: 17, finalRate: 0.43, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '稚内', department: '商業', quota: 40, finalApplicants: 27, finalRate: 0.68, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '稚内', department: '衛生看護', quota: 40, finalApplicants: 16, finalRate: 0.4, fiscalYear: '令和7年度（2025年度）' },
   ],
 };
