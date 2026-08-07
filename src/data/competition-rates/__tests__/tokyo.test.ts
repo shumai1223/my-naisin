@@ -260,6 +260,33 @@ describe('東京都 倍率パイプラインα（Y-2・普通科119校の突合�
     expect(heigou.reduce((a, r) => a + r.finalApplicants, 0)).toBe(18);
   });
 
+  it('掛-1(学校別×多年度・R5第1弾): 令和5年度(R5)分の普通科(区部)58校が収録され、区市町村+学校名+学科の重複が無い。杉並「西」は令和5年2月21日訂正後の値(女230・計463)を採用', () => {
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    expect(r5.length).toBe(58);
+    expect(r5.reduce((a, r) => a + r.quota, 0)).toBe(12531);
+    expect(r5.reduce((a, r) => a + r.finalApplicants, 0)).toBe(19195);
+
+    const seen = new Set<string>();
+    for (const r of r5) {
+      const key = `${r.area}|${r.schoolName}|${r.department}`;
+      expect(seen.has(key)).toBe(false);
+      seen.add(key);
+    }
+
+    expect(r5.find((r) => r.schoolName === '西' && r.area === '杉並')).toEqual({
+      schoolName: '西',
+      area: '杉並',
+      department: '普通科',
+      quota: 253,
+      finalApplicants: 463,
+      finalRate: 1.83,
+      fiscalYear: '令和5年度（2023年度）',
+    });
+
+    const kuBu = r5.filter((r) => TOKYO_23_WARDS.has(r.area ?? ''));
+    expect(kuBu.length).toBe(58);
+  });
+
   it('全レコードのquota>0・finalApplicants>=0・finalRateが概算で整合する', () => {
     for (const r of records) {
       expect(r.quota).toBeGreaterThan(0);
