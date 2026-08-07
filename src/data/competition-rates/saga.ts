@@ -1,5 +1,5 @@
 /**
- * 佐賀県 公立高等学校 倍率パイプラインα（Y-6・19県目・全日制完全達成）。
+ * 佐賀県 公立高等学校 倍率パイプラインα（Y-6・19県目・全日制完全達成／掛-1・R7多年度対応済）。
  *
  * 一次ソース: 佐賀県教育委員会「令和8年度佐賀県立高等学校入学者選抜一般選抜志願状況（志願変更後）」
  * （訂正版・2月25日公表・全3ページ）。
@@ -25,6 +25,12 @@
  *
  * 機械集計（quota4,212・applicants4,191・倍率1.00、32校71レコード）が「合計」行と完全一致した
  * （初回転記で一致・再修正なし）。定時制課程は他県と同じ理由でスコープ外。
+ *
+ * ⚠️掛-1（R7追加時に判明）: R7（令和7年度）とR8を突合したところ2校で新設学科を検出した。
+ * いずれもWebSearchで公式発表を裏取り済みの実際の学科改編で誤読ではない: ①神埼「こども教育進学
+ * コース」はR8（2026年度）新設（佐賀新聞記事で確認・R7は普通科単独120名）。②唐津青翔
+ * 「eスポーツ学科」もR8新設（全日制公立高校として全国初・2025年6月佐賀県教育委員会公表）。
+ * この2件を除けばR7/R8で学校名+学科名は完全一致（70レコード＝R8の71からeスポーツ学科の1件少ない）。
  */
 import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
 
@@ -36,6 +42,12 @@ export const SAGA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       docTitle: '佐賀県教育委員会 令和8年度佐賀県立高等学校入学者選抜一般選抜志願状況（志願変更後・訂正版）',
       fiscalYear: '令和8年度（2026年度）',
       fetchedAt: '2026-07-25',
+    },
+    {
+      url: 'https://www.pref.saga.lg.jp/kyouiku/kiji003111936/3_111936_345623_up_nh8p0xkw.pdf',
+      docTitle: '佐賀県教育委員会 令和7年度佐賀県立高等学校入学者選抜一般選抜志願状況（志願変更後）',
+      fiscalYear: '令和7年度（2025年度）',
+      fetchedAt: '2026-08-07',
     },
   ],
   coverage: {
@@ -129,5 +141,90 @@ export const SAGA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '多久', department: '総合学科', quota: 103, finalApplicants: 80, finalRate: 0.78 },
     { schoolName: '唐津青翔', department: '総合学科', quota: 43, finalApplicants: 39, finalRate: 0.91 },
     { schoolName: '唐津青翔', department: 'eスポーツ学科', quota: 12, finalApplicants: 15, finalRate: 1.25 },
+    // 掛-1（学校別×多年度）: 令和7年度（2025年度）分。神埼はこども教育進学コース新設前、唐津青翔はeスポーツ学科新設前の学科構成。
+    { schoolName: '鳥栖', department: '普通科', quota: 114, finalApplicants: 127, finalRate: 1.11, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '三養基', department: '普通科', quota: 179, finalApplicants: 198, finalRate: 1.11, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '神埼', department: '普通科', quota: 102, finalApplicants: 75, finalRate: 0.74, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '佐賀東', department: '普通科・スポーツ科（くくり募集）', quota: 177, finalApplicants: 161, finalRate: 0.91, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '佐賀西', department: '普通科', quota: 280, finalApplicants: 338, finalRate: 1.21, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '佐賀北', department: '普通科', quota: 205, finalApplicants: 289, finalRate: 1.41, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '佐賀北', department: '芸術科', quota: 24, finalApplicants: 26, finalRate: 1.08, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '致遠館', department: '普通科', quota: 66, finalApplicants: 83, finalRate: 1.26, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '致遠館', department: '理数科', quota: 59, finalApplicants: 56, finalRate: 0.95, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '小城', department: '普通科', quota: 175, finalApplicants: 208, finalRate: 1.19, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '唐津東', department: '普通科', quota: 122, finalApplicants: 137, finalRate: 1.12, fiscalYear: '令和7年度（2025年度）' },
+    {
+      schoolName: '唐津西',
+      department: '普通科・地域探究進学コース・学際探究進学コース（くくり募集）',
+      quota: 132,
+      finalApplicants: 99,
+      finalRate: 0.75,
+      fiscalYear: '令和7年度（2025年度）',
+    },
+    { schoolName: '厳木', department: '普通科（総合評価枠）', quota: 38, finalApplicants: 28, finalRate: 0.74, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '厳木', department: '普通科（重点評価枠）', quota: 40, finalApplicants: 49, finalRate: 1.23, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '伊万里', department: '普通科・MIRAI進学科（くくり募集）', quota: 153, finalApplicants: 134, finalRate: 0.88, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '武雄', department: '普通科', quota: 114, finalApplicants: 142, finalRate: 1.25, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '白石', department: '普通科', quota: 106, finalApplicants: 98, finalRate: 0.92, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '白石', department: '商業科・情報ビジネス科（くくり募集）', quota: 63, finalApplicants: 74, finalRate: 1.17, fiscalYear: '令和7年度（2025年度）' },
+    {
+      schoolName: '鹿島',
+      department: '普通科・文理探求進学コース・未来探求進学コース（くくり募集）',
+      quota: 154,
+      finalApplicants: 75,
+      finalRate: 0.49,
+      fiscalYear: '令和7年度（2025年度）',
+    },
+    { schoolName: '鹿島', department: '商業科', quota: 27, finalApplicants: 26, finalRate: 0.96, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '鹿島', department: '食品調理科', quota: 33, finalApplicants: 31, finalRate: 0.94, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '太良', department: '普通科（総合評価枠）', quota: 33, finalApplicants: 18, finalRate: 0.55, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '太良', department: '普通科（重点評価枠）', quota: 40, finalApplicants: 32, finalRate: 0.8, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '牛津', department: '生活経営科', quota: 27, finalApplicants: 21, finalRate: 0.78, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '牛津', department: '服飾デザイン科', quota: 32, finalApplicants: 12, finalRate: 0.38, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '牛津', department: '食品調理科', quota: 24, finalApplicants: 21, finalRate: 0.88, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '高志館', department: '食品流通科', quota: 38, finalApplicants: 39, finalRate: 1.03, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '高志館', department: '園芸科学科', quota: 36, finalApplicants: 21, finalRate: 0.58, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '高志館', department: '環境緑地科', quota: 31, finalApplicants: 24, finalRate: 0.77, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '唐津南', department: '生産技術科', quota: 20, finalApplicants: 28, finalRate: 1.4, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '唐津南', department: '食品流通科', quota: 18, finalApplicants: 24, finalRate: 1.33, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '唐津南', department: '生活教養科', quota: 22, finalApplicants: 26, finalRate: 1.18, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '伊万里実業', department: '生物科学科', quota: 29, finalApplicants: 37, finalRate: 1.28, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '伊万里実業', department: '森林環境科', quota: 17, finalApplicants: 15, finalRate: 0.88, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '伊万里実業', department: 'フードビジネス科', quota: 28, finalApplicants: 37, finalRate: 1.32, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '伊万里実業', department: '商業科', quota: 36, finalApplicants: 36, finalRate: 1.0, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '伊万里実業', department: '情報処理科', quota: 32, finalApplicants: 38, finalRate: 1.19, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '佐賀農業', department: '農業科学科', quota: 26, finalApplicants: 34, finalRate: 1.31, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '佐賀農業', department: '食品科学科', quota: 30, finalApplicants: 29, finalRate: 0.97, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '佐賀農業', department: '環境工学科', quota: 23, finalApplicants: 32, finalRate: 1.39, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '鳥栖工業', department: '機械科', quota: 61, finalApplicants: 56, finalRate: 0.92, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '鳥栖工業', department: '電子機械科', quota: 38, finalApplicants: 60, finalRate: 1.58, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '鳥栖工業', department: '電気科', quota: 39, finalApplicants: 24, finalRate: 0.62, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '鳥栖工業', department: '建築科', quota: 38, finalApplicants: 41, finalRate: 1.08, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '鳥栖工業', department: '土木科', quota: 33, finalApplicants: 26, finalRate: 0.79, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '佐賀工業', department: '機械科', quota: 28, finalApplicants: 44, finalRate: 1.57, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '佐賀工業', department: '機械システム科', quota: 28, finalApplicants: 28, finalRate: 1.0, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '佐賀工業', department: '電気科', quota: 32, finalApplicants: 45, finalRate: 1.41, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '佐賀工業', department: '電子科', quota: 39, finalApplicants: 38, finalRate: 0.97, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '佐賀工業', department: '情報システム科', quota: 35, finalApplicants: 43, finalRate: 1.23, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '佐賀工業', department: '建築科', quota: 29, finalApplicants: 51, finalRate: 1.76, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '唐津工業', department: '機械科', quota: 33, finalApplicants: 32, finalRate: 0.97, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '唐津工業', department: '電気科', quota: 39, finalApplicants: 31, finalRate: 0.79, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '唐津工業', department: '建築科', quota: 38, finalApplicants: 36, finalRate: 0.95, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '唐津工業', department: '土木科', quota: 40, finalApplicants: 22, finalRate: 0.55, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '有田工業', department: '機械科', quota: 31, finalApplicants: 34, finalRate: 1.1, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '有田工業', department: '電気科', quota: 40, finalApplicants: 18, finalRate: 0.45, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '有田工業', department: 'セラミック科', quota: 25, finalApplicants: 16, finalRate: 0.64, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '有田工業', department: 'デザイン科', quota: 24, finalApplicants: 22, finalRate: 0.92, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '嬉野', department: '機械科', quota: 32, finalApplicants: 37, finalRate: 1.16, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '嬉野', department: '電気科・建築科（くくり募集）', quota: 34, finalApplicants: 32, finalRate: 0.94, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '嬉野', department: '総合学科', quota: 73, finalApplicants: 41, finalRate: 0.56, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '鳥栖商業', department: '商業科・流通経済科（くくり募集）', quota: 101, finalApplicants: 112, finalRate: 1.11, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '鳥栖商業', department: '情報管理科', quota: 37, finalApplicants: 33, finalRate: 0.89, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '佐賀商業', department: '商業科・グローバルビジネス科（くくり募集）', quota: 158, finalApplicants: 205, finalRate: 1.3, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '佐賀商業', department: '情報処理科', quota: 38, finalApplicants: 44, finalRate: 1.16, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '唐津商業', department: '商業科・会計科（くくり募集）', quota: 141, finalApplicants: 162, finalRate: 1.15, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '神埼清明', department: '総合学科', quota: 139, finalApplicants: 143, finalRate: 1.03, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '多久', department: '総合学科', quota: 106, finalApplicants: 101, finalRate: 0.95, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '唐津青翔', department: '総合学科', quota: 71, finalApplicants: 41, finalRate: 0.58, fiscalYear: '令和7年度（2025年度）' },
   ],
 };
