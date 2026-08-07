@@ -13,11 +13,17 @@ export interface KanagawaRatioOption {
   gakuryoku: number;
 }
 
-/** 志望校の内申：学力の比率パターン（比率の合計は常に10）。 */
+/**
+ * 志望校の内申：学力の比率パターン（比率の合計は常に10）。
+ *
+ * ⚠️2026-08-07修正: 制度上の許容範囲は2:8〜8:2（実施要項の式で「f,gはいずれも2以上で
+ * 合計10となる整数」）だが、令和9年度に実際に採用されている第1次選考の比率は
+ * 3:7/4:6/5:5/6:4/7:3の5種のみ（全日制188学科／定時制22学科を全件パースして確認・
+ * 2:8と8:2を第1次に持つ学校は1校も存在しない）。実在しない2:8を選択肢から削除した。
+ */
 export const KANAGAWA_RATIO_OPTIONS: KanagawaRatioOption[] = [
   { label: '4:6（標準）', naishin: 4, gakuryoku: 6 },
   { label: '3:7（学力重視）', naishin: 3, gakuryoku: 7 },
-  { label: '2:8（学力最重視）', naishin: 2, gakuryoku: 8 },
   { label: '5:5（バランス型）', naishin: 5, gakuryoku: 5 },
   { label: '6:4（内申重視）', naishin: 6, gakuryoku: 4 },
   { label: '7:3（内申最重視）', naishin: 7, gakuryoku: 3 },

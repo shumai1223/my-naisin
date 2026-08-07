@@ -86,7 +86,7 @@ export default function KanagawaSValuePage() {
         steps={[
           { name: '内申点（135点満点）を入力', text: '中2の評定合計＋中3の評定合計×2で算出した内申点（135点満点）を入力します。' },
           { name: '学力検査点（500点満点）を入力', text: '5教科×100点の合計点（500点満点）を入力します。' },
-          { name: '志望校の比率を選ぶ', text: '志望校の内申：学力の比率（4:6/3:7/2:8など）をボタンで選択します。' },
+          { name: '志望校の比率を選ぶ', text: '志望校の内申：学力の比率（4:6/3:7/5:5など）をボタンで選択します。' },
           { name: '特色検査点を入力（任意）', text: '難関校で実施される特色検査の点数（最大100点）があれば入力します。S2値が自動算出されます。' },
           { name: 'S値と志望校比較', text: '1000点満点のS1値（S2値）が瞬時に算出され、横浜翠嵐・湘南・柏陽など主要高校の合格目安と比較できます。' },
         ]}
@@ -131,7 +131,7 @@ export default function KanagawaSValuePage() {
               神奈川県S値の仕組み
             </h2>
             <p className="text-sm text-slate-600 leading-relaxed mb-4">
-              神奈川県の公立高校入試は、内申点（135点満点）と学力検査点（500点満点）を志望校ごとに定められた比率で合計したS値（1000点満点）で合否が判定されます。比率は<strong>2:8〜8:2</strong>の範囲で学校ごとに異なります。
+              神奈川県の公立高校入試は、内申点（135点満点）と学力検査点（500点満点）を志望校ごとに定められた比率で合計したS値（1000点満点）で合否が判定されます。制度上の許容範囲は<strong>2:8〜8:2</strong>ですが、実際に採用されている比率は<strong>3:7〜7:3</strong>の5種のみです。
             </p>
             <div className="grid gap-3 sm:grid-cols-2">
               <div className="rounded-xl border-2 border-blue-200 bg-blue-50 p-4">
@@ -165,7 +165,7 @@ export default function KanagawaSValuePage() {
                   </div>
                 </div>
                 <p className="mt-2 text-xs text-slate-500">
-                  ※ 比率の合計は10。内申比率と学力比率は学校ごとに「4:6」「3:7」「2:8」「5:5」などが設定されます。
+                  ※ 比率の合計は10。内申比率と学力比率は学校ごとに「4:6」「3:7」「5:5」「6:4」「7:3」のいずれかが設定されます（制度上は2:8〜8:2まで許容されますが、実際に採用されているのはこの5種のみです）。
                 </p>
               </div>
               <div>
@@ -400,6 +400,7 @@ export default function KanagawaSValuePage() {
               <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
               <p className="text-xs text-amber-800 leading-relaxed">
                 本ツールの計算結果は神奈川県教育委員会の規定に基づく目安です。実際の合否は当日の倍率や他の受験者の得点状況により変動します。最新の情報は<a href={KANAGAWA_SOURCE_URL} target="_blank" rel="noopener noreferrer" className="text-amber-900 underline font-bold">神奈川県教育委員会の公式サイト</a>でご確認ください。
+                なお、クリエイティブスクール（釜利谷・横須賀南・田奈・大楠など）は学力検査を実施しないため本ツールの比率の概念が当てはまりません。横浜国際高校は独自の算出式（S1＝学力検査×4＋調査書×6＋面接等×1）を用いるため、こちらも本ツールの結果とは異なります。
               </p>
             </div>
           </div>

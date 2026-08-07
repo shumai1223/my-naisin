@@ -356,7 +356,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     practicalMultiplier: 1,
     maxScore: 135,
     description: '中2＋中3×2倍（135点満点）',
-    note: '実際の選抜では、この135点満点の内申点と学力検査(500点満点)をそれぞれ100点満点に換算し、志望校ごとに設定された比率（2:8〜8:2の範囲）で合算する「S値」という指標で合否が判定されます。',
+    note: '実際の選抜では、この135点満点の内申点と学力検査(500点満点)をそれぞれ100点満点に換算し、志望校ごとに設定された比率で合算する「S値」という指標で合否が判定されます。制度上の許容範囲は2:8〜8:2ですが、実際に採用されている比率は3:7〜7:3の5種のみです。',
     sourceUrl: 'https://www.pref.kanagawa.jp/docs/hr4/senbatsu2024.html',
     sourceUrl2: 'https://czemi.benesse.ne.jp/open/nyushi/article/14/feature/0014.html',
     sourceTitle: '神奈川県教育委員会 入試情報',
