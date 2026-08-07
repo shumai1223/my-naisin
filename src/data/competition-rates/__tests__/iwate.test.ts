@@ -6,10 +6,11 @@ import { IWATE_COMPETITION_RATES } from '../iwate';
  */
 describe('岩手県 倍率パイプラインα（Y-6・全日制59校113レコードの完全収録テスト）', () => {
   const { records, officialSubtotals } = IWATE_COMPETITION_RATES;
+  const r8 = records.filter((r) => !r.fiscalYear);
 
   it('全レコード合計が「合計」行（quota8,215・applicants6,574）と完全一致する', () => {
     const subtotal = officialSubtotals.find((s) => s.label === '合計')!;
-    const result = checkAgainstSubtotal(records, subtotal, () => true);
+    const result = checkAgainstSubtotal(records, subtotal, (r) => !r.fiscalYear);
     expect(result.matches).toBe(true);
   });
 
@@ -21,11 +22,11 @@ describe('岩手県 倍率パイプラインα（Y-6・全日制59校113レコ�
     }
   });
 
-  it('学校名+学科名の重複が無い', () => {
+  it('学校名+学科名+年度の重複が無い', () => {
     const seen = new Set<string>();
     const dupes: string[] = [];
     for (const r of records) {
-      const key = `${r.schoolName}|${r.department}`;
+      const key = `${r.schoolName}|${r.department}|${r.fiscalYear ?? ''}`;
       if (seen.has(key)) dupes.push(key);
       seen.add(key);
     }
@@ -37,19 +38,37 @@ describe('岩手県 倍率パイプラインα（Y-6・全日制59校113レコ�
   });
 
   it('113レコード・59校が収録されている（資料が明記する「59校113学科」と一致）', () => {
-    expect(records.length).toBe(113);
-    const distinctSchools = new Set(records.map((r) => r.schoolName));
+    expect(r8.length).toBe(113);
+    const distinctSchools = new Set(r8.map((r) => r.schoolName));
     expect(distinctSchools.size).toBe(59);
   });
 
   it('連携型入学者選抜による調整済み募集定員（一関第一・普通理数科=定員200から連携型67を除いた133）が正しく収録されている', () => {
-    expect(records.find((r) => r.schoolName === '一関第一')).toEqual({
+    expect(r8.find((r) => r.schoolName === '一関第一')).toEqual({
       schoolName: '一関第一',
       department: '普通・理数科',
       quota: 133,
       finalApplicants: 133,
       finalRate: 1.0,
     });
+  });
+
+  it('掛-1(学校別×多年度): 令和7年度(R7)分レコードが113件・59校収録され、公式「合計」8,382/6,684と完全一致し、R8と学校名+学科名の組み合わせが完全一致する(学校再編なし)', () => {
+    const r7 = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
+    expect(r7.length).toBe(113);
+    const distinctSchools = new Set(r7.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(59);
+    const sumQuota = r7.reduce((a, r) => a + r.quota, 0);
+    const sumApplicants = r7.reduce((a, r) => a + r.finalApplicants, 0);
+    expect(sumQuota).toBe(8382);
+    expect(sumApplicants).toBe(6684);
+
+    const r8Keys = new Set(r8.map((r) => `${r.schoolName}|${r.department}`));
+    const r7Keys = new Set(r7.map((r) => `${r.schoolName}|${r.department}`));
+    expect(r7Keys.size).toBe(r8Keys.size);
+    for (const key of r7Keys) {
+      expect(r8Keys.has(key)).toBe(true);
+    }
   });
 
   it('sourcesが公式PDF URLを正しく記録している', () => {
