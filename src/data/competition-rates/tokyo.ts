@@ -151,7 +151,16 @@ export const TOKYO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '「福祉計50/32/0.64」「理数計72/230/3.19」「芸術計112/200/1.79」「体育計52/85/1.63」の' +
       '全てがcompetition-rate-history側のREIWA_7カテゴリ値(家庭科(単位制)49/44/0.90・福祉科50/32/0.64・' +
       '理数科72/230/3.19・芸術科112/200/1.79・体育科52/85/1.63)と完全一致(node.js機械計算で確認)。' +
-      '次頁(6頁目)は国際科/併合科/産業科等が続く見込み。',
+      '次頁(6頁目)は国際科/併合科/産業科等が続く見込み。' +
+      '⚠️追記(掛-1第10弾・個票PDF004完結): 6頁目「19[国際関係に関する学科]」1校・「20[併合科]」3校・' +
+      '「21[産業科]」2校・「22[総合学科]」10校の計16校を追加した。印字小計「国際計138/243/1.76」' +
+      '「併合科計105/11/0.10」「産業科計252/245/0.97」「総合学科計1,626/2,036/1.25」全てが' +
+      'competition-rate-history側のREIWA_7カテゴリ値と完全一致(node.js機械計算で確認)。7頁目「23[定時制' +
+      '課程(単位制の学校)]」・8頁目「24[定時制課程単位制総合学科(チャレンジスクール)及び定時制課程単位制' +
+      '普通科(チャレンジ枠)]」は目視確認のうえ全日制の外側の別集計としてスコープ外(既存のR8方針と同一)。' +
+      'これで個票PDF「1〜5」(2025-02-13-002/003/004)全てが完結し、**R7(令和7年度)の全日制167校相当の' +
+      '学校別データが1〜22の全区分で収録完了**(coverage参照)。次回セッションでは掛-1の対象県を' +
+      'tokyo以外(hokkaido以外の残り45県)へ横展開するフェーズに進む。',
   },
   officialSubtotals: [
     { label: '区部計', schoolCount: 57, quota: 12088, finalApplicants: 16926, finalRate: 1.4 },
@@ -614,5 +623,25 @@ export const TOKYO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     // --- 体育科（2校） ---
     { schoolName: '駒場', area: '目黒', department: '体育科', quota: 28, finalApplicants: 64, finalRate: 2.29, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '野津田', area: '町田', department: '体育科', quota: 24, finalApplicants: 21, finalRate: 0.88, fiscalYear: '令和7年度（2025年度）' },
+    // --- 国際科（1校） ---
+    { schoolName: '国際', area: '目黒', department: '国際科', quota: 138, finalApplicants: 243, finalRate: 1.76, fiscalYear: '令和7年度（2025年度）' },
+    // --- 併合科（3校） ---
+    { schoolName: '大島', area: '大島', department: '併合科（農林・家政）', quota: 35, finalApplicants: 7, finalRate: 0.2, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '三宅', area: '三宅', department: '併合科（農業・家政）', quota: 35, finalApplicants: 3, finalRate: 0.09, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '八丈', area: '八丈', department: '併合科（園芸・家政）', quota: 35, finalApplicants: 1, finalRate: 0.03, fiscalYear: '令和7年度（2025年度）' },
+    // --- 産業科（2校） ---
+    { schoolName: '橘', area: '墨田', department: '産業科', quota: 126, finalApplicants: 124, finalRate: 0.98, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '八王子桑志', area: '八王子', department: '産業科', quota: 126, finalApplicants: 121, finalRate: 0.96, fiscalYear: '令和7年度（2025年度）' },
+    // ===== 総合学科（10校） =====
+    { schoolName: '晴海総合', area: '中央', department: '総合学科', quota: 192, finalApplicants: 321, finalRate: 1.67, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: 'つばさ総合', area: '大田', department: '総合学科', quota: 164, finalApplicants: 169, finalRate: 1.03, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '世田谷総合', area: '世田谷', department: '総合学科', quota: 164, finalApplicants: 160, finalRate: 0.98, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '杉並総合', area: '杉並', department: '総合学科', quota: 150, finalApplicants: 254, finalRate: 1.69, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '王子総合', area: '北', department: '総合学科', quota: 164, finalApplicants: 194, finalRate: 1.18, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '葛飾総合', area: '葛飾', department: '総合学科', quota: 136, finalApplicants: 157, finalRate: 1.15, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '青梅総合', area: '青梅', department: '総合学科', quota: 164, finalApplicants: 200, finalRate: 1.22, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '町田総合', area: '町田', department: '総合学科', quota: 164, finalApplicants: 163, finalRate: 0.99, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '東久留米総合', area: '東久留米', department: '総合学科', quota: 164, finalApplicants: 233, finalRate: 1.42, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '若葉総合', area: '稲城', department: '総合学科', quota: 164, finalApplicants: 185, finalRate: 1.13, fiscalYear: '令和7年度（2025年度）' },
   ],
 };
