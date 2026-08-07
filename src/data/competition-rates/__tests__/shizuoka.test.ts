@@ -15,10 +15,11 @@ import { SHIZUOKA_COMPETITION_RATES } from '../shizuoka';
  */
 describe('静岡県 倍率パイプラインα（Y-6・全日制90校162レコードの完全収録テスト）', () => {
   const { records, officialSubtotals } = SHIZUOKA_COMPETITION_RATES;
+  const r8 = records.filter((r) => !r.fiscalYear);
 
   it('全日制の全レコード合計がPDF末尾のグランドトータル（公立合計・quota16,954・applicants16,895・倍率1.00）と完全一致する', () => {
     const grandTotal = officialSubtotals.find((s) => s.label === '公立合計')!;
-    const result = checkAgainstSubtotal(records, grandTotal, () => true);
+    const result = checkAgainstSubtotal(records, grandTotal, (r) => !r.fiscalYear);
     expect(result.matches).toBe(true);
   });
 
@@ -30,11 +31,11 @@ describe('静岡県 倍率パイプラインα（Y-6・全日制90校162レコ�
     }
   });
 
-  it('学校名+学科名の重複が無い', () => {
+  it('学校名+学科名+年度の重複が無い', () => {
     const seen = new Set<string>();
     const dupes: string[] = [];
     for (const r of records) {
-      const key = `${r.schoolName}|${r.department}`;
+      const key = `${r.schoolName}|${r.department}|${r.fiscalYear ?? ''}`;
       if (seen.has(key)) dupes.push(key);
       seen.add(key);
     }
@@ -46,8 +47,18 @@ describe('静岡県 倍率パイプラインα（Y-6・全日制90校162レコ�
   });
 
   it('162レコード・90校が収録されている（PDF1〜9ページ目・下田〜浜松市立＝全日制全校）', () => {
-    expect(records.length).toBe(162);
-    const distinctSchools = new Set(records.map((r) => r.schoolName));
+    expect(r8.length).toBe(162);
+    const distinctSchools = new Set(r8.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(90);
+  });
+
+  it('掛-1(学校別×多年度): 令和7年度(R7)分レコードが162件収録され、90校・PDF末尾の公立合計(quota17,084・applicants18,183)と完全一致する。学科名の印字表記がR7「普通」「理数」→R8「普通科」「理数科」で全面的に異なる(内容変更ではなく印字差)。沼津工業・吉原工業のくくり学科群名の変更(内容改編)も確認した', () => {
+    const r7 = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
+    expect(r7.length).toBe(162);
+    expect(r7.reduce((a, r) => a + r.quota, 0)).toBe(17084);
+    expect(r7.reduce((a, r) => a + r.finalApplicants, 0)).toBe(18183);
+
+    const distinctSchools = new Set(r7.map((r) => r.schoolName));
     expect(distinctSchools.size).toBe(90);
   });
 
@@ -98,7 +109,7 @@ describe('静岡県 倍率パイプラインα（Y-6・全日制90校162レコ�
       浜松湖北: 4,
     };
     for (const [name, count] of Object.entries(multiDeptSchools)) {
-      const schoolRecords = records.filter((r) => r.schoolName === name);
+      const schoolRecords = r8.filter((r) => r.schoolName === name);
       expect(schoolRecords.length).toBe(count);
     }
   });
