@@ -12,10 +12,11 @@ import { KUMAMOTO_COMPETITION_RATES } from '../kumamoto';
  */
 describe('熊本県 倍率パイプラインα（Y-6・全日制52校162レコードの完全収録テスト）', () => {
   const { records, officialSubtotals } = KUMAMOTO_COMPETITION_RATES;
+  const r8 = records.filter((r) => !r.fiscalYear);
 
   it('全日制の全レコード合計がPDF末尾のグランドトータル（後期・一般選抜計・quota8,322・applicants7,295・倍率0.88）と完全一致する', () => {
     const grandTotal = officialSubtotals.find((s) => s.label === '全日制（後期・一般選抜）計')!;
-    const result = checkAgainstSubtotal(records, grandTotal, () => true);
+    const result = checkAgainstSubtotal(records, grandTotal, (r) => !r.fiscalYear);
     expect(result.matches).toBe(true);
   });
 
@@ -27,11 +28,11 @@ describe('熊本県 倍率パイプラインα（Y-6・全日制52校162レコ�
     }
   });
 
-  it('学校名+学科名の重複が無い', () => {
+  it('学校名+学科名+年度の重複が無い', () => {
     const seen = new Set<string>();
     const dupes: string[] = [];
     for (const r of records) {
-      const key = `${r.schoolName}|${r.department}`;
+      const key = `${r.schoolName}|${r.department}|${r.fiscalYear ?? ''}`;
       if (seen.has(key)) dupes.push(key);
       seen.add(key);
     }
@@ -43,8 +44,8 @@ describe('熊本県 倍率パイプラインα（Y-6・全日制52校162レコ�
   });
 
   it('162レコード・52校が収録されている', () => {
-    expect(records.length).toBe(162);
-    const distinctSchools = new Set(records.map((r) => r.schoolName));
+    expect(r8.length).toBe(162);
+    const distinctSchools = new Set(r8.map((r) => r.schoolName));
     expect(distinctSchools.size).toBe(52);
   });
 
@@ -90,7 +91,7 @@ describe('熊本県 倍率パイプラインα（Y-6・全日制52校162レコ�
       千原台: 2,
     };
     for (const [name, count] of Object.entries(multiDeptSchools)) {
-      const schoolRecords = records.filter((r) => r.schoolName === name);
+      const schoolRecords = r8.filter((r) => r.schoolName === name);
       expect(schoolRecords.length).toBe(count);
     }
   });
@@ -98,8 +99,25 @@ describe('熊本県 倍率パイプラインα（Y-6・全日制52校162レコ�
   it('くくり募集（複数学科が募集人員を共有）が連結名の単一レコードとして収録されている', () => {
     const kukuriNames = ['食農科学(農業科学コース)・(食・生活コース)', '普通・理数', '普通・(グローカル文理コース)'];
     for (const dept of kukuriNames) {
-      const matches = records.filter((r) => r.department === dept);
+      const matches = r8.filter((r) => r.department === dept);
       expect(matches.length).toBe(1);
+    }
+  });
+
+  it('掛-1(学校別×多年度): 令和7年度(R7)分レコードが162件収録され、全日制「計」行(quota8,258・applicants7,594・倍率0.92)と完全一致する。学校名・学科名のキー集合はR8と完全一致(統廃合・学科再編なし)・くくり募集3組(矢部・大津・上天草)もR8と同一パターンで存在する', () => {
+    const r7 = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
+    expect(r7.length).toBe(162);
+    expect(r7.reduce((a, r) => a + r.quota, 0)).toBe(8258);
+    expect(r7.reduce((a, r) => a + r.finalApplicants, 0)).toBe(7594);
+
+    const r7Schools = new Set(r7.map((r) => r.schoolName));
+    const r8Schools = new Set(r8.map((r) => r.schoolName));
+    expect(r7Schools.size).toBe(52);
+    expect([...r7Schools].every((s) => r8Schools.has(s))).toBe(true);
+
+    const kukuriNames = ['食農科学(農業科学コース)・(食・生活コース)', '普通・理数', '普通・(グローカル文理コース)'];
+    for (const dept of kukuriNames) {
+      expect(r7.filter((r) => r.department === dept).length).toBe(1);
     }
   });
 
