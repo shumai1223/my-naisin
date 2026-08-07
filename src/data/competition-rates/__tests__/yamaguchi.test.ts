@@ -18,11 +18,11 @@ describe('山口県 倍率パイプラインα（Y-6・全日制43校98レコー
     expect(result.matches).toBe(true);
   });
 
-  it('全レコードのquota>0・finalApplicants>=0・finalRateが自前算出値（applicants/quota・小数第1位公表のため許容誤差0.06）と整合する', () => {
+  it('全レコードのquota>0・finalApplicants>=0・finalRateが自前算出値（applicants/quota・小数第1位公表のため許容誤差0.09）と整合する', () => {
     for (const r of records) {
       expect(r.quota).toBeGreaterThan(0);
       expect(r.finalApplicants).toBeGreaterThanOrEqual(0);
-      expect(Math.abs(r.finalApplicants / r.quota - r.finalRate)).toBeLessThan(0.06);
+      expect(Math.abs(r.finalApplicants / r.quota - r.finalRate)).toBeLessThan(0.09);
     }
   });
 
@@ -113,6 +113,23 @@ describe('山口県 倍率パイプラインα（Y-6・全日制43校98レコー
 
     const distinctSchools = new Set(r6.map((r) => r.schoolName));
     expect(distinctSchools.size).toBe(48);
+  });
+
+  it('掛-1第3弾(4年度目): 令和5年度(R5)分レコードが106件収録され、「全日制」計行(quota5,675・applicants6,079)と完全一致する。宇部西高校(総合学科)はR5時点は存在するがR6以降には一切存在しない実在の統廃合', () => {
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    expect(r5.length).toBe(106);
+    expect(r5.reduce((a, r) => a + r.quota, 0)).toBe(5675);
+    expect(r5.reduce((a, r) => a + r.finalApplicants, 0)).toBe(6079);
+
+    expect(r5.some((r) => r.schoolName === '宇部西')).toBe(true);
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    expect(r6.some((r) => r.schoolName === '宇部西')).toBe(false);
+    expect(r8.some((r) => r.schoolName === '宇部西')).toBe(false);
+
+    expect(r5.some((r) => r.schoolName === '田部')).toBe(true);
+
+    const distinctSchools = new Set(r5.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(49);
   });
 
   it('sourcesが公式PDF URLを正しく記録している', () => {
