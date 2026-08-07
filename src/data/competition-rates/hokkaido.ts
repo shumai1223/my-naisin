@@ -64,7 +64,7 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '宗谷地区・全日制「普通教育を主とする学科」（令和8年度6レコード）＋「専門教育を主とする学科」（令和8年度2レコード、資料p18掲載）＋令和7年度分8レコード（掛-1第9弾）',
       'オホーツク地区・全日制「普通教育を主とする学科」（令和8年度16レコード）＋「専門教育を主とする学科及び総合学科」（令和8年度15レコード、資料p19掲載）＋令和7年度分31レコード（普通16+専門/総合15・掛-1第10弾・学校構成はR8と完全一致）',
       '十勝地区・全日制「普通教育を主とする学科」（令和8年度12レコード）＋「専門教育を主とする学科及び総合学科」（令和8年度16レコード、資料p20掲載）＋令和7年度分28レコード（普通12+専門/総合16・掛-1第11弾・学校構成はR8と完全一致）',
-      '釧路地区・全日制「普通教育を主とする学科」（9レコード）＋「専門教育を主とする学科及び総合学科」（12レコード、資料p21掲載・連携型テーブルなし）',
+      '釧路地区・全日制「普通教育を主とする学科」（令和8年度9レコード）＋「専門教育を主とする学科及び総合学科」（令和8年度12レコード、資料p21掲載・連携型テーブルなし）＋令和7年度分21レコード（普通9+専門/総合12・掛-1第12弾・学校構成はR8と完全一致）',
       '根室地区・全日制「普通教育を主とする学科」（5レコード）＋「専門教育を主とする学科」（6レコード、資料p22掲載・全14頁の最終地区）',
     ],
     pendingDepartments: [
@@ -195,7 +195,13 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '音更・上士幌・芽室・幕別清陵・鹿追・大樹(地域探究)・広尾・本別・足寄、専門/総合16レコード=' +
       '帯広農業5学科・更別農業2学科・士幌2学科・帯広工業4学科・帯広南商業商業・清水総合・池田総合)。' +
       '鹿追高校+広尾高校の普通科(連携型)もR8同様スコープ外のまま。pdftotext -layoutの数値列と全28行' +
-      'を行順突合した(結合セルなし)。',
+      'を行順突合した(結合セルなし)。' +
+      '⚠️2026-08-07追記15(掛-1第12弾): 釧路地区のR7分21レコード(普通9+専門/総合12)も追加した' +
+      '(PDF内部頁13=印字ページ21)。学校・学科構成はR8と完全一致(普通9校=釧路湖陵文理探究・釧路江南・' +
+      '釧路東・阿寒・白糠・弟子屈・厚岸翔洋・釧路北陽・霧多布、専門/総合12レコード=釧路湖陵理数探究・' +
+      '釧路工業5学科・釧路商業3学科・厚岸翔洋海洋資源・釧路明輝総合・標茶総合)。釧路地区は他地区と' +
+      '異なり連携型テーブルが無くR7も全レコードをスコープ内で収録できた。pdftotext -layoutの数値列と' +
+      '全21行を行順突合した(結合セルなし)。',
   },
   officialSubtotals: [],
   records: [
@@ -832,5 +838,28 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '帯広南商業', department: '商業', quota: 200, finalApplicants: 226, finalRate: 1.13, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '清水', department: '総合', quota: 120, finalApplicants: 57, finalRate: 0.48, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '池田', department: '総合', quota: 40, finalApplicants: 17, finalRate: 0.43, fiscalYear: '令和7年度（2025年度）' },
+    // 掛-1第12弾: 釧路地区・全日制普通科・令和7年度（2025年度）分。
+    { schoolName: '釧路湖陵', department: '文理探究', quota: 160, finalApplicants: 154, finalRate: 0.96, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '釧路江南', department: '普通', quota: 200, finalApplicants: 201, finalRate: 1.01, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '釧路東', department: '普通', quota: 80, finalApplicants: 58, finalRate: 0.73, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '阿寒', department: '普通', quota: 40, finalApplicants: 21, finalRate: 0.53, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '白糠', department: '普通', quota: 40, finalApplicants: 29, finalRate: 0.73, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '弟子屈', department: '普通', quota: 40, finalApplicants: 16, finalRate: 0.4, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '厚岸翔洋', department: '普通', quota: 40, finalApplicants: 6, finalRate: 0.15, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '釧路北陽', department: '普通', quota: 200, finalApplicants: 221, finalRate: 1.11, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '霧多布', department: '普通', quota: 60, finalApplicants: 15, finalRate: 0.25, fiscalYear: '令和7年度（2025年度）' },
+    // 掛-1第12弾: 釧路地区・専門教育を主とする学科及び総合学科・令和7年度（2025年度）分。
+    { schoolName: '釧路湖陵', department: '理数探究', quota: 40, finalApplicants: 50, finalRate: 1.25, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '釧路工業', department: '電子機械', quota: 40, finalApplicants: 40, finalRate: 1.0, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '釧路工業', department: '電気', quota: 40, finalApplicants: 27, finalRate: 0.68, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '釧路工業', department: '建築', quota: 40, finalApplicants: 38, finalRate: 0.95, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '釧路工業', department: '土木', quota: 40, finalApplicants: 24, finalRate: 0.6, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '釧路工業', department: '工業化学', quota: 40, finalApplicants: 20, finalRate: 0.5, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '釧路商業', department: '流通マネジメント', quota: 40, finalApplicants: 41, finalRate: 1.03, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '釧路商業', department: '会計マネジメント', quota: 40, finalApplicants: 44, finalRate: 1.1, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '釧路商業', department: '情報マネジメント', quota: 40, finalApplicants: 54, finalRate: 1.35, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '厚岸翔洋', department: '海洋資源', quota: 40, finalApplicants: 21, finalRate: 0.53, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '釧路明輝', department: '総合', quota: 160, finalApplicants: 175, finalRate: 1.09, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '標茶', department: '総合', quota: 80, finalApplicants: 57, finalRate: 0.71, fiscalYear: '令和7年度（2025年度）' },
   ],
 };
