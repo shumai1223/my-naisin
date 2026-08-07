@@ -131,7 +131,14 @@ export const TOKYO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       'いるため、R7もこの「計」行の値をそのまま1校1レコードとして収録した(コース別の内訳は非収録)。' +
       '11校(工芸・蔵前工科・墨田工科・総合工科・中野工科・杉並工科・荒川工科・北豊島工科・練馬工科・' +
       '足立工科・葛西工科)全てR8と学校構成が一致。工業科は全15校のためR8にある残り4校(府中工科・' +
-      '町田工科・多摩工科・田無工科)は次頁(3頁目)に続く見込み。',
+      '町田工科・多摩工科・田無工科)は次頁(3頁目)に続く見込み。' +
+      '⚠️追記(掛-1第7弾): 3頁目で工業科(単位制以外)残り4校(府中工科・町田工科・多摩工科・田無工科)を' +
+      '追加し工業科(単位制以外)全15校が完結。印字小計「工業計1,575/1,231/0.78」がquota/applicants' +
+      '合計と完全一致(node.jsで機械計算し確認)。続けて「9[工業に関する学科(単位制の学校)]」六郷工科' +
+      '1校(単位制計96/68/0.71)・「10[科学技術科]」2校(科学技術・多摩科学技術・計252/319/1.27)も' +
+      '同頁に収録されていたため合わせて追加した。工業科(単位制以外+単位制)の頁内合計「工業合計' +
+      '1,671/1,299/0.78」とも完全一致。これでR7の工業科(単位制以外/単位制)・科学技術科が全て完結。' +
+      '次頁(4頁目)は農業科/水産科等が続く見込み。',
   },
   officialSubtotals: [
     { label: '区部計', schoolCount: 57, quota: 12088, finalApplicants: 16926, finalRate: 1.4 },
@@ -560,5 +567,14 @@ export const TOKYO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '練馬工科', area: '練馬', department: '工業科', quota: 88, finalApplicants: 53, finalRate: 0.6, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '足立工科', area: '足立', department: '工業科', quota: 101, finalApplicants: 83, finalRate: 0.82, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '葛西工科', area: '江戸川', department: '工業科', quota: 115, finalApplicants: 79, finalRate: 0.69, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '府中工科', area: '府中', department: '工業科', quota: 105, finalApplicants: 109, finalRate: 1.04, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '町田工科', area: '町田', department: '工業科', quota: 105, finalApplicants: 108, finalRate: 1.03, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '多摩工科', area: '福生', department: '工業科', quota: 106, finalApplicants: 98, finalRate: 0.92, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '田無工科', area: '西東京', department: '工業科', quota: 105, finalApplicants: 87, finalRate: 0.83, fiscalYear: '令和7年度（2025年度）' },
+    // --- 工業科（単位制・1校） ---
+    { schoolName: '六郷工科', area: '大田', department: '工業科（単位制）', quota: 96, finalApplicants: 68, finalRate: 0.71, fiscalYear: '令和7年度（2025年度）' },
+    // --- 科学技術科（2校） ---
+    { schoolName: '科学技術', area: '江東', department: '科学技術科', quota: 105, finalApplicants: 106, finalRate: 1.01, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '多摩科学技術', area: '小金井', department: '科学技術科', quota: 147, finalApplicants: 213, finalRate: 1.45, fiscalYear: '令和7年度（2025年度）' },
   ],
 };
