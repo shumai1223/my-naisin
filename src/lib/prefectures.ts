@@ -147,7 +147,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     practicalMultiplier: 3,
     maxScore: 660,
     description: '5教科×2倍、実技4教科×3倍、学年比1:2:3（660点満点）',
-    note: 'この計算は660点満点ですが、実際の選抜では440点満点に換算される場合があります。',
+    note: 'この計算は660点満点ですが、実際の選抜では500点満点に圧縮されます（令和7年度以降。令和6年度以前は440点満点でした）。',
     sourceUrl: 'https://www.pref.iwate.jp/kyouikubunka/kyouiku/gakkou/senbatsu/1091420.html',
     sourceUrl2: 'https://jyuke-labo.com/koukoujyukentaisaku/iwate/',
     sourceTitle: '岩手県教育委員会 入学者選抜実施概要',
