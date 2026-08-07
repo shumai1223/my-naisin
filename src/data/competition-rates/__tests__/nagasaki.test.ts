@@ -6,10 +6,11 @@ import { NAGASAKI_COMPETITION_RATES } from '../nagasaki';
  */
 describe('長崎県 倍率パイプラインα（Y-6・全日制55校116レコードの完全収録テスト）', () => {
   const { records, officialSubtotals } = NAGASAKI_COMPETITION_RATES;
+  const r8 = records.filter((r) => !r.fiscalYear);
 
   it('全日制の全レコード合計が「総計」行（quota7,288・applicants5,794・倍率0.80）と完全一致する', () => {
     const grandTotal = officialSubtotals.find((s) => s.label === '全日制計')!;
-    const result = checkAgainstSubtotal(records, grandTotal, () => true);
+    const result = checkAgainstSubtotal(records, grandTotal, (r) => !r.fiscalYear);
     expect(result.matches).toBe(true);
   });
 
@@ -21,11 +22,11 @@ describe('長崎県 倍率パイプラインα（Y-6・全日制55校116レコ�
     }
   });
 
-  it('学校名+学科名の重複が無い', () => {
+  it('学校名+学科名+年度の重複が無い', () => {
     const seen = new Set<string>();
     const dupes: string[] = [];
     for (const r of records) {
-      const key = `${r.schoolName}|${r.department}`;
+      const key = `${r.schoolName}|${r.department}|${r.fiscalYear ?? ''}`;
       if (seen.has(key)) dupes.push(key);
       seen.add(key);
     }
@@ -37,8 +38,8 @@ describe('長崎県 倍率パイプラインα（Y-6・全日制55校116レコ�
   });
 
   it('116レコード・55校が収録されている', () => {
-    expect(records.length).toBe(116);
-    const distinctSchools = new Set(records.map((r) => r.schoolName));
+    expect(r8.length).toBe(116);
+    const distinctSchools = new Set(r8.map((r) => r.schoolName));
     expect(distinctSchools.size).toBe(55);
   });
 
@@ -60,6 +61,22 @@ describe('長崎県 倍率パイプラインα（Y-6・全日制55校116レコ�
       finalApplicants: 0,
       finalRate: 0,
     });
+  });
+
+  it('掛-1(学校別×多年度): 令和7年度(R7)分レコードが116件収録され、「総計」(quota7,372・applicants5,953・倍率0.81=県立計7,166/5,755+市立計206/198)と完全一致する。学校名・学科名のキー集合はR8と完全一致(統廃合・学科再編なし)', () => {
+    const r7 = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
+    expect(r7.length).toBe(116);
+    expect(r7.reduce((a, r) => a + r.quota, 0)).toBe(7372);
+    expect(r7.reduce((a, r) => a + r.finalApplicants, 0)).toBe(5953);
+
+    const r7Municipal = r7.filter((r) => r.schoolName === '市立長崎商業');
+    expect(r7Municipal.reduce((a, r) => a + r.quota, 0)).toBe(206);
+    expect(r7Municipal.reduce((a, r) => a + r.finalApplicants, 0)).toBe(198);
+
+    const r7Schools = new Set(r7.map((r) => r.schoolName));
+    const r8Schools = new Set(r8.map((r) => r.schoolName));
+    expect(r7Schools.size).toBe(55);
+    expect([...r7Schools].every((s) => r8Schools.has(s))).toBe(true);
   });
 
   it('sourcesが公式PDF URLを正しく記録している', () => {
