@@ -56,8 +56,8 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '札幌市・全日制（市立高校6校・令和8年度9レコード＋令和7年度分9レコード＝掛-1第3弾）',
       '後志地区・全日制「普通教育を主とする学科」（令和8年度6レコード）＋「専門教育を主とする学科及び総合学科」（令和8年度11レコード、資料p13中表・2026-08-07にpdftoppm 600dpi+ffmpegクロップで微小フォント学科名を再確認し収録）＋令和7年度分17レコード（普通6+専門/総合11・掛-1第4弾）',
       '胆振地区・全日制「普通教育を主とする学科」（令和8年度11レコード）＋「専門教育を主とする学科及び総合学科」（令和8年度16レコード、資料p14上表・2026-08-07に石狩と同じ理由で見送り撤回のうえ収録）＋令和7年度分27レコード（普通11+専門/総合16・掛-1第5弾）',
-      '日高地区・全日制「普通教育を主とする学科」（4レコード）＋「専門教育を主とする学科及び総合学科」（3レコード）',
-      '渡島地区・全日制「普通教育を主とする学科」（10レコード・知内高校含む）＋「専門教育を主とする学科及び総合学科」（19レコード・資料p16掲載）',
+      '日高地区・全日制「普通教育を主とする学科」（令和8年度4レコード）＋「専門教育を主とする学科及び総合学科」（令和8年度3レコード）＋令和7年度分7レコード（普通4+専門/総合3・掛-1第6弾）',
+      '渡島地区・全日制「普通教育を主とする学科」（令和8年度10レコード・知内高校含む）＋「専門教育を主とする学科及び総合学科」（令和8年度19レコード・資料p16掲載）＋令和7年度分普通10レコード（掛-1第6弾・専門/総合は次回）',
       '檜山地区・全日制「普通教育を主とする学科」（3レコード）＋「総合学科」（1レコード・檜山北高校）',
       '上川地区・全日制「普通教育を主とする学科」（14レコード、資料p17上表）＋「専門教育を主とする学科及び総合学科」（23レコード、資料p17下表）',
       '留萌地区・全日制「普通教育を主とする学科」（3レコード）＋「専門教育を主とする学科」（4レコード、資料p18掲載）',
@@ -156,7 +156,13 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '室蘭東翔(総合)の7校16レコード)だが募集人員が年度により変動する行がある(例:伊達開来160→200)。' +
       'pdftotext -layoutの数値列と全27行を行順突合した(結合セルなし・300dpiで学科名は明瞭)。同頁に' +
       '鵡川高校「普通科(連携型)」の別表も再度確認したが、R8と同様に出願者数/倍率の列が無く' +
-      'スキーマ不一致のためスコープ外(pendingDepartments既存記載どおり)。',
+      'スキーマ不一致のためスコープ外(pendingDepartments既存記載どおり)。' +
+      '⚠️2026-08-07追記9(掛-1第6弾): 日高地区のR7分7レコード(普通4+専門/総合3)と渡島地区のR7分' +
+      '普通10レコードも追加した(PDF内部頁6後半〜頁7=印字ページ14〜15)。日高専門/総合は静内農業' +
+      '(食品科学・生産科学)+浦河総合の3レコードでR8と完全一致。渡島普通は函館中部・函館西・南茅部・' +
+      '上磯・七飯・松前・八雲・長万部・市立函館・知内の10校でR8と完全一致(知内は独立の小表だが同一' +
+      '区分として合算済み)。渡島の専門/総合(19レコード・資料p16相当)は次回に持ち越し。pdftotext ' +
+      '-layoutの数値列と全17行を行順突合した(結合セルなし)。',
   },
   officialSubtotals: [],
   records: [
@@ -629,5 +635,24 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '苫小牧総合経済', department: '国際経済', quota: 40, finalApplicants: 35, finalRate: 0.88, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '苫小牧総合経済', department: '情報処理', quota: 40, finalApplicants: 46, finalRate: 1.15, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '室蘭東翔', department: '総合', quota: 160, finalApplicants: 169, finalRate: 1.06, fiscalYear: '令和7年度（2025年度）' },
+    // 掛-1第6弾: 日高地区・令和7年度（2025年度）分。
+    { schoolName: '平取', department: '普通', quota: 40, finalApplicants: 22, finalRate: 0.55, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '富川', department: '普通', quota: 40, finalApplicants: 16, finalRate: 0.4, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '静内', department: '普通', quota: 200, finalApplicants: 163, finalRate: 0.815, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: 'えりも', department: '普通', quota: 70, finalApplicants: 29, finalRate: 0.41, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '静内農業', department: '食品科学', quota: 40, finalApplicants: 24, finalRate: 0.6, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '静内農業', department: '生産科学', quota: 40, finalApplicants: 27, finalRate: 0.68, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '浦河', department: '総合', quota: 120, finalApplicants: 83, finalRate: 0.69, fiscalYear: '令和7年度（2025年度）' },
+    // 掛-1第6弾: 渡島地区・全日制普通科・令和7年度（2025年度）分（専門/総合は次回）。
+    { schoolName: '函館中部', department: '普通', quota: 160, finalApplicants: 186, finalRate: 1.16, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '函館西', department: '普通', quota: 240, finalApplicants: 310, finalRate: 1.29, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '南茅部', department: '普通', quota: 40, finalApplicants: 9, finalRate: 0.23, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '上磯', department: '普通', quota: 40, finalApplicants: 41, finalRate: 1.03, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '七飯', department: '普通', quota: 120, finalApplicants: 103, finalRate: 0.86, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '松前', department: '普通', quota: 40, finalApplicants: 15, finalRate: 0.38, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '八雲', department: '普通', quota: 80, finalApplicants: 63, finalRate: 0.79, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '長万部', department: '普通', quota: 40, finalApplicants: 7, finalRate: 0.18, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '市立函館', department: '普通', quota: 200, finalApplicants: 259, finalRate: 1.3, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '知内', department: '普通', quota: 80, finalApplicants: 31, finalRate: 0.39, fiscalYear: '令和7年度（2025年度）' },
   ],
 };
