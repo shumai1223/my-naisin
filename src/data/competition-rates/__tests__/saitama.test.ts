@@ -115,13 +115,13 @@ describe('埼玉県 倍率パイプラインα（Y-2・全日制の突合テス�
     expect(records.some((r) => r.schoolName === '越生翔陽')).toBe(false);
   });
 
-  it('掛-1(学校別×多年度): 令和7年度(R7)分レコードが56件収録され(1頁目「普通科」)、区市町村+学校名+学科の重複が無い', () => {
+  it('掛-1(学校別×多年度): 令和7年度(R7)分レコードが102件収録され(1〜2頁目「普通科」完結)、印字済み「普通科 計」25,877/29,983と完全一致する', () => {
     const r7 = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
-    expect(r7.length).toBe(56);
+    expect(r7.length).toBe(102);
     const sumQuota = r7.reduce((a, r) => a + r.quota, 0);
     const sumApplicants = r7.reduce((a, r) => a + r.finalApplicants, 0);
-    expect(sumQuota).toBe(15131);
-    expect(sumApplicants).toBe(17597);
+    expect(sumQuota).toBe(25877);
+    expect(sumApplicants).toBe(29983);
     const seen = new Set<string>();
     for (const r of r7) {
       const key = `${r.schoolName}|${r.department}`;
