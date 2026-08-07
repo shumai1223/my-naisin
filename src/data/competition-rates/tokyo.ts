@@ -138,7 +138,13 @@ export const TOKYO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '1校(単位制計96/68/0.71)・「10[科学技術科]」2校(科学技術・多摩科学技術・計252/319/1.27)も' +
       '同頁に収録されていたため合わせて追加した。工業科(単位制以外+単位制)の頁内合計「工業合計' +
       '1,671/1,299/0.78」とも完全一致。これでR7の工業科(単位制以外/単位制)・科学技術科が全て完結。' +
-      '次頁(4頁目)は農業科/水産科等が続く見込み。',
+      '次頁(4頁目)は農業科/水産科等が続く見込み。' +
+      '⚠️追記(掛-1第8弾): 4頁目「11[農業に関する学科]」5校・「12[水産に関する学科]」1校・' +
+      '「13[家庭に関する学科(単位制以外の学校)]」3校の計9校を追加した。印字小計「農業計413/536/1.30」' +
+      '「水産計42/46/1.10」「家庭計222/193/0.87」の3つ全てがcompetition-rate-history側のREIWA_7' +
+      'カテゴリ値(農業科413/536/1.30・水産科42/46/1.10・家庭科(単位制以外)222/193/0.87)と完全一致' +
+      '(node.js機械計算で確認)。府中の「農業」高校は農業科・家庭科の両方に学科を持つため2レコードに' +
+      'なる(R8のtokyo.tsと同じ構造)。次頁(5頁目)は家庭科(単位制)/福祉科/理数科等が続く見込み。',
   },
   officialSubtotals: [
     { label: '区部計', schoolCount: 57, quota: 12088, finalApplicants: 16926, finalRate: 1.4 },
@@ -576,5 +582,17 @@ export const TOKYO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     // --- 科学技術科（2校） ---
     { schoolName: '科学技術', area: '江東', department: '科学技術科', quota: 105, finalApplicants: 106, finalRate: 1.01, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '多摩科学技術', area: '小金井', department: '科学技術科', quota: 147, finalApplicants: 213, finalRate: 1.45, fiscalYear: '令和7年度（2025年度）' },
+    // --- 農業科（5校） ---
+    { schoolName: '園芸', area: '世田谷', department: '農業科', quota: 99, finalApplicants: 151, finalRate: 1.53, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '農芸', area: '杉並', department: '農業科', quota: 92, finalApplicants: 101, finalRate: 1.1, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '農産', area: '葛飾', department: '農業科', quota: 84, finalApplicants: 93, finalRate: 1.11, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '農業', area: '府中', department: '農業科', quota: 63, finalApplicants: 92, finalRate: 1.46, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '瑞穂農芸', area: '瑞穂', department: '農業科', quota: 75, finalApplicants: 99, finalRate: 1.32, fiscalYear: '令和7年度（2025年度）' },
+    // --- 水産科（1校） ---
+    { schoolName: '大島海洋国際', area: '大島', department: '水産科', quota: 42, finalApplicants: 46, finalRate: 1.1, fiscalYear: '令和7年度（2025年度）' },
+    // --- 家庭科（単位制以外・3校） ---
+    { schoolName: '赤羽北桜', area: '北', department: '家庭科', quota: 123, finalApplicants: 89, finalRate: 0.72, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '農業', area: '府中', department: '家庭科', quota: 50, finalApplicants: 57, finalRate: 1.14, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '瑞穂農芸', area: '瑞穂', department: '家庭科', quota: 49, finalApplicants: 47, finalRate: 0.96, fiscalYear: '令和7年度（2025年度）' },
   ],
 };
