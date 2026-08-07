@@ -59,6 +59,12 @@
  * （機械科等→機械工学科等）が、R7時点で実在した校名・学科名をそのまま収録した（R8とは
  * 別のschoolNameとして扱う設計・tokyo/kanagawaの学校統廃合と同型の対応）。次頁（5頁目）以降は
  * 専門学科の他学科（商業等）が続く見込み。
+ *
+ * **2026-08-07追記(掛-1第5弾)**: 5頁目「専門学科・商業に関する学科」15校27レコードを追加。
+ * 頁末尾の印字済み「商業科計」小計（quota2,285・applicants2,151・倍率0.94）と完全一致
+ * （node.js機械計算）。「八潮南」もR8データに対応する学校が見当たらず（既存test.tsのR8学校
+ * リストには「八潮フロンティア」が代わりに存在＝改称の可能性）、大宮工業と同様R7時点の
+ * 実在記録としてそのまま収録した。次頁（6頁目）以降は専門学科の残り学科＋総合学科が続く見込み。
  */
 import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
 
@@ -73,7 +79,7 @@ export const SAITAMA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     },
     {
       url: 'https://www.pref.saitama.lg.jp/documents/241544/r7shigansha0220.pdf',
-      docTitle: '埼玉県教育委員会 令和7年度埼玉県公立高等学校における入学志願確定者数（全日制・定時制）（1〜4/9頁・普通科完結+専門学科(農業・工業)・掛-1・saitama横展開第1〜4弾）',
+      docTitle: '埼玉県教育委員会 令和7年度埼玉県公立高等学校における入学志願確定者数（全日制・定時制）（1〜5/9頁・普通科完結+専門学科(農業・工業・商業)・掛-1・saitama横展開第1〜5弾）',
       fiscalYear: '令和7年度（2025年度）',
       fetchedAt: '2026-08-07',
     },
@@ -564,5 +570,34 @@ export const SAITAMA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '三郷工業技術', department: '電子機械科', quota: 40, finalApplicants: 24, finalRate: 0.6, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '三郷工業技術', department: '情報技術科', quota: 40, finalApplicants: 25, finalRate: 0.63, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '三郷工業技術', department: '情報電子科', quota: 40, finalApplicants: 32, finalRate: 0.8, fiscalYear: '令和7年度（2025年度）' },
+    // ===== 5頁目「全日制 専門学科・商業に関する学科」15校27レコード（頁末尾「商業科計」2285/2151/0.94と完全一致）=====
+    // ⚠️「八潮南」はR8データに対応する学校が見当たらない(統廃合の可能性)。R7時点の実在記録としてそのまま収録。
+    { schoolName: '上尾', department: '商業科', quota: 120, finalApplicants: 165, finalRate: 1.38, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '岩槻商業', department: '商業科', quota: 79, finalApplicants: 42, finalRate: 0.53, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '岩槻商業', department: '情報処理科', quota: 80, finalApplicants: 63, finalRate: 0.79, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '浦和商業', department: '商業科', quota: 198, finalApplicants: 172, finalRate: 0.87, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '浦和商業', department: '情報処理科', quota: 80, finalApplicants: 84, finalRate: 1.05, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '大宮商業', department: '商業科', quota: 198, finalApplicants: 183, finalRate: 0.92, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '熊谷商業', department: '総合ビジネス科', quota: 198, finalApplicants: 169, finalRate: 0.85, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '鴻巣', department: '商業科', quota: 80, finalApplicants: 81, finalRate: 1.01, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '越谷総合技術', department: '流通経済科', quota: 40, finalApplicants: 31, finalRate: 0.78, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '越谷総合技術', department: '情報処理科', quota: 40, finalApplicants: 37, finalRate: 0.93, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '狭山経済', department: '流通経済科', quota: 79, finalApplicants: 83, finalRate: 1.05, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '狭山経済', department: '会計科', quota: 40, finalApplicants: 41, finalRate: 1.03, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '狭山経済', department: '情報処理科', quota: 80, finalApplicants: 87, finalRate: 1.09, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '所沢商業', department: '情報処理科', quota: 79, finalApplicants: 65, finalRate: 0.82, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '所沢商業', department: '国際流通科', quota: 79, finalApplicants: 62, finalRate: 0.78, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '所沢商業', department: 'ビジネス会計科', quota: 40, finalApplicants: 17, finalRate: 0.43, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '新座総合技術', department: '総合ビジネス科', quota: 39, finalApplicants: 39, finalRate: 1.0, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '鳩ケ谷', department: '情報処理科', quota: 80, finalApplicants: 84, finalRate: 1.05, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '羽生実業', department: '商業科', quota: 39, finalApplicants: 16, finalRate: 0.41, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '羽生実業', department: '情報処理科', quota: 40, finalApplicants: 25, finalRate: 0.63, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '深谷商業', department: '商業科', quota: 158, finalApplicants: 167, finalRate: 1.06, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '深谷商業', department: '会計科', quota: 40, finalApplicants: 38, finalRate: 0.95, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '深谷商業', department: '情報処理科', quota: 80, finalApplicants: 67, finalRate: 0.84, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '八潮南', department: '商業科', quota: 79, finalApplicants: 70, finalRate: 0.89, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '八潮南', department: '情報処理科', quota: 80, finalApplicants: 49, finalRate: 0.61, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '市立川越', department: '国際経済科', quota: 70, finalApplicants: 110, finalRate: 1.57, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '市立川越', department: '情報処理科', quota: 70, finalApplicants: 104, finalRate: 1.49, fiscalYear: '令和7年度（2025年度）' },
   ],
 };

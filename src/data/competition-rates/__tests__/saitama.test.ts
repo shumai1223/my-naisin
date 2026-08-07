@@ -82,7 +82,7 @@ describe('埼玉県 倍率パイプラインα（Y-2・全日制の突合テス�
     const result = checkAgainstSubtotal(
       records,
       findSubtotal('商業に関する学科 計'),
-      (r) => shougyouSchools.has(r.schoolName) && shougyouDepartments.has(r.department)
+      (r) => shougyouSchools.has(r.schoolName) && shougyouDepartments.has(r.department) && !r.fiscalYear
     );
     expect(result.matches).toBe(true);
   });
@@ -115,13 +115,13 @@ describe('埼玉県 倍率パイプラインα（Y-2・全日制の突合テス�
     expect(records.some((r) => r.schoolName === '越生翔陽')).toBe(false);
   });
 
-  it('掛-1(学校別×多年度): 令和7年度(R7)分レコードが165件収録され(1〜4頁目完了)、区市町村+学校名+学科の重複が無い', () => {
+  it('掛-1(学校別×多年度): 令和7年度(R7)分レコードが192件収録され(1〜5頁目完了)、区市町村+学校名+学科の重複が無い', () => {
     const r7 = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
-    expect(r7.length).toBe(165);
+    expect(r7.length).toBe(192);
     const sumQuota = r7.reduce((a, r) => a + r.quota, 0);
     const sumApplicants = r7.reduce((a, r) => a + r.finalApplicants, 0);
-    expect(sumQuota).toBe(29055);
-    expect(sumApplicants).toBe(32736);
+    expect(sumQuota).toBe(31340);
+    expect(sumApplicants).toBe(34887);
     const seen = new Set<string>();
     for (const r of r7) {
       const key = `${r.schoolName}|${r.department}`;
