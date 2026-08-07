@@ -6,10 +6,11 @@ import { KAGAWA_COMPETITION_RATES } from '../kagawa';
  */
 describe('香川県 倍率パイプラインα（Y-6・全日制30校68レコードの完全収録テスト）', () => {
   const { records, officialSubtotals } = KAGAWA_COMPETITION_RATES;
+  const r8 = records.filter((r) => !r.fiscalYear);
 
   it('全日制の全レコード合計が「全日制合計」行（quota4,208・applicants4,296・倍率1.02）と完全一致する', () => {
     const grandTotal = officialSubtotals.find((s) => s.label === '全日制計')!;
-    const result = checkAgainstSubtotal(records, grandTotal, () => true);
+    const result = checkAgainstSubtotal(records, grandTotal, (r) => !r.fiscalYear);
     expect(result.matches).toBe(true);
   });
 
@@ -21,11 +22,11 @@ describe('香川県 倍率パイプラインα（Y-6・全日制30校68レコー
     }
   });
 
-  it('学校名+学科名の重複が無い', () => {
+  it('学校名+学科名+年度の重複が無い', () => {
     const seen = new Set<string>();
     const dupes: string[] = [];
     for (const r of records) {
-      const key = `${r.schoolName}|${r.department}`;
+      const key = `${r.schoolName}|${r.department}|${r.fiscalYear ?? ''}`;
       if (seen.has(key)) dupes.push(key);
       seen.add(key);
     }
@@ -37,33 +38,51 @@ describe('香川県 倍率パイプラインα（Y-6・全日制30校68レコー
   });
 
   it('68レコード・30校が収録されている', () => {
-    expect(records.length).toBe(68);
-    const distinctSchools = new Set(records.map((r) => r.schoolName));
+    expect(r8.length).toBe(68);
+    const distinctSchools = new Set(r8.map((r) => r.schoolName));
     expect(distinctSchools.size).toBe(30);
   });
 
   it('凡例(※印)で明記済みのくくり募集3組が正しく収録されている', () => {
-    expect(records.find((r) => r.schoolName === '三本松')).toEqual({
+    expect(r8.find((r) => r.schoolName === '三本松')).toEqual({
       schoolName: '三本松',
       department: '普通・理数（くくり募集）',
       quota: 87,
       finalApplicants: 80,
       finalRate: 0.92,
     });
-    expect(records.find((r) => r.schoolName === '農業経営')).toEqual({
+    expect(r8.find((r) => r.schoolName === '農業経営')).toEqual({
       schoolName: '農業経営',
       department: '農業生産・環境園芸・動物科学・食農科学（くくり募集）',
       quota: 77,
       finalApplicants: 41,
       finalRate: 0.53,
     });
-    expect(records.find((r) => r.schoolName === '観音寺第一')).toEqual({
+    expect(r8.find((r) => r.schoolName === '観音寺第一')).toEqual({
       schoolName: '観音寺第一',
       department: '普通・理数（くくり募集）',
       quota: 150,
       finalApplicants: 134,
       finalRate: 0.89,
     });
+  });
+
+  it('掛-1(学校別×多年度): 令和7年度(R7)分レコードが68件・30校収録され、公式「全日制合計」4,376/4,732と完全一致し、R8と学校名+学科名の組み合わせが完全一致する(学校再編なし・くくり募集3組も同一)', () => {
+    const r7 = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
+    expect(r7.length).toBe(68);
+    const distinctSchools = new Set(r7.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(30);
+    const sumQuota = r7.reduce((a, r) => a + r.quota, 0);
+    const sumApplicants = r7.reduce((a, r) => a + r.finalApplicants, 0);
+    expect(sumQuota).toBe(4376);
+    expect(sumApplicants).toBe(4732);
+
+    const r8Keys = new Set(r8.map((r) => `${r.schoolName}|${r.department}`));
+    const r7Keys = new Set(r7.map((r) => `${r.schoolName}|${r.department}`));
+    expect(r7Keys.size).toBe(r8Keys.size);
+    for (const key of r7Keys) {
+      expect(r8Keys.has(key)).toBe(true);
+    }
   });
 
   it('sourcesが公式PDF URLを正しく記録している', () => {
