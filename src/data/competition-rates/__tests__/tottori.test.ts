@@ -9,10 +9,11 @@ import { TOTTORI_COMPETITION_RATES } from '../tottori';
  */
 describe('鳥取県 倍率パイプラインα（Y-6・全日制22校43レコードの完全収録テスト）', () => {
   const { records, officialSubtotals } = TOTTORI_COMPETITION_RATES;
+  const r8 = records.filter((r) => !r.fiscalYear);
 
   it('全日制の全レコード合計が県計（quota2,937・applicants2,334・倍率0.79）と完全一致する', () => {
     const grandTotal = officialSubtotals.find((s) => s.label === '全日制計')!;
-    const result = checkAgainstSubtotal(records, grandTotal, () => true);
+    const result = checkAgainstSubtotal(records, grandTotal, (r) => !r.fiscalYear);
     expect(result.matches).toBe(true);
   });
 
@@ -22,7 +23,7 @@ describe('鳥取県 倍率パイプラインα（Y-6・全日制22校43レコー
     ['西部小計', '西部'],
   ])('%sが公表資料記載の地区小計と完全一致する', (label, area) => {
     const subtotal = officialSubtotals.find((s) => s.label === label)!;
-    const result = checkAgainstSubtotal(records, subtotal, (r) => r.area === area);
+    const result = checkAgainstSubtotal(records, subtotal, (r) => r.area === area && !r.fiscalYear);
     expect(result.matches).toBe(true);
   });
 
@@ -34,11 +35,11 @@ describe('鳥取県 倍率パイプラインα（Y-6・全日制22校43レコー
     }
   });
 
-  it('学校名+学科名の重複が無い', () => {
+  it('学校名+学科名+年度の重複が無い', () => {
     const seen = new Set<string>();
     const dupes: string[] = [];
     for (const r of records) {
-      const key = `${r.schoolName}|${r.department}`;
+      const key = `${r.schoolName}|${r.department}|${r.fiscalYear ?? ''}`;
       if (seen.has(key)) dupes.push(key);
       seen.add(key);
     }
@@ -50,8 +51,8 @@ describe('鳥取県 倍率パイプラインα（Y-6・全日制22校43レコー
   });
 
   it('43レコード・22校が収録されている', () => {
-    expect(records.length).toBe(43);
-    const distinctSchools = new Set(records.map((r) => r.schoolName));
+    expect(r8.length).toBe(43);
+    const distinctSchools = new Set(r8.map((r) => r.schoolName));
     expect(distinctSchools.size).toBe(22);
   });
 
@@ -69,13 +70,13 @@ describe('鳥取県 倍率パイプラインα（Y-6・全日制22校43レコー
       { schoolName: '智頭農林', area: '東部', department: '生産科学・森林科学（くくり募集）', quota: 57, finalApplicants: 9, finalRate: 0.16 },
     ];
     for (const c of cases) {
-      const rec = records.find((r) => r.schoolName === c.schoolName && r.department === c.department);
+      const rec = r8.find((r) => r.schoolName === c.schoolName && r.department === c.department);
       expect(rec).toEqual(c);
     }
   });
 
   it('applicants=0の学科(境港総合技術・電気電子)も正しく収録されている(quota>0のため)', () => {
-    expect(records.find((r) => r.schoolName === '境港総合技術' && r.department === '電気電子')).toEqual({
+    expect(r8.find((r) => r.schoolName === '境港総合技術' && r.department === '電気電子')).toEqual({
       schoolName: '境港総合技術',
       area: '西部',
       department: '電気電子',
@@ -83,6 +84,24 @@ describe('鳥取県 倍率パイプラインα（Y-6・全日制22校43レコー
       finalApplicants: 0,
       finalRate: 0,
     });
+  });
+
+  it('掛-1(学校別×多年度): 令和7年度(R7)分レコードが43件収録され、県計(quota2,936・applicants2,586)および地区別小計と完全一致する', () => {
+    const r7 = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
+    expect(r7.length).toBe(43);
+    expect(r7.reduce((a, r) => a + r.quota, 0)).toBe(2936);
+    expect(r7.reduce((a, r) => a + r.finalApplicants, 0)).toBe(2586);
+
+    const sumArea = (area: string) => {
+      const rs = r7.filter((r) => r.area === area);
+      return { quota: rs.reduce((a, r) => a + r.quota, 0), applicants: rs.reduce((a, r) => a + r.finalApplicants, 0) };
+    };
+    expect(sumArea('東部')).toEqual({ quota: 1235, applicants: 1054 });
+    expect(sumArea('中部')).toEqual({ quota: 498, applicants: 390 });
+    expect(sumArea('西部')).toEqual({ quota: 1203, applicants: 1142 });
+
+    const distinctSchools = new Set(r7.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(22);
   });
 
   it('sourcesが公式PDF URLを正しく記録している', () => {
