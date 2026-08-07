@@ -245,9 +245,44 @@
   }
   
   /* ===========================
+     Inline Links（本文中のリンク）
+
+     ⚠️2026-08-07修正: これまで `.blog-content a` の指定が存在せず、Tailwindのリセット
+     （a { color: inherit; text-decoration: inherit }）がそのまま効いていたため、
+     **本文中のリンクが黒い地の文と見分けがつかない状態**だった。
+     全49記事のうち46記事が本文中にリンクを持っており、内部リンク（/hensachi 等への誘導）も
+     外部リンクも読者から見えていなかった＝クリックされようがなかった。
+     .toc a / .cta-box a のように個別指定のある箇所だけが例外的に見えていた。
+     =========================== */
+
+  .blog-content a {
+    color: var(--blog-accent);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+    text-decoration-color: rgba(59, 130, 246, 0.4);
+    transition: text-decoration-color 0.15s, color 0.15s;
+  }
+
+  .blog-content a:hover {
+    text-decoration-color: var(--blog-accent);
+  }
+
+  /* 外部リンクはタップ領域を確保しつつ、地の文の行間を崩さない。 */
+  .blog-content a[target='_blank'] {
+    word-break: break-word;
+  }
+
+  /* ボックス内で個別にスタイルが当たっている箇所は従来どおり（上の指定を打ち消す）。 */
+  .blog-content .toc a,
+  .blog-content .cta-box a {
+    text-decoration: none;
+  }
+
+  /* ===========================
      Point Box
      =========================== */
-  
+
   .blog-content .point-box {
     background: var(--blog-bg-soft);
     border: 1px solid var(--blog-border);

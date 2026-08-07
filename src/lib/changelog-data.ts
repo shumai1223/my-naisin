@@ -15,6 +15,14 @@ export interface ChangeLogEntry {
 export const CHANGELOG: ChangeLogEntry[] = [
   {
     date: '2026-08-07',
+    type: 'fix',
+    category: 'ui',
+    title: '記事本文中のリンクが本文と見分けられない不具合を修正',
+    description:
+      'ブログ記事の本文中に置いたリンクに色と下線が付いておらず、地の文と同じ黒い文字で表示されていました。関連ページへの案内や参考リンクがリンクだと分からない状態だったため、青色と下線を付けて判別できるようにしました。全49記事のうち46記事が対象です。',
+  },
+  {
+    date: '2026-08-07',
     type: 'add',
     category: 'content',
     title: '不登校の記事に「この先は誰に相談すればいいか」の参考リンクを追加',
