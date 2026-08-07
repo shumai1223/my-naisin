@@ -2,14 +2,15 @@ import { checkAgainstSubtotal } from '@/lib/competition-rate';
 import { FUKUSHIMA_COMPETITION_RATES } from '../fukushima';
 
 /**
- * Y-6 DoD検証（福島県・保留県からの再挑戦で完全達成）。
+ * Y-6 DoD検証（福島県・保留県からの再挑戦で完全達成／掛-1・R7多年度対応済）。
  */
 describe('福島県 倍率パイプラインα（Y-6・全日制50校99レコードの完全収録テスト）', () => {
   const { records, officialSubtotals } = FUKUSHIMA_COMPETITION_RATES;
+  const r8 = records.filter((r) => !r.fiscalYear);
 
   it('全レコード合計が「全日制 合計」行（quota1,686・applicants106）と完全一致する', () => {
     const subtotal = officialSubtotals.find((s) => s.label === '全日制 合計')!;
-    const result = checkAgainstSubtotal(records, subtotal, () => true);
+    const result = checkAgainstSubtotal(records, subtotal, (r) => !r.fiscalYear);
     expect(result.matches).toBe(true);
   });
 
@@ -21,11 +22,11 @@ describe('福島県 倍率パイプラインα（Y-6・全日制50校99レコー
     }
   });
 
-  it('学校名+学科名の重複が無い', () => {
+  it('学校名+学科名+年度の重複が無い', () => {
     const seen = new Set<string>();
     const dupes: string[] = [];
     for (const r of records) {
-      const key = `${r.schoolName}|${r.department}`;
+      const key = `${r.schoolName}|${r.department}|${r.fiscalYear ?? ''}`;
       if (seen.has(key)) dupes.push(key);
       seen.add(key);
     }
@@ -37,9 +38,16 @@ describe('福島県 倍率パイプラインα（Y-6・全日制50校99レコー
   });
 
   it('99レコード・50校が収録されている', () => {
-    expect(records.length).toBe(99);
-    const distinctSchools = new Set(records.map((r) => r.schoolName));
+    expect(r8.length).toBe(99);
+    const distinctSchools = new Set(r8.map((r) => r.schoolName));
     expect(distinctSchools.size).toBe(50);
+  });
+
+  it('掛-1(学校別×多年度): 令和7年度(R7)分レコードが96件収録され、「全日制 合計」行(quota1,603・applicants175)と完全一致する。福島県の後期選抜募集定員は前期選抜の結果に応じて年ごとに残り枠が大きく変動するため、対象学科の顔ぶれ自体が年で入れ替わる(前期選抜で埋まった学科はその年は一覧に出現しない)。この構造上、他県のような学校名+学科名の完全一致検証は意味を持たないため実施しない', () => {
+    const r7 = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
+    expect(r7.length).toBe(96);
+    expect(r7.reduce((a, r) => a + r.quota, 0)).toBe(1603);
+    expect(r7.reduce((a, r) => a + r.finalApplicants, 0)).toBe(175);
   });
 
   it('sourcesが公式PDF URLを正しく記録している', () => {
