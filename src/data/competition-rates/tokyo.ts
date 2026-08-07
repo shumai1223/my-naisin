@@ -144,7 +144,14 @@ export const TOKYO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '「水産計42/46/1.10」「家庭計222/193/0.87」の3つ全てがcompetition-rate-history側のREIWA_7' +
       'カテゴリ値(農業科413/536/1.30・水産科42/46/1.10・家庭科(単位制以外)222/193/0.87)と完全一致' +
       '(node.js機械計算で確認)。府中の「農業」高校は農業科・家庭科の両方に学科を持つため2レコードに' +
-      'なる(R8のtokyo.tsと同じ構造)。次頁(5頁目)は家庭科(単位制)/福祉科/理数科等が続く見込み。',
+      'なる(R8のtokyo.tsと同じ構造)。次頁(5頁目)は家庭科(単位制)/福祉科/理数科等が続く見込み。' +
+      '⚠️追記(掛-1第9弾): 5頁目「14[家庭に関する学科(単位制の学校)]」1校・「15[福祉に関する学科]」2校・' +
+      '「16[理数に関する学科]」2校・「17[芸術に関する学科]」1校・「18[体育に関する学科]」2校の計8校を' +
+      '追加した。印字小計「家庭合計271/237/0.87」(単位制以外222/193+単位制49/44の合算と整合)・' +
+      '「福祉計50/32/0.64」「理数計72/230/3.19」「芸術計112/200/1.79」「体育計52/85/1.63」の' +
+      '全てがcompetition-rate-history側のREIWA_7カテゴリ値(家庭科(単位制)49/44/0.90・福祉科50/32/0.64・' +
+      '理数科72/230/3.19・芸術科112/200/1.79・体育科52/85/1.63)と完全一致(node.js機械計算で確認)。' +
+      '次頁(6頁目)は国際科/併合科/産業科等が続く見込み。',
   },
   officialSubtotals: [
     { label: '区部計', schoolCount: 57, quota: 12088, finalApplicants: 16926, finalRate: 1.4 },
@@ -594,5 +601,18 @@ export const TOKYO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '赤羽北桜', area: '北', department: '家庭科', quota: 123, finalApplicants: 89, finalRate: 0.72, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '農業', area: '府中', department: '家庭科', quota: 50, finalApplicants: 57, finalRate: 1.14, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '瑞穂農芸', area: '瑞穂', department: '家庭科', quota: 49, finalApplicants: 47, finalRate: 0.96, fiscalYear: '令和7年度（2025年度）' },
+    // --- 家庭科（単位制・1校） ---
+    { schoolName: '忍岡', area: '台東', department: '家庭科（単位制）', quota: 49, finalApplicants: 44, finalRate: 0.9, fiscalYear: '令和7年度（2025年度）' },
+    // --- 福祉科（2校） ---
+    { schoolName: '赤羽北桜', area: '北', department: '福祉科', quota: 25, finalApplicants: 26, finalRate: 1.04, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '野津田', area: '町田', department: '福祉科', quota: 25, finalApplicants: 6, finalRate: 0.24, fiscalYear: '令和7年度（2025年度）' },
+    // --- 理数科（2校） ---
+    { schoolName: '科学技術', area: '江東', department: '理数科', quota: 37, finalApplicants: 72, finalRate: 1.95, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '立川', area: '立川', department: '理数科', quota: 35, finalApplicants: 158, finalRate: 4.51, fiscalYear: '令和7年度（2025年度）' },
+    // --- 芸術科（1校） ---
+    { schoolName: '総合芸術', area: '新宿', department: '芸術科', quota: 112, finalApplicants: 200, finalRate: 1.79, fiscalYear: '令和7年度（2025年度）' },
+    // --- 体育科（2校） ---
+    { schoolName: '駒場', area: '目黒', department: '体育科', quota: 28, finalApplicants: 64, finalRate: 2.29, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '野津田', area: '町田', department: '体育科', quota: 24, finalApplicants: 21, finalRate: 0.88, fiscalYear: '令和7年度（2025年度）' },
   ],
 };
