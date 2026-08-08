@@ -53,6 +53,14 @@ export function HighSchoolBorderlineTable({ prefectureCode, prefectureName }: Hi
         </div>
       </div>
 
+      {/* 出典バッジはスマホ幅(390px)だと横スクロールしないと見えない列にある。
+          2026-08-08 Cowork実地監査: 数字だけ見えて「非公式・参考情報」の但し書きが
+          隠れるのは最悪の並びと指摘されたため、表の直上に独立した1行として常時表示する。 */}
+      <div className="flex items-center gap-2 rounded-xl border border-amber-200 bg-amber-50 px-4 py-2.5 text-xs font-bold text-amber-800">
+        <Info className="h-3.5 w-3.5 shrink-0" />
+        以下の数値は塾・受験情報サイトの推定です（教育委員会の公表値ではありません）
+      </div>
+
       {/* テーブル本体 */}
       <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
         <div className="overflow-x-auto">
