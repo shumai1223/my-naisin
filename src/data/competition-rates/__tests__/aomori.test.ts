@@ -71,6 +71,30 @@ describe('青森県 倍率パイプラインα（Y-6・全日制43校89レコー
     }
   });
 
+  it('掛-1(学校別×多年度・3年度目): 令和6年度(R6)分レコードが90件・43校収録され、地域別6分割PDF(東青/西北五/中弘南黒/上十三/下北むつ/三八)それぞれの合計行と「全日制の課程合計」7,137/6,733の計7段階すべてと完全一致する。青森南「普通」はR6のみquota160(R7/R8はquota120)、五所川原農林は「環境土木」(R7/R8は「環境科学」に改称)という2件の実在差を確認した', () => {
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    expect(r6.length).toBe(90);
+    const distinctSchools = new Set(r6.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(43);
+    const sumQuota = r6.reduce((a, r) => a + r.quota, 0);
+    const sumApplicants = r6.reduce((a, r) => a + r.finalApplicants, 0);
+    expect(sumQuota).toBe(7137);
+    expect(sumApplicants).toBe(6733);
+
+    expect(r6.find((r) => r.schoolName === '青森南' && r.department === '普通')).toMatchObject({ quota: 160, finalApplicants: 182 });
+    expect(r6.find((r) => r.schoolName === '五所川原農林' && r.department === '環境土木')).toMatchObject({ quota: 35, finalApplicants: 28 });
+    expect(r6.some((r) => r.schoolName === '五所川原農林' && r.department === '環境科学')).toBe(false);
+
+    expect(r6.find((r) => r.schoolName === '青森商業')).toEqual({
+      schoolName: '青森商業',
+      department: '商業・情報処理(くくり)',
+      quota: 200,
+      finalApplicants: 159,
+      finalRate: 0.8,
+      fiscalYear: '令和6年度（2024年度）',
+    });
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of AOMORI_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.pref\.aomori\.lg\.jp\//);
