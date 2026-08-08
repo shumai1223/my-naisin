@@ -80,6 +80,24 @@ describe('愛知県 倍率パイプラインα（Y-6・全日制155校1校舎241
     expect(distinctSchools.size).toBe(156);
   });
 
+  it('掛-1(学校別×多年度・3年度目): 令和6年度(R6)分レコードが237件収録され、行内検算(第1志望+第2志望=志願者総数)が全行で一致し、WebSearchで独立確認した確定値(quota31,417・applicants59,007)と完全一致する', () => {
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    expect(r6.length).toBe(237);
+    expect(r6.reduce((a, r) => a + r.quota, 0)).toBe(31417);
+    expect(r6.reduce((a, r) => a + r.finalApplicants, 0)).toBe(59007);
+
+    const seen = new Set<string>();
+    for (const r of r6) {
+      const key = `${r.schoolName}|${r.department}`;
+      expect(seen.has(key)).toBe(false);
+      seen.add(key);
+    }
+
+    // 報道記事(リセマム/中日新聞)で個別に言及された最高倍率2件との突合
+    expect(r6.find((r) => r.schoolName === '市立工芸' && r.department === '情報')?.finalRate).toBe(4.05);
+    expect(r6.find((r) => r.schoolName === '市立名東' && r.department === '国際英語')?.finalRate).toBe(3.91);
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of AICHI_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.pref\.aichi\.jp\//);
