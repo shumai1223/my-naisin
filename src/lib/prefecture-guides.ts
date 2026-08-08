@@ -1,6 +1,6 @@
 // 都道府県別ガイドデータ（データ駆動設計）
 
-import { PrefectureConfig } from './prefectures';
+import { PrefectureConfig, getPrefectureByCode } from './prefectures';
 import { calculateTotalScore } from './utils';
 import { DEFAULT_SCORES } from './constants';
 import type { Scores, SubjectKey } from './types';
@@ -11,6 +11,25 @@ function allGradeScores(n: number): Scores {
     (acc, k) => ({ ...acc, [k]: n }),
     {} as Scores,
   );
+}
+
+/**
+ * オール3から、実技科目を中3の年だけ1つ4に上げた場合の内申点合計と、その増分（"+N点"）。
+ * 神奈川「中3で1つ上げると2点アップ」・大阪「中3の1点アップは内申6点分」は、この
+ * 「対象学年のうち中3だけを1段階上げる」という単年の増分（practicalMultiplier×
+ * gradeMultipliers[3]）を指しており、既存のcalculatePointValue()（PointValueCard等が使う
+ * 「1点アップの価値」計算）と同じ単一ソースの考え方に揃える。
+ * 2026-08-08 Cowork実地監査で、千葉・静岡・福岡・東京・埼玉・北海道・広島・宮城の8県が
+ * この計算と無関係な固定値「+4点」を（コピペ由来で）表示していたと判明
+ * （埼玉は偶然にも中1〜中3を通した合計の増分が+4だったため気づかれにくかった）。
+ */
+function practicalPlus1Text(prefectureCode: string): string {
+  const prefecture = getPrefectureByCode(prefectureCode);
+  if (!prefecture) return '';
+  const all3 = calculateTotalScore(allGradeScores(3), prefectureCode);
+  const gain = prefecture.practicalMultiplier * (prefecture.gradeMultipliers[3] || 1);
+  const gainText = Number.isInteger(gain) ? `${gain}` : gain.toFixed(1);
+  return `${all3 + gain}点（+${gainText}点）`;
 }
 
 export interface PrefectureGuide {
@@ -54,7 +73,7 @@ export const prefectureGuides: Record<string, PrefectureGuide> = {
     examples: {
       all3: '39点（中堅校のボーダーライン）',
       all4: '52点（人気校・上位校の必須ライン）',
-      practicalPlus1: '43点（実技1つで当日点約18点分の価値）'
+      practicalPlus1: '41点（実技1つで当日点約9点分の価値）'
     },
     // 2026-08-01: 5項目すべてをWebSearchで個別に裏取りした（詳細はloop-question-note参照）。
     // ①②④は既存データ・一次情報と一致し正確と確認。③は「中間・期末テストの合計で決まる」が
@@ -217,7 +236,7 @@ export const prefectureGuides: Record<string, PrefectureGuide> = {
     examples: {
       all3: '108点 / 180点満点',
       all4: '144点 / 180点満点',
-      practicalPlus1: '112点（+4点）'
+      practicalPlus1: practicalPlus1Text('saitama')
     },
     // 2026-08-01: 5項目をWebSearchで個別に裏取り。全項目とも一次情報・prefectures.tsと一致し
     // 事実誤りは見つからなかった（学年比率の学校差・加算点制度は本日のprefecture-traps.ts埼玉県
@@ -274,7 +293,7 @@ export const prefectureGuides: Record<string, PrefectureGuide> = {
     examples: {
       all3: '81点 / 135点満点',
       all4: '108点 / 135点満点',
-      practicalPlus1: '85点（+4点）'
+      practicalPlus1: practicalPlus1Text('chiba')
     },
     // 2026-08-01: 5項目をWebSearchで個別に裏取り。①②③④は一次情報と一致し正確。⑤は
     // 「自己表現(面接・作文等)が全校で実施」という表現が事実誤りと判明（実際は面接/小論文/
@@ -332,7 +351,7 @@ export const prefectureGuides: Record<string, PrefectureGuide> = {
     examples: {
       all3: '189点 / 315点満点',
       all4: '252点 / 315点満点',
-      practicalPlus1: '193点（+4点）'
+      practicalPlus1: practicalPlus1Text('hokkaido')
     },
     // 2026-08-01: 5項目をWebSearchで個別に裏取り。①②③⑤は一次情報と一致し正確。④は
     // 事実誤りと判明（「学校裁量問題」は2019年発表・2022年度入試から廃止され、現在は
@@ -390,7 +409,7 @@ export const prefectureGuides: Record<string, PrefectureGuide> = {
     examples: {
       all3: '27点 / 45点満点',
       all4: '36点 / 45点満点',
-      practicalPlus1: '31点（+4点）'
+      practicalPlus1: practicalPlus1Text('fukuoka')
     },
     // 2026-08-01: 5項目をWebSearchで個別に裏取り。全項目とも一次情報・prefectures.tsと
     // 一致し事実誤りは見つからなかった（③傾斜配点・④特色化選抜は本日のprefecture-traps.ts
@@ -446,7 +465,7 @@ export const prefectureGuides: Record<string, PrefectureGuide> = {
     examples: {
       all3: '27点 / 45点満点',
       all4: '36点 / 45点満点',
-      practicalPlus1: '31点（+4点）'
+      practicalPlus1: practicalPlus1Text('shizuoka')
     },
     // 2026-08-01: 5項目をWebSearchで個別に裏取り。全項目とも一次情報と完全一致し事実誤りは
     // 見つからなかった（第2学期末までの対象期間・学校裁量枠50%以内・共通枠3段階の75%/10%/15%
@@ -504,7 +523,7 @@ export const prefectureGuides: Record<string, PrefectureGuide> = {
     examples: {
       all3: '150点 / 250点満点',
       all4: '200点 / 250点満点',
-      practicalPlus1: '157.5点（+7.5点）'
+      practicalPlus1: practicalPlus1Text('hyogo')
     },
     // 2026-08-01: 5項目をWebSearchで個別に裏取り。pitfalls5項目は一次情報と一致し事実誤りは
     // 無かったが、隣接するfaq（現状は未描画だが将来の参照に備え）の「加算点は25点」という
@@ -562,7 +581,7 @@ export const prefectureGuides: Record<string, PrefectureGuide> = {
     examples: {
       all3: '135点 / 225点満点',
       all4: '180点 / 225点満点',
-      practicalPlus1: '139点（+4点）'
+      practicalPlus1: practicalPlus1Text('hiroshima')
     },
     // 2026-08-01: 5項目をWebSearchで個別に裏取り。①②③④は一次情報と一致し正確。⑤は
     // 事実誤りと判明（「選抜Ⅰ(推薦)と選抜Ⅱ(一般)」は令和5(2023)年度の入試制度改革で
@@ -787,7 +806,7 @@ export const prefectureGuides: Record<string, PrefectureGuide> = {
     examples: {
       all3: '117点（多くの公立校で合格圏内に入る目安）',
       all4: '156点（仙台第一・第二などのトップ校を目指すなら必須）',
-      practicalPlus1: '121点（実技1アップで5教科の2倍の内申点アップ）'
+      practicalPlus1: '119点（実技1アップで5教科の2倍の内申点アップ）'
     },
     // 2026-08-01: 5項目をWebSearchで個別に裏取り。①②は一次情報・prefectures.tsと一致し正確。
     // ③は事実誤りと判明（「共通選抜70%・特色選抜30%」という固定比率は無く、実際は募集割合が
@@ -884,9 +903,6 @@ export const defaultGuide: PrefectureGuide = {
     { title: '内申点ガイド', url: '/blog/naishin-guide' }
   ]
 };
-
-
-import { getPrefectureByCode } from './prefectures';
 
 
 

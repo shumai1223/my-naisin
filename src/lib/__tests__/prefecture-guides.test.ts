@@ -1,4 +1,15 @@
 import { getPrefectureGuide, VERIFIED_PITFALLS_PREFECTURE_CODES, PREFECTURES_WITH_GUIDE } from '../prefecture-guides';
+import { getPrefectureByCode } from '../prefectures';
+import { calculateTotalScore } from '../utils';
+import { DEFAULT_SCORES } from '../constants';
+import type { Scores, SubjectKey } from '../types';
+
+function allGradeScores(n: number): Scores {
+  return (Object.keys(DEFAULT_SCORES) as SubjectKey[]).reduce(
+    (acc, k) => ({ ...acc, [k]: n }),
+    {} as Scores,
+  );
+}
 
 // 2026-08-01: getPrefectureGuide()がPrefectureMinimumContent.tsxで一度も参照されない
 // 死んだコードだった問題を修正した際に追加。pitfalls(物語調の解説)はUI表示前に事実確認が
@@ -355,5 +366,26 @@ describe('宮城県のpitfalls(2026-08-01にWebSearchで個別に裏取り済み
     const allText = guide.pitfalls.items.join('');
     expect(allText).toContain('2倍');
     expect(allText).toContain('195点満点');
+  });
+});
+
+// 2026-08-08 Cowork実地監査: 千葉・静岡・福岡・東京・埼玉・北海道・広島・宮城の8県が、
+// 実際のpracticalMultiplier×gradeMultipliersと無関係な固定値「+4点」をコピペで表示していた
+// (埼玉は偶然一致していたため気づかれなかった)。examples.practicalPlus1が数値で始まる県は、
+// 冒頭の数値が「オール3の合計＋中3のpracticalMultiplier×gradeMultipliers[3]」の理論値と
+// 一致することを機械的に保証し、今後の固定値混入を検出する。
+describe('examples.practicalPlus1は固定値でなくpracticalMultiplier×gradeMultipliers[3]から算出されている', () => {
+  test.each([...PREFECTURES_WITH_GUIDE])('%s: 冒頭の数値が理論値と一致する', (code) => {
+    const guide = getPrefectureGuide(code);
+    const match = guide.examples.practicalPlus1.match(/^(\d+(?:\.\d+)?)点/);
+    if (!match) return; // 数値を明示しない定性的な表現（愛知・岩手等）は対象外
+
+    const prefecture = getPrefectureByCode(code);
+    expect(prefecture).toBeDefined();
+    if (!prefecture) return;
+
+    const all3 = calculateTotalScore(allGradeScores(3), code);
+    const expectedGain = prefecture.practicalMultiplier * (prefecture.gradeMultipliers[3] || 1);
+    expect(Number(match[1])).toBeCloseTo(all3 + expectedGain, 5);
   });
 });
