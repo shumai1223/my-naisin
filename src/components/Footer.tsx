@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { Heart, FileText, Shield, Mail, AlertTriangle, Sparkles, BookOpen, User, Target, MapPin, ChevronRight, Database, Twitter } from 'lucide-react';
 
 import { APP_NAME } from '@/lib/constants';
+import { FISCAL_YEAR_PROVISIONAL_NOTE } from '@/lib/fiscal-year';
 
 export function Footer() {
   return (
@@ -292,6 +293,8 @@ export function Footer() {
               <strong>免責事項:</strong> 当サイトの計算結果は参考値です。実際の入試における内申点は、各中学校が作成する正式な調査書の内容に基づきます。
               正確な情報については、各都道府県教育委員会または在籍校にご確認ください。
               詳細は<Link href="/disclaimer" className="font-bold underline">免責事項</Link>をご覧ください。
+              <br />
+              {FISCAL_YEAR_PROVISIONAL_NOTE}
             </p>
           </div>
         </div>

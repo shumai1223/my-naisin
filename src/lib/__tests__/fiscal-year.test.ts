@@ -5,6 +5,9 @@ import {
   FISCAL_YEAR_LABEL,
   REIWA_YEAR_LABEL,
   FISCAL_YEAR_FULL_LABEL,
+  NEXT_REIWA_YEAR,
+  NEXT_REIWA_YEAR_LABEL,
+  FISCAL_YEAR_PROVISIONAL_NOTE,
   reiwaYear,
 } from '@/lib/fiscal-year';
 
@@ -28,5 +31,15 @@ describe('fiscal-year', () => {
     expect(FISCAL_YEAR_LABEL).toBe(`${CURRENT_FISCAL_YEAR}年度`);
     expect(REIWA_YEAR_LABEL).toBe(`令和${CURRENT_REIWA_YEAR}年度`);
     expect(FISCAL_YEAR_FULL_LABEL).toBe(`${REIWA_YEAR_LABEL}（${FISCAL_YEAR_LABEL}）`);
+  });
+
+  test('NEXT_REIWA_YEARはCURRENT_REIWA_YEARの1年後', () => {
+    expect(NEXT_REIWA_YEAR).toBe(CURRENT_REIWA_YEAR + 1);
+    expect(NEXT_REIWA_YEAR_LABEL).toBe(`令和${NEXT_REIWA_YEAR}年度`);
+  });
+
+  test('年度暫定値の注記は現在年度と次年度の両方に言及する（2026-08-08 loop-question-note対応）', () => {
+    expect(FISCAL_YEAR_PROVISIONAL_NOTE).toContain(REIWA_YEAR_LABEL);
+    expect(FISCAL_YEAR_PROVISIONAL_NOTE).toContain(NEXT_REIWA_YEAR_LABEL);
   });
 });

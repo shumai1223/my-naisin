@@ -32,3 +32,19 @@ export const REIWA_YEAR_LABEL = `令和${CURRENT_REIWA_YEAR}年度`;
 
 /** '令和8年度（2026年度）'：サイト内で最も使われる併記フォーマット。 */
 export const FISCAL_YEAR_FULL_LABEL = `${REIWA_YEAR_LABEL}（${FISCAL_YEAR_LABEL}）`;
+
+/** 次年度の令和年（数値）。12月の年度切替前でも「次の入試」の表記に使う。 */
+export const NEXT_REIWA_YEAR = CURRENT_REIWA_YEAR + 1;
+
+/** '令和9年度' */
+export const NEXT_REIWA_YEAR_LABEL = `令和${NEXT_REIWA_YEAR}年度`;
+
+/**
+ * 年度表記の年度遅れ注記（2026-08-08 loop-question-note・👤裁定「暫定値です」の明記で対応）。
+ *
+ * CURRENT_FISCAL_YEARは12月の年度切替時にしか更新しない設計のため、切替前の春〜秋の期間は
+ * 「今年度の入試（CURRENT）はすでに実施済みで、今の受験生が実際に受けるのは次年度（NEXT）の
+ * 入試」という年度ズレが生じる。全箇所の数値を年度切替前に前倒しするのは誤りのリスクが高い
+ * ため、既存の計算根拠はそのまま維持しつつ、フッター（全ページ共通）にこの一文だけを足す。
+ */
+export const FISCAL_YEAR_PROVISIONAL_NOTE = `${REIWA_YEAR_LABEL}要綱に基づく暫定値です。${NEXT_REIWA_YEAR_LABEL}要綱の公表後、順次更新します。`;
