@@ -145,8 +145,16 @@
  * 東久留米1・武蔵村山1・多摩1・羽村1・あきる野2・西東京2）と「2[普通科（島しょの学校）]」6校
  * （大島/新島/神津/三宅/八丈/小笠原）を追加。頁末尾の2つの小計「多摩部計9,237/12,415/1.34」
  * 「島しょ計308/113/0.37」全てが機械集計と完全一致（node.jsで確認）。これで**個票PDF1（区部59+
- * 多摩部44+島しょ6=109校）が完結**した。次回はPDF2「3[普通科（コース制の学校）]」
- * （documents/d/kyoiku/03_77）に進む。
+ * 多摩部44+島しょ6=109校）が完結**した。
+ *
+ * ⚠️掛-1（R4追加・第3弾）: PDF2「3[普通科（コース制の学校）]・4[普通科（単位制の学校）]・
+ * 5[普通科（海外帰国生徒対象）]」（documents/d/kyoiku/03_77・全2頁）を取得。R5-R8と異なりこの1本の
+ * PDFに3区分全てが収録されていた。コース制4校（深川外国語・片倉造形美術・松が谷外国語・小平外国語）・
+ * 単位制11校・海外帰国生徒対象6校（帰国生3+引揚者3）＝21件を追加。印字された4つの小計「コース制計
+ * 224/354/1.58」「単位制計2,146/3,169/1.48」「帰国対象計44/53/1.20」「引揚対象計18/0/0.00」
+ * （→海外帰国生徒対象計62/53/0.85）全てが機械集計と完全一致（node.jsで確認）。さらに総括表の
+ * 「男女問わず計2,432/3,576」「普通科計24,170/34,923」（109校＋今回21校=130校）とも完全一致することを
+ * 確認した。次回はPDF3「専門学科・定時制課程（単位制）」（documents/d/kyoiku/04_56）に進む。
  */
 import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
 
@@ -241,6 +249,13 @@ export const TOKYO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       url: 'https://www.kyoiku.metro.tokyo.lg.jp/documents/d/kyoiku/02_86',
       docTitle:
         '東京都教育委員会 令和4年度東京都立高等学校入学者選抜応募状況（最終応募状況）1[普通科（コース、単位制以外の学校）]・2[普通科（島しょの学校）]（掛-1・tokyo横展開R4第1〜2弾・全3頁完結・区部59+多摩部44+島しょ6=109校）',
+      fiscalYear: '令和4年度（2022年度）',
+      fetchedAt: '2026-08-08',
+    },
+    {
+      url: 'https://www.kyoiku.metro.tokyo.lg.jp/documents/d/kyoiku/03_77',
+      docTitle:
+        '東京都教育委員会 令和4年度東京都立高等学校入学者選抜応募状況（最終応募状況）3[普通科（コース制の学校）]・4[普通科（単位制の学校）]・5[普通科（海外帰国生徒対象）]（掛-1・tokyo横展開R4第3弾・全2頁完結）',
       fiscalYear: '令和4年度（2022年度）',
       fetchedAt: '2026-08-08',
     },
@@ -1326,5 +1341,27 @@ export const TOKYO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '三宅', area: '三宅', department: '普通科', quota: 40, finalApplicants: 4, finalRate: 0.1, fiscalYear: '令和4年度（2022年度）' },
     { schoolName: '八丈', area: '八丈', department: '普通科', quota: 78, finalApplicants: 38, finalRate: 0.49, fiscalYear: '令和4年度（2022年度）' },
     { schoolName: '小笠原', area: '小笠原', department: '普通科', quota: 30, finalApplicants: 16, finalRate: 0.53, fiscalYear: '令和4年度（2022年度）' },
+    // 掛-1横展開R4第3弾: R4分・PDF2「3[コース制]・4[単位制]・5[海外帰国生徒対象]」(documents/d/kyoiku/03_77)。
+    { schoolName: '深川', area: '江東', department: '普通科（コース制・外国語）', quota: 56, finalApplicants: 94, finalRate: 1.68, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '片倉', area: '八王子', department: '普通科（コース制・造形美術）', quota: 56, finalApplicants: 77, finalRate: 1.38, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '松が谷', area: '八王子', department: '普通科（コース制・外国語）', quota: 56, finalApplicants: 77, finalRate: 1.38, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '小平', area: '小平', department: '普通科（コース制・外国語）', quota: 56, finalApplicants: 106, finalRate: 1.89, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '新宿', area: '新宿', department: '普通科（単位制）', quota: 284, finalApplicants: 670, finalRate: 2.36, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '忍岡', area: '台東', department: '普通科（単位制）', quota: 124, finalApplicants: 143, finalRate: 1.15, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '墨田川', area: '墨田', department: '普通科（単位制）', quota: 252, finalApplicants: 319, finalRate: 1.27, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '美原', area: '大田', department: '普通科（単位制）', quota: 156, finalApplicants: 175, finalRate: 1.12, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '芦花', area: '世田谷', department: '普通科（単位制）', quota: 220, finalApplicants: 424, finalRate: 1.93, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '飛鳥', area: '北', department: '普通科（単位制）', quota: 170, finalApplicants: 214, finalRate: 1.26, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '板橋有徳', area: '板橋', department: '普通科（単位制）', quota: 156, finalApplicants: 123, finalRate: 0.79, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '大泉桜', area: '練馬', department: '普通科（単位制）', quota: 156, finalApplicants: 173, finalRate: 1.11, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '翔陽', area: '八王子', department: '普通科（単位制）', quota: 188, finalApplicants: 237, finalRate: 1.26, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '国分寺', area: '国分寺', department: '普通科（単位制）', quota: 252, finalApplicants: 429, finalRate: 1.7, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '上水', area: '武蔵村山', department: '普通科（単位制）', quota: 188, finalApplicants: 262, finalRate: 1.39, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '三田', area: '港', department: '普通科（海外帰国生徒対象・帰国生）', quota: 18, finalApplicants: 27, finalRate: 1.5, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '竹早', area: '文京', department: '普通科（海外帰国生徒対象・帰国生）', quota: 13, finalApplicants: 14, finalRate: 1.08, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '日野台', area: '日野', department: '普通科（海外帰国生徒対象・帰国生）', quota: 13, finalApplicants: 12, finalRate: 0.92, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '深川', area: '江東', department: '普通科（海外帰国生徒対象・引揚者）', quota: 6, finalApplicants: 0, finalRate: 0, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '光丘', area: '練馬', department: '普通科（海外帰国生徒対象・引揚者）', quota: 6, finalApplicants: 0, finalRate: 0, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '富士森', area: '八王子', department: '普通科（海外帰国生徒対象・引揚者）', quota: 6, finalApplicants: 0, finalRate: 0, fiscalYear: '令和4年度（2022年度）' },
   ],
 };

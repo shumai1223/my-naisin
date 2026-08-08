@@ -397,7 +397,7 @@ describe('東京都 倍率パイプラインα（Y-2・普通科119校の突合�
   });
 
   it('掛-1(学校別×多年度・R4第1弾・5年度目): 令和4年度(R4)分の普通科(区部)59校が収録され、区市町村+学校名+学科の重複が無い。区部計は公式値と完全一致する', () => {
-    const r4All = records.filter((r) => r.fiscalYear === '令和4年度（2022年度）');
+    const r4All = records.filter((r) => r.fiscalYear === '令和4年度（2022年度）' && r.department === '普通科');
     const r4Ward = r4All.filter((r) => TOKYO_23_WARDS.has(r.area ?? ''));
     expect(r4Ward.length).toBe(59);
     expect(r4Ward.reduce((a, r) => a + r.quota, 0)).toBe(12193);
@@ -423,7 +423,7 @@ describe('東京都 倍率パイプラインα（Y-2・普通科119校の突合�
   });
 
   it('掛-1(学校別×多年度・R4第2弾・個票PDF1完結): 令和4年度(R4)分の普通科(多摩部44校+島しょ6校)を追加した合計109校が収録され、区市町村+学校名+学科の重複が無い。多摩部計・島しょ計が公式値と完全一致する', () => {
-    const r4 = records.filter((r) => r.fiscalYear === '令和4年度（2022年度）');
+    const r4 = records.filter((r) => r.fiscalYear === '令和4年度（2022年度）' && r.department === '普通科');
     expect(r4.length).toBe(109);
     expect(r4.reduce((a, r) => a + r.quota, 0)).toBe(21738);
     expect(r4.reduce((a, r) => a + r.finalApplicants, 0)).toBe(31347);
@@ -444,6 +444,35 @@ describe('東京都 倍率パイプラインα（Y-2・普通科119校の突合�
     expect(tama.length).toBe(44);
     expect(tama.reduce((a, r) => a + r.quota, 0)).toBe(9237);
     expect(tama.reduce((a, r) => a + r.finalApplicants, 0)).toBe(12415);
+  });
+
+  it('掛-1(学校別×多年度・R4第3弾): 令和4年度(R4)分に「3[コース制]・4[単位制]・5[海外帰国生徒対象]」21件を追加した合計130件が収録され、区市町村+学校名+学科の重複が無い。普通科計(quota24,170・applicants34,923)が5区分合計と完全一致する', () => {
+    const r4 = records.filter((r) => r.fiscalYear === '令和4年度（2022年度）');
+    expect(r4.length).toBe(130);
+    expect(r4.reduce((a, r) => a + r.quota, 0)).toBe(24170);
+    expect(r4.reduce((a, r) => a + r.finalApplicants, 0)).toBe(34923);
+
+    const seen = new Set<string>();
+    for (const r of r4) {
+      const key = `${r.area}|${r.schoolName}|${r.department}`;
+      expect(seen.has(key)).toBe(false);
+      seen.add(key);
+    }
+
+    const kousei = r4.filter((r) => r.department.startsWith('普通科（コース制'));
+    expect(kousei.length).toBe(4);
+    expect(kousei.reduce((a, r) => a + r.quota, 0)).toBe(224);
+    expect(kousei.reduce((a, r) => a + r.finalApplicants, 0)).toBe(354);
+
+    const tannisei = r4.filter((r) => r.department === '普通科（単位制）');
+    expect(tannisei.length).toBe(11);
+    expect(tannisei.reduce((a, r) => a + r.quota, 0)).toBe(2146);
+    expect(tannisei.reduce((a, r) => a + r.finalApplicants, 0)).toBe(3169);
+
+    const kaigai = r4.filter((r) => r.department.startsWith('普通科（海外帰国生徒対象'));
+    expect(kaigai.length).toBe(6);
+    expect(kaigai.reduce((a, r) => a + r.quota, 0)).toBe(62);
+    expect(kaigai.reduce((a, r) => a + r.finalApplicants, 0)).toBe(53);
   });
 
   it('全レコードのquota>0・finalApplicants>=0・finalRateが概算で整合する', () => {
