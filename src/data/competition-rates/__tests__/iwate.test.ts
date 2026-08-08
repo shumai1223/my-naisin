@@ -71,6 +71,28 @@ describe('岩手県 倍率パイプラインα（Y-6・全日制59校113レコ�
     }
   });
 
+  it('掛-1(学校別×多年度): 令和6年度(R6)分レコードが117件・61校収録され、公式「合計」7,862/6,281と完全一致する。R7比較の差分は盛岡南+不来方→南昌みらい・久慈工業+久慈東→久慈翔北の2件の実在の学校統合(2025年4月開校)のみで、それ以外の59校は学校名+学科名がR6/R7で完全一致する', () => {
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    const r7 = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
+    expect(r6.length).toBe(117);
+    const distinctSchools = new Set(r6.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(61);
+    const sumQuota = r6.reduce((a, r) => a + r.quota, 0);
+    const sumApplicants = r6.reduce((a, r) => a + r.finalApplicants, 0);
+    expect(sumQuota).toBe(7862);
+    expect(sumApplicants).toBe(6281);
+
+    const mergedSchools = new Set(['盛岡南', '不来方', '久慈工業', '久慈東']);
+    const newSchools = new Set(['南昌みらい', '久慈翔北']);
+    const r6Keys = new Set(
+      r6.filter((r) => !mergedSchools.has(r.schoolName)).map((r) => `${r.schoolName}|${r.department}`)
+    );
+    const r7Keys = new Set(
+      r7.filter((r) => !newSchools.has(r.schoolName)).map((r) => `${r.schoolName}|${r.department}`)
+    );
+    expect(r6Keys).toEqual(r7Keys);
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of IWATE_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.pref\.iwate\.jp\//);
