@@ -121,6 +121,26 @@ describe('熊本県 倍率パイプラインα（Y-6・全日制52校162レコ�
     }
   });
 
+  it('掛-1(学校別×多年度・3年度目): 令和6年度(R6)分レコードが161件・52校収録され、全日制「計」行(quota8,250・applicants7,760・倍率0.94)と完全一致する。くくり募集3組(矢部・大津・上天草)もR7/R8と同一パターンで存在する。水俣高校のみ実在の学科改編を確認: R6は「電気建築システム」1学科(電気コース/建築コースの2コース制)だったが、R7/R8では「半導体情報」「建築」という2つの独立学科に分割されている', () => {
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    expect(r6.length).toBe(161);
+    const distinctSchools = new Set(r6.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(52);
+    expect(r6.reduce((a, r) => a + r.quota, 0)).toBe(8250);
+    expect(r6.reduce((a, r) => a + r.finalApplicants, 0)).toBe(7760);
+
+    const kukuriNames = ['食農科学(農業科学コース)・(食・生活コース)', '普通・理数', '普通・(グローカル文理コース)'];
+    for (const dept of kukuriNames) {
+      expect(r6.filter((r) => r.department === dept).length).toBe(1);
+    }
+
+    const mizumata = r6.filter((r) => r.schoolName === '水俣');
+    expect(mizumata.map((r) => r.department)).toEqual(
+      expect.arrayContaining(['電気建築システム(電気コース)', '電気建築システム(建築コース)']),
+    );
+    expect(r6.some((r) => r.schoolName === '水俣' && r.department === '半導体情報')).toBe(false);
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of KUMAMOTO_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.pref\.kumamoto\.jp\//);
