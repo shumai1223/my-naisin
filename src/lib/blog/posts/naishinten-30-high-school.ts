@@ -333,7 +333,7 @@ export const post: BlogPost = {
   </ul>
 </div>
 
-<p>関連記事：<a href="/blog/naishinten-27-high-school">内申点27（オール3）で行ける高校</a>／<a href="/blog/hyotei-heikin-3-5-high-school">評定平均3.5で行ける高校</a>／<a href="/blog/hyotei-heikin-4-0-high-school">評定平均4.0で行ける高校</a></p>
+<p>関連記事：<a href="/blog/naishinten-27-high-school">内申点27（オール3）で行ける高校</a>／<a href="/blog/naishinten-29-high-school">内申点29で行ける高校</a>／<a href="/blog/hyotei-heikin-3-5-high-school">評定平均3.5で行ける高校</a>／<a href="/blog/hyotei-heikin-4-0-high-school">評定平均4.0で行ける高校</a></p>
 
 <div class="point-box">
   <h4>関連ツール｜偏差値を5教科で瞬時に計算</h4>
