@@ -127,6 +127,14 @@ const TOOL_GROUPS: { id: string; heading: string; tools: Tool[] }[] = [
         color: 'purple',
       },
       {
+        title: '満点変換つき偏差値計算（250点・300点・500点・900点・1000点満点対応）',
+        description: '100点満点以外のテスト・模試の偏差値を、満点から目安値で自動算出',
+        features: ['100点満点以外に対応', '平均点・標準偏差なしでも概算', '250〜1000点満点', '登録不要・30秒'],
+        href: '/hensachi/mantenkan',
+        icon: TrendingUp,
+        color: 'purple',
+      },
+      {
         title: '評定平均 自動計算',
         description: '通知表の評定から評定平均（4.2など）と素内申を同時に算出',
         features: ['9教科対応', 'クリック入力', '評定平均＋内申点を同時表示', '推薦入試の出願目安'],
@@ -162,6 +170,14 @@ const TOOL_GROUPS: { id: string; heading: string; tools: Tool[] }[] = [
         features: ['全47都道府県', '計算機13県＋解説34県', '相関図・相関表も解説', '令和8年度対応'],
         href: '/total-score',
         icon: MapPin,
+        color: 'blue',
+      },
+      {
+        title: '得点を好きな満点に換算する計算機',
+        description: '内申点・学力検査・模試などの得点を、100点満点・1000点満点（または任意の満点）に換算',
+        features: ['任意の満点に換算', '比例計算でシンプル', '入力するだけで即結果', '登録不要'],
+        href: '/total-score/mantenkan',
+        icon: Calculator,
         color: 'blue',
       },
       {
@@ -243,12 +259,28 @@ const TOOL_GROUPS: { id: string; heading: string; tools: Tool[] }[] = [
         color: 'purple',
       },
       {
+        title: '目標偏差値まであと何点？逆算計算機',
+        description: '過去問・模試の得点から今の偏差値を計算し、目標の偏差値に必要な点数を逆算',
+        features: ['過去問・模試対応', '「あと何点」が一目', '平均点・標準偏差なしでも概算', '登録不要'],
+        href: '/hensachi/gyakusan',
+        icon: Target,
+        color: 'purple',
+      },
+      {
         title: '志望校から逆算ツール',
         description: '志望校の合格基準点と内申点から、当日に必要な学力検査の点数を逆算',
         features: ['志望校対応', '配点比率対応', '当日点を逆算', '学習計画立案'],
         href: '/reverse',
         icon: Target,
         color: 'purple',
+      },
+      {
+        title: '内申点アップの学習計画ジェネレータ',
+        description: '目標の内申点まであと何点必要かを算出し、週次でやることまで落とし込んだ学習計画を生成',
+        features: ['目標まであと何点', '週次プランに分解', '教科別の優先度', '無料・登録不要'],
+        href: '/plan',
+        icon: ClipboardCheck,
+        color: 'green',
       },
       {
         title: '都道府県の内申制度 比較',
@@ -429,6 +461,14 @@ const TOOL_GROUPS: { id: string; heading: string; tools: Tool[] }[] = [
         href: '/juken-schedule',
         icon: BookOpen,
         color: 'blue',
+      },
+      {
+        title: '主要模試 公式日程一覧',
+        description: 'Vもぎ・Wもぎ・北辰テスト・五ツ木模試・新教研の公式サイトで実在確認した実施日程をまとめて掲載',
+        features: ['5つの主要模試を網羅', '各社公式サイトの一次情報', '断定できない日程は明記', '2026年度対応'],
+        href: '/hensachi/moshi/nittei',
+        icon: BookOpen,
+        color: 'purple',
       },
       {
         title: '出願倍率の読み方',
