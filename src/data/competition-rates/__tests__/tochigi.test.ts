@@ -105,6 +105,22 @@ describe('栃木県 倍率パイプラインα（Y-6・全日制57校107レコ�
     }
   });
 
+  it('掛-1(学校別×多年度・3年度目): 令和6年度(R6)分レコードが113件収録され、公式「合計」行7,679/8,471と完全一致する。栃木農業/真岡工業/矢板はR6でもR7と同じ学科数(4/4/5)で収録され、宇都宮東は一般選抜定員0でR8と同型(R7のみ定員7の例外年)であることを確認した', () => {
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    expect(r6.length).toBe(113);
+    const distinctSchools = new Set(r6.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(57);
+    const sumQuota = r6.reduce((a, r) => a + r.quota, 0);
+    const sumApplicants = r6.reduce((a, r) => a + r.finalApplicants, 0);
+    expect(sumQuota).toBe(7679);
+    expect(sumApplicants).toBe(8471);
+
+    expect(r6.some((r) => r.schoolName === '宇都宮東')).toBe(false);
+    expect(r6.filter((r) => r.schoolName === '栃木農業')).toHaveLength(4);
+    expect(r6.filter((r) => r.schoolName === '真岡工業')).toHaveLength(4);
+    expect(r6.filter((r) => r.schoolName === '矢板')).toHaveLength(5);
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of TOCHIGI_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.pref\.tochigi\.lg\.jp\//);
