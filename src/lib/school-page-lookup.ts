@@ -38,10 +38,12 @@ import { SCHOOL_NAME_ALIASES_BY_PREFECTURE } from '@/lib/school-name-aliases';
  *   （school-page-wave-readiness.ts参照・DEPARTMENT_TO_CATEGORY_LABEL_BY_PREFECTUREへの
  *   追加が必要）。
  * wave7(2026-08-09): hokkaido（最後の1県・これで47/47県が完全制覇）。
- *   school-department-category.tsに14区分中8区分（体育/工芸/数理データサイエンス/福祉/家庭/
+ *   school-department-category.tsに14区分中8区分（体育/工芸/数理データサイエンス/福祉/農業/
  *   看護/総合/水産）の部分対応表を追加した。校名に「水産」を含む小樽水産・函館水産の学科と
- *   区分別公式合計quotaとの算術的完全一致で確定（hiroshima方式）。残り6区分（普通/農業/工業/
- *   商業/理数/外国語）は候補学科の組み合わせが複数とも同一合計に一致してしまい一意に確定
+ *   区分別公式合計quotaとの算術的完全一致で確定（hiroshima方式）。**当初「家庭」を生活科学で
+ *   確定としたが、WebSearchで岩見沢農業高校の学科体系(生活科学科は農業高校の一学科)を裏取りした
+ *   結果誤りと判明し、農業区分へ訂正した（873b516）**。残り6区分（普通/工業/商業/理数/外国語/
+ *   家庭）は候補学科の組み合わせが複数とも同一合計に一致してしまい一意に確定
  *   できないため意図的に未収録（該当学科の学校はresolveCategoryLabelがnullを返し「推移
  *   データなし」を正直に表示するのみで、誤ったindex解禁の弊害は無い）。
  */
