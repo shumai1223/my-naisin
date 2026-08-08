@@ -110,6 +110,22 @@ describe('宮城県 倍率パイプラインα（Y-6・全日制68校129レコ�
     }
   });
 
+  it('掛-1(学校別×多年度・3年度目): 令和6年度(R6)分レコードが128件・68校収録され、総括表(quota13,640・applicants13,609・倍率1.00)と完全一致する。仙台工はR6時点で建築科/機械科/電気科/土木科の4学科構成(情報科が無い)で収録されており、R7以降の「情報科新設」がR6→R7間の実際の学科新設であることを確認した', () => {
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    expect(r6.length).toBe(128);
+    const distinctSchools = new Set(r6.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(68);
+    const sumQuota = r6.reduce((a, r) => a + r.quota, 0);
+    const sumApplicants = r6.reduce((a, r) => a + r.finalApplicants, 0);
+    expect(sumQuota).toBe(13640);
+    expect(sumApplicants).toBe(13609);
+
+    const sendaikou = r6.filter((r) => r.schoolName === '仙台工');
+    expect(sendaikou).toHaveLength(4);
+    expect(sendaikou.some((r) => r.department === '情報科')).toBe(false);
+    expect(r6.filter((r) => r.schoolName === '宮城水産')).toHaveLength(1);
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of MIYAGI_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.pref\.miyagi\.jp\//);
