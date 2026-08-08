@@ -25,6 +25,7 @@ import { findUncoveredOpportunityQueries, formatMiningCandidatesMarkdown } from 
 import { findCtrUnderperformers, formatCtrUnderperformersMarkdown } from '../lib/ctr-improvement';
 import { findRoutesDueForMeasurement, type CtrChangeLogEntry } from '../lib/ctr-improvement-log';
 import { LAUNCH_BATCHES, evaluateLaunchBatchStatus, formatLaunchBatchMarkdown, evaluateBatchGoStopVerdict } from '../lib/new-page-launch-tracker';
+import { INDEXED_SCHOOL_PAGE_PREFECTURE_CODES, getPrefectureSchoolPageData } from '../lib/school-page-lookup';
 
 const SITE_URL = process.env.GSC_SITE_URL || 'sc-domain:my-naishin.com';
 const SA_KEY = process.env.GSC_SA_KEY;
@@ -222,6 +223,22 @@ async function main() {
     return { label: batch.label, statuses, verdict: evaluateBatchGoStopVerdict(batch, statuses) };
   });
 
+  // 学校ページ登録状況（Λ-2・2026-08-08 loop-question-note【B】先行指標として新設）：
+  // 958ページ規模のwave公開を3,500ページへ拡大する前の唯一の判断材料。
+  // pageディメンションのGSCクエリは表示回数>0のURLしか返らないため、
+  // マッチした行の件数がそのまま「表示回数1以上のページ数」になる。
+  const totalPublishedSchoolPages = INDEXED_SCHOOL_PAGE_PREFECTURE_CODES.reduce((sum, code) => {
+    const data = getPrefectureSchoolPageData(code);
+    return sum + (data?.schools.length ?? 0);
+  }, 0);
+  const schoolPageRows = recentPages.filter((r) => /\/pref\/[^/]+\/school\/[^/]+$/.test(shortPath(r.keys[0])));
+  const schoolPageDiscovered = schoolPageRows.length;
+  const schoolPageImpressions = schoolPageRows.reduce((sum, r) => sum + r.impressions, 0);
+  const schoolPageClicks = schoolPageRows.reduce((sum, r) => sum + r.clicks, 0);
+  const schoolPageAvgPosition = schoolPageImpressions
+    ? schoolPageRows.reduce((sum, r) => sum + r.position * r.impressions, 0) / schoolPageImpressions
+    : 0;
+
   // --- Markdownレポート組み立て ---
   const L: string[] = [];
   L.push(`# 📊 GSC週次レポート（${recentEnd} 時点）`);
@@ -330,6 +347,34 @@ async function main() {
     L.push('');
   }
 
+  L.push('## 🏫 学校ページ登録状況（Λ-2・先行指標。2026-08-08 loop-question-note【B】で新設）');
+  L.push('> 3,500ページへの拡大可否を判断する唯一の材料。958ページ規模で全部作ってから「登録されませんでした」が最悪のシナリオなので、先行公開分の登録率で見込みを読む。');
+  L.push('');
+  L.push(`公開済み学校ページ（index解禁${INDEXED_SCHOOL_PAGE_PREFECTURE_CODES.length}県）: **${totalPublishedSchoolPages}ページ**`);
+  L.push('');
+  L.push(
+    `GSCに登場（表示回数1以上・${recentStart}〜${recentEnd}）: **${schoolPageDiscovered}ページ**（登録率 ${
+      totalPublishedSchoolPages ? pct(schoolPageDiscovered / totalPublishedSchoolPages) : '-'
+    }）`
+  );
+  L.push('');
+  L.push(
+    `合計表示回数: ${schoolPageImpressions} ／ 合計クリック: ${schoolPageClicks} ／ 表示回数加重平均掲載順位: ${schoolPageAvgPosition.toFixed(1)}`
+  );
+  L.push('');
+  if (schoolPageRows.length) {
+    table(
+      schoolPageRows
+        .slice()
+        .sort((a, b) => b.impressions - a.impressions)
+        .slice(0, 15)
+        .map((r) => [shortPath(r.keys[0]), String(r.impressions), String(r.clicks), r.position.toFixed(1)]),
+      ['ページ', '表示', 'click', '順位']
+    );
+  } else {
+    L.push('_この週はGSCに1件も登場していない_\n');
+  }
+
   L.push('## 🔁 CTR自動改善ループ（掲載順位から見て明らかにCTRが低い面・TIER L-3）');
   L.push('> 順位帯別の期待CTR目安を大きく下回る面（流入上位5面は除外済み）。ガード: 同一面の変更は3週間隔・変更はdata/ctr-improvement-log.jsonに記録して3週後に効果測定する。');
   L.push('');
@@ -348,7 +393,29 @@ async function main() {
   fs.writeFileSync(
     'gsc-weekly-report.json',
     JSON.stringify(
-      { generatedAt: new Date().toISOString(), recentEnd, striking, lowCtr, dropped, rising, newcomers, uncoveredCandidates, winnerPages, loserPages, ctrUnderperformers, dueForMeasurement, launchBatchStatuses },
+      {
+        generatedAt: new Date().toISOString(),
+        recentEnd,
+        striking,
+        lowCtr,
+        dropped,
+        rising,
+        newcomers,
+        uncoveredCandidates,
+        winnerPages,
+        loserPages,
+        ctrUnderperformers,
+        dueForMeasurement,
+        launchBatchStatuses,
+        schoolPages: {
+          totalPublished: totalPublishedSchoolPages,
+          discovered: schoolPageDiscovered,
+          impressions: schoolPageImpressions,
+          clicks: schoolPageClicks,
+          avgPosition: schoolPageAvgPosition,
+          rows: schoolPageRows,
+        },
+      },
       null,
       2,
     ),
