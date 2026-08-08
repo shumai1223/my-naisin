@@ -22,6 +22,7 @@ const MUNICIPAL_UNION_SCHOOLS = [
 
 describe('福岡県 倍率パイプラインα（Y-2・全日制98校の完全収録テスト）', () => {
   const { records, officialSubtotals } = FUKUOKA_COMPETITION_RATES;
+  const r8 = records.filter((r) => !r.fiscalYear);
   const schoolFilters: Record<string, string> = {
     '苅田工業 計': '苅田工業',
     '行橋 計': '行橋',
@@ -62,13 +63,13 @@ describe('福岡県 倍率パイプラインα（Y-2・全日制98校の完全�
 
   it('県立全日制の合計がPDF末尾のグランドトータル（90校・quota22,200・applicants22,854・倍率1.03）と完全一致する', () => {
     const grandTotal = officialSubtotals.find((s) => s.label === '県立全日制合計')!;
-    const result = checkAgainstSubtotal(records, grandTotal, (r) => !MUNICIPAL_UNION_SCHOOLS.includes(r.schoolName));
+    const result = checkAgainstSubtotal(records, grandTotal, (r) => !r.fiscalYear && !MUNICIPAL_UNION_SCHOOLS.includes(r.schoolName));
     expect(result.matches).toBe(true);
   });
 
   it('市組合立全日制の合計がPDF末尾のグランドトータル（8校・quota2,120・applicants2,350・倍率1.11）と完全一致する', () => {
     const grandTotal = officialSubtotals.find((s) => s.label === '市組合立全日制合計')!;
-    const result = checkAgainstSubtotal(records, grandTotal, (r) => MUNICIPAL_UNION_SCHOOLS.includes(r.schoolName));
+    const result = checkAgainstSubtotal(records, grandTotal, (r) => !r.fiscalYear && MUNICIPAL_UNION_SCHOOLS.includes(r.schoolName));
     expect(result.matches).toBe(true);
   });
 
@@ -76,9 +77,23 @@ describe('福岡県 倍率パイプラインα（Y-2・全日制98校の完全�
     for (const sub of officialSubtotals) {
       if (GRAND_TOTAL_LABELS.includes(sub.label)) continue;
       const schoolName = schoolFilters[sub.label];
-      const result = checkAgainstSubtotal(records, sub, (r) => r.schoolName === schoolName);
+      const result = checkAgainstSubtotal(records, sub, (r) => !r.fiscalYear && r.schoolName === schoolName);
       expect(result.matches).toBe(true);
     }
+  });
+
+  it('掛-1(学校別×多年度): 令和7年度(R7)分レコードが170件・90校収録され、PDF末尾「県立合計（90校）」行(quota22,040・applicants24,542・倍率1.11)と完全一致する。市組合立分はWayback未クロールのため未収録(県立分のみ)', () => {
+    const r7 = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
+    expect(r7.length).toBe(170);
+    expect(r7.reduce((a, r) => a + r.quota, 0)).toBe(22040);
+    expect(r7.reduce((a, r) => a + r.finalApplicants, 0)).toBe(24542);
+
+    const distinctSchools = new Set(r7.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(90);
+
+    // R7時点で新宮は「普通科国際文化コース」がまだ存在せず普通科+理数科の2学科構成だった(R8で新設)
+    expect(r7.filter((r) => r.schoolName === '新宮')).toHaveLength(2);
+    expect(r8.filter((r) => r.schoolName === '新宮')).toHaveLength(3);
   });
 
   it('全レコードのquota>0・finalApplicants>=0・finalRateが概算で整合する', () => {
@@ -89,11 +104,11 @@ describe('福岡県 倍率パイプラインα（Y-2・全日制98校の完全�
     }
   });
 
-  it('学校名+学科名の重複が無い', () => {
+  it('学校名+学科名+年度の重複が無い', () => {
     const seen = new Set<string>();
     const dupes: string[] = [];
     for (const r of records) {
-      const key = `${r.schoolName}|${r.department}`;
+      const key = `${r.schoolName}|${r.department}|${r.fiscalYear ?? ''}`;
       if (seen.has(key)) dupes.push(key);
       seen.add(key);
     }
@@ -105,8 +120,8 @@ describe('福岡県 倍率パイプラインα（Y-2・全日制98校の完全�
   });
 
   it('191レコード・98校が収録されている（県立全日制90校+市組合立全日制8校）', () => {
-    expect(records.length).toBe(191);
-    const distinctSchools = new Set(records.map((r) => r.schoolName));
+    expect(r8.length).toBe(191);
+    const distinctSchools = new Set(r8.map((r) => r.schoolName));
     expect(distinctSchools.size).toBe(98);
   });
 
@@ -144,7 +159,7 @@ describe('福岡県 倍率パイプラインα（Y-2・全日制98校の完全�
       浮羽工業: 2,
     };
     for (const [name, count] of Object.entries(remainingVocationalSchools)) {
-      const schoolRecords = records.filter((r) => r.schoolName === name);
+      const schoolRecords = r8.filter((r) => r.schoolName === name);
       expect(schoolRecords.length).toBe(count);
     }
   });
@@ -167,7 +182,7 @@ describe('福岡県 倍率パイプラインα（Y-2・全日制98校の完全�
       糸島農業: 4,
     };
     for (const [name, count] of Object.entries(vocationalSchools)) {
-      const schoolRecords = records.filter((r) => r.schoolName === name);
+      const schoolRecords = r8.filter((r) => r.schoolName === name);
       expect(schoolRecords.length).toBe(count);
     }
   });
