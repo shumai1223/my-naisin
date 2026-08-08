@@ -85,6 +85,25 @@ describe('香川県 倍率パイプラインα（Y-6・全日制30校68レコー
     }
   });
 
+  it('掛-1(学校別×多年度): 令和6年度(R6)分レコードが68件・30校収録され、公式「全日制合計」4,553/5,056と完全一致し、R7と学校名+学科名の組み合わせが完全一致する(学校再編なし・くくり募集3組も同一)', () => {
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    const r7 = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
+    expect(r6.length).toBe(68);
+    const distinctSchools = new Set(r6.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(30);
+    const sumQuota = r6.reduce((a, r) => a + r.quota, 0);
+    const sumApplicants = r6.reduce((a, r) => a + r.finalApplicants, 0);
+    expect(sumQuota).toBe(4553);
+    expect(sumApplicants).toBe(5056);
+
+    const r7Keys = new Set(r7.map((r) => `${r.schoolName}|${r.department}`));
+    const r6Keys = new Set(r6.map((r) => `${r.schoolName}|${r.department}`));
+    expect(r6Keys.size).toBe(r7Keys.size);
+    for (const key of r6Keys) {
+      expect(r7Keys.has(key)).toBe(true);
+    }
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of KAGAWA_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.pref\.kagawa\.lg\.jp\//);
