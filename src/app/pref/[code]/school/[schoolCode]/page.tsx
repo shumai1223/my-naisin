@@ -235,7 +235,7 @@ export default async function SchoolPage({ params }: PageProps) {
           <section className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-xs leading-relaxed text-amber-700">
             <p className="flex items-start gap-2">
               <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" />
-              このページは建設中です。今季倍率・学科区分の県内推移は教育委員会公表の一次データに基づきますが、近隣校リンクは学区によって表示件数が少ない場合があります。学校選びの最終判断は必ず各校の公式サイト・教育委員会の最新情報でご確認ください。
+              現在は募集人員・応募者数・倍率と、学科区分の県内推移を掲載しています（いずれも教育委員会公表の一次データに基づく）。近隣校リンクは学区によって表示件数が少ない場合があります。偏差値・合格最低点は掲載していません。学校選びの最終判断は必ず各校の公式サイト・教育委員会の最新情報でご確認ください。
             </p>
           </section>
         </div>

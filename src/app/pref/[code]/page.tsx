@@ -683,7 +683,7 @@ export default async function PrefecturePage({ params }: PageProps) {
                 {prefecture.name}の高校別・入試倍率
               </h2>
               <p className="mb-4 text-xs text-slate-500">
-                学校ごとの今季入試倍率・募集人員のページです（{schoolsSortedByName.length}校・建設中）。
+                学校ごとの今季入試倍率・募集人員のページです（{schoolsSortedByName.length}校）。
               </p>
               <div className="grid max-h-96 gap-1.5 overflow-y-auto pr-1 sm:grid-cols-2">
                 {schoolsSortedByName.map((s) => (

@@ -10,7 +10,7 @@ import {
   Search,
   BookOpen,
   Target,
-  Printer
+  TrendingUp
 } from 'lucide-react';
 
 import { PREFECTURES, REGIONS } from '@/lib/prefectures';
@@ -161,8 +161,8 @@ export default function PrefecturesPage() {
                             className="flex items-center justify-between rounded-xl bg-slate-50 px-4 py-2 text-xs font-bold text-slate-500 transition-all hover:bg-slate-800 hover:text-white"
                           >
                             <span className="flex items-center gap-2">
-                              <Printer className="h-3.5 w-3.5" />
-                              印刷用資料（先生・保護者向け）
+                              <TrendingUp className="h-3.5 w-3.5" />
+                              高校別の倍率を見る
                             </span>
                             <ChevronRight className="h-3.5 w-3.5" />
                           </Link>
