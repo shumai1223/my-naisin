@@ -27,8 +27,16 @@ import { SCHOOL_NAME_ALIASES_BY_PREFECTURE } from '@/lib/school-name-aliases';
  *   裁定済み**（loopは段階解禁を推奨したが👤が却下し一括を選択・条件はsitemap投入を
  *   数日ずらす分割デプロイのみ）と判明したため、5県ずつの自主規制ペースを是正し
  *   school-page-wave-readiness.tsで即座解禁可能と判定された県を全てまとめて追加した。
- *   残り6県(hokkaido/iwate/yamagata/fukushima/nagano/yamaguchi)はmatchRate<95%または
- *   Λ-4推移データ未整備でブロック中（school-page-wave-readiness.ts参照・要データ整備）。
+ * wave6(2026-08-09): nagano/iwate/fukushima/yamaguchi/yamagata（5県）。
+ *   **wave5直後に発覚した重大バグの修正込み**: getPrefectureSchoolPageDataが掛-1の
+ *   多年度レコード(fiscalYear付き)をフィルタせず渡していたため、同一学科が複数年度分
+ *   そのままdepartmentRatesに混入しtotalQuota等が無意味な合算値になっていた
+ *   (toyama等、既存indexed県で実際に発生・b51d296で修正)。この修正でschool-name-match
+ *   のmatchRateも正常化し、旧校名(盛岡南・不来方等、統合前のR6専用レコード)による
+ *   誤ブロックが解消してこの5県が即座解禁可能になった。
+ *   残り1県(hokkaido)はcategory-detail粒度の学科→カテゴリ対応表が未整備でブロック中
+ *   （school-page-wave-readiness.ts参照・DEPARTMENT_TO_CATEGORY_LABEL_BY_PREFECTUREへの
+ *   追加が必要）。
  */
 export const INDEXED_SCHOOL_PAGE_PREFECTURE_CODES = [
   'tokyo',
@@ -72,6 +80,11 @@ export const INDEXED_SCHOOL_PAGE_PREFECTURE_CODES = [
   'okayama',
   'akita',
   'shiga',
+  'nagano',
+  'iwate',
+  'fukushima',
+  'yamaguchi',
+  'yamagata',
 ];
 
 export function getPrefectureSchoolPageData(code: string): { schools: SchoolPageData[] } | null {
