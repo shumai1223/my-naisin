@@ -75,6 +75,25 @@ describe('徳島県 倍率パイプラインα（Y-6・全日制32校69レコー
     }
   });
 
+  it('掛-1(学校別×多年度): 令和6年度(R6)分レコードが68件・32校収録され、公式「合計」4,211/4,232と完全一致する(名西・芸術(音楽)はR6時点で募集人員0のため69件でなく68件)', () => {
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    expect(r6.length).toBe(68);
+    const distinctSchools = new Set(r6.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(32);
+    const sumQuota = r6.reduce((a, r) => a + r.quota, 0);
+    const sumApplicants = r6.reduce((a, r) => a + r.finalApplicants, 0);
+    expect(sumQuota).toBe(4211);
+    expect(sumApplicants).toBe(4232);
+
+    const r8Keys = new Set(r8.map((r) => `${r.schoolName}|${r.department}`));
+    const r6Keys = new Set(r6.map((r) => `${r.schoolName}|${r.department}`));
+    expect(r8Keys.size - r6Keys.size).toBe(1);
+    for (const key of r6Keys) {
+      expect(r8Keys.has(key)).toBe(true);
+    }
+    expect(r6Keys.has('名西|芸術（音楽）')).toBe(false);
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of TOKUSHIMA_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/nyuushi\.tokushima-ec\.ed\.jp\//);

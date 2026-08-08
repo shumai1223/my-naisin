@@ -26,6 +26,16 @@
  * 機械集計（quota4,165・applicants4,160・倍率1.00、32校69レコード）が「合計」行と完全一致した
  * （複雑な列帰属判定にもかかわらず初回転記で一致）。定時制課程・学区外出願状況（別紙参考表）は
  * 他県と同じ理由でスコープ外。
+ *
+ * ⚠️掛-1（tokushima横展開R6完結・3年度目）: R6の一次資料「令和6年度徳島県公立高等学校一般選抜
+ * 出願状況（2月29日志願変更後）」https://nyuushi.tokushima-ec.ed.jp/file/630 （全1ページ）は
+ * R7と異なりテキスト埋め込みが機能せずCJKラベルが抽出できなかったが、pdftoppm 400dpiビジョン
+ * 解析でレイアウトが極めて明瞭に判読でき、罠1（2段組での学校名遅延）は発生しなかった（R7側の
+ * vision転記で確立済みの阿南光・海部の正しい学校帰属をそのまま踏襲）。全日制32校68レコードを
+ * 転記し、印字済み「合計」行（quota4,211・applicants4,232・倍率1.00）とnode.js機械集計が完全
+ * 一致した（初回転記で一致）。R7/R8に存在する「名西・芸術（音楽）」はR6時点では募集人員0（出願者
+ * 「―」）で実施されなかった年であり、quota>0のレコードのみを収録する原則に従い68レコード
+ * （R7/R8の69レコードよりちょうど1件少ない）とした。
  */
 import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
 
@@ -43,6 +53,12 @@ export const TOKUSHIMA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       docTitle: '徳島県教育委員会 令和7年度徳島県公立高等学校一般選抜出願状況（2月27日志願変更後）',
       fiscalYear: '令和7年度（2025年度）',
       fetchedAt: '2026-08-07',
+    },
+    {
+      url: 'https://nyuushi.tokushima-ec.ed.jp/file/630',
+      docTitle: '徳島県教育委員会 令和6年度徳島県公立高等学校一般選抜出願状況（2月29日志願変更後）',
+      fiscalYear: '令和6年度（2024年度）',
+      fetchedAt: '2026-08-08',
     },
   ],
   coverage: {
@@ -192,5 +208,74 @@ export const TOKUSHIMA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '池田・辻', department: '総合', quota: 34, finalApplicants: 30, finalRate: 0.88, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '池田・三好', department: '食農科学', quota: 20, finalApplicants: 19, finalRate: 0.95, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '池田・三好', department: '環境資源', quota: 15, finalApplicants: 12, finalRate: 0.8, fiscalYear: '令和7年度（2025年度）' },
+    // 掛-1（学校別×多年度）: 令和6年度（2024年度）分。名西・芸術（音楽）はR6時点で募集人員0のため収録対象外（68レコード）。
+    { schoolName: '城東', department: '普通', quota: 248, finalApplicants: 249, finalRate: 1, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '城南', department: '普通', quota: 209, finalApplicants: 219, finalRate: 1.05, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '城南', department: '応用数理', quota: 29, finalApplicants: 22, finalRate: 0.76, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '城北', department: '普通', quota: 215, finalApplicants: 222, finalRate: 1.03, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '城北', department: '理数科学', quota: 29, finalApplicants: 26, finalRate: 0.9, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '徳島北', department: '普通', quota: 225, finalApplicants: 228, finalRate: 1.01, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '徳島北', department: '国際英語', quota: 37, finalApplicants: 38, finalRate: 1.03, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '徳島市立', department: '普通', quota: 246, finalApplicants: 250, finalRate: 1.02, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '徳島市立', department: '理数', quota: 40, finalApplicants: 40, finalRate: 1, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '城西', department: '生産技術', quota: 20, finalApplicants: 24, finalRate: 1.2, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '城西', department: '植物活用', quota: 19, finalApplicants: 22, finalRate: 1.16, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '城西', department: '食品科学', quota: 23, finalApplicants: 29, finalRate: 1.26, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '城西', department: 'アグリビジネス', quota: 24, finalApplicants: 27, finalRate: 1.13, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '城西', department: '総合', quota: 69, finalApplicants: 73, finalRate: 1.06, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '城西・神山', department: '地域創生類', quota: 26, finalApplicants: 25, finalRate: 0.96, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '徳島科学技術', department: '総合科学類', quota: 54, finalApplicants: 57, finalRate: 1.06, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '徳島科学技術', department: '機械技術類', quota: 54, finalApplicants: 55, finalRate: 1.02, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '徳島科学技術', department: '電気技術類', quota: 57, finalApplicants: 58, finalRate: 1.02, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '徳島科学技術', department: '建設技術類', quota: 61, finalApplicants: 65, finalRate: 1.07, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '徳島科学技術', department: '海洋科学類', quota: 10, finalApplicants: 13, finalRate: 1.3, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '徳島科学技術', department: '海洋技術類', quota: 15, finalApplicants: 17, finalRate: 1.13, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '阿南光', department: '機械ロボットシステム', quota: 19, finalApplicants: 19, finalRate: 1, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '阿南光', department: '電気情報システム', quota: 22, finalApplicants: 23, finalRate: 1.05, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '阿南光', department: '都市環境システム', quota: 22, finalApplicants: 23, finalRate: 1.05, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '徳島商業', department: 'ビジネス探究', quota: 56, finalApplicants: 57, finalRate: 1.02, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '徳島商業', department: 'ビジネス創造', quota: 147, finalApplicants: 150, finalRate: 1.02, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '小松島', department: '普通', quota: 160, finalApplicants: 159, finalRate: 0.99, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '小松島西', department: '商業', quota: 43, finalApplicants: 48, finalRate: 1.12, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '小松島西', department: '食物', quota: 67, finalApplicants: 67, finalRate: 1, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '小松島西', department: '生活文化', quota: 18, finalApplicants: 20, finalRate: 1.11, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '小松島西', department: '福祉', quota: 27, finalApplicants: 28, finalRate: 1.04, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '小松島西・勝浦', department: '応用生産', quota: 11, finalApplicants: 11, finalRate: 1, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '小松島西・勝浦', department: '園芸福祉', quota: 12, finalApplicants: 11, finalRate: 0.92, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '富岡東', department: '普通', quota: 62, finalApplicants: 62, finalRate: 1, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '富岡東', department: '商業', quota: 19, finalApplicants: 20, finalRate: 1.05, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '富岡東・羽ノ浦', department: '看護', quota: 34, finalApplicants: 25, finalRate: 0.74, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '富岡西', department: '普通', quota: 141, finalApplicants: 148, finalRate: 1.05, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '富岡西', department: '理数', quota: 30, finalApplicants: 23, finalRate: 0.77, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '阿南光', department: '産業創造', quota: 70, finalApplicants: 74, finalRate: 1.06, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '那賀', department: '森林クリエイト', quota: 12, finalApplicants: 12, finalRate: 1, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '那賀', department: '普通', quota: 33, finalApplicants: 23, finalRate: 0.7, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '海部', department: '普通', quota: 50, finalApplicants: 48, finalRate: 0.96, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '海部', department: '情報ビジネス', quota: 16, finalApplicants: 16, finalRate: 1, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '海部', department: '数理科学', quota: 27, finalApplicants: 18, finalRate: 0.67, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '鳴門', department: '普通', quota: 256, finalApplicants: 267, finalRate: 1.04, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '鳴門渦潮', department: '総合', quota: 118, finalApplicants: 132, finalRate: 1.12, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '板野', department: '普通', quota: 127, finalApplicants: 138, finalRate: 1.09, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '名西', department: '普通', quota: 49, finalApplicants: 51, finalRate: 1.04, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '吉野川', department: '農業科学', quota: 12, finalApplicants: 10, finalRate: 0.83, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '吉野川', department: '生物活用', quota: 14, finalApplicants: 13, finalRate: 0.93, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '吉野川', department: '会計ビジネス', quota: 17, finalApplicants: 12, finalRate: 0.71, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '吉野川', department: '情報ビジネス', quota: 20, finalApplicants: 17, finalRate: 0.85, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '吉野川', department: '食ビジネス', quota: 27, finalApplicants: 23, finalRate: 0.85, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '川島', department: '普通', quota: 84, finalApplicants: 84, finalRate: 1, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '阿波', department: '普通', quota: 143, finalApplicants: 143, finalRate: 1, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '阿波西', department: '普通', quota: 15, finalApplicants: 15, finalRate: 1, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '穴吹', department: '普通', quota: 42, finalApplicants: 38, finalRate: 0.9, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '脇町', department: '普通', quota: 149, finalApplicants: 149, finalRate: 1, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: 'つるぎ', department: '電気', quota: 36, finalApplicants: 31, finalRate: 0.86, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: 'つるぎ', department: '機械', quota: 33, finalApplicants: 28, finalRate: 0.85, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: 'つるぎ', department: '建設', quota: 13, finalApplicants: 14, finalRate: 1.08, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: 'つるぎ', department: '商業', quota: 25, finalApplicants: 21, finalRate: 0.84, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: 'つるぎ', department: '地域ビジネス', quota: 19, finalApplicants: 16, finalRate: 0.84, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '池田', department: '普通', quota: 104, finalApplicants: 103, finalRate: 0.99, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '池田', department: '探究', quota: 34, finalApplicants: 35, finalRate: 1.03, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '池田・辻', department: '総合', quota: 34, finalApplicants: 18, finalRate: 0.53, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '池田・三好', department: '食農科学', quota: 20, finalApplicants: 19, finalRate: 0.95, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '池田・三好', department: '環境資源', quota: 12, finalApplicants: 11, finalRate: 0.92, fiscalYear: '令和6年度（2024年度）' },
   ],
 };
