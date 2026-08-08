@@ -104,6 +104,24 @@ describe('鳥取県 倍率パイプラインα（Y-6・全日制22校43レコー
     expect(distinctSchools.size).toBe(22);
   });
 
+  it('掛-1(学校別×多年度): 令和6年度(R6)分レコードが43件収録され、県計(quota3,048・applicants2,648)および地区別小計と完全一致する', () => {
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    expect(r6.length).toBe(43);
+    expect(r6.reduce((a, r) => a + r.quota, 0)).toBe(3048);
+    expect(r6.reduce((a, r) => a + r.finalApplicants, 0)).toBe(2648);
+
+    const sumArea = (area: string) => {
+      const rs = r6.filter((r) => r.area === area);
+      return { quota: rs.reduce((a, r) => a + r.quota, 0), applicants: rs.reduce((a, r) => a + r.finalApplicants, 0) };
+    };
+    expect(sumArea('東部')).toEqual({ quota: 1273, applicants: 1078 });
+    expect(sumArea('中部')).toEqual({ quota: 549, applicants: 448 });
+    expect(sumArea('西部')).toEqual({ quota: 1226, applicants: 1122 });
+
+    const distinctSchools = new Set(r6.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(22);
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of TOTTORI_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.pref\.tottori\.lg\.jp\//);
