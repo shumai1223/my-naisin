@@ -79,6 +79,22 @@ describe('長崎県 倍率パイプラインα（Y-6・全日制55校116レコ�
     expect([...r7Schools].every((s) => r8Schools.has(s))).toBe(true);
   });
 
+  it('掛-1(学校別×多年度): 令和6年度(R6)分レコードが116件収録され、「総計」(quota5,250・applicants3,906・倍率0.74=県立計5,154/3,771+市立計96/135)と完全一致する。令和6年度は当時「後期選抜」という呼称だったが列構成はR7/R8の「一般選抜」と構造的に同一(前期選抜等=特別選抜等の名称変更のみ)と確認済み。R7比較の差分は長崎東の「普通・国際」表記統一(実質同一のくくり募集)のみで、それ以外の54校は学校名・学科名がR6/R7で完全一致する', () => {
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    const r7 = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
+    expect(r6.length).toBe(116);
+    expect(r6.reduce((a, r) => a + r.quota, 0)).toBe(5250);
+    expect(r6.reduce((a, r) => a + r.finalApplicants, 0)).toBe(3906);
+
+    const r6Municipal = r6.filter((r) => r.schoolName === '市立長崎商業');
+    expect(r6Municipal.reduce((a, r) => a + r.quota, 0)).toBe(96);
+    expect(r6Municipal.reduce((a, r) => a + r.finalApplicants, 0)).toBe(135);
+
+    const r6Keys = new Set(r6.map((r) => `${r.schoolName}|${r.department}`));
+    const r7Keys = new Set(r7.map((r) => `${r.schoolName}|${r.department}`));
+    expect(r6Keys).toEqual(r7Keys);
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of NAGASAKI_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.pref\.nagasaki\.jp\//);
