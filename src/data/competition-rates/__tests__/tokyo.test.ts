@@ -447,7 +447,7 @@ describe('東京都 倍率パイプラインα（Y-2・普通科119校の突合�
   });
 
   it('掛-1(学校別×多年度・R4第3弾): 令和4年度(R4)分に「3[コース制]・4[単位制]・5[海外帰国生徒対象]」21件を追加した合計130件が収録され、区市町村+学校名+学科の重複が無い。普通科計(quota24,170・applicants34,923)が5区分合計と完全一致する', () => {
-    const r4 = records.filter((r) => r.fiscalYear === '令和4年度（2022年度）');
+    const r4 = records.filter((r) => r.fiscalYear === '令和4年度（2022年度）' && r.department.startsWith('普通科'));
     expect(r4.length).toBe(130);
     expect(r4.reduce((a, r) => a + r.quota, 0)).toBe(24170);
     expect(r4.reduce((a, r) => a + r.finalApplicants, 0)).toBe(34923);
@@ -473,6 +473,47 @@ describe('東京都 倍率パイプラインα（Y-2・普通科119校の突合�
     expect(kaigai.length).toBe(6);
     expect(kaigai.reduce((a, r) => a + r.quota, 0)).toBe(62);
     expect(kaigai.reduce((a, r) => a + r.finalApplicants, 0)).toBe(53);
+  });
+
+  it('掛-1(学校別×多年度・R4第4弾・tokyo R4(168校)完結・5年度完備): 令和4年度(R4)分に専門学科13学科・総合学科59件を追加した合計189件が収録され、区市町村+学校名+学科の重複が無い。17区分の印字小計と完全一致する', () => {
+    const r4 = records.filter((r) => r.fiscalYear === '令和4年度（2022年度）');
+    expect(r4.length).toBe(189);
+    expect(r4.reduce((a, r) => a + r.quota, 0)).toBe(30306);
+    expect(r4.reduce((a, r) => a + r.finalApplicants, 0)).toBe(41489);
+
+    const seen = new Set<string>();
+    for (const r of r4) {
+      const key = `${r.area}|${r.schoolName}|${r.department}`;
+      expect(seen.has(key)).toBe(false);
+      seen.add(key);
+    }
+
+    const sumOf = (dept: string) => {
+      const rs = r4.filter((r) => r.department === dept);
+      return { count: rs.length, quota: rs.reduce((a, r) => a + r.quota, 0), applicants: rs.reduce((a, r) => a + r.finalApplicants, 0) };
+    };
+
+    expect(sumOf('商業科')).toEqual({ count: 7, quota: 813, applicants: 690 });
+    expect(sumOf('ビジネスコミュニケーション科')).toEqual({ count: 2, quota: 243, applicants: 253 });
+    expect(sumOf('工業科')).toEqual({ count: 15, quota: 1541, applicants: 1312 });
+    expect(sumOf('工業科（単位制）')).toEqual({ count: 1, quota: 110, applicants: 67 });
+    expect(sumOf('科学技術科')).toEqual({ count: 2, quota: 273, applicants: 539 });
+    expect(sumOf('農業科')).toEqual({ count: 5, quota: 423, applicants: 462 });
+    expect(sumOf('水産科')).toEqual({ count: 1, quota: 49, applicants: 65 });
+    expect(sumOf('家庭科')).toEqual({ count: 3, quota: 222, applicants: 144 });
+    expect(sumOf('家庭科（単位制）')).toEqual({ count: 1, quota: 49, applicants: 30 });
+    expect(sumOf('福祉科')).toEqual({ count: 2, quota: 50, applicants: 31 });
+    expect(sumOf('理数科')).toEqual({ count: 1, quota: 32, applicants: 147 });
+    expect(sumOf('芸術科')).toEqual({ count: 1, quota: 112, applicants: 242 });
+    expect(sumOf('体育科')).toEqual({ count: 2, quota: 52, applicants: 50 });
+    expect(sumOf('国際科')).toEqual({ count: 1, quota: 138, applicants: 325 });
+    expect(sumOf('産業科')).toEqual({ count: 2, quota: 295, applicants: 332 });
+    expect(sumOf('総合学科')).toEqual({ count: 10, quota: 1630, applicants: 1860 });
+
+    const heigou = r4.filter((r) => r.department.startsWith('併合科'));
+    expect(heigou.length).toBe(3);
+    expect(heigou.reduce((a, r) => a + r.quota, 0)).toBe(104);
+    expect(heigou.reduce((a, r) => a + r.finalApplicants, 0)).toBe(17);
   });
 
   it('全レコードのquota>0・finalApplicants>=0・finalRateが概算で整合する', () => {
