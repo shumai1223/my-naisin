@@ -93,6 +93,20 @@ describe('鹿児島県 倍率パイプラインα（Y-6・全日制68校156レ�
     expect([...r7Schools].every((s) => r8Schools.has(s))).toBe(true);
   });
 
+  it('掛-1(学校別×多年度): 令和6年度(R6)分レコードが154件・68校収録され、「全日制合計」(quota10,957・applicants9,205)と完全一致する。R6の学区別詳細表は最初から全日制限定表のため定時制除外処理は不要だった。学校名のキー集合はR7/R8と完全一致(統廃合なし)。レコード数がR7/R8の156件より2件少ないのは学科構成の年度差によるもの', () => {
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    expect(r6.length).toBe(154);
+    const distinctSchools = new Set(r6.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(68);
+    const sumQuota = r6.reduce((a, r) => a + r.quota, 0);
+    const sumApplicants = r6.reduce((a, r) => a + r.finalApplicants, 0);
+    expect(sumQuota).toBe(10957);
+    expect(sumApplicants).toBe(9205);
+
+    const r8Schools = new Set(r8.map((r) => r.schoolName));
+    expect([...distinctSchools].every((s) => r8Schools.has(s))).toBe(true);
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of KAGOSHIMA_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.pref\.kagoshima\.jp\//);
