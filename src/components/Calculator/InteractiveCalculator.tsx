@@ -5,8 +5,7 @@ import Link from 'next/link';
 import {
   Calculator,
   ChevronRight,
-  Sparkles,
-  Target
+  Sparkles
 } from 'lucide-react';
 
 import { DEFAULT_SCORES } from '@/lib/constants';
@@ -133,30 +132,10 @@ export function InteractiveCalculator({ prefectureCode, prefectureName, maxScore
             </div>
           )}
           
-          {/* 逆算機能への誘導 */}
-          <div className="mt-6 rounded-xl border-2 border-violet-200 bg-gradient-to-br from-violet-50 to-purple-50 p-5">
-            <div className="flex items-start gap-3">
-              <div className="grid h-10 w-10 flex-shrink-0 place-items-center rounded-lg bg-gradient-to-br from-violet-500 to-purple-600 text-white shadow-md">
-                <Target className="h-5 w-5" />
-              </div>
-              <div className="flex-1">
-                <h4 className="mb-2 font-bold text-slate-800">志望校から逆算する</h4>
-                <p className="mb-3 text-sm leading-relaxed text-slate-600">
-                  目標の合計点から、必要な当日点や内申点を逆算できます。志望校の配点比率を入力して、自分の現在地を把握しましょう。
-                </p>
-                <Link
-                  href={`/reverse?pref=${prefectureCode}&current=${total}`}
-                  className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-violet-600 to-purple-600 px-5 py-2.5 text-sm font-bold text-white shadow-md transition-all hover:shadow-lg hover:scale-105"
-                >
-                  <Target className="h-4 w-4" />
-                  逆算機能で試す
-                  <ChevronRight className="h-4 w-4" />
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          <NextActionButtons 
+          {/* 2026-08-08 Cowork実地監査: 直下のNextActionButtonsの「志望校配点で逆算する」ボタンと
+              遷移先(/reverse?pref=X&current=Y)が完全に重複していた「逆算機能への誘導」カードを削除。
+              結果画面に逆算への導線が3つ連続で並び、うち2つの遷移先がほぼ同じという指摘への対応。 */}
+          <NextActionButtons
             prefectureCode={prefectureCode}
             scores={scores}
             totalScore={total}

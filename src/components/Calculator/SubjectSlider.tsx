@@ -40,15 +40,15 @@ export function SubjectSlider({ subject, prefectureCode, value, onChange, maxGra
       {/* ヘッダー */}
       <div className="mb-3 flex items-center justify-between gap-3">
         <div className="min-w-0 flex-1">
-          <div className="flex items-center gap-2">
-            <div className="text-sm font-semibold text-slate-700">{subject.label}</div>
+          <div className="flex flex-wrap items-center gap-2">
+            <div className="truncate text-sm font-semibold text-slate-700">{subject.label}</div>
             {weight > 1 && (
-              <span className="rounded bg-blue-100 px-1.5 py-0.5 text-[10px] font-semibold text-blue-600">
+              <span className="shrink-0 whitespace-nowrap rounded bg-blue-100 px-1.5 py-0.5 text-[10px] font-semibold text-blue-600">
                 ×{weight}
               </span>
             )}
             {isUnconfirmed && (
-              <span className="rounded bg-amber-100 px-1.5 py-0.5 text-[10px] font-semibold text-amber-700">
+              <span className="shrink-0 whitespace-nowrap rounded bg-amber-100 px-1.5 py-0.5 text-[10px] font-semibold text-amber-700">
                 未確認
               </span>
             )}
