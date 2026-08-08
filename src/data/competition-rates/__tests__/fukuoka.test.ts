@@ -96,6 +96,27 @@ describe('福岡県 倍率パイプラインα（Y-2・全日制98校の完全�
     expect(r8.filter((r) => r.schoolName === '新宮')).toHaveLength(3);
   });
 
+  it('掛-1(学校別×多年度): 令和6年度(R6)分レコードが191件・98校収録される(県教委原本はWayback未クロールのため育伸社の県全体版PDFを代替採用・県立90校+市組合立8校)。R8とのschoolName+department差分は8件で全て実在の学科改編・新設と確認済み', () => {
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    expect(r6.length).toBe(191);
+    expect(r6.reduce((a, r) => a + r.quota, 0)).toBe(24320);
+    expect(r6.reduce((a, r) => a + r.finalApplicants, 0)).toBe(27831);
+
+    const distinctSchools = new Set(r6.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(98);
+
+    // 玄界: R6は「普通科（コースを除く）」+「普通科国際文化コース」の2区分、R8で単一「普通科」に統合
+    expect(r6.filter((r) => r.schoolName === '玄界')).toHaveLength(2);
+    expect(r8.filter((r) => r.schoolName === '玄界')).toHaveLength(1);
+
+    // 小郡「普通科みらい創造コース」はR7から新設のためR6には存在しない
+    expect(r6.some((r) => r.schoolName === '小郡' && r.department === '普通科みらい創造コース')).toBe(false);
+
+    // 北九州市立高等学校: R6は「未来共創科」(新設初年度)+「情報ビジネス科」の2学科、R8で未来共創科のみに統合
+    expect(r6.filter((r) => r.schoolName === '北九州市立高等学校')).toHaveLength(2);
+    expect(r8.filter((r) => r.schoolName === '北九州市立高等学校')).toHaveLength(1);
+  });
+
   it('全レコードのquota>0・finalApplicants>=0・finalRateが概算で整合する', () => {
     for (const r of records) {
       expect(r.quota).toBeGreaterThan(0);
