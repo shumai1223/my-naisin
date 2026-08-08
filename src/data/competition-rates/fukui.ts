@@ -34,6 +34,18 @@
  * （quota/applicants等の実質的な学科内容は同一・画像で「IT・デザイン」と明瞭に判読できたため
  * 誤読ではなく実際の課程名称変更と判断）。それ以外の23校は学校名+学科名がR7/R8で完全一致
  * （学校再編なし）。
+ *
+ * ⚠️掛-1（学校別×多年度）R6追加: 令和6年度版「志願変更状況」（2月16日変更最終日・全3ページ）
+ * https://www.pref.fukui.lg.jp/doc/koukou/nyugaku/r6ittupan_d/fil/R6henkou3.pdf を取得（当初
+ * R7と同じ命名規則で`r6ippan_d/fil/R6henko3.pdf`を推測したが404。実際はフォルダ名が`r6ittupan_d`
+ * （tsuが一つ多い）・ファイル名が`R6henkou3.pdf`（uが一つ多い）と表記揺れがあり、県サイトの目次
+ * ページを辿って正しいURLを特定した）。R7同様pdftoppm 300dpiビジョン解析で73レコード（24校）を
+ * 転記し、ページ3末尾「全日制 合計」行（quota3,578・applicants3,577・倍率1.00）とnode.js機械
+ * 集計が完全一致した。学校名+学科名のR7比較差分は**若狭東1校のみ**: R6は「電気・機械（電子機械）」
+ * （quota25・applicants13）と「電気・機械（電気）」（quota25・applicants9）の2学科だったが、
+ * R7では「工業創造」（quota46）1学科に統合されている（quota合計もR6の50からR7の46へ変動）。
+ * 画像で「電子機械」「電気」の2行が明瞭に判読できたため誤読ではなく実際の学科再編と判断した。
+ * それ以外の23校は学校名+学科名がR6/R7で完全一致。
  */
 import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
 
@@ -51,6 +63,12 @@ export const FUKUI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       docTitle: '福井県教育委員会 令和7年度福井県立高等学校一般入学者選抜志願変更状況（2月18日変更最終日）',
       fiscalYear: '令和7年度（2025年度）',
       fetchedAt: '2026-08-07',
+    },
+    {
+      url: 'https://www.pref.fukui.lg.jp/doc/koukou/nyugaku/r6ittupan_d/fil/R6henkou3.pdf',
+      docTitle: '福井県教育委員会 令和6年度福井県立高等学校一般入学者選抜志願変更状況（2月16日変更最終日）',
+      fiscalYear: '令和6年度（2024年度）',
+      fetchedAt: '2026-08-09',
     },
   ],
   coverage: {
@@ -205,5 +223,78 @@ export const FUKUI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '若狭東', department: '地域創造', quota: 20, finalApplicants: 12, finalRate: 0.6, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '若狭東', department: '工業創造', quota: 46, finalApplicants: 44, finalRate: 0.96, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '若狭東', department: 'ビジネス情報', quota: 47, finalApplicants: 31, finalRate: 0.66, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '足羽', department: '普通（キャリアデザイン）', quota: 78, finalApplicants: 77, finalRate: 0.99, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '足羽', department: '多文化共生（中国語・英語）', quota: 27, finalApplicants: 18, finalRate: 0.67, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '足羽', department: '多文化共生（日本語）', quota: 8, finalApplicants: 5, finalRate: 0.63, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '羽水', department: '普通', quota: 255, finalApplicants: 178, finalRate: 0.7, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '羽水', department: '探究特進', quota: 28, finalApplicants: 103, finalRate: 3.68, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '金津', department: '普通', quota: 171, finalApplicants: 160, finalRate: 0.94, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '高志', department: '探究創造', quota: 154, finalApplicants: 292, finalRate: 1.9, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '藤島', department: '普通', quota: 326, finalApplicants: 415, finalRate: 1.27, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '丸岡', department: '普通（みらい共創）', quota: 49, finalApplicants: 33, finalRate: 0.67, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '丸岡', department: '普通（スポーツ探究）', quota: 10, finalApplicants: 9, finalRate: 0.9, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '三国', department: '普通', quota: 122, finalApplicants: 112, finalRate: 0.92, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '大野', department: '普通', quota: 109, finalApplicants: 96, finalRate: 0.88, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '勝山', department: '普通', quota: 75, finalApplicants: 47, finalRate: 0.63, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '勝山', department: '探究特進', quota: 17, finalApplicants: 16, finalRate: 0.94, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '鯖江', department: '普通（スタンダード）', quota: 141, finalApplicants: 100, finalRate: 0.71, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '鯖江', department: '普通（スポーツ・健康福祉くくり募集）', quota: 12, finalApplicants: 12, finalRate: 1, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '鯖江', department: '普通（IT・デザインくくり募集）', quota: 18, finalApplicants: 23, finalRate: 1.28, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '鯖江', department: '探究', quota: 27, finalApplicants: 60, finalRate: 2.22, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '武生', department: '普通', quota: 228, finalApplicants: 221, finalRate: 0.97, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '武生', department: '探究進学', quota: 66, finalApplicants: 113, finalRate: 1.71, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '武生東', department: '学際フロンティア', quota: 97, finalApplicants: 74, finalRate: 0.76, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '丹生', department: '普通', quota: 77, finalApplicants: 80, finalRate: 1.04, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '敦賀', department: '普通', quota: 86, finalApplicants: 76, finalRate: 0.88, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '敦賀', department: '文理進学', quota: 46, finalApplicants: 48, finalRate: 1.04, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '敦賀', department: '商業', quota: 10, finalApplicants: 11, finalRate: 1.1, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '敦賀', department: '情報経理', quota: 13, finalApplicants: 12, finalRate: 0.92, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '美方', department: '普通', quota: 33, finalApplicants: 38, finalRate: 1.15, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '美方', department: '生活情報', quota: 19, finalApplicants: 20, finalRate: 1.05, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '美方', department: '食物', quota: 14, finalApplicants: 18, finalRate: 1.29, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '若狭', department: '普通', quota: 134, finalApplicants: 119, finalRate: 0.89, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '若狭', department: '文理探究', quota: 30, finalApplicants: 40, finalRate: 1.33, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '若狭', department: '海洋科学', quota: 46, finalApplicants: 55, finalRate: 1.2, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '福井農林', department: '生物生産', quota: 18, finalApplicants: 20, finalRate: 1.11, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '福井農林', department: '環境工学', quota: 32, finalApplicants: 18, finalRate: 0.56, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '福井農林', department: '生活科学', quota: 31, finalApplicants: 24, finalRate: 0.77, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '福井農林', department: '食品流通', quota: 33, finalApplicants: 21, finalRate: 0.64, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '科学技術', department: '機械システム', quota: 24, finalApplicants: 27, finalRate: 1.13, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '科学技術', department: '情報工学', quota: 33, finalApplicants: 32, finalRate: 0.97, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '科学技術', department: '電子電気', quota: 25, finalApplicants: 25, finalRate: 1, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '科学技術', department: '化学創造', quota: 29, finalApplicants: 7, finalRate: 0.24, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '科学技術', department: '産業デザイン', quota: 22, finalApplicants: 20, finalRate: 0.91, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '敦賀工業', department: '電子機械', quota: 17, finalApplicants: 15, finalRate: 0.88, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '敦賀工業', department: '電気', quota: 24, finalApplicants: 22, finalRate: 0.92, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '敦賀工業', department: '建築システム', quota: 25, finalApplicants: 19, finalRate: 0.76, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '敦賀工業', department: '情報ケミカル', quota: 25, finalApplicants: 13, finalRate: 0.52, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '福井商業', department: '商業', quota: 38, finalApplicants: 49, finalRate: 1.29, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '福井商業', department: '流通経済', quota: 37, finalApplicants: 40, finalRate: 1.08, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '福井商業', department: '会計', quota: 23, finalApplicants: 21, finalRate: 0.91, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '福井商業', department: '情報処理', quota: 43, finalApplicants: 47, finalRate: 1.09, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '福井商業', department: '国際経済', quota: 21, finalApplicants: 24, finalRate: 1.14, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '坂井', department: '食農科学（農業）', quota: 26, finalApplicants: 20, finalRate: 0.77, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '坂井', department: '食農科学（食品）', quota: 18, finalApplicants: 15, finalRate: 0.83, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '坂井', department: '機械・自動車（機械）', quota: 13, finalApplicants: 13, finalRate: 1, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '坂井', department: '機械・自動車（自動車）', quota: 20, finalApplicants: 18, finalRate: 0.9, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '坂井', department: '電気・情報システム（電気）', quota: 30, finalApplicants: 12, finalRate: 0.4, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '坂井', department: '電気・情報システム（情報システム）', quota: 16, finalApplicants: 15, finalRate: 0.94, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '坂井', department: 'ビジネス・生活デザイン（ビジネス）', quota: 20, finalApplicants: 18, finalRate: 0.9, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '坂井', department: 'ビジネス・生活デザイン（生活デザイン）', quota: 19, finalApplicants: 19, finalRate: 1, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '奥越明成', department: '機械', quota: 22, finalApplicants: 15, finalRate: 0.68, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '奥越明成', department: '電気', quota: 18, finalApplicants: 9, finalRate: 0.5, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '奥越明成', department: 'ビジネス情報', quota: 21, finalApplicants: 15, finalRate: 0.71, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '奥越明成', department: '生活福祉（生活）', quota: 17, finalApplicants: 17, finalRate: 1, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '奥越明成', department: '生活福祉（福祉）', quota: 16, finalApplicants: 6, finalRate: 0.38, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '武生商工', department: '機械創造', quota: 46, finalApplicants: 61, finalRate: 1.33, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '武生商工', department: '電気情報', quota: 22, finalApplicants: 21, finalRate: 0.95, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '武生商工', department: '都市・建築', quota: 23, finalApplicants: 23, finalRate: 1, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '武生商工', department: '商業マネジメント', quota: 32, finalApplicants: 33, finalRate: 1.03, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '武生商工', department: '情報ビジネス', quota: 29, finalApplicants: 30, finalRate: 1.03, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '若狭東', department: '生活創造', quota: 20, finalApplicants: 19, finalRate: 0.95, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '若狭東', department: '地域創造', quota: 25, finalApplicants: 22, finalRate: 0.88, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '若狭東', department: '電気・機械（電子機械）', quota: 25, finalApplicants: 13, finalRate: 0.52, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '若狭東', department: '電気・機械（電気）', quota: 25, finalApplicants: 9, finalRate: 0.36, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '若狭東', department: 'ビジネス情報', quota: 49, finalApplicants: 29, finalRate: 0.59, fiscalYear: '令和6年度（2024年度）' },
   ],
 };

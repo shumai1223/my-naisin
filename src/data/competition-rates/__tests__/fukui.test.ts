@@ -87,6 +87,24 @@ describe('福井県 倍率パイプラインα（Y-6・全日制24校72レコー
     }
   });
 
+  it('掛-1(学校別×多年度): 令和6年度(R6)分レコードが73件・24校収録され、公式「全日制 合計」3,578/3,577と完全一致する。若狭東の「電気・機械（電子機械）」「電気・機械（電気）」2学科がR7では「工業創造」1学科に統合されている(画像確認で解決・実際の学科再編)ためこの2件を除けばR6/R7で学校名+学科名が完全一致する', () => {
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    const r7 = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
+    expect(r6.length).toBe(73);
+    const distinctSchools = new Set(r6.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(24);
+    const sumQuota = r6.reduce((a, r) => a + r.quota, 0);
+    const sumApplicants = r6.reduce((a, r) => a + r.finalApplicants, 0);
+    expect(sumQuota).toBe(3578);
+    expect(sumApplicants).toBe(3577);
+
+    const r6OnlyKeys = new Set(['若狭東|電気・機械（電子機械）', '若狭東|電気・機械（電気）']);
+    const r7OnlyKeys = new Set(['若狭東|工業創造']);
+    const r6Keys = new Set(r6.map((r) => `${r.schoolName}|${r.department}`).filter((k) => !r6OnlyKeys.has(k)));
+    const r7Keys = new Set(r7.map((r) => `${r.schoolName}|${r.department}`).filter((k) => !r7OnlyKeys.has(k)));
+    expect(r6Keys).toEqual(r7Keys);
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of FUKUI_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.pref\.fukui\.lg\.jp\//);
