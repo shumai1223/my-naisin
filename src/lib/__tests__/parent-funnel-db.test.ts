@@ -1,4 +1,11 @@
-import { computeParentFunnelReach, bucketHoursSinceSent } from '@/lib/parent-funnel-db';
+import { computeParentFunnelReach, bucketHoursSinceSent, getParentFunnelEventCounts } from '@/lib/parent-funnel-db';
+
+describe('getParentFunnelEventCounts（掛-5第3周: line_registration_click追加の回帰確認）', () => {
+  it('Cloudflare D1バインディングが無い環境(テスト/ビルド)ではno-opで全イベント種別が0の既定値を返す', async () => {
+    const counts = await getParentFunnelEventCounts(28);
+    expect(counts).toEqual({ share_to_parent: 0, parent_landing_view: 0, line_registration_click: 0 });
+  });
+});
 
 describe('computeParentFunnelReach（TIER Σ-3・純粋関数）', () => {
   it('3値からshare→landing・landing→clickの到達率(%・小数1桁)を計算する', () => {

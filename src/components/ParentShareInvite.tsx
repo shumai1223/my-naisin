@@ -52,6 +52,8 @@ export function ParentShareInvite({
 
   const onLineClick = React.useCallback(() => {
     track(EVENTS.LINE_FRIEND_CLICK, { source: `${placement}-unlock`, pref: shareCtx.prefectureCode ?? 'none' });
+    // 掛-5第3周(2026-08-09): GA4はundercountするため(share_to_parent同様)、LINE登録導線もD1に一次記録する。
+    beaconParentFunnelEvent('line_registration_click', { prefectureCode: shareCtx.prefectureCode });
   }, [placement, shareCtx.prefectureCode]);
 
   // 満点の無い指標（偏差値等）向けの素の共有（スコアカードなし・数値の分母を捏造しない）。

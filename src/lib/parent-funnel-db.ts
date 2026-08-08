@@ -16,6 +16,13 @@
  *  - 例外は握りつぶし、呼び出し側（APIレスポンス）に一切影響させない。
  *
  * 点火手順: migrations/0017_create_parent_funnel_events.sql を LEADS_DB に適用するだけ。
+ *
+ * 掛-5第3周(2026-08-09): `line_registration_click`（保護者向けLINE登録ボタンのクリック）を追加。
+ * 従来GA4のtrack(EVENTS.LINE_FRIEND_CLICK)のみに頼っていたが、share_to_parentと同じ理由で
+ * D1一次記録も並走させる。本番D1で`parent_funnel_events`が稼働開始(2026-08-02)以来7日間
+ * 一件もイベントが記録されていない（curl等のbot UAでは`isBotUserAgent`によりAPI自体は
+ * 204を返しつつ書き込みをスキップする——実ブラウザUAでの書き込み自体は動作確認済み）ことが
+ * 判明したため、より多くの導線の実クリック率をD1で追えるようにする。
  */
 
 import { getClickSummary } from '@/lib/clicks-db';
@@ -42,7 +49,7 @@ async function getDb(): Promise<MinimalD1 | null> {
   }
 }
 
-export type ParentFunnelEvent = 'share_to_parent' | 'parent_landing_view';
+export type ParentFunnelEvent = 'share_to_parent' | 'parent_landing_view' | 'line_registration_click';
 export type ParentFunnelMedium = 'native' | 'copy' | 'line' | 'x';
 
 export interface ParentFunnelEventInput {
@@ -93,7 +100,11 @@ export async function persistParentFunnelEvent(input: ParentFunnelEventInput): P
 export async function getParentFunnelEventCounts(
   days = 30
 ): Promise<Record<ParentFunnelEvent, number>> {
-  const counts: Record<ParentFunnelEvent, number> = { share_to_parent: 0, parent_landing_view: 0 };
+  const counts: Record<ParentFunnelEvent, number> = {
+    share_to_parent: 0,
+    parent_landing_view: 0,
+    line_registration_click: 0,
+  };
   try {
     const db = await getDb();
     if (!db) return counts;
