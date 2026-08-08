@@ -698,7 +698,7 @@ export const prefectureGuides: Record<string, PrefectureGuide> = {
     examples: {
       all3: '81点（中堅校のボーダーライン）',
       all4: '108点（青森・八戸・弘前など上位校の目安）',
-      practicalPlus1: '82点（1点しても多く積み上げることが重要）'
+      practicalPlus1: '82点（1点でも多く積み上げることが重要）'
     },
     // 2026-08-01: 5項目をWebSearchで個別に裏取り。①②④は一次情報と一致し正確。③は事実誤りと
     // 判明（一般選抜は学力検査500点＋調査書135点の単純合計635点で判定される固定方式であり、

@@ -208,6 +208,10 @@ export default function GuideClient() {
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-emerald-500" />
+                    内申点の対象学年も都道府県で異なり、中1〜中3の3年間が対象の県が約7割（34県）で多数派、中3のみが対象の県が11県、中2・中3が対象の県が2県です
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-emerald-500" />
                     実技4教科の配点が高い地域が多いです
                   </li>
                   <li className="flex items-start gap-2">

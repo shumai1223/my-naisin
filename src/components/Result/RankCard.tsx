@@ -93,7 +93,7 @@ export function RankCard({ result }: RankCardProps) {
                 )}
               </div>
               <div>
-                <div className="text-sm font-bold text-slate-800">ランク判定</div>
+                <div className="text-sm font-bold text-slate-800">達成度の目安（当サイト独自）</div>
                 <div className="text-xs text-slate-500">{prefectureLabel}</div>
               </div>
             </div>
@@ -125,7 +125,7 @@ export function RankCard({ result }: RankCardProps) {
                 <div className="text-xl font-bold text-slate-800">
                   {result.rank.title}
                 </div>
-                <div className="mt-1 text-sm text-slate-500">あなたのランク</div>
+                <div className="mt-1 text-sm text-slate-500">あなたの達成度</div>
               </div>
             </div>
             <div className="rounded-2xl border border-slate-200 bg-gradient-to-br from-slate-50 to-white px-5 py-3 text-right shadow-sm">
