@@ -78,9 +78,15 @@ export function getPrefectureSchoolPageData(code: string): { schools: SchoolPage
   const master = SCHOOL_MASTER_BY_PREFECTURE[code];
   const rates = COMPETITION_RATE_BY_PREFECTURE[code];
   if (!master || !rates) return null;
+  // ⚠️2026-08-09発見・緊急修正: 掛-1(学校別×多年度)がrates.recordsにR6/R7等の過去年度分を
+  // fiscalYear付きで追加するようになったが、この関数はfiscalYearでフィルタしていなかったため、
+  // 同じ学科が複数年度分そのままdepartmentRatesに混入し、totalQuota/totalApplicants/overallRateが
+  // 複数年度の合算という無意味な値になっていた(toyama等、既にindex解禁済みの県で実際に発生を確認)。
+  // 「今季倍率」が主役という本ファイル冒頭の設計方針どおり、今季(fiscalYearが無い=最新年度)分のみを渡す。
+  const currentYearRecords = rates.records.filter((r) => !r.fiscalYear);
   const { schools } = buildSchoolPageDataForPrefecture(
     master.schools,
-    rates.records,
+    currentYearRecords,
     SCHOOL_NAME_ALIASES_BY_PREFECTURE[code] ?? {}
   );
   return { schools };

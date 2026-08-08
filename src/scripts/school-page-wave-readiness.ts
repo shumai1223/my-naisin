@@ -38,13 +38,19 @@ function evaluate(code: string): ReadinessRow | null {
   const name = PREFECTURES.find((p) => p.code === code)?.name ?? code;
   if (!master || !rates) return null;
 
+  // ⚠️2026-08-09修正: 掛-1が追加したfiscalYear付き過去年度レコード(R6/R7等)を含めたまま
+  // 突合すると、統廃合済みの旧校名(盛岡南・不来方等)が現行school-masterに存在せず不当に
+  // no-matchとしてカウントされ、matchRateが実態より低く出てしまう(iwate/yamagata/fukushima/
+  // nagano/yamaguchiが誤ってブロックされていた原因)。実際にページを作るのは今季分のみ
+  // (school-page-lookup.tsと同じ絞り込み)なので、判定も今季分のみで行う。
+  const currentYearRecords = rates.records.filter((r) => !r.fiscalYear);
   const aliases = SCHOOL_NAME_ALIASES_BY_PREFECTURE[code] ?? {};
-  const schoolNames = rates.records.map((r) => aliases[r.schoolName] ?? r.schoolName);
+  const schoolNames = currentYearRecords.map((r) => aliases[r.schoolName] ?? r.schoolName);
   const summary = matchSchoolNames(schoolNames, master.schools);
   const matchRate = summary.results.length > 0 ? summary.matchedCount / summary.results.length : 0;
 
-  const withArea = rates.records.filter((r) => r.area && r.area.trim().length > 0).length;
-  const areaCoverage = rates.records.length > 0 ? withArea / rates.records.length : 0;
+  const withArea = currentYearRecords.filter((r) => r.area && r.area.trim().length > 0).length;
+  const areaCoverage = currentYearRecords.length > 0 ? withArea / currentYearRecords.length : 0;
 
   const history = COMPETITION_RATE_HISTORY_BY_PREFECTURE[code];
   const hasHistory = !!history && history.years.length > 0;
