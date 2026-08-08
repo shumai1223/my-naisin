@@ -150,6 +150,25 @@ describe('三重県 倍率パイプラインα（Y-6・全日制52校108レコ�
     expect(igahoR8).toHaveLength(4);
   });
 
+  it('掛-1(学校別×多年度): 令和6年度(R6)分レコードが106件・52校収録され、全日制総計(quota6,819・applicants7,360・倍率1.08)と完全一致する。伊賀白鳳のくくり構成はR6でもR7と同じ7学科が単一quota106を共有していた（4レコード化はR8から）', () => {
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    expect(r6.length).toBe(106);
+    expect(r6.reduce((a, r) => a + r.quota, 0)).toBe(6819);
+    expect(r6.reduce((a, r) => a + r.finalApplicants, 0)).toBe(7360);
+
+    const distinctSchools6 = new Set(r6.map((r) => r.schoolName));
+    expect(distinctSchools6.size).toBe(52);
+
+    const igahoR6 = r6.filter((r) => r.schoolName === '伊賀白鳳');
+    expect(igahoR6).toHaveLength(1);
+    expect(igahoR6[0].quota).toBe(106);
+
+    // R6時点は熊野青藍への統合前で「木本」「紀南」という別々の独立校名だった
+    expect(r6.filter((r) => r.schoolName === '木本')).toHaveLength(2);
+    expect(r6.filter((r) => r.schoolName === '紀南')).toHaveLength(1);
+    expect(r6.filter((r) => r.schoolName === '熊野青藍（木本校舎）')).toHaveLength(0);
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of MIE_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.pref\.mie\.lg\.jp\//);
