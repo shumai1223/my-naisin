@@ -397,20 +397,21 @@ describe('東京都 倍率パイプラインα（Y-2・普通科119校の突合�
   });
 
   it('掛-1(学校別×多年度・R4第1弾・5年度目): 令和4年度(R4)分の普通科(区部)59校が収録され、区市町村+学校名+学科の重複が無い。区部計は公式値と完全一致する', () => {
-    const r4 = records.filter((r) => r.fiscalYear === '令和4年度（2022年度）');
-    expect(r4.length).toBe(59);
-    expect(r4.reduce((a, r) => a + r.quota, 0)).toBe(12193);
-    expect(r4.reduce((a, r) => a + r.finalApplicants, 0)).toBe(18819);
+    const r4All = records.filter((r) => r.fiscalYear === '令和4年度（2022年度）');
+    const r4Ward = r4All.filter((r) => TOKYO_23_WARDS.has(r.area ?? ''));
+    expect(r4Ward.length).toBe(59);
+    expect(r4Ward.reduce((a, r) => a + r.quota, 0)).toBe(12193);
+    expect(r4Ward.reduce((a, r) => a + r.finalApplicants, 0)).toBe(18819);
 
     const seen = new Set<string>();
-    for (const r of r4) {
+    for (const r of r4All) {
       const key = `${r.area}|${r.schoolName}|${r.department}`;
       expect(seen.has(key)).toBe(false);
       seen.add(key);
       expect(r.department).toBe('普通科');
     }
 
-    expect(r4.find((r) => r.schoolName === '日比谷')).toEqual({
+    expect(r4All.find((r) => r.schoolName === '日比谷')).toEqual({
       schoolName: '日比谷',
       area: '千代田',
       department: '普通科',
@@ -419,6 +420,30 @@ describe('東京都 倍率パイプラインα（Y-2・普通科119校の突合�
       finalRate: 2.15,
       fiscalYear: '令和4年度（2022年度）',
     });
+  });
+
+  it('掛-1(学校別×多年度・R4第2弾・個票PDF1完結): 令和4年度(R4)分の普通科(多摩部44校+島しょ6校)を追加した合計109校が収録され、区市町村+学校名+学科の重複が無い。多摩部計・島しょ計が公式値と完全一致する', () => {
+    const r4 = records.filter((r) => r.fiscalYear === '令和4年度（2022年度）');
+    expect(r4.length).toBe(109);
+    expect(r4.reduce((a, r) => a + r.quota, 0)).toBe(21738);
+    expect(r4.reduce((a, r) => a + r.finalApplicants, 0)).toBe(31347);
+
+    const seen = new Set<string>();
+    for (const r of r4) {
+      const key = `${r.area}|${r.schoolName}|${r.department}`;
+      expect(seen.has(key)).toBe(false);
+      seen.add(key);
+    }
+
+    const shimasho = r4.filter((r) => ['大島', '新島', '神津島', '三宅', '八丈', '小笠原'].includes(r.area ?? ''));
+    expect(shimasho.length).toBe(6);
+    expect(shimasho.reduce((a, r) => a + r.quota, 0)).toBe(308);
+    expect(shimasho.reduce((a, r) => a + r.finalApplicants, 0)).toBe(113);
+
+    const tama = r4.filter((r) => !TOKYO_23_WARDS.has(r.area ?? '') && !['大島', '新島', '神津島', '三宅', '八丈', '小笠原'].includes(r.area ?? ''));
+    expect(tama.length).toBe(44);
+    expect(tama.reduce((a, r) => a + r.quota, 0)).toBe(9237);
+    expect(tama.reduce((a, r) => a + r.finalApplicants, 0)).toBe(12415);
   });
 
   it('全レコードのquota>0・finalApplicants>=0・finalRateが概算で整合する', () => {
