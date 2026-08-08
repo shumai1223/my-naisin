@@ -109,6 +109,9 @@ export default function HomeClient() {
   const [saveMemo, setSaveMemo] = React.useState('');
   const [lastSaved, setLastSaved] = React.useState<SavedHistoryEntry | null>(null);
   const [savedGoal, setSavedGoal] = React.useState<SavedGoal | null>(null);
+  const [restoredTouched, setRestoredTouched] = React.useState<Partial<Record<SubjectKey, boolean>> | undefined>(
+    undefined
+  );
 
   const selectedPrefecture = React.useMemo(() => {
     const raw = getPrefectureByCode(prefectureCode);
@@ -145,6 +148,13 @@ export default function HomeClient() {
       if (queryScores) {
         restoredScores = queryScores;
         setScores(queryScores);
+        // decodeScoresQueryは9教科すべてが数値として揃わない限りnullを返す(全部か無かの形式)ため、
+        // 引き継ぎが成立した時点で9教科すべてを「確認済み」として扱ってよい。
+        setRestoredTouched(
+          Object.fromEntries((Object.keys(queryScores) as SubjectKey[]).map((key) => [key, true])) as Partial<
+            Record<SubjectKey, boolean>
+          >
+        );
       }
     }
 
@@ -154,14 +164,21 @@ export default function HomeClient() {
       if (savedScores && !handoffPrefecture) {
         const parsed = JSON.parse(savedScores) as Partial<Record<SubjectKey, unknown>>;
         const next: Scores = { ...DEFAULT_SCORES };
+        const touchedFromStorage: Partial<Record<SubjectKey, boolean>> = {};
         (Object.keys(next) as SubjectKey[]).forEach((key) => {
           const raw = parsed?.[key];
           const n = typeof raw === 'number' ? raw : typeof raw === 'string' ? Number(raw) : Number.NaN;
           if (!Number.isFinite(n)) return;
           next[key] = Math.min(5, Math.max(1, Math.round(n)));
+          // 実際にlocalStorageから有効な値を復元できた教科のみ「確認済み」にする
+          // (パース失敗でデフォルト値のまま残った教科は、未操作のまま=バッジを出し続ける)。
+          touchedFromStorage[key] = true;
         });
         restoredScores = next;
         setScores(next);
+        if (Object.keys(touchedFromStorage).length > 0) {
+          setRestoredTouched(touchedFromStorage);
+        }
       }
       if (savedPrefecture && !handoffPrefecture) {
         restoredPrefecture = savedPrefecture;
@@ -537,6 +554,7 @@ export default function HomeClient() {
                               scores={scores}
                               onChange={onScoreChange}
                               maxGrade={maxGrade}
+                              initiallyTouched={restoredTouched}
                             />
                           </div>
 

@@ -12,6 +12,7 @@ export interface InputFormProps {
   scores: Scores;
   onChange: (key: SubjectKey, nextValue: number) => void;
   maxGrade?: number;
+  initiallyTouched?: Partial<Record<SubjectKey, boolean>>;
 }
 
 /**
@@ -21,9 +22,21 @@ export interface InputFormProps {
  * 未操作の教科にだけ「未確認」の視覚強調をSubjectSlider側で出す。value===初期値の比較ではなく
  * 実際の操作有無で判定するため、本当に評定3の教科をクイック選択等で明示的に確定した場合も
  * 正しく解消される（初期値と同じ値のまま=まだ触っていない、という誤検知を避ける設計）。
+ *
+ * 2026-08-08 👤裁定(loop-question-note): localStorage復元・URL引き継ぎで入った教科は
+ * 「確認済み」として扱う(バッジを出さない)。親(HomeClient)が復元と同時に渡すinitiallyTouchedを
+ * 一度だけtouchedへ合流させる。親の再マウントを伴わない復元(useEffect経由)に対応するため
+ * useState初期値ではなくuseEffectで反映する。
  */
-export function InputForm({ prefectureCode, scores, onChange, maxGrade = 5 }: InputFormProps) {
+export function InputForm({ prefectureCode, scores, onChange, maxGrade = 5, initiallyTouched }: InputFormProps) {
   const [touched, setTouched] = React.useState<Partial<Record<SubjectKey, boolean>>>({});
+  const appliedInitialTouchedRef = React.useRef(false);
+
+  React.useEffect(() => {
+    if (!initiallyTouched || appliedInitialTouchedRef.current) return;
+    appliedInitialTouchedRef.current = true;
+    setTouched((prev) => ({ ...prev, ...initiallyTouched }));
+  }, [initiallyTouched]);
 
   const handleChange = (key: SubjectKey, nextValue: number) => {
     setTouched((prev) => (prev[key] ? prev : { ...prev, [key]: true }));
