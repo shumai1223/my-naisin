@@ -130,6 +130,29 @@ describe('埼玉県 倍率パイプラインα（Y-2・全日制の突合テス�
     }
   });
 
+  it('掛-1(学校別×多年度・R6第1弾・3年度目): 令和6年度(R6)分に1〜3頁目「全日制 普通科」102レコードが収録され、印字済み「普通科 計」小計(A=26,007/B=30,146)と機械集計が完全一致し、学校名+学科の重複が無い', () => {
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    expect(r6.length).toBe(102);
+    const sumQuota = r6.reduce((a, r) => a + r.quota, 0);
+    const sumApplicants = r6.reduce((a, r) => a + r.finalApplicants, 0);
+    expect(sumQuota).toBe(26007);
+    expect(sumApplicants).toBe(30146);
+    const seen = new Set<string>();
+    for (const r of r6) {
+      const key = `${r.schoolName}|${r.department}`;
+      expect(seen.has(key)).toBe(false);
+      seen.add(key);
+    }
+    expect(r6.find((r) => r.schoolName === '蕨')).toEqual({
+      schoolName: '蕨',
+      department: '普通科',
+      quota: 318,
+      finalApplicants: 477,
+      finalRate: 1.5,
+      fiscalYear: '令和6年度（2024年度）',
+    });
+  });
+
   it('全レコードのquota>0・finalApplicants>=0・finalRateが概算で整合する', () => {
     for (const r of records) {
       expect(r.quota).toBeGreaterThan(0);
