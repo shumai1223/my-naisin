@@ -72,6 +72,23 @@ describe('茨城県 倍率パイプラインα（Y-6・全日制85校149レコ�
     }
   });
 
+  it('掛-1(学校別×多年度・3年度目): 令和6年度(R6)分レコードが149件収録され、公式「全日制計」17,040/16,742と完全一致する。「つくばサイエンス」はR6時点では「科学技術」1学科(quota240)のみで募集しており、R7以降に「普通」「科学技術」の2学科(各quota120)へ再編されたことを確認した', () => {
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    expect(r6.length).toBe(149);
+    const sumQuota = r6.reduce((a, r) => a + r.quota, 0);
+    const sumApplicants = r6.reduce((a, r) => a + r.finalApplicants, 0);
+    expect(sumQuota).toBe(17040);
+    expect(sumApplicants).toBe(16742);
+
+    const distinctSchools = new Set(r6.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(86);
+
+    const tsukubaScience = r6.filter((r) => r.schoolName === 'つくばサイエンス');
+    expect(tsukubaScience).toEqual([
+      { schoolName: 'つくばサイエンス', department: '科学技術', quota: 240, finalApplicants: 68, finalRate: 0.28, fiscalYear: '令和6年度（2024年度）' },
+    ]);
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of IBARAKI_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/kyoiku\.pref\.ibaraki\.jp\//);
