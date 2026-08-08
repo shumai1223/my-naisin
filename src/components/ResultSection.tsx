@@ -3,7 +3,7 @@
 import * as React from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import { BookOpen, ChevronRight, ExternalLink, FileText, RotateCcw, Send, Share2, Sparkles, BarChart3 } from 'lucide-react';
+import { BookOpen, ChevronRight, ExternalLink, FileText, RotateCcw, Send, Share2, Sparkles, BarChart3, GraduationCap } from 'lucide-react';
 
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
@@ -191,6 +191,12 @@ export function ResultSection({
     onShareOpen();
   }, [prefectureCode, result.percent, onShareOpen]);
 
+  // 学校ページ導線(2026-08-08・loop-question-note): 既にいる月10,105クリックの生徒を
+  // 個別学校ページ(Λ-2)層へ橋渡しする。保護者共有導線(橋①/橋②)より必ず下に置くこと。
+  const onSchoolPageBridgeClick = React.useCallback(() => {
+    track(EVENTS.SCHOOL_PAGE_BRIDGE_CLICK, { pref: prefectureCode });
+  }, [prefectureCode]);
+
   const tabs: TabItem[] = React.useMemo(
     () => [
       {
@@ -285,6 +291,29 @@ export function ResultSection({
               決裁者（保護者）が自然に関与する学費面（高CPAリードが正しく載る面）へ集約する。
               この面では購入を一切迫らない（権限ズレ対策＝換金は学費ページ側に委譲）。 */}
           <ParentCostBridge prefectureName={selectedPrefecture?.name} />
+
+          {/* 学校ページ導線（2026-08-08・loop-question-note【A】）：既に月10,105クリック来ている
+              生徒を個別学校ページ(Λ-2・実データの倍率/募集人員)へ橋渡しする。⚠️保護者共有導線
+              (橋①GapToTarget・橋②送るボタン・ParentCostBridge)より必ず下に置くこと（収益の主導線を
+              押し下げない）。新しい面は作らず既存の/pref/[code]ハブへリンクするだけ。 */}
+          <Link
+            href={`/pref/${prefectureCode}`}
+            onClick={onSchoolPageBridgeClick}
+            className="group flex items-center justify-between gap-3 rounded-2xl border border-slate-200 bg-white px-5 py-4 shadow-sm transition-all hover:border-blue-300 hover:shadow-md"
+          >
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
+                <GraduationCap className="h-5 w-5" />
+              </div>
+              <div>
+                <div className="text-sm font-bold text-slate-800">この点数で狙える高校を見る</div>
+                <div className="mt-0.5 text-xs text-slate-500">
+                  {selectedPrefecture?.name ?? 'この県'}の高校別の募集人員・志願者数・倍率を確認できます
+                </div>
+              </div>
+            </div>
+            <ChevronRight className="h-4 w-4 shrink-0 text-slate-400 transition-transform group-hover:translate-x-0.5 group-hover:text-blue-500" />
+          </Link>
 
           {/* 子ども向け第2選択肢（クリックアフィリ）：内申点レベル別の動的訴求。
               観客=生徒に向けた教材導線。橋①（保護者・成果報酬）の下に置く。 */}

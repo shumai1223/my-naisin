@@ -107,6 +107,8 @@ export const EVENTS = {
   // ── TIER Σ-7: hyotei-heikinの対象混在(GSC実測で確定)を踏まえた学年自己申告ブリッジ ──
   GRADE_SELF_IDENTIFY: 'grade_self_identify', // 「中学生/高校生」を自己申告（分母。gradeパラメータで分解）
   UNIVERSITY_BRIDGE_CLICK: 'university_bridge_click', // 高校生を選んだ後、大学受験導線(my-shingaku)をクリック
+  // ── 学校ページ導線(Λ-2の内部導線強化・2026-08-08) ──
+  SCHOOL_PAGE_BRIDGE_CLICK: 'school_page_bridge_click', // 結果画面から「この点数で狙える高校を見る」導線をクリック(既にいる10,105人/月を学校ページ層へ橋渡しできているかの計装)
 } as const;
 
 export type AnalyticsEvent = (typeof EVENTS)[keyof typeof EVENTS];
