@@ -38,9 +38,11 @@
  * 双方の独立ソースで「建設系」と一致表記（R7/R8の「建築系」とは呼称が異なるが同一学科系統の
  * 年度差と判断） ⑦北九州市立高等学校はR6時点「未来共創科」（新設初年度）＋「情報ビジネス科」の
  * 2学科構成だったがR7で未来共創科（quota200）に統合。なお須恵のR8デフォルトレコードは
- * department:'総合学科'と記録されているが、R7・R6とも一次資料で明確に「普通科」と確認できており
- * （英進館・ikushin両ソースで一致）、R8側の表記が誤りの可能性が高い（本タスクのスコープ外のため
- * 修正はせず正直に記録・要フォローアップ）。全98校の機械集計はquota24,320・applicants27,831。
+ * 従来department:'総合学科'と誤記録されていたが、R7・R6とも一次資料で明確に「普通科」と確認でき
+ * （英進館・ikushin両ソースで一致）、WebSearchで須恵高校が全日制普通科のみ設置（総合学科は無し・
+ * 2年次より文系/理系/医療看護コースに分岐）と裏取りできたため、2026-08-09に'普通科'へ修正した
+ * （quota/finalApplicantsの数値自体は元々正しかったため、この修正でグランドトータルへの影響は無い）。
+ * 全98校の機械集計はquota24,320・applicants27,831。
  *
  * ⚠️対象範囲=PDF1〜4ページ目（青豊〜筑豊、県立全日制の全90校）＋市組合立分PDF全8校
  * （福翔・博多工業・福岡女子・福岡西陵・北九州市立高等学校・南筑・久留米商業・古賀竟成館）
@@ -294,7 +296,7 @@ export const FUKUOKA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '新宮', department: '普通科国際文化コース', quota: 40, finalApplicants: 17, finalRate: 0.43 },
     { schoolName: '新宮', department: '理数科', quota: 40, finalApplicants: 73, finalRate: 1.83 },
     { schoolName: '福岡魁誠', department: '総合学科', quota: 280, finalApplicants: 323, finalRate: 1.15 },
-    { schoolName: '須恵', department: '総合学科', quota: 360, finalApplicants: 317, finalRate: 0.88 },
+    { schoolName: '須恵', department: '普通科', quota: 360, finalApplicants: 317, finalRate: 0.88 },
     { schoolName: '宇美商業', department: 'ビジネス探究科', quota: 200, finalApplicants: 182, finalRate: 0.91 },
     { schoolName: '香住丘', department: '普通科（コースを除く）', quota: 320, finalApplicants: 398, finalRate: 1.24 },
     { schoolName: '香住丘', department: '普通科数理データサイエンスコース', quota: 40, finalApplicants: 55, finalRate: 1.38 },
