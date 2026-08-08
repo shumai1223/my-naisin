@@ -92,6 +92,25 @@ describe('富山県 倍率パイプラインα（Y-6・全日制34校75レコー
     }
   });
 
+  it('掛-1(学校別×多年度): 令和6年度(R6)分レコードが77件・34校収録され、公式「合計 34校82学科」行(quota5,188・applicants5,248・倍率1.01)と完全一致する。R6の魚津工業もR7と同じ機械科・電気科・情報環境科の3学科制のため、学校名+学科名のキー集合はR7と完全一致する', () => {
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    expect(r6.length).toBe(77);
+    const distinctSchools = new Set(r6.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(34);
+    const sumQuota = r6.reduce((a, r) => a + r.quota, 0);
+    const sumApplicants = r6.reduce((a, r) => a + r.finalApplicants, 0);
+    expect(sumQuota).toBe(5188);
+    expect(sumApplicants).toBe(5248);
+
+    const r7 = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
+    const r6Keys = new Set(r6.map((r) => `${r.schoolName}|${r.department}`));
+    const r7Keys = new Set(r7.map((r) => `${r.schoolName}|${r.department}`));
+    expect(r6Keys.size).toBe(r7Keys.size);
+    for (const key of r6Keys) {
+      expect(r7Keys.has(key)).toBe(true);
+    }
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of TOYAMA_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.pref\.toyama\.jp\//);
