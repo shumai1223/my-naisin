@@ -599,14 +599,14 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
                       </a>
                     )}
                     {prefecture.sourceUrl2 && (
-                      <a 
+                      <a
                         href={prefecture.sourceUrl2}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-1 text-[11px] font-bold text-blue-600 hover:underline"
                       >
                         <ExternalLink className="h-3 w-3" />
-                        公式発表資料(2)を見る
+                        参考記事（民間）を見る
                       </a>
                     )}
                   </div>
