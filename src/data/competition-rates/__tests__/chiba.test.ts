@@ -65,11 +65,20 @@ describe('千葉県 倍率パイプラインα（Y-2・県立+市立全日制の
     }
   });
 
-  it('掛-1(学校別×多年度・R6第1弾・3年度目): 令和6年度(R6)分に1頁目「県立全日制」50レコードが収録され、学校名+学科名の重複が無い。機械集計がビジョン解析転記と一致する', () => {
+  it('掛-1(学校別×多年度・R6完結・3年度目): 令和6年度(R6)分に県立全日制176レコード+市立全日制14レコード=190レコードが収録され、学校名+学科名の重複が無い。県立・市立・公立全日制の3段階の機械集計が資料印字値と完全一致する', () => {
     const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
-    expect(r6.length).toBe(50);
-    expect(r6.reduce((a, r) => a + r.quota, 0)).toBe(10000);
-    expect(r6.reduce((a, r) => a + r.finalApplicants, 0)).toBe(11993);
+    expect(r6.length).toBe(190);
+
+    const r6Kenritsu = r6.filter((r) => !r.schoolName.startsWith('市立'));
+    const r6Shiritsu = r6.filter((r) => r.schoolName.startsWith('市立'));
+    expect(r6Kenritsu.length).toBe(176);
+    expect(r6Shiritsu.length).toBe(14);
+    expect(r6Kenritsu.reduce((a, r) => a + r.quota, 0)).toBe(28600);
+    expect(r6Kenritsu.reduce((a, r) => a + r.finalApplicants, 0)).toBe(31738);
+    expect(r6Shiritsu.reduce((a, r) => a + r.quota, 0)).toBe(2080);
+    expect(r6Shiritsu.reduce((a, r) => a + r.finalApplicants, 0)).toBe(2740);
+    expect(r6.reduce((a, r) => a + r.quota, 0)).toBe(30680);
+    expect(r6.reduce((a, r) => a + r.finalApplicants, 0)).toBe(34478);
 
     const seen = new Set<string>();
     for (const r of r6) {
@@ -84,6 +93,14 @@ describe('千葉県 倍率パイプラインα（Y-2・県立+市立全日制の
       quota: 240,
       finalApplicants: 356,
       finalRate: 1.48,
+      fiscalYear: '令和6年度（2024年度）',
+    });
+    expect(r6.find((r) => r.schoolName === '市立銚子')).toEqual({
+      schoolName: '市立銚子',
+      department: '普通科・理数科',
+      quota: 240,
+      finalApplicants: 255,
+      finalRate: 1.06,
       fiscalYear: '令和6年度（2024年度）',
     });
   });
