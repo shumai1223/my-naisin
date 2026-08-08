@@ -108,6 +108,29 @@ describe('長野県 倍率パイプラインα（Y-6・全日制77校129レコ�
     expect(r8.find((r) => r.schoolName === '小諸義塾')).toBeTruthy();
   });
 
+  it('掛-1(学校別×多年度): 令和6年度(R6)分レコードが127件収録され、全県計と4通学区すべての合計行と完全一致する。更級農業(R6=生産流通・生物科学・グリーンライフ・施設園芸の4学科くくり募集→R7/R8=地域園芸・植物活用・食農科学の3学科に再編)・下伊那農業(R6=農業機械・園芸クリエイト・食品化学・アグリサービスの4学科独立定員→R7/R8=栽培科学・地域資源・生物活用の3学科に再編)・岡谷工業(R6=5学科くくり募集quota80→R7=同5学科quota64→R8=環境化学廃止し4学科独立定員)という3件の実在の学科改編を確認した。小諸・小諸商業はR6/R7とも別々の学校のまま', () => {
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    expect(r6.length).toBe(127);
+    expect(r6.reduce((a, r) => a + r.quota, 0)).toBe(9945);
+    expect(r6.reduce((a, r) => a + r.finalApplicants, 0)).toBe(9312);
+
+    const areaTotals6: Record<string, { count: number; quota: number; applicants: number }> = {
+      北信: { count: 37, quota: 2935, applicants: 2725 },
+      東信: { count: 25, quota: 2044, applicants: 1934 },
+      南信: { count: 38, quota: 2668, applicants: 2489 },
+      中信: { count: 27, quota: 2298, applicants: 2164 },
+    };
+    for (const [area, expected] of Object.entries(areaTotals6)) {
+      const rs = r6.filter((r) => r.area === area);
+      expect(rs.length).toBe(expected.count);
+      expect(rs.reduce((a, r) => a + r.quota, 0)).toBe(expected.quota);
+      expect(rs.reduce((a, r) => a + r.finalApplicants, 0)).toBe(expected.applicants);
+    }
+
+    expect(r6.find((r) => r.schoolName === '小諸商業')).toBeTruthy();
+    expect(r6.find((r) => r.schoolName === '小諸義塾')).toBeUndefined();
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of NAGANO_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.pref\.nagano\.lg\.jp\//);
