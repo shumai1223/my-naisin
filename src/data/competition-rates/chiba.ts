@@ -25,6 +25,16 @@
  * 「公立全日制 合計」29,880(A)/29,720(B)/33,854/1.14と完全一致（B=募集人員列を採用）。
  * R7とR8の学校名＋学科名の組み合わせを全件突合したところ完全一致（0件の差分）＝
  * 千葉県は今回の対象2年間で学校再編が発生していない。
+ *
+ * **2026-08-08追記(掛-1・学校別×多年度・chiba横展開第1弾・3年度目)**: R6(令和6年度)版一次資料は
+ * R7と異なりページ内リンクが「志願者確定数について」(r60216sigansyakakutei.html)ページに集約
+ * されておらずWebFetchのAI要約では添付PDFリンクが検出できなかった（curlでHTML本体を直接取得し
+ * `grep href`で発見する必要があった＝WebFetch要約が添付ファイルリストを見落とす罠、既知のkanagawa
+ * WebSearch要約の罠と同系統）。実URL(`press/2023/koukou/documents/r60216ippan.pdf`・全6頁)を発見。
+ * R7と異なりこの資料は埋め込みフォント欠落があり`pdftotext -layout`では学校名が抽出できない
+ * （tokyo/hokkaido/saitamaと同型の問題）ため、`pdftoppm -r 300`によるビジョン解析方式を採用。
+ * 1頁目「県立全日制」の学校番号1〜36(千葉～市川工業)・50レコードを取得。次回以降のセッションで
+ * 残り5頁を継続する。
  */
 import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
 
@@ -42,6 +52,12 @@ export const CHIBA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       docTitle: '千葉県教育委員会 令和7年度公立高等学校一般入学者選抜等志願者確定数一覧＜その1〜6＞（掛-1・chiba横展開第1弾・全日制完結）',
       fiscalYear: '令和7年度（2025年度）',
       fetchedAt: '2026-08-07',
+    },
+    {
+      url: 'https://www.pref.chiba.lg.jp/kyouiku/shidou/press/2023/koukou/documents/r60216ippan.pdf',
+      docTitle: '千葉県教育委員会 令和6年度公立高等学校一般入学者選抜等志願者確定数一覧＜その1〜6＞（掛-1・chiba横展開R6第1弾・全6頁中1頁）',
+      fiscalYear: '令和6年度（2024年度）',
+      fetchedAt: '2026-08-08',
     },
   ],
   coverage: {
@@ -439,5 +455,56 @@ export const CHIBA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '市立柏', department: '普通科', quota: 280, finalApplicants: 285, finalRate: 1.02, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '市立柏', department: 'スポーツ科学科', quota: 40, finalApplicants: 40, finalRate: 1.0, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '市立銚子', department: '普通科・理数科', quota: 240, finalApplicants: 251, finalRate: 1.05, fiscalYear: '令和7年度（2025年度）' },
+    // 掛-1横展開R6第1弾: R6分・1頁目「県立全日制」学校番号1〜36(documents/r60216ippan.pdf)。
+    { schoolName: '千葉', department: '普通科', quota: 240, finalApplicants: 356, finalRate: 1.48, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '千葉女子', department: '普通科', quota: 240, finalApplicants: 253, finalRate: 1.05, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '千葉女子', department: '家政科', quota: 40, finalApplicants: 41, finalRate: 1.03, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '千葉東', department: '普通科', quota: 320, finalApplicants: 418, finalRate: 1.31, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '千葉商業', department: '商業科・情報処理科', quota: 320, finalApplicants: 360, finalRate: 1.13, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '京葉工業', department: '機械科', quota: 80, finalApplicants: 70, finalRate: 0.88, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '京葉工業', department: '電子工業科', quota: 80, finalApplicants: 83, finalRate: 1.04, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '京葉工業', department: '設備システム科', quota: 40, finalApplicants: 36, finalRate: 0.9, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '京葉工業', department: '建設科', quota: 40, finalApplicants: 36, finalRate: 0.9, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '千葉工業', department: '電子機械科', quota: 80, finalApplicants: 53, finalRate: 0.66, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '千葉工業', department: '電気科', quota: 40, finalApplicants: 36, finalRate: 0.9, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '千葉工業', department: '情報技術科', quota: 40, finalApplicants: 48, finalRate: 1.2, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '千葉工業', department: '工業化学科', quota: 40, finalApplicants: 13, finalRate: 0.33, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '千葉工業', department: '理数工学科', quota: 40, finalApplicants: 26, finalRate: 0.65, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '千葉南', department: '普通科', quota: 320, finalApplicants: 359, finalRate: 1.12, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '検見川', department: '普通科', quota: 320, finalApplicants: 404, finalRate: 1.26, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '千葉北', department: '普通科', quota: 320, finalApplicants: 350, finalRate: 1.09, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '若松', department: '普通科', quota: 320, finalApplicants: 384, finalRate: 1.2, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '千城台', department: '普通科', quota: 320, finalApplicants: 383, finalRate: 1.2, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '生浜', department: '普通科', quota: 80, finalApplicants: 87, finalRate: 1.09, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '磯辺', department: '普通科', quota: 320, finalApplicants: 439, finalRate: 1.37, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '泉', department: '普通科', quota: 160, finalApplicants: 101, finalRate: 0.63, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '幕張総合', department: '総合学科', quota: 680, finalApplicants: 1039, finalRate: 1.53, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '幕張総合', department: '看護科', quota: 40, finalApplicants: 54, finalRate: 1.35, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '柏井', department: '普通科', quota: 240, finalApplicants: 278, finalRate: 1.16, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '土気', department: '普通科', quota: 280, finalApplicants: 276, finalRate: 0.99, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '千葉西', department: '普通科', quota: 320, finalApplicants: 383, finalRate: 1.2, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '犢橋', department: '普通科', quota: 240, finalApplicants: 274, finalRate: 1.14, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '八千代', department: '普通科', quota: 240, finalApplicants: 323, finalRate: 1.35, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '八千代', department: '家政科', quota: 40, finalApplicants: 40, finalRate: 1.0, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '八千代', department: '体育科', quota: 40, finalApplicants: 54, finalRate: 1.35, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '八千代東', department: '普通科', quota: 280, finalApplicants: 268, finalRate: 0.96, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '八千代西', department: '普通科', quota: 200, finalApplicants: 93, finalRate: 0.47, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '津田沼', department: '普通科', quota: 320, finalApplicants: 463, finalRate: 1.45, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '実籾', department: '普通科', quota: 320, finalApplicants: 398, finalRate: 1.24, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '船橋', department: '普通科', quota: 320, finalApplicants: 641, finalRate: 2.0, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '船橋', department: '理数科', quota: 40, finalApplicants: 87, finalRate: 2.18, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '薬園台', department: '普通科', quota: 280, finalApplicants: 423, finalRate: 1.51, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '薬園台', department: '園芸科', quota: 40, finalApplicants: 49, finalRate: 1.23, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '船橋東', department: '普通科', quota: 320, finalApplicants: 508, finalRate: 1.59, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '船橋啓明', department: '普通科', quota: 320, finalApplicants: 391, finalRate: 1.22, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '船橋芝山', department: '普通科', quota: 320, finalApplicants: 501, finalRate: 1.57, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '船橋二和', department: '普通科', quota: 280, finalApplicants: 286, finalRate: 1.02, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '船橋古和釜', department: '普通科', quota: 240, finalApplicants: 234, finalRate: 0.98, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '船橋法典', department: '普通科', quota: 240, finalApplicants: 204, finalRate: 0.85, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '船橋豊富', department: '普通科', quota: 160, finalApplicants: 63, finalRate: 0.39, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '船橋北', department: '普通科', quota: 200, finalApplicants: 182, finalRate: 0.91, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '市川工業', department: '機械科', quota: 80, finalApplicants: 50, finalRate: 0.63, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '市川工業', department: '電気科', quota: 80, finalApplicants: 69, finalRate: 0.86, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '市川工業', department: '建築科', quota: 40, finalApplicants: 26, finalRate: 0.65, fiscalYear: '令和6年度（2024年度）' },
   ],
 };

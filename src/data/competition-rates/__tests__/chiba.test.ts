@@ -65,6 +65,29 @@ describe('千葉県 倍率パイプラインα（Y-2・県立+市立全日制の
     }
   });
 
+  it('掛-1(学校別×多年度・R6第1弾・3年度目): 令和6年度(R6)分に1頁目「県立全日制」50レコードが収録され、学校名+学科名の重複が無い。機械集計がビジョン解析転記と一致する', () => {
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    expect(r6.length).toBe(50);
+    expect(r6.reduce((a, r) => a + r.quota, 0)).toBe(10000);
+    expect(r6.reduce((a, r) => a + r.finalApplicants, 0)).toBe(11993);
+
+    const seen = new Set<string>();
+    for (const r of r6) {
+      const key = `${r.schoolName}|${r.department}`;
+      expect(seen.has(key)).toBe(false);
+      seen.add(key);
+    }
+
+    expect(r6.find((r) => r.schoolName === '千葉' && r.department === '普通科')).toEqual({
+      schoolName: '千葉',
+      department: '普通科',
+      quota: 240,
+      finalApplicants: 356,
+      finalRate: 1.48,
+      fiscalYear: '令和6年度（2024年度）',
+    });
+  });
+
   it('coverageが完了を示している', () => {
     expect(CHIBA_COMPETITION_RATES.coverage.status).toBe('complete');
     expect(CHIBA_COMPETITION_RATES.coverage.pendingDepartments).toEqual([]);
