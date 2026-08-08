@@ -67,6 +67,25 @@ describe('滋賀県 倍率パイプラインα（Y-6・全日制44校61レコー
     expect(rittoR8?.department).toBe('普通');
   });
 
+  it('掛-1(学校別×多年度): 令和6年度(R6)分レコードが61件・44校収録され、全日制「計①」行(quota6,369・applicants6,727・倍率1.06)と完全一致する。R6は「両方の学科」統合校が膳所・草津東・栗東・米原・高島の5校のみで、守山北はR6時点では「普通」単独学科(みらい共創との統合はR7から)、伊香も「普通」単独(森の探究はR7で新設)だったことを確認した', () => {
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    const r7 = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
+    expect(r6.length).toBe(61);
+    expect(r6.reduce((a, r) => a + r.quota, 0)).toBe(6369);
+    expect(r6.reduce((a, r) => a + r.finalApplicants, 0)).toBe(6727);
+
+    const distinctSchools6 = new Set(r6.map((r) => r.schoolName));
+    expect(distinctSchools6.size).toBe(44);
+
+    const moriyamakitaR6 = r6.find((r) => r.schoolName === '守山北');
+    expect(moriyamakitaR6?.department).toBe('普通');
+    const moriyamakitaR7 = r7.find((r) => r.schoolName === '守山北');
+    expect(moriyamakitaR7?.department).toContain('みらい共創');
+
+    expect(r6.filter((r) => r.schoolName === '伊香')).toHaveLength(1);
+    expect(r7.filter((r) => r.schoolName === '伊香')).toHaveLength(2);
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of SHIGA_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.pref\.shiga\.lg\.jp\//);
