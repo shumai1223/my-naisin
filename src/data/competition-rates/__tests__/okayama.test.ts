@@ -137,9 +137,29 @@ describe('岡山県 倍率パイプラインα（Y-6・全日制49校+2校＝109
     }
   });
 
-  it('sourcesが公式PDF URLを正しく記録している', () => {
+  it('掛-1(学校別×多年度): 令和6年度(R6)分レコードが110件・52校収録され、県立全日制/市立全日制それぞれ公式グランドトータル(5,750/6,263・68/53)と完全一致する。R7のschoolName一覧との差分は井原の地域生活＜グリーンライフ＞＜ヒューマンライフ＞2件のみ(R6はquota0で除外・R7はquota5/1で実在)で、年度ごとの実際の募集枠変動と確認した', () => {
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    const r7 = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
+    expect(r6.length).toBe(110);
+    const distinctSchools6 = new Set(r6.map((r) => r.schoolName));
+    expect(distinctSchools6.size).toBe(52);
+
+    const r6Pref = r6.filter((r) => !OKAYAMA_MUNICIPAL_SCHOOLS.includes(r.schoolName));
+    const r6City = r6.filter((r) => OKAYAMA_MUNICIPAL_SCHOOLS.includes(r.schoolName));
+    expect(r6Pref.reduce((a, r) => a + r.quota, 0)).toBe(5750);
+    expect(r6Pref.reduce((a, r) => a + r.finalApplicants, 0)).toBe(6263);
+    expect(r6City.reduce((a, r) => a + r.quota, 0)).toBe(68);
+    expect(r6City.reduce((a, r) => a + r.finalApplicants, 0)).toBe(53);
+
+    const r7OnlyKeys = new Set(['井原|地域生活＜グリーンライフ＞', '井原|地域生活＜ヒューマンライフ＞']);
+    const r7Keys = new Set(r7.map((r) => `${r.schoolName}|${r.department}`).filter((k) => !r7OnlyKeys.has(k)));
+    const r6Keys = new Set(r6.map((r) => `${r.schoolName}|${r.department}`));
+    expect(r6Keys).toEqual(r7Keys);
+  });
+
+  it('sourcesが公式PDF URLを正しく記録している（R6分は原本削除のため教育委員会公式ミラーサイトを許容）', () => {
     for (const s of OKAYAMA_COMPETITION_RATES.sources) {
-      expect(s.url).toMatch(/^https:\/\/www\.pref\.okayama\.jp\//);
+      expect(s.url).toMatch(/^https:\/\/www\.(pref\.okayama\.jp|okayama-kenritsukoukou\.jp)\//);
     }
   });
 });
