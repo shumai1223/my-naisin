@@ -76,9 +76,30 @@ describe('島根県 倍率パイプラインα（Y-6・全日制35校64レコー
     expect(distinctSchools.size).toBe(35);
   });
 
+  it('掛-1(学校別×多年度): 令和6年度(R6)分レコードが65件収録され、「合計」(quota4,169・applicants3,481)および「県立高校計」(quota4,066・applicants3,416)と完全一致する。R7との差分は津和野の「普通」→「未来共創」1件のみで、令和7年度から新学科「未来共創科」を新設した実在の学科再編をWebSearchで確認した', () => {
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    expect(r6.length).toBe(65);
+    expect(r6.reduce((a, r) => a + r.quota, 0)).toBe(4169);
+    expect(r6.reduce((a, r) => a + r.finalApplicants, 0)).toBe(3481);
+
+    const r6Kenritsu = r6.filter((r) => r.schoolName !== '皆美が丘女子');
+    expect(r6Kenritsu.reduce((a, r) => a + r.quota, 0)).toBe(4066);
+    expect(r6Kenritsu.reduce((a, r) => a + r.finalApplicants, 0)).toBe(3416);
+
+    expect(r6.some((r) => r.schoolName === '津和野' && r.department === '普通')).toBe(true);
+
+    const r7 = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
+    const r7Keys = new Set(r7.map((r) => `${r.schoolName}|${r.department}`));
+    const r6Keys = new Set(r6.map((r) => `${r.schoolName}|${r.department}`));
+    expect(r6Keys.size).toBe(r7Keys.size);
+
+    const distinctSchools = new Set(r6.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(35);
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of SHIMANE_COMPETITION_RATES.sources) {
-      expect(s.url).toMatch(/^https:\/\/www\.pref\.shimane\.lg\.jp\//);
+      expect(s.url).toMatch(/^https:\/\/www1?\.pref\.shimane\.lg\.jp\//);
     }
   });
 });
