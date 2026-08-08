@@ -220,6 +220,38 @@ describe('神奈川県 倍率パイプラインα（Y-2・全日制の突合テ�
     });
   });
 
+  it('掛-1(学校別×多年度・R5第1弾・4年度目): 令和5年度(R5)分に普通科(県立88+市立6=94校)+クリエイティブ5校=99レコードが収録され、区市町村+学校名+学科の重複が無い。印字済み小計と完全一致する', () => {
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    expect(r5.length).toBe(99);
+
+    const futsuka = r5.filter((r) => r.department === '普通科');
+    expect(futsuka.length).toBe(94);
+    expect(futsuka.reduce((a, r) => a + r.quota, 0)).toBe(28029);
+    expect(futsuka.reduce((a, r) => a + r.finalApplicants, 0)).toBe(34481);
+
+    const kenritsu = futsuka.filter((r) => r.area !== '横浜市立' && r.area !== '川崎市立');
+    expect(kenritsu.length).toBe(88);
+    expect(kenritsu.reduce((a, r) => a + r.quota, 0)).toBe(26761);
+    expect(kenritsu.reduce((a, r) => a + r.finalApplicants, 0)).toBe(32784);
+
+    const shiritsu = futsuka.filter((r) => r.area === '横浜市立' || r.area === '川崎市立');
+    expect(shiritsu.length).toBe(6);
+    expect(shiritsu.reduce((a, r) => a + r.quota, 0)).toBe(1268);
+    expect(shiritsu.reduce((a, r) => a + r.finalApplicants, 0)).toBe(1697);
+
+    const creative = r5.filter((r) => r.department === '普通科（クリエイティブスクール）');
+    expect(creative.length).toBe(5);
+    expect(creative.reduce((a, r) => a + r.quota, 0)).toBe(910);
+    expect(creative.reduce((a, r) => a + r.finalApplicants, 0)).toBe(676);
+
+    const seen = new Set<string>();
+    for (const r of r5) {
+      const key = `${r.area}|${r.schoolName}|${r.department}`;
+      expect(seen.has(key)).toBe(false);
+      seen.add(key);
+    }
+  });
+
   it('全レコードのquota>0・finalApplicants>=0・finalRateが概算で整合する', () => {
     for (const r of records) {
       expect(r.quota).toBeGreaterThan(0);

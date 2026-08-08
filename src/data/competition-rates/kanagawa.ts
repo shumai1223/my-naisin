@@ -99,6 +99,21 @@
  * 連携募集合計85/77）が完全一致（node.js機械計算）。**これでbessi-3.xlsx全体（sheet1〜3）が完結し、
  * kanagawaのR6学校粒度データが確定した（tokyo/yamaguchiに続き3県目の「学校別×多年度」深掘り
  * が進捗）。**
+ *
+ * **2026-08-08追記(掛-1・kanagawa R5横展開第1弾・4年度目)**: R5の一次資料ページ（prs/koko/
+ * r1913978.html）は現在404で直接アクセス不可（R6/R7が使う新URL体系nyusen/jisshikekkaと異なり
+ * R5以前は旧URL体系prs/kokoで、旧ページはアーカイブされず削除される模様）。**対策**:
+ * WebSearchでページタイトルを発見→`http://archive.org/wayback/available?url=...`でスナップショット
+ * のタイムスタンプを取得→`http://web.archive.org/web/<timestamp>if_/<元URL>`でスナップショット
+ * 本文をcurlで直接取得しbessi3.xlsxの実URL(documents/95719/bessi3.xlsx)を発見→この実URLは
+ * ライブサイトでは404だが、`http://web.archive.org/web/<timestamp>if_/<実URL>`のWaybackスナップ
+ * ショット経由でxlsxファイル本体（PKマジックバイト確認済み）を取得できた。sheet1「普通科・
+ * クリエイティブ」を県立88校(10地区)+市立6校+クリエイティブ5校=99レコード取得。県央地区に
+ * 「厚木東」(R6以降は「厚木王子」に改称・R6のsheet2脚注「県立厚木王子高等学校の前年度競争率は、
+ * 県立厚木東高等学校の前年度競争率です」と整合)が存在するなど、実在の学校改称を複数確認。
+ * 印字済み小計「県立計26,761/32,784」「市立計1,268/1,697」「合計28,029/34,481」「クリエイティブ
+ * 合計910/676」全てが機械集計と完全一致（node.jsで確認）。次回はsheet2「専門学科」・sheet3
+ * 「単位制」を追加する。
  */
 import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
 
@@ -124,6 +139,13 @@ export const KANAGAWA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       docTitle:
         '神奈川県教育委員会 令和6年度神奈川県公立高等学校入学者選抜一般募集共通選抜等志願変更締切日集計時志願状況（別紙3・sheet1〜3完全収録・掛-1・kanagawa横展開R6第1〜3弾・完結）',
       fiscalYear: '令和6年度（2024年度）',
+      fetchedAt: '2026-08-08',
+    },
+    {
+      url: 'https://www.pref.kanagawa.jp/documents/95719/bessi3.xlsx',
+      docTitle:
+        '神奈川県教育委員会 令和5年度神奈川県公立高等学校入学者選抜一般募集共通選抜等志願変更締切時志願状況（別紙3・sheet1「普通科・クリエイティブ」完全収録・掛-1・kanagawa横展開R5第1弾・Wayback Machine経由で取得）',
+      fiscalYear: '令和5年度（2023年度）',
       fetchedAt: '2026-08-08',
     },
   ],
@@ -770,5 +792,105 @@ export const KANAGAWA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '神奈川総合', area: '横浜市', department: '舞台芸術科（単位制）', quota: 30, finalApplicants: 45, finalRate: 1.5, fiscalYear: '令和6年度（2024年度）' },
     { schoolName: '光陵', area: '横浜中', department: '普通科（連携募集）', quota: 40, finalApplicants: 40, finalRate: 1.0, fiscalYear: '令和6年度（2024年度）' },
     { schoolName: '愛川', area: '県央', department: '普通科（連携募集）', quota: 45, finalApplicants: 37, finalRate: 0.82, fiscalYear: '令和6年度（2024年度）' },
+    // 掛-1横展開R5第1弾: R5分・sheet1「普通科・クリエイティブスクール」(documents/95719/bessi3.xlsx・Wayback Machine経由)。
+    { schoolName: '鶴見', area: '横浜北', department: '普通科', quota: 318, finalApplicants: 436, finalRate: 1.37, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '横浜翠嵐', area: '横浜北', department: '普通科', quota: 358, finalApplicants: 708, finalRate: 1.98, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '城郷', area: '横浜北', department: '普通科', quota: 238, finalApplicants: 341, finalRate: 1.43, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '港北', area: '横浜北', department: '普通科', quota: 358, finalApplicants: 511, finalRate: 1.43, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '新羽', area: '横浜北', department: '普通科', quota: 398, finalApplicants: 486, finalRate: 1.22, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '岸根', area: '横浜北', department: '普通科', quota: 318, finalApplicants: 473, finalRate: 1.49, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '霧が丘', area: '横浜北', department: '普通科', quota: 318, finalApplicants: 424, finalRate: 1.33, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '白山', area: '横浜北', department: '普通科', quota: 318, finalApplicants: 284, finalRate: 0.89, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '市ケ尾', area: '横浜北', department: '普通科', quota: 398, finalApplicants: 513, finalRate: 1.29, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '元石川', area: '横浜北', department: '普通科', quota: 358, finalApplicants: 481, finalRate: 1.34, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '川和', area: '横浜北', department: '普通科', quota: 358, finalApplicants: 431, finalRate: 1.2, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '荏田', area: '横浜北', department: '普通科', quota: 398, finalApplicants: 531, finalRate: 1.33, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '新栄', area: '横浜北', department: '普通科', quota: 351, finalApplicants: 358, finalRate: 1.02, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '希望ケ丘', area: '横浜中', department: '普通科', quota: 358, finalApplicants: 550, finalRate: 1.54, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '旭', area: '横浜中', department: '普通科', quota: 358, finalApplicants: 395, finalRate: 1.1, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '松陽', area: '横浜中', department: '普通科', quota: 318, finalApplicants: 335, finalRate: 1.05, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '横浜瀬谷', area: '横浜中', department: '普通科', quota: 318, finalApplicants: 400, finalRate: 1.26, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '横浜平沼', area: '横浜中', department: '普通科', quota: 318, finalApplicants: 400, finalRate: 1.26, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '光陵', area: '横浜中', department: '普通科', quota: 278, finalApplicants: 404, finalRate: 1.45, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '保土ケ谷', area: '横浜中', department: '普通科', quota: 318, finalApplicants: 348, finalRate: 1.09, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '舞岡', area: '横浜中', department: '普通科', quota: 358, finalApplicants: 491, finalRate: 1.37, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '上矢部', area: '横浜中', department: '普通科', quota: 238, finalApplicants: 287, finalRate: 1.21, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '金井', area: '横浜中', department: '普通科', quota: 318, finalApplicants: 436, finalRate: 1.37, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '横浜南陵', area: '横浜南', department: '普通科', quota: 278, finalApplicants: 339, finalRate: 1.22, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '永谷', area: '横浜南', department: '普通科', quota: 199, finalApplicants: 90, finalRate: 0.45, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '柏陽', area: '横浜南', department: '普通科', quota: 318, finalApplicants: 458, finalRate: 1.44, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '横浜緑ケ丘', area: '横浜南', department: '普通科', quota: 278, finalApplicants: 391, finalRate: 1.41, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '横浜立野', area: '横浜南', department: '普通科', quota: 278, finalApplicants: 341, finalRate: 1.23, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '横浜氷取沢', area: '横浜南', department: '普通科', quota: 358, finalApplicants: 487, finalRate: 1.36, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '新城', area: '川崎', department: '普通科', quota: 268, finalApplicants: 423, finalRate: 1.58, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '住吉', area: '川崎', department: '普通科', quota: 358, finalApplicants: 551, finalRate: 1.54, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '川崎北', area: '川崎', department: '普通科', quota: 278, finalApplicants: 286, finalRate: 1.03, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '多摩', area: '川崎', department: '普通科', quota: 278, finalApplicants: 519, finalRate: 1.87, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '生田', area: '川崎', department: '普通科', quota: 398, finalApplicants: 494, finalRate: 1.24, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '百合丘', area: '川崎', department: '普通科', quota: 398, finalApplicants: 501, finalRate: 1.26, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '生田東', area: '川崎', department: '普通科', quota: 318, finalApplicants: 340, finalRate: 1.07, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '菅', area: '川崎', department: '普通科', quota: 358, finalApplicants: 340, finalRate: 0.95, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '麻生', area: '川崎', department: '普通科', quota: 318, finalApplicants: 353, finalRate: 1.11, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '横須賀', area: '横須賀・三浦', department: '普通科', quota: 278, finalApplicants: 335, finalRate: 1.21, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '横須賀大津', area: '横須賀・三浦', department: '普通科', quota: 278, finalApplicants: 347, finalRate: 1.25, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '追浜', area: '横須賀・三浦', department: '普通科', quota: 318, finalApplicants: 385, finalRate: 1.21, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '津久井浜', area: '横須賀・三浦', department: '普通科', quota: 238, finalApplicants: 291, finalRate: 1.22, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '逗子葉山', area: '横須賀・三浦', department: '普通科', quota: 318, finalApplicants: 417, finalRate: 1.31, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '鎌倉', area: '鎌倉・藤沢・茅ヶ崎', department: '普通科', quota: 358, finalApplicants: 449, finalRate: 1.25, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '七里ガ浜', area: '鎌倉・藤沢・茅ヶ崎', department: '普通科', quota: 358, finalApplicants: 516, finalRate: 1.44, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '大船', area: '鎌倉・藤沢・茅ヶ崎', department: '普通科', quota: 398, finalApplicants: 488, finalRate: 1.23, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '深沢', area: '鎌倉・藤沢・茅ヶ崎', department: '普通科', quota: 238, finalApplicants: 270, finalRate: 1.13, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '湘南', area: '鎌倉・藤沢・茅ヶ崎', department: '普通科', quota: 358, finalApplicants: 572, finalRate: 1.6, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '藤沢西', area: '鎌倉・藤沢・茅ヶ崎', department: '普通科', quota: 318, finalApplicants: 414, finalRate: 1.3, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '湘南台', area: '鎌倉・藤沢・茅ヶ崎', department: '普通科', quota: 238, finalApplicants: 288, finalRate: 1.21, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '茅ケ崎', area: '鎌倉・藤沢・茅ヶ崎', department: '普通科', quota: 278, finalApplicants: 381, finalRate: 1.37, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '茅ケ崎北陵', area: '鎌倉・藤沢・茅ヶ崎', department: '普通科', quota: 278, finalApplicants: 379, finalRate: 1.36, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '鶴嶺', area: '鎌倉・藤沢・茅ヶ崎', department: '普通科', quota: 383, finalApplicants: 485, finalRate: 1.27, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '茅ケ崎西浜', area: '鎌倉・藤沢・茅ヶ崎', department: '普通科', quota: 358, finalApplicants: 382, finalRate: 1.07, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '寒川', area: '鎌倉・藤沢・茅ヶ崎', department: '普通科', quota: 278, finalApplicants: 214, finalRate: 0.77, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '平塚江南', area: '平塚・秦野・伊勢原', department: '普通科', quota: 318, finalApplicants: 377, finalRate: 1.19, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '高浜', area: '平塚・秦野・伊勢原', department: '普通科', quota: 231, finalApplicants: 247, finalRate: 1.07, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '大磯', area: '平塚・秦野・伊勢原', department: '普通科', quota: 278, finalApplicants: 327, finalRate: 1.18, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '二宮', area: '平塚・秦野・伊勢原', department: '普通科', quota: 238, finalApplicants: 219, finalRate: 0.92, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '秦野', area: '平塚・秦野・伊勢原', department: '普通科', quota: 358, finalApplicants: 404, finalRate: 1.13, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '秦野曽屋', area: '平塚・秦野・伊勢原', department: '普通科', quota: 278, finalApplicants: 301, finalRate: 1.08, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '伊勢原', area: '平塚・秦野・伊勢原', department: '普通科', quota: 228, finalApplicants: 267, finalRate: 1.17, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '伊志田', area: '平塚・秦野・伊勢原', department: '普通科', quota: 308, finalApplicants: 322, finalRate: 1.05, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '小田原東', area: '県西', department: '普通科', quota: 118, finalApplicants: 101, finalRate: 0.86, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '西湘', area: '県西', department: '普通科', quota: 308, finalApplicants: 336, finalRate: 1.09, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '足柄', area: '県西', department: '普通科', quota: 238, finalApplicants: 246, finalRate: 1.03, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '山北', area: '県西', department: '普通科', quota: 198, finalApplicants: 186, finalRate: 0.94, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '厚木', area: '県央', department: '普通科', quota: 358, finalApplicants: 446, finalRate: 1.25, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '厚木東', area: '県央', department: '普通科', quota: 198, finalApplicants: 239, finalRate: 1.21, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '厚木北', area: '県央', department: '普通科', quota: 238, finalApplicants: 258, finalRate: 1.08, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '厚木西', area: '県央', department: '普通科', quota: 238, finalApplicants: 267, finalRate: 1.12, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '海老名', area: '県央', department: '普通科', quota: 398, finalApplicants: 538, finalRate: 1.35, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '有馬', area: '県央', department: '普通科', quota: 318, finalApplicants: 355, finalRate: 1.12, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '愛川', area: '県央', department: '普通科', quota: 183, finalApplicants: 169, finalRate: 0.92, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '大和', area: '県央', department: '普通科', quota: 278, finalApplicants: 426, finalRate: 1.53, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '大和南', area: '県央', department: '普通科', quota: 308, finalApplicants: 328, finalRate: 1.06, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '大和西', area: '県央', department: '普通科', quota: 278, finalApplicants: 341, finalRate: 1.23, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '座間', area: '県央', department: '普通科', quota: 318, finalApplicants: 350, finalRate: 1.1, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '綾瀬', area: '県央', department: '普通科', quota: 318, finalApplicants: 311, finalRate: 0.98, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '綾瀬西', area: '県央', department: '普通科', quota: 318, finalApplicants: 309, finalRate: 0.97, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '麻溝台', area: '相模原', department: '普通科', quota: 358, finalApplicants: 418, finalRate: 1.17, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '上鶴間', area: '相模原', department: '普通科', quota: 318, finalApplicants: 345, finalRate: 1.08, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '上溝', area: '相模原', department: '普通科', quota: 238, finalApplicants: 293, finalRate: 1.23, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '相模原', area: '相模原', department: '普通科', quota: 278, finalApplicants: 339, finalRate: 1.22, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '上溝南', area: '相模原', department: '普通科', quota: 358, finalApplicants: 446, finalRate: 1.25, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '橋本', area: '相模原', department: '普通科', quota: 268, finalApplicants: 275, finalRate: 1.03, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '相模田名', area: '相模原', department: '普通科', quota: 318, finalApplicants: 344, finalRate: 1.08, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '津久井', area: '相模原', department: '普通科', quota: 158, finalApplicants: 105, finalRate: 0.66, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '横浜市立桜丘', area: '横浜市立', department: '普通科', quota: 318, finalApplicants: 403, finalRate: 1.27, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '横浜市立南', area: '横浜市立', department: '普通科', quota: 38, finalApplicants: 52, finalRate: 1.37, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '横浜市立金沢', area: '横浜市立', department: '普通科', quota: 318, finalApplicants: 430, finalRate: 1.35, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '川崎市立橘', area: '川崎市立', department: '普通科', quota: 198, finalApplicants: 280, finalRate: 1.41, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '川崎市立高津', area: '川崎市立', department: '普通科', quota: 278, finalApplicants: 377, finalRate: 1.36, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '川崎市立幸', area: '川崎市立', department: '普通科', quota: 118, finalApplicants: 155, finalRate: 1.31, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '田奈', area: '横浜市', department: '普通科（クリエイティブスクール）', quota: 158, finalApplicants: 56, finalRate: 0.35, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '釜利谷', area: '横浜市', department: '普通科（クリエイティブスクール）', quota: 238, finalApplicants: 182, finalRate: 0.76, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '横須賀南', area: '横須賀市', department: '普通科（クリエイティブスクール）', quota: 118, finalApplicants: 124, finalRate: 1.05, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '大井', area: '大井町', department: '普通科（クリエイティブスクール）', quota: 158, finalApplicants: 79, finalRate: 0.5, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '大和東', area: '大和市', department: '普通科（クリエイティブスクール）', quota: 238, finalApplicants: 235, finalRate: 0.99, fiscalYear: '令和5年度（2023年度）' },
   ],
 };
