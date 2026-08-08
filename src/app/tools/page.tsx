@@ -299,7 +299,7 @@ const TOOL_GROUPS: { id: string; heading: string; tools: Tool[] }[] = [
       {
         title: '高校の費用シミュレーター',
         description: '公立・私立の高校3年間にかかる学費・教材費・通学費の総額を試算',
-        features: ['公立 約165万円', '私立 約340万円', '入学準備費も調整', '就学支援金考慮'],
+        features: ['公立 約179万円', '私立 約354万円', '入学準備費も調整', '就学支援金考慮'],
         href: '/koukou-hiyou',
         icon: Wallet,
         color: 'blue',

@@ -1,16 +1,17 @@
 // 教育費の一次データ（単一ソース）。出典は文部科学省の公的調査のみ。
 //
 // 学習費総額＝授業料・学校教育費・学校給食費・学校外活動費（塾・習い事等）を含む年間総額。
-// 値は文部科学省「令和3年度 子供の学習費調査」の学習費総額（全日制・1年あたり）。
-// ※ 子供の学習費調査は2年ごと（直近の確定値が令和3年度）。最新版が出たらここだけ更新する。
+// 値は文部科学省「令和5年度 子供の学習費調査」の学習費総額（全日制・1年あたり、表1）。
+// 2026-08-08時点の最新公表は令和6年12月25日公表資料の訂正版（令和8年1月16日訂正）。
+// ※ 子供の学習費調査は2年ごと（直近の確定値が令和5年度）。最新版が出たらここだけ更新する。
 
 import type { CostSource, JukuRate, ShugakuShienTier, StageAnnualCost } from './types';
 
 /** 子供の学習費調査の出典（学習費総額の単一ソース）。 */
 export const MEXT_GAKUSHUHI_SOURCE: CostSource = {
   url: 'https://www.mext.go.jp/b_menu/toukei/chousa03/gakushuuhi/1268091.htm',
-  docTitle: '文部科学省「令和3年度 子供の学習費調査」（学習費総額）',
-  lastChecked: '2026-06-14',
+  docTitle: '文部科学省「令和5年度 子供の学習費調査」（学習費総額・令和8年1月16日訂正版）',
+  lastChecked: '2026-08-08',
 };
 
 /** 高等学校等就学支援金の出典。 */
@@ -21,13 +22,13 @@ export const MEXT_SHUGAKU_SHIEN_SOURCE: CostSource = {
 };
 
 /**
- * 段階×課程の年間学習費総額（円）。令和3年度 子供の学習費調査・学習費総額（全日制）。
- * 公立高校 約51万円/年・私立高校 約105万円/年は既存の高校費用シミュレーターと同一の一次ソース。
+ * 段階×課程の年間学習費総額（円）。令和5年度 子供の学習費調査（表1・令和8年1月16日訂正版）・学習費総額（全日制）。
+ * 公立高校 約60万円/年・私立高校 約118万円/年は既存の高校費用シミュレーターと同一の一次ソース。
  */
 export const LEARNING_COST_ANNUAL: Record<StageAnnualCost['stage'], { public: number; private: number }> = {
-  shougakkou: { public: 352566, private: 1666949 },
-  chuugakkou: { public: 538799, private: 1436353 },
-  koukou: { public: 512971, private: 1054444 },
+  shougakkou: { public: 366599, private: 1741516 },
+  chuugakkou: { public: 542450, private: 1560359 },
+  koukou: { public: 596954, private: 1179261 },
 };
 
 /** 高校の入学準備費（入学金・制服・教材など）の概算（円）。学習費総額とは別枠で初年度に発生。 */

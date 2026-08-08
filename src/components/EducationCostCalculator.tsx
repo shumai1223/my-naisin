@@ -125,7 +125,7 @@ export function EducationCostCalculator() {
       </div>
 
       <p className="mt-3 text-xs text-slate-500">
-        ※ 学習費総額は文部科学省「子供の学習費調査（令和3年度）」、塾代は一般的な相場の目安です。地域・学校・受講数で変動します。
+        ※ 学習費総額は文部科学省「子供の学習費調査（令和5年度・令和8年1月16日訂正版）」、塾代は一般的な相場の目安です。地域・学校・受講数で変動します。
       </p>
 
       <div className="mt-6 flex flex-col gap-2 sm:flex-row">

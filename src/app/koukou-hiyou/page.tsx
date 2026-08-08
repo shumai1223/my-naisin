@@ -14,12 +14,12 @@ const FAQS = [
   {
     question: '高校3年間の費用はいくらかかりますか？',
     answer:
-      '文部科学省「子供の学習費調査」の学習費総額をもとにすると、公立高校は3年間で約165万円、私立高校は約340万円が目安です（授業料・教材費・通学費・塾代などを含む総額）。入学時の制服・入学金などの準備費を加えると、私立ではさらに大きくなります。',
+      '文部科学省「子供の学習費調査」の学習費総額をもとにすると、公立高校は3年間で約179万円、私立高校は約354万円が目安です（授業料・教材費・通学費・塾代などを含む総額）。入学時の制服・入学金などの準備費を加えると、私立ではさらに大きくなります。',
   },
   {
     question: '公立高校と私立高校で費用はどれくらい違いますか？',
     answer:
-      '1年間の学習費総額は公立 約51万円、私立 約105万円で、約2倍の差があります。3年間では公立 約165万円に対し私立 約340万円となり、180万円前後の差になります。',
+      '1年間の学習費総額は公立 約60万円、私立 約118万円で、約2倍の差があります。3年間では公立 約179万円に対し私立 約354万円となり、175万円前後の差になります。',
   },
   {
     question: '就学支援金で授業料は無料になりますか？',
@@ -70,8 +70,8 @@ export default function KoukouHiyouPage() {
 
         <div className="mt-6">
           <AnswerBox question="高校3年間の費用はいくら？公立と私立でどれくらい違う？">
-            文部科学省「子供の学習費調査」をもとにすると、<strong>公立高校は3年間で約165万円、私立高校は約340万円</strong>が目安です
-            （学費・教材費・通学費・塾代などを含む総額）。1年あたりは公立 約51万円・私立 約105万円で、私立はおおむね公立の約2倍。
+            文部科学省「子供の学習費調査」をもとにすると、<strong>公立高校は3年間で約179万円、私立高校は約354万円</strong>が目安です
+            （学費・教材費・通学費・塾代などを含む総額）。1年あたりは公立 約60万円・私立 約118万円で、私立はおおむね公立の約2倍。
             就学支援金で授業料負担は軽減できます。下のシミュレーターで公立・私立を選ぶと、3年間の総額の目安が分かります。
           </AnswerBox>
         </div>
@@ -103,7 +103,7 @@ export default function KoukouHiyouPage() {
               <a href="https://www.mext.go.jp/b_menu/toukei/chousa03/gakushuuhi/1268091.htm" target="_blank" rel="noopener" className="font-medium text-blue-700 underline underline-offset-2 hover:text-blue-800">
                 文部科学省「子供の学習費調査」
               </a>
-              <span className="text-slate-400"> — 公立高校 約51万円/年・私立高校 約105万円/年（学習費総額）</span>
+              <span className="text-slate-400"> — 公立高校 約60万円/年・私立高校 約118万円/年（学習費総額）</span>
             </li>
             <li>
               <a href="https://www.mext.go.jp/a_menu/shotou/mushouka/index.htm" target="_blank" rel="noopener" className="font-medium text-blue-700 underline underline-offset-2 hover:text-blue-800">
@@ -120,7 +120,7 @@ export default function KoukouHiyouPage() {
             auditHide
             placement="parent-lp"
             heading="高校の学費、今のうちに備えていますか？"
-            body="高校3年間の費用は公立でも約165万円。早めの準備で選択肢が広がります。ご家庭に合った学習・進学プランを、まずは無料の資料で確認できます。"
+            body="高校3年間の費用は公立でも約179万円。早めの準備で選択肢が広がります。ご家庭に合った学習・進学プランを、まずは無料の資料で確認できます。"
           />
         </div>
 

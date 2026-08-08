@@ -38,7 +38,7 @@ const FAQS = [
   {
     question: 'この金額はどこまで正確ですか？',
     answer:
-      '文部科学省「子供の学習費調査（令和3年度）」の学習費総額、就学支援金の制度、日本政策金融公庫の自宅外通学費用という一次情報に基づく概算です。学校・学部・地域・受講内容で実際の金額は変動します。特定の学校の正確な費用は各校の募集要項でご確認ください。',
+      '文部科学省「子供の学習費調査（令和5年度・令和8年1月16日訂正版）」の学習費総額、就学支援金の制度、日本政策金融公庫の自宅外通学費用という一次情報に基づく概算です。学校・学部・地域・受講内容で実際の金額は変動します。特定の学校の正確な費用は各校の募集要項でご確認ください。',
   },
 ];
 
@@ -155,7 +155,7 @@ export default function ShinroHiyouPage() {
               </table>
             </div>
             <p className="mt-2 text-xs text-slate-500">
-              ※ 高校＝文科省「子供の学習費調査（令和3年度）」、大学＝学費の概算、下宿＝日本政策金融公庫の自宅外通学費用。塾代は含みません。
+              ※ 高校＝文科省「子供の学習費調査（令和5年度・令和8年1月16日訂正版）」、大学＝学費の概算、下宿＝日本政策金融公庫の自宅外通学費用。塾代は含みません。
             </p>
           </section>
 
@@ -168,7 +168,7 @@ export default function ShinroHiyouPage() {
             <ul className="space-y-1.5 text-xs leading-relaxed">
               <li>
                 <a href="https://www.mext.go.jp/b_menu/toukei/chousa03/gakushuuhi/1268091.htm" target="_blank" rel="noopener" className="font-medium text-blue-700 underline underline-offset-2 hover:text-blue-800">
-                  文部科学省「子供の学習費調査（令和3年度）」
+                  文部科学省「子供の学習費調査（令和5年度・令和8年1月16日訂正版）」
                 </a>
                 <span className="text-slate-400"> — 高校の学習費総額（公立/私立）</span>
               </li>

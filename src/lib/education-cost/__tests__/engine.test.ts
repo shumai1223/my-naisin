@@ -41,27 +41,27 @@ describe('formatYen / toManYen', () => {
     expect(formatYen(-100)).toBe('¥0');
   });
   it('万円表記', () => {
-    expect(toManYen(1054444)).toBe('約105万円');
-    expect(toManYen(512971)).toBe('約51万円');
+    expect(toManYen(LEARNING_COST_ANNUAL.koukou.private)).toBe('約118万円');
+    expect(toManYen(LEARNING_COST_ANNUAL.koukou.public)).toBe('約60万円');
   });
 });
 
 describe('annualLearningCost / highSchoolTotal', () => {
   it('段階×課程の年間費用を返す', () => {
-    expect(annualLearningCost('koukou', 'public')).toBe(512971);
-    expect(annualLearningCost('koukou', 'private')).toBe(1054444);
+    expect(annualLearningCost('koukou', 'public')).toBe(LEARNING_COST_ANNUAL.koukou.public);
+    expect(annualLearningCost('koukou', 'private')).toBe(LEARNING_COST_ANNUAL.koukou.private);
   });
   it('高校3年間＝年間×3＋準備費', () => {
-    expect(highSchoolTotal('public')).toBe(512971 * 3 + HIGH_SCHOOL_INITIAL_COST.public);
-    expect(highSchoolTotal('private')).toBe(1054444 * 3 + HIGH_SCHOOL_INITIAL_COST.private);
+    expect(highSchoolTotal('public')).toBe(LEARNING_COST_ANNUAL.koukou.public * 3 + HIGH_SCHOOL_INITIAL_COST.public);
+    expect(highSchoolTotal('private')).toBe(LEARNING_COST_ANNUAL.koukou.private * 3 + HIGH_SCHOOL_INITIAL_COST.private);
   });
 });
 
 describe('juniorRemainingCost', () => {
   it('中1は3年分、中3は1年分', () => {
-    expect(juniorRemainingCost(1, 'public')).toBe(538799 * 3);
-    expect(juniorRemainingCost(2, 'public')).toBe(538799 * 2);
-    expect(juniorRemainingCost(3, 'public')).toBe(538799 * 1);
+    expect(juniorRemainingCost(1, 'public')).toBe(LEARNING_COST_ANNUAL.chuugakkou.public * 3);
+    expect(juniorRemainingCost(2, 'public')).toBe(LEARNING_COST_ANNUAL.chuugakkou.public * 2);
+    expect(juniorRemainingCost(3, 'public')).toBe(LEARNING_COST_ANNUAL.chuugakkou.public * 1);
   });
 });
 

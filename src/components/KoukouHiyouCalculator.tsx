@@ -4,13 +4,16 @@ import * as React from 'react';
 import { School, ArrowRight, RotateCcw } from 'lucide-react';
 
 import { track, funnel } from '@/lib/track';
+import { LEARNING_COST_ANNUAL, HIGH_SCHOOL_INITIAL_COST } from '@/lib/education-cost/data';
+import { toManYen } from '@/lib/education-cost/engine';
 
 const yen = (n: number) => '¥' + Math.round(n).toLocaleString('ja-JP');
 
-// 文科省「子供の学習費調査（令和3年度）」学習費総額（年間）＋入学準備費の概算
+// 文科省「子供の学習費調査（令和5年度・令和8年1月16日訂正版）」学習費総額（年間）＋入学準備費の概算
+// data.ts（単一ソース）を直接参照し、教育費シミュレーター等と重複した定数を持たない。
 const PRESETS = {
-  kouritsu: { label: '公立高校', annual: 513000, initial: 120000 },
-  shiritsu: { label: '私立高校', annual: 1054000, initial: 250000 },
+  kouritsu: { label: '公立高校', annual: LEARNING_COST_ANNUAL.koukou.public, initial: HIGH_SCHOOL_INITIAL_COST.public },
+  shiritsu: { label: '私立高校', annual: LEARNING_COST_ANNUAL.koukou.private, initial: HIGH_SCHOOL_INITIAL_COST.private },
 } as const;
 
 type Kind = keyof typeof PRESETS;
@@ -67,7 +70,7 @@ export function KoukouHiyouCalculator() {
         <Field label="入学時の準備費（入学金・制服など）" value={initial} onChange={(n) => { markStart(); setInitial(n); }} />
       </div>
       <p className="mt-2 text-xs text-slate-500">
-        ※ 初期値は文科省「子供の学習費調査」の学習費総額（公立 約51万円/年・私立 約105万円/年）。就学支援金で軽減された後の実支出に近い値です。
+        ※ 初期値は文科省「子供の学習費調査」の学習費総額（公立 {toManYen(LEARNING_COST_ANNUAL.koukou.public)}/年・私立 {toManYen(LEARNING_COST_ANNUAL.koukou.private)}/年）。就学支援金で軽減された後の実支出に近い値です。
       </p>
 
       <div className="mt-6 flex flex-col gap-2 sm:flex-row">

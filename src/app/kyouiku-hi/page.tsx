@@ -18,12 +18,12 @@ const FAQS = [
   {
     question: '中学生から高校卒業まで、教育費は総額いくらかかりますか？',
     answer:
-      '文部科学省「子供の学習費調査（令和3年度）」の学習費総額をもとにすると、公立中学は年約54万円、公立高校は3年間で約165万円、私立高校は約340万円が目安です。中1から高校卒業までを公立で進むと、塾代を除いておおむね300万円前後、私立高校に進むと450万円前後になります。塾・習い事を加えるとさらに増えます。当ページのシミュレーターで、現在の学年・進路・通塾形態を選ぶと総額の目安がすぐ分かります。',
+      '文部科学省「子供の学習費調査（令和5年度・令和8年1月16日訂正版）」の学習費総額をもとにすると、公立中学は年約54万円、公立高校は3年間で約179万円、私立高校は約354万円が目安です。中1から高校卒業までを公立で進むと、塾代を除いておおむね340万円前後、私立高校に進むと520万円前後になります。塾・習い事を加えるとさらに増えます。当ページのシミュレーターで、現在の学年・進路・通塾形態を選ぶと総額の目安がすぐ分かります。',
   },
   {
     question: '公立と私立で教育費はどれくらい変わりますか？',
     answer:
-      '1年間の学習費総額は、中学が公立 約54万円・私立 約144万円、高校が公立 約51万円・私立 約105万円で、私立はおおむね公立の2〜2.7倍です。高校3年間だけでも公立 約165万円に対し私立 約340万円と、180万円前後の差になります。私立は就学支援金で授業料負担を軽減できる場合があるため、世帯の状況に応じて実支出を見積もることが大切です。',
+      '1年間の学習費総額は、中学が公立 約54万円・私立 約156万円、高校が公立 約60万円・私立 約118万円で、私立はおおむね公立の2.0〜2.9倍です。高校3年間だけでも公立 約179万円に対し私立 約354万円と、175万円前後の差になります。私立は就学支援金で授業料負担を軽減できる場合があるため、世帯の状況に応じて実支出を見積もることが大切です。',
   },
   {
     question: '塾代はどのくらい見込んでおけばよいですか？',
@@ -110,8 +110,8 @@ export default function KyouikuHiPage() {
 
           <div className="mb-8">
             <AnswerBox question="中学生から高校卒業まで、教育費は総額いくら？">
-              文部科学省「子供の学習費調査」をもとにすると、<strong>公立中学→公立高校で塾代別に約300万円前後</strong>、
-              <strong>私立高校に進むと約450万円前後</strong>が目安です（高校3年間だけなら公立 約{toManYen(highSchoolTotal('public'))}・私立 約{toManYen(highSchoolTotal('private'))}）。
+              文部科学省「子供の学習費調査」をもとにすると、<strong>公立中学→公立高校で塾代別に約340万円前後</strong>、
+              <strong>私立高校に進むと約520万円前後</strong>が目安です（高校3年間だけなら公立 約{toManYen(highSchoolTotal('public'))}・私立 約{toManYen(highSchoolTotal('private'))}）。
               塾・習い事を加えるとさらに増えます。下のシミュレーターで、学年・進路・通塾形態を選ぶと総額の目安がすぐ分かります。
             </AnswerBox>
           </div>
@@ -148,7 +148,7 @@ export default function KyouikuHiPage() {
               </table>
             </div>
             <p className="mt-2 text-xs text-slate-500">
-              ※ 文部科学省「子供の学習費調査（令和3年度）」の学習費総額（公立高校 約{toManYen(LEARNING_COST_ANNUAL.koukou.public)}/年・私立高校 約{toManYen(LEARNING_COST_ANNUAL.koukou.private)}/年）＋入学準備費の概算。塾代・大学費用は含みません。
+              ※ 文部科学省「子供の学習費調査（令和5年度・令和8年1月16日訂正版）」の学習費総額（公立高校 約{toManYen(LEARNING_COST_ANNUAL.koukou.public)}/年・私立高校 約{toManYen(LEARNING_COST_ANNUAL.koukou.private)}/年）＋入学準備費の概算。塾代・大学費用は含みません。
             </p>
           </section>
 
@@ -186,7 +186,7 @@ export default function KyouikuHiPage() {
             <ul className="space-y-1.5 text-xs leading-relaxed">
               <li>
                 <a href="https://www.mext.go.jp/b_menu/toukei/chousa03/gakushuuhi/1268091.htm" target="_blank" rel="noopener" className="font-medium text-blue-700 underline underline-offset-2 hover:text-blue-800">
-                  文部科学省「子供の学習費調査（令和3年度）」
+                  文部科学省「子供の学習費調査（令和5年度・令和8年1月16日訂正版）」
                 </a>
                 <span className="text-slate-400"> — 中学・高校の学習費総額（公立/私立）</span>
               </li>

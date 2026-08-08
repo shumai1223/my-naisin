@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, Wallet, Calculator, Users, GraduationCap, Lightbulb } from 'lucide-react';
+import { Home, ChevronRight, Wallet, Calculator, Users, GraduationCap, Lightbulb, BookCheck } from 'lucide-react';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -25,7 +25,7 @@ const JUKU_FAQS = [
   {
     question: '中学3年間で塾代の総額はいくらになりますか？',
     answer:
-      '通い始める学年と形態によりますが、中1から中3まで通うと総額でおおむね100万〜250万円程度になるケースが多いです。中3だけなら40万〜80万円程度が一つの目安です。高校の学費（3年間で公立約150万円・私立約300〜400万円）と合わせて、早めに総額を把握しておくと進路の選択肢を狭めずに済みます。',
+      '通い始める学年と形態によりますが、中1から中3まで通うと総額でおおむね100万〜250万円程度になるケースが多いです。中3だけなら40万〜80万円程度が一つの目安です。高校の学費（3年間で公立約179万円・私立約354万円、文部科学省「子供の学習費調査」）と合わせて、早めに総額を把握しておくと進路の選択肢を狭めずに済みます。',
   },
   {
     question: '塾代を抑えるコツはありますか？',
@@ -189,6 +189,23 @@ export default function JukuHiyouPage() {
             />
             <div className="mt-2 text-[11px] text-slate-400">そら塾（オンライン個別指導）の無料体験（PR）</div>
           </section>
+
+          {/* 出典（一次情報準拠。塾代の相場自体は特定の一次資料を持たない一般的な目安のため、
+              ページ内で唯一の公的統計参照＝高校の学費比較の出典のみを明示する） */}
+          <div className="mb-10 rounded-xl border border-slate-200 bg-slate-50/60 p-4">
+            <div className="mb-2 flex items-center gap-1.5 text-xs font-bold text-slate-600">
+              <BookCheck className="h-3.5 w-3.5 text-amber-600" />
+              出典・参考データ（一次情報）
+            </div>
+            <ul className="space-y-1.5 text-xs leading-relaxed">
+              <li>
+                <a href="https://www.mext.go.jp/b_menu/toukei/chousa03/gakushuuhi/1268091.htm" target="_blank" rel="noopener" className="font-medium text-blue-700 underline underline-offset-2 hover:text-blue-800">
+                  文部科学省「子供の学習費調査（令和5年度・令和8年1月16日訂正版）」
+                </a>
+                <span className="text-slate-400"> — 高校の学費比較（公立 約179万円・私立 約354万円/3年間）の出典。塾代の相場自体は特定の統計によらない一般的な目安です。</span>
+              </li>
+            </ul>
+          </div>
 
           {/* FAQ */}
           <section className="mb-10">
