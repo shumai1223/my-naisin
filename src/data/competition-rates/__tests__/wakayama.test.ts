@@ -78,6 +78,24 @@ describe('和歌山県 倍率パイプラインα（Y-6・全日制32校57レコ
     expect(r8.filter((r) => r.schoolName === '新宮')).toHaveLength(3);
   });
 
+  it('掛-1(学校別×多年度): 令和6年度(R6)分レコードが56件収録され、合計行(quota6,123・applicants5,432=D88+E5,344)と完全一致する。R7/R8より1件少ないのは新宮「学彩探究科」がR6時点でまだ存在しなかったため(R6は新宮=普通科1学科のみ・新翔=総合学科の別々の2校)。橋本の主学科もR6時点は「普通科」でR7/R8の「探究科」への改称前だった', () => {
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    expect(r6.length).toBe(56);
+    expect(r6.reduce((a, r) => a + r.quota, 0)).toBe(6123);
+    expect(r6.reduce((a, r) => a + r.finalApplicants, 0)).toBe(5432);
+
+    expect(r6.some((r) => r.schoolName === '新翔')).toBe(true);
+    expect(r6.filter((r) => r.schoolName === '新宮')).toHaveLength(1);
+    expect(r6.find((r) => r.schoolName === '橋本')).toEqual({
+      schoolName: '橋本',
+      department: '普通科',
+      quota: 160,
+      finalApplicants: 161,
+      finalRate: 1.01,
+      fiscalYear: '令和6年度（2024年度）',
+    });
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of WAKAYAMA_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.pref\.wakayama\.lg\.jp\//);
