@@ -71,6 +71,24 @@ describe('京都府 倍率パイプラインα（Y-6・全日制75レコード�
     expect(distinctSchools.size).toBe(54);
   });
 
+  it('掛-1(学校別×多年度): 令和6年度(R6)分レコードが76件・54校収録され、全日制計(quota6,108・applicants6,027・倍率0.99)と完全一致する。京都すばるはR6時点「起業創造・企画・情報科学」の3学科独立だったが、R7で起業創造・企画が「商業学科群」に統合され2学科になったことを確認した', () => {
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    expect(r6.length).toBe(76);
+    expect(r6.reduce((a, r) => a + r.quota, 0)).toBe(6108);
+    expect(r6.reduce((a, r) => a + r.finalApplicants, 0)).toBe(6027);
+
+    const distinctSchools6 = new Set(r6.map((r) => r.schoolName));
+    expect(distinctSchools6.size).toBe(54);
+
+    expect(r6.filter((r) => r.schoolName === '京都すばる')).toHaveLength(3);
+    const r7 = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
+    expect(r7.filter((r) => r.schoolName === '京都すばる')).toHaveLength(2);
+
+    // 京都フォレストは北桑田の学科ではなく独立校（掛-1の罠として記録済み）
+    const kyotoForest = r6.find((r) => r.schoolName === '京都フォレスト');
+    expect(kyotoForest).toMatchObject({ department: '普通', quota: 16, finalApplicants: 2 });
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of KYOTO_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.kyoto-be\.ne\.jp\//);
