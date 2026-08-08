@@ -15,6 +15,7 @@ import { PREFECTURES, getPrefectureByCode } from '@/lib/prefectures';
 import { PrintButton } from '@/components/PrintButton';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { getPrefectureSchoolPageData } from '@/lib/school-page-lookup';
+import { getFormulaExplanation } from '@/lib/prefecture-helpers';
 
 // 県別の落とし穴・注意点データ
 const PREFECTURE_PITFALLS: Record<string, { title: string; items: string[] }> = {
@@ -528,26 +529,6 @@ export default async function PrefecturePage({ params }: PageProps) {
     ? [...schoolPageData.schools].sort((a, b) => a.schoolName.localeCompare(b.schoolName, 'ja'))
     : [];
 
-  // 計算式の説明を生成
-  const getFormulaExplanation = () => {
-    const parts: string[] = [];
-    
-    prefecture.targetGrades.forEach(grade => {
-      const multiplier = prefecture.gradeMultipliers[grade];
-      if (multiplier > 0) {
-        parts.push(`中${grade}${multiplier > 1 ? `×${multiplier}` : ''}`);
-      }
-    });
-
-    let formula = parts.join(' ＋ ');
-    
-    if (prefecture.practicalMultiplier > 1) {
-      formula += `（実技${prefecture.practicalMultiplier}倍）`;
-    }
-
-    return formula;
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
       <BreadcrumbSchema
@@ -634,7 +615,7 @@ export default async function PrefecturePage({ params }: PageProps) {
             </h2>
             <div className="rounded-xl bg-slate-50 p-4">
               <code className="text-lg font-mono font-semibold text-slate-700">
-                {getFormulaExplanation()} ＝ {prefecture.maxScore}点満点
+                {getFormulaExplanation(prefecture)} ＝ {prefecture.maxScore}点満点
               </code>
             </div>
             

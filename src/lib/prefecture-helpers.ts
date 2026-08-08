@@ -62,7 +62,7 @@ export function getPracticalMultiplierText(prefecture: PrefectureConfig): string
 // 満点計算（一元化されたロジック）
 export function calculatePrefectureMaxScore(prefecture: PrefectureConfig, use10PointScale = false): number {
   const maxGrade = (use10PointScale && prefecture.supports10PointScale) ? 10 : 5;
-  
+
   let total = 0;
   for (const grade of prefecture.targetGrades) {
     const multiplier = prefecture.gradeMultipliers[grade] || 1;
@@ -70,8 +70,34 @@ export function calculatePrefectureMaxScore(prefecture: PrefectureConfig, use10P
     const practicalScore = 4 * maxGrade * prefecture.practicalMultiplier * multiplier;
     total += coreScore + practicalScore;
   }
-  
+
   return Math.round(total);
+}
+
+/**
+ * 「計算式」の一行表記（例: 中1(45点) ＋ 中2(45点) ＋ 中3(90点×2)＝195点満点）。
+ * 2026-08-08 Cowork実地監査: 旧実装は「中1＋中2＋中3（実技N倍）＝満点」のように
+ * 括弧の倍率注記を末尾に1回だけ付けていたため、「実技N倍は中3にしか掛からない」
+ * ように読め、かつ5教科側の倍率(coreMultiplier)が一切表示されなかった。読者が
+ * 単純に「45+45+65」のように暗算すると満点と一致しない事故が高知・山梨等
+ * 12県超で発生していた。各学年の実際の配点(calculatePrefectureMaxScoreと同じ式)を
+ * そのまま数値で示すことで、項を足し合わせれば必ず満点と一致するようにする。
+ */
+export function getFormulaExplanation(prefecture: PrefectureConfig): string {
+  const parts: string[] = [];
+  for (const grade of prefecture.targetGrades) {
+    const multiplier = prefecture.gradeMultipliers[grade] ?? 1;
+    if (multiplier <= 0) continue;
+    const coreScore = 5 * 5 * prefecture.coreMultiplier * multiplier;
+    const practicalScore = 4 * 5 * prefecture.practicalMultiplier * multiplier;
+    const gradeTotal = coreScore + practicalScore;
+    parts.push(`中${grade}(${gradeTotal}点)`);
+  }
+  let formula = parts.join(' ＋ ');
+  if (prefecture.practicalMultiplier > prefecture.coreMultiplier) {
+    formula += `（実技4教科は${prefecture.practicalMultiplier}倍で計算）`;
+  }
+  return formula;
 }
 
 // 注意点を自動生成

@@ -18,6 +18,7 @@ import { PREFECTURES, getPrefectureByCode } from '@/lib/prefectures';
 import { getTotalScoreSystem } from '@/lib/total-score/registry';
 import { getExplainer } from '@/lib/total-score/explainers';
 import { getPrefectureGuide, generateDynamicFAQ } from '@/lib/prefecture-guides';
+import { getFormulaExplanation } from '@/lib/prefecture-helpers';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { HowToSchema } from '@/components/StructuredData/HowToSchema';
@@ -291,21 +292,6 @@ export async function generateMetadata({ params }: PageProps) {
       url: `https://my-naishin.com/${prefectureCode}/naishin`,
     }
   };
-}
-
-function getFormulaExplanation(prefecture: { targetGrades: number[]; gradeMultipliers: Record<number, number>; practicalMultiplier: number; maxScore: number; coreMultiplier: number }) {
-  const parts: string[] = [];
-  prefecture.targetGrades.forEach(grade => {
-    const multiplier = prefecture.gradeMultipliers[grade];
-    if (multiplier > 0) {
-      parts.push(`中${grade}${multiplier > 1 ? `×${multiplier}` : ''}`);
-    }
-  });
-  let formula = parts.join(' ＋ ');
-  if (prefecture.practicalMultiplier > prefecture.coreMultiplier) {
-    formula += `（実技${prefecture.practicalMultiplier}倍）`;
-  }
-  return formula;
 }
 
 export default async function PrefectureNaishinPage({ params }: PageProps) {

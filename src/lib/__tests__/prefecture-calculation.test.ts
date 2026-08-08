@@ -6,7 +6,7 @@
 
 import { PREFECTURES, getPrefectureByCode } from '../prefectures';
 import { calculateTotalScore, calculateMaxScore } from '../utils';
-import { calculateAllFiveScore, calculateAllOneScore } from '../prefecture-helpers';
+import { calculateAllFiveScore, calculateAllOneScore, getFormulaExplanation } from '../prefecture-helpers';
 import type { Scores } from '../types';
 
 // オール5の成績
@@ -183,6 +183,27 @@ describe('Prefecture Calculation Tests', () => {
         // This may differ for prefectures with special calculations
         // but should be documented
         expect(calculatedMax).toBe(declaredMax);
+      }
+    );
+  });
+
+  // 2026-08-08 Cowork実地監査: 高知「中1＋中2＋中3（実技2倍）＝195点満点」のように、
+  // 「計算式」の一行表記を素直に暗算(45+45+65等)すると満点と一致しない県が12県超あった。
+  // getFormulaExplanation()が埋め込む各学年の点数を実際に合算し、maxScoreと一致することを
+  // 全47県で機械的に保証する（本文の表記だけを直しても、後で数値がズレたら再発するため）。
+  describe('getFormulaExplanation: 一行表記に埋め込まれた学年別点数の合計がmaxScoreと一致する', () => {
+    test.each(PREFECTURES.map(p => [p.code, p.name, p.maxScore]))(
+      '%s (%s): 式中の(N点)を合算するとmaxScore %dと一致する',
+      (code: string, name: string, declaredMax: number) => {
+        const prefecture = getPrefectureByCode(code as string);
+        expect(prefecture).toBeDefined();
+        if (!prefecture) return;
+
+        const formula = getFormulaExplanation(prefecture);
+        const matches = [...formula.matchAll(/\((\d+(?:\.\d+)?)点\)/g)];
+        expect(matches.length).toBeGreaterThan(0);
+        const sum = matches.reduce((acc, m) => acc + Number(m[1]), 0);
+        expect(sum).toBe(declaredMax);
       }
     );
   });
