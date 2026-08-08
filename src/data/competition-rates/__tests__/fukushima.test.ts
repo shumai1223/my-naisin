@@ -50,6 +50,13 @@ describe('福島県 倍率パイプラインα（Y-6・全日制50校99レコー
     expect(r7.reduce((a, r) => a + r.finalApplicants, 0)).toBe(175);
   });
 
+  it('掛-1(学校別×多年度): 令和6年度(R6)分レコードが89件収録され、「全日制 合計」行(quota1,484・applicants230)と完全一致する。R6も後期選抜募集定員が前期選抜の結果に応じた残り枠であり対象学科が年ごとに入れ替わる構造はR7/R8と同型のため、学校名+学科名の完全一致検証は実施しない', () => {
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    expect(r6.length).toBe(89);
+    expect(r6.reduce((a, r) => a + r.quota, 0)).toBe(1484);
+    expect(r6.reduce((a, r) => a + r.finalApplicants, 0)).toBe(230);
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of FUKUSHIMA_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.pref\.fukushima\.lg\.jp\//);
