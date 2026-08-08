@@ -75,6 +75,21 @@ describe('沖縄県 倍率パイプラインα（Y-6・全日制58校156レコ�
     expect([...r7Schools].every((s) => r8Schools.has(s))).toBe(true);
   });
 
+  it('掛-1(学校別×多年度): 令和6年度(R6)分レコードが160件・58校収録され、総計から定時制6箇所を差し引いた自己算出値(quota11,629・applicants10,993)と完全一致する。R6の表構成はR7/R8と異なり「志願変更前」「通学区域外」「特別募集」等の詳細列を持つが、quotaは一般入学募集列、applicantsは一般最終志願者数の「計」列(区域内+区域外+特別募集)を採用した。球陽は「理数」+「国際英語」の2学科だったがR7で単一の「文理探究」に統合された実在の学科再編が確認できる', () => {
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    expect(r6.length).toBe(160);
+    const distinctSchools = new Set(r6.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(58);
+    const sumQuota = r6.reduce((a, r) => a + r.quota, 0);
+    const sumApplicants = r6.reduce((a, r) => a + r.finalApplicants, 0);
+    expect(sumQuota).toBe(11629);
+    expect(sumApplicants).toBe(10993);
+
+    expect(r6.filter((r) => r.schoolName === '球陽')).toHaveLength(2);
+    const r7 = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
+    expect(r7.filter((r) => r.schoolName === '球陽')).toHaveLength(1);
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of OKINAWA_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.pref\.okinawa\.(jp|lg\.jp)\//);
