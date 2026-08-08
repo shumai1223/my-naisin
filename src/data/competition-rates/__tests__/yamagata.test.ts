@@ -83,6 +83,23 @@ describe('山形県 倍率パイプラインα（Y-6・全日制42校90レコー
     }
   });
 
+  it('掛-1(学校別×多年度): 令和6年度(R6)分レコードが91件・44校収録され、公式「全日制公立合計」5,729/4,518と完全一致する。R6時点は「米沢工業」(3学科)と「米沢商業」(1学科)が別々の学校だったが、R7で両校が統合され「米沢鶴城」(4学科)として開校していたことを学科数・学科名の対応関係から確認した', () => {
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    expect(r6.length).toBe(91);
+    const distinctSchools = new Set(r6.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(44);
+    const sumQuota = r6.reduce((a, r) => a + r.quota, 0);
+    const sumApplicants = r6.reduce((a, r) => a + r.finalApplicants, 0);
+    expect(sumQuota).toBe(5729);
+    expect(sumApplicants).toBe(4518);
+
+    expect(r6.some((r) => r.schoolName === '米沢工業')).toBe(true);
+    expect(r6.some((r) => r.schoolName === '米沢商業')).toBe(true);
+    expect(r6.some((r) => r.schoolName === '米沢鶴城')).toBe(false);
+    const r7 = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
+    expect(r7.filter((r) => r.schoolName === '米沢鶴城')).toHaveLength(4);
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of YAMAGATA_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.pref\.yamagata\.jp\//);
