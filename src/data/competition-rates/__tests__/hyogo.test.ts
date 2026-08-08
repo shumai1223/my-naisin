@@ -101,6 +101,31 @@ describe('兵庫県 倍率パイプラインα（Y-6・全日制127校190レコ�
     expect(r8.some((r) => r.schoolName === '姫路市立')).toBe(true);
   });
 
+  it('掛-1(学校別×多年度・3年度目): 令和6年度(R6)分レコードが200件収録され、137校・全日制計(quota21,889・applicants22,677)と完全一致する。R6はR7で統合された6組の学校(伊川谷北+伊川谷→神戸学園都市、神戸北+神戸甲北→北神戸総合、西宮北+西宮甲山→西宮苦楽園、三木北+三木東+吉川→三木総合、福崎+夢前→播磨福崎、姫路南+飾磨+家島→姫路海稜)がすべて別々の学校として募集していた最後の年度であることをWebSearchで裏取り確認した', () => {
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    expect(r6.length).toBe(200);
+    expect(r6.reduce((a, r) => a + r.quota, 0)).toBe(21889);
+    expect(r6.reduce((a, r) => a + r.finalApplicants, 0)).toBe(22677);
+
+    const distinctSchools = new Set(r6.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(137);
+
+    for (const preMergerSchool of ['伊川谷北', '伊川谷', '神戸北', '神戸甲北', '西宮北', '西宮甲山', '三木北', '三木東', '吉川', '福崎', '夢前']) {
+      expect(r6.some((r) => r.schoolName === preMergerSchool)).toBe(true);
+    }
+    for (const mergedSchool of ['神戸学園都市', '北神戸総合', '西宮苦楽園', '三木総合', '播磨福崎']) {
+      expect(r6.some((r) => r.schoolName === mergedSchool)).toBe(false);
+    }
+  });
+
+  it('令和6年度時点で単位制化前だった5校（篠山鳳鳴・明石・北条・姫路飾西・豊岡）が「普通科」のまま収録されている（R7/R8では「普通科（単位制）」）', () => {
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    for (const school of ['篠山鳳鳴', '明石', '北条', '姫路飾西', '豊岡']) {
+      const rec = r6.find((r) => r.schoolName === school);
+      expect(rec?.department).toBe('普通科');
+    }
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of HYOGO_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www2\.hyogo-c\.ed\.jp\//);
