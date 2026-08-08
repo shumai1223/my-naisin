@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { Calculator, Target, BookOpen, ChevronRight, TrendingUp } from 'lucide-react';
+import { Calculator, Target, BookOpen, ChevronRight, TrendingUp, GraduationCap } from 'lucide-react';
 
 export type NavigationMode = 'select' | 'calculate' | 'reverse' | 'learn';
 
@@ -168,6 +168,26 @@ export function HeroNavigation({ onModeChange, currentMode }: HeroNavigationProp
                 <p className="text-xs text-slate-600">都道府県別の計算方法・コラム</p>
                 <p className="mt-1 text-xs text-amber-700">
                   例：「換算内申って何？まず仕組みを知りたい」→ こちら
+                </p>
+              </Link>
+            </div>
+
+            {/* 学校ページ(Λ-2)への導線(2026-08-08 loop-question-note【A】③)。既にいる月10,105クリックの
+                生徒を個別学校ページ層(実データの倍率/募集人員)へ橋渡しする。新しい面は作らず既存の
+                /prefectures(高校別の倍率を見るハブへのリンクを既に持つ)へつなぐだけ。 */}
+            <div className="animate-fade-in-up" style={{ animationDelay: '300ms' }}>
+              <Link
+                href="/prefectures"
+                className="group flex h-full flex-col gap-1 rounded-xl border border-blue-200 bg-gradient-to-br from-blue-50 via-indigo-50/50 to-white p-4 text-left shadow-sm transition-all duration-300 hover:border-blue-300 hover:shadow-md"
+              >
+                <div className="flex items-center gap-2">
+                  <GraduationCap className="h-5 w-5 text-blue-600" />
+                  <span className="text-base font-bold text-slate-800">高校の倍率を調べる</span>
+                  <ChevronRight className="ml-auto h-4 w-4 text-blue-500 transition-transform group-hover:translate-x-1" />
+                </div>
+                <p className="text-xs text-slate-600">県内の高校別の募集人員・志願者数・倍率を確認</p>
+                <p className="mt-1 text-xs text-blue-700">
+                  例：「気になる高校の倍率を先に見ておきたい」→ こちら
                 </p>
               </Link>
             </div>
