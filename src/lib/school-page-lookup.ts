@@ -37,6 +37,11 @@ export const INDEXED_SCHOOL_PAGE_PREFECTURE_CODES = [
   'kagawa',
   'tokushima',
   'wakayama',
+  'miyazaki',
+  'toyama',
+  'oita',
+  'ishikawa',
+  'aomori',
 ];
 
 export function getPrefectureSchoolPageData(code: string): { schools: SchoolPageData[] } | null {
