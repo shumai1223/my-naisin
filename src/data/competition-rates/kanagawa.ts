@@ -86,7 +86,19 @@
  * kanagawa.tsに同一学校名が存在するものは値を継承した。11学科全ての印字済み小計（農業470/496・
  * 工業2212/1939・商業1031/1112・水産156/131・家庭39/44・看護79/69[単独校]・福祉236/129・
  * 理数39/42[単独校]・体育78/92・美術78/91・国際74/117）と完全一致（node.js機械計算）。これで
- * bessi-3.xlsxのsheet1+sheet2が完結。sheet3(単位制)は次回以降のセッションで横展開する。
+ * bessi-3.xlsxのsheet1+sheet2が完結。
+ *
+ * **2026-08-08追記(掛-1・kanagawa R6横展開第3弾・完結)**: sheet3「単位制」（普通科17校(戸塚一般
+ * コース含む)+専門コース1校(戸塚音楽コース)+総合学科8校+専門学科11学科11校+連携募集2校=計38
+ * レコード）を追加。**発見**: 単位制普通科に「横浜旭陵」（quota232/apps210）が存在するが、
+ * R7/R8のkanagawa.tsには一切存在しない。WebSearchで裏取りしたところ、横浜旭陵高校は旭高校との
+ * 再編統合が決定しており2025年度(=R7)以降の新規生徒募集を停止したことが判明（2027年度に統合完了
+ * 予定・旧都岡高校+中沢高校が2004年合併して開校した経緯を持つ）。R6が最後の募集年度だったための
+ * 実在の消失であり誤記ではない。全ての印字済み小計・合計（普通科(単位制)計4,262/5,050・総合学科
+ * (単位制)計1,980/2,289・農業(単位制)合計156/109・音楽コース39/44・国際関係(単位制)計159/206・
+ * 連携募集合計85/77）が完全一致（node.js機械計算）。**これでbessi-3.xlsx全体（sheet1〜3）が完結し、
+ * kanagawaのR6学校粒度データが確定した（tokyo/yamaguchiに続き3県目の「学校別×多年度」深掘り
+ * が進捗）。**
  */
 import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
 
@@ -110,7 +122,7 @@ export const KANAGAWA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     {
       url: 'https://www.pref.kanagawa.jp/documents/134290/bessi-3.xlsx',
       docTitle:
-        '神奈川県教育委員会 令和6年度神奈川県公立高等学校入学者選抜一般募集共通選抜等志願変更締切日集計時志願状況（別紙3・sheet1「普通科・クリエイティブ」+sheet2「専門学科」完全収録・掛-1・kanagawa横展開R6第1〜2弾）',
+        '神奈川県教育委員会 令和6年度神奈川県公立高等学校入学者選抜一般募集共通選抜等志願変更締切日集計時志願状況（別紙3・sheet1〜3完全収録・掛-1・kanagawa横展開R6第1〜3弾・完結）',
       fiscalYear: '令和6年度（2024年度）',
       fetchedAt: '2026-08-08',
     },
@@ -719,5 +731,44 @@ export const KANAGAWA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '上矢部', area: '横浜中', department: '美術科', quota: 39, finalApplicants: 44, finalRate: 1.13, fiscalYear: '令和6年度（2024年度）' },
     { schoolName: '横浜市立横浜商業', area: '横浜市立', department: '国際科', quota: 35, finalApplicants: 53, finalRate: 1.51, fiscalYear: '令和6年度（2024年度）' },
     { schoolName: '川崎市立橘', area: '川崎市立', department: '国際科', quota: 39, finalApplicants: 64, finalRate: 1.64, fiscalYear: '令和6年度（2024年度）' },
+    // 掛-1横展開R6第3弾・kanagawa完結: R6分・sheet3「単位制」(documents/134290/bessi-3.xlsx)。
+    { schoolName: '神奈川総合', area: '横浜市', department: '普通科（単位制）', quota: 208, finalApplicants: 308, finalRate: 1.48, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '横浜旭陵', area: '横浜市', department: '普通科（単位制）', quota: 232, finalApplicants: 210, finalRate: 0.91, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '横浜緑園', area: '横浜市', department: '普通科（単位制）', quota: 279, finalApplicants: 360, finalRate: 1.29, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '横浜桜陽', area: '横浜市', department: '普通科（単位制）', quota: 270, finalApplicants: 285, finalRate: 1.06, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '横浜清陵', area: '横浜市', department: '普通科（単位制）', quota: 266, finalApplicants: 400, finalRate: 1.5, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '横浜栄', area: '横浜市', department: '普通科（単位制）', quota: 319, finalApplicants: 402, finalRate: 1.26, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '川崎', area: '川崎市', department: '普通科（単位制）', quota: 223, finalApplicants: 297, finalRate: 1.33, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '大師', area: '川崎市', department: '普通科（単位制）', quota: 229, finalApplicants: 202, finalRate: 0.88, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '三浦初声', area: '三浦市', department: '普通科（単位制）', quota: 199, finalApplicants: 130, finalRate: 0.65, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '藤沢清流', area: '藤沢市', department: '普通科（単位制）', quota: 279, finalApplicants: 329, finalRate: 1.18, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '平塚湘風', area: '平塚市', department: '普通科（単位制）', quota: 199, finalApplicants: 188, finalRate: 0.94, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '小田原', area: '小田原市', department: '普通科（単位制）', quota: 319, finalApplicants: 421, finalRate: 1.32, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '厚木清南', area: '県央', department: '普通科（単位制）', quota: 230, finalApplicants: 274, finalRate: 1.19, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '相模原城山', area: '相模原', department: '普通科（単位制）', quota: 279, finalApplicants: 333, finalRate: 1.19, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '相模原弥栄', area: '相模原', department: '普通科（単位制）', quota: 184, finalApplicants: 218, finalRate: 1.18, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '横浜市立東', area: '横浜市立', department: '普通科（単位制）', quota: 268, finalApplicants: 328, finalRate: 1.22, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '横浜市立戸塚', area: '横浜市立', department: '普通科（単位制・一般コース）', quota: 279, finalApplicants: 365, finalRate: 1.31, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '横浜市立戸塚', area: '横浜市立', department: '普通科（単位制・音楽コース）', quota: 39, finalApplicants: 44, finalRate: 1.13, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '鶴見総合', area: '横浜市', department: '総合学科（単位制）', quota: 219, finalApplicants: 266, finalRate: 1.21, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '金沢総合', area: '横浜市', department: '総合学科（単位制）', quota: 279, finalApplicants: 354, finalRate: 1.27, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '麻生総合', area: '川崎市', department: '総合学科（単位制）', quota: 190, finalApplicants: 86, finalRate: 0.45, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '藤沢総合', area: '藤沢市', department: '総合学科（単位制）', quota: 272, finalApplicants: 318, finalRate: 1.17, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '秦野総合', area: '秦野市', department: '総合学科（単位制）', quota: 239, finalApplicants: 239, finalRate: 1, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '座間総合', area: '座間市', department: '総合学科（単位制）', quota: 229, finalApplicants: 256, finalRate: 1.12, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '横浜市立みなと総合', area: '横浜市立', department: '総合学科（単位制）', quota: 232, finalApplicants: 347, finalRate: 1.5, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '横須賀市立横須賀総合', area: '横須賀市立', department: '総合学科（単位制）', quota: 320, finalApplicants: 423, finalRate: 1.32, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '三浦初声', area: '三浦市', department: '農業科（単位制）', quota: 39, finalApplicants: 21, finalRate: 0.54, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '吉田島', area: '開成町', department: '農業科（単位制）', quota: 117, finalApplicants: 88, finalRate: 0.75, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '吉田島', area: '開成町', department: '家庭科（単位制）', quota: 39, finalApplicants: 38, finalRate: 0.97, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '横浜サイエンスフロンティア', area: '横浜市立', department: '理数科（単位制）', quota: 158, finalApplicants: 264, finalRate: 1.67, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '相模原弥栄', area: '相模原', department: '体育科（単位制）', quota: 79, finalApplicants: 89, finalRate: 1.13, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '相模原弥栄', area: '相模原', department: '音楽科（単位制）', quota: 39, finalApplicants: 48, finalRate: 1.23, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '相模原弥栄', area: '相模原', department: '美術科（単位制）', quota: 39, finalApplicants: 48, finalRate: 1.23, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '横浜国際', area: '横浜市', department: '国際科（単位制）', quota: 159, finalApplicants: 206, finalRate: 1.3, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '神奈川総合産業', area: '横浜市立', department: '総合産業科（単位制）', quota: 239, finalApplicants: 261, finalRate: 1.09, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '神奈川総合', area: '横浜市', department: '舞台芸術科（単位制）', quota: 30, finalApplicants: 45, finalRate: 1.5, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '光陵', area: '横浜中', department: '普通科（連携募集）', quota: 40, finalApplicants: 40, finalRate: 1.0, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '愛川', area: '県央', department: '普通科（連携募集）', quota: 45, finalApplicants: 37, finalRate: 0.82, fiscalYear: '令和6年度（2024年度）' },
   ],
 };

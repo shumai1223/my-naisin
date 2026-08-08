@@ -118,7 +118,7 @@ describe('神奈川県 倍率パイプラインα（Y-2・全日制の突合テ�
   });
 
   it('掛-1(学校別×多年度・R6第1弾): 令和6年度(R6)分に普通科(県立88+市立6=94校)+クリエイティブ5校=99レコードが収録され、区市町村+学校名+学科の重複が無い。印字済み小計と完全一致する', () => {
-    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）' && r.department.startsWith('普通科'));
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）' && r.department.startsWith('普通科') && !r.department.includes('単位制') && !r.department.includes('連携募集'));
     expect(r6.length).toBe(99);
 
     const futsuka = r6.filter((r) => r.department === '普通科');
@@ -150,7 +150,7 @@ describe('神奈川県 倍率パイプラインα（Y-2・全日制の突合テ�
   });
 
   it('掛-1(学校別×多年度・R6第2弾): 令和6年度(R6)分に専門学科11学科27校=34レコードを追加した合計133件が収録され、区市町村+学校名+学科の重複が無い。11学科全ての印字済み小計と完全一致する', () => {
-    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）' && !r.department.includes('単位制') && !r.department.includes('連携募集'));
     expect(r6.length).toBe(133);
 
     const seen = new Set<string>();
@@ -176,6 +176,48 @@ describe('神奈川県 倍率パイプラインα（Y-2・全日制の突合テ�
     expect(sumOf('体育科')).toEqual({ count: 2, quota: 78, applicants: 92 });
     expect(sumOf('美術科')).toEqual({ count: 2, quota: 78, applicants: 91 });
     expect(sumOf('国際科')).toEqual({ count: 2, quota: 74, applicants: 117 });
+  });
+
+  it('掛-1(学校別×多年度・R6第3弾・kanagawa完結): 令和6年度(R6)分に単位制38レコードを追加した合計171件が収録され、区市町村+学校名+学科の重複が無い。単位制の各区分小計と完全一致する。横浜旭陵はR7以降募集停止(旭高校と再編統合)のためR7には存在しない', () => {
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    expect(r6.length).toBe(171);
+
+    const seen = new Set<string>();
+    for (const r of r6) {
+      const key = `${r.area}|${r.schoolName}|${r.department}`;
+      expect(seen.has(key)).toBe(false);
+      seen.add(key);
+    }
+
+    const futsukaTanni = r6.filter((r) => r.department === '普通科（単位制）' || r.department === '普通科（単位制・一般コース）');
+    expect(futsukaTanni.length).toBe(17);
+    expect(futsukaTanni.reduce((a, r) => a + r.quota, 0)).toBe(4262);
+    expect(futsukaTanni.reduce((a, r) => a + r.finalApplicants, 0)).toBe(5050);
+
+    const sougouTanni = r6.filter((r) => r.department === '総合学科（単位制）');
+    expect(sougouTanni.length).toBe(8);
+    expect(sougouTanni.reduce((a, r) => a + r.quota, 0)).toBe(1980);
+    expect(sougouTanni.reduce((a, r) => a + r.finalApplicants, 0)).toBe(2289);
+
+    const nougyoTanni = r6.filter((r) => r.department === '農業科（単位制）');
+    expect(nougyoTanni.length).toBe(2);
+    expect(nougyoTanni.reduce((a, r) => a + r.quota, 0)).toBe(156);
+    expect(nougyoTanni.reduce((a, r) => a + r.finalApplicants, 0)).toBe(109);
+
+    const renkei = r6.filter((r) => r.department === '普通科（連携募集）');
+    expect(renkei.length).toBe(2);
+    expect(renkei.reduce((a, r) => a + r.quota, 0)).toBe(85);
+    expect(renkei.reduce((a, r) => a + r.finalApplicants, 0)).toBe(77);
+
+    expect(r6.find((r) => r.schoolName === '横浜旭陵')).toEqual({
+      schoolName: '横浜旭陵',
+      area: '横浜市',
+      department: '普通科（単位制）',
+      quota: 232,
+      finalApplicants: 210,
+      finalRate: 0.91,
+      fiscalYear: '令和6年度（2024年度）',
+    });
   });
 
   it('全レコードのquota>0・finalApplicants>=0・finalRateが概算で整合する', () => {
