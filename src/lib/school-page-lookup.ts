@@ -20,6 +20,15 @@ import { SCHOOL_NAME_ALIASES_BY_PREFECTURE } from '@/lib/school-name-aliases';
  * wave3(2026-08-06): fukui/nara/kagawa/tokushima/wakayama
  *   (wave2に続き学校数最小クラスの地方県を優先・school-page-wave-readiness.tsで
  *   残り36県全て即座解禁可能=0県未準備と再確認済み。2〜3日おきの分割公開ペースを維持)。
+ * wave4(2026-08-08頃): miyazaki/toyama/oita/ishikawa/aomori
+ * wave5(2026-08-09): aichi/osaka/fukuoka/shizuoka/ibaraki/hiroshima/niigata/miyagi/
+ *   kagoshima/gifu/gunma/tochigi/okinawa/ehime/nagasaki/mie/kyoto/kumamoto/okayama/
+ *   akita/shiga（21県一括）。**gate-decisions-2026-07-28で👤が既に「46県一括解禁」を
+ *   裁定済み**（loopは段階解禁を推奨したが👤が却下し一括を選択・条件はsitemap投入を
+ *   数日ずらす分割デプロイのみ）と判明したため、5県ずつの自主規制ペースを是正し
+ *   school-page-wave-readiness.tsで即座解禁可能と判定された県を全てまとめて追加した。
+ *   残り6県(hokkaido/iwate/yamagata/fukushima/nagano/yamaguchi)はmatchRate<95%または
+ *   Λ-4推移データ未整備でブロック中（school-page-wave-readiness.ts参照・要データ整備）。
  */
 export const INDEXED_SCHOOL_PAGE_PREFECTURE_CODES = [
   'tokyo',
@@ -42,6 +51,27 @@ export const INDEXED_SCHOOL_PAGE_PREFECTURE_CODES = [
   'oita',
   'ishikawa',
   'aomori',
+  'aichi',
+  'osaka',
+  'fukuoka',
+  'shizuoka',
+  'ibaraki',
+  'hiroshima',
+  'niigata',
+  'miyagi',
+  'kagoshima',
+  'gifu',
+  'gunma',
+  'tochigi',
+  'okinawa',
+  'ehime',
+  'nagasaki',
+  'mie',
+  'kyoto',
+  'kumamoto',
+  'okayama',
+  'akita',
+  'shiga',
 ];
 
 export function getPrefectureSchoolPageData(code: string): { schools: SchoolPageData[] } | null {
