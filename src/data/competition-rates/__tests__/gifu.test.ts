@@ -62,6 +62,18 @@ describe('岐阜県 倍率パイプラインα（Y-6・全日制63校134レコ�
     expect(r8.filter((r) => r.schoolName === '高山工業')).toHaveLength(1);
   });
 
+  it('掛-1(学校別×多年度): 令和6年度(R6)分レコードが138件・63校収録され、総括表記載の全日制計(quota13,121・applicants12,829・倍率0.98)と完全一致する。高山工業はR6時点でも機械工学・電子機械工学・電気工学・建築インテリア工学の4学科独立定員のままで、R8のくくり募集化はまだ行われていなかった', () => {
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    expect(r6.length).toBe(138);
+    expect(r6.reduce((a, r) => a + r.quota, 0)).toBe(13121);
+    expect(r6.reduce((a, r) => a + r.finalApplicants, 0)).toBe(12829);
+
+    const distinctSchools6 = new Set(r6.map((r) => r.schoolName));
+    expect(distinctSchools6.size).toBe(63);
+
+    expect(r6.filter((r) => r.schoolName === '高山工業')).toHaveLength(4);
+  });
+
   it('複数学科校が正しく収録されている', () => {
     const multiDeptSchools: Record<string, number> = {
       岐山: 2,
