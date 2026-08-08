@@ -74,6 +74,35 @@ describe('秋田県 倍率パイプラインα（Y-6・全日制78レコード�
     }
   });
 
+  it('掛-1(学校別×多年度・3年度目): 令和6年度(R6)分レコードが80件収録され、県北計/中央計/県南計/県合計の4段階の公式小計すべてと完全一致する。男鹿海洋・男鹿工業はR6でもR7と同じ3学科構成(R8で2学科に縮小される前の状態)で収録されている', () => {
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    expect(r6.length).toBe(80);
+    expect(r6.reduce((a, r) => a + r.quota, 0)).toBe(6604);
+    expect(r6.reduce((a, r) => a + r.finalApplicants, 0)).toBe(5753);
+
+    expect(r6.filter((r) => r.schoolName === '男鹿海洋')).toHaveLength(3);
+    expect(r6.filter((r) => r.schoolName === '男鹿工業')).toHaveLength(3);
+    expect(r6.some((r) => r.schoolName === '男鹿海洋' && r.department === '普通科')).toBe(true);
+    expect(r6.some((r) => r.schoolName === '男鹿工業' && r.department === '設備システム科')).toBe(true);
+
+    expect(r6.find((r) => r.schoolName === '大曲農業(太田分校)')).toEqual({
+      schoolName: '大曲農業(太田分校)',
+      department: '普通科',
+      quota: 35,
+      finalApplicants: 13,
+      finalRate: 0.37,
+      fiscalYear: '令和6年度（2024年度）',
+    });
+    expect(r6.find((r) => r.schoolName === '湯沢翔北(雄勝校)')).toEqual({
+      schoolName: '湯沢翔北(雄勝校)',
+      department: '普通科',
+      quota: 40,
+      finalApplicants: 9,
+      finalRate: 0.23,
+      fiscalYear: '令和6年度（2024年度）',
+    });
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of AKITA_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.pref\.akita\.lg\.jp\//);
