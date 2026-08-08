@@ -65,6 +65,24 @@ describe('山梨県 倍率パイプラインα（Y-6・全日制26校48学科の
     }
   });
 
+  it('掛-1(学校別×多年度): 令和6年度(R6)分レコードが48件・26校収録され、公式「全日制課程計」3,537/3,374と完全一致し、R8と学校名+学科名の組み合わせが完全一致する(学校再編なし)', () => {
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    expect(r6.length).toBe(48);
+    const distinctSchools = new Set(r6.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(26);
+    const sumQuota = r6.reduce((a, r) => a + r.quota, 0);
+    const sumApplicants = r6.reduce((a, r) => a + r.finalApplicants, 0);
+    expect(sumQuota).toBe(3537);
+    expect(sumApplicants).toBe(3374);
+
+    const r8Keys = new Set(r8.map((r) => `${r.schoolName}|${r.department}`));
+    const r6Keys = new Set(r6.map((r) => `${r.schoolName}|${r.department}`));
+    expect(r6Keys.size).toBe(r8Keys.size);
+    for (const key of r6Keys) {
+      expect(r8Keys.has(key)).toBe(true);
+    }
+  });
+
   it('教委が公式に一括募集と定める学科群（韮崎工業・工業一括）が単一レコードとして収録されている', () => {
     expect(records.find((r) => r.schoolName === '韮崎工業')).toEqual({
       schoolName: '韮崎工業',
