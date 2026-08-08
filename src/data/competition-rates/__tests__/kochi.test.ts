@@ -94,6 +94,24 @@ describe('高知県 倍率パイプラインα（Y-6・Ａ日程75レコード�
     }
   });
 
+  it('掛-1(学校別×多年度): 令和6年度(R6)分レコードが75件・32校収録され、node.js機械集計(quota4,924・applicants3,534)と完全一致し、公式の県立計との差分9名は高知国際グローバル探究のR6実績9名分と一致する。清水「普通(未来)」はR6時点では単に「普通」だった(実在の学科ブランディング変更)以外、R8と学校名+学科名の組み合わせが完全一致する', () => {
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    expect(r6.length).toBe(75);
+    const distinctSchools = new Set(r6.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(32);
+    const sumQuota = r6.reduce((a, r) => a + r.quota, 0);
+    const sumApplicants = r6.reduce((a, r) => a + r.finalApplicants, 0);
+    expect(sumQuota).toBe(4924);
+    expect(sumApplicants).toBe(3534);
+
+    const r8Keys = new Set(r8.map((r) => `${r.schoolName}|${r.department}`));
+    const r6Keys = new Set(r6.map((r) => `${r.schoolName}|${r.department}`));
+    const onlyInR6 = [...r6Keys].filter((k) => !r8Keys.has(k));
+    const onlyInR8 = [...r8Keys].filter((k) => !r6Keys.has(k));
+    expect(onlyInR6).toEqual(['清水|普通']);
+    expect(onlyInR8).toEqual(['清水|普通(未来)']);
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of KOCHI_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.pref\.kochi\.lg\.jp\//);
