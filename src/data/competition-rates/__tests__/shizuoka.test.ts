@@ -62,6 +62,24 @@ describe('静岡県 倍率パイプラインα（Y-6・全日制90校162レコ�
     expect(distinctSchools.size).toBe(90);
   });
 
+  it('掛-1(学校別×多年度): 令和6年度(R6)分レコードが162件・90校収録され、公式「公立合計」(quota17,699・applicants18,702・倍率1.06)と完全一致する。学科名の印字表記・沼津工業/吉原工業のくくり学科群名ともR7と完全一致(R8のみ表記が異なる)。学校名+学科名のキー集合もR7と完全一致(統廃合なし)', () => {
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    expect(r6.length).toBe(162);
+    expect(r6.reduce((a, r) => a + r.quota, 0)).toBe(17699);
+    expect(r6.reduce((a, r) => a + r.finalApplicants, 0)).toBe(18702);
+
+    const distinctSchools6 = new Set(r6.map((r) => r.schoolName));
+    expect(distinctSchools6.size).toBe(90);
+
+    const r7 = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
+    const r6Keys = new Set(r6.map((r) => `${r.schoolName}|${r.department}`));
+    const r7Keys = new Set(r7.map((r) => `${r.schoolName}|${r.department}`));
+    expect(r6Keys.size).toBe(r7Keys.size);
+    for (const key of r6Keys) {
+      expect(r7Keys.has(key)).toBe(true);
+    }
+  });
+
   it('複数学科校が正しく収録されている', () => {
     const multiDeptSchools: Record<string, number> = {
       下田: 2,
