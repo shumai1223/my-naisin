@@ -74,6 +74,22 @@ describe('石川県 倍率パイプラインα（Y-6・全日制40校70レコー
     }
   });
 
+  it('掛-1(学校別×多年度): 令和6年度(R6)分レコードが70件・40校収録され、公式「全県合計」6,775/6,650と完全一致する。併願制度3校(小松・金沢泉丘・七尾)もR6側で同型に合算収録し、学校名+学科名の集合がR7と完全に一致する（新設・廃止学科なし）', () => {
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    const r7 = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
+    expect(r6.length).toBe(70);
+    const distinctSchools = new Set(r6.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(40);
+    const sumQuota = r6.reduce((a, r) => a + r.quota, 0);
+    const sumApplicants = r6.reduce((a, r) => a + r.finalApplicants, 0);
+    expect(sumQuota).toBe(6775);
+    expect(sumApplicants).toBe(6650);
+
+    const r6Keys = new Set(r6.map((r) => `${r.schoolName}|${r.department}`));
+    const r7Keys = new Set(r7.map((r) => `${r.schoolName}|${r.department}`));
+    expect(r6Keys).toEqual(r7Keys);
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of ISHIKAWA_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.pref\.ishikawa\.lg\.jp\//);

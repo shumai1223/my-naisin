@@ -26,6 +26,16 @@
  * 小松・金沢泉丘・七尾の3校は罠（併願制度）もR7側で同型に発生しており、R8と同じ単一レコード
  * 合算方式（quota=普通・理数の合計、applicants=各学科出願者+併願者数の合計、rateは小計行の印字値）
  * で収録した。全県合計（quota6,666・applicants6,409・倍率0.96）とnode.js機械集計が完全一致。
+ *
+ * ⚠️掛-1（学校別×多年度）R6追加: 令和6年度版「一般入学(全日制)の出願状況」は2/15・2/20・2/29の
+ * 3回発表されており、2/26〜2/29が志願変更期間だったため、R7/R8と同じ「志願変更前」時点の版として
+ * 2月20日発表分（https://www.pref.ishikawa.lg.jp/kisya/r5kyoui/documents/20240220.pdf）を採用した
+ * （フォルダ名はr5kyoui＝当該年度の1つ前の元号年表記という石川県独自の命名規則で、r6kyoui/r7kyoui
+ * とは異なりURL単純類推が効かないためWebSearchで目次ページを辿って特定した）。列構成・各校末尾の
+ * 「小計」行・小松/金沢泉丘/七尾の併願制度（普・理併願等をquota無しのapplicants専用行として合算）も
+ * R7/R8と完全同型。40校70レコードをnode.js機械集計（quota6,775・applicants6,650・倍率0.98）し、
+ * 「全県合計」印字行と完全一致（誤差ゼロ・初回転記で一致）。schoolName+department diffではR7との
+ * 差分ゼロ（40校70学科すべて完全一致・新設/廃止/改称なし）。
  */
 import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
 
@@ -43,6 +53,12 @@ export const ISHIKAWA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       docTitle: '石川県教育委員会 令和7年度石川県公立高等学校一般入学(全日制)の出願状況（2月25日）',
       fiscalYear: '令和7年度（2025年度）',
       fetchedAt: '2026-08-07',
+    },
+    {
+      url: 'https://www.pref.ishikawa.lg.jp/kisya/r5kyoui/documents/20240220.pdf',
+      docTitle: '石川県教育委員会 令和6年度石川県公立高等学校一般入学(全日制)の出願状況（2月20日）',
+      fiscalYear: '令和6年度（2024年度）',
+      fetchedAt: '2026-08-09',
     },
   ],
   coverage: {
@@ -207,5 +223,75 @@ export const ISHIKAWA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '金沢市立工業', department: '電子情報', quota: 28, finalApplicants: 22, finalRate: 0.79, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '金沢市立工業', department: '建築', quota: 31, finalApplicants: 31, finalRate: 1.0, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '金沢市立工業', department: '土木', quota: 31, finalApplicants: 44, finalRate: 1.42, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '大聖寺実業', department: '機械システム', quota: 64, finalApplicants: 36, finalRate: 0.56, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '大聖寺実業', department: '情報ビジネス', quota: 28, finalApplicants: 25, finalRate: 0.89, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '大聖寺', department: '普通', quota: 160, finalApplicants: 159, finalRate: 0.99, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '加賀', department: '総合学科', quota: 78, finalApplicants: 40, finalRate: 0.51, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '小松商業', department: '総合情報ビジネス', quota: 112, finalApplicants: 92, finalRate: 0.82, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '小松工業', department: '機械システム', quota: 56, finalApplicants: 39, finalRate: 0.7, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '小松工業', department: '電気', quota: 67, finalApplicants: 48, finalRate: 0.72, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '小松工業', department: '建設', quota: 28, finalApplicants: 19, finalRate: 0.68, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '小松工業', department: '材料化学', quota: 30, finalApplicants: 27, finalRate: 0.9, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '小松', department: '普通・理数（併願あり・合算）', quota: 320, finalApplicants: 389, finalRate: 1.22, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '小松明峰', department: '普通', quota: 280, finalApplicants: 222, finalRate: 0.79, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '寺井', department: '総合学科', quota: 104, finalApplicants: 81, finalRate: 0.78, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '鶴来', department: '普通', quota: 119, finalApplicants: 71, finalRate: 0.6, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '鶴来', department: '普通（スポーツ科学）', quota: 30, finalApplicants: 17, finalRate: 0.57, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '松任', department: '普通', quota: 39, finalApplicants: 20, finalRate: 0.51, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '松任', department: '総合学科', quota: 79, finalApplicants: 56, finalRate: 0.71, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '翠星', department: '総合グリーン科学', quota: 131, finalApplicants: 161, finalRate: 1.23, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '野々市明倫', department: '普通', quota: 280, finalApplicants: 273, finalRate: 0.98, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '金沢錦丘', department: '普通', quota: 207, finalApplicants: 298, finalRate: 1.44, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '金沢泉丘', department: '普通・理数（併願あり・合算）', quota: 400, finalApplicants: 503, finalRate: 1.26, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '金沢二水', department: '普通', quota: 400, finalApplicants: 495, finalRate: 1.24, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '金沢伏見', department: '普通', quota: 280, finalApplicants: 350, finalRate: 1.25, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '金沢辰巳丘', department: '普通', quota: 79, finalApplicants: 47, finalRate: 0.59, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '金沢辰巳丘', department: '普通（芸術）', quota: 34, finalApplicants: 29, finalRate: 0.85, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '金沢商業', department: '総合情報ビジネス', quota: 196, finalApplicants: 251, finalRate: 1.28, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '工業', department: '機械システム', quota: 60, finalApplicants: 59, finalRate: 0.98, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '工業', department: '電気', quota: 28, finalApplicants: 28, finalRate: 1, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '工業', department: '電子情報', quota: 29, finalApplicants: 36, finalRate: 1.24, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '工業', department: '材料化学', quota: 31, finalApplicants: 33, finalRate: 1.06, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '工業', department: '工芸', quota: 28, finalApplicants: 25, finalRate: 0.89, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '工業', department: 'テキスタイル工学', quota: 30, finalApplicants: 29, finalRate: 0.97, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '工業', department: 'デザイン', quota: 28, finalApplicants: 32, finalRate: 1.14, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '金沢桜丘', department: '普通', quota: 360, finalApplicants: 530, finalRate: 1.47, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '金沢西', department: '普通', quota: 360, finalApplicants: 490, finalRate: 1.36, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '金沢北陵', department: '総合学科', quota: 140, finalApplicants: 128, finalRate: 0.91, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '金沢向陽', department: '普通', quota: 118, finalApplicants: 48, finalRate: 0.41, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '内灘', department: '普通', quota: 118, finalApplicants: 80, finalRate: 0.68, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '津幡', department: 'スポーツ健康科学', quota: 69, finalApplicants: 23, finalRate: 0.33, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '津幡', department: '総合学科', quota: 77, finalApplicants: 63, finalRate: 0.82, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '羽咋', department: '普通', quota: 160, finalApplicants: 144, finalRate: 0.9, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '羽咋工業', department: '機械システム', quota: 33, finalApplicants: 41, finalRate: 1.24, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '羽咋工業', department: '電気', quota: 31, finalApplicants: 27, finalRate: 0.87, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '羽咋工業', department: '建設・デザイン', quota: 28, finalApplicants: 32, finalRate: 1.14, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '宝達', department: '普通', quota: 78, finalApplicants: 24, finalRate: 0.31, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '志賀', department: '普通', quota: 36, finalApplicants: 18, finalRate: 0.5, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '志賀', department: '普通（ビジネス・福祉）', quota: 40, finalApplicants: 13, finalRate: 0.33, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '七尾東雲', department: '機械システム', quota: 77, finalApplicants: 52, finalRate: 0.68, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '七尾東雲', department: '演劇', quota: 15, finalApplicants: 10, finalRate: 0.67, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '七尾東雲', department: '総合学科', quota: 56, finalApplicants: 35, finalRate: 0.63, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '七尾', department: '普通・普通(文系フロンティア)・理数（併願あり・合算）', quota: 200, finalApplicants: 231, finalRate: 1.16, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '田鶴浜', department: '衛生看護', quota: 28, finalApplicants: 19, finalRate: 0.68, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '田鶴浜', department: '健康福祉', quota: 37, finalApplicants: 8, finalRate: 0.22, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '鹿西', department: '普通', quota: 120, finalApplicants: 79, finalRate: 0.66, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '穴水', department: '普通', quota: 40, finalApplicants: 23, finalRate: 0.57, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '穴水', department: '普通（キャリア）', quota: 40, finalApplicants: 6, finalRate: 0.15, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '能登', department: '普通', quota: 37, finalApplicants: 27, finalRate: 0.73, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '能登', department: '地域産業', quota: 34, finalApplicants: 32, finalRate: 0.94, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '門前', department: '普通', quota: 37, finalApplicants: 19, finalRate: 0.51, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '門前', department: '普通（キャリア）', quota: 37, finalApplicants: 8, finalRate: 0.22, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '輪島', department: '普通', quota: 80, finalApplicants: 64, finalRate: 0.8, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '輪島', department: '普通（ビジネス）', quota: 40, finalApplicants: 13, finalRate: 0.33, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '飯田', department: '普通', quota: 80, finalApplicants: 38, finalRate: 0.48, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '飯田', department: '普通（ビジネス）', quota: 40, finalApplicants: 15, finalRate: 0.38, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '小松市立', department: '普通', quota: 96, finalApplicants: 114, finalRate: 1.19, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '小松市立', department: '普通（芸術）', quota: 28, finalApplicants: 31, finalRate: 1.11, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '金沢市立工業', department: '機械', quota: 58, finalApplicants: 53, finalRate: 0.91, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '金沢市立工業', department: '電気', quota: 28, finalApplicants: 25, finalRate: 0.89, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '金沢市立工業', department: '電子情報', quota: 28, finalApplicants: 39, finalRate: 1.39, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '金沢市立工業', department: '建築', quota: 28, finalApplicants: 35, finalRate: 1.25, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '金沢市立工業', department: '土木', quota: 28, finalApplicants: 23, finalRate: 0.82, fiscalYear: '令和6年度（2024年度）' },
   ],
 };
