@@ -3,6 +3,11 @@
  * schools-private/tokushima.ts（第一段・機械生成の参照台帳）5校のうち、確度高く確認できた
  * 3校を収録。徳島県には佐賀県のような県庁/連合会の一覧PDFが見当たらず、学校ごとの個別調査に
  * 戻っている。
+ *
+ * 【掛-2（私立×多年度）追加】生光学園高等学校の令和7年度入学試験要項PDFを発見・確認した。
+ * 令和8年度レコードのnoteに既に「R7年度版と数値完全一致」と記載されていた過去の確認結果を、
+ * 実際のR7年度PDF一次資料に基づく独立レコードとして構造化した（前期入試: 推薦10名+専願60名+
+ * 一般130名=200名で完全一致。後期入試は両年度とも「若干名」で不確定数のため合計に含めず）。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -32,6 +37,19 @@ export const PRIVATE_SCHOOL_DETAIL_TOKUSHIMA: PrivateSchoolDetailFile = {
         url: 'https://www.seikogakuen.ac.jp/seikogakuen/wp-content/uploads/2025/08/%E7%94%9F%E5%85%89%E5%AD%A6%E5%9C%92%E9%AB%98%E7%AD%89%E5%AD%A6%E6%A0%A1-%E4%BB%A4%E5%92%8C8%E5%B9%B4%E5%BA%A6-%E5%85%A5%E5%AD%A6%E8%A9%A6%E9%A8%93%E8%A6%81%E9%A0%85.pdf',
         docTitle: '令和8年度入学試験要項｜生光学園高等学校（前期入試: 推薦10名+専願60名+一般130名=200名。後期入試は「若干名」と不確定数のため合計に含めず。R7年度版と数値完全一致）',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
+      schoolCode: 'D136320100037',
+      schoolName: '学校法人生光学園生光学園高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [],
+      totalCapacity: 200,
+      source: {
+        url: 'https://www.seikogakuen.ac.jp/seikogakuen/wp-content/uploads/2024/08/%E7%94%9F%E5%85%89%E5%AD%A6%E5%9C%92%E9%AB%98%E7%AD%89%E5%AD%A6%E6%A0%A1%E6%A7%98_%E4%BB%A4%E5%92%8C7%E5%B9%B4%E5%BA%A6-%E5%85%A5%E5%AD%A6%E8%A9%A6%E9%A8%93%E8%A6%81%E9%A0%85_0805-1.pdf',
+        docTitle: '令和7年度入学試験要項｜生光学園高等学校（前期入試: 推薦10名+専願60名+一般130名=200名。後期入試は「若干名」と不確定数のため合計に含めず。令和8年度版と数値完全一致・掛-2）',
+        fetchedAt: '2026-08-09',
         sourceTier: 'primary' as const,
       },
     },

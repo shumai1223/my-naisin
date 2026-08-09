@@ -278,9 +278,22 @@ describe('PRIVATE_SCHOOL_DETAIL_TOKUSHIMA(パイロット実データ)', () => {
     expect(result.missing).toEqual([]);
   });
 
-  it('収録3校+スキップ2校で参照台帳の5校と一致する', () => {
-    expect(PRIVATE_SCHOOL_DETAIL_TOKUSHIMA.schools.length).toBe(3);
+  it('収録4レコード(3校+掛-2多年度1レコード)+スキップ2校で参照台帳の5校と一致する', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_TOKUSHIMA.schools.length).toBe(4);
     expect(PRIVATE_SCHOOL_DETAIL_TOKUSHIMA.skipped.length).toBe(2);
+    const distinctSchoolCodes = new Set(PRIVATE_SCHOOL_DETAIL_TOKUSHIMA.schools.map((s) => s.schoolCode));
+    expect(distinctSchoolCodes.size).toBe(3);
+  });
+
+  it('掛-2(私立×多年度): 生光学園令和7年度は令和8年度と総定員が完全に同一(200名)', () => {
+    const seikoR7 = PRIVATE_SCHOOL_DETAIL_TOKUSHIMA.schools.find(
+      (s) => s.schoolCode === 'D136320100037' && s.fiscalYearLabel === '令和7年度'
+    )!;
+    const seikoR8 = PRIVATE_SCHOOL_DETAIL_TOKUSHIMA.schools.find(
+      (s) => s.schoolCode === 'D136320100037' && s.fiscalYearLabel === '令和8年度'
+    )!;
+    expect(seikoR7.totalCapacity).toBe(seikoR8.totalCapacity);
+    expect(seikoR7.totalCapacity).toBe(200);
   });
 });
 
