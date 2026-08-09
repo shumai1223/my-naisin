@@ -2695,12 +2695,12 @@ describe('PRIVATE_SCHOOL_DETAIL_TOKYO(大都市圏5県の最後・育伸社募�
     }
   });
 
-  it('収録176校(掛-2の2024年度59校分含め235レコード)・スキップ65校で参照台帳241校を完全網羅(重複・欠落なし)', () => {
+  it('収録176校(掛-2の2024年度73校分含め249レコード)・スキップ65校で参照台帳241校を完全網羅(重複・欠落なし)', () => {
     const allCodes = SCHOOLS_PRIVATE_TOKYO.schools.map((s) => s.code);
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_TOKYO, allCodes);
     expect(result.duplicates).toEqual([]);
     expect(result.missing).toHaveLength(0);
-    expect(PRIVATE_SCHOOL_DETAIL_TOKYO.schools.length).toBe(235);
+    expect(PRIVATE_SCHOOL_DETAIL_TOKYO.schools.length).toBe(249);
     expect(PRIVATE_SCHOOL_DETAIL_TOKYO.skipped.length).toBe(65);
   });
 
@@ -2966,6 +2966,45 @@ describe('PRIVATE_SCHOOL_DETAIL_TOKYO(大都市圏5県の最後・育伸社募�
       expect(y2024?.totalCapacity).toBe(before);
       expect(yLatest?.totalCapacity).toBe(after);
     }
+  });
+
+  it('掛-2(私立×多年度・9〜10ページ目): 正則学園・聖パウロ学園・青稜・世田谷学園・専修大学附属・創価・大成・大東学園・大東文化大学第一・瀧野川女子学園・拓殖大学第一・立川女子・玉川学園の13校は2024年度と2026年度で総定員が完全一致', () => {
+    const pairs: Array<[string, number]> = [
+      ['D113310100071', 125],
+      ['D113320100016', 80],
+      ['D113310900046', 130],
+      ['D113311200149', 25],
+      ['D113311500075', 400],
+      ['D113321100032', 135],
+      ['D113320400022', 405],
+      ['D113311200167', 270],
+      ['D113311900035', 350],
+      ['D113311700091', 135],
+      ['D113322300010', 400],
+      ['D113320200024', 300],
+      ['D113320900045', 80],
+    ];
+    for (const [code, total] of pairs) {
+      const y2024 = PRIVATE_SCHOOL_DETAIL_TOKYO.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '2024年度'
+      );
+      const yLatest = PRIVATE_SCHOOL_DETAIL_TOKYO.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel !== '2024年度'
+      );
+      expect(y2024?.totalCapacity).toBe(total);
+      expect(yLatest?.totalCapacity).toBe(total);
+    }
+  });
+
+  it('掛-2(私立×多年度・9〜10ページ目): 正則(港区)は2024→2026年度で総定員が変化', () => {
+    const y2024 = PRIVATE_SCHOOL_DETAIL_TOKYO.schools.find(
+      (s) => s.schoolCode === 'D113310300060' && s.fiscalYearLabel === '2024年度'
+    );
+    const yLatest = PRIVATE_SCHOOL_DETAIL_TOKYO.schools.find(
+      (s) => s.schoolCode === 'D113310300060' && s.fiscalYearLabel !== '2024年度'
+    );
+    expect(y2024?.totalCapacity).toBe(320);
+    expect(yLatest?.totalCapacity).toBe(280);
   });
 });
 

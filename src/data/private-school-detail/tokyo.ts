@@ -342,6 +342,14 @@
  * (+5、推薦単願枠の増員)、成女は30→50(+20)を検出。白梅学園は2024年度版の特別選抜コース(特選
  * 国公立系30・特選文理系70)が異なる数値で現行の「特別選抜コース計50」という結合枠解釈と整合しない
  * ため見送り。
+ * **2026-08-10further(9頁目分の正則+10頁目14校中13校を収録・成立学園は見送り)**: 正則学園・聖パウロ学園・青稜・
+ * 世田谷学園・専修大学附属(男女別内訳を「同一ラベルの繰り返し」ではなく男女別の独立加算と再解釈し
+ * 200+200=400で本文既存コメントと整合)・創価・大成(本文既存コメントの405という解釈と整合)・
+ * 大東学園・大東文化大学第一・瀧野川女子学園・拓殖大学第一・立川女子・玉川学園(いずれも本文既存
+ * コメントとの整合を確認)の13校は総定員完全一致。正則(港区、専修大学附属等とは別法人)は320→280
+ * (-40、2024年度版の一般②ラウンドが2026年度版で廃止)を検出。成立学園は2024年度版(スーパー特選
+ * [推薦50+一般70]+特進[推薦100+一般100]=320)が現行の確立済み値130と大きく乖離しコース内訳も
+ * 現行では非公開のため見送り。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -3255,6 +3263,173 @@ export const PRIVATE_SCHOOL_DETAIL_TOKYO: PrivateSchoolDetailFile = {
         },
       ],
       totalCapacity: 30,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310300060',
+      schoolName: '正則高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(推薦A・B共通枠)', capacity: 160 },
+        { courseName: '普通(一般①)', capacity: 120 },
+        { courseName: '普通(一般②、2026年度版で廃止)', capacity: 40 },
+      ],
+      totalCapacity: 320,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310100071',
+      schoolName: '正則学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通(男、A推薦・B推薦・一般共通枠)', capacity: 125 }],
+      totalCapacity: 125,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113320100016',
+      schoolName: '聖パウロ学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(グローバル・セレクティブクラス、推薦)', capacity: 30 },
+        { courseName: '普通(グローバル・セレクティブクラス、一般①②共通枠)', capacity: 50 },
+      ],
+      totalCapacity: 80,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310900046',
+      schoolName: '青稜高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        {
+          courseName: '普通(一般A[オープン]・一般B[併優]共通枠。帰国11月・1月は若干のため未算入)',
+          capacity: 130,
+        },
+      ],
+      totalCapacity: 130,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311200149',
+      schoolName: '世田谷学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(男、推薦[スポーツ])', capacity: 12 },
+        { courseName: '普通(男、一般[スポーツ])', capacity: 13 },
+      ],
+      totalCapacity: 25,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311500075',
+      schoolName: '専修大学附属高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(推薦、男女計)', capacity: 200 },
+        { courseName: '普通(一般、男女計)', capacity: 200 },
+      ],
+      totalCapacity: 400,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113321100032',
+      schoolName: '創価高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(推薦、約)', capacity: 65 },
+        { courseName: '普通(一般、約)', capacity: 70 },
+      ],
+      totalCapacity: 135,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113320400022',
+      schoolName: '大成高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特別進学コース(推薦)', capacity: 5 },
+        { courseName: '特別進学コース(一般①)', capacity: 60 },
+        { courseName: '特別進学コース(一般②)', capacity: 10 },
+        { courseName: '文理進学コース(推薦)', capacity: 110 },
+        { courseName: '文理進学コース(一般①)', capacity: 130 },
+        { courseName: '文理進学コース(一般②)', capacity: 50 },
+        { courseName: '情報進学コース(推薦)', capacity: 10 },
+        { courseName: '情報進学コース(一般①)', capacity: 20 },
+        { courseName: '情報進学コース(一般②)', capacity: 10 },
+      ],
+      totalCapacity: 405,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311200167',
+      schoolName: '大東学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(推薦)', capacity: 135 },
+        { courseName: '普通(公立併願優遇・一般①②共通枠)', capacity: 135 },
+      ],
+      totalCapacity: 270,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311900035',
+      schoolName: '大東文化大学第一高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特別進学クラス(推薦A・B・C共通枠)', capacity: 20 },
+        { courseName: '特別進学クラス(一般①・②共通枠)', capacity: 15 },
+        { courseName: '選抜進学クラス・進学クラス(推薦A・B・C共通枠、選抜・進学計)', capacity: 155 },
+        { courseName: '選抜進学クラス・進学クラス(一般①・②共通枠、選抜・進学計)', capacity: 160 },
+      ],
+      totalCapacity: 350,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311700091',
+      schoolName: '瀧野川女子学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特進選抜クラス(女、A推薦・B推薦①②・一般併優共通枠)', capacity: 15 },
+        { courseName: '特進コース(女、A推薦・B推薦①②・一般併優共通枠)', capacity: 50 },
+        { courseName: '進学コース(女、A推薦・B推薦①②・一般併優共通枠)', capacity: 70 },
+      ],
+      totalCapacity: 135,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113322300010',
+      schoolName: '拓殖大学第一高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特進コース(推薦Ⅰ・Ⅱ共通枠)', capacity: 40 },
+        { courseName: '特進コース(一般Ⅰ・Ⅱ共通枠)', capacity: 60 },
+        { courseName: '進学コース(推薦Ⅰ・Ⅱ共通枠)', capacity: 120 },
+        { courseName: '進学コース(一般Ⅰ・Ⅱ共通枠)', capacity: 180 },
+      ],
+      totalCapacity: 400,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113320200024',
+      schoolName: '立川女子高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '総合コース(女、推薦)', capacity: 125 },
+        { courseName: '総合コース(女、一般)', capacity: 125 },
+        { courseName: '特別進学コース(女、推薦)', capacity: 25 },
+        { courseName: '特別進学コース(女、一般)', capacity: 25 },
+      ],
+      totalCapacity: 300,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113320900045',
+      schoolName: '玉川学園高等部',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '一般クラス(専願優遇・併願優遇・オープン共通枠、程度)', capacity: 80 },
+      ],
+      totalCapacity: 80,
       source: KAKE2_2024_TOKYO_SOURCE,
     },
     {
