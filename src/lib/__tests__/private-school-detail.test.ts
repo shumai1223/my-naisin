@@ -1127,9 +1127,31 @@ describe('PRIVATE_SCHOOL_DETAIL_GUNMA(育伸社募集要項PDFで14校中11校�
     expect(result.missing).toEqual([]);
   });
 
-  it('収録11校+スキップ3校(掲載なし)で参照台帳の14校と一致する', () => {
-    expect(PRIVATE_SCHOOL_DETAIL_GUNMA.schools.length).toBe(11);
+  it('収録22レコード(11校×2026年度+11校×2024年度)+スキップ3校(掲載なし)で参照台帳の14校と一致する', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_GUNMA.schools.length).toBe(22);
     expect(PRIVATE_SCHOOL_DETAIL_GUNMA.skipped.length).toBe(3);
+    const distinctSchoolCodes = new Set(PRIVATE_SCHOOL_DETAIL_GUNMA.schools.map((s) => s.schoolCode));
+    expect(distinctSchoolCodes.size).toBe(11);
+  });
+
+  it('掛-2(私立×多年度): 高崎商科大学附属(500→450)と東京農業大学第二(520→450)で定員減少を検出', () => {
+    const takasakiOld = PRIVATE_SCHOOL_DETAIL_GUNMA.schools.find(
+      (s) => s.schoolCode === 'D110310000039' && s.fiscalYearLabel === '2024年度'
+    )!;
+    const takasakiNew = PRIVATE_SCHOOL_DETAIL_GUNMA.schools.find(
+      (s) => s.schoolCode === 'D110310000039' && s.fiscalYearLabel === '令和8年度'
+    )!;
+    expect(takasakiOld.totalCapacity).toBe(500);
+    expect(takasakiNew.totalCapacity).toBe(450);
+
+    const nodaiOld = PRIVATE_SCHOOL_DETAIL_GUNMA.schools.find(
+      (s) => s.schoolCode === 'D110310000048' && s.fiscalYearLabel === '2024年度'
+    )!;
+    const nodaiNew = PRIVATE_SCHOOL_DETAIL_GUNMA.schools.find(
+      (s) => s.schoolCode === 'D110310000048' && s.fiscalYearLabel === '令和8年度'
+    )!;
+    expect(nodaiOld.totalCapacity).toBe(520);
+    expect(nodaiNew.totalCapacity).toBe(450);
   });
 });
 
