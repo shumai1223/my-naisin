@@ -680,9 +680,38 @@ describe('PRIVATE_SCHOOL_DETAIL_IWATE(個別サイト調査2校+育伸社募集�
     expect(result.missing).toEqual([]);
   });
 
-  it('13校全てを収録しスキップ0件', () => {
-    expect(PRIVATE_SCHOOL_DETAIL_IWATE.schools.length).toBe(13);
+  it('収録26レコード(13校×令和8年度+13校×2024年度)でスキップ0件', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_IWATE.schools.length).toBe(26);
     expect(PRIVATE_SCHOOL_DETAIL_IWATE.skipped.length).toBe(0);
+    const distinctSchoolCodes = new Set(PRIVATE_SCHOOL_DETAIL_IWATE.schools.map((s) => s.schoolCode));
+    expect(distinctSchoolCodes.size).toBe(13);
+  });
+
+  it('掛-2(私立×多年度): 13校全てで総定員が2024年度と令和8年度で完全一致(岩手県は変化ゼロ)', () => {
+    const codes = [
+      'D103310000010',
+      'D103310000029',
+      'D103310000038',
+      'D103310000047',
+      'D103310000056',
+      'D103310000065',
+      'D103310000074',
+      'D103310000083',
+      'D103310000092',
+      'D103310000109',
+      'D103310000118',
+      'D103310000127',
+      'D103310000136',
+    ];
+    for (const code of codes) {
+      const older = PRIVATE_SCHOOL_DETAIL_IWATE.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '2024年度'
+      )!;
+      const newer = PRIVATE_SCHOOL_DETAIL_IWATE.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '令和8年度'
+      )!;
+      expect(older.totalCapacity).toBe(newer.totalCapacity);
+    }
   });
 });
 
