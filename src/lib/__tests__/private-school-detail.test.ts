@@ -2695,12 +2695,12 @@ describe('PRIVATE_SCHOOL_DETAIL_TOKYO(大都市圏5県の最後・育伸社募�
     }
   });
 
-  it('収録176校(掛-2の2024年度30校分含め206レコード)・スキップ65校で参照台帳241校を完全網羅(重複・欠落なし)', () => {
+  it('収録176校(掛-2の2024年度35校分含め211レコード)・スキップ65校で参照台帳241校を完全網羅(重複・欠落なし)', () => {
     const allCodes = SCHOOLS_PRIVATE_TOKYO.schools.map((s) => s.code);
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_TOKYO, allCodes);
     expect(result.duplicates).toEqual([]);
     expect(result.missing).toHaveLength(0);
-    expect(PRIVATE_SCHOOL_DETAIL_TOKYO.schools.length).toBe(206);
+    expect(PRIVATE_SCHOOL_DETAIL_TOKYO.schools.length).toBe(211);
     expect(PRIVATE_SCHOOL_DETAIL_TOKYO.skipped.length).toBe(65);
   });
 
@@ -2837,6 +2837,36 @@ describe('PRIVATE_SCHOOL_DETAIL_TOKYO(大都市圏5県の最後・育伸社募�
     );
     expect(y2024?.totalCapacity).toBe(50);
     expect(yLatest?.totalCapacity).toBe(90);
+  });
+
+  it('掛-2(私立×多年度・5〜6ページ目): 駒込・駒澤大学・実践学園・品川エトワール女子の4校は2024年度と2026年度で総定員が完全一致', () => {
+    const pairs: Array<[string, number]> = [
+      ['D113310500111', 120],
+      ['D113311200087', 250],
+      ['D113311400012', 270],
+      ['D113310900082', 150],
+    ];
+    for (const [code, total] of pairs) {
+      const y2024 = PRIVATE_SCHOOL_DETAIL_TOKYO.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '2024年度'
+      );
+      const yLatest = PRIVATE_SCHOOL_DETAIL_TOKYO.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel !== '2024年度'
+      );
+      expect(y2024?.totalCapacity).toBe(total);
+      expect(yLatest?.totalCapacity).toBe(total);
+    }
+  });
+
+  it('掛-2(私立×多年度・6ページ目): サレジアン国際学園は2024→2026年度で総定員が変化', () => {
+    const y2024 = PRIVATE_SCHOOL_DETAIL_TOKYO.schools.find(
+      (s) => s.schoolCode === 'D113311700073' && s.fiscalYearLabel === '2024年度'
+    );
+    const yLatest = PRIVATE_SCHOOL_DETAIL_TOKYO.schools.find(
+      (s) => s.schoolCode === 'D113311700073' && s.fiscalYearLabel !== '2024年度'
+    );
+    expect(y2024?.totalCapacity).toBe(50);
+    expect(yLatest?.totalCapacity).toBe(40);
   });
 });
 

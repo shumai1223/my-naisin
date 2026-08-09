@@ -310,6 +310,17 @@
  * 解釈と整合しないため、國學院(=國學院高等学校、本文既存コメントの表記と同一校)は2024年度版の
  * 推薦150・一般①250・一般②150・一般③50という4つの異なる数値が本文既存の「推薦130+一般250=380」
  * という確立済み読みと整合せず追加検証が必要なため、いずれも見送り。
+ * **2026-08-10further(5〜6ページ目・駒込含め8校中5校を収録・3校は見送り)**: 駒込(5頁目から継続)・
+ * 駒澤大学・実践学園(本文既存コメントの推薦130+一般140=270という解釈と整合)の3校は総定員完全一致。
+ * 品川エトワール女子は150=150で総定員は完全一致だがネイチャースタディコース(15)が2026年度版で
+ * 廃止され、国際キャリア/マルチメディア表現/キャリアデザインの3コースへ+5ずつ再配分された構造変化を
+ * 検出。サレジアン国際学園は50→40(-10、本科コースが30→10へ大幅減・グローバルスタディーズが
+ * SG10+AG20の2コースへ分化)を検出。駒沢学園女子は英語クラスが2024年度に新設されたばかりで
+ * クラス間の「全クラス計」の適用範囲(クラスごとかクラス横断か)が確定できないため、駒場学園は
+ * 実践学園と同型の「複数コースで同一の推薦/一般数値が反復」パターンに見えるが現行2026年度レコードが
+ * 単一値(160)として記録されており本文の確立済み解釈(推薦/一般ブロックの加算)と食い違う可能性が
+ * あり要再検証、桜丘は2024年度版が4コース制(難関選抜/文理特進/グローバル探究/キャリア探究)で
+ * 2026年度版の3コース制(S/K/A)と1:1対応が取れないため、いずれも見送り。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -2880,6 +2891,72 @@ export const PRIVATE_SCHOOL_DETAIL_TOKYO: PrivateSchoolDetailFile = {
         { courseName: '進学クラス(推薦・一般①②共通枠)', capacity: 100 },
       ],
       totalCapacity: 130,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310500111',
+      schoolName: '駒込高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        {
+          courseName: '理系先進コース・国際教養コース・特Sコース・Sコース(推薦Ⅰ・Ⅱ・併優・一般共通枠、普通科計)',
+          capacity: 120,
+        },
+      ],
+      totalCapacity: 120,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311200087',
+      schoolName: '駒澤大学高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通(推薦・併優・一般共通枠)', capacity: 250 }],
+      totalCapacity: 250,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311700073',
+      schoolName: 'サレジアン国際学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '本科コース(A推薦・B推薦・一般共通枠、2026年度版は10へ大幅減)', capacity: 30 },
+        {
+          courseName: 'グローバルスタディーズコース(A推薦・B推薦・一般共通枠、2026年度版はSG10+AG20の2コースへ分化)',
+          capacity: 20,
+        },
+      ],
+      totalCapacity: 50,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311400012',
+      schoolName: '実践学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        {
+          courseName: '特別進学・リベラルアーツ&サイエンス・文理進学・スポーツサイエンスの4コース(推薦共通枠、普通科計)',
+          capacity: 130,
+        },
+        {
+          courseName: '特別進学・リベラルアーツ&サイエンス・文理進学・スポーツサイエンスの4コース(一般①②共通枠、普通科計)',
+          capacity: 140,
+        },
+      ],
+      totalCapacity: 270,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310900082',
+      schoolName: '品川エトワール女子高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '国際キャリアコース(女、A推薦・一般①②共通枠、2026年度版は25へ増)', capacity: 20 },
+        { courseName: 'マルチメディア表現コース(女、A・C推薦・一般①②共通枠、2026年度版は30へ増)', capacity: 25 },
+        { courseName: 'ネイチャースタディコース(女、A・C推薦・一般①②共通枠、2026年度版で廃止・定員は他3コースへ再配分)', capacity: 15 },
+        { courseName: '保育コース(女、A推薦・一般①②共通枠)', capacity: 20 },
+        { courseName: 'キャリアデザインコース(女、A・C推薦・一般①②共通枠、2026年度版は75へ増)', capacity: 70 },
+      ],
+      totalCapacity: 150,
       source: KAKE2_2024_TOKYO_SOURCE,
     },
   ],
