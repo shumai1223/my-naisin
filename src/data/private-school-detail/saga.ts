@@ -25,6 +25,22 @@ const SOURCE = {
   sourceTier: 'primary' as const,
 };
 
+/**
+ * 【掛-2（私立×多年度）追加】県庁法務私学課が公表する「令和7年度佐賀県私立高等学校 志願状況」
+ * （様式1・令和7年1月28日現在）は志願者数と並べて募集定員も掲載しており、9校全てを1回で
+ * 多年度化できた。footnoteに「募集定員は、佐賀清和・弘学館・早稲田佐賀は併設中学校以外から
+ * 募集する数であり、龍谷・佐賀学園・東明館は併設中学校から募集する数を含む」と明記されており、
+ * 令和8年度側の既存レコードも同じ内部/外部区分でtotalCapacityを記録している学校が複数あるため、
+ * 各レコードのnoteで区分を明示した。**佐賀清和・佐賀学園・北陵の3校は令和7→令和8年度で実際に
+ * 定員が変化していた**（掛-2で初めて発見した「変更あり」の実例）。
+ */
+const KAKE2_R7_SOURCE = {
+  url: 'https://www.pref.saga.lg.jp/kiji003111567/3_111567_342278_up_3bbdku6z.pdf',
+  docTitle: '令和7年度佐賀県私立高等学校 志願状況（様式1・佐賀県庁法務私学課私立中高・専修学校支援室・令和7年1月28日現在）',
+  fetchedAt: '2026-08-09',
+  sourceTier: 'primary' as const,
+};
+
 export const PRIVATE_SCHOOL_DETAIL_SAGA: PrivateSchoolDetailFile = {
   prefectureCode: 'saga',
   schools: [
@@ -134,6 +150,112 @@ export const PRIVATE_SCHOOL_DETAIL_SAGA: PrivateSchoolDetailFile = {
       source: {
         ...SOURCE,
         docTitle: SOURCE.docTitle + '（うち早稲田佐賀中学校以外からの募集は120名程度）',
+      },
+    },
+    {
+      schoolCode: 'D141390000016',
+      schoolName: '龍谷高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [
+        { courseName: '文理進学コース', capacity: 70 },
+        { courseName: '総合コース', capacity: 130 },
+        { courseName: '保育コース', capacity: 30 },
+        { courseName: '特別進学コース', capacity: 40 },
+      ],
+      totalCapacity: 270,
+      source: { ...KAKE2_R7_SOURCE, docTitle: KAKE2_R7_SOURCE.docTitle + '（計270・令和8年度と完全に同一）' },
+    },
+    {
+      schoolCode: 'D141390000025',
+      schoolName: '佐賀清和高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [],
+      totalCapacity: 315,
+      source: {
+        ...KAKE2_R7_SOURCE,
+        docTitle:
+          KAKE2_R7_SOURCE.docTitle +
+          '（計315・footnoteにより併設中学校以外からの募集数。令和8年度の365名(併設中学校以外は325名程度)と' +
+          '比較すると325→315で外部募集数が10名減少しており、掛-2で発見した実際の定員変化の1例）',
+      },
+    },
+    {
+      schoolCode: 'D141390000034',
+      schoolName: '佐賀女子短期大学付属佐賀女子高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [],
+      totalCapacity: 295,
+      source: { ...KAKE2_R7_SOURCE, docTitle: KAKE2_R7_SOURCE.docTitle + '（計295・令和8年度と完全に同一）' },
+    },
+    {
+      schoolCode: 'D141390000043',
+      schoolName: '佐賀学園高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [],
+      totalCapacity: 255,
+      source: {
+        ...KAKE2_R7_SOURCE,
+        docTitle:
+          KAKE2_R7_SOURCE.docTitle +
+          '（計255・footnoteにより併設中学校からの募集数を含む。令和8年度の260名と比較すると' +
+          '255→260で5名増加しており、掛-2で発見した実際の定員変化の1例）',
+      },
+    },
+    {
+      schoolCode: 'D141390000052',
+      schoolName: '北陵高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [],
+      totalCapacity: 220,
+      source: {
+        ...KAKE2_R7_SOURCE,
+        docTitle:
+          KAKE2_R7_SOURCE.docTitle +
+          '（計220・令和8年度の215名と比較すると220→215で5名減少しており、掛-2で発見した実際の定員変化の1例）',
+      },
+    },
+    {
+      schoolCode: 'D141390000061',
+      schoolName: '敬徳高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [{ courseName: '普通科', capacity: 180 }],
+      totalCapacity: 180,
+      source: { ...KAKE2_R7_SOURCE, docTitle: KAKE2_R7_SOURCE.docTitle + '（普通科130+自動車整備科50=計180・令和8年度と完全に同一）' },
+    },
+    {
+      schoolCode: 'D141390000070',
+      schoolName: '弘学館高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [{ courseName: '普通科', capacity: 90 }],
+      totalCapacity: 90,
+      source: {
+        ...KAKE2_R7_SOURCE,
+        docTitle:
+          KAKE2_R7_SOURCE.docTitle +
+          '（90・footnoteにより併設中学校以外からの募集数のみ。令和8年度レコードのtotalCapacity(225)は' +
+          '併設中学校からの募集を含む全体数のため直接比較できないが、外部募集数の副記(90名程度)とは一致）',
+      },
+    },
+    {
+      schoolCode: 'D141390000089',
+      schoolName: '東明館高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [{ courseName: '普通科', capacity: 180 }],
+      totalCapacity: 180,
+      source: { ...KAKE2_R7_SOURCE, docTitle: KAKE2_R7_SOURCE.docTitle + '（計180・footnoteにより併設中学校からの募集を含む。令和8年度と完全に同一）' },
+    },
+    {
+      schoolCode: 'D141390000098',
+      schoolName: '早稲田佐賀高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [{ courseName: '普通科', capacity: 120 }],
+      totalCapacity: 120,
+      source: {
+        ...KAKE2_R7_SOURCE,
+        docTitle:
+          KAKE2_R7_SOURCE.docTitle +
+          '（120・footnoteにより併設中学校以外からの募集数のみ。令和8年度レコードのtotalCapacity(240)は' +
+          '併設中学校からの募集を含む全体数のため直接比較できないが、外部募集数の副記(120名程度)とは一致）',
       },
     },
   ],

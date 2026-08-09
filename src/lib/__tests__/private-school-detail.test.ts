@@ -270,9 +270,40 @@ describe('PRIVATE_SCHOOL_DETAIL_SAGA(パイロット実データ・県庁一次�
     expect(result.missing).toEqual([]);
   });
 
-  it('9校全てを収録しスキップ0件(県庁一次資料が全校を1枚で公表していたため)', () => {
-    expect(PRIVATE_SCHOOL_DETAIL_SAGA.schools.length).toBe(9);
+  it('9校全てを収録しスキップ0件(県庁一次資料が全校を1枚で公表していたため)＋掛-2多年度9レコード', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_SAGA.schools.length).toBe(18);
     expect(PRIVATE_SCHOOL_DETAIL_SAGA.skipped.length).toBe(0);
+    const distinctSchoolCodes = new Set(PRIVATE_SCHOOL_DETAIL_SAGA.schools.map((s) => s.schoolCode));
+    expect(distinctSchoolCodes.size).toBe(9);
+  });
+
+  it('掛-2(私立×多年度): 龍谷・佐賀女子・敬徳・東明館の4校は令和7→令和8年度で定員が完全に同一', () => {
+    const unchangedCodes = ['D141390000016', 'D141390000034', 'D141390000061', 'D141390000089'];
+    for (const code of unchangedCodes) {
+      const r7 = PRIVATE_SCHOOL_DETAIL_SAGA.schools.find((s) => s.schoolCode === code && s.fiscalYearLabel === '令和7年度')!;
+      const r8 = PRIVATE_SCHOOL_DETAIL_SAGA.schools.find((s) => s.schoolCode === code && s.fiscalYearLabel === '令和8年度')!;
+      expect(r7.totalCapacity).toBe(r8.totalCapacity);
+    }
+  });
+
+  it('掛-2(私立×多年度): 佐賀学園(255→260)・北陵(220→215)は令和7→令和8年度で定員が実際に変化していた', () => {
+    const gakuenR7 = PRIVATE_SCHOOL_DETAIL_SAGA.schools.find(
+      (s) => s.schoolCode === 'D141390000043' && s.fiscalYearLabel === '令和7年度'
+    )!;
+    const gakuenR8 = PRIVATE_SCHOOL_DETAIL_SAGA.schools.find(
+      (s) => s.schoolCode === 'D141390000043' && s.fiscalYearLabel === '令和8年度'
+    )!;
+    expect(gakuenR7.totalCapacity).toBe(255);
+    expect(gakuenR8.totalCapacity).toBe(260);
+
+    const hokuryoR7 = PRIVATE_SCHOOL_DETAIL_SAGA.schools.find(
+      (s) => s.schoolCode === 'D141390000052' && s.fiscalYearLabel === '令和7年度'
+    )!;
+    const hokuryoR8 = PRIVATE_SCHOOL_DETAIL_SAGA.schools.find(
+      (s) => s.schoolCode === 'D141390000052' && s.fiscalYearLabel === '令和8年度'
+    )!;
+    expect(hokuryoR7.totalCapacity).toBe(220);
+    expect(hokuryoR8.totalCapacity).toBe(215);
   });
 });
 
