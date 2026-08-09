@@ -30,6 +30,14 @@
  * ②植草学園大学附属(D112310000046)は英語コース(40)が丸ごと未収録で総定員240→280に是正
  * (画像で3コース構成を確認)。この2件は既に収録済みの残り44校のどこかに同型の誤りが眠っている
  * 可能性を示唆する(miyagi/oita/hiroshima等で確立済みの教訓と同型)。
+ *
+ * 【掛-2 第3弾(2026-08-09)】2024年度版PDF(6頁)をpdftoppm 300dpiで直接ビジョン解析し、27校へ拡大。
+ * 専修大学松戸・拓殖大学紅陵・千葉英和・千葉敬愛・東海大学付属市原望洋・東海大学付属浦安・
+ * 東京学館・中央学院の8校は2024年度と令和8年度で総定員完全一致。**西武台千葉のみ実際の変化を
+ * 検出**(特別選抜コース100+進学コース176=276から、令和8年度は全コース計293へ増加)。
+ * 千葉商科大学付属は2024年版PDFで「普通科計205」が特進選抜クラス・総合進学クラスの両方に
+ * 同一の数値で記載されており、これが両クラス共有の合算値なのか各クラス独立の値なのか原本だけ
+ * では判別できないため、誤記載リスクを避けて今回は収録を見送った(要再検証)。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -836,6 +844,95 @@ export const PRIVATE_SCHOOL_DETAIL_CHIBA: PrivateSchoolDetailFile = {
         { courseName: '英語コース', capacity: 40 },
       ],
       totalCapacity: 280,
+      source: KAKE2_2024_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000279',
+      schoolName: '専修大学松戸高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'E類型', capacity: 72 },
+        { courseName: 'A類型', capacity: 150 },
+        { courseName: 'S類型', capacity: 34 },
+      ],
+      totalCapacity: 256,
+      source: KAKE2_2024_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000233',
+      schoolName: '拓殖大学紅陵高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '進学トライコース・アクティブチャレンジコース(全コース計)', capacity: 360 }],
+      totalCapacity: 360,
+      source: KAKE2_2024_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000420',
+      schoolName: '千葉英和高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通科(総進文理・特進文理・特進選抜計)', capacity: 320 },
+        { courseName: '英語科', capacity: 40 },
+      ],
+      totalCapacity: 360,
+      source: KAKE2_2024_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000518',
+      schoolName: '千葉敬愛高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [],
+      totalCapacity: 406,
+      source: KAKE2_2024_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000402',
+      schoolName: '東海大学付属市原望洋高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '総合進学コース', capacity: 290 },
+        { courseName: 'スーパー特進コース', capacity: 30 },
+      ],
+      totalCapacity: 320,
+      source: KAKE2_2024_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000493',
+      schoolName: '東海大学付属浦安高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [],
+      totalCapacity: 250,
+      source: KAKE2_2024_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000545',
+      schoolName: '東京学館高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'S特進コース', capacity: 30 },
+        { courseName: '特進コース', capacity: 70 },
+        { courseName: '総合進学コース(文理専攻・スポーツ専攻計)', capacity: 250 },
+      ],
+      totalCapacity: 350,
+      source: KAKE2_2024_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000466',
+      schoolName: '中央学院高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: 'S特進コース・進学コース・スポーツコース(全コース計320+後期3)', capacity: 323 }],
+      totalCapacity: 323,
+      source: KAKE2_2024_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000297',
+      schoolName: '西武台千葉高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特別選抜コース(含内部)', capacity: 100 },
+        { courseName: '進学コース(含内部)', capacity: 176 },
+      ],
+      totalCapacity: 276,
       source: KAKE2_2024_CHIBA_SOURCE,
     },
   ],
