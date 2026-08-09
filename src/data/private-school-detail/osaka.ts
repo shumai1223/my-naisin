@@ -52,6 +52,16 @@
  * 説明のつかない大幅な乖離(+50%)があり、内訳が非公表のため単純比較すると誤りを広める危険が高いと
  * 判断し見送り(要再検証)。帝塚山学院泉ヶ丘は2024年度版がS特進約70/特進約70という2行表記で共有枠か
  * 独立枠か確定できず、2026年度版の「Ｓ特進・特進計約120」と単純に対応付けられないため見送り。
+ * **2026-08-10further(8ページ目11校中9校を収録・2校は見送り)**: ピーエル学園(PL学園)・阪南大学・
+ * 東大阪大学柏原(2027年度以降募集停止発表済み・2024年度から300で不変だったことを裏付け)・東大谷・
+ * 箕面自由学園の5校は総定員完全一致(東大谷はコース名は同じだが国際/進学間で40名の再配分を検出)。
+ * 利晶学園大阪立命館は360→400(+40、スーペリアコースの増員)、東大阪大学敬愛は300→360(+60、
+ * こども教育/ファッション創造の2コースが廃止されステップアップ/スーパーアスリートへ再編)、
+ * プール学院は260→210(-50、ただし現行2026年度レコード自体がPDF直読み不可のためWebSearch要約に
+ * 依拠するsecondary/低確度データである点に留意)、明浄学院は300→320(+20、総合キャリア減・看護
+ * メディカル増の再配分を伴う)を検出。利晶学園(初芝富田林)は2024年度版が4コースとも「約70」表記で
+ * 共有か独立か確定できず、ヴェリタス城星学園は現行レコード自体が2025年度分(2026年度分は未確認)かつ
+ * 2024年度版との差が75→140と大きすぎるため、いずれも見送り。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -2304,6 +2314,124 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
         { courseName: '総合進学コース', capacity: 160 },
       ],
       totalCapacity: 200,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000405',
+      schoolName: 'ピーエル学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        {
+          courseName: '普通科(国公立コース・理文選修コースの2コース計、含内部)',
+          capacity: 120,
+        },
+      ],
+      totalCapacity: 120,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000940',
+      schoolName: '阪南大学高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '探究特進コースS', capacity: 40 },
+        { courseName: '探究特進コースA', capacity: 80 },
+        { courseName: '総合進学コース', capacity: 320 },
+      ],
+      totalCapacity: 440,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000496',
+      schoolName: '東大阪大学柏原高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        {
+          courseName: 'キャリアスポーツ・キャリアアップ・キャリアアシスト・アドバンスト・アスリートの5コース計',
+          capacity: 300,
+        },
+      ],
+      totalCapacity: 300,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000209',
+      schoolName: '東大谷高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通科特進コース', capacity: 80 },
+        { courseName: '普通科国際コース(2026年度公式値は40へ減)', capacity: 80 },
+        { courseName: '普通科進学コース(2026年度公式値は160へ増、国際とのコース間再配分の可能性)', capacity: 120 },
+      ],
+      totalCapacity: 280,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000307',
+      schoolName: '箕面自由学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'SS特進コース(含内部)', capacity: 80 },
+        { courseName: 'スーパー特進コース(含内部・2026年度版でS特進コースへ改称)', capacity: 120 },
+        { courseName: '特進コース(含内部)', capacity: 160 },
+        { courseName: '文理探究コース(含内部)', capacity: 120 },
+        { courseName: 'クラブ選抜コース(専願のみ・含内部・2026年度版でクラブ探究コースへ改称)', capacity: 80 },
+      ],
+      totalCapacity: 560,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000851',
+      schoolName: '利晶学園大阪立命館高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'アドバンストSPコースα(2024年度版はアドバンスト英数コースαから改称直後)', capacity: 40 },
+        { courseName: 'アドバンストSPコースβ', capacity: 80 },
+        { courseName: '立命館コース(含理系クラス)', capacity: 120 },
+        {
+          courseName: 'スーペリアコース(2024年度版はグローバル特進コースα・βから改称直後・2026年度版で120へ増)',
+          capacity: 80,
+        },
+        { courseName: '体育(特別専願)', capacity: 40 },
+      ],
+      totalCapacity: 360,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000904',
+      schoolName: '東大阪大学敬愛高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '総合進学コース(2026年度版は総合キャリアコース150名へ再編)', capacity: 120 },
+        { courseName: 'こども教育コース(2026年度版では対応コースなし)', capacity: 60 },
+        { courseName: '調理・製菓コース(2026年度版は90名へ増員)', capacity: 60 },
+        { courseName: 'ファッション創造コース(2026年度版では対応コースなし、代わりにステップアップ/スーパーアスリートの2コース新設)', capacity: 60 },
+      ],
+      totalCapacity: 300,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000174',
+      schoolName: 'プール学院高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'スーパー特進・特進コース計(含内部)', capacity: 210 },
+        { courseName: '国際コース', capacity: 30 },
+        { courseName: '総合芸術コース', capacity: 20 },
+      ],
+      totalCapacity: 260,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310001084',
+      schoolName: '明浄学院高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '総合キャリアコース', capacity: 144 },
+        { courseName: '看護メディカルコース', capacity: 36 },
+        { courseName: '衛生看護コース(2024年新設)', capacity: 120 },
+      ],
+      totalCapacity: 300,
       source: KAKE2_2024_OSAKA_SOURCE,
     },
   ],

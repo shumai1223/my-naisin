@@ -2192,12 +2192,12 @@ describe('PRIVATE_SCHOOL_DETAIL_OSAKA(大都市圏5県の3県目・育伸社募�
     }
   });
 
-  it('収録91校(掛-2の2024年度63校分含め154レコード)・スキップ16校で参照台帳107校を完全網羅(重複・欠落なし)', () => {
+  it('収録91校(掛-2の2024年度72校分含め163レコード)・スキップ16校で参照台帳107校を完全網羅(重複・欠落なし)', () => {
     const allCodes = SCHOOLS_PRIVATE_OSAKA.schools.map((s) => s.code);
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_OSAKA, allCodes);
     expect(result.duplicates).toEqual([]);
     expect(result.missing).toHaveLength(0);
-    expect(PRIVATE_SCHOOL_DETAIL_OSAKA.schools.length).toBe(154);
+    expect(PRIVATE_SCHOOL_DETAIL_OSAKA.schools.length).toBe(163);
     expect(PRIVATE_SCHOOL_DETAIL_OSAKA.skipped.length).toBe(16);
   });
 
@@ -2426,6 +2426,45 @@ describe('PRIVATE_SCHOOL_DETAIL_OSAKA(大都市圏5県の3県目・育伸社募�
     const pairs: Array<[string, number, number]> = [
       ['D127310000423', 60, 40],
       ['D127310000646', 200, 235],
+    ];
+    for (const [code, before, after] of pairs) {
+      const y2024 = PRIVATE_SCHOOL_DETAIL_OSAKA.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '2024年度'
+      );
+      const yLatest = PRIVATE_SCHOOL_DETAIL_OSAKA.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel !== '2024年度'
+      );
+      expect(y2024?.totalCapacity).toBe(before);
+      expect(yLatest?.totalCapacity).toBe(after);
+    }
+  });
+
+  it('掛-2(私立×多年度・8ページ目): ピーエル学園・阪南大学・東大阪大学柏原・東大谷・箕面自由学園の5校は2024年度と2026年度で総定員が完全一致', () => {
+    const pairs: Array<[string, number]> = [
+      ['D127310000405', 120],
+      ['D127310000940', 440],
+      ['D127310000496', 300],
+      ['D127310000209', 280],
+      ['D127310000307', 560],
+    ];
+    for (const [code, total] of pairs) {
+      const y2024 = PRIVATE_SCHOOL_DETAIL_OSAKA.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '2024年度'
+      );
+      const yLatest = PRIVATE_SCHOOL_DETAIL_OSAKA.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel !== '2024年度'
+      );
+      expect(y2024?.totalCapacity).toBe(total);
+      expect(yLatest?.totalCapacity).toBe(total);
+    }
+  });
+
+  it('掛-2(私立×多年度・8ページ目): 利晶学園大阪立命館・東大阪大学敬愛・プール学院・明浄学院の4校は2024→2026年度で総定員が変化', () => {
+    const pairs: Array<[string, number, number]> = [
+      ['D127310000851', 360, 400],
+      ['D127310000904', 300, 360],
+      ['D127310000174', 260, 210],
+      ['D127310001084', 300, 320],
     ];
     for (const [code, before, after] of pairs) {
       const y2024 = PRIVATE_SCHOOL_DETAIL_OSAKA.schools.find(
