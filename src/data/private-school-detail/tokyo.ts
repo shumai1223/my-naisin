@@ -329,6 +329,13 @@
  * 芝国際は最難関選抜コースの2024年度版(一般35、旧2コース廃止に伴う新設直後の値)が現行の確立済み
  * 値(5)と大きく乖離し、国際コースも2024年度版に推薦の行が見当たらず現行の推薦15+一般10という
  * 構造と対応が取れないため、いずれも見送り。
+ * **2026-08-10further(7ページ目分の十文字+8ページ目7校中7校を収録)**: 十文字は100→80(-20、
+ * 全コース計の単一枠が縮小)、淑徳巣鴨は270→235(-35、特進コースが120→80へ大幅減)、城西大学附属
+ * 城西は190→175(-15、ACクラスの推薦・一般各回で縮小、CSクラスは40=40で不変)を検出。淑徳・
+ * 松蔭大学附属松蔭・聖徳学園・城北の4校は総定員完全一致。順天(現・北里大学附属順天)は2024年度版
+ * (理数30+英語30+特進60=120、加算解釈次第では60や30の可能性もある構造)が現行の確立済み値
+ * (理数25+英語25+特進40=90)と対応せず、校名変更(北里大学附属化)を伴う制度再編の影響も疑われる
+ * ため見送り。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -3034,6 +3041,92 @@ export const PRIVATE_SCHOOL_DETAIL_TOKYO: PrivateSchoolDetailFile = {
         { courseName: '文理進学クラス(A推薦・B推薦・一般①共通枠)', capacity: 80 },
       ],
       totalCapacity: 130,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311600038',
+      schoolName: '十文字高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        {
+          courseName: '自己発信コース・特選コース(人文・理数)・リベラルアーツコース(女、A推薦・B推薦・一般①②共通枠、全コース計、2026年度版は80へ減)',
+          capacity: 100,
+        },
+      ],
+      totalCapacity: 100,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311900017',
+      schoolName: '淑徳高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'スーパー特進コース(単願推薦・併願推薦①②・一般①②共通枠)', capacity: 20 },
+        { courseName: '特進選抜コース(単願推薦・併願推薦①②・一般①②共通枠)', capacity: 50 },
+        { courseName: '留学コース(単願推薦のみ)', capacity: 20 },
+      ],
+      totalCapacity: 90,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311600083',
+      schoolName: '淑徳巣鴨高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '選抜コース(アルティメット)(A推薦・B推薦・一般Ⅰ期・Ⅱ期共通枠、2026年度版は38へ)', capacity: 35 },
+        { courseName: '選抜コース(プレミアム)(A推薦・B推薦・一般Ⅰ期・Ⅱ期共通枠、2026年度版は37へ)', capacity: 35 },
+        { courseName: '選抜コース(選抜)(A推薦・B推薦・一般Ⅰ期・Ⅱ期共通枠)', capacity: 80 },
+        { courseName: '特進コース(特進)(A推薦・B推薦・一般Ⅰ期・Ⅱ期共通枠、2026年度版は80へ大幅減)', capacity: 120 },
+      ],
+      totalCapacity: 270,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311200103',
+      schoolName: '松蔭大学附属松蔭高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通(推薦、特進10・一般クラブ70、一般・併優①②共通枠)', capacity: 80 }],
+      totalCapacity: 80,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311600047',
+      schoolName: '城西大学附属城西高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'ACクラス(単願・併願推薦75+一般①40+一般②35、2026年度版は推薦65へ減)', capacity: 150 },
+        { courseName: 'CSクラス(単願・併願推薦10+一般②30)', capacity: 40 },
+      ],
+      totalCapacity: 190,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113320300014',
+      schoolName: '聖徳学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        {
+          courseName: '難関国公立型・文理進学型(推薦共通枠、難関国公立・文理計)',
+          capacity: 30,
+        },
+        {
+          courseName: '難関国公立型・文理進学型(一般・併優①②共通枠、難関国公立・文理計)',
+          capacity: 75,
+        },
+        { courseName: 'データサイエンスコース(一般Ⅰ・Ⅱ共通枠、2024年新設)', capacity: 25 },
+      ],
+      totalCapacity: 130,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311900026',
+      schoolName: '城北高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(男、推薦、約)', capacity: 20 },
+        { courseName: '普通(男、一般、約)', capacity: 65 },
+      ],
+      totalCapacity: 85,
       source: KAKE2_2024_TOKYO_SOURCE,
     },
   ],
