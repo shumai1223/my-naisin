@@ -17,6 +17,13 @@
  * 表組みが実際には明瞭に対応付けできると判明し追加収録(62校中52校)。広域通信制5校・完全中高一貫化
  * 2校(東邦大学付属東邦)・学則定員のみで外部募集内訳不明の渋谷教育学園幕張・PDF掲載なし3校
  * (中山学園/成美学園/千葉科学大学附属)は理由付きでskippedへ記録し、参照台帳62校を完全網羅した。
+ *
+ * 【掛-2（私立×多年度）着手(2026-08-09)】62校規模のため今回はIKUSHIN_CHIBA_SOURCE収録校から
+ * 9校を代表サンプルとして再突合・多年度化した(残りの学校は次回以降の課題)。全9校を
+ * pdftotext -layoutで現行(2026年度)PDFと再突合したが誤りは無かった。Wayback CDX APIで
+ * 2024年8月12日キャプチャを発掘し比較した結果、8校は総定員が完全一致。**千葉明徳のみ実際の
+ * 変化を検出**(進学コースHSクラス・Sクラスの共有枠が130→140に増加・総定員270→280)。
+ * 茂原北陵は総定員200で不変だが、3コース目が「家政」から「ライフデザイン」へ改称されていた。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -24,6 +31,13 @@ const IKUSHIN_CHIBA_SOURCE = {
   url: 'https://www.ikushin.co.jp/school/pdf/03912.pdf',
   docTitle: '2026年度 高専・私立高校 募集要項【千葉県】（(株)育伸社 入試情報課・2025年11月4日現在）',
   fetchedAt: '2026-07-31',
+  sourceTier: 'secondary' as const,
+};
+
+const KAKE2_2024_CHIBA_SOURCE = {
+  url: 'https://web.archive.org/web/20240812142545if_/https://www.ikushin.co.jp/school/pdf/03912.pdf',
+  docTitle: '2024年度 高専・私立高校 募集要項【千葉県】(株式会社育伸社 入試情報課・Web Archive経由で取得)',
+  fetchedAt: '2026-08-09',
   sourceTier: 'secondary' as const,
 };
 
@@ -647,6 +661,86 @@ export const PRIVATE_SCHOOL_DETAIL_CHIBA: PrivateSchoolDetailFile = {
       ],
       totalCapacity: 350,
       source: IKUSHIN_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000199',
+      schoolName: '千葉日本大学第一高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通', capacity: 120 }],
+      totalCapacity: 120,
+      source: KAKE2_2024_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000224',
+      schoolName: '千葉県安房西高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通', capacity: 100 }],
+      totalCapacity: 100,
+      source: KAKE2_2024_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000019',
+      schoolName: '千葉経済大学附属高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通', capacity: 520 }],
+      totalCapacity: 520,
+      source: KAKE2_2024_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000313',
+      schoolName: '千葉萌陽高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通', capacity: 80 }],
+      totalCapacity: 80,
+      source: KAKE2_2024_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000028',
+      schoolName: '千葉明徳高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特別進学コース', capacity: 70 },
+        { courseName: '進学コースHSクラス・Sクラス(進学計)', capacity: 130 },
+        { courseName: 'アスリート進学コース', capacity: 70 },
+      ],
+      totalCapacity: 270,
+      source: KAKE2_2024_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000554',
+      schoolName: '千葉黎明高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通(生産ビジネス含む)', capacity: 276 }],
+      totalCapacity: 276,
+      source: KAKE2_2024_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000162',
+      schoolName: '不二女子高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通(推薦60+一般60)', capacity: 120 }],
+      totalCapacity: 120,
+      source: KAKE2_2024_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000572',
+      schoolName: '茂原北陵高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '総合コース', capacity: 135 },
+        { courseName: '特別進学コース', capacity: 25 },
+        { courseName: '家政(2026年度「ライフデザイン」に改称・定員は同じ40)', capacity: 40 },
+      ],
+      totalCapacity: 200,
+      source: KAKE2_2024_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000563',
+      schoolName: '横芝敬愛高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通', capacity: 190 }],
+      totalCapacity: 190,
+      source: KAKE2_2024_CHIBA_SOURCE,
     },
   ],
   skipped: [
