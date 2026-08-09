@@ -10,12 +10,14 @@ import { PRIVATE_SCHOOL_TUITION_TOKUSHIMA } from '@/data/private-school-tuition/
 import { PRIVATE_SCHOOL_TUITION_AKITA } from '@/data/private-school-tuition/akita';
 import { PRIVATE_SCHOOL_TUITION_FUKUI } from '@/data/private-school-tuition/fukui';
 import { PRIVATE_SCHOOL_TUITION_KOCHI } from '@/data/private-school-tuition/kochi';
+import { PRIVATE_SCHOOL_TUITION_SAGA } from '@/data/private-school-tuition/saga';
 import { PRIVATE_SCHOOL_TUITION_BY_PREFECTURE, PRIVATE_SCHOOL_TUITION_FILES } from '@/data/private-school-tuition';
 import { SCHOOLS_PRIVATE_TOTTORI } from '@/data/schools-private/tottori';
 import { SCHOOLS_PRIVATE_TOKUSHIMA } from '@/data/schools-private/tokushima';
 import { SCHOOLS_PRIVATE_AKITA } from '@/data/schools-private/akita';
 import { SCHOOLS_PRIVATE_FUKUI } from '@/data/schools-private/fukui';
 import { SCHOOLS_PRIVATE_KOCHI } from '@/data/schools-private/kochi';
+import { SCHOOLS_PRIVATE_SAGA } from '@/data/schools-private/saga';
 
 describe('sumMonthlyFees / sumOneTimeFees / sumAnnualFees', () => {
   const base: PrivateSchoolTuition = {
@@ -284,17 +286,64 @@ describe('PRIVATE_SCHOOL_TUITION_KOCHI(掛-3横展開5県目)', () => {
   });
 });
 
+describe('PRIVATE_SCHOOL_TUITION_SAGA(掛-3横展開6県目・annual/monthly/one_timeが混在する学校を含む)', () => {
+  it('収録校は全てfeesが非空でamountが正の数', () => {
+    for (const school of PRIVATE_SCHOOL_TUITION_SAGA.schools) {
+      expect(school.fees.length).toBeGreaterThan(0);
+      for (const fee of school.fees) {
+        expect(fee.amount).toBeGreaterThan(0);
+      }
+    }
+  });
+
+  it('schools-private/saga.tsの全9校がschoolsまたはskippedのいずれかで網羅されている(重複・欠落なし)', () => {
+    const allCodes = SCHOOLS_PRIVATE_SAGA.schools.map((s) => s.code);
+    const result = findDuplicateOrMissingTuitionCodes(PRIVATE_SCHOOL_TUITION_SAGA, allCodes);
+    expect(result.duplicates).toEqual([]);
+    expect(result.missing).toEqual([]);
+  });
+
+  it('収録4レコード(龍谷2コース+弘学館+早稲田佐賀)+スキップ6校', () => {
+    expect(PRIVATE_SCHOOL_TUITION_SAGA.schools.length).toBe(4);
+    expect(PRIVATE_SCHOOL_TUITION_SAGA.skipped.length).toBe(6);
+    const distinctSchoolCodes = new Set(PRIVATE_SCHOOL_TUITION_SAGA.schools.map((s) => s.schoolCode));
+    expect(distinctSchoolCodes.size).toBe(3);
+  });
+
+  it('龍谷高等学校: 特別進学コースは基本コースより教育充実費が高く月額合計も高い', () => {
+    const kihon = PRIVATE_SCHOOL_TUITION_SAGA.schools.find((s) => s.courseName === '文理進学・総合・保育コース')!;
+    const tokushin = PRIVATE_SCHOOL_TUITION_SAGA.schools.find((s) => s.courseName === '特別進学コース')!;
+    expect(sumMonthlyFees(kihon)).toBe(50900);
+    expect(sumMonthlyFees(tokushin)).toBe(55400);
+  });
+
+  it('弘学館高等学校: 学校月納金の内訳合計(68,100円)が公式サイトの合計表記と一致する', () => {
+    const kogakukan = PRIVATE_SCHOOL_TUITION_SAGA.schools.find((s) => s.schoolName === '弘学館高等学校')!;
+    expect(sumMonthlyFees(kogakukan)).toBe(68100);
+    expect(sumOneTimeFees(kogakukan)).toBe(250000);
+    expect(sumAnnualFees(kogakukan)).toBe(110000);
+  });
+
+  it('早稲田佐賀高等学校: 年額費目合計(885,400円)が公式サイトの合計表記と一致する', () => {
+    const waseda = PRIVATE_SCHOOL_TUITION_SAGA.schools.find((s) => s.schoolName === '早稲田佐賀高等学校')!;
+    expect(sumAnnualFees(waseda)).toBe(885400);
+    expect(sumOneTimeFees(waseda)).toBe(110000);
+  });
+});
+
 describe('PRIVATE_SCHOOL_TUITION_BY_PREFECTURE / PRIVATE_SCHOOL_TUITION_FILES', () => {
-  it('tottori・tokushima・akita・fukui・kochiが登録されている', () => {
+  it('tottori・tokushima・akita・fukui・kochi・sagaが登録されている', () => {
     expect(PRIVATE_SCHOOL_TUITION_BY_PREFECTURE.tottori).toBe(PRIVATE_SCHOOL_TUITION_TOTTORI);
     expect(PRIVATE_SCHOOL_TUITION_BY_PREFECTURE.tokushima).toBe(PRIVATE_SCHOOL_TUITION_TOKUSHIMA);
     expect(PRIVATE_SCHOOL_TUITION_BY_PREFECTURE.akita).toBe(PRIVATE_SCHOOL_TUITION_AKITA);
     expect(PRIVATE_SCHOOL_TUITION_BY_PREFECTURE.fukui).toBe(PRIVATE_SCHOOL_TUITION_FUKUI);
     expect(PRIVATE_SCHOOL_TUITION_BY_PREFECTURE.kochi).toBe(PRIVATE_SCHOOL_TUITION_KOCHI);
+    expect(PRIVATE_SCHOOL_TUITION_BY_PREFECTURE.saga).toBe(PRIVATE_SCHOOL_TUITION_SAGA);
     expect(PRIVATE_SCHOOL_TUITION_FILES).toContain(PRIVATE_SCHOOL_TUITION_TOTTORI);
     expect(PRIVATE_SCHOOL_TUITION_FILES).toContain(PRIVATE_SCHOOL_TUITION_TOKUSHIMA);
     expect(PRIVATE_SCHOOL_TUITION_FILES).toContain(PRIVATE_SCHOOL_TUITION_AKITA);
     expect(PRIVATE_SCHOOL_TUITION_FILES).toContain(PRIVATE_SCHOOL_TUITION_FUKUI);
     expect(PRIVATE_SCHOOL_TUITION_FILES).toContain(PRIVATE_SCHOOL_TUITION_KOCHI);
+    expect(PRIVATE_SCHOOL_TUITION_FILES).toContain(PRIVATE_SCHOOL_TUITION_SAGA);
   });
 });
