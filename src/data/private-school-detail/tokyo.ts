@@ -336,6 +336,12 @@
  * (理数30+英語30+特進60=120、加算解釈次第では60や30の可能性もある構造)が現行の確立済み値
  * (理数25+英語25+特進40=90)と対応せず、校名変更(北里大学附属化)を伴う制度再編の影響も疑われる
  * ため見送り。
+ * **2026-08-10further(9ページ目13校中10校を収録・1校は見送り・正則は10ページ目へ継続)**: 昭和第一・
+ * 昭和第一学園(本文既存コメントの推薦一般Xの反復パターン=288という解釈と整合)・昭和鉄道・
+ * 女子美術大学付属・巣鴨・杉並学院・駿台学園・聖学院・成城学園の9校は総定員完全一致。成蹊は80→85
+ * (+5、推薦単願枠の増員)、成女は30→50(+20)を検出。白梅学園は2024年度版の特別選抜コース(特選
+ * 国公立系30・特選文理系70)が異なる数値で現行の「特別選抜コース計50」という結合枠解釈と整合しない
+ * ため見送り。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -3127,6 +3133,139 @@ export const PRIVATE_SCHOOL_DETAIL_TOKYO: PrivateSchoolDetailFile = {
         { courseName: '普通(男、一般、約)', capacity: 65 },
       ],
       totalCapacity: 85,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310500139',
+      schoolName: '昭和第一高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特進コース(推薦Ⅰ・Ⅱ・併優・一般Ⅰ・Ⅱ共通枠)', capacity: 20 },
+        { courseName: '進学コース(推薦Ⅰ・Ⅱ・併優・一般Ⅰ・Ⅱ共通枠)', capacity: 120 },
+      ],
+      totalCapacity: 140,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113320200015',
+      schoolName: '昭和第一学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特別選抜コース(推薦・一般①②共通枠)', capacity: 14 },
+        { courseName: '選抜進学コース(推薦・一般①②共通枠)', capacity: 60 },
+        { courseName: '総合進学コース(推薦・一般①②共通枠)', capacity: 200 },
+        { courseName: 'デザインコース(推薦・一般②共通枠、2024年新設)', capacity: 14 },
+      ],
+      totalCapacity: 288,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311600056',
+      schoolName: '昭和鉄道高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '鉄道科(A・C推薦・B併願・2月併優一般共通枠)', capacity: 100 }],
+      totalCapacity: 100,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311500066',
+      schoolName: '女子美術大学付属高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(女、推薦)', capacity: 32 },
+        { courseName: '普通(女、一般)', capacity: 33 },
+      ],
+      totalCapacity: 65,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311600065',
+      schoolName: '巣鴨高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通(男、一般のみ、約)', capacity: 70 }],
+      totalCapacity: 70,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311500011',
+      schoolName: '杉並学院高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        {
+          courseName: '特別進学コース・総合進学コース(推薦共通枠、特別・総合計)',
+          capacity: 120,
+        },
+        {
+          courseName: '特別進学コース・総合進学コース(一般①②共通枠、特別・総合計)',
+          capacity: 280,
+        },
+      ],
+      totalCapacity: 400,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311700055',
+      schoolName: '駿台学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        {
+          courseName: '特選コース・進学コース(推薦A・併願推薦B共通枠、特選・進学計)',
+          capacity: 110,
+        },
+        {
+          courseName: '特選コース・進学コース(併優・一般①②③共通枠、特選・進学計)',
+          capacity: 130,
+        },
+        { courseName: 'スペシャリストコース(ハイブリッド・オリジナル)(推薦)', capacity: 40 },
+        { courseName: 'スペシャリストコース(ハイブリッド・オリジナル)(一般)', capacity: 20 },
+      ],
+      totalCapacity: 300,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311700064',
+      schoolName: '聖学院高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'グローバルイノベーションクラス(男、推薦)', capacity: 5 },
+        { courseName: 'グローバルイノベーションクラス(男、一般、内併願優遇5)', capacity: 10 },
+      ],
+      totalCapacity: 15,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113320300032',
+      schoolName: '成蹊高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(推薦、単願、約、2026年度版は25へ増)', capacity: 20 },
+        { courseName: '普通(一般、約)', capacity: 60 },
+      ],
+      totalCapacity: 80,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310400032',
+      schoolName: '成女高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        {
+          courseName: '普通(女、A推薦・B推薦・特別推薦・一般①②共通枠、2026年度版は50へ増)',
+          capacity: 30,
+        },
+      ],
+      totalCapacity: 30,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311200121',
+      schoolName: '成城学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(推薦、約)', capacity: 20 },
+        { courseName: '普通(一般、約)', capacity: 40 },
+      ],
+      totalCapacity: 60,
       source: KAKE2_2024_TOKYO_SOURCE,
     },
   ],
