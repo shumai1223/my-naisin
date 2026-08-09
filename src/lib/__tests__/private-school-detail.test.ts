@@ -752,12 +752,12 @@ describe('PRIVATE_SCHOOL_DETAIL_CHIBA(62校中52校を収録・広域通信制5�
     }
   });
 
-  it('収録79レコード(52校+掛-2多年度27レコード)・スキップ10件で参照台帳の62校と完全一致(重複・欠落なし)', () => {
+  it('収録89レコード(52校+掛-2多年度37レコード)・スキップ10件で参照台帳の62校と完全一致(重複・欠落なし)', () => {
     const allCodes = SCHOOLS_PRIVATE_CHIBA.schools.map((s) => s.code);
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_CHIBA, allCodes);
     expect(result.duplicates).toEqual([]);
     expect(result.missing).toHaveLength(0);
-    expect(PRIVATE_SCHOOL_DETAIL_CHIBA.schools.length).toBe(79);
+    expect(PRIVATE_SCHOOL_DETAIL_CHIBA.schools.length).toBe(89);
     const distinctSchoolCodes = new Set(PRIVATE_SCHOOL_DETAIL_CHIBA.schools.map((s) => s.schoolCode));
     expect(distinctSchoolCodes.size).toBe(52);
     expect(PRIVATE_SCHOOL_DETAIL_CHIBA.skipped.length).toBe(10);
@@ -907,6 +907,51 @@ describe('PRIVATE_SCHOOL_DETAIL_CHIBA(62校中52校を収録・広域通信制5�
     );
     expect(y2024?.totalCapacity).toBe(276);
     expect(y2026?.totalCapacity).toBe(293);
+  });
+
+  it('掛-2(私立×多年度・第4弾): 敬愛大学八日市場・芝浦工業大学柏・秀明大学学校教師学部附属秀明八千代・昭和学院・愛国学園大学附属四街道・我孫子二階堂・市原中央・敬愛学園の8校は2024年度と令和8年度で総定員が完全一致', () => {
+    const pairs: Array<[string, number]> = [
+      ['D112310000340', 200],
+      ['D112310000377', 120],
+      ['D112310000448', 310],
+      ['D112310000108', 176],
+      ['D112310000527', 160],
+      ['D112310000457', 200],
+      ['D112310000411', 280],
+      ['D112310000037', 320],
+    ];
+    for (const [code, total] of pairs) {
+      const y2024 = PRIVATE_SCHOOL_DETAIL_CHIBA.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '2024年度'
+      );
+      const y2026 = PRIVATE_SCHOOL_DETAIL_CHIBA.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '令和8年度'
+      );
+      expect(y2024?.totalCapacity).toBe(total);
+      expect(y2026?.totalCapacity).toBe(total);
+    }
+  });
+
+  it('掛-2(私立×多年度): 志学館は2024→令和8年度で総定員180から200へ増加', () => {
+    const y2024 = PRIVATE_SCHOOL_DETAIL_CHIBA.schools.find(
+      (s) => s.schoolCode === 'D112310000251' && s.fiscalYearLabel === '2024年度'
+    );
+    const y2026 = PRIVATE_SCHOOL_DETAIL_CHIBA.schools.find(
+      (s) => s.schoolCode === 'D112310000251' && s.fiscalYearLabel === '令和8年度'
+    );
+    expect(y2024?.totalCapacity).toBe(180);
+    expect(y2026?.totalCapacity).toBe(200);
+  });
+
+  it('掛-2(私立×多年度): 木更津総合は2024年度版(特別進学25+進学60+総合540+美術15=640)と令和8年度一次資料の600で総定員に相違がある', () => {
+    const y2024 = PRIVATE_SCHOOL_DETAIL_CHIBA.schools.find(
+      (s) => s.schoolCode === 'D112310000260' && s.fiscalYearLabel === '2024年度'
+    );
+    const y2026 = PRIVATE_SCHOOL_DETAIL_CHIBA.schools.find(
+      (s) => s.schoolCode === 'D112310000260' && s.fiscalYearLabel === '令和8年度'
+    );
+    expect(y2024?.totalCapacity).toBe(640);
+    expect(y2026?.totalCapacity).toBe(600);
   });
 });
 

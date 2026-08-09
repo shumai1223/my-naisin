@@ -38,6 +38,17 @@
  * 千葉商科大学付属は2024年版PDFで「普通科計205」が特進選抜クラス・総合進学クラスの両方に
  * 同一の数値で記載されており、これが両クラス共有の合算値なのか各クラス独立の値なのか原本だけ
  * では判別できないため、誤記載リスクを避けて今回は収録を見送った(要再検証)。
+ *
+ * 【掛-2 第4弾(2026-08-09)】2024年度版PDFの1〜2頁目も直接ビジョン解析し、37校へ拡大。
+ * 敬愛大学八日市場・芝浦工業大学柏・秀明大学学校教師学部附属秀明八千代・昭和学院・
+ * 愛国学園大学附属四街道・我孫子二階堂・市原中央・敬愛学園の8校は2024年度と令和8年度で
+ * 総定員完全一致。**志学館は実際の変化を検出**(前期Ⅰ〜Ⅲ全区分180から令和8年度は200へ増加)。
+ * **木更津総合も総定員の相違を検出**(特別進学25+進学60+総合540+美術15=640から令和8年度は
+ * 600へ)——現行(令和8年度)側は千葉県学事課の一次資料で「600が共通記載」という単一数値のみで
+ * コース別内訳が無いため、単純な定員減なのかコース再編を伴うのか原本だけでは断定できない
+ * (要再検証)。翔凜は2024年版で3コース(特進・選抜・進学)がそれぞれ独立して「全コース計200」
+ * と記載されており、令和8年度の2コース構成(特別進学160+進学160=320)との対応関係が不明瞭な
+ * ため収録を見送った(千葉商科大学付属と同型の構造不一致・要再検証)。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -933,6 +944,112 @@ export const PRIVATE_SCHOOL_DETAIL_CHIBA: PrivateSchoolDetailFile = {
         { courseName: '進学コース(含内部)', capacity: 176 },
       ],
       totalCapacity: 276,
+      source: KAKE2_2024_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000340',
+      schoolName: '敬愛大学八日市場高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '進学コース(前期推薦60+後期20)', capacity: 80 },
+        { courseName: '普通コース(前期推薦100+後期20)', capacity: 120 },
+      ],
+      totalCapacity: 200,
+      source: KAKE2_2024_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000251',
+      schoolName: '志学館高等部',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通(前期Ⅰ〜Ⅲ全区分共通)', capacity: 180 }],
+      totalCapacity: 180,
+      source: KAKE2_2024_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000377',
+      schoolName: '芝浦工業大学柏高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'グローバル・サイエンスクラス(含内部・帰国)', capacity: 40 },
+        { courseName: 'ジェネラルラーニングクラス(含帰国)', capacity: 80 },
+      ],
+      totalCapacity: 120,
+      source: KAKE2_2024_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000448',
+      schoolName: '秀明大学学校教師学部附属秀明八千代高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特別進学コース', capacity: 50 },
+        { courseName: '国際英語コース', capacity: 60 },
+        { courseName: '文理進学コース', capacity: 100 },
+        { courseName: '総合進学コース', capacity: 100 },
+      ],
+      totalCapacity: 310,
+      source: KAKE2_2024_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000108',
+      schoolName: '昭和学院高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: 'IA・TA・AA・GA・SAコース(全コース計)', capacity: 176 }],
+      totalCapacity: 176,
+      source: KAKE2_2024_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000527',
+      schoolName: '愛国学園大学附属四街道高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [],
+      totalCapacity: 160,
+      source: KAKE2_2024_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000457',
+      schoolName: '我孫子二階堂高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '進学コース(推薦50+一般10)', capacity: 60 },
+        { courseName: '総合コース(推薦100+一般40)', capacity: 140 },
+      ],
+      totalCapacity: 200,
+      source: KAKE2_2024_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000411',
+      schoolName: '市原中央高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'ハイレベルチャレンジコースⅠ類', capacity: 60 },
+        { courseName: 'ハイレベルチャレンジコースⅡ類', capacity: 200 },
+        { courseName: 'グローバルリーダーコース', capacity: 20 },
+      ],
+      totalCapacity: 280,
+      source: KAKE2_2024_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000037',
+      schoolName: '敬愛学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特別進学コース', capacity: 160 },
+        { courseName: '進学コース', capacity: 160 },
+      ],
+      totalCapacity: 320,
+      source: KAKE2_2024_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000260',
+      schoolName: '木更津総合高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特別進学コース', capacity: 25 },
+        { courseName: '進学コース', capacity: 60 },
+        { courseName: '総合コース', capacity: 540 },
+        { courseName: '美術コース', capacity: 15 },
+      ],
+      totalCapacity: 640,
       source: KAKE2_2024_CHIBA_SOURCE,
     },
   ],
