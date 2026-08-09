@@ -294,6 +294,14 @@
  * 推薦/一般各25→各20への減員)を検出。上野学園は現行レコード自体が2027年度分かつ音楽科の
  * 推薦/一般ブロック構造が別途複雑な経緯で解決済みのため、2024年度版との再突合は誤読リスクを
  * 避け見送り。川村は本文既存コメントの通り推薦/一般ブロックの加算可否が確定できず見送り継続。
+ * **2026-08-10further(4ページ目10校中7校を収録・3校は見送り)**: 共栄学園・錦城・錦城学園・
+ * 国立音楽大学附属・慶應義塾女子・京華商業の6校は総定員完全一致(共栄学園・錦城学園は本文既存の
+ * コメントとも整合し裏付けとなった)。京華は50→75(+25、進学特進計+10とS特進コースの推薦/一般
+ * ブロック分離+15の複合)を検出。共立女子第二は一般①・②が2024年度版で異なる数値(15/5等)で
+ * 現行の「一般①・②共通枠」という単一値の扱いと整合しないため、国本女子は「全コース計100」の
+ * 表記が総合進学/ダブルディプロマ各コース単位のクォータか学校全体の合算クォータか確定できないため、
+ * 京華女子は特進/進学クラスとも入試回ごとに異なる数値が並ぶ多段階の加算構造で誤読リスクが高いため、
+ * いずれも見送り。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -2688,6 +2696,95 @@ export const PRIVATE_SCHOOL_DETAIL_TOKYO: PrivateSchoolDetailFile = {
         { courseName: 'バリュアブル・プログラム(女、一般)', capacity: 25 },
         { courseName: 'グローバル・プログラム(女、推薦A・B共通枠)', capacity: 25 },
         { courseName: 'グローバル・プログラム(女、一般)', capacity: 25 },
+      ],
+      totalCapacity: 150,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113312200012',
+      schoolName: '共栄学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '未来探究コース(A推薦・B推薦・一般・チャレンジ共通枠、2024年コース改編直後)', capacity: 15 },
+        { courseName: '国際共生コース(A推薦・B推薦・一般・チャレンジ共通枠、2024年コース改編直後)', capacity: 15 },
+        { courseName: '理数創造コース(A推薦・B推薦・一般・チャレンジ共通枠、2024年コース改編直後)', capacity: 15 },
+        { courseName: '探究特進コース(A推薦・B推薦・一般・チャレンジ共通枠、2024年コース改編直後)', capacity: 35 },
+        { courseName: '探究進学コース(A推薦・B推薦・一般・チャレンジ共通枠、2024年コース改編直後)', capacity: 80 },
+      ],
+      totalCapacity: 160,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113321100014',
+      schoolName: '錦城高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特進コース(一般①・②共通枠、推薦の掲載なし)', capacity: 120 },
+        { courseName: '進学コース(推薦)', capacity: 130 },
+        { courseName: '進学コース(一般)', capacity: 200 },
+      ],
+      totalCapacity: 450,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310100053',
+      schoolName: '錦城学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(A推薦・B推薦共通枠)', capacity: 120 },
+        { courseName: '普通(一般①・②共通枠)', capacity: 120 },
+      ],
+      totalCapacity: 240,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113321500010',
+      schoolName: '国立音楽大学附属高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(推薦、約)', capacity: 30 },
+        { courseName: '普通(一般①②③共通枠、約)', capacity: 30 },
+        { courseName: '音楽(推薦、約)', capacity: 40 },
+        { courseName: '音楽(一般①②共通枠、約)', capacity: 40 },
+      ],
+      totalCapacity: 140,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310300024',
+      schoolName: '慶應義塾女子高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(女、推薦、約)', capacity: 30 },
+        { courseName: '普通(女、一般、約、帰国生は若干のため未算入)', capacity: 70 },
+      ],
+      totalCapacity: 100,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310500068',
+      schoolName: '京華高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        {
+          courseName: '進学コース・特進コース(男、A推薦・B推薦・一般①②共通枠、進学・特進計、含帰国、2026年度版は50へ増員)',
+          capacity: 40,
+        },
+        {
+          courseName: 'S特進コース(男、A推薦・B推薦・一般①②共通枠、含帰国、2026年度版は推薦/一般ブロックが分離され25へ再編)',
+          capacity: 10,
+        },
+      ],
+      totalCapacity: 50,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310500086',
+      schoolName: '京華商業高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '商業(A推薦・得意技能・B推薦共通枠)', capacity: 70 },
+        { courseName: '商業(一般①・②共通枠)', capacity: 80 },
       ],
       totalCapacity: 150,
       source: KAKE2_2024_TOKYO_SOURCE,
