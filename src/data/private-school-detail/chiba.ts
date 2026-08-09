@@ -60,6 +60,12 @@
  * 日出学園(2024年版が「特進・進学計20程度」という粗い概数表記で令和8年度70との対応不明)・
  * 八千代松陰(全項目が「約」付き概数で外部/内部の区分が不明瞭)は、いずれも数値の対応関係を
  * 確信できないため収録を見送った(要再検証)。
+ *
+ * 【掛-2 第6弾(2026-08-09)】ページ3の下部で見落としていた千葉聖心を発見・追加し46校へ拡大。
+ * 校長推薦(専願・一能)200が併願・自己推薦とも共通記載で、令和8年度の200と完全一致。これで
+ * 62校中、確度高く多年度化できる学校は46校に到達し、残り6校(千葉商科大学付属・翔凜・
+ * 流通経済大学付属柏・二松学舎大学附属柏・日出学園・八千代松陰)はいずれも構造不一致または
+ * 粗い概数表記により対応関係が原本だけでは確定できず、掛-2のこのラウンドでは見送りとする。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -1153,6 +1159,14 @@ export const PRIVATE_SCHOOL_DETAIL_CHIBA: PrivateSchoolDetailFile = {
         { courseName: '叡智特選コース(特選)', capacity: 70 },
       ],
       totalCapacity: 100,
+      source: KAKE2_2024_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000055',
+      schoolName: '千葉聖心高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通(女子)', capacity: 200 }],
+      totalCapacity: 200,
       source: KAKE2_2024_CHIBA_SOURCE,
     },
   ],

@@ -752,12 +752,12 @@ describe('PRIVATE_SCHOOL_DETAIL_CHIBA(62校中52校を収録・広域通信制5�
     }
   });
 
-  it('収録97レコード(52校+掛-2多年度45レコード)・スキップ10件で参照台帳の62校と完全一致(重複・欠落なし)', () => {
+  it('収録98レコード(52校+掛-2多年度46レコード)・スキップ10件で参照台帳の62校と完全一致(重複・欠落なし)', () => {
     const allCodes = SCHOOLS_PRIVATE_CHIBA.schools.map((s) => s.code);
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_CHIBA, allCodes);
     expect(result.duplicates).toEqual([]);
     expect(result.missing).toHaveLength(0);
-    expect(PRIVATE_SCHOOL_DETAIL_CHIBA.schools.length).toBe(97);
+    expect(PRIVATE_SCHOOL_DETAIL_CHIBA.schools.length).toBe(98);
     const distinctSchoolCodes = new Set(PRIVATE_SCHOOL_DETAIL_CHIBA.schools.map((s) => s.schoolCode));
     expect(distinctSchoolCodes.size).toBe(52);
     expect(PRIVATE_SCHOOL_DETAIL_CHIBA.skipped.length).toBe(10);
@@ -995,6 +995,17 @@ describe('PRIVATE_SCHOOL_DETAIL_CHIBA(62校中52校を収録・広域通信制5�
     );
     expect(y2024?.totalCapacity).toBe(100);
     expect(y2026?.totalCapacity).toBe(120);
+  });
+
+  it('掛-2(私立×多年度・第6弾): 千葉聖心は2024年度と令和8年度で総定員200が完全一致', () => {
+    const y2024 = PRIVATE_SCHOOL_DETAIL_CHIBA.schools.find(
+      (s) => s.schoolCode === 'D112310000055' && s.fiscalYearLabel === '2024年度'
+    );
+    const y2026 = PRIVATE_SCHOOL_DETAIL_CHIBA.schools.find(
+      (s) => s.schoolCode === 'D112310000055' && s.fiscalYearLabel === '令和8年度'
+    );
+    expect(y2024?.totalCapacity).toBe(200);
+    expect(y2026?.totalCapacity).toBe(200);
   });
 });
 
