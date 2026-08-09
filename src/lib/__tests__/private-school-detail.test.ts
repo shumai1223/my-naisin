@@ -489,9 +489,31 @@ describe('PRIVATE_SCHOOL_DETAIL_SHIGA(県の私立学校生徒募集概要PDFで
     expect(result.missing).toEqual([]);
   });
 
-  it('収録10校+スキップ2校(全日制課程を持たない通信制専門校2校)で参照台帳の12校と一致する', () => {
-    expect(PRIVATE_SCHOOL_DETAIL_SHIGA.schools.length).toBe(10);
+  it('収録20レコード(10校+掛-2多年度10レコード)+スキップ2校(全日制課程を持たない通信制専門校2校)で参照台帳の12校と一致する', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_SHIGA.schools.length).toBe(20);
     expect(PRIVATE_SCHOOL_DETAIL_SHIGA.skipped.length).toBe(2);
+    const distinctSchoolCodes = new Set(PRIVATE_SCHOOL_DETAIL_SHIGA.schools.map((s) => s.schoolCode));
+    expect(distinctSchoolCodes.size).toBe(10);
+  });
+
+  it('掛-2(私立×多年度): 収録10校全てが令和7年度と令和8年度で定員完全に同一', () => {
+    const codes = [
+      'D125320100012',
+      'D125320100021',
+      'D125320100030',
+      'D125320200011',
+      'D125320200020',
+      'D125320400019',
+      'D125320600017',
+      'D125320600026',
+      'D125320700016',
+      'D125321300018',
+    ];
+    for (const code of codes) {
+      const r7 = PRIVATE_SCHOOL_DETAIL_SHIGA.schools.find((s) => s.schoolCode === code && s.fiscalYearLabel === '令和7年度')!;
+      const r8 = PRIVATE_SCHOOL_DETAIL_SHIGA.schools.find((s) => s.schoolCode === code && s.fiscalYearLabel === '令和8年度')!;
+      expect(r7.totalCapacity).toBe(r8.totalCapacity);
+    }
   });
 });
 

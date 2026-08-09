@@ -19,6 +19,20 @@ const SOURCE = {
   sourceTier: 'primary' as const,
 };
 
+/**
+ * 【掛-2（私立×多年度）追加】同じ連合会が公表する別版の「令和8年度私立学校生徒募集概要」
+ * (shiga-shigaku.com/wp/img/2025/09/配下・県の公式版とは別の連合会版)は「R7年度募集定員｜
+ * R7年度志願倍率｜R8年度募集定員」の3列比較表になっており、過去年度データを別途探す必要が
+ * 無かった（掛-1のkanagawa/mie等で確立した「前年度列」パターンと同型・佐賀の志願状況PDFにも
+ * 近い）。10校全てが令和7年度と令和8年度で定員完全に同一。
+ */
+const KAKE2_R7_SOURCE = {
+  url: 'https://shiga-shigaku.com/wp/img/2025/09/R8seitoboshugaiyou.pdf',
+  docTitle: '令和8年度私立学校生徒募集概要(滋賀県私立中学高等学校連合会版・R7年度募集定員/R7年度志願倍率/R8年度募集定員の3列比較表)',
+  fetchedAt: '2026-08-09',
+  sourceTier: 'primary' as const,
+};
+
 export const PRIVATE_SCHOOL_DETAIL_SHIGA: PrivateSchoolDetailFile = {
   prefectureCode: 'shiga',
   schools: [
@@ -134,6 +148,101 @@ export const PRIVATE_SCHOOL_DETAIL_SHIGA: PrivateSchoolDetailFile = {
       ],
       totalCapacity: 240,
       source: { ...SOURCE, docTitle: SOURCE.docTitle + '(全日制)' },
+    },
+    {
+      schoolCode: 'D125320100012',
+      schoolName: '比叡山高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [{ courseName: '普通科', capacity: 400 }],
+      totalCapacity: 400,
+      source: { ...KAKE2_R7_SOURCE, docTitle: KAKE2_R7_SOURCE.docTitle + '（令和8年度と完全に同一）' },
+    },
+    {
+      schoolCode: 'D125320100021',
+      schoolName: '滋賀短期大学附属高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [],
+      totalCapacity: 250,
+      source: {
+        ...KAKE2_R7_SOURCE,
+        docTitle: KAKE2_R7_SOURCE.docTitle + '（比較表は「普通」1行のみでⅠ類/Ⅱ類の内訳が示されないためcourses=[]で収録。合計250名は令和8年度と完全に同一）',
+      },
+    },
+    {
+      schoolCode: 'D125320100030',
+      schoolName: '幸福の科学学園関西高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [{ courseName: '普通科', capacity: 100 }],
+      totalCapacity: 100,
+      source: { ...KAKE2_R7_SOURCE, docTitle: KAKE2_R7_SOURCE.docTitle + '（令和8年度と完全に同一）' },
+    },
+    {
+      schoolCode: 'D125320200011',
+      schoolName: '近江高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [
+        { courseName: '普通科', capacity: 280 },
+        { courseName: 'グローバル探究科', capacity: 80 },
+      ],
+      totalCapacity: 360,
+      source: { ...KAKE2_R7_SOURCE, docTitle: KAKE2_R7_SOURCE.docTitle + '（令和8年度と完全に同一）' },
+    },
+    {
+      schoolCode: 'D125320200020',
+      schoolName: '彦根総合高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [
+        { courseName: '総合学科', capacity: 210 },
+        { courseName: 'フードクリエイト科', capacity: 35 },
+      ],
+      totalCapacity: 245,
+      source: { ...KAKE2_R7_SOURCE, docTitle: KAKE2_R7_SOURCE.docTitle + '（令和8年度と完全に同一）' },
+    },
+    {
+      schoolCode: 'D125320400019',
+      schoolName: '近江兄弟社高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [
+        { courseName: '普通科', capacity: 320 },
+        { courseName: '国際コミュニケーション科', capacity: 70 },
+      ],
+      totalCapacity: 390,
+      source: { ...KAKE2_R7_SOURCE, docTitle: KAKE2_R7_SOURCE.docTitle + '（令和8年度と完全に同一）' },
+    },
+    {
+      schoolCode: 'D125320600017',
+      schoolName: '光泉カトリック高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [{ courseName: '普通科', capacity: 350 }],
+      totalCapacity: 350,
+      source: { ...KAKE2_R7_SOURCE, docTitle: KAKE2_R7_SOURCE.docTitle + '（令和8年度と完全に同一）' },
+    },
+    {
+      schoolCode: 'D125320600026',
+      schoolName: '綾羽高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [{ courseName: '普通科', capacity: 185 }],
+      totalCapacity: 185,
+      source: { ...KAKE2_R7_SOURCE, docTitle: KAKE2_R7_SOURCE.docTitle + '（令和8年度と完全に同一）' },
+    },
+    {
+      schoolCode: 'D125320700016',
+      schoolName: '立命館守山高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [{ courseName: '普通科', capacity: 160 }],
+      totalCapacity: 160,
+      source: { ...KAKE2_R7_SOURCE, docTitle: KAKE2_R7_SOURCE.docTitle + '（令和8年度と完全に同一）' },
+    },
+    {
+      schoolCode: 'D125321300018',
+      schoolName: '滋賀学園高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [
+        { courseName: '普通科', capacity: 200 },
+        { courseName: '看護科', capacity: 40 },
+      ],
+      totalCapacity: 240,
+      source: { ...KAKE2_R7_SOURCE, docTitle: KAKE2_R7_SOURCE.docTitle + '（令和8年度と完全に同一）' },
     },
   ],
   skipped: [
