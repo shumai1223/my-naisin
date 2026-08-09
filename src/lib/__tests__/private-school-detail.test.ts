@@ -2209,13 +2209,47 @@ describe('PRIVATE_SCHOOL_DETAIL_AICHI(大都市圏5県の4県目・育伸社募�
     }
   });
 
-  it('収録50校・スキップ7件で参照台帳57校と完全一致(重複・欠落なし)', () => {
+  it('収録57レコード(50校+掛-2多年度7レコード)・スキップ7件で参照台帳57校と完全一致(重複・欠落なし)', () => {
     const allCodes = SCHOOLS_PRIVATE_AICHI.schools.map((s) => s.code);
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_AICHI, allCodes);
     expect(result.duplicates).toEqual([]);
     expect(result.missing).toHaveLength(0);
-    expect(PRIVATE_SCHOOL_DETAIL_AICHI.schools.length).toBe(50);
+    expect(PRIVATE_SCHOOL_DETAIL_AICHI.schools.length).toBe(57);
+    const distinctSchoolCodes = new Set(PRIVATE_SCHOOL_DETAIL_AICHI.schools.map((s) => s.schoolCode));
+    expect(distinctSchoolCodes.size).toBe(50);
     expect(PRIVATE_SCHOOL_DETAIL_AICHI.skipped.length).toBe(7);
+  });
+
+  it('掛-2(私立×多年度): 栄徳は2024年度と2026年度で総定員380が完全一致', () => {
+    const y2024 = PRIVATE_SCHOOL_DETAIL_AICHI.schools.find(
+      (s) => s.schoolCode === 'D123310000409' && s.fiscalYearLabel === '2024年度'
+    );
+    const yLatest = PRIVATE_SCHOOL_DETAIL_AICHI.schools.find(
+      (s) => s.schoolCode === 'D123310000409' && s.fiscalYearLabel !== '2024年度'
+    );
+    expect(y2024?.totalCapacity).toBe(380);
+    expect(yLatest?.totalCapacity).toBe(380);
+  });
+
+  it('掛-2(私立×多年度): 愛知・愛知工業大学名電・愛知啓成・愛知産業大学三河・愛知みずほ大学瑞穂・安城学園の6校は2024→2026年度で定員減少(愛知のみ新設コースを含み増加)', () => {
+    const pairs: Array<[string, number, number]> = [
+      ['D123310000007', 353, 372],
+      ['D123310000016', 547, 529],
+      ['D123310000356', 276, 241],
+      ['D123310000472', 436, 430],
+      ['D123310000196', 442, 416],
+      ['D123310000454', 540, 533],
+    ];
+    for (const [code, before, after] of pairs) {
+      const y2024 = PRIVATE_SCHOOL_DETAIL_AICHI.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '2024年度'
+      );
+      const yLatest = PRIVATE_SCHOOL_DETAIL_AICHI.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel !== '2024年度'
+      );
+      expect(y2024?.totalCapacity).toBe(before);
+      expect(yLatest?.totalCapacity).toBe(after);
+    }
   });
 });
 

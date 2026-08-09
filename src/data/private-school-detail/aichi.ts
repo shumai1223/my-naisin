@@ -17,6 +17,15 @@
  * 「推薦60名・一般15名」と記載があるが推薦/一般が合算対象か単一定員の内訳かの
  * 確証が持てず(↓等の共有クォータ記法が無い)、捏造ゼロ原則により正直にスキップ。
  * 収録50校+スキップ7校=57/57校で愛知県は完全網羅(北海道除く残り未着手は東京都のみ)。
+ *
+ * 【掛-2（私立×多年度）着手(2026-08-10)】大都市圏5県の3番目。Wayback CDX APIでikushin
+ * 03923.pdfの2023年11月2日キャプチャ(「2024年度」版)を発掘し、1ページ目8校を再突合。
+ * **愛知・愛知工業大学名電・愛知啓成・愛知産業大学三河・愛知みずほ大学瑞穂・安城学園の
+ * 6校で実際の変化を検出**(いずれも令和8年度版の方が小さい=定員減の傾向。愛知353→372は
+ * 唯一の増加例で新設の国際教養コースを含む)。栄徳のみ総定員完全一致(380=380)。愛知黎明は
+ * 2024年版で「普通」「看護」両コースが同一の「140(内推薦80%程度)」を独立記載しており
+ * 共有クォータか各コース独立かを確信できず見送り。桜花学園は表がページ下端で途切れ
+ * 続きの読み取りが必要なため次回に持ち越す。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -24,6 +33,13 @@ const IKUSHIN_AICHI_SOURCE = {
   url: 'https://www.ikushin.co.jp/school/pdf/03923.pdf',
   docTitle: '2026年度 国立高校・高専・私立高校 募集要項【愛知県】（(株)育伸社 入試情報課・2025年11月4日現在）',
   fetchedAt: '2026-07-31',
+  sourceTier: 'secondary' as const,
+};
+
+const KAKE2_2024_AICHI_SOURCE = {
+  url: 'https://web.archive.org/web/20231106193324if_/https://www.ikushin.co.jp/school/PDF/03923.pdf',
+  docTitle: '2024年度 私立高校 募集要項【愛知県】(株式会社育伸社 入試情報課・2023年11月2日現在・Web Archive経由で取得)',
+  fetchedAt: '2026-08-10',
   sourceTier: 'secondary' as const,
 };
 
@@ -562,6 +578,84 @@ export const PRIVATE_SCHOOL_DETAIL_AICHI: PrivateSchoolDetailFile = {
       ],
       totalCapacity: 637,
       source: IKUSHIN_AICHI_SOURCE,
+    },
+    {
+      schoolCode: 'D123310000007',
+      schoolName: '愛知高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '選抜クラス・進学クラス・国際教養コース(普通科計、推薦50%、国際教養コースは2024年新設)', capacity: 353 },
+      ],
+      totalCapacity: 353,
+      source: KAKE2_2024_AICHI_SOURCE,
+    },
+    {
+      schoolCode: 'D123310000016',
+      schoolName: '愛知工業大学名電高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特進・選抜コース・普通(文系・理系)コース・スポーツコース(普通科計外部387、内推薦50%程度)', capacity: 387 },
+        { courseName: '科学技術・情報科学コース計(内推薦70%程度)', capacity: 160 },
+      ],
+      totalCapacity: 547,
+      source: KAKE2_2024_AICHI_SOURCE,
+    },
+    {
+      schoolCode: 'D123310000356',
+      schoolName: '愛知啓成高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'サミッティア(特進)コース', capacity: 60 },
+        { courseName: 'アカデミア(進学総合)コース', capacity: 150 },
+        { courseName: 'グローバルコース', capacity: 30 },
+        { courseName: 'スポーツコース', capacity: 36 },
+      ],
+      totalCapacity: 276,
+      source: KAKE2_2024_AICHI_SOURCE,
+    },
+    {
+      schoolCode: 'D123310000472',
+      schoolName: '愛知産業大学三河高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(特色計は募集人員の約5%を含む)', capacity: 176 },
+        { courseName: '電気(含特色)', capacity: 110 },
+        { courseName: '情報処理(特色計は募集人員の約5%を含む)', capacity: 150 },
+      ],
+      totalCapacity: 436,
+      source: KAKE2_2024_AICHI_SOURCE,
+    },
+    {
+      schoolCode: 'D123310000196',
+      schoolName: '愛知みずほ大学瑞穂高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特進コース・進学コース・教養コース・生活文化コース(普通科計322、内推薦約80%)', capacity: 322 },
+        { courseName: '商業(内推薦約80%)', capacity: 120 },
+      ],
+      totalCapacity: 442,
+      source: KAKE2_2024_AICHI_SOURCE,
+    },
+    {
+      schoolCode: 'D123310000454',
+      schoolName: '安城学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通・商業(全科計540、基礎学力試験3科)', capacity: 540 }],
+      totalCapacity: 540,
+      source: KAKE2_2024_AICHI_SOURCE,
+    },
+    {
+      schoolCode: 'D123310000409',
+      schoolName: '栄徳高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'Super文理コース(約)', capacity: 60 },
+        { courseName: '総合進学コース(約)', capacity: 250 },
+        { courseName: '国際言語コース(約)', capacity: 30 },
+        { courseName: '人間スポーツコース(男、約)', capacity: 40 },
+      ],
+      totalCapacity: 380,
+      source: KAKE2_2024_AICHI_SOURCE,
     },
   ],
   skipped: [
