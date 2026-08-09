@@ -23,6 +23,24 @@
  * 機械集計（quota6,896・applicants6,276、29校71レコード）が「合計」行（募集人員6,896・
  * 第一出願期間出願者数6,276）と初回転記で完全一致した（再修正なし）。定時制課程・外国人／帰国
  * 生徒特別選抜は他県の定時制／特別選抜と同じ理由でスコープ外。
+ *
+ * 【掛-1（学校別×多年度）追加】令和7年度分を追加。一次ソースは奈良県「令和7年度奈良県公立高等学校
+ * 入学者一般選抜等合格者数」（令和7年3月18日公表・全2ページ）。⚠️令和7年度は令和8年度の「一次選抜」
+ * 一本化制度が導入される前の旧制度（特色選抜と一般選抜の別トラック）で実施されており、資料は
+ * 【ア　一般選抜で定員の全て又は一部を募集する学科（コース）】＝募集人員の全部または大半が一般選抜
+ * を通る学校・学科と、【イ　特色選抜で合格者数が募集人員に満たなかった学科（コース）】＝特色選抜で
+ * 定員充足できず一般選抜へ回った"残り枠"のみを示す学科、の2表に分かれる。**表イの学科（商業・工業・
+ * 音楽・美術等の専門学科の大半）は特色選抜で真の需要の大半が吸収された後の残り枠でしかなく、
+ * R8の統一「一次選抜」出願者数と比較可能な母数ではないため、本追加では表アに掲載された学校・学科
+ * （実質的に普通科系＝一般選抜が定員の全部/大半を占める学校）のみを収録した**（罠: 表イも含めて
+ * 全専門学科を収録すると見かけ上のレコード数は増えるが、質的に異なる母集団を同一テーブルに混在
+ * させることになり後年度比較の意味が壊れる。奈良商工・二階堂・御所実業・磯城野・王寺工業・奈良南等
+ * の専門学科校はR7時点で表イにすら現れず＝特色選抜のみで完全充足しており一般選抜の実質倍率データが
+ * 存在しないため、これらの学校は令和7年度分として収録していない）。表アの学校でも音楽/美術/デザイン
+ * （高円芸術）・書芸コース（桜井）・人文探究コース（添上）・生涯スポーツ（大和広陵）等の専門コースは
+ * 表イ側（特色選抜メイン）に現れるため同様の理由で除外し、普通科相当の主要コースのみを収録した。
+ * 機械集計（quota4,400・applicants4,490、17校19レコード）が表アの「合計」行（募集人員4,400・
+ * 出願者数4,490）と初回転記で完全一致した（再修正なし）。倍率は資料に印字が無いため自前算出。
  */
 import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
 
@@ -34,6 +52,12 @@ export const NARA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       docTitle: '奈良県教育委員会 令和8年度奈良県公立高等学校入学者一次選抜等出願状況（第二出願期間）',
       fiscalYear: '令和8年度（2026年度）',
       fetchedAt: '2026-07-25',
+    },
+    {
+      url: 'https://www.pref.nara.lg.jp/documents/5981/r7_ippann_goukakusyasuu.pdf',
+      docTitle: '奈良県教育委員会 令和7年度奈良県公立高等学校入学者一般選抜等合格者数',
+      fiscalYear: '令和7年度（2025年度）',
+      fetchedAt: '2026-08-09',
     },
   ],
   coverage: {
@@ -127,5 +151,24 @@ export const NARA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '十津川', department: '総合', quota: 39, finalApplicants: 21, finalRate: 0.54 },
     { schoolName: '一条', department: '普通', quota: 200, finalApplicants: 302, finalRate: 1.51 },
     { schoolName: '高田商業', department: '商業', quota: 197, finalApplicants: 191, finalRate: 0.97 },
+    { schoolName: '奈良', department: '普通', quota: 360, finalApplicants: 434, finalRate: 1.21, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '高円芸術', department: '普通', quota: 120, finalApplicants: 102, finalRate: 0.85, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '高田', department: '普通', quota: 360, finalApplicants: 372, finalRate: 1.03, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '郡山', department: '普通', quota: 360, finalApplicants: 453, finalRate: 1.26, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '添上', department: '普通(人文探究以外)', quota: 160, finalApplicants: 97, finalRate: 0.61, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '橿原', department: '普通', quota: 320, finalApplicants: 323, finalRate: 1.01, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '畝傍', department: '普通', quota: 360, finalApplicants: 368, finalRate: 1.02, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '桜井', department: '普通(書芸以外)', quota: 280, finalApplicants: 327, finalRate: 1.17, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '五條', department: '普通', quota: 240, finalApplicants: 175, finalRate: 0.73, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '生駒', department: '普通', quota: 320, finalApplicants: 329, finalRate: 1.03, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '奈良北', department: '普通', quota: 280, finalApplicants: 293, finalRate: 1.05, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '奈良北', department: '数理情報', quota: 80, finalApplicants: 59, finalRate: 0.74, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '香芝', department: '普通(表現探究)', quota: 40, finalApplicants: 44, finalRate: 1.1, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '香芝', department: '普通(表現探究以外)', quota: 280, finalApplicants: 327, finalRate: 1.17, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '西和清陵', department: '普通', quota: 200, finalApplicants: 128, finalRate: 0.64, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '法隆寺国際', department: '普通', quota: 200, finalApplicants: 152, finalRate: 0.76, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '高取国際', department: '普通', quota: 120, finalApplicants: 139, finalRate: 1.16, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '大和広陵', department: '普通', quota: 120, finalApplicants: 72, finalRate: 0.6, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '一条', department: '普通', quota: 200, finalApplicants: 296, finalRate: 1.48, fiscalYear: '令和7年度（2025年度）' },
   ],
 };

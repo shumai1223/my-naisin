@@ -6,10 +6,11 @@ import { NARA_COMPETITION_RATES } from '../nara';
  */
 describe('奈良県 倍率パイプラインα（Y-6・全日制29校71レコードの完全収録テスト）', () => {
   const { records, officialSubtotals } = NARA_COMPETITION_RATES;
+  const r8 = records.filter((r) => !r.fiscalYear);
 
   it('全レコード合計が「合計（第一出願期間）」行（quota6,896・applicants6,276）と完全一致する', () => {
     const subtotal = officialSubtotals.find((s) => s.label === '合計（第一出願期間）')!;
-    const result = checkAgainstSubtotal(records, subtotal, () => true);
+    const result = checkAgainstSubtotal(records, subtotal, (r) => !r.fiscalYear);
     expect(result.matches).toBe(true);
   });
 
@@ -21,11 +22,11 @@ describe('奈良県 倍率パイプラインα（Y-6・全日制29校71レコー
     }
   });
 
-  it('学校名+学科名の重複が無い', () => {
+  it('学校名+学科名+年度の重複が無い', () => {
     const seen = new Set<string>();
     const dupes: string[] = [];
     for (const r of records) {
-      const key = `${r.schoolName}|${r.department}`;
+      const key = `${r.schoolName}|${r.department}|${r.fiscalYear ?? ''}`;
       if (seen.has(key)) dupes.push(key);
       seen.add(key);
     }
@@ -37,8 +38,8 @@ describe('奈良県 倍率パイプラインα（Y-6・全日制29校71レコー
   });
 
   it('71レコード・29校が収録されている', () => {
-    expect(records.length).toBe(71);
-    const distinctSchools = new Set(records.map((r) => r.schoolName));
+    expect(r8.length).toBe(71);
+    const distinctSchools = new Set(r8.map((r) => r.schoolName));
     expect(distinctSchools.size).toBe(29);
   });
 
@@ -64,6 +65,16 @@ describe('奈良県 倍率パイプラインα（Y-6・全日制29校71レコー
       finalApplicants: 456,
       finalRate: 1.27,
     });
+  });
+
+  it('掛-1(学校別×多年度): 令和7年度(R7)分レコードが19件収録され、表アの「合計」(quota4,400・applicants4,490)と完全一致する。旧制度（特色選抜/一般選抜の別トラック）のため専門学科の大半は表イ(特色選抜の残り枠のみ)にしか現れず比較可能な母数でないので、普通科相当の学校・学科のみを収録した', () => {
+    const r7 = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
+    expect(r7.length).toBe(19);
+    expect(r7.reduce((a, r) => a + r.quota, 0)).toBe(4400);
+    expect(r7.reduce((a, r) => a + r.finalApplicants, 0)).toBe(4490);
+
+    const distinctSchools = new Set(r7.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(17);
   });
 
   it('sourcesが公式PDF URLを正しく記録している', () => {
