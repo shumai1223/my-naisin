@@ -360,6 +360,16 @@
  * 存在しないため比較対象外、東海大学菅生と東京音楽大学付属は2024年度版が推薦/一般で異なる数値の
  * 加算構造に見える一方、現行コードは単一の共通枠(推薦・一般共通枠、同一ラベル1本)として明示的に
  * モデル化されており構造の前提が食い違うため、いずれも見送り。
+ * **2026-08-10further(12ページ目5校中3校を収録・2校は対象外)**: 東京家政学院は単願推薦・併願推薦
+ * 共通枠80+併優一般①60+併優一般②20=160で2024年度と2026年度が完全一致。東京家政大学附属女子は
+ * 2024年度版が「特進(E)CLASS(推薦30+一般30=60)」「進学(i)CLASS(推薦70+一般70=140)」で総定員200、
+ * 2026年度版はクラス名がSA/CAクラス/TKUクラスへ再編され総定員160と、クラス構成自体が変わった
+ * 実質的な定員減少(-40)を検出。東京純心女子は叡智探究特進プログラムコース(推薦20+併優20=40)・
+ * セレクトデザインコース(推薦50+併優50=100)の2024年度版に対し2026年度版は特進コース(推薦20+
+ * 併優10=30)・セレクトコース(推薦70+併優40=110)で、総定員140は完全一致するがコース間で定員が
+ * 再配分されている(四條畷学園と同型のパターン)。東京実業は本文既存コメント通り複雑な多段階構造で
+ * 現行コード自体がスキップ済みのため、2024年度版との再突合は比較基準が無く対象外。東京女子学院は
+ * 参照台帳(schools-private/tokyo.ts)に該当コードが存在せず掛-2の対象外。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -3581,6 +3591,59 @@ export const PRIVATE_SCHOOL_DETAIL_TOKYO: PrivateSchoolDetailFile = {
         { courseName: '普通(一般①・②・③共通、3ラウンド合算150)', capacity: 150 },
       ],
       totalCapacity: 270,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310100099',
+      schoolName: '東京家政学院高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        {
+          courseName: 'リベラルアーツコース・アドバンストコース(女、単願推薦・併願推薦共通枠、普通科計)',
+          capacity: 80,
+        },
+        {
+          courseName: 'リベラルアーツコース・アドバンストコース(女、併優一般①共通枠、普通科計)',
+          capacity: 60,
+        },
+        {
+          courseName: 'リベラルアーツコース・アドバンストコース(女、併優一般②共通枠、普通科計)',
+          capacity: 20,
+        },
+      ],
+      totalCapacity: 160,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311900053',
+      schoolName: '東京家政大学附属女子高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特進(E)CLASS(女、推薦A・B①②共通枠)', capacity: 30 },
+        { courseName: '特進(E)CLASS(女、一般①②共通枠)', capacity: 30 },
+        { courseName: '進学(i)CLASS(女、推薦A・B①②共通枠)', capacity: 70 },
+        { courseName: '進学(i)CLASS(女、一般①②共通枠)', capacity: 70 },
+      ],
+      totalCapacity: 200,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113320100052',
+      schoolName: '東京純心女子高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '叡智探究特進プログラムコース(女、推薦)', capacity: 20 },
+        {
+          courseName: '叡智探究特進プログラムコース(女、併優一般Ⅰ・Ⅱ共通枠、併優。一般は若干のため未算入)',
+          capacity: 20,
+        },
+        { courseName: '叡智探究セレクトデザインコース(女、推薦)', capacity: 50 },
+        {
+          courseName: '叡智探究セレクトデザインコース(女、併優一般Ⅰ・Ⅱ共通枠、併優。一般は若干のため未算入)',
+          capacity: 50,
+        },
+      ],
+      totalCapacity: 140,
       source: KAKE2_2024_TOKYO_SOURCE,
     },
   ],

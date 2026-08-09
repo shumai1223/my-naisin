@@ -2695,12 +2695,12 @@ describe('PRIVATE_SCHOOL_DETAIL_TOKYO(大都市圏5県の最後・育伸社募�
     }
   });
 
-  it('収録176校(掛-2の2024年度85校分含め261レコード)・スキップ65校で参照台帳241校を完全網羅(重複・欠落なし)', () => {
+  it('収録176校(掛-2の2024年度88校分含め264レコード)・スキップ65校で参照台帳241校を完全網羅(重複・欠落なし)', () => {
     const allCodes = SCHOOLS_PRIVATE_TOKYO.schools.map((s) => s.code);
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_TOKYO, allCodes);
     expect(result.duplicates).toEqual([]);
     expect(result.missing).toHaveLength(0);
-    expect(PRIVATE_SCHOOL_DETAIL_TOKYO.schools.length).toBe(261);
+    expect(PRIVATE_SCHOOL_DETAIL_TOKYO.schools.length).toBe(264);
     expect(PRIVATE_SCHOOL_DETAIL_TOKYO.skipped.length).toBe(65);
   });
 
@@ -3042,6 +3042,41 @@ describe('PRIVATE_SCHOOL_DETAIL_TOKYO(大都市圏5県の最後・育伸社募�
     );
     expect(y2024?.totalCapacity).toBe(140);
     expect(yLatest?.totalCapacity).toBe(120);
+  });
+
+  it('掛-2(私立×多年度・12ページ目): 東京家政学院は2024年度と2026年度で総定員が完全一致', () => {
+    const y2024 = PRIVATE_SCHOOL_DETAIL_TOKYO.schools.find(
+      (s) => s.schoolCode === 'D113310100099' && s.fiscalYearLabel === '2024年度'
+    );
+    const yLatest = PRIVATE_SCHOOL_DETAIL_TOKYO.schools.find(
+      (s) => s.schoolCode === 'D113310100099' && s.fiscalYearLabel !== '2024年度'
+    );
+    expect(y2024?.totalCapacity).toBe(160);
+    expect(yLatest?.totalCapacity).toBe(160);
+  });
+
+  it('掛-2(私立×多年度・12ページ目): 東京家政大学附属女子は2024→2026年度でクラス再編を伴い総定員が変化', () => {
+    const y2024 = PRIVATE_SCHOOL_DETAIL_TOKYO.schools.find(
+      (s) => s.schoolCode === 'D113311900053' && s.fiscalYearLabel === '2024年度'
+    );
+    const yLatest = PRIVATE_SCHOOL_DETAIL_TOKYO.schools.find(
+      (s) => s.schoolCode === 'D113311900053' && s.fiscalYearLabel !== '2024年度'
+    );
+    expect(y2024?.totalCapacity).toBe(200);
+    expect(yLatest?.totalCapacity).toBe(160);
+  });
+
+  it('掛-2(私立×多年度・12ページ目): 東京純心女子は2024→2026年度で総定員140は一致するがコース間で再配分', () => {
+    const y2024 = PRIVATE_SCHOOL_DETAIL_TOKYO.schools.find(
+      (s) => s.schoolCode === 'D113320100052' && s.fiscalYearLabel === '2024年度'
+    );
+    const yLatest = PRIVATE_SCHOOL_DETAIL_TOKYO.schools.find(
+      (s) => s.schoolCode === 'D113320100052' && s.fiscalYearLabel !== '2024年度'
+    );
+    expect(y2024?.totalCapacity).toBe(140);
+    expect(yLatest?.totalCapacity).toBe(140);
+    expect(y2024?.courses.find((c) => c.courseName.includes('特進プログラム'))?.capacity).toBe(20);
+    expect(yLatest?.courses.find((c) => c.courseName === '特進コース(女、推薦)')?.capacity).toBe(20);
   });
 });
 
