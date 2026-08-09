@@ -1218,9 +1218,61 @@ describe('PRIVATE_SCHOOL_DETAIL_YAMAGUCHI(育伸社募集要項PDFで23校中20�
     expect(result.missing).toEqual([]);
   });
 
-  it('収録20校+スキップ3校(掲載なし)で参照台帳の23校と一致する', () => {
-    expect(PRIVATE_SCHOOL_DETAIL_YAMAGUCHI.schools.length).toBe(20);
+  it('収録40レコード(20校×令和8年度+20校×2024年度)+スキップ3校(掲載なし)で参照台帳の23校と一致する', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_YAMAGUCHI.schools.length).toBe(40);
     expect(PRIVATE_SCHOOL_DETAIL_YAMAGUCHI.skipped.length).toBe(3);
+    const distinctSchoolCodes = new Set(PRIVATE_SCHOOL_DETAIL_YAMAGUCHI.schools.map((s) => s.schoolCode));
+    expect(distinctSchoolCodes.size).toBe(20);
+  });
+
+  it('掛-2(私立×多年度): 高水(280→210)と野田学園(260→250)で定員減少を検出、他18校は完全一致', () => {
+    const takamizuOld = PRIVATE_SCHOOL_DETAIL_YAMAGUCHI.schools.find(
+      (s) => s.schoolCode === 'D135310000147' && s.fiscalYearLabel === '2024年度'
+    )!;
+    const takamizuNew = PRIVATE_SCHOOL_DETAIL_YAMAGUCHI.schools.find(
+      (s) => s.schoolCode === 'D135310000147' && s.fiscalYearLabel === '令和8年度'
+    )!;
+    expect(takamizuOld.totalCapacity).toBe(280);
+    expect(takamizuNew.totalCapacity).toBe(210);
+
+    const nodaOld = PRIVATE_SCHOOL_DETAIL_YAMAGUCHI.schools.find(
+      (s) => s.schoolCode === 'D135310000094' && s.fiscalYearLabel === '2024年度'
+    )!;
+    const nodaNew = PRIVATE_SCHOOL_DETAIL_YAMAGUCHI.schools.find(
+      (s) => s.schoolCode === 'D135310000094' && s.fiscalYearLabel === '令和8年度'
+    )!;
+    expect(nodaOld.totalCapacity).toBe(260);
+    expect(nodaNew.totalCapacity).toBe(250);
+
+    const unchangedCodes = [
+      'D135310000012',
+      'D135310000021',
+      'D135310000030',
+      'D135310000049',
+      'D135310000058',
+      'D135310000067',
+      'D135310000076',
+      'D135310000085',
+      'D135310000101',
+      'D135310000110',
+      'D135310000129',
+      'D135310000138',
+      'D135310000156',
+      'D135310000165',
+      'D135310000174',
+      'D135310000183',
+      'D135310000192',
+      'D135310000209',
+    ];
+    for (const code of unchangedCodes) {
+      const older = PRIVATE_SCHOOL_DETAIL_YAMAGUCHI.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '2024年度'
+      )!;
+      const newer = PRIVATE_SCHOOL_DETAIL_YAMAGUCHI.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '令和8年度'
+      )!;
+      expect(older.totalCapacity).toBe(newer.totalCapacity);
+    }
   });
 });
 
