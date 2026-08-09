@@ -321,6 +321,14 @@
  * 単一値(160)として記録されており本文の確立済み解釈(推薦/一般ブロックの加算)と食い違う可能性が
  * あり要再検証、桜丘は2024年度版が4コース制(難関選抜/文理特進/グローバル探究/キャリア探究)で
  * 2026年度版の3コース制(S/K/A)と1:1対応が取れないため、いずれも見送り。
+ * **2026-08-10further(7ページ目8校中6校を収録・2校は見送り・十文字は8ページ目へ継続)**: 品川学藝・
+ * 芝浦工業大学附属・下北沢成徳・自由学園・修徳(本文既存コメントとの整合を確認)の5校は総定員完全
+ * 一致。自由ヶ丘学園は135=135で総定員完全一致だがプログレス(15→25)とアドバンス(60→50)の間で
+ * コース間の再配分を検出。品川翔英は2024年度版が推薦17+一般18=35のように4頁目の加算ルールに
+ * 従うと合計350程度になり現行の「推薦・一般共通枠160」という単一枠解釈と2倍以上の乖離があるため、
+ * 芝国際は最難関選抜コースの2024年度版(一般35、旧2コース廃止に伴う新設直後の値)が現行の確立済み
+ * 値(5)と大きく乖離し、国際コースも2024年度版に推薦の行が見当たらず現行の推薦15+一般10という
+ * 構造と対応が取れないため、いずれも見送り。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -2957,6 +2965,75 @@ export const PRIVATE_SCHOOL_DETAIL_TOKYO: PrivateSchoolDetailFile = {
         { courseName: 'キャリアデザインコース(女、A・C推薦・一般①②共通枠、2026年度版は75へ増)', capacity: 70 },
       ],
       totalCapacity: 150,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310900073',
+      schoolName: '品川学藝高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(A推薦・B推薦・一般①②共通枠)', capacity: 50 },
+        { courseName: '音楽(A推薦・B推薦・一般①②共通枠)', capacity: 50 },
+      ],
+      totalCapacity: 100,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310800047',
+      schoolName: '芝浦工業大学附属高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(推薦)', capacity: 25 },
+        { courseName: '普通(一般)', capacity: 25 },
+      ],
+      totalCapacity: 50,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311200130',
+      schoolName: '下北沢成徳高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        {
+          courseName: 'GL(グローバルエデュケーション)コース・BR(ブロードエデュケーション)セレクトクラス・BR(ブロードエデュケーション)コース(推薦・一般全区分共通の単一枠、普通科計)',
+          capacity: 100,
+        },
+      ],
+      totalCapacity: 100,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311000016',
+      schoolName: '自由ヶ丘学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'プログレスコース(推薦・A日程・B日程併優・一般共通枠、2026年度版は25へ増)', capacity: 15 },
+        { courseName: 'アドバンスコース(推薦・A日程・B日程併優・一般共通枠、2026年度版は50へ減)', capacity: 60 },
+        { courseName: 'アカデミックコース(推薦・A日程一般優遇・A日程一般・B日程一般共通枠)', capacity: 60 },
+      ],
+      totalCapacity: 135,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113322200011',
+      schoolName: '自由学園高等部',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(推薦、内部進学を含む)', capacity: 60 },
+        { courseName: '普通(一般、内部進学を含む)', capacity: 60 },
+      ],
+      totalCapacity: 120,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113312200021',
+      schoolName: '修徳高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特進クラス(A推薦・自己推薦・B推薦・一般①②共通枠)', capacity: 50 },
+        { courseName: '文理進学クラス(A推薦・B推薦・一般①共通枠)', capacity: 80 },
+      ],
+      totalCapacity: 130,
       source: KAKE2_2024_TOKYO_SOURCE,
     },
   ],
