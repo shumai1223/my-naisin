@@ -825,6 +825,12 @@ describe('PRIVATE_SCHOOL_DETAIL_HYOGO(55校中43校を収録・残り12校は完
     expect(PRIVATE_SCHOOL_DETAIL_HYOGO.schools.length).toBe(43);
     expect(PRIVATE_SCHOOL_DETAIL_HYOGO.skipped.length).toBe(12);
   });
+
+  it('掛-2着手時に発見・是正: 神戸常盤女子のコース名誤り(ts上「特別選学コース」を「特別進学コース」に修正)', () => {
+    const kobeTokiwa = PRIVATE_SCHOOL_DETAIL_HYOGO.schools.find((s) => s.schoolCode === 'D128310000146')!;
+    expect(kobeTokiwa.courses.some((c) => c.courseName === '特別進学コース')).toBe(true);
+    expect(kobeTokiwa.totalCapacity).toBe(285);
+  });
 });
 
 describe('PRIVATE_SCHOOL_DETAIL_NAGANO(県プレスリリースの全日制16校+天龍興譲・地球環境・コードアカデミーを追加収録・参照台帳26校を完全収録)', () => {

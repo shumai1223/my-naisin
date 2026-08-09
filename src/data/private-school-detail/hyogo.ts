@@ -15,6 +15,13 @@
  * からの外部募集なし)、小林聖心女子学院は2013年度以降高校一般入試なし、自由ヶ丘は2021年休校、
  * 相生学院・第一学院養父校・ＡＩＥ国際は広域通信制(県別定員の性質が異なる)と判明し、いずれも
  * skippedへ理由付きで記録した。
+ *
+ * 【掛-2（私立×多年度）着手時の再検証(2026-08-09)】miyagi/oita/kagoshima/hiroshima等で
+ * 発覚した誤りを警戒し全43校の現行(2026年度)データをpdftotext -layoutで最新PDFと再突合した。
+ * 神戸常盤女子高等学校のコース名がts上「特別選学コース」となっていたが現行PDFの実際の表記は
+ * 「特別進学コース」の誤記(定員30は正しかった)と判明し是正した。他42校は総定員・コース名とも
+ * 完全に一致し、隣接校ブロック取り違えのような重大な誤りは見つからなかった。**この県は43校と
+ * 大規模なため、2024年度版との掛-2多年度比較は次回以降に持ち越す。**
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -248,7 +255,7 @@ export const PRIVATE_SCHOOL_DETAIL_HYOGO: PrivateSchoolDetailFile = {
       schoolName: '神戸常盤女子高等学校',
       fiscalYearLabel: '2026年度',
       courses: [
-        { courseName: '特別選学コース', capacity: 30 },
+        { courseName: '特別進学コース', capacity: 30 },
         { courseName: '未来創造コース', capacity: 105 },
         { courseName: '看護医療コース', capacity: 60 },
         { courseName: 'こども教育コース', capacity: 30 },
