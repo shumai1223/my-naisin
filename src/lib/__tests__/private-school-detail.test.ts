@@ -331,9 +331,22 @@ describe('PRIVATE_SCHOOL_DETAIL_AKITA(5校中2校を収録)', () => {
     expect(result.missing).toEqual([]);
   });
 
-  it('収録2校+スキップ3校で参照台帳の5校と一致する', () => {
-    expect(PRIVATE_SCHOOL_DETAIL_AKITA.schools.length).toBe(2);
+  it('収録3レコード(2校+掛-2多年度1レコード)+スキップ3校で参照台帳の5校と一致する', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_AKITA.schools.length).toBe(3);
     expect(PRIVATE_SCHOOL_DETAIL_AKITA.skipped.length).toBe(3);
+    const distinctSchoolCodes = new Set(PRIVATE_SCHOOL_DETAIL_AKITA.schools.map((s) => s.schoolCode));
+    expect(distinctSchoolCodes.size).toBe(2);
+  });
+
+  it('掛-2(私立×多年度): ノースアジア大学明桜は令和7年度と令和8年度で全日制4コースの定員が完全に同一(170名)', () => {
+    const r7 = PRIVATE_SCHOOL_DETAIL_AKITA.schools.find(
+      (s) => s.schoolCode === 'D105320159043' && s.fiscalYearLabel === '令和7年度'
+    )!;
+    const r8 = PRIVATE_SCHOOL_DETAIL_AKITA.schools.find(
+      (s) => s.schoolCode === 'D105320159043' && s.fiscalYearLabel === '令和8年度'
+    )!;
+    expect(r7.totalCapacity).toBe(r8.totalCapacity);
+    expect(r7.courses).toEqual(r8.courses);
   });
 });
 
