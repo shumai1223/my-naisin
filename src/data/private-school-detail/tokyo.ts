@@ -281,6 +281,12 @@
  * 正確に合致する構造であり、120+120=240として収録できた。潤徳女子は複数の第三者要約間で
  * 特進コースの推薦B/一般の定員が「18名」「35名」と食い違い、美術デザインコースの定員も
  * 確認できないため、確度の高い単一の値を確定できず捏造ゼロ原則によりスキップ台帳へ追加。
+ * **2026-08-10追記(掛-2私立×多年度・大都市圏5県の5つ目=最後)**: osaka完走を受けtokyoに着手。
+ * ikushin 03913.pdfのWayback CDX APIで2023年12月8日キャプチャ(19頁「2024年度」版)を発掘し、
+ * PyMuPDFビジョン解析で1頁目の私立校3校(国立・高専は対象外)を再突合。愛国・青山学院高等部の
+ * 2校は総定員完全一致。足立学園は160→120(-40、総合コースが推薦ブロック40+一般ブロック40の
+ * 2独立プールから単一ブロック40への再編)を検出(推薦/一般ブロックの加算解釈は本文4頁目の
+ * 確立済みルールと整合)。19頁規模のため複数周回に分けて処理を継続する。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -288,6 +294,13 @@ const IKUSHIN_TOKYO_SOURCE = {
   url: 'https://www.ikushin.co.jp/school/pdf/03913.pdf',
   docTitle: '2026年度 国立高校・高専・私立高校 募集要項【東京都】（(株)育伸社 入試情報課・2025年11月4日現在）',
   fetchedAt: '2026-07-31',
+  sourceTier: 'secondary' as const,
+};
+
+const KAKE2_2024_TOKYO_SOURCE = {
+  url: 'https://www.ikushin.co.jp/school/PDF/03913.pdf',
+  docTitle: '2024年度 国立高校・高専・私立高校 募集要項【東京都】(株式会社育伸社 入試情報課・2023年12月8日現在・Web Archive経由で取得)',
+  fetchedAt: '2026-08-10',
   sourceTier: 'secondary' as const,
 };
 
@@ -2488,6 +2501,46 @@ export const PRIVATE_SCHOOL_DETAIL_TOKYO: PrivateSchoolDetailFile = {
         fetchedAt: '2026-08-04',
         sourceTier: 'primary' as const,
       },
+    },
+    {
+      schoolCode: 'D113312300011',
+      schoolName: '愛国高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(A推薦・B/C推薦・一般共通枠)', capacity: 80 },
+        { courseName: '商業(A推薦・B/C推薦・一般共通枠)', capacity: 40 },
+        { courseName: '家政(A推薦・B/C推薦・一般共通枠)', capacity: 40 },
+        { courseName: '衛生看護(A推薦・B/C推薦・一般共通枠)', capacity: 20 },
+      ],
+      totalCapacity: 180,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311300013',
+      schoolName: '青山学院高等部',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(推薦・約)', capacity: 65 },
+        { courseName: '普通(帰国・約)', capacity: 25 },
+        { courseName: '普通(一般・約)', capacity: 70 },
+      ],
+      totalCapacity: 160,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113312100013',
+      schoolName: '足立学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '探究コース(男、A推薦・B推薦共通枠)', capacity: 20 },
+        { courseName: '探究コース(男、1回・2回一般共通枠)', capacity: 20 },
+        { courseName: '文理コース(男、A推薦・B推薦共通枠)', capacity: 20 },
+        { courseName: '文理コース(男、1回・2回一般共通枠)', capacity: 20 },
+        { courseName: '総合コース(男、A推薦・志自己推薦共通枠、2026年度版は一般枠と統合され単一ブロック40名に再編)', capacity: 40 },
+        { courseName: '総合コース(男、1回・2回一般共通枠、2026年度版は推薦枠と統合され単一ブロック40名に再編)', capacity: 40 },
+      ],
+      totalCapacity: 160,
+      source: KAKE2_2024_TOKYO_SOURCE,
     },
   ],
   skipped: [
