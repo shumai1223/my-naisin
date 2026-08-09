@@ -238,9 +238,21 @@ describe('PRIVATE_SCHOOL_DETAIL_KOCHI(パイロット実データ)', () => {
     expect(result.missing).toEqual([]);
   });
 
-  it('収録4校+スキップ5校で参照台帳の9校と一致する', () => {
-    expect(PRIVATE_SCHOOL_DETAIL_KOCHI.schools.length).toBe(4);
+  it('収録8レコード(4校+掛-2多年度4レコード)+スキップ5校で参照台帳の9校と一致する', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_KOCHI.schools.length).toBe(8);
     expect(PRIVATE_SCHOOL_DETAIL_KOCHI.skipped.length).toBe(5);
+    const distinctSchoolCodes = new Set(PRIVATE_SCHOOL_DETAIL_KOCHI.schools.map((s) => s.schoolCode));
+    expect(distinctSchoolCodes.size).toBe(4);
+  });
+
+  it('掛-2(私立×多年度): 太平洋学園・土佐塾・高知学芸・土佐高等学校の4校とも令和7年度と令和8年度で定員が完全に同一', () => {
+    const codes = ['D139310000090', 'D139310000081', 'D139310000054', 'D139310000018'];
+    for (const code of codes) {
+      const r7 = PRIVATE_SCHOOL_DETAIL_KOCHI.schools.find((s) => s.schoolCode === code && s.fiscalYearLabel === '令和7年度')!;
+      const r8 = PRIVATE_SCHOOL_DETAIL_KOCHI.schools.find((s) => s.schoolCode === code && s.fiscalYearLabel === '令和8年度')!;
+      expect(r7.totalCapacity).toBe(r8.totalCapacity);
+      expect(r7.courses).toEqual(r8.courses);
+    }
   });
 });
 

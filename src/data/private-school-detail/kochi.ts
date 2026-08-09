@@ -12,8 +12,21 @@
  * 　（推薦ルートが存在しないと合理的に推定できるため、一般入試の定員がそのまま総定員となる。
  * 　高知学芸・土佐高等学校が該当）
  * それ以外（推薦枠・一般枠が別々の数字で併記され合計の明記が無い学校）は正直にスキップする。
+ *
+ * 【掛-2（私立×多年度）追加】同じ連合会が公表する令和7年度版の同種リーフレット
+ * （kochishiritsu_r07_entranceexamination_03.pdf）を発見。既存4校（太平洋学園・土佐塾・
+ * 高知学芸・土佐高等学校）全てについて、令和8年度と定員が完全に同一だった（PyMuPDFで
+ * ビジョン解析・pdftoppmはCJKフォント埋め込み欠損で空白画像を返したためPyMuPDF
+ * フォールバックを使用）。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
+
+const KAKE2_R7_SOURCE = {
+  url: 'https://kochi-shiritsuchuko.com/pdf/kochishiritsu_r07_entranceexamination_03.pdf',
+  docTitle: '令和7年度 高知県私立高等学校 募集要項一覧［一般入試］（高知県私立中学高等学校連合会・令和6年10月1日現在）',
+  fetchedAt: '2026-08-09',
+  sourceTier: 'primary' as const,
+};
 
 export const PRIVATE_SCHOOL_DETAIL_KOCHI: PrivateSchoolDetailFile = {
   prefectureCode: 'kochi',
@@ -75,6 +88,44 @@ export const PRIVATE_SCHOOL_DETAIL_KOCHI: PrivateSchoolDetailFile = {
         fetchedAt: '2026-07-30',
         sourceTier: 'primary' as const,
       },
+    },
+    {
+      schoolCode: 'D139310000090',
+      schoolName: '太平洋学園高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [
+        { courseName: '総合学科（定時制）', capacity: 80 },
+        { courseName: '総合学科（通信制）', capacity: 90 },
+      ],
+      totalCapacity: 170,
+      source: { ...KAKE2_R7_SOURCE, docTitle: KAKE2_R7_SOURCE.docTitle + '（各学科とも「推薦・一般入試合計」と明記・令和8年度と完全に同一）' },
+    },
+    {
+      schoolCode: 'D139310000081',
+      schoolName: '土佐塾高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [
+        { courseName: '普通科', capacity: 45 },
+        { courseName: 'まなび創造コース', capacity: 10 },
+      ],
+      totalCapacity: 55,
+      source: { ...KAKE2_R7_SOURCE, docTitle: KAKE2_R7_SOURCE.docTitle + '（普通科は「推薦・一般入試合計45名」と明記、まなび創造コースは「10名程度」・令和8年度と完全に同一）' },
+    },
+    {
+      schoolCode: 'D139310000054',
+      schoolName: '高知学芸高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [{ courseName: '普通科', capacity: 30 }],
+      totalCapacity: 30,
+      source: { ...KAKE2_R7_SOURCE, docTitle: KAKE2_R7_SOURCE.docTitle + '（「約30名」・令和8年度と完全に同一）' },
+    },
+    {
+      schoolCode: 'D139310000018',
+      schoolName: '土佐高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [{ courseName: '普通科（S方式・H方式合計）', capacity: 50 }],
+      totalCapacity: 50,
+      source: { ...KAKE2_R7_SOURCE, docTitle: KAKE2_R7_SOURCE.docTitle + '（「約50名(S方式・H方式合計)」・令和8年度と完全に同一）' },
     },
   ],
   skipped: [
