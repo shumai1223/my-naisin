@@ -1130,9 +1130,58 @@ describe('PRIVATE_SCHOOL_DETAIL_KAGOSHIMA(育伸社募集要項PDFで22校中21�
     expect(result.missing).toEqual([]);
   });
 
-  it('収録21校+スキップ1校(掲載なし)で参照台帳の22校と一致する', () => {
-    expect(PRIVATE_SCHOOL_DETAIL_KAGOSHIMA.schools.length).toBe(21);
+  it('収録42レコード(21校×令和8年度+21校×2024年度)+スキップ1校(掲載なし)で参照台帳の22校と一致する', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_KAGOSHIMA.schools.length).toBe(42);
     expect(PRIVATE_SCHOOL_DETAIL_KAGOSHIMA.skipped.length).toBe(1);
+    const distinctSchoolCodes = new Set(PRIVATE_SCHOOL_DETAIL_KAGOSHIMA.schools.map((s) => s.schoolCode));
+    expect(distinctSchoolCodes.size).toBe(21);
+  });
+
+  it('掛-2着手時に発見・是正: 出水中央(誤195→正235)と鹿児島第一(誤55→正155)を修正', () => {
+    const izumi = PRIVATE_SCHOOL_DETAIL_KAGOSHIMA.schools.find(
+      (s) => s.schoolCode === 'D146310000135' && s.fiscalYearLabel === '令和8年度'
+    )!;
+    expect(izumi.totalCapacity).toBe(235);
+
+    const daiichi = PRIVATE_SCHOOL_DETAIL_KAGOSHIMA.schools.find(
+      (s) => s.schoolCode === 'D146310000153' && s.fiscalYearLabel === '令和8年度'
+    )!;
+    expect(daiichi.totalCapacity).toBe(155);
+  });
+
+  it('掛-2(私立×多年度): 21校全てで総定員が2024年度と令和8年度で完全一致(鹿児島県は変化ゼロ)', () => {
+    const codes = [
+      'D146310000019',
+      'D146310000028',
+      'D146310000037',
+      'D146310000046',
+      'D146310000055',
+      'D146310000064',
+      'D146310000073',
+      'D146310000082',
+      'D146310000091',
+      'D146310000108',
+      'D146310000117',
+      'D146310000126',
+      'D146310000135',
+      'D146310000144',
+      'D146310000153',
+      'D146310000162',
+      'D146310000171',
+      'D146310000180',
+      'D146310000199',
+      'D146310000206',
+      'D146310000215',
+    ];
+    for (const code of codes) {
+      const older = PRIVATE_SCHOOL_DETAIL_KAGOSHIMA.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '2024年度'
+      )!;
+      const newer = PRIVATE_SCHOOL_DETAIL_KAGOSHIMA.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '令和8年度'
+      )!;
+      expect(older.totalCapacity).toBe(newer.totalCapacity);
+    }
   });
 });
 
