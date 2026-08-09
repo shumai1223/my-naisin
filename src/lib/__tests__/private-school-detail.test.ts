@@ -988,7 +988,7 @@ describe('PRIVATE_SCHOOL_DETAIL_KAGOSHIMA(育伸社募集要項PDFで22校中21�
   });
 });
 
-describe('PRIVATE_SCHOOL_DETAIL_YAMAGATA(育伸社募集要項PDFで15校中12校を収録・羽黒は数値記載なし・和順館/基督教独立学園は掲載なしで見送り)', () => {
+describe('PRIVATE_SCHOOL_DETAIL_YAMAGATA(育伸社募集要項PDFで15校中13校を収録・和順館/基督教独立学園は掲載なしで見送り)', () => {
   it('収録した学校は全てcourses合計とtotalCapacityが一致する', () => {
     for (const school of PRIVATE_SCHOOL_DETAIL_YAMAGATA.schools) {
       expect(checkCourseCapacitySum(school)).toBe(true);
@@ -1002,9 +1002,29 @@ describe('PRIVATE_SCHOOL_DETAIL_YAMAGATA(育伸社募集要項PDFで15校中12�
     expect(result.missing).toEqual([]);
   });
 
-  it('収録12校+スキップ3校(数値記載なし1校+掲載なし2校)で参照台帳の15校と一致する', () => {
-    expect(PRIVATE_SCHOOL_DETAIL_YAMAGATA.schools.length).toBe(12);
-    expect(PRIVATE_SCHOOL_DETAIL_YAMAGATA.skipped.length).toBe(3);
+  it('収録25レコード(12校×2026年度+13校×2024年度)+スキップ2校(掲載なし)で参照台帳の15校と一致する', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_YAMAGATA.schools.length).toBe(25);
+    expect(PRIVATE_SCHOOL_DETAIL_YAMAGATA.skipped.length).toBe(2);
+    const distinctSchoolCodes = new Set(PRIVATE_SCHOOL_DETAIL_YAMAGATA.schools.map((s) => s.schoolCode));
+    expect(distinctSchoolCodes.size).toBe(13);
+  });
+
+  it('掛-2(私立×多年度): 新庄東はSコースのみ70→105に増加(総定員155→190)', () => {
+    const older = PRIVATE_SCHOOL_DETAIL_YAMAGATA.schools.find(
+      (s) => s.schoolCode === 'D106320551019' && s.fiscalYearLabel === '2024年度'
+    )!;
+    const newer = PRIVATE_SCHOOL_DETAIL_YAMAGATA.schools.find(
+      (s) => s.schoolCode === 'D106320551019' && s.fiscalYearLabel === '令和8年度'
+    )!;
+    expect(older.totalCapacity).toBe(155);
+    expect(newer.totalCapacity).toBe(190);
+  });
+
+  it('掛-2(私立×多年度): 羽黒は2024年度のみ収録(2026年度は現行PDFに数値記載なしのため未収録)', () => {
+    const records = PRIVATE_SCHOOL_DETAIL_YAMAGATA.schools.filter((s) => s.schoolCode === 'D106320351011');
+    expect(records.length).toBe(1);
+    expect(records[0].fiscalYearLabel).toBe('2024年度');
+    expect(records[0].totalCapacity).toBe(290);
   });
 });
 
