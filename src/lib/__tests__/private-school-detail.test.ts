@@ -2192,13 +2192,59 @@ describe('PRIVATE_SCHOOL_DETAIL_OSAKA(大都市圏5県の3県目・育伸社募�
     }
   });
 
-  it('収録91校・スキップ16校で参照台帳107校を完全網羅(重複・欠落なし)', () => {
+  it('収録91校(掛-2の2024年度16校分含め107レコード)・スキップ16校で参照台帳107校を完全網羅(重複・欠落なし)', () => {
     const allCodes = SCHOOLS_PRIVATE_OSAKA.schools.map((s) => s.code);
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_OSAKA, allCodes);
     expect(result.duplicates).toEqual([]);
     expect(result.missing).toHaveLength(0);
-    expect(PRIVATE_SCHOOL_DETAIL_OSAKA.schools.length).toBe(91);
+    expect(PRIVATE_SCHOOL_DETAIL_OSAKA.schools.length).toBe(107);
     expect(PRIVATE_SCHOOL_DETAIL_OSAKA.skipped.length).toBe(16);
+  });
+
+  it('掛-2(私立×多年度): アサンプション国際・アナン学園・あべの翔学・上宮太子・上宮・英真学園・追手門学院・追手門学院大手前・大阪・大阪偕星学園・大阪学院大学・大阪薫英女学院・大阪暁光・大阪学芸の14校は2024年度と2026年度で総定員が完全一致', () => {
+    const pairs: Array<[string, number]> = [
+      ['D127310000478', 120],
+      ['D127310000566', 70],
+      ['D127310000833', 300],
+      ['D127310000717', 175],
+      ['D127310000094', 480],
+      ['D127310000780', 300],
+      ['D127310000619', 350],
+      ['D127310000389', 145],
+      ['D127310000156', 550],
+      ['D127310000806', 320],
+      ['D127310000334', 400],
+      ['D127310000502', 200],
+      ['D127310000432', 280],
+      ['D127310000842', 600],
+    ];
+    for (const [code, total] of pairs) {
+      const y2024 = PRIVATE_SCHOOL_DETAIL_OSAKA.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '2024年度'
+      );
+      const yLatest = PRIVATE_SCHOOL_DETAIL_OSAKA.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel !== '2024年度'
+      );
+      expect(y2024?.totalCapacity).toBe(total);
+      expect(yLatest?.totalCapacity).toBe(total);
+    }
+  });
+
+  it('掛-2(私立×多年度): 大阪産業大学附属・大阪国際の2校は2024→2026年度で実際の変化を検出', () => {
+    const pairs: Array<[string, number, number]> = [
+      ['D127310000922', 560, 680],
+      ['D127310000600', 305, 295],
+    ];
+    for (const [code, before, after] of pairs) {
+      const y2024 = PRIVATE_SCHOOL_DETAIL_OSAKA.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '2024年度'
+      );
+      const yLatest = PRIVATE_SCHOOL_DETAIL_OSAKA.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel !== '2024年度'
+      );
+      expect(y2024?.totalCapacity).toBe(before);
+      expect(yLatest?.totalCapacity).toBe(after);
+    }
   });
 });
 

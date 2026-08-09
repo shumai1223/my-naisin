@@ -19,6 +19,14 @@
  * 約120名」)から収録。出願時にコース選択せず1本の定員枠として運用されており、履正社等の
  * 既存precedent(単一の約数字は高確度の一次情報として受容)と整合するため収録可とした。
  * 大阪信愛学院高等学校は令和9年度(次サイクル)の概数のみで正確な定員が確認できずスキップ。
+ * **2026-08-10追記(掛-2私立×多年度・大都市圏5県の4つ目)**: ikushin 03927.pdfのWayback CDX APIで
+ * 2023年11月6日キャプチャ(「2024年度」版)を発掘し、1〜2ページ目16校を再突合。うち14校
+ * (アサンプション国際・アナン学園・あべの翔学・上宮太子・上宮・英真学園・追手門学院・
+ * 追手門学院大手前・大阪・大阪偕星学園・大阪学院大学・大阪薫英女学院・大阪暁光・大阪学芸)は
+ * 総定員完全一致(変化なし)。大阪産業大学附属は560→680(+120、特進コースSと国際情報
+ * コミュニケーションコースが新設)、大阪国際は305→295(-10、Ⅱ類総合探究/幼児保育進学コースが
+ * 未来探究/幼児保育進学コースへ再編)を検出。大阪女学院(概数のみでスキップ中)は2024年度版でも
+ * 同じ約115名という概数のみで、既存のスキップ判断が引き続き妥当と確認。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -26,6 +34,13 @@ const IKUSHIN_OSAKA_SOURCE = {
   url: 'https://www.ikushin.co.jp/school/pdf/03927.pdf',
   docTitle: '2026年度 国立高校・高専・私立高校 募集要項【大阪府】（(株)育伸社 入試情報課・2025年11月4日現在）',
   fetchedAt: '2026-07-31',
+  sourceTier: 'secondary' as const,
+};
+
+const KAKE2_2024_OSAKA_SOURCE = {
+  url: 'https://www.ikushin.co.jp/school/PDF/03927.pdf',
+  docTitle: '2024年度 私立高校 募集要項【大阪府】(株式会社育伸社 入試情報課・2023年9月28日現在・Web Archive経由で取得)',
+  fetchedAt: '2026-08-10',
   sourceTier: 'secondary' as const,
 };
 
@@ -1487,6 +1502,210 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
         fetchedAt: '2026-07-31',
         sourceTier: 'primary' as const,
       },
+    },
+    {
+      schoolCode: 'D127310000478',
+      schoolName: 'アサンプション国際高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        {
+          courseName: 'スーペリアコース・イングリッシュコース・アカデミックⅠ類/Ⅱ類コース(全コース計)',
+          capacity: 120,
+        },
+      ],
+      totalCapacity: 120,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000566',
+      schoolName: 'アナン学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '看護(専願)', capacity: 40 },
+        { courseName: '調理(専願)', capacity: 30 },
+      ],
+      totalCapacity: 70,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000833',
+      schoolName: 'あべの翔学高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特進Ⅰ類コース', capacity: 25 },
+        { courseName: '特進Ⅱ類コース', capacity: 35 },
+        { courseName: '普通進学コース', capacity: 240 },
+      ],
+      totalCapacity: 300,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000717',
+      schoolName: '上宮太子高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特進Ⅰ類(国公立大学)コース(約)', capacity: 35 },
+        { courseName: '特進Ⅱ類(難関私立大学)コース(約)', capacity: 35 },
+        { courseName: '総合進学(有名私立大学)コース(約)', capacity: 105 },
+      ],
+      totalCapacity: 175,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000094',
+      schoolName: '上宮高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'パワーコース', capacity: 40 },
+        { courseName: '英数コース', capacity: 120 },
+        { courseName: 'プレップコース', capacity: 320 },
+      ],
+      totalCapacity: 480,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000780',
+      schoolName: '英真学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '文理特進コース', capacity: 50 },
+        { courseName: '情報進学コース', capacity: 60 },
+        { courseName: '総合進学コース', capacity: 190 },
+      ],
+      totalCapacity: 300,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000619',
+      schoolName: '追手門学院高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '創造コース(含内部)', capacity: 35 },
+        { courseName: '特選SSコース(含内部)', capacity: 40 },
+        { courseName: 'Ⅰ類コース(含内部)', capacity: 120 },
+        { courseName: 'Ⅱ類コース(含内部・スポーツ35)', capacity: 155 },
+      ],
+      totalCapacity: 350,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000389',
+      schoolName: '追手門学院大手前高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        {
+          courseName: 'スーパー選抜コース・グローバルアカデミー/グローバルサイエンスコース・特進コース(普通科計・外部募集、約)',
+          capacity: 145,
+        },
+      ],
+      totalCapacity: 145,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000156',
+      schoolName: '大阪高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '文理特進コース', capacity: 120 },
+        { courseName: '総合進学コース', capacity: 360 },
+        { courseName: '探究コース', capacity: 70 },
+      ],
+      totalCapacity: 550,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000806',
+      schoolName: '大阪偕星学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特進コース', capacity: 50 },
+        { courseName: '文理進学コース', capacity: 50 },
+        { courseName: '進路探究コース', capacity: 130 },
+        { courseName: 'スポーツコース(専願のみ)', capacity: 90 },
+      ],
+      totalCapacity: 320,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000334',
+      schoolName: '大阪学院大学高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        {
+          courseName: '普通コース・特進コース・国際コース・スポーツ科学コース(普通科計)',
+          capacity: 400,
+        },
+      ],
+      totalCapacity: 400,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000502',
+      schoolName: '大阪薫英女学院高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '国際科(国際特進コース・国際進学コース、国際科計、コース別内訳非公表)', capacity: 80 },
+        {
+          courseName: '普通科(文理特進・英語進学・文理進学・総合進学(2024年版は保育進学も含む)・スポーツ特技の5コース計、コース別内訳非公表)',
+          capacity: 120,
+        },
+      ],
+      totalCapacity: 200,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000922',
+      schoolName: '大阪産業大学附属高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特進コースⅠ', capacity: 80 },
+        { courseName: '特進コースⅡ', capacity: 80 },
+        { courseName: '進学コース', capacity: 240 },
+        { courseName: 'スポーツコース(男子専願のみ)', capacity: 80 },
+        { courseName: '国際(グローバルコース)', capacity: 80 },
+      ],
+      totalCapacity: 560,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000432',
+      schoolName: '大阪暁光高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通科(教育探究コース)', capacity: 35 },
+        { courseName: '普通科(幼児教育コース)', capacity: 70 },
+        { courseName: '普通科(進学総合コース)', capacity: 105 },
+        { courseName: '看護科(専願のみ)', capacity: 70 },
+      ],
+      totalCapacity: 280,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000600',
+      schoolName: '大阪国際高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'Ⅰ類国際バカロレアコース', capacity: 25 },
+        { courseName: 'Ⅰ類スーパー文理探究コース(プログラムα・β計)', capacity: 140 },
+        { courseName: 'Ⅱ類総合探究コース・Ⅱ類幼児保育進学コース(Ⅱ類計)', capacity: 140 },
+      ],
+      totalCapacity: 305,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000842',
+      schoolName: '大阪学芸高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '国際科(DD20、グローバル・留学60、国際計)', capacity: 80 },
+        { courseName: '普通科選抜特進コース', capacity: 60 },
+        { courseName: '普通科特進コース(Ⅰ類・Ⅱ類、特進計)', capacity: 200 },
+        { courseName: '普通科特進看護コース', capacity: 40 },
+        { courseName: '普通科進学コース', capacity: 160 },
+        { courseName: '普通科特技コース(専願のみ)', capacity: 60 },
+      ],
+      totalCapacity: 600,
+      source: KAKE2_2024_OSAKA_SOURCE,
     },
   ],
   skipped: [
