@@ -32,6 +32,13 @@
  * 注記を裏付ける傍証となった)。大阪桐蔭は2024年度版(外部募集Ⅱ類80名を含む合計450)と2026年度版
  * (内部進学生を除く公式サイト値・Ⅱ類無しの合計400)で前提が異なり単純比較不可のため要注記付きで収録。
  * 大阪夕陽丘学園は360→380(+20)でコース再編(英語国際→PBLへ改称等)を検出。
+ * **2026-08-10further(4ページ目11校中10校を収録・1校は前提不一致で見送り)**: 金蘭会・関西大学高等部・
+ * 関西福祉科学大学・関西大倉・賢明学院・建国・香ヶ丘リベルテの7校は総定員完全一致。近畿大学泉州は
+ * 240→210(-30、本校分のみ・3コース均等減)、近畿大学附属は640→650(+10)を検出。関西大学北陽は
+ * 280→385(+105)だが2026年度公式サイト値が「内部進学予定者を含む」と明記される一方2024年度版の
+ * 内部進学生の扱いが不明確なため要注記付きで収録。関西大学第一は2024年度版が専願A/B/C(109/40/19以内)
+ * +併願「若干」という測定基盤自体が異なる概数構成で、2026年度版(内部進学予定者を含む合計400・
+ * courses未分解)と単純比較不可のため今回は見送り。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -1812,6 +1819,123 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
         { courseName: '美術コース', capacity: 36 },
       ],
       totalCapacity: 360,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000147',
+      schoolName: '金蘭会高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        {
+          courseName: '文理進学／看護・医療／こども教育／国際教養(グローバルスタンダード)／アスリート(全コース計、含内部)',
+          capacity: 210,
+        },
+      ],
+      totalCapacity: 210,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000726',
+      schoolName: '関西大学高等部',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通科', capacity: 50 }],
+      totalCapacity: 50,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000487',
+      schoolName: '関西福祉科学大学高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特別進学Ⅰコース', capacity: 30 },
+        { courseName: '特別進学Ⅱコース', capacity: 70 },
+        { courseName: '進学コース', capacity: 140 },
+        { courseName: '保育進学コース(女子のみ)', capacity: 30 },
+      ],
+      totalCapacity: 270,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000398',
+      schoolName: '関西大倉高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特進Sコース(約)', capacity: 35 },
+        { courseName: '特進コース(約・総合コースは2024年度時点で既に募集停止)', capacity: 280 },
+      ],
+      totalCapacity: 315,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000575',
+      schoolName: '賢明学院高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '関西学院大学特進サイエンスコース(含内部)', capacity: 70 },
+        { courseName: '特進エグゼコース(含内部)', capacity: 50 },
+        { courseName: '特進コース(含内部)', capacity: 100 },
+      ],
+      totalCapacity: 220,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000263',
+      schoolName: '建国高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通(特進30・総合50)', capacity: 80 }],
+      totalCapacity: 80,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000281',
+      schoolName: '香ヶ丘リベルテ高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'ファッションビジネス／フィジカル計(専願)', capacity: 70 },
+        {
+          courseName: '美容芸術／幼児教育／クッキングエキスパート／ライフデザイン／アンダンテ(計)',
+          capacity: 152,
+        },
+      ],
+      totalCapacity: 222,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000584',
+      schoolName: '近畿大学泉州高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '英数特進コース(本校分のみ)', capacity: 80 },
+        { courseName: '進学Ⅰ類コース(本校分のみ)', capacity: 80 },
+        { courseName: '進学Ⅱ類コース(本校分のみ)', capacity: 80 },
+      ],
+      totalCapacity: 240,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000548',
+      schoolName: '近畿大学附属高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'Super文理コース', capacity: 80 },
+        { courseName: '特進文理コースⅠ', capacity: 40 },
+        { courseName: '特進文理コースⅡ', capacity: 80 },
+        { courseName: '英語特化コース', capacity: 40 },
+        { courseName: '進学コース', capacity: 400 },
+      ],
+      totalCapacity: 640,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000771',
+      schoolName: '関西大学北陽高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特進アドバンスコース(2026年度公式サイト値は内部進学予定者を含む旨明記・本レコードの内部進学生の扱いは不明確なため差の一部は前提差異の可能性)', capacity: 30 },
+        { courseName: '文理コース', capacity: 180 },
+        { courseName: '進学アスリートコース(専願のみ)', capacity: 70 },
+      ],
+      totalCapacity: 280,
       source: KAKE2_2024_OSAKA_SOURCE,
     },
   ],
