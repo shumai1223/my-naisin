@@ -5,12 +5,14 @@
 import { PRIVATE_SCHOOL_TUITION_TOTTORI } from './tottori';
 import { PRIVATE_SCHOOL_TUITION_TOKUSHIMA } from './tokushima';
 import { PRIVATE_SCHOOL_TUITION_AKITA } from './akita';
+import { PRIVATE_SCHOOL_TUITION_FUKUI } from './fukui';
 import type { PrivateSchoolTuitionFile } from '@/lib/private-school-tuition';
 
 export const PRIVATE_SCHOOL_TUITION_BY_PREFECTURE: Record<string, PrivateSchoolTuitionFile> = {
   tottori: PRIVATE_SCHOOL_TUITION_TOTTORI,
   tokushima: PRIVATE_SCHOOL_TUITION_TOKUSHIMA,
   akita: PRIVATE_SCHOOL_TUITION_AKITA,
+  fukui: PRIVATE_SCHOOL_TUITION_FUKUI,
 };
 
 export const PRIVATE_SCHOOL_TUITION_FILES: PrivateSchoolTuitionFile[] = Object.values(

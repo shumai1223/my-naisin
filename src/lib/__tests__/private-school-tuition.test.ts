@@ -8,10 +8,12 @@ import {
 import { PRIVATE_SCHOOL_TUITION_TOTTORI } from '@/data/private-school-tuition/tottori';
 import { PRIVATE_SCHOOL_TUITION_TOKUSHIMA } from '@/data/private-school-tuition/tokushima';
 import { PRIVATE_SCHOOL_TUITION_AKITA } from '@/data/private-school-tuition/akita';
+import { PRIVATE_SCHOOL_TUITION_FUKUI } from '@/data/private-school-tuition/fukui';
 import { PRIVATE_SCHOOL_TUITION_BY_PREFECTURE, PRIVATE_SCHOOL_TUITION_FILES } from '@/data/private-school-tuition';
 import { SCHOOLS_PRIVATE_TOTTORI } from '@/data/schools-private/tottori';
 import { SCHOOLS_PRIVATE_TOKUSHIMA } from '@/data/schools-private/tokushima';
 import { SCHOOLS_PRIVATE_AKITA } from '@/data/schools-private/akita';
+import { SCHOOLS_PRIVATE_FUKUI } from '@/data/schools-private/fukui';
 
 describe('sumMonthlyFees / sumOneTimeFees / sumAnnualFees', () => {
   const base: PrivateSchoolTuition = {
@@ -202,13 +204,55 @@ describe('PRIVATE_SCHOOL_TUITION_AKITA(掛-3横展開3県目・入学金内訳�
   });
 });
 
+describe('PRIVATE_SCHOOL_TUITION_FUKUI(掛-3横展開4県目・1校4コースのコース別レコード)', () => {
+  it('収録校は全てfeesが非空でamountが正の数', () => {
+    for (const school of PRIVATE_SCHOOL_TUITION_FUKUI.schools) {
+      expect(school.fees.length).toBeGreaterThan(0);
+      for (const fee of school.fees) {
+        expect(fee.amount).toBeGreaterThan(0);
+      }
+    }
+  });
+
+  it('schools-private/fukui.tsの全8校がschoolsまたはskippedのいずれかで網羅されている(重複・欠落なし)', () => {
+    const allCodes = SCHOOLS_PRIVATE_FUKUI.schools.map((s) => s.code);
+    const result = findDuplicateOrMissingTuitionCodes(PRIVATE_SCHOOL_TUITION_FUKUI, allCodes);
+    expect(result.duplicates).toEqual([]);
+    expect(result.missing).toEqual([]);
+  });
+
+  it('収録4レコード(1校・4コース)+スキップ7校', () => {
+    expect(PRIVATE_SCHOOL_TUITION_FUKUI.schools.length).toBe(4);
+    expect(PRIVATE_SCHOOL_TUITION_FUKUI.skipped.length).toBe(7);
+    const distinctSchoolCodes = new Set(PRIVATE_SCHOOL_TUITION_FUKUI.schools.map((s) => s.schoolCode));
+    expect(distinctSchoolCodes.size).toBe(1);
+  });
+
+  it('仁愛女子高等学校: 商業／進学コースの月額合計(58,400円)と特別進学コースの月額合計(70,650円)が原資料の①+④欄と一致する', () => {
+    const shogyo = PRIVATE_SCHOOL_TUITION_FUKUI.schools.find((s) => s.courseName === '商業／進学コース')!;
+    const tokushin = PRIVATE_SCHOOL_TUITION_FUKUI.schools.find((s) => s.courseName === '特別進学コース')!;
+    expect(sumMonthlyFees(shogyo)).toBe(58400);
+    expect(sumMonthlyFees(tokushin)).toBe(70650);
+    expect(sumOneTimeFees(shogyo)).toBe(5650);
+    expect(sumOneTimeFees(tokushin)).toBe(5650);
+  });
+
+  it('4コースとも入学金5,650円は共通', () => {
+    for (const school of PRIVATE_SCHOOL_TUITION_FUKUI.schools) {
+      expect(sumOneTimeFees(school)).toBe(5650);
+    }
+  });
+});
+
 describe('PRIVATE_SCHOOL_TUITION_BY_PREFECTURE / PRIVATE_SCHOOL_TUITION_FILES', () => {
-  it('tottori・tokushima・akitaが登録されている', () => {
+  it('tottori・tokushima・akita・fukuiが登録されている', () => {
     expect(PRIVATE_SCHOOL_TUITION_BY_PREFECTURE.tottori).toBe(PRIVATE_SCHOOL_TUITION_TOTTORI);
     expect(PRIVATE_SCHOOL_TUITION_BY_PREFECTURE.tokushima).toBe(PRIVATE_SCHOOL_TUITION_TOKUSHIMA);
     expect(PRIVATE_SCHOOL_TUITION_BY_PREFECTURE.akita).toBe(PRIVATE_SCHOOL_TUITION_AKITA);
+    expect(PRIVATE_SCHOOL_TUITION_BY_PREFECTURE.fukui).toBe(PRIVATE_SCHOOL_TUITION_FUKUI);
     expect(PRIVATE_SCHOOL_TUITION_FILES).toContain(PRIVATE_SCHOOL_TUITION_TOTTORI);
     expect(PRIVATE_SCHOOL_TUITION_FILES).toContain(PRIVATE_SCHOOL_TUITION_TOKUSHIMA);
     expect(PRIVATE_SCHOOL_TUITION_FILES).toContain(PRIVATE_SCHOOL_TUITION_AKITA);
+    expect(PRIVATE_SCHOOL_TUITION_FILES).toContain(PRIVATE_SCHOOL_TUITION_FUKUI);
   });
 });
