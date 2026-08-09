@@ -421,9 +421,37 @@ describe('PRIVATE_SCHOOL_DETAIL_TOYAMA(協会一覧PDFで10校全てを1回で�
     expect(result.missing).toEqual([]);
   });
 
-  it('10校全てを収録しスキップ0件(私立中学高等学校協会の一覧PDFが全校を1枚で公表していたため)', () => {
-    expect(PRIVATE_SCHOOL_DETAIL_TOYAMA.schools.length).toBe(10);
+  it('10校全てを収録しスキップ0件(私立中学高等学校協会の一覧PDFが全校を1枚で公表していたため)＋掛-2多年度10レコード', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_TOYAMA.schools.length).toBe(20);
     expect(PRIVATE_SCHOOL_DETAIL_TOYAMA.skipped.length).toBe(0);
+    const distinctSchoolCodes = new Set(PRIVATE_SCHOOL_DETAIL_TOYAMA.schools.map((s) => s.schoolCode));
+    expect(distinctSchoolCodes.size).toBe(10);
+  });
+
+  it('掛-2(私立×多年度): 富山国際大学付属は令和5→令和8年度で定員が完全に同一(250名)、他7校は変化していた(Waybackで発掘した令和5年度データ)', () => {
+    const unchanged = PRIVATE_SCHOOL_DETAIL_TOYAMA.schools.find(
+      (s) => s.schoolCode === 'D116320156052' && s.fiscalYearLabel === '令和5年度'
+    )!;
+    const unchangedR8 = PRIVATE_SCHOOL_DETAIL_TOYAMA.schools.find(
+      (s) => s.schoolCode === 'D116320156052' && s.fiscalYearLabel === '令和8年度'
+    )!;
+    expect(unchanged.totalCapacity).toBe(unchangedR8.totalCapacity);
+
+    const changedCodes: [string, number, number][] = [
+      ['D116320156016', 140, 135],
+      ['D116320156025', 260, 300],
+      ['D116320156034', 395, 400],
+      ['D116320156043', 100, 90],
+      ['D116320256015', 245, 230],
+      ['D116320256024', 175, 220],
+      ['D116320456013', 120, 90],
+    ];
+    for (const [code, r5Expected, r8Expected] of changedCodes) {
+      const r5 = PRIVATE_SCHOOL_DETAIL_TOYAMA.schools.find((s) => s.schoolCode === code && s.fiscalYearLabel === '令和5年度')!;
+      const r8 = PRIVATE_SCHOOL_DETAIL_TOYAMA.schools.find((s) => s.schoolCode === code && s.fiscalYearLabel === '令和8年度')!;
+      expect(r5.totalCapacity).toBe(r5Expected);
+      expect(r8.totalCapacity).toBe(r8Expected);
+    }
   });
 });
 
