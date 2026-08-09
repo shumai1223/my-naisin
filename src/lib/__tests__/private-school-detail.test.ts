@@ -2695,12 +2695,12 @@ describe('PRIVATE_SCHOOL_DETAIL_TOKYO(大都市圏5県の最後・育伸社募�
     }
   });
 
-  it('収録176校(掛-2の2024年度88校分含め264レコード)・スキップ65校で参照台帳241校を完全網羅(重複・欠落なし)', () => {
+  it('収録176校(掛-2の2024年度98校分含め274レコード)・スキップ65校で参照台帳241校を完全網羅(重複・欠落なし)', () => {
     const allCodes = SCHOOLS_PRIVATE_TOKYO.schools.map((s) => s.code);
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_TOKYO, allCodes);
     expect(result.duplicates).toEqual([]);
     expect(result.missing).toHaveLength(0);
-    expect(PRIVATE_SCHOOL_DETAIL_TOKYO.schools.length).toBe(264);
+    expect(PRIVATE_SCHOOL_DETAIL_TOKYO.schools.length).toBe(274);
     expect(PRIVATE_SCHOOL_DETAIL_TOKYO.skipped.length).toBe(65);
   });
 
@@ -3077,6 +3077,61 @@ describe('PRIVATE_SCHOOL_DETAIL_TOKYO(大都市圏5県の最後・育伸社募�
     expect(yLatest?.totalCapacity).toBe(140);
     expect(y2024?.courses.find((c) => c.courseName.includes('特進プログラム'))?.capacity).toBe(20);
     expect(yLatest?.courses.find((c) => c.courseName === '特進コース(女、推薦)')?.capacity).toBe(20);
+  });
+
+  it('掛-2(私立×多年度・13ページ目): 東京成徳大学・東京電機大学・東京都市大学等々力・東京立正・東星学園・東洋・東洋女子の7校は2024年度と2026年度で総定員が完全一致', () => {
+    const pairs: Array<[string, number]> = [
+      ['D113311700108', 230],
+      ['D113321000015', 110],
+      ['D113311200210', 40],
+      ['D113311500093', 225],
+      ['D113322100012', 50],
+      ['D113310100106', 160],
+      ['D113310500166', 75],
+    ];
+    for (const [code, total] of pairs) {
+      const y2024 = PRIVATE_SCHOOL_DETAIL_TOKYO.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '2024年度'
+      );
+      const yLatest = PRIVATE_SCHOOL_DETAIL_TOKYO.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel !== '2024年度'
+      );
+      expect(y2024?.totalCapacity).toBe(total);
+      expect(yLatest?.totalCapacity).toBe(total);
+    }
+  });
+
+  it('掛-2(私立×多年度・13ページ目): トキワ松学園は2024年度と2026年度で総定員が完全一致', () => {
+    const y2024 = PRIVATE_SCHOOL_DETAIL_TOKYO.schools.find(
+      (s) => s.schoolCode === 'D113311000034' && s.fiscalYearLabel === '2024年度'
+    );
+    const yLatest = PRIVATE_SCHOOL_DETAIL_TOKYO.schools.find(
+      (s) => s.schoolCode === 'D113311000034' && s.fiscalYearLabel !== '2024年度'
+    );
+    expect(y2024?.totalCapacity).toBe(50);
+    expect(yLatest?.totalCapacity).toBe(50);
+  });
+
+  it('掛-2(私立×多年度・13ページ目): 桐朋(男子)は2024→2026年度で総定員が約50から約25へ半減', () => {
+    const y2024 = PRIVATE_SCHOOL_DETAIL_TOKYO.schools.find(
+      (s) => s.schoolCode === 'D113321500029' && s.fiscalYearLabel === '2024年度'
+    );
+    const yLatest = PRIVATE_SCHOOL_DETAIL_TOKYO.schools.find(
+      (s) => s.schoolCode === 'D113321500029' && s.fiscalYearLabel !== '2024年度'
+    );
+    expect(y2024?.totalCapacity).toBe(50);
+    expect(yLatest?.totalCapacity).toBe(25);
+  });
+
+  it('掛-2(私立×多年度・13ページ目): 東洋大学京北は2024→2026年度で一般②ラウンドが単一枠へ統合され総定員が140から110へ変化', () => {
+    const y2024 = PRIVATE_SCHOOL_DETAIL_TOKYO.schools.find(
+      (s) => s.schoolCode === 'D113310500095' && s.fiscalYearLabel === '2024年度'
+    );
+    const yLatest = PRIVATE_SCHOOL_DETAIL_TOKYO.schools.find(
+      (s) => s.schoolCode === 'D113310500095' && s.fiscalYearLabel !== '2024年度'
+    );
+    expect(y2024?.totalCapacity).toBe(140);
+    expect(yLatest?.totalCapacity).toBe(110);
   });
 });
 

@@ -370,6 +370,21 @@
  * 再配分されている(四條畷学園と同型のパターン)。東京実業は本文既存コメント通り複雑な多段階構造で
  * 現行コード自体がスキップ済みのため、2024年度版との再突合は比較基準が無く対象外。東京女子学院は
  * 参照台帳(schools-private/tokyo.ts)に該当コードが存在せず掛-2の対象外。
+ * **2026-08-10further(13ページ目13校中8校を収録・2校は対象外・1校は見送り)**: 東京成徳大学は
+ * 特別進学[推薦・一般①共通枠30+一般②20=50]+進学選抜[70+20=90]+進学[70+20=90]=230、東京電機大学は
+ * 推薦30+一般[男女共通枠]80=110、東京都市大学等々力は一般のみ40、東京立正は225(スタンダード145+
+ * イノベーション35+アドバンスト45)、東星学園は50、東洋は特進選抜80+特進80=160(2コースとも全ラウンド
+ * 共有の単一枠で本文既存の解釈と整合)、東洋女子は総合進学60+特別進学15=75の6校は2024年度と2026年度
+ * で総定員が完全一致。桐朋(男子・国立市)は2024年度版が約50、2026年度版は約25で総定員が半減。
+ * 東洋大学京北は2024年度版が単願推薦30+一般①(併優・一般共通)80+一般②(併優・一般共通)30=140の
+ * 2ラウンド制に対し、2026年度版は一般①②併優一般の4区分全てが単一の80共通枠に統合され総定員110へ
+ * 減少(正則港区の一般②ラウンド廃止と同型の実質変化)。トキワ松学園は3コース全てで「普通科計50」が
+ * 反復する2024年度版でも本文既存の解釈(50)と完全一致。桐朋女子は普通科(推薦・一般計65)は2024→2026
+ * 年度で完全一致するが、音楽コースが2024年度版で推薦10・一般90という現行の単一共通枠10解釈と整合
+ * しない異なる数値のため学校全体を見送り。東京農業大学第一(2025年度から募集停止)・東邦音楽大学
+ * 附属東邦(2025年度から募集停止・2027年3月閉鎖予定)は2024年度版でまだ現役の募集人員(順に推薦45+
+ * 一般105=150、推薦60+一般↓=60)が確認でき現行のスキップ理由(募集停止)の妥当性を裏付けたが、
+ * 現行に比較対象がなく掛-2としては対象外。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -3644,6 +3659,122 @@ export const PRIVATE_SCHOOL_DETAIL_TOKYO: PrivateSchoolDetailFile = {
         },
       ],
       totalCapacity: 140,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311700108',
+      schoolName: '東京成徳大学高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特別進学コース(推薦Ⅰ・Ⅱ・Ⅲ・一般①共通枠)', capacity: 30 },
+        { courseName: '特別進学コース(一般②)', capacity: 20 },
+        { courseName: '進学選抜コース(推薦Ⅰ・Ⅱ・Ⅲ・一般①共通枠)', capacity: 70 },
+        { courseName: '進学選抜コース(一般②)', capacity: 20 },
+        { courseName: '進学コース(推薦Ⅰ・Ⅱ・Ⅲ・一般①共通枠)', capacity: 70 },
+        { courseName: '進学コース(一般②)', capacity: 20 },
+      ],
+      totalCapacity: 230,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113321000015',
+      schoolName: '東京電機大学高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(推薦、約)', capacity: 30 },
+        { courseName: '普通(一般、男女共通枠、約)', capacity: 80 },
+      ],
+      totalCapacity: 110,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311200210',
+      schoolName: '東京都市大学等々力高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '特別選抜コース(一般のみ掲載)', capacity: 40 }],
+      totalCapacity: 40,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311500093',
+      schoolName: '東京立正高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'スタンダードコース(推薦)', capacity: 75 },
+        { courseName: 'スタンダードコース(一般①・②共通枠)', capacity: 70 },
+        { courseName: 'イノベーションコース(推薦)', capacity: 15 },
+        { courseName: 'イノベーションコース(一般①・②共通枠)', capacity: 20 },
+        { courseName: 'アドバンストコース(推薦)', capacity: 15 },
+        { courseName: 'アドバンストコース(一般①・②共通枠)', capacity: 30 },
+      ],
+      totalCapacity: 225,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113322100012',
+      schoolName: '東星学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(A推薦・B推薦共通枠)', capacity: 15 },
+        { courseName: '普通(一般①・②共通枠)', capacity: 35 },
+      ],
+      totalCapacity: 50,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113321500029',
+      schoolName: '桐朋高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通(男、一般のみ掲載、約)', capacity: 50 }],
+      totalCapacity: 50,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310100106',
+      schoolName: '東洋高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特進選抜コース(推薦A・B・一般A・B共通枠)', capacity: 80 },
+        { courseName: '特進コース(推薦A・B・一般A・B共通枠)', capacity: 80 },
+      ],
+      totalCapacity: 160,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310500166',
+      schoolName: '東洋女子高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '総合進学コース(女、推薦Ⅰ・Ⅱ・一般共通枠)', capacity: 60 },
+        { courseName: '特別進学コース(女、推薦Ⅰ・Ⅱ・一般共通枠)', capacity: 15 },
+      ],
+      totalCapacity: 75,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310500095',
+      schoolName: '東洋大学京北高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(単願推薦)', capacity: 30 },
+        { courseName: '普通(一般①併優・一般①一般共通枠)', capacity: 80 },
+        { courseName: '普通(一般②併優・一般②一般共通枠)', capacity: 30 },
+      ],
+      totalCapacity: 140,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311000034',
+      schoolName: 'トキワ松学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        {
+          courseName:
+            '文理探究コース(アドバンスクラス)・文理探究コース(スタンダードクラス)・美術デザインコース(女、推薦・併優一般①共通枠、普通科計。一般②は定めずのため未算入)',
+          capacity: 50,
+        },
+      ],
+      totalCapacity: 50,
       source: KAKE2_2024_TOKYO_SOURCE,
     },
   ],
