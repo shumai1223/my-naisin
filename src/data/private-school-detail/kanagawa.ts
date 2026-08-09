@@ -65,6 +65,16 @@
  * 音楽の3区分)が令和8年度版(先進・特進統合の1区分+音楽)と対応関係を確信できず見送り
  * (要再検証)。湘南工科大学附属は過去に桐蔭学園との取り違え事故があり現在も本体がskipped
  * 中のため、正しい令和8年度データが定まるまで2024年版の追加も見送る。
+ *
+ * 【掛-2続き2(2026-08-09)】ページ4〜5も処理し34校へ拡大。立花学園・鶴見大学附属・
+ * 東海大学付属相模・藤嶺学園藤沢・日本女子大学附属・日本大学・日本大学藤沢・平塚学園・
+ * 藤沢翔陵・法政大学第二の10校は総定員完全一致(法政大学第二は2024年版でも同一の数値
+ * ブロックが独立して確認でき、令和8年度版の校名帰属の不確実性コメントを裏付け的に解消)。
+ * **中央大学附属横浜(100→110)・桐蔭学園(660→720)で実際の変化を検出**。武相・白鵬女子
+ * (いずれも令和8年度版で16名単位×10コースの精緻な構造)は2024年版で20名単位×9区分の
+ * 粗い読み取りとなり構造が一致せず、合計だけ偶然一致した可能性が拭えないため収録を見送った
+ * (要再検証)。桐光学園は「一般2回」欄が「↓」(直前と同値)か独立数値か再読で確信が持てず見送り
+ * (要再検証)。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -1036,6 +1046,135 @@ export const PRIVATE_SCHOOL_DETAIL_KANAGAWA: PrivateSchoolDetailFile = {
       ],
       totalCapacity: 200,
       source: KAKE2_2024_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114336300019',
+      schoolName: '立花学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特進コース(推薦20+1次専願筆記60)', capacity: 80 },
+        { courseName: '進学コース(推薦100+1次専願筆記140)', capacity: 240 },
+        { courseName: '総進コース(推薦60+1次専願筆記100)', capacity: 160 },
+      ],
+      totalCapacity: 480,
+      source: KAKE2_2024_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114310000375',
+      schoolName: '中央大学附属横浜高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通(推薦30+一般A書類選考30+一般B40)', capacity: 100 }],
+      totalCapacity: 100,
+      source: KAKE2_2024_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114310000044',
+      schoolName: '鶴見大学附属高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        {
+          courseName: '総合進学コース・特進コース(全コース計、推薦20+一般書類選考40+一般A併願オープン30+一般Bオープン10)',
+          capacity: 100,
+        },
+      ],
+      totalCapacity: 100,
+      source: KAKE2_2024_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114315000052',
+      schoolName: '東海大学付属相模高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通(推薦200+一般240)', capacity: 440 }],
+      totalCapacity: 440,
+      source: KAKE2_2024_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114320500066',
+      schoolName: '藤嶺学園藤沢高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通(男、推薦15+Ⅰ期A書類80+Ⅰ期B10)', capacity: 105 }],
+      totalCapacity: 105,
+      source: KAKE2_2024_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114313000057',
+      schoolName: '日本女子大学附属高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通(女、推薦約65+一般専願約65)', capacity: 130 }],
+      totalCapacity: 130,
+      source: KAKE2_2024_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114310000240',
+      schoolName: '日本大学高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        {
+          courseName: '特別進学コース・総合進学コース・スーパーグローバルクラス(普通科計、推薦100+A日程一般併願160)',
+          capacity: 260,
+        },
+      ],
+      totalCapacity: 260,
+      source: KAKE2_2024_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114320500057',
+      schoolName: '日本大学藤沢高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通(推薦160+一般200)', capacity: 360 }],
+      totalCapacity: 360,
+      source: KAKE2_2024_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114310000357',
+      schoolName: '桐蔭学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'プログレスコース(推薦30+A方式オープン30+B方式書類選考130)', capacity: 190 },
+        { courseName: 'アドバンスコース(推薦80+A方式オープン40+B方式書類選考160)', capacity: 280 },
+        { courseName: 'スタンダードコース(推薦90+A方式オープン20+B方式書類選考80)', capacity: 190 },
+      ],
+      totalCapacity: 660,
+      source: KAKE2_2024_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114320300013',
+      schoolName: '平塚学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特進選抜コース(推薦35+一般35)', capacity: 70 },
+        { courseName: '特進コース(推薦35+一般35)', capacity: 70 },
+        { courseName: '進学コース(推薦180+一般180)', capacity: 360 },
+      ],
+      totalCapacity: 500,
+      source: KAKE2_2024_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114320500075',
+      schoolName: '藤沢翔陵高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '文理融合探究コース(男、推薦5+一般1回20+書類選考5+オープン5)', capacity: 35 },
+        { courseName: '得意分野探究コース(男、推薦60+一般1回110+オープン5)', capacity: 175 },
+        { courseName: '商業(男、推薦25+一般1回45)', capacity: 70 },
+      ],
+      totalCapacity: 280,
+      source: KAKE2_2024_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114313000020',
+      schoolName: '法政大学第二高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(書類選考男子150+書類選考女子150+学科試験男子50+学科試験女子50)', capacity: 400 },
+      ],
+      totalCapacity: 400,
+      source: {
+        ...KAKE2_2024_KANAGAWA_SOURCE,
+        docTitle:
+          KAKE2_2024_KANAGAWA_SOURCE.docTitle +
+          '(2024年版でも同一の数値ブロックが独立して確認でき、令和8年度版の校名帰属の不確実性を裏付け的に解消)',
+      },
     },
   ],
   skipped: [

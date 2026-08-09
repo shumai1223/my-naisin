@@ -1971,12 +1971,12 @@ describe('PRIVATE_SCHOOL_DETAIL_KANAGAWA(大都市圏5県・育伸社募集要�
     }
   });
 
-  it('収録80レコード(56校+掛-2多年度24レコード)・スキップ27校で参照台帳83校を完全網羅(重複・欠落なし)', () => {
+  it('収録92レコード(56校+掛-2多年度36レコード)・スキップ27校で参照台帳83校を完全網羅(重複・欠落なし)', () => {
     const allCodes = SCHOOLS_PRIVATE_KANAGAWA.schools.map((s) => s.code);
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_KANAGAWA, allCodes);
     expect(result.duplicates).toEqual([]);
     expect(result.missing).toHaveLength(0);
-    expect(PRIVATE_SCHOOL_DETAIL_KANAGAWA.schools.length).toBe(80);
+    expect(PRIVATE_SCHOOL_DETAIL_KANAGAWA.schools.length).toBe(92);
     const distinctSchoolCodes = new Set(PRIVATE_SCHOOL_DETAIL_KANAGAWA.schools.map((s) => s.schoolCode));
     expect(distinctSchoolCodes.size).toBe(56);
     expect(PRIVATE_SCHOOL_DETAIL_KANAGAWA.skipped.length).toBe(27);
@@ -2094,6 +2094,53 @@ describe('PRIVATE_SCHOOL_DETAIL_KANAGAWA(大都市圏5県・育伸社募集要�
     );
     expect(y2024?.totalCapacity).toBe(370);
     expect(yLatest?.totalCapacity).toBe(390);
+  });
+
+  it('掛-2(私立×多年度・続き2): 立花学園・鶴見大学附属・東海大学付属相模・藤嶺学園藤沢・日本女子大学附属・日本大学・日本大学藤沢・平塚学園・藤沢翔陵・法政大学第二の10校は2024年度と2026年度で総定員が完全一致', () => {
+    const pairs: Array<[string, number]> = [
+      ['D114336300019', 480],
+      ['D114310000044', 100],
+      ['D114315000052', 440],
+      ['D114320500066', 105],
+      ['D114313000057', 130],
+      ['D114310000240', 260],
+      ['D114320500057', 360],
+      ['D114320300013', 500],
+      ['D114320500075', 280],
+      ['D114313000020', 400],
+    ];
+    for (const [code, total] of pairs) {
+      const y2024 = PRIVATE_SCHOOL_DETAIL_KANAGAWA.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '2024年度'
+      );
+      const yLatest = PRIVATE_SCHOOL_DETAIL_KANAGAWA.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel !== '2024年度'
+      );
+      expect(y2024?.totalCapacity).toBe(total);
+      expect(yLatest?.totalCapacity).toBe(total);
+    }
+  });
+
+  it('掛-2(私立×多年度): 中央大学附属横浜は2024→2026年度で100から110へ増加', () => {
+    const y2024 = PRIVATE_SCHOOL_DETAIL_KANAGAWA.schools.find(
+      (s) => s.schoolCode === 'D114310000375' && s.fiscalYearLabel === '2024年度'
+    );
+    const yLatest = PRIVATE_SCHOOL_DETAIL_KANAGAWA.schools.find(
+      (s) => s.schoolCode === 'D114310000375' && s.fiscalYearLabel !== '2024年度'
+    );
+    expect(y2024?.totalCapacity).toBe(100);
+    expect(yLatest?.totalCapacity).toBe(110);
+  });
+
+  it('掛-2(私立×多年度): 桐蔭学園は2024→2026年度でプログレス190+アドバンス280+スタンダード190=660からプログレス210+アドバンス300+スタンダード210=720へ増加', () => {
+    const y2024 = PRIVATE_SCHOOL_DETAIL_KANAGAWA.schools.find(
+      (s) => s.schoolCode === 'D114310000357' && s.fiscalYearLabel === '2024年度'
+    );
+    const yLatest = PRIVATE_SCHOOL_DETAIL_KANAGAWA.schools.find(
+      (s) => s.schoolCode === 'D114310000357' && s.fiscalYearLabel !== '2024年度'
+    );
+    expect(y2024?.totalCapacity).toBe(660);
+    expect(yLatest?.totalCapacity).toBe(720);
   });
 });
 
