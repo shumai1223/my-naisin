@@ -30,6 +30,13 @@
  * ただし2024年版が概数のため確度はやや低い)。京都女子は2024年版(CSコース約40+Ⅱ類型約70+
  * ウィステリア約40=150)が2026年版一次資料(CSコース約35+藤華コース約55+ウィステリア科約20=110)
  * と大きく乖離し、両年とも概数のみでコース名対応も不明瞭なため収録を見送った(要再検証)。
+ *
+ * 【掛-2完了(2026-08-09)】ページ4〜5を処理し36校で完走(37校中、京都女子を除く全校)。
+ * 日星・花園・東山・福知山淑徳・福知山成美・洛南・洛陽総合・立命館・立命館宇治・
+ * 龍谷大学付属平安の10校は総定員完全一致。**平安女学院で実際の変化を検出**(アグネス進学
+ * 約30+幼児教育進学約30+立命館進学約10=70から、2026年度は各30ずつの90へ増加。特に
+ * 立命館進学コースが約10→30と3倍化)。**洛星ノートルダム女学院も変化を示唆**(2024年版
+ * 「約75」→2026年版70、確度はやや低い)。これで大都市圏5県の1番目kyotoの掛-2が完了。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -707,6 +714,146 @@ export const PRIVATE_SCHOOL_DETAIL_KYOTO: PrivateSchoolDetailFile = {
         ...KAKE2_2024_KYOTO_SOURCE,
         docTitle: KAKE2_2024_KYOTO_SOURCE.docTitle + '(LAコースのみ掲載。他コースの記載は無い)',
       },
+    },
+    {
+      schoolCode: 'D126310000291',
+      schoolName: '日星高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '総合コース', capacity: 100 },
+        { courseName: '特進コース', capacity: 20 },
+        { courseName: '看護', capacity: 40 },
+      ],
+      totalCapacity: 160,
+      source: KAKE2_2024_KYOTO_SOURCE,
+    },
+    {
+      schoolCode: 'D126310000451',
+      schoolName: '洛星ノートルダム女学院高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        {
+          courseName: 'STE@M探究コース・グローバル英語コース・プレップ総合コース(女・全コース計、約75)',
+          capacity: 75,
+        },
+      ],
+      totalCapacity: 75,
+      source: {
+        ...KAKE2_2024_KYOTO_SOURCE,
+        docTitle: KAKE2_2024_KYOTO_SOURCE.docTitle + '(当時の校名はノートルダム女学院)',
+      },
+    },
+    {
+      schoolCode: 'D126310000219',
+      schoolName: '花園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特進Aコース', capacity: 70 },
+        { courseName: '特進Bコース', capacity: 110 },
+        { courseName: '進学カルティベートコース', capacity: 80 },
+      ],
+      totalCapacity: 260,
+      source: KAKE2_2024_KYOTO_SOURCE,
+    },
+    {
+      schoolCode: 'D126310000077',
+      schoolName: '東山高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'パスカルコース(男)', capacity: 30 },
+        { courseName: 'クレセントコース(男)', capacity: 160 },
+        { courseName: 'トップアスリートコース(男)', capacity: 40 },
+      ],
+      totalCapacity: 230,
+      source: KAKE2_2024_KYOTO_SOURCE,
+    },
+    {
+      schoolCode: 'D126310000273',
+      schoolName: '福知山淑徳高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '総合', capacity: 195 }],
+      totalCapacity: 195,
+      source: KAKE2_2024_KYOTO_SOURCE,
+    },
+    {
+      schoolCode: 'D126310000264',
+      schoolName: '福知山成美高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'アカデミーコース', capacity: 35 },
+        { courseName: '国際コース', capacity: 35 },
+        { courseName: '進学コース(文理進学60・進学60)', capacity: 120 },
+        { courseName: '普通コース', capacity: 125 },
+        { courseName: '商業(情報コース)', capacity: 35 },
+      ],
+      totalCapacity: 350,
+      source: KAKE2_2024_KYOTO_SOURCE,
+    },
+    {
+      schoolCode: 'D126310000040',
+      schoolName: '平安女学院高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'アグネス進学(AS)コース(女、約30)', capacity: 30 },
+        { courseName: '幼児教育進学(CS)コース(女、約30)', capacity: 30 },
+        { courseName: '立命館進学(RS)コース(女、約10)', capacity: 10 },
+      ],
+      totalCapacity: 70,
+      source: KAKE2_2024_KYOTO_SOURCE,
+    },
+    {
+      schoolCode: 'D126310000193',
+      schoolName: '洛南高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '空パラダイム(男女別選考)', capacity: 48 },
+        { courseName: '海パラダイム(男女別選考)', capacity: 96 },
+      ],
+      totalCapacity: 144,
+      source: KAKE2_2024_KYOTO_SOURCE,
+    },
+    {
+      schoolCode: 'D126310000120',
+      schoolName: '洛陽総合高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '総合', capacity: 280 }],
+      totalCapacity: 280,
+      source: KAKE2_2024_KYOTO_SOURCE,
+    },
+    {
+      schoolCode: 'D126310000415',
+      schoolName: '立命館高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'MSコース(文理特進、含内部、約70)', capacity: 70 },
+        { courseName: 'コアコースGJクラス(国際、含内部、約80)', capacity: 80 },
+        { courseName: 'コアコース(文理総合、含内部、約200)', capacity: 200 },
+      ],
+      totalCapacity: 350,
+      source: KAKE2_2024_KYOTO_SOURCE,
+    },
+    {
+      schoolCode: 'D126310000308',
+      schoolName: '立命館宇治高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'IGコース・IMコース・IBコース(普通科計・外部募集分)', capacity: 185 },
+        { courseName: '国際入試(11月・2月、IG/IM/IB共通枠)', capacity: 40 },
+      ],
+      totalCapacity: 225,
+      source: KAKE2_2024_KYOTO_SOURCE,
+    },
+    {
+      schoolCode: 'D126310000175',
+      schoolName: '龍谷大学付属平安高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特進コース(国公立・難関私立大学進学)', capacity: 40 },
+        { courseName: 'プログレスコース(龍谷大学連携)', capacity: 260 },
+        { courseName: 'アスリートコース(硬式野球部・男)', capacity: 30 },
+      ],
+      totalCapacity: 330,
+      source: KAKE2_2024_KYOTO_SOURCE,
     },
   ],
   skipped: [

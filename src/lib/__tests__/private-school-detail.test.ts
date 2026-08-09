@@ -1825,8 +1825,8 @@ describe('PRIVATE_SCHOOL_DETAIL_KYOTO(大都市圏5県の初回着手・育伸�
     expect(result.missing).toEqual([]);
   });
 
-  it('収録61レコード(37校+掛-2多年度24レコード)+スキップ7校で参照台帳の44校と一致する', () => {
-    expect(PRIVATE_SCHOOL_DETAIL_KYOTO.schools.length).toBe(61);
+  it('収録73レコード(37校+掛-2多年度36レコード)+スキップ7校で参照台帳の44校と一致する', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_KYOTO.schools.length).toBe(73);
     const distinctSchoolCodes = new Set(PRIVATE_SCHOOL_DETAIL_KYOTO.schools.map((s) => s.schoolCode));
     expect(distinctSchoolCodes.size).toBe(37);
     expect(PRIVATE_SCHOOL_DETAIL_KYOTO.skipped.length).toBe(7);
@@ -1914,6 +1914,53 @@ describe('PRIVATE_SCHOOL_DETAIL_KYOTO(大都市圏5県の初回着手・育伸�
     );
     expect(y2024?.totalCapacity).toBe(20);
     expect(yLatest?.totalCapacity).toBe(25);
+  });
+
+  it('掛-2(私立×多年度・完了): 日星・花園・東山・福知山淑徳・福知山成美・洛南・洛陽総合・立命館・立命館宇治・龍谷大学付属平安の10校は2024年度と2026年度で総定員が完全一致', () => {
+    const pairs: Array<[string, number]> = [
+      ['D126310000291', 160],
+      ['D126310000219', 260],
+      ['D126310000077', 230],
+      ['D126310000273', 195],
+      ['D126310000264', 350],
+      ['D126310000193', 144],
+      ['D126310000120', 280],
+      ['D126310000415', 350],
+      ['D126310000308', 225],
+      ['D126310000175', 330],
+    ];
+    for (const [code, total] of pairs) {
+      const y2024 = PRIVATE_SCHOOL_DETAIL_KYOTO.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '2024年度'
+      );
+      const yLatest = PRIVATE_SCHOOL_DETAIL_KYOTO.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel !== '2024年度'
+      );
+      expect(y2024?.totalCapacity).toBe(total);
+      expect(yLatest?.totalCapacity).toBe(total);
+    }
+  });
+
+  it('掛-2(私立×多年度): 平安女学院は2024→2026年度でアグネス進学約30+幼児教育進学約30+立命館進学約10=70から各30ずつの90へ増加(立命館進学が約10→30と3倍化)', () => {
+    const y2024 = PRIVATE_SCHOOL_DETAIL_KYOTO.schools.find(
+      (s) => s.schoolCode === 'D126310000040' && s.fiscalYearLabel === '2024年度'
+    );
+    const yLatest = PRIVATE_SCHOOL_DETAIL_KYOTO.schools.find(
+      (s) => s.schoolCode === 'D126310000040' && s.fiscalYearLabel !== '2024年度'
+    );
+    expect(y2024?.totalCapacity).toBe(70);
+    expect(yLatest?.totalCapacity).toBe(90);
+  });
+
+  it('掛-2(私立×多年度・確度やや低): 洛星ノートルダム女学院は2024年版「約75」から2026年版70への変化を示唆', () => {
+    const y2024 = PRIVATE_SCHOOL_DETAIL_KYOTO.schools.find(
+      (s) => s.schoolCode === 'D126310000451' && s.fiscalYearLabel === '2024年度'
+    );
+    const yLatest = PRIVATE_SCHOOL_DETAIL_KYOTO.schools.find(
+      (s) => s.schoolCode === 'D126310000451' && s.fiscalYearLabel !== '2024年度'
+    );
+    expect(y2024?.totalCapacity).toBe(75);
+    expect(yLatest?.totalCapacity).toBe(70);
   });
 });
 
