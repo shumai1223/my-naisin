@@ -934,7 +934,7 @@ describe('PRIVATE_SCHOOL_DETAIL_AOMORI(個別学校サイト2校+育伸社募集
   });
 });
 
-describe('PRIVATE_SCHOOL_DETAIL_MIYAGI(個別学校サイト2校+育伸社募集要項PDFで11校追加・21校中13校を収録)', () => {
+describe('PRIVATE_SCHOOL_DETAIL_MIYAGI(個別学校サイト2校+育伸社募集要項PDFで13校追加・21校中15校を収録)', () => {
   it('収録した学校は全てcourses合計とtotalCapacityが一致する', () => {
     for (const school of PRIVATE_SCHOOL_DETAIL_MIYAGI.schools) {
       expect(checkCourseCapacitySum(school)).toBe(true);
@@ -948,9 +948,48 @@ describe('PRIVATE_SCHOOL_DETAIL_MIYAGI(個別学校サイト2校+育伸社募集
     expect(result.missing).toEqual([]);
   });
 
-  it('収録13校+スキップ8校(掲載なし)で参照台帳の21校と一致する', () => {
-    expect(PRIVATE_SCHOOL_DETAIL_MIYAGI.schools.length).toBe(13);
-    expect(PRIVATE_SCHOOL_DETAIL_MIYAGI.skipped.length).toBe(8);
+  it('収録28レコード(15校×令和8年度+13校×2024年度)+スキップ6校(掲載なし)で参照台帳の21校と一致する', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_MIYAGI.schools.length).toBe(28);
+    expect(PRIVATE_SCHOOL_DETAIL_MIYAGI.skipped.length).toBe(6);
+    const distinctSchoolCodes = new Set(PRIVATE_SCHOOL_DETAIL_MIYAGI.schools.map((s) => s.schoolCode));
+    expect(distinctSchoolCodes.size).toBe(15);
+  });
+
+  it('掛-2着手時に発見・是正: 東北学院榴ケ岡の誤った660(実際は東北高等学校の値)を正しい270に修正し、東北・東陵を新規収録', () => {
+    const ryuugaoka = PRIVATE_SCHOOL_DETAIL_MIYAGI.schools.find(
+      (s) => s.schoolCode === 'D104391050036' && s.fiscalYearLabel === '令和8年度'
+    )!;
+    expect(ryuugaoka.totalCapacity).toBe(270);
+
+    const tohoku = PRIVATE_SCHOOL_DETAIL_MIYAGI.schools.find(
+      (s) => s.schoolCode === 'D104391010053' && s.fiscalYearLabel === '令和8年度'
+    )!;
+    expect(tohoku.totalCapacity).toBe(660);
+
+    const tourrying = PRIVATE_SCHOOL_DETAIL_MIYAGI.schools.find(
+      (s) => s.schoolCode === 'D104392050016' && s.fiscalYearLabel === '令和8年度'
+    )!;
+    expect(tourrying.totalCapacity).toBe(120);
+  });
+
+  it('掛-2(私立×多年度): 仙台白百合学園(225→175)と宮城学院(170→150)で定員減少を検出', () => {
+    const shirayuriOld = PRIVATE_SCHOOL_DETAIL_MIYAGI.schools.find(
+      (s) => s.schoolCode === 'D104391050018' && s.fiscalYearLabel === '2024年度'
+    )!;
+    const shirayuriNew = PRIVATE_SCHOOL_DETAIL_MIYAGI.schools.find(
+      (s) => s.schoolCode === 'D104391050018' && s.fiscalYearLabel === '令和8年度'
+    )!;
+    expect(shirayuriOld.totalCapacity).toBe(225);
+    expect(shirayuriNew.totalCapacity).toBe(175);
+
+    const miyagiGakuinOld = PRIVATE_SCHOOL_DETAIL_MIYAGI.schools.find(
+      (s) => s.schoolCode === 'D104391010017' && s.fiscalYearLabel === '2024年度'
+    )!;
+    const miyagiGakuinNew = PRIVATE_SCHOOL_DETAIL_MIYAGI.schools.find(
+      (s) => s.schoolCode === 'D104391010017' && s.fiscalYearLabel === '令和8年度'
+    )!;
+    expect(miyagiGakuinOld.totalCapacity).toBe(170);
+    expect(miyagiGakuinNew.totalCapacity).toBe(150);
   });
 });
 
