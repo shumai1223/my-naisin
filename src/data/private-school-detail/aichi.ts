@@ -33,6 +33,12 @@
  * 修文学院(392→440・情報会計コースが152→200へ大幅増員)のみ定員増**。aichiは他の
  * 大都市圏県と異なり「変化あり」が「変化なし」を大きく上回る=県全体として2024→2026年度で
  * 定員が縮小傾向にある可能性が高い(唯一の例外は修文学院と新設コースを含む愛知)。
+ *
+ * 【掛-2続き2(2026-08-10)】ページ3も処理し32校へ拡大。大同大学大同・滝・中京大学附属中京・
+ * 東海・東海学園・同朋の6校は総定員完全一致。**清林館(454→434)・聖霊(234→228)・
+ * 中部大学第一(405→390)・中部大学春日丘(533→526)・東邦(623→604)・豊川(489→400)は定員減、
+ * 大成(134→145)・杜若(254→266)は定員増**。引き続きaichi県全体の定員縮小傾向を確認しつつ、
+ * 増減が混在する県であることも判明(縮小一辺倒ではない)。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -783,6 +789,156 @@ export const PRIVATE_SCHOOL_DETAIL_AICHI: PrivateSchoolDetailFile = {
       fiscalYearLabel: '2024年度',
       courses: [{ courseName: '普通(内推薦80%)', capacity: 274 }],
       totalCapacity: 274,
+      source: KAKE2_2024_AICHI_SOURCE,
+    },
+    {
+      schoolCode: 'D123310000338',
+      schoolName: '清林館高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '文理特進コース(約、含スカラ若干)', capacity: 70 },
+        { courseName: '文理選抜コース(約)', capacity: 105 },
+        { courseName: '国際コース(約、含スカラ若干)', capacity: 105 },
+        { courseName: '進学総合コース(約)', capacity: 174 },
+      ],
+      totalCapacity: 454,
+      source: KAKE2_2024_AICHI_SOURCE,
+    },
+    {
+      schoolCode: 'D123310000301',
+      schoolName: '聖霊高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通(含内部200)', capacity: 234 }],
+      totalCapacity: 234,
+      source: KAKE2_2024_AICHI_SOURCE,
+    },
+    {
+      schoolCode: 'D123310000418',
+      schoolName: '大成高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'ラトナディアコース', capacity: 20 },
+        { courseName: 'グローバルフューチャーコース', capacity: 20 },
+        { courseName: 'プラウディアコース', capacity: 94 },
+      ],
+      totalCapacity: 134,
+      source: KAKE2_2024_AICHI_SOURCE,
+    },
+    {
+      schoolCode: 'D123310000249',
+      schoolName: '大同大学大同高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通', capacity: 240 },
+        { courseName: '工業', capacity: 240 },
+      ],
+      totalCapacity: 480,
+      source: KAKE2_2024_AICHI_SOURCE,
+    },
+    {
+      schoolCode: 'D123310000347',
+      schoolName: '滝高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通(推薦・帰国、外部、内推薦・帰国20%程度)', capacity: 110 }],
+      totalCapacity: 110,
+      source: KAKE2_2024_AICHI_SOURCE,
+    },
+    {
+      schoolCode: 'D123310000178',
+      schoolName: '中京大学附属中京高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特進コース(内推薦約40%程度、約80)', capacity: 80 },
+        { courseName: '国際コース(内推薦約50%程度、約40)', capacity: 40 },
+        { courseName: '進学コース(内推薦約50%程度、約280)', capacity: 280 },
+      ],
+      totalCapacity: 400,
+      source: KAKE2_2024_AICHI_SOURCE,
+    },
+    {
+      schoolCode: 'D123310000114',
+      schoolName: '中部大学第一高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通', capacity: 300 },
+        { courseName: '創造工学', capacity: 105 },
+      ],
+      totalCapacity: 405,
+      source: KAKE2_2024_AICHI_SOURCE,
+    },
+    {
+      schoolCode: 'D123310000329',
+      schoolName: '中部大学春日丘高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '創進コース(創進2クラス、内部含)・進学コース(進学9クラス、内部含)(普通科計533)', capacity: 533 },
+      ],
+      totalCapacity: 533,
+      source: KAKE2_2024_AICHI_SOURCE,
+    },
+    {
+      schoolCode: 'D123310000052',
+      schoolName: '東海高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通(男、一般のみ掲載)', capacity: 40 }],
+      totalCapacity: 40,
+      source: KAKE2_2024_AICHI_SOURCE,
+    },
+    {
+      schoolCode: 'D123310000285',
+      schoolName: '東海学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通(推薦280+一般120)', capacity: 400 }],
+      totalCapacity: 400,
+      source: KAKE2_2024_AICHI_SOURCE,
+    },
+    {
+      schoolCode: 'D123310000267',
+      schoolName: '東邦高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '文理特進コース(内推薦60%)', capacity: 40 },
+        { courseName: '普通コース(内推薦60%)', capacity: 463 },
+        { courseName: '人間健康コース(男)', capacity: 40 },
+        { courseName: '国際探究コース(内推薦60%)', capacity: 40 },
+        { courseName: '美術(内推薦60%)', capacity: 40 },
+      ],
+      totalCapacity: 623,
+      source: KAKE2_2024_AICHI_SOURCE,
+    },
+    {
+      schoolCode: 'D123310000105',
+      schoolName: '同朋高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(内推薦65%程度)', capacity: 360 },
+        { courseName: '商業(内推薦65%程度)', capacity: 80 },
+        { courseName: '音楽(内推薦65%程度)', capacity: 30 },
+      ],
+      totalCapacity: 470,
+      source: KAKE2_2024_AICHI_SOURCE,
+    },
+    {
+      schoolCode: 'D123310000463',
+      schoolName: '杜若高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '文理コース(内推薦・特色80%程度)', capacity: 30 },
+        { courseName: '特進コース(内推薦・特色80%程度)', capacity: 124 },
+        { courseName: '創造コース(内推薦・特色80%程度)', capacity: 100 },
+      ],
+      totalCapacity: 254,
+      source: KAKE2_2024_AICHI_SOURCE,
+    },
+    {
+      schoolCode: 'D123310000551',
+      schoolName: '豊川高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'Ⅰ類(内推薦約80%)', capacity: 349 },
+        { courseName: 'Ⅱ類(内推薦約80%)', capacity: 140 },
+      ],
+      totalCapacity: 489,
       source: KAKE2_2024_AICHI_SOURCE,
     },
   ],
