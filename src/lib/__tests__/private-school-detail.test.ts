@@ -2192,12 +2192,12 @@ describe('PRIVATE_SCHOOL_DETAIL_OSAKA(大都市圏5県の3県目・育伸社募�
     }
   });
 
-  it('収録91校(掛-2の2024年度45校分含め136レコード)・スキップ16校で参照台帳107校を完全網羅(重複・欠落なし)', () => {
+  it('収録91校(掛-2の2024年度55校分含め146レコード)・スキップ16校で参照台帳107校を完全網羅(重複・欠落なし)', () => {
     const allCodes = SCHOOLS_PRIVATE_OSAKA.schools.map((s) => s.code);
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_OSAKA, allCodes);
     expect(result.duplicates).toEqual([]);
     expect(result.missing).toHaveLength(0);
-    expect(PRIVATE_SCHOOL_DETAIL_OSAKA.schools.length).toBe(136);
+    expect(PRIVATE_SCHOOL_DETAIL_OSAKA.schools.length).toBe(146);
     expect(PRIVATE_SCHOOL_DETAIL_OSAKA.skipped.length).toBe(16);
   });
 
@@ -2364,6 +2364,41 @@ describe('PRIVATE_SCHOOL_DETAIL_OSAKA(大都市圏5県の3県目・育伸社募�
       expect(y2024?.totalCapacity).toBe(before);
       expect(yLatest?.totalCapacity).toBe(after);
     }
+  });
+
+  it('掛-2(私立×多年度・6ページ目): 常翔学園・常翔啓光学園・城南学園・昇陽・精華・清教学園・清風・清風南海・清明学院の9校は2024年度と2026年度で総定員が完全一致', () => {
+    const pairs: Array<[string, number]> = [
+      ['D127310000913', 480],
+      ['D127310000370', 320],
+      ['D127310000272', 230],
+      ['D127310000049', 300],
+      ['D127310000664', 320],
+      ['D127310000441', 200],
+      ['D127310000101', 250],
+      ['D127310000520', 40],
+      ['D127310000245', 360],
+    ];
+    for (const [code, total] of pairs) {
+      const y2024 = PRIVATE_SCHOOL_DETAIL_OSAKA.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '2024年度'
+      );
+      const yLatest = PRIVATE_SCHOOL_DETAIL_OSAKA.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel !== '2024年度'
+      );
+      expect(y2024?.totalCapacity).toBe(total);
+      expect(yLatest?.totalCapacity).toBe(total);
+    }
+  });
+
+  it('掛-2(私立×多年度・6ページ目): 星翔は2024→2026年度で総定員が変化', () => {
+    const y2024 = PRIVATE_SCHOOL_DETAIL_OSAKA.schools.find(
+      (s) => s.schoolCode === 'D127310000977' && s.fiscalYearLabel === '2024年度'
+    );
+    const yLatest = PRIVATE_SCHOOL_DETAIL_OSAKA.schools.find(
+      (s) => s.schoolCode === 'D127310000977' && s.fiscalYearLabel !== '2024年度'
+    );
+    expect(y2024?.totalCapacity).toBe(300);
+    expect(yLatest?.totalCapacity).toBe(335);
   });
 });
 

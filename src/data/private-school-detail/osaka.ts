@@ -43,6 +43,9 @@
  * 金光大阪・香里ヌヴェール学院の8校は総定員完全一致。四條畷学園は総定員480完全一致だが発展キャリア
  * (140→160)と特別シンガク(60→40)の間でコース間の再配分が起きている可能性を検出。好文学園女子は
  * 300→270(-30、8コース計→9コース計への再編)、金光八尾は205→220(+15、美術コース新設)を検出。
+ * **2026-08-10further(6ページ目10校)**: 常翔学園・常翔啓光学園・城南学園・昇陽・精華・清教学園・
+ * 清風・清風南海・清明学院の9校は総定員完全一致(常翔学園はコース名「特進/文理」→「アカデミックⅠ/Ⅱ」
+ * への改称を検出したが定員は不変)。星翔のみ300→335(+35、普通科総合キャリアコースの増員)を検出。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -2072,6 +2075,131 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
         { courseName: '普通科特別シンガクコース(2026年度版は40へ減)', capacity: 60 },
       ],
       totalCapacity: 480,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000913',
+      schoolName: '常翔学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'スーパーコース', capacity: 40 },
+        { courseName: '特進コース(2026年度版でアカデミックコースⅠへ改称)', capacity: 200 },
+        { courseName: '文理コース(部活動選抜入試あり・2026年度版でアカデミックコースⅡへ改称)', capacity: 240 },
+      ],
+      totalCapacity: 480,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000370',
+      schoolName: '常翔啓光学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特進コースⅠ類(選抜)', capacity: 40 },
+        { courseName: '特進コースⅡ類', capacity: 120 },
+        { courseName: '進学コース', capacity: 160 },
+      ],
+      totalCapacity: 320,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000272',
+      schoolName: '城南学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        {
+          courseName: '普通科(特進∞・特進+・特進3・特進看護・幼児教育・進学スタンダードの6コース計、含内部)',
+          capacity: 230,
+        },
+      ],
+      totalCapacity: 230,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000049',
+      schoolName: '昇陽高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        {
+          courseName: '普通科(特進・進学Ⅰ/Ⅱ/Ⅲ・看護医療系進学・保育教育・ITフロンティア・ビジネス公務員チャレンジ・パティシエの8コース計)',
+          capacity: 270,
+        },
+        { courseName: '福祉科', capacity: 30 },
+      ],
+      totalCapacity: 300,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000664',
+      schoolName: '精華高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'ニュースタンダードコース', capacity: 120 },
+        { courseName: 'スーパーグローカルコース', capacity: 20 },
+        { courseName: 'スポーツ&アートコース(専願のみ・強化クラブのみ)', capacity: 80 },
+        { courseName: 'i-Techコース', capacity: 40 },
+        { courseName: '環境福祉コース(専願のみ)', capacity: 30 },
+        { courseName: 'フリーアカデミーコース(専願のみ)', capacity: 30 },
+      ],
+      totalCapacity: 320,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000441',
+      schoolName: '清教学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'S特進コース理系(3年コース・外部募集)', capacity: 80 },
+        { courseName: 'S特進コース文系(3年コース・外部募集)', capacity: 120 },
+      ],
+      totalCapacity: 200,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000101',
+      schoolName: '清風高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '理Ⅲ6か年編入コース(男子)', capacity: 80 },
+        { courseName: '理数コース(男子)', capacity: 80 },
+        { courseName: '文理コース(男子・特技コース50名を含む)', capacity: 90 },
+      ],
+      totalCapacity: 250,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000520',
+      schoolName: '清風南海高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '3か年特進コース(男女・外部募集)', capacity: 40 }],
+      totalCapacity: 40,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000245',
+      schoolName: '清明学院高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特進コース(文系・理系・看護医療系合計)', capacity: 120 },
+        { courseName: '進学コース', capacity: 120 },
+        { courseName: '総合コース', capacity: 120 },
+      ],
+      totalCapacity: 360,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000977',
+      schoolName: '星翔高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        {
+          courseName: '工業技術系(機械工学科・電子機械工学科・電気工学科・コミュニケーションシステム工学科の一括募集)',
+          capacity: 140,
+        },
+        { courseName: '普通科特進アドバンスコース', capacity: 20 },
+        { courseName: '普通科総合キャリアコース', capacity: 70 },
+        { courseName: '普通科アスリートコース(専願のみ・国際科スポーツコースから改称)', capacity: 70 },
+      ],
+      totalCapacity: 300,
       source: KAKE2_2024_OSAKA_SOURCE,
     },
   ],
