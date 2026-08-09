@@ -12,6 +12,23 @@
  * 一般約40」という記法(3コースで共有)を推薦分+一般分の合計120として解釈した。
  * 複数コースが「普通科計X」「全科計X」と注記され同一数値を共有している場合は
  * 合算せず1つの共有コースとして統合記録した。
+ *
+ * 【掛-2（私立×多年度）着手時に発見した重大な誤り(2026-08-09是正)】pdftotext -layoutで
+ * 全32校の令和8年度データを再突合したところ、2校で大きな誤りを発見しpdftoppm(300dpi
+ * 画像)で直接目視して確定させた。尾道高等学校は「最難関コース20・難関コース40・
+ * 総合進学コース120・スポーツコース40・機械40・電気35＝295(いずれも含内部)」が
+ * 正しいが、ts上は「普通科(特別入試・含内部)240」という実在しない単一コースに
+ * 誤って集約されていた(実に55名分の過小収録)。近畿大学附属広島高等学校福山校も
+ * 現行PDFの実際のコース名は「特別入試・特別進学コース(共有枠240・含内部)」
+ * ＋「体育進学コース(募集人員は学校に個別問い合わせ・数値非公表)」であり、
+ * ts上に記録されていた「特別選抜コース20・進学コース40・総合進学コース120・
+ * スポーツコース40＝220」という4コース構成はこの現行PDFのどこにも見当たらず、
+ * 別の年度または別の情報源のデータが混入していたと見られる。体育進学コースは
+ * 数値非公表のため捏造ゼロの原則により募集人員から除外し、確定できる240のみを
+ * 採用した。広陵高等学校も、tsのコース名「難関コース」「総合進学クラス」は
+ * 現行PDFの実際の表記「特別進学コース」「総合進学コース」と異なっていたため
+ * 是正した(定員70・430は正しかった)。**掛-2(2024年度版との多年度比較)は
+ * この県の規模(32校)を踏まえ、既存データの是正を優先し次回以降に持ち越す。**
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -46,8 +63,8 @@ export const PRIVATE_SCHOOL_DETAIL_HIROSHIMA: PrivateSchoolDetailFile = {
       schoolName: '広陵高等学校',
       fiscalYearLabel: '令和8年度',
       courses: [
-        { courseName: '難関コース(約70)', capacity: 70 },
-        { courseName: '総合進学クラス(約430)', capacity: 430 },
+        { courseName: '特別進学コース(約70)', capacity: 70 },
+        { courseName: '総合進学コース(約430)', capacity: 430 },
       ],
       totalCapacity: 500,
       source: SOURCE,
@@ -203,8 +220,15 @@ export const PRIVATE_SCHOOL_DETAIL_HIROSHIMA: PrivateSchoolDetailFile = {
       schoolCode: 'D134310000237',
       schoolName: '尾道高等学校',
       fiscalYearLabel: '令和8年度',
-      courses: [{ courseName: '普通科(特別入試・含内部)', capacity: 240 }],
-      totalCapacity: 240,
+      courses: [
+        { courseName: '最難関コース(含内部)', capacity: 20 },
+        { courseName: '難関コース(含内部)', capacity: 40 },
+        { courseName: '総合進学コース(含内部)', capacity: 120 },
+        { courseName: 'スポーツコース(含内部)', capacity: 40 },
+        { courseName: '機械(含内部)', capacity: 40 },
+        { courseName: '電気(含内部)', capacity: 35 },
+      ],
+      totalCapacity: 295,
       source: SOURCE,
     },
     {
@@ -230,14 +254,12 @@ export const PRIVATE_SCHOOL_DETAIL_HIROSHIMA: PrivateSchoolDetailFile = {
       schoolCode: 'D134310000264',
       schoolName: '近畿大学附属広島高等学校福山校',
       fiscalYearLabel: '令和8年度',
-      courses: [
-        { courseName: '特別選抜コース(含内部)', capacity: 20 },
-        { courseName: '進学コース(含内部)', capacity: 40 },
-        { courseName: '総合進学コース(含内部)', capacity: 120 },
-        { courseName: 'スポーツコース(含内部)', capacity: 40 },
-      ],
-      totalCapacity: 220,
-      source: SOURCE,
+      courses: [{ courseName: '特別入試・特別進学コース計(含内部)', capacity: 240 }],
+      totalCapacity: 240,
+      source: {
+        ...SOURCE,
+        docTitle: SOURCE.docTitle + '(体育進学コースは募集人員が学校問い合わせ制で非公表のため除外)',
+      },
     },
     {
       schoolCode: 'D134310000273',

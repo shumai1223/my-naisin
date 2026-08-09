@@ -1452,6 +1452,16 @@ describe('PRIVATE_SCHOOL_DETAIL_HIROSHIMA(育伸社募集要項PDFで40校中32�
     expect(PRIVATE_SCHOOL_DETAIL_HIROSHIMA.schools.length).toBe(32);
     expect(PRIVATE_SCHOOL_DETAIL_HIROSHIMA.skipped.length).toBe(8);
   });
+
+  it('掛-2着手時に発見・是正: 尾道(誤240→正295の6コース)と近畿大学附属広島福山校(誤220の4コース→正240の1コース)を修正', () => {
+    const onomichi = PRIVATE_SCHOOL_DETAIL_HIROSHIMA.schools.find((s) => s.schoolCode === 'D134310000237')!;
+    expect(onomichi.courses.length).toBe(6);
+    expect(onomichi.totalCapacity).toBe(295);
+
+    const kindaiFukuyama = PRIVATE_SCHOOL_DETAIL_HIROSHIMA.schools.find((s) => s.schoolCode === 'D134310000264')!;
+    expect(kindaiFukuyama.courses.length).toBe(1);
+    expect(kindaiFukuyama.totalCapacity).toBe(240);
+  });
 });
 
 describe('PRIVATE_SCHOOL_DETAIL_NARA(育伸社募集要項PDFで18校中12校を収録・東大寺学園等6校は掲載なしで見送り)', () => {
