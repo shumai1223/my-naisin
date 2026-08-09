@@ -7,9 +7,11 @@ import {
 } from '@/lib/private-school-tuition';
 import { PRIVATE_SCHOOL_TUITION_TOTTORI } from '@/data/private-school-tuition/tottori';
 import { PRIVATE_SCHOOL_TUITION_TOKUSHIMA } from '@/data/private-school-tuition/tokushima';
+import { PRIVATE_SCHOOL_TUITION_AKITA } from '@/data/private-school-tuition/akita';
 import { PRIVATE_SCHOOL_TUITION_BY_PREFECTURE, PRIVATE_SCHOOL_TUITION_FILES } from '@/data/private-school-tuition';
 import { SCHOOLS_PRIVATE_TOTTORI } from '@/data/schools-private/tottori';
 import { SCHOOLS_PRIVATE_TOKUSHIMA } from '@/data/schools-private/tokushima';
+import { SCHOOLS_PRIVATE_AKITA } from '@/data/schools-private/akita';
 
 describe('sumMonthlyFees / sumOneTimeFees / sumAnnualFees', () => {
   const base: PrivateSchoolTuition = {
@@ -170,11 +172,43 @@ describe('PRIVATE_SCHOOL_TUITION_TOKUSHIMA(掛-3横展開2県目・入試区分�
   });
 });
 
+describe('PRIVATE_SCHOOL_TUITION_AKITA(掛-3横展開3県目・入学金内訳のみ収録し授業料額は未確認と明示)', () => {
+  it('収録校は全てfeesが非空でamountが正の数', () => {
+    for (const school of PRIVATE_SCHOOL_TUITION_AKITA.schools) {
+      expect(school.fees.length).toBeGreaterThan(0);
+      for (const fee of school.fees) {
+        expect(fee.amount).toBeGreaterThan(0);
+      }
+    }
+  });
+
+  it('schools-private/akita.tsの全5校がschoolsまたはskippedのいずれかで網羅されている(重複・欠落なし)', () => {
+    const allCodes = SCHOOLS_PRIVATE_AKITA.schools.map((s) => s.code);
+    const result = findDuplicateOrMissingTuitionCodes(PRIVATE_SCHOOL_TUITION_AKITA, allCodes);
+    expect(result.duplicates).toEqual([]);
+    expect(result.missing).toEqual([]);
+  });
+
+  it('収録1校+スキップ4校', () => {
+    expect(PRIVATE_SCHOOL_TUITION_AKITA.schools.length).toBe(1);
+    expect(PRIVATE_SCHOOL_TUITION_AKITA.skipped.length).toBe(4);
+  });
+
+  it('秋田令和高等学校: 入学手続き納付金内訳合計(220,000円)が募集要項PDFの記載と一致し、授業料額は未確認のためhasUnspecifiedAdditionalFees=true', () => {
+    const reiwa = PRIVATE_SCHOOL_TUITION_AKITA.schools.find((s) => s.schoolName === '秋田令和高等学校')!;
+    expect(sumOneTimeFees(reiwa)).toBe(220000);
+    expect(sumMonthlyFees(reiwa)).toBe(0);
+    expect(reiwa.hasUnspecifiedAdditionalFees).toBe(true);
+  });
+});
+
 describe('PRIVATE_SCHOOL_TUITION_BY_PREFECTURE / PRIVATE_SCHOOL_TUITION_FILES', () => {
-  it('tottori・tokushimaが登録されている', () => {
+  it('tottori・tokushima・akitaが登録されている', () => {
     expect(PRIVATE_SCHOOL_TUITION_BY_PREFECTURE.tottori).toBe(PRIVATE_SCHOOL_TUITION_TOTTORI);
     expect(PRIVATE_SCHOOL_TUITION_BY_PREFECTURE.tokushima).toBe(PRIVATE_SCHOOL_TUITION_TOKUSHIMA);
+    expect(PRIVATE_SCHOOL_TUITION_BY_PREFECTURE.akita).toBe(PRIVATE_SCHOOL_TUITION_AKITA);
     expect(PRIVATE_SCHOOL_TUITION_FILES).toContain(PRIVATE_SCHOOL_TUITION_TOTTORI);
     expect(PRIVATE_SCHOOL_TUITION_FILES).toContain(PRIVATE_SCHOOL_TUITION_TOKUSHIMA);
+    expect(PRIVATE_SCHOOL_TUITION_FILES).toContain(PRIVATE_SCHOOL_TUITION_AKITA);
   });
 });
