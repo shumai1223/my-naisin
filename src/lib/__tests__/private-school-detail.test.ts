@@ -2209,12 +2209,12 @@ describe('PRIVATE_SCHOOL_DETAIL_AICHI(大都市圏5県の4県目・育伸社募�
     }
   });
 
-  it('収録82レコード(50校+掛-2多年度32レコード)・スキップ7件で参照台帳57校と完全一致(重複・欠落なし)', () => {
+  it('収録97レコード(50校+掛-2多年度47レコード)・スキップ7件で参照台帳57校と完全一致(重複・欠落なし)', () => {
     const allCodes = SCHOOLS_PRIVATE_AICHI.schools.map((s) => s.code);
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_AICHI, allCodes);
     expect(result.duplicates).toEqual([]);
     expect(result.missing).toHaveLength(0);
-    expect(PRIVATE_SCHOOL_DETAIL_AICHI.schools.length).toBe(82);
+    expect(PRIVATE_SCHOOL_DETAIL_AICHI.schools.length).toBe(97);
     const distinctSchoolCodes = new Set(PRIVATE_SCHOOL_DETAIL_AICHI.schools.map((s) => s.schoolCode));
     expect(distinctSchoolCodes.size).toBe(50);
     expect(PRIVATE_SCHOOL_DETAIL_AICHI.skipped.length).toBe(7);
@@ -2324,6 +2324,51 @@ describe('PRIVATE_SCHOOL_DETAIL_AICHI(大都市圏5県の4県目・育伸社募�
       ['D123310000551', 489, 400],
       ['D123310000418', 134, 145],
       ['D123310000463', 254, 266],
+    ];
+    for (const [code, before, after] of pairs) {
+      const y2024 = PRIVATE_SCHOOL_DETAIL_AICHI.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '2024年度'
+      );
+      const yLatest = PRIVATE_SCHOOL_DETAIL_AICHI.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel !== '2024年度'
+      );
+      expect(y2024?.totalCapacity).toBe(before);
+      expect(yLatest?.totalCapacity).toBe(after);
+    }
+  });
+
+  it('掛-2(私立×多年度・完了): 名古屋国際・誉・豊橋中央の3校は2024年度と2026年度で総定員が完全一致', () => {
+    const pairs: Array<[string, number]> = [
+      ['D123310000187', 145],
+      ['D123310000392', 200],
+      ['D123310000542', 225],
+    ];
+    for (const [code, total] of pairs) {
+      const y2024 = PRIVATE_SCHOOL_DETAIL_AICHI.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '2024年度'
+      );
+      const yLatest = PRIVATE_SCHOOL_DETAIL_AICHI.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel !== '2024年度'
+      );
+      expect(y2024?.totalCapacity).toBe(total);
+      expect(yLatest?.totalCapacity).toBe(total);
+    }
+  });
+
+  it('掛-2(私立×多年度): 豊田大谷・名古屋・名古屋経済大学市邨・日本福祉大学付属・光ヶ丘女子・藤ノ花女子は定員減、名古屋大谷・名古屋経済大学高蔵・名古屋工業・名古屋たちばな・人間環境大学附属岡崎・名城大学附属は定員増', () => {
+    const pairs: Array<[string, number, number]> = [
+      ['D123310000481', 240, 229],
+      ['D123310000070', 257, 221],
+      ['D123310000043', 488, 467],
+      ['D123310000276', 275, 250],
+      ['D123310000436', 315, 310],
+      ['D123310000533', 443, 409],
+      ['D123310000212', 525, 545],
+      ['D123310000230', 482, 495],
+      ['D123310000141', 318, 320],
+      ['D123310000123', 389, 429],
+      ['D123310000427', 310, 315],
+      ['D123310000098', 634, 637],
     ];
     for (const [code, before, after] of pairs) {
       const y2024 = PRIVATE_SCHOOL_DETAIL_AICHI.schools.find(

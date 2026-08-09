@@ -39,6 +39,15 @@
  * 中部大学第一(405→390)・中部大学春日丘(533→526)・東邦(623→604)・豊川(489→400)は定員減、
  * 大成(134→145)・杜若(254→266)は定員増**。引き続きaichi県全体の定員縮小傾向を確認しつつ、
  * 増減が混在する県であることも判明(縮小一辺倒ではない)。
+ *
+ * 【掛-2完了(2026-08-10)】ページ4〜5を処理し47校で完走(50校中47校=5頁全処理済み)。
+ * 名古屋国際・誉の2校と、豊橋中央(総定員225不変・普通1コースへ統合)は総定員完全一致。
+ * **豊田大谷・名古屋・名古屋経済大学市邨・日本福祉大学付属・光ヶ丘女子は定員減、
+ * 名古屋大谷・名古屋経済大学高蔵・名古屋工業・名古屋たちばな・人間環境大学附属岡崎・
+ * 名城大学附属は定員増**(名城大学附属は2024年版5クラス制→令和8年度版は普通科1コースへ
+ * 統合という構造変化を伴う)。藤ノ花女子も定員減(443→409)。愛知黎明(共有クォータか
+ * 各コース独立か不明)・桜花学園(表がページ下端で途切れ)・名古屋葵大学(このPDF未掲載)の
+ * 3校は要再検証のまま残存。これで大都市圏5県の3番目aichiの掛-2が完了。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -940,6 +949,181 @@ export const PRIVATE_SCHOOL_DETAIL_AICHI: PrivateSchoolDetailFile = {
       ],
       totalCapacity: 489,
       source: KAKE2_2024_AICHI_SOURCE,
+    },
+    {
+      schoolCode: 'D123310000481',
+      schoolName: '豊田大谷高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特別選抜コース', capacity: 28 },
+        { courseName: '人間福祉コース', capacity: 34 },
+        { courseName: '情報メディアコース', capacity: 60 },
+        { courseName: '生活文化コース', capacity: 34 },
+        { courseName: '文理コース', capacity: 84 },
+      ],
+      totalCapacity: 240,
+      source: KAKE2_2024_AICHI_SOURCE,
+    },
+    {
+      schoolCode: 'D123310000542',
+      schoolName: '豊橋中央高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通', capacity: 145 },
+        { courseName: '家政(女)', capacity: 80 },
+      ],
+      totalCapacity: 225,
+      source: {
+        ...KAKE2_2024_AICHI_SOURCE,
+        docTitle: KAKE2_2024_AICHI_SOURCE.docTitle + '(令和8年度版は普通1コースへ統合。総定員225は不変)',
+      },
+    },
+    {
+      schoolCode: 'D123310000070',
+      schoolName: '名古屋高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '文理コース・文理選抜クラス(男、選抜クラス含む、257)', capacity: 257 }],
+      totalCapacity: 257,
+      source: KAKE2_2024_AICHI_SOURCE,
+    },
+    {
+      schoolCode: 'D123310000212',
+      schoolName: '名古屋大谷高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特別進学コース', capacity: 30 },
+        { courseName: '特別選抜コース', capacity: 30 },
+        { courseName: '福祉・医療進学コース', capacity: 80 },
+        { courseName: '文理進学コース', capacity: 280 },
+        { courseName: '商業', capacity: 105 },
+      ],
+      totalCapacity: 525,
+      source: KAKE2_2024_AICHI_SOURCE,
+    },
+    {
+      schoolCode: 'D123310000043',
+      schoolName: '名古屋経済大学市邨高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        {
+          courseName: 'エクスプローラーコース・キャリアデザインコース・アカデミックコース・ブライトコース(普通科計488、含内部)',
+          capacity: 488,
+        },
+      ],
+      totalCapacity: 488,
+      source: KAKE2_2024_AICHI_SOURCE,
+    },
+    {
+      schoolCode: 'D123310000230',
+      schoolName: '名古屋経済大学高蔵高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特進コース・進学コース(普通科計402)', capacity: 402 },
+        { courseName: '商業(女)', capacity: 80 },
+      ],
+      totalCapacity: 482,
+      source: KAKE2_2024_AICHI_SOURCE,
+    },
+    {
+      schoolCode: 'D123310000141',
+      schoolName: '名古屋工業高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '工業(建築・土木80、電気・情技120、機械118)(男)', capacity: 318 }],
+      totalCapacity: 318,
+      source: KAKE2_2024_AICHI_SOURCE,
+    },
+    {
+      schoolCode: 'D123310000187',
+      schoolName: '名古屋国際高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(国際バカロレア25・アドバンスト40、含内部)', capacity: 65 },
+        { courseName: '国際教養', capacity: 80 },
+      ],
+      totalCapacity: 145,
+      source: KAKE2_2024_AICHI_SOURCE,
+    },
+    {
+      schoolCode: 'D123310000123',
+      schoolName: '名古屋たちばな高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '電気・電子', capacity: 150 },
+        { courseName: '機械', capacity: 159 },
+        { courseName: '普通(2024年新設)', capacity: 80 },
+      ],
+      totalCapacity: 389,
+      source: {
+        ...KAKE2_2024_AICHI_SOURCE,
+        docTitle: KAKE2_2024_AICHI_SOURCE.docTitle + '(2024年度に愛知産業大学工業から校名変更・男子から共学化した初年度)',
+      },
+    },
+    {
+      schoolCode: 'D123310000276',
+      schoolName: '日本福祉大学付属高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通(特色含む)', capacity: 275 }],
+      totalCapacity: 275,
+      source: KAKE2_2024_AICHI_SOURCE,
+    },
+    {
+      schoolCode: 'D123310000427',
+      schoolName: '人間環境大学附属岡崎高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '特進コース・進学コース(普通科計310)', capacity: 310 }],
+      totalCapacity: 310,
+      source: KAKE2_2024_AICHI_SOURCE,
+    },
+    {
+      schoolCode: 'D123310000436',
+      schoolName: '光ヶ丘女子高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(女)', capacity: 245 },
+        { courseName: '国際教養(女)', capacity: 70 },
+      ],
+      totalCapacity: 315,
+      source: KAKE2_2024_AICHI_SOURCE,
+    },
+    {
+      schoolCode: 'D123310000533',
+      schoolName: '藤ノ花女子高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(特進コース30を含む、女、243)', capacity: 243 },
+        { courseName: '生活情報(女)', capacity: 120 },
+        { courseName: '食物(女)', capacity: 80 },
+      ],
+      totalCapacity: 443,
+      source: KAKE2_2024_AICHI_SOURCE,
+    },
+    {
+      schoolCode: 'D123310000392',
+      schoolName: '誉高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '進学コース', capacity: 120 },
+        { courseName: '総合オフィスコース', capacity: 80 },
+      ],
+      totalCapacity: 200,
+      source: KAKE2_2024_AICHI_SOURCE,
+    },
+    {
+      schoolCode: 'D123310000098',
+      schoolName: '名城大学附属高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特進クラス(内推薦50%程度)', capacity: 120 },
+        { courseName: 'スーパーサイエンスクラス(内特色10以内)', capacity: 40 },
+        { courseName: '進学クラス(内推薦50%程度)', capacity: 274 },
+        { courseName: '国際クラス(内特色10以内)', capacity: 40 },
+        { courseName: '総合(内推薦50%程度)', capacity: 160 },
+      ],
+      totalCapacity: 634,
+      source: {
+        ...KAKE2_2024_AICHI_SOURCE,
+        docTitle: KAKE2_2024_AICHI_SOURCE.docTitle + '(2024年版は5クラス制。令和8年度版は普通科1コースへ統合しコース制廃止)',
+      },
     },
   ],
   skipped: [
