@@ -190,17 +190,23 @@ describe('PRIVATE_SCHOOL_DETAIL_TOTTORI(パイロット実データ)', () => {
   });
 });
 
-describe('PRIVATE_SCHOOL_DETAIL_FUKUI(全校スキップ台帳)', () => {
-  it('schools-private/fukui.tsの全8校がskippedで網羅されている(重複・欠落なし)', () => {
+describe('PRIVATE_SCHOOL_DETAIL_FUKUI', () => {
+  it('収録した学校は全てcourses合計とtotalCapacityが一致する', () => {
+    for (const school of PRIVATE_SCHOOL_DETAIL_FUKUI.schools) {
+      expect(checkCourseCapacitySum(school)).toBe(true);
+    }
+  });
+
+  it('schools-private/fukui.tsの全8校がschoolsまたはskippedのいずれかで網羅されている(重複・欠落なし)', () => {
     const allCodes = SCHOOLS_PRIVATE_FUKUI.schools.map((s) => s.code);
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_FUKUI, allCodes);
     expect(result.duplicates).toEqual([]);
     expect(result.missing).toEqual([]);
   });
 
-  it('確度の高い確認が取れず全8校スキップ', () => {
-    expect(PRIVATE_SCHOOL_DETAIL_FUKUI.schools.length).toBe(0);
-    expect(PRIVATE_SCHOOL_DETAIL_FUKUI.skipped.length).toBe(8);
+  it('収録4校+スキップ4校で参照台帳の8校と一致する(旧版のpoppler未導入前提は誤りと判明しPyMuPDFで解禁)', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_FUKUI.schools.length).toBe(4);
+    expect(PRIVATE_SCHOOL_DETAIL_FUKUI.skipped.length).toBe(4);
   });
 });
 
