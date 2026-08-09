@@ -752,12 +752,12 @@ describe('PRIVATE_SCHOOL_DETAIL_CHIBA(62校中52校を収録・広域通信制5�
     }
   });
 
-  it('収録61レコード(52校+掛-2多年度9レコード)・スキップ10件で参照台帳の62校と完全一致(重複・欠落なし)', () => {
+  it('収録70レコード(52校+掛-2多年度18レコード)・スキップ10件で参照台帳の62校と完全一致(重複・欠落なし)', () => {
     const allCodes = SCHOOLS_PRIVATE_CHIBA.schools.map((s) => s.code);
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_CHIBA, allCodes);
     expect(result.duplicates).toEqual([]);
     expect(result.missing).toHaveLength(0);
-    expect(PRIVATE_SCHOOL_DETAIL_CHIBA.schools.length).toBe(61);
+    expect(PRIVATE_SCHOOL_DETAIL_CHIBA.schools.length).toBe(70);
     const distinctSchoolCodes = new Set(PRIVATE_SCHOOL_DETAIL_CHIBA.schools.map((s) => s.schoolCode));
     expect(distinctSchoolCodes.size).toBe(52);
     expect(PRIVATE_SCHOOL_DETAIL_CHIBA.skipped.length).toBe(10);
@@ -807,6 +807,72 @@ describe('PRIVATE_SCHOOL_DETAIL_CHIBA(62校中52校を収録・広域通信制5�
     expect(y2026?.totalCapacity).toBe(200);
     expect(y2024?.courses.some((c) => c.courseName.includes('家政'))).toBe(true);
     expect(y2026?.courses.some((c) => c.courseName === 'ライフデザイン')).toBe(true);
+  });
+
+  it('掛-2(私立×多年度・第2弾): 市川・桜林・鴨川令徳・暁星国際・昭和学院秀英の5校は2024年度と令和8年度で総定員が完全一致', () => {
+    const pairs: Array<[string, number]> = [
+      ['D112310000117', 120],
+      ['D112310000091', 160],
+      ['D112310000475', 110],
+      ['D112310000242', 30],
+      ['D112310000064', 80],
+    ];
+    for (const [code, total] of pairs) {
+      const y2024 = PRIVATE_SCHOOL_DETAIL_CHIBA.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '2024年度'
+      );
+      const y2026 = PRIVATE_SCHOOL_DETAIL_CHIBA.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '令和8年度'
+      );
+      expect(y2024?.totalCapacity).toBe(total);
+      expect(y2026?.totalCapacity).toBe(total);
+    }
+  });
+
+  it('掛-2(私立×多年度): 光英VERITASは特待選抜コースが2024→令和8年度で40→30に減少し総定員140→130に変化', () => {
+    const y2024 = PRIVATE_SCHOOL_DETAIL_CHIBA.schools.find(
+      (s) => s.schoolCode === 'D112310000288' && s.fiscalYearLabel === '2024年度'
+    );
+    const y2026 = PRIVATE_SCHOOL_DETAIL_CHIBA.schools.find(
+      (s) => s.schoolCode === 'D112310000288' && s.fiscalYearLabel === '令和8年度'
+    );
+    expect(y2024?.totalCapacity).toBe(140);
+    expect(y2026?.totalCapacity).toBe(130);
+  });
+
+  it('掛-2(データ誤り是正): 国府台女子学院は隣接する光英VERITASのブロックを誤って転記していた(特待選抜30+推薦一般100=130)。真の値=単願推薦約50/併願推薦約70のうち大きい方70(選抜クラス・美術デザインコース含む共有枠)へ是正、2024年度も同じ70で不変', () => {
+    const y2024 = PRIVATE_SCHOOL_DETAIL_CHIBA.schools.find(
+      (s) => s.schoolCode === 'D112310000153' && s.fiscalYearLabel === '2024年度'
+    );
+    const y2026 = PRIVATE_SCHOOL_DETAIL_CHIBA.schools.find(
+      (s) => s.schoolCode === 'D112310000153' && s.fiscalYearLabel === '令和8年度'
+    );
+    expect(y2024?.totalCapacity).toBe(70);
+    expect(y2026?.totalCapacity).toBe(70);
+    expect(y2026?.courses.some((c) => c.courseName.includes('特待選抜'))).toBe(false);
+  });
+
+  it('掛-2(データ誤り是正): 植草学園大学附属は英語コース(40)が丸ごと未収録だった。真の総定員=普通コース200+特進コース40+英語コース40=280へ是正、2024年度も同じ280で不変', () => {
+    const y2024 = PRIVATE_SCHOOL_DETAIL_CHIBA.schools.find(
+      (s) => s.schoolCode === 'D112310000046' && s.fiscalYearLabel === '2024年度'
+    );
+    const y2026 = PRIVATE_SCHOOL_DETAIL_CHIBA.schools.find(
+      (s) => s.schoolCode === 'D112310000046' && s.fiscalYearLabel === '令和8年度'
+    );
+    expect(y2024?.totalCapacity).toBe(280);
+    expect(y2026?.totalCapacity).toBe(280);
+    expect(y2026?.courses.some((c) => c.courseName === '英語コース')).toBe(true);
+  });
+
+  it('掛-2(私立×多年度): 千葉学芸は2024年度と令和8年度で総定員280が完全一致(普通科240+特別進学コース40)', () => {
+    const y2024 = PRIVATE_SCHOOL_DETAIL_CHIBA.schools.find(
+      (s) => s.schoolCode === 'D112310000331' && s.fiscalYearLabel === '2024年度'
+    );
+    const y2026 = PRIVATE_SCHOOL_DETAIL_CHIBA.schools.find(
+      (s) => s.schoolCode === 'D112310000331' && s.fiscalYearLabel === '令和8年度'
+    );
+    expect(y2024?.totalCapacity).toBe(280);
+    expect(y2026?.totalCapacity).toBe(280);
   });
 });
 

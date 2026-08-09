@@ -19,11 +19,17 @@
  * (中山学園/成美学園/千葉科学大学附属)は理由付きでskippedへ記録し、参照台帳62校を完全網羅した。
  *
  * 【掛-2（私立×多年度）着手(2026-08-09)】62校規模のため今回はIKUSHIN_CHIBA_SOURCE収録校から
- * 9校を代表サンプルとして再突合・多年度化した(残りの学校は次回以降の課題)。全9校を
- * pdftotext -layoutで現行(2026年度)PDFと再突合したが誤りは無かった。Wayback CDX APIで
- * 2024年8月12日キャプチャを発掘し比較した結果、8校は総定員が完全一致。**千葉明徳のみ実際の
- * 変化を検出**(進学コースHSクラス・Sクラスの共有枠が130→140に増加・総定員270→280)。
- * 茂原北陵は総定員200で不変だが、3コース目が「家政」から「ライフデザイン」へ改称されていた。
+ * 18校を代表サンプルとして再突合・多年度化した(残りの学校は次回以降の課題)。Wayback CDX APIで
+ * 2024年8月12日キャプチャを発掘し現行(2026年度)PDFと突合した。**千葉明徳は実際の変化を検出**
+ * (進学コースHSクラス・Sクラスの共有枠が130→140に増加・総定員270→280)。**光英VERITASも実際の
+ * 変化を検出**(特待選抜コースが40→30に減少・総定員140→130)。茂原北陵は総定員200で不変だが、
+ * 3コース目が「家政」から「ライフデザイン」へ改称されていた。**再突合で2件の既存誤りを発見・
+ * 是正した**: ①国府台女子学院(D112310000153)は隣接する光英VERITASのブロック(特待選抜30+
+ * 推薦一般100=130)を誤って転記していたことが判明し、真の値(単願推薦約50/併願推薦約70のうち
+ * 大きい方=70、選抜クラス・美術デザインコース含む共有枠)へ是正(pdftoppm 300dpi画像で確認)。
+ * ②植草学園大学附属(D112310000046)は英語コース(40)が丸ごと未収録で総定員240→280に是正
+ * (画像で3コース構成を確認)。この2件は既に収録済みの残り44校のどこかに同型の誤りが眠っている
+ * 可能性を示唆する(miyagi/oita/hiroshima等で確立済みの教訓と同型)。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -224,8 +230,9 @@ export const PRIVATE_SCHOOL_DETAIL_CHIBA: PrivateSchoolDetailFile = {
       courses: [
         { courseName: '普通コース(女)', capacity: 200 },
         { courseName: '特進コース', capacity: 40 },
+        { courseName: '英語コース', capacity: 40 },
       ],
-      totalCapacity: 240,
+      totalCapacity: 280,
       source: {
         url: 'https://www.ikushin.co.jp/school/pdf/03912.pdf',
         docTitle: '2026年度 高専・私立高校 募集要項【千葉県】（(株)育伸社 入試情報課・2025年11月4日現在）',
@@ -314,13 +321,15 @@ export const PRIVATE_SCHOOL_DETAIL_CHIBA: PrivateSchoolDetailFile = {
       schoolName: '国府台女子学院高等部',
       fiscalYearLabel: '令和8年度',
       courses: [
-        { courseName: '特待選抜', capacity: 30 },
-        { courseName: '推薦・一般', capacity: 100 },
+        {
+          courseName: '普通(普通クラス・選抜クラス・美術デザインコース計、単願推薦約50/併願推薦約70のうち大きい方を採用)',
+          capacity: 70,
+        },
       ],
-      totalCapacity: 130,
+      totalCapacity: 70,
       source: {
         url: 'https://www.ikushin.co.jp/school/pdf/03912.pdf',
-        docTitle: '2026年度 高専・私立高校 募集要項【千葉県】（(株)育伸社 入試情報課・2025年11月4日現在）',
+        docTitle: '2026年度 高専・私立高校 募集要項【千葉県】（(株)育伸社 入試情報課・2025年11月4日現在・掛-2再検証(2026-08-09)で光英VERITASの記載(特待選抜30+推薦一般100)を誤って転記していたことが判明し是正）',
         fetchedAt: '2026-07-31',
         sourceTier: 'secondary' as const,
       },
@@ -740,6 +749,93 @@ export const PRIVATE_SCHOOL_DETAIL_CHIBA: PrivateSchoolDetailFile = {
       fiscalYearLabel: '2024年度',
       courses: [{ courseName: '普通', capacity: 190 }],
       totalCapacity: 190,
+      source: KAKE2_2024_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000117',
+      schoolName: '市川高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通(単願推薦30+一般90・帰国含む)', capacity: 120 }],
+      totalCapacity: 120,
+      source: KAKE2_2024_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000091',
+      schoolName: '桜林高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通(A日程推薦140+B日程一般20)', capacity: 160 }],
+      totalCapacity: 160,
+      source: KAKE2_2024_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000475',
+      schoolName: '鴨川令徳高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通(前期単願90+後期20)', capacity: 110 }],
+      totalCapacity: 110,
+      source: KAKE2_2024_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000242',
+      schoolName: '暁星国際高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '特進・進学コース・インターナショナルコース・アストラインターナショナルコース(全コース計)', capacity: 30 }],
+      totalCapacity: 30,
+      source: KAKE2_2024_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000288',
+      schoolName: '光英VERITAS高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(特待選抜)', capacity: 40 },
+        { courseName: '普通(推薦・一般)', capacity: 100 },
+      ],
+      totalCapacity: 140,
+      source: KAKE2_2024_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000064',
+      schoolName: '昭和学院秀英高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通(含帰国)', capacity: 80 }],
+      totalCapacity: 80,
+      source: KAKE2_2024_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000331',
+      schoolName: '千葉学芸高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通科(前期専願200+後期40)', capacity: 240 },
+        { courseName: '特別進学コース(前期専願25+後期15)', capacity: 40 },
+      ],
+      totalCapacity: 280,
+      source: KAKE2_2024_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000153',
+      schoolName: '国府台女子学院高等部',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        {
+          courseName: '普通(選抜クラス・美術デザインコース含む、単願推薦約50/併願推薦約70のうち大きい方を採用)',
+          capacity: 70,
+        },
+      ],
+      totalCapacity: 70,
+      source: KAKE2_2024_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000046',
+      schoolName: '植草学園大学附属高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通コース(女)', capacity: 200 },
+        { courseName: '特進コース', capacity: 40 },
+        { courseName: '英語コース', capacity: 40 },
+      ],
+      totalCapacity: 280,
       source: KAKE2_2024_CHIBA_SOURCE,
     },
   ],
