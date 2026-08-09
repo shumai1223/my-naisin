@@ -1258,9 +1258,53 @@ describe('PRIVATE_SCHOOL_DETAIL_NARA(育伸社募集要項PDFで18校中12校を
     expect(result.missing).toEqual([]);
   });
 
-  it('収録12校+スキップ6校(掲載なし)で参照台帳の18校と一致する', () => {
-    expect(PRIVATE_SCHOOL_DETAIL_NARA.schools.length).toBe(12);
+  it('収録24レコード(12校×令和8年度+12校×2024年度)+スキップ6校(掲載なし)で参照台帳の18校と一致する', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_NARA.schools.length).toBe(24);
     expect(PRIVATE_SCHOOL_DETAIL_NARA.skipped.length).toBe(6);
+    const distinctSchoolCodes = new Set(PRIVATE_SCHOOL_DETAIL_NARA.schools.map((s) => s.schoolCode));
+    expect(distinctSchoolCodes.size).toBe(12);
+  });
+
+  it('掛-2(私立×多年度): 天理(480→440)と奈良文化(190→180)で定員減少を検出、他10校は完全一致', () => {
+    const tenriOld = PRIVATE_SCHOOL_DETAIL_NARA.schools.find(
+      (s) => s.schoolCode === 'D129310000145' && s.fiscalYearLabel === '2024年度'
+    )!;
+    const tenriNew = PRIVATE_SCHOOL_DETAIL_NARA.schools.find(
+      (s) => s.schoolCode === 'D129310000145' && s.fiscalYearLabel === '令和8年度'
+    )!;
+    expect(tenriOld.totalCapacity).toBe(480);
+    expect(tenriNew.totalCapacity).toBe(440);
+
+    const narabunkaOld = PRIVATE_SCHOOL_DETAIL_NARA.schools.find(
+      (s) => s.schoolCode === 'D129310000109' && s.fiscalYearLabel === '2024年度'
+    )!;
+    const narabunkaNew = PRIVATE_SCHOOL_DETAIL_NARA.schools.find(
+      (s) => s.schoolCode === 'D129310000109' && s.fiscalYearLabel === '令和8年度'
+    )!;
+    expect(narabunkaOld.totalCapacity).toBe(190);
+    expect(narabunkaNew.totalCapacity).toBe(180);
+
+    const unchangedCodes = [
+      'D129310000010',
+      'D129310000029',
+      'D129310000038',
+      'D129310000056',
+      'D129310000065',
+      'D129310000092',
+      'D129310000118',
+      'D129310000127',
+      'D129310000136',
+      'D129310000154',
+    ];
+    for (const code of unchangedCodes) {
+      const older = PRIVATE_SCHOOL_DETAIL_NARA.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '2024年度'
+      )!;
+      const newer = PRIVATE_SCHOOL_DETAIL_NARA.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '令和8年度'
+      )!;
+      expect(older.totalCapacity).toBe(newer.totalCapacity);
+    }
   });
 });
 
