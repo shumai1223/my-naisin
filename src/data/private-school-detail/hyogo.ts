@@ -33,6 +33,15 @@
  * 総定員は不変」パターンを裏付けた。市川はキャリアコースが320→240へ減少し総定員350→270、賢明女子
  * 学院はソフィア15→35・ルミエール20→35で総定員35→70へ倍増を検出(いずれも専願/併願で同数のシンプル
  * な構造のため読み取り精度は高い)。
+ * **2026-08-10further(2ページ目11校中10校を収録・見送りゼロ)**: 神戸星城390・神戸野田320・三田学園
+ * 40・三田松聖210・夙川160・松蔭50の6校はコース名・数まで完全一致。神戸第一(360)・神戸常盤女子(285)
+ * ・神戸龍谷(260)は課程名が2024→2026年度で改称・再編されたが総定員は完全一致(神戸龍谷は龍谷総合80/
+ * 特進文理S105/特進グローバル文系40/特進グローバル理系35→医療理数20/国際教養40/難関進学80/総合進学
+ * 120という全面的なコース名の入れ替えにも関わらず合計260で一致)。神戸山手グローバル(2024年度版は
+ * 神戸山手女子)は総定員170は完全一致するが選抜コース(35→105)と未来探究コース(105→35)の間で定員が
+ * 入れ替わっている(四條畷学園と同型のコース間再配分)。彩星工科のみ実質変化を検出: ものづくり系
+ * (旧機械科)180→210(+30、2026年度からの男子→共学化に伴う増員)、電気・情報系(旧電気・情報技術科・
+ * 機械電子科)270→205(-65)、普通135=135(不変)で総定員585→550(-35)。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -724,6 +733,138 @@ export const PRIVATE_SCHOOL_DETAIL_HYOGO: PrivateSchoolDetailFile = {
         { courseName: '国際', capacity: 30 },
       ],
       totalCapacity: 360,
+      source: KAKE2_2024_HYOGO_SOURCE,
+    },
+    {
+      schoolCode: 'D128310000173',
+      schoolName: '神戸星城高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '商業(特進Sコース)', capacity: 30 },
+        { courseName: '商業(特進Aコース)', capacity: 120 },
+        { courseName: '商業(特進Bコース)', capacity: 160 },
+        { courseName: '商業(みらい総合コース)', capacity: 80 },
+      ],
+      totalCapacity: 390,
+      source: KAKE2_2024_HYOGO_SOURCE,
+    },
+    {
+      schoolCode: 'D128310000075',
+      schoolName: '神戸第一高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通コース', capacity: 120 },
+        { courseName: 'スポーツコース', capacity: 40 },
+        { courseName: 'ビジネスコース', capacity: 20 },
+        { courseName: 'システム情報コース', capacity: 20 },
+        { courseName: 'ファッションデザインコース', capacity: 40 },
+        { courseName: '保育・福祉コース', capacity: 40 },
+        { courseName: '製菓衛生師コース', capacity: 40 },
+        { courseName: '調理師コース', capacity: 40 },
+      ],
+      totalCapacity: 360,
+      source: KAKE2_2024_HYOGO_SOURCE,
+    },
+    {
+      schoolCode: 'D128310000146',
+      schoolName: '神戸常盤女子高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '家庭(女)', capacity: 60 },
+        { courseName: '大学特進看護医療コース(女)', capacity: 60 },
+        { courseName: '大学特進こども教育コース(女)', capacity: 30 },
+        { courseName: '大学特進文系コース(女)', capacity: 30 },
+        { courseName: '総合コース(女)', capacity: 105 },
+      ],
+      totalCapacity: 285,
+      source: KAKE2_2024_HYOGO_SOURCE,
+    },
+    {
+      schoolCode: 'D128310000155',
+      schoolName: '神戸野田高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特進Sコース(SS・S系列)', capacity: 35 },
+        { courseName: '特進グローバル英語(GE)コース(SG・G系列)', capacity: 35 },
+        { courseName: '特進アドバンス(A)コース(文理国際・スポーツ系列)', capacity: 100 },
+        { courseName: '進学総合コース', capacity: 150 },
+      ],
+      totalCapacity: 320,
+      source: KAKE2_2024_HYOGO_SOURCE,
+    },
+    {
+      schoolCode: 'D128310000100',
+      schoolName: '神戸山手グローバル高等学校(2024年度版は神戸山手女子)',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'グローバル選抜探究コース(女)', capacity: 30 },
+        { courseName: '選抜コース(女)', capacity: 35 },
+        { courseName: '未来探究コース(女)', capacity: 105 },
+      ],
+      totalCapacity: 170,
+      source: KAKE2_2024_HYOGO_SOURCE,
+    },
+    {
+      schoolCode: 'D128310000066',
+      schoolName: '神戸龍谷高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '龍谷総合コース', capacity: 80 },
+        { courseName: '特進文理Sコース', capacity: 105 },
+        { courseName: '特進グローバル文系コース', capacity: 40 },
+        { courseName: '特進グローバル理系コース', capacity: 35 },
+      ],
+      totalCapacity: 260,
+      source: KAKE2_2024_HYOGO_SOURCE,
+    },
+    {
+      schoolCode: 'D128310000137',
+      schoolName: '彩星工科高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'ものづくり系(男、※機械科から改称)', capacity: 180 },
+        { courseName: '電気・情報系(男、※電気・情報技術科・機械電子科から改称)', capacity: 270 },
+        { courseName: '普通(男)', capacity: 135 },
+      ],
+      totalCapacity: 585,
+      source: KAKE2_2024_HYOGO_SOURCE,
+    },
+    {
+      schoolCode: 'D128310000440',
+      schoolName: '三田学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [],
+      totalCapacity: 40,
+      source: KAKE2_2024_HYOGO_SOURCE,
+    },
+    {
+      schoolCode: 'D128310000459',
+      schoolName: '三田松聖高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特別進学コース', capacity: 30 },
+        { courseName: '総合コース・進学アスリートコース(総合・進学アスリート計)', capacity: 180 },
+      ],
+      totalCapacity: 210,
+      source: KAKE2_2024_HYOGO_SOURCE,
+    },
+    {
+      schoolCode: 'D128310000360',
+      schoolName: '夙川高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特進コース', capacity: 80 },
+        { courseName: '進学コース', capacity: 80 },
+      ],
+      totalCapacity: 160,
+      source: KAKE2_2024_HYOGO_SOURCE,
+    },
+    {
+      schoolCode: 'D128310000057',
+      schoolName: '松蔭高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通(女、専願・推薦)', capacity: 50 }],
+      totalCapacity: 50,
       source: KAKE2_2024_HYOGO_SOURCE,
     },
   ],

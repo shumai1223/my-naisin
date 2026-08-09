@@ -1094,12 +1094,12 @@ describe('PRIVATE_SCHOOL_DETAIL_HYOGO(55校中43校を収録・残り12校は完
     }
   });
 
-  it('収録57レコード(43校+掛-2多年度14レコード)・スキップ12件で参照台帳の55校と完全一致(重複・欠落なし)', () => {
+  it('収録68レコード(43校+掛-2多年度25レコード)・スキップ12件で参照台帳の55校と完全一致(重複・欠落なし)', () => {
     const allCodes = SCHOOLS_PRIVATE_HYOGO.schools.map((s) => s.code);
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_HYOGO, allCodes);
     expect(result.duplicates).toEqual([]);
     expect(result.missing).toHaveLength(0);
-    expect(PRIVATE_SCHOOL_DETAIL_HYOGO.schools.length).toBe(57);
+    expect(PRIVATE_SCHOOL_DETAIL_HYOGO.schools.length).toBe(68);
     expect(PRIVATE_SCHOOL_DETAIL_HYOGO.skipped.length).toBe(12);
   });
 
@@ -1151,6 +1151,52 @@ describe('PRIVATE_SCHOOL_DETAIL_HYOGO(55校中43校を収録・残り12校は完
       expect(y2024?.totalCapacity).toBe(before);
       expect(yLatest?.totalCapacity).toBe(after);
     }
+  });
+
+  it('掛-2(私立×多年度・2ページ目): 神戸星城・神戸第一・神戸常盤女子・神戸野田・神戸龍谷・三田学園・三田松聖・夙川・松蔭の9校は2024年度と2026年度で総定員が完全一致(神戸第一・神戸常盤女子・神戸龍谷はコース名の改称・再編を伴う)', () => {
+    const pairs: Array<[string, number]> = [
+      ['D128310000173', 390],
+      ['D128310000075', 360],
+      ['D128310000146', 285],
+      ['D128310000155', 320],
+      ['D128310000066', 260],
+      ['D128310000440', 40],
+      ['D128310000459', 210],
+      ['D128310000360', 160],
+      ['D128310000057', 50],
+    ];
+    for (const [code, total] of pairs) {
+      const y2024 = PRIVATE_SCHOOL_DETAIL_HYOGO.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '2024年度'
+      );
+      const yLatest = PRIVATE_SCHOOL_DETAIL_HYOGO.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel !== '2024年度'
+      );
+      expect(y2024?.totalCapacity).toBe(total);
+      expect(yLatest?.totalCapacity).toBe(total);
+    }
+  });
+
+  it('掛-2(私立×多年度・2ページ目): 神戸山手グローバル(旧神戸山手女子)は総定員170は一致するがコース間で再配分', () => {
+    const y2024 = PRIVATE_SCHOOL_DETAIL_HYOGO.schools.find(
+      (s) => s.schoolCode === 'D128310000100' && s.fiscalYearLabel === '2024年度'
+    );
+    const yLatest = PRIVATE_SCHOOL_DETAIL_HYOGO.schools.find(
+      (s) => s.schoolCode === 'D128310000100' && s.fiscalYearLabel !== '2024年度'
+    );
+    expect(y2024?.totalCapacity).toBe(170);
+    expect(yLatest?.totalCapacity).toBe(170);
+  });
+
+  it('掛-2(私立×多年度・2ページ目): 彩星工科は2024→2026年度でものづくり系(旧機械科)の共学化増員はあるが電気・情報系の減員が上回り総定員が585から550へ減少', () => {
+    const y2024 = PRIVATE_SCHOOL_DETAIL_HYOGO.schools.find(
+      (s) => s.schoolCode === 'D128310000137' && s.fiscalYearLabel === '2024年度'
+    );
+    const yLatest = PRIVATE_SCHOOL_DETAIL_HYOGO.schools.find(
+      (s) => s.schoolCode === 'D128310000137' && s.fiscalYearLabel !== '2024年度'
+    );
+    expect(y2024?.totalCapacity).toBe(585);
+    expect(yLatest?.totalCapacity).toBe(550);
   });
 });
 
