@@ -54,6 +54,17 @@
  * 旭丘・麻布大学附属・アレセイア湘南・英理女子学院・柏木学園・鎌倉学園・鎌倉国際文理
  * (当時鎌倉女子大学)・函嶺白百合学園の8校は総定員完全一致。**大西学園(120→160)・
  * 関東学院六浦(40→25)で実際の変化を検出**。
+ *
+ * 【掛-2続き(2026-08-09)】ページ2〜3も処理し25校へ拡大。鵠沼・慶應義塾湘南藤沢・向上・
+ * 湘南学院・相模女子大学・相模原(光明学園相模原)・聖セシリア女子・聖ヨゼフ学園・聖和学院・
+ * 相洋の10校は総定員完全一致(向上/湘南学院/相模女子大学/相模原/相洋はコース単位の内訳まで
+ * 完全一致という強い確認が取れた)。慶應義塾は2024年版が帰国生を「若干名」として除外していた
+ * ため単純比較では370→390の差が出るが、令和8年度版で帰国生が新たに20名と数値公表された
+ * 可能性が高く単純な定員変化ではない(要注記)。**星槎(73→49)・捜真女学校(25→35)・
+ * 橘学苑(200→204)で実際の変化を検出**。北鎌倉女子学園は2024年版のコース構成(先進・特進・
+ * 音楽の3区分)が令和8年度版(先進・特進統合の1区分+音楽)と対応関係を確信できず見送り
+ * (要再検証)。湘南工科大学附属は過去に桐蔭学園との取り違え事故があり現在も本体がskipped
+ * 中のため、正しい令和8年度データが定まるまで2024年版の追加も見送る。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -854,6 +865,176 @@ export const PRIVATE_SCHOOL_DETAIL_KANAGAWA: PrivateSchoolDetailFile = {
       fiscalYearLabel: '2024年度',
       courses: [{ courseName: '普通(女、推薦20+一般30)', capacity: 50 }],
       totalCapacity: 50,
+      source: KAKE2_2024_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114320500011',
+      schoolName: '鵠沼高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '英語コース', capacity: 30 },
+        { courseName: '理数コース', capacity: 30 },
+        { courseName: '文理コース', capacity: 190 },
+      ],
+      totalCapacity: 250,
+      source: {
+        ...KAKE2_2024_KANAGAWA_SOURCE,
+        docTitle: KAKE2_2024_KANAGAWA_SOURCE.docTitle + '(各コースとも推薦・一般専願・一般併願・一般オープンで同一の募集人員が記載)',
+      },
+    },
+    {
+      schoolCode: 'D114310000222',
+      schoolName: '慶應義塾高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(男、推薦1次約40)', capacity: 40 },
+        { courseName: '普通(男、一般、含帰国)', capacity: 330 },
+      ],
+      totalCapacity: 370,
+      source: {
+        ...KAKE2_2024_KANAGAWA_SOURCE,
+        docTitle:
+          KAKE2_2024_KANAGAWA_SOURCE.docTitle +
+          '(帰国生は若干名で数値非公表のため未算入。令和8年度版の「帰国生20」は別枠として新たに数値公表された可能性がある)',
+      },
+    },
+    {
+      schoolCode: 'D114320500093',
+      schoolName: '慶應義塾湘南藤沢高等部',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通(帰国生)', capacity: 20 }],
+      totalCapacity: 20,
+      source: {
+        ...KAKE2_2024_KANAGAWA_SOURCE,
+        docTitle: KAKE2_2024_KANAGAWA_SOURCE.docTitle + '(全国枠は若干名のため未算入。一般募集の記載はこのPDFに無い)',
+      },
+    },
+    {
+      schoolCode: 'D114321400010',
+      schoolName: '向上高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'S特進コース(推薦10+一般10、2024年新設)', capacity: 20 },
+        { courseName: '特進コース(推薦15+一般15)', capacity: 30 },
+        { courseName: '選抜コース(推薦35+一般55)', capacity: 90 },
+        { courseName: '文理コース(推薦60+一般80)', capacity: 140 },
+      ],
+      totalCapacity: 280,
+      source: KAKE2_2024_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114320100015',
+      schoolName: '湘南学院高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'サイエンス(特進理数)コース(推薦10+一般10)', capacity: 20 },
+        { courseName: 'アドバンス(特進)コース(推薦30+一般70)', capacity: 100 },
+        { courseName: 'アビリティ(進学)コース(推薦60+一般80)', capacity: 140 },
+        { courseName: 'リベラルアーツ(総合)コース(推薦100+一般85)', capacity: 185 },
+      ],
+      totalCapacity: 445,
+      source: KAKE2_2024_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114315000034',
+      schoolName: '相模女子大学高等部',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特進コース(推薦入試)', capacity: 25 },
+        { courseName: '特進コース(一般入試・書類選考)', capacity: 35 },
+        { courseName: '進学コース(推薦入試)', capacity: 100 },
+        { courseName: '進学コース(一般入試・書類選考)', capacity: 100 },
+      ],
+      totalCapacity: 260,
+      source: KAKE2_2024_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114315000043',
+      schoolName: '相模原高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '総合コース(推薦入試)', capacity: 155 },
+        { courseName: '総合コース(一般入試・一次書類選考含む)', capacity: 150 },
+        { courseName: '総合コース(オープン入試)', capacity: 5 },
+        { courseName: '体育科学コース(推薦入試)', capacity: 35 },
+        { courseName: '体育科学コース(一般入試)', capacity: 35 },
+        { courseName: '文理コース(推薦入試)', capacity: 30 },
+        { courseName: '文理コース(一般入試・一次書類選考含む)', capacity: 25 },
+        { courseName: '文理コース(オープン入試)', capacity: 5 },
+      ],
+      totalCapacity: 440,
+      source: {
+        ...KAKE2_2024_KANAGAWA_SOURCE,
+        docTitle: KAKE2_2024_KANAGAWA_SOURCE.docTitle + '(正式名称：光明学園相模原高等学校)',
+      },
+    },
+    {
+      schoolCode: 'D114310000295',
+      schoolName: '星槎高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通(推薦37+一般36)', capacity: 73 }],
+      totalCapacity: 73,
+      source: KAKE2_2024_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114321300011',
+      schoolName: '聖セシリア女子高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通(女、推薦15+一般書類選考15)', capacity: 30 }],
+      totalCapacity: 30,
+      source: KAKE2_2024_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114310000026',
+      schoolName: '聖ヨゼフ学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '総合進学コース・AEコース・ILコース(推薦20+一般書類選考15+オープン5)', capacity: 40 }],
+      totalCapacity: 40,
+      source: KAKE2_2024_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114320800018',
+      schoolName: '聖和学院高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '英語(女、推薦10+1回書類選考30+オープン5)', capacity: 45 },
+        { courseName: '普通(女、推薦10+1回書類選考30+オープン5)', capacity: 45 },
+      ],
+      totalCapacity: 90,
+      source: KAKE2_2024_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114310000099',
+      schoolName: '捜真女学校高等学部',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通(女、推薦10+一般15)', capacity: 25 }],
+      totalCapacity: 25,
+      source: KAKE2_2024_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114320600029',
+      schoolName: '相洋高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特進コース(選抜クラス、推薦5+一般筆記20+チャレンジ二次5)', capacity: 30 },
+        { courseName: '特進コース(特進クラス、推薦25+一般筆記55+チャレンジ二次5)', capacity: 85 },
+        { courseName: '文理コース(理科クラス、推薦30+一般筆記60+チャレンジ二次5)', capacity: 95 },
+        { courseName: '文理コース(文科クラス、推薦60+一般筆記120+チャレンジ二次5)', capacity: 185 },
+        { courseName: '進学コース(推薦60+一般筆記125+チャレンジ二次5)', capacity: 190 },
+      ],
+      totalCapacity: 585,
+      source: KAKE2_2024_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114310000035',
+      schoolName: '橘学苑高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '文理コース(特別進学、推薦10+一般10)', capacity: 20 },
+        { courseName: '文理コース(総合進学、推薦75+一般75)', capacity: 150 },
+        { courseName: 'デザイン美術コース(推薦15+一般15)', capacity: 30 },
+      ],
+      totalCapacity: 200,
       source: KAKE2_2024_KANAGAWA_SOURCE,
     },
   ],
