@@ -752,12 +752,12 @@ describe('PRIVATE_SCHOOL_DETAIL_CHIBA(62校中52校を収録・広域通信制5�
     }
   });
 
-  it('収録89レコード(52校+掛-2多年度37レコード)・スキップ10件で参照台帳の62校と完全一致(重複・欠落なし)', () => {
+  it('収録97レコード(52校+掛-2多年度45レコード)・スキップ10件で参照台帳の62校と完全一致(重複・欠落なし)', () => {
     const allCodes = SCHOOLS_PRIVATE_CHIBA.schools.map((s) => s.code);
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_CHIBA, allCodes);
     expect(result.duplicates).toEqual([]);
     expect(result.missing).toHaveLength(0);
-    expect(PRIVATE_SCHOOL_DETAIL_CHIBA.schools.length).toBe(89);
+    expect(PRIVATE_SCHOOL_DETAIL_CHIBA.schools.length).toBe(97);
     const distinctSchoolCodes = new Set(PRIVATE_SCHOOL_DETAIL_CHIBA.schools.map((s) => s.schoolCode));
     expect(distinctSchoolCodes.size).toBe(52);
     expect(PRIVATE_SCHOOL_DETAIL_CHIBA.skipped.length).toBe(10);
@@ -952,6 +952,49 @@ describe('PRIVATE_SCHOOL_DETAIL_CHIBA(62校中52校を収録・広域通信制5�
     );
     expect(y2024?.totalCapacity).toBe(640);
     expect(y2026?.totalCapacity).toBe(600);
+  });
+
+  it('掛-2(私立×多年度・第5弾): 東京学館浦安・東京学館船橋・成田・日本体育大学柏・日本大学習志野・和洋国府台女子の6校は2024年度と令和8年度で総定員が完全一致', () => {
+    const pairs: Array<[string, number]> = [
+      ['D112310000509', 400],
+      ['D112310000206', 292],
+      ['D112310000322', 200],
+      ['D112310000386', 360],
+      ['D112310000180', 190],
+      ['D112310000126', 140],
+    ];
+    for (const [code, total] of pairs) {
+      const y2024 = PRIVATE_SCHOOL_DETAIL_CHIBA.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '2024年度'
+      );
+      const y2026 = PRIVATE_SCHOOL_DETAIL_CHIBA.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '令和8年度'
+      );
+      expect(y2024?.totalCapacity).toBe(total);
+      expect(y2026?.totalCapacity).toBe(total);
+    }
+  });
+
+  it('掛-2(私立×多年度): 東葉は2024→令和8年度で2024年新設のS特進36+特進160+進学80=276から、特進・進学統合後のS特進26+特進240=266へ変化', () => {
+    const y2024 = PRIVATE_SCHOOL_DETAIL_CHIBA.schools.find(
+      (s) => s.schoolCode === 'D112310000171' && s.fiscalYearLabel === '2024年度'
+    );
+    const y2026 = PRIVATE_SCHOOL_DETAIL_CHIBA.schools.find(
+      (s) => s.schoolCode === 'D112310000171' && s.fiscalYearLabel === '令和8年度'
+    );
+    expect(y2024?.totalCapacity).toBe(276);
+    expect(y2026?.totalCapacity).toBe(266);
+  });
+
+  it('掛-2(私立×多年度): 麗澤は2024→令和8年度で叡智スーパー特進30+叡智特選70=100からS特進35+特選85=120へ増加', () => {
+    const y2024 = PRIVATE_SCHOOL_DETAIL_CHIBA.schools.find(
+      (s) => s.schoolCode === 'D112310000368' && s.fiscalYearLabel === '2024年度'
+    );
+    const y2026 = PRIVATE_SCHOOL_DETAIL_CHIBA.schools.find(
+      (s) => s.schoolCode === 'D112310000368' && s.fiscalYearLabel === '令和8年度'
+    );
+    expect(y2024?.totalCapacity).toBe(100);
+    expect(y2026?.totalCapacity).toBe(120);
   });
 });
 

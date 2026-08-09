@@ -49,6 +49,17 @@
  * (要再検証)。翔凜は2024年版で3コース(特進・選抜・進学)がそれぞれ独立して「全コース計200」
  * と記載されており、令和8年度の2コース構成(特別進学160+進学160=320)との対応関係が不明瞭な
  * ため収録を見送った(千葉商科大学付属と同型の構造不一致・要再検証)。
+ *
+ * 【掛-2 第5弾(2026-08-09)】2024年度版PDFの5〜6頁目もビジョン解析し、45校へ拡大。
+ * 東京学館浦安・東京学館船橋・成田・日本体育大学柏・日本大学習志野・和洋国府台女子の6校は
+ * 総定員完全一致。**東葉は実際の変化を検出**(2024年新設のS特進クラス36+特進クラス160+
+ * 進学クラス80=276から、令和8年度は特進・進学を統合しS特進26+特進240=266へ変化)。
+ * **麗澤も実際の変化を検出**(叡智スーパー特進30+叡智特選70=100から令和8年度はS特進35+
+ * 特選85=120へ増加)。流通経済大学付属柏(2024年版の総合進学コース211が令和8年度の71と
+ * 大きく乖離)・二松学舎大学附属柏(2024年版3コースと令和8年度2コースの対応不明)・
+ * 日出学園(2024年版が「特進・進学計20程度」という粗い概数表記で令和8年度70との対応不明)・
+ * 八千代松陰(全項目が「約」付き概数で外部/内部の区分が不明瞭)は、いずれも数値の対応関係を
+ * 確信できないため収録を見送った(要再検証)。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -1050,6 +1061,98 @@ export const PRIVATE_SCHOOL_DETAIL_CHIBA: PrivateSchoolDetailFile = {
         { courseName: '美術コース', capacity: 15 },
       ],
       totalCapacity: 640,
+      source: KAKE2_2024_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000509',
+      schoolName: '東京学館浦安高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特別進学コース選抜', capacity: 25 },
+        { courseName: '特別進学コース', capacity: 60 },
+        { courseName: '総合進学コース', capacity: 250 },
+        { courseName: '国際教養コース', capacity: 30 },
+        { courseName: 'スポーツ進学コース(男)', capacity: 35 },
+      ],
+      totalCapacity: 400,
+      source: KAKE2_2024_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000206',
+      schoolName: '東京学館船橋高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通', capacity: 108 },
+        { courseName: '情報ビジネス', capacity: 108 },
+        { courseName: '食物調理', capacity: 40 },
+        { courseName: '美術工芸', capacity: 36 },
+      ],
+      totalCapacity: 292,
+      source: KAKE2_2024_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000322',
+      schoolName: '成田高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特進αクラス', capacity: 80 },
+        { courseName: '進学クラス', capacity: 70 },
+        { courseName: '特別技能生', capacity: 50 },
+      ],
+      totalCapacity: 200,
+      source: KAKE2_2024_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000386',
+      schoolName: '日本体育大学柏高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'アカデミックフロンティアコース・アドバンストラーニングコース・アスリートコース(全コース計)', capacity: 360 },
+      ],
+      totalCapacity: 360,
+      source: KAKE2_2024_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000180',
+      schoolName: '日本大学習志野高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通(第一志望180・一般190のうち大きい方を採用)', capacity: 190 }],
+      totalCapacity: 190,
+      source: KAKE2_2024_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000126',
+      schoolName: '和洋国府台女子高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '和洋コース(女)', capacity: 50 },
+        { courseName: '進学コース(女)', capacity: 60 },
+        { courseName: '特進コース(女)', capacity: 30 },
+      ],
+      totalCapacity: 140,
+      source: KAKE2_2024_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000171',
+      schoolName: '東葉高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'S特進クラス(2024年新設)', capacity: 36 },
+        { courseName: '特進クラス', capacity: 160 },
+        { courseName: '進学クラス', capacity: 80 },
+      ],
+      totalCapacity: 276,
+      source: KAKE2_2024_CHIBA_SOURCE,
+    },
+    {
+      schoolCode: 'D112310000368',
+      schoolName: '麗澤高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '叡智スーパー特進コース(S特進)', capacity: 30 },
+        { courseName: '叡智特選コース(特選)', capacity: 70 },
+      ],
+      totalCapacity: 100,
       source: KAKE2_2024_CHIBA_SOURCE,
     },
   ],
