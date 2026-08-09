@@ -1825,8 +1825,8 @@ describe('PRIVATE_SCHOOL_DETAIL_KYOTO(大都市圏5県の初回着手・育伸�
     expect(result.missing).toEqual([]);
   });
 
-  it('収録47レコード(37校+掛-2多年度10レコード)+スキップ7校で参照台帳の44校と一致する', () => {
-    expect(PRIVATE_SCHOOL_DETAIL_KYOTO.schools.length).toBe(47);
+  it('収録61レコード(37校+掛-2多年度24レコード)+スキップ7校で参照台帳の44校と一致する', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_KYOTO.schools.length).toBe(61);
     const distinctSchoolCodes = new Set(PRIVATE_SCHOOL_DETAIL_KYOTO.schools.map((s) => s.schoolCode));
     expect(distinctSchoolCodes.size).toBe(37);
     expect(PRIVATE_SCHOOL_DETAIL_KYOTO.skipped.length).toBe(7);
@@ -1855,6 +1855,65 @@ describe('PRIVATE_SCHOOL_DETAIL_KYOTO(大都市圏5県の初回着手・育伸�
       expect(y2024?.totalCapacity).toBe(total);
       expect(yLatest?.totalCapacity).toBe(total);
     }
+  });
+
+  it('掛-2(私立×多年度・続き): 京都翔英・京都精華学園・京都成章・京都聖母学院・京都先端科学大学附属・京都西山・京都文教・京都明徳・京都両洋・同志社・同志社国際の11校は2024年度と2026年度で総定員が完全一致', () => {
+    const pairs: Array<[string, number]> = [
+      ['D126310000371', 260],
+      ['D126310000086', 200],
+      ['D126310000255', 400],
+      ['D126310000246', 180],
+      ['D126310000200', 320],
+      ['D126310000326', 250],
+      ['D126310000095', 200],
+      ['D126310000184', 350],
+      ['D126310000111', 435],
+      ['D126310000068', 80],
+      ['D126310000344', 135],
+    ];
+    for (const [code, total] of pairs) {
+      const y2024 = PRIVATE_SCHOOL_DETAIL_KYOTO.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '2024年度'
+      );
+      const yLatest = PRIVATE_SCHOOL_DETAIL_KYOTO.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel !== '2024年度'
+      );
+      expect(y2024?.totalCapacity).toBe(total);
+      expect(yLatest?.totalCapacity).toBe(total);
+    }
+  });
+
+  it('掛-2(私立×多年度): 京都聖カタリナは2024→2026年度で看護60+普通35=95から看護40+普通40=80へ変化', () => {
+    const y2024 = PRIVATE_SCHOOL_DETAIL_KYOTO.schools.find(
+      (s) => s.schoolCode === 'D126310000335' && s.fiscalYearLabel === '2024年度'
+    );
+    const yLatest = PRIVATE_SCHOOL_DETAIL_KYOTO.schools.find(
+      (s) => s.schoolCode === 'D126310000335' && s.fiscalYearLabel !== '2024年度'
+    );
+    expect(y2024?.totalCapacity).toBe(95);
+    expect(yLatest?.totalCapacity).toBe(80);
+  });
+
+  it('掛-2(私立×多年度): 京都橘は2024→2026年度で選抜類型70+総合類型200=270から選抜類型60+総合類型200=260へ変化', () => {
+    const y2024 = PRIVATE_SCHOOL_DETAIL_KYOTO.schools.find(
+      (s) => s.schoolCode === 'D126310000059' && s.fiscalYearLabel === '2024年度'
+    );
+    const yLatest = PRIVATE_SCHOOL_DETAIL_KYOTO.schools.find(
+      (s) => s.schoolCode === 'D126310000059' && s.fiscalYearLabel !== '2024年度'
+    );
+    expect(y2024?.totalCapacity).toBe(270);
+    expect(yLatest?.totalCapacity).toBe(260);
+  });
+
+  it('掛-2(私立×多年度・確度やや低): 同志社女子は2024年版「約20」から2026年版25への変化を示唆(いずれもLAコースのみ掲載)', () => {
+    const y2024 = PRIVATE_SCHOOL_DETAIL_KYOTO.schools.find(
+      (s) => s.schoolCode === 'D126310000022' && s.fiscalYearLabel === '2024年度'
+    );
+    const yLatest = PRIVATE_SCHOOL_DETAIL_KYOTO.schools.find(
+      (s) => s.schoolCode === 'D126310000022' && s.fiscalYearLabel !== '2024年度'
+    );
+    expect(y2024?.totalCapacity).toBe(20);
+    expect(yLatest?.totalCapacity).toBe(25);
   });
 });
 

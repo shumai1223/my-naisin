@@ -21,6 +21,15 @@
  * 京都国際・京都産業大学附属の10校は2024年度と2026年度で総定員が完全一致(コース内訳の
  * 呼称が変わっている場合もあるが総定員は一致)。京都光華は2024年版で女子専用コースのみ
  * だったことを確認(2026年度からの共学化コメントと整合)。
+ *
+ * 【掛-2続き(2026-08-09)】ページ2〜3も処理し24校へ拡大。京都翔英・京都精華学園・京都成章・
+ * 京都聖母学院・京都先端科学大学附属・京都西山・京都文教・京都明徳・京都両洋・同志社・
+ * 同志社国際の11校は総定員完全一致。**京都聖カタリナ・京都橘で実際の変化を検出**
+ * (京都聖カタリナ: 看護60+普通35=95→看護40+普通40=80。京都橘: 選抜類型70+総合類型200=270→
+ * 選抜類型60+総合類型200=260)。**同志社女子も変化を検出**(2024年版「約20」→2026年版25、
+ * ただし2024年版が概数のため確度はやや低い)。京都女子は2024年版(CSコース約40+Ⅱ類型約70+
+ * ウィステリア約40=150)が2026年版一次資料(CSコース約35+藤華コース約55+ウィステリア科約20=110)
+ * と大きく乖離し、両年とも概数のみでコース名対応も不明瞭なため収録を見送った(要再検証)。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -544,6 +553,160 @@ export const PRIVATE_SCHOOL_DETAIL_KYOTO: PrivateSchoolDetailFile = {
       courses: [{ courseName: '特進コース・進学コース(普通科計)', capacity: 280 }],
       totalCapacity: 280,
       source: KAKE2_2024_KYOTO_SOURCE,
+    },
+    {
+      schoolCode: 'D126310000371',
+      schoolName: '京都翔英高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(単位制)', capacity: 220 },
+        { courseName: '看護(2024年新設)', capacity: 40 },
+      ],
+      totalCapacity: 260,
+      source: KAKE2_2024_KYOTO_SOURCE,
+    },
+    {
+      schoolCode: 'D126310000086',
+      schoolName: '京都精華学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '進学Aコース・進学Bコース・遊学コース(普通科計、約170)', capacity: 170 },
+        { courseName: '美術(約30)', capacity: 30 },
+      ],
+      totalCapacity: 200,
+      source: KAKE2_2024_KYOTO_SOURCE,
+    },
+    {
+      schoolCode: 'D126310000335',
+      schoolName: '京都聖カタリナ高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '看護', capacity: 60 },
+        { courseName: '普通', capacity: 35 },
+      ],
+      totalCapacity: 95,
+      source: KAKE2_2024_KYOTO_SOURCE,
+    },
+    {
+      schoolCode: 'D126310000255',
+      schoolName: '京都成章高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'アカデミーコース(TSクラス/ASクラス/アカデミークラス)・メディカルスポーツコース(普通科計)', capacity: 400 },
+      ],
+      totalCapacity: 400,
+      source: KAKE2_2024_KYOTO_SOURCE,
+    },
+    {
+      schoolCode: 'D126310000246',
+      schoolName: '京都聖母学院高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        {
+          courseName: 'Ⅲ類(最難関特進)・Ⅱ類(特進)・看護系大学進学コース・Ⅰ類GSC・Ⅰ類(大学連携)(女・普通科計)',
+          capacity: 180,
+        },
+      ],
+      totalCapacity: 180,
+      source: KAKE2_2024_KYOTO_SOURCE,
+    },
+    {
+      schoolCode: 'D126310000200',
+      schoolName: '京都先端科学大学附属高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '国際コース・特進ADVANCEDコース・特進BASICコース・進学コース(普通科計)', capacity: 320 },
+      ],
+      totalCapacity: 320,
+      source: KAKE2_2024_KYOTO_SOURCE,
+    },
+    {
+      schoolCode: 'D126310000059',
+      schoolName: '京都橘高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '選抜類型', capacity: 70 },
+        { courseName: '総合類型', capacity: 200 },
+      ],
+      totalCapacity: 270,
+      source: KAKE2_2024_KYOTO_SOURCE,
+    },
+    {
+      schoolCode: 'D126310000326',
+      schoolName: '京都西山高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '特進コース・総合進学コース(普通科計)', capacity: 250 }],
+      totalCapacity: 250,
+      source: KAKE2_2024_KYOTO_SOURCE,
+    },
+    {
+      schoolCode: 'D126310000095',
+      schoolName: '京都文教高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特進コースA(文系・理系)・特進コースB(文理専攻/国際英語専攻)(特進A・B計)', capacity: 40 },
+        { courseName: '進学コース', capacity: 130 },
+        { courseName: '体育コース', capacity: 30 },
+      ],
+      totalCapacity: 200,
+      source: KAKE2_2024_KYOTO_SOURCE,
+    },
+    {
+      schoolCode: 'D126310000184',
+      schoolName: '京都明徳高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        {
+          courseName: 'みらい社会EL(特進コース)・PL(総合/文理コース)・CL(マネジメント系大学進学コース)・SL(スポーツマネジメントコース)(全コース計)',
+          capacity: 350,
+        },
+      ],
+      totalCapacity: 350,
+      source: KAKE2_2024_KYOTO_SOURCE,
+    },
+    {
+      schoolCode: 'D126310000111',
+      schoolName: '京都両洋高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'K特進コース', capacity: 15 },
+        { courseName: 'J進学コース・Jキャリアコース・S探究コース(進学・キャリア・探究計)', capacity: 420 },
+      ],
+      totalCapacity: 435,
+      source: KAKE2_2024_KYOTO_SOURCE,
+    },
+    {
+      schoolCode: 'D126310000068',
+      schoolName: '同志社高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '推薦', capacity: 30 },
+        { courseName: '一般', capacity: 50 },
+      ],
+      totalCapacity: 80,
+      source: KAKE2_2024_KYOTO_SOURCE,
+    },
+    {
+      schoolCode: 'D126310000344',
+      schoolName: '同志社国際高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '帰国生(特別推薦・12月/2月選考、含編入、約90)', capacity: 90 },
+        { courseName: '国内一般生(推薦・G選考、約45)', capacity: 45 },
+      ],
+      totalCapacity: 135,
+      source: KAKE2_2024_KYOTO_SOURCE,
+    },
+    {
+      schoolCode: 'D126310000022',
+      schoolName: '同志社女子高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通(LAコース、約20)', capacity: 20 }],
+      totalCapacity: 20,
+      source: {
+        ...KAKE2_2024_KYOTO_SOURCE,
+        docTitle: KAKE2_2024_KYOTO_SOURCE.docTitle + '(LAコースのみ掲載。他コースの記載は無い)',
+      },
     },
   ],
   skipped: [
