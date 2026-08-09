@@ -11,6 +11,7 @@ import { PRIVATE_SCHOOL_TUITION_AKITA } from '@/data/private-school-tuition/akit
 import { PRIVATE_SCHOOL_TUITION_FUKUI } from '@/data/private-school-tuition/fukui';
 import { PRIVATE_SCHOOL_TUITION_KOCHI } from '@/data/private-school-tuition/kochi';
 import { PRIVATE_SCHOOL_TUITION_SAGA } from '@/data/private-school-tuition/saga';
+import { PRIVATE_SCHOOL_TUITION_TOYAMA } from '@/data/private-school-tuition/toyama';
 import { PRIVATE_SCHOOL_TUITION_BY_PREFECTURE, PRIVATE_SCHOOL_TUITION_FILES } from '@/data/private-school-tuition';
 import { SCHOOLS_PRIVATE_TOTTORI } from '@/data/schools-private/tottori';
 import { SCHOOLS_PRIVATE_TOKUSHIMA } from '@/data/schools-private/tokushima';
@@ -18,6 +19,7 @@ import { SCHOOLS_PRIVATE_AKITA } from '@/data/schools-private/akita';
 import { SCHOOLS_PRIVATE_FUKUI } from '@/data/schools-private/fukui';
 import { SCHOOLS_PRIVATE_KOCHI } from '@/data/schools-private/kochi';
 import { SCHOOLS_PRIVATE_SAGA } from '@/data/schools-private/saga';
+import { SCHOOLS_PRIVATE_TOYAMA } from '@/data/schools-private/toyama';
 
 describe('sumMonthlyFees / sumOneTimeFees / sumAnnualFees', () => {
   const base: PrivateSchoolTuition = {
@@ -331,19 +333,52 @@ describe('PRIVATE_SCHOOL_TUITION_SAGA(掛-3横展開6県目・annual/monthly/one
   });
 });
 
+describe('PRIVATE_SCHOOL_TUITION_TOYAMA(掛-3横展開7県目・授業料額面非公開校が多く部分収録に留まる)', () => {
+  it('収録校は全てfeesが非空でamountが正の数', () => {
+    for (const school of PRIVATE_SCHOOL_TUITION_TOYAMA.schools) {
+      expect(school.fees.length).toBeGreaterThan(0);
+      for (const fee of school.fees) {
+        expect(fee.amount).toBeGreaterThan(0);
+      }
+    }
+  });
+
+  it('schools-private/toyama.tsの全10校がschoolsまたはskippedのいずれかで網羅されている(重複・欠落なし)', () => {
+    const allCodes = SCHOOLS_PRIVATE_TOYAMA.schools.map((s) => s.code);
+    const result = findDuplicateOrMissingTuitionCodes(PRIVATE_SCHOOL_TUITION_TOYAMA, allCodes);
+    expect(result.duplicates).toEqual([]);
+    expect(result.missing).toEqual([]);
+  });
+
+  it('収録2校+スキップ8校', () => {
+    expect(PRIVATE_SCHOOL_TUITION_TOYAMA.schools.length).toBe(2);
+    expect(PRIVATE_SCHOOL_TUITION_TOYAMA.skipped.length).toBe(8);
+  });
+
+  it('富山第一・高岡第一とも入学金130,000円で一致する（校納金の他費目は学校ごとに異なる）', () => {
+    for (const school of PRIVATE_SCHOOL_TUITION_TOYAMA.schools) {
+      expect(sumOneTimeFees(school)).toBe(130000);
+    }
+    const tomiichi = PRIVATE_SCHOOL_TUITION_TOYAMA.schools.find((s) => s.schoolName === '富山第一高等学校')!;
+    expect(sumMonthlyFees(tomiichi)).toBe(2700);
+  });
+});
+
 describe('PRIVATE_SCHOOL_TUITION_BY_PREFECTURE / PRIVATE_SCHOOL_TUITION_FILES', () => {
-  it('tottori・tokushima・akita・fukui・kochi・sagaが登録されている', () => {
+  it('tottori・tokushima・akita・fukui・kochi・saga・toyamaが登録されている', () => {
     expect(PRIVATE_SCHOOL_TUITION_BY_PREFECTURE.tottori).toBe(PRIVATE_SCHOOL_TUITION_TOTTORI);
     expect(PRIVATE_SCHOOL_TUITION_BY_PREFECTURE.tokushima).toBe(PRIVATE_SCHOOL_TUITION_TOKUSHIMA);
     expect(PRIVATE_SCHOOL_TUITION_BY_PREFECTURE.akita).toBe(PRIVATE_SCHOOL_TUITION_AKITA);
     expect(PRIVATE_SCHOOL_TUITION_BY_PREFECTURE.fukui).toBe(PRIVATE_SCHOOL_TUITION_FUKUI);
     expect(PRIVATE_SCHOOL_TUITION_BY_PREFECTURE.kochi).toBe(PRIVATE_SCHOOL_TUITION_KOCHI);
     expect(PRIVATE_SCHOOL_TUITION_BY_PREFECTURE.saga).toBe(PRIVATE_SCHOOL_TUITION_SAGA);
+    expect(PRIVATE_SCHOOL_TUITION_BY_PREFECTURE.toyama).toBe(PRIVATE_SCHOOL_TUITION_TOYAMA);
     expect(PRIVATE_SCHOOL_TUITION_FILES).toContain(PRIVATE_SCHOOL_TUITION_TOTTORI);
     expect(PRIVATE_SCHOOL_TUITION_FILES).toContain(PRIVATE_SCHOOL_TUITION_TOKUSHIMA);
     expect(PRIVATE_SCHOOL_TUITION_FILES).toContain(PRIVATE_SCHOOL_TUITION_AKITA);
     expect(PRIVATE_SCHOOL_TUITION_FILES).toContain(PRIVATE_SCHOOL_TUITION_FUKUI);
     expect(PRIVATE_SCHOOL_TUITION_FILES).toContain(PRIVATE_SCHOOL_TUITION_KOCHI);
     expect(PRIVATE_SCHOOL_TUITION_FILES).toContain(PRIVATE_SCHOOL_TUITION_SAGA);
+    expect(PRIVATE_SCHOOL_TUITION_FILES).toContain(PRIVATE_SCHOOL_TUITION_TOYAMA);
   });
 });
