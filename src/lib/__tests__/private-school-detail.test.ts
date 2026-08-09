@@ -1317,9 +1317,48 @@ describe('PRIVATE_SCHOOL_DETAIL_IBARAKI(育伸社募集要項PDFで36校中22校
     expect(result.missing).toEqual([]);
   });
 
-  it('収録22校+スキップ14校(掲載なし13校+数値不明瞭1校)で参照台帳の36校と一致する', () => {
-    expect(PRIVATE_SCHOOL_DETAIL_IBARAKI.schools.length).toBe(22);
+  it('収録44レコード(22校×令和8年度+22校×2024年度)+スキップ14校(掲載なし13校+数値不明瞭1校)で参照台帳の36校と一致する', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_IBARAKI.schools.length).toBe(44);
     expect(PRIVATE_SCHOOL_DETAIL_IBARAKI.skipped.length).toBe(14);
+    const distinctSchoolCodes = new Set(PRIVATE_SCHOOL_DETAIL_IBARAKI.schools.map((s) => s.schoolCode));
+    expect(distinctSchoolCodes.size).toBe(22);
+  });
+
+  it('掛-2着手時に発見・是正: 霞ヶ浦のコース名誤り(ts上「総合選学コース」を「総合進学コース」に修正)', () => {
+    const kasumigaura = PRIVATE_SCHOOL_DETAIL_IBARAKI.schools.find(
+      (s) => s.schoolCode === 'D108344300011' && s.fiscalYearLabel === '令和8年度'
+    )!;
+    expect(kasumigaura.courses[0].courseName).toContain('総合進学コース');
+    expect(kasumigaura.totalCapacity).toBe(430);
+  });
+
+  it('掛-2(私立×多年度): 霞ヶ浦(480→430)・聖徳大学附属取手聖徳女子(70→100)・明秀学園日立(360→320)で定員変化を検出', () => {
+    const kasumigauraOld = PRIVATE_SCHOOL_DETAIL_IBARAKI.schools.find(
+      (s) => s.schoolCode === 'D108344300011' && s.fiscalYearLabel === '2024年度'
+    )!;
+    const kasumigauraNew = PRIVATE_SCHOOL_DETAIL_IBARAKI.schools.find(
+      (s) => s.schoolCode === 'D108344300011' && s.fiscalYearLabel === '令和8年度'
+    )!;
+    expect(kasumigauraOld.totalCapacity).toBe(480);
+    expect(kasumigauraNew.totalCapacity).toBe(430);
+
+    const shotokuOld = PRIVATE_SCHOOL_DETAIL_IBARAKI.schools.find(
+      (s) => s.schoolCode === 'D108321700024' && s.fiscalYearLabel === '2024年度'
+    )!;
+    const shotokuNew = PRIVATE_SCHOOL_DETAIL_IBARAKI.schools.find(
+      (s) => s.schoolCode === 'D108321700024' && s.fiscalYearLabel === '令和8年度'
+    )!;
+    expect(shotokuOld.totalCapacity).toBe(70);
+    expect(shotokuNew.totalCapacity).toBe(100);
+
+    const meishuOld = PRIVATE_SCHOOL_DETAIL_IBARAKI.schools.find(
+      (s) => s.schoolCode === 'D108320200012' && s.fiscalYearLabel === '2024年度'
+    )!;
+    const meishuNew = PRIVATE_SCHOOL_DETAIL_IBARAKI.schools.find(
+      (s) => s.schoolCode === 'D108320200012' && s.fiscalYearLabel === '令和8年度'
+    )!;
+    expect(meishuOld.totalCapacity).toBe(360);
+    expect(meishuNew.totalCapacity).toBe(320);
   });
 });
 
