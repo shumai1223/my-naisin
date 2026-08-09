@@ -414,6 +414,20 @@
  * 日本体育大学桜華と同型のパターン)。八王子学園八王子は現行コード解釈(一般①②第一志望・併願
  * 共通枠という単一値ラベル)が2024年度版で読み取れる第一志望/併願の異なる数値(例: 特選5/10)と
  * 整合せず、現行の測定基盤自体に確信が持てないため比較を見送り。
+ * **2026-08-10further(16ページ目8校中4校を収録・4校は測定基盤の不確実性が高く見送り)**: 八王子実践
+ * (特進45+75+選抜110+120+総合進学90+90=530)・広尾学園(医進サイエンス15+インターナショナル10=25)・
+ * フェリシア(推薦140+一般140=280、いずれも推薦/一般が別個の独立ラウンドとして明示)・文華女子
+ * (現行の東京文華、2026年度に校名変更・共学化、推薦120+一般120=240)の4校は2024年度と2026年度で
+ * 総定員が完全一致。羽田国際(2024〜蒲田女子から校名変更・女子→共学、本頁のPDF自体に既にその旨の
+ * 注記あり)は現行コードが「推薦・一般共通枠」という単一値ラベルで各コース18/54/18=90としているが、
+ * 2024年度版では推薦と一般が明確に異なる非連結の数値として印字されており(特別進学20+20、総合進学
+ * 72+72、幼児教育18+18)、加算した場合220と現行の90が2倍以上乖離するため、推薦/一般の結合規約が
+ * 年度間で一貫しているか確信が持てず見送り。富士見丘は2024年度版がWILL推薦60・一般①②③80・帰国40
+ * という3つの異なる値(現行の2値60/20と構造が食い違う)、藤村女子は2024年度版がアカデミッククエスト
+ * 40・キャリアデザイン120・スポーツウェルネス70の3コース制(現行は単一の普通コース20)、文化学園
+ * 大学杉並は進学コースの推薦・一般が現行では単一共有枠30である一方2024年度版は推薦30・一般50と
+ * 特進コースと同一の数値で印字され結合規約の一貫性が確認できないため、いずれも比較基盤の信頼性が
+ * 不十分と判断し見送り(捏造ゼロ原則)。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -4016,6 +4030,54 @@ export const PRIVATE_SCHOOL_DETAIL_TOKYO: PrivateSchoolDetailFile = {
         { courseName: '理数(理数Sクラス)(女、A推薦・B推薦①②・一般併優共通枠)', capacity: 40 },
       ],
       totalCapacity: 140,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113320100070',
+      schoolName: '八王子実践高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特進コース(推薦、J特進5・特選10・特進30)', capacity: 45 },
+        { courseName: '特進コース(一般併優①②③・フリー共通枠、J特進15・特選10・特進50)', capacity: 75 },
+        { courseName: '選抜コース(推薦)', capacity: 110 },
+        { courseName: '選抜コース(一般併優①②③・フリー共通枠)', capacity: 120 },
+        { courseName: '総合進学コース(推薦)', capacity: 90 },
+        { courseName: '総合進学コース(一般併優①②③・フリー共通枠)', capacity: 90 },
+      ],
+      totalCapacity: 530,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310300042',
+      schoolName: '広尾学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '医進・サイエンスコース(一般①②共通枠。帰国生は若干のため未算入)', capacity: 15 },
+        { courseName: 'インターナショナルコース(一般共通枠。帰国生は若干のため未算入)', capacity: 10 },
+      ],
+      totalCapacity: 25,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113320900054',
+      schoolName: 'フェリシア高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(女、推薦)', capacity: 140 },
+        { courseName: '普通(女、一般)', capacity: 140 },
+      ],
+      totalCapacity: 280,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113322900032',
+      schoolName: '文華女子高等学校(東京文華高等学校の校名変更前)',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(女、A推薦・B推薦共通枠)', capacity: 120 },
+        { courseName: '普通(女、一般)', capacity: 120 },
+      ],
+      totalCapacity: 240,
       source: KAKE2_2024_TOKYO_SOURCE,
     },
   ],

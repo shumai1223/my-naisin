@@ -2695,12 +2695,12 @@ describe('PRIVATE_SCHOOL_DETAIL_TOKYO(大都市圏5県の最後・育伸社募�
     }
   });
 
-  it('収録176校(掛-2の2024年度113校分含め289レコード)・スキップ65校で参照台帳241校を完全網羅(重複・欠落なし)', () => {
+  it('収録176校(掛-2の2024年度117校分含め293レコード)・スキップ65校で参照台帳241校を完全網羅(重複・欠落なし)', () => {
     const allCodes = SCHOOLS_PRIVATE_TOKYO.schools.map((s) => s.code);
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_TOKYO, allCodes);
     expect(result.duplicates).toEqual([]);
     expect(result.missing).toHaveLength(0);
-    expect(PRIVATE_SCHOOL_DETAIL_TOKYO.schools.length).toBe(289);
+    expect(PRIVATE_SCHOOL_DETAIL_TOKYO.schools.length).toBe(293);
     expect(PRIVATE_SCHOOL_DETAIL_TOKYO.skipped.length).toBe(65);
   });
 
@@ -3237,6 +3237,25 @@ describe('PRIVATE_SCHOOL_DETAIL_TOKYO(大都市圏5県の最後・育伸社募�
     );
     expect(y2024?.totalCapacity).toBe(80);
     expect(yLatest?.totalCapacity).toBe(80);
+  });
+
+  it('掛-2(私立×多年度・16ページ目): 八王子実践・広尾学園・フェリシア・文華女子(現・東京文華)の4校は2024年度と2026年度で総定員が完全一致', () => {
+    const pairs: Array<[string, number]> = [
+      ['D113320100070', 530],
+      ['D113310300042', 25],
+      ['D113320900054', 280],
+      ['D113322900032', 240],
+    ];
+    for (const [code, total] of pairs) {
+      const y2024 = PRIVATE_SCHOOL_DETAIL_TOKYO.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '2024年度'
+      );
+      const yLatest = PRIVATE_SCHOOL_DETAIL_TOKYO.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel !== '2024年度'
+      );
+      expect(y2024?.totalCapacity).toBe(total);
+      expect(yLatest?.totalCapacity).toBe(total);
+    }
   });
 });
 
