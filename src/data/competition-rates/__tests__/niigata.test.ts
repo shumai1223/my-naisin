@@ -6,10 +6,11 @@ import { NIIGATA_COMPETITION_RATES } from '../niigata';
  */
 describe('新潟県 倍率パイプラインα（Y-6・全日制73校93レコードの完全収録テスト）', () => {
   const { records, officialSubtotals } = NIIGATA_COMPETITION_RATES;
+  const r8 = records.filter((r) => !r.fiscalYear);
 
   it('全日制の全レコード合計が「全日制合計」行（quota11,709・applicants11,679）と完全一致する', () => {
     const grandTotal = officialSubtotals.find((s) => s.label === '全日制合計')!;
-    const result = checkAgainstSubtotal(records, grandTotal, () => true);
+    const result = checkAgainstSubtotal(records, grandTotal, (r) => !r.fiscalYear);
     expect(result.matches).toBe(true);
   });
 
@@ -21,11 +22,11 @@ describe('新潟県 倍率パイプラインα（Y-6・全日制73校93レコー
     }
   });
 
-  it('学校名+学科名の重複が無い', () => {
+  it('学校名+学科名+年度の重複が無い', () => {
     const seen = new Set<string>();
     const dupes: string[] = [];
     for (const r of records) {
-      const key = `${r.schoolName}|${r.department}`;
+      const key = `${r.schoolName}|${r.department}|${r.fiscalYear ?? ''}`;
       if (seen.has(key)) dupes.push(key);
       seen.add(key);
     }
@@ -37,8 +38,8 @@ describe('新潟県 倍率パイプラインα（Y-6・全日制73校93レコー
   });
 
   it('93レコード・73校が収録されている', () => {
-    expect(records.length).toBe(93);
-    const distinctSchools = new Set(records.map((r) => r.schoolName));
+    expect(r8.length).toBe(93);
+    const distinctSchools = new Set(r8.map((r) => r.schoolName));
     expect(distinctSchools.size).toBe(73);
   });
 
@@ -76,9 +77,19 @@ describe('新潟県 倍率パイプラインα（Y-6・全日制73校93レコー
     });
   });
 
+  it('掛-1(学校別×多年度): 令和7年度(R7)分レコードが92件収録され、「県立及び市立合計」(quota11,750・applicants11,923)と完全一致する', () => {
+    const r7 = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
+    expect(r7.length).toBe(92);
+    expect(r7.reduce((a, r) => a + r.quota, 0)).toBe(11750);
+    expect(r7.reduce((a, r) => a + r.finalApplicants, 0)).toBe(11923);
+
+    const distinctSchools = new Set(r7.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(73);
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of NIIGATA_COMPETITION_RATES.sources) {
-      expect(s.url).toMatch(/^https:\/\/kyouikucho\.nein\.ed\.jp\//);
+      expect(s.url).toMatch(/^https:\/\/(kyouikucho\.nein\.ed\.jp|www\.pref\.niigata\.lg\.jp)\//);
     }
   });
 });
