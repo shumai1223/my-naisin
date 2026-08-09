@@ -2695,12 +2695,12 @@ describe('PRIVATE_SCHOOL_DETAIL_TOKYO(大都市圏5県の最後・育伸社募�
     }
   });
 
-  it('収録176校(掛-2の2024年度3校分含め179レコード)・スキップ65校で参照台帳241校を完全網羅(重複・欠落なし)', () => {
+  it('収録176校(掛-2の2024年度16校分含め192レコード)・スキップ65校で参照台帳241校を完全網羅(重複・欠落なし)', () => {
     const allCodes = SCHOOLS_PRIVATE_TOKYO.schools.map((s) => s.code);
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_TOKYO, allCodes);
     expect(result.duplicates).toEqual([]);
     expect(result.missing).toHaveLength(0);
-    expect(PRIVATE_SCHOOL_DETAIL_TOKYO.schools.length).toBe(179);
+    expect(PRIVATE_SCHOOL_DETAIL_TOKYO.schools.length).toBe(192);
     expect(PRIVATE_SCHOOL_DETAIL_TOKYO.skipped.length).toBe(65);
   });
 
@@ -2730,6 +2730,49 @@ describe('PRIVATE_SCHOOL_DETAIL_TOKYO(大都市圏5県の最後・育伸社募�
     );
     expect(y2024?.totalCapacity).toBe(160);
     expect(yLatest?.totalCapacity).toBe(120);
+  });
+
+  it('掛-2(私立×多年度・2〜3ページ目): 安部学院・岩倉・江戸川女子・大森学園・開成・かえつ有明・科学技術学園・学習院高等科・神田女学園・関東国際・関東第一の11校は2024年度と2026年度で総定員が完全一致', () => {
+    const pairs: Array<[string, number]> = [
+      ['D113311700019', 100],
+      ['D113310600012', 420],
+      ['D113312300020', 125],
+      ['D113311100024', 180],
+      ['D113311800018', 100],
+      ['D113310800010', 10],
+      ['D113311200274', 80],
+      ['D113311600010', 20],
+      ['D113310100026', 100],
+      ['D113311300022', 180],
+      ['D113312300039', 600],
+    ];
+    for (const [code, total] of pairs) {
+      const y2024 = PRIVATE_SCHOOL_DETAIL_TOKYO.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '2024年度'
+      );
+      const yLatest = PRIVATE_SCHOOL_DETAIL_TOKYO.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel !== '2024年度'
+      );
+      expect(y2024?.totalCapacity).toBe(total);
+      expect(yLatest?.totalCapacity).toBe(total);
+    }
+  });
+
+  it('掛-2(私立×多年度・2〜3ページ目): 桜美林・北豊島の2校は2024→2026年度で総定員が変化', () => {
+    const pairs: Array<[string, number, number]> = [
+      ['D113320900036', 150, 180],
+      ['D113311800027', 150, 140],
+    ];
+    for (const [code, before, after] of pairs) {
+      const y2024 = PRIVATE_SCHOOL_DETAIL_TOKYO.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '2024年度'
+      );
+      const yLatest = PRIVATE_SCHOOL_DETAIL_TOKYO.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel !== '2024年度'
+      );
+      expect(y2024?.totalCapacity).toBe(before);
+      expect(yLatest?.totalCapacity).toBe(after);
+    }
   });
 });
 

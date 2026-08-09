@@ -287,6 +287,13 @@
  * 2校は総定員完全一致。足立学園は160→120(-40、総合コースが推薦ブロック40+一般ブロック40の
  * 2独立プールから単一ブロック40への再編)を検出(推薦/一般ブロックの加算解釈は本文4頁目の
  * 確立済みルールと整合)。19頁規模のため複数周回に分けて処理を継続する。
+ * **2026-08-10further(2〜3ページ目13校)**: 安部学院・岩倉・江戸川女子・大森学園・開成・
+ * かえつ有明・科学技術学園・学習院高等科・神田女学園・関東国際・関東第一(特別進学/進学A/進学G/
+ * スポーツ→ハイパー/アドバンスト/アグレッシブ/アスリートへ改称)の11校は総定員完全一致。桜美林は
+ * 150→180(+30、進学コースの増員)、北豊島は150→140(-10、インスパイアリング・プログラムの
+ * 推薦/一般各25→各20への減員)を検出。上野学園は現行レコード自体が2027年度分かつ音楽科の
+ * 推薦/一般ブロック構造が別途複雑な経緯で解決済みのため、2024年度版との再突合は誤読リスクを
+ * 避け見送り。川村は本文既存コメントの通り推薦/一般ブロックの加算可否が確定できず見送り継続。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -2540,6 +2547,149 @@ export const PRIVATE_SCHOOL_DETAIL_TOKYO: PrivateSchoolDetailFile = {
         { courseName: '総合コース(男、1回・2回一般共通枠、2026年度版は推薦枠と統合され単一ブロック40名に再編)', capacity: 40 },
       ],
       totalCapacity: 160,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311700019',
+      schoolName: '安部学院高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '商業科(女、A推薦・B推薦・一般共通枠)', capacity: 100 }],
+      totalCapacity: 100,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310600012',
+      schoolName: '岩倉高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '7限制(A推薦・B推薦・一般①・一般②共通枠)', capacity: 100 },
+        { courseName: '6限制(A推薦・B推薦・一般①・一般②共通枠)', capacity: 200 },
+        { courseName: '運輸(A推薦・B推薦・一般①・一般②共通枠)', capacity: 120 },
+      ],
+      totalCapacity: 420,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113312300020',
+      schoolName: '江戸川女子高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'Ⅱ類(A推薦・B推薦・一般①・一般②共通枠、普通科計。帰国は若干のため未算入)', capacity: 50 },
+        { courseName: 'Ⅲ類(A推薦・B推薦・一般①・一般②共通枠、普通科計。帰国は若干のため未算入)', capacity: 50 },
+        { courseName: '国際英語(A推薦・B推薦・一般①・一般②共通枠。帰国は若干のため未算入)', capacity: 25 },
+      ],
+      totalCapacity: 125,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113320900036',
+      schoolName: '桜美林高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '国公立コース(オープン・併優共通枠)', capacity: 20 },
+        { courseName: '特別進学コース(オープン・併優共通枠)', capacity: 30 },
+        { courseName: '進学コース(オープン・併優共通枠、2026年度版は130へ増員)', capacity: 100 },
+      ],
+      totalCapacity: 150,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311100024',
+      schoolName: '大森学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特選コース(推薦・一般①②③共通枠)', capacity: 20 },
+        { courseName: '選抜コース(推薦・一般①②③共通枠)', capacity: 40 },
+        { courseName: '総進コース(推薦・一般①②③共通枠)', capacity: 80 },
+        { courseName: '工業(男、推薦・一般①②③共通枠)', capacity: 40 },
+      ],
+      totalCapacity: 180,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311800018',
+      schoolName: '開成高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通(男、一般のみ)', capacity: 100 }],
+      totalCapacity: 100,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310800010',
+      schoolName: 'かえつ有明高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通(一般、帰国生を含む)', capacity: 10 }],
+      totalCapacity: 10,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311200274',
+      schoolName: '科学技術学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '総合コース(男、推薦・A日程・B日程共通枠)', capacity: 60 },
+        { courseName: '特進コース(男、推薦・A日程・B日程共通枠)', capacity: 20 },
+      ],
+      totalCapacity: 80,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311600010',
+      schoolName: '学習院高等科',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通(男、一般のみ、約)', capacity: 20 }],
+      totalCapacity: 20,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310100026',
+      schoolName: '神田女学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'グローバルコース(単願推薦・併願推薦・併願優遇・一般共通枠)', capacity: 25 },
+        { courseName: 'アドバンストコース(単願推薦・併願推薦・併願優遇・一般共通枠)', capacity: 25 },
+        { courseName: 'キャリアデザインコース(単願推薦・併願推薦・併願優遇・一般共通枠)', capacity: 50 },
+      ],
+      totalCapacity: 100,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311300022',
+      schoolName: '関東国際高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(推薦・一般①②③共通枠)', capacity: 60 },
+        { courseName: '外国語(推薦・一般①②③共通枠)', capacity: 120 },
+      ],
+      totalCapacity: 180,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113312300039',
+      schoolName: '関東第一高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特別進学コース(第一志望推薦・併願推薦・一般①②共通枠、2026年度版でハイパーコースへ改称)', capacity: 80 },
+        { courseName: '進学Aコース(第一志望推薦・併願推薦・一般①②共通枠、2026年度版でアドバンストコースへ改称)', capacity: 240 },
+        { courseName: '進学Gコース(第一志望推薦・併願推薦・一般①②共通枠、2026年度版でアグレッシブコースへ改称)', capacity: 200 },
+        { courseName: 'スポーツコース(男、第一志望推薦・一般共通枠、2026年度版でアスリートコースへ改称)', capacity: 80 },
+      ],
+      totalCapacity: 600,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311800027',
+      schoolName: '北豊島高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'インスパイアリング・プログラム(女、推薦A・B共通枠、2026年度版は20へ減)', capacity: 25 },
+        { courseName: 'インスパイアリング・プログラム(女、一般、2026年度版は20へ減)', capacity: 25 },
+        { courseName: 'バリュアブル・プログラム(女、推薦A・B共通枠)', capacity: 25 },
+        { courseName: 'バリュアブル・プログラム(女、一般)', capacity: 25 },
+        { courseName: 'グローバル・プログラム(女、推薦A・B共通枠)', capacity: 25 },
+        { courseName: 'グローバル・プログラム(女、一般)', capacity: 25 },
+      ],
+      totalCapacity: 150,
       source: KAKE2_2024_TOKYO_SOURCE,
     },
   ],
