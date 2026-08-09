@@ -428,6 +428,14 @@
  * 大学杉並は進学コースの推薦・一般が現行では単一共有枠30である一方2024年度版は推薦30・一般50と
  * 特進コースと同一の数値で印字され結合規約の一貫性が確認できないため、いずれも比較基盤の信頼性が
  * 不十分と判断し見送り(捏造ゼロ原則)。
+ * **2026-08-10further(17ページ目7校を全て収録・見送りなし)**: 文京学院大学女子(理数キャリアT25+
+ * A25+国際教養T25+A50=125)・文教大学付属(推薦70+一般①②40+一般③10=120)・法政大学(推薦46+一般46=92)・
+ * 宝仙学園(女子部こども教育コースのみ、推薦10+一般10=20、共学部理数インターは現行コードの対象外の
+ * ため比較対象外)・豊南(特進20+選抜40+進学100=160)・朋優学院(TGコース25[推薦掲載なし]+AG推薦40+
+ * 一般130+SG推薦60+一般140=395)・保善(特別進学30+大進選抜60+大学進学210=300)の7校全てで2024年度と
+ * 2026年度の総定員・内訳が完全一致(前頁の測定基盤不確実性とは対照的に本頁は全校が推薦/一般の結合
+ * 規約も含めクリーンに再現・朋優学院のTGコースが両年度とも推薦掲載なしという構造まで一致した点が
+ * 特に裏付けとして強い)。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -4078,6 +4086,100 @@ export const PRIVATE_SCHOOL_DETAIL_TOKYO: PrivateSchoolDetailFile = {
         { courseName: '普通(女、一般)', capacity: 120 },
       ],
       totalCapacity: 240,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310500193',
+      schoolName: '文京学院大学女子高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '理数キャリアコースT(特進)クラス(女、A推薦・B推薦①②・一般①②③共通枠)', capacity: 25 },
+        { courseName: '理数キャリアコースA(進学)クラス(女、A推薦・B推薦①②・一般①②③共通枠)', capacity: 25 },
+        { courseName: '国際教養コースT(特進)クラス(女、A推薦・B推薦①②・一般①②③共通枠)', capacity: 25 },
+        { courseName: '国際教養コースA(進学)クラス(女、A推薦・B推薦①②・一般①②③共通枠)', capacity: 50 },
+      ],
+      totalCapacity: 125,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310900091',
+      schoolName: '文教大学付属高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        {
+          courseName: 'スタンダードクラス・アドバンストクラス・アルティメットクラス(推薦共通枠、普通科計)',
+          capacity: 70,
+        },
+        {
+          courseName: 'スタンダードクラス・アドバンストクラス・アルティメットクラス(一般①②共通枠、普通科計)',
+          capacity: 40,
+        },
+        {
+          courseName: 'スタンダードクラス・アドバンストクラス・アルティメットクラス(一般③、普通科計)',
+          capacity: 10,
+        },
+      ],
+      totalCapacity: 120,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113320400013',
+      schoolName: '法政大学高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(推薦)', capacity: 46 },
+        { courseName: '普通(一般、男女共通枠)', capacity: 46 },
+      ],
+      totalCapacity: 92,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311400058',
+      schoolName: '宝仙学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'こども教育コース(女子部、A・C推薦・B推薦共通枠)', capacity: 10 },
+        { courseName: 'こども教育コース(女子部、一般①・②共通枠)', capacity: 10 },
+      ],
+      totalCapacity: 20,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311600127',
+      schoolName: '豊南高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特進コース(A推薦・B/C推薦①②・一般①②共通枠)', capacity: 20 },
+        { courseName: '選抜コース(A推薦・B/C推薦①②・一般①②共通枠)', capacity: 40 },
+        { courseName: '進学コース(A推薦・B/C推薦①②・一般①②共通枠)', capacity: 100 },
+      ],
+      totalCapacity: 160,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310900064',
+      schoolName: '朋優学院高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'TGコース(一般①②③共通枠、推薦の掲載なし)', capacity: 25 },
+        { courseName: 'AGコース(推薦)', capacity: 40 },
+        { courseName: 'AGコース(一般①②③共通枠)', capacity: 130 },
+        { courseName: 'SGコース(推薦)', capacity: 60 },
+        { courseName: 'SGコース(一般①②③共通枠)', capacity: 140 },
+      ],
+      totalCapacity: 395,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310400050',
+      schoolName: '保善高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特別進学クラス(男、単願推薦・併願推薦・一般A・B・C共通枠)', capacity: 30 },
+        { courseName: '大進選抜クラス(男、単願推薦・併願推薦・一般A・B・C共通枠)', capacity: 60 },
+        { courseName: '大学進学クラス(男、単願推薦・併願推薦・一般A・B・C共通枠)', capacity: 210 },
+      ],
+      totalCapacity: 300,
       source: KAKE2_2024_TOKYO_SOURCE,
     },
   ],
