@@ -39,6 +39,10 @@
  * 内部進学生の扱いが不明確なため要注記付きで収録。関西大学第一は2024年度版が専願A/B/C(109/40/19以内)
  * +併願「若干」という測定基盤自体が異なる概数構成で、2026年度版(内部進学予定者を含む合計400・
  * courses未分解)と単純比較不可のため今回は見送り。
+ * **2026-08-10further(5ページ目11校)**: 樟蔭・四天王寺・興國・金光藤蔭・堺リベラル・四天王寺東・
+ * 金光大阪・香里ヌヴェール学院の8校は総定員完全一致。四條畷学園は総定員480完全一致だが発展キャリア
+ * (140→160)と特別シンガク(60→40)の間でコース間の再配分が起きている可能性を検出。好文学園女子は
+ * 300→270(-30、8コース計→9コース計への再編)、金光八尾は205→220(+15、美術コース新設)を検出。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -1936,6 +1940,138 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
         { courseName: '進学アスリートコース(専願のみ)', capacity: 70 },
       ],
       totalCapacity: 280,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000557',
+      schoolName: '樟蔭高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '国際教養コース', capacity: 30 },
+        { courseName: '身体表現コース', capacity: 30 },
+        { courseName: '総合コース', capacity: 150 },
+      ],
+      totalCapacity: 210,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000110',
+      schoolName: '四天王寺高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '文理選抜コース(外部・約)', capacity: 35 },
+        { courseName: '文理コース(外部・約)', capacity: 90 },
+        { courseName: '文化・スポーツコース(約)', capacity: 30 },
+      ],
+      totalCapacity: 155,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000753',
+      schoolName: '興國高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通科アドバンスコース スーパーアドバンス', capacity: 110 },
+        { courseName: '普通科アドバンスコース プレミアムアドバンス', capacity: 80 },
+        { courseName: '普通科アスリートアドバンスコース', capacity: 120 },
+        { courseName: '普通科アカデミアコース', capacity: 120 },
+        { courseName: '普通科キャリアトライコース', capacity: 40 },
+        { courseName: 'ITビジネス科', capacity: 120 },
+      ],
+      totalCapacity: 590,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000815',
+      schoolName: '金光藤蔭高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        {
+          courseName: '普通科(スタンダード・エンカレッジ・アートアニメーション・トップアスリートの4コース計)',
+          capacity: 280,
+        },
+      ],
+      totalCapacity: 280,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000744',
+      schoolName: '堺リベラル高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '表現教育科(専願)', capacity: 74 }],
+      totalCapacity: 74,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000735',
+      schoolName: '四天王寺東高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'Ⅰ・Ⅱ・Ⅲコース(普通科計)', capacity: 175 },
+      ],
+      totalCapacity: 175,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000628',
+      schoolName: '金光大阪高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通科特進Ⅰコース', capacity: 80 },
+        { courseName: '普通科特進Ⅱコース', capacity: 80 },
+        { courseName: '普通科進学コース', capacity: 200 },
+      ],
+      totalCapacity: 360,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000414',
+      schoolName: '香里ヌヴェール学院高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        {
+          courseName: 'スーパーアカデミー(SAC)・スーパーイングリッシュ(SEC)・グローバルサイエンス(GSC)(全コース計)',
+          capacity: 180,
+        },
+      ],
+      totalCapacity: 180,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000762',
+      schoolName: '好文学園女子高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        {
+          courseName: '普通科(特別進学・進学アドバンス・進学フロンティア・看護医療系進学・幼児教育・ITライセンス・メディアクリエイター・デザイン美術・マンガアニメーションの8コース計、2026年度版は9コース計への再編後)',
+          capacity: 300,
+        },
+      ],
+      totalCapacity: 300,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000691',
+      schoolName: '金光八尾高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通科S特進コース(約)', capacity: 40 },
+        { courseName: '普通科特進コース(約)', capacity: 80 },
+        { courseName: '普通科総合進学コース(約、2026年度版では美術コース25名が新設され4コース構成に)', capacity: 85 },
+      ],
+      totalCapacity: 205,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000450',
+      schoolName: '四條畷学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通科総合キャリアコース(内共学1クラス)', capacity: 280 },
+        { courseName: '普通科発展キャリアコース(2026年度版は160へ増、総合キャリア/特別シンガクとの間で再配分の可能性)', capacity: 140 },
+        { courseName: '普通科特別シンガクコース(2026年度版は40へ減)', capacity: 60 },
+      ],
+      totalCapacity: 480,
       source: KAKE2_2024_OSAKA_SOURCE,
     },
   ],

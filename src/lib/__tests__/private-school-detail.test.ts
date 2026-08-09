@@ -2192,12 +2192,12 @@ describe('PRIVATE_SCHOOL_DETAIL_OSAKA(大都市圏5県の3県目・育伸社募�
     }
   });
 
-  it('収録91校(掛-2の2024年度34校分含め125レコード)・スキップ16校で参照台帳107校を完全網羅(重複・欠落なし)', () => {
+  it('収録91校(掛-2の2024年度45校分含め136レコード)・スキップ16校で参照台帳107校を完全網羅(重複・欠落なし)', () => {
     const allCodes = SCHOOLS_PRIVATE_OSAKA.schools.map((s) => s.code);
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_OSAKA, allCodes);
     expect(result.duplicates).toEqual([]);
     expect(result.missing).toHaveLength(0);
-    expect(PRIVATE_SCHOOL_DETAIL_OSAKA.schools.length).toBe(125);
+    expect(PRIVATE_SCHOOL_DETAIL_OSAKA.schools.length).toBe(136);
     expect(PRIVATE_SCHOOL_DETAIL_OSAKA.skipped.length).toBe(16);
   });
 
@@ -2312,6 +2312,47 @@ describe('PRIVATE_SCHOOL_DETAIL_OSAKA(大都市圏5県の3県目・育伸社募�
       ['D127310000584', 240, 210],
       ['D127310000548', 640, 650],
       ['D127310000771', 280, 385],
+    ];
+    for (const [code, before, after] of pairs) {
+      const y2024 = PRIVATE_SCHOOL_DETAIL_OSAKA.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '2024年度'
+      );
+      const yLatest = PRIVATE_SCHOOL_DETAIL_OSAKA.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel !== '2024年度'
+      );
+      expect(y2024?.totalCapacity).toBe(before);
+      expect(yLatest?.totalCapacity).toBe(after);
+    }
+  });
+
+  it('掛-2(私立×多年度・5ページ目): 樟蔭・四天王寺・興國・金光藤蔭・堺リベラル・四天王寺東・金光大阪・香里ヌヴェール学院・四條畷学園の9校は2024年度と2026年度で総定員が完全一致', () => {
+    const pairs: Array<[string, number]> = [
+      ['D127310000557', 210],
+      ['D127310000110', 155],
+      ['D127310000753', 590],
+      ['D127310000815', 280],
+      ['D127310000744', 74],
+      ['D127310000735', 175],
+      ['D127310000628', 360],
+      ['D127310000414', 180],
+      ['D127310000450', 480],
+    ];
+    for (const [code, total] of pairs) {
+      const y2024 = PRIVATE_SCHOOL_DETAIL_OSAKA.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '2024年度'
+      );
+      const yLatest = PRIVATE_SCHOOL_DETAIL_OSAKA.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel !== '2024年度'
+      );
+      expect(y2024?.totalCapacity).toBe(total);
+      expect(yLatest?.totalCapacity).toBe(total);
+    }
+  });
+
+  it('掛-2(私立×多年度・5ページ目): 好文学園女子・金光八尾の2校は2024→2026年度で総定員が変化', () => {
+    const pairs: Array<[string, number, number]> = [
+      ['D127310000762', 300, 270],
+      ['D127310000691', 205, 220],
     ];
     for (const [code, before, after] of pairs) {
       const y2024 = PRIVATE_SCHOOL_DETAIL_OSAKA.schools.find(
