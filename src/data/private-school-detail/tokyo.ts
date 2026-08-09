@@ -436,6 +436,25 @@
  * 2026年度の総定員・内訳が完全一致(前頁の測定基盤不確実性とは対照的に本頁は全校が推薦/一般の結合
  * 規約も含めクリーンに再現・朋優学院のTGコースが両年度とも推薦掲載なしという構造まで一致した点が
  * 特に裏付けとして強い)。
+ * **2026-08-10further(18ページ目12校中10校を収録・1校は見送り・1校は参照台帳に無く対象外)**: 堀越
+ * (総合科計約180の単一共有枠)・武蔵野(特進30+進学130=160)・明治学院東村山(推薦男子25+女子25+一般
+ * 男子35+女子35=120、性別ごとに独立した加算)・明治大学付属中野(推薦Ⅰ30+推薦Ⅱ30+一般105=165)・
+ * 明治大学付属明治(推薦20+一般30=50、男女同数値は共有単一枠)の5校は2024年度と2026年度で総定員が
+ * 完全一致。武蔵野大学大学は3コース全て「A推薦・B推薦・併優・一般共通枠」の単一共有値の年度間比較
+ * (ハイグレード40→35・PBLインター30→30・本科60→45)で総定員130→110へ減少。明治大学付属八王子
+ * (2024〜明治大学付属中野八王子から校名変更、本頁PDF自体に既にその旨注記あり)は推薦85+一般85=170
+ * から推薦80+一般80=160へ減少。明星(府中市)は2024年度版が推薦「全コース計110」+一般①「全コース計
+ * 200」+一般②「全コース計10」=320の3区分制に対し2026年度版は一般①②が単一の150共通枠へ統合され
+ * 推薦80+一般150=230へ減少(正則・東洋大学京北と同型のラウンド統合)。明法は2024年度版がA推薦・
+ * B推薦・一般が全て単一の「普通科計約90」共有枠だったのに対し2026年度版はA推薦57とB推薦・一般58の
+ * 2つの独立プールへ分割され90から115へ増加(東京家政大学附属女子と同型のプール分割による実質増)。
+ * 明治学院は2024年度版の推薦が「男女各60」(男女別個に60ずつ=計120)という明示的な性別内訳表記だった
+ * のに対し2026年度版は「男女共通枠60」という単一値表記に変わっており、一般①②(75/30)は不変のため
+ * 総定員が225から165へ変化(「各」から「共通枠」への文言変化という強いテキスト上の根拠に基づく判断)。
+ * 明星学園は2024年度版の一般①55・一般②20(異なる数値で加算含み75)が現行の一般・併優共通枠60という
+ * 単一値解釈と整合せず測定基盤に確信が持てないため見送り。武蔵野大学附属千代田高等学院は参照台帳
+ * (schools-private/tokyo.ts)に該当コードが存在せず掛-2の対象外(「千代田高等学校」という別の学校が
+ * 存在するが科・コース構成が異なり別法人と判断)。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -4180,6 +4199,135 @@ export const PRIVATE_SCHOOL_DETAIL_TOKYO: PrivateSchoolDetailFile = {
         { courseName: '大学進学クラス(男、単願推薦・併願推薦・一般A・B・C共通枠)', capacity: 210 },
       ],
       totalCapacity: 300,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311400067',
+      schoolName: '堀越高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        {
+          courseName: '総合コース・体育コース・トレイトコース(学校推薦・一般A・B共通枠、普通科計、約)',
+          capacity: 180,
+        },
+      ],
+      totalCapacity: 180,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311700117',
+      schoolName: '武蔵野高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特進ステージ(推薦A・B・併優・一般共通枠)', capacity: 30 },
+        { courseName: '進学ステージ(推薦A・B・併優・一般共通枠)', capacity: 130 },
+      ],
+      totalCapacity: 160,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113322900023',
+      schoolName: '武蔵野大学高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'ハイグレードコース(A推薦・B推薦・併優・一般共通枠)', capacity: 40 },
+        { courseName: 'PBLインターナショナルコース(A推薦・B推薦・併優・一般共通枠)', capacity: 30 },
+        { courseName: '本科コース(A推薦・B推薦・併優・一般共通枠)', capacity: 60 },
+      ],
+      totalCapacity: 130,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310300122',
+      schoolName: '明治学院高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(推薦、男女各60=計120)', capacity: 120 },
+        { courseName: '普通(一般①、男女共通枠)', capacity: 75 },
+        { courseName: '普通(一般②、男女共通枠)', capacity: 30 },
+      ],
+      totalCapacity: 225,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113321300021',
+      schoolName: '明治学院東村山高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(推薦・男子、約。運動クラブ男子約10を含む)', capacity: 25 },
+        { courseName: '普通(推薦・女子、約)', capacity: 25 },
+        { courseName: '普通(一般・男子、約)', capacity: 35 },
+        { courseName: '普通(一般・女子、約)', capacity: 35 },
+      ],
+      totalCapacity: 120,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311400076',
+      schoolName: '明治大学付属中野高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(男、推薦Ⅰ[総合]、約)', capacity: 30 },
+        { courseName: '普通(男、推薦Ⅱ[スポーツ]、約)', capacity: 30 },
+        { courseName: '普通(男、一般、約)', capacity: 105 },
+      ],
+      totalCapacity: 165,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113320100098',
+      schoolName: '明治大学付属八王子高等学校(2024〜明治大学付属中野八王子から校名変更)',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(推薦、男女共通枠、約)', capacity: 85 },
+        { courseName: '普通(一般、男女共通枠、約。スポーツ文化芸術20以内を含む)', capacity: 85 },
+      ],
+      totalCapacity: 170,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113320800019',
+      schoolName: '明治大学付属明治高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(推薦、男女共通枠、約。指定校を含む)', capacity: 20 },
+        { courseName: '普通(一般、男女共通枠、約)', capacity: 30 },
+      ],
+      totalCapacity: 50,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113320600011',
+      schoolName: '明星高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        {
+          courseName: '本科コース・MGSコース・SMGSコース(推薦共通枠、全コース計)',
+          capacity: 110,
+        },
+        {
+          courseName: '本科コース・MGSコース・SMGSコース(一般①(A・B・C)共通枠、全コース計)',
+          capacity: 200,
+        },
+        {
+          courseName: '本科コース・MGSコース・SMGSコース(一般②(A・B)共通枠、全コース計)',
+          capacity: 10,
+        },
+      ],
+      totalCapacity: 320,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113321300030',
+      schoolName: '明法高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        {
+          courseName: '特別進学コース・総合進学コース(A推薦・B推薦Ⅰ・Ⅱ・一般①②共通枠、普通科計、約。GSP15を含む)',
+          capacity: 90,
+        },
+      ],
+      totalCapacity: 90,
       source: KAKE2_2024_TOKYO_SOURCE,
     },
   ],

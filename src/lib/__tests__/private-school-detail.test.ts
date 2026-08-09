@@ -2695,12 +2695,12 @@ describe('PRIVATE_SCHOOL_DETAIL_TOKYO(大都市圏5県の最後・育伸社募�
     }
   });
 
-  it('収録176校(掛-2の2024年度124校分含め300レコード)・スキップ65校で参照台帳241校を完全網羅(重複・欠落なし)', () => {
+  it('収録176校(掛-2の2024年度134校分含め310レコード)・スキップ65校で参照台帳241校を完全網羅(重複・欠落なし)', () => {
     const allCodes = SCHOOLS_PRIVATE_TOKYO.schools.map((s) => s.code);
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_TOKYO, allCodes);
     expect(result.duplicates).toEqual([]);
     expect(result.missing).toHaveLength(0);
-    expect(PRIVATE_SCHOOL_DETAIL_TOKYO.schools.length).toBe(300);
+    expect(PRIVATE_SCHOOL_DETAIL_TOKYO.schools.length).toBe(310);
     expect(PRIVATE_SCHOOL_DETAIL_TOKYO.skipped.length).toBe(65);
   });
 
@@ -3278,6 +3278,56 @@ describe('PRIVATE_SCHOOL_DETAIL_TOKYO(大都市圏5県の最後・育伸社募�
       expect(y2024?.totalCapacity).toBe(total);
       expect(yLatest?.totalCapacity).toBe(total);
     }
+  });
+
+  it('掛-2(私立×多年度・18ページ目): 堀越・武蔵野・明治学院東村山・明治大学付属中野・明治大学付属明治の5校は2024年度と2026年度で総定員が完全一致', () => {
+    const pairs: Array<[string, number]> = [
+      ['D113311400067', 180],
+      ['D113311700117', 160],
+      ['D113321300021', 120],
+      ['D113311400076', 165],
+      ['D113320800019', 50],
+    ];
+    for (const [code, total] of pairs) {
+      const y2024 = PRIVATE_SCHOOL_DETAIL_TOKYO.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '2024年度'
+      );
+      const yLatest = PRIVATE_SCHOOL_DETAIL_TOKYO.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel !== '2024年度'
+      );
+      expect(y2024?.totalCapacity).toBe(total);
+      expect(yLatest?.totalCapacity).toBe(total);
+    }
+  });
+
+  it('掛-2(私立×多年度・18ページ目): 武蔵野大学・明治大学付属八王子・明星(府中市)・明治学院の4校は2024→2026年度で総定員が減少', () => {
+    const pairs: Array<[string, number, number]> = [
+      ['D113322900023', 130, 110],
+      ['D113320100098', 170, 160],
+      ['D113320600011', 320, 230],
+      ['D113310300122', 225, 165],
+    ];
+    for (const [code, before, after] of pairs) {
+      const y2024 = PRIVATE_SCHOOL_DETAIL_TOKYO.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '2024年度'
+      );
+      const yLatest = PRIVATE_SCHOOL_DETAIL_TOKYO.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel !== '2024年度'
+      );
+      expect(y2024?.totalCapacity).toBe(before);
+      expect(yLatest?.totalCapacity).toBe(after);
+    }
+  });
+
+  it('掛-2(私立×多年度・18ページ目): 明法はA推薦・B推薦・一般の単一共有枠がA/B系統の2プールへ分割され総定員が90から115へ増加', () => {
+    const y2024 = PRIVATE_SCHOOL_DETAIL_TOKYO.schools.find(
+      (s) => s.schoolCode === 'D113321300030' && s.fiscalYearLabel === '2024年度'
+    );
+    const yLatest = PRIVATE_SCHOOL_DETAIL_TOKYO.schools.find(
+      (s) => s.schoolCode === 'D113321300030' && s.fiscalYearLabel !== '2024年度'
+    );
+    expect(y2024?.totalCapacity).toBe(90);
+    expect(yLatest?.totalCapacity).toBe(115);
   });
 });
 
