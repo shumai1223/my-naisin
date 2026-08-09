@@ -9,6 +9,7 @@ import { PRIVATE_SCHOOL_TUITION_FUKUI } from './fukui';
 import { PRIVATE_SCHOOL_TUITION_KOCHI } from './kochi';
 import { PRIVATE_SCHOOL_TUITION_SAGA } from './saga';
 import { PRIVATE_SCHOOL_TUITION_TOYAMA } from './toyama';
+import { PRIVATE_SCHOOL_TUITION_SHIMANE } from './shimane';
 import type { PrivateSchoolTuitionFile } from '@/lib/private-school-tuition';
 
 export const PRIVATE_SCHOOL_TUITION_BY_PREFECTURE: Record<string, PrivateSchoolTuitionFile> = {
@@ -19,6 +20,7 @@ export const PRIVATE_SCHOOL_TUITION_BY_PREFECTURE: Record<string, PrivateSchoolT
   kochi: PRIVATE_SCHOOL_TUITION_KOCHI,
   saga: PRIVATE_SCHOOL_TUITION_SAGA,
   toyama: PRIVATE_SCHOOL_TUITION_TOYAMA,
+  shimane: PRIVATE_SCHOOL_TUITION_SHIMANE,
 };
 
 export const PRIVATE_SCHOOL_TUITION_FILES: PrivateSchoolTuitionFile[] = Object.values(
