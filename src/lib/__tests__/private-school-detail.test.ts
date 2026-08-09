@@ -882,9 +882,55 @@ describe('PRIVATE_SCHOOL_DETAIL_AOMORI(個別学校サイト2校+育伸社募集
     expect(result.missing).toEqual([]);
   });
 
-  it('17校全てを収録しスキップ0件', () => {
-    expect(PRIVATE_SCHOOL_DETAIL_AOMORI.schools.length).toBe(17);
+  it('収録34レコード(17校×2026年度+17校×2024年度)でスキップ0件', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_AOMORI.schools.length).toBe(34);
     expect(PRIVATE_SCHOOL_DETAIL_AOMORI.skipped.length).toBe(0);
+    const distinctSchoolCodes = new Set(PRIVATE_SCHOOL_DETAIL_AOMORI.schools.map((s) => s.schoolCode));
+    expect(distinctSchoolCodes.size).toBe(17);
+  });
+
+  it('掛-2(私立×多年度): 青森山田/五所川原第一/東奥義塾/八戸聖ウルスラ学院の4校で定員変化を検出、他13校は完全一致', () => {
+    const changed = [
+      { code: 'D102310000057', older: 400, newer: 360 },
+      { code: 'D102310000119', older: 175, newer: 140 },
+      { code: 'D102310000039', older: 320, newer: 234 },
+      { code: 'D102310000084', older: 200, newer: 180 },
+    ];
+    for (const { code, older, newer } of changed) {
+      const oldRecord = PRIVATE_SCHOOL_DETAIL_AOMORI.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '2024年度'
+      )!;
+      const newRecord = PRIVATE_SCHOOL_DETAIL_AOMORI.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '令和8年度'
+      )!;
+      expect(oldRecord.totalCapacity).toBe(older);
+      expect(newRecord.totalCapacity).toBe(newer);
+    }
+
+    const unchangedCodes = [
+      'D102310000011',
+      'D102310000020',
+      'D102310000048',
+      'D102310000066',
+      'D102310000075',
+      'D102310000093',
+      'D102310000100',
+      'D102310000128',
+      'D102310000137',
+      'D102310000146',
+      'D102310000155',
+      'D102310000164',
+      'D102310000173',
+    ];
+    for (const code of unchangedCodes) {
+      const oldRecord = PRIVATE_SCHOOL_DETAIL_AOMORI.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '2024年度'
+      )!;
+      const newRecord = PRIVATE_SCHOOL_DETAIL_AOMORI.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '令和8年度'
+      )!;
+      expect(oldRecord.totalCapacity).toBe(newRecord.totalCapacity);
+    }
   });
 });
 

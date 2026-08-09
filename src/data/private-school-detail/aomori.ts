@@ -8,6 +8,18 @@
  * (岩手・宮城・宮崎に続き4県連続でこの一致検証が再現)。八戸聖ウルスラ学院の
  * LAコース・MAコース・SAコースのように複数コースが「普通科計X」と注記され
  * 同一数値を共有している場合は合算せず1つの共有コースとして統合記録した。
+ *
+ * 【掛-2（私立×多年度）追加】同一URL(03902.pdf)はikushin.co.jpが年次更新のたびに
+ * 上書きする方式のため、Wayback CDX APIで過去スナップショットを確認したところ
+ * 2024年8月12日キャプチャ分(「2024年度版・2023年12月26日現在」)が発掘できた
+ * (ishikawa/yamagataの2年ギャップと同型)。pdftotext -layoutで現行(2026年度)版と
+ * 機械的に突合した結果、17校中13校は総定員が完全一致。**4校で実際の変化を検出**:
+ * 青森山田(共通枠320→280・吹奏楽コース→アートエクスプレッションコースに改称・
+ * 総定員400→360)、五所川原第一(175→140)、東奥義塾(320→234・単一「普通」から
+ * 特別進学/進学選抜/総合の3コース制へ再編)、八戸聖ウルスラ学院(音楽科20が
+ * 「※音楽科→普通科MAコース」という現行PDFの脚注どおり普通科の共有枠に統合され
+ * 総定員200→180)。下山学園の脚注「(2024～五所川原商業から校名変更)」から、
+ * 同校が2024年度に五所川原商業から改称した実在の経緯も確認できた。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -15,6 +27,13 @@ const IKUSHIN_SOURCE = {
   url: 'https://www.ikushin.co.jp/school/pdf/03902.pdf',
   docTitle: '2026年度 高専・私立高校 募集要項【青森県】（(株)育伸社 入試情報課・2025年11月4日現在）',
   fetchedAt: '2026-07-31',
+  sourceTier: 'secondary' as const,
+};
+
+const KAKE2_2024_SOURCE = {
+  url: 'https://web.archive.org/web/20240812174927if_/https://www.ikushin.co.jp/school/pdf/03902.pdf',
+  docTitle: '2024年度 高専・私立高校 募集要項【青森県】(株式会社育伸社 入試情報課・2023年12月26日現在・Web Archive経由で取得)',
+  fetchedAt: '2026-08-09',
   sourceTier: 'secondary' as const,
 };
 
@@ -201,6 +220,198 @@ export const PRIVATE_SCHOOL_DETAIL_AOMORI: PrivateSchoolDetailFile = {
       courses: [{ courseName: '普通', capacity: 80 }],
       totalCapacity: 80,
       source: IKUSHIN_SOURCE,
+    },
+    {
+      schoolCode: 'D102310000057',
+      schoolName: '青森山田高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通科(特進コース・吹奏楽コース・キャリアアップコース・スポーツコース計)', capacity: 320 },
+        { courseName: 'ITビジネス', capacity: 40 },
+        { courseName: '調理', capacity: 40 },
+      ],
+      totalCapacity: 400,
+      source: {
+        ...KAKE2_2024_SOURCE,
+        docTitle:
+          KAKE2_2024_SOURCE.docTitle +
+          '(2026年度は共通枠320→280に減少・吹奏楽コースはアートエクスプレッションコースに改称。総定員400→360)',
+      },
+    },
+    {
+      schoolCode: 'D102310000011',
+      schoolName: '弘前学院聖愛高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通', capacity: 216 }],
+      totalCapacity: 216,
+      source: { ...KAKE2_2024_SOURCE, docTitle: KAKE2_2024_SOURCE.docTitle + '(2026年度と完全に同一)' },
+    },
+    {
+      schoolCode: 'D102310000020',
+      schoolName: '柴田学園大学附属柴田学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通・家政・情報', capacity: 210 }],
+      totalCapacity: 210,
+      source: { ...KAKE2_2024_SOURCE, docTitle: KAKE2_2024_SOURCE.docTitle + '(2026年度と完全に同一)' },
+    },
+    {
+      schoolCode: 'D102310000039',
+      schoolName: '東奥義塾高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通', capacity: 320 }],
+      totalCapacity: 320,
+      source: {
+        ...KAKE2_2024_SOURCE,
+        docTitle:
+          KAKE2_2024_SOURCE.docTitle + '(2026年度は特別進学・進学選抜・総合の3コース制に再編され総定員320→234に減少)',
+      },
+    },
+    {
+      schoolCode: 'D102310000048',
+      schoolName: '東奥学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(内スポーツ40以内)', capacity: 120 },
+        { courseName: '調理', capacity: 40 },
+        { courseName: '情報科学', capacity: 40 },
+        { courseName: '福祉', capacity: 40 },
+        { courseName: '看護', capacity: 40 },
+      ],
+      totalCapacity: 280,
+      source: { ...KAKE2_2024_SOURCE, docTitle: KAKE2_2024_SOURCE.docTitle + '(2026年度と完全に同一)' },
+    },
+    {
+      schoolCode: 'D102310000066',
+      schoolName: '青森明の星高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通', capacity: 130 },
+        { courseName: '英語', capacity: 40 },
+      ],
+      totalCapacity: 170,
+      source: { ...KAKE2_2024_SOURCE, docTitle: KAKE2_2024_SOURCE.docTitle + '(2026年度と完全に同一)' },
+    },
+    {
+      schoolCode: 'D102310000075',
+      schoolName: '千葉学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通', capacity: 35 },
+        { courseName: '生活文化', capacity: 60 },
+        { courseName: '調理', capacity: 35 },
+        { courseName: '看護', capacity: 40 },
+      ],
+      totalCapacity: 170,
+      source: { ...KAKE2_2024_SOURCE, docTitle: KAKE2_2024_SOURCE.docTitle + '(2026年度と完全に同一)' },
+    },
+    {
+      schoolCode: 'D102310000084',
+      schoolName: '八戸聖ウルスラ学院高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通科(LAコース・SAコース計)(内推薦若干)', capacity: 140 },
+        { courseName: '英語(内推薦若干)', capacity: 40 },
+        { courseName: '音楽(内推薦若干)', capacity: 20 },
+      ],
+      totalCapacity: 200,
+      source: {
+        ...KAKE2_2024_SOURCE,
+        docTitle:
+          KAKE2_2024_SOURCE.docTitle +
+          '(2026年度PDFの脚注「※音楽科→普通科MAコース」の通り音楽科20が普通科の共有枠に統合され、共有枠はLA/MA/SAの3コースへ拡張。総定員200→180)',
+      },
+    },
+    {
+      schoolCode: 'D102310000093',
+      schoolName: '八戸学院光星高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通', capacity: 270 },
+        { courseName: '保育福祉', capacity: 90 },
+      ],
+      totalCapacity: 360,
+      source: { ...KAKE2_2024_SOURCE, docTitle: KAKE2_2024_SOURCE.docTitle + '(2026年度と完全に同一)' },
+    },
+    {
+      schoolCode: 'D102310000100',
+      schoolName: '八戸工業大学第一高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通', capacity: 80 },
+        { courseName: '工業', capacity: 245 },
+      ],
+      totalCapacity: 325,
+      source: { ...KAKE2_2024_SOURCE, docTitle: KAKE2_2024_SOURCE.docTitle + '(2026年度と完全に同一)' },
+    },
+    {
+      schoolCode: 'D102310000119',
+      schoolName: '五所川原第一高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通', capacity: 175 }],
+      totalCapacity: 175,
+      source: {
+        ...KAKE2_2024_SOURCE,
+        docTitle: KAKE2_2024_SOURCE.docTitle + '(2026年度は175→140に減少)',
+      },
+    },
+    {
+      schoolCode: 'D102310000128',
+      schoolName: '下山学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '商業(内推薦80%以内)', capacity: 80 },
+        { courseName: '普通(内推薦80%以内)', capacity: 40 },
+      ],
+      totalCapacity: 120,
+      source: {
+        ...KAKE2_2024_SOURCE,
+        docTitle: KAKE2_2024_SOURCE.docTitle + '(総定員は2026年度と完全に同一。PDF脚注に「2024～五所川原商業から校名変更」の記載あり)',
+      },
+    },
+    {
+      schoolCode: 'D102310000137',
+      schoolName: '弘前東高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通', capacity: 80 },
+        { courseName: '電子', capacity: 40 },
+        { courseName: '情報', capacity: 80 },
+        { courseName: '自動車', capacity: 40 },
+      ],
+      totalCapacity: 240,
+      source: { ...KAKE2_2024_SOURCE, docTitle: KAKE2_2024_SOURCE.docTitle + '(2026年度と完全に同一)' },
+    },
+    {
+      schoolCode: 'D102310000146',
+      schoolName: '八戸学院野辺地西高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '総合', capacity: 100 }],
+      totalCapacity: 100,
+      source: { ...KAKE2_2024_SOURCE, docTitle: KAKE2_2024_SOURCE.docTitle + '(2026年度と完全に同一)' },
+    },
+    {
+      schoolCode: 'D102310000155',
+      schoolName: '松風塾高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通(総合進学コースのみ)', capacity: 25 }],
+      totalCapacity: 25,
+      source: { ...KAKE2_2024_SOURCE, docTitle: KAKE2_2024_SOURCE.docTitle + '(2026年度と完全に同一)' },
+    },
+    {
+      schoolCode: 'D102310000164',
+      schoolName: '八戸工業大学第二高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通科(進学コース・総合コース・美術コース計・一貫含む)', capacity: 240 }],
+      totalCapacity: 240,
+      source: { ...KAKE2_2024_SOURCE, docTitle: KAKE2_2024_SOURCE.docTitle + '(2026年度と完全に同一)' },
+    },
+    {
+      schoolCode: 'D102310000173',
+      schoolName: '向陵高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通', capacity: 80 }],
+      totalCapacity: 80,
+      source: { ...KAKE2_2024_SOURCE, docTitle: KAKE2_2024_SOURCE.docTitle + '(2026年度と完全に同一)' },
     },
   ],
   skipped: [],
