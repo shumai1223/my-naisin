@@ -404,6 +404,16 @@
  * 中村は2024年度版が推薦・一般とも同一の「先進・探究計25・国際5」(単一共有枠30、国際プログラム
  * 込み)である一方、2026年度版は推薦12+一般12という異なるラベル体系(国際プログラムへの言及なし)
  * のため、測定基盤が実質的に異なり単純な定員減とは断定できず見送り。
+ * **2026-08-10further(15ページ目9校中8校を収録・1校は見送り・日大系列が多数)**: 日本大学櫻丘
+ * (推薦220+A/B日程230=450)・日本大学第一(推薦75+一般75=150)・日本大学第二(推薦105+一般105=210)・
+ * 日本大学第三(推薦65+一般85=150)・日本大学鶴ヶ丘(総進175+175+特進10+40=400)・日本大学豊山
+ * (全コース計120の単一共有枠)・日本大学豊山女子(A特進・N進学計100+理数40=140)の7校は2024年度と
+ * 2026年度で総定員・内訳とも完全一致(日大系列は他県と同様に多年度でも安定)。日本女子体育大学附属
+ * 二階堂は総定員80は完全一致するが、2024年度版のキャリアデザイン35・ダンス20・スポーツ20から
+ * 2026年度版はキャリアデザイン25・ダンス25・スポーツ25へコース間で再配分(特別進学5は不変、
+ * 日本体育大学桜華と同型のパターン)。八王子学園八王子は現行コード解釈(一般①②第一志望・併願
+ * 共通枠という単一値ラベル)が2024年度版で読み取れる第一志望/併願の異なる数値(例: 特選5/10)と
+ * 整合せず、現行の測定基盤自体に確信が持てないため比較を見送り。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -3897,6 +3907,115 @@ export const PRIVATE_SCHOOL_DETAIL_TOKYO: PrivateSchoolDetailFile = {
         },
       ],
       totalCapacity: 248,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311200229',
+      schoolName: '日本女子体育大学附属二階堂高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'キャリアデザインコース(女、A・C推薦・B推薦・一般①②共通枠)', capacity: 35 },
+        { courseName: '特別進学コース(女、A推薦・B推薦・一般①②共通枠)', capacity: 5 },
+        { courseName: 'ダンスコース(女、A推薦・B推薦・一般①②共通枠)', capacity: 20 },
+        { courseName: 'スポーツコース(女、A推薦・B推薦・一般①②共通枠)', capacity: 20 },
+      ],
+      totalCapacity: 80,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311200247',
+      schoolName: '日本大学櫻丘高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        {
+          courseName: '特別進学(S)クラス・総合進学(G)クラス(推薦共通枠、普通科計)',
+          capacity: 220,
+        },
+        {
+          courseName: '特別進学(S)クラス・総合進学(G)クラス(A日程・B日程共通枠、普通科計)',
+          capacity: 230,
+        },
+      ],
+      totalCapacity: 450,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310700011',
+      schoolName: '日本大学第一高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(推薦)', capacity: 75 },
+        { courseName: '普通(一般A・B共通枠)', capacity: 75 },
+      ],
+      totalCapacity: 150,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311500100',
+      schoolName: '日本大学第二高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(推薦)', capacity: 105 },
+        { courseName: '普通(一般A・B共通枠)', capacity: 105 },
+      ],
+      totalCapacity: 210,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113320900018',
+      schoolName: '日本大学第三高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        {
+          courseName: '特進クラス・普通クラス(推薦共通枠、普通科計)',
+          capacity: 65,
+        },
+        {
+          courseName: '特進クラス・普通クラス(一般A・B共通枠、普通科計)',
+          capacity: 85,
+        },
+      ],
+      totalCapacity: 150,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311500119',
+      schoolName: '日本大学鶴ヶ丘高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '総進コース(推薦Ⅰ。推薦Ⅱは若干のため未算入)', capacity: 175 },
+        { courseName: '総進コース(一般、公立併願優遇可)', capacity: 175 },
+        { courseName: '特進コース(推薦Ⅰ)', capacity: 10 },
+        { courseName: '特進コース(一般)', capacity: 40 },
+      ],
+      totalCapacity: 400,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310500184',
+      schoolName: '日本大学豊山高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        {
+          courseName: '進学コース・特進コース・スポーツコース(男、推薦・特別推薦(学業・スポーツ)・併願優遇・一般(学業・スポーツ)共通枠、普通科計)',
+          capacity: 120,
+        },
+      ],
+      totalCapacity: 120,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311900062',
+      schoolName: '日本大学豊山女子高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        {
+          courseName: 'A特進クラス・N進学クラス(女、A推薦・B推薦①②・第一志望優遇・一般併優共通枠、A特進・N進学計)',
+          capacity: 100,
+        },
+        { courseName: '理数(理数Sクラス)(女、A推薦・B推薦①②・一般併優共通枠)', capacity: 40 },
+      ],
+      totalCapacity: 140,
       source: KAKE2_2024_TOKYO_SOURCE,
     },
   ],
