@@ -2209,12 +2209,12 @@ describe('PRIVATE_SCHOOL_DETAIL_AICHI(大都市圏5県の4県目・育伸社募�
     }
   });
 
-  it('収録57レコード(50校+掛-2多年度7レコード)・スキップ7件で参照台帳57校と完全一致(重複・欠落なし)', () => {
+  it('収録68レコード(50校+掛-2多年度18レコード)・スキップ7件で参照台帳57校と完全一致(重複・欠落なし)', () => {
     const allCodes = SCHOOLS_PRIVATE_AICHI.schools.map((s) => s.code);
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_AICHI, allCodes);
     expect(result.duplicates).toEqual([]);
     expect(result.missing).toHaveLength(0);
-    expect(PRIVATE_SCHOOL_DETAIL_AICHI.schools.length).toBe(57);
+    expect(PRIVATE_SCHOOL_DETAIL_AICHI.schools.length).toBe(68);
     const distinctSchoolCodes = new Set(PRIVATE_SCHOOL_DETAIL_AICHI.schools.map((s) => s.schoolCode));
     expect(distinctSchoolCodes.size).toBe(50);
     expect(PRIVATE_SCHOOL_DETAIL_AICHI.skipped.length).toBe(7);
@@ -2239,6 +2239,47 @@ describe('PRIVATE_SCHOOL_DETAIL_AICHI(大都市圏5県の4県目・育伸社募�
       ['D123310000472', 436, 430],
       ['D123310000196', 442, 416],
       ['D123310000454', 540, 533],
+    ];
+    for (const [code, before, after] of pairs) {
+      const y2024 = PRIVATE_SCHOOL_DETAIL_AICHI.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '2024年度'
+      );
+      const yLatest = PRIVATE_SCHOOL_DETAIL_AICHI.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel !== '2024年度'
+      );
+      expect(y2024?.totalCapacity).toBe(before);
+      expect(yLatest?.totalCapacity).toBe(after);
+    }
+  });
+
+  it('掛-2(私立×多年度・続き): 至学館・椙山女学園・聖カピタニオ女子の3校は2024年度と2026年度で総定員が完全一致', () => {
+    const pairs: Array<[string, number]> = [
+      ['D123310000132', 440],
+      ['D123310000034', 200],
+      ['D123310000310', 200],
+    ];
+    for (const [code, total] of pairs) {
+      const y2024 = PRIVATE_SCHOOL_DETAIL_AICHI.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '2024年度'
+      );
+      const yLatest = PRIVATE_SCHOOL_DETAIL_AICHI.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel !== '2024年度'
+      );
+      expect(y2024?.totalCapacity).toBe(total);
+      expect(yLatest?.totalCapacity).toBe(total);
+    }
+  });
+
+  it('掛-2(私立×多年度): 岡崎城西・菊華・享栄・啓明学館・桜丘・星城・誠信の7校は2024→2026年度で定員減少、修文学院のみ情報会計コース増員で定員増', () => {
+    const pairs: Array<[string, number, number]> = [
+      ['D123310000445', 540, 524],
+      ['D123310000258', 346, 343],
+      ['D123310000221', 520, 503],
+      ['D123310000089', 249, 234],
+      ['D123310000524', 591, 587],
+      ['D123310000365', 608, 581],
+      ['D123310000374', 274, 242],
+      ['D123310000294', 392, 440],
     ];
     for (const [code, before, after] of pairs) {
       const y2024 = PRIVATE_SCHOOL_DETAIL_AICHI.schools.find(

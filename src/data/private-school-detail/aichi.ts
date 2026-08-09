@@ -26,6 +26,13 @@
  * 2024年版で「普通」「看護」両コースが同一の「140(内推薦80%程度)」を独立記載しており
  * 共有クォータか各コース独立かを確信できず見送り。桜花学園は表がページ下端で途切れ
  * 続きの読み取りが必要なため次回に持ち越す。
+ *
+ * 【掛-2続き(2026-08-10)】ページ2も処理し18校へ拡大。至学館・椙山女学園・聖カピタニオ女子の
+ * 3校は総定員完全一致。**岡崎城西(540→524)・菊華(346→343)・享栄(520→503)・
+ * 啓明学館(249→234)・桜丘(591→587)・星城(608→581)・誠信(274→242)は定員減、
+ * 修文学院(392→440・情報会計コースが152→200へ大幅増員)のみ定員増**。aichiは他の
+ * 大都市圏県と異なり「変化あり」が「変化なし」を大きく上回る=県全体として2024→2026年度で
+ * 定員が縮小傾向にある可能性が高い(唯一の例外は修文学院と新設コースを含む愛知)。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -655,6 +662,127 @@ export const PRIVATE_SCHOOL_DETAIL_AICHI: PrivateSchoolDetailFile = {
         { courseName: '人間スポーツコース(男、約)', capacity: 40 },
       ],
       totalCapacity: 380,
+      source: KAKE2_2024_AICHI_SOURCE,
+    },
+    {
+      schoolCode: 'D123310000445',
+      schoolName: '岡崎城西高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '特進Zコース・特進Yコース・学習Xコース(普通科計)', capacity: 540 }],
+      totalCapacity: 540,
+      source: KAKE2_2024_AICHI_SOURCE,
+    },
+    {
+      schoolCode: 'D123310000258',
+      schoolName: '菊華高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通科総合コース(内推薦約80%)', capacity: 40 },
+        { courseName: '普通科進学コース(内推薦約80%)', capacity: 60 },
+        { courseName: '普通科保育・福祉コース(内推薦約80%)', capacity: 50 },
+        { courseName: '普通科スポーツコース(内推薦約80%)', capacity: 60 },
+        { courseName: '普通科エンタメコース(内推薦約80%)', capacity: 50 },
+        { courseName: '普通科フードクリエイトコース(内推薦約80%)', capacity: 30 },
+        { courseName: 'ITビジネス科(内推薦約80%)', capacity: 56 },
+      ],
+      totalCapacity: 346,
+      source: KAKE2_2024_AICHI_SOURCE,
+    },
+    {
+      schoolCode: 'D123310000221',
+      schoolName: '享栄高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'CP(コアプロ)コース(約)', capacity: 30 },
+        { courseName: 'C(コア)コース(約)', capacity: 210 },
+        { courseName: '商業(約)', capacity: 170 },
+        { courseName: '機械(約)', capacity: 110 },
+      ],
+      totalCapacity: 520,
+      source: KAKE2_2024_AICHI_SOURCE,
+    },
+    {
+      schoolCode: 'D123310000089',
+      schoolName: '啓明学館高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(女、内推薦80%以内)', capacity: 100 },
+        { courseName: '商業(女、内推薦80%以内)', capacity: 149 },
+      ],
+      totalCapacity: 249,
+      source: KAKE2_2024_AICHI_SOURCE,
+    },
+    {
+      schoolCode: 'D123310000524',
+      schoolName: '桜丘高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通コース・英数コース(普通科計556)', capacity: 556 },
+        { courseName: '音楽', capacity: 35 },
+      ],
+      totalCapacity: 591,
+      source: {
+        ...KAKE2_2024_AICHI_SOURCE,
+        docTitle: KAKE2_2024_AICHI_SOURCE.docTitle + '(2024年版は音楽が独立枠。令和8年度版は文理コース音楽専攻へ統合された可能性)',
+      },
+    },
+    {
+      schoolCode: 'D123310000132',
+      schoolName: '至学館高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'アドバンスコース', capacity: 30 },
+        { courseName: '留学コース', capacity: 30 },
+        { courseName: '進学スポーツサイエンスコース', capacity: 260 },
+        { courseName: '家政', capacity: 40 },
+        { courseName: '商業', capacity: 80 },
+      ],
+      totalCapacity: 440,
+      source: KAKE2_2024_AICHI_SOURCE,
+    },
+    {
+      schoolCode: 'D123310000294',
+      schoolName: '修文学院高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特進クラス・進学クラス(普通科計120、志入試含む)', capacity: 120 },
+        { courseName: '情報会計', capacity: 152 },
+        { courseName: '家政(女)', capacity: 40 },
+        { courseName: '食物調理', capacity: 80 },
+      ],
+      totalCapacity: 392,
+      source: KAKE2_2024_AICHI_SOURCE,
+    },
+    {
+      schoolCode: 'D123310000034',
+      schoolName: '椙山女学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通(外部、内推薦約55%)', capacity: 200 }],
+      totalCapacity: 200,
+      source: KAKE2_2024_AICHI_SOURCE,
+    },
+    {
+      schoolCode: 'D123310000310',
+      schoolName: '聖カピタニオ女子高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通(普通・英語コース)', capacity: 200 }],
+      totalCapacity: 200,
+      source: KAKE2_2024_AICHI_SOURCE,
+    },
+    {
+      schoolCode: 'D123310000365',
+      schoolName: '星城高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '仰星コース・特進コース・アスリート特進コース・明徳コース(普通科計)', capacity: 608 }],
+      totalCapacity: 608,
+      source: KAKE2_2024_AICHI_SOURCE,
+    },
+    {
+      schoolCode: 'D123310000374',
+      schoolName: '誠信高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通(内推薦80%)', capacity: 274 }],
+      totalCapacity: 274,
       source: KAKE2_2024_AICHI_SOURCE,
     },
   ],
