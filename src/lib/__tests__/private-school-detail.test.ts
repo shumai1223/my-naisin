@@ -557,9 +557,52 @@ describe('PRIVATE_SCHOOL_DETAIL_ISHIKAWA(民間集計PDFで12校中10校を収�
     expect(result.missing).toEqual([]);
   });
 
-  it('収録10校+スキップ2校(休校1校・広域通信制1校)で参照台帳の12校と一致する', () => {
-    expect(PRIVATE_SCHOOL_DETAIL_ISHIKAWA.schools.length).toBe(10);
+  it('収録19レコード(10校+掛-2多年度9レコード)+スキップ2校(休校1校・広域通信制1校)で参照台帳の12校と一致する', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_ISHIKAWA.schools.length).toBe(19);
     expect(PRIVATE_SCHOOL_DETAIL_ISHIKAWA.skipped.length).toBe(2);
+    const distinctSchoolCodes = new Set(PRIVATE_SCHOOL_DETAIL_ISHIKAWA.schools.map((s) => s.schoolCode));
+    expect(distinctSchoolCodes.size).toBe(10);
+  });
+
+  it('掛-2(私立×多年度): 金沢/遊学館/金沢龍谷/北陸学院/鵬学園/小松大谷/日本航空石川は2024年度と2026年度で定員完全一致', () => {
+    const unchangedCodes = [
+      'D117320100012',
+      'D117320100030',
+      'D117320100049',
+      'D117320100058',
+      'D117320200011',
+      'D117320300010',
+      'D117320400019',
+    ];
+    for (const code of unchangedCodes) {
+      const older = PRIVATE_SCHOOL_DETAIL_ISHIKAWA.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '2024年度'
+      )!;
+      const newer = PRIVATE_SCHOOL_DETAIL_ISHIKAWA.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '2026年度'
+      )!;
+      expect(older.totalCapacity).toBe(newer.totalCapacity);
+    }
+  });
+
+  it('掛-2(私立×多年度): 金沢学院大学附属は4コース全て減少・星稜はBコースのみ減少', () => {
+    const gakuinOld = PRIVATE_SCHOOL_DETAIL_ISHIKAWA.schools.find(
+      (s) => s.schoolCode === 'D117320100021' && s.fiscalYearLabel === '2024年度'
+    )!;
+    const gakuinNew = PRIVATE_SCHOOL_DETAIL_ISHIKAWA.schools.find(
+      (s) => s.schoolCode === 'D117320100021' && s.fiscalYearLabel === '2026年度'
+    )!;
+    expect(gakuinOld.totalCapacity).toBe(420);
+    expect(gakuinNew.totalCapacity).toBe(375);
+
+    const seiryoOld = PRIVATE_SCHOOL_DETAIL_ISHIKAWA.schools.find(
+      (s) => s.schoolCode === 'D117320100067' && s.fiscalYearLabel === '2024年度'
+    )!;
+    const seiryoNew = PRIVATE_SCHOOL_DETAIL_ISHIKAWA.schools.find(
+      (s) => s.schoolCode === 'D117320100067' && s.fiscalYearLabel === '2026年度'
+    )!;
+    expect(seiryoOld.totalCapacity).toBe(440);
+    expect(seiryoNew.totalCapacity).toBe(400);
   });
 });
 

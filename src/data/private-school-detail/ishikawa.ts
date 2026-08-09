@@ -4,6 +4,15 @@
  * (2025年11月4日現在)に、県内の国立/高専/私立高校の学科別募集定員が1枚の表にまとまって
  * いた(佐賀/富山/滋賀に続く高効率パターン・ただし出典は県庁/協会でなく民間教育情報会社の
  * 集計である点に留意)。国立(金沢大学附属)・高専(石川工業高専・私立国際高専)は対象外。
+ *
+ * 【掛-2（私立×多年度）追加】同一URL(03917.pdf)はikushin.co.jpが年次更新のたびに上書きする
+ * 方式のため、Wayback CDX APIで過去スナップショットを確認したところ2024年8月13日キャプチャ分
+ * (「2024年度版・2023年11月17日現在」)が発掘できた。現行(2026年度版)との間に2年の間隔がある
+ * (toyamaの3年ギャップに近い遠隔比較)。9校中6校(鵬学園/金沢/金沢龍谷/小松大谷/日本航空石川/
+ * 北陸学院)は定員完全一致だったが、**金沢学院大学附属は4コース全てで定員減少**(特別進学80→60・
+ * 総合進学180→175・スポーツ120→105・芸術デザイン40→35・合計420→375)、**星稜はBコースのみ
+ * 320→280に減少**(A/Pコースは不変)と、2校で実際の変化を検出した。金沢学院大学附属第二高等学校
+ * は2026年4月開校のため2024年度時点では存在せず対象外。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -11,6 +20,13 @@ const SOURCE = {
   url: 'https://www.ikushin.co.jp/school/pdf/03917.pdf',
   docTitle: '2026年度 国立高校・高専・私立高校 募集要項【石川県】(株式会社育伸社 入試情報課・2025年11月4日現在)',
   fetchedAt: '2026-07-30',
+  sourceTier: 'secondary' as const,
+};
+
+const KAKE2_2024_SOURCE = {
+  url: 'https://web.archive.org/web/20240813010713if_/https://www.ikushin.co.jp/school/pdf/03917.pdf',
+  docTitle: '2024年度 国立高校・高専・私立高校 募集要項【石川県】(株式会社育伸社 入試情報課・2023年11月17日現在・Web Archive経由で取得)',
+  fetchedAt: '2026-08-09',
   sourceTier: 'secondary' as const,
 };
 
@@ -124,6 +140,104 @@ export const PRIVATE_SCHOOL_DETAIL_ISHIKAWA: PrivateSchoolDetailFile = {
       courses: [{ courseName: '航空科(航空工学コース・普通科コース計)', capacity: 200 }],
       totalCapacity: 200,
       source: SOURCE,
+    },
+    {
+      schoolCode: 'D117320100012',
+      schoolName: '金沢高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'Sコース', capacity: 70 },
+        { courseName: '特進コース', capacity: 70 },
+        { courseName: '進学コース', capacity: 280 },
+      ],
+      totalCapacity: 420,
+      source: { ...KAKE2_2024_SOURCE, docTitle: KAKE2_2024_SOURCE.docTitle + '(2026年度と完全に同一)' },
+    },
+    {
+      schoolCode: 'D117320100021',
+      schoolName: '金沢学院大学附属高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特別進学コース', capacity: 80 },
+        { courseName: '総合進学コース', capacity: 180 },
+        { courseName: 'スポーツコース', capacity: 120 },
+        { courseName: '芸術デザインコース', capacity: 40 },
+      ],
+      totalCapacity: 420,
+      source: {
+        ...KAKE2_2024_SOURCE,
+        docTitle:
+          KAKE2_2024_SOURCE.docTitle + '(2026年度は4コース全てで定員減少=特別進学80→60・総合進学180→175・スポーツ120→105・芸術デザイン40→35・合計420→375)',
+      },
+    },
+    {
+      schoolCode: 'D117320100030',
+      schoolName: '遊学館高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通科', capacity: 440 }],
+      totalCapacity: 440,
+      source: { ...KAKE2_2024_SOURCE, docTitle: KAKE2_2024_SOURCE.docTitle + '(2026年度と完全に同一)' },
+    },
+    {
+      schoolCode: 'D117320100049',
+      schoolName: '金沢龍谷高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通科', capacity: 280 }],
+      totalCapacity: 280,
+      source: { ...KAKE2_2024_SOURCE, docTitle: KAKE2_2024_SOURCE.docTitle + '(2026年度と完全に同一)' },
+    },
+    {
+      schoolCode: 'D117320100058',
+      schoolName: '北陸学院高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通科(特別進学コース・総合進学コース計)', capacity: 200 }],
+      totalCapacity: 200,
+      source: { ...KAKE2_2024_SOURCE, docTitle: KAKE2_2024_SOURCE.docTitle + '(2026年度と完全に同一)' },
+    },
+    {
+      schoolCode: 'D117320100067',
+      schoolName: '星稜高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'Aコース', capacity: 70 },
+        { courseName: 'Bコース', capacity: 320 },
+        { courseName: 'Pコース', capacity: 50 },
+      ],
+      totalCapacity: 440,
+      source: {
+        ...KAKE2_2024_SOURCE,
+        docTitle: KAKE2_2024_SOURCE.docTitle + '(2026年度はBコースのみ320→280に減少。A/Pコースは不変)',
+      },
+    },
+    {
+      schoolCode: 'D117320200011',
+      schoolName: '鵬学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通科', capacity: 90 },
+        { courseName: '調理科', capacity: 30 },
+      ],
+      totalCapacity: 120,
+      source: { ...KAKE2_2024_SOURCE, docTitle: KAKE2_2024_SOURCE.docTitle + '(2026年度と完全に同一)' },
+    },
+    {
+      schoolCode: 'D117320300010',
+      schoolName: '小松大谷高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通科(特進コース・進学コース・教養コース計)', capacity: 260 },
+        { courseName: '体育コース', capacity: 40 },
+      ],
+      totalCapacity: 300,
+      source: { ...KAKE2_2024_SOURCE, docTitle: KAKE2_2024_SOURCE.docTitle + '(2026年度と完全に同一)' },
+    },
+    {
+      schoolCode: 'D117320400019',
+      schoolName: '日本航空高等学校石川',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '航空科(航空工学コース・普通科コース計)', capacity: 200 }],
+      totalCapacity: 200,
+      source: { ...KAKE2_2024_SOURCE, docTitle: KAKE2_2024_SOURCE.docTitle + '(2026年度と完全に同一)' },
     },
   ],
   skipped: [
