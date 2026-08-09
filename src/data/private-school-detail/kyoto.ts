@@ -14,6 +14,13 @@
  * ウィステリア科約20)を発見し収録。続けて京都共栄学園高等学校も公式サイト(kyoei.ed.jp)で
  * 再挑戦し「募集コース・募集人数」の明瞭な一覧表(バタビア30/進学90/総合75)を発見し収録
  * (ただし公式サイトが既に令和8年度分を令和9年度分へ更新済みのためfiscalYearLabelは令和9年度)。
+ *
+ * 【掛-2（私立×多年度）着手(2026-08-09)】大都市圏5県の1番目。Wayback CDX APIでikushin
+ * 03926.pdfの2023年9月28日キャプチャ(「2024年度」版)を発掘し、現行(2026年度)版と再突合。
+ * 大谷・華頂女子・京都外大西・京都共栄学園・京都暁星・京都芸術・京都光華・京都廣学館・
+ * 京都国際・京都産業大学附属の10校は2024年度と2026年度で総定員が完全一致(コース内訳の
+ * 呼称が変わっている場合もあるが総定員は一致)。京都光華は2024年版で女子専用コースのみ
+ * だったことを確認(2026年度からの共学化コメントと整合)。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -21,6 +28,13 @@ const IKUSHIN_KYOTO_SOURCE = {
   url: 'https://www.ikushin.co.jp/school/pdf/03926.pdf',
   docTitle: '2026年度 国立高校・高専・私立高校 募集要項【京都府】（(株)育伸社 入試情報課・2026年2月17日現在）',
   fetchedAt: '2026-07-31',
+  sourceTier: 'secondary' as const,
+};
+
+const KAKE2_2024_KYOTO_SOURCE = {
+  url: 'https://web.archive.org/web/20231106225147if_/https://www.ikushin.co.jp/school/PDF/03926.pdf',
+  docTitle: '2024年度 私立高校 募集要項【京都府】(株式会社育伸社 入試情報課・2023年9月28日現在・Web Archive経由で取得)',
+  fetchedAt: '2026-08-09',
   sourceTier: 'secondary' as const,
 };
 
@@ -430,6 +444,106 @@ export const PRIVATE_SCHOOL_DETAIL_KYOTO: PrivateSchoolDetailFile = {
         fetchedAt: '2026-07-31',
         sourceTier: 'primary' as const,
       },
+    },
+    {
+      schoolCode: 'D126310000139',
+      schoolName: '大谷高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: 'バタビアコース(マスター/コア/グローバル)・インテグラルコース(全コース計)', capacity: 400 }],
+      totalCapacity: 400,
+      source: KAKE2_2024_KYOTO_SOURCE,
+    },
+    {
+      schoolCode: 'D126310000157',
+      schoolName: '華頂女子高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通(女)', capacity: 120 }],
+      totalCapacity: 120,
+      source: KAKE2_2024_KYOTO_SOURCE,
+    },
+    {
+      schoolCode: 'D126310000237',
+      schoolName: '京都外大西高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'グローバル特進コース(選抜文系・躍進文理計)', capacity: 100 },
+        { courseName: '総合進学コース', capacity: 60 },
+        { courseName: '国際文化コースA・B', capacity: 80 },
+        { courseName: '体育コース(男)', capacity: 40 },
+      ],
+      totalCapacity: 280,
+      source: KAKE2_2024_KYOTO_SOURCE,
+    },
+    {
+      schoolCode: 'D126310000282',
+      schoolName: '京都共栄学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'バタビアコース', capacity: 35 },
+        { courseName: '進学コース', capacity: 80 },
+        { courseName: '総合コース(情報系・美術系・スポーツ系・文理系)', capacity: 80 },
+      ],
+      totalCapacity: 195,
+      source: KAKE2_2024_KYOTO_SOURCE,
+    },
+    {
+      schoolCode: 'D126310000317',
+      schoolName: '京都暁星高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通', capacity: 70 }],
+      totalCapacity: 70,
+      source: KAKE2_2024_KYOTO_SOURCE,
+    },
+    {
+      schoolCode: 'D126310000380',
+      schoolName: '京都芸術高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '美術', capacity: 175 }],
+      totalCapacity: 175,
+      source: KAKE2_2024_KYOTO_SOURCE,
+    },
+    {
+      schoolCode: 'D126310000228',
+      schoolName: '京都光華高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        {
+          courseName: '医療貢献コース・未来創造コース・国際挑戦(女・全コース計、含内部)',
+          capacity: 150,
+        },
+      ],
+      totalCapacity: 150,
+      source: KAKE2_2024_KYOTO_SOURCE,
+    },
+    {
+      schoolCode: 'D126310000353',
+      schoolName: '京都廣学館高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'アドバンスコース', capacity: 60 },
+        { courseName: 'ジェネラルコース', capacity: 180 },
+      ],
+      totalCapacity: 240,
+      source: KAKE2_2024_KYOTO_SOURCE,
+    },
+    {
+      schoolCode: 'D126310000399',
+      schoolName: '京都国際高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '進学コース', capacity: 15 },
+        { courseName: '総合コース(国際系列20・スポーツ系列(男)15)', capacity: 35 },
+      ],
+      totalCapacity: 50,
+      source: KAKE2_2024_KYOTO_SOURCE,
+    },
+    {
+      schoolCode: 'D126310000031',
+      schoolName: '京都産業大学附属高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '特進コース・進学コース(普通科計)', capacity: 280 }],
+      totalCapacity: 280,
+      source: KAKE2_2024_KYOTO_SOURCE,
     },
   ],
   skipped: [

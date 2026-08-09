@@ -1825,9 +1825,36 @@ describe('PRIVATE_SCHOOL_DETAIL_KYOTO(大都市圏5県の初回着手・育伸�
     expect(result.missing).toEqual([]);
   });
 
-  it('収録37校+スキップ7校で参照台帳の44校と一致する', () => {
-    expect(PRIVATE_SCHOOL_DETAIL_KYOTO.schools.length).toBe(37);
+  it('収録47レコード(37校+掛-2多年度10レコード)+スキップ7校で参照台帳の44校と一致する', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_KYOTO.schools.length).toBe(47);
+    const distinctSchoolCodes = new Set(PRIVATE_SCHOOL_DETAIL_KYOTO.schools.map((s) => s.schoolCode));
+    expect(distinctSchoolCodes.size).toBe(37);
     expect(PRIVATE_SCHOOL_DETAIL_KYOTO.skipped.length).toBe(7);
+  });
+
+  it('掛-2(私立×多年度): 大谷・華頂女子・京都外大西・京都共栄学園・京都暁星・京都芸術・京都光華・京都廣学館・京都国際・京都産業大学附属の10校は2024年度と2026年度で総定員が完全一致', () => {
+    const pairs: Array<[string, number]> = [
+      ['D126310000139', 400],
+      ['D126310000157', 120],
+      ['D126310000237', 280],
+      ['D126310000282', 195],
+      ['D126310000317', 70],
+      ['D126310000380', 175],
+      ['D126310000228', 150],
+      ['D126310000353', 240],
+      ['D126310000399', 50],
+      ['D126310000031', 280],
+    ];
+    for (const [code, total] of pairs) {
+      const y2024 = PRIVATE_SCHOOL_DETAIL_KYOTO.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '2024年度'
+      );
+      const yLatest = PRIVATE_SCHOOL_DETAIL_KYOTO.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel !== '2024年度'
+      );
+      expect(y2024?.totalCapacity).toBe(total);
+      expect(yLatest?.totalCapacity).toBe(total);
+    }
   });
 });
 
