@@ -2192,12 +2192,12 @@ describe('PRIVATE_SCHOOL_DETAIL_OSAKA(大都市圏5県の3県目・育伸社募�
     }
   });
 
-  it('収録91校(掛-2の2024年度55校分含め146レコード)・スキップ16校で参照台帳107校を完全網羅(重複・欠落なし)', () => {
+  it('収録91校(掛-2の2024年度63校分含め154レコード)・スキップ16校で参照台帳107校を完全網羅(重複・欠落なし)', () => {
     const allCodes = SCHOOLS_PRIVATE_OSAKA.schools.map((s) => s.code);
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_OSAKA, allCodes);
     expect(result.duplicates).toEqual([]);
     expect(result.missing).toHaveLength(0);
-    expect(PRIVATE_SCHOOL_DETAIL_OSAKA.schools.length).toBe(146);
+    expect(PRIVATE_SCHOOL_DETAIL_OSAKA.schools.length).toBe(154);
     expect(PRIVATE_SCHOOL_DETAIL_OSAKA.skipped.length).toBe(16);
   });
 
@@ -2399,6 +2399,44 @@ describe('PRIVATE_SCHOOL_DETAIL_OSAKA(大都市圏5県の3県目・育伸社募�
     );
     expect(y2024?.totalCapacity).toBe(300);
     expect(yLatest?.totalCapacity).toBe(335);
+  });
+
+  it('掛-2(私立×多年度・7ページ目): 大商学園・相愛・太成学院大学・羽衣学園・宣真・梅花の6校は2024年度と2026年度で総定員が完全一致', () => {
+    const pairs: Array<[string, number]> = [
+      ['D127310000879', 360],
+      ['D127310000058', 150],
+      ['D127310000959', 320],
+      ['D127310000511', 340],
+      ['D127310000316', 280],
+      ['D127310000290', 280],
+    ];
+    for (const [code, total] of pairs) {
+      const y2024 = PRIVATE_SCHOOL_DETAIL_OSAKA.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '2024年度'
+      );
+      const yLatest = PRIVATE_SCHOOL_DETAIL_OSAKA.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel !== '2024年度'
+      );
+      expect(y2024?.totalCapacity).toBe(total);
+      expect(yLatest?.totalCapacity).toBe(total);
+    }
+  });
+
+  it('掛-2(私立×多年度・7ページ目): 同志社香里・東海大学付属大阪仰星の2校は2024→2026年度で総定員が変化', () => {
+    const pairs: Array<[string, number, number]> = [
+      ['D127310000423', 60, 40],
+      ['D127310000646', 200, 235],
+    ];
+    for (const [code, before, after] of pairs) {
+      const y2024 = PRIVATE_SCHOOL_DETAIL_OSAKA.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '2024年度'
+      );
+      const yLatest = PRIVATE_SCHOOL_DETAIL_OSAKA.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel !== '2024年度'
+      );
+      expect(y2024?.totalCapacity).toBe(before);
+      expect(yLatest?.totalCapacity).toBe(after);
+    }
   });
 });
 

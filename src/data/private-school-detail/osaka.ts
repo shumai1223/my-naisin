@@ -46,6 +46,12 @@
  * **2026-08-10further(6ページ目10校)**: 常翔学園・常翔啓光学園・城南学園・昇陽・精華・清教学園・
  * 清風・清風南海・清明学院の9校は総定員完全一致(常翔学園はコース名「特進/文理」→「アカデミックⅠ/Ⅱ」
  * への改称を検出したが定員は不変)。星翔のみ300→335(+35、普通科総合キャリアコースの増員)を検出。
+ * **2026-08-10further(7ページ目10校中8校を収録・2校は見送り)**: 大商学園・相愛・太成学院大学・
+ * 羽衣学園・宣真・梅花の6校は総定員完全一致。同志社香里は60→40(-20、男女各30→各20)、東海大学付属
+ * 大阪仰星は200→235(+35)を検出。浪速は2024年度版640(4類計・含内部)に対し2026年度版が960という
+ * 説明のつかない大幅な乖離(+50%)があり、内訳が非公表のため単純比較すると誤りを広める危険が高いと
+ * 判断し見送り(要再検証)。帝塚山学院泉ヶ丘は2024年度版がS特進約70/特進約70という2行表記で共有枠か
+ * 独立枠か確定できず、2026年度版の「Ｓ特進・特進計約120」と単純に対応付けられないため見送り。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -2200,6 +2206,104 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
         { courseName: '普通科アスリートコース(専願のみ・国際科スポーツコースから改称)', capacity: 70 },
       ],
       totalCapacity: 300,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000879',
+      schoolName: '大商学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        {
+          courseName: '普通科(特進Ⅰ類・特進Ⅱ類・情報クリエイティブ・進学の4コース計)',
+          capacity: 320,
+        },
+        { courseName: '商業科', capacity: 40 },
+      ],
+      totalCapacity: 360,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000058',
+      schoolName: '相愛高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特進コース(含内部約10)', capacity: 30 },
+        { courseName: '専攻選択コース(含内部約30)', capacity: 90 },
+        { courseName: '音楽(含内部約10)', capacity: 30 },
+      ],
+      totalCapacity: 150,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000959',
+      schoolName: '太成学院大学高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特進セレクトコース', capacity: 80 },
+        { courseName: 'ライフデザインコース', capacity: 120 },
+        { courseName: '製菓パティスリーコース', capacity: 40 },
+        { courseName: 'スポーツ(進学40・アスリート40)', capacity: 80 },
+      ],
+      totalCapacity: 320,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000511',
+      schoolName: '羽衣学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通科文理特進Ⅰ類・Ⅱ類コース(約)', capacity: 170 },
+        { courseName: '普通科進学コース(約)', capacity: 170 },
+      ],
+      totalCapacity: 340,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000316',
+      schoolName: '宣真高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        {
+          courseName: '普通科(総合・アニメアート・保育系進学・看護医療特進の4コース計)',
+          capacity: 280,
+        },
+      ],
+      totalCapacity: 280,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000290',
+      schoolName: '梅花高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        {
+          courseName: 'リベラルアーツコース(6専攻)・アドバンスコース(特進S/医療看護の2専攻)、全コース計',
+          capacity: 280,
+        },
+      ],
+      totalCapacity: 280,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000423',
+      schoolName: '同志社香里高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '全日制課程 普通科(男子約30名)', capacity: 30 },
+        { courseName: '全日制課程 普通科(女子約30名)', capacity: 30 },
+      ],
+      totalCapacity: 60,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000646',
+      schoolName: '東海大学付属大阪仰星高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '英数特進コース', capacity: 40 },
+        { courseName: '総合進学コース', capacity: 160 },
+      ],
+      totalCapacity: 200,
       source: KAKE2_2024_OSAKA_SOURCE,
     },
   ],
