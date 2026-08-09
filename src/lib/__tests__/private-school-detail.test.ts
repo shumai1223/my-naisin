@@ -640,9 +640,39 @@ describe('PRIVATE_SCHOOL_DETAIL_MIYAZAKI(個別サイト10校+育伸社募集要
     expect(result.missing).toEqual([]);
   });
 
-  it('収録13校+スキップ1校(掲載なし)で参照台帳の14校と一致する', () => {
-    expect(PRIVATE_SCHOOL_DETAIL_MIYAZAKI.schools.length).toBe(13);
+  it('収録16レコード(13校×令和8年度+3校×2024年度)+スキップ1校(掲載なし)で参照台帳の14校と一致する', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_MIYAZAKI.schools.length).toBe(16);
     expect(PRIVATE_SCHOOL_DETAIL_MIYAZAKI.skipped.length).toBe(1);
+    const distinctSchoolCodes = new Set(PRIVATE_SCHOOL_DETAIL_MIYAZAKI.schools.map((s) => s.schoolCode));
+    expect(distinctSchoolCodes.size).toBe(13);
+  });
+
+  it('掛-2(私立×多年度): 小林西(110→120)と延岡学園(240→280)で定員変化を検出、都城聖ドミニコ学園は不変', () => {
+    const kobayashiOld = PRIVATE_SCHOOL_DETAIL_MIYAZAKI.schools.find(
+      (s) => s.schoolCode === 'D145320559112' && s.fiscalYearLabel === '2024年度'
+    )!;
+    const kobayashiNew = PRIVATE_SCHOOL_DETAIL_MIYAZAKI.schools.find(
+      (s) => s.schoolCode === 'D145320559112' && s.fiscalYearLabel === '令和8年度'
+    )!;
+    expect(kobayashiOld.totalCapacity).toBe(110);
+    expect(kobayashiNew.totalCapacity).toBe(120);
+
+    const nobeokaOld = PRIVATE_SCHOOL_DETAIL_MIYAZAKI.schools.find(
+      (s) => s.schoolCode === 'D145320359098' && s.fiscalYearLabel === '2024年度'
+    )!;
+    const nobeokaNew = PRIVATE_SCHOOL_DETAIL_MIYAZAKI.schools.find(
+      (s) => s.schoolCode === 'D145320359098' && s.fiscalYearLabel === '令和8年度'
+    )!;
+    expect(nobeokaOld.totalCapacity).toBe(240);
+    expect(nobeokaNew.totalCapacity).toBe(280);
+
+    const miyakonojoOld = PRIVATE_SCHOOL_DETAIL_MIYAZAKI.schools.find(
+      (s) => s.schoolCode === 'D145320259142' && s.fiscalYearLabel === '2024年度'
+    )!;
+    const miyakonojoNew = PRIVATE_SCHOOL_DETAIL_MIYAZAKI.schools.find(
+      (s) => s.schoolCode === 'D145320259142' && s.fiscalYearLabel === '令和8年度'
+    )!;
+    expect(miyakonojoOld.totalCapacity).toBe(miyakonojoNew.totalCapacity);
   });
 });
 

@@ -7,8 +7,23 @@
  * 延岡学園・小林西の3校を追加(既存の宮崎学園=340・宮崎日本大学=500・都城=260は
  * 育伸社データと独立に完全一致確認できた)。日章学園九州国際高等学校のみこのPDFに
  * 掲載が無く見送り。
+ *
+ * 【掛-2（私立×多年度）追加(2026-08-09)】上記3校(いずれもikushin.co.jp 03945.pdfが
+ * ソース)について、Wayback CDX APIで2024年8月12日キャプチャ(「2024年度版・2023年
+ * 12月8日現在」相当)を発掘し現行(2026年度)版とpdftotext -layoutで機械突合した。
+ * 再突合の結果、令和8年度の現行データ3校とも誤りは無かった。**2校で実際の変化を
+ * 検出**: 小林西(普通コース40→50に増加・総定員110→120)、延岡学園(普通200→170に
+ * 減少も情報テックリート科70が新設され総定員240→280に増加)。都城聖ドミニコ学園は
+ * 総定員100で変化なし。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
+
+const KAKE2_2024_SOURCE = {
+  url: 'https://web.archive.org/web/20240812134118if_/https://www.ikushin.co.jp/school/pdf/03945.pdf',
+  docTitle: '2024年度 高専・私立高校 募集要項【宮崎県】(株式会社育伸社 入試情報課・Web Archive経由で取得)',
+  fetchedAt: '2026-08-09',
+  sourceTier: 'secondary' as const,
+};
 
 export const PRIVATE_SCHOOL_DETAIL_MIYAZAKI: PrivateSchoolDetailFile = {
   prefectureCode: 'miyazaki',
@@ -251,6 +266,46 @@ export const PRIVATE_SCHOOL_DETAIL_MIYAZAKI: PrivateSchoolDetailFile = {
         docTitle: '2026年度 高専・私立高校 募集要項【宮崎県】（(株)育伸社 入試情報課・2025年11月4日現在）',
         fetchedAt: '2026-07-31',
         sourceTier: 'secondary' as const,
+      },
+    },
+    {
+      schoolCode: 'D145320259142',
+      schoolName: '都城聖ドミニコ学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通', capacity: 90 },
+        { courseName: '普通(単位制)', capacity: 10 },
+      ],
+      totalCapacity: 100,
+      source: { ...KAKE2_2024_SOURCE, docTitle: KAKE2_2024_SOURCE.docTitle + '(2026年度と完全に同一)' },
+    },
+    {
+      schoolCode: 'D145320359098',
+      schoolName: '延岡学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '調理', capacity: 40 },
+        { courseName: '普通', capacity: 200 },
+      ],
+      totalCapacity: 240,
+      source: {
+        ...KAKE2_2024_SOURCE,
+        docTitle: KAKE2_2024_SOURCE.docTitle + '(2026年度は普通200→170に減少も情報テックリート科70が新設され総定員240→280に増加)',
+      },
+    },
+    {
+      schoolCode: 'D145320559112',
+      schoolName: '小林西高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通', capacity: 40 },
+        { courseName: 'ビジネス総合', capacity: 40 },
+        { courseName: '調理', capacity: 30 },
+      ],
+      totalCapacity: 110,
+      source: {
+        ...KAKE2_2024_SOURCE,
+        docTitle: KAKE2_2024_SOURCE.docTitle + '(2026年度は普通コースのみ40→50に増加。総定員110→120)',
       },
     },
   ],
