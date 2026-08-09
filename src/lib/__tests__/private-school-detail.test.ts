@@ -1076,9 +1076,43 @@ describe('PRIVATE_SCHOOL_DETAIL_OITA(育伸社募集要項PDFで15校中13校を
     expect(result.missing).toEqual([]);
   });
 
-  it('収録13校+スキップ2校(掲載なし)で参照台帳の15校と一致する', () => {
-    expect(PRIVATE_SCHOOL_DETAIL_OITA.schools.length).toBe(13);
+  it('収録26レコード(13校×令和8年度+13校×2024年度)+スキップ2校(掲載なし)で参照台帳の15校と一致する', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_OITA.schools.length).toBe(26);
     expect(PRIVATE_SCHOOL_DETAIL_OITA.skipped.length).toBe(2);
+    const distinctSchoolCodes = new Set(PRIVATE_SCHOOL_DETAIL_OITA.schools.map((s) => s.schoolCode));
+    expect(distinctSchoolCodes.size).toBe(13);
+  });
+
+  it('掛-2着手時に発見・是正: 大分東明(誤70→正440)と大分国際情報(誤70→正140)の隣接校ブロック取り違えを修正', () => {
+    const toumei = PRIVATE_SCHOOL_DETAIL_OITA.schools.find(
+      (s) => s.schoolCode === 'D144310000057' && s.fiscalYearLabel === '令和8年度'
+    )!;
+    expect(toumei.totalCapacity).toBe(440);
+
+    const kokusaijoho = PRIVATE_SCHOOL_DETAIL_OITA.schools.find(
+      (s) => s.schoolCode === 'D144310000066' && s.fiscalYearLabel === '令和8年度'
+    )!;
+    expect(kokusaijoho.totalCapacity).toBe(140);
+  });
+
+  it('掛-2(私立×多年度): 大分(440→400)と昭和学園(255→240)で定員減少を検出', () => {
+    const oitaOld = PRIVATE_SCHOOL_DETAIL_OITA.schools.find(
+      (s) => s.schoolCode === 'D144310000039' && s.fiscalYearLabel === '2024年度'
+    )!;
+    const oitaNew = PRIVATE_SCHOOL_DETAIL_OITA.schools.find(
+      (s) => s.schoolCode === 'D144310000039' && s.fiscalYearLabel === '令和8年度'
+    )!;
+    expect(oitaOld.totalCapacity).toBe(440);
+    expect(oitaNew.totalCapacity).toBe(400);
+
+    const showaOld = PRIVATE_SCHOOL_DETAIL_OITA.schools.find(
+      (s) => s.schoolCode === 'D144310000093' && s.fiscalYearLabel === '2024年度'
+    )!;
+    const showaNew = PRIVATE_SCHOOL_DETAIL_OITA.schools.find(
+      (s) => s.schoolCode === 'D144310000093' && s.fiscalYearLabel === '令和8年度'
+    )!;
+    expect(showaOld.totalCapacity).toBe(255);
+    expect(showaNew.totalCapacity).toBe(240);
   });
 });
 
