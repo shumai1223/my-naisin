@@ -73,16 +73,20 @@ export function sumAnnualFees(entry: PrivateSchoolTuition): number {
   return entry.fees.filter((f) => f.billingCycle === 'annual').reduce((acc, f) => acc + f.amount, 0);
 }
 
-/** 同一県内でschoolCodeが schools と skipped の両方に重複していないか（収録漏れ・二重登録の検出）。 */
+/**
+ * 同一県内でschoolCodeが schools と skipped の両方に重複していないか（収録漏れ・二重登録の検出）。
+ * 学費は入試区分（前期/後期等）で複数レコードに分かれることがあるため、schools内で同じ
+ * schoolCodeが複数回出現すること自体は許容する（courseNameで区別された正当な複数プランのため）。
+ * duplicatesは「schoolsとskippedの両方に同じコードが存在する」矛盾のみを検出する。
+ */
 export function findDuplicateOrMissingTuitionCodes(
   file: PrivateSchoolTuitionFile,
   allCodesInPrefecture: string[]
 ): { duplicates: string[]; missing: string[] } {
-  const covered = [...file.schools.map((s) => s.schoolCode), ...file.skipped.map((s) => s.schoolCode)];
-  const seen = new Map<string, number>();
-  for (const code of covered) seen.set(code, (seen.get(code) ?? 0) + 1);
-  const duplicates = [...seen.entries()].filter(([, n]) => n > 1).map(([code]) => code);
-  const coveredSet = new Set(covered);
+  const schoolCodes = new Set(file.schools.map((s) => s.schoolCode));
+  const skippedCodes = new Set(file.skipped.map((s) => s.schoolCode));
+  const duplicates = [...schoolCodes].filter((code) => skippedCodes.has(code));
+  const coveredSet = new Set([...schoolCodes, ...skippedCodes]);
   const missing = allCodesInPrefecture.filter((code) => !coveredSet.has(code));
   return { duplicates, missing };
 }

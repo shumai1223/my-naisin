@@ -6,8 +6,10 @@ import {
   type PrivateSchoolTuition,
 } from '@/lib/private-school-tuition';
 import { PRIVATE_SCHOOL_TUITION_TOTTORI } from '@/data/private-school-tuition/tottori';
+import { PRIVATE_SCHOOL_TUITION_TOKUSHIMA } from '@/data/private-school-tuition/tokushima';
 import { PRIVATE_SCHOOL_TUITION_BY_PREFECTURE, PRIVATE_SCHOOL_TUITION_FILES } from '@/data/private-school-tuition';
 import { SCHOOLS_PRIVATE_TOTTORI } from '@/data/schools-private/tottori';
+import { SCHOOLS_PRIVATE_TOKUSHIMA } from '@/data/schools-private/tokushima';
 
 describe('sumMonthlyFees / sumOneTimeFees / sumAnnualFees', () => {
   const base: PrivateSchoolTuition = {
@@ -62,6 +64,17 @@ describe('findDuplicateOrMissingTuitionCodes', () => {
     const result = findDuplicateOrMissingTuitionCodes(file, ['A', 'B']);
     expect(result.missing).toEqual(['A', 'B']);
   });
+
+  it('同一schoolCodeがschools内に複数回出現しても重複扱いしない(入試区分等の正当な複数プラン)', () => {
+    const file = {
+      prefectureCode: 'x',
+      schools: [{ schoolCode: 'A' } as PrivateSchoolTuition, { schoolCode: 'A' } as PrivateSchoolTuition],
+      skipped: [],
+    };
+    const result = findDuplicateOrMissingTuitionCodes(file, ['A']);
+    expect(result.duplicates).toEqual([]);
+    expect(result.missing).toEqual([]);
+  });
 });
 
 describe('PRIVATE_SCHOOL_TUITION_TOTTORI(掛-3パイロット県・私立学費第一段)', () => {
@@ -107,9 +120,61 @@ describe('PRIVATE_SCHOOL_TUITION_TOTTORI(掛-3パイロット県・私立学費�
   });
 });
 
+describe('PRIVATE_SCHOOL_TUITION_TOKUSHIMA(掛-3横展開2県目・入試区分で複数レコードを持つ学校を含む)', () => {
+  it('収録校は全てfeesが非空でamountが正の数', () => {
+    for (const school of PRIVATE_SCHOOL_TUITION_TOKUSHIMA.schools) {
+      expect(school.fees.length).toBeGreaterThan(0);
+      for (const fee of school.fees) {
+        expect(fee.amount).toBeGreaterThan(0);
+      }
+    }
+  });
+
+  it('schools-private/tokushima.tsの全5校がschoolsまたはskippedのいずれかで網羅されている(重複・欠落なし)', () => {
+    const allCodes = SCHOOLS_PRIVATE_TOKUSHIMA.schools.map((s) => s.code);
+    const result = findDuplicateOrMissingTuitionCodes(PRIVATE_SCHOOL_TUITION_TOKUSHIMA, allCodes);
+    expect(result.duplicates).toEqual([]);
+    expect(result.missing).toEqual([]);
+  });
+
+  it('収録4レコード(3校・うち生光学園は前期/後期の2レコード)+スキップ2校', () => {
+    expect(PRIVATE_SCHOOL_TUITION_TOKUSHIMA.schools.length).toBe(4);
+    expect(PRIVATE_SCHOOL_TUITION_TOKUSHIMA.skipped.length).toBe(2);
+    const distinctSchoolCodes = new Set(PRIVATE_SCHOOL_TUITION_TOKUSHIMA.schools.map((s) => s.schoolCode));
+    expect(distinctSchoolCodes.size).toBe(3);
+  });
+
+  it('徳島文理高等学校: 月額費目の内訳合計(58,000円)が公式サイトの合計表記と一致し、入学金200,000円+保護者会入会金3,000円を収録', () => {
+    const bunri = PRIVATE_SCHOOL_TUITION_TOKUSHIMA.schools.find((s) => s.schoolName === '徳島文理高等学校')!;
+    expect(sumOneTimeFees(bunri)).toBe(203000);
+    expect(sumMonthlyFees(bunri)).toBe(58000);
+  });
+
+  it('生光学園高等学校: 前期(入学金250,000円)/後期(入学金350,000円)の2レコードとも月額47,500円は共通', () => {
+    const seiko = PRIVATE_SCHOOL_TUITION_TOKUSHIMA.schools.filter((s) => s.schoolCode === 'D136320100037');
+    expect(seiko.length).toBe(2);
+    const zenki = seiko.find((s) => s.courseName === '前期入試合格者')!;
+    const kouki = seiko.find((s) => s.courseName === '後期入試合格者')!;
+    expect(sumOneTimeFees(zenki)).toBe(250000);
+    expect(sumOneTimeFees(kouki)).toBe(350000);
+    expect(sumMonthlyFees(zenki)).toBe(47500);
+    expect(sumMonthlyFees(kouki)).toBe(47500);
+  });
+
+  it('みのり高等学校(通信制): 入学金不要のため一時金費目は入学検定料のみ・単位制授業料はhasUnspecifiedAdditionalFeesで明示', () => {
+    const minori = PRIVATE_SCHOOL_TUITION_TOKUSHIMA.schools.find((s) => s.schoolName === 'みのり高等学校')!;
+    expect(sumOneTimeFees(minori)).toBe(10000);
+    expect(sumAnnualFees(minori)).toBe(86000);
+    expect(minori.hasUnspecifiedAdditionalFees).toBe(true);
+    expect(minori.fees.some((f) => f.label === '入学金')).toBe(false);
+  });
+});
+
 describe('PRIVATE_SCHOOL_TUITION_BY_PREFECTURE / PRIVATE_SCHOOL_TUITION_FILES', () => {
-  it('tottoriが登録されている', () => {
+  it('tottori・tokushimaが登録されている', () => {
     expect(PRIVATE_SCHOOL_TUITION_BY_PREFECTURE.tottori).toBe(PRIVATE_SCHOOL_TUITION_TOTTORI);
+    expect(PRIVATE_SCHOOL_TUITION_BY_PREFECTURE.tokushima).toBe(PRIVATE_SCHOOL_TUITION_TOKUSHIMA);
     expect(PRIVATE_SCHOOL_TUITION_FILES).toContain(PRIVATE_SCHOOL_TUITION_TOTTORI);
+    expect(PRIVATE_SCHOOL_TUITION_FILES).toContain(PRIVATE_SCHOOL_TUITION_TOKUSHIMA);
   });
 });
