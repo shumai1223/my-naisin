@@ -75,6 +75,16 @@
  * 粗い読み取りとなり構造が一致せず、合計だけ偶然一致した可能性が拭えないため収録を見送った
  * (要再検証)。桐光学園は「一般2回」欄が「↓」(直前と同値)か独立数値か再読で確信が持てず見送り
  * (要再検証)。
+ *
+ * 【掛-2完了(2026-08-09)】ページ6〜7を処理し47校で完走(56校中47校=7頁全処理済み)。
+ * 三浦学苑・山手学院・横須賀学院・横浜・横浜学園・横浜商科大学・横浜創学館の7校は
+ * 総定員完全一致(三浦学苑は2024年版でIBコースが独立していたが総定員394が令和8年度版と
+ * 完全一致=IBコースが総合コースへ統合された可能性を示唆)。**横浜清風(337→340)・
+ * 横浜創英(230→220)・横浜隼人(263→251)・横浜富士見丘学園(120→150)で実際の変化を検出**。
+ * 緑ヶ丘女子(校名変更・コース全面刷新)・横浜翠陵(総定員120→320の大幅乖離で構造不一致)は
+ * 収録を見送った。残る9校(神奈川歯科大学系属緑ヶ丘女子・北鎌倉女子学園・桐光学園・武相・
+ * 聖園女学院・横浜翠陵・白鵬女子・森村学園・法政大学国際)はいずれも構造複雑または既知の
+ * 帰属不確実性により要再検証のまま残存。これで大都市圏5県の2番目kanagawaの掛-2が完了。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -1175,6 +1185,146 @@ export const PRIVATE_SCHOOL_DETAIL_KANAGAWA: PrivateSchoolDetailFile = {
           KAKE2_2024_KANAGAWA_SOURCE.docTitle +
           '(2024年版でも同一の数値ブロックが独立して確認でき、令和8年度版の校名帰属の不確実性を裏付け的に解消)',
       },
+    },
+    {
+      schoolCode: 'D114320100024',
+      schoolName: '三浦学苑高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特進コース(推薦10+一般書類選考10)', capacity: 20 },
+        { courseName: '進学コース(推薦83+一般書類選考83)', capacity: 166 },
+        { courseName: '総合コース(推薦78+一般書類選考78)', capacity: 156 },
+        { courseName: 'IBコース(推薦5+一般チャレンジ5)', capacity: 10 },
+        { courseName: '工業技術(推薦・一般書類選考ともものづくり系21+デザイン系21)', capacity: 42 },
+      ],
+      totalCapacity: 394,
+      source: {
+        ...KAKE2_2024_KANAGAWA_SOURCE,
+        docTitle:
+          KAKE2_2024_KANAGAWA_SOURCE.docTitle +
+          '(2024年版はIBコースが独立していたが総定員394は令和8年度版と完全一致。IBコースが総合コースへ統合された可能性を示唆)',
+      },
+    },
+    {
+      schoolCode: 'D114310000277',
+      schoolName: '山手学院高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        {
+          courseName: '進学コース・特別進学コース(普通科計、A日程併願80+A日程オープン40+B日程併願30+B日程オープン20)',
+          capacity: 170,
+        },
+      ],
+      totalCapacity: 170,
+      source: KAKE2_2024_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114320100042',
+      schoolName: '横須賀学院高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'S選抜コース・A進学コース(A進学・S選抜計、推薦80+書類選考120+オープンⅡ10)', capacity: 210 },
+      ],
+      totalCapacity: 210,
+      source: KAKE2_2024_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114310000204',
+      schoolName: '横浜高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'プレミアコース(推薦100)', capacity: 100 },
+        { courseName: 'アドバンスコース(推薦350)', capacity: 350 },
+        { courseName: 'アクティブコース(推薦160)', capacity: 160 },
+      ],
+      totalCapacity: 610,
+      source: {
+        ...KAKE2_2024_KANAGAWA_SOURCE,
+        docTitle: KAKE2_2024_KANAGAWA_SOURCE.docTitle + '(推薦以降の一般各方式は全て↓で同一数値を継承)',
+      },
+    },
+    {
+      schoolCode: 'D114310000188',
+      schoolName: '横浜学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'クリエイティブコース(推薦15+一般専願5併願10)', capacity: 30 },
+        { courseName: 'アカデミーコース(推薦100+一般専願90併願100)', capacity: 290 },
+      ],
+      totalCapacity: 320,
+      source: KAKE2_2024_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114310000286',
+      schoolName: '横浜商科大学高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特進コース(推薦10+一般書類選考10+学科試験15+オープン5)', capacity: 40 },
+        { courseName: '進学コース(推薦140+一般書類選考60+学科試験140+オープン10)', capacity: 350 },
+        { courseName: '商業(国際観光コース・会計情報コース、推薦40+一般書類選考40+学科試験100+オープン10)', capacity: 190 },
+      ],
+      totalCapacity: 580,
+      source: KAKE2_2024_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114310000179',
+      schoolName: '横浜清風高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特進コース(推薦25+一般筆記32+オープン計3共有)', capacity: 60 },
+        { courseName: '総合進学コース(推薦140+一般筆記137)', capacity: 277 },
+      ],
+      totalCapacity: 337,
+      source: KAKE2_2024_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114310000080',
+      schoolName: '横浜創英高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特進コース(推薦35+オープン35)', capacity: 70 },
+        { courseName: '文理コース(推薦80+オープン80)', capacity: 160 },
+      ],
+      totalCapacity: 230,
+      source: {
+        ...KAKE2_2024_KANAGAWA_SOURCE,
+        docTitle: KAKE2_2024_KANAGAWA_SOURCE.docTitle + '(令和8年度版は特進フロンティアコース1本化・特進+文理から統合された可能性)',
+      },
+    },
+    {
+      schoolCode: 'D114310000213',
+      schoolName: '横浜創学館高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(特別進学)(推薦20+一般20)', capacity: 40 },
+        { courseName: '普通(文理選抜)(推薦90+一般90)', capacity: 180 },
+        { courseName: '普通(総合進学)(推薦60+一般60)', capacity: 120 },
+      ],
+      totalCapacity: 340,
+      source: KAKE2_2024_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114310000348',
+      schoolName: '横浜隼人高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(推薦60含帰国+一般125+オープン10)', capacity: 195 },
+        { courseName: '国際語(推薦20含帰国+一般45+オープン3)', capacity: 68 },
+      ],
+      totalCapacity: 263,
+      source: KAKE2_2024_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114310000302',
+      schoolName: '横浜富士見丘学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '進学クラス(女、推薦20+一般15)', capacity: 35 },
+        { courseName: '特進クラス(推薦40+一般40)', capacity: 80 },
+        { courseName: '全クラス共通オープン枠', capacity: 5 },
+      ],
+      totalCapacity: 120,
+      source: KAKE2_2024_KANAGAWA_SOURCE,
     },
   ],
   skipped: [

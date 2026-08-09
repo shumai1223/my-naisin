@@ -1971,12 +1971,12 @@ describe('PRIVATE_SCHOOL_DETAIL_KANAGAWA(大都市圏5県・育伸社募集要�
     }
   });
 
-  it('収録92レコード(56校+掛-2多年度36レコード)・スキップ27校で参照台帳83校を完全網羅(重複・欠落なし)', () => {
+  it('収録103レコード(56校+掛-2多年度47レコード)・スキップ27校で参照台帳83校を完全網羅(重複・欠落なし)', () => {
     const allCodes = SCHOOLS_PRIVATE_KANAGAWA.schools.map((s) => s.code);
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_KANAGAWA, allCodes);
     expect(result.duplicates).toEqual([]);
     expect(result.missing).toHaveLength(0);
-    expect(PRIVATE_SCHOOL_DETAIL_KANAGAWA.schools.length).toBe(92);
+    expect(PRIVATE_SCHOOL_DETAIL_KANAGAWA.schools.length).toBe(103);
     const distinctSchoolCodes = new Set(PRIVATE_SCHOOL_DETAIL_KANAGAWA.schools.map((s) => s.schoolCode));
     expect(distinctSchoolCodes.size).toBe(56);
     expect(PRIVATE_SCHOOL_DETAIL_KANAGAWA.skipped.length).toBe(27);
@@ -2141,6 +2141,47 @@ describe('PRIVATE_SCHOOL_DETAIL_KANAGAWA(大都市圏5県・育伸社募集要�
     );
     expect(y2024?.totalCapacity).toBe(660);
     expect(yLatest?.totalCapacity).toBe(720);
+  });
+
+  it('掛-2(私立×多年度・完了): 三浦学苑・山手学院・横須賀学院・横浜・横浜学園・横浜商科大学・横浜創学館の7校は2024年度と2026年度で総定員が完全一致', () => {
+    const pairs: Array<[string, number]> = [
+      ['D114320100024', 394],
+      ['D114310000277', 170],
+      ['D114320100042', 210],
+      ['D114310000204', 610],
+      ['D114310000188', 320],
+      ['D114310000286', 580],
+      ['D114310000213', 340],
+    ];
+    for (const [code, total] of pairs) {
+      const y2024 = PRIVATE_SCHOOL_DETAIL_KANAGAWA.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '2024年度'
+      );
+      const yLatest = PRIVATE_SCHOOL_DETAIL_KANAGAWA.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel !== '2024年度'
+      );
+      expect(y2024?.totalCapacity).toBe(total);
+      expect(yLatest?.totalCapacity).toBe(total);
+    }
+  });
+
+  it('掛-2(私立×多年度): 横浜清風・横浜創英・横浜隼人・横浜富士見丘学園の4校は2024→2026年度で実際の変化を検出', () => {
+    const pairs: Array<[string, number, number]> = [
+      ['D114310000179', 337, 340],
+      ['D114310000080', 230, 220],
+      ['D114310000348', 263, 251],
+      ['D114310000302', 120, 150],
+    ];
+    for (const [code, before, after] of pairs) {
+      const y2024 = PRIVATE_SCHOOL_DETAIL_KANAGAWA.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '2024年度'
+      );
+      const yLatest = PRIVATE_SCHOOL_DETAIL_KANAGAWA.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel !== '2024年度'
+      );
+      expect(y2024?.totalCapacity).toBe(before);
+      expect(yLatest?.totalCapacity).toBe(after);
+    }
   });
 });
 
