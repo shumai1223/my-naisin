@@ -1094,12 +1094,12 @@ describe('PRIVATE_SCHOOL_DETAIL_HYOGO(55校中43校を収録・残り12校は完
     }
   });
 
-  it('収録43校・スキップ12件で参照台帳の55校と完全一致(重複・欠落なし)', () => {
+  it('収録57レコード(43校+掛-2多年度14レコード)・スキップ12件で参照台帳の55校と完全一致(重複・欠落なし)', () => {
     const allCodes = SCHOOLS_PRIVATE_HYOGO.schools.map((s) => s.code);
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_HYOGO, allCodes);
     expect(result.duplicates).toEqual([]);
     expect(result.missing).toHaveLength(0);
-    expect(PRIVATE_SCHOOL_DETAIL_HYOGO.schools.length).toBe(43);
+    expect(PRIVATE_SCHOOL_DETAIL_HYOGO.schools.length).toBe(57);
     expect(PRIVATE_SCHOOL_DETAIL_HYOGO.skipped.length).toBe(12);
   });
 
@@ -1107,6 +1107,50 @@ describe('PRIVATE_SCHOOL_DETAIL_HYOGO(55校中43校を収録・残り12校は完
     const kobeTokiwa = PRIVATE_SCHOOL_DETAIL_HYOGO.schools.find((s) => s.schoolCode === 'D128310000146')!;
     expect(kobeTokiwa.courses.some((c) => c.courseName === '特別進学コース')).toBe(true);
     expect(kobeTokiwa.totalCapacity).toBe(285);
+  });
+
+  it('掛-2(私立×多年度・1ページ目): 愛徳学園・芦屋学園・育英・関西学院・近畿大学附属豊岡・啓明学院・甲子園学院・甲南・神戸学院大学附属・神戸弘陵学園・神戸国際・神戸国際大学附属の12校は2024年度と2026年度で総定員が完全一致(芦屋学園・育英はコース再編を伴うが総定員は不変)', () => {
+    const pairs: Array<[string, number]> = [
+      ['D128310000217', 20],
+      ['D128310000388', 240],
+      ['D128310000164', 360],
+      ['D128310000315', 120],
+      ['D128310000404', 120],
+      ['D128310000093', 80],
+      ['D128310000342', 280],
+      ['D128310000397', 25],
+      ['D128310000128', 200],
+      ['D128310000477', 310],
+      ['D128310000510', 15],
+      ['D128310000226', 360],
+    ];
+    for (const [code, total] of pairs) {
+      const y2024 = PRIVATE_SCHOOL_DETAIL_HYOGO.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '2024年度'
+      );
+      const yLatest = PRIVATE_SCHOOL_DETAIL_HYOGO.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel !== '2024年度'
+      );
+      expect(y2024?.totalCapacity).toBe(total);
+      expect(yLatest?.totalCapacity).toBe(total);
+    }
+  });
+
+  it('掛-2(私立×多年度・1ページ目): 市川・賢明女子学院の2校は2024→2026年度で総定員が変化', () => {
+    const pairs: Array<[string, number, number]> = [
+      ['D128310000468', 350, 270],
+      ['D128310000253', 35, 70],
+    ];
+    for (const [code, before, after] of pairs) {
+      const y2024 = PRIVATE_SCHOOL_DETAIL_HYOGO.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '2024年度'
+      );
+      const yLatest = PRIVATE_SCHOOL_DETAIL_HYOGO.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel !== '2024年度'
+      );
+      expect(y2024?.totalCapacity).toBe(before);
+      expect(yLatest?.totalCapacity).toBe(after);
+    }
   });
 });
 

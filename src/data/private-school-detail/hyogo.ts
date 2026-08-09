@@ -22,6 +22,17 @@
  * 「特別進学コース」の誤記(定員30は正しかった)と判明し是正した。他42校は総定員・コース名とも
  * 完全に一致し、隣接校ブロック取り違えのような重大な誤りは見つからなかった。**この県は43校と
  * 大規模なため、2024年度版との掛-2多年度比較は次回以降に持ち越す。**
+ * **2026-08-10(掛-2私立×多年度・着手)**: 大都市圏5県(kyoto/kanagawa/aichi/osaka/tokyo)完走を
+ * 受けhyogoに着手。ikushin 03928.pdfのWayback CDX APIで2023年11月17日現在版(2023年12月16日
+ * キャプチャ・全4頁)を発掘。**1頁目14校を再突合し全校で総定員が完全一致**: 愛徳学園20・関西学院
+ * 120・近畿大学附属豊岡120・啓明学院80・甲子園学院280・甲南25(含グローバル・ファウンデーション)・
+ * 神戸学院大学附属200・神戸弘陵学園310・神戸国際15・神戸国際大学附属360(進学キャリアコース→
+ * 総合進学コースの改称は2024年度版時点で既に反映済み)。芦屋学園と育英は2024年度版のコース名・
+ * コース数が現行と異なる(芦屋学園:特進+総合進学Ⅰ・Ⅱ類→スタンダード+アドバンスへ再編、育英:5コース
+ * →3コースへ統合)がいずれも総定員は完全一致(240・360)というtokyo掛-2で確立した「コース再編でも
+ * 総定員は不変」パターンを裏付けた。市川はキャリアコースが320→240へ減少し総定員350→270、賢明女子
+ * 学院はソフィア15→35・ルミエール20→35で総定員35→70へ倍増を検出(いずれも専願/併願で同数のシンプル
+ * な構造のため読み取り精度は高い)。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -29,6 +40,13 @@ const IKUSHIN_SOURCE = {
   url: 'https://www.ikushin.co.jp/school/pdf/03928.pdf',
   docTitle: '2026年度 高専・私立高校 募集要項【兵庫県】（(株)育伸社 入試情報課・2025年11月4日現在）',
   fetchedAt: '2026-07-31',
+  sourceTier: 'secondary' as const,
+};
+
+const KAKE2_2024_HYOGO_SOURCE = {
+  url: 'http://web.archive.org/web/20231216134637/https://www.ikushin.co.jp/school/PDF/03928.pdf',
+  docTitle: '2024年度 高専・私立高校 募集要項【兵庫県】（(株)育伸社 入試情報課・2023年11月17日現在、Wayback Machine 2023-12-16キャプチャ）',
+  fetchedAt: '2026-08-10',
   sourceTier: 'secondary' as const,
 };
 
@@ -558,6 +576,155 @@ export const PRIVATE_SCHOOL_DETAIL_HYOGO: PrivateSchoolDetailFile = {
         fetchedAt: '2026-07-31',
         sourceTier: 'primary' as const,
       },
+    },
+    {
+      schoolCode: 'D128310000217',
+      schoolName: '愛徳学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [],
+      totalCapacity: 20,
+      source: KAKE2_2024_HYOGO_SOURCE,
+    },
+    {
+      schoolCode: 'D128310000388',
+      schoolName: '芦屋学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特進コース', capacity: 20 },
+        { courseName: '総合進学コース(Ⅰ類30・Ⅱ類125)', capacity: 155 },
+        { courseName: 'アスリートコース', capacity: 35 },
+        { courseName: '国際文化', capacity: 30 },
+      ],
+      totalCapacity: 240,
+      source: KAKE2_2024_HYOGO_SOURCE,
+    },
+    {
+      schoolCode: 'D128310000164',
+      schoolName: '育英高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特別進学理系コース', capacity: 30 },
+        { courseName: '特別進学文系コース', capacity: 30 },
+        { courseName: '理系進学コース', capacity: 40 },
+        { courseName: '文系進学コース', capacity: 40 },
+        { courseName: '総合進学コース', capacity: 220 },
+      ],
+      totalCapacity: 360,
+      source: KAKE2_2024_HYOGO_SOURCE,
+    },
+    {
+      schoolCode: 'D128310000468',
+      schoolName: '市川高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'アドバンスコース', capacity: 30 },
+        { courseName: 'キャリアコース', capacity: 320 },
+      ],
+      totalCapacity: 350,
+      source: KAKE2_2024_HYOGO_SOURCE,
+    },
+    {
+      schoolCode: 'D128310000315',
+      schoolName: '関西学院高等部',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'A方式(一般、含帰国若干)', capacity: 100 },
+        { courseName: 'B方式(自己推薦)', capacity: 20 },
+      ],
+      totalCapacity: 120,
+      source: KAKE2_2024_HYOGO_SOURCE,
+    },
+    {
+      schoolCode: 'D128310000404',
+      schoolName: '近畿大学附属豊岡高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '特進コース', capacity: 120 }],
+      totalCapacity: 120,
+      source: KAKE2_2024_HYOGO_SOURCE,
+    },
+    {
+      schoolCode: 'D128310000093',
+      schoolName: '啓明学院高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通(推薦専願)', capacity: 80 }],
+      totalCapacity: 80,
+      source: KAKE2_2024_HYOGO_SOURCE,
+    },
+    {
+      schoolCode: 'D128310000253',
+      schoolName: '賢明女子学院高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'ソフィアコース(特進、女子)', capacity: 15 },
+        { courseName: 'ルミエールコース(進学、女子)', capacity: 20 },
+      ],
+      totalCapacity: 35,
+      source: KAKE2_2024_HYOGO_SOURCE,
+    },
+    {
+      schoolCode: 'D128310000342',
+      schoolName: '甲子園学院高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'プレミアムステージ(女子)', capacity: 80 },
+        { courseName: 'スタンダードステージ(女子)', capacity: 200 },
+      ],
+      totalCapacity: 280,
+      source: KAKE2_2024_HYOGO_SOURCE,
+    },
+    {
+      schoolCode: 'D128310000397',
+      schoolName: '甲南高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通科(アドバンストコース、男子、専願のみ、含グローバル・ファウンデーション)', capacity: 25 }],
+      totalCapacity: 25,
+      source: KAKE2_2024_HYOGO_SOURCE,
+    },
+    {
+      schoolCode: 'D128310000128',
+      schoolName: '神戸学院大学附属高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特進文理コース', capacity: 40 },
+        { courseName: '特進グローバルコース', capacity: 30 },
+        { courseName: '総合進学コース', capacity: 130 },
+      ],
+      totalCapacity: 200,
+      source: KAKE2_2024_HYOGO_SOURCE,
+    },
+    {
+      schoolCode: 'D128310000477',
+      schoolName: '神戸弘陵学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特進コース', capacity: 25 },
+        { courseName: '進学コース', capacity: 70 },
+        { courseName: '総合コース', capacity: 140 },
+        { courseName: '体育コース(専願のみ)', capacity: 75 },
+      ],
+      totalCapacity: 310,
+      source: KAKE2_2024_HYOGO_SOURCE,
+    },
+    {
+      schoolCode: 'D128310000510',
+      schoolName: '神戸国際高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [],
+      totalCapacity: 15,
+      source: KAKE2_2024_HYOGO_SOURCE,
+    },
+    {
+      schoolCode: 'D128310000226',
+      schoolName: '神戸国際大学附属高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '文理特進コース', capacity: 50 },
+        { courseName: '総合進学コース', capacity: 200 },
+        { courseName: 'アスリートコース', capacity: 80 },
+        { courseName: '国際', capacity: 30 },
+      ],
+      totalCapacity: 360,
+      source: KAKE2_2024_HYOGO_SOURCE,
     },
   ],
   skipped: [
