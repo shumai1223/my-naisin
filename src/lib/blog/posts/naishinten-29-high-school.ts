@@ -261,7 +261,7 @@ export const post: BlogPost = {
   </ul>
 </div>
 
-<p>関連記事：<a href="/blog/naishinten-27-high-school">内申点27（オール3）で行ける高校</a>／<a href="/blog/naishinten-30-high-school">内申点30で行ける高校</a>／<a href="/blog/how-to-raise-naishinten">内申点の上げ方7選</a></p>
+<p>関連記事：<a href="/blog/naishinten-27-high-school">内申点27（オール3）で行ける高校</a>／<a href="/blog/naishinten-28-high-school">内申点28で行ける高校</a>／<a href="/blog/naishinten-30-high-school">内申点30で行ける高校</a>／<a href="/blog/how-to-raise-naishinten">内申点の上げ方7選</a></p>
 
 <div class="point-box">
   <h4>関連ツール｜偏差値を5教科で瞬時に計算</h4>

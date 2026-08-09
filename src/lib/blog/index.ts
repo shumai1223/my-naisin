@@ -49,6 +49,7 @@ import { post as hyoteiHeikin40HighSchool } from '@/lib/blog/posts/hyotei-heikin
 import { post as hyoteiHeikin35HighSchool } from '@/lib/blog/posts/hyotei-heikin-3-5-high-school';
 import { post as hyoteiHeikin45HighSchool } from '@/lib/blog/posts/hyotei-heikin-4-5-high-school';
 import { post as naishinten27HighSchool } from '@/lib/blog/posts/naishinten-27-high-school';
+import { post as naishinten28HighSchool } from '@/lib/blog/posts/naishinten-28-high-school';
 import { post as naishinten29HighSchool } from '@/lib/blog/posts/naishinten-29-high-school';
 import { post as naishinten30HighSchool } from '@/lib/blog/posts/naishinten-30-high-school';
 import { post as parentHyoteiHeikinSuisenGuide } from '@/lib/blog/posts/parent-hyotei-heikin-suisen-guide';
@@ -89,6 +90,7 @@ const HAND_WRITTEN_POSTS: BlogPost[] = [
   hyoteiHeikin40HighSchool,
   hyoteiHeikin35HighSchool,
   naishinten27HighSchool,
+  naishinten28HighSchool,
   naishinten29HighSchool,
   naishinten30HighSchool,
   hensachiKoukouIchiran2026,
