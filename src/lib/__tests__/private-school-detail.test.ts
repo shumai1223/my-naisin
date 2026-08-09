@@ -2695,12 +2695,12 @@ describe('PRIVATE_SCHOOL_DETAIL_TOKYO(大都市圏5県の最後・育伸社募�
     }
   });
 
-  it('収録176校(掛-2の2024年度134校分含め310レコード)・スキップ65校で参照台帳241校を完全網羅(重複・欠落なし)', () => {
+  it('収録176校(掛-2の2024年度141校分含め317レコード)・スキップ65校で参照台帳241校を完全網羅(重複・欠落なし)', () => {
     const allCodes = SCHOOLS_PRIVATE_TOKYO.schools.map((s) => s.code);
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_TOKYO, allCodes);
     expect(result.duplicates).toEqual([]);
     expect(result.missing).toHaveLength(0);
-    expect(PRIVATE_SCHOOL_DETAIL_TOKYO.schools.length).toBe(310);
+    expect(PRIVATE_SCHOOL_DETAIL_TOKYO.schools.length).toBe(317);
     expect(PRIVATE_SCHOOL_DETAIL_TOKYO.skipped.length).toBe(65);
   });
 
@@ -3328,6 +3328,58 @@ describe('PRIVATE_SCHOOL_DETAIL_TOKYO(大都市圏5県の最後・育伸社募�
     );
     expect(y2024?.totalCapacity).toBe(90);
     expect(yLatest?.totalCapacity).toBe(115);
+  });
+
+  it('掛-2(私立×多年度・19ページ目=最終頁): 目黒学院・目黒日本大学・立正大学付属立正の3校は2024年度と2026年度で総定員が完全一致', () => {
+    const pairs: Array<[string, number]> = [
+      ['D113311000052', 280],
+      ['D113311000043', 245],
+      ['D113311100015', 200],
+    ];
+    for (const [code, total] of pairs) {
+      const y2024 = PRIVATE_SCHOOL_DETAIL_TOKYO.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '2024年度'
+      );
+      const yLatest = PRIVATE_SCHOOL_DETAIL_TOKYO.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel !== '2024年度'
+      );
+      expect(y2024?.totalCapacity).toBe(total);
+      expect(yLatest?.totalCapacity).toBe(total);
+    }
+  });
+
+  it('掛-2(私立×多年度・19ページ目=最終頁): 安田学園・早稲田大学高等学院の2校は2024→2026年度で総定員が減少', () => {
+    const pairs: Array<[string, number, number]> = [
+      ['D113310700020', 240, 200],
+      ['D113312000050', 360, 280],
+    ];
+    for (const [code, before, after] of pairs) {
+      const y2024 = PRIVATE_SCHOOL_DETAIL_TOKYO.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '2024年度'
+      );
+      const yLatest = PRIVATE_SCHOOL_DETAIL_TOKYO.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel !== '2024年度'
+      );
+      expect(y2024?.totalCapacity).toBe(before);
+      expect(yLatest?.totalCapacity).toBe(after);
+    }
+  });
+
+  it('掛-2(私立×多年度・19ページ目=最終頁): 立志舎は土曜コース新設で総定員が200から500へ、和洋九段女子は2コース新設で10から40へ増加', () => {
+    const pairs: Array<[string, number, number]> = [
+      ['D113310700039', 200, 500],
+      ['D113310100142', 10, 40],
+    ];
+    for (const [code, before, after] of pairs) {
+      const y2024 = PRIVATE_SCHOOL_DETAIL_TOKYO.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '2024年度'
+      );
+      const yLatest = PRIVATE_SCHOOL_DETAIL_TOKYO.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel !== '2024年度'
+      );
+      expect(y2024?.totalCapacity).toBe(before);
+      expect(yLatest?.totalCapacity).toBe(after);
+    }
   });
 });
 

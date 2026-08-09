@@ -455,6 +455,23 @@
  * 単一値解釈と整合せず測定基盤に確信が持てないため見送り。武蔵野大学附属千代田高等学院は参照台帳
  * (schools-private/tokyo.ts)に該当コードが存在せず掛-2の対象外(「千代田高等学校」という別の学校が
  * 存在するが科・コース構成が異なり別法人と判断)。
+ * **2026-08-10further(19ページ目=最終頁、12校中7校を収録・4校は見送り・1校は既存スキップと整合)**:
+ * 目黒学院(全コース計約280の単一共有枠)・目黒日本大学(推薦122+一般併優123=245)・立正大学付属立正
+ * (推薦100+一般①70+一般②30=200)の3校は2024年度と2026年度で総定員が完全一致。安田学園はS特80→120・
+ * 特進160→80で総定員240→200(コース間の配分変化)、立志舎は2024年度版が平日コースのみ(推薦100+一般
+ * ①100=200)で土曜コース(B推薦のみ300)は現行コードにのみ存在するため200→500(新規プログラム追加)、
+ * 早稲田大学高等学院は自己推薦約100→約20への大幅減(一般は260[含帰国18]で完全一致・この一致が読み
+ * 取り精度の裏付けとなった)で総定員360→280、和洋九段女子はグローバルコースのみ(10)だった2024年度
+ * 版に対し2026年度版はフューチャーデザイン・サイエンスの2コース新設(既存コメントに「2026年新設」と
+ * 明記済み)を織り込んだ全コース計40円へ拡大しており10→40(新設コース追加という既知の事実と整合)。
+ * 目白研心(推薦100・一般130という異なる数値が現行の単一100共通枠解釈と整合しない)・八雲学園(特進・
+ * 進学の両コースで推薦・一般とも一律25という現行の30/40という差分構造と整合しない)・和光(一般が
+ * 推薦からの「↓」で連結され単一70枠に見えるが現行は推薦70+一般70=140の加算構造)・早稲田実業学校
+ * (一般が男子約50・女子約30という異なる数値で現行の男女共通枠45という単一値解釈と整合しない)の
+ * 4校は推薦/一般の結合規約が年度間で一貫しているか確信が持てず見送り。立教池袋は現行スキップ理由
+ * (育伸社PDFに「若干」としか記載が無い)が2024年度版でも同一のため掛-2の対象外(既存スキップの妥当性
+ * を裏付け)。**これでtokyo掛-2の19頁PDF全処理が完了**（大都市圏5県=kyoto/kanagawa/aichi/osaka/tokyo
+ * が全て掛-2完了）。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -4328,6 +4345,98 @@ export const PRIVATE_SCHOOL_DETAIL_TOKYO: PrivateSchoolDetailFile = {
         },
       ],
       totalCapacity: 90,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311000052',
+      schoolName: '目黒学院高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        {
+          courseName: 'スーパープレミアムコース・プレミアムコース・アドバンスコース・スタンダードキャリアコース(第一志望推薦・A/B日程・CB日程共通枠、全コース計、約)',
+          capacity: 280,
+        },
+      ],
+      totalCapacity: 280,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311000043',
+      schoolName: '目黒日本大学高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        {
+          courseName: '進学コース選抜クラス・進学コースN進学クラス(推薦共通枠、普通科計)',
+          capacity: 122,
+        },
+        {
+          courseName: '進学コース選抜クラス・進学コースN進学クラス(一般併優①②共通枠、普通科計)',
+          capacity: 123,
+        },
+      ],
+      totalCapacity: 245,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310700020',
+      schoolName: '安田学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'S特コース(A推薦・B推薦・一般①・一般②共通枠)', capacity: 80 },
+        { courseName: '特進コース(A推薦・B推薦・一般①・一般②共通枠)', capacity: 160 },
+      ],
+      totalCapacity: 240,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310700039',
+      schoolName: '立志舎高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(平日コース、A推薦・B推薦共通枠)', capacity: 100 },
+        { courseName: '普通(平日コース、一般①)', capacity: 100 },
+      ],
+      totalCapacity: 200,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311100015',
+      schoolName: '立正大学付属立正高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        {
+          courseName: '進学クラス・特進クラス(推薦共通枠、普通科計)',
+          capacity: 100,
+        },
+        {
+          courseName: '進学クラス・特進クラス(一般①共通枠、普通科計)',
+          capacity: 70,
+        },
+        {
+          courseName: '進学クラス・特進クラス(一般②共通枠、普通科計)',
+          capacity: 30,
+        },
+      ],
+      totalCapacity: 200,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113312000050',
+      schoolName: '早稲田大学高等学院',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(男、自己推薦、約)', capacity: 100 },
+        { courseName: '普通(男、一般、帰国生18を含む)', capacity: 260 },
+      ],
+      totalCapacity: 360,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310100142',
+      schoolName: '和洋九段女子高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: 'グローバルコース(女、推薦・一般併優共通枠)', capacity: 10 }],
+      totalCapacity: 10,
       source: KAKE2_2024_TOKYO_SOURCE,
     },
   ],
