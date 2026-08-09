@@ -62,6 +62,15 @@
  * メディカル増の再配分を伴う)を検出。利晶学園(初芝富田林)は2024年度版が4コースとも「約70」表記で
  * 共有か独立か確定できず、ヴェリタス城星学園は現行レコード自体が2025年度分(2026年度分は未確認)かつ
  * 2024年度版との差が75→140と大きすぎるため、いずれも見送り。
+ * **2026-08-10further(9ページ目=最終頁・4校中3校を収録・1校は見送り、これでikushin全9頁の処理完了)**:
+ * 明星・桃山学院の2校は総定員完全一致。早稲田大阪(旧校名:早稲田摂陵、2024年度版PDF時点ではこの旧校名で
+ * 掲載)は240→284(+44、Wコース→早稲田コースへの改称と同時に定員増)を検出。履正社は2024年度版387
+ * (学藝コースS/Ⅰ/Ⅱ計258+競技Ⅲ類129)に対し2026年度版が560という説明のつかない大幅な乖離(+45%)が
+ * あり、浪速と同様のパターンのため単純比較を避け見送り(要再検証)。**osaka掛-2はこれでikushin
+ * 03927.pdf全9頁・参照台帳107校中76校の再突合が完了(2024年度版データ76レコード追加)。未処理は
+ * 残り31校(既にikushin以外の公式サイト個別調査等でスキップ/収録済みの校のうち、まだ2024年度版との
+ * 突合が済んでいない分・および浪速/履正社/利晶学園(初芝富田林)/ヴェリタス城星学園/帝塚山学院泉ヶ丘の
+ * 5校の見送り分)**。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -2432,6 +2441,43 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
         { courseName: '衛生看護コース(2024年新設)', capacity: 120 },
       ],
       totalCapacity: 300,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000085',
+      schoolName: '明星高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '文理選抜コース(男・約)', capacity: 80 },
+        { courseName: '文理コース(男・約)', capacity: 40 },
+      ],
+      totalCapacity: 120,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000218',
+      schoolName: '桃山学院高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'S英数コース', capacity: 80 },
+        { courseName: '英数コース', capacity: 80 },
+        { courseName: '文理コース(文理クラス120+アスリートクラス40男子)', capacity: 160 },
+        { courseName: '国際コース', capacity: 80 },
+      ],
+      totalCapacity: 400,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000968',
+      schoolName: '早稲田大阪高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'Wコース(本校専願/併願・大宮/所沢外部会場含む、2026年度版で早稲田コースへ改称・校名も早稲田摂陵から早稲田大阪へ変更)', capacity: 30 },
+        { courseName: 'Bコース(2026年度版で文理コースへ改称)', capacity: 70 },
+        { courseName: 'Aコース(2026年度版で総合コースへ改称)', capacity: 105 },
+        { courseName: '吹奏楽コース(女子)', capacity: 35 },
+      ],
+      totalCapacity: 240,
       source: KAKE2_2024_OSAKA_SOURCE,
     },
   ],

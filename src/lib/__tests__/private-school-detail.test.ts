@@ -2192,12 +2192,12 @@ describe('PRIVATE_SCHOOL_DETAIL_OSAKA(大都市圏5県の3県目・育伸社募�
     }
   });
 
-  it('収録91校(掛-2の2024年度72校分含め163レコード)・スキップ16校で参照台帳107校を完全網羅(重複・欠落なし)', () => {
+  it('収録91校(掛-2の2024年度75校分含め166レコード)・スキップ16校で参照台帳107校を完全網羅(重複・欠落なし)', () => {
     const allCodes = SCHOOLS_PRIVATE_OSAKA.schools.map((s) => s.code);
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_OSAKA, allCodes);
     expect(result.duplicates).toEqual([]);
     expect(result.missing).toHaveLength(0);
-    expect(PRIVATE_SCHOOL_DETAIL_OSAKA.schools.length).toBe(163);
+    expect(PRIVATE_SCHOOL_DETAIL_OSAKA.schools.length).toBe(166);
     expect(PRIVATE_SCHOOL_DETAIL_OSAKA.skipped.length).toBe(16);
   });
 
@@ -2476,6 +2476,34 @@ describe('PRIVATE_SCHOOL_DETAIL_OSAKA(大都市圏5県の3県目・育伸社募�
       expect(y2024?.totalCapacity).toBe(before);
       expect(yLatest?.totalCapacity).toBe(after);
     }
+  });
+
+  it('掛-2(私立×多年度・9ページ目=最終頁): 明星・桃山学院の2校は2024年度と2026年度で総定員が完全一致', () => {
+    const pairs: Array<[string, number]> = [
+      ['D127310000085', 120],
+      ['D127310000218', 400],
+    ];
+    for (const [code, total] of pairs) {
+      const y2024 = PRIVATE_SCHOOL_DETAIL_OSAKA.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '2024年度'
+      );
+      const yLatest = PRIVATE_SCHOOL_DETAIL_OSAKA.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel !== '2024年度'
+      );
+      expect(y2024?.totalCapacity).toBe(total);
+      expect(yLatest?.totalCapacity).toBe(total);
+    }
+  });
+
+  it('掛-2(私立×多年度・9ページ目=最終頁): 早稲田大阪(旧早稲田摂陵)は2024→2026年度で総定員が変化', () => {
+    const y2024 = PRIVATE_SCHOOL_DETAIL_OSAKA.schools.find(
+      (s) => s.schoolCode === 'D127310000968' && s.fiscalYearLabel === '2024年度'
+    );
+    const yLatest = PRIVATE_SCHOOL_DETAIL_OSAKA.schools.find(
+      (s) => s.schoolCode === 'D127310000968' && s.fiscalYearLabel !== '2024年度'
+    );
+    expect(y2024?.totalCapacity).toBe(240);
+    expect(yLatest?.totalCapacity).toBe(284);
   });
 });
 
