@@ -48,6 +48,12 @@
  * と湘南学院高等学校(公式サイトPDF・4コース合計445が原資料の「定員445名」と完全一致検算)を
  * 収録(53校)。シュタイナー学園高等部は小中高一貫で外部転入は欠員時の若干名のみのため
  * 固定定員が無くskippedへ(合計skipped27校)。
+ *
+ * 【掛-2（私立×多年度）着手(2026-08-09)】大都市圏5県の2番目。Wayback CDX APIでikushin
+ * 03914.pdfの2023年10月3日キャプチャ(「2024年度」版)を発掘し、1ページ目10校を再突合。
+ * 旭丘・麻布大学附属・アレセイア湘南・英理女子学院・柏木学園・鎌倉学園・鎌倉国際文理
+ * (当時鎌倉女子大学)・函嶺白百合学園の8校は総定員完全一致。**大西学園(120→160)・
+ * 関東学院六浦(40→25)で実際の変化を検出**。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -55,6 +61,13 @@ const IKUSHIN_KANAGAWA_SOURCE = {
   url: 'https://www.ikushin.co.jp/school/pdf/03914.pdf',
   docTitle: '2026年度 私立高校 募集要項【神奈川県】（(株)育伸社 入試情報課・2025年11月4日現在）',
   fetchedAt: '2026-07-31',
+  sourceTier: 'secondary' as const,
+};
+
+const KAKE2_2024_KANAGAWA_SOURCE = {
+  url: 'https://web.archive.org/web/20231106155753if_/https://www.ikushin.co.jp/school/PDF/03914.pdf',
+  docTitle: '2024年度 私立高校 募集要項【神奈川県】(株式会社育伸社 入試情報課・2023年10月3日現在・Web Archive経由で取得)',
+  fetchedAt: '2026-08-09',
   sourceTier: 'secondary' as const,
 };
 
@@ -739,6 +752,109 @@ export const PRIVATE_SCHOOL_DETAIL_KANAGAWA: PrivateSchoolDetailFile = {
         fetchedAt: '2026-08-04',
         sourceTier: 'secondary' as const,
       },
+    },
+    {
+      schoolCode: 'D114320600010',
+      schoolName: '旭丘高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(推薦120+一般120)', capacity: 240 },
+        { courseName: '総合(推薦116+一般117)', capacity: 233 },
+      ],
+      totalCapacity: 473,
+      source: KAKE2_2024_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114315000025',
+      schoolName: '麻布大学附属高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: 'S特進クラス・特進クラス・進学クラス(全コース計、推薦55+一般200)', capacity: 255 }],
+      totalCapacity: 255,
+      source: KAKE2_2024_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114320700019',
+      schoolName: 'アレセイア湘南高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '特進コース・探求コース(普通科計、推薦70+一般110+オープン20)', capacity: 200 }],
+      totalCapacity: 200,
+      source: KAKE2_2024_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114310000231',
+      schoolName: '英理女子学院高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'iグローバル部(女、推薦30+一般併願50)', capacity: 80 },
+        { courseName: 'キャリア部進学教養コース(女、推薦40+一般併願40)', capacity: 80 },
+        { courseName: 'キャリア部ビジネスデザインコース(女、推薦20+一般併願20)', capacity: 40 },
+        { courseName: 'キャリア部情報デザインコース(女、推薦40+一般併願40)', capacity: 80 },
+        { courseName: 'キャリア部ライフデザインコース(女、推薦40+一般併願40)', capacity: 80 },
+      ],
+      totalCapacity: 360,
+      source: KAKE2_2024_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114313000011',
+      schoolName: '大西学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(推薦30+併願一般50)', capacity: 80 },
+        { courseName: '家庭(女、推薦20+併願一般20)', capacity: 40 },
+      ],
+      totalCapacity: 120,
+      source: KAKE2_2024_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114321300020',
+      schoolName: '柏木学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'アドバンスコース(推薦30+一般30)', capacity: 60 },
+        { courseName: 'スタンダードコース(推薦70+一般70)', capacity: 140 },
+        { courseName: '情報コース(推薦20+一般15)', capacity: 35 },
+        { courseName: '全コース共通オープン枠', capacity: 5 },
+      ],
+      totalCapacity: 240,
+      source: KAKE2_2024_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114320400021',
+      schoolName: '鎌倉学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通(男、一般A方式90+一般B方式20)', capacity: 110 }],
+      totalCapacity: 110,
+      source: KAKE2_2024_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114320400058',
+      schoolName: '鎌倉国際文理高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '国際教養コース(推薦35含内部+一般併願35+オープン5)', capacity: 75 },
+        { courseName: 'プログレスコース(推薦75含内部+一般専願25+一般併願50+オープン10)', capacity: 160 },
+      ],
+      totalCapacity: 235,
+      source: {
+        ...KAKE2_2024_KANAGAWA_SOURCE,
+        docTitle: KAKE2_2024_KANAGAWA_SOURCE.docTitle + '(当時の校名は鎌倉女子大学高等部)',
+      },
+    },
+    {
+      schoolCode: 'D114310000197',
+      schoolName: '関東学院六浦高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通(一般・GLEクラス、推薦10+一般書類選考30)', capacity: 40 }],
+      totalCapacity: 40,
+      source: KAKE2_2024_KANAGAWA_SOURCE,
+    },
+    {
+      schoolCode: 'D114338200016',
+      schoolName: '函嶺白百合学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通(女、推薦20+一般30)', capacity: 50 }],
+      totalCapacity: 50,
+      source: KAKE2_2024_KANAGAWA_SOURCE,
     },
   ],
   skipped: [

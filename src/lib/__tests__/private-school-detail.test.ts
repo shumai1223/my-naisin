@@ -1971,13 +1971,60 @@ describe('PRIVATE_SCHOOL_DETAIL_KANAGAWA(大都市圏5県・育伸社募集要�
     }
   });
 
-  it('収録56校・スキップ27校で参照台帳83校を完全網羅(重複・欠落なし)', () => {
+  it('収録66レコード(56校+掛-2多年度10レコード)・スキップ27校で参照台帳83校を完全網羅(重複・欠落なし)', () => {
     const allCodes = SCHOOLS_PRIVATE_KANAGAWA.schools.map((s) => s.code);
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_KANAGAWA, allCodes);
     expect(result.duplicates).toEqual([]);
     expect(result.missing).toHaveLength(0);
-    expect(PRIVATE_SCHOOL_DETAIL_KANAGAWA.schools.length).toBe(56);
+    expect(PRIVATE_SCHOOL_DETAIL_KANAGAWA.schools.length).toBe(66);
+    const distinctSchoolCodes = new Set(PRIVATE_SCHOOL_DETAIL_KANAGAWA.schools.map((s) => s.schoolCode));
+    expect(distinctSchoolCodes.size).toBe(56);
     expect(PRIVATE_SCHOOL_DETAIL_KANAGAWA.skipped.length).toBe(27);
+  });
+
+  it('掛-2(私立×多年度): 旭丘・麻布大学附属・アレセイア湘南・英理女子学院・柏木学園・鎌倉学園・鎌倉国際文理・函嶺白百合学園の8校は2024年度と2026年度で総定員が完全一致', () => {
+    const pairs: Array<[string, number]> = [
+      ['D114320600010', 473],
+      ['D114315000025', 255],
+      ['D114320700019', 200],
+      ['D114310000231', 360],
+      ['D114321300020', 240],
+      ['D114320400021', 110],
+      ['D114320400058', 235],
+      ['D114338200016', 50],
+    ];
+    for (const [code, total] of pairs) {
+      const y2024 = PRIVATE_SCHOOL_DETAIL_KANAGAWA.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '2024年度'
+      );
+      const yLatest = PRIVATE_SCHOOL_DETAIL_KANAGAWA.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel !== '2024年度'
+      );
+      expect(y2024?.totalCapacity).toBe(total);
+      expect(yLatest?.totalCapacity).toBe(total);
+    }
+  });
+
+  it('掛-2(私立×多年度): 大西学園は2024→2026年度で普通80+家庭40=120から普通110+家庭50=160へ増加', () => {
+    const y2024 = PRIVATE_SCHOOL_DETAIL_KANAGAWA.schools.find(
+      (s) => s.schoolCode === 'D114313000011' && s.fiscalYearLabel === '2024年度'
+    );
+    const yLatest = PRIVATE_SCHOOL_DETAIL_KANAGAWA.schools.find(
+      (s) => s.schoolCode === 'D114313000011' && s.fiscalYearLabel !== '2024年度'
+    );
+    expect(y2024?.totalCapacity).toBe(120);
+    expect(yLatest?.totalCapacity).toBe(160);
+  });
+
+  it('掛-2(私立×多年度): 関東学院六浦は2024→2026年度で推薦10+一般書類選考30=40から推薦10+一般書類選考15=25へ減少', () => {
+    const y2024 = PRIVATE_SCHOOL_DETAIL_KANAGAWA.schools.find(
+      (s) => s.schoolCode === 'D114310000197' && s.fiscalYearLabel === '2024年度'
+    );
+    const yLatest = PRIVATE_SCHOOL_DETAIL_KANAGAWA.schools.find(
+      (s) => s.schoolCode === 'D114310000197' && s.fiscalYearLabel !== '2024年度'
+    );
+    expect(y2024?.totalCapacity).toBe(40);
+    expect(yLatest?.totalCapacity).toBe(25);
   });
 });
 
