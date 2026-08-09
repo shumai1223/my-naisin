@@ -1056,9 +1056,45 @@ describe('PRIVATE_SCHOOL_DETAIL_KUMAMOTO(育伸社募集要項PDFで25校中20�
     expect(result.missing).toEqual([]);
   });
 
-  it('収録20校+スキップ5校(概算表記1校+広域通信制4校)で参照台帳の25校と一致する', () => {
-    expect(PRIVATE_SCHOOL_DETAIL_KUMAMOTO.schools.length).toBe(20);
+  it('収録40レコード(20校×令和8年度+20校×2024年度)+スキップ5校(概算表記1校+広域通信制4校)で参照台帳の25校と一致する', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_KUMAMOTO.schools.length).toBe(40);
     expect(PRIVATE_SCHOOL_DETAIL_KUMAMOTO.skipped.length).toBe(5);
+    const distinctSchoolCodes = new Set(PRIVATE_SCHOOL_DETAIL_KUMAMOTO.schools.map((s) => s.schoolCode));
+    expect(distinctSchoolCodes.size).toBe(20);
+  });
+
+  it('掛-2(私立×多年度): 20校全てで総定員が2024年度と令和8年度で完全一致(熊本県は変化ゼロ)', () => {
+    const codes = [
+      'D143310000174',
+      'D143310000049',
+      'D143310000192',
+      'D143310000012',
+      'D143310000058',
+      'D143310000094',
+      'D143310000129',
+      'D143310000138',
+      'D143310000101',
+      'D143310000165',
+      'D143310000076',
+      'D143310000218',
+      'D143310000183',
+      'D143310000209',
+      'D143310000021',
+      'D143310000067',
+      'D143310000147',
+      'D143310000085',
+      'D143310000156',
+      'D143310000110',
+    ];
+    for (const code of codes) {
+      const older = PRIVATE_SCHOOL_DETAIL_KUMAMOTO.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '2024年度'
+      )!;
+      const newer = PRIVATE_SCHOOL_DETAIL_KUMAMOTO.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '令和8年度'
+      )!;
+      expect(older.totalCapacity).toBe(newer.totalCapacity);
+    }
   });
 });
 
