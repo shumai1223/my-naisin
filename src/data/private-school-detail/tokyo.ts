@@ -385,6 +385,25 @@
  * 附属東邦(2025年度から募集停止・2027年3月閉鎖予定)は2024年度版でまだ現役の募集人員(順に推薦45+
  * 一般105=150、推薦60+一般↓=60)が確認でき現行のスキップ理由(募集停止)の妥当性を裏付けたが、
  * 現行に比較対象がなく掛-2としては対象外。
+ * **2026-08-10further(14ページ目8校中7校を収録・1校は見送り)**: 豊島学院は2024年度版でも4類型
+ * 全てで推薦・1月併願・2月併優一般が同一値の反復(15/40/60/60=175)で本文既存の解釈と完全一致。
+ * 日本体育大学荏原は3コース全ラウンドで「全コース計160」が反復し完全一致。二松学舎大学附属は
+ * 2024年度版が進学コース推薦120+一般併優Ⅰ80+一般併優Ⅱ50(いずれも含特進コース)=250の3ラウンド制
+ * だったのに対し、2026年度版は一般併優Ⅰ・Ⅱが単一の80共通枠へ統合され総定員200へ減少(東洋大学
+ * 京北と同型の一般ラウンド統合)。日本工業大学駒場は2024年度版に理数特進コース(18+17=35)が特進
+ * コースと全く同じ定員で別枠として存在し4コース計245だったが、2026年度版では理数特進コースが
+ * 消滅し3コース計210へ減少。日本体育大学桜華は総定員100は完全一致するが、2024年度版の総合進学・
+ * 総合スポーツが「総合進学・スポーツ計85」という単一共有枠だったのに対し2026年度版は35+50の
+ * 個別配分へ変化(四條畷学園と同型のコース間再配分)。新渡戸文化は2024年度版が単願推薦・併願優遇・
+ * 第一志望優遇一般①の共通枠50(一般②は若干のため未算入)に対し2026年度版は一般②を含めた全区分が
+ * 42の共通枠へ再編され総定員が50から42へ減少。明治大学付属世田谷は2026年に日本学園から校名変更・
+ * 男子校→共学化した学校で、2024年度版(日本学園当時)は特別進学コース・進学コースが「特進・進学計」
+ * ラベルで推薦124+一般併優①83+一般②41=248の3ラウンド制の単一共有枠だったのに対し、2026年度版
+ * (明治大学付属世田谷)は推薦80+一般80のプレーン2ラウンド制へ全面再編され総定員が248から160へ
+ * 減少(校名変更・共学化という制度的な断絶を伴う変化のため単純な定員減とは性質が異なる点に留意)。
+ * 中村は2024年度版が推薦・一般とも同一の「先進・探究計25・国際5」(単一共有枠30、国際プログラム
+ * 込み)である一方、2026年度版は推薦12+一般12という異なるラベル体系(国際プログラムへの言及なし)
+ * のため、測定基盤が実質的に異なり単純な定員減とは断定できず見送り。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -3775,6 +3794,109 @@ export const PRIVATE_SCHOOL_DETAIL_TOKYO: PrivateSchoolDetailFile = {
         },
       ],
       totalCapacity: 50,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311600109',
+      schoolName: '豊島学院高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'スーパー特進類型(推薦・1月併願・2月併優一般共通枠)', capacity: 15 },
+        { courseName: '特別進学類型(推薦・1月併願・2月併優一般共通枠)', capacity: 40 },
+        { courseName: '選抜進学類型(推薦・1月併願・2月併優一般共通枠)', capacity: 60 },
+        { courseName: '普通進学類型(推薦・1月併願・2月併優一般共通枠)', capacity: 60 },
+      ],
+      totalCapacity: 175,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310100115',
+      schoolName: '二松学舎大学附属高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '進学コース(A・C推薦・B推薦共通枠、含特進コース)', capacity: 120 },
+        { courseName: '進学コース(一般・併優Ⅰ、含特進コース)', capacity: 80 },
+        { courseName: '進学コース(一般・併優Ⅱ、含特進コース)', capacity: 50 },
+      ],
+      totalCapacity: 250,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311000025',
+      schoolName: '日本工業大学駒場高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特進コース(推薦A・B共通枠)', capacity: 18 },
+        { courseName: '特進コース(一般併優①・②共通枠)', capacity: 17 },
+        { courseName: '理数特進コース(推薦A・B共通枠)', capacity: 18 },
+        { courseName: '理数特進コース(一般併優①・②共通枠)', capacity: 17 },
+        { courseName: '総合進学コース(推薦A・B共通枠)', capacity: 53 },
+        { courseName: '総合進学コース(一般併優①・②共通枠)', capacity: 52 },
+        { courseName: '文理未来コース(推薦A・B共通枠)', capacity: 35 },
+        { courseName: '文理未来コース(一般併優①・②共通枠)', capacity: 35 },
+      ],
+      totalCapacity: 245,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311100060',
+      schoolName: '日本体育大学荏原高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        {
+          courseName: 'アカデミックコース・アドバンストコース・スポーツコース(推薦・一般①②共通枠、全コース計)',
+          capacity: 160,
+        },
+      ],
+      totalCapacity: 160,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113321300012',
+      schoolName: '日本体育大学桜華高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'アドバンストコース(女、A推薦・B推薦・一般共通枠)', capacity: 15 },
+        {
+          courseName: '総合進学コース・総合スポーツコース(女、A推薦・B推薦・一般共通枠、総合進学・スポーツ計)',
+          capacity: 85,
+        },
+      ],
+      totalCapacity: 100,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311400030',
+      schoolName: '新渡戸文化高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        {
+          courseName: '普通(探究進学・美術・フードデザイン、単願推薦・併願優遇・第一志望優遇一般①共通枠。第一志望優遇一般②は若干のため未算入)',
+          capacity: 50,
+        },
+      ],
+      totalCapacity: 50,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311200238',
+      schoolName: '明治大学付属世田谷高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        {
+          courseName: '日本学園高等学校(校名変更前)特別進学コース・進学コース(男、推薦、特進・進学計)',
+          capacity: 124,
+        },
+        {
+          courseName: '日本学園高等学校(校名変更前)特別進学コース・進学コース(男、一般・併優①、特進・進学計)',
+          capacity: 83,
+        },
+        {
+          courseName: '日本学園高等学校(校名変更前)特別進学コース・進学コース(男、一般②、特進・進学計)',
+          capacity: 41,
+        },
+      ],
+      totalCapacity: 248,
       source: KAKE2_2024_TOKYO_SOURCE,
     },
   ],
