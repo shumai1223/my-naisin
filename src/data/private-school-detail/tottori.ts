@@ -3,6 +3,13 @@
  * schools-private/tottori.ts（第一段・機械生成の参照台帳）8校のうち、
  * 公式募集要項PDFで最新年度の定員を確度高く確認できた学校のみ収録。
  * 残りは正直にスキップ台帳へ（[[fable5-fullaccel-backlog-2026-07]]のΛ-5進捗ノート参照）。
+ *
+ * 【掛-2（私立×多年度）追加】既存4校のうち米子松蔭・鳥取城北について過去年度の募集要項も
+ * 発見できたため、fiscalYearLabelを変えた追加レコードとしてschools配列に収録した（同一
+ * schoolCodeが複数回出現する設計・掛-1/掛-3の多年度拡張と同型）。米子松蔭R7(2025年度)は
+ * コース構成・定員ともR8と完全に同一（4コース合計255名）、鳥取城北R6(令和6年度)も
+ * R8と完全に同一（普通科400名・コース別内訳非公開）だった。「定員に変更が無かった」という
+ * 事実自体も掛-4的な意味で資産になるため、変更の有無にかかわらず正直に記録する。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -68,6 +75,37 @@ export const PRIVATE_SCHOOL_DETAIL_TOTTORI: PrivateSchoolDetailFile = {
         url: 'https://t-ki.jp/pages/20/',
         docTitle: '入試情報（鳥取敬愛高等学校）',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
+      schoolCode: 'D131310000052',
+      schoolName: '米子松蔭高等学校',
+      fiscalYearLabel: '2025年度',
+      courses: [
+        { courseName: '特別進学コースα', capacity: 30 },
+        { courseName: '特別進学コースβ', capacity: 30 },
+        { courseName: '進学コース', capacity: 35 },
+        { courseName: '総合選択コース', capacity: 160 },
+      ],
+      totalCapacity: 255,
+      source: {
+        url: 'https://www.yonagoshoin.ed.jp/wp-content/uploads/2024/10/2ede262fadf3fe07cf15c00134ecec68.pdf',
+        docTitle: '米子松蔭高等学校 2025年度生徒募集要項「1 学科・コースと募集定員およびコースの特徴」（掛-2・2026年度版と完全に同一の4コース構成・定員）',
+        fetchedAt: '2026-08-09',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
+      schoolCode: 'D131310000025',
+      schoolName: '鳥取城北高等学校',
+      fiscalYearLabel: '令和6年度',
+      courses: [{ courseName: '普通科（研志コース・志学コース・スポーツ科学コース）', capacity: 400 }],
+      totalCapacity: 400,
+      source: {
+        url: 'https://www.tottori-johoku.ed.jp/data/wyg/files/R6%E5%8B%9F%E9%9B%86%E8%A6%81%E9%A0%85%E4%BF%AE%E6%AD%A3%E7%89%88(%E6%8A%9C%E7%B2%8B).pdf',
+        docTitle: '鳥取城北高等学校 令和6年度募集要項「1 募集学科（コース）・入学定員」（掛-2・令和8年度版と完全に同一の普通科400名・コース別内訳非公開）',
+        fetchedAt: '2026-08-09',
         sourceTier: 'primary' as const,
       },
     },

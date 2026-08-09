@@ -162,9 +162,31 @@ describe('PRIVATE_SCHOOL_DETAIL_TOTTORI(パイロット実データ)', () => {
     expect(result.missing).toEqual([]);
   });
 
-  it('収録4校+スキップ4校で参照台帳の8校と一致する', () => {
-    expect(PRIVATE_SCHOOL_DETAIL_TOTTORI.schools.length).toBe(4);
+  it('収録6レコード(4校+掛-2多年度2レコード)+スキップ4校で参照台帳の8校と一致する', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_TOTTORI.schools.length).toBe(6);
     expect(PRIVATE_SCHOOL_DETAIL_TOTTORI.skipped.length).toBe(4);
+    const distinctSchoolCodes = new Set(PRIVATE_SCHOOL_DETAIL_TOTTORI.schools.map((s) => s.schoolCode));
+    expect(distinctSchoolCodes.size).toBe(4);
+  });
+
+  it('掛-2(私立×多年度): 米子松蔭2025年度と鳥取城北令和6年度は、令和8年度と定員・コース構成が完全に同一', () => {
+    const matsukageR7 = PRIVATE_SCHOOL_DETAIL_TOTTORI.schools.find(
+      (s) => s.schoolCode === 'D131310000052' && s.fiscalYearLabel === '2025年度'
+    )!;
+    const matsukageR8 = PRIVATE_SCHOOL_DETAIL_TOTTORI.schools.find(
+      (s) => s.schoolCode === 'D131310000052' && s.fiscalYearLabel === '2026年度'
+    )!;
+    expect(matsukageR7.totalCapacity).toBe(matsukageR8.totalCapacity);
+    expect(matsukageR7.courses).toEqual(matsukageR8.courses);
+
+    const johokuR6 = PRIVATE_SCHOOL_DETAIL_TOTTORI.schools.find(
+      (s) => s.schoolCode === 'D131310000025' && s.fiscalYearLabel === '令和6年度'
+    )!;
+    const johokuR8 = PRIVATE_SCHOOL_DETAIL_TOTTORI.schools.find(
+      (s) => s.schoolCode === 'D131310000025' && s.fiscalYearLabel === '令和8年度'
+    )!;
+    expect(johokuR6.totalCapacity).toBe(johokuR8.totalCapacity);
+    expect(johokuR6.courses).toEqual(johokuR8.courses);
   });
 });
 

@@ -60,16 +60,21 @@ export function checkCourseCapacitySum(detail: PrivateSchoolDetail): boolean {
   return sum === detail.totalCapacity;
 }
 
-/** 同一県内でschoolCodeが schools と skipped の両方に重複していないか（収録漏れ・二重登録の検出）。 */
+/**
+ * 同一県内でschoolCodeが schools と skipped の両方に重複していないか（収録漏れ・二重登録の検出）。
+ * 掛-2（私立×多年度）では同じ学校が複数の年度で別レコードとして schools 内に複数回出現しうるため、
+ * schools内での同一コード多重出現自体は許容する（private-school-tuition.tsの
+ * findDuplicateOrMissingTuitionCodesと同じ設計）。duplicatesは「schoolsとskippedの両方に
+ * 同じコードが存在する」矛盾のみを検出する。
+ */
 export function findDuplicateOrMissingCodes(
   file: PrivateSchoolDetailFile,
   allCodesInPrefecture: string[]
 ): { duplicates: string[]; missing: string[] } {
-  const covered = [...file.schools.map((s) => s.schoolCode), ...file.skipped.map((s) => s.schoolCode)];
-  const seen = new Map<string, number>();
-  for (const code of covered) seen.set(code, (seen.get(code) ?? 0) + 1);
-  const duplicates = [...seen.entries()].filter(([, n]) => n > 1).map(([code]) => code);
-  const coveredSet = new Set(covered);
+  const schoolCodes = new Set(file.schools.map((s) => s.schoolCode));
+  const skippedCodes = new Set(file.skipped.map((s) => s.schoolCode));
+  const duplicates = [...schoolCodes].filter((code) => skippedCodes.has(code));
+  const coveredSet = new Set([...schoolCodes, ...skippedCodes]);
   const missing = allCodesInPrefecture.filter((code) => !coveredSet.has(code));
   return { duplicates, missing };
 }
