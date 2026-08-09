@@ -350,6 +350,16 @@
  * (-40、2024年度版の一般②ラウンドが2026年度版で廃止)を検出。成立学園は2024年度版(スーパー特選
  * [推薦50+一般70]+特進[推薦100+一般100]=320)が現行の確立済み値130と大きく乖離しコース内訳も
  * 現行では非公開のため見送り。
+ * **2026-08-10further(11ページ目16校中11校を収録・4校は見送り)**: 多摩大学附属聖ケ丘・多摩大学
+ * 目黒・中央学院大学中央・中央大学(昼間定時制、男女共通枠として解釈)・中央大学杉並・中央大学附属
+ * (以上いずれも本文既存コメントとの整合を確認)・帝京大学・貞静学園(本文既存コメントの125という
+ * 総額は正しいが幼児教育保育コースの内訳は本文の記載ミスで実際は50、現行コードとも整合)・東亜学園・
+ * 東海大学付属高輪台・東京(高等学校)の11校は総定員完全一致。玉川聖学院は140→120(-20、推薦約
+ * 50→40、一般約90→80)を検出。帝京は本文既存コメントの通り「全コース計100」の加算解釈が確定
+ * できないため見送り継続、帝京八王子は本文既存コメントで「2026年新設校」と明記され2024年度時点で
+ * 存在しないため比較対象外、東海大学菅生と東京音楽大学付属は2024年度版が推薦/一般で異なる数値の
+ * 加算構造に見える一方、現行コードは単一の共通枠(推薦・一般共通枠、同一ラベル1本)として明示的に
+ * モデル化されており構造の前提が食い違うため、いずれも見送り。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -3441,6 +3451,136 @@ export const PRIVATE_SCHOOL_DETAIL_TOKYO: PrivateSchoolDetailFile = {
         { courseName: '普通(一般、約)', capacity: 40 },
       ],
       totalCapacity: 60,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311200176',
+      schoolName: '玉川聖学院高等部',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(女、推薦、約、2026年度版は40へ)', capacity: 50 },
+        {
+          courseName: '普通(女、一般Ⅰ・Ⅱ・Ⅲ①・Ⅳ①・Ⅲ②・Ⅳ②共通枠、約、2026年度版は80へ)',
+          capacity: 90,
+        },
+      ],
+      totalCapacity: 140,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113322400028',
+      schoolName: '多摩大学附属聖ケ丘高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通(一般のみ)', capacity: 20 }],
+      totalCapacity: 20,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311000061',
+      schoolName: '多摩大学目黒高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(推薦)', capacity: 30 },
+        { courseName: '普通(一般①②共通枠)', capacity: 120 },
+      ],
+      totalCapacity: 150,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310800029',
+      schoolName: '中央学院大学中央高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(推薦・一般併優共通枠)', capacity: 25 },
+        { courseName: '商業(推薦・一般併優共通枠)', capacity: 25 },
+      ],
+      totalCapacity: 50,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310500013',
+      schoolName: '中央大学高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(昼間定時制、推薦、男女共通枠)', capacity: 25 },
+        { courseName: '普通(昼間定時制、一般、男女共通枠)', capacity: 70 },
+      ],
+      totalCapacity: 95,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311500084',
+      schoolName: '中央大学杉並高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(一般公募推薦)', capacity: 130 },
+        { courseName: '普通(帰国)', capacity: 20 },
+        { courseName: '普通(一般)', capacity: 150 },
+      ],
+      totalCapacity: 300,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113321000024',
+      schoolName: '中央大学附属高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(一般公募推薦、約)', capacity: 80 },
+        { courseName: '普通(一般、約、帰国は若干のため未算入)', capacity: 120 },
+      ],
+      totalCapacity: 200,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113320100034',
+      schoolName: '帝京大学高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通(併願優遇・一般共通枠)', capacity: 60 }],
+      totalCapacity: 60,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310500148',
+      schoolName: '貞静学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特別進学コース(A推薦・B推薦・併優一般①②共通枠)', capacity: 15 },
+        { courseName: '総合進学コース(A推薦・B推薦・併優一般①②共通枠)', capacity: 60 },
+        { courseName: '幼児教育・保育系進学コース(A推薦・B推薦・併優一般①②共通枠)', capacity: 50 },
+      ],
+      totalCapacity: 125,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311400021',
+      schoolName: '東亜学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '総合選抜コース(推薦)', capacity: 179 },
+        { courseName: '総合選抜コース(一般①②共通枠)', capacity: 181 },
+        { courseName: '特進コース(推薦)', capacity: 10 },
+        { courseName: '特進コース(一般①②共通枠)', capacity: 35 },
+      ],
+      totalCapacity: 405,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310300097',
+      schoolName: '東海大学付属高輪台高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '普通(推薦・一般共通枠)', capacity: 170 }],
+      totalCapacity: 170,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311100042',
+      schoolName: '東京高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(推薦Ⅰ・Ⅱ共通枠)', capacity: 120 },
+        { courseName: '普通(一般①・②・③共通、3ラウンド合算150)', capacity: 150 },
+      ],
+      totalCapacity: 270,
       source: KAKE2_2024_TOKYO_SOURCE,
     },
   ],

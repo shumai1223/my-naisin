@@ -2695,12 +2695,12 @@ describe('PRIVATE_SCHOOL_DETAIL_TOKYO(大都市圏5県の最後・育伸社募�
     }
   });
 
-  it('収録176校(掛-2の2024年度73校分含め249レコード)・スキップ65校で参照台帳241校を完全網羅(重複・欠落なし)', () => {
+  it('収録176校(掛-2の2024年度85校分含め261レコード)・スキップ65校で参照台帳241校を完全網羅(重複・欠落なし)', () => {
     const allCodes = SCHOOLS_PRIVATE_TOKYO.schools.map((s) => s.code);
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_TOKYO, allCodes);
     expect(result.duplicates).toEqual([]);
     expect(result.missing).toHaveLength(0);
-    expect(PRIVATE_SCHOOL_DETAIL_TOKYO.schools.length).toBe(249);
+    expect(PRIVATE_SCHOOL_DETAIL_TOKYO.schools.length).toBe(261);
     expect(PRIVATE_SCHOOL_DETAIL_TOKYO.skipped.length).toBe(65);
   });
 
@@ -3005,6 +3005,43 @@ describe('PRIVATE_SCHOOL_DETAIL_TOKYO(大都市圏5県の最後・育伸社募�
     );
     expect(y2024?.totalCapacity).toBe(320);
     expect(yLatest?.totalCapacity).toBe(280);
+  });
+
+  it('掛-2(私立×多年度・11ページ目): 多摩大学附属聖ケ丘・多摩大学目黒・中央学院大学中央・中央大学・中央大学杉並・中央大学附属・帝京大学・貞静学園・東亜学園・東海大学付属高輪台・東京の11校は2024年度と2026年度で総定員が完全一致', () => {
+    const pairs: Array<[string, number]> = [
+      ['D113322400028', 20],
+      ['D113311000061', 150],
+      ['D113310800029', 50],
+      ['D113310500013', 95],
+      ['D113311500084', 300],
+      ['D113321000024', 200],
+      ['D113320100034', 60],
+      ['D113310500148', 125],
+      ['D113311400021', 405],
+      ['D113310300097', 170],
+      ['D113311100042', 270],
+    ];
+    for (const [code, total] of pairs) {
+      const y2024 = PRIVATE_SCHOOL_DETAIL_TOKYO.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '2024年度'
+      );
+      const yLatest = PRIVATE_SCHOOL_DETAIL_TOKYO.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel !== '2024年度'
+      );
+      expect(y2024?.totalCapacity).toBe(total);
+      expect(yLatest?.totalCapacity).toBe(total);
+    }
+  });
+
+  it('掛-2(私立×多年度・11ページ目): 玉川聖学院は2024→2026年度で総定員が変化', () => {
+    const y2024 = PRIVATE_SCHOOL_DETAIL_TOKYO.schools.find(
+      (s) => s.schoolCode === 'D113311200176' && s.fiscalYearLabel === '2024年度'
+    );
+    const yLatest = PRIVATE_SCHOOL_DETAIL_TOKYO.schools.find(
+      (s) => s.schoolCode === 'D113311200176' && s.fiscalYearLabel !== '2024年度'
+    );
+    expect(y2024?.totalCapacity).toBe(140);
+    expect(yLatest?.totalCapacity).toBe(120);
   });
 });
 
