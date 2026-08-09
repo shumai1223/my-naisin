@@ -162,11 +162,11 @@ describe('PRIVATE_SCHOOL_DETAIL_TOTTORI(パイロット実データ)', () => {
     expect(result.missing).toEqual([]);
   });
 
-  it('収録6レコード(4校+掛-2多年度2レコード)+スキップ4校で参照台帳の8校と一致する', () => {
-    expect(PRIVATE_SCHOOL_DETAIL_TOTTORI.schools.length).toBe(6);
-    expect(PRIVATE_SCHOOL_DETAIL_TOTTORI.skipped.length).toBe(4);
+  it('収録7レコード(5校+掛-2多年度2レコード)+スキップ3校で参照台帳の8校と一致する', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_TOTTORI.schools.length).toBe(7);
+    expect(PRIVATE_SCHOOL_DETAIL_TOTTORI.skipped.length).toBe(3);
     const distinctSchoolCodes = new Set(PRIVATE_SCHOOL_DETAIL_TOTTORI.schools.map((s) => s.schoolCode));
-    expect(distinctSchoolCodes.size).toBe(4);
+    expect(distinctSchoolCodes.size).toBe(5);
   });
 
   it('掛-2(私立×多年度): 米子松蔭2025年度と鳥取城北令和6年度は、令和8年度と定員・コース構成が完全に同一', () => {

@@ -10,6 +10,10 @@
  * コース構成・定員ともR8と完全に同一（4コース合計255名）、鳥取城北R6(令和6年度)も
  * R8と完全に同一（普通科400名・コース別内訳非公開）だった。「定員に変更が無かった」という
  * 事実自体も掛-4的な意味で資産になるため、変更の有無にかかわらず正直に記録する。
+ *
+ * 【2026-08-09追記】米子北高等学校は旧版で「poppler未導入」を理由にスキップしていたが、
+ * これはfukui.tsと同じ誤った前提だった。PyMuPDF(`import fitz`)で全40頁の大容量PDF(11.4MB)
+ * を問題なく走査でき、4頁目に募集人数の記載を発見したため今回追加収録した。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -109,6 +113,24 @@ export const PRIVATE_SCHOOL_DETAIL_TOTTORI: PrivateSchoolDetailFile = {
         sourceTier: 'primary' as const,
       },
     },
+    {
+      schoolCode: 'D131310000043',
+      schoolName: '米子北高等学校',
+      fiscalYearLabel: '令和8年度',
+      courses: [
+        { courseName: '普通科 未来創造コース・進学探究コース(合算募集)', capacity: 160 },
+        { courseName: '普通科 特別進学コース', capacity: 40 },
+        { courseName: '看護科', capacity: 40 },
+      ],
+      totalCapacity: 240,
+      source: {
+        url: 'https://www.yonagokita.ed.jp/wp-content/uploads/2025/11/5ee48b95cef1bd31afb6b405f39053bc-1.pdf',
+        docTitle:
+          '令和8年度生徒募集要項｜米子北高等学校(「Ⅰ 募集人数」。全40頁だがPyMuPDFで4頁目に即発見。11.4MBの大容量PDFで文字情報がほぼ埋め込まれておらず全頁が画像のためget_pixmapでの目視読み取りのみ有効。未来創造コースと進学探究コースは合算160名のみ公表で内訳非公開)',
+        fetchedAt: '2026-08-09',
+        sourceTier: 'primary',
+      },
+    },
   ],
   skipped: [
     {
@@ -116,12 +138,6 @@ export const PRIVATE_SCHOOL_DETAIL_TOTTORI: PrivateSchoolDetailFile = {
       schoolName: '倉吉北高等学校',
       reason:
         '公式サイトの入試情報ページ(kurayoshikita-h.ed.jp/exam/)は「生徒募集要項をご確認ください」と案内するのみでPDFへの直接リンクがページ本文に見当たらず、WebSearchでも令和8年度版の直接URLを特定できなかったため見送り。',
-    },
-    {
-      schoolCode: 'D131310000043',
-      schoolName: '米子北高等学校',
-      reason:
-        '「令和8年度 生徒募集要項」PDF(https://www.yonagokita.ed.jp/wp-content/uploads/2025/11/5ee48b95cef1bd31afb6b405f39053bc-1.pdf)への直接URLは特定できたが、全40頁でこの環境はpoppler未導入のためpages指定読み取りが機能せず内容確認に至らなかった(WebFetchも10MB超で拒否)。定員記載ページの位置が分からない限りこの環境では読了不可能なため見送り。',
     },
     {
       schoolCode: 'D131310000061',
