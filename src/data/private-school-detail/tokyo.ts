@@ -302,6 +302,14 @@
  * 表記が総合進学/ダブルディプロマ各コース単位のクォータか学校全体の合算クォータか確定できないため、
  * 京華女子は特進/進学クラスとも入試回ごとに異なる数値が並ぶ多段階の加算構造で誤読リスクが高いため、
  * いずれも見送り。
+ * **2026-08-10further(5ページ目10校中7校を収録・2校は見送り・駒込は6ページ目へ継続)**: 小石川淑徳
+ * 学園・工学院大学附属・麹町学園女子・佼成学園女子・國學院大學久我山・国士舘の6校は総定員完全一致
+ * (小石川淑徳学園・國學院大學久我山は本文既存コメントとの整合も確認)。啓明学園は50→90(+40、
+ * 全区分共有の単一枠から推薦40+一般50の2ブロック制へ再編)を検出。佼成学園は2024年度版の推薦(全
+ * コース計30)と一般(全コース計90)が異なる数値で現行の「全コース計50(推薦一般共通)」という単一枠
+ * 解釈と整合しないため、國學院(=國學院高等学校、本文既存コメントの表記と同一校)は2024年度版の
+ * 推薦150・一般①250・一般②150・一般③50という4つの異なる数値が本文既存の「推薦130+一般250=380」
+ * という確立済み読みと整合せず追加検証が必要なため、いずれも見送り。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -2787,6 +2795,91 @@ export const PRIVATE_SCHOOL_DETAIL_TOKYO: PrivateSchoolDetailFile = {
         { courseName: '商業(一般①・②共通枠)', capacity: 80 },
       ],
       totalCapacity: 150,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113320700010',
+      schoolName: '啓明学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        {
+          courseName: '普通(推薦・併優①②・一般①②の全区分共通の単一枠、2026年度版で推薦40+一般50の2ブロックへ再編)',
+          capacity: 50,
+        },
+      ],
+      totalCapacity: 50,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310500120',
+      schoolName: '小石川淑徳学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特別選抜コース(女、A・B推薦・一般①②共通枠)', capacity: 40 },
+        { courseName: '選抜コース(女、A・B推薦・一般①②共通枠)', capacity: 40 },
+      ],
+      totalCapacity: 80,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113320100043',
+      schoolName: '工学院大学附属高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '先進文理コース(推薦)', capacity: 30 },
+        { courseName: '先進文理コース(併優・一般①②共通枠)', capacity: 40 },
+        { courseName: '文理コース(推薦)', capacity: 40 },
+        { courseName: '文理コース(併優・一般①②共通枠)', capacity: 30 },
+        { courseName: 'インターナショナルコース(推薦)', capacity: 10 },
+        { courseName: 'インターナショナルコース(併優・一般①②共通枠)', capacity: 10 },
+      ],
+      totalCapacity: 160,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113310100062',
+      schoolName: '麹町学園女子高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '東洋大学グローバルコース(女、推薦A・B共通枠)', capacity: 40 },
+        { courseName: '東洋大学グローバルコース(女、一般①・②共通枠)', capacity: 30 },
+      ],
+      totalCapacity: 70,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311200069',
+      schoolName: '佼成学園女子高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '国際コース(女、推薦・一般①②共通枠、留学10+スーパーグローバル5)', capacity: 15 },
+        { courseName: '特進コース(女、推薦・一般①②共通枠)', capacity: 35 },
+        { courseName: '進学コース(女、推薦・一般①②共通枠)', capacity: 30 },
+      ],
+      totalCapacity: 80,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311500048',
+      schoolName: '國學院大學久我山高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通(推薦、男女共通枠)', capacity: 50 },
+        { courseName: '普通(一般、男、約)', capacity: 60 },
+        { courseName: '普通(一般、女、約、帰国は若干のため未算入)', capacity: 35 },
+      ],
+      totalCapacity: 145,
+      source: KAKE2_2024_TOKYO_SOURCE,
+    },
+    {
+      schoolCode: 'D113311200078',
+      schoolName: '国士舘高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '選抜クラス(推薦・一般①②共通枠)', capacity: 30 },
+        { courseName: '進学クラス(推薦・一般①②共通枠)', capacity: 100 },
+      ],
+      totalCapacity: 130,
       source: KAKE2_2024_TOKYO_SOURCE,
     },
   ],
