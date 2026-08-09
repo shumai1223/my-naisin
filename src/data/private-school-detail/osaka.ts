@@ -27,6 +27,11 @@
  * コミュニケーションコースが新設)、大阪国際は305→295(-10、Ⅱ類総合探究/幼児保育進学コースが
  * 未来探究/幼児保育進学コースへ再編)を検出。大阪女学院(概数のみでスキップ中)は2024年度版でも
  * 同じ約115名という概数のみで、既存のスキップ判断が引き続き妥当と確認。
+ * **2026-08-10further(3ページ目8校)**: 大阪成蹊女子・大谷・開明・大阪体育大学浪商(本校分)・
+ * 大阪電気通信大学の6校は総定員完全一致(大阪青凌も280=280で一致・現行レコードの「年度別裏付け未確認」
+ * 注記を裏付ける傍証となった)。大阪桐蔭は2024年度版(外部募集Ⅱ類80名を含む合計450)と2026年度版
+ * (内部進学生を除く公式サイト値・Ⅱ類無しの合計400)で前提が異なり単純比較不可のため要注記付きで収録。
+ * 大阪夕陽丘学園は360→380(+20)でコース再編(英語国際→PBLへ改称等)を検出。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -1705,6 +1710,108 @@ export const PRIVATE_SCHOOL_DETAIL_OSAKA: PrivateSchoolDetailFile = {
         { courseName: '普通科特技コース(専願のみ)', capacity: 60 },
       ],
       totalCapacity: 600,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000165',
+      schoolName: '大阪成蹊女子高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通科特進コース', capacity: 30 },
+        { courseName: '普通科看護医療進学コース', capacity: 30 },
+        { courseName: '普通科英語コース(2024年新設)', capacity: 30 },
+        { courseName: '普通科総合キャリアコース', capacity: 130 },
+        { courseName: '普通科幼児教育コース', capacity: 60 },
+        { courseName: '普通科スポーツコース', capacity: 30 },
+        { courseName: '普通科音楽コース', capacity: 30 },
+        { courseName: '美術科(アート・イラスト・アニメーションコース)', capacity: 60 },
+      ],
+      totalCapacity: 400,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000192',
+      schoolName: '大谷高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'プレミアム文理コース(女子)', capacity: 40 },
+        { courseName: 'アドバンス文理コース(女子)', capacity: 40 },
+      ],
+      totalCapacity: 80,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000673',
+      schoolName: '大阪桐蔭高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'Ⅰ類(エクシード30名を含む)', capacity: 190 },
+        { courseName: 'Ⅱ類(2026年度公式サイト値には対応コースなし・要注記)', capacity: 80 },
+        { courseName: 'Ⅲ類(体育・芸術コース)', capacity: 180 },
+      ],
+      totalCapacity: 450,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000655',
+      schoolName: '大阪青凌高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '普通科特進Sコース(含内部)', capacity: 40 },
+        { courseName: '普通科特進コース(含内部)', capacity: 80 },
+        { courseName: '普通科進学コース(含内部)', capacity: 160 },
+      ],
+      totalCapacity: 280,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000824',
+      schoolName: '開明高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '6年文理編入コース(外部募集)', capacity: 80 }],
+      totalCapacity: 80,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000897',
+      schoolName: '大阪体育大学浪商高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '進学アドバンスコース(含内部・本校分のみ)', capacity: 25 },
+        { courseName: '進学グローバルコース(含内部)', capacity: 30 },
+        { courseName: '探究キャリアコース(含内部)', capacity: 70 },
+        { courseName: '進学スポーツコース(含内部)', capacity: 70 },
+        { courseName: '探究スポーツコース(スポーツ推薦・専願のみ)', capacity: 70 },
+      ],
+      totalCapacity: 265,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000931',
+      schoolName: '大阪電気通信大学高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '工学(工学理数コース)', capacity: 40 },
+        { courseName: '工学(工学連携コース)', capacity: 120 },
+        { courseName: '普通(進学総合コース)', capacity: 120 },
+        { courseName: '普通(健康スポーツコース)', capacity: 40 },
+      ],
+      totalCapacity: 320,
+      source: KAKE2_2024_OSAKA_SOURCE,
+    },
+    {
+      schoolCode: 'D127310000129',
+      schoolName: '大阪夕陽丘学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特進Ⅰ類コース(2026年度版はコース再編後で単純な1:1対応ではない可能性)', capacity: 36 },
+        { courseName: '特進Ⅱ類コース', capacity: 72 },
+        { courseName: '文理進学コース', capacity: 108 },
+        { courseName: '英語国際コース(2026年度版でPBLコースへ改称)', capacity: 72 },
+        { courseName: '音楽コース', capacity: 36 },
+        { courseName: '美術コース', capacity: 36 },
+      ],
+      totalCapacity: 360,
       source: KAKE2_2024_OSAKA_SOURCE,
     },
   ],
