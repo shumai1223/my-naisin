@@ -246,6 +246,18 @@ export const PAST_SYSTEM_CHANGES: PastSystemChange[] = [
     confirmedDate: '2026-08-10',
   },
   {
+    prefCode: 'nagano',
+    prefName: '長野県',
+    effectiveYear: '令和7年度（2025年度）入試',
+    category: 'selection-structure',
+    headline: '前期選抜に学力検査(5教科200点満点)を新設、後期選抜に「紙上面接」を導入',
+    detail:
+      '長野県教育委員会は令和7(2025)年度入試から、それまで調査書・面接(一部校は作文)のみで合否判定していた前期選抜に、5教科の学力検査(検査Ⅰ=国語・社会・英語、検査Ⅱ=数学・理科、いずれも中学3年生12月までの範囲・選択式/短答式中心の基礎問題)を新設し、全受験生が学力検査を受ける方式に切り替えた。同時に後期選抜では、対面面接に加え、事前公表される県共通の面接シートを用いた「紙上面接」の選択肢が新設された。後期選抜の調査書点(内申点)は「現行同様学力検査点との相関図を作成して判断材料とする」と明記されており、内申点の計算方式自体(中学3年生のみ・9教科5段階=45点満点)には変更がなく、前期選抜への学力検査導入という選抜の骨組みが変わった点が本変更の核心。',
+    sourceUrl: 'https://www.pref.nagano.lg.jp/kyoiku/koko/gakko/saihen/joho/senbatsuseido.html',
+    sourceTitle: '長野県教育委員会「長野県公立高等学校新たな入学者選抜制度に関する情報」',
+    confirmedDate: '2026-08-10',
+  },
+  {
     prefCode: 'hokkaido',
     prefName: '北海道',
     effectiveYear: '令和4年度（2022年度）入試',

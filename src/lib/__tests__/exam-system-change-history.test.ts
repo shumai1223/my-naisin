@@ -186,6 +186,19 @@ describe('PAST_SYSTEM_CHANGES（Λ+5・過去の制度変更履歴DB）', () => 
     expect(yamanashiPref?.practicalMultiplier).toBe(3);
   });
 
+  test('長野県の前期選抜学力検査新設エントリはprefectures.tsの現行maxScore(45点満点)と矛盾しない(前期選抜の構成変更であり内申点計算式は不変)', () => {
+    const nagano = PAST_SYSTEM_CHANGES.find((c) => c.prefCode === 'nagano');
+    expect(nagano).toBeDefined();
+    expect(nagano?.effectiveYear).toBe('令和7年度（2025年度）入試');
+    expect(nagano?.category).toBe('selection-structure');
+    expect(nagano?.detail).toContain('前期選抜');
+    expect(nagano?.detail).toContain('紙上面接');
+
+    const naganoPref = PREFECTURES.find((p) => p.code === 'nagano');
+    expect(naganoPref?.maxScore).toBe(45);
+    expect(naganoPref?.targetGrades).toEqual([3]);
+  });
+
   test('categoryは定義済みの4種類のいずれかのみ(型崩れ防止)', () => {
     const validCategories = new Set(['scoring-input', 'selection-structure', 'weighting-formula', 'other']);
     for (const c of PAST_SYSTEM_CHANGES) {
