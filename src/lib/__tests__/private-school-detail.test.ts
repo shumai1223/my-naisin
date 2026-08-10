@@ -1118,10 +1118,22 @@ describe('PRIVATE_SCHOOL_DETAIL_FUKUOKA(私学協会志願者数調で62校中57
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_FUKUOKA, allCodes);
     expect(result.duplicates).toEqual([]);
     expect(result.missing).toHaveLength(0);
-    expect(PRIVATE_SCHOOL_DETAIL_FUKUOKA.schools.length).toBe(57);
     expect(PRIVATE_SCHOOL_DETAIL_FUKUOKA.skipped.length).toBe(5);
-    const grandTotal = PRIVATE_SCHOOL_DETAIL_FUKUOKA.schools.reduce((acc, s) => acc + s.totalCapacity, 0);
+    const grandTotal = PRIVATE_SCHOOL_DETAIL_FUKUOKA.schools
+      .filter((s) => s.fiscalYearLabel === '令和8年度')
+      .reduce((acc, s) => acc + s.totalCapacity, 0);
     expect(grandTotal).toBe(17340);
+  });
+
+  it('掛-2(私立×多年度): 令和7年度データ56校分(明治学園は令和7年度に実施なしのため対象外)を追加しschools.lengthは113', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_FUKUOKA.schools.length).toBe(113);
+    const r7Count = PRIVATE_SCHOOL_DETAIL_FUKUOKA.schools.filter((s) => s.fiscalYearLabel === '令和7年度').length;
+    expect(r7Count).toBe(56);
+    const r7Total = PRIVATE_SCHOOL_DETAIL_FUKUOKA.schools
+      .filter((s) => s.fiscalYearLabel === '令和7年度')
+      .reduce((acc, s) => acc + s.totalCapacity, 0);
+    // 令和7年度県合計17,425から、schoolsに含まれない中村学園三陽(150・令和8年度は募集停止でスキップ済み)を除いた額
+    expect(r7Total).toBe(17425 - 150);
   });
 });
 
