@@ -331,6 +331,17 @@ describe('CONFIRMED_NO_CHANGE_CHECKS（掛-4・空振りの調査記録）', () 
     expect(getPastSystemChangesByPrefecture('toyama')).toEqual([]);
   });
 
+  test('石川県は対象期間内の制度変更なしと確認済み(2026-08-05の135点均等→180点満点訂正は自己データ誤りの訂正であり実際の制度変更ではない)', () => {
+    const ishikawa = CONFIRMED_NO_CHANGE_CHECKS.find((c) => c.prefCode === 'ishikawa');
+    expect(ishikawa).toBeDefined();
+    expect(ishikawa?.note).toContain('自己データ誤り');
+
+    const ishikawaPref = PREFECTURES.find((p) => p.code === 'ishikawa');
+    expect(ishikawaPref?.maxScore).toBe(180);
+    expect(ishikawaPref?.gradeMultipliers).toEqual({ 1: 1, 2: 1, 3: 2 });
+    expect(getPastSystemChangesByPrefecture('ishikawa')).toEqual([]);
+  });
+
   test('同一県がPAST_SYSTEM_CHANGESとCONFIRMED_NO_CHANGE_CHECKSの両方に重複登録されていない', () => {
     const changedPrefs = new Set(PAST_SYSTEM_CHANGES.map((c) => c.prefCode));
     for (const c of CONFIRMED_NO_CHANGE_CHECKS) {
