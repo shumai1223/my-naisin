@@ -946,6 +946,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+    },
+    {
+      "id": "gakusan-sanseido-books",
+      "org": "三省堂書店(三省堂グループ)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.books-sanseido.co.jp/contact/gaisho/",
+      "contactClass": "b2b",
+      "evidence": "「学校・官公庁の方へ」専用ページ(/business/)から「営業推進部 外商推進担当お問合せ」フォームへのリンクを直接WebFetchで確認。公費購入・テキスト販売等の法人向けサービスを案内",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
     }
   ]
 }
