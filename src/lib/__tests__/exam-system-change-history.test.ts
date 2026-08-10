@@ -265,6 +265,17 @@ describe('CONFIRMED_NO_CHANGE_CHECKS（掛-4・空振りの調査記録）', () 
     expect(getPastSystemChangesByPrefecture('kyoto')).toEqual([]);
   });
 
+  test('新潟県は対象期間内の制度変更なしと確認済み(令和8年度の調査書様式変更は算出方法に影響しないため収録基準外)', () => {
+    const niigata = CONFIRMED_NO_CHANGE_CHECKS.find((c) => c.prefCode === 'niigata');
+    expect(niigata).toBeDefined();
+    expect(niigata?.note).toContain('令和9年度');
+
+    const niigataPref = PREFECTURES.find((p) => p.code === 'niigata');
+    expect(niigataPref?.maxScore).toBe(135);
+    expect(niigataPref?.gradeMultipliers).toEqual({ 1: 1, 2: 1, 3: 1 });
+    expect(getPastSystemChangesByPrefecture('niigata')).toEqual([]);
+  });
+
   test('同一県がPAST_SYSTEM_CHANGESとCONFIRMED_NO_CHANGE_CHECKSの両方に重複登録されていない', () => {
     const changedPrefs = new Set(PAST_SYSTEM_CHANGES.map((c) => c.prefCode));
     for (const c of CONFIRMED_NO_CHANGE_CHECKS) {
