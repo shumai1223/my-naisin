@@ -224,6 +224,18 @@ describe('PAST_SYSTEM_CHANGES（Λ+5・過去の制度変更履歴DB）', () => 
     expect(sagaPref?.gradeMultipliers).toEqual({ 1: 1, 2: 1, 3: 1 });
   });
 
+  test('鹿児島県の推薦選抜自己推薦方式追加エントリはprefectures.tsの現行maxScore(450点満点)と矛盾しない(選抜方式の選択肢拡充であり内申点計算式は不変)', () => {
+    const kagoshima = PAST_SYSTEM_CHANGES.find((c) => c.prefCode === 'kagoshima');
+    expect(kagoshima).toBeDefined();
+    expect(kagoshima?.effectiveYear).toBe('令和7年度（2025年度）入試');
+    expect(kagoshima?.category).toBe('selection-structure');
+    expect(kagoshima?.detail).toContain('自己推薦方式');
+
+    const kagoshimaPref = PREFECTURES.find((p) => p.code === 'kagoshima');
+    expect(kagoshimaPref?.maxScore).toBe(450);
+    expect(kagoshimaPref?.practicalMultiplier).toBe(20);
+  });
+
   test('categoryは定義済みの4種類のいずれかのみ(型崩れ防止)', () => {
     const validCategories = new Set(['scoring-input', 'selection-structure', 'weighting-formula', 'other']);
     for (const c of PAST_SYSTEM_CHANGES) {

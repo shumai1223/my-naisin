@@ -282,6 +282,18 @@ export const PAST_SYSTEM_CHANGES: PastSystemChange[] = [
     confirmedDate: '2026-08-10',
   },
   {
+    prefCode: 'kagoshima',
+    prefName: '鹿児島県',
+    effectiveYear: '令和7年度（2025年度）入試',
+    category: 'selection-structure',
+    headline: '推薦入学者選抜に自己推薦方式を追加、推薦選抜と第二次選抜の学科併願・一般選抜の追加選抜を可能に',
+    detail:
+      '鹿児島県教育委員会は令和7(2025)年度入試から、各公立高校の判断で①推薦入学者選抜において従来の学校推薦方式に加え自己推薦方式も実施できるようにし、②推薦入学者選抜と第二次入学者選抜の間で学科併願(推薦選抜が不合格の場合に別学科の第二次選抜へ出願)を可能とし、③一般入学者選抜において追加の選抜を実施できるようにする、という3点の制度変更を行った(いずれも各校が実施の可否を選択できる仕組み)。前年度の令和6年度には追選抜・追加選抜を実施しない代わりに、新型コロナウイルス感染症等により第二次入学者選抜を受検できなかった者を書類のみで選考する対応も導入されていた。調査書(内申点)の計算方式自体(学力検査5教科は2倍・実技4教科は20倍換算=450点満点、実技換算点が全体の約9割を占める特異な配点)には変更がなく、選抜方式の選択肢が拡充された点が本変更の核心。',
+    sourceUrl: 'https://www.pref.kagoshima.jp/ba05/kyoiku-bunka/school/koukou/nyushi/r6/r7jissiyoukou.html',
+    sourceTitle: '鹿児島県教育委員会「令和7年度鹿児島県公立高等学校入学者選抜実施要綱」',
+    confirmedDate: '2026-08-10',
+  },
+  {
     prefCode: 'hokkaido',
     prefName: '北海道',
     effectiveYear: '令和4年度（2022年度）入試',
