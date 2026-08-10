@@ -959,6 +959,32 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
+    },
+    {
+      "id": "edtech-chieru",
+      "org": "チエル株式会社",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.chieru.co.jp/mailform/partner/",
+      "contactClass": "b2b",
+      "evidence": "「パートナープログラム入会申し込みフォーム」という専用ページ(直接WebFetchで確認)。一般の資料請求・お問い合わせ・お客様サポートとは別に企業間パートナー提携専用の窓口を持つ。教育委員会960以上・高校大学2,100校以上の導入実績を持つ教育ICT専業メーカー",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "edtech-educom",
+      "org": "株式会社EDUCOM",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.educom.co.jp/contact",
+      "contactClass": "b2b",
+      "evidence": "統合型校務支援システム「C4th」が全国約600自治体・11,000校以上で採用されている学校向けB2Bベンダー。お問い合わせフォームURLの実在をcurlで確認済み(HTTP 200)",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     }
   ]
 }
