@@ -159,6 +159,19 @@ describe('PAST_SYSTEM_CHANGES（Λ+5・過去の制度変更履歴DB）', () => 
     expect(kanagawaPref?.gradeMultipliers).toEqual({ 1: 0, 2: 1, 3: 2 });
   });
 
+  test('北海道の学校裁量問題廃止エントリはprefectures.tsの現行maxScore(315点満点)と矛盾しない(学力検査の配点変更であり調査書計算式は不変)', () => {
+    const hokkaido = PAST_SYSTEM_CHANGES.find((c) => c.prefCode === 'hokkaido');
+    expect(hokkaido).toBeDefined();
+    expect(hokkaido?.effectiveYear).toBe('令和4年度（2022年度）入試');
+    expect(hokkaido?.category).toBe('weighting-formula');
+    expect(hokkaido?.detail).toContain('学校裁量問題');
+    expect(hokkaido?.detail).toContain('100点満点');
+
+    const hokkaidoPref = PREFECTURES.find((p) => p.code === 'hokkaido');
+    expect(hokkaidoPref?.maxScore).toBe(315);
+    expect(hokkaidoPref?.gradeMultipliers).toEqual({ 1: 2, 2: 2, 3: 3 });
+  });
+
   test('categoryは定義済みの4種類のいずれかのみ(型崩れ防止)', () => {
     const validCategories = new Set(['scoring-input', 'selection-structure', 'weighting-formula', 'other']);
     for (const c of PAST_SYSTEM_CHANGES) {
