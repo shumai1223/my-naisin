@@ -1128,6 +1128,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
+    },
+    {
+      "id": "moshi-chuoh-kyouiku",
+      "org": "中央教育研究所株式会社",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.chuoh-kyouiku.co.jp/contact/index.php",
+      "contactClass": "b2b",
+      "evidence": "お問い合わせフォームの必須項目に『貴塾名・貴社名』欄があり、サイトのキャッチフレーズが『塾専用教材はおまかせください』と明記。教育業界向けプラットフォームを標榜する法人専業企業",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
     }
   ]
 }
