@@ -212,6 +212,18 @@ describe('PAST_SYSTEM_CHANGES（Λ+5・過去の制度変更履歴DB）', () => 
     expect(iwatePref?.actualMaxScore).toBe(500);
   });
 
+  test('佐賀県の学区制廃止エントリはprefectures.tsの現行maxScore(135点満点)と矛盾しない(通学区域の変更であり内申点計算式は不変)', () => {
+    const saga = PAST_SYSTEM_CHANGES.find((c) => c.prefCode === 'saga');
+    expect(saga).toBeDefined();
+    expect(saga?.effectiveYear).toBe('令和5年度（2023年度）入試');
+    expect(saga?.category).toBe('selection-structure');
+    expect(saga?.detail).toContain('全県1区');
+
+    const sagaPref = PREFECTURES.find((p) => p.code === 'saga');
+    expect(sagaPref?.maxScore).toBe(135);
+    expect(sagaPref?.gradeMultipliers).toEqual({ 1: 1, 2: 1, 3: 1 });
+  });
+
   test('categoryは定義済みの4種類のいずれかのみ(型崩れ防止)', () => {
     const validCategories = new Set(['scoring-input', 'selection-structure', 'weighting-formula', 'other']);
     for (const c of PAST_SYSTEM_CHANGES) {
