@@ -1024,6 +1024,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+    },
+    {
+      "id": "gakusan-shoryudo",
+      "org": "昇龍堂出版株式会社",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://shoryudo.co.jp/teacher/",
+      "contactClass": "b2b",
+      "evidence": "『学校の先生方へ』専用ページに問い合わせフォームが直接埋め込まれている(氏名/フリガナ/区分等の入力欄を直接WebFetchで確認)。書籍見本の送付先も学校・塾限定と案内されている",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
     }
   ]
 }
