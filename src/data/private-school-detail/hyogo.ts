@@ -42,6 +42,18 @@
  * 入れ替わっている(四條畷学園と同型のコース間再配分)。彩星工科のみ実質変化を検出: ものづくり系
  * (旧機械科)180→210(+30、2026年度からの男子→共学化に伴う増員)、電気・情報系(旧電気・情報技術科・
  * 機械電子科)270→205(-65)、普通135=135(不変)で総定員585→550(-35)。
+ * **2026-08-10further(3ページ目14校中13校を収録・見送りなし・1校[白陵]は既存スキップと整合)**:
+ * 神港学園310・須磨学園280・蒼開100・東洋大学附属姫路310・灘40・仁川学院280・日ノ本学園200・
+ * 姫路女学院270の8校はコース名・数まで完全一致。親和女子(80)・滝川第二(165)はコース名が改称された
+ * が総定員は完全一致(親和女子は特進A/B/国際→アドバンスト/スポーツカルチャー/グローバルという改称が
+ * 既に2024年度版で反映済み)。園田学園(270)は特別進学60=アドバンス60で一致するが進学140→キャリア
+ * デザイン105・総合70→フロンティア105の間で定員が再配分(合計は不変)。滝川(170)はScience Global
+ * コース40→80・ミライ探究コース130→90で再配分(合計は不変)、かつ2024年度版時点でScience Globalのみ
+ * 共学・ミライ探究はまだ男子のみという段階的共学化の過程を捕捉(2026年度に全面共学化予定)。雲雀丘
+ * 学園はB日程(専願Ⅲ・併願)を別枠として除外する既存の測定基盤が2024年度版でも同一のため単純比較可能
+ * (100=100)。白陵は現行スキップ理由(募集人員が若干のみ)が2024年度版でも同一のため対象外(既存の
+ * スキップ判断の妥当性を裏付け)。この頁は総じてhyogoの「コース名が改称・再編されても総定員は極めて
+ * 安定」という傾向をさらに補強する結果となった。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -865,6 +877,155 @@ export const PRIVATE_SCHOOL_DETAIL_HYOGO: PrivateSchoolDetailFile = {
       fiscalYearLabel: '2024年度',
       courses: [{ courseName: '普通(女、専願・推薦)', capacity: 50 }],
       totalCapacity: 50,
+      source: KAKE2_2024_HYOGO_SOURCE,
+    },
+    {
+      schoolCode: 'D128310000084',
+      schoolName: '神港学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特進コース', capacity: 30 },
+        { courseName: '進学コース', capacity: 120 },
+        { courseName: '総合進学コース', capacity: 120 },
+        { courseName: 'トップアスリートコース', capacity: 40 },
+      ],
+      totalCapacity: 310,
+      source: KAKE2_2024_HYOGO_SOURCE,
+    },
+    {
+      schoolCode: 'D128310000119',
+      schoolName: '親和女子高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'アドバンストコース(女、※特進Aコースから改称)', capacity: 30 },
+        { courseName: 'スポーツ・カルチャーコース(女、※特進Bコースから改称)', capacity: 30 },
+        { courseName: 'グローバルコース(女、※国際コースから改称)', capacity: 20 },
+      ],
+      totalCapacity: 80,
+      source: KAKE2_2024_HYOGO_SOURCE,
+    },
+    {
+      schoolCode: 'D128310000182',
+      schoolName: '須磨学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'I類', capacity: 40 },
+        { courseName: 'II類', capacity: 160 },
+        { courseName: 'III類英数', capacity: 40 },
+        { courseName: 'III類理数', capacity: 40 },
+      ],
+      totalCapacity: 280,
+      source: KAKE2_2024_HYOGO_SOURCE,
+    },
+    {
+      schoolCode: 'D128310000529',
+      schoolName: '蒼開高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'I類(アスリート進学コース)', capacity: 40 },
+        { courseName: 'II類(グローバル進学コース)', capacity: 30 },
+        { courseName: 'III類(スーパー特進コース)', capacity: 30 },
+      ],
+      totalCapacity: 100,
+      source: KAKE2_2024_HYOGO_SOURCE,
+    },
+    {
+      schoolCode: 'D128310000280',
+      schoolName: '園田学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特別進学コース(女、※アドバンスコードへ改称・2026年度~女子→共学)', capacity: 60 },
+        { courseName: '進学コース(女)', capacity: 140 },
+        { courseName: '総合コース(女)', capacity: 70 },
+      ],
+      totalCapacity: 270,
+      source: KAKE2_2024_HYOGO_SOURCE,
+    },
+    {
+      schoolCode: 'D128310000191',
+      schoolName: '滝川高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'Science Globalコース(共)', capacity: 40 },
+        { courseName: 'ミライ探究コース(男、2026年度までに全面共学化予定)', capacity: 130 },
+      ],
+      totalCapacity: 170,
+      source: KAKE2_2024_HYOGO_SOURCE,
+    },
+    {
+      schoolCode: 'D128310000495',
+      schoolName: '滝川第二高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'スーパーフロンティアコース(※イノベイティブフロンティアコースへ改称)', capacity: 30 },
+        { courseName: 'クリエイティブフロンティアコース', capacity: 35 },
+        { courseName: 'Cコース', capacity: 100 },
+      ],
+      totalCapacity: 165,
+      source: KAKE2_2024_HYOGO_SOURCE,
+    },
+    {
+      schoolCode: 'D128310000271',
+      schoolName: '東洋大学附属姫路高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'Sコース', capacity: 70 },
+        { courseName: 'Tコース', capacity: 240 },
+      ],
+      totalCapacity: 310,
+      source: KAKE2_2024_HYOGO_SOURCE,
+    },
+    {
+      schoolCode: 'D128310000020',
+      schoolName: '灘高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [],
+      totalCapacity: 40,
+      source: KAKE2_2024_HYOGO_SOURCE,
+    },
+    {
+      schoolCode: 'D128310000379',
+      schoolName: '仁川学院高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'カルティベーションコース(含内部)', capacity: 160 },
+        { courseName: 'カルティベーションSコース(含内部)', capacity: 80 },
+        { courseName: 'アカデミアコース(含内部)', capacity: 40 },
+      ],
+      totalCapacity: 280,
+      source: KAKE2_2024_HYOGO_SOURCE,
+    },
+    {
+      schoolCode: 'D128310000244',
+      schoolName: '日ノ本学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        {
+          courseName: '未来探究コース・幼児教育音楽コース・スーパーアスリートコース・学際科学・ステップコース・フリーアカデミーコース(全コース計)',
+          capacity: 200,
+        },
+      ],
+      totalCapacity: 200,
+      source: KAKE2_2024_HYOGO_SOURCE,
+    },
+    {
+      schoolCode: 'D128310000422',
+      schoolName: '雲雀丘学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [{ courseName: '文理探究コース(A日程専願Ⅰ・Ⅱ・Ⅲ・併願共通枠。B日程専願Ⅲ・併願は別枠のため未算入)', capacity: 100 }],
+      totalCapacity: 100,
+      source: KAKE2_2024_HYOGO_SOURCE,
+    },
+    {
+      schoolCode: 'D128310000235',
+      schoolName: '姫路女学院高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特別進学国際教養コース(女)', capacity: 30 },
+        { courseName: '教養コース(女)', capacity: 180 },
+        { courseName: 'アスリートコース(女)', capacity: 60 },
+      ],
+      totalCapacity: 270,
       source: KAKE2_2024_HYOGO_SOURCE,
     },
   ],

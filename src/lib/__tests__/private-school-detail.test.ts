@@ -1094,12 +1094,12 @@ describe('PRIVATE_SCHOOL_DETAIL_HYOGO(55校中43校を収録・残り12校は完
     }
   });
 
-  it('収録68レコード(43校+掛-2多年度25レコード)・スキップ12件で参照台帳の55校と完全一致(重複・欠落なし)', () => {
+  it('収録81レコード(43校+掛-2多年度38レコード)・スキップ12件で参照台帳の55校と完全一致(重複・欠落なし)', () => {
     const allCodes = SCHOOLS_PRIVATE_HYOGO.schools.map((s) => s.code);
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_HYOGO, allCodes);
     expect(result.duplicates).toEqual([]);
     expect(result.missing).toHaveLength(0);
-    expect(PRIVATE_SCHOOL_DETAIL_HYOGO.schools.length).toBe(68);
+    expect(PRIVATE_SCHOOL_DETAIL_HYOGO.schools.length).toBe(81);
     expect(PRIVATE_SCHOOL_DETAIL_HYOGO.skipped.length).toBe(12);
   });
 
@@ -1197,6 +1197,49 @@ describe('PRIVATE_SCHOOL_DETAIL_HYOGO(55校中43校を収録・残り12校は完
     );
     expect(y2024?.totalCapacity).toBe(585);
     expect(yLatest?.totalCapacity).toBe(550);
+  });
+
+  it('掛-2(私立×多年度・3ページ目): 神港学園・親和女子・須磨学園・蒼開・滝川第二・東洋大学附属姫路・灘・仁川学院・日ノ本学園・雲雀丘学園・姫路女学院の11校は2024年度と2026年度で総定員が完全一致(親和女子・滝川第二はコース改称を伴う)', () => {
+    const pairs: Array<[string, number]> = [
+      ['D128310000084', 310],
+      ['D128310000119', 80],
+      ['D128310000182', 280],
+      ['D128310000529', 100],
+      ['D128310000495', 165],
+      ['D128310000271', 310],
+      ['D128310000020', 40],
+      ['D128310000379', 280],
+      ['D128310000244', 200],
+      ['D128310000422', 100],
+      ['D128310000235', 270],
+    ];
+    for (const [code, total] of pairs) {
+      const y2024 = PRIVATE_SCHOOL_DETAIL_HYOGO.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '2024年度'
+      );
+      const yLatest = PRIVATE_SCHOOL_DETAIL_HYOGO.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel !== '2024年度'
+      );
+      expect(y2024?.totalCapacity).toBe(total);
+      expect(yLatest?.totalCapacity).toBe(total);
+    }
+  });
+
+  it('掛-2(私立×多年度・3ページ目): 園田学園・滝川の2校は総定員は一致するがコース間で再配分', () => {
+    const pairs: Array<[string, number]> = [
+      ['D128310000280', 270],
+      ['D128310000191', 170],
+    ];
+    for (const [code, total] of pairs) {
+      const y2024 = PRIVATE_SCHOOL_DETAIL_HYOGO.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '2024年度'
+      );
+      const yLatest = PRIVATE_SCHOOL_DETAIL_HYOGO.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel !== '2024年度'
+      );
+      expect(y2024?.totalCapacity).toBe(total);
+      expect(yLatest?.totalCapacity).toBe(total);
+    }
   });
 });
 
