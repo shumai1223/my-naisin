@@ -1011,6 +1011,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
+    },
+    {
+      "id": "moshi-hokkoku-ishikawa",
+      "org": "一般財団法人北國新聞文化センター",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.ishikawa-moshi.com/contact",
+      "contactClass": "b2b",
+      "evidence": "お問い合わせフォームの区分選択肢に『個人』『塾・団体』の2種があり、『塾・団体』選択時は『学習塾名』入力欄が表示される仕様を直接WebFetchで確認",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
     }
   ]
 }
