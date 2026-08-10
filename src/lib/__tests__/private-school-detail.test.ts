@@ -1067,10 +1067,17 @@ describe('PRIVATE_SCHOOL_DETAIL_SHIZUOKA(私学協会一括PDFで48校中40校�
   });
 
   it('収録40校+スキップ8校(全日制一覧に掲載の無い学校)で参照台帳の48校と一致し、40校のcourses合計を積み上げた総計が原資料の全体合計11,485と完全一致する', () => {
-    expect(PRIVATE_SCHOOL_DETAIL_SHIZUOKA.schools.length).toBe(40);
     expect(PRIVATE_SCHOOL_DETAIL_SHIZUOKA.skipped.length).toBe(8);
-    const grandTotal = PRIVATE_SCHOOL_DETAIL_SHIZUOKA.schools.reduce((acc, s) => acc + s.totalCapacity, 0);
+    const grandTotal = PRIVATE_SCHOOL_DETAIL_SHIZUOKA.schools
+      .filter((s) => s.fiscalYearLabel === '令和8年度')
+      .reduce((acc, s) => acc + s.totalCapacity, 0);
     expect(grandTotal).toBe(11485);
+  });
+
+  it('掛-2(私立×多年度): 令和7年度データ39校分(40校中静岡聖光学院は令和7年度PDFに掲載なしのため対象外)を追加しschools.lengthは79', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_SHIZUOKA.schools.length).toBe(79);
+    const r7Count = PRIVATE_SCHOOL_DETAIL_SHIZUOKA.schools.filter((s) => s.fiscalYearLabel === '令和7年度').length;
+    expect(r7Count).toBe(39);
   });
 });
 
