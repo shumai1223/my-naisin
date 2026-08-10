@@ -1206,6 +1206,32 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "gakusan-nichibun-g",
+      "org": "日本文教出版株式会社",
+      "lane": "b2b-saas",
+      "channel": "email",
+      "contact": "d-sapo@nichibun-g.co.jp",
+      "contactClass": "b2b",
+      "evidence": "デジタル教材お問い合わせページに直接WebFetchで実在確認したメールアドレス(3箇所に記載、▲でアドレス偽装)。『教育委員会様での一括申し込み』はメール相談と明記",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
+    },
+    {
+      "id": "gakusan-jikkyo-shuppan",
+      "org": "実教出版株式会社",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.jikkyo.co.jp/contact/",
+      "contactClass": "b2b",
+      "evidence": "『高校お問い合わせ』フォームの必須項目に『職業(教職員/生徒学生/その他)』『勤務先』欄があることを直接WebFetchで確認",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
     }
   ]
 }
