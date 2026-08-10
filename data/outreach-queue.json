@@ -1271,6 +1271,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "moshi-gsc-gunma",
+      "org": "株式会社GSC(群馬進学センター)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://shingaku.co.jp/form",
+      "contactClass": "b2b",
+      "evidence": "お申し込みフォームの必須項目に『貴塾コード』『貴塾名』『ご担当先生名』欄があり、『個人で受験を希望される方は資料請求より』『塾コードをお持ちでない塾様は資料請求よりお問い合わせください』と個人/塾向けの申込経路が明確に分離されていることを直接WebFetchで確認",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
     }
   ]
 }
