@@ -1167,6 +1167,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+    },
+    {
+      "id": "gakusan-kyoiku-shuppan",
+      "org": "教育出版株式会社",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.kyoiku-shuppan.co.jp/contact/contact.html",
+      "contactClass": "b2b",
+      "evidence": "直接WebFetchで『教師用指導書や高等学校の教授資料については、学校の先生以外への販売は行っておりません』という明記を確認。教員向け専門対応のある教科書出版社(大日本印刷グループ)",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
     }
   ]
 }
