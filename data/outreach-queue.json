@@ -1037,6 +1037,32 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
+    },
+    {
+      "id": "edtech-metamoji",
+      "org": "株式会社MetaMoJi",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://metamoji.com/jp/contact1/",
+      "contactClass": "b2b",
+      "evidence": "「ご購入／導入前のお問い合わせ」専用ページに「文教向け製品」セクションがあり『MetaMoJi ClassRoom/MetaMoJi Note学校版』への問い合わせリンクを直接確認。WebSearch要約が提示したメールアドレス(info_ep@metamoji.com)は一次ページに実在せず不採用(このセッション7件目のWebSearch作話検知)",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "edtech-sky",
+      "org": "Sky株式会社",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.skygroup.jp/inquiry/",
+      "contactClass": "b2b",
+      "evidence": "学校向けICTソフト「SKYMENU」シリーズ(コンピュータ教室運用・校務スマート化支援)の専業ベンダー。お問い合わせページの実在をcurlで確認(HTTP 200)",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     }
   ]
 }
