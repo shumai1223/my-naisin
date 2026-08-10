@@ -749,6 +749,33 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+    },
+    {
+      "id": "moshi-shizuoka-moshi",
+      "org": "静岡模試出版会",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://shizumoshi.com/contact/",
+      "contactClass": "b2b",
+      "evidence": "お問い合わせフォームの必須項目「お客様区分」に「一般」「教育機関」「その他」の選択肢があり、教育機関向け窓口として機能する",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+    },
+    {
+      "id": "moshi-shingakusha",
+      "org": "株式会社進学舎",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.shingakusha.co.jp/contact",
+      "contactClass": "unknown",
+      "evidence": "お問い合わせフォームは「資料請求」/「お問い合わせ」の用件選択のみで学校・塾と個人の区分が無い。塾関係者向けは別ページの書籍注文バナーのみで、問い合わせ窓口としての法人/個人分離は確認できず判定不能",
+      "verifiedAt": "2026-08-11",
+      "status": "excluded",
+      "excludeReason": "contactClass判定不能(B2B/consumer分離signalなし)のため送信対象外。C1原則により推測でb2bと判定しない",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
     }
   ]
 }
