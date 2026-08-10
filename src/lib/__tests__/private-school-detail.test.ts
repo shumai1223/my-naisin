@@ -537,9 +537,20 @@ describe('PRIVATE_SCHOOL_DETAIL_OKINAWA(12校中1校のみ全日制外部募集�
     expect(result.missing).toEqual([]);
   });
 
-  it('収録1校+スキップ11校で参照台帳の12校と一致する', () => {
-    expect(PRIVATE_SCHOOL_DETAIL_OKINAWA.schools.length).toBe(1);
+  it('収録2レコード(1校+掛-2多年度1レコード)+スキップ11校で参照台帳の12校と一致する', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_OKINAWA.schools.length).toBe(2);
     expect(PRIVATE_SCHOOL_DETAIL_OKINAWA.skipped.length).toBe(11);
+  });
+
+  it('掛-2(私立×多年度): 沖縄尚学は2025年度と2026年度で総定員が完全一致(内進生を含む定員355+45=400という測定基盤も同一)', () => {
+    const y2025 = PRIVATE_SCHOOL_DETAIL_OKINAWA.schools.find(
+      (s) => s.schoolCode === 'D147320100016' && s.fiscalYearLabel === '2025年度'
+    );
+    const yLatest = PRIVATE_SCHOOL_DETAIL_OKINAWA.schools.find(
+      (s) => s.schoolCode === 'D147320100016' && s.fiscalYearLabel !== '2025年度'
+    );
+    expect(y2025?.totalCapacity).toBe(400);
+    expect(yLatest?.totalCapacity).toBe(400);
   });
 });
 

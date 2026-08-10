@@ -6,6 +6,17 @@
  * 広域通信制(N高等学校・仙台育英学園ILC沖縄・瑞穂MSC・つくば開成国際・八洲学園大学
  * 国際・沖縄中央・ヒューマンキャンパス)またはスポーツ専門の通信制系(エナジック
  * スポーツ高等学院)であることをWebSearchで裏取りした。
+ *
+ * **2026-08-10(掛-2私立×多年度)**: 沖縄県のPDF公開形式は他県のikushin.co.jp集約PDFと異なり、
+ * okisho.ed.jp(沖縄県私立中学高等学校協会)上の学校別個別PDF(sr_01=沖縄尚学のように学校ごとに
+ * 連番)であると判明。Wayback CDX APIでokisho.ed.jpドメイン全体を検索したところsr_01_2025.pdf
+ * (2025年度版・2025-06-03キャプチャ)を発掘。**このPDFは日本語フォントがpdftoppm/pdftotext
+ * いずれでも文字化け(Adobe-Japan1文字コレクション未対応)して読めなかったが、PyMuPDF(fitz)の
+ * get_pixmap()で300dpiレンダリングしたところ完全に判読可能だった**(hyogo等で確立済みの
+ * pdftoppm失敗時のPyMuPDFフォールバックが本県でも有効)。沖縄尚学は2025年度版でも355+45=400と
+ * 総定員が完全一致(内進生を含む定員という測定基盤も両年度で同一)。興南・沖縄カトリック・昭和薬科
+ * 大学附属の他3伝統校は現行(2026年度)自体が募集要項アクセス不可等でスキップ済みのため掛-2の
+ * 対象外(比較対象となる現行データが無い)。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -25,6 +36,22 @@ export const PRIVATE_SCHOOL_DETAIL_OKINAWA: PrivateSchoolDetailFile = {
         url: 'https://www.okisho.ed.jp/_/f/2025/11/sr_01_2026_v2.pdf',
         docTitle: '2026年度 高等学校募集定員およびコース(沖縄尚学高等学校)',
         fetchedAt: '2026-07-30',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
+      schoolCode: 'D147320100016',
+      schoolName: '沖縄尚学高等学校',
+      fiscalYearLabel: '2025年度',
+      courses: [
+        { courseName: '普通科(難関大・国公立大医学科/尚学パイオニアα・チャレンジャー/国際文化科学コース)', capacity: 355 },
+        { courseName: '普通科(尚学パイオニアコースβ・旧体育コース)', capacity: 45 },
+      ],
+      totalCapacity: 400,
+      source: {
+        url: 'http://web.archive.org/web/20250603144345/https://www.okisho.ed.jp/_/f/2025/05/sr_01_2025.pdf',
+        docTitle: '2025年度 高等学校募集定員およびコース(沖縄尚学高等学校、Wayback Machine 2025-06-03キャプチャ)',
+        fetchedAt: '2026-08-10',
         sourceTier: 'primary' as const,
       },
     },
