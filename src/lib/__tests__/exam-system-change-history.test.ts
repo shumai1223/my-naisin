@@ -199,6 +199,19 @@ describe('PAST_SYSTEM_CHANGES（Λ+5・過去の制度変更履歴DB）', () => 
     expect(naganoPref?.targetGrades).toEqual([3]);
   });
 
+  test('岩手県の推薦入試廃止・内申点圧縮先変更エントリはprefectures.tsの現行値(660点満点・500点圧縮)と矛盾しない', () => {
+    const iwate = PAST_SYSTEM_CHANGES.find((c) => c.prefCode === 'iwate');
+    expect(iwate).toBeDefined();
+    expect(iwate?.effectiveYear).toBe('令和7年度（2025年度）入試');
+    expect(iwate?.category).toBe('selection-structure');
+    expect(iwate?.detail).toContain('推薦入試');
+    expect(iwate?.detail).toContain('500点満点');
+
+    const iwatePref = PREFECTURES.find((p) => p.code === 'iwate');
+    expect(iwatePref?.maxScore).toBe(660);
+    expect(iwatePref?.actualMaxScore).toBe(500);
+  });
+
   test('categoryは定義済みの4種類のいずれかのみ(型崩れ防止)', () => {
     const validCategories = new Set(['scoring-input', 'selection-structure', 'weighting-formula', 'other']);
     for (const c of PAST_SYSTEM_CHANGES) {

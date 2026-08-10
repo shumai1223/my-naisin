@@ -258,6 +258,18 @@ export const PAST_SYSTEM_CHANGES: PastSystemChange[] = [
     confirmedDate: '2026-08-10',
   },
   {
+    prefCode: 'iwate',
+    prefName: '岩手県',
+    effectiveYear: '令和7年度（2025年度）入試',
+    category: 'selection-structure',
+    headline: '推薦入試を廃止し特色入学者選抜・一般入学者選抜へ移行、内申点の圧縮先を440点満点から500点満点へ変更',
+    detail:
+      '岩手県教育委員会は令和7(2025)年度入試から、従来の中学校長推薦による「推薦入試」を廃止し、推薦不要の「特色入学者選抜」と「一般入学者選抜」を3月上旬の「一次募集」として同時実施する方式へ移行した。同時に、調査書点(内申点・9教科×5段階×3学年に学年比1:2:3と実技傾斜を適用した660点満点)を実際の選抜で用いる際の圧縮先が、令和6(2024)年度以前の440点満点から500点満点へ変更された。内申点の基礎計算式そのもの(660点満点方式)自体には変更がなく、圧縮後の点数と選抜区分の構成が変わった点が本変更の核心。',
+    sourceUrl: 'https://www.pref.iwate.jp/kyouikubunka/kyouiku/gakkou/senbatsu/1069793.html',
+    sourceTitle: '岩手県教育委員会「令和7年度以降の岩手県立高等学校入学者選抜」',
+    confirmedDate: '2026-08-10',
+  },
+  {
     prefCode: 'hokkaido',
     prefName: '北海道',
     effectiveYear: '令和4年度（2022年度）入試',
