@@ -261,6 +261,18 @@ describe('PAST_SYSTEM_CHANGES（Λ+5・過去の制度変更履歴DB）', () => 
     expect(yamaguchiPref?.gradeMultipliers).toEqual({ 1: 1, 2: 1, 3: 1 });
   });
 
+  test('鳥取県の推薦入試廃止・特色入学者選抜移行エントリはprefectures.tsの現行maxScore(65点満点)と矛盾しない(出願資格の変更であり内申点計算式は不変)', () => {
+    const tottori = PAST_SYSTEM_CHANGES.find((c) => c.prefCode === 'tottori');
+    expect(tottori).toBeDefined();
+    expect(tottori?.effectiveYear).toBe('令和5年度（2023年度）入試');
+    expect(tottori?.category).toBe('selection-structure');
+    expect(tottori?.detail).toContain('特色入学者選抜');
+
+    const tottoriPref = PREFECTURES.find((p) => p.code === 'tottori');
+    expect(tottoriPref?.maxScore).toBe(65);
+    expect(tottoriPref?.targetGrades).toEqual([3]);
+  });
+
   test('categoryは定義済みの4種類のいずれかのみ(型崩れ防止)', () => {
     const validCategories = new Set(['scoring-input', 'selection-structure', 'weighting-formula', 'other']);
     for (const c of PAST_SYSTEM_CHANGES) {
