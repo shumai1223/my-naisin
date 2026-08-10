@@ -867,6 +867,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
+    },
+    {
+      "id": "gakusan-bunri",
+      "org": "株式会社文理",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://bts.bunri.co.jp/Home/Contact",
+      "contactClass": "b2b",
+      "evidence": "塾・学校教材専用サイト(Bunri Teachers' Site)のトップに『本サービスは塾・学校の先生専用のサービスです。』と明記。新規登録・問い合わせは同サイトの専用フォームへ誘導される",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
     }
   ]
 }
