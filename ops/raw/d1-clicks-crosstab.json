@@ -1,0 +1,578 @@
+[
+ {
+  "affiliate_id": "fp-soudan",
+  "placement": "naishin-up",
+  "referer": null,
+  "n": 64
+ },
+ {
+  "affiliate_id": "sora-juku-text",
+  "placement": "naishin-up",
+  "referer": null,
+  "n": 54
+ },
+ {
+  "affiliate_id": "fp-soudan",
+  "placement": "prefecture",
+  "referer": null,
+  "n": 50
+ },
+ {
+  "affiliate_id": "sora-juku-text",
+  "placement": "prefecture",
+  "referer": null,
+  "n": 44
+ },
+ {
+  "affiliate_id": "zkai-banner",
+  "placement": "prefecture",
+  "referer": null,
+  "n": 35
+ },
+ {
+  "affiliate_id": "atama-banner",
+  "placement": "prefecture",
+  "referer": null,
+  "n": 33
+ },
+ {
+  "affiliate_id": "zkai-text-middle",
+  "placement": null,
+  "referer": null,
+  "n": 32
+ },
+ {
+  "affiliate_id": "sapuri-banner-300",
+  "placement": "prefecture",
+  "referer": null,
+  "n": 30
+ },
+ {
+  "affiliate_id": "zkai-text-request",
+  "placement": null,
+  "referer": null,
+  "n": 30
+ },
+ {
+  "affiliate_id": "atama-text",
+  "placement": "parent-lp",
+  "referer": "https://my-naishin.com/",
+  "n": 12
+ },
+ {
+  "affiliate_id": "sapuri-banner-300",
+  "placement": null,
+  "referer": null,
+  "n": 12
+ },
+ {
+  "affiliate_id": "shoin-banner",
+  "placement": null,
+  "referer": null,
+  "n": 10
+ },
+ {
+  "affiliate_id": "morijuku-text",
+  "placement": "naishin-up",
+  "referer": null,
+  "n": 9
+ },
+ {
+  "affiliate_id": "sora-juku-text",
+  "placement": null,
+  "referer": null,
+  "n": 9
+ },
+ {
+  "affiliate_id": "atama-text",
+  "placement": null,
+  "referer": null,
+  "n": 8
+ },
+ {
+  "affiliate_id": "sapuri-text",
+  "placement": null,
+  "referer": null,
+  "n": 8
+ },
+ {
+  "affiliate_id": "sora-juku-text",
+  "placement": "juku-hiyou",
+  "referer": null,
+  "n": 7
+ },
+ {
+  "affiliate_id": "atama-text",
+  "placement": "/hensachi",
+  "referer": "https://my-naishin.com/hensachi",
+  "n": 6
+ },
+ {
+  "affiliate_id": "morijuku-text",
+  "placement": null,
+  "referer": null,
+  "n": 6
+ },
+ {
+  "affiliate_id": "moshimo-studycoach",
+  "placement": null,
+  "referer": null,
+  "n": 6
+ },
+ {
+  "affiliate_id": "sora-juku-banner",
+  "placement": null,
+  "referer": null,
+  "n": 6
+ },
+ {
+  "affiliate_id": "fp-soudan",
+  "placement": "hiyou",
+  "referer": null,
+  "n": 5
+ },
+ {
+  "affiliate_id": "sora-juku-text",
+  "placement": "result",
+  "referer": null,
+  "n": 5
+ },
+ {
+  "affiliate_id": "zkai-banner",
+  "placement": null,
+  "referer": null,
+  "n": 5
+ },
+ {
+  "affiliate_id": "atama-text",
+  "placement": "hensachi",
+  "referer": "https://my-naishin.com/hensachi?utm_source=line&utm_medium=richmenu&utm_campaign=hensachi",
+  "n": 4
+ },
+ {
+  "affiliate_id": "atama-text",
+  "placement": "parent-lp",
+  "referer": null,
+  "n": 4
+ },
+ {
+  "affiliate_id": "campus-banner",
+  "placement": null,
+  "referer": null,
+  "n": 4
+ },
+ {
+  "affiliate_id": "campus-text",
+  "placement": "prefecture",
+  "referer": null,
+  "n": 4
+ },
+ {
+  "affiliate_id": "fp-soudan",
+  "placement": "blog",
+  "referer": null,
+  "n": 4
+ },
+ {
+  "affiliate_id": "fp-soudan",
+  "placement": "suisen",
+  "referer": null,
+  "n": 4
+ },
+ {
+  "affiliate_id": "morijuku-text",
+  "placement": "prefecture",
+  "referer": null,
+  "n": 4
+ },
+ {
+  "affiliate_id": "moshimo-classjapan",
+  "placement": null,
+  "referer": null,
+  "n": 4
+ },
+ {
+  "affiliate_id": "moshimo-garden-chochiku",
+  "placement": "parent-lp",
+  "referer": null,
+  "n": 4
+ },
+ {
+  "affiliate_id": "moshimo-garden-chochiku",
+  "placement": "parent-lp",
+  "referer": "https://my-naishin.com/",
+  "n": 4
+ },
+ {
+  "affiliate_id": "sapuri-banner-468",
+  "placement": null,
+  "referer": null,
+  "n": 4
+ },
+ {
+  "affiliate_id": "campus-text",
+  "placement": "naishin-up",
+  "referer": null,
+  "n": 3
+ },
+ {
+  "affiliate_id": "fp-soudan",
+  "placement": "dashboard",
+  "referer": null,
+  "n": 3
+ },
+ {
+  "affiliate_id": "moshimo-garden-gakushi",
+  "placement": "hiyou",
+  "referer": null,
+  "n": 3
+ },
+ {
+  "affiliate_id": "shoin-banner",
+  "placement": "/kochi/naishin",
+  "referer": "https://my-naishin.com/kochi/naishin",
+  "n": 3
+ },
+ {
+  "affiliate_id": "sora-juku-text",
+  "placement": "blog",
+  "referer": null,
+  "n": 3
+ },
+ {
+  "affiliate_id": "sora-juku-text",
+  "placement": "dashboard",
+  "referer": null,
+  "n": 3
+ },
+ {
+  "affiliate_id": "sora-juku-text",
+  "placement": "hiyou",
+  "referer": null,
+  "n": 3
+ },
+ {
+  "affiliate_id": "sora-juku-text",
+  "placement": "parent-lp",
+  "referer": null,
+  "n": 3
+ },
+ {
+  "affiliate_id": "zkai-text-advanced",
+  "placement": null,
+  "referer": null,
+  "n": 3
+ },
+ {
+  "affiliate_id": "atama-banner",
+  "placement": null,
+  "referer": null,
+  "n": 2
+ },
+ {
+  "affiliate_id": "atama-banner",
+  "placement": "/tokyo/total-score",
+  "referer": "https://my-naishin.com/tokyo/total-score",
+  "n": 2
+ },
+ {
+  "affiliate_id": "atama-text",
+  "placement": null,
+  "referer": "https://my-naishin.com/",
+  "n": 2
+ },
+ {
+  "affiliate_id": "atama-text",
+  "placement": null,
+  "referer": "https://my-naishin.com/hensachi",
+  "n": 2
+ },
+ {
+  "affiliate_id": "atama-text",
+  "placement": "/hyotei-heikin",
+  "referer": "https://my-naishin.com/hyotei-heikin",
+  "n": 2
+ },
+ {
+  "affiliate_id": "atama-text",
+  "placement": "hensachi",
+  "referer": "https://my-naishin.com/hensachi",
+  "n": 2
+ },
+ {
+  "affiliate_id": "campus-text",
+  "placement": null,
+  "referer": null,
+  "n": 2
+ },
+ {
+  "affiliate_id": "morijuku-banner",
+  "placement": null,
+  "referer": null,
+  "n": 2
+ },
+ {
+  "affiliate_id": "morijuku-text",
+  "placement": "result",
+  "referer": "https://my-naishin.com/reverse?pref=tokyo&current=51",
+  "n": 2
+ },
+ {
+  "affiliate_id": "moshimo-e-live",
+  "placement": "mendan",
+  "referer": null,
+  "n": 2
+ },
+ {
+  "affiliate_id": "moshimo-e-live",
+  "placement": "mendan",
+  "referer": "https://my-naishin.com/mendan",
+  "n": 2
+ },
+ {
+  "affiliate_id": "moshimo-e-live",
+  "placement": "shindan",
+  "referer": "https://my-naishin.com/juku-shindan",
+  "n": 2
+ },
+ {
+  "affiliate_id": "moshimo-garden-gakushi",
+  "placement": "mendan",
+  "referer": null,
+  "n": 2
+ },
+ {
+  "affiliate_id": "moshimo-garden-gakushi",
+  "placement": "result",
+  "referer": null,
+  "n": 2
+ },
+ {
+  "affiliate_id": "moshimo-tintoru",
+  "placement": null,
+  "referer": null,
+  "n": 2
+ },
+ {
+  "affiliate_id": "sapuri-banner-300",
+  "placement": "/",
+  "referer": "https://my-naishin.com/",
+  "n": 2
+ },
+ {
+  "affiliate_id": "sapuri-banner-300",
+  "placement": "blog",
+  "referer": null,
+  "n": 2
+ },
+ {
+  "affiliate_id": "zkai-banner",
+  "placement": "/",
+  "referer": "https://my-naishin.com/",
+  "n": 2
+ },
+ {
+  "affiliate_id": "zkai-banner",
+  "placement": "/hensachi",
+  "referer": "https://my-naishin.com/hensachi",
+  "n": 2
+ },
+ {
+  "affiliate_id": "zkai-text-request",
+  "placement": "/",
+  "referer": "https://my-naishin.com/",
+  "n": 2
+ },
+ {
+  "affiliate_id": "atama-banner",
+  "placement": null,
+  "referer": "https://www.google.com/",
+  "n": 1
+ },
+ {
+  "affiliate_id": "atama-text",
+  "placement": null,
+  "referer": "https://websearch.rakuten.co.jp/",
+  "n": 1
+ },
+ {
+  "affiliate_id": "atama-text",
+  "placement": null,
+  "referer": "https://www.google.com/",
+  "n": 1
+ },
+ {
+  "affiliate_id": "atama-text",
+  "placement": "/",
+  "referer": "https://my-naishin.com/",
+  "n": 1
+ },
+ {
+  "affiliate_id": "atama-text",
+  "placement": "hensachi",
+  "referer": "https://my-naishin.com/",
+  "n": 1
+ },
+ {
+  "affiliate_id": "atama-text",
+  "placement": "hensachi",
+  "referer": "https://my-naishin.com/hensachi?utm_source=chatgpt.com",
+  "n": 1
+ },
+ {
+  "affiliate_id": "atama-text",
+  "placement": "hyotei-heikin",
+  "referer": "https://my-naishin.com/hyotei-heikin",
+  "n": 1
+ },
+ {
+  "affiliate_id": "atama-text",
+  "placement": "shindan",
+  "referer": "https://my-naishin.com/juku-shindan",
+  "n": 1
+ },
+ {
+  "affiliate_id": "fp-soudan",
+  "placement": "jitsugika",
+  "referer": null,
+  "n": 1
+ },
+ {
+  "affiliate_id": "morijuku-banner",
+  "placement": "/",
+  "referer": "https://my-naishin.com/",
+  "n": 1
+ },
+ {
+  "affiliate_id": "morijuku-text",
+  "placement": null,
+  "referer": "https://www.google.com/",
+  "n": 1
+ },
+ {
+  "affiliate_id": "morijuku-text",
+  "placement": "/kanagawa/s-value",
+  "referer": "https://my-naishin.com/kanagawa/s-value",
+  "n": 1
+ },
+ {
+  "affiliate_id": "morijuku-text",
+  "placement": "/tokyo/total-score",
+  "referer": "https://my-naishin.com/tokyo/total-score",
+  "n": 1
+ },
+ {
+  "affiliate_id": "moshimo-garden-gakushi",
+  "placement": "hiyou",
+  "referer": "https://my-naishin.com/juku-hiyou",
+  "n": 1
+ },
+ {
+  "affiliate_id": "moshimo-garden-gakushi",
+  "placement": "hiyou",
+  "referer": "https://my-naishin.com/koukou-hiyou/kokoroze",
+  "n": 1
+ },
+ {
+  "affiliate_id": "moshimo-minhoken",
+  "placement": "suisen",
+  "referer": null,
+  "n": 1
+ },
+ {
+  "affiliate_id": "moshimo-rewrite",
+  "placement": null,
+  "referer": null,
+  "n": 1
+ },
+ {
+  "affiliate_id": "moshimo-studycoach",
+  "placement": "dashboard",
+  "referer": null,
+  "n": 1
+ },
+ {
+  "affiliate_id": "shinken-koukou",
+  "placement": "hyotei-koukou",
+  "referer": null,
+  "n": 1
+ },
+ {
+  "affiliate_id": "sora-juku-banner",
+  "placement": "/",
+  "referer": "https://my-naishin.com/",
+  "n": 1
+ },
+ {
+  "affiliate_id": "sora-juku-text",
+  "placement": "jitsugika",
+  "referer": null,
+  "n": 1
+ },
+ {
+  "affiliate_id": "sora-juku-text",
+  "placement": "naishin-up",
+  "referer": "https://my-naishin.com/aichi/naishin?utm_source=openai",
+  "n": 1
+ },
+ {
+  "affiliate_id": "sora-juku-text",
+  "placement": "result",
+  "referer": "https://my-naishin.com/reverse?pref=hiroshima&current=135",
+  "n": 1
+ },
+ {
+  "affiliate_id": "sora-juku-text",
+  "placement": "suisen",
+  "referer": null,
+  "n": 1
+ },
+ {
+  "affiliate_id": "zkai-banner",
+  "placement": null,
+  "referer": "https://my-naishin.com/hensachi",
+  "n": 1
+ },
+ {
+  "affiliate_id": "zkai-banner",
+  "placement": "/hensachi/agekata",
+  "referer": "https://my-naishin.com/hensachi/agekata",
+  "n": 1
+ },
+ {
+  "affiliate_id": "zkai-daigaku",
+  "placement": null,
+  "referer": null,
+  "n": 1
+ },
+ {
+  "affiliate_id": "zkai-daigaku",
+  "placement": "hiyou",
+  "referer": null,
+  "n": 1
+ },
+ {
+  "affiliate_id": "zkai-text-middle",
+  "placement": "/",
+  "referer": "https://my-naishin.com",
+  "n": 1
+ },
+ {
+  "affiliate_id": "zkai-text-middle",
+  "placement": "/",
+  "referer": "https://my-naishin.com/",
+  "n": 1
+ },
+ {
+  "affiliate_id": "zkai-text-middle",
+  "placement": "/blog/toritsu-nyushi-2026-kanzen-guide",
+  "referer": "https://my-naishin.com/blog/toritsu-nyushi-2026-kanzen-guide",
+  "n": 1
+ },
+ {
+  "affiliate_id": "zkai-text-request",
+  "placement": "/",
+  "referer": "https://my-naishin.com",
+  "n": 1
+ }
+]

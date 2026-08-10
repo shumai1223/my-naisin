@@ -1,0 +1,2100 @@
+{
+ "siteUrl": "sc-domain:my-shingaku.com",
+ "dateRange": {
+  "startDate": "2026-07-10",
+  "endDate": "2026-08-07"
+ },
+ "dimensions": [
+  "query"
+ ],
+ "filters": [],
+ "rowCount": 298,
+ "rows": [
+  {
+   "query": "一人暮らし 光熱費 平均 群馬",
+   "clicks": 1,
+   "impressions": 2,
+   "ctr": 0.5,
+   "position": 8.5
+  },
+  {
+   "query": "一人暮らし 光熱費 茨城",
+   "clicks": 1,
+   "impressions": 13,
+   "ctr": 0.07692307692307693,
+   "position": 8.153846153846153
+  },
+  {
+   "query": "千葉 一人暮らし 費用",
+   "clicks": 1,
+   "impressions": 11,
+   "ctr": 0.09090909090909091,
+   "position": 8.363636363636363
+  },
+  {
+   "query": "奨学金 返済シュミレーション",
+   "clicks": 1,
+   "impressions": 15,
+   "ctr": 0.06666666666666667,
+   "position": 9.333333333333334
+  },
+  {
+   "query": "岐阜県 一人暮らし 費用",
+   "clicks": 1,
+   "impressions": 6,
+   "ctr": 0.16666666666666666,
+   "position": 5.833333333333333
+  },
+  {
+   "query": "さいたま 費用",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 46
+  },
+  {
+   "query": "オーキャン 持ち物",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 39
+  },
+  {
+   "query": "オープンキャンパス 持ちもの",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 46
+  },
+  {
+   "query": "オープンキャンパス 持ち物",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 38
+  },
+  {
+   "query": "シミュレーション 大学",
+   "clicks": 0,
+   "impressions": 11,
+   "ctr": 0,
+   "position": 31.818181818181817
+  },
+  {
+   "query": "ローン 奨学 金",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 73
+  },
+  {
+   "query": "一人暮らし",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 6
+  },
+  {
+   "query": "一人暮らし 京都 生活費",
+   "clicks": 0,
+   "impressions": 19,
+   "ctr": 0,
+   "position": 30.68421052631579
+  },
+  {
+   "query": "一人暮らし 京都 費用",
+   "clicks": 0,
+   "impressions": 18,
+   "ctr": 0,
+   "position": 26.38888888888889
+  },
+  {
+   "query": "一人暮らし 仙台 費用",
+   "clicks": 0,
+   "impressions": 12,
+   "ctr": 0,
+   "position": 33.75
+  },
+  {
+   "query": "一人暮らし 光熱費 平均 岐阜",
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 9.666666666666666
+  },
+  {
+   "query": "一人暮らし 光熱費 平均 広島",
+   "clicks": 0,
+   "impressions": 5,
+   "ctr": 0,
+   "position": 10.6
+  },
+  {
+   "query": "一人暮らし 光熱費 平均 長崎",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 10
+  },
+  {
+   "query": "一人暮らし 光熱費 平均 静岡",
+   "clicks": 0,
+   "impressions": 4,
+   "ctr": 0,
+   "position": 9.75
+  },
+  {
+   "query": "一人暮らし 光熱費 静岡",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 10
+  },
+  {
+   "query": "一人暮らし 初期費用 シミュレーション",
+   "clicks": 0,
+   "impressions": 5,
+   "ctr": 0,
+   "position": 29.2
+  },
+  {
+   "query": "一人暮らし 北海道 生活費",
+   "clicks": 0,
+   "impressions": 26,
+   "ctr": 0,
+   "position": 28.192307692307693
+  },
+  {
+   "query": "一人暮らし 北海道 費用",
+   "clicks": 0,
+   "impressions": 24,
+   "ctr": 0,
+   "position": 27.958333333333332
+  },
+  {
+   "query": "一人暮らし 千葉 費用",
+   "clicks": 0,
+   "impressions": 27,
+   "ctr": 0,
+   "position": 15.25925925925926
+  },
+  {
+   "query": "一人暮らし 名古屋 費用",
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 51.666666666666664
+  },
+  {
+   "query": "一人暮らし 埼玉 費用",
+   "clicks": 0,
+   "impressions": 15,
+   "ctr": 0,
+   "position": 12.333333333333334
+  },
+  {
+   "query": "一人暮らし 大阪 初期費用",
+   "clicks": 0,
+   "impressions": 5,
+   "ctr": 0,
+   "position": 46.2
+  },
+  {
+   "query": "一人暮らし 大阪 生活費",
+   "clicks": 0,
+   "impressions": 7,
+   "ctr": 0,
+   "position": 27.428571428571427
+  },
+  {
+   "query": "一人暮らし 大阪 相場",
+   "clicks": 0,
+   "impressions": 7,
+   "ctr": 0,
+   "position": 36.42857142857143
+  },
+  {
+   "query": "一人暮らし 大阪 費用",
+   "clicks": 0,
+   "impressions": 7,
+   "ctr": 0,
+   "position": 31.857142857142858
+  },
+  {
+   "query": "一人暮らし 奈良 費用",
+   "clicks": 0,
+   "impressions": 14,
+   "ctr": 0,
+   "position": 10.142857142857142
+  },
+  {
+   "query": "一人暮らし 岡山 費用",
+   "clicks": 0,
+   "impressions": 8,
+   "ctr": 0,
+   "position": 20.625
+  },
+  {
+   "query": "一人暮らし 岩手",
+   "clicks": 0,
+   "impressions": 8,
+   "ctr": 0,
+   "position": 36.375
+  },
+  {
+   "query": "一人暮らし 島根",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 38
+  },
+  {
+   "query": "一人暮らし 広島 費用",
+   "clicks": 0,
+   "impressions": 13,
+   "ctr": 0,
+   "position": 17.076923076923077
+  },
+  {
+   "query": "一人暮らし 愛知 費用",
+   "clicks": 0,
+   "impressions": 25,
+   "ctr": 0,
+   "position": 29.48
+  },
+  {
+   "query": "一人暮らし 新潟 費用",
+   "clicks": 0,
+   "impressions": 12,
+   "ctr": 0,
+   "position": 15.333333333333334
+  },
+  {
+   "query": "一人暮らし 東京 費用",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 35
+  },
+  {
+   "query": "一人暮らし 横浜 費用",
+   "clicks": 0,
+   "impressions": 7,
+   "ctr": 0,
+   "position": 38
+  },
+  {
+   "query": "一人暮らし 沖縄 初期費用",
+   "clicks": 0,
+   "impressions": 22,
+   "ctr": 0,
+   "position": 29.59090909090909
+  },
+  {
+   "query": "一人暮らし 沖縄 家賃",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 39.5
+  },
+  {
+   "query": "一人暮らし 沖縄 生活費",
+   "clicks": 0,
+   "impressions": 16,
+   "ctr": 0,
+   "position": 22.8125
+  },
+  {
+   "query": "一人暮らし 沖縄 費用",
+   "clicks": 0,
+   "impressions": 13,
+   "ctr": 0,
+   "position": 28.53846153846154
+  },
+  {
+   "query": "一人暮らし 熊本 費用",
+   "clicks": 0,
+   "impressions": 27,
+   "ctr": 0,
+   "position": 15
+  },
+  {
+   "query": "一人暮らし 生活費 大阪",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 51
+  },
+  {
+   "query": "一人暮らし 神奈川 費用",
+   "clicks": 0,
+   "impressions": 19,
+   "ctr": 0,
+   "position": 20.736842105263158
+  },
+  {
+   "query": "一人暮らし 福井 費用",
+   "clicks": 0,
+   "impressions": 24,
+   "ctr": 0,
+   "position": 17.333333333333332
+  },
+  {
+   "query": "一人暮らし 福岡 初期費用",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 44
+  },
+  {
+   "query": "一人暮らし 福岡 生活費",
+   "clicks": 0,
+   "impressions": 15,
+   "ctr": 0,
+   "position": 37.733333333333334
+  },
+  {
+   "query": "一人暮らし 福岡 費用",
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 41.333333333333336
+  },
+  {
+   "query": "一人暮らし 群馬 費用",
+   "clicks": 0,
+   "impressions": 10,
+   "ctr": 0,
+   "position": 17.4
+  },
+  {
+   "query": "一人暮らし 費用 大阪",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 30
+  },
+  {
+   "query": "一人暮らし 費用 東京",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 17.5
+  },
+  {
+   "query": "一人暮らし 費用 計算",
+   "clicks": 0,
+   "impressions": 6,
+   "ctr": 0,
+   "position": 46.833333333333336
+  },
+  {
+   "query": "一人暮らし 都内 初期費用",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 58
+  },
+  {
+   "query": "一人暮らし 都内 費用",
+   "clicks": 0,
+   "impressions": 5,
+   "ctr": 0,
+   "position": 34.4
+  },
+  {
+   "query": "一人暮らし 静岡 費用",
+   "clicks": 0,
+   "impressions": 9,
+   "ctr": 0,
+   "position": 11.222222222222221
+  },
+  {
+   "query": "一人暮らし 高知 費用",
+   "clicks": 0,
+   "impressions": 18,
+   "ctr": 0,
+   "position": 19.555555555555557
+  },
+  {
+   "query": "一人暮らし 鹿児島 費用",
+   "clicks": 0,
+   "impressions": 11,
+   "ctr": 0,
+   "position": 16.727272727272727
+  },
+  {
+   "query": "三重 費用",
+   "clicks": 0,
+   "impressions": 7,
+   "ctr": 0,
+   "position": 36
+  },
+  {
+   "query": "三重県 一人暮らし 費用",
+   "clicks": 0,
+   "impressions": 5,
+   "ctr": 0,
+   "position": 9.2
+  },
+  {
+   "query": "京都 一人暮らし 費用",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 30
+  },
+  {
+   "query": "京都 生活費",
+   "clicks": 0,
+   "impressions": 19,
+   "ctr": 0,
+   "position": 31.157894736842106
+  },
+  {
+   "query": "京都大学 一人暮らし 費用",
+   "clicks": 0,
+   "impressions": 18,
+   "ctr": 0,
+   "position": 44.22222222222222
+  },
+  {
+   "query": "仙台 生活費",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 56
+  },
+  {
+   "query": "佐賀 一人暮らし 費用",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 8
+  },
+  {
+   "query": "佐賀 費用",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 40.5
+  },
+  {
+   "query": "北海道 一人暮らし 費用",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 31
+  },
+  {
+   "query": "北海道 初期費用",
+   "clicks": 0,
+   "impressions": 21,
+   "ctr": 0,
+   "position": 32.095238095238095
+  },
+  {
+   "query": "北海道 大学 一人暮らし 費用",
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 47.666666666666664
+  },
+  {
+   "query": "北海道 生活費",
+   "clicks": 0,
+   "impressions": 4,
+   "ctr": 0,
+   "position": 27.5
+  },
+  {
+   "query": "千葉 生活費",
+   "clicks": 0,
+   "impressions": 22,
+   "ctr": 0,
+   "position": 18.727272727272727
+  },
+  {
+   "query": "千葉 費用",
+   "clicks": 0,
+   "impressions": 21,
+   "ctr": 0,
+   "position": 26
+  },
+  {
+   "query": "千葉一人暮らし 費用",
+   "clicks": 0,
+   "impressions": 8,
+   "ctr": 0,
+   "position": 9.875
+  },
+  {
+   "query": "千葉大学 一人暮らし 費用",
+   "clicks": 0,
+   "impressions": 31,
+   "ctr": 0,
+   "position": 34
+  },
+  {
+   "query": "千葉県 一人暮らし 生活費",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 9
+  },
+  {
+   "query": "千葉県一人暮らし 費用",
+   "clicks": 0,
+   "impressions": 6,
+   "ctr": 0,
+   "position": 4.166666666666666
+  },
+  {
+   "query": "名古屋 一人暮らし 費用",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 54
+  },
+  {
+   "query": "和歌山 一人暮らし 費用",
+   "clicks": 0,
+   "impressions": 10,
+   "ctr": 0,
+   "position": 6.9
+  },
+  {
+   "query": "和歌山 初期費用",
+   "clicks": 0,
+   "impressions": 15,
+   "ctr": 0,
+   "position": 36.4
+  },
+  {
+   "query": "和歌山 費用",
+   "clicks": 0,
+   "impressions": 6,
+   "ctr": 0,
+   "position": 32.5
+  },
+  {
+   "query": "四国 家賃相場",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 4
+  },
+  {
+   "query": "埼玉 一人暮らし 生活費",
+   "clicks": 0,
+   "impressions": 6,
+   "ctr": 0,
+   "position": 7.333333333333333
+  },
+  {
+   "query": "埼玉 一人暮らし 費用",
+   "clicks": 0,
+   "impressions": 18,
+   "ctr": 0,
+   "position": 9.166666666666666
+  },
+  {
+   "query": "埼玉 初期費用",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 36
+  },
+  {
+   "query": "埼玉 生活費",
+   "clicks": 0,
+   "impressions": 11,
+   "ctr": 0,
+   "position": 10.727272727272727
+  },
+  {
+   "query": "埼玉 費用",
+   "clicks": 0,
+   "impressions": 9,
+   "ctr": 0,
+   "position": 38.22222222222222
+  },
+  {
+   "query": "埼玉一人暮らし 費用",
+   "clicks": 0,
+   "impressions": 5,
+   "ctr": 0,
+   "position": 9
+  },
+  {
+   "query": "埼玉大学 一人暮らし 費用",
+   "clicks": 0,
+   "impressions": 21,
+   "ctr": 0,
+   "position": 35.19047619047619
+  },
+  {
+   "query": "埼玉県 一人暮らし 費用",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 8
+  },
+  {
+   "query": "大分 一人暮らし 費用",
+   "clicks": 0,
+   "impressions": 4,
+   "ctr": 0,
+   "position": 7.5
+  },
+  {
+   "query": "大分 費用",
+   "clicks": 0,
+   "impressions": 5,
+   "ctr": 0,
+   "position": 43.4
+  },
+  {
+   "query": "大分大学 一人暮らし 費用",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 3
+  },
+  {
+   "query": "大学 受験 費用 シミュレーション",
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 47.333333333333336
+  },
+  {
+   "query": "大学 学費 シュミレーション",
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 44.333333333333336
+  },
+  {
+   "query": "大学 進学 費用 シミュレーション",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 64
+  },
+  {
+   "query": "大学ローン 金利計算",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 50
+  },
+  {
+   "query": "大阪 一人暮らし 費用 学生",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 19
+  },
+  {
+   "query": "大阪 生活費",
+   "clicks": 0,
+   "impressions": 6,
+   "ctr": 0,
+   "position": 26.333333333333332
+  },
+  {
+   "query": "大阪大学 一人暮らし 費用",
+   "clicks": 0,
+   "impressions": 13,
+   "ctr": 0,
+   "position": 38.76923076923077
+  },
+  {
+   "query": "大阪生活費",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 6
+  },
+  {
+   "query": "奈良 費用",
+   "clicks": 0,
+   "impressions": 12,
+   "ctr": 0,
+   "position": 27.916666666666668
+  },
+  {
+   "query": "奈良県 一人暮らし 費用",
+   "clicks": 0,
+   "impressions": 4,
+   "ctr": 0,
+   "position": 7
+  },
+  {
+   "query": "奨学 金 1000 万 返済 計画",
+   "clicks": 0,
+   "impressions": 7,
+   "ctr": 0,
+   "position": 74.14285714285714
+  },
+  {
+   "query": "奨学 金 120 万 返済",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 52
+  },
+  {
+   "query": "奨学 金 200 万 返済 額",
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 49.666666666666664
+  },
+  {
+   "query": "奨学 金 8 万 返済",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 58
+  },
+  {
+   "query": "奨学 金 8 万 返済 額",
+   "clicks": 0,
+   "impressions": 4,
+   "ctr": 0,
+   "position": 45.75
+  },
+  {
+   "query": "奨学 金 いくら 返済",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 73
+  },
+  {
+   "query": "奨学 金 シュミレーション",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 48.5
+  },
+  {
+   "query": "奨学 金 ローン 返済",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 41
+  },
+  {
+   "query": "奨学 金 世帯 年収",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 57
+  },
+  {
+   "query": "奨学 金 八 万 円 返済",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 42
+  },
+  {
+   "query": "奨学 金 利子 計算",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 43.5
+  },
+  {
+   "query": "奨学 金 平均 返済 額",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 61
+  },
+  {
+   "query": "奨学 金 年収",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 33
+  },
+  {
+   "query": "奨学 金 月 の 返済 額",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 81
+  },
+  {
+   "query": "奨学 金 月額 返済",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 73.5
+  },
+  {
+   "query": "奨学 金 条件 年収",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 46
+  },
+  {
+   "query": "奨学 金 短大 返済 額",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 59
+  },
+  {
+   "query": "奨学 金 繰り上げ 返済 シミュレーション",
+   "clicks": 0,
+   "impressions": 6,
+   "ctr": 0,
+   "position": 73.83333333333333
+  },
+  {
+   "query": "奨学 金 繰り上げ 返済 利息 計算",
+   "clicks": 0,
+   "impressions": 5,
+   "ctr": 0,
+   "position": 90.6
+  },
+  {
+   "query": "奨学 金 繰り上げ 返済 計算",
+   "clicks": 0,
+   "impressions": 5,
+   "ctr": 0,
+   "position": 88.2
+  },
+  {
+   "query": "奨学 金 返済 グラフ",
+   "clicks": 0,
+   "impressions": 5,
+   "ctr": 0,
+   "position": 56
+  },
+  {
+   "query": "奨学 金 返済 シュミレーション",
+   "clicks": 0,
+   "impressions": 12,
+   "ctr": 0,
+   "position": 81.41666666666667
+  },
+  {
+   "query": "奨学 金 返済 シュミレーター",
+   "clicks": 0,
+   "impressions": 5,
+   "ctr": 0,
+   "position": 74.2
+  },
+  {
+   "query": "奨学 金 返済 ナビ",
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 71.33333333333333
+  },
+  {
+   "query": "奨学 金 返済 プラン",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 78
+  },
+  {
+   "query": "奨学 金 返済 住宅 ローン",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 59
+  },
+  {
+   "query": "奨学 金 返済 月",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 82
+  },
+  {
+   "query": "奨学 金 返済 月 いくら",
+   "clicks": 0,
+   "impressions": 6,
+   "ctr": 0,
+   "position": 53.666666666666664
+  },
+  {
+   "query": "奨学 金 返済 月々",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 77
+  },
+  {
+   "query": "奨学 金 返済 月々 いくら",
+   "clicks": 0,
+   "impressions": 5,
+   "ctr": 0,
+   "position": 64.8
+  },
+  {
+   "query": "奨学 金 返済 月額",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 58.5
+  },
+  {
+   "query": "奨学 金 返済 毎月",
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 49.333333333333336
+  },
+  {
+   "query": "奨学 金 返済 毎月 いくら",
+   "clicks": 0,
+   "impressions": 4,
+   "ctr": 0,
+   "position": 65.25
+  },
+  {
+   "query": "奨学 金 返済 目安",
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 58
+  },
+  {
+   "query": "奨学 金 返済 相場",
+   "clicks": 0,
+   "impressions": 6,
+   "ctr": 0,
+   "position": 50.666666666666664
+  },
+  {
+   "query": "奨学 金 返済 計算",
+   "clicks": 0,
+   "impressions": 7,
+   "ctr": 0,
+   "position": 70.85714285714286
+  },
+  {
+   "query": "奨学 金 返済 金額 月々",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 64.5
+  },
+  {
+   "query": "奨学 金 返済 金額 計算",
+   "clicks": 0,
+   "impressions": 7,
+   "ctr": 0,
+   "position": 74.14285714285714
+  },
+  {
+   "query": "奨学 金 返済 額 月々",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 41
+  },
+  {
+   "query": "奨学 金 返済 額 毎月",
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 43
+  },
+  {
+   "query": "奨学 金 返済 額 計算",
+   "clicks": 0,
+   "impressions": 5,
+   "ctr": 0,
+   "position": 72.2
+  },
+  {
+   "query": "奨学金 シミュレーター",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 5.5
+  },
+  {
+   "query": "奨学金 利子 計算",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 63
+  },
+  {
+   "query": "奨学金 毎月の返済額",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 10
+  },
+  {
+   "query": "奨学金 計算",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 9
+  },
+  {
+   "query": "奨学金 計算 ツール",
+   "clicks": 0,
+   "impressions": 4,
+   "ctr": 0,
+   "position": 8.75
+  },
+  {
+   "query": "奨学金 返済 シミュレーション 保護 者 の方 向け",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 10
+  },
+  {
+   "query": "奨学金 返済 シュミレーション",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 10
+  },
+  {
+   "query": "奨学金 返済 月いくら",
+   "clicks": 0,
+   "impressions": 5,
+   "ctr": 0,
+   "position": 54.4
+  },
+  {
+   "query": "奨学金 返済シミュレーション",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 72
+  },
+  {
+   "query": "奨学金 返還シミュレーション 利用",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 47
+  },
+  {
+   "query": "奨学金と教育ローンどっちが得",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 50
+  },
+  {
+   "query": "奨学金シミュレーター",
+   "clicks": 0,
+   "impressions": 7,
+   "ctr": 0,
+   "position": 9.285714285714286
+  },
+  {
+   "query": "奨学金シュミレーション",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 62
+  },
+  {
+   "query": "奨学金シュミレーション 返済",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 10
+  },
+  {
+   "query": "奨学金繰り上げ返済シミュレーション",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 68
+  },
+  {
+   "query": "奨学金計算",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 11
+  },
+  {
+   "query": "奨学金貸与・返還シミュレーション",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 11
+  },
+  {
+   "query": "奨学金返済 シュミレーション",
+   "clicks": 0,
+   "impressions": 8,
+   "ctr": 0,
+   "position": 9.5
+  },
+  {
+   "query": "奨学金返済 月いくら",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 63
+  },
+  {
+   "query": "奨学金返済シミュレーション",
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 9.666666666666666
+  },
+  {
+   "query": "奨学金返済シュミレーション",
+   "clicks": 0,
+   "impressions": 6,
+   "ctr": 0,
+   "position": 18.833333333333332
+  },
+  {
+   "query": "学費 シュミレーション",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 61
+  },
+  {
+   "query": "学費 計算",
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 62
+  },
+  {
+   "query": "宮城 費用",
+   "clicks": 0,
+   "impressions": 10,
+   "ctr": 0,
+   "position": 32.8
+  },
+  {
+   "query": "宮城県 一人暮らし 費用",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 10
+  },
+  {
+   "query": "宮崎 一人暮らし 安い",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 6.5
+  },
+  {
+   "query": "宮崎 一人暮らし 費用",
+   "clicks": 0,
+   "impressions": 5,
+   "ctr": 0,
+   "position": 6.2
+  },
+  {
+   "query": "宮崎 初期費用",
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 51
+  },
+  {
+   "query": "宮崎 生活費",
+   "clicks": 0,
+   "impressions": 18,
+   "ctr": 0,
+   "position": 22.055555555555557
+  },
+  {
+   "query": "宮崎 費用",
+   "clicks": 0,
+   "impressions": 7,
+   "ctr": 0,
+   "position": 39
+  },
+  {
+   "query": "富山 一人暮らし 費用",
+   "clicks": 0,
+   "impressions": 18,
+   "ctr": 0,
+   "position": 7.777777777777778
+  },
+  {
+   "query": "富山 生活費",
+   "clicks": 0,
+   "impressions": 25,
+   "ctr": 0,
+   "position": 20.36
+  },
+  {
+   "query": "富山 費用",
+   "clicks": 0,
+   "impressions": 4,
+   "ctr": 0,
+   "position": 38.75
+  },
+  {
+   "query": "富山市 費用",
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 41.666666666666664
+  },
+  {
+   "query": "山形 一人暮らし 費用",
+   "clicks": 0,
+   "impressions": 4,
+   "ctr": 0,
+   "position": 6.75
+  },
+  {
+   "query": "山形 市営住宅 シニア 単身",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 4
+  },
+  {
+   "query": "山形 費用",
+   "clicks": 0,
+   "impressions": 6,
+   "ctr": 0,
+   "position": 39.833333333333336
+  },
+  {
+   "query": "山梨 相場",
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 56
+  },
+  {
+   "query": "山梨 費用",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 47.5
+  },
+  {
+   "query": "岐阜 一人暮らし 費用",
+   "clicks": 0,
+   "impressions": 9,
+   "ctr": 0,
+   "position": 9.777777777777779
+  },
+  {
+   "query": "岐阜 費用",
+   "clicks": 0,
+   "impressions": 6,
+   "ctr": 0,
+   "position": 35.166666666666664
+  },
+  {
+   "query": "岡山 一人暮らし 費用",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 11.5
+  },
+  {
+   "query": "岡山 生活費",
+   "clicks": 0,
+   "impressions": 9,
+   "ctr": 0,
+   "position": 15.88888888888889
+  },
+  {
+   "query": "岡山 費用",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 44.5
+  },
+  {
+   "query": "岩手 一人暮らし",
+   "clicks": 0,
+   "impressions": 4,
+   "ctr": 0,
+   "position": 39.25
+  },
+  {
+   "query": "岩手 費用",
+   "clicks": 0,
+   "impressions": 14,
+   "ctr": 0,
+   "position": 30.5
+  },
+  {
+   "query": "岩手県 一人暮らし",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 42.5
+  },
+  {
+   "query": "島根 一人暮らし 費用",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 8
+  },
+  {
+   "query": "島根 費用",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 47
+  },
+  {
+   "query": "島根大学 一人暮らし 費用",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 11
+  },
+  {
+   "query": "広島 一人暮らし 生活費",
+   "clicks": 0,
+   "impressions": 7,
+   "ctr": 0,
+   "position": 7.571428571428571
+  },
+  {
+   "query": "広島 初期費用",
+   "clicks": 0,
+   "impressions": 6,
+   "ctr": 0,
+   "position": 40.5
+  },
+  {
+   "query": "広島 生活費",
+   "clicks": 0,
+   "impressions": 13,
+   "ctr": 0,
+   "position": 18.307692307692307
+  },
+  {
+   "query": "広島 費用",
+   "clicks": 0,
+   "impressions": 9,
+   "ctr": 0,
+   "position": 38.333333333333336
+  },
+  {
+   "query": "広島市中区 賃貸 一人暮らし",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 6
+  },
+  {
+   "query": "引越し 費用 鳥取",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 48
+  },
+  {
+   "query": "徳島 費用",
+   "clicks": 0,
+   "impressions": 5,
+   "ctr": 0,
+   "position": 29.6
+  },
+  {
+   "query": "愛知 一人暮らし 費用",
+   "clicks": 0,
+   "impressions": 7,
+   "ctr": 0,
+   "position": 11.285714285714286
+  },
+  {
+   "query": "愛知 費用",
+   "clicks": 0,
+   "impressions": 17,
+   "ctr": 0,
+   "position": 34.294117647058826
+  },
+  {
+   "query": "愛知県 一人暮らし 費用",
+   "clicks": 0,
+   "impressions": 4,
+   "ctr": 0,
+   "position": 7
+  },
+  {
+   "query": "愛知県一人暮らし 費用",
+   "clicks": 0,
+   "impressions": 9,
+   "ctr": 0,
+   "position": 9.777777777777779
+  },
+  {
+   "query": "教育 ローン 奨学 金 違い",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 59
+  },
+  {
+   "query": "教育 ローン 奨学金",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 67.5
+  },
+  {
+   "query": "教育ローン 返済額 毎月",
+   "clicks": 0,
+   "impressions": 10,
+   "ctr": 0,
+   "position": 43.7
+  },
+  {
+   "query": "教育ローンの比較は何がおすすめ？",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 49
+  },
+  {
+   "query": "新潟 一人暮らし 生活費",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 10
+  },
+  {
+   "query": "新潟 一人暮らし 費用",
+   "clicks": 0,
+   "impressions": 4,
+   "ctr": 0,
+   "position": 7.75
+  },
+  {
+   "query": "新潟 初期費用",
+   "clicks": 0,
+   "impressions": 7,
+   "ctr": 0,
+   "position": 34.285714285714285
+  },
+  {
+   "query": "新潟 家賃",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 3
+  },
+  {
+   "query": "新潟 家賃 安い",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 3
+  },
+  {
+   "query": "新潟 生活費",
+   "clicks": 0,
+   "impressions": 10,
+   "ctr": 0,
+   "position": 12.2
+  },
+  {
+   "query": "新潟 費用",
+   "clicks": 0,
+   "impressions": 4,
+   "ctr": 0,
+   "position": 35.75
+  },
+  {
+   "query": "新潟一人暮らし",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 4
+  },
+  {
+   "query": "新潟市 家賃 相場",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 4
+  },
+  {
+   "query": "日本 学生 支援 機構 奨学 金 返済 シュミレーション",
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 52.666666666666664
+  },
+  {
+   "query": "東京 一人暮らし 生活費",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 88
+  },
+  {
+   "query": "東京 一人暮らし 費用",
+   "clicks": 0,
+   "impressions": 20,
+   "ctr": 0,
+   "position": 69.55
+  },
+  {
+   "query": "東京 学生 一人暮らし 費用",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 46.5
+  },
+  {
+   "query": "東京で一人暮らし 費用",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 17
+  },
+  {
+   "query": "東京一人暮らし費用",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 84
+  },
+  {
+   "query": "栃木 初期費用",
+   "clicks": 0,
+   "impressions": 9,
+   "ctr": 0,
+   "position": 35.666666666666664
+  },
+  {
+   "query": "栃木 費用",
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 39
+  },
+  {
+   "query": "楽天 教育ローン 奨学金",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 50
+  },
+  {
+   "query": "横浜 生活費",
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 34.333333333333336
+  },
+  {
+   "query": "沖縄 一人暮らし 生活費",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 17
+  },
+  {
+   "query": "沖縄 一人暮らし 生活費 平均",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 20
+  },
+  {
+   "query": "沖縄 一人暮らし 費用",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 11
+  },
+  {
+   "query": "沖縄 生活費",
+   "clicks": 0,
+   "impressions": 11,
+   "ctr": 0,
+   "position": 32.36363636363636
+  },
+  {
+   "query": "沖縄 移住 補助金",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 3
+  },
+  {
+   "query": "沖縄に移住するには",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 3
+  },
+  {
+   "query": "沖縄移住 補助金",
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 3
+  },
+  {
+   "query": "滋賀 費用",
+   "clicks": 0,
+   "impressions": 14,
+   "ctr": 0,
+   "position": 31.571428571428573
+  },
+  {
+   "query": "熊本 一人暮らし 費用",
+   "clicks": 0,
+   "impressions": 24,
+   "ctr": 0,
+   "position": 8.625
+  },
+  {
+   "query": "熊本 生活費",
+   "clicks": 0,
+   "impressions": 23,
+   "ctr": 0,
+   "position": 14.956521739130435
+  },
+  {
+   "query": "熊本 費用",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 52
+  },
+  {
+   "query": "相場 一人暮らし 1k 鹿児島",
+   "clicks": 0,
+   "impressions": 6,
+   "ctr": 0,
+   "position": 24
+  },
+  {
+   "query": "石川 費用",
+   "clicks": 0,
+   "impressions": 10,
+   "ctr": 0,
+   "position": 36.9
+  },
+  {
+   "query": "神奈川 一人暮らし 家賃 平均",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 3
+  },
+  {
+   "query": "神奈川 一人暮らし 費用 社会人",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 11
+  },
+  {
+   "query": "神奈川 生活費",
+   "clicks": 0,
+   "impressions": 14,
+   "ctr": 0,
+   "position": 17.928571428571427
+  },
+  {
+   "query": "神奈川 費用",
+   "clicks": 0,
+   "impressions": 16,
+   "ctr": 0,
+   "position": 30.5
+  },
+  {
+   "query": "神奈川一人暮らし 費用",
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 8.666666666666668
+  },
+  {
+   "query": "福井 一人暮らし 費用",
+   "clicks": 0,
+   "impressions": 15,
+   "ctr": 0,
+   "position": 7.266666666666667
+  },
+  {
+   "query": "福井 費用",
+   "clicks": 0,
+   "impressions": 17,
+   "ctr": 0,
+   "position": 36.411764705882355
+  },
+  {
+   "query": "福岡 一人暮らし 費用",
+   "clicks": 0,
+   "impressions": 53,
+   "ctr": 0,
+   "position": 45.339622641509436
+  },
+  {
+   "query": "福岡 生活費",
+   "clicks": 0,
+   "impressions": 4,
+   "ctr": 0,
+   "position": 30.75
+  },
+  {
+   "query": "福岡 費用",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 57
+  },
+  {
+   "query": "福岡大学 一人暮らし 費用",
+   "clicks": 0,
+   "impressions": 20,
+   "ctr": 0,
+   "position": 41.55
+  },
+  {
+   "query": "福島 費用",
+   "clicks": 0,
+   "impressions": 10,
+   "ctr": 0,
+   "position": 30.8
+  },
+  {
+   "query": "秋田 一人暮らし 費用",
+   "clicks": 0,
+   "impressions": 5,
+   "ctr": 0,
+   "position": 6.6
+  },
+  {
+   "query": "秋田 費用",
+   "clicks": 0,
+   "impressions": 7,
+   "ctr": 0,
+   "position": 34.57142857142857
+  },
+  {
+   "query": "給付奨学金区分",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 11
+  },
+  {
+   "query": "繰り上げ 返済 シュミレーション 奨学 金",
+   "clicks": 0,
+   "impressions": 6,
+   "ctr": 0,
+   "position": 69.16666666666667
+  },
+  {
+   "query": "群馬 一人暮らし 女性",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 4
+  },
+  {
+   "query": "群馬 一人暮らし 費用",
+   "clicks": 0,
+   "impressions": 9,
+   "ctr": 0,
+   "position": 8
+  },
+  {
+   "query": "群馬 生活費",
+   "clicks": 0,
+   "impressions": 7,
+   "ctr": 0,
+   "position": 17.428571428571427
+  },
+  {
+   "query": "群馬 費用",
+   "clicks": 0,
+   "impressions": 8,
+   "ctr": 0,
+   "position": 34.125
+  },
+  {
+   "query": "茨城 一人暮らし 費用",
+   "clicks": 0,
+   "impressions": 13,
+   "ctr": 0,
+   "position": 6.846153846153846
+  },
+  {
+   "query": "茨城 生活費",
+   "clicks": 0,
+   "impressions": 32,
+   "ctr": 0,
+   "position": 11.03125
+  },
+  {
+   "query": "茨城 費用",
+   "clicks": 0,
+   "impressions": 24,
+   "ctr": 0,
+   "position": 29.041666666666668
+  },
+  {
+   "query": "茨城県 一人暮らし",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 34
+  },
+  {
+   "query": "茨城県 一人暮らし 費用",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 5
+  },
+  {
+   "query": "返済 シュミレーション 奨学 金",
+   "clicks": 0,
+   "impressions": 8,
+   "ctr": 0,
+   "position": 68.125
+  },
+  {
+   "query": "進学 資金 シミュレーター",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 59
+  },
+  {
+   "query": "進学資金 シュミレーター",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 65
+  },
+  {
+   "query": "都内 費用",
+   "clicks": 0,
+   "impressions": 8,
+   "ctr": 0,
+   "position": 39.375
+  },
+  {
+   "query": "金沢 一人暮らし 費用",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 17
+  },
+  {
+   "query": "銀行 教育ローン いくら借りる",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 47
+  },
+  {
+   "query": "銀行 教育ローン 返済額 毎月",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 36
+  },
+  {
+   "query": "銀行 教育ローン 金利計算",
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 40.333333333333336
+  },
+  {
+   "query": "長崎 一人暮らし 費用",
+   "clicks": 0,
+   "impressions": 6,
+   "ctr": 0,
+   "position": 7.666666666666667
+  },
+  {
+   "query": "長崎 生活費",
+   "clicks": 0,
+   "impressions": 21,
+   "ctr": 0,
+   "position": 17.666666666666668
+  },
+  {
+   "query": "長崎 費用",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 48
+  },
+  {
+   "query": "静岡 一人暮らし 費用",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 5
+  },
+  {
+   "query": "静岡 費用",
+   "clicks": 0,
+   "impressions": 6,
+   "ctr": 0,
+   "position": 35
+  },
+  {
+   "query": "香川",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 3
+  },
+  {
+   "query": "香川 家賃相場",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 3
+  },
+  {
+   "query": "香川 引っ越し 1月",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 44
+  },
+  {
+   "query": "香川 費用",
+   "clicks": 0,
+   "impressions": 6,
+   "ctr": 0,
+   "position": 34.666666666666664
+  },
+  {
+   "query": "香川大学 一人暮らし 費用",
+   "clicks": 0,
+   "impressions": 13,
+   "ctr": 0,
+   "position": 20.307692307692307
+  },
+  {
+   "query": "香川県 一人暮らし 費用",
+   "clicks": 0,
+   "impressions": 11,
+   "ctr": 0,
+   "position": 12.272727272727273
+  },
+  {
+   "query": "高知 一人暮らし 費用",
+   "clicks": 0,
+   "impressions": 5,
+   "ctr": 0,
+   "position": 5.8
+  },
+  {
+   "query": "高知 費用",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 31.5
+  },
+  {
+   "query": "鳥取 一人暮らし",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 4
+  },
+  {
+   "query": "鳥取 一人暮らし 費用",
+   "clicks": 0,
+   "impressions": 15,
+   "ctr": 0,
+   "position": 7.333333333333333
+  },
+  {
+   "query": "鳥取 家賃 一人暮らし",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 2
+  },
+  {
+   "query": "鳥取 引っ越し 1月",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 49
+  },
+  {
+   "query": "鳥取 引っ越し 費用",
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 48.333333333333336
+  },
+  {
+   "query": "鳥取 費用",
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 48
+  },
+  {
+   "query": "鳥取市 家賃相場",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 3
+  },
+  {
+   "query": "鳥取県 家賃",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 4
+  },
+  {
+   "query": "鳥取県 家賃相場",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 3
+  },
+  {
+   "query": "鹿児島 一人暮らし 費用",
+   "clicks": 0,
+   "impressions": 6,
+   "ctr": 0,
+   "position": 5.666666666666667
+  },
+  {
+   "query": "鹿児島 生活費",
+   "clicks": 0,
+   "impressions": 9,
+   "ctr": 0,
+   "position": 13.555555555555555
+  }
+ ]
+}

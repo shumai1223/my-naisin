@@ -1,0 +1,1897 @@
+{
+ "siteUrl": "sc-domain:my-naishin.com",
+ "dateRange": {
+  "startDate": "2026-07-01",
+  "endDate": "2026-07-09"
+ },
+ "dimensions": [
+  "page"
+ ],
+ "filters": [],
+ "rowCount": 269,
+ "rows": [
+  {
+   "page": "https://my-naishin.com/hensachi",
+   "clicks": 971,
+   "impressions": 24122,
+   "ctr": 0.04025371030594478,
+   "position": 5.859754580880524
+  },
+  {
+   "page": "https://my-naishin.com/hyotei-heikin",
+   "clicks": 437,
+   "impressions": 2055,
+   "ctr": 0.21265206812652068,
+   "position": 5.157177615571777
+  },
+  {
+   "page": "https://my-naishin.com/",
+   "clicks": 420,
+   "impressions": 8454,
+   "ctr": 0.049680624556423,
+   "position": 5.927135083983913
+  },
+  {
+   "page": "https://my-naishin.com/kanagawa/s-value",
+   "clicks": 321,
+   "impressions": 1121,
+   "ctr": 0.2863514719000892,
+   "position": 3.9643175735950043
+  },
+  {
+   "page": "https://my-naishin.com/blog/all-3-high-school-options-2026-update",
+   "clicks": 199,
+   "impressions": 9573,
+   "ctr": 0.020787631881332914,
+   "position": 5.072391099968661
+  },
+  {
+   "page": "https://my-naishin.com/tokyo/total-score",
+   "clicks": 176,
+   "impressions": 1276,
+   "ctr": 0.13793103448275862,
+   "position": 5.460815047021944
+  },
+  {
+   "page": "https://my-naishin.com/kanagawa/naishin",
+   "clicks": 94,
+   "impressions": 1709,
+   "ctr": 0.05500292568753657,
+   "position": 5.904622586307783
+  },
+  {
+   "page": "https://my-naishin.com/osaka/naishin",
+   "clicks": 80,
+   "impressions": 1783,
+   "ctr": 0.044868199663488505,
+   "position": 4.529444756029164
+  },
+  {
+   "page": "https://my-naishin.com/hyogo/naishin",
+   "clicks": 69,
+   "impressions": 1688,
+   "ctr": 0.04087677725118483,
+   "position": 4.555094786729858
+  },
+  {
+   "page": "https://my-naishin.com/blog/teiki-test-and-naishinten",
+   "clicks": 67,
+   "impressions": 4068,
+   "ctr": 0.016470009832841692,
+   "position": 5.553343166175025
+  },
+  {
+   "page": "https://my-naishin.com/blog/naishin-target-grades-by-prefecture",
+   "clicks": 25,
+   "impressions": 1185,
+   "ctr": 0.02109704641350211,
+   "position": 6.4540084388185655
+  },
+  {
+   "page": "https://my-naishin.com/blog/tokyo-naishin-calculation-guide",
+   "clicks": 25,
+   "impressions": 1528,
+   "ctr": 0.016361256544502618,
+   "position": 7.859293193717278
+  },
+  {
+   "page": "https://my-naishin.com/blog/naishinten-average-score",
+   "clicks": 23,
+   "impressions": 1929,
+   "ctr": 0.011923276308968377,
+   "position": 4.690513219284604
+  },
+  {
+   "page": "https://my-naishin.com/blog/naishinten-30-high-school",
+   "clicks": 21,
+   "impressions": 1315,
+   "ctr": 0.01596958174904943,
+   "position": 4.796958174904943
+  },
+  {
+   "page": "https://my-naishin.com/blog/hyotei-heikin-4-5-high-school",
+   "clicks": 17,
+   "impressions": 636,
+   "ctr": 0.026729559748427674,
+   "position": 5.504716981132075
+  },
+  {
+   "page": "https://my-naishin.com/fukuoka/naishin",
+   "clicks": 17,
+   "impressions": 413,
+   "ctr": 0.04116222760290557,
+   "position": 5.719128329297821
+  },
+  {
+   "page": "https://my-naishin.com/blog/hyotei-heikin-3-5-high-school",
+   "clicks": 13,
+   "impressions": 671,
+   "ctr": 0.019374068554396422,
+   "position": 7.070044709388972
+  },
+  {
+   "page": "https://my-naishin.com/blog/hensachi-koukou-ichiran-2026",
+   "clicks": 12,
+   "impressions": 369,
+   "ctr": 0.032520325203252036,
+   "position": 8.365853658536587
+  },
+  {
+   "page": "https://my-naishin.com/hokkaido/naishin",
+   "clicks": 12,
+   "impressions": 545,
+   "ctr": 0.022018348623853212,
+   "position": 6.269724770642202
+  },
+  {
+   "page": "https://my-naishin.com/osaka/total-score",
+   "clicks": 12,
+   "impressions": 240,
+   "ctr": 0.05,
+   "position": 6.691666666666666
+  },
+  {
+   "page": "https://my-naishin.com/kumamoto/naishin",
+   "clicks": 11,
+   "impressions": 217,
+   "ctr": 0.05069124423963134,
+   "position": 6.640552995391705
+  },
+  {
+   "page": "https://my-naishin.com/nara/naishin",
+   "clicks": 11,
+   "impressions": 466,
+   "ctr": 0.023605150214592276,
+   "position": 7.3927038626609445
+  },
+  {
+   "page": "https://my-naishin.com/reverse",
+   "clicks": 11,
+   "impressions": 347,
+   "ctr": 0.03170028818443804,
+   "position": 11.94236311239193
+  },
+  {
+   "page": "https://my-naishin.com/blog/toritsu-nyushi-2026-kanzen-guide",
+   "clicks": 10,
+   "impressions": 796,
+   "ctr": 0.01256281407035176,
+   "position": 8.154522613065327
+  },
+  {
+   "page": "https://my-naishin.com/blog/naishinten-27-high-school",
+   "clicks": 8,
+   "impressions": 378,
+   "ctr": 0.021164021164021163,
+   "position": 8.93915343915344
+  },
+  {
+   "page": "https://my-naishin.com/blog/practical-subjects-naishin-strategy",
+   "clicks": 8,
+   "impressions": 607,
+   "ctr": 0.013179571663920923,
+   "position": 7.171334431630972
+  },
+  {
+   "page": "https://my-naishin.com/blog/tokyo-kansan-naishin-guide",
+   "clicks": 8,
+   "impressions": 1167,
+   "ctr": 0.006855184233076264,
+   "position": 8.906598114824336
+  },
+  {
+   "page": "https://my-naishin.com/hokkaido/rank",
+   "clicks": 8,
+   "impressions": 953,
+   "ctr": 0.008394543546694649,
+   "position": 5.940188877229801
+  },
+  {
+   "page": "https://my-naishin.com/tokyo/naishin",
+   "clicks": 8,
+   "impressions": 204,
+   "ctr": 0.0392156862745098,
+   "position": 13.857843137254902
+  },
+  {
+   "page": "https://my-naishin.com/mie/naishin",
+   "clicks": 7,
+   "impressions": 550,
+   "ctr": 0.012727272727272728,
+   "position": 4.825454545454546
+  },
+  {
+   "page": "https://my-naishin.com/okinawa/naishin",
+   "clicks": 7,
+   "impressions": 272,
+   "ctr": 0.025735294117647058,
+   "position": 8.290441176470587
+  },
+  {
+   "page": "https://my-naishin.com/chiba/naishin",
+   "clicks": 6,
+   "impressions": 331,
+   "ctr": 0.01812688821752266,
+   "position": 7.413897280966768
+  },
+  {
+   "page": "https://my-naishin.com/miyagi/naishin",
+   "clicks": 6,
+   "impressions": 275,
+   "ctr": 0.02181818181818182,
+   "position": 8.523636363636363
+  },
+  {
+   "page": "https://my-naishin.com/tools",
+   "clicks": 6,
+   "impressions": 205,
+   "ctr": 0.02926829268292683,
+   "position": 15.77560975609756
+  },
+  {
+   "page": "https://my-naishin.com/blog/fukukyoka-bairitsu-by-prefecture",
+   "clicks": 5,
+   "impressions": 235,
+   "ctr": 0.02127659574468085,
+   "position": 7.178723404255319
+  },
+  {
+   "page": "https://my-naishin.com/blog/naishinten-not-enough-strategies",
+   "clicks": 5,
+   "impressions": 605,
+   "ctr": 0.008264462809917356,
+   "position": 6.634710743801653
+  },
+  {
+   "page": "https://my-naishin.com/nagasaki/naishin",
+   "clicks": 5,
+   "impressions": 106,
+   "ctr": 0.04716981132075472,
+   "position": 5.018867924528302
+  },
+  {
+   "page": "https://my-naishin.com/saitama/total-score",
+   "clicks": 5,
+   "impressions": 113,
+   "ctr": 0.04424778761061947,
+   "position": 5.95575221238938
+  },
+  {
+   "page": "https://my-naishin.com/aichi/total-score",
+   "clicks": 4,
+   "impressions": 214,
+   "ctr": 0.018691588785046728,
+   "position": 7.4672897196261685
+  },
+  {
+   "page": "https://my-naishin.com/blog/2026-naishin-reversal-strategy",
+   "clicks": 4,
+   "impressions": 56,
+   "ctr": 0.07142857142857142,
+   "position": 6.892857142857143
+  },
+  {
+   "page": "https://my-naishin.com/blog/chiba-naishin-calculation-guide",
+   "clicks": 4,
+   "impressions": 193,
+   "ctr": 0.02072538860103627,
+   "position": 7.212435233160622
+  },
+  {
+   "page": "https://my-naishin.com/blog/teishutsubutsu-jugyou-taido-guide",
+   "clicks": 4,
+   "impressions": 273,
+   "ctr": 0.014652014652014652,
+   "position": 7.582417582417582
+  },
+  {
+   "page": "https://my-naishin.com/fukushima/naishin",
+   "clicks": 4,
+   "impressions": 110,
+   "ctr": 0.03636363636363636,
+   "position": 6.709090909090909
+  },
+  {
+   "page": "https://my-naishin.com/hiroshima/naishin",
+   "clicks": 4,
+   "impressions": 90,
+   "ctr": 0.044444444444444446,
+   "position": 9.688888888888888
+  },
+  {
+   "page": "https://my-naishin.com/ibaraki/naishin",
+   "clicks": 3,
+   "impressions": 178,
+   "ctr": 0.016853932584269662,
+   "position": 7.449438202247191
+  },
+  {
+   "page": "https://my-naishin.com/ishikawa/naishin",
+   "clicks": 3,
+   "impressions": 102,
+   "ctr": 0.029411764705882353,
+   "position": 8.009803921568627
+  },
+  {
+   "page": "https://my-naishin.com/kagawa/naishin",
+   "clicks": 3,
+   "impressions": 89,
+   "ctr": 0.033707865168539325,
+   "position": 7.202247191011236
+  },
+  {
+   "page": "https://my-naishin.com/blog/all-3-high-school-options-2026-update#understanding-all-3",
+   "clicks": 2,
+   "impressions": 2566,
+   "ctr": 0.000779423226812159,
+   "position": 7.0849571317225255
+  },
+  {
+   "page": "https://my-naishin.com/blog/hyotei-heikin-4-0-high-school",
+   "clicks": 2,
+   "impressions": 115,
+   "ctr": 0.017391304347826087,
+   "position": 8.208695652173912
+  },
+  {
+   "page": "https://my-naishin.com/blog/understanding-jitsugikyoka-grading-2026",
+   "clicks": 2,
+   "impressions": 584,
+   "ctr": 0.003424657534246575,
+   "position": 6.498287671232877
+  },
+  {
+   "page": "https://my-naishin.com/blog/what-is-naishinten",
+   "clicks": 2,
+   "impressions": 173,
+   "ctr": 0.011560693641618497,
+   "position": 7.606936416184971
+  },
+  {
+   "page": "https://my-naishin.com/developers",
+   "clicks": 2,
+   "impressions": 4,
+   "ctr": 0.5,
+   "position": 4.25
+  },
+  {
+   "page": "https://my-naishin.com/fukui/naishin",
+   "clicks": 2,
+   "impressions": 64,
+   "ctr": 0.03125,
+   "position": 5.96875
+  },
+  {
+   "page": "https://my-naishin.com/hensachi/kyoka-betsu",
+   "clicks": 2,
+   "impressions": 57,
+   "ctr": 0.03508771929824561,
+   "position": 9.228070175438596
+  },
+  {
+   "page": "https://my-naishin.com/kyoto/naishin",
+   "clicks": 2,
+   "impressions": 22,
+   "ctr": 0.09090909090909091,
+   "position": 9
+  },
+  {
+   "page": "https://my-naishin.com/yamagata/naishin",
+   "clicks": 2,
+   "impressions": 20,
+   "ctr": 0.1,
+   "position": 4.95
+  },
+  {
+   "page": "https://my-naishin.com/yamagata/total-score",
+   "clicks": 2,
+   "impressions": 6,
+   "ctr": 0.3333333333333333,
+   "position": 6.833333333333333
+  },
+  {
+   "page": "https://my-naishin.com/blog/education-cost-junior-high-to-high-school",
+   "clicks": 1,
+   "impressions": 55,
+   "ctr": 0.01818181818181818,
+   "position": 10.309090909090909
+  },
+  {
+   "page": "https://my-naishin.com/blog/futoukou-naishinten-high-school",
+   "clicks": 1,
+   "impressions": 290,
+   "ctr": 0.0034482758620689655,
+   "position": 17.082758620689656
+  },
+  {
+   "page": "https://my-naishin.com/blog/how-to-raise-naishinten",
+   "clicks": 1,
+   "impressions": 362,
+   "ctr": 0.0027624309392265192,
+   "position": 6.68232044198895
+  },
+  {
+   "page": "https://my-naishin.com/blog/kanagawa-naishin-calculation-guide",
+   "clicks": 1,
+   "impressions": 177,
+   "ctr": 0.005649717514124294,
+   "position": 14
+  },
+  {
+   "page": "https://my-naishin.com/blog/practical-subjects-all-5-strategy-2026-update",
+   "clicks": 1,
+   "impressions": 75,
+   "ctr": 0.013333333333333334,
+   "position": 8.773333333333333
+  },
+  {
+   "page": "https://my-naishin.com/chiba/total-score",
+   "clicks": 1,
+   "impressions": 59,
+   "ctr": 0.01694915254237288,
+   "position": 6.711864406779661
+  },
+  {
+   "page": "https://my-naishin.com/chousasho/kakikata",
+   "clicks": 1,
+   "impressions": 14,
+   "ctr": 0.07142857142857142,
+   "position": 7.285714285714286
+  },
+  {
+   "page": "https://my-naishin.com/fukuoka/total-score",
+   "clicks": 1,
+   "impressions": 56,
+   "ctr": 0.017857142857142856,
+   "position": 5.857142857142857
+  },
+  {
+   "page": "https://my-naishin.com/gifu/total-score",
+   "clicks": 1,
+   "impressions": 24,
+   "ctr": 0.041666666666666664,
+   "position": 10.166666666666666
+  },
+  {
+   "page": "https://my-naishin.com/kagawa/total-score",
+   "clicks": 1,
+   "impressions": 4,
+   "ctr": 0.25,
+   "position": 10
+  },
+  {
+   "page": "https://my-naishin.com/kochi/naishin",
+   "clicks": 1,
+   "impressions": 43,
+   "ctr": 0.023255813953488372,
+   "position": 8.767441860465116
+  },
+  {
+   "page": "https://my-naishin.com/koukou-bairitsu",
+   "clicks": 1,
+   "impressions": 8,
+   "ctr": 0.125,
+   "position": 16.625
+  },
+  {
+   "page": "https://my-naishin.com/kyouiku-hi",
+   "clicks": 1,
+   "impressions": 5,
+   "ctr": 0.2,
+   "position": 4.6
+  },
+  {
+   "page": "https://my-naishin.com/mendan",
+   "clicks": 1,
+   "impressions": 43,
+   "ctr": 0.023255813953488372,
+   "position": 7.767441860465116
+  },
+  {
+   "page": "https://my-naishin.com/niigata/naishin",
+   "clicks": 1,
+   "impressions": 64,
+   "ctr": 0.015625,
+   "position": 10.78125
+  },
+  {
+   "page": "https://my-naishin.com/oita/total-score",
+   "clicks": 1,
+   "impressions": 23,
+   "ctr": 0.043478260869565216,
+   "position": 10.043478260869565
+  },
+  {
+   "page": "https://my-naishin.com/shizuoka/total-score",
+   "clicks": 1,
+   "impressions": 1,
+   "ctr": 1,
+   "position": 6
+  },
+  {
+   "page": "https://my-naishin.com/tochigi/total-score",
+   "clicks": 1,
+   "impressions": 8,
+   "ctr": 0.125,
+   "position": 15.375
+  },
+  {
+   "page": "https://my-naishin.com/tokushima/naishin",
+   "clicks": 1,
+   "impressions": 22,
+   "ctr": 0.045454545454545456,
+   "position": 8.40909090909091
+  },
+  {
+   "page": "https://my-naishin.com/total-score/mantenkan",
+   "clicks": 1,
+   "impressions": 145,
+   "ctr": 0.006896551724137931,
+   "position": 6.386206896551724
+  },
+  {
+   "page": "https://my-naishin.com/toyama/naishin",
+   "clicks": 1,
+   "impressions": 77,
+   "ctr": 0.012987012987012988,
+   "position": 9.051948051948052
+  },
+  {
+   "page": "https://my-naishin.com/about",
+   "clicks": 0,
+   "impressions": 6,
+   "ctr": 0,
+   "position": 6.166666666666667
+  },
+  {
+   "page": "https://my-naishin.com/aichi",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 10
+  },
+  {
+   "page": "https://my-naishin.com/akita/naishin",
+   "clicks": 0,
+   "impressions": 58,
+   "ctr": 0,
+   "position": 8.258620689655173
+  },
+  {
+   "page": "https://my-naishin.com/akita/total-score",
+   "clicks": 0,
+   "impressions": 15,
+   "ctr": 0,
+   "position": 8.4
+  },
+  {
+   "page": "https://my-naishin.com/aomori/naishin",
+   "clicks": 0,
+   "impressions": 25,
+   "ctr": 0,
+   "position": 9.08
+  },
+  {
+   "page": "https://my-naishin.com/aomori/total-score",
+   "clicks": 0,
+   "impressions": 6,
+   "ctr": 0,
+   "position": 9.166666666666666
+  },
+  {
+   "page": "https://my-naishin.com/blog",
+   "clicks": 0,
+   "impressions": 6,
+   "ctr": 0,
+   "position": 4.833333333333334
+  },
+  {
+   "page": "https://my-naishin.com/blog/2026-naishin-simulator-complete-guide",
+   "clicks": 0,
+   "impressions": 5,
+   "ctr": 0,
+   "position": 7.8
+  },
+  {
+   "page": "https://my-naishin.com/blog/2026-parent-support-guide",
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 8
+  },
+  {
+   "page": "https://my-naishin.com/blog/all-3-high-school-options-2026-update#kansai-tokai-public-schools",
+   "clicks": 0,
+   "impressions": 2960,
+   "ctr": 0,
+   "position": 7.079391891891892
+  },
+  {
+   "page": "https://my-naishin.com/blog/all-3-high-school-options-2026-update#kanto-public-schools",
+   "clicks": 0,
+   "impressions": 3072,
+   "ctr": 0,
+   "position": 7.0400390625
+  },
+  {
+   "page": "https://my-naishin.com/blog/all-3-high-school-options-2026-update#private-school-strategy",
+   "clicks": 0,
+   "impressions": 2473,
+   "ctr": 0,
+   "position": 7.124140719773554
+  },
+  {
+   "page": "https://my-naishin.com/blog/all-3-high-school-options-2026-update#reversal-tips",
+   "clicks": 0,
+   "impressions": 2457,
+   "ctr": 0,
+   "position": 7.109076109076109
+  },
+  {
+   "page": "https://my-naishin.com/blog/april-naishin-recovery-plan",
+   "clicks": 0,
+   "impressions": 7,
+   "ctr": 0,
+   "position": 8.571428571428571
+  },
+  {
+   "page": "https://my-naishin.com/blog/chiba-naishin-calculation-guide#how-to-calc",
+   "clicks": 0,
+   "impressions": 23,
+   "ctr": 0,
+   "position": 6.826086956521739
+  },
+  {
+   "page": "https://my-naishin.com/blog/chiba-naishin-calculation-guide#k-value",
+   "clicks": 0,
+   "impressions": 24,
+   "ctr": 0,
+   "position": 6.833333333333333
+  },
+  {
+   "page": "https://my-naishin.com/blog/chiba-naishin-calculation-guide#k-value-list",
+   "clicks": 0,
+   "impressions": 24,
+   "ctr": 0,
+   "position": 6.833333333333333
+  },
+  {
+   "page": "https://my-naishin.com/blog/chiba-naishin-calculation-guide#other-points",
+   "clicks": 0,
+   "impressions": 18,
+   "ctr": 0,
+   "position": 7.722222222222222
+  },
+  {
+   "page": "https://my-naishin.com/blog/chiba-naishin-calculation-guide#what-is-naishin",
+   "clicks": 0,
+   "impressions": 24,
+   "ctr": 0,
+   "position": 6.833333333333333
+  },
+  {
+   "page": "https://my-naishin.com/blog/fukui-naishin-calculation-guide",
+   "clicks": 0,
+   "impressions": 6,
+   "ctr": 0,
+   "position": 9.333333333333334
+  },
+  {
+   "page": "https://my-naishin.com/blog/fukukyoka-bairitsu-by-prefecture#2bai-group",
+   "clicks": 0,
+   "impressions": 6,
+   "ctr": 0,
+   "position": 3.1666666666666665
+  },
+  {
+   "page": "https://my-naishin.com/blog/fukukyoka-bairitsu-by-prefecture#all47-list",
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 2
+  },
+  {
+   "page": "https://my-naishin.com/blog/fukukyoka-bairitsu-by-prefecture#hight-bai-group",
+   "clicks": 0,
+   "impressions": 6,
+   "ctr": 0,
+   "position": 3.1666666666666665
+  },
+  {
+   "page": "https://my-naishin.com/blog/fukukyoka-bairitsu-by-prefecture#impact",
+   "clicks": 0,
+   "impressions": 6,
+   "ctr": 0,
+   "position": 3.1666666666666665
+  },
+  {
+   "page": "https://my-naishin.com/blog/fukukyoka-bairitsu-by-prefecture#pattern-overview",
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 2
+  },
+  {
+   "page": "https://my-naishin.com/blog/fukukyoka-bairitsu-by-prefecture#tobai-group",
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 2
+  },
+  {
+   "page": "https://my-naishin.com/blog/fukukyoka-bairitsu-by-prefecture#what-is-fukukyoka",
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 2
+  },
+  {
+   "page": "https://my-naishin.com/blog/how-to-choose-high-school-2026",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 7.5
+  },
+  {
+   "page": "https://my-naishin.com/blog/hyotei-heikin-3-5-high-school#case-studies",
+   "clicks": 0,
+   "impressions": 86,
+   "ctr": 0,
+   "position": 7.069767441860465
+  },
+  {
+   "page": "https://my-naishin.com/blog/hyotei-heikin-3-5-high-school#hensachi-conversion",
+   "clicks": 0,
+   "impressions": 11,
+   "ctr": 0,
+   "position": 6.2727272727272725
+  },
+  {
+   "page": "https://my-naishin.com/blog/hyotei-heikin-3-5-high-school#how-to-raise",
+   "clicks": 0,
+   "impressions": 87,
+   "ctr": 0,
+   "position": 7.103448275862069
+  },
+  {
+   "page": "https://my-naishin.com/blog/hyotei-heikin-3-5-high-school#meaning",
+   "clicks": 0,
+   "impressions": 19,
+   "ctr": 0,
+   "position": 6.7894736842105265
+  },
+  {
+   "page": "https://my-naishin.com/blog/hyotei-heikin-3-5-high-school#monthly-plan",
+   "clicks": 0,
+   "impressions": 92,
+   "ctr": 0,
+   "position": 7.108695652173913
+  },
+  {
+   "page": "https://my-naishin.com/blog/hyotei-heikin-3-5-high-school#prefecture-detail",
+   "clicks": 0,
+   "impressions": 105,
+   "ctr": 0,
+   "position": 7.133333333333334
+  },
+  {
+   "page": "https://my-naishin.com/blog/hyotei-heikin-3-5-high-school#private-detail",
+   "clicks": 0,
+   "impressions": 86,
+   "ctr": 0,
+   "position": 7.069767441860465
+  },
+  {
+   "page": "https://my-naishin.com/blog/hyotei-heikin-3-5-high-school#private-recommendation",
+   "clicks": 0,
+   "impressions": 59,
+   "ctr": 0,
+   "position": 7.254237288135593
+  },
+  {
+   "page": "https://my-naishin.com/blog/hyotei-heikin-3-5-high-school#public-schools",
+   "clicks": 0,
+   "impressions": 97,
+   "ctr": 0,
+   "position": 7.164948453608248
+  },
+  {
+   "page": "https://my-naishin.com/blog/hyotei-heikin-4-5-high-school#case-studies",
+   "clicks": 0,
+   "impressions": 137,
+   "ctr": 0,
+   "position": 6.218978102189781
+  },
+  {
+   "page": "https://my-naishin.com/blog/hyotei-heikin-4-5-high-school#hensachi-conversion",
+   "clicks": 0,
+   "impressions": 133,
+   "ctr": 0,
+   "position": 6.082706766917293
+  },
+  {
+   "page": "https://my-naishin.com/blog/hyotei-heikin-4-5-high-school#meaning",
+   "clicks": 0,
+   "impressions": 118,
+   "ctr": 0,
+   "position": 6.228813559322034
+  },
+  {
+   "page": "https://my-naishin.com/blog/hyotei-heikin-4-5-high-school#monthly-plan",
+   "clicks": 0,
+   "impressions": 121,
+   "ctr": 0,
+   "position": 6.214876033057851
+  },
+  {
+   "page": "https://my-naishin.com/blog/hyotei-heikin-4-5-high-school#private-recommendation",
+   "clicks": 0,
+   "impressions": 118,
+   "ctr": 0,
+   "position": 6.228813559322034
+  },
+  {
+   "page": "https://my-naishin.com/blog/hyotei-heikin-4-5-high-school#public-schools",
+   "clicks": 0,
+   "impressions": 149,
+   "ctr": 0,
+   "position": 6.167785234899329
+  },
+  {
+   "page": "https://my-naishin.com/blog/hyotei-heikin-4-5-high-school#recommendation",
+   "clicks": 0,
+   "impressions": 120,
+   "ctr": 0,
+   "position": 6.258333333333334
+  },
+  {
+   "page": "https://my-naishin.com/blog/improve-grades-from-all-3",
+   "clicks": 0,
+   "impressions": 26,
+   "ctr": 0,
+   "position": 9.5
+  },
+  {
+   "page": "https://my-naishin.com/blog/jitsugi-kyoka-prefecture-comparison",
+   "clicks": 0,
+   "impressions": 5,
+   "ctr": 0,
+   "position": 8
+  },
+  {
+   "page": "https://my-naishin.com/blog/kansan-naishin-vs-su-naishin",
+   "clicks": 0,
+   "impressions": 35,
+   "ctr": 0,
+   "position": 9.571428571428571
+  },
+  {
+   "page": "https://my-naishin.com/blog/naishin-evaluation-criteria-3-points",
+   "clicks": 0,
+   "impressions": 23,
+   "ctr": 0,
+   "position": 8.956521739130434
+  },
+  {
+   "page": "https://my-naishin.com/blog/naishin-guide",
+   "clicks": 0,
+   "impressions": 69,
+   "ctr": 0,
+   "position": 14.53623188405797
+  },
+  {
+   "page": "https://my-naishin.com/blog/naishin-target-grades-by-prefecture#pattern-detail",
+   "clicks": 0,
+   "impressions": 36,
+   "ctr": 0,
+   "position": 5.222222222222222
+  },
+  {
+   "page": "https://my-naishin.com/blog/naishin-target-grades-by-prefecture#prefecture-table",
+   "clicks": 0,
+   "impressions": 36,
+   "ctr": 0,
+   "position": 5.25
+  },
+  {
+   "page": "https://my-naishin.com/blog/naishin-target-grades-by-prefecture#three-patterns",
+   "clicks": 0,
+   "impressions": 29,
+   "ctr": 0,
+   "position": 5.655172413793103
+  },
+  {
+   "page": "https://my-naishin.com/blog/naishin-target-grades-by-prefecture#what-is-target-grade",
+   "clicks": 0,
+   "impressions": 32,
+   "ctr": 0,
+   "position": 5
+  },
+  {
+   "page": "https://my-naishin.com/blog/naishinten-27-high-school#hensachi-conversion",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 9
+  },
+  {
+   "page": "https://my-naishin.com/blog/naishinten-27-high-school#meaning",
+   "clicks": 0,
+   "impressions": 28,
+   "ctr": 0,
+   "position": 8.928571428571429
+  },
+  {
+   "page": "https://my-naishin.com/blog/naishinten-27-high-school#monthly-plan",
+   "clicks": 0,
+   "impressions": 28,
+   "ctr": 0,
+   "position": 8.928571428571429
+  },
+  {
+   "page": "https://my-naishin.com/blog/naishinten-27-high-school#prefecture-detail",
+   "clicks": 0,
+   "impressions": 34,
+   "ctr": 0,
+   "position": 9.117647058823529
+  },
+  {
+   "page": "https://my-naishin.com/blog/naishinten-27-high-school#private-detail",
+   "clicks": 0,
+   "impressions": 28,
+   "ctr": 0,
+   "position": 8.928571428571429
+  },
+  {
+   "page": "https://my-naishin.com/blog/naishinten-27-high-school#private-recommendation",
+   "clicks": 0,
+   "impressions": 26,
+   "ctr": 0,
+   "position": 8.923076923076923
+  },
+  {
+   "page": "https://my-naishin.com/blog/naishinten-27-high-school#public-schools",
+   "clicks": 0,
+   "impressions": 34,
+   "ctr": 0,
+   "position": 9.117647058823529
+  },
+  {
+   "page": "https://my-naishin.com/blog/naishinten-27-high-school#reversal-strategy",
+   "clicks": 0,
+   "impressions": 28,
+   "ctr": 0,
+   "position": 8.928571428571429
+  },
+  {
+   "page": "https://my-naishin.com/blog/naishinten-30-high-school#hensachi-conversion",
+   "clicks": 0,
+   "impressions": 135,
+   "ctr": 0,
+   "position": 5.311111111111111
+  },
+  {
+   "page": "https://my-naishin.com/blog/naishinten-30-high-school#how-to-raise",
+   "clicks": 0,
+   "impressions": 301,
+   "ctr": 0,
+   "position": 5.710963455149502
+  },
+  {
+   "page": "https://my-naishin.com/blog/naishinten-30-high-school#meaning",
+   "clicks": 0,
+   "impressions": 273,
+   "ctr": 0,
+   "position": 5.758241758241758
+  },
+  {
+   "page": "https://my-naishin.com/blog/naishinten-30-high-school#monthly-plan",
+   "clicks": 0,
+   "impressions": 315,
+   "ctr": 0,
+   "position": 5.660317460317461
+  },
+  {
+   "page": "https://my-naishin.com/blog/naishinten-30-high-school#prefecture-detail",
+   "clicks": 0,
+   "impressions": 419,
+   "ctr": 0,
+   "position": 5.556085918854415
+  },
+  {
+   "page": "https://my-naishin.com/blog/naishinten-30-high-school#private-detail",
+   "clicks": 0,
+   "impressions": 279,
+   "ctr": 0,
+   "position": 5.745519713261649
+  },
+  {
+   "page": "https://my-naishin.com/blog/naishinten-30-high-school#private-recommendation",
+   "clicks": 0,
+   "impressions": 165,
+   "ctr": 0,
+   "position": 6.066666666666666
+  },
+  {
+   "page": "https://my-naishin.com/blog/naishinten-30-high-school#public-schools",
+   "clicks": 0,
+   "impressions": 325,
+   "ctr": 0,
+   "position": 5.6984615384615385
+  },
+  {
+   "page": "https://my-naishin.com/blog/naishinten-from-junior-1",
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 9
+  },
+  {
+   "page": "https://my-naishin.com/blog/naishinten-high-school-exam-system",
+   "clicks": 0,
+   "impressions": 15,
+   "ctr": 0,
+   "position": 9.066666666666666
+  },
+  {
+   "page": "https://my-naishin.com/blog/naishinten-not-enough-strategies#naishin-keisan",
+   "clicks": 0,
+   "impressions": 6,
+   "ctr": 0,
+   "position": 6.666666666666667
+  },
+  {
+   "page": "https://my-naishin.com/blog/naishinten-not-enough-strategies#strategy-1",
+   "clicks": 0,
+   "impressions": 8,
+   "ctr": 0,
+   "position": 7.125
+  },
+  {
+   "page": "https://my-naishin.com/blog/naishinten-not-enough-strategies#strategy-2",
+   "clicks": 0,
+   "impressions": 6,
+   "ctr": 0,
+   "position": 6.666666666666667
+  },
+  {
+   "page": "https://my-naishin.com/blog/naishinten-not-enough-strategies#strategy-3",
+   "clicks": 0,
+   "impressions": 6,
+   "ctr": 0,
+   "position": 6.666666666666667
+  },
+  {
+   "page": "https://my-naishin.com/blog/naishinten-not-enough-strategies#strategy-4",
+   "clicks": 0,
+   "impressions": 6,
+   "ctr": 0,
+   "position": 6.666666666666667
+  },
+  {
+   "page": "https://my-naishin.com/blog/naishinten-not-enough-strategies#strategy-5",
+   "clicks": 0,
+   "impressions": 6,
+   "ctr": 0,
+   "position": 6.666666666666667
+  },
+  {
+   "page": "https://my-naishin.com/blog/naishinten-not-enough-strategies#why-not-give-up",
+   "clicks": 0,
+   "impressions": 8,
+   "ctr": 0,
+   "position": 7.125
+  },
+  {
+   "page": "https://my-naishin.com/blog/parent-hyotei-heikin-suisen-guide",
+   "clicks": 0,
+   "impressions": 11,
+   "ctr": 0,
+   "position": 14.727272727272727
+  },
+  {
+   "page": "https://my-naishin.com/blog/practical-subjects-naishin-strategy#bijutsu",
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 7
+  },
+  {
+   "page": "https://my-naishin.com/blog/practical-subjects-naishin-strategy#common",
+   "clicks": 0,
+   "impressions": 5,
+   "ctr": 0,
+   "position": 6.2
+  },
+  {
+   "page": "https://my-naishin.com/blog/practical-subjects-naishin-strategy#ongaku",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 9
+  },
+  {
+   "page": "https://my-naishin.com/blog/practical-subjects-naishin-strategy#taiiku",
+   "clicks": 0,
+   "impressions": 5,
+   "ctr": 0,
+   "position": 6.2
+  },
+  {
+   "page": "https://my-naishin.com/blog/practical-subjects-naishin-strategy#three-points",
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 7
+  },
+  {
+   "page": "https://my-naishin.com/blog/practical-subjects-naishin-strategy#why-important",
+   "clicks": 0,
+   "impressions": 5,
+   "ctr": 0,
+   "position": 6.2
+  },
+  {
+   "page": "https://my-naishin.com/blog/practical-subjects-tips",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 11
+  },
+  {
+   "page": "https://my-naishin.com/blog/smart-smartphone-usage-for-exams",
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 5.666666666666667
+  },
+  {
+   "page": "https://my-naishin.com/blog/suisen-goukaku-taikenki",
+   "clicks": 0,
+   "impressions": 5,
+   "ctr": 0,
+   "position": 6.2
+  },
+  {
+   "page": "https://my-naishin.com/blog/tag/%E3%82%AA%E3%83%BC%E3%83%AB3",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 16
+  },
+  {
+   "page": "https://my-naishin.com/blog/tag/%E9%B9%BF%E5%85%90%E5%B3%B6%E7%9C%8C",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 11
+  },
+  {
+   "page": "https://my-naishin.com/blog/teiki-test-and-naishinten#section-4subjects",
+   "clicks": 0,
+   "impressions": 475,
+   "ctr": 0,
+   "position": 6.886315789473684
+  },
+  {
+   "page": "https://my-naishin.com/blog/teiki-test-and-naishinten#section-5subjects",
+   "clicks": 0,
+   "impressions": 552,
+   "ctr": 0,
+   "position": 6.746376811594203
+  },
+  {
+   "page": "https://my-naishin.com/blog/teiki-test-and-naishinten#section-attitude",
+   "clicks": 0,
+   "impressions": 439,
+   "ctr": 0,
+   "position": 6.911161731207289
+  },
+  {
+   "page": "https://my-naishin.com/blog/teiki-test-and-naishinten#section-system",
+   "clicks": 0,
+   "impressions": 488,
+   "ctr": 0,
+   "position": 6.950819672131147
+  },
+  {
+   "page": "https://my-naishin.com/blog/teiki-test-and-naishinten#section-target",
+   "clicks": 0,
+   "impressions": 451,
+   "ctr": 0,
+   "position": 6.926829268292683
+  },
+  {
+   "page": "https://my-naishin.com/blog/teiki-test-and-naishinten#section-truth",
+   "clicks": 0,
+   "impressions": 569,
+   "ctr": 0,
+   "position": 6.8347978910369065
+  },
+  {
+   "page": "https://my-naishin.com/blog/teishutsubutsu-jugyou-taido-guide#attitude-hacks",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 9.5
+  },
+  {
+   "page": "https://my-naishin.com/blog/teishutsubutsu-jugyou-taido-guide#evaluation-criteria",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 9.5
+  },
+  {
+   "page": "https://my-naishin.com/blog/teishutsubutsu-jugyou-taido-guide#importance",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 9.5
+  },
+  {
+   "page": "https://my-naishin.com/blog/teishutsubutsu-jugyou-taido-guide#ng-actions",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 9.5
+  },
+  {
+   "page": "https://my-naishin.com/blog/teishutsubutsu-jugyou-taido-guide#subject-specific-submission",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 9.5
+  },
+  {
+   "page": "https://my-naishin.com/blog/teishutsubutsu-jugyou-taido-guide#submission-rules",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 9.5
+  },
+  {
+   "page": "https://my-naishin.com/blog/tochigi-naishin-calculation-guide",
+   "clicks": 0,
+   "impressions": 17,
+   "ctr": 0,
+   "position": 10.647058823529411
+  },
+  {
+   "page": "https://my-naishin.com/blog/tokyo-kansan-naishin-guide#s-calc-chosasho",
+   "clicks": 0,
+   "impressions": 29,
+   "ctr": 0,
+   "position": 8.931034482758621
+  },
+  {
+   "page": "https://my-naishin.com/blog/tokyo-kansan-naishin-guide#s-calc-esatj",
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 8
+  },
+  {
+   "page": "https://my-naishin.com/blog/tokyo-kansan-naishin-guide#s-calc-gakuryoku",
+   "clicks": 0,
+   "impressions": 28,
+   "ctr": 0,
+   "position": 8.857142857142858
+  },
+  {
+   "page": "https://my-naishin.com/blog/tokyo-kansan-naishin-guide#s-calc-kansan",
+   "clicks": 0,
+   "impressions": 35,
+   "ctr": 0,
+   "position": 8.714285714285715
+  },
+  {
+   "page": "https://my-naishin.com/blog/tokyo-kansan-naishin-guide#s-diff",
+   "clicks": 0,
+   "impressions": 34,
+   "ctr": 0,
+   "position": 8.647058823529413
+  },
+  {
+   "page": "https://my-naishin.com/blog/tokyo-kansan-naishin-guide#s-intro",
+   "clicks": 0,
+   "impressions": 27,
+   "ctr": 0,
+   "position": 9
+  },
+  {
+   "page": "https://my-naishin.com/blog/tokyo-kansan-naishin-guide#s-latest-trend",
+   "clicks": 0,
+   "impressions": 27,
+   "ctr": 0,
+   "position": 9
+  },
+  {
+   "page": "https://my-naishin.com/blog/tokyo-kansan-naishin-guide#s-simulation",
+   "clicks": 0,
+   "impressions": 28,
+   "ctr": 0,
+   "position": 8.857142857142858
+  },
+  {
+   "page": "https://my-naishin.com/blog/tokyo-kansan-naishin-guide#s-total-score",
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 8
+  },
+  {
+   "page": "https://my-naishin.com/blog/tokyo-naishin-calculation-guide#section-chosasho",
+   "clicks": 0,
+   "impressions": 56,
+   "ctr": 0,
+   "position": 8.285714285714285
+  },
+  {
+   "page": "https://my-naishin.com/blog/tokyo-naishin-calculation-guide#section-esatj",
+   "clicks": 0,
+   "impressions": 50,
+   "ctr": 0,
+   "position": 8.74
+  },
+  {
+   "page": "https://my-naishin.com/blog/tokyo-naishin-calculation-guide#section-kanzan",
+   "clicks": 0,
+   "impressions": 60,
+   "ctr": 0,
+   "position": 8.266666666666666
+  },
+  {
+   "page": "https://my-naishin.com/blog/tokyo-naishin-calculation-guide#section-overall",
+   "clicks": 0,
+   "impressions": 76,
+   "ctr": 0,
+   "position": 8.25
+  },
+  {
+   "page": "https://my-naishin.com/blog/tokyo-naishin-calculation-guide#section-simulation",
+   "clicks": 0,
+   "impressions": 54,
+   "ctr": 0,
+   "position": 8.555555555555555
+  },
+  {
+   "page": "https://my-naishin.com/blog/tokyo-naishin-calculation-guide#section-suisen",
+   "clicks": 0,
+   "impressions": 64,
+   "ctr": 0,
+   "position": 8.59375
+  },
+  {
+   "page": "https://my-naishin.com/blog/tokyo-naishin-calculation-guide#section-weight",
+   "clicks": 0,
+   "impressions": 49,
+   "ctr": 0,
+   "position": 8.714285714285715
+  },
+  {
+   "page": "https://my-naishin.com/blog/toritsu-nyushi-2026-kanzen-guide#section-calculation",
+   "clicks": 0,
+   "impressions": 7,
+   "ctr": 0,
+   "position": 5.571428571428571
+  },
+  {
+   "page": "https://my-naishin.com/blog/toritsu-nyushi-2026-kanzen-guide#section-changes",
+   "clicks": 0,
+   "impressions": 9,
+   "ctr": 0,
+   "position": 6.444444444444445
+  },
+  {
+   "page": "https://my-naishin.com/blog/toritsu-nyushi-2026-kanzen-guide#section-esatj",
+   "clicks": 0,
+   "impressions": 7,
+   "ctr": 0,
+   "position": 5.571428571428571
+  },
+  {
+   "page": "https://my-naishin.com/blog/toritsu-nyushi-2026-kanzen-guide#section-naishin",
+   "clicks": 0,
+   "impressions": 7,
+   "ctr": 0,
+   "position": 5.571428571428571
+  },
+  {
+   "page": "https://my-naishin.com/blog/toritsu-nyushi-2026-kanzen-guide#section-schedule",
+   "clicks": 0,
+   "impressions": 9,
+   "ctr": 0,
+   "position": 6.444444444444445
+  },
+  {
+   "page": "https://my-naishin.com/blog/toritsu-nyushi-2026-kanzen-guide#section-strategy",
+   "clicks": 0,
+   "impressions": 7,
+   "ctr": 0,
+   "position": 5.571428571428571
+  },
+  {
+   "page": "https://my-naishin.com/blog/toritsu-nyushi-2026-kanzen-guide#section-suisen",
+   "clicks": 0,
+   "impressions": 7,
+   "ctr": 0,
+   "position": 5.571428571428571
+  },
+  {
+   "page": "https://my-naishin.com/blog/understanding-jitsugikyoka-grading-2026#section-common-rules",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 4
+  },
+  {
+   "page": "https://my-naishin.com/blog/understanding-jitsugikyoka-grading-2026#section-evaluation",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 4
+  },
+  {
+   "page": "https://my-naishin.com/blog/understanding-jitsugikyoka-grading-2026#section-reflection-sheet",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 4
+  },
+  {
+   "page": "https://my-naishin.com/blog/understanding-jitsugikyoka-grading-2026#section-subject-art",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 4
+  },
+  {
+   "page": "https://my-naishin.com/blog/understanding-jitsugikyoka-grading-2026#section-subject-music",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 4
+  },
+  {
+   "page": "https://my-naishin.com/blog/understanding-jitsugikyoka-grading-2026#section-subject-pe",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 4
+  },
+  {
+   "page": "https://my-naishin.com/blog/understanding-jitsugikyoka-grading-2026#section-subject-techhome",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 4
+  },
+  {
+   "page": "https://my-naishin.com/chousasho",
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 30.666666666666668
+  },
+  {
+   "page": "https://my-naishin.com/chousasho/reibun",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 61
+  },
+  {
+   "page": "https://my-naishin.com/ehime/total-score",
+   "clicks": 0,
+   "impressions": 5,
+   "ctr": 0,
+   "position": 10.6
+  },
+  {
+   "page": "https://my-naishin.com/fukui/total-score",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 7
+  },
+  {
+   "page": "https://my-naishin.com/guide",
+   "clicks": 0,
+   "impressions": 13,
+   "ctr": 0,
+   "position": 58.23076923076923
+  },
+  {
+   "page": "https://my-naishin.com/gunma/naishin",
+   "clicks": 0,
+   "impressions": 30,
+   "ctr": 0,
+   "position": 14.166666666666666
+  },
+  {
+   "page": "https://my-naishin.com/gunma/total-score",
+   "clicks": 0,
+   "impressions": 5,
+   "ctr": 0,
+   "position": 9
+  },
+  {
+   "page": "https://my-naishin.com/heigan-yuugu",
+   "clicks": 0,
+   "impressions": 21,
+   "ctr": 0,
+   "position": 20.142857142857142
+  },
+  {
+   "page": "https://my-naishin.com/hensachi/agekata",
+   "clicks": 0,
+   "impressions": 11,
+   "ctr": 0,
+   "position": 28
+  },
+  {
+   "page": "https://my-naishin.com/hensachi/kyoka-betsu/kokugo",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 11
+  },
+  {
+   "page": "https://my-naishin.com/hensachi/kyoka-betsu/rika",
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 9.333333333333334
+  },
+  {
+   "page": "https://my-naishin.com/hensachi/kyoka-betsu/shakai",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 8
+  },
+  {
+   "page": "https://my-naishin.com/hensachi/kyoka-betsu/sugaku",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 94
+  },
+  {
+   "page": "https://my-naishin.com/hensachi/moshi",
+   "clicks": 0,
+   "impressions": 13,
+   "ctr": 0,
+   "position": 10.846153846153847
+  },
+  {
+   "page": "https://my-naishin.com/hensachi/moshi/ichiran",
+   "clicks": 0,
+   "impressions": 26,
+   "ctr": 0,
+   "position": 8.76923076923077
+  },
+  {
+   "page": "https://my-naishin.com/hiroshima/total-score",
+   "clicks": 0,
+   "impressions": 19,
+   "ctr": 0,
+   "position": 11.157894736842104
+  },
+  {
+   "page": "https://my-naishin.com/hiyou",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 9
+  },
+  {
+   "page": "https://my-naishin.com/hyotei-heikin/gyakusan",
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 8.666666666666668
+  },
+  {
+   "page": "https://my-naishin.com/hyotei-heikin/suisen-kijun",
+   "clicks": 0,
+   "impressions": 61,
+   "ctr": 0,
+   "position": 9.262295081967213
+  },
+  {
+   "page": "https://my-naishin.com/ibaraki/total-score",
+   "clicks": 0,
+   "impressions": 4,
+   "ctr": 0,
+   "position": 7.75
+  },
+  {
+   "page": "https://my-naishin.com/ishikawa/total-score",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 12.5
+  },
+  {
+   "page": "https://my-naishin.com/iwate",
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 8.333333333333332
+  },
+  {
+   "page": "https://my-naishin.com/iwate/total-score",
+   "clicks": 0,
+   "impressions": 11,
+   "ctr": 0,
+   "position": 9.363636363636363
+  },
+  {
+   "page": "https://my-naishin.com/juken-ryou",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 7
+  },
+  {
+   "page": "https://my-naishin.com/juken-schedule",
+   "clicks": 0,
+   "impressions": 6,
+   "ctr": 0,
+   "position": 16
+  },
+  {
+   "page": "https://my-naishin.com/juku-hiyou",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 22.5
+  },
+  {
+   "page": "https://my-naishin.com/kagoshima/total-score",
+   "clicks": 0,
+   "impressions": 17,
+   "ctr": 0,
+   "position": 9.058823529411764
+  },
+  {
+   "page": "https://my-naishin.com/kanagawa",
+   "clicks": 0,
+   "impressions": 9,
+   "ctr": 0,
+   "position": 45.77777777777778
+  },
+  {
+   "page": "https://my-naishin.com/kochi/total-score",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 9
+  },
+  {
+   "page": "https://my-naishin.com/koukou-hiyou",
+   "clicks": 0,
+   "impressions": 34,
+   "ctr": 0,
+   "position": 10
+  },
+  {
+   "page": "https://my-naishin.com/kumamoto/total-score",
+   "clicks": 0,
+   "impressions": 11,
+   "ctr": 0,
+   "position": 8.727272727272727
+  },
+  {
+   "page": "https://my-naishin.com/kyoto/total-score",
+   "clicks": 0,
+   "impressions": 6,
+   "ctr": 0,
+   "position": 23.333333333333332
+  },
+  {
+   "page": "https://my-naishin.com/mie/total-score",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 11
+  },
+  {
+   "page": "https://my-naishin.com/miyagi/total-score",
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 9.333333333333334
+  },
+  {
+   "page": "https://my-naishin.com/miyazaki/total-score",
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 9
+  },
+  {
+   "page": "https://my-naishin.com/nagano/total-score",
+   "clicks": 0,
+   "impressions": 4,
+   "ctr": 0,
+   "position": 9.25
+  },
+  {
+   "page": "https://my-naishin.com/nagasaki/total-score",
+   "clicks": 0,
+   "impressions": 7,
+   "ctr": 0,
+   "position": 9.142857142857142
+  },
+  {
+   "page": "https://my-naishin.com/naishin-age-kata/chu1",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 10
+  },
+  {
+   "page": "https://my-naishin.com/naishin-age-kata/chu3",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 32
+  },
+  {
+   "page": "https://my-naishin.com/niigata/total-score",
+   "clicks": 0,
+   "impressions": 12,
+   "ctr": 0,
+   "position": 8.75
+  },
+  {
+   "page": "https://my-naishin.com/okayama/naishin",
+   "clicks": 0,
+   "impressions": 11,
+   "ctr": 0,
+   "position": 9.363636363636363
+  },
+  {
+   "page": "https://my-naishin.com/okayama/total-score",
+   "clicks": 0,
+   "impressions": 5,
+   "ctr": 0,
+   "position": 8.4
+  },
+  {
+   "page": "https://my-naishin.com/okinawa/total-score",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 10
+  },
+  {
+   "page": "https://my-naishin.com/prefectures",
+   "clicks": 0,
+   "impressions": 5,
+   "ctr": 0,
+   "position": 38
+  },
+  {
+   "page": "https://my-naishin.com/saga/naishin",
+   "clicks": 0,
+   "impressions": 19,
+   "ctr": 0,
+   "position": 18.789473684210527
+  },
+  {
+   "page": "https://my-naishin.com/saitama",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 38
+  },
+  {
+   "page": "https://my-naishin.com/shimane/total-score",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 9
+  },
+  {
+   "page": "https://my-naishin.com/shizuoka",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 17
+  },
+  {
+   "page": "https://my-naishin.com/shougakukin",
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 6.333333333333333
+  },
+  {
+   "page": "https://my-naishin.com/shutsugan-junbi/shibou-riyuusho",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 37
+  },
+  {
+   "page": "https://my-naishin.com/tarinai-taisaku",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 9
+  },
+  {
+   "page": "https://my-naishin.com/tochigi/naishin",
+   "clicks": 0,
+   "impressions": 13,
+   "ctr": 0,
+   "position": 19.846153846153847
+  },
+  {
+   "page": "https://my-naishin.com/total-score",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 10
+  },
+  {
+   "page": "https://my-naishin.com/toyama/total-score",
+   "clicks": 0,
+   "impressions": 4,
+   "ctr": 0,
+   "position": 12.25
+  },
+  {
+   "page": "https://my-naishin.com/wakayama/total-score",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 11
+  },
+  {
+   "page": "https://my-naishin.com/yamaguchi/naishin",
+   "clicks": 0,
+   "impressions": 26,
+   "ctr": 0,
+   "position": 9.653846153846153
+  },
+  {
+   "page": "https://my-naishin.com/yamaguchi/total-score",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 5
+  },
+  {
+   "page": "https://my-naishin.com/yamanashi/total-score",
+   "clicks": 0,
+   "impressions": 38,
+   "ctr": 0,
+   "position": 10.210526315789474
+  }
+ ]
+}

@@ -1,0 +1,877 @@
+{
+  "meta": {
+    "generatedAt": "2026-08-10",
+    "generatedBy": "PHASE 0 ビルダー（STATE担当）／リポジトリ c:\\Users\\E24054\\my-naisin",
+    "purpose": "後続サイクルが読む唯一の数値台帳。ここに無い数値はどこにも書かれていないのと同じ。",
+    "trustOrder": {
+      "rank1_conversion": "転換の真値は D1（本番 my-naishin-leads）。clicks / leads / stats_submissions / school_page_clicks / parent_funnel_events。",
+      "rank2_scale": "規模（クリック・表示・順位）は GSC。",
+      "rank3_ratio": "GA4 は比率・傾向のみ。★GA4のゼロをアラート条件に使わない。",
+      "_evidence_ga4_undercount": "同28日で affiliate_click: GA4 2件 vs D1 349件 ＝ 174倍の乖離（BRIEF.md:161 / node scripts/d1q.mjs \"SELECT COUNT(*) FROM clicks WHERE created_at>='2026-07-13'\" → 349）。「GA4は実数の1/3以下」という従来の丸めは affiliate_click には全く当てはまらない（1/174）。イベントごとに乖離率が違うため、GA4の絶対値を円換算に使ってはならない。",
+      "_source": "MEMORY.md ga4-undercounts-conversions / ops/raw/BRIEF.md:155-169"
+    },
+    "corrections_to_BRIEF": [
+      {
+        "item": "学校ページ実体枚数",
+        "briefValue": "約958枚（ops/raw/BRIEF.md:278）",
+        "measuredValue": 3089,
+        "method": "①ローカル: INDEXED_SCHOOL_PAGE_PREFECTURE_CODES 全47県に getPrefectureSchoolPageData() を回して schools.length を合算 → 3089。②本番: curl https://my-naishin.com/sitemap.xml の <loc> のうち '/school/' を含む数 → 3089。2経路一致。",
+        "note": "BRIEF §E の958は wave5〜7（2026-08-09に47県完走）以前の値と思われる。以後 3,089 を使うこと。"
+      },
+      {
+        "item": "「/blog 134ページがクリック0・表示89,972」の読み方",
+        "briefValue": "ops/raw/BRIEF.md:55",
+        "measuredValue": "実URLのゼロクリックblogは10ページ・表示641のみ。残り124ページ・表示89,331は全てアンカー断片URL（#付き）。",
+        "method": "python: ops/raw/gsc-pages-28d.json の rows を '#' の有無で二分",
+        "note": "BRIEF §G(:315-341)が「断片は構造的にクリックが付かない／直すな」と結論しているので矛盾ではないが、この2行を続けて読むと『134本の未回収記事がある』と誤読する。実在の未回収blog在庫は10ページ・641表示しかない。"
+      },
+      {
+        "item": "D1 clicks 総数",
+        "briefValue": 629,
+        "measuredValue": 630,
+        "method": "node scripts/d1q.mjs（2026-08-10 実行）。BRIEF取得(18:12)後に1件増加。crosstab の n 合計は629で BRIEF と完全一致。",
+        "note": "差分1件は時間経過。矛盾ではない。"
+      }
+    ],
+    "crosschecks": [
+      {
+        "id": "cc1",
+        "claim": "GSC 2026-07 clicks = 10,667 / impressions = 246,092 / position = 6.16",
+        "pathA": "ops/raw/BRIEF.md:35（オーケストレータ取得）",
+        "pathB": "自分で mcp__gsc__gsc_totals(sc-domain:my-naishin.com, 2026-07-01..07-31) を再実行 → clicks 10667 / impressions 246092 / ctr 0.043346 / position 6.16255",
+        "result": "一致"
+      },
+      {
+        "id": "cc2",
+        "claim": "GSC 月次 5月=1,119 / 6月=5,373（起動プロンプト由来の値の検証）",
+        "pathA": "起動プロンプト＋ops/raw/BRIEF.md:231-232",
+        "pathB": "自分で mcp__gsc__gsc_totals を月別に再実行 → 5月 clicks 1119 / impr 39769 / pos 7.1108、6月 clicks 5373 / impr 152132 / pos 6.1607",
+        "result": "完全一致。起動プロンプトの誤りは7月(10,178)のみで、5月/6月は正しい。"
+      },
+      {
+        "id": "cc3",
+        "claim": "GSC page次元 611行・クリック0が464ページ・断片125行で表示101,257",
+        "pathA": "ops/raw/BRIEF.md:44-56, 320-322",
+        "pathB": "python で ops/raw/gsc-pages-28d.json を自前集計 → rowCount 611 / zero-click 464 / fragment 125行 clicks 4 impr 101,257 / 実URL 486行 clicks 8,645 impr 215,748 CTR 4.01%",
+        "result": "全項目一致"
+      },
+      {
+        "id": "cc4",
+        "claim": "学校ページ実体 = 3,089枚",
+        "pathA": "ローカル lib 実行（npx tsx で getPrefectureSchoolPageData を47県分合算）→ 3089",
+        "pathB": "本番 curl https://my-naishin.com/sitemap.xml → <loc> 総数 3,481 のうち '/school/' を含むもの 3,089",
+        "result": "一致（BRIEF §E の『約958枚』とは不一致 → meta.corrections_to_BRIEF 参照）"
+      },
+      {
+        "id": "cc5",
+        "claim": "GSCに露出している学校ページ233枚は全て本番sitemapに載っている",
+        "pathA": "ops/raw/gsc-pages-28d.json 中の '/school/' 行 = 233",
+        "pathB": "本番 sitemap.xml の school URL 集合との積集合 = 233 / 差集合 = 0",
+        "result": "一致（露出233は sitemap 掲載3,089の 7.54%）"
+      },
+      {
+        "id": "cc6",
+        "claim": "GA4 result_view ≈ 570 / share_to_parent = 2 / affiliate_click = 2",
+        "pathA": "ops/raw/BRIEF.md:158-162",
+        "pathB": "自分で mcp__ga4__ga4_run_report(property 540358022, dimensions=[eventName], days=28) を再実行 → result_view 571(users 332) / share_to_parent 2(users 2) / affiliate_click 2(users 1) / lead_submit 1 / line_friend_click 27 / rage_click 61",
+        "result": "一致（result_view 570→571・line_friend_click 26→27・rage_click 60→61 の+1は取得時刻ずれによる窓の1日ぶんの違い）"
+      },
+      {
+        "id": "cc7",
+        "claim": "D1 clicks の affiliate_id 別内訳の合計 = clicks テーブル総数",
+        "pathA": "ops/raw/d1-clicks-crosstab.json の n 合計 = 629",
+        "pathB": "node scripts/d1q.mjs \"SELECT COUNT(*) FROM clicks\" → 630（BRIEF取得後に+1）",
+        "result": "一致（差分1は時間経過）。placement 別の合計も 629 で一致。"
+      },
+      {
+        "id": "cc8",
+        "claim": "G1 の名簿N = 61",
+        "pathA": "src/lib/roadmap-gates.ts の rosterTotalOf({lineFriends:55, rosterN:6}) を npx tsx で実行 → {total:61, breakdown:\"（LINE55＋D1 leads6）\"}",
+        "pathB": "data/line-friends.json:37 の 2026-08-07 friends=55 ＋ D1 leads COUNT(*)=6 を手計算 → 61",
+        "result": "一致"
+      }
+    ]
+  },
+
+  "clock": {
+    "today": "2026-08-10",
+    "buildPhaseEnd": {
+      "date": "2026-08-31",
+      "daysLeft": 21,
+      "_source": "ops/raw/BRIEF.md:194（👤が2026-07-28に決定）／日数はpythonで (2026-08-31 - 2026-08-10).days = 21"
+    },
+    "utahAbsence": {
+      "start": "2026-09-08",
+      "end": "2026-09-22",
+      "daysUntilStart": 29,
+      "meaning": "👤の対外アクション不可（送信・商談・電話）。リンク/B2Bの実質締切は2026-09-07。",
+      "_source": "ops/raw/BRIEF.md:195 ／ MEMORY.md summer-2026-calendar-utah-blackout"
+    },
+    "peakFreeze": {
+      "start": "2026-11-15",
+      "end": "2027-02-28",
+      "daysUntilStart": 97,
+      "meaning": "構造・URL・大規模リライト禁止",
+      "_source": "ops/raw/BRIEF.md:196"
+    },
+    "peakWindow": {
+      "months": "2026-12 〜 2027-02",
+      "summit": "2027-02",
+      "daysUntilDec1": 113,
+      "seasonalMultipliers": {
+        "s-value-keikaku": 11.7,
+        "toujitsuten": 7.3,
+        "naishinten-keisan": 2.6,
+        "hensachi-keisan": 1.05,
+        "_source": "ops/raw/BRIEF.md:197-198（出典はGoogle Trends。★自社実測ではない）",
+        "_warning": "GSCデータの起点が2026-02下旬のため、このドメインには『去年の冬』が存在しない。冬の季節係数を自社データから出すことは不可能（ops/raw/BRIEF.md:237-239）。EV試算では必ず『Google Trends由来・自社未実測』と明記すること。"
+      }
+    },
+    "harvestDays": {
+      "definition": "終業式デー（12月下旬・3月下旬）",
+      "measuredMultiplier": 2.6,
+      "measuredMultiplierRange": "2.6〜2.9倍（平常比）",
+      "evidence": "2026-07-16 clicks 1,075 / 2026-07-17 clicks 1,081 vs 2026-07-25 164・2026-08-07 148",
+      "_source": "ops/raw/BRIEF.md:199, 244-252"
+    },
+    "schoolPagePublishPolicy": {
+      "rule": "1波5県・2〜3日おき（👤合意済み）",
+      "actualStatus": "2026-08-09 の wave7(hokkaido) で 47/47県 完走済み。以後この制約は消化済み。",
+      "_source": "ops/raw/BRIEF.md:200 ／ src/lib/school-page-lookup.ts:40-48"
+    }
+  },
+
+  "gsc": {
+    "property": "sc-domain:my-naishin.com",
+    "monthly": {
+      "2026-02": { "days": 8, "clicks": 36, "impressions": 523, "position": 11.51, "_source": "ops/raw/BRIEF.md:229（GSCデータ起点・8日分のみ）" },
+      "2026-03": { "days": 31, "clicks": 134, "impressions": 6652, "position": 6.90, "_source": "ops/raw/BRIEF.md:230" },
+      "2026-04": { "days": 30, "clicks": 238, "impressions": 9276, "position": 6.72, "_source": "ops/raw/BRIEF.md:231" },
+      "2026-05": { "days": 31, "clicks": 1119, "impressions": 39769, "ctr": 0.028137, "position": 7.1108, "_source": "自分で mcp__gsc__gsc_totals 2026-05-01..05-31 を再取得（2026-08-10）。起動プロンプト値と完全一致。" },
+      "2026-06": { "days": 30, "clicks": 5373, "impressions": 152132, "ctr": 0.035318, "position": 6.1607, "_source": "自分で mcp__gsc__gsc_totals 2026-06-01..06-30 を再取得（2026-08-10）。起動プロンプト値と完全一致。" },
+      "2026-07": { "days": 31, "clicks": 10667, "impressions": 246092, "ctr": 0.043346, "position": 6.1626, "_source": "自分で mcp__gsc__gsc_totals 2026-07-01..07-31 を再取得（2026-08-10）。★起動プロンプトの『10,178』は誤り・10,667が正。" },
+      "2026-08-01to07": { "days": 7, "clicks": 1088, "impressions": 35185, "position": 6.21, "_source": "ops/raw/BRIEF.md:234" },
+      "_growthNote": "5月→6月 +380% / 6月→7月 +99%。順位は6.16で6月・7月が同値＝伸びは順位でなく在庫（表示）の増加による。"
+    },
+    "window28d": {
+      "range": "2026-07-10 〜 2026-08-07",
+      "clicks": 8565,
+      "impressions": 207117,
+      "ctr": 0.041353,
+      "position": 6.2774,
+      "_source": "自分で mcp__gsc__gsc_totals 2026-07-10..08-07 を再取得（2026-08-10）。BRIEF.md:36 と完全一致。"
+    },
+    "pageDimension28d": {
+      "rows": 611,
+      "sumClicks": 8649,
+      "sumImpressions": 317005,
+      "zeroClickPages": 464,
+      "zeroClickShare": 0.7594,
+      "_source": "python集計 ops/raw/gsc-pages-28d.json（自分で再集計・BRIEF.md:39,54 と一致）",
+      "_warning": "次元集計(8,649/317,005)とAPI総計(8,565/207,117)はGSC仕様でズレる。★総計値のほうを正とする（BRIEF.md:39）。"
+    },
+    "anchorFragmentInventory": {
+      "fragmentRows": 125,
+      "fragmentClicks": 4,
+      "fragmentImpressions": 101257,
+      "fragmentShareOfImpressions": 0.3194,
+      "realUrlRows": 486,
+      "realUrlClicks": 8645,
+      "realUrlImpressions": 215748,
+      "realUrlCtr": 0.0401,
+      "_source": "python: ops/raw/gsc-pages-28d.json を '#' の有無で二分（自分で再集計・BRIEF.md:320-322 と一致）",
+      "_rule_for_downstream": "★EVの分母に 246K/317K を使ってはならない。到達可能な表示は実URLの 215,748（28日）。間違えると全施策のEVが約1.5倍に膨らむ（BRIEF.md:334-335）。",
+      "_rule_2": "断片を『直す』ことを施策にしてはいけない。得られる円はゼロ（もともとクリックが付いていない）。計測衛生の問題であってSEOの問題ではない（BRIEF.md:338-340）。"
+    },
+    "zeroClickDecomposition28d": {
+      "totalZeroClickPages": 464,
+      "anchorFragments": { "pages": 124, "impressions": 89331 },
+      "schoolPages": { "pages": 226, "impressions": 571 },
+      "otherRealPages": { "pages": 114, "impressions": 2282 },
+      "topOtherZeroClick": [
+        { "page": "/blog/futoukou-naishinten-high-school", "impressions": 554, "position": 21.0 },
+        { "page": "/naishin-oru/4", "impressions": 431, "position": 4.1 },
+        { "page": "/juku-hiyou", "impressions": 68, "position": 31.5 },
+        { "page": "/shutsugan-junbi/kounai-senkou", "impressions": 55, "position": 12.4 },
+        { "page": "/shizuoka/naishin", "impressions": 54, "position": 23.3 },
+        { "page": "/naishin-oru/3", "impressions": 53, "position": 8.7 },
+        { "page": "/naishin-oru/5", "impressions": 46, "position": 8.0 },
+        { "page": "/prefectures", "impressions": 46, "position": 47.6 },
+        { "page": "/saga/total-score", "impressions": 43, "position": 14.0 },
+        { "page": "/report/2026/en", "impressions": 40, "position": 4.8 }
+      ],
+      "_source": "python集計 ops/raw/gsc-pages-28d.json（自分で新規に分解・BRIEFには無い）",
+      "_meaning": "★『464ページ＝76%がクリック0』の表示質量の97%（89,331/91,613）はアンカー断片。実在の『表示はあるがクリック0の実URL在庫』は非学校ページ114枚・28日で2,282表示しかない。ここを刈っても桁は動かない。"
+    },
+    "segments28d": {
+      "/blog": { "pages": 165, "clicks": 1501, "impressions": 195566, "ctr": 0.00768, "position": 6.46, "_source": "python集計 ops/raw/gsc-pages-28d.json（自分で再集計）", "_note": "165行のうち125行がアンカー断片。実URLのblogは39行のみ（clicks 1,497 / impr 94,292）。" },
+      "/hensachi": { "pages": 14, "clicks": 1640, "impressions": 35723, "ctr": 0.04591, "position": 7.00, "_source": "同上" },
+      "home": { "pages": 1, "clicks": 1879, "impressions": 29752, "ctr": 0.06316, "position": 5.81, "_source": "同上" },
+      "/tokyo": { "pages": 3, "clicks": 963, "impressions": 6572, "ctr": 0.14653, "position": 7.23, "_source": "同上" },
+      "/hyotei-heikin": { "pages": 3, "clicks": 926, "impressions": 5784, "ctr": 0.16010, "position": 6.37, "_source": "同上" },
+      "/kanagawa": { "pages": 4, "clicks": 685, "impressions": 6763, "ctr": 0.10129, "position": 5.91, "_source": "同上" },
+      "/hyogo": { "pages": 3, "clicks": 265, "impressions": 7707, "ctr": 0.03438, "position": 5.71, "_source": "同上" },
+      "/osaka": { "pages": 3, "clicks": 186, "impressions": 5153, "ctr": 0.03610, "position": 5.34, "_source": "同上" },
+      "/pref/*/school/*": { "pages": 233, "clicks": 7, "impressions": 605, "ctr": 0.01157, "position": 7.91, "_source": "同上" },
+      "/pref/{code}": { "pages": 0, "clicks": 0, "impressions": 0, "_source": "同上", "_note": "★47本すべてGSCに1インプレッションも無い。本番sitemapには47本とも掲載されている（curl sitemap.xml で確認）。" }
+    },
+    "devices28d": {
+      "range": "2026-07-10 〜 2026-08-07",
+      "MOBILE": { "clicks": 6447, "impressions": 151547, "ctr": 0.042541, "position": 5.98 },
+      "DESKTOP": { "clicks": 1918, "impressions": 49942, "ctr": 0.038405, "position": 7.26 },
+      "TABLET": { "clicks": 200, "impressions": 5628, "ctr": 0.035537, "position": 5.55 },
+      "mobileClickShare": 0.7527,
+      "mobileImpressionShare": 0.7317,
+      "_source": "自分で mcp__gsc__gsc_query(dimensions=[device], 2026-07-10..08-07) を実行（2026-08-10）",
+      "_note": "起動プロンプトの『モバイル74%』は概ね正しい（クリック基準75.3% / 表示基準73.2%）。"
+    },
+    "ctrCurve": {
+      "canonical": { "1": 0.464, "2": 0.326, "3": 0.111, "4": 0.078, "5": 0.067, "6": 0.039, "7": 0.030, "8": 0.027, "9": 0.016, "10": 0.010, "11": 0.012 },
+      "deprecated": { "1": 0.559, "2": 0.336, "3": 0.133, "4": 0.082, "5": 0.054, "10": 0.018 },
+      "_source": "ops/raw/BRIEF.md:342-367。ops/raw/gsc-queries-full-28d.json（query次元13,958行）を順位で束ね、表示20回以上のクエリのみで再計算した実測。",
+      "_rule": "★C5のEV計算では canonical を使う。1位は n=11クエリ・表示470 と標本が薄いので 46.4% を使い 55.9% は使わない（差は約17%の過大評価）。",
+      "_sampleSizes": { "1": 11, "2": 32, "3": 72, "4": 62, "5": 76, "6": 81, "7": 71, "8": 73, "9": 71, "10": 50, "11": 16 }
+    },
+    "rankBandDistribution28d": {
+      "1-3": { "queries": 8570, "clicks": 2839, "impressions": 30094, "ctr": 0.0943 },
+      "4-5": { "queries": 2621, "clicks": 1132, "impressions": 19228, "ctr": 0.0589 },
+      "6-10": { "queries": 2084, "clicks": 863, "impressions": 34735, "ctr": 0.0248 },
+      "11-20": { "queries": 552, "clicks": 48, "impressions": 3600, "ctr": 0.0133 },
+      "21-30": { "queries": 143, "clicks": 10, "impressions": 974, "ctr": 0.0103 },
+      "31+": { "queries": 191, "clicks": 1, "impressions": 804, "ctr": 0.0012 },
+      "strikingDistanceUpperBound": { "additionalClicksPer28d": 550, "shareOfSiteClicks": 0.064, "candidatesWithImpressionsGte20": 28 },
+      "_source": "ops/raw/BRIEF.md:369-390",
+      "_conclusion": "★『11〜30位を3位へ押し上げる』定石はこの案件では桁を動かさない（+6.4%が粗い上限）。サイトは既に平均6.2位・クエリの61%が1〜3位。定石は食い尽くされている。",
+      "_limit": "query次元はGSCの匿名化により総計のクリック57%・表示43%しか見えていない（BRIEF.md:392-393）。"
+    },
+    "bairitsuLongtail28d": {
+      "schoolNameXBairitsu": { "queries": 300, "clicks": 3, "impressions": 410, "weightedPosition": 6.00, "top3": 129, "top3Share": 0.43, "top10": 283 },
+      "bairitsuHeadTerms": { "queries": 19, "clicks": 6, "impressions": 76, "weightedPosition": 25.32, "top3": 1 },
+      "_source": "ops/raw/BRIEF.md:207-222 ／ 生データ ops/raw/gsc-bairitsu-28d.json（319行）",
+      "_meaning": "★学校名×倍率の長尾は既に順位を取っている（43%が3位以内）。欠けているのは『季節』と『その順位を円に変える導線』だけ。取得期間7/10〜8/7は倍率の最深オフシーズンで1クエリあたり平均1.4表示しかない。"
+    },
+    "ctrDeclineDecomposition": {
+      "windowA": { "range": "2026-07-01〜07-09", "clicks": 3220, "impressions": 98762, "ctr": 0.0326 },
+      "windowB": { "range": "2026-07-30〜08-07", "clicks": 1425, "impressions": 64837, "ctr": 0.0220 },
+      "counterfactualClicksB": 1736,
+      "lossFromCtrDegradation": 311,
+      "lossFromImpressionDecline": 1484,
+      "shareFromImpressionDecline": 0.83,
+      "shareFromCtrDegradation": 0.17,
+      "primaryCause": "/hyotei-heikin の CTR 20.62%→3.85%（-409クリック）。『評定平均』が7月ピークの高校生語で高意図クエリが枯れたためのクエリ構成変化であって順位低下ではない（平均順位は6.16→6.21で安定）。",
+      "healthySignal": "/hensachi は CTR 4.01%→5.61% で改善。サイトの中核は健全。",
+      "_source": "ops/raw/BRIEF.md:283-313",
+      "_rule": "★『CTRが落ちている』を緊急事態として扱ってはいけない。"
+    }
+  },
+
+  "ga4": {
+    "property": "540358022",
+    "window": "直近28日（BRIEF取得時点）",
+    "events": {
+      "page_view": { "count": 2303, "users": 717 },
+      "calc_complete": { "count": 714, "users": 289 },
+      "result_view": { "count": 570, "users": 331 },
+      "cta_view": { "count": 1241 },
+      "unlock_teaser_view": { "count": 672 },
+      "stats_optin_view": { "count": 599 },
+      "share_to_parent": { "count": 2, "users": 2 },
+      "parent_landing_view": { "count": 5, "users": 3 },
+      "affiliate_click": { "count": 2, "users": 1 },
+      "lead_submit": { "count": 1 },
+      "line_friend_click": { "count": 26 },
+      "rage_click": { "count": 60 },
+      "_source": "ops/raw/BRIEF.md:157-164（そのまま引用）"
+    },
+    "myReVerification": {
+      "runAt": "2026-08-10",
+      "call": "mcp__ga4__ga4_run_report(property=540358022, dimensions=[eventName], metrics=[eventCount,totalUsers], days=28)",
+      "deltas": { "result_view": 571, "line_friend_click": 27, "rage_click": 61, "share_to_parent": 2, "affiliate_click": 2, "lead_submit": 1, "parent_landing_view": 5, "calc_complete": 715, "cta_view": 1246, "stats_optin_view": 600 },
+      "verdict": "BRIEFと一致（+1差は取得時刻ずれによる窓の違い）。BRIEF値を正準として使う。"
+    },
+    "otherNotableEvents": {
+      "experiment_impression": 8303,
+      "reverse_calc_use": 380,
+      "stats_submit_ok": { "count": 97, "users": 6 },
+      "percentile_view": 58,
+      "ai_referral": 31,
+      "exit_intent_view": 12,
+      "unlock_granted": 2,
+      "share_qr_reveal": 3,
+      "share_image": 2,
+      "dashboard_view": 1,
+      "_source": "自分で mcp__ga4__ga4_run_report を実行（2026-08-10）。BRIEFには載っていない追加観測。",
+      "_note": "stats_submit_ok は 97件だが users 6 ＝ 少数ユーザーの反復送信。D1 stats_submissions 319件との対応関係は未検証。"
+    },
+    "_undercountRule": "★GA4は実数を大幅に取りこぼす。affiliate_click では GA4 2件 : D1 349件 ＝ 1/174。イベントごとに乖離率が異なるため『1/3以下』という単一係数で補正してはならない。GA4のゼロをアラート条件に使わない（MEMORY.md ga4-undercounts-conversions：Λ-1が6日間オオカミ少年になった原因）。"
+  },
+
+  "d1": {
+    "database": "my-naishin-leads（本番）",
+    "readTool": "node scripts/d1q.mjs \"SELECT ...\"（読み取り専用・書き込みSQLは自前で拒否）",
+    "queriedAt": "2026-08-10",
+    "tables": {
+      "clicks": { "count": 630, "firstAt": "2026-06-18 05:38:23", "lastAt": "2026-08-10 10:03:36", "last28d": 349, "gscWindowCount": 376, "_source": "node scripts/d1q.mjs（自分で実行 2026-08-10）。BRIEF.md:93 の629はBRIEF取得時点。last28dは created_at>='2026-07-13'、gscWindowCountは 2026-07-10〜08-07。" },
+      "leads": { "count": 6, "firstAt": "2026-07-14 09:42:42", "lastAt": "2026-08-07 02:40:51", "_source": "同上（BRIEF.md:94 と一致）" },
+      "stats_submissions": { "count": 319, "firstAt": "2026-07-14 13:27:48", "lastAt": "2026-08-09 08:11:27", "_source": "同上（BRIEF.md:95 と一致）" },
+      "school_page_clicks": { "count": 9, "firstAt": "2026-08-07 05:02:23", "lastAt": "2026-08-10 03:22:11", "breakdown": "reverse 8 / juku-shindan 1", "_source": "同上（BRIEF.md:96 と一致・breakdownはBRIEF由来）" },
+      "parent_funnel_events": { "count": 0, "firstAt": null, "lastAt": null, "_source": "同上（BRIEF.md:97 と一致）", "_flag": "★★★ 全期間ゼロ" },
+      "email_events": { "count": 27, "_source": "node scripts/d1q.mjs（自分で実行・BRIEFには無い）" },
+      "api_keys": { "count": 0, "_source": "同上", "_meaning": "★API有料顧客ゼロ。G3のapiCustomers=0の機械的根拠。" },
+      "api_usage": { "count": 0, "_source": "同上" },
+      "juku_reviews": { "count": 0, "_source": "同上", "_meaning": "UGCシーディング（R-8）は1件も実データが無い。" },
+      "push_subscriptions": { "count": 0, "_source": "同上", "_meaning": "PWA Web Push の購読者ゼロ＝冬の再訪チャネルとして現時点で使えない。" },
+      "adoption_domains": { "count": 0, "_source": "同上", "_meaning": "埋め込みウィジェット(X-25/X-28)の外部採用ドメインゼロ。" },
+      "high_schools": { "count": 0, "_source": "同上", "_meaning": "D1側の学校マスタは空。学校データは src/data/schools/*.ts（ビルド時）が単一ソース。" }
+    },
+    "parentFunnelZeroDiagnosis": {
+      "status": "APIは健全。8日間で share_to_parent / parent_landing_view が実質1件も発火していない。",
+      "implementation": "src/lib/parent-funnel-beacon.ts → src/app/api/parent-funnel/route.ts:47 → persistParentFunnelEvent",
+      "commits": "fd7ecb5(2026-08-02) / ef44191(2026-08-03)",
+      "migrations": "0017 / 0018 はリモート適用済み（テーブルが存在する）",
+      "controlProof": "同日コミットの school_page_clicks（c3492e9・2026-08-02）は9件記録されている → デプロイもD1書き込み経路も生きている",
+      "endpointProbe": { "POST_browserUA_invalidEvent": 400, "POST_curlDefaultUA": 204, "GET": 405, "_note": "204は isBotUserAgent による正しい挙動。これをバグと誤認するな。" },
+      "_source": "ops/raw/BRIEF.md:101-110"
+    },
+    "clicksByAffiliate": {
+      "_period": "全期間（2026-06-18〜2026-08-10のBRIEF取得時点・n=629）",
+      "_source": "python集計 ops/raw/d1-clicks-crosstab.json（自分で再集計・合計629でBRIEFと一致）",
+      "sora-juku-text": 135, "fp-soudan": 131, "atama-text": 49, "zkai-banner": 46,
+      "sapuri-banner-300": 46, "atama-banner": 38, "zkai-text-middle": 35, "zkai-text-request": 33,
+      "morijuku-text": 24, "shoin-banner": 13, "campus-text": 9, "moshimo-garden-gakushi": 9,
+      "sapuri-text": 8, "moshimo-garden-chochiku": 8, "moshimo-studycoach": 7, "sora-juku-banner": 7,
+      "moshimo-e-live": 6, "campus-banner": 4, "moshimo-classjapan": 4, "sapuri-banner-468": 4,
+      "zkai-text-advanced": 3, "morijuku-banner": 3, "moshimo-tintoru": 2, "zkai-daigaku": 2,
+      "moshimo-minhoken": 1, "moshimo-rewrite": 1, "shinken-koukou": 1
+    },
+    "clicksByPlacement": {
+      "_period": "全期間・n=629（合計検算済み）",
+      "_source": "python集計 ops/raw/d1-clicks-crosstab.json（自分で再集計）",
+      "prefecture": 200, "(null)": 166, "naishin-up": 131, "parent-lp": 27, "hiyou": 14,
+      "/": 12, "result": 10, "blog": 9, "/hensachi": 8, "hensachi": 8,
+      "juku-hiyou": 7, "dashboard": 7, "suisen": 6, "mendan": 6,
+      "/kochi/naishin": 3, "/tokyo/total-score": 3, "shindan": 3,
+      "/hyotei-heikin": 2, "jitsugika": 2, "hyotei-heikin": 1, "/kanagawa/s-value": 1,
+      "hyotei-koukou": 1, "/hensachi/agekata": 1, "/blog/toritsu-nyushi-2026-kanzen-guide": 1,
+      "_dataQualityIssues": [
+        "placement が null のクリックが166件＝全体の26.4%（帰属不能）",
+        "表記ゆれ: 'hensachi' と '/hensachi'、'hyotei-heikin' と '/hyotei-heikin' が別値として記録されている",
+        "placement は URL パスではなくコンポーネント配置ラベル（naishin-up / parent-lp / result / suisen / shindan 等）が混在しており、GSCの面別データと機械的にjoinできない"
+      ]
+    },
+    "clicksByRefererQuality": {
+      "nullReferer": 553,
+      "total": 629,
+      "nullShare": 0.8792,
+      "_source": "python集計 ops/raw/d1-clicks-crosstab.json（自分で再集計・BRIEF.md:139 と一致）",
+      "_meaning": "アフィリクリックの88%は流入元が不明。面別の円換算はplacementに頼るしかない。"
+    },
+    "top28dAffiliateXPlacement": {
+      "fp-soudan × naishin-up": 52, "fp-soudan × prefecture": 50,
+      "sora-juku-text × naishin-up": 39, "sora-juku-text × prefecture": 33,
+      "atama-banner × prefecture": 21, "atama-text × parent-lp": 14,
+      "moshimo-garden-chochiku × parent-lp": 7, "moshimo-garden-gakushi × hiyou": 3,
+      "_source": "ops/raw/BRIEF.md:142-147"
+    },
+    "leadsDetail": [
+      { "surface": "prefecture", "pref": "兵庫", "date": "2026-07-14" },
+      { "surface": "prefecture", "pref": "東京", "date": "2026-07-17" },
+      { "surface": "hyotei-heikin", "date": "2026-07-17" },
+      { "surface": "prefecture", "pref": "兵庫", "date": "2026-07-21" },
+      { "surface": "hensachi", "date": "2026-07-31" },
+      { "surface": "hensachi-shiboukou", "date": "2026-08-07" }
+    ],
+    "_leadsDetailSource": "ops/raw/BRIEF.md:150-152"
+  },
+
+  "funnel": {
+    "definition": "保護者到達率 = share_to_parent ÷ result_view",
+    "ga4Based": {
+      "shareToParent": 2,
+      "resultView": 570,
+      "rate": 0.00351,
+      "ratePercent": "0.35%",
+      "_source": "ops/raw/BRIEF.md:158,161。2 ÷ 570 = 0.003509"
+    },
+    "d1Based": {
+      "shareToParent": 0,
+      "resultViewProxy": 570,
+      "rate": 0.0,
+      "ratePercent": "0.00%",
+      "_source": "node scripts/d1q.mjs \"SELECT COUNT(*) FROM parent_funnel_events\" → 0（全期間）。分母はD1に result_view 相当テーブルが無いためGA4の570を代用。",
+      "_explicit": "★D1系は 0 / 570 ＝ 0.00%。D1に parent_funnel_events は1件も無い。"
+    },
+    "priorClaim": {
+      "value": "share_to_parent 8件 / 0.99%",
+      "status": "無効。現在は2件/0.35%に低下。",
+      "_source": "ops/raw/BRIEF.md:166"
+    },
+    "downstream": {
+      "parent_landing_view_ga4": 5,
+      "parent_landing_view_d1": 0,
+      "clicks_from_parent-lp_placement_allTime": 27,
+      "_note": "★矛盾に見えるが矛盾ではない: D1 clicks の placement='parent-lp' は27件あるのに parent_funnel_events は0件。前者は2026-06-18からの全期間・後者はビーコン実装(2026-08-02)以降の8日間。同期間で比較していない。同期間での再集計は未実施（unknowns参照）。"
+    },
+    "conclusion": "保護者到達がほぼ発生していない、という結論は GA4(0.35%) と D1(0件) の2系統で一致している（ops/raw/BRIEF.md:168-169）。",
+    "calcFunnel": {
+      "page_view": 2303, "calc_complete": 714, "result_view": 570,
+      "calc_to_result": 0.798, "pv_to_calc": 0.310,
+      "result_to_share": 0.0035, "result_to_lead_submit": 0.00175,
+      "_source": "GA4値は ops/raw/BRIEF.md:158-163。比率は自分で計算（714/2303=0.3101、570/714=0.7983、2/570=0.0035、1/570=0.00175）。",
+      "_meaning": "計算まで到達したユーザーの80%が結果を見ている＝ツール自体の完走率は健全。壊れているのは結果→保護者への橋渡しの1点。"
+    }
+  },
+
+  "line": {
+    "source": "data/line-friends.json（LINE Official Account Manager > 分析 > 友だち から👤が手動転記）",
+    "lastManualUpdate": "2026-08-07",
+    "stalenessDays": 3,
+    "latest": { "date": "2026-08-07", "friends": 55, "active": 55, "blocked": 0, "_source": "data/line-friends.json:37" },
+    "first": { "date": "2026-07-13", "friends": 10, "_source": "data/line-friends.json:12" },
+    "entries": 26,
+    "velocity": {
+      "last7d": { "delta": 8, "from": "2026-07-31 (47)", "to": "2026-08-07 (55)", "perWeek": 8, "_source": "data/line-friends.json:30,37 の差分（自分で計算）" },
+      "last14d": { "delta": 17, "perWeek": 8.5, "_source": "data/line-friends.json:23(38)→37(55) の差分（自分で計算）" },
+      "since0713": { "delta": 45, "days": 25, "perDay": 1.8, "perWeek": 12.6, "_source": "data/line-friends.json:12(10)→37(55)（自分で計算）" },
+      "peakWeek": { "delta": 19, "range": "2026-07-13(10) → 2026-07-20(29)", "_note": "7/16-17の終業式デーを含む週。収穫日は名簿velocityにも効いている。" },
+      "_trend": "★週次velocityは 19 → 13 → 9 → 8 と単調減少。G1(2026-08-31)の努力軌道N≥100に必要な残差は45人／残り24日＝13.1人/週。直近実測8人/週の1.6倍が必要。"
+    }
+  },
+
+  "affiliates": {
+    "source": "src/lib/affiliates.ts（539行・AFFILIATESレコードを正規表現でパースして自分で集計）",
+    "totalEntries": 47,
+    "live": 34,
+    "pending": 13,
+    "pendingIds": [
+      "afb-juku-trial", "accesstrade-juku-trial", "rentracks-juku-trial", "afb-katei-kyoshi",
+      "gakken-katei-kyoshi", "ganba-katei-kyoshi", "manalink-katei-kyoshi",
+      "gakushi-hoken", "hoken-compass", "money-doctor",
+      "winter-koushuu-trial", "summer-koushuu-trial", "last-minute-trial"
+    ],
+    "_pendingNote": "pending は status:'pending' の先回し枠。AffiliateAd が描画しない＝デッドリンクは出ない設計（src/lib/affiliates.ts:63）。",
+    "maxCpaLive": { "id": "moshimo-classjapan", "cpaYen": 20000, "name": "クラスジャパン小中学園（不登校オンラインフリースクール）", "d1Clicks": 4, "_source": "src/lib/affiliate-economics.ts:98 / src/lib/affiliates.ts:382-389 / D1クリック数は crosstab 集計" },
+    "topCpaLive": [
+      { "id": "moshimo-classjapan", "cpaYen": 20000, "d1Clicks": 4 },
+      { "id": "moshimo-minhoken", "cpaYen": 17000, "d1Clicks": 1 },
+      { "id": "morijuku-text", "cpaYen": 15000, "d1Clicks": 24 },
+      { "id": "morijuku-banner", "cpaYen": 15000, "d1Clicks": 3 },
+      { "id": "campus-text", "cpaYen": 15000, "d1Clicks": 9 },
+      { "id": "campus-banner", "cpaYen": 15000, "d1Clicks": 4 },
+      { "id": "fp-soudan", "cpaYen": 13800, "d1Clicks": 131 },
+      { "id": "findit-fp-soudan", "cpaYen": 13000, "d1Clicks": 0 }
+    ],
+    "_cpaSource": "src/lib/affiliate-economics.ts:86-155（cpaYen フィールド）。★これはASPの公称CPAであって実績確定額ではない。",
+    "withAtLeastOneD1Click": 27,
+    "liveWithZeroD1Clicks": {
+      "count": 7,
+      "ids": [
+        { "id": "findit-fp-soudan", "cpaYen": 13000, "_note": "A8公開EPC 222円・提携中FP勢で最高水準。1件もクリックが無い＝どこにも配置されていない疑い。" },
+        { "id": "moshimo-manecafe", "cpaYen": 11500 },
+        { "id": "moshimo-withstudy", "cpaYen": 11500 },
+        { "id": "moshimo-manabuterasu", "cpaYen": 8000 },
+        { "id": "tenjin-chugaku", "cpaYen": 2000 },
+        { "id": "eten-net", "cpaYen": 1905 },
+        { "id": "eten-net-home", "cpaYen": 1905 }
+      ],
+      "_source": "python: src/lib/affiliates.ts の live 34件 − ops/raw/d1-clicks-crosstab.json に現れる27件 = 7件（自分で集合演算）。BRIEF.md:128-129 の指摘と一致（findit-fp-soudan / moshimo-manecafe / moshimo-withstudy / moshimo-manabuterasu のゼロを確認）＋ BRIEFに無い tenjin-chugaku / eten-net / eten-net-home の3件を追加検出。",
+      "_highestValueMiss": "findit-fp-soudan（CPA¥13,000）。live なのにクリック0＝表示機会がゼロ。配置されている面の特定は未検証。"
+    },
+    "seasonalReadiness": {
+      "winterAffiliates": "冬季アフィリ 0/2件live化（winter-koushuu-trial 未申請/承認待ち・last-minute-trial 未申請/承認待ち）",
+      "_source": "npx tsx で src/lib/roadmap-gates.ts の winterAffiliateReadinessSummary() を実行（2026-08-10）",
+      "_meaning": "★G2（2026-09-30判定）の冬案件ASP申請は現時点で0件。ASP出品は秋（10〜11月）だが、👤が申請しない限り点かない。"
+    },
+    "actualRevenue": {
+      "value": "未計測（¥0とは書けない）",
+      "reason": "data/ には affiliate-actuals.template.json（テンプレートのみ・4,648バイト・2026-07-08作成）しか存在せず、実績を入れた affiliate-actuals.json は無い。ASP管理画面の発生/承認/確定額はコードベースのどこにも記録されていない。",
+      "_source": "ls -la data/affiliate-actuals*（自分で実行）"
+    }
+  },
+
+  "surfaces": {
+    "_gscWindow": "2026-07-10 〜 2026-08-07（28日）",
+    "_gscSource": "python集計 ops/raw/gsc-pages-28d.json（自分で再集計・position は表示数加重平均）",
+    "_d1Source": "python集計 ops/raw/d1-clicks-crosstab.json（全期間 n=629）。d1ClickCount は placement ラベルがそのURL面と literal に一致するものだけを合算し、対応が確定できないものは null にした（推測でマップしない）。",
+    "home": { "path": "/", "clicks28d": 1879, "impressions28d": 29752, "ctr28d": 0.06316, "position": 5.81, "d1ClickCount": 12, "d1PlacementLabels": ["/"] },
+    "hensachi": { "path": "/hensachi", "clicks28d": 1640, "impressions28d": 35723, "ctr28d": 0.04591, "position": 7.00, "d1ClickCount": 17, "d1PlacementLabels": ["hensachi(8)", "/hensachi(8)", "/hensachi/agekata(1)"], "_note": "同一面が表記ゆれで2ラベルに分裂している。" },
+    "hyotei-heikin": { "path": "/hyotei-heikin", "clicks28d": 926, "impressions28d": 5784, "ctr28d": 0.16010, "position": 6.37, "d1ClickCount": 3, "d1PlacementLabels": ["/hyotei-heikin(2)", "hyotei-heikin(1)"], "_note": "★CTR 16.0% はサイト最高水準だが、7月ピーク語のため8月に 20.62%→3.85% へ急落した面でもある（gsc.ctrDeclineDecomposition）。" },
+    "blog": { "path": "/blog", "clicks28d": 1501, "impressions28d": 195566, "ctr28d": 0.00768, "position": 6.46, "d1ClickCount": 10, "d1PlacementLabels": ["blog(9)", "/blog/toritsu-nyushi-2026-kanzen-guide(1)"], "_note": "165行中125行がアンカー断片。実URLは39本（clicks 1,497 / impr 94,292）。本番sitemapのblog URLは49本。" },
+    "tokyo": { "path": "/tokyo", "clicks28d": 963, "impressions28d": 6572, "ctr28d": 0.14653, "position": 7.23, "d1ClickCount": 3, "d1PlacementLabels": ["/tokyo/total-score(3)"] },
+    "kanagawa": { "path": "/kanagawa", "clicks28d": 685, "impressions28d": 6763, "ctr28d": 0.10129, "position": 5.91, "d1ClickCount": 1, "d1PlacementLabels": ["/kanagawa/s-value(1)"] },
+    "hyogo": { "path": "/hyogo", "clicks28d": 265, "impressions28d": 7707, "ctr28d": 0.03438, "position": 5.71, "d1ClickCount": null },
+    "osaka": { "path": "/osaka", "clicks28d": 186, "impressions28d": 5153, "ctr28d": 0.03610, "position": 5.34, "d1ClickCount": null },
+    "reverse": { "path": "/reverse", "clicks28d": 42, "impressions28d": 839, "ctr28d": 0.05006, "position": 13.39, "d1ClickCount": null, "_note": "school_page_clicks 9件のうち8件が reverse 導線（BRIEF.md:96）。" },
+    "total-score": { "path": "/total-score", "clicks28d": 16, "impressions28d": 746, "ctr28d": 0.02145, "position": 6.81, "d1ClickCount": null },
+    "tools": { "path": "/tools", "clicks28d": 15, "impressions28d": 486, "ctr28d": 0.03086, "position": 17.51, "d1ClickCount": null },
+    "mendan": { "path": "/mendan", "clicks28d": 13, "impressions28d": 375, "ctr28d": 0.03467, "position": 8.61, "d1ClickCount": 6, "d1PlacementLabels": ["mendan(6)"] },
+    "school-pages": { "path": "/pref/{code}/school/{schoolCode}", "clicks28d": 7, "impressions28d": 605, "ctr28d": 0.01157, "position": 7.91, "d1ClickCount": 0, "d1SchoolPageClicksAllTime": 9, "_note": "clicks テーブルには学校ページ由来のplacementは無い。専用テーブル school_page_clicks に9件（reverse 8 / juku-shindan 1・2026-08-07以降）。" },
+    "heigan-yuugu": { "path": "/heigan-yuugu", "clicks28d": 5, "impressions28d": 255, "ctr28d": 0.01961, "position": 19.08, "d1ClickCount": null },
+    "koukou-hiyou": { "path": "/koukou-hiyou", "clicks28d": 4, "impressions28d": 90, "ctr28d": 0.04444, "position": 13.57, "d1ClickCount": null, "_note": "placement 'hiyou'(14件) がこの面か /hiyou かは確定できない。" },
+    "koukou-bairitsu": { "path": "/koukou-bairitsu", "clicks28d": 4, "impressions28d": 106, "ctr28d": 0.03774, "position": 24.83, "d1ClickCount": null, "_note": "倍率ヘッド語のハブ。24.8位＝ヘッド語は死んでいる（gsc.bairitsuLongtail28d）。" },
+    "naishin-kakusa": { "path": "/naishin-kakusa", "clicks28d": 3, "impressions28d": 44, "ctr28d": 0.06818, "position": 9.25, "d1ClickCount": null },
+    "chousasho": { "path": "/chousasho", "clicks28d": 1, "impressions28d": 85, "ctr28d": 0.01176, "position": 14.40, "d1ClickCount": null },
+    "naishin-oru": { "path": "/naishin-oru", "clicks28d": 0, "impressions28d": 544, "ctr28d": 0.0, "position": 5.72, "d1ClickCount": null, "_flag": "★順位5.7で544表示ありながらクリック0の4ページ。BRIEF §F が『追う価値がある唯一の面』と名指しした在庫（BRIEF.md:312-313）。" },
+    "shutsugan-junbi": { "path": "/shutsugan-junbi", "clicks28d": 0, "impressions28d": 94, "ctr28d": 0.0, "position": 22.66, "d1ClickCount": null },
+    "juku-hiyou": { "path": "/juku-hiyou", "clicks28d": 0, "impressions28d": 68, "ctr28d": 0.0, "position": 31.50, "d1ClickCount": 7, "d1PlacementLabels": ["juku-hiyou(7)"], "_note": "検索からの流入は0なのにアフィリクリックは7件＝内部リンク経由の到達。" },
+    "prefectures": { "path": "/prefectures", "clicks28d": 0, "impressions28d": 46, "ctr28d": 0.0, "position": 47.59, "d1ClickCount": null },
+    "report": { "path": "/report", "clicks28d": 0, "impressions28d": 118, "ctr28d": 0.0, "position": 12.42, "d1ClickCount": null, "_note": "16ページ。白書系（X-1）。" },
+    "guide": { "path": "/guide", "clicks28d": 0, "impressions28d": 37, "ctr28d": 0.0, "position": 58.32, "d1ClickCount": null },
+    "developers": { "path": "/developers", "clicks28d": 0, "impressions28d": 27, "ctr28d": 0.0, "position": 5.63, "d1ClickCount": null },
+    "kyouiku-hi": { "path": "/kyouiku-hi", "clicks28d": 0, "impressions28d": 27, "ctr28d": 0.0, "position": 17.41, "d1ClickCount": null },
+    "shougakukin": { "path": "/shougakukin", "clicks28d": 0, "impressions28d": 23, "ctr28d": 0.0, "position": 31.52, "d1ClickCount": null },
+    "nyushi-seido-henkou": { "path": "/nyushi-seido-henkou", "clicks28d": 0, "impressions28d": 22, "ctr28d": 0.0, "position": 8.00, "d1ClickCount": null },
+    "juken-ryou": { "path": "/juken-ryou", "clicks28d": 0, "impressions28d": 18, "ctr28d": 0.0, "position": 6.83, "d1ClickCount": null },
+    "jikosaiten": { "path": "/jikosaiten", "clicks28d": 0, "impressions28d": 15, "ctr28d": 0.0, "position": 6.47, "d1ClickCount": null },
+    "naishin-age-kata": { "path": "/naishin-age-kata", "clicks28d": 0, "impressions28d": 14, "ctr28d": 0.0, "position": 44.00, "d1ClickCount": null },
+    "stats": { "path": "/stats", "clicks28d": 0, "impressions28d": 12, "ctr28d": 0.0, "position": 16.50, "d1ClickCount": null },
+    "hiyou": { "path": "/hiyou", "clicks28d": 0, "impressions28d": 9, "ctr28d": 0.0, "position": 37.00, "d1ClickCount": null },
+    "naishin-map": { "path": "/naishin-map", "clicks28d": 0, "impressions28d": 8, "ctr28d": 0.0, "position": 9.38, "d1ClickCount": null },
+    "juken-toujitsu": { "path": "/juken-toujitsu", "clicks28d": 0, "impressions28d": 8, "ctr28d": 0.0, "position": 29.12, "d1ClickCount": null },
+    "goukaku-happyo": { "path": "/goukaku-happyo", "clicks28d": 0, "impressions28d": 8, "ctr28d": 0.0, "position": 7.88, "d1ClickCount": null },
+    "katei-kyoshi": { "path": "/katei-kyoshi", "clicks28d": 0, "impressions28d": 4, "ctr28d": 0.0, "position": 79.50, "d1ClickCount": null },
+    "press": { "path": "/press", "clicks28d": 0, "impressions28d": 4, "ctr28d": 0.0, "position": 5.25, "d1ClickCount": null },
+    "zeroImpressionSurfaces": {
+      "paths": ["/pref/{code} ×47", "/suisen-nyuushi", "/juku-shindan", "/hogosha", "/shinro-hiyou", "/juku", "/plan", "/futoukou", "/hyouka-kijun", "/comparison", "/ask", "/advisor", "/embed", "/glossary", "/dashboard"],
+      "_source": "python集計 ops/raw/gsc-pages-28d.json で startswith が0行（自分で再集計・BRIEF.md:86 と一致し、さらに追加検出）",
+      "_meaning": "28日で1インプレッションも無い＝検索エンジンに存在しないのと同じ。/hogosha と /juku-shindan は保護者導線の中核面（BRIEF.md:184）でありながら露出ゼロ。"
+    },
+    "unmappedD1Placements": {
+      "naishin-up": 131, "parent-lp": 27, "hiyou": 14, "result": 10, "dashboard": 7, "suisen": 6, "shindan": 3, "jitsugika": 2, "hyotei-koukou": 1, "(null)": 166,
+      "_total": 367,
+      "_shareOfAllClicks": 0.583,
+      "_meaning": "★D1クリックの58.3%（367/629）は URL 面に機械的に紐づけられない。naishin-up(131件・第3位)に対応する /naishin-up ルートは src/app に存在しない（コンポーネント配置ラベル）。面別の円換算をする際はこの制約を必ず明記すること。"
+    }
+  },
+
+  "data_assets": {
+    "schoolMaster": {
+      "prefectures": 47,
+      "nonEmptyPrefectures": 47,
+      "totalSchools": 3422,
+      "files": "src/data/schools/*.ts 48ファイル（47県＋index.ts）",
+      "_source": "npx tsx で SCHOOL_MASTER_BY_PREFECTURE を実行集計（自分で実行 2026-08-10）／ls src/data/schools/*.ts | wc -l = 48",
+      "_provenance": "各県ファイルに source.url（文科省 学校コード一覧CSV等）が入っている。例: src/data/schools/hokkaido.ts の source.url = https://www.mext.go.jp/content/20260529-mxt_chousa01-000011635_2.csv"
+    },
+    "competitionRates": {
+      "prefectures": 47,
+      "nonEmptyPrefectures": 47,
+      "files": "src/data/competition-rates/*.ts 48ファイル（47県＋index.ts）",
+      "historyPrefectures": 47,
+      "historyFiles": "src/data/competition-rate-history/*.ts 48ファイル",
+      "_source": "npx tsx で COMPETITION_RATE_BY_PREFECTURE / COMPETITION_RATE_HISTORY_BY_PREFECTURE を実行集計（自分で実行）",
+      "_provenance": "各県 sources[] に教育委員会の一次URL・docTitle・fiscalYear・fetchedAt が入っている。例: src/data/competition-rates/tokyo.ts sources[0].url = 東京都教育委員会 令和8年度応募状況"
+    },
+    "schoolPages": {
+      "entityCount": 3089,
+      "gscExposedCount": 233,
+      "gscExposureRate": 0.0754,
+      "inProductionSitemap": 3089,
+      "clicks28d": 7,
+      "impressions28d": 605,
+      "d1SchoolPageClicksAllTime": 9,
+      "perPrefecture": { "hokkaido": 205, "tokyo": 167, "aichi": 156, "kanagawa": 138, "saitama": 129, "osaka": 125, "chiba": 119, "hyogo": 113, "fukuoka": 96, "shizuoka": 90, "ibaraki": 85, "hiroshima": 83, "nagano": 74, "niigata": 70, "miyagi": 68, "kagoshima": 68, "gifu": 62, "iwate": 59, "gunma": 58, "okinawa": 58, "tochigi": 57, "nagasaki": 55, "kyoto": 53, "mie": 52, "kumamoto": 51, "okayama": 51, "fukushima": 50, "akita": 44, "shiga": 44, "aomori": 43, "ehime": 43, "yamaguchi": 43, "yamagata": 42, "oita": 39, "ishikawa": 39, "shimane": 35, "miyazaki": 34, "toyama": 34, "kochi": 32, "tokushima": 32, "saga": 31, "wakayama": 31, "kagawa": 30, "nara": 29, "yamanashi": 26, "fukui": 24, "tottori": 22 },
+      "_source": "npx tsx で INDEXED_SCHOOL_PAGE_PREFECTURE_CODES 全47県に getPrefectureSchoolPageData() を回して schools.length を合算（自分で実行 2026-08-10）／本番 curl sitemap.xml の '/school/' を含む <loc> 数と一致（3,089）",
+      "_correctsBrief": "★BRIEF.md:278 の『実体 約958枚』は古い。3,089が正。"
+    },
+    "indexUnlockStatus": {
+      "unlockedPrefectures": 47,
+      "totalPrefectures": 47,
+      "unlockedShare": 1.0,
+      "codes": ["tokyo","kanagawa","saitama","chiba","hyogo","tottori","kochi","saga","yamanashi","shimane","fukui","nara","kagawa","tokushima","wakayama","miyazaki","toyama","oita","ishikawa","aomori","aichi","osaka","fukuoka","shizuoka","ibaraki","hiroshima","niigata","miyagi","kagoshima","gifu","gunma","tochigi","okinawa","ehime","nagasaki","mie","kyoto","kumamoto","okayama","akita","shiga","nagano","iwate","fukushima","yamaguchi","yamagata","hokkaido"],
+      "mechanism": {
+        "gate": "src/lib/school-page-lookup.ts:50 の INDEXED_SCHOOL_PAGE_PREFECTURE_CODES 配列",
+        "metaRobots": "src/app/pref/[code]/school/[schoolCode]/page.tsx:56,64 → isIndexed = INDEXED_SCHOOL_PAGE_PREFECTURE_CODES.includes(code) → robots: {index: isIndexed, follow: isIndexed}",
+        "staticParams": "同 page.tsx:35-41 generateStaticParams は同じ配列から生成（OpenNext 1102回避のため必須）",
+        "sitemap": "src/app/sitemap.ts:105-109 で同じ配列から school URL を生成",
+        "robotsTxt": "src/app/robots.ts が単一ソース。/pref/ 配下に disallow は無い（disallow は /api/ /go/ /admin/ /*?* のみ）"
+      },
+      "_source": "自分で3ファイルを実読して配列長を数えた（lib のコメントではなく実配列）。47県＝完全解禁。",
+      "_waveHistory": "wave1(2026-08-01) 5県 → wave5 21県一括 → wave6(2026-08-09) 5県 → wave7(2026-08-09) hokkaido で 47/47完走（src/lib/school-page-lookup.ts:24-48）"
+    },
+    "otherPrefectureDatasets": {
+      "exam-score-statistics": { "files": 42, "_source": "ls src/data/exam-score-statistics/*.ts | wc -l" },
+      "private-school-detail": { "files": 47, "_source": "ls src/data/private-school-detail/*.ts | wc -l" },
+      "private-school-tuition": { "files": 9, "_source": "ls src/data/private-school-tuition/*.ts | wc -l" },
+      "schools-private": { "files": 48, "_source": "ls src/data/schools-private/*.ts | wc -l" },
+      "_note": "ファイル数にはindex.tsが含まれる場合がある。県数として使う前に中身を数え直すこと。"
+    },
+    "productionSitemap": {
+      "totalUrls": 3481,
+      "schoolUrls": 3089,
+      "prefIndexUrls": 47,
+      "blogUrls": 49,
+      "otherUrls": 296,
+      "_source": "curl -k --max-time 45 -A \"Mozilla/5.0 (iPhone; ...)\" https://my-naishin.com/sitemap.xml → <loc> を正規表現で抽出（自分で実行 2026-08-10）",
+      "_meaning": "★本番sitemapの88.7%（3,089/3,481）が学校ページ。GSC露出は233枚（7.5%）。残り2,856枚がインデックス未登録なのか、登録済みで表示ゼロなのかは未検証（unknowns参照）。"
+    },
+    "codebase": {
+      "appRouteDirectories": 77,
+      "leadConfigLines": 466,
+      "affiliatesLines": 539,
+      "trackLines": 238,
+      "_source": "ops/raw/BRIEF.md:176-182"
+    }
+  },
+
+  "outreach": {
+    "queue": {
+      "file": "data/outreach-queue.json",
+      "asOf": "2026-08-06",
+      "totalEntries": 54,
+      "queued": 51,
+      "excluded": 3,
+      "sent": 0,
+      "replied": 0,
+      "withGmailDraftPlaced": 32,
+      "byLane": { "kyoiku-i": { "queued": 33, "excluded": 1 }, "chihoshi": { "queued": 14, "excluded": 2 }, "mutual-link": { "queued": 4, "excluded": 0 } },
+      "byChannel": { "email": 33, "form": 17, "line": 4 },
+      "excludedIds": ["kyoiku-excluded-phone-only", "media-excluded-not-sendable", "media-excluded-conditional"],
+      "_source": "python集計 data/outreach-queue.json（自分で集計 2026-08-10）",
+      "_meaning": "★51件が queued のまま1件も送信されていない。うち32件はGmail下書きまで設置済み＝👤が送信ボタンを押すだけの状態。送信は人間ゲート（loopは1件も送信しない）。"
+    },
+    "ledger": {
+      "file": "data/outreach-ledger.json",
+      "asOf": "2026-07-24",
+      "totalEntries": 17,
+      "sent": 17,
+      "awaiting": 16,
+      "replied": 1,
+      "repliedDetail": { "status": "meeting", "lane": "b2b-saas", "sentDate": "2026-07-12", "_note": "B2B初の商談リクエスト（2026-07-15受領）。組織名はPIIではないが本ファイルでは伏せる。" },
+      "followupsSent": 1,
+      "sentDateRange": "2026-07-12 〜 2026-07-20",
+      "daysSinceLastSend": 21,
+      "reviewTier": { "spot-check": 5, "full-review(default)": 12 },
+      "_source": "python集計 data/outreach-ledger.json（自分で集計 2026-08-10）",
+      "_meaning": "★返信率 1/17 = 5.9%。最後の送信から21日経過し、追撃(AA-1)は followupCount=1 の1件のみ。16件が awaiting のまま放置されている。"
+    },
+    "inconsistency": {
+      "ledgerEntries": 17,
+      "roadmapGatesB2bLog": 20,
+      "memoryClaim": "B2B累計32社接触（MEMORY.md session-2026-07-13-gmail-mcp-b2b-day1-link-wall）",
+      "_source": "data/outreach-ledger.json（17）／ src/lib/roadmap-gates.ts:202-208 B2B_OUTREACH_LOG（2026-07-12に20社）／ MEMORY.md（32社）",
+      "_status": "★3つの数字が一致していない。突合は未実施（unknowns参照）。ledger の _comment 自身が『フォーム送信のみでGmail送信履歴に残らないもの（コエテコ/スタディサプリ等）は未収録』と書いており、差分の一部はこれで説明できるが検証していない。"
+    }
+  },
+
+  "gates": {
+    "source": "src/lib/roadmap-gates.ts:100-155（ROADMAP_GATES 定義）＋ evaluateRoadmapGates() を npx tsx で実際に実行（2026-08-10）",
+    "actualsUsed": { "rosterN": 6, "lineFriends": 55, "apiCustomers": 0, "_note": "rosterN は D1 leads COUNT(*)=6、lineFriends は data/line-friends.json:37 の 2026-08-07 値、apiCustomers は D1 api_keys COUNT(*)=0。contractCount / cpThisMonth / conversionsThisMonth / cumulativeConfirmedYen は実測が存在しないため undefined のまま渡した。" },
+    "rosterTotal": { "value": 61, "breakdown": "（LINE55＋D1 leads6）", "_source": "rosterTotalOf({lineFriends:55, rosterN:6}) の実行結果" },
+    "_criticalRule": "★G1/G5の『名簿N』は必ず LINE友だち数 ＋ D1 leads の合算。D1だけで判定すると N=6 で behind になり、missedAction『Aレバー（名簿）縮小』＝実際には伸びているチャネルを畳む戦略転換が誤発火する（src/lib/roadmap-gates.ts:26-33 のコメント）。",
+    "evaluations": [
+      {
+        "id": "g1-roster-velocity",
+        "label": "G1 名簿velocity",
+        "dateIso": "2026-08-31",
+        "daysLeft": 21,
+        "decided": false,
+        "status": "upcoming",
+        "metric": "名簿累計N（LINE友だち数 ＋ D1 leads総数）",
+        "effortTarget": "N ≥ 100（≈20/週ペース）",
+        "maxTarget": "N ≥ 150（≈40/週ペース）",
+        "missedAction": "Aレバー（名簿）縮小・B（直接契約）へ重心移動",
+        "currentValue": 61,
+        "ifJudgedTodayStatus": "behind",
+        "ifJudgedTodayDetail": "名簿N=61（LINE55＋D1 leads6）（努力軌道の目安100未満）＝Aレバー（名簿）縮小・B（直接契約）へ重心移動",
+        "gapToEffort": 39,
+        "gapToMax": 89,
+        "requiredWeeklyVelocityToPass": 13.1,
+        "actualRecentWeeklyVelocity": 8,
+        "_source": "evaluateRoadmapGates を now=2026-09-01 で実行して 'behind' を実際に確認（npx tsx・2026-08-10）。requiredWeeklyVelocity は 39人÷(21日/7)=13.0、08-07起点なら45人÷(24日/7)=13.1（自分で計算）。",
+        "_verdict": "★現在の velocity(8/週) の1.6倍が21日間必要。この差を埋める施策が無い限り G1 は behind で確定し、missedAction が発火する。"
+      },
+      {
+        "id": "g2-winter-prep",
+        "label": "G2 冬案件申請＋S-3インデックス",
+        "dateIso": "2026-09-30",
+        "daysLeft": 51,
+        "decided": false,
+        "status": "upcoming",
+        "metric": "冬期講習/直前案件ASP申請完了＋S-3面のインデックス確認（数値でなくチェック項目）",
+        "effortTarget": "申請完了",
+        "maxTarget": "申請完了＋特単候補の選定済",
+        "missedAction": "Eレバー（冬アフィリ）期待値を半減して再計画",
+        "autoDetected": "冬季アフィリ 0/2件live化（winter-koushuu-trial 未申請/承認待ち・last-minute-trial 未申請/承認待ち）",
+        "judgementType": "manual-check（👤が g2Confirmed を渡すまで自動判定不可）",
+        "_source": "winterAffiliateReadinessSummary() の実行結果（npx tsx・2026-08-10）",
+        "_verdict": "★判定日はユタ不在(09-08〜09-22)の直後。ASP申請は👤しかできない。実質の作業可能期間は 08-10〜09-07 と 09-23〜09-30。"
+      },
+      {
+        "id": "g3-contract-api",
+        "label": "G3 直接契約／API",
+        "dateIso": "2026-10-31",
+        "daysLeft": 82,
+        "decided": false,
+        "status": "upcoming",
+        "metric": "契約社数・API顧客数",
+        "effortTarget": "契約1社 or API1社",
+        "maxTarget": "契約1社稼働＋API1社",
+        "missedAction": "Bは来季送り・A/Eへ集中",
+        "currentApiCustomers": 0,
+        "currentContractCount": null,
+        "supportingEvidence": "D1 api_keys COUNT(*)=0 / api_usage COUNT(*)=0 ＝ API有料顧客ゼロは機械的に確定。契約社数は記録場所が無く未計測。outreach-ledger は 17送信・1返信(meeting)・0成約。",
+        "_source": "node scripts/d1q.mjs（自分で実行）／ data/outreach-ledger.json"
+      },
+      {
+        "id": "g4-cp-november",
+        "label": "G4 C_p実測（11月）",
+        "dateIso": "2026-11-30",
+        "daysLeft": 112,
+        "decided": false,
+        "status": "upcoming",
+        "metric": "C_p/月（＋ASP発生>0が絶対条件）",
+        "effortTarget": "C_p ≥ 40（N≈400）",
+        "maxTarget": "C_p ≥ 100（N≈620）",
+        "missedAction": "発生0なら全シナリオを保守側へ再校正",
+        "currentCpProxy": { "ga4_parent_landing_view_28d": 5, "d1_parent_funnel_events_allTime": 0 },
+        "_source": "ops/raw/BRIEF.md:159 / node scripts/d1q.mjs",
+        "_verdict": "★C_p の実測代理値は月換算で 5前後。努力軌道40の 1/8。しかも D1 側は 0 件で、そもそも計測が成立していない疑いがある（d1.parentFunnelZeroDiagnosis）。"
+      },
+      {
+        "id": "g5-december-close",
+        "label": "G5 窓フル回収",
+        "dateIso": "2026-12-25",
+        "daysLeft": 137,
+        "decided": false,
+        "status": "upcoming",
+        "metric": "名簿N／契約MRR＋APIMRR／シーズン累計確定額",
+        "effortTarget": "N≈540・契約1社・累計¥24万",
+        "maxTarget": "N≈880・MRR計¥10万/月・累計¥62万",
+        "missedAction": "1-2月は在庫最適化のみに切替",
+        "currentRosterN": 61,
+        "_source": "src/lib/roadmap-gates.ts:138-145 ／ rosterTotalOf 実行結果"
+      },
+      {
+        "id": "g6-february-check",
+        "label": "G6 実測照合",
+        "dateIso": "2027-02-28",
+        "daysLeft": 202,
+        "decided": false,
+        "status": "upcoming",
+        "metric": "シーズン累計確定額",
+        "effortTarget": "≈¥56万",
+        "maxTarget": "≈¥160万",
+        "missedAction": "実測でモデルを置換・来季計画へ",
+        "_source": "src/lib/roadmap-gates.ts:146-154"
+      }
+    ],
+    "nextGate": "g1-roster-velocity",
+    "_allUpcoming": "2026-08-10時点では6ゲート全てが upcoming（判定日未到来）。判定日に実測値を渡さないと unmeasured のまま確定するため、upcomingGateReminders(windowDays=7) が判定日の7日前から警告する設計（src/lib/roadmap-gates.ts:345-355）。"
+  },
+
+  "unknowns": [
+    {
+      "id": "U-1",
+      "item": "parent_funnel_events が0件である根本原因",
+      "known": "APIは400/204/405を正しく返す。同日実装の school_page_clicks は9件記録されている＝デプロイもD1書き込み経路も生きている。",
+      "unknown": "クライアント側でビーコンが発火しているか。実ブラウザでの検証をしていない（loopにブラウザが無い）。GA4側でも share_to_parent は28日で2件しかないため、『計測バグ』と『そもそも保護者共有UIが使われていない』のどちらかを切り分けられていない。",
+      "verificationTask": "Cowork（実ブラウザ）で /hyotei-heikin の結果画面 → 保護者共有ボタンを実際に押し、DevTools Network で POST /api/parent-funnel が204でなく2xx成功を返すか、その直後にD1へ1件入るかを確認する。★MEMORY.md cowork-division-of-labor の起動条件（loopが『不明/保留』と書いたもの）に該当。"
+    },
+    {
+      "id": "U-2",
+      "item": "GA4 share_to_parent 2件がD1ビーコン稼働(2026-08-02)以降のものかどうか",
+      "known": "GA4 28日で share_to_parent=2 / parent_landing_view=5。D1は全期間0。",
+      "unknown": "GA4の2件の発生日。8/2より前なら『ビーコン稼働後は本当に0件』、8/2以降なら『GA4は拾ったがD1は落とした＝計測バグ確定』。",
+      "verificationTask": "mcp__ga4__ga4_run_report(dimensions=[date,eventName], dimensionFilter で eventName=share_to_parent, startDate=2026-07-13) を実行して発生日を特定する。★U-1の切り分けに直結する。今回時間の都合で未実施。"
+    },
+    {
+      "id": "U-3",
+      "item": "D1クリックの58.3%（367/629）が面に紐づかない",
+      "known": "placement が null のクリック166件（26.4%）。placement='naishin-up' 131件に対応する /naishin-up ルートは src/app に存在しない。referer は88%がnull。",
+      "unknown": "naishin-up / parent-lp / result / suisen / shindan / hyotei-koukou が実際にどのURL面に描画されているコンポーネントなのか。placement='hiyou' が /hiyou と /koukou-hiyou のどちらか。",
+      "verificationTask": "grep -rn \"placement=\\\"naishin-up\\\"\" src/ 等で各ラベルの描画箇所を特定し、面→placement の対応表を作る。これが無い限り面別の円換算は推測になる。"
+    },
+    {
+      "id": "U-4",
+      "item": "ASP側の実績（発生／承認／確定額）",
+      "known": "D1 clicks は630件。CPAは src/lib/affiliate-economics.ts に公称値がある。",
+      "unknown": "実際に何件発生し、いくら確定したか。data/ には affiliate-actuals.template.json（テンプレートのみ）しかなく、実績ファイルが存在しない。したがって『¥0』とも『¥X』とも書けない。",
+      "verificationTask": "👤がA8／もしも／アクセストレードの管理画面から発生・承認・確定件数を転記し data/affiliate-actuals.json を作る。★これが無い限り G4 の absolute条件（ASP発生>0）も G5/G6 の累計確定額も永久に unmeasured。"
+    },
+    {
+      "id": "U-5",
+      "item": "学校ページ3,089枚のうち2,856枚がインデックス登録されているのか未登録なのか",
+      "known": "本番sitemapに3,089枚掲載。GSCで28日に1回でも表示されたのは233枚（7.5%）。",
+      "unknown": "残り2,856枚が『インデックス済みだがオフシーズンで表示ゼロ』なのか『そもそもインデックスされていない』のか。表示ゼロと未登録は別の事実。",
+      "verificationTask": "GSC の『ページのインデックス登録』レポート（URL Inspection API か管理画面）で送信済みsitemapの登録数を確認する。現行の gsc MCP には対応ツールが無い（gsc_sitemaps はサイトマップ一覧のみ）。★冬の収穫量を左右する最重要の未知数。"
+    },
+    {
+      "id": "U-6",
+      "item": "冬の季節係数の自社実測値",
+      "known": "GSCデータの起点は2026-02下旬＝このドメインには『去年の冬』が存在しない。Google Trends由来の倍率（S値計算11.7x等）はある。",
+      "unknown": "自社の実測季節係数。2027年2月まで取得不可能。",
+      "verificationTask": "取得不可能。EV試算では必ず『Google Trends由来・自社未実測』と明記する（ops/raw/BRIEF.md:239）。"
+    },
+    {
+      "id": "U-7",
+      "item": "GSC query次元の見えない範囲",
+      "known": "query次元13,958行はサイト総計のクリックの57%・表示の43%しかカバーしていない（GSCの匿名化）。",
+      "unknown": "残り43%のクリック・57%の表示がどのクエリで発生しているか。順位帯分布（gsc.rankBandDistribution28d）も『見えている範囲』の話。",
+      "verificationTask": "原理的に取得不可能。クエリ起点の結論には必ずこのカバレッジ制約を添える。"
+    },
+    {
+      "id": "U-8",
+      "item": "CTR曲線の1位の値（46.4%）の信頼度",
+      "known": "1位は n=11クエリ・表示470 と標本が薄い。2位・4位は従来値と一致。",
+      "unknown": "1位CTRの真値。46.4%も55.9%も標本が足りない。",
+      "verificationTask": "期間を延ばして（例: 90日）1位帯のクエリ数を増やして再計算する。それまで1位EVには不確実性が残ることを明記する。"
+    },
+    {
+      "id": "U-9",
+      "item": "B2B接触社数の3つの数字の不一致",
+      "known": "data/outreach-ledger.json = 17件 / src/lib/roadmap-gates.ts:202-208 B2B_OUTREACH_LOG = 20社 / MEMORY.md = 累計32社接触。",
+      "unknown": "どれが正しいか。ledger の _comment は『フォーム送信のみでGmail送信履歴に残らないものは未収録』と書いているが、差分15社の内訳は確認していない。",
+      "verificationTask": "gmail_search q=\"in:sent\" で 2026-07-01以降の送信を全数取得し ledger にバックフィルする（AA-1の設計どおりの運用）。返信率の分母が間違っていると追撃の優先順位も間違う。"
+    },
+    {
+      "id": "U-10",
+      "item": "LINE友だち数の鮮度",
+      "known": "data/line-friends.json の _lastManualUpdate は 2026-08-07。手動転記のみ（LINE Messaging APIでは自動取得不可）。",
+      "unknown": "2026-08-08〜08-10 の3日分。G1判定(08-31)まで21日しかないので、週次の転記が止まると判定が unmeasured になる。",
+      "verificationTask": "👤がLINE Official Account Manager > 分析 > 友だち から3日分を転記する。★G1判定日の直前に必ず最新値が要る。"
+    },
+    {
+      "id": "U-11",
+      "item": "/naishin-oru が544表示・順位5.7でクリック0の理由",
+      "known": "4ページ・28日で544表示・クリック0・加重順位5.72。BRIEF §F が『追う価値がある唯一の面』と名指し。",
+      "unknown": "タイトル/ディスクリプションの問題か、クエリ意図とのミスマッチか。どのクエリで表示されているかを分解していない。",
+      "verificationTask": "mcp__gsc__gsc_query(dimensions=[query], pageContains='naishin-oru') で表示クエリを特定する。順位5.7で0クリックは曲線の期待値(6.7%)と乖離しすぎており、原因が特定できれば安価に取れる。"
+    },
+    {
+      "id": "U-12",
+      "item": "live なのにD1クリック0のアフィリ7件がどこに配置されているか",
+      "known": "findit-fp-soudan(CPA¥13,000)・moshimo-manecafe(¥11,500)・moshimo-withstudy(¥11,500)・moshimo-manabuterasu(¥8,000)・tenjin-chugaku・eten-net・eten-net-home の7件が live なのにクリック0。",
+      "unknown": "src/lib/lead-config.ts / ev-engine.ts のどのランキングにも載っていないのか、載っているが下位で描画されないのか。",
+      "verificationTask": "grep -rn \"findit-fp-soudan\" src/ で参照箇所を数え、rankLiveOffersByEV() の出力に含まれるかを npx tsx で確認する。★CPA¥13,000がゼロインプレッションなら、コード1行の配置追加で取れる可能性がある（ただし EV順序を壊さないこと）。"
+    },
+    {
+      "id": "U-13",
+      "item": "D1 の空テーブル群が意図的か障害か",
+      "known": "juku_reviews=0 / push_subscriptions=0 / adoption_domains=0 / high_schools=0 / api_keys=0 / api_usage=0。",
+      "unknown": "『機能は動いているが利用者ゼロ』なのか『書き込み経路が壊れている』のか。parent_funnel_events と同じ罠の可能性がある。",
+      "verificationTask": "各テーブルへの書き込み経路（route.ts）を実読し、school_page_clicks（生きている）と同じ形で呼ばれているかを比較する。特に push_subscriptions は冬の再訪チャネルなので、壊れていると冬に効かない。"
+    },
+    {
+      "id": "U-14",
+      "item": "stats_submissions 319件 と GA4 stats_submit_ok 97件(users 6) の関係",
+      "known": "D1 stats_submissions = 319件（2026-07-14〜08-09）。GA4 stats_submit_ok = 97件だが users は6人。",
+      "unknown": "319件が何人のユーザーから来ているか。少数ユーザーの反復投稿なら ZZ-1 データフライホイールの『n』としては使えない。",
+      "verificationTask": "node scripts/d1q.mjs で stats_submissions の重複判定キー（ある場合）別の distinct 件数を数える。★Ω-1『国民的内申点データバンク』の実質nを決める数字。"
+    },
+    {
+      "id": "U-15",
+      "item": "/hogosha と /juku-shindan が28日で0インプレッションである理由",
+      "known": "両面とも GSC page次元に1行も無い。BRIEF.md:184 によれば /hogosha は保護者共有UIを描画する中核面。",
+      "unknown": "noindex なのか、インデックスされているが表示ゼロなのか、sitemapに載っていないのか。",
+      "verificationTask": "本番sitemap.xml に /hogosha /juku-shindan が含まれるかを確認し（今回の3,481 URLリストから抽出可能）、page.tsx の metadata.robots を実読する。保護者到達率0.35%の原因の一部がここにある可能性。"
+    },
+    {
+      "id": "U-16",
+      "item": "契約社数（contractCount）の記録場所が存在しない",
+      "known": "G3/G5 が contractCount を要求するが、コードにもD1にも記録先が無い。outreach-ledger の status に 'contract' や 'won' の値は無く、現在の最良は 'meeting' 1件。",
+      "unknown": "現在の契約社数（おそらく0だが、0であることを機械的に確認できない）。",
+      "verificationTask": "outreach-ledger の status enum に成約状態を追加するか、👤が月次で渡す運用を決める。★『0と未計測は別物』というのが roadmap-gates.ts の設計思想（unmeasured を返す）なので、推測で0と書かない。"
+    }
+  ]
+}
