@@ -234,6 +234,18 @@ export const PAST_SYSTEM_CHANGES: PastSystemChange[] = [
     confirmedDate: '2026-08-10',
   },
   {
+    prefCode: 'yamanashi',
+    prefName: '山梨県',
+    effectiveYear: '令和7年度（2025年度）入試',
+    category: 'selection-structure',
+    headline: '不登校・ヤングケアラー等の長期欠席経験者向けに調査書を用いない「特別選抜」を新設',
+    detail:
+      '山梨県教育委員会は令和7(2025)年度入試の後期募集から、中学校時代に不登校・ヤングケアラー・病気等により長期にわたって欠席した生徒を対象に、調査書(内申点)を一切使用せず出願できる「特別選抜」を新設した。対象生徒は中学校長の申請に基づき、学力検査の結果や面接等のみで合否判定を受けられる。既存の一般選抜(後期募集・5教科×2倍+実技4教科×3倍=330点満点の調査書点を用いる)や前期募集(高校ごとに評定の学年比率・教科倍率を独自設定)自体の計算方式には変更がなく、特定の生徒層のために調査書を使わない選抜経路が新たに追加された点が本変更の核心。',
+    sourceUrl: 'https://www.manatera.com/blog/futoko-tokubetsu-senbatsu/',
+    sourceTitle: 'まなぶてらす「不登校でも公立高校は受けられる｜調査書を使わない『特別選抜』とは」（山梨県教育委員会発表を引用）',
+    confirmedDate: '2026-08-10',
+  },
+  {
     prefCode: 'hokkaido',
     prefName: '北海道',
     effectiveYear: '令和4年度（2022年度）入試',

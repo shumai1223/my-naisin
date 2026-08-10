@@ -172,6 +172,20 @@ describe('PAST_SYSTEM_CHANGES（Λ+5・過去の制度変更履歴DB）', () => 
     expect(hokkaidoPref?.gradeMultipliers).toEqual({ 1: 2, 2: 2, 3: 3 });
   });
 
+  test('山梨県の特別選抜新設エントリはprefectures.tsの現行maxScore(330点満点)と矛盾しない(特定生徒層向けの新選抜経路であり一般選抜の調査書計算式は不変)', () => {
+    const yamanashi = PAST_SYSTEM_CHANGES.find((c) => c.prefCode === 'yamanashi');
+    expect(yamanashi).toBeDefined();
+    expect(yamanashi?.effectiveYear).toBe('令和7年度（2025年度）入試');
+    expect(yamanashi?.category).toBe('selection-structure');
+    expect(yamanashi?.detail).toContain('特別選抜');
+    expect(yamanashi?.detail).toContain('不登校');
+
+    const yamanashiPref = PREFECTURES.find((p) => p.code === 'yamanashi');
+    expect(yamanashiPref?.maxScore).toBe(330);
+    expect(yamanashiPref?.coreMultiplier).toBe(2);
+    expect(yamanashiPref?.practicalMultiplier).toBe(3);
+  });
+
   test('categoryは定義済みの4種類のいずれかのみ(型崩れ防止)', () => {
     const validCategories = new Set(['scoring-input', 'selection-structure', 'weighting-formula', 'other']);
     for (const c of PAST_SYSTEM_CHANGES) {
