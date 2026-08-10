@@ -236,6 +236,18 @@ describe('PAST_SYSTEM_CHANGES（Λ+5・過去の制度変更履歴DB）', () => 
     expect(kagoshimaPref?.practicalMultiplier).toBe(20);
   });
 
+  test('大分県の二次試験廃止・複数校志願制度エントリはprefectures.tsの現行値(260点満点圧縮)と矛盾しない(第二志願校の選考手続き変更であり内申点計算式は不変)', () => {
+    const oita = PAST_SYSTEM_CHANGES.find((c) => c.prefCode === 'oita');
+    expect(oita).toBeDefined();
+    expect(oita?.effectiveYear).toBe('令和8年度（2026年度）入試');
+    expect(oita?.category).toBe('selection-structure');
+    expect(oita?.detail).toContain('複数校志願制度');
+    expect(oita?.detail).toContain('二次試験');
+
+    const oitaPref = PREFECTURES.find((p) => p.code === 'oita');
+    expect(oitaPref?.actualMaxScore).toBe(260);
+  });
+
   test('categoryは定義済みの4種類のいずれかのみ(型崩れ防止)', () => {
     const validCategories = new Set(['scoring-input', 'selection-structure', 'weighting-formula', 'other']);
     for (const c of PAST_SYSTEM_CHANGES) {
