@@ -1076,6 +1076,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "moshi-gifu-shinbun-jc",
+      "org": "株式会社岐阜新聞情報センター",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://gjc.gifu-np.co.jp/inquire_cram/",
+      "contactClass": "b2b",
+      "evidence": "サイトナビに『塾関係者の皆さまへ』専用ページがあり、フッターに塾専用の問い合わせフォームURL(/inquire_cram/)が設置されている(直接WebFetchで確認・URL実在をcurlでも確認HTTP200)",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
     }
   ]
 }
