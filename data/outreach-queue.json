@@ -828,6 +828,32 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
+    },
+    {
+      "id": "gakusan-kumon-shuppan",
+      "org": "くもん出版株式会社",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.kumonshuppan.com/businesspartners/",
+      "contactClass": "b2b",
+      "evidence": "「法人・教育機関のかたへ」(/businesspartners/for-school/)「書店・教育機関さま向け」(/businesspartners/)という専用セクションが個人向けサポート(/support/)と明確に分離されている",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
+    },
+    {
+      "id": "gakusan-zkai-solutions",
+      "org": "株式会社Z会ソリューションズ",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.zkai.co.jp/solutions/contact/",
+      "contactClass": "b2b",
+      "evidence": "「先生・企業向け教育サービス」という専用サイト(zkai.co.jp/solutions/)を運営し専用問い合わせフォームを設置。すららネットとの業務提携実績もあり法人間連携の前例がある",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
     }
   ]
 }
