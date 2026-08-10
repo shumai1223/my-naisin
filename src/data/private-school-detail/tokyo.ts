@@ -4439,6 +4439,29 @@ export const PRIVATE_SCHOOL_DETAIL_TOKYO: PrivateSchoolDetailFile = {
       totalCapacity: 10,
       source: KAKE2_2024_TOKYO_SOURCE,
     },
+    {
+      schoolCode: 'D113311100051',
+      schoolName: '東京実業高等学校',
+      fiscalYearLabel: '2026年度',
+      courses: [
+        { courseName: '普通科 特別進学コース', capacity: 20 },
+        { courseName: '普通科 総合進学コースⅠ類', capacity: 35 },
+        { courseName: '普通科 総合進学コースⅡ類', capacity: 35 },
+        { courseName: '普通科 総合進学コースⅢ類(男子サッカー部・硬式野球部の志願者のみ対象)', capacity: 35 },
+        { courseName: '普通科 ビジネスコース', capacity: 70 },
+        { courseName: '機械科 機械システムコース', capacity: 35 },
+        { courseName: '電気科 電気システムコース', capacity: 35 },
+        { courseName: '電気科 ゲームITコース', capacity: 35 },
+      ],
+      totalCapacity: 300,
+      source: {
+        url: 'https://www.tojitsu.ed.jp/assets/pdf/common/r8_tojitsu_application.pdf',
+        docTitle:
+          '令和8年度生徒募集要項(東京実業高等学校)。推薦(140名)・併願Ⅰ+併願Ⅱ合計(115名、総合進学Ⅲ類は対象外)・フェニックス単願+一般A+一般B合計(45名)の3つの独立した入試区分の合計値がそれぞれ表見出しに明記されており、コース別に3区分を合算(旧スキップ理由で引用した二次情報源「JS日本の学校」の合計300名と一致・確度を確認)',
+        fetchedAt: '2026-08-10',
+        sourceTier: 'primary' as const,
+      },
+    },
   ],
   skipped: [
     {
@@ -4755,11 +4778,6 @@ export const PRIVATE_SCHOOL_DETAIL_TOKYO: PrivateSchoolDetailFile = {
       schoolCode: 'D113310500040',
       schoolName: '郁文館グローバル高等学校',
       reason: '公式2027年度入試生徒募集概要PDF(速報版・郁文館高等学校とは別PDF)に入試日程・出願資格・英語資格優遇制度の記載はあるが募集人数(定員)の記載自体が無いため(募集要項本体は10月上旬公開予定)',
-    },
-    {
-      schoolCode: 'D113311100051',
-      schoolName: '東京実業高等学校',
-      reason: '公式募集要項PDF(16頁)はpages指定・pdftoppm未導入により読めず。二次情報源のJS日本の学校(推薦/併願I・II/フェニックス各ラウンド別の値・合算で合計300名)とみんなの高校情報(41〜50の8値、数値の粒度からコース別偏差値を募集定員と誤認した疑いが強い)が一致せず、確度の高い単一の値を確定できないため(潤徳女子高等学校と同型のケース・捏造ゼロ原則によりスキップ)',
     },
     {
       schoolCode: 'D113320800028',

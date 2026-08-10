@@ -2917,13 +2917,18 @@ describe('PRIVATE_SCHOOL_DETAIL_TOKYO(大都市圏5県の最後・育伸社募�
     }
   });
 
-  it('収録176校(掛-2の2024年度141校分含め317レコード)・スキップ65校で参照台帳241校を完全網羅(重複・欠落なし)', () => {
+  it('収録177校(掛-2の2024年度141校分含め318レコード)・スキップ64校で参照台帳241校を完全網羅(重複・欠落なし)', () => {
     const allCodes = SCHOOLS_PRIVATE_TOKYO.schools.map((s) => s.code);
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_TOKYO, allCodes);
     expect(result.duplicates).toEqual([]);
     expect(result.missing).toHaveLength(0);
-    expect(PRIVATE_SCHOOL_DETAIL_TOKYO.schools.length).toBe(317);
-    expect(PRIVATE_SCHOOL_DETAIL_TOKYO.skipped.length).toBe(65);
+    expect(PRIVATE_SCHOOL_DETAIL_TOKYO.schools.length).toBe(318);
+    expect(PRIVATE_SCHOOL_DETAIL_TOKYO.skipped.length).toBe(64);
+  });
+
+  it('東京実業高等学校は推薦140+併願Ⅰ・Ⅱ合計115+フェニックス単願・一般合計45=300名(公式PDFの3独立区分を合算)', () => {
+    const tojitsu = PRIVATE_SCHOOL_DETAIL_TOKYO.schools.find((s) => s.schoolCode === 'D113311100051');
+    expect(tojitsu?.totalCapacity).toBe(300);
   });
 
   it('掛-2(私立×多年度・1ページ目): 愛国・青山学院高等部の2校は2024年度と2026年度で総定員が完全一致', () => {
