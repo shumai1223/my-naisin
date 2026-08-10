@@ -854,6 +854,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
+    },
+    {
+      "id": "gakusan-zoshindo-jukenkenkyusha",
+      "org": "株式会社増進堂・受験研究社",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://teachers.zoshindo.co.jp/contact/",
+      "contactClass": "b2b",
+      "evidence": "一般向けフォームに『こちらのお問い合わせフォームは、一般のお客様専用』と明記され、直後に『学校・塾の先生方、書店様は以下のリンク先のお問い合わせフォームへ』と教員専用サイト(teachers.zoshindo.co.jp)への誘導があり、一般/法人が構造的に分離されている",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
     }
   ]
 }
