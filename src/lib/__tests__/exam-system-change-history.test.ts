@@ -309,6 +309,19 @@ describe('PAST_SYSTEM_CHANGES（Λ+5・過去の制度変更履歴DB）', () => 
     expect(shigaPref?.gradeMultipliers).toEqual({ 1: 1, 2: 1, 3: 1 });
   });
 
+  test('奈良県の内申点対象学年拡大(中1追加)エントリはprefectures.tsの現行値(144点満点・パターン①)と一致する', () => {
+    const nara = PAST_SYSTEM_CHANGES.find((c) => c.prefCode === 'nara');
+    expect(nara).toBeDefined();
+    expect(nara?.effectiveYear).toBe('令和8年度（2026年度）入試');
+    expect(nara?.category).toBe('scoring-input');
+    expect(nara?.detail).toContain('主体的に学習に取り組む態度');
+    expect(nara?.detail).toContain('144点満点');
+
+    const naraPref = PREFECTURES.find((p) => p.code === 'nara');
+    expect(naraPref?.maxScore).toBe(144);
+    expect(naraPref?.targetGrades).toEqual([1, 2, 3]);
+  });
+
   test('categoryは定義済みの4種類のいずれかのみ(型崩れ防止)', () => {
     const validCategories = new Set(['scoring-input', 'selection-structure', 'weighting-formula', 'other']);
     for (const c of PAST_SYSTEM_CHANGES) {
