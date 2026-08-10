@@ -707,8 +707,13 @@ describe('PRIVATE_SCHOOL_DETAIL_TOCHIGI(県庁一括PDF2冊で15校全校を完�
   });
 
   it('15校全てを収録しスキップ0件(県庁公表の全日制/通信制一覧PDF2冊で完全収録)', () => {
-    expect(PRIVATE_SCHOOL_DETAIL_TOCHIGI.schools.length).toBe(15);
     expect(PRIVATE_SCHOOL_DETAIL_TOCHIGI.skipped.length).toBe(0);
+  });
+
+  it('掛-2(私立×多年度): 令和6年度データ14校分(通信制の日々輝学園を除く全日制14校)を追加しschools.lengthは29', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_TOCHIGI.schools.length).toBe(29);
+    const r6Count = PRIVATE_SCHOOL_DETAIL_TOCHIGI.schools.filter((s) => s.fiscalYearLabel === '令和6年度').length;
+    expect(r6Count).toBe(14);
   });
 });
 
