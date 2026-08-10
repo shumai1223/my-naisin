@@ -47,7 +47,7 @@ export default function PrivacyPage() {
             </li>
             <li className="flex gap-2">
               <span className="text-emerald-500">✓</span>
-              <span><strong>広告配信：</strong>将来的に広告を掲載する場合があり、その際は第三者Cookieを使用してパーソナライズ広告を配信します</span>
+              <span><strong>広告：</strong>アフィリエイト広告を掲載しています。閲覧履歴に基づくパーソナライズ広告は配信していません</span>
             </li>
             <li className="flex gap-2">
               <span className="text-emerald-500">✓</span>
@@ -323,41 +323,53 @@ export default function PrivacyPage() {
             </div>
           </section>
 
-          {/* 将来的に導入予定の広告サービス（現在は未使用） */}
-          {/* 広告配信と第三者Cookie */}
+          {/* 広告（アフィリエイト）について。
+              2026-08-11: 記述が実態と食い違っていたため全面的に書き直した。
+              旧文は「将来的に広告を掲載する場合があります」「現在、広告は掲載しておりません」だったが、
+              実際には src/lib/affiliates.ts の live 案件（A8.net / もしもアフィリエイト / ACCESS TRADE）が
+              稼働しており、AffiliateAd.tsx のトラッキングピクセルが外部ドメインへリクエストを発生させている。
+              「掲載していない」と書き続けることは、このサイトの拠り所である「公表値のみ・捏造ゼロ」に反する。 */}
           <section>
             <div className="mb-3 flex items-center gap-2">
               <BarChart3 className="h-5 w-5 text-orange-500" />
-              <h2 className="text-lg font-bold text-slate-800">5. 広告配信と第三者Cookieについて</h2>
+              <h2 className="text-lg font-bold text-slate-800">5. 広告（アフィリエイト）と第三者Cookieについて</h2>
             </div>
             <p className="text-sm leading-relaxed text-slate-600">
-              当サイトでは、サービス運営費の一部を補填するため、Google AdSense や Amazon アソシエイト 等の第三者広告配信事業者を通じて広告を掲載する場合があります。
+              当サイトは、運営費をまかなうためにアフィリエイト広告を掲載しています。塾・通信教育・家庭教師・
+              ファイナンシャルプランナーの無料相談など、当サイトの内容に関連するサービスの紹介リンクです。
+              リンク経由でお申し込みがあった場合、広告主から当サイトに紹介料が支払われることがあります。
+              紹介料の有無によって、計算結果や順位・評価を変えることはありません。
             </p>
             <div className="mt-3 rounded-xl border border-orange-200 bg-orange-50 p-4">
-              <h4 className="text-sm font-bold text-orange-800">広告Cookieとパーソナライズ広告</h4>
+              <h4 className="text-sm font-bold text-orange-800">利用しているサービスと外部への送信</h4>
               <p className="mt-2 text-xs leading-relaxed text-orange-700">
-                • Google 等の第三者配信事業者が Cookie を利用して、過去のアクセス情報に基づきパーソナライズ広告を配信する場合があります。<br/>
-                • これにより、ユーザーに関連性の高い広告が表示されることがありますが、個人を特定する情報は収集しません。<br/>
-                • 広告配信事業者のプライバシーポリシーおよび利用規約が適用されます。
+                • 利用しているASP（広告仲介事業者）：A8.net、もしもアフィリエイト、ACCESS TRADE<br/>
+                • 広告リンクをクリックすると、当サイトの計測用URL（/go）を経由して広告主のサイトへ移動します。
+                その際、どの広告がクリックされたかを当サイト内に記録します（氏名・メールアドレス等は含みません）。<br/>
+                • 一部の広告では、ASPが提供する計測用の画像（トラッキングピクセル）を読み込むため、
+                広告の表示時にASPのドメインへ通信が発生します。<br/>
+                • 各ASPのCookie・個人情報の取り扱いは、それぞれの事業者のプライバシーポリシーが適用されます。<br/>
+                • Google AdSense・Amazonアソシエイトは<strong>利用していません</strong>（パーソナライズ広告の配信は行っていません）。
               </p>
             </div>
             
-            <h3 className="mb-2 mt-4 text-sm font-bold text-slate-700">5.1 広告Cookieの管理</h3>
+            <h3 className="mb-2 mt-4 text-sm font-bold text-slate-700">5.1 広告に関わる通信を止めたい場合</h3>
             <p className="text-sm leading-relaxed text-slate-600">
-              広告Cookieを管理する方法：
+              当サイトはパーソナライズ広告（閲覧履歴に基づく広告）を配信していないため、
+              広告のために利用者を追跡する仕組みは使っていません。それでも通信を減らしたい場合は次の方法があります：
             </p>
             <ul className="mt-2 space-y-1 text-sm leading-relaxed text-slate-600">
               <li className="flex gap-2">
                 <span className="text-orange-500">•</span>
-                <strong>Cookie同意画面：</strong>広告Cookieの使用を拒否することができます
-              </li>
-              <li className="flex gap-2">
-                <span className="text-orange-500">•</span>
-                <strong>Google広告設定：</strong><a href="https://adssettings.google.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">https://adssettings.google.com</a>でパーソナライズ広告を管理
+                広告リンクをクリックしない（クリックしなければ広告主・ASPへの遷移は発生しません）
               </li>
               <li className="flex gap-2">
                 <span className="text-orange-500">•</span>
                 ブラウザの設定で「サードパーティCookie」を無効にする
+              </li>
+              <li className="flex gap-2">
+                <span className="text-orange-500">•</span>
+                広告ブロック拡張機能を使う（当サイトの計算機は広告をブロックした状態でも通常どおり動作します）
               </li>
             </ul>
             <div className="mt-4 rounded-xl border border-amber-200 bg-amber-50 p-4">
@@ -391,7 +403,7 @@ export default function PrivacyPage() {
                 </li>
                 <li className="flex gap-2">
                   <span className="text-red-500">•</span>
-                  <strong>Google AdSenseの制限：</strong>Google AdSenseでは13歳未満向けのパーソナライズ広告は禁止されており、技術的に制限されています
+                  <strong>パーソナライズ広告は不使用：</strong>当サイトは閲覧履歴に基づくパーソナライズ広告を一切配信していません。掲載しているのは、ページの内容に応じて選ばれるアフィリエイト広告のみです
                 </li>
               </ul>
               <p className="mt-3 text-xs leading-relaxed text-red-600 bg-red-100 rounded p-2">
@@ -429,7 +441,7 @@ export default function PrivacyPage() {
             </p>
             <div className="mt-4 rounded-xl border border-amber-200 bg-amber-50 p-4">
               <p className="text-xs leading-relaxed text-amber-800">
-                <strong>広告について：</strong>現在、広告は掲載しておりません。将来的に Google AdSense や Amazon アソシエイト 等の広告配信サービスを導入する場合があります。
+                <strong>広告について：</strong>アフィリエイト広告（塾・通信教育・FP無料相談等の紹介リンク）を掲載しています。閲覧履歴に基づくパーソナライズ広告は配信しておらず、Google AdSense・Amazonアソシエイトは利用していません。詳しくは「5. 広告（アフィリエイト）と第三者Cookieについて」をご覧ください。
               </p>
             </div>
           </section>
