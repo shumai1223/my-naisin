@@ -205,6 +205,17 @@ describe('CONFIRMED_NO_CHANGE_CHECKS（掛-4・空振りの調査記録）', () 
     expect(getPastSystemChangesByPrefecture('shizuoka')).toEqual([]);
   });
 
+  test('埼玉県は対象期間内の制度変更なしと確認済み(令和9年度からの共通選抜・特色選抜再編は対象期間外)', () => {
+    const saitama = CONFIRMED_NO_CHANGE_CHECKS.find((c) => c.prefCode === 'saitama');
+    expect(saitama).toBeDefined();
+    expect(saitama?.note).toContain('令和9年度');
+
+    const saitamaPref = PREFECTURES.find((p) => p.code === 'saitama');
+    expect(saitamaPref?.gradeMultipliers).toEqual({ 1: 1, 2: 1, 3: 2 });
+    expect(saitamaPref?.maxScore).toBe(180);
+    expect(getPastSystemChangesByPrefecture('saitama')).toEqual([]);
+  });
+
   test('同一県がPAST_SYSTEM_CHANGESとCONFIRMED_NO_CHANGE_CHECKSの両方に重複登録されていない', () => {
     const changedPrefs = new Set(PAST_SYSTEM_CHANGES.map((c) => c.prefCode));
     for (const c of CONFIRMED_NO_CHANGE_CHECKS) {
