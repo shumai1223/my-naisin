@@ -285,6 +285,18 @@ describe('PAST_SYSTEM_CHANGES（Λ+5・過去の制度変更履歴DB）', () => 
     expect(shimanePref?.gradeMultipliers).toEqual({ 1: 1, 2: 1, 3: 2 });
   });
 
+  test('山形県の推薦入学者選抜廃止・前期後期選抜移行エントリはprefectures.tsの現行maxScore(45点満点)と矛盾しない(選抜区分の変更であり内申点計算式は不変)', () => {
+    const yamagata = PAST_SYSTEM_CHANGES.find((c) => c.prefCode === 'yamagata');
+    expect(yamagata).toBeDefined();
+    expect(yamagata?.effectiveYear).toBe('令和8年度（2026年度）入試');
+    expect(yamagata?.category).toBe('selection-structure');
+    expect(yamagata?.detail).toContain('前期(特色)選抜');
+
+    const yamagataPref = PREFECTURES.find((p) => p.code === 'yamagata');
+    expect(yamagataPref?.maxScore).toBe(45);
+    expect(yamagataPref?.targetGrades).toEqual([3]);
+  });
+
   test('categoryは定義済みの4種類のいずれかのみ(型崩れ防止)', () => {
     const validCategories = new Set(['scoring-input', 'selection-structure', 'weighting-formula', 'other']);
     for (const c of PAST_SYSTEM_CHANGES) {

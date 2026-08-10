@@ -342,6 +342,18 @@ export const PAST_SYSTEM_CHANGES: PastSystemChange[] = [
     confirmedDate: '2026-08-10',
   },
   {
+    prefCode: 'yamagata',
+    prefName: '山形県',
+    effectiveYear: '令和8年度（2026年度）入試',
+    category: 'selection-structure',
+    headline: '推薦入学者選抜を廃止し、全公立高校で前期(特色)選抜・後期(一般)選抜の2回受検制へ移行',
+    detail:
+      '山形県教育委員会は令和8(2026)年度入試から、それまでの推薦入学者選抜を廃止し、普通科を含む全ての県立高校で前期(特色)選抜と後期(一般)選抜の2回受検できる新制度へ移行した。この新制度は令和7(2025)年度入試において谷地・米沢東・南陽の3校(いずれも普通科)が前倒しで前期(特色)選抜を先行導入しており、令和8年度から全校展開された経緯を持つ。調査書(内申点)の計算方式自体(中学3年生のみ9教科5段階=45点満点、学力検査500点満点との比率は高校ごとに3:7〜5:5程度で設定)には変更が確認されておらず、選抜区分の名称・受検機会の回数構成が変わった点が本変更の核心。',
+    sourceUrl: 'https://www.pref.yamagata.jp/700013/koko/2024r8nyuugakusyajouhou.html',
+    sourceTitle: '山形県教育委員会「令和8年度入学者選抜情報」（前期(特色)選抜及び後期(一般)選抜の概要を掲載）',
+    confirmedDate: '2026-08-10',
+  },
+  {
     prefCode: 'hokkaido',
     prefName: '北海道',
     effectiveYear: '令和4年度（2022年度）入試',
