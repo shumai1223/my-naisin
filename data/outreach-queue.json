@@ -985,6 +985,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "edtech-lines",
+      "org": "ラインズ株式会社",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.education.jp/education01/contact",
+      "contactClass": "b2b",
+      "evidence": "『小学校・中学校向けサービスに関するお問い合わせフォーム』『塾・学童 他向けサービスに関するお問い合わせフォーム』が対象種別ごとに分離されており(URL実在をcurlで確認)、いずれも教育機関向け窓口",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     }
   ]
 }
