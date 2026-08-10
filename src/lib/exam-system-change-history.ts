@@ -14,6 +14,13 @@
  *    管轄のまま・本DBには含めない＝二重管理を避ける）
  *  - 過去5年（おおむね令和3年度〜令和8年度入試）の範囲に絞る（∞ではなく有限のバックフィル）
  *  - 裏取りできない・伝聞のみの変更は正直に収録を見送る（捏造ゼロ）
+ *
+ * **掛-4（47県×5年＝235調査単位）**: 上記の実際の変更に加え、「調査したが対象期間内に該当する
+ * 変更が見つからなかった」という空振りも`CONFIRMED_NO_CHANGE_CHECKS`（本ファイル下部）へ記録する。
+ * 空振りを記録しないと同じ県を何度も再調査してしまうため、47県を体系的に潰す際の必須のログ。
+ *
+ * **2026-08-10追記**: 大阪府を調査し対象期間内の変更なしを確認（CONFIRMED_NO_CHANGE_CHECKS参照）。
+ * 令和10年度(2028年度)以降に「学校特色枠」導入等の大きな改正が予告されているが対象期間外。
  */
 
 export type SystemChangeCategory =
@@ -165,6 +172,33 @@ export const PAST_SYSTEM_CHANGES: PastSystemChange[] = [
     sourceUrl: 'https://www.edu-netz.com/admission-information2025/nagasaki-info-r7',
     sourceTitle: '対話式進学塾1対1ネッツ「長崎県の高校入試情報2025(令和7年度)」（長崎県教育委員会発表を引用）',
     confirmedDate: '2026-08-05',
+  },
+];
+
+export interface ConfirmedNoChangeCheck {
+  prefCode: string;
+  prefName: string;
+  /** 調査した対象期間（例: '令和3年度〜令和8年度入試'）。 */
+  yearRange: string;
+  /** この県を調査した日('YYYY-MM-DD')。 */
+  confirmedDate: string;
+  /** 調査の要約（どのソースでどう確認したか、1〜2文）。 */
+  note: string;
+}
+
+/**
+ * 「調査したが対象期間内に該当する制度変更が見つからなかった」という空振り自体を記録する台帳
+ * （掛-4の設計原則：「この県のこの期間に変更なしを確認済み」自体が資産・二度と同じ調査をしない
+ * ための記録）。PAST_SYSTEM_CHANGESに載る「実際に起きた変更」とは別に、47県×5年の体系的な
+ * 調査進捗を可視化する。
+ */
+export const CONFIRMED_NO_CHANGE_CHECKS: ConfirmedNoChangeCheck[] = [
+  {
+    prefCode: 'osaka',
+    prefName: '大阪府',
+    yearRange: '令和3年度〜令和8年度入試',
+    confirmedDate: '2026-08-10',
+    note: '大阪府教育庁は令和10年度(2028年度)以降に「学校特色枠」導入・2月特別選抜と3月一般選抜の統合等の大きな制度改正を令和7年10月に予告発表しているが、これは対象期間(令和3〜8年度)より後の変更であり本DBの範囲外。令和3〜8年度の間は特別選抜(2月・実技検査を伴う一部学科のみ)+一般選抜(3月)の2本立て構成が継続しており、内申点の計算方式(大阪タイプ・prefectures.ts現行値)を含め対象期間内の制度変更は確認できなかった。',
   },
 ];
 

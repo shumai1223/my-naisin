@@ -1,4 +1,8 @@
-import { PAST_SYSTEM_CHANGES, getPastSystemChangesByPrefecture } from '../exam-system-change-history';
+import {
+  PAST_SYSTEM_CHANGES,
+  getPastSystemChangesByPrefecture,
+  CONFIRMED_NO_CHANGE_CHECKS,
+} from '../exam-system-change-history';
 import { PREFECTURES } from '../prefectures';
 
 describe('PAST_SYSTEM_CHANGES（Λ+5・過去の制度変更履歴DB）', () => {
@@ -131,5 +135,43 @@ describe('getPastSystemChangesByPrefecture', () => {
 
   test('変更が無い県は空配列を返す(存在しない変更を捏造しない)', () => {
     expect(getPastSystemChangesByPrefecture('shimane')).toEqual([]);
+  });
+});
+
+describe('CONFIRMED_NO_CHANGE_CHECKS（掛-4・空振りの調査記録）', () => {
+  test('全エントリはprefectures.tsに実在する都道府県コードを指す(捏造県防止)', () => {
+    const codes = new Set(PREFECTURES.map((p) => p.code));
+    for (const c of CONFIRMED_NO_CHANGE_CHECKS) {
+      expect(codes.has(c.prefCode)).toBe(true);
+    }
+  });
+
+  test('prefNameはprefectures.tsのnameと一致する(表記ゆれ防止)', () => {
+    for (const c of CONFIRMED_NO_CHANGE_CHECKS) {
+      const pref = PREFECTURES.find((p) => p.code === c.prefCode);
+      expect(pref?.name).toBe(c.prefName);
+    }
+  });
+
+  test('全エントリは確認日・調査要約を持つ(空文字なし)', () => {
+    for (const c of CONFIRMED_NO_CHANGE_CHECKS) {
+      expect(c.confirmedDate).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+      expect(c.note.length).toBeGreaterThan(0);
+      expect(c.yearRange.length).toBeGreaterThan(0);
+    }
+  });
+
+  test('大阪府は対象期間内の制度変更なしと確認済み(令和10年度以降の予告は対象期間外)', () => {
+    const osaka = CONFIRMED_NO_CHANGE_CHECKS.find((c) => c.prefCode === 'osaka');
+    expect(osaka).toBeDefined();
+    expect(osaka?.note).toContain('令和10年度');
+    expect(getPastSystemChangesByPrefecture('osaka')).toEqual([]);
+  });
+
+  test('同一県がPAST_SYSTEM_CHANGESとCONFIRMED_NO_CHANGE_CHECKSの両方に重複登録されていない', () => {
+    const changedPrefs = new Set(PAST_SYSTEM_CHANGES.map((c) => c.prefCode));
+    for (const c of CONFIRMED_NO_CHANGE_CHECKS) {
+      expect(changedPrefs.has(c.prefCode)).toBe(false);
+    }
   });
 });
