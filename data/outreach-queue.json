@@ -1323,6 +1323,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane3"
+    },
+    {
+      "id": "moshi-ibatou-ibaraki",
+      "org": "茨城統一テスト協議会",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://web.gogo.jp/ibatou/form/page13",
+      "contactClass": "b2b",
+      "evidence": "お問い合わせフォームの必須項目に『塾コード(加盟塾)』欄、お問い合わせ種別の選択肢に『茨城統一テスト協議会加盟について』があり、個人の自宅受験申込とは別の塾向け加盟窓口であることを直接WebFetchで確認",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
     }
   ]
 }

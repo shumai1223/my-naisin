@@ -290,10 +290,12 @@ lane1/lane2/lane4から着手し`data/outreach-queue.json`へ実サイト訪問�
 
 | 区分 | 件数 |
 |---|---:|
-| contactClass='b2b'（status='candidate'・下書き未作成） | **44件** |
+| contactClass='b2b'（status='candidate'・下書き未作成） | **45件** |
 | contactClass='unknown'（status='excluded'・送信対象外） | 2件 |
 | 既存の教委/メディア/相互リンク分（queued・変更なし） | 51件 |
-| lane別内訳 | lane1=20件・lane2=18件・lane3=1件・lane4=7件（T-C1由来のみ・queue総数104件） |
+| lane別内訳 | lane1=21件・lane2=18件・lane3=1件・lane4=7件（T-C1由来のみ・queue総数105件） |
+
+**08-11 08:4x追記(lane1第5弾)**: 茨城統一テスト協議会=お問い合わせフォームの必須項目に『塾コード(加盟塾)』欄・お問い合わせ種別に『茨城統一テスト協議会加盟について』があり、個人の自宅受験申込とは別の塾向け加盟窓口であることを直接WebFetchで確認しb2b確定、candidate計45件。
 
 **08-11 08:2x追記(lane3初着手)**: 株式会社明光ネットワークジャパン=お問い合わせページで『明光ネットワークジャパンに関するお問い合わせ』と『フランチャイズオーナーに関するお問い合わせ』が別リンクで分離され、後者はFC加盟専用サイト(meiko-net.com)・専用ダイヤルへ誘導されることを直接WebFetchで確認しb2b確定。candidate計44件、lane3初のcandidate。ITTO/早稲田アカデミーは法人・提携専用の窓口分離が確認できず見送り。
 
