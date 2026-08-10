@@ -1284,6 +1284,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+    },
+    {
+      "id": "moshi-syogakusya-hyogo",
+      "org": "株式会社晶学社(兵庫模試)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.syogakusya.co.jp/F01_FORMDATA/210721/sankajyuku_form.html",
+      "contactClass": "b2b",
+      "evidence": "『公開兵庫模試参加塾掲載申込フォーム』という塾向け専用フォームが個人向けの意見・要望窓口とは別に存在し、必須項目に『貴塾名』『対象学年と指導科目』『ホームページURL』があることを直接WebFetchで確認",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
     }
   ]
 }
