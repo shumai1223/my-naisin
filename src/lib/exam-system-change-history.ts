@@ -534,6 +534,13 @@ export const CONFIRMED_NO_CHANGE_CHECKS: ConfirmedNoChangeCheck[] = [
     note: '宮城県は対象期間中、全ての高校・学科で第一次募集として共通選抜(調査書195点満点=5教科の5段階評定合計+実技4教科の5段階評定×2倍、学力検査500点満点との比率は高校ごとに7:3〜3:7の範囲で設定)と特色選抜(募集人員10〜50%程度・教科ごとに0.25〜4.0倍の換算率を高校・学科・コースごとに独自設定)を並行実施する2本立て構成が安定して継続しており、独立した2ソース(進研ゼミ・axis-kobetsu.jp)でも同一の記述が確認できた。prefectures.ts(miyagi・practicalMultiplier2・maxScore195)の現行値とも整合する。対象期間内の制度変更は確認できなかった。',
   },
   {
+    prefCode: 'tokushima',
+    prefName: '徳島県',
+    yearRange: '令和3年度〜令和8年度入試',
+    confirmedDate: '2026-08-10',
+    note: '徳島県は対象期間中、育成型選抜(2月・活動重視枠と実績重視枠の2区分、いずれも調査書・学力検査・活動記録等の配点比率を規定の範囲内で各校が設定)と一般選抜(3月・学力検査と面接)の2本立て構成、内申点の計算方式(9教科×5段階×3学年、実技4教科2倍換算=195点満点)とも安定して継続しており、独立した2ソース(axis-kobetsu.jp・進研ゼミ)でも同一の記述が確認できた。prefectures.ts(tokushima・practicalMultiplier2・maxScore195)の現行値とも整合する。対象期間内の制度変更は確認できなかった。',
+  },
+  {
     prefCode: 'ishikawa',
     prefName: '石川県',
     yearRange: '令和3年度〜令和8年度入試',
