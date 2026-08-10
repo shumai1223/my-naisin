@@ -54,6 +54,16 @@
  * (100=100)。白陵は現行スキップ理由(募集人員が若干のみ)が2024年度版でも同一のため対象外(既存の
  * スキップ判断の妥当性を裏付け)。この頁は総じてhyogoの「コース名が改称・再編されても総定員は極めて
  * 安定」という傾向をさらに補強する結果となった。
+ * **2026-08-10further(4ページ目=最終頁、4校全てを収録・見送りゼロ)**: 兵庫大学附属須磨ノ浦(300)・
+ * 武庫川女子大学附属(160)・百合学院(140)の3校はコース名が改称(特進アドバンス→特別進学等・創造
+ * グローバル(CG)→SOAR探究等・選抜特進→アカデミックリサーチ等)されたが総定員は完全一致(武庫川女子
+ * 大学附属は改称自体が既に2024年度版で反映済み)。報徳学園(250)は専願・併願の共通枠に加え1.5次募集
+ * (選抜特進15・特進10・進学10)が別枠として存在するが、現行コードの測定基盤(専願・併願のみを合算し
+ * 1.5次は含めない)を2024年度版にも一貫して適用すれば総定員は完全一致。**これでhyogo掛-2の全4頁処理
+ * が完了**(55校中43校収録・12校スキップの母数のうち、収録43校の大半で2024年度との多年度比較を
+ * 達成)。hyogo全体を通じての最大の知見は「コース名が全面的に改称・再編されても総定員(grand total)
+ * は驚くほど安定して一致する」というパターンで、これはtokyo等の大都市圏5県でも見られたが、hyogoでは
+ * より高頻度かつより大規模な改称でも一貫して再現した。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -1026,6 +1036,54 @@ export const PRIVATE_SCHOOL_DETAIL_HYOGO: PrivateSchoolDetailFile = {
         { courseName: 'アスリートコース(女)', capacity: 60 },
       ],
       totalCapacity: 270,
+      source: KAKE2_2024_HYOGO_SOURCE,
+    },
+    {
+      schoolCode: 'D128310000208',
+      schoolName: '兵庫大学附属須磨ノ浦高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '特進アドバンスコース(女、※特別進学コースへ改称)', capacity: 30 },
+        { courseName: '特進看護医療コース(女、※看護医療進学コースへ改称)', capacity: 30 },
+        { courseName: '幼児教育コース(女、※こども教育探究コースへ改称)', capacity: 70 },
+        { courseName: 'キャリア進学コース(女、※未来探究コースへ改称)', capacity: 144 },
+        { courseName: '介護福祉士コース(女)', capacity: 26 },
+      ],
+      totalCapacity: 300,
+      source: KAKE2_2024_HYOGO_SOURCE,
+    },
+    {
+      schoolCode: 'D128310000306',
+      schoolName: '報徳学園高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '選抜特進コース(男、専願・併願共通枠。1.5次は別枠のため未算入)', capacity: 20 },
+        { courseName: '特進コース(男、専願・併願共通枠。1.5次は別枠のため未算入)', capacity: 70 },
+        { courseName: '進学コース(男、専願・併願共通枠。1.5次は別枠のため未算入)', capacity: 160 },
+      ],
+      totalCapacity: 250,
+      source: KAKE2_2024_HYOGO_SOURCE,
+    },
+    {
+      schoolCode: 'D128310000333',
+      schoolName: '武庫川女子大学附属高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: 'SOAR探究コース(女、外部、※創造グローバル(CG)コースへ改称)', capacity: 140 },
+        { courseName: 'SOARグローバルサイエンスコース(女、外部、※創造サイエンス(CS)コースへ改称)', capacity: 20 },
+      ],
+      totalCapacity: 160,
+      source: KAKE2_2024_HYOGO_SOURCE,
+    },
+    {
+      schoolCode: 'D128310000299',
+      schoolName: '百合学院高等学校',
+      fiscalYearLabel: '2024年度',
+      courses: [
+        { courseName: '選抜特進コース(女、※アカデミックリサーチコースへ改称)', capacity: 40 },
+        { courseName: '特進コース(女、※キャリアリサーチコースへ改称)', capacity: 100 },
+      ],
+      totalCapacity: 140,
       source: KAKE2_2024_HYOGO_SOURCE,
     },
   ],

@@ -1094,12 +1094,12 @@ describe('PRIVATE_SCHOOL_DETAIL_HYOGO(55校中43校を収録・残り12校は完
     }
   });
 
-  it('収録81レコード(43校+掛-2多年度38レコード)・スキップ12件で参照台帳の55校と完全一致(重複・欠落なし)', () => {
+  it('収録85レコード(43校+掛-2多年度42レコード)・スキップ12件で参照台帳の55校と完全一致(重複・欠落なし)', () => {
     const allCodes = SCHOOLS_PRIVATE_HYOGO.schools.map((s) => s.code);
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_HYOGO, allCodes);
     expect(result.duplicates).toEqual([]);
     expect(result.missing).toHaveLength(0);
-    expect(PRIVATE_SCHOOL_DETAIL_HYOGO.schools.length).toBe(81);
+    expect(PRIVATE_SCHOOL_DETAIL_HYOGO.schools.length).toBe(85);
     expect(PRIVATE_SCHOOL_DETAIL_HYOGO.skipped.length).toBe(12);
   });
 
@@ -1229,6 +1229,25 @@ describe('PRIVATE_SCHOOL_DETAIL_HYOGO(55校中43校を収録・残り12校は完
     const pairs: Array<[string, number]> = [
       ['D128310000280', 270],
       ['D128310000191', 170],
+    ];
+    for (const [code, total] of pairs) {
+      const y2024 = PRIVATE_SCHOOL_DETAIL_HYOGO.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel === '2024年度'
+      );
+      const yLatest = PRIVATE_SCHOOL_DETAIL_HYOGO.schools.find(
+        (s) => s.schoolCode === code && s.fiscalYearLabel !== '2024年度'
+      );
+      expect(y2024?.totalCapacity).toBe(total);
+      expect(yLatest?.totalCapacity).toBe(total);
+    }
+  });
+
+  it('掛-2(私立×多年度・4ページ目=最終頁): 兵庫大学附属須磨ノ浦・報徳学園・武庫川女子大学附属・百合学院の4校は2024年度と2026年度で総定員が完全一致(いずれもコース名の改称を伴う)', () => {
+    const pairs: Array<[string, number]> = [
+      ['D128310000208', 300],
+      ['D128310000306', 250],
+      ['D128310000333', 160],
+      ['D128310000299', 140],
     ];
     for (const [code, total] of pairs) {
       const y2024 = PRIVATE_SCHOOL_DETAIL_HYOGO.schools.find(
