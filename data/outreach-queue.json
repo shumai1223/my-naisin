@@ -1232,6 +1232,32 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
+    },
+    {
+      "id": "gakusan-daiichi-gakushusha",
+      "org": "株式会社第一学習社",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.daiichi-g.co.jp/contact/",
+      "contactClass": "b2b",
+      "evidence": "公式サイトに『小社の教材は高等学校採択用書籍のため、当ホームページからのご注文は高等学校の先生に限らせていただきます。塾関係・一般・学生の方は、最寄りの書店にてご注文が可能です』と明記(直接WebFetchで確認)",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
+    },
+    {
+      "id": "gakusan-hamajima-shoten",
+      "org": "浜島書店",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.hamajima.co.jp/feedback/",
+      "contactClass": "b2b",
+      "evidence": "公式サイトFAQに『当社の出版物は学校採用品となっております』『中学校用教材は中学校を対象に販売しており、個人様への販売は行っていません』と明記(直接WebFetchで確認)",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
     }
   ]
 }
