@@ -1349,8 +1349,20 @@ describe('PRIVATE_SCHOOL_DETAIL_GIFU(私学振興会一覧で全21校を完全�
   });
 
   it('21校全てを収録しスキップ0件(全日制16校+通信制専業5校)', () => {
-    expect(PRIVATE_SCHOOL_DETAIL_GIFU.schools.length).toBe(21);
     expect(PRIVATE_SCHOOL_DETAIL_GIFU.skipped.length).toBe(0);
+  });
+
+  it('掛-2(私立×多年度): 令和7年度データ21校分を追加しschools.lengthは42', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_GIFU.schools.length).toBe(42);
+    const r7Count = PRIVATE_SCHOOL_DETAIL_GIFU.schools.filter((s) => s.fiscalYearLabel === '令和7年度').length;
+    expect(r7Count).toBe(21);
+  });
+
+  it('城南高等学校は令和8年度も普通科(通信制)60を含み校計160(旧データは調理科+製菓科の100のみで欠落していた)', () => {
+    const jonan = PRIVATE_SCHOOL_DETAIL_GIFU.schools.find(
+      (s) => s.schoolCode === 'D121320100070' && s.fiscalYearLabel === '令和8年度'
+    );
+    expect(jonan?.totalCapacity).toBe(160);
   });
 });
 
