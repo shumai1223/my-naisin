@@ -342,6 +342,17 @@ describe('CONFIRMED_NO_CHANGE_CHECKS（掛-4・空振りの調査記録）', () 
     expect(getPastSystemChangesByPrefecture('ishikawa')).toEqual([]);
   });
 
+  test('福井県は対象期間内の制度変更なしと確認済み(推薦一般2トラック・英数選択問題方式とも安定)', () => {
+    const fukui = CONFIRMED_NO_CHANGE_CHECKS.find((c) => c.prefCode === 'fukui');
+    expect(fukui).toBeDefined();
+    expect(fukui?.note).toContain('45点満点');
+
+    const fukuiPref = PREFECTURES.find((p) => p.code === 'fukui');
+    expect(fukuiPref?.maxScore).toBe(45);
+    expect(fukuiPref?.targetGrades).toEqual([3]);
+    expect(getPastSystemChangesByPrefecture('fukui')).toEqual([]);
+  });
+
   test('同一県がPAST_SYSTEM_CHANGESとCONFIRMED_NO_CHANGE_CHECKSの両方に重複登録されていない', () => {
     const changedPrefs = new Set(PAST_SYSTEM_CHANGES.map((c) => c.prefCode));
     for (const c of CONFIRMED_NO_CHANGE_CHECKS) {
