@@ -229,6 +229,18 @@ describe('CONFIRMED_NO_CHANGE_CHECKS（掛-4・空振りの調査記録）', () 
     expect(getPastSystemChangesByPrefecture('saitama')).toEqual([]);
   });
 
+  test('兵庫県は対象期間内の制度変更なしと確認済み(令和6年度の唯一の要綱変更は追検査資格の事務的追記のみ)', () => {
+    const hyogo = CONFIRMED_NO_CHANGE_CHECKS.find((c) => c.prefCode === 'hyogo');
+    expect(hyogo).toBeDefined();
+    expect(hyogo?.note).toContain('250点満点');
+
+    const hyogoPref = PREFECTURES.find((p) => p.code === 'hyogo');
+    expect(hyogoPref?.maxScore).toBe(250);
+    expect(hyogoPref?.coreMultiplier).toBe(4);
+    expect(hyogoPref?.practicalMultiplier).toBe(7.5);
+    expect(getPastSystemChangesByPrefecture('hyogo')).toEqual([]);
+  });
+
   test('同一県がPAST_SYSTEM_CHANGESとCONFIRMED_NO_CHANGE_CHECKSの両方に重複登録されていない', () => {
     const changedPrefs = new Set(PAST_SYSTEM_CHANGES.map((c) => c.prefCode));
     for (const c of CONFIRMED_NO_CHANGE_CHECKS) {
