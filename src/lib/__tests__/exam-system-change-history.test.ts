@@ -322,6 +322,18 @@ describe('PAST_SYSTEM_CHANGES（Λ+5・過去の制度変更履歴DB）', () => 
     expect(naraPref?.targetGrades).toEqual([1, 2, 3]);
   });
 
+  test('和歌山県のスポーツ推薦縮小エントリはprefectures.tsの現行maxScore(180点満点)と矛盾しない(選抜区分間の募集枠配分変更であり内申点計算式は不変)', () => {
+    const wakayama = PAST_SYSTEM_CHANGES.find((c) => c.prefCode === 'wakayama');
+    expect(wakayama).toBeDefined();
+    expect(wakayama?.effectiveYear).toBe('令和7年度（2025年度）入試');
+    expect(wakayama?.category).toBe('selection-structure');
+    expect(wakayama?.detail).toContain('スポーツ推薦');
+
+    const wakayamaPref = PREFECTURES.find((p) => p.code === 'wakayama');
+    expect(wakayamaPref?.maxScore).toBe(180);
+    expect(wakayamaPref?.gradeMultipliers).toEqual({ 1: 1, 2: 1, 3: 2 });
+  });
+
   test('categoryは定義済みの4種類のいずれかのみ(型崩れ防止)', () => {
     const validCategories = new Set(['scoring-input', 'selection-structure', 'weighting-formula', 'other']);
     for (const c of PAST_SYSTEM_CHANGES) {
@@ -336,7 +348,7 @@ describe('getPastSystemChangesByPrefecture', () => {
   });
 
   test('変更が無い県は空配列を返す(存在しない変更を捏造しない)', () => {
-    expect(getPastSystemChangesByPrefecture('wakayama')).toEqual([]);
+    expect(getPastSystemChangesByPrefecture('okinawa')).toEqual([]);
   });
 });
 

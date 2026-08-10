@@ -378,6 +378,18 @@ export const PAST_SYSTEM_CHANGES: PastSystemChange[] = [
     confirmedDate: '2026-08-10',
   },
   {
+    prefCode: 'wakayama',
+    prefName: '和歌山県',
+    effectiveYear: '令和7年度（2025年度）入試',
+    category: 'selection-structure',
+    headline: 'スポーツ推薦の対象・募集枠を縮小し、特色化選抜へ段階的に移行開始',
+    detail:
+      '和歌山県教育委員会は令和7(2025)年度入試から、それまで独立した選抜区分だったスポーツ推薦の対象種目・募集枠を縮小し、一部の枠を特色化選抜(2月実施)へ移行する段階的な再編を開始した。スポーツ推薦は令和9(2027)年度入試を最後に完全廃止される方針が公表されているが、これは対象期間(令和3〜8年度)より後の変更であり本DBの範囲外(大阪府等と同型のパターン)。対象期間中に実際に生じたのは令和7年度からのスポーツ推薦の縮小開始であり、内申点(調査書)の計算方式自体(9教科×5段階、中1中2各45点+中3を2倍の90点＝180点満点)には変更がなく、選抜区分間の募集枠配分が変わった点が本変更の核心。',
+    sourceUrl: 'https://www.agara.co.jp/article/359963',
+    sourceTitle: '紀伊民報AGARA「スポーツ推薦、２７年度で廃止 高校入試『特色化選抜』拡充へ、和歌山県教委」',
+    confirmedDate: '2026-08-10',
+  },
+  {
     prefCode: 'hokkaido',
     prefName: '北海道',
     effectiveYear: '令和4年度（2022年度）入試',
