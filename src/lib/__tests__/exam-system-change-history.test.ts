@@ -334,6 +334,18 @@ describe('PAST_SYSTEM_CHANGES（Λ+5・過去の制度変更履歴DB）', () => 
     expect(wakayamaPref?.gradeMultipliers).toEqual({ 1: 1, 2: 1, 3: 2 });
   });
 
+  test('宮崎県の学校推薦廃止・自己推薦型移行エントリはprefectures.tsの現行maxScore(135点満点)と矛盾しない(出願資格の変更であり内申点計算式は不変)', () => {
+    const miyazaki = PAST_SYSTEM_CHANGES.find((c) => c.prefCode === 'miyazaki');
+    expect(miyazaki).toBeDefined();
+    expect(miyazaki?.effectiveYear).toBe('令和4年度（2022年度）入試');
+    expect(miyazaki?.category).toBe('selection-structure');
+    expect(miyazaki?.detail).toContain('自己推薦型');
+
+    const miyazakiPref = PREFECTURES.find((p) => p.code === 'miyazaki');
+    expect(miyazakiPref?.maxScore).toBe(135);
+    expect(miyazakiPref?.gradeMultipliers).toEqual({ 1: 1, 2: 1, 3: 1 });
+  });
+
   test('categoryは定義済みの4種類のいずれかのみ(型崩れ防止)', () => {
     const validCategories = new Set(['scoring-input', 'selection-structure', 'weighting-formula', 'other']);
     for (const c of PAST_SYSTEM_CHANGES) {
