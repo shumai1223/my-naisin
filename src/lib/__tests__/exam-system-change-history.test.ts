@@ -298,6 +298,17 @@ describe('CONFIRMED_NO_CHANGE_CHECKS（掛-4・空振りの調査記録）', () 
     expect(getPastSystemChangesByPrefecture('gifu')).toEqual([]);
   });
 
+  test('熊本県は対象期間内の制度変更なしと確認済み(令和9年度改革は令和8年度以降当面延期と公式発表済み)', () => {
+    const kumamoto = CONFIRMED_NO_CHANGE_CHECKS.find((c) => c.prefCode === 'kumamoto');
+    expect(kumamoto).toBeDefined();
+    expect(kumamoto?.note).toContain('延期');
+
+    const kumamotoPref = PREFECTURES.find((p) => p.code === 'kumamoto');
+    expect(kumamotoPref?.maxScore).toBe(180);
+    expect(kumamotoPref?.gradeMultipliers).toEqual({ 1: 1, 2: 1, 3: 2 });
+    expect(getPastSystemChangesByPrefecture('kumamoto')).toEqual([]);
+  });
+
   test('同一県がPAST_SYSTEM_CHANGESとCONFIRMED_NO_CHANGE_CHECKSの両方に重複登録されていない', () => {
     const changedPrefs = new Set(PAST_SYSTEM_CHANGES.map((c) => c.prefCode));
     for (const c of CONFIRMED_NO_CHANGE_CHECKS) {
