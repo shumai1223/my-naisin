@@ -1141,6 +1141,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+    },
+    {
+      "id": "moshi-hiroshima-juku-coop",
+      "org": "広島県学習塾協同組合(じゅくこーぷ)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://juku-coop.com/contact/",
+      "contactClass": "b2b",
+      "evidence": "広島県で唯一正式認可された学習塾協同組合。加盟塾向けの『組合加入方法』ページと『お問い合わせ・ご相談』フォームの実在を直接確認(curlでHTTP200)。模擬試験の作成・実施も事業内容に含む",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
     }
   ]
 }
