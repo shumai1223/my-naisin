@@ -369,7 +369,7 @@ export function GET() {
               properties: {
                 formula: { type: 'object' },
                 examples: { type: 'array', items: { $ref: '#/components/schemas/CalcExample' } },
-                targetSchools: { type: 'array', items: { type: 'object' } },
+                // E-0（2026-08-11）: targetSchools は配信を停止した（学校別ボーダーの独自推定・Y-0違反）。
               },
             },
           ],

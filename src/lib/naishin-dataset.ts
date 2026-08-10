@@ -166,24 +166,11 @@ function buildExamples(code: string) {
   });
 }
 
-/** スケール整合の取れた主要校の目安内申（満点内のもののみ＝信頼の堀を守る）。 */
-function buildTargetSchools(code: string, maxScore: number) {
-  const data = PREFECTURE_HIGH_SCHOOL_DATA[code];
-  if (!data) return [];
-  return (data.topHighSchools ?? [])
-    .filter(
-      (s): s is typeof s & { avgNaishin: number } =>
-        typeof s.avgNaishin === 'number' && s.avgNaishin > 0 && s.avgNaishin <= maxScore
-    )
-    .slice(0, 8)
-    .map((s) => ({
-      name: s.name,
-      department: s.department,
-      targetNaishin: s.avgNaishin,
-      note: s.notes,
-      source: s.source,
-    }));
-}
+// E-0（2026-08-11）: buildTargetSchools() は削除した。
+// 学校別の目安内申（＝合格ボーダーの推定）を公開データセットに載せる関数だったが、
+// 元データ PREFECTURE_HIGH_SCHOOL_DATA は教委を出典に持つ行が0で、226行が自社推定。
+// Y-0憲法が永久禁止した対象であり、CC BY 4.0 で再利用自由に配布していた。
+// 復活させるなら、教委等が公表した学校別の値のみで作り直すこと。
 
 /** 単一都道府県の詳細（/api/naishin/{code}）。計算例・計算式の説明・目安校を含む。 */
 export function buildPrefectureDetail(code: string) {
@@ -207,7 +194,20 @@ export function buildPrefectureDetail(code: string) {
       practicalSubjects: ['音楽', '美術', '保健体育', '技術家庭'],
     },
     examples: buildExamples(code),
-    targetSchools: buildTargetSchools(code, p.maxScore),
+    // ⛔ 2026-08-11 E-0: `targetSchools` の配信を停止した。
+    //
+    // 中身は PREFECTURE_HIGH_SCHOOL_DATA の `avgNaishin`＝学校別の目安内申（＝合格ボーダーの推定）で、
+    // 実測すると source: 400行のうち教委を出典に持つ行は 0行、うち226行は「推計 2026年度」＝自社推定。
+    // これは Y-0憲法が永久禁止した「学校別の合格ボーダーの独自推定」そのものであり、
+    // さらに悪いことに、このデータセットは
+    //   ・/api/naishin ・/api/naishin/[code] ・/api/naishin/csv ・/api/mcp（AIエージェント向け）で配信され
+    //   ・CC BY 4.0（再利用自由）でライセンスされていた
+    // ＝「推定値を、出典を明示しないまま再利用自由のオープンデータとして配布していた」状態だった。
+    // 本番 /api/naishin/tokyo が日比谷62・西61・国立61 を返していることを実測で確認（2026-08-11）。
+    //
+    // 復活させる場合の条件: 教委等が公表した学校別の値のみで構成し直すこと。
+    // 塾・受験情報サイトの推定値は「公表値」ではないため、出典を明記しても Y-0 の対象外にはならない。
+    // 詳細と経緯: ops/tasks/T-E0-borderline-y0-violation.md
   };
 }
 

@@ -27,7 +27,6 @@ import { PrefectureMinimumContent } from '@/components/PrefectureMinimumContent'
 import { BlogRelatedArticles } from '@/components/BlogRelatedArticles';
 import { NaishinResultFlow } from '@/components/Calculator/NaishinResultFlow';
 import { StaticToolEntryLinks } from '@/components/StaticToolEntryLinks';
-import { HighSchoolBorderlineTable } from '@/components/HighSchoolBorderlineTable';
 import { TrustInfo } from '@/components/TrustInfo';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
@@ -463,8 +462,8 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
               </section>
             )}
 
-            {/* 高校別ボーダーライン一覧 */}
-            <HighSchoolBorderlineTable prefectureCode={prefectureCode} prefectureName={prefecture.name} />
+            {/* ⛔ E-0（2026-08-11）: 高校別ボーダーライン一覧の掲載を停止した（Y-0違反）。
+                詳細と復活条件: ops/tasks/T-E0-borderline-y0-violation.md */}
 
             {/* 志望校検討モードのユーザーへ：AI個別指導（旧サプリ¥5.4/clickは低EVで撤去） */}
             <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">

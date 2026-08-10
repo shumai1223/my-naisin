@@ -56,8 +56,7 @@ export default function DevelopersPage() {
   "examples": [
     { "label": "オール3", "total": 39, "max": 65, "percent": 60 },
     { "label": "オール5", "total": 65, "max": 65, "percent": 100 }
-  ],
-  "targetSchools": [ { "name": "…", "targetNaishin": 0 } ]
+  ]
 }`;
 
   const mcpConfig = `{

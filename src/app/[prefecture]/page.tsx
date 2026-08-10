@@ -22,7 +22,6 @@ import { getPrefectureGuide, PREFECTURES_WITH_GUIDE } from '@/lib/prefecture-gui
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { BlogRelatedArticles } from '@/components/BlogRelatedArticles';
 import { PrefecturePillarLinks } from '@/components/PrefecturePillarLinks';
-import { HighSchoolBorderlineTable } from '@/components/HighSchoolBorderlineTable';
 import { TrustInfo } from '@/components/TrustInfo';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
@@ -154,8 +153,11 @@ export default async function PrefecturePage({ params }: PrefecturePageProps) {
                 </div>
               </section>
 
-              {/* 高校別ボーダーライン一覧（最重要データ） */}
-              <HighSchoolBorderlineTable prefectureCode={code} prefectureName={pref.name} />
+              {/* ⛔ E-0（2026-08-11）: 高校別ボーダーライン一覧の掲載を停止した。
+                  掲載していた値は PREFECTURE_HIGH_SCHOOL_DATA で、source: 400行のうち
+                  教委を出典に持つ行は0・226行は「推計 2026年度」＝自社推定だった。
+                  Y-0憲法が永久禁止する「学校別の合格ボーダーの独自推定」に該当する。
+                  復活の条件と経緯: ops/tasks/T-E0-borderline-y0-violation.md */}
 
               {/* 関連ナビゲーション */}
               <section className="grid gap-4 sm:grid-cols-2">

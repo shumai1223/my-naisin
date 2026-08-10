@@ -68,7 +68,11 @@ describe('buildPrefectureDetail（/api/naishin/{code} 契約）', () => {
       expect(ex.percent).toBeGreaterThanOrEqual(0);
       expect(ex.percent).toBeLessThanOrEqual(100);
     }
-    expect(Array.isArray(detail!.targetSchools)).toBe(true);
+    // E-0（2026-08-11）: `targetSchools`（学校別の目安内申＝合格ボーダーの推定）の配信を停止した。
+    // Y-0憲法が永久禁止した「学校別の合格ボーダーの独自推定」であり、
+    // かつ CC BY 4.0 の再利用自由なデータセットとして /api/naishin・/api/mcp 等で配布されていた。
+    // → 二度と混入させないことを契約として固定する。
+    expect(detail).not.toHaveProperty('targetSchools');
   });
 
   test('存在しない県は null', () => {
