@@ -1,5 +1,5 @@
 {
-  "asOf": "2026-08-06",
+  "asOf": "2026-08-11",
   "notes": "X'-1送信キューv1。docs各所に散在する宛先を統合する作業の第一段(教委22県[email]+教育メディア9件[email]+5件[form]+個人塾4件[line]=40件をqueued化)。個人塾4件はX-7でフォームが生徒募集用で送信不可と判明済みだったが、併記された公式LINEアカウント(自由記述・PII不要)へ切り替えて追加(👤指示「line最優先・今すぐ送れる」に対応)。X-2地方紙残り31県/X-6 NPO/X-19学術/X-21オープンデータ/X-23/X-27/X-29/X-33等、他の複数docsに残る宛先は未統合(次回以降に追加)。統合済みの母数はkyoiku-i-contact-directory-2026-08-01.md(教委)・outreach-triage-2026-08-01.md(メディア)・x7-mutual-link-outreach-2026-07.md(個人塾)のCowork実地確認/既存調査結果を単一の真実源とし、文面は各docsから転記(新規の事実確認・捏造なし)。loopは1件も送信しない。",
   "entries": [
     {
@@ -671,6 +671,58 @@
       "status": "excluded",
       "excludeReason": "日本教育新聞社は種別が電子版/会員登録等3択のみで情報提供向けの選択肢が無い。埼玉新聞社は「その他」区分はあるが報道向けではなくデジタル関連窓口が主目的。優先度低のため今回は見送り。",
       "sourceDoc": "docs/outreach-triage-2026-08-01.md"
+    },
+    {
+      "id": "moshi-kyoiku-kaihatsu-shuppan",
+      "org": "教育開発出版株式会社",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.kyo-kai.co.jp/contact/apply.html",
+      "contactClass": "b2b",
+      "evidence": "サイトナビに「塾の先生へ」「学校の先生へ」の専用セクションがあり、問い合わせページに「新規お取引申請」フォームが存在する(教育機関・塾向け専用窓口)",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1",
+      "addedAt": "2026-08-11"
+    },
+    {
+      "id": "moshi-itsuki-shobo",
+      "org": "株式会社五ツ木書房",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.itsuki-s.co.jp/inquiry/",
+      "contactClass": "b2b",
+      "evidence": "「団体様」向け団体申込ウェブサイト(もしログ)と「中学校先生」向け学校教材ページが存在し、法人・教育機関向け窓口であることが明確",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1",
+      "addedAt": "2026-08-11"
+    },
+    {
+      "id": "moshi-wao-corporation",
+      "org": "株式会社ワオ・コーポレーション",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.wao-corp.com/contact/",
+      "contactClass": "b2b",
+      "evidence": "お問い合わせフォームに「事業・サービスに関するお問い合わせ」「プレスリリース・取材に関するお問い合わせ」の区分があり、生徒募集向け窓口とは別に法人・広報向け窓口が存在する",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1",
+      "addedAt": "2026-08-11"
+    },
+    {
+      "id": "moshi-osaka-shinken",
+      "org": "株式会社大阪進研",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "http://www.o-shinken.co.jp/corporate/inq.html",
+      "contactClass": "b2b",
+      "evidence": "フォーム内に「こちらは学習塾様専用のお問い合わせフォームとなります。それ以外のお問い合わせにはご対応いたしかねます」と明記。必須項目は「塾教室名」「先生名」で個人消費者向けではない",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1",
+      "addedAt": "2026-08-11"
     }
   ]
 }

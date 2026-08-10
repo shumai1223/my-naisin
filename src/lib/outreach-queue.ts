@@ -13,7 +13,10 @@ import type { OutreachLane, ReviewTier } from './outreach-ledger';
 import { LANE_DEFAULT_REVIEW_TIER } from './outreach-ledger';
 
 export type QueueChannel = 'line' | 'email' | 'form';
-export type QueueStatus = 'queued' | 'excluded';
+/** 'candidate' = T-C1連絡経路判別済みだが件名・本文の下書きが未作成(まだ送信キューに乗らない)。 */
+export type QueueStatus = 'queued' | 'excluded' | 'candidate';
+/** T-C1連絡経路判別ルールの結果。'unknown'は送信対象外(推測でb2b/consumerを付けない)。 */
+export type ContactClass = 'b2b' | 'consumer' | 'unknown';
 
 export interface QueueEntry {
   id: string;
@@ -36,6 +39,12 @@ export interface QueueEntry {
   draftId?: string;
   /** 下書き作成日時(ISO)。draftId同様、二重作成防止用。 */
   draftedAt?: string;
+  /** T-C1: 実際にサイトを開いて判別した連絡経路の性質。'unknown'は送信対象外。 */
+  contactClass?: ContactClass;
+  /** contactClassの判定根拠(ページ内の文言・フォーム必須項目名等)。空のまま「検証済み」に数えない。 */
+  evidence?: string;
+  /** contactClassを確認した日付(YYYY-MM-DD)。 */
+  verifiedAt?: string;
 }
 
 /** チャンネルの優先順位（👤の手間が小さい順）。X'-1本文の実測に基づく: line最優先→email→form。 */
@@ -67,20 +76,27 @@ export function summarizeQueue(entries: QueueEntry[]): {
   queuedByChannel: Record<QueueChannel, number>;
   queuedByLane: Partial<Record<OutreachLane, number>>;
   excludedCount: number;
+  /** status==='candidate'(判別済み・下書き未作成)の件数。queuedByChannel/queuedByLaneには含めない。 */
+  candidateCount: number;
   total: number;
 } {
   const queuedByChannel: Record<QueueChannel, number> = { line: 0, email: 0, form: 0 };
   const queuedByLane: Partial<Record<OutreachLane, number>> = {};
   let excludedCount = 0;
+  let candidateCount = 0;
   for (const e of entries) {
     if (e.status === 'excluded') {
       excludedCount += 1;
       continue;
     }
+    if (e.status === 'candidate') {
+      candidateCount += 1;
+      continue;
+    }
     queuedByChannel[e.channel] += 1;
     queuedByLane[e.lane] = (queuedByLane[e.lane] ?? 0) + 1;
   }
-  return { queuedByChannel, queuedByLane, excludedCount, total: entries.length };
+  return { queuedByChannel, queuedByLane, excludedCount, candidateCount, total: entries.length };
 }
 
 /** エントリのレビュー区分(個別指定 > レーン既定値)。outreach-ledgerのreviewTierOfと同じ規約。 */
