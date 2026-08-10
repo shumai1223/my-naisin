@@ -510,6 +510,17 @@ describe('CONFIRMED_NO_CHANGE_CHECKS（掛-4・空振りの調査記録）', () 
     expect(getPastSystemChangesByPrefecture('aomori')).toEqual([]);
   });
 
+  test('宮城県は対象期間内の制度変更なしと確認済み(共通選抜/特色選抜の2本立て構成・195点満点とも安定)', () => {
+    const miyagi = CONFIRMED_NO_CHANGE_CHECKS.find((c) => c.prefCode === 'miyagi');
+    expect(miyagi).toBeDefined();
+    expect(miyagi?.note).toContain('特色選抜');
+
+    const miyagiPref = PREFECTURES.find((p) => p.code === 'miyagi');
+    expect(miyagiPref?.maxScore).toBe(195);
+    expect(miyagiPref?.practicalMultiplier).toBe(2);
+    expect(getPastSystemChangesByPrefecture('miyagi')).toEqual([]);
+  });
+
   test('同一県がPAST_SYSTEM_CHANGESとCONFIRMED_NO_CHANGE_CHECKSの両方に重複登録されていない', () => {
     const changedPrefs = new Set(PAST_SYSTEM_CHANGES.map((c) => c.prefCode));
     for (const c of CONFIRMED_NO_CHANGE_CHECKS) {
