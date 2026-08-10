@@ -776,6 +776,32 @@
       "excludeReason": "contactClass判定不能(B2B/consumer分離signalなし)のため送信対象外。C1原則により推測でb2bと判定しない",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+    },
+    {
+      "id": "gakusan-gakken",
+      "org": "株式会社Gakken",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.corp-gakken.co.jp/contact/",
+      "contactClass": "b2b",
+      "evidence": "取材・製品/サービスに関する問い合わせ用のGoogleフォームが用意されており、広報窓口(TEL 0570-056-710・平日9-17時)として機能する。※WebSearch要約は個別メールアドレス(gpress9470@gakken.co.jp)を提示したが、直接WebFetchで一次ページを確認したところ当該メールアドレスの記載は見当たらず、フォームのみと判明(要約の誤りを一次確認で訂正)",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
+    },
+    {
+      "id": "gakusan-obunsha",
+      "org": "株式会社旺文社",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.obunsha.co.jp/support/contact",
+      "contactClass": "b2b",
+      "evidence": "サイトに「法人の方へ」(obunsha.co.jp/corporation)という専用ページがあり、参考書・辞書のライセンスビジネスや塾・予備校向けサービスを案内している。専用の問い合わせフォーム/メールは同ページから直接リンクされていないため、一般お問い合わせフォームを窓口として記録",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
     }
   ]
 }
