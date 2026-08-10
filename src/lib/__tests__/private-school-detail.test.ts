@@ -1084,8 +1084,13 @@ describe('PRIVATE_SCHOOL_DETAIL_SAITAMA(学事課一覧で58校中47校を完全
   });
 
   it('収録47校+スキップ11校(募集なし1校+通信制のみ掲載/分校/掲載なし10校)で参照台帳の58校と一致する', () => {
-    expect(PRIVATE_SCHOOL_DETAIL_SAITAMA.schools.length).toBe(47);
     expect(PRIVATE_SCHOOL_DETAIL_SAITAMA.skipped.length).toBe(11);
+  });
+
+  it('掛-2(私立×多年度): 令和7年度データ47校分を追加しschools.lengthは94', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_SAITAMA.schools.length).toBe(94);
+    const r7Count = PRIVATE_SCHOOL_DETAIL_SAITAMA.schools.filter((s) => s.fiscalYearLabel === '令和7年度').length;
+    expect(r7Count).toBe(47);
   });
 });
 
