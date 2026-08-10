@@ -402,6 +402,17 @@ describe('CONFIRMED_NO_CHANGE_CHECKS（掛-4・空振りの調査記録）', () 
     expect(getPastSystemChangesByPrefecture('ibaraki')).toEqual([]);
   });
 
+  test('福島県は対象期間内の制度変更なしと確認済み(令和8年度のWEB出願化は出願手続きの変更で内申点計算に影響しないため収録基準外)', () => {
+    const fukushima = CONFIRMED_NO_CHANGE_CHECKS.find((c) => c.prefCode === 'fukushima');
+    expect(fukushima).toBeDefined();
+    expect(fukushima?.note).toContain('WEB出願');
+
+    const fukushimaPref = PREFECTURES.find((p) => p.code === 'fukushima');
+    expect(fukushimaPref?.maxScore).toBe(195);
+    expect(fukushimaPref?.practicalMultiplier).toBe(2);
+    expect(getPastSystemChangesByPrefecture('fukushima')).toEqual([]);
+  });
+
   test('同一県がPAST_SYSTEM_CHANGESとCONFIRMED_NO_CHANGE_CHECKSの両方に重複登録されていない', () => {
     const changedPrefs = new Set(PAST_SYSTEM_CHANGES.map((c) => c.prefCode));
     for (const c of CONFIRMED_NO_CHANGE_CHECKS) {
