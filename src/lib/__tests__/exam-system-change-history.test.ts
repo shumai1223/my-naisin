@@ -241,6 +241,17 @@ describe('CONFIRMED_NO_CHANGE_CHECKS（掛-4・空振りの調査記録）', () 
     expect(getPastSystemChangesByPrefecture('hyogo')).toEqual([]);
   });
 
+  test('京都府は対象期間内の制度変更なしと確認済み(令和9年度からの前期中期一本化は対象期間外)', () => {
+    const kyoto = CONFIRMED_NO_CHANGE_CHECKS.find((c) => c.prefCode === 'kyoto');
+    expect(kyoto).toBeDefined();
+    expect(kyoto?.note).toContain('令和9年度');
+
+    const kyotoPref = PREFECTURES.find((p) => p.code === 'kyoto');
+    expect(kyotoPref?.maxScore).toBe(195);
+    expect(kyotoPref?.practicalMultiplier).toBe(2);
+    expect(getPastSystemChangesByPrefecture('kyoto')).toEqual([]);
+  });
+
   test('同一県がPAST_SYSTEM_CHANGESとCONFIRMED_NO_CHANGE_CHECKSの両方に重複登録されていない', () => {
     const changedPrefs = new Set(PAST_SYSTEM_CHANGES.map((c) => c.prefCode));
     for (const c of CONFIRMED_NO_CHANGE_CHECKS) {
