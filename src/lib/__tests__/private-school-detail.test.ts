@@ -631,9 +631,14 @@ describe('PRIVATE_SCHOOL_DETAIL_KAGAWA(県庁公表の全日制/通信制募集�
     expect(result.missing).toEqual([]);
   });
 
-  it('収録10校+スキップ3校(通信制専門校)で参照台帳の13校と一致する', () => {
-    expect(PRIVATE_SCHOOL_DETAIL_KAGAWA.schools.length).toBe(10);
+  it('収録10校(令和8年度)+スキップ3校(通信制専門校)で参照台帳の13校と一致する', () => {
     expect(PRIVATE_SCHOOL_DETAIL_KAGAWA.skipped.length).toBe(3);
+  });
+
+  it('掛-2(私立×多年度): 令和7年度データ9校分(大手前丸亀は令和8年度新設のため対象外)を追加しschools.lengthは19', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_KAGAWA.schools.length).toBe(19);
+    const r7Count = PRIVATE_SCHOOL_DETAIL_KAGAWA.schools.filter((s) => s.fiscalYearLabel === '令和7年度').length;
+    expect(r7Count).toBe(9);
   });
 });
 
