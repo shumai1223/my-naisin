@@ -1154,6 +1154,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+    },
+    {
+      "id": "moshi-kagoshima-kyoiku-shinkokai",
+      "org": "株式会社鹿児島県教育振興会",
+      "lane": "b2b-saas",
+      "channel": "email",
+      "contact": "kyoushin@kakyoushin.co.jp",
+      "contactClass": "b2b",
+      "evidence": "統一模試の解説ページ(about-moshi/)を直接WebFetchした内容にメールアドレスの記載を確認(WebSearch要約経由ではなく一次ページの直接読み取り)。統一模試参加塾からの申込制度があり事業自体が学習塾との提携を前提とする",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
     }
   ]
 }
