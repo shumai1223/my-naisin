@@ -46,7 +46,7 @@ const FAQS = [
   {
     question: 'なぜ一部の統計が表示されていないのですか？',
     answer:
-      `サンプルサイズが${STATS_MIN_SAMPLE_SIZE}件未満の項目は、個人の値が推測されるリスクを避けるため（k-匿名性）、集計値を表示せず「現在n件収集中」とだけ表示します。件数が閾値を超えると自動的に集計値が表示されます。`,
+      `理由は3つあります。①サンプルサイズが${STATS_MIN_SAMPLE_SIZE}件未満（個人の値が推測されるリスクを避けるため・k-匿名性）②投稿の出所を検証できない（2026-08-10より、自動投稿とみられる集中が確認されたため公開を停止しています）③その指標として成立しない集計値になっている（例：偏差値は定義上、母集団平均が50です）。どの理由で非表示なのかは画面とAPIの両方に明示しています。`,
   },
   {
     question: '自分の結果も統計に含めるにはどうすればいいですか？',
@@ -87,15 +87,19 @@ async function loadStats() {
   return results;
 }
 
+// DW-1（2026-08-10）: 「全国分布」「全国平均」は、母集団を代表する統計であるかのように読める。
+// 実体は計算機利用者が任意でオプトインした自己選択標本であり、代表性は無い。
+// 見出しだけでなく、title / description / og / DatasetSchema（機械可読）まで名乗りを揃える。
+// ※ データ利用者やAIが読むのは後者なので、こちらを直さないと是正になっていない。
 export const metadata: Metadata = {
-  title: '全国 内申点・偏差値・総合得点 統計データ（利用者オプトイン集計） | My Naishin',
+  title: '内申点・偏差値・総合得点の統計データ（利用者オプトイン集計） | My Naishin',
   description:
-    '内申点・偏差値・総合得点の全国分布を、計算機利用者の任意オプトインによる匿名データから集計。個人を特定できる情報は一切含みません。サンプルサイズが少ない項目は「収集中」と誠実に表示します。',
-  keywords: ['内申点 平均', '偏差値 分布', '総合得点 統計', '内申点 全国平均'],
+    '内申点・偏差値・総合得点の分布を、計算機利用者の任意オプトインによる匿名データから集計。任意参加の自己選択標本であり、母集団を代表する統計ではありません。個人を特定できる情報は一切含みません。サンプルサイズが少ない項目・出所を検証できない項目は数値を表示せず理由を明示します。',
+  keywords: ['内申点 平均', '偏差値 分布', '総合得点 統計'],
   alternates: { canonical: `${SITE_URL}/stats` },
   openGraph: {
-    title: '全国 内申点・偏差値・総合得点 統計データ',
-    description: '計算機利用者の任意オプトインによる匿名データから集計した全国分布。',
+    title: '内申点・偏差値・総合得点の統計データ（利用者オプトイン集計）',
+    description: '計算機利用者の任意オプトインによる匿名データの集計。母集団を代表する統計ではありません。',
     url: `${SITE_URL}/stats`,
     type: 'website',
   },
@@ -113,16 +117,16 @@ export default async function StatsPage() {
       <BreadcrumbSchema
         items={[
           { name: 'ホーム', url: `${SITE_URL}/` },
-          { name: '全国統計データ', url },
+          { name: '統計データ（利用者オプトイン集計）', url },
         ]}
       />
       <FAQPageSchema faqItems={FAQS} />
       <DatasetSchema
-        name="全国 内申点・偏差値・総合得点 統計データ"
-        description="My Naishinの計算機利用者が任意でオプトインした匿名の計算結果を集計した全国分布データ。個人を特定できる情報は含まない。サンプルサイズが閾値未満のセグメントは非公開（k-匿名性）。"
+        name="内申点・偏差値・総合得点の統計データ（利用者オプトイン集計）"
+        description="My Naishinの計算機利用者が任意でオプトインした匿名の計算結果の集計。任意参加の自己選択標本であり、母集団を代表する統計ではない。個人を特定できる情報は含まない。サンプルサイズが閾値未満のセグメント・出所を検証できないセグメント・指標の不変条件を満たさないセグメントは非公開。"
         url={url}
         variableMeasured={['内申点', '偏差値', '総合得点']}
-        keywords={['内申点', '偏差値', '総合得点', '統計', '全国分布']}
+        keywords={['内申点', '偏差値', '総合得点', '統計', 'オプトイン集計']}
         distribution={[
           {
             '@type': 'DataDownload',
@@ -147,14 +151,14 @@ export default async function StatsPage() {
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">全国統計データ</span>
+            <span className="text-slate-700">統計データ</span>
           </nav>
 
           <header className="mb-8 text-center">
             <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white shadow-xl">
               <BarChart3 className="h-8 w-8" />
             </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">全国統計データ</h1>
+            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">統計データ（利用者オプトイン集計）</h1>
             <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-slate-600">
               内申点・偏差値・総合得点の計算機を使った方が任意でオプトインした匿名データを集計しています。個人を特定できる情報は一切含みません。
             </p>

@@ -193,10 +193,16 @@ export default function QualityPage() {
         <div className="mb-16 rounded-2xl border border-emerald-200 bg-emerald-50 p-6">
           <h2 className="mb-2 text-lg font-bold text-slate-800">利用者の匿名データによる統計</h2>
           <p className="mb-4 text-sm leading-relaxed text-slate-600">
-            計算機の結果を任意でオプトインいただいた匿名データから、内申点・偏差値・総合得点の全国分布を集計・公開しています。個人を特定できる情報は一切含みません。
+            計算機の結果を任意でオプトインいただいた匿名データから、内申点・偏差値・総合得点の分布を集計しています。任意参加の自己選択標本であり、母集団を代表する統計ではありません。個人を特定できる情報は一切含みません。
+            {/* DW-1（2026-08-10）: 投稿の真正性を検証できないことが判明したため、現在は数値の公開を停止している。
+                「公開しています」と書き続けると、このページ自体が信頼性の説明として嘘になる。 */}
+            <br />
+            <span className="mt-2 inline-block font-bold text-emerald-800">
+              ※ 2026-08-10 より、投稿の真正性を検証できないため集計値の公開を停止しています。送信元の検証を実装したうえで再収集します。件数の表示は続けています。
+            </span>
           </p>
           <Link href="/stats" className="mb-6 inline-flex items-center gap-1 text-sm font-bold text-emerald-700 hover:underline">
-            全国統計データを見る →
+            統計データのページを見る →
           </Link>
           <br />
           <Link href="/reliability" className="mt-2 inline-flex items-center gap-1 text-sm font-bold text-emerald-700 hover:underline">
