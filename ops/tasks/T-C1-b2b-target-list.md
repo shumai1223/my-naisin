@@ -288,10 +288,12 @@ lane1/lane2/lane4から着手し`data/outreach-queue.json`へ実サイト訪問�
 
 | 区分 | 件数 |
 |---|---:|
-| contactClass='b2b'（status='candidate'・下書き未作成） | **43件** |
+| contactClass='b2b'（status='candidate'・下書き未作成） | **44件** |
 | contactClass='unknown'（status='excluded'・送信対象外） | 2件 |
 | 既存の教委/メディア/相互リンク分（queued・変更なし） | 51件 |
-| lane別内訳 | lane1=20件・lane2=18件・lane4=7件（T-C1由来のみ・queue総数103件） |
+| lane別内訳 | lane1=20件・lane2=18件・lane3=1件・lane4=7件（T-C1由来のみ・queue総数104件） |
+
+**08-11 08:2x追記(lane3初着手)**: 株式会社明光ネットワークジャパン=お問い合わせページで『明光ネットワークジャパンに関するお問い合わせ』と『フランチャイズオーナーに関するお問い合わせ』が別リンクで分離され、後者はFC加盟専用サイト(meiko-net.com)・専用ダイヤルへ誘導されることを直接WebFetchで確認しb2b確定。candidate計44件、lane3初のcandidate。ITTO/早稲田アカデミーは法人・提携専用の窓口分離が確認できず見送り。
 
 **08-11 08:2x追記(lane2続報)**: 大日本図書=『お問い合わせ 教員の方』専用フォーム(必須項目『学校名』『勤務先住所』)が一般向け窓口(『一般の方はこちら』)と明確に分離されていることを直接WebFetchで確認しb2b確定、candidate計43件。開隆堂出版=デジタル教科書問い合わせ先(digital@kairyudo.co.jp)は実在確認できたが学校専用である明示的な文言が無く確証不足のため見送り。世界思想社教学社(赤本)/みくに出版は今回も学校・塾専用の窓口が特定できず見送り。
 

@@ -1310,6 +1310,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
+    },
+    {
+      "id": "juku-meiko-fc",
+      "org": "株式会社明光ネットワークジャパン(FC開発)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.meiko-net.com/contact-form/",
+      "contactClass": "b2b",
+      "evidence": "本体サイト(meikonet.co.jp)のお問い合わせページに『明光ネットワークジャパンに関するお問い合わせ』と『フランチャイズオーナーに関するお問い合わせ』が別リンクで分離されており、後者はFC加盟・独立開業専用サイト(meiko-net.com)へ誘導、専用ダイヤルも別番号であることを直接WebFetchで確認",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane3"
     }
   ]
 }
