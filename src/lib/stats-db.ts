@@ -11,6 +11,7 @@
  *    2026-07-11に/hensachiへ結線済み（stats-submit-client.ts経由で同意済みユーザーの結果のみ送信）。
  */
 import { isValidStatsSubmission, type StatsMetric, type StatsSubmissionInput } from '@/lib/stats-aggregation';
+import type { ClickTrust } from '@/lib/bot-filter';
 
 interface D1Result<T = Record<string, unknown>> {
   results?: T[];
@@ -34,18 +35,28 @@ async function getStatsDb(): Promise<MinimalD1 | null> {
   }
 }
 
-/** 匿名の計算結果を1件保存する。バインディング未設定・テーブル未作成なら no-op（false）。 */
-export async function insertStatsSubmission(input: StatsSubmissionInput): Promise<boolean> {
+/**
+ * 匿名の計算結果を1件保存する。バインディング未設定・テーブル未作成なら no-op（false）。
+ *
+ * DW-1（2026-08-10）以降、出所の信頼度を必ず添えて書く（migration 0019）。
+ * `trustClass !== 'human'` の行は保存はするが集計から外れる（trusted=0）。
+ * 消さずに残すのは、攻撃の規模を後から検証できる状態を保つため（Y-0：データを壊さない）。
+ */
+export async function insertStatsSubmission(
+  input: StatsSubmissionInput,
+  provenance: { trustClass: ClickTrust }
+): Promise<boolean> {
   if (!isValidStatsSubmission(input)) return false;
   try {
     const db = await getStatsDb();
     if (!db) return false;
+    const trusted = provenance.trustClass === 'human' ? 1 : 0;
     await db
       .prepare(
-        `INSERT INTO stats_submissions (metric, prefecture_code, value, max_value, created_at)
-         VALUES (?, ?, ?, ?, datetime('now'))`
+        `INSERT INTO stats_submissions (metric, prefecture_code, value, max_value, trusted, trust_class, created_at)
+         VALUES (?, ?, ?, ?, ?, ?, datetime('now'))`
       )
-      .bind(input.metric, input.prefectureCode ?? null, input.value, input.maxValue ?? null)
+      .bind(input.metric, input.prefectureCode ?? null, input.value, input.maxValue ?? null, trusted, provenance.trustClass)
       .run();
     return true;
   } catch (err) {
@@ -63,9 +74,13 @@ export async function getStatsValues(metric: StatsMetric, prefectureCode?: strin
   try {
     const db = await getStatsDb();
     if (!db) return [];
+    // DW-1: 集計に入れるのは出所検査を通った行だけ（trusted=1）。
+    // migration 0019 適用前の既存行はすべて trusted=0 なので自動的に除外される。
     const stmt = prefectureCode
-      ? db.prepare('SELECT value FROM stats_submissions WHERE metric = ? AND prefecture_code = ?').bind(metric, prefectureCode)
-      : db.prepare('SELECT value FROM stats_submissions WHERE metric = ?').bind(metric);
+      ? db
+          .prepare('SELECT value FROM stats_submissions WHERE metric = ? AND prefecture_code = ? AND trusted = 1')
+          .bind(metric, prefectureCode)
+      : db.prepare('SELECT value FROM stats_submissions WHERE metric = ? AND trusted = 1').bind(metric);
     const { results } = await stmt.all<{ value: number }>();
     return (results ?? []).map((r) => r.value).filter((v) => typeof v === 'number' && Number.isFinite(v));
   } catch (err) {
@@ -86,7 +101,8 @@ export async function getStatsValuesByPrefecture(metric: StatsMetric): Promise<R
     const db = await getStatsDb();
     if (!db) return grouped;
     const { results } = await db
-      .prepare('SELECT prefecture_code, value FROM stats_submissions WHERE metric = ? AND prefecture_code IS NOT NULL')
+      // DW-1: 全国集計と同じく trusted=1 のみ。
+      .prepare('SELECT prefecture_code, value FROM stats_submissions WHERE metric = ? AND prefecture_code IS NOT NULL AND trusted = 1')
       .bind(metric)
       .all<{ prefecture_code: string; value: number }>();
     for (const row of results ?? []) {

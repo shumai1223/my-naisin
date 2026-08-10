@@ -98,34 +98,32 @@ export const STATS_AGGREGATE_INVARIANTS: Partial<
 };
 
 /**
- * 出所を証明できたか（Layer B）。`/api/stats/submit` に投稿元の真正性検査が無い間、
- * 「人間の投稿である」と証明できない指標は公開しない。
+ * 出所を証明できたか（Layer B）。
  *
- * 2026-08-10 時点の実測（本番D1 `stats_submissions`）:
- *   hensachi   263件中243件(92%) が 07-16 / 07-22 / 07-27 / 08-01 / 08-07 の5日に集中。
- *              同期間のGA4 `stats_optin_grant` は28日で10件。実トラフィックは148〜172クリック/日。
- *   total-score 48件中39件(81%) が 07-21 / 07-25 の2日に集中。真偽を判定する材料が無い。
- *   naishin     8件（k-匿名性しきい値未満で元々非公開）。
+ * 【DW-1 の経緯と、いま publishable:true に戻してよい理由】
+ * 2026-08-10 の事故時点では `/api/stats/submit` に送信元の真正性検査が無く、
+ * 「人間の投稿である」と証明できなかったため全指標を withheld にした。
+ *   実測: hensachi 263件中243件(92%)が 07-16/07-22/07-27/08-01/08-07 の5日に集中。
+ *         同期間のGA4 `stats_optin_grant` は28日で10件。実トラフィックは148〜172クリック/日。
  *
- * → 送信元の真正性検査を入れて再収集するまで、全指標を withheld にする。
- *   復帰の条件は docs/ の DW-1 対応記録に書く（勝手に true へ戻さないこと）。
+ * 同日、以下を実装して**データ層で汚染を隔離**した:
+ *   1. `/api/stats/submit` が送信元を判定し（bot-filter.ts の classifyClick）、
+ *      ブラウザUA かつ 内部オリジン のときだけ trusted=1 で保存する
+ *   2. migration 0019 で `trusted` / `trust_class` 列を追加。**既存319件は全て trusted=0**
+ *   3. `getStatsValues` / `getStatsValuesByPrefecture` が `trusted = 1` のみを集計する
+ *
+ * → 汚染データは集計に入らなくなったので、Layer B の一律停止は不要になった。
+ *   いま公開されるのは「検査を通った行だけで、かつ30件以上あり、かつ Layer A の
+ *   不変条件を満たす」場合に限られる。切替時点の trusted 行は0件なので、
+ *   k-匿名性により当面は自動的に非公開のまま（＝復帰は「消す」ではなく「貯まるのを待つ」）。
+ *
+ * ⚠️ ここを false に戻すのは「データ層の隔離が壊れた」と分かったときだけにすること。
+ *    逆に、集計クエリから `trusted = 1` を外すのは DW-1 の再発と同義（テストで固定してある）。
  */
 export const STATS_PUBLICATION: Record<StatsMetric, { publishable: boolean; withheldReason?: string }> = {
-  hensachi: {
-    publishable: false,
-    withheldReason:
-      '投稿の真正性を検証できないため公開を停止しています（2026-08-10〜）。自動投稿とみられる集中が確認されたため、送信元の検証を実装したうえで再収集します。',
-  },
-  naishin: {
-    publishable: false,
-    withheldReason:
-      '投稿の真正性を検証できないため公開を停止しています（2026-08-10〜）。送信元の検証を実装したうえで再収集します。',
-  },
-  'total-score': {
-    publishable: false,
-    withheldReason:
-      '投稿の真正性を検証できないため公開を停止しています（2026-08-10〜）。送信元の検証を実装したうえで再収集します。',
-  },
+  hensachi: { publishable: true },
+  naishin: { publishable: true },
+  'total-score': { publishable: true },
 };
 
 /**

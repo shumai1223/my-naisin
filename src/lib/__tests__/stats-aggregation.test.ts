@@ -19,6 +19,7 @@ import {
   buildPublishableAggregate,
   buildPublishablePercentile,
   STATS_PUBLICATION,
+  STATS_AGGREGATE_INVARIANTS,
 } from '../stats-aggregation';
 
 describe('formatStatValue（統計ページのmin/max表示丸め・2026-07-19: 生の浮動小数点(21.333333333333332)が本番表示されていた事故の再発防止）', () => {
@@ -296,30 +297,37 @@ describe('DW-1 公開ゲート（集計レベルの不変条件・出所検証�
       expect(r.suppressed!.code).toBe('insufficient_sample');
     });
 
-    it('出所を検証できない指標は、件数が足りていても公開しない', () => {
-      // STATS_PUBLICATION が全指標 publishable:false の間は、平均50ちょうどでも公開されない。
-      const r = buildPublishableAggregate('hensachi', many(50, 100));
-      expect(r.aggregate).toBeNull();
-      expect(r.count).toBe(100);
-      expect(r.suppressed!.code).toBe('provenance_unverified');
+    it('STATS_PUBLICATION で withheld にした指標は、件数が足りていても公開しない', () => {
+      // 実際の運用値ではなく、ゲートの契約そのものを検証する（運用値は別テストで確認）。
+      const original = STATS_PUBLICATION.hensachi;
+      try {
+        STATS_PUBLICATION.hensachi = { publishable: false, withheldReason: 'テスト用の停止' };
+        const r = buildPublishableAggregate('hensachi', many(50, 100));
+        expect(r.aggregate).toBeNull();
+        expect(r.count).toBe(100);
+        expect(r.suppressed!.code).toBe('provenance_unverified');
+      } finally {
+        STATS_PUBLICATION.hensachi = original;
+      }
     });
 
     it('★本番で起きた汚染データ（n=263・平均63.16相当）を公開しない', () => {
-      // 20〜85の範囲で平均が63前後になる集合＝1件ずつは全て妥当域内。
+      // 20〜85の範囲で平均が63前後になる集合＝1件ずつは全て妥当域内で、
+      // 既存の isValidStatsSubmission では1件も弾けない形。
       const contaminated = [...many(75, 150), ...many(45, 113)];
       const r = buildPublishableAggregate('hensachi', contaminated);
       expect(r.aggregate).toBeNull();
       expect(r.count).toBe(263);
-      // 出所ゲートで先に止まる。出所ゲートを通しても不変条件で止まることを別途確認する。
-      expect(r.suppressed).not.toBeNull();
+      // Layer B を通す運用値に戻したあとも、Layer A の不変条件で必ず止まること。
+      expect(r.suppressed!.code).toBe('aggregate_invariant_violation');
     });
 
-    it('全指標が STATS_PUBLICATION で止まっている間、公開される集計は存在しない', () => {
-      for (const metric of STATS_METRICS) {
-        const r = buildPublishableAggregate(metric, many(50, 200));
-        expect(r.aggregate).toBeNull();
-        expect(r.suppressed).not.toBeNull();
-      }
+    it('検査を通った十分な件数で、不変条件も満たす集合は公開される（＝復帰できる状態であること）', () => {
+      const clean = [...many(45, 50), ...many(55, 50)]; // 平均50・n=100
+      const r = buildPublishableAggregate('hensachi', clean);
+      expect(r.aggregate).not.toBeNull();
+      expect(r.aggregate!.mean).toBe(50);
+      expect(r.suppressed).toBeNull();
     });
 
     it('公開可否に関わらず件数だけは返す（件数を隠すと「収集中」の表示が嘘になる）', () => {
@@ -328,10 +336,19 @@ describe('DW-1 公開ゲート（集計レベルの不変条件・出所検証�
   });
 
   describe('buildPublishablePercentile', () => {
-    it('公開できない分布から作ったパーセンタイルは返さない（汚染された分母で自己比較させない）', () => {
-      const r = buildPublishablePercentile('hensachi', many(50, 200), 55);
+    it('★公開できない分布から作ったパーセンタイルは返さない（汚染された分母で自己比較させない）', () => {
+      // 本番で起きた形（平均63前後・n=263）。件数は足りているが不変条件を満たさない。
+      const contaminated = [...many(75, 150), ...many(45, 113)];
+      const r = buildPublishablePercentile('hensachi', contaminated, 55);
       expect(r.percentile).toBeNull();
-      expect(r.suppressed).not.toBeNull();
+      expect(r.suppressed!.code).toBe('aggregate_invariant_violation');
+    });
+
+    it('公開できる分布ならパーセンタイルを返す', () => {
+      const clean = [...many(45, 50), ...many(55, 50)]; // 平均50・n=100
+      const r = buildPublishablePercentile('hensachi', clean, 55);
+      expect(r.percentile).not.toBeNull();
+      expect(r.percentile!.count).toBe(100);
     });
 
     it('件数不足のときも返さない', () => {
@@ -355,6 +372,14 @@ describe('DW-1 公開ゲート（集計レベルの不変条件・出所検証�
           expect(STATS_PUBLICATION[metric].withheldReason).toBeTruthy();
         }
       }
+    });
+
+    it('偏差値には集計レベルの不変条件が必ず設定されている（DW-1の再発防止線を外させない）', () => {
+      const inv = STATS_AGGREGATE_INVARIANTS.hensachi;
+      expect(inv).toBeDefined();
+      expect(inv!.meanCenter).toBe(50);
+      // 許容幅を広げすぎると事故値63.16を通してしまう。13以上に緩めたらこのテストが落ちる。
+      expect(inv!.meanTolerance).toBeLessThan(13);
     });
   });
 });

@@ -10,12 +10,22 @@ import { GET as percentileGET } from '@/app/api/stats/percentile/route';
 import { GET as csvGET } from '@/app/api/stats/csv/route';
 import type { NextRequest } from 'next/server';
 
-function submitReq(body: unknown, opts: { ip?: string; contentLength?: string } = {}) {
+/** DW-1以降、実ブラウザとみなされる既定ヘッダ（UAとOriginが無いと 204 で弾かれる）。 */
+const BROWSER_UA =
+  'Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1';
+
+function submitReq(
+  body: unknown,
+  opts: { ip?: string; contentLength?: string; ua?: string | null; origin?: string | null } = {}
+) {
   const raw = JSON.stringify(body);
   const headers: Record<string, string> = {
     'content-type': 'application/json',
     'cf-connecting-ip': opts.ip ?? 'test-default',
   };
+  // ua/origin に null を明示したときだけ外す（ボット扱いの検証用）。
+  if (opts.ua !== null) headers['user-agent'] = opts.ua ?? BROWSER_UA;
+  if (opts.origin !== null) headers['origin'] = opts.origin ?? 'https://my-naishin.com';
   if (opts.contentLength) headers['content-length'] = opts.contentLength;
   return new Request('https://my-naishin.com/api/stats/submit', { method: 'POST', headers, body: raw }) as unknown as NextRequest;
 }
@@ -57,6 +67,44 @@ describe('/api/stats/submit 契約', () => {
       last = await submitPOST(submitReq({ metric: 'naishin', value: 40 }, { ip }));
     }
     expect(last!.status).toBe(429);
+  });
+
+  // ── DW-1（2026-08-10）の再発防止 ──────────────────────────────────────
+  // 事故: このエンドポイントにボットUA検査もオリジン検査も無く、自動投稿が混入して
+  //   本番が「偏差値の全国平均 = 63.16」を配信していた（偏差値は定義上、母集団平均が50）。
+  test('ボットUAは保存もせず204で無言に落とす（成否を攻撃側に教えない）', async () => {
+    const res = await submitPOST(submitReq({ metric: 'naishin', value: 40 }, { ip: '2.1.2.1', ua: 'curl/8.4.0' }));
+    expect(res.status).toBe(204);
+  });
+
+  test('UAが無いリクエストも204で落とす', async () => {
+    const res = await submitPOST(submitReq({ metric: 'naishin', value: 40 }, { ip: '2.1.2.2', ua: null }));
+    expect(res.status).toBe(204);
+  });
+
+  test('プリフェッチは204で落とす', async () => {
+    const raw = JSON.stringify({ metric: 'naishin', value: 40 });
+    const req = new Request('https://my-naishin.com/api/stats/submit', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        'cf-connecting-ip': '2.1.2.3',
+        'user-agent': BROWSER_UA,
+        origin: 'https://my-naishin.com',
+        purpose: 'prefetch',
+      },
+      body: raw,
+    }) as unknown as NextRequest;
+    expect((await submitPOST(req)).status).toBe(204);
+  });
+
+  test('内部オリジンが無くても200で受けるが、集計対象にはしない（trusted=0で保存）', async () => {
+    // 保存自体は続ける＝攻撃の規模を後から検証できる状態を残す（Y-0：データを壊さない）。
+    // trusted の値そのものは stats-db 層の責務で、ここでは「弾かれない」ことだけを固定する。
+    const res = await submitPOST(
+      submitReq({ metric: 'naishin', value: 40 }, { ip: '2.1.2.4', origin: null })
+    );
+    expect(res.status).toBe(200);
   });
 });
 

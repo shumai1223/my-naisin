@@ -177,7 +177,9 @@ export default async function StatsPage() {
               const meta = METRIC_META[metric];
               return (
                 <div key={metric} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-                  <h2 className="mb-3 text-lg font-bold text-slate-800">{meta.label}の全国分布</h2>
+                  {/* DW-1: 「全国分布」は母集団を代表しているかのように読める。実体は
+                      オプトインした協力者の集計なので、見出しでもそう名乗る。 */}
+                  <h2 className="mb-3 text-lg font-bold text-slate-800">{meta.label}の分布（協力者の集計）</h2>
                   {aggregate ? (
                     <>
                       <div className="grid grid-cols-3 gap-3 text-center">
