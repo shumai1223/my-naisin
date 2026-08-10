@@ -802,6 +802,32 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
+    },
+    {
+      "id": "gakusan-kadokawa",
+      "org": "株式会社KADOKAWA",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.kadokawa.co.jp/support/b/",
+      "contactClass": "b2b",
+      "evidence": "「法人・団体様」専用の問い合わせページが個人向け(/support/toform/)と明確に分離。「メディア、企業、図書館、学校、各種団体」向けと明記され、広告掲載/一括購入/キャラクター利用許諾/メディア取材等の業務カテゴリが用意されている",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
+    },
+    {
+      "id": "gakusan-suken-shuppan",
+      "org": "数研出版株式会社",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.chart.co.jp/inquiry/inquiry.html",
+      "contactClass": "b2b",
+      "evidence": "デジタル教材の窓口が「先生・教育委員会」向けと「一般・法人」向けで別ページに誘導される構造。書籍も「学校でのご採用」と「個人でのご購入」を区別しており教育機関向け窓口が明確に存在する",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
     }
   ]
 }
