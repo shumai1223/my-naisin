@@ -146,6 +146,19 @@ describe('PAST_SYSTEM_CHANGES（Λ+5・過去の制度変更履歴DB）', () => 
     expect(aichiPref?.gradeMultipliers).toEqual({ 1: 0, 2: 0, 3: 2 });
   });
 
+  test('神奈川県の面接一律廃止・観点別評価新設エントリはprefectures.tsの現行maxScore(135点満点)と矛盾しない(S値算出の要素構成変更であり調査書の計算式自体は不変)', () => {
+    const kanagawa = PAST_SYSTEM_CHANGES.find((c) => c.prefCode === 'kanagawa');
+    expect(kanagawa).toBeDefined();
+    expect(kanagawa?.effectiveYear).toBe('令和6年度（2024年度）入試');
+    expect(kanagawa?.category).toBe('selection-structure');
+    expect(kanagawa?.detail).toContain('主体的に学習に取り組む態度');
+    expect(kanagawa?.detail).toContain('面接');
+
+    const kanagawaPref = PREFECTURES.find((p) => p.code === 'kanagawa');
+    expect(kanagawaPref?.maxScore).toBe(135);
+    expect(kanagawaPref?.gradeMultipliers).toEqual({ 1: 0, 2: 1, 3: 2 });
+  });
+
   test('categoryは定義済みの4種類のいずれかのみ(型崩れ防止)', () => {
     const validCategories = new Set(['scoring-input', 'selection-structure', 'weighting-formula', 'other']);
     for (const c of PAST_SYSTEM_CHANGES) {
