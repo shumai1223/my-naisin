@@ -8,7 +8,7 @@ import { DatasetSchema } from '@/components/StructuredData/DatasetSchema';
 import {
   STATS_METRICS,
   STATS_MIN_SAMPLE_SIZE,
-  computeAggregate,
+  buildPublishableAggregate,
   buildPrefectureAggregates,
   formatStatValue,
   type StatsMetric,
@@ -74,13 +74,14 @@ async function loadStats() {
   const results = await Promise.all(
     STATS_METRICS.map(async (metric) => {
       const [values, valuesByPrefecture] = await Promise.all([getStatsValues(metric), getStatsValuesByPrefecture(metric)]);
-      const aggregate = computeAggregate(values);
-      const count = aggregate?.count ?? 0;
-      const sufficient = count >= STATS_MIN_SAMPLE_SIZE;
-      const prefectureCells = buildPrefectureAggregates(valuesByPrefecture)
-        .filter((cell) => cell.aggregate !== null)
-        .sort((a, b) => b.aggregate!.count - a.aggregate!.count);
-      return { metric, aggregate: sufficient ? aggregate : null, count, prefectureCells };
+      const { aggregate, count, suppressed } = buildPublishableAggregate(metric, values);
+      // 全国が公開できない指標は県別セルも出さない（同じ母集団から切り出しているため）。
+      const prefectureCells = aggregate
+        ? buildPrefectureAggregates(valuesByPrefecture)
+            .filter((cell) => cell.aggregate !== null)
+            .sort((a, b) => b.aggregate!.count - a.aggregate!.count)
+        : [];
+      return { metric, aggregate, count, suppressed, prefectureCells };
     })
   );
   return results;
@@ -172,7 +173,7 @@ export default async function StatsPage() {
           </section>
 
           <section className="mb-8 grid gap-4">
-            {stats.map(({ metric, aggregate, count, prefectureCells }) => {
+            {stats.map(({ metric, aggregate, count, suppressed, prefectureCells }) => {
               const meta = METRIC_META[metric];
               return (
                 <div key={metric} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
@@ -209,7 +210,9 @@ export default async function StatsPage() {
                       className="rounded-xl border border-dashed border-slate-200 bg-slate-50 p-4 text-center text-sm text-slate-500"
                       role="status"
                     >
-                      現在{count}件収集中（{STATS_MIN_SAMPLE_SIZE}件で表示開始）
+                      {suppressed?.code === 'insufficient_sample'
+                        ? `現在${count}件収集中（${STATS_MIN_SAMPLE_SIZE}件で表示開始）`
+                        : suppressed?.message}
                     </div>
                   )}
                   <p className="mt-3 flex items-start gap-1.5 text-[11px] leading-relaxed text-slate-400">

@@ -7,7 +7,7 @@ import { ArticleSchema } from '@/components/StructuredData/ArticleSchema';
 import { DatasetSchema } from '@/components/StructuredData/DatasetSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { SITE_URL } from '@/lib/naishin-dataset';
-import { STATS_METRICS, STATS_MIN_SAMPLE_SIZE, computeAggregate, formatStatValue, type StatsMetric } from '@/lib/stats-aggregation';
+import { STATS_METRICS, STATS_MIN_SAMPLE_SIZE, buildPublishableAggregate, formatStatValue, type StatsMetric } from '@/lib/stats-aggregation';
 import { getStatsValues } from '@/lib/stats-db';
 import { REPORT_2026_ROWS as ROWS, REPORT_2026_NO_SKEW_COUNT as NO_SKEW_COUNT, REPORT_2026_GRADE3_ONLY as GRADE3_ONLY } from '@/lib/report-2026-data';
 import { REPORT_2026_DIGEST_CODES } from '@/lib/report-2026-digest-content';
@@ -60,10 +60,8 @@ async function loadLiveStats() {
   const results = await Promise.all(
     STATS_METRICS.map(async (metric) => {
       const values = await getStatsValues(metric);
-      const aggregate = computeAggregate(values);
-      const count = aggregate?.count ?? 0;
-      const sufficient = count >= STATS_MIN_SAMPLE_SIZE;
-      return { metric, aggregate: sufficient ? aggregate : null, count };
+      const { aggregate, count, suppressed } = buildPublishableAggregate(metric, values);
+      return { metric, aggregate, count, suppressed };
     })
   );
   return results;
@@ -271,7 +269,7 @@ export default async function Report2026Page() {
               このページを開くたびに最新値を再集計します。
             </p>
             <div className="grid gap-3 sm:grid-cols-3">
-              {liveStats.map(({ metric, aggregate, count }) => (
+              {liveStats.map(({ metric, aggregate, count, suppressed }) => (
                 <div key={metric} className="rounded-xl bg-slate-50 p-4">
                   <div className="text-xs font-bold text-slate-500">{METRIC_LABEL[metric]}</div>
                   {aggregate ? (
@@ -282,7 +280,9 @@ export default async function Report2026Page() {
                       </div>
                     </>
                   ) : (
-                    <div className="mt-1 text-xs text-slate-400">現在{count}件収集中</div>
+                    <div className="mt-1 text-xs text-slate-400">
+                      {suppressed?.code === 'insufficient_sample' ? `現在${count}件収集中` : suppressed?.message}
+                    </div>
                   )}
                 </div>
               ))}

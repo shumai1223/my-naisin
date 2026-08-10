@@ -1,6 +1,6 @@
 import { gateApiRequest } from '@/lib/api-auth';
 import { corsCsv, corsPreflight, logApiHit } from '@/lib/api-cors';
-import { STATS_METRICS, buildSuppressedAggregate, buildStatsCsv, computeAggregate } from '@/lib/stats-aggregation';
+import { STATS_METRICS, buildPublishableAggregate, buildStatsCsv } from '@/lib/stats-aggregation';
 import { getStatsValues } from '@/lib/stats-db';
 
 /**
@@ -21,8 +21,7 @@ export async function GET(request: Request) {
   const rows = await Promise.all(
     STATS_METRICS.map(async (metric) => {
       const values = await getStatsValues(metric);
-      const count = computeAggregate(values)?.count ?? 0;
-      const aggregate = buildSuppressedAggregate(values);
+      const { aggregate, count } = buildPublishableAggregate(metric, values);
       return { metric, count, aggregate };
     })
   );

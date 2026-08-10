@@ -1,6 +1,6 @@
 import { gateApiRequest } from '@/lib/api-auth';
 import { corsJson, corsPreflight, logApiHit } from '@/lib/api-cors';
-import { isStatsMetric, buildSuppressedAggregate, STATS_MIN_SAMPLE_SIZE, STATS_METRICS } from '@/lib/stats-aggregation';
+import { isStatsMetric, buildPublishableAggregate, STATS_MIN_SAMPLE_SIZE, STATS_METRICS } from '@/lib/stats-aggregation';
 import { getStatsValues } from '@/lib/stats-db';
 import { SITE_URL } from '@/lib/naishin-dataset';
 
@@ -37,14 +37,14 @@ export async function GET(request: Request) {
   }
 
   const values = await getStatsValues(metricRaw, prefecture);
-  const aggregate = buildSuppressedAggregate(values);
+  const { aggregate, count, suppressed } = buildPublishableAggregate(metricRaw, values);
 
   return corsJson(
     {
       meta: {
         name: '匿名統計（内申点・偏差値等の全国分布）',
         description:
-          '利用者が任意でオプトインした匿名の計算結果を集計した統計値。個人を特定できる情報は含まない。サンプルサイズが不足するセルは表示しない（k-匿名性）。',
+          '利用者が任意でオプトインした匿名の計算結果を集計した統計値。個人を特定できる情報は含まない。サンプルサイズが不足するセル・出所を検証できないセル・指標の不変条件を満たさないセルは表示しない。',
         metric: metricRaw,
         prefecture: prefecture ?? null,
         minSampleSize: STATS_MIN_SAMPLE_SIZE,
@@ -52,6 +52,9 @@ export async function GET(request: Request) {
         source: `${SITE_URL}/quality`,
       },
       insufficientData: aggregate === null,
+      // 非公開の理由を黙って隠さず開示する（件数だけは常に返す）。
+      sampleCount: count,
+      suppressedReason: suppressed,
       aggregate,
     },
     { headers: gate.headers, private: gate.cachePrivate }

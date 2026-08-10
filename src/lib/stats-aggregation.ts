@@ -55,6 +55,173 @@ export function shouldSuppressCell(sampleSize: number, threshold: number = STATS
   return sampleSize < threshold;
 }
 
+/* ────────────────────────────────────────────────────────────────────────────
+ * 公開ゲート（DW-1・2026-08-10）
+ *
+ * 事故: 2026-08-10 に本番の /api/stats/* ・/stats ・/report/2026 ・/api/mcp が
+ *   「偏差値の全国平均 = 63.16」を配信していた。偏差値は定義上、母集団平均が50。
+ *   原因は STATS_VALUE_LIMITS が「1件ずつ」しか検査せず、1件ずつは妥当（20〜90）でも
+ *   集団としてあり得ない分布を素通しすること。宮崎県の avgNaishin 425（満点135）を
+ *   3,826件のテストが全greenのまま通したのと同じ穴。
+ *
+ * 対策は2層:
+ *   Layer A  checkAggregateInvariants … 指標ごとの「集計レベル」不変条件。理論上の
+ *                                       アンカーがある指標（偏差値＝平均50）を自動で弾く。
+ *   Layer B  STATS_PUBLICATION           … 出所を証明できない指標を明示的に withheld にする。
+ *                                       「確認できない数値は推測で埋めず、空にして理由を書く」（Y-0）。
+ *
+ * どちらも fail-closed。metric を渡さずに公開集計を作れる関数は用意しない。
+ * ──────────────────────────────────────────────────────────────────────────── */
+
+/** 公開を止めた理由（APIのmetaでそのまま利用者に開示する。黙って隠さない）。 */
+export interface StatsSuppressionReason {
+  /** 機械可読なコード。 */
+  code: 'insufficient_sample' | 'aggregate_invariant_violation' | 'provenance_unverified';
+  /** 人間可読な説明（日本語・そのまま公開してよい文言）。 */
+  message: string;
+}
+
+/**
+ * 集計レベルの不変条件。理論上のアンカーが無い指標は band を持たない
+ * （持たせると恣意的な検閲になるため。その場合は Layer B で扱う）。
+ */
+export const STATS_AGGREGATE_INVARIANTS: Partial<
+  Record<StatsMetric, { meanCenter: number; meanTolerance: number; rationale: string }>
+> = {
+  // 偏差値は「平均50・標準偏差10」になるよう定義された量。標本平均が50から大きく外れた集合は
+  // 母集団の推定値として公開できない（自己選択でも汚染でも、公開すれば同じ嘘になる）。
+  hensachi: {
+    meanCenter: 50,
+    meanTolerance: 5,
+    rationale: '偏差値は定義上、母集団平均が50。標本平均が50±5を外れる集合は全国分布として公開しない。',
+  },
+};
+
+/**
+ * 出所を証明できたか（Layer B）。`/api/stats/submit` に投稿元の真正性検査が無い間、
+ * 「人間の投稿である」と証明できない指標は公開しない。
+ *
+ * 2026-08-10 時点の実測（本番D1 `stats_submissions`）:
+ *   hensachi   263件中243件(92%) が 07-16 / 07-22 / 07-27 / 08-01 / 08-07 の5日に集中。
+ *              同期間のGA4 `stats_optin_grant` は28日で10件。実トラフィックは148〜172クリック/日。
+ *   total-score 48件中39件(81%) が 07-21 / 07-25 の2日に集中。真偽を判定する材料が無い。
+ *   naishin     8件（k-匿名性しきい値未満で元々非公開）。
+ *
+ * → 送信元の真正性検査を入れて再収集するまで、全指標を withheld にする。
+ *   復帰の条件は docs/ の DW-1 対応記録に書く（勝手に true へ戻さないこと）。
+ */
+export const STATS_PUBLICATION: Record<StatsMetric, { publishable: boolean; withheldReason?: string }> = {
+  hensachi: {
+    publishable: false,
+    withheldReason:
+      '投稿の真正性を検証できないため公開を停止しています（2026-08-10〜）。自動投稿とみられる集中が確認されたため、送信元の検証を実装したうえで再収集します。',
+  },
+  naishin: {
+    publishable: false,
+    withheldReason:
+      '投稿の真正性を検証できないため公開を停止しています（2026-08-10〜）。送信元の検証を実装したうえで再収集します。',
+  },
+  'total-score': {
+    publishable: false,
+    withheldReason:
+      '投稿の真正性を検証できないため公開を停止しています（2026-08-10〜）。送信元の検証を実装したうえで再収集します。',
+  },
+};
+
+/**
+ * 集計が指標の不変条件を満たすか（Layer A・純粋関数）。
+ * 違反があれば理由を返す。アンカーを持たない指標は常に null（＝Layer Aは通す）。
+ */
+export function checkAggregateInvariants(metric: StatsMetric, aggregate: StatsAggregate): StatsSuppressionReason | null {
+  const inv = STATS_AGGREGATE_INVARIANTS[metric];
+  if (!inv) return null;
+  const deviation = Math.abs(aggregate.mean - inv.meanCenter);
+  if (deviation > inv.meanTolerance) {
+    return {
+      code: 'aggregate_invariant_violation',
+      message: `${inv.rationale}（実測の標本平均 ${aggregate.mean.toFixed(2)}）`,
+    };
+  }
+  return null;
+}
+
+export interface PublishableAggregateResult {
+  /** 公開してよい集計。公開できない場合は null。 */
+  aggregate: StatsAggregate | null;
+  /** 集計対象の実件数（公開可否に関わらず返す。件数だけは隠さない）。 */
+  count: number;
+  /** null でない場合、なぜ公開しなかったか。 */
+  suppressed: StatsSuppressionReason | null;
+}
+
+/**
+ * 公開用の集計を作る唯一の入口（fail-closed）。
+ * k-匿名性 → Layer B（出所）→ Layer A（不変条件）の順に検査し、1つでも落ちたら aggregate は null。
+ *
+ * ⚠️ 公開面（API・ページ・MCP）は必ずこの関数を通すこと。`computeAggregate` /
+ *    `buildSuppressedAggregate` を公開面から直接呼ぶと、この2層のゲートを迂回する。
+ */
+export function buildPublishableAggregate(
+  metric: StatsMetric,
+  values: number[],
+  threshold: number = STATS_MIN_SAMPLE_SIZE
+): PublishableAggregateResult {
+  const agg = computeAggregate(values);
+  const count = agg?.count ?? 0;
+
+  if (!agg || shouldSuppressCell(count, threshold)) {
+    return {
+      aggregate: null,
+      count,
+      suppressed: {
+        code: 'insufficient_sample',
+        message: `公開に必要な件数（${threshold}件）に達していません。`,
+      },
+    };
+  }
+
+  const publication = STATS_PUBLICATION[metric];
+  if (!publication.publishable) {
+    return {
+      aggregate: null,
+      count,
+      suppressed: {
+        code: 'provenance_unverified',
+        message: publication.withheldReason ?? '出所を検証できないため公開していません。',
+      },
+    };
+  }
+
+  const violation = checkAggregateInvariants(metric, agg);
+  if (violation) return { aggregate: null, count, suppressed: violation };
+
+  return { aggregate: agg, count, suppressed: null };
+}
+
+export interface PublishablePercentileResult {
+  percentile: PercentileResult | null;
+  count: number;
+  suppressed: StatsSuppressionReason | null;
+}
+
+/**
+ * 公開用のパーセンタイルを作る唯一の入口（fail-closed）。
+ * 分布そのものが公開できない集合から算出したパーセンタイルも同じく公開できない
+ * （利用者の自己比較に汚染された分母を使わせないため）。
+ */
+export function buildPublishablePercentile(
+  metric: StatsMetric,
+  values: number[],
+  target: number,
+  threshold: number = STATS_MIN_SAMPLE_SIZE
+): PublishablePercentileResult {
+  const gate = buildPublishableAggregate(metric, values, threshold);
+  if (!gate.aggregate) return { percentile: null, count: gate.count, suppressed: gate.suppressed };
+
+  const percentile = buildSuppressedPercentile(values, target, threshold);
+  return { percentile, count: gate.count, suppressed: percentile ? null : gate.suppressed };
+}
+
 /**
  * 数値配列から件数・平均・最小・最大を計算する（純粋関数）。
  * 空配列はnull（集計不能。呼び出し側でshouldSuppressCellと合わせて非表示にする）。

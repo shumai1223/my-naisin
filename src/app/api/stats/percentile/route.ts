@@ -1,6 +1,6 @@
 import { gateApiRequest } from '@/lib/api-auth';
 import { corsJson, corsPreflight, logApiHit } from '@/lib/api-cors';
-import { isStatsMetric, buildSuppressedPercentile, STATS_MIN_SAMPLE_SIZE, STATS_METRICS } from '@/lib/stats-aggregation';
+import { isStatsMetric, buildPublishablePercentile, STATS_MIN_SAMPLE_SIZE, STATS_METRICS } from '@/lib/stats-aggregation';
 import { getStatsValues } from '@/lib/stats-db';
 import { SITE_URL } from '@/lib/naishin-dataset';
 
@@ -46,12 +46,16 @@ export async function GET(request: Request) {
   }
 
   const nationalValues = await getStatsValues(metricRaw);
-  const result = buildSuppressedPercentile(nationalValues, value);
+  const national = buildPublishablePercentile(metricRaw, nationalValues, value);
+  const result = national.percentile;
 
   let prefectureResult = null;
+  let prefectureSuppressed = null;
   if (prefecture) {
     const prefectureValues = await getStatsValues(metricRaw, prefecture);
-    prefectureResult = buildSuppressedPercentile(prefectureValues, value);
+    const pref = buildPublishablePercentile(metricRaw, prefectureValues, value);
+    prefectureResult = pref.percentile;
+    prefectureSuppressed = pref.suppressed;
   }
 
   return corsJson(
@@ -59,7 +63,7 @@ export async function GET(request: Request) {
       meta: {
         name: '匿名統計パーセンタイル（自分の値が全国・県内の協力者内で何%タイルか）',
         description:
-          '利用者が任意でオプトインした匿名の計算結果と比較した、自分の値のパーセンタイル。個人を特定できる情報は含まない。サンプルサイズが不足する場合は表示しない（k-匿名性・全国と県内で独立判定）。',
+          '利用者が任意でオプトインした匿名の計算結果と比較した、自分の値のパーセンタイル。個人を特定できる情報は含まない。サンプルサイズが不足する場合・出所を検証できない場合・分布が指標の不変条件を満たさない場合は表示しない（全国と県内で独立判定）。',
         metric: metricRaw,
         prefecture: prefecture ?? null,
         value,
@@ -68,8 +72,12 @@ export async function GET(request: Request) {
         source: `${SITE_URL}/quality`,
       },
       insufficientData: result === null,
+      // 非公開の理由を黙って隠さず開示する。
+      suppressedReason: national.suppressed,
+      sampleCount: national.count,
       result,
       prefectureInsufficientData: prefecture ? prefectureResult === null : null,
+      prefectureSuppressedReason: prefectureSuppressed,
       prefectureResult,
     },
     { headers: gate.headers, private: gate.cachePrivate }

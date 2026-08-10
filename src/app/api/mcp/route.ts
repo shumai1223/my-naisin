@@ -22,7 +22,7 @@ import { computeTotalScore, requiredAcademicRaw } from '@/lib/total-score/engine
 import { calcApplicationRatio, calcActualRatio, roundRatio } from '@/lib/bairitsu';
 import { simulateEducationCost, simulateHighToUniversity } from '@/lib/education-cost/engine';
 import type { CourseType, JukuType, IncomeBracket, UniversityType, Residence } from '@/lib/education-cost/types';
-import { isStatsMetric, buildSuppressedAggregate, STATS_MIN_SAMPLE_SIZE, STATS_METRICS } from '@/lib/stats-aggregation';
+import { isStatsMetric, buildPublishableAggregate, STATS_MIN_SAMPLE_SIZE, STATS_METRICS } from '@/lib/stats-aggregation';
 import { getStatsValues } from '@/lib/stats-db';
 import { computeTokyoTotalScore, tokyoRankLabel, TOKYO_ESAT_GRADES } from '@/lib/total-score/tokyo';
 import { computeKanagawaSValue, kanagawaRankLabel, KANAGAWA_RATIO_OPTIONS } from '@/lib/total-score/kanagawa';
@@ -679,8 +679,16 @@ async function runTool(name: string, args: Record<string, unknown>) {
     }
     const prefecture = typeof args.prefecture === 'string' ? args.prefecture : undefined;
     const values = await getStatsValues(metric, prefecture);
-    const aggregate = buildSuppressedAggregate(values);
-    return toolText({ metric, prefecture: prefecture ?? null, minSampleSize: STATS_MIN_SAMPLE_SIZE, insufficientData: aggregate === null, aggregate });
+    const { aggregate, count, suppressed } = buildPublishableAggregate(metric, values);
+    return toolText({
+      metric,
+      prefecture: prefecture ?? null,
+      minSampleSize: STATS_MIN_SAMPLE_SIZE,
+      insufficientData: aggregate === null,
+      sampleCount: count,
+      suppressedReason: suppressed,
+      aggregate,
+    });
   }
 
   if (name === 'calculate_tokyo_total_score') {

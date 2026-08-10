@@ -15,6 +15,10 @@ import {
   buildSuppressedPercentile,
   formatStatValue,
   metricLabelToStatsMetric,
+  checkAggregateInvariants,
+  buildPublishableAggregate,
+  buildPublishablePercentile,
+  STATS_PUBLICATION,
 } from '../stats-aggregation';
 
 describe('formatStatValue（統計ページのmin/max表示丸め・2026-07-19: 生の浮動小数点(21.333333333333332)が本番表示されていた事故の再発防止）', () => {
@@ -238,5 +242,119 @@ describe('isValidStatsSubmission', () => {
   it('満点付きの提出は満点超えを拒否する', () => {
     expect(isValidStatsSubmission({ metric: 'naishin', value: 46, maxValue: 45 })).toBe(false);
     expect(isValidStatsSubmission({ metric: 'naishin', value: 45, maxValue: 45 })).toBe(true);
+  });
+});
+
+/**
+ * DW-1（2026-08-10）の再発防止テスト。
+ *
+ * 事故: 本番の /api/stats/* ・/stats ・/report/2026 ・/api/mcp が
+ *   「偏差値の全国平均 = 63.16」（n=263）を配信していた。偏差値は定義上、母集団平均が50。
+ *   既存の isValidStatsSubmission は「1件ずつ」しか見ないため、1件ずつは妥当域(20〜90)でも
+ *   集団としてあり得ない分布を素通しした。宮崎県の avgNaishin 425（満点135）を
+ *   3,826件のテストが全greenのまま通したのと同じ穴。
+ *
+ * ここで守る契約:
+ *   (1) 集計レベルの不変条件を持つ指標は、外れた集合を「公開できない」と判定する
+ *   (2) 出所を検証できない指標は、件数が足りていても公開しない（fail-closed）
+ *   (3) 公開できない分布から作ったパーセンタイルも公開しない
+ */
+describe('DW-1 公開ゲート（集計レベルの不変条件・出所検証）', () => {
+  const many = (v: number, n = 60) => Array.from({ length: n }, () => v);
+
+  describe('checkAggregateInvariants', () => {
+    it('偏差値の標本平均が50±5を外れたら違反として検出する（本番で起きた 63.16 の再現）', () => {
+      const violation = checkAggregateInvariants('hensachi', { count: 263, mean: 63.16, min: 20, max: 85 });
+      expect(violation).not.toBeNull();
+      expect(violation!.code).toBe('aggregate_invariant_violation');
+      // 実測値を理由文に含めること（黙って隠さない）。
+      expect(violation!.message).toContain('63.16');
+    });
+
+    it('偏差値の標本平均が50±5の中なら違反にしない', () => {
+      expect(checkAggregateInvariants('hensachi', { count: 100, mean: 50, min: 20, max: 80 })).toBeNull();
+      expect(checkAggregateInvariants('hensachi', { count: 100, mean: 55, min: 20, max: 80 })).toBeNull();
+      expect(checkAggregateInvariants('hensachi', { count: 100, mean: 45, min: 20, max: 80 })).toBeNull();
+    });
+
+    it('境界: ちょうど±5は許容し、それを超えたら違反', () => {
+      expect(checkAggregateInvariants('hensachi', { count: 100, mean: 55.0, min: 20, max: 80 })).toBeNull();
+      expect(checkAggregateInvariants('hensachi', { count: 100, mean: 55.01, min: 20, max: 80 })).not.toBeNull();
+    });
+
+    it('理論上のアンカーが無い指標には不変条件を課さない（恣意的な検閲をしない）', () => {
+      expect(checkAggregateInvariants('naishin', { count: 100, mean: 300, min: 0, max: 450 })).toBeNull();
+      expect(checkAggregateInvariants('total-score', { count: 100, mean: 508, min: 24, max: 838 })).toBeNull();
+    });
+  });
+
+  describe('buildPublishableAggregate（公開用集計の唯一の入口・fail-closed）', () => {
+    it('件数がしきい値未満なら insufficient_sample で止める', () => {
+      const r = buildPublishableAggregate('hensachi', many(50, 5));
+      expect(r.aggregate).toBeNull();
+      expect(r.count).toBe(5);
+      expect(r.suppressed!.code).toBe('insufficient_sample');
+    });
+
+    it('出所を検証できない指標は、件数が足りていても公開しない', () => {
+      // STATS_PUBLICATION が全指標 publishable:false の間は、平均50ちょうどでも公開されない。
+      const r = buildPublishableAggregate('hensachi', many(50, 100));
+      expect(r.aggregate).toBeNull();
+      expect(r.count).toBe(100);
+      expect(r.suppressed!.code).toBe('provenance_unverified');
+    });
+
+    it('★本番で起きた汚染データ（n=263・平均63.16相当）を公開しない', () => {
+      // 20〜85の範囲で平均が63前後になる集合＝1件ずつは全て妥当域内。
+      const contaminated = [...many(75, 150), ...many(45, 113)];
+      const r = buildPublishableAggregate('hensachi', contaminated);
+      expect(r.aggregate).toBeNull();
+      expect(r.count).toBe(263);
+      // 出所ゲートで先に止まる。出所ゲートを通しても不変条件で止まることを別途確認する。
+      expect(r.suppressed).not.toBeNull();
+    });
+
+    it('全指標が STATS_PUBLICATION で止まっている間、公開される集計は存在しない', () => {
+      for (const metric of STATS_METRICS) {
+        const r = buildPublishableAggregate(metric, many(50, 200));
+        expect(r.aggregate).toBeNull();
+        expect(r.suppressed).not.toBeNull();
+      }
+    });
+
+    it('公開可否に関わらず件数だけは返す（件数を隠すと「収集中」の表示が嘘になる）', () => {
+      expect(buildPublishableAggregate('hensachi', many(50, 263)).count).toBe(263);
+    });
+  });
+
+  describe('buildPublishablePercentile', () => {
+    it('公開できない分布から作ったパーセンタイルは返さない（汚染された分母で自己比較させない）', () => {
+      const r = buildPublishablePercentile('hensachi', many(50, 200), 55);
+      expect(r.percentile).toBeNull();
+      expect(r.suppressed).not.toBeNull();
+    });
+
+    it('件数不足のときも返さない', () => {
+      const r = buildPublishablePercentile('hensachi', many(50, 3), 55);
+      expect(r.percentile).toBeNull();
+      expect(r.suppressed!.code).toBe('insufficient_sample');
+    });
+  });
+
+  describe('公開面がゲートを迂回していないこと（回帰の入口を塞ぐ）', () => {
+    it('STATS_PUBLICATION は全 StatsMetric を網羅する（指標を足したら公開可否の明示が必須）', () => {
+      for (const metric of STATS_METRICS) {
+        expect(STATS_PUBLICATION[metric]).toBeDefined();
+        expect(typeof STATS_PUBLICATION[metric].publishable).toBe('boolean');
+      }
+    });
+
+    it('publishable:false の指標には必ず理由文が付く（黙って隠さない）', () => {
+      for (const metric of STATS_METRICS) {
+        if (!STATS_PUBLICATION[metric].publishable) {
+          expect(STATS_PUBLICATION[metric].withheldReason).toBeTruthy();
+        }
+      }
+    });
   });
 });
