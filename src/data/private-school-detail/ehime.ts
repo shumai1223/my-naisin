@@ -12,6 +12,19 @@
  * 確定し、このタスクをクローズする。済美高等学校は当初SVG画像でテキスト抽出できず
  * スキップしていたが、公式ページの画像表を目視で読み取り募集人員を確認できたため収録済みに
  * 昇格（一般入試枠単独の数値は非公表のため、学校全体の募集人員として収録）。
+ *
+ * **2026-08-10(掛-2私立×多年度)**: hyogo/okinawa完走を受け着手。ehimeは各校が個別公式サイト
+ * ソース(ikushin形式ではない)のため、各校のドメイン単体でWayback CDX APIを検索する方式を採用。
+ * 愛光(aiko.ed.jp)はyoukou2022〜2024.pdfが連番で発掘でき、youkou2024.pdf(令和6年度)を取得。
+ * 「内進生含め250名」は令和8年度版と完全に同一の文言・数値で総定員250=250完全一致。聖カタリナ
+ * 学園(catalina.ed.jp)はbosyuyoukou202110〜202310.pdfが発掘でき、202310.pdf(令和6年度)を取得。
+ * 2024年度版は普通科(特進+スポーツ進学、200)と総合学科(240)が別々の学科として掲載されていたが、
+ * 2026年度版では総合コースが普通科の1コースとして統合され「普通科4コース合算400」という単一
+ * グループに再編されている(学科レベルの統合再編)。看護科80は両年度で不変。合計は520→480へ
+ * 減少(学科統合による構造変化を伴う実質減)。帝京第五・今治精華・松山学院・松山東雲・FC今治
+ * 里山校の残り5校は個別ドメインのWayback CDX検索で該当する過去年度の募集要項PDFを発見できず
+ * (帝京第五は2004-2006年の行事写真のみヒット・他は今回未着手)、今回は愛光・聖カタリナ学園の
+ * 2校のみで区切りとする。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
 
@@ -142,6 +155,36 @@ export const PRIVATE_SCHOOL_DETAIL_EHIME: PrivateSchoolDetailFile = {
         url: 'https://saibi.ac.jp/entrance/exam-info/',
         docTitle: '受験案内（済美高等学校・画像表を目視で判読）',
         fetchedAt: '2026-08-06',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
+      schoolCode: 'D138320100062',
+      schoolName: '愛光高等学校',
+      fiscalYearLabel: '令和6年度（2024年度）',
+      courses: [{ courseName: '募集人員（内進生含め・コース分けなし）', capacity: 250 }],
+      totalCapacity: 250,
+      source: {
+        url: 'http://web.archive.org/web/20240504222326/https://www.aiko.ed.jp//admission/ar_high/youkou2024.pdf',
+        docTitle: '令和6年度（2024年度）愛光高等学校 入学試験要項（Wayback Machine 2024-05-04キャプチャ）',
+        fetchedAt: '2026-08-10',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
+      schoolCode: 'D138320100026',
+      schoolName: '聖カタリナ学園高等学校',
+      fiscalYearLabel: '令和6年度（2024年度）',
+      courses: [
+        { courseName: '普通科（特進コース・スポーツ進学コース合算）', capacity: 200 },
+        { courseName: '総合学科', capacity: 240 },
+        { courseName: '看護科', capacity: 80 },
+      ],
+      totalCapacity: 520,
+      source: {
+        url: 'http://web.archive.org/web/20240716045729/https://catalina.ed.jp/wp-content/themes/catalina-hs/pdf/bosyuyoukou202310.pdf',
+        docTitle: '令和6年度 募集要項（聖カタリナ学園高等学校、Wayback Machine 2024-07-16キャプチャ）',
+        fetchedAt: '2026-08-10',
         sourceTier: 'primary' as const,
       },
     },

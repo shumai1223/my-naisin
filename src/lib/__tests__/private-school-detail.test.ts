@@ -3627,12 +3627,34 @@ describe('PRIVATE_SCHOOL_DETAIL_EHIME(愛光高等学校+聖カタリナ学園�
     }
   });
 
-  it('収録7校・スキップ7校で参照台帳14校を完全網羅(重複・欠落なし)', () => {
+  it('収録10レコード(8校+掛-2多年度2レコード)・スキップ6校で参照台帳14校を完全網羅(重複・欠落なし)', () => {
     const allCodes = SCHOOLS_PRIVATE_EHIME.schools.map((s) => s.code);
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_EHIME, allCodes);
     expect(result.duplicates).toEqual([]);
     expect(result.missing).toHaveLength(0);
-    expect(PRIVATE_SCHOOL_DETAIL_EHIME.schools.length).toBe(8);
+    expect(PRIVATE_SCHOOL_DETAIL_EHIME.schools.length).toBe(10);
     expect(PRIVATE_SCHOOL_DETAIL_EHIME.skipped.length).toBe(6);
+  });
+
+  it('掛-2(私立×多年度): 愛光は令和6年度(2024年度)と令和8年度(2026年度)で総定員が完全一致', () => {
+    const y2024 = PRIVATE_SCHOOL_DETAIL_EHIME.schools.find(
+      (s) => s.schoolCode === 'D138320100062' && s.fiscalYearLabel === '令和6年度（2024年度）'
+    );
+    const yLatest = PRIVATE_SCHOOL_DETAIL_EHIME.schools.find(
+      (s) => s.schoolCode === 'D138320100062' && s.fiscalYearLabel !== '令和6年度（2024年度）'
+    );
+    expect(y2024?.totalCapacity).toBe(250);
+    expect(yLatest?.totalCapacity).toBe(250);
+  });
+
+  it('掛-2(私立×多年度): 聖カタリナ学園は総合コースが普通科へ統合される再編を伴い総定員が520から480へ変化', () => {
+    const y2024 = PRIVATE_SCHOOL_DETAIL_EHIME.schools.find(
+      (s) => s.schoolCode === 'D138320100026' && s.fiscalYearLabel === '令和6年度（2024年度）'
+    );
+    const yLatest = PRIVATE_SCHOOL_DETAIL_EHIME.schools.find(
+      (s) => s.schoolCode === 'D138320100026' && s.fiscalYearLabel !== '令和6年度（2024年度）'
+    );
+    expect(y2024?.totalCapacity).toBe(520);
+    expect(yLatest?.totalCapacity).toBe(480);
   });
 });
