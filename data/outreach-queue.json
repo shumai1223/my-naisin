@@ -906,6 +906,33 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+    },
+    {
+      "id": "moshi-soshin-tosho",
+      "org": "株式会社総進図書",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.soshintosho.com/inquiry/cramSchool.php",
+      "contactClass": "b2b",
+      "evidence": "ページタイトルが『塾でのお問い合わせフォーム』(個人向けフォームとURLが別/inquiry/personal.php)、必須項目に『塾名』『塾名のフリガナ』があり法人窓口であることが明確",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+    },
+    {
+      "id": "moshi-rinkai-kanagawa",
+      "org": "株式会社臨海",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.rinkaiseminar.co.jp/contact/kj-hogo/",
+      "contactClass": "unknown",
+      "evidence": "WebSearch要約は『kj-hogo@rinkaiseminar.co.jp』というメールアドレスを提示したが直接WebFetchで実在せず誤りと判明(このセッション4件目のWebSearch作話検知)。実際の窓口は電話/Webフォームで『保護者・受験生向けの一般的な相談窓口』と説明されており法人向けではなく判定不能",
+      "verifiedAt": "2026-08-11",
+      "status": "excluded",
+      "excludeReason": "contactClass判定不能(消費者向け窓口の可能性が高くb2bと断定できない)のため送信対象外",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
     }
   ]
 }
