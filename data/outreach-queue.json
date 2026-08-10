@@ -723,6 +723,32 @@
       "status": "candidate",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1",
       "addedAt": "2026-08-11"
+    },
+    {
+      "id": "moshi-shinken",
+      "org": "株式会社進学研究会",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.shinken.co.jp/inquiry",
+      "contactClass": "b2b",
+      "evidence": "お問い合わせフォームに「種別」選択があり、電話窓口も「個人の方」と「塾・学校の先生方」で明確に分離掲載されている(Vもぎ/進研テストは全国11,000塾超が採用する法人向け商材)",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+    },
+    {
+      "id": "moshi-hokushin-tosho",
+      "org": "北辰図書株式会社",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.hokushin-t.jp/contact/",
+      "contactClass": "b2b",
+      "evidence": "お問い合わせフォーム冒頭で「入力フォームの種類」を「塾の先生」「学校の先生」「保護者の方」「生徒の方」等から選択させる設計。「貴校名」項目も存在し法人窓口が明確",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
     }
   ]
 }
