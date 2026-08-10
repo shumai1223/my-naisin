@@ -11,8 +11,29 @@
  * 公式サイトに具体的な定員数の記載がありcourses収録、ステップ/信濃むつみ/さくら国際/
  * 緑誠蘭/つくば開成学園/ＩＤ学園は「若干名」表記や項目自体の不在で定員非公開のためスキップ。
  * これで参照台帳26校全ての在籍状況・データ収集可否を確認完了(schools=19, skipped=7)。
+ *
+ * 【掛-2(私立×多年度)追加・2026-08-10】令和8年度と同型の県民文化部プレスリリース(令和7年度版・
+ * 2024年11月14日付)を、旧ページ(r7kokonyushi.html)は404だったもののWebFetchでPDFファイル名
+ * (boshu1114.pdf)を特定し直接取得した。このPDFは「学科別募集定員」に加え「前年度募集定員」列
+ * (=令和6年度の学校別合計値)も同梱する珍しい形式だったため、全日制16校について**令和7年度
+ * (学科別内訳付き)と令和6年度(合計値のみ・学科別内訳は原資料に無くcourses空)の2年分をまとめて
+ * 追加した**。令和7→令和8年度で**実際の変化を3件発見**(いずれも-5名の小幅減少): ①長野清泉女学院
+ * 180→175 ②長野日本大学(普通科)275→270(探究創造科30は不変・校計305→300) ③長野俊英220→215。
+ * 他13校は完全一致。長野女子高等学校は令和6年度から既に募集停止(既存skipped記載と整合)。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
+
+const KAKE2_2025_SOURCE = {
+  url: 'https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r7/documents/boshu1114.pdf',
+  docTitle: '令和7年度私立高等学校(全日制)の募集定員をお知らせします｜長野県県民文化部',
+  fetchedAt: '2026-08-10',
+  sourceTier: 'primary' as const,
+};
+
+const KAKE2_2024_SOURCE = {
+  ...KAKE2_2025_SOURCE,
+  docTitle: '令和7年度私立高等学校(全日制)の募集定員をお知らせします｜長野県県民文化部(「前年度募集定員」列=令和6年度の学校別合計値。学科別内訳は原資料に記載なし)',
+};
 
 export const PRIVATE_SCHOOL_DETAIL_NAGANO: PrivateSchoolDetailFile = {
   prefectureCode: 'nagano',
@@ -285,6 +306,281 @@ export const PRIVATE_SCHOOL_DETAIL_NAGANO: PrivateSchoolDetailFile = {
         fetchedAt: '2026-07-30',
         sourceTier: 'primary' as const,
       },
+    },
+    {
+      schoolCode: 'D120320100017',
+      schoolName: '長野清泉女学院高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [{ courseName: '普通科', capacity: 180 }],
+      totalCapacity: 180,
+      source: { ...KAKE2_2025_SOURCE, docTitle: KAKE2_2025_SOURCE.docTitle + '(令和8年度は175に減少)' },
+    },
+    {
+      schoolCode: 'D120320100017',
+      schoolName: '長野清泉女学院高等学校',
+      fiscalYearLabel: '令和6年度',
+      courses: [],
+      totalCapacity: 195,
+      source: KAKE2_2024_SOURCE,
+    },
+    {
+      schoolCode: 'D120320100035',
+      schoolName: '文化学園長野高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [{ courseName: '普通科', capacity: 210 }],
+      totalCapacity: 210,
+      source: { ...KAKE2_2025_SOURCE, docTitle: KAKE2_2025_SOURCE.docTitle + '(令和8年度と完全に同一)' },
+    },
+    {
+      schoolCode: 'D120320100035',
+      schoolName: '文化学園長野高等学校',
+      fiscalYearLabel: '令和6年度',
+      courses: [],
+      totalCapacity: 210,
+      source: KAKE2_2024_SOURCE,
+    },
+    {
+      schoolCode: 'D120320100044',
+      schoolName: '長野日本大学高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [
+        { courseName: '普通科', capacity: 275 },
+        { courseName: '探究創造科', capacity: 30 },
+      ],
+      totalCapacity: 305,
+      source: {
+        ...KAKE2_2025_SOURCE,
+        docTitle: KAKE2_2025_SOURCE.docTitle + '(普通科が令和8年度は270に減少。探究創造科30は不変。校計305→300)',
+      },
+    },
+    {
+      schoolCode: 'D120320100044',
+      schoolName: '長野日本大学高等学校',
+      fiscalYearLabel: '令和6年度',
+      courses: [],
+      totalCapacity: 305,
+      source: KAKE2_2024_SOURCE,
+    },
+    {
+      schoolCode: 'D120320100053',
+      schoolName: '長野俊英高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [{ courseName: '普通科', capacity: 220 }],
+      totalCapacity: 220,
+      source: { ...KAKE2_2025_SOURCE, docTitle: KAKE2_2025_SOURCE.docTitle + '(令和8年度は215に減少)' },
+    },
+    {
+      schoolCode: 'D120320100053',
+      schoolName: '長野俊英高等学校',
+      fiscalYearLabel: '令和6年度',
+      courses: [],
+      totalCapacity: 220,
+      source: KAKE2_2024_SOURCE,
+    },
+    {
+      schoolCode: 'D120320300015',
+      schoolName: '上田西高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [{ courseName: '普通科', capacity: 290 }],
+      totalCapacity: 290,
+      source: { ...KAKE2_2025_SOURCE, docTitle: KAKE2_2025_SOURCE.docTitle + '(令和8年度と完全に同一)' },
+    },
+    {
+      schoolCode: 'D120320300015',
+      schoolName: '上田西高等学校',
+      fiscalYearLabel: '令和6年度',
+      courses: [],
+      totalCapacity: 290,
+      source: KAKE2_2024_SOURCE,
+    },
+    {
+      schoolCode: 'D120321700019',
+      schoolName: '佐久長聖高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [{ courseName: '普通科', capacity: 315 }],
+      totalCapacity: 315,
+      source: { ...KAKE2_2025_SOURCE, docTitle: KAKE2_2025_SOURCE.docTitle + '(令和8年度と完全に同一)' },
+    },
+    {
+      schoolCode: 'D120321700019',
+      schoolName: '佐久長聖高等学校',
+      fiscalYearLabel: '令和6年度',
+      courses: [],
+      totalCapacity: 320,
+      source: KAKE2_2024_SOURCE,
+    },
+    {
+      schoolCode: 'D120321400012',
+      schoolName: '東海大学付属諏訪高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [
+        { courseName: '普通科', capacity: 265 },
+        { courseName: '理数科', capacity: 40 },
+      ],
+      totalCapacity: 305,
+      source: { ...KAKE2_2025_SOURCE, docTitle: KAKE2_2025_SOURCE.docTitle + '(令和8年度と完全に同一)' },
+    },
+    {
+      schoolCode: 'D120321400012',
+      schoolName: '東海大学付属諏訪高等学校',
+      fiscalYearLabel: '令和6年度',
+      courses: [],
+      totalCapacity: 305,
+      source: KAKE2_2024_SOURCE,
+    },
+    {
+      schoolCode: 'D120320900019',
+      schoolName: '伊那西高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [{ courseName: '普通科', capacity: 170 }],
+      totalCapacity: 170,
+      source: { ...KAKE2_2025_SOURCE, docTitle: KAKE2_2025_SOURCE.docTitle + '(令和8年度と完全に同一)' },
+    },
+    {
+      schoolCode: 'D120320900019',
+      schoolName: '伊那西高等学校',
+      fiscalYearLabel: '令和6年度',
+      courses: [],
+      totalCapacity: 175,
+      source: KAKE2_2024_SOURCE,
+    },
+    {
+      schoolCode: 'D120320500013',
+      schoolName: '飯田女子高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [{ courseName: '普通科', capacity: 210 }],
+      totalCapacity: 210,
+      source: { ...KAKE2_2025_SOURCE, docTitle: KAKE2_2025_SOURCE.docTitle + '(令和8年度と完全に同一)' },
+    },
+    {
+      schoolCode: 'D120320500013',
+      schoolName: '飯田女子高等学校',
+      fiscalYearLabel: '令和6年度',
+      courses: [],
+      totalCapacity: 215,
+      source: KAKE2_2024_SOURCE,
+    },
+    {
+      schoolCode: 'D120321500011',
+      schoolName: '東京都市大学塩尻高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [{ courseName: '普通科', capacity: 255 }],
+      totalCapacity: 255,
+      source: { ...KAKE2_2025_SOURCE, docTitle: KAKE2_2025_SOURCE.docTitle + '(令和8年度と完全に同一)' },
+    },
+    {
+      schoolCode: 'D120321500011',
+      schoolName: '東京都市大学塩尻高等学校',
+      fiscalYearLabel: '令和6年度',
+      courses: [],
+      totalCapacity: 255,
+      source: KAKE2_2024_SOURCE,
+    },
+    {
+      schoolCode: 'D120320200016',
+      schoolName: '松商学園高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [
+        { courseName: '普通科', capacity: 340 },
+        { courseName: '商業科', capacity: 80 },
+      ],
+      totalCapacity: 420,
+      source: { ...KAKE2_2025_SOURCE, docTitle: KAKE2_2025_SOURCE.docTitle + '(令和8年度と完全に同一)' },
+    },
+    {
+      schoolCode: 'D120320200016',
+      schoolName: '松商学園高等学校',
+      fiscalYearLabel: '令和6年度',
+      courses: [],
+      totalCapacity: 420,
+      source: KAKE2_2024_SOURCE,
+    },
+    {
+      schoolCode: 'D120320200025',
+      schoolName: '松本国際高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [{ courseName: '普通科', capacity: 190 }],
+      totalCapacity: 190,
+      source: { ...KAKE2_2025_SOURCE, docTitle: KAKE2_2025_SOURCE.docTitle + '(令和8年度と完全に同一)' },
+    },
+    {
+      schoolCode: 'D120320200025',
+      schoolName: '松本国際高等学校',
+      fiscalYearLabel: '令和6年度',
+      courses: [],
+      totalCapacity: 190,
+      source: KAKE2_2024_SOURCE,
+    },
+    {
+      schoolCode: 'D120320200052',
+      schoolName: '松本第一高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [
+        { courseName: '普通科', capacity: 120 },
+        { courseName: '家庭科(食物)', capacity: 75 },
+      ],
+      totalCapacity: 195,
+      source: { ...KAKE2_2025_SOURCE, docTitle: KAKE2_2025_SOURCE.docTitle + '(令和8年度と完全に同一)' },
+    },
+    {
+      schoolCode: 'D120320200052',
+      schoolName: '松本第一高等学校',
+      fiscalYearLabel: '令和6年度',
+      courses: [],
+      totalCapacity: 195,
+      source: KAKE2_2024_SOURCE,
+    },
+    {
+      schoolCode: 'D120320200034',
+      schoolName: 'エクセラン高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [
+        { courseName: '普通科', capacity: 90 },
+        { courseName: '美術科', capacity: 15 },
+        { courseName: '福祉科', capacity: 15 },
+      ],
+      totalCapacity: 120,
+      source: { ...KAKE2_2025_SOURCE, docTitle: KAKE2_2025_SOURCE.docTitle + '(令和8年度と完全に同一)' },
+    },
+    {
+      schoolCode: 'D120320200034',
+      schoolName: 'エクセラン高等学校',
+      fiscalYearLabel: '令和6年度',
+      courses: [],
+      totalCapacity: 120,
+      source: KAKE2_2024_SOURCE,
+    },
+    {
+      schoolCode: 'D120345200013',
+      schoolName: '日本ウェルネス長野高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [{ courseName: '普通科(県内生対象の総合コースのみ・全体定員80名の内数)', capacity: 30 }],
+      totalCapacity: 30,
+      source: { ...KAKE2_2025_SOURCE, docTitle: KAKE2_2025_SOURCE.docTitle + '(令和8年度と完全に同一)' },
+    },
+    {
+      schoolCode: 'D120345200013',
+      schoolName: '日本ウェルネス長野高等学校',
+      fiscalYearLabel: '令和6年度',
+      courses: [],
+      totalCapacity: 30,
+      source: KAKE2_2024_SOURCE,
+    },
+    {
+      schoolCode: 'D120332100012',
+      schoolName: 'ユナイテッド・ワールド・カレッジＩＳＡＫジャパン',
+      fiscalYearLabel: '令和7年度',
+      courses: [{ courseName: '普通科', capacity: 40 }],
+      totalCapacity: 40,
+      source: { ...KAKE2_2025_SOURCE, docTitle: KAKE2_2025_SOURCE.docTitle + '(令和8年度と完全に同一)' },
+    },
+    {
+      schoolCode: 'D120332100012',
+      schoolName: 'ユナイテッド・ワールド・カレッジＩＳＡＫジャパン',
+      fiscalYearLabel: '令和6年度',
+      courses: [],
+      totalCapacity: 40,
+      source: KAKE2_2024_SOURCE,
     },
   ],
   skipped: [

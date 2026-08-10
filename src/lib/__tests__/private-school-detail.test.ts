@@ -1312,17 +1312,25 @@ describe('PRIVATE_SCHOOL_DETAIL_NAGANO(県プレスリリースの全日制16校
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_NAGANO, allCodes);
     expect(result.duplicates).toEqual([]);
     expect(result.missing).toHaveLength(0);
-    expect(PRIVATE_SCHOOL_DETAIL_NAGANO.schools.length).toBe(19);
     expect(PRIVATE_SCHOOL_DETAIL_NAGANO.skipped.length).toBe(7);
     const pressReleaseTotal = PRIVATE_SCHOOL_DETAIL_NAGANO.schools
       .filter(
         (s) =>
+          s.fiscalYearLabel === '令和8年度' &&
           s.schoolCode !== 'D120341300011' &&
           s.schoolCode !== 'D120321700028' &&
           s.schoolCode !== 'D120320300033'
       )
       .reduce((acc, s) => acc + s.totalCapacity, 0);
     expect(pressReleaseTotal).toBe(3440);
+  });
+
+  it('掛-2(私立×多年度): プレスリリース掲載16校について令和7年度(内訳付き)+令和6年度(合計値のみ)を追加しschools.lengthは51', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_NAGANO.schools.length).toBe(51);
+    const r7Count = PRIVATE_SCHOOL_DETAIL_NAGANO.schools.filter((s) => s.fiscalYearLabel === '令和7年度').length;
+    const r6Count = PRIVATE_SCHOOL_DETAIL_NAGANO.schools.filter((s) => s.fiscalYearLabel === '令和6年度').length;
+    expect(r7Count).toBe(16);
+    expect(r6Count).toBe(16);
   });
 });
 
