@@ -1115,6 +1115,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
+    },
+    {
+      "id": "gakusan-gakko-tosho",
+      "org": "学校図書株式会社",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "http://inquiry.gakuto-plus.jp/gakuto_inquiry_new/",
+      "contactClass": "b2b",
+      "evidence": "お問い合わせフォームの必須項目に『学校名、団体名』欄があることを直接WebFetchで確認。教科書は書店経由のみで直接販売せず、事業自体が学校向けB2Bモデル(2021年に数研出版が買収=lane2既存エントリと資本関係あり)",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
     }
   ]
 }
