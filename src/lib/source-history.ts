@@ -33,6 +33,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '塾オンラインドットコム「愛知県の内申点計算方法」＋WebSearch要約の2独立ソース',
       note: 'ZZ-9b再検証優先度キューにより選定・再検証(前回2026-07-23は調査書記載事項の変更確認のみだったため、計算方式自体の裏取りは今回が初)。既存記載(targetGrades[3]のみ・gradeMultipliers{3:2}・9教科一律2倍=90点満点)を、WebSearch要約とjyuku-online.comの2独立ソースでクロスチェックし変更が無いことを確認した(両ソースとも「中3のみ対象・9教科の評定合計(45点)を2倍して90点満点・5教科と実技4教科の倍率差なし」で完全一致)。',
     },
+    {
+      date: '2026-08-10',
+      sourceUrl: 'https://manach.kyoshin.co.jp/577453/',
+      sourceTitle: '学習塾京進「愛知県公立高校入試の仕組みとは？複合選抜の特徴と2027年度からの変更点」',
+      note: '掛-4調査で発見: 令和5(2023)年度入試から学力検査を2回→1回(マークシート方式)に統合し「特色選抜」を新設。内申点の計算方式自体(評定×2倍・90点満点)には変更なし',
+    },
   ],
   saitama: [
     {
@@ -61,6 +67,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '塾オンラインドットコム「鹿児島県内申点」＋WebSearch要約の2独立ソース',
       note: 'ZZ-9b再検証優先度キューにより選定・再検証(前回2026-07-24からdaysSinceVerified12日で最古グループに再浮上)。全国最大級の実技傾斜(実技4教科×20倍・全体の約9割)という特異な数値のため特に慎重に再確認。既存記載(coreMultiplier2・practicalMultiplier20・maxScore450)をWebSearch要約とjyuku-online.comの2独立ソースでクロスチェックし変更なしと完全一致確認(両ソースとも「5教科×2倍=50点+実技4教科×20倍=400点=450点満点」で一致)。',
     },
+    {
+      date: '2026-08-10',
+      sourceUrl: 'https://www.pref.kagoshima.jp/ba05/kyoiku-bunka/school/koukou/nyushi/r6/r7jissiyoukou.html',
+      sourceTitle: '鹿児島県教育委員会「令和7年度鹿児島県公立高等学校入学者選抜実施要綱」',
+      note: '掛-4調査で発見: 令和7(2025)年度入試から推薦入学者選抜に自己推薦方式を追加、学科併願・追加選抜を可能に。調査書(内申点)の計算方式自体(450点満点)には変更なし',
+    },
   ],
   fukuoka: [
     {
@@ -75,6 +87,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '塾オンラインドットコム「福岡県内申点」＋WebSearch要約の2独立ソース',
       note: 'ZZ-9b再検証優先度キューにより選定・再検証(前回2026-07-24からdaysSinceVerified12日で最古グループに再浮上)。Λ-2 wave3候補で学校数が最多(98校)の県のため慎重に確認。既存記載(中3のみ・45点満点・note欄「一部高校で傾斜配点あり」)をWebSearch要約とjyuku-online.comの2独立ソースでクロスチェックし変更なしと確認(両ソースとも45点満点+一部高校の教科傾斜配点(例:数学理科1.5倍)で一致)。',
     },
+    {
+      date: '2026-08-10',
+      sourceUrl: 'https://resemom.jp/article/2022/11/15/69494.html',
+      sourceTitle: 'リセマム「【高校受験2023】福岡県、第2志望校制度スタート」（福岡県教育委員会発表を引用）',
+      note: '掛-4調査で発見: 令和5(2023)年度入試から一般入学者選抜に「第2志望校制度」新設(第1志望不合格時に欠員のある第2志望校でも再選考)。内申点の計算方式自体には変更なし。詳細は/nyushi-seido-henkouに掲載',
+    },
   ],
   tottori: [
     {
@@ -88,6 +106,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceUrl: 'https://jyuku-online.com/blog/jj-tottori/',
       sourceTitle: '塾オンラインドットコム「鳥取県内申点」＋WebSearch要約の2独立ソース',
       note: 'ZZ-9b再検証優先度キューにより選定・再検証(前回2026-07-24からdaysSinceVerified12日で最古グループに再浮上)。既にΛ-2 wave2で公開済みの県のため特に慎重に確認。既存記載(中3のみ・実技4教科×2倍・65点満点・note欄の高校別2〜4倍換算例)をWebSearch要約とjyuku-online.comの2独立ソースでクロスチェックし完全一致確認(両ソースとも基本65点満点+高校指定倍率2倍→130点/3倍→195点/4倍→260点で一致)。',
+    },
+    {
+      date: '2026-08-10',
+      sourceUrl: 'https://resemom.jp/article/2022/05/13/66993.html',
+      sourceTitle: 'リセマム「【高校受験2023】鳥取県立高、推薦廃止し特色選抜へ…検査日2/3」（鳥取県教育委員会発表を引用）',
+      note: '掛-4調査で発見: 令和5(2023)年度入試から推薦入学者選抜を廃止し出身中学校長の推薦不要の「特色入学者選抜」へ移行。調査書(65点満点)の計算方式自体には変更なし',
     },
   ],
   fukui: [
@@ -118,6 +142,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '個別指導Axis「山形県公立高校入試概要」＋WebSearch要約の2独立ソース',
       note: 'ZZ-9b再検証優先度キューにより選定・再検証(前回2026-07-24からdaysSinceVerified12日で最古グループに再浮上)。既存記載(中3のみ対象・9教科×5段階=45点満点)をWebSearch要約とaxis-kobetsu.jpの2独立ソースでクロスチェックし変更なしと確認(両ソースとも「調査書45点満点・500点満点へ換算・評定:学力検査=3:7〜5:5の範囲で高校ごとに設定」で一致)。',
     },
+    {
+      date: '2026-08-10',
+      sourceUrl: 'https://www.pref.yamagata.jp/700013/koko/2024r8nyuugakusyajouhou.html',
+      sourceTitle: '山形県教育委員会「令和8年度入学者選抜情報」（前期(特色)選抜及び後期(一般)選抜の概要を掲載）',
+      note: '掛-4調査で発見: 令和8(2026)年度入試から推薦入学者選抜を廃止し全公立高校で前期(特色)・後期(一般)の2回受検制へ移行(令和7年度に谷地・米沢東・南陽3校が先行導入)。調査書(45点満点)の計算方式自体には変更なし',
+    },
   ],
   aomori: [
     {
@@ -146,6 +176,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '「内申点と内申ランクの計算方法」＋WebSearch要約の2独立ソース',
       note: 'ZZ-9b再検証優先度キューにより選定・再検証(前回2026-07-24からdaysSinceVerified12日で最古グループに再浮上)。既存記載(gradeMultipliers1:2/2:2/3:3・maxScore315)をWebSearch要約とsidoukai.comの2独立ソースでクロスチェックし変更なしと確認(両ソースとも中1×2+中2×2+中3×3=315点満点で一致・sidoukai.comが記載する中1/中2時点の「仮計算」用の別倍率(7倍/5倍)は暫定見込み値の算出方法であり、中3確定時の本計算式(既存記載と一致)とは矛盾しない)。',
     },
+    {
+      date: '2026-08-10',
+      sourceUrl: 'https://resemom.jp/article/2019/07/05/51367.html',
+      sourceTitle: 'リセマム「【高校受験2022】北海道公立高校入試、学校裁量問題を廃止」（北海道教育委員会発表を引用）',
+      note: '掛-4調査で発見: 令和4(2022)年度入試から学力検査の「学校裁量問題」を廃止し全校共通問題へ一本化、配点を1教科60点→100点へ拡大。調査書(内申点315点満点)の計算方式自体には変更なし',
+    },
   ],
   kanagawa: [
     {
@@ -159,6 +195,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceUrl: 'https://bestjuku.com/shingaku/s-article/4796/',
       sourceTitle: '塾選ジャーナル「神奈川の内申点計算方法」＋WebSearch要約の2独立ソース',
       note: 'ZZ-9b再検証優先度キューにより選定・再検証(前回2026-07-24からdaysSinceVerified12日で最古グループに再浮上)。既存の46都道府県中で公開済み(Λ-2 wave1)の県のため特に慎重に確認。既存記載(targetGrades [2,3]・中2×1倍45点+中3×2倍90点=135点満点)をWebSearch要約とbestjuku.comの2独立ソースでクロスチェックし完全一致確認(両ソースとも同一の計算例(中2評定合計×1+中3評定合計×2)を提示)。',
+    },
+    {
+      date: '2026-08-10',
+      sourceUrl: 'https://www.pref.kanagawa.jp/documents/24739/kaizensetumei.pdf',
+      sourceTitle: '神奈川県教育委員会「神奈川県公立高等学校入学者選抜制度改善方針 説明資料」（令和4年7月）',
+      note: '掛-4調査で発見: 令和6(2024)年度入試から共通選抜の面接を一律廃止し、第2次選考に「主体的に学習に取り組む態度」評価を新設。調査書(内申点)自体の計算方式(135点満点)には変更なし',
     },
   ],
   tokyo: [
@@ -266,6 +308,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '沖縄県内申点計算方法のまとめ記事（学習塾ベンガル記事群の要約含む・2026年度入試版）',
       note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。中1〜中3の3年間すべて対象・5教科(国数英理社)そのまま+実技4教科(音楽・美術・保健体育・技術家庭)を1.5倍・1学年55点満点×3年=165点満点の計算方式を、独立した教育系情報サイト2件(WebSearch要約+jyuku-online.comの詳細配点内訳)でクロスチェックし変更が無いことを確認した。数値は既存記載(targetGrades[1,2,3]・gradeMultipliers全学年1・coreMultiplier1・practicalMultiplier1.5・maxScore165)と完全一致',
     },
+    {
+      date: '2026-08-10',
+      sourceUrl: 'https://note.com/asamorikdb/n/n50d508f3d62f',
+      sourceTitle: '朝森教育データバンク「沖縄県の高校入試事情（ホンネの高校選び）」',
+      note: '掛-4調査で発見: 令和7(2025)年度入試から推薦入学を廃止し「特色選抜」へ移行、必ず一般選抜(学力検査5教科)と併願する仕組みとし全受検者に学力検査を必須化。内申点(165点満点)の計算方式自体には変更なし',
+    },
   ],
   iwate: [
     {
@@ -273,6 +321,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceUrl: 'https://jyuke-labo.com/koukoujyukentaisaku/iwate/',
       sourceTitle: '受験ラボ「岩手県高校入試情報」＋WebSearch要約（複数教育系サイトの記述比較）',
       note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。**計算に使う中核数値(targetGrades[1,2,3]・gradeMultipliers{1,2,3}・coreMultiplier2・practicalMultiplier3・maxScore660)自体は複数ソースで660点満点という総量が一致し変更なしと確認できた**。一方、noteフィールドに記載の「実際の選抜では440点満点に換算される場合がある」という圧縮後の点数については、WebSearch要約が「2025年度入試より500点に圧縮」と述べる一方、jyuke-labo.comは「270点×2/3で440点満点」という既存noteと異なる計算過程(9教科合計×学年比のみ・実技倍率の記述なし)を示しており、2次情報源間で440/500が食い違い、算出根拠の記述も相互に整合しない。このnoteフィールドは実際の計算エンジン(coreMultiplier等)には使われない補足情報であり、着手前の状態から変更していないため実害はないが、圧縮後点数の真値は今回のセッションでは確定できなかった。捏造ゼロ原則により440→500等への書き換えは行わず現状維持のまま、次に手が空いた際に岩手県教育委員会の地区別実施概要PDF(盛岡地区等)を直接確認することを推奨する。',
+    },
+    {
+      date: '2026-08-10',
+      sourceUrl: 'https://www.pref.iwate.jp/kyouikubunka/kyouiku/gakkou/senbatsu/1069793.html',
+      sourceTitle: '岩手県教育委員会「令和7年度以降の岩手県立高等学校入学者選抜」',
+      note: '掛-4調査で発見: 令和7(2025)年度入試から推薦入試を廃止し特色・一般入学者選抜へ移行、内申点の圧縮先が440点満点から500点満点へ変更(基礎計算式=660点満点は不変)',
     },
   ],
   gifu: [
@@ -289,6 +343,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceUrl: 'https://www.edu-netz.com/admission-information2026/miyazaki-info-r8',
       sourceTitle: '対話式進学塾1対1ネッツ「宮崎県の高校入試情報2026(令和8年度)」＋WebSearch要約',
       note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。既存記載(targetGrades[1,2,3]・全学年等倍・coreMultiplier1・practicalMultiplier1・maxScore135=9教科×5段階×3学年、学力検査等との比率は非公表で学校ごとに傾斜配点)を、WebSearch要約とedu-netz.comの2独立ソースでクロスチェックし変更が無いことを確認した(実際の配点は学校により70〜300点と幅がある旨も既存noteと整合)。',
+    },
+    {
+      date: '2026-08-10',
+      sourceUrl: 'https://socra.info/blog/%EF%BC%9C%E5%A1%BE%E9%95%B7%E3%83%96%E3%83%AD%E3%82%B0vol-273%EF%BC%9E%E5%AE%AE%E5%B4%8E%E7%9C%8C%E7%AB%8B%E9%AB%98%E6%A0%A1%E5%85%A5%E8%A9%A6%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E8%80%83%E3%81%88/',
+      sourceTitle: '個別指導スクールSOCRA「塾長ブログvol.273 宮崎県立高校入試について考える 自己推薦型入試3年目の課題」',
+      note: '掛-4調査で発見: 令和4(2022)年度入試から中学校長推薦必須の学校推薦型入試を廃止し自己推薦型入試(自己推薦・スポーツ推薦の2種)へ移行。内申点(135点満点)の計算方式自体には変更なし',
     },
   ],
   miyagi: [
@@ -360,6 +420,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '対話式進学塾1対1ネッツ「佐賀県の高校入試情報2026(令和8年度)」＋WebSearch要約',
       note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。既存記載(全学年等倍・実技倍率なし・9教科×5段階×3年=135点満点)を、WebSearch要約とedu-netz.comの2独立ソースでクロスチェックし変更が無いことを確認した(「中1 45点・中2 45点・中3 45点=135点満点」で完全一致)。2028年度からの選抜制度改革(特別選抜廃止+一般選抜一本化・本セッション今朝のX-30調査で発見済み)は未施行かつ選抜方式のみの変更であり、内申点算出方法自体には影響しないことを確認。',
     },
+    {
+      date: '2026-08-10',
+      sourceUrl: 'https://www.saga-s.co.jp/articles/-/1467979',
+      sourceTitle: '佐賀新聞「高校学区制は今 佐賀県の県立中学校・高校は2023年度入試から全県区に 県外からの受験要件も緩和」',
+      note: '掛-4調査で発見: 令和5(2023)年度入試から東西2学区制を廃止し「全県1区」へ移行。内申点の計算方式自体(135点満点)には変更なし',
+    },
   ],
   mie: [
     {
@@ -376,6 +442,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '塾オンラインドットコム「山口県の公立高校入試の内申点とは？」＋WebSearch要約',
       note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。既存記載(全学年等倍・実技倍率なし・9教科×5段階×3年=135点満点)を、WebSearch要約とjyuku-online.comの2独立ソースでクロスチェックし変更が無いことを確認した。2026年度からの推薦入学廃止(校長推薦必須→自己出願の特色選抜へ・本セッション今朝のX-30調査で発見済み)は選抜方式(出願資格)の変更であり、内申点算出方法自体(135点満点の計算式)には影響しないことを両ソースで確認できた。',
     },
+    {
+      date: '2026-08-10',
+      sourceUrl: 'https://tokushin-juku.com/journal/%E3%80%90%E4%BB%A4%E5%92%8C8%E5%B9%B4%E5%BA%A6-%E5%B1%B1%E5%8F%A3%E7%9C%8C%E5%85%AC%E7%AB%8B%E9%AB%98%E6%A0%A1%E5%85%A5%E8%A9%A6%E3%80%91%E9%87%8D%E8%A6%81%E3%81%AA%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B',
+      sourceTitle: '徳進塾「【重要】令和8年度(2026年度) 山口県公立高等学校入学者選抜大綱・定員について」',
+      note: '掛-4調査で発見: 令和8(2026)年度入試から中学校長推薦必須の「推薦入試」を廃止し自己推薦型の「特色選抜」へ移行。内申点の計算方式自体(135点満点)に変更は確認されず',
+    },
   ],
   yamanashi: [
     {
@@ -384,6 +456,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '個別指導Axis「山梨県の公立高校入試概要」＋WebSearch要約（複数教育系サイトの記述比較）',
       note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。既存記載(5教科×2倍+実技4教科×3倍・全学年等倍・maxScore330・note欄「特別活動等で+30点」=合計360)を、WebSearch要約とaxis-kobetsu.jpの2独立ソースが揃って「360点満点(特別活動30点を含む)」と報告し完全一致で確認できた。**一方でjyuke-labo.comが「中1中2各45点+中3のみ×3倍で135点=225点満点+特別活動30点」という既存とは全く異なる構造(gifu/kumamoto等と同型の学年3のみ傾斜パターン)を返した**が、この主張の合計(225+30=255)は他2ソースが一致する360と算術的に矛盾するため、jyuke-labo.com側の誤り(他県との混同の可能性)と判断し不採用。既存の330(内訳は2倍/3倍を3学年均等適用)+30=360という構造を維持。',
     },
+    {
+      date: '2026-08-10',
+      sourceUrl: 'https://www.manatera.com/blog/futoko-tokubetsu-senbatsu/',
+      sourceTitle: 'まなぶてらす「不登校でも公立高校は受けられる｜調査書を使わない『特別選抜』とは」（山梨県教育委員会発表を引用）',
+      note: '掛-4調査で発見: 令和7(2025)年度入試後期募集から不登校・ヤングケアラー等向けに調査書不使用の「特別選抜」を新設。既存選抜方式の計算式自体には変更なし',
+    },
   ],
   shiga: [
     {
@@ -391,6 +469,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceUrl: 'https://jyuke-labo.com/koukoujyukentaisaku/shiga/',
       sourceTitle: '受験ラボ「滋賀県高校入試情報」＋WebSearch要約（複数教育系サイトの記述比較）',
       note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。既存記載(全学年等倍・実技倍率なし・9教科×5段階×3年=135点満点)を、WebSearch要約とjyuke-labo.comの2独立ソースでクロスチェックし変更が無いことを確認した(「中1 45点・中2 45点・中3 45点=135点満点」で完全一致)。2026年度からの選抜制度改革(推薦/特色/一般の3方式→一般型/学校独自型の2方式へ一本化)は選抜方式の変更であり、内申点算出方法自体(135点満点)には影響しないことを確認。',
+    },
+    {
+      date: '2026-08-10',
+      sourceUrl: 'https://www.aile21.jp/area/shiga/jyuken-system/',
+      sourceTitle: '家庭教師のえーる「2026年度より(令和8年度)滋賀県の高校入試制度が変わります！」（滋賀県教育委員会発表を引用）',
+      note: '掛-4調査で発見: 令和8(2026)年度入試から推薦選抜・特色選抜等を「一次募集」へ統合し全受験生に学力検査を義務化。内申点(135点満点)の計算方式自体には変更なし',
     },
   ],
   akita: [
@@ -432,6 +516,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '大分市夢進学塾kanaL「大分県公立高校入試の内申点の計算」＋jyuke-labo.com(WebSearch経由)の2独立ソース',
       note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。既存記載(simplifiedCalc=true・簡易520点表示・note欄の実選抜真値260点=中1中2各65点(核5×1+実技4×2)+中3130点(核5×2+実技4×4))を、WebSearch要約とyume-kanal-oita.comの2独立ソースでクロスチェックし変更が無いことを確認した(両ソースとも「1・2年次各65点(主要25+実技40)・3年次130点(主要50+実技80)・合計260点」で完全一致)。ishikawaのような構造的な食い違いは無かった。',
     },
+    {
+      date: '2026-08-10',
+      sourceUrl: 'https://tosonline.jp/news/20250710/00000006.html',
+      sourceTitle: 'TOSオンライン「県立高校で複数校志願制度 導入へ 2026年春から2次入試は廃止『地域の高校の活性化へ』大分」',
+      note: '掛-4調査で発見: 令和8(2026)年度入試から第二志願校向けの二次試験を廃止し「複数校志願制度」へ移行(一次入試の得点をそのまま流用)。調査書点(260点満点)の計算方式自体には変更なし',
+    },
   ],
   nagasaki: [
     {
@@ -448,6 +538,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '個別指導Axis「長野県の公立高校入試概要」＋bibroom.comの2直接WebFetch',
       note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。既存記載(targetGrades[3]のみ・実技倍率なし・9教科×5段階=45点満点)を、axis-kobetsu.jpとbibroom.comへの2件の直接WebFetchでクロスチェックし変更が無いことを確認した(両ソースとも「中3のみ対象・45点満点・実技教科に特別倍率なし」で完全一致)。',
     },
+    {
+      date: '2026-08-10',
+      sourceUrl: 'https://www.pref.nagano.lg.jp/kyoiku/koko/gakko/saihen/joho/senbatsuseido.html',
+      sourceTitle: '長野県教育委員会「長野県公立高等学校新たな入学者選抜制度に関する情報」',
+      note: '掛-4調査で発見: 令和7(2025)年度入試から前期選抜に学力検査(5教科200点満点)を新設、後期選抜に「紙上面接」を導入。内申点の計算方式自体(45点満点)には変更なし',
+    },
   ],
   shimane: [
     {
@@ -455,6 +551,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceUrl: 'https://jyuku-online.com/blog/jj-simane/',
       sourceTitle: '塾オンラインドットコム「島根県の内申点の計算方法」＋WebSearch要約の2独立ソース',
       note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。既存記載(gradeMultipliers{1:1,2:1,3:2}・maxScore180=中1中2各45点+中3×2倍90点・note欄「実選抜では51点満点に換算後、特別活動9点を加算し60点満点」)を、WebSearch要約とjyuku-online.comの2独立ソースでクロスチェックし変更が無いことを確認した(両ソースとも「素点180点×51/180=51点」+「特別活動6〜9点」=60点満点という同一の換算式を報告・完全一致)。',
+    },
+    {
+      date: '2026-08-10',
+      sourceUrl: 'https://resemom.jp/article/2024/11/28/79691.html',
+      sourceTitle: 'リセマム「【高校受験2025】島根県公立高入試、特色選抜1/22・一般選抜3/5」（島根県教育委員会発表を引用）',
+      note: '掛-4調査で発見: 令和7(2025)年度入試から推薦入学者選抜を廃止し自己推薦による「総合入学者選抜」を導入(特色・総合・中高一貫特別・スポーツ特別+一般の5区分に再編)。調査書(180点満点)の計算方式自体には変更なし',
     },
   ],
   tokushima: [
@@ -496,6 +598,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '受験ラボ「和歌山県高校入試情報」＋axis-kobetsu.jpの2直接WebFetch',
       note: 'ZZ-9b再検証優先度キュー(最終確認日2026-07-16で最古グループ)により選定・再検証。**akitaに続き2件目のWebSearch要約ハルシネーション事例**: WebSearch要約が「2026年度から中1中2は態度評価3段階27点満点方式へ変更・合計144点満点」という既存記載(180点満点)と異なる記述をしたが、**同じ要約の中で直後に「内申点は180点で評価」と自己矛盾**していた。akitaの教訓に従いaxis-kobetsu.jpとjyuke-labo.comへ個別に直接WebFetchしたところ、**両方とも「144点」「態度評価」への言及が一切無く、既存どおり中1・中2各45点+中3×2倍90点=180点満点を明確に否定的に確認**した(jyuke-labo.comは明示的に「144点という数値は記載されていません」と回答)。既存の180点満点を維持。教訓の強化: WebSearchの要約が「態度評価3段階27点満点」という特定のフレーズパターンで既存の点数と異なる主張をした場合、それ自体がハルシネーションの強いシグナルである可能性が高い(akita・wakayamaで2回連続再現)。',
     },
+    {
+      date: '2026-08-10',
+      sourceUrl: 'https://www.agara.co.jp/article/359963',
+      sourceTitle: '紀伊民報AGARA「スポーツ推薦、２７年度で廃止 高校入試『特色化選抜』拡充へ、和歌山県教委」',
+      note: '掛-4調査で発見: 令和7(2025)年度入試からスポーツ推薦の対象・募集枠を縮小し特色化選抜へ段階移行開始(完全廃止は令和9年度で対象期間外)。調査書(180点満点)の計算方式自体には変更なし',
+    },
   ],
   nara: [
     {
@@ -503,6 +611,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceUrl: 'https://jyuku-online.com/blog/jj-nara/',
       sourceTitle: '塾オンラインドットコム「奈良県の内申点計算方法」＋WebSearch要約の2独立ソース',
       note: '**akita/wakayamaのWebSearchハルシネーション調査中に発覚した重要な後日談**: 「態度評価3段階27点満点・合計144点満点」というフレーズは、実は**完全な作り話ではなく奈良県の2026年3月17日発表の本物の制度改定(令和8年度〜)を指していた**。prefectures.tsのnara(lastVerified 2026-07-17)は既にこの改定を4パターン(①144点/②234点/③198点/④180点)まで詳細に記録済みだったため、これを機に改めて再検証した。WebSearch要約とjyuku-online.comの2独立ソースが標準パターン①(中1中2は9教科×3段階×各27点+中3は9教科×5段階×2倍90点=144点満点)を完全一致で確認し、既存の詳細記録に変更なしと結論した。**結論**: WebSearchのハルシネーションは純粋な捏造ではなく、**nara固有の実在する制度改定を他県(akita/wakayama)に誤帰属させていた**可能性が高い。jyuku-online.comが「加重配点設定時に160点満点になる可能性」に触れていたが、既存4パターンとは別の追加情報のため今回は変更せず今後の調査候補として記録するに留める。',
+    },
+    {
+      date: '2026-08-10',
+      sourceUrl: 'https://www.re-juku.com/2025/07/2575/',
+      sourceTitle: '理塾「【理塾大研究】奈良県公立高校受験の変更点について（最新版）」（奈良県教育委員会発表を引用）',
+      note: '掛-4調査で発見: 令和8(2026)年度入試から内申点の対象学年に中1を追加し135点満点→144点満点(標準)へ拡大、中1・中2は「主体的に学習に取り組む態度」評価を新規算入(学校により234/198/180点の4パターン)。既存の観点別評価3段階27点満点・144点満点という記述はakita/wakayama再検証時にWebSearchが誤って言及した対象県であり、nara自身については実在する制度改定と確認済み(2026-08-05既存記録と平仄一致)',
     },
   ],
 };
