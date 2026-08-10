@@ -181,6 +181,17 @@ describe('CONFIRMED_NO_CHANGE_CHECKS（掛-4・空振りの調査記録）', () 
     expect(getPastSystemChangesByPrefecture('osaka')).toEqual([]);
   });
 
+  test('静岡県は対象期間内の制度変更なしと確認済み(WebSearch要約の誤った180点満点説はWebFetchで否定済み)', () => {
+    const shizuoka = CONFIRMED_NO_CHANGE_CHECKS.find((c) => c.prefCode === 'shizuoka');
+    expect(shizuoka).toBeDefined();
+    expect(shizuoka?.note).toContain('45点満点');
+
+    const shizuokaPref = PREFECTURES.find((p) => p.code === 'shizuoka');
+    expect(shizuokaPref?.maxScore).toBe(45);
+    expect(shizuokaPref?.targetGrades).toEqual([3]);
+    expect(getPastSystemChangesByPrefecture('shizuoka')).toEqual([]);
+  });
+
   test('同一県がPAST_SYSTEM_CHANGESとCONFIRMED_NO_CHANGE_CHECKSの両方に重複登録されていない', () => {
     const changedPrefs = new Set(PAST_SYSTEM_CHANGES.map((c) => c.prefCode));
     for (const c of CONFIRMED_NO_CHANGE_CHECKS) {
