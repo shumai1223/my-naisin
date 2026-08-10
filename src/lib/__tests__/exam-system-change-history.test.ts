@@ -391,6 +391,17 @@ describe('CONFIRMED_NO_CHANGE_CHECKS（掛-4・空振りの調査記録）', () 
     expect(getPastSystemChangesByPrefecture('tochigi')).toEqual([]);
   });
 
+  test('茨城県は対象期間内の制度変更なしと確認済み(令和7年度の3変更は出願手続き・時間割・アクセシビリティ配慮でDB収録基準外)', () => {
+    const ibaraki = CONFIRMED_NO_CHANGE_CHECKS.find((c) => c.prefCode === 'ibaraki');
+    expect(ibaraki).toBeDefined();
+    expect(ibaraki?.note).toContain('135点満点');
+
+    const ibarakiPref = PREFECTURES.find((p) => p.code === 'ibaraki');
+    expect(ibarakiPref?.maxScore).toBe(135);
+    expect(ibarakiPref?.gradeMultipliers).toEqual({ 1: 1, 2: 1, 3: 1 });
+    expect(getPastSystemChangesByPrefecture('ibaraki')).toEqual([]);
+  });
+
   test('同一県がPAST_SYSTEM_CHANGESとCONFIRMED_NO_CHANGE_CHECKSの両方に重複登録されていない', () => {
     const changedPrefs = new Set(PAST_SYSTEM_CHANGES.map((c) => c.prefCode));
     for (const c of CONFIRMED_NO_CHANGE_CHECKS) {
