@@ -346,6 +346,18 @@ describe('PAST_SYSTEM_CHANGES（Λ+5・過去の制度変更履歴DB）', () => 
     expect(miyazakiPref?.gradeMultipliers).toEqual({ 1: 1, 2: 1, 3: 1 });
   });
 
+  test('沖縄県の推薦入学廃止・特色選抜移行エントリはprefectures.tsの現行maxScore(165点満点)と矛盾しない(選抜区分の再編であり内申点計算式は不変)', () => {
+    const okinawa = PAST_SYSTEM_CHANGES.find((c) => c.prefCode === 'okinawa');
+    expect(okinawa).toBeDefined();
+    expect(okinawa?.effectiveYear).toBe('令和7年度（2025年度）入試');
+    expect(okinawa?.category).toBe('selection-structure');
+    expect(okinawa?.detail).toContain('特色選抜');
+
+    const okinawaPref = PREFECTURES.find((p) => p.code === 'okinawa');
+    expect(okinawaPref?.maxScore).toBe(165);
+    expect(okinawaPref?.practicalMultiplier).toBe(1.5);
+  });
+
   test('categoryは定義済みの4種類のいずれかのみ(型崩れ防止)', () => {
     const validCategories = new Set(['scoring-input', 'selection-structure', 'weighting-formula', 'other']);
     for (const c of PAST_SYSTEM_CHANGES) {
@@ -360,7 +372,7 @@ describe('getPastSystemChangesByPrefecture', () => {
   });
 
   test('変更が無い県は空配列を返す(存在しない変更を捏造しない)', () => {
-    expect(getPastSystemChangesByPrefecture('okinawa')).toEqual([]);
+    expect(getPastSystemChangesByPrefecture('nonexistent-pref-code')).toEqual([]);
   });
 });
 
