@@ -309,6 +309,17 @@ describe('CONFIRMED_NO_CHANGE_CHECKS（掛-4・空振りの調査記録）', () 
     expect(getPastSystemChangesByPrefecture('kumamoto')).toEqual([]);
   });
 
+  test('三重県は対象期間内の制度変更なしと確認済み(特定学科の前期100%募集は毎年の定員配分でありDB収録基準外)', () => {
+    const mie = CONFIRMED_NO_CHANGE_CHECKS.find((c) => c.prefCode === 'mie');
+    expect(mie).toBeDefined();
+    expect(mie?.note).toContain('45点満点');
+
+    const miePref = PREFECTURES.find((p) => p.code === 'mie');
+    expect(miePref?.maxScore).toBe(45);
+    expect(miePref?.targetGrades).toEqual([3]);
+    expect(getPastSystemChangesByPrefecture('mie')).toEqual([]);
+  });
+
   test('同一県がPAST_SYSTEM_CHANGESとCONFIRMED_NO_CHANGE_CHECKSの両方に重複登録されていない', () => {
     const changedPrefs = new Set(PAST_SYSTEM_CHANGES.map((c) => c.prefCode));
     for (const c of CONFIRMED_NO_CHANGE_CHECKS) {
