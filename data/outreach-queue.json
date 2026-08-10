@@ -1336,6 +1336,32 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+    },
+    {
+      "id": "edtech-system-d",
+      "org": "株式会社システムディ",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.systemd.co.jp/inqry_academic",
+      "contactClass": "b2b",
+      "evidence": "『学園ソリューション』専用問い合わせフォームの必須項目に『学校名・法人名』欄があることを直接WebFetchで確認。私立大学・高校向け校務システム(Campus Plan/School Engine)が主力製品",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "edtech-tfabworks",
+      "org": "株式会社ティーファブワークス",
+      "lane": "b2b-saas",
+      "channel": "email",
+      "contact": "info@tfabworks.com",
+      "contactClass": "b2b",
+      "evidence": "事業自体が学校の授業ICT活用ツール(ふきだしくん・TFabTile・micro:bit教材)専業で個人向け消費者製品が無い(全事業が教員/学校向け)ことを公式サイトで確認。汎用問い合わせ窓口(info@tfabworks.com)の実在を直接WebFetchで確認",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     }
   ]
 }
