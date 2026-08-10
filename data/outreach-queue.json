@@ -1297,6 +1297,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+    },
+    {
+      "id": "gakusan-dainippon-tosho",
+      "org": "大日本図書株式会社",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.dainippon-tosho.co.jp/contact/teachers.php",
+      "contactClass": "b2b",
+      "evidence": "『お問い合わせ 教員の方』という専用フォームが存在し、必須項目に『学校名』『勤務先住所』欄があり、ページ内に『一般の方はこちら』という別窓口への案内リンクがあることで教員向け窓口が明確に分離されていることを直接WebFetchで確認",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
     }
   ]
 }
