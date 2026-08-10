@@ -1,12 +1,27 @@
 /**
  * 岡山県私立高等学校の募集定員データ(Λ-5第二段)。
  * 岡山県私学協会(oka-shigaku.gr.jp)が公表する「令和8年度岡山県私立高等学校(全日制)入試要項
- * 一覧」PDF(定員合計5,560人)から、コース区分が単一で誤帰属リスクの無い3校のみを収録。
- * 大半の学校は複数コースが視覚的な括弧グルーピングで表現されており(関西高校・就実高校等)、
- * どのコースがどの数値に対応するか慎重な個別確認が必要なため今回は見送り、次回以降に
- * 1校ずつ丁寧に再訪する。
+ * 一覧」PDFに加え、大半の学校で個別の学校公式サイトが公表する募集要項PDFを直接ソースとして
+ * 採用し、24校(参照台帳の大半)を収録した(2026-08-04時点)。
+ *
+ * 【掛-2(私立×多年度)追加・2026-08-10】県私学協会の一括PDFは前年度版(highschool2025.pdf)も
+ * URLの年数部分を単純に置換するだけで削除されずlive公開されたままだったため、直接取得できた。
+ * このPDFを一次ソースとする10校(岡山白陵/吉備高原学園/岡山県共生/倉敷翠松/岡山龍谷/方谷學舎/
+ * 明誠学院/金光学園/岡山高等学校/岡山商科大学附属)を令和8年度データと再突合し、**実際の変化を
+ * 2件発見**: ①明誠学院高等学校は「進学総合」75+「保育・福祉」30の2区分が令和8年度は
+ * 「進創エクシードコース」105へ統合(校計370は不変) ②岡山商科大学附属高等学校はITデザイン
+ * (10→15)・工業技術(75→40)・健康スポーツ(20→45)・情報コース/ビジネス(45→50)の4区分間で
+ * 定員が再配分(校計270は不変)。他8校は完全一致。個別学校サイトを一次ソースとする残り14校は
+ * 学校ごとに別途の過去年度探索が必要なため今回は対象外。
  */
 import type { PrivateSchoolDetailFile } from '@/lib/private-school-detail';
+
+const KAKE2_2025_SOURCE = {
+  url: 'https://www.oka-shigaku.gr.jp/pdf/examguide/highschool2025.pdf',
+  docTitle: '令和7年度岡山県私立高等学校(全日制)入試要項一覧｜岡山県私学協会',
+  fetchedAt: '2026-08-10',
+  sourceTier: 'primary' as const,
+};
 
 export const PRIVATE_SCHOOL_DETAIL_OKAYAMA: PrivateSchoolDetailFile = {
   prefectureCode: 'okayama',
@@ -442,6 +457,315 @@ export const PRIVATE_SCHOOL_DETAIL_OKAYAMA: PrivateSchoolDetailFile = {
         docTitle: '令和8年度岡山県私立高等学校(全日制)入試要項一覧｜岡山県私学協会(岡山商科大学附属：総合学科7コース+自動車科)',
         fetchedAt: '2026-08-04',
         sourceTier: 'primary' as const,
+      },
+    },
+    {
+      schoolCode: 'D133310000210',
+      schoolName: '岡山白陵高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [],
+      totalCapacity: 160,
+      source: { ...KAKE2_2025_SOURCE, docTitle: KAKE2_2025_SOURCE.docTitle + '(令和8年度と完全に同一)' },
+    },
+    {
+      schoolCode: 'D133310000238',
+      schoolName: '吉備高原学園高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [],
+      totalCapacity: 100,
+      source: { ...KAKE2_2025_SOURCE, docTitle: KAKE2_2025_SOURCE.docTitle + '(令和8年度と完全に同一)' },
+    },
+    {
+      schoolCode: 'D133310000201',
+      schoolName: '岡山県共生高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [
+        {
+          courseName: '普通科(普通コース・メディア情報コース・生活アレンジコース・スポーツ科学コース計)',
+          capacity: 80,
+        },
+      ],
+      totalCapacity: 80,
+      source: {
+        ...KAKE2_2025_SOURCE,
+        docTitle:
+          KAKE2_2025_SOURCE.docTitle +
+          '(令和8年度資料は「スポーツ科学コース」への言及がなく3コース計と案内。校計80は同一)',
+      },
+    },
+    {
+      schoolCode: 'D133310000078',
+      schoolName: '倉敷高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [
+        {
+          courseName: '普通科（特進国大(S)コース・進学チャレンジコース・特進アドバンス(A)コース・総合探究コースの4コース合算）',
+          capacity: 260,
+        },
+        { courseName: '商業科', capacity: 70 },
+      ],
+      totalCapacity: 330,
+      source: {
+        url: 'https://www.oka-shigaku.gr.jp/pdf/examguide/highschool2025.pdf',
+        docTitle: '令和7年度岡山県私立高等学校(全日制)入試要項一覧｜岡山県私学協会(倉敷：令和8年度と完全に同一)',
+        fetchedAt: '2026-08-10',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
+      schoolCode: 'D133310000130',
+      schoolName: '岡山学芸館高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [
+        {
+          courseName: '普通科（清秀高等部・スーパーV・進学・医進サイエンス・特別進学の5区分合算・内訳は非公開）',
+          capacity: 400,
+        },
+        { courseName: '英語科', capacity: 25 },
+      ],
+      totalCapacity: 425,
+      source: {
+        url: 'https://www.oka-shigaku.gr.jp/pdf/examguide/highschool2025.pdf',
+        docTitle: '令和7年度岡山県私立高等学校(全日制)入試要項一覧｜岡山県私学協会(岡山学芸館：令和8年度と完全に同一)',
+        fetchedAt: '2026-08-10',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
+      schoolCode: 'D133310000149',
+      schoolName: '興譲館高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [
+        { courseName: '普通科 総合進学', capacity: 40 },
+        { courseName: '普通科 キャリアデザイン', capacity: 50 },
+        { courseName: '普通科 スポーツ', capacity: 30 },
+      ],
+      totalCapacity: 120,
+      source: {
+        url: 'https://www.oka-shigaku.gr.jp/pdf/examguide/highschool2025.pdf',
+        docTitle:
+          '令和7年度岡山県私立高等学校(全日制)入試要項一覧｜岡山県私学協会(興譲館：令和8年度は進学チャレンジ25・キャリアコース40・アスリート25=計90に再編され120から30減少)',
+        fetchedAt: '2026-08-10',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
+      schoolCode: 'D133310000176',
+      schoolName: 'おかやま山陽高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [
+        {
+          courseName: '普通科（特別進学・総合進学・公務員・ビューティ・IT・音楽・スポーツの7コース合算）',
+          capacity: 160,
+        },
+        { courseName: '専門科 機械科', capacity: 40 },
+        { courseName: '専門科 自動車科', capacity: 40 },
+        { courseName: '専門科 調理科', capacity: 45 },
+        { courseName: '専門科 製菓科', capacity: 40 },
+      ],
+      totalCapacity: 325,
+      source: {
+        url: 'https://www.oka-shigaku.gr.jp/pdf/examguide/highschool2025.pdf',
+        docTitle: '令和7年度岡山県私立高等学校(全日制)入試要項一覧｜岡山県私学協会(おかやま山陽：令和8年度と完全に同一)',
+        fetchedAt: '2026-08-10',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
+      schoolCode: 'D133310000112',
+      schoolName: '作陽学園高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [
+        { courseName: '普通科 Proud(特進プレミア・特進アドバンス計)', capacity: 30 },
+        { courseName: '普通科 Progress(進学チャレンジ・進学スタンダード計)', capacity: 130 },
+        { courseName: '普通科 Professional(スポーツ・ミュージック計)', capacity: 80 },
+      ],
+      totalCapacity: 240,
+      source: {
+        url: 'https://www.oka-shigaku.gr.jp/pdf/examguide/highschool2025.pdf',
+        docTitle:
+          '令和7年度岡山県私立高等学校(全日制)入試要項一覧｜岡山県私学協会(作陽学園：令和8年度はProud50・Progress110・Professional80に再配分。校計240は同一)',
+        fetchedAt: '2026-08-10',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
+      schoolCode: 'D133310000041',
+      schoolName: '就実高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [
+        { courseName: '特別進学コース アドバンスクラス', capacity: 130 },
+        { courseName: '特別進学コース ハイグレードクラス', capacity: 20 },
+        { courseName: '特別進学チャレンジコース', capacity: 200 },
+        { courseName: '総合進学コース(女子)', capacity: 100 },
+      ],
+      totalCapacity: 450,
+      source: {
+        url: 'https://www.oka-shigaku.gr.jp/pdf/examguide/highschool2025.pdf',
+        docTitle: '令和7年度岡山県私立高等学校(全日制)入試要項一覧｜岡山県私学協会(就実：令和8年度と完全に同一)',
+        fetchedAt: '2026-08-10',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
+      schoolCode: 'D133310000096',
+      schoolName: '倉敷翠松高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [
+        {
+          courseName: '普通科(特別進学コース・創学コース・進学コースの3コース計)',
+          capacity: 160,
+        },
+        { courseName: '商業科', capacity: 80 },
+        { courseName: '生活科学科', capacity: 60 },
+        { courseName: '看護科', capacity: 35 },
+      ],
+      totalCapacity: 335,
+      source: { ...KAKE2_2025_SOURCE, docTitle: KAKE2_2025_SOURCE.docTitle + '(倉敷翠松：令和8年度と完全に同一)' },
+    },
+    {
+      schoolCode: 'D133310000103',
+      schoolName: '岡山県美作高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [
+        { courseName: 'ハイグレードコース', capacity: 30 },
+        { courseName: '進学コース(美作大学コース・アドバンスコース)', capacity: 60 },
+        {
+          courseName: '探究コース(アドバンスコース・ITスペシャリストコース・クリエイトコース)',
+          capacity: 110,
+        },
+        { courseName: '福祉医療コース', capacity: 30 },
+        { courseName: 'アスリートコース', capacity: 20 },
+        { courseName: 'Bloomコース(不登校特例校・程度)', capacity: 20 },
+      ],
+      totalCapacity: 270,
+      source: {
+        url: 'https://www.oka-shigaku.gr.jp/pdf/examguide/highschool2025.pdf',
+        docTitle: '令和7年度岡山県私立高等学校(全日制)入試要項一覧｜岡山県私学協会(岡山県美作：令和8年度と完全に同一)',
+        fetchedAt: '2026-08-10',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
+      schoolCode: 'D133310000121',
+      schoolName: '岡山龍谷高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [
+        {
+          courseName: '普通科 特別進学コース(Ⅲ類・Ⅱ類・探究の3区分計)',
+          capacity: 20,
+        },
+        { courseName: '普通科 選択選抜コース', capacity: 50 },
+        { courseName: '普通科 進学教養コース', capacity: 80 },
+        { courseName: '情報科 情報コース', capacity: 50 },
+      ],
+      totalCapacity: 200,
+      source: { ...KAKE2_2025_SOURCE, docTitle: KAKE2_2025_SOURCE.docTitle + '(岡山龍谷：令和8年度と完全に同一)' },
+    },
+    {
+      schoolCode: 'D133310000158',
+      schoolName: '方谷學舎高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [
+        { courseName: '普通科(普通コース・スポーツコース・美容コース計)', capacity: 80 },
+      ],
+      totalCapacity: 80,
+      source: {
+        ...KAKE2_2025_SOURCE,
+        docTitle:
+          KAKE2_2025_SOURCE.docTitle +
+          '(方谷學舎：令和8年度はコース名を日本文化・進学(特別進学系/総合進学系)・アスリート・美容に再編。校計80は同一)',
+      },
+    },
+    {
+      schoolCode: 'D133310000069',
+      schoolName: '明誠学院高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [
+        { courseName: '普通科 特別進学コースⅢ類', capacity: 20 },
+        { courseName: '普通科 特別進学コースⅠ類', capacity: 70 },
+        { courseName: '普通科 進学総合', capacity: 75 },
+        { courseName: '普通科 保育・福祉', capacity: 30 },
+        { courseName: '普通科 特別進学コースⅡ類', capacity: 70 },
+        { courseName: '普通科 特別芸術コース', capacity: 30 },
+        { courseName: '普通科 新情報コース', capacity: 75 },
+      ],
+      totalCapacity: 370,
+      source: {
+        ...KAKE2_2025_SOURCE,
+        docTitle:
+          KAKE2_2025_SOURCE.docTitle +
+          '(明誠学院：令和8年度は「進学総合」75+「保育・福祉」30を「進創エクシードコース」105へ統合。校計370は同一)',
+      },
+    },
+    {
+      schoolCode: 'D133310000185',
+      schoolName: '金光学園高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [
+        { courseName: '普通科 特別進学クラス', capacity: 40 },
+        { courseName: '普通科 総合進学クラス', capacity: 140 },
+      ],
+      totalCapacity: 180,
+      source: { ...KAKE2_2025_SOURCE, docTitle: KAKE2_2025_SOURCE.docTitle + '(金光学園：令和8年度と完全に同一)' },
+    },
+    {
+      schoolCode: 'D133310000229',
+      schoolName: '岡山高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [
+        {
+          courseName: '普通科 東大・国立医学部コース・難関大コースの外部募集計',
+          capacity: 160,
+        },
+      ],
+      totalCapacity: 160,
+      source: { ...KAKE2_2025_SOURCE, docTitle: KAKE2_2025_SOURCE.docTitle + '(岡山：令和8年度と完全に同一)' },
+    },
+    {
+      schoolCode: 'D133310000014',
+      schoolName: '関西高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [
+        { courseName: '普通科 サイエンスフロンティア', capacity: 30 },
+        { courseName: '普通科 国立進学', capacity: 20 },
+        { courseName: '普通科 アドバンス(スタンダード系・ハイグレード系計)', capacity: 100 },
+        { courseName: '普通科 体育進学', capacity: 70 },
+        { courseName: 'ITビジネス科(ビジネス・アドバンス系・アスリート系計)', capacity: 100 },
+        { courseName: 'EIエンジニア科(Eシステム・ICTクリエイター系・アスリート系計)', capacity: 100 },
+      ],
+      totalCapacity: 420,
+      source: {
+        url: 'https://www.oka-shigaku.gr.jp/pdf/examguide/highschool2025.pdf',
+        docTitle:
+          '令和7年度岡山県私立高等学校(全日制)入試要項一覧｜岡山県私学協会(関西：令和8年度はサイエンスフロンティア30→15・国立進学20→15・アドバンス100→110・体育進学70→80に再配分。校計420は同一)',
+        fetchedAt: '2026-08-10',
+        sourceTier: 'primary' as const,
+      },
+    },
+    {
+      schoolCode: 'D133310000023',
+      schoolName: '岡山商科大学附属高等学校',
+      fiscalYearLabel: '令和7年度',
+      courses: [
+        { courseName: '総合学科 進学系列 総合進学コース', capacity: 45 },
+        { courseName: '総合学科 進学系列 ITデザインコース', capacity: 10 },
+        { courseName: '総合学科 情報・ビジネス系列 商大コース', capacity: 20 },
+        { courseName: '総合学科 工業系列 工業技術コース', capacity: 75 },
+        { courseName: '総合学科 進学系列 特別進学コース', capacity: 15 },
+        { courseName: '総合学科 健康スポーツコース', capacity: 20 },
+        {
+          courseName: '総合学科 情報・ビジネス系列 情報コース・ビジネスコース',
+          capacity: 45,
+        },
+        { courseName: '自動車科', capacity: 40 },
+      ],
+      totalCapacity: 270,
+      source: {
+        ...KAKE2_2025_SOURCE,
+        docTitle:
+          KAKE2_2025_SOURCE.docTitle +
+          '(岡山商科大学附属：令和8年度はITデザイン10→15・工業技術75→40・健康スポーツ20→45・情報/ビジネス45→50に再配分。校計270は同一)',
       },
     },
   ],

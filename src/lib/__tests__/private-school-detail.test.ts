@@ -1042,8 +1042,13 @@ describe('PRIVATE_SCHOOL_DETAIL_OKAYAMA(23校を収録・スキップ4件で参�
     const result = findDuplicateOrMissingCodes(PRIVATE_SCHOOL_DETAIL_OKAYAMA, allCodes);
     expect(result.duplicates).toEqual([]);
     expect(result.missing).toHaveLength(0);
-    expect(PRIVATE_SCHOOL_DETAIL_OKAYAMA.schools.length).toBe(23);
     expect(PRIVATE_SCHOOL_DETAIL_OKAYAMA.skipped.length).toBe(4);
+  });
+
+  it('掛-2(私立×多年度): 令和7年度データ18校分(県私学協会一括PDF由来校)を追加しschools.lengthは41', () => {
+    expect(PRIVATE_SCHOOL_DETAIL_OKAYAMA.schools.length).toBe(41);
+    const r7Count = PRIVATE_SCHOOL_DETAIL_OKAYAMA.schools.filter((s) => s.fiscalYearLabel === '令和7年度').length;
+    expect(r7Count).toBe(18);
   });
 });
 
