@@ -297,6 +297,18 @@ describe('PAST_SYSTEM_CHANGES（Λ+5・過去の制度変更履歴DB）', () => 
     expect(yamagataPref?.targetGrades).toEqual([3]);
   });
 
+  test('滋賀県の選抜統合・学力検査義務化エントリはprefectures.tsの現行maxScore(135点満点)と矛盾しない(選抜区分の統合であり内申点計算式は不変)', () => {
+    const shiga = PAST_SYSTEM_CHANGES.find((c) => c.prefCode === 'shiga');
+    expect(shiga).toBeDefined();
+    expect(shiga?.effectiveYear).toBe('令和8年度（2026年度）入試');
+    expect(shiga?.category).toBe('selection-structure');
+    expect(shiga?.detail).toContain('学校独自型選抜');
+
+    const shigaPref = PREFECTURES.find((p) => p.code === 'shiga');
+    expect(shigaPref?.maxScore).toBe(135);
+    expect(shigaPref?.gradeMultipliers).toEqual({ 1: 1, 2: 1, 3: 1 });
+  });
+
   test('categoryは定義済みの4種類のいずれかのみ(型崩れ防止)', () => {
     const validCategories = new Set(['scoring-input', 'selection-structure', 'weighting-formula', 'other']);
     for (const c of PAST_SYSTEM_CHANGES) {
