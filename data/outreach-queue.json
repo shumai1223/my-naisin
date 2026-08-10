@@ -1089,6 +1089,32 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+    },
+    {
+      "id": "gakusan-teikokushoin",
+      "org": "株式会社帝国書院",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.teikokushoin.co.jp/high/faq/",
+      "contactClass": "b2b",
+      "evidence": "『高等学校の方』専用FAQページに『説明会に関するお問い合わせ』『見本本送付依頼フォーム』等、学校名入力必須の複数フォームへのリンクを直接WebFetchで確認。一般・書店員向けページとは別に区分されている",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
+    },
+    {
+      "id": "gakusan-tokyo-shoseki",
+      "org": "東京書籍株式会社",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.tokyo-shoseki.co.jp/aboutus/contact.html",
+      "contactClass": "b2b",
+      "evidence": "お問い合わせページが商品分野別に分類されており『学習塾向け教材』というカテゴリを直接WebFetchで確認。学校向け/学習塾向け/企業向け商品を扱う総合教育出版社",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
     }
   ]
 }
