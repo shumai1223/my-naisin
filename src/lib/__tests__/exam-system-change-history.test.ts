@@ -320,6 +320,17 @@ describe('CONFIRMED_NO_CHANGE_CHECKS（掛-4・空振りの調査記録）', () 
     expect(getPastSystemChangesByPrefecture('mie')).toEqual([]);
   });
 
+  test('富山県は対象期間内の制度変更なしと確認済み(令和9年度以降の制度変更は現在未公表)', () => {
+    const toyama = CONFIRMED_NO_CHANGE_CHECKS.find((c) => c.prefCode === 'toyama');
+    expect(toyama).toBeDefined();
+    expect(toyama?.note).toContain('未公表');
+
+    const toyamaPref = PREFECTURES.find((p) => p.code === 'toyama');
+    expect(toyamaPref?.maxScore).toBe(135);
+    expect(toyamaPref?.gradeMultipliers).toEqual({ 1: 0, 2: 1, 3: 2 });
+    expect(getPastSystemChangesByPrefecture('toyama')).toEqual([]);
+  });
+
   test('同一県がPAST_SYSTEM_CHANGESとCONFIRMED_NO_CHANGE_CHECKSの両方に重複登録されていない', () => {
     const changedPrefs = new Set(PAST_SYSTEM_CHANGES.map((c) => c.prefCode));
     for (const c of CONFIRMED_NO_CHANGE_CHECKS) {
