@@ -998,6 +998,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "gakusan-asutoro",
+      "org": "あすとろ出版株式会社",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.asutoro.co.jp/inquiry",
+      "contactClass": "b2b",
+      "evidence": "東京書籍グループの一員として教科書ガイド/準拠教材を発行。サイトに「書店様向け情報」ページと「教材制作サービス」(法人向け受託制作)ページが存在し、事業自体が学校・書店向けB2Bモデル",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
     }
   ]
 }
