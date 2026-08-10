@@ -933,6 +933,19 @@
       "excludeReason": "contactClass判定不能(消費者向け窓口の可能性が高くb2bと断定できない)のため送信対象外",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+    },
+    {
+      "id": "moshi-shingaku-kobo",
+      "org": "株式会社伸学工房",
+      "lane": "b2b-saas",
+      "channel": "email",
+      "contact": "info@shingaku-kobo.com",
+      "contactClass": "b2b",
+      "evidence": "会社概要ページに直接記載のメールアドレス(直接WebFetchで実在確認済み)。事業内容は『テスト処理代行』『教師用資料』の制作等で塾・教育機関向けの受託業務が中心",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
     }
   ]
 }
