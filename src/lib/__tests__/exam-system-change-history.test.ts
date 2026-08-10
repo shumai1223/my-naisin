@@ -133,6 +133,19 @@ describe('PAST_SYSTEM_CHANGES（Λ+5・過去の制度変更履歴DB）', () => 
     expect(fukuokaPref?.targetGrades).toEqual([3]);
   });
 
+  test('愛知県の学力検査1回化・特色選抜新設エントリはprefectures.tsの現行maxScore(90点満点)と矛盾しない(選抜方式の変更であり内申点計算式は不変)', () => {
+    const aichi = PAST_SYSTEM_CHANGES.find((c) => c.prefCode === 'aichi');
+    expect(aichi).toBeDefined();
+    expect(aichi?.effectiveYear).toBe('令和5年度（2023年度）入試');
+    expect(aichi?.category).toBe('selection-structure');
+    expect(aichi?.detail).toContain('特色選抜');
+    expect(aichi?.detail).toContain('マークシート');
+
+    const aichiPref = PREFECTURES.find((p) => p.code === 'aichi');
+    expect(aichiPref?.maxScore).toBe(90);
+    expect(aichiPref?.gradeMultipliers).toEqual({ 1: 0, 2: 0, 3: 2 });
+  });
+
   test('categoryは定義済みの4種類のいずれかのみ(型崩れ防止)', () => {
     const validCategories = new Set(['scoring-input', 'selection-structure', 'weighting-formula', 'other']);
     for (const c of PAST_SYSTEM_CHANGES) {
