@@ -120,6 +120,19 @@ describe('PAST_SYSTEM_CHANGES（Λ+5・過去の制度変更履歴DB）', () => 
     expect(nagasakiPref?.practicalMultiplier).toBe(1);
   });
 
+  test('福岡県の第2志望校制度新設エントリはprefectures.tsの現行maxScore(45点満点)と矛盾しない(選抜の敗者復活制度であり内申点計算式は不変)', () => {
+    const fukuoka = PAST_SYSTEM_CHANGES.find((c) => c.prefCode === 'fukuoka');
+    expect(fukuoka).toBeDefined();
+    expect(fukuoka?.effectiveYear).toBe('令和5年度（2023年度）入試');
+    expect(fukuoka?.category).toBe('selection-structure');
+    expect(fukuoka?.detail).toContain('第2志望校制度');
+    expect(fukuoka?.detail).toContain('変わったのは');
+
+    const fukuokaPref = PREFECTURES.find((p) => p.code === 'fukuoka');
+    expect(fukuokaPref?.maxScore).toBe(45);
+    expect(fukuokaPref?.targetGrades).toEqual([3]);
+  });
+
   test('categoryは定義済みの4種類のいずれかのみ(型崩れ防止)', () => {
     const validCategories = new Set(['scoring-input', 'selection-structure', 'weighting-formula', 'other']);
     for (const c of PAST_SYSTEM_CHANGES) {
