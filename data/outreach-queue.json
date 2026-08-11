@@ -2481,6 +2481,19 @@
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
     },
     {
+      "id": "gakusan-kirihara",
+      "org": "株式会社桐原書店(英語学参『Vintage』等・学研グループ)",
+      "lane": "b2b-saas",
+      "channel": "email",
+      "contact": "publisher.jp@kirihara.co.jp",
+      "contactClass": "b2b",
+      "evidence": "公式サイト`kirihara.co.jp/faq/`をcurlで取得した生HTMLの会社情報欄にpublisher.jp@kirihara.co.jpが記載されていることを直接確認。同ページには著作権担当henshu-soumu@kirihara.co.jpと各種お問い合わせフォーム(/inquiry_form/)も併記されているが、代表窓口として最も汎用性の高いpublisher.jp@kirihara.co.jpを採用",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
+    },
+    {
       "id": "cert-rekiken-group",
       "org": "歴史能力検定協会(歴史能力検定・歴検・団体受検)",
       "lane": "b2b-saas",
