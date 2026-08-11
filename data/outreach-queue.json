@@ -2947,6 +2947,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-jset",
+      "org": "一般社団法人日本教育工学会(JSET・教育工学の学術団体)",
+      "lane": "npo",
+      "channel": "form",
+      "contact": "https://www.jset.gr.jp/contact/form1/",
+      "contactClass": "b2b",
+      "evidence": "公式サイトjset.gr.jp/contact/を直接WebFetchで確認(WebSearch要約が提示したメールアドレスoffice@jset.gr.jpはページ本文に記載が無く不採用=既知のWebSearch作話パターンを回避)。リンク先/contact/form1/に「お名前・メールアドレス・所属・メッセージ本文」必須の実在フォームを確認しb2b確定。教育工学(EdTech研究含む)の学術団体で日本教育学会に続くlane9横展開",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
