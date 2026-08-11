@@ -1713,6 +1713,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "cert-jken-group",
+      "org": "一般財団法人職業教育・キャリア教育財団(情報検定J検・団体出願)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://jken.sgec.or.jp/inquiry/organization/",
+      "contactClass": "b2b",
+      "evidence": "個人出願向け(`/inquiry/common/`・`/apply/cbt.html`)とは別に団体出願向けの専用お問い合わせフォーム(`/inquiry/organization/`)とPBT/CBT団体出願ページ(`/apply/org_pbt.html`・`/apply/org_cbt.html`)が独立して存在することを直接WebFetchで確認しb2b確定。文部科学省後援・専門学校/高校/大学の団体導入実績多数",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     }
   ]
 }
