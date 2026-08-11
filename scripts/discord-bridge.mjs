@@ -390,7 +390,8 @@ client.on('messageCreate', async (msg) => {
     const r = await job.run();
     running = false;
     log(`DONE(confirmed) exit=${r.code} label=${job.label}`);
-    return void (await msg.reply(`exit=${r.code}\n${chunk(r.out)}`));
+    // 二段確認まで通した実行の結果は切り捨てない（`!w ask` の長文回答もここを通る）
+    return void (await sendLong(msg, `exit=${r.code}\n${r.out}`));
   }
 
   // ── 第4層: Claude Code を1本起動して調べさせる（読み取り専用） ──
@@ -453,6 +454,22 @@ client.on('messageCreate', async (msg) => {
   if (body === 'ask' || body.startsWith('ask ')) {
     const q = body.slice(3).trim();
     if (!q) return void (await msg.reply('`!w ask` の後に指示を書いてください。'));
+    // `!w ask` は bypassPermissions で走るので、対外送信っぽい指示は二段確認に回す。
+    // （2026-08-12: この分岐が needsConfirm より手前で return していて素通りしていた）
+    if (needsConfirm(q)) {
+      const code = String(Math.floor(100000 + Math.random() * 900000));
+      const label = `!w ask（書き込み可）: ${q.slice(0, 120)}`;
+      pending = {
+        code,
+        label,
+        run: () => runClaude(q, { write: true }),
+        expiresAt: Date.now() + CONFIRM_TTL_MS,
+      };
+      log(`CONFIRM_REQUIRED user=${msg.author.id} label=${label} code=${code}`);
+      return void (await msg.reply(
+        `⚠️ 対外送信に該当する可能性があります。実行するなら10分以内に:\n\`!confirm ${code}\`\n対象: ${label}`
+      ));
+    }
     running = true;
     log(`WRITE_ASK user=${msg.author.id} len=${q.length} q=${q.slice(0, 200)}`);
     await msg.reply(`🤖 Claude Code を起動しました（${ASK_MODEL}・**書き込み可**）。数分かかることがあります。`);
