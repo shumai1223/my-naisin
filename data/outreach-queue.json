@@ -2986,6 +2986,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane5-kyoiku-press",
+      "org": "日本教育新聞社(日本教育新聞電子版NIKKYOWEB・日本最大の教育専門全国紙)",
+      "lane": "media",
+      "channel": "form",
+      "contact": "https://adv.kyoiku-press.co.jp/inquiry/",
+      "contactClass": "b2b",
+      "evidence": "kyoiku-press.com/kyouiku-collabo/を直接WebFetchで確認しフッターの「マーケティング・広告」窓口(adv.kyoiku-press.co.jp)を発見、専用問い合わせフォーム(/inquiry/)に「広告主様/広告会社様/その他の方」の区分選択があることを直接WebFetchで確認しb2b確定(一般読者向けcontact/とは明確に分離)。⚠️注記: フォーム必須項目に電話番号があり、未成年の運営者は電話番号を渡さない原則(fukushima-form等と同型の制約)に抵触する可能性があるため送信時は👤の電話番号で対応するか代替手段を検討すること。日本最大の教育専門全国紙で媒体価値が高い高価値ターゲット",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
     }
   ]
 }
