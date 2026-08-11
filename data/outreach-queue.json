@@ -3012,6 +3012,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
+    },
+    {
+      "id": "lane5-kknews",
+      "org": "株式会社教育家庭新聞社(教育家庭新聞・学校/家庭向け教育専門紙)",
+      "lane": "media",
+      "channel": "form",
+      "contact": "https://www.kknews.co.jp/contact.html",
+      "contactClass": "b2b",
+      "evidence": "kknews.co.jp/contact.htmlを直接WebFetchで確認。問い合わせ区分に「掲載（告知）に関するお問い合わせ」「広告に関するお問い合わせ」があり、必須項目に学校名/企業名欄があることを確認しb2b確定。日本教育新聞・時事通信社に続くlane5教育専門メディア3件目",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
     }
   ]
 }
