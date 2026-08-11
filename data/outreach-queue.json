@@ -1531,6 +1531,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "edtech-atsystem",
+      "org": "株式会社アットシステム",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.atsystem.jp/contact/",
+      "contactClass": "b2b",
+      "evidence": "調査書Web登録システム(全国708校の中学校が利用)は『私立中学・高等学校様のご要望により開発をスタート』と明記。他製品も『学校専用勤怠管理システム(勤怠先生)』『インターネット出願システム(Ckip)』等いずれも学校向け専業で個人向け製品が無いことを直接WebFetchで確認",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     }
   ]
 }
