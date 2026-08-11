@@ -2168,6 +2168,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane3"
+    },
+    {
+      "id": "cert-kumon-toefljunior",
+      "org": "公文教育研究会(TOEFL Primary/TOEFL Junior日本総代理店)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.toefl-junior-primary.jp/inquiry/",
+      "contactClass": "b2b",
+      "evidence": "問い合わせフォームの区分が『個人・生徒【受験者】』『学校・団体のご担当者様』に明確に分離されていることを直接WebFetchで確認しb2b確定。学校・塾向けの団体受験を扱う日本総代理店",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     }
   ]
 }
