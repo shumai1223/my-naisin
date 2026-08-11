@@ -1401,6 +1401,32 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
+    },
+    {
+      "id": "edtech-correos",
+      "org": "コレオス株式会社",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.correos.co.jp/contact",
+      "contactClass": "b2b",
+      "evidence": "教育機関向けLMS(Open LMS/Blackboard等)を提供。お問い合わせフォームの必須項目に『法人名』欄があり、メールアドレスも『会社でお使いのメールアドレス』指定であることを直接WebFetchで確認",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "edtech-studylab",
+      "org": "株式会社スタディラボ",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://studylab.co.jp/contact/",
+      "contactClass": "b2b",
+      "evidence": "学習塾向けICTツール(schoolTakt for 塾等)を開発販売。お問い合わせフォームの必須項目に『会社名/塾名』欄があることを直接WebFetchで確認",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     }
   ]
 }
