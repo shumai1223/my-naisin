@@ -3064,6 +3064,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
+    },
+    {
+      "id": "lane4-gakken-educational",
+      "org": "株式会社学研エデュケーショナル(学研グループ・図書館/学校/自治体向け窓口)",
+      "lane": "edtech",
+      "channel": "form",
+      "contact": "https://contact.gakken.jp/user/op_enquete.gsp?sid=1073&mid=000269FV&hid=Yxg8eypbY_0",
+      "contactClass": "b2b",
+      "evidence": "gakken-educational.co.jp/contact/を直接WebFetchで確認。「図書館・学校・自治体のお客様」向けに一般消費者とは独立した専用フォームが設置されていることを確認しb2b確定。学研グループ(桐原書店等の既存エントリとは別法人)の教室事業/コンテンツ事業を展開する子会社",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     }
   ]
 }
