@@ -1687,6 +1687,32 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "cert-suken-group",
+      "org": "公益財団法人日本数学検定協会(実用数学技能検定・団体受検)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.su-gaku.net/suken/group/contact/inquiry/",
+      "contactClass": "b2b",
+      "evidence": "個人受検者向けお問い合わせフォームとは別に『団体担当者専用サイト』(`/suken/group/first/`)配下に『実用数学技能検定実施に関するお問い合わせフォーム』(検定を実施される学校・塾の担当者向けと明記)が独立して存在することを直接WebFetchで確認しb2b確定。電話窓口も別(03-5812-8340)",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "cert-eiken-group",
+      "org": "公益財団法人日本英語検定協会(英検・団体受験)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://contact.eiken.or.jp/helpdesk?category_id=81&site_domain=eiken&safe=1",
+      "contactClass": "b2b",
+      "evidence": "個人受験者向けページ(`/eiken/contact/examinee/`)とは別に『団体・学校関係者向け』専用ページ(`/eiken/contact/group/`)があり、専用電話番号(03-3266-6581・平日9:30-17:00)と専用WEBフォームURL(helpdesk?category_id=81)が明確に分離されていることを直接WebFetchで確認しb2b確定",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     }
   ]
 }
