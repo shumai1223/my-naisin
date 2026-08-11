@@ -1609,6 +1609,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
+    },
+    {
+      "id": "edtech-succeed-gakunaijuku",
+      "org": "株式会社サクシード(学内塾運営受託)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.succeed-jinzai.jp/client/inquiry/",
+      "contactClass": "b2b",
+      "evidence": "私立中高一貫校・公立中学・公立高校の学内塾運営を受託(実例: 奈良県田原本町教育委員会からの受託実績あり)。『自治体・教育委員会等の関係者の方はこちら』専用バナーが存在し、問い合わせフォームの必須項目に『会社名・学校名』欄(個人の場合は「個人」と入力の指示あり)があることを直接WebFetchで確認",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     }
   ]
 }
