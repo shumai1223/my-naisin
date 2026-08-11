@@ -96,6 +96,12 @@ export async function createCheckoutSession(input: CheckoutInput): Promise<{ url
   params.set('metadata[tier]', input.tier);
   params.set('subscription_data[metadata][tier]', input.tier);
   if (input.email) params.set('customer_email', input.email);
+  // T-S13A A-0-1: 特定商取引法に基づく表記へStripe Checkout側からも到達可能にする
+  // (custom_textはStripeがMarkdownのリンク記法[text](url)をサポートする)。
+  params.set(
+    'custom_text[submit][message]',
+    `お申し込み内容の詳細は[特定商取引法に基づく表記](${input.origin}/tokushoho)をご確認ください。`
+  );
 
   try {
     const res = await fetch(`${STRIPE_API}/checkout/sessions`, {

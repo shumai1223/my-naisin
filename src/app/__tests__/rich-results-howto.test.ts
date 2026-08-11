@@ -97,6 +97,7 @@ const HOWTO_EXEMPT_ROUTES: Record<string, string> = {
   '/suisen-nyuushi': '推薦入試の解説ページ（手順でなく制度解説）',
   '/tarinai-taisaku': '内申・当日点不足の対策ハブ（下位の計算機ページへの導線が本体）',
   '/terms': '利用規約（リッチリザルト価値が低い定型ページ）',
+  '/tokushoho': '特定商取引法に基づく表記（リッチリザルト価値が低い法定表記ページ・T-S13A A-0-1）',
   '/tools': 'ツール一覧ハブ（下位の各計算機ページへの導線のみ）',
   '/total-score': '総合得点計算機ハブ（下位47県ページへの導線が本体）',
   '/[prefecture]': '県別内申点ガイドページ（手順でなく制度解説。CANDIDATE_FOR_HOWTO_CONTENT参照）',

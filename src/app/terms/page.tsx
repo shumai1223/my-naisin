@@ -40,8 +40,19 @@ export default function TermsPage() {
           <section>
             <h2 className="mb-3 text-lg font-bold text-slate-800">第2条（サービス内容）</h2>
             <p className="text-sm leading-relaxed text-slate-600">
-              本サービスは、中高生の内申点を計算し、目標設定や学習サポートを提供する無料のWebアプリケーションです。
-              計算結果はあくまで目安であり、実際の内申点は学校・地域によって異なる場合があります。
+              本サービスは、中高生の内申点を計算し、目標設定や学習サポートを提供するWebアプリケーションです。
+              一般利用者向けの機能は無料で提供します。計算結果はあくまで目安であり、実際の内申点は学校・地域によって異なる場合があります。
+            </p>
+            <p className="mt-2 text-sm leading-relaxed text-slate-600">
+              このほか、法人・開発者向けにAPI・データの有償プラン（
+              <Link href="/developers" className="mx-1 font-semibold text-blue-600 underline">
+                Developers
+              </Link>
+              ページ参照）を提供しています。有償プランの価格・支払方法・提供時期・解約条件等は
+              <Link href="/tokushoho" className="mx-1 font-semibold text-blue-600 underline">
+                特定商取引法に基づく表記
+              </Link>
+              をご確認ください。
             </p>
           </section>
 

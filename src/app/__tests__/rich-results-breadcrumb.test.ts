@@ -33,6 +33,7 @@ const BREADCRUMB_EXEMPT_ROUTES: Record<string, string> = {
   '/contact': '問い合わせページ（リッチリザルト価値が低い定型ページ）',
   '/privacy': 'プライバシーポリシー（リッチリザルト価値が低い定型ページ）',
   '/terms': '利用規約（リッチリザルト価値が低い定型ページ）',
+  '/tokushoho': '特定商取引法に基づく表記（リッチリザルト価値が低い法定表記ページ・T-S13A A-0-1）',
   '/[prefecture]/reverse': 'permanentRedirectのみのリダイレクトページ（実コンテンツ無し）',
 };
 

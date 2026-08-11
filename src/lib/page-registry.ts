@@ -120,6 +120,7 @@ export const STATIC_PAGES: StaticPageEntry[] = [
   { url: '/contact', priority: 0.3, changeFrequency: 'yearly' },
   { url: '/privacy', priority: 0.3, changeFrequency: 'yearly' },
   { url: '/terms', priority: 0.3, changeFrequency: 'yearly' },
+  { url: '/tokushoho', priority: 0.3, changeFrequency: 'yearly' },
   { url: '/disclaimer', priority: 0.3, changeFrequency: 'yearly' },
 ];
 

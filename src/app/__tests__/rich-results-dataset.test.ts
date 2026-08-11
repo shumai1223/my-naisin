@@ -115,6 +115,7 @@ const DATASET_EXEMPT_ROUTES: Record<string, string> = {
   '/suisen-nyuushi': '推薦入試の解説ページ（データセットの提供なし）',
   '/tarinai-taisaku': '内申・当日点不足の対策ハブ（データセットの提供なし）',
   '/terms': '利用規約（リッチリザルト価値が低い定型ページ）',
+  '/tokushoho': '特定商取引法に基づく表記（リッチリザルト価値が低い法定表記ページ・T-S13A A-0-1）',
   '/tools': 'ツール一覧ハブ（データセットの提供なし）',
   '/total-score/mantenkan': '総合得点満点変換計算機（単発計算UIでありデータセットの提供ではない）',
   '/total-score': '総合得点計算機ハブ（データセットの提供なし・各県ページが本体）',

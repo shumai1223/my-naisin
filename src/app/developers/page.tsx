@@ -823,6 +823,14 @@ print(naishin["total"])  # -> 52`;
               <Link href="/contact" className="mx-1 font-semibold text-indigo-700 underline">お問い合わせ</Link>ください。
             </p>
           </div>
+
+          <p className="mt-3 text-xs text-slate-500">
+            有償プランのお申し込みにあたっては、
+            <Link href="/tokushoho" className="mx-1 font-semibold text-slate-600 underline">
+              特定商取引法に基づく表記
+            </Link>
+            をご確認ください。
+          </p>
         </section>
 
         {/* License */}
@@ -854,6 +862,10 @@ print(naishin["total"])  # -> 52`;
           ／ お問い合わせは
           <Link href="/contact" className="mx-1 underline">
             こちら
+          </Link>
+          ／
+          <Link href="/tokushoho" className="mx-1 underline">
+            特定商取引法に基づく表記
           </Link>
         </div>
       </div>

@@ -55,6 +55,7 @@ const FAQ_EXEMPT_ROUTES: Record<string, string> = {
   '/privacy': 'プライバシーポリシー（リッチリザルト価値が低い定型ページ）',
   '/quality': '品質・E-E-A-T説明ページ（Q&A形式のコンテンツなし）',
   '/terms': '利用規約（リッチリザルト価値が低い定型ページ）',
+  '/tokushoho': '特定商取引法に基づく表記（リッチリザルト価値が低い法定表記ページ・T-S13A A-0-1）',
   '/[prefecture]': '県別内申点ガイドページ（Q&A形式のセクションなし。CANDIDATE_FOR_FAQ_CONTENT参照）',
   '/[prefecture]/reverse': 'permanentRedirectのみのリダイレクトページ（実コンテンツ無し）',
 };
