@@ -68,6 +68,8 @@ function isAlive(pid) {
     return e.code === 'EPERM'; // 存在するが権限が無い＝生きている
   }
 }
+/** 前回が異常終了していた場合の旧PID。起動時にチャンネルへ知らせるために持つ。 */
+let stalePid = null;
 if (fs.existsSync(LOCK_FILE)) {
   const prev = Number.parseInt(fs.readFileSync(LOCK_FILE, 'utf8').trim(), 10);
   if (Number.isInteger(prev) && prev !== process.pid && isAlive(prev)) {
@@ -75,7 +77,8 @@ if (fs.existsSync(LOCK_FILE)) {
     log(`DUPLICATE_START_REFUSED existing_pid=${prev}`);
     process.exit(3);
   }
-  log(`STALE_LOCK_TAKEOVER previous_pid=${prev}`); // 前回の異常終了の痕跡
+  stalePid = prev; // 前回の異常終了の痕跡
+  log(`STALE_LOCK_TAKEOVER previous_pid=${prev}`);
 }
 fs.writeFileSync(LOCK_FILE, String(process.pid), 'utf8');
 function releaseLock() {
@@ -131,6 +134,21 @@ function run(command, { cwd = REPO } = {}) {
 function chunk(text) {
   const t = text.length > MAX_REPLY ? `${text.slice(0, MAX_REPLY)}\n…(以下省略)` : text;
   return '```\n' + t.replace(/```/g, "'''") + '\n```';
+}
+
+/**
+ * 実行中ずっと「入力中…」を出し続ける。
+ * `!ask` は数分かかることがあり、無反応との区別がつかないため
+ * （2026-08-12: 14分待たせて生死不明になった事故を受けて追加）。
+ */
+async function withTyping(msg, fn) {
+  await msg.channel.sendTyping().catch(() => {});
+  const timer = setInterval(() => void msg.channel.sendTyping().catch(() => {}), 8000);
+  try {
+    return await fn();
+  } finally {
+    clearInterval(timer);
+  }
 }
 
 /**
@@ -235,6 +253,10 @@ function runClaude(prompt, { write }) {
   return new Promise((resolve) => {
     const child = spawn(CLAUDE_EXE, args, {
       cwd: REPO,
+      // stdin をパイプのまま開くと claude CLI が3秒待ったうえで
+      // 「Warning: no stdin data received in 3s...」を**標準出力に混ぜる**（実測）。
+      // ignore にすると即EOFになり、警告も消えて9秒速い。
+      stdio: ['ignore', 'pipe', 'pipe'],
       env: { ...process.env, NODE_TLS_REJECT_UNAUTHORIZED: '0' },
     });
     let out = '';
@@ -349,9 +371,22 @@ const client = new Client({
   partials: [Partials.Channel],
 });
 
-client.once('clientReady', (c) => {
+client.once('clientReady', async (c) => {
   log(`bridge started as ${c.user.tag} channel=${CHANNEL_ID} allowlist=${ALLOWED.length}名`);
   console.log(`[bridge] 起動しました: ${c.user.tag}`);
+  // 前回が異常終了していたなら黙って再開しない。実行中のコマンドを道連れにしている
+  // 可能性があり、👤が結果を待ち続けてしまう（2026-08-12に14分待たせた事故）。
+  if (stalePid !== null) {
+    try {
+      const ch = await c.channels.fetch(CHANNEL_ID);
+      await ch?.send(
+        `🔄 ブリッジを再起動しました（前のプロセス pid=${stalePid} は異常終了）。\n` +
+          '実行中だったコマンドがあれば、その結果は失われています。必要ならもう一度打ってください。'
+      );
+    } catch {
+      /* 通知に失敗しても起動は続ける */
+    }
+  }
 });
 
 client.on('messageCreate', async (msg) => {
@@ -401,8 +436,7 @@ client.on('messageCreate', async (msg) => {
     running = true;
     log(`ASK user=${msg.author.id} len=${q.length} q=${q.slice(0, 200)}`);
     await msg.reply(`🤖 Claude Code を起動しました（${ASK_MODEL}・調査モード＝書き込み不可）。調べて返すまで数分かかることがあります。`);
-    await msg.channel.sendTyping().catch(() => {});
-    const r = await runClaude(q, { write: false });
+    const r = await withTyping(msg, () => runClaude(q, { write: false }));
     running = false;
     log(`ASK_DONE exit=${r.code} len=${r.out.length}`);
     return void (await sendLong(msg, r.out));
@@ -473,8 +507,7 @@ client.on('messageCreate', async (msg) => {
     running = true;
     log(`WRITE_ASK user=${msg.author.id} len=${q.length} q=${q.slice(0, 200)}`);
     await msg.reply(`🤖 Claude Code を起動しました（${ASK_MODEL}・**書き込み可**）。数分かかることがあります。`);
-    await msg.channel.sendTyping().catch(() => {});
-    const r = await runClaude(q, { write: true });
+    const r = await withTyping(msg, () => runClaude(q, { write: true }));
     running = false;
     log(`WRITE_ASK_DONE exit=${r.code} len=${r.out.length}`);
     return void (await sendLong(msg, r.out));
