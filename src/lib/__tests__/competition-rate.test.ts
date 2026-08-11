@@ -97,9 +97,11 @@ describe('countUnresolvedSources（実データ・A-0-3のスコープ計測）'
   // 福岡地区15校＝筑紫丘〜糸島の実際の記載範囲を目視確認）に該当する学校はそのsourceへ、
   // 該当しない学校（「裏取りに使用」のみの北九州地区分を含む）は県公式PDF（県立分/市組合立分）
   // へ機械的に割り当てた。
+  // ✅2026-08-12: aomoriも令和6年度分90件をsourceIndexバックフィル済み。sources[2]〜[7]が地域別
+  // （東青/西北五/中弘南黒/上十三/下北むつ/三八）6分割の公式PDFで全て県教委原本（商用ソースなし）。
+  // 学校名からファイル内の記載順（=地域の並び順）で機械的に割り当てた。
   const KNOWN_UNRESOLVED_COUNTS: Record<string, number> = {
     tokyo: 944,
-    aomori: 90,
   };
 
   for (const [code, expected] of Object.entries(KNOWN_UNRESOLVED_COUNTS)) {

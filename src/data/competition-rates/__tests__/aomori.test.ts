@@ -92,6 +92,7 @@ describe('青森県 倍率パイプラインα（Y-6・全日制43校89レコー
       finalApplicants: 159,
       finalRate: 0.8,
       fiscalYear: '令和6年度（2024年度）',
+      sourceIndex: 2, // T-S13A A-0-3: 東青地域PDF(sources[2])からの機械的バックフィル済み
     });
   });
 
