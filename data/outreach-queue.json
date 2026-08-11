@@ -2246,6 +2246,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "cert-rekiken-group",
+      "org": "歴史能力検定協会(歴史能力検定・歴検・団体受検)",
+      "lane": "b2b-saas",
+      "channel": "email",
+      "contact": "rekiken@kentei-uketsuke.com",
+      "contactClass": "b2b",
+      "evidence": "『第45回 団体受験申込のご案内』ページが個人受検向け実施概要と分離され、団体受検専用のお問い合わせメールアドレスrekiken@kentei-uketsuke.comと団体受験申込書(Excel)アップロードフォームが記載されていることをcurlで取得した生HTMLで直接確認しb2b確定(前回セッションはURL特定できず見送りだったが再挑戦で発見)",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     }
   ]
 }
