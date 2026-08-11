@@ -2533,6 +2533,19 @@
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
     },
     {
+      "id": "moshi-gakuyu-mie",
+      "org": "学悠出版株式会社(三重ぜんけん模試・岐阜全県模試運営)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.zenkenmoshi.jp/mie/contact/",
+      "contactClass": "b2b",
+      "evidence": "『三重ぜんけん模試』公式サイトのお問い合わせフォーム`/mie/contact/`をcurlで取得した生HTMLに『会社名（塾名）』という入力欄があることを直接確認、また『塾専用サイト』への別リンクもあり塾/学校向けB2B窓口としてb2b確定。サブタスク0のlane1母集団59社確定リストの未検証分",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+    },
+    {
       "id": "cert-rekiken-group",
       "org": "歴史能力検定協会(歴史能力検定・歴検・団体受検)",
       "lane": "b2b-saas",
