@@ -2326,6 +2326,19 @@
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     },
     {
+      "id": "lane9-edupsych",
+      "org": "一般社団法人日本教育心理学会(教育心理学の学術団体)",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "office@edupsych.jp",
+      "contactClass": "b2b",
+      "evidence": "公式サイト`edupsych.jp/contact`をcurlで取得した生HTMLに『E-mail：office（at）edupsych.jp（at）を@に変えてから送信してください』とスパム対策の全角表記で明記されていることを直接確認し、office@edupsych.jpと復元しb2b確定。学会事務局(法人)のためPII非該当。lane9『大学・研究室』枠(教育データを用いる研究需要のある学術団体)として日本教育社会学会に続く2件目",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
       "id": "cert-rekiken-group",
       "org": "歴史能力検定協会(歴史能力検定・歴検・団体受検)",
       "lane": "b2b-saas",
