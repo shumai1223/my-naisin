@@ -3168,6 +3168,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+    },
+    {
+      "id": "lane9-j-sla",
+      "org": "公益社団法人全国学校図書館協議会(全国SLA・学校図書館の全国団体)",
+      "lane": "npo",
+      "channel": "form",
+      "contact": "https://www.j-sla.or.jp/about/contact/inquiry/",
+      "contactClass": "b2b",
+      "evidence": "j-sla.or.jp/about/contact/inquiry/を直接WebFetchで確認。「メールフォームでのお問い合わせ」という実在フォームを確認しb2b確定。全国の学校図書館を対象とする公益社団法人で、進路・入試情報資料の紹介・調べ学習コンテンツとしての活用可能性がある新規カテゴリ",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
