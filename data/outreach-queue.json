@@ -2650,6 +2650,19 @@
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     },
     {
+      "id": "moshi-gifushinbun",
+      "org": "岐阜新聞情報センター(岐阜新聞・中学3年模試・協力塾登録窓口)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://gjc.gifu-np.co.jp/for_cooperations/",
+      "contactClass": "b2b",
+      "evidence": "『学習塾関係者の皆さまへ』専用ページ`/for_cooperations/`をcurlで取得した生HTMLに協力塾登録フォーム(必須項目『塾名』を含むContact Form 7)を直接確認しb2b確定。⚠️同ページ内のメール入力欄プレースホルダー『例）gifushinbun@gmail.com』を実在の連絡先と誤認しないよう注意(入力例に過ぎず実際の窓口ではない)。curlで200到達も確認済み",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+    },
+    {
       "id": "cert-rekiken-group",
       "org": "歴史能力検定協会(歴史能力検定・歴検・団体受検)",
       "lane": "b2b-saas",
