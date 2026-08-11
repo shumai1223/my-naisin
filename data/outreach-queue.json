@@ -3116,6 +3116,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane8"
+    },
+    {
+      "id": "lane1-shijuku-net",
+      "org": "私塾ネット(全日本私塾教育ネットワーク・全国約200校の加盟学習塾ネットワーク)",
+      "lane": "juku",
+      "channel": "form",
+      "contact": "https://shijuku.net/contact/",
+      "contactClass": "b2b",
+      "evidence": "shijuku.net/contact/を直接WebFetchで確認。お名前(漢字/フリガナ)/メールアドレス/電話番号/お問い合わせ内容/選択式項目が必須の実在フォームを確認しb2b確定。北海道から九州まで約200校の加盟学習塾を持つ全国ネットワーク組織(JJA/AJCとは別の学習塾支援団体)",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
     }
   ]
 }
