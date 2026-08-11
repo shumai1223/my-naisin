@@ -52,6 +52,47 @@ function log(line) {
   fs.appendFileSync(LOG_FILE, `${stamp} ${line}\n`, 'utf8');
 }
 
+/**
+ * 二重起動ガード。
+ * 自動起動（ログオン時タスク）と手動のダブルクリックが重なると2本走り、
+ * `!w` 系のコマンドが**2回実行される**。それを防ぐ。
+ * ただしクラッシュ後の残骸ロックで永久に起動できなくならないよう、
+ * 記録されたPIDが**生きている場合だけ**拒否する。
+ */
+const LOCK_FILE = path.join(LOG_DIR, 'discord-bridge.pid');
+function isAlive(pid) {
+  try {
+    process.kill(pid, 0); // シグナルを送らずに存在確認
+    return true;
+  } catch (e) {
+    return e.code === 'EPERM'; // 存在するが権限が無い＝生きている
+  }
+}
+if (fs.existsSync(LOCK_FILE)) {
+  const prev = Number.parseInt(fs.readFileSync(LOCK_FILE, 'utf8').trim(), 10);
+  if (Number.isInteger(prev) && prev !== process.pid && isAlive(prev)) {
+    console.error(`[bridge] 既に pid=${prev} で起動しています。二重起動しません。`);
+    log(`DUPLICATE_START_REFUSED existing_pid=${prev}`);
+    process.exit(3);
+  }
+  log(`STALE_LOCK_TAKEOVER previous_pid=${prev}`); // 前回の異常終了の痕跡
+}
+fs.writeFileSync(LOCK_FILE, String(process.pid), 'utf8');
+function releaseLock() {
+  try {
+    if (fs.readFileSync(LOCK_FILE, 'utf8').trim() === String(process.pid)) fs.unlinkSync(LOCK_FILE);
+  } catch {
+    /* 既に消えている場合は何もしない */
+  }
+}
+process.on('exit', releaseLock);
+for (const sig of ['SIGINT', 'SIGTERM', 'SIGHUP']) {
+  process.on(sig, () => {
+    releaseLock();
+    process.exit(0);
+  });
+}
+
 /** 実行中フラグ（同時実行1本）。 */
 let running = false;
 /** 二段確認の保留（1件のみ保持）。 */
@@ -92,6 +133,99 @@ function chunk(text) {
   return '```\n' + t.replace(/```/g, "'''") + '\n```';
 }
 
+/**
+ * 長文を Discord の2000字上限で分割して順に送る（`chunk()` と違い切り捨てない）。
+ * `!ask` の回答は数千字になりうるため、こちらを使う。
+ */
+async function sendLong(msg, text) {
+  const body = text.trim() || '(出力なし)';
+  const parts = [];
+  for (let i = 0; i < body.length; i += MAX_REPLY) parts.push(body.slice(i, i + MAX_REPLY));
+  for (const [i, p] of parts.entries()) {
+    const suffix = parts.length > 1 ? `\n\n— ${i + 1}/${parts.length}` : '';
+    if (i === 0) await msg.reply(p + suffix);
+    else await msg.channel.send(p + suffix);
+  }
+}
+
+// ── 第4層: Claude Code をヘッドレスで1本起動して答えさせる ──────────────
+const CLAUDE_EXE = process.env.CLAUDE_EXE || 'C:/Users/E24054/.local/bin/claude.exe';
+const ASK_MODEL = process.env.DISCORD_ASK_MODEL || 'sonnet';
+
+/**
+ * ヘッドレス側に必ず被せる枠。
+ * ここで縛るのは **C7ゲート（👤の承認が要る領域）** と、
+ * Discord という細い画面に返すための出力形式の2点だけ。
+ */
+const ASK_GUARD = [
+  'あなたは my-naishin.com（中学生向け内申点・偏差値計算サイト）の運用を手伝うエージェントです。',
+  'Discord から呼び出されており、回答はスマホの画面で読まれます。',
+  '',
+  '【出力】日本語。結論を最初の1〜2行に書く。全体で2000字以内。表は使わず箇条書きにする。',
+  '【根拠】憶測で答えない。実ファイル・実コマンドの結果・MCPの実データだけを根拠にする。',
+  '  分からない場合は「分からない」と書く。数値を出すときは出典（ファイル名や取得元）を添える。',
+  '',
+  '【絶対に行わないこと（👤の明示承認が必要な領域）】',
+  '  - 対外メールの送信（下書きの作成までは可）',
+  '  - 本番D1の破壊的操作（DROP・列削除・データ書き換え）',
+  '  - 環境変数・機能フラグの変更',
+  '  - Stripe の操作、価格の決定',
+  '  - PII（生徒の氏名・住所・学校名・個人のメールアドレス）をファイルに記録すること',
+  '  - 学校別の偏差値・合格ボーダーの独自推定（Y-0憲法。教委等の公表値のみ扱う）',
+].join('\n');
+
+/**
+ * claude CLI を1本だけ起動して、その回答テキストを返す。
+ * write=false のときは編集系ツールを渡さない（読み取り＋調査のみ）。
+ */
+function runClaude(prompt, { write }) {
+  const args = [
+    '-p',
+    prompt,
+    '--output-format',
+    'text',
+    '--model',
+    ASK_MODEL,
+    '--append-system-prompt',
+    ASK_GUARD,
+  ];
+  if (write) {
+    args.push('--permission-mode', 'bypassPermissions');
+  } else {
+    // 許可リストに無いツールは自動的に拒否される（fail-closed）
+    args.push('--allowedTools', 'Read,Grep,Glob,Bash,WebFetch');
+  }
+  return new Promise((resolve) => {
+    const child = spawn(CLAUDE_EXE, args, {
+      cwd: REPO,
+      env: { ...process.env, NODE_TLS_REJECT_UNAUTHORIZED: '0' },
+    });
+    let out = '';
+    let err = '';
+    child.stdout.on('data', (b) => {
+      out += b.toString();
+      if (out.length > 200_000) out = out.slice(-200_000);
+    });
+    child.stderr.on('data', (b) => {
+      err += b.toString();
+      if (err.length > 20_000) err = err.slice(-20_000);
+    });
+    const timer = setTimeout(() => {
+      child.kill('SIGKILL');
+      out += '\n\n[bridge] 10分でタイムアウトしたため強制終了しました。';
+    }, TIMEOUT_MS);
+    child.on('close', (code) => {
+      clearTimeout(timer);
+      const body = out.trim() || `(出力なし)\n${err.trim().slice(0, 1000)}`;
+      resolve({ code, out: body });
+    });
+    child.on('error', (e) => {
+      clearTimeout(timer);
+      resolve({ code: -1, out: `[bridge] claude の起動に失敗: ${e.message}` });
+    });
+  });
+}
+
 /** 読み取り専用コマンド。ここに無いものは `!w` が必要。 */
 const READ_COMMANDS = {
   help: {
@@ -107,7 +241,12 @@ const READ_COMMANDS = {
         '  !log      直近のworklog 30行',
         '  !tasks    A群（期限つきタスク）の進捗',
         '',
+        '【AIに調べさせる】',
+        '  !ask <質問>      Claude Codeを1本起動し、ファイルやコマンドを実際に見て答えさせる',
+        '                   （読み取り専用。編集・commitはしない。数分かかることがある）',
+        '',
         '【書き込み（!w を付ける）】',
+        '  !w ask <指示>    上記の書き込み版。ファイル修正・commit・pushまでやらせる',
         '  !w note <本文>   質問ノートの冒頭に追記（loopへの指示経路）',
         '  !w stop          loopを停止',
         '  !w start         loopを起動',
@@ -216,6 +355,20 @@ client.on('messageCreate', async (msg) => {
     return void (await msg.reply(`exit=${r.code}\n${chunk(r.out)}`));
   }
 
+  // ── 第4層: Claude Code を1本起動して調べさせる（読み取り専用） ──
+  if (raw === '!ask' || raw.startsWith('!ask ')) {
+    const q = raw.slice(4).trim();
+    if (!q) return void (await msg.reply('`!ask` の後に質問を書いてください。例: `!ask 昨日のD1のリード件数と、増えた分の流入元は？`'));
+    running = true;
+    log(`ASK user=${msg.author.id} len=${q.length} q=${q.slice(0, 200)}`);
+    await msg.reply(`🤖 Claude Code を起動しました（${ASK_MODEL}・読み取り専用）。調べて返すまで数分かかることがあります。`);
+    await msg.channel.sendTyping().catch(() => {});
+    const r = await runClaude(q, { write: false });
+    running = false;
+    log(`ASK_DONE exit=${r.code} len=${r.out.length}`);
+    return void (await sendLong(msg, r.out));
+  }
+
   // ── 読み取り専用 ──
   const readKey = raw.slice(1).split(/\s+/)[0];
   if (READ_COMMANDS[readKey]) {
@@ -256,6 +409,20 @@ client.on('messageCreate', async (msg) => {
     }
     running = false;
     return void (await msg.reply(chunk(r.out)));
+  }
+
+  // !w ask <指示> … 第4層の書き込み版。ファイル修正・commit・push までやらせる
+  if (body === 'ask' || body.startsWith('ask ')) {
+    const q = body.slice(3).trim();
+    if (!q) return void (await msg.reply('`!w ask` の後に指示を書いてください。'));
+    running = true;
+    log(`WRITE_ASK user=${msg.author.id} len=${q.length} q=${q.slice(0, 200)}`);
+    await msg.reply(`🤖 Claude Code を起動しました（${ASK_MODEL}・**書き込み可**）。数分かかることがあります。`);
+    await msg.channel.sendTyping().catch(() => {});
+    const r = await runClaude(q, { write: true });
+    running = false;
+    log(`WRITE_ASK_DONE exit=${r.code} len=${r.out.length}`);
+    return void (await sendLong(msg, r.out));
   }
 
   const SHORTCUTS = {
