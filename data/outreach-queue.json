@@ -2895,6 +2895,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-zenkohcho",
+      "org": "公益社団法人全国高等学校長協会(全国の高等学校長で構成される専門団体)",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "kyoukai@zen-koh-choh.jp",
+      "contactClass": "b2b",
+      "evidence": "公式サイト`zen-koh-choh.jp/info/info.html`をcurlで取得した生HTMLに団体自身のドメインのkyoukai@zen-koh-choh.jp(協会の一般的部門名のみ)が明記されていることを直接確認しb2b確定。個人名の記載なし。全国の高等学校長で構成される専門団体で、全国高等学校進路指導協議会(見送り)とは別法人・当サイトの対象読者(高校進学者・保護者)と直接重なるlane9該当",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
