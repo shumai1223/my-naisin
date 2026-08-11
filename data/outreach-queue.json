@@ -1804,6 +1804,32 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "edtech-compass-qubena",
+      "org": "株式会社COMPASS(AI型教材『Qubena』)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://info.compass-e.com/contact",
+      "contactClass": "b2b",
+      "evidence": "問い合わせページに『「Qubena」は小学校・中学校向けのサービスです。塾・個人へのご提供は行なっておりません』と明記され、学校・教育委員会向け専用フォーム(info.compass-e.com/contact)が『ご利用中の方向け』窓口と分離されていることを直接WebFetchで確認しb2b確定。全国170以上の自治体・2,300以上の公立私立小中学校で導入実績",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "edtech-loilo-school",
+      "org": "株式会社LoiLo(授業支援クラウド『ロイロノート・スクール』)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://n.loilo.tv/ja/consulting_form",
+      "contactClass": "b2b",
+      "evidence": "『導入お問い合わせ』専用フォーム(consulting_form)が複数箇所に配置され、『教員養成課程・教育センター・教育委員会は先生ID、生徒IDともに永年無料』という教育機関限定の料金体系が明記されていることを直接WebFetchで確認しb2b確定。全事業が学校向け授業支援クラウド専業",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     }
   ]
 }
