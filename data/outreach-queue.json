@@ -2181,6 +2181,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "juku-kyoshin-ir",
+      "org": "京進グループ(株式会社京進・学習塾/個別指導FC本部・IR窓口)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://reg18.smp.ne.jp/regist/is?SMPFORM=mjqd-lfscpc-66450437c2e154b22281b6c88e6f47f1",
+      "contactClass": "b2b",
+      "evidence": "持株会社サイト(group.kyoshin.co.jp)に個人向け窓口とは別の『IRお問合せフォーム』が独立して存在することを直接WebFetchで確認しb2b確定。東証上場・幼児〜高校生学習塾/個別指導教室FC事業運営",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane3"
     }
   ]
 }
