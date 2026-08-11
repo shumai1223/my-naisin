@@ -2999,6 +2999,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
+    },
+    {
+      "id": "lane5-jiji-naigai-kyoiku",
+      "org": "株式会社時事通信社(教育専門紙『内外教育』発行元・読者65%が学校関係者/20%が教育委員会関係者/5%が文科省関係者)",
+      "lane": "media",
+      "channel": "form",
+      "contact": "https://www2.jiji.com/f/prdsvc/inqform.php",
+      "contactClass": "b2b",
+      "evidence": "時事通信社の教育専門紙『内外教育』(半世紀超の歴史・発行部数25,000部・想定読者15万人)を発見。専用問い合わせ導線(jiji.co.jp/service/senmon/educate/index.html)はJS起動のポップアップでURL特定不能だったため、時事通信社の一般問い合わせフォーム(www2.jiji.com/f/prdsvc/inqform.php)を直接WebFetchで確認、会社・学校・団体名/氏名/電話/メール必須+「お問い合わせサービス名」選択肢に『内外教育』が明記され法人/個人の契約形態選択もあることを確認しb2b確定。⚠️注記: フォーム必須項目に電話番号・住所があり未成年運営者の原則(kyoiku-press等と同型の制約)に抵触の可能性があるため送信時は👤対応が必要。教育行政・教育委員会関係者への到達率が極めて高い高価値ターゲット",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
     }
   ]
 }
