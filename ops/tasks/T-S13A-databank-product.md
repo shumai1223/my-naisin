@@ -240,6 +240,28 @@ G7のPASS理由がこれなので、触った時点で判定が変わる。
 - A-1 で `redistribution: 'ok'` が **10県未満** → 商品として成立しないため中止し、👤に報告
 - 育伸社由来の除外後に残るレコードが **50%未満** → 同上
 
+## 進捗（2026-08-12・loop）
+
+**A-0-1・A-0-2 完了・push済（`1b1cdcd`）。**
+
+- A-0-1: `/tokushoho`（特定商取引法に基づく表記）を新設。`/developers`・`/terms`・
+  Stripe Checkout（`custom_text[submit][message]`にMarkdownリンク）の3方向から到達可能。
+  事業者名・所在地等のPIIはプレースホルダ（「準備中」）のみ・実値は👤が入力（C7）。
+  価格欄は`TIER_POLICIES`/`formatTierPrice()`から動的算出（ハードコード数値の二重管理を避けた）。
+- A-0-2: `/terms`の「本サービスは…無料のWebアプリケーションです」という断定を、
+  有償API/データプラン（`/developers`）の存在を踏まえた記述に修正。
+- 新規ページ追加に伴う既知の罠（rich-results-*系4テストのEXEMPT_ROUTES・
+  page-registry.tsのsitemap登録簿）を自己検知・自己修正済み。
+- tsc実exit0・フルjest 255 suites 4366 tests green。
+
+**残り（A-0-3〜A-0-5・A-1〜A-6）は次回セッションへ。** 優先順は本ファイルの
+「⛔実行順序」どおり: 次はA-0-3（`CompetitionRateRecord`へのレコード単位出典キー・
+tokyo/fukuoka/aomori/gifuの4県2,173レコードが対象）またはA-0-5（fukuoka.tsの
+育伸社・英進館由来98校191レコードの機械的除外＋テスト）から着手するのが妥当
+（A-0-4のcheckAgainstSubtotal実データテストも比較的軽量で並行候補）。
+A-0-3は`CompetitionRateRecord`という広く参照される型への変更のため、既存の
+全県データファイル・テストへの影響範囲を先に`grep`で確認してから着手すること。
+
 ## 時計（`ops/CLOCK.md`）
 
 | 期限 | 到達点 |
