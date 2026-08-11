@@ -1479,6 +1479,32 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
+    },
+    {
+      "id": "edtech-artec",
+      "org": "株式会社アーテック(ArtecRobo)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.artec-kk.co.jp/artecrobo/edu/contact/",
+      "contactClass": "b2b",
+      "evidence": "プログラミングロボット教材『ArtecRobo』のお問い合わせフォームの所属欄に『学校関係者様(小学校以下)』『学校関係者様(中学校以上)』の選択肢があることを直接WebFetchで確認",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "edtech-oec-kintai",
+      "org": "株式会社オーイーシー(教職員向け出退勤管理システム)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.oec.co.jp/contact",
+      "contactClass": "b2b",
+      "evidence": "教職員向け出退勤管理システムの紹介ページに『教育委員会からは、各学校・各職員の勤務状況を確認することができる』と明記され、学校・教育委員会向けの導入相談を前提としたサービスであることを直接WebFetchで確認。問い合わせフォームの実在も確認済み",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     }
   ]
 }
