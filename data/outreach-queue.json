@@ -3155,6 +3155,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+    },
+    {
+      "id": "lane1-jac-chiba",
+      "org": "JAC千葉学習塾協同組合(千葉県の学習塾協同組合)",
+      "lane": "juku",
+      "channel": "form",
+      "contact": "https://jac-web.com/contact",
+      "contactClass": "b2b",
+      "evidence": "jac-web.com/contactを直接WebFetchで確認。項目選択/お名前(担当者名)/メールアドレス/電話番号/題名/お問い合わせ内容が必須のフォーム構造(会社名・学校名は任意)を確認しb2b確定。東京私塾協同組合とは別の千葉県私塾協同組合(電話番号047-系で東京の03-5996-6565とは別事務局と確認済み)",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
     }
   ]
 }
