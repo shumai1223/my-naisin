@@ -1362,6 +1362,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "edtech-benesse-gtec",
+      "org": "株式会社ベネッセコーポレーション(GTEC)",
+      "lane": "b2b-saas",
+      "channel": "email",
+      "contact": "gtec_brand@mail.benesse.co.jp",
+      "contactClass": "b2b",
+      "evidence": "GTECお問い合わせ窓口一覧ページに学校・教育委員会向けの専用メールアドレスとして明記(受検者本人の個人問い合わせとは別枠)。同ページには教育委員会/公立小中学校専用の電話窓口(0120-888844)と私立国立学校専用窓口(0120-077109)も別途記載されており、学校法人向け窓口として明確に区分されていることを直接WebFetchで確認",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     }
   ]
 }
