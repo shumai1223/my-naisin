@@ -1453,6 +1453,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "edtech-aied",
+      "org": "アイード株式会社(AIed)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://aied.jp/contact-form/",
+      "contactClass": "b2b",
+      "evidence": "事業ラインナップ(学校向けAI英会話『AIed English』・学校向け英語スピーキングテスト『SEATS』・学習塾向け『STE』)が全て学校/塾向けで個人消費者向け製品が無い。問い合わせフォームに『所属先』欄があり、区分選択肢も自社の学校/塾向け製品名で構成されていることを直接WebFetchで確認",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     }
   ]
 }
