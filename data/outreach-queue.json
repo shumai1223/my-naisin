@@ -2546,6 +2546,19 @@
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
     },
     {
+      "id": "moshi-fujii-nara",
+      "org": "株式会社藤井書房(奈良県統一模試・学校教材販売)",
+      "lane": "b2b-saas",
+      "channel": "email",
+      "contact": "info@ebooks-fujii.co.jp",
+      "contactClass": "b2b",
+      "evidence": "公式サイト`ebooks-fujii.co.jp`をcurlで取得した生HTMLにinfo@ebooks-fujii.co.jpが記載されていることを直接確認。奈良県内の公私立小中高校向けに学校教材を販売し奈良県統一模試を主催する専業事業者でb2b確定。サブタスク0のlane1母集団59社確定リストの未検証分",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+    },
+    {
       "id": "cert-rekiken-group",
       "org": "歴史能力検定協会(歴史能力検定・歴検・団体受検)",
       "lane": "b2b-saas",
