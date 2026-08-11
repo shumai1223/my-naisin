@@ -2377,6 +2377,19 @@
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     },
     {
+      "id": "edtech-codetakt",
+      "org": "株式会社コードタクト(授業支援クラウド『schoolTakt』)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://codetakt.form.kintoneapp.com/public/005fe4f4ef9b739d009c4fcf4d253f6dd10c3732ef6444ede1fcfe404b4e88ed",
+      "contactClass": "b2b",
+      "evidence": "公式サイト`codetakt.com`をcurlで取得した生HTMLの『お問い合わせ』セクションに『お問い合わせは下記のフォームからご連絡ください』の案内文とkintoneApp上のフォームURLが明記されていることを直接確認(curlで302到達も確認・kintoneホスティングの正規フォーム)。schoolTaktは『生徒同士による協働学習・学級経営支援』を掲げる授業支援クラウドで個人向け製品が無い(全事業が学校/教員向け)ためb2b確定。JAPET&CEC非加盟のためlane4母集団178社の外側からの追加",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
       "id": "cert-rekiken-group",
       "org": "歴史能力検定協会(歴史能力検定・歴検・団体受検)",
       "lane": "b2b-saas",
