@@ -2248,6 +2248,19 @@
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     },
     {
+      "id": "lane9-nier-library",
+      "org": "国立教育政策研究所(NIER・図書館お問い合わせ窓口)",
+      "lane": "kyoiku-i",
+      "channel": "email",
+      "contact": "library@nier.go.jp",
+      "contactClass": "b2b",
+      "evidence": "公式サイトの`/11_copyright/inquiry.html`をcurlで取得した生HTMLに『図書館に関する問合せはこちら』の見出し直下にlibrary@nier.go.jpが記載されていることを直接確認。同ページの一般問合せ窓口nier-info@mext.go.jpは意見・要望への個別回答なしと明記されているため、資料・データの取扱いに関する問合せは図書館窓口の方が適合度が高いと判断",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
       "id": "cert-rekiken-group",
       "org": "歴史能力検定協会(歴史能力検定・歴検・団体受検)",
       "lane": "b2b-saas",
