@@ -3025,6 +3025,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
+    },
+    {
+      "id": "lane5-gakuji",
+      "org": "学事出版株式会社(月刊高校教育・全国高等学校校長協会/文科省教育課程課編集協力の高校教育総合誌・発行部数5000部)",
+      "lane": "media",
+      "channel": "form",
+      "contact": "https://www.gakuji.co.jp/contact/",
+      "contactClass": "b2b",
+      "evidence": "gakuji.co.jp/company/cc10500.html(広告出稿のご案内)経由でgakuji.co.jp/contact/を直接WebFetchで確認。お問い合わせ種別に「広告」を含む7区分(個人客/書店/法人客/広告/自費出版/著作物利用/その他)がある実在フォームを確認しb2b確定。読者層が高校管理職・主任クラスの教員という当サイトのターゲット読者と直接重なる高価値メディア",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
     }
   ]
 }
