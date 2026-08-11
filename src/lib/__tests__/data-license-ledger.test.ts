@@ -38,9 +38,10 @@ describe('DATA_LICENSE_LEDGER（T-S13A A-1・47県利用条件台帳）', () => 
     expect(DATA_LICENSE_LEDGER.gifu.redistribution).toBe('unknown');
   });
 
-  test('fukuoka: A-0-5未解決（商用第三者ソース混在の疑い）が理由に明記されており"unknown"のまま', () => {
+  test('fukuoka: 令和6年度分は商用第三者(育伸社)ソースであることが理由に明記されており"unknown"のまま', () => {
     expect(DATA_LICENSE_LEDGER.fukuoka.redistribution).toBe('unknown');
-    expect(DATA_LICENSE_LEDGER.fukuoka.evidence).toContain('A-0-5');
+    expect(DATA_LICENSE_LEDGER.fukuoka.evidence).toContain('育伸社');
+    expect(DATA_LICENSE_LEDGER.fukuoka.evidence).toContain('令和6年度分191件');
   });
 
   test('redistributableOkPrefectures()は現時点でmieのみを返す（kill_criteria: 10県未満のため商品化はまだ未達）', () => {

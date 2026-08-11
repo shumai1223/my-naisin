@@ -41,10 +41,14 @@ export const DATA_LICENSE_LEDGER: Record<string, DataLicenseLedgerEntry> = {
   saitama: { prefecture: 'saitama', sourceHost: '.lg.jp', ...UNKNOWN() },
   fukuoka: {
     prefecture: 'fukuoka',
-    sourceHost: '.lg.jp（一部レコードに商用第三者ソース混在の疑い）',
+    sourceHost: '.lg.jp（令和6年度分のみ商用第三者ソース）',
     ...UNKNOWN(
-      '未確認。加えてA-0-5未解決（育伸社・英進館由来の疑いがあるレコードの切り分けが済むまで、' +
-        'このredistribution判定を"ok"にしても実際の配布対象から当該レコードを除外する必要がある）'
+      '未確認。加えてsourceIndexバックフィル(2026-08-12)により判明: 令和6年度分191件' +
+        '(98校)は県教委原本が取得不能だったため育伸社(ikushin.co.jp)の代替PDFを唯一の' +
+        'ソースとして採用しており商用第三者由来。令和7年度分170件は公式PDF(Wayback経由)。' +
+        '令和8年度分191件は48校99件が英進館記事を学科別内訳の主典拠とし、残り42校+市組合立' +
+        '8校92件は公式PDFが主典拠(英進館は裏取りのみ)。A-2実装時は最低限、令和6年度分191件を' +
+        'fiscalYearで除外すること(sourceIndex:8が該当)'
     ),
   },
   hyogo: { prefecture: 'hyogo', sourceHost: '.lg.jp', ...UNKNOWN() },
