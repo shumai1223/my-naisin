@@ -100,9 +100,11 @@ describe('countUnresolvedSources（実データ・A-0-3のスコープ計測）'
   // ✅2026-08-12: aomoriも令和6年度分90件をsourceIndexバックフィル済み。sources[2]〜[7]が地域別
   // （東青/西北五/中弘南黒/上十三/下北むつ/三八）6分割の公式PDFで全て県教委原本（商用ソースなし）。
   // 学校名からファイル内の記載順（=地域の並び順）で機械的に割り当てた。
-  const KNOWN_UNRESOLVED_COUNTS: Record<string, number> = {
-    tokyo: 944,
-  };
+  // ✅2026-08-12: tokyoも全944件をsourceIndexバックフィル済み（残っていた最後の県・A-0-3完遂）。
+  // 5年度×3グループ(普通科(コース・単位制以外)+島しょ／コース制・単位制・海外帰国生徒対象／
+  // 専門学科・総合学科)の計15sourceに対し、docTitleに明記された学科区分・fiscalYearで一意に
+  // 機械的に割り当てた（推測不要）。
+  const KNOWN_UNRESOLVED_COUNTS: Record<string, number> = {};
 
   for (const [code, expected] of Object.entries(KNOWN_UNRESOLVED_COUNTS)) {
     it(`${code}: 出典未解決レコード数は${expected}件（sourceIndexバックフィル前の既知値）`, () => {

@@ -174,6 +174,7 @@ describe('東京都 倍率パイプラインα（Y-2・普通科119校の突合�
       finalApplicants: 124,
       finalRate: 0.87,
       fiscalYear: '令和6年度（2024年度）',
+      sourceIndex: 6, // T-S13A A-0-3: R6の1[普通科(コース単位制以外)]・2[島しょ]source
     });
 
     const kuBu = r6.filter((r) => TOKYO_23_WARDS.has(r.area ?? ''));
@@ -281,6 +282,7 @@ describe('東京都 倍率パイプラインα（Y-2・普通科119校の突合�
       finalApplicants: 463,
       finalRate: 1.83,
       fiscalYear: '令和5年度（2023年度）',
+      sourceIndex: 9, // T-S13A A-0-3: R5の1[普通科(コース単位制以外)]・2[島しょ]source
     });
   });
 
@@ -305,6 +307,7 @@ describe('東京都 倍率パイプラインα（Y-2・普通科119校の突合�
       finalApplicants: 10,
       finalRate: 0.25,
       fiscalYear: '令和5年度（2023年度）',
+      sourceIndex: 9,
     });
 
     const tamaBu = r5.filter((r) => !TOKYO_23_WARDS.has(r.area ?? '') && !ISLAND_AREAS.has(r.area ?? ''));
@@ -339,6 +342,7 @@ describe('東京都 倍率パイプラインα（Y-2・普通科119校の突合�
       finalApplicants: 637,
       finalRate: 2.24,
       fiscalYear: '令和5年度（2023年度）',
+      sourceIndex: 10,
     });
 
     const kousei = r5.filter((r) => r.department.startsWith('普通科（コース制'));
@@ -419,6 +423,7 @@ describe('東京都 倍率パイプラインα（Y-2・普通科119校の突合�
       finalApplicants: 546,
       finalRate: 2.15,
       fiscalYear: '令和4年度（2022年度）',
+      sourceIndex: 12,
     });
   });
 
