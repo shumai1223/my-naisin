@@ -2739,6 +2739,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-jspa",
+      "org": "日本学校心理学会(学校心理学・チーム学校支援の学術団体)",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "jspa-office@as.bunken.co.jp",
+      "contactClass": "b2b",
+      "evidence": "公式サイト`schoolpsychology.jp/contact/index.html`をcurlで取得した生HTMLに2窓口(会員窓口jspa-office@as.bunken.co.jp・アカデミーセンター法人所在地／学会事務局office@schoolpsychology.jp・埼玉大学教育学部米谷研究室気付)を確認し、異文化間教育学会と同じ理由でPII回避のためas.bunken.co.jp運営の法人窓口(会員窓口)を採用。as.bunken.co.jp横展開8件目。学校心理学・チーム学校支援の学術団体でlane9該当",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
