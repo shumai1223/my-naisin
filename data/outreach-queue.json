@@ -2663,6 +2663,19 @@
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
     },
     {
+      "id": "lane9-jscs-curriculum",
+      "org": "日本カリキュラム学会(教育課程・カリキュラム研究の学術団体)",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "g050jscs-support@ml.gakkai.ne.jp",
+      "contactClass": "b2b",
+      "evidence": "公式サイト`jscs-info.jp/contact/index_test.html`をcurlで取得した生HTMLに『日本カリキュラム学会 会員窓口』(ガリレオ学会業務情報化センター内)としてg050jscs-support アットマーク ml.gakkai.ne.jpが明記されていることを直接確認。⚠️同ページには『学会運営に関するお問い合わせ』として特定教員の個人名付き窓口(◯◯気付)も併記されていたがPII回避のため不採用、法人格の会員窓口のみ採用。教育課程・カリキュラム研究の専門学会でlane9該当",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
       "id": "cert-rekiken-group",
       "org": "歴史能力検定協会(歴史能力検定・歴検・団体受検)",
       "lane": "b2b-saas",
