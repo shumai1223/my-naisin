@@ -2856,6 +2856,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-nit",
+      "org": "一般社団法人日本図書教材協会・全国図書教材協議会(図書教材出版業の業界団体)",
+      "lane": "npo",
+      "channel": "form",
+      "contact": "https://nit.or.jp/contct/",
+      "contactClass": "b2b",
+      "evidence": "公式サイト`nit.or.jp/contct/`をcurlで取得した生HTMLに『お名前』『メールアドレス』『お問い合わせ内容』の必須項目を持つ問い合わせフォームが稼働中であることを直接確認しb2b確定。加盟出版社を会員とする図書教材出版業の業界団体(学校用教材の質的向上・供給サポート・著作権問題対応が活動内容)。個人名の記載なし",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
