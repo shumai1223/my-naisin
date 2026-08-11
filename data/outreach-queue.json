@@ -1466,6 +1466,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "media-school-partners",
+      "org": "株式会社スクールパートナーズ(高校生新聞)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://e-karte.site/form.php?page=6504909ab81edf8086a8ec6982a1099a",
+      "contactClass": "b2b",
+      "evidence": "「高校生新聞」学校申込フォーム(2026年度)②という現行年度のフォームが実際に稼働していることを直接WebFetchで確認(見出しに2026年度と明記=鮮度確認済み)。必須項目に『高校名』『送付先宛名(担当者氏名/分掌役職)』欄があり個人購読者向けとは別の学校向け窓口",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
     }
   ]
 }
