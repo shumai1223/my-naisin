@@ -2274,6 +2274,19 @@
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     },
     {
+      "id": "lane9-yokohama-koko",
+      "org": "横浜市教育委員会事務局学校教育部高校教育課(市立高等学校9校の入学者選抜担当)",
+      "lane": "kyoiku-i",
+      "channel": "email",
+      "contact": "ky-koko@city.yokohama.lg.jp",
+      "contactClass": "b2b",
+      "evidence": "横浜市公式サイト`/kosodate-kyoiku/kyoiku/sesaku/hischool/itiritukoko.html`をcurlで取得した生HTMLの『このページへのお問合せ』欄に『教育委員会事務局学校教育部高校教育課』のメールアドレスky-koko@city.yokohama.lg.jpが記載されていることを直接確認。政令指定都市の横浜市は神奈川県教委とは別に市立高校9校(金沢・桜丘・戸塚・東・南・サイエンスフロンティア・商業・みなと総合・総合)の入学者選抜を独自に所管しており、既存の都道府県教委(kyoiku-i)とは別の判断主体としてlane9の『市区町村の教育委員会』枠に該当",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
       "id": "cert-rekiken-group",
       "org": "歴史能力検定協会(歴史能力検定・歴検・団体受検)",
       "lane": "b2b-saas",
