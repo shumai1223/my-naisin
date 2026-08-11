@@ -2908,6 +2908,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-zennichu",
+      "org": "全日本中学校長会(全国の中学校長で構成される専門団体)",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "znck-jimukyoku@zennichu.org",
+      "contactClass": "b2b",
+      "evidence": "公式サイト`zennichu.com/inquiry.php`をcurlで取得した生HTMLに団体自身のドメインのznck-jimukyoku@zennichu.org(事務局の一般的部門名のみ)が明記されていることを直接確認しb2b確定。個人名の記載なし。全国高等学校長協会と同型の専門団体で、内申点(調査書)は中学校が作成する当サイトの主軸データと直接関連するためlane9高価値ターゲット",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
