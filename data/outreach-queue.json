@@ -1999,6 +1999,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
+    },
+    {
+      "id": "edtech-manabilinkplus-sumarepo",
+      "org": "学びリンクプラス株式会社(通信制高校向けオンラインレポートシステム『スマレポ』)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://manabilinkplus.net/contact/",
+      "contactClass": "b2b",
+      "evidence": "全事業が『通信制高校のレポート提出専用に開発されたシステム』(生徒向け消費者製品が無い、学校が導入するBtoBシステム)であることを直接WebFetchで確認しb2b確定。問い合わせフォーム自体に学校名欄等の明示分離は無いが、製品の性質上すべての問い合わせが学校導入検討者からのものと判断できる",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     }
   ]
 }
