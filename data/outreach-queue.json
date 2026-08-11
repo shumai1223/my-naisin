@@ -1570,6 +1570,32 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
+    },
+    {
+      "id": "edtech-frompage-ocans",
+      "org": "株式会社フロムページ(OCANs)",
+      "lane": "b2b-saas",
+      "channel": "email",
+      "contact": "info@telemail.jp",
+      "contactClass": "b2b",
+      "evidence": "オープンキャンパス運営支援システム『OCANs』は『大学様との共同開発により、実際のオープンキャンパス運営に即したプログラム管理システム』と明記されており大学向け専業。問い合わせ先メールアドレスを直接WebFetchで確認",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "media-sanpou",
+      "org": "株式会社さんぽう",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://company.sanpou-s.net/data/inquiry.html",
+      "contactClass": "b2b",
+      "evidence": "進路ソリューションカンパニー(高等学校進路支援/大学短大専門学校広報支援等)。お問い合わせページに『大学、短大などの広告掲載、広報・取材に関すること』という教育機関専用の問い合わせ区分が存在することを直接WebFetchで確認",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
     }
   ]
 }
