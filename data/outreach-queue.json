@@ -2442,6 +2442,19 @@
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     },
     {
+      "id": "edtech-digitalknowledge",
+      "org": "株式会社デジタル・ナレッジ(eラーニングLMS『KnowledgeDeliver for School』)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.digital-knowledge.co.jp/inquiry/",
+      "contactClass": "b2b",
+      "evidence": "学校向け製品ページ`/solution/school/forschool/`から案内される問い合わせフォーム`/inquiry/`を直接curlで取得し、フォーム文言に『貴社』表記があることを確認しb2b確定。大学・専門学校向けeラーニングシステム(導入実績2000件超)で個人向け無料版は無い",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
       "id": "cert-rekiken-group",
       "org": "歴史能力検定協会(歴史能力検定・歴検・団体受検)",
       "lane": "b2b-saas",
