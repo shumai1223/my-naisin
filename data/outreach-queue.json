@@ -1466,19 +1466,6 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
-    },
-    {
-      "id": "gakusan-sanseido",
-      "org": "株式会社三省堂",
-      "lane": "b2b-saas",
-      "channel": "form",
-      "contact": "https://tb.sanseido-publ.co.jp/contact/",
-      "contactClass": "b2b",
-      "evidence": "教員専用会員サイト『三省堂プラス』の利用対象者説明に『全国の小学校，中学校，高等学校，特別支援学校の先生方にお使いいただけます』『大学の先生，大学生・大学院生，生徒・児童，塾関係者，保護者，企業の方にはご登録いただけません』と明記されており、学校教員限定であることを直接WebFetchで確認",
-      "verifiedAt": "2026-08-11",
-      "status": "candidate",
-      "addedAt": "2026-08-11",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
     }
   ]
 }
