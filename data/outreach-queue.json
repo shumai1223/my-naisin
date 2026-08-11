@@ -2287,6 +2287,19 @@
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     },
     {
+      "id": "lane9-nagoya-koko",
+      "org": "名古屋市教育委員会事務局教育支援部高等学校教育課(市立高等学校の入学者選抜担当)",
+      "lane": "kyoiku-i",
+      "channel": "email",
+      "contact": "a3236@kyoiku.city.nagoya.lg.jp",
+      "contactClass": "b2b",
+      "evidence": "名古屋市公式サイト`/kyoiku/page/0000050830.html`(高等学校教育)をcurlで取得した生HTMLの『このページに関するお問い合わせ』欄に『教育委員会事務局教育支援部高等学校教育課』のメールアドレスa3236@kyoiku.city.nagoya.lg.jpが記載されていることを直接確認。WebSearch要約はこのアドレスを義務教育課の窓口と誤って紹介したが、生HTMLで高等学校教育課自身のページ内お問い合わせ欄に記載されていることを確認し修正。愛知県教委とは別に名古屋市立高校8校の入学者選抜を所管する市区町村教委としてlane9該当",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
       "id": "cert-rekiken-group",
       "org": "歴史能力検定協会(歴史能力検定・歴検・団体受検)",
       "lane": "b2b-saas",
