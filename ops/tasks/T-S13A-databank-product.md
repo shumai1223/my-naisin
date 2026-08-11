@@ -316,6 +316,20 @@ R7・R8は原則として公式PDFが主要典拠のため除外不要（ただ�
 A-0-3→A-0-5に入れ替える価値がある（本文書「⛔実装順序」はA-0内の順序を規定していないため
 矛盾しない）。
 
+### ✅ 2026-08-12完了: A-0-5実装完遂（`d899c3c`）
+
+A-0-3完了後、`CompetitionRateRecord`に`commercialSourceOnly?: boolean`フィールドと
+`licensableRecords(file)`ヘルパーを追加。上記「訂正した結論」通り、R6（`fiscalYear ===
+'令和6年度（2024年度）'`）の191レコード全件に`commercialSourceOnly: true`を機械的に付与し、
+`licensableRecords()`がこれを除外する設計にした。R7（教委公式PDF単独）・R8（現行年度・
+英進館は48校99レコードで裏取りに留まらず学科別内訳の主要典拠だが公式PDFとの突合検算済み）
+は除外対象外のまま維持（R8の出典表記反映はA-2実装時の課題として持ち越し）。
+回帰テスト2件を追加（fukuoka191件除外の厳密検証＋他46都道府県に意図しない除外が
+起きていないことの横断確認）。tsc実exit0・フルjest256suites4383tests green。
+
+**A-0（前提条件の是正）はA-0-1〜A-0-5全て完了。残りA-0系はなし。次はA-1（47県利用条件
+台帳・進行中・現在mieのみok確定、東京/愛知/兵庫/栃木/島根にGmail下書き設置済み）を継続。**
+
 ### 🟡 A-0-3（レコード単位出典キー）: 型・解決関数は実装済み・バックフィル本体は未着手（push済`10a652b`）
 
 `src/lib/competition-rate.ts`に`CompetitionRateRecord.sourceIndex?: number`（後方互換）・
