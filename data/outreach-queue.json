@@ -2921,6 +2921,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-jagc",
+      "org": "日本生徒指導学会(生徒指導・教育相談・キャリア教育研究の学術団体)",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "jagc.sec@gmail.com",
+      "contactClass": "b2b",
+      "evidence": "公式サイト`jagc.jpn.org/notification.html`をcurlで取得した生HTML(Shift_JIS)に『日本生徒指導学会　宛』としてE-mail: jagc.sec(at)gmail.comが記載されていることを直接確認しb2b確定。個人名の記載なし(学会共有アカウント)。生徒指導・教育相談・進路指導・キャリア教育を対象分野とする学術団体で当サイトの内申点・生活指導関連コンテンツと直接重なるlane9該当",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
