@@ -41,6 +41,15 @@ export interface CompetitionRateRecord {
    * （その年度の`sources`が1件のみなら一意に決まる）。既存の全都道府県ファイルは無改修で動作する。
    */
   sourceIndex?: number;
+  /**
+   * T-S13A A-0-5用。県教委原本が取得不能で商用第三者資料（育伸社等）を唯一の情報源として
+   * 代替採用したレコードに`true`を明示する。有償データ商品（A-2配布API）はこのフラグが
+   * 立ったレコードを`licensableRecords()`で機械的に除外する（無断再配布を避けるため）。
+   * 省略時は`false`扱い（＝通常どおり配布対象）。教委公式PDFが主要典拠で商用サイトを
+   * 裏取り・学科別内訳の補助にのみ使ったレコード（例: fukuoka R8の一部）はこのフラグを
+   * 立てない（唯一の情報源ではないため）。
+   */
+  commercialSourceOnly?: boolean;
 }
 
 export interface OfficialSubtotal {
@@ -150,4 +159,12 @@ export function resolveRecordSourceIndex(
 /** 1県分のrecords全体について、出典が一意に解決できないレコード数を数える（A-0-3の進捗計測用）。 */
 export function countUnresolvedSources(file: PrefectureCompetitionRateFile): number {
   return file.records.filter((r) => resolveRecordSourceIndex(r, file.sources) === null).length;
+}
+
+/**
+ * T-S13A A-0-5: 有償データ商品（A-2配布API）に載せてよいレコードだけを返す。
+ * `commercialSourceOnly: true`のレコード（商用第三者資料が唯一の情報源）を除外する。
+ */
+export function licensableRecords(file: PrefectureCompetitionRateFile): CompetitionRateRecord[] {
+  return file.records.filter((r) => !r.commercialSourceOnly);
 }

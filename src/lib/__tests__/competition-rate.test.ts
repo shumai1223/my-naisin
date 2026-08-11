@@ -3,6 +3,7 @@ import {
   checkAgainstSubtotal,
   resolveRecordSourceIndex,
   countUnresolvedSources,
+  licensableRecords,
   type CompetitionRateRecord,
   type CompetitionRateSource,
   type OfficialSubtotal,
@@ -123,5 +124,32 @@ describe('countUnresolvedSources（実データ・A-0-3のスコープ計測）'
     }
     // 新たに複数source県が増えたらここで検知できる（A-0-1の対象県リストを黙って広げない）
     expect(unexpectedlyAmbiguous).toEqual([]);
+  });
+});
+
+describe('licensableRecords（T-S13A A-0-5・商用第三者資料のみを唯一の情報源とするレコードの除外）', () => {
+  it('fukuokaは令和6年度(育伸社が唯一の情報源)の191レコードのみが除外される', () => {
+    const file = COMPETITION_RATE_BY_PREFECTURE['fukuoka'];
+    expect(file).toBeDefined();
+    const excluded = file!.records.filter((r) => r.commercialSourceOnly);
+    expect(excluded.length).toBe(191);
+    expect(excluded.every((r) => r.fiscalYear === '令和6年度（2024年度）')).toBe(true);
+
+    const licensable = licensableRecords(file!);
+    expect(licensable.length).toBe(file!.records.length - 191);
+    expect(licensable.some((r) => r.fiscalYear === '令和6年度（2024年度）')).toBe(false);
+    // R7/R8（教委公式PDFが主要典拠）はcommercialSourceOnlyを立てず配布対象のまま維持する
+    expect(licensable.some((r) => r.fiscalYear === '令和7年度（2025年度）')).toBe(true);
+    expect(licensable.some((r) => r.fiscalYear === undefined)).toBe(true);
+  });
+
+  it('参考: fukuoka以外の46都道府県はcommercialSourceOnlyレコードが存在しない（除外対象の意図しない拡大を検知）', () => {
+    const unexpected: Array<{ code: string; count: number }> = [];
+    for (const [code, file] of Object.entries(COMPETITION_RATE_BY_PREFECTURE)) {
+      if (code === 'fukuoka' || !file) continue;
+      const count = file.records.filter((r) => r.commercialSourceOnly).length;
+      if (count > 0) unexpected.push({ code, count });
+    }
+    expect(unexpected).toEqual([]);
   });
 });
