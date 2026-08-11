@@ -2817,6 +2817,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "edtech-manabipocket",
+      "org": "NTTドコモビジネス株式会社(教育クラウドプラットフォーム『まなびポケット』)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://fastanswer.ed-cl.com/manabipocket/support/web/form114.html",
+      "contactClass": "b2b",
+      "evidence": "公式サイト`manabipocket.ed-cl.com`をWebFetchで確認しお問い合わせフォームURLを取得、curlで実際にHTTP200稼働中であることを確認。フォームページの生HTMLに『本フォームへのお問い合わせではなく、先生または学校へお問い合わせを頂きます』という児童・生徒/保護者向けの除外文言が明記され、対象が教職員・学校管理者・法人向け利用説明依頼者に限定されていることを直接確認しb2b確定。全国13,000校以上導入の教育クラウドプラットフォーム",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     }
   ]
 }
