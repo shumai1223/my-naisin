@@ -3038,6 +3038,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
+    },
+    {
+      "id": "lane5-kyobun",
+      "org": "株式会社教育新聞社(教育新聞・全国51,114校/教員116万人/教育委員会1,785に到達する教育専門報道メディア)",
+      "lane": "media",
+      "channel": "form",
+      "contact": "https://www.kyobun.co.jp/contact",
+      "contactClass": "b2b",
+      "evidence": "kyobun.co.jp/aboutおよびkyobun.co.jp/contactを直接WebFetchで確認。「電子版広告に関すること」「紙面版広告に関すること」の2区分を含む5カテゴリのGoogleフォーム誘導型お問い合わせページを確認しb2b確定。kyoiku-press.com(日本教育新聞社・NIKKYOWEB)とは別法人・別媒体(教育新聞社/kyobun.co.jp)。到達規模(全国51,114校・教員116万人・教育委員会1,785)が極めて大きい高価値ターゲット",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
     }
   ]
 }
