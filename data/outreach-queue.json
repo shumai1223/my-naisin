@@ -2624,6 +2624,19 @@
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     },
     {
+      "id": "lane9-jscs",
+      "org": "日本子ども社会学会(子どもの社会学的研究の学術団体)",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "kosha-post@as.bunken.co.jp",
+      "contactClass": "b2b",
+      "evidence": "WebSearch提示の旧URL`js-cs.jp/office/`は404(サイト構造変更で失効)だったため、公式トップページから現行の`/information/inquiries/contact/`を再発見しcurlで直接取得。生HTMLに『Mail：kosha-post[at]as.bunken.co.jp』が2箇所明記されていることを確認しb2b確定(as.bunken.co.jp運営の学会群と同型)。子どもの学校生活・教育を対象とする社会学的研究団体でlane9該当",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
       "id": "cert-rekiken-group",
       "org": "歴史能力検定協会(歴史能力検定・歴検・団体受検)",
       "lane": "b2b-saas",

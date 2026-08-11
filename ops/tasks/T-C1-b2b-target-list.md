@@ -612,6 +612,8 @@ lane1〜lane5・lane9(高DR .jp新設)に着手し`data/outreach-queue.json`へ�
 
 **22:2x〜22:3x追記(as.bunken.co.jp事務局代行パターンの発見・横展開)**: 国際文献社(as.bunken.co.jp)は180以上の学会の事務局運営を代行しており、`<略称>-post@as.bunken.co.jp`という共通メール命名規則を持つと判明(WebSearchで確認)。**日本言語テスト学会**を追加。公式サイト`jlta2016.sakura.ne.jp`にjlta-post@as.bunken.co.jpが平文(非画像・非スパム対策)で記載されていることを直接確認しb2b確定。candidate計145件。**新技法**: as.bunken.co.jp配下の学会は命名規則が一貫しているため、他の学会でも`<英字略称>-post@as.bunken.co.jp`パターンを仮説として持ちつつ、必ず各学会の公式サイトで実在確認してから追加すること(命名規則はあくまで仮説・毎回検証必須)。
 
+**22:3x追記(横展開2件目・WebSearch stale URL再発)**: **日本子ども社会学会**を追加。WebSearch提示の`js-cs.jp/office/`は404(サイト構造変更)だったため公式トップページから現行URL`/information/inquiries/contact/`を再発見、kosha-post@as.bunken.co.jpを直接確認しb2b確定。candidate計146件。
+
 **新知見**: 個々の大学研究室を1件ずつ探すより、教育社会学・教育心理学等の学術団体(学会事務局)の方が①法人格がありPII非該当②公式問い合わせ窓口が明確③データ利用ニーズの母集団密度が高い、という点で横展開しやすい。次回は日本教育学会・日本教育心理学会等の同型学会へ横展開する価値あり。
 
 **19:0x追記(学術団体パターン・2件目成功)**: 一般社団法人日本教育心理学会を追加。公式サイト`edupsych.jp/contact`の生HTMLに『E-mail：office（at）edupsych.jp（at）を@に変えてから送信してください』とスパム対策表記で明記されていることを直接確認し、office@edupsych.jpと復元しb2b確定。lane='npo'。candidate計127件。学術団体パターンは2/2成功と好調(JSES・教育心理学会とも公式サイトのcontactページに明確なメールアドレスあり)。次回は日本教育学会・日本教育工学会等へ継続横展開する価値あり。
