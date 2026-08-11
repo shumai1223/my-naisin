@@ -2416,6 +2416,19 @@
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     },
     {
+      "id": "edtech-suzukisoft",
+      "org": "スズキ教育ソフト株式会社(小中学校向け学習・校務支援ソフト)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.suzukisoft.co.jp/mail/support_form.html",
+      "contactClass": "b2b",
+      "evidence": "公式サイト`suzukisoft.co.jp/mail/support_form.html`(製品に関するお問い合わせ)をcurlで取得した生HTMLに『学校名』の入力欄があることを直接確認。事業内容が『小中学校向け学習ソフト・指導ソフト・校務支援ソフトの企画開発販売』(WebSearch要約)であり個人向け製品が無いためb2b確定。lane4母集団20社確定リストの未検証分",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
       "id": "cert-rekiken-group",
       "org": "歴史能力検定協会(歴史能力検定・歴検・団体受検)",
       "lane": "b2b-saas",
