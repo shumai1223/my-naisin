@@ -2012,6 +2012,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "edtech-eduq-quest-education",
+      "org": "株式会社教育と探求社(探究学習プログラム『クエストエデュケーション』)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://info.eduq.jp/form/askquestandeduca",
+      "contactClass": "b2b",
+      "evidence": "全国41都道府県・500校以上で導入される学校向け探究学習プログラム専業(生徒向け消費者製品なし)であり、専用の導入問い合わせフォームがあることを直接WebFetchで確認しb2b確定。⚠️WebSearch要約が提示したメールアドレス(co@eduq.jp)はページ内に実在せず不採用(既知のWebSearch作話パターン再検知)、formチャネルのみ採用",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     }
   ]
 }
