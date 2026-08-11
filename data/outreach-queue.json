@@ -2611,6 +2611,19 @@
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     },
     {
+      "id": "lane9-jlta",
+      "org": "日本言語テスト学会(言語テスト理論・評価の学術団体)",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "jlta-post@as.bunken.co.jp",
+      "contactClass": "b2b",
+      "evidence": "公式サイト`jlta2016.sakura.ne.jp/?page_id=103`(事務局・問い合わせ先)をcurlで取得した生HTMLにjlta-post@as.bunken.co.jpが平文で2箇所記載されていることを直接確認しb2b確定。国際文献社(as.bunken.co.jp)が事務局運営を代行する学会の1つ(日本行動計量学会・日本キャリア教育学会と同型)。言語テスト理論・評価の専門学会でhensachi等の測定手法に近接する分野のためlane9該当",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
       "id": "cert-rekiken-group",
       "org": "歴史能力検定協会(歴史能力検定・歴検・団体受検)",
       "lane": "b2b-saas",
