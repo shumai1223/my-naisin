@@ -2155,6 +2155,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
+    },
+    {
+      "id": "juku-yarukiswitch-advertisement",
+      "org": "株式会社やる気スイッチグループホールディングス(スクールIE等4事業・広告窓口)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.yarukiswitch.jp/inquiry/advertisement/",
+      "contactClass": "b2b",
+      "evidence": "問い合わせページが『採用について』『フランチャイズ加盟について』『店舗設備のご提案について』『広告について』『その他』の5区分に明確に分離されており、事業提携・広告関連の専用フォーム(/inquiry/advertisement/)が独立して存在することを直接WebFetchで確認しb2b確定。スクールIE・WinBe・チャイルド・アイズ・KidsDuoの4事業部門・国内外1,200教室以上",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane3"
     }
   ]
 }
