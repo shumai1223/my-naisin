@@ -2261,6 +2261,19 @@
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     },
     {
+      "id": "lane9-nits-soumu",
+      "org": "独立行政法人教職員支援機構(NITS・総合窓口)",
+      "lane": "kyoiku-i",
+      "channel": "email",
+      "contact": "soumu@ml.nits.go.jp",
+      "contactClass": "b2b",
+      "evidence": "公式お問い合わせページ`/contact/`をcurlで取得した生HTMLで確認。研修/教材/連携等の個別窓口が事業別に分かれる中、末尾の『総合窓口』(総務企画課)に『上記にない内容についてはこちらにお問い合わせください』と明記されsoumu@ml.nits.go.jpが記載されている。データ提供・引用等の個別事業に当てはまらない用件のため総合窓口を採用",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
       "id": "cert-rekiken-group",
       "org": "歴史能力検定協会(歴史能力検定・歴検・団体受検)",
       "lane": "b2b-saas",
