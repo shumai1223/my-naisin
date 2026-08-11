@@ -1388,6 +1388,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
+    },
+    {
+      "id": "media-kyoiku-kohosha",
+      "org": "株式会社教育広報社",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://form.epr-kk.co.jp/contactform/",
+      "contactClass": "b2b",
+      "evidence": "教育広報誌『ForM』の広告代理店。お問い合わせフォームの区分選択肢に『広告掲載・イベント(私立大学医学部進学相談会)協賛について』があり、企業/教育機関からの広告・協賛問い合わせを受け付ける窓口であることを直接WebFetchで確認",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
     }
   ]
 }
