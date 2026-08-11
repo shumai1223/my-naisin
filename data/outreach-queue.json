@@ -2791,6 +2791,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "edtech-studysapuri-teachers",
+      "org": "株式会社リクルート(スタディサプリ学校向けサービス)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://teachers.studysapuri.jp/contact",
+      "contactClass": "b2b",
+      "evidence": "`teachers.studysapuri.jp/contact`をcurlで取得した生HTMLに『学校名』『都道府県』『校務分掌・部署』『導入検討時期』等の項目を持つ学校向け専用フォームが稼働中であることを直接確認しb2b確定。学校向けサービス専用サイト(teachers.studysapuri.jp)で個人向けアプリ(studysapuri.jp)とは分離済み",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     }
   ]
 }
