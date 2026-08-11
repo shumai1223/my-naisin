@@ -2752,6 +2752,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-jasea",
+      "org": "日本教育経営学会(教育経営・学校マネジメント研究の学術団体)",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "jimu@jasea.jp",
+      "contactClass": "b2b",
+      "evidence": "公式サイト`jasea.jp/joining/`をcurlで取得した生HTMLに『jimu★jasea.jp』(学会自身のドメインjasea.jp・スパム対策表記)が明記されていることを直接確認しjimu@jasea.jpと復元しb2b確定。所在地は西南学院大学学術研究所雪丸研究室内だが、contactに記録するメールアドレス自体は学会ドメインの汎用局所部(jimu=事務)で個人名を含まないためPII非該当と判断(代替の法人窓口は確認できず唯一の公式窓口として採用)。教育経営・学校マネジメント研究の学術団体でlane9該当",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
