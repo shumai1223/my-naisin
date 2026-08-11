@@ -1765,6 +1765,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
+    },
+    {
+      "id": "edtech-kyoikusw-saitennavi",
+      "org": "株式会社教育ソフトウェア(デジタル採点システム『採点ナビ』)",
+      "lane": "b2b-saas",
+      "channel": "email",
+      "contact": "info@kyoikusw.co.jp",
+      "contactClass": "b2b",
+      "evidence": "全事業が学校向け専業(『学校の先生が実際に使えるデジタル採点システム』と明記・個人向けサービス案内なし)であることを直接WebFetchで確認しb2b確定。学校導入専用問い合わせ窓口(電話042-649-9600・メールinfo@kyoikusw.co.jp)がページ内に明記されていることを確認",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     }
   ]
 }
