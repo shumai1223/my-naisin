@@ -1674,6 +1674,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "edtech-nativecamp-school",
+      "org": "株式会社NativeCamp(ネイティブキャンプ・教育機関向け英会話)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://nativecamp.net/school/cs",
+      "contactClass": "b2b",
+      "evidence": "個人向けオンライン英会話とは別に`/school`配下に学校・教育機関専用ページがあり、専用の問い合わせフォームURL(`/school/cs`)・専用電話番号(03-5877-4801)・資料請求/無料体験申込URL(`/school/apply_trial`)が個人向け導線と分離されていることを直接WebFetchで確認",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     }
   ]
 }
