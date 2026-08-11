@@ -1635,6 +1635,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "media-jukushiru",
+      "org": "株式会社ユナイトプロジェクト(塾シル)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://jukushiru.com/published",
+      "contactClass": "b2b",
+      "evidence": "塾検索ポータルサイト『塾シル』の塾向け掲載相談専用ページ(教室契約数15,000突破)。ページ全体が『急成長中の塾シルに掲載しませんか？』という塾事業者向けの営業ページであり、個人向けページとは明確に別区分。問い合わせボタンの実在を直接WebFetchで確認",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
     }
   ]
 }
