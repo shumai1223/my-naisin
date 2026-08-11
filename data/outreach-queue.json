@@ -1427,6 +1427,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "edtech-konicaminolta-tomolinks",
+      "org": "コニカミノルタジャパン株式会社(tomoLinks)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://bs-offers.konicaminolta.jp/tomolinks/contact",
+      "contactClass": "b2b",
+      "evidence": "学習伴走型AI教材『tomoLinks』の問い合わせフォームに『新規導入をご検討中の自治体・学校関係者様向け』『保護者様、児童生徒の方は本フォームからではなく、先生または学校へお問合せください』と明記され、必須項目に『団体区分』『学校区分』『部署名』があることを直接WebFetchで確認",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     }
   ]
 }
