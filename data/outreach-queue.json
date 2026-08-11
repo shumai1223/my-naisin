@@ -2194,6 +2194,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane3"
+    },
+    {
+      "id": "juku-shuei-yobiko-ir",
+      "org": "株式会社秀英予備校(学習塾・進学塾チェーン・IR窓口)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.shuei-yobiko.co.jp/corporate/ir/form/",
+      "contactClass": "b2b",
+      "evidence": "コーポレートサイトのIR情報ページに個人向け窓口とは別の『資料請求/お問い合わせ』専用フォームが独立して存在することを直接WebFetchで確認しb2b確定(東証上場・静岡地盤の進学塾チェーン)",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane3"
     }
   ]
 }
