@@ -2585,6 +2585,19 @@
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     },
     {
+      "id": "lane9-shinroshido",
+      "org": "公益財団法人日本進路指導協会(進路指導・キャリア教育・職業指導の公益法人)",
+      "lane": "npo",
+      "channel": "form",
+      "contact": "https://www.shinro-shido.com/pages/5/",
+      "contactClass": "b2b",
+      "evidence": "公式サイト`shinro-shido.com/pages/5/`をcurlで取得した生HTMLに『お問い合わせフォーム』の実際のPOSTフォーム(お名前/住所/電話番号/メールアドレス/お問い合わせ内容の入力欄)を直接確認、コメントアウトや404ではない稼働中のフォームでb2b確定。進路指導・キャリア教育を専門とする公益法人で、当サイトの受験/進路データの利用対象と直接重なる分野のためlane9該当",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
       "id": "cert-rekiken-group",
       "org": "歴史能力検定協会(歴史能力検定・歴検・団体受検)",
       "lane": "b2b-saas",
