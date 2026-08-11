@@ -1934,6 +1934,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+    },
+    {
+      "id": "juku-yozemi-teacher-site",
+      "org": "学校法人高宮学園(代々木ゼミナール・高校の先生／大学関係者／塾関係者向けサイト)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.yozemi.ac.jp/yozemi/toiawaseForm/init",
+      "contactClass": "b2b",
+      "evidence": "河合塾・駿台と同型の教育関係者専用サイト(yozemi.ac.jp/teacher/)があり、対象者が『高校の先生／大学関係者／塾関係者』と明記され、専用の問い合わせフォームが独立していることを直接WebFetchで確認しb2b確定。大手3予備校(河合塾/駿台/代ゼミ)すべてで同型パターンを確認",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
     }
   ]
 }
