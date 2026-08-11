@@ -85,15 +85,17 @@ describe('resolveRecordSourceIndex（T-S13A A-0-3）', () => {
 describe('countUnresolvedSources（実データ・A-0-3のスコープ計測）', () => {
   // ⚠️2026-08-12実測: A-0-3本文が「tokyo/fukuoka/aomori/gifuの2,173レコード」を一律に
   // 出典未解決としていたが、fiscalYear単位で見るとfukuoka/aomoriは一部の年度が単一sourceで
-  // 自動解決できることが判明した。真に手動バックフィルが要るのは以下の件数のみ（tokyo/gifuは
+  // 自動解決できることが判明した。真に手動バックフィルが要るのは以下の件数のみ（tokyoは
   // 全年度が複数source制のため全件、fukuoka/aomoriは一部年度のみ）。このテストはA-0-3着手時の
   // スコープを固定するリグレッションガード（sources/recordsを編集した回はこの数値が動き得るので、
   // 動いたら意図した変化か確認してから期待値を更新すること）。
+  // ✅2026-08-12: gifuは全409件をsourceIndexバックフィル済み（各年度の2sourcesが「変更後出願者数」
+  // ＝学校別詳細と「変更後出願者数総括表」＝集計のみの明確なペアだったため、集計版には個別
+  // 学校のレコードが存在し得ないと確定できた。詳細版=各年度の偶数番目indexへ機械的に割り当て）。
   const KNOWN_UNRESOLVED_COUNTS: Record<string, number> = {
     tokyo: 944,
     fukuoka: 191,
     aomori: 90,
-    gifu: 409,
   };
 
   for (const [code, expected] of Object.entries(KNOWN_UNRESOLVED_COUNTS)) {
