@@ -2843,6 +2843,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-kyozai",
+      "org": "日本教材学会(教材研究・教育教材開発の学術団体)",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "jimukyoku@kyozai-gakkai.jp",
+      "contactClass": "b2b",
+      "evidence": "公式サイト`kyozai-gakkai.jp/enrollment/`をcurlで取得した生HTMLに学会自身のドメインのjimukyoku@kyozai-gakkai.jp(事務局の一般的部門名のみ)が平文で明記されていることを直接確認しb2b確定。個人名の記載なし。教材研究・教育教材開発の学術団体でlane9該当(全国高等学校進路指導協議会は全国事務局の直接連絡先が見つからず、地域事務局のみ個人名付きメールで見送り)",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
