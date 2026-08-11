@@ -2390,6 +2390,19 @@
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     },
     {
+      "id": "edtech-surala",
+      "org": "株式会社すららネット(無学年式オンライン教材『すらら』学校向け窓口)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://surala.jp/school/contact-form/",
+      "contactClass": "b2b",
+      "evidence": "公式サイト`surala.jp/school/contact-form/`をcurlで取得した生HTMLのmeta descriptionに『このページは学校・教育委員会様向けとなります。個人のお客様はこちらから、塾でのご利用を検討されている場合は、こちらよりお問い合わせください』と明記されており、学校/個人/塾の3窓口が明確に分離されていることを直接確認しb2b確定。サブタスク0のlane4母集団20社確定リストに含まれていたが未検証だった1社",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
       "id": "cert-rekiken-group",
       "org": "歴史能力検定協会(歴史能力検定・歴検・団体受検)",
       "lane": "b2b-saas",
