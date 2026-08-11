@@ -3103,6 +3103,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+    },
+    {
+      "id": "lane8-zenp-pta",
+      "org": "一般社団法人全国PTA連絡協議会(PTA運営支援・情報提供団体)",
+      "lane": "npo",
+      "channel": "form",
+      "contact": "https://zen-p.net/sus/contact.html",
+      "contactClass": "b2b",
+      "evidence": "zen-p.net/sus/contact.htmlを直接WebFetchで確認。「行政関連や企業」向けの専用フォーム区分を含む複数区分の実在フォームを確認しb2b確定(PTA/個人向けとは分離された法人・行政向け窓口)。全国のPTA連合会・単位PTA・地域団体を対象にした運営支援団体で保護者接点のある提携先候補",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane8"
     }
   ]
 }
