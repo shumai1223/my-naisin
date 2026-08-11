@@ -7,7 +7,6 @@ import { Target, Send, ChevronRight, TrendingUp, PartyPopper, Wallet, Info } fro
 import { Card } from '@/components/ui/Card';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
-import { PREFECTURE_HIGH_SCHOOL_DATA } from '@/lib/prefecture-high-school-data';
 import { track } from '@/lib/track';
 import { writeSavedGoal } from '@/lib/persistence';
 import type { ResultData } from '@/lib/types';
@@ -38,24 +37,12 @@ type GapState = 'met' | 'close' | 'far';
  * 採点は保護者CVではなく ①ギャップ提示後のエンゲージ ②シェア（保護者バトン）クリック率で行う。
  */
 
+// E-0（2026-08-11）: 学校別の目安内申（＝合格ボーダーの推定）への依存を全て削除した。
+// 目標は「自分で入れる」だけになったため、推定値に関する断り書き（HEDGE_NOTE）も不要になった。
 const HEDGE_NOTE =
-  '※高校の目安内申は各塾の追跡調査等をもとにした集約推定値です。合格を保証するものではなく、あくまで目安としてご利用ください。';
+  '※「あと何点」は入力された目標との差です。合格を保証するものではありません。志望校の基準は必ず各高校・教育委員会の公表資料でご確認ください。';
 
 export function GapToTarget({ result, prefectureCode, prefectureName, onShareOpen }: GapToTargetProps) {
-  const data = PREFECTURE_HIGH_SCHOOL_DATA[prefectureCode];
-
-  // スケール整合の取れた主要校のみ（avgNaishin が当県満点内）。
-  // 例：神奈川 横浜翠嵐 avgNaishin 138 > 満点135 のような不整合データは自動除外し、誤った「あと◯点」を出さない。
-  const schools = React.useMemo(
-    () =>
-      (data?.topHighSchools ?? [])
-        .filter(
-          (s): s is typeof s & { avgNaishin: number } =>
-            typeof s.avgNaishin === 'number' && s.avgNaishin > 0 && s.avgNaishin <= result.max
-        )
-        .slice(0, 6),
-    [data, result.max]
-  );
 
   const [target, setTarget] = React.useState<number | null>(null);
   const [targetLabel, setTargetLabel] = React.useState<string>('');
@@ -64,26 +51,9 @@ export function GapToTarget({ result, prefectureCode, prefectureName, onShareOpe
   const gap = target == null ? null : target - result.total;
   const state: GapState | null = gap == null ? null : gap <= 0 ? 'met' : gap <= 3 ? 'close' : 'far';
 
-  function pickSchool(s: { name: string; avgNaishin: number }) {
-    const label = `${s.name}の目安`;
-    setTarget(s.avgNaishin);
-    setTargetLabel(label);
-    track('gap_target_set', {
-      pref: prefectureCode,
-      source: 'school',
-      target: s.avgNaishin,
-      gap: s.avgNaishin - result.total,
-    });
-    // 堀A：再訪導線の燃料として目標を保存（次回「前回の続き＝あと◯点」を出せる）
-    writeSavedGoal({
-      prefectureCode,
-      prefectureName,
-      target: s.avgNaishin,
-      targetLabel: label,
-      score: result.total,
-      gap: s.avgNaishin - result.total,
-    });
-  }
+  // E-0（2026-08-11）: pickSchool()（主要校チップから目標をプリフィルする関数）を削除した。
+  // 入力していた値が学校別の合格ボーダーの推定だったため（Y-0違反）。
+  // 目標設定は下の setManual() のみになった。track の source は 'manual' に一本化される。
 
   function setManual(raw: number) {
     if (Number.isNaN(raw)) return;
@@ -130,34 +100,13 @@ export function GapToTarget({ result, prefectureCode, prefectureName, onShareOpe
       </div>
 
       <div className="space-y-4 p-6">
-        {/* 目標の設定：主要校チップ（プリフィル）＋ 手入力 */}
-        {schools.length > 0 && (
-          <div>
-            <div className="mb-2 text-xs font-bold text-slate-600">主要校の目安から選ぶ</div>
-            <div className="flex flex-wrap gap-2">
-              {schools.map((s) => {
-                const active = targetLabel === `${s.name}の目安`;
-                return (
-                  <button
-                    key={`${s.name}-${s.department}`}
-                    type="button"
-                    onClick={() => pickSchool(s)}
-                    className={`rounded-full border px-3 py-1.5 text-xs font-semibold transition-all ${
-                      active
-                        ? 'border-indigo-500 bg-indigo-600 text-white shadow-sm'
-                        : 'border-slate-200 bg-white text-slate-700 hover:border-indigo-300 hover:bg-indigo-50'
-                    }`}
-                  >
-                    {s.name}
-                    <span className={`ml-1 ${active ? 'text-indigo-100' : 'text-slate-400'}`}>
-                      {s.avgNaishin}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-        )}
+        {/* ⛔ E-0（2026-08-11）: 「主要校の目安から選ぶ」チップを削除した。
+            チップの数値は PREFECTURE_HIGH_SCHOOL_DATA の avgNaishin ＝ 学校別の合格ボーダーの推定で、
+            source: 400行のうち教委を出典に持つ行は0・226行が「推計 2026年度」＝自社推定だった。
+            Y-0憲法が永久禁止する「学校別の合格ボーダーの独自推定」に該当する。
+            機能そのものは下の「目標の内申点を直接入れる」で維持される（元から実装済み）。
+            復活の条件: 教委等が公表した学校別の値のみで作り直すこと。
+            経緯: ops/tasks/T-E0-borderline-y0-violation.md */}
 
         <div className="grid gap-2 sm:grid-cols-[1fr_auto] sm:items-end">
           <div>
