@@ -1518,6 +1518,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
+    },
+    {
+      "id": "edtech-nais-test",
+      "org": "株式会社ナイズ",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://nais-test.jp/contact/",
+      "contactClass": "b2b",
+      "evidence": "小学・中学生の模試運営を学習塾向けにサポートする専業会社。『塾・団体様向け 中学生用WEB成績結果』という明示的な塾専用セクションが存在することを直接WebFetchで確認",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     }
   ]
 }
