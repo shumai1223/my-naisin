@@ -1440,6 +1440,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "edtech-toppan-navima",
+      "org": "TOPPAN株式会社(navima)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://solution.toppan.co.jp/education/inquiry/navima.html",
+      "contactClass": "b2b",
+      "evidence": "デジタルドリル(AI型ドリル)『navima』の問い合わせフォームに『学校名・団体名等』の入力欄があり、導入検討中の学校・教育委員会向け窓口であることを直接WebFetchで確認",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     }
   ]
 }
