@@ -2051,6 +2051,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "career-mynavi-koshien-teacher",
+      "org": "株式会社マイナビ(マイナビキャリア甲子園・担当教員の皆様へ)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://survey.mynavi.jp/cre/?enq=F2ZYxkj%2fhK4%3d",
+      "contactClass": "b2b",
+      "evidence": "高校生向けビジネスコンテスト『マイナビキャリア甲子園』に『担当教員の皆様へ』専用ページ(/13_forteacher/)があり、『高校内授業で取り入れる事ができる、キャリア教育プログラムです』と教員向けに明記された問い合わせフォームがあることを直接WebFetchで確認しb2b確定。全国3,151チーム・11,668名(第12回)が参加し「学校応募」枠がある",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     }
   ]
 }
