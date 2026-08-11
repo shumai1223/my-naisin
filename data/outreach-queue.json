@@ -2700,6 +2700,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "lane9-iesj",
+      "org": "異文化間教育学会(異文化間教育・多文化共生研究の学術団体)",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "iesj-post@as.bunken.co.jp",
+      "contactClass": "b2b",
+      "evidence": "公式サイト`intercultural.jp/contact/`をcurlで取得した生HTMLで確認。同ページには2つの窓口があり、①iesj@dwc.doshisha.ac.jp(学会全般・個人研究室気付でPII混入リスク)と②iesj-post@as.bunken.co.jp(入会・退会・登録変更等の会員管理事務局)が併記されていたため、日本カリキュラム学会と同じ理由でPII回避のため②の法人窓口を採用。as.bunken.co.jp運営学会群の7件目。異文化間教育・多文化共生は内申点/入試制度の国際比較研究と関心が重なりうるためlane9該当",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
