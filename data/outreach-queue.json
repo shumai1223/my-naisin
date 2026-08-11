@@ -2403,6 +2403,19 @@
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     },
     {
+      "id": "juku-sprix-ir",
+      "org": "株式会社スプリックス(東証上場・森塾/湘南ゼミナール等の塾チェーン運営・IR窓口)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://sprix.inc/contact/",
+      "contactClass": "b2b",
+      "evidence": "公式サイト`sprix.inc/contact/`をcurlで取得した生HTMLに、問い合わせ区分の`<select name=\"category\">`が森塾/湘南ゼミナール/自立学習RED/河合塾マナビス/そら塾等の各ブランドに加え『IR』『教育JAPAN』『その他』の選択肢を持つ単一フォームであることを直接確認。東証上場企業のIR窓口区分を明示的に選択できるためb2b確定(秀英予備校・京進等の既存IR窓口パターンと同型)",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
       "id": "cert-rekiken-group",
       "org": "歴史能力検定協会(歴史能力検定・歴検・団体受検)",
       "lane": "b2b-saas",
