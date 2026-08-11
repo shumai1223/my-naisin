@@ -2142,6 +2142,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "textbook-zkai-honsha-sample",
+      "org": "株式会社Z会(学校教材『Z会の本』・書籍見本請求)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.zkai.co.jp/books/school/sample/",
+      "contactClass": "b2b",
+      "evidence": "『中学校・高等学校・中等教育学校・高等専門学校の先生』限定の書籍見本請求ページがあり、『個人のお客様、塾・予備校様にはご提供できません』と明記(個人・塾向けより厳格な学校教員限定)されていることを直接WebFetchで確認しb2b確定。既存のZ会ソリューションズ(gakusan-zkai-solutions)とは別法人",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
     }
   ]
 }
