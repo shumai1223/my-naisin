@@ -2064,6 +2064,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "career-jfc-koukousei-businessplan",
+      "org": "株式会社日本政策金融公庫(高校生ビジネスプラン・グランプリ・教員専用ページ)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.jfc.go.jp/n/grandprix/teacher/index.html",
+      "contactClass": "b2b",
+      "evidence": "『教員専用』と明記されたページがあり『※教員の方以外はご利用いただけません』と限定された動画教材サービス+専用問い合わせフォーム(電話03-3270-1385)を直接WebFetchで確認しb2b確定。⚠️注記: 日本政策金融公庫は政府系金融機関(.go.jpドメイン)であり、既知の罠(教育委員会・自治体は内規で被リンク不可と回答済み)と同種の制約が及ぶ可能性がある。ただし金融機関であり教育委員会/自治体そのものではないため、送信要否は👤が個別に判断すること",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     }
   ]
 }
