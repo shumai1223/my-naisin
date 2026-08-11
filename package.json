@@ -9,6 +9,7 @@
   "scripts": {
     "worklog": "node scripts/worklog.mjs",
     "brief:daily": "tsx src/scripts/daily-brief-health.ts",
+    "discord:bridge": "node --use-system-ca scripts/discord-bridge.mjs",
     "dev": "next dev",
     "build": "NODE_OPTIONS=--max-old-space-size=4096 next build",
     "start": "next start",
