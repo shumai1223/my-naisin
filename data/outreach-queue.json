@@ -2429,6 +2429,19 @@
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     },
     {
+      "id": "edtech-gakugei",
+      "org": "株式会社がくげい(タブレット学習アプリ・学校向け製品)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.gakugei.co.jp/support/inqto/",
+      "contactClass": "b2b",
+      "evidence": "サイト内`/school/school.html`(title:『学校向け製品－学習ソフトのがくげい』・小中学校向けと明記)の学校向けセクションから同一の問い合わせフォーム`/support/inqto/`が案内されていることを直接WebFetchで確認。同社は個人向けタブレット学習アプリと学校向け製品の両方を展開するがコンタクトフォームは共通のため、学校向けページ経由での到達を根拠にb2b確定(curl 200到達確認済み)。lane4母集団20社確定リストの未検証分",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
       "id": "cert-rekiken-group",
       "org": "歴史能力検定協会(歴史能力検定・歴検・団体受検)",
       "lane": "b2b-saas",
