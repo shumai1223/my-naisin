@@ -2804,6 +2804,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "cert-kanken-group",
+      "org": "公益財団法人日本漢字能力検定協会(漢検・団体受検)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.kanken.or.jp/kanken/contact/",
+      "contactClass": "b2b",
+      "evidence": "公式サイト`kanken.or.jp/kanken/contact/`をcurlで取得した生HTMLに『団体ご担当者様向け』(団体受検について/資料の請求/新規団体ご担当者向け)と一般向け『その他』カテゴリを含む問い合わせフォーム群が稼働中であることを直接確認しb2b確定。歴史能力検定協会・実用数学技能検定等と同型の団体受検実施法人",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     }
   ]
 }
