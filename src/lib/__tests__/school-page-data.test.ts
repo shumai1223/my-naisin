@@ -1,5 +1,7 @@
 import {
   buildSchoolPageDataForPrefecture,
+  buildSchoolHistoryForPrefecture,
+  groupSchoolHistoryByDepartment,
   selectNearbySchools,
   getSchoolCategoryTrends,
   type SchoolPageData,
@@ -10,6 +12,7 @@ import type { PrefectureRateHistoryFile, YearSnapshot } from '../competition-rat
 import { TOKYO_COMPETITION_RATES } from '@/data/competition-rates/tokyo';
 import { TOKYO_COMPETITION_RATE_HISTORY } from '@/data/competition-rate-history/tokyo';
 import { SCHOOLS_TOKYO } from '@/data/schools/tokyo';
+import { getPrefectureSchoolPageData } from '../school-page-lookup';
 
 function rec(code: string, name: string): SchoolRecord {
   return { code, name, address: `${name}の住所`, postalCode: '1000001', branch: false };
@@ -34,6 +37,7 @@ function schoolData(overrides: Partial<SchoolPageData> & { schoolCode: string })
     totalQuota: 0,
     totalApplicants: 0,
     overallRate: 0,
+    history: [],
     ...overrides,
   };
 }
@@ -138,6 +142,127 @@ describe('buildSchoolPageDataForPrefecture', () => {
     const rates = [rate('日比谷', '普通科', 253, 520, 2.06)];
     const result = buildSchoolPageDataForPrefecture(master, rates);
     expect(result.schools[0].area).toBeUndefined();
+  });
+});
+
+describe('buildSchoolHistoryForPrefecture（T-A1・学校固有の多年度推移）', () => {
+  test('今季分(fiscalYear未指定)はcurrentFiscalYearラベルで、過去年度分はfiscalYearそのままで年度降順に並ぶ', () => {
+    const master = [rec('T1', '東京都立日比谷高等学校')];
+    const records = [
+      { ...rate('日比谷', '普通科', 253, 520, 2.06), fiscalYear: '令和6年度（2024年度）' },
+      rate('日比谷', '普通科', 253, 540, 2.13), // 今季分(fiscalYear未指定)
+      { ...rate('日比谷', '普通科', 253, 500, 1.98), fiscalYear: '令和7年度（2025年度）' },
+    ];
+    const history = buildSchoolHistoryForPrefecture(master, records, '令和8年度（2026年度）');
+    const entries = history.get('T1');
+    expect(entries).toHaveLength(3);
+    expect(entries!.map((e) => e.fiscalYear)).toEqual([
+      '令和8年度（2026年度）',
+      '令和7年度（2025年度）',
+      '令和6年度（2024年度）',
+    ]);
+  });
+
+  test('同一年度内は学科(department)の昇順で並ぶ', () => {
+    const master = [rec('O1', '大阪府立東高等学校')];
+    const records = [
+      { ...rate('東', '理数科', 80, 99, 1.24), fiscalYear: '令和7年度（2025年度）' },
+      { ...rate('東', '普通科', 200, 271, 1.36), fiscalYear: '令和7年度（2025年度）' },
+    ];
+    const history = buildSchoolHistoryForPrefecture(master, records, '令和8年度（2026年度）');
+    expect(history.get('O1')!.map((e) => e.department)).toEqual(['普通科', '理数科']);
+  });
+
+  test('学校名が突合できないレコードはhistoryに含めない（誤った紐付けをしない）', () => {
+    const master = [rec('T1', '東京都立日比谷高等学校')];
+    const records = [{ ...rate('存在しない高校', '普通科', 100, 100, 1.0), fiscalYear: '令和7年度（2025年度）' }];
+    const history = buildSchoolHistoryForPrefecture(master, records, '令和8年度（2026年度）');
+    expect(history.size).toBe(0);
+  });
+
+  test('あいまい一致(同名複数校)もhistoryに含めない', () => {
+    const master = [rec('X1', '東京都立大森高等学校'), rec('X2', '東京都立大森高校')];
+    const records = [{ ...rate('大森', '普通科', 100, 100, 1.0), fiscalYear: '令和7年度（2025年度）' }];
+    const history = buildSchoolHistoryForPrefecture(master, records, '令和8年度（2026年度）');
+    expect(history.size).toBe(0);
+  });
+
+  test('nameAliasesは今季分・過去年度分どちらのレコードにも適用される', () => {
+    const master = [rec('M1', '宮城県白石工業高等学校')];
+    const records = [{ ...rate('白石工', '機械科', 40, 50, 1.25), fiscalYear: '令和7年度（2025年度）' }];
+    const history = buildSchoolHistoryForPrefecture(master, records, '令和8年度（2026年度）', { 白石工: '白石工業' });
+    expect(history.get('M1')).toHaveLength(1);
+  });
+
+  // 不変条件テスト群（DoD必須・宮崎avgNaishin425の再発防止と同型）
+  describe('不変条件（実データ・東京都日比谷）', () => {
+    const { schools } = buildSchoolPageDataForPrefecture(SCHOOLS_TOKYO.schools, TOKYO_COMPETITION_RATES.records.filter((r) => !r.fiscalYear));
+    const hibiyaCurrent = schools.find((s) => s.schoolName.includes('日比谷'))!;
+    const history = buildSchoolHistoryForPrefecture(
+      SCHOOLS_TOKYO.schools,
+      TOKYO_COMPETITION_RATES.records,
+      TOKYO_COMPETITION_RATES.sources[0].fiscalYear
+    );
+    const hibiyaHistory = history.get(hibiyaCurrent.schoolCode)!;
+
+    test('history が取得できる(令和4〜8年度・複数件)', () => {
+      expect(hibiyaHistory).toBeDefined();
+      expect(hibiyaHistory.length).toBeGreaterThan(0);
+    });
+
+    test('applicants >= 0 かつ quota > 0', () => {
+      for (const e of hibiyaHistory) {
+        expect(e.applicants).toBeGreaterThanOrEqual(0);
+        expect(e.quota).toBeGreaterThan(0);
+      }
+    });
+
+    test('rate は applicants / quota と小数第2位まで一致する（データ側のrateを鵜呑みにしない）', () => {
+      for (const e of hibiyaHistory) {
+        const computed = Math.round((e.applicants / e.quota) * 100) / 100;
+        expect(e.rate).toBeCloseTo(computed, 2);
+      }
+    });
+
+    test('同一学科・同一年度のレコードが2件以上存在しない（2026-08-09事故の直接原因）', () => {
+      const keys = hibiyaHistory.map((e) => `${e.fiscalYear}::${e.department}`);
+      expect(new Set(keys).size).toBe(keys.length);
+    });
+
+    test('fiscalYear が重複せず年度降順である', () => {
+      const years = [...new Set(hibiyaHistory.map((e) => e.fiscalYear))];
+      const sorted = [...years].sort().reverse();
+      // 文字列の年度ラベル自体が'令和N年度（YYYY年度）'で辞書順=年順のため、reverse文字列ソートと一致するはず
+      expect(years).toEqual(sorted);
+    });
+
+    test('今季値(totalQuota/totalApplicants/overallRate)はhistoryを混ぜても変化しない（2026-08-09事故のリグレッションテスト）', () => {
+      // getPrefectureSchoolPageData相当の統合結果でも今季値が同一であることを確認する
+      const result = getPrefectureSchoolPageData('tokyo');
+      const hibiyaFull = result!.schools.find((s) => s.schoolCode === hibiyaCurrent.schoolCode)!;
+      expect(hibiyaFull.totalQuota).toBe(hibiyaCurrent.totalQuota);
+      expect(hibiyaFull.totalApplicants).toBe(hibiyaCurrent.totalApplicants);
+      expect(hibiyaFull.overallRate).toBe(hibiyaCurrent.overallRate);
+      expect(hibiyaFull.history.length).toBeGreaterThan(0);
+    });
+  });
+});
+
+describe('groupSchoolHistoryByDepartment', () => {
+  test('学科ごとにグルーピングし、出現順(=departmentの初出順)を保つ', () => {
+    const history = [
+      { fiscalYear: '令和8年度（2026年度）', department: '普通科', quota: 200, applicants: 271, rate: 1.36 },
+      { fiscalYear: '令和8年度（2026年度）', department: '理数科', quota: 80, applicants: 99, rate: 1.24 },
+      { fiscalYear: '令和7年度（2025年度）', department: '普通科', quota: 200, applicants: 260, rate: 1.3 },
+    ];
+    const grouped = groupSchoolHistoryByDepartment(history);
+    expect(grouped.map((g) => g.department)).toEqual(['普通科', '理数科']);
+    expect(grouped[0].entries).toHaveLength(2);
+    expect(grouped[1].entries).toHaveLength(1);
+  });
+
+  test('空配列は空配列を返す', () => {
+    expect(groupSchoolHistoryByDepartment([])).toEqual([]);
   });
 });
 

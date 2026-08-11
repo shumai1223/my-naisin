@@ -5,7 +5,7 @@ import { ChevronRight, Home, GraduationCap, MapPin, AlertTriangle } from 'lucide
 
 import { getPrefectureByCode } from '@/lib/prefectures';
 import { COMPETITION_RATE_HISTORY_BY_PREFECTURE } from '@/data/competition-rate-history';
-import { selectNearbySchools, getSchoolCategoryTrends } from '@/lib/school-page-data';
+import { selectNearbySchools, getSchoolCategoryTrends, groupSchoolHistoryByDepartment } from '@/lib/school-page-data';
 import { getPrefectureSchoolPageData, INDEXED_SCHOOL_PAGE_PREFECTURE_CODES } from '@/lib/school-page-lookup';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { SchoolPageConvertCTA } from '@/components/SchoolPageConvertCTA';
@@ -78,6 +78,7 @@ export default async function SchoolPage({ params }: PageProps) {
 
   const nearbySchools = selectNearbySchools(school, data.schools, 3);
   const categoryTrends = getSchoolCategoryTrends(code, school, COMPETITION_RATE_HISTORY_BY_PREFECTURE[code]);
+  const schoolHistoryByDepartment = groupSchoolHistoryByDepartment(school.history);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
@@ -166,6 +167,62 @@ export default async function SchoolPage({ params }: PageProps) {
                     ))}
                   </tbody>
                 </table>
+              </div>
+            </section>
+          )}
+
+          {schoolHistoryByDepartment.length > 0 && (
+            <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <h2 className="mb-1 text-lg font-bold text-slate-800">この学校の募集人員・応募者数・倍率の推移</h2>
+              <p className="mb-4 text-xs text-slate-500">
+                {school.schoolName}固有の一次データです（下記の「県全体の傾向」とは別物）。
+              </p>
+              <div className="space-y-4">
+                {schoolHistoryByDepartment.map((group) => (
+                  <div key={group.department} className="overflow-x-auto">
+                    {schoolHistoryByDepartment.length > 1 && (
+                      <h3 className="mb-2 text-sm font-semibold text-slate-600">{group.department}</h3>
+                    )}
+                    <table className="w-full text-sm">
+                      <thead>
+                        <tr className="border-b border-slate-200 text-left text-slate-500">
+                          <th className="py-2 pr-4 font-normal">年度</th>
+                          {group.entries.map((e) => (
+                            <th key={e.fiscalYear} className="py-2 pr-4 text-right font-normal">
+                              {e.fiscalYear}
+                            </th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr className="border-b border-slate-100">
+                          <td className="py-2 pr-4 text-slate-500">募集人員</td>
+                          {group.entries.map((e) => (
+                            <td key={e.fiscalYear} className="py-2 pr-4 text-right text-slate-600">
+                              {e.quota}名
+                            </td>
+                          ))}
+                        </tr>
+                        <tr className="border-b border-slate-100">
+                          <td className="py-2 pr-4 text-slate-500">応募者数</td>
+                          {group.entries.map((e) => (
+                            <td key={e.fiscalYear} className="py-2 pr-4 text-right text-slate-600">
+                              {e.applicants}名
+                            </td>
+                          ))}
+                        </tr>
+                        <tr>
+                          <td className="py-2 pr-4 text-slate-500">倍率</td>
+                          {group.entries.map((e) => (
+                            <td key={e.fiscalYear} className="py-2 pr-4 text-right font-semibold text-slate-700">
+                              {e.rate}倍
+                            </td>
+                          ))}
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                ))}
               </div>
             </section>
           )}

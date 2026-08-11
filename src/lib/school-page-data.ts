@@ -33,6 +33,20 @@ export interface SchoolPageData {
   overallRate: number;
   /** 学区(市区町村等)。一次資料にareaが無い県ではundefined（近隣校選定は同区分の学校が対象外になる）。 */
   area?: string;
+  /**
+   * この学校固有の募集人員・応募者数・倍率の多年度推移（T-A1・掛-1の学校別×多年度レコードが
+   * 母数。今季分も含む・年度降順）。学科ごとに複数行あり得る（1データ点1出典・Y-0）。
+   * データが無い県（掛-1未着手の5県等）・学校は空配列。
+   */
+  history: SchoolHistoryEntry[];
+}
+
+export interface SchoolHistoryEntry {
+  fiscalYear: string;
+  department: string;
+  quota: number;
+  applicants: number;
+  rate: number;
 }
 
 export interface SchoolPageDataSkipEntry {
@@ -103,10 +117,89 @@ export function buildSchoolPageDataForPrefecture(
       totalApplicants,
       overallRate,
       area,
+      history: [],
     });
   }
 
   return { schools, skipped };
+}
+
+/**
+ * 学校固有の募集人員・応募者数・倍率の多年度推移（T-A1）を組み立てる（純粋関数）。
+ * `buildSchoolPageDataForPrefecture`の今季分計算（currentYearRecords絞り込み）は一切変更せず、
+ * 別経路として全レコード（今季分+過去年度分fiscalYear付き）からschoolCode別に集計する
+ * （2026-08-09事故の再発防止＝今季値の計算経路に多年度分を混入させない）。
+ * 学校名の突合ロジックは`buildSchoolPageDataForPrefecture`と同一（matchSchoolNames）を再利用。
+ * currentFiscalYear: `fiscalYear`未指定のレコード（今季分）に付与するラベル
+ * （通常は`PrefectureCompetitionRateFile.sources[0].fiscalYear`）。
+ * 返り値はschoolCode→SchoolHistoryEntry[]（年度降順・同一年度内はdepartment順）。
+ */
+export function buildSchoolHistoryForPrefecture(
+  masterRecords: SchoolRecord[],
+  allRateRecords: CompetitionRateRecord[],
+  currentFiscalYear: string,
+  nameAliases: Record<string, string> = {}
+): Map<string, SchoolHistoryEntry[]> {
+  const schoolNames = allRateRecords.map((r) => r.schoolName);
+  const aliasedNames = schoolNames.map((n) => nameAliases[n] ?? n);
+  const matchSummary = matchSchoolNames(aliasedNames, masterRecords);
+
+  const matchByAliasedName = new Map<string, SchoolCodeMatchResult>();
+  for (const result of matchSummary.results) matchByAliasedName.set(result.inputName, result);
+
+  const historyByCode = new Map<string, SchoolHistoryEntry[]>();
+  for (const rec of allRateRecords) {
+    const aliased = nameAliases[rec.schoolName] ?? rec.schoolName;
+    const match = matchByAliasedName.get(aliased);
+    if (!match || match.reason !== 'matched' || !match.matchedCode) continue;
+    const list = historyByCode.get(match.matchedCode) ?? [];
+    list.push({
+      fiscalYear: rec.fiscalYear ?? currentFiscalYear,
+      department: rec.department,
+      quota: rec.quota,
+      applicants: rec.finalApplicants,
+      rate: rec.finalRate,
+    });
+    historyByCode.set(match.matchedCode, list);
+  }
+
+  for (const list of historyByCode.values()) {
+    list.sort((a, b) => {
+      const diff = extractFiscalYearNumber(b.fiscalYear) - extractFiscalYearNumber(a.fiscalYear);
+      if (diff !== 0) return diff;
+      return a.department.localeCompare(b.department);
+    });
+  }
+
+  return historyByCode;
+}
+
+/** '令和8年度（2026年度）'のような表記から西暦年(2026)を抽出する（ソート専用・抽出不能なら0）。 */
+function extractFiscalYearNumber(fiscalYear: string): number {
+  const match = fiscalYear.match(/[（(](\d{4})/);
+  return match ? Number(match[1]) : 0;
+}
+
+export interface SchoolHistoryByDepartment {
+  department: string;
+  entries: SchoolHistoryEntry[];
+}
+
+/**
+ * `SchoolPageData.history`（fiscalYear×departmentのフラットな配列）を学科ごとにグルーピングする
+ * （表示側の便宜のための純粋関数。並び順はhistory自体の並び順=年度降順・学科昇順を維持する）。
+ */
+export function groupSchoolHistoryByDepartment(history: SchoolHistoryEntry[]): SchoolHistoryByDepartment[] {
+  const order: string[] = [];
+  const byDept = new Map<string, SchoolHistoryEntry[]>();
+  for (const entry of history) {
+    if (!byDept.has(entry.department)) {
+      byDept.set(entry.department, []);
+      order.push(entry.department);
+    }
+    byDept.get(entry.department)!.push(entry);
+  }
+  return order.map((department) => ({ department, entries: byDept.get(department)! }));
 }
 
 export interface NearbySchool {

@@ -5,7 +5,7 @@
  */
 import { SCHOOL_MASTER_BY_PREFECTURE } from '@/data/schools';
 import { COMPETITION_RATE_BY_PREFECTURE } from '@/data/competition-rates';
-import { buildSchoolPageDataForPrefecture, type SchoolPageData } from '@/lib/school-page-data';
+import { buildSchoolPageDataForPrefecture, buildSchoolHistoryForPrefecture, type SchoolPageData } from '@/lib/school-page-data';
 import { SCHOOL_NAME_ALIASES_BY_PREFECTURE } from '@/lib/school-name-aliases';
 
 /**
@@ -107,10 +107,14 @@ export function getPrefectureSchoolPageData(code: string): { schools: SchoolPage
   // 複数年度の合算という無意味な値になっていた(toyama等、既にindex解禁済みの県で実際に発生を確認)。
   // 「今季倍率」が主役という本ファイル冒頭の設計方針どおり、今季(fiscalYearが無い=最新年度)分のみを渡す。
   const currentYearRecords = rates.records.filter((r) => !r.fiscalYear);
-  const { schools } = buildSchoolPageDataForPrefecture(
-    master.schools,
-    currentYearRecords,
-    SCHOOL_NAME_ALIASES_BY_PREFECTURE[code] ?? {}
-  );
-  return { schools };
+  const nameAliases = SCHOOL_NAME_ALIASES_BY_PREFECTURE[code] ?? {};
+  const { schools } = buildSchoolPageDataForPrefecture(master.schools, currentYearRecords, nameAliases);
+
+  // T-A1: 学校固有の多年度推移（今季値の計算経路(currentYearRecords)には一切触れず、
+  // rates.records全体(今季+過去年度)から別経路で集計し、schoolCodeで後から合流する）。
+  const currentFiscalYear = rates.sources[0]?.fiscalYear ?? '';
+  const historyByCode = buildSchoolHistoryForPrefecture(master.schools, rates.records, currentFiscalYear, nameAliases);
+  const schoolsWithHistory = schools.map((s) => ({ ...s, history: historyByCode.get(s.schoolCode) ?? [] }));
+
+  return { schools: schoolsWithHistory };
 }
