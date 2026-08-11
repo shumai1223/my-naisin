@@ -2313,6 +2313,19 @@
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     },
     {
+      "id": "lane9-jses",
+      "org": "一般社団法人日本教育社会学会(JSES・教育社会学の学術団体)",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "g003jses-mng@ml.gakkai.ne.jp",
+      "contactClass": "b2b",
+      "evidence": "公式サイト`jses-web.jp`をcurlで取得した生HTMLのフッター『お問い合わせ』欄にg003jses-mng@ml.gakkai.ne.jpが記載されていることを直接確認(WebSearch要約が提示した旧URL`gakkai.ne.jp/jses/contact/`は実際には404で失効済みだったため、現行の公式サイトで再確認)。1949年設立の教育社会学の学術団体で、内申点/倍率等の教育データを用いる研究需要がある大学研究室に近い母集団としてlane9『大学・研究室』枠に該当(個人研究者でなく法人格を持つ学会事務局のためPIIに該当しない)",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
       "id": "cert-rekiken-group",
       "org": "歴史能力検定協会(歴史能力検定・歴検・団体受検)",
       "lane": "b2b-saas",
