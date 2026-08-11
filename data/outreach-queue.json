@@ -1856,6 +1856,32 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "edtech-lifeistech-lesson",
+      "org": "ライフイズテック株式会社(学校・自治体向け『Life is Tech! Lesson』)",
+      "lane": "b2b-saas",
+      "channel": "email",
+      "contact": "gakkou@lifeistech.co.jp",
+      "contactClass": "b2b",
+      "evidence": "個人向けキャンプ・スクール事業とは別に学校・自治体向け専用サブサイト(lifeistech-lesson.jp)があり、『学校間格差をなくし、学びの質を保障する教員研修と全校一括導入』と明記、学校専用メールアドレス(gakkou@lifeistech.co.jp・「がっこう」の意)がページ本文に直接記載されていることを直接WebFetchで確認しb2b確定。2023年8月時点で600自治体・4,000校で導入",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "edtech-poper-comiru",
+      "org": "株式会社POPER(学習塾特化型SaaS『Comiru』)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://comiru.co/contact/",
+      "contactClass": "b2b",
+      "evidence": "全事業が学習塾・スクール事業者向けの業務管理SaaS専業(生徒・保護者が直接利用するアプリではなく塾側が導入するBtoB SaaS)であり、『スクール運営でのお悩みはComiruにご相談ください』という事業者向け専用の資料請求(/request/)・お問い合わせ(/contact/)フォームがナビゲーションに独立配置されていることを直接WebFetchで確認しb2b確定。導入教室数6,000教室以上・利用生徒数40万人以上",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     }
   ]
 }
