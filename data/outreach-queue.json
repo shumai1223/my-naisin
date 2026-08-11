@@ -2882,6 +2882,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-jsei",
+      "org": "日本教育情報学会(教育情報化・ICT活用教育研究の学術団体)",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "jsei@jsei.jp",
+      "contactClass": "b2b",
+      "evidence": "公式サイト`jsei.jp/?page_id=79`をcurlで取得した生HTMLに学会自身のドメインのjsei@jsei.jp(学会略称のみの局所部)が明記されていることを直接確認しb2b確定。所在地は大阪教育大学若杉研究室内だが、日本教育経営学会(jimu@jasea.jp)と同じ理由でcontact自体は個人名を含まないためPII非該当と判断(代替の法人窓口は確認できず唯一の公式窓口として採用)。教育情報化・ICT活用教育研究の学術団体でlane9該当",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
