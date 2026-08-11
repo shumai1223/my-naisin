@@ -74,3 +74,33 @@ const currentYearRecords = rates.records.filter((r) => !r.fiscalYear);
 - `tsc`/`jest` は**パイプ厳禁**。`NODE_OPTIONS=--max-old-space-size=6144` を付ける
 - shellはPowerShell（`&&`不可・heredoc不可・`;`で連結）
 - repoルートに `scratch-*.ts` を残さない（`tsc` が壊れる）
+
+## 進捗（2026-08-12・loop）
+
+**手順1〜4は完了・push済（`9da80cc`→`16ce43b`）。**
+
+- `school-page-data.ts`: `SchoolHistoryEntry`型・`buildSchoolHistoryForPrefecture()`
+  （今季値の計算経路`currentYearRecords`には一切触れず、`rates.records`全体から別経路で
+  schoolCode別に集計し後から合流する設計）・`groupSchoolHistoryByDepartment()`を追加
+- `school-page-lookup.ts`: `getPrefectureSchoolPageData()`に`history`を合流
+- `school/[schoolCode]/page.tsx`: 「この学校の推移」セクションを新設
+  （既存の「県全体の傾向」＝`categoryTrends`とは視覚的に別区画・DoD項目3対応）
+- 不変条件テスト: tokyo/日比谷の実データで5種（quota>0/applicants>=0/学科×年度重複なし/
+  fiscalYear降順/今季値不変のリグレッション）＋全47県横断の機械検証
+
+**手順5「残り41県へ展開」は本実装では追加コードが不要と判明**: `buildSchoolHistoryForPrefecture`は
+純粋関数として`COMPETITION_RATE_BY_PREFECTURE[code].records`を読むだけなので、
+`getPrefectureSchoolPageData(code)`経由で**全県共通に即座に効く**（T-C1のような1県ずつのデータ収集労働が発生しない）。
+
+**⚠️重要な発見（rateの精度は県により異なる）**: 当初「`rate`が`applicants/quota`の単純計算と
+小数第2位まで一致する」を全47県共通の不変条件として書いたところ、実データで**33/47県が失敗**した。
+調査の結果、①nagasaki等は公表値自体が小数第1位までしか無い（例:「1.1」）、②yamanashi等は
+最大0.04程度のずれがあり単純な丸め方式の違いだけでは説明がつかない（一次資料側の志願変更前後等の
+版差の可能性・未確定）。`finalRate`型コメントの「公表値をそのまま転記・独自計算はしない」設計と
+整合するため転記事故ではないと判断し、rate厳密一致はtokyo個別テストに留め、全県横断テストは
+`quota>0`/`applicants>=0`/`学科×年度重複なし`という県非依存の範囲に是正した（`16ce43b`）。
+
+**残り**: `tsc`/`jest`は全green（255 suites・4361 tests）。目視でのブラウザ確認は
+[[fable5-loop-protocol]]の既知の罠（ローカルでnext buildが完走しない）によりこの環境では
+実施不能・CIとGSCでの後日確認に委ねる。kill_criteria（28日後の加重順位）の判定は
+次回以降のセッションで日付が来たら確認すること。
