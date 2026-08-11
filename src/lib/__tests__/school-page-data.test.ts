@@ -12,7 +12,7 @@ import type { PrefectureRateHistoryFile, YearSnapshot } from '../competition-rat
 import { TOKYO_COMPETITION_RATES } from '@/data/competition-rates/tokyo';
 import { TOKYO_COMPETITION_RATE_HISTORY } from '@/data/competition-rate-history/tokyo';
 import { SCHOOLS_TOKYO } from '@/data/schools/tokyo';
-import { getPrefectureSchoolPageData } from '../school-page-lookup';
+import { getPrefectureSchoolPageData, INDEXED_SCHOOL_PAGE_PREFECTURE_CODES } from '../school-page-lookup';
 
 function rec(code: string, name: string): SchoolRecord {
   return { code, name, address: `${name}の住所`, postalCode: '1000001', branch: false };
@@ -245,6 +245,36 @@ describe('buildSchoolHistoryForPrefecture（T-A1・学校固有の多年度推�
       expect(hibiyaFull.overallRate).toBe(hibiyaCurrent.overallRate);
       expect(hibiyaFull.history.length).toBeGreaterThan(0);
     });
+  });
+
+  // T-A1手順5「残り41県へ展開」は本実装では新規コードが不要（純粋関数がgetPrefectureSchoolPageData
+  // 経由で全県共通に効くため）。ただし「本当に全県で不変条件が壊れていないか」は実データで機械検証する。
+  //
+  // ⚠️発見（2026-08-12）: 当初「rateはapplicants/quotaの単純計算と小数第2位まで一致する」を全県共通の
+  // 不変条件として検証しようとしたが、実データで33/47県が失敗した。原因を機械調査したところ、
+  // ①nagasaki等は公表値そのものが小数第1位までしか無い（例:「1.1」）ため単純計算(1.14等)とは
+  // 構造的にずれる、②yamanashi等では最大0.04程度のずれがあり、四捨五入方式の違いだけでは説明が
+  // つかないケースも見つかった（rate自体はcompetition-rate.ts型コメントの通り「公表値をそのまま
+  // 転記・独自計算はしない」設計のため、この乖離は転記事故ではなく可能性として一次資料側の
+  // 志願変更前後などの版差と推測される・未確定）。よって「rateがapplicants/quotaと一致する」を
+  // 全県横断の機械的invariantにするのは実データの多様性と衝突し誤検知を生むため採用しない
+  // （tokyo/日比谷の個別回帰テストでは実際に一致するため上のdescribeでは維持する）。
+  // ここでは県によらず必ず成り立つべき最小限の不変条件（quota>0・applicants>=0・重複なし）のみを検証する。
+  describe('不変条件（全47県・横断機械検証・県非依存のもののみ）', () => {
+    for (const code of INDEXED_SCHOOL_PAGE_PREFECTURE_CODES) {
+      test(`${code}: 全学校のhistoryが不変条件を満たす`, () => {
+        const result = getPrefectureSchoolPageData(code);
+        expect(result).not.toBeNull();
+        for (const school of result!.schools) {
+          const keys = school.history.map((e) => `${e.fiscalYear}::${e.department}`);
+          expect(new Set(keys).size).toBe(keys.length); // 同一学科・同一年度の重複なし
+          for (const e of school.history) {
+            expect(e.applicants).toBeGreaterThanOrEqual(0);
+            expect(e.quota).toBeGreaterThan(0);
+          }
+        }
+      });
+    }
   });
 });
 
