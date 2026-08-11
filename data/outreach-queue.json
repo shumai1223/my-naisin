@@ -1622,6 +1622,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "edtech-pumpkin-labo",
+      "org": "株式会社ぱんぷきんラボ",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://pumpkin-labo.com/contact",
+      "contactClass": "b2b",
+      "evidence": "通信制高校専用の校務支援システム『Student Mypage Lite』のみを提供する専業企業(個人向け消費者製品なし)。公式サイトに『通信制高校専用 校務支援システム』『学校向けICTシステムの開発を手がけております』と明記されていることを直接WebFetchで確認",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     }
   ]
 }
