@@ -2220,6 +2220,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane3"
+    },
+    {
+      "id": "cert-shosha-group",
+      "org": "一般財団法人日本書写技能検定協会(硬筆・毛筆書写技能検定・団体受験)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.nihon-shosha.or.jp/formgroup.html",
+      "contactClass": "b2b",
+      "evidence": "ナビゲーションに『個人受験』『団体受験』が完全に分離されたメニュー項目として配置され、団体受験(硬筆・毛筆合わせて5名以上)専用の資料請求フォームが独立していることを直接WebFetchで確認しb2b確定",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     }
   ]
 }
