@@ -2,7 +2,9 @@ import { NextRequest, NextResponse } from 'next/server';
 
 import { isValidStatsSubmission, type StatsMetric } from '@/lib/stats-aggregation';
 import { insertStatsSubmission } from '@/lib/stats-db';
-import { classifyClick, isBotUserAgent, isPrefetchRequest, isInternalReferer } from '@/lib/bot-filter';
+import { isBotUserAgent, isPrefetchRequest } from '@/lib/bot-filter';
+// route.ts は HTTP メソッド以外を export できないため、純粋関数は lib 側に置く（詳細は同ファイルのコメント）。
+import { classifySubmission } from '@/lib/stats-submit-provenance';
 
 /**
  * 匿名統計の投稿受け口（S-1・旧N-3）。/api/lead と同方針の公開POST（レート制限あり・API鍵不要）。
@@ -71,20 +73,6 @@ function allow(ip: string): boolean {
     }
   }
   return true;
-}
-
-/**
- * 送信元の真正性を判定する（DW-1）。
- * Origin ヘッダを優先し、無ければ Referer で判定する（fetch は同一オリジンPOSTに Origin を付ける）。
- * 純粋関数として切り出し、テストから直接叩けるようにしている。
- */
-export function classifySubmission(headers: { get(name: string): string | null }): ReturnType<typeof classifyClick> {
-  const ua = headers.get('user-agent');
-  const origin = headers.get('origin');
-  const referer = headers.get('referer');
-  // Origin は "https://my-naishin.com" の形。isInternalReferer はURLとして解釈するのでそのまま渡せる。
-  const internalOrigin = isInternalReferer(origin) || isInternalReferer(referer);
-  return classifyClick({ userAgent: ua, referer: internalOrigin ? 'https://my-naishin.com/' : null });
 }
 
 export async function POST(request: NextRequest) {

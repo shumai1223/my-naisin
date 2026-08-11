@@ -17,7 +17,7 @@
  *
  * ⚠️ この判定を緩めると DW-1 が再発する。
  */
-import { classifySubmission } from '@/app/api/stats/submit/route';
+import { classifySubmission } from '@/lib/stats-submit-provenance';
 
 /** Headers 風の最小オブジェクト（NextRequest.headers と同じ get 契約）。 */
 function headers(map: Record<string, string | undefined>) {
