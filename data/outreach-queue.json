@@ -3090,6 +3090,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+    },
+    {
+      "id": "lane1-ajc",
+      "org": "全国学習塾協同組合(AJC・学習塾業界の協同組合)",
+      "lane": "juku",
+      "channel": "form",
+      "contact": "https://www.ajc.or.jp/mailform/mailform.php",
+      "contactClass": "b2b",
+      "evidence": "ajc.or.jp/mailform/mailform.phpを直接WebFetchで確認。「会社名・塾名等」(必須・所属なしの場合の記入例あり)/氏名/メールアドレス/資料名(選択式)/お問い合わせ内容が必須項目の実在フォームを確認しb2b確定。JJA(全国学習塾協会)とは別組織(協同組合形態)の学習塾業界団体",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
     }
   ]
 }
