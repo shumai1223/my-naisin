@@ -2778,6 +2778,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-jald",
+      "org": "一般社団法人日本LD学会(学習障害・発達障害の学術団体)",
+      "lane": "npo",
+      "channel": "form",
+      "contact": "https://www.jald.or.jp/contact/",
+      "contactClass": "b2b",
+      "evidence": "公式サイト`jald.or.jp/contact/`をcurlで取得した生HTMLにお問い合わせフォーム(項目: お問い合わせ項目/所属団体名/氏名等・Contact Form 7埋め込み型でaction=同一ページ内)が稼働中であることを直接確認しb2b確定。個人名の記載は無く組織名(事務局)表記のみでPII非該当。学習障害・発達障害研究の学術団体でlane9該当",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
