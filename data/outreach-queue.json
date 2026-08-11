@@ -2352,6 +2352,19 @@
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     },
     {
+      "id": "lane9-jartest",
+      "org": "日本テスト学会(テスト理論・測定評価の学術団体)",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "info1@jartest.jp",
+      "contactClass": "b2b",
+      "evidence": "公式サイト`jartest.jp/office.html`(お問い合わせページ)を確認したところ、メールアドレスが116x24pxの画像(`img/mail_info.jpg`・スパム対策で文字列でなく画像化)として掲載されておりHTMLのgrepでは抽出できなかったため、画像自体をcurlでダウンロードしRead toolで直接目視確認しinfo1@jartest.jpと判読(WebSearch要約の提示値と一致・画像確認により二重検証済み)。テスト理論・測定評価の専門学会でありhensachi/内申点の計算ロジックに関する研究的関心が想定されるためlane9『大学・研究室』枠に該当",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
       "id": "cert-rekiken-group",
       "org": "歴史能力検定協会(歴史能力検定・歴検・団体受検)",
       "lane": "b2b-saas",
