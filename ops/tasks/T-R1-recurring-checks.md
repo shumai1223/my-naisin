@@ -19,11 +19,25 @@
 - ユタ滞在中（9/08〜09-22）は**👤が1日5分Discordを見るだけ**の運用になる。1通に集約されている必要がある
 - 異常時アラートは**この日次通知に埋め込む**（別チャンネルに分けない）
 
-### 実装のギャップ（★これが未着手の本体）
-`src/scripts/daily-brief-health.ts` は**実装済み**（6KB）で `DISCORD_WEBHOOK_URL` も読む。
-**しかし npm script に未登録で、定期実行の仕組みが無い**（Λ-21 残り②「稼働スケジュールの外部設定化」）。
-→ **やること**: npm script 登録 ＋ Windows タスクスケジューラ（または `loop-start.bat` からの定期起動）。
-   **`DISCORD_WEBHOOK_URL` は既に `loop-start.bat` に設定済み・疎通確認済（HTTP 204・2026-08-11）。**
+### 実装状況（★2026-08-12 完了）
+`src/scripts/daily-brief-health.ts`（6KB）→ `npm run brief:daily` として登録済み。
+`C:\Users\E24054\daily-brief.bat` 経由でタスクスケジューラ `MyNaishin-DailyBrief` が毎朝実行する。
+`DISCORD_WEBHOOK_URL` はユーザー環境変数。疎通確認済（HTTP 204・2026-08-11）。
+
+**Λ-21 第3層／第4層も同日で開通済み**（`scripts/discord-bridge.mjs`・`npm run discord:bridge`）:
+- `#naishin-control`（プライベート）で 👤 のみが操作できる双方向ブリッジ。
+  チャンネルIDとユーザーIDの二重ロック・不一致は黙って無視・同時実行1本・10分でkill。
+- 読み取り `!status !brief !gsc !d1 !log !tasks` ／ 書き込みは `!w ` 接頭辞が必要。
+- **`!ask <質問>`＝Claude Code をヘッドレスで1本起動**し、実ファイル・実コマンドを見て答えさせる
+  （`--allowedTools Read,Grep,Glob,Bash,WebFetch` に限定＝編集不可）。書き込み版は `!w ask`。
+  どちらにも C7ゲートと Y-0憲法を `--append-system-prompt` で常時被せている。
+- 起動は `C:\Users\E24054\discord-bridge.bat`（落ちても20秒で自動復帰）。
+  ログオン時の自動起動はスタートアップフォルダの `discord-bridge-autostart.bat`
+  （`schtasks /SC ONLOGON` は管理者権限が要るため不採用）。
+  二重起動は `logs/discord-bridge.pid` で拒否する（`!w` の二重実行防止）。
+
+⚠️ **`!ask` は Claude Code とセッション上限を共有する。** loop が重い周回を回している最中は
+上限に当たりうる。ユタ滞在中に多用する場合は、この点だけ頭に置くこと。
 
 ### 1通に入れる内容（上から順に・異常があれば先頭に赤で）
 
