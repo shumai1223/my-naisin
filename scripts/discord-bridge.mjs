@@ -322,15 +322,37 @@ const READ_COMMANDS = {
     run: () =>
       run(
         [
-          '$p = Get-CimInstance Win32_Process -Filter "Name=\'claude.exe\'" | Where-Object { $_.CommandLine -like \'*my-naisin*\' };',
-          'Write-Output ("loop稼働: " + $(if ($p) { "YES (" + ($p | Measure-Object).Count + "本)" } else { "NO" }));',
-          'Write-Output ("直近24hのコミット: " + (git log --since=\'24 hours ago\' --oneline | Measure-Object).Count);',
-          'Write-Output ("未push: " + (git rev-list --count origin/main..HEAD));',
-          'Write-Output "--- 直近5件 ---"; git log --format=\'%h %ad %s\' --date=format:\'%m-%d %H:%M\' -5',
+          // ⚠️ loop本体は `C:\Users\E24054\.local\bin\claude.exe ... "/loop ..."` として起動し、
+          //    コマンドラインに **my-naisin という文字列を一切含まない**。
+          //    以前はそれで探していたため常に「稼働: NO」と誤報していた（2026-08-12 👤が発見）。
+          //    `/loop` 引数で見分ける。VS Code側のセッションは --resume なので混ざらない。
+          `$loop = Get-CimInstance Win32_Process -Filter "Name='claude.exe'" | Where-Object { $_.CommandLine -like '*/loop *' };`,
+          `if ($loop) { $ids = ($loop | ForEach-Object { $_.ProcessId }) -join ','; $t = ($loop | Sort-Object CreationDate | Select-Object -First 1).CreationDate; $mins = [int]((Get-Date) - $t).TotalMinutes; Write-Output "loopプロセス: YES pid=$ids ($($t.ToString('MM-dd HH:mm')) 起動 / $mins 分経過)" } else { Write-Output "loopプロセス: NO" };`,
+          // プロセスが生きていても固まっていることがある。実際の進捗はworklogの更新で見る
+          // （watchdogは「70分停滞」で強制再起動する。同じ基準を出す）。
+          `$w = Get-ChildItem docs\\worklog -File -ErrorAction SilentlyContinue | Sort-Object LastWriteTime -Descending | Select-Object -First 1;`,
+          `if ($w) { $m = [int]((Get-Date) - $w.LastWriteTime).TotalMinutes; $warn = $(if ($m -gt 70) { '  ★70分以上停滞=watchdogの再起動基準' } else { '' }); Write-Output "worklog: $($w.Name) / $m 分前に更新$warn" };`,
+          `Write-Output ("watchdog: " + (Get-Content C:\\Users\\E24054\\loop-watchdog.log -Tail 1 -ErrorAction SilentlyContinue));`,
+          `Write-Output ("直近24hのコミット: " + (git log --since='24 hours ago' --oneline | Measure-Object).Count);`,
+          `Write-Output ("未push: " + (git rev-list --count origin/main..HEAD));`,
+          `Write-Output "--- 直近5件 ---"; git log --format='%h %ad %s' --date=format:'%m-%d %H:%M' -5`,
         ].join(' ')
       ),
   },
-  brief: { desc: '日次ブリーフを即実行', run: () => run('npx tsx src/scripts/daily-brief-health.ts') },
+  brief: {
+    desc: '日次ブリーフを即実行',
+    // ⚠️ `npx` / `npm` を PowerShell から呼んではいけない。会社のGPOで npx.ps1 が
+    //    「デジタル署名されていない」として実行ポリシーに弾かれる（2026-08-12 実測）。
+    //    `.bat` 側は cmd 経由で npx.cmd を使うため通っていたので気づかなかった。
+    //    tsx の CLI を node で直接叩けば shim を通らない。
+    // `setx` より前に開かれた窓から起動されていると webhook を持たず、
+    // 「未設定のためskip」で黙って何も送らない。起動順に依存しないよう毎回補う。
+    run: () =>
+      run(
+        "if (-not $env:DISCORD_WEBHOOK_URL) { $env:DISCORD_WEBHOOK_URL = [Environment]::GetEnvironmentVariable('DISCORD_WEBHOOK_URL','User') }; " +
+          'node node_modules\\tsx\\dist\\cli.mjs src/scripts/daily-brief-health.ts'
+      ),
+  },
   gsc: {
     desc: 'GSC総計',
     run: () =>
