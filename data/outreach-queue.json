@@ -1947,6 +1947,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+    },
+    {
+      "id": "juku-eikoh-media",
+      "org": "株式会社栄光(栄光ゼミナール・取材/広報窓口)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.eikoh-seminar.com/eforms/user/app.php?keycode=103_azd06lw804",
+      "contactClass": "b2b",
+      "evidence": "『こちらのフォームは、報道機関からの取材のお申し込みや画像イメージなどのご使用に関するご依頼専用申し込みフォームとなっております。一般のお客様からのご質問はコチラから』と明記され、必須項目に『会社名』欄があり一般利用者(保護者相談室)向け窓口と明確に分離されていることを直接WebFetchで確認しb2b確定",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane3"
     }
   ]
 }
