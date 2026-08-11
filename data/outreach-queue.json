@@ -2339,6 +2339,19 @@
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     },
     {
+      "id": "lane9-jset",
+      "org": "一般社団法人日本教育工学会(JSET・教育工学の学術団体)",
+      "lane": "npo",
+      "channel": "form",
+      "contact": "https://www.jset.gr.jp/contact/form1/",
+      "contactClass": "b2b",
+      "evidence": "公式サイト`jset.gr.jp/contact/`をcurlで取得した生HTMLで、委員会別に分かれた問い合わせボタン群のうち『学会に関して』ボタンのリンク先が`/contact/form1/`であることを直接確認。curlで200 OK到達も確認済み。他は編集委員会(form4)/企画委員会(form5)/研究会委員会(form3)/SIG委員会(form6)/広報委員会(form2)に分かれ、いずれも直接アクセス可能な安定URL(神戸市・札幌市のようなhidden code必須cgiとは異なる)。学会事務局(法人)のためPII非該当",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
       "id": "cert-rekiken-group",
       "org": "歴史能力検定協会(歴史能力検定・歴検・団体受検)",
       "lane": "b2b-saas",
