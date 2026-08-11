@@ -2494,6 +2494,19 @@
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
     },
     {
+      "id": "gakusan-iizuna",
+      "org": "株式会社いいずな書店(英語・国語の高校向け副教材)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.iizuna-shoten.com/contact/",
+      "contactClass": "b2b",
+      "evidence": "公式サイト`iizuna-shoten.com/contact/`をcurlで取得した生HTMLに『先生』『学校名』『ご採用』の語句を確認。同サイトには`/teacher/`という教員専用ページも別途存在し、副教材採用校の先生向け窓口としてb2b確定",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
+    },
+    {
       "id": "cert-rekiken-group",
       "org": "歴史能力検定協会(歴史能力検定・歴検・団体受検)",
       "lane": "b2b-saas",
