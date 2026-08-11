@@ -1505,6 +1505,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "media-allow-corp",
+      "org": "株式会社アローコーポレーション",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.allow-web.com/contact/",
+      "contactClass": "b2b",
+      "evidence": "クライアントが100%大学の大学広報専業代理店。お問い合わせフォームの必須項目に『御社名・団体名』欄があり(個人の場合は別途チェックボックス指定)、法人・大学からの問い合わせを前提とした設計であることを直接WebFetchで確認",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
     }
   ]
 }
