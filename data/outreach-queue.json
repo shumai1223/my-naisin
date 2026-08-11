@@ -2830,6 +2830,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "lane9-careerdesign",
+      "org": "一般社団法人日本キャリアデザイン学会(キャリア形成・キャリア教育研究の学術団体)",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "info@career-design.org",
+      "contactClass": "b2b",
+      "evidence": "公式サイト`career-design.org/contact/`をcurlで取得した生HTMLにinfo@career-design.org(学会自身のドメインの汎用窓口)が平文で明記されていることを直接確認しb2b確定。個人名の記載なし。キャリア形成・キャリア教育研究の学術団体で当サイトの進路指導・キャリア教育コンテンツと関心が重なるためlane9該当",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
