@@ -3142,6 +3142,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+    },
+    {
+      "id": "lane1-tjk-tokyo-shijuku",
+      "org": "東京私塾協同組合(東京都の私塾協同組合)",
+      "lane": "juku",
+      "channel": "email",
+      "contact": "jimukyoku@tjk-jp.org",
+      "contactClass": "b2b",
+      "evidence": "tjk-jp.org/kigyo/(企業の方へ)を直接WebFetchで確認。「企業協賛」ページとして加盟塾への営業・受験相談会参加等の機会を提供しており事務局メール(jimukyoku@tjk-jp.org)とGoogleフォーム申込導線の両方を確認しb2b確定。JJA/AJC/私塾ネット/日本民間教育協議会に続く都道府県単位の私塾協同組合(東京都)",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
     }
   ]
 }
