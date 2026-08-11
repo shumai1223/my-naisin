@@ -1596,6 +1596,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
+    },
+    {
+      "id": "gakusan-gakusho",
+      "org": "株式会社学書",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.gakusho.com/official/contact/",
+      "contactClass": "b2b",
+      "evidence": "学校・塾向け教材出版+教室運営サポート事業。お問い合わせフォームに『個人/法人』選択欄があり、会社名欄の注記に『塾・学校・法人の場合は記入をお願いします』と明記されていることを直接WebFetchで確認",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
     }
   ]
 }
