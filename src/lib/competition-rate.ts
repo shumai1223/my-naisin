@@ -33,6 +33,14 @@ export interface CompetitionRateRecord {
    * 明記する（例: '令和7年度（2025年度）'）。既存46都道府県ファイルは無改修のまま動作する。
    */
   fiscalYear?: string;
+  /**
+   * T-S13A A-0-3用。このレコードの由来先を`sources[]`の添字で明示する後方互換フィールド。
+   * `sources`はファイル単位（同一年度に複数の公表資料PDFがあり得る＝tokyo/fukuoka/aomori/gifu）
+   * のため、`fiscalYear`だけでは出典が一意に決まらないレコードが存在する
+   * （`resolveRecordSourceIndex`参照）。省略時は`fiscalYear`から自動解決を試みる
+   * （その年度の`sources`が1件のみなら一意に決まる）。既存の全都道府県ファイルは無改修で動作する。
+   */
+  sourceIndex?: number;
 }
 
 export interface OfficialSubtotal {
@@ -113,4 +121,33 @@ export function checkAgainstSubtotal(
     actualApplicants: sums.finalApplicants,
     matches: sums.quota === subtotal.quota && sums.finalApplicants === subtotal.finalApplicants,
   };
+}
+
+/**
+ * T-S13A A-0-3: レコード1件がどの`sources[]`要素に由来するかを解決する（純粋関数）。
+ * 優先順位: ①明示的な`record.sourceIndex` ②`record.fiscalYear`（省略時は`sources[0].fiscalYear`）に
+ * 一致する`sources`が**ちょうど1件**ならそれを自動解決 ③複数件/0件一致なら`null`（一意に決まらない
+ * ＝A-2の出典列付きCSVには載せられない。C0-②「1データ点1出典」を満たせないレコード）。
+ * tokyo/fukuoka/aomori/gifuのように同一年度に複数の公表資料PDFが存在する県で、`sourceIndex`未設定の
+ * レコードがどれだけ機械的に自動解決できるか（＝手動バックフィルが本当に必要な件数）を算出する用途。
+ */
+export function resolveRecordSourceIndex(
+  record: CompetitionRateRecord,
+  sources: CompetitionRateSource[]
+): number | null {
+  if (record.sourceIndex !== undefined) {
+    return record.sourceIndex >= 0 && record.sourceIndex < sources.length ? record.sourceIndex : null;
+  }
+  const year = record.fiscalYear ?? sources[0]?.fiscalYear;
+  if (year === undefined) return null;
+  const matches = sources.reduce<number[]>((acc, s, i) => {
+    if (s.fiscalYear === year) acc.push(i);
+    return acc;
+  }, []);
+  return matches.length === 1 ? matches[0] : null;
+}
+
+/** 1県分のrecords全体について、出典が一意に解決できないレコード数を数える（A-0-3の進捗計測用）。 */
+export function countUnresolvedSources(file: PrefectureCompetitionRateFile): number {
+  return file.records.filter((r) => resolveRecordSourceIndex(r, file.sources) === null).length;
 }
