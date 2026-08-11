@@ -3051,6 +3051,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
+    },
+    {
+      "id": "lane5-shogakukan-kyoikugijutsu",
+      "org": "株式会社小学館(『みんなの教育技術』創刊90余年の教職員向け誌を母体とする教育情報メディア・メディアビジネス局)",
+      "lane": "media",
+      "channel": "form",
+      "contact": "https://adpocket.shogakukan.co.jp/contact",
+      "contactClass": "b2b",
+      "evidence": "adpocket.shogakukan.co.jp/media/minnano-kyoiku/(広告出稿ページ)経由で発見。担当者個人のメールアドレス(atsushi.kojima@shogakukan.jp)はPII該当のため不採用、代わりにadpocket.shogakukan.co.jp/contactの部署宛(小学館メディアビジネス局)一般問い合わせフォーム(お名前/メールアドレスのみ必須・個人名非含有)を直接WebFetchで確認しb2b確定。小学校教員向け教育情報メディアで当サイトの隣接読者層",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
     }
   ]
 }
