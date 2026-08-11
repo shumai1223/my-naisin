@@ -2207,6 +2207,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane3"
+    },
+    {
+      "id": "juku-ichishin-press",
+      "org": "株式会社市進ホールディングス(市進学院・取材専用窓口)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://reg18.smp.ne.jp/regist/is?SMPFORM=ncpd-ljngke-68520ab90544a98fa3bcd91ef895e452",
+      "contactClass": "b2b",
+      "evidence": "IRサイトのお問い合わせページに『取材に関するお問い合わせ』と『IR、その他に関するお問い合わせ』の2つの専用フォームが分離されていることを直接WebFetchで確認しb2b確定(東証上場・学研が37%出資)",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane3"
     }
   ]
 }
