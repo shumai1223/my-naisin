@@ -2103,6 +2103,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "career-miraikyoiku-sdgsquest",
+      "org": "未来教育株式会社(SDGs QUEST みらい甲子園)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://sdgs.ac/contact",
+      "contactClass": "b2b",
+      "evidence": "『教員の皆さへ』と明記された専用ページ(/teachers/)が一般(生徒向け/students)ページとは別に存在し、『教員向けの研修会を開催』『SDGsアクティブスクール制度』等の学校向けサービスが専用問い合わせフォームへ誘導されていることを直接WebFetchで確認しb2b確定。一般社団法人未来教育推進機構(UMEDAI・既存エントリcareer-umedai-sdgs-awards)とは別法人",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     }
   ]
 }
