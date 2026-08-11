@@ -172,11 +172,47 @@ const ASK_GUARD = [
   '  - Stripe の操作、価格の決定',
   '  - PII（生徒の氏名・住所・学校名・個人のメールアドレス）をファイルに記録すること',
   '  - 学校別の偏差値・合格ボーダーの独自推定（Y-0憲法。教委等の公表値のみ扱う）',
+  '',
+  '【ツールが足りないとき】調査モードでは Bash が読み取り系コマンドだけに絞られている。',
+  '  必要な操作が拒否されたら、無理に迂回せず「この作業には `!w ask` が必要です」と明記して終わること。',
 ].join('\n');
 
 /**
+ * `!ask`（調査モード）で渡すツールの許可リスト。
+ *
+ * ⚠️ **`Bash` を丸ごと許可してはいけない。** `Bash` が通ると `echo > file` や
+ * `git commit` が実行でき、`Edit`/`Write` を外した意味が消える（2026-08-12 👤が指摘）。
+ * そのため Bash は**コマンド単位**で、状態を変えないものだけを列挙する。
+ * ここに無いコマンドが必要になった場合は、エージェント側が「`!w ask` が要る」と答える。
+ */
+const ASK_READONLY_TOOLS = [
+  'Read',
+  'Grep',
+  'Glob',
+  'WebFetch',
+  'WebSearch',
+  'Bash(git log:*)',
+  'Bash(git show:*)',
+  'Bash(git diff:*)',
+  'Bash(git status:*)',
+  'Bash(git branch:*)',
+  'Bash(git rev-list:*)',
+  'Bash(node scripts/d1q.mjs:*)', // 書き込みSQLを自前で拒否する読み取り専用ヘルパ
+  'Bash(node scripts/gsc-pull.mjs:*)',
+  'Bash(npm run gsc:*)',
+  'Bash(npm run ga4:*)',
+  'Bash(npm run typecheck:*)',
+  'Bash(npm test:*)',
+  'Bash(ls:*)',
+  'Bash(wc:*)',
+];
+
+/** 調査モードで明示的に外すもの（許可リストと二重に効かせる）。 */
+const ASK_DENIED_TOOLS = ['Edit', 'Write', 'NotebookEdit'];
+
+/**
  * claude CLI を1本だけ起動して、その回答テキストを返す。
- * write=false のときは編集系ツールを渡さない（読み取り＋調査のみ）。
+ * write=false のときは編集系ツールを渡さず、Bash もコマンド単位に絞る。
  */
 function runClaude(prompt, { write }) {
   const args = [
@@ -193,7 +229,8 @@ function runClaude(prompt, { write }) {
     args.push('--permission-mode', 'bypassPermissions');
   } else {
     // 許可リストに無いツールは自動的に拒否される（fail-closed）
-    args.push('--allowedTools', 'Read,Grep,Glob,Bash,WebFetch');
+    args.push('--allowedTools', ...ASK_READONLY_TOOLS);
+    args.push('--disallowedTools', ...ASK_DENIED_TOOLS);
   }
   return new Promise((resolve) => {
     const child = spawn(CLAUDE_EXE, args, {
@@ -243,7 +280,8 @@ const READ_COMMANDS = {
         '',
         '【AIに調べさせる】',
         '  !ask <質問>      Claude Codeを1本起動し、ファイルやコマンドを実際に見て答えさせる',
-        '                   （読み取り専用。編集・commitはしない。数分かかることがある）',
+        '                   （調査モード。Edit/Writeは渡さず、Bashも読み取り系コマンドだけ）',
+        '                   （数分かかることがある）',
         '',
         '【書き込み（!w を付ける）】',
         '  !w ask <指示>    上記の書き込み版。ファイル修正・commit・pushまでやらせる',
@@ -361,7 +399,7 @@ client.on('messageCreate', async (msg) => {
     if (!q) return void (await msg.reply('`!ask` の後に質問を書いてください。例: `!ask 昨日のD1のリード件数と、増えた分の流入元は？`'));
     running = true;
     log(`ASK user=${msg.author.id} len=${q.length} q=${q.slice(0, 200)}`);
-    await msg.reply(`🤖 Claude Code を起動しました（${ASK_MODEL}・読み取り専用）。調べて返すまで数分かかることがあります。`);
+    await msg.reply(`🤖 Claude Code を起動しました（${ASK_MODEL}・調査モード＝書き込み不可）。調べて返すまで数分かかることがあります。`);
     await msg.channel.sendTyping().catch(() => {});
     const r = await runClaude(q, { write: false });
     running = false;
