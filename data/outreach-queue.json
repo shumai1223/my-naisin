@@ -2934,6 +2934,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-jera",
+      "org": "一般社団法人日本教育学会(JERA・教育学の代表的学術団体)",
+      "lane": "npo",
+      "channel": "form",
+      "contact": "https://www.jera.jp/contact/",
+      "contactClass": "b2b",
+      "evidence": "公式サイトjera.jp/contact/を直接WebFetchで確認。メールアドレスの記載は無いが、同ページにContact Form 7(WordPress標準プラグイン)による問い合わせフォームが直接埋め込まれている(ページ自体がフォームのエンドポイント)。法人格を持つ学会事務局のためPII非該当。教育学全般を扱う代表的学術団体で日本教育心理学会・日本教育社会学会に続くlane9横展開",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
