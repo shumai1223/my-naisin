@@ -3129,6 +3129,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+    },
+    {
+      "id": "lane1-private-education-org",
+      "org": "日本民間教育協議会(民間教育各分野が連携する全国協議会)",
+      "lane": "juku",
+      "channel": "form",
+      "contact": "https://forms.gle/fKhdjkngZdLeetDP7",
+      "contactClass": "b2b",
+      "evidence": "private-education.org/p/contact.htmlが実際にGoogleフォーム(forms.gle/fKhdjkngZdLeetDP7)へ301リダイレクトすることを直接WebFetchで確認しb2b確定(法人団体運営の実在フォーム)。「民間教育の各分野の垣根を越えて」連携する全国横断団体でJJA/AJC/私塾ネットとは異なる業界横断型の協議会",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
     }
   ]
 }
