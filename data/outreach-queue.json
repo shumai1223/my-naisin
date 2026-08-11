@@ -2713,6 +2713,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-jces",
+      "org": "日本比較教育学会(比較教育学・国際教育研究の学術団体)",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "g020jces-mng@ml.gakkai.ne.jp",
+      "contactClass": "b2b",
+      "evidence": "公式サイト`gakkai.ne.jp/jces/`をcurlで取得した生HTMLにg020jces-mng@ml.gakkai.ne.jp(東京事務局・会員管理システムSOLTI/年会費関連窓口、ガリレオ学会業務情報化センター運営)が平文で明記されていることを直接確認しb2b確定。日本カリキュラム学会と同じml.gakkai.ne.jp運営の法人窓口でPII非該当(名古屋事務局jcesjimu@outlook.jpは図書送付用の別窓口で個人アカウント風ドメインのため不採用)。比較教育学・国際教育制度研究の学術団体でlane9該当",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
