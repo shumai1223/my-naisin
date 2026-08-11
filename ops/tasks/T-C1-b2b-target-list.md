@@ -333,16 +333,18 @@ lane として残すなら「データ販売」ではなく「掲載・相互リ
 
 **確定+暫定の合計（重複除去前・粗集計）＝ 59+50+23+17+13+1,571+127+4 ≈ 1,864**（lane6の1,571校が支配的。lane6を除く「B2B窓口として実務的に接触しうる法人」は**約293社**）。
 
-## サブタスク1（連絡経路の判別）進捗（2026-08-11 15:54更新・第5版）
+## サブタスク1（連絡経路の判別）進捗（2026-08-11 20:3x更新・第6版）
 
-lane1〜lane5全てに着手し`data/outreach-queue.json`へ実サイト訪問済みの結果を記録中。2026-08-11 15:54時点の内訳（`node -e`でJSON集計・実測・queue総数156件）:
+lane1〜lane5・lane9(高DR .jp新設)に着手し`data/outreach-queue.json`へ実サイト訪問済みの結果を記録中。2026-08-11 20:3x時点の内訳（`node -e`でJSON集計・実測・queue総数191件）:
 
 | 区分 | 件数 |
 |---|---:|
-| contactClass='b2b'（status='candidate'・下書き未作成） | **100件** |
+| contactClass='b2b'（status='candidate'・下書き未作成） | **132件** |
 | contactClass='unknown'（status='excluded'・送信対象外） | 5件 |
-| 既存の教委/メディア/相互リンク分（queued・変更なし） | 51件 |
-| T-C1由来lane別内訳 | lane1=24件・lane2=25件・lane3=4件・lane4=40件・lane5=9件(T-C1由来合計102件、`node -e`実測で機械集計・確定値。合計102がcandidate100+一部excludedを含むため一致しない点に注意) |
+| queued（教委+メディア+相互リンク+市立高校教委3件のGmail下書き済み分） | 54件 |
+| T-C1由来lane別内訳（sourceDocの#laneタグで機械集計） | lane1=24件・lane2=26件・lane3=8件・lane4=60件・lane5=9件・lane8=1件・lane9=9件 |
+
+⚠️ **20:1x台の一部commitメッセージ内の「candidate計N件」表記は不正確**（18:2x〜19:3xの間に市立高校教委3件をcandidate→queuedへ昇格させた際、以降のcommitメッセージがその-3を反映せず旧基準のまま加算し続けていた）。**実データ(`data/outreach-queue.json`)自体は常に正しく、影響はcommitメッセージ/worklogの表記のみ**。以後は都度`node -e`で実測してから記載する。
 
 **帳簿ズレ是正の経緯(2026-08-11 15:1x〜15:3x)**: この日、JJA/JAPETリスト由来6社(モノグサ/スタディプラス/ライフイズテック/POPER/GMOメディア/アタマプラス)とlane3の21法人が、本文の「確定N社」タリーには含まれていたが実際には`outreach-queue.json`に未追加という帳簿ズレを2件発見・是正した。**教訓**: 「lane◯確定N社」のようなカウント更新時は、そのカウントに含まれる会社が実際にoutreach-queue.jsonへ追加済みか`node -e`で定期的に突合すること(本文中盤の該当箇所に詳細記録)。
 
