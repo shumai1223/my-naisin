@@ -1986,6 +1986,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane3"
+    },
+    {
+      "id": "media-jyukusagasu-info",
+      "org": "株式会社ジュウナナワーク(学習塾口コミサイト『ジュクサガス』)",
+      "lane": "b2b-saas",
+      "channel": "email",
+      "contact": "contact@jyukusagasu.com",
+      "contactClass": "b2b",
+      "evidence": "『学習塾様専用サイト』(jyukusagasu.info)が一般利用者向けサイトとは別に存在し、ページ内に『●利用者様用 info@jyukusagasu.com ●学習塾様用 contact@jyukusagasu.com』と明記され、専用メールアドレスと専用問い合わせフォーム(/contact/)が明確に分離されていることを直接WebFetchで確認しb2b確定",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
     }
   ]
 }
