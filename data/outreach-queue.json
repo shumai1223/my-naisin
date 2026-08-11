@@ -1375,6 +1375,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "gakusan-shinko-keirinkan",
+      "org": "新興出版社啓林館",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.shinko-keirin.co.jp/keirinkan/contact/",
+      "contactClass": "b2b",
+      "evidence": "副教材ご審査用見本・パンフレット請求のページに『送付は中学校・高等学校での採用をご検討中の学校の先生に限ります』と明記されていることを直接WebFetchで確認",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
     }
   ]
 }
