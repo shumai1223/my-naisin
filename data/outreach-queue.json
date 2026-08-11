@@ -3077,6 +3077,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "lane1-jja",
+      "org": "公益社団法人全国学習塾協会(JJA・学習塾業界の全国団体)",
+      "lane": "juku",
+      "channel": "form",
+      "contact": "https://jja.or.jp/contact/",
+      "contactClass": "b2b",
+      "evidence": "jja.or.jp/contact/を直接WebFetchで確認。「お問合せ・資料請求フォーム」という実在フォーム(お名前/メールアドレス/電話番号/お問い合わせ項目が必須)を確認しb2b確定。学習塾業界を代表する公益社団法人で加盟塾への情報提供・提携先として高い適合度",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
     }
   ]
 }
