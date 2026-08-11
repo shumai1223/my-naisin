@@ -2233,6 +2233,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "cert-newskentei-group",
+      "org": "日本ニュース時事能力検定協会(ニュース時事能力検定・N検・団体受検)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.newskentei.jp/inquiry.html",
+      "contactClass": "b2b",
+      "evidence": "『個人受検のお申し込みについて』『団体のご担当者様へ』の2つの独立したメニューセクションに分離されており、団体受検専用の資料請求・問い合わせフォームが存在することを直接WebFetchで確認しb2b確定。学校・塾・企業向けの活用事例ページも別途あり",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     }
   ]
 }
