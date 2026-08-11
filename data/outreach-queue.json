@@ -2077,6 +2077,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "edtech-feelnote-hamagakuen",
+      "org": "株式会社浜学園(eポートフォリオサービス『Feelnote』運営・販売は株式会社Xview)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://feel-note.com/contact/",
+      "contactClass": "b2b",
+      "evidence": "学校導入検討者向け専用問い合わせフォームがあり、必須項目に『会社名・団体名』『担当者氏名』欄があることを直接WebFetchで確認しb2b確定。個人ユーザーは別途アプリダウンロードで対応する設計と推定され、団体・組織単位での導入検討を前提としたフォーム設計",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     }
   ]
 }
