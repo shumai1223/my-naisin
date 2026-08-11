@@ -2025,6 +2025,32 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "npo-katariba-myproject",
+      "org": "認定NPO法人カタリバ(全国高校生マイプロジェクト・探究学習支援)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://docs.google.com/forms/d/e/1FAIpQLSdhUP0ebMdfVb1oJqt4CsKwqqc-nAE267XA-WLfR0_8Nd5SJQ/viewform",
+      "contactClass": "b2b",
+      "evidence": "『高校にキャリア学習の出張授業を届けることから活動を始めた』団体で、高校・教育機関職員専用ページ(/school/)が一般向けとは別に存在し、全国高校生マイプロジェクトの専用申込フォーム(Googleフォーム)があることを直接WebFetchで確認しb2b確定",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane8"
+    },
+    {
+      "id": "edtech-igs-aigrow",
+      "org": "IGS株式会社(非認知能力アセスメントツール『Ai GROW』)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.aigrow.jp/inq",
+      "contactClass": "b2b",
+      "evidence": "全国46都道府県・約500校(小中高)で導入される学校向け専業アセスメントツール(生徒個人が直接購入する製品ではない)であり、専用の問い合わせ/資料請求フォームがあることを直接WebFetchで確認しb2b確定",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     }
   ]
 }
