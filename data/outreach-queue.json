@@ -2090,6 +2090,19 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "career-umedai-sdgs-awards",
+      "org": "一般社団法人未来教育推進機構(UMEDAI・全国高校生SDGs探究AWARDS)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://sdgs-awards.umedai.jp/contact/",
+      "contactClass": "b2b",
+      "evidence": "文部科学省後援の高校生探究活動アワード(前年度エントリー1,671件)を主催する団体で、専用問い合わせフォームの必須項目に『学校/団体名』欄があることを直接WebFetchで確認しb2b確定。⚠️WebSearch要約が提示したメールアドレス(sdgs-awards@umedai.jp)はページ内で確認できず(スパムフィルタ許可リスト文脈での言及のみ)formチャネルのみ採用",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     }
   ]
 }
