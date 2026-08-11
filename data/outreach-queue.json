@@ -1544,6 +1544,32 @@
       "status": "candidate",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "edtech-jip-saksak",
+      "org": "日本電子計算株式会社(SakSak出願)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.jip.co.jp/inquiry/inquiry.cgi?keywords=proservice&p_id=23",
+      "contactClass": "b2b",
+      "evidence": "大学向けインターネット出願・入試アウトソーシングサービス『SakSak出願』(全国41大学導入実績)の専用問い合わせフォームURLを直接WebFetchで確認",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "media-caritas",
+      "org": "株式会社キャリタス",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.career-tasu.co.jp/contact/",
+      "contactClass": "b2b",
+      "evidence": "教育機関向けサービス(学生募集/入試・教務/キャリア)の3カテゴリで問い合わせ導線が構成され、別途『教育機関ご担当者様へ』専用ページも存在することを直接WebFetchで確認。キャリタス進学は全国のほぼ全ての大学・短大掲載実績あり",
+      "verifiedAt": "2026-08-11",
+      "status": "candidate",
+      "addedAt": "2026-08-11",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
     }
   ]
 }
