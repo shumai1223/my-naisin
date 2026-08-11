@@ -2869,6 +2869,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-kodomogakkai",
+      "org": "一般社団法人日本子ども学会(子どもの成育環境・発達研究の学術団体)",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "kodomo-post@as.bunken.co.jp",
+      "contactClass": "b2b",
+      "evidence": "公式サイト`kodomogakkai.jp/admission.html`をcurlで取得した生HTMLにJS組み立て型(var username='kodomo-post'; var hostname='as.bunken.co.jp')でメールアドレスが構成されていることを直接確認しkodomo-post@as.bunken.co.jpと復元しb2b確定(as.bunken.co.jp横展開9件目)。個人名の記載なし。子どもの成育環境・発達研究の学術団体でlane9該当",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
