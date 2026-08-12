@@ -3636,6 +3636,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
+    },
+    {
+      "id": "lane3-koenokyoikusha",
+      "org": "株式会社声の教育社",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://koenokyoikusha.co.jp/contact",
+      "contactClass": "b2b",
+      "evidence": "koenokyoikusha.co.jp/contactを直接WebFetchで確認。お客様区分に塾関係者/学校関係者(個人・書店関係者と並ぶ選択肢)、お問い合わせ区分に高校受験等がありb2b確定。首都圏公立高校入試過去問集の老舗出版社で当サイトのテーマと直接重複(JJA企業会員一覧より発掘)",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane3"
     }
   ]
 }
