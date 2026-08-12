@@ -4052,6 +4052,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-jasep",
+      "org": "日本教育政策学会",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "jasep11th@gmail.com",
+      "contactClass": "b2b",
+      "evidence": "jasep-web.jpn.orgの事務局連絡ページを直接WebFetchで確認。事務局宛jasep11th@gmail.com(組織名+期数ベースで個人名を含まない・近隣に事務局長石井拓児氏の役職名の記載はあるがアドレス自体は個人名非含有)を採用。教育政策研究の学術団体",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
