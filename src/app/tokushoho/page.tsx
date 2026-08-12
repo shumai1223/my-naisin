@@ -79,8 +79,9 @@ export default function TokushohoPage() {
               <dt className="font-semibold text-slate-700">販売価格</dt>
               <dd className="text-slate-600 sm:col-span-2">
                 <ul className="space-y-1">
-                  <li>{TIER_POLICIES.pro.label}: {formatTierPrice('pro')}（税込・月額・サブスクリプション）</li>
-                  <li>{TIER_POLICIES.scale.label}: {formatTierPrice('scale')}（データライセンス・年額契約を含む）</li>
+                  <li>{TIER_POLICIES.pro.label}: {formatTierPrice('pro')}（税込・月額・サブスクリプション・非商用）</li>
+                  <li>{TIER_POLICIES.business.label}: {formatTierPrice('business')}（税込・年額契約・商用可）</li>
+                  <li>{TIER_POLICIES.scale.label}: {formatTierPrice('scale')}（データライセンス・年額契約・オプション加算あり）</li>
                 </ul>
                 詳細は
                 <Link href="/developers" className="mx-1 font-semibold text-blue-600 underline">
@@ -108,7 +109,8 @@ export default function TokushohoPage() {
             <div className="grid gap-1 py-3 sm:grid-cols-3 sm:gap-4">
               <dt className="font-semibold text-slate-700">お支払い時期</dt>
               <dd className="text-slate-600 sm:col-span-2">
-                クレジットカード決済の場合、お申し込み時点で初回課金し、以後は毎月同日に自動課金されます。
+                月額プラン（Pro）はクレジットカード決済の場合、お申し込み時点で初回課金し、以後は毎月同日に自動課金されます。
+                年額プラン（Business・Enterprise）は個別契約書に基づき、契約時に一括でお支払いいただきます。
               </dd>
             </div>
             <div className="grid gap-1 py-3 sm:grid-cols-3 sm:gap-4">

@@ -11,7 +11,7 @@
  *    キー＋クォータを課して「誰がどれだけ使うか＝堀の証拠」を可視化し、課金へ橋渡しする。
  */
 
-export type ApiTier = 'anonymous' | 'free' | 'pro' | 'scale';
+export type ApiTier = 'anonymous' | 'free' | 'pro' | 'business' | 'scale';
 
 export interface TierPolicy {
   tier: ApiTier;
@@ -28,8 +28,10 @@ export interface TierPolicy {
   prioritySupport: boolean;
   /** データ再配布ライセンス＋維持されるフィード・更新通知（年額・有料の差別化点③）。 */
   dataLicense: boolean;
-  /** 価格表示（円・税別の目安。0=無料、-1=個別見積り）。 */
+  /** 価格表示（円・税別の目安。0=無料、-1=個別見積り）。月額課金のプランのみ使う。 */
   monthlyPriceJpy: number;
+  /** 年額課金プランの価格（円）。0=対象外。Business/Enterpriseはここを使う（月額換算ではなく年額契約）。 */
+  annualPriceJpy: number;
   /** 想定対象。 */
   audience: string;
   /** SLA文言。 */
@@ -55,6 +57,7 @@ export const TIER_POLICIES: Record<ApiTier, TierPolicy> = {
     prioritySupport: false,
     dataLicense: false,
     monthlyPriceJpy: 0,
+    annualPriceJpy: 0,
     audience: 'お試し・少量の手動利用・AIアシスタントの単発参照',
     sla: 'ベストエフォート（保証なし）',
   },
@@ -69,6 +72,7 @@ export const TIER_POLICIES: Record<ApiTier, TierPolicy> = {
     prioritySupport: false,
     dataLicense: false,
     monthlyPriceJpy: 0,
+    annualPriceJpy: 0,
     audience: '個人開発・検証・小規模アプリ',
     sla: 'ベストエフォート（保証なし）',
   },
@@ -76,27 +80,47 @@ export const TIER_POLICIES: Record<ApiTier, TierPolicy> = {
     tier: 'pro',
     label: 'Pro',
     ratePerMinute: 600,
-    monthlyQuota: 200_000,
-    attributionRequired: false, // ★出典明記不要（商用アプリの実需）
-    commercialUse: true,
-    prioritySupport: true, // ★SLA・優先サポート
+    // 2026-08-13価格決定（ops/PRICING_OPTIONS.md）: 商用利用はBusinessへ誘導するため
+    // 月次クォータをFreeと同水準の10,000に統一（旧200,000はBusinessへ移動）。
+    monthlyQuota: 10_000,
+    attributionRequired: false, // ★出典明記不要
+    commercialUse: false, // ★2026-08-13: Proは非商用限定。商用はBusiness（第三者提供する場合はBusiness相当額を遡及請求）
+    prioritySupport: true,
     dataLicense: false,
     monthlyPriceJpy: 9_800,
-    audience: '受験アプリ・進路SaaS・塾チェーンの本番組み込み',
-    sla: '99.9%（ベストエフォート・障害時は翌月クレジット）',
+    annualPriceJpy: 117_600,
+    audience: '個人開発者・社内利用・検証（非商用）',
+    sla: 'SLAとしての保証は行わず、稼働実績を公開（障害時は契約期間相当分の翌月クレジット）',
+  },
+  business: {
+    tier: 'business',
+    label: 'Business',
+    // 2026-08-13新設（ops/PRICING_OPTIONS.md）。旧Proの月次クォータ(200,000)をここへ移動。
+    // ratePerMinuteはpro(600)とscale(3,000)の中間に置き、階層を単調増加に保つ。
+    ratePerMinute: 1_200,
+    monthlyQuota: 200_000,
+    attributionRequired: false,
+    commercialUse: true, // ★第三者への提供・自社商品への組み込みが可能
+    prioritySupport: true,
+    dataLicense: false,
+    monthlyPriceJpy: -1, // 年額契約のため月額表示は使わない
+    annualPriceJpy: 240_000, // 初年度価格（改定トリガーはops/PRICING_OPTIONS.md修正6）
+    audience: '模試会社・塾管理SaaS・中堅塾本部（商用・自社サービス利用者への提供）',
+    sla: 'SLAとしての保証は行わず、稼働実績を公開（障害時は契約期間を延長）',
   },
   scale: {
     tier: 'scale',
-    label: 'Scale / Enterprise',
+    label: 'Enterprise',
     ratePerMinute: 3_000,
     monthlyQuota: 0, // 個別
     attributionRequired: false,
     commercialUse: true,
     prioritySupport: true,
     dataLicense: true, // ★データ再配布＋維持フィード＋更新通知（年額ライセンス）
-    monthlyPriceJpy: -1, // 個別見積り（年額データライセンス含む）
+    monthlyPriceJpy: -1, // 年額契約のため月額表示は使わない
+    annualPriceJpy: 1_000_000, // 基本料金。実提示は¥100万／¥150万（+再配布権）／¥250万（フル）の3点
     audience: '大規模EdTech・データライセンス（CSV/JSON定期更新の年額契約）',
-    sla: '個別SLA・専用サポート',
+    sla: '個別SLA・専用サポート（契約条件は個別に定める）',
   },
 };
 
@@ -113,6 +137,7 @@ export interface TierCapability {
 export const TIER_CAPABILITY_MATRIX: TierCapability[] = [
   { label: '内申点API（都度クエリ・AI被引用）', has: () => true },
   { label: 'CSV/JSON スナップショット取得', has: () => true },
+  { label: '商用利用（第三者への提供・自社商品への組み込み）', has: (p) => p.commercialUse },
   { label: '高レート上限', has: (p) => p.ratePerMinute >= 600 },
   { label: '大量月次クォータ', has: (p) => p.monthlyQuota === 0 || p.monthlyQuota >= 200_000 },
   { label: '出典明記なしで利用', has: (p) => !p.attributionRequired },
@@ -120,9 +145,9 @@ export const TIER_CAPABILITY_MATRIX: TierCapability[] = [
   { label: 'データ再配布ライセンス・更新通知フィード', has: (p) => p.dataLicense },
 ];
 
-/** DBに保存される tier 文字列（free/pro/scale）を安全に正規化する。 */
+/** DBに保存される tier 文字列（free/pro/business/scale）を安全に正規化する。 */
 export function normalizeTier(raw: string | null | undefined): Exclude<ApiTier, 'anonymous'> {
-  if (raw === 'pro' || raw === 'scale') return raw;
+  if (raw === 'pro' || raw === 'business' || raw === 'scale') return raw;
   return 'free';
 }
 
@@ -146,9 +171,13 @@ export function remainingInWindow(usedInWindow: number, tier: ApiTier): number {
   return Math.max(0, policy.ratePerMinute - usedInWindow);
 }
 
-/** 価格表示の人間可読フォーマット。 */
+/** 価格表示の人間可読フォーマット。年額契約プラン（annualPriceJpy>0）はそちらを優先表示する。 */
 export function formatTierPrice(tier: ApiTier): string {
   const policy = getTierPolicy(tier);
+  if (policy.annualPriceJpy > 0) {
+    const monthlyEquivalent = Math.round(policy.annualPriceJpy / 12);
+    return `年額 ¥${policy.annualPriceJpy.toLocaleString('ja-JP')}〜（月${monthlyEquivalent.toLocaleString('ja-JP')}円相当）`;
+  }
   if (policy.monthlyPriceJpy < 0) return '個別見積り';
   if (policy.monthlyPriceJpy === 0) return '無料';
   return `月額 ¥${policy.monthlyPriceJpy.toLocaleString('ja-JP')}〜`;

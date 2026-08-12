@@ -19,21 +19,31 @@ import { createRateLimiter, extractApiKey, gateApiRequest, SAME_ORIGIN_RATE_PER_
 import { computeFreemiumFunnel } from '../api-keys';
 
 describe('api-tiers（ティア表の正準データ）', () => {
-  test('4ティアが揃い、レートは anonymous < free < pro < scale で単調増加', () => {
-    const order = ['anonymous', 'free', 'pro', 'scale'] as const;
+  test('5ティアが揃い、レートは anonymous < free < pro < business < scale で単調増加', () => {
+    const order = ['anonymous', 'free', 'pro', 'business', 'scale'] as const;
     const rates = order.map((t) => TIER_POLICIES[t].ratePerMinute);
     for (let i = 1; i < rates.length; i += 1) {
       expect(rates[i]).toBeGreaterThan(rates[i - 1]);
     }
   });
 
-  test('normalizeTier は不正値を free に丸め、pro/scale は保持', () => {
+  test('normalizeTier は不正値を free に丸め、pro/business/scale は保持', () => {
     expect(normalizeTier('pro')).toBe('pro');
+    expect(normalizeTier('business')).toBe('business');
     expect(normalizeTier('scale')).toBe('scale');
     expect(normalizeTier('free')).toBe('free');
     expect(normalizeTier('nonsense')).toBe('free');
     expect(normalizeTier(null)).toBe('free');
     expect(normalizeTier(undefined)).toBe('free');
+  });
+
+  test('2026-08-13価格決定: Proは非商用限定・Businessは商用可（1問判定の基準）', () => {
+    expect(TIER_POLICIES.pro.commercialUse).toBe(false);
+    expect(TIER_POLICIES.business.commercialUse).toBe(true);
+    expect(TIER_POLICIES.scale.commercialUse).toBe(true);
+    // 旧Proの月次クォータ(200,000)はBusinessへ移動し、ProはFreeと同水準(10,000)
+    expect(TIER_POLICIES.pro.monthlyQuota).toBe(10_000);
+    expect(TIER_POLICIES.business.monthlyQuota).toBe(200_000);
   });
 
   test('月次クォータ判定：quota=0 は無制限、有限クォータは境界で false', () => {
@@ -51,11 +61,13 @@ describe('api-tiers（ティア表の正準データ）', () => {
     expect(remainingInWindow(999_999, 'free')).toBe(0);
   });
 
-  test('formatTierPrice：無料/有料/個別の表記', () => {
+  test('formatTierPrice：無料/月額/年額の表記', () => {
     expect(formatTierPrice('anonymous')).toBe('無料');
     expect(formatTierPrice('free')).toBe('無料');
     expect(formatTierPrice('pro')).toContain('¥');
-    expect(formatTierPrice('scale')).toBe('個別見積り');
+    // business/scaleは年額契約(annualPriceJpy)を優先表示する（2026-08-13価格決定）
+    expect(formatTierPrice('business')).toBe('年額 ¥240,000〜（月20,000円相当）');
+    expect(formatTierPrice('scale')).toBe('年額 ¥1,000,000〜（月83,333円相当）');
   });
 
   test('periodKey は YYYY-MM 形式（UTC基準）', () => {

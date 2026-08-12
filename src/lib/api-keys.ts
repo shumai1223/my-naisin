@@ -266,7 +266,7 @@ export async function getFreemiumFunnel(now: Date = new Date()): Promise<Freemiu
         )
         .bind(period)
         .all<{ n: number }>(),
-      db.prepare(`SELECT COUNT(*) AS n FROM api_keys WHERE tier IN ('pro', 'scale')`).all<{ n: number }>(),
+      db.prepare(`SELECT COUNT(*) AS n FROM api_keys WHERE tier IN ('pro', 'business', 'scale')`).all<{ n: number }>(),
       db
         .prepare(`SELECT COUNT(DISTINCT email) AS n FROM api_keys WHERE tier = 'free' AND email IS NOT NULL`)
         .all<{ n: number }>(),
@@ -274,7 +274,7 @@ export async function getFreemiumFunnel(now: Date = new Date()): Promise<Freemiu
         .prepare(
           `SELECT COUNT(DISTINCT f.email) AS n FROM api_keys f
            WHERE f.tier = 'free' AND f.email IS NOT NULL
-           AND EXISTS (SELECT 1 FROM api_keys p WHERE p.email = f.email AND p.tier IN ('pro', 'scale'))`
+           AND EXISTS (SELECT 1 FROM api_keys p WHERE p.email = f.email AND p.tier IN ('pro', 'business', 'scale'))`
         )
         .all<{ n: number }>(),
     ]);

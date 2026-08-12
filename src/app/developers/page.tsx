@@ -707,8 +707,29 @@ print(naishin["total"])  # -> 52`;
           <p className="mb-4 text-sm leading-relaxed text-slate-600">
             <strong>キー無しでもそのまま利用できます</strong>（匿名ティア・出典明記が条件）。
             継続利用や大量呼び出しには下の<strong>無料APIキー</strong>を発行するとレート上限と月次クォータが上がります。
-            本番組み込み（受験アプリ・進路SaaS・塾チェーン）やデータライセンス（CSV/JSONの定期更新）は Pro / Scale をご利用ください。
+            自分・社内だけで使うなら Pro、自社サービスの利用者に提供する（第三者へ渡す）なら Business、
+            大規模利用やデータライセンス（CSV/JSONの定期更新）は Enterprise をご利用ください。
           </p>
+
+          {/* Pro / Business の1問判定（2026-08-13価格決定・修正1） */}
+          <div className="mb-4 rounded-xl border border-indigo-200 bg-indigo-50 p-4">
+            <p className="text-sm font-bold text-indigo-900">
+              「あなた以外の第三者が、このデータを使いますか？」
+            </p>
+            <ul className="mt-2 space-y-1 text-sm text-indigo-800">
+              <li>
+                <strong>いいえ</strong>（自分で使う・社内で使う・検証する） → <strong>Pro</strong>
+              </li>
+              <li>
+                <strong>はい</strong>（自社サービスの利用者に提供する・自社商品に組み込む） → <strong>Business</strong>
+              </li>
+            </ul>
+            <p className="mt-2 text-xs text-indigo-700">
+              ※ Proでの商用利用が判明した場合、Business相当額を遡って請求する場合があります（
+              <Link href="/terms" className="underline">利用規約</Link>
+              第2条の3）。
+            </p>
+          </div>
 
           <div className="overflow-x-auto">
             <table className="w-full min-w-[560px] border-collapse text-left text-sm">
@@ -722,7 +743,7 @@ print(naishin["total"])  # -> 52`;
                 </tr>
               </thead>
               <tbody>
-                {(['anonymous', 'free', 'pro', 'scale'] as ApiTier[]).map((t) => {
+                {(['anonymous', 'free', 'pro', 'business', 'scale'] as ApiTier[]).map((t) => {
                   const p = TIER_POLICIES[t];
                   return (
                     <tr key={t} className="border-b border-slate-100 align-top">
@@ -740,7 +761,7 @@ print(naishin["total"])  # -> 52`;
             </table>
           </div>
           <p className="mt-2 text-xs text-slate-400">
-            ※ レート上限はベストエフォート、月次クォータは発行キー単位で計測します。Pro / Scale・年額データライセンスのお見積りは
+            ※ レート上限はベストエフォート、月次クォータは発行キー単位で計測します。Business / Enterprise・年額データライセンスのお見積りは
             <Link href="/contact" className="mx-1 underline">お問い合わせ</Link>から。
           </p>
 
@@ -751,7 +772,7 @@ print(naishin["total"])  # -> 52`;
               <thead>
                 <tr className="border-b-2 border-slate-200 text-xs text-slate-500">
                   <th className="py-2 pr-3 font-semibold">機能</th>
-                  {(['anonymous', 'free', 'pro', 'scale'] as ApiTier[]).map((t) => (
+                  {(['anonymous', 'free', 'pro', 'business', 'scale'] as ApiTier[]).map((t) => (
                     <th key={t} className="py-2 pr-3 text-center font-semibold">{TIER_POLICIES[t].label.split('（')[0]}</th>
                   ))}
                 </tr>
@@ -760,7 +781,7 @@ print(naishin["total"])  # -> 52`;
                 {TIER_CAPABILITY_MATRIX.map((cap) => (
                   <tr key={cap.label} className="border-b border-slate-100">
                     <td className="py-2 pr-3 text-slate-700">{cap.label}</td>
-                    {(['anonymous', 'free', 'pro', 'scale'] as ApiTier[]).map((t) => (
+                    {(['anonymous', 'free', 'pro', 'business', 'scale'] as ApiTier[]).map((t) => (
                       <td key={t} className="py-2 pr-3 text-center">
                         {cap.has(TIER_POLICIES[t]) ? (
                           <span className="font-bold text-emerald-600">✓</span>
@@ -785,25 +806,46 @@ print(naishin["total"])  # -> 52`;
             発行は <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">POST /api/keys</code>。
           </p>
 
-          {/* B2B：本番組み込みの価値提案＋決済導線 */}
+          {/* Pro：非商用（個人・社内・検証） */}
           <div className="mt-6 rounded-2xl border-2 border-amber-200 bg-gradient-to-br from-amber-50 to-orange-50 p-6">
-            <h3 className="text-base font-bold text-slate-800">本番組み込みなら Pro — 自前実装を省けます</h3>
+            <h3 className="text-base font-bold text-slate-800">個人・社内での本格利用なら Pro</h3>
             <p className="mt-2 text-sm leading-relaxed text-slate-700">
               47都道府県×全方式（東京1020点・神奈川S値・大阪タイプ・千葉K値・北海道ランク…）の内申点計算を
-              自前で実装・毎年保守するのは大きな負担です。Pro なら<strong>高レート・大量クォータ・出典明記なしでの商用利用・SLA</strong>付きで、
-              要綱改訂の追従も当方が肩代わりします。受験アプリ・進路SaaS・塾チェーンの内申自動算出にそのまま組み込めます。
+              自前で実装・毎年保守するのは大きな負担です。Pro なら<strong>出典明記なし・優先サポート</strong>で、
+              個人開発・社内利用・検証目的でそのまま使えます。
+              <strong>第三者（自社サービスの利用者）へ提供する場合は、下記の Business プラン</strong>をご利用ください。
             </p>
             <div className="mt-4">
               <UpgradeButton tier="pro" label="Proにアップグレード（月額 ¥9,800〜）" />
             </div>
+          </div>
+
+          {/* Business：2026-08-13新設。商用利用（第三者提供）向け。Stripe商品未登録のため自動決済でなくお問い合わせ導線 */}
+          <div className="mt-6 rounded-2xl border-2 border-emerald-200 bg-gradient-to-br from-emerald-50 to-teal-50 p-6">
+            <h3 className="text-base font-bold text-slate-800">自社サービスに組み込むなら Business</h3>
+            <p className="mt-2 text-sm leading-relaxed text-slate-700">
+              模試会社・塾管理SaaS・中堅塾本部向け。<strong>商用利用（第三者への提供・自社商品への組み込み）</strong>を
+              許諾し、月次クォータ<strong>200,000回</strong>・出典明記不要・優先サポート付き。
+              受験アプリ・進路SaaS・塾チェーンの内申自動算出にそのまま組み込めます。要綱改訂の追従も当方が肩代わりします。
+            </p>
+            <p className="mt-3 text-lg font-bold text-emerald-700">{formatTierPrice('business')}</p>
+            <p className="mt-1 text-xs text-slate-500">初年度価格。契約主体は親権者名義。詳細は<Link href="/tokushoho" className="mx-1 underline">特定商取引法に基づく表記</Link>参照。</p>
+            <div className="mt-4">
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 px-5 py-2.5 text-sm font-bold text-white shadow-md shadow-emerald-200 transition-all hover:shadow-lg"
+              >
+                Businessについて相談する
+              </Link>
+            </div>
             <p className="mt-3 text-xs text-slate-500">
               塾・学習塾・進路指導の事業者様は、
-              <Link href="/partner" className="mx-1 font-semibold text-amber-700 underline">パートナー向けページ</Link>
+              <Link href="/partner" className="mx-1 font-semibold text-emerald-700 underline">パートナー向けページ</Link>
               で埋め込みウィジェットやデータ提供メニューもご覧いただけます。
             </p>
           </div>
 
-          {/* Enterprise（Scale）：名称・SLA・データ再配布ライセンスを明示（E-6・2026-07-10 👤裁定B＝文言強調のみ・価格は個別見積りのまま） */}
+          {/* Enterprise（Scale）：基本＋オプション加算を明示（2026-08-13価格決定・修正3） */}
           <div className="mt-6 rounded-2xl border-2 border-slate-300 bg-gradient-to-br from-slate-50 to-indigo-100 p-6">
             <h3 className="text-base font-bold text-slate-800">
               大規模利用・データライセンスなら {TIER_POLICIES.scale.label}
@@ -811,15 +853,43 @@ print(naishin["total"])  # -> 52`;
             <p className="mt-2 text-sm leading-relaxed text-slate-700">
               {TIER_POLICIES.scale.audience}向け。レート上限
               <strong className="mx-1">{TIER_POLICIES.scale.ratePerMinute.toLocaleString('ja-JP')}回/分</strong>
-              に加え、<strong>{TIER_POLICIES.scale.sla}</strong>の専用SLAと、
+              ・{TIER_POLICIES.scale.sla}に加え、
               <strong>データ再配布ライセンス（CSV/JSONの定期更新フィード＋更新通知つき）</strong>が付きます。
               47都道府県全方式の要綱改訂の追従・保守もこちらで引き受けます。
+            </p>
+            <div className="mt-3 overflow-x-auto">
+              <table className="w-full min-w-[420px] border-collapse text-left text-sm">
+                <thead>
+                  <tr className="border-b border-slate-300 text-xs text-slate-500">
+                    <th className="py-1.5 pr-3 font-semibold">構成</th>
+                    <th className="py-1.5 font-semibold">年額</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="border-b border-slate-200">
+                    <td className="py-1.5 pr-3 text-slate-700">基本のみ</td>
+                    <td className="py-1.5 font-semibold text-slate-800">¥1,000,000</td>
+                  </tr>
+                  <tr className="border-b border-slate-200">
+                    <td className="py-1.5 pr-3 text-slate-700">＋再配布権（自社の顧客にデータを渡せる）</td>
+                    <td className="py-1.5 font-semibold text-slate-800">¥1,500,000</td>
+                  </tr>
+                  <tr>
+                    <td className="py-1.5 pr-3 text-slate-700">フル（再配布権＋DB納品）</td>
+                    <td className="py-1.5 font-semibold text-slate-800">¥2,500,000</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p className="mt-2 text-xs text-slate-500">
+              オンプレ提供（自社サーバ内設置・年次更新の適用義務あり）は別途<strong className="mx-1">+¥1,000,000/年</strong>、
+              カスタム項目対応は個別見積り（¥300,000〜）。
             </p>
             <div className="mt-4">
               <UpgradeButton tier="scale" label="Enterpriseについて相談する" />
             </div>
             <p className="mt-3 text-xs text-slate-500">
-              価格は利用規模・データライセンス範囲に応じた{formatTierPrice('scale')}。
+              上記は実際の提示額です。
               <Link href="/contact" className="mx-1 font-semibold text-indigo-700 underline">お問い合わせ</Link>ください。
             </p>
           </div>

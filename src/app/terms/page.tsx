@@ -71,7 +71,7 @@ export default function TermsPage() {
           <section>
             <h2 className="mb-3 text-lg font-bold text-slate-800">第2条の3（有償プランの提供条件）</h2>
             <p className="text-sm leading-relaxed text-slate-600">
-              法人・開発者向け有償プラン（Business・Enterprise）については、以下の条件で提供します。
+              法人・開発者向け有償プラン（Pro・Business・Enterprise）については、以下の条件で提供します。
             </p>
             <ul className="mt-2 space-y-2 text-sm leading-relaxed text-slate-600">
               <li className="flex gap-2">
