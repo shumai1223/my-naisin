@@ -3350,6 +3350,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-jasce",
+      "org": "日本協同教育学会",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "office@jasce.jp",
+      "contactClass": "b2b",
+      "evidence": "jasce.jp/1071toiawase.phpを直接WebFetchで確認。複数の窓口(研修委員会/編集委員会/広報委員会/事務局/各支部)のうち支部窓口には個人名(研究室主催者名)が含まれるためPII回避のため不採用、学会ドメインの汎用局所部『事務局』office@jasce.jpのみ採用(個人名なし)。協同学習(グループ学習)研究の学術団体",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
