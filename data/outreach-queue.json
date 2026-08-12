@@ -3935,6 +3935,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-yougo",
+      "org": "全国養護教諭連絡協議会",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "z-yougo@orion.ocn.ne.jp",
+      "contactClass": "b2b",
+      "evidence": "yougo.jpを直接WebFetchで確認。事務局宛z-yougo@orion.ocn.ne.jp(個人名なし)を採用。全国の養護教諭(保健室)の連絡・連携団体",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
