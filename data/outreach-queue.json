@@ -4338,6 +4338,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
+    },
+    {
+      "id": "lane5-jukujournal",
+      "org": "塾ジャーナル編集部(マナビネット・株式会社ルックデータ出版発行の塾/私学向け専門誌)",
+      "lane": "media",
+      "channel": "email",
+      "contact": "info@manavinet.com",
+      "contactClass": "b2b",
+      "evidence": "公式サイト`manavinet.com/contact/`を直接WebFetchで確認。『塾ジャーナル編集部』宛の組織メールで、問い合わせに含めるべき情報として『学校名・塾名』が明記されておりb2b確定。年6回発行・塾/予備校/私学向けの業界誌",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
     }
   ]
 }
