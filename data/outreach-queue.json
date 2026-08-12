@@ -3480,6 +3480,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane8-npo"
+    },
+    {
+      "id": "lane7-jaue",
+      "org": "一般社団法人日本教育大学協会(JAUE)",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "jaue@u-gakugei.ac.jp",
+      "contactClass": "b2b",
+      "evidence": "j-aue.jp/about/organisation.htmlを直接WebFetchで確認。東京学芸大学内の事務局宛jaue@u-gakugei.ac.jp(個人名なし)を採用。全国の教員養成系大学・学部を会員とする協会で、母集団『研究機関・大学の教育学研究室』(lane7・個別研究室は数えられないため見送っていた)の代わりに機関単位で到達できる集約窓口として発見",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane7"
     }
   ]
 }
