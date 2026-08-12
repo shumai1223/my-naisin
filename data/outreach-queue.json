@@ -4104,6 +4104,32 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-tokkatsu",
+      "org": "日本特別活動学会",
+      "lane": "npo",
+      "channel": "form",
+      "contact": "https://jaseatokkatsu.jimdoweb.com/%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B/",
+      "contactClass": "b2b",
+      "evidence": "公式サイトを直接WebFetchで確認。トップページの『お問い合わせ』メニューから遷移する専用ページで、個人ページでなく学会事務局宛の組織窓口であることを確認(実践事例募集等の個別担当者連絡先とは別)。特別活動(学級活動・学校行事等)研究の学術団体",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-seikatsu-sougou",
+      "org": "日本生活科・総合的学習教育学会",
+      "lane": "npo",
+      "channel": "form",
+      "contact": "https://seikatsu-sougou.org/contact",
+      "contactClass": "b2b",
+      "evidence": "公式サイト`seikatsu-sougou.org/contact`を直接WebFetchで確認。広島大学教育学部内の学会事務局が運営する公式問い合わせフォーム。生活科・総合的な学習の時間の研究を扱う学術団体",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
