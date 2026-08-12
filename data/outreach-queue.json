@@ -3441,6 +3441,45 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane8"
+    },
+    {
+      "id": "npo-manabito",
+      "org": "認定NPO法人まなびと",
+      "lane": "npo",
+      "channel": "form",
+      "contact": "https://manabitomanabi.com/contact",
+      "contactClass": "b2b",
+      "evidence": "manabitomanabi.com/contactを直接WebFetchで確認。問い合わせ区分に取材依頼/講演依頼/提携等のb2b向けカテゴリがあり、団体名/企業名(任意)欄も存在することを確認しb2b確定。子ども・外国人・大学生向けの学び場づくりを展開する認定NPO法人(神戸市)",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane8-npo"
+    },
+    {
+      "id": "npo-bunkagakushu",
+      "org": "特定非営利活動法人文化学習協同ネットワーク",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "center@npobunka.net",
+      "contactClass": "b2b",
+      "evidence": "npobunka.net/overview/を直接WebFetchで確認し団体総合窓口center@npobunka.net(個人名なし)を採用。1974年設立・1999年NPO法人化の子ども・若者の学びの場づくりを展開する武蔵野市の団体(スタッフ約100名)",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane8-npo"
+    },
+    {
+      "id": "npo-terakoya-houjousha",
+      "org": "特定非営利活動法人寺子屋方丈舎",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "info.terakoyahoujyousha@gmail.com",
+      "contactClass": "b2b",
+      "evidence": "terakoyahoujyousha.com(WebFetchが403のためcurl -A UAで直接取得しHTML内grepで確認)の『メール』見出し下にinfo.terakoyahoujyousha@gmail.com(組織名ベースのローカル部・個人名なし)を確認。同ページ内の別アドレスhoujou0228@gmail.comは『こども食堂問い合わせ(LINE)』専用の消費者向け窓口と明確に区分されているため不採用。福島県会津若松市の子ども支援NPO",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane8-npo"
     }
   ]
 }
