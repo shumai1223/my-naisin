@@ -4710,6 +4710,47 @@
       "excludeReason": "contactClass判定不能(b2b分離signal未確認)のため送信対象外",
       "addedAt": "2026-08-13",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane3"
+    },
+    {
+      "id": "juku-live-slive",
+      "org": "LIVE株式会社(個別指導塾s-Live)",
+      "lane": "b2b-saas",
+      "channel": "email",
+      "contact": "live@e-live-online.com",
+      "contactClass": "b2b",
+      "evidence": "公式サイトの会社情報ページ(xn--live-ye6f785fgsonh6a.jp/company/)に本社(静岡)の公式連絡先として明記(個人名なし)。全国FC展開のs-Live個別指導塾のほかe-Live/effisage/Pro Igo等複数のオンライン指導ブランドを運営",
+      "verifiedAt": "2026-08-13",
+      "status": "candidate",
+      "addedAt": "2026-08-13",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane3"
+    },
+    {
+      "id": "juku-gengakusha-genronkai-excluded",
+      "org": "株式会社言楽舎(現論会)",
+      "lane": "b2b-saas",
+      "channel": "email",
+      "contact": "scrivere.logic@gmail.com",
+      "contactClass": "unknown",
+      "evidence": "WebSearchでメールアドレスは確認できたがgmail.com個人向けフリーメールドメインで法人窓口としての確証が弱い。サイト移転案内もあり情報の鮮度に懸念",
+      "verifiedAt": "2026-08-13",
+      "status": "excluded",
+      "excludeReason": "個人向けフリーメールドメインで法人窓口の確証が弱いため送信対象外(学び舎ケースと同型)",
+      "addedAt": "2026-08-13",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane3"
+    },
+    {
+      "id": "juku-weighanchor-flagship-excluded",
+      "org": "株式会社Weigh Anchor(FLAGSHIP)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.fgsp.jp/company/",
+      "contactClass": "unknown",
+      "evidence": "WebSearchで電話番号(0476-85-6993)のみ確認でき、法人向けオンライン窓口(フォーム/メール)は確認できなかった",
+      "verifiedAt": "2026-08-13",
+      "status": "excluded",
+      "excludeReason": "電話専用パターン(channel enum非対応)のため送信対象外",
+      "addedAt": "2026-08-13",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane3"
     }
   ]
 }
