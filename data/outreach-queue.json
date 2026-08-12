@@ -4143,6 +4143,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-sme",
+      "org": "公益社団法人日本数学教育学会",
+      "lane": "npo",
+      "channel": "form",
+      "contact": "https://www.sme.or.jp/contact/",
+      "contactClass": "b2b",
+      "evidence": "公式サイト`sme.or.jp/contact/`を直接WebFetchで確認。会員/非会員選択・会員番号入力欄を持つ公式問い合わせフォーム(公益社団法人事務局宛)。数学教育の学術団体で入試制度・学力データの研究対象と隣接",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
