@@ -4515,6 +4515,75 @@
       "excludeReason": "contactClass判定不能(B2B/consumer分離signalなし)のため送信対象外。C1原則により推測でb2bと判定しない",
       "addedAt": "2026-08-13",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+    },
+    {
+      "id": "moshi-shizuoka-gakuchoken",
+      "org": "学力調査研究会(静岡県統一模試)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://kento-moshi.jp/blog/cramschool_inquiry_form/",
+      "contactClass": "b2b",
+      "evidence": "フォームページのタイトル自体が『学習塾様向け資料請求フォーム』と明記され、個人受験者向けページとは別のURL(/blog/cramschool_inquiry_form/)に設置されていることを直接WebFetchで確認。静岡県内760塾が採用・県内最大10,659名受験の県下最大規模模試",
+      "verifiedAt": "2026-08-13",
+      "status": "candidate",
+      "addedAt": "2026-08-13",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+    },
+    {
+      "id": "moshi-fukushima-shinkyoken",
+      "org": "福島新教育研究協会",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://shinkyoken.com/",
+      "contactClass": "unknown",
+      "evidence": "公式サイトを直接WebFetchで確認したが、一般お問い合わせフォームと電話番号のみで塾・法人専用の窓口区分は確認できなかった",
+      "verifiedAt": "2026-08-13",
+      "status": "excluded",
+      "excludeReason": "contactClass判定不能(B2B/consumer分離signalなし)のため送信対象外。C1原則により推測でb2bと判定しない",
+      "addedAt": "2026-08-13",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+    },
+    {
+      "id": "moshi-ibaraki-tochigi-shinkyoken",
+      "org": "株式会社新教研(茨城・栃木)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.shinkyoken.co.jp/",
+      "contactClass": "unknown",
+      "evidence": "公式サイトを直接WebFetchで確認したが、複数の一般お問い合わせリンクのみで塾・法人専用の窓口区分は確認できなかった",
+      "verifiedAt": "2026-08-13",
+      "status": "excluded",
+      "excludeReason": "contactClass判定不能(B2B/consumer分離signalなし)のため送信対象外。C1原則により推測でb2bと判定しない",
+      "addedAt": "2026-08-13",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+    },
+    {
+      "id": "moshi-yamanashi-toitsu",
+      "org": "山梨統一模試",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://ymoshi.com/moshi.html",
+      "contactClass": "unknown",
+      "evidence": "公式サイトを直接WebFetchで確認したが、一般お問い合わせリンクのみで塾・法人専用の窓口区分は確認できなかった",
+      "verifiedAt": "2026-08-13",
+      "status": "excluded",
+      "excludeReason": "contactClass判定不能(B2B/consumer分離signalなし)のため送信対象外。C1原則により推測でb2bと判定しない",
+      "addedAt": "2026-08-13",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+    },
+    {
+      "id": "moshi-shimonjuku-gifu",
+      "org": "志門塾(岐阜模試)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.shimonjuku.com/",
+      "contactClass": "unknown",
+      "evidence": "岐阜模試は志門塾が自社塾生・個人テスト会員向けに実施する自社ブランド模試であり、他の学習塾へデータ・システムを外販する構造ではないと判断。塾・法人専用の窓口区分も確認できなかった",
+      "verifiedAt": "2026-08-13",
+      "status": "excluded",
+      "excludeReason": "個人(テスト会員)向けモデルで他塾へのデータ外販窓口ではないため送信対象外",
+      "addedAt": "2026-08-13",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
     }
   ]
 }
