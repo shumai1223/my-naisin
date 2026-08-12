@@ -3610,6 +3610,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
+    },
+    {
+      "id": "lane2-ikuhosha",
+      "org": "株式会社育鵬社",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://ikuhosha.co.jp/contact/",
+      "contactClass": "b2b",
+      "evidence": "ikuhosha.co.jp/contact/を直接WebFetchで確認。『会社・団体・学校名』必須欄+所属部署(教員/教育関係者/法人担当者等)+区分に『リンクの依頼』を確認しb2b確定(データ引用・相互リンクの相談に直接合致するカテゴリ)。教科書協会加盟の教育出版社(lane2・50社中の1社・原文表記「育芳社」は正しくは「育鵬社」の誤記と判明)",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
     }
   ]
 }
