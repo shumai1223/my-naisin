@@ -1,5 +1,5 @@
 {
-  "asOf": "2026-08-11",
+  "asOf": "2026-08-12",
   "notes": "X'-1送信キューv1。docs各所に散在する宛先を統合する作業の第一段(教委22県[email]+教育メディア9件[email]+5件[form]+個人塾4件[line]=40件をqueued化)。個人塾4件はX-7でフォームが生徒募集用で送信不可と判明済みだったが、併記された公式LINEアカウント(自由記述・PII不要)へ切り替えて追加(👤指示「line最優先・今すぐ送れる」に対応)。X-2地方紙残り31県/X-6 NPO/X-19学術/X-21オープンデータ/X-23/X-27/X-29/X-33等、他の複数docsに残る宛先は未統合(次回以降に追加)。統合済みの母数はkyoiku-i-contact-directory-2026-08-01.md(教委)・outreach-triage-2026-08-01.md(メディア)・x7-mutual-link-outreach-2026-07.md(個人塾)のCowork実地確認/既存調査結果を単一の真実源とし、文面は各docsから転記(新規の事実確認・捏造なし)。loopは1件も送信しない。",
   "entries": [
     {
@@ -3389,6 +3389,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane8-tepro",
+      "org": "公益財団法人東京都教育支援機構(TEPRO)",
+      "lane": "npo",
+      "channel": "form",
+      "contact": "https://www.tepro.or.jp/etc/form",
+      "contactClass": "b2b",
+      "evidence": "tepro.or.jp/etc/formを直接WebFetchで確認。問い合わせ区分(TEPRO Supporter Bank/国際交流/施設整備/日本語支援/個人情報/その他)の6択+氏名/フリガナ(任意)/団体名(任意・学校名や企業名等)/電話(任意)/メール(必須)/本文(必須)の構成で、団体名欄が学校・企業・団体名を想定した記載であり単純な個人向けフォームではないことを確認。東京都教育委員会所管の公益財団法人(都立学校の日本語指導支援・国際交流コンシェルジュ・ボランティア人材バンク等を運営)でb2b確定。総務課の別窓口soumu@tepro.or.jpも存在するが個人名記載の有無が未確認のためフォームを主契約経路として採用",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane8"
     }
   ]
 }
