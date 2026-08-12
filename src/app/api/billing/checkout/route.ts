@@ -4,10 +4,12 @@ import { createCheckoutSession } from '@/lib/stripe';
 
 /**
  * 課金導線（堀B／Stripeループの入口）。
- * POST /api/billing/checkout { tier: 'pro' | 'scale', email? } → Stripe Checkout の決済URLを返す。
+ * POST /api/billing/checkout { tier: 'pro' | 'scale', email?, tosAgreedAt } → Stripe Checkout の決済URLを返す。
  * フロント（/developers の Upgrade ボタン）はこのURLへ遷移する。
  *
  * 未設定（STRIPE_SECRET_KEY 無し）/ price未設定は 503「準備中」＋お問い合わせ案内（サイレント失敗を避ける）。
+ * tosAgreedAt（利用規約への同意時刻・ISO 8601）は必須（クリックラップ・ops/PRICING_OPTIONS.md #5）。
+ * このエンドポイントは/developersのUpgradeButtonからのみ呼ばれる非公開API（OpenAPI契約対象外）。
  */
 
 const limiter = createRateLimiter(60 * 60_000);
@@ -33,7 +35,7 @@ export async function POST(request: Request) {
     return json({ error: 'リクエストが多すぎます。少し時間をおいてお試しください。' }, 429);
   }
 
-  let body: { tier?: unknown; email?: unknown } = {};
+  let body: { tier?: unknown; email?: unknown; tosAgreedAt?: unknown } = {};
   try {
     const raw = await request.text();
     if (raw && raw.length < 2048) body = JSON.parse(raw);
@@ -49,8 +51,16 @@ export async function POST(request: Request) {
     ? body.email.trim().slice(0, 254)
     : undefined;
 
+  // クリックラップ（ops/PRICING_OPTIONS.md #5）: 利用規約への同意時刻が無い申し込みは受け付けない。
+  const tosAgreedAtRaw = typeof body.tosAgreedAt === 'string' ? body.tosAgreedAt : '';
+  const tosAgreedAtMs = Date.parse(tosAgreedAtRaw);
+  if (!tosAgreedAtRaw || Number.isNaN(tosAgreedAtMs)) {
+    return json({ error: 'tos_not_agreed', message: '利用規約への同意が必要です。同意のうえ再度お試しください。' }, 400);
+  }
+  const tosAgreedAt = new Date(tosAgreedAtMs).toISOString();
+
   const origin = new URL(request.url).origin;
-  const session = await createCheckoutSession({ tier, email, origin });
+  const session = await createCheckoutSession({ tier, email, origin, tosAgreedAt });
   if (!session) {
     return json(
       {

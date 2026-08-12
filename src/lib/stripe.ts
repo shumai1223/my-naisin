@@ -74,6 +74,12 @@ export interface CheckoutInput {
   tier: Exclude<ApiTier, 'anonymous' | 'free'>;
   email?: string;
   origin: string;
+  /**
+   * 利用規約クリックラップの同意時刻（ISO 8601・ブラウザで同意チェックボックスをONにした瞬間）。
+   * Stripeのセッション/サブスクリプション両方のmetadataへ記録し、押印無しでも同意の証跡を残す
+   * （ops/PRICING_OPTIONS.md「商談ゼロで売るために必要な7点」#5）。
+   */
+  tosAgreedAt?: string;
 }
 
 /**
@@ -95,6 +101,10 @@ export async function createCheckoutSession(input: CheckoutInput): Promise<{ url
   params.set('allow_promotion_codes', 'true');
   params.set('metadata[tier]', input.tier);
   params.set('subscription_data[metadata][tier]', input.tier);
+  if (input.tosAgreedAt) {
+    params.set('metadata[tos_agreed_at]', input.tosAgreedAt);
+    params.set('subscription_data[metadata][tos_agreed_at]', input.tosAgreedAt);
+  }
   if (input.email) params.set('customer_email', input.email);
   // T-S13A A-0-1: 特定商取引法に基づく表記へStripe Checkout側からも到達可能にする
   // (custom_textはStripeがMarkdownのリンク記法[text](url)をサポートする)。

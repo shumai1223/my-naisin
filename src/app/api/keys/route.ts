@@ -41,7 +41,7 @@ export async function POST(request: Request) {
     return json({ error: '発行のリクエストが多すぎます。1時間ほどおいて再度お試しください。' }, 429);
   }
 
-  let body: { label?: unknown; email?: unknown } = {};
+  let body: { label?: unknown; email?: unknown; tosAgreedAt?: unknown } = {};
   try {
     const raw = await request.text();
     if (raw && raw.length < 2048) body = JSON.parse(raw);
@@ -52,6 +52,12 @@ export async function POST(request: Request) {
   const label = typeof body.label === 'string' ? body.label.trim().slice(0, 80) : undefined;
   const emailRaw = typeof body.email === 'string' ? body.email.trim().slice(0, 254) : '';
   const email = emailRaw && EMAIL_RE.test(emailRaw) ? emailRaw : undefined;
+  // クリックラップ（ops/PRICING_OPTIONS.md #5）: Web UIは同意チェック後に送るが、
+  // /developersが「POST /api/keys」を直叩き可能なAPIとして案内しているため必須にはしない（任意で記録のみ）。
+  const tosAgreedAtRaw = typeof body.tosAgreedAt === 'string' ? body.tosAgreedAt : '';
+  if (tosAgreedAtRaw && !Number.isNaN(Date.parse(tosAgreedAtRaw))) {
+    console.log(JSON.stringify({ t: new Date().toISOString(), api: 'keys-issue', tosAgreedAt: tosAgreedAtRaw }));
+  }
 
   const issued = await issueApiKey({ tier: 'free', label, email });
   if (!issued) {

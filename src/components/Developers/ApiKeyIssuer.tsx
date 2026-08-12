@@ -16,8 +16,10 @@ export function ApiKeyIssuer() {
   const [info, setInfo] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
+  const [agreed, setAgreed] = useState(false);
 
   async function issue() {
+    if (!agreed) return;
     setLoading(true);
     setError(null);
     setInfo(null);
@@ -25,7 +27,11 @@ export function ApiKeyIssuer() {
       const res = await fetch('/api/keys', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ label: label || undefined, email: email || undefined }),
+        body: JSON.stringify({
+          label: label || undefined,
+          email: email || undefined,
+          tosAgreedAt: new Date().toISOString(),
+        }),
       });
       const data = (await res.json()) as { apiKey?: string; message?: string; error?: string };
       if (res.ok && data.apiKey) {
@@ -111,11 +117,25 @@ export function ApiKeyIssuer() {
           />
         </label>
       </div>
+      <label className="mt-3 flex items-start gap-2 text-xs text-slate-600">
+        <input
+          type="checkbox"
+          checked={agreed}
+          onChange={(e) => setAgreed(e.target.checked)}
+          className="mt-0.5 h-4 w-4 shrink-0 rounded border-slate-300"
+        />
+        <span>
+          <a href="/terms" target="_blank" rel="noreferrer" className="font-semibold text-indigo-600 underline">
+            利用規約
+          </a>
+          に同意します
+        </span>
+      </label>
       <button
         type="button"
         onClick={issue}
-        disabled={loading}
-        className="mt-4 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 px-5 py-2.5 text-sm font-bold text-white shadow-md shadow-indigo-200 transition-all hover:shadow-lg disabled:opacity-60"
+        disabled={loading || !agreed}
+        className="mt-3 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 px-5 py-2.5 text-sm font-bold text-white shadow-md shadow-indigo-200 transition-all hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-60"
       >
         {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <KeyRound className="h-4 w-4" />}
         無料APIキーを発行
