@@ -3714,6 +3714,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane3"
+    },
+    {
+      "id": "lane9-jash",
+      "org": "一般社団法人日本学校保健学会",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "jash-post@kokusaibunken.jp",
+      "contactClass": "b2b",
+      "evidence": "jash-web.jp/contact/を直接WebFetchで確認。事務局宛jash-post@kokusaibunken.jp(個人名なし)を採用。児童生徒の健康教育・学校保健を研究する学術団体",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
