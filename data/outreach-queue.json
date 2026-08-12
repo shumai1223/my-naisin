@@ -3363,6 +3363,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-jsdt",
+      "org": "日本デジタル教科書学会",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "office@js-dt.jp",
+      "contactClass": "b2b",
+      "evidence": "js-dt.jp/本学会について/お問合せ/を直接WebFetchで確認。学会ドメインの汎用局所部office@js-dt.jp(その他問い合わせ用・報道取材用news@js-dt.jpとは別窓口)を採用。ページ上に担当者の姓(久富)の記載はあるがメールアドレス自体には個人名を含まないため既存の日本教育経営学会(jimu@jasea.jp)等と同型でPII非該当と判断。デジタル教科書・教育工学研究の学術団体でEdTech(lane4)とも隣接する高関連性ターゲット",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
