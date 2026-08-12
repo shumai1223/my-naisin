@@ -4156,6 +4156,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane4-viling",
+      "org": "株式会社ヴィリング(STEMON・STEAM教育&プログラミングスクール運営)",
+      "lane": "edtech",
+      "channel": "form",
+      "contact": "https://www.stemon.net/contact/",
+      "contactClass": "b2b",
+      "evidence": "公式サイトを直接WebFetchで確認。フランチャイズ募集ページ(`/genre/franchise/`)・事業者/教育関係者向けページ(`/business-education/`)経由で問い合わせフォームに到達。フォームの『問い合わせの種類』選択肢に『フランチャイズについて』『公教育支援について』という個人受講者向けとは明確に区別される法人/教育機関向けカテゴリがあることを確認しb2b確定。08-11調査時点では保留扱いだったが本日再検証しフランチャイズ/公教育カテゴリの存在を確認できたため確定に格上げ",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     }
   ]
 }
