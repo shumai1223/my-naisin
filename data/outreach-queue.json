@@ -4286,6 +4286,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+    },
+    {
+      "id": "lane1-okayama-kangaerukai",
+      "org": "岡山の教育を考える会",
+      "lane": "moshi",
+      "channel": "form",
+      "contact": "https://kangaeru-kai.main.jp/contact.html",
+      "contactClass": "b2b",
+      "evidence": "公式サイト`kangaeru-kai.main.jp/contact.html`を直接WebFetchで確認。フォーム必須項目に『塾の名前』欄がありb2b確定。岡山県の学習塾連合団体",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
     }
   ]
 }
