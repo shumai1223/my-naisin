@@ -3649,6 +3649,32 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane3"
+    },
+    {
+      "id": "lane3-kogaku-pub",
+      "org": "好学出版株式会社",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.kogaku-pub.com/contact/",
+      "contactClass": "b2b",
+      "evidence": "kogaku-pub.com/company/を直接WebFetchで確認。『学習塾・国立私立学校専用教材のご購入・ご質問』と明記されたフォーム案内を確認、事業自体が学習塾・国公立私立学校専用教材出版に特化(個人向け製品なし)しておりb2b確定。JJA企業会員一覧より発掘",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane3"
+    },
+    {
+      "id": "lane3-tomonokai",
+      "org": "株式会社トモノカイ",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.tomonokai-corp.com/contact/",
+      "contactClass": "b2b",
+      "evidence": "tomonokai-corp.com/contact/を直接WebFetchで確認。『会社名・部署名』欄+区分(学校関係の方/企業の方/ご家庭・保護者の方/塾関係の方/学生の方)で家庭・保護者と学校・塾を明確に区分しb2b確定。塾講師求人サイト『塾講師ステーション』・学校向け探究授業支援等を展開。JJA企業会員一覧より発掘",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane3"
     }
   ]
 }
