@@ -3311,6 +3311,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+    },
+    {
+      "id": "lane1-hanamaru",
+      "org": "花まるグループ(花まる学習会・高濱正伸氏主宰の大手教育企業グループ)",
+      "lane": "juku",
+      "channel": "form",
+      "contact": "https://www.hanamarugroup.jp/contact.html",
+      "contactClass": "b2b",
+      "evidence": "hanamarugroup.jp/contact.htmlを直接WebFetchで確認。「取材等広報関係」「教育機関の方」を含む複数の問い合わせ区分(一般読者向けとは分離)を確認しb2b確定。高濱正伸氏が主宰する大手教育企業グループ(公教育連携実績もあり)",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
     }
   ]
 }
