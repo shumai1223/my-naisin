@@ -2949,19 +2949,6 @@
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     },
     {
-      "id": "lane9-jset",
-      "org": "一般社団法人日本教育工学会(JSET・教育工学の学術団体)",
-      "lane": "npo",
-      "channel": "form",
-      "contact": "https://www.jset.gr.jp/contact/form1/",
-      "contactClass": "b2b",
-      "evidence": "公式サイトjset.gr.jp/contact/を直接WebFetchで確認(WebSearch要約が提示したメールアドレスoffice@jset.gr.jpはページ本文に記載が無く不採用=既知のWebSearch作話パターンを回避)。リンク先/contact/form1/に「お名前・メールアドレス・所属・メッセージ本文」必須の実在フォームを確認しb2b確定。教育工学(EdTech研究含む)の学術団体で日本教育学会に続くlane9横展開",
-      "verifiedAt": "2026-08-12",
-      "status": "candidate",
-      "addedAt": "2026-08-12",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
-    },
-    {
       "id": "lane9-jsste",
       "org": "日本教師教育学会(教師教育の学術団体)",
       "lane": "npo",
@@ -2969,19 +2956,6 @@
       "contact": "https://jsste.jp/contact/",
       "contactClass": "b2b",
       "evidence": "公式サイトjsste.jp/member/contact/経由でjsste.jp/contact/を直接WebFetchで確認。お名前・メールアドレス・内容が必須の実在フォームを確認しb2b確定(所属欄なし)。事務局は学会名義の公式窓口(事務局長名の記載はあるが個人メールではなく学会窓口経由)。日本教育学会・日本教育工学会に続くlane9横展開",
-      "verifiedAt": "2026-08-12",
-      "status": "candidate",
-      "addedAt": "2026-08-12",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
-    },
-    {
-      "id": "lane9-jssce",
-      "org": "日本キャリア教育学会(進路指導・キャリア教育の学術団体)",
-      "lane": "npo",
-      "channel": "email",
-      "contact": "jssce-post@as.bunken.co.jp",
-      "contactClass": "b2b",
-      "evidence": "公式サイトjssce.jp/contact/を直接WebFetchで確認。ページ本文に「jssce-post(at)as.bunken.co.jp」とスパム対策表記で明記されておりjssce-post@as.bunken.co.jpと復元しb2b確定(⚠️WebSearch要約は「jssce-post@bunken.co.jp」とas.のプレフィックスを欠落させた誤った表記を提示しておりWebFetchでの直接確認により訂正=既知のWebSearch作話パターンの一種)。as.bunken.co.jp型(学会運営代行の国際文献社アカデミーセンター)の既存複数学会と同型パターン",
       "verifiedAt": "2026-08-12",
       "status": "candidate",
       "addedAt": "2026-08-12",
@@ -3324,6 +3298,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+    },
+    {
+      "id": "lane9-jtsj",
+      "org": "全国大学国語教育学会",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "jtsj-post@as.bunken.co.jp",
+      "contactClass": "b2b",
+      "evidence": "jtsj.org/toiawaseを直接WebFetchで確認。事務局(国際文献社内)宛のjtsj-post@as.bunken.co.jpが平文で明記されており個人名の記載なし。as.bunken.co.jp事務局代行パターン(日本行動計量学会等)と同型でb2b確定",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
