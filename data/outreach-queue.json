@@ -3376,6 +3376,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-jsrecce",
+      "org": "日本保育学会",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "hoiku.info@jsrecce.jp",
+      "contactClass": "b2b",
+      "evidence": "jsrecce.jp/?page_id=6279を直接WebFetchで確認。学会ドメインの汎用局所部hoiku.info@jsrecce.jpが平文で明記されており個人名の記載なし。対象学齢は高校より低いが教育学研究の学術団体として母集団『研究機関・大学の教育学研究室』に該当",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
