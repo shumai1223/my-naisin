@@ -3558,6 +3558,32 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
+    },
+    {
+      "id": "lane2-kyoiku-tosho",
+      "org": "教育図書株式会社",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.kyoiku-tosho.co.jp/contact/",
+      "contactClass": "b2b",
+      "evidence": "kyoiku-tosho.co.jp/contact/を直接WebFetchで確認。『学校名・会社名必須』欄+区分に利用許諾(ライセンス)/報道関係お問い合わせ等がありb2b確定。教科書協会加盟の教育出版社(lane2・50社中の1社)",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
+    },
+    {
+      "id": "lane2-tokyo-horei",
+      "org": "東京法令出版株式会社",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://secure.tokyo-horei.co.jp/company_s/voiceform_s.php",
+      "contactClass": "b2b",
+      "evidence": "secure.tokyo-horei.co.jp/company_s/voiceform_s.phpを直接WebFetchで確認。法人申請の場合は申請情報が必須と明記された法人向け区分を確認しb2b確定。教科書協会加盟の教育出版社(lane2・50社中の1社)",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
     }
   ]
 }
