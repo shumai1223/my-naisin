@@ -4247,6 +4247,32 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+    },
+    {
+      "id": "lane1-toyama-edu",
+      "org": "一般社団法人富山県教育ネットワーク",
+      "lane": "moshi",
+      "channel": "form",
+      "contact": "https://www.toyama-edu.net/form/129367/",
+      "contactClass": "b2b",
+      "evidence": "公式サイト`toyama-edu.net`を直接WebFetchで確認。事務局宛の公式問い合わせフォームを確認しb2b確定。富山県の学習塾/教育団体",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+    },
+    {
+      "id": "lane1-najukuren",
+      "org": "奈良県学習塾連盟",
+      "lane": "moshi",
+      "channel": "form",
+      "contact": "http://najukuren.net/postmail/postmail.html",
+      "contactClass": "b2b",
+      "evidence": "公式サイト`najukuren.net`を直接WebFetchで確認。本部(奈良県香芝市)宛の公式問い合わせフォームを確認しb2b確定。奈良県の学習塾連盟",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
     }
   ]
 }
