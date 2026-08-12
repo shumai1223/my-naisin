@@ -3402,6 +3402,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane8"
+    },
+    {
+      "id": "lane8-tottori-kyobun",
+      "org": "公益財団法人鳥取県教育文化財団",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "jimukyoku@kyobun-zaidan.sakura.ne.jp",
+      "contactClass": "b2b",
+      "evidence": "kyobun-zaidan.sakura.ne.jpを直接WebFetchで確認。事務局宛の一般窓口jimukyoku@kyobun-zaidan.sakura.ne.jpが平文で明記され個人名の記載なし(既存の学術団体jimu@/office@型と同型のPII非該当判定)。鳥取県の教育振興・調査研究を行う公益財団法人",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane8"
     }
   ]
 }
