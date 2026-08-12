@@ -3324,6 +3324,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-nasem",
+      "org": "日本教育方法学会",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "nasem-jimu@ml.gakkai.ne.jp",
+      "contactClass": "b2b",
+      "evidence": "nasem.jp掲載の画像(email2.gif)をcurlで直接ダウンロードしRead toolのビジョン解析で目視確認。「E-mail: nasem-jimu@ml.gakkai.ne.jp」と表示されており個人名の記載なし。日本比較教育学会等と同型のml.gakkai.ne.jp(ガリレオ学会業務情報化センター)事務局代行パターン",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
