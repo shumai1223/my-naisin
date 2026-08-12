@@ -3909,6 +3909,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-zenkojoken",
+      "org": "全国高等学校情報教育研究会(全高情研)",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "info@zenkojoken.jp",
+      "contactClass": "b2b",
+      "evidence": "zenkojoken.jp/contact/を直接WebFetchで確認。メールアドレス自体は組織名ベース(info@zenkojoken.jp・個人名を含まない)のため既存の同種事例と同型でPII非該当と判断(ページ上には事務局担当者名として能城茂雄氏が併記されているが採用したのはアドレス自体のみ)。全国の高校情報科教員が加盟する研究団体で当サイトのテーマ(高校教育・情報科)と隣接",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
