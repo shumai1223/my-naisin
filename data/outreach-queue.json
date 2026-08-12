@@ -4195,6 +4195,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "lane9-syogyo",
+      "org": "日本商業教育学会",
+      "lane": "npo",
+      "channel": "form",
+      "contact": "https://www.syogyo-ed.jp/%e3%81%8a%e5%95%8f%e3%81%84%e5%90%88%e3%82%8f%e3%81%9b/",
+      "contactClass": "b2b",
+      "evidence": "公式サイトを直接WebFetchで確認。千葉商科大学内の本部事務局宛の公式問い合わせフォーム(お名前・メールアドレス必須)。商業科教育の学術団体で高校商業教育・キャリア教育の研究対象と重なる",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
