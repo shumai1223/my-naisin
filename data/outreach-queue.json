@@ -4065,6 +4065,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-jstem",
+      "org": "日本STEM教育学会",
+      "lane": "npo",
+      "channel": "form",
+      "contact": "https://www.j-stem.jp/inquiry/",
+      "contactClass": "b2b",
+      "evidence": "j-stem.jp/inquiry/を直接WebFetchで確認。任意項目『所属団体名(会社、学校、教育委員会など)』の例示に会社/学校/教育委員会が明記されておりb2b確定。STEM教育の学術団体",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
