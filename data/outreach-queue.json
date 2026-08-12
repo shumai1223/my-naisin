@@ -4473,6 +4473,48 @@
       "status": "candidate",
       "addedAt": "2026-08-13",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
+    },
+    {
+      "id": "moshi-aomori-zenken",
+      "org": "青森県全県テスト協会(事務局:有限会社くどう教材社)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.zenkenmoshi.net/ao/",
+      "contactClass": "unknown",
+      "evidence": "公式サイトを直接WebFetchで確認したが、個人受験者向けの一般お問い合わせリンクのみで塾・法人専用の窓口区分(専用フォーム/メールアドレス)は確認できなかった",
+      "verifiedAt": "2026-08-13",
+      "status": "excluded",
+      "excludeReason": "contactClass判定不能(B2B/consumer分離signalなし)のため送信対象外。C1原則により推測でb2bと判定しない",
+      "addedAt": "2026-08-13",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+    },
+    {
+      "id": "moshi-niigata-toitsu",
+      "org": "新潟県統一模試会",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://t-moshi.jp/contact",
+      "contactClass": "unknown",
+      "evidence": "公式サイトに『学習塾の方 受験申込』ナビはあるが、これは塾経由の受験申込導線であり法人向け問い合わせ窓口ではない。/contactページを直接WebFetchしたが個人/法人の区分・塾名等の必須項目の有無を確認できなかった",
+      "verifiedAt": "2026-08-13",
+      "status": "excluded",
+      "excludeReason": "contactClass判定不能(B2B/consumer分離signalなし)のため送信対象外。C1原則により推測でb2bと判定しない",
+      "addedAt": "2026-08-13",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+    },
+    {
+      "id": "moshi-toyama-ikuei",
+      "org": "富山育英センター",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.toyama-ikuei.com/",
+      "contactClass": "unknown",
+      "evidence": "公式サイトを直接WebFetchで確認したところ、電話・学習相談フォーム・資料請求フォームはいずれも個人の生徒・保護者向けであり、法人・塾専用の問い合わせ窓口は確認できなかった",
+      "verifiedAt": "2026-08-13",
+      "status": "excluded",
+      "excludeReason": "contactClass判定不能(B2B/consumer分離signalなし)のため送信対象外。C1原則により推測でb2bと判定しない",
+      "addedAt": "2026-08-13",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
     }
   ]
 }
