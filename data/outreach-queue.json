@@ -4299,6 +4299,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+    },
+    {
+      "id": "lane1-jyda",
+      "org": "一般社団法人日本青少年育成協会",
+      "lane": "moshi",
+      "channel": "form",
+      "contact": "https://www.jyda.jp/contact",
+      "contactClass": "b2b",
+      "evidence": "公式サイト`jyda.jp/contact`を直接WebFetchで確認。フォーム必須項目に『個人/法人』の区分・法人選択時『会社・団体名』欄がありb2b確定。HSK/YCT日本事務局・キャリア教育・教育コーチング等を手がける全国協議会",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
     }
   ]
 }
