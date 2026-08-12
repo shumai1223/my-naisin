@@ -4364,6 +4364,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
+    },
+    {
+      "id": "lane9-shitsukyo",
+      "org": "全国私立通信制高等学校協会(私通協)",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "info@shitsukyo.jp",
+      "contactClass": "b2b",
+      "evidence": "公式サイト`shitsukyo.jp`を直接WebFetchで確認。事務局宛メールアドレス(組織名ベース・個人名非含有)を採用。全国の私立通信制高等学校が加盟する協会",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
