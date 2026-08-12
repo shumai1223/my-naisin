@@ -3896,6 +3896,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-zenkoukyo",
+      "org": "公益社団法人全国工業高等学校長協会",
+      "lane": "npo",
+      "channel": "form",
+      "contact": "https://zenkoukyo.or.jp/contact",
+      "contactClass": "b2b",
+      "evidence": "zenkoukyo.or.jp/contactを直接WebFetchで確認。学校・団体名(任意)欄+問い合わせ種別に校長/管理職/教員を確認しb2b確定。工業高校の校長で構成される全国団体",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
