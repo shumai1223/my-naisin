@@ -4584,6 +4584,62 @@
       "excludeReason": "個人(テスト会員)向けモデルで他塾へのデータ外販窓口ではないため送信対象外",
       "addedAt": "2026-08-13",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+    },
+    {
+      "id": "juku-itto-excluded",
+      "org": "株式会社ITTO(ITTO個別指導学院)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.itto.jp/corporation/",
+      "contactClass": "unknown",
+      "evidence": "WebSearchでフリーダイヤル(0120-62-0885)は確認できたが、IR・広報・法人向けの専用オンライン窓口(フォーム/メール)は確認できなかった",
+      "verifiedAt": "2026-08-13",
+      "status": "excluded",
+      "excludeReason": "電話専用パターン(channel enum非対応)のため送信対象外",
+      "addedAt": "2026-08-13",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane3"
+    },
+    {
+      "id": "juku-seigakusha-excluded",
+      "org": "株式会社成学社(個別指導学院フリーステップ)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.kaisei-group.co.jp/outline/",
+      "contactClass": "unknown",
+      "evidence": "WebSearchでFC事業部直通(0120-66-0816)・一般問い合わせ(0120-77-1233)を確認したがいずれも電話のみで法人向けオンライン窓口(フォーム/メール)は確認できなかった",
+      "verifiedAt": "2026-08-13",
+      "status": "excluded",
+      "excludeReason": "電話専用パターン(channel enum非対応)のため送信対象外",
+      "addedAt": "2026-08-13",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane3"
+    },
+    {
+      "id": "juku-waseda-academy-excluded",
+      "org": "株式会社早稲田アカデミー",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://reg.waseda-ac.co.jp/public/application/add/483",
+      "contactClass": "unknown",
+      "evidence": "IR/faqページから誘導される問い合わせフォームを直接WebFetchで確認したところ、会社名/部署は任意項目で必須項目は氏名・住所等の個人向け相談フォームだった。IR専用のメール/フォームは別途確認できなかった",
+      "verifiedAt": "2026-08-13",
+      "status": "excluded",
+      "excludeReason": "contactClass判定不能(個人向けフォームのみでb2b分離signalなし)のため送信対象外",
+      "addedAt": "2026-08-13",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane3"
+    },
+    {
+      "id": "juku-ecc-bestone-excluded",
+      "org": "株式会社ECC(ECCの個別指導塾ベストワン)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.ecc.co.jp/company/outline.html",
+      "contactClass": "unknown",
+      "evidence": "WebSearchで関西本社・関東本部の代表電話番号を確認したが法人向けオンライン窓口(フォーム/メール)は確認できなかった",
+      "verifiedAt": "2026-08-13",
+      "status": "excluded",
+      "excludeReason": "電話専用パターン(channel enum非対応)のため送信対象外",
+      "addedAt": "2026-08-13",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane3"
     }
   ]
 }
