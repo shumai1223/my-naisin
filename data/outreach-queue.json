@@ -3870,6 +3870,32 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-zenkyoukyou",
+      "org": "全国高等学校定時制通信制教頭・副校長協会",
+      "lane": "npo",
+      "channel": "form",
+      "contact": "https://www.zenkyoukyou.jp/contact/",
+      "contactClass": "b2b",
+      "evidence": "zenkyoukyou.jp/contact/を直接WebFetchで確認。『学校名』欄が明示的にある問い合わせフォームでb2b確定。定時制・通信制高校の教頭・副校長で構成される全国団体",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-kobunren",
+      "org": "公益社団法人全国高等学校文化連盟",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "https://www.kobunren.or.jp/contact/",
+      "contactClass": "b2b",
+      "evidence": "kobunren.or.jp/contact/を直接WebFetchで確認。フォーム自体は氏名/メール/件名の3項目のみで組織名欄は無いが、団体の構成員が全国の高等学校文化部連盟であり事業自体が学校単位の加盟団体との連携が前提のためb2b確定",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
