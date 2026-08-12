@@ -4221,6 +4221,32 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+    },
+    {
+      "id": "lane1-kmkk",
+      "org": "一般社団法人かながわ民間教育協会",
+      "lane": "moshi",
+      "channel": "form",
+      "contact": "https://ws.formzu.net/dist/S17847074/",
+      "contactClass": "b2b",
+      "evidence": "公式サイト`kmkk.or.jp`を直接WebFetchで確認。本部事務局の公式問い合わせフォームを確認しb2b確定。神奈川県の民間教育(学習塾)団体で、既存の『神奈川県私塾協同組合』(見送り済)とは別法人",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+    },
+    {
+      "id": "lane1-aomoriken-juku",
+      "org": "青森県学習塾協議会",
+      "lane": "moshi",
+      "channel": "form",
+      "contact": "https://aomoriken-juku.jp/toiawase/",
+      "contactClass": "b2b",
+      "evidence": "公式サイト`aomoriken-juku.jp`を直接WebFetchで確認。専用の問い合わせページ(`/toiawase/`)を持つ公式窓口を確認しb2b確定。青森県の学習塾協議会",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
     }
   ]
 }
