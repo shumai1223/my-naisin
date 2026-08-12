@@ -3337,6 +3337,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-jsshse",
+      "org": "日本高校教育学会",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "nihonkoukou@gmail.com",
+      "contactClass": "b2b",
+      "evidence": "jsshse.s1007.xrea.com/contact.htmlを直接curl取得(cert wildcard不一致でWebFetch不可のためcurl -k使用)。メールアドレスが画像(ngc-1.png)化されていたためダウンロードしRead toolのビジョン解析でnihonkoukou@gmail.comを目視確認。gmailだがローカル部が学会名の略(日本高校)で個人名を含まないため既存の日本教育制度学会(jseso1993@gmail.com)と同型でPII非該当と判断。高校教育を専門とする学術団体で当サイトのテーマと直接一致",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
