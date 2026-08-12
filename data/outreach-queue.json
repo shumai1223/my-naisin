@@ -3415,6 +3415,32 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane8"
+    },
+    {
+      "id": "lane8-nagasaki-kyoikukai",
+      "org": "一般財団法人長崎県教育会",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "k-k-kai@ngs2.cncm.ne.jp",
+      "contactClass": "b2b",
+      "evidence": "www1.cncm.ne.jp/~k-k-kai/を直接WebFetchで確認し事務局宛k-k-kai@ngs2.cncm.ne.jp(個人名なし)を採用。WebSearchで事業内容を裏取りし、長崎県の教育関係者の資質向上・研修・論文募集・教職セミナー等を展開する教育振興団体(信濃教育会・山口県教育会と同型の県単位教育職能団体)と確認",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane8"
+    },
+    {
+      "id": "lane8-yamaguchi-kyoikukai",
+      "org": "一般財団法人山口県教育会",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "ykyoikuk@ruby.ocn.ne.jp",
+      "contactClass": "b2b",
+      "evidence": "sites.google.com/view/yamakyou/を直接WebFetchで確認し事務局宛ykyoikuk@ruby.ocn.ne.jp(個人名なし)を採用。山口県教育会館の運営・情報紙『山口県教育』刊行・『山口県教育の日』事業等を展開する県単位教育職能団体(既存記載どおり)",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane8"
     }
   ]
 }
