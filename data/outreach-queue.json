@@ -3688,6 +3688,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane3"
+    },
+    {
+      "id": "lane3-gakuyusya",
+      "org": "株式会社学友社",
+      "lane": "b2b-saas",
+      "channel": "email",
+      "contact": "gakuyu@tokyo-horei.co.jp",
+      "contactClass": "b2b",
+      "evidence": "gakuyusya.co.jp/contact.htmlを直接WebFetchで確認。『学友社の教材は、学習塾・私立学校の専用教材ですので個人のお客様への販売はいたしません』と明記され事業自体が完全に法人限定であることを確認しb2b確定。メールgakuyu@tokyo-horei.co.jp(個人名なし・東京法令出版と同系列)。JJA企業会員一覧より発掘",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane3"
     }
   ]
 }
