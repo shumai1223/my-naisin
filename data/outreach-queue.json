@@ -3623,6 +3623,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
+    },
+    {
+      "id": "lane2-nichieisha",
+      "org": "株式会社日栄社",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.nichieisha.com/contact",
+      "contactClass": "b2b",
+      "evidence": "nichieisha.com/contactを直接WebFetchで確認。職業選択(教員/高校生/受験生/保護者等)+『学校名』欄(該当職業選択時)を確認しb2b確定。学参協会加盟の教育出版社(lane2・50社中の1社)",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
     }
   ]
 }
