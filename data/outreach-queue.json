@@ -4351,6 +4351,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
+    },
+    {
+      "id": "lane5-zenshigaku",
+      "org": "一般社団法人全私学新聞",
+      "lane": "media",
+      "channel": "form",
+      "contact": "https://www.zenshigaku-np.jp/contact/",
+      "contactClass": "b2b",
+      "evidence": "公式サイト`zenshigaku-np.jp/contact/`を直接WebFetchで確認。問い合わせ項目に『記事』『広告』『その他』の選択肢がある公式フォームでb2b確定。私立学校の教育・経営者向け専門紙を発行する一般社団法人",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
     }
   ]
 }
