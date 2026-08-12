@@ -3519,6 +3519,45 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "lane2-kairyudo",
+      "org": "開隆堂出版株式会社",
+      "lane": "b2b-saas",
+      "channel": "email",
+      "contact": "d_hanbai@kairyudo.co.jp",
+      "contactClass": "b2b",
+      "evidence": "kairyudo.co.jp/contents/02_chu/info/r7/index.htmを直接WebFetchで確認。製造供給部宛d_hanbai@kairyudo.co.jp(個人名なし・デジタル教科書ライセンス問い合わせ用)を採用。教科書協会加盟の教育出版社(lane2・50社中の1社)",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
+    },
+    {
+      "id": "lane2-tac",
+      "org": "TAC株式会社(出版事業部)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://koukou.tac-school.co.jp/contact/",
+      "contactClass": "b2b",
+      "evidence": "koukou.tac-school.co.jp/contact/を直接WebFetchで確認。高校の先生専用の問い合わせフォームで学校名欄+氏名/フリガナ/電話/メール必須、区分に書籍注文/学習支援プログラム等がありb2b確定。学参協会加盟(lane2・50社中の1社)",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
+    },
+    {
+      "id": "lane2-yamakawa",
+      "org": "株式会社山川出版社",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://forms.gle/6PfFfiKedeXnFRsU7",
+      "contactClass": "b2b",
+      "evidence": "yamakawa.co.jp/contact/を直接WebFetchで発見したGoogleフォームを直接確認。問い合わせ区分に『権利関連』、所属(任意・学校/企業/団体)欄、職業選択に教員等がありb2b確定。教科書協会加盟の教育出版社(lane2・50社中の1社)",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
     }
   ]
 }
