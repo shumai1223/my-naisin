@@ -3987,6 +3987,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-katei-ed",
+      "org": "公益財団法人全国高等学校家庭科教育振興会",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "katei-ed@katei-ed.or.jp",
+      "contactClass": "b2b",
+      "evidence": "katei-ed.or.jp/contact.htmlを直接WebFetchで確認。事務局宛katei-ed@katei-ed.or.jp(アドレス自体は個人名を含まない)+フォームに『会社名』『部署名』欄があることを確認しb2b確定。高校家庭科の技術検定を実施する公益財団法人",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
