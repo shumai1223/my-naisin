@@ -3220,6 +3220,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-jerass",
+      "org": "全国社会科教育学会(社会科教育の学術団体)",
+      "lane": "npo",
+      "channel": "form",
+      "contact": "https://jerass.jp/contactus/inquirybyemail/",
+      "contactClass": "b2b",
+      "evidence": "jerass.jp/contactus/inquirybyemail/を直接WebFetchで確認。氏名/メールアドレス/お問い合わせの詳細が必須(所属機関/会員種別は任意)の実在フォーム構造を確認しb2b確定。日本社会科教育学会(socialstudies.jp・別法人)とは異なる社会科教育の学術団体",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
