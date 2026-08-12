@@ -3584,6 +3584,32 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
+    },
+    {
+      "id": "lane2-gakuto",
+      "org": "学校図書株式会社",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "http://inquiry.gakuto-plus.jp/gakuto_inquiry_new/",
+      "contactClass": "b2b",
+      "evidence": "gakuto.co.jp/inquiry/がinquiry.gakuto-plus.jp/gakuto_inquiry_new/へ301リダイレクトすることを直接WebFetchで確認。『学校名，団体名』欄+デジタル教科書/Studyaid D.B.等の区分を確認しb2b確定。WebSearch要約が提示したsuishin@gakuto.co.jpはこのページに記載が無く不採用。教科書協会加盟の教育出版社(lane2・50社中の1社)",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
+    },
+    {
+      "id": "lane2-nichibun",
+      "org": "日本文教出版株式会社",
+      "lane": "b2b-saas",
+      "channel": "email",
+      "contact": "d-sapo@nichibun-g.co.jp",
+      "contactClass": "b2b",
+      "evidence": "nichibun-g.co.jp/contact/を直接WebFetchで確認。サポートデスク宛d-sapo@nichibun-g.co.jp(個人名なし)が『教育委員会様の一括申請』にも使われる窓口と明記されておりb2b確定。教科書協会加盟の教育出版社(lane2・50社中の1社)",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
     }
   ]
 }
