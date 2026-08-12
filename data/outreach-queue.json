@@ -3701,6 +3701,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane3"
+    },
+    {
+      "id": "lane3-freemind",
+      "org": "株式会社FREEMIND",
+      "lane": "edtech",
+      "channel": "form",
+      "contact": "https://www.freemind.co.jp/contact/",
+      "contactClass": "b2b",
+      "evidence": "freemind.co.jp/contact/を直接WebFetchで確認。問い合わせ区分が『塾コアパッケージ/デモ依頼』『Formaid(学習塾サイトのCV改善チャット型フォーム)』『Eラーニング』『システム開発』等、事業自体が学習塾・英語教室(Lepton)フランチャイズ向けに特化しておりb2b確定。JJA企業会員一覧より発掘",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane3"
     }
   ]
 }
