@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>My Naishin データライセンス 稟議資料</title>
+<style>
+  @page { size: A4; margin: 18mm; }
+  body {
+    font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Noto Sans JP", sans-serif;
+    color: #1a1a1a;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 24px;
+    line-height: 1.6;
+    font-size: 13px;
+  }
+  h1 { font-size: 18px; border-bottom: 3px solid #2563eb; padding-bottom: 8px; margin-bottom: 4px; }
+  .subtitle { color: #555; font-size: 12px; margin-bottom: 20px; }
+  h2 { font-size: 13px; background: #eef2ff; padding: 4px 10px; margin-top: 16px; margin-bottom: 6px; border-left: 4px solid #2563eb; }
+  table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  td, th { border: 1px solid #ddd; padding: 5px 8px; text-align: left; vertical-align: top; }
+  th { background: #f5f5f5; width: 26%; }
+  .placeholder { color: #b45309; background: #fffbeb; padding: 1px 4px; }
+  .footer { margin-top: 20px; font-size: 11px; color: #666; border-top: 1px solid #ddd; padding-top: 8px; }
+  ul { margin: 4px 0; padding-left: 18px; }
+  li { margin-bottom: 2px; }
+</style>
+</head>
+<body>
+
+<h1>My Naishin データライセンス・API ご提案資料</h1>
+<div class="subtitle">全国47都道府県 公立高校 内申点・入試制度計算データ／API</div>
+
+<h2>何のデータか</h2>
+<table>
+  <tr><th>提供内容</th><td>全国47都道府県の公立高校入試における内申点(調査書点)計算方式・入試総合得点計算方式のデータおよび計算API</td></tr>
+  <tr><th>提供形態</th><td>REST API／MCPサーバー／CSV／JSON の4形態（本番稼働中）</td></tr>
+  <tr><th>収録範囲</th><td>公立高校のみ（私立は対象外）。全都道府県の計算方式に対応。学校別の複数年度倍率データは42/47都道府県で整備済み</td></tr>
+</table>
+
+<h2>どこが一次ソースか</h2>
+<table>
+  <tr><th>出典</th><td>各都道府県教育委員会が公表する入学者選抜実施要綱等の一次資料のみ。独自推定・独自計算は一切行わない</td></tr>
+  <tr><th>出典の確認</th><td>データ1件ごとに出典URL・確認日を保持。お問い合わせいただければ該当データの一次ソースを個別に提示可能</td></tr>
+</table>
+
+<h2>更新体制</h2>
+<table>
+  <tr><th>年次更新</th><td>制度改定の公表から60日以内に反映</td></tr>
+  <tr><th>更新対象</th><td>公表資料に基づく制度変更のみ（独自推定は行わない）</td></tr>
+  <tr><th>誤り訂正</th><td>報告から5営業日以内に訂正</td></tr>
+  <tr><th>サポート</th><td>平日2営業日以内の対応</td></tr>
+  <tr><th>稼働率</th><td>SLA数値保証は行わず、実績値を公開する方針（個人運営の実態を隠さず、約束できる範囲だけを約束する）</td></tr>
+</table>
+
+<h2>価格</h2>
+<table>
+  <tr><th>プラン</th><td class="placeholder">［👤確定後に記入］ Free / Pro / Business / Enterprise の4段階を想定。詳細はお問い合わせ時にご案内</td></tr>
+  <tr><th>お試し</th><td>無料プランでAPIキーを即時発行し、契約前に技術検証が可能</td></tr>
+</table>
+
+<h2>導入方法</h2>
+<ul>
+  <li>REST API または MCPサーバーとして既存システムに組み込み</li>
+  <li>CSV/JSONでの一括データ納品にも対応</li>
+  <li>再配布権付きプランでは、貴社の顧客向けサービスにデータそのものを組み込むことも可能</li>
+</ul>
+
+<h2>試用方法</h2>
+<ul>
+  <li>開発者向けページ（<span class="placeholder">https://my-naishin.com/developers</span>）よりAPI Playgroundをその場でお試しいただけます</li>
+  <li>無料プランのAPIキーはその場で即時発行</li>
+</ul>
+
+<div class="footer">
+  提供事業者: <span class="placeholder">［事業者名は👤が記入・PIIのため空欄］</span><br>
+  お問い合わせ: <span class="placeholder">naishin.dev@gmail.com</span><br>
+  ※本資料は稟議・社内検討用の1枚資料です。価格・契約条件は個別にご案内いたします。
+</div>
+
+</body>
+</html>
