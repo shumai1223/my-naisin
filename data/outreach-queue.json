@@ -3194,6 +3194,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "lane5-asahi-chukosei",
+      "org": "朝日学生新聞社(朝日中高生新聞・中高生向け月刊タブロイド紙)",
+      "lane": "media",
+      "channel": "form",
+      "contact": "https://form.run/@asagaku-FcEeTyg2tapUj9I7m1L6",
+      "contactClass": "b2b",
+      "evidence": "asagaku.com/media.htmlを直接WebFetchで確認。広告部専用フォーム(form.run)を確認しb2b確定(東京本社/大阪支社の広告部専用電話番号も併記)。朝日中高生新聞は当サイトの主要読者層(中高生)に直接届く数少ないメディアで、既存の高校生新聞オンラインとは別法人・別媒体",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
     }
   ]
 }
