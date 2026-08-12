@@ -3233,6 +3233,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane1-shizuoka-jukuren",
+      "org": "協同組合静岡県私塾連盟(静岡県知事認可の私塾連盟)",
+      "lane": "juku",
+      "channel": "email",
+      "contact": "okapjuku@gmail.com",
+      "contactClass": "b2b",
+      "evidence": "shizuoka-jukuren.site/sp/を直接WebFetchで確認。トップページにmailto:okapjuku@gmail.com直接公開+専用お問い合わせフォームの両方を確認しb2b確定(gmailだが組織名由来のアカウントで個人名非含有のためPII非該当)。都道府県単位の私塾協同組合(東京/千葉に続く3件目)",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
     }
   ]
 }
