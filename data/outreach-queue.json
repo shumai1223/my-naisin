@@ -4169,6 +4169,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "lane4-shinrokikaku",
+      "org": "株式会社進路企画(進学情報プラットフォーム『進路の広場』・1985年創業の高校進路指導支援会社)",
+      "lane": "edtech",
+      "channel": "form",
+      "contact": "https://www.shinrokikaku.co.jp/aboutus/form",
+      "contactClass": "b2b",
+      "evidence": "公式サイトを直接WebFetchで確認。問い合わせフォームに『会社名/学校名』の入力欄があり、高校進路指導を専業とする会社(30年以上・進学情報配信/ネット添削サービス)であることを確認しb2b確定",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     }
   ]
 }
