@@ -42,8 +42,11 @@ export async function POST(request: Request) {
     const obj = (event.data?.object ?? {}) as Record<string, unknown>;
 
     if (event.type === 'checkout.session.completed') {
+      // 2026-08-13価格決定でbusinessティアが追加された。issueApiKey内部のnormalizeTier()は
+      // 既に'business'を正しく保持するが、この型注釈も実態に合わせて広げておく。
       const tier =
-        ((obj.metadata as Record<string, string> | undefined)?.tier as 'pro' | 'scale' | undefined) ?? 'pro';
+        ((obj.metadata as Record<string, string> | undefined)?.tier as 'pro' | 'business' | 'scale' | undefined) ??
+        'pro';
       const email =
         (obj.customer_email as string | undefined) ||
         ((obj.customer_details as Record<string, string> | undefined)?.email as string | undefined);
