@@ -4000,6 +4000,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-zenshin-teishin",
+      "org": "公益財団法人全国高等学校定時制通信制教育振興会",
+      "lane": "npo",
+      "channel": "form",
+      "contact": "https://kokotto.com/contact/",
+      "contactClass": "b2b",
+      "evidence": "kokotto.com/contact/を直接WebFetchで確認。『名前または学校名』欄+区分(各種申請/刊行物関連/団体情報/その他)を確認しb2b確定。定時制・通信制高校教育の振興を行う公益財団法人",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
