@@ -3922,6 +3922,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-jeas",
+      "org": "日本教育行政学会",
+      "lane": "npo",
+      "channel": "form",
+      "contact": "https://forms.gle/ouMVyTShjinsGKaw9",
+      "contactClass": "b2b",
+      "evidence": "jeas.jpのGoogleフォームを直接WebFetchで確認。『お名前・ご所属について』の必須項目があり組織識別が可能なことを確認しb2b確定。教育行政学の学術団体",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
