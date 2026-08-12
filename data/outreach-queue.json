@@ -4751,6 +4751,20 @@
       "excludeReason": "電話専用パターン(channel enum非対応)のため送信対象外",
       "addedAt": "2026-08-13",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane3"
+    },
+    {
+      "id": "gakusan-kyogei-excluded",
+      "org": "株式会社教育芸術社(教芸)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.kyogei.co.jp/contactform/",
+      "contactClass": "unknown",
+      "evidence": "WebFetchで3回連続(2026-08-12・過去セッション含む)Socket is closedエラーとなり内容を確認できなかった。教科書購入は全国教科書供給協会経由と案内されている情報のみWebSearchで確認",
+      "verifiedAt": "2026-08-13",
+      "status": "excluded",
+      "excludeReason": "WebFetch到達不能(Socket is closed・3回連続)のため確証を得られず送信対象外",
+      "addedAt": "2026-08-13",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
     }
   ]
 }
