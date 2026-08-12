@@ -3298,6 +3298,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
+    },
+    {
+      "id": "lane1-morigami",
+      "org": "株式会社森上教育研究所(中学受験・教育コンサルティングの調査研究機関)",
+      "lane": "juku",
+      "channel": "email",
+      "contact": "morigami@morigami.co.jp",
+      "contactClass": "b2b",
+      "evidence": "morigami.co.jp/access/を直接WebFetchで確認しmorigami@morigami.co.jpを確定しb2b確定。中学受験業界で著名な調査研究機関(ダイヤモンド・オンライン等で連載も持つ)。中学受験情報局とは別法人だが同じ業界の専門家組織",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
     }
   ]
 }
