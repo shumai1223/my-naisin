@@ -69,6 +69,68 @@ export default function TermsPage() {
           </section>
 
           <section>
+            <h2 className="mb-3 text-lg font-bold text-slate-800">第2条の3（有償プランの提供条件）</h2>
+            <p className="text-sm leading-relaxed text-slate-600">
+              法人・開発者向け有償プラン（Business・Enterprise）については、以下の条件で提供します。
+            </p>
+            <ul className="mt-2 space-y-2 text-sm leading-relaxed text-slate-600">
+              <li className="flex gap-2">
+                <span className="text-blue-500">•</span>
+                <span>
+                  <strong className="text-slate-700">年次更新：</strong>
+                  各都道府県教育委員会が翌年度の入学者選抜実施要項を公表してから60日以内に、本サービスのデータへ反映します。
+                  反映の対象は教育委員会が公表した資料に基づく変更のみとし、非公表の運用や学校ごとの内規は対象としません。
+                </span>
+              </li>
+              <li className="flex gap-2">
+                <span className="text-blue-500">•</span>
+                <span>
+                  <strong className="text-slate-700">サポート：</strong>
+                  お問い合わせには原則として平日2営業日以内にメールで回答します。電話サポート・オンサイト対応は行っておりません。
+                </span>
+              </li>
+              <li className="flex gap-2">
+                <span className="text-blue-500">•</span>
+                <span>
+                  <strong className="text-slate-700">稼働率：</strong>
+                  稼働率について契約上の保証（SLA）は行いません。過去の稼働実績は別途公開する運用とし、
+                  数値の保証・違約金の対象とはしません。
+                </span>
+              </li>
+              <li className="flex gap-2">
+                <span className="text-blue-500">•</span>
+                <span>
+                  <strong className="text-slate-700">障害発生時の対応：</strong>
+                  障害等によりサービスが停止した場合、返金・減額は行わず、停止時間分だけ契約期間を延長する対応を基本とします。
+                </span>
+              </li>
+              <li className="flex gap-2">
+                <span className="text-blue-500">•</span>
+                <span>
+                  <strong className="text-slate-700">データの正確性：</strong>
+                  提供するデータには出典（都道府県教育委員会等の公表資料）のURLを付与し、第三者が検証できる状態を維持します。
+                  誤りが確認された場合は、報告を受けてから5営業日以内の訂正に努めます。ただし誤りが皆無であることを保証するものではありません。
+                </span>
+              </li>
+              <li className="flex gap-2">
+                <span className="text-blue-500">•</span>
+                <span>
+                  <strong className="text-slate-700">Proプランでの商用利用：</strong>
+                  Proプラン（月額¥9,800）は非商用利用を前提としています。第三者への提供等の商用利用が判明した場合、
+                  Businessプラン相当額を遡って請求する場合があります。
+                </span>
+              </li>
+              <li className="flex gap-2">
+                <span className="text-blue-500">•</span>
+                <span>
+                  <strong className="text-slate-700">契約主体：</strong>
+                  年額プラン（Business・Enterprise）の契約主体は、運営者（未成年）の親権者名義とします。
+                </span>
+              </li>
+            </ul>
+          </section>
+
+          <section>
             <h2 className="mb-3 text-lg font-bold text-slate-800">第3条（免責事項）</h2>
             <ul className="space-y-2 text-sm leading-relaxed text-slate-600">
               <li className="flex gap-2">
@@ -113,7 +175,7 @@ export default function TermsPage() {
           </section>
 
           <div className="rounded-xl bg-slate-50 p-4 text-center text-xs text-slate-500">
-            最終更新日: 2026-04-22
+            最終更新日: 2026-08-13
           </div>
         </div>
       </div>
