@@ -3857,6 +3857,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-zentoku",
+      "org": "全国特別支援学校長会",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "info@zentoku.jp",
+      "contactClass": "b2b",
+      "evidence": "WebSearchで発見した2つの異なる年度(令和6年度/令和7年度時点)の推進連盟加盟団体一覧PDFのスニペットに、それぞれ別の会長名(緒方直彦氏/三浦昭広氏)とともにinfo@zentoku.jpが記載されており、2つの独立した文書で一致することを確認(会長個人名はPDF内の役職表記であり組織のアドレス自体には個人名を含まない)。zentokucho.jp公式サイトの問い合わせ先はJS難読化されており直接WebFetch確認はできなかったため、この2文書クロスチェックを根拠に採用。全国約1,011校の特別支援学校校長で構成される全国団体",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
