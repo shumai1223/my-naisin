@@ -3493,6 +3493,32 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane7"
+    },
+    {
+      "id": "lane4-chokyoiku",
+      "org": "一般社団法人超教育協会(LOT)",
+      "lane": "edtech",
+      "channel": "email",
+      "contact": "info@lot.or.jp",
+      "contactClass": "b2b",
+      "evidence": "lot.or.jp/about/admission/を直接WebFetchで確認。事務局(事務局)宛info@lot.or.jp(個人名なし)を採用。JAPET&CEC会員一覧に記載のあるAI・オンライン教育政策提言団体で、当サイトのEdTech/教育データ領域と直接関連",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "lane4-jmooc",
+      "org": "一般社団法人日本オープンオンライン教育推進協議会(JMOOC)",
+      "lane": "edtech",
+      "channel": "form",
+      "contact": "https://docs.google.com/forms/d/e/1FAIpQLScUkUvFa4bZawIqQwwG_PXDXBkz07drva3tSTzPOvspj4duww/viewform",
+      "contactClass": "b2b",
+      "evidence": "jmooc.jpを直接WebFetchで確認しGoogleフォーム経由の問い合わせ窓口を発見。区分にメディア関連・講座配信依頼等があり団体名(任意)欄もありb2b確定。ただし同フォームは「営業目的の勧誘は厳禁」と明記されているため、実際の送信文面はデータ引用・提携趣旨を明確にし営業的トーンを避けるよう👤に申し添える必要あり。JAPET&CEC会員一覧記載の国内MOOC最大手団体",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     }
   ]
 }
