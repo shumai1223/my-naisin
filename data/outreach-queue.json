@@ -4436,6 +4436,19 @@
       "status": "candidate",
       "addedAt": "2026-08-13",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+    },
+    {
+      "id": "gakusan-ohmsha",
+      "org": "オーム社",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.ohmsha.co.jp/contact/kenpon.php",
+      "contactClass": "b2b",
+      "evidence": "公式サイト`ohmsha.co.jp/contact/kenpon.php`(教科書献本申し込みフォーム)を直接WebFetchで確認。必須項目に『学校名』『学部名』『学科名』『学校種別』があり、大学・高専・工業高校等の教員による教科書採択検討向けと明記されておりb2b確定。T-C1サブタスク0で判別済みの教科書協会加盟出版社50社の1社",
+      "verifiedAt": "2026-08-13",
+      "status": "candidate",
+      "addedAt": "2026-08-13",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
     }
   ]
 }
