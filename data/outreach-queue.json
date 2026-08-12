@@ -4410,6 +4410,32 @@
       "status": "candidate",
       "addedAt": "2026-08-13",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+    },
+    {
+      "id": "moshi-nihonkai-shinbun",
+      "org": "新日本海新聞社(鳥取県の新聞社・模試/教育情報事業運営)",
+      "lane": "b2b-saas",
+      "channel": "email",
+      "contact": "web-ad@nnn.co.jp",
+      "contactClass": "b2b",
+      "evidence": "公式サイト`nnn.co.jp/list/company/web-ad/`を直接WebFetchで確認。営業局広告部宛の組織メールアドレス。T-C1サブタスク0で判別済みの模試会社59社の1社(鳥取県対象・js88 pref=31)",
+      "verifiedAt": "2026-08-13",
+      "status": "candidate",
+      "addedAt": "2026-08-13",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+    },
+    {
+      "id": "moshi-ehime-shinbun",
+      "org": "愛媛新聞社(愛媛県の新聞社・模試/教育情報事業運営)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.ehime-np.co.jp/online/information/enp_adguide/contact.html",
+      "contactClass": "b2b",
+      "evidence": "公式サイトを直接WebFetchで確認。広告ガイド内の公式問い合わせフォーム。T-C1サブタスク0で判別済みの模試会社59社の1社(愛媛県対象・js88 pref=38)",
+      "verifiedAt": "2026-08-13",
+      "status": "candidate",
+      "addedAt": "2026-08-13",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
     }
   ]
 }
