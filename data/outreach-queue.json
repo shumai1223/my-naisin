@@ -4397,6 +4397,19 @@
       "status": "candidate",
       "addedAt": "2026-08-13",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "moshi-shimotsuke-shinbun",
+      "org": "株式会社下野新聞社(栃木県の新聞社・模試/教育情報事業運営)",
+      "lane": "b2b-saas",
+      "channel": "email",
+      "contact": "kou-ei@shimotsuke.co.jp",
+      "contactClass": "b2b",
+      "evidence": "公式サイト`shimotsuke.co.jp/list/company/otoiawase`を直接WebFetchで確認。ビジネス局(広告申込み等の法人窓口)宛の組織メールアドレス。T-C1 サブタスク0で判別済みの模試会社59社の1社(栃木県対象・js88 pref=9)",
+      "verifiedAt": "2026-08-13",
+      "status": "candidate",
+      "addedAt": "2026-08-13",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
     }
   ]
 }
