@@ -4325,6 +4325,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "gakusan-ikushin",
+      "org": "株式会社育伸社(私立高校募集要項・倍率データ等の教材出版社)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://school-ikushin.jp/contact",
+      "contactClass": "b2b",
+      "evidence": "私立学校専用サイト`school-ikushin.jp/contact`を直接WebFetchで確認。ページに『こちらは、学校の先生方向けの専用お問い合わせフォームになります』と明記、必須項目に『学校名』『先生のお名前』『役職・教科』ありb2b確定。S13-A(データバンク商品化)調査で判明した進研ゼミ(ベネッセ)への私立高校倍率データ供給元でもあり、当サイトと同一データ領域(私立高校募集定員・倍率)を扱う出版社",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
     }
   ]
 }
