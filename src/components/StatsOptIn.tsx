@@ -13,6 +13,7 @@ import { BarChart3, ShieldCheck } from 'lucide-react';
 
 import { readStatsConsent, grantStatsConsent, revokeStatsConsent } from '@/lib/stats-consent';
 import { submitStatsResult } from '@/lib/stats-submit-client';
+import { createStatsSubmitScheduler, type StatsSubmitScheduler } from '@/lib/stats-submit-scheduler';
 import { trackEvent, EVENTS } from '@/lib/track';
 import { useExperiment } from '@/components/ab/useExperiment';
 import { getExperiment, type ExperimentArm } from '@/lib/experiments';
@@ -34,7 +35,7 @@ interface StatsOptInProps {
 export function StatsOptIn({ className = '', metric, value, maxValue, prefectureCode }: StatsOptInProps) {
   const [granted, setGranted] = useState(false);
   const [consentedAt, setConsentedAt] = useState<string | null>(null);
-  const submittedSignature = useRef<string | null>(null);
+  const schedulerRef = useRef<StatsSubmitScheduler | null>(null);
   const viewTracked = useRef(false);
 
   const def = getExperiment(STATS_OPTIN_EXPERIMENT_ID);
@@ -59,12 +60,34 @@ export function StatsOptIn({ className = '', metric, value, maxValue, prefecture
     trackEvent(EVENTS.STATS_OPTIN_VIEW, { metric, pref: prefectureCode ?? 'none', variant: variantId });
   }, [metric, value, prefectureCode, variantId]);
 
+  // ⚠️ DW-2（2026-08-12）: ここは以前 `value` が変わるたびに送信していた。
+  //   実測で1人の1セッションが28秒で52行（21.3〜77）を投稿しており、
+  //   全国分布が「最終結果」ではなく「入力途中の状態」の分布になっていた。
+  //   スケジューラ側で「1セッション1件・入力が落ち着いた最終値・離脱時にflush」に固定する。
+  useEffect(() => {
+    if (!granted) return;
+    const scheduler = createStatsSubmitScheduler({
+      submit: (input) => void submitStatsResult(input),
+    });
+    schedulerRef.current = scheduler;
+    // 離脱経路。pagehide はモバイルSafariのbfcache、visibilitychange はタブ切替を拾う。
+    const onLeave = () => scheduler.flush();
+    const onVisibility = () => {
+      if (document.visibilityState === 'hidden') scheduler.flush();
+    };
+    window.addEventListener('pagehide', onLeave);
+    document.addEventListener('visibilitychange', onVisibility);
+    return () => {
+      window.removeEventListener('pagehide', onLeave);
+      document.removeEventListener('visibilitychange', onVisibility);
+      scheduler.dispose();
+      schedulerRef.current = null;
+    };
+  }, [granted]);
+
   useEffect(() => {
     if (!granted || !metric || typeof value !== 'number' || !Number.isFinite(value)) return;
-    const signature = `${metric}:${prefectureCode ?? ''}:${value}:${maxValue ?? ''}`;
-    if (submittedSignature.current === signature) return;
-    submittedSignature.current = signature;
-    void submitStatsResult({ metric, value, maxValue: maxValue ?? undefined, prefectureCode });
+    schedulerRef.current?.update({ metric, value, maxValue: maxValue ?? undefined, prefectureCode });
   }, [granted, metric, value, maxValue, prefectureCode]);
 
   const handleToggle = () => {
