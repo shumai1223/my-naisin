@@ -3818,6 +3818,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-jahee",
+      "org": "日本家庭科教育学会",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "kateika@jahee.jp",
+      "contactClass": "b2b",
+      "evidence": "jahee.jpのメールアドレス画像(jimukyoku_url.gif)を直接ダウンロードしOCR確認。kateika@jahee.jp(個人名なし)が正しいアドレスと判明(WebSearch要約が提示したkateika@amethyst.broba.ccは誤りで既知のWebSearch作話パターンを回避)。家庭科教育の学術団体",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
