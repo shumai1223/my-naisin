@@ -3740,6 +3740,32 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-jaeis",
+      "org": "日本情報科教育学会",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "jaeis-jimu@jaeis.org",
+      "contactClass": "b2b",
+      "evidence": "jaeis.org/jimukyoku/を直接WebFetchで確認。事務局宛jaeis-jimu@jaeis.org(個人名なし)を採用。高校情報科教育の学術団体で当サイトのテーマ(高校入試・教科)と隣接",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-jaet",
+      "org": "一般社団法人日本教育工学協会(JAET)",
+      "lane": "npo",
+      "channel": "form",
+      "contact": "https://jaet.jp/contact/",
+      "contactClass": "b2b",
+      "evidence": "jaet.jp/contact/を直接WebFetchで確認。フォーム自体は氏名/メール/内容の3項目のみだが、団体の中核事業が学校向け『学校情報化認定』(学校を審査・認定する制度)であり組織向けサービスと確認。既存の日本教育工学会(JSET・jset.gr.jp)とは別法人",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
