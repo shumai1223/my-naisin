@@ -4182,6 +4182,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "lane4-tao-tenjin",
+      "org": "株式会社タオ(ICT教材『天神』・塾/放デイ/フリースクール/学校/保育施設向け)",
+      "lane": "edtech",
+      "channel": "form",
+      "contact": "https://www.tenjin.cc/inquiries/form/co/",
+      "contactClass": "b2b",
+      "evidence": "公式サイト`tenjin.cc/contents/inquiries/`を直接WebFetchで確認。問い合わせ導線が『個人(ご家庭)でご利用予定』『法人(学校等)でご利用予定』『個人・法人でご利用中』の3区分に明確に分かれており、法人向け専用フォーム(`/inquiries/form/co/`)・専用電話(0120-019-828)・資料請求フォームが個人向けと別に用意されていることを確認しb2b確定",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     }
   ]
 }
