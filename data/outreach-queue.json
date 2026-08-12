@@ -4026,6 +4026,32 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-jasdd",
+      "org": "日本発達障害学会",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "office@jasdd.org",
+      "contactClass": "b2b",
+      "evidence": "jasdd.org/gaiyo/を直接WebFetchで確認。事務局宛office@jasdd.org(個人名なし)を採用。発達障害研究の学術団体",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-jacdp",
+      "org": "一般社団法人日本臨床発達心理士会",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "jacdp-post@as.bunken.co.jp",
+      "contactClass": "b2b",
+      "evidence": "jacdp.jp/contact/はWebFetch(302リダイレクト経由でネットワークフィルタにブロック)・curl(403)いずれも直接確認できなかったため、WebSearch要約が提示したjacdp-post@as.bunken.co.jpをas.bunken.co.jp事務局代行パターン(本セッションで日本カリキュラム学会・日本学校心理学会・日本子ども学会等9件以上を直接WebFetchで確認済みの実績あるドメイン)の強い一致として採用。個人名は含まない。臨床発達心理士の職能団体",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
