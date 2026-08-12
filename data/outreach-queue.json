@@ -3961,6 +3961,32 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-zennokocyokai",
+      "org": "全国農業高等学校長協会",
+      "lane": "npo",
+      "channel": "form",
+      "contact": "https://www.zennokocyokai.org/otoiawase/otoiawase",
+      "contactClass": "b2b",
+      "evidence": "zennokocyokai.org/otoiawase/otoiawaseを直接WebFetchで確認。『所属』必須欄がある一般問い合わせフォームでb2b確定。農業高校の校長で構成される全国団体",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-zensho",
+      "org": "公益財団法人全国商業高等学校協会",
+      "lane": "npo",
+      "channel": "form",
+      "contact": "https://zensho.or.jp/contact/",
+      "contactClass": "b2b",
+      "evidence": "zensho.or.jp/contact/を直接WebFetchで確認。担当教員メールアドレス+都道府県/学校名欄のある検定合格者発表用フォームで学校・教員からの提出を前提とした窓口(用途は限定的だが教員/学校名の識別が可能)でb2b確定。商業高校の全国団体",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
