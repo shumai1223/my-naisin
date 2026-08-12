@@ -3831,6 +3831,32 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-jste",
+      "org": "一般社団法人日本産業技術教育学会",
+      "lane": "npo",
+      "channel": "form",
+      "contact": "http://www.jste.jp/main/contact/contact.html",
+      "contactClass": "b2b",
+      "evidence": "jste.jp/main/contact/contact.htmlを直接WebFetchで確認。氏名/所属/住所/電話/メールの入力フォームがあり所属欄で組織識別が可能なことを確認しb2b確定。技術科教育の学術団体",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-jsfee",
+      "org": "一般社団法人日本環境教育学会",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "office@jsfee.jp",
+      "contactClass": "b2b",
+      "evidence": "jsfee.jpを直接WebFetchで確認。事務局宛office@jsfee.jp(個人名なし)を採用。環境教育の学術団体",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
