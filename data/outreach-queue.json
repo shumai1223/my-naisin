@@ -3727,6 +3727,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-jslis",
+      "org": "日本図書館情報学会",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "office@jslis.jp",
+      "contactClass": "b2b",
+      "evidence": "jslis.jp/contact/を直接WebFetchで確認。事務局宛office@jslis.jp(個人名なし・所在地は相模女子大学金井研究室内だが窓口自体は事務局表記で個人名非含有)。図書館情報学の学術団体",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
