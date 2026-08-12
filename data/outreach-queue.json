@@ -3311,6 +3311,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-jass",
+      "org": "社会言語科学会",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "jass-post@as.bunken.co.jp",
+      "contactClass": "b2b",
+      "evidence": "jass.ne.jp/procedure/contact/を直接WebFetchで確認。事務局(国際文献社アカデミーセンター内)宛のjass-post[at]as.bunken.co.jpが平文で明記されており個人名の記載なし。既存複数学会と同型のas.bunken.co.jp事務局代行パターンでb2b確定。社会言語科学(言語教育・コミュニケーション研究)の学術団体",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
