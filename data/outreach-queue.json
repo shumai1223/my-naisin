@@ -4208,6 +4208,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane1-kyoto-shijukurenmei",
+      "org": "京都私塾連盟",
+      "lane": "moshi",
+      "channel": "form",
+      "contact": "https://forms.gle/LJpa3Xatrv1mce7U7",
+      "contactClass": "b2b",
+      "evidence": "公式サイト`ksr-net.jp/home.html`を直接WebFetchで確認。Googleフォームによる公式問い合わせ窓口を確認しb2b確定。education-career.jpの学習塾関連協会・団体一覧(2024年版)から発掘・京都府の私塾連盟(過去に別組織『京都総合学習塾』は見送り済だが本団体は別法人)",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
     }
   ]
 }
