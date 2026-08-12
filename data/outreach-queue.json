@@ -3207,6 +3207,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
+    },
+    {
+      "id": "lane9-sjst",
+      "org": "一般社団法人日本理科教育学会(理科教育の学術団体)",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "sjst@nacos.com",
+      "contactClass": "b2b",
+      "evidence": "sjst.jpトップページを直接WebFetchで確認。ページ下部に事務局連絡先として「E-mail：sjst@nacos.com」を明記しており確認しb2b確定(WebSearchが提示した次世代企画委員会宛のgmailアドレスは委員会限定かつ表記が不自然だったため不採用し、より確実な事務局本体のnacos.comアドレスを採用)。学会運営代行のnacos.com(日本理科教育学会等の学会事務局代行会社)ドメイン",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
