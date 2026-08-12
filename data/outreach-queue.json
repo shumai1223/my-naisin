@@ -3181,6 +3181,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane4-jotea",
+      "org": "一般社団法人日本オンライン教育産業協会(JOTEA・オンライン教育産業の業界団体・日本eラーニング大賞主催)",
+      "lane": "edtech",
+      "channel": "email",
+      "contact": "info@jotea.org",
+      "contactClass": "b2b",
+      "evidence": "jotea.org公式サイトを直接WebFetchで確認。Googleフォーム(docs.google.com/forms)とinfo@jotea.orgのメールアドレスの両方を確認しb2b確定。日本eラーニング大賞を22回主催する業界団体で会員企業のプロモーション支援も実施しており当サイトのようなWebベースの教育ツールとの親和性が高い",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     }
   ]
 }
