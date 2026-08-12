@@ -39,6 +39,10 @@ export default async function JukuMatchingPage() {
         <p className="mt-2 text-sm text-slate-500">
           My Naishinが個別に提携している塾・オンライン家庭教師の一覧です。気になる塾があれば、紹介を依頼できます（メールアドレス等の入力は不要です）。
         </p>
+        <div className="mt-3 rounded-xl border border-amber-200 bg-amber-50 p-3 text-xs leading-relaxed text-amber-800">
+          【PR】掲載塾・オンライン家庭教師は、My Naishinと個別に提携契約を結んだ事業者です。紹介を通じて
+          入塾等の成果が発生した場合、当サイトは提携事業者から紹介料（成果報酬）を受け取ります。
+        </div>
 
         {partners.length === 0 ? (
           <div className="mt-8 rounded-2xl border border-dashed border-slate-300 bg-white p-8 text-center">
