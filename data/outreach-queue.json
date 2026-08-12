@@ -3792,6 +3792,32 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-jsme",
+      "org": "日本道徳教育学会",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "office@jsme-japan.org",
+      "contactClass": "b2b",
+      "evidence": "jsme-japan.org/hongaku.htmlを直接WebFetchで確認。事務局宛office@jsme-japan.org(個人名なし)を採用。道徳教育の学術団体",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-jale",
+      "org": "日本生涯教育学会",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "jale-post@kokusaibunken.jp",
+      "contactClass": "b2b",
+      "evidence": "j-lifelong.org/お問い合わせ/を直接WebFetchで確認。事務局宛jale-post@kokusaibunken.jp(個人名なし)を採用。生涯学習・生涯教育の学術団体",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
