@@ -3285,6 +3285,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
+    },
+    {
+      "id": "lane5-e-juken",
+      "org": "アクセラレーテッドラーニングジャパン有限会社(中学受験情報局『かしこい塾の使い方』・中学受験専門メディア)",
+      "lane": "media",
+      "channel": "form",
+      "contact": "https://www.e-juken.jp/mail/",
+      "contactClass": "b2b",
+      "evidence": "e-juken.jp/mail/を直接WebFetchで確認。お名前/メールアドレス/お問い合わせ内容が必須のフォーム(zfrmz.com外部サービス経由)を確認しb2b確定。中学受験界で著名な西村則康氏・小川大介氏が関わる老舗の中学受験専門メディア。当サイトの受験生保護者層と直接重なる隣接メディア",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
     }
   ]
 }
