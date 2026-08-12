@@ -3272,6 +3272,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
+    },
+    {
+      "id": "lane5-nikkei-xwoman",
+      "org": "日経BP(日経xwoman・共働き子育て世代向けメディア・旧日経DUAL)",
+      "lane": "media",
+      "channel": "form",
+      "contact": "https://www.nikkeibp.co.jp/ad/form/index.html?Ref=https://www.nikkeibp.co.jp/ad/atcl/netmedia/NXW/",
+      "contactClass": "b2b",
+      "evidence": "woman.nikkei.com経由でnikkeibp.co.jp/ad/atcl/netmedia/NXW/を直接WebFetchで確認。「広告掲載のお問い合わせ」専用フォーム(電話番号03-6811-8071も併記)を確認しb2b確定。共働き子育て世代(教育熱心な保護者層)向けの日経BPメディアでyomiuri/asahiと異なりnikkei.comはWebFetchブロックされていないことも確認",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
     }
   ]
 }
