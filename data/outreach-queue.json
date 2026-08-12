@@ -3246,6 +3246,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+    },
+    {
+      "id": "lane5-president-family",
+      "org": "プレジデント社(家庭教育誌『プレジデントFamily』・保護者向け教育メディア)",
+      "lane": "media",
+      "channel": "email",
+      "contact": "info@presidentfamily.com",
+      "contactClass": "b2b",
+      "evidence": "presidentfamily.com/inquiry/を直接WebFetchで確認しinfo@presidentfamily.comを確定(WebSearch要約が提示したfamily_ad@president.co.jpはpresident.co.jp/information/contactus/を直接WebFetchで確認したが記載が見つからず不採用=既知のWebSearch作話パターンを回避)。家庭教育誌として保護者層への到達力が高い当サイトの直接的な隣接メディア",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
     }
   ]
 }
