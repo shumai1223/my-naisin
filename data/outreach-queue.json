@@ -4312,6 +4312,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+    },
+    {
+      "id": "lane4-mingaku",
+      "org": "株式会社みんがく(教育プラットフォーム『スクールAI』・全国1,600校以上導入)",
+      "lane": "edtech",
+      "channel": "form",
+      "contact": "https://school-ai.mingaku.net/contact/",
+      "contactClass": "b2b",
+      "evidence": "公式サイト`school-ai.mingaku.net/contact/`を直接WebFetchで確認。フォーム必須項目に『所属(企業名/学校名/塾名など)』欄がありb2b確定。全国の先生が開発に関わった生成AI活用の教育プラットフォームで小中高・専門学科まで1,600校以上が導入",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     }
   ]
 }
