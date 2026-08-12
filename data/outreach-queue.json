@@ -4091,6 +4091,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-sansinchuoukai",
+      "org": "公益財団法人産業教育振興中央会",
+      "lane": "npo",
+      "channel": "form",
+      "contact": "https://www.sansinchuoukai.or.jp/contact.html",
+      "contactClass": "b2b",
+      "evidence": "公式サイト`sansinchuoukai.or.jp/contact.html`を直接WebFetchで確認。入力項目に『学校名』『部署名』欄があり明確に組織(学校/団体)からの問い合わせを想定した設計。工業/商業/水産/家庭等の専門高校教育を横断的に支援する中央団体で、機関誌『産業と教育』を発行",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
