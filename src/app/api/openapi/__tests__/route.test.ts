@@ -47,6 +47,7 @@ const EXCLUDED_ROUTES = new Set<string>([
   '/api/card',
   '/api/mcp',
   '/api/openapi',
+  '/api/version',
 ]);
 
 /** src/app/api配下のroute.tsを再帰列挙し、Next.jsのURLパス形式([code]→{code})に変換する。 */
