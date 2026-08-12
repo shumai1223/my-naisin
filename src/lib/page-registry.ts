@@ -151,4 +151,6 @@ export const SITEMAP_EXCLUDED_ROUTES = [
   '/juku/matching',
   // AA-2：パートナー統合デモ（NEXT_PUBLIC_PARTNER_DEMO_ENABLED='1'まではnotFound()・noindex・実ブランド名不使用の内部確認用）。
   '/partner-demo',
+  // 2026-08-13：見積書の自動発行ツール（ops/PRICING_OPTIONS.md #3）。/developersからリンクする内部ツールでnoindex。
+  '/mitsumori',
 ];

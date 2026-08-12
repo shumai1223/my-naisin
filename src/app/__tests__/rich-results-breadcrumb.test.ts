@@ -35,6 +35,7 @@ const BREADCRUMB_EXEMPT_ROUTES: Record<string, string> = {
   '/terms': '利用規約（リッチリザルト価値が低い定型ページ）',
   '/tokushoho': '特定商取引法に基づく表記（リッチリザルト価値が低い法定表記ページ・T-S13A A-0-1）',
   '/[prefecture]/reverse': 'permanentRedirectのみのリダイレクトページ（実コンテンツ無し）',
+  '/mitsumori': '2026-08-13：noindex・/developersからのみ導線する見積書自動発行の内部ツール（リッチリザルト対象外）',
 };
 
 describe('BreadcrumbSchema網羅チェック（L-2）', () => {

@@ -3,6 +3,7 @@ import Link from 'next/link';
 
 import { APP_NAME } from '@/lib/constants';
 import { TIER_POLICIES, formatTierPrice } from '@/lib/api-tiers';
+import { BUSINESS_INFO } from '@/lib/business-info';
 
 /**
  * 特定商取引法に基づく表記（T-S13A A-0-1）。
@@ -54,17 +55,15 @@ export default function TokushohoPage() {
           <dl className="divide-y divide-slate-100 text-sm">
             <div className="grid gap-1 py-3 sm:grid-cols-3 sm:gap-4">
               <dt className="font-semibold text-slate-700">販売事業者</dt>
-              <dd className="text-slate-600 sm:col-span-2">準備中（親権者名義で表記予定）</dd>
+              <dd className="text-slate-600 sm:col-span-2">{BUSINESS_INFO.sellerName}</dd>
             </div>
             <div className="grid gap-1 py-3 sm:grid-cols-3 sm:gap-4">
               <dt className="font-semibold text-slate-700">運営統括責任者</dt>
-              <dd className="text-slate-600 sm:col-span-2">準備中</dd>
+              <dd className="text-slate-600 sm:col-span-2">{BUSINESS_INFO.responsiblePerson}</dd>
             </div>
             <div className="grid gap-1 py-3 sm:grid-cols-3 sm:gap-4">
               <dt className="font-semibold text-slate-700">所在地</dt>
-              <dd className="text-slate-600 sm:col-span-2">
-                準備中（ご請求があれば遅滞なく開示いたします）
-              </dd>
+              <dd className="text-slate-600 sm:col-span-2">{BUSINESS_INFO.address}</dd>
             </div>
             <div className="grid gap-1 py-3 sm:grid-cols-3 sm:gap-4">
               <dt className="font-semibold text-slate-700">連絡先</dt>
@@ -87,7 +86,11 @@ export default function TokushohoPage() {
                 <Link href="/developers" className="mx-1 font-semibold text-blue-600 underline">
                   Developers
                 </Link>
-                ページの料金表をご確認ください。
+                ページの料金表をご確認ください。Business・Enterpriseの
+                <Link href="/mitsumori" className="mx-1 font-semibold text-blue-600 underline">
+                  見積書
+                </Link>
+                もその場で作成できます。
               </dd>
             </div>
             <div className="grid gap-1 py-3 sm:grid-cols-3 sm:gap-4">

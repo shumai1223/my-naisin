@@ -9,6 +9,7 @@ import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { DatasetSchema } from '@/components/StructuredData/DatasetSchema';
 import { DATASET_DISTRIBUTION, DATASET_META, SITE_URL } from '@/lib/naishin-dataset';
 import { TIER_POLICIES, TIER_CAPABILITY_MATRIX, formatTierPrice, type ApiTier } from '@/lib/api-tiers';
+import { QUOTE_PLANS } from '@/lib/quote-plans';
 
 export const metadata: Metadata = {
   title: '内申点データAPI / MCP（開発者・AI向け）| My Naishin',
@@ -830,12 +831,18 @@ print(naishin["total"])  # -> 52`;
             </p>
             <p className="mt-3 text-lg font-bold text-emerald-700">{formatTierPrice('business')}</p>
             <p className="mt-1 text-xs text-slate-500">初年度価格。契約主体は親権者名義。詳細は<Link href="/tokushoho" className="mx-1 underline">特定商取引法に基づく表記</Link>参照。</p>
-            <div className="mt-4">
+            <div className="mt-4 flex flex-wrap gap-3">
               <Link
                 href="/contact"
                 className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 px-5 py-2.5 text-sm font-bold text-white shadow-md shadow-emerald-200 transition-all hover:shadow-lg"
               >
                 Businessについて相談する
+              </Link>
+              <Link
+                href="/mitsumori"
+                className="inline-flex items-center gap-2 rounded-xl border-2 border-emerald-300 bg-white px-5 py-2.5 text-sm font-bold text-emerald-700 transition-all hover:bg-emerald-50"
+              >
+                見積書を作成する
               </Link>
             </div>
             <p className="mt-3 text-xs text-slate-500">
@@ -866,18 +873,12 @@ print(naishin["total"])  # -> 52`;
                   </tr>
                 </thead>
                 <tbody>
-                  <tr className="border-b border-slate-200">
-                    <td className="py-1.5 pr-3 text-slate-700">基本のみ</td>
-                    <td className="py-1.5 font-semibold text-slate-800">¥1,000,000</td>
-                  </tr>
-                  <tr className="border-b border-slate-200">
-                    <td className="py-1.5 pr-3 text-slate-700">＋再配布権（自社の顧客にデータを渡せる）</td>
-                    <td className="py-1.5 font-semibold text-slate-800">¥1,500,000</td>
-                  </tr>
-                  <tr>
-                    <td className="py-1.5 pr-3 text-slate-700">フル（再配布権＋DB納品）</td>
-                    <td className="py-1.5 font-semibold text-slate-800">¥2,500,000</td>
-                  </tr>
+                  {QUOTE_PLANS.filter((p) => p.id.startsWith('enterprise')).map((p) => (
+                    <tr key={p.id} className="border-b border-slate-200 last:border-b-0">
+                      <td className="py-1.5 pr-3 text-slate-700">{p.label.replace('Enterprise（', '').replace('）', '')}</td>
+                      <td className="py-1.5 font-semibold text-slate-800">¥{p.annualPriceJpy.toLocaleString('ja-JP')}</td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
@@ -885,8 +886,14 @@ print(naishin["total"])  # -> 52`;
               オンプレ提供（自社サーバ内設置・年次更新の適用義務あり）は別途<strong className="mx-1">+¥1,000,000/年</strong>、
               カスタム項目対応は個別見積り（¥300,000〜）。
             </p>
-            <div className="mt-4">
+            <div className="mt-4 flex flex-wrap gap-3">
               <UpgradeButton tier="scale" label="Enterpriseについて相談する" />
+              <Link
+                href="/mitsumori"
+                className="inline-flex items-center gap-2 rounded-xl border-2 border-slate-300 bg-white px-5 py-2.5 text-sm font-bold text-slate-700 transition-all hover:bg-slate-50"
+              >
+                見積書を作成する
+              </Link>
             </div>
             <p className="mt-3 text-xs text-slate-500">
               上記は実際の提示額です。
