@@ -4377,6 +4377,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-code-or-jp",
+      "org": "特定非営利活動法人みんなのコード",
+      "lane": "npo",
+      "channel": "form",
+      "contact": "https://code.or.jp/contact-form/",
+      "contactClass": "b2b",
+      "evidence": "公式サイト`code.or.jp/contact-form/`を直接WebFetchで確認。フォーム必須項目に『法人・団体名』欄がありb2b確定。公教育でのプログラミング/情報教育推進・教員研修・政策提言を手がける全国規模のNPO",
+      "verifiedAt": "2026-08-13",
+      "status": "candidate",
+      "addedAt": "2026-08-13",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
