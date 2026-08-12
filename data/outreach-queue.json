@@ -4640,6 +4640,76 @@
       "excludeReason": "電話専用パターン(channel enum非対応)のため送信対象外",
       "addedAt": "2026-08-13",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane3"
+    },
+    {
+      "id": "juku-j1group-novas-excluded",
+      "org": "株式会社ジェイワングループ(個別指導塾ノーバス)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.nohvas-juku.com/prof/",
+      "contactClass": "unknown",
+      "evidence": "WebSearchで会社概要ページは確認できたが、IR・広報・法人向けの専用オンライン窓口(フォーム/メール)は確認できなかった",
+      "verifiedAt": "2026-08-13",
+      "status": "excluded",
+      "excludeReason": "contactClass判定不能(b2b分離signal未確認)のため送信対象外",
+      "addedAt": "2026-08-13",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane3"
+    },
+    {
+      "id": "juku-showin-excluded",
+      "org": "株式会社ショウイン(松陰塾)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.showin.co.jp/gaiyo/",
+      "contactClass": "unknown",
+      "evidence": "お問い合わせフォームURL(/contact/)がWebFetchで404となり内容確認不能。電話番号(0120-037-401)のみ確認できたが法人向け窓口区分は未確認",
+      "verifiedAt": "2026-08-13",
+      "status": "excluded",
+      "excludeReason": "contactClass判定不能(フォーム到達不能・b2b分離signal未確認)のため送信対象外",
+      "addedAt": "2026-08-13",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane3"
+    },
+    {
+      "id": "juku-kawaijuku-manavis-excluded",
+      "org": "株式会社河合塾マナビス",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.manavis.com/fc/",
+      "contactClass": "unknown",
+      "evidence": "FC加盟募集ページは確認できたが、お客様センターは電話窓口のみ(10:00-17:30)でオンラインの法人専用窓口(フォーム/メール)は確認できなかった",
+      "verifiedAt": "2026-08-13",
+      "status": "excluded",
+      "excludeReason": "電話専用パターン(channel enum非対応)のため送信対象外",
+      "addedAt": "2026-08-13",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane3"
+    },
+    {
+      "id": "juku-trg-tryplus-excluded",
+      "org": "株式会社TRGネットワーク(個別指導塾トライプラス)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.try-plus.com/company",
+      "contactClass": "unknown",
+      "evidence": "FC説明会予約・教室見学の案内は確認できたが、法人向けの専用オンライン窓口(フォーム/メール)の具体的なURLは確認できなかった",
+      "verifiedAt": "2026-08-13",
+      "status": "excluded",
+      "excludeReason": "contactClass判定不能(b2b分離signal未確認)のため送信対象外",
+      "addedAt": "2026-08-13",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane3"
+    },
+    {
+      "id": "juku-enw-selmo-excluded",
+      "org": "エデュケーション・ネットワークス株式会社(個別学習のセルモ)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://enw.co.jp/contact/index.html",
+      "contactClass": "unknown",
+      "evidence": "お問い合わせページを直接WebFetchしたが具体的なフォーム区分・入力項目を確認できず、電話番号(0120-334-778)と説明会予約リンクのみ確認できた",
+      "verifiedAt": "2026-08-13",
+      "status": "excluded",
+      "excludeReason": "contactClass判定不能(b2b分離signal未確認)のため送信対象外",
+      "addedAt": "2026-08-13",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane3"
     }
   ]
 }
