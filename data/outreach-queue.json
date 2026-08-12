@@ -4013,6 +4013,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-zenshokai",
+      "org": "一般社団法人全国書写書道教育振興会",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "info@zenshokai.or.jp",
+      "contactClass": "b2b",
+      "evidence": "zenshokai.or.jp/inquiry/を直接WebFetchで確認。事務局宛info@zenshokai.or.jp(個人名なし)+フォームに『団体名(必須)』欄を確認しb2b確定。学校での書写書道教育・書き初め展等を振興する団体",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
