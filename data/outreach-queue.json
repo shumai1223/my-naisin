@@ -3259,6 +3259,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
+    },
+    {
+      "id": "lane5-kodomo-manabi-labo",
+      "org": "株式会社新恵社(STUDY HACKERこどもまなび☆ラボ・子育て系Webメディア)",
+      "lane": "media",
+      "channel": "form",
+      "contact": "https://kodomo-manabi-labo.net/contact-corporation",
+      "contactClass": "b2b",
+      "evidence": "kodomo-manabi-labo.net/contact-corporationを直接WebFetchで確認。「会社名」入力欄を含む法人向け専用フォーム(一般読者向けcontactとは別ページ)を確認しb2b確定。教育熱心な保護者層に訴求する急成長中の子育て系Webメディア(タイアップ広告/バナー広告等の実績あり)",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
     }
   ]
 }
