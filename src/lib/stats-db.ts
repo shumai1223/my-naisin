@@ -50,19 +50,69 @@ export async function insertStatsSubmission(
   try {
     const db = await getStatsDb();
     if (!db) return false;
-    const trusted = provenance.trustClass === 'human' ? 1 : 0;
+    let trusted = provenance.trustClass === 'human' ? 1 : 0;
+    let trustClass: string = provenance.trustClass;
+
+    // ── DW-2 バックストップ（2026-08-12）──────────────────────────────
+    // クライアント側の送信間引き（stats-submit-scheduler）だけでは守れない。
+    // 古いJSを掴んだままのブラウザは修正後も**入力途中の値を毎回送り続ける**ため
+    // （実測: 12件/秒）、受け口側でも塊を検知して隔離する。
+    // DW-1で「ボット判定はサーバに置く」と学んだのと同じ理由。
+    if (trusted === 1) {
+      const recent = await countRecentSubmissions(db, input.metric);
+      if (recent >= BURST_THRESHOLD - 1) {
+        trusted = 0;
+        trustClass = 'burst';
+        await demoteRecentBurst(db, input.metric); // 塊の先頭側も一緒に落とす
+      }
+    }
+
     await db
       .prepare(
         `INSERT INTO stats_submissions (metric, prefecture_code, value, max_value, trusted, trust_class, created_at)
          VALUES (?, ?, ?, ?, ?, ?, datetime('now'))`
       )
-      .bind(input.metric, input.prefectureCode ?? null, input.value, input.maxValue ?? null, trusted, provenance.trustClass)
+      .bind(input.metric, input.prefectureCode ?? null, input.value, input.maxValue ?? null, trusted, trustClass)
       .run();
     return true;
   } catch (err) {
     console.error('insertStatsSubmission skipped:', err instanceof Error ? err.message : err);
     return false;
   }
+}
+
+/**
+ * 塊とみなす閾値。**同一指標が `BURST_WINDOW_SECONDS` 内に `BURST_THRESHOLD` 件以上**なら塊。
+ *
+ * 数字の根拠（2026-08-12 実測）:
+ *   - 壊れていたクライアント: 1セッションで 12件/秒（4秒で51件）
+ *   - 正常なクライアント: 1セッション1件
+ *   - サイト全体の流入は約150クリック/日。**別々の人間が10秒に3件投稿する確率は実質ゼロ**。
+ * 迷ったら「取りこぼす」より「隔離する」を選ぶ（行は消さないので後から戻せる）。
+ */
+export const BURST_WINDOW_SECONDS = 10;
+export const BURST_THRESHOLD = 3;
+
+async function countRecentSubmissions(db: MinimalD1, metric: StatsMetric): Promise<number> {
+  const res = await db
+    .prepare(
+      `SELECT COUNT(*) AS n FROM stats_submissions
+       WHERE metric = ? AND created_at >= datetime('now', ?)`
+    )
+    .bind(metric, `-${BURST_WINDOW_SECONDS} seconds`)
+    .all<{ n: number }>();
+  return Number(res.results?.[0]?.n ?? 0);
+}
+
+/** 塊と判定した瞬間、同じ窓に入っている先行行も trusted=0 に落とす。 */
+async function demoteRecentBurst(db: MinimalD1, metric: StatsMetric): Promise<void> {
+  await db
+    .prepare(
+      `UPDATE stats_submissions SET trusted = 0, trust_class = 'burst'
+       WHERE metric = ? AND trusted = 1 AND created_at >= datetime('now', ?)`
+    )
+    .bind(metric, `-${BURST_WINDOW_SECONDS} seconds`)
+    .run();
 }
 
 /**
