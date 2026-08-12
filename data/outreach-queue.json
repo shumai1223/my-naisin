@@ -4130,6 +4130,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-anzenkyoiku",
+      "org": "日本安全教育学会",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "jase@dcrc.tohoku.ac.jp",
+      "contactClass": "b2b",
+      "evidence": "公式サイト`anzen-kyoiku.org/?page_id=60`を直接WebFetchで確認。『学会事務局』宛のメールアドレス(組織名ベース・個人名非含有)を採用。同ページに併記されたホームページ管理者個人宛アドレスは不採用(PII回避)。東北大学災害科学国際研究所内に事務局を置く安全教育・防災教育の学術団体",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
