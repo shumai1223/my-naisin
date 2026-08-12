@@ -3948,6 +3948,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-jmes",
+      "org": "日本音楽教育学会",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "onkyoiku@remus.dti.ne.jp",
+      "contactClass": "b2b",
+      "evidence": "公式サイトのお問い合わせページを直接WebFetchで確認。事務局宛onkyoiku@remus.dti.ne.jp(個人名なし)を採用。音楽教育の学術団体",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
