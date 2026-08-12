@@ -4273,6 +4273,19 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+    },
+    {
+      "id": "lane1-tottorishijuku",
+      "org": "鳥取私塾の会",
+      "lane": "moshi",
+      "channel": "form",
+      "contact": "https://tottorishijuku.jp/contactus/",
+      "contactClass": "b2b",
+      "evidence": "公式サイト`tottorishijuku.jp/contactus/`を直接WebFetchで確認。窓口フォームと加盟希望フォーム(必須項目に会社名あり)の2種類が用意されておりb2b確定。鳥取県の学習塾連合団体",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
     }
   ]
 }
