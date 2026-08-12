@@ -3766,6 +3766,32 @@
       "status": "candidate",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-geoedu",
+      "org": "日本地理教育学会",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "newgeo@geoedu.jp",
+      "contactClass": "b2b",
+      "evidence": "geoedu.jpを直接WebFetchで確認。2024-12-27付で刷新された事務局宛newgeo@geoedu.jp(個人名なし)を採用。1950年創立の地理教育学術団体",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-jssace",
+      "org": "日本社会教育学会",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "jssace.office@gmail.com",
+      "contactClass": "b2b",
+      "evidence": "jssace.jp/contactを直接WebFetchで確認。事務局メールjssace.office@gmail.com(組織名ベース・個人名なし)を採用。社会教育・生涯学習の学術団体",
+      "verifiedAt": "2026-08-12",
+      "status": "candidate",
+      "addedAt": "2026-08-12",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
