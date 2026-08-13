@@ -108,12 +108,13 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     }
   });
 
-  it('32件がqueued(教委13[email3+form10]+メディアemail9+メディアform5+個人塾line4+npo1)', () => {
+  it('40件がqueued(教委13[email3+form10]+メディアemail9+メディアform5+個人塾line4+npo1+EdTech校務支援8)', () => {
     // 2026-08-13: 教委email26件は8/6に送信済みでledger側(kyoiku-*-0806)に記録済みの重複だったため
     // queueから削除(outreach-queue.tsの設計「送信済みはledgerへ移しqueueから除外する」に合わせた)。
     // 残る教委emailはlane9-*(政令市3件)のみ・教委formの10件は未送信のため変更なし。
     // 2026-08-14: lane9-nit(日本図書教材協会)に本文を書きcandidateからqueuedへ昇格(業界団体経由の紹介依頼の型を検証)。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(32);
+    // 2026-08-14: 校務支援システムレーンで発見した8件(教科書協会+校務支援システム7社)に本文を書きqueuedへ昇格。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(40);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {
