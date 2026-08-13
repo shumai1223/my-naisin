@@ -4564,7 +4564,9 @@
       "verifiedAt": "2026-08-13",
       "status": "candidate",
       "addedAt": "2026-08-13",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1-moshi59"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1-moshi59",
+      "subject": "内申点計算データAPI/MCPのご案内（My Naishin）",
+      "body": "株式会社フクト ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\n貴社の「フクト公開実力テスト会」は毎年約10万人が受験し、累計約500万人の実績をお持ちと拝見しました。学力検査の判定に加えて、福岡県公立高校入試で合否判定に直結する内申点の自動計算をAPIで組み込むことで、加盟塾様への合格可能性判定資料をより実態に近い形にできるのではと思いご連絡いたしました。\n\nPro（月額¥9,800〜・非商用利用向け）は上記ページからお打ち合わせなしでその場でお申し込みいただけます。商用利用（帳票・システムへの組み込み等）をご検討の場合はBusinessプラン（年額¥240,000）をご案内しております。まずは触っていただくだけでも歓迎です。より大きな規模にご興味があれば、一度オンラインで15分ほどお話しできればと思います。\n\n引き続きよろしくお願いいたします。\n\nしゅうまい\nMy Naishin 運営\nnaishin.dev@gmail.com\nhttps://my-naishin.com\n"
     },
     {
       "id": "moshi-shirayuri",
@@ -4593,13 +4595,14 @@
       "org": "ひょうご進路選択ナビ／兵庫統一模試(edic創造学園運営)",
       "lane": "b2b-saas",
       "channel": "form",
-      "contact": "https://www.sinro.jp/mosi/entry/group/entry.php",
-      "contactClass": "b2b",
+      "contactClass": "unknown",
       "evidence": "「塾・団体登録はこちら」から遷移する塾・団体向け模試申込フォームを直接WebFetchで確認。必須項目に「塾･団体名」「塾･団体名(フリガナ)」欄があり個人受験申込(entry/personal)とは別の法人向け窓口と確定。運営はedic創造学園(神戸新聞社と共同運営表記あり)",
       "verifiedAt": "2026-08-13",
-      "status": "candidate",
+      "status": "excluded",
       "addedAt": "2026-08-13",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1-moshi59"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1-moshi59",
+      "excludeReason": "前回セッションが「塾・団体登録はこちら」フォームをb2b窓口と誤判定していたが、実際は自由記述欄が一切無い会員登録専用フォーム(塾名/所在地/電話/メール等の定型項目のみ)で、API/データライセンスの問い合わせを送れる窓口ではないと判明(自己訂正)。サイト全体を再確認したが一般問い合わせ窓口は見当たらず見送り",
+      "note": "2026-08-13当初はcandidate登録・同日中に誤分類と判明し訂正"
     },
     {
       "id": "moshi-eisu-suzuka",
