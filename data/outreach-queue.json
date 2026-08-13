@@ -3073,7 +3073,7 @@
     {
       "id": "lane4-gakken-educational",
       "org": "株式会社学研エデュケーショナル(学研グループ・図書館/学校/自治体向け窓口)",
-      "lane": "edtech",
+      "lane": "b2b-saas",
       "channel": "form",
       "contact": "https://contact.gakken.jp/user/op_enquete.gsp?sid=1073&mid=000269FV&hid=Yxg8eypbY_0",
       "contactClass": "b2b",
@@ -3086,7 +3086,7 @@
     {
       "id": "lane1-jja",
       "org": "公益社団法人全国学習塾協会(JJA・学習塾業界の全国団体)",
-      "lane": "juku",
+      "lane": "b2b-saas",
       "channel": "form",
       "contact": "https://jja.or.jp/contact/",
       "contactClass": "b2b",
@@ -3099,7 +3099,7 @@
     {
       "id": "lane1-ajc",
       "org": "全国学習塾協同組合(AJC・学習塾業界の協同組合)",
-      "lane": "juku",
+      "lane": "b2b-saas",
       "channel": "form",
       "contact": "https://www.ajc.or.jp/mailform/mailform.php",
       "contactClass": "b2b",
@@ -3125,7 +3125,7 @@
     {
       "id": "lane1-shijuku-net",
       "org": "私塾ネット(全日本私塾教育ネットワーク・全国約200校の加盟学習塾ネットワーク)",
-      "lane": "juku",
+      "lane": "b2b-saas",
       "channel": "form",
       "contact": "https://shijuku.net/contact/",
       "contactClass": "b2b",
@@ -3138,7 +3138,7 @@
     {
       "id": "lane1-private-education-org",
       "org": "日本民間教育協議会(民間教育各分野が連携する全国協議会)",
-      "lane": "juku",
+      "lane": "b2b-saas",
       "channel": "form",
       "contact": "https://forms.gle/fKhdjkngZdLeetDP7",
       "contactClass": "b2b",
@@ -3151,7 +3151,7 @@
     {
       "id": "lane1-tjk-tokyo-shijuku",
       "org": "東京私塾協同組合(東京都の私塾協同組合)",
-      "lane": "juku",
+      "lane": "b2b-saas",
       "channel": "email",
       "contact": "jimukyoku@tjk-jp.org",
       "contactClass": "b2b",
@@ -3164,7 +3164,7 @@
     {
       "id": "lane1-jac-chiba",
       "org": "JAC千葉学習塾協同組合(千葉県の学習塾協同組合)",
-      "lane": "juku",
+      "lane": "b2b-saas",
       "channel": "form",
       "contact": "https://jac-web.com/contact",
       "contactClass": "b2b",
@@ -3190,7 +3190,7 @@
     {
       "id": "lane4-jotea",
       "org": "一般社団法人日本オンライン教育産業協会(JOTEA・オンライン教育産業の業界団体・日本eラーニング大賞主催)",
-      "lane": "edtech",
+      "lane": "b2b-saas",
       "channel": "email",
       "contact": "info@jotea.org",
       "contactClass": "b2b",
@@ -3242,7 +3242,7 @@
     {
       "id": "lane1-shizuoka-jukuren",
       "org": "協同組合静岡県私塾連盟(静岡県知事認可の私塾連盟)",
-      "lane": "juku",
+      "lane": "b2b-saas",
       "channel": "email",
       "contact": "okapjuku@gmail.com",
       "contactClass": "b2b",
@@ -3307,7 +3307,7 @@
     {
       "id": "lane1-morigami",
       "org": "株式会社森上教育研究所(中学受験・教育コンサルティングの調査研究機関)",
-      "lane": "juku",
+      "lane": "b2b-saas",
       "channel": "email",
       "contact": "morigami@morigami.co.jp",
       "contactClass": "b2b",
@@ -3320,7 +3320,7 @@
     {
       "id": "lane1-hanamaru",
       "org": "花まるグループ(花まる学習会・高濱正伸氏主宰の大手教育企業グループ)",
-      "lane": "juku",
+      "lane": "b2b-saas",
       "channel": "form",
       "contact": "https://www.hanamarugroup.jp/contact.html",
       "contactClass": "b2b",
@@ -3528,7 +3528,7 @@
     {
       "id": "lane4-chokyoiku",
       "org": "一般社団法人超教育協会(LOT)",
-      "lane": "edtech",
+      "lane": "b2b-saas",
       "channel": "email",
       "contact": "info@lot.or.jp",
       "contactClass": "b2b",
@@ -3541,7 +3541,7 @@
     {
       "id": "lane4-jmooc",
       "org": "一般社団法人日本オープンオンライン教育推進協議会(JMOOC)",
-      "lane": "edtech",
+      "lane": "b2b-saas",
       "channel": "form",
       "contact": "https://docs.google.com/forms/d/e/1FAIpQLScUkUvFa4bZawIqQwwG_PXDXBkz07drva3tSTzPOvspj4duww/viewform",
       "contactClass": "b2b",
@@ -3736,7 +3736,7 @@
     {
       "id": "lane3-freemind",
       "org": "株式会社FREEMIND",
-      "lane": "edtech",
+      "lane": "b2b-saas",
       "channel": "form",
       "contact": "https://www.freemind.co.jp/contact/",
       "contactClass": "b2b",
@@ -4191,7 +4191,7 @@
     {
       "id": "lane4-viling",
       "org": "株式会社ヴィリング(STEMON・STEAM教育&プログラミングスクール運営)",
-      "lane": "edtech",
+      "lane": "b2b-saas",
       "channel": "form",
       "contact": "https://www.stemon.net/contact/",
       "contactClass": "b2b",
@@ -4204,7 +4204,7 @@
     {
       "id": "lane4-shinrokikaku",
       "org": "株式会社進路企画(進学情報プラットフォーム『進路の広場』・1985年創業の高校進路指導支援会社)",
-      "lane": "edtech",
+      "lane": "b2b-saas",
       "channel": "form",
       "contact": "https://www.shinrokikaku.co.jp/aboutus/form",
       "contactClass": "b2b",
@@ -4217,7 +4217,7 @@
     {
       "id": "lane4-tao-tenjin",
       "org": "株式会社タオ(ICT教材『天神』・塾/放デイ/フリースクール/学校/保育施設向け)",
-      "lane": "edtech",
+      "lane": "b2b-saas",
       "channel": "form",
       "contact": "https://www.tenjin.cc/inquiries/form/co/",
       "contactClass": "b2b",
@@ -4243,7 +4243,7 @@
     {
       "id": "lane1-kyoto-shijukurenmei",
       "org": "京都私塾連盟",
-      "lane": "moshi",
+      "lane": "b2b-saas",
       "channel": "form",
       "contact": "https://forms.gle/LJpa3Xatrv1mce7U7",
       "contactClass": "b2b",
@@ -4256,7 +4256,7 @@
     {
       "id": "lane1-kmkk",
       "org": "一般社団法人かながわ民間教育協会",
-      "lane": "moshi",
+      "lane": "b2b-saas",
       "channel": "form",
       "contact": "https://ws.formzu.net/dist/S17847074/",
       "contactClass": "b2b",
@@ -4269,7 +4269,7 @@
     {
       "id": "lane1-aomoriken-juku",
       "org": "青森県学習塾協議会",
-      "lane": "moshi",
+      "lane": "b2b-saas",
       "channel": "form",
       "contact": "https://aomoriken-juku.jp/toiawase/",
       "contactClass": "b2b",
@@ -4282,7 +4282,7 @@
     {
       "id": "lane1-toyama-edu",
       "org": "一般社団法人富山県教育ネットワーク",
-      "lane": "moshi",
+      "lane": "b2b-saas",
       "channel": "form",
       "contact": "https://www.toyama-edu.net/form/129367/",
       "contactClass": "b2b",
@@ -4295,7 +4295,7 @@
     {
       "id": "lane1-najukuren",
       "org": "奈良県学習塾連盟",
-      "lane": "moshi",
+      "lane": "b2b-saas",
       "channel": "form",
       "contact": "http://najukuren.net/postmail/postmail.html",
       "contactClass": "b2b",
@@ -4308,7 +4308,7 @@
     {
       "id": "lane1-tottorishijuku",
       "org": "鳥取私塾の会",
-      "lane": "moshi",
+      "lane": "b2b-saas",
       "channel": "form",
       "contact": "https://tottorishijuku.jp/contactus/",
       "contactClass": "b2b",
@@ -4321,7 +4321,7 @@
     {
       "id": "lane1-okayama-kangaerukai",
       "org": "岡山の教育を考える会",
-      "lane": "moshi",
+      "lane": "b2b-saas",
       "channel": "form",
       "contact": "https://kangaeru-kai.main.jp/contact.html",
       "contactClass": "b2b",
@@ -4334,7 +4334,7 @@
     {
       "id": "lane1-jyda",
       "org": "一般社団法人日本青少年育成協会",
-      "lane": "moshi",
+      "lane": "b2b-saas",
       "channel": "form",
       "contact": "https://www.jyda.jp/contact",
       "contactClass": "b2b",
@@ -4347,7 +4347,7 @@
     {
       "id": "lane4-mingaku",
       "org": "株式会社みんがく(教育プラットフォーム『スクールAI』・全国1,600校以上導入)",
-      "lane": "edtech",
+      "lane": "b2b-saas",
       "channel": "form",
       "contact": "https://school-ai.mingaku.net/contact/",
       "contactClass": "b2b",
