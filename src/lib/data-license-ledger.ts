@@ -105,7 +105,15 @@ export const DATA_LICENSE_LEDGER: Record<string, DataLicenseLedgerEntry> = {
   iwate: { prefecture: 'iwate', sourceHost: '.lg.jp', ...UNKNOWN() },
   kyoto: { prefecture: 'kyoto', sourceHost: '.lg.jp（実質公的）', ...UNKNOWN() },
   yamagata: { prefecture: 'yamagata', sourceHost: '.lg.jp', ...UNKNOWN() },
-  aichi: { prefecture: 'aichi', sourceHost: '.lg.jp', ...UNKNOWN() },
+  aichi: {
+    prefecture: 'aichi',
+    sourceHost: '.lg.jp',
+    ...UNKNOWN(
+      '愛知県教育委員会高等学校教育課からGmail回答あり（2026-08-13）だが内容は「外部サイト等を' +
+        '紹介することはしておりません」＝gifuと同型の被リンク可否の回答のみで、再配布（引用・' +
+        'データ商品への収録）可否には言及していない。再配布の可否は別途確認が必要（要再確認）'
+    ),
+  },
   wakayama: { prefecture: 'wakayama', sourceHost: '.lg.jp', ...UNKNOWN() },
   shimane: { prefecture: 'shimane', sourceHost: '.lg.jp', ...UNKNOWN() },
   shiga: { prefecture: 'shiga', sourceHost: '.lg.jp', ...UNKNOWN() },
