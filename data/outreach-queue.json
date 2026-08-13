@@ -4865,46 +4865,39 @@
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
     },
     {
-      "id": "gakusan-tokyohorei-excluded",
-      "org": "東京法令出版株式会社",
+      "id": "moshi-fukuto",
+      "org": "株式会社フクト(フクト公開実力テスト会)",
       "lane": "b2b-saas",
       "channel": "form",
-      "contact": "https://www.tokyo-horei.co.jp/",
-      "contactClass": "unknown",
-      "evidence": "公式サイトの直接的な問い合わせ窓口情報(フォーム/メール)が発見できなかった。",
+      "contact": "https://fukuto.jp/contactform_teacher_other/",
+      "contactClass": "b2b",
+      "evidence": "フォームページタイトルが「実力テスト会の導入をご検討の塾様」で、必須項目に塾名欄あり(既契約塾専用フォームcontactform_teacherとは別に新規検討塾向けフォームが独立して存在することを直接WebFetchで確認)。福岡発祥・累計500万人受験実績の中学生向け実力テスト会運営会社",
       "verifiedAt": "2026-08-13",
-      "status": "excluded",
-      "excludeReason": "問い合わせ窓口が確認できず送信対象外",
+      "status": "candidate",
       "addedAt": "2026-08-13",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1-moshi59"
     },
     {
-      "id": "gakusan-nihonkyokasho-excluded",
-      "org": "日本教科書株式会社",
+      "id": "moshi-shirayuri",
+      "org": "株式会社白ゆり(白ゆりテスト・岩手県)",
       "lane": "b2b-saas",
       "channel": "form",
-      "contact": "https://www.nihonkyokasho.co.jp/",
-      "contactClass": "unknown",
-      "evidence": "公式サイトの直接的な問い合わせ窓口情報(フォーム/メール)が発見できなかった。",
-      "verifiedAt": "2026-08-13",
       "status": "excluded",
-      "excludeReason": "問い合わせ窓口が確認できず送信対象外",
+      "excludeReason": "公式サイトのお問い合わせフォームは必須項目が氏名/メールアドレス/お問い合わせ内容のみで塾名・法人名欄が無く「既存のお客さまからのお問い合わせを目的とした」個人向け窓口と明記されている。塾専用の別窓口は直接WebFetchで確認できず",
+      "verifiedAt": "2026-08-13",
       "addedAt": "2026-08-13",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1-moshi59"
     },
     {
-      "id": "gakusan-kairyudo-excluded",
-      "org": "開隆堂出版株式会社",
+      "id": "moshi-miyagi-shinkyoiku",
+      "org": "株式会社宮城新教育(新みやぎ模試・山形県もぎ)",
       "lane": "b2b-saas",
       "channel": "form",
-      "contact": "mailto:digital@kairyudo.co.jp",
-      "contactClass": "unknown",
-      "evidence": "デジタル教科書問い合わせ先(digital@kairyudo.co.jp)は実在確認できたが、学校専用である明示的な文言が無く確証不足。",
-      "verifiedAt": "2026-08-13",
       "status": "excluded",
-      "excludeReason": "確証不足のため送信対象外",
+      "excludeReason": "公式サイトに問い合わせフォームへのリンクはあるが、ページ本文は「ご質問・お問い合わせは宮城新教育へ直接お電話ください」と電話のみを案内しておりchannel enum(line/email/form)非対応と判断",
+      "verifiedAt": "2026-08-13",
       "addedAt": "2026-08-13",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1-moshi59"
     }
   ]
 }
