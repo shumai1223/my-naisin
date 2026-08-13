@@ -4884,6 +4884,34 @@
       "status": "candidate",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9",
       "addedAt": "2026-08-14"
+    },
+    {
+      "id": "edtech-welldone-schoolmaster-zeus",
+      "org": "ウェルダンシステム株式会社(私立校向け校務支援システム「スクールマスターZeus」)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://welldone.co.jp/inquiry",
+      "contactClass": "b2b",
+      "formPurpose": "accepts-b2b",
+      "evidence": "私立小中高向けの校務支援システム「スクールマスターZeus」を運営(出願〜卒業後進路まで生徒情報を一元管理)。My Naishinの主な顧客は塾管理SaaSだが、学校自身が使う校務システムという新市場。公式お問い合わせフォームを直接WebFetchで確認したところ「学校/会社名」が必須項目として存在し、対象者を限定する文言は見当たらない。",
+      "verifiedAt": "2026-08-14",
+      "status": "candidate",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
+      "addedAt": "2026-08-14"
+    },
+    {
+      "id": "edtech-satt-kenja-cloud",
+      "org": "エスエイティーティー株式会社(駿台グループ・校務支援システム「賢者クラウド」)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://business.form-mailer.jp/fms/5676ff0f331551",
+      "contactClass": "b2b",
+      "formPurpose": "accepts-b2b",
+      "evidence": "駿台グループが運営する公立・私立高校向け校務支援システム「賢者クラウド」(全国800校以上導入実績)。公式お問い合わせフォームを直接WebFetchで確認(URLはWebSearch要約が提示した値と実際のページ記載値が異なっていたため、直接WebFetchで確認できたリンクを採用)。会社名・学校名欄が存在し対象者を限定する文言は見当たらない。駿台という知名度の高いブランドであり接続が成立すれば権威付けの価値が高い。",
+      "verifiedAt": "2026-08-14",
+      "status": "candidate",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
+      "addedAt": "2026-08-14"
     }
   ]
 }
