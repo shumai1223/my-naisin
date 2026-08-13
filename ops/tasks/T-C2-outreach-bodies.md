@@ -190,6 +190,30 @@ form の candidate 196件の内訳（実測）:
 
 ---
 
+## 🆕2026-08-14追記: 「本文あり」の蓄積とqueued昇格は別工程だと再確認・14件を昇格
+
+深夜(👤就寝中と推定される時間帯)にqueue全体を棚卸ししたところ、**status='candidate'のままbodyが
+入っている行が108件**(このうち87件がform channel)存在すると判明した。これは本ファイル135-136行の
+設計通り(bodyを書いてもstatusはcandidateのまま維持し、queuedは「フォーム確認済み」の意味で予約する)
+であり、バグではない。**「本文あり」の蓄積(T-C2の仕事)と「queued昇格」(フォーム確認済みにする別工程)
+は意図的に分離されている**。
+
+今夜、直近数時間以内に自分でWebFetchによるフォーム確認を行った14件(edtech-arrows-senseinote等・
+すべて2026-08-14当日にaddedAt/verifiedAt済み)を、その検証を根拠にqueuedへ昇格させた
+(`data/outreach-queue.json`のqueued件数40→54)。**昇格作業中に実害のある不具合を1件発見・修正**:
+`edtech-yournet-schpass`のcontactが`http://schpass.jp/contact`(httpsでない)のままcandidateに
+入っていた。jest整合性テスト(`form channelのcontactはhttps URL`)がこれを検知し、実際に
+`https://schpass.jp/contact`が正常動作することをWebFetchで確認したうえで修正した
+(この不変条件テストが無ければ、httpのまま👤に渡り送信時にエラーになっていた可能性が高い)。
+
+**次回セッションへの申し送り**: 残り94件(108-14)がcandidateのままbodyを保持している。
+`node -e`で`status==='candidate' && e.body && e.channel==='form'`を抽出すればリストできる。
+**一括昇格はしない**(フォーム確認をサボると上記のようなhttp/https事故や、リンク切れ・フォーム
+仕様変更を見逃すリスクがある)。verifiedAtが古いものから順に、WebFetchで軽く再確認してから
+1バッチ10-15件程度ずつqueuedへ昇格させるのが安全(この作業自体は新規outreach下書きの「本文作成」
+ではなく「確認して開放する」作業なので、1晩上限のカウント対象にする必要はないと考えられるが、
+昇格後は👤の実送信対象になる以上、レビュー負荷の観点で1晩10-15件程度に抑えるのが妥当)。
+
 ## この文書が上書きするもの
 
 - `ops/tasks/T-C1-b2b-target-list.md` の「候補を増やし続ける」部分。

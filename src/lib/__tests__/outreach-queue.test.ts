@@ -108,13 +108,15 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     }
   });
 
-  it('40件がqueued(教委13[email3+form10]+メディアemail9+メディアform5+個人塾line4+npo1+EdTech校務支援8)', () => {
+  it('54件がqueued(教委13[email3+form10]+メディアemail9+メディアform5+個人塾line4+npo1+EdTech校務支援8+本文既存済み14の昇格)', () => {
     // 2026-08-13: 教委email26件は8/6に送信済みでledger側(kyoiku-*-0806)に記録済みの重複だったため
     // queueから削除(outreach-queue.tsの設計「送信済みはledgerへ移しqueueから除外する」に合わせた)。
     // 残る教委emailはlane9-*(政令市3件)のみ・教委formの10件は未送信のため変更なし。
     // 2026-08-14: lane9-nit(日本図書教材協会)に本文を書きcandidateからqueuedへ昇格(業界団体経由の紹介依頼の型を検証)。
     // 2026-08-14: 校務支援システムレーンで発見した8件(教科書協会+校務支援システム7社)に本文を書きqueuedへ昇格。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(40);
+    // 2026-08-14: 同夜に本文まで書きながらstatus='candidate'のまま残っていた14件(T-C2の設計「queuedはフォーム確認済みの意味」
+    // に沿い、直近のWebFetch検証を根拠にqueuedへ昇格)。うちedtech-yournet-schpassのcontactがhttp://だったためhttps://に修正。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(54);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {
