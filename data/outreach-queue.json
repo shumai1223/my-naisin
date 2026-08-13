@@ -1263,13 +1263,13 @@
       "org": "株式会社オーイーシー(教職員向け出退勤管理システム)",
       "lane": "b2b-saas",
       "channel": "form",
-      "contact": "https://www.oec.co.jp/contact",
       "contactClass": "b2b",
       "evidence": "教職員向け出退勤管理システムの紹介ページに『教育委員会からは、各学校・各職員の勤務状況を確認することができる』と明記され、学校・教育委員会向けの導入相談を前提としたサービスであることを直接WebFetchで確認。問い合わせフォームの実在も確認済み",
       "verifiedAt": "2026-08-11",
-      "status": "candidate",
+      "status": "excluded",
       "addedAt": "2026-08-11",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
+      "excludeReason": "evidence記載の通り学校・教育委員会向けの導入相談を前提としたサービス紹介ページからの問い合わせで、SaaS導入相談パターンに該当。当方はその対象(自治体・学校)ではないため見送り"
     },
     {
       "id": "media-allow-corp",
@@ -1392,7 +1392,9 @@
       "verifiedAt": "2026-08-11",
       "status": "candidate",
       "addedAt": "2026-08-11",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
+      "subject": "内申点計算データAPI/MCPのご案内（My Naishin）",
+      "body": "株式会社サクシード ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\n貴社のサービスをご利用の学校・塾現場向けに、都道府県ごとに異なる内申点の自動計算をAPIで組み込むことで、進路指導業務をより効率化できるのではと思いご連絡いたしました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com"
     },
     {
       "id": "edtech-pumpkin-labo",
@@ -1813,13 +1815,13 @@
       "org": "株式会社教育と探求社(探究学習プログラム『クエストエデュケーション』)",
       "lane": "b2b-saas",
       "channel": "form",
-      "contact": "https://info.eduq.jp/form/askquestandeduca",
       "contactClass": "b2b",
       "evidence": "全国41都道府県・500校以上で導入される学校向け探究学習プログラム専業(生徒向け消費者製品なし)であり、専用の導入問い合わせフォームがあることを直接WebFetchで確認しb2b確定。⚠️WebSearch要約が提示したメールアドレス(co@eduq.jp)はページ内に実在せず不採用(既知のWebSearch作話パターン再検知)、formチャネルのみ採用",
       "verifiedAt": "2026-08-11",
-      "status": "candidate",
+      "status": "excluded",
       "addedAt": "2026-08-11",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
+      "excludeReason": "evidence記載の通り『専用の導入問い合わせフォーム』であり、自社プログラムの導入検討校向け窓口。SaaS導入相談パターンに該当するため見送り"
     },
     {
       "id": "npo-katariba-myproject",
@@ -1845,7 +1847,9 @@
       "verifiedAt": "2026-08-11",
       "status": "candidate",
       "addedAt": "2026-08-11",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
+      "subject": "内申点計算データAPI/MCPのご案内（My Naishin）",
+      "body": "IGS株式会社 ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\n貴社のサービスをご利用の学校・塾現場向けに、都道府県ごとに異なる内申点の自動計算をAPIで組み込むことで、進路指導業務をより効率化できるのではと思いご連絡いたしました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com"
     },
     {
       "id": "career-mynavi-koshien-teacher",
@@ -1938,7 +1942,9 @@
       "verifiedAt": "2026-08-11",
       "status": "candidate",
       "addedAt": "2026-08-11",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
+      "subject": "内申点計算データAPI/MCPのご案内（My Naishin）",
+      "body": "株式会社両備システムズ ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\n貴社のサービスをご利用の学校・塾現場向けに、都道府県ごとに異なる内申点の自動計算をAPIで組み込むことで、進路指導業務をより効率化できるのではと思いご連絡いたしました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com"
     },
     {
       "id": "textbook-zkai-honsha-sample",
@@ -2613,13 +2619,13 @@
       "org": "株式会社リクルート(スタディサプリ学校向けサービス)",
       "lane": "b2b-saas",
       "channel": "form",
-      "contact": "https://teachers.studysapuri.jp/contact",
       "contactClass": "b2b",
       "evidence": "`teachers.studysapuri.jp/contact`をcurlで取得した生HTMLに『学校名』『都道府県』『校務分掌・部署』『導入検討時期』等の項目を持つ学校向け専用フォームが稼働中であることを直接確認しb2b確定。学校向けサービス専用サイト(teachers.studysapuri.jp)で個人向けアプリ(studysapuri.jp)とは分離済み",
       "verifiedAt": "2026-08-12",
-      "status": "candidate",
+      "status": "excluded",
       "addedAt": "2026-08-12",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
+      "excludeReason": "フォーム必須項目に『学校名』『都道府県』『導入検討時期』があり、明確にスタディサプリ導入を検討する学校向けのリード獲得フォームと判明。SaaS導入相談パターンに該当するため見送り"
     },
     {
       "id": "cert-kanken-group",
