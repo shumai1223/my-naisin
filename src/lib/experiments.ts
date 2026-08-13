@@ -152,7 +152,7 @@ export const EXPERIMENTS: ExperimentDef[] = [
     ],
     primaryMetric: 'line_friend_click',
     placement: 'result',
-    note: '送り先・登録の仕組みは同一・副題コピーのみ差し替え。SaveResultCTAの全設置面（result/prefecture/hensachi等）で母数を稼ぐ。',
+    note: '送り先・登録の仕組みは同一・副題コピーのみ差し替え。SaveResultCTAの全設置面（result/prefecture/hensachi等）で母数を稼ぐ。**2026-08-13判明: 30日超過(32日)で検知したがGA4で判定不能**——experiment_impressionのimpressions(control144/benefit200)は取れるが、conversion側のline_friend_clickイベントが積む`copy_variant`パラメータがGA4カスタムディメンション未登録(experiment_id/variantとは別物)のため、変換率をアーム別に一切引けない。D1側にもこのイベントのフォールバック記録は無い(track()はgtag/dataLayerのみでD1書き込みなし)。**👤への申し送り: GA4管理画面でcopy_variant/position_variant/timing_variantの3つをカスタムディメンション登録すれば以後のデータから判定可能になる**(登録は遡及しない・experiment_id登録時と同じ制約)。登録待ちの間は実害が無いため停止はせず稼働継続。',
     startedAt: '2026-07-12',
   },
   {
@@ -166,7 +166,7 @@ export const EXPERIMENTS: ExperimentDef[] = [
     ],
     primaryMetric: 'line_friend_click',
     placement: 'result',
-    note: 'SaveResultCTAの受け皿2種（LINE/メール）の表示順のみ入れ替え。文言・機能は同一（bodyは実装が読む疑似フラグ。prefecture-order-2026と同じ表現規約）。',
+    note: 'SaveResultCTAの受け皿2種（LINE/メール）の表示順のみ入れ替え。文言・機能は同一（bodyは実装が読む疑似フラグ。prefecture-order-2026と同じ表現規約）。**2026-08-13判明: line-cta-copy-2026と同根の理由(position_variantカスタムディメンション未登録)でGA4判定不能。詳細はline-cta-copy-2026のnote参照。**',
     startedAt: '2026-07-12',
   },
   {
@@ -180,7 +180,7 @@ export const EXPERIMENTS: ExperimentDef[] = [
     ],
     primaryMetric: 'line_friend_click',
     placement: 'result',
-    note: 'SaveResultCTA自体は結果確定後にマウントされる設計のため、ここでの遅延はLINE受け皿ブロックの表示タイミングのみを指す（フォーム自体は変わらず表示）。',
+    note: 'SaveResultCTA自体は結果確定後にマウントされる設計のため、ここでの遅延はLINE受け皿ブロックの表示タイミングのみを指す（フォーム自体は変わらず表示）。**2026-08-13判明: line-cta-copy-2026と同根の理由(timing_variantカスタムディメンション未登録)でGA4判定不能。詳細はline-cta-copy-2026のnote参照。**',
     startedAt: '2026-07-12',
   },
   {
