@@ -704,6 +704,236 @@
       "status": "awaiting",
       "followupCount": 0,
       "note": "Cowork第1弾(30社)でフォーム送信済み(ops/cowork/COWORK-RESULT-01.md)。フォーム経由のためGmail threadIdなし。Gmail経由の教委26社等とは別セグメントとして返信率を計測すること。"
+    },
+    {
+      "id": "gakusan-obunsha",
+      "org": "株式会社旺文社",
+      "lane": "b2b-saas",
+      "sourceTaskId": "S13-A",
+      "sentDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 0,
+      "note": "Cowork第2弾(30社)でフォーム送信済み(ops/cowork/COWORK-RESULT-02.md)。フォーム経由のためGmail threadIdなし。第1弾10社・Gmail経由セグメントとは別に返信率を計測すること。"
+    },
+    {
+      "id": "gakusan-kadokawa",
+      "org": "株式会社KADOKAWA",
+      "lane": "b2b-saas",
+      "sourceTaskId": "S13-A",
+      "sentDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 0,
+      "note": "Cowork第2弾(30社)でフォーム送信済み(ops/cowork/COWORK-RESULT-02.md)。フォーム経由のためGmail threadIdなし。第1弾10社・Gmail経由セグメントとは別に返信率を計測すること。"
+    },
+    {
+      "id": "moshi-tierra-com",
+      "org": "株式会社ティエラコム",
+      "lane": "b2b-saas",
+      "sourceTaskId": "S13-A",
+      "sentDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 0,
+      "note": "Cowork第2弾(30社)でフォーム送信済み(ops/cowork/COWORK-RESULT-02.md)。フォーム経由のためGmail threadIdなし。第1弾10社・Gmail経由セグメントとは別に返信率を計測すること。"
+    },
+    {
+      "id": "moshi-hokkoku-ishikawa",
+      "org": "一般財団法人北國新聞文化センター",
+      "lane": "b2b-saas",
+      "sourceTaskId": "S13-A",
+      "sentDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 0,
+      "note": "Cowork第2弾(30社)でフォーム送信済み(ops/cowork/COWORK-RESULT-02.md)。フォーム経由のためGmail threadIdなし。第1弾10社・Gmail経由セグメントとは別に返信率を計測すること。"
+    },
+    {
+      "id": "gakusan-tokyo-shoseki",
+      "org": "東京書籍株式会社",
+      "lane": "b2b-saas",
+      "sourceTaskId": "S13-A",
+      "sentDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 0,
+      "note": "Cowork第2弾(30社)でフォーム送信済み(ops/cowork/COWORK-RESULT-02.md)。フォーム経由のためGmail threadIdなし。第1弾10社・Gmail経由セグメントとは別に返信率を計測すること。"
+    },
+    {
+      "id": "gakusan-mitsumura-tosho",
+      "org": "光村図書出版株式会社",
+      "lane": "b2b-saas",
+      "sourceTaskId": "S13-A",
+      "sentDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 0,
+      "note": "Cowork第2弾(30社)でフォーム送信済み(ops/cowork/COWORK-RESULT-02.md)。フォーム経由のためGmail threadIdなし。第1弾10社・Gmail経由セグメントとは別に返信率を計測すること。"
+    },
+    {
+      "id": "gakusan-jikkyo-shuppan",
+      "org": "実教出版株式会社",
+      "lane": "b2b-saas",
+      "sourceTaskId": "S13-A",
+      "sentDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 0,
+      "note": "Cowork第2弾(30社)でフォーム送信済み(ops/cowork/COWORK-RESULT-02.md)。フォーム経由のためGmail threadIdなし。第1弾10社・Gmail経由セグメントとは別に返信率を計測すること。"
+    },
+    {
+      "id": "gakusan-daiichi-gakushusha",
+      "org": "株式会社第一学習社",
+      "lane": "b2b-saas",
+      "sourceTaskId": "S13-A",
+      "sentDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 0,
+      "note": "Cowork第2弾(30社)でフォーム送信済み(ops/cowork/COWORK-RESULT-02.md)。フォーム経由のためGmail threadIdなし。第1弾10社・Gmail経由セグメントとは別に返信率を計測すること。"
+    },
+    {
+      "id": "gakusan-hamajima-shoten",
+      "org": "浜島書店",
+      "lane": "b2b-saas",
+      "sourceTaskId": "S13-A",
+      "sentDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 0,
+      "note": "Cowork第2弾(30社)でフォーム送信済み(ops/cowork/COWORK-RESULT-02.md)。フォーム経由のためGmail threadIdなし。第1弾10社・Gmail経由セグメントとは別に返信率を計測すること。"
+    },
+    {
+      "id": "edtech-kyoiku-net",
+      "org": "株式会社教育ネット",
+      "lane": "b2b-saas",
+      "sourceTaskId": "S13-A",
+      "sentDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 0,
+      "note": "Cowork第2弾(30社)でフォーム送信済み(ops/cowork/COWORK-RESULT-02.md)。フォーム経由のためGmail threadIdなし。第1弾10社・Gmail経由セグメントとは別に返信率を計測すること。"
+    },
+    {
+      "id": "moshi-syogakusya-hyogo",
+      "org": "株式会社晶学社(兵庫模試)",
+      "lane": "b2b-saas",
+      "sourceTaskId": "S13-A",
+      "sentDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 0,
+      "note": "Cowork第2弾(30社)でフォーム送信済み(ops/cowork/COWORK-RESULT-02.md)。フォーム経由のためGmail threadIdなし。第1弾10社・Gmail経由セグメントとは別に返信率を計測すること。"
+    },
+    {
+      "id": "gakusan-dainippon-tosho",
+      "org": "大日本図書株式会社",
+      "lane": "b2b-saas",
+      "sourceTaskId": "S13-A",
+      "sentDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 0,
+      "note": "Cowork第2弾(30社)でフォーム送信済み(ops/cowork/COWORK-RESULT-02.md)。フォーム経由のためGmail threadIdなし。第1弾10社・Gmail経由セグメントとは別に返信率を計測すること。"
+    },
+    {
+      "id": "moshi-ibatou-ibaraki",
+      "org": "茨城統一テスト協議会",
+      "lane": "b2b-saas",
+      "sourceTaskId": "S13-A",
+      "sentDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 0,
+      "note": "Cowork第2弾(30社)でフォーム送信済み(ops/cowork/COWORK-RESULT-02.md)。フォーム経由のためGmail threadIdなし。第1弾10社・Gmail経由セグメントとは別に返信率を計測すること。"
+    },
+    {
+      "id": "edtech-system-d",
+      "org": "株式会社システムディ",
+      "lane": "b2b-saas",
+      "sourceTaskId": "S13-A",
+      "sentDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 0,
+      "note": "Cowork第2弾(30社)でフォーム送信済み(ops/cowork/COWORK-RESULT-02.md)。フォーム経由のためGmail threadIdなし。第1弾10社・Gmail経由セグメントとは別に返信率を計測すること。"
+    },
+    {
+      "id": "edtech-correos",
+      "org": "コレオス株式会社",
+      "lane": "b2b-saas",
+      "sourceTaskId": "S13-A",
+      "sentDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 0,
+      "note": "Cowork第2弾(30社)でフォーム送信済み(ops/cowork/COWORK-RESULT-02.md)。フォーム経由のためGmail threadIdなし。第1弾10社・Gmail経由セグメントとは別に返信率を計測すること。"
+    },
+    {
+      "id": "edtech-studylab",
+      "org": "株式会社スタディラボ",
+      "lane": "b2b-saas",
+      "sourceTaskId": "S13-A",
+      "sentDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 0,
+      "note": "Cowork第2弾(30社)でフォーム送信済み(ops/cowork/COWORK-RESULT-02.md)。フォーム経由のためGmail threadIdなし。第1弾10社・Gmail経由セグメントとは別に返信率を計測すること。"
+    },
+    {
+      "id": "edtech-toppan-navima",
+      "org": "TOPPAN株式会社(navima)",
+      "lane": "b2b-saas",
+      "sourceTaskId": "S13-A",
+      "sentDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 0,
+      "note": "Cowork第2弾(30社)でフォーム送信済み(ops/cowork/COWORK-RESULT-02.md)。フォーム経由のためGmail threadIdなし。第1弾10社・Gmail経由セグメントとは別に返信率を計測すること。"
+    },
+    {
+      "id": "edtech-aied",
+      "org": "アイード株式会社(AIed)",
+      "lane": "b2b-saas",
+      "sourceTaskId": "S13-A",
+      "sentDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 0,
+      "note": "Cowork第2弾(30社)でフォーム送信済み(ops/cowork/COWORK-RESULT-02.md)。フォーム経由のためGmail threadIdなし。第1弾10社・Gmail経由セグメントとは別に返信率を計測すること。"
+    },
+    {
+      "id": "edtech-artec",
+      "org": "株式会社アーテック(ArtecRobo)",
+      "lane": "b2b-saas",
+      "sourceTaskId": "S13-A",
+      "sentDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 0,
+      "note": "Cowork第2弾(30社)でフォーム送信済み(ops/cowork/COWORK-RESULT-02.md)。フォーム経由のためGmail threadIdなし。第1弾10社・Gmail経由セグメントとは別に返信率を計測すること。"
+    },
+    {
+      "id": "edtech-nais-test",
+      "org": "株式会社ナイズ",
+      "lane": "b2b-saas",
+      "sourceTaskId": "S13-A",
+      "sentDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 0,
+      "note": "Cowork第2弾(30社)でフォーム送信済み(ops/cowork/COWORK-RESULT-02.md)。フォーム経由のためGmail threadIdなし。第1弾10社・Gmail経由セグメントとは別に返信率を計測すること。"
+    },
+    {
+      "id": "edtech-atsystem",
+      "org": "株式会社アットシステム",
+      "lane": "b2b-saas",
+      "sourceTaskId": "S13-A",
+      "sentDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 0,
+      "note": "Cowork第2弾(30社)でフォーム送信済み(ops/cowork/COWORK-RESULT-02.md)。フォーム経由のためGmail threadIdなし。第1弾10社・Gmail経由セグメントとは別に返信率を計測すること。"
+    },
+    {
+      "id": "gakusan-gakusho",
+      "org": "株式会社学書",
+      "lane": "b2b-saas",
+      "sourceTaskId": "S13-A",
+      "sentDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 0,
+      "note": "Cowork第2弾(30社)でフォーム送信済み(ops/cowork/COWORK-RESULT-02.md)。フォーム経由のためGmail threadIdなし。第1弾10社・Gmail経由セグメントとは別に返信率を計測すること。"
+    },
+    {
+      "id": "edtech-pumpkin-labo",
+      "org": "株式会社ぱんぷきんラボ",
+      "lane": "b2b-saas",
+      "sourceTaskId": "S13-A",
+      "sentDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 0,
+      "note": "Cowork第2弾(30社)でフォーム送信済み(ops/cowork/COWORK-RESULT-02.md)。フォーム経由のためGmail threadIdなし。第1弾10社・Gmail経由セグメントとは別に返信率を計測すること。"
     }
   ]
 }
