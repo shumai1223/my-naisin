@@ -4784,6 +4784,17 @@
       "status": "candidate",
       "addedAt": "2026-08-13",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4-online-katekyo"
+    },
+    {
+      "id": "excluded-wam-online-katekyo",
+      "org": "オンライン家庭教師WAM(HMGROUP)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "status": "excluded",
+      "excludeReason": "公式サイトの問い合わせフォーム(wam.onl/contact/)を直接WebFetchで確認したが、必須項目に『お子さんの学年』があり見出しも『保護者の方』向けと明記された体験申込・相談専用フォーム。マナリンクとは異なりマーケットプレイス型ではなく従来型の個別指導/家庭教師派遣モデルであり、本日全滅した家庭教師派遣業界と同型のパターンのため見送り",
+      "verifiedAt": "2026-08-13",
+      "addedAt": "2026-08-13",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4-online-katekyo"
     }
   ]
 }
