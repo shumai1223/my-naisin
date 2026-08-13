@@ -4912,6 +4912,48 @@
       "status": "candidate",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
       "addedAt": "2026-08-14"
+    },
+    {
+      "id": "edtech-paconsul-yorisoar",
+      "org": "株式会社プラスアルファ・コンサルティング(統合型スクールマネジメントシステム「ヨリソル」)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://forms.yorisoar.com/cre/?enq=gON33PBY7dU=",
+      "contactClass": "b2b",
+      "formPurpose": "unknown",
+      "evidence": "大学・小中高向けの教育データ統合・分析システム「ヨリソル」を運営(タレントマネジメントシステム「タレントパレット」の教育版)。公式サイトのお問い合わせ/資料請求リンクを直接WebFetchで確認したが、フォームURLに追跡用クエリパラメータが付与されており(一般的な静的URLが見当たらない)、フォーム自体の必須項目は未確認。formPurposeは判定不能のためunknownとする。",
+      "verifiedAt": "2026-08-14",
+      "status": "candidate",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
+      "addedAt": "2026-08-14"
+    },
+    {
+      "id": "edtech-asahinet-manaba",
+      "org": "株式会社朝日ネット(クラウド型教育支援サービス「manaba」)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://manaba.jp/contact",
+      "contactClass": "b2b",
+      "formPurpose": "accepts-b2b",
+      "evidence": "大学を中心に多くの教育機関で導入されているLMS「manaba」を運営。お問い合わせページ(manaba.jp/contact)が明示的に「manabaについて、ご検討中の方はこちらからお問い合わせください」という導入検討者向けの窓口であることを直接WebFetchで確認(=まさに事業提携・データ利用の相談を投げる先として適切)。",
+      "verifiedAt": "2026-08-14",
+      "status": "candidate",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
+      "addedAt": "2026-08-14"
+    },
+    {
+      "id": "edtech-motivationworks-blend",
+      "org": "モチベーションワークス株式会社(フルクラウド統合型校務支援システム「BLEND」)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://motivationworks.co.jp/blend/contact/",
+      "contactClass": "b2b",
+      "formPurpose": "accepts-b2b",
+      "evidence": "完全クラウド型の校務支援システム「BLEND」を運営(教職員・保護者・児童生徒にアカウント発行)。公式お問い合わせフォームを直接WebFetchで確認したところ「学校名・会社名」が必須項目として存在し、問い合わせ種類に「エンタープライズプランについて」の選択肢もあり事業提携相談を明確に受け付けている。対象者を限定する文言は見当たらない。",
+      "verifiedAt": "2026-08-14",
+      "status": "candidate",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
+      "addedAt": "2026-08-14"
     }
   ]
 }
