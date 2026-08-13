@@ -17,6 +17,13 @@ export type QueueChannel = 'line' | 'email' | 'form';
 export type QueueStatus = 'queued' | 'excluded' | 'candidate';
 /** T-C1連絡経路判別ルールの結果。'unknown'は送信対象外(推測でb2b/consumerを付けない)。 */
 export type ContactClass = 'b2b' | 'consumer' | 'unknown';
+/**
+ * form channelの窓口が事業提携・データ利用等の相談を受け付けるか(Cowork第1弾実測・2026-08-14)。
+ * `contactClass='b2b'`は「法人向け窓口が存在する」ことしか保証せず、「教科書見本請求専用」「取材のみ」
+ * のような目的限定窓口も同じくb2bに分類されうる。この2軸は独立(contactClassより細かい判定)。
+ * 'unknown'は未判定(送信可否の判断には使わない・Cowork側の目視判定に委ねる)。
+ */
+export type FormPurpose = 'accepts-b2b' | 'purpose-restricted' | 'unknown';
 
 export interface QueueEntry {
   id: string;
@@ -45,6 +52,12 @@ export interface QueueEntry {
   evidence?: string;
   /** contactClassを確認した日付(YYYY-MM-DD)。 */
   verifiedAt?: string;
+  /**
+   * channel==='form'の場合のみ有効: この窓口が事業提携・データ利用等の相談を受け付けるか。
+   * evidenceを書く際に同時に判定して記録する(Cowork第1弾実測: スキップ11社中6社がこの型の
+   * 判定漏れだった。事前判定でCoworkの試行を約37%節約できる見込み)。
+   */
+  formPurpose?: FormPurpose;
 }
 
 /** チャンネルの優先順位（👤の手間が小さい順）。X'-1本文の実測に基づく: line最優先→email→form。 */

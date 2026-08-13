@@ -670,6 +670,8 @@ lane1〜lane5・lane9(高DR .jp新設)に着手し`data/outreach-queue.json`へ�
 
 **08-14 03:0x追記(塾管理システムSaaS残り候補のうち4社を検証・追加)**: 上記「残り約10社」のうち4社を直接WebFetchで検証し追加した: `edtech-esia-anesta`(anesta Pro・株式会社e-sia・お問い合わせフォームに「社名、学校、団体名」必須欄あり)/`edtech-knowledge-wagaco`(wagaco・株式会社ナレッジラーニング・「スクール名」「代表者名」「ご担当者名」の組織項目あり)/`edtech-whiteplum-jukusuma`(塾スマ・株式会社ホワイトプラム・「塾名」必須欄あり)/`edtech-vish-scholaplus`(スコラプラス・VISH株式会社・導入施設数1,000超、問い合わせ/資料請求フォーム両方の存在を確認、必須項目詳細はJS描画のため未確認だが製品自体が施設運営者向けのため法人向けと判定)。**残り未検証6社**: School Manager(株式会社VividWorks)/Platinum School(株式会社大和コンピューター)/MyClass(株式会社メディアシーク)/OneRead(合同会社CROP)/Jukugo(株式会社TSパートナーズ)/PiCRO School Manager(株式会社EDIONクロスベンチャーズ)。**できたDEKITA(フォークルス)は`dekita.online`・`lp.dekita.online`とも2回連続でWebFetchが403 Forbiddenを返し検証不能(ボット対策の可能性)、別経路(プレスリリース記事等)での間接確認が必要**。id/org重複チェック0件・tsc実exit0・jest outreach系2suites32tests green。本日(2026-08-14)のcandidate新規追加は計10件(EdTechスタートアップ2+明光義塾1+塾管理SaaS7)でアウトリーチ下書き1晩上限の目安に達したため、これ以上の新規candidate追加は翌日に持ち越す。
 
+**08-14 03:1x追記(formPurposeフィールドを新設・COWORK-RESULT-01.mdの改善提案を実装)**: `src/lib/outreach-queue.ts`に`FormPurpose`型(`'accepts-b2b' | 'purpose-restricted' | 'unknown'`)と`QueueEntry.formPurpose`フィールドを追加(`contactClass='b2b'`は「法人向け窓口が存在する」ことしか保証せず「教科書見本請求専用」等の目的限定窓口も同じくb2bに分類されうるため、これとは独立な軸として新設)。データ整合性テストを2件追加(許容値チェック・channel==='form'限定チェック)。既存約370件の一括backfillはWebFetch再訪問が必要な推測作業になるため見送り、**今回新規追加した4件(edtech-esia-anesta等)のみformPurpose:'accepts-b2b'を遡及記録**(evidence記載時に目的制限文言なしを確認済みのため)。**運用ルール(以後のcandidate追加に適用)**: form channelの新規候補をWebFetchで検証する際、evidence記載と同時に「事業提携・データ利用等の相談を受け付けるか」を判定しformPurposeに記録する(判定不能はunknown)。tsc実exit0・jest outreach系2suites34tests green(2件追加分含む)。
+
 → 数え終わったら、**lane別の実数**をこのファイルに追記し、そこから目標件数を決める。
 
 - 起票: 2026-08-11 / 優先度: **最優先（主食の本体）** / 実行主体: loop単独（送信は👤）

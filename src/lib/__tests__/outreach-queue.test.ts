@@ -122,4 +122,17 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     const plusgym = lineEntries.find((e) => e.id === 'mutual-link-plusgym-line');
     expect(plusgym?.reviewTier).toBe('full-review');
   });
+
+  it('formPurposeを持つ場合は許容値のみ(accepts-b2b/purpose-restricted/unknown)', () => {
+    const allowed = new Set(['accepts-b2b', 'purpose-restricted', 'unknown']);
+    for (const e of raw.entries.filter((e) => e.formPurpose !== undefined)) {
+      expect(allowed.has(e.formPurpose as string)).toBe(true);
+    }
+  });
+
+  it('formPurposeはchannel===\'form\'のエントリにのみ付与する', () => {
+    for (const e of raw.entries.filter((e) => e.formPurpose !== undefined)) {
+      expect(e.channel).toBe('form');
+    }
+  });
 });
