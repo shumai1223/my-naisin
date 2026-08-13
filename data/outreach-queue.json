@@ -4706,6 +4706,21 @@
       "verifiedAt": "2026-08-13",
       "addedAt": "2026-08-13",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1-moshi59"
+    },
+    {
+      "id": "edtech-kadokawa-dwango-gakuen",
+      "org": "学校法人角川ドワンゴ学園(N高等学校・S高等学校・R高等学校)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://docs.google.com/forms/d/e/1FAIpQLSdyw8ndTaEdARSFzjsu9-GJ_OM-odeg-U8JqntIeZbD-ITlcA/viewform",
+      "subject": "内申点計算データAPI/MCPのご案内（My Naishin）",
+      "body": "学校法人角川ドワンゴ学園 ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\nN高等学校・S高等学校は全国に多数の生徒を抱え、中学生からの進路相談・転入学相談も多いと拝見しております。都道府県ごとに異なる内申点の計算方式をAPIで組み込むことで、進路相談やオンライン学習プログラムの中で生徒・保護者向けの資料をより具体的にできるのではと思いご連絡いたしました。\n\n産官学連携の枠組みの中で、データ連携・API組み込みや共同企画等、貴学園に合う形でのご相談ができればと考えております。ご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com",
+      "contactClass": "b2b",
+      "evidence": "産官学連携パートナー募集ページ(nnn.ed.jp/renkei/)から専用の問い合わせフォーム(Googleフォーム)を直接WebFetchで確認。必須項目に「ご所属の会社名・団体名」「ご興味のあるご連携の形」に加え、自由記述の「お問い合わせ内容／ご質問」欄がありb2b/連携提案に適した窓口と確定。企業・自治体・学校機関との連携実績(ユニットコム/Meta日本法人/森永製菓/山口県長門市/筑波大学等)が明記されており受け入れ体制も確認済み",
+      "verifiedAt": "2026-08-13",
+      "status": "candidate",
+      "addedAt": "2026-08-13",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4-tsushinsei"
     }
   ]
 }
