@@ -108,7 +108,7 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     }
   });
 
-  it('111件がqueued(教委13[email3+form10]+メディアemail9+メディアform5+個人塾line4+npo1+EdTech校務支援8+本文既存済み71の昇格)', () => {
+  it('121件がqueued(教委13[email3+form10]+メディアemail9+メディアform5+個人塾line4+npo1+EdTech校務支援8+本文既存済み81の昇格)', () => {
     // 2026-08-13: 教委email26件は8/6に送信済みでledger側(kyoiku-*-0806)に記録済みの重複だったため
     // queueから削除(outreach-queue.tsの設計「送信済みはledgerへ移しqueueから除外する」に合わせた)。
     // 残る教委emailはlane9-*(政令市3件)のみ・教委formの10件は未送信のため変更なし。
@@ -129,7 +129,10 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // 続けてemail channelの残candidate21件(既にevidenceで直接WebFetch確認済みのアドレス)を一括昇格(83→104)。
     // 2026-08-14続き4: formチャネル7件(edtech-gakugei/edtech-digitalknowledge/gakusan-shimizushoin/
     // gakusan-meijishoin/moshi-gakuyu-mie/lane1-shijuku-net/lane2-yamakawa)をWebFetch再確認のうえ昇格(104→111)。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(111);
+    // 2026-08-14続き5: さらに10件(lane2-nichieisha/lane3-koenokyoikusha/lane3-kogaku-pub/lane3-tomonokai/
+    // lane3-freemind/lane4-viling/lane4-shinrokikaku/lane4-tao-tenjin/lane4-mingaku/lane1-tottorishijuku)を
+    // WebFetch再確認のうえ昇格(111→121)。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(121);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {
