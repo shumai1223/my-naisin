@@ -1239,13 +1239,13 @@
       "org": "株式会社スクールパートナーズ(高校生新聞)",
       "lane": "b2b-saas",
       "channel": "form",
-      "contact": "https://e-karte.site/form.php?page=6504909ab81edf8086a8ec6982a1099a",
       "contactClass": "b2b",
       "evidence": "「高校生新聞」学校申込フォーム(2026年度)②という現行年度のフォームが実際に稼働していることを直接WebFetchで確認(見出しに2026年度と明記=鮮度確認済み)。必須項目に『高校名』『送付先宛名(担当者氏名/分掌役職)』欄があり個人購読者向けとは別の学校向け窓口",
       "verifiedAt": "2026-08-11",
-      "status": "candidate",
+      "status": "excluded",
       "addedAt": "2026-08-11",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5",
+      "excludeReason": "フォームが『高校生新聞』の学校向け購読申込フォーム(高校名/送付先宛名が必須)であり、当方から先方への提案を送る一般問い合わせ窓口ではない(申込専用・方向が逆)"
     },
     {
       "id": "edtech-artec",
@@ -1280,13 +1280,13 @@
       "org": "株式会社アローコーポレーション",
       "lane": "b2b-saas",
       "channel": "form",
-      "contact": "https://www.allow-web.com/contact/",
       "contactClass": "b2b",
       "evidence": "クライアントが100%大学の大学広報専業代理店。お問い合わせフォームの必須項目に『御社名・団体名』欄があり(個人の場合は別途チェックボックス指定)、法人・大学からの問い合わせを前提とした設計であることを直接WebFetchで確認",
       "verifiedAt": "2026-08-11",
-      "status": "candidate",
+      "status": "excluded",
       "addedAt": "2026-08-11",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5",
+      "excludeReason": "クライアントが100%大学の広報代理店。当方の内申点(中学生向け)データとの事業領域の重複が薄く適合度が低いため見送り"
     },
     {
       "id": "edtech-nais-test",
@@ -1336,13 +1336,13 @@
       "org": "株式会社キャリタス",
       "lane": "b2b-saas",
       "channel": "form",
-      "contact": "https://www.career-tasu.co.jp/contact/",
       "contactClass": "b2b",
       "evidence": "教育機関向けサービス(学生募集/入試・教務/キャリア)の3カテゴリで問い合わせ導線が構成され、別途『教育機関ご担当者様へ』専用ページも存在することを直接WebFetchで確認。キャリタス進学は全国のほぼ全ての大学・短大掲載実績あり",
       "verifiedAt": "2026-08-11",
-      "status": "candidate",
+      "status": "excluded",
       "addedAt": "2026-08-11",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5",
+      "excludeReason": "大学・短大向けの学生募集支援サービスで、当方の内申点(中学生向け)データとの適合度が低いため見送り"
     },
     {
       "id": "edtech-frompage-ocans",
@@ -1368,7 +1368,9 @@
       "verifiedAt": "2026-08-11",
       "status": "candidate",
       "addedAt": "2026-08-11",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5",
+      "subject": "内申点計算データAPI/MCPのご案内（My Naishin）",
+      "body": "株式会社さんぽう ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\n貴社が支援されている高等学校進路支援の分野で、都道府県ごとに異なる内申点の自動計算をAPIとしてご活用いただける機会があればと思いご連絡いたしました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com"
     },
     {
       "id": "gakusan-gakusho",
@@ -1420,13 +1422,13 @@
       "org": "株式会社ユナイトプロジェクト(塾シル)",
       "lane": "b2b-saas",
       "channel": "form",
-      "contact": "https://jukushiru.com/published",
       "contactClass": "b2b",
       "evidence": "塾検索ポータルサイト『塾シル』の塾向け掲載相談専用ページ(教室契約数15,000突破)。ページ全体が『急成長中の塾シルに掲載しませんか？』という塾事業者向けの営業ページであり、個人向けページとは明確に別区分。問い合わせボタンの実在を直接WebFetchで確認",
       "verifiedAt": "2026-08-11",
-      "status": "candidate",
+      "status": "excluded",
       "addedAt": "2026-08-11",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5",
+      "excludeReason": "ページ全体が塾シルへの掲載を勧誘する営業ページであり、先方が塾側から掲載料を受け取るビジネスモデル。当方から先方へデータ/API提案を送る用途とは方向が逆"
     },
     {
       "id": "edtech-flens-schoolmanager",
@@ -1517,26 +1519,26 @@
       "org": "株式会社貿易広告社(大学・大学院・短大の進学ガイダンス企画運営)",
       "lane": "b2b-saas",
       "channel": "form",
-      "contact": "https://www.boueki-ad.co.jp/contact/",
       "contactClass": "b2b",
       "evidence": "1952年創業・『教育機関向けに特化した広告代理店』と明記。お問い合わせ区分が『各進学ガイダンスに関するご相談』『サービスに関するご相談』のみで個人向け窓口は存在しないことを直接WebFetchで確認しb2b確定",
       "verifiedAt": "2026-08-11",
-      "status": "candidate",
+      "status": "excluded",
       "addedAt": "2026-08-11",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5",
+      "excludeReason": "教育機関(学校)向けの広告代理店で、問い合わせ区分が学校側からの進学ガイダンス相談・サービス相談のみ。当方(データ/API提供事業者)が送る一般提案窓口ではない"
     },
     {
       "id": "media-epass-gakuseiboshu",
       "org": "株式会社イーパス(生徒募集相談・学校法人様向け)",
       "lane": "b2b-saas",
       "channel": "form",
-      "contact": "https://epass.jp/contact/",
       "contactClass": "b2b",
       "evidence": "『生徒募集相談（学校法人様向け）お問い合わせ』という専用ナビゲーションがあり、フォームの入力欄に『学校名・会社名』『役職・部署名』欄があることを直接WebFetchで確認しb2b確定。⚠️WebSearch要約が提示したメールアドレス(info@epass.jp)はページ内に実在せず不採用(既知のWebSearch作話パターン再検知)、channelはformのみ採用",
       "verifiedAt": "2026-08-11",
-      "status": "candidate",
+      "status": "excluded",
       "addedAt": "2026-08-11",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5",
+      "excludeReason": "学校法人向けの生徒募集(マーケティング)コンサルティングサービスで、当方のデータ/API提供とは事業領域が異なるため見送り"
     },
     {
       "id": "textbook-chikuma-shobo",
