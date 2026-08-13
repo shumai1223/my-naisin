@@ -1478,39 +1478,39 @@
       "org": "公益財団法人日本数学検定協会(実用数学技能検定・団体受検)",
       "lane": "b2b-saas",
       "channel": "form",
-      "contact": "https://www.su-gaku.net/suken/group/contact/inquiry/",
       "contactClass": "b2b",
       "evidence": "個人受検者向けお問い合わせフォームとは別に『団体担当者専用サイト』(`/suken/group/first/`)配下に『実用数学技能検定実施に関するお問い合わせフォーム』(検定を実施される学校・塾の担当者向けと明記)が独立して存在することを直接WebFetchで確認しb2b確定。電話窓口も別(03-5812-8340)",
       "verifiedAt": "2026-08-11",
-      "status": "candidate",
+      "status": "excluded",
       "addedAt": "2026-08-11",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
+      "excludeReason": "フォームが『検定を実施される学校・塾の担当者向け』団体受検実施専用窓口。当方は検定を実施する学校・塾ではないため対象外(cert-rekiken-groupと同型)"
     },
     {
       "id": "cert-eiken-group",
       "org": "公益財団法人日本英語検定協会(英検・団体受験)",
       "lane": "b2b-saas",
       "channel": "form",
-      "contact": "https://contact.eiken.or.jp/helpdesk?category_id=81&site_domain=eiken&safe=1",
       "contactClass": "b2b",
       "evidence": "個人受験者向けページ(`/eiken/contact/examinee/`)とは別に『団体・学校関係者向け』専用ページ(`/eiken/contact/group/`)があり、専用電話番号(03-3266-6581・平日9:30-17:00)と専用WEBフォームURL(helpdesk?category_id=81)が明確に分離されていることを直接WebFetchで確認しb2b確定",
       "verifiedAt": "2026-08-11",
-      "status": "candidate",
+      "status": "excluded",
       "addedAt": "2026-08-11",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
+      "excludeReason": "フォームが団体・学校関係者向けの検定実施専用窓口。当方は検定実施団体ではないため対象外(同型パターン)"
     },
     {
       "id": "cert-jken-group",
       "org": "一般財団法人職業教育・キャリア教育財団(情報検定J検・団体出願)",
       "lane": "b2b-saas",
       "channel": "form",
-      "contact": "https://jken.sgec.or.jp/inquiry/organization/",
       "contactClass": "b2b",
       "evidence": "個人出願向け(`/inquiry/common/`・`/apply/cbt.html`)とは別に団体出願向けの専用お問い合わせフォーム(`/inquiry/organization/`)とPBT/CBT団体出願ページ(`/apply/org_pbt.html`・`/apply/org_cbt.html`)が独立して存在することを直接WebFetchで確認しb2b確定。文部科学省後援・専門学校/高校/大学の団体導入実績多数",
       "verifiedAt": "2026-08-11",
-      "status": "candidate",
+      "status": "excluded",
       "addedAt": "2026-08-11",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
+      "excludeReason": "フォームが団体出願専用窓口(PBT/CBT団体出願ページ)。当方は検定出願団体ではないため対象外(同型パターン)"
     },
     {
       "id": "media-boueki-koukokusha",
@@ -1998,13 +1998,13 @@
       "org": "公文教育研究会(TOEFL Primary/TOEFL Junior日本総代理店)",
       "lane": "b2b-saas",
       "channel": "form",
-      "contact": "https://www.toefl-junior-primary.jp/inquiry/",
       "contactClass": "b2b",
       "evidence": "問い合わせフォームの区分が『個人・生徒【受験者】』『学校・団体のご担当者様』に明確に分離されていることを直接WebFetchで確認しb2b確定。学校・塾向けの団体受験を扱う日本総代理店",
       "verifiedAt": "2026-08-11",
-      "status": "candidate",
+      "status": "excluded",
       "addedAt": "2026-08-11",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
+      "excludeReason": "フォームが学校・団体の検定担当者向け窓口(団体受験専用)。当方は検定実施団体ではないため対象外(同型パターン)"
     },
     {
       "id": "juku-kyoshin-ir",
@@ -2055,26 +2055,26 @@
       "org": "一般財団法人日本書写技能検定協会(硬筆・毛筆書写技能検定・団体受験)",
       "lane": "b2b-saas",
       "channel": "form",
-      "contact": "https://www.nihon-shosha.or.jp/formgroup.html",
       "contactClass": "b2b",
       "evidence": "ナビゲーションに『個人受験』『団体受験』が完全に分離されたメニュー項目として配置され、団体受験(硬筆・毛筆合わせて5名以上)専用の資料請求フォームが独立していることを直接WebFetchで確認しb2b確定",
       "verifiedAt": "2026-08-11",
-      "status": "candidate",
+      "status": "excluded",
       "addedAt": "2026-08-11",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
+      "excludeReason": "フォームが団体受験(5名以上)専用の資料請求窓口。当方は検定実施団体ではないため対象外(同型パターン)"
     },
     {
       "id": "cert-newskentei-group",
       "org": "日本ニュース時事能力検定協会(ニュース時事能力検定・N検・団体受検)",
       "lane": "b2b-saas",
       "channel": "form",
-      "contact": "https://www.newskentei.jp/inquiry.html",
       "contactClass": "b2b",
       "evidence": "『個人受検のお申し込みについて』『団体のご担当者様へ』の2つの独立したメニューセクションに分離されており、団体受検専用の資料請求・問い合わせフォームが存在することを直接WebFetchで確認しb2b確定。学校・塾・企業向けの活用事例ページも別途あり",
       "verifiedAt": "2026-08-11",
-      "status": "candidate",
+      "status": "excluded",
       "addedAt": "2026-08-11",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
+      "excludeReason": "フォームが団体受検専用の資料請求・問い合わせ窓口。当方は検定実施団体ではないため対象外(同型パターン)"
     },
     {
       "id": "lane9-nier-library",
@@ -2658,7 +2658,10 @@
       "verifiedAt": "2026-08-12",
       "status": "candidate",
       "addedAt": "2026-08-12",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
+      "subject": "内申点計算データAPI/MCPのご案内（My Naishin）",
+      "body": "公益財団法人日本漢字能力検定協会 ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\n貴協会の漢字能力検定は入試の内申点評価にも活用されるケースがあり、都道府県ごとに異なる内申点の計算方式のデータをご活用いただける機会があればと思いご連絡いたしました。事業提携に関するご相談のため、恐れ入りますが適切な部署へお取り次ぎいただけますと幸いです。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com",
+      "note": "フォームに『その他』カテゴリがあるため送信時はそちらを選択することを推奨"
     },
     {
       "id": "edtech-manabipocket",
