@@ -945,7 +945,9 @@
       "verifiedAt": "2026-08-11",
       "status": "candidate",
       "addedAt": "2026-08-11",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
+      "subject": "内申点計算データAPI/MCPのご案内（My Naishin）",
+      "body": "株式会社ガイアエデュケーション ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\n貴社のサービスをご利用の学校・塾現場向けに、都道府県ごとに異なる内申点の自動計算をAPIで組み込むことで、進路指導業務をより効率化できるのではと思いご連絡いたしました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com"
     },
     {
       "id": "gakusan-nichibun-g",
@@ -1014,7 +1016,9 @@
       "verifiedAt": "2026-08-11",
       "status": "candidate",
       "addedAt": "2026-08-11",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
+      "subject": "内申点計算データAPI/MCPのご案内（My Naishin）",
+      "body": "株式会社教育ネット ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\n貴社のサービスをご利用の学校・塾現場向けに、都道府県ごとに異なる内申点の自動計算をAPIで組み込むことで、進路指導業務をより効率化できるのではと思いご連絡いたしました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com"
     },
     {
       "id": "moshi-gsc-gunma",
@@ -1250,7 +1254,9 @@
       "verifiedAt": "2026-08-11",
       "status": "candidate",
       "addedAt": "2026-08-11",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
+      "subject": "内申点計算データAPI/MCPのご案内（My Naishin）",
+      "body": "株式会社アーテック ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\n貴社のサービスをご利用の学校・塾現場向けに、都道府県ごとに異なる内申点の自動計算をAPIで組み込むことで、進路指導業務をより効率化できるのではと思いご連絡いたしました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com"
     },
     {
       "id": "edtech-oec-kintai",
@@ -1289,7 +1295,9 @@
       "verifiedAt": "2026-08-11",
       "status": "candidate",
       "addedAt": "2026-08-11",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
+      "subject": "内申点計算データAPI/MCPのご案内（My Naishin）",
+      "body": "株式会社ナイズ ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\n貴社のサービスをご利用の学校・塾現場向けに、都道府県ごとに異なる内申点の自動計算をAPIで組み込むことで、進路指導業務をより効率化できるのではと思いご連絡いたしました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com"
     },
     {
       "id": "edtech-atsystem",
@@ -1302,7 +1310,9 @@
       "verifiedAt": "2026-08-11",
       "status": "candidate",
       "addedAt": "2026-08-11",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
+      "subject": "内申点計算データAPI/MCPのご案内（My Naishin）",
+      "body": "株式会社アットシステム ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\n貴社が全国708校の中学校に提供されている調査書Web登録システムに、都道府県ごとに異なる内申点の自動計算をAPIで組み込むことで、調査書作成業務の一部を効率化できるのではと思いご連絡いたしました。まさに調査書データを扱われている貴社との親和性が高いのではと考えております。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com"
     },
     {
       "id": "edtech-jip-saksak",
