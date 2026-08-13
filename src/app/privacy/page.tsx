@@ -5,7 +5,7 @@ import { APP_NAME } from '@/lib/constants';
 import { LINE_UNFRIEND_HELP_TEXT } from '@/lib/line';
 
 export default function PrivacyPage() {
-  const lastUpdated = '2026年7月12日';
+  const lastUpdated = '2026年8月13日';
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
@@ -186,6 +186,29 @@ export default function PrivacyPage() {
                 <li>• <strong>利用目的：</strong>全国の匿名集計統計データの作成・公開（サンプルサイズが一定件数未満の項目は非公開）</li>
                 <li>• <strong>同意の撤回：</strong>チェックを外すことでいつでも協力を停止できます（過去に送信済みのデータは個人と紐づいていないため個別の削除はできません）</li>
                 <li>• <strong>第三者提供：</strong>集計済みの統計データとしてAPI・CSV形式で一般公開しますが、個人を特定できる情報は含まれません</li>
+              </ul>
+            </div>
+
+            <h3 className="mb-2 mt-4 text-sm font-bold text-slate-700">2.6 開発者向けAPI利用・有償プランのお申し込み</h3>
+            <div className="rounded-xl border border-violet-200 bg-violet-50 p-4">
+              <p className="text-sm leading-relaxed text-violet-800">
+                <strong>APIキーを発行する場合：</strong>ラベル（任意の管理用メモ）・メールアドレス（任意）を
+                当サイトのデータベースに保存します。
+              </p>
+              <ul className="mt-2 space-y-1 text-xs text-violet-700">
+                <li>• <strong>取得項目：</strong>ラベル、メールアドレス（いずれも任意入力）</li>
+                <li>• <strong>利用目的：</strong>発行済みキーの管理、無料プランから有償プランへの移行状況の把握、重要なお知らせの送付</li>
+                <li>• <strong>削除方法：</strong>削除をご希望の場合はお問い合わせください</li>
+              </ul>
+              <p className="mt-3 text-sm leading-relaxed text-violet-800">
+                <strong>Pro／Business／Enterpriseプランをお申し込みの場合：</strong>決済はStripe社の
+                決済ページ（Stripe Checkout）で行われます。お支払い情報・メールアドレスはStripe社が
+                管理し、当サイトのサーバーには保存しません。当サイトからStripe社へは、選択いただいた
+                プラン種別と、利用規約への同意時刻のみを記録用に送信します。
+              </p>
+              <ul className="mt-2 space-y-1 text-xs text-violet-700">
+                <li>• <strong>Stripe社への送信項目：</strong>プラン種別、利用規約への同意時刻、（入力した場合）メールアドレス</li>
+                <li>• <strong>第三者提供：</strong>Stripe社のプライバシーポリシーが別途適用されます</li>
               </ul>
             </div>
           </section>
