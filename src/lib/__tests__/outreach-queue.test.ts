@@ -108,8 +108,11 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     }
   });
 
-  it('54件がqueued(教委36[email26+form10]+メディアemail9+メディアform5+個人塾line4)', () => {
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(54);
+  it('31件がqueued(教委13[email3+form10]+メディアemail9+メディアform5+個人塾line4)', () => {
+    // 2026-08-13: 教委email26件は8/6に送信済みでledger側(kyoiku-*-0806)に記録済みの重複だったため
+    // queueから削除(outreach-queue.tsの設計「送信済みはledgerへ移しqueueから除外する」に合わせた)。
+    // 残る教委emailはlane9-*(政令市3件)のみ・教委formの10件は未送信のため変更なし。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(31);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {
