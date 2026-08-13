@@ -1517,7 +1517,9 @@
       "verifiedAt": "2026-08-11",
       "status": "candidate",
       "addedAt": "2026-08-11",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
+      "subject": "内申点計算データAPI/MCPのご案内（My Naishin）",
+      "body": "株式会社教育ソフトウェア ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\n貴社のデジタル採点システム『採点ナビ』をご利用の学校現場において、定期テストの採点結果と合わせて内申点を自動計算できれば、生徒・保護者向けの成績資料の作成をより効率化できるのではと思いご連絡いたしました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com"
     },
     {
       "id": "textbook-shingakusha-faculty",
@@ -2432,13 +2434,14 @@
       "org": "歴史能力検定協会(歴史能力検定・歴検・団体受検)",
       "lane": "b2b-saas",
       "channel": "email",
-      "contact": "rekiken@kentei-uketsuke.com",
       "contactClass": "b2b",
       "evidence": "『第45回 団体受験申込のご案内』ページが個人受検向け実施概要と分離され、団体受検専用のお問い合わせメールアドレスrekiken@kentei-uketsuke.comと団体受験申込書(Excel)アップロードフォームが記載されていることをcurlで取得した生HTMLで直接確認しb2b確定(前回セッションはURL特定できず見送りだったが再挑戦で発見)",
       "verifiedAt": "2026-08-11",
-      "status": "candidate",
+      "status": "excluded",
       "addedAt": "2026-08-11",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
+      "excludeReason": "連絡先が団体受検(生徒の集団受験申込)専用の窓口であり、API/データライセンスの一般的な業務提案を送る先としては目的不一致(sinro-hyogo等と同型)。歴史能力検定協会の一般的な事務局窓口は別途調査が必要",
+      "note": "2026-08-13評価: 本文設置を試みる過程で目的不一致に気づき見送りへ変更"
     },
     {
       "id": "lane9-iesj",
@@ -2962,7 +2965,9 @@
       "verifiedAt": "2026-08-12",
       "status": "candidate",
       "addedAt": "2026-08-12",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1",
+      "subject": "内申点計算データAPI/MCPのご案内（My Naishin）",
+      "body": "協同組合静岡県私塾連盟 ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\n貴組合に加盟されている静岡県内の学習塾様は、静岡県独自の内申点計算方式に基づく合否判定資料を日々作成されているかと思います。この計算をAPIで組み込むことで、加盟塾様の資料作成の負担を減らせるのではと思いご連絡いたしました。加盟塾様向けにご紹介いただける機会があれば幸いです。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com"
     },
     {
       "id": "lane5-president-family",
