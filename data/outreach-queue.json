@@ -4898,6 +4898,52 @@
       "verifiedAt": "2026-08-13",
       "addedAt": "2026-08-13",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1-moshi59"
+    },
+    {
+      "id": "moshi-sinro-hyogo",
+      "org": "ひょうご進路選択ナビ／兵庫統一模試(edic創造学園運営)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.sinro.jp/mosi/entry/group/entry.php",
+      "contactClass": "b2b",
+      "evidence": "「塾・団体登録はこちら」から遷移する塾・団体向け模試申込フォームを直接WebFetchで確認。必須項目に「塾･団体名」「塾･団体名(フリガナ)」欄があり個人受験申込(entry/personal)とは別の法人向け窓口と確定。運営はedic創造学園(神戸新聞社と共同運営表記あり)",
+      "verifiedAt": "2026-08-13",
+      "status": "candidate",
+      "addedAt": "2026-08-13",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1-moshi59"
+    },
+    {
+      "id": "moshi-eisu-suzuka",
+      "org": "株式会社鈴鹿英数学院(eisu・三重県公開模擬テスト)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "status": "excluded",
+      "excludeReason": "公式サイト(eisu.co.jp)の模試ページに法人向けメール・問い合わせフォームが見当たらず、電話窓口(059-227-6248)のみ確認。channel enum(line/email/form)非対応",
+      "verifiedAt": "2026-08-13",
+      "addedAt": "2026-08-13",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1-moshi59"
+    },
+    {
+      "id": "moshi-svision-wakayama",
+      "org": "株式会社エスビジョングループ(和歌山県・学習塾)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "status": "excluded",
+      "excludeReason": "公式サイトのドメインが特定できず(同名の別業種企業が複数存在し誤帰属リスクあり)、ディレクトリサイト経由の電話番号(073-476-2533)のみ確認。誤帰属回避のため見送り",
+      "verifiedAt": "2026-08-13",
+      "addedAt": "2026-08-13",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1-moshi59"
+    },
+    {
+      "id": "moshi-seishinsha-okinawa",
+      "org": "株式会社誠伸社(沖縄県統一プレ入試)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "status": "excluded",
+      "excludeReason": "公式サイト(e-seishin.jp)のお問い合わせページを直接WebFetchで確認したが電話番号(098-875-0437)のみでメール・フォームなし。channel enum非対応",
+      "verifiedAt": "2026-08-13",
+      "addedAt": "2026-08-13",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1-moshi59"
     }
   ]
 }
