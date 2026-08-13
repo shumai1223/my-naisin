@@ -1410,13 +1410,13 @@
       "contact": "https://docs.google.com/forms/d/e/1FAIpQLSdhUP0ebMdfVb1oJqt4CsKwqqc-nAE267XA-WLfR0_8Nd5SJQ/viewform",
       "contactClass": "b2b",
       "evidence": "『高校にキャリア学習の出張授業を届けることから活動を始めた』団体で、高校・教育機関職員専用ページ(/school/)が一般向けとは別に存在し、全国高校生マイプロジェクトの専用申込フォーム(Googleフォーム)があることを直接WebFetchで確認しb2b確定",
-      "verifiedAt": "2026-08-11",
-      "status": "candidate",
+      "verifiedAt": "2026-08-14",
+      "status": "excluded",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane8",
       "subject": "内申点計算データAPI/MCPのご案内（My Naishin）",
       "body": "認定NPO法人カタリバ ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\n貴団体が展開されている高校生向けプログラムに、都道府県ごとに異なる内申点の自動計算をAPIとしてご活用いただける機会があればと思いご連絡いたしました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com",
-      "note": "フォームが「全国高校生マイプロジェクトアワードに関するお問い合わせですか」で分岐する専用フォームと2026-08-14 WebFetchで再確認。本文はB2B API案内でアワード関連ではないため、このフォーム経由での送信はミスマッチの可能性が高い。送信前に別の分岐(アワード以外)が一般問い合わせを受け付けるか要確認、または代表連絡先を別途探す"
+      "excludeReason": "2026-08-14 代表窓口(katariba.or.jp/contact/)を再確認したところ「営業を目的としたお問い合わせはお断りしております」と明記されており、B2B API/データ提携の打診は不適合と判断。マイプロジェクト専用フォームも本文とミスマッチのため両方の窓口とも見送り"
     },
     {
       "id": "edtech-igs-aigrow",
