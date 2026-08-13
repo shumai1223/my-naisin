@@ -108,7 +108,7 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     }
   });
 
-  it('82件がqueued(教委13[email3+form10]+メディアemail9+メディアform5+個人塾line4+npo1+EdTech校務支援8+本文既存済み42の昇格)', () => {
+  it('104件がqueued(教委13[email3+form10]+メディアemail9+メディアform5+個人塾line4+npo1+EdTech校務支援8+本文既存済み64の昇格)', () => {
     // 2026-08-13: 教委email26件は8/6に送信済みでledger側(kyoiku-*-0806)に記録済みの重複だったため
     // queueから削除(outreach-queue.tsの設計「送信済みはledgerへ移しqueueから除外する」に合わせた)。
     // 残る教委emailはlane9-*(政令市3件)のみ・教委formの10件は未送信のため変更なし。
@@ -125,7 +125,9 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // edtech-igs-aigrow/edtech-feelnote-hamagakuen)をWebFetch再確認のうえqueuedへ昇格(76→81)。
     // 2026-08-14続き2: career-miraikyoiku-sdgsquestを昇格(81→82)。juku-shuei-yobiko-ir(IR専用と判明)・
     // edtech-ryobi-koushien(フリーメール拒否と判明)の2件をexcludedへ。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(82);
+    // 2026-08-14続き3: juku-sprix-ir(IRは複数区分の1つに過ぎない一般問い合わせフォームと確認)を昇格(82→83)。
+    // 続けてemail channelの残candidate21件(既にevidenceで直接WebFetch確認済みのアドレス)を一括昇格(83→104)。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(104);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {
