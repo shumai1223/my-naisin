@@ -142,10 +142,11 @@
       "lane": "b2b-saas",
       "sourceTaskId": "W-1",
       "sentDate": "2026-07-18",
+      "lastContactDate": "2026-08-13",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "19f705797d7e94b6",
-      "note": "送信のみ・自動受付メール等の反応も未確認。"
+      "note": "8/13追撃下書き設置(draftId r-6606022803189757519・messageId 19ff893e3a30f4ac)。原文がPro=商用利用可と案内していたが8/13にProを非商用限定へ変更したため、訂正+Businessプラン案内の文面。送信は👤。"
     },
     {
       "id": "educom",
@@ -153,10 +154,11 @@
       "lane": "b2b-saas",
       "sourceTaskId": "W-1",
       "sentDate": "2026-07-18",
+      "lastContactDate": "2026-08-13",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "19f7057a5802b7a6",
-      "note": "送信のみ・自動受付メール等の反応も未確認。"
+      "note": "8/13追撃下書き設置(draftId r-3137629585098184426・messageId 19ff893ef8ab911a)。原文がPro=商用利用可と案内していたが8/13にProを非商用限定へ変更したため、訂正+Businessプラン案内の文面。送信は👤。"
     },
     {
       "id": "justsystems",
@@ -164,10 +166,11 @@
       "lane": "b2b-saas",
       "sourceTaskId": "W-1",
       "sentDate": "2026-07-18",
+      "lastContactDate": "2026-08-13",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "19f7057b21db3c08",
-      "note": "送信のみ・自動受付メール等の反応も未確認。"
+      "note": "8/13追撃下書き設置(draftId r-5037152564500306743・messageId 19ff893d507093db)。原文がPro=商用利用可と案内していたが8/13にProを非商用限定へ変更したため、訂正+Businessプラン案内の文面。送信は👤。"
     },
     {
       "id": "zkai-mcp",
@@ -175,10 +178,11 @@
       "lane": "b2b-saas",
       "sourceTaskId": "W-1",
       "sentDate": "2026-07-18",
+      "lastContactDate": "2026-08-13",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "19f7057c092a2e65",
-      "note": "送信のみ・自動受付メール等の反応も未確認。別件で7/12頃にZ会企業営業担当の問い合わせフォーム経由の接点(zs_hojin@ml.zkai.co.jp)もあるが本件(API/MCP案内)とは別スレッド。"
+      "note": "8/13追撃下書き設置(draftId r1420744513252719414・messageId 19ff893c58aa3dfa)。原文がPro=商用利用可と案内していたが8/13にProを非商用限定へ変更したため、訂正+Businessプラン案内の文面。送信は👤。別件で7/12頃にZ会企業営業担当の問い合わせフォーム経由の接点(zs_hojin@ml.zkai.co.jp)もあるが本件(API/MCP案内)とは別スレッド。"
     },
     {
       "id": "lifeistech",
