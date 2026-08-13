@@ -48,7 +48,7 @@
       "status": "awaiting",
       "followupCount": 0,
       "threadId": "19f8768bdf273775",
-      "note": "自動受付メールのみ・人間の返信なし。",
+      "note": "自動受付メールのみ・人間の返信なし。⚠️8/13確認: threadId 19f8768bdf273775 はGmail上でRequested entity was not foundとなり参照不能(削除/無効化の可能性)。到達可能な連絡経路が確認できず今回は下書き未作成・次回別経路(公式サイト再確認等)で調査要。",
       "reviewTier": "spot-check"
     },
     {
@@ -82,9 +82,10 @@
       "lane": "b2b-saas",
       "sourceTaskId": "W-1",
       "sentDate": "2026-07-17",
+      "lastContactDate": "2026-08-13",
       "status": "awaiting",
-      "followupCount": 0,
-      "note": "wave2・👤がフォーム送信(Gmail下書き非経由のため送信メール自体はin:sentに残らない)。送信日は自動受付メール(19f6fc8e82bb1b99・20:14着)の受信時刻から確定。"
+      "followupCount": 1,
+      "note": "wave2・👤がフォーム送信(Gmail下書き非経由のため送信メール自体はin:sentに残らない)。送信日は自動受付メール(19f6fc8e82bb1b99・20:14着)の受信時刻から確定。自動受付メールの署名にinfo@shinken.co.jp明記・no-reply表記なし=返信到達可能と判断。8/13追撃下書き設置(draftId r-5243379990143750606・messageId 19ffa2f5bfe3e70d)。内申点白書2026+セルフサーブ見積り(/mitsumori)の追加価値を提示。送信は👤。"
     },
     {
       "id": "hokushin",
@@ -94,7 +95,7 @@
       "sentDate": "2026-07-17",
       "status": "awaiting",
       "followupCount": 0,
-      "note": "wave2・フォーム送信。送信日は自動受付メール(19f6fce325eb1339・20:20着)の受信時刻から確定。"
+      "note": "wave2・フォーム送信。送信日は自動受付メール(19f6fce325eb1339・20:20着)の受信時刻から確定。⚠️8/13確認: 自動受付メールに『このメールへの返信はできません』と明記(toiawase@hokushin-t.jp)=メール追撃は無意味と判断し下書き未作成。電話窓口(0570-06-0103・平日9-18時)のみが追撃経路=👤のみ実行可。"
     },
     {
       "id": "ikushin",
@@ -104,7 +105,7 @@
       "sentDate": "2026-07-17",
       "status": "awaiting",
       "followupCount": 0,
-      "note": "wave2・フォーム送信。送信日は自動受付メール(19f6fd176ced2657・20:23着)の受信時刻から確定。"
+      "note": "wave2・フォーム送信。送信日は自動受付メール(19f6fd176ced2657・20:23着)の受信時刻から確定。⚠️8/13確認: 自動受付メールに『本メールに返信していただきましても、ご質問などにはお答えできません』と明記(school-e@ikushin.co.jp)=メール追撃は無意味と判断し下書き未作成。電話窓口(03-3831-9591・本社代表)のみが追撃経路=👤のみ実行可。"
     },
     {
       "id": "shinkyoken",
@@ -112,9 +113,10 @@
       "lane": "b2b-saas",
       "sourceTaskId": "W-1",
       "sentDate": "2026-07-17",
+      "lastContactDate": "2026-08-13",
       "status": "awaiting",
-      "followupCount": 0,
-      "note": "wave2・フォーム送信。送信日は自動受付メール(19f6fd94b68ff7e9・20:32着)の受信時刻から確定。3営業日超で無反応なら029-252-7210へ電話可、と自動受付メールに明記あり。",
+      "followupCount": 1,
+      "note": "wave2・フォーム送信。送信日は自動受付メール(19f6fd94b68ff7e9・20:32着)の受信時刻から確定。3営業日超で無反応なら029-252-7210へ電話可、と自動受付メールに明記あり(soumu@shinkyoken.co.jp=総務窓口・no-reply表記なし)。8/13追撃下書き設置(draftId r3119101593777800974・messageId 19ffa2f63e1db543)。内申点白書2026+セルフサーブ見積り(/mitsumori)の追加価値を提示し電話番号も併記。送信は👤。",
       "reviewTier": "spot-check"
     },
     {
@@ -123,9 +125,10 @@
       "lane": "b2b-saas",
       "sourceTaskId": "W-1",
       "sentDate": "2026-07-17",
+      "lastContactDate": "2026-08-13",
       "status": "awaiting",
-      "followupCount": 0,
-      "note": "wave2・フォーム送信。送信日は自動受付メール(19f6fdab48fe1bb4・20:33着)の受信時刻から確定。"
+      "followupCount": 1,
+      "note": "wave2・フォーム送信。送信日は自動受付メール(19f6fdab48fe1bb4・20:33着)の受信時刻から確定。no-reply明示は無いがinfo@宛の汎用自動返信で到達性は不確実。8/13追撃下書き設置(draftId r-6014061984540378143・messageId 19ffa2f6ac389930)。内申点白書2026+セルフサーブ見積り(/mitsumori)の追加価値を提示(具体的な模試名は未確認のため『貴社の模試事業』と一般化)。送信は👤。"
     },
     {
       "id": "gakuyu",
