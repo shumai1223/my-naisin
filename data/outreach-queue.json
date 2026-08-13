@@ -4944,6 +4944,50 @@
       "verifiedAt": "2026-08-13",
       "addedAt": "2026-08-13",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1-moshi59"
+    },
+    {
+      "id": "katekyo-trygroup",
+      "org": "株式会社トライグループ(家庭教師のトライ)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "status": "excluded",
+      "excludeReason": "公式サイト(trygroup.co.jp)・問い合わせ窓口(info-faq.trygroup.co.jp)を直接WebFetchで確認したが、200以上の自治体と連携する行政支援事業があるにもかかわらず、法人・自治体提携専用の問い合わせフォーム/メールアドレスは見当たらず一般消費者向け窓口(電話・資料請求フォーム)のみ",
+      "verifiedAt": "2026-08-13",
+      "addedAt": "2026-08-13",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane-katekyo"
+    },
+    {
+      "id": "katekyo-gakken-lstaffing",
+      "org": "株式会社学研エル・スタッフィング(学研の家庭教師)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "status": "excluded",
+      "excludeReason": "お問い合わせフォームを直接WebFetchで確認。項目は「サイトに関するお問い合わせ」「当社サービスに関するお問い合わせ」「その他」の3区分のみで法人提携に関する区分が無く、会社名欄も任意。契約可否の確証が持てず見送り",
+      "verifiedAt": "2026-08-13",
+      "addedAt": "2026-08-13",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane-katekyo"
+    },
+    {
+      "id": "katekyo-meimonkai",
+      "org": "株式会社名門会(プロ家庭教師の名門会)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "status": "excluded",
+      "excludeReason": "公式サイトに掲載されている窓口は進路相談室の電話番号(0120-14-3759)のみでオンラインフォーム・メールアドレスが見当たらず。channel enum非対応",
+      "verifiedAt": "2026-08-13",
+      "addedAt": "2026-08-13",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane-katekyo"
+    },
+    {
+      "id": "katekyo-deskstyle",
+      "org": "株式会社デスクスタイル(家庭教師のデスクスタイル)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "status": "excluded",
+      "excludeReason": "問い合わせフォームを直接WebFetchで確認したところ、お子さまの学年・保護者住所等を入力する無料体験申込フォームで法人向けではないと判断",
+      "verifiedAt": "2026-08-13",
+      "addedAt": "2026-08-13",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane-katekyo"
     }
   ]
 }
