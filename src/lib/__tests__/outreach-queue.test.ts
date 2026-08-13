@@ -108,7 +108,7 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     }
   });
 
-  it('60件がqueued(教委13[email3+form10]+メディアemail9+メディアform5+個人塾line4+npo1+EdTech校務支援8+本文既存済み20の昇格)', () => {
+  it('71件がqueued(教委13[email3+form10]+メディアemail9+メディアform5+個人塾line4+npo1+EdTech校務支援8+本文既存済み31の昇格)', () => {
     // 2026-08-13: 教委email26件は8/6に送信済みでledger側(kyoiku-*-0806)に記録済みの重複だったため
     // queueから削除(outreach-queue.tsの設計「送信済みはledgerへ移しqueueから除外する」に合わせた)。
     // 残る教委emailはlane9-*(政令市3件)のみ・教委formの10件は未送信のため変更なし。
@@ -117,7 +117,8 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // 2026-08-14: 同夜に本文まで書きながらstatus='candidate'のまま残っていた14件+6件(計20件)をT-C2の設計に沿いqueuedへ昇格
     // (直近のWebFetch再検証を根拠)。edtech-yournet-schpass/edtech-broadmedia-renaissanceのcontactがhttp://だった
     // ため昇格時にhttps://へ修正。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(60);
+    // 2026-08-14: さらに11件(cert-kanken-group等)をWebFetch再確認のうえqueuedへ昇格。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(71);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {
