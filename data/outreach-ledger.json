@@ -468,9 +468,10 @@
       "sourceTaskId": "X-6",
       "sentDate": "2026-08-06",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "19fcd6f535d73fa2",
-      "note": "「中学生が独学で開発した内申点計算サイトについて」の情報提供メール。"
+      "note": "「中学生が独学で開発した内申点計算サイトについて」の情報提供メール。 2026-08-14: 8日間無反応のため追撃下書きを新規作成(gmail_create_draft・元スレッドへの返信ではなく新規宛先指定で正しく宛先設定)。",
+      "lastContactDate": "2026-08-14"
     },
     {
       "id": "chihoshi-chunichi-0806",
@@ -479,9 +480,10 @@
       "sourceTaskId": "X-6",
       "sentDate": "2026-08-06",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "19fcd6f5d8240aab",
-      "note": "同上テンプレート。"
+      "note": "同上テンプレート。 2026-08-14: 8日間無反応のため追撃下書きを新規作成(gmail_create_draft・元スレッドへの返信ではなく新規宛先指定で正しく宛先設定)。",
+      "lastContactDate": "2026-08-14"
     },
     {
       "id": "chihoshi-chugoku-np-0806",
@@ -490,9 +492,10 @@
       "sourceTaskId": "X-6",
       "sentDate": "2026-08-06",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "19fcd6f696bdb62a",
-      "note": "同上テンプレート。"
+      "note": "同上テンプレート。 2026-08-14: 8日間無反応のため追撃下書きを新規作成(gmail_create_draft・元スレッドへの返信ではなく新規宛先指定で正しく宛先設定)。",
+      "lastContactDate": "2026-08-14"
     },
     {
       "id": "chihoshi-kyoto-np-0806",
@@ -501,9 +504,10 @@
       "sourceTaskId": "X-6",
       "sentDate": "2026-08-06",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "19fcd6f74d1734a2",
-      "note": "同上テンプレート。"
+      "note": "同上テンプレート。 2026-08-14: 8日間無反応のため追撃下書きを新規作成(gmail_create_draft・元スレッドへの返信ではなく新規宛先指定で正しく宛先設定)。",
+      "lastContactDate": "2026-08-14"
     },
     {
       "id": "chihoshi-kobe-np-0806",
@@ -512,9 +516,10 @@
       "sourceTaskId": "X-6",
       "sentDate": "2026-08-06",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "19fcd6f81263331f",
-      "note": "同上テンプレート。"
+      "note": "同上テンプレート。 2026-08-14: 8日間無反応のため追撃下書きを新規作成(gmail_create_draft・元スレッドへの返信ではなく新規宛先指定で正しく宛先設定)。",
+      "lastContactDate": "2026-08-14"
     },
     {
       "id": "chihoshi-shijyukukai-0806",
@@ -523,9 +528,10 @@
       "sourceTaskId": "X-6",
       "sentDate": "2026-08-06",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "19fcd6f8ec975d1f",
-      "note": "「学習塾業界向け」のご紹介メール。"
+      "note": "「学習塾業界向け」のご紹介メール。 2026-08-14: 8日間無反応のため追撃下書きを新規作成(gmail_create_draft・元スレッドへの返信ではなく新規宛先指定で正しく宛先設定)。",
+      "lastContactDate": "2026-08-14"
     },
     {
       "id": "chihoshi-ict-enews-0806",
@@ -534,9 +540,10 @@
       "sourceTaskId": "X-6",
       "sentDate": "2026-08-06",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "19fcd6f9c1bad74f",
-      "note": "「AI/API連携も見据えて公開」のニュースリリース文面。"
+      "note": "「AI/API連携も見据えて公開」のニュースリリース文面。 2026-08-14: 8日間無反応のため追撃下書きを新規作成(gmail_create_draft・元スレッドへの返信ではなく新規宛先指定で正しく宛先設定)。",
+      "lastContactDate": "2026-08-14"
     },
     {
       "id": "chihoshi-iid-edtech-0806",
@@ -556,9 +563,10 @@
       "sourceTaskId": "X-6",
       "sentDate": "2026-08-06",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "19fcd6fb26f2c3f3",
-      "note": "media-biz@iid.co.jp宛・保護者/受験生向けの文面。同一窓口に2本送付（chihoshi-iid-edtech-0806とは別の切り口）。"
+      "note": "media-biz@iid.co.jp宛・保護者/受験生向けの文面。同一窓口に2本送付（chihoshi-iid-edtech-0806とは別の切り口）。 2026-08-14: 8日間無反応のため追撃下書きを新規作成(gmail_create_draft・元スレッドへの返信ではなく新規宛先指定で正しく宛先設定)。",
+      "lastContactDate": "2026-08-14"
     },
     {
       "id": "kyoiku-yokohama-shi-0812",
