@@ -684,6 +684,8 @@ lane1〜lane5・lane9(高DR .jp新設)に着手し`data/outreach-queue.json`へ�
 
 **08-14 05:0x追記(校務支援システムレーンの残り3社を検証・追加・aspicjapan.org15選記事の中学・高校向け7製品を完了)**: `edtech-paconsul-yorisoar`(ヨリソル・株式会社プラスアルファ・コンサルティング・大学/小中高向け教育データ統合システム。フォームURLに追跡クエリパラメータのみでformPurpose判定不能のためunknown)/`edtech-asahinet-manaba`(manaba・株式会社朝日ネット・お問い合わせページが『ご検討中の方』向けと明記)/`edtech-motivationworks-blend`(BLEND・モチベーションワークス株式会社・『学校名・会社名』必須欄+エンタープライズプラン選択肢あり)を追加。これで15選記事の中学・高校向け7製品は全て処理完了(重複4件+新規5件)。残る「教育支援に強みのあるタイプ」3製品(manaba=完了/Classi=既存見送り/ヨリソル=完了)・「小中学校向け」5製品・「大学向け」2製品は未着手だが、My Naishinの対象読者(中高生の進路・入試)との親和性は中学・高校向けが最も高いためこのレーンはここで一区切りとする。id/org重複0件・tsc実exit0・jest outreach系2suites34tests green。
 
+**08-14 05:0x追記(校務支援システム「小中学校向け」区分を確認・中学校はMy Naishin本丸のため優先実施)**: 「小中学校向け」5製品のうちC4th(EDUCOM)は既存candidateと重複、Classi枠のClassiは既存見送り済み。残り3社を検証: `edtech-uchida-digitalkoumu`(デジタル校務・株式会社内田洋行・大手教育機器企業・「団体名」必須欄あり)/`edtech-sr-e3school-jr`(e3school校務エキスパートjr・株式会社システムリサーチ・380校以上導入・「団体名」必須欄あり)をcandidate追加。**`edtech-winbird-database`(Win Bird校務支援データベース・ウィンバード株式会社)はフォームページ冒頭に『営業・勧誘などの目的でのお問い合わせはご遠慮ください』と明記されており(FLENSと同型パターン)、事前にexcludedとして記録**(Cowork側の無駄な試行を防ぐ)。これで校務支援システム15選のうち中学・高校向け7製品+小中学校向け3製品(実質)=計10製品を処理完了。id/org重複0件・tsc実exit0・jest outreach系2suites34tests green。
+
 → 数え終わったら、**lane別の実数**をこのファイルに追記し、そこから目標件数を決める。
 
 - 起票: 2026-08-11 / 優先度: **最優先（主食の本体）** / 実行主体: loop単独（送信は👤）

@@ -4954,6 +4954,47 @@
       "status": "candidate",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
       "addedAt": "2026-08-14"
+    },
+    {
+      "id": "edtech-uchida-digitalkoumu",
+      "org": "株式会社内田洋行(公立小中学校向け統合型校務支援システム「デジタル校務」)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.uchida.co.jp/system_form/form/swj/form.php?method=swj&large_class=%E6%95%99%E8%82%B2&genre=%E5%95%86%E5%93%81&kenmei=%E3%83%87%E3%82%B8%E3%82%BF%E3%83%AB%E6%A0%A1%E5%8B%99",
+      "contactClass": "b2b",
+      "formPurpose": "accepts-b2b",
+      "evidence": "公立小中学校向けの統合型校務支援システム「デジタル校務」を運営(内田洋行は教育機器分野で著名な大手企業)。公式お問い合わせフォームを直接WebFetchで確認したところ「団体名」が必須項目として存在し、所属選択肢に「教育委員会」「学校(学校法人)」「その他」があり対象を限定する明示的な文言は見当たらない。My Naishinの主な対象読者(中学生・内申点)と直接重なる小中学校向け製品。",
+      "verifiedAt": "2026-08-14",
+      "status": "candidate",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
+      "addedAt": "2026-08-14"
+    },
+    {
+      "id": "edtech-sr-e3school-jr",
+      "org": "株式会社システムリサーチ(小中学校向け統合型校務支援システム「e3school校務エキスパートjr」)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://e3school-koumu-jr.com/",
+      "contactClass": "b2b",
+      "formPurpose": "accepts-b2b",
+      "evidence": "380校以上導入の小中学校向け校務支援システム「e3school校務エキスパートjr」を運営。公式お問い合わせ・資料請求フォームを直接WebFetchで確認したところ「団体名」が必須項目として存在し、所属選択肢に「教育委員会」「学校」「その他」があり対象を限定する明示的な文言は見当たらない。",
+      "verifiedAt": "2026-08-14",
+      "status": "candidate",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
+      "addedAt": "2026-08-14"
+    },
+    {
+      "id": "edtech-winbird-database",
+      "org": "ウィンバード株式会社(校務支援システム「Win Bird 校務支援データベース」)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.winbird-gp.co.jp/contact/index.php",
+      "contactClass": "b2b",
+      "status": "excluded",
+      "excludeReason": "お問い合わせフォームページ冒頭に「営業・勧誘などの目的でのお問い合わせはご遠慮ください」と明記(FLENS[edtech-flens-schoolmanager]と同型のパターン)。",
+      "verifiedAt": "2026-08-14",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
+      "addedAt": "2026-08-14"
     }
   ]
 }
