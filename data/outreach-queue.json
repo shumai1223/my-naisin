@@ -5029,6 +5029,47 @@
       "status": "candidate",
       "addedAt": "2026-08-13",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4-tsushinsei"
+    },
+    {
+      "id": "edtech-meihoukan",
+      "org": "明蓬館高等学校(SNEC・STEC提携)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://docs.google.com/forms/d/e/1FAIpQLSeCY8gEuPlI-kwiBUhtBDcTyiKgeMouJpsEtMYWCHMRzlycPg/viewform",
+      "subject": "内申点計算データAPI/MCPのご案内（My Naishin）",
+      "body": "明蓬館高等学校 ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\n貴校は全国のSNEC・STEC提携施設を通じて中学生からの転入学相談・進路相談も多いと拝見しております。都道府県ごとに異なる内申点の自動計算をAPIで組み込むことで、進路相談の資料をより具体的にできるのではと思いご連絡いたしました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com",
+      "contactClass": "b2b",
+      "evidence": "公式サイトの『SNEC・STEC提携希望の方へ』ページ(at-mhk.com/for-partner/)を直接WebFetchで確認。提携専用のGoogleフォームURL(docs.google.com/forms/...)とメールアドレス(info@at-learn.co.jp)が明記されており、法人・提携施設向けの専用窓口であることが確定",
+      "verifiedAt": "2026-08-13",
+      "status": "candidate",
+      "addedAt": "2026-08-13",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4-tsushinsei"
+    },
+    {
+      "id": "edtech-asukamirai-sanko",
+      "org": "学校法人三幸学園(飛鳥未来高等学校グループ)",
+      "lane": "b2b-saas",
+      "channel": "email",
+      "contact": "info-nara-asuka@sanko.ac.jp",
+      "subject": "内申点計算データAPI/MCPのご案内（My Naishin）",
+      "body": "飛鳥未来高等学校 ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\n貴校（飛鳥未来高等学校・飛鳥未来きずな・飛鳥未来きぼう）は全国にキャンパスを持ち、中学生からの転入学相談・進路相談も多いと拝見しております。都道府県ごとに異なる内申点の自動計算をAPIで組み込むことで、進路相談の資料をより具体的にできるのではと思いご連絡いたしました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com",
+      "contactClass": "b2b",
+      "evidence": "学校法人三幸学園の運営各校お問い合わせ一覧(sanko.ac.jp/contact-list/)を直接WebFetchで確認。飛鳥未来高等学校(奈良本校)のメールアドレス(info-nara-asuka@sanko.ac.jp)がページ内に実在することを確認済み",
+      "verifiedAt": "2026-08-13",
+      "status": "candidate",
+      "addedAt": "2026-08-13",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4-tsushinsei"
+    },
+    {
+      "id": "excluded-sakura-kokusai",
+      "org": "学校法人上田煌桜学園(さくら国際高等学校)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "status": "excluded",
+      "excludeReason": "提携問い合わせ窓口が『法人本部事務局 連携施設部（広報）担当：平井、金澤までTEL』という個人名付き電話専用と判明。channel enum(line/email/form)非対応のため見送り",
+      "verifiedAt": "2026-08-13",
+      "addedAt": "2026-08-13",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4-tsushinsei"
     }
   ]
 }
