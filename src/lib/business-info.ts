@@ -14,6 +14,6 @@ export const BUSINESS_INFO = {
 } as const;
 
 /** 事業者情報がまだ実値化されていないか（見積書等で警告表示の要否判定に使う）。 */
-export function isBusinessInfoPending(): boolean {
-  return BUSINESS_INFO.sellerName.startsWith('準備中');
+export function isBusinessInfoPending(sellerName: string = BUSINESS_INFO.sellerName): boolean {
+  return sellerName.startsWith('準備中');
 }
