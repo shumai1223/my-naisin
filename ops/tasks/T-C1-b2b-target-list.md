@@ -678,6 +678,8 @@ lane1〜lane5・lane9(高DR .jp新設)に着手し`data/outreach-queue.json`へ�
 
 **08-14 03:5x追記(PiCRO School Managerの関係性確認→別法人と判明し追加)**: 前回持ち越したPiCRO School Manager(株式会社EDIONクロスベンチャーズ)がVividWorksのSCHOOL MANAGERと関係あるか(販売代理店等)を直接WebFetchで確認したところ、PiCRO運営会社ページに「PiCROを運営する株式会社EDIONクロスベンチャーズ」とのみ明記されVividWorksへの言及は一切なかった。**別法人・別製品(名称が偶然似ているだけ)と判断**し`edtech-edionxv-picro-schoolmanager`として追加。フォームに「貴団体名」必須欄+「代理店提携」の問い合わせ種別選択肢があり事業提携相談を明確に受け付けている。OneRead(合同会社CROP)は引き続き未着手で持ち越し。id/org重複0件・tsc実exit0・jest outreach系2suites34tests green。
 
+**08-14 04:0x追記(OneRead調査→接続確認不能のため見送り・塾管理SaaSレーンの調査を完結)**: OneRead(合同会社CROP)を調査したところ、公式ドメイン`oneread.jp`が`dd929.com`へリダイレクトしており(会社・製品自体は同一と確認済み)、専用の問い合わせフォームが見当たらず連絡先はCloudflareのメール難読化(`[email protected]`表示・WebFetchでは復号不可)と電話番号のみだった。**確実に使える連絡経路を確認できないため今回は候補化を見送り**(電話のみの連絡先はloopが使えず、メールも実体不明のため)。これで08-14に発見した「塾管理システムSaaS N選」ソースの候補は全て処理完了: 追加7件(Grow/スクパス/TechnoSMS/e-sia/wagaco/塾スマ/スコラプラス)+3件(VividWorks/大和コンピューター/TSパートナーズ)+1件(PiCRO)=11件candidate化、2件見送り(MyClass=運営会社不一致検知/OneRead=接続経路不明)、1件検証不能(できたDEKITA=WebFetch403)。このソースからの新規探索は打ち止め。
+
 → 数え終わったら、**lane別の実数**をこのファイルに追記し、そこから目標件数を決める。
 
 - 起票: 2026-08-11 / 優先度: **最優先（主食の本体）** / 実行主体: loop単独（送信は👤）
