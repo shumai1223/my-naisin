@@ -672,6 +672,8 @@ lane1〜lane5・lane9(高DR .jp新設)に着手し`data/outreach-queue.json`へ�
 
 **08-14 03:1x追記(formPurposeフィールドを新設・COWORK-RESULT-01.mdの改善提案を実装)**: `src/lib/outreach-queue.ts`に`FormPurpose`型(`'accepts-b2b' | 'purpose-restricted' | 'unknown'`)と`QueueEntry.formPurpose`フィールドを追加(`contactClass='b2b'`は「法人向け窓口が存在する」ことしか保証せず「教科書見本請求専用」等の目的限定窓口も同じくb2bに分類されうるため、これとは独立な軸として新設)。データ整合性テストを2件追加(許容値チェック・channel==='form'限定チェック)。既存約370件の一括backfillはWebFetch再訪問が必要な推測作業になるため見送り、**今回新規追加した4件(edtech-esia-anesta等)のみformPurpose:'accepts-b2b'を遡及記録**(evidence記載時に目的制限文言なしを確認済みのため)。**運用ルール(以後のcandidate追加に適用)**: form channelの新規候補をWebFetchで検証する際、evidence記載と同時に「事業提携・データ利用等の相談を受け付けるか」を判定しformPurposeに記録する(判定不能はunknown)。tsc実exit0・jest outreach系2suites34tests green(2件追加分含む)。
 
+**08-14 03:2x追記(業界団体経由の紹介依頼という新しい型を1件検証)**: COWORK-RESULT-01.mdが提起した仮説「教科書会社に届かないのはフォームという経路が構造的に塞がっているためで、業界団体(日本図書教材協会等)経由での紹介依頼なら届くのではないか」を検証すべく、既存candidate`lane9-nit`(一般社団法人日本図書教材協会・2026-08-12にcontactClass=b2b確定済みだが本文未作成のまま放置されていた)を直接WebFetchで再確認。お問い合わせフォーム(`nit.or.jp/contct/`)は「お名前」「メールアドレス」「お問い合わせ内容」のみが必須で会社名欄も会員限定文言もなく、外部からの提携提案を受け付ける余地があると判断。個別出版社への直接ピッチと異なり「加盟社様へのお取り次ぎ」を依頼する文面で本文を作成しstatus:'queued'へ昇格(reviewTier:'full-review'で個別上書き=初めての型のため慎重に)。返信結果は今後の教育出版レーン全体の戦略を左右する重要な1件。tsc実exit0・jest outreach系2suites34tests green(queued件数32へ更新に伴いテスト期待値修正)。
+
 → 数え終わったら、**lane別の実数**をこのファイルに追記し、そこから目標件数を決める。
 
 - 起票: 2026-08-11 / 優先度: **最優先（主食の本体）** / 実行主体: loop単独（送信は👤）
