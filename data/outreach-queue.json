@@ -4988,6 +4988,28 @@
       "verifiedAt": "2026-08-13",
       "addedAt": "2026-08-13",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane-katekyo"
+    },
+    {
+      "id": "moshi-kochi-toitsu",
+      "org": "高知県統一模試実施研究会",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "status": "excluded",
+      "excludeReason": "公式サイト(toitumosi.jp)のトップ・会場案内ページを直接WebFetchで確認したが電話番号(088-885-3470)のみでメール・フォームの記載なし。channel enum非対応",
+      "verifiedAt": "2026-08-13",
+      "addedAt": "2026-08-13",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1-moshi59"
+    },
+    {
+      "id": "moshi-yoshino-soiku",
+      "org": "吉野創育株式会社(Wもぎ・首都圏最大級の高校受験模試)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "status": "excluded",
+      "excludeReason": "公式サイト(soiku.co.jp/saiten-soiku.com/schoolguide.ne.jp)へ計5回WebFetchを試行したが404×2・403×1・Socket is closed×2で一度も到達できず(教育芸術社と同型の到達不能パターン)。3回以上の到達不能で打ち切り",
+      "verifiedAt": "2026-08-13",
+      "addedAt": "2026-08-13",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1-moshi59"
     }
   ]
 }
