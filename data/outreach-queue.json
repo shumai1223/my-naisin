@@ -2907,7 +2907,9 @@
       "verifiedAt": "2026-08-12",
       "status": "candidate",
       "addedAt": "2026-08-12",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
+      "subject": "内申点計算データAPI/MCPのご案内（My Naishin）",
+      "body": "株式会社学研エデュケーショナル ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\n貴社のサービスをご利用の学校・塾現場向けに、都道府県ごとに異なる内申点の自動計算をAPIで組み込むことで、進路指導業務をより効率化できるのではと思いご連絡いたしました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com"
     },
     {
       "id": "lane1-jja",
@@ -3172,7 +3174,9 @@
       "verifiedAt": "2026-08-12",
       "status": "candidate",
       "addedAt": "2026-08-12",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1",
+      "subject": "内申点計算データAPI/MCPのご案内（My Naishin）",
+      "body": "花まるグループ ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\n貴社のサービスをご利用の学校・塾現場向けに、都道府県ごとに異なる内申点の自動計算をAPIで組み込むことで、進路指導業務をより効率化できるのではと思いご連絡いたしました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com"
     },
     {
       "id": "lane9-jtsj",
@@ -3389,13 +3393,13 @@
       "org": "一般社団法人日本オープンオンライン教育推進協議会(JMOOC)",
       "lane": "b2b-saas",
       "channel": "form",
-      "contact": "https://docs.google.com/forms/d/e/1FAIpQLScUkUvFa4bZawIqQwwG_PXDXBkz07drva3tSTzPOvspj4duww/viewform",
       "contactClass": "b2b",
       "evidence": "jmooc.jpを直接WebFetchで確認しGoogleフォーム経由の問い合わせ窓口を発見。区分にメディア関連・講座配信依頼等があり団体名(任意)欄もありb2b確定。ただし同フォームは「営業目的の勧誘は厳禁」と明記されているため、実際の送信文面はデータ引用・提携趣旨を明確にし営業的トーンを避けるよう👤に申し添える必要あり。JAPET&CEC会員一覧記載の国内MOOC最大手団体",
       "verifiedAt": "2026-08-12",
-      "status": "candidate",
+      "status": "excluded",
       "addedAt": "2026-08-12",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
+      "excludeReason": "フォームに『営業目的の勧誘は厳禁』と明記されており、当方のメール内容(API/データライセンスの提案)は実質的に営業的性質を持つため、先方の方針に抵触するリスクを避けて見送り"
     },
     {
       "id": "lane2-kairyudo",
@@ -4075,7 +4079,9 @@
       "verifiedAt": "2026-08-12",
       "status": "candidate",
       "addedAt": "2026-08-12",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
+      "subject": "内申点計算データAPI/MCPのご案内（My Naishin）",
+      "body": "株式会社ヴィリング ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\n貴社のサービスをご利用の学校・塾現場向けに、都道府県ごとに異なる内申点の自動計算をAPIで組み込むことで、進路指導業務をより効率化できるのではと思いご連絡いたしました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com"
     },
     {
       "id": "lane4-shinrokikaku",
@@ -4088,7 +4094,9 @@
       "verifiedAt": "2026-08-12",
       "status": "candidate",
       "addedAt": "2026-08-12",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
+      "subject": "内申点計算データAPI/MCPのご案内（My Naishin）",
+      "body": "株式会社進路企画 ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\n貴社が30年以上にわたり手がけていらっしゃる高校進路指導支援事業に、都道府県ごとに異なる内申点の自動計算をAPIで組み込むことで、進学情報配信・ネット添削サービスをより充実させられるのではと思いご連絡いたしました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com"
     },
     {
       "id": "lane4-tao-tenjin",
@@ -4101,7 +4109,9 @@
       "verifiedAt": "2026-08-12",
       "status": "candidate",
       "addedAt": "2026-08-12",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
+      "subject": "内申点計算データAPI/MCPのご案内（My Naishin）",
+      "body": "株式会社タオ ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\n貴社のサービスをご利用の学校・塾現場向けに、都道府県ごとに異なる内申点の自動計算をAPIで組み込むことで、進路指導業務をより効率化できるのではと思いご連絡いたしました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com"
     },
     {
       "id": "lane9-syogyo",
@@ -4247,7 +4257,9 @@
       "verifiedAt": "2026-08-12",
       "status": "candidate",
       "addedAt": "2026-08-12",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
+      "subject": "内申点計算データAPI/MCPのご案内（My Naishin）",
+      "body": "株式会社みんがく ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\n貴社のサービスをご利用の学校・塾現場向けに、都道府県ごとに異なる内申点の自動計算をAPIで組み込むことで、進路指導業務をより効率化できるのではと思いご連絡いたしました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com"
     },
     {
       "id": "gakusan-ikushin",
