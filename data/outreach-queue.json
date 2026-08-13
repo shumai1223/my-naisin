@@ -380,14 +380,15 @@
       "org": "株式会社五ツ木書房",
       "lane": "b2b-saas",
       "channel": "form",
-      "contact": "https://www.itsuki-s.co.jp/inquiry/",
       "contactClass": "b2b",
       "evidence": "「団体様」向け団体申込ウェブサイト(もしログ)と「中学校先生」向け学校教材ページが存在し、法人・教育機関向け窓口であることが明確",
       "verifiedAt": "2026-08-11",
-      "status": "candidate",
+      "status": "excluded",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1",
       "addedAt": "2026-08-11",
-      "body": "株式会社五ツ木書房 ご担当者様\n\n突然のご連絡失礼いたします。中学生向け内申点・偏差値計算サイト「My Naishin」(https://my-naishin.com) を運営しております、現役中学生エンジニアのしゅうまいと申します。\n\n貴社が実施されている「五ツ木模試」「五ツ木・京都模試」は関西最大規模の公開会場模試として、多くの受験生の進路選択を支えていらっしゃると拝見し感銘を受けご連絡いたしました。\n\n当サイトは全国47都道府県の内申点計算方式や公立高校入試の総合得点計算方式を、各都道府県教育委員会の公表資料を出典として明記したうえで無料公開しております。今後、教育委員会公表資料に基づく公立高校の募集倍率データ等を機械可読な形(CSV/API)でも提供する計画があり、貴社の模試・進路指導事業と親和性がある部分があるのではと考えご連絡させていただきました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com"
+      "body": "株式会社五ツ木書房 ご担当者様\n\n突然のご連絡失礼いたします。中学生向け内申点・偏差値計算サイト「My Naishin」(https://my-naishin.com) を運営しております、現役中学生エンジニアのしゅうまいと申します。\n\n貴社が実施されている「五ツ木模試」「五ツ木・京都模試」は関西最大規模の公開会場模試として、多くの受験生の進路選択を支えていらっしゃると拝見し感銘を受けご連絡いたしました。\n\n当サイトは全国47都道府県の内申点計算方式や公立高校入試の総合得点計算方式を、各都道府県教育委員会の公表資料を出典として明記したうえで無料公開しております。今後、教育委員会公表資料に基づく公立高校の募集倍率データ等を機械可読な形(CSV/API)でも提供する計画があり、貴社の模試・進路指導事業と親和性がある部分があるのではと考えご連絡させていただきました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com",
+      "excludeReason": "outreach-ledger.jsonのitsuki-sエントリ(2026-07-17送信済み・info@itsuki-s.com宛)と同一法人(五ツ木書房)への重複(形式は別チャネルのフォーム)。excluded",
+      "note": "2026-08-13にoutreach-ledger.jsonとの重複を発見し訂正"
     },
     {
       "id": "moshi-wao-corporation",
@@ -421,28 +422,30 @@
       "org": "株式会社進学研究会",
       "lane": "b2b-saas",
       "channel": "form",
-      "contact": "https://www.shinken.co.jp/inquiry",
       "contactClass": "b2b",
       "evidence": "お問い合わせフォームに「種別」選択があり、電話窓口も「個人の方」と「塾・学校の先生方」で明確に分離掲載されている(Vもぎ/進研テストは全国11,000塾超が採用する法人向け商材)",
       "verifiedAt": "2026-08-11",
-      "status": "candidate",
+      "status": "excluded",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1",
-      "body": "株式会社進学研究会 ご担当者様\n\n突然のご連絡失礼いたします。中学生向け内申点・偏差値計算サイト「My Naishin」(https://my-naishin.com) を運営しております、現役中学生エンジニアのしゅうまいと申します。\n\n貴社が実施されている「Vもぎ」は首都圏最大級の合格判定テストとして、多くの受験生の進路選択を支えていらっしゃると拝見し感銘を受けご連絡いたしました。\n\n当サイトは全国47都道府県の内申点計算方式や公立高校入試の総合得点計算方式を、各都道府県教育委員会の公表資料を出典として明記したうえで無料公開しております。今後、教育委員会公表資料に基づく公立高校の募集倍率データ等を機械可読な形(CSV/API)でも提供する計画があり、貴社の模試・進路情報事業と親和性がある部分があるのではと考えご連絡させていただきました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com"
+      "body": "株式会社進学研究会 ご担当者様\n\n突然のご連絡失礼いたします。中学生向け内申点・偏差値計算サイト「My Naishin」(https://my-naishin.com) を運営しております、現役中学生エンジニアのしゅうまいと申します。\n\n貴社が実施されている「Vもぎ」は首都圏最大級の合格判定テストとして、多くの受験生の進路選択を支えていらっしゃると拝見し感銘を受けご連絡いたしました。\n\n当サイトは全国47都道府県の内申点計算方式や公立高校入試の総合得点計算方式を、各都道府県教育委員会の公表資料を出典として明記したうえで無料公開しております。今後、教育委員会公表資料に基づく公立高校の募集倍率データ等を機械可読な形(CSV/API)でも提供する計画があり、貴社の模試・進路情報事業と親和性がある部分があるのではと考えご連絡させていただきました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com",
+      "excludeReason": "outreach-ledger.jsonのshinkenエントリ(2026-07-17に👤がフォーム送信済み)と同一法人・同一チャネル(進学研究会の問い合わせフォーム)への重複だったと判明。二重送信回避のためexcluded",
+      "note": "2026-08-13にoutreach-ledger.jsonとの重複を発見し訂正"
     },
     {
       "id": "moshi-hokushin-tosho",
       "org": "北辰図書株式会社",
       "lane": "b2b-saas",
       "channel": "form",
-      "contact": "https://www.hokushin-t.jp/contact/",
       "contactClass": "b2b",
       "evidence": "お問い合わせフォーム冒頭で「入力フォームの種類」を「塾の先生」「学校の先生」「保護者の方」「生徒の方」等から選択させる設計。「貴校名」項目も存在し法人窓口が明確",
       "verifiedAt": "2026-08-11",
-      "status": "candidate",
+      "status": "excluded",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1",
-      "body": "北辰図書株式会社 ご担当者様\n\n突然のご連絡失礼いたします。中学生向け内申点・偏差値計算サイト「My Naishin」(https://my-naishin.com) を運営しております、現役中学生エンジニアのしゅうまいと申します。\n\n貴社が実施されている「北辰テスト」は埼玉県の中学生を対象とした主要な学力診断模試として、多くの受験生の進路選択を支えていらっしゃると拝見し感銘を受けご連絡いたしました。\n\n当サイトは全国47都道府県の内申点計算方式や公立高校入試の総合得点計算方式を、各都道府県教育委員会の公表資料を出典として明記したうえで無料公開しております。今後、教育委員会公表資料に基づく公立高校の募集倍率データ等を機械可読な形(CSV/API)でも提供する計画があり、貴社の模試・進路情報事業と親和性がある部分があるのではと考えご連絡させていただきました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com"
+      "body": "北辰図書株式会社 ご担当者様\n\n突然のご連絡失礼いたします。中学生向け内申点・偏差値計算サイト「My Naishin」(https://my-naishin.com) を運営しております、現役中学生エンジニアのしゅうまいと申します。\n\n貴社が実施されている「北辰テスト」は埼玉県の中学生を対象とした主要な学力診断模試として、多くの受験生の進路選択を支えていらっしゃると拝見し感銘を受けご連絡いたしました。\n\n当サイトは全国47都道府県の内申点計算方式や公立高校入試の総合得点計算方式を、各都道府県教育委員会の公表資料を出典として明記したうえで無料公開しております。今後、教育委員会公表資料に基づく公立高校の募集倍率データ等を機械可読な形(CSV/API)でも提供する計画があり、貴社の模試・進路情報事業と親和性がある部分があるのではと考えご連絡させていただきました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com",
+      "excludeReason": "outreach-ledger.jsonのhokushinエントリ(2026-07-17に👤がフォーム送信済み)と同一法人・同一チャネル(北辰図書の問い合わせフォーム)への重複だったと判明。二重送信回避のためexcluded",
+      "note": "2026-08-13にoutreach-ledger.jsonとの重複を発見し訂正"
     },
     {
       "id": "moshi-shizuoka-moshi",
@@ -684,14 +687,15 @@
       "org": "株式会社EDUCOM",
       "lane": "b2b-saas",
       "channel": "form",
-      "contact": "https://www.educom.co.jp/contact",
       "contactClass": "b2b",
       "evidence": "統合型校務支援システム「C4th」が全国約600自治体・11,000校以上で採用されている学校向けB2Bベンダー。お問い合わせフォームURLの実在をcurlで確認済み(HTTP 200)",
       "verifiedAt": "2026-08-11",
-      "status": "candidate",
+      "status": "excluded",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
-      "body": "株式会社EDUCOM ご担当者様\n\n突然のご連絡失礼いたします。中学生向け内申点・偏差値計算サイト「My Naishin」(https://my-naishin.com) を運営しております、現役中学生エンジニアのしゅうまいと申します。\n\n貴社の統合型校務支援システム「C4th」が全国約600自治体・11,000校以上で採用され、保護者向け情報配信システム「C4th Home & School」等も展開されていることを拝見し感銘を受けご連絡いたしました。\n\n当サイトは全国47都道府県の内申点計算方式や公立高校入試の総合得点計算方式を、各都道府県教育委員会の公表資料を出典として明記したうえで無料公開しております。今後、教育委員会公表資料に基づく公立高校の募集倍率データ等を機械可読な形(CSV/API)でも提供する計画があり、貴社の事業と親和性がある部分があるのではと考えご連絡させていただきました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com"
+      "body": "株式会社EDUCOM ご担当者様\n\n突然のご連絡失礼いたします。中学生向け内申点・偏差値計算サイト「My Naishin」(https://my-naishin.com) を運営しております、現役中学生エンジニアのしゅうまいと申します。\n\n貴社の統合型校務支援システム「C4th」が全国約600自治体・11,000校以上で採用され、保護者向け情報配信システム「C4th Home & School」等も展開されていることを拝見し感銘を受けご連絡いたしました。\n\n当サイトは全国47都道府県の内申点計算方式や公立高校入試の総合得点計算方式を、各都道府県教育委員会の公表資料を出典として明記したうえで無料公開しております。今後、教育委員会公表資料に基づく公立高校の募集倍率データ等を機械可読な形(CSV/API)でも提供する計画があり、貴社の事業と親和性がある部分があるのではと考えご連絡させていただきました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com",
+      "excludeReason": "outreach-ledger.jsonのeducomエントリ(2026-07-18送信・2026-08-13追撃済みで既に2通到達)と同一法人への重複(形式はメールと別チャネルのフォームだが同一企業への3通目送信を避ける)。excluded",
+      "note": "2026-08-13にoutreach-ledger.jsonとの重複を発見し訂正"
     },
     {
       "id": "edtech-lines",
@@ -1542,13 +1546,14 @@
       "org": "株式会社COMPASS(AI型教材『Qubena』)",
       "lane": "b2b-saas",
       "channel": "form",
-      "contact": "https://info.compass-e.com/contact",
       "contactClass": "b2b",
       "evidence": "問い合わせページに『「Qubena」は小学校・中学校向けのサービスです。塾・個人へのご提供は行なっておりません』と明記され、学校・教育委員会向け専用フォーム(info.compass-e.com/contact)が『ご利用中の方向け』窓口と分離されていることを直接WebFetchで確認しb2b確定。全国170以上の自治体・2,300以上の公立私立小中学校で導入実績",
       "verifiedAt": "2026-08-11",
-      "status": "candidate",
+      "status": "excluded",
       "addedAt": "2026-08-11",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
+      "excludeReason": "outreach-ledger.jsonのcompass-eエントリ(2026-07-18送信・2026-08-13追撃済みで既に2通到達)と同一法人への重複。excluded",
+      "note": "2026-08-13にoutreach-ledger.jsonとの重複を発見し訂正"
     },
     {
       "id": "edtech-loilo-school",
@@ -1594,26 +1599,28 @@
       "org": "ライフイズテック株式会社(学校・自治体向け『Life is Tech! Lesson』)",
       "lane": "b2b-saas",
       "channel": "email",
-      "contact": "gakkou@lifeistech.co.jp",
       "contactClass": "b2b",
       "evidence": "個人向けキャンプ・スクール事業とは別に学校・自治体向け専用サブサイト(lifeistech-lesson.jp)があり、『学校間格差をなくし、学びの質を保障する教員研修と全校一括導入』と明記、学校専用メールアドレス(gakkou@lifeistech.co.jp・「がっこう」の意)がページ本文に直接記載されていることを直接WebFetchで確認しb2b確定。2023年8月時点で600自治体・4,000校で導入",
       "verifiedAt": "2026-08-11",
-      "status": "candidate",
+      "status": "excluded",
       "addedAt": "2026-08-11",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
+      "excludeReason": "outreach-ledger.jsonのlifeistechエントリ(2026-07-20送信・2026-08-13追撃済み)と全く同じメールアドレス(gakkou@lifeistech.co.jp)宛の重複だったと判明。既に2通送信済みの相手への3通目の新規メールを避けるためexcluded",
+      "note": "2026-08-11当初はcandidate登録・同日中に発見できなかった重複(2026-08-13に発覚)"
     },
     {
       "id": "edtech-poper-comiru",
       "org": "株式会社POPER(学習塾特化型SaaS『Comiru』)",
       "lane": "b2b-saas",
       "channel": "form",
-      "contact": "https://comiru.co/contact/",
       "contactClass": "b2b",
       "evidence": "全事業が学習塾・スクール事業者向けの業務管理SaaS専業(生徒・保護者が直接利用するアプリではなく塾側が導入するBtoB SaaS)であり、『スクール運営でのお悩みはComiruにご相談ください』という事業者向け専用の資料請求(/request/)・お問い合わせ(/contact/)フォームがナビゲーションに独立配置されていることを直接WebFetchで確認しb2b確定。導入教室数6,000教室以上・利用生徒数40万人以上",
       "verifiedAt": "2026-08-11",
-      "status": "candidate",
+      "status": "excluded",
       "addedAt": "2026-08-11",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
+      "excludeReason": "outreach-ledger.jsonのpoper-bitcampusエントリ(2026-07-12送信・追撃1回済み)と同一法人(株式会社POPER・Comiruチーム)への重複。excluded",
+      "note": "2026-08-13にoutreach-ledger.jsonとの重複を発見し訂正"
     },
     {
       "id": "edtech-gmomedia-coeteco-manager",
@@ -4054,13 +4061,14 @@
       "org": "株式会社育伸社(私立高校募集要項・倍率データ等の教材出版社)",
       "lane": "b2b-saas",
       "channel": "form",
-      "contact": "https://school-ikushin.jp/contact",
       "contactClass": "b2b",
       "evidence": "私立学校専用サイト`school-ikushin.jp/contact`を直接WebFetchで確認。ページに『こちらは、学校の先生方向けの専用お問い合わせフォームになります』と明記、必須項目に『学校名』『先生のお名前』『役職・教科』ありb2b確定。S13-A(データバンク商品化)調査で判明した進研ゼミ(ベネッセ)への私立高校倍率データ供給元でもあり、当サイトと同一データ領域(私立高校募集定員・倍率)を扱う出版社",
       "verifiedAt": "2026-08-12",
-      "status": "candidate",
+      "status": "excluded",
       "addedAt": "2026-08-12",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2",
+      "excludeReason": "outreach-ledger.jsonのikushinエントリ(2026-07-17に👤がフォーム送信済み)と同一法人(育伸社)への重複だったと判明。excluded",
+      "note": "2026-08-13にoutreach-ledger.jsonとの重複を発見し訂正"
     },
     {
       "id": "lane5-jukujournal",
