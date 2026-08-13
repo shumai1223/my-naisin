@@ -676,6 +676,8 @@ lane1〜lane5・lane9(高DR .jp新設)に着手し`data/outreach-queue.json`へ�
 
 **08-14 03:4x追記(残り6社のうち3社を検証・追加)**: `edtech-vividworks-schoolmanager`(SCHOOL MANAGER・株式会社VividWorks・「Company Name」必須欄あり)/`edtech-daiwa-platinum-school`(Platinum School・株式会社大和コンピューター・全国13,000校導入・「会社名(スクール名)」必須欄あり)/`edtech-tspartners-jukugo`(Jukugo・株式会社TSパートナーズ・「施設名」必須欄あり、住所も必須のためCowork送信時は第2弾で追加済みの住所置換欄を使う)を直接WebFetchで検証し追加。**MyClassは見送り**: WebSearch要約は「株式会社メディアシークが運営」としていたが、実際のmy-class.jp運営会社ページを直接WebFetchで確認したところ「提供会社: 株式会社Solvvy」と表示され、メディアシークへの言及が一切なかった(WebSearch要約とサイト本文の食い違い・[[fable5-loop-protocol]]既知の罠と同型)。組織の誤帰属を避けるため今回は追加を見送り、次回Solvvy社として再調査するか判断すること。**PiCRO School Manager(EDIONクロスベンチャーズ)/OneRead(合同会社CROP)は未着手のまま持ち越し**(PiCROはVividWorksのSCHOOL MANAGERの販売代理店である可能性があり、同一製品の重複打診を避けるため関係性の確認が先に必要)。id/org重複0件・tsc実exit0・jest outreach系2suites34tests green。
 
+**08-14 03:5x追記(PiCRO School Managerの関係性確認→別法人と判明し追加)**: 前回持ち越したPiCRO School Manager(株式会社EDIONクロスベンチャーズ)がVividWorksのSCHOOL MANAGERと関係あるか(販売代理店等)を直接WebFetchで確認したところ、PiCRO運営会社ページに「PiCROを運営する株式会社EDIONクロスベンチャーズ」とのみ明記されVividWorksへの言及は一切なかった。**別法人・別製品(名称が偶然似ているだけ)と判断**し`edtech-edionxv-picro-schoolmanager`として追加。フォームに「貴団体名」必須欄+「代理店提携」の問い合わせ種別選択肢があり事業提携相談を明確に受け付けている。OneRead(合同会社CROP)は引き続き未着手で持ち越し。id/org重複0件・tsc実exit0・jest outreach系2suites34tests green。
+
 → 数え終わったら、**lane別の実数**をこのファイルに追記し、そこから目標件数を決める。
 
 - 起票: 2026-08-11 / 優先度: **最優先（主食の本体）** / 実行主体: loop単独（送信は👤）
