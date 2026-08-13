@@ -4747,6 +4747,28 @@
       "verifiedAt": "2026-08-13",
       "addedAt": "2026-08-13",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4-tsushinsei"
+    },
+    {
+      "id": "excluded-clark-soshigakuen",
+      "org": "クラーク記念国際高等学校(学校法人創志学園運営)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "status": "excluded",
+      "excludeReason": "公式サイト(clark.ed.jp/contact/)を直接WebFetchで確認したが学校見学/資料請求/入試/取材撮影等のカテゴリのみで法人・業務提携向けの専用窓口が見当たらず。運営母体の創志学園(seg.ac.jp)も電話番号のみで問い合わせフォームを特定できず見送り",
+      "verifiedAt": "2026-08-13",
+      "addedAt": "2026-08-13",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4-tsushinsei"
+    },
+    {
+      "id": "excluded-idgakuen-ikubunkan",
+      "org": "ID学園高等学校(学校法人郁文館夢学園運営)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "status": "excluded",
+      "excludeReason": "公式サイト(id.ikubunkan.ed.jp)を直接WebFetchで確認したが生徒・保護者向けの入学相談窓口(電話)のみで法人・企業提携向けの専用窓口が見当たらず見送り",
+      "verifiedAt": "2026-08-13",
+      "addedAt": "2026-08-13",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4-tsushinsei"
     }
   ]
 }
