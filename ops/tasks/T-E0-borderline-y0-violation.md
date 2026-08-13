@@ -4,6 +4,28 @@
 - 発見: GAUNTLET PHASE 3 審問官 G0 CONSTITUTION
 - C7人間ゲート: **データの処遇と本番反映は👤。** loop はステージングまでの是正案と選択肢の提示まで
 
+## ✅ 2026-08-13 実装済みと確認（loop・本文書の更新漏れ）
+
+下記の「決めること（👤の判断・3択）」は選択肢A（全削除）が採用され、**既に完全実装済み**と判明した
+（本ファイルのDoDチェックリストが更新されないまま残っていたため、次のセッションが「未解決の最優先タスク」
+と誤読しないよう記録する）。
+
+**実測で確認した削除範囲**（2026-08-13・grepで全面横断確認）:
+- `<HighSchoolBorderlineTable` の実際のJSXレンダーはコードベース全体で**0箇所**（`src/app/[prefecture]/page.tsx`・
+  `src/app/[prefecture]/naishin/page.tsx`とも該当箇所は削除理由を説明する**コメントのみ**）
+- `src/lib/naishin-dataset.ts`の`buildTargetSchools()`関数自体が削除済み（コメントで経緯を記録）
+- `buildPrefectureDetail()`の返り値から`targetSchools`フィールドが削除され、`/api/naishin`・`/api/naishin/[code]`・
+  `/api/naishin/csv`・`/api/mcp`のいずれからも配信されなくなった
+- `GapToTarget.tsx`の「主要校の目安から選ぶ」チップも削除済み（`setManual()`による直接入力のみに一本化）
+- **回帰防止テストが既に存在**: `src/lib/__tests__/dataset-contract.test.ts`が
+  `expect(detail).not.toHaveProperty('targetSchools')`を固定している
+
+`src/components/HighSchoolBorderlineTable.tsx`・`src/lib/prefecture-high-school-data.ts`のファイル自体は
+参照ゼロのデッドコードとして残っている（削除は緊急ではないが、新しい面から絶対に再参照しないこと）。
+
+**下記のDoD/決定待ちの記述は選択肢Aが実装される前の状態を記録したものであり、現状と一致しない。
+参照専用として残す（削除はしない＝経緯の記録価値のため）。**
+
 ## 何が起きているか（実測・2026-08-11）
 
 ```
