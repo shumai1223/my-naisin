@@ -674,6 +674,8 @@ lane1〜lane5・lane9(高DR .jp新設)に着手し`data/outreach-queue.json`へ�
 
 **08-14 03:2x追記(業界団体経由の紹介依頼という新しい型を1件検証)**: COWORK-RESULT-01.mdが提起した仮説「教科書会社に届かないのはフォームという経路が構造的に塞がっているためで、業界団体(日本図書教材協会等)経由での紹介依頼なら届くのではないか」を検証すべく、既存candidate`lane9-nit`(一般社団法人日本図書教材協会・2026-08-12にcontactClass=b2b確定済みだが本文未作成のまま放置されていた)を直接WebFetchで再確認。お問い合わせフォーム(`nit.or.jp/contct/`)は「お名前」「メールアドレス」「お問い合わせ内容」のみが必須で会社名欄も会員限定文言もなく、外部からの提携提案を受け付ける余地があると判断。個別出版社への直接ピッチと異なり「加盟社様へのお取り次ぎ」を依頼する文面で本文を作成しstatus:'queued'へ昇格(reviewTier:'full-review'で個別上書き=初めての型のため慎重に)。返信結果は今後の教育出版レーン全体の戦略を左右する重要な1件。tsc実exit0・jest outreach系2suites34tests green(queued件数32へ更新に伴いテスト期待値修正)。
 
+**08-14 03:4x追記(残り6社のうち3社を検証・追加)**: `edtech-vividworks-schoolmanager`(SCHOOL MANAGER・株式会社VividWorks・「Company Name」必須欄あり)/`edtech-daiwa-platinum-school`(Platinum School・株式会社大和コンピューター・全国13,000校導入・「会社名(スクール名)」必須欄あり)/`edtech-tspartners-jukugo`(Jukugo・株式会社TSパートナーズ・「施設名」必須欄あり、住所も必須のためCowork送信時は第2弾で追加済みの住所置換欄を使う)を直接WebFetchで検証し追加。**MyClassは見送り**: WebSearch要約は「株式会社メディアシークが運営」としていたが、実際のmy-class.jp運営会社ページを直接WebFetchで確認したところ「提供会社: 株式会社Solvvy」と表示され、メディアシークへの言及が一切なかった(WebSearch要約とサイト本文の食い違い・[[fable5-loop-protocol]]既知の罠と同型)。組織の誤帰属を避けるため今回は追加を見送り、次回Solvvy社として再調査するか判断すること。**PiCRO School Manager(EDIONクロスベンチャーズ)/OneRead(合同会社CROP)は未着手のまま持ち越し**(PiCROはVividWorksのSCHOOL MANAGERの販売代理店である可能性があり、同一製品の重複打診を避けるため関係性の確認が先に必要)。id/org重複0件・tsc実exit0・jest outreach系2suites34tests green。
+
 → 数え終わったら、**lane別の実数**をこのファイルに追記し、そこから目標件数を決める。
 
 - 起票: 2026-08-11 / 優先度: **最優先（主食の本体）** / 実行主体: loop単独（送信は👤）
