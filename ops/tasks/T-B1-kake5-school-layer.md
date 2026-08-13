@@ -4,6 +4,19 @@
 - C7人間ゲート: **本番反映のみ**
 - 見積: 3〜5h
 
+## ✅ 2026-08-13 訂正: 「学校ページに収益コード0件」という前提は誤りだった
+
+LOOP_CONTRACT.md §0は本タスクを「降格・未着手」と記載しているが、**実際には
+`SchoolPageConvertCTA`（自身のコメントで「換金導線＝主食②-1」と明記・別タスクの
+コミット`51af7ac`で導入）が学校ページに既に実装済み**だった（`school_page_clicks`
+D1テーブルに27件の実クリックあり）。ただし**G7に違反する順序（SchoolPageParentBridge
+より上に配置）だったため2026-08-13に是正**（`SchoolPageParentBridge`を先に配置し直し、
+`src/app/__tests__/school-page-cta-order.test.ts`で回帰防止）。
+⚠️ ただしDoD項目3（`placement`をselectSecondaryLeadOfferへ渡す）は満たしていない
+（SchoolPageConvertCTAは静的リンクのみでlead-config経由の副オファー選択をしていない）。
+**降格判断自体（新たにaffiliateAd等を追加投資する価値は無い）は覆さないが、
+「収益導線が0件」という前提は誤りだったため記録を訂正する。**
+
 ## ⚠️ 掛-5 は「対象が変わった」タスクである
 
 元の掛-5（収益距離の全面短縮）は**もう終わっている**。`ops/DISTANCE.md` の実測:

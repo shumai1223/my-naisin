@@ -139,9 +139,11 @@ export default async function SchoolPage({ params }: PageProps) {
             </div>
           </section>
 
-          <SchoolPageConvertCTA schoolName={school.schoolName} prefectureCode={prefecture.code} schoolCode={schoolCode} />
-
           <SchoolPageParentBridge schoolName={school.schoolName} prefectureCode={prefecture.code} />
+
+          {/* G7（保護者到達を押し下げない・ResultSection.tsx:295-298の規約）: 換金導線
+              (SchoolPageConvertCTA＝主食②-1)は必ずSchoolPageParentBridgeより下に置く。 */}
+          <SchoolPageConvertCTA schoolName={school.schoolName} prefectureCode={prefecture.code} schoolCode={schoolCode} />
 
           {school.departmentRates.length > 1 && (
             <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
