@@ -4142,26 +4142,28 @@
       "org": "愛媛新聞社(愛媛県の新聞社・模試/教育情報事業運営)",
       "lane": "b2b-saas",
       "channel": "form",
-      "contact": "https://www.ehime-np.co.jp/online/information/enp_adguide/contact.html",
-      "contactClass": "b2b",
+      "contactClass": "unknown",
       "evidence": "公式サイトを直接WebFetchで確認。広告ガイド内の公式問い合わせフォーム。T-C1サブタスク0で判別済みの模試会社59社の1社(愛媛県対象・js88 pref=38)",
       "verifiedAt": "2026-08-13",
-      "status": "candidate",
+      "status": "excluded",
       "addedAt": "2026-08-13",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1",
+      "excludeReason": "発見した問い合わせフォームは新聞社の広告ガイド内の広告出稿相談窓口(自由記述欄も「掲載されたい内容や時期、ご予算」という広告出稿前提の案内文)であり、模試/教育情報事業の担当部署への窓口ではないため部署不一致で見送り。正しい窓口(模試事業の担当部署)は別途特定が必要",
+      "note": "2026-08-13当初はcandidate登録・同日中に部署不一致と判明し訂正"
     },
     {
       "id": "gakusan-ohmsha",
       "org": "オーム社",
       "lane": "b2b-saas",
       "channel": "form",
-      "contact": "https://www.ohmsha.co.jp/contact/kenpon.php",
-      "contactClass": "b2b",
+      "contactClass": "unknown",
       "evidence": "公式サイト`ohmsha.co.jp/contact/kenpon.php`(教科書献本申し込みフォーム)を直接WebFetchで確認。必須項目に『学校名』『学部名』『学科名』『学校種別』があり、大学・高専・工業高校等の教員による教科書採択検討向けと明記されておりb2b確定。T-C1サブタスク0で判別済みの教科書協会加盟出版社50社の1社",
       "verifiedAt": "2026-08-13",
-      "status": "candidate",
+      "status": "excluded",
       "addedAt": "2026-08-13",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2",
+      "excludeReason": "フォームの主目的が教科書献本申込(書名/ISBN/学科名/受講者数等の定型項目が必須)であり、自由記述欄「ご意見・お問合せ内容」も献本申込の補足説明用と明記されている。当方の用件(API/データライセンスの相談)を書くには書名等の必須項目に架空の値を入れる必要がありフォームの目的と一致しないため見送り(sinro-hyogoと同型の目的不一致パターン)",
+      "note": "2026-08-13当初はcandidate登録・同日中に目的不一致と判明し訂正"
     },
     {
       "id": "moshi-aomori-zenken",
@@ -4210,13 +4212,14 @@
       "org": "学力調査研究会(静岡県統一模試)",
       "lane": "b2b-saas",
       "channel": "form",
-      "contact": "https://kento-moshi.jp/blog/cramschool_inquiry_form/",
-      "contactClass": "b2b",
+      "contactClass": "unknown",
       "evidence": "フォームページのタイトル自体が『学習塾様向け資料請求フォーム』と明記され、個人受験者向けページとは別のURL(/blog/cramschool_inquiry_form/)に設置されていることを直接WebFetchで確認。静岡県内760塾が採用・県内最大10,659名受験の県下最大規模模試",
       "verifiedAt": "2026-08-13",
-      "status": "candidate",
+      "status": "excluded",
       "addedAt": "2026-08-13",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1",
+      "excludeReason": "フォームの主目的が学習塾向け資料請求(FAX/郵送で料金表等を送付してもらう)であり、当方から先方への提案を送る用途とは方向が逆。フォーム項目の詳細を再度WebFetchで確認したが自由記述欄の有無を明確に確認できず、目的不一致の疑いが強いため見送り(sinro-hyogoと同型のリスク)",
+      "note": "2026-08-13当初はcandidate登録・同日中に目的不一致の疑いで訂正"
     },
     {
       "id": "moshi-fukushima-shinkyoken",
