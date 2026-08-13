@@ -212,10 +212,11 @@
       "lane": "kyoiku-i",
       "sourceTaskId": "X-14",
       "sentDate": "2026-08-06",
-      "status": "awaiting",
+      "lastContactDate": "2026-08-13",
+      "status": "declined",
       "followupCount": 0,
       "threadId": "19fc125741153954",
-      "note": "8/6一斉送信23通のうち1件。"
+      "note": "8/13返信(別スレッドID 19ff88a6c498f71cで着信): 「外部サイト等を紹介することはしておりません」。引用可否には言及なし(リンク/紹介のみの言及)。追撃対象外。"
     },
     {
       "id": "kyoiku-fukuoka-0806",
