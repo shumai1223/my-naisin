@@ -1112,7 +1112,9 @@
       "verifiedAt": "2026-08-11",
       "status": "candidate",
       "addedAt": "2026-08-11",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
+      "subject": "内申点計算データAPI/MCPのご案内（My Naishin）",
+      "body": "株式会社ベネッセコーポレーション GTEC ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\n貴社のGTECをご採用の学校・教育委員会様向けに、都道府県ごとに異なる内申点の自動計算をAPIで組み込むことで、英語4技能スコアと合わせた進路指導資料をより具体的にできるのではと思いご連絡いたしました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com"
     },
     {
       "id": "gakusan-shinko-keirinkan",
@@ -4157,26 +4159,28 @@
       "org": "株式会社下野新聞社(栃木県の新聞社・模試/教育情報事業運営)",
       "lane": "b2b-saas",
       "channel": "email",
-      "contact": "kou-ei@shimotsuke.co.jp",
       "contactClass": "b2b",
       "evidence": "公式サイト`shimotsuke.co.jp/list/company/otoiawase`を直接WebFetchで確認。ビジネス局(広告申込み等の法人窓口)宛の組織メールアドレス。T-C1 サブタスク0で判別済みの模試会社59社の1社(栃木県対象・js88 pref=9)",
       "verifiedAt": "2026-08-13",
-      "status": "candidate",
+      "status": "excluded",
       "addedAt": "2026-08-13",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1",
+      "excludeReason": "連絡先(kou-ei@shimotsuke.co.jp)がevidence記載の通りビジネス局(広告申込み等の法人窓口)宛であり、広告関連の窓口である可能性が高いため模試/教育情報事業の担当部署への到達が不確実。moshi-ehime-shinbunと同型のリスクのため見送り",
+      "note": "2026-08-13評価: 本文設置を試みる過程で目的不一致リスクに気づき見送りへ変更"
     },
     {
       "id": "moshi-nihonkai-shinbun",
       "org": "新日本海新聞社(鳥取県の新聞社・模試/教育情報事業運営)",
       "lane": "b2b-saas",
       "channel": "email",
-      "contact": "web-ad@nnn.co.jp",
       "contactClass": "b2b",
       "evidence": "公式サイト`nnn.co.jp/list/company/web-ad/`を直接WebFetchで確認。営業局広告部宛の組織メールアドレス。T-C1サブタスク0で判別済みの模試会社59社の1社(鳥取県対象・js88 pref=31)",
       "verifiedAt": "2026-08-13",
-      "status": "candidate",
+      "status": "excluded",
       "addedAt": "2026-08-13",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1",
+      "excludeReason": "連絡先(web-ad@nnn.co.jp)がevidence記載の通り営業局広告部宛の窓口であり、模試/教育情報事業の担当部署ではなく広告出稿窓口。moshi-ehime-shinbunと同型の部署不一致のため見送り",
+      "note": "2026-08-13評価: 本文設置を試みる過程で目的不一致に気づき見送りへ変更"
     },
     {
       "id": "moshi-ehime-shinbun",
