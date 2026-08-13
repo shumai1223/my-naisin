@@ -597,7 +597,9 @@
       "verifiedAt": "2026-08-11",
       "status": "candidate",
       "addedAt": "2026-08-11",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1",
+      "subject": "内申点計算データAPI/MCPのご案内（My Naishin）",
+      "body": "株式会社ブロッサム九州 ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\n貴社は長崎県・山口県・福岡県・佐賀県の一斉模試を運営されており、県ごとに異なる内申点の計算方式を自社で維持されるのは保守コストが高いのではと拝見しております。都道府県ごとの内申点自動計算をAPIで組み込むことで、この保守コストを削減しつつ加盟塾様への合否判定資料をより精度高くできるのではと思いご連絡いたしました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com"
     },
     {
       "id": "moshi-tierra-com",
@@ -652,7 +654,9 @@
       "verifiedAt": "2026-08-11",
       "status": "candidate",
       "addedAt": "2026-08-11",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1",
+      "subject": "内申点計算データAPI/MCPのご案内（My Naishin）",
+      "body": "株式会社伸学工房 ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\n貴社が手がけていらっしゃる神奈川全県模試の『テスト処理代行』『教師用資料』制作に、神奈川県の入試制度（S値）に基づく内申点の自動計算をAPIで組み込むことで、成績帳票や教師用資料の作成をより効率化できるのではと思いご連絡いたしました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com"
     },
     {
       "id": "gakusan-sanseido-books",
@@ -1726,7 +1730,10 @@
       "verifiedAt": "2026-08-11",
       "status": "candidate",
       "addedAt": "2026-08-11",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane3"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane3",
+      "subject": "【情報提供】中学生が独学で開発した内申点計算サイトについて",
+      "body": "はじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、現役中学生エンジニアのしゅうまいと申します。\n\n47都道府県すべての教育委員会が公表する入学者選抜の一次資料を自分で読み解き、独学でプログラミングを学んでこのサイトを開発・運営しています（https://my-naishin.com）。公開から数ヶ月で検索流入が伸び、月間数千クリック規模の利用をいただくまでになりました。\n\n利用者の同意のもとで匿名集計した「全国の中学生の内申点・偏差値の分布データ」も公開しています（https://my-naishin.com/stats）。受験を控えた中学生自身が「自分と同じ受験生のために」ゼロから作ったツール・データという切り口で、情報提供としてご連絡いたしました。もしご興味をお持ちいただけましたら、取材等どのような形でも対応いたします。\n\nしゅうまい / My Naishin 運営（中学生・個人開発）\nnaishin.dev@gmail.com\nhttps://my-naishin.com",
+      "note": "2026-08-13訂正: 当初は他のb2b候補と同様API/データライセンスの営業文面を想定していたが、窓口が『報道関係者の方へ』専用ページ(press@)であることに気づき、chihoshiレーンの既存送信済み地方紙(北海道新聞等)と同型の情報提供・取材依頼文面に差し替えた(目的一致チェックを適用)"
     },
     {
       "id": "media-jyukusagasu-info",
