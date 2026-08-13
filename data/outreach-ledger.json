@@ -604,6 +604,106 @@
       "followupCount": 0,
       "threadId": "19fda56a45ff05b0",
       "note": "記事紹介への返礼として被リンク設置に合意・8/7に当サイト側の掲載完了・8/12に先方へ完了報告送信済み。8/13先方より設置完了の返信(https://pro-megajun.com/archives/1742・アンカーテキスト『不登校でも高校受験はできる？内申点への影響と進路の選択肢を解説』)を受信し、WebFetchで実在を直接確認済み。実被リンク1本を獲得して完全に成立・完了（追撃対象外）。プレイブック: 相互リンクを条件にせず先に当方が一方的に紹介したことが今回の被リンク獲得につながった（X-2の型として有効）。"
+    },
+    {
+      "id": "moshi-wao-corporation",
+      "org": "株式会社ワオ・コーポレーション",
+      "lane": "b2b-saas",
+      "sourceTaskId": "S13-A",
+      "sentDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 0,
+      "note": "Cowork第1弾(30社)でフォーム送信済み(ops/cowork/COWORK-RESULT-01.md)。フォーム経由のためGmail threadIdなし。Gmail経由の教委26社等とは別セグメントとして返信率を計測すること。"
+    },
+    {
+      "id": "moshi-shizuoka-moshi",
+      "org": "静岡模試出版会",
+      "lane": "b2b-saas",
+      "sourceTaskId": "S13-A",
+      "sentDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 0,
+      "note": "Cowork第1弾(30社)でフォーム送信済み(ops/cowork/COWORK-RESULT-01.md)。フォーム経由のためGmail threadIdなし。Gmail経由の教委26社等とは別セグメントとして返信率を計測すること。"
+    },
+    {
+      "id": "gakusan-bunri",
+      "org": "株式会社文理",
+      "lane": "b2b-saas",
+      "sourceTaskId": "S13-A",
+      "sentDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 0,
+      "note": "Cowork第1弾(30社)でフォーム送信済み(ops/cowork/COWORK-RESULT-01.md)。フォーム経由のためGmail threadIdなし。Gmail経由の教委26社等とは別セグメントとして返信率を計測すること。"
+    },
+    {
+      "id": "gakusan-sanseido-books",
+      "org": "三省堂書店(三省堂グループ)",
+      "lane": "b2b-saas",
+      "sourceTaskId": "S13-A",
+      "sentDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 0,
+      "note": "Cowork第1弾(30社)でフォーム送信済み(ops/cowork/COWORK-RESULT-01.md)。フォーム経由のためGmail threadIdなし。Gmail経由の教委26社等とは別セグメントとして返信率を計測すること。"
+    },
+    {
+      "id": "edtech-chieru",
+      "org": "チエル株式会社",
+      "lane": "b2b-saas",
+      "sourceTaskId": "S13-A",
+      "sentDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 0,
+      "note": "Cowork第1弾(30社)でフォーム送信済み(ops/cowork/COWORK-RESULT-01.md)。フォーム経由のためGmail threadIdなし。Gmail経由の教委26社等とは別セグメントとして返信率を計測すること。"
+    },
+    {
+      "id": "edtech-lines",
+      "org": "ラインズ株式会社",
+      "lane": "b2b-saas",
+      "sourceTaskId": "S13-A",
+      "sentDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 0,
+      "note": "Cowork第1弾(30社)でフォーム送信済み(ops/cowork/COWORK-RESULT-01.md)。フォーム経由のためGmail threadIdなし。Gmail経由の教委26社等とは別セグメントとして返信率を計測すること。"
+    },
+    {
+      "id": "gakusan-asutoro",
+      "org": "あすとろ出版株式会社",
+      "lane": "b2b-saas",
+      "sourceTaskId": "S13-A",
+      "sentDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 0,
+      "note": "Cowork第1弾(30社)でフォーム送信済み(ops/cowork/COWORK-RESULT-01.md)。フォーム経由のためGmail threadIdなし。Gmail経由の教委26社等とは別セグメントとして返信率を計測すること。"
+    },
+    {
+      "id": "edtech-metamoji",
+      "org": "株式会社MetaMoJi",
+      "lane": "b2b-saas",
+      "sourceTaskId": "S13-A",
+      "sentDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 0,
+      "note": "Cowork第1弾(30社)でフォーム送信済み(ops/cowork/COWORK-RESULT-01.md)。フォーム経由のためGmail threadIdなし。Gmail経由の教委26社等とは別セグメントとして返信率を計測すること。"
+    },
+    {
+      "id": "edtech-sky",
+      "org": "Sky株式会社",
+      "lane": "b2b-saas",
+      "sourceTaskId": "S13-A",
+      "sentDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 0,
+      "note": "Cowork第1弾(30社)でフォーム送信済み(ops/cowork/COWORK-RESULT-01.md)。フォーム経由のためGmail threadIdなし。Gmail経由の教委26社等とは別セグメントとして返信率を計測すること。"
+    },
+    {
+      "id": "gakusan-gakko-tosho",
+      "org": "学校図書株式会社",
+      "lane": "b2b-saas",
+      "sourceTaskId": "S13-A",
+      "sentDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 0,
+      "note": "Cowork第1弾(30社)でフォーム送信済み(ops/cowork/COWORK-RESULT-01.md)。フォーム経由のためGmail threadIdなし。Gmail経由の教委26社等とは別セグメントとして返信率を計測すること。"
     }
   ]
 }
