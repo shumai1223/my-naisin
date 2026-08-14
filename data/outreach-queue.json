@@ -4548,11 +4548,15 @@
       "org": "クラーク記念国際高等学校(学校法人創志学園運営)",
       "lane": "b2b-saas",
       "channel": "form",
-      "status": "excluded",
-      "excludeReason": "公式サイト(clark.ed.jp/contact/)を直接WebFetchで確認したが学校見学/資料請求/入試/取材撮影等のカテゴリのみで法人・業務提携向けの専用窓口が見当たらず。運営母体の創志学園(seg.ac.jp)も電話番号のみで問い合わせフォームを特定できず見送り",
-      "verifiedAt": "2026-08-13",
+      "status": "queued",
+      "verifiedAt": "2026-08-14",
       "addedAt": "2026-08-13",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4-tsushinsei"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4-tsushinsei",
+      "contact": "https://www.clark.ed.jp/contact-form/",
+      "contactClass": "b2b",
+      "evidence": "2026-08-14再調査: clark.ed.jp/contact/を再確認したところ『取材・撮影に関するお問い合わせ』と『その他のお問い合わせ』が共に同一の一般フォーム(contact-form/)へ誘導されると判明(前回08-13調査時点では見落とし)。フォーム自体を直接WebFetchで確認し稼働中と確認。この2区分は情報提供・取材ベースの本文と相性が良いため復活させる",
+      "subject": "【情報提供】中学生が独学で開発した内申点計算サイトについて",
+      "body": "学校法人創志学園（クラーク記念国際高等学校） ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、現役中学生エンジニアのしゅうまいと申します。\n\n47都道府県すべての教育委員会が公表する入学者選抜の一次資料を自分で読み解き、独学でプログラミングを学んでこのサイトを開発・運営しています（https://my-naishin.com）。公開から数ヶ月で検索流入が伸び、月間数千クリック規模の利用をいただくまでになりました。\n\n利用者の同意のもとで匿名集計した「全国の中学生の内申点・偏差値の分布データ」も公開しています（https://my-naishin.com/stats）。通信制高校を検討する中学生・保護者向けの情報として、貴校にてご紹介いただけないかと思いご連絡いたしました。もしご興味をお持ちいただけましたら、取材等どのような形でも対応いたします。\n\nしゅうまい / My Naishin 運営（中学生・個人開発）\nnaishin.dev@gmail.com\nhttps://my-naishin.com"
     },
     {
       "id": "excluded-idgakuen-ikubunkan",
