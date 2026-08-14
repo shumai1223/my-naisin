@@ -649,7 +649,7 @@ $ python: 本番HTMLの <a>/<button> の class から Tailwind の高さを推�
 |---|---|---|---|---|---|---|
 | `affiliate_click` | `Affiliate/AffiliateClickTracker.tsx:61` | `clicks` ← `src/app/go/[id]/route.ts:100` → `clicks-db.ts` | **2** | **348** | 見かけ174倍 | **どちらも×。真値は「D1のうち内部パス付きreferer＋非化石UA」＝20件**（DW-3）。GA4はさらに consent/adblock で落ちるので下限2 |
 | `lead_submit` | `SaveResultCTA.tsx:218` → `track.ts:149` | `leads` ← `leads-db.ts` | **1** | **6** | 6倍 | **D1が真値。** 公開POSTだが本文にメール必須でボットが撃つ動機が薄い。実際6件は7/14〜8/07に散在し人間の分布 |
-| `stats_submit_ok` | `stats-submit-client.ts:26` | `stats_submissions` ← `stats-db.ts` | **0** | **169（7/26〜）** | ∞ | **どちらも×。D1は汚染、GA4は0**（DW-1）。**汚染2日を除いた125件が上限** |
+| `stats_submit_ok` | `stats-submit-client.ts:26` | `stats_submissions` ← `stats-db.ts` | ~~0~~ **訂正: 97**（2026-07-10〜08-07の28日窓・`mcp__ga4__ga4_run_report`で再取得し独立検証済み） | **169（7/26〜）** | 見かけ1.7倍 | **2026-08-15訂正（`ops/CORRECTIONS.md` C-6c）**: 元の「GA4=0」はDW-1本文が引用した別の窓（7/26〜8/10）の値を28日実測列に誤転記したもの。正しい28日窓ではGA4=97件（7/14=1・7/17=30・7/18=2・7/20=2・7/21=24・7/22=23・7/25=15）でD1=169件（同一28日窓は別途§4/表Bを参照）。「D1もGA4も0でどちらも×」という判定は誤り。**汚染2日を除いた125件が上限**という結論自体は別途DW-2で確定済みのため変わらない |
 | `share_to_parent` | 8箇所（うち3箇所はD1未送信・DW-4） | `parent_funnel_events` ← `parent-funnel-db.ts:87` | **0** | **0** | 一致 | **2系統一致＝0が真値。** 断定してよい唯一のゼロ |
 | `parent_landing_view` | `ParentShareBanner.tsx:47` | 同上 `:54` | **0** | **0** | 一致 | 同上 |
 | `line_friend_click` | 8箇所（`ParentWindowBridge.tsx:73` / `ExitIntentLineModal.tsx:123` / `SaveResultCTA` / `StickyConvertBar` / `SchoolPageConvertCTA` ほか） | **無し** | 26 | — | — | **GA4しか無い。** 名簿velocityの唯一の計器なのにD1一次記録が無い |

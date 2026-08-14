@@ -248,9 +248,15 @@ dS≧3 の合計: **250行 / 1,579クリック / 200,843表示**（＝サイト�
 > ### ★ 最重要: `/hogosha` は **GSC表示0・GSCクリック0（検索から誰も来ない）** のに、内部リンク経由だけで実アフィリクリックの **37%（16/43）** を生んでいる。
 > 高CPA面は「到達させれば効く」ことが実測で示されている。詰まっているのは **/hogosha への到達量**。
 
-`/hogosha` への文脈リンクを持つのは **7ルートだけ**（`ops/raw/revenue-distance.json`）:
+`/hogosha` への文脈リンクを持つのは ~~7ルートだけ~~ **訂正: 16ルート**（`ops/raw/revenue-distance.json` の
+`routes.ctx`を`out`配列に`/hogosha`を含む行で機械的に再集計・2026-08-15検証・DISTANCE criticの訂正値と一致）:
 `/hensachi` `/hyotei-heikin` `/[prefecture]/naishin`（この3本は `StaticToolEntryLinks`／`src/components/StaticToolEntryLinks.tsx:16` 経由）、
-`/hensachi/shindan` 系3本（`src/components/Hensachi/ShindanQuiz.tsx:272,296`）、`/hiyou`（`src/app/hiyou/page.tsx:220`）。
+`/hensachi/shindan` 系3本（`src/components/Hensachi/ShindanQuiz.tsx:272,296`）、`/hiyou`（`src/app/hiyou/page.tsx:220`）、
+に加えて元の集計から漏れていた **9ルート**: `/ask` `/juken-schedule` `/juku-hiyou` `/juku-shindan` `/kyouiku-hi`
+`/mendan` `/plan` `/shougakukin` `/tools`（いずれも保護者お金クラスタ系ページで、`HogoshaLeadCTA`等を個別に
+埋め込んでいる箇所と見られる。旧集計は`StaticToolEntryLinks`経由の3ルートのみを機械的に数え、個別埋め込み分を
+見落としていた可能性が高い）。**37%(16/43)という被リンク効果の実測値自体は変わらない**（到達ルート数の
+過小報告であり、効果測定そのものに誤りは無い）。
 
 **`/hogosha` 単独への距離分布**
 | 距離 | ページ枚数 | GSCクリック | GSC表示 |
