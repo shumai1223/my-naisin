@@ -5029,6 +5029,19 @@
       "status": "candidate",
       "addedAt": "2026-08-15",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
+    },
+    {
+      "id": "lane2-presto",
+      "org": "株式会社プレスト",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://e-prest.co.jp/contact/",
+      "contactClass": "b2b",
+      "evidence": "学習塾・塾専用教材の販売会社。問い合わせフォームの必須項目に「塾名・教室名」欄があり教育機関向け設計・個人限定の文言なし、汎用お問い合わせ欄で事業提携相談も記入可能と直接WebFetchで確認。教材会社レーンの新規候補。",
+      "verifiedAt": "2026-08-15",
+      "status": "candidate",
+      "addedAt": "2026-08-15",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
     }
   ]
 }
