@@ -183,7 +183,10 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // 2026-08-15続き2: 東京大学大学院教育学研究科(庶務チーム・組織名義窓口)を新規candidate追加のうえ
     // queuedへ(149→150)。LOOP_CONTRACT§3-6で「教員個人メールのみでC7抵触」と記録されていた⏸要設計案件を、
     // 研究科代表窓口経由の間接打診に設計変更して解消した初回試行。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(150);
+    // 2026-08-15続き3: lane1-najukuren(奈良県学習塾連盟)のcontactをhttp→httpsへ修正しqueuedへ(150→151)。
+    // WebFetchのShift-JIS文字化けで再確認不能だったが、curl(--ssl-no-revoke)でhttps版のHTTPヘッダが
+    // http版と完全に同一のContent-Length/Last-Modifiedを返すことを確認し、同一ファイルの提供と判断した。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(151);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {
