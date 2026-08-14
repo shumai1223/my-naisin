@@ -174,7 +174,11 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // excludedへ(残り3件は既存excludedと重複)。queued141→131(-10)。
     // 2026-08-14続き22: 本文確認済みの3件(edtech-teachersmarket/gakusan-nihonkyozai/
     // gakusan-akatsuki-kyoiku)をqueuedへ昇格(131→134)。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(134);
+    // 2026-08-15: mediaレーン(lane5-*)の教育専門メディア13件(日本教育新聞社/時事通信社『内外教育』/
+    // 教育家庭新聞社/学事出版/教育新聞社/小学館/朝日中高生新聞/プレジデントFamily/こどもまなび☆ラボ/
+    // 日経xwoman/中学受験情報局/塾ジャーナル/全私学新聞)に個別本文を書きqueuedへ昇格(134→147)。
+    // いずれも2026-08-12にWebFetchで直接確認済みのcontact/evidenceを再利用(新規サイト訪問なし)。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(147);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {

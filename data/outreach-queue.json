@@ -2179,9 +2179,11 @@
       "contactClass": "b2b",
       "evidence": "kyoiku-press.com/kyouiku-collabo/を直接WebFetchで確認しフッターの「マーケティング・広告」窓口(adv.kyoiku-press.co.jp)を発見、専用問い合わせフォーム(/inquiry/)に「広告主様/広告会社様/その他の方」の区分選択があることを直接WebFetchで確認しb2b確定(一般読者向けcontact/とは明確に分離)。⚠️注記: フォーム必須項目に電話番号があり、未成年の運営者は電話番号を渡さない原則(fukushima-form等と同型の制約)に抵触する可能性があるため送信時は👤の電話番号で対応するか代替手段を検討すること。日本最大の教育専門全国紙で媒体価値が高い高価値ターゲット",
       "verifiedAt": "2026-08-12",
-      "status": "candidate",
+      "status": "queued",
       "addedAt": "2026-08-12",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5",
+      "subject": "【情報提供】中学生が独学で開発した内申点計算サイトについて",
+      "body": "日本教育新聞社（日本教育新聞電子版NIKKYOWEB）ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、現役中学生エンジニアのしゅうまいと申します。\n\n47都道府県すべての教育委員会が公表する入学者選抜の一次資料を自分で読み解き、独学でプログラミングを学んでこのサイトを開発・運営しています（https://my-naishin.com）。公開から数ヶ月で検索流入が伸び、月間数千クリック規模の利用をいただくまでになりました。\n\n貴社が発行される日本最大の教育専門全国紙と、当サイトが扱う「教育委員会の一次資料をもとにした受験データ」という切り口が近いと拝見し、情報提供としてご連絡いたしました。利用者の同意のもとで匿名集計した「全国の中学生の内申点・偏差値の分布データ」も公開しております（https://my-naishin.com/stats）。もしご興味をお持ちいただけましたら、情報提供・データ連携等どのような形でも対応いたします。ご不要でしたら読み流していただければ結構です。\n\nしゅうまい / My Naishin 運営（中学生・個人開発）\nnaishin.dev@gmail.com\nhttps://my-naishin.com"
     },
     {
       "id": "lane5-jiji-naigai-kyoiku",
@@ -2192,9 +2194,11 @@
       "contactClass": "b2b",
       "evidence": "時事通信社の教育専門紙『内外教育』(半世紀超の歴史・発行部数25,000部・想定読者15万人)を発見。専用問い合わせ導線(jiji.co.jp/service/senmon/educate/index.html)はJS起動のポップアップでURL特定不能だったため、時事通信社の一般問い合わせフォーム(www2.jiji.com/f/prdsvc/inqform.php)を直接WebFetchで確認、会社・学校・団体名/氏名/電話/メール必須+「お問い合わせサービス名」選択肢に『内外教育』が明記され法人/個人の契約形態選択もあることを確認しb2b確定。⚠️注記: フォーム必須項目に電話番号・住所があり未成年運営者の原則(kyoiku-press等と同型の制約)に抵触の可能性があるため送信時は👤対応が必要。教育行政・教育委員会関係者への到達率が極めて高い高価値ターゲット",
       "verifiedAt": "2026-08-12",
-      "status": "candidate",
+      "status": "queued",
       "addedAt": "2026-08-12",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5",
+      "subject": "【情報提供】中学生が独学で開発した内申点計算サイトについて",
+      "body": "株式会社時事通信社　教育専門紙『内外教育』ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、現役中学生エンジニアのしゅうまいと申します。\n\n47都道府県すべての教育委員会が公表する入学者選抜の一次資料を自分で読み解き、独学でプログラミングを学んでこのサイトを開発・運営しています（https://my-naishin.com）。公開から数ヶ月で検索流入が伸び、月間数千クリック規模の利用をいただくまでになりました。\n\n半世紀を超える歴史を持つ貴紙『内外教育』は教育行政・教育委員会関係者への到達力が高く、全国の教育委員会一次資料を独自に収集・整理している当サイトの取り組みと親和性が高いと考え、情報提供としてご連絡いたしました。利用者の同意のもとで匿名集計した「全国の中学生の内申点・偏差値の分布データ」も公開しております（https://my-naishin.com/stats）。もしご興味をお持ちいただけましたら、情報提供・データ連携等どのような形でも対応いたします。ご不要でしたら読み流していただければ結構です。\n\nしゅうまい / My Naishin 運営（中学生・個人開発）\nnaishin.dev@gmail.com\nhttps://my-naishin.com"
     },
     {
       "id": "lane5-kknews",
@@ -2205,9 +2209,11 @@
       "contactClass": "b2b",
       "evidence": "kknews.co.jp/contact.htmlを直接WebFetchで確認。問い合わせ区分に「掲載（告知）に関するお問い合わせ」「広告に関するお問い合わせ」があり、必須項目に学校名/企業名欄があることを確認しb2b確定。日本教育新聞・時事通信社に続くlane5教育専門メディア3件目",
       "verifiedAt": "2026-08-12",
-      "status": "candidate",
+      "status": "queued",
       "addedAt": "2026-08-12",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5",
+      "subject": "【情報提供】中学生が独学で開発した内申点計算サイトについて",
+      "body": "株式会社教育家庭新聞社　ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、現役中学生エンジニアのしゅうまいと申します。\n\n47都道府県すべての教育委員会が公表する入学者選抜の一次資料を自分で読み解き、独学でプログラミングを学んでこのサイトを開発・運営しています（https://my-naishin.com）。公開から数ヶ月で検索流入が伸び、月間数千クリック規模の利用をいただくまでになりました。\n\n学校・家庭双方に向けて発信されている貴社の専門紙と、当サイトが扱う「中学生・保護者向けの受験データ」という読者層が重なると考え、情報提供としてご連絡いたしました。利用者の同意のもとで匿名集計した「全国の中学生の内申点・偏差値の分布データ」も公開しております（https://my-naishin.com/stats）。もしご興味をお持ちいただけましたら、情報提供・データ連携等どのような形でも対応いたします。ご不要でしたら読み流していただければ結構です。\n\nしゅうまい / My Naishin 運営（中学生・個人開発）\nnaishin.dev@gmail.com\nhttps://my-naishin.com"
     },
     {
       "id": "lane5-gakuji",
@@ -2218,9 +2224,11 @@
       "contactClass": "b2b",
       "evidence": "gakuji.co.jp/company/cc10500.html(広告出稿のご案内)経由でgakuji.co.jp/contact/を直接WebFetchで確認。お問い合わせ種別に「広告」を含む7区分(個人客/書店/法人客/広告/自費出版/著作物利用/その他)がある実在フォームを確認しb2b確定。読者層が高校管理職・主任クラスの教員という当サイトのターゲット読者と直接重なる高価値メディア",
       "verifiedAt": "2026-08-12",
-      "status": "candidate",
+      "status": "queued",
       "addedAt": "2026-08-12",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5",
+      "subject": "【情報提供】中学生が独学で開発した内申点計算サイトについて",
+      "body": "学事出版株式会社　『月刊高校教育』ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、現役中学生エンジニアのしゅうまいと申します。\n\n47都道府県すべての教育委員会が公表する入学者選抜の一次資料を自分で読み解き、独学でプログラミングを学んでこのサイトを開発・運営しています（https://my-naishin.com）。公開から数ヶ月で検索流入が伸び、月間数千クリック規模の利用をいただくまでになりました。\n\n高校の管理職・主任クラスの教員を主読者とされる貴誌と、当サイトが扱う「中学生の内申点・進路データ」は入試選抜の実務という点で重なりが大きいと考え、情報提供としてご連絡いたしました。利用者の同意のもとで匿名集計した「全国の中学生の内申点・偏差値の分布データ」も公開しております（https://my-naishin.com/stats）。もしご興味をお持ちいただけましたら、情報提供・データ連携等どのような形でも対応いたします。ご不要でしたら読み流していただければ結構です。\n\nしゅうまい / My Naishin 運営（中学生・個人開発）\nnaishin.dev@gmail.com\nhttps://my-naishin.com"
     },
     {
       "id": "lane5-kyobun",
@@ -2231,9 +2239,11 @@
       "contactClass": "b2b",
       "evidence": "kyobun.co.jp/aboutおよびkyobun.co.jp/contactを直接WebFetchで確認。「電子版広告に関すること」「紙面版広告に関すること」の2区分を含む5カテゴリのGoogleフォーム誘導型お問い合わせページを確認しb2b確定。kyoiku-press.com(日本教育新聞社・NIKKYOWEB)とは別法人・別媒体(教育新聞社/kyobun.co.jp)。到達規模(全国51,114校・教員116万人・教育委員会1,785)が極めて大きい高価値ターゲット",
       "verifiedAt": "2026-08-12",
-      "status": "candidate",
+      "status": "queued",
       "addedAt": "2026-08-12",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5",
+      "subject": "【情報提供】中学生が独学で開発した内申点計算サイトについて",
+      "body": "株式会社教育新聞社　ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、現役中学生エンジニアのしゅうまいと申します。\n\n47都道府県すべての教育委員会が公表する入学者選抜の一次資料を自分で読み解き、独学でプログラミングを学んでこのサイトを開発・運営しています（https://my-naishin.com）。公開から数ヶ月で検索流入が伸び、月間数千クリック規模の利用をいただくまでになりました。\n\n全国51,114校・教員116万人・教育委員会1,785団体という圧倒的な到達規模をお持ちの貴社媒体と、全国47都道府県の入試選抜一次資料を独自に整理してきた当サイトの取り組みが重なると考え、情報提供としてご連絡いたしました。利用者の同意のもとで匿名集計した「全国の中学生の内申点・偏差値の分布データ」も公開しております（https://my-naishin.com/stats）。もしご興味をお持ちいただけましたら、情報提供・データ連携等どのような形でも対応いたします。ご不要でしたら読み流していただければ結構です。\n\nしゅうまい / My Naishin 運営（中学生・個人開発）\nnaishin.dev@gmail.com\nhttps://my-naishin.com"
     },
     {
       "id": "lane5-shogakukan-kyoikugijutsu",
@@ -2244,9 +2254,11 @@
       "contactClass": "b2b",
       "evidence": "adpocket.shogakukan.co.jp/media/minnano-kyoiku/(広告出稿ページ)経由で発見。担当者個人のメールアドレス(atsushi.kojima@shogakukan.jp)はPII該当のため不採用、代わりにadpocket.shogakukan.co.jp/contactの部署宛(小学館メディアビジネス局)一般問い合わせフォーム(お名前/メールアドレスのみ必須・個人名非含有)を直接WebFetchで確認しb2b確定。小学校教員向け教育情報メディアで当サイトの隣接読者層",
       "verifiedAt": "2026-08-12",
-      "status": "candidate",
+      "status": "queued",
       "addedAt": "2026-08-12",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5",
+      "subject": "【情報提供】中学生が独学で開発した内申点計算サイトについて",
+      "body": "株式会社小学館　メディアビジネス局『みんなの教育技術』ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、現役中学生エンジニアのしゅうまいと申します。\n\n47都道府県すべての教育委員会が公表する入学者選抜の一次資料を自分で読み解き、独学でプログラミングを学んでこのサイトを開発・運営しています（https://my-naishin.com）。公開から数ヶ月で検索流入が伸び、月間数千クリック規模の利用をいただくまでになりました。\n\n小学校教員向けの教育情報メディアとして90余年の歴史をお持ちの貴媒体と、当サイト（中学生向け内申点・偏差値計算）は隣接する読者層を持つと考え、情報提供としてご連絡いたしました。利用者の同意のもとで匿名集計した「全国の中学生の内申点・偏差値の分布データ」も公開しております（https://my-naishin.com/stats）。もしご興味をお持ちいただけましたら、情報提供・データ連携等どのような形でも対応いたします。ご不要でしたら読み流していただければ結構です。\n\nしゅうまい / My Naishin 運営（中学生・個人開発）\nnaishin.dev@gmail.com\nhttps://my-naishin.com"
     },
     {
       "id": "lane4-gakken-educational",
@@ -2403,9 +2415,11 @@
       "contactClass": "b2b",
       "evidence": "asagaku.com/media.htmlを直接WebFetchで確認。広告部専用フォーム(form.run)を確認しb2b確定(東京本社/大阪支社の広告部専用電話番号も併記)。朝日中高生新聞は当サイトの主要読者層(中高生)に直接届く数少ないメディアで、既存の高校生新聞オンラインとは別法人・別媒体",
       "verifiedAt": "2026-08-12",
-      "status": "candidate",
+      "status": "queued",
       "addedAt": "2026-08-12",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5",
+      "subject": "【情報提供】中学生が独学で開発した内申点計算サイトについて",
+      "body": "朝日学生新聞社　『朝日中高生新聞』ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、現役中学生エンジニアのしゅうまいと申します。\n\n47都道府県すべての教育委員会が公表する入学者選抜の一次資料を自分で読み解き、独学でプログラミングを学んでこのサイトを開発・運営しています（https://my-naishin.com）。公開から数ヶ月で検索流入が伸び、月間数千クリック規模の利用をいただくまでになりました。\n\n中高生ご本人に直接届く数少ない新聞である貴紙と、当サイトの主要な利用者（受験を控えた中学生本人）は完全に重なると考え、情報提供としてご連絡いたしました。利用者の同意のもとで匿名集計した「全国の中学生の内申点・偏差値の分布データ」も公開しております（https://my-naishin.com/stats）。もしご興味をお持ちいただけましたら、情報提供・データ連携等どのような形でも対応いたします。ご不要でしたら読み流していただければ結構です。\n\nしゅうまい / My Naishin 運営（中学生・個人開発）\nnaishin.dev@gmail.com\nhttps://my-naishin.com"
     },
     {
       "id": "lane9-sjst",
@@ -2457,9 +2471,11 @@
       "contactClass": "b2b",
       "evidence": "presidentfamily.com/inquiry/を直接WebFetchで確認しinfo@presidentfamily.comを確定(WebSearch要約が提示したfamily_ad@president.co.jpはpresident.co.jp/information/contactus/を直接WebFetchで確認したが記載が見つからず不採用=既知のWebSearch作話パターンを回避)。家庭教育誌として保護者層への到達力が高い当サイトの直接的な隣接メディア",
       "verifiedAt": "2026-08-12",
-      "status": "candidate",
+      "status": "queued",
       "addedAt": "2026-08-12",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5",
+      "subject": "【情報提供】中学生が独学で開発した内申点計算サイトについて",
+      "body": "プレジデント社　『プレジデントFamily』ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、現役中学生エンジニアのしゅうまいと申します。\n\n47都道府県すべての教育委員会が公表する入学者選抜の一次資料を自分で読み解き、独学でプログラミングを学んでこのサイトを開発・運営しています（https://my-naishin.com）。公開から数ヶ月で検索流入が伸び、月間数千クリック規模の利用をいただくまでになりました。\n\n家庭教育をテーマとされる貴誌と、当サイトを実際に利用してくださっている保護者層は直接重なると考え、情報提供としてご連絡いたしました。利用者の同意のもとで匿名集計した「全国の中学生の内申点・偏差値の分布データ」も公開しております（https://my-naishin.com/stats）。もしご興味をお持ちいただけましたら、情報提供・データ連携等どのような形でも対応いたします。ご不要でしたら読み流していただければ結構です。\n\nしゅうまい / My Naishin 運営（中学生・個人開発）\nnaishin.dev@gmail.com\nhttps://my-naishin.com"
     },
     {
       "id": "lane5-kodomo-manabi-labo",
@@ -2470,9 +2486,11 @@
       "contactClass": "b2b",
       "evidence": "kodomo-manabi-labo.net/contact-corporationを直接WebFetchで確認。「会社名」入力欄を含む法人向け専用フォーム(一般読者向けcontactとは別ページ)を確認しb2b確定。教育熱心な保護者層に訴求する急成長中の子育て系Webメディア(タイアップ広告/バナー広告等の実績あり)",
       "verifiedAt": "2026-08-12",
-      "status": "candidate",
+      "status": "queued",
       "addedAt": "2026-08-12",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5",
+      "subject": "【情報提供】中学生が独学で開発した内申点計算サイトについて",
+      "body": "株式会社新恵社　『STUDY HACKERこどもまなび☆ラボ』ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、現役中学生エンジニアのしゅうまいと申します。\n\n47都道府県すべての教育委員会が公表する入学者選抜の一次資料を自分で読み解き、独学でプログラミングを学んでこのサイトを開発・運営しています（https://my-naishin.com）。公開から数ヶ月で検索流入が伸び、月間数千クリック規模の利用をいただくまでになりました。\n\n教育熱心な保護者層に向けて発信されている貴メディアと、当サイトの主要な利用者層（受験生の保護者）が重なると考え、情報提供としてご連絡いたしました。利用者の同意のもとで匿名集計した「全国の中学生の内申点・偏差値の分布データ」も公開しております（https://my-naishin.com/stats）。もしご興味をお持ちいただけましたら、情報提供・データ連携等どのような形でも対応いたします。ご不要でしたら読み流していただければ結構です。\n\nしゅうまい / My Naishin 運営（中学生・個人開発）\nnaishin.dev@gmail.com\nhttps://my-naishin.com"
     },
     {
       "id": "lane5-nikkei-xwoman",
@@ -2483,9 +2501,11 @@
       "contactClass": "b2b",
       "evidence": "woman.nikkei.com経由でnikkeibp.co.jp/ad/atcl/netmedia/NXW/を直接WebFetchで確認。「広告掲載のお問い合わせ」専用フォーム(電話番号03-6811-8071も併記)を確認しb2b確定。共働き子育て世代(教育熱心な保護者層)向けの日経BPメディアでyomiuri/asahiと異なりnikkei.comはWebFetchブロックされていないことも確認",
       "verifiedAt": "2026-08-12",
-      "status": "candidate",
+      "status": "queued",
       "addedAt": "2026-08-12",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5",
+      "subject": "【情報提供】中学生が独学で開発した内申点計算サイトについて",
+      "body": "日経BP　『日経xwoman』ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、現役中学生エンジニアのしゅうまいと申します。\n\n47都道府県すべての教育委員会が公表する入学者選抜の一次資料を自分で読み解き、独学でプログラミングを学んでこのサイトを開発・運営しています（https://my-naishin.com）。公開から数ヶ月で検索流入が伸び、月間数千クリック規模の利用をいただくまでになりました。\n\n共働き子育て世代・教育熱心な保護者層に向けて発信されている貴メディアと、当サイトの主要な利用者層が重なると考え、情報提供としてご連絡いたしました。利用者の同意のもとで匿名集計した「全国の中学生の内申点・偏差値の分布データ」も公開しております（https://my-naishin.com/stats）。もしご興味をお持ちいただけましたら、情報提供・データ連携等どのような形でも対応いたします。ご不要でしたら読み流していただければ結構です。\n\nしゅうまい / My Naishin 運営（中学生・個人開発）\nnaishin.dev@gmail.com\nhttps://my-naishin.com"
     },
     {
       "id": "lane5-e-juken",
@@ -2496,9 +2516,11 @@
       "contactClass": "b2b",
       "evidence": "e-juken.jp/mail/を直接WebFetchで確認。お名前/メールアドレス/お問い合わせ内容が必須のフォーム(zfrmz.com外部サービス経由)を確認しb2b確定。中学受験界で著名な西村則康氏・小川大介氏が関わる老舗の中学受験専門メディア。当サイトの受験生保護者層と直接重なる隣接メディア",
       "verifiedAt": "2026-08-12",
-      "status": "candidate",
+      "status": "queued",
       "addedAt": "2026-08-12",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5",
+      "subject": "【情報提供】中学生が独学で開発した内申点計算サイトについて",
+      "body": "アクセラレーテッドラーニングジャパン有限会社　『中学受験情報局』ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、現役中学生エンジニアのしゅうまいと申します。\n\n47都道府県すべての教育委員会が公表する入学者選抜の一次資料を自分で読み解き、独学でプログラミングを学んでこのサイトを開発・運営しています（https://my-naishin.com）。公開から数ヶ月で検索流入が伸び、月間数千クリック規模の利用をいただくまでになりました。\n\n中学受験分野で長年発信されてこられた貴メディアと、当サイト（高校受験・内申点データ）は隣接領域として受験生保護者層を共有していると考え、情報提供としてご連絡いたしました。利用者の同意のもとで匿名集計した「全国の中学生の内申点・偏差値の分布データ」も公開しております（https://my-naishin.com/stats）。もしご興味をお持ちいただけましたら、情報提供・データ連携等どのような形でも対応いたします。ご不要でしたら読み流していただければ結構です。\n\nしゅうまい / My Naishin 運営（中学生・個人開発）\nnaishin.dev@gmail.com\nhttps://my-naishin.com"
     },
     {
       "id": "lane1-morigami",
@@ -3641,9 +3663,11 @@
       "contactClass": "b2b",
       "evidence": "公式サイト`manavinet.com/contact/`を直接WebFetchで確認。『塾ジャーナル編集部』宛の組織メールで、問い合わせに含めるべき情報として『学校名・塾名』が明記されておりb2b確定。年6回発行・塾/予備校/私学向けの業界誌",
       "verifiedAt": "2026-08-12",
-      "status": "candidate",
+      "status": "queued",
       "addedAt": "2026-08-12",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5",
+      "subject": "【情報提供】中学生が独学で開発した内申点計算サイトについて",
+      "body": "塾ジャーナル編集部　ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、現役中学生エンジニアのしゅうまいと申します。\n\n47都道府県すべての教育委員会が公表する入学者選抜の一次資料を自分で読み解き、独学でプログラミングを学んでこのサイトを開発・運営しています（https://my-naishin.com）。公開から数ヶ月で検索流入が伸び、月間数千クリック規模の利用をいただくまでになりました。\n\n塾・予備校・私学向けに発信されている貴誌と、当サイトが独自に整理してきた全国の入試選抜一次資料・内申点データは、現場の指導や進路指導に役立つ情報として重なりがあると考え、情報提供としてご連絡いたしました。利用者の同意のもとで匿名集計した「全国の中学生の内申点・偏差値の分布データ」も公開しております（https://my-naishin.com/stats）。もしご興味をお持ちいただけましたら、情報提供・データ連携等どのような形でも対応いたします。ご不要でしたら読み流していただければ結構です。\n\nしゅうまい / My Naishin 運営（中学生・個人開発）\nnaishin.dev@gmail.com\nhttps://my-naishin.com"
     },
     {
       "id": "lane5-zenshigaku",
@@ -3654,9 +3678,11 @@
       "contactClass": "b2b",
       "evidence": "公式サイト`zenshigaku-np.jp/contact/`を直接WebFetchで確認。問い合わせ項目に『記事』『広告』『その他』の選択肢がある公式フォームでb2b確定。私立学校の教育・経営者向け専門紙を発行する一般社団法人",
       "verifiedAt": "2026-08-12",
-      "status": "candidate",
+      "status": "queued",
       "addedAt": "2026-08-12",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5",
+      "subject": "【情報提供】中学生が独学で開発した内申点計算サイトについて",
+      "body": "一般社団法人全私学新聞　ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、現役中学生エンジニアのしゅうまいと申します。\n\n47都道府県すべての教育委員会が公表する入学者選抜の一次資料を自分で読み解き、独学でプログラミングを学んでこのサイトを開発・運営しています（https://my-naishin.com）。公開から数ヶ月で検索流入が伸び、月間数千クリック規模の利用をいただくまでになりました。\n\n私立学校の教育・経営者層に向けて発信されている貴紙と、当サイトが扱う入試選抜・内申点データは進路指導・広報の観点で重なりがあると考え、情報提供としてご連絡いたしました。利用者の同意のもとで匿名集計した「全国の中学生の内申点・偏差値の分布データ」も公開しております（https://my-naishin.com/stats）。もしご興味をお持ちいただけましたら、情報提供・データ連携等どのような形でも対応いたします。ご不要でしたら読み流していただければ結構です。\n\nしゅうまい / My Naishin 運営（中学生・個人開発）\nnaishin.dev@gmail.com\nhttps://my-naishin.com"
     },
     {
       "id": "lane9-shitsukyo",
