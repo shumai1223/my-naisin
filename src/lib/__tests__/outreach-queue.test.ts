@@ -108,7 +108,7 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     }
   });
 
-  it('129件がqueued(教委13[email3+form10]+メディアemail9+メディアform5+個人塾line4+npo4+EdTech校務支援8+本文既存済み86の昇格)', () => {
+  it('130件がqueued(教委13[email3+form10]+メディアemail9+メディアform5+個人塾line4+npo4+EdTech校務支援8+本文既存済み87の昇格)', () => {
     // 2026-08-13: 教委email26件は8/6に送信済みでledger側(kyoiku-*-0806)に記録済みの重複だったため
     // queueから削除(outreach-queue.tsの設計「送信済みはledgerへ移しqueueから除外する」に合わせた)。
     // 残る教委emailはlane9-*(政令市3件)のみ・教委formの10件は未送信のため変更なし。
@@ -138,7 +138,9 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // 2026-08-14続き8: T-C2 C2-3のゲート(b2b-saas尽きた後に3-5件個別試作)に従いnpoレーンから
     // 進路指導・キャリア教育・テスト理論の3学会(lane9-shinroshido/lane9-jssce/lane9-jartest)に
     // 研究協力・データ引用フレーミングの個別本文を書き昇格(126→129・営業文面ではなく情報提供文面)。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(129);
+    // 2026-08-14続き9: 新規candidate edtech-litalico-koto-gakuin(株式会社LITALICO・通信制高校
+    // サポート校運営)を発見・本文作成のうえ昇格(129→130)。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(130);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {
