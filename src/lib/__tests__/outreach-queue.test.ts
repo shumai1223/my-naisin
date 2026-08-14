@@ -165,7 +165,14 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // 2026-08-14続き20: edtech-faboc-jukumail(ファボック)をクエリパラメータ無しのURL
     // (contactus.php?cate_id=5 → contactus.php)で再確認し有効な自由記述欄を確認、queuedへ昇格
     // (140→141)。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(141);
+    // 2026-08-14続き21: Cowork第3弾(30社・ops/cowork/COWORK-RESULT-03.md)の実測を反映。
+    // 送信済み8件(edtech-afrel-legoeducation/edtech-studyplus-for-school/
+    // edtech-manabilinkplus-sumarepo/edtech-igs-aigrow/edtech-suzukisoft/edtech-gakugei/
+    // edtech-digitalknowledge/moshi-gakuyu-mie)をledgerへstatus:'awaiting'で移設しqueueから削除。
+    // スキップ7件(edtech-faboc-jukumail/edtech-techmatrix-tsumugino/juku-ichishin-press/
+    // edtech-codetakt/edtech-surala/edtech-manabipocket/lane2-tokyo-horei、うちqueued3件)を
+    // excludedへ(残り3件は既存excludedと重複)。queued141→131(-10)。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(131);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {

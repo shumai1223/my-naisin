@@ -1010,11 +1010,12 @@
       "contactClass": "b2b",
       "evidence": "製品名『塾用・入退室メール配信システム 通塾メール』自体が学習塾専業であることを明示。ページ内も『生徒数が多い教室』『生徒数が少ない教室』等の教室運営前提の説明であることを直接WebFetchで確認",
       "verifiedAt": "2026-08-14",
-      "status": "queued",
+      "status": "excluded",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
       "subject": "内申点計算データAPI/MCPのご案内（My Naishin）",
-      "body": "ファボック株式会社 ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\n貴社のサービスをご利用の学校・塾現場向けに、都道府県ごとに異なる内申点の自動計算をAPIで組み込むことで、進路指導業務をより効率化できるのではと思いご連絡いたしました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com"
+      "body": "ファボック株式会社 ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\n貴社のサービスをご利用の学校・塾現場向けに、都道府県ごとに異なる内申点の自動計算をAPIで組み込むことで、進路指導業務をより効率化できるのではと思いご連絡いたしました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com",
+      "excludeReason": "Cowork第3弾(30社)実測で目的不一致と判定されスキップ(ops/cowork/COWORK-RESULT-03.md)"
     },
     {
       "id": "cert-suken-group",
@@ -1125,22 +1126,6 @@
       "note": "2026-08-13評価: 本文設置を試みる過程で教員限定の見本請求専用フォームと判明し見送りへ変更"
     },
     {
-      "id": "edtech-afrel-legoeducation",
-      "org": "株式会社アフレル(レゴ®エデュケーション正規代理店・STEAM教材)",
-      "lane": "b2b-saas",
-      "channel": "form",
-      "contact": "https://afrel.co.jp/contact/inquiry/",
-      "contactClass": "b2b",
-      "evidence": "『教育機関向けLEAトレーニング』専用ページに『学校・自治体に向けた研修会を実施しています』『小学校、中学校、高校の教員／教育委員会』向けと明記され、専用のお問い合わせ/お見積り/資料請求フォームが独立していることを直接WebFetchで確認しb2b確定",
-      "verifiedAt": "2026-08-14",
-      "status": "excluded",
-      "addedAt": "2026-08-11",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
-      "subject": "内申点計算データAPI/MCPのご案内（My Naishin）",
-      "body": "株式会社アフレル ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\n貴社のサービスをご利用の学校・塾現場向けに、都道府県ごとに異なる内申点の自動計算をAPIで組み込むことで、進路指導業務をより効率化できるのではと思いご連絡いたしました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com",
-      "excludeReason": "フォームに「営業目的のお問い合わせはご遠慮ください」「お客様専用フォーム」と明記(2026-08-14 WebFetch再確認)。既存顧客専用で新規B2B打診には不適"
-    },
-    {
       "id": "edtech-compass-qubena",
       "org": "株式会社COMPASS(AI型教材『Qubena』)",
       "lane": "b2b-saas",
@@ -1179,21 +1164,6 @@
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
       "excludeReason": "evidence記載の通り『学校・塾などの教育機関向け専用の資料請求フォーム』であり、SaaS企業の顧客獲得導線(教育委員会/学校が対象)。当方はその対象ではないため見送り"
-    },
-    {
-      "id": "edtech-studyplus-for-school",
-      "org": "スタディプラス株式会社(『Studyplus for School』教育機関向けプラットフォーム)",
-      "lane": "b2b-saas",
-      "channel": "form",
-      "contact": "https://docs.google.com/forms/d/e/1FAIpQLSef6zVHPYp5BgPGi1PlDF6U5Btj38KZiTX9mlTZ1UaYU9cgXg/viewform?pli=1",
-      "contactClass": "b2b",
-      "evidence": "個人向け学習記録アプリ『Studyplus』とは別の教育機関向けサブブランド『Studyplus for School』(サブドメインfor-school.studyplus.co.jp)として『教育機関向けのコミュニケーションプラットフォーム』対象は『学校』『学習塾・予備校』と明記され、専用の資料請求フォームがあることを直接WebFetchで確認しb2b確定",
-      "verifiedAt": "2026-08-14",
-      "status": "queued",
-      "addedAt": "2026-08-11",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
-      "subject": "内申点計算データAPI/MCPのご案内（My Naishin）",
-      "body": "スタディプラス株式会社 ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\n貴社のサービスをご利用の学校・塾様向けに、都道府県ごとに異なる内申点の自動計算をAPIで組み込むことで、生徒・保護者向けの進路指導機能をより充実させられるのではと思いご連絡いたしました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com"
     },
     {
       "id": "edtech-lifeistech-lesson",
@@ -1300,21 +1270,6 @@
       "body": "株式会社ジュウナナワーク ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\n貴社が運営される学習塾口コミサイト『ジュクサガス』にご掲載の学習塾様に、都道府県ごとに異なる内申点の自動計算を紹介できるコンテンツやAPI連携として活用いただけないかと思いご連絡いたしました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com"
     },
     {
-      "id": "edtech-manabilinkplus-sumarepo",
-      "org": "学びリンクプラス株式会社(通信制高校向けオンラインレポートシステム『スマレポ』)",
-      "lane": "b2b-saas",
-      "channel": "form",
-      "contact": "https://manabilinkplus.net/contact/",
-      "contactClass": "b2b",
-      "evidence": "全事業が『通信制高校のレポート提出専用に開発されたシステム』(生徒向け消費者製品が無い、学校が導入するBtoBシステム)であることを直接WebFetchで確認しb2b確定。問い合わせフォーム自体に学校名欄等の明示分離は無いが、製品の性質上すべての問い合わせが学校導入検討者からのものと判断できる",
-      "verifiedAt": "2026-08-14",
-      "status": "queued",
-      "addedAt": "2026-08-11",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
-      "subject": "内申点計算データAPI/MCPのご案内（My Naishin）",
-      "body": "学びリンクプラス株式会社 ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\n貴社のサービスをご利用の学校・塾現場向けに、都道府県ごとに異なる内申点の自動計算をAPIで組み込むことで、進路指導業務をより効率化できるのではと思いご連絡いたしました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com"
-    },
-    {
       "id": "edtech-eduq-quest-education",
       "org": "株式会社教育と探求社(探究学習プログラム『クエストエデュケーション』)",
       "lane": "b2b-saas",
@@ -1342,21 +1297,6 @@
       "subject": "内申点計算データAPI/MCPのご案内（My Naishin）",
       "body": "認定NPO法人カタリバ ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\n貴団体が展開されている高校生向けプログラムに、都道府県ごとに異なる内申点の自動計算をAPIとしてご活用いただける機会があればと思いご連絡いたしました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com",
       "excludeReason": "2026-08-14 代表窓口(katariba.or.jp/contact/)を再確認したところ「営業を目的としたお問い合わせはお断りしております」と明記されており、B2B API/データ提携の打診は不適合と判断。マイプロジェクト専用フォームも本文とミスマッチのため両方の窓口とも見送り"
-    },
-    {
-      "id": "edtech-igs-aigrow",
-      "org": "IGS株式会社(非認知能力アセスメントツール『Ai GROW』)",
-      "lane": "b2b-saas",
-      "channel": "form",
-      "contact": "https://www.aigrow.jp/inq",
-      "contactClass": "b2b",
-      "evidence": "全国46都道府県・約500校(小中高)で導入される学校向け専業アセスメントツール(生徒個人が直接購入する製品ではない)であり、専用の問い合わせ/資料請求フォームがあることを直接WebFetchで確認しb2b確定",
-      "verifiedAt": "2026-08-14",
-      "status": "queued",
-      "addedAt": "2026-08-11",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
-      "subject": "内申点計算データAPI/MCPのご案内（My Naishin）",
-      "body": "IGS株式会社 ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\n貴社のサービスをご利用の学校・塾現場向けに、都道府県ごとに異なる内申点の自動計算をAPIで組み込むことで、進路指導業務をより効率化できるのではと思いご連絡いたしました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com"
     },
     {
       "id": "career-mynavi-koshien-teacher",
@@ -1426,11 +1366,12 @@
       "contactClass": "b2b",
       "evidence": "『ツムギノ製品お問い合わせ』という製品専用フォームがあり、製品自体が小中学校向け校務支援システム専業(生徒個人向け製品ではない)であることを直接WebFetchで確認しb2b確定",
       "verifiedAt": "2026-08-11",
-      "status": "candidate",
+      "status": "excluded",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
       "subject": "内申点計算データAPI/MCPのご案内（My Naishin）",
-      "body": "テクマトリックス株式会社 ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\n貴社のサービスをご利用の学校現場向けに、都道府県ごとに異なる内申点の自動計算をAPIで組み込むことで、生徒・保護者向けの機能をより充実させられるのではと思いご連絡いたしました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com"
+      "body": "テクマトリックス株式会社 ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\n貴社のサービスをご利用の学校現場向けに、都道府県ごとに異なる内申点の自動計算をAPIで組み込むことで、生徒・保護者向けの機能をより充実させられるのではと思いご連絡いたしました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com",
+      "excludeReason": "Cowork第3弾(30社)実測で目的不一致と判定されスキップ(ops/cowork/COWORK-RESULT-03.md)"
     },
     {
       "id": "edtech-ryobi-koushien",
@@ -1526,12 +1467,13 @@
       "contactClass": "b2b",
       "evidence": "IRサイトのお問い合わせページに『取材に関するお問い合わせ』と『IR、その他に関するお問い合わせ』の2つの専用フォームが分離されていることを直接WebFetchで確認しb2b確定(東証上場・学研が37%出資)",
       "verifiedAt": "2026-08-14",
-      "status": "queued",
+      "status": "excluded",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane3",
       "subject": "内申点計算データAPI/MCPのご案内（My Naishin）",
       "body": "株式会社市進ホールディングス ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\n貴社の市進学院をご利用の生徒・保護者様向けに、都道府県ごとに異なる内申点の自動計算をAPIで組み込むことで、合否判定資料をより具体的にできるのではと思いご連絡いたしました。事業提携に関するご相談のため、恐れ入りますが適切な部署へお取り次ぎいただけますと幸いです。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com",
-      "note": "使用するのは『IR、その他に関するお問い合わせ』フォーム(取材専用フォームではない)"
+      "note": "使用するのは『IR、その他に関するお問い合わせ』フォーム(取材専用フォームではない)",
+      "excludeReason": "Cowork第3弾(30社)実測で目的不一致と判定されスキップ(ops/cowork/COWORK-RESULT-03.md)"
     },
     {
       "id": "cert-shosha-group",
@@ -1699,11 +1641,12 @@
       "contactClass": "b2b",
       "evidence": "公式サイト`codetakt.com`をcurlで取得した生HTMLの『お問い合わせ』セクションに『お問い合わせは下記のフォームからご連絡ください』の案内文とkintoneApp上のフォームURLが明記されていることを直接確認(curlで302到達も確認・kintoneホスティングの正規フォーム)。schoolTaktは『生徒同士による協働学習・学級経営支援』を掲げる授業支援クラウドで個人向け製品が無い(全事業が学校/教員向け)ためb2b確定。JAPET&CEC非加盟のためlane4母集団178社の外側からの追加",
       "verifiedAt": "2026-08-11",
-      "status": "candidate",
+      "status": "excluded",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
       "subject": "内申点計算データAPI/MCPのご案内（My Naishin）",
-      "body": "株式会社コードタクト ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\n貴社のサービスをご利用の学校・塾様向けに、都道府県ごとに異なる内申点の自動計算をAPIで組み込むことで、生徒・保護者向けの進路指導機能をより充実させられるのではと思いご連絡いたしました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com"
+      "body": "株式会社コードタクト ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\n貴社のサービスをご利用の学校・塾様向けに、都道府県ごとに異なる内申点の自動計算をAPIで組み込むことで、生徒・保護者向けの進路指導機能をより充実させられるのではと思いご連絡いたしました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com",
+      "excludeReason": "Cowork第3弾(30社)実測で目的不一致と判定されスキップ(ops/cowork/COWORK-RESULT-03.md)"
     },
     {
       "id": "edtech-surala",
@@ -1714,57 +1657,12 @@
       "contactClass": "b2b",
       "evidence": "公式サイト`surala.jp/school/contact-form/`をcurlで取得した生HTMLのmeta descriptionに『このページは学校・教育委員会様向けとなります。個人のお客様はこちらから、塾でのご利用を検討されている場合は、こちらよりお問い合わせください』と明記されており、学校/個人/塾の3窓口が明確に分離されていることを直接確認しb2b確定。サブタスク0のlane4母集団20社確定リストに含まれていたが未検証だった1社",
       "verifiedAt": "2026-08-11",
-      "status": "candidate",
+      "status": "excluded",
       "addedAt": "2026-08-11",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
       "subject": "内申点計算データAPI/MCPのご案内（My Naishin）",
-      "body": "株式会社すららネット ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\n貴社のサービスをご利用の学校・塾様向けに、都道府県ごとに異なる内申点の自動計算をAPIで組み込むことで、生徒・保護者向けの進路指導機能をより充実させられるのではと思いご連絡いたしました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com"
-    },
-    {
-      "id": "edtech-suzukisoft",
-      "org": "スズキ教育ソフト株式会社(小中学校向け学習・校務支援ソフト)",
-      "lane": "b2b-saas",
-      "channel": "form",
-      "contact": "https://www.suzukisoft.co.jp/mail/support_form.html",
-      "contactClass": "b2b",
-      "evidence": "公式サイト`suzukisoft.co.jp/mail/support_form.html`(製品に関するお問い合わせ)をcurlで取得した生HTMLに『学校名』の入力欄があることを直接確認。事業内容が『小中学校向け学習ソフト・指導ソフト・校務支援ソフトの企画開発販売』(WebSearch要約)であり個人向け製品が無いためb2b確定。lane4母集団20社確定リストの未検証分",
-      "verifiedAt": "2026-08-14",
-      "status": "queued",
-      "addedAt": "2026-08-11",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
-      "subject": "内申点計算データAPI/MCPのご案内（My Naishin）",
-      "body": "スズキ教育ソフト株式会社 ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\n貴社のサービスをご利用の学校現場向けに、都道府県ごとに異なる内申点の自動計算をAPIで組み込むことで、生徒・保護者向けの機能をより充実させられるのではと思いご連絡いたしました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com",
-      "note": "⚠️フォームは『製品に関するお問い合わせ』専用で必須項目に『学校名』欄あり。学校向け製品説明会等の導入相談専用の可能性もあるため、送信前に👤が実フォームを確認することを推奨"
-    },
-    {
-      "id": "edtech-gakugei",
-      "org": "株式会社がくげい(タブレット学習アプリ・学校向け製品)",
-      "lane": "b2b-saas",
-      "channel": "form",
-      "contact": "https://www.gakugei.co.jp/support/inqto/",
-      "contactClass": "b2b",
-      "evidence": "サイト内`/school/school.html`(title:『学校向け製品－学習ソフトのがくげい』・小中学校向けと明記)の学校向けセクションから同一の問い合わせフォーム`/support/inqto/`が案内されていることを直接WebFetchで確認。同社は個人向けタブレット学習アプリと学校向け製品の両方を展開するがコンタクトフォームは共通のため、学校向けページ経由での到達を根拠にb2b確定(curl 200到達確認済み)。lane4母集団20社確定リストの未検証分",
-      "verifiedAt": "2026-08-14",
-      "status": "queued",
-      "addedAt": "2026-08-11",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
-      "subject": "内申点計算データAPI/MCPのご案内（My Naishin）",
-      "body": "株式会社がくげい ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\n貴社のサービスをご利用の学校現場向けに、都道府県ごとに異なる内申点の自動計算をAPIで組み込むことで、生徒・保護者向けの機能をより充実させられるのではと思いご連絡いたしました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com"
-    },
-    {
-      "id": "edtech-digitalknowledge",
-      "org": "株式会社デジタル・ナレッジ(eラーニングLMS『KnowledgeDeliver for School』)",
-      "lane": "b2b-saas",
-      "channel": "form",
-      "contact": "https://www.digital-knowledge.co.jp/inquiry/",
-      "contactClass": "b2b",
-      "evidence": "学校向け製品ページ`/solution/school/forschool/`から案内される問い合わせフォーム`/inquiry/`を直接curlで取得し、フォーム文言に『貴社』表記があることを確認しb2b確定。大学・専門学校向けeラーニングシステム(導入実績2000件超)で個人向け無料版は無い",
-      "verifiedAt": "2026-08-14",
-      "status": "queued",
-      "addedAt": "2026-08-11",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
-      "subject": "内申点計算データAPI/MCPのご案内（My Naishin）",
-      "body": "株式会社デジタル・ナレッジ ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\n貴社のサービスをご利用の学校現場向けに、都道府県ごとに異なる内申点の自動計算をAPIで組み込むことで、生徒・保護者向けの機能をより充実させられるのではと思いご連絡いたしました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com"
+      "body": "株式会社すららネット ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\n貴社のサービスをご利用の学校・塾様向けに、都道府県ごとに異なる内申点の自動計算をAPIで組み込むことで、生徒・保護者向けの進路指導機能をより充実させられるのではと思いご連絡いたしました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com",
+      "excludeReason": "Cowork第3弾(30社)実測で目的不一致と判定されスキップ(ops/cowork/COWORK-RESULT-03.md)"
     },
     {
       "id": "juku-step-ir",
@@ -1852,20 +1750,6 @@
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2",
       "subject": "内申点計算データAPI/MCPのご案内（My Naishin）",
       "body": "株式会社明治書院 ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\n貴社の教科書・教材をご利用の学校現場・保護者向けに、都道府県ごとに異なる内申点の自動計算をAPIで組み込むことで、進路指導資料をより具体的にできるのではと思いご連絡いたしました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com"
-    },
-    {
-      "id": "moshi-gakuyu-mie",
-      "org": "学悠出版株式会社(三重ぜんけん模試・岐阜全県模試運営)",
-      "lane": "b2b-saas",
-      "channel": "form",
-      "contact": "https://www.zenkenmoshi.jp/mie/contact/",
-      "contactClass": "b2b",
-      "evidence": "『三重ぜんけん模試』公式サイトのお問い合わせフォーム`/mie/contact/`をcurlで取得した生HTMLに『会社名（塾名）』という入力欄があることを直接確認、また『塾専用サイト』への別リンクもあり塾/学校向けB2B窓口としてb2b確定。サブタスク0のlane1母集団59社確定リストの未検証分",
-      "verifiedAt": "2026-08-14",
-      "status": "queued",
-      "addedAt": "2026-08-11",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1",
-      "body": "学悠出版株式会社 ご担当者様\n\n突然のご連絡失礼いたします。中学生向け内申点・偏差値計算サイト「My Naishin」(https://my-naishin.com) を運営しております、現役中学生エンジニアのしゅうまいと申します。\n\n貴社が運営される「三重ぜんけん模試」「岐阜全県模試」の成績資料に、偏差値と内申点の相関表を掲載され、受験生が集団内での自分の位置と合格可能性を正確に把握できるよう工夫されていることを拝見しました。\n\n三重県・岐阜県はいずれも入試の総合得点計算に県独自の内申点算出方式(学年ごとの重み付け等)があり、これを自社で正確に再現・保守するには継続的な一次資料の追跡コストがかかります。当サイトは全国47都道府県の内申点計算方式・総合得点計算方式を、各都道府県教育委員会の公表資料を出典として明記したうえで無料公開しており、今後は機械可読な形(CSV/API)での提供も計画しています。三重・岐阜2県を横断して模試を運営される貴社であれば、この計算部分を外部化することで、判定ロジックの保守コストを下げられる可能性があるのではと考えご連絡いたしました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com"
     },
     {
       "id": "moshi-fujii-nara",
@@ -2145,11 +2029,12 @@
       "contactClass": "b2b",
       "evidence": "公式サイト`manabipocket.ed-cl.com`をWebFetchで確認しお問い合わせフォームURLを取得、curlで実際にHTTP200稼働中であることを確認。フォームページの生HTMLに『本フォームへのお問い合わせではなく、先生または学校へお問い合わせを頂きます』という児童・生徒/保護者向けの除外文言が明記され、対象が教職員・学校管理者・法人向け利用説明依頼者に限定されていることを直接確認しb2b確定。全国13,000校以上導入の教育クラウドプラットフォーム",
       "verifiedAt": "2026-08-12",
-      "status": "queued",
+      "status": "excluded",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
       "subject": "内申点計算データAPI/MCPのご案内（My Naishin）",
-      "body": "NTTドコモビジネス株式会社 ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\n貴社のサービスをご利用の学校現場向けに、都道府県ごとに異なる内申点の自動計算をAPIで組み込むことで、生徒・保護者向けの機能をより充実させられるのではと思いご連絡いたしました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com"
+      "body": "NTTドコモビジネス株式会社 ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\n貴社のサービスをご利用の学校現場向けに、都道府県ごとに異なる内申点の自動計算をAPIで組み込むことで、生徒・保護者向けの機能をより充実させられるのではと思いご連絡いたしました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com",
+      "excludeReason": "Cowork第3弾(30社)実測で目的不一致と判定されスキップ(ops/cowork/COWORK-RESULT-03.md)"
     },
     {
       "id": "lane9-careerdesign",
@@ -2938,11 +2823,12 @@
       "contactClass": "b2b",
       "evidence": "secure.tokyo-horei.co.jp/company_s/voiceform_s.phpを直接WebFetchで確認。法人申請の場合は申請情報が必須と明記された法人向け区分を確認しb2b確定。教科書協会加盟の教育出版社(lane2・50社中の1社)",
       "verifiedAt": "2026-08-12",
-      "status": "candidate",
+      "status": "excluded",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2",
       "subject": "内申点計算データAPI/MCPのご案内（My Naishin）",
-      "body": "東京法令出版株式会社 ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\n貴社の教科書・教材をご利用の学校現場・保護者向けに、都道府県ごとに異なる内申点の自動計算をAPIで組み込むことで、進路指導資料をより具体的にできるのではと思いご連絡いたしました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com"
+      "body": "東京法令出版株式会社 ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\n貴社の教科書・教材をご利用の学校現場・保護者向けに、都道府県ごとに異なる内申点の自動計算をAPIで組み込むことで、進路指導資料をより具体的にできるのではと思いご連絡いたしました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com",
+      "excludeReason": "Cowork第3弾(30社)実測で目的不一致と判定されスキップ(ops/cowork/COWORK-RESULT-03.md)"
     },
     {
       "id": "lane2-kobun-shoin",

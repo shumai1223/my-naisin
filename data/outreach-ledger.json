@@ -1016,6 +1016,86 @@
       "status": "awaiting",
       "followupCount": 0,
       "note": "フォーム送信確認メールを1a0001df9128403dで受信(2026-08-14 20:52 JST・info@sprix.jp)。queueではqueuedのまま未反映だったため本セッションでledgerへ反映しqueueから削除。フォーム経由のためGmail threadIdなし。"
+    },
+    {
+      "id": "edtech-afrel-legoeducation",
+      "org": "株式会社アフレル(レゴ®エデュケーション正規代理店・STEAM教材)",
+      "lane": "b2b-saas",
+      "sourceTaskId": "S13-A",
+      "sentDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 0,
+      "note": "Cowork第3弾(30社)でフォーム送信済み(ops/cowork/COWORK-RESULT-03.md)。フォーム経由のためGmail threadIdなし。Gmail経由の教委26社等とは別セグメントとして返信率を計測すること。 ⚠️直前のT-C1判定で「営業目的お断り」によりexcluded登録済みだったが、Coworkが判定前にフォーム送信済みだったため実送信済みとして扱う(到達確認は未確認)。"
+    },
+    {
+      "id": "edtech-studyplus-for-school",
+      "org": "スタディプラス株式会社(『Studyplus for School』教育機関向けプラットフォーム)",
+      "lane": "b2b-saas",
+      "sourceTaskId": "S13-A",
+      "sentDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 0,
+      "note": "Cowork第3弾(30社)でフォーム送信済み(ops/cowork/COWORK-RESULT-03.md)。フォーム経由のためGmail threadIdなし。Gmail経由の教委26社等とは別セグメントとして返信率を計測すること。"
+    },
+    {
+      "id": "edtech-manabilinkplus-sumarepo",
+      "org": "学びリンクプラス株式会社(通信制高校向けオンラインレポートシステム『スマレポ』)",
+      "lane": "b2b-saas",
+      "sourceTaskId": "S13-A",
+      "sentDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 0,
+      "note": "Cowork第3弾(30社)でフォーム送信済み(ops/cowork/COWORK-RESULT-03.md)。フォーム経由のためGmail threadIdなし。Gmail経由の教委26社等とは別セグメントとして返信率を計測すること。"
+    },
+    {
+      "id": "edtech-igs-aigrow",
+      "org": "IGS株式会社(非認知能力アセスメントツール『Ai GROW』)",
+      "lane": "b2b-saas",
+      "sourceTaskId": "S13-A",
+      "sentDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 0,
+      "note": "Cowork第3弾(30社)でフォーム送信済み(ops/cowork/COWORK-RESULT-03.md)。フォーム経由のためGmail threadIdなし。Gmail経由の教委26社等とは別セグメントとして返信率を計測すること。 reCAPTCHAは👤が手動処理。"
+    },
+    {
+      "id": "edtech-suzukisoft",
+      "org": "スズキ教育ソフト株式会社(小中学校向け学習・校務支援ソフト)",
+      "lane": "b2b-saas",
+      "sourceTaskId": "S13-A",
+      "sentDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 0,
+      "note": "Cowork第3弾(30社)でフォーム送信済み(ops/cowork/COWORK-RESULT-03.md)。フォーム経由のためGmail threadIdなし。Gmail経由の教委26社等とは別セグメントとして返信率を計測すること。 自動応答22:50着信で到達確認済み。"
+    },
+    {
+      "id": "edtech-gakugei",
+      "org": "株式会社がくげい(タブレット学習アプリ・学校向け製品)",
+      "lane": "b2b-saas",
+      "sourceTaskId": "S13-A",
+      "sentDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 0,
+      "note": "Cowork第3弾(30社)でフォーム送信済み(ops/cowork/COWORK-RESULT-03.md)。フォーム経由のためGmail threadIdなし。Gmail経由の教委26社等とは別セグメントとして返信率を計測すること。 自動応答22:50着信で到達確認済み。"
+    },
+    {
+      "id": "edtech-digitalknowledge",
+      "org": "株式会社デジタル・ナレッジ(eラーニングLMS『KnowledgeDeliver for School』)",
+      "lane": "b2b-saas",
+      "sourceTaskId": "S13-A",
+      "sentDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 0,
+      "note": "Cowork第3弾(30社)でフォーム送信済み(ops/cowork/COWORK-RESULT-03.md)。フォーム経由のためGmail threadIdなし。Gmail経由の教委26社等とは別セグメントとして返信率を計測すること。 自動応答23:09着信で到達確認済み。必須セレクト4項目が未選択のまま送信された可能性があったが、自動応答が届いておりサーバ側では受理されている。"
+    },
+    {
+      "id": "moshi-gakuyu-mie",
+      "org": "学悠出版株式会社(三重ぜんけん模試・岐阜全県模試運営)",
+      "lane": "b2b-saas",
+      "sourceTaskId": "S13-A",
+      "sentDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 0,
+      "note": "Cowork第3弾はフォーム文字数制限で未着手のまま終了したが、同日22:15にBusinessプラン新設のお知らせをGmail経由で別途送信済み(ops/cowork/COWORK-RESULT-03.md)。フォームからの重複送信は行わない。"
     }
   ]
 }
