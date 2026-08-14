@@ -585,10 +585,11 @@
       "lane": "kyoiku-i",
       "sourceTaskId": "X-14",
       "sentDate": "2026-08-12",
-      "status": "awaiting",
+      "lastContactDate": "2026-08-14",
+      "status": "declined",
       "followupCount": 0,
       "threadId": "19ff05c496bf0708",
-      "note": "同上・名古屋市立高校向け。"
+      "note": "同上・名古屋市立高校向け。2026-08-14 18:24着信でリンク掲載を明示的に拒否(理由の説明なし・簡潔な定型文)。都道府県教委4件と同型の結果=市区町村教委でも同じ内規が適用される可能性を示す最初のデータ点(LOOP_CONTRACT §3-6の「未検証のまま残っている主体」に記録)。"
     },
     {
       "id": "kyoiku-fukuoka-shi-0812",
@@ -941,9 +942,10 @@
       "lane": "b2b-saas",
       "sourceTaskId": "S13-A",
       "sentDate": "2026-08-14",
-      "status": "awaiting",
+      "lastContactDate": "2026-08-14",
+      "status": "declined",
       "followupCount": 0,
-      "note": "Cowork第2弾(30社)でフォーム送信済み(ops/cowork/COWORK-RESULT-02.md)。フォーム経由のためGmail threadIdなし。第1弾10社・Gmail経由セグメントとは別に返信率を計測すること。"
+      "note": "Cowork第2弾(30社)でフォーム送信済み(ops/cowork/COWORK-RESULT-02.md)。フォーム経由のためGmail threadIdなし。第1弾10社・Gmail経由セグメントとは別に返信率を計測すること。2026-08-14 18:56着信で丁重に見送り(理由: 代表多忙で打ち合わせ日程調整が困難・現時点で具体的な連携は難しい)。GitHubまで確認した上での好意的な断りで、技術力への言及・応援コメント付き。実害なし・追撃不要。"
     }
   ]
 }
