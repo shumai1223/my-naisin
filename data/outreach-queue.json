@@ -5085,6 +5085,21 @@
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5",
       "subject": "【情報提供】中学生が独学で開発した内申点計算サイトについて",
       "body": "株式会社バレクセル ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、現役中学生エンジニアのしゅうまいと申します。\n\n47都道府県すべての教育委員会が公表する入学者選抜の一次資料を自分で読み解き、独学でプログラミングを学んでこのサイトを開発・運営しています（https://my-naishin.com）。公開から数ヶ月で検索流入が伸び、月間数千クリック規模の利用をいただくまでになりました。\n\n貴社が運営される高校受験情報サイト「スタディ」と当サイトは対象読者・領域が近いと拝見し、情報提供としてご連絡いたしました。利用者の同意のもとで匿名集計した「全国の中学生の内申点・偏差値の分布データ」も公開しております（https://my-naishin.com/stats）。もしご興味をお持ちいただけましたら、ご紹介・データ連携等どのような形でも対応いたします。\n\nしゅうまい / My Naishin 運営（中学生・個人開発）\nnaishin.dev@gmail.com\nhttps://my-naishin.com"
+    },
+    {
+      "id": "media-impress-kodomotoit",
+      "org": "株式会社インプレス(教育ICTメディア「こどもとIT」編集部)",
+      "lane": "b2b-saas",
+      "channel": "email",
+      "contact": "edu-watch@impress.co.jp",
+      "contactClass": "b2b",
+      "evidence": "edu.watch.impress.co.jp(こどもとIT)の記事ページを直接WebFetchで確認。『プレスリリースなど、情報をご提供いただける場合は、以下のメールアドレスまでお寄せいただけますよう、お願いいたします』と明記されたedu-watch@impress.co.jpを実在確認。株式会社インプレス運営の教育ICT専門メディア",
+      "verifiedAt": "2026-08-14",
+      "status": "queued",
+      "addedAt": "2026-08-14",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5",
+      "subject": "【情報提供】47都道府県対応・内申点計算サイトをAI/API連携も見据えて公開",
+      "body": "こどもとIT編集部 ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、現役中学生エンジニアのしゅうまいと申します。\n\n47都道府県すべての教育委員会が公表する入学者選抜の一次資料を自分で読み解き、独学でプログラミングを学んでこのサイトを開発・運営しています（https://my-naishin.com）。内申点計算方式をREST API / MCP（AIエージェント向け標準プロトコル）の両方で公開しており、ChatGPTやClaude等のAIが受験相談に答える際に一次データとして引用できる設計です（https://my-naishin.com/developers）。\n\n教育分野でAIエージェント接続を前提にデータを公開している事例はまだ少なく、教育ICTの文脈で貴メディアにてご紹介いただけないかと思いご連絡いたしました。取材等どのような形でも対応いたします。\n\nしゅうまい / My Naishin 運営（中学生・個人開発）\nnaishin.dev@gmail.com\nhttps://my-naishin.com"
     }
   ]
 }
