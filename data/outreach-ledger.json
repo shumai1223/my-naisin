@@ -946,6 +946,56 @@
       "status": "declined",
       "followupCount": 0,
       "note": "Cowork第2弾(30社)でフォーム送信済み(ops/cowork/COWORK-RESULT-02.md)。フォーム経由のためGmail threadIdなし。第1弾10社・Gmail経由セグメントとは別に返信率を計測すること。2026-08-14 18:56着信で丁重に見送り(理由: 代表多忙で打ち合わせ日程調整が困難・現時点で具体的な連携は難しい)。GitHubまで確認した上での好意的な断りで、技術力への言及・応援コメント付き。実害なし・追撃不要。"
+    },
+    {
+      "id": "edtech-nativecamp-school",
+      "org": "株式会社NativeCamp(ネイティブキャンプ・教育機関向け英会話)",
+      "lane": "b2b-saas",
+      "sourceTaskId": "S13-A",
+      "sentDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 0,
+      "note": "フォーム送信確認メールを19fff181caddbc52で受信(2026-08-14 16:06 JST・corporate-support@nativecamp.co.jp)。queueではqueuedのまま未反映だったため本セッションでledgerへ反映しqueueから削除。フォーム経由のためGmail threadIdなし。"
+    },
+    {
+      "id": "juku-kawaijuku-keinet-plus",
+      "org": "学校法人河合塾(Kei-Net Plus・教育関係者向け情報サイト)",
+      "lane": "b2b-saas",
+      "sourceTaskId": "S13-A",
+      "sentDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 0,
+      "note": "フォーム送信確認メールを19fff1e3be5dc921で受信(2026-08-14 16:08 JST・keinet-plus@kawaijuku.jp)。queueではcandidateのまま未反映だったため本セッションでledgerへ反映しqueueから削除。フォーム経由のためGmail threadIdなし。"
+    },
+    {
+      "id": "edtech-gmomedia-coeteco-manager",
+      "org": "GMOメディア株式会社(スクール管理システム『コエテコマネージャー byGMO』)",
+      "lane": "b2b-saas",
+      "sourceTaskId": "S13-A",
+      "sentDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 0,
+      "note": "フォーム送信確認メールを19fffd277985d366で受信(2026-08-14 19:30 JST・no-reply@coeteco.jp)。queueではqueuedのまま未反映だったため本セッションでledgerへ反映しqueueから削除。フォーム経由のためGmail threadIdなし。"
+    },
+    {
+      "id": "juku-johnan-edubiz",
+      "org": "株式会社城南進学研究社(城南コベッツ・教育関係者向けソリューションサイト)",
+      "lane": "b2b-saas",
+      "sourceTaskId": "S13-A",
+      "sentDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 0,
+      "note": "フォーム送信確認メールを19fffd20fe6b31de で受信(2026-08-14 19:29 JST・info@edu-biz.johnan.jp)。queueではqueuedのまま未反映だったため本セッションでledgerへ反映しqueueから削除。フォーム経由のためGmail threadIdなし。"
+    },
+    {
+      "id": "juku-eikoh-media",
+      "org": "株式会社栄光(栄光ゼミナール・取材/広報窓口)",
+      "lane": "b2b-saas",
+      "sourceTaskId": "S13-A",
+      "sentDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 0,
+      "note": "フォーム送信確認メールを2件受信(19fff1a1b9981199=2026-08-14 16:08 JST、19fffd2603f33167=同19:30 JST・いずれもinformation-desk@eikoh-seminar.com)。誤って2回送信された可能性が高いが実害小さいためそのまま1エントリとして記録。queueではqueuedのまま未反映だったため本セッションでledgerへ反映しqueueから削除。フォーム経由のためGmail threadIdなし。"
     }
   ]
 }

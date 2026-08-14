@@ -155,7 +155,10 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // 2026-08-14続き16: b2b-saas残candidateのうちform channel・本文ありの9件をWebFetch再確認の上
     // queuedへ昇格(chuoh-kyouiku/nativecamp/umedai-sdgs-awards/suzukisoft/iizuna-shoten/
     // okayama-kangaerukai/ichishin-press/private-education-org/smartrador・137→146)。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(146);
+    // 2026-08-14続き17: Gmail受信箱のフォーム送信確認メール5件(nativecamp/kawaijuku-keinet-plus/
+    // gmomedia-coeteco-manager/johnan-edubiz/eikoh-media)を検知し、queueに未反映のまま実際は送信済み
+    // だったと判明。ledgerへstatus:'awaiting'で移設しqueueから削除(146→142・queued4件減)。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(142);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {
