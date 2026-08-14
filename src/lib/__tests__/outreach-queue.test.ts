@@ -108,7 +108,7 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     }
   });
 
-  it('136件がqueued(教委13[email3+form10]+メディアemail9+メディアform5+個人塾line4+npo4+EdTech校務支援8+本文既存済み93の昇格)', () => {
+  it('137件がqueued(教委13[email3+form10]+メディアemail9+メディアform5+個人塾line4+npo4+EdTech校務支援8+本文既存済み94の昇格)', () => {
     // 2026-08-13: 教委email26件は8/6に送信済みでledger側(kyoiku-*-0806)に記録済みの重複だったため
     // queueから削除(outreach-queue.tsの設計「送信済みはledgerへ移しqueueから除外する」に合わせた)。
     // 残る教委emailはlane9-*(政令市3件)のみ・教委formの10件は未送信のため変更なし。
@@ -150,7 +150,9 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // 「スタディ」運営)を発見・本文作成のうえ昇格(134→135)。
     // 2026-08-14続き14: 新規candidate media-impress-kodomotoit(株式会社インプレス・教育ICTメディア
     // 「こどもとIT」)を発見・本文作成のうえ昇格(135→136)。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(136);
+    // 2026-08-14続き15: 新規candidate media-clisk-tsuushinsei-navi(株式会社クリスク・通信制高校ナビ/
+    // 不登校サポートナビ運営)を発見・本文作成のうえ昇格(136→137)。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(137);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {
