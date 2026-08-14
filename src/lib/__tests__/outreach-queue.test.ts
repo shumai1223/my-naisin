@@ -162,7 +162,10 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // (142→141)。
     // 2026-08-14続き19: 同様にjuku-sprix-ir(株式会社スプリックス)の送信確認メールを検知し
     // ledgerへ移設(141→140)。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(140);
+    // 2026-08-14続き20: edtech-faboc-jukumail(ファボック)をクエリパラメータ無しのURL
+    // (contactus.php?cate_id=5 → contactus.php)で再確認し有効な自由記述欄を確認、queuedへ昇格
+    // (140→141)。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(141);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {
