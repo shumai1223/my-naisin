@@ -1510,9 +1510,11 @@
       "contactClass": "b2b",
       "evidence": "公式サイトの`/11_copyright/inquiry.html`をcurlで取得した生HTMLに『図書館に関する問合せはこちら』の見出し直下にlibrary@nier.go.jpが記載されていることを直接確認。同ページの一般問合せ窓口nier-info@mext.go.jpは意見・要望への個別回答なしと明記されているため、資料・データの取扱いに関する問合せは図書館窓口の方が適合度が高いと判断",
       "verifiedAt": "2026-08-11",
-      "status": "candidate",
+      "status": "queued",
       "addedAt": "2026-08-11",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9",
+      "subject": "【情報提供】公立高校入試・内申点計算データのご案内(My Naishin)",
+      "body": "国立教育政策研究所　図書館ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の教育委員会が公表する公立高校入試の入学者選抜方式(内申点の計算方法・総合得点の算出方式等)を独自に整理し、一次資料の出典を明記したうえでウェブサイトとして公開しています(https://my-naishin.com)。あわせて、サイト利用者の同意のもとで匿名集計した「全国の中学生の内申点・偏差値の分布データ」も公開しております(https://my-naishin.com/stats)。\n\n貴所がご専門とされる教育政策・教育制度の研究において、都道府県ごとに異なる入試制度の実務データ(内申点の計算方法・総合得点の算出方式等、一次資料の出典を明記して整理したもの)が資料としてお役に立つ場面があるのではと考え、情報提供としてご連絡いたしました。データの参照・引用等でお力になれることがあれば幸いです。\n\nご不要でしたら、このメールもそのまま読み流していただければ結構です。\n\nしゅうまい / My Naishin 運営(中学生・個人開発)\nnaishin.dev@gmail.com\nhttps://my-naishin.com"
     },
     {
       "id": "lane9-nits-soumu",
@@ -1523,9 +1525,11 @@
       "contactClass": "b2b",
       "evidence": "公式お問い合わせページ`/contact/`をcurlで取得した生HTMLで確認。研修/教材/連携等の個別窓口が事業別に分かれる中、末尾の『総合窓口』(総務企画課)に『上記にない内容についてはこちらにお問い合わせください』と明記されsoumu@ml.nits.go.jpが記載されている。データ提供・引用等の個別事業に当てはまらない用件のため総合窓口を採用",
       "verifiedAt": "2026-08-11",
-      "status": "candidate",
+      "status": "queued",
       "addedAt": "2026-08-11",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9",
+      "subject": "【情報提供】公立高校入試・内申点計算データのご案内(My Naishin)",
+      "body": "独立行政法人教職員支援機構　総合窓口ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の教育委員会が公表する公立高校入試の入学者選抜方式(内申点の計算方法・総合得点の算出方式等)を独自に整理し、一次資料の出典を明記したうえでウェブサイトとして公開しています(https://my-naishin.com)。あわせて、サイト利用者の同意のもとで匿名集計した「全国の中学生の内申点・偏差値の分布データ」も公開しております(https://my-naishin.com/stats)。\n\n貴機構が取り組まれる教員研修等において、全国47都道府県の入試選抜制度を一次資料ベースで比較整理したデータが、研修教材や資料作成の参考になる場面があるのではと考え、情報提供としてご連絡いたしました。データの参照・引用等でお力になれることがあれば幸いです。\n\nご不要でしたら、このメールもそのまま読み流していただければ結構です。\n\nしゅうまい / My Naishin 運営(中学生・個人開発)\nnaishin.dev@gmail.com\nhttps://my-naishin.com"
     },
     {
       "id": "lane9-yokohama-koko",

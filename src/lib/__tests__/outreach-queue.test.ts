@@ -178,7 +178,9 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // 教育家庭新聞社/学事出版/教育新聞社/小学館/朝日中高生新聞/プレジデントFamily/こどもまなび☆ラボ/
     // 日経xwoman/中学受験情報局/塾ジャーナル/全私学新聞)に個別本文を書きqueuedへ昇格(134→147)。
     // いずれも2026-08-12にWebFetchで直接確認済みのcontact/evidenceを再利用(新規サイト訪問なし)。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(147);
+    // 2026-08-15続き: kyoiku-iレーンの独立行政法人2件(国立教育政策研究所図書館/教職員支援機構総合窓口)に
+    // npo3件パイロットと同型の「情報提供・データ引用」フレーミングで本文を書きqueuedへ昇格(147→149)。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(149);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {
