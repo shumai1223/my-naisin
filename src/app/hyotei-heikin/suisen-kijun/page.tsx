@@ -247,9 +247,9 @@ export default function HyoteiSuisenKijunPage() {
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white px-6 py-6 text-center shadow-sm">
             <div className="mb-1 text-sm font-bold text-slate-700">評定を支える、定期テスト対策</div>
             <div className="mb-4 text-xs leading-relaxed text-slate-500">
-              評定の土台＝定期テスト。<AffiliateAd id="sora-juku-text" hideLabel />（PR）で苦手教科を安定させる
+              評定の土台＝定期テスト。<AffiliateAd placement="hyotei-heikin-suisen-kijun" id="sora-juku-text" hideLabel />（PR）で苦手教科を安定させる
             </div>
-            <AffiliateAd id="sora-juku-banner" />
+            <AffiliateAd placement="hyotei-heikin-suisen-kijun" id="sora-juku-banner" />
           </section>
 
           {/* 関連ツール */}

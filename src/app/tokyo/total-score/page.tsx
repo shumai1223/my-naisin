@@ -341,9 +341,9 @@ export default function TokyoTotalScorePage() {
               AIが弱点を自動分析する個別指導
             </div>
             <div className="text-xs text-slate-500 mb-4 leading-relaxed">
-              <AffiliateAd id="atama-text" hideLabel />（PR）の無料体験で、今の学力に必要な対策を確認できます。
+              <AffiliateAd placement="total-score" id="atama-text" hideLabel />（PR）の無料体験で、今の学力に必要な対策を確認できます。
             </div>
-            <AffiliateAd id="atama-banner" />
+            <AffiliateAd placement="total-score" id="atama-banner" />
           </section>
 
           {/* 合格基準点シミュレーション（SEO: 都立高校 合格基準点 シュミレーション / 都立 点数 計算） */}

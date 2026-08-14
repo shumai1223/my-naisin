@@ -261,9 +261,9 @@ export default function AichiTotalScorePage() {
               AIが弱点を自動分析する個別指導
             </div>
             <div className="text-xs text-slate-500 mb-4 leading-relaxed">
-              <AffiliateAd id="atama-text" hideLabel />（PR）の無料体験で、今の学力に必要な対策を確認できます。
+              <AffiliateAd placement="total-score" id="atama-text" hideLabel />（PR）の無料体験で、今の学力に必要な対策を確認できます。
             </div>
-            <AffiliateAd id="atama-banner" />
+            <AffiliateAd placement="total-score" id="atama-banner" />
           </section>
 
           {/* 保護者向けリード（換金の本命：資料請求送客。愛知は関東/関西の地盤塾が無いため全国オンライン対応のそら塾へ。

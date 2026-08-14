@@ -295,7 +295,7 @@ export default async function PrefecturePage({ params }: PrefecturePageProps) {
                 <div className="text-[11px] text-slate-500 mb-3 leading-relaxed">
                   内申点を上げる<br />毎日の学習習慣づくりに
                 </div>
-                <AffiliateAd id="shoin-banner" />
+                <AffiliateAd placement="prefecture-top" id="shoin-banner" />
               </div>
             </div>
           </div>

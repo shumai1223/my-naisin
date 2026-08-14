@@ -346,7 +346,7 @@ export function ResultSection({
                       内申点が高い層は、当日点の取り切りで合否が決まります。Z会の難関校受験コースは、応用問題対策・記述力育成・添削指導で、トップ校合格者の定番教材。
                     </p>
                     <div className="text-xs">
-                      <AffiliateAd id="zkai-text-advanced" hideLabel />（PR）
+                      <AffiliateAd placement="home" id="zkai-text-advanced" hideLabel />（PR）
                     </div>
                   </div>
                 </div>
@@ -366,8 +366,8 @@ export function ResultSection({
                       あと一押しで上位校が見える層。テキスト＋添削で定期テスト対策が万全のZ会と、月額2,178円で映像授業見放題のスタディサプリの組み合わせがコスパ最高。
                     </p>
                     <div className="text-xs space-y-1">
-                      <div><AffiliateAd id="zkai-text-middle" hideLabel />（PR）── テキスト＋添削で内申＋偏差値を伸ばす</div>
-                      <div><AffiliateAd id="sapuri-text" hideLabel /> ── 月額2,178円で5教科＋実技の映像授業</div>
+                      <div><AffiliateAd placement="home" id="zkai-text-middle" hideLabel />（PR）── テキスト＋添削で内申＋偏差値を伸ばす</div>
+                      <div><AffiliateAd placement="home" id="sapuri-text" hideLabel /> ── 月額2,178円で5教科＋実技の映像授業</div>
                     </div>
                   </div>
                 </div>
@@ -387,8 +387,8 @@ export function ResultSection({
                       苦手教科の理解不足が原因で評定が伸び悩んでいる層。映像授業で「分からない」を解消し、個別指導で学習習慣を作るのが最短ルート。
                     </p>
                     <div className="grid gap-2 md:grid-cols-2">
-                      <AffiliateAd id="sapuri-banner-300" />
-                      <AffiliateAd id="shoin-banner" />
+                      <AffiliateAd placement="home" id="sapuri-banner-300" />
+                      <AffiliateAd placement="home" id="shoin-banner" />
                     </div>
                   </div>
                 </div>
@@ -408,8 +408,8 @@ export function ResultSection({
                       学習習慣が確立していない層は、まず「毎日机に向かう」を作ることが最優先。個別指導でつまずきポイントを潰しながら、映像授業で基礎を理解する2段構えが効果的。
                     </p>
                     <div className="grid gap-2 md:grid-cols-2">
-                      <AffiliateAd id="shoin-banner" />
-                      <AffiliateAd id="sapuri-banner-300" />
+                      <AffiliateAd placement="home" id="shoin-banner" />
+                      <AffiliateAd placement="home" id="sapuri-banner-300" />
                     </div>
                   </div>
                 </div>
@@ -431,7 +431,7 @@ export function ResultSection({
               </div>
               {/* Desktop: 728x90バナー */}
               <div className="hidden md:block">
-                <AffiliateAd id="zkai-banner" />
+                <AffiliateAd placement="home" id="zkai-banner" />
               </div>
               {/* Mobile: ボタン化したCTA（タップしやすい44px以上） */}
               <div className="md:hidden">
@@ -442,7 +442,7 @@ export function ResultSection({
                   <div className="mb-3 text-xs text-blue-700 leading-relaxed">
                     難関校対策にも対応。テキスト＋添削で内申＋偏差値を伸ばす定番教材。
                   </div>
-                  <AffiliateAd
+                  <AffiliateAd placement="home"
                     id="zkai-text-request"
                     hideLabel
                     linkClassName="block w-full rounded-xl bg-blue-600 px-5 py-3.5 text-center text-base font-bold text-white shadow-md shadow-blue-500/30 active:bg-blue-700"
@@ -451,7 +451,7 @@ export function ResultSection({
                 </div>
               </div>
               <div className="mt-3 hidden text-xs md:block">
-                <AffiliateAd id="zkai-text-request" className="mx-1" hideLabel />（PR）から始められます
+                <AffiliateAd placement="home" id="zkai-text-request" className="mx-1" hideLabel />（PR）から始められます
               </div>
             </div>
           </Card>
@@ -472,7 +472,7 @@ export function ResultSection({
                   </div>
                 </div>
                 <div className="flex justify-center md:justify-end">
-                  <AffiliateAd id="sapuri-banner-300" />
+                  <AffiliateAd placement="home" id="sapuri-banner-300" />
                 </div>
               </div>
             </div>
@@ -685,8 +685,8 @@ export function ResultSection({
                 内申点を最大化したら、次は当日点。トップ校受験で実績ある通信教育の選択肢があります。
               </div>
               <div className="text-sm">
-                <AffiliateAd id="zkai-text-advanced" hideLabel />（PR）／
-                <AffiliateAd id="zkai-text-request" hideLabel />（PR）
+                <AffiliateAd placement="home" id="zkai-text-advanced" hideLabel />（PR）／
+                <AffiliateAd placement="home" id="zkai-text-request" hideLabel />（PR）
               </div>
             </div>
           </Card>
@@ -772,7 +772,7 @@ export function ResultSection({
               <div className="mb-4 text-xs text-slate-500">
                 スマホ・タブレットで学べる定番のオンライン学習サービス
               </div>
-              <AffiliateAd id="sapuri-banner-300" />
+              <AffiliateAd placement="home" id="sapuri-banner-300" />
             </div>
           </Card>
         </div>

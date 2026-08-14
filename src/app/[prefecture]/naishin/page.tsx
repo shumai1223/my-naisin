@@ -661,7 +661,7 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
                     トップ校を志望する場合、内申点だけでなく当日点の実力も鍵。現役東大・難関大生による学習コーチングで、難関校対策を伴走してもらう選択肢もあります。
                   </p>
                   <div className="text-sm">
-                    <AffiliateAd id="moshimo-studycoach" hideLabel />（PR）
+                    <AffiliateAd placement="naishin" id="moshimo-studycoach" hideLabel />（PR）
                   </div>
                 </div>
                 <div className="rounded-xl border border-emerald-100 bg-emerald-50/40 p-4">
@@ -670,7 +670,7 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
                     自宅でマンツーマンの個別指導を受けたいなら、ネット松陰塾の自立学習スタイルが選択肢になります。
                   </p>
                   <div className="flex justify-start">
-                    <AffiliateAd id="shoin-banner" centered={false} auditHide />
+                    <AffiliateAd placement="naishin" id="shoin-banner" centered={false} auditHide />
                   </div>
                 </div>
                 <div className="rounded-xl border border-sky-100 bg-sky-50/40 p-4">
@@ -678,25 +678,25 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
                   <p className="mb-3 text-xs text-sky-700 leading-relaxed">
                     先生1人に生徒2人まで。{prefecture.name}全域から受講できるオンライン個別指導塾です。
                   </p>
-                  <AffiliateAd id="sora-juku-banner" auditHide />
+                  <AffiliateAd placement="naishin" id="sora-juku-banner" auditHide />
                 </div>
                 {/* 校舎所在地の実態に合わせる：関東=森塾／関西=個別指導キャンパス（旧コードは大阪にも関東限定の森塾を誤表示していた） */}
                 {['tokyo', 'kanagawa', 'saitama', 'chiba', 'ibaraki', 'tochigi', 'gunma'].includes(prefectureCode) && (
                   <div className="rounded-xl border border-orange-100 bg-orange-50/40 p-4">
                     <div className="mb-2 text-sm font-bold text-orange-900">教室で学ぶ個別指導</div>
                     <p className="mb-3 text-xs text-orange-700 leading-relaxed">
-                      {prefecture.name}内に教室がある<AffiliateAd id="morijuku-text" hideLabel />（PR）。先生1人に生徒2人までの個別指導で定期テスト対策。
+                      {prefecture.name}内に教室がある<AffiliateAd placement="naishin" id="morijuku-text" hideLabel />（PR）。先生1人に生徒2人までの個別指導で定期テスト対策。
                     </p>
-                    <AffiliateAd id="morijuku-banner" />
+                    <AffiliateAd placement="naishin" id="morijuku-banner" />
                   </div>
                 )}
                 {['osaka', 'hyogo', 'kyoto', 'nara', 'shiga', 'wakayama'].includes(prefectureCode) && (
                   <div className="rounded-xl border border-orange-100 bg-orange-50/40 p-4">
                     <div className="mb-2 text-sm font-bold text-orange-900">教室で学ぶ個別指導</div>
                     <p className="mb-3 text-xs text-orange-700 leading-relaxed">
-                      {prefecture.name}内に教室がある<AffiliateAd id="campus-text" hideLabel />（PR）。先生1人に生徒2人までの個別指導で定期テスト対策。
+                      {prefecture.name}内に教室がある<AffiliateAd placement="naishin" id="campus-text" hideLabel />（PR）。先生1人に生徒2人までの個別指導で定期テスト対策。
                     </p>
-                    <AffiliateAd id="campus-banner" />
+                    <AffiliateAd placement="naishin" id="campus-banner" />
                   </div>
                 )}
               </div>

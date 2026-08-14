@@ -242,7 +242,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           <div className="mb-8 rounded-xl border border-amber-200 bg-amber-50/60 px-4 py-3">
             <p className="text-xs leading-relaxed text-slate-700">
               <span className="text-slate-500">関連サービス：</span>
-              <AffiliateAd id="atama-text" className="mx-1" hideLabel />
+              <AffiliateAd placement="blog-article" id="atama-text" className="mx-1" hideLabel />
               （PR）AIが弱点を自動分析する個別指導の無料体験。
             </p>
           </div>

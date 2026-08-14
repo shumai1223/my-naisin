@@ -220,9 +220,9 @@ export default function HensachiMoshiPage() {
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white px-6 py-6 text-center shadow-sm">
             <div className="mb-1 text-sm font-bold text-slate-700">模試の点数を、確実に伸ばす</div>
             <div className="mb-4 text-xs leading-relaxed text-slate-500">
-              苦手分野だけをピンポイントで底上げする<AffiliateAd id="sora-juku-text" hideLabel />（PR）。無料体験あり。
+              苦手分野だけをピンポイントで底上げする<AffiliateAd placement="hensachi-moshi" id="sora-juku-text" hideLabel />（PR）。無料体験あり。
             </div>
-            <AffiliateAd id="sora-juku-banner" />
+            <AffiliateAd placement="hensachi-moshi" id="sora-juku-banner" />
           </section>
 
           {/* クラスタナビ */}

@@ -106,8 +106,8 @@ export default function ComparisonClient() {
                   複数県の制度を比較するレベルの志望校検討なら、難関校受験対策に強い通信教育で実力を伸ばす選択肢があります。
                 </div>
                 <div className="text-sm">
-                  <AffiliateAd id="zkai-text-advanced" hideLabel />（PR）／
-                  <AffiliateAd id="zkai-text-request" hideLabel />（PR）
+                  <AffiliateAd placement="comparison" id="zkai-text-advanced" hideLabel />（PR）／
+                  <AffiliateAd placement="comparison" id="zkai-text-request" hideLabel />（PR）
                 </div>
               </div>
             </section>
@@ -284,11 +284,11 @@ export default function ComparisonClient() {
                   地域ごとの内申制度の違いを把握したら、次は実際の学習に進みましょう。映像授業のスタディサプリは全教科の単元別講義で苦手を集中対策、ネット松陰塾は自宅でマンツーマンの個別指導が受けられます。
                 </p>
                 <div className="mt-3 flex items-center gap-3">
-                  <AffiliateAd id="shoin-banner" centered={false} />
+                  <AffiliateAd placement="comparison" id="shoin-banner" centered={false} />
                 </div>
               </div>
               <div className="flex justify-center md:justify-end">
-                <AffiliateAd id="sapuri-banner-468" />
+                <AffiliateAd placement="comparison" id="sapuri-banner-468" />
               </div>
             </div>
           </section>

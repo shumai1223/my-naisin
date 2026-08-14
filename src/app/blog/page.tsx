@@ -90,14 +90,14 @@ export default function BlogPage() {
               記事と一緒に活用したい学習教材
             </div>
             <div className="text-xs text-slate-500 mb-5 leading-relaxed max-w-xl mx-auto">
-              内申点アップの基本は毎日の積み重ね。<AffiliateAd id="sapuri-text" hideLabel />（月額2,178円・無料体験あり）と
-              <AffiliateAd id="zkai-text-middle" className="ml-1" hideLabel />（PR）が中学生に最も使われている定番教材です。
+              内申点アップの基本は毎日の積み重ね。<AffiliateAd placement="blog" id="sapuri-text" hideLabel />（月額2,178円・無料体験あり）と
+              <AffiliateAd placement="blog" id="zkai-text-middle" className="ml-1" hideLabel />（PR）が中学生に最も使われている定番教材です。
             </div>
             <div className="hidden md:block">
-              <AffiliateAd id="zkai-banner" />
+              <AffiliateAd placement="blog" id="zkai-banner" />
             </div>
             <div className="md:hidden">
-              <AffiliateAd id="sapuri-banner-300" />
+              <AffiliateAd placement="blog" id="sapuri-banner-300" />
             </div>
           </div>
 

@@ -322,13 +322,13 @@ export default function HensachiPage() {
               この偏差値を上げる、最短ルート
             </div>
             <div className="text-xs text-slate-600 mb-4 leading-relaxed">
-              <AffiliateAd id="atama-text" hideLabel />（PR）— AIが弱点を自動分析する個別指導の無料体験
+              <AffiliateAd placement="hensachi" id="atama-text" hideLabel />（PR）— AIが弱点を自動分析する個別指導の無料体験
             </div>
             <div className="hidden md:block">
-              <AffiliateAd id="atama-banner" />
+              <AffiliateAd placement="hensachi" id="atama-banner" />
             </div>
             <div className="md:hidden">
-              <AffiliateAd
+              <AffiliateAd placement="hensachi"
                 id="atama-text"
                 hideLabel
                 ctaText="無料体験を申し込む（PR）"
@@ -665,9 +665,9 @@ export default function HensachiPage() {
               全国どこでも受けられるオンライン個別指導
             </div>
             <div className="text-xs text-slate-500 mb-4 leading-relaxed">
-              苦手教科だけをピンポイントで底上げする<AffiliateAd id="sora-juku-text" hideLabel />（PR）。無料体験あり。
+              苦手教科だけをピンポイントで底上げする<AffiliateAd placement="hensachi" id="sora-juku-text" hideLabel />（PR）。無料体験あり。
             </div>
-            <AffiliateAd id="sora-juku-banner" />
+            <AffiliateAd placement="hensachi" id="sora-juku-banner" />
           </section>
 
           {/* 中間広告：atama+ */}
@@ -676,9 +676,9 @@ export default function HensachiPage() {
               AIが苦手を自動分析・個別カリキュラムで偏差値アップ
             </div>
             <div className="text-xs text-slate-500 mb-4 leading-relaxed">
-              マンツーマンAI×担任サポート制の<AffiliateAd id="atama-text" hideLabel />（PR）。無料体験あり。
+              マンツーマンAI×担任サポート制の<AffiliateAd placement="hensachi" id="atama-text" hideLabel />（PR）。無料体験あり。
             </div>
-            <AffiliateAd id="atama-banner" />
+            <AffiliateAd placement="hensachi" id="atama-banner" />
           </section>
 
           {/* 偏差値と内申点の関係 */}

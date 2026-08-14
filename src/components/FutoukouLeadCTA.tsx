@@ -41,7 +41,7 @@ export function FutoukouLeadCTA({ className = '' }: { className?: string }) {
           <p className="mb-3 text-xs leading-relaxed text-rose-800/90">
             クラスジャパン小中学園は、自宅から参加できるオンラインのフリースクール。在籍校と連携して「出席扱い」を目指せるのが特長です。
           </p>
-          <AffiliateAd
+          <AffiliateAd placement="blog"
             id="moshimo-classjapan"
             hideLabel
             linkClassName="block w-full rounded-xl bg-rose-600 px-5 py-3 text-center text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-rose-700 active:scale-95"
@@ -59,7 +59,7 @@ export function FutoukouLeadCTA({ className = '' }: { className?: string }) {
           <p className="mb-3 text-xs leading-relaxed text-pink-800/90">
             ティントルは不登校専門のオンライン個別指導。学び直しから受験対策まで、お子さまのペースに合わせて先生がマンツーマンで伴走します。
           </p>
-          <AffiliateAd
+          <AffiliateAd placement="blog"
             id="moshimo-tintoru"
             hideLabel
             linkClassName="block w-full rounded-xl bg-pink-600 px-5 py-3 text-center text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-pink-700 active:scale-95"

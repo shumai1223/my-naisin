@@ -186,16 +186,16 @@ export default function PrefecturesPage() {
               47都道府県すべてに対応する通信教育
             </div>
             <div className="text-xs text-slate-500 mb-5 leading-relaxed max-w-xl mx-auto">
-              地域差のない高品質な学習教材で、内申点アップと志望校合格を両立。<AffiliateAd id="zkai-text-middle" hideLabel />（PR）は全国の中学生に支持されています。
+              地域差のない高品質な学習教材で、内申点アップと志望校合格を両立。<AffiliateAd placement="prefectures" id="zkai-text-middle" hideLabel />（PR）は全国の中学生に支持されています。
             </div>
             <div className="hidden md:block">
-              <AffiliateAd id="zkai-banner" />
+              <AffiliateAd placement="prefectures" id="zkai-banner" />
             </div>
             <div className="md:hidden">
-              <AffiliateAd id="sapuri-banner-300" />
+              <AffiliateAd placement="prefectures" id="sapuri-banner-300" />
             </div>
             <div className="mt-4 text-xs">
-              <AffiliateAd id="zkai-text-request" className="mx-1" hideLabel />（PR）で詳細を確認
+              <AffiliateAd placement="prefectures" id="zkai-text-request" className="mx-1" hideLabel />（PR）で詳細を確認
             </div>
           </div>
 

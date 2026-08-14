@@ -275,13 +275,13 @@ export default function HyoteiHeikinPage() {
               この評定平均を上げるなら
             </div>
             <div className="text-xs text-slate-600 mb-4 leading-relaxed">
-              内申点アップに直結する学習なら<AffiliateAd id="atama-text" hideLabel />（PR）。AIが弱点を自動分析する個別指導の無料体験。
+              内申点アップに直結する学習なら<AffiliateAd placement="hyotei-heikin" id="atama-text" hideLabel />（PR）。AIが弱点を自動分析する個別指導の無料体験。
             </div>
             <div className="hidden md:block">
-              <AffiliateAd id="atama-banner" />
+              <AffiliateAd placement="hyotei-heikin" id="atama-banner" />
             </div>
             <div className="md:hidden">
-              <AffiliateAd
+              <AffiliateAd placement="hyotei-heikin"
                 id="atama-text"
                 hideLabel
                 ctaText="無料体験を申し込む（PR）"
@@ -527,7 +527,7 @@ export default function HyoteiHeikinPage() {
               <div className="text-[11px] text-slate-500 mb-3 leading-relaxed">
                 内申点アップに直結する学習習慣
               </div>
-              <AffiliateAd id="shoin-banner" />
+              <AffiliateAd placement="hyotei-heikin" id="shoin-banner" />
             </div>
             <div className="rounded-2xl border border-slate-200 bg-white px-5 py-5 text-center shadow-sm">
               <div className="text-xs font-bold text-slate-700 mb-1">
@@ -536,7 +536,7 @@ export default function HyoteiHeikinPage() {
               <div className="text-[11px] text-slate-500 mb-3 leading-relaxed">
                 先生1人に生徒2人まで・全国対応
               </div>
-              <AffiliateAd id="sora-juku-banner" />
+              <AffiliateAd placement="hyotei-heikin" id="sora-juku-banner" />
             </div>
           </section>
 
@@ -865,7 +865,7 @@ export default function HyoteiHeikinPage() {
               大学受験も評定平均が鍵｜高1から始める通信教育
             </div>
             <div className="text-xs text-emerald-700 mb-4 leading-relaxed">
-              総合型選抜・指定校推薦を狙うなら<AffiliateAd id="zkai-daigaku" hideLabel />（PR）や<AffiliateAd id="shinken-koukou" hideLabel placement="hyotei-koukou" />（PR）で高1から大学受験の基礎を固める
+              総合型選抜・指定校推薦を狙うなら<AffiliateAd placement="hyotei-heikin" id="zkai-daigaku" hideLabel />（PR）や<AffiliateAd id="shinken-koukou" hideLabel placement="hyotei-koukou" />（PR）で高1から大学受験の基礎を固める
             </div>
           </section>
 

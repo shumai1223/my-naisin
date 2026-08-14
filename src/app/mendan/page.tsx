@@ -242,7 +242,7 @@ export default function MendanPage() {
               </p>
               <p className="mt-2 text-xs text-slate-500">
                 英語が不安な場合は、
-                <AffiliateAd id="moshimo-rewrite" hideLabel linkClassName="font-bold text-blue-600 underline decoration-blue-300 underline-offset-2 hover:text-blue-700" />
+                <AffiliateAd placement="mendan" id="moshimo-rewrite" hideLabel linkClassName="font-bold text-blue-600 underline decoration-blue-300 underline-offset-2 hover:text-blue-700" />
                 （PR）で受験英語専門の無料相談もできます。
               </p>
             </div>
