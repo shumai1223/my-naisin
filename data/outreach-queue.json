@@ -5041,6 +5041,21 @@
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5",
       "subject": "【情報提供】中学生が独学で開発した内申点計算サイトについて",
       "body": "株式会社クリスク ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、現役中学生エンジニアのしゅうまいと申します。\n\n47都道府県すべての教育委員会が公表する入学者選抜の一次資料を自分で読み解き、独学でプログラミングを学んでこのサイトを開発・運営しています（https://my-naishin.com）。公開から数ヶ月で検索流入が伸び、月間数千クリック規模の利用をいただくまでになりました。\n\n貴社が運営される「通信制高校ナビ」「不登校サポートナビ」と当サイトは進路選択を検討する中学生・保護者という読者層が近いと拝見し、情報提供としてご連絡いたしました。利用者の同意のもとで匿名集計した「全国の中学生の内申点・偏差値の分布データ」も公開しております（https://my-naishin.com/stats）。もしご興味をお持ちいただけましたら、ご紹介・データ連携等どのような形でも対応いたします。\n\nしゅうまい / My Naishin 運営（中学生・個人開発）\nnaishin.dev@gmail.com\nhttps://my-naishin.com"
+    },
+    {
+      "id": "edtech-teachersmarket",
+      "org": "株式会社RECT(個人契約家庭教師マッチング掲示板『Teachers Market』)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://teachers-market.com/contact",
+      "subject": "内申点計算データAPI/MCPのご案内（My Naishin）",
+      "body": "株式会社RECT ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\n貴社が運営される「Teachers Market」は個人契約の家庭教師と生徒をマッチングするサービスと拝見しております。都道府県ごとに異なる内申点の自動計算をAPIで組み込むことで、登録されている先生方が生徒の志望校判定・指導計画を立てる際の参考資料をより具体的にできるのではと思いご連絡いたしました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com",
+      "contactClass": "b2b",
+      "evidence": "公式サイト(teachers-market.com)を直接WebFetchで確認。運営会社は株式会社RECT(フッターのコピーライト表記で確認)。お問い合わせフォーム(/contact)に自由記述の「お問い合わせ内容」欄があることを確認(会社名欄は無いが個人契約掲示板型のためスマートレーダー/マナリンクと同型のb2b-saas判定)。同型で調査したDIY(diy-education.com)はサービス停止済み、ASK(abilityfuse.co.jp/ask)は電話窓口のみでいずれも見送り。",
+      "verifiedAt": "2026-08-14",
+      "status": "candidate",
+      "addedAt": "2026-08-14",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4-online-katekyo"
     }
   ]
 }
