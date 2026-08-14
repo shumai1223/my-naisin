@@ -22,6 +22,7 @@ import {
   buildDiscordMessage,
   buildHealthSection,
   injectHealthSection,
+  yesterdayJst,
   HEALTH_EVENT_NAMES,
   type EventHealthCounts,
   type TruthCounts,
@@ -72,12 +73,6 @@ function fetchTruthCounts(): TruthCounts | null {
   }
 }
 
-function yesterdayUtc(): string {
-  const d = new Date();
-  d.setUTCDate(d.getUTCDate() - 1);
-  return d.toISOString().slice(0, 10);
-}
-
 async function fetchYesterdayCounts(date: string): Promise<EventHealthCounts> {
   const auth = getAuthedClient();
   const property = `properties/${getPropertyId()}`;
@@ -106,7 +101,7 @@ async function fetchYesterdayCounts(date: string): Promise<EventHealthCounts> {
 }
 
 async function main() {
-  const date = yesterdayUtc();
+  const date = yesterdayJst();
   const ga4 = await fetchYesterdayCounts(date);
   const truth = fetchTruthCounts();
   const section = buildHealthSection({ ga4, truth }, date);

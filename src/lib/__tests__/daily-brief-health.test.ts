@@ -3,6 +3,7 @@ import {
   buildHealthSection,
   injectHealthSection,
   judgeHealth,
+  yesterdayJst,
   type EventHealthCounts,
   type TruthCounts,
 } from '../daily-brief-health';
@@ -94,6 +95,31 @@ describe('buildDiscordMessage', () => {
   it('D1が取得できない場合はその旨を明記する', () => {
     const msg = buildDiscordMessage({ ga4: GA4_OK, truth: null }, '2026-08-01');
     expect(msg).toContain('D1から確定値を取得できず');
+  });
+});
+
+describe('yesterdayJst', () => {
+  afterEach(() => {
+    jest.useRealTimers();
+  });
+
+  it('毎朝7:30 JST実行時、JSTの前日日付を返す(UTC基準だと2日前になる回帰を防ぐ)', () => {
+    // 2026-08-14 07:30 JST = 2026-08-13 22:30 UTC。実際にこの時刻のcron実行で
+    // 2026-08-12(2日前)が表示される事故が2026-08-14に発生した([[fable5-loop-protocol]]記録)。
+    jest.useFakeTimers().setSystemTime(new Date('2026-08-13T22:30:00Z'));
+    expect(yesterdayJst()).toBe('2026-08-13');
+  });
+
+  it('日付境界をまたぐ深夜近く(23:59 JST)でも正しくJSTの前日を返す', () => {
+    // 2026-08-14 23:59 JST = 2026-08-14 14:59 UTC
+    jest.useFakeTimers().setSystemTime(new Date('2026-08-14T14:59:00Z'));
+    expect(yesterdayJst()).toBe('2026-08-13');
+  });
+
+  it('月をまたぐ場合も正しく前日を返す', () => {
+    // 2026-09-01 07:30 JST = 2026-08-31 22:30 UTC
+    jest.useFakeTimers().setSystemTime(new Date('2026-08-31T22:30:00Z'));
+    expect(yesterdayJst()).toBe('2026-08-31');
   });
 });
 

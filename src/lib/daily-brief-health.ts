@@ -140,6 +140,20 @@ export function buildDiscordMessage(input: HealthInput, dateLabel: string): stri
   ].join('\n');
 }
 
+/**
+ * JSTの「昨日」の日付を返す。
+ *
+ * 毎朝7:30 JST（=前日22:30 UTC）にcron実行されるため、UTC基準で「昨日」を計算すると
+ * JSTの2日前を指してしまう（2026-08-14判明・[[fable5-loop-protocol]]記録済み）。
+ * GA4プロパティの集計タイムゾーンもJSTのため、この関数の出力をそのままGA4クエリの
+ * dateRangeとブリーフィングの表示ラベルの両方に使う。
+ */
+export function yesterdayJst(): string {
+  const jstNow = new Date(Date.now() + 9 * 60 * 60 * 1000);
+  jstNow.setUTCDate(jstNow.getUTCDate() - 1);
+  return jstNow.toISOString().slice(0, 10);
+}
+
 const SECTION_START = '<!-- LAMBDA1_HEALTH_START -->';
 const SECTION_END = '<!-- LAMBDA1_HEALTH_END -->';
 
