@@ -57,6 +57,22 @@
 
 ## 対策（この順で効く）
 
+### ✅ 2026-08-14 23:4x **①は👤が設定済み（Exclude 方式を採用）**
+
+**Include は `*` のまま、Exclude に非デプロイ系ディレクトリを列挙**した。
+Include を絞る方式を採らなかったのは、**将来ビルドに必要な新しいフォルダが増えたときに
+静かにデプロイされなくなる**ため。**Exclude 方式は「知らないものは常にビルドする」側に倒れる。**
+（デプロイが1回余分に走るより、デプロイされない方が危険）
+
+除外したもの: `docs/* ops/* data/* logs/* reports/* backups/* migrations/* scripts/* tests/*
+test-results/* naishin-dataset/* wordpress-plugin/* github-repo-samples/* osaka_r4_test_xlsx/* .claude/* .github/*`
+
+⚠️ `@/data/...` は `src/data/` を指すため、**ルートの `data/` はビルドに関与しない**（確認済み）。
+
+**この commit 自体が docs のみの変更＝設定が効いていればビルドは走らない。**
+設定直前の最新デプロイは **2026-08-14T14:35:54Z**。この push 後にこれより新しいデプロイが
+出なければ成功。**残タスク: my-shingaku 側にも同じ設定を入れる。**
+
 ### ① Build watch paths を設定する【👤・最も効く】
 
 Cloudflare ダッシュボード → Workers & Pages → my-naishin → **Settings → Builds → Build watch paths**
