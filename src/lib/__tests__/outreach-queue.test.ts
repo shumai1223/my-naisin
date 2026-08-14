@@ -108,7 +108,7 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     }
   });
 
-  it('133件がqueued(教委13[email3+form10]+メディアemail9+メディアform5+個人塾line4+npo4+EdTech校務支援8+本文既存済み90の昇格)', () => {
+  it('134件がqueued(教委13[email3+form10]+メディアemail9+メディアform5+個人塾line4+npo4+EdTech校務支援8+本文既存済み91の昇格)', () => {
     // 2026-08-13: 教委email26件は8/6に送信済みでledger側(kyoiku-*-0806)に記録済みの重複だったため
     // queueから削除(outreach-queue.tsの設計「送信済みはledgerへ移しqueueから除外する」に合わせた)。
     // 残る教委emailはlane9-*(政令市3件)のみ・教委formの10件は未送信のため変更なし。
@@ -144,7 +144,9 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // edtech-ikubunkan-id-gakuen・130→132)。
     // 2026-08-14続き11: 08-13にexcludedだったexcluded-clark-soshigakuenを再調査し、前回見落としていた
     // 『取材・撮影』『その他』の一般フォームを発見・queuedへ復活(132→133)。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(133);
+    // 2026-08-14続き12: 同様にexcluded-wizas-daiichigakuen(08-13時点でIRフォームが404だった)を
+    // 再調査しサイトリニューアル後の正しいURL(ir.with-us.co.jp/contact/)を発見・queuedへ復活(133→134)。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(134);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {
