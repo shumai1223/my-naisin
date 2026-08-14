@@ -996,6 +996,16 @@
       "status": "awaiting",
       "followupCount": 0,
       "note": "フォーム送信確認メールを2件受信(19fff1a1b9981199=2026-08-14 16:08 JST、19fffd2603f33167=同19:30 JST・いずれもinformation-desk@eikoh-seminar.com)。誤って2回送信された可能性が高いが実害小さいためそのまま1エントリとして記録。queueではqueuedのまま未反映だったため本セッションでledgerへ反映しqueueから削除。フォーム経由のためGmail threadIdなし。"
+    },
+    {
+      "id": "edtech-feelnote-hamagakuen",
+      "org": "株式会社浜学園(eポートフォリオサービス『Feelnote』運営・販売は株式会社Xview)",
+      "lane": "b2b-saas",
+      "sourceTaskId": "S13-A",
+      "sentDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 0,
+      "note": "フォーム送信確認メールを1a0001dd66ac3a7cで受信(2026-08-14 20:52 JST・noreply@feel-note.com)。queueではqueuedのまま未反映だったため本セッションでledgerへ反映しqueueから削除。フォーム経由のためGmail threadIdなし。"
     }
   ]
 }
