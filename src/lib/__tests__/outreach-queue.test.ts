@@ -152,7 +152,10 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // 「こどもとIT」)を発見・本文作成のうえ昇格(135→136)。
     // 2026-08-14続き15: 新規candidate media-clisk-tsuushinsei-navi(株式会社クリスク・通信制高校ナビ/
     // 不登校サポートナビ運営)を発見・本文作成のうえ昇格(136→137)。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(137);
+    // 2026-08-14続き16: b2b-saas残candidateのうちform channel・本文ありの9件をWebFetch再確認の上
+    // queuedへ昇格(chuoh-kyouiku/nativecamp/umedai-sdgs-awards/suzukisoft/iizuna-shoten/
+    // okayama-kangaerukai/ichishin-press/private-education-org/smartrador・137→146)。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(146);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {
