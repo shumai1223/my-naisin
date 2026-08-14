@@ -4923,7 +4923,7 @@
       "contactClass": "b2b",
       "evidence": "公式サイト(teachers-market.com)を直接WebFetchで確認。運営会社は株式会社RECT(フッターのコピーライト表記で確認)。お問い合わせフォーム(/contact)に自由記述の「お問い合わせ内容」欄があることを確認(会社名欄は無いが個人契約掲示板型のためスマートレーダー/マナリンクと同型のb2b-saas判定)。同型で調査したDIY(diy-education.com)はサービス停止済み、ASK(abilityfuse.co.jp/ask)は電話窓口のみでいずれも見送り。",
       "verifiedAt": "2026-08-14",
-      "status": "candidate",
+      "status": "queued",
       "addedAt": "2026-08-14",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4-online-katekyo"
     },
@@ -4953,7 +4953,7 @@
       "contactClass": "b2b",
       "evidence": "公式サイト(nihonkyouzai.jp/contact)を直接WebFetchで確認。自由記述の「お問い合わせ内容」必須欄・送信前確認チェックボックスを持つ実在フォームを確認しb2b確定。",
       "verifiedAt": "2026-08-14",
-      "status": "candidate",
+      "status": "queued",
       "addedAt": "2026-08-14",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2-textbook-publishers"
     },
@@ -4968,7 +4968,7 @@
       "contactClass": "b2b",
       "evidence": "公式サイト(aktk.co.jp/inquiry)を直接WebFetchで確認。問い合わせ種別(内容/著作権/販売購入/その他)選択+自由記述の「お問い合わせ内容」必須欄を持つ実在フォームを確認しb2b確定。",
       "verifiedAt": "2026-08-14",
-      "status": "candidate",
+      "status": "queued",
       "addedAt": "2026-08-14",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2-textbook-publishers"
     }

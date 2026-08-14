@@ -172,7 +172,9 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // スキップ7件(edtech-faboc-jukumail/edtech-techmatrix-tsumugino/juku-ichishin-press/
     // edtech-codetakt/edtech-surala/edtech-manabipocket/lane2-tokyo-horei、うちqueued3件)を
     // excludedへ(残り3件は既存excludedと重複)。queued141→131(-10)。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(131);
+    // 2026-08-14続き22: 本文確認済みの3件(edtech-teachersmarket/gakusan-nihonkyozai/
+    // gakusan-akatsuki-kyoiku)をqueuedへ昇格(131→134)。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(134);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {
