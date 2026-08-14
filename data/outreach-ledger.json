@@ -719,9 +719,11 @@
       "lane": "b2b-saas",
       "sourceTaskId": "S13-A",
       "sentDate": "2026-08-14",
-      "status": "awaiting",
+      "lastContactDate": "2026-08-14",
+      "status": "meeting",
       "followupCount": 0,
-      "note": "Cowork第2弾(30社)でフォーム送信済み(ops/cowork/COWORK-RESULT-02.md)。フォーム経由のためGmail threadIdなし。第1弾10社・Gmail経由セグメントとは別に返信率を計測すること。"
+      "threadId": "19ffec16f41aea02",
+      "note": "Cowork第2弾(30社)でフォーム送信済み(ops/cowork/COWORK-RESULT-02.md)。2026-08-14 14:31に「パスナビ for School」担当より返信着信=オンライン面談を提案・保護者同席の可否を確認された。同日、両方OKの旨とスケジュール候補依頼を返信下書きとしてGmailに設置済み(draftId r3870826112613974858・未送信・👤の確認/送信待ち)。"
     },
     {
       "id": "gakusan-kadokawa",
