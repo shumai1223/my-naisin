@@ -224,6 +224,27 @@ form の candidate 196件の内訳（実測）:
 ではなく「確認して開放する」作業なので、1晩上限のカウント対象にする必要はないと考えられるが、
 昇格後は👤の実送信対象になる以上、レビュー負荷の観点で1晩10-15件程度に抑えるのが妥当)。
 
+## 🆕2026-08-14続き17: b2b-saas残candidate(form channel・本文あり)18件を再確認・9件昇格
+
+上記「残り94件」を`status==='candidate' && e.body && e.channel==='form'`で再抽出したところ、他セッションの
+並行処理により**実際は18件まで収束済み**だった（b2b-saasレーンに限る。npo82件は別枠でC2-3の反応待ち）。
+18件全件をWebFetchで個別に再確認し、有効な自由記述問い合わせ欄を確認できた9件をqueuedへ昇格(137→146)。
+1件(lane1-jyda・日本青少年育成協会)は選択式カテゴリのみで自由記述欄が無いと判明しexcludedへ訂正。
+
+**残り8件は今回WebFetchでは確認しきれず、candidateのまま次回へ持ち越し**:
+- `edtech-faboc-jukumail` / `edtech-surala`: フォーム本体が別ページ・別リンク先にある構造で、
+  指定URL直接フェッチでは自由記述欄を確認できなかった。サイト内の実際のフォーム到達リンクを辿る必要あり。
+- `lane2-tokyo-horei` / `lane1-najukuren`: 文字化け(Shift-JIS等の非UTF-8エンコーディング)でWebFetchの
+  HTML→Markdown変換が失敗。najukurenはhttp URLのまま(https版の有無も未確認)。
+- `edtech-techmatrix-tsumugino`(tayori.com) / `edtech-codetakt`(kintoneapp.com) /
+  `juku-kawaijuku-keinet-plus`(forms.office.com→forms.cloud.microsoft): いずれもJS描画のSPAフォームで
+  WebFetchはページタイトルや「Loading...」しか取得できず中身を確認不能。
+- `career-mynavi-koshien-teacher`(survey.mynavi.jp): WebFetchが408 Request Timeoutで応答なし。
+
+これら8件は次回、①ブラウザ的な確認が可能な別手段があれば個別に試す、②無理なら「フォーム構造がWebFetchで
+検証不能」という制約を記録した上で、evidenceの初回確認内容(addedAt時点でのcontactClass判定根拠)の信頼性
+だけを根拠に慎重昇格するか判断する、のいずれかで対応する。
+
 ## この文書が上書きするもの
 
 - `ops/tasks/T-C1-b2b-target-list.md` の「候補を増やし続ける」部分。
