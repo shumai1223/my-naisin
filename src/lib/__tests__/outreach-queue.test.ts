@@ -160,7 +160,9 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // だったと判明。ledgerへstatus:'awaiting'で移設しqueueから削除(146→142・queued4件減)。
     // 2026-08-14続き18: 同様にedtech-feelnote-hamagakuenの送信確認メールを検知しledgerへ移設
     // (142→141)。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(141);
+    // 2026-08-14続き19: 同様にjuku-sprix-ir(株式会社スプリックス)の送信確認メールを検知し
+    // ledgerへ移設(141→140)。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(140);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {

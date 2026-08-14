@@ -1006,6 +1006,16 @@
       "status": "awaiting",
       "followupCount": 0,
       "note": "フォーム送信確認メールを1a0001dd66ac3a7cで受信(2026-08-14 20:52 JST・noreply@feel-note.com)。queueではqueuedのまま未反映だったため本セッションでledgerへ反映しqueueから削除。フォーム経由のためGmail threadIdなし。"
+    },
+    {
+      "id": "juku-sprix-ir",
+      "org": "株式会社スプリックス(東証上場・森塾/湘南ゼミナール等の塾チェーン運営・IR窓口)",
+      "lane": "b2b-saas",
+      "sourceTaskId": "S13-A",
+      "sentDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 0,
+      "note": "フォーム送信確認メールを1a0001df9128403dで受信(2026-08-14 20:52 JST・info@sprix.jp)。queueではqueuedのまま未反映だったため本セッションでledgerへ反映しqueueから削除。フォーム経由のためGmail threadIdなし。"
     }
   ]
 }
