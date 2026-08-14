@@ -180,7 +180,10 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // いずれも2026-08-12にWebFetchで直接確認済みのcontact/evidenceを再利用(新規サイト訪問なし)。
     // 2026-08-15続き: kyoiku-iレーンの独立行政法人2件(国立教育政策研究所図書館/教職員支援機構総合窓口)に
     // npo3件パイロットと同型の「情報提供・データ引用」フレーミングで本文を書きqueuedへ昇格(147→149)。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(149);
+    // 2026-08-15続き2: 東京大学大学院教育学研究科(庶務チーム・組織名義窓口)を新規candidate追加のうえ
+    // queuedへ(149→150)。LOOP_CONTRACT§3-6で「教員個人メールのみでC7抵触」と記録されていた⏸要設計案件を、
+    // 研究科代表窓口経由の間接打診に設計変更して解消した初回試行。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(150);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {
