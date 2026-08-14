@@ -169,7 +169,7 @@ placement クエリ無し + referer 無し   → placement = NULL               
 
 | ページ／面 | GSC 28日クリック | GSC 28日表示 | D1 trusted クリック | **換金率** | 押された案件 |
 |---|---|---|---|---|---|
-| `/`（トップ） | 1,879 | 29,752 | **22** | **1.17%** | atama-text 11・moshimo-garden-chochiku 4・sapuri-banner-300 2・zkai-banner 2・zkai-text-request 2・zkai-text-middle 1 |
+| `/`（トップ） | 1,879 | 29,752 | 22（**訂正: 実質8** ※1） | **1.17%（訂正: 0.43%）** | atama-text 11・moshimo-garden-chochiku 4・sapuri-banner-300 2・zkai-banner 2・zkai-text-request 2・zkai-text-middle 1 |
 | `/hensachi` | 1,601 | 32,513 | **5** | **0.31%** | atama-text 5 |
 | `/hyotei-heikin` | 920 | 5,478 | **1** | **0.11%** | atama-text 1 |
 | `/tokyo/total-score` | 908 | 5,636 | **2** | **0.22%** | atama-banner 2 |
@@ -187,6 +187,17 @@ placement クエリ無し + referer 無し   → placement = NULL               
 
 出典：GSC＝`ops/raw/gsc-pages-28d.json` を python で page パス集計／D1＝上記 d1q 結果（trusted 39件の内訳、全19行）。
 
+**※1 2026-08-15訂正（GAUNTLET MONEY criticの指摘を`node scripts/d1q.mjs`で直接再現・検証済み）**: 「/」の22件のうち
+**14件は`placement=parent-lp`**（atama-text 10・moshimo-garden-chochiku 4）で、これは`/hogosha`系ページ由来の
+クリックが referer 欠損（root_onlyへの短縮）でトップページに誤帰属したもの（§3-bの`parent-lp`＝`/hogosha`の
+対応関係を参照）。**さらに1件（atama-text）は`placement=hensachi`**（`/hensachi`のAffiliateAd呼び出しに明示付与
+された値のはずだが、当該行のrefererはroot_onlyで記録されており「refererがパスを失う機序は未検証」（§2-c）の
+実例）。したがって真にトップページ起源と確認できるのは**7件**（`placement="/"`のsapuri-banner-300 2・zkai-banner
+2・zkai-text-request 2・zkai-text-middle 1）。**GAUNTLET critic自身の訂正値は0.43%（=8/1879、parent-lp 14件のみ
+除外）だった**が、上記のhensachi 1件をさらに除くとより厳密には**0.37%（=7/1879）**になる。実務上の結論
+（1.17%は誤りで実際は0.4%前後）に変わりはないため、下流の§289/300/318/336の「1.17%」を使った試算は
+**この訂正後は全て再計算が必要**（未実施・次にこのファイルへ戻るセッションが引き継ぐこと）。
+
 ### 3-b. 参考：bot込みD1（全期間629件）の placement × affiliate 上位
 
 | placement | 件数 | 主な案件 | trusted比率 |
@@ -198,7 +209,10 @@ placement クエリ無し + referer 無し   → placement = NULL               
 
 出典：`ops/raw/d1-clicks-crosstab.json`。
 → **クリック数トップ3面（prefecture/null/naishin-up・計497件＝79%）の trusted は 7件（1.4%）。逆に `parent-lp` は27件中16件（59%）が trusted。**
-→ `parent-lp` を出す `/hogosha` は **GSCインプレッション0**（BRIEF §2 収益面の実測）。**流入ゼロの面が、サイト全体の人間クリックの41%(16/39)を叩き出している。**
+→ `parent-lp` を出す `/hogosha` は **GSCインプレッション0**（BRIEF §2 収益面の実測）。**流入ゼロの面が、サイト全体の人間クリックの~~41%(16/39)~~ 訂正: 35.9%(14/39) を叩き出している。**
+　**2026-08-15訂正**: 元の「16/39」は**期間不整合**（分子16は本表と同じ全期間629件ベース、分母39は§3-aの
+　28日窓ベース）だった。`node scripts/d1q.mjs`で28日窓（2026-07-10〜08-07）に揃えて再計算すると
+　`parent-lp`のtrustedは**14件**・同窓の総trustedは**39件**で一致 → **14/39=35.9%**（GAUNTLET criticの訂正値と一致・検証済み）。
 
 > ⚠️ 制約の明示：この16件の referer は `https://my-naishin.com/`（パス無し）で記録されており、
 > ページの特定は placement 値からの逆引き（`placement="parent-lp"` は `/hogosha` 系＝`hogosha/page.tsx:228,237,353` / `HogoshaLeadCTA.tsx:29` / `koukou-hiyou/page.tsx:121` / `juken-schedule/page.tsx:137`）に依存する。
@@ -214,7 +228,7 @@ placement クエリ無し + referer 無し   → placement = NULL               
 | うち **クリック0のページ** | **464枚（76.0%）**・その表示 **92,184** | 同・python集計 |
 | うち **D1に1度も現れないページ** | **597枚（97.7%）** | referer付きD1クリックを生んだページは **全期間で14枚のみ**（`/`・`/hensachi`・`/kochi/naishin`・`/tokyo/total-score`・`/hyotei-heikin`・`/reverse`・`/juku-shindan`・`/mendan`・`/kanagawa/s-value`・`/juku-hiyou`・`/koukou-hiyou/kokoroze`・`/aichi/naishin`・`/hensachi/agekata`・`/blog/toritsu-nyushi-2026-kanzen-guide`） |
 | **捨てられている流入量** | 14枚に着地したGSCクリックは5,881。**残り 2,768クリック（32.0%）は、1度もアフィリクリックを生んだことのないページに落ちている** | 同 |
-| さらに厳密に（GSC28日窓に揃える） | trusted を生んだページは **9枚**。この9枚のGSCクリック合計 5,352 → **窓内クリック 8,649 のうち 3,297（38.1%）は換金実績ゼロのページ着地** | §3-a |
+| さらに厳密に（GSC28日窓に揃える） | trusted を生んだページは **9枚**。この9枚のGSCクリック合計 ~~5,352~~ **訂正: 5,852**（§3-aの9行を実際に合算し直すと1,879+1,601+920+908+489+42+13+0+0=5,852。元の5,352は単純な合算ミス） → **窓内クリック 8,649 のうち ~~3,297（38.1%）~~ 訂正: 2,797（32.3%） は換金実績ゼロのページ着地**（2026-08-15訂正・GAUNTLET criticの訂正値と一致・検証済み） | §3-a |
 | 上位20%集中度（全611枚中の上位122枚） | **クリックの99.7%** | 同 |
 | 上位20%集中度（クリックのある147枚中の上位29枚） | **クリックの93.7%** | 同 |
 | 上位12ページ | `/`1,879・`/hensachi`1,601・`/hyotei-heikin`920・`/tokyo/total-score`908・`/blog/all-3-high-school-options-2026-update`648・`/kanagawa/s-value`489・`/hyogo/naishin`264・`/kanagawa/naishin`195・`/osaka/naishin`172・`/blog/naishinten-average-score`120・`/blog/naishinten-30-high-school`106・`/blog/hyotei-heikin-4-5-high-school`91 | 同 |
@@ -286,6 +300,7 @@ C5式：`EV(円/月) = 月間検索クリック × 遷移率 × (発生率 × �
 > **この計算が示す最重要の含意：**
 > **「最高CPA案件に寄せる」は +¥232/月 にしかならない。** サイト自身の `convRateLow` を使うと、CPA¥17,000のFP相談（発生率1.5%）は CPA¥10,000の塾体験（発生率4.0%）に EV で負ける。
 > **単価ミックスの損失は最大でも ¥4,465/月（現実的な全国案件基準）であり、ボトルネックは単価ではなく遷移率0.455%の側にある。**
+> ⚠️**要再計算（2026-08-15）**: この基準値**1.17%は誤り（訂正値0.43%）**と判明（§3-a末尾の※1参照）。以下の数値は旧基準のまま未修正。
 > 参考：遷移率をトップページ実測の **1.17%**（§3-a）までサイト平均で引き上げると、ミックスを一切変えなくても 48.6→124.8クリック/月・**¥18,495/月（+¥11,296/月）**。単価ミックス最適化の2.5倍のレバー。
 
 ---
@@ -297,7 +312,7 @@ C5式：`EV(円/月) = 月間検索クリック × 遷移率 × (発生率 × �
 |---|---|
 | **症状** | 全ブログ記事に `ParentLeadCTA placement="blog"`（主`sora-juku-text` EV¥240）が入っているのに、内部referer付きのアフィリクリックは**全期間で1件**（`/blog/toritsu-nyushi-2026-kanzen-guide` の `zkai-text-middle`＝EV¥1.5の最低EV案件） |
 | **証拠** | 配線：`src/app/blog/[slug]/page.tsx:349`。実測：`ops/raw/gsc-pages-28d.json`（`/blog/*` 164枚 1,501クリック）／`ops/raw/d1-clicks-crosstab.json`（`placement='blog'` 9件・うち内部referer 0件、referer付きblogクリックは1件） |
-| **推定影響** | ブログ月間クリック ≈ 1,853（1,501×10,667/8,649）。トップページ実測遷移率1.17%が出れば 21.7クリック/月 × EV¥240 = **¥5,208/月**。現状ほぼ¥0 → **出血 約¥5,200/月**（仮置き：遷移率は自社実測の最高値を上限とした。同一 `ParentLeadCTA` コンポーネントを使っているため到達可能と判断） |
+| **推定影響** | ⚠️要再計算（2026-08-15・1.17%は誤り→訂正値0.43%。以下は旧基準のまま未修正）: ブログ月間クリック ≈ 1,853（1,501×10,667/8,649）。トップページ実測遷移率1.17%が出れば 21.7クリック/月 × EV¥240 = **¥5,208/月**。現状ほぼ¥0 → **出血 約¥5,200/月**（仮置き：遷移率は自社実測の最高値を上限とした。同一 `ParentLeadCTA` コンポーネントを使っているため到達可能と判断） |
 | **最小の直し方** | ①記事内CTAの位置を本文冒頭直後にも1つ増やす（`blog/[slug]/page.tsx:349` は記事末のみ）②`blog` 面の副オファーは `fp-soudan`（EV¥124）だが記事の8割が「内申点の数字」クエリ→主を `sora-juku-text` のまま、**記事末CTAより上に `AffiliateAd` を1本置くのではなく、まず `cta_view` を計測して到達自体を確認する**（現状 blog面の `cta_view` が分離できていない） |
 | **人間ゲート** | 不要（src変更のみ・デプロイは👤） |
 
@@ -315,7 +330,7 @@ C5式：`EV(円/月) = 月間検索クリック × 遷移率 × (発生率 × �
 |---|---|
 | **症状** | `/{pref}/naishin` は1ページに `ParentLeadCTA`×3（`layout.tsx:125` placement無し・`page.tsx:438` naishin-up・`page.tsx:709` prefecture）＋ `AffiliateAd`×7（`:481,665,674,682,691,700`）＝**10枠**を積んでいるのに、GSC窓内の trusted クリックは0 |
 | **証拠** | 配線：上記 file:line。実測：§3-a（GSC 1,043 / trusted 0）／`node scripts/d1q.mjs "... referer LIKE '%naishin.com/%naishin%'"` → 4件のみ（7/09・8/08、いずれも窓外） |
-| **推定影響** | 月間クリック ≈ 1,287。トップページ実測遷移率1.17%なら 15.1クリック/月 × EV¥240（そら塾／関東関西は¥360）= **¥3,616〜¥5,424/月**。現状¥0 |
+| **推定影響** | ⚠️要再計算（2026-08-15・1.17%は誤り→訂正値0.43%。以下は旧基準のまま未修正）: 月間クリック ≈ 1,287。トップページ実測遷移率1.17%なら 15.1クリック/月 × EV¥240（そら塾／関東関西は¥360）= **¥3,616〜¥5,424/月**。現状¥0 |
 | **最小の直し方** | 広告枠を減らして1枠に集約する（10枠の広告過密はCTAの識別性を潰す仮説）。まず `layout.tsx:125` の placement 無しCTA（`page.tsx:438` と重複）を削除し、`cta_view` の実測を取る |
 | **人間ゲート** | 不要 |
 
@@ -333,7 +348,7 @@ C5式：`EV(円/月) = 月間検索クリック × 遷移率 × (発生率 × �
 |---|---|
 | **症状** | Λ-2で拡張中の面に `AffiliateAd`/`ParentLeadCTA`/`selectLeadOffer`/`goHref` が皆無 |
 | **証拠** | `grep -n "AffiliateAd\|ParentLeadCTA\|selectLeadOffer\|goHref" "src/app/pref/[code]/school/[schoolCode]/page.tsx" "src/app/pref/[code]/page.tsx"` → **0ヒット** |
-| **推定影響** | 現時点：GSC 605表示/7クリック → 月間 ≈ 8.6クリック × 1.17% × EV¥240 = **¥24/月**（ほぼゼロ）。ただし冬ピーク（2月にS値系11.7倍・BRIEF §7）で「○○高校 倍率」が伸びた場合、この面が最大流入になっても受け皿が無い＝**構造的な機会損失** |
+| **推定影響** | ⚠️要再計算（2026-08-15・1.17%は誤り→訂正値0.43%。以下は旧基準のまま未修正）: 現時点：GSC 605表示/7クリック → 月間 ≈ 8.6クリック × 1.17% × EV¥240 = **¥24/月**（ほぼゼロ）。ただし冬ピーク（2月にS値系11.7倍・BRIEF §7）で「○○高校 倍率」が伸びた場合、この面が最大流入になっても受け皿が無い＝**構造的な機会損失** |
 | **最小の直し方** | `prefecture` 面の `ParentLeadCTA prefectureCode={code} placement="prefecture"` を1行入れる（既存エンジンで解決・新規案件不要）。※学校別の偏差値/ボーダーは書かない（C0） |
 | **人間ゲート** | 不要。ただし index解禁の県単位ゲートは既存ルール通り👤 |
 
