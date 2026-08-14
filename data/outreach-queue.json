@@ -5055,6 +5055,36 @@
       "status": "candidate",
       "addedAt": "2026-08-14",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane1-juku-associations"
+    },
+    {
+      "id": "gakusan-nihonkyozai",
+      "org": "日本教材出版",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.nihonkyouzai.jp/contact",
+      "subject": "内申点計算データAPI/MCPのご案内（My Naishin）",
+      "body": "日本教材出版 ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、教育委員会公表資料に基づく一次情報として無料公開しています。\nhttps://my-naishin.com\n\n貴社が発行される教材をご利用の学校・塾現場向けに、都道府県ごとに異なる内申点の自動計算をAPIで組み込むことで、進路指導資料をより具体的にできるのではと思いご連絡いたしました。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com",
+      "contactClass": "b2b",
+      "evidence": "公式サイト(nihonkyouzai.jp/contact)を直接WebFetchで確認。自由記述の「お問い合わせ内容」必須欄・送信前確認チェックボックスを持つ実在フォームを確認しb2b確定。",
+      "verifiedAt": "2026-08-14",
+      "status": "candidate",
+      "addedAt": "2026-08-14",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2-textbook-publishers"
+    },
+    {
+      "id": "gakusan-akatsuki-kyoiku",
+      "org": "あかつき教育図書株式会社",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.aktk.co.jp/inquiry",
+      "subject": "内申点計算データAPI/MCPのご案内（My Naishin）",
+      "body": "あかつき教育図書株式会社 ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、教育委員会公表資料に基づく一次情報として無料公開しています。\nhttps://my-naishin.com\n\n貴社が発行される教科書・教材をご利用の学校・塾現場向けに、都道府県ごとに異なる内申点の自動計算をAPIで組み込むことで、進路指導資料をより具体的にできるのではと思いご連絡いたしました。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com",
+      "contactClass": "b2b",
+      "evidence": "公式サイト(aktk.co.jp/inquiry)を直接WebFetchで確認。問い合わせ種別(内容/著作権/販売購入/その他)選択+自由記述の「お問い合わせ内容」必須欄を持つ実在フォームを確認しb2b確定。",
+      "verifiedAt": "2026-08-14",
+      "status": "candidate",
+      "addedAt": "2026-08-14",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2-textbook-publishers"
     }
   ]
 }
