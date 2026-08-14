@@ -4600,6 +4600,21 @@
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4-online-katekyo"
     },
     {
+      "id": "edtech-smartrador",
+      "org": "株式会社prd(超難関大生限定家庭教師マッチング「スマートレーダー」)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://prd-inc.jp/contact",
+      "subject": "内申点計算データAPI/MCPのご案内（My Naishin）",
+      "body": "株式会社prd ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\n貴社が運営される「スマートレーダー」は東大・京大等の超難関大生が個人契約で家庭教師を務めるマッチング型のサービスと拝見しております。都道府県ごとに異なる内申点の自動計算をAPIで組み込むことで、講師が生徒の志望校判定・指導計画を立てる際の資料をより具体的にできるのではと思いご連絡いたしました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com",
+      "contactClass": "b2b",
+      "evidence": "公式サイト(prd-inc.jp/contact)を直接WebFetchで確認。項目はお名前/メールアドレス/電話番号/お問い合わせ内容の4つで会社名欄・問い合わせ種別選択は無いが、必須項目に保護者・生徒向けを示す情報(学年等)は無く自由記述の一般問い合わせ窓口。マナリンクと同じくマーケットプレイス型(個人契約仲介)であり、本日全滅した従来型家庭教師派遣モデル(トライ/学研/名門会/デスクスタイル/WAM)とは異なる業態と判断し、status=candidateとして本文のみ設置(queued昇格は次回以降の個別判断とする)。",
+      "verifiedAt": "2026-08-14",
+      "status": "candidate",
+      "addedAt": "2026-08-14",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4-online-katekyo"
+    },
+    {
       "id": "edtech-ktc-oozora",
       "org": "学校法人KTC学園(屋久島おおぞら高等学校・おおぞら高等学院)",
       "lane": "b2b-saas",
