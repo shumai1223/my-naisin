@@ -4945,6 +4945,19 @@
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     },
     {
+      "id": "lane9-waseda-iase",
+      "org": "早稲田大学教育総合研究所(IASE)",
+      "lane": "kyoiku-i",
+      "channel": "email",
+      "contact": "IASE@list.waseda.jp",
+      "contactClass": "b2b",
+      "evidence": "公式サイト(waseda.jp/fedu/iase/contact/)のメールアドレスがCloudflareのメール難読化(cdn-cgi/l/email-protection)で表示されていたためcurlで生HTMLを取得しdata-cfemail属性の16進数をXORデコード(スクリプトで機械的に復号・手動転記ミスのリスクを排除)して実在確認。教育総合研究所という教育学に特化した研究機関の組織メール(mailing list形式・個人名不使用)でC7非該当",
+      "verifiedAt": "2026-08-15",
+      "status": "candidate",
+      "addedAt": "2026-08-15",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
       "id": "lane2-gakubunsha",
       "org": "株式会社学文社",
       "lane": "b2b-saas",
