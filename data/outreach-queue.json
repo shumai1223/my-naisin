@@ -5316,6 +5316,19 @@
       "status": "candidate",
       "addedAt": "2026-08-15",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "edtech-mined-programming",
+      "org": "株式会社Mined(小中学生向けオンラインプログラミング教育「ちゃんと身につくプログラミング」)",
+      "lane": "b2b-saas",
+      "channel": "email",
+      "contact": "support@mined.jp",
+      "contactClass": "b2b",
+      "evidence": "小中学生向けPythonプログラミングライブ授業を提供するEdTechスタートアップ(累計6000万円調達)。公式サイトfor-schoolページ(mined.jp/for-school)で学校向け展開も明記。お問い合わせ窓口(support@mined.jp)を複数の一次情報源(公式サイト)で確認。EdTechスタートアップ厳選一覧(startupclass.co.jp)由来。",
+      "verifiedAt": "2026-08-15",
+      "status": "candidate",
+      "addedAt": "2026-08-15",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     }
   ]
 }
