@@ -4958,6 +4958,19 @@
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     },
     {
+      "id": "lane9-kyoto-educ-soumu",
+      "org": "京都大学大学院教育学研究科・教育学部(総務掛)",
+      "lane": "kyoiku-i",
+      "channel": "email",
+      "contact": "020kyosou@mail2.adm.kyoto-u.ac.jp",
+      "contactClass": "b2b",
+      "evidence": "公式サイト(educ.kyoto-u.ac.jp/overview/contact/)のメールアドレスが[at]表記難読化されていたためcurlで生HTMLを取得し目視でデコード(020kyosou[ at |mail2.adm.kyoto-u.ac.jp→@に置換)して実在確認。総務掛は『教授会等運営、教員選考、施設整備、組織の方針決定等に関する事務』を担当する組織窓口(個人教員名義でなく組織名義)で東京大学庶務チームと同型のパターン",
+      "verifiedAt": "2026-08-15",
+      "status": "candidate",
+      "addedAt": "2026-08-15",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
       "id": "lane2-gakubunsha",
       "org": "株式会社学文社",
       "lane": "b2b-saas",
