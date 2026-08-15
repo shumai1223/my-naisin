@@ -5042,6 +5042,19 @@
       "status": "candidate",
       "addedAt": "2026-08-15",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2"
+    },
+    {
+      "id": "edtech-mediaseek-myclass",
+      "org": "株式会社メディアシーク(マイクラス)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.my-class.jp/contact/",
+      "contactClass": "b2b",
+      "evidence": "カルチャースクール/学習塾向けスクール管理システム「マイクラス」。問い合わせフォーム必須項目に「会社名(団体名)」欄あり・個人限定文言なしを直接WebFetchで確認。塾管理システムSaaSレーン(08-14着手)の残り候補の1つ。",
+      "verifiedAt": "2026-08-15",
+      "status": "candidate",
+      "addedAt": "2026-08-15",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     }
   ]
 }
