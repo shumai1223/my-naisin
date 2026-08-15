@@ -5289,6 +5289,20 @@
       "addedAt": "2026-08-15",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
       "formPurpose": "unknown"
+    },
+    {
+      "id": "edtech-atsystem-ckip",
+      "org": "株式会社アットシステム(インターネット出願システム「Ckip」)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.ckip.jp/top/form/index.php",
+      "contactClass": "b2b",
+      "evidence": "全国708校の中学校が利用する調査書Web登録システムと同じ会社が提供するインターネット出願システム『Ckip』の専用問い合わせ窓口(「Ckip出願システムに関するお問い合わせ・資料請求」と明記)を直接WebFetchで確認。フォーム自体はJS描画のため必須項目の詳細確認はできなかったが、生徒/保護者向けではなく明確に法人(学校)向けの製品問い合わせ窓口であるためcontactClass=b2b、formPurposeはunknown。過去のtarget-list.md記載(11:4x追記「調査書Web登録システムを追加」)にもかかわらずqueueに未登録だった不一致を解消する形での追加。",
+      "verifiedAt": "2026-08-15",
+      "status": "candidate",
+      "addedAt": "2026-08-15",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
+      "formPurpose": "unknown"
     }
   ]
 }
