@@ -245,6 +245,28 @@ form の candidate 196件の内訳（実測）:
 検証不能」という制約を記録した上で、evidenceの初回確認内容(addedAt時点でのcontactClass判定根拠)の信頼性
 だけを根拠に慎重昇格するか判断する、のいずれかで対応する。
 
+## ★★2026-08-15 09:5x判明: 「queued（本文あり）」と「実際にGmail下書きが存在する」は別物だった
+
+`data/outreach-queue.json`で`status:'queued'`かつ`channel:'email'`の42件を全件チェックしたところ、
+**30件（71%）が本文は書かれているのにGmail下書きが一度も作成されていなかった**。うち3件は
+`lane9-jartest`/`lane9-jssce`（日本テスト学会・日本キャリア教育学会）で、これらは`fable5-loop-protocol`の
+複数の過去worklogが「npo3件パイロット・09:05送信から18時間経過・返信待ち」と繰り返し記録していた当のもの
+だった。Gmail検索(`in:drafts`/`newer_than:5d`いずれも対象org名で0件)で実際には**一度も下書き化・送信され
+ていなかった**と判明した（返信が来ないのは当然で、そもそも届いていなかった）。
+
+**原因の推測**: `status:'queued'`への昇格は「本文を書いた」時点で行われる運用だったが、その後の
+`gmail_create_draft`呼び出し（下書き設置）が別の独立した作業ステップとして扱われ、多くの周回で
+「本文を書いてqueued化する」ところまでで力尽きて下書き化が漏れていた。「本文ありの件数」を進捗指標に
+したこと自体は正しいが、**「本文あり」と「実際に👤が送信ボタンを押せる状態（Gmail下書き実在）」の間に
+もう1段階あることが見落とされていた**。
+
+**対策（2026-08-15実施）**: 未下書き化30件のうち15件を`gmail_create_draft`で下書き化し、
+`draftId`/`messageId`/`draftedAt`を`outreach-queue.json`に反映済み（残り15件は次回セッションへ持ち越し）。
+**以後の運用ルール**: `status:'queued'`かつ`channel:'email'`だが`draftId`が無いエントリは「未完了」として
+扱う。新規に本文を書いてqueued化した回は、可能な範囲でその場で`gmail_create_draft`まで実行し、
+「本文を書いただけで下書き化を次回に持ち越す」状態を極力作らない。定期チェックポイントの一つとして
+`draftId`欠落件数を数えることを推奨する（診断コマンド: `node -e "const q=require('./data/outreach-queue.json').entries;console.log(q.filter(x=>x.status==='queued'&&x.channel==='email'&&!x.draftId).length)"`）。
+
 ## この文書が上書きするもの
 
 - `ops/tasks/T-C1-b2b-target-list.md` の「候補を増やし続ける」部分。
