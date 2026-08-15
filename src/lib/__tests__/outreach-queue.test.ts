@@ -190,7 +190,9 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // 私塾界/ICT教育ニュース/ReseEd/リセマム)をoutreach-ledger.jsonへ遡及反映のうえqueueから削除(151→142)。
     // 2026-08-15続き5: 8/12送信済みでledgerには既に正しく記録済みだったlane9-*-koko3件(横浜/名古屋/福岡市
     // 教委)がqueueにのみ重複して残存していたのを削除(142→139)。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(139);
+    // 2026-08-16: 大学研究室横展開4校(広島/早稲田IASE/京都)はcandidateのまま(本文未着手)だったが、
+    // その後lane9の学会candidate11件(email)+1件(jset・form)に本文を執筆しqueuedへ昇格(139→151)。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(151);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {
