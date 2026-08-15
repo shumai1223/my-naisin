@@ -186,7 +186,9 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // 2026-08-15続き3: lane1-najukuren(奈良県学習塾連盟)のcontactをhttp→httpsへ修正しqueuedへ(150→151)。
     // WebFetchのShift-JIS文字化けで再確認不能だったが、curl(--ssl-no-revoke)でhttps版のHTTPヘッダが
     // http版と完全に同一のContent-Length/Last-Modifiedを返すことを確認し、同一ファイルの提供と判断した。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(151);
+    // 2026-08-15続き4: 8/6送信済み・8/14追撃送信済みだがqueueに残存していたmedia-*9件(地方紙5件+
+    // 私塾界/ICT教育ニュース/ReseEd/リセマム)をoutreach-ledger.jsonへ遡及反映のうえqueueから削除(151→142)。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(142);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {

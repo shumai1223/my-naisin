@@ -1096,6 +1096,113 @@
       "status": "awaiting",
       "followupCount": 0,
       "note": "Cowork第3弾はフォーム文字数制限で未着手のまま終了したが、同日22:15にBusinessプラン新設のお知らせをGmail経由で別途送信済み(ops/cowork/COWORK-RESULT-03.md)。フォームからの重複送信は行わない。"
+    },
+    {
+      "id": "media-hokkaido-np",
+      "org": "北海道新聞社（報道センター・情報提供窓口）",
+      "lane": "chihoshi",
+      "sourceTaskId": "T-C2",
+      "sentDate": "2026-08-06",
+      "lastContactDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 1,
+      "threadId": "19fcd6f535d73fa2",
+      "note": "2026-08-15に発覚したqueue/ledger未反映のハウスキーピング漏れを遡及反映(8/6初回送信+8/14追撃送信の両方をGmail sentフォルダで確認済み)。queueにstatus=queuedのまま9件残存していた「media-*」バッチの1件。"
+    },
+    {
+      "id": "media-chunichi",
+      "org": "中日新聞社（Your Scoop／社会部 取材依頼窓口）",
+      "lane": "chihoshi",
+      "sourceTaskId": "T-C2",
+      "sentDate": "2026-08-06",
+      "lastContactDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 1,
+      "threadId": "19fcd6f5d8240aab",
+      "note": "2026-08-15に発覚したqueue/ledger未反映のハウスキーピング漏れを遡及反映(8/6初回送信+8/14追撃送信の両方をGmail sentフォルダで確認済み)。queueにstatus=queuedのまま9件残存していた「media-*」バッチの1件。"
+    },
+    {
+      "id": "media-chugoku-np",
+      "org": "中国新聞社（社会担当・情報提供窓口）",
+      "lane": "chihoshi",
+      "sourceTaskId": "T-C2",
+      "sentDate": "2026-08-06",
+      "lastContactDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 1,
+      "threadId": "19fcd6f696bdb62a",
+      "note": "2026-08-15に発覚したqueue/ledger未反映のハウスキーピング漏れを遡及反映(8/6初回送信+8/14追撃送信の両方をGmail sentフォルダで確認済み)。queueにstatus=queuedのまま9件残存していた「media-*」バッチの1件。"
+    },
+    {
+      "id": "media-kyoto-np",
+      "org": "京都新聞社（「読者に応える」取材リクエスト窓口）",
+      "lane": "chihoshi",
+      "sourceTaskId": "T-C2",
+      "sentDate": "2026-08-06",
+      "lastContactDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 1,
+      "threadId": "19fcd6f74d1734a2",
+      "note": "2026-08-15に発覚したqueue/ledger未反映のハウスキーピング漏れを遡及反映(8/6初回送信+8/14追撃送信の両方をGmail sentフォルダで確認済み)。queueにstatus=queuedのまま9件残存していた「media-*」バッチの1件。"
+    },
+    {
+      "id": "media-shijyukukai",
+      "org": "月刊私塾界／全国私塾情報センター（学習塾業界向け専門誌）",
+      "lane": "chihoshi",
+      "sourceTaskId": "T-C2",
+      "sentDate": "2026-08-06",
+      "lastContactDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 1,
+      "threadId": "19fcd6f8ec975d1f",
+      "note": "2026-08-15に発覚したqueue/ledger未反映のハウスキーピング漏れを遡及反映(8/6初回送信+8/14追撃送信の両方をGmail sentフォルダで確認済み)。queueにstatus=queuedのまま9件残存していた「media-*」バッチの1件。"
+    },
+    {
+      "id": "media-ict-enews",
+      "org": "ICT教育ニュース（株式会社BREXA Technology）",
+      "lane": "chihoshi",
+      "sourceTaskId": "T-C2",
+      "sentDate": "2026-08-06",
+      "lastContactDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 1,
+      "threadId": "19fcd6f9c1bad74f",
+      "note": "2026-08-15に発覚したqueue/ledger未反映のハウスキーピング漏れを遡及反映(8/6初回送信+8/14追撃送信の両方をGmail sentフォルダで確認済み)。queueにstatus=queuedのまま9件残存していた「media-*」バッチの1件。"
+    },
+    {
+      "id": "media-reseed",
+      "org": "ReseEd（リシード・株式会社イード）",
+      "lane": "chihoshi",
+      "sourceTaskId": "T-C2",
+      "sentDate": "2026-08-06",
+      "lastContactDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 1,
+      "threadId": "19fcd6fa9d56faa2",
+      "note": "2026-08-15に発覚したqueue/ledger未反映のハウスキーピング漏れを遡及反映(8/6初回送信+8/14追撃送信の両方をGmail sentフォルダで確認済み)。queueにstatus=queuedのまま9件残存していた「media-*」バッチの1件。"
+    },
+    {
+      "id": "media-resemom",
+      "org": "リセマム（株式会社イード）",
+      "lane": "chihoshi",
+      "sourceTaskId": "T-C2",
+      "sentDate": "2026-08-06",
+      "lastContactDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 1,
+      "threadId": "19fcd6fb26f2c3f3",
+      "note": "2026-08-15に発覚したqueue/ledger未反映のハウスキーピング漏れを遡及反映(8/6初回送信+8/14追撃送信の両方をGmail sentフォルダで確認済み)。queueにstatus=queuedのまま9件残存していた「media-*」バッチの1件。"
+    },
+    {
+      "id": "media-kobe-np",
+      "org": "神戸新聞社（編集局報道部・情報提供窓口）",
+      "lane": "chihoshi",
+      "sourceTaskId": "T-C2",
+      "sentDate": "2026-08-14",
+      "status": "awaiting",
+      "followupCount": 0,
+      "threadId": "19ffd7dfe687fc14",
+      "note": "⚠️queueにはdraftedAt 2026-08-05・messageId 19fcd6f81263331fの記録があったが、gmail_readで実体無し(Requested entity was not found)かつin:sent検索でも8/6送信の実在を確認できず、実際の初回送信は無かったと判明。にもかかわらず2026-08-14に送信された文面は「先日(8/6)に一度ご連絡させていただきました」という誤った前提を含む(実際には初回連絡)。この文面は既に送信済みのため訂正不能。sentDateは実際に送信が確認できた8/14を採用し、followupCountは0(これが実質の初回)とする。"
     }
   ]
 }
