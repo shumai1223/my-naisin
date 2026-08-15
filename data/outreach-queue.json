@@ -5344,6 +5344,43 @@
       "verifiedAt": "2026-08-16",
       "addedAt": "2026-08-16",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane-tsushin"
+    },
+    {
+      "id": "lane9-gakugei-kouhou",
+      "org": "東京学芸大学 総務課広報・基金室",
+      "lane": "kyoiku-i",
+      "channel": "email",
+      "contact": "kouhouty@u-gakugei.ac.jp",
+      "contactClass": "b2b",
+      "evidence": "公式お問い合わせ一覧(u-gakugei.ac.jp/contact/)をcurlで取得した生HTMLに『総務課 広報・基金室 TEL:042-329-7116 E-mail:kouhouty(a)u-gakugei.ac.jp』を直接確認。教員養成の中核校(教育大学協会加盟)で組織名義の広報窓口(個人名なし)。東京大学/京都大学等と同型の『研究科代表窓口経由の間接打診』設計を教員養成大学の広報部門へ横展開したもの",
+      "verifiedAt": "2026-08-16",
+      "status": "candidate",
+      "addedAt": "2026-08-16",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-osaka-kyoiku-kouhou",
+      "org": "大阪教育大学 広報室",
+      "lane": "kyoiku-i",
+      "channel": "email",
+      "contact": "kouhou@bur.osaka-kyoiku.ac.jp",
+      "contactClass": "b2b",
+      "evidence": "公式お問い合わせページ(osaka-kyoiku.ac.jp/contact.html)をcurlで取得した生HTMLの『一般の方』向け表に『広報室 072-978-3344 kouhou(※)bur.osaka-kyoiku.ac.jp』(※を@に置換)を直接確認。教育大学協会加盟の教員養成大学。組織名義の広報窓口(個人名なし)",
+      "verifiedAt": "2026-08-16",
+      "addedAt": "2026-08-16",
+      "status": "candidate",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-tsukuba-education-excluded",
+      "org": "筑波大学 人間学群教育学類・教育学域",
+      "lane": "kyoiku-i",
+      "channel": "form",
+      "status": "excluded",
+      "excludeReason": "公式問い合わせページ(education.tsukuba.ac.jp/contact/)をcurlで取得した生HTMLを確認したところ、フォームのチェックボックス項目が『入試情報・資料請求』『教育・カリキュラム』『学生生活』『留学生生活』の4区分のみで、全て入学希望者・在学生向けの窓口と判明(T-C1既知の罠=受験生・保護者向け問い合わせフォームをB2B窓口と誤認するパターンに該当するため不採用)。組織名義のメールアドレス等の代替窓口も同ページに記載なし",
+      "verifiedAt": "2026-08-16",
+      "addedAt": "2026-08-16",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
