@@ -5303,6 +5303,19 @@
       "addedAt": "2026-08-15",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
       "formPurpose": "unknown"
+    },
+    {
+      "id": "edtech-terraport-campusentry",
+      "org": "株式会社テラポート(大学・専門学校向けWeb出願システム「Campus ENTRY」)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://terraport.jp/contact/",
+      "contactClass": "b2b",
+      "evidence": "大学・専門学校向けWeb出願・合否発表システム「Campus ENTRY」の開発会社。お問い合わせフォームに「学校名・または企業名」欄(任意)を直接WebFetchで確認、個人限定文言・受付終了の記載なし。Web出願システム比較記事(aspicjapan.org/asu/article/4892)由来。",
+      "verifiedAt": "2026-08-15",
+      "status": "candidate",
+      "addedAt": "2026-08-15",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     }
   ]
 }
