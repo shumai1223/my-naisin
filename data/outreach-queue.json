@@ -5055,6 +5055,19 @@
       "status": "candidate",
       "addedAt": "2026-08-15",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "edtech-esco-schole-v3",
+      "org": "ウチダエスコ株式会社(校務支援システム「スコーレV3」)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://go.esco.co.jp/business/contact/scholev3",
+      "contactClass": "b2b",
+      "evidence": "中学・高校・高専向け統合型校務支援システム「スコーレV3」。相談フォームに「会社・団体名」欄あり(必須項目の明示は無いが法人情報入力欄が存在)・個人限定文言/受付終了の記載なしを直接WebFetchで確認。校務支援システムレーン(08-14着手)の最後の未着手候補(前回は専用フォーム未確認・オンラインデモ申込のみと記録されていたが今回相談フォームの実在を確認できた)。",
+      "verifiedAt": "2026-08-15",
+      "status": "candidate",
+      "addedAt": "2026-08-15",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     }
   ]
 }
