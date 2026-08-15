@@ -188,7 +188,9 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // http版と完全に同一のContent-Length/Last-Modifiedを返すことを確認し、同一ファイルの提供と判断した。
     // 2026-08-15続き4: 8/6送信済み・8/14追撃送信済みだがqueueに残存していたmedia-*9件(地方紙5件+
     // 私塾界/ICT教育ニュース/ReseEd/リセマム)をoutreach-ledger.jsonへ遡及反映のうえqueueから削除(151→142)。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(142);
+    // 2026-08-15続き5: 8/12送信済みでledgerには既に正しく記録済みだったlane9-*-koko3件(横浜/名古屋/福岡市
+    // 教委)がqueueにのみ重複して残存していたのを削除(142→139)。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(139);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {
