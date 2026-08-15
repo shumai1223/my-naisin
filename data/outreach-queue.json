@@ -5285,6 +5285,50 @@
       "status": "candidate",
       "addedAt": "2026-08-15",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "tsushin-justsystems-smilezemi",
+      "org": "株式会社ジャストシステム(通信教育「スマイルゼミ」)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "status": "excluded",
+      "excludeReason": "公式サイトのお問い合わせ一覧をWebFetchで直接確認。法人専用インフォメーションセンターは『ご購入前のお問い合わせ』専用で電話(03-5324-7655・平日9-18時)のみでメールアドレス/フォームURLの記載なし。『ご意見・ご要望窓口』フォームは製品・サービスへの意見用途で企業間の情報提供・提携提案向けとは明記されていない。channel enum非対応の家庭教師派遣業界(katekyo-*)と同型の電話専用パターン",
+      "verifiedAt": "2026-08-16",
+      "addedAt": "2026-08-16",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane-tsushin"
+    },
+    {
+      "id": "tsushin-classi",
+      "org": "Classi株式会社(教育プラットフォーム「Classi」)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "status": "excluded",
+      "excludeReason": "corp.classi.jp/contact/は恒久的に classi.jp トップへ301リダイレクトされ問い合わせページが実質消滅。ed.classi.jp/inquiry-cも404。classi.jpトップページをWebFetchで確認したが企業からの一般的な情報提供・データ提携向けの窓口へのリンクが見当たらない(学校・保護者・生徒向け導線のみ)。ベネッセ・ソフトバンク合弁のため既存queued済みのベネッセコーポレーション(edtech-benesse-gtec)と実質重複する可能性も高く優先度低",
+      "verifiedAt": "2026-08-16",
+      "addedAt": "2026-08-16",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane-tsushin"
+    },
+    {
+      "id": "tsushin-wao-corp",
+      "org": "株式会社ワオ・コーポレーション(通信教育・能開センター等)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "status": "excluded",
+      "excludeReason": "ソリューション事業部の窓口(edu.wao-corp.com)はTLS証明書のホスト名不一致(cert altnamesが*.secure.ne.jp)で信頼できず接続見送り。公開学力テスト問い合わせページ(t.wao.ne.jp/gakute/contact/)をWebFetchで確認したが能開センター/個別指導Axisの部門別フリーコール電話番号のみでオンラインフォーム記載なし。電話専用パターン",
+      "verifiedAt": "2026-08-16",
+      "addedAt": "2026-08-16",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane-tsushin"
+    },
+    {
+      "id": "tsushin-tokyoshoseki-juku",
+      "org": "東京書籍株式会社(学習塾向けデジタル教材・教科書出版)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "status": "excluded",
+      "excludeReason": "サポート・お問い合わせ総合ページ(tokyo-shoseki.co.jp/customer/)をWebFetchで確認。学習塾向け教材/ICT商品資料請求等12種のフォームは全て既存商品の購入者・学校向けサポートに特化しており、他企業からの一般的なビジネス提案・データ提携向けの窓口が明記されていない。『その他のお問い合わせやご要望』ページ(e-mail/tenwebshop_a.html)はサーバーエラー(HTTP 500)で内容確認不可のため確証が持てず見送り",
+      "verifiedAt": "2026-08-16",
+      "addedAt": "2026-08-16",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane-tsushin"
     }
   ]
 }
