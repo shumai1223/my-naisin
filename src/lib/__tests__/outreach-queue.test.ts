@@ -192,7 +192,10 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // 教委)がqueueにのみ重複して残存していたのを削除(142→139)。
     // 2026-08-16: 大学研究室横展開4校(広島/早稲田IASE/京都)はcandidateのまま(本文未着手)だったが、
     // その後lane9の学会candidate11件(email)+1件(jset・form)に本文を執筆しqueuedへ昇格(139→151)。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(151);
+    // 2026-08-16続き: kyoiku-iレーンの都道府県教委リンク依頼型10件(hokkaido/kanagawa/gunma/okayama/
+    // fukushima/niigata/hiroshima/yamaguchi/ehime/kumamoto)を、LOOP_CONTRACT§3-6で既に4/4全滅と
+    // 判定済みの型と同型のため送信対象から除外(151→141)。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(141);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {
