@@ -260,8 +260,9 @@ form の candidate 196件の内訳（実測）:
 したこと自体は正しいが、**「本文あり」と「実際に👤が送信ボタンを押せる状態（Gmail下書き実在）」の間に
 もう1段階あることが見落とされていた**。
 
-**対策（2026-08-15実施）**: 未下書き化30件のうち15件を`gmail_create_draft`で下書き化し、
-`draftId`/`messageId`/`draftedAt`を`outreach-queue.json`に反映済み（残り15件は次回セッションへ持ち越し）。
+**対策（2026-08-15実施）**: 未下書き化30件全件を`gmail_create_draft`で下書き化し、
+`draftId`/`messageId`/`draftedAt`を`outreach-queue.json`に反映済み（同日中に2バッチ=15件+15件で完了）。
+`status==='queued' && channel==='email' && !draftId`のギャップは2026-08-15時点で0件。
 **以後の運用ルール**: `status:'queued'`かつ`channel:'email'`だが`draftId`が無いエントリは「未完了」として
 扱う。新規に本文を書いてqueued化した回は、可能な範囲でその場で`gmail_create_draft`まで実行し、
 「本文を書いただけで下書き化を次回に持ち越す」状態を極力作らない。定期チェックポイントの一つとして
