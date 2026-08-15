@@ -5236,6 +5236,59 @@
       "status": "candidate",
       "addedAt": "2026-08-15",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "edtech-dcs-miraicompass",
+      "org": "三菱総研DCS株式会社(インターネット出願システム「miraicompass」・全国シェア70%)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://inquiry.dcs.co.jp/ind/miraicompass",
+      "contactClass": "b2b",
+      "evidence": "全国1,700校以上・私立校の過半数が導入する国内最大手のネット出願システム。問い合わせフォームに「※受験生・保護者様向けのお問い合わせフォームではありません」と明記され「学校名・貴社名」必須欄ありを直接WebFetchで確認、学校・教育委員会・企業向けの法人窓口であることが明示的に確認できた。中学・高校向け入試システム比較記事(aspicjapan.org/asu/article/5023)由来。",
+      "verifiedAt": "2026-08-15",
+      "status": "candidate",
+      "addedAt": "2026-08-15",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "edtech-move-net-step",
+      "org": "株式会社コンピュータムーブ(教務・校務システム「Step」)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.move-net.jp/about-this-website/contact",
+      "contactClass": "b2b",
+      "evidence": "幼稚園から大学まで対応する教務システム「STEPシリーズ」の開発会社。お問い合わせフォームに「企業名／組織名」必須欄ありを直接WebFetchで確認。個人限定文言・受付終了の記載なし。",
+      "verifiedAt": "2026-08-15",
+      "status": "candidate",
+      "addedAt": "2026-08-15",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "edtech-planners-schoolgear",
+      "org": "株式会社プランナーズランド(教務システム「School Gear 高校版」)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.planners.co.jp/inquiry/index.html",
+      "contactClass": "b2b",
+      "evidence": "私立中高向け教務システム(全国100校以上導入)の独立系開発会社。お問い合わせフォームに「会社名」「部署名」必須欄ありを直接WebFetchで確認。個人限定文言・受付終了の記載なし。",
+      "verifiedAt": "2026-08-15",
+      "status": "candidate",
+      "addedAt": "2026-08-15",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "edtech-beein-syutsugan",
+      "org": "株式会社Beein(高等学校・専門学校専用インターネット出願システム)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://info.syutsugan.net/contact/",
+      "contactClass": "b2b",
+      "evidence": "高校・専門学校専用のネット出願システム運営会社(2024年にユニバーサル・サポート・システムズから事業譲受)。お問い合わせフォームに「学校法人名」必須欄を直接WebFetchで確認。ただし欄名が学校法人を前提とした表記のため、事業提携目的の問い合わせとして受理されるかはformPurpose:unknown扱い(該当なし等の代替記入で試行する想定)。",
+      "verifiedAt": "2026-08-15",
+      "status": "candidate",
+      "addedAt": "2026-08-15",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
+      "formPurpose": "unknown"
     }
   ]
 }
