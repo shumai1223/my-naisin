@@ -4932,6 +4932,19 @@
       "draftedAt": "2026-08-15"
     },
     {
+      "id": "lane9-hiroshima-education-somu",
+      "org": "広島大学大学院人間社会科学研究科教育学系総括支援室(総務担当)",
+      "lane": "kyoiku-i",
+      "channel": "email",
+      "contact": "ed-sou-jin@office.hiroshima-u.ac.jp",
+      "contactClass": "b2b",
+      "evidence": "公式サイト(hiroshima-u.ac.jp/ed/otoiawase)を直接WebFetchで確認。教育学系総括支援室の総務担当窓口(個人教員名義でなく組織名義)で、東京大学庶務チームと同型のパターン。広島大学教育学部は日本で歴史のある教育学部の一つで教育制度・評価に関する研究蓄積がある",
+      "verifiedAt": "2026-08-15",
+      "status": "candidate",
+      "addedAt": "2026-08-15",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
       "id": "lane2-gakubunsha",
       "org": "株式会社学文社",
       "lane": "b2b-saas",
