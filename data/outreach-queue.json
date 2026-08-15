@@ -5184,6 +5184,58 @@
       "status": "candidate",
       "addedAt": "2026-08-15",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "edtech-scanet-digiraku",
+      "org": "スキャネット株式会社(デジタル採点ツール「デジらく採点2」)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.scanet.jp/contact/",
+      "contactClass": "b2b",
+      "evidence": "マークシート/デジタル採点の専業事業者。お問い合わせフォームは会社名必須欄こそ無いが、お問い合わせ内容欄に「学校名・会社名」「学部・学科・部署名」の記載を案内する設計で学校・法人からの問い合わせを想定していることを直接WebFetchで確認。個人限定文言・受付終了の記載なし。デジタル採点システム比較記事(aspicjapan.org)由来の新規レーン。",
+      "verifiedAt": "2026-08-15",
+      "status": "candidate",
+      "addedAt": "2026-08-15",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "edtech-yujin-youmark",
+      "org": "株式会社佑人社(小規模向けデジタル採点「YouMark Personal」)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.yu-jin.co.jp/personal/contact/",
+      "contactClass": "b2b",
+      "evidence": "お問い合わせフォームに「学校名・会社名」必須欄(個人の場合は「個人」と記入する注記あり)を直接WebFetchで確認。五ツ木書房「U-チェック」との連携実績もある教育系デジタル採点専業事業者。",
+      "verifiedAt": "2026-08-15",
+      "status": "candidate",
+      "addedAt": "2026-08-15",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "edtech-smarky",
+      "org": "株式会社Smarky(デジタル採点システム「Smarky」)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://smarky.jp/contact.html",
+      "contactClass": "b2b",
+      "evidence": "お問い合わせフォームに「学校名」必須欄を直接WebFetchで確認。AI自動採点(英語・数式)が特徴のデジタル採点専業事業者。個人限定文言・受付終了の記載なし。",
+      "verifiedAt": "2026-08-15",
+      "status": "candidate",
+      "addedAt": "2026-08-15",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "edtech-ssi-sgs",
+      "org": "株式会社ソフトウエア・サイエンス(デジタル採点システム「SGS」)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.ssi.co.jp/contact/",
+      "contactClass": "b2b",
+      "evidence": "お問い合わせフォームに「貴社名」必須欄(個人の場合は「なし」「フリー」等の記入案内あり)を直接WebFetchで確認。2010年から続くテスト業務全般(作成・採点・成績処理)のシステム開発企業。",
+      "verifiedAt": "2026-08-15",
+      "status": "candidate",
+      "addedAt": "2026-08-15",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     }
   ]
 }
