@@ -5329,6 +5329,32 @@
       "status": "candidate",
       "addedAt": "2026-08-15",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "edtech-manabinomori-gakunaijuku",
+      "org": "株式会社学びの森(私立中高向け学内塾・放課後学習支援)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://manabi-mori.net/contact",
+      "contactClass": "b2b",
+      "evidence": "私立中高の校内に学内塾を構え学校の先生と連携して放課後学習支援を提供する事業者(東京都・埼玉県・群馬県で運営)。お問い合わせフォームに「学校名」「役職」欄(任意)と「お問い合わせの種類」選択欄を直接WebFetchで確認、個人限定文言・受付終了の記載なし。EdTechベンチャー25選記事(reashu.com)由来。",
+      "verifiedAt": "2026-08-15",
+      "status": "candidate",
+      "addedAt": "2026-08-15",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "edtech-ictedu-family",
+      "org": "株式会社ICTエデュケーションズ(小中学生向けIT教育事業・IT塾)",
+      "lane": "b2b-saas",
+      "channel": "email",
+      "contact": "info@ictedu.co.jp",
+      "contactClass": "b2b",
+      "evidence": "初等学年向けIT教育・IT塾の開講・ICT教材開発を行う事業者。公式サイト複数ページから代表メールアドレス(info@ictedu.co.jp)を確認。EdTechベンチャー25選記事(reashu.com)由来。",
+      "verifiedAt": "2026-08-15",
+      "status": "candidate",
+      "addedAt": "2026-08-15",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     }
   ]
 }
