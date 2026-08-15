@@ -195,7 +195,10 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // 2026-08-16続き: kyoiku-iレーンの都道府県教委リンク依頼型10件(hokkaido/kanagawa/gunma/okayama/
     // fukushima/niigata/hiroshima/yamaguchi/ehime/kumamoto)を、LOOP_CONTRACT§3-6で既に4/4全滅と
     // 判定済みの型と同型のため送信対象から除外(151→141)。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(141);
+    // 2026-08-16続き2: 家庭教師/通信教育レーンexcluded4件追加(candidateには影響せずqueued数不変)。
+    // その後、大学研究室candidate3件(広島/早稲田IASE/京都)に本文を執筆しqueuedへ昇格(141→144・
+    // 1晩上限10-15件の範囲内で本日2バッチ目、当日合計15件)。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(144);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {
