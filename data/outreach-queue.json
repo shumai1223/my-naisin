@@ -5068,6 +5068,32 @@
       "status": "candidate",
       "addedAt": "2026-08-15",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "edtech-systechits-majorschool",
+      "org": "システックITソリューション株式会社(校務支援システム「Major School System」)",
+      "lane": "b2b-saas",
+      "channel": "email",
+      "contact": "info@systech-its.co.jp",
+      "contactClass": "b2b",
+      "evidence": "高校・中高一貫校向けフルカスタマイズ校務支援システム。導入109件(2023年7月時点)。公式サイトのお問い合わせページはWebフォームではなくmailtoリンク(info@systech-its.co.jp)だが、件名テンプレートに「学校名」「役職」「担当者名」が組み込まれ法人・学校からの問い合わせを想定した設計であることを直接WebFetchで確認。個人限定文言・受付終了の記載なし。",
+      "verifiedAt": "2026-08-15",
+      "status": "candidate",
+      "addedAt": "2026-08-15",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+    },
+    {
+      "id": "edtech-systemd-schoolengine",
+      "org": "株式会社システムディ(校務支援システム「School Engine」)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.systemd.co.jp/inqry_public_education",
+      "contactClass": "b2b",
+      "evidence": "小中高校向けクラウド統合型校務支援サービス「School Engine」。北海道・愛知県・新潟県等の公立高校へ提供実績あり。「公教育ソリューション事業部」専用問い合わせフォームに「貴社名」必須欄ありを直接WebFetchで確認。個人限定文言・受付終了の記載なし。",
+      "verifiedAt": "2026-08-15",
+      "status": "candidate",
+      "addedAt": "2026-08-15",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
     }
   ]
 }
