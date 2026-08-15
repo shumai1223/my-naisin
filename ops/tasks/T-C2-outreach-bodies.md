@@ -268,6 +268,23 @@ form の candidate 196件の内訳（実測）:
 「本文を書いただけで下書き化を次回に持ち越す」状態を極力作らない。定期チェックポイントの一つとして
 `draftId`欠落件数を数えることを推奨する（診断コマンド: `node -e "const q=require('./data/outreach-queue.json').entries;console.log(q.filter(x=>x.status==='queued'&&x.channel==='email'&&!x.draftId).length)"`）。
 
+## 既知の罠: `body`が実体でなく「外部docへのポインタ文」になっている旧エントリがあった（2026-08-15発見・修正済み）
+
+`data/outreach-queue.json`の`body`フィールド長を全件計測したところ、地方紙5件（東京新聞/信濃毎日新聞/
+沖縄タイムス/琉球新報/四国新聞・いずれも2026-08-02作成の`docs/media-outreach-paste-blocks-2026-08-02.md`
+由来）だけが61〜79文字と極端に短く、中身を見ると`"docs/media-outreach-paste-blocks-2026-08-02.md#1に
+貼るだけの本文を用意済み"`という**実体のないポインタ文字列**だった。これはCowork指示書生成スクリプト
+（`ops/cowork/COWORK-PROMPT-30-04.md`等）が「queue内の既存本文(subject/body)をそのまま転記」する設計
+のため、もしこの5件が将来のCowork指示書に含まれていたら、Coworkはリポジトリへのアクセス権が無いため
+このポインタ文だけを渡され実際の文面が分からず失敗していた（幸い今回はまだどのCowork指示書にも
+含まれていなかったため実害ゼロで発見できた）。5件とも`docs/media-outreach-paste-blocks-2026-08-02.md`
+から実体の本文をqueue側へ転記して修正済み。東京新聞向けの本文は`/stats`表現の過大表現（02:55の修正と
+同型）も同時に是正した（「公開しており」→「公開する仕組みも用意しております・件数が一定数集まった
+指標から順次公開されます」）。**教訓**: 本文を外部docへのポインタで済ませる設計は、参照先のdocが
+Cowork側から読めない構造である以上、queueの`body`フィールドには常に実体を持たせること。今後同様の
+「〇〇に用意済み」という短いポインタ文がbodyに紛れていないか、body長の外れ値チェック（`body.length<200`
+程度）を定期チェックポイントに含める価値がある。
+
 ## この文書が上書きするもの
 
 - `ops/tasks/T-C1-b2b-target-list.md` の「候補を増やし続ける」部分。
