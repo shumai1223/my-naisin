@@ -83,7 +83,16 @@ export const DATA_LICENSE_LEDGER: Record<string, DataLicenseLedgerEntry> = {
     verifiedAt: '2026-08',
   },
   toyama: { prefecture: 'toyama', sourceHost: '.lg.jp', ...UNKNOWN() },
-  ishikawa: { prefecture: 'ishikawa', sourceHost: '.lg.jp', ...UNKNOWN() },
+  ishikawa: {
+    prefecture: 'ishikawa',
+    sourceHost: '.lg.jp',
+    ...UNKNOWN(
+      '石川県教育委員会学校指導課からGmail回答あり（2026-08-07）だが内容は「学校指導課の関連' +
+        'ページからサイト「My Naishin」への参照についてですが、課内で協議して不可となりました」' +
+        '＝mie/wakayamaと同型の被リンク可否の回答のみで、再配布（引用・データ商品への収録）' +
+        '可否には言及していない。再配布の可否は別途確認が必要（要再確認）'
+    ),
+  },
   fukui: { prefecture: 'fukui', sourceHost: '.lg.jp', ...UNKNOWN() },
   ehime: { prefecture: 'ehime', sourceHost: '.lg.jp', ...UNKNOWN() },
   tokushima: { prefecture: 'tokushima', sourceHost: '.lg.jp', ...UNKNOWN() },
@@ -114,7 +123,17 @@ export const DATA_LICENSE_LEDGER: Record<string, DataLicenseLedgerEntry> = {
         'データ商品への収録）可否には言及していない。再配布の可否は別途確認が必要（要再確認）'
     ),
   },
-  wakayama: { prefecture: 'wakayama', sourceHost: '.lg.jp', ...UNKNOWN() },
+  wakayama: {
+    prefecture: 'wakayama',
+    sourceHost: '.lg.jp',
+    ...UNKNOWN(
+      '和歌山県教育庁県立学校教育課からGmail回答あり（2026-08-12 16:49）だが内容は「本県においては' +
+        '公的団体のページ以外へのリンクは原則として行っておらず...個人が運営されているホームページ' +
+        '等へのリンクを挿入することは、公平性や中立性の観点から困難」＝mie/ishikawaと同型の被リンク' +
+        '可否の回答のみで、再配布（引用・データ商品への収録）可否には言及していない。' +
+        '再配布の可否は別途確認が必要（要再確認）'
+    ),
+  },
   shimane: { prefecture: 'shimane', sourceHost: '.lg.jp', ...UNKNOWN() },
   shiga: { prefecture: 'shiga', sourceHost: '.lg.jp', ...UNKNOWN() },
   fukushima: { prefecture: 'fukushima', sourceHost: '.lg.jp', ...UNKNOWN() },
