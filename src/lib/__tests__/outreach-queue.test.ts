@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { sortQueueByPriority, summarizeQueue, queueReviewTierOf, type QueueEntry } from '../outreach-queue';
+import { getPrefectureByCode } from '../prefectures';
 
 function makeEntry(overrides: Partial<QueueEntry>): QueueEntry {
   return {
@@ -220,5 +221,20 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     for (const e of raw.entries.filter((e) => e.formPurpose !== undefined)) {
       expect(e.channel).toBe('form');
     }
+  });
+
+  it('本文中の/pref/<code>リンクは実在する都道府県コードのみ参照する(リンク切れ防止)', () => {
+    const brokenRefs: string[] = [];
+    for (const e of raw.entries) {
+      if (!e.body) continue;
+      const matches = e.body.matchAll(/\/pref\/([a-z]+)/g);
+      for (const m of matches) {
+        const code = m[1];
+        if (!getPrefectureByCode(code)) {
+          brokenRefs.push(`${e.id}: /pref/${code}`);
+        }
+      }
+    }
+    expect(brokenRefs).toEqual([]);
   });
 });
