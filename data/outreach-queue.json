@@ -6297,6 +6297,33 @@
       "status": "candidate",
       "addedAt": "2026-08-16",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane7"
+    },
+    {
+      "id": "lane7-saga-u",
+      "org": "佐賀大学",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "sagakoho@mail.admin.saga-u.ac.jp",
+      "contactClass": "b2b",
+      "evidence": "saga-u.ac.jp/koho/soshiki.html(佐賀大学広報室の組織ページ)を直接curlで確認。「佐賀大学公式ホームページは佐賀大学広報室が管理・制作しています」の署名として掲載された窓口を採用。前回セッションが確認した/contact(ご意見箱)は市民向け意見箱で信号が弱いため不採用とし、広報室の公式窓口に切替",
+      "verifiedAt": "2026-08-16",
+      "status": "candidate",
+      "addedAt": "2026-08-16",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane7"
+    },
+    {
+      "id": "lane7-ryukyu-u",
+      "org": "琉球大学",
+      "lane": "npo",
+      "channel": "form",
+      "contact": "https://www.u-ryukyu.ac.jp/inquiry-form/",
+      "contactClass": "b2b",
+      "evidence": "u-ryukyu.ac.jp/inquiry-form/を直接curlで確認。問い合わせ種別の選択肢に「広報・ホームページに関すること」「共同研究・受託研究に関すること」「大学の総合案内に関すること」が存在し、入力欄にも「所属（会社名等）」があり法人からの問い合わせを想定した設計と確認。前回セッションはTEL専用と判断していたが実際はフォーム受付ありと判明(誤診断の訂正)",
+      "verifiedAt": "2026-08-16",
+      "status": "candidate",
+      "addedAt": "2026-08-16",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane7",
+      "formPurpose": "accepts-b2b"
     }
   ]
 }
