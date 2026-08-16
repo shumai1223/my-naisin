@@ -6206,6 +6206,32 @@
       "status": "candidate",
       "addedAt": "2026-08-16",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane7"
+    },
+    {
+      "id": "lane7-oita-u-education",
+      "org": "大分大学教育学部",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "ed-web@oita-u.ac.jp",
+      "contactClass": "b2b",
+      "evidence": "ed.oita-u.ac.jp/contact/を直接curlで確認。ページ本文に『本学部へのお問い合わせは、こちらで受付しております』とあり、スパム対策で画像化されたメールアドレスを画像ダウンロード後Read toolで目視確認しed-web@oita-u.ac.jpと判読(WebSearch要約が提示したkyosomu@oita-u.ac.jpは実ページで確認できず既知の罠に該当し不採用)",
+      "verifiedAt": "2026-08-16",
+      "status": "candidate",
+      "addedAt": "2026-08-16",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane7"
+    },
+    {
+      "id": "lane7-miyazaki-u-education",
+      "org": "宮崎大学教育学部",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "edusoumu@miyazaki-u.ac.jp",
+      "contactClass": "b2b",
+      "evidence": "miyazaki-u.ac.jp/edu/inquiry.htmlを直接curlで確認。「総務係:教育学部・教育学研究科全般について」区分のメール(○を@に置換の明示的ルールに従い復元)を採用。教務・学生支援係(学生向け)は不採用",
+      "verifiedAt": "2026-08-16",
+      "status": "candidate",
+      "addedAt": "2026-08-16",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane7"
     }
   ]
 }
