@@ -199,7 +199,9 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // 2026-08-16続き2: 家庭教師/通信教育レーンexcluded4件追加(candidateには影響せずqueued数不変)。
     // その後、大学研究室candidate3件(広島/早稲田IASE/京都)に本文を執筆しqueuedへ昇格(141→144・
     // 1晩上限10-15件の範囲内で本日2バッチ目、当日合計15件)。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(144);
+    // 2026-08-17: Gmail実測(in:sent)で3件の送信完了を確認したためqueueから削除しoutreach-ledger.jsonへ反映
+    // (juku-tkg-press=送信済み・lane9-jscs-curriculum=送信済み・edtech-tfabworks=ハードバウンスで打ち切り、144→141)。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(141);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {

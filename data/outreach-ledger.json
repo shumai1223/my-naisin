@@ -1,6 +1,6 @@
 {
   "_comment": "AA-1追撃システムの送信台帳。Gmail MCP(gmail_search q=\"in:sent\" / 受信箱の自動受付メール)で実測した内容を手動で反映する運用(scripts/weekly-kpi-report.tsの手動入力パターンと同じ)。統計処理はsrc/lib/outreach-ledger.tsの純関数が担当。1エントリ=1組織。フォーム送信のみでGmail送信履歴に残らないもの(コエテコ/スタディサプリ等)は次回以降のバックフィル対象・現時点では未収録(捏造回避のため確証のある送信のみ収録)。Λ-3(2026-07-29): reviewTierはエントリ個別のレビュー区分上書き(未指定ならb2b-saasレーンの既定値full-review)。今回は組織名から都道府県単位の小規模な模試団体と明確に判別できたもの(かとうもし/新潟県統一模試会/愛媛県模試/新教研/学悠出版)のみ保守的にspot-checkへ下げた。出版社・塾チェーン等の規模が名前だけでは断定できないものはfull-reviewのまま据え置いている(判断に迷う場合はより厳格な側=full-reviewを既定とする方針)。",
-  "asOf": "2026-08-13",
+  "asOf": "2026-08-17",
   "entries": [
     {
       "id": "benesse-kato",
@@ -1203,6 +1203,39 @@
       "followupCount": 0,
       "threadId": "19ffd7dfe687fc14",
       "note": "⚠️queueにはdraftedAt 2026-08-05・messageId 19fcd6f81263331fの記録があったが、gmail_readで実体無し(Requested entity was not found)かつin:sent検索でも8/6送信の実在を確認できず、実際の初回送信は無かったと判明。にもかかわらず2026-08-14に送信された文面は「先日(8/6)に一度ご連絡させていただきました」という誤った前提を含む(実際には初回連絡)。この文面は既に送信済みのため訂正不能。sentDateは実際に送信が確認できた8/14を採用し、followupCountは0(これが実質の初回)とする。"
+    },
+    {
+      "id": "juku-tkg-press",
+      "org": "株式会社東京個別指導学院(TKG・報道関係者向け窓口)",
+      "lane": "b2b-saas",
+      "sourceTaskId": "T-C2",
+      "sentDate": "2026-08-16",
+      "status": "awaiting",
+      "followupCount": 0,
+      "threadId": "1a0044e2b9c98caf",
+      "note": "正しい文面(「公開する仕組みも用意しております」・23:04:55送信)。⚠️同日23:06:12に同一宛先へ旧文面(過大表現「も公開しています」・削除依頼済みだったが未削除のまま残存していた下書き)も重複送信されてしまった(threadId 1a002f3874116bc4・queueには未登録の別スレッド)。loop-question-noteへ報告済み。夏期休業中(8/11-16)のため自動応答のみ受信、実質初回対応は8/17 10時以降。"
+    },
+    {
+      "id": "lane9-jscs-curriculum",
+      "org": "日本カリキュラム学会(教育課程・カリキュラム研究の学術団体)",
+      "lane": "npo",
+      "sourceTaskId": "T-C2",
+      "sentDate": "2026-08-16",
+      "status": "awaiting",
+      "followupCount": 0,
+      "threadId": "1a00602534598a97",
+      "note": "送信完了・自動受領確認(お問合せNo:663901・23:04:58受信)。同一運営代行事務局(ml.gakkai.ne.jp)宛の他候補は同日に追加送信していないことを確認済み(分散方針を維持)。"
+    },
+    {
+      "id": "edtech-tfabworks",
+      "org": "株式会社ティーファブワークス",
+      "lane": "b2b-saas",
+      "sourceTaskId": "T-C2",
+      "sentDate": "2026-08-16",
+      "status": "closed",
+      "followupCount": 0,
+      "threadId": "1a002f36749b8db4",
+      "note": "ハードバウンス(550 5.1.1 The email account that you tried to reach does not exist)。info@tfabworks.comは死んだアドレスと確定・再送不可のため打ち切り。"
     }
   ]
 }
