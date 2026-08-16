@@ -216,7 +216,8 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // lane1-npo-jzk(本文執筆済みだがstatus昇格漏れだった1件)を追加でqueuedへ昇格(182→186)。
     // 2026-08-17続き8: b2b-saas残candidateからlane2-presto/学びの森/日本標準に新規本文執筆、
     // career-mynavi-koshien-teacher(本文執筆済みだがstatus昇格漏れだった1件)を追加でqueuedへ昇格(186→190)。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(190);
+    // 2026-08-17続き9: npo/lane9残り学会4件+kyoiku-i(教育大学広報)1件に新規本文執筆しqueuedへ昇格(190→195)。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(195);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {
