@@ -5326,16 +5326,18 @@
     },
     {
       "id": "edtech-terraport-campusentry",
-      "org": "株式会社テラポート(大学・専門学校向けWeb出願システム「Campus ENTRY」)",
+      "org": "株式会社テラポート(私立中高向け生徒募集支援ソリューション「Can'dy series」)",
       "lane": "b2b-saas",
       "channel": "form",
       "contact": "https://terraport.jp/contact/",
       "contactClass": "b2b",
-      "evidence": "大学・専門学校向けWeb出願・合否発表システム「Campus ENTRY」の開発会社。お問い合わせフォームに「学校名・または企業名」欄(任意)を直接WebFetchで確認、個人限定文言・受付終了の記載なし。Web出願システム比較記事(aspicjapan.org/asu/article/4892)由来。",
-      "verifiedAt": "2026-08-15",
-      "status": "candidate",
+      "evidence": "当初は大学・専門学校向けWeb出願システム「Campus ENTRY」を対象に登録していたが、2026-08-17にWebFetchで同社サービス一覧を再確認したところ、同社は私立中学校・高等学校向け生徒募集支援ソリューション「Can'dy series」(募集広報アプリ「Can'dy APP」・イベント予約「Can'dy RESERVE」・WEB出願「Can'dy ENTRY」・合否通知「Can'dy LOOK」の4モジュール構成)を別ラインで展開しており、当サイトの対象読者(高校受験生・保護者)との適合度はCampus ENTRY(大学向け)よりCan'dy series(私立中高向け)の方が高いと判明。問い合わせフォーム(https://terraport.jp/contact/)は「学校名・または企業名」が任意項目で「お問い合わせ区分」に「キャンディシリーズについて」の選択肢があることも直接WebFetchで確認済み(学校法人限定ではなく一般企業も送信可能)。",
+      "verifiedAt": "2026-08-17",
+      "status": "queued",
       "addedAt": "2026-08-15",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
+      "subject": "私立中高向け募集支援ソリューションと公立高校入試データの相互補完について（My Naishin）",
+      "body": "株式会社テラポート ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します(中学生が個人で運営しております)。\n\n貴社の「Can'dy series」をご利用の私立中学校・高等学校様の受験生・保護者様は、多くの場合、私立校と並行して公立高校も併願検討されているかと存じます。当サイトでは全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、REST API / MCP（AIエージェント向け）として無料〜有償で提供しております。\nhttps://my-naishin.com/developers\n\n併願検討中の受験生向け情報提供の一環として、貴社の募集支援ソリューションと当サイトのデータに何か接点がないか、まずは情報交換だけでもさせていただければと思いご連絡いたしました。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com　naishin.dev@gmail.com"
     },
     {
       "id": "edtech-mined-programming",
