@@ -5997,6 +5997,32 @@
       "status": "candidate",
       "addedAt": "2026-08-16",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane7"
+    },
+    {
+      "id": "lane7-shizuoka-u-education",
+      "org": "静岡大学教育学部",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "kyouiku@adb.shizuoka.ac.jp",
+      "contactClass": "b2b",
+      "evidence": "ed.shizuoka.ac.jp/access_inquiry/を直接curlで確認([at]表記を@に変換)。「総務係」が担当する窓口で「講義室の利用(学外)」を含む学外者向け一般問い合わせ(TEL 054-238-4572)。学務係(入試・学生関係)とは別区分で個人名なし",
+      "verifiedAt": "2026-08-16",
+      "status": "candidate",
+      "addedAt": "2026-08-16",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane7"
+    },
+    {
+      "id": "lane7-shinshu-u",
+      "org": "信州大学",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "shinhp@shinshu-u.ac.jp",
+      "contactClass": "b2b",
+      "evidence": "shinshu-u.ac.jp/inquiry/index.htmlを直接curlで確認(HTML実体参照でエンコードされたmailtoを復元)。「総合案内」窓口(TEL 0263-35-4600代表)で、問い合わせ者の立場に「受験生・保護者・学生・一般等」を明記くださいと案内されており一般(学外者)からの問い合わせも想定した大学全体の窓口。教育学部単体の個別窓口は未発見のため大学全体窓口として登録(信州大学教育学部は前掲の学務・入試課窓口のみで学外一般向けの独立メールは無し)",
+      "verifiedAt": "2026-08-16",
+      "status": "candidate",
+      "addedAt": "2026-08-16",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane7"
     }
   ]
 }
