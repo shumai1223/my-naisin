@@ -6115,6 +6115,19 @@
       "status": "candidate",
       "addedAt": "2026-08-16",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane7"
+    },
+    {
+      "id": "lane7-nara-kyoiku-u",
+      "org": "奈良教育大学",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "kikaku-kouhou@nara-edu.ac.jp",
+      "contactClass": "b2b",
+      "evidence": "nara-edu.ac.jp/students/contact/secretariat.html(事務局等連絡先一覧)を直接curlで確認。事務局総務課のメールはドメイン部分「@nara-edu.ac.jp」が画像化(at_naraedu.gif・110x12px)されていたため画像を実際にダウンロードしRead toolで目視確認(画像内テキスト「@nara-edu.ac.jp」を確認)、前置文字列kikaku-kouhouと結合して復元。総務課(個人名なし・組織名義・一般向け)を採用",
+      "verifiedAt": "2026-08-16",
+      "status": "candidate",
+      "addedAt": "2026-08-16",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane7"
     }
   ]
 }
