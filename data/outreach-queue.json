@@ -6141,6 +6141,32 @@
       "status": "candidate",
       "addedAt": "2026-08-16",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane7"
+    },
+    {
+      "id": "lane7-kanazawa-u-education",
+      "org": "金沢大学(人間社会学域学校教育学類)",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "n-somu@adm.kanazawa-u.ac.jp",
+      "contactClass": "b2b",
+      "evidence": "hss.w3.kanazawa-u.ac.jp/about/inq/を直接curlで確認。学校教育学類を含む人間社会学域全体を管轄する人間社会系事務部の「諸行事、会議等その他総務に関すること」区分(総務課総務係・個人名なし・組織名義)のメールを採用",
+      "verifiedAt": "2026-08-16",
+      "status": "candidate",
+      "addedAt": "2026-08-16",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane7"
+    },
+    {
+      "id": "lane7-fukui-u-education",
+      "org": "福井大学教育学部",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "office@ad.u-fukui.ac.jp",
+      "contactClass": "b2b",
+      "evidence": "u-fukui.ac.jp/enq/を直接curlで確認(※は@に置換)。教育学部は文京キャンパス所属で学部単体の一般窓口は見当たらず、全学共通の「その他:大学へのご意見・ご質問」区分(総務部総務課・個人名なし・組織名義)を機関単位窓口として採用(lane7-shinshu-u/lane7-jaueと同型の例外パターン)",
+      "verifiedAt": "2026-08-16",
+      "status": "candidate",
+      "addedAt": "2026-08-16",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane7"
     }
   ]
 }
