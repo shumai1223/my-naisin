@@ -5653,6 +5653,76 @@
       "excludeReason": "サイトへの接続自体が不可(閉鎖/移転の可能性)",
       "addedAt": "2026-08-16",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane8"
+    },
+    {
+      "id": "lane8-excluded-miyazaki-kyogo",
+      "org": "一般社団法人宮崎県教職員互助会",
+      "lane": "npo",
+      "channel": "form",
+      "contact": "https://www.miyazaki-kyogo.or.jp/contact/",
+      "contactClass": "consumer",
+      "evidence": "miyazaki-kyogo.or.jp/contact/の生HTMLをcurlで確認。「会員選択」欄が必須で選択肢が「一般」「現職会員」「退職互助部会員」のみ、加えて「会員番号(職員番号)」「所属名」欄があり会員以外の一般法人からの問い合わせを想定していない",
+      "verifiedAt": "2026-08-16",
+      "status": "excluded",
+      "excludeReason": "会員区分選択必須のフォームでb2b窓口ではない",
+      "addedAt": "2026-08-16",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane8"
+    },
+    {
+      "id": "lane8-excluded-wakayama-kyogo",
+      "org": "一般財団法人和歌山県教育互助会",
+      "lane": "npo",
+      "channel": "form",
+      "contact": "https://www.wakyogo.or.jp/inquiry/",
+      "contactClass": "consumer",
+      "evidence": "wakyogo.or.jp/inquiry/の生HTMLをcurlで確認。「会員区分」(現職会員/退職会員)必須選択+「会員番号」欄があり、会員本人確認前提のフォーム",
+      "verifiedAt": "2026-08-16",
+      "status": "excluded",
+      "excludeReason": "会員区分選択必須のフォームでb2b窓口ではない",
+      "addedAt": "2026-08-16",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane8"
+    },
+    {
+      "id": "lane8-excluded-nara-kyogo",
+      "org": "一般財団法人奈良県教職員互助組合",
+      "lane": "npo",
+      "channel": "unknown",
+      "contact": "http://nakyogo.or.jp/form/",
+      "contactClass": "consumer",
+      "evidence": "nakyogo.or.jp/form/を直接curlで確認。ページ内の文言が「会員のページ」「会員番号」中心で、会員ログイン前提のフォームと判断。トップページにも一般問い合わせ用の代表メール・電話が見当たらず",
+      "verifiedAt": "2026-08-16",
+      "status": "excluded",
+      "excludeReason": "会員ログイン前提のフォームでb2b窓口ではない",
+      "addedAt": "2026-08-16",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane8"
+    },
+    {
+      "id": "lane8-excluded-okinawa-kyosaikai",
+      "org": "一般社団法人沖縄県教職員共済会",
+      "lane": "npo",
+      "channel": "unknown",
+      "contact": "http://okikyousai.jp/honbu.html",
+      "contactClass": "unknown",
+      "evidence": "okikyousai.jp配下の複数ページ(top/footer/title/sosikigaiyou/sibu/honbu)をcurlで直接確認したがhonbu.htmlの電話番号(098-867-1760/098-861-6725)以外に連絡先情報が見つからずメール/フォームは無い",
+      "verifiedAt": "2026-08-16",
+      "status": "excluded",
+      "excludeReason": "TEL以外の連絡経路が見つからない",
+      "addedAt": "2026-08-16",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane8"
+    },
+    {
+      "id": "lane8-excluded-kagawa-kyogo",
+      "org": "一般財団法人香川県教職員互助会",
+      "lane": "npo",
+      "channel": "unknown",
+      "contact": "https://kgbenefit.jp/",
+      "contactClass": "unknown",
+      "evidence": "kgbenefit.jp(香川県教職員福利厚生サポートサイト)をcurlで確認(既定UAは403で拒否されChrome UAで200取得)。パス構成が「member-card」中心の会員カード管理サイトで、TEL(087-832-3791/087-837-7103)以外にメール/一般問い合わせフォームが見当たらない",
+      "verifiedAt": "2026-08-16",
+      "status": "excluded",
+      "excludeReason": "会員カード管理サイトでTEL以外の連絡経路が見つからない",
+      "addedAt": "2026-08-16",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane8"
     }
   ]
 }
