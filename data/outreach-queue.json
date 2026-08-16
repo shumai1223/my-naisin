@@ -6193,6 +6193,19 @@
       "status": "candidate",
       "addedAt": "2026-08-16",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane7"
+    },
+    {
+      "id": "lane7-kumamoto-u-education",
+      "org": "熊本大学教育学部",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "kyo-somu@jimu.kumamoto-u.ac.jp",
+      "contactClass": "b2b",
+      "evidence": "kumamoto-u.ac.jp/contactを直接curlで確認。ページ冒頭に『メールアドレスについては、kumamoto-u.ac.jpを※に置き換えております』と明記されており、人社・教育系事務課(教育学部・教育学研究科等を管轄)の`kyo-somu@jimu.※`を機械的に復元。個人名なし・組織名義",
+      "verifiedAt": "2026-08-16",
+      "status": "candidate",
+      "addedAt": "2026-08-16",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane7"
     }
   ]
 }
