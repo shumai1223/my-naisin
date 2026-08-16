@@ -204,7 +204,9 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // 2026-08-17続き: T-C2下書き上限リセット後、lane9の学会・校長会12件(email8+form4)に本文を執筆しqueuedへ昇格(141→153)。
     // 2026-08-17続き2: 同夜2バッチ目としてlane9の学会6件(email4+form2)に本文を執筆しqueuedへ昇格(153→159・
     // 本日のGmail下書き作成数は合計12件で1晩10-15件上限内)。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(159);
+    // 2026-08-17続き3: b2b-saas/lane4の校務支援システム・出願システム系candidate5件(全件form channelの
+    // ためGmail下書き上限の対象外)に本文を執筆しqueuedへ昇格(159→164)。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(164);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {
