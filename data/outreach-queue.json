@@ -5790,6 +5790,62 @@
       "excludeReason": "現職/退職の会員区分別構成でTEL以外の連絡経路が無い",
       "addedAt": "2026-08-16",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane8"
+    },
+    {
+      "id": "lane8-excluded-fukushima-kyogo",
+      "org": "一般財団法人福島県教職員互助会",
+      "lane": "npo",
+      "channel": "unknown",
+      "contact": "http://www.fgojokai.com/",
+      "contactClass": "unknown",
+      "evidence": "fgojokai.comの全リンクをcurlで確認。TEL(024-521-7798)のみでメール/一般問い合わせフォームへのリンクがナビゲーションに見当たらない",
+      "verifiedAt": "2026-08-16",
+      "status": "excluded",
+      "excludeReason": "TEL以外の連絡経路が見つからない",
+      "addedAt": "2026-08-16",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane8"
+    },
+    {
+      "id": "lane8-excluded-gifu-kyogo-1",
+      "org": "一般財団法人岐阜県教職員互助会",
+      "lane": "npo",
+      "channel": "unknown",
+      "contact": "http://www.gikyogo.jp/",
+      "contactClass": "consumer",
+      "evidence": "gikyogo.jpの全リンクをcurlで確認。サイト構成が「現職会員」「退職会員」「特別会員」の会員区分別ナビゲーションのみで一般問い合わせ窓口が見当たらない",
+      "verifiedAt": "2026-08-16",
+      "status": "excluded",
+      "excludeReason": "会員区分別ナビゲーション中心でb2b窓口が見当たらない",
+      "addedAt": "2026-08-16",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane8"
+    },
+    {
+      "id": "lane8-excluded-osaka-kyogo",
+      "org": "一般財団法人大阪府教職員互助組合",
+      "lane": "npo",
+      "channel": "unknown",
+      "contact": "http://www.daikyogo.or.jp/",
+      "contactClass": "consumer",
+      "evidence": "daikyogo.or.jpの全リンクをcurlで確認。サイト構成が`/site/guest/login/`という会員ログインポータル中心で一般問い合わせ窓口が見当たらない",
+      "verifiedAt": "2026-08-16",
+      "status": "excluded",
+      "excludeReason": "会員ログインポータル中心でb2b窓口が見当たらない",
+      "addedAt": "2026-08-16",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane8"
+    },
+    {
+      "id": "lane8-excluded-hyogo-gakko-kouseikai",
+      "org": "一般財団法人兵庫県学校厚生会",
+      "lane": "npo",
+      "channel": "unknown",
+      "contact": "http://www.kouseikai.or.jp/public/about/otoiawase/index.html",
+      "contactClass": "consumer",
+      "evidence": "kouseikai.or.jpのお問い合わせページを直接curlで確認したが、実際のリンク先は全て`/member/`配下の会員限定ページ(会員番号手続き・現職版/退職版の制度改革案内等)で、構造化された一般問い合わせフォームやメールアドレスが見当たらない",
+      "verifiedAt": "2026-08-16",
+      "status": "excluded",
+      "excludeReason": "会員限定ページのみでb2b窓口が見当たらない",
+      "addedAt": "2026-08-16",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane8"
     }
   ]
 }
