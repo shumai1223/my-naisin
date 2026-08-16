@@ -5407,6 +5407,32 @@
       "status": "candidate",
       "addedAt": "2026-08-16",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-ynu-education-somu",
+      "org": "横浜国立大学 教育学部・教育学研究科 教育学系総務係",
+      "lane": "kyoiku-i",
+      "channel": "email",
+      "contact": "edu.somu@ynu.ac.jp",
+      "contactClass": "b2b",
+      "evidence": "公式お問い合わせ一覧(ynu.ac.jp/inquiry/general.html)をcurlで取得した生HTMLの『各学部・大学院総務担当お問い合わせ先』表に『教育学部・教育学研究科／教育学系総務係／edu.somu(画像アットマーク)ynu.ac.jp』を直接確認。組織名義の窓口(個人名なし)",
+      "verifiedAt": "2026-08-16",
+      "status": "candidate",
+      "addedAt": "2026-08-16",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-hokkyodai-somu",
+      "org": "北海道教育大学 総務課総務・法規グループ（札幌校）",
+      "lane": "kyoiku-i",
+      "channel": "email",
+      "contact": "s-somu@j.hokkyodai.ac.jp",
+      "contactClass": "b2b",
+      "evidence": "公式お問い合わせページ(hokkyodai.ac.jp/contact/)をcurlで取得した生HTMLに札幌校(本部)総務課総務・法規グループのmailtoリンク(s-somu@j.hokkyodai.ac.jp)を直接確認。教員養成の総合大学(教育大学協会加盟)で組織名義の窓口(個人名なし)",
+      "verifiedAt": "2026-08-16",
+      "status": "candidate",
+      "addedAt": "2026-08-16",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
