@@ -5958,6 +5958,45 @@
       "excludeReason": "JS依存サイトで静的取得では連絡先が抽出できない",
       "addedAt": "2026-08-16",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane8"
+    },
+    {
+      "id": "lane7-naruto-kyoiku",
+      "org": "鳴門教育大学",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "kohou@naruto-u.ac.jp",
+      "contactClass": "b2b",
+      "evidence": "naruto-u.ac.jp/contact/を直接curlで確認。電話番号(088-687-6035)と並んで広報課宛の代表メール(個人名なし)が記載。教員養成単科大学(教育大学協会加盟校)で東京学芸大学/大阪教育大学等と同型の窓口",
+      "verifiedAt": "2026-08-16",
+      "status": "candidate",
+      "addedAt": "2026-08-16",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane7"
+    },
+    {
+      "id": "lane7-kyokyo-u",
+      "org": "京都教育大学",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "kouhou@kyokyo-u.ac.jp",
+      "contactClass": "b2b",
+      "evidence": "kyokyo-u.ac.jp/inquiry/の問い合わせ先一覧ページを直接curlで確認(メールは◎を@に置換する表記)。「広報関係について」区分の総務・企画課 企画・広報グループ宛アドレスで、担当業務に「公開講座・公開講演会」「講演講師依頼等」「本学への取材申込」「共催・後援等申請」が明記されており外部からの提携・情報提供打診を受け付ける窓口と確定",
+      "verifiedAt": "2026-08-16",
+      "status": "candidate",
+      "addedAt": "2026-08-16",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane7"
+    },
+    {
+      "id": "lane7-chiba-u-education",
+      "org": "千葉大学教育学部",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "hag2505@office.chiba-u.jp",
+      "contactClass": "b2b",
+      "evidence": "education.chiba-u.jp/contact.htmlの目的別お問い合わせ一覧を直接curlで確認(メールは(アットマーク)表記を@に変換)。入試/教務/就職/教育実習等はいずれも学生向けの担当窓口だったが、末尾の「その他問い合わせ」区分のみ総務係(個人名なし)が担当でTEL 043-290-2508・E-Mail hag2505@office.chiba-u.jp。他大学の総務課パターン(横浜国立大学edu.somu@等)と同型の一般問い合わせ窓口",
+      "verifiedAt": "2026-08-16",
+      "status": "candidate",
+      "addedAt": "2026-08-16",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane7"
     }
   ]
 }
