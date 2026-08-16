@@ -212,7 +212,9 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // 2026-08-17続き5: npo/lane9・lane8のcandidate6件(全件form channel)に本文を執筆しqueuedへ昇格(170→176)。
     // formPurpose='purpose-restricted'のzensho(検定合格者発表専用フォーム)は見送り。
     // 2026-08-17続き6: npo/lane8・lane9の残candidate6件(全件form channel)に本文を執筆しqueuedへ昇格(176→182)。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(182);
+    // 2026-08-17続き7: npo/lane9(みんなのコード)・lane7大学教育学部2件(和歌山大/琉球大)に新規本文執筆、
+    // lane1-npo-jzk(本文執筆済みだがstatus昇格漏れだった1件)を追加でqueuedへ昇格(182→186)。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(186);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {
