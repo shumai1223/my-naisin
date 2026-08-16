@@ -5433,6 +5433,19 @@
       "status": "candidate",
       "addedAt": "2026-08-16",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "media-shijyukukai",
+      "org": "株式会社ステージ・オン(月刊私塾界・全国私塾情報センター)",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "info@shijyukukai.co.jp",
+      "contactClass": "b2b",
+      "evidence": "公式サイトのお問い合わせページ(shijyukukai.jp/about/contact)をcurlで取得した生HTMLに『メールでのお問合せ・ご相談 info@shijyukukai.co.jp(365日24時間受付)』を直接確認。学習塾業界向け専門誌『月刊私塾界』の発行元で、寄稿ページ(/kikou)や学習塾白書(/hakusyo)も運営。T-C1タスクファイルで『塾教室単位』レーンの代替チャネルとして提案されていた業界トレード誌への情報提供打診(寄稿・データ引用の相談)の候補",
+      "verifiedAt": "2026-08-16",
+      "status": "candidate",
+      "addedAt": "2026-08-16",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md"
     }
   ]
 }
