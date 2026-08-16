@@ -5381,6 +5381,32 @@
       "verifiedAt": "2026-08-16",
       "addedAt": "2026-08-16",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-hyogo-kyoiku-soumu",
+      "org": "兵庫教育大学 総務課総務チーム",
+      "lane": "kyoiku-i",
+      "channel": "email",
+      "contact": "office-hisyo-r@ml.hyogo-u.ac.jp",
+      "contactClass": "b2b",
+      "evidence": "公式お問い合わせページ(hyogo-u.ac.jp/inquiry/)をcurlで取得した生HTMLに『大学全般に関すること　総務課総務チーム　office-hisyo-r（あっと）ml.hyogo-u.ac.jp』を直接確認。教員養成の大学院大学(教育大学協会加盟)で組織名義の窓口(個人名なし)",
+      "verifiedAt": "2026-08-16",
+      "status": "candidate",
+      "addedAt": "2026-08-16",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+    },
+    {
+      "id": "lane9-joetsu-kyoiku-kouhou",
+      "org": "上越教育大学 総務課広報チーム",
+      "lane": "kyoiku-i",
+      "channel": "form",
+      "contact": "https://www.juen.ac.jp/120inquiry/form_kouhou.html",
+      "contactClass": "b2b",
+      "evidence": "公式お問い合わせページ(juen.ac.jp/120inquiry/)をcurlで取得した生HTMLに『窓口:総務課広報チーム／メールフォーム:フォームで問い合わせる(form_kouhou.html)』を直接確認。フォーム自体もcurlでHTTP200稼働確認済み(action=/cgi-bin/wcv/extend/form2mail/form2mail.cgi)。教員養成の大学院大学(教育大学協会加盟)で組織名義の窓口(個人名なし・学生向け専用区分なし)",
+      "verifiedAt": "2026-08-16",
+      "status": "candidate",
+      "addedAt": "2026-08-16",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
     }
   ]
 }
