@@ -6023,6 +6023,45 @@
       "status": "candidate",
       "addedAt": "2026-08-16",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane7"
+    },
+    {
+      "id": "lane7-yamanashi-u-education",
+      "org": "山梨大学教育学部",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "edu-admin@yamanashi.ac.jp",
+      "contactClass": "b2b",
+      "evidence": "yamanashi.ac.jp/contactを直接curlで確認。教育学部単体のcontact/ページ(edu-hs@yamanashi.ac.jp)はサイト運営専用で「各機関の取次ぎ依頼」を明示的に対応不可としていたため不採用、大学全体の問い合わせページの「各学部への問い合わせ」表にある教育学部窓口(edu-admin@yamanashi.ac.jp)を採用(個人名なし・組織名義)",
+      "verifiedAt": "2026-08-16",
+      "status": "candidate",
+      "addedAt": "2026-08-16",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane7"
+    },
+    {
+      "id": "lane7-okayama-u-education",
+      "org": "岡山大学教育学部",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "ed-contact@adm.okayama-u.ac.jp",
+      "contactClass": "b2b",
+      "evidence": "edu.okayama-u.ac.jp/contact/を直接curlで確認(◎を@に置換)。問い合わせ内容別の担当表のうち「教員の兼業・派遣」「その他の内容」を扱う庶務グループ宛(個人名なし・組織名義・一般向け)を採用",
+      "verifiedAt": "2026-08-16",
+      "status": "candidate",
+      "addedAt": "2026-08-16",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane7"
+    },
+    {
+      "id": "lane7-kagoshima-u-education",
+      "org": "鹿児島大学教育学部",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "edusyomu@kuas.kagoshima-u.ac.jp",
+      "contactClass": "b2b",
+      "evidence": "edu.kagoshima-u.ac.jp/contact/を直接curlで確認。「その他・全般」区分の総務係宛(個人名なし・組織名義・一般向け)を採用",
+      "verifiedAt": "2026-08-16",
+      "status": "candidate",
+      "addedAt": "2026-08-16",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane7"
     }
   ]
 }
