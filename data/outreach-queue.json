@@ -6128,6 +6128,19 @@
       "status": "candidate",
       "addedAt": "2026-08-16",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane7"
+    },
+    {
+      "id": "lane7-utsunomiya-u-education",
+      "org": "宇都宮大学共同教育学部",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "kyoukoho@cc.utsunomiya-u.ac.jp",
+      "contactClass": "b2b",
+      "evidence": "web.edu.utsunomiya-u.ac.jp/contact/を直接curlで確認。「共同教育学部広報委員会」宛(個人名なし・組織名義・一般向け)のメールが平文で明記されていた",
+      "verifiedAt": "2026-08-16",
+      "status": "candidate",
+      "addedAt": "2026-08-16",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane7"
     }
   ]
 }
