@@ -5723,6 +5723,73 @@
       "excludeReason": "会員カード管理サイトでTEL以外の連絡経路が見つからない",
       "addedAt": "2026-08-16",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane8"
+    },
+    {
+      "id": "lane8-ibaraki-kyoshokuin",
+      "org": "一般財団法人茨城県教職員互助会",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "info@ibakyogo.jp",
+      "contactClass": "b2b",
+      "evidence": "ibakyogo.jpトップページに〒住所・TEL/FAXと並んで一般案内として`MAIL info@ibakyogo.jp`が掲載。ニュース記事内でも会員向けの掛金・給付に関する問い合わせ先として同アドレスを案内しており、個人名なし・会員限定を示すフォームゲートも無い一般代表メール。全国教職員互助団体協議会(全教互 zenkyogo.jp)の加盟団体一覧から正しい公式URLを特定",
+      "verifiedAt": "2026-08-16",
+      "status": "candidate",
+      "addedAt": "2026-08-16",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane8"
+    },
+    {
+      "id": "lane8-aomori-kyoshokuin",
+      "org": "一般財団法人青森県教職員互助会",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "gojokai@pref.aomori.lg.jp",
+      "contactClass": "b2b",
+      "evidence": "青森県庁公式サイト(pref.aomori.lg.jp/soshiki/kyoiku/e-shokuin/gojokai.html)のページ末尾に`<a href=\"mailto:gojokai@pref.aomori.lg.jp\">お問い合わせ</a>`という一般問い合わせリンクを直接curlで確認。県教育庁職員福利課が窓口の互助会で個人名なし。全教互加盟団体一覧経由で特定",
+      "verifiedAt": "2026-08-16",
+      "status": "candidate",
+      "addedAt": "2026-08-16",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane8"
+    },
+    {
+      "id": "lane8-tokushima-kyogo",
+      "org": "一般財団法人徳島県教職員互助組合",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "info@toku-kyougo.or.jp",
+      "contactClass": "b2b",
+      "evidence": "toku-kyougo.or.jpをcurlで直接確認(Shift_JIS古い作りのサイト)。`<a href=\"mailto:info@toku-kyougo.or.jp\">`という「お問い合わせ」リンクをページ内に確認、個人名なし。会員区分選択等のフォームゲートは存在しない(そもそも構造化フォーム自体が無い静的サイト)。全教互加盟団体一覧経由で特定(公式サイトkyouikukai.orgが別団体のコンテンツを返す不整合を検知していた徳島県教育会=lane8既存エントリとは別法人)",
+      "verifiedAt": "2026-08-16",
+      "status": "candidate",
+      "addedAt": "2026-08-16",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane8"
+    },
+    {
+      "id": "lane8-excluded-saitama-kyogo",
+      "org": "一般財団法人埼玉県教職員互助会",
+      "lane": "npo",
+      "channel": "form",
+      "contact": "https://gojo-saitama.jp/contact",
+      "contactClass": "consumer",
+      "evidence": "gojo-saitama.jp/contactを直接curlで確認。「会員専用ページ」「現職会員の方へ」「退職会員の方へ」等、サイト全体が会員資格別ナビゲーションで構成され一般向けb2b窓口が見当たらない",
+      "verifiedAt": "2026-08-16",
+      "status": "excluded",
+      "excludeReason": "会員専用ページ中心の構成でb2b窓口が見当たらない",
+      "addedAt": "2026-08-16",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane8"
+    },
+    {
+      "id": "lane8-excluded-chiba-kyogo",
+      "org": "一般財団法人千葉県公立学校教職員互助会",
+      "lane": "npo",
+      "channel": "unknown",
+      "contact": "http://www.chibagojo.or.jp/",
+      "contactClass": "unknown",
+      "evidence": "chibagojo.or.jpの全リンクをcurlで確認。サイト構成が/incumbent(現職)/retirement(退職)の会員区分別ページのみでTEL番号3件以外にメール/一般問い合わせフォームが見当たらない",
+      "verifiedAt": "2026-08-16",
+      "status": "excluded",
+      "excludeReason": "現職/退職の会員区分別構成でTEL以外の連絡経路が無い",
+      "addedAt": "2026-08-16",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane8"
     }
   ]
 }
