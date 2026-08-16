@@ -206,7 +206,10 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // 本日のGmail下書き作成数は合計12件で1晩10-15件上限内)。
     // 2026-08-17続き3: b2b-saas/lane4の校務支援システム・出願システム系candidate5件(全件form channelの
     // ためGmail下書き上限の対象外)に本文を執筆しqueuedへ昇格(159→164)。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(164);
+    // 2026-08-17続き4: b2b-saas/lane4・lane2の残candidate6件(全件form channel)に本文を執筆しqueuedへ昇格
+    // (164→170)。formPurpose='unknown'の2件(beein-syutsugan/atsystem-ckip・学校法人名必須欄で非学校の
+    // 送信者が弾かれるリスクあり)と大学向け製品のjip-saksak(高校生向けサイトとの適合度が弱い)は見送り。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(170);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {
