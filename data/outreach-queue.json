@@ -6167,6 +6167,32 @@
       "status": "candidate",
       "addedAt": "2026-08-16",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane7"
+    },
+    {
+      "id": "lane7-tottori-u-education",
+      "org": "鳥取大学地域学部",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "reg-syomu@ml.adm.tottori-u.ac.jp",
+      "contactClass": "b2b",
+      "evidence": "rs.tottori-u.ac.jp/inquiry/index.htmlを直接curlで確認。「学部全般について」区分の庶務係(個人名なし・組織名義)を採用。教務係(学生向け)は不採用",
+      "verifiedAt": "2026-08-16",
+      "status": "candidate",
+      "addedAt": "2026-08-16",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane7"
+    },
+    {
+      "id": "lane7-ehime-u-education",
+      "org": "愛媛大学教育学部",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "edsoumu@stu.ehime-u.ac.jp",
+      "contactClass": "b2b",
+      "evidence": "ed.ehime-u.ac.jp/edhp/contact/を直接curlで確認。「事務課総務チーム(庶務・会計)」を採用(個人名なし・組織名義)。学務チーム(edgakumu@・入試/履修等の学生向け)は不採用",
+      "verifiedAt": "2026-08-16",
+      "status": "candidate",
+      "addedAt": "2026-08-16",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane7"
     }
   ]
 }
