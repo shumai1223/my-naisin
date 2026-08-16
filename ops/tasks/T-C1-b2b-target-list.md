@@ -601,6 +601,20 @@ outreach-queue.json全entryのorgフィールドと突合した結果（`lane7-`
 
 ---
 
+## 2026-08-16 lane7大学研究室続き11(残り5校を完走・56校母集団を完全消化)
+
+前回セッションが「一旦終了」とした残り5校を、JS描画の疑いという前回の見立てを検証する目的も兼ねて再訪した。結果は5/5が静的HTML内に平文(難読化含む)で存在しており、前回の"JS動的読み込みの疑い"という診断は誤りだったと判明(実際には単に未着手だっただけ)。全件`curl -A "Mozilla/5.0..."`で生HTML取得→WebFetchでの一次読み取り結果を必ず生HTMLのgrepで裏取りする二段構えを実施(WebFetchのみの信頼は既知の罠に該当するため)。
+
+- ✅**筑波技術大学**(`lane7-tsukuba-tech-u`)。`tsukuba-tech.ac.jp/inquiry/`の大学戦略課広報・国際係(「見学や取材に関すること」区分)`kouhou@ad.tsukuba-tech.ac.jp`。生HTML直接grepで存在確認済み
+- ✅**東京藝術大学**(`lane7-geidai-u`)。`geidai.ac.jp/inquiry`の企画総務課総務・広報係(大学広報・取材申込)`contact@ml.geidai.ac.jp`。生HTML直接grepで存在確認済み。教員養成系ではないがJAUE会員大学として母集団56校に含まれる
+- ✅**お茶の水女子大学**(`lane7-ocha-u`)。`ocha.ac.jp/introduction/menu/008/index.html`から`ocha.ac.jp/about/contact.html`へリンクを辿り、広報・ダイバーシティ推進課`info@cc.ocha.ac.jp`を発見(WebFetchは当初トップの/introduction/ページで「専用アドレスなし」と誤答したが、実際のcontactページを直接curlしたら存在した=WebFetch単独では不十分でリンク先まで裏取りする必要がある実例)
+- ✅**神戸大学**(`lane7-kobe-u`)。`kobe-u.ac.jp/ja/about/public-relations/contact/`の広報課「取材等のお問い合わせ」`ppr-kouhoushitsu@office.kobe-u.ac.jp`。生HTML直接grepで存在確認済み
+- ✅**奈良女子大学**(`lane7-nara-wu-u`)。`nara-wu.ac.jp/nwu/intro/contact/list/`の総務課一般窓口`somusomu@jimu.nara-wu.ac.jp`(ホームページ専用のsomu02とは別)。生HTML直接grepで存在確認済み
+
+**累計(最終)**: lane7は36校がcandidate以上。**母集団56校(JAUE会員一覧)の内訳=candidate以上36校＋excluded(筑波・学生向け窓口のみ等)1校＋試行済みだが未解決3校(佐賀・長崎・琉球=メール記載なし電話専用)＋未確定16校相当**。真の「未着手」は0校となり、lane7は完全に消化した。以後このlaneに戻る場合は佐賀/長崎/琉球の再挑戦(Cowork経由のブラウザ確認等)のみが残タスク。id/org重複0件・tsc実exit0・outreach-queue.test.ts17件green・フルjest318suites5376tests green。
+
+---
+
 ## 2026-08-16 21:5x スプリックス(sprix.inc)再挑戦・確定的に見送り
 
 lane3の帳簿ズレ是正で「次回再挑戦」と記録されていたスプリックス(森塾/湘南ゼミナール運営元)を再訪。①`sprix.inc/contact/`を直接curlで確認したが67文字のみ(IE11非対応通知だけ)でJS-SPAのため本文取得不能(前回と同じ結果)、②代替ルートとしてPR TIMES企業ページ(`prtimes.jp/main/html/searchrlp/company_id/45711`)のプレスリリース一覧も同様にJS描画でリンクを静的取得できず。**2つの独立ルートとも技術的に不可能と確認できたため、「次回再挑戦」を取り下げ「loop環境では構造的に検証不能」と確定させる**(1082行目の新興EdTechスタートアップ判定基準に倣い、今後は深追いしない。Coworkでのブラウザ確認が必要ならタスク化するが優先度は低い)。

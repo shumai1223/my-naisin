@@ -6232,6 +6232,71 @@
       "status": "candidate",
       "addedAt": "2026-08-16",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane7"
+    },
+    {
+      "id": "lane7-tsukuba-tech-u",
+      "org": "筑波技術大学",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "kouhou@ad.tsukuba-tech.ac.jp",
+      "contactClass": "b2b",
+      "evidence": "tsukuba-tech.ac.jp/inquiry/を直接curlで確認。大学戦略課広報・国際係の窓口(「ホームページに関すること」「見学や取材に関すること」区分)を採用。教務・学生支援系の他窓口は不採用",
+      "verifiedAt": "2026-08-16",
+      "status": "candidate",
+      "addedAt": "2026-08-16",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane7"
+    },
+    {
+      "id": "lane7-geidai-u",
+      "org": "東京藝術大学",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "contact@ml.geidai.ac.jp",
+      "contactClass": "b2b",
+      "evidence": "geidai.ac.jp/inquiryを直接curlで確認。企画総務課総務・広報係(大学広報・Webサイト・取材申込)の窓口を採用。学科別の教務・入試系窓口多数は不採用",
+      "verifiedAt": "2026-08-16",
+      "status": "candidate",
+      "addedAt": "2026-08-16",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane7"
+    },
+    {
+      "id": "lane7-ocha-u",
+      "org": "お茶の水女子大学",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "info@cc.ocha.ac.jp",
+      "contactClass": "b2b",
+      "evidence": "ocha.ac.jp/about/contact.htmlを直接curlで確認。広報・ダイバーシティ推進課の窓口を採用。学生・入試・研究協力系の他窓口は不採用",
+      "verifiedAt": "2026-08-16",
+      "status": "candidate",
+      "addedAt": "2026-08-16",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane7"
+    },
+    {
+      "id": "lane7-kobe-u",
+      "org": "神戸大学",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "ppr-kouhoushitsu@office.kobe-u.ac.jp",
+      "contactClass": "b2b",
+      "evidence": "kobe-u.ac.jp/ja/about/public-relations/contact/を直接curlで確認。「取材等のお問い合わせ」広報課の窓口を採用(企業名・担当者名・連絡先・取材内容の明記を求める形式)",
+      "verifiedAt": "2026-08-16",
+      "status": "candidate",
+      "addedAt": "2026-08-16",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane7"
+    },
+    {
+      "id": "lane7-nara-wu-u",
+      "org": "奈良女子大学",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "somusomu@jimu.nara-wu.ac.jp",
+      "contactClass": "b2b",
+      "evidence": "nara-wu.ac.jp/nwu/intro/contact/list/を直接curlで確認。総務課の一般的なお問い合わせ窓口を採用(ホームページ内容専用のsomu02は不採用)",
+      "verifiedAt": "2026-08-16",
+      "status": "candidate",
+      "addedAt": "2026-08-16",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane7"
     }
   ]
 }
