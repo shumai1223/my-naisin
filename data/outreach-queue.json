@@ -5446,6 +5446,20 @@
       "status": "candidate",
       "addedAt": "2026-08-16",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md"
+    },
+    {
+      "id": "edtech-nipponhyojun",
+      "org": "株式会社日本標準(小学校向け標準学力検査NRT/CRT等)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.nipponhyojun.co.jp/contact/",
+      "contactClass": "b2b",
+      "formPurpose": "accepts-b2b",
+      "evidence": "公式お問い合わせフォームをcurlで取得した生HTMLを確認。『目的』ラジオボタンに商品/販売/その他の3区分、『職業』ラジオボタンに小学校教諭/中学校教諭/教育委員会・自治体/幼稚園・保育園/民間企業・団体/保護者/その他の7区分があり、学校・保護者以外(民間企業・団体/その他)からの一般的な情報提供の送信も想定された設計と判明。全国の小学校で使われる標準学力検査(NRT/CRT)の発行元で、偏差値・学力データとの親和性が高い",
+      "verifiedAt": "2026-08-16",
+      "status": "candidate",
+      "addedAt": "2026-08-16",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md"
     }
   ]
 }
