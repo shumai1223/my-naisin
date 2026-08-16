@@ -6062,6 +6062,32 @@
       "status": "candidate",
       "addedAt": "2026-08-16",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane7"
+    },
+    {
+      "id": "lane7-niigata-u-education",
+      "org": "新潟大学教育学部",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "soumu@ed.niigata-u.ac.jp",
+      "contactClass": "b2b",
+      "evidence": "niigata-u.ac.jp/university/contact/organization/(学部・大学院等の組織別連絡先一覧)を直接curlで確認。教育学部の担当部局「人文社会科学系総務課(教育)」宛(個人名なし・組織名義・一般向け)を採用",
+      "verifiedAt": "2026-08-16",
+      "status": "candidate",
+      "addedAt": "2026-08-16",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane7"
+    },
+    {
+      "id": "lane7-mie-u-education",
+      "org": "三重大学教育学部",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "edu-somu@ab.mie-u.ac.jp",
+      "contactClass": "b2b",
+      "evidence": "edu.mie-u.ac.jp/contact/index.htmlを直接curlで確認。メールはスパム対策のテキスト置換表記(「edu-somu@」+「@以下はab.mie-u.ac.jpです」)だったため機械的に結合し復元。学務係(edu-gakumu@・学生向け)は不採用、総務係(edu-somu@)を採用(個人名なし・組織名義・一般向け)",
+      "verifiedAt": "2026-08-16",
+      "status": "candidate",
+      "addedAt": "2026-08-16",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane7"
     }
   ]
 }
