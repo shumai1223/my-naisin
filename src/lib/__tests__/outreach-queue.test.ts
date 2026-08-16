@@ -211,7 +211,8 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // 送信者が弾かれるリスクあり)と大学向け製品のjip-saksak(高校生向けサイトとの適合度が弱い)は見送り。
     // 2026-08-17続き5: npo/lane9・lane8のcandidate6件(全件form channel)に本文を執筆しqueuedへ昇格(170→176)。
     // formPurpose='purpose-restricted'のzensho(検定合格者発表専用フォーム)は見送り。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(176);
+    // 2026-08-17続き6: npo/lane8・lane9の残candidate6件(全件form channel)に本文を執筆しqueuedへ昇格(176→182)。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(182);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {

@@ -2242,9 +2242,11 @@
       "contactClass": "b2b",
       "evidence": "zen-p.net/sus/contact.htmlを直接WebFetchで確認。「行政関連や企業」向けの専用フォーム区分を含む複数区分の実在フォームを確認しb2b確定(PTA/個人向けとは分離された法人・行政向け窓口)。全国のPTA連合会・単位PTA・地域団体を対象にした運営支援団体で保護者接点のある提携先候補",
       "verifiedAt": "2026-08-12",
-      "status": "candidate",
+      "status": "queued",
       "addedAt": "2026-08-12",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane8"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane8",
+      "subject": "【情報提供】公立高校入試・内申点計算データのご案内(My Naishin)",
+      "body": "一般社団法人全国PTA連絡協議会 ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の教育委員会が公表する公立高校入試の入学者選抜方式(内申点の計算方法・総合得点の算出方式等)を独自に整理し、一次資料の出典を明記したうえでウェブサイトとして公開しています(https://my-naishin.com)。あわせて、サイト利用者の同意のもとで匿名集計した「全国の中学生の内申点・偏差値の分布データ」を公開する仕組みも用意しております(https://my-naishin.com/stats・件数が一定数集まった指標から順次公開されます)。\n\n貴協議会が全国のPTA・保護者団体を対象に情報提供・運営支援をされていることを拝見しました。都道府県ごとに異なる公立高校入試制度の実務データ(内申点の計算方法・総合得点の算出方式等)が、加盟PTA・保護者向けの進路情報提供の一助になる場面があるのではと考え、情報提供としてご連絡いたしました。\n\nご不要でしたら、このメールもそのまま読み流していただければ結構です。\n\nしゅうまい / My Naishin 運営(中学生・個人開発)\nnaishin.dev@gmail.com\nhttps://my-naishin.com"
     },
     {
       "id": "lane1-shijuku-net",
@@ -2673,9 +2675,11 @@
       "contactClass": "b2b",
       "evidence": "manabitomanabi.com/contactを直接WebFetchで確認。問い合わせ区分に取材依頼/講演依頼/提携等のb2b向けカテゴリがあり、団体名/企業名(任意)欄も存在することを確認しb2b確定。子ども・外国人・大学生向けの学び場づくりを展開する認定NPO法人(神戸市)",
       "verifiedAt": "2026-08-12",
-      "status": "candidate",
+      "status": "queued",
       "addedAt": "2026-08-12",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane8-npo"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane8-npo",
+      "subject": "【情報提供】公立高校入試・内申点計算データのご案内(My Naishin)",
+      "body": "認定NPO法人まなびと ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の教育委員会が公表する公立高校入試の入学者選抜方式(内申点の計算方法・総合得点の算出方式等)を独自に整理し、一次資料の出典を明記したうえでウェブサイトとして公開しています(https://my-naishin.com)。あわせて、サイト利用者の同意のもとで匿名集計した「全国の中学生の内申点・偏差値の分布データ」を公開する仕組みも用意しております(https://my-naishin.com/stats・件数が一定数集まった指標から順次公開されます)。\n\n貴法人が展開される子ども・外国人・大学生向けの学び場づくりの取り組みを拝見しました。都道府県ごとに異なる公立高校入試制度の実務データが、進路支援や学習支援の現場で何かの参考になる場面があるのではと考え、情報提供としてご連絡いたしました。\n\nご不要でしたら、このメールもそのまま読み流していただければ結構です。\n\nしゅうまい / My Naishin 運営(中学生・個人開発)\nnaishin.dev@gmail.com\nhttps://my-naishin.com"
     },
     {
       "id": "npo-bunkagakushu",
@@ -3110,13 +3114,15 @@
       "org": "一般社団法人日本産業技術教育学会",
       "lane": "npo",
       "channel": "form",
-      "contact": "http://www.jste.jp/main/contact/contact.html",
+      "contact": "https://www.jste.jp/main/contact/contact.html",
       "contactClass": "b2b",
       "evidence": "jste.jp/main/contact/contact.htmlを直接WebFetchで確認。氏名/所属/住所/電話/メールの入力フォームがあり所属欄で組織識別が可能なことを確認しb2b確定。技術科教育の学術団体",
       "verifiedAt": "2026-08-12",
-      "status": "candidate",
+      "status": "queued",
       "addedAt": "2026-08-12",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9",
+      "subject": "【情報提供】公立高校入試・内申点計算データのご案内(My Naishin)",
+      "body": "一般社団法人日本産業技術教育学会 ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の教育委員会が公表する公立高校入試の入学者選抜方式(内申点の計算方法・総合得点の算出方式等)を独自に整理し、一次資料の出典を明記したうえでウェブサイトとして公開しています(https://my-naishin.com)。あわせて、サイト利用者の同意のもとで匿名集計した「全国の中学生の内申点・偏差値の分布データ」を公開する仕組みも用意しております(https://my-naishin.com/stats・件数が一定数集まった指標から順次公開されます)。\n\n貴学会がご専門とされる技術科教育の研究において、都道府県ごとに異なる入試制度の実務データが、技術・情報教育と進路指導を結びつける研究資料としてお役に立つ場面があるのではと考え、情報提供としてご連絡いたしました。\n\nご不要でしたら、このメールもそのまま読み流していただければ結構です。\n\nしゅうまい / My Naishin 運営(中学生・個人開発)\nnaishin.dev@gmail.com\nhttps://my-naishin.com"
     },
     {
       "id": "lane9-jsfee",
@@ -3153,9 +3159,11 @@
       "contactClass": "b2b",
       "evidence": "zenkyoukyou.jp/contact/を直接WebFetchで確認。『学校名』欄が明示的にある問い合わせフォームでb2b確定。定時制・通信制高校の教頭・副校長で構成される全国団体",
       "verifiedAt": "2026-08-12",
-      "status": "candidate",
+      "status": "queued",
       "addedAt": "2026-08-12",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9",
+      "subject": "【情報提供】公立高校入試・内申点計算データのご案内(My Naishin)",
+      "body": "全国高等学校定時制通信制教頭・副校長協会 ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の教育委員会が公表する公立高校入試の入学者選抜方式(内申点の計算方法・総合得点の算出方式等)を独自に整理し、一次資料の出典を明記したうえでウェブサイトとして公開しています(https://my-naishin.com)。あわせて、サイト利用者の同意のもとで匿名集計した「全国の中学生の内申点・偏差値の分布データ」を公開する仕組みも用意しております(https://my-naishin.com/stats・件数が一定数集まった指標から順次公開されます)。\n\n貴協会に加盟される定時制・通信制高校の教頭・副校長の皆様の進路指導のご担当において、都道府県ごとに異なる公立高校入試制度の実務データが、生徒・保護者向けの説明資料の参考になる場面があるのではと考え、情報提供としてご連絡いたしました。\n\nご不要でしたら、このメールもそのまま読み流していただければ結構です。\n\nしゅうまい / My Naishin 運営(中学生・個人開発)\nnaishin.dev@gmail.com\nhttps://my-naishin.com"
     },
     {
       "id": "lane9-kobunren",
@@ -3383,9 +3391,11 @@
       "contactClass": "b2b",
       "evidence": "公式サイト`sansinchuoukai.or.jp/contact.html`を直接WebFetchで確認。入力項目に『学校名』『部署名』欄があり明確に組織(学校/団体)からの問い合わせを想定した設計。工業/商業/水産/家庭等の専門高校教育を横断的に支援する中央団体で、機関誌『産業と教育』を発行",
       "verifiedAt": "2026-08-12",
-      "status": "candidate",
+      "status": "queued",
       "addedAt": "2026-08-12",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9",
+      "subject": "【情報提供】公立高校入試・内申点計算データのご案内(My Naishin)",
+      "body": "公益財団法人産業教育振興中央会 ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の教育委員会が公表する公立高校入試の入学者選抜方式(内申点の計算方法・総合得点の算出方式等)を独自に整理し、一次資料の出典を明記したうえでウェブサイトとして公開しています(https://my-naishin.com)。あわせて、サイト利用者の同意のもとで匿名集計した「全国の中学生の内申点・偏差値の分布データ」を公開する仕組みも用意しております(https://my-naishin.com/stats・件数が一定数集まった指標から順次公開されます)。\n\n貴会がご支援される工業・商業・水産・家庭等の専門高校教育において、都道府県ごとに異なる公立高校入試制度の実務データが、加盟校の進路指導・入試広報の参考になる場面があるのではと考え、情報提供としてご連絡いたしました。\n\nご不要でしたら、このメールもそのまま読み流していただければ結構です。\n\nしゅうまい / My Naishin 運営(中学生・個人開発)\nnaishin.dev@gmail.com\nhttps://my-naishin.com"
     },
     {
       "id": "lane9-tokkatsu",
@@ -3435,9 +3445,11 @@
       "contactClass": "b2b",
       "evidence": "公式サイト`sme.or.jp/contact/`を直接WebFetchで確認。会員/非会員選択・会員番号入力欄を持つ公式問い合わせフォーム(公益社団法人事務局宛)。数学教育の学術団体で入試制度・学力データの研究対象と隣接",
       "verifiedAt": "2026-08-12",
-      "status": "candidate",
+      "status": "queued",
       "addedAt": "2026-08-12",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9",
+      "subject": "【情報提供】公立高校入試・内申点計算データのご案内(My Naishin)",
+      "body": "公益社団法人日本数学教育学会 ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の教育委員会が公表する公立高校入試の入学者選抜方式(内申点の計算方法・総合得点の算出方式等)を独自に整理し、一次資料の出典を明記したうえでウェブサイトとして公開しています(https://my-naishin.com)。あわせて、サイト利用者の同意のもとで匿名集計した「全国の中学生の内申点・偏差値の分布データ」を公開する仕組みも用意しております(https://my-naishin.com/stats・件数が一定数集まった指標から順次公開されます)。\n\n貴学会がご専門とされる数学教育の研究において、都道府県ごとに異なる入試制度の実務データ(内申点の計算方法・総合得点の算出方式等)が、学力データと入試制度を結びつける研究資料としてお役に立つ場面があるのではと考え、情報提供としてご連絡いたしました。\n\nご不要でしたら、このメールもそのまま読み流していただければ結構です。\n\nしゅうまい / My Naishin 運営(中学生・個人開発)\nnaishin.dev@gmail.com\nhttps://my-naishin.com"
     },
     {
       "id": "lane4-viling",
