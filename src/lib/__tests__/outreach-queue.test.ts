@@ -202,7 +202,9 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // 2026-08-17: Gmail実測(in:sent)で3件の送信完了を確認したためqueueから削除しoutreach-ledger.jsonへ反映
     // (juku-tkg-press=送信済み・lane9-jscs-curriculum=送信済み・edtech-tfabworks=ハードバウンスで打ち切り、144→141)。
     // 2026-08-17続き: T-C2下書き上限リセット後、lane9の学会・校長会12件(email8+form4)に本文を執筆しqueuedへ昇格(141→153)。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(153);
+    // 2026-08-17続き2: 同夜2バッチ目としてlane9の学会6件(email4+form2)に本文を執筆しqueuedへ昇格(153→159・
+    // 本日のGmail下書き作成数は合計12件で1晩10-15件上限内)。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(159);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {
