@@ -6088,6 +6088,33 @@
       "status": "candidate",
       "addedAt": "2026-08-16",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane7"
+    },
+    {
+      "id": "lane7-shiga-u-education",
+      "org": "滋賀大学教育学部",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "syomu@edu.shiga-u.ac.jp",
+      "contactClass": "b2b",
+      "evidence": "shiga-u.ac.jp/information/contact_recruit/info_contact-list/を直接curlで確認(script/style除去後のテキスト抽出)。メールは[at]表記の難読化だったため機械的に@へ置換。「教育学部教員について」区分の総務係を採用(個人名なし・組織名義・入試/教務/学生相談等の学生向け窓口は除外)",
+      "verifiedAt": "2026-08-16",
+      "status": "candidate",
+      "addedAt": "2026-08-16",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane7"
+    },
+    {
+      "id": "lane7-wakayama-u-education",
+      "org": "和歌山大学教育学部",
+      "lane": "npo",
+      "channel": "form",
+      "contact": "https://www.wakayama-u.ac.jp/edu/contact/19/",
+      "contactClass": "b2b",
+      "formPurpose": "unknown",
+      "evidence": "wakayama-u.ac.jp/edu/contact/19/を直接curlで確認。教育学部単体の代表メールアドレスは学部・センター所在地連絡先一覧(department.html)にも記載が無く電話番号のみだったため、大学公式の「メールでのお問い合わせ」フォームを採用。フォーム自体に対象者制限の記載はなくサイト訪問者カテゴリに「企業・研究者の皆さまへ」が含まれるが、フォーム目的の明示的な限定文言は無いためformPurposeはunknownとして保守的に扱う",
+      "verifiedAt": "2026-08-16",
+      "status": "candidate",
+      "addedAt": "2026-08-16",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane7"
     }
   ]
 }
