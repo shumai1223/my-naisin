@@ -56,7 +56,7 @@ export const EXAM_RATIO_DATA: ExamRatioConfig[] = [
       note: '第1次選考: 内申4:学力4:面接2、第2次選考は学校により異なる',
     },
     lastVerified: '2026-01-30',
-    sourceUrl: 'https://www.pref.kanagawa.jp/docs/dc4/nyusen/nyusen.html',
+    sourceUrl: 'https://www.pref.kanagawa.jp/docs/dc4/nyusen/nyusen/nyusenseidogaiyou.html',
   },
   {
     prefectureCode: 'osaka',
@@ -121,7 +121,7 @@ export const EXAM_RATIO_DATA: ExamRatioConfig[] = [
       note: '内申点300点+学力検査300点=600点満点',
     },
     lastVerified: '2026-01-30',
-    sourceUrl: 'https://www.pref.fukuoka.lg.jp/contents/koukou-nyushi.html',
+    sourceUrl: 'https://www.pref.fukuoka.lg.jp/site/kyouiku/08youkou.html',
   },
   {
     prefectureCode: 'hokkaido',
@@ -160,7 +160,7 @@ export const EXAM_RATIO_DATA: ExamRatioConfig[] = [
       note: '前期選抜・中期選抜で配点が異なる',
     },
     lastVerified: '2026-01-30',
-    sourceUrl: 'https://www.kyoto-be.ne.jp/kyoto-be/cms/?page_id=247',
+    sourceUrl: 'https://www.kyoto-be.ne.jp/koukyou/cms/?p=6024',
   },
 ];
 
