@@ -882,9 +882,10 @@
       "lane": "b2b-saas",
       "sourceTaskId": "S13-A",
       "sentDate": "2026-08-14",
-      "status": "awaiting",
+      "lastContactDate": "2026-08-17",
+      "status": "declined",
       "followupCount": 0,
-      "note": "Cowork第2弾(30社)でフォーム送信済み(ops/cowork/COWORK-RESULT-02.md)。フォーム経由のためGmail threadIdなし。第1弾10社・Gmail経由セグメントとは別に返信率を計測すること。2026-08-17 01:01に自動受付確認メール(navimaサポートデスク)を受信・フォーム送信自体は正常に到達していたと確認(人間の実質回答はまだ)。"
+      "note": "Cowork第2弾(30社)でフォーム送信済み(ops/cowork/COWORK-RESULT-02.md)。フォーム経由のためGmail threadIdなし。2026-08-17 01:01に自動受付確認メール受信後、同日11:23に人間(志野奈美子氏)から正式回答あり:『navimaは、この度サービスを終了することが決定しており、残念ながらご期待に沿うことができない状況』。提案内容への拒否ではなくサービス自体の終了が理由。追撃対象外(構造的にクローズ)。"
     },
     {
       "id": "edtech-aied",
