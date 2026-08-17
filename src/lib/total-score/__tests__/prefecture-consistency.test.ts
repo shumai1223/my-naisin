@@ -66,4 +66,14 @@ describe('total-score ↔ prefectures 整合', () => {
       expect(exp?.report.targetGrades).toEqual(pref?.targetGrades);
     }
   });
+
+  // 上記と同型のドリフトが計算機側（registry・13県）にも起きうるため、防御的に同じ不変条件を張る
+  // （2026-08-17時点で実測済み・13県とも一致・回帰防止のためテストとして固定）。
+  test('計算機のreport.targetGradesはPREFECTURESのtargetGradesと一致（ドリフト検出）', () => {
+    for (const code of VERIFIED_TOTAL_SCORE_CODES) {
+      const sys = getTotalScoreSystem(code);
+      const pref = getPrefectureByCode(code);
+      expect(sys?.report.targetGrades).toEqual(pref?.targetGrades);
+    }
+  });
 });
