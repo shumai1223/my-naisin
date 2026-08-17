@@ -221,7 +221,11 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // (私立中高向け生徒募集支援)へevidence/subject/bodyを差し替えてqueuedへ昇格(195→196)。
     // 2026-08-17続き11: lane2-shinkyo-pub(一般社団法人信州教育出版社・2026-08-11時点の
     // lane2残り約13社リストで未処理のまま残っていた1社)を新規検証のうえqueuedへ昇格(196→197)。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(197);
+    // 2026-08-18: 08-18 00時のリセット後、本文執筆済みcandidateから5件(edtech-crop-oneread・
+    // lane9-jslis・lane9-jsme・media-shijyukukai・npo-bunkagakushu)にGmail下書きを作成し
+    // queuedへ昇格(197→202)。ドメイン多様性を確保(as.bunken.co.jp/ml.gakkai.ne.jp等の
+    // 運営代行クラスタは今回意図的に避けた)。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(202);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {
