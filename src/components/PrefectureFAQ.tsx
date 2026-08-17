@@ -99,7 +99,7 @@ export function PrefectureFAQ({ prefectureCode, className = '' }: PrefectureFAQP
       commonQuestions: [
         {
           question: 'どの学期の成績が対象になりますか？',
-          answer: '大阪府の場合、中3のみの成績が対象です。中1・中2の成績は直接影響しません。',
+          answer: '大阪府の場合、中1〜中3の3年間すべての成績が対象です。学年比は1:1:3で、中3の成績が最も重視されます。',
           icon: <Calendar className="h-4 w-4" />,
           priority: 'high'
         },
@@ -110,8 +110,8 @@ export function PrefectureFAQ({ prefectureCode, className = '' }: PrefectureFAQP
           priority: 'high'
         },
         {
-          question: '内申点は本当に10倍ですか？',
-          answer: 'はい、大阪府では中3の9教科評定合計を10倍して計算します。45点満点→450点満点になります。',
+          question: '内申点は本当に450点満点ですか？',
+          answer: 'はい、大阪府は中1〜中3全学年が対象で、学年比は1:1:3（中1×2倍・中2×2倍・中3×6倍）です。9教科評定合計45点満点×3学年をこの比率で換算すると450点満点になります。',
           icon: <AlertTriangle className="h-4 w-4" />,
           priority: 'high'
         }
@@ -125,7 +125,7 @@ export function PrefectureFAQ({ prefectureCode, className = '' }: PrefectureFAQP
       commonQuestions: [
         {
           question: 'どの学期の成績が対象になりますか？',
-          answer: '埼玉県の場合、中3のみの成績が対象です。中1・中2の成績は直接影響しません。',
+          answer: '埼玉県の場合、中1〜中3の3年間すべての成績が対象です。学年比は1:1:2が標準で、中3の成績が2倍で計算されます（高校により1:1:3、1:2:3などの場合もあります）。',
           icon: <Calendar className="h-4 w-4" />,
           priority: 'high'
         },
@@ -157,9 +157,9 @@ export function PrefectureFAQ({ prefectureCode, className = '' }: PrefectureFAQP
         },
         {
           question: '実技教科の倍率は？',
-          answer: '愛知県では実技教科は1.5倍換算です。5教科より少し高い比重があります。',
-          icon: <AlertTriangle className="h-4 w-4" />,
-          priority: 'high'
+          answer: '愛知県では実技教科も主要5教科も同じ倍率（傾斜なし）で計算されます。9教科評定合計45点満点を2倍した90点満点の「評定得点」が校内順位の計算に使われます。',
+          icon: <BookOpen className="h-4 w-4" />,
+          priority: 'medium'
         },
         {
           question: '名古屋市立と県立で違いは？',
