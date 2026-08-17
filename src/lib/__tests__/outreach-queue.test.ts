@@ -228,6 +228,10 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // 2026-08-18続き: 同日2バッチ目としてlane9-jaeis・lane9-jsfee・lane8-tottori-kyobun・
     // edtech-systechits-majorschool・lane7-shinshu-uの5件を追加でqueuedへ昇格(202→207・
     // 本日合計10件で1晩10-15件上限のほぼ上限)。
+    // 2026-08-18続き2: 上記コメント(08-17 3件目・4件目)で既に「見送り」裁定済みだったlane9-zensho/
+    // edtech-beein-syutsugan/edtech-atsystem-ckipの3件が、JSON側ではstatus:'candidate'のまま
+    // excludedに未反映で残存していた(00:44に本文執筆事故として一度検知したがexcluded化までは
+    // 未実施だった)ため、excludeReason付きで正式にexcludedへ確定(queuedには影響せず207のまま)。
     expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(207);
   });
 

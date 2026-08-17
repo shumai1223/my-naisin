@@ -3344,7 +3344,8 @@
       "contactClass": "b2b",
       "evidence": "zensho.or.jp/contact/を直接WebFetchで確認。担当教員メールアドレス+都道府県/学校名欄のある検定合格者発表用フォームで学校・教員からの提出を前提とした窓口(用途は限定的だが教員/学校名の識別が可能)でb2b確定。商業高校の全国団体",
       "verifiedAt": "2026-08-12",
-      "status": "candidate",
+      "status": "excluded",
+      "excludeReason": "formPurpose='purpose-restricted'(検定合格者発表専用フォーム)のため事業提携目的の問い合わせ窓口として機能しない。2026-08-17にoutreach-queue.test.tsのコメントで見送り裁定済みだったがstatusが未反映のまま残存していたため確定(2026-08-18)。",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9",
       "formPurpose": "purpose-restricted"
@@ -5399,7 +5400,8 @@
       "contactClass": "b2b",
       "evidence": "高校・専門学校専用のネット出願システム運営会社(2024年にユニバーサル・サポート・システムズから事業譲受)。お問い合わせフォームに「学校法人名」必須欄を直接WebFetchで確認。ただし欄名が学校法人を前提とした表記のため、事業提携目的の問い合わせとして受理されるかはformPurpose:unknown扱い(該当なし等の代替記入で試行する想定)。",
       "verifiedAt": "2026-08-15",
-      "status": "candidate",
+      "status": "excluded",
+      "excludeReason": "formPurpose='unknown'・フォームの必須項目が「学校法人名」欄で非学校送信者(個人運営サイト)が弾かれるリスクが高い。2026-08-17にoutreach-queue.test.tsのコメントで見送り裁定済みだったがstatusが未反映のまま残存していたため確定(2026-08-18)。",
       "addedAt": "2026-08-15",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
       "formPurpose": "unknown"
@@ -5413,7 +5415,8 @@
       "contactClass": "b2b",
       "evidence": "全国708校の中学校が利用する調査書Web登録システムと同じ会社が提供するインターネット出願システム『Ckip』の専用問い合わせ窓口(「Ckip出願システムに関するお問い合わせ・資料請求」と明記)を直接WebFetchで確認。フォーム自体はJS描画のため必須項目の詳細確認はできなかったが、生徒/保護者向けではなく明確に法人(学校)向けの製品問い合わせ窓口であるためcontactClass=b2b、formPurposeはunknown。過去のtarget-list.md記載(11:4x追記「調査書Web登録システムを追加」)にもかかわらずqueueに未登録だった不一致を解消する形での追加。",
       "verifiedAt": "2026-08-15",
-      "status": "candidate",
+      "status": "excluded",
+      "excludeReason": "formPurpose='unknown'・フォームがJS描画で必須項目詳細を確認できず、学校法人向け製品の窓口であるため非学校送信者(個人運営サイト)が弾かれるリスクが高い。2026-08-17にoutreach-queue.test.tsのコメントで見送り裁定済みだったがstatusが未反映のまま残存していたため確定(2026-08-18)。",
       "addedAt": "2026-08-15",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
       "formPurpose": "unknown"
