@@ -1,5 +1,5 @@
 import { NAISHIN_OMOMI_CONTENT } from '../naishin-omomi-content';
-import { getPrefectureByCode } from '../prefectures';
+import { PREFECTURES, getPrefectureByCode } from '../prefectures';
 
 // 2026-08-17: naishin-omomi-content.tsは既存テスト(naishin-omomi-content.test.ts)で
 // 「テンプレ流用でないこと(scaled-content検出)」「県名が含まれること」は検証済みだったが、
@@ -74,6 +74,33 @@ describe('NAISHIN_OMOMI_CONTENT: skewPositionの実技/主要倍率比がprefect
       });
     }
   }
+});
+
+// 2026-08-18: 各エントリのskewPositionは自県の倍率だけでなく「全国31県が該当」「11県の2倍
+// グループ」のような全国集計値を比較対象として繰り返し引用している。この集計値自体は
+// prefectures.tsの実データから独立して再計算し突合していなかったため、ここで固定する。
+describe('NAISHIN_OMOMI_CONTENT: 全国集計値(31県/11県)がprefectures.tsの実データと一致する', () => {
+  test('「傾斜なし」(coreMultiplier===practicalMultiplier)の県数は31県', () => {
+    const noSkewCount = PREFECTURES.filter((p) => p.coreMultiplier === p.practicalMultiplier).length;
+    expect(noSkewCount).toBe(31);
+
+    const allText = Object.values(NAISHIN_OMOMI_CONTENT)
+      .map((e) => e.skewPosition)
+      .join('');
+    expect(allText).toContain(`全国31県`);
+  });
+
+  test('実技/主要倍率比がちょうど2倍の県数は11県', () => {
+    const ratio2Count = PREFECTURES.filter(
+      (p) => p.coreMultiplier > 0 && p.practicalMultiplier / p.coreMultiplier === 2
+    ).length;
+    expect(ratio2Count).toBe(11);
+
+    const allText = Object.values(NAISHIN_OMOMI_CONTENT)
+      .map((e) => e.skewPosition)
+      .join('');
+    expect(allText).toContain(`11県の2倍グループ`);
+  });
 });
 
 describe('NAISHIN_OMOMI_CONTENT: 登録keyがprefectures.tsに実在する', () => {
