@@ -110,3 +110,18 @@ describe('NAISHIN_OMOMI_CONTENT: 登録keyがprefectures.tsに実在する', () 
     });
   }
 });
+
+// 2026-08-18: shiga entryのgradeComparison/faqsが「奈良県は中1除外」という2026年3月改定前(令和7年度
+// 以前)の旧制度を現在値として書いていた事故を発見(奈良県自身のエントリ(471-483行)は改定後の正しい
+// 記述だったため同一ファイル内で自己矛盾していた)。他県エントリの他項目(angle/gradeComparison/faqs)は
+// maxScoreNote/skewPositionと異なりprefectures.tsの数値と機械的に突合できないため、せめて「奈良県は
+// 中1を除外する」という改定前の言い回しが他のどのエントリにも残っていないことだけを機械的に検証する。
+describe('NAISHIN_OMOMI_CONTENT: 奈良県の2026年3月改定(中1除外→中1・中2を態度評価で算入)が全エントリで反映されている', () => {
+  const allText = Object.values(NAISHIN_OMOMI_CONTENT)
+    .flatMap((e) => [e.angle, e.gradeComparison, e.maxScoreNote, ...e.faqs.map((f) => f.answer)])
+    .join('\n');
+
+  test('「奈良県...中1除外」という改定前(旧制度)の言い回しがどのエントリにも存在しない', () => {
+    expect(allText).not.toMatch(/奈良県?[^\n。]{0,10}中1[^\n。]{0,5}除外/);
+  });
+});
