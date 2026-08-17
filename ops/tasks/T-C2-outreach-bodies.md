@@ -336,6 +336,43 @@ lane9-zensho等）は、送信者が弾かれる・適合度が低いという�
 新規候補が溜まってから作る」がform channel41件の新規蓄積を指すかは未確定・判断に迷う場合は
 質問ノートで確認してから作ること）、のいずれか。
 
+## 🆕2026-08-17 11:xx: 残candidate(email 76件)のドメイン衝突を事前集計・次回本文執筆前のガード表
+
+08-17未明のバッチでGmail下書き上限(1晩10-15件・本日はすでに12件で到達済み・`in:drafts newer_than:1d`で実測)
+に達したため、本日はこれ以上新規email本文を書かない（下書き化とセットで行う運用のため、書いても
+その場で下書き化できないなら次回に持ち越すだけで二度手間になる）。代わりに、次回(08-18 00:00以降)の
+本文執筆セッションが08-16に発見した「同一運営代行事務局への複数件同日下書き」事故を再発させないよう、
+残っているcandidate(status='candidate' && channel='email')全76件（npo67・b2b-saas4・kyoiku-i5）を
+対象にドメイン単位で事前集計した。
+
+```
+node -e "const d=require('./data/outreach-queue.json');
+const e=d.entries.filter(x=>x.status==='candidate'&&x.channel==='email');
+const g={};e.forEach(x=>{const m=x.contact.match(/@([^\s]+)$/);const k=m?m[1]:x.contact;(g[k]=g[k]||[]).push(x.id+':'+x.org);});
+Object.entries(g).filter(([,v])=>v.length>1).forEach(([k,v])=>console.log(k,v));"
+```
+
+**衝突ドメイン（複数件が同じ受信箱に届く可能性がある組み合わせ）**:
+
+| ドメイン | 件数 | 対象id |
+|---|---|---|
+| `as.bunken.co.jp`(国際文献社・既に4件下書き済み=08-16判明の既知運営代行) | 6 | lane9-jsdp/iesj/kodomogakkai/jtsj/jass/jacdp |
+| `kokusaibunken.jp`(別の学会事務局代行業者・新規発見) | 2 | lane9-jash/jale |
+| `u-gakugei.ac.jp`(東京学芸大学。ただし宛先メールボックスは別＝JAUE事務局`jaue@`とPR室`kouhouty@`で
+  部署が異なるため実害は低いと判断。ただし同大学へ2通目という印象は残るので念のため記載) | 2 | lane7-jaue / lane9-gakugei-kouhou(kyoiku-iレーン) |
+| `gmail.com` | 3 | npo-terakoya-houjousha/lane9-jssace/lane9-jasep（**個人・小団体の汎用アドレスで
+  運営代行ではないため衝突の実害なし。除外してよい**） |
+
+**次回本文執筆セッションへの指示**:
+1. `as.bunken.co.jp`宛の6件は、既に08-16に4件下書き済み(計10件になる)。**1回のセッションで一括執筆・
+   一括下書き化しない。** 2〜3件ずつに分割し、件名を学会分野ごとに変える（既存ルールを再確認・
+   `docs/aa1-followup-templates.md`は関係ないので混同しない）。
+2. `kokusaibunken.jp`宛の2件（日本学校保健学会・日本生涯教育学会）も同様に同日連投を避ける。
+3. `u-gakugei.ac.jp`の2件は部署が異なるため通常運用でよいが、送信間隔を数日空けるとなお安全。
+4. `gmail.com`の3件は衝突ドメインとして扱わなくてよい（誤って一緒くたに間引かないこと）。
+
+この分析自体は下書きを1件も作らないため、本日のGmail下書き上限(12件)を消費していない。
+
 ## この文書が上書きするもの
 
 - `ops/tasks/T-C1-b2b-target-list.md` の「候補を増やし続ける」部分。
