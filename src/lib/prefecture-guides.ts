@@ -161,7 +161,7 @@ export const prefectureGuides: Record<string, PrefectureGuide> = {
     sources: [
       {
         name: '神奈川県教育委員会（公立高校入試）',
-        url: 'https://www.pref.kanagawa.jp/docs/dc4/nyusen/nyusen.html',
+        url: 'https://www.pref.kanagawa.jp/docs/dc4/nyusen/nyusen/nyusenseidogaiyou.html',
         lastVerified: '2026年4月22日',
         notes: '面接廃止後の新制度に対応した情報を掲載。'
       }
@@ -842,7 +842,7 @@ export const prefectureGuides: Record<string, PrefectureGuide> = {
     sources: [
       {
         name: '宮城県教育委員会 高校入学者選抜情報',
-        url: 'https://www.pref.miyagi.jp/soshiki/koukyou/r8-nyushi.html',
+        url: 'https://www.pref.miyagi.jp/site/sub-jigyou/list680.html',
         lastVerified: '2026年4月22日',
         notes: '令和8年度（2026年度）の「共通選抜」と「特色選抜」の具体的な選抜方法や配点比率については、今後発表される宮城県教育委員会の公式情報を必ずご確認ください。'
       }
