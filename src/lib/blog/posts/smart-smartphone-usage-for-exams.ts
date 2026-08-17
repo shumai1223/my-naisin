@@ -12,7 +12,7 @@ export const post: BlogPost = {
   tags: ['スマホ学習', '内申点対策', '学習習慣', '保護者向け', 'モチベーション'],
   sources: [
     { name: '文部科学省：全国学力・学習状況調査', url: 'https://www.mext.go.jp/a_menu/shotou/gakuryoku-chousa/index.htm' },
-    { name: '総務省：青少年のインターネット利用環境実態調査', url: 'https://www.soumu.go.jp/main_sosiki/joho_tsusin/kyouiku_joho-ka/jittai_chousa.html' }
+    { name: '総務省：青少年のインターネット利用環境実態調査', url: 'https://www.soumu.go.jp/main_content/000955177.pdf' }
   ],
   content: `
     <div class="lead">

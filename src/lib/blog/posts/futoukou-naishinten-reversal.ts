@@ -12,7 +12,7 @@ export const post: BlogPost = {
   tags: ['不登校', '別室登校', '内申点対策', '高校受験', '2026年度入試'],
   sources: [
     { name: '文部科学省：不登校児童生徒への支援の在り方について', url: 'https://www.mext.go.jp/a_menu/shotou/seitoshidou/1397802.htm' },
-    { name: '文部科学省：通信制高等学校の質の確保・向上に関するガイドライン', url: 'https://www.mext.go.jp/a_menu/shotou/kaikaku/1394873.htm' },
+    { name: '文部科学省：通信制高等学校の質の確保・向上に関するガイドライン', url: 'https://www.mext.go.jp/a_menu/shotou/seitoshidou/1397802_00005.htm' },
     { name: '東京都教育委員会：令和8年度東京都立高等学校入学者選抜実施要綱', url: 'https://www.kyoiku.metro.tokyo.lg.jp/' },
     { name: '東京都教育委員会：令和8年度都立通信制高等学校入学者選抜実施要綱', url: 'https://www.kyoiku.metro.tokyo.lg.jp/' },
   ],
@@ -204,7 +204,7 @@ export const post: BlogPost = {
 <div class="point-box">
   <h4>一次ソース：教育委員会の「通信制高校 入学者選抜実施要綱」を必ず確認</h4>
   <p>通信制高校の選考基準は、各都道府県教育委員会が公表する<strong>「通信制高等学校入学者選抜実施要綱」</strong>に明記されています。たとえば<a href="https://www.kyoiku.metro.tokyo.lg.jp/" target="_blank" rel="noopener noreferrer">東京都教育委員会の令和8年度（2026年度）都立通信制高校選抜実施要綱</a>では、調査書・志願申告書・面接・作文の比重と、不登校生徒への配慮（出席日数の評価方法）が明文化されています。</p>
-  <p>文部科学省の<a href="https://www.mext.go.jp/a_menu/shotou/kaikaku/1394873.htm" target="_blank" rel="noopener noreferrer">「通信制高等学校の質の確保・向上に関するガイドライン」</a>とあわせて読むと、「自分が受験する地域・学校が、どの観点をどう評価するのか」が確実に把握できます。SNSや塾の情報ではなく、必ず一次ソースで確認してください。</p>
+  <p>文部科学省の<a href="https://www.mext.go.jp/a_menu/shotou/seitoshidou/1397802_00005.htm" target="_blank" rel="noopener noreferrer">「通信制高等学校の質の確保・向上に関するガイドライン」</a>とあわせて読むと、「自分が受験する地域・学校が、どの観点をどう評価するのか」が確実に把握できます。SNSや塾の情報ではなく、必ず一次ソースで確認してください。</p>
 </div>
 
 <h3>私立高校の個別相談会・オープンキャンパスの活用</h3>

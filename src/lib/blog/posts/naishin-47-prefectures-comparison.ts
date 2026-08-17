@@ -13,12 +13,12 @@ export const post: BlogPost = {
   tags: ['内申点', '都道府県比較', '高校受験', '独自データ', '実技4教科', '2026年度入試'],
   sources: [
     {
-      name: '文部科学省：学習評価の在り方ハンドブック（観点別評価）',
-      url: 'https://www.mext.go.jp/a_menu/shotou/new-cs/1413073.htm',
+      name: '国立教育政策研究所：学習評価の在り方ハンドブック（観点別評価）',
+      url: 'https://www.nier.go.jp/kaihatsu/shidousiryou.html',
     },
     {
       name: '各都道府県教育委員会 入学者選抜実施要綱（各県公式）',
-      url: 'https://www.mext.go.jp/a_menu/shotou/koukou/index.htm',
+      url: 'https://www.mext.go.jp/a_menu/shotou/kaikaku/main8_a2.htm',
     },
   ],
   content: `

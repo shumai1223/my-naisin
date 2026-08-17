@@ -12,7 +12,7 @@ export const post: BlogPost = {
   tags: ['内申点', 'GIGAスクール', 'スピーキングテスト', '探究学習', '2026年度入試', '高校受験対策'],
   sources: [
     { name: 'GIGAスクール構想について（文部科学省）', url: 'https://www.mext.go.jp/a_menu/other/index_00011111.htm' },
-    { name: '中学校英語スピーキングテスト（ESAT-J）特設ページ（東京都教育委員会）', url: 'https://www.kyoiku.metro.tokyo.lg.jp/school/junior_high_school/esat-j/' },
+    { name: '中学校英語スピーキングテスト（ESAT-J）特設ページ（東京都教育委員会）', url: 'https://www.kyoiku.metro.tokyo.lg.jp/school/content/global/esat-j_qa' },
     { name: '内申点の計算方法（家庭教師のアルファ）', url: 'https://alpha-katekyo.jp/tips/tips286/' },
     { name: '大阪府公立高校入試ガイド2026年版（開成教育グループ）', url: 'https://www.kaisei-group.co.jp/highschoolinfo/osaka_public/guide_2026.html' },
   ],

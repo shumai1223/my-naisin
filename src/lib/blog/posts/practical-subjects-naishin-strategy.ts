@@ -13,7 +13,7 @@ export const post: BlogPost = {
   sources: [
     { name: '進研ゼミ 高校入試情報サイト「実技教科の内申点を上げる方法」', url: 'https://czemi.benesse.ne.jp/open/nyushi/article/closeup/0087.html' },
     { name: 'なるほど！BUNRI「内申に影響！実技4教科をあなどるなかれ！」', url: 'https://portal.bunri.jp/naruhodo/zitsugi_20230602' },
-    { name: '文部科学省「学習評価の在り方について」', url: 'https://www.mext.go.jp/b_menu/shingi/chukyo/chukyo3/siryo/attach/1364317.htm' },
+    { name: '国立教育政策研究所「学習評価の在り方について」', url: 'https://www.nier.go.jp/kaihatsu/shidousiryou.html' },
     { name: '学研の家庭教師「中学校の副教科テスト対策！内申点をアップさせよう」', url: 'https://www.kame.co.jp/column/column8_5-html' },
   ],
   content: `

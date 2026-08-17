@@ -20,8 +20,8 @@ export const post: BlogPost = {
   tags: ['内申点', '評定平均', '体験記', '成績アップ', '実技4教科', '観点別評価'],
   sources: [
     {
-      name: '文部科学省：学習評価の在り方ハンドブック（観点別評価の3観点）',
-      url: 'https://www.mext.go.jp/a_menu/shotou/new-cs/1413073.htm',
+      name: '国立教育政策研究所：学習評価の在り方ハンドブック（観点別評価の3観点）',
+      url: 'https://www.nier.go.jp/kaihatsu/shidousiryou.html',
     },
   ],
   content: `
@@ -124,7 +124,7 @@ export const post: BlogPost = {
     <li><strong>③ 主体的に学習に取り組む態度</strong>……提出物の姿勢、質問、授業への関わり方</li>
   </ul>
 </div>
-<p>僕がやった5つの行動は、ほとんどが<strong>②と③を狙い撃ち</strong>しています。テストの点（①）だけを追っていた人が見落としがちな部分こそ、行動で確実に動かせる伸びしろなんです。文部科学省の<a href="https://www.mext.go.jp/a_menu/shotou/new-cs/1413073.htm" target="_blank" rel="noopener">学習評価の在り方</a>でも、この3観点で評価することが明記されています。</p>
+<p>僕がやった5つの行動は、ほとんどが<strong>②と③を狙い撃ち</strong>しています。テストの点（①）だけを追っていた人が見落としがちな部分こそ、行動で確実に動かせる伸びしろなんです。文部科学省の<a href="https://www.nier.go.jp/kaihatsu/shidousiryou.html" target="_blank" rel="noopener">学習評価の在り方</a>でも、この3観点で評価することが明記されています。</p>
 
 <hr>
 <h2 id="s9">やってよかった順ランキングと、後輩へ</h2>

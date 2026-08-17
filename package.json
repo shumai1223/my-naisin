@@ -19,6 +19,7 @@
     "test:ci": "jest --ci --coverage",
     "check:links": "node scripts/check-source-links.mjs",
     "check:affiliate-links": "node scripts/check-affiliate-links.mjs",
+    "check:blog-links": "node scripts/check-blog-source-links.mjs",
     "check:forbidden": "node scripts/check-forbidden-words.js",
     "check:consistency": "node scripts/check-data-consistency.js",
     "check:orphans": "node scripts/check-orphans.mjs",

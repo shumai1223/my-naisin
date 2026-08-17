@@ -22,7 +22,7 @@ export const post: BlogPost = {
     },
     {
       name: '文部科学省：高等教育の修学支援新制度',
-      url: 'https://www.mext.go.jp/kaikakusuishin/',
+      url: 'https://www.mext.go.jp/a_menu/koutou/hutankeigen/index.htm',
     },
   ],
   faqs: [

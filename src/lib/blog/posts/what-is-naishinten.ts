@@ -11,7 +11,7 @@ export const post: BlogPost = {
   author: '運営者（My Naishin）',
   tags: ['内申点', '高校受験', '成績アップ', '中学生', '保護者向け'],
   sources: [
-    { name: '文部科学省：学習評価の在り方ハンドブック', url: 'https://www.mext.go.jp/a_menu/shotou/new-cs/1413073.htm' },
+    { name: '国立教育政策研究所：学習評価の在り方ハンドブック', url: 'https://www.nier.go.jp/kaihatsu/shidousiryou.html' },
     { name: '東京都教育委員会：都立高校入試に関する情報', url: 'https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/exam/' }
   ],
   content: `

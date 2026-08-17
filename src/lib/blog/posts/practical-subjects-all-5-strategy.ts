@@ -13,8 +13,8 @@ export const post: BlogPost = {
   tags: ['実技教科', '副教科', '内申点', 'オール5', '体育', '音楽', '美術', '技術家庭'],
   sources: [
     {
-      name: '文部科学省「学習評価の在り方について」',
-      url: 'https://www.mext.go.jp/b_menu/shingi/chukyo/chukyo3/siryo/attach/1364317.htm',
+      name: '国立教育政策研究所「学習評価の在り方について」',
+      url: 'https://www.nier.go.jp/kaihatsu/shidousiryou.html',
     },
     {
       name: '国立教育政策研究所「学習評価の在り方ハンドブック」',

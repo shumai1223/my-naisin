@@ -12,7 +12,7 @@ export const post: BlogPost = {
   tags: ['評定平均', '評定平均4.0', '私立併願優遇', '推薦入試', '高校受験', '内申点'],
   sources: [
     { name: '東京都教育委員会｜評定状況の調査結果', url: 'https://www.kyoiku.metro.tokyo.lg.jp/' },
-    { name: '文部科学省｜学習評価の在り方ハンドブック', url: 'https://www.mext.go.jp/a_menu/shotou/new-cs/1413073.htm' },
+    { name: '国立教育政策研究所｜学習評価の在り方ハンドブック', url: 'https://www.nier.go.jp/kaihatsu/shidousiryou.html' },
   ],
   faqs: [
     {

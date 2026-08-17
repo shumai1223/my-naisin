@@ -11,7 +11,7 @@ export const post: BlogPost = {
   author: '運営者（My Naishin）',
   tags: ['神奈川県', '内申点計算', '公立高校入試', 'S値', '傾斜配点', '中2内申', '中3内申'],
   sources: [
-    { name: '神奈川県教育委員会｜令和8年度公立高等学校入学者選抜選考基準', url: 'https://www.pref.kanagawa.jp/docs/dc4/prs/r9127472.html' },
+    { name: '神奈川県教育委員会｜令和8年度公立高等学校入学者選抜選考基準', url: 'https://www.pref.kanagawa.jp/docs/dc4/nyusen/nyusen/nyusenseidogaiyou.html' },
     { name: '湘南ゼミナール｜神奈川県公立高校入試を解説', url: 'https://www.shozemi.com/column/highexam/16071/' },
     { name: '学習塾ステップ｜神奈川県公立高校入試の仕組み', url: 'https://www.stepnet.co.jp/beginner/kanagawa-koritsu.html' },
   ],

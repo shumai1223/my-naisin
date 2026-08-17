@@ -13,12 +13,12 @@ export const post: BlogPost = {
   tags: ['副教科', '内申点', '音楽', '美術', '体育', '技術家庭', '観点別評価', '高校受験'],
   sources: [
     {
-      name: '文部科学省 学習評価の在り方について',
-      url: 'https://www.mext.go.jp/b_menu/shingi/chukyo/chukyo3/siryo/attach/1364317.htm',
+      name: '国立教育政策研究所 学習評価の在り方について',
+      url: 'https://www.nier.go.jp/kaihatsu/shidousiryou.html',
     },
     {
       name: '国立教育政策研究所 学習評価の在り方ハンドブック',
-      url: 'https://www.nier.go.jp/kaihatsu/pdf/hyouka/r020326_man_syo-chu.pdf',
+      url: 'https://www.nier.go.jp/kaihatsu/shidousiryou.html',
     },
     {
       name: '東京都教育委員会 都立高校入試内申点の換算方法',

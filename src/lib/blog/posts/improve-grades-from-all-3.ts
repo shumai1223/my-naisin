@@ -11,7 +11,7 @@ export const post: BlogPost = {
   author: '運営者（My Naishin）',
   tags: ['内申点', 'オール3', '定期テスト', '授業態度', '観点別評価', '副教科', '高校受験'],
   sources: [
-    { name: '文部科学省｜学習評価の在り方について', url: 'https://www.mext.go.jp/b_menu/shingi/chukyo/chukyo3/siryo/attach/1364317.htm' },
+    { name: '国立教育政策研究所｜学習評価の在り方について', url: 'https://www.nier.go.jp/kaihatsu/shidousiryou.html' },
     { name: '学研の家庭教師｜内申点の上げ方', url: 'https://www.kame.co.jp/column/column14_3-html' },
     { name: '進研ゼミ｜内申点アップした先輩がやっていたこと', url: 'https://czemi.benesse.ne.jp/open/nyushi/article/study/0001.html' },
     { name: 'Z会受験情報ナビ｜内申点とは', url: 'https://www.zkai.co.jp/exam-navi/jr/jr-method/naishinten/' },

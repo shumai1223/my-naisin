@@ -11,7 +11,7 @@ export const post: BlogPost = {
   author:      '運営者（My Naishin）',
   tags:        ['千葉県', '内申点', 'K値', '公立高校入試', '調査書', '計算方法'],
   sources: [
-    { name: '千葉県教育委員会 令和7年度公立高等学校入学者選抜実施要項', url: 'https://www.pref.chiba.lg.jp/kyouiku/shidou/nyuushi/r7/index.html' },
+    { name: '千葉県教育委員会 令和7年度公立高等学校入学者選抜実施要項', url: 'https://www.pref.chiba.lg.jp/kyouiku/shidou/nyuushi/koukou/r8/r8jissiyoko.html' },
     { name: '進研ゼミ 高校入試情報サイト（千葉県）', url: 'https://czemi.benesse.ne.jp/open/nyushi/article/12/feature/0012.html' },
     { name: '市進 高校受験情報ナビ 2026年度変更点', url: 'https://www.ko-jukennavi.net/nyushi/kawaru/chiba/' },
     { name: 'エソー個伸塾 千葉県公立高校入試の仕組み', url: 'https://esoh-group.com/entrance-system-chiba-high-school/' },

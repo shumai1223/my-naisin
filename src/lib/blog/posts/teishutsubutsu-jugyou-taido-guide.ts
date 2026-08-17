@@ -11,7 +11,7 @@ export const post: BlogPost = {
   author: '運営者（My Naishin）',
   tags: ['内申点', '提出物', '授業態度', '観点別評価', '定期テスト'],
   sources: [
-    { name: '文部科学省：学習評価の在り方ハンドブック', url: 'https://www.mext.go.jp/a_menu/shotou/new-cs/1422510_00001.htm' },
+    { name: '文部科学省：学習評価の在り方ハンドブック', url: 'https://www.mext.go.jp/a_menu/shotou/new-cs/senseiouen/mext_01501.html' },
   ],
   content: `
 <div class="lead">

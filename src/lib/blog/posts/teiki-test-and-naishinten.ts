@@ -12,7 +12,7 @@ export const post: BlogPost = {
   tags: ['内申点', '定期テスト', '勉強法', '高校受験', '成績アップ'],
   sources: [
     { name: '文部科学省「学習評価の在り方ハンドブック」', url: 'https://www.mext.go.jp/a_menu/shotou/new-cs/1407074.htm' },
-    { name: '国立教育政策研究所「指導と評価の一体化」のための学習評価に関する参考資料', url: 'https://www.nier.go.jp/kaihatsu/shidouhyouka.html' }
+    { name: '国立教育政策研究所「指導と評価の一体化」のための学習評価に関する参考資料', url: 'https://www.nier.go.jp/kaihatsu/shidousiryou.html' }
   ],
   content: `
     <div class="lead">

@@ -11,7 +11,7 @@ export const post: BlogPost = {
   author: '運営者（My Naishin）',
   tags: ['内申点', '換算内申', '素内申', '都立高校', '一般入試', '推薦入試', '調査書点'],
   sources: [
-    { name: '東京都教育委員会｜都立高校入試について', url: 'https://www.kyoiku.metro.tokyo.lg.jp/school/high_school/admission/' },
+    { name: '東京都教育委員会｜都立高校入試について', url: 'https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/exam' },
     { name: '都立高のトリセツ｜換算内申の計算方法', url: 'https://tokyo-metropolitan-high-school.com/contents/kansan-naishin/' },
     { name: '学研の家庭教師｜内申点の計算方法（東京都）', url: 'https://www.kame.co.jp/column/column000031-html' },
     { name: 'SAPIX中学部｜都立高校入試の仕組みと対策', url: 'https://www.sapix.co.jp/blog/2759/' },

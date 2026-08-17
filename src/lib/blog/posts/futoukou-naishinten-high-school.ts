@@ -12,7 +12,7 @@ export const post: BlogPost = {
   tags: ['不登校', '内申点対策', '高校選び', '保護者向け'],
   sources: [
     { name: '文部科学省「不登校児童生徒への支援の在り方について」', url: 'https://www.mext.go.jp/a_menu/shotou/seitoshidou/1397802.htm' },
-    { name: '文部科学省「通信制高等学校の質の確保・向上に関するガイドライン」', url: 'https://www.mext.go.jp/a_menu/shotou/kaikaku/1394873.htm' },
+    { name: '文部科学省「通信制高等学校の質の確保・向上に関するガイドライン」', url: 'https://www.mext.go.jp/a_menu/shotou/seitoshidou/1397802_00005.htm' },
     { name: '東京都教育委員会「令和8年度都立通信制高等学校入学者選抜実施要綱」', url: 'https://www.kyoiku.metro.tokyo.lg.jp/' },
     { name: '東京都教育委員会「チャレンジスクール」', url: 'https://www.toritsuko.metro.tokyo.lg.jp/challenge/' }
   ],
