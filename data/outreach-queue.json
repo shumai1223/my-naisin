@@ -6563,6 +6563,21 @@
       "formPurpose": "accepts-b2b",
       "subject": "【情報提供】公立高校入試・内申点計算データのご案内(My Naishin)",
       "body": "琉球大学 ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の教育委員会が公表する公立高校入試の入学者選抜方式(内申点の計算方法・総合得点の算出方式等)を独自に整理し、一次資料の出典を明記したうえでウェブサイトとして公開しています(https://my-naishin.com)。あわせて、サイト利用者の同意のもとで匿名集計した「全国の中学生の内申点・偏差値の分布データ」を公開する仕組みも用意しております(https://my-naishin.com/stats・件数が一定数集まった指標から順次公開されます)。\n\n貴学における教育学・地域教育研究において、都道府県ごとに異なる入試制度の実務データが、沖縄県を含む全国の入試制度比較研究資料としてお役に立つ場面があるのではと考え、情報提供としてご連絡いたしました。\n\nご不要でしたら、このメールもそのまま読み流していただければ結構です。\n\nしゅうまい / My Naishin 運営(中学生・個人開発)\nnaishin.dev@gmail.com\nhttps://my-naishin.com"
+    },
+    {
+      "id": "edtech-crop-oneread",
+      "org": "合同会社CROP(OneRead ワンリード)",
+      "lane": "b2b-saas",
+      "channel": "email",
+      "contact": "oneread_info@crop-cc.com",
+      "contactClass": "b2b",
+      "evidence": "スクール・塾管理システム「OneRead」運営元。公式問い合わせページ(oneread.jp/contact/)をcurl生HTMLで直接確認し、mailto:oneread_info@crop-cc.com(組織名義の一般問い合わせ窓口・個人名なし)を確認。塾管理システムSaaSレーン(08-14着手)で08-14時点の候補リストに残っていた未着手2社のうちの1社。",
+      "verifiedAt": "2026-08-17",
+      "status": "candidate",
+      "addedAt": "2026-08-17",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
+      "subject": "内申点計算データAPI/MCPのご案内（My Naishin）",
+      "body": "合同会社CROP ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\n貴社の学習塾・スクール向け管理システム「OneRead」を拝見しました。都道府県ごとに異なる内申点の自動計算をAPIで組み込むことで、加盟塾様への成績処理・進路指導資料の作成をさらに効率化できるのではと思いご連絡いたしました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com"
     }
   ]
 }
