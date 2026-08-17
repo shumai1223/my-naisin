@@ -214,8 +214,8 @@ CTRは3.53%→1.92%へ一貫して低下、平均順位も6.1→7.9へ緩やか�
 | 順位 | 指標 | 対応する脅威 | 実装コスト | 実行者 |
 |---|---|---|---|---|
 | 1 | **GSC「手動による対策」「セキュリティの問題」ページの確認** | 脅威5(TH-3) | **最低**（Search Console管理画面を開いて見るだけ。コード・クエリ不要） | 👤 |
-| 2 | **`stats_submissions` の `trust_class`別週次集計SQL** | 脅威7(TH-5) | 低（`node scripts/d1q.mjs` のSQL1本を週1回実行するだけ。既にコマンドは確立済み・本書に記載） | loop |
-| 3 | **`evaluateTripwires()`（`src/lib/velocity.ts`）を `npm run kpi:weekly` 経由で週次運用に乗せる** | 脅威4(TH-2) | 低（コードは既に存在。GA4 MCPの値をCLI引数として渡すだけ） | loop |
+| 2 | ✅完了済み（2026-08-17に本表を実態へ更新）: `stats_submissions` の `trust_class`別週次集計SQLは`ops/tasks/T-R1-recurring-checks.md`のW-1として週次チェックリストに組み込み済み | 脅威7(TH-5) | 完了。以後はT-R1週次確認のタイミングで実行するだけ | loop |
+| 3 | ✅完了済み（2026-08-17に本表を実態へ更新）: `evaluateTripwires()`（`src/lib/velocity.ts`）は`src/lib/weekly-kpi-report.ts`の`formatWeeklyKpiEmail()`内で既に呼び出され、`npm run kpi:weekly`の週次メール件名に警報件数として反映済み | 脅威4(TH-2) | 完了 | loop |
 | 4 | ✅2026-08-17完了: `affiliates.ts` のlive 34本hrefを巡回するops側チェックスクリプト（`npm run check:affiliate-links`） | 脅威6(TH-4) | 完了。以後は月次実行するだけ | loop（実装済）→👤（月次実行） |
 | 5 | **`data/affiliate-actuals.json` へのASP発生件数の転記** | 脅威2(TH-10)・脅威3(TH-1)ほか全ての円換算試算の校正点 | 技術コストはゼロだが👤の手作業（3ASP管理画面）が必須。**価値は最大**（これが埋まるまで、本書を含む全ての¥試算は仮置き係数のままであり続ける） | 👤 |
 
