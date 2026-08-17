@@ -3,6 +3,7 @@
  * 3学年分を手書きするページのため、コピペ起因の重複（scaled content）が無いことを固定する。
  */
 import { GRADE_CONTENTS, getGradeContent } from '@/lib/naishin-grade-content';
+import { PREFECTURES } from '@/lib/prefectures';
 
 describe('GRADE_CONTENTS', () => {
   it('中1・中2・中3の3学年が揃う', () => {
@@ -35,5 +36,25 @@ describe('GRADE_CONTENTS', () => {
   it('getGradeContentは存在するslugを返し、存在しないslugはundefined', () => {
     expect(getGradeContent('chu3')?.label).toBe('中3');
     expect(getGradeContent('chu4')).toBeUndefined();
+  });
+
+  // 2026-08-17: lead/FAQ文中の「34県」「11県」「36県」等の集計値はprefectures.tsから手書きで
+  // 転記されたもの（naishin-kakusa等の新しいページのような動的算出ではない）。iwate/PrefectureFAQ
+  // 等で同種の手書き数値ドリフトが繰り返し発生している教訓を踏まえ、実データから再計算した値と
+  // 突合する不変条件を張る。
+  it('本文中の都道府県別集計値(34県/11県/2県/36県)がprefectures.tsの実データと一致する', () => {
+    const all3 = PREFECTURES.filter((p) => JSON.stringify(p.targetGrades) === JSON.stringify([1, 2, 3])).length;
+    const grade3only = PREFECTURES.filter((p) => JSON.stringify(p.targetGrades) === JSON.stringify([3])).length;
+    const grade23 = PREFECTURES.filter((p) => JSON.stringify(p.targetGrades) === JSON.stringify([2, 3])).length;
+
+    expect(all3).toBe(34);
+    expect(grade3only).toBe(11);
+    expect(grade23).toBe(2);
+    expect(all3 + grade3only + grade23).toBe(PREFECTURES.length);
+
+    const allText = GRADE_CONTENTS.flatMap((g) => [g.lead, ...g.faqs.map((f) => f.answer)]).join('');
+    expect(allText).toContain(`${all3}県`);
+    expect(allText).toContain(`${grade3only}県`);
+    expect(allText).toContain(`${all3 + grade23}県`);
   });
 });
