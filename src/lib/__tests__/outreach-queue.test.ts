@@ -219,7 +219,9 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // 2026-08-17続き9: npo/lane9残り学会4件+kyoiku-i(教育大学広報)1件に新規本文執筆しqueuedへ昇格(190→195)。
     // 2026-08-17続き10: edtech-terraport-campusentryを対象製品Campus ENTRY(大学向け)からCan'dy series
     // (私立中高向け生徒募集支援)へevidence/subject/bodyを差し替えてqueuedへ昇格(195→196)。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(196);
+    // 2026-08-17続き11: lane2-shinkyo-pub(一般社団法人信州教育出版社・2026-08-11時点の
+    // lane2残り約13社リストで未処理のまま残っていた1社)を新規検証のうえqueuedへ昇格(196→197)。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(197);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {
