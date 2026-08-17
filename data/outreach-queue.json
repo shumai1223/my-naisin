@@ -3239,7 +3239,7 @@
       "contactClass": "b2b",
       "evidence": "kobunren.or.jp/contact/を直接WebFetchで確認。フォーム自体は氏名/メール/件名の3項目のみで組織名欄は無いが、団体の構成員が全国の高等学校文化部連盟であり事業自体が学校単位の加盟団体との連携が前提のためb2b確定",
       "verifiedAt": "2026-08-12",
-      "status": "candidate",
+      "status": "queued",
       "addedAt": "2026-08-12",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane9",
       "subject": "【情報提供】公立高校入試・内申点計算データのご案内(My Naishin)",

@@ -232,7 +232,9 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // edtech-beein-syutsugan/edtech-atsystem-ckipの3件が、JSON側ではstatus:'candidate'のまま
     // excludedに未反映で残存していた(00:44に本文執筆事故として一度検知したがexcluded化までは
     // 未実施だった)ため、excludeReason付きで正式にexcludedへ確定(queuedには影響せず207のまま)。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(207);
+    // 2026-08-18続き3: lane9-kobunren(全国高等学校文化連盟・form channel)は本文執筆済みでcandidateの
+    // まま昇格漏れだった1件をqueuedへ昇格(207→208・form channelのためGmail下書き上限の対象外)。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(208);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {
