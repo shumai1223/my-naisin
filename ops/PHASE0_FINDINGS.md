@@ -132,8 +132,8 @@
 | **P-5** | Google Trends（「高校 倍率」「〇〇高校 倍率」の月次） | BAR §5 の全EVが代理係数11.7倍（S値の係数）に依存。BAR 自身が V-1 で「loop実行可」と書いた | loop |
 | **P-6** | 教育委員会の一次PDF | BAR が実物突合したのは **chiba 1県・一宮商業1校のみ**。残り46県は `src/data/competition-rates/*.ts` の**コメントを信じている**。memory `[[feedback-verify-data-via-files-not-lib-comments]]` の再発条件 | loop |
 | **P-7** | 競合HTML（minkou/進研ゼミ/高校偏差値.net）を **他校でも** | 4サイト比較は **1校のみ**。「〇〇高校 倍率」300クエリの上位を取れているのが一宮商業1校の構図と同じ保証は無い | loop（curl+iPhone UA。進研ゼミは WebFetch 403） |
-| **P-8** | `AFFILIATES` 34本の href（＝ASPの実リンク先） | §1-D D-1。全EVの前提 | loop |
-| **P-9** | my-shingaku リポジトリ | 追加作業ディレクトリに入っているのに未読。PLAYBOOK横展開の判断材料 | loop |
+| **P-8** | `AFFILIATES` 34本の href（＝ASPの実リンク先） | §1-D D-1。全EVの前提 | loop（✅2026-08-17解消: `npm run check:affiliate-links`新設・初回実行でデッドリンク0件確認。詳細は`ops/THREATS.md`脅威6を参照） |
+| **P-9** | my-shingaku リポジトリ | 追加作業ディレクトリに入っているのに未読。PLAYBOOK横展開の判断材料 | loop（本書執筆(2026-08-10)後、複数回のセッションでmy-shingaku側の実修正が発生済み——例: 2026-08-17にGSC構造化データ警告を検知しDataset JSON-LDのlicense欄・/developersページを追加修正（`loop-question-note`参照）。「未読」という前提は解消済みだが、PLAYBOOK横展開そのものの体系的判断材料としての読み込みは別途必要な可能性あり） |
 
 ---
 
