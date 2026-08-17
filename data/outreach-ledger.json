@@ -884,7 +884,7 @@
       "sentDate": "2026-08-14",
       "status": "awaiting",
       "followupCount": 0,
-      "note": "Cowork第2弾(30社)でフォーム送信済み(ops/cowork/COWORK-RESULT-02.md)。フォーム経由のためGmail threadIdなし。第1弾10社・Gmail経由セグメントとは別に返信率を計測すること。"
+      "note": "Cowork第2弾(30社)でフォーム送信済み(ops/cowork/COWORK-RESULT-02.md)。フォーム経由のためGmail threadIdなし。第1弾10社・Gmail経由セグメントとは別に返信率を計測すること。2026-08-17 01:01に自動受付確認メール(navimaサポートデスク)を受信・フォーム送信自体は正常に到達していたと確認(人間の実質回答はまだ)。"
     },
     {
       "id": "edtech-aied",
