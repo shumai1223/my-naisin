@@ -54,4 +54,16 @@ describe('total-score ↔ prefectures 整合', () => {
       expect(exp?.name).toBe(pref?.name);
     }
   });
+
+  // 2026-08-17判明: yamagataのreport.targetGradesが[1,2,3]と誤記されていた（実際はprefectures.ts
+  // どおり[3]のみ。source-history.tsの3回の独立検証(07-24/08-05/08-10)とWebSearch+axis-kobetsu.jp
+  // の追加確認で「中3のみ・45点満点→500点換算」と確定）。report.targetGradesはprefectures.tsの
+  // targetGradesと常に一致するべき不変条件をここで固定する（rawMaxは換算後の値がありうるため対象外）。
+  test('解説のreport.targetGradesはPREFECTURESのtargetGradesと一致（ドリフト検出）', () => {
+    for (const code of EXPLAINER_CODES) {
+      const exp = getExplainer(code);
+      const pref = getPrefectureByCode(code);
+      expect(exp?.report.targetGrades).toEqual(pref?.targetGrades);
+    }
+  });
 });
