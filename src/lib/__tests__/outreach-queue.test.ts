@@ -225,7 +225,10 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // lane9-jslis・lane9-jsme・media-shijyukukai・npo-bunkagakushu)にGmail下書きを作成し
     // queuedへ昇格(197→202)。ドメイン多様性を確保(as.bunken.co.jp/ml.gakkai.ne.jp等の
     // 運営代行クラスタは今回意図的に避けた)。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(202);
+    // 2026-08-18続き: 同日2バッチ目としてlane9-jaeis・lane9-jsfee・lane8-tottori-kyobun・
+    // edtech-systechits-majorschool・lane7-shinshu-uの5件を追加でqueuedへ昇格(202→207・
+    // 本日合計10件で1晩10-15件上限のほぼ上限)。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(207);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {
