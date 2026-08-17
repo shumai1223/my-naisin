@@ -328,6 +328,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '岩手県教育委員会「令和7年度以降の岩手県立高等学校入学者選抜」',
       note: '掛-4調査で発見: 令和7(2025)年度入試から推薦入試を廃止し特色・一般入学者選抜へ移行、内申点の圧縮先が440点満点から500点満点へ変更(基礎計算式=660点満点は不変)',
     },
+    {
+      date: '2026-08-17',
+      sourceUrl: 'https://www.pref.iwate.jp/_res/projects/default_project/_page_/001/006/462/r8_yoko.pdf',
+      sourceTitle: '岩手県教育委員会「令和8年度岩手県立高等学校入学者選抜実施要項」(P.8 第2選抜 4選抜方法(3)一般入学者選抜)',
+      note: '岩手県教育委員会事務局学校教育室から「掲載内容に誤りがある」との直接指摘(Gmail着信)を受け、令和8年度(今年度)実施要項PDF原文をRead toolで直接確認した。「調査書の学習の記録の換算」欄に(ア)1学年110点満点(5教科×2倍・実技4教科×3倍)(イ)2学年220点満点(5教科×4倍・実技4教科×6倍)(ウ)3学年330点満点(5教科×6倍・実技4教科×9倍)(エ)合計660点を500点に圧縮する、と明記されており、オール5の記入例(110/220/330点)も含めprefectures.ts(iwate)のgradeMultipliers{1,2,3}・coreMultiplier2・practicalMultiplier3・maxScore660・actualMaxScore500と完全一致することを確認した。**config自体(prefectures.ts)に誤りはなかった**。実際の誤りは、この設定値を手書きでコピーしていた複数のプロース系ファイル(src/app/pref/[code]/page.tsx の岩手pitfalls・src/lib/prefecture-guides.tsのiwateガイド・src/lib/blog/posts/jitsugi-kyoka-prefecture-comparison.ts・src/lib/blog/posts/practical-subjects-all-5-strategy.ts)が、圧縮後点数を令和6年度以前の旧値「440点」のまま未更新だったこと、およびprefecture-guides.tsのpitfallsが独自に「面接60点」という一次資料に存在しない内訳を書き添えていたこと。全ファイルを500点(令和7年度以降)に修正し、440点の記述は「令和6年度以前は440点満点でした」という明示的な過去形に統一した。2026-08-10のsource-history追記(掛-4調査)は既に500点への変更を発見していたが、prefectures.ts以外のプロースファイルへの反映が漏れていた(手書きプローズはprefectures.tsと定期的に突合すべきという教訓が今回も再現した)。',
+    },
   ],
   gifu: [
     {

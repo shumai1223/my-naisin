@@ -486,7 +486,7 @@ export const post: BlogPost = {
         <td><strong>岩手県</strong></td>
         <td>中1・中2・中3</td>
         <td>5教科：実技＝2：3の比率で加重</td>
-        <td>440点満点</td>
+        <td>660点満点（実選抜は500点満点に圧縮）</td>
       </tr>
     </tbody>
   </table>

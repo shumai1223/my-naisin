@@ -326,14 +326,14 @@ describe('青森県のpitfalls(2026-08-01にWebSearchで個別に裏取り済み
   });
 });
 
-describe('岩手県のpitfalls(2026-08-01にWebSearchで個別に裏取り済み)', () => {
-  test('実技3倍・5教科2倍・学年比1:2:3・660→440換算がprefectures.tsと一致する', () => {
+describe('岩手県のpitfalls(2026-08-17に岩手県教育委員会からの指摘を受け令和8年度実施要項原文で再検証済み)', () => {
+  test('実技3倍・5教科2倍・学年比1:2:3・660→500換算(令和7年度以降)がprefectures.tsと一致する', () => {
     const guide = getPrefectureGuide('iwate');
     const allText = guide.pitfalls.items.join('');
     expect(allText).toContain('評定×3倍');
     expect(allText).toContain('評定×2倍');
     expect(allText).toContain('1：2：3');
-    expect(allText).toContain('440点満点');
+    expect(allText).toContain('500点満点');
   });
 
   test('A選考・B選考・C選考は一般選抜の学力:調査書比率タイプと正確に記載されている(旧「推薦入試の区分」という事実誤りを修正)', () => {
