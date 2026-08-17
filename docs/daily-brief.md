@@ -1,22 +1,22 @@
 # 朝ブリーフィング（自動更新・W-0が毎周回上書き）
 
 <!-- LAMBDA1_HEALTH_START -->
-## ⚡収益導線の生存監視（自動・2026-08-16時点・Λ-1）
+## ⚡収益導線の生存監視（自動・2026-08-17時点・Λ-1）
 
 **🟢 正常**
 
 ### 確定値（D1・判定はこちらで行う）
 
-- `stats_submissions`（7日）: **199件**
+- `stats_submissions`（7日）: **202件**
 - `leads`（7日）: **0件**
-- `stats_submissions`（累計）: **518件**
+- `stats_submissions`（累計）: **521件**
 
 ### 参考値（GA4・前日／**下限値**）
 
 GA4はConsent Modeと離脱時のビーコン欠損で収益系イベントを取りこぼす（実測で
 D1 25件に対しGA4 0件の日がある）。**ここのゼロは異常の証拠にならない。**
 
-- `cta_view`: 5件以上
+- `cta_view`: 6件以上
 - `lead_submit`: 0件以上
 - `line_friend_click`: 0件以上
 - `affiliate_click`: 0件以上
