@@ -853,9 +853,11 @@
       "lane": "b2b-saas",
       "sourceTaskId": "S13-A",
       "sentDate": "2026-08-14",
-      "status": "awaiting",
+      "lastContactDate": "2026-08-17",
+      "status": "declined",
       "followupCount": 0,
-      "note": "Cowork第2弾(30社)でフォーム送信済み(ops/cowork/COWORK-RESULT-02.md)。フォーム経由のためGmail threadIdなし。第1弾10社・Gmail経由セグメントとは別に返信率を計測すること。"
+      "threadId": "1a00dee65ead948b",
+      "note": "Cowork第2弾(30社)でフォーム送信済み(ops/cowork/COWORK-RESULT-02.md)。2026-08-17 04:15(UTC)着信で学園ソリューション事業部の森井氏より人間の実質回答: 問い合わせは公教育ソリューション事業部の担当領域に近いが『現在、自社のソリューションを展開するのに精一杯の状況で、余力がない』とのことで丁寧なお断り(中学生エンジニアとしての活動には好意的なコメント付き)。構造的な余力不足によるクローズであり提案内容自体への拒否ではない。追撃対象外。"
     },
     {
       "id": "edtech-correos",
