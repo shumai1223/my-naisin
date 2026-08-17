@@ -796,9 +796,10 @@
       "contactClass": "b2b",
       "evidence": "大学向けインターネット出願・入試アウトソーシングサービス『SakSak出願』(全国41大学導入実績)の専用問い合わせフォームURLを直接WebFetchで確認",
       "verifiedAt": "2026-08-11",
-      "status": "candidate",
+      "status": "excluded",
       "addedAt": "2026-08-11",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4"
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane4",
+      "excludeReason": "対象が大学向け出願システム(41大学導入)で当方の内申点(公立高校入試向け)データとの適合度が弱いため見送り(2026-08-17時点で本文執筆を保留していたが未確定のまま残っていたため本セッションで正式にexcludedへ確定)"
     },
     {
       "id": "media-caritas",
