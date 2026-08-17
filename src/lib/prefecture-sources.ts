@@ -3,7 +3,7 @@
 export const PREFECTURE_SOURCES = {
   tokyo: [
     {
-      sourceUrl: 'https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/exam/release20250925_r8yoko.html',
+      sourceUrl: 'https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/exam',
       pdfTitle: '令和8年度東京都立高等学校入学者選抜実施要綱・同細目について',
       lastChecked: '2026年5月28日',
       pageNumber: '実施要綱（公式公開ページ）',
@@ -11,7 +11,7 @@ export const PREFECTURE_SOURCES = {
       description: '内申点の計算方法と実技教科の2倍計算について'
     },
     {
-      sourceUrl: 'https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/exam/release20250925_r8yoko.html',
+      sourceUrl: 'https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/exam',
       pdfTitle: '令和8年度東京都立高等学校入学者選抜実施要綱・同細目について',
       lastChecked: '2026年5月28日',
       pageNumber: '実施要綱（公式公開ページ）',
@@ -19,7 +19,7 @@ export const PREFECTURE_SOURCES = {
       description: 'ESAT-Jの実施と配点について'
     },
     {
-      sourceUrl: 'https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/exam/release20250925_r8yoko.html',
+      sourceUrl: 'https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/exam',
       pdfTitle: '令和8年度東京都立高等学校入学者選抜実施要綱・同細目について',
       lastChecked: '2026年5月28日',
       pageNumber: '実施要綱（公式公開ページ）',
@@ -30,7 +30,7 @@ export const PREFECTURE_SOURCES = {
 
   kanagawa: [
     {
-      sourceUrl: 'https://www.pref.kanagawa.jp/docs/hr4/senbatsu2024.html',
+      sourceUrl: 'https://www.pref.kanagawa.jp/docs/dc4/nyusen/nyusen/nyusenseidogaiyou.html',
       pdfTitle: '令和8年度神奈川県立高等学校入学者選抜実施要綱',
       lastChecked: '2026年4月22日',
       pageNumber: '18ページ',
@@ -38,7 +38,7 @@ export const PREFECTURE_SOURCES = {
       description: 'S値方式と換算内申の計算方法について'
     },
     {
-      sourceUrl: 'https://www.pref.kanagawa.jp/docs/hr4/senbatsu2024.html',
+      sourceUrl: 'https://www.pref.kanagawa.jp/docs/dc4/nyusen/nyusen/nyusenseidogaiyou.html',
       pdfTitle: '令和8年度神奈川県立高等学校入学者選抜実施要綱',
       lastChecked: '2026年4月22日',
       pageNumber: '22ページ',
@@ -46,7 +46,7 @@ export const PREFECTURE_SOURCES = {
       description: '特色検査の実施と配点について'
     },
     {
-      sourceUrl: 'https://www.pref.kanagawa.jp/docs/hr4/senbatsu2024.html',
+      sourceUrl: 'https://www.pref.kanagawa.jp/docs/dc4/nyusen/nyusen/nyusenseidogaiyou.html',
       pdfTitle: '令和8年度神奈川県立高等学校入学者選抜実施要綱',
       lastChecked: '2026年4月22日',
       pageNumber: '25ページ',
@@ -111,7 +111,7 @@ export const PREFECTURE_SOURCES = {
 
   fukuoka: [
     {
-      sourceUrl: 'https://www.pref.fukuoka.lg.jp/kyouiku/',
+      sourceUrl: 'https://www.pref.fukuoka.lg.jp/site/kyouiku/08youkou.html',
       pdfTitle: '福岡県教育委員会（公立高校入試情報ハブ）',
       lastChecked: '2026年5月28日',
       pageNumber: '公式サイト',
@@ -119,7 +119,7 @@ export const PREFECTURE_SOURCES = {
       description: '調査書点の算出方法と満点45点について'
     },
     {
-      sourceUrl: 'https://www.pref.fukuoka.lg.jp/kyouiku/',
+      sourceUrl: 'https://www.pref.fukuoka.lg.jp/site/kyouiku/08youkou.html',
       pdfTitle: '福岡県教育委員会（公立高校入試情報ハブ）',
       lastChecked: '2026年5月28日',
       pageNumber: '公式サイト',
@@ -127,7 +127,7 @@ export const PREFECTURE_SOURCES = {
       description: '当日点の比重について'
     },
     {
-      sourceUrl: 'https://www.pref.fukuoka.lg.jp/kyouiku/',
+      sourceUrl: 'https://www.pref.fukuoka.lg.jp/site/kyouiku/08youkou.html',
       pdfTitle: '福岡県教育委員会（公立高校入試情報ハブ）',
       lastChecked: '2026年5月28日',
       pageNumber: '公式サイト',

@@ -93,6 +93,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: 'リセマム「【高校受験2023】福岡県、第2志望校制度スタート」（福岡県教育委員会発表を引用）',
       note: '掛-4調査で発見: 令和5(2023)年度入試から一般入学者選抜に「第2志望校制度」新設(第1志望不合格時に欠員のある第2志望校でも再選考)。内申点の計算方式自体には変更なし。詳細は/nyushi-seido-henkouに掲載',
     },
+    {
+      date: '2026-08-17',
+      sourceUrl: 'https://www.pref.fukuoka.lg.jp/site/kyouiku/08youkou.html',
+      sourceTitle: '福岡県教育委員会「令和８年度福岡県立高等学校入学者選抜要項」',
+      note: '定期リンク死活監視(npm run check:affiliate-links新設に伴いnpm run check:linksもTLS回避フラグ付きで再実行)により、prefectures.tsのsourceUrl(旧: https://www.pref.fukuoka.lg.jp/kyouiku/ )がHTTP 404になっていることを検知。WebSearchで現行の要項ページを発見しprefectures.ts側のsourceUrlを差し替えた。内申点の計算方式(中3のみ・45点満点)自体の変更は無い(ページ内容は未読解のためsourceUrl2のczemi記載との整合のみで確認、要項PDF本文の再読解は別途推奨)',
+    },
   ],
   tottori: [
     {
@@ -162,6 +168,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '個別指導Axis「青森県公立高校入試概要」＋WebSearch要約の2独立ソース',
       note: 'ZZ-9b再検証優先度キューにより選定・再検証(前回2026-07-24からdaysSinceVerified12日で最古グループに再浮上)。既存記載(全学年等倍・9教科×5段階×3年=135点満点)をWebSearch要約とaxis-kobetsu.jpの2独立ソースでクロスチェックし変更なしと確認(両ソースとも135点満点で一致)。',
     },
+    {
+      date: '2026-08-17',
+      sourceUrl: 'https://www.pref.aomori.lg.jp/soshiki/kyoiku/e-gakyo/senbatsu2026.html',
+      sourceTitle: '青森県教育委員会「令和8年度青森県立学校入学者選抜について」',
+      note: '定期リンク死活監視(npm run check:linksをTLS回避フラグ付きで再実行)により、prefectures.tsのsourceUrl(旧: https://www.pref.aomori.lg.jp/soshiki/kyoiku/e-gakyo/nyuushi.html )がHTTP 404になっていることを検知。WebSearchで現行の案内ページ(令和8年度選抜要項PDFへのリンクを含む)を発見しprefectures.ts側のsourceUrlを差し替えた。内申点の計算方式(全学年等倍・135点満点)自体の変更は無い(要項PDF本体はバイナリ形式でWebFetchによるテキスト抽出が不可だったため、案内ページの記述とsourceUrl2のjyuku-labo.com記載との整合のみで確認)',
+    },
   ],
   hokkaido: [
     {
@@ -202,6 +214,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '神奈川県教育委員会「神奈川県公立高等学校入学者選抜制度改善方針 説明資料」（令和4年7月）',
       note: '掛-4調査で発見: 令和6(2024)年度入試から共通選抜の面接を一律廃止し、第2次選考に「主体的に学習に取り組む態度」評価を新設。調査書(内申点)自体の計算方式(135点満点)には変更なし',
     },
+    {
+      date: '2026-08-17',
+      sourceUrl: 'https://www.pref.kanagawa.jp/docs/dc4/nyusen/nyusen/nyusenseidogaiyou.html',
+      sourceTitle: '神奈川県教育委員会「入学者選抜制度の概要」',
+      note: '定期リンク死活監視(npm run check:linksをTLS回避フラグ付きで再実行)により、prefectures.tsのsourceUrl(旧: https://www.pref.kanagawa.jp/docs/hr4/senbatsu2024.html )がHTTP 404になっていることを検知。WebFetchで現行の「入学者選抜制度の概要」ページを確認したところ、S1計算式「A＝(第2学年の9教科評定合計)＋(第3学年の9教科評定合計)×2」の記載が既存のgradeMultipliers(2:1/3:2)・targetGrades([2,3])と一致することを独立に再確認できたため、これをsourceUrlとして差し替えた',
+    },
   ],
   tokyo: [
     {
@@ -215,6 +233,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceUrl: 'https://tokyo-metropolitan-high-school.com/contents/kansan-naishin/',
       sourceTitle: '都立高のトリセツ「都立高校受験の内申点計算方法」＋WebSearch要約の2独立ソース',
       note: 'ZZ-9b再検証優先度キューにより選定・再検証(前回2026-07-24からdaysSinceVerified12日で最古グループに再浮上)。Λ-2パイロット県(公開済み・品質ゲート確立の起点)のため特に慎重に確認。既存記載(中3のみ・5教科×1倍25点+実技4教科×2倍40点=65点満点)をWebSearch要約とtokyo-metropolitan-high-school.comの2独立ソースでクロスチェックし完全一致確認(両ソースとも同一の内訳・「換算内申点÷65×300」で300点満点へ換算する式も既存reverseCalcと整合)。',
+    },
+    {
+      date: '2026-08-17',
+      sourceUrl: 'https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/exam',
+      sourceTitle: '東京都教育委員会「入試案内等|都立高等学校」',
+      note: '定期リンク死活監視(npm run check:linksをTLS回避フラグ付きで再実行)により、prefectures.tsのsourceUrl(旧: .../exam/release20250925_r8yoko.html )がHTTP 404になっていることを検知(令和8年度の実施要綱発表ページは日付付きURLのため、年度が進むと差し替わったと推定)。WebFetchで現行の入試案内トップページ(常設URL・今後の年度でも維持される見込み)が生きていることを確認しsourceUrlを差し替えた。計算方式自体(中3のみ・65点満点)の変更確認は前回(2026-08-05)の再検証で完了済みのため今回は行っていない',
     },
   ],
   hyogo: [
