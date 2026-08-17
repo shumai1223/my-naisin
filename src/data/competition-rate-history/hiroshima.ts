@@ -2,7 +2,7 @@
  * 広島県 多年度アーカイブ（Λ-4）。
  *
  * 一次ソース: 広島県教育委員会「公立高等学校入学者選抜一次選抜等の志願状況について」
- * 令和8年度: https://www.pref.hiroshima.lg.jp/uploaded/attachment/653718.pdf（2026-02-18最終志願者数）
+ * 令和8年度: https://www.pref.hiroshima.lg.jp/site/kyouiku/08senior-2nd-r8-nyuushi-r8-kou-r8-kou-mokuji-r8-kou-mokuji.html（2026-02-18最終志願者数）
  * 令和7年度: https://www.pref.hiroshima.lg.jp/uploaded/attachment/606791.pdf（2025-02-10現在志願者数）
  *
  * 全日制本校（学科系統別・11区分）の「小計」行を全日制合計として採用する
@@ -30,7 +30,7 @@ import type { PrefectureRateHistoryFile, YearSnapshot } from '@/lib/competition-
 
 const REIWA_8: YearSnapshot = {
   fiscalYear: '令和8年度（2026年度）',
-  sourceUrl: 'https://www.pref.hiroshima.lg.jp/uploaded/attachment/653718.pdf',
+  sourceUrl: 'https://www.pref.hiroshima.lg.jp/site/kyouiku/08senior-2nd-r8-nyuushi-r8-kou-r8-kou-mokuji-r8-kou-mokuji.html',
   sourceTitle: '広島県教育委員会 令和8年度公立高等学校入学者選抜一次選抜等の志願状況について（2月18日最終志願者数）',
   fetchedAt: '2026-08-01',
   origin: 'current-year-column',

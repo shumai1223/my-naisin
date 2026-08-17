@@ -3,7 +3,7 @@
  *
  * 一次ソース: 岡山県教育委員会「令和7年度岡山県公立高等学校一般入学者選抜志願者数について」
  * （2025年2月28日公表）
- * https://www.pref.okayama.jp/uploaded/life/1048890_10156774_misc.pdf
+ * https://www.pref.okayama.jp/site/16/913706.html
  *
  * 既存Y-6 okayama.tsと同一の資料シリーズ・同一の列定義（quota=一般入学募集人員(A-B)・
  * applicants=一般入学志願者数(C)）。「（１）総括表」の「県立全日制」行（募集定員10,625・
@@ -58,7 +58,7 @@ const REIWA_6: YearSnapshot = {
 
 const REIWA_7: YearSnapshot = {
   fiscalYear: '令和7年度（2025年度）',
-  sourceUrl: 'https://www.pref.okayama.jp/uploaded/life/1048890_10156774_misc.pdf',
+  sourceUrl: 'https://www.pref.okayama.jp/site/16/913706.html',
   sourceTitle: '岡山県教育委員会 令和7年度岡山県公立高等学校一般入学者選抜志願者数について',
   fetchedAt: '2026-07-29',
   origin: 'current-year-column',
