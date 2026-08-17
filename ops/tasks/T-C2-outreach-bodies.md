@@ -373,6 +373,21 @@ Object.entries(g).filter(([,v])=>v.length>1).forEach(([k,v])=>console.log(k,v));
 
 この分析自体は下書きを1件も作らないため、本日のGmail下書き上限(12件)を消費していない。
 
+## 🎉2026-08-17 12:4x: candidate(email channel)の本文執筆が全件完了(0件)
+
+08-17未明〜昼にかけて、`status==='candidate' && channel==='email' && !body`の76件全てに個別本文を
+追加した（npoレーン中心・edtech4件はb2b-saas型ピッチ・lane7大学education faculty18件・lane8教職員
+互助会系6件等）。**次に必要なのは「本文執筆」ではなく「下書き化(gmail_create_draft)」**。
+
+**次回セッションへの引き継ぎ**:
+1. 1晩10〜15件のGmail下書き上限を守りながら、`status==='candidate' && channel==='email' && body`を
+   `gmail_create_draft`で下書き化し`status:'queued'`+`draftId`へ昇格させる。
+2. **as.bunken.co.jp(国際文献社・12団体)・kokusaibunken.jp(2団体)・u-gakugei.ac.jp(2団体・部署違い)は
+   同日に複数件下書き化しない**（`loop-question-note`の該当項目・本ファイル上部のガード表を参照）。
+   lane7大学(23件)は全て別ドメインのため衝突なし・優先的に消化してよい。
+3. 診断コマンド: `node -e "const q=require('./data/outreach-queue.json').entries;console.log(q.filter(x=>x.status==='candidate'&&x.channel==='email'&&x.body&&!x.draftId).length)"`
+   （下書き化候補の残数を数える）。
+
 ## この文書が上書きするもの
 
 - `ops/tasks/T-C1-b2b-target-list.md` の「候補を増やし続ける」部分。
