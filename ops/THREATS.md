@@ -114,10 +114,10 @@ CTRは3.53%→1.92%へ一貫して低下、平均順位も6.1→7.9へ緩やか�
 | 項目 | 内容 |
 |---|---|
 | **症状** | 主要ASP案件（`sora-juku-text`等）のプログラムが終了・条件変更されると、対応するhrefがデッドリンク化しEVがゼロになる。`sora-juku-text`は季節フォールバック先として複数面の既定オファーになっている（`src/lib/affiliates.ts:19,48-49`のコメント：「未approveの間はseasonalが自動で既存塾にフォールバックするのでデッドリンクは出ない」） |
-| **早期警戒指標** | ①本書で実施（`curl -k --max-time 45 -A <iPhone UA> -L https://px.a8.net/svt/ejp?a8mat=4B3SN7+EDZ52Q+4YWU+5YJRM`）: **`sora-juku-text`のhrefは2026-08-10時点でhttp_code=200、1回のリダイレクトで正常遷移を確認**。**この確認を行う定期スクリプトが現状存在しない**（`check:links` は一次ソースURL119本のみ対象で `affiliates.ts` のhrefはスコープ外）。②D1のこの案件へのクリックが急減した場合（前週比50%減等）も間接指標になる。ただし③の実測により、クリック数の増減だけでは終了/正常を判別できないことが判明している。③**本書の新規実測**（`node scripts/d1q.mjs`・D1ローリング28日・2026-08-10取得・`affiliate_id='sora-juku-text'`限定）: 85クリックのうち referer 内訳は `null` 84件・`internal_path`（人間と確証できる referer）**わずか1件**。`ops/COEFFICIENTS.md`§1の「下限＝内部パス付き」定義をこの案件だけに適用すると、**この案件が仮に今日終了しても、確証を持って失う人間のクリックは28日で1件**（サイト全体の下限17件のうち5.9%相当）という計算になる |
+| **早期警戒指標** | ①本書で実施（`curl -k --max-time 45 -A <iPhone UA> -L https://px.a8.net/svt/ejp?a8mat=4B3SN7+EDZ52Q+4YWU+5YJRM`）: **`sora-juku-text`のhrefは2026-08-10時点でhttp_code=200、1回のリダイレクトで正常遷移を確認**。✅2026-08-17: この確認を行う定期スクリプト`npm run check:affiliate-links`を新設した（`check:links` は一次ソースURL119本のみ対象で `affiliates.ts` のhrefはスコープ外だったため別スクリプトとした・詳細は下の「予防」欄）。②D1のこの案件へのクリックが急減した場合（前週比50%減等）も間接指標になる。ただし③の実測により、クリック数の増減だけでは終了/正常を判別できないことが判明している。③**本書の新規実測**（`node scripts/d1q.mjs`・D1ローリング28日・2026-08-10取得・`affiliate_id='sora-juku-text'`限定）: 85クリックのうち referer 内訳は `null` 84件・`internal_path`（人間と確証できる referer）**わずか1件**。`ops/COEFFICIENTS.md`§1の「下限＝内部パス付き」定義をこの案件だけに適用すると、**この案件が仮に今日終了しても、確証を持って失う人間のクリックは28日で1件**（サイト全体の下限17件のうち5.9%相当）という計算になる |
 | **発生確率** | **低**（実測: href自体は生存）。ただし監視の仕組みが無いため「終了に気づくまでの遅延」のリスクは**高い** |
 | **影響** | 出せる部分と出せない部分が混在。出せる部分: `sora-juku-text`のEV理論値は 0.04×0.6×¥10,000=**¥240/click**（`ops/COEFFICIENTS.md`§4、**理論値であり実測ではない**）。下限の人間クリック1件/28日を当てはめると**理論上¥240/28日相当（≒¥257/月）**がこの案件単体の見える範囲での上限。出せない部分: 84件のnull refererクリックが本当に全部botかは未証明（COEFFICIENTS§1不採用値注記のとおり、GA4は2026-08-10にaffiliate_click 1件を記録しその日のD1側は全てnull/root referer）なので、上限側は最大85件×¥240=**¥20,400/28日**にもなりうる幅がある |
-| **予防** | `affiliates.ts` のlive 34本のhrefを月次でcurl巡回するops側スクリプトを作る価値がある（D1を汚さない読み取り専用チェック・実装コスト低） |
+| **予防** | ✅2026-08-17新設: `npm run check:affiliate-links`（`scripts/check-affiliate-links.mjs`）。affiliates.tsのlive34本(status≠'pending')のhrefを自動抽出しHEAD/GETで巡回、404/410/DNS不能のみ「壊れ」として`exit 1`（403等のbot弾き応答は到達確認済みとして警告止まり・`check-source-links.mjs`と同じ寛容な分類方針）。初回実行(2026-08-17)は34件中デッドリンク0件・警告3件（sapuri-*がHTTP403でbot弾きの可能性、到達自体は確認済み）。月次でこのコマンドを実行するだけで良い（会社ネットワークではTLS傍受で素のfetchが失敗することがあり、その場合は`NODE_TLS_REJECT_UNAUTHORIZED=0 npm run check:affiliate-links`で回避） |
 | **回復** | href失効を検知したら、該当案件を `status: 'pending'` へ戻す（既存設計により `AffiliateAd` が自動的に描画を止め、季節フォールバック=既存塾へ自動切替＝デッドリンクが出ない、`affiliates.ts:49`） |
 | **人間ゲート(C7)** | 不要（読み取りチェックのみ）。`status` 変更はコード変更のためデプロイは👤 |
 
@@ -216,7 +216,7 @@ CTRは3.53%→1.92%へ一貫して低下、平均順位も6.1→7.9へ緩やか�
 | 1 | **GSC「手動による対策」「セキュリティの問題」ページの確認** | 脅威5(TH-3) | **最低**（Search Console管理画面を開いて見るだけ。コード・クエリ不要） | 👤 |
 | 2 | **`stats_submissions` の `trust_class`別週次集計SQL** | 脅威7(TH-5) | 低（`node scripts/d1q.mjs` のSQL1本を週1回実行するだけ。既にコマンドは確立済み・本書に記載） | loop |
 | 3 | **`evaluateTripwires()`（`src/lib/velocity.ts`）を `npm run kpi:weekly` 経由で週次運用に乗せる** | 脅威4(TH-2) | 低（コードは既に存在。GA4 MCPの値をCLI引数として渡すだけ） | loop |
-| 4 | **`affiliates.ts` のlive 34本hrefを月次でcurl巡回するops側チェックスクリプトの新設** | 脅威6(TH-4) | 中（新規スクリプト1本。読み取り専用でD1を汚さない設計は本書のcurlコマンドをそのまま雛形にできる） | loop（実装）→👤（承認） |
+| 4 | ✅2026-08-17完了: `affiliates.ts` のlive 34本hrefを巡回するops側チェックスクリプト（`npm run check:affiliate-links`） | 脅威6(TH-4) | 完了。以後は月次実行するだけ | loop（実装済）→👤（月次実行） |
 | 5 | **`data/affiliate-actuals.json` へのASP発生件数の転記** | 脅威2(TH-10)・脅威3(TH-1)ほか全ての円換算試算の校正点 | 技術コストはゼロだが👤の手作業（3ASP管理画面）が必須。**価値は最大**（これが埋まるまで、本書を含む全ての¥試算は仮置き係数のままであり続ける） | 👤 |
 
 ---
