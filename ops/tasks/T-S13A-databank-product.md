@@ -420,8 +420,8 @@ ok確定に追加され、現時点でok県はmie+gifuの2県**（詳細は上�
 出典明記のうえ掲載してよいか」への明確なOKを受信し確定。詳細は`src/lib/data-license-ledger.ts`
 のgifuエントリを参照）。
 
-**残り44県は完全に未着手。** kill_criteria（`redistribution: 'ok'`が10県未満なら中止）を
-満たすには、最低あと9県の一次ソース確認が必要。
+**残り45県（mie/gifu以外）は完全に未着手。** kill_criteria（`redistribution: 'ok'`が10県未満なら中止）を
+満たすには、2026-08-17時点でmie+gifuの2県が確定済みのため、最低あと8県の一次ソース確認が必要。
 
 **2026-08-12追記(受動確認は低歩留まりと判明・能動的な問い合わせへ切替)**: 東京都・愛知県の
 公式サイト著作権ページ（`kyoiku.metro.tokyo.lg.jp/administration/web/rights.html`等）を
