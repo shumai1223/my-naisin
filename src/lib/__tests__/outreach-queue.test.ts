@@ -234,7 +234,11 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // 未実施だった)ため、excludeReason付きで正式にexcludedへ確定(queuedには影響せず207のまま)。
     // 2026-08-18続き3: lane9-kobunren(全国高等学校文化連盟・form channel)は本文執筆済みでcandidateの
     // まま昇格漏れだった1件をqueuedへ昇格(207→208・form channelのためGmail下書き上限の対象外)。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(208);
+    // 2026-08-19: T-C2上限リセット後、本文執筆済みcandidate66件から12件(edtech-frompage-ocans/lane9-nasem/
+    // lane9-jsrecce/lane8-nagasaki-kyoikukai/lane8-yamaguchi-kyoikukai/npo-terakoya-houjousha/lane9-jash/
+    // lane9-geoedu/lane9-jssace/lane9-zentoku/lane9-zenkojoken/lane7-jaue)をGmail下書き化しqueuedへ昇格(208→220・
+    // as.bunken.co.jp/kokusaibunken.jp/u-gakugei.ac.jp等の運営代行クラスタは各1件のみに抑え分散)。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(220);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {
