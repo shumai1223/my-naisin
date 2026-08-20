@@ -238,7 +238,10 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // lane9-jsrecce/lane8-nagasaki-kyoikukai/lane8-yamaguchi-kyoikukai/npo-terakoya-houjousha/lane9-jash/
     // lane9-geoedu/lane9-jssace/lane9-zentoku/lane9-zenkojoken/lane7-jaue)をGmail下書き化しqueuedへ昇格(208→220・
     // as.bunken.co.jp/kokusaibunken.jp/u-gakugei.ac.jp等の運営代行クラスタは各1件のみに抑え分散)。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(220);
+    // 2026-08-20: アカウント乗っ取り懸念(08-19停止)解除後、本文執筆済みcandidate54件(全件evidence/verifiedAt
+    // 済み)から12件(lane9-jsdp/lane9-iesj/lane9-kodomogakkai/lane9-jtsj/lane9-jass/lane9-jale/lane9-yougo/
+    // lane9-jmes/lane9-katei-ed/lane9-zenshokai/lane9-jasdd/lane9-jacdp)をGmail下書き化しqueuedへ昇格(220→232)。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(232);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {
