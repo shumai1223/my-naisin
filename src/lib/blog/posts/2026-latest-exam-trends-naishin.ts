@@ -160,7 +160,7 @@ export const post: BlogPost = {
       <tr>
         <td>東京都</td>
         <td>中3のみ</td>
-        <td>300点</td>
+        <td>65点（調査書点300点に換算）</td>
         <td>学力7：内申3（多くの高校）</td>
       </tr>
       <tr>
