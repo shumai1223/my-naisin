@@ -291,15 +291,15 @@ export const post: BlogPost = {
       </tr>
       <tr>
         <td><strong>神奈川県</strong></td>
-        <td>2倍</td>
-        <td>2倍</td>
-        <td>中2・中3が対象</td>
+        <td>1倍</td>
+        <td>1倍</td>
+        <td>中2・中3が対象（中3の得点は学年ごと2倍）</td>
       </tr>
       <tr>
         <td><strong>埼玉県</strong></td>
-        <td>2倍</td>
-        <td>2倍</td>
-        <td>中1〜中3が対象</td>
+        <td>1倍</td>
+        <td>1倍</td>
+        <td>中1〜中3が対象（中3の得点は学年ごと2倍）</td>
       </tr>
       <tr>
         <td><strong>兵庫県</strong></td>
