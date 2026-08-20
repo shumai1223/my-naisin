@@ -332,7 +332,9 @@ export const PREFECTURES: PrefectureConfig[] = [
     reverseCalc: {
       totalMaxScore: 1020,
       examMaxScore: 1000,
-      defaultRatio: { naishin: 70, exam: 30 },
+      // ⚠️2026-08-21修正: naishin/examが逆転していた(内申70%は誤り)。実際は換算内申300点：
+      // 学力検査700点=内申30%：学力70%（total-score/tokyo.tsのcomputeTokyoTotalScoreと同じ配点）。
+      defaultRatio: { naishin: 30, exam: 70 },
       calcType: 'tokyo',
       // 東京都固有の設定
       tokyoSettings: {
