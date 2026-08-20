@@ -104,8 +104,8 @@ export const PREFECTURE_FAQ_DATA: Record<string, PrefectureFAQEntry> = {
         priority: 'high'
       },
       {
-        question: 'タイプⅠ〜Ⅲの違いは？',
-        answer: 'タイプⅠは総合学科、タイプⅡは普通科、タイプⅢは専門学科向けです。内申点の比重が異なります。',
+        question: 'タイプⅠ〜Ⅴの違いは？',
+        answer: '学校の種類ではなく、内申点と学力検査の比率（合計10）を表す5段階です。タイプⅠ（内申3：学力7）が最も学力重視、タイプⅢ（内申5：学力5）が標準、タイプⅤ（内申7：学力3）が最も内申重視です。どの高校がどのタイプを採用しているかは各校の募集要項で確認できます。',
         icon: 'help',
         priority: 'high'
       },
@@ -117,7 +117,7 @@ export const PREFECTURE_FAQ_DATA: Record<string, PrefectureFAQEntry> = {
       }
     ],
     specificNotes: [
-      'タイプⅡが最も一般的です',
+      'タイプⅢ（内申5：学力5）が標準的な比率とされています',
       '当日点は500点満点が基本です'
     ]
   },
