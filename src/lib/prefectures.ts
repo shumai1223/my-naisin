@@ -765,10 +765,14 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceTitle: '岡山県 県立高等学校の入学者選抜',
     lastVerified: '2026-07-16',
     fiscalYear: '2026',
+    // ⚠️2026-08-21修正: 他県と同じ汎用値(500点満点)のままだったが、岡山県の学力検査は
+    // 実際には5教科×70点＝350点満点（500点満点ではない）。ReverseCalculator.tsxの
+    // naishinMaxはツール内部のmaxScore(195)を使う(実選抜換算のactualMaxScore200とは
+    // 僅差のため大きな歪みなし)ため、195+学力350=545点満点・内申比率約36%とした。
     reverseCalc: {
-      totalMaxScore: 1000,
-      examMaxScore: 500,
-      defaultRatio: { naishin: 40, exam: 60 },
+      totalMaxScore: 545,
+      examMaxScore: 350,
+      defaultRatio: { naishin: 36, exam: 64 },
       calcType: 'standard'
     }
   },
