@@ -69,7 +69,7 @@
 | # | 見るもの | コマンド／手順 | 異常の定義 |
 |---|---|---|---|
 | W-1 | **匿名統計の汚染再発** | `node scripts/d1q.mjs "SELECT trust_class, COUNT(*), ROUND(AVG(value),2) FROM stats_submissions WHERE metric='hensachi' GROUP BY 1"` | `trusted=1` の平均が **50±5** を外れる／`trusted=1` が急増 |
-| W-2 | **人間のアフィリクリック数** | `node scripts/d1q.mjs "SELECT COUNT(*) FROM clicks WHERE referer LIKE 'https://my-naishin.com/_%' AND created_at >= datetime('now','-7 days')"` | 0が3週続く（＝換金導線の死） |
+| W-2 | **人間のアフィリクリック数** | `node scripts/d1q.mjs "SELECT COUNT(*) FROM clicks WHERE referer LIKE 'https://my-naishin.com/_%' AND created_at >= datetime('now','-7 days')"` ＋ **`npm run check:click-fraud`**（2026-08-20新設・TH-13の不正クリック検知） | 0が3週続く（＝換金導線の死）／`check:click-fraud`が`exit 1`（IPローテーション型の疑いがある日を検知） |
 | W-3 | **保護者到達** | `node scripts/d1q.mjs "SELECT event, COUNT(*) FROM parent_funnel_events GROUP BY 1"` | **0→1 への遷移そのものが最重要シグナル**。11/15の窓オープン後も0なら機能不全 |
 | W-4 | **D1の件数が減っていないか** | 各テーブルの `COUNT(*)` を前週と比較 | **減少していたら即停止**（書き込み経路の事故） |
 | W-5 | **サイト規模** | `mcp__gsc__gsc_totals`（**次元なし。query/page次元の合計を使わない**） | 平均順位が7日で2位以上悪化 |
