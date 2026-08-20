@@ -27,7 +27,7 @@
 
 ---
 
-## 1. 栃木県教育委員会
+## 1. 栃木県教育委員会 ✅下書き化済み(2026-08-20・draftId r-5247365395633408192)
 
 - to: `kokokyoiku@pref.tochigi.lg.jp`
 - subject: `Re: 貴課公表資料の引用利用に関するご報告および参照可否のご相談`
@@ -53,7 +53,7 @@
 https://my-naishin.com　naishin.dev@gmail.com
 ```
 
-## 2. 島根県教育委員会
+## 2. 島根県教育委員会 ✅下書き化済み(2026-08-20・draftId r-3850377284819771014)
 
 - to: `gakkoukyouiku@pref.shimane.lg.jp`
 - subject: `Re: 貴課公表資料の引用利用に関するご報告および参照可否のご相談`
@@ -79,7 +79,7 @@ https://my-naishin.com　naishin.dev@gmail.com
 https://my-naishin.com　naishin.dev@gmail.com
 ```
 
-## 3. 高知県教育委員会
+## 3. 高知県教育委員会 ✅下書き化済み(2026-08-20・draftId r-1180606127451523989)
 
 - to: `311701@ken.pref.kochi.lg.jp`
 - subject: `Re: 貴課公表資料の引用利用に関するご報告および参照可否のご相談`
@@ -418,6 +418,15 @@ https://my-naishin.com　naishin.dev@gmail.com
 ```
 
 ---
+
+## ⚠️2026-08-20追記: gmail_searchが一時的に機能不全だった(全クエリで無関係な同一結果を返す既知の罠)
+
+2026-08-20 17:5x時点でgmail_search MCPが壊れており(詳細は`memory/fable5-loop-protocol`の新設項目参照)、
+返信有無の事前確認ができないままdata/outreach-ledger.jsonのstatusフィールド(ローカルの記録のみ)を
+根拠に栃木・島根・高知の3件を下書き化した。次回セッションでこの現象が直っていれば、
+残り11件(宮崎/香川/静岡/福井/滋賀/秋田[要書き直し]/茨城/鳥取/佐賀/鹿児島/沖縄/岩手)に着手する前に
+gmail_searchで返信有無を再確認すること。直っていなければ、ledgerのstatus(awaiting=返信なしの前提が
+崩れていないか)をこまめにチェックしつつ進める。
 
 ## 下書き化の順序メモ（1晩の上限内でどう配分するか）
 
