@@ -688,10 +688,12 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceTitle: '和歌山県教育委員会 県立高等学校入学者選抜実施要項',
     lastVerified: '2026-07-16',
     fiscalYear: '2026',
+    // ⚠️2026-08-21修正: examMaxScore(500点)は正しいが、totalMaxScoreが他県と同じ汎用値
+    // (1000)のままだった。実際は内申180+学力500=680点満点・内申比率は約26%（Web検索で確認）。
     reverseCalc: {
-      totalMaxScore: 1000,
+      totalMaxScore: 680,
       examMaxScore: 500,
-      defaultRatio: { naishin: 40, exam: 60 },
+      defaultRatio: { naishin: 26, exam: 74 },
       calcType: 'standard'
     }
   },
@@ -712,10 +714,13 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceTitle: '鳥取県教育委員会 入学者選抜',
     lastVerified: '2026-04-22',
     fiscalYear: '2026',
+    // ⚠️2026-08-21修正: 他県と同じ汎用値(500点満点)のままだったが、鳥取県の学力検査は
+    // 実際には5教科×50点＝250点満点（500点満点ではない）。内申65+学力250=315点満点・
+    // 内申比率は約21%（学校により内申を2〜3倍に換算する場合ありnote参照）。
     reverseCalc: {
-      totalMaxScore: 1000,
-      examMaxScore: 500,
-      defaultRatio: { naishin: 40, exam: 60 },
+      totalMaxScore: 315,
+      examMaxScore: 250,
+      defaultRatio: { naishin: 21, exam: 79 },
       calcType: 'standard'
     }
   },
@@ -975,10 +980,12 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceTitle: '長崎県 公立高等学校入学者選抜実施要領',
     lastVerified: '2026-07-16',
     fiscalYear: '2026',
+    // ⚠️2026-08-21修正: examMaxScore(500点)は正しいが、totalMaxScoreが他県と同じ汎用値
+    // (1000)のままだった。実際は内申135+学力500=635点満点・内申比率は約21%。
     reverseCalc: {
-      totalMaxScore: 1000,
+      totalMaxScore: 635,
       examMaxScore: 500,
-      defaultRatio: { naishin: 40, exam: 60 },
+      defaultRatio: { naishin: 21, exam: 79 },
       calcType: 'standard'
     }
   },
@@ -1048,10 +1055,13 @@ export const PREFECTURES: PrefectureConfig[] = [
     lastVerified: '2026-07-16',
     fiscalYear: '2026',
     note: '学力検査・面接との比率は非公表で、高校ごとに傾斜配点が行われます。合否における内申点の実質的な重みは志望校の募集要項でご確認ください。',
+    // ⚠️2026-08-21修正: examMaxScore(500点)は正しいが、totalMaxScoreが他県と同じ汎用値
+    // (1000)のままだった。実際は内申135+学力500=635点満点。公式な比率は非公表のため、
+    // defaultRatioは素点の単純合算(内申約21%)を目安値として置く。
     reverseCalc: {
-      totalMaxScore: 1000,
+      totalMaxScore: 635,
       examMaxScore: 500,
-      defaultRatio: { naishin: 40, exam: 60 },
+      defaultRatio: { naishin: 21, exam: 79 },
       calcType: 'standard'
     }
   },
