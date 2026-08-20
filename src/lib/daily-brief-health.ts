@@ -40,6 +40,20 @@ export interface TruthCounts {
   statsSubmissionsTotal: number;
 }
 
+/**
+ * 脅威13(TH-13・2026-08-20発見)のクリック不正バースト検知結果（前日分・
+ * `scripts/lib/click-fraud-detector.mjs`と同じ判定ロジックを使う）。
+ * 取得自体に失敗した場合は null（判定は保留＝既存のstatus判定を悪化させない）。
+ */
+export interface ClickFraudCheck {
+  date: string;
+  total: number;
+  distinctIp: number;
+  distinctUa: number;
+  ipRatio: number;
+  flagged: boolean;
+}
+
 export const HEALTH_EVENT_NAMES: (keyof EventHealthCounts)[] = [
   'cta_view',
   'lead_submit',
@@ -54,6 +68,8 @@ export interface HealthInput {
   ga4: EventHealthCounts;
   /** D1から取得した確定値。取得できなかった場合は null（その場合🔴判定は行わない）。 */
   truth: TruthCounts | null;
+  /** TH-13クリック不正バースト検知（前日分）。省略/取得できなかった場合はnull扱い（判定に影響させない）。 */
+  clickFraud?: ClickFraudCheck | null;
 }
 
 /**
@@ -68,10 +84,11 @@ export interface HealthInput {
  * 「分からない」を「異常」に丸めない（それが初版の誤りだった）。
  */
 export function judgeHealth(input: HealthInput): HealthStatus {
-  const { ga4, truth } = input;
+  const { ga4, truth, clickFraud } = input;
   if (truth === null) return 'caution';
   if (truth.statsSubmissions7d === 0) return 'alert';
   if (ga4.cta_view === 0) return 'caution';
+  if (clickFraud?.flagged) return 'caution';
   return 'ok';
 }
 
@@ -83,7 +100,7 @@ const STATUS_LABEL: Record<HealthStatus, string> = {
 
 /** 実測件数から生存監視セクションのMarkdownを組み立てる（外部APIに依存しない純関数）。 */
 export function buildHealthSection(input: HealthInput, dateLabel: string): string {
-  const { ga4, truth } = input;
+  const { ga4, truth, clickFraud } = input;
   const status = judgeHealth(input);
 
   const truthLines = truth
@@ -97,6 +114,14 @@ export function buildHealthSection(input: HealthInput, dateLabel: string): strin
   const ga4Lines = HEALTH_EVENT_NAMES.map(
     (name) => `- \`${name}\`: ${ga4[name].toLocaleString('en-US')}件以上`
   );
+
+  const clickFraudLines = clickFraud
+    ? [
+        clickFraud.flagged
+          ? `- ⚠️ **クリック不正の疑いあり**（総クリック${clickFraud.total}件・distinct IP比率${clickFraud.ipRatio.toFixed(2)}・distinct UA${clickFraud.distinctUa}種類。詳細は\`ops/THREATS.md\`脅威13）`
+          : `- クリック不正の兆候なし（総クリック${clickFraud.total}件）`,
+      ]
+    : ['- （D1から取得できなかったため今回はチェック未実施）'];
 
   return [
     `## ⚡収益導線の生存監視（自動・${dateLabel}時点・Λ-1）`,
@@ -114,6 +139,10 @@ export function buildHealthSection(input: HealthInput, dateLabel: string): strin
     '',
     ...ga4Lines,
     '',
+    '### クリック不正バースト検知（前日・TH-13）',
+    '',
+    ...clickFraudLines,
+    '',
   ].join('\n');
 }
 
@@ -129,15 +158,16 @@ export function buildHealthSection(input: HealthInput, dateLabel: string): strin
  */
 export function buildDiscordMessage(input: HealthInput, dateLabel: string): string {
   const status = judgeHealth(input);
-  const { truth } = input;
+  const { truth, clickFraud } = input;
   const truthLine = truth
     ? `stats_submissions(7日)=${truth.statsSubmissions7d}件 / leads(7日)=${truth.leads7d}件`
     : 'D1から確定値を取得できず（判定保留）';
-  return [
-    `${STATUS_LABEL[status]}（${dateLabel}時点・My Naishin 収益導線監視）`,
-    truthLine,
-    '詳細: docs/daily-brief.md',
-  ].join('\n');
+  const lines = [`${STATUS_LABEL[status]}（${dateLabel}時点・My Naishin 収益導線監視）`, truthLine];
+  if (clickFraud?.flagged) {
+    lines.push(`⚠️ クリック不正の疑い(TH-13): ${clickFraud.date} 総クリック${clickFraud.total}件`);
+  }
+  lines.push('詳細: docs/daily-brief.md');
+  return lines.join('\n');
 }
 
 /**

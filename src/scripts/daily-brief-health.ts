@@ -26,8 +26,10 @@ import {
   HEALTH_EVENT_NAMES,
   type EventHealthCounts,
   type TruthCounts,
+  type ClickFraudCheck,
 } from '@/lib/daily-brief-health';
 import { postDiscordWebhook } from '@/lib/discord-notify';
+import { analyzeClickFraudByDay } from '../../scripts/lib/click-fraud-detector.mjs';
 
 /**
  * D1（本番・読み取り専用）から確定値を取る。
@@ -73,6 +75,42 @@ function fetchTruthCounts(): TruthCounts | null {
   }
 }
 
+/**
+ * TH-13クリック不正バースト検知（前日分）。判定ロジックは scripts/lib/click-fraud-detector.mjs を
+ * check-click-fraud-burst.mjs（週次手動実行）と共有する。取得に失敗しても監視全体は落とさずnullを返す。
+ */
+function fetchClickFraudCheck(date: string): ClickFraudCheck | null {
+  const sql = [
+    "SELECT date(created_at) as d, ip_hash, user_agent FROM clicks",
+    "WHERE referer LIKE 'https://my-naishin.com/_%'",
+    `AND date(created_at) = '${date}'`,
+  ].join(' ');
+  try {
+    const out = execFileSync(
+      process.execPath,
+      [
+        path.resolve(process.cwd(), 'node_modules/wrangler/bin/wrangler.js'),
+        'd1', 'execute', 'my-naishin-leads', '--remote', '--json', '--command', sql,
+      ],
+      {
+        encoding: 'utf8',
+        env: { ...process.env, NODE_TLS_REJECT_UNAUTHORIZED: '0' },
+        stdio: ['ignore', 'pipe', 'ignore'],
+        timeout: 60_000,
+      }
+    );
+    const jsonStart = out.indexOf('[');
+    if (jsonStart === -1) return null;
+    const parsed = JSON.parse(out.slice(jsonStart));
+    const rows = parsed?.[0]?.results ?? [];
+    const [result] = analyzeClickFraudByDay(rows);
+    if (!result) return { date, total: 0, distinctIp: 0, distinctUa: 0, ipRatio: 0, flagged: false };
+    return result;
+  } catch {
+    return null;
+  }
+}
+
 async function fetchYesterdayCounts(date: string): Promise<EventHealthCounts> {
   const auth = getAuthedClient();
   const property = `properties/${getPropertyId()}`;
@@ -104,7 +142,8 @@ async function main() {
   const date = yesterdayJst();
   const ga4 = await fetchYesterdayCounts(date);
   const truth = fetchTruthCounts();
-  const section = buildHealthSection({ ga4, truth }, date);
+  const clickFraud = fetchClickFraudCheck(date);
+  const section = buildHealthSection({ ga4, truth, clickFraud }, date);
 
   const filePath = path.resolve(process.cwd(), 'docs/daily-brief.md');
   const existing = fs.existsSync(filePath) ? fs.readFileSync(filePath, 'utf8') : '# 朝ブリーフィング（自動更新）\n';
@@ -115,7 +154,7 @@ async function main() {
 
   // Λ-21第1層（Discord通知）: DISCORD_WEBHOOK_URL未設定の間は自動でskipされる
   // （👤がDiscord側でwebhookを発行し設定するまでは本番挙動への影響ゼロ）。
-  const discordMessage = buildDiscordMessage({ ga4, truth }, date);
+  const discordMessage = buildDiscordMessage({ ga4, truth, clickFraud }, date);
   const discordResult = await postDiscordWebhook(process.env.DISCORD_WEBHOOK_URL, discordMessage);
   if (discordResult.skipped) {
     console.log('Discord通知: DISCORD_WEBHOOK_URL未設定のためskip');

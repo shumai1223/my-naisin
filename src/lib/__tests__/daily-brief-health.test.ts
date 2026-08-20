@@ -6,6 +6,7 @@ import {
   yesterdayJst,
   type EventHealthCounts,
   type TruthCounts,
+  type ClickFraudCheck,
 } from '../daily-brief-health';
 
 const GA4_OK: EventHealthCounts = { cta_view: 120, lead_submit: 3, line_friend_click: 8, affiliate_click: 45 };
@@ -13,6 +14,23 @@ const GA4_OK: EventHealthCounts = { cta_view: 120, lead_submit: 3, line_friend_c
 const GA4_ALL_ZERO: EventHealthCounts = { cta_view: 0, lead_submit: 0, line_friend_click: 0, affiliate_click: 0 };
 const TRUTH_OK: TruthCounts = { statsSubmissions7d: 29, leads7d: 1, statsSubmissionsTotal: 179 };
 const TRUTH_DRY: TruthCounts = { statsSubmissions7d: 0, leads7d: 0, statsSubmissionsTotal: 179 };
+const CLICK_FRAUD_CLEAN: ClickFraudCheck = {
+  date: '2026-08-19',
+  total: 12,
+  distinctIp: 12,
+  distinctUa: 9,
+  ipRatio: 1,
+  flagged: false,
+};
+/** TH-13の実測(2026-08-14)相当のシグネチャ: 総クリック384件・distinct IP比率0.99・distinct UA8種類。 */
+const CLICK_FRAUD_FLAGGED: ClickFraudCheck = {
+  date: '2026-08-14',
+  total: 384,
+  distinctIp: 380,
+  distinctUa: 8,
+  ipRatio: 0.99,
+  flagged: true,
+};
 
 describe('judgeHealth', () => {
   it('D1が健全でGA4も正なら ok', () => {
@@ -36,6 +54,19 @@ describe('judgeHealth', () => {
 
   it('D1が健全でも高頻度のcta_viewが前日ゼロなら caution', () => {
     expect(judgeHealth({ ga4: { ...GA4_OK, cta_view: 0 }, truth: TRUTH_OK })).toBe('caution');
+  });
+
+  it('TH-13: クリック不正が検知された日は他が健全でも caution', () => {
+    expect(judgeHealth({ ga4: GA4_OK, truth: TRUTH_OK, clickFraud: CLICK_FRAUD_FLAGGED })).toBe('caution');
+  });
+
+  it('クリック不正の兆候が無ければ status に影響しない', () => {
+    expect(judgeHealth({ ga4: GA4_OK, truth: TRUTH_OK, clickFraud: CLICK_FRAUD_CLEAN })).toBe('ok');
+  });
+
+  it('clickFraudが省略/nullでも既存の判定に影響しない（後方互換）', () => {
+    expect(judgeHealth({ ga4: GA4_OK, truth: TRUTH_OK })).toBe('ok');
+    expect(judgeHealth({ ga4: GA4_OK, truth: TRUTH_OK, clickFraud: null })).toBe('ok');
   });
 });
 
@@ -70,6 +101,23 @@ describe('buildHealthSection', () => {
     const section = buildHealthSection({ ga4: GA4_OK, truth: TRUTH_OK }, '2026-08-01');
     expect(section).toContain('2026-08-01時点');
   });
+
+  it('TH-13: クリック不正が検知されたら警告文とops/THREATS.mdへの参照を出す', () => {
+    const section = buildHealthSection({ ga4: GA4_OK, truth: TRUTH_OK, clickFraud: CLICK_FRAUD_FLAGGED }, '2026-08-15');
+    expect(section).toContain('クリック不正の疑いあり');
+    expect(section).toContain('ops/THREATS.md');
+    expect(section).toContain('脅威13');
+  });
+
+  it('クリック不正の兆候が無ければ「兆候なし」と表示する', () => {
+    const section = buildHealthSection({ ga4: GA4_OK, truth: TRUTH_OK, clickFraud: CLICK_FRAUD_CLEAN }, '2026-08-19');
+    expect(section).toContain('クリック不正の兆候なし');
+  });
+
+  it('clickFraudが省略された場合は未実施と明記する（後方互換）', () => {
+    const section = buildHealthSection({ ga4: GA4_OK, truth: TRUTH_OK }, '2026-07-28');
+    expect(section).toContain('チェック未実施');
+  });
 });
 
 describe('buildDiscordMessage', () => {
@@ -95,6 +143,17 @@ describe('buildDiscordMessage', () => {
   it('D1が取得できない場合はその旨を明記する', () => {
     const msg = buildDiscordMessage({ ga4: GA4_OK, truth: null }, '2026-08-01');
     expect(msg).toContain('D1から確定値を取得できず');
+  });
+
+  it('TH-13: クリック不正が検知された日はDiscordメッセージにも警告行を含める', () => {
+    const msg = buildDiscordMessage({ ga4: GA4_OK, truth: TRUTH_OK, clickFraud: CLICK_FRAUD_FLAGGED }, '2026-08-15');
+    expect(msg).toContain('クリック不正の疑い(TH-13)');
+    expect(msg).toContain('2026-08-14');
+  });
+
+  it('クリック不正の兆候が無ければDiscordメッセージに警告行を含めない', () => {
+    const msg = buildDiscordMessage({ ga4: GA4_OK, truth: TRUTH_OK, clickFraud: CLICK_FRAUD_CLEAN }, '2026-08-19');
+    expect(msg).not.toContain('TH-13');
   });
 });
 
