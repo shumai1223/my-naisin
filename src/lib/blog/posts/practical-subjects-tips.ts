@@ -73,7 +73,7 @@ export const post: BlogPost = {
         </tr>
         <tr>
           <td><strong>神奈川県</strong></td>
-          <td>全9教科を3年間分合計</td>
+          <td>中2・中3の全9教科を合計（中1は対象外）</td>
           <td>135点満点（副教科60点分）</td>
         </tr>
         <tr>
