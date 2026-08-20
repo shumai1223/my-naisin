@@ -922,10 +922,15 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceTitle: '福岡県教育委員会 入学者選抜',
     lastVerified: '2026-04-22',
     fiscalYear: '2026',
+    // ⚠️2026-08-21修正: 他の大半の県と同じ汎用値(totalMaxScore1000/examMaxScore500/
+    // defaultRatio40:60)がそのまま置かれていたが、福岡県の実際の学力検査は5教科×60点＝
+    // 300点満点（500点満点ではない）で、内申45点+学力300点=345点満点・内申比率は約13%
+    // （total-score/fukuoka.tsのFUKUOKA_MAX_TOTAL、およびprefecture-exam-data.tsの
+    // naishinRatio:13/examRatio:87と同じ、このセッション内で既に検証済みの値）。
     reverseCalc: {
-      totalMaxScore: 1000,
-      examMaxScore: 500,
-      defaultRatio: { naishin: 40, exam: 60 },
+      totalMaxScore: 345,
+      examMaxScore: 300,
+      defaultRatio: { naishin: 13, exam: 87 },
       calcType: 'standard',
       note: '一部高校で傾斜配点あり'
     }
