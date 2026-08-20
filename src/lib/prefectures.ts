@@ -950,10 +950,13 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceTitle: '佐賀県 県立高等学校入学者選抜実施要項',
     lastVerified: '2026-07-16',
     fiscalYear: '2026',
+    // ⚠️2026-08-21修正: 他県と同じ汎用値(500点満点)のままだったが、佐賀県の学力検査は
+    // 実際には5教科×50点＝250点満点（500点満点ではない、一般選抜の標準）。
+    // 内申135+学力250=385点満点・内申比率は約35%（Web検索で確認）。
     reverseCalc: {
-      totalMaxScore: 1000,
-      examMaxScore: 500,
-      defaultRatio: { naishin: 40, exam: 60 },
+      totalMaxScore: 385,
+      examMaxScore: 250,
+      defaultRatio: { naishin: 35, exam: 65 },
       calcType: 'standard'
     }
   },
@@ -994,10 +997,13 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceTitle: '熊本県 県立高等学校入学者選抜要項',
     lastVerified: '2026-07-16',
     fiscalYear: '2026',
+    // ⚠️2026-08-21修正: 他県と同じ汎用値(500点満点)のままだったが、熊本県の学力検査は
+    // 実際には5教科で250点満点（500点満点ではない）。内申180+学力250=430点満点・
+    // 内申比率は約42%（Web検索で確認）。
     reverseCalc: {
-      totalMaxScore: 1000,
-      examMaxScore: 500,
-      defaultRatio: { naishin: 40, exam: 60 },
+      totalMaxScore: 430,
+      examMaxScore: 250,
+      defaultRatio: { naishin: 42, exam: 58 },
       calcType: 'standard'
     }
   },
@@ -1065,10 +1071,13 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceTitle: '鹿児島県教育委員会 入学者選抜',
     lastVerified: '2026-04-22',
     fiscalYear: '2026',
+    // ⚠️2026-08-21修正: 他県と同じ汎用値(500点満点)のままだったが、鹿児島県の学力検査は
+    // 実際には5教科×90点＝450点満点（500点満点ではない）。内申450+学力450=900点満点・
+    // 内申比率は50%（鹿児島県教育委員会公表資料をWeb検索で確認）。
     reverseCalc: {
-      totalMaxScore: 1000,
-      examMaxScore: 500,
-      defaultRatio: { naishin: 40, exam: 60 },
+      totalMaxScore: 900,
+      examMaxScore: 450,
+      defaultRatio: { naishin: 50, exam: 50 },
       calcType: 'standard',
       note: '実技が全体の約9割'
     }
@@ -1088,10 +1097,13 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceTitle: '沖縄県 県立高等学校入試関連情報',
     lastVerified: '2026-07-16',
     fiscalYear: '2026',
+    // ⚠️2026-08-21修正: 他県と同じ汎用値(500点満点)のままだったが、沖縄県の学力検査は
+    // 実際には5教科×60点＝300点満点（500点満点ではない）。内申165+学力300=465点満点・
+    // 内申比率は約35%（沖縄県公式サイト記載の入試情報をWeb検索で確認）。
     reverseCalc: {
-      totalMaxScore: 1000,
-      examMaxScore: 500,
-      defaultRatio: { naishin: 40, exam: 60 },
+      totalMaxScore: 465,
+      examMaxScore: 300,
+      defaultRatio: { naishin: 35, exam: 65 },
       calcType: 'standard'
     }
   }
