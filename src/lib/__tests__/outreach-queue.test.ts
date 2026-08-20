@@ -245,7 +245,9 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // (declined・容量不足のため見送り)をoutreach-ledger.jsonへ移しqueueから削除(232→231)。
     // 2026-08-20続き2: lane5-president-family(プレジデント社)がハードバウンス(Relay access denied)と
     // 判明したためoutreach-ledger.jsonへstatus:'closed'で移しqueueから削除(231→230)。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(230);
+    // 2026-08-21: 0時リセット後、lane7大学3件(chiba-u-education/kobe-u/ocha-u)をGmail下書き化しqueuedへ
+    // 昇格(230→233・本日はS13-A A-1の11件と合わせて計14件下書きのため上限内で終了)。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(233);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {
