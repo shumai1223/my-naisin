@@ -165,7 +165,7 @@ export const post: BlogPost = {
     </thead>
     <tbody>
       <tr><td>北海道</td><td>札幌真栄・札幌平岸・市立札幌啓北商業</td><td>内申ランクE〜F目安</td></tr>
-      <tr><td>青森県</td><td>五所川原工科・八戸西・弘前実業</td><td>内申点170〜200</td></tr>
+      <tr><td>青森県</td><td>五所川原工科・八戸西・弘前実業</td><td>3年間対象・等倍方式（135点満点）</td></tr>
       <tr><td>宮城県</td><td>仙台東・宮城広瀬・仙台西</td><td>実技2倍方式</td></tr>
       <tr><td>秋田県</td><td>大館桂桜・能代工業・秋田工業</td><td>実技2倍方式</td></tr>
       <tr><td>福島県</td><td>福島北・郡山北工業・会津工業</td><td>実技2倍方式</td></tr>
@@ -197,7 +197,7 @@ export const post: BlogPost = {
       <tr><td>広島県</td><td>広島商業・呉宮原・尾道商業</td><td>3年間対象</td></tr>
       <tr><td>岡山県</td><td>倉敷天城（下位）・玉野・倉敷工業</td><td>3年間対象</td></tr>
       <tr><td>福岡県</td><td>福翔・玄洋・福岡魁誠</td><td>中3のみ</td></tr>
-      <tr><td>沖縄県</td><td>浦添・那覇商業・宜野湾</td><td>実技2倍方式</td></tr>
+      <tr><td>沖縄県</td><td>浦添・那覇商業・宜野湾</td><td>実技1.5倍方式</td></tr>
     </tbody>
   </table>
 </div>
