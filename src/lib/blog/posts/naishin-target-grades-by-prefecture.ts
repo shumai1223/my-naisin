@@ -192,7 +192,7 @@ export const post: BlogPost = {
       <tr>
         <td><strong>愛知県</strong></td>
         <td>中3のみ</td>
-        <td>中3の9教科45点満点（一般入試）</td>
+        <td>中3の9教科×5段階×2倍（90点満点、一般入試）</td>
       </tr>
       <tr>
         <td rowspan="7">近畿</td>
