@@ -2431,24 +2431,6 @@
       "draftedAt": "2026-08-15"
     },
     {
-      "id": "lane5-president-family",
-      "org": "プレジデント社(家庭教育誌『プレジデントFamily』・保護者向け教育メディア)",
-      "lane": "media",
-      "channel": "email",
-      "contact": "info@presidentfamily.com",
-      "contactClass": "b2b",
-      "evidence": "presidentfamily.com/inquiry/を直接WebFetchで確認しinfo@presidentfamily.comを確定(WebSearch要約が提示したfamily_ad@president.co.jpはpresident.co.jp/information/contactus/を直接WebFetchで確認したが記載が見つからず不採用=既知のWebSearch作話パターンを回避)。家庭教育誌として保護者層への到達力が高い当サイトの直接的な隣接メディア",
-      "verifiedAt": "2026-08-12",
-      "status": "queued",
-      "addedAt": "2026-08-12",
-      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane5",
-      "subject": "【情報提供】中学生が独学で開発した内申点計算サイトについて",
-      "body": "プレジデント社　『プレジデントFamily』ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、現役中学生エンジニアのしゅうまいと申します。\n\n47都道府県すべての教育委員会が公表する入学者選抜の一次資料を自分で読み解き、独学でプログラミングを学んでこのサイトを開発・運営しています（https://my-naishin.com）。公開から数ヶ月で検索流入が伸び、月間数千クリック規模の利用をいただくまでになりました。\n\n家庭教育をテーマとされる貴誌と、当サイトを実際に利用してくださっている保護者層は直接重なると考え、情報提供としてご連絡いたしました。利用者の同意のもとで匿名集計した「全国の中学生の内申点・偏差値の分布データ」を公開する仕組みも用意しております（https://my-naishin.com/stats・件数が一定数集まった指標から順次公開されます）。もしご興味をお持ちいただけましたら、情報提供・データ連携等どのような形でも対応いたします。ご不要でしたら読み流していただければ結構です。\n\nしゅうまい / My Naishin 運営（中学生・個人開発）\nnaishin.dev@gmail.com\nhttps://my-naishin.com",
-      "draftId": "r-8733183127290094030",
-      "messageId": "1a002f3d8fcedabb",
-      "draftedAt": "2026-08-15"
-    },
-    {
       "id": "lane5-kodomo-manabi-labo",
       "org": "株式会社新恵社(STUDY HACKERこどもまなび☆ラボ・子育て系Webメディア)",
       "lane": "media",
