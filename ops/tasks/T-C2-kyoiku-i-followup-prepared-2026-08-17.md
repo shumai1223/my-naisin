@@ -105,7 +105,7 @@ https://my-naishin.com　naishin.dev@gmail.com
 https://my-naishin.com　naishin.dev@gmail.com
 ```
 
-## 4. 宮崎県教育委員会
+## 4. 宮崎県教育委員会 ✅下書き化済み(2026-08-21・draftId r-5581084623295914861)
 
 - to: `kokokyoiku@pref.miyazaki.lg.jp`
 - subject: `Re: 貴課公表資料の引用利用に関するご報告および参照可否のご相談`
@@ -131,7 +131,7 @@ https://my-naishin.com　naishin.dev@gmail.com
 https://my-naishin.com　naishin.dev@gmail.com
 ```
 
-## 5. 香川県教育委員会
+## 5. 香川県教育委員会 ✅下書き化済み(2026-08-21・draftId r-7501933920225757180)
 
 - to: `kokokyoiku@pref.kagawa.lg.jp`
 - subject: `Re: 貴課公表資料の引用利用に関するご報告および参照可否のご相談`
@@ -157,7 +157,7 @@ https://my-naishin.com　naishin.dev@gmail.com
 https://my-naishin.com　naishin.dev@gmail.com
 ```
 
-## 6. 静岡県教育委員会
+## 6. 静岡県教育委員会 ✅下書き化済み(2026-08-21・draftId r7183340580392309269)
 
 - to: `kyoui_koko@pref.shizuoka.lg.jp`
 - subject: `Re: 貴課公表資料の引用利用に関するご報告および参照可否のご相談`
@@ -183,7 +183,7 @@ https://my-naishin.com　naishin.dev@gmail.com
 https://my-naishin.com　naishin.dev@gmail.com
 ```
 
-## 7. 福井県教育委員会
+## 7. 福井県教育委員会 ✅下書き化済み(2026-08-21・draftId r-4235808945313496332)
 
 - to: `koukou@pref.fukui.lg.jp`
 - subject: `Re: 貴課公表資料の引用利用に関するご報告および参照可否のご相談`
@@ -209,7 +209,7 @@ https://my-naishin.com　naishin.dev@gmail.com
 https://my-naishin.com　naishin.dev@gmail.com
 ```
 
-## 8. 滋賀県教育委員会
+## 8. 滋賀県教育委員会 ✅下書き化済み(2026-08-21・draftId r-6643750599743768217)
 
 - to: `ma09@pref.shiga.lg.jp`
 - subject: `Re: 貴課公表資料の引用利用に関するご報告および参照可否のご相談`
@@ -261,7 +261,7 @@ https://my-naishin.com　naishin.dev@gmail.com
 https://my-naishin.com　naishin.dev@gmail.com
 ```
 
-## 10. 茨城県教育委員会
+## 10. 茨城県教育委員会 ✅下書き化済み(2026-08-21・draftId r2748527243247653553)
 
 - to: `kokyo2@pref.ibaraki.lg.jp`
 - subject: `Re: 貴課公表資料の引用利用に関するご報告および参照可否のご相談`
@@ -287,7 +287,7 @@ https://my-naishin.com　naishin.dev@gmail.com
 https://my-naishin.com　naishin.dev@gmail.com
 ```
 
-## 11. 鳥取県教育委員会
+## 11. 鳥取県教育委員会 ✅下書き化済み(2026-08-21・draftId r-4438517810515140502)
 
 - to: `koutougakkou@pref.tottori.lg.jp`
 - subject: `Re: 貴課公表資料の引用利用に関するご報告および参照可否のご相談`
@@ -313,7 +313,7 @@ https://my-naishin.com　naishin.dev@gmail.com
 https://my-naishin.com　naishin.dev@gmail.com
 ```
 
-## 12. 佐賀県教育委員会
+## 12. 佐賀県教育委員会 ✅下書き化済み(2026-08-21・draftId r7116447854118903703)
 
 - to: `gakkoukyouiku@pref.saga.lg.jp`
 - subject: `Re: 貴課公表資料の引用利用に関するご報告および参照可否のご相談`
@@ -339,7 +339,7 @@ https://my-naishin.com　naishin.dev@gmail.com
 https://my-naishin.com　naishin.dev@gmail.com
 ```
 
-## 13. 鹿児島県教育委員会
+## 13. 鹿児島県教育委員会 ✅下書き化済み(2026-08-21・draftId r-3478902720051575230)
 
 - to: `kou-kyoiku@pref.kagoshima.lg.jp`
 - subject: `Re: 貴課公表資料の引用利用に関するご報告および参照可否のご相談`
@@ -365,7 +365,7 @@ https://my-naishin.com　naishin.dev@gmail.com
 https://my-naishin.com　naishin.dev@gmail.com
 ```
 
-## 14. 沖縄県教育委員会
+## 14. 沖縄県教育委員会 ✅下書き化済み(2026-08-21・draftId r-9001312007409860235)
 
 - to: `aa315028@pref.okinawa.lg.jp`
 - subject: `Re: 貴課公表資料の引用利用に関するご報告および参照可否のご相談`
@@ -391,7 +391,7 @@ https://my-naishin.com　naishin.dev@gmail.com
 https://my-naishin.com　naishin.dev@gmail.com
 ```
 
-## 15. 岩手県教育委員会
+## 15. 岩手県教育委員会 ✅下書き化済み(2026-08-21・draftId r-3113567628490338873・岩手は08-17に別件[リンク可否のみ拒否]の回答済みだが再配布可否は未回答のため送付)
 
 - to: `DB0003@pref.iwate.jp`
 - subject: `Re: 貴担当公表資料の引用利用に関するご報告および参照可否のご相談`
@@ -418,6 +418,15 @@ https://my-naishin.com　naishin.dev@gmail.com
 ```
 
 ---
+
+## ✅2026-08-21: 残り11件全てを下書き化完了(このタスクは完了)
+
+gmail_search復旧後に該当11県(宮崎/香川/静岡/福井/滋賀/茨城/鳥取/佐賀/鹿児島/沖縄/岩手)の
+返信有無を再確認し(いずれも「応募状況」データ再配布可否については無回答と確認)、
+`gmail_create_draft`で全件下書き化した(`gmail_create_reply_draft`は既知バグのため不使用)。
+`data/outreach-ledger.json`の該当11エントリにdraftIdを追記済み。秋田は個別に書き直しが必要なため
+このバッチには含めていない(別途対応)。これでS13-A A-1のkill_criteria向け追撃は
+mie/gifu(確定済み2県)を除く全県に打診済みとなり、あとは👤の送信と返信を待つのみ。
 
 ## ⚠️2026-08-20追記: gmail_searchが一時的に機能不全だった(全クエリで無関係な同一結果を返す既知の罠)
 
