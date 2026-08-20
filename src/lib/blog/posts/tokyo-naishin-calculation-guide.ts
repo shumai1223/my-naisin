@@ -136,7 +136,7 @@ export const post: BlogPost = {
       <li><strong>換算内申：15 ＋ 40 ＝ 55点</strong>（/65点満点）</li>
     </ul>
 
-    <p>パターンCとパターンDを比較してみてください。単純な9教科の合計点（素内申）はどちらも37点で同じですが、<strong>換算内申にするとパターンD（実技が得意な生徒）の方が6点も高くなります。</strong></p>
+    <p>パターンCとパターンDを比較してみてください。単純な9教科の合計点（素内申）はパターンCが37点、パターンDが35点と<strong>パターンDの方が2点低い</strong>にもかかわらず、<strong>換算内申にするとパターンD（実技が得意な生徒）の方が6点も高くなります。</strong></p>
     <p>これが東京都立高校入試における<strong>「実技2倍の魔法」</strong>です。実技教科の内申点を上げることが、換算内申を大きく引き上げる強力な武器になることが分かります。</p>
 
     <hr>
@@ -224,8 +224,8 @@ export const post: BlogPost = {
             <tr><td><strong>B</strong></td><td>65〜79スコア</td><td><strong>16点</strong></td></tr>
             <tr><td><strong>C</strong></td><td>50〜64スコア</td><td><strong>12点</strong></td></tr>
             <tr><td><strong>D</strong></td><td>35〜49スコア</td><td><strong>8点</strong></td></tr>
-            <tr><td><strong>E</strong></td><td>1〜34スコア</td><td><strong>4点</strong></td></tr>
-            <tr><td><strong>F</strong></td><td>0スコア</td><td><strong>0点</strong></td></tr>
+            <tr><td><strong>E</strong></td><td>20〜34スコア</td><td><strong>4点</strong></td></tr>
+            <tr><td><strong>F</strong></td><td>20スコア未満</td><td><strong>0点</strong></td></tr>
           </tbody>
         </table>
       </div>
