@@ -121,7 +121,7 @@ export const post: BlogPost = {
             <td><strong>兵庫県</strong></td>
             <td>250点</td>
             <td>中3（1・2学期）</td>
-            <td>主要5教科は等倍、実技4教科を<strong>7.5倍</strong>（！）</td>
+            <td>主要5教科は<strong>4倍</strong>、実技4教科は<strong>7.5倍</strong>（！）</td>
           </tr>
         </tbody>
       </table>
