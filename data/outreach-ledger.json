@@ -1240,6 +1240,18 @@
       "followupCount": 0,
       "threadId": "1a002f36749b8db4",
       "note": "ハードバウンス(550 5.1.1 The email account that you tried to reach does not exist)。info@tfabworks.comは死んだアドレスと確定・再送不可のため打ち切り。"
+    },
+    {
+      "id": "edtech-systemd-schoolengine",
+      "org": "株式会社システムディ(校務支援システム「School Engine」)",
+      "lane": "b2b-saas",
+      "sourceTaskId": "T-C1",
+      "sentDate": "2026-08-16",
+      "lastContactDate": "2026-08-17",
+      "status": "declined",
+      "followupCount": 0,
+      "threadId": "1a00dee65ead948b",
+      "note": "Cowork経由でフォーム送信(正確な送信日は未確認のためCOWORK-PROMPT-30-02.md記載バッチの目安08-16を暫定採用)。2026-08-17 13:15(JST)に学園ソリューション事業部・森井様より返信=送信先が大学向け部署だったが、公立小中高向けの「公教育ソリューション事業部」に確認したところ現在自社ソリューション展開で手一杯のため余力なしとの回答。明確な拒否ではなく供給側キャパシティ理由の見送り。中学生運営への好意的な言及あり(将来の再打診余地は残る)。"
     }
   ]
 }

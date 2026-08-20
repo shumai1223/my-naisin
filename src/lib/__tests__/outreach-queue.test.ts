@@ -241,7 +241,9 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // 2026-08-20: アカウント乗っ取り懸念(08-19停止)解除後、本文執筆済みcandidate54件(全件evidence/verifiedAt
     // 済み)から12件(lane9-jsdp/lane9-iesj/lane9-kodomogakkai/lane9-jtsj/lane9-jass/lane9-jale/lane9-yougo/
     // lane9-jmes/lane9-katei-ed/lane9-zenshokai/lane9-jasdd/lane9-jacdp)をGmail下書き化しqueuedへ昇格(220→232)。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(232);
+    // 2026-08-20続き: gmail_search復旧により、返信が確認できたが未反映だったedtech-systemd-schoolengine
+    // (declined・容量不足のため見送り)をoutreach-ledger.jsonへ移しqueueから削除(232→231)。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(231);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {
