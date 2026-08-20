@@ -152,12 +152,12 @@ export const EXAM_RATIO_DATA: ExamRatioConfig[] = [
   {
     prefectureCode: 'kyoto',
     generalExam: {
-      naishinRatio: 50,
-      examRatio: 50,
+      naishinRatio: 49,
+      examRatio: 51,
       examMaxScore: 200,
-      totalMaxScore: 400,
+      totalMaxScore: 395,
       subjects: 5,
-      note: '前期選抜・中期選抜で配点が異なる',
+      note: '中期選抜: 学力検査5教科×40点=200点満点＋調査書点195点満点(prefectures.tsのmaxScoreと同じ)＝395点満点。前期選抜は配点が異なる（実施校ごとに個別設定）。',
     },
     lastVerified: '2026-01-30',
     sourceUrl: 'https://www.kyoto-be.ne.jp/koukyou/cms/?p=6024',
