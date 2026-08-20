@@ -53,7 +53,7 @@ export const EXAM_RATIO_DATA: ExamRatioConfig[] = [
       examMaxScore: 500,
       totalMaxScore: 1000,
       subjects: 5,
-      note: '第1次選考: 内申4:学力4:面接2、第2次選考は学校により異なる',
+      note: '第1次選考(定員90%): 内申と学力検査の比率(合計10)は学校ごとに3:7〜7:3の5種、特色検査実施校は加算あり。第2次選考(定員10%)は内申点不使用で学力検査と「主体的に学習に取り組む態度」の観点別評価を合算。面接は令和6(2024)年度から共通選抜の必須検査でなくなり、一部の特色検査実施校のみで実施。',
     },
     lastVerified: '2026-01-30',
     sourceUrl: 'https://www.pref.kanagawa.jp/docs/dc4/nyusen/nyusen/nyusenseidogaiyou.html',
