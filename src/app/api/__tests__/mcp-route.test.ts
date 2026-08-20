@@ -186,12 +186,12 @@ describe('/api/mcp JSON-RPC 契約', () => {
     expect(data.rankLabel).toContain('最難関校レベル');
   });
 
-  test('tools/call calculate_osaka_total_score は満点入力で450点を返す', async () => {
+  test('tools/call calculate_osaka_total_score は満点入力で900点を返す', async () => {
     const res = await POST(
       rpc('tools/call', { name: 'calculate_osaka_total_score', arguments: { naishinRaw: 450, gakuryokuRaw: 450 } })
     );
     const data = JSON.parse((await res.json()).result.content[0].text);
-    expect(data.total).toBe(450);
+    expect(data.total).toBe(900);
     expect(data.rankLabel).toContain('最難関校レベル');
   });
 

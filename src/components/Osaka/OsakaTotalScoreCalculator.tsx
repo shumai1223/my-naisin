@@ -44,10 +44,10 @@ export function OsakaTotalScoreCalculator({ onResult }: OsakaTotalScoreCalculato
   };
 
   const getRankColor = () => {
-    if (total >= 380) return 'text-red-700';
-    if (total >= 340) return 'text-orange-700';
-    if (total >= 300) return 'text-amber-700';
-    if (total >= 250) return 'text-emerald-700';
+    if (total >= 760) return 'text-red-700';
+    if (total >= 680) return 'text-orange-700';
+    if (total >= 600) return 'text-amber-700';
+    if (total >= 500) return 'text-emerald-700';
     return 'text-blue-700';
   };
 
@@ -134,7 +134,7 @@ export function OsakaTotalScoreCalculator({ onResult }: OsakaTotalScoreCalculato
       {hasInput && (
         <div className="border-t-2 border-orange-100 bg-gradient-to-br from-orange-50 to-amber-50 px-6 py-6">
           <div className="text-center">
-            <div className="text-xs font-bold text-slate-600 mb-2">あなたの総合点（450点満点）</div>
+            <div className="text-xs font-bold text-slate-600 mb-2">あなたの総合点（900点満点）</div>
             <div className={`text-5xl font-black ${getRankColor()}`}>{total}<span className="text-xl">点</span></div>
             <div className="mt-1 text-sm text-slate-500">満点比 {percent.toFixed(1)}%</div>
             <div className="mt-4 text-sm font-bold text-slate-700">{getRankLabel()}</div>

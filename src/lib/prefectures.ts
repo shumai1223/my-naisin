@@ -583,12 +583,17 @@ export const PREFECTURES: PrefectureConfig[] = [
       defaultRatio: { naishin: 50, exam: 50 },
       calcType: 'osaka',
       naishinMultiplier: 1, // 450点満点をそのまま使用
+      // ⚠️2026-08-21修正: examMultiplierが全タイプ一律1.0だったバグを修正。実際の制度は
+      // 学力・内申それぞれに倍率がかかり合計が常に2.0になる（例: タイプⅠは学力検査350点・
+      // 調査書400点なら(350×1.4)+(400×0.6)=730点/900点満点、という公表計算例で確認）。
+      // ReverseCalculator.tsxのosaka分岐は元々examMultiplierが可変である前提のコード
+      // （フォールバック値1.2＝タイプⅡ）だったため、この定数値の誤りだけが浮いていた。
       osakaTypes: [
-        { code: 'I', name: 'タイプⅠ', ratio: 30, description: '学力7：内申点3', examMultiplier: 1.0, naishinMultiplier: 0.6 },
-        { code: 'II', name: 'タイプⅡ', ratio: 40, description: '学力6：内申点4', examMultiplier: 1.0, naishinMultiplier: 0.8 },
+        { code: 'I', name: 'タイプⅠ', ratio: 30, description: '学力7：内申点3', examMultiplier: 1.4, naishinMultiplier: 0.6 },
+        { code: 'II', name: 'タイプⅡ', ratio: 40, description: '学力6：内申点4', examMultiplier: 1.2, naishinMultiplier: 0.8 },
         { code: 'III', name: 'タイプⅢ', ratio: 50, description: '学力5：内申点5', examMultiplier: 1.0, naishinMultiplier: 1.0 },
-        { code: 'IV', name: 'タイプⅣ', ratio: 60, description: '学力4：内申点6', examMultiplier: 1.0, naishinMultiplier: 1.2 },
-        { code: 'V', name: 'タイプⅤ', ratio: 70, description: '学力3：内申点7', examMultiplier: 1.0, naishinMultiplier: 1.4 }
+        { code: 'IV', name: 'タイプⅣ', ratio: 60, description: '学力4：内申点6', examMultiplier: 0.8, naishinMultiplier: 1.2 },
+        { code: 'V', name: 'タイプⅤ', ratio: 70, description: '学力3：内申点7', examMultiplier: 0.6, naishinMultiplier: 1.4 }
       ]
     }
   },

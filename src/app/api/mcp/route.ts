@@ -330,7 +330,7 @@ const TOOLS = [
   },
   {
     name: 'calculate_osaka_total_score',
-    description: `大阪府の総合点（学力検査450点+内申450点を志望校の選抜タイプ別比率で加重合算/450点満点）を計算する。統一エンジンとは配点構造が異なる個別実装。選抜タイプ: ${OSAKA_TYPE_OPTIONS.map((o, i) => `${i}=${o.label}`).join(', ')}。`,
+    description: `大阪府の総合点（学力検査450点+内申450点を志望校の選抜タイプ別倍率で加重合算/900点満点）を計算する。統一エンジンとは配点構造が異なる個別実装。選抜タイプ: ${OSAKA_TYPE_OPTIONS.map((o, i) => `${i}=${o.label}`).join(', ')}。`,
     inputSchema: {
       type: 'object',
       properties: {
