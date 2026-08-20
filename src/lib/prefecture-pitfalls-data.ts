@@ -1,6 +1,10 @@
 // 県別の落とし穴・注意点データ
 // 2026-08-17: /pref/[code]/page.tsxから分離（page.tsxはNext.jsのpage export規約により
 // デフォルト以外の任意named exportを許容しないため、テストからimportできるようlib配下へ移動）
+// 2026-08-20: 全47県をprefectures.ts（gradeMultipliers/coreMultiplier/practicalMultiplier/
+// maxScore/actualMaxScore/note）と1件ずつ突合する監査を実施。iwate（2026-08-17に岩手県教委の
+// 指摘で修正済み）以外は数値の食い違いゼロ。新規の修正は無し。次回同種の監査をする際、この日付
+// 以降にprefectures.ts側が変更された県だけを再チェックすれば足りる。
 export const PREFECTURE_PITFALLS: Record<string, { title: string; items: string[] }> = {
   tokyo: {
     title: '東京都の注意点',
