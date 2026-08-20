@@ -292,7 +292,11 @@ export const PREFECTURES: PrefectureConfig[] = [
     reverseCalc: {
       totalMaxScore: 1000,
       examMaxScore: 500,
-      defaultRatio: { naishin: 50, exam: 50 },
+      // ⚠️2026-08-21修正: 50:50は埼玉県で実際に採用されている比率のどれとも一致しない
+      // （難関校は概ね学力7:内申3、標準的な学校は概ね学力6:内申4＝内申40%。学校ごとに
+      // 変動する制度のため断定はできないが、prefecture-exam-data.tsのnaishinRatio(40)と
+      // 揃え、より実態に近い値を初期値にした）。
+      defaultRatio: { naishin: 40, exam: 60 },
       calcType: 'saitama',
       note: '標準的な1:1:2モデルを採用。一部進学校では1:1:3など異なる場合あり'
     }
