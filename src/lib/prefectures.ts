@@ -290,9 +290,14 @@ export const PREFECTURES: PrefectureConfig[] = [
     lastVerified: '2026-04-22',
     fiscalYear: '2026',
     reverseCalc: {
-      totalMaxScore: 1000,
+      // ⚠️2026-08-21修正: totalMaxScoreが1000のままだったが、total-score/saitama.tsの
+      // SAITAMA_ASSUMED_TOTAL_CEILING（学力検査500点＋調査書点の仮定400点＝900点前後という
+      // 目安）と食い違っていた（大阪府と同型の「reverseCalcとtotal-score engineの二重実装ズレ」）。
+      // 埼玉県は高校ごとに調査書満点が異なり県一律の正解値は無いため、total-score engine側の
+      // 既存の仮定(900)に揃えた。
+      totalMaxScore: 900,
       examMaxScore: 500,
-      // ⚠️2026-08-21修正: 50:50は埼玉県で実際に採用されている比率のどれとも一致しない
+      // 50:50は埼玉県で実際に採用されている比率のどれとも一致しない
       // （難関校は概ね学力7:内申3、標準的な学校は概ね学力6:内申4＝内申40%。学校ごとに
       // 変動する制度のため断定はできないが、prefecture-exam-data.tsのnaishinRatio(40)と
       // 揃え、より実態に近い値を初期値にした）。
