@@ -787,10 +787,13 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceTitle: '広島県教育委員会 公立高等学校入学者選抜実施要項',
     lastVerified: '2026-07-16',
     fiscalYear: '2026',
+    // ⚠️2026-08-21修正: 他県と同じ汎用値(500点満点)のままだったが、広島県の学力検査は
+    // 実際には5教科×50点＝250点満点（500点満点ではない）。内申225+学力250=475点満点・
+    // 内申比率は約47%（Web検索で確認）。
     reverseCalc: {
-      totalMaxScore: 1000,
-      examMaxScore: 500,
-      defaultRatio: { naishin: 40, exam: 60 },
+      totalMaxScore: 475,
+      examMaxScore: 250,
+      defaultRatio: { naishin: 47, exam: 53 },
       calcType: 'standard'
     }
   },
@@ -809,10 +812,13 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceTitle: '山口県 公立高等学校入学者選抜実施大綱',
     lastVerified: '2026-07-16',
     fiscalYear: '2026',
+    // ⚠️2026-08-21修正: 他県と同じ汎用値(500点満点)のままだったが、山口県の学力検査は
+    // 実際には5教科×50点＝250点満点（500点満点ではない）。内申135+学力250=385点満点・
+    // 内申比率は約35%（Web検索で確認）。
     reverseCalc: {
-      totalMaxScore: 1000,
-      examMaxScore: 500,
-      defaultRatio: { naishin: 40, exam: 60 },
+      totalMaxScore: 385,
+      examMaxScore: 250,
+      defaultRatio: { naishin: 35, exam: 65 },
       calcType: 'standard'
     }
   },
@@ -832,10 +838,14 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceTitle: '徳島県教育委員会 公立高等学校生徒募集選抜要項',
     lastVerified: '2026-07-16',
     fiscalYear: '2026',
+    // ⚠️2026-08-21修正: 他県と同じ汎用値(500点満点)のままだったが、徳島県の学力検査は
+    // 実際には5教科×40点＝200点満点（500点満点ではない）。素点は調査書195+学力200=395点。
+    // 実選抜では各校が独自の換算方法で500点満点に総合するため厳密な最終満点ではないが、
+    // 汎用値(1000/40:60)よりは素点ベースの395点・比率49%の方が実態に近い目安値となる。
     reverseCalc: {
-      totalMaxScore: 1000,
-      examMaxScore: 500,
-      defaultRatio: { naishin: 40, exam: 60 },
+      totalMaxScore: 395,
+      examMaxScore: 200,
+      defaultRatio: { naishin: 49, exam: 51 },
       calcType: 'standard'
     }
   },
@@ -879,10 +889,13 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceTitle: '愛媛県教育委員会 県立学校入学者選抜等関連情報',
     lastVerified: '2026-07-16',
     fiscalYear: '2026',
+    // ⚠️2026-08-21修正: 他県と同じ汎用値(500点満点)のままだったが、愛媛県の学力検査は
+    // 実際には5教科×50点＝250点満点（500点満点ではない）。内申135+学力250=385点満点・
+    // 内申比率は約35%（Web検索で確認）。
     reverseCalc: {
-      totalMaxScore: 1000,
-      examMaxScore: 500,
-      defaultRatio: { naishin: 40, exam: 60 },
+      totalMaxScore: 385,
+      examMaxScore: 250,
+      defaultRatio: { naishin: 35, exam: 65 },
       calcType: 'standard'
     }
   },
@@ -903,10 +916,15 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceTitle: '高知県 公立高等学校入学者選抜',
     lastVerified: '2026-07-16',
     fiscalYear: '2026',
+    // ⚠️2026-08-21修正: 他県と同じ汎用値(500点満点)のままだったが、高知県の学力検査は
+    // 実際には5教科×50点＝250点満点（500点満点ではない）。ReverseCalculator.tsxの
+    // naishinMaxはuse10PointScaleを渡さずcalculateMaxScoreを呼ぶため常に5段階評価の
+    // 195点満点(maxScoreと同じスケール)を使う＝10段階評価の260点満点(noteの補足値)とは
+    // 混在させず、195+学力250=445点満点・内申比率約44%とした。
     reverseCalc: {
-      totalMaxScore: 1000,
-      examMaxScore: 500,
-      defaultRatio: { naishin: 40, exam: 60 },
+      totalMaxScore: 445,
+      examMaxScore: 250,
+      defaultRatio: { naishin: 44, exam: 56 },
       calcType: 'standard'
     }
   },
