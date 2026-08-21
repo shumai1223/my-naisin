@@ -247,7 +247,11 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // 判明したためoutreach-ledger.jsonへstatus:'closed'で移しqueueから削除(231→230)。
     // 2026-08-21: 0時リセット後、lane7大学3件(chiba-u-education/kobe-u/ocha-u)をGmail下書き化しqueuedへ
     // 昇格(230→233・本日はS13-A A-1の11件と合わせて計14件下書きのため上限内で終了)。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(233);
+    // 2026-08-21続き: outreach-ledger.jsonのGmail in:sent実測により、2026-08-15〜08-19の間に実送信済み
+    // だったにもかかわらずledger未反映だった62件をledgerへ移しqueueから削除(233→171)。うち15件
+    // (lane9-jsdp等・lane7大学3件を含む)はmessageId記録があってもgmail_threadで実際にはlabelIds='DRAFT'
+    // のまま未送信と判明したためqueuedに残置(この15件は233→171の差分62件には含まれない)。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(171);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {
