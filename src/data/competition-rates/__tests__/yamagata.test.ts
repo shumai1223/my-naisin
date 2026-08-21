@@ -100,6 +100,37 @@ describe('山形県 倍率パイプラインα（Y-6・全日制42校90レコー
     expect(r7.filter((r) => r.schoolName === '米沢鶴城')).toHaveLength(4);
   });
 
+  it('掛-1(学校別×多年度): 令和5年度(R5)分レコードが92件・45校収録され、公式「全日制公立合計」5,948/4,869と完全一致する（内訳: 全日制県立合計6,480/750/5,730/4,593＋全日制市立合計280/62/218/276）。R5時点は「鶴岡南」(普通・理数)と「鶴岡北」(普通)が別々の学校だったが、2024年4月に両校統合し中高一貫校「致道館」として開校していたことをWebSearchで確認した(旧鶴岡南校舎を高校が、旧鶴岡北校舎を中学校が使用)', () => {
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    expect(r5.length).toBe(92);
+    const distinctSchools = new Set(r5.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(45);
+    const sumQuota = r5.reduce((a, r) => a + r.quota, 0);
+    const sumApplicants = r5.reduce((a, r) => a + r.finalApplicants, 0);
+    expect(sumQuota).toBe(5948);
+    expect(sumApplicants).toBe(4869);
+
+    expect(r5.some((r) => r.schoolName === '鶴岡南')).toBe(true);
+    expect(r5.some((r) => r.schoolName === '鶴岡北')).toBe(true);
+    expect(r5.some((r) => r.schoolName === '致道館')).toBe(false);
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    expect(r6.some((r) => r.schoolName === '致道館')).toBe(true);
+    expect(r6.some((r) => r.schoolName === '鶴岡南')).toBe(false);
+    expect(r6.some((r) => r.schoolName === '鶴岡北')).toBe(false);
+  });
+
+  it('掛-1(学校別×多年度): R5の「鶴岡南」は普通・理数の入学定員が別だが一般選抜の募集人員・志願者数・志願倍率がPDF上で両学科合算の単一値として印字されているため、department:「普通・理数」の単一レコードとして収録されている', () => {
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    expect(r5.find((r) => r.schoolName === '鶴岡南')).toEqual({
+      schoolName: '鶴岡南',
+      department: '普通・理数',
+      quota: 200,
+      finalApplicants: 188,
+      finalRate: 0.94,
+      fiscalYear: '令和5年度（2023年度）',
+    });
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of YAMAGATA_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.pref\.yamagata\.jp\//);
