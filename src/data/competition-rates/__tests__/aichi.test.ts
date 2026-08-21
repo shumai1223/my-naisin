@@ -98,6 +98,32 @@ describe('愛知県 倍率パイプラインα（Y-6・全日制155校1校舎241
     expect(r6.find((r) => r.schoolName === '市立名東' && r.department === '国際英語')?.finalRate).toBe(3.91);
   });
 
+  it('掛-1(学校別×多年度・4年度目): 令和5年度(R5)分レコードが237件収録され、157校・学科別志願状況の合計行(quota32,002・applicants59,129)と完全一致する', () => {
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    expect(r5.length).toBe(237);
+    expect(r5.reduce((a, r) => a + r.quota, 0)).toBe(32002);
+    expect(r5.reduce((a, r) => a + r.finalApplicants, 0)).toBe(59129);
+
+    const distinctSchools = new Set(r5.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(157);
+
+    const seen = new Set<string>();
+    for (const r of r5) {
+      const key = `${r.schoolName}|${r.department}`;
+      expect(seen.has(key)).toBe(false);
+      seen.add(key);
+    }
+  });
+
+  it('令和5年度(R5)は2025年度統合(津島北翔)前のため「津島北」と「海翔」が別校として収録されている(R6と同じ形)', () => {
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    const tsushimaKita = r5.filter((r) => r.schoolName === '津島北');
+    const kaisho = r5.filter((r) => r.schoolName === '海翔');
+    expect(tsushimaKita.length).toBe(2);
+    expect(kaisho.length).toBe(1);
+    expect(r5.find((r) => r.schoolName === '津島北翔')).toBeUndefined();
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of AICHI_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.pref\.aichi\.jp\//);
