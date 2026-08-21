@@ -117,6 +117,41 @@ describe('福岡県 倍率パイプラインα（Y-2・全日制98校の完全�
     expect(r8.filter((r) => r.schoolName === '北九州市立高等学校')).toHaveLength(1);
   });
 
+  it('掛-1(学校別×多年度): 令和5年度(R5)分レコードが県立169件(90校)・市組合立24件(9校)=計193件収録され、それぞれPDF末尾の「県立合計（90校）」行(quota22,200・applicants25,261・倍率1.14)と「合計（9校）」行(quota2,240・applicants2,998・倍率1.34)に完全一致する', () => {
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    expect(r5.length).toBe(193);
+
+    const r5MunicipalNames = [...MUNICIPAL_UNION_SCHOOLS, '三井中央'];
+    const r5Municipal = r5.filter((r) => r5MunicipalNames.includes(r.schoolName));
+    const r5Kenritsu = r5.filter((r) => !r5MunicipalNames.includes(r.schoolName));
+
+    expect(r5Kenritsu.length).toBe(169);
+    expect(r5Kenritsu.reduce((a, r) => a + r.quota, 0)).toBe(22200);
+    expect(r5Kenritsu.reduce((a, r) => a + r.finalApplicants, 0)).toBe(25261);
+    expect(new Set(r5Kenritsu.map((r) => r.schoolName)).size).toBe(90);
+
+    expect(r5Municipal.length).toBe(24);
+    expect(r5Municipal.reduce((a, r) => a + r.quota, 0)).toBe(2240);
+    expect(r5Municipal.reduce((a, r) => a + r.finalApplicants, 0)).toBe(2998);
+    expect(new Set(r5Municipal.map((r) => r.schoolName)).size).toBe(9);
+
+    // R5のみ在籍した「三井中央」(組合立・少子化によりR6から募集停止・R8閉校)はR6/R7/R8には存在しない
+    expect(r5.some((r) => r.schoolName === '三井中央')).toBe(true);
+    expect(records.some((r) => r.schoolName === '三井中央' && r.fiscalYear !== '令和5年度（2023年度）')).toBe(false);
+    expect(r8.some((r) => r.schoolName === '三井中央')).toBe(false);
+
+    // 北九州市立高等学校: R5は「普通科」+「情報ビジネス科」の2学科、R6で「未来共創科」(新設初年度)に転換
+    expect(r5.filter((r) => r.schoolName === '北九州市立高等学校')).toHaveLength(2);
+    expect(r5.some((r) => r.schoolName === '北九州市立高等学校' && r.department === '普通科')).toBe(true);
+
+    // 宇美商業: R5は「総合ビジネス科・ビジネス情報科（くくり募集）」、R6以降は単一「ビジネス探究科」に統合
+    expect(r5.some((r) => r.schoolName === '宇美商業' && r.department === '総合ビジネス科・ビジネス情報科（くくり募集）')).toBe(true);
+
+    // 小郡「普通科みらい創造コース」・新宮「普通科国際文化コース」はR5時点でいずれも未存在(R7以降の新設)
+    expect(r5.some((r) => r.schoolName === '小郡' && r.department === '普通科みらい創造コース')).toBe(false);
+    expect(r5.filter((r) => r.schoolName === '新宮')).toHaveLength(2);
+  });
+
   it('全レコードのquota>0・finalApplicants>=0・finalRateが概算で整合する', () => {
     for (const r of records) {
       expect(r.quota).toBeGreaterThan(0);
