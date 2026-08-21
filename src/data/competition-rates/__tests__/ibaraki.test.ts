@@ -89,6 +89,30 @@ describe('茨城県 倍率パイプラインα（Y-6・全日制85校149レコ�
     ]);
   });
 
+  it('掛-1(学校別×多年度・4年度目): 令和5年度(R5)分レコードが150件収録され、公式「全日制計」17,443/17,246と完全一致する。「勝田」（普通・quota120）はR5には存在するがR6以降には存在しない実在の学校統廃合（勝田工業への統合）であることを確認した。「筑波」はR5時点では「普通」1学科(quota120)のみで募集しており、R6以降に「普通〔進学アドバンスト〕」「普通〔地域キャリアビジネス〕」の2学科体制へ再編された。「下館工業」はR5時点では機械・電気・電子・建設工学の4学科体制だったが、R6以降に電気・電子学科が統合され3学科体制になった', () => {
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    expect(r5.length).toBe(150);
+    const sumQuota = r5.reduce((a, r) => a + r.quota, 0);
+    const sumApplicants = r5.reduce((a, r) => a + r.finalApplicants, 0);
+    expect(sumQuota).toBe(17443);
+    expect(sumApplicants).toBe(17246);
+
+    const distinctSchools = new Set(r5.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(87);
+
+    expect(r5.some((r) => r.schoolName === '勝田' && r.department === '普通')).toBe(true);
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    expect(r6.some((r) => r.schoolName === '勝田')).toBe(false);
+
+    const tsukuba = r5.filter((r) => r.schoolName === '筑波');
+    expect(tsukuba).toEqual([
+      { schoolName: '筑波', department: '普通', quota: 120, finalApplicants: 76, finalRate: 0.63, fiscalYear: '令和5年度（2023年度）' },
+    ]);
+
+    const shimodateKougyou = r5.filter((r) => r.schoolName === '下館工業');
+    expect(shimodateKougyou).toHaveLength(4);
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of IBARAKI_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/kyoiku\.pref\.ibaraki\.jp\//);
