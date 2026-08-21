@@ -105,6 +105,22 @@ describe('福井県 倍率パイプラインα（Y-6・全日制24校72レコー
     expect(r6Keys).toEqual(r7Keys);
   });
 
+  it('掛-1(学校別×多年度): 令和5年度(R5)分レコードが73件・24校収録され、公式「合計」3,606/3,694と完全一致する。学校名+学科名はR5/R6で完全一致する(学校再編なし・若狭東の「電気・機械」2学科制も鯖江の「IT・デザインくくり募集」表記もR5時点で既にR6と同一)', () => {
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    expect(r5.length).toBe(73);
+    const distinctSchools = new Set(r5.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(24);
+    const sumQuota = r5.reduce((a, r) => a + r.quota, 0);
+    const sumApplicants = r5.reduce((a, r) => a + r.finalApplicants, 0);
+    expect(sumQuota).toBe(3606);
+    expect(sumApplicants).toBe(3694);
+
+    const r5Keys = new Set(r5.map((r) => `${r.schoolName}|${r.department}`));
+    const r6Keys = new Set(r6.map((r) => `${r.schoolName}|${r.department}`));
+    expect(r5Keys).toEqual(r6Keys);
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of FUKUI_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.pref\.fukui\.lg\.jp\//);
