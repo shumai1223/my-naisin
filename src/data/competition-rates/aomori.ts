@@ -1,5 +1,5 @@
 /**
- * 青森県 公立高等学校 倍率パイプラインα（Y-6・32県目・全日制完全達成／掛-1・R7多年度追加済み）。
+ * 青森県 公立高等学校 倍率パイプラインα（Y-6・32県目・全日制完全達成／掛-1・R5〜R8の4年度分収録済み）。
  *
  * 一次ソース: 青森県教育委員会「令和8年度青森県立高等学校入学者選抜出願状況等（全日制の課程）」
  * （令和8年2月18日発表・出願期間2/12〜2/17正午締切・全2ページ）。
@@ -35,6 +35,25 @@
  * 改称されている（同一学科の名称変更と判断・生徒数・定員の推移に不自然な断絶が無いため）。
  * 「鰺ヶ沢」の表記はR7/R8に合わせて統一した（異体字「鯵」との揺れは印字フォントの違いであり
  * 学校自体は同一）。
+ *
+ * ⚠️掛-1（学校別×多年度・4年度目）R5追加: R5もR6と同様地域別6分割PDF（東青/西北五/中弘南黒/
+ * 上十三/下北むつ/三八の各1ページ）で公開されていたが、統合公開ページ・全PDFとも原本は既に
+ * 削除済み（https://www.pref.aomori.lg.jp/soshiki/kyoiku/e-gakyo/shutsugansyasuu2023_koukou.html
+ * は404）。Wayback Machineのアーカイブスナップショット（2023年10月取得分・6PDF共通）を
+ * `archive.org/wayback/available`及びCDX APIで特定し取得。全6PDFともpdftotextではCJKラベルが
+ * 全欠落する埋め込みフォントのためReadツールのpages指定によるビジョン解析で91レコード
+ * （43校）を転記した。6地域それぞれの「合計」行（東青1,800/1,825・西北五715/567・
+ * 中弘南黒1,470/1,497・上十三1,230/1,078・下北むつ535/421・三八1,495/1,465）と
+ * 「全日制の課程合計」行（選抜募集人員7,245・applicants6,853・倍率0.95）の計7段階すべてが
+ * node.js機械集計と完全一致した（初回転記で一致）。**R5とR6で3件の実在差を確認**（各校の
+ * 地域内合計行との整合で裏取り済み・誤読ではない）: ①青森南の学科名がR5は「外国語」だが
+ * R6以降は「グローバル探究」に改称されている（同一枠の名称変更と判断）。②柏木農業はR5時点で
+ * 「生物生産・環境工学・食品科学・生活科学」の4学科だったが、R6以降は「生活科学」が廃止され
+ * 3学科体制になっている（募集人員35名分の学科自体の廃止・R5〜R6間の地域小計整合で確認）。
+ * ③八戸北「普通」はR5時点quota240だがR6以降はquota200に縮小されている（募集人員の年次調整・
+ * 三八地域小計1,495との整合で確認）。三本木の内部進学控除後quotaはR5=160・R6=167・R7/R8=165と
+ * 年度ごとに変動しているが、これは既知の「附属中等からの内部進学者数の年次変動」の範囲内であり
+ * 構造変化ではないと判断した。
  */
 import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
 
@@ -88,6 +107,54 @@ export const AOMORI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       docTitle: '青森県教育委員会 令和6年度青森県立高等学校入学者選抜出願状況等（全日制の課程・三八地域）',
       fiscalYear: '令和6年度（2024年度）',
       fetchedAt: '2026-08-08',
+    },
+    {
+      url: 'https://web.archive.org/web/20231002191557/https://www.pref.aomori.lg.jp/soshiki/kyoiku/e-gakyo/files/R5senbatsu_syutsugan-tousei.pdf',
+      docTitle:
+        '青森県教育委員会 令和5年度青森県立高等学校入学者選抜出願状況等（全日制の課程・東青地域）' +
+        '※原本は既に削除されており、Wayback Machine経由で取得',
+      fiscalYear: '令和5年度（2023年度）',
+      fetchedAt: '2026-08-22',
+    },
+    {
+      url: 'https://web.archive.org/web/20231002192253/https://www.pref.aomori.lg.jp/soshiki/kyoiku/e-gakyo/files/R5senbatsu_syutsugan-seihoku.pdf',
+      docTitle:
+        '青森県教育委員会 令和5年度青森県立高等学校入学者選抜出願状況等（全日制の課程・西北五地域）' +
+        '※原本は既に削除されており、Wayback Machine経由で取得',
+      fiscalYear: '令和5年度（2023年度）',
+      fetchedAt: '2026-08-22',
+    },
+    {
+      url: 'https://web.archive.org/web/20231002182621/https://www.pref.aomori.lg.jp/soshiki/kyoiku/e-gakyo/files/R5senbatsu_syutsugan-chuunan.pdf',
+      docTitle:
+        '青森県教育委員会 令和5年度青森県立高等学校入学者選抜出願状況等（全日制の課程・中弘南黒地域）' +
+        '※原本は既に削除されており、Wayback Machine経由で取得',
+      fiscalYear: '令和5年度（2023年度）',
+      fetchedAt: '2026-08-22',
+    },
+    {
+      url: 'https://web.archive.org/web/20231002181406/https://www.pref.aomori.lg.jp/soshiki/kyoiku/e-gakyo/files/R5senbatsu_syutsugan-kamikita.pdf',
+      docTitle:
+        '青森県教育委員会 令和5年度青森県立高等学校入学者選抜出願状況等（全日制の課程・上十三地域）' +
+        '※原本は既に削除されており、Wayback Machine経由で取得',
+      fiscalYear: '令和5年度（2023年度）',
+      fetchedAt: '2026-08-22',
+    },
+    {
+      url: 'https://web.archive.org/web/20231002191514/https://www.pref.aomori.lg.jp/soshiki/kyoiku/e-gakyo/files/R5senbatsu_syutsugan-shimokita.pdf',
+      docTitle:
+        '青森県教育委員会 令和5年度青森県立高等学校入学者選抜出願状況等（全日制の課程・下北むつ地域）' +
+        '※原本は既に削除されており、Wayback Machine経由で取得',
+      fiscalYear: '令和5年度（2023年度）',
+      fetchedAt: '2026-08-22',
+    },
+    {
+      url: 'https://web.archive.org/web/20231002173119/https://www.pref.aomori.lg.jp/soshiki/kyoiku/e-gakyo/files/R5senbatsu_syutsugan-sanpachi.pdf',
+      docTitle:
+        '青森県教育委員会 令和5年度青森県立高等学校入学者選抜出願状況等（全日制の課程・三八地域）' +
+        '※原本は既に削除されており、Wayback Machine経由で取得',
+      fiscalYear: '令和5年度（2023年度）',
+      fetchedAt: '2026-08-22',
     },
   ],
   coverage: {
@@ -366,5 +433,102 @@ export const AOMORI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '八戸工業', department: '材料技術', quota: 35, finalApplicants: 40, finalRate: 1.14, sourceIndex: 7, fiscalYear: '令和6年度（2024年度）' },
     { schoolName: '八戸商業', department: '商業', quota: 80, finalApplicants: 50, finalRate: 0.63, sourceIndex: 7, fiscalYear: '令和6年度（2024年度）' },
     { schoolName: '八戸商業', department: '情報処理', quota: 40, finalApplicants: 29, finalRate: 0.73, sourceIndex: 7, fiscalYear: '令和6年度（2024年度）' },
+    // 掛-1（学校別×多年度・4年度目）令和5年度 追加分（東青地域・sources[8]）
+    { schoolName: '青森', department: '普通', quota: 240, finalApplicants: 229, finalRate: 0.95, sourceIndex: 8, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '青森西', department: '普通', quota: 240, finalApplicants: 249, finalRate: 1.04, sourceIndex: 8, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '青森東', department: '普通', quota: 240, finalApplicants: 272, finalRate: 1.13, sourceIndex: 8, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '青森北', department: '普通', quota: 160, finalApplicants: 154, finalRate: 0.96, sourceIndex: 8, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '青森北', department: 'スポーツ科学', quota: 40, finalApplicants: 39, finalRate: 0.98, sourceIndex: 8, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '青森南', department: '普通', quota: 160, finalApplicants: 194, finalRate: 1.21, sourceIndex: 8, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '青森南', department: '外国語', quota: 40, finalApplicants: 37, finalRate: 0.93, sourceIndex: 8, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '青森中央', department: '総合', quota: 200, finalApplicants: 228, finalRate: 1.14, sourceIndex: 8, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '浪岡', department: '普通', quota: 70, finalApplicants: 17, finalRate: 0.24, sourceIndex: 8, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '青森工業', department: '機械', quota: 35, finalApplicants: 36, finalRate: 1.03, sourceIndex: 8, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '青森工業', department: '電気', quota: 35, finalApplicants: 30, finalRate: 0.86, sourceIndex: 8, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '青森工業', department: '電子', quota: 35, finalApplicants: 27, finalRate: 0.77, sourceIndex: 8, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '青森工業', department: '情報技術', quota: 35, finalApplicants: 46, finalRate: 1.31, sourceIndex: 8, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '青森工業', department: '建築', quota: 35, finalApplicants: 35, finalRate: 1, sourceIndex: 8, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '青森工業', department: '都市環境', quota: 35, finalApplicants: 30, finalRate: 0.86, sourceIndex: 8, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '青森商業', department: '商業・情報処理(くくり)', quota: 200, finalApplicants: 202, finalRate: 1.01, sourceIndex: 8, fiscalYear: '令和5年度（2023年度）' },
+    // 掛-1（学校別×多年度・4年度目）令和5年度 追加分（西北五地域・sources[9]）
+    { schoolName: '五所川原', department: '普通・理数(くくり)', quota: 200, finalApplicants: 148, finalRate: 0.74, sourceIndex: 9, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '木造', department: '総合', quota: 160, finalApplicants: 168, finalRate: 1.05, sourceIndex: 9, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '鰺ヶ沢', department: '普通', quota: 40, finalApplicants: 16, finalRate: 0.4, sourceIndex: 9, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '五所川原農林', department: '生物生産', quota: 35, finalApplicants: 20, finalRate: 0.57, sourceIndex: 9, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '五所川原農林', department: '森林科学', quota: 35, finalApplicants: 12, finalRate: 0.34, sourceIndex: 9, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '五所川原農林', department: '環境土木', quota: 35, finalApplicants: 23, finalRate: 0.66, sourceIndex: 9, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '五所川原農林', department: '食品科学', quota: 35, finalApplicants: 42, finalRate: 1.2, sourceIndex: 9, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '五所川原工科', department: '普通', quota: 70, finalApplicants: 68, finalRate: 0.97, sourceIndex: 9, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '五所川原工科', department: '機械', quota: 35, finalApplicants: 22, finalRate: 0.63, sourceIndex: 9, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '五所川原工科', department: '電子機械', quota: 35, finalApplicants: 33, finalRate: 0.94, sourceIndex: 9, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '五所川原工科', department: '電気', quota: 35, finalApplicants: 15, finalRate: 0.43, sourceIndex: 9, fiscalYear: '令和5年度（2023年度）' },
+    // 掛-1（学校別×多年度・4年度目）令和5年度 追加分（中弘南黒地域・sources[10]）
+    { schoolName: '弘前', department: '普通', quota: 240, finalApplicants: 269, finalRate: 1.12, sourceIndex: 10, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '弘前中央', department: '普通', quota: 240, finalApplicants: 286, finalRate: 1.19, sourceIndex: 10, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '弘前南', department: '普通', quota: 200, finalApplicants: 217, finalRate: 1.09, sourceIndex: 10, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '黒石', department: '普通', quota: 120, finalApplicants: 91, finalRate: 0.76, sourceIndex: 10, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '黒石', department: '情報デザイン', quota: 40, finalApplicants: 38, finalRate: 0.95, sourceIndex: 10, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '黒石', department: '看護', quota: 40, finalApplicants: 38, finalRate: 0.95, sourceIndex: 10, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '柏木農業', department: '生物生産', quota: 35, finalApplicants: 25, finalRate: 0.71, sourceIndex: 10, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '柏木農業', department: '環境工学', quota: 35, finalApplicants: 17, finalRate: 0.49, sourceIndex: 10, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '柏木農業', department: '食品科学', quota: 35, finalApplicants: 23, finalRate: 0.66, sourceIndex: 10, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '柏木農業', department: '生活科学', quota: 35, finalApplicants: 18, finalRate: 0.51, sourceIndex: 10, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '弘前工業', department: '機械', quota: 35, finalApplicants: 35, finalRate: 1, sourceIndex: 10, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '弘前工業', department: '電気', quota: 35, finalApplicants: 28, finalRate: 0.8, sourceIndex: 10, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '弘前工業', department: '電子', quota: 35, finalApplicants: 30, finalRate: 0.86, sourceIndex: 10, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '弘前工業', department: '情報技術', quota: 35, finalApplicants: 45, finalRate: 1.29, sourceIndex: 10, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '弘前工業', department: '土木', quota: 35, finalApplicants: 40, finalRate: 1.14, sourceIndex: 10, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '弘前工業', department: '建築', quota: 35, finalApplicants: 43, finalRate: 1.23, sourceIndex: 10, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '弘前実業', department: '商業', quota: 80, finalApplicants: 86, finalRate: 1.08, sourceIndex: 10, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '弘前実業', department: '情報処理', quota: 40, finalApplicants: 46, finalRate: 1.15, sourceIndex: 10, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '弘前実業', department: '家庭科学', quota: 40, finalApplicants: 38, finalRate: 0.95, sourceIndex: 10, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '弘前実業', department: '服飾デザイン', quota: 40, finalApplicants: 38, finalRate: 0.95, sourceIndex: 10, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '弘前実業', department: 'スポーツ科学', quota: 40, finalApplicants: 46, finalRate: 1.15, sourceIndex: 10, fiscalYear: '令和5年度（2023年度）' },
+    // 掛-1（学校別×多年度・4年度目）令和5年度 追加分（上十三地域・sources[11]）
+    { schoolName: '三本木', department: '普通', quota: 160, finalApplicants: 147, finalRate: 0.92, sourceIndex: 11, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '三沢', department: '普通', quota: 240, finalApplicants: 234, finalRate: 0.98, sourceIndex: 11, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '野辺地', department: '普通', quota: 80, finalApplicants: 32, finalRate: 0.4, sourceIndex: 11, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '七戸', department: '総合', quota: 120, finalApplicants: 91, finalRate: 0.76, sourceIndex: 11, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '百石', department: '普通', quota: 80, finalApplicants: 76, finalRate: 0.95, sourceIndex: 11, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '百石', department: '食物調理', quota: 40, finalApplicants: 32, finalRate: 0.8, sourceIndex: 11, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '六ヶ所', department: '普通', quota: 40, finalApplicants: 35, finalRate: 0.88, sourceIndex: 11, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '三本木農業恵拓', department: '普通', quota: 70, finalApplicants: 64, finalRate: 0.91, sourceIndex: 11, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '三本木農業恵拓', department: '植物科学', quota: 35, finalApplicants: 22, finalRate: 0.63, sourceIndex: 11, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '三本木農業恵拓', department: '動物科学', quota: 35, finalApplicants: 36, finalRate: 1.03, sourceIndex: 11, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '三本木農業恵拓', department: '環境工学', quota: 35, finalApplicants: 38, finalRate: 1.09, sourceIndex: 11, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '三本木農業恵拓', department: '食品科学', quota: 35, finalApplicants: 28, finalRate: 0.8, sourceIndex: 11, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '十和田工業', department: '機械・エネルギー', quota: 35, finalApplicants: 38, finalRate: 1.09, sourceIndex: 11, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '十和田工業', department: '電気', quota: 35, finalApplicants: 30, finalRate: 0.86, sourceIndex: 11, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '十和田工業', department: '電子', quota: 35, finalApplicants: 37, finalRate: 1.06, sourceIndex: 11, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '十和田工業', department: '建築', quota: 35, finalApplicants: 29, finalRate: 0.83, sourceIndex: 11, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '三沢商業', department: '商業・情報処理(くくり)', quota: 120, finalApplicants: 109, finalRate: 0.91, sourceIndex: 11, fiscalYear: '令和5年度（2023年度）' },
+    // 掛-1（学校別×多年度・4年度目）令和5年度 追加分（下北むつ地域・sources[12]）
+    { schoolName: '田名部', department: '普通', quota: 200, finalApplicants: 166, finalRate: 0.83, sourceIndex: 12, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '大湊', department: '総合', quota: 160, finalApplicants: 117, finalRate: 0.73, sourceIndex: 12, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '大間', department: '普通', quota: 70, finalApplicants: 50, finalRate: 0.71, sourceIndex: 12, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: 'むつ工業', department: '機械', quota: 35, finalApplicants: 32, finalRate: 0.91, sourceIndex: 12, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: 'むつ工業', department: '電気', quota: 35, finalApplicants: 34, finalRate: 0.97, sourceIndex: 12, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: 'むつ工業', department: '設備・エネルギー', quota: 35, finalApplicants: 22, finalRate: 0.63, sourceIndex: 12, fiscalYear: '令和5年度（2023年度）' },
+    // 掛-1（学校別×多年度・4年度目）令和5年度 追加分（三八地域・sources[13]）
+    { schoolName: '八戸', department: '普通', quota: 240, finalApplicants: 259, finalRate: 1.08, sourceIndex: 13, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '八戸東', department: '普通', quota: 200, finalApplicants: 239, finalRate: 1.2, sourceIndex: 13, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '八戸東', department: '表現', quota: 30, finalApplicants: 24, finalRate: 0.8, sourceIndex: 13, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '八戸北', department: '普通', quota: 240, finalApplicants: 253, finalRate: 1.05, sourceIndex: 13, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '八戸西', department: '普通', quota: 200, finalApplicants: 233, finalRate: 1.17, sourceIndex: 13, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '八戸西', department: 'スポーツ科学', quota: 40, finalApplicants: 41, finalRate: 1.03, sourceIndex: 13, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '三戸', department: '普通', quota: 40, finalApplicants: 33, finalRate: 0.83, sourceIndex: 13, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '名久井農業', department: '生物生産', quota: 35, finalApplicants: 30, finalRate: 0.86, sourceIndex: 13, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '名久井農業', department: '環境システム', quota: 35, finalApplicants: 14, finalRate: 0.4, sourceIndex: 13, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '八戸水産', department: '海洋生産', quota: 35, finalApplicants: 21, finalRate: 0.6, sourceIndex: 13, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '八戸水産', department: '水産食品', quota: 35, finalApplicants: 11, finalRate: 0.31, sourceIndex: 13, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '八戸水産', department: '水産工学', quota: 35, finalApplicants: 10, finalRate: 0.29, sourceIndex: 13, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '八戸工業', department: '機械', quota: 35, finalApplicants: 31, finalRate: 0.89, sourceIndex: 13, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '八戸工業', department: '電気', quota: 35, finalApplicants: 33, finalRate: 0.94, sourceIndex: 13, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '八戸工業', department: '電子', quota: 35, finalApplicants: 48, finalRate: 1.37, sourceIndex: 13, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '八戸工業', department: '土木', quota: 35, finalApplicants: 23, finalRate: 0.66, sourceIndex: 13, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '八戸工業', department: '建築', quota: 35, finalApplicants: 35, finalRate: 1, sourceIndex: 13, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '八戸工業', department: '材料技術', quota: 35, finalApplicants: 30, finalRate: 0.86, sourceIndex: 13, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '八戸商業', department: '商業', quota: 80, finalApplicants: 60, finalRate: 0.75, sourceIndex: 13, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '八戸商業', department: '情報処理', quota: 40, finalApplicants: 37, finalRate: 0.93, sourceIndex: 13, fiscalYear: '令和5年度（2023年度）' },
   ],
 };

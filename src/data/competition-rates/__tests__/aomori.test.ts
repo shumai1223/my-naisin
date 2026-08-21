@@ -96,9 +96,42 @@ describe('青森県 倍率パイプラインα（Y-6・全日制43校89レコー
     });
   });
 
-  it('sourcesが公式PDF URLを正しく記録している', () => {
+  it('sourcesが公式PDF URLを正しく記録している（R5分は原本削除のためWayback Machine経由の公式ドメインURLを許容）', () => {
     for (const s of AOMORI_COMPETITION_RATES.sources) {
-      expect(s.url).toMatch(/^https:\/\/www\.pref\.aomori\.lg\.jp\//);
+      expect(s.url).toMatch(
+        /^https:\/\/www\.pref\.aomori\.lg\.jp\/|^https:\/\/web\.archive\.org\/web\/\d+\/https:\/\/www\.pref\.aomori\.lg\.jp\//
+      );
     }
+  });
+
+  it('掛-1(学校別×多年度・4年度目): 令和5年度(R5)分レコードが91件・43校収録され、地域別6分割PDF(東青/西北五/中弘南黒/上十三/下北むつ/三八)それぞれの合計行と「全日制の課程合計」7,245/6,853の計7段階すべてと完全一致する。青森南の学科名「外国語」(R6以降「グローバル探究」)、柏木農業の4学科目「生活科学」(R6以降廃止)、八戸北「普通」quota240(R6以降quota200)という3件の実在差を確認した', () => {
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    expect(r5.length).toBe(91);
+    const distinctSchools = new Set(r5.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(43);
+    const sumQuota = r5.reduce((a, r) => a + r.quota, 0);
+    const sumApplicants = r5.reduce((a, r) => a + r.finalApplicants, 0);
+    expect(sumQuota).toBe(7245);
+    expect(sumApplicants).toBe(6853);
+
+    expect(r5.find((r) => r.schoolName === '青森南' && r.department === '外国語')).toMatchObject({ quota: 40, finalApplicants: 37 });
+    expect(r5.some((r) => r.schoolName === '青森南' && r.department === 'グローバル探究')).toBe(false);
+
+    expect(r5.find((r) => r.schoolName === '柏木農業' && r.department === '生活科学')).toMatchObject({ quota: 35, finalApplicants: 18 });
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    expect(r6.some((r) => r.schoolName === '柏木農業' && r.department === '生活科学')).toBe(false);
+
+    expect(r5.find((r) => r.schoolName === '八戸北' && r.department === '普通')).toMatchObject({ quota: 240, finalApplicants: 253 });
+    expect(r6.find((r) => r.schoolName === '八戸北' && r.department === '普通')).toMatchObject({ quota: 200 });
+
+    expect(r5.find((r) => r.schoolName === '青森商業')).toEqual({
+      schoolName: '青森商業',
+      department: '商業・情報処理(くくり)',
+      quota: 200,
+      finalApplicants: 202,
+      finalRate: 1.01,
+      fiscalYear: '令和5年度（2023年度）',
+      sourceIndex: 8, // 東青地域PDF(sources[8])からの機械的バックフィル済み
+    });
   });
 });
