@@ -105,6 +105,46 @@ describe('千葉県 倍率パイプラインα（Y-2・県立+市立全日制の
     });
   });
 
+  it('掛-1(学校別×多年度・R5追加・4年度目): 令和5年度(R5)分に県立全日制179レコード+市立全日制14レコード=193レコードが収録され、学校名+学科名の重複が無い。県立・市立・公立全日制の3段階の機械集計が資料印字値と完全一致する', () => {
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    expect(r5.length).toBe(193);
+
+    const r5Kenritsu = r5.filter((r) => !r.schoolName.startsWith('市立'));
+    const r5Shiritsu = r5.filter((r) => r.schoolName.startsWith('市立'));
+    expect(r5Kenritsu.length).toBe(179);
+    expect(r5Shiritsu.length).toBe(14);
+    expect(r5Kenritsu.reduce((a, r) => a + r.quota, 0)).toBe(28840);
+    expect(r5Kenritsu.reduce((a, r) => a + r.finalApplicants, 0)).toBe(32029);
+    expect(r5Shiritsu.reduce((a, r) => a + r.quota, 0)).toBe(2120);
+    expect(r5Shiritsu.reduce((a, r) => a + r.finalApplicants, 0)).toBe(2764);
+    expect(r5.reduce((a, r) => a + r.quota, 0)).toBe(30960);
+    expect(r5.reduce((a, r) => a + r.finalApplicants, 0)).toBe(34793);
+
+    const seen = new Set<string>();
+    for (const r of r5) {
+      const key = `${r.schoolName}|${r.department}`;
+      expect(seen.has(key)).toBe(false);
+      seen.add(key);
+    }
+
+    expect(r5.find((r) => r.schoolName === '千葉' && r.department === '普通科')).toEqual({
+      schoolName: '千葉',
+      department: '普通科',
+      quota: 240,
+      finalApplicants: 380,
+      finalRate: 1.58,
+      fiscalYear: '令和5年度（2023年度）',
+    });
+    expect(r5.find((r) => r.schoolName === '市立銚子')).toEqual({
+      schoolName: '市立銚子',
+      department: '普通科・理数科',
+      quota: 280,
+      finalApplicants: 271,
+      finalRate: 0.97,
+      fiscalYear: '令和5年度（2023年度）',
+    });
+  });
+
   it('coverageが完了を示している', () => {
     expect(CHIBA_COMPETITION_RATES.coverage.status).toBe('complete');
     expect(CHIBA_COMPETITION_RATES.coverage.pendingDepartments).toEqual([]);
