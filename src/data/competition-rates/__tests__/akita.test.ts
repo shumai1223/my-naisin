@@ -103,6 +103,38 @@ describe('秋田県 倍率パイプラインα（Y-6・全日制78レコード�
     });
   });
 
+  it('掛-1(学校別×多年度・4年度目): 令和5年度(R5)分レコードが82件収録され、県北計/中央計/県南計/県合計の4段階の公式小計すべてと完全一致する。R5のみ「花輪」「十和田」「小坂」の3校が独立して存在し(令和6年4月の3校統合で「鹿角」に一本化される前の状態)、R6以降の「鹿角」2レコードに代えて計4レコードが収録されている(差分+2で82件)', () => {
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    expect(r5.length).toBe(82);
+    expect(r5.reduce((a, r) => a + r.quota, 0)).toBe(6752);
+    expect(r5.reduce((a, r) => a + r.finalApplicants, 0)).toBe(5912);
+
+    expect(r5.some((r) => r.schoolName === '花輪' && r.department === '普通科')).toBe(true);
+    expect(r5.some((r) => r.schoolName === '十和田' && r.department === '普通科')).toBe(true);
+    expect(r5.filter((r) => r.schoolName === '小坂')).toHaveLength(2);
+    expect(r5.some((r) => r.schoolName === '鹿角')).toBe(false);
+
+    expect(r5.filter((r) => r.schoolName === '男鹿海洋')).toHaveLength(3);
+    expect(r5.filter((r) => r.schoolName === '男鹿工業')).toHaveLength(3);
+
+    expect(r5.find((r) => r.schoolName === '大曲農業(太田分校)')).toEqual({
+      schoolName: '大曲農業(太田分校)',
+      department: '普通科',
+      quota: 35,
+      finalApplicants: 6,
+      finalRate: 0.17,
+      fiscalYear: '令和5年度（2023年度）',
+    });
+    expect(r5.find((r) => r.schoolName === '湯沢翔北(雄勝校)')).toEqual({
+      schoolName: '湯沢翔北(雄勝校)',
+      department: '普通科',
+      quota: 40,
+      finalApplicants: 16,
+      finalRate: 0.4,
+      fiscalYear: '令和5年度（2023年度）',
+    });
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of AKITA_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.pref\.akita\.lg\.jp\//);
