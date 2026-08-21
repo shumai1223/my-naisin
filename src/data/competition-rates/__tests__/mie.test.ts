@@ -169,6 +169,52 @@ describe('三重県 倍率パイプラインα（Y-6・全日制52校108レコ�
     expect(r6.filter((r) => r.schoolName === '熊野青藍（木本校舎）')).toHaveLength(0);
   });
 
+  it('掛-1(学校別×多年度): 令和5年度(R5)分レコードが108件・52校収録され、全日制総計(quota6,945・applicants7,373・倍率1.06)と完全一致する。伊賀白鳳のくくり構成はR5でもR6/R7と同じ7学科が単一quota105を共有していた', () => {
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    expect(r5.length).toBe(108);
+    expect(r5.reduce((a, r) => a + r.quota, 0)).toBe(6945);
+    expect(r5.reduce((a, r) => a + r.finalApplicants, 0)).toBe(7373);
+
+    const distinctSchools5 = new Set(r5.map((r) => r.schoolName));
+    expect(distinctSchools5.size).toBe(52);
+
+    const igahoR5 = r5.filter((r) => r.schoolName === '伊賀白鳳');
+    expect(igahoR5).toHaveLength(1);
+    expect(igahoR5[0].quota).toBe(105);
+
+    // R5時点は熊野青藍への統合前で「木本」「紀南」という別々の独立校名だった（R6と同じ）
+    expect(r5.filter((r) => r.schoolName === '木本')).toHaveLength(2);
+    expect(r5.filter((r) => r.schoolName === '紀南')).toHaveLength(1);
+
+    // R5では稲生に「体育」学科が存在した（R7で廃止、R6コメントと整合）
+    expect(r5.filter((r) => r.schoolName === '稲生' && r.department === '体育')).toHaveLength(1);
+
+    // R5では川越は「普通・国際文理」表記だった（探究・国際探究への改称はR7から）
+    expect(r5.filter((r) => r.schoolName === '川越' && r.department === '普通')).toHaveLength(1);
+    expect(r5.filter((r) => r.schoolName === '川越' && r.department === '国際文理')).toHaveLength(1);
+  });
+
+  it('掛-1(R5固有の構造差): 久居農林はR5時点でくくり募集ではなく4学科個別募集（quota18ずつ）だった（R6以降にくくり化）', () => {
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    const kuiNorin5 = r5.filter((r) => r.schoolName === '久居農林');
+    expect(kuiNorin5).toHaveLength(5);
+    expect(kuiNorin5.map((r) => r.department).sort()).toEqual(
+      ['環境情報', '環境土木', '生物資源', '生物生産', '生活デザイン'].sort()
+    );
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    const kuiNorin6 = r6.filter((r) => r.schoolName === '久居農林');
+    expect(kuiNorin6).toHaveLength(3);
+  });
+
+  it('掛-1(R5固有の構造差): 南伊勢はR5時点で度会校舎・南勢校舎の合算1レコードだった（R6以降は度会校舎単独）', () => {
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    const minamiIse5 = r5.filter((r) => r.schoolName.startsWith('南伊勢'));
+    expect(minamiIse5).toHaveLength(1);
+    expect(minamiIse5[0].schoolName).toBe('南伊勢（度会校舎・南勢校舎）');
+    expect(minamiIse5[0].quota).toBe(52);
+    expect(minamiIse5[0].finalApplicants).toBe(8);
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of MIE_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.pref\.mie\.lg\.jp\//);

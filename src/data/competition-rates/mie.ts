@@ -1,5 +1,5 @@
 /**
- * 三重県 公立高等学校 倍率パイプラインα（Y-6・12県目・全日制完全達成／掛-1・R7多年度対応済）。
+ * 三重県 公立高等学校 倍率パイプラインα（Y-6・12県目・全日制完全達成／掛-1・R5〜R8の4年度対応済）。
  *
  * 一次ソース: 三重県教育委員会「令和8年度三重県立高等学校後期選抜志願状況（最終）」
  * （3月5日公表・全5ページ）。
@@ -46,6 +46,27 @@
  * （R6）→「探究・国際探究」（R7以降）に学科名変更 ②稲生に「体育」学科がR6のみ存在しR7で
  * 廃止 ③熊野青藍（木本校舎・紀南校舎）はR6時点では統合前の独立校「木本」「紀南」で、
  * 木本は普通+総合学科、紀南は普通のみ（R7で熊野青藍へ統合・紀南校舎は普通→総合学科に転換）。
+ *
+ * ⚠️掛-1（R5追加時の年度差）: R5（令和5年3月6日公表・全5ページ、総計行はNo.3末尾）も
+ * pdftotextでは学校名・学科名が一切読めず（数字列のみ抽出）、pdftoppm 300dpiビジョン解析で
+ * 全日制108レコードを転記した。PDF3ページ目末尾の「総計」行（quota6,945・applicants7,373・
+ * 倍率1.06）とnode.js機械集計が完全一致し、全52校の「学校計」行とも個別に完全一致した
+ * （突合スクリプトで自動検証）。⚠️転記の罠: 初回の全体俯瞰読みでは久居農林の環境情報/環境土木
+ * の志願者数を誤読した（17/20を20/20と誤読）。pdftoppmで300dpiのPNGを生成しPillowで該当行を
+ * 高解像度クロップして再確認することで誤りに気づき修正した（学校計行との突合だけでは全ての
+ * 誤読を検出できるとは限らないため、以後も疑わしい箇所は必ず高解像度クロップで再確認する）。
+ * 稲生の「体育」学科はR5でも存在した（R5・R6で存在しR7で廃止、上記R6コメントに整合）。
+ * 川越はR5でも「普通・国際文理」表記だった（R6と同じ、名称変更はR7から）。伊賀白鳳のくくり
+ * 構成はR5でもR6/R7と同じ7学科まとめて単一quota105だった。実在の構造変化を新たに複数発見:
+ * ①久居農林はR5時点では「生物生産・生物資源・環境情報・環境土木」の4学科が個別quota18の
+ * 独立募集で、R6以降に「生物生産・生物資源」「環境情報・環境土木」の2組のくくり募集に再編
+ * された（R5→R6でくくり化、R8までそのまま維持）。②南伊勢はR5時点では「度会校舎」「南勢校舎」
+ * の2校舎が単一の合算行（quota52・applicants8・倍率0.15）で存在し、R6以降は「度会校舎」単独
+ * （南勢校舎は消滅）になった。③四日市四郷の「スポーツ科学コース」・飯野の「応用デザイン」・
+ * 白子の「文化教養（吹奏楽）コース」・相可の「食物調理」はR5時点で前期選抜のみで定員充足
+ * （後期募集人数0）のため他県と同型の0-quotaパターンでレコード非採用（R6以降のPDFにはこれら
+ * の学科自体が掲載されていない＝R6までに募集停止したとみられる）。④昴学園はR5でも学校全体が
+ * 前期選抜のみで定員充足（後期募集人数0）でレコード非採用（R8と同型）。
  */
 import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
 
@@ -69,6 +90,12 @@ export const MIE_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       docTitle: '三重県教育委員会 令和6年度三重県立高等学校後期選抜志願状況（最終）',
       fiscalYear: '令和6年度（2024年度）',
       fetchedAt: '2026-08-08',
+    },
+    {
+      url: 'https://www.pref.mie.lg.jp/common/content/001063898.pdf',
+      docTitle: '三重県教育委員会 令和5年度三重県立高等学校後期選抜志願状況（最終）',
+      fiscalYear: '令和5年度（2023年度）',
+      fetchedAt: '2026-08-22',
     },
   ],
   coverage: {
@@ -401,5 +428,114 @@ export const MIE_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '木本', department: '普通', quota: 120, finalApplicants: 121, finalRate: 1.01, fiscalYear: '令和6年度（2024年度）' },
     { schoolName: '木本', department: '総合学科', quota: 18, finalApplicants: 21, finalRate: 1.17, fiscalYear: '令和6年度（2024年度）' },
     { schoolName: '紀南', department: '普通', quota: 56, finalApplicants: 20, finalRate: 0.36, fiscalYear: '令和6年度（2024年度）' },
+    // 掛-1（学校別×多年度）令和5年度（2023年度）: 全日制108レコード（機械集計quota6,945・applicants7,373・倍率1.06がPDF末尾「総計」行と完全一致、全52校の「学校計」行とも個別に完全一致）。
+    { schoolName: '桑名', department: '普通', quota: 240, finalApplicants: 240, finalRate: 1, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '桑名', department: '理数', quota: 40, finalApplicants: 97, finalRate: 2.43, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '桑名西', department: '普通', quota: 280, finalApplicants: 351, finalRate: 1.25, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '桑名北', department: '普通', quota: 134, finalApplicants: 96, finalRate: 0.72, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '桑名工業', department: '機械・材料技術(くくり)', quota: 36, finalApplicants: 32, finalRate: 0.89, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '桑名工業', department: '電気・電子(くくり)', quota: 36, finalApplicants: 20, finalRate: 0.56, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: 'いなべ総合学園', department: '総合学科', quota: 132, finalApplicants: 168, finalRate: 1.27, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '四日市', department: '普通', quota: 240, finalApplicants: 158, finalRate: 0.66, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '四日市', department: '国際科学コース', quota: 80, finalApplicants: 205, finalRate: 2.56, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '四日市南', department: '普通', quota: 240, finalApplicants: 192, finalRate: 0.8, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '四日市南', department: '数理科学コース', quota: 80, finalApplicants: 211, finalRate: 2.64, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '四日市西', department: '普通', quota: 160, finalApplicants: 130, finalRate: 0.81, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '四日市西', department: '比較文化・歴史コース・数理情報コース(くくり)', quota: 60, finalApplicants: 91, finalRate: 1.52, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '朝明', department: '普通', quota: 80, finalApplicants: 55, finalRate: 0.69, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '朝明', department: 'ふくし', quota: 20, finalApplicants: 2, finalRate: 0.1, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '四日市四郷', department: '普通', quota: 80, finalApplicants: 73, finalRate: 0.91, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '四日市工業', department: '機械', quota: 18, finalApplicants: 23, finalRate: 1.28, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '四日市工業', department: '電子機械', quota: 18, finalApplicants: 14, finalRate: 0.78, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '四日市工業', department: '電気', quota: 18, finalApplicants: 18, finalRate: 1, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '四日市工業', department: '電子工学', quota: 18, finalApplicants: 27, finalRate: 1.5, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '四日市工業', department: '建築', quota: 18, finalApplicants: 22, finalRate: 1.22, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '四日市工業', department: '物質工学', quota: 18, finalApplicants: 23, finalRate: 1.28, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '四日市工業', department: '自動車', quota: 18, finalApplicants: 15, finalRate: 0.83, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '四日市中央工業', department: '機械', quota: 18, finalApplicants: 16, finalRate: 0.89, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '四日市中央工業', department: '電気', quota: 20, finalApplicants: 13, finalRate: 0.65, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '四日市中央工業', department: '化学工学', quota: 18, finalApplicants: 9, finalRate: 0.5, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '四日市中央工業', department: '都市工学', quota: 18, finalApplicants: 14, finalRate: 0.78, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '四日市中央工業', department: '設備システム', quota: 18, finalApplicants: 16, finalRate: 0.89, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '四日市商業', department: '商業', quota: 92, finalApplicants: 95, finalRate: 1.03, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '四日市商業', department: '情報マネジメント', quota: 18, finalApplicants: 13, finalRate: 0.72, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '四日市農芸', department: '農業科学・食品科学・環境造園(くくり)', quota: 54, finalApplicants: 77, finalRate: 1.43, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '四日市農芸', department: '生活文化', quota: 36, finalApplicants: 51, finalRate: 1.42, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '菰野', department: '普通', quota: 107, finalApplicants: 113, finalRate: 1.06, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '川越', department: '普通', quota: 200, finalApplicants: 198, finalRate: 0.99, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '川越', department: '国際文理', quota: 40, finalApplicants: 112, finalRate: 2.8, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '神戸', department: '普通', quota: 200, finalApplicants: 158, finalRate: 0.79, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '神戸', department: '理数', quota: 40, finalApplicants: 138, finalRate: 3.45, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '飯野', department: '英語コミュニケーション', quota: 36, finalApplicants: 33, finalRate: 0.92, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '白子', department: '普通', quota: 107, finalApplicants: 107, finalRate: 1, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '白子', department: '生活創造', quota: 18, finalApplicants: 18, finalRate: 1, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '石薬師', department: '普通', quota: 80, finalApplicants: 79, finalRate: 0.99, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '稲生', department: '普通', quota: 80, finalApplicants: 88, finalRate: 1.1, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '稲生', department: '体育', quota: 18, finalApplicants: 15, finalRate: 0.83, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '亀山', department: '普通', quota: 53, finalApplicants: 73, finalRate: 1.38, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '亀山', department: 'システムメディア', quota: 36, finalApplicants: 47, finalRate: 1.31, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '亀山', department: '総合生活', quota: 18, finalApplicants: 16, finalRate: 0.89, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '津', department: '普通', quota: 320, finalApplicants: 367, finalRate: 1.15, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '津西', department: '普通', quota: 240, finalApplicants: 186, finalRate: 0.78, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '津西', department: '国際科学', quota: 40, finalApplicants: 167, finalRate: 4.18, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '津商業', department: 'ビジネス', quota: 92, finalApplicants: 124, finalRate: 1.35, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '津商業', department: '情報システム', quota: 18, finalApplicants: 11, finalRate: 0.61, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '津東', department: '普通', quota: 192, finalApplicants: 211, finalRate: 1.1, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '津工業', department: '機械', quota: 54, finalApplicants: 48, finalRate: 0.89, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '津工業', department: '電気', quota: 18, finalApplicants: 19, finalRate: 1.06, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '津工業', department: '電子', quota: 18, finalApplicants: 19, finalRate: 1.06, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '津工業', department: '建設工学', quota: 18, finalApplicants: 14, finalRate: 0.78, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '久居', department: '普通', quota: 134, finalApplicants: 132, finalRate: 0.99, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '久居農林', department: '生物生産', quota: 18, finalApplicants: 17, finalRate: 0.94, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '久居農林', department: '生物資源', quota: 18, finalApplicants: 17, finalRate: 0.94, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '久居農林', department: '環境情報', quota: 18, finalApplicants: 17, finalRate: 0.94, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '久居農林', department: '環境土木', quota: 18, finalApplicants: 20, finalRate: 1.11, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '久居農林', department: '生活デザイン', quota: 36, finalApplicants: 36, finalRate: 1, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '白山', department: '普通', quota: 18, finalApplicants: 12, finalRate: 0.67, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '白山', department: '情報コミュニケーション', quota: 18, finalApplicants: 17, finalRate: 0.94, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '上野', department: '普通', quota: 200, finalApplicants: 176, finalRate: 0.88, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '上野', department: '理数', quota: 20, finalApplicants: 48, finalRate: 2.4, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: 'あけぼの学園', department: '総合学科', quota: 36, finalApplicants: 21, finalRate: 0.58, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '伊賀白鳳', department: '機械・電子機械・建築デザイン・生物資源・フードシステム・経営・ヒューマンサービス(くくり)', quota: 105, finalApplicants: 110, finalRate: 1.05, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '名張', department: '総合学科', quota: 92, finalApplicants: 78, finalRate: 0.85, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '名張青峰', department: '普通', quota: 134, finalApplicants: 113, finalRate: 0.84, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '名張青峰', department: '文理探究コース', quota: 18, finalApplicants: 40, finalRate: 2.22, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '松阪', department: '普通', quota: 240, finalApplicants: 189, finalRate: 0.79, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '松阪', department: '理数', quota: 39, finalApplicants: 155, finalRate: 3.97, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '松阪工業', department: '機械', quota: 18, finalApplicants: 19, finalRate: 1.06, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '松阪工業', department: '電気工学', quota: 18, finalApplicants: 21, finalRate: 1.17, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '松阪工業', department: '工業化学', quota: 18, finalApplicants: 13, finalRate: 0.72, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '松阪工業', department: '自動車', quota: 18, finalApplicants: 19, finalRate: 1.06, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '松阪商業', department: '総合ビジネス', quota: 54, finalApplicants: 54, finalRate: 1, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '松阪商業', department: '国際ビジネス', quota: 18, finalApplicants: 9, finalRate: 0.5, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '飯南', department: '総合学科', quota: 27, finalApplicants: 14, finalRate: 0.52, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '相可', department: '普通', quota: 53, finalApplicants: 53, finalRate: 1, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '相可', department: '生産経済', quota: 18, finalApplicants: 25, finalRate: 1.39, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '相可', department: '環境創造', quota: 18, finalApplicants: 18, finalRate: 1, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '明野', department: '生産科学', quota: 18, finalApplicants: 24, finalRate: 1.33, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '明野', department: '食品科学', quota: 18, finalApplicants: 24, finalRate: 1.33, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '明野', department: '生活教養', quota: 18, finalApplicants: 18, finalRate: 1, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '明野', department: '福祉', quota: 18, finalApplicants: 17, finalRate: 0.94, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '宇治山田', department: '普通', quota: 134, finalApplicants: 143, finalRate: 1.07, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '伊勢', department: '普通', quota: 240, finalApplicants: 232, finalRate: 0.97, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '伊勢', department: '国際科学コース', quota: 40, finalApplicants: 67, finalRate: 1.68, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '宇治山田商業', department: '商業', quota: 54, finalApplicants: 54, finalRate: 1, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '宇治山田商業', department: '情報処理', quota: 18, finalApplicants: 15, finalRate: 0.83, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '宇治山田商業', department: '国際', quota: 18, finalApplicants: 21, finalRate: 1.17, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '伊勢工業', department: '機械', quota: 36, finalApplicants: 45, finalRate: 1.25, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '伊勢工業', department: '電気', quota: 18, finalApplicants: 22, finalRate: 1.22, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '伊勢工業', department: '建築', quota: 18, finalApplicants: 21, finalRate: 1.17, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '南伊勢（度会校舎・南勢校舎）', department: '普通', quota: 52, finalApplicants: 8, finalRate: 0.15, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '鳥羽', department: '総合学科', quota: 38, finalApplicants: 15, finalRate: 0.39, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '志摩', department: '普通', quota: 47, finalApplicants: 6, finalRate: 0.13, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '水産', department: '海洋・機関', quota: 18, finalApplicants: 3, finalRate: 0.17, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '水産', department: '水産資源', quota: 18, finalApplicants: 7, finalRate: 0.39, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '尾鷲', department: '普通', quota: 49, finalApplicants: 45, finalRate: 0.92, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '尾鷲', department: 'プログレッシブコース', quota: 20, finalApplicants: 12, finalRate: 0.6, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '尾鷲', department: '情報ビジネス', quota: 21, finalApplicants: 17, finalRate: 0.81, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '尾鷲', department: 'システム工学', quota: 21, finalApplicants: 14, finalRate: 0.67, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '木本', department: '普通', quota: 120, finalApplicants: 101, finalRate: 0.84, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '木本', department: '総合学科', quota: 19, finalApplicants: 18, finalRate: 0.95, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '紀南', department: '普通', quota: 53, finalApplicants: 53, finalRate: 1, fiscalYear: '令和5年度（2023年度）' },
   ],
 };
