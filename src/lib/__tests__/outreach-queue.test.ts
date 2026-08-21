@@ -256,7 +256,13 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // (21:52台送信)の計10件を見落としていたと判明し追加反映(171→161)。
     // 2026-08-21続き3: in:sent newer_than:8dで全件突合の再チェックを行い、lane9-jsrecce(日本保育学会)・
     // lane9-nasem(日本教育方法学会)の2件がさらに見落としと判明し追加反映(161→159)。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(159);
+    // 2026-08-22: 0時リセット後、本文執筆済みcandidate39件から13件(lane9-jasep/lane9-zenkokukateika/
+    // lane9-anzenkyoiku/lane9-shitsukyo/edtech-mined-programming/edtech-ictedu-family/
+    // lane9-gakugei-kouhou/lane7-naruto-kyoiku/lane7-kyokyo-u/lane7-shizuoka-u-education/
+    // lane7-yamanashi-u-education/lane8-toyama-kyoshokuin/lane8-tokushima-kyogo)をGmail下書き化し
+    // queuedへ昇格(159→172・大学教育学部/教職員互助会/学会/edtech企業に分散し同一ドメインクラスタへの
+    // 集中を回避)。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(172);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {
