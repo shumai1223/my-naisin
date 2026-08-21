@@ -2045,6 +2045,28 @@
       "followupCount": 0,
       "threadId": "1a01a27f6b245386",
       "note": "08-19 21:52台送信(前回反映作業で見落とし)。2026-08-21にin:sent実測で確認し反映。"
+    },
+    {
+      "id": "lane9-jsrecce",
+      "org": "日本保育学会",
+      "lane": "npo",
+      "sourceTaskId": "T-C2",
+      "sentDate": "2026-08-19",
+      "status": "awaiting",
+      "followupCount": 0,
+      "threadId": "1a01a28193586a0f",
+      "note": "08-19 22:17台の第2波送信(前々回・前回とも反映漏れ、全件突合の再チェックで発見)。2026-08-21にin:sent実測で確認し反映。"
+    },
+    {
+      "id": "lane9-nasem",
+      "org": "日本教育方法学会",
+      "lane": "npo",
+      "sourceTaskId": "T-C2",
+      "sentDate": "2026-08-19",
+      "status": "awaiting",
+      "followupCount": 0,
+      "threadId": "1a01a2807486215f",
+      "note": "08-19 22:17台の第2波送信(前々回・前回とも反映漏れ、全件突合の再チェックで発見)。2026-08-21にin:sent実測で確認し反映。"
     }
   ]
 }

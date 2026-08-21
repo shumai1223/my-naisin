@@ -254,7 +254,9 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // 2026-08-21続き2: 上記反映作業が08-19 22:17台の第2波送信9件(jaue/zenkojoken/zentoku/jssace/
     // geoedu/jash/terakoya-houjousha/yamaguchi-kyoikukai/nagasaki-kyoikukai)とedtech-frompage-ocans
     // (21:52台送信)の計10件を見落としていたと判明し追加反映(171→161)。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(161);
+    // 2026-08-21続き3: in:sent newer_than:8dで全件突合の再チェックを行い、lane9-jsrecce(日本保育学会)・
+    // lane9-nasem(日本教育方法学会)の2件がさらに見落としと判明し追加反映(161→159)。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(159);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {
