@@ -157,9 +157,11 @@ describe('岡山県 倍率パイプラインα（Y-6・全日制49校+2校＝109
     expect(r6Keys).toEqual(r7Keys);
   });
 
-  it('sourcesが公式PDF URLを正しく記録している（R6分は原本削除のため教育委員会公式ミラーサイトを許容）', () => {
+  it('sourcesが公式PDF URLを正しく記録している（R6分は原本削除のため教育委員会公式ミラーサイトを、R5分は原本削除のためWayback Machine経由の公式ドメインURLを許容）', () => {
     for (const s of OKAYAMA_COMPETITION_RATES.sources) {
-      expect(s.url).toMatch(/^https:\/\/www\.(pref\.okayama\.jp|okayama-kenritsukoukou\.jp)\//);
+      expect(s.url).toMatch(
+        /^https:\/\/www\.(pref\.okayama\.jp|okayama-kenritsukoukou\.jp)\/|^https:\/\/web\.archive\.org\/web\/\d+\/https:\/\/www\.pref\.okayama\.jp\//
+      );
     }
   });
 });
