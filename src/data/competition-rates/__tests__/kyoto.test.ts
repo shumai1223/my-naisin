@@ -89,6 +89,22 @@ describe('京都府 倍率パイプラインα（Y-6・全日制75レコード�
     expect(kyotoForest).toMatchObject({ department: '普通', quota: 16, finalApplicants: 2 });
   });
 
+  it('掛-1(学校別×多年度): 令和5年度(R5)分レコードが76件・54校収録され、全日制計(quota6,096・applicants5,935・倍率0.97)と完全一致する。京都すばるはR5時点も「起業創造・企画・情報科学」の3学科独立構成だった(R6と同型)', () => {
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    expect(r5.length).toBe(76);
+    expect(r5.reduce((a, r) => a + r.quota, 0)).toBe(6096);
+    expect(r5.reduce((a, r) => a + r.finalApplicants, 0)).toBe(5935);
+
+    const distinctSchools5 = new Set(r5.map((r) => r.schoolName));
+    expect(distinctSchools5.size).toBe(54);
+
+    expect(r5.filter((r) => r.schoolName === '京都すばる')).toHaveLength(3);
+
+    // 開建は令和5年度に新設された学校（塔南高校の募集停止と入れ替わり）
+    const kaiken = r5.find((r) => r.schoolName === '開建');
+    expect(kaiken).toMatchObject({ department: 'ルミノベーション', quota: 120, finalApplicants: 171 });
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of KYOTO_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.kyoto-be\.ne\.jp\//);
