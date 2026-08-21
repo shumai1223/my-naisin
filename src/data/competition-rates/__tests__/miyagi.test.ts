@@ -126,6 +126,29 @@ describe('宮城県 倍率パイプラインα（Y-6・全日制68校129レコ�
     expect(r6.filter((r) => r.schoolName === '宮城水産')).toHaveLength(1);
   });
 
+  it('掛-1(学校別×多年度・4年度目): 令和5年度(R5)分レコードが130件・68校収録され、総括表(quota13,760・applicants14,095・倍率1.02)と完全一致する。仙台工はR5時点でもR6と同じ建築科/機械科/電気科/土木科の4学科構成、宮城水産も海洋総合科1学科構成(分割前)で、亘理のみR5では普通科・普通コース/普通科・園芸コース/食品化学科/商業科/家政科の5学科構成(R6は普通科/食品科学科/家政科の3学科構成に再編済み)という相違がある', () => {
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    expect(r5.length).toBe(130);
+    const distinctSchools = new Set(r5.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(68);
+    const sumQuota = r5.reduce((a, r) => a + r.quota, 0);
+    const sumApplicants = r5.reduce((a, r) => a + r.finalApplicants, 0);
+    expect(sumQuota).toBe(13760);
+    expect(sumApplicants).toBe(14095);
+
+    const sendaikou = r5.filter((r) => r.schoolName === '仙台工');
+    expect(sendaikou).toHaveLength(4);
+    expect(sendaikou.some((r) => r.department === '情報科')).toBe(false);
+    expect(r5.filter((r) => r.schoolName === '宮城水産')).toHaveLength(1);
+
+    const watari = r5.filter((r) => r.schoolName === '亘理');
+    expect(watari).toHaveLength(5);
+    const watariQuota = watari.reduce((a, r) => a + r.quota, 0);
+    const watariApplicants = watari.reduce((a, r) => a + r.finalApplicants, 0);
+    expect(watariQuota).toBe(200);
+    expect(watariApplicants).toBe(106);
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of MIYAGI_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.pref\.miyagi\.jp\//);
