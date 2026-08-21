@@ -1,6 +1,6 @@
 {
   "_comment": "AA-1追撃システムの送信台帳。Gmail MCP(gmail_search q=\"in:sent\" / 受信箱の自動受付メール)で実測した内容を手動で反映する運用(scripts/weekly-kpi-report.tsの手動入力パターンと同じ)。統計処理はsrc/lib/outreach-ledger.tsの純関数が担当。1エントリ=1組織。フォーム送信のみでGmail送信履歴に残らないもの(コエテコ/スタディサプリ等)は次回以降のバックフィル対象・現時点では未収録(捏造回避のため確証のある送信のみ収録)。Λ-3(2026-07-29): reviewTierはエントリ個別のレビュー区分上書き(未指定ならb2b-saasレーンの既定値full-review)。今回は組織名から都道府県単位の小規模な模試団体と明確に判別できたもの(かとうもし/新潟県統一模試会/愛媛県模試/新教研/学悠出版)のみ保守的にspot-checkへ下げた。出版社・塾チェーン等の規模が名前だけでは断定できないものはfull-reviewのまま据え置いている(判断に迷う場合はより厳格な側=full-reviewを既定とする方針)。",
-  "asOf": "2026-08-17",
+  "asOf": "2026-08-21",
   "entries": [
     {
       "id": "benesse-kato",
@@ -210,9 +210,9 @@
       "sourceTaskId": "X-14",
       "sentDate": "2026-08-06",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "19fc12565765b750",
-      "note": "8/6一斉送信23通のうち1件。引用利用の報告＋公式サイトからの参照可否を確認する内容。08-17: 11日経過・返信無しのため「応募状況」データ再配布可否を尋ねる追撃下書きを準備済み(draftId r9107276015220444202・S9000011@section.metro.tokyo.jp宛の新規下書き)。未送信・👤の送信待ち(full-review)。"
+      "note": "8/6一斉送信23通のうち1件。引用利用の報告＋公式サイトからの参照可否を確認する内容。08-17に準備した追撃下書き(応募状況データ再配布可否)は08-19 21:53:45にS9000011@section.metro.tokyo.jp宛へ実送信済み(messageId 1a01a15c14b761dd・新規スレッド1a00d8d0add68cf2)と2026-08-21にGmail実測で確認。返信は2026-08-21時点でまだ無し。※同時刻に既存スレッド19fc12565765b750への自分宛(誤送信)の重複コピーも存在するが実害無し(gmail_create_reply_draftの既知バグ・実送信は正しいアドレスに到達済み)。"
     },
     {
       "id": "kyoiku-aichi-0806",
@@ -233,9 +233,9 @@
       "sourceTaskId": "X-14",
       "sentDate": "2026-08-06",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "19fc12584c255e34",
-      "note": "8/6一斉送信23通のうち1件。08-17: 11日経過・返信無しのため「応募状況」データ再配布可否を尋ねる追撃下書きを準備済み(draftId r5378628432371614103・kkokyo@pref.fukuoka.lg.jp宛の新規下書き)。未送信・👤の送信待ち(full-review)。"
+      "note": "8/6一斉送信23通のうち1件。08-17に準備した追撃下書き(応募状況データ再配布可否)は08-19 21:53:47にkkokyo@pref.fukuoka.lg.jp宛へ実送信済み(messageId 1a01a15c7925164c・新規スレッド1a00d8d1a1103d94)と2026-08-21にGmail実測で確認。返信は2026-08-21時点でまだ無し。※同時刻に既存スレッド19fc12584c255e34への自分宛(誤送信)の重複コピーも存在するが実害無し(gmail_create_reply_draftの既知バグ・実送信は正しいアドレスに到達済み)。"
     },
     {
       "id": "kyoiku-hyogo-0806",
@@ -244,9 +244,9 @@
       "sourceTaskId": "X-14",
       "sentDate": "2026-08-06",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "19fc1259232a7713",
-      "note": "8/6一斉送信23通のうち1件。08-17: 11日経過・返信無しのため「応募状況」データ再配布可否を尋ねる追撃下書きを準備済み(draftId r-4034362545945390538・koukoukyouikuka@pref.hyogo.lg.jp宛の新規下書き)。未送信・👤の送信待ち(full-review)。"
+      "note": "8/6一斉送信23通のうち1件。08-17に準備した追撃下書き(応募状況データ再配布可否)は08-19 21:53:49にkoukoukyouikuka@pref.hyogo.lg.jp宛へ実送信済み(messageId 1a01a15d1cd55b64・新規スレッド1a00d8d263134871)と2026-08-21にGmail実測で確認。返信は2026-08-21時点でまだ無し。※同時刻に既存スレッド19fc1259232a7713への自分宛(誤送信)の重複コピーも存在するが実害無し(gmail_create_reply_draftの既知バグ・実送信は正しいアドレスに到達済み)。"
     },
     {
       "id": "kyoiku-tochigi-0806",
