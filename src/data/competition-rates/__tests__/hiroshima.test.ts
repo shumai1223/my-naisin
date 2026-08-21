@@ -131,6 +131,24 @@ describe('広島県 倍率パイプラインα（Y-6・全日制85校138レコ�
     expect(misuzugaokaR7?.department).toBe('グローカル探究');
   });
 
+  it('掛-1(学校別×多年度): 令和5年度(R5)分レコードが138件・85校収録され、全日制計(quota14,898・applicants14,974・倍率1.00)と完全一致する。学校名・学科名のキー集合はR6と完全一致し、統廃合・学科再編は無かった(広島市立美鈴が丘はR5時点でも「普通」のまま)', () => {
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    expect(r5.length).toBe(138);
+    expect(r5.reduce((a, r) => a + r.quota, 0)).toBe(14898);
+    expect(r5.reduce((a, r) => a + r.finalApplicants, 0)).toBe(14974);
+
+    const distinctSchools5 = new Set(r5.map((r) => r.schoolName));
+    expect(distinctSchools5.size).toBe(85);
+
+    const r5Keys = new Set(r5.map((r) => `${r.schoolName}|${r.department}`));
+    const r6Keys = new Set(r6.map((r) => `${r.schoolName}|${r.department}`));
+    expect(r5Keys).toEqual(r6Keys);
+
+    const misuzugaokaR5 = r5.find((r) => r.schoolName === '広島市立美鈴が丘');
+    expect(misuzugaokaR5?.department).toBe('普通');
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of HIROSHIMA_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.pref\.hiroshima\.lg\.jp\//);
