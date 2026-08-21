@@ -90,6 +90,32 @@ describe('愛媛県 倍率パイプラインα（Y-6・全日制43校99レコー
     expect(r7.some((r) => r.schoolName.includes('三間'))).toBe(false);
   });
 
+  it('掛-1(学校別×多年度): 令和5年度(R5)分レコードが104件収録され、「合計」(quota8,965・applicants7,941・倍率0.89)と完全一致する。R6(103件)との差分は+1件のみで学校集合は完全一致(51校=51校): 三崎の学科名がR5「普通」→R6「社会共創」に変更、宇和島東(本校)「情報ビジネス」はR5のみに存在しR6・R7いずれにも存在しない', () => {
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    expect(r5.length).toBe(104);
+    const sumQuota = r5.reduce((a, r) => a + r.quota, 0);
+    const sumApplicants = r5.reduce((a, r) => a + r.finalApplicants, 0);
+    expect(sumQuota).toBe(8965);
+    expect(sumApplicants).toBe(7941);
+
+    const distinctSchools = new Set(r5.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(51);
+
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    const r6Schools = new Set(r6.map((r) => r.schoolName));
+    expect(distinctSchools).toEqual(r6Schools);
+
+    expect(r5.find((r) => r.schoolName === '三崎')?.department).toBe('普通');
+    expect(r6.find((r) => r.schoolName === '三崎')?.department).toBe('社会共創');
+    expect(r5.some((r) => r.schoolName === '宇和島東（本校）' && r.department === '情報ビジネス')).toBe(true);
+    expect(r6.some((r) => r.schoolName === '宇和島東（本校）' && r.department === '情報ビジネス')).toBe(false);
+    const r7 = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
+    expect(r7.some((r) => r.schoolName === '宇和島東' && r.department === '情報ビジネス')).toBe(false);
+
+    expect(r5.some((r) => r.schoolName === '宇和島東（津島）')).toBe(true);
+    expect(r5.some((r) => r.schoolName === '北宇和（三間）')).toBe(true);
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of EHIME_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/ehime-(kyoiku|c)\.esnet\.ed\.jp\//);
