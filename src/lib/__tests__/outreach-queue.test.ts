@@ -251,7 +251,10 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // だったにもかかわらずledger未反映だった62件をledgerへ移しqueueから削除(233→171)。うち15件
     // (lane9-jsdp等・lane7大学3件を含む)はmessageId記録があってもgmail_threadで実際にはlabelIds='DRAFT'
     // のまま未送信と判明したためqueuedに残置(この15件は233→171の差分62件には含まれない)。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(171);
+    // 2026-08-21続き2: 上記反映作業が08-19 22:17台の第2波送信9件(jaue/zenkojoken/zentoku/jssace/
+    // geoedu/jash/terakoya-houjousha/yamaguchi-kyoikukai/nagasaki-kyoikukai)とedtech-frompage-ocans
+    // (21:52台送信)の計10件を見落としていたと判明し追加反映(171→161)。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(161);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {

@@ -1935,6 +1935,116 @@
       "followupCount": 0,
       "threadId": "1a010423621d14d5",
       "note": "T-C2で本文作成済みの候補が2026-08-15〜08-20の間にGmailで実送信されていたことを2026-08-21にin:sent実測で確認し反映(queueのmessageId=1a010423621d14d5と実際のGmail送信を突合)。"
+    },
+    {
+      "id": "lane7-jaue",
+      "org": "一般社団法人日本教育大学協会(JAUE)",
+      "lane": "npo",
+      "sourceTaskId": "T-C2",
+      "sentDate": "2026-08-19",
+      "status": "awaiting",
+      "followupCount": 0,
+      "threadId": "1a01a28a76d841b5",
+      "note": "08-19 22:17台の第2波送信(前回反映作業で見落とし)。2026-08-21にin:sent実測で確認し反映。"
+    },
+    {
+      "id": "lane9-zenkojoken",
+      "org": "全国高等学校情報教育研究会(全高情研)",
+      "lane": "npo",
+      "sourceTaskId": "T-C2",
+      "sentDate": "2026-08-19",
+      "status": "awaiting",
+      "followupCount": 0,
+      "threadId": "1a01a2896765fc50",
+      "note": "08-19 22:17台の第2波送信(前回反映作業で見落とし)。2026-08-21にin:sent実測で確認し反映。"
+    },
+    {
+      "id": "lane9-zentoku",
+      "org": "全国特別支援学校長会",
+      "lane": "npo",
+      "sourceTaskId": "T-C2",
+      "sentDate": "2026-08-19",
+      "status": "awaiting",
+      "followupCount": 0,
+      "threadId": "1a01a2886e73fc31",
+      "note": "08-19 22:17台の第2波送信(前回反映作業で見落とし)。2026-08-21にin:sent実測で確認し反映。"
+    },
+    {
+      "id": "lane9-jssace",
+      "org": "日本社会教育学会",
+      "lane": "npo",
+      "sourceTaskId": "T-C2",
+      "sentDate": "2026-08-19",
+      "status": "awaiting",
+      "followupCount": 0,
+      "threadId": "1a01a28764daf6c0",
+      "note": "08-19 22:17台の第2波送信(前回反映作業で見落とし)。2026-08-21にin:sent実測で確認し反映。"
+    },
+    {
+      "id": "lane9-geoedu",
+      "org": "日本地理教育学会",
+      "lane": "npo",
+      "sourceTaskId": "T-C2",
+      "sentDate": "2026-08-19",
+      "status": "awaiting",
+      "followupCount": 0,
+      "threadId": "1a01a286b0d48408",
+      "note": "08-19 22:17台の第2波送信(前回反映作業で見落とし)。2026-08-21にin:sent実測で確認し反映。"
+    },
+    {
+      "id": "lane9-jash",
+      "org": "一般社団法人日本学校保健学会",
+      "lane": "npo",
+      "sourceTaskId": "T-C2",
+      "sentDate": "2026-08-19",
+      "status": "awaiting",
+      "followupCount": 0,
+      "threadId": "1a01a285a3aec03b",
+      "note": "08-19 22:17台の第2波送信(前回反映作業で見落とし)。2026-08-21にin:sent実測で確認し反映。"
+    },
+    {
+      "id": "npo-terakoya-houjousha",
+      "org": "特定非営利活動法人寺子屋方丈舎",
+      "lane": "npo",
+      "sourceTaskId": "T-C2",
+      "sentDate": "2026-08-19",
+      "status": "awaiting",
+      "followupCount": 0,
+      "threadId": "1a01a2846002f903",
+      "note": "08-19 22:17台の第2波送信(前回反映作業で見落とし)。2026-08-21にin:sent実測で確認し反映。"
+    },
+    {
+      "id": "lane8-yamaguchi-kyoikukai",
+      "org": "一般財団法人山口県教育会",
+      "lane": "npo",
+      "sourceTaskId": "T-C2",
+      "sentDate": "2026-08-19",
+      "status": "awaiting",
+      "followupCount": 0,
+      "threadId": "1a01a2836105567c",
+      "note": "08-19 22:17台の第2波送信(前回反映作業で見落とし)。2026-08-21にin:sent実測で確認し反映。"
+    },
+    {
+      "id": "lane8-nagasaki-kyoikukai",
+      "org": "一般財団法人長崎県教育会",
+      "lane": "npo",
+      "sourceTaskId": "T-C2",
+      "sentDate": "2026-08-19",
+      "status": "awaiting",
+      "followupCount": 0,
+      "threadId": "1a01a28260216982",
+      "note": "08-19 22:17台の第2波送信(前回反映作業で見落とし)。2026-08-21にin:sent実測で確認し反映。"
+    },
+    {
+      "id": "edtech-frompage-ocans",
+      "org": "株式会社フロムページ(OCANs)",
+      "lane": "b2b-saas",
+      "sourceTaskId": "T-C2",
+      "sentDate": "2026-08-19",
+      "status": "awaiting",
+      "followupCount": 0,
+      "threadId": "1a01a27f6b245386",
+      "note": "08-19 21:52台送信(前回反映作業で見落とし)。2026-08-21にin:sent実測で確認し反映。"
     }
   ]
 }
