@@ -37,6 +37,7 @@
     "kpi:weekly": "npx tsx scripts/weekly-kpi-report.ts",
     "outreach:followup": "npx tsx scripts/outreach-followup-report.ts",
     "outreach:queue": "npx tsx scripts/outreach-queue-report.ts",
+    "annual-update:check": "npx tsx scripts/annual-update-check.ts",
     "school-master:build": "npx tsx scripts/build-school-master.ts",
     "ev:reconcile": "npx tsx scripts/reconcile-affiliate-economics.ts",
     "push-send": "npx tsx scripts/push-send.ts",
