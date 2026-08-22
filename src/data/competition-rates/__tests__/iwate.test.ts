@@ -93,9 +93,32 @@ describe('岩手県 倍率パイプラインα（Y-6・全日制59校113レコ�
     expect(r6Keys).toEqual(r7Keys);
   });
 
-  it('sourcesが公式PDF URLを正しく記録している', () => {
+  it('sourcesが公式PDF URLを正しく記録している（R5のみ同一運営者の旧ポータルwww2.iwate-ed.jpだが公式一次ソース）', () => {
     for (const s of IWATE_COMPETITION_RATES.sources) {
-      expect(s.url).toMatch(/^https:\/\/www\.pref\.iwate\.jp\//);
+      expect(s.url).toMatch(/^https:\/\/(www\.pref\.iwate\.jp|www2\.iwate-ed\.jp)\//);
+    }
+  });
+
+  it('掛-1(学校別×多年度): 令和5年度(R5)分レコードが117件・61校収録され、公式「合計」7,881/6,424と完全一致し、R6と学校名+学科名の組み合わせが完全一致する(R5はR6と同じく学校再編前で盛岡南/不来方/久慈工業/久慈東が個別校として存在)', () => {
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    expect(r5.length).toBe(117);
+    const distinctSchools = new Set(r5.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(61);
+    const sumQuota = r5.reduce((a, r) => a + r.quota, 0);
+    const sumApplicants = r5.reduce((a, r) => a + r.finalApplicants, 0);
+    expect(sumQuota).toBe(7881);
+    expect(sumApplicants).toBe(6424);
+
+    const r6Keys = new Set(r6.map((r) => `${r.schoolName}|${r.department}`));
+    const r5Keys = new Set(r5.map((r) => `${r.schoolName}|${r.department}`));
+    expect(r5Keys).toEqual(r6Keys);
+
+    for (const name of ['盛岡南', '不来方', '久慈工業', '久慈東']) {
+      expect(r5.some((r) => r.schoolName === name)).toBe(true);
+    }
+    for (const name of ['南昌みらい', '久慈翔北']) {
+      expect(r5.some((r) => r.schoolName === name)).toBe(false);
     }
   });
 });
