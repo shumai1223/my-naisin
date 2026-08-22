@@ -141,6 +141,38 @@ describe('熊本県 倍率パイプラインα（Y-6・全日制52校162レコ�
     expect(r6.some((r) => r.schoolName === '水俣' && r.department === '半導体情報')).toBe(false);
   });
 
+  it('掛-1(学校別×多年度・4年度目): 令和5年度(R5)分レコードが162件・52校収録され、全日制「計」行(quota8,362・applicants7,983・倍率0.95)と完全一致する。くくり募集3組(矢部・大津・上天草)もR6〜R8と同一パターンで存在する。水俣高校はR6と同一の「電気建築システム」1学科(電気コース)/(建築コース)の2コース制で半導体情報への分割は未発生。学校名・学科名のキー集合はR6とほぼ一致するが、必由館のみ実在の学科改編を確認: R5は「普通」学科(無コース・240人)+(国際コース)/(芸術コース)/(服飾デザインコース)の3コース制(計4レコード)だったが、R6以降は「文理総合探究」という新学科名の3コース制(無コース枠なし・計3レコード)に再編されている(R5が162件でR6より1件多いのはこの差分による)', () => {
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    expect(r5.length).toBe(162);
+    const distinctSchools = new Set(r5.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(52);
+    expect(r5.reduce((a, r) => a + r.quota, 0)).toBe(8362);
+    expect(r5.reduce((a, r) => a + r.finalApplicants, 0)).toBe(7983);
+
+    const kukuriNames = ['食農科学(農業科学コース)・(食・生活コース)', '普通・理数', '普通・(グローカル文理コース)'];
+    for (const dept of kukuriNames) {
+      expect(r5.filter((r) => r.department === dept).length).toBe(1);
+    }
+
+    const mizumata = r5.filter((r) => r.schoolName === '水俣');
+    expect(mizumata.map((r) => r.department)).toEqual(
+      expect.arrayContaining(['電気建築システム(電気コース)', '電気建築システム(建築コース)']),
+    );
+    expect(r5.some((r) => r.schoolName === '水俣' && r.department === '半導体情報')).toBe(false);
+
+    const hitsuyukan = r5.filter((r) => r.schoolName === '必由館');
+    expect(hitsuyukan.length).toBe(4);
+    expect(hitsuyukan.map((r) => r.department)).toEqual(
+      expect.arrayContaining(['普通', '普通(国際コース)', '普通(芸術コース)', '普通(服飾デザインコース)']),
+    );
+    expect(r5.some((r) => r.schoolName === '必由館' && r.department.startsWith('文理総合探究'))).toBe(false);
+
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    const r5Schools = new Set(r5.map((r) => r.schoolName));
+    const r6Schools = new Set(r6.map((r) => r.schoolName));
+    expect([...r5Schools].every((s) => r6Schools.has(s))).toBe(true);
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of KUMAMOTO_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.pref\.kumamoto\.jp\//);
