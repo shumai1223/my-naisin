@@ -97,6 +97,35 @@ describe('島根県 倍率パイプラインα（Y-6・全日制35校64レコー
     expect(distinctSchools.size).toBe(35);
   });
 
+  it('掛-1(学校別×多年度): 令和5年度(R5)分レコードが66件収録され、「合計」(quota4,227・applicants3,873)および「県立高校計」(quota4,122・applicants3,783)と完全一致する。R6より1件多いのは松江工業がR5時点で「機械・電子機械・電気・電子・情報技術・建築都市工学」の6学科構成だったため（R6以降は電気・電子が電気電子工学へ統合、情報技術が情報クリエイター学へ改称された5学科構成）。Wikipediaで2024年3月に両改編が実施されたことを確認した', () => {
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    expect(r5.length).toBe(66);
+    expect(r5.reduce((a, r) => a + r.quota, 0)).toBe(4227);
+    expect(r5.reduce((a, r) => a + r.finalApplicants, 0)).toBe(3873);
+
+    const r5Kenritsu = r5.filter((r) => r.schoolName !== '皆美が丘女子');
+    expect(r5Kenritsu.reduce((a, r) => a + r.quota, 0)).toBe(4122);
+    expect(r5Kenritsu.reduce((a, r) => a + r.finalApplicants, 0)).toBe(3783);
+
+    const matsueKougyoR5 = r5.filter((r) => r.schoolName === '松江工業');
+    expect(matsueKougyoR5.length).toBe(6);
+    expect(new Set(matsueKougyoR5.map((r) => r.department))).toEqual(
+      new Set(['機械', '電子機械', '電気', '電子', '情報技術', '建築都市工学']),
+    );
+
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    const r6Keys = new Set(r6.map((r) => `${r.schoolName}|${r.department}`));
+    const r5Keys = new Set(r5.map((r) => `${r.schoolName}|${r.department}`));
+    // 松江工業のみ学科構成が異なる（R5:6学科 vs R6:5学科）ため差分はこの1校分
+    const onlyInR5 = [...r5Keys].filter((k) => !r6Keys.has(k));
+    const onlyInR6 = [...r6Keys].filter((k) => !r5Keys.has(k));
+    expect(onlyInR5.every((k) => k.startsWith('松江工業|'))).toBe(true);
+    expect(onlyInR6.every((k) => k.startsWith('松江工業|'))).toBe(true);
+
+    const distinctSchools = new Set(r5.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(35);
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of SHIMANE_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www1?\.pref\.shimane\.lg\.jp\//);
