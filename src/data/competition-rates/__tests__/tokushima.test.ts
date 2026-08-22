@@ -94,6 +94,25 @@ describe('徳島県 倍率パイプラインα（Y-6・全日制32校69レコー
     expect(r6Keys.has('名西|芸術（音楽）')).toBe(false);
   });
 
+  it('掛-1(学校別×多年度): 令和5年度(R5)分レコードが68件・32校収録され、公式「合計」4,187/4,174と完全一致し(名西・芸術(音楽)はR5時点で募集人員0のため69件でなく68件)、学校名+学科名の集合がR8の部分集合である', () => {
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    expect(r5.length).toBe(68);
+    const distinctSchools = new Set(r5.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(32);
+    const sumQuota = r5.reduce((a, r) => a + r.quota, 0);
+    const sumApplicants = r5.reduce((a, r) => a + r.finalApplicants, 0);
+    expect(sumQuota).toBe(4187);
+    expect(sumApplicants).toBe(4174);
+
+    const r8Keys = new Set(r8.map((r) => `${r.schoolName}|${r.department}`));
+    const r5Keys = new Set(r5.map((r) => `${r.schoolName}|${r.department}`));
+    expect(r8Keys.size - r5Keys.size).toBe(1);
+    for (const key of r5Keys) {
+      expect(r8Keys.has(key)).toBe(true);
+    }
+    expect(r5Keys.has('名西|芸術（音楽）')).toBe(false);
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of TOKUSHIMA_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/nyuushi\.tokushima-ec\.ed\.jp\//);
