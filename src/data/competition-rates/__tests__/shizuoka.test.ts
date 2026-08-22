@@ -80,6 +80,44 @@ describe('静岡県 倍率パイプラインα（Y-6・全日制90校162レコ�
     }
   });
 
+  it('掛-1(学校別×多年度): 令和5年度(R5)分レコードが163件(90校)収録され、PDF末尾の合計行(quota18,598・applicants19,284・倍率1.04)と完全一致する。学科名の印字表記はR6/R7と同じ「科」を付けない形式で完全一致するが、掛川工業のみ学科構成が異なる(R5「機械・電子機械・電子電気・情報技術・環境設備」の5学科・総定員200 → R6以降「機械工学・電気電子工学・情報工学・建築設備工学」の4学科・総定員160に再編、というR5→R6間の実データ差分をR6以降のキー集合との比較で検出できる)。それ以外の89校はR6と学校名+学科名のキー集合が完全一致する', () => {
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    expect(r5.length).toBe(163);
+    expect(r5.reduce((a, r) => a + r.quota, 0)).toBe(18598);
+    expect(r5.reduce((a, r) => a + r.finalApplicants, 0)).toBe(19284);
+
+    const distinctSchools5 = new Set(r5.map((r) => r.schoolName));
+    expect(distinctSchools5.size).toBe(90);
+
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    const r5Keys = new Set(r5.map((r) => `${r.schoolName}|${r.department}`));
+    const r6Keys = new Set(r6.map((r) => `${r.schoolName}|${r.department}`));
+
+    // 掛川工業のみR5→R6で学科再編（5学科→4学科）。それ以外の89校・160レコードのキーは完全一致する。
+    const r5Only = [...r5Keys].filter((k) => !r6Keys.has(k));
+    const r6Only = [...r6Keys].filter((k) => !r5Keys.has(k));
+    expect(r5Only.sort()).toEqual([
+      '掛川工業|情報技術',
+      '掛川工業|環境設備',
+      '掛川工業|機械',
+      '掛川工業|電子機械',
+      '掛川工業|電子電気',
+    ].sort());
+    expect(r6Only.sort()).toEqual([
+      '掛川工業|建築設備工学',
+      '掛川工業|情報工学',
+      '掛川工業|機械工学',
+      '掛川工業|電気電子工学',
+    ].sort());
+
+    const kakegawaR5 = r5.filter((r) => r.schoolName === '掛川工業');
+    expect(kakegawaR5.length).toBe(5);
+    expect(kakegawaR5.reduce((a, r) => a + r.quota, 0)).toBe(200);
+    const kakegawaR6 = r6.filter((r) => r.schoolName === '掛川工業');
+    expect(kakegawaR6.length).toBe(4);
+    expect(kakegawaR6.reduce((a, r) => a + r.quota, 0)).toBe(160);
+  });
+
   it('複数学科校が正しく収録されている', () => {
     const multiDeptSchools: Record<string, number> = {
       下田: 2,
