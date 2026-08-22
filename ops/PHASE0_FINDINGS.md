@@ -70,8 +70,8 @@
 
 | # | 取っていないもの | なぜ効くか |
 |---|---|---|
-| D-1 | **`AFFILIATES` の live 34本の href 生存確認** | プログラム終了・URL失効なら**EVは全部ゼロ**。5成果物の円が全部その上に乗っている。※`/go/[id]` をボットUAで叩いても `route.ts:79-82` でホーム退避するだけで href は見えない。**`affiliates.ts` の href を直接 curl する**のが正しい経路（D1を汚さない） |
-| D-2 | `/api/stats/distribution?metric=total-score` と `=naishin` | DW-1 は **hensachi しか curl していない**。`total-score` は n=48 で k閾値30を超えており、**同じ汚染値が公開されている可能性が未確認** |
+| D-1 | ✅2026-08-17完了・2026-08-23再確認(`ops/THREATS.md` 脅威6(TH-4)参照)。`npm run check:affiliate-links`(要`NODE_TLS_REJECT_UNAUTHORIZED=0`)で34本中デッドリンク0件・警告3件(sapuri-*のHTTP403・到達自体は確認済み) | プログラム終了・URL失効なら**EVは全部ゼロ**。5成果物の円が全部その上に乗っている。※`/go/[id]` をボットUAで叩いても `route.ts:79-82` でホーム退避するだけで href は見えない。**`affiliates.ts` の href を直接 curl する**のが正しい経路（D1を汚さない） |
+| D-2 | ✅2026-08-23完了(`ops/THREATS.md` 脅威7早期警戒指標③参照)。total-score(trusted=0が48件)・naishin(trusted=0が8件)ともtrusted=1がminSampleSize未満のためAPI実測で`insufficientData:true`・非公開を確認。汚染値は公開されていない | DW-1 は **hensachi しか curl していない**。`total-score` は n=48 で k閾値30を超えており、**同じ汚染値が公開されている可能性が未確認** |
 | D-3 | `/pref/[code]`（県ハブ）の本番HTML | 学校ページ3,089枚への唯一の一覧経路（`pref/[code]/page.tsx:692`）。MONEY §4-b が「換金コード0ヒット」と判定した面だが、本番の実描画は未確認 |
 | D-4 | `robots.txt` / `llms.txt` の実物 | STATE は `robots.ts` のソースを読んだだけ。本番配信物は未取得 |
 | D-5 | 競合の `robots.txt` / `sitemap.xml` / Wayback | BAR 差-5「公表当日に更新できる体制」の**競合側の更新頻度が推測**（「年1回のバッチ更新に見える」）。Wayback は memory `[[cowork-division-of-labor]]` で **loop実行可**と明記されているのに未実行 |
