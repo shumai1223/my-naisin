@@ -122,6 +122,50 @@ describe('鳥取県 倍率パイプラインα（Y-6・全日制22校43レコー
     expect(distinctSchools.size).toBe(22);
   });
 
+  it('掛-1(学校別×多年度): 令和5年度(R5)分レコードが46件収録され、県計(quota3,040・applicants2,757)および地区別小計と完全一致する', () => {
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    expect(r5.length).toBe(46);
+    expect(r5.reduce((a, r) => a + r.quota, 0)).toBe(3040);
+    expect(r5.reduce((a, r) => a + r.finalApplicants, 0)).toBe(2757);
+
+    const sumArea = (area: string) => {
+      const rs = r5.filter((r) => r.area === area);
+      return { quota: rs.reduce((a, r) => a + r.quota, 0), applicants: rs.reduce((a, r) => a + r.finalApplicants, 0) };
+    };
+    expect(sumArea('東部')).toEqual({ quota: 1234, applicants: 1106 });
+    expect(sumArea('中部')).toEqual({ quota: 560, applicants: 450 });
+    expect(sumArea('西部')).toEqual({ quota: 1246, applicants: 1201 });
+
+    const distinctSchools = new Set(r5.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(22);
+  });
+
+  it('掛-1(実データ差分): 令和5年度(R5)時点の鳥取工業は4学科が個別quotaで独立収録され(くくり募集ではない)、R6以降の完全統合くくり募集とは異なる', () => {
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    const tottoriKogyoR5 = r5.filter((r) => r.schoolName === '鳥取工業');
+    expect(tottoriKogyoR5).toEqual([
+      { schoolName: '鳥取工業', area: '東部', department: '機械', quota: 30, finalApplicants: 14, finalRate: 0.47, fiscalYear: '令和5年度（2023年度）' },
+      { schoolName: '鳥取工業', area: '東部', department: '電気', quota: 23, finalApplicants: 8, finalRate: 0.35, fiscalYear: '令和5年度（2023年度）' },
+      { schoolName: '鳥取工業', area: '東部', department: '制御・情報', quota: 25, finalApplicants: 17, finalRate: 0.68, fiscalYear: '令和5年度（2023年度）' },
+      { schoolName: '鳥取工業', area: '東部', department: '建設工学', quota: 22, finalApplicants: 9, finalRate: 0.41, fiscalYear: '令和5年度（2023年度）' },
+    ]);
+
+    const tottoriKogyoR6 = records.find(
+      (r) => r.schoolName === '鳥取工業' && r.fiscalYear === '令和6年度（2024年度）',
+    );
+    expect(tottoriKogyoR6?.department).toBe('工業（機械・電気・情報工学・建設工学）（くくり募集）');
+  });
+
+  it('掛-1(実データ差分): 米子南の学科名がR5→R6以降で改称されている(ビジネス情報→ITビジネス、生活文化→生活創造)', () => {
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）' && r.schoolName === '米子南');
+    const r5Departments = r5.map((r) => r.department).sort();
+    expect(r5Departments).toEqual(['ビジネス情報', '生活文化（環境文化）', '生活文化（調理）'].sort());
+
+    const r7 = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）' && r.schoolName === '米子南');
+    const r7Departments = r7.map((r) => r.department).sort();
+    expect(r7Departments).toEqual(['ITビジネス', '生活創造(ライフデザイン)', '生活創造(調理)'].sort());
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of TOTTORI_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.pref\.tottori\.lg\.jp\//);

@@ -41,6 +41,25 @@
  * 募集）とは学科名・学科数とも異なる。誤読ではなくR6→R7間の実在の学科再編（3学科→2学科への統合・
  * 改称）と判断し、R6時点の実際の学科名をそのまま収録した（他県の学科改編発見パターンと同様、
  * 過去年度のラベルを新年度のラベルへ機械的にコピーしない原則を遵守）。
+ *
+ * ⚠️掛-1（tottori横展開R5完結・4年度目）: R5の一次資料はとりネット「令和５年度県立高等学校入学者選抜
+ * 関係資料等」（https://www.pref.tottori.lg.jp/295710.htm）のリンク一覧から発見した単独PDF「令和５
+ * 年度鳥取県立高等学校一般入学者選抜最終志願者数等について」（資料提供2月24日・全8頁）で、R6と同型の
+ * 1〜4頁地区別概要＋5〜7頁全日制学校別詳細表（東部/中部/西部）＋8頁定時制詳細表という構成だった。
+ * R6/R7/R8同様pdftotextは日本語ラベルが文字化けするためpdftoppm 300dpiビジョン解析で転記した。
+ * 県計（全日制・quota3,040・applicants2,757・倍率0.91）および東部（quota1,234・applicants1,106・
+ * 倍率0.90）/中部（quota560・applicants450・倍率0.80）/西部（quota1,246・applicants1,201・倍率0.96）
+ * の3地区別小計行すべてがnode.js機械集計と完全一致した（初回転記で一致・再修正なし）。22校は同数だが、
+ * レコード数はR6-R8の43件に対しR5は46件（下記①の鳥取工業の実在差により+3件）。
+ * ⚠️R5固有の実在差（学科再編・改称を複数発見。過去年度のラベルを新年度へ機械的に遡及コピーしない原則を
+ * 遵守し、R5時点の実際の学科名・募集単位をそのまま収録した）:
+ * ①鳥取工業（機械／電気／制御・情報／建設工学）: R5時点は実質募集定員が4学科に個別配分されており独立
+ *   4レコード（quota30/23/25/22・applicants14/8/17/9）として収録した。R6以降にR7/R8で確認済みの
+ *   「工業（機械・電気・情報工学・建設工学）（くくり募集）」への完全統合くくり募集に再編されたと判断
+ *   した（学科名「制御・情報」もR6以降「情報工学」へ改称）。
+ * ②米子南「ビジネス情報」（quota76・applicants67）はR6以降「ＩＴビジネス」に改称。
+ * ③米子南「生活文化（環境文化）」「生活文化（調理）」（quota11/12・applicants12/14）はR6以降
+ *   「生活創造（ライフデザイン）」「生活創造（調理）」に改称。
  */
 import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
 
@@ -64,6 +83,12 @@ export const TOTTORI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       docTitle: '鳥取県教育委員会 令和6年度県立高等学校一般入学者選抜最終志願者数等について',
       fiscalYear: '令和6年度（2024年度）',
       fetchedAt: '2026-08-08',
+    },
+    {
+      url: 'https://www.pref.tottori.lg.jp/secure/1311267/R5ippannsaisyuushigan.pdf',
+      docTitle: '鳥取県教育委員会 令和5年度鳥取県立高等学校一般入学者選抜最終志願者数等について',
+      fiscalYear: '令和5年度（2023年度）',
+      fetchedAt: '2026-08-22',
     },
   ],
   coverage: {
@@ -208,5 +233,51 @@ export const TOTTORI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '境港総合技術', area: '西部', department: '電気電子', quota: 37, finalApplicants: 10, finalRate: 0.27, fiscalYear: '令和6年度（2024年度）' },
     { schoolName: '境港総合技術', area: '西部', department: '福祉', quota: 29, finalApplicants: 19, finalRate: 0.66, fiscalYear: '令和6年度（2024年度）' },
     { schoolName: '日野', area: '西部', department: '総合', quota: 64, finalApplicants: 23, finalRate: 0.36, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '鳥取東', area: '東部', department: '普通・理数（くくり募集）', quota: 280, finalApplicants: 285, finalRate: 1.02, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '鳥取西', area: '東部', department: '普通', quota: 275, finalApplicants: 284, finalRate: 1.03, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '鳥取商業', area: '東部', department: '商業', quota: 102, finalApplicants: 120, finalRate: 1.18, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '鳥取工業', area: '東部', department: '機械', quota: 30, finalApplicants: 14, finalRate: 0.47, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '鳥取工業', area: '東部', department: '電気', quota: 23, finalApplicants: 8, finalRate: 0.35, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '鳥取工業', area: '東部', department: '制御・情報', quota: 25, finalApplicants: 17, finalRate: 0.68, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '鳥取工業', area: '東部', department: '建設工学', quota: 22, finalApplicants: 9, finalRate: 0.41, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '鳥取湖陵', area: '東部', department: '食品システム', quota: 19, finalApplicants: 22, finalRate: 1.16, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '鳥取湖陵', area: '東部', department: '緑地デザイン', quota: 30, finalApplicants: 14, finalRate: 0.47, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '鳥取湖陵', area: '東部', department: '電子機械', quota: 30, finalApplicants: 12, finalRate: 0.40, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '鳥取湖陵', area: '東部', department: '人間環境', quota: 19, finalApplicants: 16, finalRate: 0.84, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '鳥取湖陵', area: '東部', department: '情報科学', quota: 19, finalApplicants: 17, finalRate: 0.89, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '青谷', area: '東部', department: '総合', quota: 60, finalApplicants: 32, finalRate: 0.53, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '岩美', area: '東部', department: '普通', quota: 38, finalApplicants: 34, finalRate: 0.89, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '八頭', area: '東部', department: '普通', quota: 208, finalApplicants: 207, finalRate: 1.00, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '智頭農林', area: '東部', department: 'ふるさと創造・森林科学・生活環境（くくり募集）', quota: 54, finalApplicants: 15, finalRate: 0.28, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '倉吉東', area: '中部', department: '普通', quota: 195, finalApplicants: 190, finalRate: 0.97, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '倉吉西', area: '中部', department: '普通', quota: 96, finalApplicants: 79, finalRate: 0.82, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '倉吉農業', area: '中部', department: '生物', quota: 24, finalApplicants: 12, finalRate: 0.50, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '倉吉農業', area: '中部', department: '食品', quota: 29, finalApplicants: 17, finalRate: 0.59, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '倉吉農業', area: '中部', department: '環境', quota: 32, finalApplicants: 15, finalRate: 0.47, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '倉吉総合産業', area: '中部', department: '機械', quota: 24, finalApplicants: 21, finalRate: 0.88, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '倉吉総合産業', area: '中部', department: '電気', quota: 23, finalApplicants: 20, finalRate: 0.87, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '倉吉総合産業', area: '中部', department: 'ビジネス', quota: 23, finalApplicants: 30, finalRate: 1.30, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '倉吉総合産業', area: '中部', department: '生活デザイン', quota: 23, finalApplicants: 25, finalRate: 1.09, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '鳥取中央育英', area: '中部', department: '普通', quota: 91, finalApplicants: 41, finalRate: 0.45, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '米子東', area: '西部', department: '普通（生命科学）', quota: 40, finalApplicants: 58, finalRate: 1.45, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '米子東', area: '西部', department: '普通（普通）', quota: 240, finalApplicants: 282, finalRate: 1.18, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '米子西', area: '西部', department: '普通', quota: 245, finalApplicants: 306, finalRate: 1.25, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '米子', area: '西部', department: '総合', quota: 114, finalApplicants: 114, finalRate: 1.00, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '米子南', area: '西部', department: 'ビジネス情報', quota: 76, finalApplicants: 67, finalRate: 0.88, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '米子南', area: '西部', department: '生活文化（環境文化）', quota: 11, finalApplicants: 12, finalRate: 1.09, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '米子南', area: '西部', department: '生活文化（調理）', quota: 12, finalApplicants: 14, finalRate: 1.17, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '米子工業', area: '西部', department: '機械', quota: 22, finalApplicants: 12, finalRate: 0.55, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '米子工業', area: '西部', department: '電気', quota: 29, finalApplicants: 11, finalRate: 0.38, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '米子工業', area: '西部', department: '情報電子', quota: 21, finalApplicants: 30, finalRate: 1.43, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '米子工業', area: '西部', department: '環境エネルギー', quota: 30, finalApplicants: 17, finalRate: 0.57, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '米子工業', area: '西部', department: '建設（土木）', quota: 15, finalApplicants: 12, finalRate: 0.80, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '米子工業', area: '西部', department: '建設（建築）', quota: 10, finalApplicants: 18, finalRate: 1.80, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '境', area: '西部', department: '普通', quota: 150, finalApplicants: 161, finalRate: 1.07, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '境港総合技術', area: '西部', department: '海洋', quota: 29, finalApplicants: 20, finalRate: 0.69, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '境港総合技術', area: '西部', department: '食品・ビジネス', quota: 34, finalApplicants: 15, finalRate: 0.44, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '境港総合技術', area: '西部', department: '機械', quota: 34, finalApplicants: 11, finalRate: 0.32, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '境港総合技術', area: '西部', department: '電気電子', quota: 36, finalApplicants: 13, finalRate: 0.36, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '境港総合技術', area: '西部', department: '福祉', quota: 30, finalApplicants: 16, finalRate: 0.53, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '日野', area: '西部', department: '総合', quota: 68, finalApplicants: 12, finalRate: 0.18, fiscalYear: '令和5年度（2023年度）' },
   ],
 };
