@@ -1,8 +1,8 @@
 import { INTERIM_BULLETIN_REGISTRY } from '../interim-rate-bulletin-registry';
 
 describe('冬の倍率速報体制（Y-11フェーズ1）台帳の不変条件', () => {
-  it('2026-08-22調査分の8県を収録している', () => {
-    expect(INTERIM_BULLETIN_REGISTRY).toHaveLength(8);
+  it('2026-08-22調査分の18県(第1弾8県+第2弾10県)を収録している', () => {
+    expect(INTERIM_BULLETIN_REGISTRY).toHaveLength(18);
   });
 
   it('prefectureCodeに重複が無い', () => {
@@ -36,5 +36,26 @@ describe('冬の倍率速報体制（Y-11フェーズ1）台帳の不変条件',
     const kumamoto = INTERIM_BULLETIN_REGISTRY.find((e) => e.prefectureCode === 'kumamoto');
     expect(kumamoto).toBeDefined();
     expect(kumamoto?.interimIncludesRate).toBe(false);
+  });
+
+  it('第2バッチ(2026-08-22)の10県を収録している', () => {
+    const batch2 = ['chiba', 'saitama', 'kanagawa', 'aichi', 'osaka', 'hyogo', 'hiroshima', 'fukushima', 'hokkaido', 'aomori'];
+    const codes = new Set(INTERIM_BULLETIN_REGISTRY.map((e) => e.prefectureCode));
+    for (const code of batch2) {
+      expect(codes.has(code)).toBe(true);
+    }
+  });
+
+  it('hokkaidoは4段階以上の多段階公表構造(石川・東京と同型)と明記されている', () => {
+    const hokkaido = INTERIM_BULLETIN_REGISTRY.find((e) => e.prefectureCode === 'hokkaido');
+    expect(hokkaido).toBeDefined();
+    expect(hokkaido?.status).toBe('confirmed-multistage');
+    expect(hokkaido?.interimIncludesRate).toBe(true);
+  });
+
+  it('aomoriは先行速報の実在を断定できず正直にunconfirmedとしている(捏造ゼロ原則)', () => {
+    const aomori = INTERIM_BULLETIN_REGISTRY.find((e) => e.prefectureCode === 'aomori');
+    expect(aomori).toBeDefined();
+    expect(aomori?.status).toBe('unconfirmed');
   });
 });
