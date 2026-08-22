@@ -7,10 +7,11 @@ import { PREFECTURE_TUITION_SUBSIDY_REGISTRY, PrefectureTuitionSubsidyEntry } fr
 const ALPHA_PREFECTURES = ['tokyo', 'kanagawa', 'osaka', 'chiba', 'saitama', 'aichi', 'fukuoka', 'hokkaido', 'hyogo', 'shizuoka'];
 const BATCH2_PREFECTURES = ['aomori', 'iwate', 'miyagi', 'akita', 'yamagata', 'fukushima', 'ibaraki', 'tochigi', 'gunma', 'niigata'];
 const BATCH3_PREFECTURES = ['toyama', 'ishikawa', 'fukui', 'yamanashi', 'nagano', 'gifu', 'mie', 'shiga', 'kyoto', 'nara'];
-const ALL_INVESTIGATED_PREFECTURES = [...ALPHA_PREFECTURES, ...BATCH2_PREFECTURES, ...BATCH3_PREFECTURES];
+const BATCH4_PREFECTURES = ['wakayama', 'tottori', 'shimane', 'okayama', 'hiroshima', 'yamaguchi', 'tokushima', 'kagawa', 'ehime', 'kochi'];
+const ALL_INVESTIGATED_PREFECTURES = [...ALPHA_PREFECTURES, ...BATCH2_PREFECTURES, ...BATCH3_PREFECTURES, ...BATCH4_PREFECTURES];
 
-describe('PREFECTURE_TUITION_SUBSIDY_REGISTRY（Y-9αバッチ+第2バッチ+第3バッチ・計30県）', () => {
-  it('αバッチ+第2バッチ+第3バッチ対象の30県すべてが登録されている', () => {
+describe('PREFECTURE_TUITION_SUBSIDY_REGISTRY（Y-9αバッチ+第2バッチ+第3バッチ+第4バッチ・計40県）', () => {
+  it('αバッチ+第2バッチ+第3バッチ+第4バッチ対象の40県すべてが登録されている', () => {
     const codes = PREFECTURE_TUITION_SUBSIDY_REGISTRY.map((e) => e.prefectureCode).sort();
     expect(codes).toEqual([...ALL_INVESTIGATED_PREFECTURES].sort());
   });
@@ -131,5 +132,45 @@ describe('PREFECTURE_TUITION_SUBSIDY_REGISTRY（Y-9αバッチ+第2バッチ+第
     const nara = PREFECTURE_TUITION_SUBSIDY_REGISTRY.find((e) => e.prefectureCode === 'nara') as PrefectureTuitionSubsidyEntry;
     expect(nara.status).toBe('confirmed');
     expect(nara.confidence).toBe('medium');
+  });
+
+  it('第4バッチのunconfirmed4県(和歌山/山口/愛媛/高知)もsourceを持たず断定しない', () => {
+    const batch4Unconfirmed = ['wakayama', 'yamaguchi', 'ehime', 'kochi'];
+    for (const code of batch4Unconfirmed) {
+      const entry = PREFECTURE_TUITION_SUBSIDY_REGISTRY.find((e) => e.prefectureCode === code) as PrefectureTuitionSubsidyEntry;
+      expect(entry.status).toBe('unconfirmed');
+      expect(entry.source).toBeUndefined();
+      expect(entry.programName).toBeUndefined();
+    }
+  });
+
+  it('岡山県・香川県は所得区分別の具体的な金額が公式ページから直接確認できたためconfidence:high', () => {
+    for (const code of ['okayama', 'kagawa']) {
+      const entry = PREFECTURE_TUITION_SUBSIDY_REGISTRY.find((e) => e.prefectureCode === code) as PrefectureTuitionSubsidyEntry;
+      expect(entry.status).toBe('confirmed');
+      expect(entry.confidence).toBe('high');
+      expect(entry.subsidyAmountNote).toMatch(/\d{2,3},\d{3}円|\d{2,3}0円/);
+    }
+  });
+
+  it('島根県は円建ての固定額でなく「授業料−就学支援金の差額補填型」の仕組みで確認された', () => {
+    const shimane = PREFECTURE_TUITION_SUBSIDY_REGISTRY.find((e) => e.prefectureCode === 'shimane') as PrefectureTuitionSubsidyEntry;
+    expect(shimane.status).toBe('confirmed');
+    expect(shimane.confidence).toBe('high');
+    expect(shimane.subsidyAmountNote).toMatch(/差額補填型/);
+  });
+
+  it('鳥取県・広島県・徳島県は制度名は確認できたが金額はリーフレットPDF参照のみのためconfidence:medium', () => {
+    for (const code of ['tottori', 'hiroshima', 'tokushima']) {
+      const entry = PREFECTURE_TUITION_SUBSIDY_REGISTRY.find((e) => e.prefectureCode === code) as PrefectureTuitionSubsidyEntry;
+      expect(entry.status).toBe('confirmed');
+      expect(entry.confidence).toBe('medium');
+    }
+  });
+
+  it('山口県は制度名に「授業料等」を含むが実際は入学金減免のみのためunconfirmedのまま(捏造回避)', () => {
+    const yamaguchi = PREFECTURE_TUITION_SUBSIDY_REGISTRY.find((e) => e.prefectureCode === 'yamaguchi') as PrefectureTuitionSubsidyEntry;
+    expect(yamaguchi.status).toBe('unconfirmed');
+    expect(yamaguchi.note).toMatch(/入学金減免/);
   });
 });
