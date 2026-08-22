@@ -107,6 +107,47 @@ describe('鹿児島県 倍率パイプラインα（Y-6・全日制68校156レ�
     expect([...distinctSchools].every((s) => r8Schools.has(s))).toBe(true);
   });
 
+  it('掛-1(学校別×多年度): 令和5年度(R5)分レコードが153件・68校収録され、「全日制合計」(quota11,094・applicants9,025)と完全一致する。7学区すべての学区合計行(鹿児島3795/3784・南薩1107/676・北薩1569/1133・姶良伊佐1724/1455・大隅1516/1136・熊毛395/236・大島988/605)とも完全一致する。学校名のキー集合はR6/R7/R8と完全一致(統廃合なし)。喜界(商業)がR5時点で最終出願者数0だった', () => {
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    expect(r5.length).toBe(153);
+    const distinctSchools = new Set(r5.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(68);
+    expect(r5.reduce((a, r) => a + r.quota, 0)).toBe(11094);
+    expect(r5.reduce((a, r) => a + r.finalApplicants, 0)).toBe(9025);
+
+    const districts: Record<string, string[]> = {
+      鹿児島: ['鶴丸', '甲南', '鹿児島中央', '錦江湾', '武岡台', '開陽', '明桜館', '松陽', '鹿児島東', '鹿児島工業', '鹿児島南', '吹上', '伊集院', '市来農芸', '串木野', '鹿児島玉龍', '鹿児島商業', '鹿児島女子'],
+      南薩: ['指宿', '山川', '頴娃', '枕崎', '鹿児島水産', '加世田', '加世田常潤', '川辺', '薩南工業', '指宿商業'],
+      北薩: ['川内', '川内商工', '川薩清修館', '薩摩中央', '鶴翔', '野田女子', '出水', '出水工業', '出水商業'],
+      姶良伊佐: ['大口', '伊佐農林', '霧島', '蒲生', '加治木', '加治木工業', '隼人工業', '国分', '福山', '国分中央'],
+      大隅: ['曽於', '志布志', '串良商業', '楠隼', '鹿屋', '鹿屋農業', '鹿屋工業', '垂水', '南大隅', '鹿屋女子'],
+      熊毛: ['種子島', '種子島中央', '屋久島'],
+      大島: ['大島', '奄美', '大島北', '古仁屋', '喜界', '徳之島', '沖永良部', '与論'],
+    };
+    const expectedDistrictTotals: Record<string, { quota: number; applicants: number }> = {
+      鹿児島: { quota: 3795, applicants: 3784 },
+      南薩: { quota: 1107, applicants: 676 },
+      北薩: { quota: 1569, applicants: 1133 },
+      姶良伊佐: { quota: 1724, applicants: 1455 },
+      大隅: { quota: 1516, applicants: 1136 },
+      熊毛: { quota: 395, applicants: 236 },
+      大島: { quota: 988, applicants: 605 },
+    };
+    for (const [district, schoolNames] of Object.entries(districts)) {
+      const recs = r5.filter((r) => schoolNames.includes(r.schoolName));
+      const exp = expectedDistrictTotals[district];
+      expect(recs.reduce((a, r) => a + r.quota, 0)).toBe(exp.quota);
+      expect(recs.reduce((a, r) => a + r.finalApplicants, 0)).toBe(exp.applicants);
+    }
+
+    expect(r5.find((r) => r.schoolName === '喜界' && r.department === '商業')).toMatchObject({ finalApplicants: 0 });
+    expect(r5.find((r) => r.schoolName === '与論')).toMatchObject({ finalApplicants: 1 });
+
+    const r5Schools = new Set(r5.map((r) => r.schoolName));
+    const r8Schools = new Set(r8.map((r) => r.schoolName));
+    expect([...r5Schools].every((s) => r8Schools.has(s))).toBe(true);
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of KAGOSHIMA_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.pref\.kagoshima\.jp\//);
