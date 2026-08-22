@@ -114,6 +114,25 @@ describe('宮崎県 倍率パイプラインα（Y-6・全日制34校104レコ�
     }
   });
 
+  it('掛-1(学校別×多年度): 令和5年度(R5)分レコードが104件・34校収録され、公式「全日制合計」4,106/3,514と完全一致する。R6と学校名+学科名の組み合わせが完全一致する(学校再編なし・飯野「普通」もR5時点は改称前)', () => {
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    expect(r5.length).toBe(104);
+    const distinctSchools = new Set(r5.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(34);
+    const sumQuota = r5.reduce((a, r) => a + r.quota, 0);
+    const sumApplicants = r5.reduce((a, r) => a + r.finalApplicants, 0);
+    expect(sumQuota).toBe(4106);
+    expect(sumApplicants).toBe(3514);
+
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    const r6Keys = new Set(r6.map((r) => `${r.schoolName}|${r.department}`));
+    const r5Keys = new Set(r5.map((r) => `${r.schoolName}|${r.department}`));
+    expect(r5Keys.size).toBe(r6Keys.size);
+    for (const key of r5Keys) {
+      expect(r6Keys.has(key)).toBe(true);
+    }
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of MIYAZAKI_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.pref\.miyazaki\.lg\.jp\//);
