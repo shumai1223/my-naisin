@@ -91,4 +91,35 @@ describe('滋賀県 倍率パイプラインα（Y-6・全日制44校61レコー
       expect(s.url).toMatch(/^https:\/\/www\.pref\.shiga\.lg\.jp\//);
     }
   });
+
+  it('掛-1(学校別×多年度): 令和5年度(R5)分レコードが61件・44校収録され、旧制度の全日制「計①」行(quota6,286・applicants6,689・倍率1.06)と完全一致する。R5の「両方の学科」統合校は膳所・草津東・栗東・米原・高島の5校でR6と完全に同一構成であり、守山北は「普通」単独学科(みらい共創との統合はR7から)、伊香も「普通」単独(森の探究はR7で新設)だったことを確認した', () => {
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    expect(r5.length).toBe(61);
+    expect(r5.reduce((a, r) => a + r.quota, 0)).toBe(6286);
+    expect(r5.reduce((a, r) => a + r.finalApplicants, 0)).toBe(6689);
+
+    const distinctSchools5 = new Set(r5.map((r) => r.schoolName));
+    expect(distinctSchools5.size).toBe(44);
+
+    for (const school of ['膳所', '草津東', '栗東', '米原', '高島']) {
+      const rec = r5.find((r) => r.schoolName === school);
+      expect(rec).toBeDefined();
+      expect(rec!.department).toContain('両方の学科・くくり');
+    }
+
+    const moriyamakitaR5 = r5.find((r) => r.schoolName === '守山北');
+    expect(moriyamakitaR5?.department).toBe('普通');
+    const moriyamakitaR6 = r6.find((r) => r.schoolName === '守山北');
+    expect(moriyamakitaR6?.department).toBe('普通');
+
+    expect(r5.filter((r) => r.schoolName === '伊香')).toHaveLength(1);
+
+    // R5とR6は同一44校61レコードだが実データ(倍率)は年度で異なる実測値であることを明示する回帰ガード。
+    const zezeR5 = r5.find((r) => r.schoolName === '膳所')!;
+    const zezeR6 = r6.find((r) => r.schoolName === '膳所')!;
+    expect(zezeR5.finalApplicants).toBe(394);
+    expect(zezeR6.finalApplicants).toBe(350);
+    expect(zezeR5.finalApplicants).not.toBe(zezeR6.finalApplicants);
+  });
 });
