@@ -1,8 +1,8 @@
 import { INTERIM_BULLETIN_REGISTRY } from '../interim-rate-bulletin-registry';
 
 describe('冬の倍率速報体制（Y-11フェーズ1）台帳の不変条件', () => {
-  it('2026-08-22調査分の18県(第1弾8県+第2弾10県)を収録している', () => {
-    expect(INTERIM_BULLETIN_REGISTRY).toHaveLength(18);
+  it('2026-08-22調査分の28県(第1弾8県+第2弾10県+第3弾10県)を収録している', () => {
+    expect(INTERIM_BULLETIN_REGISTRY).toHaveLength(28);
   });
 
   it('prefectureCodeに重複が無い', () => {
@@ -57,5 +57,25 @@ describe('冬の倍率速報体制（Y-11フェーズ1）台帳の不変条件',
     const aomori = INTERIM_BULLETIN_REGISTRY.find((e) => e.prefectureCode === 'aomori');
     expect(aomori).toBeDefined();
     expect(aomori?.status).toBe('unconfirmed');
+  });
+
+  it('第3バッチ(2026-08-22)の10県を収録している', () => {
+    const batch3 = ['iwate', 'miyagi', 'akita', 'yamagata', 'ibaraki', 'gunma', 'niigata', 'toyama', 'fukui', 'yamanashi'];
+    const codes = new Set(INTERIM_BULLETIN_REGISTRY.map((e) => e.prefectureCode));
+    for (const code of batch3) {
+      expect(codes.has(code)).toBe(true);
+    }
+  });
+
+  it('miyagiは他県と異なり志願変更前/後の別記事構成が確認できず正直にunconfirmedとしている(捏造ゼロ原則)', () => {
+    const miyagi = INTERIM_BULLETIN_REGISTRY.find((e) => e.prefectureCode === 'miyagi');
+    expect(miyagi).toBeDefined();
+    expect(miyagi?.status).toBe('unconfirmed');
+  });
+
+  it('akitaは速報段階(1次締切2/5時点)で学校別倍率まで公表されると明記されている', () => {
+    const akita = INTERIM_BULLETIN_REGISTRY.find((e) => e.prefectureCode === 'akita');
+    expect(akita).toBeDefined();
+    expect(akita?.interimIncludesRate).toBe(true);
   });
 });
