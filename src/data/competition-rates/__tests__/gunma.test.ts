@@ -197,6 +197,73 @@ const R6_SCHOOL_LEVEL_APPLICANTS: Record<string, number> = {
   利根商業: 73,
 };
 
+const R5_SCHOOL_LEVEL_APPLICANTS: Record<string, number> = {
+  前橋: 230,
+  前橋南: 129,
+  前橋西: 106,
+  前橋女子: 242,
+  前橋東: 117,
+  勢多農林: 99,
+  前橋工業: 129,
+  前橋商業: 141,
+  前橋清陵: 79,
+  高崎: 234,
+  高崎東: 115,
+  高崎北: 198,
+  榛名: 19,
+  高崎女子: 256,
+  吉井: 36,
+  高崎工業: 154,
+  高崎商業: 102,
+  桐生: 226,
+  桐生清桜: 143,
+  桐生工業: 73,
+  伊勢崎: 177,
+  伊勢崎清明: 135,
+  伊勢崎興陽: 116,
+  伊勢崎工業: 83,
+  伊勢崎商業: 101,
+  太田: 210,
+  太田東: 143,
+  太田女子: 151,
+  新田暁: 108,
+  太田工業: 71,
+  太田フレックス: 52,
+  沼田: 36,
+  尾瀬: 0,
+  沼田女子: 48,
+  利根実業: 43,
+  館林: 93,
+  館林女子: 90,
+  渋川: 93,
+  渋川女子: 108,
+  渋川青翠: 78,
+  渋川工業: 69,
+  藤岡中央: 71,
+  藤岡北: 70,
+  藤岡工業: 15,
+  富岡: 91,
+  富岡実業: 59,
+  松井田: 15,
+  安中総合学園: 107,
+  大間々: 70,
+  万場: 3,
+  下仁田: 6,
+  吾妻中央: 62,
+  長野原: 3,
+  嬬恋: 0,
+  玉村: 37,
+  板倉: 23,
+  館林商工: 70,
+  西邑楽: 77,
+  大泉: 77,
+  市立前橋: 137,
+  高崎経済大学附属: 217,
+  桐生市立商業: 123,
+  市立太田: 84,
+  利根商業: 26,
+};
+
 describe('群馬県 倍率パイプラインα（Y-6・全日制+フレックス60校106レコード・coverage=partial）', () => {
   const { records } = GUNMA_COMPETITION_RATES;
   const r8 = records.filter((r) => !r.fiscalYear);
@@ -285,6 +352,26 @@ describe('群馬県 倍率パイプラインα（Y-6・全日制+フレックス
     ]);
     const r7 = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
     expect(r7.some((r) => r.schoolName === '沼田女子')).toBe(false);
+  });
+
+  it('掛-1(学校別×多年度・4年度目): 令和5年度(R5)分レコードが113件・64校収録され、各校のD列相当の合計が完全一致する。R5は前期/後期選抜の二段階制度だった最後の年度で、本一次資料は後期選抜分のみ掲載(quota=印字済み学科等別倍率の分母である後期学科等別募集人員)。R6-R8と異なり尾瀬・万場・嬬恋(連携型選抜実施校)も本文に直接データが記載されていたため3校とも収録し、機械集計(quota合計・applicants合計)がPDF末尾のグランドトータル(11,838/11,838/6,344/6,344/3,481/2,795/6,276/0.99/6,276/0.99の該当列=後期学科等別募集人員6,344・学科等別志願者数計6,276)と完全一致することを確認済み', () => {
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    expect(r5.length).toBe(113);
+    const distinctSchools = new Set(r5.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(64);
+    const sumQuota = r5.reduce((a, r) => a + r.quota, 0);
+    const sumApplicants = r5.reduce((a, r) => a + r.finalApplicants, 0);
+    expect(sumQuota).toBe(6344);
+    expect(sumApplicants).toBe(6276);
+
+    for (const [schoolName, expectedApplicants] of Object.entries(R5_SCHOOL_LEVEL_APPLICANTS)) {
+      const sum = r5.filter((r) => r.schoolName === schoolName).reduce((acc, r) => acc + r.finalApplicants, 0);
+      expect(sum).toBe(expectedApplicants);
+    }
+
+    for (const included of ['尾瀬', '万場', '嬬恋']) {
+      expect(r5.some((r) => r.schoolName === included)).toBe(true);
+    }
   });
 
   it('sourcesが公式PDF URLを正しく記録している', () => {
