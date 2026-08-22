@@ -1,8 +1,8 @@
 import { INTERIM_BULLETIN_REGISTRY } from '../interim-rate-bulletin-registry';
 
 describe('冬の倍率速報体制（Y-11フェーズ1）台帳の不変条件', () => {
-  it('2026-08-22調査分の38県(第1弾8県+第2弾10県+第3弾10県+第4弾10県)を収録している', () => {
-    expect(INTERIM_BULLETIN_REGISTRY).toHaveLength(38);
+  it('2026-08-22調査分の46県(第1弾8県+第2弾10県+第3弾10県+第4弾10県+第5弾8県=栃木を除く全都道府県)を収録している', () => {
+    expect(INTERIM_BULLETIN_REGISTRY).toHaveLength(46);
   });
 
   it('prefectureCodeに重複が無い', () => {
@@ -97,5 +97,43 @@ describe('冬の倍率速報体制（Y-11フェーズ1）台帳の不変条件',
     const shiga = INTERIM_BULLETIN_REGISTRY.find((e) => e.prefectureCode === 'shiga');
     expect(shiga).toBeDefined();
     expect(shiga?.note).toContain('制度改編');
+  });
+
+  it('第5バッチ(2026-08-22・最終バッチ)の8県を収録している(これでフェーズ1が全46県完走)', () => {
+    const batch5 = ['tokushima', 'kagawa', 'ehime', 'kochi', 'nagasaki', 'oita', 'miyazaki', 'kagoshima'];
+    const codes = new Set(INTERIM_BULLETIN_REGISTRY.map((e) => e.prefectureCode));
+    for (const code of batch5) {
+      expect(codes.has(code)).toBe(true);
+    }
+  });
+
+  it('nagasakiは志願変更前/後に相当する時系列的な別公表物が確認できず正直にunconfirmedとしている(捏造ゼロ原則)', () => {
+    const nagasaki = INTERIM_BULLETIN_REGISTRY.find((e) => e.prefectureCode === 'nagasaki');
+    expect(nagasaki).toBeDefined();
+    expect(nagasaki?.status).toBe('unconfirmed');
+  });
+
+  it('oitaは速報段階(一次入試出願状況2/19時点)で学校別倍率まで公表されると明記されている', () => {
+    const oita = INTERIM_BULLETIN_REGISTRY.find((e) => e.prefectureCode === 'oita');
+    expect(oita).toBeDefined();
+    expect(oita?.interimIncludesRate).toBe(true);
+    expect(oita?.approxGapDays).toBe(8);
+  });
+
+  it('フェーズ1完走: 栃木を除く全46都道府県のprefectureCodeが揃っている', () => {
+    const ALL_46 = [
+      'hokkaido', 'aomori', 'iwate', 'miyagi', 'akita', 'yamagata', 'fukushima',
+      'ibaraki', 'gunma', 'saitama', 'chiba', 'tokyo', 'kanagawa', 'niigata',
+      'toyama', 'ishikawa', 'fukui', 'yamanashi', 'nagano', 'gifu', 'shizuoka',
+      'aichi', 'mie', 'shiga', 'kyoto', 'osaka', 'hyogo', 'nara', 'wakayama',
+      'tottori', 'shimane', 'okayama', 'hiroshima', 'yamaguchi', 'tokushima',
+      'kagawa', 'ehime', 'kochi', 'fukuoka', 'saga', 'nagasaki', 'kumamoto',
+      'oita', 'miyazaki', 'kagoshima', 'okinawa',
+    ];
+    const codes = new Set(INTERIM_BULLETIN_REGISTRY.map((e) => e.prefectureCode));
+    expect(codes.size).toBe(46);
+    for (const code of ALL_46) {
+      expect(codes.has(code)).toBe(true);
+    }
   });
 });
