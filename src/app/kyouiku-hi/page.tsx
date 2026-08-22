@@ -152,6 +152,25 @@ export default function KyouikuHiPage() {
             </p>
           </section>
 
+          {/* 都道府県独自の上乗せ制度への橋渡し（Y-9・私立は国の支援金だけで判断しない） */}
+          <section className="mb-10 rounded-2xl border border-emerald-200 bg-emerald-50/50 p-6">
+            <h2 className="mb-2 flex items-center gap-2 text-lg font-bold text-emerald-900">
+              <Wallet className="h-5 w-5 text-emerald-600" />
+              私立を検討中なら、都道府県独自の上乗せ制度も確認を
+            </h2>
+            <p className="text-sm leading-relaxed text-slate-700">
+              上の試算は国の就学支援金までを含んでいます。多くの都道府県は<strong>私立高校の授業料差額を独自に補助する制度</strong>を
+              別途持っており、実際の負担はさらに軽くなる場合があります。
+            </p>
+            <Link
+              href="/shougakukin#pref-subsidy"
+              className="mt-3 inline-flex items-center gap-1.5 text-sm font-bold text-emerald-700 hover:text-emerald-800"
+            >
+              都道府県別の上乗せ制度を確認する
+              <ChevronRight className="h-4 w-4" />
+            </Link>
+          </section>
+
           {/* 大学進学の橋渡し（姉妹サイト My Shingaku へ） */}
           <section className="mb-10 rounded-2xl border border-violet-200 bg-violet-50/50 p-6">
             <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-violet-900">

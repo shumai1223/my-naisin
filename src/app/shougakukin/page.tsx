@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Home, ChevronRight, HandCoins, BookCheck, HelpCircle, ShieldCheck, Landmark } from 'lucide-react';
 
 import { ShugakuShienEstimator } from '@/components/ShugakuShienEstimator';
+import { PrefectureTuitionSubsidyTable } from '@/components/PrefectureTuitionSubsidyTable';
 import { AnswerBox } from '@/components/AnswerBox';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
@@ -183,6 +184,11 @@ export default function ShougakukinPage() {
             <p className="mt-2 text-xs text-slate-500">
               ※ 実質負担＝学習費総額（3年）−就学支援金（3年）の目安。授業料以外（入学金・施設費・教材費・通学費など）も含む総額からの概算で、就学支援金は授業料部分が対象です。私立は学校により学費が大きく異なります。
             </p>
+          </section>
+
+          {/* 都道府県独自の上乗せ制度（Y-9・一次情報テーブル） */}
+          <section className="mb-10">
+            <PrefectureTuitionSubsidyTable />
           </section>
 
           {/* 3つの支援を整理 */}
