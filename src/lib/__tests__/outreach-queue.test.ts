@@ -262,7 +262,12 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // lane7-yamanashi-u-education/lane8-toyama-kyoshokuin/lane8-tokushima-kyogo)をGmail下書き化し
     // queuedへ昇格(159→172・大学教育学部/教職員互助会/学会/edtech企業に分散し同一ドメインクラスタへの
     // 集中を回避)。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(172);
+    // 2026-08-23: 0時リセット後、本文執筆済みcandidate26件から13件(kyoiku-i教育大学広報/総務系4件
+    // [osaka-kyoiku/hyogo-kyoiku/ynu/hokkyodai]・npo教職員互助会等4件[yamanashi-shigaku/
+    // niigata-kyoshokuin/ibaraki-kyoshokuin/aomori-kyoshokuin]・npo大学教育学部5件
+    // [okayama/kagoshima/niigata/mie/shiga])をGmail下書き化しqueuedへ昇格(172→185・全件が
+    // 別ドメインのため同一運営代行事務局への集中なし)。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(185);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {
