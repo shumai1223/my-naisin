@@ -1,8 +1,8 @@
 import { INTERIM_BULLETIN_REGISTRY } from '../interim-rate-bulletin-registry';
 
 describe('冬の倍率速報体制（Y-11フェーズ1）台帳の不変条件', () => {
-  it('2026-08-22調査分の28県(第1弾8県+第2弾10県+第3弾10県)を収録している', () => {
-    expect(INTERIM_BULLETIN_REGISTRY).toHaveLength(28);
+  it('2026-08-22調査分の38県(第1弾8県+第2弾10県+第3弾10県+第4弾10県)を収録している', () => {
+    expect(INTERIM_BULLETIN_REGISTRY).toHaveLength(38);
   });
 
   it('prefectureCodeに重複が無い', () => {
@@ -77,5 +77,25 @@ describe('冬の倍率速報体制（Y-11フェーズ1）台帳の不変条件',
     const akita = INTERIM_BULLETIN_REGISTRY.find((e) => e.prefectureCode === 'akita');
     expect(akita).toBeDefined();
     expect(akita?.interimIncludesRate).toBe(true);
+  });
+
+  it('第4バッチ(2026-08-22)の10県を収録している', () => {
+    const batch4 = ['nagano', 'gifu', 'shizuoka', 'mie', 'shiga', 'kyoto', 'nara', 'wakayama', 'tottori', 'okayama'];
+    const codes = new Set(INTERIM_BULLETIN_REGISTRY.map((e) => e.prefectureCode));
+    for (const code of batch4) {
+      expect(codes.has(code)).toBe(true);
+    }
+  });
+
+  it('okayamaは志願変更前後の別記事構成が確認できず正直にunconfirmedとしている(捏造ゼロ原則)', () => {
+    const okayama = INTERIM_BULLETIN_REGISTRY.find((e) => e.prefectureCode === 'okayama');
+    expect(okayama).toBeDefined();
+    expect(okayama?.status).toBe('unconfirmed');
+  });
+
+  it('shigaは2026年度の制度改編(学校独自選抜+一般選抜→一次募集)による構造変化がnoteに明記されている', () => {
+    const shiga = INTERIM_BULLETIN_REGISTRY.find((e) => e.prefectureCode === 'shiga');
+    expect(shiga).toBeDefined();
+    expect(shiga?.note).toContain('制度改編');
   });
 });
