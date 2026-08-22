@@ -112,6 +112,35 @@ describe('高知県 倍率パイプラインα（Y-6・Ａ日程75レコード�
     expect(onlyInR8).toEqual(['清水|普通(未来)']);
   });
 
+  it('掛-1(学校別×多年度): 令和5年度(R5)分レコードが76件・32校収録され(高知国際「探究(グローバル)」学科がR5では募集定員が実数(26)で公表され数値化できたため他年度より1レコード多い)、公式「合計」行(quota4,901・applicants3,442)とnode.js機械集計が完全一致する(探究(グローバル)が数値化できたため他年度のような若干名分の意図的差分は発生しない)。ＤＰコースは学科内の内数のため独立レコード化されていない。清水「普通」はR5時点ではR6と同じく括弧なし表記(R8は「普通(未来)」)。それ以外はR8と学校名+学科名の組み合わせが完全一致する(学校再編なし)', () => {
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    expect(r5.length).toBe(76);
+    const distinctSchools = new Set(r5.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(32);
+    const sumQuota = r5.reduce((a, r) => a + r.quota, 0);
+    const sumApplicants = r5.reduce((a, r) => a + r.finalApplicants, 0);
+    expect(sumQuota).toBe(4901);
+    expect(sumApplicants).toBe(3442);
+
+    expect(
+      r5.find((r) => r.schoolName === '高知国際' && r.department === '探究(グローバル)')
+    ).toEqual({
+      schoolName: '高知国際',
+      department: '探究(グローバル)',
+      quota: 26,
+      finalApplicants: 15,
+      finalRate: 0.58,
+      fiscalYear: '令和5年度（2023年度）',
+    });
+
+    const r8Keys = new Set(r8.map((r) => `${r.schoolName}|${r.department}`));
+    const r5Keys = new Set(r5.map((r) => `${r.schoolName}|${r.department}`));
+    const onlyInR5 = [...r5Keys].filter((k) => !r8Keys.has(k)).sort();
+    const onlyInR8 = [...r8Keys].filter((k) => !r5Keys.has(k)).sort();
+    expect(onlyInR5).toEqual(['清水|普通', '高知国際|探究(グローバル)'].sort());
+    expect(onlyInR8).toEqual(['清水|普通(未来)']);
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of KOCHI_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.pref\.kochi\.lg\.jp\//);
