@@ -153,6 +153,33 @@ describe('埼玉県 倍率パイプラインα（Y-2・全日制の突合テス�
     });
   });
 
+  it('掛-1(学校別×多年度・4年度目): 令和5年度(R5)分に251レコードが収録され(全日制が完結・R6/R7/R8の240件より11件多い)、印字済み「全日制 普通・専門・総合学科 計」(A=36,002/B=39,921)と機械集計が完全一致し、学校名+学科の重複が無い', () => {
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    expect(r5.length).toBe(251);
+    const sumQuota = r5.reduce((a, r) => a + r.quota, 0);
+    const sumApplicants = r5.reduce((a, r) => a + r.finalApplicants, 0);
+    expect(sumQuota).toBe(36002);
+    expect(sumApplicants).toBe(39921);
+    const seen = new Set<string>();
+    for (const r of r5) {
+      const key = `${r.schoolName}|${r.department}`;
+      expect(seen.has(key)).toBe(false);
+      seen.add(key);
+    }
+  });
+
+  it('掛-1(R5固有の実データ差分): R5のみに存在し翌年度以降に統廃合された「浦和工業」「鳩山」「皆野」が収録され、R6以降の学校名で誤って重複収録されていない', () => {
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    expect(r5.filter((r) => r.schoolName === '浦和工業').length).toBe(4);
+    expect(r5.some((r) => r.schoolName === '鳩山' && r.department === '普通科')).toBe(true);
+    expect(r5.some((r) => r.schoolName === '鳩山' && r.department === '情報管理科')).toBe(true);
+    expect(r5.some((r) => r.schoolName === '皆野' && r.department === '商業系')).toBe(true);
+    // R5時点の「国際文化に関する学科」は岩槻の1校のみ（R6以降「国際関係に関する学科」に改称・拡大）
+    const kokusai = r5.filter((r) => r.department === '国際文化科');
+    expect(kokusai.length).toBe(1);
+    expect(kokusai[0]).toMatchObject({ schoolName: '岩槻', quota: 40, finalApplicants: 46 });
+  });
+
   it('全レコードのquota>0・finalApplicants>=0・finalRateが概算で整合する', () => {
     for (const r of records) {
       expect(r.quota).toBeGreaterThan(0);
