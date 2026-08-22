@@ -62,13 +62,22 @@ describe('ingestInterimBulletin（ドライラン: 過去年度の確定デー�
     expect(result).toBeNull();
   });
 
-  it("台帳status='presumed-multistage'の県（佐賀）は先行速報の実在が推定のみでもnullにしない（unconfirmed/not-investigatedのみ拒否する設計）", () => {
-    const sagaEntry = INTERIM_BULLETIN_REGISTRY.find((e) => e.prefectureCode === 'saga');
-    expect(sagaEntry?.status).toBe('presumed-multistage');
+  it("台帳status='presumed-multistage'の県は先行速報の実在が推定のみでもnullにしない（unconfirmed/not-investigatedのみ拒否する設計）", () => {
+    // 2026-08-23の再調査で佐賀がconfirmed-multistageへ昇格しpresumed-multistageの実データが0件に
+    // なったため、この不変条件自体は合成レジストリで検証する（実データの状態に依存しないテストにする）。
+    const syntheticRegistry = [
+      ...INTERIM_BULLETIN_REGISTRY,
+      {
+        prefectureCode: 'test-presumed-pref',
+        status: 'presumed-multistage' as const,
+        note: 'テスト用の合成エントリ',
+        investigatedAt: '2026-08-23',
+      },
+    ];
     const result = ingestInterimBulletin(
-      'saga',
+      'test-presumed-pref',
       [{ schoolName: 'テスト高校', department: '普通', quota: 200, interimApplicants: 180, observedAt: '2027-02-05' }],
-      INTERIM_BULLETIN_REGISTRY
+      syntheticRegistry
     );
     expect(result).not.toBeNull();
   });
