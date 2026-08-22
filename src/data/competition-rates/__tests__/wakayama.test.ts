@@ -96,6 +96,48 @@ describe('和歌山県 倍率パイプラインα（Y-6・全日制32校57レコ
     });
   });
 
+  it('掛-1(学校別×多年度): 令和5年度(R5)分レコードが60件収録され、合計行(quota6,131・applicants5,442=D110+E5,332)と完全一致する。ページ2の「大学科別状況」集計表でも同一の合計が独立に印字されており二重に整合を確認した', () => {
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    expect(r5.length).toBe(60);
+    expect(r5.reduce((a, r) => a + r.quota, 0)).toBe(6131);
+    expect(r5.reduce((a, r) => a + r.finalApplicants, 0)).toBe(5442);
+
+    // R5は新宮・新翔がR6同様に別々の学校(統合はR8)
+    expect(r5.some((r) => r.schoolName === '新翔')).toBe(true);
+    expect(r5.filter((r) => r.schoolName === '新宮')).toHaveLength(1);
+  });
+
+  it('掛-1(R5固有の実データ差分): R5は笠田・粉河・貴志川・海南の4校でR6以降より学科がさらに細分化されていた実在の学科再編を確認した(R6でこれらの学科が統合済み)', () => {
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+
+    // 笠田: R5は3学科(普通科/総合ビジネス科/情報処理科)、R6は2学科(普通科/商業科系)
+    expect(r5.filter((r) => r.schoolName === '笠田')).toHaveLength(3);
+    expect(r6.filter((r) => r.schoolName === '笠田')).toHaveLength(2);
+    expect(r5.some((r) => r.schoolName === '笠田' && r.department === '総合ビジネス科')).toBe(true);
+    expect(r5.some((r) => r.schoolName === '笠田' && r.department === '情報処理科')).toBe(true);
+
+    // 粉河: R5は2学科(普通科/理数科、合算quota240)、R6は単一「普通科系」(quota240)
+    expect(r5.filter((r) => r.schoolName === '粉河')).toHaveLength(2);
+    expect(
+      r5.filter((r) => r.schoolName === '粉河').reduce((a, r) => a + r.quota, 0),
+    ).toBe(r6.find((r) => r.schoolName === '粉河')!.quota);
+
+    // 貴志川: R5は2学科(普通科/人間科学科、合算quota120)、R6は単一「普通科」(quota120)
+    expect(r5.filter((r) => r.schoolName === '貴志川')).toHaveLength(2);
+    expect(
+      r5.filter((r) => r.schoolName === '貴志川').reduce((a, r) => a + r.quota, 0),
+    ).toBe(r6.find((r) => r.schoolName === '貴志川')!.quota);
+
+    // 海南: R5は3学科(普通科(海南校舎)/教養理学科/普通科(大成校舎))、R6は2学科
+    expect(r5.filter((r) => r.schoolName === '海南')).toHaveLength(3);
+    expect(r6.filter((r) => r.schoolName === '海南')).toHaveLength(2);
+    expect(r5.some((r) => r.schoolName === '海南' && r.department === '教養理学科')).toBe(true);
+
+    // 串本古座: R5時点の学科名は単純な「普通科」で、R7/R8の「未来創造学科」名はまだ存在しなかった
+    expect(r5.find((r) => r.schoolName === '串本古座')).toMatchObject({ department: '普通科' });
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of WAKAYAMA_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.pref\.wakayama\.lg\.jp\//);
