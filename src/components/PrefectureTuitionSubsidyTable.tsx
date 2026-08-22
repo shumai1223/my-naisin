@@ -25,6 +25,15 @@ function confirmedCount(): number {
   return PREFECTURE_TUITION_SUBSIDY_REGISTRY.filter((e) => e.status === 'confirmed').length;
 }
 
+/** 最終確認日のうち最も新しいものを取得（E-E-A-T用の鮮度表示・PrefectureNaishinTableと同型） */
+function latestVerifiedLabel(): string {
+  const dates = PREFECTURE_TUITION_SUBSIDY_REGISTRY.map((e) => e.source?.lastChecked ?? e.investigatedAt).filter(Boolean) as string[];
+  if (dates.length === 0) return '2026年度';
+  const latest = dates.sort().at(-1)!;
+  const [y, m] = latest.split('-');
+  return `${y}年${Number(m)}月時点`;
+}
+
 function SubsidyRow({ pref }: { pref: PrefectureConfig }) {
   const entry = entryFor(pref.code);
   const confirmed = entry?.status === 'confirmed';
@@ -32,7 +41,18 @@ function SubsidyRow({ pref }: { pref: PrefectureConfig }) {
   return (
     <tr className="border-b border-slate-100 last:border-0 even:bg-slate-50/40 hover:bg-emerald-50/50">
       <th scope="row" className="whitespace-nowrap px-3 py-2.5 text-left font-bold text-slate-800">
-        {pref.name}
+        <span className="flex items-center gap-1.5">
+          {pref.name}
+          {confirmed ? (
+            <span className="shrink-0 rounded-full bg-emerald-50 px-1.5 py-0.5 text-[10px] font-bold text-emerald-700 ring-1 ring-emerald-100">
+              確認済み
+            </span>
+          ) : (
+            <span className="shrink-0 rounded-full bg-slate-100 px-1.5 py-0.5 text-[10px] font-bold text-slate-500 ring-1 ring-slate-200">
+              未確認
+            </span>
+          )}
+        </span>
       </th>
       {confirmed ? (
         <>
@@ -56,7 +76,7 @@ function SubsidyRow({ pref }: { pref: PrefectureConfig }) {
                 href={entry!.source.url}
                 target="_blank"
                 rel="noopener"
-                className="inline-flex items-center gap-1 text-xs font-bold text-blue-700 hover:text-blue-900 hover:underline"
+                className="inline-flex items-center gap-1 text-xs font-bold text-blue-700 underline underline-offset-2 hover:text-blue-900"
               >
                 公式
                 <ExternalLink className="h-3 w-3" />
@@ -133,7 +153,7 @@ export function PrefectureTuitionSubsidyTable() {
         <p className="flex items-start gap-2 text-xs leading-relaxed text-amber-900">
           <ShieldCheck className="mt-0.5 h-3.5 w-3.5 shrink-0 text-amber-600" />
           <span>
-            各都道府県教育委員会・私学担当課の公式ページを一次情報として作成。金額・所得区分は年度改定されるため、
+            各都道府県教育委員会・私学担当課の公式ページを一次情報として作成（{latestVerifiedLabel()}確認）。金額・所得区分は年度改定されるため、
             申請前に必ず出典リンクまたはお住まいの都道府県で最新情報をご確認ください。
           </span>
         </p>
