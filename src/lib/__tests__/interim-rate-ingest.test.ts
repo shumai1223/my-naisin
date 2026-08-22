@@ -42,13 +42,22 @@ describe('ingestInterimBulletin（ドライラン: 過去年度の確定デー�
     expect(result).toBeNull();
   });
 
-  it("台帳status='unconfirmed'の県（島根）はnullを返す（先行速報の実在自体が未確認のため）", () => {
-    const shimaneEntry = INTERIM_BULLETIN_REGISTRY.find((e) => e.prefectureCode === 'shimane');
-    expect(shimaneEntry?.status).toBe('unconfirmed');
+  it("台帳status='unconfirmed'の県はnullを返す（先行速報の実在自体が未確認のため）", () => {
+    // 2026-08-23時点で実データのINTERIM_BULLETIN_REGISTRYにunconfirmedの県が0件になったため、
+    // この不変条件自体は合成レジストリで検証する（実データの状態に依存しないテストにする）。
+    const syntheticRegistry = [
+      ...INTERIM_BULLETIN_REGISTRY,
+      {
+        prefectureCode: 'test-unconfirmed-pref',
+        status: 'unconfirmed' as const,
+        note: 'テスト用の合成エントリ',
+        investigatedAt: '2026-08-23',
+      },
+    ];
     const result = ingestInterimBulletin(
-      'shimane',
+      'test-unconfirmed-pref',
       [{ schoolName: 'テスト高校', department: '普通', quota: 200, interimApplicants: 180, observedAt: '2027-02-05' }],
-      INTERIM_BULLETIN_REGISTRY
+      syntheticRegistry
     );
     expect(result).toBeNull();
   });

@@ -53,10 +53,11 @@ describe('冬の倍率速報体制（Y-11フェーズ1）台帳の不変条件',
     expect(hokkaido?.interimIncludesRate).toBe(true);
   });
 
-  it('aomoriは先行速報の実在を断定できず正直にunconfirmedとしている(捏造ゼロ原則)', () => {
+  it('aomoriは2026-08-23再調査で「進路志望状況調査」の学校別倍率を確認しconfirmed-multistageへ昇格した', () => {
     const aomori = INTERIM_BULLETIN_REGISTRY.find((e) => e.prefectureCode === 'aomori');
     expect(aomori).toBeDefined();
-    expect(aomori?.status).toBe('unconfirmed');
+    expect(aomori?.status).toBe('confirmed-multistage');
+    expect(aomori?.interimIncludesRate).toBe(true);
   });
 
   it('第3バッチ(2026-08-22)の10県を収録している', () => {
@@ -67,10 +68,11 @@ describe('冬の倍率速報体制（Y-11フェーズ1）台帳の不変条件',
     }
   });
 
-  it('miyagiは他県と異なり志願変更前/後の別記事構成が確認できず正直にunconfirmedとしている(捏造ゼロ原則)', () => {
+  it('miyagiは2026-08-23再調査で「出願希望調査」の学校別倍率を確認しconfirmed-multistageへ昇格した', () => {
     const miyagi = INTERIM_BULLETIN_REGISTRY.find((e) => e.prefectureCode === 'miyagi');
     expect(miyagi).toBeDefined();
-    expect(miyagi?.status).toBe('unconfirmed');
+    expect(miyagi?.status).toBe('confirmed-multistage');
+    expect(miyagi?.interimIncludesRate).toBe(true);
   });
 
   it('akitaは速報段階(1次締切2/5時点)で学校別倍率まで公表されると明記されている', () => {
@@ -87,10 +89,11 @@ describe('冬の倍率速報体制（Y-11フェーズ1）台帳の不変条件',
     }
   });
 
-  it('okayamaは志願変更前後の別記事構成が確認できず正直にunconfirmedとしている(捏造ゼロ原則)', () => {
+  it('okayamaは2026-08-23再調査で「進学希望状況調査」の学校別倍率相当データを確認しconfirmed-multistageへ昇格した', () => {
     const okayama = INTERIM_BULLETIN_REGISTRY.find((e) => e.prefectureCode === 'okayama');
     expect(okayama).toBeDefined();
-    expect(okayama?.status).toBe('unconfirmed');
+    expect(okayama?.status).toBe('confirmed-multistage');
+    expect(okayama?.interimIncludesRate).toBe(true);
   });
 
   it('shigaは2026年度の制度改編(学校独自選抜+一般選抜→一次募集)による構造変化がnoteに明記されている', () => {
@@ -107,10 +110,11 @@ describe('冬の倍率速報体制（Y-11フェーズ1）台帳の不変条件',
     }
   });
 
-  it('nagasakiは志願変更前/後に相当する時系列的な別公表物が確認できず正直にunconfirmedとしている(捏造ゼロ原則)', () => {
+  it('nagasakiは2026-08-23再調査で「進学希望状況調査」(7月実施)の学校別倍率を確認しconfirmed-multistageへ昇格した', () => {
     const nagasaki = INTERIM_BULLETIN_REGISTRY.find((e) => e.prefectureCode === 'nagasaki');
     expect(nagasaki).toBeDefined();
-    expect(nagasaki?.status).toBe('unconfirmed');
+    expect(nagasaki?.status).toBe('confirmed-multistage');
+    expect(nagasaki?.interimIncludesRate).toBe(true);
   });
 
   it('oitaは速報段階(一次入試出願状況2/19時点)で学校別倍率まで公表されると明記されている', () => {
