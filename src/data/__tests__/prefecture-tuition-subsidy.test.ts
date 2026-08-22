@@ -1,15 +1,17 @@
-// Y-9(就学支援金・自治体上乗せDB)αバッチの不変条件テスト。
+// Y-9(就学支援金・自治体上乗せDB)αバッチ+第2バッチの不変条件テスト。
 // interim-rate-bulletin-registry.test.tsと同型の設計思想: 未確認は無理に埋めない・
 // 出典URLは.go.jp/.lg.jpの一次ソースのみ・statusとconfidence/sourceの整合性を機械検証する。
 
 import { PREFECTURE_TUITION_SUBSIDY_REGISTRY, PrefectureTuitionSubsidyEntry } from '../prefecture-tuition-subsidy';
 
 const ALPHA_PREFECTURES = ['tokyo', 'kanagawa', 'osaka', 'chiba', 'saitama', 'aichi', 'fukuoka', 'hokkaido', 'hyogo', 'shizuoka'];
+const BATCH2_PREFECTURES = ['aomori', 'iwate', 'miyagi', 'akita', 'yamagata', 'fukushima', 'ibaraki', 'tochigi', 'gunma', 'niigata'];
+const ALL_INVESTIGATED_PREFECTURES = [...ALPHA_PREFECTURES, ...BATCH2_PREFECTURES];
 
-describe('PREFECTURE_TUITION_SUBSIDY_REGISTRY（Y-9αバッチ・10県）', () => {
-  it('αバッチ対象の10県すべてが登録されている', () => {
+describe('PREFECTURE_TUITION_SUBSIDY_REGISTRY（Y-9αバッチ+第2バッチ・計20県）', () => {
+  it('αバッチ+第2バッチ対象の20県すべてが登録されている', () => {
     const codes = PREFECTURE_TUITION_SUBSIDY_REGISTRY.map((e) => e.prefectureCode).sort();
-    expect(codes).toEqual([...ALPHA_PREFECTURES].sort());
+    expect(codes).toEqual([...ALL_INVESTIGATED_PREFECTURES].sort());
   });
 
   it('prefectureCodeに重複が無い', () => {
@@ -65,5 +67,37 @@ describe('PREFECTURE_TUITION_SUBSIDY_REGISTRY（Y-9αバッチ・10県）', () =
     const hyogo = PREFECTURE_TUITION_SUBSIDY_REGISTRY.find((e) => e.prefectureCode === 'hyogo') as PrefectureTuitionSubsidyEntry;
     expect(hyogo.status).toBe('confirmed');
     expect(hyogo.confidence).toBe('medium');
+  });
+
+  it('新潟県は区分別の金額(定額/第2子以降/全額/施設整備費/入学金)が公式ページから直接確認できたためconfidence:high', () => {
+    const niigata = PREFECTURE_TUITION_SUBSIDY_REGISTRY.find((e) => e.prefectureCode === 'niigata') as PrefectureTuitionSubsidyEntry;
+    expect(niigata.status).toBe('confirmed');
+    expect(niigata.confidence).toBe('high');
+    expect(niigata.subsidyAmountNote).toMatch(/\d{2,3},\d{3}円/);
+  });
+
+  it('山形県は県独自の上乗せ部分の金額が公式ページに明記されている(1,000円/12,100円)', () => {
+    const yamagata = PREFECTURE_TUITION_SUBSIDY_REGISTRY.find((e) => e.prefectureCode === 'yamagata') as PrefectureTuitionSubsidyEntry;
+    expect(yamagata.status).toBe('confirmed');
+    expect(yamagata.subsidyAmountNote).toMatch(/1,000円/);
+  });
+
+  it('栃木県は「学校法人補填型」(減免総額の10分の9を県が補助)で円建て金額を断定していない', () => {
+    const tochigi = PREFECTURE_TUITION_SUBSIDY_REGISTRY.find((e) => e.prefectureCode === 'tochigi') as PrefectureTuitionSubsidyEntry;
+    expect(tochigi.status).toBe('confirmed');
+    expect(tochigi.type).toBe('grant');
+    expect(tochigi.subsidyAmountNote).toMatch(/10分の9/);
+    // 円建ての断定額(例: 123,456円のような具体的な確定額)を書いていないことを確認
+    expect(tochigi.subsidyAmountNote).not.toMatch(/^\d/);
+  });
+
+  it('第2バッチのunconfirmed7県(青森/岩手/宮城/秋田/福島/茨城/群馬)もsourceを持たず断定しない', () => {
+    const batch2Unconfirmed = ['aomori', 'iwate', 'miyagi', 'akita', 'fukushima', 'ibaraki', 'gunma'];
+    for (const code of batch2Unconfirmed) {
+      const entry = PREFECTURE_TUITION_SUBSIDY_REGISTRY.find((e) => e.prefectureCode === code) as PrefectureTuitionSubsidyEntry;
+      expect(entry.status).toBe('unconfirmed');
+      expect(entry.source).toBeUndefined();
+      expect(entry.programName).toBeUndefined();
+    }
   });
 });
