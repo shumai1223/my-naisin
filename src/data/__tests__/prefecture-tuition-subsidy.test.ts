@@ -168,12 +168,18 @@ describe('PREFECTURE_TUITION_SUBSIDY_REGISTRY（Y-9・5バッチ全47都道府�
     expect(shimane.subsidyAmountNote).toMatch(/差額補填型/);
   });
 
-  it('鳥取県・広島県・徳島県は制度名は確認できたが金額はリーフレットPDF参照のみのためconfidence:medium', () => {
-    for (const code of ['tottori', 'hiroshima', 'tokushima']) {
+  it('鳥取県・広島県は2026-08-23にリーフレットPDFを直接確認し具体的な金額が判明したためconfidence:high', () => {
+    for (const code of ['tottori', 'hiroshima']) {
       const entry = PREFECTURE_TUITION_SUBSIDY_REGISTRY.find((e) => e.prefectureCode === code) as PrefectureTuitionSubsidyEntry;
       expect(entry.status).toBe('confirmed');
-      expect(entry.confidence).toBe('medium');
+      expect(entry.confidence).toBe('high');
     }
+  });
+
+  it('徳島県はリーフレットPDFを直接確認したがグラフに金額の数値ラベルが無く読み取れなかったためconfidence:medium', () => {
+    const tokushima = PREFECTURE_TUITION_SUBSIDY_REGISTRY.find((e) => e.prefectureCode === 'tokushima') as PrefectureTuitionSubsidyEntry;
+    expect(tokushima.status).toBe('confirmed');
+    expect(tokushima.confidence).toBe('medium');
   });
 
   it('山口県は制度名に「授業料等」を含むが実際は入学金減免のみのためunconfirmedのまま(捏造回避)', () => {
