@@ -8,12 +8,20 @@ const ALPHA_PREFECTURES = ['tokyo', 'kanagawa', 'osaka', 'chiba', 'saitama', 'ai
 const BATCH2_PREFECTURES = ['aomori', 'iwate', 'miyagi', 'akita', 'yamagata', 'fukushima', 'ibaraki', 'tochigi', 'gunma', 'niigata'];
 const BATCH3_PREFECTURES = ['toyama', 'ishikawa', 'fukui', 'yamanashi', 'nagano', 'gifu', 'mie', 'shiga', 'kyoto', 'nara'];
 const BATCH4_PREFECTURES = ['wakayama', 'tottori', 'shimane', 'okayama', 'hiroshima', 'yamaguchi', 'tokushima', 'kagawa', 'ehime', 'kochi'];
-const ALL_INVESTIGATED_PREFECTURES = [...ALPHA_PREFECTURES, ...BATCH2_PREFECTURES, ...BATCH3_PREFECTURES, ...BATCH4_PREFECTURES];
+const BATCH5_PREFECTURES = ['oita', 'saga', 'nagasaki', 'kumamoto', 'miyazaki', 'kagoshima', 'okinawa'];
+const ALL_INVESTIGATED_PREFECTURES = [
+  ...ALPHA_PREFECTURES,
+  ...BATCH2_PREFECTURES,
+  ...BATCH3_PREFECTURES,
+  ...BATCH4_PREFECTURES,
+  ...BATCH5_PREFECTURES,
+];
 
-describe('PREFECTURE_TUITION_SUBSIDY_REGISTRY（Y-9αバッチ+第2バッチ+第3バッチ+第4バッチ・計40県）', () => {
-  it('αバッチ+第2バッチ+第3バッチ+第4バッチ対象の40県すべてが登録されている', () => {
+describe('PREFECTURE_TUITION_SUBSIDY_REGISTRY（Y-9・5バッチ全47都道府県完走）', () => {
+  it('全47都道府県すべてが登録されている（Y-9フェーズ完走）', () => {
     const codes = PREFECTURE_TUITION_SUBSIDY_REGISTRY.map((e) => e.prefectureCode).sort();
     expect(codes).toEqual([...ALL_INVESTIGATED_PREFECTURES].sort());
+    expect(codes.length).toBe(47);
   });
 
   it('prefectureCodeに重複が無い', () => {
@@ -172,5 +180,24 @@ describe('PREFECTURE_TUITION_SUBSIDY_REGISTRY（Y-9αバッチ+第2バッチ+第
     const yamaguchi = PREFECTURE_TUITION_SUBSIDY_REGISTRY.find((e) => e.prefectureCode === 'yamaguchi') as PrefectureTuitionSubsidyEntry;
     expect(yamaguchi.status).toBe('unconfirmed');
     expect(yamaguchi.note).toMatch(/入学金減免/);
+  });
+
+  it('第5バッチのunconfirmed5県(佐賀/長崎/熊本/宮崎/沖縄)もsourceを持たず断定しない', () => {
+    const batch5Unconfirmed = ['saga', 'nagasaki', 'kumamoto', 'miyazaki', 'okinawa'];
+    for (const code of batch5Unconfirmed) {
+      const entry = PREFECTURE_TUITION_SUBSIDY_REGISTRY.find((e) => e.prefectureCode === code) as PrefectureTuitionSubsidyEntry;
+      expect(entry.status).toBe('unconfirmed');
+      expect(entry.source).toBeUndefined();
+      expect(entry.programName).toBeUndefined();
+    }
+  });
+
+  it('大分県・鹿児島県は区分別の月額が公式ページから直接確認できたためconfidence:high', () => {
+    for (const code of ['oita', 'kagoshima']) {
+      const entry = PREFECTURE_TUITION_SUBSIDY_REGISTRY.find((e) => e.prefectureCode === code) as PrefectureTuitionSubsidyEntry;
+      expect(entry.status).toBe('confirmed');
+      expect(entry.confidence).toBe('high');
+      expect(entry.subsidyAmountNote).toMatch(/円/);
+    }
   });
 });
