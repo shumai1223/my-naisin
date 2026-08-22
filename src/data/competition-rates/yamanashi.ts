@@ -1,5 +1,5 @@
 /**
- * 山梨県 公立高等学校 倍率パイプラインα（Y-6・29県目・全日制完全達成／掛-1・R7多年度追加済み）。
+ * 山梨県 公立高等学校 倍率パイプラインα（Y-6・29県目・全日制完全達成／掛-1・R5〜R8多年度4年度分収録済み）。
  *
  * 一次ソース: 山梨県教育委員会「令和8年度山梨県公立高等学校入学者選抜 全日制後期募集及び定時制
  * 課程の最終志願状況について」内の「志願変更後の最終志願者数」一覧（令和8年2月25日午後4時締切）。
@@ -39,6 +39,23 @@
  * 機械集計と完全一致した（初回転記で一致）。帰国生徒等特別措置の適用者（都留興譲館普通3名・
  * 甲府東1名・甲府昭和1名・富士河口湖1名）は他年度同様、最終志願者数の内数として収録し倍率算定
  * からは除外（印字済み倍率をそのまま採用）。
+ *
+ * ⚠️掛-1（yamanashi横展開R5完結・4年度目）: R5の一次資料「令和5年度山梨県公立高等学校入学者選抜
+ * 志願変更後の最終志願者数」（令和5年2月27日午後4時締切・全6頁のうち全日制後期募集は2〜3頁）
+ * https://www.pref.yamanashi.jp/documents/7061/r5_saisyuu_sigansya.pdf を取得。R7/R6と異なり
+ * この年度版はpdftotext -layoutでCJKラベルが正しく抽出でき（ビジョン解析不要）、48レコード
+ * （26校）を転記した。学校・学科構成はR6/R7/R8と完全一致（学校再編0件）。ページ1目の速報概要
+ * （全日制後期募集3,490人・最終志願者数3,489人・倍率0.96）、ページ3末尾の「県立高校計」
+ * （quota3,461・applicants3,356・倍率0.97）・「市立高校計」（quota140・applicants133・倍率0.94）・
+ * 「全日制課程計」（quota3,601・applicants3,489・倍率0.96）の全階層がnode.js機械集計と初回転記で
+ * 完全一致した（再修正なし）。速報タイトルに「（甲陵高校を除く。）」との注記があるが、甲陵高校は
+ * R6〜R8の収録データにも元々含まれておらず、本ファイルの範囲に影響しない。
+ * ⚠️農林高校システム園芸科（quota17・applicants16・帰国生徒等1名内数）・食品科学科（quota16・
+ * applicants17・帰国生徒等1名内数）は募集人員が小さいため、帰国生徒等特別措置の除外が倍率に
+ * 与える影響が他年度・他校より大きく、単純計算値との差が最大0.0625（食品科学科：
+ * 17/16=1.0625→印字済み倍率1.00）まで拡大する。転記ミスではなく印字済み倍率をそのまま採用した
+ * （帰国生徒等控除後の(17-1)/16=1.00で印字値と一致）。この実データにより、掛-1不変条件テストの
+ * 許容誤差を0.06→0.07へ拡張した。
  */
 import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
 
@@ -62,6 +79,12 @@ export const YAMANASHI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       docTitle: '山梨県教育委員会 令和6年度山梨県公立高等学校入学者選抜 全日制後期募集及び定時制課程の最終志願状況について',
       fiscalYear: '令和6年度（2024年度）',
       fetchedAt: '2026-08-08',
+    },
+    {
+      url: 'https://www.pref.yamanashi.jp/documents/7061/r5_saisyuu_sigansya.pdf',
+      docTitle: '山梨県教育委員会 令和5年度山梨県公立高等学校入学者選抜 全日制後期募集及び定時制課程の最終志願状況について',
+      fiscalYear: '令和5年度（2023年度）',
+      fetchedAt: '2026-08-22',
     },
   ],
   coverage: {
@@ -218,5 +241,53 @@ export const YAMANASHI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '富士河口湖', department: '普通', quota: 128, finalApplicants: 129, finalRate: 1, fiscalYear: '令和6年度（2024年度）' },
     { schoolName: '甲府商業', department: '商業', quota: 83, finalApplicants: 96, finalRate: 1.16, fiscalYear: '令和6年度（2024年度）' },
     { schoolName: '甲府商業', department: '情報処理', quota: 51, finalApplicants: 59, finalRate: 1.16, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '北杜', department: '普通', quota: 50, finalApplicants: 57, finalRate: 1.14, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '北杜', department: '総合学科', quota: 48, finalApplicants: 51, finalRate: 1.06, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '韮崎', department: '普通', quota: 138, finalApplicants: 151, finalRate: 1.09, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '韮崎', department: '文理', quota: 21, finalApplicants: 26, finalRate: 1.24, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '韮崎工業', department: '工業(一括)', quota: 101, finalApplicants: 93, finalRate: 0.92, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '甲府第一', department: '普通', quota: 136, finalApplicants: 147, finalRate: 1.08, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '甲府第一', department: '探究', quota: 45, finalApplicants: 47, finalRate: 1.04, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '甲府西', department: '普通', quota: 150, finalApplicants: 144, finalRate: 0.96, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '甲府南', department: '普通', quota: 160, finalApplicants: 161, finalRate: 1.01, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '甲府南', department: '理数', quota: 28, finalApplicants: 38, finalRate: 1.36, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '甲府東', department: '普通', quota: 216, finalApplicants: 250, finalRate: 1.15, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '甲府工業', department: '機械', quota: 44, finalApplicants: 31, finalRate: 0.7, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '甲府工業', department: '電気', quota: 46, finalApplicants: 37, finalRate: 0.8, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '甲府工業', department: '建築', quota: 28, finalApplicants: 24, finalRate: 0.86, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '甲府工業', department: '土木', quota: 20, finalApplicants: 12, finalRate: 0.6, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '甲府工業', department: '電子', quota: 28, finalApplicants: 20, finalRate: 0.71, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '甲府城西', department: '総合学科', quota: 138, finalApplicants: 143, finalRate: 1.04, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '甲府昭和', department: '普通', quota: 183, finalApplicants: 202, finalRate: 1.09, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '農林', department: 'システム園芸', quota: 17, finalApplicants: 16, finalRate: 0.88, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '農林', department: '森林科学', quota: 21, finalApplicants: 16, finalRate: 0.76, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '農林', department: '環境土木', quota: 23, finalApplicants: 24, finalRate: 1.04, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '農林', department: '造園緑地', quota: 16, finalApplicants: 19, finalRate: 1.19, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '農林', department: '食品科学', quota: 16, finalApplicants: 17, finalRate: 1.0, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '巨摩', department: '普通', quota: 137, finalApplicants: 110, finalRate: 0.8, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '白根', department: '普通', quota: 86, finalApplicants: 90, finalRate: 1.05, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '青洲', department: '普通', quota: 98, finalApplicants: 115, finalRate: 1.17, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '青洲', department: '工業(一括)', quota: 36, finalApplicants: 35, finalRate: 0.97, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '青洲', department: '商業(一括)', quota: 42, finalApplicants: 46, finalRate: 1.1, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '身延', department: '総合学科', quota: 58, finalApplicants: 30, finalRate: 0.5, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '笛吹', department: '普通', quota: 56, finalApplicants: 55, finalRate: 0.98, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '笛吹', department: '食品化学', quota: 15, finalApplicants: 21, finalRate: 1.4, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '笛吹', department: '果樹園芸', quota: 16, finalApplicants: 21, finalRate: 1.31, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '笛吹', department: '総合学科', quota: 45, finalApplicants: 48, finalRate: 1.04, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '日川', department: '普通', quota: 130, finalApplicants: 134, finalRate: 1.03, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '山梨', department: '普通', quota: 102, finalApplicants: 113, finalRate: 1.11, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '塩山', department: '普通', quota: 59, finalApplicants: 30, finalRate: 0.51, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '塩山', department: '商業(一括)', quota: 34, finalApplicants: 9, finalRate: 0.26, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '都留', department: '普通', quota: 145, finalApplicants: 137, finalRate: 0.94, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '上野原', department: '総合学科', quota: 84, finalApplicants: 45, finalRate: 0.54, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '都留興譲館', department: '普通', quota: 64, finalApplicants: 60, finalRate: 0.91, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '都留興譲館', department: '英語理数', quota: 20, finalApplicants: 15, finalRate: 0.75, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '都留興譲館', department: '工業(一括)', quota: 71, finalApplicants: 34, finalRate: 0.46, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '吉田', department: '普通', quota: 160, finalApplicants: 162, finalRate: 1.01, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '吉田', department: '理数', quota: 34, finalApplicants: 47, finalRate: 1.38, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '富士北稜', department: '総合学科', quota: 168, finalApplicants: 140, finalRate: 0.83, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '富士河口湖', department: '普通', quota: 128, finalApplicants: 133, finalRate: 1.04, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '甲府商業', department: '商業', quota: 85, finalApplicants: 78, finalRate: 0.92, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '甲府商業', department: '情報処理', quota: 55, finalApplicants: 55, finalRate: 0.98, fiscalYear: '令和5年度（2023年度）' },
   ],
 };

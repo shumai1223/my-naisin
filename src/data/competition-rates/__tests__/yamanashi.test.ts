@@ -6,7 +6,10 @@ import { YAMANASHI_COMPETITION_RATES } from '../yamanashi';
  *
  * ⚠️帰国生徒等特別措置の適用者は最終志願者数に内数として含まれるが倍率算定からは除外されるため、
  * 該当者が一定数いる学科（笛吹・果樹園芸/都留興譲館・普通）では印字済み倍率が
- * finalApplicants/quotaの単純計算値と若干（最大0.06程度）ずれる。許容誤差を0.06に緩めている。
+ * finalApplicants/quotaの単純計算値と若干（最大0.07程度）ずれる。許容誤差を0.07に緩めている。
+ * （掛-1 R5追加時、農林高校システム園芸科・食品科学科は募集人員が小さく帰国生徒等控除の影響が
+ * 相対的に大きいため差が最大0.0625まで拡大した。印字済み倍率をそのまま採用しているため許容誤差
+ * を0.06→0.07へ拡張）
  */
 describe('山梨県 倍率パイプラインα（Y-6・全日制26校48学科の完全収録テスト）', () => {
   const { records, officialSubtotals } = YAMANASHI_COMPETITION_RATES;
@@ -18,11 +21,11 @@ describe('山梨県 倍率パイプラインα（Y-6・全日制26校48学科の
     expect(result.matches).toBe(true);
   });
 
-  it('全レコードのquota>0・finalApplicants>=0・finalRateが自前算出値（applicants/quota・帰国生徒等除外のため許容誤差0.06）と整合する', () => {
+  it('全レコードのquota>0・finalApplicants>=0・finalRateが自前算出値（applicants/quota・帰国生徒等除外のため許容誤差0.07）と整合する', () => {
     for (const r of records) {
       expect(r.quota).toBeGreaterThan(0);
       expect(r.finalApplicants).toBeGreaterThanOrEqual(0);
-      expect(Math.abs(r.finalApplicants / r.quota - r.finalRate)).toBeLessThan(0.06);
+      expect(Math.abs(r.finalApplicants / r.quota - r.finalRate)).toBeLessThan(0.07);
     }
   });
 
@@ -81,6 +84,40 @@ describe('山梨県 倍率パイプラインα（Y-6・全日制26校48学科の
     for (const key of r6Keys) {
       expect(r8Keys.has(key)).toBe(true);
     }
+  });
+
+  it('掛-1(学校別×多年度): 令和5年度(R5)分レコードが48件・26校収録され、公式「全日制課程計」3,601/3,489と完全一致し、R8と学校名+学科名の組み合わせが完全一致する(学校再編なし)', () => {
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    expect(r5.length).toBe(48);
+    const distinctSchools = new Set(r5.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(26);
+    const sumQuota = r5.reduce((a, r) => a + r.quota, 0);
+    const sumApplicants = r5.reduce((a, r) => a + r.finalApplicants, 0);
+    expect(sumQuota).toBe(3601);
+    expect(sumApplicants).toBe(3489);
+
+    const r8Keys = new Set(r8.map((r) => `${r.schoolName}|${r.department}`));
+    const r5Keys = new Set(r5.map((r) => `${r.schoolName}|${r.department}`));
+    expect(r5Keys.size).toBe(r8Keys.size);
+    for (const key of r5Keys) {
+      expect(r8Keys.has(key)).toBe(true);
+    }
+  });
+
+  it('掛-1(学校別×多年度): R5の「県立高校計」（quota3,461・applicants3,356）・「市立高校計」（quota140・applicants133）の2階層内訳がR5レコードの機械集計と完全一致する', () => {
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    const r5Municipal = r5.filter((r) => r.schoolName === '甲府商業');
+    const r5Prefectural = r5.filter((r) => r.schoolName !== '甲府商業');
+
+    const prefQuota = r5Prefectural.reduce((a, r) => a + r.quota, 0);
+    const prefApplicants = r5Prefectural.reduce((a, r) => a + r.finalApplicants, 0);
+    expect(prefQuota).toBe(3461);
+    expect(prefApplicants).toBe(3356);
+
+    const cityQuota = r5Municipal.reduce((a, r) => a + r.quota, 0);
+    const cityApplicants = r5Municipal.reduce((a, r) => a + r.finalApplicants, 0);
+    expect(cityQuota).toBe(140);
+    expect(cityApplicants).toBe(133);
   });
 
   it('教委が公式に一括募集と定める学科群（韮崎工業・工業一括）が単一レコードとして収録されている', () => {
