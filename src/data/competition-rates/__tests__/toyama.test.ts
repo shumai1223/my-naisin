@@ -111,9 +111,28 @@ describe('富山県 倍率パイプラインα（Y-6・全日制34校75レコー
     }
   });
 
-  it('sourcesが公式PDF URLを正しく記録している', () => {
+  it('掛-1(学校別×多年度): 令和5年度(R5)分レコードが77件・34校収録され、公式「合計 34校82学科」行(quota5,226・applicants5,327・倍率1.02)と完全一致する。R5の魚津工業もR6/R7と同じ機械科・電気科・情報環境科の3学科制のため、学校名+学科名のキー集合はR6/R7と完全一致する', () => {
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    expect(r5.length).toBe(77);
+    const distinctSchools = new Set(r5.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(34);
+    const sumQuota = r5.reduce((a, r) => a + r.quota, 0);
+    const sumApplicants = r5.reduce((a, r) => a + r.finalApplicants, 0);
+    expect(sumQuota).toBe(5226);
+    expect(sumApplicants).toBe(5327);
+
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    const r5Keys = new Set(r5.map((r) => `${r.schoolName}|${r.department}`));
+    const r6Keys = new Set(r6.map((r) => `${r.schoolName}|${r.department}`));
+    expect(r5Keys.size).toBe(r6Keys.size);
+    for (const key of r5Keys) {
+      expect(r6Keys.has(key)).toBe(true);
+    }
+  });
+
+  it('sourcesが公式PDF URLを正しく記録している（R5分はpref.toyama.jp原本削除済みのため富山県教育委員会県立高校課の公式ミラーkengaku.tym.ed.jpを許容）', () => {
     for (const s of TOYAMA_COMPETITION_RATES.sources) {
-      expect(s.url).toMatch(/^https:\/\/www\.pref\.toyama\.jp\//);
+      expect(s.url).toMatch(/^https:\/\/www\.(pref\.toyama\.jp|kengaku\.tym\.ed\.jp)\//);
     }
   });
 });
