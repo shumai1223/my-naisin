@@ -6,10 +6,11 @@ import { PREFECTURE_TUITION_SUBSIDY_REGISTRY, PrefectureTuitionSubsidyEntry } fr
 
 const ALPHA_PREFECTURES = ['tokyo', 'kanagawa', 'osaka', 'chiba', 'saitama', 'aichi', 'fukuoka', 'hokkaido', 'hyogo', 'shizuoka'];
 const BATCH2_PREFECTURES = ['aomori', 'iwate', 'miyagi', 'akita', 'yamagata', 'fukushima', 'ibaraki', 'tochigi', 'gunma', 'niigata'];
-const ALL_INVESTIGATED_PREFECTURES = [...ALPHA_PREFECTURES, ...BATCH2_PREFECTURES];
+const BATCH3_PREFECTURES = ['toyama', 'ishikawa', 'fukui', 'yamanashi', 'nagano', 'gifu', 'mie', 'shiga', 'kyoto', 'nara'];
+const ALL_INVESTIGATED_PREFECTURES = [...ALPHA_PREFECTURES, ...BATCH2_PREFECTURES, ...BATCH3_PREFECTURES];
 
-describe('PREFECTURE_TUITION_SUBSIDY_REGISTRY（Y-9αバッチ+第2バッチ・計20県）', () => {
-  it('αバッチ+第2バッチ対象の20県すべてが登録されている', () => {
+describe('PREFECTURE_TUITION_SUBSIDY_REGISTRY（Y-9αバッチ+第2バッチ+第3バッチ・計30県）', () => {
+  it('αバッチ+第2バッチ+第3バッチ対象の30県すべてが登録されている', () => {
     const codes = PREFECTURE_TUITION_SUBSIDY_REGISTRY.map((e) => e.prefectureCode).sort();
     expect(codes).toEqual([...ALL_INVESTIGATED_PREFECTURES].sort());
   });
@@ -99,5 +100,36 @@ describe('PREFECTURE_TUITION_SUBSIDY_REGISTRY（Y-9αバッチ+第2バッチ・�
       expect(entry.source).toBeUndefined();
       expect(entry.programName).toBeUndefined();
     }
+  });
+
+  it('第3バッチのunconfirmed5県(石川/山梨/岐阜/三重/滋賀)もsourceを持たず断定しない', () => {
+    const batch3Unconfirmed = ['ishikawa', 'yamanashi', 'gifu', 'mie', 'shiga'];
+    for (const code of batch3Unconfirmed) {
+      const entry = PREFECTURE_TUITION_SUBSIDY_REGISTRY.find((e) => e.prefectureCode === code) as PrefectureTuitionSubsidyEntry;
+      expect(entry.status).toBe('unconfirmed');
+      expect(entry.source).toBeUndefined();
+      expect(entry.programName).toBeUndefined();
+    }
+  });
+
+  it('長野県は栃木県と同型の学校法人補填型で円建ての断定額を書いていない', () => {
+    const nagano = PREFECTURE_TUITION_SUBSIDY_REGISTRY.find((e) => e.prefectureCode === 'nagano') as PrefectureTuitionSubsidyEntry;
+    expect(nagano.status).toBe('confirmed');
+    expect(nagano.subsidyAmountNote).toMatch(/学校法人補填型/);
+  });
+
+  it('富山県・福井県・京都府は所得区分別の具体的な金額が公式ページから直接確認できたためconfidence:high', () => {
+    for (const code of ['toyama', 'fukui', 'kyoto']) {
+      const entry = PREFECTURE_TUITION_SUBSIDY_REGISTRY.find((e) => e.prefectureCode === code) as PrefectureTuitionSubsidyEntry;
+      expect(entry.status).toBe('confirmed');
+      expect(entry.confidence).toBe('high');
+      expect(entry.subsidyAmountNote).toMatch(/\d{2,3},\d{3}円/);
+    }
+  });
+
+  it('奈良県は制度の実在・対象要件は確認できたが金額は別添PDF参照のみのためconfidence:medium', () => {
+    const nara = PREFECTURE_TUITION_SUBSIDY_REGISTRY.find((e) => e.prefectureCode === 'nara') as PrefectureTuitionSubsidyEntry;
+    expect(nara.status).toBe('confirmed');
+    expect(nara.confidence).toBe('medium');
   });
 });
