@@ -32,6 +32,8 @@ import { computeChibaKValue, CHIBA_K_PRESETS } from '@/lib/total-score/chiba';
 import { computeSaitamaTotalScore } from '@/lib/total-score/saitama';
 import { computeFukuokaScore } from '@/lib/total-score/fukuoka';
 import { computeHokkaidoRank } from '@/lib/total-score/hokkaido';
+import { COMPETITION_RATE_BY_PREFECTURE } from '@/data/competition-rates';
+import { licensableRecords } from '@/lib/competition-rate';
 
 /**
  * MCP互換エンドポイント（堀B / AIネイティブの城①）。
@@ -403,6 +405,25 @@ const TOOLS = [
         gakuryokuRaw: { type: 'number', description: '学力検査点素点（300点満点＝5教科×60点）。' },
       },
       required: ['naishinRaw', 'gakuryokuRaw'],
+    },
+  },
+  {
+    name: 'get_school_competition_rates',
+    description:
+      '都道府県別の公立高校入試における学校ごとの競争率（募集人員・応募者数・倍率）を返す（Y-2/Y-6の一次資料ベース）。商用第三者資料のみを出典とするレコードは配布ポリシーにより自動的に除外される。',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        prefectureCode: {
+          type: 'string',
+          description: '都道府県コード（英語小文字, 例: tokyo, osaka, hokkaido）。',
+        },
+        fiscalYear: {
+          type: 'string',
+          description: '任意。特定年度に絞り込む（例: 令和8年度（2026年度））。未指定なら全収録年度。',
+        },
+      },
+      required: ['prefectureCode'],
     },
   },
 ] as const;
@@ -785,6 +806,28 @@ async function runTool(name: string, args: Record<string, unknown>) {
     }
     const result = computeHokkaidoRank({ naishinRaw, gakuryokuRaw });
     return toolText(result);
+  }
+
+  if (name === 'get_school_competition_rates') {
+    const prefectureCode = String(args.prefectureCode ?? '').trim();
+    const file = COMPETITION_RATE_BY_PREFECTURE[prefectureCode];
+    if (!file) {
+      return toolText({ error: 'not_found', message: `都道府県コード「${prefectureCode}」の学校別入試競争率データは見つかりませんでした。` });
+    }
+    let records = licensableRecords(file);
+    const fiscalYear = typeof args.fiscalYear === 'string' ? args.fiscalYear : undefined;
+    if (fiscalYear !== undefined) {
+      const defaultFiscalYear = file.sources[0]?.fiscalYear;
+      records = records.filter((r) => (r.fiscalYear ?? defaultFiscalYear) === fiscalYear);
+    }
+    return toolText({
+      prefectureCode,
+      sources: file.sources,
+      coverage: file.coverage,
+      recordCount: records.length,
+      records,
+      officialSubtotals: file.officialSubtotals,
+    });
   }
 
   return null;

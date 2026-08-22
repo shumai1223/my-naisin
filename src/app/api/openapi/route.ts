@@ -250,6 +250,34 @@ export function GET() {
           responses: { '200': { description: '成功（text/csv）' } },
         },
       },
+      '/api/schools/{pref}': {
+        get: {
+          operationId: 'getSchoolCompetitionRates',
+          summary: '都道府県別・学校ごとの公立高校入試競争率（募集人員・応募者数・倍率）',
+          description:
+            'Y-2/Y-6で構築した一次資料ベースの学校別レコードを返す。商用第三者資料のみを出典とするレコードは配布ポリシーにより自動的に除外される（licensableRecords）。?fiscalYear= で特定年度に絞り込み可能（掛-1・多年度データ対応）。',
+          parameters: [
+            {
+              name: 'pref',
+              in: 'path',
+              required: true,
+              description: '都道府県コード（英語小文字, 例: tokyo, osaka, hokkaido）。',
+              schema: { type: 'string', example: 'tokyo' },
+            },
+            {
+              name: 'fiscalYear',
+              in: 'query',
+              required: false,
+              description: '特定年度に絞り込む（例: 令和8年度（2026年度））。未指定なら全収録年度。',
+              schema: { type: 'string', example: '令和8年度（2026年度）' },
+            },
+          ],
+          responses: {
+            '200': { description: '成功' },
+            '404': { description: '都道府県コードが見つからない' },
+          },
+        },
+      },
       '/api/status': {
         get: {
           operationId: 'getApiStatus',

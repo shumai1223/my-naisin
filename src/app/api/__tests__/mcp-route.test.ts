@@ -36,16 +36,38 @@ describe('/api/mcp JSON-RPC 契約', () => {
     expect(json.result.capabilities.prompts).toBeDefined();
   });
 
-  test('tools/list は25ツールを返す（S-5でhensachi/total-score/bairitsu/education-cost/stats/tokyo/kanagawa/osaka/aichi/chiba/saitama/fukuoka/hokkaidoの18本を追加=13統一エンジン県+8個別実装県が全てMCP化完了）', async () => {
+  test('tools/list は26ツールを返す（S-5で18本追加=13統一エンジン県+8個別実装県が全てMCP化完了・Y-7でget_school_competition_ratesを追加）', async () => {
     const res = await POST(rpc('tools/list'));
     const json = await res.json();
-    expect(json.result.tools).toHaveLength(25);
+    expect(json.result.tools).toHaveLength(26);
     expect(json.result.tools.map((t: { name: string }) => t.name)).toContain('build_study_plan');
     expect(json.result.tools.map((t: { name: string }) => t.name)).toContain('calculate_hensachi');
     expect(json.result.tools.map((t: { name: string }) => t.name)).toContain('calculate_total_score');
     expect(json.result.tools.map((t: { name: string }) => t.name)).toContain('calculate_bairitsu');
     expect(json.result.tools.map((t: { name: string }) => t.name)).toContain('calculate_education_cost');
     expect(json.result.tools.map((t: { name: string }) => t.name)).toContain('calculate_path_to_university_cost');
+    expect(json.result.tools.map((t: { name: string }) => t.name)).toContain('get_school_competition_rates');
+  });
+
+  test('tools/call get_school_competition_rates は学校別レコードを返し、商用限定レコードは除外する', async () => {
+    const res = await POST(
+      rpc('tools/call', { name: 'get_school_competition_rates', arguments: { prefectureCode: 'tokyo' } })
+    );
+    const json = await res.json();
+    const data = JSON.parse(json.result.content[0].text);
+    expect(data.prefectureCode).toBe('tokyo');
+    expect(Array.isArray(data.records)).toBe(true);
+    expect(data.records.length).toBeGreaterThan(0);
+    expect(data.records.every((r: { commercialSourceOnly?: boolean }) => r.commercialSourceOnly !== true)).toBe(true);
+  });
+
+  test('tools/call get_school_competition_rates は存在しない都道府県コードでnot_foundを返す', async () => {
+    const res = await POST(
+      rpc('tools/call', { name: 'get_school_competition_rates', arguments: { prefectureCode: 'nowhere' } })
+    );
+    const json = await res.json();
+    const data = JSON.parse(json.result.content[0].text);
+    expect(data.error).toBe('not_found');
   });
 
   test('tools/call calculate_naishin は確定値(東京オール5=65)を返す', async () => {
@@ -340,7 +362,7 @@ describe('/api/mcp JSON-RPC 契約', () => {
   test('GET ディスカバリはツール/メソッド一覧を返す', async () => {
     const res = GET();
     const json = await res.json();
-    expect(json.tools).toHaveLength(25);
+    expect(json.tools).toHaveLength(26);
     expect(json.methods).toContain('resources/read');
   });
 });
@@ -397,9 +419,10 @@ const ALL_TOOL_FIXTURES: { name: string; arguments: Record<string, unknown> }[] 
   { name: 'calculate_saitama_total_score', arguments: { gakuryokuRaw: 380, chosashoRaw: 260 } },
   { name: 'calculate_fukuoka_score', arguments: { naishinRaw: 45, gakuryokuRaw: 300 } },
   { name: 'calculate_hokkaido_rank', arguments: { naishinRaw: 315, gakuryokuRaw: 300 } },
+  { name: 'get_school_competition_rates', arguments: { prefectureCode: 'tokyo' } },
 ];
 
-describe('/api/mcp 性能回帰スイート（ZZ-6a: 全25ツール）', () => {
+describe('/api/mcp 性能回帰スイート（ZZ-6a: 全26ツール）', () => {
   test('TOOLS定義と本スイートのfixtureが1対1で一致する（新規ツール追加時の計測漏れ防止）', async () => {
     const res = await POST(rpc('tools/list'));
     const json = await res.json();
