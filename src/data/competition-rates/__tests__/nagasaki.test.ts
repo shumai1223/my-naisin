@@ -95,6 +95,28 @@ describe('長崎県 倍率パイプラインα（Y-6・全日制55校116レコ�
     expect(r6Keys).toEqual(r7Keys);
   });
 
+  it('掛-1(学校別×多年度・4年度目): 令和5年度(R5)分レコードが117件収録され、「総計」(quota5,554・applicants4,277・倍率0.77=県立計5,434/4,135+市立計120/142)と完全一致する。令和5年度も令和6年度と同じく当時「後期選抜」という呼称だった。市立長崎商業にR5時点で存在した「スポーツビジネスコース」がR6では姿を消しており(学科再編)、それ以外の116キーはR5/R6で完全一致する', () => {
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    expect(r5.length).toBe(117);
+    expect(r5.reduce((a, r) => a + r.quota, 0)).toBe(5554);
+    expect(r5.reduce((a, r) => a + r.finalApplicants, 0)).toBe(4277);
+
+    const r5Municipal = r5.filter((r) => r.schoolName === '市立長崎商業');
+    expect(r5Municipal.reduce((a, r) => a + r.quota, 0)).toBe(120);
+    expect(r5Municipal.reduce((a, r) => a + r.finalApplicants, 0)).toBe(142);
+
+    const r5Schools = new Set(r5.map((r) => r.schoolName));
+    expect(r5Schools.size).toBe(55);
+
+    const r5Keys = new Set(r5.map((r) => `${r.schoolName}|${r.department}`));
+    const r6Keys = new Set(r6.map((r) => `${r.schoolName}|${r.department}`));
+    const onlyInR5 = [...r5Keys].filter((k) => !r6Keys.has(k));
+    expect(onlyInR5).toEqual(['市立長崎商業|スポーツビジネスコース']);
+    const onlyInR6 = [...r6Keys].filter((k) => !r5Keys.has(k));
+    expect(onlyInR6).toEqual([]);
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of NAGASAKI_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.pref\.nagasaki\.jp\//);
