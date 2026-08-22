@@ -91,11 +91,13 @@
  * 1. confidence: mediumまたはinterimIncludesRate未確定の県（徳島・香川・愛媛・宮崎・高知・鹿児島・
  *    山形・富山・山梨・和歌山・京都 等）について、一次資料（県教委公式サイト）の直接確認による確度向上。
  *    unconfirmedの5県（島根・青森・宮城・岡山・長崎）は先行速報の実在自体の再調査が必要。
- * 2. 速報データの取込スクリプト設計（`interimIncludesRate: false`の県では倍率でなく出願者数の
- *    前年同時期比を表示する設計が必要）。
- * 3. 速報面フロントエンド（既存のcompetition-rates系ページと混同しないよう「未確定・参考値」である
- *    旨を明示するUI設計が必須）。
- * 4. DoD「速報取込のドライラン（過去年度データで模擬）成功」の実施。
+ * 2. ✅2026-08-22完了: 速報データの取込ロジック（純関数）を`src/lib/interim-rate-ingest.ts`に実装済み。
+ *    `interimIncludesRate: false`の県では倍率を一切出力しない設計・`unconfirmed`/`not-investigated`の
+ *    県はnullを返し機能させない設計（安全側）。DoD「速報取込のドライラン（過去年度データで模擬）成功」も
+ *    `src/lib/__tests__/interim-rate-ingest.test.ts`で実データ（kumamoto/chiba）を使い達成済み。
+ * 3. 残タスク: 速報面フロントエンド（既存のcompetition-rates系ページと混同しないよう「未確定・参考値」
+ *    である旨を明示するUI設計が必須。`ingestInterimBulletin`の出力をそのまま表示に使える）。
+ *    実際のライブ速報データの取得（スクレイピング・当日〜翌日反映の運用フロー）は依然として未着手。
  */
 
 export type InterimBulletinStatus =
