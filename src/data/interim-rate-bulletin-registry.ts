@@ -95,9 +95,15 @@
  *    `interimIncludesRate: false`の県では倍率を一切出力しない設計・`unconfirmed`/`not-investigated`の
  *    県はnullを返し機能させない設計（安全側）。DoD「速報取込のドライラン（過去年度データで模擬）成功」も
  *    `src/lib/__tests__/interim-rate-ingest.test.ts`で実データ（kumamoto/chiba）を使い達成済み。
- * 3. 残タスク: 速報面フロントエンド（既存のcompetition-rates系ページと混同しないよう「未確定・参考値」
- *    である旨を明示するUI設計が必須。`ingestInterimBulletin`の出力をそのまま表示に使える）。
- *    実際のライブ速報データの取得（スクレイピング・当日〜翌日反映の運用フロー）は依然として未着手。
+ * 3. ✅2026-08-22完了: 速報面フロントエンドを`src/app/interim-bulletin-preview/page.tsx`に実装済み
+ *    （`NEXT_PUBLIC_INTERIM_BULLETIN_ENABLED='1'`まではnotFound()・noindex・build-not-launch）。
+ *    表示データは実在校と誤認され得ないよう完全に架空の学校名によるサンプルのみ（Y-0憲法「捏造ゼロ」）。
+ *    ナビゲーション・サイトマップ・page-registry.tsのSTATIC_PAGESには意図的に登録しない
+ *    （`SITEMAP_EXCLUDED_ROUTES`・`NO_INBOUND_LINK_EXEMPT_ROUTES`・各rich-results-*系EXEMPT_ROUTESに登録済み）。
+ * 4. 残タスク（Y-11の最後の未着手事項）: **実際のライブ速報データの取得**（各県教委サイトの当日〜翌日
+ *    スクレイピング・取込パイプラインの運用化）。これは出願シーズン（1〜2月）が来ないと実地検証できない
+ *    ため、次の冬季（2027年1〜2月）に着手すること。それまでは`interim-rate-ingest.ts`のロジックと
+ *    `interim-bulletin-preview`の表示器を旗offのまま維持し、confidence向上調査（上記1）を隙間時間で進める。
  */
 
 export type InterimBulletinStatus =

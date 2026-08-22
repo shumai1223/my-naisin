@@ -153,4 +153,7 @@ export const SITEMAP_EXCLUDED_ROUTES = [
   '/partner-demo',
   // 2026-08-13：見積書の自動発行ツール（ops/PRICING_OPTIONS.md #3）。/developersからリンクする内部ツールでnoindex。
   '/mitsumori',
+  // Y-11：冬の倍率速報体制・速報面プレビュー（NEXT_PUBLIC_INTERIM_BULLETIN_ENABLED='1'まではnotFound()・
+  // noindex・サンプルデータのみの内部確認用。ライブ速報データの取得手段が整うまでSTATIC_PAGESへ移さない）。
+  '/interim-bulletin-preview',
 ];

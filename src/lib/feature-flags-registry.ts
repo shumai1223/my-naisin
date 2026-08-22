@@ -11,6 +11,7 @@
 import { isAdvisorEnabled } from '@/lib/advisor/flag';
 import { isJukuSaasEnabled } from '@/lib/juku-saas/flag';
 import { isPartnerDemoEnabled } from '@/lib/partner-demo/flag';
+import { isInterimBulletinPreviewEnabled } from '@/lib/interim-bulletin/flag';
 import { isAdSlotEnabled } from '@/components/AdSlot';
 
 export interface FeatureFlagEntry {
@@ -26,6 +27,11 @@ export const FEATURE_FLAGS: FeatureFlagEntry[] = [
   { name: 'advisor（ZZ-3c）', envVar: 'NEXT_PUBLIC_ADVISOR_ENABLED', check: isAdvisorEnabled },
   { name: 'juku-saas（ZZ-4d/e）', envVar: 'NEXT_PUBLIC_JUKU_SAAS_ENABLED', check: isJukuSaasEnabled },
   { name: 'partner-demo（AA-2）', envVar: 'NEXT_PUBLIC_PARTNER_DEMO_ENABLED', check: isPartnerDemoEnabled },
+  {
+    name: 'interim-bulletin-preview（Y-11）',
+    envVar: 'NEXT_PUBLIC_INTERIM_BULLETIN_ENABLED',
+    check: isInterimBulletinPreviewEnabled,
+  },
   {
     name: 'adsense',
     envVar: 'NEXT_PUBLIC_ADSENSE_ENABLED',

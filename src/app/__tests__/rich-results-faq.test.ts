@@ -38,6 +38,7 @@ const FAQ_EXEMPT_ROUTES: Record<string, string> = {
   '/juku/dashboard/demo': 'ZZ-4e：noindex・旗付きUIのデモ環境（Q&A形式のコンテンツなし）',
   '/partner-demo': 'AA-2：noindex・旗付きUI（Q&A形式のコンテンツなし）',
   '/mitsumori': '2026-08-13：noindex・見積書自動発行の内部ツール（Q&A形式のコンテンツなし）',
+  '/interim-bulletin-preview': 'Y-11：noindex・旗付きUI（サンプルデータのテーブル表示のみでQ&A形式のコンテンツなし）',
   '/blog': '記事一覧ページ（個別記事はblog/[slug]側でFAQPageSchema対応済み）',
   '/blog/tag/[tag]': 'タグ別記事一覧ページ（一覧のみでQ&A形式のコンテンツなし）',
   '/comparison': '都道府県比較表ページ（表形式でQ&A形式のコンテンツなし）',
