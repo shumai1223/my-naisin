@@ -52,7 +52,7 @@ import { SCHOOLS_PRIVATE_MIYAZAKI } from './miyazaki';
 import { SCHOOLS_PRIVATE_KAGOSHIMA } from './kagoshima';
 import { SCHOOLS_PRIVATE_OKINAWA } from './okinawa';
 
-export const SCHOOL_MASTER_BY_PREFECTURE: Record<string, SchoolMasterFile> = {
+export const PRIVATE_SCHOOL_MASTER_BY_PREFECTURE: Record<string, SchoolMasterFile> = {
   hokkaido: SCHOOLS_PRIVATE_HOKKAIDO,
   aomori: SCHOOLS_PRIVATE_AOMORI,
   iwate: SCHOOLS_PRIVATE_IWATE,
@@ -102,4 +102,4 @@ export const SCHOOL_MASTER_BY_PREFECTURE: Record<string, SchoolMasterFile> = {
   okinawa: SCHOOLS_PRIVATE_OKINAWA,
 };
 
-export const SCHOOL_MASTER_FILES: SchoolMasterFile[] = Object.values(SCHOOL_MASTER_BY_PREFECTURE);
+export const PRIVATE_SCHOOL_MASTER_FILES: SchoolMasterFile[] = Object.values(PRIVATE_SCHOOL_MASTER_BY_PREFECTURE);

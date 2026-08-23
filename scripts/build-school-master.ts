@@ -83,7 +83,8 @@ function buildMaster(
   filterFn: (row: RawMextRow) => boolean,
   outDir: string,
   varPrefix: string,
-  ownerLabel: string
+  ownerLabel: string,
+  exportPrefix: string
 ): { total: number; emptyPrefectures: string[] } {
   const prefNumberMap = buildPrefectureNumberMap(PREFECTURES.map((p) => p.code));
 
@@ -177,14 +178,14 @@ export const ${varName}: SchoolMasterFile = ${JSON.stringify(
   }
 
   indexLines.push('');
-  indexLines.push('export const SCHOOL_MASTER_BY_PREFECTURE: Record<string, SchoolMasterFile> = {');
+  indexLines.push(`export const ${exportPrefix}_BY_PREFECTURE: Record<string, SchoolMasterFile> = {`);
   for (const p of PREFECTURES) {
     const varName = `${varPrefix}_${p.code.toUpperCase().replace(/-/g, '_')}`;
     indexLines.push(`  ${p.code}: ${varName},`);
   }
   indexLines.push('};');
   indexLines.push('');
-  indexLines.push('export const SCHOOL_MASTER_FILES: SchoolMasterFile[] = Object.values(SCHOOL_MASTER_BY_PREFECTURE);');
+  indexLines.push(`export const ${exportPrefix}_FILES: SchoolMasterFile[] = Object.values(${exportPrefix}_BY_PREFECTURE);`);
   indexLines.push('');
 
   fs.writeFileSync(path.join(outDir, 'index.ts'), indexLines.join('\n'), 'utf8');
@@ -213,7 +214,8 @@ async function main() {
     isPublicActiveHighSchool,
     OUT_DIR,
     'SCHOOLS',
-    'Y-1 公立高等学校マスター'
+    'Y-1 公立高等学校マスター',
+    'SCHOOL_MASTER'
   );
   console.log(`\n✅ 公立: 47都道府県・合計${pub.total}校を書き出しました（${OUT_DIR}）`);
   if (pub.emptyPrefectures.length > 0) {
@@ -227,7 +229,8 @@ async function main() {
     isPrivateActiveHighSchool,
     OUT_DIR_PRIVATE,
     'SCHOOLS_PRIVATE',
-    'Λ-5 私立高等学校マスター'
+    'Λ-5 私立高等学校マスター',
+    'PRIVATE_SCHOOL_MASTER'
   );
   console.log(`\n✅ 私立: 47都道府県・合計${priv.total}校を書き出しました（${OUT_DIR_PRIVATE}）`);
   if (priv.emptyPrefectures.length > 0) {

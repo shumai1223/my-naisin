@@ -508,8 +508,14 @@ return path.replace(/^\//, '').slice(0, 40) || 'home';
 > ✅ **2026-08-23 一部対応済み（loopが実施）**: 表内 #4（`competition-rates`横断テスト）と #5（`schools-private`マスタ整合テスト）を追加した。
 > `src/data/competition-rates/__tests__/index-invariants.test.ts` と `src/data/schools-private/__tests__/school-master-data.test.ts`
 > （commit `1624a9d`・tsc実exit0・jestフルスイート333suites5835tests全green）。
-> **残りは #5 のexport名衝突リネーム（`SCHOOL_MASTER_BY_PREFECTURE`等を`PRIVATE_SCHOOL_MASTER_*`へ）と #9/#10（D1実行時データの自動ゲート＝DW-8）が未対応。**
-> リネームは import 呼び出し元の全数把握が必要なため今回は見送った（規模次第では次周回で着手可）。
+> **残りは #9/#10（D1実行時データの自動ゲート＝DW-8）が未対応。**
+>
+> ✅ **2026-08-24 export名衝突リネーム完了（loopが実施）**: `src/data/schools-private/index.ts`の
+> `SCHOOL_MASTER_BY_PREFECTURE`/`SCHOOL_MASTER_FILES`を`PRIVATE_SCHOOL_MASTER_BY_PREFECTURE`/
+> `PRIVATE_SCHOOL_MASTER_FILES`へリネーム。grep確認の結果、本番コードからのimportは0件（テスト1本
+> `school-master-data.test.ts`のみが参照）だったため低リスクと判断。生成元`scripts/build-school-master.ts`の
+> `buildMaster()`に`exportPrefix`引数を追加し、再生成時も同じ命名を維持するよう同期済み（公立版は
+> `SCHOOL_MASTER`のまま不変）。tsc実exit0・jestフル336suites5875tests green。
 
 `src/data/` 配下の「数値を持つ型」を全列挙し、不変条件テストの有無を機械的に確認した。
 
