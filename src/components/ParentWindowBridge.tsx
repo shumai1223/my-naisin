@@ -4,7 +4,13 @@ import * as React from 'react';
 import Link from 'next/link';
 import { CalendarClock, Users, MessageCircle, ChevronRight } from 'lucide-react';
 
-import { activeParentWindow, parentWindowCopy, type ParentWindowId } from '@/lib/parent-window';
+import {
+  activeParentWindow,
+  parentWindowCopy,
+  isEndOfTermSpikeDay,
+  END_OF_TERM_SPIKE_DAY_NOTE,
+  type ParentWindowId,
+} from '@/lib/parent-window';
 import { lineAddUrl } from '@/lib/line';
 import { track } from '@/lib/track';
 import { beaconParentFunnelEvent } from '@/lib/parent-funnel-beacon';
@@ -58,9 +64,13 @@ export function ParentWindowBridge({
   className = '',
 }: ParentWindowBridgeProps) {
   const [windowId, setWindowId] = React.useState<ParentWindowId | null>(null);
+  const [isSpikeDay, setIsSpikeDay] = React.useState(false);
 
   React.useEffect(() => {
-    setWindowId(activeParentWindow(new Date()));
+    const now = new Date();
+    setWindowId(activeParentWindow(now));
+    // S7-1: 終業式デー（12/24〜12/25）だけ既存コピーへ時宜性の一文を追加する。
+    setIsSpikeDay(isEndOfTermSpikeDay(now));
   }, []);
 
   if (!windowId) return null;
@@ -92,7 +102,10 @@ export function ParentWindowBridge({
       </div>
 
       <h3 className="mb-2 text-lg font-bold leading-snug text-slate-900 md:text-xl">{copy.heading}</h3>
-      <p className="mb-4 text-sm leading-relaxed text-slate-700">{copy.intro}</p>
+      <p className="mb-4 text-sm leading-relaxed text-slate-700">
+        {copy.intro}
+        {isSpikeDay && <span className="mt-1 block font-semibold text-indigo-700">{END_OF_TERM_SPIKE_DAY_NOTE}</span>}
+      </p>
 
       {/* ① 現在地サマリ（結果値入り）。数値が無い面では見出しだけの現在地カードにフォールバック。 */}
       {hasScore && (

@@ -2,7 +2,13 @@
  * 保護者ウィンドウ判定（Build 1）の境界テスト。
  * 収穫窓は保護者接点が確実に立つ期間だけ＝三者面談・出願の直前。窓の端が仕様どおりか固定する。
  */
-import { activeParentWindow, parentWindowCopy, PARENT_WINDOW_COPY } from '../parent-window';
+import {
+  activeParentWindow,
+  parentWindowCopy,
+  PARENT_WINDOW_COPY,
+  isEndOfTermSpikeDay,
+  END_OF_TERM_SPIKE_DAY_NOTE,
+} from '../parent-window';
 
 const D = (iso: string) => new Date(`${iso}T00:00:00Z`);
 
@@ -41,6 +47,24 @@ describe('activeParentWindow（7月・冬の収穫窓判定）', () => {
   it('引数なしでも例外なく null|窓ID を返す（既定 now）', () => {
     const r = activeParentWindow();
     expect(r === null || r === 'mendan-july' || r === 'winter' || r === 'final-stretch').toBe(true);
+  });
+});
+
+describe('isEndOfTermSpikeDay（S7-1・終業式デー判定）', () => {
+  it('12/23×・12/24○・12/25○・12/26×', () => {
+    expect(isEndOfTermSpikeDay(D('2026-12-23'))).toBe(false);
+    expect(isEndOfTermSpikeDay(D('2026-12-24'))).toBe(true);
+    expect(isEndOfTermSpikeDay(D('2026-12-25'))).toBe(true);
+    expect(isEndOfTermSpikeDay(D('2026-12-26'))).toBe(false);
+  });
+
+  it('年をまたいでも同型で判定できる（純関数・日付非依存のロジック）', () => {
+    expect(isEndOfTermSpikeDay(D('2027-12-24'))).toBe(true);
+  });
+
+  it('日付・合否を断定しない一文である（捏造ゼロ）', () => {
+    expect(END_OF_TERM_SPIKE_DAY_NOTE).not.toMatch(/必ず|絶対|確実に合格/);
+    expect(END_OF_TERM_SPIKE_DAY_NOTE.length).toBeGreaterThan(0);
   });
 });
 

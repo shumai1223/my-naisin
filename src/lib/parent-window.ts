@@ -72,3 +72,22 @@ export const PARENT_WINDOW_COPY: Record<ParentWindowId, ParentWindowCopy> = {
 export function parentWindowCopy(id: ParentWindowId): ParentWindowCopy {
   return PARENT_WINDOW_COPY[id] ?? PARENT_WINDOW_COPY['mendan-july'];
 }
+
+/**
+ * 終業式デー（S7-1・2026-08-24追加）: `ops/CLOCK.md`§2が一次ソース実査で確定した
+ * 2学期終業式日（東京都12/25・神奈川県/兵庫県/大阪府12/24）。GSC実測でこの2日間は
+ * サイト全体のクリックが平常日の約2.6〜2.9倍に集中する（`ops/raw/BRIEF.md`§C）。
+ * この4県以外の43県は未実査のため、2日間（12/24〜12/25）まとめて扱う（県別の1日差は
+ * JSTとの数時間ズレも考慮し区別しない）。UTC日付判定は他の窓関数と同方針。
+ */
+export function isEndOfTermSpikeDay(now: Date = new Date()): boolean {
+  const m = now.getUTCMonth() + 1;
+  const d = now.getUTCDate();
+  return m === 12 && (d === 24 || d === 25);
+}
+
+/**
+ * 終業式デーだけ既存の`winter`コピーへ追加で差し込む短い時宜性の一文。
+ * 日付・合否は断定しない（「今日で終わる学校も」という一般的な言及に留める）。
+ */
+export const END_OF_TERM_SPIKE_DAY_NOTE = '今日で2学期が終わる学校も。年末年始に一度、現在地を確認しませんか。';
