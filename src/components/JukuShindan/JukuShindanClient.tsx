@@ -20,6 +20,7 @@ import { recommendJuku, type JukuFormat, type JukuSituation, type JukuRecommenda
 import { readSavedGoal } from '@/lib/persistence';
 import { buildParentShareMessage } from '@/lib/share';
 import { EVENTS, funnel, track } from '@/lib/track';
+import { beaconParentFunnelEvent } from '@/lib/parent-funnel-beacon';
 import { APP_NAME } from '@/lib/constants';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
@@ -136,6 +137,7 @@ export function JukuShindanClient() {
 
     const medium = typeof navigator !== 'undefined' && typeof navigator.share === 'function' ? 'native' : 'copy';
     track(EVENTS.SHARE_TO_PARENT, { source: PLACEMENT, pref: prefectureCode || 'none', tool: 'juku-shindan', medium });
+    beaconParentFunnelEvent('share_to_parent', { medium, prefectureCode: prefectureCode || undefined });
 
     if (typeof navigator !== 'undefined' && typeof navigator.share === 'function') {
       try {

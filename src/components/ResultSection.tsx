@@ -20,6 +20,7 @@ import { PointValueCard } from '@/components/Result/PointValueCard';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { getPrefectureByCode, type PrefectureConfig } from '@/lib/prefectures';
 import { track, EVENTS } from '@/lib/track';
+import { beaconParentFunnelEvent } from '@/lib/parent-funnel-beacon';
 import type { ResultData, SavedHistoryEntry, Scores } from '@/lib/types';
 
 /**
@@ -188,6 +189,7 @@ export function ResultSection({
       source: 'result-top',
       percent: Math.round(result.percent),
     });
+    beaconParentFunnelEvent('share_to_parent', { prefectureCode });
     onShareOpen();
   }, [prefectureCode, result.percent, onShareOpen]);
 

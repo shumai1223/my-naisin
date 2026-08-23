@@ -8,6 +8,7 @@ import { Card } from '@/components/ui/Card';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { track } from '@/lib/track';
+import { beaconParentFunnelEvent } from '@/lib/parent-funnel-beacon';
 import { writeSavedGoal } from '@/lib/persistence';
 import type { ResultData } from '@/lib/types';
 
@@ -83,6 +84,7 @@ export function GapToTarget({ result, prefectureCode, prefectureName, onShareOpe
       state: state ?? 'none',
       gap: gap ?? 0,
     });
+    beaconParentFunnelEvent('share_to_parent', { prefectureCode });
     onShareOpen();
   }
 
