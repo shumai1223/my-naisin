@@ -16,6 +16,7 @@ const TOKYO_SOURCE_URL =
   getPrefectureByCode('tokyo')?.sourceUrl ?? 'https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/exam/';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
+import { StaticToolEntryLinks } from '@/components/StaticToolEntryLinks';
 
 export const metadata: Metadata = {
   title: '都立高校 総合得点 計算サイト【1020点満点】学力検査・調査書点・ESAT-J | My Naishin',
@@ -144,6 +145,12 @@ export default function TokyoTotalScorePage() {
               <span className="text-2xl font-black text-slate-800">1020点満点</span>
             </div>
           </section>
+
+          {/* S4-1: /juku-shindan・/hogoshaへの静的（計算前）内部リンク。GSC表示0・クリック0なのに
+              内部リンク経由の実アフィリクリックの37%を生む/hogoshaへ、サイト最大流入面から到達距離を短縮する。 */}
+          <div className="mb-6">
+            <StaticToolEntryLinks />
+          </div>
 
           {/* Calculator＋結果連動の名簿/送客導線（総合得点の実測値をCTAへ配線＝成績カード/保護者バトン点灯） */}
           <TokyoTotalScoreResultFlow />

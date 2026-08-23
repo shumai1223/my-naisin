@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Calculator, Target, BookOpen, ChevronRight, MapPin, TrendingUp, Wallet } from 'lucide-react';
+import { Calculator, Target, BookOpen, ChevronRight, MapPin, TrendingUp, Wallet, HeartHandshake } from 'lucide-react';
 import { PREFECTURES, REGIONS } from '@/lib/prefectures';
 
 interface BlogRelatedLinksProps {
@@ -145,6 +145,21 @@ export function BlogRelatedLinks({
             <div className="flex-1">
               <div className="text-[10px] font-medium text-rose-600/80 leading-none mb-1">HIYOU</div>
               高校受験・進学にかかるお金まとめ
+            </div>
+            <ChevronRight className="h-4 w-4" />
+          </Link>
+
+          {/* 保護者の方へ（S4-1・GSC表示0だが内部リンク経由の実アフィリクリックの37%を生む面） */}
+          <Link
+            href="/hogosha"
+            className="flex items-center gap-3 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-bold text-emerald-700 transition-colors hover:border-emerald-300 hover:bg-emerald-100"
+          >
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white text-emerald-600 shadow-sm">
+              <HeartHandshake className="h-4 w-4" />
+            </div>
+            <div className="flex-1">
+              <div className="text-[10px] font-medium text-emerald-600/80 leading-none mb-1">HOGOSHA</div>
+              保護者の方へ（無料ガイド）
             </div>
             <ChevronRight className="h-4 w-4" />
           </Link>

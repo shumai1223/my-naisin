@@ -17,6 +17,7 @@ const KANAGAWA_SOURCE_URL =
   getPrefectureByCode('kanagawa')?.sourceUrl ?? 'https://www.pref.kanagawa.jp/docs/hr4/senbatsu2024.html';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
+import { StaticToolEntryLinks } from '@/components/StaticToolEntryLinks';
 
 // 可視の「よくある質問」セクションと完全一致させた FAQ（FAQ リッチリザルト用）
 const KANAGAWA_S_VALUE_FAQS = [
@@ -146,6 +147,12 @@ export default function KanagawaSValuePage() {
               </div>
             </div>
           </section>
+
+          {/* S4-1: /juku-shindan・/hogoshaへの静的（計算前）内部リンク。GSC表示0・クリック0なのに
+              内部リンク経由の実アフィリクリックの37%を生む/hogoshaへ、サイト最大流入面から到達距離を短縮する。 */}
+          <div className="mb-6">
+            <StaticToolEntryLinks />
+          </div>
 
           {/* Calculator・結果連動（S-1④） */}
           <KanagawaResultFlow />

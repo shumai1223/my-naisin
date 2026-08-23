@@ -47,6 +47,7 @@ import { BlogSection } from '@/components/BlogSection';
 import { NaishinGuideSection } from '@/components/NaishinGuideSection';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
+import { StaticToolEntryLinks } from '@/components/StaticToolEntryLinks';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { ThreeStepGuide } from '@/components/ThreeStepGuide';
@@ -467,6 +468,15 @@ export default function HomeClient() {
                       </Link>
                     </div>
                   </div>
+                </div>
+              )}
+
+              {/* S4-1: /hogosha・/juku-shindanへの静的（select画面のみ・クロール可視）内部リンク。
+                  GSC表示0・クリック0なのに内部リンク経由の実アフィリクリックの37%を生む/hogoshaへ、
+                  最大流入面（ホーム）から到達距離3→2に短縮する。 */}
+              {navigationMode === 'select' && (
+                <div className="px-4 pb-4 md:px-6">
+                  <StaticToolEntryLinks />
                 </div>
               )}
 
