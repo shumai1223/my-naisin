@@ -485,6 +485,12 @@ return path.replace(/^\//, '').slice(0, 40) || 'home';
 
 # 6. ★★ DW-7: 数値の不変条件テストの欠落 —「次の事故の予定地」
 
+> ✅ **2026-08-23 一部対応済み（loopが実施）**: 表内 #4（`competition-rates`横断テスト）と #5（`schools-private`マスタ整合テスト）を追加した。
+> `src/data/competition-rates/__tests__/index-invariants.test.ts` と `src/data/schools-private/__tests__/school-master-data.test.ts`
+> （commit `1624a9d`・tsc実exit0・jestフルスイート333suites5835tests全green）。
+> **残りは #5 のexport名衝突リネーム（`SCHOOL_MASTER_BY_PREFECTURE`等を`PRIVATE_SCHOOL_MASTER_*`へ）と #9/#10（D1実行時データの自動ゲート＝DW-8）が未対応。**
+> リネームは import 呼び出し元の全数把握が必要なため今回は見送った（規模次第では次周回で着手可）。
+
 `src/data/` 配下の「数値を持つ型」を全列挙し、不変条件テストの有無を機械的に確認した。
 
 | # | 型 / 場所 | 実ファイル数 | 想定される不変条件 | テスト | 証拠 |
