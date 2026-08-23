@@ -273,7 +273,10 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // kumamoto-u-education/oita-u-education/miyazaki-u-education/tsukuba-tech-u/geidai-u/
     // nara-wu-u/saga-u)をGmail下書き作成は行わず(上限を超えないため)status のみqueuedへ昇格
     // (185→198・org/id重複チェック0件)。実際のGmail下書き化は次回リセット後に行う。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(198);
+    // 2026-08-23さらに続き: 本日新規追加した5件(lane7-hirosaki-u-education/gifu-u-education/
+    // yamaguchi-u-education/lane3-manabi-aid/shinnihon-shuppansha)も同様に本文執筆済み・
+    // Gmail下書きは未作成のままqueuedへ昇格(198→203)。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(203);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {
