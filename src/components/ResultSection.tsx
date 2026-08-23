@@ -341,14 +341,14 @@ export function ResultSection({
                         難関校志望者へ
                       </span>
                       <div className="text-sm font-bold text-purple-900">
-                        Z会の通信教育（難関校受験コース）
+                        オンライン個別指導の無料体験
                       </div>
                     </div>
                     <p className="text-xs text-purple-800 leading-relaxed mb-3">
-                      内申点が高い層は、当日点の取り切りで合否が決まります。Z会の難関校受験コースは、応用問題対策・記述力育成・添削指導で、トップ校合格者の定番教材。
+                      内申点が高い層は、当日点の取り切りで合否が決まります。まずは無料体験で今の実力を診断し、応用問題対策や記述力を伸ばす学習プランを一緒に組み立てられます。
                     </p>
                     <div className="text-xs">
-                      <AffiliateAd placement="home" id="zkai-text-advanced" hideLabel />（PR）
+                      <AffiliateAd placement="result" id="sora-juku-text" hideLabel />（PR）── 全国オンライン対応・費用はかかりません
                     </div>
                   </div>
                 </div>
@@ -361,15 +361,14 @@ export function ResultSection({
                         中堅上位を狙うなら
                       </span>
                       <div className="text-sm font-bold text-blue-900">
-                        Z会の通信教育 ＋ スタディサプリ
+                        オンライン個別指導の無料体験
                       </div>
                     </div>
                     <p className="text-xs text-blue-800 leading-relaxed mb-3">
-                      あと一押しで上位校が見える層。テキスト＋添削で定期テスト対策が万全のZ会と、月額2,178円で映像授業見放題のスタディサプリの組み合わせがコスパ最高。
+                      あと一押しで上位校が見える層。定期テスト対策と入試対策を一緒に見てもらえる無料体験で、今の弱点と伸ばし方を具体的に確認できます。
                     </p>
-                    <div className="text-xs space-y-1">
-                      <div><AffiliateAd placement="home" id="zkai-text-middle" hideLabel />（PR）── テキスト＋添削で内申＋偏差値を伸ばす</div>
-                      <div><AffiliateAd placement="home" id="sapuri-text" hideLabel /> ── 月額2,178円で5教科＋実技の映像授業</div>
+                    <div className="text-xs">
+                      <AffiliateAd placement="result" id="sora-juku-text" hideLabel />（PR）── 全国オンライン対応・費用はかかりません
                     </div>
                   </div>
                 </div>
@@ -382,15 +381,14 @@ export function ResultSection({
                         基礎固めで底上げ
                       </span>
                       <div className="text-sm font-bold text-emerald-900">
-                        スタディサプリ中学講座 ＋ ネット松陰塾
+                        オンライン個別指導の無料体験
                       </div>
                     </div>
                     <p className="text-xs text-emerald-800 leading-relaxed mb-3">
-                      苦手教科の理解不足が原因で評定が伸び悩んでいる層。映像授業で「分からない」を解消し、個別指導で学習習慣を作るのが最短ルート。
+                      苦手教科の理解不足が原因で評定が伸び悩んでいる層。無料体験で「分からない」の原因を洗い出し、個別指導で学習習慣を作るのが最短ルート。
                     </p>
-                    <div className="grid gap-2 md:grid-cols-2">
-                      <AffiliateAd placement="home" id="sapuri-banner-300" />
-                      <AffiliateAd placement="home" id="shoin-banner" />
+                    <div className="text-xs">
+                      <AffiliateAd placement="result" id="sora-juku-text" hideLabel />（PR）── 全国オンライン対応・費用はかかりません
                     </div>
                   </div>
                 </div>
@@ -403,15 +401,14 @@ export function ResultSection({
                         まず学習習慣から
                       </span>
                       <div className="text-sm font-bold text-rose-900">
-                        ネット松陰塾の個別指導 ＋ スタディサプリ
+                        オンライン個別指導の無料体験
                       </div>
                     </div>
                     <p className="text-xs text-rose-800 leading-relaxed mb-3">
-                      学習習慣が確立していない層は、まず「毎日机に向かう」を作ることが最優先。個別指導でつまずきポイントを潰しながら、映像授業で基礎を理解する2段構えが効果的。
+                      学習習慣が確立していない層は、まず「毎日机に向かう」を作ることが最優先。無料体験でつまずきポイントを洗い出しながら、個別指導で基礎から理解する2段構えが効果的。
                     </p>
-                    <div className="grid gap-2 md:grid-cols-2">
-                      <AffiliateAd placement="home" id="shoin-banner" />
-                      <AffiliateAd placement="home" id="sapuri-banner-300" />
+                    <div className="text-xs">
+                      <AffiliateAd placement="result" id="sora-juku-text" hideLabel />（PR）── 全国オンライン対応・費用はかかりません
                     </div>
                   </div>
                 </div>
@@ -422,30 +419,30 @@ export function ResultSection({
             </div>
           </Card>
 
-          {/* 計算結果直後の最高エンゲージ位置：Z会CTA（モバイルは大きめタップ領域） */}
+          {/* 計算結果直後の最高エンゲージ位置：塾体験CTA（モバイルは大きめタップ領域） */}
           <Card className="overflow-hidden">
             <div className="px-5 py-5 text-center md:px-6">
               <div className="mb-2 text-sm font-bold text-slate-700">
-                内申点アップに通信教育という選択肢
+                結果が出た今が、対策の“始めどき”です
               </div>
               <div className="mb-4 text-xs text-slate-500">
-                定期テスト対策に強い教材で、毎学期の評定を底上げ
+                内申点・偏差値の差は、動き出すのが遅いほど取り戻すのが大変になります
               </div>
               {/* Desktop: 728x90バナー */}
               <div className="hidden md:block">
-                <AffiliateAd placement="home" id="zkai-banner" />
+                <AffiliateAd placement="result" id="sora-juku-banner" />
               </div>
               {/* Mobile: ボタン化したCTA（タップしやすい44px以上） */}
               <div className="md:hidden">
                 <div className="rounded-xl bg-blue-50 border border-blue-100 p-4 text-left">
                   <div className="mb-2 text-sm font-bold text-blue-900">
-                    中学生のためのＺ会の通信教育
+                    オンライン個別指導の無料体験
                   </div>
                   <div className="mb-3 text-xs text-blue-700 leading-relaxed">
-                    難関校対策にも対応。テキスト＋添削で内申＋偏差値を伸ばす定番教材。
+                    間に合ううちに、まずは無料体験で「今の学力で何が足りないか」を見える化。全国オンライン対応・費用はかかりません。
                   </div>
-                  <AffiliateAd placement="home"
-                    id="zkai-text-request"
+                  <AffiliateAd placement="result"
+                    id="sora-juku-text"
                     hideLabel
                     linkClassName="block w-full rounded-xl bg-blue-600 px-5 py-3.5 text-center text-base font-bold text-white shadow-md shadow-blue-500/30 active:bg-blue-700"
                   />
@@ -453,7 +450,7 @@ export function ResultSection({
                 </div>
               </div>
               <div className="mt-3 hidden text-xs md:block">
-                <AffiliateAd placement="home" id="zkai-text-request" className="mx-1" hideLabel />（PR）から始められます
+                <AffiliateAd placement="result" id="sora-juku-text" className="mx-1" hideLabel />（PR）から始められます
               </div>
             </div>
           </Card>
@@ -461,20 +458,20 @@ export function ResultSection({
           <RankCard result={result} />
           <PointValueCard scores={scores} prefectureCode={prefectureCode} />
 
-          {/* スコア解釈後の中間CTA：スタディサプリ */}
+          {/* スコア解釈後の中間CTA：塾体験 */}
           <Card className="overflow-hidden">
             <div className="px-5 py-5 md:px-6">
               <div className="grid items-center gap-4 md:grid-cols-[1fr_auto]">
                 <div>
                   <div className="text-sm font-bold text-slate-800">
-                    定期テスト対策ならスタディサプリ
+                    今の学力、無料体験でチェックしませんか
                   </div>
                   <div className="mt-1 text-xs text-slate-500 leading-relaxed">
-                    プロ講師の映像授業で全教科の単元別講義。月額料金で見放題。
+                    志望校との距離とやるべきことを具体的に確認できます。全国オンライン対応・費用はかかりません。
                   </div>
                 </div>
                 <div className="flex justify-center md:justify-end">
-                  <AffiliateAd placement="home" id="sapuri-banner-300" />
+                  <AffiliateAd placement="result" id="sora-juku-banner" />
                 </div>
               </div>
             </div>
@@ -677,18 +674,17 @@ export function ResultSection({
             currentPrefecture={prefectureCode}
           />
 
-          {/* 詳細分析を開く高インテント層へ：Z会難関校 */}
+          {/* 詳細分析を開く高インテント層へ：塾体験CTA */}
           <Card className="overflow-hidden">
             <div className="px-5 py-5 md:px-6">
               <div className="text-sm font-bold text-slate-800 mb-2">
                 難関校を狙うなら、当日点の実力も伸ばす
               </div>
               <div className="text-xs text-slate-500 leading-relaxed mb-3">
-                内申点を最大化したら、次は当日点。トップ校受験で実績ある通信教育の選択肢があります。
+                内申点を最大化したら、次は当日点の対策です。無料体験で今の実力を確認し、伸ばし方を一緒に組み立てられます。
               </div>
               <div className="text-sm">
-                <AffiliateAd placement="home" id="zkai-text-advanced" hideLabel />（PR）／
-                <AffiliateAd placement="home" id="zkai-text-request" hideLabel />（PR）
+                <AffiliateAd placement="result" id="sora-juku-text" hideLabel />（PR）── 全国オンライン対応・費用はかかりません
               </div>
             </div>
           </Card>
@@ -769,12 +765,12 @@ export function ResultSection({
           <Card className="overflow-hidden">
             <div className="px-6 py-6 text-center">
               <div className="mb-2 text-sm font-bold text-slate-700">
-                月額2,178円で全教科見放題
+                今の実力を無料でチェック
               </div>
               <div className="mb-4 text-xs text-slate-500">
-                スマホ・タブレットで学べる定番のオンライン学習サービス
+                オンライン個別指導の無料体験で、志望校との距離を具体的に確認できます
               </div>
-              <AffiliateAd placement="home" id="sapuri-banner-300" />
+              <AffiliateAd placement="result" id="sora-juku-banner" />
             </div>
           </Card>
         </div>
