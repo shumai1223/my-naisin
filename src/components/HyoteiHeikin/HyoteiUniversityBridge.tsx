@@ -6,7 +6,10 @@ import { GraduationCap, ChevronRight } from 'lucide-react';
 import { EVENTS, track } from '@/lib/track';
 import { beaconStudentFunnelEvent } from '@/lib/student-funnel-beacon';
 
-const MY_SHINGAKU_URL = 'https://my-shingaku.com';
+// S12-2(2026-08-24): トップページから学費シミュレーター(/gakuhi)へ変更・UTM付与。
+// 他のmy-shingaku導線(kyouiku-hi/page.tsx・hiyou/page.tsx)は既に/gakuhiを指しており、
+// これで統一される。/gakuhiはスタブではなく計算ツール・FAQ・出典を備えた実体ページ。
+const MY_SHINGAKU_URL = 'https://my-shingaku.com/gakuhi?utm_source=my-naishin&utm_medium=bridge&utm_campaign=hyotei-university';
 
 /**
  * 高校生シグナル限定の大学受験ブリッジ（TIER Σ-7・2026-08-03）。
