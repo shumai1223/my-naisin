@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>8/27 旺文社 商談メモ</title>
+<style>
+:root{--bg:#fff;--fg:#111;--mut:#666;--line:#e3e3e3;--accent:#0b6b3a;--warn:#b3261e;--box:#f6f8f7}
+@media(prefers-color-scheme:dark){:root{--bg:#151515;--fg:#eee;--mut:#aaa;--line:#333;--accent:#5fd39a;--warn:#ff8a80;--box:#1e1e1e}}
+*{box-sizing:border-box}
+body{margin:0;padding:24px;background:var(--bg);color:var(--fg);
+font-family:"Hiragino Kaku Gothic ProN","Yu Gothic UI",Meiryo,system-ui,sans-serif;
+line-height:1.75;font-size:16px;max-width:920px;margin-inline:auto}
+h1{font-size:22px;margin:0 0 4px;border-bottom:3px solid var(--accent);padding-bottom:8px}
+h2{font-size:18px;margin:32px 0 10px;color:var(--accent);border-left:5px solid var(--accent);padding-left:10px}
+h3{font-size:15px;margin:18px 0 6px}
+.hero{background:var(--box);border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin:14px 0}
+.hero b{font-size:19px}
+a{color:var(--accent);word-break:break-all}
+ol,ul{padding-left:1.4em;margin:6px 0}
+li{margin:5px 0}
+.script{background:var(--box);border-left:5px solid var(--accent);padding:14px 18px;border-radius:0 8px 8px 0;margin:10px 0}
+.q{font-weight:700;margin-top:14px}
+.a{color:var(--mut);margin:2px 0 0}
+.warn{color:var(--warn);font-weight:700}
+table{border-collapse:collapse;width:100%;margin:10px 0;font-size:15px}
+th,td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+th{background:var(--box);white-space:nowrap}
+.small{font-size:13px;color:var(--mut)}
+</style></head><body>
+
+<h1>8/27（木）10:00-11:00　旺文社 商談メモ</h1>
+<p class="small">これ1枚だけ見ればいい。前夜に10分読むだけで足りる。</p>
+
+<div class="hero">
+<b>Google Meet：<a href="https://meet.google.com/wve-nsfi-izm">https://meet.google.com/wve-nsfi-izm</a></b><br>
+相手：株式会社旺文社 開発本部 <b>池田</b>様 ／ サービス：<b>パスナビ for School</b>（高校の先生向け進路指導支援サイト）<br>
+先方の意図：<b>「一度お話だけでも」＝ 探りの回。売り込む場ではない。</b>
+</div>
+
+<h2>1. 60分の使い方（これだけ決めておけば迷わない）</h2>
+<table>
+<tr><th>0-5分</th><td><b>母が同席して挨拶 → 退席</b>（下の台本）</td></tr>
+<tr><th>5-8分</th><td>こちらの説明（下の「3分で話すこと」）</td></tr>
+<tr><th>8-35分</th><td><b>相手に聞く</b>（下の5問）← ここが本番</td></tr>
+<tr><th>35-50分</th><td>質問に答える（下のQ&A）・必要なら画面共有でデモ</td></tr>
+<tr><th>50-60分</th><td>次の一手を決めて終わる（下の「終わり方」）</td></tr>
+</table>
+<p class="warn">話す3割・聞く7割。売る場ではなく、相手が何を欲しがっているかを聞く場。</p>
+
+<h2>2. 冒頭5分：母の台本（そのまま渡す）</h2>
+<p>PC1台の前に横に座ってもらうだけ。接続作業は不要。カメラON。</p>
+<div class="script">
+はじめまして、〇〇の母でございます。本日はお時間をいただきありがとうございます。<br>
+<b>息子がこのような活動をしていることは把握しており、私も応援しております。</b><br>
+技術的な内容は本人の方が詳しいので、この後は本人からご説明させていただきます。<br>
+<b>契約などのお話に進む場合は、改めて私が対応いたします</b>ので、その際はよろしくお願いいたします。<br>
+それでは、私はここで失礼いたします。
+</div>
+<p class="warn">黙って抜けない。「ここで失礼します」と口に出してから退席してもらう。</p>
+<p class="small">これで①相手が本題に入れる ②「契約は親権者」が口頭で伝わり相手の懸念が消える。</p>
+
+<h2>3. 自分が3分で話すこと（これ以上話さない）</h2>
+<ol>
+<li><b>何をしているか</b>：全国47都道府県の公立高校入試の<b>内申点計算方式・総合得点計算方式</b>を、各教育委員会の公表資料だけを出典にデータ化して無料公開している。</li>
+<li><b>提供形態</b>：REST API・MCP・CSV・JSON の4つで本番稼働中。<code>/developers</code> にPlaygroundがある。</li>
+<li><b>一番の特徴</b>：<b>公表値しか載せない。</b> 学校別の偏差値や合格ボーダーの独自推定は一切しない。1データ点＝1出典で、その場でソースURLを出せる。</li>
+<li><b>今日の目的</b>：「本日は御社の<b>パスナビ for School</b> で、先生方が進路指導をされる際に、中学から高校への入口のデータがどう使われているのかを伺いたくて」</li>
+</ol>
+<p class="small">冒頭でアジェンダを出すだけで主導権が取れる。デモは聞かれてから。</p>
+
+<h2>4. 必ず聞く5問（★2番目が今日いちばん価値がある）</h2>
+<ol>
+<li>パスナビ for School では、先生方はどんな場面で使われることが多いですか？</li>
+<li class="warn">★ 中学から高校への入口のデータ（内申点・倍率）が御社のサービスに入っていたら、先生方はお使いになると思われますか？</li>
+<li>いま、高校受験まわりの情報はどのように集めて更新されていますか？</li>
+<li>こうした外部データの導入は、最終的にどなたのご判断になりますか？予算の検討はどのタイミングですか？</li>
+<li>今回のようなお話を進める場合、次はどんなステップになりますか？</li>
+</ol>
+<p class="small">答えたら必ず質問を返す。沈黙は相手が考えている時間なので埋めなくていい。<br>
+20問の全リストが必要なら <code>ops/tasks/T-C3-questions.md</code>。</p>
+
+<h2>5. 聞かれて詰まりそうな5問（答えは決まっている）</h2>
+
+<p class="q">Q. データはどこから？</p>
+<p class="a">A. 47都道府県の教育委員会の公表資料のみ。独自推定はしない。<b>1データ点1出典で、その場で該当県のソースURLを画面共有で出せます。</b></p>
+
+<p class="q">Q. 更新はどうなる？</p>
+<p class="a">A. 年次更新。<b>公表から60日以内に反映</b>。対象は公表資料に基づく変更のみ。誤りは報告から5営業日以内に訂正。</p>
+
+<p class="q">Q. 中学生が運営していて継続性は？</p>
+<p class="a">A. 正直に。開発・運用は本人、<b>契約は親権者名義</b>の2名体制。（隠さない方が強い）</p>
+
+<p class="q">Q. 他社の導入実績は？</p>
+<p class="a">A. <b>ありません。</b>そう答える。代わりに47県対応のAPIが本番稼働していること、通知表配布日に平常の数倍のアクセスが来ても安定していることを出す。</p>
+
+<p class="q">Q. 稼働率の保証（SLA）は？</p>
+<p class="a">A. <b>SLAとしての保証はしません。代わりに実績値を公開します。</b>個人運営で99.9%を約束して破る方が信頼を壊すので。障害時は返金でなく契約期間の延長で対応します。</p>
+
+<p class="q">Q. 価格は？</p>
+<p class="a">A. <b>この場で金額を言わない。</b>「自社で47県分を作ると100〜190時間かかる、という試算を根拠に設計しています。具体的な金額は、御社のご利用形態を伺ってから見積もりでお出しします」で止める。</p>
+
+<h2>6. 終わり方（これを言って終わる）</h2>
+<ol>
+<li><b>次のアクションを必ず1つ決める</b>：「資料をお送りしましょうか」「社内でご検討いただく際に必要な資料はございますか」</li>
+<li>稟議に出せるA4 1枚がある（<code>ops/tasks/T-C3-ringi-onesheet.html</code>）。<b>「持ち帰って検討します」で消えないよう、当日か翌日に送る。</b></li>
+<li>お礼メールは<b>当日中</b>に。話に出た相手の言葉をそのまま引用して書く。</li>
+</ol>
+
+<h2>7. 前日（8/26 夜）にやること — 15分</h2>
+<ul>
+<li>このページを1回読む（10分）</li>
+<li>母に「27日10時から<b>5分だけ</b>」と伝える＋この台本を見せる（3分）</li>
+<li>Meet URLをカレンダーに入れる（1分）</li>
+<li>当日朝：<code>/developers</code> のPlaygroundをブラウザで開いておく（デモを求められた時用）</li>
+</ul>
+<p class="warn">それ以外の準備は不要。想定問答も質問リストも、もう全部この1枚に入っている。</p>
+
+<p class="small" style="margin-top:36px;border-top:1px solid var(--line);padding-top:12px">
+出典：T-C3-qa.md（想定問答10問）／T-C3-questions.md（聞く20問）／T-C3-benesse-retrospective.md（ベネッセ商談の振り返り）／PRICING_OPTIONS.md（規約文言）
+</p>
+</body></html>
