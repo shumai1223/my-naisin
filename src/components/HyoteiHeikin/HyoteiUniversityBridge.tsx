@@ -11,6 +11,9 @@ import { beaconStudentFunnelEvent } from '@/lib/student-funnel-beacon';
 // これで統一される。/gakuhiはスタブではなく計算ツール・FAQ・出典を備えた実体ページ。
 const MY_SHINGAKU_URL = 'https://my-shingaku.com/gakuhi?utm_source=my-naishin&utm_medium=bridge&utm_campaign=hyotei-university';
 
+// S12-3(2026-08-24): 学年自己申告をlocalStorageへ永続化し、再訪問時に再質問しない。
+const GRADE_STORAGE_KEY = 'mn_grade_self_id';
+
 /**
  * 高校生シグナル限定の大学受験ブリッジ（TIER Σ-7・2026-08-03）。
  *
@@ -30,11 +33,29 @@ const MY_SHINGAKU_URL = 'https://my-shingaku.com/gakuhi?utm_source=my-naishin&ut
 export function HyoteiUniversityBridge({ value }: { value: number | null }) {
   const [grade, setGrade] = React.useState<'unset' | 'chugaku' | 'koukou'>('unset');
 
+  // S12-3: マウント後（SSR/ハイドレーション不一致を避けるためclient-onlyで）永続化済みの
+  // 選択があれば復元し、再訪問時に「中学生ですか高校生ですか」を聞き直さない。
+  // ストレージ不可環境（プライベートブラウジング等）では従来通り毎回質問する（例外を投げない）。
+  React.useEffect(() => {
+    try {
+      const saved = window.localStorage.getItem(GRADE_STORAGE_KEY);
+      if (saved === 'chugaku' || saved === 'koukou') setGrade(saved);
+    } catch {
+      /* no-op */
+    }
+  }, []);
+
   const selectGrade = React.useCallback((g: 'chugaku' | 'koukou') => {
     setGrade(g);
     track(EVENTS.GRADE_SELF_IDENTIFY, { tool: 'hyotei-heikin', grade: g });
     // S12-1: GA4がこのページで計測系統ごと機能していない疑いがあるため、D1一次記録を併走させる。
+    // 復元時（useEffect側）はこのイベントを再送しない＝1回の実選択=1件の記録を保つ（二重計上防止）。
     beaconStudentFunnelEvent('grade_self_identify', { grade: g, tool: 'hyotei-heikin' });
+    try {
+      window.localStorage.setItem(GRADE_STORAGE_KEY, g);
+    } catch {
+      /* no-op */
+    }
   }, []);
 
   const onBridgeClick = React.useCallback(() => {
