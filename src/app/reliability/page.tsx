@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, ShieldCheck, RefreshCw, Activity, Archive, ExternalLink } from 'lucide-react';
+import { Home, ChevronRight, ShieldCheck, RefreshCw, Activity, Archive, ExternalLink, FileCheck2 } from 'lucide-react';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { ArticleSchema } from '@/components/StructuredData/ArticleSchema';
@@ -164,6 +164,32 @@ export default function ReliabilityPage() {
             >
               全都道府県の確認履歴を見る →
             </Link>
+          </section>
+
+          {/* S6-3(2026-08-24): データの検証方法（自社の方針の自己記述のみ・他社への言及は行わない） */}
+          <section className="mb-8 rounded-2xl border-2 border-amber-100 bg-white p-6">
+            <div className="mb-3 flex items-center gap-2">
+              <FileCheck2 className="h-5 w-5 text-amber-600" />
+              <h2 className="text-lg font-bold text-slate-800">データの検証方法</h2>
+            </div>
+            <ul className="space-y-3 text-sm leading-relaxed text-slate-600">
+              <li>
+                <strong className="text-slate-800">一次資料のみを出典とする：</strong>
+                募集人員・応募者数・倍率・内申点の計算方式は、教育委員会が公表する入学者選抜要綱・
+                入学者選抜結果等の一次資料のみを出典とし、独自に推測した数値は掲載しません。
+              </li>
+              <li>
+                <strong className="text-slate-800">公式公表値との突合テスト：</strong>
+                募集人員・応募者数の合計を学校単位で積み上げた値と、一次資料が公式に公表している
+                小計・合計値とを突合するテストを実施しています。一致しない場合はデータを取り込みません。
+              </li>
+              <li>
+                <strong className="text-slate-800">独自推定はしない：</strong>
+                学校別の偏差値・合格ボーダーラインなど、公表資料に無い数値を独自に推定して掲載する
+                ことはありません。一次資料が機械可読な形で取得できない場合は、正直に「未収録」として
+                扱い、推測で埋めることはしません。
+              </li>
+            </ul>
           </section>
 
           {/* 稼働状況 */}
