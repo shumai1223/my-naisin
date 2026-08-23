@@ -5,6 +5,7 @@ import { Home, ChevronRight, Bell, ExternalLink } from 'lucide-react';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { ArticleSchema } from '@/components/StructuredData/ArticleSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
+import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { SITE_URL } from '@/lib/naishin-dataset';
 import { PAST_SYSTEM_CHANGES } from '@/lib/exam-system-change-history';
 
@@ -270,6 +271,11 @@ export default function NyushiSeidoHenkouPage() {
               ))}
             </div>
           </section>
+
+          {/* 保護者リード */}
+          <div className="mb-8">
+            <ParentLeadCTA placement="prefecture" />
+          </div>
 
           <section className="rounded-2xl border border-slate-200 bg-slate-50 p-6 text-center">
             <p className="mb-3 text-sm text-slate-600">

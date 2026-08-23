@@ -5,6 +5,7 @@ import { Calculator, ChevronRight, Home, Network, HelpCircle, MapPin, Info } fro
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { HensachiPromo } from '@/components/HensachiPromo';
+import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { HUB_CALCULATORS, HUB_EXPLAINERS, HUB_ALL } from '@/lib/total-score/hub';
 
 const BASE = 'https://my-naishin.com';
@@ -220,6 +221,11 @@ export default function TotalScoreHubPage() {
               ))}
             </div>
           </section>
+
+          {/* 保護者リード */}
+          <div className="mb-8">
+            <ParentLeadCTA placement="prefecture" />
+          </div>
 
           {/* 関連リンク */}
           <section className="rounded-2xl border border-slate-200 bg-slate-50 p-6">

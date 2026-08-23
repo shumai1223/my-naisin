@@ -7,6 +7,7 @@ import { WebApplicationSchema } from '@/components/StructuredData/WebApplication
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { BairitsuCalculator } from '@/components/Bairitsu/BairitsuCalculator';
 import { PREFECTURES } from '@/lib/prefectures';
+import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { SITE_URL } from '@/lib/naishin-dataset';
 
 const FAQS = [
@@ -129,6 +130,11 @@ export default function KoukouBairitsuPage() {
               </Link>
             </div>
           </section>
+
+          {/* 保護者リード */}
+          <div className="mt-8">
+            <ParentLeadCTA placement="prefecture" />
+          </div>
 
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>

@@ -9,6 +9,7 @@ import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { HensachiCalculator } from '@/components/Hensachi/HensachiCalculator';
 import { HensachiClusterNav } from '@/components/Hensachi/HensachiClusterNav';
 import { SUBJECT_CONTENTS, getSubjectContent } from '@/lib/hensachi-subject-content';
+import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { SITE_URL } from '@/lib/naishin-dataset';
 
 interface PageProps {
@@ -104,6 +105,11 @@ export default async function SubjectHensachiPage({ params }: PageProps) {
               ))}
             </div>
           </section>
+
+          {/* 保護者リード */}
+          <div className="mt-8">
+            <ParentLeadCTA placement="hensachi" />
+          </div>
 
           {/* FAQ */}
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">

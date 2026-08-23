@@ -8,6 +8,7 @@ import { ArticleSchema } from '@/components/StructuredData/ArticleSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { getPrefectureByCode } from '@/lib/prefectures';
 import { getNaishinOmomiEntry, NAISHIN_OMOMI_CODES } from '@/lib/naishin-omomi-content';
+import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { SITE_URL } from '@/lib/naishin-dataset';
 
 interface PageProps {
@@ -122,6 +123,11 @@ export default async function NaishinOmomiPage({ params }: PageProps) {
               </Link>
             </div>
           </section>
+
+          {/* 保護者リード */}
+          <div className="mb-6">
+            <ParentLeadCTA prefectureCode={prefecture.code} placement="prefecture" />
+          </div>
 
           <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>

@@ -5,6 +5,7 @@ import { Home, ChevronRight, Calculator, ArrowRight, HelpCircle, Sigma } from 'l
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { AnswerBox } from '@/components/AnswerBox';
+import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { SITE_URL } from '@/lib/naishin-dataset';
 
 const FAQS = [
@@ -134,6 +135,11 @@ export default function ChousashoHyoteiPage() {
               </Link>
             ))}
           </section>
+
+          {/* 保護者リード */}
+          <div className="mt-8">
+            <ParentLeadCTA placement="hyotei-heikin" />
+          </div>
 
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800"><HelpCircle className="h-5 w-5 text-emerald-600" />よくある質問</h2>

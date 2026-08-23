@@ -6,6 +6,7 @@ import { Home, ChevronRight, BookOpen, HelpCircle, AlertTriangle, MapPin, Lightb
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { GLOSSARY_TERMS, getGlossaryTerm, shortTermLabel, buildGlossaryTermFaqs } from '@/lib/glossary-terms';
+import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { SITE_URL } from '@/lib/naishin-dataset';
 
 interface PageProps {
@@ -143,6 +144,11 @@ export default async function GlossaryTermPage({ params }: PageProps) {
               ))}
             </div>
           </section>
+
+          {/* 保護者リード */}
+          <div className="mb-8">
+            <ParentLeadCTA placement="home" />
+          </div>
 
           <section className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
             <h2 className="mb-3 text-sm font-bold text-slate-700">他の用語も見る</h2>

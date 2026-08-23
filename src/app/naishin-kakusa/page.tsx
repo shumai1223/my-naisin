@@ -7,6 +7,7 @@ import { ArticleSchema } from '@/components/StructuredData/ArticleSchema';
 import { DatasetSchema } from '@/components/StructuredData/DatasetSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { PREFECTURES, getPrefectureByCode } from '@/lib/prefectures';
+import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { SITE_URL } from '@/lib/naishin-dataset';
 import { NAISHIN_OMOMI_CODES } from '@/lib/naishin-omomi-content';
 import { REPORT_2026_DIGEST_CODES } from '@/lib/report-2026-digest-content';
@@ -349,6 +350,11 @@ export default function NaishinKakusaPage() {
               </Link>
             </div>
           </section>
+
+          {/* 保護者リード */}
+          <div className="mb-8">
+            <ParentLeadCTA placement="prefecture" />
+          </div>
 
           <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>

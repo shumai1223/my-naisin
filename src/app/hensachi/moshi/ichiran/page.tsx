@@ -6,6 +6,7 @@ import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { HensachiClusterNav } from '@/components/Hensachi/HensachiClusterNav';
 import { MOCK_EXAMS } from '@/lib/mock-exam-data';
+import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { SITE_URL } from '@/lib/naishin-dataset';
 
 const FAQS = [
@@ -142,6 +143,11 @@ export default function MockExamIchiranPage() {
               </Link>
             </div>
           </section>
+
+          {/* 保護者リード */}
+          <div className="mt-8">
+            <ParentLeadCTA placement="hensachi" />
+          </div>
 
           {/* FAQ */}
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">

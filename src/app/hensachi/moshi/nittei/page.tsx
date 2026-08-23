@@ -7,6 +7,7 @@ import { DatasetSchema } from '@/components/StructuredData/DatasetSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { HensachiClusterNav } from '@/components/Hensachi/HensachiClusterNav';
 import { MOCK_EXAMS } from '@/lib/mock-exam-data';
+import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { SITE_URL } from '@/lib/naishin-dataset';
 
 const FAQS = [
@@ -163,6 +164,11 @@ export default function MockExamScheduleDbPage() {
               </Link>
             </div>
           </section>
+
+          {/* 保護者リード */}
+          <div className="mt-8">
+            <ParentLeadCTA placement="hensachi" />
+          </div>
 
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>

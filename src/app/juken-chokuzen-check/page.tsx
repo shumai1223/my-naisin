@@ -6,6 +6,7 @@ import { Home, ChevronRight, ChevronRightSquare, ClipboardCheck, HelpCircle, Ale
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { HowToSchema } from '@/components/StructuredData/HowToSchema';
+import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { SITE_URL } from '@/lib/naishin-dataset';
 import { resolveSeason, isSeasonalContentLive } from '@/lib/seasonal';
 
@@ -189,6 +190,11 @@ export default function JukenChokuzenCheckPage() {
               ))}
             </div>
           </section>
+
+          {/* 保護者リード */}
+          <div className="mb-8">
+            <ParentLeadCTA placement="home" />
+          </div>
 
           <section className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
             <h2 className="mb-3 text-sm font-bold text-slate-700">あわせて確認</h2>
