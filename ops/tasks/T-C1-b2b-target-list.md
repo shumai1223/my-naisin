@@ -568,7 +568,7 @@ outreach-queue.json全entryのorgフィールドと突合した結果（`lane7-`
 
 - ✅**金沢大学**(`lane7-kanazawa-u-education`)。人間社会系事務部の「総務課総務係」宛`n-somu@adm.kanazawa-u.ac.jp`(学校教育学類を含む学域全体の管轄窓口)
 - ✅**福井大学教育学部**(`lane7-fukui-u-education`)。学部単体窓口が見当たらず全学共通「その他:大学へのご意見・ご質問」区分`office@ad.u-fukui.ac.jp`を機関単位窓口として採用(信州大学と同型の例外パターン)
-- ⏸秋田大学教育文化学部/岩手大学教育学部/山形大学地域教育文化学部: いずれも問い合わせページを直接curlで確認したが総務担当は電話番号のみでメール記載なし(茨城/群馬と同型)。WebSearch要約は秋田(kyosou@jimu.akita-u.ac.jp)・岩手(edujim@iwate-u.ac.jp)にそれぞれ具体的なメールを提示したが、実ページで確認できず既知の罠(WebSearch要約の作話)に該当する恐れがあるため不採用
+- ✕秋田大学教育文化学部/岩手大学教育学部/山形大学地域教育文化学部(2026-08-23再調査・見送り確定): 学部単体サイト(`akita-u.ac.jp/eduhuman/utility/contact.html`・`edu.iwate-u.ac.jp/access/`・`e.yamagata-u.ac.jp`)を直接curl/WebFetchで再確認したが3件とも電話・FAXのみでメール記載なしと再確認(既存の見送り判断を維持)。WebSearch要約が繰り返し提示する秋田`kyosou@jimu.akita-u.ac.jp`・岩手`edujim@iwate-u.ac.jp`は今回も実ページで裏取りできず、既知の罠(WebSearch要約の作話)に該当すると再確定。メール窓口が無いため見送り確定(再調査不要)。**これでT-C1本文中の⏸(保留)マーク付き大学は全件処理完了**(2026-08-23に弘前/岐阜/山口の3件を新規採用・富山/島根/香川/秋田/岩手/山形の6件を見送り確定)
 
 **累計(最新)**: lane7は26校がcandidate以上。
 
