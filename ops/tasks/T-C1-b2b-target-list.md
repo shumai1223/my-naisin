@@ -515,7 +515,7 @@ candidate計207件→208件。福岡/千葉/信濃教育会は2026-08-11時点�
 **2026-08-16続報4(滋賀/和歌山を追加・岐阜/富山は保留)**:
 - ✅**滋賀大学教育学部**(`lane7-shiga-u-education`)。`shiga-u.ac.jp/information/contact_recruit/info_contact-list/`の目的別窓口一覧で「教育学部教員について」区分の総務係`syomu@edu.shiga-u.ac.jp`([at]表記の難読化を機械的に@へ復元)を採用
 - ✅**和歌山大学教育学部**(`lane7-wakayama-u-education`)。学部所在地連絡先一覧には電話番号のみでメール記載無し。学部公式の「メールでのお問い合わせ」フォーム(`/edu/contact/19/`)を採用(channel=form・formPurpose=unknown・対象者制限の明示文言なし)
-- ⏸岐阜大学教育学部: `ed.gifu-u.ac.jp`の問い合わせページを直接curlで取得したがnav/イベント告知のみでcontactセクション自体がJS動的読み込みの可能性が高く静的取得できず(既知の罠=poppler/JS描画系と同型)。再調査するなら別ページ`www.gifu-u.ac.jp/contact/`や`toiawasesaki0331_2.pdf`(問い合わせ先PDF)経由を試す
+- ✅**岐阜大学教育学部**(`lane7-gifu-u-education`・2026-08-23)。前回の見送りメモどおり`www.gifu-u.ac.jp/contact/`経由で再調査し発見。「各学部・センターに関する問い合わせ」表の教育学部区分・総務係(個人名なし・電話058-293-2203併記)、メールはアスタリスク難読化`kyoiku*t.gifu-u.ac.jp`を`kyoiku@t.gifu-u.ac.jp`へ機械的に復元。candidate計372件
 - ✕富山大学人間発達科学部(2026-08-23再調査・見送り確定): 大学全体の`u-toyama.ac.jp/contact/`→`/contact/inquiry/`の問い合わせ一覧を確認した結果、「各学部代表」区分の教育学部窓口(五福高岡地区事務部人社系総務課教育学部事務室)は電話(076-445-6251)のみでメール記載なしと判明(秋田/岩手/山形/茨城/群馬と同型の電話専用パターン)。メール窓口が無いため見送り確定(再調査不要)
 
 **累計(最新)**: lane7は22校がcandidate以上。

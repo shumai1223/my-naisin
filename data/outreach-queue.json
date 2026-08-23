@@ -5422,6 +5422,19 @@
       "status": "candidate",
       "addedAt": "2026-08-23",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane7"
+    },
+    {
+      "id": "lane7-gifu-u-education",
+      "org": "岐阜大学教育学部",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "kyoiku@t.gifu-u.ac.jp",
+      "contactClass": "b2b",
+      "evidence": "gifu-u.ac.jp/contact/ を直接curlで確認(HTTP200)。「各学部・センターに関する問い合わせ」表の教育学部区分・総務係(個人名なし・電話058-293-2203併記)。掲載メールはアスタリスク難読化(kyoiku*t.gifu-u.ac.jp)されており機械的に@へ復元(*→@)。2026-08-17時点でed.gifu-u.ac.jp(JS動的読み込みの疑い)で断念していた候補を、大学全体サイトの問い合わせ窓口経由で再調査し発見",
+      "verifiedAt": "2026-08-23",
+      "status": "candidate",
+      "addedAt": "2026-08-23",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane7"
     }
   ]
 }
