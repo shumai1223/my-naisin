@@ -63,16 +63,58 @@ export function isInternalReferer(referer: string | null | undefined): boolean {
 export type ClickTrust = 'human' | 'suspect' | 'bot' | 'unknown';
 
 /**
+ * root_only referer（`https://my-naishin.com/` ちょうど・パス無し）か。
+ * `ops/CORRECTIONS.md` §2実測: 全期間33件中17件が`placement=parent-lp`を名乗るが、
+ * `parent-lp`は`/hogosha`等でしか実際に使われずトップページには存在しない＝自己矛盾。
+ * 「毎日04:1x・11:2x UTCに全desktopで発生するスケジュール実行の指紋」（`ops/DEADWIRE.md:259-278`）
+ * と一致する既知のbotパターン。
+ */
+export function isRootOnlyReferer(referer: string | null | undefined): boolean {
+  return referer === 'https://my-naishin.com/';
+}
+
+/**
+ * root_only referer で実際に観測される正当なplacement値（ホームページ自身が発行するもの）。
+ * `src/app/HomeClient.tsx`が明示的に付与する`home`/`home-percentile`に加え、
+ * `/go/[id]/route.ts`の`placementFromReferer`旧版（2026-08-23のS9-2是正前）がroot refererから
+ * 生成していた`/`（`ops/CORRECTIONS.md`§2の実測表が「整合」と判定した過去データ）も後方互換で許容する。
+ * 他のplacement値（`parent-lp`/`naishin-up`/`prefecture`/`hensachi`等）はホームページに実在しないため、
+ * root_only referer とともに観測されると内部整合性の矛盾＝bot と確定できる（S9-4）。
+ */
+const HOME_PAGE_PLACEMENTS = new Set(['home', 'home-percentile', '/']);
+
+/**
+ * refererのパスと、そのplacement値が実際に設定されているページが矛盾していないかを判定する。
+ * 現状はroot_only referer（トップページ由来）についてのみ検証材料が揃っている
+ * （`ops/CORRECTIONS.md`§2）。root_only以外のreferer・placement未設定の呼び出しは
+ * 判定材料が無いため常にtrue（矛盾なし）を返し、既存の分類結果を変えない。
+ */
+export function isPlacementConsistentWithReferer(
+  referer: string | null | undefined,
+  placement: string | null | undefined
+): boolean {
+  if (!isRootOnlyReferer(referer)) return true;
+  if (!placement) return true;
+  return HOME_PAGE_PLACEMENTS.has(placement);
+}
+
+/**
  * クリックの信頼度を1か所で判定（ダッシュボードの正準ロジック）。
  *  - unknown … UA未記録の旧データ（判定不能）
- *  - bot     … UAがbot/スクリプト（または空UA）
+ *  - bot     … UAがbot/スクリプト（または空UA）、または root_only referer × 実在しないplacement の自己矛盾（S9-4）
  *  - human   … ブラウザUA かつ 自サイト referer あり（＝実際に当サイトの面から押された）
  *  - suspect … ブラウザUAだが 内部referer無し（/go直叩きのスクレイパが大半。privacyブラウザや外部embedも稀に含む）
  *
  * /go ルートは bot-UA・空UA・IPバーストを取り込み時点で弾くので、新規データの大半は human / suspect に分かれる。
  */
-export function classifyClick(c: { userAgent?: string | null; referer?: string | null }): ClickTrust {
+export function classifyClick(c: {
+  userAgent?: string | null;
+  referer?: string | null;
+  placement?: string | null;
+}): ClickTrust {
   if (c.userAgent === undefined || c.userAgent === null) return 'unknown';
   if (isBotUserAgent(c.userAgent)) return 'bot';
-  return isInternalReferer(c.referer) ? 'human' : 'suspect';
+  if (!isInternalReferer(c.referer)) return 'suspect';
+  if (!isPlacementConsistentWithReferer(c.referer, c.placement)) return 'bot';
+  return 'human';
 }

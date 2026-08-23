@@ -306,7 +306,7 @@ export default async function AdminReportPage({
   const gateStyle = GATE_STYLE[gate.verdict];
 
   // 直近クリックの信頼度分類（明細＋サマリ）。
-  const classified = recentClicks.map((r) => ({ row: r, trust: classifyClick({ userAgent: r.user_agent, referer: r.referer }) }));
+  const classified = recentClicks.map((r) => ({ row: r, trust: classifyClick({ userAgent: r.user_agent, referer: r.referer, placement: r.placement }) }));
   const trustCount = (t: ClickTrust) => classified.filter((c) => c.trust === t).length;
   const recentTrust = { human: trustCount('human'), suspect: trustCount('suspect'), bot: trustCount('bot'), unknown: trustCount('unknown') };
   // 既定（trustedOnly）では明細も信頼クリックだけ表示。?clicks=all で全件。

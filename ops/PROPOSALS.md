@@ -76,7 +76,7 @@
 | S9-1 | Cowork で `/hogosha` の実referer を実機検証 | 0.5 | 8/31まで（発注） | **👤裁量枠** | **採用・最優先で発注**（S4-1のEVの生死を決める） |
 | S9-2 | `placementFromReferer` の表記ゆれ正規化 | 0.3 | 8/31まで | デプロイのみ | 採用 |
 | S9-3 | `TRUSTED_CLAUSE` 厳格化＋`trustedOnly` 既定化 | 1.0 | **9月へ後ろ倒し（裁定・§3-C 対立3）** | 認識訂正の👤報告 | 採用・ただしS9-4と同時投入 |
-| S9-4 | root_only × placement の自己矛盾検出を実装 | 2.0 | 9月（S1-1後） | 不要 | 採用 |
+| S9-4 | root_only × placement の自己矛盾検出を実装 | 2.0 | 9月（S1-1後） | 不要 | 採用。**✅2026-08-24対応済み(loop)**。S1-1完了済みを確認の上で着手。`isPlacementConsistentWithReferer`を`bot-filter.ts`に追加し`classifyClick`の第3判定軸として配線（SQL側`TRUSTED_CLAUSE`集計＝S9-3の対象は変更せず） |
 | S9-5 | click-hop 通過計測（null-referer 304件の可視化） | 1.0〜1.5 | 9月 | 新規D1なら**migration適用=👤** | 採用 |
 | S2-3 | `ParentWindowBridge` の `/mendan` リンクにトラッキング追加 | 1.0 | 8/31まで | デプロイのみ | 採用 |
 | S12-1 | `HyoteiUniversityBridge` の D1一次計測 | 2.0 | 8/31まで | **migration本番適用=👤** | 採用（S12群の全下流の前提） |
