@@ -28,6 +28,7 @@ export function HensachiGyakusanResultFlow() {
       {/* 保護者リード */}
       <div className="mt-6">
         <ParentLeadCTA
+          placement="hensachi"
           heading={has ? `偏差値${result.currentHensachi}、目標まで届きますか？保護者の方へ` : '目標の偏差値、どう伸ばす？保護者の方へ'}
           body="偏差値は「今からの伸ばし方」で十分に動きます。お子さまにいま必要な対策を、AI個別指導の無料体験で具体的に確認できます（保護者の方向け・費用はかかりません）。"
           affiliateId="atama-text"

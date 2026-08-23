@@ -134,6 +134,7 @@ export default function HensachiKyokaBetsuPage() {
           {/* 保護者リード */}
           <div className="mt-6">
             <ParentLeadCTA
+              placement="hensachi"
               heading="苦手教科、どう伸ばす？保護者の方へ"
               body="教科別の偏差値が分かると「どこから対策するか」が見えてきます。お子さまに必要な教科の伸ばし方を、AI個別指導の無料体験で具体的に確認できます（保護者の方向け・費用はかかりません）。"
               affiliateId="atama-text"

@@ -208,6 +208,7 @@ export default function HokkaidoRankPage() {
           {/* 保護者向けリード（換金の本命：オンライン個別の無料体験送客。旧Z会/サプリ¥1.5-5.4/clickブロックは低EVで撤去） */}
           <ParentLeadCTA
             className="mt-8"
+            placement="prefecture"
             heading="北海道の志望校、内申ランクはあと何点で上がりますか？"
             body="ランクは中1〜中3の評定で決まり、残りの定期テストでまだ動きます。お子さまにいま必要な対策を、オンライン個別指導の無料体験で具体的に確認できます（費用はかかりません）。"
             affiliateId="sora-juku-text"

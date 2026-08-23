@@ -642,6 +642,7 @@ export default function HomeClient() {
                         <div className="mt-6">
                           <ParentLeadCTA
                             auditHide
+                            placement="home"
                             heading="この結果、志望校の合格ラインに届いていますか？"
                             body="内申点は「今からの動き方」で十分に変えられます。お子さまに必要な対策を、AI個別指導の無料体験で具体的に確認できます（保護者の方向け・費用はかかりません）。"
                             affiliateId="atama-text"

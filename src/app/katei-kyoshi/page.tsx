@@ -120,6 +120,7 @@ export default function KateiKyoshiPage() {
           </section>
 
           <ParentLeadCTA
+            placement="naishin-up"
             heading={`まずは${bestOfferName}の無料体験で相性を確認`}
             body="お子さまに合う指導者かどうかは、実際の体験授業で確認するのが一番確実です。費用はかからず、その場で契約を迫られることはありません。"
             affiliateId={bestOfferId}

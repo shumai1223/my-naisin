@@ -142,6 +142,7 @@ export default function HensachiShiboukouPage() {
           {/* 即効レバー：保護者リード */}
           <div className="mt-6">
             <ParentLeadCTA
+              placement="hensachi"
               heading="このレンジの高校、本当に届く？保護者の方へ"
               body="偏差値の「いまの位置」と「志望校との差」は、対策しだいで十分に動きます。お子さまに必要な勉強を、AI個別指導の無料体験で具体的に確認できます（保護者の方向け・費用はかかりません）。"
               affiliateId="atama-text"

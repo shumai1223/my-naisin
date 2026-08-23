@@ -193,6 +193,8 @@ export function TotalScoreExplainerView({ explainer: e }: { explainer: TotalScor
           {/* 保護者向けリード（換金の本命） */}
           <ParentLeadCTA
             className="mt-8"
+            placement="prefecture"
+            prefectureCode={e.code}
             heading={offer.heading}
             body={offer.body}
             affiliateId={offer.affiliateId}

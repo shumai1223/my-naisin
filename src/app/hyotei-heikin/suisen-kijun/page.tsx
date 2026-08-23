@@ -235,6 +235,7 @@ export default function HyoteiSuisenKijunPage() {
           {/* 保護者リード */}
           <div className="mt-8">
             <ParentLeadCTA
+              placement="hyotei-heikin"
               heading="推薦の評定基準に届く？保護者の方へ"
               body="評定平均は早い学年からの積み上げが効きます。お子さまにいま必要な対策を、個別指導の無料体験で具体的に確認できます（保護者の方向け・費用はかかりません）。"
               affiliateId="atama-text"

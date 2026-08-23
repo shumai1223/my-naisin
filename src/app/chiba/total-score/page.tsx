@@ -241,6 +241,7 @@ export default function ChibaTotalScorePage() {
           {/* 保護者向けリード（旧Z会/サプリ¥1.5-5.4/clickブロックは低EVで撤去） */}
           <ParentLeadCTA
             className="mb-8"
+            placement="prefecture"
             heading="千葉の志望校、K値に合った対策ができていますか？"
             body="志望校のK値で必要な内申・当日点のバランスは変わります。お子さまに合った対策を、塾の無料体験で具体的に確認できます（費用はかかりません）。"
             affiliateId="morijuku-text"

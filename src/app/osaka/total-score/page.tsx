@@ -292,6 +292,7 @@ export default function OsakaTotalScorePage() {
           {/* 保護者向けリード（換金の本命：資料請求送客。旧Z会/サプリ¥1.5-5.4/clickブロックは低EVで撤去） */}
           <ParentLeadCTA
             className="mt-8"
+            placement="prefecture"
             heading="大阪の志望校、総合点はあと何点で届きますか？"
             body="総合点は学力と内申の伸ばし方で変わります。お子さまにいま必要な対策を、個別指導の無料体験で具体的に確認できます（費用はかかりません）。"
             affiliateId="campus-text"

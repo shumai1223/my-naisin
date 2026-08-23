@@ -396,6 +396,7 @@ export default function Page() {
 
             {/* 保護者向けリード導線（収益化の本命：高単価＝オンライン個別の無料体験へ送客） */}
             <ParentLeadCTA
+              placement="home"
               heading="お子さまの内申点、志望校に届いていますか？"
               body="内申点は「今からの動き方」で大きく変わります。お子さまに必要な対策を、オンライン個別指導の無料体験で確認できます。全国どこからでも受講でき、費用はかかりません。"
               affiliateId="sora-juku-text"

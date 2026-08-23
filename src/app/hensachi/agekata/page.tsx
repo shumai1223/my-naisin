@@ -212,6 +212,7 @@ export default function HensachiAgekataPage() {
           {/* 保護者リード */}
           <div className="mt-8">
             <ParentLeadCTA
+              placement="hensachi"
               heading="偏差値を上げる、いちばん効率の良い方法は？保護者の方へ"
               body="どの教科から、どんな順番で対策すれば偏差値が上がるか——お子さまの状況に合わせた具体策を、AI個別指導の無料体験で確認できます（保護者の方向け・費用はかかりません）。"
               affiliateId="atama-text"

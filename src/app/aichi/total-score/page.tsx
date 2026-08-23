@@ -271,6 +271,7 @@ export default function AichiTotalScorePage() {
               愛知に校舎が無い地域ミスマッチだったため是正） */}
           <ParentLeadCTA
             className="mb-8"
+            placement="prefecture"
             heading="愛知の志望校、評価方法に合った対策ができていますか？"
             body="評価方法Ⅰ〜Ⅴで必要な得点配分は変わります。お子さまに合った対策を、全国オンライン対応の個別指導の無料体験で具体的に確認できます（費用はかかりません）。"
             affiliateId="sora-juku-text"

@@ -208,6 +208,7 @@ export default function HensachiMoshiPage() {
           {/* 保護者リード */}
           <div className="mt-8">
             <ParentLeadCTA
+              placement="hensachi"
               heading="模試の判定が伸び悩んでいる…保護者の方へ"
               body="模試の偏差値が動かないのは「対策する教科の選び方」が原因のことも。お子さまに必要な勉強を、AI個別指導の無料体験で具体的に確認できます（保護者の方向け・費用はかかりません）。"
               affiliateId="atama-text"

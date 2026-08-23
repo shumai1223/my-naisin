@@ -244,6 +244,7 @@ export default function FukuokaTotalScorePage() {
           {/* 保護者向けリード（旧Z会/サプリ¥1.5-5.4/clickブロックは低EVで撤去） */}
           <ParentLeadCTA
             className="mb-8"
+            placement="prefecture"
             heading="福岡の志望校、内申と当日点の両方が届いていますか？"
             body="福岡はA群でまず合否が決まるため、学力と内申の両立がカギ。お子さまにいま必要な対策を、オンライン個別指導の無料体験で具体的に確認できます（費用はかかりません）。"
             affiliateId="sora-juku-text"
