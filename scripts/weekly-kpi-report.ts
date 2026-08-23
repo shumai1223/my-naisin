@@ -323,6 +323,35 @@ async function fetchHeadQueryCtrWoW(client: GscClient): Promise<{ now: number; p
   return { now, prev };
 }
 
+/**
+ * 学校ページ（URLに /school/ を含むページ群）の28日GSC露出ページ数（imp>0）。今週/前週の2窓分。
+ * S5-2: sitemap掲載3,089枚に対し233枚（7.5%）で停滞中（ops/THREATS.md脅威9）という事実の週次定点観測。
+ * page次元でcontainsフィルタし、返ってきた行数＝露出のあったページ数（clicks/impressionsの値は使わない）。
+ */
+async function fetchSchoolPageExposureCount(client: GscClient): Promise<{ pagesNow: number; pagesPrev: number }> {
+  const curStart = ymd(LAG_DAYS + WINDOW - 1);
+  const curEnd = ymd(LAG_DAYS);
+  const prevStart = ymd(LAG_DAYS + WINDOW * 2 - 1);
+  const prevEnd = ymd(LAG_DAYS + WINDOW);
+
+  const countPages = async (startDate: string, endDate: string): Promise<number> => {
+    const res = await client.searchanalytics.query({
+      siteUrl: SITE_URL,
+      requestBody: {
+        startDate,
+        endDate,
+        dimensions: ['page'],
+        dimensionFilterGroups: [{ filters: [{ dimension: 'page', operator: 'contains', expression: '/school/' }] }],
+        rowLimit: 5000,
+      },
+    });
+    return (res.data.rows as Array<{ keys: string[] }> | undefined)?.length ?? 0;
+  };
+
+  const [pagesNow, pagesPrev] = await Promise.all([countPages(curStart, curEnd), countPages(prevStart, prevEnd)]);
+  return { pagesNow, pagesPrev };
+}
+
 async function main() {
   const saKey = process.env.GSC_SA_KEY;
   if (!saKey) {
@@ -340,12 +369,13 @@ async function main() {
 
   console.log(`🔍 週次KPIレポート生成中... (${curStart}〜${curEnd})`);
 
-  const [totalsNow, totalsPrev, hensachiWeeklyCtr, toolPages, headQuery] = await Promise.all([
+  const [totalsNow, totalsPrev, hensachiWeeklyCtr, toolPages, headQuery, schoolPageExposure] = await Promise.all([
     fetchTotals(client, curStart, curEnd),
     fetchTotals(client, prevStart, prevEnd),
     fetchWeeklyCtrForPage(client, HENSACHI_PAGE, 4),
     fetchToolPagesWoW(client),
     fetchHeadQueryCtrWoW(client),
+    fetchSchoolPageExposureCount(client),
   ]);
 
   const manualDataProvided =
@@ -359,6 +389,7 @@ async function main() {
     weekEnding: curEnd,
     manualDataProvided,
     gsc: { clicksNow: totalsNow.clicks, clicksPrev: totalsPrev.clicks, impNow: totalsNow.impressions, impPrev: totalsPrev.impressions },
+    schoolPageExposure,
     parentLandingViews: num(args.cp),
     leadVelocity: {
       leadsThisWeek: num(args['leads-week']),

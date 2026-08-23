@@ -28,6 +28,12 @@ export interface WeeklyKpiData {
   weekEnding: string;
   /** GSC総クリック・総表示（今週/前週）。 */
   gsc: { clicksNow: number; clicksPrev: number; impNow: number; impPrev: number };
+  /**
+   * 学校ページ（URLに /school/ を含むページ群）のGSC 28日露出ページ数（今週/前週・任意・S5-2）。
+   * sitemap掲載3,089枚に対しGSC露出は233枚（7.5%）で停滞中（ops/THREATS.md脅威9）という
+   * 事実を週次で定点観測し、動き出したか／さらに停滞が長期化しているかを早期検知する。
+   */
+  schoolPageExposure?: { pagesNow: number; pagesPrev: number };
   /** C_p（保護者起点クリック=parent_landing_view）今週件数。 */
   parentLandingViews: number;
   /** 名簿velocity：今週のlead_submit件数と、逆算目標（例：約20/日）。 */
@@ -158,6 +164,11 @@ export function formatWeeklyKpiEmail(data: WeeklyKpiData): { subject: string; te
   lines.push('');
   lines.push('■ 実測サマリ（今週）');
   lines.push(`  GSCクリック: ${fmt(data.gsc.clicksNow)}（${pctDelta(data.gsc.clicksNow, data.gsc.clicksPrev)}）／ 表示: ${fmt(data.gsc.impNow)}（${pctDelta(data.gsc.impNow, data.gsc.impPrev)}）`);
+  if (data.schoolPageExposure) {
+    lines.push(
+      `  学校ページ露出（GSC 28日・S5-2）: ${fmt(data.schoolPageExposure.pagesNow)}枚（${pctDelta(data.schoolPageExposure.pagesNow, data.schoolPageExposure.pagesPrev)}）`
+    );
+  }
   lines.push(`  C_p（保護者接点 parent_landing_view）: ${manual ? `${fmt(data.parentLandingViews)}件` : unmeasured}`);
   lines.push(`  送客（affiliate_click）: ${manual ? `${fmt(data.affiliateClicks)}件` : unmeasured}`);
   lines.push(`  確定発生（ASP実測）: ${manual ? `${data.confirmedConversions}件` : unmeasured}`);
