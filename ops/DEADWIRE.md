@@ -236,6 +236,16 @@ node scripts/d1q.mjs "SELECT * FROM parent_funnel_events WHERE prefecture_code='
 
 # 3. ★★★ DW-3: 「D1こそ真値」という前提が `clicks` に関して壊れている
 
+> ✅ **2026-08-23 「最小の直し方」#2のみ対応済み（loopが実施）**: `BOT_UA_RE`に`googleother`を追加した
+> （`src/lib/bot-filter.ts`・commit予定・tsc実exit0・jestフルスイート333suites5836tests green）。
+> **#1（ダッシュボード/レポートの既定をclassifyClick()のhumanのみに切り替え）は見送り**:
+> `scripts/generate-sales-report.ts`（実際のB2B営業資料の土台）が現状referer/user_agent列を
+> エクスポートしておらず、正しく直すにはwrangler SQLエクスポートの列追加も必要な大きめの変更に
+> なるため、外部提出物に関わる変更として今回は着手しない（次回以降、影響範囲を確認してから着手）。
+> **#3（/goのIPバースト窓を日次にも拡張）も見送り**: 学校等の共有IPから同一県の生徒が1日に
+> 複数回アフィリリンクを踏む正当なケースを誤検知するリスクがあり、需要データが無いまま
+> 拡張するのは時期尚早と判断。
+
 **BRIEF §4 の「GA4 affiliate_click=2 に対し D1 clicks=348（174倍）」は、GA4の欠測ではなく D1 の過大計上。**
 
 ### 症状

@@ -9,9 +9,13 @@
  *
  * 実ブラウザの UA（Mozilla/AppleWebKit/Chrome/Safari/Gecko 等）には下記トークンが含まれないため、
  * 誤検出しにくい。UA が空＝スクリプト直叩きとみなして bot 扱いする（実ブラウザは必ず UA を送る）。
+ *
+ * 追記（DW-3・DEADWIRE 2026-08-10監査→2026-08-23対応）：`GoogleOther`（`googlebot`とは別名の
+ * Google製クローラ）が"bot"を含まない文字列のため既存の`bot`トークンをすり抜けていた
+ * （本番D1 clicksの実測で1件確認済み）。個別トークンとして追加した。
  */
 const BOT_UA_RE =
-  /bot|crawl|spider|slurp|mediapartners|googlebot|bing|yandex|baidu|duckduck|sogou|exabot|facebookexternalhit|facebot|ia_archiver|ahrefs|semrush|mj12|dotbot|petalbot|bytespider|headless|phantom|puppeteer|playwright|selenium|lighthouse|gtmetrix|pingdom|uptime|statuscake|monitor|python|curl|wget|libwww|okhttp|java(\/| )|go-http|scrapy|node-fetch|axios|postman|insomnia|scraper|scan|preview|embed|feedfetcher|apache-httpclient|gptbot|chatgpt|oai-searchbot|claudebot|claude-web|anthropic|ccbot|amazonbot|applebot|perplexity|google-extended|cohere|diffbot|dataforseo|serpstat|screaming|httpx|zgrab|masscan|nuclei|censys|nikto|wpscan|fasthttp|httpclient|guzzle|colly|dalvik|electron|crawler|fetch\b/i;
+  /bot|googleother|crawl|spider|slurp|mediapartners|googlebot|bing|yandex|baidu|duckduck|sogou|exabot|facebookexternalhit|facebot|ia_archiver|ahrefs|semrush|mj12|dotbot|petalbot|bytespider|headless|phantom|puppeteer|playwright|selenium|lighthouse|gtmetrix|pingdom|uptime|statuscake|monitor|python|curl|wget|libwww|okhttp|java(\/| )|go-http|scrapy|node-fetch|axios|postman|insomnia|scraper|scan|preview|embed|feedfetcher|apache-httpclient|gptbot|chatgpt|oai-searchbot|claudebot|claude-web|anthropic|ccbot|amazonbot|applebot|perplexity|google-extended|cohere|diffbot|dataforseo|serpstat|screaming|httpx|zgrab|masscan|nuclei|censys|nikto|wpscan|fasthttp|httpclient|guzzle|colly|dalvik|electron|crawler|fetch\b/i;
 
 /**
  * 化石UA＝実ブラウザ集団がもう存在しない古さのUAを名乗る既知ボット。

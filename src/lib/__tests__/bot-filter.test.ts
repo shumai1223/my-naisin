@@ -25,6 +25,10 @@ describe('isBotUserAgent', () => {
     for (const ua of bots) expect(isBotUserAgent(ua)).toBe(true);
   });
 
+  it('GoogleOther("bot"を含まないGoogle製クローラ)は bot 扱い(DW-3・2026-08-23対応)', () => {
+    expect(isBotUserAgent('Mozilla/5.0 (compatible; GoogleOther)')).toBe(true);
+  });
+
   it('UA が空/未指定はスクリプト直叩きとみなして bot 扱い', () => {
     expect(isBotUserAgent('')).toBe(true);
     expect(isBotUserAgent('   ')).toBe(true);
