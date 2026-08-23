@@ -1,5 +1,18 @@
 import { getActiveSeason, isSeasonalContentLive, SEASON_COPY } from '@/lib/seasonal';
 import { selectLeadOffer } from '@/lib/lead-config';
+import { isLiveAffiliate } from '@/lib/affiliates';
+import { confirmedPer1000 } from '@/lib/affiliate-economics';
+
+// S11-2(2026-08-24)テスト用: winter-koushuu-trialだけを強制liveにできるフラグ。
+// 既定offではactual.isLiveAffiliateへそのまま委譲するため、他の全テストの挙動には影響しない。
+let forceWinterLive = false;
+jest.mock('@/lib/affiliates', () => {
+  const actual = jest.requireActual('@/lib/affiliates');
+  return {
+    ...actual,
+    isLiveAffiliate: (id: string) => (id === 'winter-koushuu-trial' && forceWinterLive ? true : actual.isLiveAffiliate(id)),
+  };
+});
 
 const D = (iso: string) => new Date(`${iso}T00:00:00Z`);
 
@@ -88,5 +101,34 @@ describe('selectLeadOffer × 季節講習スワップ', () => {
     expect(o.affiliateId).toBe('sora-juku-text');
     expect(o.ctaText).not.toContain('冬期講習');
     expect(o.ctaText).not.toContain('夏期講習');
+  });
+});
+
+describe('S11-2: 季節専用枠のEVガード（2026-08-24）', () => {
+  afterEach(() => {
+    forceWinterLive = false;
+  });
+
+  it('前提: winter-koushuu-trialの実EVはフォールバック(sora-juku-text)より低い', () => {
+    expect(confirmedPer1000('winter-koushuu-trial')).toBeLessThan(confirmedPer1000('sora-juku-text'));
+  });
+
+  it('前提: forceWinterLiveフラグは実際にisLiveAffiliateの戻り値を切り替える（モックの実効性確認）', () => {
+    expect(isLiveAffiliate('winter-koushuu-trial')).toBe(false);
+    forceWinterLive = true;
+    expect(isLiveAffiliate('winter-koushuu-trial')).toBe(true);
+  });
+
+  it('専用枠がliveでもEVがフォールバック未満なら採用しない（無警告のクリック単価劣化を防ぐ）', () => {
+    forceWinterLive = true;
+    expect(isLiveAffiliate('winter-koushuu-trial')).toBe(true); // ガードのisLiveAffiliate分岐に実際に入ることを確認
+    const o = selectLeadOffer({ placement: 'result', season: 'winter' });
+    expect(o.affiliateId).not.toBe('winter-koushuu-trial');
+    expect(o.affiliateId).toBe('sora-juku-text');
+  });
+
+  it('専用枠がpendingのまま(既定)なら従来通りフォールバックする（回帰確認）', () => {
+    const o = selectLeadOffer({ placement: 'result', season: 'winter' });
+    expect(o.affiliateId).toBe('sora-juku-text');
   });
 });

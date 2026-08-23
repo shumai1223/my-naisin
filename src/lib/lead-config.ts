@@ -25,6 +25,7 @@
 
 import { AFFILIATES, isLiveAffiliate, type AffiliateId } from '@/lib/affiliates';
 import {
+  confirmedPer1000,
   economicsFor,
   isParentSafeOffer,
   OFFER_KIND_LABEL,
@@ -327,15 +328,26 @@ const SEASON_AFFILIATE: Record<Season, AffiliateId> = {
 const SEASONAL_JUKU_IDS = new Set<AffiliateId>(['sora-juku-text', 'morijuku-text', 'campus-text', 'atama-text']);
 
 /**
- * 季節講習の送客先を解決：専用案件が live ならそれ、無ければ県の地盤塾、無ければ全国オンライン（そら塾）。
+ * 季節講習の送客先を解決：専用案件が live かつ EV がフォールバック以上ならそれ、
+ * 無ければ／EVで劣るならフォールバック（県の地盤塾、無ければ全国オンライン＝そら塾）。
  * pending の専用枠には絶対にフォールバックしない（デッドリンクを出さない）。
+ *
+ * S11-2(2026-08-24): 専用枠(winter/summer/last-minute)がASP承認されlive化した瞬間、
+ * EV比較なしで無条件採用していたため、専用枠のEV(¥108〜132/click)がフォールバック
+ * (¥240〜360/click)を大幅に下回るケースで無警告にクリック単価が半分以下に落ちる
+ * リスクがあった（`ops/PROPOSALS.md` S11-2）。confirmedPer1000での比較を追加し、
+ * 専用枠が劣る場合はフォールバックのまま据え置く安全装置を入れる。
  */
 function seasonalAffiliate(season: Season, prefectureCode?: string): AffiliateId {
-  const dedicated = SEASON_AFFILIATE[season];
-  if (isLiveAffiliate(dedicated)) return dedicated;
   const prefOff = prefectureCode ? PREFECTURE_LEAD_OVERRIDES[prefectureCode] : undefined;
-  if (prefOff?.affiliateId && SEASONAL_JUKU_IDS.has(prefOff.affiliateId)) return prefOff.affiliateId;
-  return 'sora-juku-text';
+  const fallback: AffiliateId =
+    prefOff?.affiliateId && SEASONAL_JUKU_IDS.has(prefOff.affiliateId) ? prefOff.affiliateId : 'sora-juku-text';
+
+  const dedicated = SEASON_AFFILIATE[season];
+  if (isLiveAffiliate(dedicated) && confirmedPer1000(dedicated) >= confirmedPer1000(fallback)) {
+    return dedicated;
+  }
+  return fallback;
 }
 
 /**
