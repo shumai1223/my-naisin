@@ -49,7 +49,11 @@ async function getDb(): Promise<MinimalD1 | null> {
   }
 }
 
-export type ParentFunnelEvent = 'share_to_parent' | 'parent_landing_view' | 'line_registration_click';
+export type ParentFunnelEvent =
+  | 'share_to_parent'
+  | 'parent_landing_view'
+  | 'line_registration_click'
+  | 'mendan_bridge_click';
 export type ParentFunnelMedium = 'native' | 'copy' | 'line' | 'x';
 
 export interface ParentFunnelEventInput {
@@ -104,6 +108,7 @@ export async function getParentFunnelEventCounts(
     share_to_parent: 0,
     parent_landing_view: 0,
     line_registration_click: 0,
+    mendan_bridge_click: 0,
   };
   try {
     const db = await getDb();

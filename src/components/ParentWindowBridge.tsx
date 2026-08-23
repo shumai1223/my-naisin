@@ -7,6 +7,7 @@ import { CalendarClock, Users, MessageCircle, ChevronRight } from 'lucide-react'
 import { activeParentWindow, parentWindowCopy, type ParentWindowId } from '@/lib/parent-window';
 import { lineAddUrl } from '@/lib/line';
 import { track } from '@/lib/track';
+import { beaconParentFunnelEvent } from '@/lib/parent-funnel-beacon';
 import { CtaViewTracker } from '@/components/Affiliate/CtaViewTracker';
 import { ParentShareLinkButton } from '@/components/ParentShareLinkButton';
 
@@ -73,6 +74,12 @@ export function ParentWindowBridge({
     track('line_friend_click', { source: PLACEMENT, pref: prefectureCode ?? 'none', gap: gap ?? 0 });
   }
 
+  // S2-3: /mendanリンクは従来onClickが無く計測ゼロだった（LINEボタンと並ぶ本コンポーネントのもう一方の主要CTA）。
+  function onMendanLinkClick() {
+    track('mendan_bridge_link_click', { source: PLACEMENT, pref: prefectureCode ?? 'none', gap: gap ?? 0 });
+    beaconParentFunnelEvent('mendan_bridge_click', { prefectureCode });
+  }
+
   return (
     <section
       className={`overflow-hidden rounded-2xl border border-indigo-200 bg-gradient-to-br from-indigo-50 via-blue-50/60 to-white p-6 shadow-sm md:p-7 ${className}`}
@@ -113,6 +120,7 @@ export function ParentWindowBridge({
         {/* ② 三者面談の準備へ（/mendan＝面談面。ここに家庭教師の無料体験が結線済み） */}
         <Link
           href="/mendan"
+          onClick={onMendanLinkClick}
           className="group flex items-center justify-between gap-2 rounded-xl bg-indigo-600 px-4 py-3.5 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-indigo-700 active:scale-[0.99]"
         >
           <span className="flex items-center gap-2">

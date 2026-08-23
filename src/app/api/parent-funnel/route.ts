@@ -11,7 +11,12 @@ import { isBotUserAgent } from '@/lib/bot-filter';
  * D1一次記録で補う（[[ga4-undercounts-conversions]]）。送信/遷移は止めず、記録はベストエフォート。
  */
 
-const VALID_EVENTS = new Set<ParentFunnelEvent>(['share_to_parent', 'parent_landing_view', 'line_registration_click']);
+const VALID_EVENTS = new Set<ParentFunnelEvent>([
+  'share_to_parent',
+  'parent_landing_view',
+  'line_registration_click',
+  'mendan_bridge_click',
+]);
 const VALID_MEDIUMS = new Set<ParentFunnelMedium>(['native', 'copy', 'line', 'x']);
 const MAX_BODY_BYTES = 256;
 
