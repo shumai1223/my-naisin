@@ -370,6 +370,10 @@ $ node scripts/d1q.mjs "SELECT affiliate_id, COALESCE(placement,'(null)') p, sub
 
 # 4. ★★ DW-4: `share_to_parent` の7発火点のうち3点がD1ビーコン未配線
 
+> ✅ **2026-08-23 対応済み（loopが実施）**: GapToTarget.tsx/ResultSection.tsx/JukuShindanClient.tsxの3箇所に
+> 既存5箇所と同型の`beaconParentFunnelEvent`呼び出しを追加した（commit `b9333d8`・tsc実exit0・
+> jestフルスイート333suites5835tests green）。GA4送信・表示挙動は変更していない。
+
 ### 症状
 `parent_funnel_events` は設計上「GA4の欠測を補うD1一次記録」（`src/lib/parent-funnel-db.ts:4-8`）だが、
 **GA4に送る箇所の3/7がD1に送っていない。** 仮に共有が起きても D1 は取りこぼす。
@@ -406,6 +410,12 @@ BRIEF §3 の設計思想「GA4は使えないのでD1で判定する」を、**
 ---
 
 # 5. ★★ DW-5 / DW-6: `placement` と `referer` の欠損 — null になる経路の全列挙
+
+> ✅ **2026-08-23 表記ゆれ部分のみ対応済み（loopが実施）**: 「最小の直し方」#1（`placementFromReferer`の
+> 先頭スラッシュ剥がし・`/`→`home`）のみ適用した（`src/app/go/[id]/route.ts`・tsc実exit0・
+> jestフルスイート333suites5835tests green）。**89箇所の`<AffiliateAd>`にplacement明示を足す方は
+> 見送り（本文のとおりEVがほぼゼロと判定済みのため）。過去データの表記ゆれ自体の遡及正規化
+> （SQL UPDATE）は本番D1書き込みのため👤ゲートのまま未実施。**
 
 ### 症状（BRIEF §3 の再掲）
 `placement` が null: 166件/629件（26%）。`referer` が null: 553件/629件（88%）。

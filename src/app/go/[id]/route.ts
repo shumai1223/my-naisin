@@ -38,6 +38,11 @@ function clamp(v: string | null, max: number): string | undefined {
  * placement クエリが無いクリック（素のバナー等）を、同一オリジンの referer パスから面に推定する。
  * これで「placement未付与＝(不明)」をページ単位で取りこぼさず回収（referer がある実クリックに限る）。
  * 外部 referer・referer無し（bot/直叩き）は undefined のまま（=偽の面を作らない）。
+ *
+ * DW-5/6（DEADWIRE 2026-08-10）: 明示 placement は `hensachi` のようにスラッシュ無しで渡る一方、
+ * この推定値は従来 `/hensachi` のようにスラッシュ付きで返しており、同じ面のクリックが集計上
+ * 二重に割れていた。先頭スラッシュを剥がして明示placementと同じ語彙に正規化する
+ * （過去データの表記ゆれ自体はここでは触らない＝本番D1の書き換えは👤ゲート）。
  */
 function placementFromReferer(referer: string | null): string | undefined {
   if (!referer) return undefined;
@@ -45,7 +50,7 @@ function placementFromReferer(referer: string | null): string | undefined {
     const u = new URL(referer);
     if (!u.hostname.endsWith('my-naishin.com')) return undefined;
     const path = u.pathname.replace(/\/+$/, '') || '/';
-    return path.slice(0, 40);
+    return path.replace(/^\//, '').slice(0, 40) || 'home';
   } catch {
     return undefined;
   }
