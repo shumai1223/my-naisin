@@ -17,6 +17,7 @@ import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { getPrefectureSchoolPageData } from '@/lib/school-page-lookup';
 import { getFormulaExplanation } from '@/lib/prefecture-helpers';
 import { PREFECTURE_PITFALLS, DEFAULT_PITFALLS } from '@/lib/prefecture-pitfalls-data';
+import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 
 interface PageProps {
   params: Promise<{ code: string }>;
@@ -233,6 +234,11 @@ export default async function PrefecturePage({ params }: PageProps) {
               <ArrowRight className="h-4 w-4" />
             </Link>
           </section>
+
+          {/* S3-2（PROPOSALS.md 2026-08-10）: 県別まとめページに換金導線が1つも配線されていなかった
+              欠落を是正。既存の県面オファー(lead-config.ts)をplacement="prefecture"で解決するだけの
+              最小配線。保護者共有導線がこのページに元々存在しないためG7の押し下げ対象は無い。 */}
+          <ParentLeadCTA prefectureCode={prefecture.code} placement="prefecture" className="print:hidden" />
 
           {/* 関連リンク */}
           <section className="rounded-2xl border border-slate-200 bg-slate-50 p-6 print:hidden">

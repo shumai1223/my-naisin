@@ -10,6 +10,7 @@ import { getPrefectureSchoolPageData, INDEXED_SCHOOL_PAGE_PREFECTURE_CODES } fro
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { SchoolPageConvertCTA } from '@/components/SchoolPageConvertCTA';
 import { SchoolPageParentBridge } from '@/components/SchoolPageParentBridge';
+import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { SchoolPageNaishinNote } from '@/components/SchoolPageNaishinNote';
 
 /**
@@ -144,6 +145,10 @@ export default async function SchoolPage({ params }: PageProps) {
           {/* G7（保護者到達を押し下げない・ResultSection.tsx:295-298の規約）: 換金導線
               (SchoolPageConvertCTA＝主食②-1)は必ずSchoolPageParentBridgeより下に置く。 */}
           <SchoolPageConvertCTA schoolName={school.schoolName} prefectureCode={prefecture.code} schoolCode={schoolCode} />
+
+          {/* S3-2（PROPOSALS.md 2026-08-10）: 学校ページに換金導線が1つも配線されていなかった欠落を是正。
+              既存の県面オファー(lead-config.ts)をplacement="prefecture"で解決するだけの最小配線。 */}
+          <ParentLeadCTA prefectureCode={prefecture.code} placement="prefecture" />
 
           {school.departmentRates.length > 1 && (
             <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">

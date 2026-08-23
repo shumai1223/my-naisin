@@ -21,4 +21,20 @@ describe('学校ページのCTA順序（G7）', () => {
     expect(convertCtaIndex).toBeGreaterThan(-1);
     expect(parentBridgeIndex).toBeLessThan(convertCtaIndex);
   });
+
+  /**
+   * S3-2（PROPOSALS.md 2026-08-10・2026-08-23対応）: 学校ページに追加した収益CTA
+   * （ParentLeadCTA）も同じG7規約の対象。SchoolPageParentBridgeより後に置く。
+   */
+  it('ParentLeadCTAはSchoolPageParentBridgeより後にレンダーされる', () => {
+    const filePath = join(process.cwd(), 'src/app/pref/[code]/school/[schoolCode]/page.tsx');
+    const content = readFileSync(filePath, 'utf8');
+
+    const parentBridgeIndex = content.indexOf('<SchoolPageParentBridge');
+    const leadCtaIndex = content.indexOf('<ParentLeadCTA');
+
+    expect(parentBridgeIndex).toBeGreaterThan(-1);
+    expect(leadCtaIndex).toBeGreaterThan(-1);
+    expect(parentBridgeIndex).toBeLessThan(leadCtaIndex);
+  });
 });
