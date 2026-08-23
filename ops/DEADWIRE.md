@@ -519,6 +519,15 @@ return path.replace(/^\//, '').slice(0, 40) || 'home';
 > `school-master-data.test.ts`のみが参照）だったため低リスクと判断。生成元`scripts/build-school-master.ts`の
 > `buildMaster()`に`exportPrefix`引数を追加し、再生成時も同じ命名を維持するよう同期済み（公立版は
 > `SCHOOL_MASTER`のまま不変）。tsc実exit0・jestフル336suites5875tests green。
+>
+> ✅ **2026-08-24 #9/#10「実行時ゲート無し」を解消（loopが実施）**: `check:stats`
+> （`stats-distribution-audit.ts`）・`check:click-fraud`（`check-click-fraud-burst.mjs`）は
+> どちらも既に読み取り専用でD1を直接見られる状態だったが、**CIに未登録のためloopが手動で叩かない限り
+> 一度も自動実行されない**という点が「実行時ゲート無し」の本質だった。`d1-backup-weekly.yml`と同じ
+> `CLOUDFLARE_API_TOKEN`/`CLOUDFLARE_ACCOUNT_ID` secretsパターンで新規`.github/workflows/d1-integrity-daily.yml`
+> を追加し、毎日1回両チェックを実行、異常検知時のみ`link-monitor.yml`と同型でGitHub issueを自動作成する
+> ようにした（検知ロジック自体は一切変更しない・書き込みは行わない）。secretsが未設定の場合は
+> `d1-backup-weekly.yml`と同じく明示エラーで停止する設計。**DW-7表の#4/#5/#9/#10・DW-8は全て対応完了。**
 
 `src/data/` 配下の「数値を持つ型」を全列挙し、不変条件テストの有無を機械的に確認した。
 

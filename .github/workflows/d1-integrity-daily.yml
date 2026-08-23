@@ -1,0 +1,101 @@
+name: D1 Integrity Daily Check
+
+# DW-7(#9/#10)/DW-8: stats_submissions（匿名統計）とclicks（アフィリエイトクリック）の
+# 異常検知ロジックはunit test済みで存在し、check:stats / check:click-fraud として
+# npm scriptにも登録済みだが、どちらもCIに未登録のためloopが手動で叩かない限り
+# 一度も自動実行されない「実行時ゲート無し」の状態だった（2026-08-10監査）。
+# 本ワークフローはd1-backup-weekly.ymlと同じCLOUDFLARE_API_TOKEN/CLOUDFLARE_ACCOUNT_ID
+# secretsパターンで本番D1を読み取り専用で参照し、異常検知時のみlink-monitor.ymlと
+# 同型でissueを自動作成する（デフォルトは静か＝毎日のissue量産を避ける）。
+#
+# 必須シークレット（👤がGitHub repo設定で追加するまでこのワークフローは実行されない）：
+#   CLOUDFLARE_API_TOKEN     - D1:Read権限を持つCloudflare APIトークン（d1-backup-weeklyと共用可）
+#   CLOUDFLARE_ACCOUNT_ID    - 対象Cloudflareアカウントのaccount_id（同上）
+
+on:
+  schedule:
+    # 毎日午前10時（JST）= UTC 深夜1時。link-monitor(9時)・gsc/d1-backup(月曜9時)と枠をずらす。
+    - cron: '0 1 * * *'
+  workflow_dispatch: # 手動実行も可能
+
+jobs:
+  integrity-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check required secrets
+        run: |
+          missing=""
+          [ -z "${{ secrets.CLOUDFLARE_API_TOKEN }}" ] && missing="$missing CLOUDFLARE_API_TOKEN"
+          [ -z "${{ secrets.CLOUDFLARE_ACCOUNT_ID }}" ] && missing="$missing CLOUDFLARE_ACCOUNT_ID"
+          if [ -n "$missing" ]; then
+            echo "::error::以下のシークレットが未設定のため実行できません:$missing"
+            echo "::error::docs/d1-backup-restore.md の手順に従って👤がGitHub repo設定で追加してください。"
+            exit 1
+          fi
+
+      - name: Run stats_submissions distribution audit
+        id: stats_audit
+        continue-on-error: true
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npm run check:stats 2>&1 | tee stats-audit-output.txt
+
+      - name: Run clicks fraud burst check
+        id: click_fraud
+        continue-on-error: true
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npm run check:click-fraud 2>&1 | tee click-fraud-output.txt
+
+      - name: Upload outputs
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: d1-integrity-daily-outputs
+          path: |
+            stats-audit-output.txt
+            click-fraud-output.txt
+          retention-days: 30
+
+      - name: Create issue if either check flagged an anomaly
+        if: steps.stats_audit.outcome == 'failure' || steps.click_fraud.outcome == 'failure'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const statsOut = fs.existsSync('stats-audit-output.txt') ? fs.readFileSync('stats-audit-output.txt', 'utf8') : '(no output)';
+            const clickOut = fs.existsSync('click-fraud-output.txt') ? fs.readFileSync('click-fraud-output.txt', 'utf8') : '(no output)';
+            const statsFlagged = '${{ steps.stats_audit.outcome }}' === 'failure';
+            const clickFlagged = '${{ steps.click_fraud.outcome }}' === 'failure';
+
+            let body = `# D1整合性デイリーチェックで異常を検知\n\n`;
+            body += `検知日時: ${new Date().toISOString()}\n\n`;
+            if (statsFlagged) {
+              body += `## stats_submissions 分布監査（check:stats）\n\n\`\`\`\n${statsOut.slice(0, 6000)}\n\`\`\`\n\n`;
+            }
+            if (clickFlagged) {
+              body += `## clicks クリック不正バースト検知（check:click-fraud）\n\n\`\`\`\n${clickOut.slice(0, 6000)}\n\`\`\`\n\n`;
+            }
+            body += `## 対応方法\n\n`;
+            body += `- このワークフローは読み取り専用です。D1への書き込み（隔離・削除）は行いません。\n`;
+            body += `- \`ops/DEADWIRE.md\` の DW-1/DW-2（stats_submissions）・DW-7（clicks・TH-13）の対応手順を参照してください。\n`;
+            body += `- 対応後、このissueを閉じてください。\n\n`;
+            body += `---\nこのissueは自動的に作成されました。`;
+
+            github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `⚠️ D1整合性チェックで異常検知: ${new Date().toISOString().slice(0, 10)}`,
+              body,
+              labels: ['data-integrity', 'automated'],
+            });
