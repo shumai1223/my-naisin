@@ -28,7 +28,7 @@
     "check:orphans": "node scripts/check-orphans.mjs",
     "check:freshness": "node scripts/check-freshness.mjs",
     "report:links": "npx tsx scripts/link-graph-report.ts",
-    "check:all": "npm run check:consistency && npm run check:forbidden",
+    "check:all": "npm run check:consistency && npm run check:forbidden && npm run check:orphans",
     "monitor:links": "npx tsx src/scripts/link-monitor.ts",
     "newsletter": "npx tsx scripts/newsletter.ts",
     "sales-report": "npx tsx scripts/generate-sales-report.ts",

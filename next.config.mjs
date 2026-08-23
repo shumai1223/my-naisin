@@ -67,6 +67,33 @@ const nextConfig = {
     }
     return config;
   },
+  // S5-1(2026-08-24): public/_headersはOpenNextの動的レンダリング経路(App RouterのSSR/ISR)を
+  // 経由しないため本番で欠落していた(curl -Iで4本とも確認できず・ops/MONEY.md出血10)。
+  // next.config.mjsのheaders()で明示配信する。⚠️Referrer-Policyはpublic/_headersと1文字も
+  // 変えず'strict-origin-when-cross-origin'を維持すること（bot-filter.tsのisInternalReferer
+  // 判定・COEFFICIENTS/CORRECTIONS/DEADWIREの人間クリック識別軸が全てこの値に依拠している）。
+  // /embed/:path*は埋め込みウィジェット用にX-Frame-Optionsを緩めるため、Next.jsが後勝ちで
+  // 上書きするよう全体ルールより後に配置する。
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          { key: 'X-Frame-Options', value: 'DENY' },
+          { key: 'X-Content-Type-Options', value: 'nosniff' },
+          { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+          { key: 'Permissions-Policy', value: 'geolocation=(), microphone=(), camera=()' },
+        ],
+      },
+      {
+        source: '/embed/:path*',
+        headers: [
+          { key: 'X-Frame-Options', value: 'ALLOWALL' },
+          { key: 'Content-Security-Policy', value: 'frame-ancestors *' },
+        ],
+      },
+    ];
+  },
   async redirects() {
     return [
       // 都道府県リバースページのリダイレクト（/{code}/reverse → /reverse?pref={code}）
