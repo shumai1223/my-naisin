@@ -267,7 +267,13 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // niigata-kyoshokuin/ibaraki-kyoshokuin/aomori-kyoshokuin]・npo大学教育学部5件
     // [okayama/kagoshima/niigata/mie/shiga])をGmail下書き化しqueuedへ昇格(172→185・全件が
     // 別ドメインのため同一運営代行事務局への集中なし)。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(185);
+    // 2026-08-23続き: 本日のGmail下書き上限(10-15件)は上記バッチで到達済み(次リセットは08-24 0:00)の
+    // ため、本文執筆済みだが未昇格のcandidate13件(lane7大学: nara-kyoiku-u/utsunomiya-u-education/
+    // kanazawa-u-education/fukui-u-education/tottori-u-education/ehime-u-education/
+    // kumamoto-u-education/oita-u-education/miyazaki-u-education/tsukuba-tech-u/geidai-u/
+    // nara-wu-u/saga-u)をGmail下書き作成は行わず(上限を超えないため)status のみqueuedへ昇格
+    // (185→198・org/id重複チェック0件)。実際のGmail下書き化は次回リセット後に行う。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(198);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {
