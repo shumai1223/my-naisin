@@ -113,7 +113,7 @@ export function getPrefectureSchoolPageData(code: string): { schools: SchoolPage
   // T-A1: 学校固有の多年度推移（今季値の計算経路(currentYearRecords)には一切触れず、
   // rates.records全体(今季+過去年度)から別経路で集計し、schoolCodeで後から合流する）。
   const currentFiscalYear = rates.sources[0]?.fiscalYear ?? '';
-  const historyByCode = buildSchoolHistoryForPrefecture(master.schools, rates.records, currentFiscalYear, nameAliases);
+  const historyByCode = buildSchoolHistoryForPrefecture(master.schools, rates.records, currentFiscalYear, nameAliases, rates.sources);
   const schoolsWithHistory = schools.map((s) => ({ ...s, history: historyByCode.get(s.schoolCode) ?? [] }));
 
   return { schools: schoolsWithHistory };

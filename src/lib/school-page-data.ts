@@ -15,7 +15,7 @@
  * ことを東京都167校の実データで確認済み・2026-08-01)。
  */
 import type { SchoolRecord } from '@/lib/school-master';
-import type { CompetitionRateRecord } from '@/lib/competition-rate';
+import { resolveRecordSourceIndex, type CompetitionRateRecord, type CompetitionRateSource } from '@/lib/competition-rate';
 import type { PrefectureRateHistoryFile } from '@/lib/competition-rate-history';
 import { matchSchoolNames, type SchoolCodeMatchResult } from '@/lib/school-name-match';
 import { resolveCategoryLabel } from '@/lib/school-department-category';
@@ -47,6 +47,12 @@ export interface SchoolHistoryEntry {
   quota: number;
   applicants: number;
   rate: number;
+  /**
+   * この数値の一次出典（S6-1・Y-0憲法②「1データ点1出典」）。`resolveRecordSourceIndex`で
+   * 一意に解決できた場合のみ設定・複数資料/0件一致で一意に決まらない場合はnull
+   * （捏造ゼロ＝出典を断定できないなら断定して表示しない）。
+   */
+  source: CompetitionRateSource | null;
 }
 
 export interface SchoolPageDataSkipEntry {
@@ -138,7 +144,8 @@ export function buildSchoolHistoryForPrefecture(
   masterRecords: SchoolRecord[],
   allRateRecords: CompetitionRateRecord[],
   currentFiscalYear: string,
-  nameAliases: Record<string, string> = {}
+  nameAliases: Record<string, string> = {},
+  sources: CompetitionRateSource[] = []
 ): Map<string, SchoolHistoryEntry[]> {
   const schoolNames = allRateRecords.map((r) => r.schoolName);
   const aliasedNames = schoolNames.map((n) => nameAliases[n] ?? n);
@@ -152,6 +159,7 @@ export function buildSchoolHistoryForPrefecture(
     const aliased = nameAliases[rec.schoolName] ?? rec.schoolName;
     const match = matchByAliasedName.get(aliased);
     if (!match || match.reason !== 'matched' || !match.matchedCode) continue;
+    const sourceIndex = resolveRecordSourceIndex(rec, sources);
     const list = historyByCode.get(match.matchedCode) ?? [];
     list.push({
       fiscalYear: rec.fiscalYear ?? currentFiscalYear,
@@ -159,6 +167,7 @@ export function buildSchoolHistoryForPrefecture(
       quota: rec.quota,
       applicants: rec.finalApplicants,
       rate: rec.finalRate,
+      source: sourceIndex !== null ? sources[sourceIndex] : null,
     });
     historyByCode.set(match.matchedCode, list);
   }

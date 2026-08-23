@@ -228,6 +228,23 @@ export default async function SchoolPage({ params }: PageProps) {
                         </tr>
                       </tbody>
                     </table>
+                    {/* S6-1(2026-08-24): 1データ点1出典(Y-0憲法②)。数値の直下に年度ごとの一次資料を明示する。
+                        resolveRecordSourceIndexで一意に解決できた年度のみ表示(捏造ゼロ＝断定できない出典は出さない)。 */}
+                    {group.entries.some((e) => e.source) && (
+                      <ul className="mt-2 space-y-0.5 text-[11px] leading-relaxed text-slate-400">
+                        {group.entries
+                          .filter((e) => e.source)
+                          .map((e) => (
+                            <li key={e.fiscalYear}>
+                              出典（{e.fiscalYear}）：
+                              <a href={e.source!.url} target="_blank" rel="noopener noreferrer" className="underline hover:text-slate-600">
+                                {e.source!.docTitle}
+                              </a>
+                              （取得日: {e.source!.fetchedAt}）
+                            </li>
+                          ))}
+                      </ul>
+                    )}
                   </div>
                 ))}
               </div>

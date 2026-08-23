@@ -194,6 +194,46 @@ describe('buildSchoolHistoryForPrefecture（T-A1・学校固有の多年度推�
     expect(history.get('M1')).toHaveLength(1);
   });
 
+  describe('source解決（S6-1・1データ点1出典）', () => {
+    const sources = [
+      { url: 'https://example.jp/r8.pdf', docTitle: '令和8年度入学者選抜結果', fiscalYear: '令和8年度（2026年度）', fetchedAt: '2026-08-01' },
+      { url: 'https://example.jp/r7.pdf', docTitle: '令和7年度入学者選抜結果', fiscalYear: '令和7年度（2025年度）', fetchedAt: '2025-08-01' },
+    ];
+
+    test('fiscalYearがsourcesと一意に一致すればsourceが設定される', () => {
+      const master = [rec('T1', '東京都立日比谷高等学校')];
+      const records = [
+        { ...rate('日比谷', '普通科', 253, 540, 2.13), fiscalYear: '令和8年度（2026年度）' },
+        { ...rate('日比谷', '普通科', 253, 500, 1.98), fiscalYear: '令和7年度（2025年度）' },
+      ];
+      const history = buildSchoolHistoryForPrefecture(master, records, '令和8年度（2026年度）', {}, sources);
+      const entries = history.get('T1')!;
+      expect(entries.find((e) => e.fiscalYear === '令和8年度（2026年度）')!.source).toEqual(sources[0]);
+      expect(entries.find((e) => e.fiscalYear === '令和7年度（2025年度）')!.source).toEqual(sources[1]);
+    });
+
+    test('sourceIndexが明示されていればfiscalYear一致より優先される', () => {
+      const master = [rec('T1', '東京都立日比谷高等学校')];
+      const records = [{ ...rate('日比谷', '普通科', 253, 540, 2.13), fiscalYear: '令和8年度（2026年度）', sourceIndex: 1 }];
+      const history = buildSchoolHistoryForPrefecture(master, records, '令和8年度（2026年度）', {}, sources);
+      expect(history.get('T1')![0].source).toEqual(sources[1]);
+    });
+
+    test('sourcesが一致0件・複数件のいずれでもnull（出典を断定しない＝捏造ゼロ）', () => {
+      const master = [rec('T1', '東京都立日比谷高等学校')];
+      const records = [{ ...rate('日比谷', '普通科', 253, 540, 2.13), fiscalYear: '令和9年度（2027年度）' }];
+      const history = buildSchoolHistoryForPrefecture(master, records, '令和8年度（2026年度）', {}, sources);
+      expect(history.get('T1')![0].source).toBeNull();
+    });
+
+    test('sources未指定（既定[]）でも従来どおり動作しsourceは常にnull（後方互換）', () => {
+      const master = [rec('T1', '東京都立日比谷高等学校')];
+      const records = [{ ...rate('日比谷', '普通科', 253, 540, 2.13), fiscalYear: '令和8年度（2026年度）' }];
+      const history = buildSchoolHistoryForPrefecture(master, records, '令和8年度（2026年度）');
+      expect(history.get('T1')![0].source).toBeNull();
+    });
+  });
+
   // 不変条件テスト群（DoD必須・宮崎avgNaishin425の再発防止と同型）
   describe('不変条件（実データ・東京都日比谷）', () => {
     const { schools } = buildSchoolPageDataForPrefecture(SCHOOLS_TOKYO.schools, TOKYO_COMPETITION_RATES.records.filter((r) => !r.fiscalYear));
@@ -281,9 +321,9 @@ describe('buildSchoolHistoryForPrefecture（T-A1・学校固有の多年度推�
 describe('groupSchoolHistoryByDepartment', () => {
   test('学科ごとにグルーピングし、出現順(=departmentの初出順)を保つ', () => {
     const history = [
-      { fiscalYear: '令和8年度（2026年度）', department: '普通科', quota: 200, applicants: 271, rate: 1.36 },
-      { fiscalYear: '令和8年度（2026年度）', department: '理数科', quota: 80, applicants: 99, rate: 1.24 },
-      { fiscalYear: '令和7年度（2025年度）', department: '普通科', quota: 200, applicants: 260, rate: 1.3 },
+      { fiscalYear: '令和8年度（2026年度）', department: '普通科', quota: 200, applicants: 271, rate: 1.36, source: null },
+      { fiscalYear: '令和8年度（2026年度）', department: '理数科', quota: 80, applicants: 99, rate: 1.24, source: null },
+      { fiscalYear: '令和7年度（2025年度）', department: '普通科', quota: 200, applicants: 260, rate: 1.3, source: null },
     ];
     const grouped = groupSchoolHistoryByDepartment(history);
     expect(grouped.map((g) => g.department)).toEqual(['普通科', '理数科']);
