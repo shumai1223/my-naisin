@@ -86,7 +86,6 @@ export function ParentLeadCTA({ heading, body, className = '', auditHide = false
       <div className="flex flex-col items-stretch gap-2 sm:flex-row sm:items-center">
         <AffiliateAd
           id={resolvedAffiliateId}
-          hideLabel
           ctaText={resolvedCtaText}
           pref={prefectureCode}
           placement={placement}
@@ -107,7 +106,6 @@ export function ParentLeadCTA({ heading, body, className = '', auditHide = false
           </span>
           <AffiliateAd
             id={secondary.affiliateId}
-            hideLabel
             ctaText={secondary.ctaText}
             pref={prefectureCode}
             placement={placement}
