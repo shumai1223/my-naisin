@@ -1,6 +1,6 @@
 {
   "_comment": "AA-1追撃システムの送信台帳。Gmail MCP(gmail_search q=\"in:sent\" / 受信箱の自動受付メール)で実測した内容を手動で反映する運用(scripts/weekly-kpi-report.tsの手動入力パターンと同じ)。統計処理はsrc/lib/outreach-ledger.tsの純関数が担当。1エントリ=1組織。フォーム送信のみでGmail送信履歴に残らないもの(コエテコ/スタディサプリ等)は次回以降のバックフィル対象・現時点では未収録(捏造回避のため確証のある送信のみ収録)。Λ-3(2026-07-29): reviewTierはエントリ個別のレビュー区分上書き(未指定ならb2b-saasレーンの既定値full-review)。今回は組織名から都道府県単位の小規模な模試団体と明確に判別できたもの(かとうもし/新潟県統一模試会/愛媛県模試/新教研/学悠出版)のみ保守的にspot-checkへ下げた。出版社・塾チェーン等の規模が名前だけでは断定できないものはfull-reviewのまま据え置いている(判断に迷う場合はより厳格な側=full-reviewを既定とする方針)。",
-  "asOf": "2026-08-21",
+  "asOf": "2026-08-23",
   "entries": [
     {
       "id": "benesse-kato",
@@ -1228,7 +1228,7 @@
       "status": "awaiting",
       "followupCount": 0,
       "threadId": "1a00602534598a97",
-      "note": "送信完了・自動受領確認(お問合せNo:663901・23:04:58受信)。同一運営代行事務局(ml.gakkai.ne.jp)宛の他候補は同日に追加送信していないことを確認済み(分散方針を維持)。"
+      "note": "送信完了・自動受領確認(お問合せNo:663901・23:04:58受信)。同一運営代行事務局(ml.gakkai.ne.jp)宛の他候補は同日に追加送信していないことを確認済み(分散方針を維持)。 2026-08-23: 7日経過・返信無しのため追撃下書きを作成(draftId r-8101270385434893234)。"
     },
     {
       "id": "edtech-tfabworks",
@@ -1373,7 +1373,7 @@
       "status": "awaiting",
       "followupCount": 0,
       "threadId": "1a006020ddc030a5",
-      "note": "T-C2で本文作成済みの候補が2026-08-15〜08-20の間にGmailで実送信されていたことを2026-08-21にin:sent実測で確認し反映(queueのmessageId=1a006020ddc030a5と実際のGmail送信を突合)。"
+      "note": "T-C2で本文作成済みの候補が2026-08-15〜08-20の間にGmailで実送信されていたことを2026-08-21にin:sent実測で確認し反映(queueのmessageId=1a006020ddc030a5と実際のGmail送信を突合)。 2026-08-23: 7日経過・返信無しのため追撃下書きを作成(draftId r-9069551893591455649)。"
     },
     {
       "id": "lane9-edupsych",
@@ -1384,7 +1384,7 @@
       "status": "awaiting",
       "followupCount": 0,
       "threadId": "1a0060219c799cb4",
-      "note": "T-C2で本文作成済みの候補が2026-08-15〜08-20の間にGmailで実送信されていたことを2026-08-21にin:sent実測で確認し反映(queueのmessageId=1a0060219c799cb4と実際のGmail送信を突合)。"
+      "note": "T-C2で本文作成済みの候補が2026-08-15〜08-20の間にGmailで実送信されていたことを2026-08-21にin:sent実測で確認し反映(queueのmessageId=1a0060219c799cb4と実際のGmail送信を突合)。 2026-08-23: 7日経過・返信無しのため追撃下書きを作成(draftId r227987206068279989)。"
     },
     {
       "id": "lane9-jartest",
@@ -1395,7 +1395,7 @@
       "status": "awaiting",
       "followupCount": 0,
       "threadId": "1a002edc621eefae",
-      "note": "T-C2で本文作成済みの候補が2026-08-15〜08-20の間にGmailで実送信されていたことを2026-08-21にin:sent実測で確認し反映(queueのmessageId=1a002edc621eefaeと実際のGmail送信を突合)。"
+      "note": "T-C2で本文作成済みの候補が2026-08-15〜08-20の間にGmailで実送信されていたことを2026-08-21にin:sent実測で確認し反映(queueのmessageId=1a002edc621eefaeと実際のGmail送信を突合)。 2026-08-23: 7日経過・返信無しのため追撃下書きを作成(draftId r-1223634845919583613)。"
     },
     {
       "id": "gakusan-kirihara",
@@ -1428,7 +1428,7 @@
       "status": "awaiting",
       "followupCount": 0,
       "threadId": "1a0060227c600b86",
-      "note": "T-C2で本文作成済みの候補が2026-08-15〜08-20の間にGmailで実送信されていたことを2026-08-21にin:sent実測で確認し反映(queueのmessageId=1a0060227c600b86と実際のGmail送信を突合)。"
+      "note": "T-C2で本文作成済みの候補が2026-08-15〜08-20の間にGmailで実送信されていたことを2026-08-21にin:sent実測で確認し反映(queueのmessageId=1a0060227c600b86と実際のGmail送信を突合)。 2026-08-23: 7日経過・返信無しのため追撃下書きを作成(draftId r2992304591270213859)。"
     },
     {
       "id": "lane9-bms",
@@ -1439,7 +1439,7 @@
       "status": "awaiting",
       "followupCount": 0,
       "threadId": "1a0060234e44581c",
-      "note": "T-C2で本文作成済みの候補が2026-08-15〜08-20の間にGmailで実送信されていたことを2026-08-21にin:sent実測で確認し反映(queueのmessageId=1a0060234e44581cと実際のGmail送信を突合)。"
+      "note": "T-C2で本文作成済みの候補が2026-08-15〜08-20の間にGmailで実送信されていたことを2026-08-21にin:sent実測で確認し反映(queueのmessageId=1a0060234e44581cと実際のGmail送信を突合)。 2026-08-23: 7日経過・返信無しのため追撃下書きを作成(draftId r-110444169569725693)。"
     },
     {
       "id": "lane9-jssce",
@@ -1450,7 +1450,7 @@
       "status": "awaiting",
       "followupCount": 0,
       "threadId": "1a002edd4f5d150b",
-      "note": "T-C2で本文作成済みの候補が2026-08-15〜08-20の間にGmailで実送信されていたことを2026-08-21にin:sent実測で確認し反映(queueのmessageId=1a002edd4f5d150bと実際のGmail送信を突合)。"
+      "note": "T-C2で本文作成済みの候補が2026-08-15〜08-20の間にGmailで実送信されていたことを2026-08-21にin:sent実測で確認し反映(queueのmessageId=1a002edd4f5d150bと実際のGmail送信を突合)。 2026-08-23: 7日経過・返信無しのため追撃下書きを作成(draftId r-7884693009734892015)。"
     },
     {
       "id": "lane9-jlta",
@@ -1461,7 +1461,7 @@
       "status": "awaiting",
       "followupCount": 0,
       "threadId": "1a00602444d56d5e",
-      "note": "T-C2で本文作成済みの候補が2026-08-15〜08-20の間にGmailで実送信されていたことを2026-08-21にin:sent実測で確認し反映(queueのmessageId=1a00602444d56d5eと実際のGmail送信を突合)。"
+      "note": "T-C2で本文作成済みの候補が2026-08-15〜08-20の間にGmailで実送信されていたことを2026-08-21にin:sent実測で確認し反映(queueのmessageId=1a00602444d56d5eと実際のGmail送信を突合)。 2026-08-23: 7日経過・返信無しのため追撃下書きを作成(draftId r-2332399218250062847)。"
     },
     {
       "id": "lane9-jscs",
@@ -1472,7 +1472,7 @@
       "status": "awaiting",
       "followupCount": 0,
       "threadId": "1a006029bc431737",
-      "note": "T-C2で本文作成済みの候補が2026-08-15〜08-20の間にGmailで実送信されていたことを2026-08-21にin:sent実測で確認し反映(queueのmessageId=1a006029bc431737と実際のGmail送信を突合)。"
+      "note": "T-C2で本文作成済みの候補が2026-08-15〜08-20の間にGmailで実送信されていたことを2026-08-21にin:sent実測で確認し反映(queueのmessageId=1a006029bc431737と実際のGmail送信を突合)。 2026-08-23: 7日経過・返信無しのため追撃下書きを作成(draftId r8075977190440027272)。"
     },
     {
       "id": "lane9-jams",
@@ -1494,7 +1494,7 @@
       "status": "awaiting",
       "followupCount": 0,
       "threadId": "1a00602614b40460",
-      "note": "T-C2で本文作成済みの候補が2026-08-15〜08-20の間にGmailで実送信されていたことを2026-08-21にin:sent実測で確認し反映(queueのmessageId=1a00602614b40460と実際のGmail送信を突合)。"
+      "note": "T-C2で本文作成済みの候補が2026-08-15〜08-20の間にGmailで実送信されていたことを2026-08-21にin:sent実測で確認し反映(queueのmessageId=1a00602614b40460と実際のGmail送信を突合)。 2026-08-23: 7日経過・返信無しのため追撃下書きを作成(draftId r1076348244774140107)。"
     },
     {
       "id": "lane9-jseso",
@@ -1505,7 +1505,7 @@
       "status": "awaiting",
       "followupCount": 0,
       "threadId": "1a0060270b44f53e",
-      "note": "T-C2で本文作成済みの候補が2026-08-15〜08-20の間にGmailで実送信されていたことを2026-08-21にin:sent実測で確認し反映(queueのmessageId=1a0060270b44f53eと実際のGmail送信を突合)。"
+      "note": "T-C2で本文作成済みの候補が2026-08-15〜08-20の間にGmailで実送信されていたことを2026-08-21にin:sent実測で確認し反映(queueのmessageId=1a0060270b44f53eと実際のGmail送信を突合)。 2026-08-23: 7日経過・返信無しのため追撃下書きを作成(draftId r-8780459438874568060)。"
     },
     {
       "id": "lane9-jspa",
@@ -1516,7 +1516,7 @@
       "status": "awaiting",
       "followupCount": 0,
       "threadId": "1a006027f67ae213",
-      "note": "T-C2で本文作成済みの候補が2026-08-15〜08-20の間にGmailで実送信されていたことを2026-08-21にin:sent実測で確認し反映(queueのmessageId=1a006027f67ae213と実際のGmail送信を突合)。"
+      "note": "T-C2で本文作成済みの候補が2026-08-15〜08-20の間にGmailで実送信されていたことを2026-08-21にin:sent実測で確認し反映(queueのmessageId=1a006027f67ae213と実際のGmail送信を突合)。 2026-08-23: 7日経過・返信無しのため追撃下書きを作成(draftId r5862603942396568202)。"
     },
     {
       "id": "lane9-jasea",
@@ -1527,7 +1527,7 @@
       "status": "awaiting",
       "followupCount": 0,
       "threadId": "1a006028c55ffa7a",
-      "note": "T-C2で本文作成済みの候補が2026-08-15〜08-20の間にGmailで実送信されていたことを2026-08-21にin:sent実測で確認し反映(queueのmessageId=1a006028c55ffa7aと実際のGmail送信を突合)。"
+      "note": "T-C2で本文作成済みの候補が2026-08-15〜08-20の間にGmailで実送信されていたことを2026-08-21にin:sent実測で確認し反映(queueのmessageId=1a006028c55ffa7aと実際のGmail送信を突合)。 2026-08-23: 7日経過・返信無しのため追撃下書きを作成(draftId r-911524525794228314)。"
     },
     {
       "id": "lane9-careerdesign",
@@ -1846,7 +1846,7 @@
       "status": "awaiting",
       "followupCount": 0,
       "threadId": "1a002edeb3d8828e",
-      "note": "T-C2で本文作成済みの候補が2026-08-15〜08-20の間にGmailで実送信されていたことを2026-08-21にin:sent実測で確認し反映(queueのmessageId=1a002edeb3d8828eと実際のGmail送信を突合)。"
+      "note": "T-C2で本文作成済みの候補が2026-08-15〜08-20の間にGmailで実送信されていたことを2026-08-21にin:sent実測で確認し反映(queueのmessageId=1a002edeb3d8828eと実際のGmail送信を突合)。 2026-08-23: 7日経過・返信無しのため追撃下書きを作成(draftId r-7717734972048911088)。"
     },
     {
       "id": "media-impress-kodomotoit",
