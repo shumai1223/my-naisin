@@ -508,7 +508,10 @@ return path.replace(/^\//, '').slice(0, 40) || 'home';
 > ✅ **2026-08-23 一部対応済み（loopが実施）**: 表内 #4（`competition-rates`横断テスト）と #5（`schools-private`マスタ整合テスト）を追加した。
 > `src/data/competition-rates/__tests__/index-invariants.test.ts` と `src/data/schools-private/__tests__/school-master-data.test.ts`
 > （commit `1624a9d`・tsc実exit0・jestフルスイート333suites5835tests全green）。
-> **残りは #9/#10（D1実行時データの自動ゲート＝DW-8）が未対応。**
+> **残りは #9/#10（D1実行時データの自動ゲート＝DW-8）が未対応だった。#9は下記の通り2026-08-23にDW-8で対応済み。
+> #10（`clicks`の人間比率・モバイル比率の妥当域チェック）は`check:click-fraud`（`check-click-fraud-burst.mjs`・
+> バーストの日次検知）が近い機能を部分的に持つが、`classifyClick`の比率そのものをアラート/ゲートに繋ぐ専用の
+> チェックはまだ無い＝厳密には#10は依然未対応のまま。**
 >
 > ✅ **2026-08-24 export名衝突リネーム完了（loopが実施）**: `src/data/schools-private/index.ts`の
 > `SCHOOL_MASTER_BY_PREFECTURE`/`SCHOOL_MASTER_FILES`を`PRIVATE_SCHOOL_MASTER_BY_PREFECTURE`/
