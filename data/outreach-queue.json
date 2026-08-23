@@ -5484,6 +5484,36 @@
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane3",
       "subject": "内申点計算データAPI/MCPのご案内（My Naishin）",
       "body": "新日本出版社 ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\n出版活動を通じて教育・学習分野に携わられている貴社の事業と、都道府県ごとに異なる入試制度の一次資料データとの親和性があるのではと考え、情報提供としてご連絡いたしました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com"
+    },
+    {
+      "id": "edtech-crop-oneread",
+      "org": "合同会社CROP(スクール・塾管理システム「OneRead」)",
+      "lane": "b2b-saas",
+      "channel": "email",
+      "contact": "oneread_info@crop-cc.com",
+      "contactClass": "b2b",
+      "evidence": "oneread.jp/company/を直接curlで確認(HTTP200)。JSON-LD構造化データ(schema.org/Organization)に「OneReadに関するお問い合わせ」窓口として明記されたメールアドレス(個人名なし)。塾管理システム(低価格帯・入退室管理/メッセージ送信等)を提供する企業でWebSearch要約(oneread@crop-cc.com)とは実際のアドレス(oneread_info@crop-cc.com)が異なっていたため生HTML裏取りで訂正",
+      "verifiedAt": "2026-08-23",
+      "status": "queued",
+      "addedAt": "2026-08-23",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2",
+      "subject": "内申点計算データAPI/MCPのご案内（My Naishin）",
+      "body": "合同会社CROP(OneRead運営) ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\n貴社が提供されるスクール・塾管理システム「OneRead」に、都道府県ごとに異なる内申点の自動計算をAPIで組み込むことで、加盟塾様への進路指導資料をより具体的にできるのではと思いご連絡いたしました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com"
+    },
+    {
+      "id": "edtech-solvvy-myclass",
+      "org": "Solvvy株式会社(スクール管理システム「マイクラス」提供元)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://solvvy.co.jp/contact/corporate/",
+      "contactClass": "b2b",
+      "evidence": "solvvy.co.jp/contact/corporate/を直接curlで確認(HTTP200)。問い合わせ区分に「当社への情報提供・取材・提案」の選択肢、入力欄に「organization」フィールドがありb2b確定。スクール管理システム「マイクラス」(my-class.jp)の運営会社。過去セッションでWebSearch要約が運営会社を「株式会社メディアシーク」と誤帰属していたが、実際のmy-class.jp運営会社ページで「Solvvy株式会社」と確認し訂正",
+      "verifiedAt": "2026-08-23",
+      "status": "queued",
+      "addedAt": "2026-08-23",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane2",
+      "subject": "内申点計算データAPI/MCPのご案内（My Naishin）",
+      "body": "Solvvy株式会社 ご担当者様\n\nはじめまして。中学生向け内申点・偏差値計算サイト「My Naishin」を運営しております、しゅうまいと申します。\n\n全国47都道府県の公立高校入試における内申点（調査書点）の計算方式を機械可読データ化し、\nREST API / MCP（AIエージェント向け）として無料〜有償で提供しています。\nhttps://my-naishin.com/developers\n\n貴社が提供されるスクール管理システム「マイクラス」に、都道府県ごとに異なる内申点の自動計算をAPIで組み込むことで、加盟校様への進路指導資料をより具体的にできるのではと思いご連絡いたしました。\n\nもしご興味をお持ちいただけましたら、まずは当サイトの内容や今後のデータ提供計画について簡単にご紹介させていただければ幸いです。押し売りする意図はございませんので、ご不要でしたら読み流していただければ結構です。\n\nお忙しいところ恐縮ですが、ご検討いただけますと幸いです。\n\nしゅうまい\nMy Naishin 運営（中学生・個人開発）\nhttps://my-naishin.com\nnaishin.dev@gmail.com"
     }
   ]
 }

@@ -275,8 +275,9 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // (185→198・org/id重複チェック0件)。実際のGmail下書き化は次回リセット後に行う。
     // 2026-08-23さらに続き: 本日新規追加した5件(lane7-hirosaki-u-education/gifu-u-education/
     // yamaguchi-u-education/lane3-manabi-aid/shinnihon-shuppansha)も同様に本文執筆済み・
-    // Gmail下書きは未作成のままqueuedへ昇格(198→203)。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(203);
+    // Gmail下書きは未作成のままqueuedへ昇格(198→203)。さらにOneRead(edtech-crop-oneread)・
+    // Solvvy株式会社(edtech-solvvy-myclass)の持ち越し2件も新規発見・本文執筆済みでqueued追加(203→205)。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(205);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {
