@@ -7,7 +7,7 @@ import { ArticleSchema } from '@/components/StructuredData/ArticleSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { DatasetSchema } from '@/components/StructuredData/DatasetSchema';
 import { SITE_URL } from '@/lib/naishin-dataset';
-import { getAllSourceHistories } from '@/lib/source-history';
+import { getAllSourceHistories, getAllCompetitionRateSourceHistories } from '@/lib/source-history';
 import { getStaleTop } from '@/lib/freshness-queue';
 import { REGIONS } from '@/lib/prefectures';
 
@@ -52,6 +52,8 @@ export const metadata: Metadata = {
 export default function GentenArchivePage() {
   const histories = getAllSourceHistories();
   const totalEntries = histories.reduce((sum, h) => sum + h.history.length, 0);
+  const rateHistories = getAllCompetitionRateSourceHistories();
+  const totalRateSources = rateHistories.reduce((sum, h) => sum + h.sources.length, 0);
   const latestDate = histories
     .flatMap((h) => h.history.map((s) => s.date))
     .sort()
@@ -163,6 +165,57 @@ export default function GentenArchivePage() {
                               <ExternalLink className="ml-0.5 inline h-3 w-3" />
                             </a>
                             <span className="text-slate-400">（{snap.note}）</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            );
+          })}
+
+          <section className="mb-8 rounded-2xl border-2 border-slate-200 bg-slate-50 p-6">
+            <h2 className="mb-2 text-lg font-bold text-slate-800">
+              募集人員・応募者数・倍率データの一次ソース確認履歴（S6-2）
+            </h2>
+            <p className="text-sm leading-relaxed text-slate-700">
+              上記は内申点の計算方式に関する確認履歴です。ここからは、各学校の募集人員・応募者数・倍率の
+              数値データについて、都道府県教育委員会が公表する年度ごとの資料をいつ・どのURLで確認したかを
+              記録します。現在{rateHistories.length}都道府県ぶん・計{totalRateSources}件の確認記録があります。
+            </p>
+          </section>
+
+          {REGIONS.map((region) => {
+            const regionRateHistories = rateHistories.filter((h) => h.region === region);
+            if (regionRateHistories.length === 0) return null;
+            return (
+              <section key={`rate-${region}`} className="mb-8">
+                <h3 className="mb-3 text-base font-bold text-slate-800">{region}（倍率データ）</h3>
+                <div className="grid gap-3 sm:grid-cols-2">
+                  {regionRateHistories.map((pref) => (
+                    <div key={pref.code} className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+                      <div className="mb-2 flex items-center justify-between">
+                        <span className="font-bold text-slate-800">{pref.name}</span>
+                        <span className="rounded-full bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-500">
+                          {pref.sources.length}件の資料
+                        </span>
+                      </div>
+                      <ul className="space-y-1.5">
+                        {pref.sources.map((src) => (
+                          <li key={`${pref.code}-${src.fiscalYear}-${src.url}`} className="text-xs leading-relaxed text-slate-500">
+                            <span className="font-mono text-slate-400">{src.fiscalYear}</span>
+                            {' — '}
+                            <a
+                              href={src.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-indigo-600 hover:underline"
+                            >
+                              {src.docTitle}
+                              <ExternalLink className="ml-0.5 inline h-3 w-3" />
+                            </a>
+                            <span className="text-slate-400">（確認日: {src.fetchedAt}）</span>
                           </li>
                         ))}
                       </ul>

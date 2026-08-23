@@ -9,6 +9,8 @@
 // そのもの）。それ以降のエントリは、制度変更を確認する・再検証する等の実際の作業が発生した
 // 都度、MANUAL_HISTORY に手動で追記していく（ここに架空の日付・架空の変更内容を追加しない）。
 import { PREFECTURES } from './prefectures';
+import { COMPETITION_RATE_BY_PREFECTURE } from '@/data/competition-rates';
+import type { CompetitionRateSource } from './competition-rate';
 
 export interface SourceSnapshot {
   date: string;
@@ -680,4 +682,26 @@ export function getAllSourceHistories(): PrefectureSourceHistory[] {
     region: p.region,
     history: getSourceHistory(p.code),
   })).filter((entry) => entry.history.length > 0);
+}
+
+export interface PrefectureCompetitionRateSourceHistory {
+  code: string;
+  name: string;
+  region: string;
+  sources: CompetitionRateSource[];
+}
+
+/**
+ * S6-2(2026-08-24): 内申点計算方式のみだった確認履歴を、募集人員・応募者数・倍率データ
+ * (competition-rates/*.ts)の一次ソースにも拡張する。`getAllSourceHistories()`と同型（県別・
+ * 地域別に一覧化できる形）で返す。過去のスナップショットの創作はしない＝各県のsources[]は
+ * 掛-1/Y-2パイプラインが実際に取得・記録したPDF等をそのまま列挙するだけ（新規調査はしない）。
+ */
+export function getAllCompetitionRateSourceHistories(): PrefectureCompetitionRateSourceHistory[] {
+  return PREFECTURES.map((p) => ({
+    code: p.code,
+    name: p.name,
+    region: p.region,
+    sources: COMPETITION_RATE_BY_PREFECTURE[p.code]?.sources ?? [],
+  })).filter((entry) => entry.sources.length > 0);
 }
