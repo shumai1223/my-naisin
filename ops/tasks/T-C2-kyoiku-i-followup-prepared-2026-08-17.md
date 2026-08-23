@@ -235,7 +235,7 @@ https://my-naishin.com　naishin.dev@gmail.com
 https://my-naishin.com　naishin.dev@gmail.com
 ```
 
-## 9. 秋田県教育委員会
+## 9. 秋田県教育委員会 ✅下書き化済み(2026-08-23・draftId r6726729720611278416・回答へのお礼を起点に書き直した本文で同スレッド1a00d9d5bfb6b04eへ`gmail_create_reply_draft`で作成。下記の元テンプレ本文はそのままでは使っていない=履歴として残す)
 
 - to: `koukou@pref.akita.lg.jp`
 - subject: `Re: 貴課公表資料の引用利用に関するご報告および参照可否のご相談`
