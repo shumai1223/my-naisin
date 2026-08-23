@@ -570,6 +570,15 @@ files 47 / records_parsed 17,301 / violations 7
 
 # 7. ★★ DW-8: `stats-distribution-audit` が「手動でしか走らない」ことになっているが、その制約は今日消えた
 
+> ✅ **2026-08-23 対応済み（loopが実施）**: `scripts/stats-distribution-audit.ts`を`scripts/d1q.mjs`
+> 経由の本番D1直接読み取りに変更し、`npm run check:stats`として登録した（tsc実exit0・
+> jestフルスイート333suites5836tests green）。**実行して分かった副産物**: クエリを素の
+> `stats_submissions`全件にしたところ、2026-08-12の既知バースト198件（`trust_class=
+> 'excluded-dw2-burst'`・当時手動隔離済み・DW-1/DW-2の実装後）を「新規異常」として誤検知した。
+> 公開集計と同じ`trusted = 1`条件を追加して解消（詳細はスクリプト冒頭コメント）。
+> **教訓**: この監査ロジック自体はDW-1着手時点（2026-08-10）の設計のままで、その後に
+> 追加された`trusted`/`trust_class`による自動隔離システムを知らなかった。
+
 ### 症状
 DW-1 のバーストを検知する仕組みは**既に実装済み・ユニットテスト済み**なのに、**9日間誰も気づかなかった。**
 
