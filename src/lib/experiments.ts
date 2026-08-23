@@ -844,6 +844,7 @@ export const EXPERIMENTS: ExperimentDef[] = [
     arms: [
       { id: 'control', label: 'fp-soudan（もしも・保険トータルプロフェッショナル・現行の既定）', affiliateId: 'fp-soudan' },
       { id: 'findit', label: 'findit-fp-soudan（A8・ファインドイット・EPC222円）', affiliateId: 'findit-fp-soudan' },
+      { id: 'manecafe', label: 'マネカフェ（もしも・CPA¥11,500）', affiliateId: 'moshimo-manecafe' },
     ],
     primaryMetric: 'affiliate_click',
     placement: 'hensachi',
@@ -856,6 +857,7 @@ export const EXPERIMENTS: ExperimentDef[] = [
     arms: [
       { id: 'control', label: 'fp-soudan（もしも・保険トータルプロフェッショナル・現行の既定）', affiliateId: 'fp-soudan' },
       { id: 'findit', label: 'findit-fp-soudan（A8・ファインドイット・EPC222円）', affiliateId: 'findit-fp-soudan' },
+      { id: 'manecafe', label: 'マネカフェ（もしも・CPA¥11,500）', affiliateId: 'moshimo-manecafe' },
     ],
     primaryMetric: 'affiliate_click',
     placement: 'hyotei-heikin',

@@ -37,10 +37,15 @@ export function HensachiResultFlow() {
     setGap(g);
   }, []);
 
-  // TIER Σ-0: 副オファー(FP無料相談)のA/B。主(atama-text)は不変・副だけfp-soudan⇔findit-fp-soudanを切替。
-  const secondaryVariant = useExperiment('hensachi-fp-secondary-2026', [{ id: 'control' }, { id: 'findit' }]);
+  // TIER Σ-0: 副オファー(FP無料相談)のA/B。主(atama-text)は不変・副だけfp-soudan/findit-fp-soudan/moshimo-manecafeを切替。
+  // S1-2(2026-08-24): moshimo-manecafe(live・未参照だった)を第3アームとして追加。
+  const secondaryVariant = useExperiment('hensachi-fp-secondary-2026', [
+    { id: 'control' },
+    { id: 'findit' },
+    { id: 'manecafe' },
+  ]);
   const secondaryAffiliateId: AffiliateId | undefined =
-    secondaryVariant === 'findit' ? 'findit-fp-soudan' : undefined;
+    secondaryVariant === 'findit' ? 'findit-fp-soudan' : secondaryVariant === 'manecafe' ? 'moshimo-manecafe' : undefined;
 
   return (
     <>
