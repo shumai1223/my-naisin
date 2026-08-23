@@ -4,6 +4,7 @@ import * as React from 'react';
 import { GraduationCap, ChevronRight } from 'lucide-react';
 
 import { EVENTS, track } from '@/lib/track';
+import { beaconStudentFunnelEvent } from '@/lib/student-funnel-beacon';
 
 const MY_SHINGAKU_URL = 'https://my-shingaku.com';
 
@@ -29,10 +30,13 @@ export function HyoteiUniversityBridge({ value }: { value: number | null }) {
   const selectGrade = React.useCallback((g: 'chugaku' | 'koukou') => {
     setGrade(g);
     track(EVENTS.GRADE_SELF_IDENTIFY, { tool: 'hyotei-heikin', grade: g });
+    // S12-1: GA4がこのページで計測系統ごと機能していない疑いがあるため、D1一次記録を併走させる。
+    beaconStudentFunnelEvent('grade_self_identify', { grade: g, tool: 'hyotei-heikin' });
   }, []);
 
   const onBridgeClick = React.useCallback(() => {
     track(EVENTS.UNIVERSITY_BRIDGE_CLICK, { tool: 'hyotei-heikin' });
+    beaconStudentFunnelEvent('university_bridge_click', { grade: 'koukou', tool: 'hyotei-heikin' });
   }, []);
 
   // 中学生を選んだ場合は既存導線のまま＝何も追加しない。
