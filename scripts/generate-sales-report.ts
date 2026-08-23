@@ -68,7 +68,9 @@ function aggregate(rows: ClickRow[]): { byProgram: Agg[]; byPlacement: Map<strin
   for (const r of rows) {
     const c = typeof r.clicks === 'number' ? r.clicks : 1; // 集計済みなら clicks、生行なら1
     if (r.affiliate_id) prog.set(r.affiliate_id, (prog.get(r.affiliate_id) ?? 0) + c);
-    placement.set(r.placement || '(none)', (placement.get(r.placement || '(none)') ?? 0) + c);
+    // S9-2: 過去データの表記ゆれ（'/hensachi' と 'hensachi' が別キーになる二重計上）を先頭/末尾スラッシュ除去で吸収。
+    const normPlacement = (r.placement ?? '').replace(/^\/+|\/+$/g, '') || '(none)';
+    placement.set(normPlacement, (placement.get(normPlacement) ?? 0) + c);
     pref.set(r.prefecture || '(none)', (pref.get(r.prefecture || '(none)') ?? 0) + c);
   }
   const byProgram: Agg[] = [...prog.entries()]

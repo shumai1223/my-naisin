@@ -157,6 +157,8 @@ export interface ClickAggRow {
 /**
  * 直近 N 日のクリック集計（KPIダイジェスト＝P6-1 用）。
  * バインディング未設定なら空配列。program × 県 × 面 のクリック実数を返す。
+ * TRIM(placement,'/') で先頭/末尾のスラッシュを吸収する（S9-2・過去データに`/hensachi`と`hensachi`が
+ * 混在する表記ゆれがあり、書き込み側は是正済みだが既存行の二重計上を集計側でも防ぐ）。
  */
 export async function getClickSummary(days = 7, opts: { trustedOnly?: boolean } = {}): Promise<ClickAggRow[]> {
   try {
@@ -165,10 +167,10 @@ export async function getClickSummary(days = 7, opts: { trustedOnly?: boolean } 
     const since = Math.max(1, Math.min(365, Math.round(days)));
     const { results } = await db
       .prepare(
-        `SELECT affiliate_id, prefecture, placement, COUNT(*) AS clicks
+        `SELECT affiliate_id, prefecture, TRIM(placement, '/') AS placement, COUNT(*) AS clicks
          FROM clicks
          WHERE created_at >= datetime('now', ?)${trustFilter(opts.trustedOnly)}
-         GROUP BY affiliate_id, prefecture, placement
+         GROUP BY affiliate_id, prefecture, TRIM(placement, '/')
          ORDER BY clicks DESC`
       )
       .bind(`-${since} days`)
