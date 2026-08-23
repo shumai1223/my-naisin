@@ -91,7 +91,7 @@ export default function BlogPage() {
             </div>
             <div className="text-xs text-slate-500 mb-5 leading-relaxed max-w-xl mx-auto">
               内申点アップの基本は毎日の積み重ね。<AffiliateAd placement="blog" id="sapuri-text" hideLabel />（月額2,178円・無料体験あり）と
-              <AffiliateAd placement="blog" id="zkai-text-middle" className="ml-1" hideLabel />（PR）が中学生に最も使われている定番教材です。
+              <AffiliateAd placement="blog" id="zkai-text-middle" className="ml-1" hideLabel />（PR）は多くの中学生に選ばれている定番教材の一つです。
             </div>
             <div className="hidden md:block">
               <AffiliateAd placement="blog" id="zkai-banner" />
