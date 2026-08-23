@@ -314,4 +314,45 @@ describe('formatWeeklyKpiEmail', () => {
       expect(text).not.toContain('🏆 line-cta-copy-2026:');
     });
   });
+
+  describe('定点観測（S8-4/5/6・0→1の変化を見逃さないための計器）', () => {
+    it('3項目とも未指定なら見出し自体を出さない', () => {
+      const { text } = formatWeeklyKpiEmail(baseData());
+      expect(text).not.toContain('定点観測（S8-4/5/6');
+    });
+
+    it('outreachFollowupCandidatesのみ指定でもセクションが出て件数を表示する', () => {
+      const data = baseData({ outreachFollowupCandidates: 5 });
+      const { text } = formatWeeklyKpiEmail(data);
+      expect(text).toContain('定点観測（S8-4/5/6');
+      expect(text).toContain('B2Bアウトリーチ追撃候補（S8-4）: 5件');
+    });
+
+    it('brandedQueryは今週/前週の表示・クリックと前週比を出す', () => {
+      const data = baseData({
+        brandedQuery: { impressionsNow: 20, impressionsPrev: 10, clicksNow: 2, clicksPrev: 1 },
+      });
+      const { text } = formatWeeklyKpiEmail(data);
+      expect(text).toContain('指名検索"naishin"（S8-5）: 表示20（＋100%）／クリック2（＋100%）');
+    });
+
+    it('adoptionDomainsが空配列なら「0件・採用実績なし」と明示する（無言のゼロにしない）', () => {
+      const data = baseData({ adoptionDomains: [] });
+      const { text } = formatWeeklyKpiEmail(data);
+      expect(text).toContain('被リンク採用検出（S8-6・週間）: 0件（採用実績なし・継続監視中）');
+    });
+
+    it('adoptionDomainsに件数があればドメイン別内訳を出す', () => {
+      const data = baseData({
+        adoptionDomains: [
+          { domain: 'example.com', count: 3 },
+          { domain: 'blog.example.jp', count: 1 },
+        ],
+      });
+      const { text } = formatWeeklyKpiEmail(data);
+      expect(text).toContain('被リンク採用検出（S8-6・週間）: 2ドメイン');
+      expect(text).toContain('example.com=3');
+      expect(text).toContain('blog.example.jp=1');
+    });
+  });
 });

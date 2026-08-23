@@ -92,6 +92,15 @@ export interface WeeklyKpiData {
    * 手動値なしでconversions=0のまま確定判定してしまう誤判定を防ぐ）。
    */
   manualDataProvided?: boolean;
+  /** B2Bアウトリーチ台帳(data/outreach-ledger.json)の今週の追撃候補件数（任意・S8-4）。放置検知。 */
+  outreachFollowupCandidates?: number;
+  /**
+   * 指名検索（"naishin"を含むクエリ）の今週/前週 表示・クリック（任意・S8-5）。
+   * 認知が実際に届いたかを唯一直接示す一次シグナル。0→1の変化を検知するための定点観測。
+   */
+  brandedQuery?: { impressionsNow: number; impressionsPrev: number; clicksNow: number; clicksPrev: number };
+  /** 埋め込みウィジェット経由の外部採用ドメイン（直近7日・任意・S8-6）。0件でも配列は空のまま渡す。 */
+  adoptionDomains?: { domain: string; count: number }[];
 }
 
 function fmt(n: number): string {
@@ -244,6 +253,31 @@ export function formatWeeklyKpiEmail(data: WeeklyKpiData): { subject: string; te
   lines.push(`■ トリップワイヤー（${triggeredCount}/4 発火）`);
   for (const t of tripwires) {
     lines.push(`  ${t.triggered ? '🚨' : '✅'} ${t.label}：${t.detail}`);
+  }
+  if (
+    data.outreachFollowupCandidates !== undefined ||
+    data.brandedQuery !== undefined ||
+    data.adoptionDomains !== undefined
+  ) {
+    lines.push('');
+    lines.push('■ 定点観測（S8-4/5/6・0→1の変化を見逃さないための計器）');
+    if (data.outreachFollowupCandidates !== undefined) {
+      lines.push(`  B2Bアウトリーチ追撃候補（S8-4）: ${fmt(data.outreachFollowupCandidates)}件`);
+    }
+    if (data.brandedQuery) {
+      const bq = data.brandedQuery;
+      lines.push(
+        `  指名検索"naishin"（S8-5）: 表示${fmt(bq.impressionsNow)}（${pctDelta(bq.impressionsNow, bq.impressionsPrev)}）／クリック${fmt(bq.clicksNow)}（${pctDelta(bq.clicksNow, bq.clicksPrev)}）`
+      );
+    }
+    if (data.adoptionDomains !== undefined) {
+      if (data.adoptionDomains.length === 0) {
+        lines.push('  被リンク採用検出（S8-6・週間）: 0件（採用実績なし・継続監視中）');
+      } else {
+        const top = [...data.adoptionDomains].sort((a, b) => b.count - a.count).slice(0, 5);
+        lines.push(`  被リンク採用検出（S8-6・週間）: ${fmt(data.adoptionDomains.length)}ドメイン　${top.map((d) => `${d.domain}=${d.count}`).join(' / ')}`);
+      }
+    }
   }
   if (data.aiReferralBySource && data.aiReferralBySource.length > 0) {
     lines.push('');

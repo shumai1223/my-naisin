@@ -81,6 +81,8 @@ import { latestEntry, type LineFriendsEntry } from '@/lib/line-friends';
 import type { FunnelStage, PlacementFunnel } from '@/lib/velocity';
 import type { ArmResult } from '@/lib/experiments';
 import { CONTACT_EMAIL } from '@/lib/contact';
+import { computeFollowupCandidates, type OutreachEntry } from '@/lib/outreach-ledger';
+import { getAdoptionDomainSummary } from '@/lib/adoption-radar-db';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPORTS_DIR = path.resolve(__dirname, '..', 'reports');
@@ -95,6 +97,22 @@ function readLatestLineFriends(): number | undefined {
     const p = path.resolve(__dirname, '..', 'data', 'line-friends.json');
     const raw = JSON.parse(fs.readFileSync(p, 'utf8')) as { entries?: LineFriendsEntry[] };
     return latestEntry({ entries: raw.entries ?? [] })?.friends;
+  } catch {
+    return undefined;
+  }
+}
+
+/**
+ * data/outreach-ledger.json から今日時点の追撃候補件数を読む（S8-4）。
+ * scripts/outreach-followup-report.ts と同じ純関数(computeFollowupCandidates)を使う。
+ * ファイルが無い/壊れている場合は undefined（未計測、0件と混同させない）。
+ */
+function readOutreachFollowupCount(): number | undefined {
+  try {
+    const p = path.resolve(__dirname, '..', 'data', 'outreach-ledger.json');
+    const raw = JSON.parse(fs.readFileSync(p, 'utf8')) as { entries?: OutreachEntry[] };
+    const todayISO = new Date().toISOString().slice(0, 10);
+    return computeFollowupCandidates(raw.entries ?? [], todayISO).length;
   } catch {
     return undefined;
   }
@@ -324,6 +342,40 @@ async function fetchHeadQueryCtrWoW(client: GscClient): Promise<{ now: number; p
 }
 
 /**
+ * 指名検索（"naishin"を含むクエリ）の今週/前週 表示・クリック（S8-5）。
+ * 認知が実際に届いたかを唯一直接示す一次シグナル。0→1の変化を検知するための定点観測。
+ * fetchHeadQueryCtrWoW と同型のcontainsフィルタ版（equalsではなくcontains・複数クエリを合算する）。
+ */
+async function fetchBrandedQuerySignal(
+  client: GscClient
+): Promise<{ impressionsNow: number; impressionsPrev: number; clicksNow: number; clicksPrev: number }> {
+  const curStart = ymd(LAG_DAYS + WINDOW - 1);
+  const curEnd = ymd(LAG_DAYS);
+  const prevStart = ymd(LAG_DAYS + WINDOW * 2 - 1);
+  const prevEnd = ymd(LAG_DAYS + WINDOW);
+
+  const fetchOne = async (startDate: string, endDate: string) => {
+    const res = await client.searchanalytics.query({
+      siteUrl: SITE_URL,
+      requestBody: {
+        startDate,
+        endDate,
+        dimensions: ['query'],
+        dimensionFilterGroups: [{ filters: [{ dimension: 'query', operator: 'contains', expression: 'naishin' }] }],
+        rowLimit: 100,
+      },
+    });
+    const rows = (res.data.rows as Array<{ clicks?: number; impressions?: number }> | undefined) ?? [];
+    return rows.reduce<{ impressions: number; clicks: number }>(
+      (acc, r) => ({ impressions: acc.impressions + (r.impressions ?? 0), clicks: acc.clicks + (r.clicks ?? 0) }),
+      { impressions: 0, clicks: 0 }
+    );
+  };
+  const [now, prev] = await Promise.all([fetchOne(curStart, curEnd), fetchOne(prevStart, prevEnd)]);
+  return { impressionsNow: now.impressions, impressionsPrev: prev.impressions, clicksNow: now.clicks, clicksPrev: prev.clicks };
+}
+
+/**
  * 学校ページ（URLに /school/ を含むページ群）の28日GSC露出ページ数（imp>0）。今週/前週の2窓分。
  * S5-2: sitemap掲載3,089枚に対し233枚（7.5%）で停滞中（ops/THREATS.md脅威9）という事実の週次定点観測。
  * page次元でcontainsフィルタし、返ってきた行数＝露出のあったページ数（clicks/impressionsの値は使わない）。
@@ -369,14 +421,24 @@ async function main() {
 
   console.log(`🔍 週次KPIレポート生成中... (${curStart}〜${curEnd})`);
 
-  const [totalsNow, totalsPrev, hensachiWeeklyCtr, toolPages, headQuery, schoolPageExposure] = await Promise.all([
-    fetchTotals(client, curStart, curEnd),
-    fetchTotals(client, prevStart, prevEnd),
-    fetchWeeklyCtrForPage(client, HENSACHI_PAGE, 4),
-    fetchToolPagesWoW(client),
-    fetchHeadQueryCtrWoW(client),
-    fetchSchoolPageExposureCount(client),
-  ]);
+  const [totalsNow, totalsPrev, hensachiWeeklyCtr, toolPages, headQuery, schoolPageExposure, brandedQuery, adoptionDomainRows] =
+    await Promise.all([
+      fetchTotals(client, curStart, curEnd),
+      fetchTotals(client, prevStart, prevEnd),
+      fetchWeeklyCtrForPage(client, HENSACHI_PAGE, 4),
+      fetchToolPagesWoW(client),
+      fetchHeadQueryCtrWoW(client),
+      fetchSchoolPageExposureCount(client),
+      fetchBrandedQuerySignal(client),
+      getAdoptionDomainSummary(7),
+    ]);
+
+  // S8-6: ドメイン×source別のhitsをドメイン単位に合算する（週次メールはsource内訳まで出さない）。
+  const adoptionDomainTotals = new Map<string, number>();
+  for (const row of adoptionDomainRows) {
+    adoptionDomainTotals.set(row.domain, (adoptionDomainTotals.get(row.domain) ?? 0) + row.hits);
+  }
+  const adoptionDomains = [...adoptionDomainTotals.entries()].map(([domain, count]) => ({ domain, count }));
 
   const manualDataProvided =
     args.cp !== undefined ||
@@ -390,6 +452,9 @@ async function main() {
     manualDataProvided,
     gsc: { clicksNow: totalsNow.clicks, clicksPrev: totalsPrev.clicks, impNow: totalsNow.impressions, impPrev: totalsPrev.impressions },
     schoolPageExposure,
+    outreachFollowupCandidates: readOutreachFollowupCount(),
+    brandedQuery,
+    adoptionDomains,
     parentLandingViews: num(args.cp),
     leadVelocity: {
       leadsThisWeek: num(args['leads-week']),
