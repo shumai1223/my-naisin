@@ -22,22 +22,31 @@ describe('activeParentWindow（7月・冬の収穫窓判定）', () => {
     expect(activeParentWindow(D('2026-12-26'))).toBeNull();
   });
 
-  it('窓の外（春・夏休み中・秋）は null＝ブリッジ非表示', () => {
+  it('入試直前の窓は 1/5〜2/15（S2-2・1/4×・1/5○・2/15○・2/16×）', () => {
+    expect(activeParentWindow(D('2027-01-04'))).toBeNull();
+    expect(activeParentWindow(D('2027-01-05'))).toBe('final-stretch');
+    expect(activeParentWindow(D('2027-01-20'))).toBe('final-stretch');
+    expect(activeParentWindow(D('2027-02-15'))).toBe('final-stretch');
+    expect(activeParentWindow(D('2027-02-16'))).toBeNull();
+  });
+
+  it('窓の外（春・夏休み中・秋・年末年始12/26〜1/4）は null＝ブリッジ非表示', () => {
     expect(activeParentWindow(D('2026-05-10'))).toBeNull();
     expect(activeParentWindow(D('2026-08-01'))).toBeNull();
     expect(activeParentWindow(D('2026-10-31'))).toBeNull();
-    expect(activeParentWindow(D('2027-01-05'))).toBeNull();
+    expect(activeParentWindow(D('2026-12-26'))).toBeNull();
+    expect(activeParentWindow(D('2027-01-04'))).toBeNull();
   });
 
   it('引数なしでも例外なく null|窓ID を返す（既定 now）', () => {
     const r = activeParentWindow();
-    expect(r === null || r === 'mendan-july' || r === 'winter').toBe(true);
+    expect(r === null || r === 'mendan-july' || r === 'winter' || r === 'final-stretch').toBe(true);
   });
 });
 
 describe('parentWindowCopy（表示コピーの単一ソース）', () => {
-  it('両方の窓に badge/heading/intro が揃う', () => {
-    for (const id of ['mendan-july', 'winter'] as const) {
+  it('3つの窓すべてに badge/heading/intro が揃う', () => {
+    for (const id of ['mendan-july', 'winter', 'final-stretch'] as const) {
       const c = parentWindowCopy(id);
       expect(c).toBe(PARENT_WINDOW_COPY[id]);
       expect(c.badge).toBeTruthy();
@@ -47,7 +56,7 @@ describe('parentWindowCopy（表示コピーの単一ソース）', () => {
   });
 
   it('コピーは日付・合否を断定しない（捏造ゼロ＝一般的な時期の言及のみ）', () => {
-    for (const id of ['mendan-july', 'winter'] as const) {
+    for (const id of ['mendan-july', 'winter', 'final-stretch'] as const) {
       const c = parentWindowCopy(id);
       // 「必ず合格」「◯日まで」等の断定は置かない
       expect(c.heading + c.intro).not.toMatch(/必ず|絶対|確実に合格/);

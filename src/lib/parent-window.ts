@@ -15,18 +15,22 @@
  *  - 捏造リスクゼロ：日付の断定はせず「一般的な面談時期」への言及に留める（コピーは PARENT_WINDOW_COPY）。
  */
 
-export type ParentWindowId = 'mendan-july' | 'winter';
+export type ParentWindowId = 'mendan-july' | 'winter' | 'final-stretch';
 
 /**
  * いまが保護者の収穫窓か（三者面談・出願の直前）を返す。窓外は null。
- *  - mendan-july : 7/1〜7/25（1学期末の三者面談〜夏休み前。通知表が出て保護者が最も関与する短い窓）
- *  - winter      : 11/15〜12/25（2学期末の三者面談〜出願確定。中3の進路が実質決まる最重要面談）
+ *  - mendan-july   : 7/1〜7/25（1学期末の三者面談〜夏休み前。通知表が出て保護者が最も関与する短い窓）
+ *  - winter        : 11/15〜12/25（2学期末の三者面談〜出願確定。中3の進路が実質決まる最重要面談）
+ *  - final-stretch : 1/5〜2/15（入試本番直前。S2-2・2026-08-24追加）。開始日1/5は「三が日・冬休み明け後」
+ *    という一般的な区切りの仮置き、終了日2/15は`ops/CLOCK.md`§6が使う「2027-02-15（山の目安）」を再利用。
+ *    いずれも教委一次ソースでの検証はしていない未検証の目安（12/26〜1/4は意図的に窓の外のまま残す）。
  */
 export function activeParentWindow(now: Date = new Date()): ParentWindowId | null {
   const m = now.getUTCMonth() + 1;
   const d = now.getUTCDate();
   if (m === 7 && d >= 1 && d <= 25) return 'mendan-july';
   if ((m === 11 && d >= 15) || (m === 12 && d <= 25)) return 'winter';
+  if ((m === 1 && d >= 5) || (m === 2 && d <= 15)) return 'final-stretch';
   return null;
 }
 
@@ -55,6 +59,12 @@ export const PARENT_WINDOW_COPY: Record<ParentWindowId, ParentWindowCopy> = {
     heading: '出願を決める面談の前に、いまの「現在地」を整理しませんか？',
     intro:
       '2学期末の三者面談は、内申が実質固まり出願校を決める大切な場です。お子さまの現在地（今の数値と目標との差）を保護者の方と共有しておくと、限られた面談の時間を最大限に活かせます。',
+  },
+  'final-stretch': {
+    badge: '入試本番前・最終確認シーズン',
+    heading: '本番前に、いまの「現在地」をもう一度確認しませんか？',
+    intro:
+      '出願を終え、あとは本番を迎えるだけの時期です。お子さまの現在地（今の数値と目標との差）を保護者の方と共有しておくと、残り期間の過ごし方について具体的な話がしやすくなります。',
   },
 };
 
