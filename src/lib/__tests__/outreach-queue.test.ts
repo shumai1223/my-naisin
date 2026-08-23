@@ -277,7 +277,11 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // yamaguchi-u-education/lane3-manabi-aid/shinnihon-shuppansha)も同様に本文執筆済み・
     // Gmail下書きは未作成のままqueuedへ昇格(198→203)。さらにOneRead(edtech-crop-oneread)・
     // Solvvy株式会社(edtech-solvvy-myclass)の持ち越し2件も新規発見・本文執筆済みでqueued追加(203→205)。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(205);
+    // 2026-08-23夜: lane8サブタスク1の残り11県未着手分を消化。神奈川(kyo-fukushi.or.jp・会員番号は
+    // 任意項目)・愛知(gojokai@fukuri.pref.aichi.jp・組織名義メール確認済み)の2件がcandidateとして
+    // 合格し本文執筆済みでqueued追加(205→207)。栃木/群馬/東京/石川/福井/長野/山口/熊本の8県は
+    // 電話のみ・独立サイトなし・会員限定ゲートありのいずれかでexcluded。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(207);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {

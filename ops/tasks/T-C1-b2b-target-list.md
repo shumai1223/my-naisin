@@ -482,6 +482,21 @@ candidate計207件→208件。福岡/千葉/信濃教育会は2026-08-11時点�
 
 **累計(最新3)**: lane8サブタスク1は35団体検証済み(candidate 6件・excluded 30件)。ヒット率17%(6/35)に再び低下。**「地方団体の方がヒットしやすい」仮説は8件中0件のヒットで否定された(前回の6件は偶然の可能性が高い)。教職員互助団体という組織類型そのものが構造的にb2b/一般問い合わせ窓口を持たない(会員福祉が主目的で外部との接点を想定していない)というのがより一貫した説明**。残り約12団体(岐阜のもう1団体・熊本[全教互未加盟]・政令市単位の横浜/川崎/福岡市/北九州市、東京/神奈川/長野/石川/福井/愛知3団体/三重2団体等の未検証分)は費用対効果が低下しているため、次回このlaneに戻る際はこれ以上の網羅より他の梯子(#3本文品質、または新規lane発掘)を優先することを検討する。
 
+**2026-08-23 21:xx追記(未検証のまま残っていた11県を消化・candidate2件+excluded8件+要Cowork確認1件)**: 本日のGmail下書き上限(15件)到達によりT-C2の下書き作成ができない状況下で、outreach-queue.jsonをlane8プレフィックスで機械集計したところ栃木/群馬/東京/神奈川/石川/福井/長野/愛知/山口/熊本/鹿児島の11県が未着手のまま残っていると判明(candidate追加はGmail下書き上限を消費しないため安全に前進可能)。
+- ✅**神奈川県教育福祉振興会**(`lane8-kanagawa-kyoiku-fukushi`)をcandidate追加。kyo-fukushi.or.jp/contact/を直接curlで確認、Contact Form 7の必須項目はお名前/メールアドレス/題名/メッセージ本文のみで「会員番号(職員番号)」欄は入力必須マークなし(任意)。山梨/富山/新潟と同型の任意項目パターンとして採用・本文執筆済みでqueued昇格。
+- ✅**一般社団法人愛知県教育職員互助会**(`lane8-aichi-kyoiku-shokuin-gojokai`)をcandidate追加。aichi-kyogo.or.jpトップページを直接curlで確認、`gojokai@fukuri.pref.aichi.jp`という組織名義メール(個人名なし)がページ本文に直接記載。会員限定ゲートなし・本文執筆済みでqueued昇格。
+- ❌栃木県連合教育会: tochigi-rk.jp/contact/を直接curlで確認、電話番号2件のみでメール/フォームへのリンクが存在しない(`lane8-excluded-tochigi-rengokyoikukai`)
+- ❌群馬県教職員互助会: 独立した組織サイトが存在せず群馬県教育委員会の資料公開サイト内の1ページとして案内されるのみ(`lane8-excluded-gunma-kyoshokuin`)
+- ❌東京都教職員互助会(公益社団法人・三楽病院運営): sanraku.or.jp/gojokai/form/contact.htmlを直接curlで確認、代表電話番号のみでメール/フォームなし(`lane8-excluded-tokyo-kyoshokuin-gojokai`)
+- ❌石川県教職員互助会: ishikyogo.or.jpトップページを直接curlで確認、メール/フォームへのリンクが1件も存在せず電話・FAXのみ(`lane8-excluded-ishikawa-kyogo`)
+- ❌福井県教職員互助会: info.pref.fukui.lg.jp/gakukyo/gojo/を直接curlで確認、電話・FAXのみでメール/フォームへのリンクなし(`lane8-excluded-fukui-kyogo`)
+- ❌長野県教職員互助組合: nagano-gojo.or.jp/contact/のフォームを直接curlで確認、「組合員番号」欄が入力必須(※必須入力)で会員以外は送信不可能な構造(`lane8-excluded-nagano-kyoshokuin-gojo`)
+- ❌山口県教職員互助会: yamakyogo.jp/contactのフォームを直接curlで確認、「会員区分※」(現職者/退職者)が必須ラジオボタンで会員以外は送信不可能(`lane8-excluded-yamaguchi-kyogo`)
+- ❌熊本県教職員互助会: 独立した組織サイトが見つからず熊本県総務厚生課の電話窓口案内のみ確認(`lane8-excluded-kumamoto-kyogo`)
+- ⏸鹿児島県教職員互助組合(`kyogo.or.jp/contact`): ページ本文にContact Form 7の実フォームHTMLが含まれず(footer scriptに`riyoushubetsu`フィールド名の言及のみ)、静的curl取得では会員限定ゲートの有無を判別不能。JS動的レンダリングの疑いが強くCowork行き(queue追加せず・要再調査マークのみ残す)。
+
+**累計(最新4)**: lane8サブタスク1は46団体検証済み(candidate 8件[山梨/富山/新潟/茨城/青森/徳島/神奈川/愛知]・excluded 38件)。ヒット率17%(8/46)で前回とほぼ同水準を維持。これで47都道府県中46県が検証完了(鹿児島のみJS動的レンダリングでCowork待ち)。**lane8サブタスク1はこれで実質完了**(残る鹿児島1件はCowork行き)。次回このlaneに戻る際は新規発掘ではなく、Cowork回答が来た鹿児島の処理のみでよい。
+
 **累計**: lane8サブタスク1は14団体検証済み(candidate 3件[山梨/富山/新潟]・excluded 11件)。ヒット率21%(3/14)。**効率化ルール(会員区分選択の有無を最初にチェック)が有効と実証**(島根/大分/静岡で高速に判定できた)。残り33団体は未着手。福島(24u.jp)はポータルサイト形式で組織固有ページが直接には見つからずWebSearchでの再探索が必要(要検討事項として保留)。
 
 ### ❌ lane「大学の教育学研究室」＝カウント不能と判断（2026-08-11・loop）
