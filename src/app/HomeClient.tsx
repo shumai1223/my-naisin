@@ -35,6 +35,7 @@ import { InputForm } from '@/components/Calculator/InputForm';
 import { PrefectureSelector } from '@/components/Calculator/PrefectureSelector';
 import { ReverseCalculator } from '@/components/Calculator/ReverseCalculator';
 import { ResultSection } from '@/components/ResultSection';
+import { ParentWindowBridge } from '@/components/ParentWindowBridge';
 import { StatsOptIn } from '@/components/StatsOptIn';
 import { UnlockGate } from '@/components/UnlockGate';
 import { NationalPercentileReveal } from '@/components/NationalPercentileReveal';
@@ -607,6 +608,19 @@ export default function HomeClient() {
                           onSaveNow={onSaveNow}
                           lastSaved={lastSaved}
                           onShareOpen={openShare}
+                        />
+                      )}
+
+                      {/* S2-1(2026-08-24): 三者面談/出願の収穫窓限定ブリッジ。既存18面(NaishinResultFlow等)には
+                          あったがサイト第2位の流入面である/自体には無かった欠落を是正。窓外は自動非表示。 */}
+                      {showResult && (
+                        <ParentWindowBridge
+                          className="mt-6"
+                          metricLabel="内申点"
+                          score={result.total}
+                          max={result.max}
+                          prefectureCode={prefectureCode}
+                          prefectureName={selectedPrefecture?.name}
                         />
                       )}
 
