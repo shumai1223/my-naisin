@@ -5448,6 +5448,19 @@
       "status": "candidate",
       "addedAt": "2026-08-23",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane7"
+    },
+    {
+      "id": "lane3-manabi-aid",
+      "org": "株式会社学びエイド",
+      "lane": "b2b-saas",
+      "channel": "email",
+      "contact": "support@manabi-aid.jp",
+      "contactClass": "b2b",
+      "evidence": "corp.manabi-aid.jp(法人向けドメイン)は繰り返しSocket is closedで到達不能だったため、消費者向けドメインwww.manabi-aid.jp/service/tradelaw(特定商取引法に基づく表記)を直接curlで確認しsupport@manabi-aid.jpを発見(生HTML直接grepで存在確認済み)。学習塾向け映像授業/生徒管理ツール(法人プラン「学びエイドマスター」)を提供する全国4,000教室導入実績のある企業で、サポート窓口経由でも情報提供outreachとしては到達可能と判断",
+      "verifiedAt": "2026-08-23",
+      "status": "candidate",
+      "addedAt": "2026-08-23",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane3"
     }
   ]
 }
