@@ -5435,6 +5435,19 @@
       "status": "candidate",
       "addedAt": "2026-08-23",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane7"
+    },
+    {
+      "id": "lane7-yamaguchi-u-education",
+      "org": "山口大学教育学部",
+      "lane": "npo",
+      "channel": "email",
+      "contact": "ed142@yamaguchi-u.ac.jp",
+      "contactClass": "b2b",
+      "evidence": "yamaguchi-u.ac.jp/info/contact/undergraduate_graduate_institute/ を直接curlで確認(HTTP200)。学部・研究科別問い合わせ一覧表の教育学部行「(総務担当・その他)」列(学務担当=学生向けの列は不採用)。ページ末尾の明示的な注記「アドレス@以下→yamaguchi-u.ac.jp」でドメイン補完ルールを直接確認済み。2026-08-17時点でWebSearch要約が同じアドレスを提示したが実ページで確認できず不採用としていた候補を、今回は生HTML直接取得で裏取りできたため採用に切替(WebSearchが偶然正しかったケース・裏取りの手順自体は変えていない)",
+      "verifiedAt": "2026-08-23",
+      "status": "candidate",
+      "addedAt": "2026-08-23",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane7"
     }
   ]
 }
