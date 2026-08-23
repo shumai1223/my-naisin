@@ -218,7 +218,10 @@ candidate計224件→225件。
 **2026-08-12追記(JJA企業会員一覧を取得・接触先判別に着手)**: `jja.or.jp/member-list/kigyou/`から東京都62社・大阪府7社・その他地区15社・賛助/団体会員8社の企業会員一覧を取得。塾チェーン本部としての重複突合はまだ完了していないが、一覧から当サイトのテーマと直接重なる高価値候補を発見:
 - ✅**声の教育社**(`lane3-koenokyoikusha`)。`koenokyoikusha.co.jp/contact`のお客様区分に塾関係者/学校関係者(個人・書店関係者と並ぶ選択肢)を確認しb2b確定。首都圏公立高校入試過去問集の老舗出版社。
 - ✅**学びエイド**(`lane3-manabi-aid`・2026-08-23)。法人向けドメイン`corp.manabi-aid.jp`は今回も`Socket is closed`で到達不能だったが、消費者向けドメイン`www.manabi-aid.jp/service/tradelaw`(特定商取引法に基づく表記)を直接curlで確認し`support@manabi-aid.jp`を発見・生HTML直接grepで存在確認済み。candidate計374件
-JJA一覧の残り(研恒社/国土社/小峰書店/フレーベル館/少年写真新聞社/新日本出版社等)は未着手・次回継続。
+JJA一覧の残り(研恒社/国土社/小峰書店/フレーベル館/新日本出版社等)は未着手・次回継続(少年写真新聞社は後日`lane3-schoolpress`として別途採用済み)。
+
+**2026-08-23追記**: JJA残り候補を再開。小峰書店(`komineshoten.co.jp/contact/`)・フレーベル館(`froebel-kan.co.jp/contact`)はいずれも問い合わせフォームがJS動的レンダリングでフォーム項目・メールアドレスとも静的取得できず、関連ページ(著作物利用ページ・学校図書館向けページ)にも直接のメール記載なし。次回はCoworkでのフォーム確認が必要。
+- ✅**新日本出版社**(`lane3-shinnihon-shuppansha`)。`shinnihon-net.co.jp/guide`(会社紹介ページ)を直接curlで確認し電話・ファクスと並ぶ会社代表メール`shop@shinnihon-net.co.jp`を採用(生HTML直接grepで存在確認済み)。candidate計375件
 
 **2026-08-12続報(2件追加確定)**:
 - ✅**好学出版**(`lane3-kogaku-pub`)。`kogaku-pub.com/company/`に『学習塾・国立私立学校専用教材』と明記、事業自体が学習塾・国公立私立学校専用教材出版に特化(個人向け製品なし)しておりb2b確定。

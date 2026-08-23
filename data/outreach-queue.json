@@ -5461,6 +5461,19 @@
       "status": "candidate",
       "addedAt": "2026-08-23",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane3"
+    },
+    {
+      "id": "lane3-shinnihon-shuppansha",
+      "org": "新日本出版社",
+      "lane": "b2b-saas",
+      "channel": "email",
+      "contact": "shop@shinnihon-net.co.jp",
+      "contactClass": "b2b",
+      "evidence": "shinnihon-net.co.jp/guide(会社紹介ページ)を直接curlで確認(HTTP200)。電話・ファクスと並んで掲載された会社代表メールアドレス(個人名なし)。JJA(日本児童図書出版協会)加盟の出版社で他のlane3出版社と同型の窓口として採用",
+      "verifiedAt": "2026-08-23",
+      "status": "candidate",
+      "addedAt": "2026-08-23",
+      "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane3"
     }
   ]
 }
