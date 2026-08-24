@@ -49,7 +49,7 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     },
     {
       url: 'https://www.dokyoi.pref.hokkaido.lg.jp/fs/1/0/4/8/5/8/2/3/_/p9-22_gakkoubetu.pdf',
-      docTitle: '北海道教育委員会 R6入学者選抜状況報告書「§3 学校別受検者数及び合格者数」（全14頁・R7/R8と同一シリーズ・掛-1第22弾・空知+石狩+札幌市+後志+胆振+日高+渡島+檜山+上川の9地区に着手）',
+      docTitle: '北海道教育委員会 R6入学者選抜状況報告書「§3 学校別受検者数及び合格者数」（全14頁・R7/R8と同一シリーズ・掛-1第23弾・空知+石狩+札幌市+後志+胆振+日高+渡島+檜山+上川+留萌+宗谷の11地区に着手）',
       fiscalYear: '令和6年度（2024年度）',
       fetchedAt: '2026-08-24',
     },
@@ -275,7 +275,14 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '今回変更していない**（独立した再検証(R7原本PDFの該当頁を再取得)なしに既存データを書き換える' +
       'のはリスクが高いため）。次回以降R7の富良野関連レコードを再確認する際の参考情報としてここに記録。' +
       '**残り6管内(留萌/宗谷/オホーツク/十勝/釧路/根室)のR6追加は次回セッションへ持ち越し**' +
-      '(coverage.statusは既存の\'partial\'のまま・R6分は空知+石狩+札幌市+後志+胆振+日高+渡島+檜山+上川のみのpartial coverageと明記)。',
+      '(coverage.statusは既存の\'partial\'のまま・R6分は空知+石狩+札幌市+後志+胆振+日高+渡島+檜山+上川のみのpartial coverageと明記)。' +
+      '⚠️2026-08-24追記10(掛-1第23弾): 留萌地区のR6分7レコード(普通3+専門4)と宗谷地区のR6分8' +
+      'レコード(普通6+専門2)を追加した(両地区とも印字ページ18の1頁に収まっていた)。R7(留萌7+宗谷8)' +
+      'と学校名・学科構成が完全一致(留萌=留萌・羽幌・天塩の普通3校、専門は遠別農業生産科学・' +
+      '留萌(電気建築・情報ビジネス)・苫前商業。宗谷=稚内・豊富・浜頓別・枝幸・利尻・礼文の普通6校、' +
+      '専門は稚内(商業・衛生看護)・年度差なし)。全15行を受検者数÷募集人員≒印字済み倍率の検算で' +
+      '誤読なしを確認した。**残り4管内(オホーツク/十勝/釧路/根室)のR6追加は次回セッションへ持ち越し**' +
+      '(coverage.statusは既存の\'partial\'のまま・R6分は空知+石狩+札幌市+後志+胆振+日高+渡島+檜山+上川+留萌+宗谷のみのpartial coverageと明記)。',
   },
   officialSubtotals: [],
   records: [
@@ -1177,5 +1184,22 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '下川商業', department: '商業', quota: 40, finalApplicants: 34, finalRate: 0.85, fiscalYear: '令和6年度（2024年度）' },
     { schoolName: '旭川南', department: '総合', quota: 200, finalApplicants: 247, finalRate: 1.24, fiscalYear: '令和6年度（2024年度）' },
     { schoolName: '剣淵', department: '総合', quota: 40, finalApplicants: 12, finalRate: 0.3, fiscalYear: '令和6年度（2024年度）' },
+    // 掛-1第23弾: 留萌地区・令和6年度（2024年度）分。
+    { schoolName: '留萌', department: '普通', quota: 160, finalApplicants: 114, finalRate: 0.71, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '羽幌', department: '普通', quota: 80, finalApplicants: 44, finalRate: 0.55, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '天塩', department: '普通', quota: 40, finalApplicants: 28, finalRate: 0.7, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '遠別農業', department: '生産科学', quota: 40, finalApplicants: 13, finalRate: 0.33, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '留萌', department: '電気・建築', quota: 40, finalApplicants: 21, finalRate: 0.53, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '留萌', department: '情報ビジネス', quota: 40, finalApplicants: 13, finalRate: 0.33, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '苫前商業', department: '商業', quota: 40, finalApplicants: 17, finalRate: 0.43, fiscalYear: '令和6年度（2024年度）' },
+    // 掛-1第23弾: 宗谷地区・令和6年度（2024年度）分。
+    { schoolName: '稚内', department: '普通', quota: 120, finalApplicants: 106, finalRate: 0.88, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '豊富', department: '普通', quota: 40, finalApplicants: 14, finalRate: 0.35, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '浜頓別', department: '普通', quota: 40, finalApplicants: 33, finalRate: 0.83, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '枝幸', department: '普通', quota: 80, finalApplicants: 44, finalRate: 0.55, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '利尻', department: '普通', quota: 40, finalApplicants: 18, finalRate: 0.45, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '礼文', department: '普通', quota: 40, finalApplicants: 18, finalRate: 0.45, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '稚内', department: '商業', quota: 40, finalApplicants: 30, finalRate: 0.75, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '稚内', department: '衛生看護', quota: 40, finalApplicants: 14, finalRate: 0.35, fiscalYear: '令和6年度（2024年度）' },
   ],
 };
