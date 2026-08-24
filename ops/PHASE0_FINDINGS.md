@@ -249,6 +249,18 @@
 |---|---|---|
 | F-1 | **Gmail MCP `gmail_search q="in:sent"`** — U-9（接触社数 17 / 20 / 32 の三重矛盾）を解く唯一の手段。MCPは接続済み。未実行 | loop |
 | F-2 | **Google Trends の「倍率」月次係数** — BAR V-1 が自ら「loop（Trends取得）」と主体まで書いて未実行。**BAR §5 の全EVがこの代理係数11.7倍に乗っている** | loop |
+
+> ⚠️ **2026-08-24試行・ブロックされ実測不可と判明（loopが実施）**: `trends.google.com/trends/explore`
+> をWebFetchで取得しようとしたところ**HTTP 429（Too Many Requests）**で即座に拒否された。念のため
+> pytrends型の非公式API（`/trends/api/explore`）へBashからcurlで直接アクセスしても同じく**429**
+> （Googleのrobot検知ページを返す）。**WebFetch・curl直接アクセスとも本タスクは実行不可能**と確認できた
+> （[[fable5-loop-protocol]]の既知の罠「curlでschannel revocationエラー」とは別の原因＝TLSではなく
+> Google側のbot/レート制限によるブロック）。BAR §5-3-5がV-1として「loop（Trends取得）」と主体を
+> 指定していたが、この主体指定は誤り（実行不可能な環境制約を見落としていた）と判断し、
+> `ops/cowork/COWORK-TASK-trends-bairitsu.md`にCowork向け指示書を新規作成した（[[cowork-division-of-labor]]
+> の起動条件「loopが自分では検証できないもの」に合致=実ブラウザでの手動アクセスなら429を回避できる
+> 可能性が高い）。次回セッションまたは👤がCoworkにこの指示書を投入すれば、BAR §5の全EVが依存する
+> 代理係数11.7倍を実測値へ差し替えられる見込み。
 | F-3 | Cowork への実発注 — BAR V-2/V-3、MONEY B-9、STATE U-1 が全て「Coworkへ」で終わっており、**プロンプトが1本も書かれていない**（memory `[[cowork-division-of-labor]]` は起動条件「loopが不明/保留と書いたもの」を満たしている） | loop（発注文面）→👤 |
 | F-4 | `c:\Users\E24054\my-shingaku` — 追加作業ディレクトリに入っているのに、**5成果物のどれもリポジトリを1行も読んでいない**（BRIEF §D の GSC数値のみ） | loop |
 
@@ -281,7 +293,7 @@
 | **P-2** | LINE Official Account Manager（8/08〜8/10の3日分） | G1判定（8/31・残り21日）の分子。`data/line-friends.json` は 8/07 で止まっている | 👤 |
 | **P-3** | GSC「ページのインデックス登録」レポート | 学校ページ3,089枚中2,856枚の状態（U-5）。STATE 自身が「冬の収穫量を左右する最重要の未知数」と明記 | 👤 |
 | **P-4** | **GSC「手動による対策」「セキュリティの問題」ページ** | **誰も1度も確認していない。** ドメイン6か月・BRIEF §B の C8 に該当。THREATS を書く前提の最低ライン | 👤 |
-| **P-5** | Google Trends（「高校 倍率」「〇〇高校 倍率」の月次） | BAR §5 の全EVが代理係数11.7倍（S値の係数）に依存。BAR 自身が V-1 で「loop実行可」と書いた | loop |
+| **P-5** | Google Trends（「高校 倍率」「〇〇高校 倍率」の月次） | BAR §5 の全EVが代理係数11.7倍（S値の係数）に依存。BAR 自身が V-1 で「loop実行可」と書いた | loop→**Cowork**（2026-08-24訂正・F-2参照。loopはHTTP 429でブロックされ実行不可能と判明） |
 | **P-6** | 教育委員会の一次PDF | BAR が実物突合したのは **chiba 1県・一宮商業1校のみ**。残り46県は `src/data/competition-rates/*.ts` の**コメントを信じている**。memory `[[feedback-verify-data-via-files-not-lib-comments]]` の再発条件 | loop |
 | **P-7** | 競合HTML（minkou/進研ゼミ/高校偏差値.net）を **他校でも** | 4サイト比較は **1校のみ**。「〇〇高校 倍率」300クエリの上位を取れているのが一宮商業1校の構図と同じ保証は無い | loop（curl+iPhone UA。進研ゼミは WebFetch 403） |
 | **P-8** | `AFFILIATES` 34本の href（＝ASPの実リンク先） | §1-D D-1。全EVの前提 | loop（✅2026-08-17解消: `npm run check:affiliate-links`新設・初回実行でデッドリンク0件確認。詳細は`ops/THREATS.md`脅威6を参照） |
