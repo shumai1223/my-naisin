@@ -134,7 +134,17 @@ export const DATA_LICENSE_LEDGER: Record<string, DataLicenseLedgerEntry> = {
   },
   yamanashi: { prefecture: 'yamanashi', sourceHost: '.lg.jp', ...UNKNOWN() },
   nara: { prefecture: 'nara', sourceHost: '.lg.jp', ...UNKNOWN() },
-  akita: { prefecture: 'akita', sourceHost: '.lg.jp', ...UNKNOWN() },
+  akita: {
+    prefecture: 'akita',
+    sourceHost: '.lg.jp',
+    ...UNKNOWN(
+      '秋田県教育庁高校教育課からGmail回答あり（2026-08-17 11:46・スレッド1a00d9d5bfb6b04e）だが内容は' +
+        '「当課公式サイトでは個人サイトへの参照を認めておりません」＝mie/gifu/wakayamaと同型の被リンク' +
+        '可否の回答のみで、再配布（引用・データ商品への収録）可否には言及していない。' +
+        '2026-08-23に「応募状況」データの出典明記掲載可否のみを尋ねる追撃返信下書き(draftId ' +
+        'r6726729720611278416)を同スレッドに作成済み（👤送信待ち）。再配布の可否は追撃返信を待つ'
+    ),
+  },
   aomori: { prefecture: 'aomori', sourceHost: '.lg.jp', ...UNKNOWN() },
   iwate: { prefecture: 'iwate', sourceHost: '.lg.jp', ...UNKNOWN() },
   kyoto: { prefecture: 'kyoto', sourceHost: '.lg.jp（実質公的）', ...UNKNOWN() },
