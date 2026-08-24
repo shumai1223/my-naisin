@@ -49,7 +49,7 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     },
     {
       url: 'https://www.dokyoi.pref.hokkaido.lg.jp/fs/1/0/4/8/5/8/2/3/_/p9-22_gakkoubetu.pdf',
-      docTitle: '北海道教育委員会 R6入学者選抜状況報告書「§3 学校別受検者数及び合格者数」（全14頁・R7/R8と同一シリーズ・掛-1第4弾・空知地区のみ着手）',
+      docTitle: '北海道教育委員会 R6入学者選抜状況報告書「§3 学校別受検者数及び合格者数」（全14頁・R7/R8と同一シリーズ・掛-1第17弾・空知+石狩+札幌市+後志の4地区に着手）',
       fiscalYear: '令和6年度（2024年度）',
       fetchedAt: '2026-08-24',
     },
@@ -234,9 +234,14 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '⚠️2026-08-24追記3(掛-1第16弾): 札幌市(市立高校)のR6分9レコード(普通7+専門2)も追加した' +
       '(PDF内部頁4=印字ページ12)。R7(6校9レコード)と学校名・学科構成が完全一致(市立札幌旭丘・' +
       '藻岩・平岸(2学科)・清田(2学科)・新川・啓北商業)。300dpiビジョン解析で数値列を確認した。' +
-      '**残り11管内(後志/胆振/日高/渡島/檜山/上川/留萌/宗谷/オホーツク/十勝/釧路/根室)のR6追加は' +
+      '⚠️2026-08-24追記4(掛-1第17弾): 後志地区のR6分17レコード(普通6+専門/総合11)も追加した' +
+      '(PDF内部頁5=印字ページ13)。R7(17レコード)と学校名・学科構成が完全一致(小樽潮陵・小樽桜陽・' +
+      '岩内・寿都・蘭越・倶知安の普通6校、専門は倶知安農業・小樽未来創造(4学科)・岩内(地域産業' +
+      'ビジネス)・小樽水産(4学科)・余市紅志の11レコード・年度差なし)。300dpiビジョン解析で数値列を' +
+      '確認しpdftotext -layoutの数値列とも突合した(結合セルなし)。' +
+      '**残り11管内(胆振/日高/渡島/檜山/上川/留萌/宗谷/オホーツク/十勝/釧路/根室)のR6追加は' +
       '次回セッションへ持ち越し**' +
-      '(coverage.statusは既存の\'partial\'のまま・R6分は空知+石狩+札幌市のみのpartial coverageと明記)。',
+      '(coverage.statusは既存の\'partial\'のまま・R6分は空知+石狩+札幌市+後志のみのpartial coverageと明記)。',
   },
   officialSubtotals: [],
   records: [
@@ -1006,5 +1011,22 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '市立札幌新川', department: '普通', quota: 320, finalApplicants: 393, finalRate: 1.23, fiscalYear: '令和6年度（2024年度）' },
     { schoolName: '市立札幌旭丘', department: '数理データサイエンス', quota: 80, finalApplicants: 82, finalRate: 1.02, fiscalYear: '令和6年度（2024年度）' },
     { schoolName: '市立札幌啓北商業', department: '未来商学', quota: 240, finalApplicants: 304, finalRate: 1.27, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '小樽潮陵', department: '普通', quota: 200, finalApplicants: 182, finalRate: 0.91, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '小樽桜陽', department: '普通', quota: 200, finalApplicants: 189, finalRate: 0.95, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '岩内', department: '普通', quota: 80, finalApplicants: 53, finalRate: 0.66, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '寿都', department: '普通', quota: 40, finalApplicants: 26, finalRate: 0.65, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '蘭越', department: '普通', quota: 40, finalApplicants: 10, finalRate: 0.25, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '倶知安', department: '普通', quota: 160, finalApplicants: 125, finalRate: 0.78, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '倶知安農業', department: '生産科学', quota: 40, finalApplicants: 21, finalRate: 0.53, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '小樽未来創造', department: '機械電気システム', quota: 40, finalApplicants: 34, finalRate: 0.85, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '小樽未来創造', department: '建設システム', quota: 40, finalApplicants: 36, finalRate: 0.9, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '小樽未来創造', department: '流通マネジメント', quota: 40, finalApplicants: 36, finalRate: 0.9, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '小樽未来創造', department: '情報会計マネジメント', quota: 40, finalApplicants: 44, finalRate: 1.1, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '岩内', department: '地域産業ビジネス', quota: 40, finalApplicants: 12, finalRate: 0.3, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '小樽水産', department: '海洋漁業', quota: 40, finalApplicants: 30, finalRate: 0.75, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '小樽水産', department: '水産食品', quota: 40, finalApplicants: 31, finalRate: 0.78, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '小樽水産', department: '栽培漁業', quota: 40, finalApplicants: 36, finalRate: 0.9, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '小樽水産', department: '情報通信', quota: 40, finalApplicants: 23, finalRate: 0.57, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '余市紅志', department: '総合', quota: 40, finalApplicants: 39, finalRate: 0.98, fiscalYear: '令和6年度（2024年度）' },
   ],
 };
