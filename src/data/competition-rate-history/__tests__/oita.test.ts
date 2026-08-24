@@ -5,9 +5,9 @@ import { OITA_COMPETITION_RATE_HISTORY } from '../oita';
  * 数値を一次資料(令和8・令和7年度は大分県教育委員会PDF)・地方紙・教育系サイト(令和6〜3年度は
  * TOSオンライン/リセモム/個別指導NEXTA)の固定値で確認する。
  */
-describe('大分県 多年度アーカイブ（Λ-4・令和8〜令和3の6年度分・grand-total-only）', () => {
-  it('6年度分（令和8年度〜令和3年度）を収録している', () => {
-    expect(OITA_COMPETITION_RATE_HISTORY.years).toHaveLength(6);
+describe('大分県 多年度アーカイブ（Λ-4・令和8〜令和2の7年度分・grand-total-only）', () => {
+  it('7年度分（令和8年度〜令和2年度）を収録している', () => {
+    expect(OITA_COMPETITION_RATE_HISTORY.years).toHaveLength(7);
     expect(OITA_COMPETITION_RATE_HISTORY.years.map((y) => y.fiscalYear)).toEqual([
       '令和8年度（2026年度）',
       '令和7年度（2025年度）',
@@ -15,6 +15,7 @@ describe('大分県 多年度アーカイブ（Λ-4・令和8〜令和3の6年�
       '令和5年度（2023年度）',
       '令和4年度（2022年度）',
       '令和3年度（2021年度）',
+      '令和2年度（2020年度）',
     ]);
   });
 
@@ -64,5 +65,12 @@ describe('大分県 多年度アーカイブ（Λ-4・令和8〜令和3の6年�
     expect(r3.grandTotal.quota).toBe(5635);
     expect(r3.grandTotal.applicants).toBe(6070);
     expect(r3.grandTotal.rate).toBeCloseTo(1.08, 2);
+  });
+
+  it('令和2年度の合計はリセモム記事(最終志願状況)と一致する(募集定員5,730・志願6,168・倍率1.08)', () => {
+    const r2 = OITA_COMPETITION_RATE_HISTORY.years[6];
+    expect(r2.grandTotal.quota).toBe(5730);
+    expect(r2.grandTotal.applicants).toBe(6168);
+    expect(r2.grandTotal.rate).toBeCloseTo(1.08, 2);
   });
 });

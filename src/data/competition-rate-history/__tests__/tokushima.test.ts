@@ -4,9 +4,9 @@ import { TOKUSHIMA_COMPETITION_RATE_HISTORY } from '../tokushima';
  * 徳島県 多年度アーカイブ（Λ-4）DoD検証: 令和7・令和6年度の一般選抜(全日制)合計の数値を
  * リセモム記事（教委発表の引用）の固定値で確認する。
  */
-describe('徳島県 多年度アーカイブ（Λ-4・令和8/令和7/令和6/令和5/令和4/令和3の6年度分・grand-total-only）', () => {
-  it('6年度分（令和8年度・令和7年度・令和6年度・令和5年度・令和4年度・令和3年度）を収録している', () => {
-    expect(TOKUSHIMA_COMPETITION_RATE_HISTORY.years).toHaveLength(6);
+describe('徳島県 多年度アーカイブ（Λ-4・令和8/令和7/令和6/令和5/令和4/令和3/令和2の7年度分・grand-total-only）', () => {
+  it('7年度分（令和8年度・令和7年度・令和6年度・令和5年度・令和4年度・令和3年度・令和2年度）を収録している', () => {
+    expect(TOKUSHIMA_COMPETITION_RATE_HISTORY.years).toHaveLength(7);
     expect(TOKUSHIMA_COMPETITION_RATE_HISTORY.years.map((y) => y.fiscalYear)).toEqual([
       '令和8年度（2026年度）',
       '令和7年度（2025年度）',
@@ -14,6 +14,7 @@ describe('徳島県 多年度アーカイブ（Λ-4・令和8/令和7/令和6/�
       '令和5年度（2023年度）',
       '令和4年度（2022年度）',
       '令和3年度（2021年度）',
+      '令和2年度（2020年度）',
     ]);
   });
 
@@ -63,5 +64,12 @@ describe('徳島県 多年度アーカイブ（Λ-4・令和8/令和7/令和6/�
     expect(r3.grandTotal.quota).toBe(4261);
     expect(r3.grandTotal.applicants).toBe(4247);
     expect(r3.grandTotal.rate).toBeCloseTo(1.0, 2);
+  });
+
+  it('令和2年度の合計は徳島県教育委員会公式PDF(志願変更後)と一致する(募集人員4,539・志願者数4,565・倍率1.01)', () => {
+    const r2 = TOKUSHIMA_COMPETITION_RATE_HISTORY.years[6];
+    expect(r2.grandTotal.quota).toBe(4539);
+    expect(r2.grandTotal.applicants).toBe(4565);
+    expect(r2.grandTotal.rate).toBeCloseTo(1.01, 2);
   });
 });

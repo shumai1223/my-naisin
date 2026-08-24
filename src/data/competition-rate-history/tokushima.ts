@@ -110,7 +110,25 @@ const REIWA_3: YearSnapshot = {
   grandTotal: { label: '一般選抜 全日制の課程', quota: 4261, applicants: 4247, rate: 1.0 },
 };
 
+/**
+ * 令和2年度（2020年度）: リセモムに該当記事なし(6通りのWebSearchで探索も不発)のため、
+ * 徳島県教育委員会公式サイト(nyuushi.tokushima-ec.ed.jp)のR2ハブページから直接発見した
+ * PDF（志願変更後・確定）を一次資料として採用。全日制の課程「一般選抜」全体: 一般選抜募集人員
+ * 4,539・出願者数4,565・倍率1.01（4565/4539=1.0057…≈1.01で整合）。定時制課程（募集210・
+ * 出願147・倍率0.70）はY-6・他年度と同じ理由でスコープ外。
+ */
+const REIWA_2: YearSnapshot = {
+  fiscalYear: '令和2年度（2020年度）',
+  sourceUrl: 'https://nyuushi.tokushima-ec.ed.jp/file/849',
+  sourceTitle: '徳島県教育委員会 令和２年度徳島県公立高等学校一般選抜出願状況（３月５日志願変更後）',
+  fetchedAt: '2026-08-24',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '一般選抜 全日制の課程', quota: 4539, applicants: 4565, rate: 1.01 },
+};
+
 export const TOKUSHIMA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'tokushima',
-  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
+  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3, REIWA_2],
 };

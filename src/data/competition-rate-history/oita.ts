@@ -30,6 +30,13 @@
  * リセモム記事＋個別指導NEXTAブログの2独立ソースが完全一致。令和3年度はリセモム記事1件のみ発見
  * (NEXTAの同年ブログは大分市内個別校の倍率のみで県全体合計の記載が無くクロスチェック不可だった)。
  * 3年度とも「志願者数÷募集人員」が発表倍率と近似することを検算済み。
+ *
+ * **2026-08-24追記(令和2年度追加・全47県中この時点で最古の7年度目に到達)**: リセモム記事
+ * （2020-03-09付「大分県が2月28日に発表した最終志願状況」を引用）で確認。募集人員5,730・
+ * 最終志願者数6,168・倍率1.08（2/25時点の速報値と数値が完全一致しており、志願変更による
+ * 変動が無かったことも確認済み）。教委公式サイトの旧URL(r02ichijishigan1.html等)は404で
+ * 削除済み・Wayback Machineはこの環境のツールから到達不可(既知の制約)だったため、確定値を
+ * 直接報じたリセモム記事を一次資料として採用した。
  */
 import type { PrefectureRateHistoryFile, YearSnapshot } from '@/lib/competition-rate-history';
 
@@ -100,7 +107,19 @@ const REIWA_3: YearSnapshot = {
   grandTotal: { label: '県立高校全日制課程合計', quota: 5635, applicants: 6070, rate: 1.08 },
 };
 
+const REIWA_2: YearSnapshot = {
+  fiscalYear: '令和2年度（2020年度）',
+  sourceUrl: 'https://resemom.jp/article/2020/03/09/55236.html',
+  sourceTitle:
+    'リセモム「大分県が2月28日に発表した最終志願状況」(第一次入学者選抜・県立高校全日制課程)',
+  fetchedAt: '2026-08-24',
+  origin: 'current-year-column',
+  granularity: 'grand-total-only',
+  categories: [],
+  grandTotal: { label: '県立高校全日制課程合計', quota: 5730, applicants: 6168, rate: 1.08 },
+};
+
 export const OITA_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'oita',
-  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
+  years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3, REIWA_2],
 };

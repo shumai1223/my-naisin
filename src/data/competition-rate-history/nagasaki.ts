@@ -97,6 +97,16 @@ const REIWA_3: YearSnapshot = {
   grandTotal: { label: '後期選抜 全日制', quota: 5527, applicants: 4350, rate: 0.79 },
 };
 
+/**
+ * ⚠️2026-08-24調査(令和2年度・見送り): リセモム記事(2020-02-20付「【高校受験2020】長崎県公立高
+ * 入試、志願状況（2/19時点）」https://resemom.jp/article/2020/02/20/54879.html)で
+ * 「全日制課程55校（市立1校含む）の募集定員7,096人に対して志願者6,430人、志願倍率0.91倍」を
+ * 発見したが、①**2/19時点の志願変更前**の速報値であり、②「一般入学者選抜」全体としか記載が
+ * なく既存年度が使い分ける「後期選抜」または「一般選抜（全募集定員－特別選抜等合格者数）」の
+ * どちらの区分に対応するかも記事本文からは判別できない。確定値・区分とも既存年度との整合を
+ * 確認できないためR2追加を見送る**(捏造ゼロ原則)。公式サイト(pref.nagasaki.jp)はR6-R8のみ
+ * 保持・Wayback Machineはこの環境のツールから到達不可(既知の制約)。
+ */
 export const NAGASAKI_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'nagasaki',
   years: [REIWA_8, REIWA_7, REIWA_6, REIWA_5, REIWA_4, REIWA_3],
