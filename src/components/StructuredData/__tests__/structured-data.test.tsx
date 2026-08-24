@@ -16,6 +16,7 @@ import { FAQSchema } from '../FAQSchema';
 import { HowToSchema } from '../HowToSchema';
 import { WebApplicationSchema } from '../WebApplicationSchema';
 import { BreadcrumbSchema } from '../BreadcrumbSchema';
+import { HighSchoolSchema } from '../HighSchoolSchema';
 import { ArticleSchema } from '../ArticleSchema';
 import { BlogPostingSchema } from '../BlogPostingSchema';
 import { DatasetSchema } from '../DatasetSchema';
@@ -139,6 +140,30 @@ describe('WebApplicationSchema', () => {
       }),
     ) as Record<string, unknown>;
     expect(json.featureList).toEqual(['機能A', '機能B']);
+  });
+});
+
+describe('HighSchoolSchema', () => {
+  test('name/url のみ渡すと address キー無し・aggregateRatingは常に無い（捏造ゼロ）', () => {
+    const json = extractJsonLd(
+      HighSchoolSchema({ name: '東京都立日比谷高等学校', url: 'https://my-naishin.com/pref/tokyo/school/T1' }),
+    ) as Record<string, unknown>;
+    expectSchemaNode(json, 'HighSchool');
+    expect(json.name).toBe('東京都立日比谷高等学校');
+    expectHttpsUrl(json.url);
+    expect(json.address).toBeUndefined();
+    expect(json.aggregateRating).toBeUndefined();
+  });
+
+  test('address を渡すと含まれる', () => {
+    const json = extractJsonLd(
+      HighSchoolSchema({
+        name: '東京都立日比谷高等学校',
+        url: 'https://my-naishin.com/pref/tokyo/school/T1',
+        address: '東京都千代田区永田町2-16-1',
+      }),
+    ) as Record<string, unknown>;
+    expect(json.address).toBe('東京都千代田区永田町2-16-1');
   });
 });
 

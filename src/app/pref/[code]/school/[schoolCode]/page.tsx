@@ -8,7 +8,10 @@ import { COMPETITION_RATE_HISTORY_BY_PREFECTURE } from '@/data/competition-rate-
 import { selectNearbySchools, getSchoolCategoryTrends, groupSchoolHistoryByDepartment } from '@/lib/school-page-data';
 import { getPrefectureSchoolPageData, INDEXED_SCHOOL_PAGE_PREFECTURE_CODES } from '@/lib/school-page-lookup';
 import { shortenSchoolName } from '@/lib/school-name-short-form';
+import { buildSchoolFaqItems } from '@/lib/school-page-faq';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
+import { HighSchoolSchema } from '@/components/StructuredData/HighSchoolSchema';
+import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { SchoolPageConvertCTA } from '@/components/SchoolPageConvertCTA';
 import { SchoolPageParentBridge } from '@/components/SchoolPageParentBridge';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
@@ -94,6 +97,9 @@ export default async function SchoolPage({ params }: PageProps) {
   const schoolHistoryByDepartment = groupSchoolHistoryByDepartment(school.history);
   // S3-3パイロット（aichi限定・BAR.md V-6）: 検索ユーザーが実際に打つ短縮形をh1に併記する。
   const shortName = SHORT_FORM_PILOT_PREFECTURE_CODES.includes(code) ? shortenSchoolName(school.schoolName) : null;
+  const canonicalUrl = `https://my-naishin.com/pref/${prefecture.code}/school/${schoolCode}`;
+  // S3-4（ops/PROPOSALS.md）: HighSchool + FAQPage 構造化データ。実数のみ・AggregateRatingは作らない。
+  const faqItems = buildSchoolFaqItems(school, prefecture.name);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
@@ -101,9 +107,11 @@ export default async function SchoolPage({ params }: PageProps) {
         items={[
           { name: 'ホーム', url: 'https://my-naishin.com/' },
           { name: `${prefecture.name}の内申点`, url: `https://my-naishin.com/pref/${prefecture.code}` },
-          { name: school.schoolName, url: `https://my-naishin.com/pref/${prefecture.code}/school/${schoolCode}` },
+          { name: school.schoolName, url: canonicalUrl },
         ]}
       />
+      <HighSchoolSchema name={school.schoolName} url={canonicalUrl} address={school.address || undefined} />
+      <FAQPageSchema faqItems={faqItems} />
       <div className="mx-auto max-w-4xl px-4 py-8 md:py-12">
         <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
           <Link href="/" className="flex items-center gap-1 hover:text-blue-600">
