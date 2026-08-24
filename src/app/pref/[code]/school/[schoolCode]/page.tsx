@@ -7,6 +7,7 @@ import { getPrefectureByCode } from '@/lib/prefectures';
 import { COMPETITION_RATE_HISTORY_BY_PREFECTURE } from '@/data/competition-rate-history';
 import { selectNearbySchools, getSchoolCategoryTrends, groupSchoolHistoryByDepartment } from '@/lib/school-page-data';
 import { getPrefectureSchoolPageData, INDEXED_SCHOOL_PAGE_PREFECTURE_CODES } from '@/lib/school-page-lookup';
+import { shortenSchoolName } from '@/lib/school-name-short-form';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { SchoolPageConvertCTA } from '@/components/SchoolPageConvertCTA';
 import { SchoolPageParentBridge } from '@/components/SchoolPageParentBridge';
@@ -28,6 +29,14 @@ import { SchoolPageNaishinNote } from '@/components/SchoolPageNaishinNote';
  */
 
 const PILOT_PREFECTURE_CODES = INDEXED_SCHOOL_PAGE_PREFECTURE_CODES;
+
+/**
+ * S3-3（ops/PROPOSALS.md・BAR.md V-6）: 学校名短縮形の併記パイロット。
+ * GSCの実クエリでは短縮形（例:「一宮商業高校」）が正式名（「〜高等学校」）の23倍表示・76倍クリック
+ * だが、このページは正式名しか出していなかった（BAR.md §0-6）。まず1県（aichi＝実測の例示県）に
+ * 限定してtitle/meta description/h1に短縮形を併記し、GSCで4週間CTRを追跡してから展開県を広げる。
+ */
+const SHORT_FORM_PILOT_PREFECTURE_CODES = ['aichi'];
 
 interface PageProps {
   params: Promise<{ code: string; schoolCode: string }>;
@@ -51,8 +60,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return { title: '学校が見つかりません | My Naishin', robots: { index: false, follow: false } };
   }
 
-  const title = `${school.schoolName}の入試倍率・募集人員 | My Naishin`;
-  const description = `${school.schoolName}(${prefecture.name})の今季入試倍率${school.overallRate}倍・募集人員${school.totalQuota}名・応募者数${school.totalApplicants}名。教育委員会公表の一次データに基づく。`;
+  const shortName = SHORT_FORM_PILOT_PREFECTURE_CODES.includes(code) ? shortenSchoolName(school.schoolName) : null;
+  const displayName = shortName ? `${school.schoolName}（${shortName}）` : school.schoolName;
+
+  const title = `${displayName}の入試倍率・募集人員 | My Naishin`;
+  const description = `${displayName}(${prefecture.name})の今季入試倍率${school.overallRate}倍・募集人員${school.totalQuota}名・応募者数${school.totalApplicants}名。教育委員会公表の一次データに基づく。`;
 
   const isIndexed = INDEXED_SCHOOL_PAGE_PREFECTURE_CODES.includes(code);
 
@@ -80,6 +92,8 @@ export default async function SchoolPage({ params }: PageProps) {
   const nearbySchools = selectNearbySchools(school, data.schools, 3);
   const categoryTrends = getSchoolCategoryTrends(code, school, COMPETITION_RATE_HISTORY_BY_PREFECTURE[code]);
   const schoolHistoryByDepartment = groupSchoolHistoryByDepartment(school.history);
+  // S3-3パイロット（aichi限定・BAR.md V-6）: 検索ユーザーが実際に打つ短縮形をh1に併記する。
+  const shortName = SHORT_FORM_PILOT_PREFECTURE_CODES.includes(code) ? shortenSchoolName(school.schoolName) : null;
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
@@ -110,7 +124,10 @@ export default async function SchoolPage({ params }: PageProps) {
               <GraduationCap className="h-6 w-6" />
             </div>
             <div>
-              <h1 className="text-2xl font-bold text-slate-800 md:text-3xl">{school.schoolName}</h1>
+              <h1 className="text-2xl font-bold text-slate-800 md:text-3xl">
+                {school.schoolName}
+                {shortName && <span className="ml-2 text-lg font-semibold text-slate-500 md:text-xl">（{shortName}）</span>}
+              </h1>
               {school.address && (
                 <p className="mt-1 flex items-center gap-1 text-sm text-slate-500">
                   <MapPin className="h-3.5 w-3.5" />
