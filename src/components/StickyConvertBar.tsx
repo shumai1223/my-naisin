@@ -6,7 +6,7 @@ import { MessageCircle, X } from 'lucide-react';
 
 import { track } from '@/lib/track';
 import { lineAddUrl } from '@/lib/line';
-import { shouldShowStickyBar, STICKY_ARM_SCROLL, STICKY_DISMISS_KEY } from '@/lib/sticky-bar';
+import { shouldShowStickyBar, stickyBarCategoryOf, STICKY_ARM_SCROLL, STICKY_DISMISS_KEY } from '@/lib/sticky-bar';
 
 /**
  * モバイル主体（実測68%）の常設“ながら”換金バー＝名簿velocity直撃。
@@ -18,8 +18,10 @@ import { shouldShowStickyBar, STICKY_ARM_SCROLL, STICKY_DISMISS_KEY } from '@/li
  *
  * SEO/AdSense安全・非侵入：
  *  - 本文を覆わない細いボトムバー（コンテンツを隠す interstitial ではない）。閉じる明示。
- *  - ツール/結果ページのみ（ブログ・規約・API・管理は出さない）。着地直後は出さず一定スクロール後にarm。
- *  - 閉じたらセッション内は再表示しない。env NEXT_PUBLIC_STICKY_BAR_DISABLED=1 で即停止。
+ *  - ツール/結果/ブログページのみ（規約・API・管理・開発者は出さない。S8-1でblog除外を解除）。
+ *    着地直後は出さず一定スクロール後にarm。
+ *  - 閉じたらセッション内・同一カテゴリ内は再表示しない（S8-2・カテゴリを跨げば改めて出る）。
+ *    env NEXT_PUBLIC_STICKY_BAR_DISABLED=1 で即停止。
  *  - 広告ではなく“資産形成（名簿）”なので密度リスクに当たらない（[[ExitIntentLineModal]]と同方針）。
  */
 
@@ -28,6 +30,11 @@ export function StickyConvertBar() {
   const [visible, setVisible] = React.useState(false);
   const [dismissed, setDismissed] = React.useState(false);
   const eligible = shouldShowStickyBar(pathname);
+  // S8-2: 「閉じる」の抑制範囲をセッション全体からカテゴリ単位（home/tool/prefecture-tool/school/blog）
+  // へ緩める。キーをカテゴリごとに分けるため、カテゴリを跨いだ遷移では改めて判定し直す必要がある
+  // （dismissedは前カテゴリの状態を引き継いだままにせず、新カテゴリのキー有無で明示的に更新する）。
+  const category = stickyBarCategoryOf(pathname);
+  const dismissKey = category ? `${STICKY_DISMISS_KEY}:${category}` : STICKY_DISMISS_KEY;
 
   React.useEffect(() => {
     if (process.env.NEXT_PUBLIC_STICKY_BAR_DISABLED === '1') return;
@@ -35,14 +42,14 @@ export function StickyConvertBar() {
       setVisible(false);
       return;
     }
+    let alreadyDismissed = false;
     try {
-      if (window.sessionStorage.getItem(STICKY_DISMISS_KEY) === '1') {
-        setDismissed(true);
-        return;
-      }
+      alreadyDismissed = window.sessionStorage.getItem(dismissKey) === '1';
     } catch {
       /* ストレージ不可でも表示は継続（安全側＝出す） */
     }
+    setDismissed(alreadyDismissed);
+    if (alreadyDismissed) return;
     // 2026-07-14: globals.cssの html,body{height:100%;overflow-y:auto} により body がスクロール
     // コンテナになっていて、Chrome/Android系では window.scrollY が常に0（バーが誰にも出ない）。
     // iOS Safariはbodyスクロールをwindowに昇格するため一部ユーザーだけ動いていた。
@@ -59,14 +66,14 @@ export function StickyConvertBar() {
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true, capture: true });
     return () => window.removeEventListener('scroll', onScroll, { capture: true } as EventListenerOptions);
-  }, [eligible, pathname]);
+  }, [eligible, pathname, dismissKey]);
 
   if (!eligible) return null;
 
   const close = () => {
     setDismissed(true);
     try {
-      window.sessionStorage.setItem(STICKY_DISMISS_KEY, '1');
+      window.sessionStorage.setItem(dismissKey, '1');
     } catch {
       /* no-op */
     }
