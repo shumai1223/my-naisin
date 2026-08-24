@@ -230,9 +230,13 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '⚠️2026-08-24追記2(掛-1第15弾): 石狩地区のR6分57レコード(普通31+専門/総合26)も追加した' +
       '(PDF内部頁2〜3=印字ページ10〜11)。R7(普通31+専門/総合26=57)と学校名・学科構成が完全一致' +
       '(空知と異なり年度差なし)。300dpiビジョン解析で数値列を確認し、pdftotext -layoutの数値列とも' +
-      '突合した(結合セルなし)。**残り12管内(札幌市/後志/胆振/日高/渡島/檜山/上川/留萌/宗谷/' +
-      'オホーツク/十勝/釧路/根室)のR6追加は次回セッションへ持ち越し**' +
-      '(coverage.statusは既存の\'partial\'のまま・R6分は空知+石狩のみのpartial coverageと明記)。',
+      '突合した(結合セルなし)。' +
+      '⚠️2026-08-24追記3(掛-1第16弾): 札幌市(市立高校)のR6分9レコード(普通7+専門2)も追加した' +
+      '(PDF内部頁4=印字ページ12)。R7(6校9レコード)と学校名・学科構成が完全一致(市立札幌旭丘・' +
+      '藻岩・平岸(2学科)・清田(2学科)・新川・啓北商業)。300dpiビジョン解析で数値列を確認した。' +
+      '**残り11管内(後志/胆振/日高/渡島/檜山/上川/留萌/宗谷/オホーツク/十勝/釧路/根室)のR6追加は' +
+      '次回セッションへ持ち越し**' +
+      '(coverage.statusは既存の\'partial\'のまま・R6分は空知+石狩+札幌市のみのpartial coverageと明記)。',
   },
   officialSubtotals: [],
   records: [
@@ -993,5 +997,14 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '石狩翔陽', department: '総合', quota: 320, finalApplicants: 391, finalRate: 1.22, fiscalYear: '令和6年度（2024年度）' },
     { schoolName: '札幌厚別', department: '総合', quota: 280, finalApplicants: 356, finalRate: 1.27, fiscalYear: '令和6年度（2024年度）' },
     { schoolName: '千歳北陽', department: '総合', quota: 160, finalApplicants: 118, finalRate: 0.74, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '市立札幌旭丘', department: '普通', quota: 240, finalApplicants: 334, finalRate: 1.39, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '市立札幌藻岩', department: '普通', quota: 240, finalApplicants: 300, finalRate: 1.25, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '市立札幌平岸', department: '普通', quota: 280, finalApplicants: 452, finalRate: 1.61, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '市立札幌平岸', department: 'デザインアート', quota: 40, finalApplicants: 55, finalRate: 1.38, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '市立札幌清田', department: '普通', quota: 200, finalApplicants: 250, finalRate: 1.25, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '市立札幌清田', department: 'グローバル', quota: 40, finalApplicants: 52, finalRate: 1.3, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '市立札幌新川', department: '普通', quota: 320, finalApplicants: 393, finalRate: 1.23, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '市立札幌旭丘', department: '数理データサイエンス', quota: 80, finalApplicants: 82, finalRate: 1.02, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '市立札幌啓北商業', department: '未来商学', quota: 240, finalApplicants: 304, finalRate: 1.27, fiscalYear: '令和6年度（2024年度）' },
   ],
 };
