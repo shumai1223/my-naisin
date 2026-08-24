@@ -283,7 +283,9 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // 電話のみ・独立サイトなし・会員限定ゲートありのいずれかでexcluded。
     // 2026-08-24: 全国家庭科教育協会(lane9-zenkokukateika)が8/23送信・8/24返信を受け
     // outreach-ledger.jsonへ移設されqueueから削除(207→206)。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(206);
+    // 2026-08-24 23:15: 大学教育学部等lane7の15件(👤による下書き一括送信)がin:sent実測で確認でき
+    // outreach-ledger.jsonへ移設されqueueから削除(206→191)。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(191);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {
