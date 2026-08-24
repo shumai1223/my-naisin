@@ -43,6 +43,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // 3.5 都道府県別 印刷対応の計算方法まとめ（P-1・全47県。/pref/{code}はgenerateStaticParamsのみで
   //     sitemap登録が漏れていたため追加。先生・進路指導向けのA4印刷資料）
+  //     ⚠️2026-08-24追記: /pref/{code}はgenerateMetadataでrobots.index=falseかつcanonicalが
+  //     `/{code}/naishin`を指す意図的なnoindexページと判明した（ops/PROPOSALS.md H-10参照）。
+  //     このsitemap登録自体はP-1の意図的な決定で、seo-surface.test.tsに回帰防止テストがある
+  //     ため変更していない（noindexページのsitemap掲載はGSCの「除外」レポートにノイズが出る
+  //     だけでランキングへの実害はない・除外する場合はP-1の元判断を再検証してから）。
   const prefectureHandoutPages = PREFECTURES.map(prefecture => ({
     url: `${baseUrl}/pref/${prefecture.code}`,
     lastModified,
