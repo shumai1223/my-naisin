@@ -87,6 +87,16 @@ describe('新潟県 倍率パイプラインα（Y-6・全日制73校93レコー
     expect(distinctSchools.size).toBe(73);
   });
 
+  it('掛-1(学校別×多年度・3年度目): 令和6年度(R6)分レコードが91件収録され、「全日制合計」(quota12,168・applicants12,551)と完全一致する', () => {
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    expect(r6.length).toBe(91);
+    expect(r6.reduce((a, r) => a + r.quota, 0)).toBe(12168);
+    expect(r6.reduce((a, r) => a + r.finalApplicants, 0)).toBe(12551);
+
+    const distinctSchools = new Set(r6.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(73);
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of NIIGATA_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/(kyouikucho\.nein\.ed\.jp|www\.pref\.niigata\.lg\.jp)\//);

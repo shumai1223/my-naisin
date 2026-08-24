@@ -29,6 +29,25 @@
  * 転記時に両方を30と誤読し合計が10不足する事故があったが、募集学級の機械集計突合で発見・訂正した）。
  * 全92レコード（県立90＋市立2）の機械集計（quota11,750・applicants11,923）が「県立及び市立合計」行
  * と完全一致（初回転記時の1件の誤読を除き再修正なし）。
+ *
+ * 【掛-1（学校別×多年度）追加・3年度目】令和6年度分を追加（PHASE0_FINDINGS.md P0-d/項目7の
+ * follow-up＝「3年度以上を保有する県42/47」の未達5県のうち1県を埋める作業）。一次ソースは新潟県
+ * 「令和6年度新潟県公立高等学校入学者選抜一般選抜志願変更後の志願状況一覧」（令和6年2月29日現在・
+ * 全6ページ）——R8基準ファイルと**完全に同一のタイトル・様式**（8学科区分＋全日制合計＋定時制課程＋
+ * 公立合計）で、R7（入学状況・4トラック併記型）より直接比較可能な良質ソース。ページはR8同様
+ * ToUnicodeマッピング欠落のためpdftoppmビジョン解析で全頁を転記した。
+ * ⚠️このPDFは2026-08-24時点で新潟県公式サイトから既に削除されており（案内ページ・PDF本体とも
+ * 404）、Wayback Machine（`web.archive.org`・案内ページ2025-11-11クロール分・PDF本体2024-08-13
+ * クロール分）からのみ取得できた。
+ * 機械集計（quota7,319・applicants7,648、44レコード＝普通科系）を含む全87レコードの合計
+ * （quota12,168・applicants12,551・倍率1.03「全日制合計」309学級）が、資料の学科区分別「計」行
+ * 8本＋「全日制合計」行の両方と完全一致した（初回転記で一致・再修正なし）。
+ * ⚠️年度差（誤読ではなく実際の制度・組織変化）: ①R7に存在した「十日町・クロス探究コース」
+ * （quota40）はR6では確認できず（普通科のみ190人で1本化）。②R7に存在した「阿賀黎明・総合」
+ * （quota40）はR6では確認できず（普通科のみ37人）。③R7に存在した「碧」「佐渡(両津)」の2校は
+ * R6のNo.1〜No.4いずれのページにも掲載が無い（学校自体がR6時点で未開校、またはR7年度に新設された
+ * 可能性が高いが本ファイルでは検証不能のため事実の記録のみに留める）。定時制課程は他県と同じ
+ * 理由でスコープ外。
  */
 import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
 
@@ -46,6 +65,12 @@ export const NIIGATA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       docTitle: '新潟県教育委員会 令和7年度新潟県公立高等学校入学状況',
       fiscalYear: '令和7年度（2025年度）',
       fetchedAt: '2026-08-09',
+    },
+    {
+      url: 'https://www.pref.niigata.lg.jp/uploaded/attachment/394179.pdf',
+      docTitle: '新潟県教育委員会 令和6年度新潟県公立高等学校入学者選抜一般選抜志願変更後の志願状況一覧',
+      fiscalYear: '令和6年度（2024年度）',
+      fetchedAt: '2026-08-24',
     },
   ],
   coverage: {
@@ -241,5 +266,96 @@ export const NIIGATA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '佐渡総合', department: '総合', quota: 120, finalApplicants: 108, finalRate: 0.9, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '市立万代', department: '普通', quota: 200, finalApplicants: 297, finalRate: 1.49, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '市立万代', department: '英語理数', quota: 40, finalApplicants: 49, finalRate: 1.23, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '新潟', department: '普通', quota: 280, finalApplicants: 307, finalRate: 1.09, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '新潟中央', department: '普通', quota: 197, finalApplicants: 199, finalRate: 1.01, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '新潟中央', department: '学究コース', quota: 80, finalApplicants: 87, finalRate: 1.08, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '新潟南', department: '普通', quota: 320, finalApplicants: 384, finalRate: 1.2, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '新潟南', department: '理数コース', quota: 40, finalApplicants: 50, finalRate: 1.25, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '新潟江南', department: '普通', quota: 280, finalApplicants: 336, finalRate: 1.2, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '新潟西', department: '普通', quota: 269, finalApplicants: 302, finalRate: 1.12, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '新潟東', department: '普通', quota: 240, finalApplicants: 280, finalRate: 1.16, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '新潟北', department: '普通', quota: 100, finalApplicants: 130, finalRate: 1.3, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '新潟向陽', department: '普通', quota: 200, finalApplicants: 289, finalRate: 1.44, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '巻', department: '普通', quota: 275, finalApplicants: 296, finalRate: 1.07, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '豊栄', department: '普通', quota: 78, finalApplicants: 32, finalRate: 0.41, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '新津', department: '普通', quota: 240, finalApplicants: 259, finalRate: 1.07, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '新津南', department: '普通', quota: 120, finalApplicants: 99, finalRate: 0.82, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '白根', department: '普通', quota: 80, finalApplicants: 43, finalRate: 0.53, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '村松', department: '普通', quota: 80, finalApplicants: 17, finalRate: 0.21, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '阿賀黎明', department: '普通', quota: 37, finalApplicants: 16, finalRate: 0.43, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '新発田', department: '普通', quota: 240, finalApplicants: 289, finalRate: 1.2, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '新発田南', department: '普通', quota: 120, finalApplicants: 145, finalRate: 1.2, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '村上', department: '普通', quota: 120, finalApplicants: 92, finalRate: 0.76, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '中条', department: '普通', quota: 79, finalApplicants: 33, finalRate: 0.41, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '阿賀野', department: '普通', quota: 79, finalApplicants: 34, finalRate: 0.43, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '長岡', department: '普通', quota: 240, finalApplicants: 285, finalRate: 1.18, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '長岡大手', department: '普通', quota: 233, finalApplicants: 279, finalRate: 1.19, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '長岡向陵', department: '普通', quota: 200, finalApplicants: 297, finalRate: 1.48, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '正徳館', department: '普通', quota: 40, finalApplicants: 16, finalRate: 0.4, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '見附', department: '普通', quota: 80, finalApplicants: 59, finalRate: 0.73, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '三条', department: '普通', quota: 240, finalApplicants: 291, finalRate: 1.21, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '三条東', department: '普通', quota: 200, finalApplicants: 228, finalRate: 1.14, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '吉田', department: '普通', quota: 80, finalApplicants: 69, finalRate: 0.86, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '分水', department: '普通', quota: 80, finalApplicants: 44, finalRate: 0.55, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '加茂', department: '普通', quota: 155, finalApplicants: 220, finalRate: 1.41, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '小千谷', department: '普通', quota: 200, finalApplicants: 234, finalRate: 1.17, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '小出', department: '普通', quota: 159, finalApplicants: 140, finalRate: 0.88, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '六日町', department: '普通', quota: 200, finalApplicants: 199, finalRate: 0.99, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '八海', department: '普通', quota: 76, finalApplicants: 69, finalRate: 0.9, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '十日町', department: '普通', quota: 190, finalApplicants: 190, finalRate: 1.0, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '松代', department: '普通', quota: 77, finalApplicants: 47, finalRate: 0.61, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '柏崎', department: '普通', quota: 195, finalApplicants: 169, finalRate: 0.86, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '柏崎常盤', department: '普通', quota: 120, finalApplicants: 101, finalRate: 0.84, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '高田', department: '普通', quota: 200, finalApplicants: 210, finalRate: 1.05, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '高田北城', department: '普通', quota: 200, finalApplicants: 222, finalRate: 1.11, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '有恒', department: '普通', quota: 40, finalApplicants: 32, finalRate: 0.8, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '糸魚川', department: '普通', quota: 120, finalApplicants: 110, finalRate: 0.91, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '佐渡', department: '普通', quota: 200, finalApplicants: 194, finalRate: 0.97, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '羽茂', department: '普通', quota: 40, finalApplicants: 18, finalRate: 0.45, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '市立万代', department: '普通', quota: 200, finalApplicants: 206, finalRate: 1.03, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '新発田農業', department: '農業', quota: 160, finalApplicants: 177, finalRate: 1.1, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '長岡農業', department: '農業', quota: 160, finalApplicants: 176, finalRate: 1.1, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '加茂農林', department: '農業', quota: 160, finalApplicants: 174, finalRate: 1.08, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '高田農業', department: '農業', quota: 160, finalApplicants: 194, finalRate: 1.21, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '新潟工業', department: 'ミライ創造工学', quota: 262, finalApplicants: 324, finalRate: 1.23, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '新津工業', department: '工業マイスター', quota: 40, finalApplicants: 52, finalRate: 1.3, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '新津工業', department: '生産工学', quota: 40, finalApplicants: 16, finalRate: 0.4, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '新津工業', department: 'ロボット工学', quota: 40, finalApplicants: 19, finalRate: 0.47, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '新津工業', department: '日本建築', quota: 30, finalApplicants: 31, finalRate: 1.03, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '新発田南', department: '工業', quota: 160, finalApplicants: 163, finalRate: 1.01, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '長岡工業', department: '工業', quota: 200, finalApplicants: 230, finalRate: 1.15, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '新潟県央工業', department: '工業', quota: 157, finalApplicants: 111, finalRate: 0.7, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '塩沢商工', department: '地域創造工学', quota: 80, finalApplicants: 32, finalRate: 0.4, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '柏崎工業', department: '工業', quota: 120, finalApplicants: 116, finalRate: 0.96, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '上越総合技術', department: '工業', quota: 195, finalApplicants: 213, finalRate: 1.09, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '新潟商業', department: '総合ビジネス', quota: 136, finalApplicants: 209, finalRate: 1.53, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '新潟商業', department: '情報処理', quota: 80, finalApplicants: 93, finalRate: 1.16, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '新発田商業', department: '商業', quota: 115, finalApplicants: 117, finalRate: 1.01, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '長岡商業', department: '総合ビジネス', quota: 149, finalApplicants: 131, finalRate: 0.87, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '三条商業', department: '総合ビジネス', quota: 120, finalApplicants: 119, finalRate: 0.99, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '塩沢商工', department: '商業', quota: 40, finalApplicants: 19, finalRate: 0.47, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '高田商業', department: '総合ビジネス', quota: 120, finalApplicants: 121, finalRate: 1.0, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '海洋', department: '水産', quota: 78, finalApplicants: 68, finalRate: 0.87, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '新潟中央', department: '食物', quota: 38, finalApplicants: 54, finalRate: 1.42, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '長岡大手', department: '家政', quota: 39, finalApplicants: 41, finalRate: 1.05, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '高田北城', department: '生活文化', quota: 40, finalApplicants: 52, finalRate: 1.3, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '新潟', department: '理数', quota: 80, finalApplicants: 144, finalRate: 1.8, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '新潟中央', department: '音楽', quota: 26, finalApplicants: 3, finalRate: 0.11, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '新潟商業', department: '国際教養', quota: 80, finalApplicants: 75, finalRate: 0.93, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '新発田', department: '理数', quota: 40, finalApplicants: 44, finalRate: 1.1, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '長岡', department: '理数', quota: 78, finalApplicants: 85, finalRate: 1.08, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '国際情報', department: '専門系', quota: 120, finalApplicants: 48, finalRate: 0.4, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '高田', department: '理数', quota: 40, finalApplicants: 57, finalRate: 1.42, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '市立万代', department: '英語理数', quota: 40, finalApplicants: 65, finalRate: 1.62, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '巻総合', department: '総合', quota: 200, finalApplicants: 222, finalRate: 1.11, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '五泉', department: '総合', quota: 200, finalApplicants: 202, finalRate: 1.01, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '村上桜ケ丘', department: '総合', quota: 114, finalApplicants: 110, finalRate: 0.96, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '栃尾', department: '総合', quota: 80, finalApplicants: 50, finalRate: 0.62, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '小千谷西', department: '総合', quota: 160, finalApplicants: 126, finalRate: 0.78, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '十日町総合', department: '総合', quota: 116, finalApplicants: 125, finalRate: 1.07, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '柏崎総合', department: '総合', quota: 120, finalApplicants: 117, finalRate: 0.97, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '新井', department: '総合', quota: 156, finalApplicants: 171, finalRate: 1.09, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '糸魚川白嶺', department: '総合', quota: 120, finalApplicants: 99, finalRate: 0.82, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '佐渡総合', department: '総合', quota: 160, finalApplicants: 108, finalRate: 0.67, fiscalYear: '令和6年度（2024年度）' },
   ],
 };
