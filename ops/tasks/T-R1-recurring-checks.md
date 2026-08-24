@@ -84,7 +84,7 @@
 | M-2 | **出典・アフィリリンク4種の生存確認** | `NODE_TLS_REJECT_UNAUTHORIZED=0 npm run check:links`（prefectures.ts 47件）・`check:affiliate-links`（affiliates.ts live34本）・`check:blog-links`（ブログ51記事157件）・`check:competition-links`（Λ-4多年度アーカイブ47県298件）の4つを**必ずTLS回避フラグ付きで**実行する。**⚠️2026-08-17判明: フラグ無しだとこの環境のTLS傍受で素のfetchが全滅し「壊れリンクなし」と誤報する**（この誤報により少なくとも数ヶ月間、真の404が計20件〔prefectures.ts4件+ブログ14件+競争率アーカイブ2件〕、検知されないまま放置されていた実績あり）。リンク切れ＝404/410のみ「壊れ」判定（bot弾き403・web.archive.orgの一時的503等は警告止まり） |
 | M-3 | **公開ページの記述が実態と一致しているか** | `/quality` `/reliability` `/terms` `/privacy` `/developers` を実際に開いて、機能や方針の変更が反映されているか。**2026-08-10に2件・08-11に1件の不一致が見つかった** |
 | M-4 | **不変条件テストの網羅** | `src/data` に新しく追加された「数値を持つ型」に、範囲テストが付いているか |
-| M-5 | **Cloudflareの請求額とBuild Minutes** | Cloudflareダッシュボードの請求明細（`ops/INFRA-COST.md`参照）。**2026-08-14に月$104.76（86%がBuild Minutes=push起因）と判明・3か月目まで誰も見ていなかった**。急増していたら`LOOP_CONTRACT.md`のpush方針（docs/ops/dataのみの変更は溜めてpush）が守られているかも合わせて確認 |
+| M-5 | **Cloudflareの請求額とBuild Minutes** | Cloudflareダッシュボードの請求明細（`ops/INFRA-COST.md`参照）。**2026-08-14に月$104.76（86%がBuild Minutes=push起因）と判明・3か月目まで誰も見ていなかった**。急増していたら`LOOP_CONTRACT.md`のpush方針（docs/ops/dataのみの変更は溜めてpush）が守られているかも合わせて確認。**2026-08-24判明: 請求額そのものはダッシュボード限定(👤専用)だが、ビルド発生率の代理指標は`NODE_TLS_REJECT_UNAUTHORIZED=0 node_modules/wrangler/bin/wrangler.js deployments list --name my-naishin`（直近10件のみ・タイムスタンプ付き）でloopが自力確認できる。使い方は`ops/INFRA-COST.md`の2026-08-24追記を参照** |
 
 ## 月次（👤・loopは代行できない）
 
