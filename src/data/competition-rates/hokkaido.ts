@@ -49,7 +49,7 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     },
     {
       url: 'https://www.dokyoi.pref.hokkaido.lg.jp/fs/1/0/4/8/5/8/2/3/_/p9-22_gakkoubetu.pdf',
-      docTitle: '北海道教育委員会 R6入学者選抜状況報告書「§3 学校別受検者数及び合格者数」（全14頁・R7/R8と同一シリーズ・掛-1第24弾・空知+石狩+札幌市+後志+胆振+日高+渡島+檜山+上川+留萌+宗谷+オホーツクの12地区に着手）',
+      docTitle: '北海道教育委員会 R6入学者選抜状況報告書「§3 学校別受検者数及び合格者数」（全14頁・R7/R8と同一シリーズ・掛-1第25弾・空知+石狩+札幌市+後志+胆振+日高+渡島+檜山+上川+留萌+宗谷+オホーツク+十勝の13地区に着手）',
       fiscalYear: '令和6年度（2024年度）',
       fetchedAt: '2026-08-24',
     },
@@ -293,7 +293,16 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '整合(43/40=1.075→印字1.1と完全一致)からR6のquota=40が正しいと確認)。全31行を受検者数÷' +
       '募集人員≒印字済み倍率の検算で誤読なしを確認した。**残り3管内(十勝/釧路/根室)のR6追加は' +
       '次回セッションへ持ち越し**' +
-      '(coverage.statusは既存の\'partial\'のまま・R6分は空知+石狩+札幌市+後志+胆振+日高+渡島+檜山+上川+留萌+宗谷+オホーツクのみのpartial coverageと明記)。',
+      '(coverage.statusは既存の\'partial\'のまま・R6分は空知+石狩+札幌市+後志+胆振+日高+渡島+檜山+上川+留萌+宗谷+オホーツクのみのpartial coverageと明記)。' +
+      '⚠️2026-08-24追記12(掛-1第25弾): 十勝地区のR6分28レコード(普通12+専門/総合16)も' +
+      '追加した(印字ページ20に普通・専門/総合の両テーブルが1頁で収まっていた)。R7(普通12+専門/総合16' +
+      '=28)と学校名・学科構成が完全一致(普通12校=帯広柏葉・帯広三条・帯広緑陽・音更・上士幌・芽室・' +
+      '幕別清陵・鹿追・大樹(地域探究)・広尾・本別・足寄、専門/総合16レコード=帯広農業(農業科学・' +
+      '酪農科学・食品科学・農業土木工学・森林科学)・更別農業(農業・生活科学)・士幌(アグリビジネス・' +
+      'フードシステム)・帯広工業(電子機械・電気・建築・環境土木)・帯広南商業商業・清水総合・池田総合・' +
+      '年度差なし)。全28行を受検者数÷募集人員≒印字済み倍率の検算で誤読なしを確認した。' +
+      '**残り2管内(釧路/根室)のR6追加は次回セッションへ持ち越し**(根室が最終管内)' +
+      '(coverage.statusは既存の\'partial\'のまま・R6分は空知+石狩+札幌市+後志+胆振+日高+渡島+檜山+上川+留萌+宗谷+オホーツク+十勝のみのpartial coverageと明記)。',
   },
   officialSubtotals: [],
   records: [
@@ -1245,5 +1254,35 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '置戸', department: '福祉', quota: 40, finalApplicants: 9, finalRate: 0.23, fiscalYear: '令和6年度（2024年度）' },
     { schoolName: '斜里', department: '総合', quota: 40, finalApplicants: 31, finalRate: 0.78, fiscalYear: '令和6年度（2024年度）' },
     { schoolName: '大空', department: '総合', quota: 40, finalApplicants: 47, finalRate: 1.18, fiscalYear: '令和6年度（2024年度）' },
+    // 掛-1第25弾: 十勝地区・全日制普通科・令和6年度（2024年度）分。
+    { schoolName: '帯広柏葉', department: '普通', quota: 240, finalApplicants: 267, finalRate: 1.11, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '帯広三条', department: '普通', quota: 240, finalApplicants: 277, finalRate: 1.15, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '帯広緑陽', department: '普通', quota: 160, finalApplicants: 188, finalRate: 1.18, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '音更', department: '普通', quota: 120, finalApplicants: 124, finalRate: 1.03, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '上士幌', department: '普通', quota: 80, finalApplicants: 59, finalRate: 0.74, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '芽室', department: '普通', quota: 160, finalApplicants: 199, finalRate: 1.24, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '幕別清陵', department: '普通', quota: 120, finalApplicants: 119, finalRate: 0.99, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '鹿追', department: '普通', quota: 80, finalApplicants: 77, finalRate: 0.96, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '大樹', department: '地域探究', quota: 40, finalApplicants: 34, finalRate: 0.85, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '広尾', department: '普通', quota: 40, finalApplicants: 26, finalRate: 0.65, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '本別', department: '普通', quota: 40, finalApplicants: 37, finalRate: 0.93, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '足寄', department: '普通', quota: 80, finalApplicants: 65, finalRate: 0.81, fiscalYear: '令和6年度（2024年度）' },
+    // 掛-1第25弾: 十勝地区・専門教育を主とする学科及び総合学科・令和6年度（2024年度）分。
+    { schoolName: '帯広農業', department: '農業科学', quota: 40, finalApplicants: 40, finalRate: 1.0, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '帯広農業', department: '酪農科学', quota: 40, finalApplicants: 37, finalRate: 0.93, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '帯広農業', department: '食品科学', quota: 40, finalApplicants: 33, finalRate: 0.83, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '帯広農業', department: '農業土木工学', quota: 40, finalApplicants: 40, finalRate: 1.0, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '帯広農業', department: '森林科学', quota: 40, finalApplicants: 31, finalRate: 0.78, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '更別農業', department: '農業', quota: 40, finalApplicants: 16, finalRate: 0.4, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '更別農業', department: '生活科学', quota: 40, finalApplicants: 32, finalRate: 0.8, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '士幌', department: 'アグリビジネス', quota: 40, finalApplicants: 20, finalRate: 0.5, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '士幌', department: 'フードシステム', quota: 40, finalApplicants: 32, finalRate: 0.8, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '帯広工業', department: '電子機械', quota: 40, finalApplicants: 47, finalRate: 1.18, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '帯広工業', department: '電気', quota: 40, finalApplicants: 30, finalRate: 0.75, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '帯広工業', department: '建築', quota: 40, finalApplicants: 42, finalRate: 1.05, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '帯広工業', department: '環境土木', quota: 40, finalApplicants: 27, finalRate: 0.68, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '帯広南商業', department: '商業', quota: 200, finalApplicants: 235, finalRate: 1.18, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '清水', department: '総合', quota: 120, finalApplicants: 83, finalRate: 0.69, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '池田', department: '総合', quota: 80, finalApplicants: 25, finalRate: 0.31, fiscalYear: '令和6年度（2024年度）' },
   ],
 };
