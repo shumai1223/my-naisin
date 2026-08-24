@@ -190,6 +190,27 @@ export default function HyoteiSuisenKijunPage() {
             </div>
           </section>
 
+          {/* 大学進学の橋渡し（姉妹サイト My Shingaku へ） */}
+          <section className="mt-8 rounded-2xl border border-violet-200 bg-violet-50/50 p-6">
+            <h2 className="mb-2 flex items-center gap-2 text-lg font-bold text-violet-900">
+              <GraduationCap className="h-5 w-5 text-violet-600" />
+              大学受験の指定校推薦・総合型選抜を詳しく調べるなら
+            </h2>
+            <p className="text-sm leading-relaxed text-slate-700">
+              指定校推薦・総合型選抜の仕組みや、大学の学費・奨学金の目安まで詳しく知りたい方は、
+              大学受験に特化した姉妹サイト「My Shingaku」もあわせてご覧ください。
+            </p>
+            <Link
+              href="https://my-shingaku.com/gakuhi"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 inline-flex items-center gap-1.5 text-sm font-bold text-violet-700 hover:text-violet-800"
+            >
+              大学進学の費用を詳しく見る（姉妹サイト My Shingaku）
+              <ChevronRight className="h-4 w-4" />
+            </Link>
+          </section>
+
           {/* 注意 */}
           <section className="mt-8 rounded-xl border border-amber-200 bg-amber-50 p-5">
             <div className="flex items-start gap-3">
