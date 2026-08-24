@@ -47,6 +47,12 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       fiscalYear: '令和7年度（2025年度）',
       fetchedAt: '2026-08-07',
     },
+    {
+      url: 'https://www.dokyoi.pref.hokkaido.lg.jp/fs/1/0/4/8/5/8/2/3/_/p9-22_gakkoubetu.pdf',
+      docTitle: '北海道教育委員会 R6入学者選抜状況報告書「§3 学校別受検者数及び合格者数」（全14頁・R7/R8と同一シリーズ・掛-1第4弾・空知地区のみ着手）',
+      fiscalYear: '令和6年度（2024年度）',
+      fetchedAt: '2026-08-24',
+    },
   ],
   coverage: {
     status: 'partial',
@@ -210,7 +216,19 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '総合ビジネス)。羅臼高校の普通科(連携型)もR8同様スコープ外のまま。pdftotext -layoutの数値列と' +
       '全11行を行順突合した(結合セルなし)。**掛-1(学校別×多年度)の技法確立フェーズはこれで完了**。' +
       '次はhokkaidoで確立した「R8報告書ページと同一構造のR7版ページを教委サイトで探す」技法を他県' +
-      '(tokyo/hiroshima/saitama等のcategory-detail粒度県が候補)へ横展開する段階に移る。',
+      '(tokyo/hiroshima/saitama等のcategory-detail粒度県が候補)へ横展開する段階に移る。' +
+      '⚠️2026-08-24追記(3年度目・掛-1第14弾・空知地区のみ着手): R6(令和6年度)報告書ページ' +
+      '(dokyoi.pref.hokkaido.lg.jp/hk/gks/193247.html)から同一シリーズのp9-22_gakkoubetu.pdf' +
+      '(全14頁)を発見し、まず空知地区(PDF内部頁1)の32レコード(普通12+専門/総合20)を追加した。' +
+      '300dpiビジョン解析で2回精読しR7(31レコード)と突合したところ、実際の年度差3件を検出した' +
+      '(誤読ではなく2回の独立読み取りで再現・確定): ①岩見沢西「普通」(quota120)がR6のみ存在し' +
+      'R7/R8には無い(募集停止または統合の可能性) ②岩見沢東「文理探究」(quota80)はR7で新設され' +
+      'R6には無い(R6は普通quota200のみ・R7で普通quota160+文理探究80に再編) ③深川東「総合ビジネス」' +
+      '(quota40)はR6のみでR7には無い。pdftotext -layoutは数値列を正確抽出できたが学科名欄の' +
+      'CJKラベルは他頁同様読めず、学校名・学科名は300dpiビジョン解析で確認し数値列と行順突合した' +
+      '(結合セルなし・空知R7と同水準の確度)。**残り13管内(石狩/札幌市/後志/胆振/日高/渡島/檜山/' +
+      '上川/留萌/宗谷/オホーツク/十勝/釧路/根室)のR6追加は次回セッションへ持ち越し**' +
+      '(coverage.statusは既存の\'partial\'のまま・R6分は空知のみのpartial coverageと明記)。',
   },
   officialSubtotals: [],
   records: [
@@ -882,5 +900,37 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '根室', department: '商業', quota: 40, finalApplicants: 29, finalRate: 0.73, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '根室', department: '事務情報', quota: 40, finalApplicants: 3, finalRate: 0.08, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '中標津', department: '総合ビジネス', quota: 40, finalApplicants: 28, finalRate: 0.7, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '岩見沢東', department: '普通', quota: 200, finalApplicants: 149, finalRate: 0.75, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '岩見沢西', department: '普通', quota: 120, finalApplicants: 64, finalRate: 0.53, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '月形', department: '普通', quota: 40, finalApplicants: 18, finalRate: 0.45, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '夕張', department: '普通', quota: 40, finalApplicants: 26, finalRate: 0.65, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '長沼', department: '普通', quota: 80, finalApplicants: 44, finalRate: 0.55, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '栗山', department: '普通', quota: 80, finalApplicants: 49, finalRate: 0.61, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '岩見沢緑陵', department: '普通', quota: 120, finalApplicants: 114, finalRate: 0.95, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '滝川', department: '普通', quota: 160, finalApplicants: 147, finalRate: 0.92, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '砂川', department: '普通', quota: 80, finalApplicants: 51, finalRate: 0.64, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '芦別', department: '普通', quota: 80, finalApplicants: 26, finalRate: 0.33, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '深川西', department: '普通', quota: 120, finalApplicants: 74, finalRate: 0.62, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '滝川西', department: '普通', quota: 120, finalApplicants: 91, finalRate: 0.76, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '滝川', department: '理数', quota: 40, finalApplicants: 30, finalRate: 0.75, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '岩見沢農業', department: '農業科学', quota: 40, finalApplicants: 24, finalRate: 0.6, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '岩見沢農業', department: '畜産科学', quota: 40, finalApplicants: 16, finalRate: 0.4, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '岩見沢農業', department: '食品科学', quota: 40, finalApplicants: 36, finalRate: 0.9, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '岩見沢農業', department: '農業土木工学', quota: 40, finalApplicants: 36, finalRate: 0.9, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '岩見沢農業', department: '環境造園', quota: 40, finalApplicants: 22, finalRate: 0.55, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '岩見沢農業', department: '森林科学', quota: 40, finalApplicants: 39, finalRate: 0.98, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '岩見沢農業', department: '生活科学', quota: 40, finalApplicants: 28, finalRate: 0.7, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '深川東', department: '生産科学', quota: 40, finalApplicants: 10, finalRate: 0.25, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '新十津川農業', department: '農業・生活', quota: 40, finalApplicants: 39, finalRate: 0.98, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '滝川工業', department: '電子機械', quota: 40, finalApplicants: 19, finalRate: 0.48, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '滝川工業', department: '電気', quota: 40, finalApplicants: 34, finalRate: 0.85, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '深川東', department: '総合ビジネス', quota: 40, finalApplicants: 18, finalRate: 0.45, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '奈井江商業', department: '情報処理', quota: 40, finalApplicants: 9, finalRate: 0.23, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '岩見沢緑陵', department: '情報コミュニケーション', quota: 80, finalApplicants: 68, finalRate: 0.85, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '滝川西', department: '情報マネジメント', quota: 120, finalApplicants: 106, finalRate: 0.88, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '三笠', department: '調理師', quota: 20, finalApplicants: 23, finalRate: 1.15, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '三笠', department: '製菓', quota: 20, finalApplicants: 20, finalRate: 1.0, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '美唄聖華', department: '衛生看護', quota: 80, finalApplicants: 44, finalRate: 0.55, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '美唄尚栄', department: '総合', quota: 80, finalApplicants: 52, finalRate: 0.65, fiscalYear: '令和6年度（2024年度）' },
   ],
 };

@@ -14,17 +14,18 @@ import { HOKKAIDO_COMPETITION_RATES } from '../hokkaido';
  * 「finalApplicants ÷ quota ≒ finalRate」の内部整合性のみを検証する（公式グランドトータル行は
  * 原資料に印字されておらず突合対象が無いため）。
  */
-describe('北海道 倍率パイプラインα（Y-6・R8=323レコード＋掛-1(全14管内R7完走):R7=325レコード＝648レコード・coverage=partial）', () => {
+describe('北海道 倍率パイプラインα（Y-6・R8=323レコード＋掛-1(全14管内R7完走):R7=325レコード＋掛-1(3年度目・空知のみ):R6=32レコード＝680レコード・coverage=partial）', () => {
   const { records } = HOKKAIDO_COMPETITION_RATES;
 
   it('coverageがpartialを示している', () => {
     expect(HOKKAIDO_COMPETITION_RATES.coverage.status).toBe('partial');
   });
 
-  it('648レコードが収録されている(R8年度323+R7年度325・全14管内R7完走)', () => {
-    expect(records.length).toBe(648);
+  it('680レコードが収録されている(R8年度323+R7年度325+R6年度32(空知のみ))', () => {
+    expect(records.length).toBe(680);
     expect(records.filter((r) => r.fiscalYear === '令和7年度（2025年度）').length).toBe(325);
     expect(records.filter((r) => !r.fiscalYear).length).toBe(323);
+    expect(records.filter((r) => r.fiscalYear === '令和6年度（2024年度）').length).toBe(32);
   });
 
   it('全レコードのquota>0・finalApplicants>=0・finalRateが自前算出値(applicants/quota)と整合する', () => {
