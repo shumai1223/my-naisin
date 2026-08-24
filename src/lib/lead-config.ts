@@ -235,6 +235,14 @@ const KANTO_MORI = offerFor('morijuku-text', {
   body: '内申の比重が地域で異なる中、合否ラインまでの距離は早く知るほど対策が打てます。関東で校舎数の多い個別指導の無料体験授業で、今の弱点を見える化しませんか。費用はかかりません。',
 });
 
+/**
+ * S11-4（ops/PROPOSALS.md §3-C 対立4）の裁定: この県override（保護者LP=`/hogosha`のFP相談が
+ * 塾体験に置換される挙動）は「設計意図と矛盾する」という指摘（ops/MONEY.md §2-a a8）があったが、
+ * EV比較で現行挙動の方が高い（`moshimo-garden-chochiku` ¥103.5/click < `morijuku-text`/
+ * `campus-text` ¥360/click）ため**コード変更しない**と裁定済み（EV比較はコード上の定数からの
+ * 算術であり反論の余地がない）。「EV最大化と保護者の意思決定文脈のどちらを優先するか」は製品判断
+ * として👤に残す＝このコメントは裁定の明文化のみで、動作は変更しない。
+ */
 export const PREFECTURE_LEAD_OVERRIDES: Partial<Record<string, Partial<LeadOffer>>> = {
   // 関西（個別指導キャンパスの地盤）
   osaka: KANSAI_CAMPUS,

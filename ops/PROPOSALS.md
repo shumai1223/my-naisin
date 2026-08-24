@@ -120,7 +120,7 @@
 | S11-2 | 季節スワップに「専用枠EV < フォールバックEV なら採用しない」ガード | 1.0 | **フリーズ前(11/14)必達** | 採用（避けられる損失 ¥108〜240/click） |
 | S1-4 | `FutoukouLeadCTA` を `selectLeadOffer` 経由に統一 | 1.5 | 9月 | 採用。**✅2026-08-24対応済み(loop・`b3124ab`)。本行はstale記述だった**: 主枠をEVエンジン(`selectLeadOffer`)経由に統一済み |
 | S1-2 | `moshimo-manecafe` を既存FP実験のアームに追加 | 0.5 | 8/31まで | 採用（ゼロサムの配分変更＝情報価値のみ）。**✅対応済み**（`experiments.ts`に`manecafe`アーム実装済み） |
-| S11-4 | `/hogosha` 県override の裁定を明文化（**コード変更しない**） | 0.5 | 9月 | 採用（§3-C 対立4 の裁定を継承） |
+| S11-4 | `/hogosha` 県override の裁定を明文化（**コード変更しない**） | 0.5 | 9月 | 採用（§3-C 対立4 の裁定を継承）。**✅2026-08-25対応済み(loop)**: `lead-config.ts`の`PREFECTURE_LEAD_OVERRIDES`直上に裁定内容をコメントとして明文化（動作変更なし・tsc/jest lead-config系green） |
 | S4-4 | `check:orphans` を `check:all` に組み込む | 0.5 | 8/31まで | 採用（S3-1〜5 より前に入れる）。**✅対応済み**（`package.json`の`check:all`に含まれる） |
 | S5-1 | セキュリティヘッダ4本を `next.config.mjs` の `headers()` で配信 | 0.5 | 8/31まで | 採用。**`Referrer-Policy` は現行値を1文字も変えない**（→GRAVEYARD G-11）。**✅対応済み**（`next.config.mjs`の`headers()`実装済み・本番反映のcurl確認は👤へ依頼中） |
 | S5-3 | `indexnow.yml` の paths に `school-page-lookup.ts` を追加 | 0.2 | 8/31まで | 採用。**✅対応済み**（`.github/workflows/indexnow.yml`のpathsに含まれる） |
