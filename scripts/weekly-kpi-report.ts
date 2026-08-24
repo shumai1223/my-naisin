@@ -96,7 +96,11 @@ function readLatestLineFriends(): number | undefined {
   try {
     const p = path.resolve(__dirname, '..', 'data', 'line-friends.json');
     const raw = JSON.parse(fs.readFileSync(p, 'utf8')) as { entries?: LineFriendsEntry[] };
-    return latestEntry({ entries: raw.entries ?? [] })?.friends;
+    // ⚠️2026-08-24: ここは以前 .friends（ブロック込みの累計）を読んでいたが、
+    // roadmap-gates.ts の G1/G5 の定義は「友だち数（累計・**ブロック除く**）」であり不一致だった。
+    // blocked が常に0だったため誰も気づけず、2026-08-24に初めてブロック3人が発生して顕在化した。
+    // 名簿Nは「実際に到達できる人数」でなければ意味がないので active（ブロック除く）を使う。
+    return latestEntry({ entries: raw.entries ?? [] })?.active;
   } catch {
     return undefined;
   }

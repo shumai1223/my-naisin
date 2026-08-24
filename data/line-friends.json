@@ -168,9 +168,8 @@
     {
       "date": "2026-08-24",
       "friends": 81,
-      "active": 81,
-      "blocked": 0,
-      "_unconfirmed": "👤からfriends=81のみ共有。active/blockedは未転記のため friends と同値・ブロック0を暫定値として置いた（実測ではない）。次回のOAM確認時に上書きすること"
+      "active": 78,
+      "blocked": 3
     }
   ]
 }
