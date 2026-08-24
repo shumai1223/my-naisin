@@ -135,12 +135,18 @@ export async function getRecentClicks(limit = 25): Promise<ClickRecentRow[]> {
 }
 
 /**
- * 「信頼できるクリック」= 自サイト（my-naishin.com）の面から押された＝内部referer付き。
+ * 「信頼できるクリック」= 自サイト（my-naishin.com）の**面（パス付きページ）**から押された＝内部referer付き。
  * 実ブラウザのCTAクリックは必ず内部refererを伴う（[[bot-filter]] の classifyClick と同じ前提）ため、
  * これを満たさない /go 直叩き（ブラウザUAのスクレイパ）を集計から除外する軸になる。
  * 取り込み時点で bot-UA・空UA・IPバーストは既に除外済みなので、ここはさらに「内部referer」で絞る。
+ *
+ * ⚠️アンダースコア（1文字ワイルドカード）でパス部分の存在を必須にすること。`LIKE 'https://my-naishin.com%'`
+ * （アンダースコア無し）は root_only（パス無し・トップページ直リンクを装うスケジュール実行bot）まで
+ * 「信頼できる」に含めてしまう（`ops/LOOP_CONTRACT.md` §3-2で確立済みの罠・実測で28日950件超のうち
+ * 64件がこの誤り由来の過大計上だった＝2026-08-24修正）。`isInternalReferer`（ホスト名一致のみ）より
+ * 厳格な条件をこのSQL側では課している。
  */
-const TRUSTED_CLAUSE = "referer LIKE 'https://my-naishin.com%'";
+const TRUSTED_CLAUSE = "referer LIKE 'https://my-naishin.com/_%'";
 
 /** trustedOnly=true なら内部referer条件を AND 連結する（固定文字列＝SQLインジェクションにならない）。 */
 function trustFilter(trustedOnly?: boolean): string {
