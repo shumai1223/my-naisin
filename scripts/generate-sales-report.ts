@@ -2,9 +2,12 @@
  * 月次 送客実績レポート生成（Markdown）＝来季の直接送客契約の「営業資料」の土台（H5）。
  *
  *   # まず D1 のクリックを JSON でエクスポート（unsubscribed等の絞りは不要・clicksテーブル）：
+ *   # ⚠️referer条件は src/lib/clicks-db.ts の TRUSTED_CLAUSE と同一にすること（S9-3・root_only bot除外）。
+ *   # アンダースコア（1文字ワイルドカード）を落とすとroot_only botを「信頼できる」に含めてしまう。
  *   wrangler d1 execute my-naishin-leads --remote --json \
  *     --command "SELECT affiliate_id, prefecture, placement, COUNT(*) AS clicks
  *                FROM clicks WHERE created_at >= datetime('now','-30 days')
+ *                AND referer LIKE 'https://my-naishin.com/_%'
  *                GROUP BY affiliate_id, prefecture, placement" > clicks.json
  *
  *   # レポート生成（標準出力 / --out でファイル保存）：

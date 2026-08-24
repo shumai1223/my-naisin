@@ -242,6 +242,15 @@ node scripts/d1q.mjs "SELECT * FROM parent_funnel_events WHERE prefecture_code='
 > `scripts/generate-sales-report.ts`（実際のB2B営業資料の土台）が現状referer/user_agent列を
 > エクスポートしておらず、正しく直すにはwrangler SQLエクスポートの列追加も必要な大きめの変更に
 > なるため、外部提出物に関わる変更として今回は着手しない（次回以降、影響範囲を確認してから着手）。
+>
+> ✅ **2026-08-25 #1も完全対応済みと判明（S9-3として実施・別セッション+本セッション）**:
+> `src/app/admin/report/page.tsx`の`trustedOnly = sp.clicks !== 'all'`は2026-06-28から既に既定trueで
+> `/admin/report`は元々human-onlyがデフォルト。`TRUSTED_CLAUSE`自体の厳格化（アンダースコア追加で
+> root_only botを除外）はcommit`f9aac30`(2026-08-24)で完了済み。残っていた`generate-sales-report.ts`の
+> exportSQL例（referer列フィルタが無くroot_only botを含んでいた）を本セッションで追記修正した
+> （`AND referer LIKE 'https://my-naishin.com/_%'`）。これでDW-3の最小の直し方3点は全て対応完了。
+> **「fp-soudanが2位」という認識訂正は、この修正が反映される全ての集計（/admin/report・今後の
+> generate-sales-report.ts実行分）に自動的に反映される。**
 > **#3（/goのIPバースト窓を日次にも拡張）も見送り**: 学校等の共有IPから同一県の生徒が1日に
 > 複数回アフィリリンクを踏む正当なケースを誤検知するリスクがあり、需要データが無いまま
 > 拡張するのは時期尚早と判断。

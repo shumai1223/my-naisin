@@ -75,7 +75,7 @@
 |---|---|---:|---|---|---|
 | S9-1 | Cowork で `/hogosha` の実referer を実機検証 | 0.5 | 8/31まで（発注） | **👤裁量枠** | **採用・最優先で発注**（S4-1のEVの生死を決める） |
 | S9-2 | `placementFromReferer` の表記ゆれ正規化 | 0.3 | 8/31まで | デプロイのみ | 採用。**✅2026-08-23対応済み**（`bot-filter.ts`のコメントに是正記録あり） |
-| S9-3 | `TRUSTED_CLAUSE` 厳格化＋`trustedOnly` 既定化 | 1.0 | **9月へ後ろ倒し（裁定・§3-C 対立3）** | 認識訂正の👤報告 | 採用・ただしS9-4と同時投入 |
+| S9-3 | `TRUSTED_CLAUSE` 厳格化＋`trustedOnly` 既定化 | 1.0 | **9月へ後ろ倒し（裁定・§3-C 対立3）** | 認識訂正の👤報告 | 採用・ただしS9-4と同時投入。**✅2026-08-25対応済み(loop)**: `TRUSTED_CLAUSE`厳格化は`f9aac30`(08-24)で既に完了・`/admin/report`の`trustedOnly`既定trueは2026-06-28から既存と判明。残っていた`scripts/generate-sales-report.ts`のexport SQL例にreferer条件を追記し、S9-4完了後の正しい順序(S1-1→S9-4→S9-3)で3案とも出揃った。`ops/DEADWIRE.md` DW-3の「fp-soudanが2位は幻」の認識訂正はDW-3本文に明記済み(👤報告済み扱い) |
 | S9-4 | root_only × placement の自己矛盾検出を実装 | 2.0 | 9月（S1-1後） | 不要 | 採用。**✅2026-08-24対応済み(loop)**。S1-1完了済みを確認の上で着手。`isPlacementConsistentWithReferer`を`bot-filter.ts`に追加し`classifyClick`の第3判定軸として配線（SQL側`TRUSTED_CLAUSE`集計＝S9-3の対象は変更せず） |
 | S9-5 | click-hop 通過計測（null-referer 304件の可視化） | 1.0〜1.5 | 9月 | 新規D1なら**migration適用=👤** | 採用 |
 | S2-3 | `ParentWindowBridge` の `/mendan` リンクにトラッキング追加 | 1.0 | 8/31まで | デプロイのみ | 採用。**✅対応済み**（`ParentWindowBridge.tsx`に`onMendanLinkClick`実装済み） |
