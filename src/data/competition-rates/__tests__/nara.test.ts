@@ -77,6 +77,16 @@ describe('奈良県 倍率パイプラインα（Y-6・全日制29校71レコー
     expect(distinctSchools.size).toBe(17);
   });
 
+  it('掛-1(学校別×多年度・3年度目): 令和6年度(R6)分レコードが19件収録され、表アの「合計」(quota4,440・applicants4,702)と完全一致する。R7と同一の学校名・学科構成', () => {
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    expect(r6.length).toBe(19);
+    expect(r6.reduce((a, r) => a + r.quota, 0)).toBe(4440);
+    expect(r6.reduce((a, r) => a + r.finalApplicants, 0)).toBe(4702);
+
+    const distinctSchools = new Set(r6.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(17);
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of NARA_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.pref\.nara\.lg\.jp\//);

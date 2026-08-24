@@ -41,6 +41,16 @@
  * 表イ側（特色選抜メイン）に現れるため同様の理由で除外し、普通科相当の主要コースのみを収録した。
  * 機械集計（quota4,400・applicants4,490、17校19レコード）が表アの「合計」行（募集人員4,400・
  * 出願者数4,490）と初回転記で完全一致した（再修正なし）。倍率は資料に印字が無いため自前算出。
+ *
+ * 【掛-1（学校別×多年度）追加・3年度目】令和6年度分を追加（PHASE0_FINDINGS.md 2章項目7
+ * follow-up・3年度以上43/47→44/47への前進）。一次ソースは奈良県「令和6年度奈良県公立高等学校
+ * 入学者一般選抜等合格者数」（令和6年3月15日公表・全2ページ）——県公式サイトから現在も直接
+ * 取得可能（Waybackを介さず`https://www.pref.nara.lg.jp/documents/5981/`配下で現存）。R7と
+ * 同一の資料構成（表ア＝一般選抜が定員の全部/大半を占める学校のみ・表イ＝特色選抜残り枠は
+ * 同じ理由で除外）。ToUnicodeマッピング欠落によりpdftoppm 200dpiビジョン解析で全2頁を転記した。
+ * 機械集計（quota4,440・applicants4,702、17校19レコード）が表アの「合計」行（募集人員4,440・
+ * 出願者数4,702）と初回転記で完全一致した（再修正なし）。R7と学校名・学科構成は完全一致
+ * （統廃合・新設なし）。倍率は資料に印字が無いため自前算出（applicants÷quota、小数第2位四捨五入）。
  */
 import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
 
@@ -58,6 +68,12 @@ export const NARA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       docTitle: '奈良県教育委員会 令和7年度奈良県公立高等学校入学者一般選抜等合格者数',
       fiscalYear: '令和7年度（2025年度）',
       fetchedAt: '2026-08-09',
+    },
+    {
+      url: 'https://www.pref.nara.lg.jp/documents/5981/r6ippann_goukakusyasuu.pdf',
+      docTitle: '奈良県教育委員会 令和6年度奈良県公立高等学校入学者一般選抜等合格者数',
+      fiscalYear: '令和6年度（2024年度）',
+      fetchedAt: '2026-08-24',
     },
   ],
   coverage: {
@@ -170,5 +186,24 @@ export const NARA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '高取国際', department: '普通', quota: 120, finalApplicants: 139, finalRate: 1.16, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '大和広陵', department: '普通', quota: 120, finalApplicants: 72, finalRate: 0.6, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '一条', department: '普通', quota: 200, finalApplicants: 296, finalRate: 1.48, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '奈良', department: '普通', quota: 360, finalApplicants: 423, finalRate: 1.18, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '高円芸術', department: '普通', quota: 120, finalApplicants: 149, finalRate: 1.24, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '高田', department: '普通', quota: 360, finalApplicants: 426, finalRate: 1.18, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '郡山', department: '普通', quota: 360, finalApplicants: 428, finalRate: 1.19, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '添上', department: '普通(人文探究コース以外)', quota: 160, finalApplicants: 130, finalRate: 0.81, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '橿原', department: '普通', quota: 320, finalApplicants: 324, finalRate: 1.01, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '畝傍', department: '普通', quota: 360, finalApplicants: 430, finalRate: 1.19, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '桜井', department: '普通(一般コース)', quota: 280, finalApplicants: 277, finalRate: 0.99, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '五條', department: '普通', quota: 240, finalApplicants: 183, finalRate: 0.76, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '生駒', department: '普通', quota: 320, finalApplicants: 352, finalRate: 1.1, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '奈良北', department: '普通', quota: 280, finalApplicants: 280, finalRate: 1, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '奈良北', department: '数理情報', quota: 80, finalApplicants: 53, finalRate: 0.66, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '香芝', department: '普通(表現探究コース)', quota: 40, finalApplicants: 32, finalRate: 0.8, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '香芝', department: '普通(表現探究コース以外)', quota: 280, finalApplicants: 301, finalRate: 1.08, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '西和清陵', department: '普通', quota: 200, finalApplicants: 209, finalRate: 1.05, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '法隆寺国際', department: '普通', quota: 200, finalApplicants: 197, finalRate: 0.99, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '高取国際', department: '普通', quota: 120, finalApplicants: 125, finalRate: 1.04, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '大和広陵', department: '普通', quota: 160, finalApplicants: 92, finalRate: 0.57, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '一条', department: '普通', quota: 200, finalApplicants: 291, finalRate: 1.46, fiscalYear: '令和6年度（2024年度）' },
   ],
 };
