@@ -104,7 +104,7 @@
 | ID | 施策名 | 工数 | 時期 | 裁定 |
 |---|---|---:|---|---|
 | **S3-1**<br>(≡S7-3) | 学校固有の多年度（募集人員・応募者数・倍率）を描画 | **8.0**（§3-A で裁定） | 8/31着手・**フリーズ前完了必達** | 採用。**G7のため配置を再指定**（§5-2）。**✅対応済み**（T-A1と同一実装。`school-page-lookup.ts`の`buildSchoolHistoryForPrefecture`→学校ページの「募集人員・応募者数・倍率の推移」テーブルに配線済み・G7順序(`SchoolPageParentBridge`→`SchoolPageConvertCTA`)も遵守確認済み） |
-| S3-3 | 学校名の短縮形を title/h1/meta/アンカーへ併記 | 1.5 | 8/31まで（**1県限定で開始**） | 採用（BAR V-6 の検証手順を厳守）。**🟡2026-08-24 aichi限定でtitle/description/h1に実装済み(loop・165ff14)**。`src/lib/school-name-short-form.ts`(shortenSchoolName)新設。**アンカー(近隣校リンク等)は未対応・GSCで4週間CTR追跡してから展開県拡大とアンカー対応を判断**（V-6の検証手順どおり） |
+| S3-3 | 学校名の短縮形を title/h1/meta/アンカーへ併記 | 1.5 | 8/31まで（**1県限定で開始**） | 採用（BAR V-6 の検証手順を厳守）。**🟡2026-08-24 aichi限定でtitle/description/h1に実装済み(loop・165ff14)・2026-08-25 01:10に本番反映を実機確認済み(title「愛知県立旭丘高等学校（旭丘高校）の入試倍率・募集人員」)**。`src/lib/school-name-short-form.ts`(shortenSchoolName)新設。**GSC 4週間CTR追跡の起点は2026-08-25。次回判断は2026-09-22頃**。**アンカー(近隣校リンク等)は未対応・追跡後に展開県拡大とアンカー対応を判断**（V-6の検証手順どおり） |
 | S3-4 | `HighSchool` + `FAQPage` 構造化データ（実数のみ・`AggregateRating`は作らない） | 2.5 | 9月 | 採用 |
 | S3-5 | 2年度しかない5県（hokkaido/nara/niigata/oita/saga）の3年度目収集 | **15.0** | 9月着手・フリーズ前完了 | 採用・ただし優先度は最下位群（§13 H-9） |
 | S6-1 | 学校ページの数値直下に年度別一次ソースURLを表示 | 1.5 | 9月（S3-1と同時） | 採用 |
