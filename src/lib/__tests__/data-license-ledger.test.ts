@@ -45,9 +45,15 @@ describe('DATA_LICENSE_LEDGER（T-S13A A-1・47県利用条件台帳）', () => 
     expect(DATA_LICENSE_LEDGER.fukuoka.evidence).toContain('令和6年度分191件');
   });
 
-  test('redistributableOkPrefectures()は現時点でmie/gifuの2県を返す（kill_criteria: 10県未満のため商品化はまだ未達）', () => {
+  test('okinawa: 沖縄県教育委員会の回答(2026-08-24)により"ok"（転載・被リンクとも明示的に許諾した唯一の県）', () => {
+    expect(DATA_LICENSE_LEDGER.okinawa.redistribution).toBe('ok');
+    expect(DATA_LICENSE_LEDGER.okinawa.evidence).toContain('差し支えございません');
+    expect(DATA_LICENSE_LEDGER.okinawa.verifiedAt).toBe('2026-08-24');
+  });
+
+  test('redistributableOkPrefectures()は現時点でgifu/mie/okinawaの3県を返す（kill_criteria: 10県未満のため商品化はまだ未達）', () => {
     // ⚠️このテストはA-1進捗を記録するリグレッションガード。次のセッションが県を
     // 追加調査してokが増えたら、この配列を実態に合わせて更新すること（減ることは無いはず）。
-    expect(redistributableOkPrefectures().sort()).toEqual(['gifu', 'mie']);
+    expect(redistributableOkPrefectures().sort()).toEqual(['gifu', 'mie', 'okinawa']);
   });
 });

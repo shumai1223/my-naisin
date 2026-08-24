@@ -118,7 +118,20 @@ export const DATA_LICENSE_LEDGER: Record<string, DataLicenseLedgerEntry> = {
   yamaguchi: { prefecture: 'yamaguchi', sourceHost: '.lg.jp', ...UNKNOWN() },
   kagoshima: { prefecture: 'kagoshima', sourceHost: '.lg.jp', ...UNKNOWN() },
   niigata: { prefecture: 'niigata', sourceHost: '.lg.jp', ...UNKNOWN() },
-  okinawa: { prefecture: 'okinawa', sourceHost: '.lg.jp', ...UNKNOWN() },
+  okinawa: {
+    prefecture: 'okinawa',
+    sourceHost: '.lg.jp',
+    redistribution: 'ok',
+    evidence:
+      '沖縄県教育委員会県立学校教育課からGmail回答（2026-08-24 09:22・スレッド1a03126277ffefe6）: ' +
+      '「公表データの転載および当課ウェブサイトへのリンク設定につきましては、差し支えございません。' +
+      'ご提示いただいた通り、出典（資料名およびURL）を明記のうえ、ご活用いただけますと幸いです」。' +
+      '「応募状況」（募集人員・志願者数・倍率等）データの再配布・引用を出典明記条件で明確に許諾。' +
+      'gifu/mieと異なり被リンクも明示的にOKだった（唯一の完全許諾県）。「公表データの更新やURLの' +
+      '変更等が予告なく行われる場合がある」旨の留保あり＝A-2実装時は出典URLの定期疎通確認が必要。' +
+      'A-2実装時はこの県のレコードに出典URLを必ず付与する条件で応募状況データを収録してよい',
+    verifiedAt: '2026-08-24',
+  },
   yamanashi: { prefecture: 'yamanashi', sourceHost: '.lg.jp', ...UNKNOWN() },
   nara: { prefecture: 'nara', sourceHost: '.lg.jp', ...UNKNOWN() },
   akita: { prefecture: 'akita', sourceHost: '.lg.jp', ...UNKNOWN() },

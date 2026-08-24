@@ -446,10 +446,11 @@
       "lane": "kyoiku-i",
       "sourceTaskId": "X-14",
       "sentDate": "2026-08-06",
-      "status": "awaiting",
-      "followupCount": 0,
-      "threadId": "19fcc7d2d5b93249",
-      "note": "8/6一斉送信23通のうち1件。 2026-08-21: 15日経過・返信無し(岩手のみ08-17に別件[リンク可否]の回答あり・再配布可否は未回答)のため「応募状況」データ再配布可否を尋ねる追撃下書きを作成(draftId r-9001312007409860235)。"
+      "lastContactDate": "2026-08-24",
+      "status": "replied",
+      "followupCount": 1,
+      "threadId": "1a03126277ffefe6",
+      "note": "8/6一斉送信23通のうち1件。8/23夜に追撃下書き(draftId r-9001312007409860235)を送信・8/24 09:22返信あり: 「応募状況」（募集人員・志願者数・倍率等）の転載および当課ウェブサイトへのリンク設定はいずれも差し支えない、出典（資料名・URL）明記のうえで活用可、との明確な許諾。gifu/mieと異なり被リンクも明示的にOK。追撃対象外。data-license-ledger.tsのokinawaエントリをredistribution:'ok'へ更新(2026-08-24)。"
     },
     {
       "id": "kyoiku-iwate-0806",
