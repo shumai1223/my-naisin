@@ -42,6 +42,25 @@ console.log(
 );
 console.log('レーン別:', Object.entries(summary.queuedByLane).map(([l, n]) => `${l}=${n}`).join(' / '), '\n');
 
+// S8-3: sortQueueByPriority()はchannel優先(line→email→form)を第1キーにするため、
+// リンク価値が最も高いkyoiku-i(.lg.jp・BAR§0-3実測)がレポートの先頭に来るとは限らない。
+// 送信優先度の設計(sortQueueByPriority)自体は他の利用箇所への影響を避けるため変更せず、
+// この別枠のみで「👤が最初に見るべき33件」を経過日数付きで提示する。
+const kyoikuIQueued = entries
+  .filter((e) => e.lane === 'kyoiku-i' && e.status === 'queued')
+  .sort((a, b) => (a.draftedAt ?? '').localeCompare(b.draftedAt ?? ''));
+
+if (kyoikuIQueued.length > 0) {
+  console.log(`🏛️ 最優先（.lg.jp・権威価値最高＝BAR§0-3実測・${kyoikuIQueued.length}件・下書きが古い順）\n`);
+  for (const e of kyoikuIQueued) {
+    const days = e.draftedAt ? Math.floor((Date.now() - new Date(e.draftedAt).getTime()) / 86400000) : null;
+    console.log(`--- [${e.channel}] ${e.org}${days !== null ? `（下書きから${days}日経過）` : ''} ---`);
+    console.log(`  宛先: ${e.contact ?? '(未確定)'}`);
+    if (e.subject) console.log(`  件名: ${e.subject}`);
+    console.log('');
+  }
+}
+
 const sorted = sortQueueByPriority(entries);
 
 if (sorted.length === 0) {
