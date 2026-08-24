@@ -2068,6 +2068,18 @@
       "followupCount": 0,
       "threadId": "1a01a2807486215f",
       "note": "08-19 22:17台の第2波送信(前々回・前回とも反映漏れ、全件突合の再チェックで発見)。2026-08-21にin:sent実測で確認し反映。"
+    },
+    {
+      "id": "lane9-zenkokukateika",
+      "org": "全国家庭科教育協会",
+      "lane": "npo",
+      "sourceTaskId": "T-C2",
+      "sentDate": "2026-08-23",
+      "lastContactDate": "2026-08-24",
+      "status": "replied",
+      "followupCount": 0,
+      "threadId": "1a024d819dfdd024",
+      "note": "8/23 22:13送信、8/24 10:07返信あり(事務局長 浅井氏)。「貴重な情報をありがとうございます。サイトをじっくり拝見させていただき、何かのご連絡をするかもしれません」という挨拶程度の受領確認で具体的な言及なし。追撃対象外(status=repliedのためcomputeFollowupCandidatesの対象外)。outreach-queue.jsonの元エントリ(lane9-zenkokukateika)は既存パターン(lane9-jses等)にならい削除・こちらへ移設。"
     }
   ]
 }

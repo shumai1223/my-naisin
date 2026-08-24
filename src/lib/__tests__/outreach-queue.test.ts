@@ -281,7 +281,9 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // 任意項目)・愛知(gojokai@fukuri.pref.aichi.jp・組織名義メール確認済み)の2件がcandidateとして
     // 合格し本文執筆済みでqueued追加(205→207)。栃木/群馬/東京/石川/福井/長野/山口/熊本の8県は
     // 電話のみ・独立サイトなし・会員限定ゲートありのいずれかでexcluded。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(207);
+    // 2026-08-24: 全国家庭科教育協会(lane9-zenkokukateika)が8/23送信・8/24返信を受け
+    // outreach-ledger.jsonへ移設されqueueから削除(207→206)。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(206);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {
