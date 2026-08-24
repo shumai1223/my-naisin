@@ -4,7 +4,8 @@
  * +渡島地区(全日制)+檜山地区(全日制)+上川地区(全日制)+留萌地区(全日制)+宗谷地区(全日制)
  * +オホーツク地区(全日制)+十勝地区(全日制)+釧路地区(全日制)+根室地区(全日制)＝
  * 全14管内すべてに着手済み。ただし各地区の連携型（別選抜方式でスキーマ不一致）のみ
- * スコープ外のためstatus='partial'のまま）。
+ * スコープ外のためstatus='partial'のまま）。R8/R7に加えR6（令和6年度・3年度目）も
+ * 2026-08-24（掛-1第14〜27弾）に全14管内完走した（3年度分・合計966レコード）。
  *
  * 一次ソース: 北海道教育委員会「R8入学者選抜状況報告書 §3 学校別受検者数及び合格者数」
  * （令和8年度＝2026年度入学者選抜・全14頁・管内(空知/石狩/後志/胆振/日高/渡島/檜山/上川/
@@ -49,7 +50,7 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     },
     {
       url: 'https://www.dokyoi.pref.hokkaido.lg.jp/fs/1/0/4/8/5/8/2/3/_/p9-22_gakkoubetu.pdf',
-      docTitle: '北海道教育委員会 R6入学者選抜状況報告書「§3 学校別受検者数及び合格者数」（全14頁・R7/R8と同一シリーズ・掛-1第26弾・空知+石狩+札幌市+後志+胆振+日高+渡島+檜山+上川+留萌+宗谷+オホーツク+十勝+釧路の14地区に着手・残り根室のみ）',
+      docTitle: '北海道教育委員会 R6入学者選抜状況報告書「§3 学校別受検者数及び合格者数」（全14頁・R7/R8と同一シリーズ・掛-1第27弾でhokkaido全14管内のR6完走）',
       fiscalYear: '令和6年度（2024年度）',
       fetchedAt: '2026-08-24',
     },
@@ -309,8 +310,18 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '弟子屈・厚岸翔洋・釧路北陽・霧多布、専門/総合12レコード=釧路湖陵理数探究・釧路工業(電子機械・' +
       '電気・建築・土木・工業化学)・釧路商業(流通マネジメント・会計マネジメント・情報マネジメント)・' +
       '厚岸翔洋海洋資源・釧路明輝総合・標茶総合・年度差なし)。全21行を受検者数÷募集人員≒印字済み' +
-      '倍率の検算で誤読なしを確認した。**残り1管内(根室)のR6追加で全14管内完走**(次回セッションで達成見込み)' +
-      '(coverage.statusは既存の\'partial\'のまま・R6分は空知+石狩+札幌市+後志+胆振+日高+渡島+檜山+上川+留萌+宗谷+オホーツク+十勝+釧路のみのpartial coverageと明記)。',
+      '倍率の検算で誤読なしを確認した。' +
+      '⚠️2026-08-24追記14(掛-1第27弾・hokkaido全14管内のR6完走): 根室地区(全14頁の最終頁)のR6分' +
+      '11レコード(普通5+専門6)を追加し、**これでhokkaido全14管内(空知/石狩/札幌市/後志/胆振/日高/' +
+      '渡島/檜山/上川/留萌/宗谷/オホーツク/十勝/釧路/根室)のR6完走を達成した**(R6合計318レコード・' +
+      'R7の325レコードとほぼ同規模)。学校・学科構成はR7と完全一致(普通5校=根室・別海・中標津・標津・' +
+      '羅臼、専門6レコード=別海酪農経営・中標津農業(生産技術・食品ビジネス)・根室(商業・事務情報)・' +
+      '中標津総合ビジネス)。羅臼高校の普通科(連携型)もR7同様スコープ外のまま。全11行を受検者数÷' +
+      '募集人員≒印字済み倍率の検算で誤読なしを確認した。' +
+      '**掛-1(学校別×多年度)のR6(3年度目)全14管内完走はこれで達成**。同一シリーズのR5(4年度目)版' +
+      'ページが教委サイトに存在するかは未調査。次のステップは①R5版の探索、②他県(tokyo/hiroshima/' +
+      'saitama等のcategory-detail粒度県)への多年度化技法の横展開、のいずれかを次回セッションで判断する。' +
+      '(coverage.statusは既存の\'partial\'のまま・全14管内の普通/専門を収録も、連携型のみスコープ外のためpartialを維持)。',
   },
   officialSubtotals: [],
   records: [
@@ -1315,5 +1326,17 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '厚岸翔洋', department: '海洋資源', quota: 40, finalApplicants: 13, finalRate: 0.33, fiscalYear: '令和6年度（2024年度）' },
     { schoolName: '釧路明輝', department: '総合', quota: 160, finalApplicants: 203, finalRate: 1.27, fiscalYear: '令和6年度（2024年度）' },
     { schoolName: '標茶', department: '総合', quota: 80, finalApplicants: 49, finalRate: 0.61, fiscalYear: '令和6年度（2024年度）' },
+    // 掛-1第27弾: 根室地区(全14頁の最終頁)・令和6年度（2024年度）分。これでhokkaido全14管内のR6完走。
+    { schoolName: '根室', department: '普通', quota: 120, finalApplicants: 109, finalRate: 0.91, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '別海', department: '普通', quota: 120, finalApplicants: 78, finalRate: 0.65, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '中標津', department: '普通', quota: 160, finalApplicants: 117, finalRate: 0.73, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '標津', department: '普通', quota: 40, finalApplicants: 17, finalRate: 0.43, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '羅臼', department: '普通', quota: 40, finalApplicants: 24, finalRate: 0.6, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '別海', department: '酪農経営', quota: 40, finalApplicants: 3, finalRate: 0.08, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '中標津農業', department: '生産技術', quota: 40, finalApplicants: 17, finalRate: 0.43, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '中標津農業', department: '食品ビジネス', quota: 40, finalApplicants: 19, finalRate: 0.48, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '根室', department: '商業', quota: 40, finalApplicants: 24, finalRate: 0.6, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '根室', department: '事務情報', quota: 40, finalApplicants: 19, finalRate: 0.48, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '中標津', department: '総合ビジネス', quota: 40, finalApplicants: 32, finalRate: 0.8, fiscalYear: '令和6年度（2024年度）' },
   ],
 };
