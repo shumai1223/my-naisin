@@ -49,7 +49,7 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     },
     {
       url: 'https://www.dokyoi.pref.hokkaido.lg.jp/fs/1/0/4/8/5/8/2/3/_/p9-22_gakkoubetu.pdf',
-      docTitle: '北海道教育委員会 R6入学者選抜状況報告書「§3 学校別受検者数及び合格者数」（全14頁・R7/R8と同一シリーズ・掛-1第19弾・空知+石狩+札幌市+後志+胆振+日高の6地区に着手）',
+      docTitle: '北海道教育委員会 R6入学者選抜状況報告書「§3 学校別受検者数及び合格者数」（全14頁・R7/R8と同一シリーズ・掛-1第20弾・空知+石狩+札幌市+後志+胆振+日高+渡島の7地区に着手）',
       fiscalYear: '令和6年度（2024年度）',
       fetchedAt: '2026-08-24',
     },
@@ -250,9 +250,15 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '(印字ページ14末尾〜15冒頭=PDF内部頁6〜7)。R7(7レコード)と学校名・学科構成が完全一致' +
       '(普通4校=平取・富川・静内・えりも、専門/総合3レコード=静内農業(食品科学・生産科学)・' +
       '浦河総合・年度差なし)。全行について受検者数÷募集人員≒印字済み倍率の検算で誤読なしを確認した。' +
-      '**残り9管内(渡島/檜山/上川/留萌/宗谷/オホーツク/十勝/釧路/根室)のR6追加は' +
-      '次回セッションへ持ち越し**' +
-      '(coverage.statusは既存の\'partial\'のまま・R6分は空知+石狩+札幌市+後志+胆振+日高のみのpartial coverageと明記)。',
+      '⚠️2026-08-24追記7(掛-1第20弾): 渡島地区のR6分30レコード(普通10+専門/総合20)も追加した' +
+      '(印字ページ15末尾=普通・印字ページ16冒頭=専門/総合、PDF内部頁7〜8)。R7(普通10+専門/総合20=30' +
+      'レコード)と学校名・学科構成が完全一致(普通10校=函館中部・函館西・南茅部・上磯・七飯・松前・' +
+      '八雲・長万部・市立函館・知内、専門/総合20レコード=函館中部理数・大野農業(3学科)・函館工業' +
+      '(5学科)・函館商業(4学科)・福島商業・八雲総合ビジネス・函館水産(4学科)・森総合・年度差なし)。' +
+      '全30行について受検者数÷募集人員≒印字済み倍率の検算(全行1decimal完全一致)で誤読なしを確認した。' +
+      '**残り8管内(檜山/上川/留萌/宗谷/オホーツク/十勝/釧路/根室)のR6追加は' +
+      '次回セッションへ持ち越し**(檜山地区のテーブルは既に画像取得済みで次回すぐ着手可能)' +
+      '(coverage.statusは既存の\'partial\'のまま・R6分は空知+石狩+札幌市+後志+胆振+日高+渡島のみのpartial coverageと明記)。',
   },
   officialSubtotals: [],
   records: [
@@ -1077,5 +1083,37 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '静内農業', department: '食品科学', quota: 40, finalApplicants: 15, finalRate: 0.38, fiscalYear: '令和6年度（2024年度）' },
     { schoolName: '静内農業', department: '生産科学', quota: 40, finalApplicants: 33, finalRate: 0.83, fiscalYear: '令和6年度（2024年度）' },
     { schoolName: '浦河', department: '総合', quota: 120, finalApplicants: 85, finalRate: 0.71, fiscalYear: '令和6年度（2024年度）' },
+    // 掛-1第20弾: 渡島地区・全日制普通科・令和6年度（2024年度）分。
+    { schoolName: '函館中部', department: '普通', quota: 160, finalApplicants: 190, finalRate: 1.19, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '函館西', department: '普通', quota: 240, finalApplicants: 315, finalRate: 1.31, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '南茅部', department: '普通', quota: 40, finalApplicants: 5, finalRate: 0.13, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '上磯', department: '普通', quota: 40, finalApplicants: 24, finalRate: 0.6, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '七飯', department: '普通', quota: 120, finalApplicants: 116, finalRate: 0.97, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '松前', department: '普通', quota: 40, finalApplicants: 19, finalRate: 0.48, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '八雲', department: '普通', quota: 80, finalApplicants: 56, finalRate: 0.7, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '長万部', department: '普通', quota: 40, finalApplicants: 13, finalRate: 0.33, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '市立函館', department: '普通', quota: 200, finalApplicants: 333, finalRate: 1.67, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '知内', department: '普通', quota: 80, finalApplicants: 42, finalRate: 0.53, fiscalYear: '令和6年度（2024年度）' },
+    // 掛-1第20弾: 渡島地区・専門教育を主とする学科及び総合学科・令和6年度（2024年度）分。
+    { schoolName: '函館中部', department: '理数', quota: 40, finalApplicants: 39, finalRate: 0.98, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '大野農業', department: '農業科学', quota: 40, finalApplicants: 30, finalRate: 0.75, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '大野農業', department: '園芸福祉', quota: 40, finalApplicants: 18, finalRate: 0.45, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '大野農業', department: '食品科学', quota: 40, finalApplicants: 27, finalRate: 0.68, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '函館工業', department: '電子機械', quota: 40, finalApplicants: 69, finalRate: 1.73, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '函館工業', department: '電気情報工学', quota: 40, finalApplicants: 65, finalRate: 1.63, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '函館工業', department: '建築', quota: 40, finalApplicants: 36, finalRate: 0.9, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '函館工業', department: '環境土木', quota: 40, finalApplicants: 48, finalRate: 1.2, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '函館工業', department: '工業化学', quota: 40, finalApplicants: 45, finalRate: 1.13, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '函館商業', department: '流通ビジネス', quota: 40, finalApplicants: 64, finalRate: 1.6, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '函館商業', department: '国際経済', quota: 40, finalApplicants: 47, finalRate: 1.18, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '函館商業', department: '会計ビジネス', quota: 40, finalApplicants: 58, finalRate: 1.45, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '函館商業', department: '情報処理', quota: 40, finalApplicants: 65, finalRate: 1.63, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '福島商業', department: '商業', quota: 40, finalApplicants: 29, finalRate: 0.73, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '八雲', department: '総合ビジネス', quota: 40, finalApplicants: 10, finalRate: 0.25, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '函館水産', department: '海洋技術', quota: 40, finalApplicants: 35, finalRate: 0.88, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '函館水産', department: '水産食品', quota: 40, finalApplicants: 37, finalRate: 0.93, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '函館水産', department: '品質管理流通', quota: 40, finalApplicants: 22, finalRate: 0.55, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '函館水産', department: '機関工学', quota: 40, finalApplicants: 50, finalRate: 1.25, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '森', department: '総合', quota: 40, finalApplicants: 22, finalRate: 0.55, fiscalYear: '令和6年度（2024年度）' },
   ],
 };
