@@ -49,7 +49,7 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     },
     {
       url: 'https://www.dokyoi.pref.hokkaido.lg.jp/fs/1/0/4/8/5/8/2/3/_/p9-22_gakkoubetu.pdf',
-      docTitle: '北海道教育委員会 R6入学者選抜状況報告書「§3 学校別受検者数及び合格者数」（全14頁・R7/R8と同一シリーズ・掛-1第20弾・空知+石狩+札幌市+後志+胆振+日高+渡島の7地区に着手）',
+      docTitle: '北海道教育委員会 R6入学者選抜状況報告書「§3 学校別受検者数及び合格者数」（全14頁・R7/R8と同一シリーズ・掛-1第21弾・空知+石狩+札幌市+後志+胆振+日高+渡島+檜山の8地区に着手）',
       fiscalYear: '令和6年度（2024年度）',
       fetchedAt: '2026-08-24',
     },
@@ -258,7 +258,13 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '全30行について受検者数÷募集人員≒印字済み倍率の検算(全行1decimal完全一致)で誤読なしを確認した。' +
       '**残り8管内(檜山/上川/留萌/宗谷/オホーツク/十勝/釧路/根室)のR6追加は' +
       '次回セッションへ持ち越し**(檜山地区のテーブルは既に画像取得済みで次回すぐ着手可能)' +
-      '(coverage.statusは既存の\'partial\'のまま・R6分は空知+石狩+札幌市+後志+胆振+日高+渡島のみのpartial coverageと明記)。',
+      '(coverage.statusは既存の\'partial\'のまま・R6分は空知+石狩+札幌市+後志+胆振+日高+渡島のみのpartial coverageと明記)。' +
+      '⚠️2026-08-24追記8(掛-1第21弾): 檜山地区のR6分4レコード(普通3+総合1)も追加した' +
+      '(印字ページ16下半分・渡島専門/総合と同一ページに掲載・新規ページ取得不要だった)。R7(4レコード)' +
+      'と学校名・学科構成が完全一致(江差・上ノ国・奥尻の普通3校、檜山北総合・年度差なし)。全4行を' +
+      '受検者数÷募集人員≒印字済み倍率の検算で誤読なしを確認した。' +
+      '**残り7管内(上川/留萌/宗谷/オホーツク/十勝/釧路/根室)のR6追加は次回セッションへ持ち越し**' +
+      '(coverage.statusは既存の\'partial\'のまま・R6分は空知+石狩+札幌市+後志+胆振+日高+渡島+檜山のみのpartial coverageと明記)。',
   },
   officialSubtotals: [],
   records: [
@@ -1115,5 +1121,10 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '函館水産', department: '品質管理流通', quota: 40, finalApplicants: 22, finalRate: 0.55, fiscalYear: '令和6年度（2024年度）' },
     { schoolName: '函館水産', department: '機関工学', quota: 40, finalApplicants: 50, finalRate: 1.25, fiscalYear: '令和6年度（2024年度）' },
     { schoolName: '森', department: '総合', quota: 40, finalApplicants: 22, finalRate: 0.55, fiscalYear: '令和6年度（2024年度）' },
+    // 掛-1第21弾: 檜山地区・令和6年度（2024年度）分。
+    { schoolName: '江差', department: '普通', quota: 80, finalApplicants: 54, finalRate: 0.68, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '上ノ国', department: '普通', quota: 40, finalApplicants: 15, finalRate: 0.38, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '奥尻', department: '普通', quota: 40, finalApplicants: 19, finalRate: 0.48, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '檜山北', department: '総合', quota: 80, finalApplicants: 51, finalRate: 0.64, fiscalYear: '令和6年度（2024年度）' },
   ],
 };
