@@ -123,6 +123,16 @@ const REIWA_7: YearSnapshot = {
   grandTotal: { label: '全日制計（第１次出願者数）', quota: 29366, applicants: 28326, rate: 0.96 },
 };
 
+/**
+ * ⚠️2026-08-24追記(R5以前は恒久的に取得不可・再調査不要): 本ファイルが依拠する「入学者選抜状況
+ * 報告書」シリーズについて、同日別タスク(Y-6・掛-1系列・src/data/competition-rates/hokkaido.ts)
+ * で教委サイトの一覧ページ(hk/gks/koukounyuusenn.html)を直接WebFetchで精読し、**この報告書
+ * シリーズは常にR6/R7/R8の直近3年度分のみを公開するローリングウィンドウ方式**であり、R5版への
+ * リンクは一覧ページに存在しないことを確認済み(詳細はcompetition-rates/hokkaido.tsのcoverage.note
+ * 追記14〜16を参照)。**したがって本ファイルのR6/R7/R8=3年度分は、このシリーズを一次ソースと
+ * する限り実質的な上限であり、R5以前の追加調査は不要**（新しい年度が公表されるたびに最古の年度が
+ * 既に非公開化されている可能性が高く、過去に遡って取得する経路が無いため）。
+ */
 export const HOKKAIDO_COMPETITION_RATE_HISTORY: PrefectureRateHistoryFile = {
   prefectureCode: 'hokkaido',
   years: [REIWA_8, REIWA_7, REIWA_6],
