@@ -241,7 +241,7 @@
 |---|---|---|
 | 学校別倍率レコード総数 | **17,142** | `src/data/competition-rates/*.ts` 47ファイルを正規表現集計 |
 | うち**過年度**レコード（＝描画されていない） | **11,690** | 同上（`fiscalYear:` 付きの行） |
-| 3年度以上を保有する県 | ~~47 / 47~~ **44 / 47**（2026-08-24時点） | 同上（**2026-08-15訂正・`ops/CORRECTIONS.md` C-6a**: `hokkaido`・`nara`・`niigata`・`oita`・`saga`の5県が令和8・令和7の2年度分のみで3年度未満と判明。**2026-08-24: `niigata`（Wayback Machine経由でR6取得）・`nara`（県公式サイトに現存・直接取得）の2県を3年度化し44/47へ前進。残り3県のうち`oita`・`saga`はWayback CDX広域検索まで含め複数手法を尽くしR6のPDF本体が未アーカイブと確定（断念済み）。`hokkaido`は複雑さ（14管内構成）を理由に今回は未着手のまま（「断念」ではなく「未試行」）** — `ops/PHASE0_FINDINGS.md` 2章項目7参照） |
+| 3年度以上を保有する県 | ~~47 / 47~~ **44 / 47**（2026-08-24時点） | 同上（**2026-08-15訂正・`ops/CORRECTIONS.md` C-6a**: `hokkaido`・`nara`・`niigata`・`oita`・`saga`の5県が令和8・令和7の2年度分のみで3年度未満と判明。**2026-08-24: `niigata`（Wayback Machine経由でR6取得）・`nara`（県公式サイトに現存・直接取得）の2県を3年度化し44/47へ前進。残り3県のうち`oita`・`saga`はWayback CDX広域検索まで含め複数手法を尽くしR6のPDF本体が未アーカイブと確定（断念済み）。`hokkaido`はR6版PDF（`dokyoi.pref.hokkaido.lg.jp/fs/1/0/4/8/5/8/2/3/_/p9-22_gakkoubetu.pdf`・全14頁）が現在も県公式サイトに存置（HTTP200・Wayback不要で直接取得可能）と確認済みだが、14管内分の大規模転記（既存のpdftotext+visionハイブリッド技法が必要）は今回は着手せず次回セッションへ持ち越した** — `ops/PHASE0_FINDINGS.md` 2章項目7参照） |
 | 最多保有県 | tokyo・yamaguchi = **6年度**（tokyo 944レコード） | 同上 |
 | 学校マスタ件数 | **3,422校** | `src/data/schools/*.ts` の `"code":` を集計 |
 | index解禁済み県 | **47 / 47**（wave7 で hokkaido 完了・2026-08-09） | `src/lib/school-page-lookup.ts:44-101`／同ファイル `:40` のコメント |
