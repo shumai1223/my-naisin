@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 import { AFFILIATES, isLiveAffiliate, type AffiliateId } from '@/lib/affiliates';
 import { persistClick, countRecentClicksByIp } from '@/lib/clicks-db';
-import { isBotUserAgent, isInternalReferer, isPrefetchRequest } from '@/lib/bot-filter';
+import { isBotUserAgent, isInternalReferer, isPrefetchRequest, hasSameOriginNavigation } from '@/lib/bot-filter';
 import { renderClickHopHtml } from '@/lib/click-hop';
 
 /**
@@ -23,7 +23,9 @@ import { renderClickHopHtml } from '@/lib/click-hop';
  *   ①' prefetch/prerender → 204（記録なし）
  *   ② 同一IPハッシュの短時間バースト → ホーム退避（記録なし）
  *   ③ 内部 referer なし → 302ではなくJSホップページ（click-hop.ts）。JS実行する実ブラウザのみASPへ。
- *   内部 referer あり（自サイト面からの通常クリック）だけが従来どおり即302。
+ *   ④ **Sec-Fetch-Site が same-origin/same-site でない → 同じくJSホップ**（2026-08-24追加）。
+ *   Referer は詐称できるが Sec-Fetch-* は禁止ヘッダ名でブラウザしか付けられない。
+ *   **内部referer かつ same-origin遷移**のときだけ従来どおり即302。
  */
 
 const SITE = 'https://my-naishin.com';
@@ -120,7 +122,12 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
   // 実クリックの約9倍計上されていた実測への対策。JSを実行する実ブラウザ（LINE/メール経由の
   // 実ユーザー含む）だけがホップページ経由でASPへ進む。D1記録は上で済んでおり suspect として
   // 分類される（ダッシュボードの信頼分類は従来どおり）。
-  if (!isInternalReferer(refererRaw)) {
+  // ⚠️2026-08-24 追加: referer だけを信頼しない。**Referer はクライアントが詐称できる。**
+  // 実測: 8/13〜8/15の3日で829クリック / 1クリック=1個の別IP(比率1.000) / distinct UA わずか8種の
+  // IPローテーション型botが、内部refererを偽装して①②③を全てすり抜け、ASP3社(A8 241/もしも200+/
+  // アクセストレード180)へ無効クリックとして計上されていた。**ASPのアカウント停止リスクに直結する。**
+  // ブラウザが自動で付ける Sec-Fetch-Site を併用し、**両方**満たすときだけ即302する。
+  if (!isInternalReferer(refererRaw) || !hasSameOriginNavigation(request.headers)) {
     return new NextResponse(renderClickHopHtml(affiliate.href), {
       status: 200,
       headers: {

@@ -60,6 +60,39 @@ export function isInternalReferer(referer: string | null | undefined): boolean {
   }
 }
 
+/**
+ * 実ブラウザが**自サイト内のリンクをクリックして遷移した**ときだけ付く Fetch Metadata を検査する。
+ *
+ * ## なぜ必要か（2026-08-24 実測）
+ * `/go` の無効クリック対策は4段構えだったが、**IPローテーション型のbotに全段すり抜けられた**:
+ *   8/13〜8/15 の3日で829クリック / **1クリック=1個の別IP**（比率1.000）/ **distinct UA はわずか8種**。
+ *   ①UA検査 → 8種とも正規のChrome/EdgeのUA文字列なので通過
+ *   ②同一IPの短時間バースト → IPを毎回変えるので発火しない
+ *   ③内部referer無し→JSホップ → **Referer ヘッダを偽装すれば即302の速い経路に入れる**
+ * つまり `isInternalReferer()` だけを「自サイトから来た証拠」として信頼したのが穴だった。
+ * **Referer はクライアントが自由に詐称できる。**
+ *
+ * ## Sec-Fetch-* が有効な理由
+ * `Sec-Fetch-*` は**禁止ヘッダ名**でありブラウザが自動で付ける。JSからも拡張からも上書きできない。
+ * Chrome 76+/Edge 79+/Firefox 90+/Safari 16.4+ が送るため、実ユーザーのほぼ全てが該当する。
+ * 一方、curl・Python requests・多くのヘッドレス簡易クライアントは**そもそも送らない**。
+ *
+ * ## 判定
+ * `sec-fetch-site` が `same-origin`（同一オリジンのページからの遷移）のときだけ true。
+ * `same-site`（サブドメイン間）も許容する。`none`（アドレスバー直打ち）・`cross-site`（外部サイト
+ * からの流入）は false ＝ JSホップへ回す（実ユーザーなら数百msで通過するだけで実害はない）。
+ *
+ * ⚠️ **ヘッダが無い場合も false**（＝安全側）。古いブラウザの実ユーザーはJSホップを通るので
+ * 送客自体は成立する。**取りこぼしよりASPへの無効クリック計上の方が損害が大きい**
+ * （ASPはアカウント停止の判断材料にする）。
+ */
+export function hasSameOriginNavigation(headers: { get(name: string): string | null }): boolean {
+  const site = headers.get('sec-fetch-site');
+  if (!site) return false;
+  const v = site.trim().toLowerCase();
+  return v === 'same-origin' || v === 'same-site';
+}
+
 export type ClickTrust = 'human' | 'suspect' | 'bot' | 'unknown';
 
 /**
