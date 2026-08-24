@@ -49,7 +49,7 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     },
     {
       url: 'https://www.dokyoi.pref.hokkaido.lg.jp/fs/1/0/4/8/5/8/2/3/_/p9-22_gakkoubetu.pdf',
-      docTitle: '北海道教育委員会 R6入学者選抜状況報告書「§3 学校別受検者数及び合格者数」（全14頁・R7/R8と同一シリーズ・掛-1第21弾・空知+石狩+札幌市+後志+胆振+日高+渡島+檜山の8地区に着手）',
+      docTitle: '北海道教育委員会 R6入学者選抜状況報告書「§3 学校別受検者数及び合格者数」（全14頁・R7/R8と同一シリーズ・掛-1第22弾・空知+石狩+札幌市+後志+胆振+日高+渡島+檜山+上川の9地区に着手）',
       fiscalYear: '令和6年度（2024年度）',
       fetchedAt: '2026-08-24',
     },
@@ -263,8 +263,19 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '(印字ページ16下半分・渡島専門/総合と同一ページに掲載・新規ページ取得不要だった)。R7(4レコード)' +
       'と学校名・学科構成が完全一致(江差・上ノ国・奥尻の普通3校、檜山北総合・年度差なし)。全4行を' +
       '受検者数÷募集人員≒印字済み倍率の検算で誤読なしを確認した。' +
-      '**残り7管内(上川/留萌/宗谷/オホーツク/十勝/釧路/根室)のR6追加は次回セッションへ持ち越し**' +
-      '(coverage.statusは既存の\'partial\'のまま・R6分は空知+石狩+札幌市+後志+胆振+日高+渡島+檜山のみのpartial coverageと明記)。',
+      '⚠️2026-08-24追記9(掛-1第22弾): 上川地区のR6分38レコード(普通14+専門/総合24)も追加した' +
+      '(印字ページ17に普通・専門/総合の両テーブルが1頁で収まっていた)。普通14校はR7と学校名完全一致' +
+      '(旭川東・旭川西・旭川北・旭川永嶺・鷹栖・東川・美瑛・上川・富良野・上富良野・南富良野・士別翔雲・' +
+      '名寄・美深)。専門/総合はR6が24レコードでR7(23レコード)より1件多く、原資料上「富良野緑峰」' +
+      '（園芸科学・電気システム・総合ビジネスの3学科を持つ独立校）として明記されている学校が、' +
+      'R7データでは「富良野」（普通科校）名義で記録されている**不一致を発見した**（R6画像は' +
+      '受検者数÷募集人員≒印字倍率の検算で全24行とも完全一致・誤読ではない）。R7の「富良野」普通科' +
+      '(quota120)とR6の「富良野」普通科(quota160・受検123/160=0.77→印字0.8と完全一致で確認済み)も' +
+      'quotaが異なり、R7データの学校名/quota区分に既存の誤りがある可能性が高い。**R7データ自体は' +
+      '今回変更していない**（独立した再検証(R7原本PDFの該当頁を再取得)なしに既存データを書き換える' +
+      'のはリスクが高いため）。次回以降R7の富良野関連レコードを再確認する際の参考情報としてここに記録。' +
+      '**残り6管内(留萌/宗谷/オホーツク/十勝/釧路/根室)のR6追加は次回セッションへ持ち越し**' +
+      '(coverage.statusは既存の\'partial\'のまま・R6分は空知+石狩+札幌市+後志+胆振+日高+渡島+檜山+上川のみのpartial coverageと明記)。',
   },
   officialSubtotals: [],
   records: [
@@ -1126,5 +1137,45 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '上ノ国', department: '普通', quota: 40, finalApplicants: 15, finalRate: 0.38, fiscalYear: '令和6年度（2024年度）' },
     { schoolName: '奥尻', department: '普通', quota: 40, finalApplicants: 19, finalRate: 0.48, fiscalYear: '令和6年度（2024年度）' },
     { schoolName: '檜山北', department: '総合', quota: 80, finalApplicants: 51, finalRate: 0.64, fiscalYear: '令和6年度（2024年度）' },
+    // 掛-1第22弾: 上川地区・全日制普通科・令和6年度（2024年度）分。
+    { schoolName: '旭川東', department: '普通', quota: 240, finalApplicants: 254, finalRate: 1.06, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '旭川西', department: '普通', quota: 160, finalApplicants: 221, finalRate: 1.38, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '旭川北', department: '普通', quota: 200, finalApplicants: 221, finalRate: 1.11, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '旭川永嶺', department: '普通', quota: 200, finalApplicants: 281, finalRate: 1.41, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '鷹栖', department: '普通', quota: 40, finalApplicants: 19, finalRate: 0.48, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '東川', department: '普通', quota: 80, finalApplicants: 74, finalRate: 0.93, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '美瑛', department: '普通', quota: 40, finalApplicants: 12, finalRate: 0.3, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '上川', department: '普通', quota: 40, finalApplicants: 19, finalRate: 0.48, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '富良野', department: '普通', quota: 160, finalApplicants: 125, finalRate: 0.78, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '上富良野', department: '普通', quota: 40, finalApplicants: 23, finalRate: 0.58, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '南富良野', department: '普通', quota: 40, finalApplicants: 19, finalRate: 0.48, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '士別翔雲', department: '普通', quota: 120, finalApplicants: 72, finalRate: 0.6, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '名寄', department: '普通', quota: 160, finalApplicants: 122, finalRate: 0.76, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '美深', department: '普通', quota: 40, finalApplicants: 28, finalRate: 0.7, fiscalYear: '令和6年度（2024年度）' },
+    // 掛-1第22弾: 上川地区・専門教育を主とする学科及び総合学科・令和6年度（2024年度）分。
+    { schoolName: '旭川西', department: '理数', quota: 40, finalApplicants: 60, finalRate: 1.5, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: 'おといねっぷ美術工芸', department: '工芸', quota: 40, finalApplicants: 40, finalRate: 1.0, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '旭川農業', department: '農業科学', quota: 40, finalApplicants: 39, finalRate: 0.98, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '旭川農業', department: '食品科学', quota: 40, finalApplicants: 44, finalRate: 1.1, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '旭川農業', department: '森林科学', quota: 40, finalApplicants: 35, finalRate: 0.88, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '旭川農業', department: '生活科学', quota: 40, finalApplicants: 41, finalRate: 1.03, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '富良野緑峰', department: '園芸科学', quota: 40, finalApplicants: 22, finalRate: 0.55, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '旭川工業', department: '電子機械', quota: 40, finalApplicants: 35, finalRate: 0.88, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '旭川工業', department: '電気', quota: 40, finalApplicants: 30, finalRate: 0.75, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '旭川工業', department: '情報技術', quota: 40, finalApplicants: 48, finalRate: 1.2, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '旭川工業', department: '建築', quota: 40, finalApplicants: 38, finalRate: 0.95, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '旭川工業', department: '土木', quota: 40, finalApplicants: 41, finalRate: 1.03, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '旭川工業', department: '工業化学', quota: 40, finalApplicants: 28, finalRate: 0.7, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '名寄', department: '情報技術', quota: 40, finalApplicants: 15, finalRate: 0.38, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '富良野緑峰', department: '電気システム', quota: 40, finalApplicants: 12, finalRate: 0.3, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '旭川商業', department: '流通ビジネス', quota: 80, finalApplicants: 81, finalRate: 1.01, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '旭川商業', department: '国際ビジネス', quota: 40, finalApplicants: 45, finalRate: 1.13, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '旭川商業', department: '会計', quota: 40, finalApplicants: 42, finalRate: 1.05, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '旭川商業', department: '情報処理', quota: 40, finalApplicants: 40, finalRate: 1.0, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '士別翔雲', department: '総合ビジネス', quota: 40, finalApplicants: 18, finalRate: 0.45, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '富良野緑峰', department: '総合ビジネス', quota: 40, finalApplicants: 11, finalRate: 0.28, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '下川商業', department: '商業', quota: 40, finalApplicants: 34, finalRate: 0.85, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '旭川南', department: '総合', quota: 200, finalApplicants: 247, finalRate: 1.24, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '剣淵', department: '総合', quota: 40, finalApplicants: 12, finalRate: 0.3, fiscalYear: '令和6年度（2024年度）' },
   ],
 };
