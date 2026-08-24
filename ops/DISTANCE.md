@@ -258,6 +258,19 @@ dS≧3 の合計: **250行 / 1,579クリック / 200,843表示**（＝サイト�
 見落としていた可能性が高い）。**37%(16/43)という被リンク効果の実測値自体は変わらない**（到達ルート数の
 過小報告であり、効果測定そのものに誤りは無い）。
 
+> ⚠️ **2026-08-24重大な疑義（loopが実測で確認・`ops/PHASE0_FINDINGS.md` 2章項目3参照）**:
+> この「37%(16/43)」の元データ（`placement='parent-lp'`のtrustedクリック）を実際にD1で再照会したところ、
+> **同一期間の該当21件全てのreferer（root_only=14件・null=7件）が、サイト自身の正準ボット判定関数
+> `classifyClick`（`src/lib/bot-filter.ts`）に通すと1件も'human'に分類されない**（root_only+
+> `placement='parent-lp'`は`isPlacementConsistentWithReferer()`が矛盾と判定し'bot'・null refererは
+> `isInternalReferer()`がfalseで'suspect'）。これは`ops/DEADWIRE.md`が同じ16件を「スケジュール実行の
+> スクレイパ」と断定した根拠と完全に整合する。**本節が「実測で効くと分かっている」「最優先」と位置づける
+> 施策A（`/hogosha`への到達距離3→2）の土台である37%という数字自体が、サイト自身の現行ボット判定基準では
+> 支持されない可能性が高い。** 本書はこの節を書き換えていない（判断の重さを考慮し、事実の指摘に留める）。
+> 次にこの節へ戻るセッションは、①`classifyClick`で21件を実際に再分類したうえで施策Aの優先度を再評価する、
+> ②あるいは`classifyClick`のplacement整合性チェック自体が`/hogosha`系ページでは誤検知している可能性
+> （`HOME_PAGE_PLACEMENTS`に`parent-lp`を含めるべきか等）を検討する、のいずれかを行うこと。
+
 **`/hogosha` 単独への距離分布**
 | 距離 | ページ枚数 | GSCクリック | GSC表示 |
 |---|---|---|---|
