@@ -30,7 +30,7 @@ const FEATURED_ARTICLES = [
     description: 'テスト・提出物・授業態度…確実に点を伸ばす実践テクニック集。',
     icon: TrendingUp,
     color: 'from-emerald-500 to-teal-600',
-    tag: '人気No.1',
+    tag: '人気記事',
     tagColor: 'bg-emerald-100 text-emerald-700',
     readTime: '15分',
   },
