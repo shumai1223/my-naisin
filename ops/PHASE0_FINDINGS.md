@@ -306,6 +306,17 @@
 | # | 断定 | 場所 | なぜ裏取り不足か（実測） |
 |---|---|---|---|
 | **1** | 「サイト全体の実**遷移率 = 0.455%**」（D1 trusted 39 ÷ GSC 8,565） | `ops/MONEY.md:19`（`:272` で係数化） | **trusted の定義が `referer LIKE 'https://my-naishin.com%'` なので、パスの無い root_only を人間に数えている。** M1: 28日の内訳は root_only **29（mobile 0）** + 内部パス付き **17**。DEADWIRE DW-3 は root_only を「毎日04:1x/11:2x・全desktop のスケジュール実行」と断定済み。**内部パス付きだけなら 17 ÷ 8,565 = 0.199%**（2.3倍の過大） |
+
+> ✅ **2026-08-24修正済み（loopが実施）**: この指摘が対象としていた**根本原因のSQLコード**
+> （`src/lib/clicks-db.ts`の`TRUSTED_CLAUSE`）を実際に修正した。アンダースコア無しパターン
+> （root_onlyまで拾う）を`ops/LOOP_CONTRACT.md` §3-2が定める正しいパターン
+> （`'https://my-naishin.com/_%'`）へ変更（`f9aac30`）。**実D1で28日窓の差分を実測: 956→892
+> （64件・約6.7%の過大計上が解消）**。この関数（`getClickSummary`/`getClickTrend`/
+> `getClickPeriodComparison`/`getClickTrustCounts`）は`/admin/report`の既定表示「信頼クリック
+> （実数）」を生成する中核関数のため、**この修正により運営者が普段見ているダッシュボードの
+> 数値そのものが是正された**（MONEY.mdの「0.455%」という係数値自体は文書内の記述でありコード
+> 変更では自動更新されないため、次回`ops/MONEY.md`を編集する周回で新しいtrusted実測値を
+> 反映すること）。
 | **2** | 「`/`（トップ）trusted 22 → 換金率 **1.17%**」＝「到達可能な上限」 | `ops/MONEY.md:172`, `:289` | 22件の referer は全て root_only（M1の29の一部）。**同文書 `:203-205` が「referer だけではページ帰属できない」と自認**しており、上限値の根拠として使える強度が無い |
 | **3** | 「`/hogosha` は内部リンク経由だけで実アフィリクリックの **37%（16/43）** を生んでいる」→ **最優先施策A** | `ops/DISTANCE.md:22`, `:248`, `:481` | 同じ16件を `ops/DEADWIRE.md:259-278` が「スケジュール実行のスクレイパ」と断定。**PHASE 0 内で正面衝突**。DISTANCE の施策優先順位（A→D→B→C）は全てこの上に乗っている |
 | **4** | 「実人間は多くて **20件**（5.7%）」 | `ops/DEADWIRE.md:13`, `:332` | M1: 20 = 内部パス付き17 + 外部3。**外部3件（google.com）は自書が採用する `classifyClick`（`bot-filter.ts:70-73`）では human ではなく suspect**。さらに GA4 が確認した affiliate_click は **7/13 と 8/10** の2件で、**8/10 は DEADWIRE の20件表に1行も無い**（D1の8/10は9件すべて null/root referer）。＝20は上限でも下限でもない |
