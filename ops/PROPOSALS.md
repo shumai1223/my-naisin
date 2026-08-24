@@ -84,7 +84,7 @@
 | S8-5 | 指名検索クエリの定点観測を週次KPIへ | 1.0 | 9月 | 不要 | 採用。**✅2026-08-24対応済み(loop・`21a65ec`)。本行はstale記述だった**（`ops/proposals/S8.md`側は既に✅済みだったがマスターの本行が未同期）: `fetchBrandedQuerySignal()`を週次KPIに接続済み |
 | S8-6 | `adoption_domains`（被リンク採用検出）を週次KPIへ | 0.5 | 9月 | 不要 | 採用。**✅2026-08-24対応済み(loop・`21a65ec`)。本行はstale記述だった**（同上）: `getAdoptionDomainSummary(7)`を週次KPIに接続済み・0件時も「継続監視中」と明示 |
 | S8-4 | `outreach-ledger` 追撃状況を週次KPIへ | 1.5 | 9月 | 不要 | 採用。**✅2026-08-24対応済み(loop・`21a65ec`)。本行はstale記述だった**（同上）: `computeFollowupCandidates()`を週次KPIに接続済み |
-| S11-3 | FP6案件 `convRateLow` 実測運用の確立 | 0.5 | 9月 | 不要 | 採用（**`convRateLow` の書き換え提案は禁止**を明記して継承） |
+| S11-3 | FP6案件 `convRateLow` 実測運用の確立 | 0.5 | 9月 | 不要 | 採用（**`convRateLow` の書き換え提案は禁止**を明記して継承）。**✅2026-08-25対応済み(loop)**: 週次KPIレポート(`weekly-kpi-report.ts`)は`runningExperiments()`経由で`hensachi-fp-secondary-2026`/`hyotei-heikin-fp-secondary-2026`を既に自動追跡済みと確認(V-6の既存汎用機構)。`affiliate-economics.ts`のFP6案件クラスタ直上にkill_criteria(2桁未満は試行不足・convRateLow書き換え禁止)をコメントで明文化 |
 | S13-D | MCP/API 利用の永続計測（`api_hits_daily`） | 3.0〜4.0 | 8/31まで | migration=👤 | 採用（**S13-A の A-5 と同一作業。二重計上しない**） |
 | S13-E | 埋め込みOEM：`adoption_domains` 0行の切り分け | 1.0 | 9月 | 不要 | **単独採用しない**（S13-A の営業フックとして同梱） |
 

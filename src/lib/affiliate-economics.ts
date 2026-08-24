@@ -83,6 +83,13 @@ const KIND_DEFAULT: Record<OfferKind, AffiliateEconomics> = {
  */
 export const AFFILIATE_ECONOMICS: Partial<Record<AffiliateId, AffiliateEconomics>> = {
   // ── 最高単価帯（保護者＝決裁者・無料相談/資料請求／生徒面では完結しづらい＝保守は厳しめ） ──
+  // S11-3(ops/PROPOSALS.md)のkill_criteria: FP無料相談6案件(fp-soudan/findit-fp-soudan/
+  // moshimo-manecafe/moshimo-garden-gakushi/moshimo-garden-chochiku/moshimo-minhoken)は
+  // hensachi-fp-secondary-2026/hyotei-heikin-fp-secondary-2026のA/B実験で実測中(判定は2026年11月・
+  // weekly-kpi-report.tsが週次で自動追跡)。**判定時に全アーム合計クリックが2桁に達しなければ
+  // 「試行不足」と明記し判定を先送りする。ここのconvRateLow=0.015(仮置き)を、この実験のクリック数
+  // だけを根拠に書き換える提案はしない**（実測1件だけで置換すると[[ga4-undercounts-conversions]]と
+  // 同種の誤帰属を起こす。書き換えるならjudgeWinnerの有意判定を経てから）。
   'fp-soudan': { cpaYen: 13800, convRate: 0.05, convRateLow: 0.015, kind: 'free-lead' }, // もしも・保険トータルプロフェッショナル
   'hoken-compass': { cpaYen: 12000, convRate: 0.05, convRateLow: 0.015, kind: 'free-lead' },
   'money-doctor': { cpaYen: 11000, convRate: 0.05, convRateLow: 0.015, kind: 'free-lead' },

@@ -377,6 +377,9 @@ export function selectLeadOffer(
       ? PREFECTURE_PLACEMENT_LEAD_OVERRIDES[`${prefectureCode}:${placement}`]
       : undefined;
 
+  // S11-4裁定: prefOverride が placementOverride（例: parent-lp の FP相談）を上書きする挙動は
+  // 意図的（EV比較で正当化済み）。優先順位を変えたくなったら、先に PREFECTURE_LEAD_OVERRIDES
+  // 直上のコメントを読むこと。
   const base: LeadOffer = {
     ...DEFAULT_LEAD_OFFER,
     ...placementOverride,
