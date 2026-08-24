@@ -49,7 +49,7 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     },
     {
       url: 'https://www.dokyoi.pref.hokkaido.lg.jp/fs/1/0/4/8/5/8/2/3/_/p9-22_gakkoubetu.pdf',
-      docTitle: '北海道教育委員会 R6入学者選抜状況報告書「§3 学校別受検者数及び合格者数」（全14頁・R7/R8と同一シリーズ・掛-1第18弾・空知+石狩+札幌市+後志+胆振の5地区に着手）',
+      docTitle: '北海道教育委員会 R6入学者選抜状況報告書「§3 学校別受検者数及び合格者数」（全14頁・R7/R8と同一シリーズ・掛-1第19弾・空知+石狩+札幌市+後志+胆振+日高の6地区に着手）',
       fiscalYear: '令和6年度（2024年度）',
       fetchedAt: '2026-08-24',
     },
@@ -246,9 +246,13 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '「電子機械/電気/建設」3学科に対し、R6は「電子機械/電気/建築/環境土木」の4学科構成で' +
       '17レコード(R7の「建設」はR6の「建築」+「環境土木」が統合されたものと推定)。全行について' +
       '受検者数÷募集人員≒印字済み倍率の検算(0.0〜0.1刻みで完全一致)で誤読なしを確認した。' +
-      '**残り10管内(日高/渡島/檜山/上川/留萌/宗谷/オホーツク/十勝/釧路/根室)のR6追加は' +
+      '⚠️2026-08-24追記6(掛-1第19弾): 日高地区のR6分7レコード(普通4+専門/総合3)も追加した' +
+      '(印字ページ14末尾〜15冒頭=PDF内部頁6〜7)。R7(7レコード)と学校名・学科構成が完全一致' +
+      '(普通4校=平取・富川・静内・えりも、専門/総合3レコード=静内農業(食品科学・生産科学)・' +
+      '浦河総合・年度差なし)。全行について受検者数÷募集人員≒印字済み倍率の検算で誤読なしを確認した。' +
+      '**残り9管内(渡島/檜山/上川/留萌/宗谷/オホーツク/十勝/釧路/根室)のR6追加は' +
       '次回セッションへ持ち越し**' +
-      '(coverage.statusは既存の\'partial\'のまま・R6分は空知+石狩+札幌市+後志+胆振のみのpartial coverageと明記)。',
+      '(coverage.statusは既存の\'partial\'のまま・R6分は空知+石狩+札幌市+後志+胆振+日高のみのpartial coverageと明記)。',
   },
   officialSubtotals: [],
   records: [
@@ -1065,5 +1069,13 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '苫小牧総合経済', department: '国際経済', quota: 40, finalApplicants: 39, finalRate: 0.98, fiscalYear: '令和6年度（2024年度）' },
     { schoolName: '苫小牧総合経済', department: '情報処理', quota: 40, finalApplicants: 42, finalRate: 1.05, fiscalYear: '令和6年度（2024年度）' },
     { schoolName: '室蘭東翔', department: '総合', quota: 160, finalApplicants: 175, finalRate: 1.09, fiscalYear: '令和6年度（2024年度）' },
+    // 掛-1第19弾: 日高地区・令和6年度（2024年度）分。
+    { schoolName: '平取', department: '普通', quota: 40, finalApplicants: 9, finalRate: 0.23, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '富川', department: '普通', quota: 40, finalApplicants: 23, finalRate: 0.58, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '静内', department: '普通', quota: 200, finalApplicants: 160, finalRate: 0.8, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: 'えりも', department: '普通', quota: 70, finalApplicants: 22, finalRate: 0.31, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '静内農業', department: '食品科学', quota: 40, finalApplicants: 15, finalRate: 0.38, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '静内農業', department: '生産科学', quota: 40, finalApplicants: 33, finalRate: 0.83, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '浦河', department: '総合', quota: 120, finalApplicants: 85, finalRate: 0.71, fiscalYear: '令和6年度（2024年度）' },
   ],
 };

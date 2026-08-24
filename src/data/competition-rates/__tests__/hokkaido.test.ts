@@ -14,18 +14,18 @@ import { HOKKAIDO_COMPETITION_RATES } from '../hokkaido';
  * 「finalApplicants ÷ quota ≒ finalRate」の内部整合性のみを検証する（公式グランドトータル行は
  * 原資料に印字されておらず突合対象が無いため）。
  */
-describe('北海道 倍率パイプラインα（Y-6・R8=323レコード＋掛-1(全14管内R7完走):R7=325レコード＋掛-1(5年度目・空知+石狩+札幌市+後志+胆振):R6=144レコード＝792レコード・coverage=partial）', () => {
+describe('北海道 倍率パイプラインα（Y-6・R8=323レコード＋掛-1(全14管内R7完走):R7=325レコード＋掛-1(6年度目・空知+石狩+札幌市+後志+胆振+日高):R6=151レコード＝799レコード・coverage=partial）', () => {
   const { records } = HOKKAIDO_COMPETITION_RATES;
 
   it('coverageがpartialを示している', () => {
     expect(HOKKAIDO_COMPETITION_RATES.coverage.status).toBe('partial');
   });
 
-  it('792レコードが収録されている(R8年度323+R7年度325+R6年度144(空知32+石狩57+札幌市9+後志17+胆振29))', () => {
-    expect(records.length).toBe(792);
+  it('799レコードが収録されている(R8年度323+R7年度325+R6年度151(空知32+石狩57+札幌市9+後志17+胆振29+日高7))', () => {
+    expect(records.length).toBe(799);
     expect(records.filter((r) => r.fiscalYear === '令和7年度（2025年度）').length).toBe(325);
     expect(records.filter((r) => !r.fiscalYear).length).toBe(323);
-    expect(records.filter((r) => r.fiscalYear === '令和6年度（2024年度）').length).toBe(144);
+    expect(records.filter((r) => r.fiscalYear === '令和6年度（2024年度）').length).toBe(151);
   });
 
   it('全レコードのquota>0・finalApplicants>=0・finalRateが自前算出値(applicants/quota)と整合する', () => {
