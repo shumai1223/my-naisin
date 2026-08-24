@@ -151,8 +151,8 @@ describe('B2B_OUTREACH_LOG / latestOutreachSummary（U-1/U-2送信実績のG3補
 
   it('latestOutreachSummaryは累計数と最新日を含む', () => {
     const summary = latestOutreachSummary();
-    expect(summary).toContain('20社');
-    expect(summary).toContain('2026-07-12');
+    expect(summary).toContain('累計194社');
+    expect(summary).toContain('2026-08-23に1社');
   });
 
   it('ログが空なら null を返す（契約/API実測を勝手に補完しない）', () => {
