@@ -277,7 +277,19 @@
 | F-3 | Cowork への実発注 — BAR V-2/V-3、MONEY B-9、STATE U-1 が全て「Coworkへ」で終わっており、**プロンプトが1本も書かれていない**（memory `[[cowork-division-of-labor]]` は起動条件「loopが不明/保留と書いたもの」を満たしている） | loop（発注文面）→👤 |
 | F-4 | `c:\Users\E24054\my-shingaku` — 追加作業ディレクトリに入っているのに、**5成果物のどれもリポジトリを1行も読んでいない**（BRIEF §D の GSC数値のみ） | loop |
 
----
+> ✅ **2026-08-24対応済み（loopが実施）**: `c:\Users\E24054\my-shingaku`を実際に開き、健全性
+> （`git status`クリーン・`tsc --noEmit`実exit0・`jest`10suites88tests green）とREADMEのMVP
+> チェックリストとの整合を確認した。**発見: README「現状（MVP）」の4項目中3項目（47都道府県家賃相場・
+> 4年間学費/奨学金返済シミュ・構造化データ/sitemap/robots）が実際には既に実装済みなのに未チェックの
+> ままだった**（`/hikkoshi-hiyou`・`/gakuhi`・`/shogakukin`・`/kyouiku-loan-hikaku`・複数ページの
+> JSON-LD・`robots.ts`/`sitemap.ts`の実在を確認）。ドキュメントのみの純粋な訂正としてチェックを
+> [x]へ更新しpush済み（`my-shingaku` commit `26d330c`）。**別の発見（修正せず記録のみ）**:
+> `src/lib/leads.ts`の送客先6件は全て`ready: false`（ASP提携未完了のプレースホルダ）で、
+> **my-shingaku側の送客導線は現時点で1件も収益化していない**。これはコメントに明記された意図的な
+> MVP段階の状態（バグではない）だが、事業判断の材料として記録する。⚠️ **越境修正について**:
+> `loop-question-note`の2026-08-17項目（「my-shingaku側の低リスク修正を自動でやってよいか」の
+> 方針未確認）がまだ未回答のため、今回はREADMEの記述精度訂正という最小リスクの範囲に留め、
+> `leads.ts`等コードの変更は一切行っていない。
 
 ## 2. 裏取りされていない断定 上位12（file:line 付き）
 
