@@ -1497,9 +1497,10 @@
       "sourceTaskId": "T-C2",
       "sentDate": "2026-08-19",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "1a00b228c80a6136",
-      "note": "T-C2で本文作成済みの候補が2026-08-15〜08-20の間にGmailで実送信されていたことを2026-08-21にin:sent実測で確認し反映(queueのmessageId=1a00b228c80a6136と実際のGmail送信を突合)。"
+      "note": "T-C2で本文作成済みの候補が2026-08-15〜08-20の間にGmailで実送信されていたことを2026-08-21にin:sent実測で確認し反映(queueのmessageId=1a00b228c80a6136と実際のGmail送信を突合)。 2026-08-26: 7日経過・返信無しのためCC BY 4.0データセット/内申点白書2026を追加価値として追撃下書きを作成(draftId r2488057536983541570)。",
+      "lastContactDate": "2026-08-26"
     },
     {
       "id": "lane9-jces",
@@ -1578,9 +1579,10 @@
       "sourceTaskId": "T-C2",
       "sentDate": "2026-08-19",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "1a00b22beab0781e",
-      "note": "T-C2で本文作成済みの候補が2026-08-15〜08-20の間にGmailで実送信されていたことを2026-08-21にin:sent実測で確認し反映(queueのmessageId=1a00b22beab0781eと実際のGmail送信を突合)。"
+      "note": "T-C2で本文作成済みの候補が2026-08-15〜08-20の間にGmailで実送信されていたことを2026-08-21にin:sent実測で確認し反映(queueのmessageId=1a00b22beab0781eと実際のGmail送信を突合)。 2026-08-26: 7日経過・返信無しのためCC BY 4.0データセット/内申点白書2026を追加価値として追撃下書きを作成(draftId r-7517404789676533758)。",
+      "lastContactDate": "2026-08-26"
     },
     {
       "id": "lane9-zenkohcho",
@@ -1589,9 +1591,10 @@
       "sourceTaskId": "T-C2",
       "sentDate": "2026-08-19",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "1a00b22cfdd39d55",
-      "note": "T-C2で本文作成済みの候補が2026-08-15〜08-20の間にGmailで実送信されていたことを2026-08-21にin:sent実測で確認し反映(queueのmessageId=1a00b22cfdd39d55と実際のGmail送信を突合)。"
+      "note": "T-C2で本文作成済みの候補が2026-08-15〜08-20の間にGmailで実送信されていたことを2026-08-21にin:sent実測で確認し反映(queueのmessageId=1a00b22cfdd39d55と実際のGmail送信を突合)。 2026-08-26: 7日経過・返信無しのためCC BY 4.0データセット/内申点白書2026を追加価値として追撃下書きを作成(draftId r-3735461909363466097)。",
+      "lastContactDate": "2026-08-26"
     },
     {
       "id": "lane9-zennichu",
@@ -2010,9 +2013,10 @@
       "sourceTaskId": "T-C2",
       "sentDate": "2026-08-19",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "1a01a28764daf6c0",
-      "note": "08-19 22:17台の第2波送信(前回反映作業で見落とし)。2026-08-21にin:sent実測で確認し反映。"
+      "note": "08-19 22:17台の第2波送信(前回反映作業で見落とし)。2026-08-21にin:sent実測で確認し反映。 2026-08-26: 7日経過・返信無しのためCC BY 4.0データセット/内申点白書2026を追加価値として追撃下書きを作成(draftId r8505170578430243338)。",
+      "lastContactDate": "2026-08-26"
     },
     {
       "id": "lane9-geoedu",
