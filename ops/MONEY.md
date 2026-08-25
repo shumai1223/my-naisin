@@ -340,6 +340,14 @@ C5式：`EV(円/月) = 月間検索クリック × 遷移率 × (発生率 × �
 | **最小の直し方** | ①記事内CTAの位置を本文冒頭直後にも1つ増やす（`blog/[slug]/page.tsx:349` は記事末のみ）②`blog` 面の副オファーは `fp-soudan`（EV¥124）だが記事の8割が「内申点の数字」クエリ→主を `sora-juku-text` のまま、**記事末CTAより上に `AffiliateAd` を1本置くのではなく、まず `cta_view` を計測して到達自体を確認する**（現状 blog面の `cta_view` が分離できていない） |
 | **人間ゲート** | 不要（src変更のみ・デプロイは👤） |
 
+> ✅ **2026-08-25解消済み確認（loopが実ファイルで裏取り）**: 項目①は実装済みと確認。
+> `blog/[slug]/page.tsx:241-247`に記事冒頭の2タッチ目（`AffiliateAd placement="blog-article"
+> id="atama-text"`）が追加されており、末尾の`placement="blog"`（`:349`）とは異なる`placement`値・
+> 異なるプログラムで多様性を確保している（コード内コメント「旧サプリ/Z会¥1.5-5.4/clickの代替」参照）。
+> 2つの`placement`値が分かれているため、既存の`CtaViewTracker`/`AffiliateAd`計測機構で②の
+> `cta_view`分離も自然に達成されている（追加の計測基盤は不要）。実装コミットの特定はできなかったが
+> 現状のコードは本項目の推奨と完全一致している。
+
 ### 出血2 — D1 `clicks` の88%がbot由来で、勝者判定が丸ごと汚染されている
 | | |
 |---|---|
@@ -348,6 +356,14 @@ C5式：`EV(円/月) = 月間検索クリック × 遷移率 × (発生率 × �
 | **推定影響** | 円換算不能だが最大級。**この汚染データを根拠に面のオファーを差し替えると、EV¥360の案件をEV¥1.5の案件に置き換える誤判断が起きうる**（現に `/kochi/naishin` で発生した唯一の人間クリック3件は `shoin-banner`＝EV¥18の最低EV枠に落ちている：`[prefecture]/naishin/page.tsx:674`） |
 | **最小の直し方** | `getClickSummary` / `getClickTrend` / `getRefererSummary` の呼び出し側（`/admin/report`・`generate-sales-report`）を **`trustedOnly:true` 既定**にする。関数は既にオプションを持っている（`clicks-db.ts:146-148`） |
 | **人間ゲート** | 不要 |
+
+> ✅ **2026-08-25解消済み確認（loopが実ファイルで裏取り）**: `/admin/report`側は本項目執筆（2026-08-10）
+> より前の**2026-08-28ではなく2026-06-28（`9342fff`）**に既に`trustedOnly`既定化が実装済みだった
+> （`src/app/admin/report/page.tsx:207` `const trustedOnly = sp.clicks !== 'all'`＝既定true・
+> `?clicks=all`で明示的に外せる設計）。本項目が指摘した「既定＝全件」という状態は**執筆時点で
+> 既に事実と異なっていた**可能性が高い（誤読か、別のダッシュボードを指していたかは不明）。
+> もう一方の`generate-sales-report`側は2026-08-24（S9-3・`ops/proposals/S1-S9-S11.md`参照）に
+> `TRUSTED_CLAUSE`と同一のreferer条件をSQL例docstringへ追記して整合済み。両call siteとも対応済み。
 
 ### 出血3 — `*/naishin` 40枚（GSC 1,043クリック/28日）から人間のアフィリクリックが28日窓でゼロ
 | | |
@@ -358,6 +374,15 @@ C5式：`EV(円/月) = 月間検索クリック × 遷移率 × (発生率 × �
 | **最小の直し方** | 広告枠を減らして1枠に集約する（10枠の広告過密はCTAの識別性を潰す仮説）。まず `layout.tsx:125` の placement 無しCTA（`page.tsx:438` と重複）を削除し、`cta_view` の実測を取る |
 | **人間ゲート** | 不要 |
 
+> 🟡 **2026-08-25関連更新（loopが実施・本項目の「枠を減らす」という設計判断は未着手のまま）**:
+> `layout.tsx:125`の「placement無し」は別項目（出血6・全`<ParentLeadCTA>`43箇所の完全準拠監査）で
+> 発見し、**削除ではなく`placement="prefecture"`を追加**する形で対応した（`01cfc27`）。これは
+> 出血6が指摘する「副オファーが無言に消える」バグの是正としては正しいが、**本項目（出血3）が
+> 提案する「広告過密を減らすため削除する」という設計判断とは別方向の対応**であり、本項目の
+> 「最小の直し方」自体はまだ未着手（10枠のまま・`cta_view`実測も未取得）。両者は矛盾しないが
+> 混同しないこと: 出血6は「既存のCTAが仕様通り動くか」のバグ修正、出血3は「そもそも枠数が
+> 多すぎないか」という設計判断で、後者は👤の意思決定領域に近いため今回は手を付けなかった。
+
 ### 出血4 — 季節スワップが「年間45%・冬ピーク全域」で高EV案件を締め出す
 | | |
 |---|---|
@@ -366,6 +391,12 @@ C5式：`EV(円/月) = 月間検索クリック × 遷移率 × (発生率 × �
 | **推定影響** | `prefecture` 面：置換で `manabuterasu`(EV¥192)→`sora-juku-text`(EV¥240) は+、`jitsugika`：`withstudy`(EV¥276)→`sora-juku`(EV¥240) は−、`dashboard`：`studycoach`(EV¥120)→`sora-juku`(EV¥240) は+。**現時点の純EV影響は小さい（±¥36/click）が、pendingの季節枠が承認された瞬間に EV¥120の未検証案件（`winter-koushuu-trial` CPA¥4,000）へ5面が自動で切り替わり、EV¥240→¥120の半減が無警告で起きる**（`isLiveAffiliate` になった瞬間に `seasonalAffiliate` が最優先で返す：`lead-config.ts:334-335`） |
 | **最小の直し方** | `seasonalAffiliate()` に「専用枠のEVが現行フォールバックのEVを下回るなら採用しない」ガードを入れる（`affiliate-economics.confirmedPer1000` で比較可能・`affiliate-economics.ts:206-208`）。CIの不変条件テストを1本追加 |
 | **人間ゲート** | 不要（フラグ点火ではない） |
+
+> ✅ **2026-08-25解消済み確認（loopが実ファイルで裏取り）**: `lead-config.ts:349-355`の
+> `seasonalAffiliate()`に`confirmedPer1000(dedicated) >= confirmedPer1000(fallback)`ガードが
+> 実装済み（コード内コメントが`ops/PROPOSALS.md` S11-2を明示参照）。不変条件テストも
+> `src/lib/__tests__/seasonal-lead.test.ts`に存在を確認。PROPOSALS.md側では2026-08-24付で
+> 実装済みだったが本ファイルには未反映のままだった（同型の同期漏れ）。
 
 ### 出血5 — 学校ページ233枚＋県まとめ47枚に換金コードが1行も無い
 
@@ -439,6 +470,13 @@ C5式：`EV(円/月) = 月間検索クリック × 遷移率 × (発生率 × �
 | **最小の直し方** | 新規配置ではなく、**FP勢のローテーション実験を1面（`hiyou`）で回して発生率を実測**する。実験基盤は `experiments.ts` に既存 |
 | **人間ゲート** | 不要（A/B定義追加はsrc変更） |
 
+> ✅ **2026-08-25解消済み確認（loopが実ファイルで裏取り）**: `experiments.ts`の
+> `hensachi-fp-secondary-2026`/`hyotei-heikin-fp-secondary-2026`（`status:'running'`）の
+> armsに`moshimo-manecafe`が追加済みで、FP勢のローテーション実験が実際に回っている
+> （提案は`hiyou`面だったが実装は`hensachi`/`hyotei-heikin`面＝現行最大流入2面。目的
+> 「FP勢の実発生率を実測する」は同等に達成される）。判定は2026年11月予定（夏はA/B判定
+> しない方針のため意図的にstartedAt未設定）。
+
 ### 出血9 — `placement` が93%の `AffiliateAd` に無く、面別集計が二重化している
 | | |
 |---|---|
@@ -448,6 +486,11 @@ C5式：`EV(円/月) = 月間検索クリック × 遷移率 × (発生率 × �
 | **最小の直し方** | ①出血6の修正で大半が解消 ②`placementFromReferer` の戻り値を先頭スラッシュ無しに正規化（1行）＋既存行のマイグレーションは不要（集計側で `ltrim(placement,'/')`） |
 | **人間ゲート** | 不要 |
 
+> ✅ **2026-08-25解消済み確認（loopが実ファイルで裏取り）**: 項目①（出血6）は今回のセッションで
+> 43/43配線完了を確認済み。項目②も`src/app/go/[id]/route.ts:54-55`で`path.replace(/^\//, '')`
+> により既に先頭スラッシュ無しへ正規化済みと確認（`clicks-db.ts`側も`TRIM(placement,'/')`で
+> 二重の防御）。`ops/PHASE0_FINDINGS.md`2章項目11（2026-08-24解消済み・placement93/93=100%）とも整合。
+
 ### 出血10 — 本番にセキュリティヘッダが1本も出ていない（`public/_headers` がWorkersで無効）
 | | |
 |---|---|
@@ -456,6 +499,11 @@ C5式：`EV(円/月) = 月間検索クリック × 遷移率 × (発生率 × �
 | **推定影響** | 換金への直接影響は無い。ただし①クリックジャッキング耐性ゼロ ②`Referrer-Policy` をブラウザ既定に委ねているため、将来ブラウザが既定を厳格化すると **D1の面別帰属（`placementFromReferer`）が丸ごと死ぬ** |
 | **最小の直し方** | `next.config.mjs` に `headers()` を追加、または OpenNext のミドルウェアで付与。`/embed/*` の例外（`_headers:9-11`）を移植すること |
 | **人間ゲート** | 不要（設定ファイル変更・デプロイは👤） |
+
+> ✅ **2026-08-25解消済み確認（loopが実ファイルで裏取り）**: `next.config.mjs:77-91`に
+> `headers()`が実装済み（`X-Frame-Options`/`X-Content-Type-Options`/`Referrer-Policy`/
+> `Permissions-Policy`の4本全て・`/embed/:path*`のX-Frame-Options緩和例外も移植済み）。
+> S5-1（2026-08-24）で対応されたがPROPOSALS.mdでは✅済みのまま本ファイルへの反映が漏れていた。
 
 ---
 
