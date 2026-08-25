@@ -554,9 +554,10 @@
       "sourceTaskId": "X-6",
       "sentDate": "2026-08-06",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "19fcd6fa9d56faa2",
-      "note": "media-biz@iid.co.jp宛・EdTech関係者向けの文面。同日に保護者向け文面も別送（chihoshi-iid-hogosha-0806）。"
+      "note": "media-biz@iid.co.jp宛・EdTech関係者向けの文面。同日に保護者向け文面も別送（chihoshi-iid-hogosha-0806）。 2026-08-26: 20日経過・返信無しのため追撃下書きを作成(draftId r6120430977832204045)。",
+      "lastContactDate": "2026-08-26"
     },
     {
       "id": "chihoshi-iid-hogosha-0806",
@@ -577,9 +578,10 @@
       "sourceTaskId": "X-14",
       "sentDate": "2026-08-12",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "19ff05c1f248bdbf",
-      "note": "市立高等学校入試に関する報告・参照可否の相談（県教委とは別の政令市窓口）。 2026-08-26: 14日経過・返信無しのためリンク参照可否を再度尋ねる追撃下書きを作成(draftId r5091774802906953805)。"
+      "note": "市立高等学校入試に関する報告・参照可否の相談（県教委とは別の政令市窓口）。 2026-08-26: 14日経過・返信無しのためリンク参照可否を再度尋ねる追撃下書きを作成(draftId r5091774802906953805)。",
+      "lastContactDate": "2026-08-26"
     },
     {
       "id": "kyoiku-nagoya-shi-0812",
@@ -600,9 +602,10 @@
       "sourceTaskId": "X-14",
       "sentDate": "2026-08-12",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "19ff05c71163b85b",
-      "note": "同上・福岡市立高校向け。 2026-08-26: 14日経過・返信無しのためリンク参照可否を再度尋ねる追撃下書きを作成(draftId r6990475188729659674)。"
+      "note": "同上・福岡市立高校向け。 2026-08-26: 14日経過・返信無しのためリンク参照可否を再度尋ねる追撃下書きを作成(draftId r6990475188729659674)。",
+      "lastContactDate": "2026-08-26"
     },
     {
       "id": "michishirube",
