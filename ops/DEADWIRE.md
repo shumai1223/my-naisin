@@ -248,7 +248,8 @@ node scripts/d1q.mjs "SELECT * FROM parent_funnel_events WHERE prefecture_code='
 > `/admin/report`は元々human-onlyがデフォルト。`TRUSTED_CLAUSE`自体の厳格化（アンダースコア追加で
 > root_only botを除外）はcommit`f9aac30`(2026-08-24)で完了済み。残っていた`generate-sales-report.ts`の
 > exportSQL例（referer列フィルタが無くroot_only botを含んでいた）を本セッションで追記修正した
-> （`AND referer LIKE 'https://my-naishin.com/_%'`）。これでDW-3の最小の直し方3点は全て対応完了。
+> （`AND referer LIKE 'https://my-naishin.com/_%'`）。これで#1/#2は対応完了・#3のみ下記の理由で
+> 意図的見送りのまま残る。
 > **「fp-soudanが2位」という認識訂正は、この修正が反映される全ての集計（/admin/report・今後の
 > generate-sales-report.ts実行分）に自動的に反映される。**
 > **#3（/goのIPバースト窓を日次にも拡張）も見送り**: 学校等の共有IPから同一県の生徒が1日に
