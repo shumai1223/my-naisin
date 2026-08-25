@@ -368,22 +368,39 @@ C5式：`EV(円/月) = 月間検索クリック × 遷移率 × (発生率 × �
 | **人間ゲート** | 不要（フラグ点火ではない） |
 
 ### 出血5 — 学校ページ233枚＋県まとめ47枚に換金コードが1行も無い
+
+> ✅ **2026-08-25解消済み確認（loopが実ファイルで裏取り）**: 本項目の「最小の直し方」（`prefecture`面の
+> `ParentLeadCTA`配線）は**2026-08-23（S3-2）で既に実装・push済み**だった（PROPOSALS.md側は当時から
+> ✅済みだったが、本ファイル側には未反映のまま残っていた＝出血7と同型のPROPOSALS.md↔MONEY.md同期漏れ・
+> 本セッションで発見した3件目）。実際に`grep`すると`src/app/pref/[code]/school/[schoolCode]/page.tsx:176`と
+> `src/app/pref/[code]/page.tsx:241`の両方に`<ParentLeadCTA prefectureCode={prefecture.code}
+> placement="prefecture" />`が配線済みと確認。下記は対応前のスナップショットとして履歴保存する。
+
 | | |
 |---|---|
-| **症状** | Λ-2で拡張中の面に `AffiliateAd`/`ParentLeadCTA`/`selectLeadOffer`/`goHref` が皆無 |
-| **証拠** | `grep -n "AffiliateAd\|ParentLeadCTA\|selectLeadOffer\|goHref" "src/app/pref/[code]/school/[schoolCode]/page.tsx" "src/app/pref/[code]/page.tsx"` → **0ヒット** |
-| **推定影響** | ~~現時点：GSC 605表示/7クリック→月間≈8.6クリック×1.17%×EV¥240=¥24/月~~ **2026-08-15訂正（`ops/CORRECTIONS.md` C-1転記）**: 8.6クリック×**0.43%**×¥240＝**約¥9/月**（元の37%。もともと「ほぼゼロ」という結論自体は変わらない）。ただし冬ピーク（2月にS値系11.7倍・BRIEF §7）で「○○高校 倍率」が伸びた場合、この面が最大流入になっても受け皿が無い＝**構造的な機会損失** |
-| **最小の直し方** | `prefecture` 面の `ParentLeadCTA prefectureCode={code} placement="prefecture"` を1行入れる（既存エンジンで解決・新規案件不要）。※学校別の偏差値/ボーダーは書かない（C0） |
-| **人間ゲート** | 不要。ただし index解禁の県単位ゲートは既存ルール通り👤 |
+| **症状（対応前）** | Λ-2で拡張中の面に `AffiliateAd`/`ParentLeadCTA`/`selectLeadOffer`/`goHref` が皆無 |
+| **証拠（対応前）** | `grep -n "AffiliateAd\|ParentLeadCTA\|selectLeadOffer\|goHref" "src/app/pref/[code]/school/[schoolCode]/page.tsx" "src/app/pref/[code]/page.tsx"` → **0ヒット** |
+| **推定影響（対応前の試算・履歴保存）** | ~~現時点：GSC 605表示/7クリック→月間≈8.6クリック×1.17%×EV¥240=¥24/月~~ **2026-08-15訂正（`ops/CORRECTIONS.md` C-1転記）**: 8.6クリック×**0.43%**×¥240＝**約¥9/月**（元の37%。もともと「ほぼゼロ」という結論自体は変わらない） |
+| **最小の直し方** | ~~`prefecture` 面の `ParentLeadCTA prefectureCode={code} placement="prefecture"` を1行入れる~~ → **2026-08-23 実施済み（S3-2）** |
+| **人間ゲート** | 不要（対応済み。index解禁の県単位ゲートは既存ルール通り👤で別途運用中） |
 
 ### 出血6 — 副オファーが 22 の呼び出し箇所で無言に消える（GSC 3,425クリック/28日の面）
+
+> ✅ **2026-08-25解消済み確認（loopが実ファイルで裏取り）**: 本項目の「最小の直し方」（22箇所への
+> `placement`追記）は**2026-08-23（S1-1・S11-5込み）で既に実装・push済み**だった。本セッションで
+> `<ParentLeadCTA` の全43箇所をプログラム的に再走査した結果、`placement`未設定は
+> `src/app/[prefecture]/naishin/layout.tsx:125`の**1箇所のみ**（S1-1のgrep実施時から日数が経ち
+> 新設されていたと見られる漏れ）に絞り込めたため、この1箇所に`placement="prefecture"`
+> （同route内`page.tsx`の既存パターンと整合）を追加しtsc/jest green確認のうえ対応した
+> （42/43→43/43）。下記は対応前のスナップショットとして履歴保存する。
+
 | | |
 |---|---|
-| **症状** | `placement` を渡さない `ParentLeadCTA` は `selectSecondaryLeadOffer` が `null` を返し、副オファー（多くは `fp-soudan` EV¥124.2）が描画されない |
-| **証拠** | `lead-config.ts:419`（`if (!placement) return null`）。該当22箇所（§2-a a4に全リスト）。影響面のGSC28日クリック＝`/`1,879＋`*/total-score`1,018＋`/kanagawa/s-value`489＋`/hensachi/*`39 = **3,425** |
-| **推定影響** | ~~月間 ≈ 4,224クリック × 遷移率0.455% = 19.2 主クリック/月~~ **2026-08-24訂正（C-7）: 4,224クリック×0.198%＝8.4 主クリック/月**（複数面の合算のためサイト平均係数を使用）。副オファーのクリックは主の何割かが**未実測**（`placement='hensachi'` の `fp-soudan` は0件だが、副が有効化されたのは2026-08-02＝観測8日：`ParentLeadCTA.tsx:55-57`）。仮に副が主の20%（根拠：副は小さいテキストリンク・`ParentLeadCTA.tsx:108-116`）なら ~~3.8クリック/月 × EV¥124.2 = ¥478/月~~ **1.7クリック/月×EV¥124.2＝約¥208/月（2026-08-24訂正）** |
-| **最小の直し方** | 22箇所に `placement="..."` を追記するだけ（既に該当ページは `selectLeadOffer({placement:'prefecture'})` を上で呼んでいる例が多い：`[prefecture]/total-score/page.tsx:95` / `TotalScoreExplainerView.tsx:28`）。**同じ修正で §2-c の placement 欠落・表記ゆれも同時に解消する** |
-| **人間ゲート** | 不要 |
+| **症状（対応前）** | `placement` を渡さない `ParentLeadCTA` は `selectSecondaryLeadOffer` が `null` を返し、副オファー（多くは `fp-soudan` EV¥124.2）が描画されない |
+| **証拠（対応前）** | `lead-config.ts:419`（`if (!placement) return null`）。該当22箇所（§2-a a4に全リスト）。影響面のGSC28日クリック＝`/`1,879＋`*/total-score`1,018＋`/kanagawa/s-value`489＋`/hensachi/*`39 = **3,425** |
+| **推定影響（対応前の試算・履歴保存）** | ~~月間 ≈ 4,224クリック × 遷移率0.455% = 19.2 主クリック/月~~ **2026-08-24訂正（C-7）: 4,224クリック×0.198%＝8.4 主クリック/月**（複数面の合算のためサイト平均係数を使用）。仮に副が主の20%なら**1.7クリック/月×EV¥124.2＝約¥208/月** |
+| **最小の直し方** | ~~22箇所に `placement="..."` を追記するだけ~~ → **2026-08-23（21箇所）＋2026-08-25（残り1箇所・`[prefecture]/naishin/layout.tsx`）で完了** |
+| **人間ゲート** | 不要（対応済み） |
 
 ### 出血7 — トップページ結果画面がEV¥1.5〜¥7.2の有料型バナーで埋まっている
 

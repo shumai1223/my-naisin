@@ -128,6 +128,7 @@ export default async function PrefectureNaishinLayout({ children, params }: Layo
             affiliateId="sora-juku-text"
             ctaText="無料体験を申し込む（そら塾）"
             note="【そら塾】オンライン個別指導の無料体験（PR）"
+            placement="prefecture"
           />
         </div>
         </>
