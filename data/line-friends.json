@@ -7,7 +7,7 @@
     "blocked": "ブロック数"
   },
   "_source": "LINE Official Account Manager > 分析 > 友だち",
-  "_lastManualUpdate": "2026-08-24",
+  "_lastManualUpdate": "2026-08-25",
   "entries": [
     {
       "date": "2026-07-13",
@@ -170,6 +170,13 @@
       "friends": 81,
       "active": 78,
       "blocked": 3
+    },
+    {
+      "date": "2026-08-25",
+      "friends": 82,
+      "active": 79,
+      "blocked": 3,
+      "_note": "👤から『LINEは82』の報告のみ。blockedは08-24実測の3を持ち越した推定値でactiveはその差分。次回👤が管理画面を見るときにactive/blockedを実測へ差し替えること"
     }
   ]
 }
