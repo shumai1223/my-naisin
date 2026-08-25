@@ -386,14 +386,32 @@ C5式：`EV(円/月) = 月間検索クリック × 遷移率 × (発生率 × �
 | **人間ゲート** | 不要 |
 
 ### 出血7 — トップページ結果画面がEV¥1.5〜¥7.2の有料型バナーで埋まっている
+
+> ✅ **2026-08-25解消済み確認（loopが実ファイルで裏取り）**: 本項目の「最小の直し方」は既に
+> **2026-08-24 02:40（`8ebad13`・S11-1）で実装・push済み**だった（`ops/PROPOSALS.md` §2-A側は
+> 当時から✅済みだったが、本ファイル側の本項目には未反映のまま残っていた＝PROPOSALS.mdとPHASE0系
+> 監査文書間の同期漏れ。今回発見した2件目の同型事例）。`src/components/ResultSection.tsx`を実際に
+> `grep`すると`zkai-banner`/`zkai-text-advanced`/`sapuri-*`/`shoin-banner`は**1箇所も残っておらず**、
+> 全13箇所が`sora-juku-text`/`sora-juku-banner`（EV¥240・全国オンライン対応）に統一済み。
+> 下記の「症状」「推定影響」「最小の直し方」は**対応前（2026-08-10執筆時点）のスナップショットとして
+> 履歴保存**し、現状は解消済みとして扱う。なお「推定影響」欄が未解決のまま残していた
+> C-1（トップページ固有0.43%）とC-7（サイト平均0.198%〜0.537%）のどちらを使うべきかという論点は、
+> **両者が異なる集計基準（0.43%は`referer='https://my-naishin.com/'`の完全一致＝root_only包含・
+> 0.198%〜0.537%は是正済み`TRUSTED_CLAUSE`＝root_only除外）で計算されており、単純比較できない
+> ことが判明したため解消不要になった**（詳細は`ops/PHASE0_FINDINGS.md`2章項目2参照:
+> トップページ自身のURLはパス無しのため、トップページ発クリックのrefererは是正済み基準下では
+> 構造的に常にroot_only＝除外対象になり、「トップページ固有のtrusted遷移率」という指標自体が
+> 是正済み基準の下では原理的に測定不能。この論点は本項目の対応可否には影響しなかった＝
+> 修正は既に完了している）。
+
 | | |
 |---|---|
-| **症状** | `/`（GSC 1,879クリック・サイト最大）の内申点計算結果画面 `ResultSection` に `<AffiliateAd>` が14箇所あり、その中身は `zkai-banner`(EV¥1.5)・`zkai-text-middle`(¥1.5)・`zkai-text-advanced`(¥1.5)・`sapuri-text`(¥7.2)・`sapuri-banner-300`(¥5.4)×3・`shoin-banner`(¥18)×2・`zkai-text-request`(¥28.8)×2。高EVは `HomeClient.tsx:643` の `atama-text`(¥180) 1本のみ |
-| **証拠** | `src/components/ResultSection.tsx:349,369,370,390,391,411,412,434,445,454,475,688,689,775`（`HomeClient.tsx:37,587` で結果表示時に描画）。EV出典 `affiliate-economics.ts:128-145`。実測：トップの trusted 22件のうち **7件（32%）が zkai/sapuri 系＝EV¥1.5〜¥28.8** に流出（§3-a） |
-| **推定影響** | トップ月間クリック ≈ 2,318 × 0.455% = 10.5 アフィリクリック/月。うち32%（3.4件）が平均EV≒¥8 の枠へ。同数を `sora-juku-text`(¥240) に振り替えると **+¥789/月**。実測ベース（22件中7件・28日）でも同オーダー ⚠️**2026-08-24未訂正（C-7）**: この行は「トップページ」固有の数値であり、`ops/CORRECTIONS.md` C-1が確定した**トップページ固有の遷移率0.43%**（C-7のサイト平均0.198%〜0.537%とは別の値）を使うべき可能性が高いが、今回はどちらの係数が正しいか即断せず未訂正のまま残す（次回セッションで判断） |
-| **最小の直し方** | `ResultSection` の `zkai-banner`/`zkai-text-advanced`/`sapuri-*` を `rankLiveOffersByEV()`（`affiliate-economics.ts:229-243`）の上位に置換。既に `topLiveOfferByEV()`（`:250-254`）という選択関数がある＝IDハードコードを外すだけ |
-| **人間ゲート** | 不要 |
-| **注意** | [[affiliate-density-cleanup]] の教訓「低EV重複は削除一辺倒でなく別プログラムで2タッチ以上を維持」に従い、削除ではなく**置換**すること |
+| **症状（対応前のスナップショット）** | `/`（GSC 1,879クリック・サイト最大）の内申点計算結果画面 `ResultSection` に `<AffiliateAd>` が14箇所あり、その中身は `zkai-banner`(EV¥1.5)・`zkai-text-middle`(¥1.5)・`zkai-text-advanced`(¥1.5)・`sapuri-text`(¥7.2)・`sapuri-banner-300`(¥5.4)×3・`shoin-banner`(¥18)×2・`zkai-text-request`(¥28.8)×2。高EVは `HomeClient.tsx:643` の `atama-text`(¥180) 1本のみ |
+| **証拠（対応前）** | `src/components/ResultSection.tsx:349,369,370,390,391,411,412,434,445,454,475,688,689,775`（`HomeClient.tsx:37,587` で結果表示時に描画）。EV出典 `affiliate-economics.ts:128-145`。実測：トップの trusted 22件のうち **7件（32%）が zkai/sapuri 系＝EV¥1.5〜¥28.8** に流出（§3-a） |
+| **推定影響（対応前の試算・履歴保存）** | トップ月間クリック ≈ 2,318 × 0.455% = 10.5 アフィリクリック/月。うち32%（3.4件）が平均EV≒¥8 の枠へ。同数を `sora-juku-text`(¥240) に振り替えると **+¥789/月**。実測ベース（22件中7件・28日）でも同オーダー |
+| **最小の直し方** | ~~`ResultSection` の `zkai-banner`/`zkai-text-advanced`/`sapuri-*` を `rankLiveOffersByEV()`（`affiliate-economics.ts:229-243`）の上位に置換~~ → **2026-08-24 実施済み（`8ebad13`）**: 実際には個別のEVランキング関数呼び出しではなく、全13箇所を`sora-juku-text`/`sora-juku-banner`へ文言ごと統一する形で対応された |
+| **人間ゲート** | 不要（対応済み） |
+| **注意** | [[affiliate-density-cleanup]] の教訓「低EV重複は削除一辺倒でなく別プログラムで2タッチ以上を維持」は`sora-juku-text`/`sora-juku-banner`の2種で踏襲済み |
 
 ### 出血8 — `moshimo-manecafe`(CPA¥11,500) が完全に未配置＝在庫死蔵
 | | |
