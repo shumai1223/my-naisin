@@ -10,8 +10,9 @@
  *  - 招待トークンは平文を保存しない（SHA-256ハッシュのみ）。発行時に一度だけ平文を返す。
  *  - 例外は握りつぶし、呼び出し側の可用性に影響させない。
  *
- * 点火手順（本人操作・👤専用・build-not-launchのため現時点では未実行）：
- *  wrangler d1 execute my-naishin-leads --remote --file=migrations/0012_create_juku_saas.sql
+ * migration: `0012_create_juku_saas.sql`（新規テーブル追加のみの非破壊migration・
+ * 2026-07-28のゲート解禁によりloop単独適用可・2026-08-27に本番へ適用済み）。
+ * 機能自体は引き続きbuild-not-launch（書き込み経路・UIは未実装）。
  */
 
 interface D1Result<T = Record<string, unknown>> {
