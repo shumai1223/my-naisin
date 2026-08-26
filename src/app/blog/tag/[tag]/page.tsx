@@ -137,7 +137,7 @@ export default async function TagPage({ params }: PageProps) {
                   <Link
                     key={t}
                     href={`/blog/tag/${encodeURIComponent(t)}`}
-                    className="inline-flex items-center gap-1 rounded-full bg-gray-50 px-3 py-1 text-xs font-medium text-gray-700 ring-1 ring-gray-200 transition-colors hover:bg-blue-50 hover:text-blue-600 hover:ring-blue-200"
+                    className="inline-flex min-h-[44px] items-center gap-1 rounded-full bg-gray-50 px-3 py-1 text-xs font-medium text-gray-700 ring-1 ring-gray-200 transition-colors hover:bg-blue-50 hover:text-blue-600 hover:ring-blue-200"
                   >
                     <TagIcon className="h-3 w-3" />
                     {t}

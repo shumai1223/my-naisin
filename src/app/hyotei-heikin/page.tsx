@@ -137,20 +137,20 @@ export default function HyoteiHeikinPage() {
                 <Calculator className="h-3.5 w-3.5" />
                 計算ツールへ
               </a>
-              <a href="#kansan-hayami" className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50">
+              <a href="#kansan-hayami" className="inline-flex min-h-[44px] items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50">
                 換算早見表
               </a>
-              <a href="#shinrro-meyasu" className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50">
+              <a href="#shinrro-meyasu" className="inline-flex min-h-[44px] items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50">
                 進路目安
               </a>
-              <a href="#daigaku-hyotei" className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50">
+              <a href="#daigaku-hyotei" className="inline-flex min-h-[44px] items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50">
                 <GraduationCap className="h-3.5 w-3.5" />
                 大学の評定平均
               </a>
-              <a href="#tairaku-experience" className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50">
+              <a href="#tairaku-experience" className="inline-flex min-h-[44px] items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50">
                 体験談
               </a>
-              <a href="#hyotei-faq" className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50">
+              <a href="#hyotei-faq" className="inline-flex min-h-[44px] items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50">
                 よくある質問
               </a>
               <Link href="/" className="inline-flex items-center gap-1 rounded-full bg-blue-50 px-3 py-1.5 text-xs font-bold text-blue-700 ring-1 ring-blue-200 hover:bg-blue-100">

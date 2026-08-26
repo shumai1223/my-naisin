@@ -199,28 +199,28 @@ export default function HensachiPage() {
                 <Calculator className="h-3.5 w-3.5" />
                 計算ツールへ
               </a>
-              <a href="#hensachi-hayami" className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50">
+              <a href="#hensachi-hayami" className="inline-flex min-h-[44px] items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50">
                 <Table2 className="h-3.5 w-3.5" />
                 点数→偏差値 早見表
               </a>
-              <a href="#hensachi-percentile" className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50">
+              <a href="#hensachi-percentile" className="inline-flex min-h-[44px] items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50">
                 <Percent className="h-3.5 w-3.5" />
                 偏差値→上位％・順位
               </a>
-              <a href="#hensachi-moshi" className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50">
+              <a href="#hensachi-moshi" className="inline-flex min-h-[44px] items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50">
                 模試で偏差値が違う理由
               </a>
-              <a href="#real-examples" className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50">
+              <a href="#real-examples" className="inline-flex min-h-[44px] items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50">
                 実例5パターン
               </a>
-              <a href="#hensachi-daigaku" className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50">
+              <a href="#hensachi-daigaku" className="inline-flex min-h-[44px] items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50">
                 <GraduationCap className="h-3.5 w-3.5" />
                 高校と大学の偏差値
               </a>
-              <a href="#hensachi-koukou" className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50">
+              <a href="#hensachi-koukou" className="inline-flex min-h-[44px] items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50">
                 偏差値と高校
               </a>
-              <a href="#hensachi-faq" className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50">
+              <a href="#hensachi-faq" className="inline-flex min-h-[44px] items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50">
                 よくある質問
               </a>
               <Link href="/" className="inline-flex items-center gap-1 rounded-full bg-blue-50 px-3 py-1.5 text-xs font-bold text-blue-700 ring-1 ring-blue-200 hover:bg-blue-100">

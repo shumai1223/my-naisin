@@ -187,7 +187,7 @@ export function BlogListClient({ posts, initialTag }: BlogListClientProps) {
                 <button
                   type="button"
                   onClick={() => setShowAllTags(true)}
-                  className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-medium text-blue-600 ring-1 ring-blue-200 hover:bg-blue-50"
+                  className="inline-flex min-h-[44px] items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-medium text-blue-600 ring-1 ring-blue-200 hover:bg-blue-50"
                 >
                   すべて表示（+{tagCounts.length - 14}）
                 </button>
@@ -196,7 +196,7 @@ export function BlogListClient({ posts, initialTag }: BlogListClientProps) {
                 <button
                   type="button"
                   onClick={() => setShowAllTags(false)}
-                  className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-medium text-gray-500 ring-1 ring-gray-200 hover:bg-gray-50"
+                  className="inline-flex min-h-[44px] items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-medium text-gray-500 ring-1 ring-gray-200 hover:bg-gray-50"
                 >
                   折りたたむ
                 </button>

@@ -157,14 +157,14 @@ export function PrefectureNaishinTable() {
         <div className="flex shrink-0 gap-2">
           <Link
             href="/prefectures"
-            className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-bold text-blue-700 ring-1 ring-blue-200 transition-all hover:bg-blue-50"
+            className="inline-flex min-h-[44px] items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-bold text-blue-700 ring-1 ring-blue-200 transition-all hover:bg-blue-50"
           >
             <Calculator className="h-3 w-3" />
             都道府県一覧へ
           </Link>
           <Link
             href="/quality"
-            className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-bold text-slate-600 ring-1 ring-slate-200 transition-all hover:bg-slate-50"
+            className="inline-flex min-h-[44px] items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-bold text-slate-600 ring-1 ring-slate-200 transition-all hover:bg-slate-50"
           >
             情報の信頼性
           </Link>

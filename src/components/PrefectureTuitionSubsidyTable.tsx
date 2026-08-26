@@ -159,7 +159,7 @@ export function PrefectureTuitionSubsidyTable() {
         </p>
         <Link
           href="/prefectures"
-          className="inline-flex shrink-0 items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-bold text-emerald-700 ring-1 ring-emerald-200 transition-all hover:bg-emerald-50"
+          className="inline-flex min-h-[44px] shrink-0 items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-bold text-emerald-700 ring-1 ring-emerald-200 transition-all hover:bg-emerald-50"
         >
           都道府県一覧へ
         </Link>

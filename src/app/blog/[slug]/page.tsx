@@ -365,7 +365,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                 <Link
                   key={tag}
                   href={`/blog/tag/${encodeURIComponent(tag)}`}
-                  className="inline-flex items-center gap-1 rounded-full bg-gray-50 px-3 py-1 text-xs font-medium text-gray-700 ring-1 ring-gray-200 transition-colors hover:bg-blue-50 hover:text-blue-600 hover:ring-blue-200"
+                  className="inline-flex min-h-[44px] items-center gap-1 rounded-full bg-gray-50 px-3 py-1 text-xs font-medium text-gray-700 ring-1 ring-gray-200 transition-colors hover:bg-blue-50 hover:text-blue-600 hover:ring-blue-200"
                 >
                   <Tag className="h-3 w-3" />
                   {tag}

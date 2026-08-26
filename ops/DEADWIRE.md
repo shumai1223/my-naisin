@@ -685,6 +685,14 @@ $ python: 本番HTMLの <a>/<button> の class から Tailwind の高さを推�
 ### 確信度
 **要追加検証**（class から推定した静的値であり、実ブラウザのレイアウト実測ではない）。
 
+> ✅ **2026-08-26 対応済み（loopが実施）**: `rounded-full ... text-xs` のタグ/チップ型リンク19箇所
+> （`hensachi`/`hyotei-heikin`の各アンカーナビ12本、`BlogListClient`のタグ開閉ボタン2本、
+> `PrefectureNaishinTable`/`PrefectureTuitionSubsidyTable`のCTA3本、`blog/[slug]`・`blog/tag/[tag]`の
+> タグリンク2本）全てに`min-h-[44px]`を追加。グローバルCSSは触らず対象を限定通り絞った。
+> 全て`inline-flex items-center`のため高さ拡張は自動で垂直中央寄せされる。tsc実exit0・jestフル
+> 339 suites/5918 tests green。円換算根拠は引き続き無いため確信度は「要追加検証」のまま
+> （効果測定はrage_click率の推移を次回T-R1月次で確認）。
+
 ---
 
 # 10. 過去の死配線の再確認 — 3件のうち2件は既に直っていた
