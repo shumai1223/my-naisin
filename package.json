@@ -22,6 +22,7 @@
     "check:blog-links": "node scripts/check-blog-source-links.mjs",
     "check:competition-links": "node scripts/check-competition-rate-links.mjs",
     "check:click-fraud": "node scripts/check-click-fraud-burst.mjs",
+    "check:click-ratio": "npx tsx scripts/check-click-ratio-anomaly.ts",
     "check:stats": "npx tsx scripts/stats-distribution-audit.ts",
     "check:forbidden": "node scripts/check-forbidden-words.js",
     "check:consistency": "node scripts/check-data-consistency.js",

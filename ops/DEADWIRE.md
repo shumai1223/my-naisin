@@ -523,6 +523,18 @@ return path.replace(/^\//, '').slice(0, 40) || 'home';
 > バーストの日次検知）が近い機能を部分的に持つが、`classifyClick`の比率そのものをアラート/ゲートに繋ぐ専用の
 > チェックはまだ無い＝厳密には#10は依然未対応のまま。**
 >
+> ✅ **2026-08-26 #10も対応済み（loopが実施）**: `src/lib/click-ratio-audit.ts`（純関数`auditClickRatios`・
+> DW-3実測「human分類のうちdesktop327/mobile21=6%」を根拠に、human分類クリックのモバイル比率が
+> サイト全体水準(74%)から著しく低ければ偽装ヘッダ型ボットのすり抜けを疑うロジック。サンプル10件未満は
+> オオカミ少年防止のため判定を見送る）＋不変条件テスト6件を新規追加。データ取得は
+> `scripts/check-click-ratio-anomaly.ts`（d1q.mjs経由・読み取り専用）が担当し`npm run check:click-ratio`
+> として登録、`.github/workflows/d1-integrity-daily.yml`に第3の検知ステップとして配線（既存の
+> CLOUDFLARE_API_TOKEN/ACCOUNT_ID secretsを共用・新規シークレット不要）。**本番D1に対する初回実行で
+> 実際に異常を検知した**（過去28日・human分類40件中モバイル比率17.5%）が、これはDW-3が既に文書化
+> 済みの既知の未解決問題（IPローテーション×ヘッダ偽装型ボットのすり抜け）と一致する数値であり、
+> 新規のインシデントではないと判断（該当ボット自体の追加対策はスコープ外・TH-13の継続課題）。
+> tsc実exit0・jestフル340suites5925tests green。
+>
 > ✅ **2026-08-24 export名衝突リネーム完了（loopが実施）**: `src/data/schools-private/index.ts`の
 > `SCHOOL_MASTER_BY_PREFECTURE`/`SCHOOL_MASTER_FILES`を`PRIVATE_SCHOOL_MASTER_BY_PREFECTURE`/
 > `PRIVATE_SCHOOL_MASTER_FILES`へリネーム。grep確認の結果、本番コードからのimportは0件（テスト1本
@@ -552,7 +564,7 @@ return path.replace(/^\//, '').slice(0, 40) || 'home';
 | 7 | `private-school-tuition`（私立学費） | 8 | fees非空・amount>0 / 内訳合計＝公表合計 | **○（8/8）** | `src/lib/__tests__/private-school-tuition.test.ts:93,136,186,…` |
 | 8 | `exam-score-statistics`（入試平均点） | 41 | 教科合計 ≈ totalAverage | **○（41/41が本文に出現）** | `src/lib/__tests__/exam-score-statistics.test.ts:57,90,129,…` |
 | 9 | **`stats_submissions`（D1・実行時データ）** | — | 母平均の妥当域 / 日次バースト / 極値集中 | **× 実行時ゲート無し** | 純関数 `src/lib/stats-audit.ts` とテストは存在するが、**本番データに対して自動では一度も走っていない**（DW-8） |
-| 10 | `clicks`（D1・実行時データ） | — | 人間比率・モバイル比率の妥当域 | **×** | `classifyClick`（`bot-filter.ts:70`）は存在するが**アラート/ゲートに繋がっていない** |
+| 10 | `clicks`（D1・実行時データ） | — | 人間比率・モバイル比率の妥当域 | **○** | 2026-08-26対応: `check:click-ratio`＋`d1-integrity-daily.yml`（`src/lib/click-ratio-audit.ts`） |
 
 テストの現況（自分で実行）:
 ```bash
