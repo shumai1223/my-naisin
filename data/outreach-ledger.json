@@ -1787,9 +1787,10 @@
       "sourceTaskId": "T-C2",
       "sentDate": "2026-08-19",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "1a010424c0c752cf",
-      "note": "T-C2で本文作成済みの候補が2026-08-15〜08-20の間にGmailで実送信されていたことを2026-08-21にin:sent実測で確認し反映(queueのmessageId=1a010424c0c752cfと実際のGmail送信を突合)。"
+      "note": "T-C2で本文作成済みの候補が2026-08-15〜08-20の間にGmailで実送信されていたことを2026-08-21にin:sent実測で確認し反映(queueのmessageId=1a010424c0c752cfと実際のGmail送信を突合)。 2026-08-27: 8日経過・返信無しのため内申点白書2026を差分価値とした追撃下書きを作成(draftId r-2861158577973477922)。",
+      "lastContactDate": "2026-08-27"
     },
     {
       "id": "lane9-jaeis",
@@ -1798,9 +1799,10 @@
       "sourceTaskId": "T-C2",
       "sentDate": "2026-08-19",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "1a0104ce722f5777",
-      "note": "T-C2で本文作成済みの候補が2026-08-15〜08-20の間にGmailで実送信されていたことを2026-08-21にin:sent実測で確認し反映(queueのmessageId=1a0104ce722f5777と実際のGmail送信を突合)。"
+      "note": "T-C2で本文作成済みの候補が2026-08-15〜08-20の間にGmailで実送信されていたことを2026-08-21にin:sent実測で確認し反映(queueのmessageId=1a0104ce722f5777と実際のGmail送信を突合)。 2026-08-27: 8日経過・返信無しのため内申点白書2026を差分価値とした追撃下書きを作成(draftId r-3236140555524014535)。",
+      "lastContactDate": "2026-08-27"
     },
     {
       "id": "lane9-jsme",
@@ -1809,9 +1811,10 @@
       "sourceTaskId": "T-C2",
       "sentDate": "2026-08-19",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "1a010428d75f594e",
-      "note": "T-C2で本文作成済みの候補が2026-08-15〜08-20の間にGmailで実送信されていたことを2026-08-21にin:sent実測で確認し反映(queueのmessageId=1a010428d75f594eと実際のGmail送信を突合)。"
+      "note": "T-C2で本文作成済みの候補が2026-08-15〜08-20の間にGmailで実送信されていたことを2026-08-21にin:sent実測で確認し反映(queueのmessageId=1a010428d75f594eと実際のGmail送信を突合)。 2026-08-27: 8日経過・返信無しのため内申点白書2026を差分価値とした追撃下書きを作成(draftId r4083623326110554313)。",
+      "lastContactDate": "2026-08-27"
     },
     {
       "id": "lane9-jahee",
@@ -1820,9 +1823,10 @@
       "sourceTaskId": "T-C2",
       "sentDate": "2026-08-19",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "1a00b27841588536",
-      "note": "T-C2で本文作成済みの候補が2026-08-15〜08-20の間にGmailで実送信されていたことを2026-08-21にin:sent実測で確認し反映(queueのmessageId=1a00b27841588536と実際のGmail送信を突合)。"
+      "note": "T-C2で本文作成済みの候補が2026-08-15〜08-20の間にGmailで実送信されていたことを2026-08-21にin:sent実測で確認し反映(queueのmessageId=1a00b27841588536と実際のGmail送信を突合)。 2026-08-27: 8日経過・返信無しのため内申点白書2026を差分価値とした追撃下書きを作成(draftId r8541465607615103812)。",
+      "lastContactDate": "2026-08-27"
     },
     {
       "id": "lane9-jsfee",
@@ -1831,9 +1835,10 @@
       "sourceTaskId": "T-C2",
       "sentDate": "2026-08-19",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "1a0104cfb92647ab",
-      "note": "T-C2で本文作成済みの候補が2026-08-15〜08-20の間にGmailで実送信されていたことを2026-08-21にin:sent実測で確認し反映(queueのmessageId=1a0104cfb92647abと実際のGmail送信を突合)。"
+      "note": "T-C2で本文作成済みの候補が2026-08-15〜08-20の間にGmailで実送信されていたことを2026-08-21にin:sent実測で確認し反映(queueのmessageId=1a0104cfb92647abと実際のGmail送信を突合)。 2026-08-27: 8日経過・返信無しのため内申点白書2026を差分価値とした追撃下書きを作成(draftId r-640617884846715073)。",
+      "lastContactDate": "2026-08-27"
     },
     {
       "id": "lane5-jukujournal",
