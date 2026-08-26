@@ -165,7 +165,7 @@ async function bootstrapActive() {
 
 function startRotation() {
   rotating = true;
-  console.log('[copilot] 会話が伸びてきたため裏で新しいプロセスを準備します(応答は止めない)');
+  console.log('[copilot] 新しいプロセスを裏で準備します(応答は止めない)');
   const next = createSession();
   rotatingSession = next;
   warmupSession(next)
@@ -243,6 +243,23 @@ const server = http.createServer(async (req, res) => {
   if (req.method === 'GET' && req.url === '/health') {
     res.writeHead(200, { 'content-type': 'application/json; charset=utf-8' });
     return res.end(JSON.stringify({ ready: !!active?.ready, model: MODEL, error: lastError }));
+  }
+  // 会話が長くなって文脈が汚れた時・話題が大きく変わった時に、
+  // 履歴ゼロの新しいプロセスへ入れ替える(商談中に押せるよう応答は止めない)。
+  // 回帰テストで「1度目の価格質問」を検証するのにも使う(セッション内2度目になってしまうため)。
+  if (req.method === 'POST' && req.url === '/reset') {
+    res.writeHead(200, { 'content-type': 'application/json; charset=utf-8' });
+    if (rotating) return res.end(JSON.stringify({ ok: true, note: 'すでに入れ替え中です' }));
+    const before = active;
+    startRotation();
+    // 切替完了を待ってから返す(テストが確実に新セッションで次を投げられるようにする)
+    const t0 = Date.now();
+    const wait = () => {
+      if (active !== before && active?.ready) return res.end(JSON.stringify({ ok: true, ms: Date.now() - t0 }));
+      if (Date.now() - t0 > 120_000) return res.end(JSON.stringify({ ok: false, error: 'timeout' }));
+      setTimeout(wait, 200);
+    };
+    return wait();
   }
   if (req.method === 'POST' && req.url === '/suggest') {
     let raw = '';

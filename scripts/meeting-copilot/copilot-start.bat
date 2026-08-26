@@ -1,5 +1,6 @@
 @echo off
-rem 商談副操縦士: サーバー起動 + ブラウザを開く
+rem Meeting copilot: start server and open browser.
+rem ASCII only - cmd.exe reads this file as Shift-JIS and Japanese comments have broken parsing before.
 cd /d %~dp0
 start "" http://localhost:3456
 node server.mjs

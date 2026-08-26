@@ -37,6 +37,16 @@
   details { background: #131a29; border: 1px solid #263049; border-radius: 10px; padding: 6px 10px; }
   details summary { cursor: pointer; font-size: 13px; font-weight: 700; padding: 4px 0; color: #cbd5e1; }
   details .body { font-size: 14px; line-height: 1.75; padding: 6px 2px 8px; white-space: pre-wrap; color: #e6e9f0; }
+  #doors { display: grid; grid-template-columns: 1fr 1fr 1.2fr; gap: 6px; }
+  .door { background: #131a29; border: 1px solid #263049; border-radius: 8px; padding: 6px 9px; font-size: 12px; line-height: 1.5; }
+  .door b { color: #8b96ad; }
+  .door small { display: block; color: #5b6780; font-size: 10.5px; }
+  .door.b { border-color: #2563eb; background: #14203a; }
+  .door.b b { color: #7dd3fc; }
+  .door.b small { color: #93a9c9; }
+  .door.goal { border-color: #713f12; background: #241c0e; }
+  .door.goal b { color: #fde047; }
+  .door.goal small { color: #c9b78a; }
   footer#reminderBar { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; padding: 5px 14px; background: #171e2e; border-top: 1px solid #263049; font-size: 11px; color: #9aa5bd; }
   footer#reminderBar .rgroup { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
   footer#reminderBar .rlabel { font-weight: 800; color: #7dd3fc; white-space: nowrap; }
@@ -45,10 +55,12 @@
 </head>
 <body>
 <header>
-  <h1>🎙️ 商談副操縦士</h1>
+  <h1>🎙️ 旺文社 商談副操縦士</h1>
+  <span class="badge" style="background:#1e3a5f;color:#93c5fd">パスナビ for School / 池田様</span>
   <span id="micBadge" class="badge">マイク: OFF</span>
   <span id="aiBadge" class="badge warn">AI: 起動中…</span>
-  <span class="badge" style="margin-left:auto">スピーカー出音で相手の声も拾う / 保存なし</span>
+  <button id="resetBtn" style="margin-left:auto;font-size:11px;padding:3px 10px" title="話題が大きく変わった時・回答がおかしくなった時に押す(履歴ゼロの新セッションに入れ替え・数秒)">🔄 文脈リセット</button>
+  <span class="badge">保存なし</span>
 </header>
 <main>
   <section class="left">
@@ -61,6 +73,17 @@
     </div>
   </section>
   <section>
+    <div id="doors">
+      <div class="door">
+        <b>🚪A</b> 中学生の内申点・倍率<br><small>入ってくる生徒を見る・年1回</small>
+      </div>
+      <div class="door b">
+        <b>🚪B ★強い</b> 評定平均→推薦<br><small>指定校/総合型の出願資格・面談のたび</small>
+      </div>
+      <div class="door goal">
+        <b>今日の勝ち条件</b><br><small>①どちらのドアか聞く ②相手の言葉を1つ持ち帰る ③次の一手を決める</small>
+      </div>
+    </div>
     <div class="panel-title">🤖 AIサジェスト（自動: 発言の区切りごとに回答ヒントが流れる）</div>
     <div class="row">
       <button id="autoBtn" class="primary">🤖 自動回答: ON</button>
@@ -79,40 +102,53 @@
     <span class="ritem">「進んだ際はPR TIMES等での共同発表もご検討いただけますか」</span>
   </div>
   <div class="rgroup">
+    <span class="rlabel" style="color:#fca5a5">⚠️事故りやすい</span>
+    <span class="ritem">価格は<b>1度目は言わない</b>／「二度目」「先ほど」と言われたら<b>必ず帯で答える</b></span>
+    <span class="ritem">学校名・地名は<b>絶対に言わない</b></span>
+    <span class="ritem">NDA/インボイス/SLA/納期は<b>1行目で確約しない</b></span>
+    <span class="ritem">導入実績は<b>0と正直に</b>→第1号プレミアムへ反転</span>
+  </div>
+  <div class="rgroup">
     <span class="rlabel">②稟議ルート</span>
     <span class="ritem">「社内では最終的にどなたのご判断に?」</span>
     <span class="ritem">「次のステップはどんな流れに?」</span>
   </div>
-  <details id="q20panel">
-    <summary>❓ こちらから聞く20問（沈黙対策・クリックで開閉）</summary>
+  <details id="q20panel" open>
+    <summary>❓ こちらから聞く20問（旺文社版・沈黙対策／クリックで開閉）</summary>
     <div class="body">
-      <b>①相手の現状</b><br>
-      現在、生徒さんの内申点はどなたが、どのように計算されていますか？／
-      その作業には普段どれくらいのお時間がかかっていますか？／
-      都道府県ごとの制度の違いはどのように管理されていますか？／
-      制度改定があった時、情報のアップデートはどなたが担当されますか？／
-      今、内申点まわりで一番困っていることは何ですか？／
-      生徒さん・保護者様向けサービスで、内申点に関するお問い合わせはどれくらいありますか？
+      <b>①相手の現状を知る（まずここ。ドアAかBかが分かる）</b><br>
+      パスナビ for School は、先生方がどんな場面でお使いになることが多いですか？／
+      学校採用というのは、進路指導部の先生がまとめて導入される形でしょうか？／
+      螢雪時代や志願動向の分析は、先生方はどのように活用されていますか？／
+      先生方から「こういうデータが欲しい」というご要望で多いものは何ですか？／
+      今、進路指導まわりで先生方が一番お困りなのはどんなことですか？／
+      高校入試（中学生）側のデータに関心を持たれたのは、どういう経緯だったのでしょうか？
       <br><br>
-      <b>②次の商品の要件（★最重要）</b><br>
-      これが御社の管理画面に組み込まれていたら、実際にお使いになりますか？／
-      教室・校舎の先生が使うとしたら、どんな機能が必要ですか？／
-      生徒さん・保護者様向けの画面と社内向けの業務ツール、どちらに近い形でお使いになりたいですか？／
-      データを見るだけでなく他システムと連携させたいというご要望はありますか？／
-      将来的に対応してほしい都道府県・機能の優先順位はありますか？
+      <b>②★ドアBを開ける5問（今日いちばん価値がある）</b><br>
+      先生方が生徒さんの<b>評定平均</b>を出して、推薦の基準に届くか判断される場面はありますか？／
+      それは今、どうやって計算されていますか？（手計算・Excel・校務システム）／
+      指定校推薦の校内選考の資料づくりには、どのくらいお時間がかかっていますか？／
+      総合型選抜の出願資格の確認は、どなたが担当されていますか？／
+      「あと何が必要か」を生徒に逆算して示す場面はありますか？
       <br><br>
-      <b>③導入の障壁</b><br>
-      こうした外部サービスの導入は最終的にどなたのご判断になりますか？／
-      予算のご検討はどのタイミングで行われますか？／
-      情報システム部門のご審査は必要ですか？どのくらいお時間がかかりますか？／
-      ご契約前に必要な社内資料はございますか？／
-      他社の類似サービスと比較検討されるご予定はありますか？
+      <b>③ドアAの確認（★2番目に聞く。最初に聞くと相手が引きずられる）</b><br>
+      逆に、中学から高校への入口のデータ（内申点・倍率）の方に需要はありますか？／
+      高校の先生が、入学してくる生徒の内申の分布を知りたがることはありますか？／
+      中学生・保護者向けの新しい展開をご検討されている、ということはありますか？
       <br><br>
-      <b>④断られたときに聞くこと</b><br>
-      差し支えなければ見送りの決め手を教えていただけますか？／
-      もし価格がネックであれば、どのくらいの水準ならご検討の余地がありますか？／
-      今回は難しくても将来的にまたお声がけさせていただいてもよろしいですか？／
-      社内で今回のお話が伝わった際、どんな反応が印象に残りましたか？
+      <b>④導入の障壁（ここを聞かないと「検討します」で終わる）</b><br>
+      こうした外部データの導入は、最終的にどなたのご判断になりますか？／
+      予算のご検討はどのタイミングで行われますか？（年度替わり等）／
+      開発本部として、技術的に確認しておきたい点はございますか？／
+      ご契約前に必要な社内資料はございますか？（見積書・仕様書等）
+      <br><br>
+      <b>⑤断られたときに必ず聞く</b><br>
+      差し支えなければ、見送りの決め手を教えていただけますか？（価格・機能・時期のどれが大きいか）／
+      今回は難しくても、将来的にまたお声がけさせていただいてもよろしいですか？
+      <br><br>
+      <b>⑥終わり方</b><br>
+      社内でご検討いただく際に必要な資料はございますか？／
+      次はどのように進めるのがよろしいでしょうか？
     </div>
   </details>
 </footer>
@@ -272,13 +308,17 @@ setInterval(() => {
 // つなぎ言葉: 生成待ちの~2秒を人間が自然に喋って埋めるための一言。
 // 「そうですね」だけでは短すぎるので、2〜3秒ぶん話せる長さにする。連続で同じものが
 // 出ないよう順送りする。中身はどれも「まだ何も答えていない」当たり障りのない相槌。
+// 生成待ちの1〜2秒を人間が喋って埋めるための「つなぎ言葉」。
+// 中学生が企業の方に話す場面なので、評価する言い回し(「いい質問ですね」)は入れない。
+// 2〜3秒ぶん喋れる長さにする(「そうですね」だけでは間が持たない)。
 const BRIDGES = [
   'はい、ありがとうございます。そうですね……',
   'なるほど、そこは大事なところですね。ええと……',
-  'そうですね、少し確認しながらお話ししますね。',
-  'ありがとうございます。整理してお答えしますと、',
+  'そうですね、少し整理しながらお話しさせてください。',
+  'ありがとうございます。順番にお答えしますと、',
   'はい、その点ですね。ええ……',
-  'いい質問をありがとうございます。そうですね、',
+  'ありがとうございます。そこは正確にお伝えしたいので、',
+  'なるほど、承知しました。そうしますと……',
 ];
 let bridgeIdx = 0;
 function pickBridge() {
@@ -366,6 +406,14 @@ async function suggest(auto = false, interim = '') {
   if (autoOn && lines.length > sentCount) scheduleAuto(); // 生成中に溜まった発言を処理
 }
 
+document.getElementById('resetBtn').onclick = async (e) => {
+  const b = e.currentTarget;
+  const label = b.textContent;
+  b.disabled = true; b.textContent = '🔄 入れ替え中…';
+  try { await fetch('/reset', { method: 'POST' }); } catch {}
+  b.disabled = false; b.textContent = label;
+  sentCount = lines.length; // リセット後は過去ログを送り直さない
+};
 suggestBtn.onclick = () => suggest(false);
 document.addEventListener('keydown', (e) => { if (e.ctrlKey && e.key === 'Enter') suggest(); });
 </script>
