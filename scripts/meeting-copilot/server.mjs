@@ -207,22 +207,71 @@ const POLISH = [
   [/貴社/g, '御社'],
 ];
 const POLISH_CARRY = 3; // 置換対象の最長語-1文字ぶん持ち越せば境界割れしない
+
+// ---- 価格リークの決定論ガード ------------------------------------------
+// プロンプトで3回作り直しても「1行目で正しくかわした後、3行目に『参考までに、年24万円から』を
+// 足す」リークが消えなかった(実測 price1 5〜8/9)。この商談で最も高くつく事故なので、
+// 文面から機械判定できる部分だけコードで塞ぐ。
+//
+// 規則: 相手の発言に「再度の要求」を示す語が無い限り、B2B価格の数字を含む行を落とす。
+// Pro月9,800円はサイトに公開している価格なので対象にしない(隠す理由がない)。
+const B2B_PRICE_RE = /(24\s*万|240,?000|100\s*万|1,?000,?000|50\s*万|500,?000|20\s*万)/;
+const REASK_RE = /(二度目|2度目|再度|もう一度|もう一回|先ほど|さきほど|改めて|やはり|重ねて|しつこ)/;
+// 話者自身が「価格を出せ」と指示した場合も解禁する(手動入力での明示指示)
+const SPEAKER_ALLOW_RE = /(価格を出|金額を(言|出)|価格帯を(言|出)|値段を(言|出))/;
+
+function priceGuardAllowed(inboundText) {
+  return REASK_RE.test(inboundText) || SPEAKER_ALLOW_RE.test(inboundText);
+}
+
+// ---- 「待ちの姿勢」で終わる行を落とす ------------------------------------
+// 相手が「なるほど」「わかりました」で区切った時に、こちらから質問を返さず
+// 「ご不明な点があればお気軽にお声がけください」で終えてしまう癖が消えなかった
+// (形式規則を足して 22%→75% までは改善したが残った)。
+// これを話者がそのまま読み上げると主導権を相手に預けてしまうので、行ごと落とす。
+// 落とした結果2行になっても、待ちの姿勢を読み上げるより良い。
+const PASSIVE_CLOSER_RE =
+  /(お気軽に(お声がけ|ご連絡|お問い合わせ)|遠慮なく(お声がけ|ご連絡|おっしゃ)|いつでも(お声がけ|ご連絡)|お声がけください|ご不明な点が(あれば|ございましたら|出てきましたら)[^。]*ください)/;
 function polishAll(s) {
   for (const [re, to] of POLISH) s = s.replace(re, to);
   return s;
 }
-function makePolisher() {
-  let carry = '';
+// 行単位に組み直した理由: 価格ガードは「行を丸ごと落とす」判定なので、
+// 行が完成する前に流してしまうと取り消せない。TTFBは「最初のトークン」から
+// 「最初の1行が完成するまで」に伸びるが、UI側のつなぎ言葉が2〜3秒ぶん間を埋めるため
+// 実用上の体感は変わらない(実測: 1.75s → 下の run-tests で再測定する)。
+const NL = '\n';
+function makePolisher(allowPrice) {
+  let buf = '';
+  const filter = (line) => {
+    if (!line.trim()) return '';
+    if (!allowPrice && B2B_PRICE_RE.test(line)) {
+      console.log('[copilot] 価格リークを1行ブロック:', line.trim().slice(0, 60));
+      return '';
+    }
+    if (PASSIVE_CLOSER_RE.test(line)) {
+      console.log('[copilot] 待ちの姿勢の行をブロック:', line.trim().slice(0, 60));
+      return '';
+    }
+    return line;
+  };
   return {
     push(t) {
-      const s = polishAll(carry + t);
-      carry = s.slice(-POLISH_CARRY);
-      return s.slice(0, s.length - carry.length);
+      buf += t;
+      let out = '';
+      let idx;
+      while ((idx = buf.indexOf(NL)) >= 0) {
+        const line = polishAll(buf.slice(0, idx));
+        buf = buf.slice(idx + 1);
+        const kept = filter(line);
+        if (kept) out += kept + NL;
+      }
+      return out;
     },
     flush() {
-      const out = polishAll(carry);
-      carry = '';
-      return out;
+      const kept = filter(polishAll(buf));
+      buf = '';
+      return kept;
     },
   };
 }
@@ -277,7 +326,7 @@ const server = http.createServer(async (req, res) => {
       // 生成テキストを逐次チャンクで流す(ブラウザ側はreaderで読みながら描画)
       res.writeHead(200, { 'content-type': 'text/plain; charset=utf-8', 'cache-control': 'no-cache' });
       let streamed = 0;
-      const polisher = makePolisher();
+      const polisher = makePolisher(priceGuardAllowed(text));
       try {
         const answer = await sendTurn(text.slice(0, 8000), (t) => {
           streamed += t.length;
