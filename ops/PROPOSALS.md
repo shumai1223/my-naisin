@@ -79,7 +79,7 @@
 | S9-4 | root_only × placement の自己矛盾検出を実装 | 2.0 | 9月（S1-1後） | 不要 | 採用。**✅2026-08-24対応済み(loop)**。S1-1完了済みを確認の上で着手。`isPlacementConsistentWithReferer`を`bot-filter.ts`に追加し`classifyClick`の第3判定軸として配線（SQL側`TRUSTED_CLAUSE`集計＝S9-3の対象は変更せず） |
 | S9-5 | click-hop 通過計測（null-referer 304件の可視化） | 1.0〜1.5 | 9月 | 新規D1なら**migration適用=👤** | 採用 |
 | S2-3 | `ParentWindowBridge` の `/mendan` リンクにトラッキング追加 | 1.0 | 8/31まで | デプロイのみ | 採用。**✅対応済み**（`ParentWindowBridge.tsx`に`onMendanLinkClick`実装済み） |
-| S12-1 | `HyoteiUniversityBridge` の D1一次計測 | 2.0 | 8/31まで | **migration本番適用=👤** | 採用（S12群の全下流の前提）。**🟡コード完了・migration適用のみ👤待ち**（commit 3736961・loop-question-noteに手順記載済み） |
+| S12-1 | `HyoteiUniversityBridge` の D1一次計測 | 2.0 | 8/31まで | ~~migration本番適用=👤~~ 2026-07-28ゲート解禁によりloop単独可 | 採用（S12群の全下流の前提）。**✅2026-08-27 migration(0020)をloop自力適用完了**（`student_funnel_events`テーブル作成・D1実測でrows=0の初期状態を確認済み。以後イベントが溜まり次第S12群の下流判断に進める） |
 | S5-2 | 学校ページ露出率(233/3,089)の週次追跡＋GSC確認カレンダー | 1.0 | 8/31まで | GSC確認=👤 | 採用。**✅loop側(自動取得・カレンダー)は対応済み**。`ops/CLOCK.md`に08/23・09/20・11/28の3チェックポイントを記録済み・週次KPIメールが露出行(233枚起点)を自動追跡。GSC確認自体は引き続き👤のみ |
 | S8-5 | 指名検索クエリの定点観測を週次KPIへ | 1.0 | 9月 | 不要 | 採用。**✅2026-08-24対応済み(loop・`21a65ec`)。本行はstale記述だった**（`ops/proposals/S8.md`側は既に✅済みだったがマスターの本行が未同期）: `fetchBrandedQuerySignal()`を週次KPIに接続済み |
 | S8-6 | `adoption_domains`（被リンク採用検出）を週次KPIへ | 0.5 | 9月 | 不要 | 採用。**✅2026-08-24対応済み(loop・`21a65ec`)。本行はstale記述だった**（同上）: `getAdoptionDomainSummary(7)`を週次KPIに接続済み・0件時も「継続監視中」と明示 |
