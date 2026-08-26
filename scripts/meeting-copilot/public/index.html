@@ -59,11 +59,32 @@
   <span class="badge" style="background:#1e3a5f;color:#93c5fd">パスナビ for School / 池田様</span>
   <span id="micBadge" class="badge">マイク: OFF</span>
   <span id="aiBadge" class="badge warn">AI: 起動中…</span>
+  <span id="phase" class="badge" style="background:#1e293b;color:#cbd5e1" title="クリックで開始/停止">▶ 商談タイマー開始</span>
   <button id="resetBtn" style="margin-left:auto;font-size:11px;padding:3px 10px" title="話題が大きく変わった時・回答がおかしくなった時に押す(履歴ゼロの新セッションに入れ替え・数秒)">🔄 文脈リセット</button>
   <span class="badge">保存なし</span>
 </header>
 <main>
   <section class="left">
+    <details id="openPanel" open>
+      <summary>▶ 冒頭5分（母の台本 → 自分の第一声 → 3分で話すこと）</summary>
+      <div class="body">
+        <b style="color:#7dd3fc">① 母の台本（そのまま読んでもらう・読み終えたら「ここで失礼します」と口に出して退席）</b><br>
+        はじめまして、〇〇の母でございます。本日はお時間をいただきありがとうございます。<br>
+        息子がこのような活動をしていることは把握しており、私も応援しております。<br>
+        技術的な内容は本人の方が詳しいので、この後は本人からご説明させていただきます。<br>
+        <b>契約などのお話に進む場合は、改めて私が対応いたします</b>ので、その際はよろしくお願いいたします。<br>
+        それでは、私はここで失礼いたします。
+        <br><br>
+        <b style="color:#fde047">② 自分の第一声（アジェンダを先に出すと主導権が取れる）</b><br>
+        「本日は御社の<b>パスナビ for School</b> で、<b>先生方が進路指導のどの場面でお使いになっているのか</b>を伺いたくて、お時間をいただきました」<br>
+        <span style="color:#fca5a5">⚠️ 用途を「中学から高校への入口」と決めつけない。決めつけた瞬間にドアBが閉じる。</span>
+        <br><br>
+        <b style="color:#86efac">③ 3分で話すこと（これ以上話さない）</b><br>
+        1. 全国47都道府県の公立高校入試の<b>内申点計算方式・総合得点計算方式</b>を、各教育委員会の公表資料だけを出典にデータ化して無料公開している<br>
+        2. REST API・MCP・CSV・JSON の4形態で本番稼働中。<code>/developers</code> にPlaygroundがある<br>
+        3. <b>公表値しか載せない。</b>学校別の偏差値や合格ボーダーの独自推定は一切しない。1データ点＝1出典で、その場でソースURLを出せる
+      </div>
+    </details>
     <div class="panel-title">会話ログ（自動文字起こし・編集はできないが手入力で追記可）</div>
     <div id="transcript"></div>
     <div id="interim"></div>
@@ -405,6 +426,28 @@ async function suggest(auto = false, interim = '') {
   suggestBtn.disabled = false;
   if (autoOn && lines.length > sentCount) scheduleAuto(); // 生成中に溜まった発言を処理
 }
+
+// ── 60分の進行タイマー(playbookの時間配分をそのまま出す) ──
+const PHASES = [
+  [0, 5, '母が同席して挨拶→退席'],
+  [5, 8, '自分が3分で話す'],
+  [8, 35, '★聞く（話す3割・聞く7割）'],
+  [35, 50, '質問に答える・デモ'],
+  [50, 60, '次の一手を決めて終わる'],
+];
+const phaseEl = document.getElementById('phase');
+let startedAt = null;
+phaseEl.onclick = () => { startedAt = startedAt ? null : Date.now(); if (!startedAt) phaseEl.textContent = '▶ 商談タイマー開始'; };
+setInterval(() => {
+  if (!startedAt) return;
+  const min = (Date.now() - startedAt) / 60000;
+  const p = PHASES.find(([a, b]) => min >= a && min < b);
+  const mm = String(Math.floor(min)).padStart(2, '0');
+  const ss = String(Math.floor(((Date.now() - startedAt) / 1000) % 60)).padStart(2, '0');
+  phaseEl.textContent = `${mm}:${ss}  ${p ? p[2] : '60分経過'}`;
+  phaseEl.style.background = p && p[2].startsWith('★') ? '#14532d' : (p ? '#1e293b' : '#7f1d1d');
+  phaseEl.style.color = p && p[2].startsWith('★') ? '#86efac' : '#cbd5e1';
+}, 1000);
 
 document.getElementById('resetBtn').onclick = async (e) => {
   const b = e.currentTarget;
