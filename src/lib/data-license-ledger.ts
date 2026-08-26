@@ -76,7 +76,22 @@ export const DATA_LICENSE_LEDGER: Record<string, DataLicenseLedgerEntry> = {
   tochigi: { prefecture: 'tochigi', sourceHost: '.lg.jp', ...UNKNOWN() },
   gunma: { prefecture: 'gunma', sourceHost: '.lg.jp', ...UNKNOWN() },
   nagano: { prefecture: 'nagano', sourceHost: '.lg.jp', ...UNKNOWN() },
-  ibaraki: { prefecture: 'ibaraki', sourceHost: '.lg.jp', ...UNKNOWN() },
+  ibaraki: {
+    prefecture: 'ibaraki',
+    sourceHost: '.lg.jp',
+    redistribution: 'ok',
+    evidence:
+      '茨城県教育庁高校教育課からGmail回答（2026-08-26 15:45・スレッド1a01fb938697db53）: ' +
+      '「茨城県立高等学校入学者選抜の『応募状況』（募集人員、志願者数、倍率等）につきましては、' +
+      '茨城県教育委員会が公表している資料の内容をそのまま掲載するものであれば、出典を明記の上で' +
+      '掲載していただくことは差し支えありません」。提示した出典表記形式（出典：茨城県教育委員会' +
+      '「（資料名）」（URL））もそのまま承認された。「最新の公表資料をご確認いただき、掲載内容に' +
+      'ついて誤解が生じないよう御配慮いただければ」という留保あり＝A-2実装時は出典URLの定期疎通' +
+      '確認が必要（他のok県と同様）。被リンク可否には言及なし（今回の質問自体がデータ掲載のみに' +
+      '絞った内容だったため）。A-2実装時はこの県のレコードに出典URLを必ず付与する条件で応募状況' +
+      'データ（募集人員・志願者数・倍率等）を収録してよい',
+    verifiedAt: '2026-08-26',
+  },
   mie: {
     prefecture: 'mie',
     sourceHost: '.lg.jp',
