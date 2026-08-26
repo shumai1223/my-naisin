@@ -39,6 +39,20 @@
   details { flex-shrink: 0; }
   /* 冒頭5分パネルは既定で開いているため、左カラムの会話ログを潰さないよう上限を小さめにする。 */
   #openPanel .body { max-height: 26vh; }
+  /* 聞く30問: クリックで✓が付く。押した瞬間に薄くなるので、残りが一目で分かる。 */
+  #qList { display: flex; flex-direction: column; gap: 3px; }
+  label.q { display: grid; grid-template-columns: 16px 20px 1fr; align-items: start; gap: 6px;
+            padding: 4px 6px; border-radius: 6px; cursor: pointer; border: 1px solid transparent; }
+  label.q:hover { background: #1a2336; }
+  label.q .n { color: #5b6780; font-weight: 700; font-size: 12px; }
+  label.q .t { font-size: 13px; line-height: 1.5; }
+  label.q .t small { display: block; color: #5b6780; font-size: 11px; margin-top: 1px; }
+  label.q.top { border-color: #2563eb; background: #14203a; }
+  label.q.top .n { color: #7dd3fc; }
+  label.q input { margin-top: 3px; accent-color: #2563eb; }
+  label.q.done { opacity: .38; background: transparent; border-color: transparent; }
+  label.q.done .t { text-decoration: line-through; }
+  #qCount { font-size: 11px; color: #7dd3fc; font-weight: 700; }
   /* body が height:100vh + overflow:hidden のため、details を開くと中身が画面外へ出て
      どこにもスクロールが無くなる事故が起きた。開いた中身自身に上限とスクロールを持たせる。 */
   details .body { font-size: 14px; line-height: 1.75; padding: 6px 2px 8px; white-space: pre-wrap; color: #e6e9f0;
@@ -142,41 +156,38 @@
     <span class="ritem">「次のステップはどんな流れに?」</span>
   </div>
   <details id="q20panel">
-    <summary>❓ こちらから聞く20問（旺文社版・沈黙対策／クリックで開閉）</summary>
-    <div class="body">
-      <b>①相手の現状を知る（まずここ。ドアAかBかが分かる）</b><br>
-      パスナビ for School は、先生方がどんな場面でお使いになることが多いですか？／
-      学校採用というのは、進路指導部の先生がまとめて導入される形でしょうか？／
-      螢雪時代や志願動向の分析は、先生方はどのように活用されていますか？／
-      先生方から「こういうデータが欲しい」というご要望で多いものは何ですか？／
-      今、進路指導まわりで先生方が一番お困りなのはどんなことですか？／
-      高校入試（中学生）側のデータに関心を持たれたのは、どういう経緯だったのでしょうか？
-      <br><br>
-      <b>②★ドアBを開ける5問（今日いちばん価値がある）</b><br>
-      先生方が生徒さんの<b>評定平均</b>を出して、推薦の基準に届くか判断される場面はありますか？／
-      それは今、どうやって計算されていますか？（手計算・Excel・校務システム）／
-      指定校推薦の校内選考の資料づくりには、どのくらいお時間がかかっていますか？／
-      総合型選抜の出願資格の確認は、どなたが担当されていますか？／
-      「あと何が必要か」を生徒に逆算して示す場面はありますか？
-      <br><br>
-      <b>③ドアAの確認（★2番目に聞く。最初に聞くと相手が引きずられる）</b><br>
-      逆に、中学から高校への入口のデータ（内申点・倍率）の方に需要はありますか？／
-      高校の先生が、入学してくる生徒の内申の分布を知りたがることはありますか？／
-      中学生・保護者向けの新しい展開をご検討されている、ということはありますか？
-      <br><br>
-      <b>④導入の障壁（ここを聞かないと「検討します」で終わる）</b><br>
-      こうした外部データの導入は、最終的にどなたのご判断になりますか？／
-      予算のご検討はどのタイミングで行われますか？（年度替わり等）／
-      開発本部として、技術的に確認しておきたい点はございますか？／
-      ご契約前に必要な社内資料はございますか？（見積書・仕様書等）
-      <br><br>
-      <b>⑤断られたときに必ず聞く</b><br>
-      差し支えなければ、見送りの決め手を教えていただけますか？（価格・機能・時期のどれが大きいか）／
-      今回は難しくても、将来的にまたお声がけさせていただいてもよろしいですか？
-      <br><br>
-      <b>⑥終わり方</b><br>
-      社内でご検討いただく際に必要な資料はございますか？／
-      次はどのように進めるのがよろしいでしょうか？
+    <summary>❓ 聞く30問（優先度順・上から聞けばいい）　<span id="qCount">0/30</span> <a href="#" id="qReset" style="font-weight:400;color:#5b6780;font-size:11px">リセット</a></summary>
+    <div class="body" id="qList">
+      <label class="q top"><input type="checkbox" data-qi="1"><span class="n">1</span><span class="t">パスナビ for School では、先生方はどんな場面でお使いになることが多いですか？<small>冒頭の一問。「進路面談」「推薦」の語が出たら<b>ドアB</b></small></span></label>
+      <label class="q top"><input type="checkbox" data-qi="2"><span class="n">2</span><span class="t">先生方が生徒さんの<b>評定平均</b>を出して、推薦の基準に届くか判断される場面はありますか？<small>ドアBをこじ開ける一問</small></span></label>
+      <label class="q top"><input type="checkbox" data-qi="3"><span class="n">3</span><span class="t">それは今、どうやって計算されていますか？手計算でしょうか、Excelでしょうか。<small><b>今日いちばん価値のある答えが返ってくる。相手の言葉をそのまま持ち帰る</b></small></span></label>
+      <label class="q"><input type="checkbox" data-qi="4"><span class="n">4</span><span class="t">その作業には、どのくらいのお時間がかかっていますか？<small>痛みを数字にする。見積もりの根拠になる</small></span></label>
+      <label class="q"><input type="checkbox" data-qi="5"><span class="n">5</span><span class="t">今回、私からのご連絡にご返信いただけたのは、どのあたりに関心を持っていただけたのでしょうか？<small>先方の意図が直接分かる。早めに聞いてよい</small></span></label>
+      <label class="q"><input type="checkbox" data-qi="6"><span class="n">6</span><span class="t">もし評定平均の計算と推薦基準の照合が御社のサイトの中でできたら、先生方はお使いになると思われますか？<small>ドアBの需要確認。YESなら画面共有してよい</small></span></label>
+      <label class="q"><input type="checkbox" data-qi="7"><span class="n">7</span><span class="t">逆に、中学から高校への入口のデータ（内申点・倍率）の方に需要はありますか？<small>ドアAの確認。<b>必ず2番目に聞く</b>（先に聞くと相手がそちらに引きずられる）</small></span></label>
+      <label class="q"><input type="checkbox" data-qi="8"><span class="n">8</span><span class="t">こうした外部データの導入は、最終的にどなたのご判断になりますか？<small>これを聞かないと「検討します」で終わる</small></span></label>
+      <label class="q"><input type="checkbox" data-qi="9"><span class="n">9</span><span class="t">予算のご検討はどのタイミングで行われますか？年度替わりでしょうか。<small>冬に間に合うかの逆算ができる</small></span></label>
+      <label class="q"><input type="checkbox" data-qi="10"><span class="n">10</span><span class="t">今回のようなお話を進める場合、次はどんなステップになりますか？<small>相手に手順を言わせると、次が自動的に決まる</small></span></label>
+      <label class="q"><input type="checkbox" data-qi="11"><span class="n">11</span><span class="t">社内でご検討いただく際に、あった方がよい資料はどんなものですか？<small>稟議1枚を渡す口実になる</small></span></label>
+      <label class="q"><input type="checkbox" data-qi="12"><span class="n">12</span><span class="t">指定校推薦の校内選考の資料づくりは、どなたが担当されているのですか？<small>使う人が具体化される（誰向けの画面かが決まる）</small></span></label>
+      <label class="q"><input type="checkbox" data-qi="13"><span class="n">13</span><span class="t">「あと何が必要か」を生徒さんに逆算して示す場面はありますか？<small><code>/gyakusan</code> がそのまま当たる。あるなら見せる</small></span></label>
+      <label class="q"><input type="checkbox" data-qi="14"><span class="n">14</span><span class="t">先生方からご要望はあるけれど、今は応えられていないものはありますか？<small>穴を相手に言わせる。そこに入れるものがあるかも</small></span></label>
+      <label class="q"><input type="checkbox" data-qi="15"><span class="n">15</span><span class="t">今、進路指導まわりで先生方が一番お困りなのはどんなことですか？<small>話が止まったときの強い一問</small></span></label>
+      <label class="q"><input type="checkbox" data-qi="16"><span class="n">16</span><span class="t">開発本部として、技術的に確認しておきたい点はございますか？<small>相手の部署に合わせた一問</small></span></label>
+      <label class="q"><input type="checkbox" data-qi="17"><span class="n">17</span><span class="t">今、この場でAPIを実際に叩いてお見せできますが、ご覧になりますか？<small>話すより見せる方が速い。<code>/developers</code> を開いておく</small></span></label>
+      <label class="q"><input type="checkbox" data-qi="18"><span class="n">18</span><span class="t">御社で内製されるという選択肢は、検討されたことがありますか？<small>内製の脅しに先回り。「47県×毎年改定の維持を肩代わりします」</small></span></label>
+      <label class="q"><input type="checkbox" data-qi="19"><span class="n">19</span><span class="t">学校採用というのは、進路指導部の先生がまとめて導入される形でしょうか？<small>誰が財布を持っているかが分かる</small></span></label>
+      <label class="q"><input type="checkbox" data-qi="20"><span class="n">20</span><span class="t">現在、どのくらいの学校数にお使いいただいているのですか？<small>規模が分かると見積もりの形が決まる</small></span></label>
+      <label class="q"><input type="checkbox" data-qi="21"><span class="n">21</span><span class="t">総合型選抜の出願資格を満たすかどうかの確認は、誰がどうやっているのですか？<small>ドアBの深掘り</small></span></label>
+      <label class="q"><input type="checkbox" data-qi="22"><span class="n">22</span><span class="t">大学ごとの出願基準（評定3.5以上など）は、御社では一覧として持っていらっしゃるのですか？<small>持っていなければ、こちらが埋められる</small></span></label>
+      <label class="q"><input type="checkbox" data-qi="23"><span class="n">23</span><span class="t">先生向けの機能と、生徒・保護者向けの機能では、どちらに近い形をお考えですか？<small>組み込み先が決まる</small></span></label>
+      <label class="q"><input type="checkbox" data-qi="24"><span class="n">24</span><span class="t">対応してほしい都道府県や機能に、優先順位はありますか？<small>次に作るものが決まる</small></span></label>
+      <label class="q"><input type="checkbox" data-qi="25"><span class="n">25</span><span class="t">まず小さく試すとしたら、どのくらいの範囲から始めるのが現実的でしょうか？<small>パイロットの形を相手に言わせる</small></span></label>
+      <label class="q"><input type="checkbox" data-qi="26"><span class="n">26</span><span class="t">螢雪時代とパスナビ for School は、どう役割を分けていらっしゃるのですか？<small>社内の地図が分かる</small></span></label>
+      <label class="q"><input type="checkbox" data-qi="27"><span class="n">27</span><span class="t">外部のデータを誌面やサイトに載せられた事例はございますか？その場合、出典の表記はどういう形になるのですか？<small><b>クレジット表記の前例</b>が取れる（非金銭4点セット）</small></span></label>
+      <label class="q"><input type="checkbox" data-qi="28"><span class="n">28</span><span class="t">進んだ場合、導入事例として御社名を出させていただくことは可能でしょうか？<small>非金銭4点セットの1つ目</small></span></label>
+      <label class="q"><input type="checkbox" data-qi="29"><span class="n">29</span><span class="t">差し支えなければ、見送りの決め手を教えていただけますか？<small>断られたとき<b>必ず</b>聞く。価格か機能か時期かで次の手が変わる</small></span></label>
+      <label class="q"><input type="checkbox" data-qi="30"><span class="n">30</span><span class="t">本日中に、稟議用のA4 1枚と概算のお見積もりをメールでお送りしてもよろしいでしょうか？<small><b>これで終わる。次に動くのは常にこちら</b></small></span></label>
     </div>
   </details>
 </footer>
@@ -455,6 +466,37 @@ setInterval(() => {
   phaseEl.style.background = p && p[2].startsWith('★') ? '#14532d' : (p ? '#1e293b' : '#7f1d1d');
   phaseEl.style.color = p && p[2].startsWith('★') ? '#86efac' : '#cbd5e1';
 }, 1000);
+
+// ── 聞く30問のチェック(押した質問を消し込む) ──
+// 商談中にブラウザを再読み込みしても消えないよう localStorage に持つ。
+// プライベートウィンドウ等で storage が使えない環境でも落ちないよう try/catch で包む。
+const Q_KEY = 'copilot-q30-obunsha';
+const qList = document.getElementById('qList');
+const qCount = document.getElementById('qCount');
+function qLoad() { try { return JSON.parse(localStorage.getItem(Q_KEY) || '[]'); } catch { return []; } }
+function qSave(v) { try { localStorage.setItem(Q_KEY, JSON.stringify(v)); } catch {} }
+function qRender() {
+  const done = new Set(qLoad());
+  let n = 0;
+  qList.querySelectorAll('input[type=checkbox]').forEach((cb) => {
+    const on = done.has(Number(cb.dataset.qi));
+    cb.checked = on;
+    cb.closest('label').classList.toggle('done', on);
+    if (on) n++;
+  });
+  qCount.textContent = n + '/' + qList.querySelectorAll('input').length;
+}
+qList.addEventListener('change', (e) => {
+  const cb = e.target;
+  if (!cb.dataset || !cb.dataset.qi) return;
+  const done = new Set(qLoad());
+  const i = Number(cb.dataset.qi);
+  if (cb.checked) done.add(i); else done.delete(i);
+  qSave([...done]);
+  qRender();
+});
+document.getElementById('qReset').onclick = (e) => { e.preventDefault(); e.stopPropagation(); qSave([]); qRender(); };
+qRender();
 
 document.getElementById('resetBtn').onclick = async (e) => {
   const b = e.currentTarget;
