@@ -708,7 +708,11 @@
 > 通過を記録するよう変更（commit予定）。分母（`persistClick`で記録されるsuspectクリック数・
 > `clicks-db.ts`）と分子（`click_hop_completions`テーブル）から通過率を算出できる状態になった。
 > ①（href生存確認）は`npm run check:affiliate-links`として既に運用中（T-R1月次M-2）。
-> ③（外部referer4件の原因）のみ未確認のまま残存。
+> ③を実測: `node scripts/d1q.mjs`でclicksテーブルを直接確認したところ、直近28日で外部referer
+> （`https://my-naishin.com`以外）は3件のみ（全てgoogle.com・2026-08-06〜08の3日間・以降0件）で
+> 増加傾向は無い。`robots.ts`は`/go/`をdisallow済みでGoogleが正規クロールで拾う経路は無いため、
+> ユーザーがGoogle検索窓に直接URLを入力した等の個別事象と推測される。件数が極小・非継続のため
+> これ以上の追加計装は費用対効果に見合わず調査を打ち切る（出血6は①②③とも対応完了）。
 
 ### 出血7 — G1（8/31・残り21日）を動かす施策が PHASE 0 のどこにも書かれていない
 
