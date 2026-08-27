@@ -86,7 +86,15 @@ export const DATA_LICENSE_LEDGER: Record<string, DataLicenseLedgerEntry> = {
   shizuoka: { prefecture: 'shizuoka', sourceHost: '.lg.jp', ...UNKNOWN() },
   hiroshima: { prefecture: 'hiroshima', sourceHost: '.lg.jp', ...UNKNOWN() },
   kumamoto: { prefecture: 'kumamoto', sourceHost: '.lg.jp', ...UNKNOWN() },
-  miyagi: { prefecture: 'miyagi', sourceHost: '.lg.jp', ...UNKNOWN() },
+  miyagi: {
+    prefecture: 'miyagi',
+    sourceHost: '.lg.jp',
+    ...UNKNOWN(
+      '未確認。2026-08-28調査: 高校教育課ページ(pref.miyagi.jp/soshiki/koukyou/)の生HTMLを確認したが' +
+        'メールアドレス・問い合わせフォームへのリンクとも見当たらず、電話番号(022-211-3621等)のみ掲載。' +
+        'yamagataと同型の接触ルート無し(loop電話不可)のため初回接触は保留し優先度を下げる'
+    ),
+  },
   gifu: {
     prefecture: 'gifu',
     sourceHost: '.lg.jp',
