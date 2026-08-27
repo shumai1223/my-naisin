@@ -53,6 +53,12 @@
   label.q.done { opacity: .38; background: transparent; border-color: transparent; }
   label.q.done .t { text-decoration: line-through; }
   #qCount { font-size: 11px; color: #7dd3fc; font-weight: 700; }
+  /* 言い詰まった時の型: 商談中に目線を落として1行拾えるよう、行間を広めに取る。 */
+  #phraseList { display: flex; flex-direction: column; gap: 8px; }
+  #phraseList .pg > b { display: block; font-size: 11px; letter-spacing: .04em; margin-bottom: 3px; }
+  #phraseList .p { font-size: 13.5px; line-height: 1.6; padding: 4px 8px; margin-bottom: 3px;
+                   background: #131a29; border-left: 2px solid #263049; border-radius: 4px; }
+  #phraseList .p small { display: block; color: #5b6780; font-size: 11px; margin-top: 2px; }
   /* body が height:100vh + overflow:hidden のため、details を開くと中身が画面外へ出て
      どこにもスクロールが無くなる事故が起きた。開いた中身自身に上限とスクロールを持たせる。 */
   details .body { font-size: 14px; line-height: 1.75; padding: 6px 2px 8px; white-space: pre-wrap; color: #e6e9f0;
@@ -155,6 +161,66 @@
     <span class="ritem">「社内では最終的にどなたのご判断に?」</span>
     <span class="ritem">「次のステップはどんな流れに?」</span>
   </div>
+  <details id="phrasePanel">
+    <summary>🗣 言い詰まった時の型（そのまま読める31文）</summary>
+    <div class="body" id="phraseList">
+      <div class="pg"><b style="color:#7dd3fc">時間を稼ぐ</b>
+        <div class="p">ありがとうございます。<b>少し整理してお答えさせてください。</b></div>
+        <div class="p">そこは<b>正確にお伝えしたいので</b>、少しお時間をいただけますか。</div>
+        <div class="p">なるほど、<b>その観点は考えていませんでした。</b>少し考えさせてください。</div>
+      </div>
+      <div class="pg"><b style="color:#7dd3fc">質問の意味が分からない</b>
+        <div class="p">恐れ入ります、今のご質問は<b>◯◯という理解でよろしいでしょうか。</b></div>
+        <div class="p"><b>もう少し詳しく伺ってもよろしいでしょうか。</b></div>
+        <div class="p"><b>不勉強で恐縮ですが、◯◯というのはどういうものでしょうか。</b><br><small>遠慮せず使う。知らないのは当たり前で、知ったふりの方が事故る</small></div>
+      </div>
+      <div class="pg"><b style="color:#fde047">答えを持っていない（いちばん使う）</b>
+        <div class="p">その点は<b>正確を期すために確認して、本日中にメールでお答えします。</b></div>
+        <div class="p"><b>今この場では正確にお答えできない</b>ので、持ち帰らせてください。</div>
+        <div class="p"><b>まだ決めていない部分です。</b>決めていないことを決まっているようには申し上げたくないので、確認してご連絡します。</div>
+        <div class="p"><b>契約名義人の國井に確認して</b>、改めてご連絡いたします。</div>
+      </div>
+      <div class="pg"><b style="color:#fca5a5">できない・持っていない</b>
+        <div class="p">（学校別の偏差値）それは、<b>あえて持たない方針にしています。</b></div>
+        <div class="p">そこは弊方の提供範囲の外になります。<b>内申点の計算と県別の制度データまで</b>をお出しして、その先は御社側で組んでいただく形です。</div>
+        <div class="p"><b>今はできません。</b>ただ、御社が必要とされるなら検討したいので、要件を伺えますか。</div>
+      </div>
+      <div class="pg"><b style="color:#fca5a5">価格を聞かれた</b>
+        <div class="p">（1度目）<b>自社で47県分を作ると100〜190時間かかる</b>という試算を根拠に設計しています。<b>御社のご利用形態を伺ってから見積もりでお出しします。</b></div>
+        <div class="p">（2度目・「先ほど」「もう一度」と言われたら<b>必ず</b>）<b>商用組み込みで年24万円から、再配布権を含む形で100万円台からの2段階です。</b></div>
+      </div>
+      <div class="pg"><b style="color:#86efac">相手の言葉を取る（今日の成果物）</b>
+        <div class="p">今の<b>「◯◯」というのは、具体的にはどういう場面でしょうか。</b></div>
+        <div class="p"><b>差し支えなければ、もう少し詳しく伺えますか。</b></div>
+        <div class="p">それは<b>先生方からよく出るお言葉なのですか。</b></div>
+      </div>
+      <div class="pg"><b style="color:#86efac">話を戻す・主導権を取り返す</b>
+        <div class="p">ありがとうございます。<b>少し話が戻るのですが、</b>先ほどの◯◯について伺ってもよろしいですか。</div>
+        <div class="p">そこは<b>後ほど詳しくご説明させてください。</b>先に◯◯を伺えますか。</div>
+        <div class="p">（相手が長い時）ありがとうございます。<b>今のお話で一つ伺いたいのですが——</b></div>
+      </div>
+      <div class="pg"><b style="color:#cbd5e1">沈黙したとき</b>
+        <div class="p"><b>相手が考えている沈黙は埋めない。</b>黙って待つのが正解。</div>
+        <div class="p">（自分の番で詰まったら）<b>一つ伺ってもよろしいですか。</b></div>
+      </div>
+      <div class="pg"><b style="color:#7dd3fc">見せた方が早い</b>
+        <div class="p"><b>口で説明するより早いので、画面をお見せしてもよろしいでしょうか。</b></div>
+        <div class="p">（県別の細かい話）<b>その県の正確な数式は、いま画面でお見せできます。</b><br><small>最強の逃げ。他県の満点や段階を記憶で言わない（間違えた前科あり）</small></div>
+      </div>
+      <div class="pg"><b style="color:#cbd5e1">褒められた・中学生と驚かれた</b>
+        <div class="p">ありがとうございます。ただ、<b>データの正確さは年齢と関係なく担保したい</b>と思って作っています。</div>
+        <div class="p">恐れ入ります。<b>運営は私ですが、契約や決済は保護者の國井が担当しています。</b></div>
+      </div>
+      <div class="pg"><b style="color:#fca5a5">相手が誤解している</b>
+        <div class="p">恐れ入ります、<b>そこだけ正確にお伝えさせてください。</b></div>
+        <div class="p"><b>いえ、そこは持っていません。</b>持っているのは◯◯までです。</div>
+      </div>
+      <div class="pg"><b style="color:#fde047">終わり</b>
+        <div class="p"><b>本日中に、稟議用のA4 1枚と概算のお見積もりをメールでお送りしてもよろしいでしょうか。</b></div>
+        <div class="p">本日伺ったことを整理してお送りしますので、<b>認識がずれていたらご指摘いただけますか。</b></div>
+      </div>
+    </div>
+  </details>
   <details id="q20panel">
     <summary>❓ 聞く30問（優先度順・上から聞けばいい）　<span id="qCount">0/30</span> <a href="#" id="qReset" style="font-weight:400;color:#5b6780;font-size:11px">リセット</a></summary>
     <div class="body" id="qList">
