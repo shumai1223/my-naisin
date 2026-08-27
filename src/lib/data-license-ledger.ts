@@ -37,8 +37,29 @@ export const DATA_LICENSE_LEDGER: Record<string, DataLicenseLedgerEntry> = {
   tokyo: { prefecture: 'tokyo', sourceHost: '.lg.jp', ...UNKNOWN() },
   kanagawa: { prefecture: 'kanagawa', sourceHost: '.lg.jp', ...UNKNOWN() },
   osaka: { prefecture: 'osaka', sourceHost: '.lg.jp', ...UNKNOWN() },
-  chiba: { prefecture: 'chiba', sourceHost: '.lg.jp', ...UNKNOWN() },
-  saitama: { prefecture: 'saitama', sourceHost: '.lg.jp', ...UNKNOWN() },
+  chiba: {
+    prefecture: 'chiba',
+    sourceHost: '.lg.jp',
+    ...UNKNOWN(
+      '未確認。2026-08-28調査: 出典を所管する学習指導課 学力向上推進室に部署直通メール・' +
+        'フォームは無く(電話0120-23-1008のみ)、教育委員会全体の「ご意見・ご提案」フォーム/宛先' +
+        'kyouiku@mz.pref.chiba.lg.jp(mailtoリンク+平文表記で2回のraw HTML確認により実在確認済み・' +
+        '難読化なし)のみ確認できた。学習指導課への取次ぎを依頼する初回メール下書きを設置' +
+        '(draftId r-3220498342067744872・送信は👤)'
+    ),
+  },
+  saitama: {
+    prefecture: 'saitama',
+    sourceHost: '.lg.jp',
+    ...UNKNOWN(
+      '未確認。2026-08-28調査: 高校教育指導課(入学者選抜担当・所管確認済み)は生HTML全文grepで' +
+        'mailto:/cfemail等ゼロ件・メールアドレスが一切存在しない。連絡手段は専用フォームのみ' +
+        '(https://www.pref.saitama.lg.jp/soshiki/f2208/index.html の「お問い合わせフォーム」' +
+        'ボタン・当課宛てにdeptコードで事前タグ付け済み)。loopはフォーム送信不可のためCowork委任が' +
+        '必要(T-C9-license-outreach.mdのフォーム経由バッチに追加予定)。WebSearch要約が提示した' +
+        'a6760-03@pref.saitama.lg.jpは生HTML内に存在せず架空と確認・不使用'
+    ),
+  },
   fukuoka: {
     prefecture: 'fukuoka',
     sourceHost: '.lg.jp（令和6年度分のみ商用第三者ソース）',

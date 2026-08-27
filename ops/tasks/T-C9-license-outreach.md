@@ -74,9 +74,20 @@ naishin.dev@gmail.com
 ## 2026-08-28実施分
 
 3県（ishikawa/aichi/wakayama）へ既存スレッドの絞り込み再質問を、
-2県（kyoto/shiga・未接触39県のうち）へ初回問い合わせを送信下書き設置済み（送信は👤）。
+3県（kyoto/shiga/chiba・未接触39県のうち）へ初回問い合わせを送信下書き設置済み（送信は👤）。
 yamagataはメール/フォームとも見つからず初回接触ルート無し（電話・郵送が必要・優先度を下げる）。
+saitamaはメール自体が存在せず専用フォームのみ（下記「フォーム経由が必要な県」参照）。
 詳細は各県の`DATA_LICENSE_LEDGER`エントリのevidence欄・`docs/worklog/2026-08-28.md`を参照。
+
+### フォーム経由が必要な県（Cowork委任待ち・バッチ化はまだ）
+
+| 県 | フォームURL | 備考 |
+|---|---|---|
+| saitama | https://www.pref.saitama.lg.jp/soshiki/f2208/index.html | 高校教育指導課宛てにdeptコードで事前タグ付け済み |
+
+1件だけではCowork指示書化のコストが見合わないため、同種の県が数件溜まってから
+`ops/cowork/COWORK-TASK-license-outreach-forms.md`としてバッチ化する（T-C1/T-C2の
+「第◯弾」方式を踏襲）。
 
 kyotoは部署直通メールが公式サイト上に無く（電話番号のみ・loopは電話不可）、教育委員会全体の
 「ご意見箱」窓口へ高校教育課への取次ぎを依頼する形の初回メールとした。この「部署直通メールが
