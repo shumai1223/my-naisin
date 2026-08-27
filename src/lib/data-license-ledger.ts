@@ -179,7 +179,17 @@ export const DATA_LICENSE_LEDGER: Record<string, DataLicenseLedgerEntry> = {
         'r5483203572825509665・送信は👤）'
     ),
   },
-  yamagata: { prefecture: 'yamagata', sourceHost: '.lg.jp', ...UNKNOWN() },
+  yamagata: {
+    prefecture: 'yamagata',
+    sourceHost: '.lg.jp',
+    ...UNKNOWN(
+      '未確認。2026-08-28調査: 高校教育課(所管確認済み)の公式サイト・R8入学者選抜情報ページ・' +
+        '教育相談窓口ページのいずれにもメールアドレス・問い合わせフォームが一切掲載されておらず' +
+        '(電話023-630-3287/FAXのみ)、教育委員会全体の「ご意見箱」的な代替窓口も見つからなかった。' +
+        'loopは電話・郵送に対応できないため、メールでの初回接触ルートが無い(架空アドレスは作らない)。' +
+        '次に手を付けるなら👤による電話または郵送が必要（優先度は他県より低い）'
+    ),
+  },
   aichi: {
     prefecture: 'aichi',
     sourceHost: '.lg.jp',
@@ -205,7 +215,17 @@ export const DATA_LICENSE_LEDGER: Record<string, DataLicenseLedgerEntry> = {
     ),
   },
   shimane: { prefecture: 'shimane', sourceHost: '.lg.jp', ...UNKNOWN() },
-  shiga: { prefecture: 'shiga', sourceHost: '.lg.jp', ...UNKNOWN() },
+  shiga: {
+    prefecture: 'shiga',
+    sourceHost: '.lg.jp',
+    ...UNKNOWN(
+      '未確認。2026-08-28調査: 出典ページ自体に高校教育課の問い合わせ先が明記されており、' +
+        'Cloudflareメール難読化(data-cfemail)をXORデコードしてma0902@pref.shiga.lg.jpを確認済み' +
+        '(HTML内2箇所で一致・要出典明記条件での応募状況データ掲載可否を尋ねる初回メール下書きを設置' +
+        '(draftId r-8409111603568947518・送信は👤)。' +
+        '本県は応募状況データの再配布許諾自体はまだ確認できていない'
+    ),
+  },
   fukushima: { prefecture: 'fukushima', sourceHost: '.lg.jp', ...UNKNOWN() },
   hokkaido: { prefecture: 'hokkaido', sourceHost: '.lg.jp', ...UNKNOWN() },
 };
