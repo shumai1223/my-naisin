@@ -169,7 +169,16 @@ export const DATA_LICENSE_LEDGER: Record<string, DataLicenseLedgerEntry> = {
   },
   aomori: { prefecture: 'aomori', sourceHost: '.lg.jp', ...UNKNOWN() },
   iwate: { prefecture: 'iwate', sourceHost: '.lg.jp', ...UNKNOWN() },
-  kyoto: { prefecture: 'kyoto', sourceHost: '.lg.jp（実質公的）', ...UNKNOWN() },
+  kyoto: {
+    prefecture: 'kyoto',
+    sourceHost: '.lg.jp（実質公的）',
+    ...UNKNOWN(
+      '未確認。2026-08-28調査: 高校教育課の部署直通メールは公式サイト上に見当たらず、電話番号のみ' +
+        '掲載（loopは電話不可）。京都府教育委員会の全体窓口「ご意見箱」(goikenbako@kyoto-be.ne.jp)' +
+        'へ、高校教育課への取次ぎを依頼する初回問い合わせメールの下書きを設置（draftId ' +
+        'r5483203572825509665・送信は👤）'
+    ),
+  },
   yamagata: { prefecture: 'yamagata', sourceHost: '.lg.jp', ...UNKNOWN() },
   aichi: {
     prefecture: 'aichi',
