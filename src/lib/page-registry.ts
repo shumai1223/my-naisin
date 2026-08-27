@@ -163,4 +163,6 @@ export const SITEMAP_EXCLUDED_ROUTES = [
   // Y-11：冬の倍率速報体制・速報面プレビュー（NEXT_PUBLIC_INTERIM_BULLETIN_ENABLED='1'まではnotFound()・
   // noindex・サンプルデータのみの内部確認用。ライブ速報データの取得手段が整うまでSTATIC_PAGESへ移さない）。
   '/interim-bulletin-preview',
+  // T-C7：埋め込みウィジェットのデモページ（提案書からリンクする営業用モック・noindex）。
+  '/embed/demo',
 ];

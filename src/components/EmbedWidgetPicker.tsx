@@ -3,11 +3,16 @@
 import * as React from 'react';
 import { Check, Code2 } from 'lucide-react';
 
-type WidgetKey = 'naishin' | 'hensachi';
+type WidgetKey = 'naishin' | 'hensachi' | 'gakushu_seiseki';
 
 const WIDGETS: Record<WidgetKey, { label: string; path: string; title: string }> = {
   naishin: { label: '内申点・評定平均', path: '/embed/naishin', title: '内申点・評定平均 計算ツール｜My Naishin' },
   hensachi: { label: '偏差値（5教科）', path: '/embed/hensachi', title: '偏差値 計算ツール｜My Naishin' },
+  gakushu_seiseki: {
+    label: '学習成績の状況（大学受験）',
+    path: '/embed/gakushu-seiseki',
+    title: '学習成績の状況 計算ツール｜My Naishin',
+  },
 };
 
 function snippetFor(key: WidgetKey): string {

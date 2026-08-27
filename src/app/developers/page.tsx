@@ -321,6 +321,17 @@ print(naishin["total"])  # -> 52`;
             大学入学者選抜の調査書に記載される「学習成績の状況」を、文部科学省の公式計算方法で試せます。POST + JSONです。
           </p>
           <GakushuSeisekiPlayground />
+          <p className="mt-3 text-xs leading-relaxed text-slate-500">
+            この計算ツールは{' '}
+            <Link href="/embed" className="font-bold text-indigo-600 underline">
+              埋め込みウィジェット
+            </Link>{' '}
+            として貴サイトの記事にも設置できます（
+            <Link href="/embed/demo" className="font-bold text-indigo-600 underline">
+              埋め込みデモを見る
+            </Link>
+            ）。
+          </p>
         </section>
 
         {/* 利用シーン（事例・E-3） */}

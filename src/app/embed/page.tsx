@@ -116,6 +116,13 @@ export default function EmbedPage() {
               WordPress・はてなブログ・note（HTML埋め込み対応プラン）・自作サイトなどに貼り付けてください。
               幅は自動で親要素に合わせて調整されます（最大480px）。高さが足りない場合は <code className="rounded bg-slate-100 px-1">height</code> の数値を増やしてください。
             </p>
+            <p className="mt-2 text-xs leading-relaxed text-slate-500">
+              記事に埋め込んだときの見え方は{' '}
+              <Link href="/embed/demo" className="font-bold text-blue-700 underline">
+                埋め込みデモページ
+              </Link>{' '}
+              で確認できます。
+            </p>
           </section>
 
           {/* プラットフォーム別 設置ガイド（P-4） */}

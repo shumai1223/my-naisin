@@ -55,6 +55,7 @@ const DATASET_EXEMPT_ROUTES: Record<string, string> = {
   '/dashboard': '個人の成績推移トラッカー（利用者個別データでありデータセットではない）',
   '/disclaimer': '免責事項（リッチリザルト価値が低い定型ページ）',
   '/embed': '埋め込みウィジェット選択ページ（データセットの提供なし）',
+  '/embed/demo': 'T-C7：埋め込みデモページ（noindex・営業用モック・実ブランド名不使用・データセットの提供ではない）',
   '/for-teachers': '先生・進路指導向けの活用案内ページ（データセットの提供なし）',
   '/futoukou': '不登校支援の解説ページ（データセットの提供なし）',
   '/futoukou/shussekiatsukai': '出席扱いの解説ページ（データセットの提供なし）',

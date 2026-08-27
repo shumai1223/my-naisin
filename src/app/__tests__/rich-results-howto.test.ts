@@ -40,6 +40,7 @@ const HOWTO_EXEMPT_ROUTES: Record<string, string> = {
   '/juku/dashboard': 'ZZ-4d：noindex・旗付きUI・招待トークン必須の内部ツール（一覧表示で手順ではない）',
   '/juku/dashboard/demo': 'ZZ-4e：noindex・旗付きUIのデモ環境（一覧表示で手順ではない）',
   '/partner-demo': 'AA-2：noindex・旗付きUI（統合イメージの提示で手順の解説ではない）',
+  '/embed/demo': 'T-C7：noindex・埋め込みデモページ（統合イメージの提示で手順の解説ではない）',
   '/mitsumori': '2026-08-13：noindex・見積書自動発行の内部ツール（社名入力フォーム＋PDF印刷で手順コンテンツではない）',
   '/interim-bulletin-preview': 'Y-11：noindex・旗付きUI（サンプルデータのテーブル表示で手順コンテンツではない）',
   '/blog': '記事一覧ページ（一覧のみで手順コンテンツなし）',

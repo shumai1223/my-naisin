@@ -40,7 +40,7 @@ async function getDb(): Promise<MinimalD1 | null> {
 /** 自ドメイン・ローカル開発ドメインの一覧（記録対象から除外）。 */
 const OWN_HOSTNAMES = new Set(['my-naishin.com', 'www.my-naishin.com', 'localhost', '127.0.0.1']);
 
-export type AdoptionSource = 'embed_naishin' | 'embed_hensachi' | 'api_anonymous';
+export type AdoptionSource = 'embed_naishin' | 'embed_hensachi' | 'embed_gakushu_seiseki' | 'api_anonymous';
 
 /**
  * Referer または Origin ヘッダの値から「外部の」registrable domainを抽出する純関数。
