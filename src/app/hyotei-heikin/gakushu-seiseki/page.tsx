@@ -138,6 +138,22 @@ export default function GakushuSeisekiPage() {
             <GakushuSeisekiCalculator />
           </div>
 
+          {/* 調査書シミュレーターへの導線（§7①本命ページ） */}
+          <div className="mt-6 rounded-2xl border-2 border-emerald-300 bg-white p-5 text-center shadow-sm">
+            <h2 className="mb-2 font-bold text-emerald-900">
+              実際の調査書と同じ見た目で確認したい方へ
+            </h2>
+            <p className="mb-4 text-sm leading-relaxed text-slate-600">
+              「調査書 様式１」と同じ並び（学習の記録→教科別の学習成績の状況→全体→概評）でシミュレーションできるツールもあります。
+            </p>
+            <Link
+              href="/hyotei-heikin/gakushu-seiseki/chousasho"
+              className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-emerald-600 px-6 py-3 text-sm font-bold text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-emerald-700"
+            >
+              調査書シミュレーターを開く
+            </Link>
+          </div>
+
           {/* なぜ単位数を入れないのか */}
           <section className="mt-8 rounded-2xl border-2 border-emerald-200 bg-gradient-to-br from-emerald-50 to-teal-50 p-6 shadow-sm">
             <h2 className="mb-3 text-lg font-bold text-slate-800">なぜ単位数を入力しないのか</h2>

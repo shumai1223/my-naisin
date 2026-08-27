@@ -105,6 +105,16 @@ export default function ChousashoPage() {
             </p>
           </AnswerBox>
 
+          {/* 大学受験(学習成績の状況)との混同を避ける導線 */}
+          <div className="mt-4 rounded-xl border border-blue-200 bg-blue-50 px-4 py-3 text-sm text-blue-900">
+            このページは<strong>高校受験（中学生）向け</strong>の調査書の解説です。
+            大学受験の調査書（学習成績の状況）をシミュレーションしたい場合は
+            <Link href="/hyotei-heikin/gakushu-seiseki/chousasho" className="font-bold underline">
+              大学受験用の調査書シミュレーター
+            </Link>
+            をご利用ください。
+          </div>
+
           {/* 記載内容 */}
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
