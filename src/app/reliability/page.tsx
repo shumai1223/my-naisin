@@ -11,6 +11,7 @@ import { PREFECTURES } from '@/lib/prefectures';
 import { VERIFIED_TOTAL_SCORE_CODES } from '@/lib/total-score/registry';
 import { getAllSourceHistories } from '@/lib/source-history';
 import { getLicensedPrefectureSummaries } from '@/lib/reliability-license-summary';
+import { getAnnualUpdateExamples } from '@/lib/annual-update-examples';
 
 /**
  * 信頼性ページ(ZZ-6d・Ω-4実行層)。/quality(人間・E-E-A-T向けの検証プロセス説明)、
@@ -36,6 +37,8 @@ const latestHistoryDate = histories
 
 // T-C9: 応募状況データの再配布・引用許諾状況（個人名は含めない）。ロジックはlib側で共有・テスト済み。
 const licensedPrefectures = getLicensedPrefectureSummaries();
+// T-C9: 年次更新の実績（実例）。公表日を記録するフィールドが無いため経過日数は計算しない。
+const annualUpdateExamples = getAnnualUpdateExamples();
 
 const FAQS = [
   {
@@ -201,6 +204,39 @@ export default function ReliabilityPage() {
             <p className="mt-4 text-xs leading-relaxed text-slate-500">
               許諾はいずれも当該教育委員会の担当課からの正式な回答に基づきます（回答者個人名は公開しません）。
               未確認の都道府県は掲載を見送っており、独自の推測で応募状況データを補うことはありません。
+            </p>
+          </section>
+
+          {/* T-C9: 年次更新の実績（実例）。/termsの「公表から60日以内に反映」の裏付けとして、
+              経過日数のSLA計測（公表日データが無く不可能）ではなく実際に検知・記録した変更を示す。 */}
+          <section className="mb-8 rounded-2xl border-2 border-indigo-100 bg-white p-6">
+            <div className="mb-3 flex items-center gap-2">
+              <RefreshCw className="h-5 w-5 text-indigo-600" />
+              <h2 className="text-lg font-bold text-slate-800">年次更新の実績（実例）</h2>
+            </div>
+            <p className="mb-4 text-sm leading-relaxed text-slate-600">
+              入試制度は都道府県ごとに毎年見直しが入ります。当サイトは各都道府県教育委員会の公表資料を
+              継続的に再確認し、内申点の計算方式に影響する変更を検知した場合はデータへ反映しています。
+              実際に検知・記録した変更の例：
+            </p>
+            <ul className="space-y-3">
+              {annualUpdateExamples.map((ex) => (
+                <li key={`${ex.prefecture}-${ex.date}`} className="rounded-xl border border-indigo-100 bg-indigo-50/40 p-4">
+                  <div className="mb-1 flex items-center justify-between">
+                    <span className="font-bold text-slate-800">{ex.prefectureName}</span>
+                    <span className="font-mono text-xs text-slate-500">検知日: {ex.date}</span>
+                  </div>
+                  <p className="text-xs leading-relaxed text-slate-600">{ex.summary}</p>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-4 text-xs leading-relaxed text-slate-500">
+              上記2件はいずれも
+              <Link href="/genten-archive" className="mx-1 font-semibold text-indigo-600 underline">
+                一次ソース確認履歴アーカイブ
+              </Link>
+              に記録済みの実例です。教育委員会が制度改定を公表した正確な日付を記録するデータは
+              現状保有していないため、「公表から何日で反映したか」の統計値は算出していません。
             </p>
           </section>
 
