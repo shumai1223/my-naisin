@@ -3235,6 +3235,17 @@
       "followupCount": 0,
       "threadId": null,
       "note": "Cowork第4-6弾でフォーム入力→👤が個別に送信し完了URLを記録。送信確認URL: https://www.schoolpress.co.jp/company/contact"
+    },
+    {
+      "id": "edtech-teachersmarket",
+      "org": "株式会社RECT(Teachers Market)",
+      "lane": "b2b-saas",
+      "sourceTaskId": "T-C2",
+      "sentDate": "2026-08-27",
+      "status": "awaiting",
+      "followupCount": 0,
+      "threadId": "1a042b02297ebcd1",
+      "note": "Coworkによるフォーム送信バッチ(30-02〜30-10系・T-C2-C2-2手順書)実行分。2026-08-28朝の受信箱棚卸しで自動受付確認メールを実測し追加(人間の返信なし・自動返信のみ)。"
     }
   ]
 }
