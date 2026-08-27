@@ -36,7 +36,17 @@ const UNKNOWN = (evidence = '未確認（A-1未着手・次に着手するセッ
 export const DATA_LICENSE_LEDGER: Record<string, DataLicenseLedgerEntry> = {
   tokyo: { prefecture: 'tokyo', sourceHost: '.lg.jp', ...UNKNOWN() },
   kanagawa: { prefecture: 'kanagawa', sourceHost: '.lg.jp', ...UNKNOWN() },
-  osaka: { prefecture: 'osaka', sourceHost: '.lg.jp', ...UNKNOWN() },
+  osaka: {
+    prefecture: 'osaka',
+    sourceHost: '.lg.jp',
+    ...UNKNOWN(
+      '未確認。2026-08-28調査: 高等学校課学事グループの複数ページ(kotogakko/gakuji-g3配下・' +
+        'soshikikarasagasu配下)を生HTMLで確認したが、いずれもメールアドレス・実質的な問い合わせ' +
+        'フォームは無く電話番号(06-6944-6887等)のみ掲載。ページ末尾のfeedback.cgiは「情報は役に' +
+        '立ったか」の満足度アンケート用で問い合わせ経路ではない。miyagiと同型の接触ルート無しのため' +
+        '初回接触は保留し優先度を下げる'
+    ),
+  },
   chiba: {
     prefecture: 'chiba',
     sourceHost: '.lg.jp',
