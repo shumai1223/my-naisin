@@ -4,6 +4,7 @@ import { Database, Code2, Bot, Scale, ArrowLeft, Terminal, Sparkles, ExternalLin
 
 import { ApiKeyIssuer } from '@/components/Developers/ApiKeyIssuer';
 import { ApiPlayground } from '@/components/Developers/ApiPlayground';
+import { GakushuSeisekiPlayground } from '@/components/Developers/GakushuSeisekiPlayground';
 import { UpgradeButton } from '@/components/Developers/UpgradeButton';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { DatasetSchema } from '@/components/StructuredData/DatasetSchema';
@@ -147,6 +148,10 @@ curl -X POST ${SITE_URL}/api/mcp \\
 # 2) 内申点×当日点の総合得点（対応5県のみ・非対応県は404）
 curl "${SITE_URL}/api/total-score/hyogo?academicRaw=420&reportRaw=200"`;
 
+  const gakushuSeisekiCurlExample = `curl -X POST ${SITE_URL}/api/gakushu-seiseki \\
+  -H "Content-Type: application/json" \\
+  -d '{"kamoku":[{"kyoka":"理科","kamoku":"物理基礎","gakunen":1,"hyotei":3},{"kyoka":"理科","kamoku":"化学基礎","gakunen":2,"hyotei":3},{"kyoka":"理科","kamoku":"生物基礎","gakunen":1,"hyotei":5}]}'`;
+
   // ZZ-6b（2026-07-24）：Claude Desktop / Cursor / コードから、の導入別クイックスタート。
   // レスポンス例は本物のエンジン関数(calculateNaishin/calcHensachi)を実行して得た確定値をそのまま貼付
   // （捏造ゼロ・数値は本番と同一ソース）。X-3のサンプルリポジトリ資産（github-repo-samples/）を再利用。
@@ -289,6 +294,18 @@ print(naishin["total"])  # -> 52`;
             都道府県を選んで、実際にAPIを呼び出してみてください。レスポンスはこの場でそのまま表示されます（登録不要）。
           </p>
           <ApiPlayground />
+        </section>
+
+        {/* 学習成績の状況プレイグラウンド（T-C4・大学受験の評定平均） */}
+        <section className="mb-10">
+          <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
+            <Play className="h-5 w-5 text-emerald-500" />
+            学習成績の状況（大学受験の評定平均）プレイグラウンド
+          </h2>
+          <p className="mb-3 text-sm leading-relaxed text-slate-600">
+            大学入学者選抜の調査書に記載される「学習成績の状況」を、文部科学省の公式計算方法で試せます。POST + JSONです。
+          </p>
+          <GakushuSeisekiPlayground />
         </section>
 
         {/* 利用シーン（事例・E-3） */}
@@ -556,6 +573,29 @@ print(naishin["total"])  # -> 52`;
             </a>
           </p>
 
+          <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">⑦c 学習成績の状況（大学受験の評定平均）計算</h3>
+          <p className="mb-2 text-sm text-slate-600">
+            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">GET /api/gakushu-seiseki</code>
+            {' — '}エンドポイント説明（出典・リクエスト例）。実際の計算は
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">POST /api/gakushu-seiseki</code>
+            に教科・科目・学年・評定の配列（<code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">kamoku</code>）を送信します。
+            文部科学省の公式計算方法どおりに算出し、修得単位数・氏名・学籍番号・学校名を受け取るフィールドは存在しません。
+          </p>
+          <p className="mt-1 text-xs text-slate-500">
+            実際に開く（GETメタ情報）：{' '}
+            <a
+              href="/api/gakushu-seiseki"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 font-semibold text-indigo-600 underline"
+            >
+              /api/gakushu-seiseki <ExternalLink className="h-3 w-3" />
+            </a>
+          </p>
+          <div className="mt-2">
+            <CodeBlock>{gakushuSeisekiCurlExample}</CodeBlock>
+          </div>
+
           <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">⑧ ステータス確認（認証不要）</h3>
           <p className="mb-2 text-sm text-slate-600">
             <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">GET /api/status</code>
@@ -622,7 +662,9 @@ print(naishin["total"])  # -> 52`;
             <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">calculate_saitama_total_score</code>
             <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">calculate_fukuoka_score</code>
             <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">calculate_hokkaido_rank</code>
-            の25ツールを呼び出せます。さらに <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">resources/list・resources/read</code>（47都道府県を読める一次資料として公開）と
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">get_school_competition_rates</code>
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">calculate_gakushu_seiseki</code>
+            の27ツールを呼び出せます。さらに <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">resources/list・resources/read</code>（47都道府県を読める一次資料として公開）と
             <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">prompts/list・prompts/get</code>（内申点を確定値で答え出典を添える定型プロンプト）に対応しています。
           </p>
 
