@@ -255,6 +255,10 @@ export default function TotalScoreHubPage() {
                 <span className="text-sm font-medium text-slate-700">都道府県別 内申点格差レポートを見る</span>
                 <ChevronRight className="h-4 w-4 text-slate-400" />
               </Link>
+              <Link href="/kakomon-jisaiten" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm transition-shadow hover:shadow-md">
+                <span className="text-sm font-medium text-slate-700">過去問の自己採点から総合得点を計算する</span>
+                <ChevronRight className="h-4 w-4 text-slate-400" />
+              </Link>
             </div>
           </section>
         </div>

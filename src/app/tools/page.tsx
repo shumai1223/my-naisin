@@ -181,6 +181,14 @@ const TOOL_GROUPS: { id: string; heading: string; tools: Tool[] }[] = [
         color: 'blue',
       },
       {
+        title: '過去問自己採点×内申点で総合得点を計算',
+        description: '過去問・模擬試験の自己採点（5教科）と内申点を入力すると、都道府県公表の方式で総合得点を算出。合格ライン・ボーダーの推定は行いません',
+        features: ['5教科自己採点対応', '47都道府県すべてに対応', '内申点計算機と連携', '合否推定は一切なし'],
+        href: '/kakomon-jisaiten',
+        icon: ClipboardCheck,
+        color: 'blue',
+      },
+      {
         title: '都立高校 総合得点 計算（1020点満点）',
         description: '学力検査700点＋調査書点300点＋ESAT-J 20点の総合得点を一括算出',
         features: ['1020点満点対応', 'ESAT-J対応', '主要都立の合格目安', '2026年度対応'],
