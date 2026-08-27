@@ -58,7 +58,7 @@ const HYOTEI_FAQS = [
   },
   {
     question: '大学の評定平均はどうやって計算する？中学と同じ？',
-    answer: '考え方は中学と同じで「全科目の評定（5段階）の合計÷科目数」です。ただし大学受験では9教科ではなく、高校で履修した全科目（国語総合・数学I・世界史・物理基礎など細かく分かれた科目すべて）が対象になり、高1〜高3前期の成績を通算して平均します。当ツールは中学9教科向けですが、各科目の評定を入力して平均を出す仕組みは大学の評定平均の感覚をつかむのにも使えます。',
+    answer: '考え方は中学と同じで「全科目の評定（5段階）の合計÷科目数」です。ただし大学受験では9教科ではなく、高校で履修した全科目（国語総合・数学I・世界史・物理基礎など細かく分かれた科目すべて）が対象になり、高1〜高3前期の成績を通算して平均します。文部科学省の正式名称は「学習成績の状況」で、単位数による重み付けは行いません。大学受験向けの専用計算ツールは「学習成績の状況 計算ツール」で計算できます。',
   },
 ];
 
@@ -813,6 +813,23 @@ export default function HyoteiHeikinPage() {
                 大学受験の評定平均は<strong>高1〜高3前期の5学期分</strong>の積み上げ。高3で急に上げようとしても、すでに4学期分が確定済みで挽回が難しい。
                 逆に言えば、<strong>高1の最初から評定を意識できる人が、推薦の選択肢を最大化</strong>できます。中学生のうちにこの構造を知っておくことが、何よりの先行投資です。
               </p>
+            </div>
+
+            {/* 大学受験専用の「学習成績の状況」計算ツールへの導線（T-C4） */}
+            <div className="mb-5 rounded-xl border-2 border-emerald-300 bg-white p-5 text-center shadow-sm">
+              <h3 className="mb-2 font-bold text-emerald-900">
+                大学受験の「学習成績の状況」を正式な計算方法で算出する
+              </h3>
+              <p className="mb-4 text-sm leading-relaxed text-slate-600">
+                高校で履修した科目ごとの評定を入力すると、文部科学省の公式計算方法どおりに教科別・全体の学習成績の状況と学習成績概評A〜Eを算出します。修得単位数は計算に使いません。
+              </p>
+              <Link
+                href="/hyotei-heikin/gakushu-seiseki"
+                className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-emerald-600 px-6 py-3 text-sm font-bold text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-emerald-700"
+              >
+                <GraduationCap className="h-4 w-4" />
+                学習成績の状況 計算ツールを使う
+              </Link>
             </div>
 
             {/* 大学受験の評定平均 Q&A（schemaの新規4問と一致） */}

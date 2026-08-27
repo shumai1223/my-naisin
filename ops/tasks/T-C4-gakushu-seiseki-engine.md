@@ -224,6 +224,24 @@ type Kamoku = { kyoka: string; kamoku: string; gakunen: 1|2|3|4; hyotei: Hyotei 
 
 ---
 
+## 7-0. ⚠️ルート衝突を発見・修正（2026-08-27 23:5x・loop実装時判明）
+
+下記§7の当初案（`/chousasho`・`/chousasho/kyoka-betsu`等）は、**既に`src/app/chousasho/page.tsx`が
+中学受験(高校入試)向けの「調査書とは？」解説ページとして存在しており衝突する**（対象読者・文脈が別物:
+既存は中学生の高校入試調査書の説明、本タスクは大学入試の調査書シミュレーター）。
+上書きは既存コンテンツの破壊になるため、以下のとおりルートを`/hyotei-heikin/gakushu-seiseki/`配下に
+変更して実装する（既存の`/hyotei-heikin/gyakusan`等の兄弟ルート命名パターンに合わせた）。
+
+| §7当初案 | 実際に使うルート |
+|---|---|
+| `/chousasho` | `/hyotei-heikin/gakushu-seiseki/chousasho` |
+| `/chousasho/kyoka-betsu` | `/hyotei-heikin/gakushu-seiseki/kyoka-betsu` |
+| `/chousasho/gaihyou` | `/hyotei-heikin/gakushu-seiseki/gaihyou` |
+| `/chousasho/yokuaru-machigai` | `/hyotei-heikin/gakushu-seiseki/yokuaru-machigai` |
+| `/chousasho/tousei-han-i` | `/hyotei-heikin/gakushu-seiseki/tousei-han-i` |
+
+以下§7本文中の`/chousasho/...`という表記は、すべて上表の実ルートに読み替えること。
+
 ## 7. ★「ほかにないページ」を作る（👤指示 2026-08-27）
 
 > 「極めて使いやすい、ほかにないページを数個でも作らせるようにしてね。専門的な一面もある」

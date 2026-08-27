@@ -79,6 +79,7 @@ const DATASET_EXEMPT_ROUTES: Record<string, string> = {
   '/hogosha': '保護者向けランディングページ（データセットの提供なし）',
   '/hyotei-heikin': '評定平均計算UI（単発計算でありデータセット定義はhome/hensachi側が正）',
   '/hyotei-heikin/gyakusan': '評定平均逆算計算機（単発計算UIでありデータセットの提供ではない）',
+  '/hyotei-heikin/gakushu-seiseki': '学習成績の状況（大学受験の評定平均）計算UI（単発計算でありデータセットの提供ではない・T-C4）',
   '/hyouka-kijun': '評価基準の解説ページ（データセットの提供なし）',
   '/jitsugika': '実技教科の解説ページ（データセットの提供なし）',
   '/juken-ryou': '受験料シミュレーター（単発計算UIでありデータセットの提供ではない）',

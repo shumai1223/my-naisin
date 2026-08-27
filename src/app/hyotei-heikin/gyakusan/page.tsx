@@ -126,6 +126,10 @@ export default function HyoteiHeikinGyakusanPage() {
                 目標偏差値まであと何点？逆算
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
+              <Link href="/hyotei-heikin/gakushu-seiseki" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-emerald-200 hover:bg-emerald-50/50">
+                大学受験の「学習成績の状況」を計算
+                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
+              </Link>
             </div>
           </section>
 
