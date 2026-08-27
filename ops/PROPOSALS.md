@@ -77,7 +77,7 @@
 | S9-2 | `placementFromReferer` の表記ゆれ正規化 | 0.3 | 8/31まで | デプロイのみ | 採用。**✅2026-08-23対応済み**（`bot-filter.ts`のコメントに是正記録あり） |
 | S9-3 | `TRUSTED_CLAUSE` 厳格化＋`trustedOnly` 既定化 | 1.0 | **9月へ後ろ倒し（裁定・§3-C 対立3）** | 認識訂正の👤報告 | 採用・ただしS9-4と同時投入。**✅2026-08-25対応済み(loop)**: `TRUSTED_CLAUSE`厳格化は`f9aac30`(08-24)で既に完了・`/admin/report`の`trustedOnly`既定trueは2026-06-28から既存と判明。残っていた`scripts/generate-sales-report.ts`のexport SQL例にreferer条件を追記し、S9-4完了後の正しい順序(S1-1→S9-4→S9-3)で3案とも出揃った。`ops/DEADWIRE.md` DW-3の「fp-soudanが2位は幻」の認識訂正はDW-3本文に明記済み(👤報告済み扱い) |
 | S9-4 | root_only × placement の自己矛盾検出を実装 | 2.0 | 9月（S1-1後） | 不要 | 採用。**✅2026-08-24対応済み(loop)**。S1-1完了済みを確認の上で着手。`isPlacementConsistentWithReferer`を`bot-filter.ts`に追加し`classifyClick`の第3判定軸として配線（SQL側`TRUSTED_CLAUSE`集計＝S9-3の対象は変更せず） |
-| S9-5 | click-hop 通過計測（null-referer 304件の可視化） | 1.0〜1.5 | 9月 | 新規D1なら**migration適用=👤** | 採用 |
+| S9-5 | click-hop 通過計測（null-referer 304件の可視化） | 1.0〜1.5 | 9月 | ~~新規D1なら**migration適用=👤**~~ 2026-07-28ゲート解禁によりloop単独可 | 採用。**✅2026-08-28対応済み(loop・`fbe9bb0`)**: `migrations/0021_create_click_hop_completions.sql`をloop自力適用（`click_hop_completions`テーブル作成・D1実測で存在確認済み）。`src/lib/click-hop-db.ts`＋新規ビーコン`/api/click-hop-complete`＋`click-hop.ts`の`sendBeacon`計装で、ホップページのJS実行（＝ASP到達）を記録できる状態になった。PHASE0_FINDINGS.md出血6②と同一対応。テスト16件追加・jestフルスイート350suites6079tests green |
 | S2-3 | `ParentWindowBridge` の `/mendan` リンクにトラッキング追加 | 1.0 | 8/31まで | デプロイのみ | 採用。**✅対応済み**（`ParentWindowBridge.tsx`に`onMendanLinkClick`実装済み） |
 | S12-1 | `HyoteiUniversityBridge` の D1一次計測 | 2.0 | 8/31まで | ~~migration本番適用=👤~~ 2026-07-28ゲート解禁によりloop単独可 | 採用（S12群の全下流の前提）。**✅2026-08-27 migration(0020)をloop自力適用完了**（`student_funnel_events`テーブル作成・D1実測でrows=0の初期状態を確認済み。以後イベントが溜まり次第S12群の下流判断に進める） |
 | S5-2 | 学校ページ露出率(233/3,089)の週次追跡＋GSC確認カレンダー | 1.0 | 8/31まで | GSC確認=👤 | 採用。**✅loop側(自動取得・カレンダー)は対応済み**。`ops/CLOCK.md`に08/23・09/20・11/28の3チェックポイントを記録済み・週次KPIメールが露出行(233枚起点)を自動追跡。GSC確認自体は引き続き👤のみ |
@@ -253,6 +253,7 @@ S2-1（`/` に `ParentWindowBridge` 追加）／S2-2（窓を41日→83日相当
 S9-3（**後ろ倒し裁定**）/ S9-4 / S9-5 / S1-4 / S11-3 / S11-4 / S12-3 / S12-5 / S3-4 / S3-5(15h・着手) / S6-1 / S6-2 / S6-3 / S8-4 / S8-5 / S8-6 / S10-4(網羅調査) / **S10-5（G1判定8/31より後・必須条件）** / S13-E / S13-B(migration＋開示表記のみ)
 
 > **⚠️2026-08-25再監査**: 上記リストは本来9月着手予定だったが、👤ゲート無しの案は8/31を待たず前倒しで大半が消化済みと判明した（本文の各行に✅追記済み）。**残っているのは S9-5 / S11-3 / S11-4 / S10-4(網羅調査) / S10-5(👤ゲート) / S13-B(👤ゲート/migration待ち) / S13-E(単独不採用) のみ**。次回このリストへ戻る際は、まず各行の✅有無を確認してから着手すること（未✅の行だけが真に手つかず）。
+> **✅2026-08-28追記**: S9-5もloopが対応完了（上記本行参照）。§4「9月ラベル」リストのうち👤ゲート無しの案は**全て消化済み**。残るはS10-5(👤ゲート・G1判定後必須)・S13-B(👤ゲート・migration待ち)・S13-E(単独不採用の裁定)のみ。
 
 > ⚠️ **9/7 が👤の対外アクションの実質締切**（ユタ出発9/8）。S13-A/S13-C の提案送信・価格決定・契約文レビューはここに収束する。9/8〜9/22 は対外アクション不可。
 
