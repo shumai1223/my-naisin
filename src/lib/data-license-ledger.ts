@@ -72,7 +72,17 @@ export const DATA_LICENSE_LEDGER: Record<string, DataLicenseLedgerEntry> = {
         'fiscalYearで除外すること(sourceIndex:8が該当)'
     ),
   },
-  hyogo: { prefecture: 'hyogo', sourceHost: '.lg.jp', ...UNKNOWN() },
+  hyogo: {
+    prefecture: 'hyogo',
+    sourceHost: '.lg.jp',
+    ...UNKNOWN(
+      '未確認。2026-08-28調査: 出典ページ(hyogo-c.ed.jp)の「お問合せ先」欄にE-mail表記の平文で' +
+        'koukoukyouikuka@pref.hyogo.lg.jp(高校教育課の課内共通アドレス)を発見・生HTML(Shift_JIS)を' +
+        '直接ダウンロードして該当行を確認済み(mailtoリンクでなく平文・難読化なし)。応募状況データの' +
+        '出典明記のうえでの掲載可否を尋ねる初回メール下書きを設置(draftId ' +
+        'r-8693386759128892238・送信は👤)'
+    ),
+  },
   shizuoka: { prefecture: 'shizuoka', sourceHost: '.lg.jp', ...UNKNOWN() },
   hiroshima: { prefecture: 'hiroshima', sourceHost: '.lg.jp', ...UNKNOWN() },
   kumamoto: { prefecture: 'kumamoto', sourceHost: '.lg.jp', ...UNKNOWN() },
