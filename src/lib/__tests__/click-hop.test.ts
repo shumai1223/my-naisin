@@ -21,4 +21,19 @@ describe('renderClickHopHtml', () => {
     expect(html).toContain('name="robots" content="noindex,nofollow"');
     expect(html).toMatch(/<noscript>.*href="\/".*<\/noscript>/);
   });
+
+  it('affiliateIdを渡すとlocation.replaceの前にsendBeaconで通過を記録する（出血6②）', () => {
+    const html = renderClickHopHtml(href, 'zkai-banner');
+    expect(html).toContain('navigator.sendBeacon("/api/click-hop-complete"');
+    expect(html).toContain('affiliateId:"zkai-banner"');
+    const beaconIndex = html.indexOf('sendBeacon');
+    const replaceIndex = html.indexOf('location.replace');
+    expect(beaconIndex).toBeGreaterThan(-1);
+    expect(beaconIndex).toBeLessThan(replaceIndex);
+  });
+
+  it('affiliateIdを渡さない場合はsendBeaconを含まない（従来動作のまま）', () => {
+    const html = renderClickHopHtml(href);
+    expect(html).not.toContain('sendBeacon');
+  });
 });

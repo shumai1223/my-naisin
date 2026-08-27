@@ -13,9 +13,19 @@
  * 自サイト面からの通常クリック（内部refererあり）は従来どおり即302で摩擦ゼロ。
  */
 
-/** 遷移先URLはASCII前提（AFFILIATES allowlist のASP URLのみ。非ASCIIだと atob が壊れる）。 */
-export function renderClickHopHtml(href: string): string {
+/**
+ * 遷移先URLはASCII前提（AFFILIATES allowlist のASP URLのみ。非ASCIIだと atob が壊れる）。
+ *
+ * affiliateIdを渡すと、location.replaceの直前に`navigator.sendBeacon`で
+ * `/api/click-hop-complete`を叩く（出血6②・PHASE0_FINDINGS.md）。JSが実行された＝実ブラウザが
+ * ASPへ到達したことの証跡になる（href収集だけのボットはこのJSを実行せず到達しない）。
+ * affiliateIdを渡さない呼び出し（既存の他用途があれば）はビーコン無しの従来動作のまま。
+ */
+export function renderClickHopHtml(href: string, affiliateId?: string): string {
   const b64 = Buffer.from(href, 'utf8').toString('base64');
+  const beacon = affiliateId
+    ? `try{navigator.sendBeacon("/api/click-hop-complete",JSON.stringify({affiliateId:${JSON.stringify(affiliateId)}}));}catch(e){}`
+    : '';
   return (
     '<!doctype html><html lang="ja"><head><meta charset="utf-8">' +
     '<meta name="robots" content="noindex,nofollow">' +
@@ -24,7 +34,7 @@ export function renderClickHopHtml(href: string): string {
     '<body style="font-family:sans-serif;padding:2rem;text-align:center;color:#333">' +
     '<p>ページへ移動しています…</p>' +
     '<noscript><p>JavaScriptを有効にすると自動で移動します。<a href="/">トップへ戻る</a></p></noscript>' +
-    `<script>location.replace(atob("${b64}"));</script>` +
+    `<script>${beacon}location.replace(atob("${b64}"));</script>` +
     '</body></html>'
   );
 }

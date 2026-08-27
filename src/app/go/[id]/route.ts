@@ -128,7 +128,7 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
   // アクセストレード180)へ無効クリックとして計上されていた。**ASPのアカウント停止リスクに直結する。**
   // ブラウザが自動で付ける Sec-Fetch-Site を併用し、**両方**満たすときだけ即302する。
   if (!isInternalReferer(refererRaw) || !hasSameOriginNavigation(request.headers)) {
-    return new NextResponse(renderClickHopHtml(affiliate.href), {
+    return new NextResponse(renderClickHopHtml(affiliate.href, id), {
       status: 200,
       headers: {
         'Content-Type': 'text/html; charset=utf-8',

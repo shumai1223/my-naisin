@@ -702,6 +702,14 @@
 | **人間ゲート(C7)** | 不要（①は読み取り。②はコード変更・デプロイは👤） |
 | **確信度** | 経路の存在は**断定**（コード）。損失量は**未検証** |
 
+> ✅2026-08-28追記（loop実施）: ②を実施。`migrations/0021_create_click_hop_completions.sql`
+> （loop単独適用済み・非破壊CREATE TABLE）＋`src/lib/click-hop-db.ts`＋新規ビーコン
+> `/api/click-hop-complete`を新設し、`click-hop.ts`のホップページがJS実行時に`sendBeacon`で
+> 通過を記録するよう変更（commit予定）。分母（`persistClick`で記録されるsuspectクリック数・
+> `clicks-db.ts`）と分子（`click_hop_completions`テーブル）から通過率を算出できる状態になった。
+> ①（href生存確認）は`npm run check:affiliate-links`として既に運用中（T-R1月次M-2）。
+> ③（外部referer4件の原因）のみ未確認のまま残存。
+
 ### 出血7 — G1（8/31・残り21日）を動かす施策が PHASE 0 のどこにも書かれていない
 
 | | |
