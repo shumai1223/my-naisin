@@ -142,6 +142,13 @@ export default function ChousashoSimulatorPage() {
                 目標に必要な評定を逆算する
                 <ChevronRightSquare className="h-4 w-4" />
               </Link>
+              <Link
+                href="/hyotei-heikin/gakushu-seiseki/kyoka-betsu"
+                className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700"
+              >
+                教科ごとの学習成績の状況を計算
+                <ChevronRightSquare className="h-4 w-4" />
+              </Link>
             </div>
           </section>
         </div>
