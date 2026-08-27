@@ -93,7 +93,15 @@ export const DATA_LICENSE_LEDGER: Record<string, DataLicenseLedgerEntry> = {
         'r-8693386759128892238・送信は👤)'
     ),
   },
-  shizuoka: { prefecture: 'shizuoka', sourceHost: '.lg.jp', ...UNKNOWN() },
+  shizuoka: {
+    prefecture: 'shizuoka',
+    sourceHost: '.lg.jp',
+    ...UNKNOWN(
+      '未確認・返信待ち。2026-08-23付でkyoui_koko@pref.shizuoka.lg.jp宛の既存スレッド(2026-08-6が' +
+        '初回)へ「応募状況」データの出典明記のうえでの掲載可否を尋ねる絞り込み再質問を送信済み' +
+        '(2026-08-28再調査で重複送信ではないと確認)。新規下書きは不要・返信待ち'
+    ),
+  },
   hiroshima: { prefecture: 'hiroshima', sourceHost: '.lg.jp', ...UNKNOWN() },
   kumamoto: { prefecture: 'kumamoto', sourceHost: '.lg.jp', ...UNKNOWN() },
   miyagi: {
@@ -126,10 +134,12 @@ export const DATA_LICENSE_LEDGER: Record<string, DataLicenseLedgerEntry> = {
     prefecture: 'tochigi',
     sourceHost: '.lg.jp',
     ...UNKNOWN(
-      '未確認。2026-08-28調査: 高校教育課トップページ(pref.tochigi.lg.jp/m04/)の生HTMLをcurlで' +
-        '直接取得しmailtoリンクでkokokyoiku@pref.tochigi.lg.jpを発見・実在確認済み。応募状況データの' +
-        '出典明記のうえでの掲載可否を尋ねる初回メール下書きを設置(draftId ' +
-        'r2112922851031670398・送信は👤)'
+      '⚠️2026-08-28夜に判明: 同日04:48作成のdraftId r2112922851031670398' +
+        '(kokokyoiku@pref.tochigi.lg.jp宛)は、実は2026-08-23 22:13:15に全く同じアドレスへ' +
+        '既に送信済みだった「応募状況」データの絞り込み再質問(2026-08-06初回の返信)と完全重複。' +
+        'T-C9-license-outreach.mdの「未接触39県」表がこの8/23一括送信を反映しておらず未接触と' +
+        '誤認したため二重に下書きしてしまった。**このdraftId r2112922851031670398は送信しないこと**' +
+        '(送信済み再質問の返信待ちのまま・新規下書きは不要)'
     ),
   },
   gunma: { prefecture: 'gunma', sourceHost: '.lg.jp', ...UNKNOWN() },
@@ -180,35 +190,80 @@ export const DATA_LICENSE_LEDGER: Record<string, DataLicenseLedgerEntry> = {
         'のみ」を尋ねる再質問の返信下書きを設置済み（draftId r1644566739000759853・送信は👤・返信待ち）'
     ),
   },
-  fukui: { prefecture: 'fukui', sourceHost: '.lg.jp', ...UNKNOWN() },
+  fukui: {
+    prefecture: 'fukui',
+    sourceHost: '.lg.jp',
+    ...UNKNOWN(
+      '未確認・返信待ち。2026-08-23付でkoukou@pref.fukui.lg.jp宛の既存スレッド(2026-08-6が初回)へ' +
+        '「応募状況」データの出典明記のうえでの掲載可否を尋ねる絞り込み再質問を送信済み' +
+        '(2026-08-28再調査で重複送信ではないと確認)。新規下書きは不要・返信待ち'
+    ),
+  },
   ehime: { prefecture: 'ehime', sourceHost: '.lg.jp', ...UNKNOWN() },
   tokushima: { prefecture: 'tokushima', sourceHost: '.lg.jp', ...UNKNOWN() },
   kagawa: {
     prefecture: 'kagawa',
     sourceHost: '.lg.jp',
     ...UNKNOWN(
-      '未確認。2026-08-28調査: 高校教育課の組織紹介ページの生HTMLでmailtoリンクと表示テキストが' +
-        '一致するkokokyoiku@pref.kagawa.lg.jpを発見・実在確認済み。応募状況データの出典明記のうえ' +
-        'での掲載可否を尋ねる初回メール下書きを設置(draftId r3803487085097089300・送信は👤)'
+      '⚠️2026-08-28夜に判明: 同日作成のdraftId r3803487085097089300(kokokyoiku@pref.kagawa.lg.jp宛)は、' +
+        '実は2026-08-23 22:13:19に全く同じアドレスへ既に送信済みだった「応募状況」データの絞り込み' +
+        '再質問(2026-08-06初回の返信)と完全重複。T-C9-license-outreach.mdの「未接触39県」表がこの' +
+        '8/23一括送信を反映しておらず未接触と誤認したため二重に下書きしてしまった。' +
+        '**このdraftId r3803487085097089300は送信しないこと**(送信済み再質問の返信待ちのまま・' +
+        '新規下書きは不要)'
     ),
   },
-  saga: { prefecture: 'saga', sourceHost: '.lg.jp', ...UNKNOWN() },
+  saga: {
+    prefecture: 'saga',
+    sourceHost: '.lg.jp',
+    ...UNKNOWN(
+      '未確認・返信待ち。2026-08-28夜に判明: 2026-08-23 20:53:59付でgakkoukyouiku@pref.saga.lg.jp宛の' +
+        '既存スレッド(2026-08-06が初回)へ「応募状況」データの出典明記のうえでの掲載可否を尋ねる' +
+        '絞り込み再質問を送信済み。新規下書きは不要・返信待ち'
+    ),
+  },
   nagasaki: { prefecture: 'nagasaki', sourceHost: '.lg.jp', ...UNKNOWN() },
   oita: { prefecture: 'oita', sourceHost: '.lg.jp', ...UNKNOWN() },
   tottori: {
     prefecture: 'tottori',
     sourceHost: '.lg.jp',
     ...UNKNOWN(
-      '未確認。2026-08-28調査: 高等学校課(高校教育企画室)ページの生HTMLでmailtoリンクと表示' +
-        'テキストが一致するkoutougakkou@pref.tottori.lg.jpを発見・実在確認済み。応募状況データの' +
-        '出典明記のうえでの掲載可否を尋ねる初回メール下書きを設置(draftId ' +
-        'r-8120971795787063897・送信は👤)'
+      '⚠️2026-08-28夜に判明: 同日作成のdraftId r-8120971795787063897' +
+        '(koutougakkou@pref.tottori.lg.jp宛)は、実は2026-08-23 20:53:59に全く同じアドレスへ' +
+        '既に送信済みだった「応募状況」データの絞り込み再質問(2026-08-06初回の返信)と完全重複。' +
+        'T-C9-license-outreach.mdの「未接触39県」表がこの8/23一括送信を反映しておらず未接触と' +
+        '誤認したため二重に下書きしてしまった。**このdraftId r-8120971795787063897は送信しないこと**' +
+        '(送信済み再質問の返信待ちのまま・新規下書きは不要)'
     ),
   },
-  kochi: { prefecture: 'kochi', sourceHost: '.lg.jp', ...UNKNOWN() },
-  miyazaki: { prefecture: 'miyazaki', sourceHost: '.lg.jp', ...UNKNOWN() },
+  kochi: {
+    prefecture: 'kochi',
+    sourceHost: '.lg.jp',
+    ...UNKNOWN(
+      '未確認・返信待ち。2026-08-28夜に判明: 2026-08-23 22:13:16付で311701@ken.pref.kochi.lg.jp宛の' +
+        '既存スレッド(2026-08-06が初回)へ「応募状況」データの出典明記のうえでの掲載可否を尋ねる' +
+        '絞り込み再質問を送信済み。新規下書きは不要・返信待ち'
+    ),
+  },
+  miyazaki: {
+    prefecture: 'miyazaki',
+    sourceHost: '.lg.jp',
+    ...UNKNOWN(
+      '未確認・返信待ち。2026-08-28夜に判明: 2026-08-23 22:13:17付でkokokyoiku@pref.miyazaki.lg.jp宛の' +
+        '既存スレッド(2026-08-06が初回)へ「応募状況」データの出典明記のうえでの掲載可否を尋ねる' +
+        '絞り込み再質問を送信済み。新規下書きは不要・返信待ち'
+    ),
+  },
   yamaguchi: { prefecture: 'yamaguchi', sourceHost: '.lg.jp', ...UNKNOWN() },
-  kagoshima: { prefecture: 'kagoshima', sourceHost: '.lg.jp', ...UNKNOWN() },
+  kagoshima: {
+    prefecture: 'kagoshima',
+    sourceHost: '.lg.jp',
+    ...UNKNOWN(
+      '未確認・返信待ち。2026-08-28夜に判明: 2026-08-23 20:54:04付でkou-kyoiku@pref.kagoshima.lg.jp宛の' +
+        '既存スレッド(2026-08-06が初回)へ「応募状況」データの出典明記のうえでの掲載可否を尋ねる' +
+        '絞り込み再質問を送信済み。新規下書きは不要・返信待ち'
+    ),
+  },
   niigata: { prefecture: 'niigata', sourceHost: '.lg.jp', ...UNKNOWN() },
   okinawa: {
     prefecture: 'okinawa',
@@ -320,22 +375,25 @@ export const DATA_LICENSE_LEDGER: Record<string, DataLicenseLedgerEntry> = {
     prefecture: 'shimane',
     sourceHost: '.lg.jp',
     ...UNKNOWN(
-      '未確認・要検証で保留。2026-08-28調査: 学校教育課ページの生HTMLでmailtoリンクのhref属性' +
+      '未確認・返信待ち。2026-08-28調査: 学校教育課ページの生HTMLでmailtoリンクのhref属性' +
         '(shidou@pref.shimane.lg.jp)と表示テキスト(gakkoukyouiku@pref.shimane.lg.jp)が食い違って' +
-        'いることを発見。どちらが実際に稼働している窓口か生HTML単独では確定できず、架空アドレス' +
-        '使用のリスクを避けるため今回は下書き作成を見送り。次回は電話(0852-22-5419)で実在確認する' +
-        'か、両アドレス併記での送信を検討する'
+        'いたため一時保留としたが、同日夜にGmail送信履歴を確認したところ2026-08-23 22:12:55付で' +
+        'gakkoukyouiku@pref.shimane.lg.jp宛(表示テキスト側)に既に「応募状況」データの絞り込み' +
+        '再質問を送信済み(2026-08-06初回の返信)と判明。このアドレスは既に使われ実在が裏付けられた' +
+        'ため要検証状態は解消・新規下書きは不要で返信待ち'
     ),
   },
   shiga: {
     prefecture: 'shiga',
     sourceHost: '.lg.jp',
     ...UNKNOWN(
-      '未確認。2026-08-28調査: 出典ページ自体に高校教育課の問い合わせ先が明記されており、' +
-        'Cloudflareメール難読化(data-cfemail)をXORデコードしてma0902@pref.shiga.lg.jpを確認済み' +
-        '(HTML内2箇所で一致・要出典明記条件での応募状況データ掲載可否を尋ねる初回メール下書きを設置' +
-        '(draftId r-8409111603568947518・送信は👤)。' +
-        '本県は応募状況データの再配布許諾自体はまだ確認できていない'
+      '⚠️2026-08-28夜に判明: 同日04:19作成のdraftId r-8409111603568947518' +
+        '(ma0902@pref.shiga.lg.jp宛)を送信済みの初回メールと誤認して作成したが、実際には' +
+        '2026-08-23 20:53:58に既に別アドレス(ma09@pref.shiga.lg.jp)へ同内容の「応募状況」データ' +
+        '絞り込み再質問を送信済みだった(2026-08-06初回の返信)。アドレスは異なるが同じ高校教育課への' +
+        '実質重複の問い合わせとなるため、**draftId r-8409111603568947518は送信を見合わせ、' +
+        '2026-08-23送信分の返信を待つことを優先すべき**。T-C9-license-outreach.mdの「未接触39県」' +
+        '表がこの8/23一括送信を反映しておらず未接触と誤認したことが原因'
     ),
   },
   fukushima: { prefecture: 'fukushima', sourceHost: '.lg.jp', ...UNKNOWN() },
