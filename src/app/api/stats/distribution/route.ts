@@ -3,6 +3,7 @@ import { corsJson, corsPreflight, logApiHit } from '@/lib/api-cors';
 import { isStatsMetric, buildPublishableAggregate, STATS_MIN_SAMPLE_SIZE, STATS_METRICS } from '@/lib/stats-aggregation';
 import { getStatsValues } from '@/lib/stats-db';
 import { SITE_URL } from '@/lib/naishin-dataset';
+import { getPrefectureByCode } from '@/lib/prefectures';
 
 /**
  * 匿名統計の集計API（堀B・TIER N-3）。
@@ -42,7 +43,9 @@ export async function GET(request: Request) {
   return corsJson(
     {
       meta: {
-        name: '匿名統計（内申点・偏差値等の全国分布）',
+        name: prefecture
+          ? `匿名統計（内申点・偏差値等の${getPrefectureByCode(prefecture)?.name ?? prefecture}分布）`
+          : '匿名統計（内申点・偏差値等の全国分布）',
         description:
           '利用者が任意でオプトインした匿名の計算結果を集計した統計値。個人を特定できる情報は含まない。サンプルサイズが不足するセル・出所を検証できないセル・指標の不変条件を満たさないセルは表示しない。',
         metric: metricRaw,
