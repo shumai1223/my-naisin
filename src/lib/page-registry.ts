@@ -45,6 +45,7 @@ export const STATIC_PAGES: StaticPageEntry[] = [
   { url: '/hyotei-heikin/gakushu-seiseki/kyoka-betsu', priority: 0.7, changeFrequency: 'weekly' },
   { url: '/hyotei-heikin/gakushu-seiseki/gaihyou', priority: 0.7, changeFrequency: 'weekly' },
   { url: '/hyotei-heikin/gakushu-seiseki/yokuaru-machigai', priority: 0.8, changeFrequency: 'weekly' },
+  { url: '/hyotei-heikin/gakushu-seiseki/tousei-han-i', priority: 0.7, changeFrequency: 'weekly' },
   { url: '/total-score', priority: 0.9, changeFrequency: 'weekly' },
   { url: '/total-score/mantenkan', priority: 0.8, changeFrequency: 'weekly' },
   { url: '/tokyo/total-score', priority: 1.0, changeFrequency: 'weekly' },

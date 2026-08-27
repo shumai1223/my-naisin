@@ -80,3 +80,30 @@ export function toGaihyou(overall: number): GakushuSeihyou {
   if (overall >= 1.9) return 'D';
   return 'E';
 }
+
+export interface AttainableRange {
+  /** 残り全部が評定5だった場合に到達し得る全体の学習成績の状況の最大値。 */
+  max: number;
+  /** 残り全部が評定1だった場合の最小値。 */
+  min: number;
+}
+
+/**
+ * 現在までの評定の合計・件数と、残りの評価回数（見込み）から、卒業までに到達し得る
+ * 全体の学習成績の状況の最大値・最小値を算出する（残り全部が5／全部が1だった場合の理論値）。
+ * currentCount・remainingCountがともに0の場合は算出不能として0/0を返す。
+ */
+export function calcAttainableRange(
+  currentSum: number,
+  currentCount: number,
+  remainingCount: number,
+): AttainableRange {
+  const totalCount = Math.max(0, currentCount) + Math.max(0, remainingCount);
+  if (totalCount === 0) return { max: 0, min: 0 };
+  const safeSum = Math.max(0, currentSum);
+  const safeRemaining = Math.max(0, remainingCount);
+  return {
+    max: roundToFirstDecimal((safeSum + safeRemaining * 5) / totalCount),
+    min: roundToFirstDecimal((safeSum + safeRemaining * 1) / totalCount),
+  };
+}

@@ -163,6 +163,13 @@ export default function ChousashoSimulatorPage() {
                 計算でよくある3つの誤りを検証
                 <ChevronRightSquare className="h-4 w-4" />
               </Link>
+              <Link
+                href="/hyotei-heikin/gakushu-seiseki/tousei-han-i"
+                className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700"
+              >
+                到達可能範囲をチェック（高1・高2向け）
+                <ChevronRightSquare className="h-4 w-4" />
+              </Link>
             </div>
           </section>
         </div>

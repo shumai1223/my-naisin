@@ -2,6 +2,7 @@ import {
   calcKyokaStatus,
   calcOverallStatus,
   toGaihyou,
+  calcAttainableRange,
   type Kamoku,
 } from '@/lib/gakushu-seiseki';
 
@@ -127,5 +128,38 @@ describe('型レベルで単位数(tanni)を受け取れない（§1-3の設計�
     expect(Object.keys(kamoku)).not.toContain('tanni');
     expect(Object.keys(kamoku)).not.toContain('tanniSu');
     expect(Object.keys(kamoku)).not.toContain('unit');
+  });
+});
+
+describe('calcAttainableRange — 到達可能範囲（§7⑤）', () => {
+  it('現在の合計70・件数20・残り10回なら、最大(残り全部5)と最小(残り全部1)を算出する', () => {
+    // 最大: (70 + 10*5) / 30 = 120/30 = 4.0 ／ 最小: (70 + 10*1) / 30 = 80/30 = 2.666… → 2.7
+    const range = calcAttainableRange(70, 20, 10);
+    expect(range.max).toBe(4.0);
+    expect(range.min).toBe(2.7);
+  });
+
+  it('残り0回なら最大・最小とも現在の全体の学習成績の状況に一致する（70÷20=3.5）', () => {
+    const range = calcAttainableRange(70, 20, 0);
+    expect(range.max).toBe(3.5);
+    expect(range.min).toBe(3.5);
+  });
+
+  it('現在の実績が0(currentCount=0)でも残り全部が理論値として機能する', () => {
+    const range = calcAttainableRange(0, 0, 5);
+    expect(range.max).toBe(5.0);
+    expect(range.min).toBe(1.0);
+  });
+
+  it('現在・残りともに0なら0/0を返す（算出不能の安全なデフォルト）', () => {
+    const range = calcAttainableRange(0, 0, 0);
+    expect(range.max).toBe(0);
+    expect(range.min).toBe(0);
+  });
+
+  it('最大値は必ず5.0以下、最小値は必ず1.0以上に収まる', () => {
+    const range = calcAttainableRange(45, 15, 8);
+    expect(range.max).toBeLessThanOrEqual(5.0);
+    expect(range.min).toBeGreaterThanOrEqual(1.0);
   });
 });
