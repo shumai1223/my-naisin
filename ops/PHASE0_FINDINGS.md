@@ -651,6 +651,13 @@
 | **人間ゲート(C7)** | ①は不要（デプロイは👤）。②③④のうち**本番D1の行操作と文言変更は👤必須**。加えて `scripts/backup-d1.ts` を先に走らせること（DEADWIRE は言及していない） |
 | **確信度** | 「bot判定が無い」= 断定（grep）。「222件が非ブラウザ」= **中**（GA4のTZ未確定＋7/15-16の分布が人間的） |
 
+> ✅2026-08-28追記（loop実施）: ③を実施（`src/app/api/stats/distribution/route.ts`の`meta.name`を
+> prefecture指定時は`getPrefectureByCode`で解決した実際の県名を使うよう修正・commit `5eabc68`）。
+> ④を確認: `getStatsValues`（`stats-db.ts`）はmetric別の分岐が無く`trusted = 1`のみを集計する共通経路
+> のため、`total-score`もhensachiと同じくDW-1（①のisBotUserAgent＋migration 0019のtrust列）の
+> 恩恵を既に受けており、追加確認は不要と判明。**②（過去に紛れ込んだ汚染222件のD1隔離）のみ未着手**
+> （本番D1の行操作のため引き続き👤ゲート・`scripts/backup-d1.ts`先行が必須）。
+
 ### 出血3 — 学校名エンティティのクエリを、汎用ページが2〜4位で受けて0%で捨てている
 
 | | |
