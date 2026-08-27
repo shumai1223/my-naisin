@@ -266,6 +266,26 @@ export default function ReliabilityPage() {
             </ul>
           </section>
 
+          {/* T-C8: 個人情報を受け取らない設計（データの信頼性の一部として要約表示） */}
+          <section className="mb-8 rounded-2xl border-2 border-emerald-100 bg-white p-6">
+            <div className="mb-3 flex items-center gap-2">
+              <ShieldCheck className="h-5 w-5 text-emerald-600" />
+              <h2 className="text-lg font-bold text-slate-800">個人情報を受け取らない設計</h2>
+            </div>
+            <p className="text-sm leading-relaxed text-slate-600">
+              公開データ/計算API・MCPは、氏名・学籍番号・学校名・生年月日を受け取るフィールドが存在しません。
+              「送らない運用」ではなく「送れない設計」です。受け取った内容は計算してレスポンスを返すのみで保存せず、
+              アクセスログにも生徒個人のスコアや入力値は残しません。この設計はリクエストスキーマとログ出力の両方を
+              自動テストで機械的に固定しています。
+            </p>
+            <Link
+              href="/developers"
+              className="mt-3 inline-flex items-center gap-1 text-sm font-bold text-emerald-700 hover:underline"
+            >
+              リクエスト・レスポンスの実例を見る →
+            </Link>
+          </section>
+
           {/* 稼働状況 */}
           <section className="mb-8 rounded-2xl border-2 border-slate-200 bg-white p-6">
             <div className="mb-3 flex items-center gap-2">

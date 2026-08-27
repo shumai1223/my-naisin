@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Database, Code2, Bot, Scale, ArrowLeft, Terminal, Sparkles, ExternalLink, KeyRound, Gauge, Play } from 'lucide-react';
+import { Database, Code2, Bot, Scale, ArrowLeft, Terminal, Sparkles, ExternalLink, KeyRound, Gauge, Play, ShieldCheck } from 'lucide-react';
 
 import { ApiKeyIssuer } from '@/components/Developers/ApiKeyIssuer';
 import { ApiPlayground } from '@/components/Developers/ApiPlayground';
@@ -151,6 +151,21 @@ curl "${SITE_URL}/api/total-score/hyogo?academicRaw=420&reportRaw=200"`;
   const gakushuSeisekiCurlExample = `curl -X POST ${SITE_URL}/api/gakushu-seiseki \\
   -H "Content-Type: application/json" \\
   -d '{"kamoku":[{"kyoka":"理科","kamoku":"物理基礎","gakunen":1,"hyotei":3},{"kyoka":"理科","kamoku":"化学基礎","gakunen":2,"hyotei":3},{"kyoka":"理科","kamoku":"生物基礎","gakunen":1,"hyotei":5}]}'`;
+
+  // T-C8: 個人情報を受け取らない設計の実演。リクエスト/レスポンスの実例をそのまま並べ、
+  // 個人が特定できるフィールドが1つも無いことを見せる（src/app/api/__tests__/no-pii-fields.test.tsで固定）。
+  const noPiiRequestExample = `POST ${SITE_URL}/api/gakushu-seiseki
+{
+  "kamoku": [
+    { "kyoka": "理科", "kamoku": "物理基礎", "gakunen": 1, "hyotei": 3 }
+  ]
+}`;
+  const noPiiResponseExample = `{
+  "kyokaStatus": { "理科": 3 },
+  "overall": 3,
+  "gaihyou": "C",
+  "source": { "title": "...", "url": "...", "verifiedAt": "2026-08-27" }
+}`;
 
   // ZZ-6b（2026-07-24）：Claude Desktop / Cursor / コードから、の導入別クイックスタート。
   // レスポンス例は本物のエンジン関数(calculateNaishin/calcHensachi)を実行して得た確定値をそのまま貼付
@@ -627,6 +642,51 @@ print(naishin["total"])  # -> 52`;
             <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">/compare</code> で複数県比較。
           </p>
           <CodeBlock>{restToolsExample}</CodeBlock>
+        </section>
+
+        {/* T-C8: 個人情報を受け取らない設計（学校・企業向け提案書に添付できる説明） */}
+        <section className="mb-10 rounded-2xl border-2 border-emerald-200 bg-emerald-50/30 p-6">
+          <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
+            <ShieldCheck className="h-5 w-5 text-emerald-600" />
+            個人情報を受け取らない設計
+          </h2>
+          <p className="mb-4 text-sm leading-relaxed text-slate-600">
+            公開データ/計算API（学習成績の状況・内申点・偏差値・総合得点・倍率・教育費・匿名統計・MCP）は、
+            <strong className="text-emerald-700">氏名・学籍番号・学校名・生年月日を受け取るフィールドが存在しません。</strong>
+            「送らない運用」ではなく「送れない設計」です。教科・科目・学年・評定や得点・都道府県コードなど、
+            計算に必要な数値・区分だけを受け取ります。以下はそのままの実例です。
+          </p>
+          <div className="mb-4 grid gap-4 sm:grid-cols-2">
+            <div>
+              <div className="mb-1 text-xs font-bold text-slate-500">リクエスト（実例）</div>
+              <CodeBlock>{noPiiRequestExample}</CodeBlock>
+            </div>
+            <div>
+              <div className="mb-1 text-xs font-bold text-slate-500">レスポンス（実例）</div>
+              <CodeBlock>{noPiiResponseExample}</CodeBlock>
+            </div>
+          </div>
+          <ul className="space-y-2 text-xs leading-relaxed text-slate-600">
+            <li>
+              <strong className="text-slate-800">保存しない：</strong>
+              サーバーは受け取った内容を計算してレスポンスを返すのみで、リクエストボディをデータベースやファイルに保存しません。
+              アクセスログにも生徒個人のスコアや入力値は残りません（記録するのは呼び出し時刻・エンドポイント名・利用ティアなど、
+              個人を特定しない運用情報のみ）。
+            </li>
+            <li>
+              <strong className="text-slate-800">機械的に固定：</strong>
+              この設計は自己申告ではなく、リクエストスキーマに個人特定フィールドが存在しないこと、アクセスログに
+              生データが残らないことの両方を自動テストで固定しています（コードの変更で個人情報収集が紛れ込むと
+              テストが落ちる仕組みです）。
+            </li>
+          </ul>
+          <p className="mt-4 text-xs text-slate-500">
+            データの信頼性・検証プロセスの全体像は{' '}
+            <Link href="/reliability" className="font-semibold text-indigo-600 underline">
+              /reliability
+            </Link>{' '}
+            にもまとめています。
+          </p>
         </section>
 
         {/* MCP */}
