@@ -104,7 +104,16 @@ export const DATA_LICENSE_LEDGER: Record<string, DataLicenseLedgerEntry> = {
     verifiedAt: '2026-08-17',
   },
   okayama: { prefecture: 'okayama', sourceHost: '.lg.jp（実質公的・県立高校共同サイト）', ...UNKNOWN() },
-  tochigi: { prefecture: 'tochigi', sourceHost: '.lg.jp', ...UNKNOWN() },
+  tochigi: {
+    prefecture: 'tochigi',
+    sourceHost: '.lg.jp',
+    ...UNKNOWN(
+      '未確認。2026-08-28調査: 高校教育課トップページ(pref.tochigi.lg.jp/m04/)の生HTMLをcurlで' +
+        '直接取得しmailtoリンクでkokokyoiku@pref.tochigi.lg.jpを発見・実在確認済み。応募状況データの' +
+        '出典明記のうえでの掲載可否を尋ねる初回メール下書きを設置(draftId ' +
+        'r2112922851031670398・送信は👤)'
+    ),
+  },
   gunma: { prefecture: 'gunma', sourceHost: '.lg.jp', ...UNKNOWN() },
   nagano: { prefecture: 'nagano', sourceHost: '.lg.jp', ...UNKNOWN() },
   ibaraki: {
