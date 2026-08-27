@@ -10,6 +10,7 @@ import { DATASET_META, SITE_URL } from '@/lib/naishin-dataset';
 import { PREFECTURES } from '@/lib/prefectures';
 import { VERIFIED_TOTAL_SCORE_CODES } from '@/lib/total-score/registry';
 import { getAllSourceHistories } from '@/lib/source-history';
+import { getLicensedPrefectureSummaries } from '@/lib/reliability-license-summary';
 
 /**
  * 信頼性ページ(ZZ-6d・Ω-4実行層)。/quality(人間・E-E-A-T向けの検証プロセス説明)、
@@ -32,6 +33,9 @@ const latestHistoryDate = histories
   .flatMap((h) => h.history.map((s) => s.date))
   .sort()
   .at(-1);
+
+// T-C9: 応募状況データの再配布・引用許諾状況（個人名は含めない）。ロジックはlib側で共有・テスト済み。
+const licensedPrefectures = getLicensedPrefectureSummaries();
 
 const FAQS = [
   {
@@ -164,6 +168,40 @@ export default function ReliabilityPage() {
             >
               全都道府県の確認履歴を見る →
             </Link>
+          </section>
+
+          {/* T-C9: 応募状況データの再配布・引用許諾状況（教育委員会からの明示的な許諾のみを掲載・個人名は含めない） */}
+          <section className="mb-8 rounded-2xl border-2 border-teal-100 bg-white p-6">
+            <div className="mb-3 flex items-center gap-2">
+              <FileCheck2 className="h-5 w-5 text-teal-600" />
+              <h2 className="text-lg font-bold text-slate-800">募集人員・応募者数・倍率データの再配布・引用許諾状況</h2>
+            </div>
+            <p className="mb-4 text-sm leading-relaxed text-slate-600">
+              各校の募集人員・応募者数・倍率（「応募状況」）データを掲載するにあたり、都道府県教育委員会へ
+              個別に出典明記のうえでの掲載可否を確認しています。現在{' '}
+              <span className="font-semibold text-slate-800">{licensedPrefectures.length}県</span>{' '}
+              から、出典を明記したうえでの掲載について明示的な許諾を得ています。
+            </p>
+            <div className="grid gap-3 sm:grid-cols-2">
+              {licensedPrefectures.map((p) => (
+                <div key={p.code} className="rounded-xl border border-teal-100 bg-teal-50/40 p-4">
+                  <div className="mb-1 flex items-center justify-between">
+                    <span className="font-bold text-slate-800">{p.name}</span>
+                    <span className="font-mono text-xs text-slate-500">{p.verifiedAt}</span>
+                  </div>
+                  <p className="text-xs leading-relaxed text-slate-600">{p.text}</p>
+                  {p.backlink && (
+                    <span className="mt-2 inline-block rounded-full bg-teal-600 px-2 py-0.5 text-[10px] font-bold text-white">
+                      当委員会サイトへのリンク設定も許諾
+                    </span>
+                  )}
+                </div>
+              ))}
+            </div>
+            <p className="mt-4 text-xs leading-relaxed text-slate-500">
+              許諾はいずれも当該教育委員会の担当課からの正式な回答に基づきます（回答者個人名は公開しません）。
+              未確認の都道府県は掲載を見送っており、独自の推測で応募状況データを補うことはありません。
+            </p>
           </section>
 
           {/* S6-3(2026-08-24): データの検証方法（自社の方針の自己記述のみ・他社への言及は行わない） */}
