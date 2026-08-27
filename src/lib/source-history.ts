@@ -692,6 +692,28 @@ export interface PrefectureCompetitionRateSourceHistory {
 }
 
 /**
+ * 都道府県に紐づかない全国一律の一次ソース（文科省通知等）の確認履歴。
+ * T-C4（学習成績の状況エンジン）で新設。都道府県別のMANUAL_HISTORYと同じ
+ * 「実際に確認した日付・内容のみを追記する」原則に従う（過去分の創作禁止）。
+ */
+export interface NationalSourceSnapshot extends SourceSnapshot {
+  /** この一次ソースが根拠にしている機能・エンジンの識別名（例: 'gakushu-seiseki'）。 */
+  feature: string;
+}
+
+export const NATIONAL_SOURCE_HISTORY: NationalSourceSnapshot[] = [
+  {
+    feature: 'gakushu-seiseki',
+    date: '2026-08-27',
+    sourceUrl: 'https://www.mext.go.jp/content/20260529-mxt_daigakuc02-000005144_1.pdf',
+    sourceTitle:
+      '文部科学省「令和９年度大学入学者選抜実施要項について（通知）」（令和８年５月27日付け８文科高第318号文部科学省高等教育局長通知）別紙様式１「調査書記入上の注意事項等について」',
+    note:
+      'T-C4着手前の一次ソース確認。PyMuPDF(fitz)でp.18-22(項目1-17)の全文を抽出し、各教科/全体の学習成績の状況の計算式・公式計算例(理科3.66→3.7・全体120/31=3.87→3.9)・概評A〜Eの境界値(通知9(1))を確認。いずれも旧年度版から変更なし。★ただし「学習成績概評Ａに属する生徒のうちⒶと標示できる」という制度(旧年度版で言及されていたとされる)は、この令和9年度版の全文(項目1-17)には見当たらなかった。実装ではⒶ関連の主張を一切行わない（未確認の記述を実装の根拠にしない）。',
+  },
+];
+
+/**
  * S6-2(2026-08-24): 内申点計算方式のみだった確認履歴を、募集人員・応募者数・倍率データ
  * (competition-rates/*.ts)の一次ソースにも拡張する。`getAllSourceHistories()`と同型（県別・
  * 地域別に一覧化できる形）で返す。過去のスナップショットの創作はしない＝各県のsources[]は
