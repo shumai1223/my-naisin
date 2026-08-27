@@ -9,7 +9,7 @@ import { DatasetSchema } from '@/components/StructuredData/DatasetSchema';
 import { SITE_URL } from '@/lib/naishin-dataset';
 import { getAllSourceHistories, getAllCompetitionRateSourceHistories } from '@/lib/source-history';
 import { getStaleTop } from '@/lib/freshness-queue';
-import { REGIONS } from '@/lib/prefectures';
+import { PREFECTURES, REGIONS } from '@/lib/prefectures';
 
 // 47都道府県教育委員会の一次ソース確認履歴を蓄積する∞継続型アーカイブ(X-14)。
 // 単年の情報提供でなく「一次ソースをいつ・どう確認したか」の履歴を積み上げることで、
@@ -60,6 +60,24 @@ export default function GentenArchivePage() {
     .at(-1);
   // ZZ-9b: 最終確認日が古い県から順に並べた再検証キュー(自己改善メタループの入口)。
   const staleTop = getStaleTop(5);
+
+  // T-C9: 「何県分を、いつ確認したか」が一目で分かるサマリー表(47県×計算方式確認日×応募状況データ年度数)。
+  // 詳細カード(下の県別セクション)は情報が多く俯瞰しにくいため、一覧性を優先した表を別途用意する。
+  const summaryRows = PREFECTURES.map((p) => {
+    const h = histories.find((x) => x.code === p.code);
+    const r = rateHistories.find((x) => x.code === p.code);
+    const latestNaishinDate = h ? [...h.history].map((s) => s.date).sort().at(-1) : undefined;
+    const fiscalYearCount = r ? new Set(r.sources.map((s) => s.fiscalYear)).size : 0;
+    const latestRateDate = r ? [...r.sources].map((s) => s.fetchedAt).sort().at(-1) : undefined;
+    return {
+      code: p.code,
+      name: p.name,
+      region: p.region,
+      latestNaishinDate,
+      fiscalYearCount,
+      latestRateDate,
+    };
+  });
 
   return (
     <>
@@ -115,6 +133,42 @@ export default function GentenArchivePage() {
               現在{histories.length}都道府県ぶん・計{totalEntries}件の確認記録があります
               （最終更新: {latestDate}）。今後、制度改定の確認・再検証を行うたびに記録を追加していきます。
             </p>
+          </section>
+
+          {/* T-C9: 47都道府県×確認日×応募状況データ年度数の一覧表（詳細カードより俯瞰しやすい表形式） */}
+          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <h2 className="mb-2 text-lg font-bold text-slate-800">都道府県別サマリー</h2>
+            <p className="mb-4 text-xs leading-relaxed text-slate-500">
+              「何県分を、いつ確認したか」が一目で分かる一覧です。詳細（出典URL・資料名）は下の県別セクションを参照してください。
+            </p>
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-[560px] text-xs">
+                <thead>
+                  <tr className="bg-slate-100 text-left text-slate-600">
+                    <th className="border border-slate-200 px-2 py-1.5 font-bold">都道府県</th>
+                    <th className="border border-slate-200 px-2 py-1.5 font-bold">計算方式の最終確認日</th>
+                    <th className="border border-slate-200 px-2 py-1.5 font-bold">応募状況データ収録年度数</th>
+                    <th className="border border-slate-200 px-2 py-1.5 font-bold">応募状況データの最終確認日</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {summaryRows.map((row) => (
+                    <tr key={row.code} className="odd:bg-white even:bg-slate-50/60">
+                      <td className="border border-slate-200 px-2 py-1 font-semibold text-slate-700">{row.name}</td>
+                      <td className="border border-slate-200 px-2 py-1 font-mono text-slate-500">
+                        {row.latestNaishinDate ?? '未確認'}
+                      </td>
+                      <td className="border border-slate-200 px-2 py-1 text-center text-slate-600">
+                        {row.fiscalYearCount > 0 ? `${row.fiscalYearCount}年度分` : '未収録'}
+                      </td>
+                      <td className="border border-slate-200 px-2 py-1 font-mono text-slate-500">
+                        {row.latestRateDate ?? '—'}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </section>
 
           <section className="mb-8 rounded-2xl border border-amber-200 bg-amber-50 p-6">
