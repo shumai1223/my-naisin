@@ -127,6 +127,56 @@ export function GET() {
           },
         },
       },
+      '/api/gakushu-seiseki': {
+        get: {
+          operationId: 'getGakushuSeisekiMeta',
+          summary: '学習成績の状況（大学受験の評定平均）計算APIのエンドポイント説明',
+          description: 'パラメータ無しで呼び出すと、POSTのリクエスト例・出典・計算ツールURLを含むメタ情報を返す。実際の計算はPOSTを参照。',
+          responses: { '200': { description: '成功' } },
+        },
+        post: {
+          operationId: 'calculateGakushuSeiseki',
+          summary: '大学入学者選抜の調査書「学習成績の状況」を計算（教科別・全体・概評A〜E）',
+          description:
+            '文部科学省の公式計算方法どおりに、教科ごとの学習成績の状況・全体の学習成績の状況・学習成績概評を算出する。修得単位数は計算に使用しないため受け取らない。氏名・学籍番号・学校名等の個人情報を受け取るフィールドも存在しない。',
+          requestBody: {
+            required: true,
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  required: ['kamoku'],
+                  properties: {
+                    kamoku: {
+                      type: 'array',
+                      description: '教科・科目・学年・評定の配列（最大100件）。複数学年にわたる科目は学年ごとに別要素で指定する。',
+                      items: {
+                        type: 'object',
+                        required: ['kyoka', 'kamoku', 'gakunen', 'hyotei'],
+                        properties: {
+                          kyoka: { type: 'string', description: '教科名。', example: '理科' },
+                          kamoku: { type: 'string', description: '科目名。', example: '物理基礎' },
+                          gakunen: { type: 'integer', description: '学年（1〜4）。', example: 1 },
+                          hyotei: { type: 'integer', description: '評定（1〜5）。', example: 3 },
+                        },
+                      },
+                      example: [
+                        { kyoka: '理科', kamoku: '物理基礎', gakunen: 1, hyotei: 3 },
+                        { kyoka: '理科', kamoku: '化学基礎', gakunen: 2, hyotei: 3 },
+                        { kyoka: '理科', kamoku: '生物基礎', gakunen: 1, hyotei: 5 },
+                      ],
+                    },
+                  },
+                },
+              },
+            },
+          },
+          responses: {
+            '200': { description: '成功（kyokaStatus・overall・gaihyou・sourceを返す）' },
+            '400': { description: 'kamokuが未指定・不正な形式・要素数が範囲外' },
+          },
+        },
+      },
       '/api/hensachi/percentile-table': {
         get: {
           operationId: 'hensachiPercentileTable',
