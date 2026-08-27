@@ -82,6 +82,7 @@ const DATASET_EXEMPT_ROUTES: Record<string, string> = {
   '/hyotei-heikin/gakushu-seiseki': '学習成績の状況（大学受験の評定平均）計算UI（単発計算でありデータセットの提供ではない・T-C4）',
   '/hyotei-heikin/gakushu-seiseki/chousasho': '調査書シミュレーターUI（単発計算の様式プレビューでありデータセットの提供ではない・T-C4）',
   '/hyotei-heikin/gakushu-seiseki/kyoka-betsu': '教科別学習成績の状況計算UI（単発計算でありデータセットの提供ではない・T-C4）',
+  '/hyotei-heikin/gakushu-seiseki/gaihyou': '学習成績概評の境界チェックUI（単発計算でありデータセットの提供ではない・T-C4）',
   '/hyouka-kijun': '評価基準の解説ページ（データセットの提供なし）',
   '/jitsugika': '実技教科の解説ページ（データセットの提供なし）',
   '/juken-ryou': '受験料シミュレーター（単発計算UIでありデータセットの提供ではない）',

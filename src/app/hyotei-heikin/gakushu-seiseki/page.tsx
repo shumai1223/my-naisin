@@ -258,6 +258,13 @@ export default function GakushuSeisekiPage() {
                 <ChevronRightSquare className="h-4 w-4" />
               </Link>
               <Link
+                href="/hyotei-heikin/gakushu-seiseki/gaihyou"
+                className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700"
+              >
+                概評A〜Eまであと何点？境界チェック
+                <ChevronRightSquare className="h-4 w-4" />
+              </Link>
+              <Link
                 href="/developers"
                 className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700"
               >
