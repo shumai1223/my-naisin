@@ -36,10 +36,10 @@ describe('/api/mcp JSON-RPC 契約', () => {
     expect(json.result.capabilities.prompts).toBeDefined();
   });
 
-  test('tools/list は26ツールを返す（S-5で18本追加=13統一エンジン県+8個別実装県が全てMCP化完了・Y-7でget_school_competition_ratesを追加）', async () => {
+  test('tools/list は27ツールを返す（S-5で18本追加=13統一エンジン県+8個別実装県が全てMCP化完了・Y-7でget_school_competition_ratesを追加・T-C4でcalculate_gakushu_seisekiを追加）', async () => {
     const res = await POST(rpc('tools/list'));
     const json = await res.json();
-    expect(json.result.tools).toHaveLength(26);
+    expect(json.result.tools).toHaveLength(27);
     expect(json.result.tools.map((t: { name: string }) => t.name)).toContain('build_study_plan');
     expect(json.result.tools.map((t: { name: string }) => t.name)).toContain('calculate_hensachi');
     expect(json.result.tools.map((t: { name: string }) => t.name)).toContain('calculate_total_score');
@@ -47,6 +47,7 @@ describe('/api/mcp JSON-RPC 契約', () => {
     expect(json.result.tools.map((t: { name: string }) => t.name)).toContain('calculate_education_cost');
     expect(json.result.tools.map((t: { name: string }) => t.name)).toContain('calculate_path_to_university_cost');
     expect(json.result.tools.map((t: { name: string }) => t.name)).toContain('get_school_competition_rates');
+    expect(json.result.tools.map((t: { name: string }) => t.name)).toContain('calculate_gakushu_seiseki');
   });
 
   test('tools/call get_school_competition_rates は学校別レコードを返し、商用限定レコードは除外する', async () => {
@@ -86,6 +87,34 @@ describe('/api/mcp JSON-RPC 契約', () => {
     const json = await res.json();
     const data = JSON.parse(json.result.content[0].text);
     expect(data.hensachi).toBe(60);
+  });
+
+  test('tools/call calculate_gakushu_seiseki は文科省の公式計算例(理科3.66→3.7)と一致する', async () => {
+    const res = await POST(
+      rpc('tools/call', {
+        name: 'calculate_gakushu_seiseki',
+        arguments: {
+          kamoku: [
+            { kyoka: '理科', kamoku: '物理基礎', gakunen: 1, hyotei: 3 },
+            { kyoka: '理科', kamoku: '化学基礎', gakunen: 2, hyotei: 3 },
+            { kyoka: '理科', kamoku: '生物基礎', gakunen: 1, hyotei: 5 },
+          ],
+        },
+      })
+    );
+    const json = await res.json();
+    const data = JSON.parse(json.result.content[0].text);
+    expect(data.kyokaStatus['理科']).toBe(3.7);
+    expect(data.overall).toBe(3.7);
+    expect(data.gaihyou).toBe('B');
+    expect(data.source.url).toContain('mext.go.jp');
+  });
+
+  test('tools/call calculate_gakushu_seiseki はkamoku未指定・空配列でinvalid_paramsを返す', async () => {
+    const res = await POST(rpc('tools/call', { name: 'calculate_gakushu_seiseki', arguments: {} }));
+    const json = await res.json();
+    const data = JSON.parse(json.result.content[0].text);
+    expect(data.error).toBe('invalid_params');
   });
 
   test('tools/call reverse_calc_hensachi は必要点数を逆算する', async () => {
@@ -362,7 +391,7 @@ describe('/api/mcp JSON-RPC 契約', () => {
   test('GET ディスカバリはツール/メソッド一覧を返す', async () => {
     const res = GET();
     const json = await res.json();
-    expect(json.tools).toHaveLength(26);
+    expect(json.tools).toHaveLength(27);
     expect(json.methods).toContain('resources/read');
   });
 });
@@ -420,9 +449,13 @@ const ALL_TOOL_FIXTURES: { name: string; arguments: Record<string, unknown> }[] 
   { name: 'calculate_fukuoka_score', arguments: { naishinRaw: 45, gakuryokuRaw: 300 } },
   { name: 'calculate_hokkaido_rank', arguments: { naishinRaw: 315, gakuryokuRaw: 300 } },
   { name: 'get_school_competition_rates', arguments: { prefectureCode: 'tokyo' } },
+  {
+    name: 'calculate_gakushu_seiseki',
+    arguments: { kamoku: [{ kyoka: '理科', kamoku: '物理基礎', gakunen: 1, hyotei: 3 }] },
+  },
 ];
 
-describe('/api/mcp 性能回帰スイート（ZZ-6a: 全26ツール）', () => {
+describe('/api/mcp 性能回帰スイート（ZZ-6a: 全27ツール）', () => {
   test('TOOLS定義と本スイートのfixtureが1対1で一致する（新規ツール追加時の計測漏れ防止）', async () => {
     const res = await POST(rpc('tools/list'));
     const json = await res.json();

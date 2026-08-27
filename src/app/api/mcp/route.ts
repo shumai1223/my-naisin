@@ -34,6 +34,7 @@ import { computeFukuokaScore } from '@/lib/total-score/fukuoka';
 import { computeHokkaidoRank } from '@/lib/total-score/hokkaido';
 import { COMPETITION_RATE_BY_PREFECTURE } from '@/data/competition-rates';
 import { licensableRecords } from '@/lib/competition-rate';
+import { calcKyokaStatus, calcOverallStatus, toGaihyou, type Kamoku } from '@/lib/gakushu-seiseki';
 
 /**
  * MCP互換エンドポイント（堀B / AIネイティブの城①）。
@@ -424,6 +425,31 @@ const TOOLS = [
         },
       },
       required: ['prefectureCode'],
+    },
+  },
+  {
+    name: 'calculate_gakushu_seiseki',
+    description:
+      '大学入学者選抜の調査書における学習成績の状況（旧称: 評定平均値）を、文部科学省の公式計算方法どおりに計算する。修得単位数は計算に使用しない（受け取らない）。教科ごとの学習成績の状況・全体の学習成績の状況・学習成績概評（A〜E）を返す。',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        kamoku: {
+          type: 'array',
+          description: '教科・科目・学年・評定の配列（最大100件）。複数学年にわたる科目は学年ごとに別要素で指定する。',
+          items: {
+            type: 'object',
+            properties: {
+              kyoka: { type: 'string', description: '教科名（例: 理科）。' },
+              kamoku: { type: 'string', description: '科目名（例: 物理基礎）。' },
+              gakunen: { type: 'number', description: '学年（1〜4）。' },
+              hyotei: { type: 'number', description: '評定（1〜5）。' },
+            },
+            required: ['kyoka', 'kamoku', 'gakunen', 'hyotei'],
+          },
+        },
+      },
+      required: ['kamoku'],
     },
   },
 ] as const;
@@ -827,6 +853,47 @@ async function runTool(name: string, args: Record<string, unknown>) {
       recordCount: records.length,
       records,
       officialSubtotals: file.officialSubtotals,
+    });
+  }
+
+  if (name === 'calculate_gakushu_seiseki') {
+    const kamokuRaw = args.kamoku;
+    if (!Array.isArray(kamokuRaw) || kamokuRaw.length === 0) {
+      return toolText({ error: 'invalid_params', message: 'kamokuは1件以上の配列で指定してください。' });
+    }
+    if (kamokuRaw.length > 100) {
+      return toolText({ error: 'invalid_params', message: 'kamokuは最大100件までです。' });
+    }
+    const kamokuList: Kamoku[] = [];
+    for (const raw of kamokuRaw) {
+      if (typeof raw !== 'object' || raw === null) {
+        return toolText({ error: 'invalid_params', message: 'kamokuの各要素はオブジェクトで指定してください。' });
+      }
+      const { kyoka, kamoku, gakunen, hyotei } = raw as Record<string, unknown>;
+      if (
+        typeof kyoka !== 'string' || kyoka.trim() === '' ||
+        typeof kamoku !== 'string' || kamoku.trim() === '' ||
+        typeof gakunen !== 'number' || ![1, 2, 3, 4].includes(gakunen) ||
+        typeof hyotei !== 'number' || ![1, 2, 3, 4, 5].includes(hyotei)
+      ) {
+        return toolText({
+          error: 'invalid_params',
+          message: 'kamokuの各要素はkyoka(文字列)・kamoku(文字列)・gakunen(1-4)・hyotei(1-5)を指定してください。',
+        });
+      }
+      kamokuList.push({ kyoka, kamoku, gakunen: gakunen as 1 | 2 | 3 | 4, hyotei: hyotei as 1 | 2 | 3 | 4 | 5 });
+    }
+    const overall = calcOverallStatus(kamokuList);
+    return toolText({
+      kyokaStatus: calcKyokaStatus(kamokuList),
+      overall,
+      gaihyou: toGaihyou(overall),
+      source: {
+        title:
+          '文部科学省「令和９年度大学入学者選抜実施要項について（通知）」（令和８年５月27日付け８文科高第318号）別紙様式１「調査書記入上の注意事項等について」',
+        url: 'https://www.mext.go.jp/content/20260529-mxt_daigakuc02-000005144_1.pdf',
+        verifiedAt: '2026-08-27',
+      },
     });
   }
 
