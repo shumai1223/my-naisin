@@ -22,12 +22,15 @@ okayama, tochigi, gunma, nagano, toyama, fukui, ehime, tokushima, kagawa, saga, 
 tottori, kochi, miyazaki, yamaguchi, kagoshima, niigata, yamanashi, nara, aomori, iwate, kyoto,
 yamagata, shimane, shiga, fukushima, hokkaido
 
-⚠️ このうち **北海道/神奈川/群馬/岡山/福島/新潟/広島/山口/愛媛/熊本の10県は`kyoiku-i`レーン
-（`data/outreach-queue.json`/`outreach-ledger.json`）で既に「入試情報ページへのリンクを貼って
-もらえないか」という別件の依頼を送信済み**（2026-08-16に4県全滅を理由にリンク依頼自体は
-queueから除外済み・[[loop-question-note]]参照）。この10県は**返信スレッドが既にある可能性が高く**、
-新規コールドメールより「応募状況データのみ」への絞り込み再質問の方が反応率が高いと予想される。
-着手前に必ず`data/outreach-ledger.json`を該当県コードでgrepし、既存スレッドの有無を確認すること。
+⚠️★2026-08-28追記・訂正: 当初「北海道/神奈川/群馬/岡山/福島/新潟/広島/山口/愛媛/熊本の10県は
+kyoiku-iレーンに既存スレッドがあるはず」と記載していたが、`data/outreach-queue.json`を実際に
+grepして確認したところ**この10件はすべて`status: excluded`かつ`channel: form`（メールでなく
+専用問い合わせフォーム経由）だった**。つまりGmailの既存スレッドは無く、返信への再質問という
+軽い手が使えない。この10県への着手には、ishikawa/aichi/wakayamaと同じ「メール再質問」ではなく、
+①フォーム経由での新規送信（Cowork委任が必要・`ops/cowork/`にタスクを用意する）、
+または②メールアドレスを別途調査できないか確認する、のいずれかが必要（未着手）。
+**次回この10県に着手する前に、必ずこの訂正を踏まえてから動くこと**（過去の記憶を鵜呑みにせず
+実データを見る、という[[fable5-loop-protocol]]の教訓をここでも徹底する）。
 
 fukuokaは令和6年度分データが商用第三者(育伸社)由来という別問題を抱えているが、応募状況データの
 再配布許諾自体はまだ確認していないため、他の未接触県と同列で扱ってよい（許諾が得られても
