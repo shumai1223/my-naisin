@@ -183,11 +183,28 @@ export const DATA_LICENSE_LEDGER: Record<string, DataLicenseLedgerEntry> = {
   fukui: { prefecture: 'fukui', sourceHost: '.lg.jp', ...UNKNOWN() },
   ehime: { prefecture: 'ehime', sourceHost: '.lg.jp', ...UNKNOWN() },
   tokushima: { prefecture: 'tokushima', sourceHost: '.lg.jp', ...UNKNOWN() },
-  kagawa: { prefecture: 'kagawa', sourceHost: '.lg.jp', ...UNKNOWN() },
+  kagawa: {
+    prefecture: 'kagawa',
+    sourceHost: '.lg.jp',
+    ...UNKNOWN(
+      '未確認。2026-08-28調査: 高校教育課の組織紹介ページの生HTMLでmailtoリンクと表示テキストが' +
+        '一致するkokokyoiku@pref.kagawa.lg.jpを発見・実在確認済み。応募状況データの出典明記のうえ' +
+        'での掲載可否を尋ねる初回メール下書きを設置(draftId r3803487085097089300・送信は👤)'
+    ),
+  },
   saga: { prefecture: 'saga', sourceHost: '.lg.jp', ...UNKNOWN() },
   nagasaki: { prefecture: 'nagasaki', sourceHost: '.lg.jp', ...UNKNOWN() },
   oita: { prefecture: 'oita', sourceHost: '.lg.jp', ...UNKNOWN() },
-  tottori: { prefecture: 'tottori', sourceHost: '.lg.jp', ...UNKNOWN() },
+  tottori: {
+    prefecture: 'tottori',
+    sourceHost: '.lg.jp',
+    ...UNKNOWN(
+      '未確認。2026-08-28調査: 高等学校課(高校教育企画室)ページの生HTMLでmailtoリンクと表示' +
+        'テキストが一致するkoutougakkou@pref.tottori.lg.jpを発見・実在確認済み。応募状況データの' +
+        '出典明記のうえでの掲載可否を尋ねる初回メール下書きを設置(draftId ' +
+        'r-8120971795787063897・送信は👤)'
+    ),
+  },
   kochi: { prefecture: 'kochi', sourceHost: '.lg.jp', ...UNKNOWN() },
   miyazaki: { prefecture: 'miyazaki', sourceHost: '.lg.jp', ...UNKNOWN() },
   yamaguchi: { prefecture: 'yamaguchi', sourceHost: '.lg.jp', ...UNKNOWN() },
@@ -208,7 +225,17 @@ export const DATA_LICENSE_LEDGER: Record<string, DataLicenseLedgerEntry> = {
     verifiedAt: '2026-08-24',
   },
   yamanashi: { prefecture: 'yamanashi', sourceHost: '.lg.jp', ...UNKNOWN() },
-  nara: { prefecture: 'nara', sourceHost: '.lg.jp', ...UNKNOWN() },
+  nara: {
+    prefecture: 'nara',
+    sourceHost: '.lg.jp',
+    ...UNKNOWN(
+      '未確認。2026-08-28調査: 高校教育課本体は問い合わせフォームのみで直メール無しだったが、' +
+        '同課所管のキャリアサポートセンターのページ(生HTML確認・実体参照デコード済み)で' +
+        'k6_career@e-net.nara.jpを発見・実在確認済み。担当違いの可能性を明記しつつ応募状況データの' +
+        '出典明記のうえでの掲載可否を尋ねる初回メール下書きを設置(draftId ' +
+        'r3298031575527760230・送信は👤)'
+    ),
+  },
   akita: {
     prefecture: 'akita',
     sourceHost: '.lg.jp',
@@ -225,8 +252,25 @@ export const DATA_LICENSE_LEDGER: Record<string, DataLicenseLedgerEntry> = {
       '（募集人員・志願者数・倍率等）を収録してよい',
     verifiedAt: '2026-08-26',
   },
-  aomori: { prefecture: 'aomori', sourceHost: '.lg.jp', ...UNKNOWN() },
-  iwate: { prefecture: 'iwate', sourceHost: '.lg.jp', ...UNKNOWN() },
+  aomori: {
+    prefecture: 'aomori',
+    sourceHost: '.lg.jp',
+    ...UNKNOWN(
+      '未確認。2026-08-28調査: 学校教育課高等学校指導グループのページを生HTMLで確認したが電話・FAX' +
+        'のみでメール記載無し。県全体の「ご意見・ご提案」フォーム(外部s-kantan.jp)はあるが教育政策課' +
+        '情報広報グループ宛の一般窓口であり高校教育課専用ではない。専用の直接連絡手段が無いため' +
+        '初回接触は保留し優先度を下げる'
+    ),
+  },
+  iwate: {
+    prefecture: 'iwate',
+    sourceHost: '.lg.jp',
+    ...UNKNOWN(
+      '未確認・返信待ち。2026-08-23付でDB0003@pref.iwate.jp宛の既存スレッド(2026-08-17に一度' +
+        'リンク不可の回答あり)へ「応募状況」データの出典明記のうえでの掲載可否を尋ねる絞り込み' +
+        '再質問を送信済み(2026-08-28再調査で重複送信ではないと確認)。新規下書きは不要・返信待ち'
+    ),
+  },
   kyoto: {
     prefecture: 'kyoto',
     sourceHost: '.lg.jp（実質公的）',
@@ -272,7 +316,17 @@ export const DATA_LICENSE_LEDGER: Record<string, DataLicenseLedgerEntry> = {
         'のみ」を尋ねる再質問の返信下書きを設置済み（draftId r-4191017784548390043・送信は👤・返信待ち）'
     ),
   },
-  shimane: { prefecture: 'shimane', sourceHost: '.lg.jp', ...UNKNOWN() },
+  shimane: {
+    prefecture: 'shimane',
+    sourceHost: '.lg.jp',
+    ...UNKNOWN(
+      '未確認・要検証で保留。2026-08-28調査: 学校教育課ページの生HTMLでmailtoリンクのhref属性' +
+        '(shidou@pref.shimane.lg.jp)と表示テキスト(gakkoukyouiku@pref.shimane.lg.jp)が食い違って' +
+        'いることを発見。どちらが実際に稼働している窓口か生HTML単独では確定できず、架空アドレス' +
+        '使用のリスクを避けるため今回は下書き作成を見送り。次回は電話(0852-22-5419)で実在確認する' +
+        'か、両アドレス併記での送信を検討する'
+    ),
+  },
   shiga: {
     prefecture: 'shiga',
     sourceHost: '.lg.jp',
