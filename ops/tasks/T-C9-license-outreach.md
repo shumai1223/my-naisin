@@ -15,7 +15,7 @@
 | 🟡再質問送信済み・返信待ち | 15 | ishikawa, aichi, wakayama（本セッション対応分）／fukui, kagawa, shizuoka, miyazaki, kochi, tochigi, shimane, iwate, kagoshima, saga, tottori, shiga（2026-08-23に別セッションが一括送信済み・下記訂正参照） |
 | 🟢初回問い合わせ送信済み・返信待ち（2026-08-28本セッション） | 8 | kyoto, chiba, hyogo, nara（キャリアセンター経由）, nagano, oita／miyagi・osaka・tokushima・yamagataは接触ルート無しのため対象外 |
 | ⚪未接触（応募状況データについて一度も聞いていない） | 20 | 下記参照（nagano/oitaは初回送信済みへ移動・tokushimaは接触ルート無しへ移動） |
-| 🔵着手済みだがフォームのみでCowork委任待ち | tokyo, saitama +excluded10県 | 直メール無し。loop単独では未着手のまま |
+| 🔵着手済みだがフォームのみでCowork委任待ち | tokyo, saitama +excluded10県 | 直メール無し。**2026-08-28: tokyo/saitamaの2件はCowork指示書を作成済み**（`ops/cowork/COWORK-TASK-t-c9-form-prefectures.md`・本文入力→確認画面到達まで・送信は👤）。発注実行（👤裁量）はまだ。excluded10県（hokkaido/kanagawa/gunma/okayama/fukushima/niigata/hiroshima/yamaguchi/ehime/kumamoto）は未着手のまま |
 
 ### ⚠️2026-08-28夜 重大訂正: 「未接触39県」に実は2026-08-23送信済みの12県が混入していた
 
