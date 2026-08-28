@@ -227,7 +227,17 @@ export const DATA_LICENSE_LEDGER: Record<string, DataLicenseLedgerEntry> = {
     ),
   },
   ehime: { prefecture: 'ehime', sourceHost: '.lg.jp', ...UNKNOWN() },
-  tokushima: { prefecture: 'tokushima', sourceHost: '.lg.jp', ...UNKNOWN() },
+  tokushima: {
+    prefecture: 'tokushima',
+    sourceHost: '.lg.jp',
+    ...UNKNOWN(
+      '未確認。2026-08-28調査: 高校教育課の公式ページ(pref.tokushima.lg.jp/kenseijoho/soshiki/' +
+        'kyouiku/koukoukyouikuka/)は電話番号(088-621-3139等)のみ掲載でmailto無し。全県共通の' +
+        '「お問い合わせ」ページ(/otoiawase/)も「各担当課に直接メールを」という案内のみで実際の' +
+        'アドレスは無く、実質的にフォーム誘導のみ。yamagata/miyagi/osakaと同型の接触ルート無し' +
+        '（架空アドレスは作らない）'
+    ),
+  },
   kagawa: {
     prefecture: 'kagawa',
     sourceHost: '.lg.jp',
@@ -250,7 +260,17 @@ export const DATA_LICENSE_LEDGER: Record<string, DataLicenseLedgerEntry> = {
     ),
   },
   nagasaki: { prefecture: 'nagasaki', sourceHost: '.lg.jp', ...UNKNOWN() },
-  oita: { prefecture: 'oita', sourceHost: '.lg.jp', ...UNKNOWN() },
+  oita: {
+    prefecture: 'oita',
+    sourceHost: '.lg.jp',
+    ...UNKNOWN(
+      '未確認・初回問い合わせ送信下書き設置済み(2026-08-28)。高校教育課の公式ページ' +
+        '(pref.oita.jp/soshiki/31210/)で高校改革推進班（高校入試担当）直後のmailtoリンクから' +
+        'a31210@pref.oita.lg.jpを実在確認。「貴課公表資料の引用利用に関するご報告および参照可否の' +
+        'ご相談」として初回メール(draftId r6782234245672548169)を設置。応募状況データの再配布許諾は' +
+        '返信後の絞り込み再質問で確認する（gifu/mie/akita型）'
+    ),
+  },
   tottori: {
     prefecture: 'tottori',
     sourceHost: '.lg.jp',
