@@ -21,43 +21,67 @@
 
 ---
 
-## ① sitemap漏れ333校 — 原因は特定済み
+## ① sitemap漏れ333校 — 原因を訂正（2026-08-28夜・診断スクリプト実装で判明）
 
-`src/lib/school-page-data.ts` の `buildSchoolPageDataForPrefecture` が、
-**倍率データの学校名を学校マスタにマッチできなかった学校を `skipped` として落としている。**
+⚠️ **起票時点の診断は誤りだった。** `buildSchoolPageDataForPrefecture` の `skipped`（学校名突合失敗）が
+原因だと書いたが、`scripts/check-school-name-gaps.mjs` を実装して実測したところ、**333校の内訳の
+大半（290校・87%）は名前突合の失敗ではなく、そもそも今年度の倍率データ(`competition-rates/*.ts`)
+に該当校のレコードが1件も存在しない**ことが原因だった。`skipped`（エイリアスで救済できる名前
+不一致）はわずか43校（13%）に過ぎない。
 
 ```
-if (match.reason !== 'matched' || !match.matchedCode || !match.matchedFullName) {
-  skipped.push({ schoolName, reason: match.reason === 'ambiguous' ? 'ambiguous' : 'no-match' });
-  continue;
-}
+学校マスタ 3,422校
+  └ 今年度倍率データに何らかの形でレコードがある: 3,132校（unique school name数と完全一致）
+       ├ 名前が完全一致してページ生成された: 3,089校 = sitemap実測と一致
+       └ 名前が一致せずskippedされた: 43校 ← エイリアスで救済可能
+  └ 今年度倍率データにレコード自体が無い: 290校 ← エイリアスでは救済できない別問題
 ```
 
-→ ページが生成されない → sitemapにも載らない → 永久に露出しない。
+**エイリアス追加は「43件のうち一部」しか解決しない。** 290校がなぜ倍率データを持たないか
+（対象外の学校種別なのか、収集モレなのか）は**未調査**。ここを次の一次調査対象にすること
+（学校マスタ側の1校をサンプルで開き、定時制/通信制/特別支援等の別区分か、単純収集漏れかを確認する）。
 
-**45/47県で発生している（系統的）。**
+### skipped（名前不一致・43→2026-08-28時点で29に削減）の内訳と回収状況
 
-| 県 | 漏れ | 率 |
-|---|---|---|
-| **hyogo** | **48/161** | **30%** |
-| **fukushima** | **25/75** | **33%** |
-| osaka | 23/148 | 16% |
-| tokyo | 20/187 | 11% |
-| niigata | 14/84 | 17% |
-| **ehime** | **14/57** | **25%** |
-| okayama | 12/63 | 19% |
-| hokkaido | 12/217 | 6% |
-| miyagi | 10/78 | 13% |
-| kanagawa | 10/148 | 7% |
+`scripts/check-school-name-gaps.mjs`（実装・commit済み）の実測。**tsxがこの環境で.tsファイルの
+named exportをdefaultへ畳み込むことがある不安定挙動があり、全importを動的import+フォールバックに
+している（スクリプト冒頭コメント参照）。**
 
-（以下 yamaguchi 9・kyoto 9・chiba 9・saitama 7・nagano 7・ibaraki 7・hiroshima 7・fukuoka 7・aichi 7・wakayama 6 …）
+| 県 | skipped(名前不一致) | データ自体なし | 合計漏れ |
+|---|---|---|---|
+| hyogo | 3（14→11件回収） | 34 | 37 |
+| fukushima | 0 | 25 | 25 |
+| osaka | 1 | 22 | 23 |
+| tokyo | 0 | 20 | 20 |
+| niigata | 3 | 11 | 14 |
+| ehime | 0 | 14 | 14 |
+| hokkaido | 2 | 10 | 12 |
+| okayama | 0 | 12 | 12 |
+| miyagi | 0 | 10 | 10 |
+| kanagawa | 1 | 9 | 10 |
+| chiba | 5(全件ambiguous) | 4 | 9 |
+| kyoto | 1 | 8 | 9 |
+| nagano | 2（3→1件回収） | 4 | 6 |
+| fukuoka | 0（2→全件回収） | 5 | 5 |
+
+（残りの県は`node scripts/check-school-name-gaps.mjs`の出力を参照。47県中16県に skipped 29件が分布）
+
+2026-08-28に**14件を`SCHOOL_NAME_ALIASES_BY_PREFECTURE`へ追加し回収済み**（hyogo11件・nagano1件・
+fukuoka2件）。いずれも1件ずつ`src/data/schools/*.ts`の実データと突合し、単一候補のみを採用した
+（あいまい一致・推測ゼロ・Y-0遵守）。残る29件のうち「尼崎」「伊丹」「西宮」「長野」「千葉」
+「船橋」「松戸」「柏」「銚子」「前橋」「太田」「浦和」「川越」「広島商業」「広島工業」「川崎」
+「工業」「岐阜商業」「和歌山」「嬉野」等は**同一正規化名が複数校にヒットするambiguousで、
+どの倍率データがどの学校を指すか一次資料（教委PDF等）で個別に裏取りしないと解決できない**
+（推測でエイリアスを追加しないこと）。「佐渡(両津)」「五泉総合」「村上桜ケ丘」「飯田OIDE長姫」
+「浦河総合」「稚内商業」「京都フォレスト」「人吉・五木分校」は**候補ゼロ**＝統廃合・改称の可能性が
+高く、`fable5-loop-protocol`の「実在校の統廃合はWebSearchで裏取りできる」技法を使う価値がある。
 
 ### やること
 
-1. **`skipped` の中身を県ごとにダンプする診断スクリプトを作る**
-   （`scripts/check-school-name-gaps.mjs` 等）。
-   出力は「県 / 倍率データ側の学校名 / reason(no-match|ambiguous) / マスタ側の近い候補」。
-2. **`SCHOOL_NAME_ALIASES_BY_PREFECTURE` にエイリアスを追加**して回収する。
+1. ~~`skipped` の中身を県ごとにダンプする診断スクリプトを作る~~ **✅完了**
+   （`scripts/check-school-name-gaps.mjs`・47県対応・エイリアス適用後の再実行で効果を確認できる）。
+2. **`SCHOOL_NAME_ALIASES_BY_PREFECTURE` にエイリアスを追加**して回収する。**✅14件着手済み・残29件は
+   ambiguous解決(一次資料での裏取りが必要)または候補ゼロ(統廃合調査が必要)**。
    miyagi では既にこの方式で解決した実績がある（2026-08-02 commit）。
 3. **漏れの多い県から順に処理する**: hyogo(48) → fukushima(25) → osaka(23) → tokyo(20)。
    **上位10県で222校＝全漏れの67%が回収できる。**
@@ -71,11 +95,14 @@ if (match.reason !== 'matched' || !match.matchedCode || !match.matchedFullName) 
 - 回収できなかった学校は、**「回収できなかった」と台帳に正直に記録する**（沈黙させない）。
 
 ### DoD
-- [ ] 診断スクリプトが県別の skipped 一覧を出力する
-- [ ] 上位10県のエイリアスを追加（無理なものは残す）
-- [ ] sitemapの `/school/` 件数が 3,089 から増えたことを実測で確認
+- [x] 診断スクリプトが県別の skipped 一覧を出力する（`scripts/check-school-name-gaps.mjs`・2026-08-28）
+- [x] 確実に単一候補と分かるエイリアスを追加（14件・無理なもの=ambiguous/候補ゼロは残した・2026-08-28）
+- [ ] 残る29件（ambiguous19件程度・候補ゼロ8件程度）を一次資料で裏取りして追加で回収する
+- [ ] **290校（漏れの87%）＝今年度倍率データにレコード自体が無い問題を別途調査する**
+      （エイリアスでは解決しない。まずhyogoの34校サンプルで「対象外の学校種別か」「単純な収集漏れか」を切り分ける）
+- [ ] sitemapの `/school/` 件数が 3,089 から増えたことを実測で確認（本番デプロイ後）
 - [ ] `ambiguous` を推測で埋めていないことをレビューできる形にする
-- [ ] jest / tsc green
+- [x] jest / tsc green（tsc exit0・350suites 6079tests・2026-08-28）
 
 ---
 
