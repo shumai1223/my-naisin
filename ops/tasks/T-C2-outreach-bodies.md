@@ -409,19 +409,21 @@ Object.entries(g).filter(([,v])=>v.length>1).forEach(([k,v])=>console.log(k,v));
 実質完了**。次にこのタスクへ戻る場合、真っ先にやるべきは新規bodyの執筆ではなく[[fable5-fullaccel-backlog-2026-07]]
 AA-1（`src/lib/outreach-ledger.ts`の`computeFollowupCandidates()`）による**追撃候補の処理**。
 
-### 未着手の追撃候補（2026-08-28時点・83件中、下記以外はkyoiku-i絡みか要再確認）
+### 未着手の追撃候補（2026-08-29 00:2x時点更新）
 
-`computeFollowupCandidates()`で検出した83件のうち、**下記の約23件は「送信元メールが実在し到達確認済み・
-まだ1度も追撃していない」正当な候補**（media-kobe-np / moshi-blossoms-kyushu / moshi-shingaku-kobo /
-moshi-kagoshima-kyoiku-shinkokai / edtech-benesse-gtec / edtech-kyoikusw-saitennavi /
-lane9-nier-library / lane9-nits-soumu / lane5-jukujournal / lane9-hiroshima-education-somu /
-edtech-systechits-majorschool / lane7-shinshu-u / edtech-crop-oneread / lane7-jaue /
-lane9-zenkojoken / lane9-zentoku / lane9-geoedu / lane9-jash / npo-terakoya-houjousha /
-lane8-yamaguchi-kyoikukai / lane8-nagasaki-kyoikukai / edtech-frompage-ocans / lane9-jsrecce /
-lane9-nasem）。2026-08-28は本日のGmail下書きが既に17件（1晩上限10-15件を超過）作成済みだったため
-着手を見送った。**次回セッションはここから着手してよい**（`docs/aa1-followup-templates.md`のb2b-saas/
-npo系テンプレを使い、1件ずつ`gmail_search`で元スレッドの相手アドレスを確認してから
-`gmail_create_reply_draft`または`gmail_create_draft`）。
+2026-08-28夜に特定した約23件のうち、**15件は2026-08-29 00:00の日次リセット直後に下書き作成済み**
+（media-kobe-np / moshi-blossoms-kyushu / moshi-shingaku-kobo / moshi-kagoshima-kyoiku-shinkokai /
+edtech-benesse-gtec / edtech-kyoikusw-saitennavi / lane9-nier-library / lane9-nits-soumu /
+lane5-jukujournal / lane9-hiroshima-education-somu / edtech-systechits-majorschool /
+lane7-shinshu-u / edtech-crop-oneread / lane7-jaue / lane9-zenkojoken・全てdraftId付きで
+`outreach-ledger.json`へ反映済み・着手前に15件のドメイン重複が無いことを確認済み）。
+
+**残り9件は本日15件で1晩上限に達したため未着手のまま**（lane9-zentoku / lane9-geoedu /
+lane9-jash / npo-terakoya-houjousha / lane8-yamaguchi-kyoikukai / lane8-nagasaki-kyoikukai /
+edtech-frompage-ocans / lane9-jsrecce / lane9-nasem）。**次回セッションはここから着手してよい**
+（`docs/aa1-followup-templates.md`のnpo系テンプレを使い、`gmail_thread`で元スレッドが自分の送信のみ
+[未返信]であることを確認したうえで`gmail_create_draft`で宛先を明示指定する。
+`gmail_create_reply_draft`は使わない=自分宛て下書き化の既知の罠を回避するため）。
 
 ⚠️ **kyoiku-i系12件（栃木/島根/高知/宮崎/香川/静岡/福井/滋賀/鳥取/佐賀/鹿児島/岩手）はここに含めていない。**
 これらは本日(08-28)夜のT-C9作業と同一の県群への「応募状況データ再配布」問い合わせであり、
