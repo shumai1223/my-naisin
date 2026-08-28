@@ -37,7 +37,7 @@
   概評（A〜E）が即座に出る
 - **メリット**: 手計算・Excelでの独自計算をやめられる。**計算方法の一次ソース
   （文科省令和４年度大学入学者選抜実施要項）を毎回参照しなくてよい**。単位数で重み付けする、
-  教科平均をさらに平均する、といった**よくある計算ミス（`/chousasho/yokuaru-machigai`で
+  教科平均をさらに平均する、といった**よくある計算ミス（`/hyotei-heikin/gakushu-seiseki/yokuaru-machigai`で
   実例を検証済み）を構造的に避けられる**
 
 ### ストーリーB: 生徒本人が、自分の位置を知る
@@ -70,8 +70,8 @@
 | 何が試せるか | URL |
 |---|---|
 | 学習成績の状況 計算機（単位数で重み付けしない設計を明示） | `https://my-naishin.com/hyotei-heikin/gakushu-seiseki` |
-| 調査書シミュレーター（様式そのままの見た目で再現） | `https://my-naishin.com/chousasho` |
-| よくある3つの計算ミスの実演（出典付き） | `https://my-naishin.com/chousasho/yokuaru-machigai` |
+| 調査書シミュレーター（様式そのままの見た目で再現） | `https://my-naishin.com/hyotei-heikin/gakushu-seiseki/chousasho` |
+| よくある3つの計算ミスの実演（出典付き） | `https://my-naishin.com/hyotei-heikin/gakushu-seiseki/yokuaru-machigai` |
 | 過去問自己採点 → 総合得点への橋渡し | `https://my-naishin.com/kakomon-jisaiten` |
 | 埋め込みウィジェットのデモ（「先生向けサイトに貼ったらこう見える」） | `https://my-naishin.com/embed/demo` |
 | API/MCPをその場で叩けるPlayground | `https://my-naishin.com/developers` |
