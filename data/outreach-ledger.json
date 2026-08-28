@@ -45,10 +45,11 @@
       "lane": "b2b-saas",
       "sourceTaskId": "W-1",
       "sentDate": "2026-07-17",
-      "status": "awaiting",
+      "lastContactDate": "2026-08-13",
+      "status": "closed",
       "followupCount": 0,
       "threadId": "19f8768bdf273775",
-      "note": "自動受付メールのみ・人間の返信なし。⚠️8/13確認: threadId 19f8768bdf273775 はGmail上でRequested entity was not foundとなり参照不能(削除/無効化の可能性)。到達可能な連絡経路が確認できず今回は下書き未作成・次回別経路(公式サイト再確認等)で調査要。",
+      "note": "自動受付メールのみ・人間の返信なし。8/13確認: threadId 19f8768bdf273775 はGmail上でRequested entity was not foundとなり参照不能(削除/無効化の可能性)。到達可能なメール連絡経路が無いためメール追撃は打ち切り(closed)。2026-08-28: computeFollowupCandidates()が毎回この件を『追撃候補』として再検出し続けていたため、既に8/13時点で判明していた到達不能を理由にclosedへ更新(新たな連絡経路が見つかった場合のみawaitingへ戻す)。",
       "reviewTier": "spot-check"
     },
     {
@@ -93,9 +94,10 @@
       "lane": "b2b-saas",
       "sourceTaskId": "W-1",
       "sentDate": "2026-07-17",
-      "status": "awaiting",
+      "lastContactDate": "2026-08-13",
+      "status": "closed",
       "followupCount": 0,
-      "note": "wave2・フォーム送信。送信日は自動受付メール(19f6fce325eb1339・20:20着)の受信時刻から確定。⚠️8/13確認: 自動受付メールに『このメールへの返信はできません』と明記(toiawase@hokushin-t.jp)=メール追撃は無意味と判断し下書き未作成。電話窓口(0570-06-0103・平日9-18時)のみが追撃経路=👤のみ実行可。"
+      "note": "wave2・フォーム送信。送信日は自動受付メール(19f6fce325eb1339・20:20着)の受信時刻から確定。8/13確認: 自動受付メールに『このメールへの返信はできません』と明記(toiawase@hokushin-t.jp)=メール追撃は無意味と判断しclosed(電話窓口0570-06-0103・平日9-18時のみが追撃経路=👤のみ実行可)。2026-08-28: computeFollowupCandidates()の再検出ノイズを止めるためstatus更新(電話追撃を👤が実施した場合はnoteに追記のうえawaitingへ戻す)。"
     },
     {
       "id": "ikushin",
@@ -103,9 +105,10 @@
       "lane": "b2b-saas",
       "sourceTaskId": "W-1",
       "sentDate": "2026-07-17",
-      "status": "awaiting",
+      "lastContactDate": "2026-08-13",
+      "status": "closed",
       "followupCount": 0,
-      "note": "wave2・フォーム送信。送信日は自動受付メール(19f6fd176ced2657・20:23着)の受信時刻から確定。⚠️8/13確認: 自動受付メールに『本メールに返信していただきましても、ご質問などにはお答えできません』と明記(school-e@ikushin.co.jp)=メール追撃は無意味と判断し下書き未作成。電話窓口(03-3831-9591・本社代表)のみが追撃経路=👤のみ実行可。"
+      "note": "wave2・フォーム送信。送信日は自動受付メール(19f6fd176ced2657・20:23着)の受信時刻から確定。8/13確認: 自動受付メールに『本メールに返信していただきましても、ご質問などにはお答えできません』と明記(school-e@ikushin.co.jp)=メール追撃は無意味と判断しclosed(電話窓口03-3831-9591・本社代表のみが追撃経路=👤のみ実行可)。2026-08-28: computeFollowupCandidates()の再検出ノイズを止めるためstatus更新(電話追撃を👤が実施した場合はnoteに追記のうえawaitingへ戻す)。"
     },
     {
       "id": "shinkyoken",

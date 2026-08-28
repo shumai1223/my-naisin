@@ -400,3 +400,43 @@ Object.entries(g).filter(([,v])=>v.length>1).forEach(([k,v])=>console.log(k,v));
 - **憶測で「その会社に効く一文」を書かない**（裏取りできなければ空で置く）
 - **候補件数を増やすことを進捗として報告しない**（274件目に意味は無い。
   報告する数字は **「本文ありの件数」** に統一する）
+
+## 🆕2026-08-28 20:4x: T-C2はcandidate枯渇・次はAA-1(追撃)フェーズへ移行
+
+`data/outreach-queue.json`を実測したところ、**`status==='candidate'`のエントリは0件**になっていた
+（全371件がqueued 191件 / excluded 180件のいずれか）。queuedは全件bodyあり、email channelは
+全件`draftId`あり（下書き済み）。**T-C2の「本文が無いcandidateに文面を用意する」という当初のDoDは
+実質完了**。次にこのタスクへ戻る場合、真っ先にやるべきは新規bodyの執筆ではなく[[fable5-fullaccel-backlog-2026-07]]
+AA-1（`src/lib/outreach-ledger.ts`の`computeFollowupCandidates()`）による**追撃候補の処理**。
+
+### 未着手の追撃候補（2026-08-28時点・83件中、下記以外はkyoiku-i絡みか要再確認）
+
+`computeFollowupCandidates()`で検出した83件のうち、**下記の約23件は「送信元メールが実在し到達確認済み・
+まだ1度も追撃していない」正当な候補**（media-kobe-np / moshi-blossoms-kyushu / moshi-shingaku-kobo /
+moshi-kagoshima-kyoiku-shinkokai / edtech-benesse-gtec / edtech-kyoikusw-saitennavi /
+lane9-nier-library / lane9-nits-soumu / lane5-jukujournal / lane9-hiroshima-education-somu /
+edtech-systechits-majorschool / lane7-shinshu-u / edtech-crop-oneread / lane7-jaue /
+lane9-zenkojoken / lane9-zentoku / lane9-geoedu / lane9-jash / npo-terakoya-houjousha /
+lane8-yamaguchi-kyoikukai / lane8-nagasaki-kyoikukai / edtech-frompage-ocans / lane9-jsrecce /
+lane9-nasem）。2026-08-28は本日のGmail下書きが既に17件（1晩上限10-15件を超過）作成済みだったため
+着手を見送った。**次回セッションはここから着手してよい**（`docs/aa1-followup-templates.md`のb2b-saas/
+npo系テンプレを使い、1件ずつ`gmail_search`で元スレッドの相手アドレスを確認してから
+`gmail_create_reply_draft`または`gmail_create_draft`）。
+
+⚠️ **kyoiku-i系12件（栃木/島根/高知/宮崎/香川/静岡/福井/滋賀/鳥取/佐賀/鹿児島/岩手）はここに含めていない。**
+これらは本日(08-28)夜のT-C9作業と同一の県群への「応募状況データ再配布」問い合わせであり、
+既に08-20〜08-21頃に別の追撃下書きが作成済みと`outreach-ledger.json`のnoteに記録がある。
+`outreach-ledger.json`(AA-1追撃システム)と`ops/tasks/T-C9-license-outreach.md`+
+`src/lib/data-license-ledger.ts`(T-C9)は同じ県への連絡を別々の台帳で追跡しており、
+2026-08-28に実際に4件の重複下書き事故が発生している（詳細は`fable5-loop-protocol`メモリ）。
+**この12件をAA-1経由で追撃する前に、必ずT-C9側の台帳(`data-license-ledger.ts`)と突合し、
+既に別ルートで連絡済みでないか確認すること。**
+
+### 副産物: 死んでいた追撃候補3件をclosedへ整理
+
+`t-moshi`/`hokushin`/`ikushin`（模試/学参3社）は8/13時点で「メール到達不能・電話窓口のみ」と
+判明済みだったが`status:'awaiting'`のまま放置され、`computeFollowupCandidates()`が毎回誤検出して
+いた。`status:'closed'`へ更新済み（`data/outreach-ledger.json`）。同様の「死に筋なのに`awaiting`の
+まま」エントリが他にも埋もれている可能性があるため、次にAA-1へ着手する際は83件全件のnoteを
+斜め読みし、「電話のみ」「到達不能」等の既存記述があるものは先にclosedへ整理してから
+本当に新規の追撃候補だけに絞り込むと効率的。
