@@ -274,7 +274,16 @@ export const DATA_LICENSE_LEDGER: Record<string, DataLicenseLedgerEntry> = {
         '(2026-08-28再調査で重複送信ではないと確認)。新規下書きは不要・返信待ち'
     ),
   },
-  ehime: { prefecture: 'ehime', sourceHost: '.lg.jp', ...UNKNOWN() },
+  ehime: {
+    prefecture: 'ehime',
+    sourceHost: '.lg.jp',
+    ...UNKNOWN(
+      '未確認。2026-08-29調査: 高校教育課ページ(pref.ehime.jp/soshiki/140/)をWebFetchで確認したところ' +
+        'メールアドレス記載は無く、お問い合わせフォーム(pref.ehime.jp/form/detail.php?sec_sec1=140)' +
+        'のみ。loopはフォーム送信不可のためCowork委任が必要' +
+        '(ops/cowork/COWORK-TASK-t-c9-form-prefectures.mdに追加予定)'
+    ),
+  },
   tokushima: {
     prefecture: 'tokushima',
     sourceHost: '.lg.jp',
@@ -307,7 +316,17 @@ export const DATA_LICENSE_LEDGER: Record<string, DataLicenseLedgerEntry> = {
         '絞り込み再質問を送信済み。新規下書きは不要・返信待ち'
     ),
   },
-  nagasaki: { prefecture: 'nagasaki', sourceHost: '.lg.jp', ...UNKNOWN() },
+  nagasaki: {
+    prefecture: 'nagasaki',
+    sourceHost: '.lg.jp',
+    ...UNKNOWN(
+      '未確認。2026-08-29調査: 高校教育課ページ(pref.nagasaki.jp/organization/edu/edu-koko/)を' +
+        'WebFetchで確認したところメールアドレス記載は無く、「このページへの質問はこちらから」という' +
+        'リンクはhref="#"のJavaScript駆動(実URLがWebFetchでは解決不能)。電話(095-894-3352)・FAXのみ' +
+        '実質確定。ehime/yamaguchi/niigataより優先度を下げ、Cowork委任時にブラウザで実際のフォーム' +
+        'リンク先を特定してもらう必要がある(未着手)'
+    ),
+  },
   oita: {
     prefecture: 'oita',
     sourceHost: '.lg.jp',
@@ -349,7 +368,17 @@ export const DATA_LICENSE_LEDGER: Record<string, DataLicenseLedgerEntry> = {
         '絞り込み再質問を送信済み。新規下書きは不要・返信待ち'
     ),
   },
-  yamaguchi: { prefecture: 'yamaguchi', sourceHost: '.lg.jp', ...UNKNOWN() },
+  yamaguchi: {
+    prefecture: 'yamaguchi',
+    sourceHost: '.lg.jp',
+    ...UNKNOWN(
+      '未確認。2026-08-29調査: 高校教育課ページ(pref.yamaguchi.lg.jp/soshiki/180/)をWebFetchで' +
+        '確認したところメールアドレス記載は無く（WebSearch要約が提示したa50300@pref.yamaguchi.lg.jpは' +
+        '実ページに存在せず架空と判明・既知の罠と同型）、お問い合わせフォーム' +
+        '(pref.yamaguchi.lg.jp/form/detail.php?sec_sec1=180)のみ。loopはフォーム送信不可のため' +
+        'Cowork委任が必要(ops/cowork/COWORK-TASK-t-c9-form-prefectures.mdに追加予定)'
+    ),
+  },
   kagoshima: {
     prefecture: 'kagoshima',
     sourceHost: '.lg.jp',
@@ -359,7 +388,18 @@ export const DATA_LICENSE_LEDGER: Record<string, DataLicenseLedgerEntry> = {
         '絞り込み再質問を送信済み。新規下書きは不要・返信待ち'
     ),
   },
-  niigata: { prefecture: 'niigata', sourceHost: '.lg.jp', ...UNKNOWN() },
+  niigata: {
+    prefecture: 'niigata',
+    sourceHost: '.lg.jp',
+    ...UNKNOWN(
+      '未確認。2026-08-29調査: 教育庁高等学校教育課ページ(pref.niigata.lg.jp/sec/kotogakko/)を' +
+        'WebFetchで確認したところメールアドレス記載は無く、係ごとに' +
+        'pref.niigata.lg.jp/form/detail.php?sec_sec1=248系のフォームが複数(指導第1係等)。' +
+        '入学者選抜担当は「指導第1係」(025-280-5611)。loopはフォーム送信不可のためCowork委任が必要' +
+        '(ops/cowork/COWORK-TASK-t-c9-form-prefectures.mdに追加予定・実際のフォームで指導第1係を' +
+        '選択できるか確認が必要)'
+    ),
+  },
   okinawa: {
     prefecture: 'okinawa',
     sourceHost: '.lg.jp',
@@ -374,7 +414,15 @@ export const DATA_LICENSE_LEDGER: Record<string, DataLicenseLedgerEntry> = {
       'A-2実装時はこの県のレコードに出典URLを必ず付与する条件で応募状況データを収録してよい',
     verifiedAt: '2026-08-24',
   },
-  yamanashi: { prefecture: 'yamanashi', sourceHost: '.lg.jp', ...UNKNOWN() },
+  yamanashi: {
+    prefecture: 'yamanashi',
+    sourceHost: '.lg.jp',
+    ...UNKNOWN(
+      '未確認。2026-08-29調査: 高校教育課ページ(pref.yamanashi.jp/koukoukyo/)をWebFetchで確認したが' +
+        'メールアドレス・お問い合わせフォームへのリンクとも見当たらず、電話(055-223-1769)・FAXのみ。' +
+        'miyagi/yamagata/toyama/aomori/osakaと同型の接触ルート無しのため初回接触は保留し優先度を下げる'
+    ),
+  },
   nara: {
     prefecture: 'nara',
     sourceHost: '.lg.jp',
