@@ -125,7 +125,10 @@ fukuoka2件）。いずれも1件ずつ`src/data/schools/*.ts`の実データと
 ### DoD
 - [x] 診断スクリプトが県別の skipped 一覧を出力する（`scripts/check-school-name-gaps.mjs`・2026-08-28）
 - [x] 確実に単一候補と分かるエイリアスを追加（14件・無理なもの=ambiguous/候補ゼロは残した・2026-08-28）
-- [ ] 残る29件（ambiguous19件程度・候補ゼロ8件程度）を一次資料で裏取りして追加で回収する
+- [x]（部分完了・2026-08-29）候補ゼロ8件のうち9件相当（niigata3・hokkaido2・kyoto1・osaka1・kumamoto1・nagano1）を
+      実データ突合で回収済み（`SCHOOL_NAME_ALIASES_BY_PREFECTURE`に追加。kyotoは競争率データ側の誤った
+      「独立校」コメントも訂正しdepartment不整合をjestで検知・修正）。残る20件（全てambiguous＝一次資料での
+      個別裏取りが必要）は未着手のまま持ち越し
 - [x] **290校問題の一次調査（2026-08-28 20:4x完了）**: hyogoサンプルで、根本原因が「収集モレ」では
       なく`competition-rates/*.ts`の**意図的な定時制/通信制スコープ除外**（東京・神奈川・千葉・
       埼玉・福岡・大阪等も同型の注記あり）である可能性が高いと判明。ただしhyogoで数が完全一致

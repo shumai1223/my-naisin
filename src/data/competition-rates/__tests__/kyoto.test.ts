@@ -84,9 +84,13 @@ describe('京都府 倍率パイプラインα（Y-6・全日制75レコード�
     const r7 = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
     expect(r7.filter((r) => r.schoolName === '京都すばる')).toHaveLength(2);
 
-    // 京都フォレストは北桑田の学科ではなく独立校（掛-1の罠として記録済み）
+    // 訂正(2026-08-29・T-S1調査): 京都フォレストは独立校ではなく北桑田高等学校の学科名だった
+    // （京都府教育委員会「府立高校一覧」で確認・school-name-aliases.tsのkyotoエイリアス参照）。
+    // schoolNameは資料の行区分のまま保持しつつ、departmentは北桑田自身の"普通"と区別するため
+    // "京都フォレスト"に補正済み（補正前は誤って"普通"のまま収録し、school-page-data側で
+    // 北桑田と合流させた際に同一fiscalYear::department"普通"が重複する不変条件違反を引き起こしていた）。
     const kyotoForest = r6.find((r) => r.schoolName === '京都フォレスト');
-    expect(kyotoForest).toMatchObject({ department: '普通', quota: 16, finalApplicants: 2 });
+    expect(kyotoForest).toMatchObject({ department: '京都フォレスト', quota: 16, finalApplicants: 2 });
   });
 
   it('掛-1(学校別×多年度): 令和5年度(R5)分レコードが76件・54校収録され、全日制計(quota6,096・applicants5,935・倍率0.97)と完全一致する。京都すばるはR5時点も「起業創造・企画・情報科学」の3学科独立構成だった(R6と同型)', () => {

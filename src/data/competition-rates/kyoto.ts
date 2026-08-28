@@ -33,9 +33,12 @@
  * R7/R8の75レコードよりR6は76レコードで1件多い：京都すばるがR6時点は「起業創造・企画・情報科学」
  * の3学科独立だったが、R7で起業創造・企画が「商業学科群」に統合され2学科構成になった（実在の
  * 学科再編・誤記ではない）。綾部（東）の農業・園芸くくり募集はR6でも同型（両学科併せて定員9人）。
- * ⚠️罠: 表の地域区分で北桑田の直後に「京都フォレスト」の行が現れるため、一見「北桑田の学科の1つ」
- * に見えるが、京都フォレストは京都府立の独立校（R7/R8でも別学校として収録済み）。区分レイアウトの
- * 見た目だけで学校名/学科名を判定せず、既存年度のschoolName一覧と突合してから収録すること。
+ * ⚠️訂正(2026-08-29・T-S1調査で判明): 表の地域区分で北桑田の直後に「京都フォレスト」の行が現れるため
+ * 当初「京都フォレストは京都府立の独立校（別学校）」と記録していたが誤りだった。京都府教育委員会
+ * 「府立高校一覧」(https://www.kyoto-be.ne.jp/koukyou/cms/?p=1111)で「北桑田高等学校・課程：全日制
+ * （普通・京都ﾌｫﾚｽﾄ）」と明記されており、京都フォレストは北桑田高等学校の学科名（独立校ではない）。
+ * schoolName側はこの資料の行区分をそのまま保持する（数値は既に検算済みで正しい）が、学校ページ生成
+ * 時の突合は`src/lib/school-name-aliases.ts`の`京都フォレスト: '北桑田'`エイリアスで解決する。
  *
  * ⚠️掛-1（R5追加時の年度差）: R5（令和5年3月3日発表「令和5年度京都府公立高等学校入学者選抜（中期
  * 選抜）に係る志願者数について＋中期選抜志願者数等一覧表」・単一PDF全4ページ、1ページ目がサマリ・
@@ -136,7 +139,7 @@ export const KYOTO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '木津', department: '情報企画', quota: 20, finalApplicants: 2, finalRate: 0.1 },
     { schoolName: '南陽', department: '普通', quota: 112, finalApplicants: 122, finalRate: 1.09 },
     { schoolName: '北桑田', department: '普通', quota: 42, finalApplicants: 0, finalRate: 0.0 },
-    { schoolName: '京都フォレスト', department: '普通', quota: 10, finalApplicants: 0, finalRate: 0.0 },
+    { schoolName: '京都フォレスト', department: '京都フォレスト', quota: 10, finalApplicants: 0, finalRate: 0.0 },
     { schoolName: '亀岡', department: '普通[単位制]', quota: 140, finalApplicants: 165, finalRate: 1.18 },
     { schoolName: '南丹', department: '総合学科[単位制]', quota: 64, finalApplicants: 2, finalRate: 0.03 },
     { schoolName: '園部', department: '普通', quota: 84, finalApplicants: 28, finalRate: 0.33 },
@@ -211,7 +214,7 @@ export const KYOTO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '木津', department: '情報企画', quota: 22, finalApplicants: 1, finalRate: 0.05, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '南陽', department: '普通', quota: 112, finalApplicants: 123, finalRate: 1.1, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '北桑田', department: '普通', quota: 41, finalApplicants: 3, finalRate: 0.07, fiscalYear: '令和7年度（2025年度）' },
-    { schoolName: '京都フォレスト', department: '普通', quota: 13, finalApplicants: 0, finalRate: 0, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '京都フォレスト', department: '京都フォレスト', quota: 13, finalApplicants: 0, finalRate: 0, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '亀岡', department: '普通[単位制]', quota: 140, finalApplicants: 142, finalRate: 1.01, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '南丹', department: '総合学科[単位制]', quota: 51, finalApplicants: 11, finalRate: 0.22, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '園部', department: '普通', quota: 84, finalApplicants: 42, finalRate: 0.5, fiscalYear: '令和7年度（2025年度）' },
@@ -288,7 +291,7 @@ export const KYOTO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '木津', department: '情報企画', quota: 12, finalApplicants: 3, finalRate: 0.25, fiscalYear: '令和6年度（2024年度）' },
     { schoolName: '南陽', department: '普通', quota: 112, finalApplicants: 139, finalRate: 1.24, fiscalYear: '令和6年度（2024年度）' },
     { schoolName: '北桑田', department: '普通', quota: 41, finalApplicants: 9, finalRate: 0.22, fiscalYear: '令和6年度（2024年度）' },
-    { schoolName: '京都フォレスト', department: '普通', quota: 16, finalApplicants: 2, finalRate: 0.13, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '京都フォレスト', department: '京都フォレスト', quota: 16, finalApplicants: 2, finalRate: 0.13, fiscalYear: '令和6年度（2024年度）' },
     { schoolName: '亀岡', department: '普通[単位制]', quota: 140, finalApplicants: 180, finalRate: 1.29, fiscalYear: '令和6年度（2024年度）' },
     { schoolName: '南丹', department: '総合学科[単位制]', quota: 51, finalApplicants: 13, finalRate: 0.25, fiscalYear: '令和6年度（2024年度）' },
     { schoolName: '園部', department: '普通', quota: 84, finalApplicants: 53, finalRate: 0.63, fiscalYear: '令和6年度（2024年度）' },
@@ -365,7 +368,7 @@ export const KYOTO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '木津', department: '情報企画', quota: 24, finalApplicants: 2, finalRate: 0.08, fiscalYear: '令和5年度（2023年度）' },
     { schoolName: '南陽', department: '普通', quota: 112, finalApplicants: 133, finalRate: 1.19, fiscalYear: '令和5年度（2023年度）' },
     { schoolName: '北桑田', department: '普通', quota: 41, finalApplicants: 7, finalRate: 0.17, fiscalYear: '令和5年度（2023年度）' },
-    { schoolName: '京都フォレスト', department: '普通', quota: 10, finalApplicants: 2, finalRate: 0.2, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '京都フォレスト', department: '京都フォレスト', quota: 10, finalApplicants: 2, finalRate: 0.2, fiscalYear: '令和5年度（2023年度）' },
     { schoolName: '亀岡', department: '普通[単位制]', quota: 140, finalApplicants: 179, finalRate: 1.28, fiscalYear: '令和5年度（2023年度）' },
     { schoolName: '南丹', department: '総合学科[単位制]', quota: 73, finalApplicants: 4, finalRate: 0.05, fiscalYear: '令和5年度（2023年度）' },
     { schoolName: '園部', department: '普通', quota: 84, finalApplicants: 33, finalRate: 0.39, fiscalYear: '令和5年度（2023年度）' },
