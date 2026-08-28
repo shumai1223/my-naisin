@@ -2642,11 +2642,11 @@
       "lane": "b2b-saas",
       "sourceTaskId": "T-C2/Cowork第4-6弾",
       "sentDate": "2026-08-27",
-      "lastContactDate": "2026-08-27",
-      "status": "awaiting",
+      "lastContactDate": "2026-08-28",
+      "status": "declined",
       "followupCount": 0,
-      "threadId": null,
-      "note": "Cowork第4-6弾でフォーム入力→👤が個別に送信し完了URLを記録。送信確認URL: http://contact.gakken.jp/user/complete.gsp"
+      "threadId": "1a045a3c61eb4a54",
+      "note": "Cowork第4-6弾でフォーム入力→👤が個別に送信し完了URLを記録。送信確認URL: http://contact.gakken.jp/user/complete.gsp 2026-08-28 08:52に総合案内(info@gakken.co.jp)から自動応答的な文面で明示的なお断り(『弊社特に希望いたしません・ご辞退』)を受信。送信専用アドレスのため返信不可・追撃対象から除外。"
     },
     {
       "id": "OL-0842",
