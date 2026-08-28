@@ -2805,11 +2805,11 @@
       "lane": "media",
       "sourceTaskId": "T-C2/Cowork第4-6弾",
       "sentDate": "2026-08-27",
-      "lastContactDate": "2026-08-27",
+      "lastContactDate": "2026-08-28",
       "status": "awaiting",
       "followupCount": 0,
-      "threadId": null,
-      "note": "Cowork第4-6弾でフォーム入力→👤が個別に送信し完了URLを記録。送信確認URL: https://form.run/@asagaku-FcEeTyg2tapUj9I7m1L6"
+      "threadId": "1a04671cea632c9c",
+      "note": "Cowork第4-6弾でフォーム入力→👤が個別に送信し完了URLを記録。送信確認URL: https://form.run/@asagaku-FcEeTyg2tapUj9I7m1L6 2026-08-28 12:37に販売部(reply+tBg2XnaIqr4hCAIoTZ5k@form.run)から受付確認の自動応答的な返信を受信(threadId 1a04671cea632c9c・『いただきました情報は弊社担当部署に共有いたします』)。担当部署からの実質回答ではなくreceipt/取次段階のため、追撃対象からは除外せずstatus=awaitingのまま据え置き。"
     },
     {
       "id": "OL-0862",
