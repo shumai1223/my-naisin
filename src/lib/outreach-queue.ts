@@ -68,6 +68,7 @@ const LANE_PRIORITY: Record<OutreachLane, number> = {
   'kyoiku-i': 0,
   'b2b-saas': 1,
   chihoshi: 2,
+  media: 2, // chihoshi(地方紙)と同格の対外発信メディア枠
   npo: 3,
   'mutual-link': 4,
 };

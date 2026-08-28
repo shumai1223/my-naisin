@@ -9,8 +9,14 @@
  * ここは「その台帳から誰に追撃すべきかを決定論で判定する」部分のみを担う（サーバー/CI/スクリプト共通）。
  */
 
-/** 追撃システムが扱うアウトリーチのレーン（送信先の性質）。 */
-export type OutreachLane = 'b2b-saas' | 'chihoshi' | 'npo' | 'mutual-link' | 'kyoiku-i';
+/**
+ * 追撃システムが扱うアウトリーチのレーン（送信先の性質）。
+ * `chihoshi`=地方紙、`media`=全国紙・専門誌・EdTech系メディア等の地方紙以外の報道・専門媒体
+ * （2026-08-29判明: `data/outreach-ledger.json`に`lane: 'media'`のエントリが17件既に存在していたが
+ * 本型に無く、`summarizeByLane`が`NaN`を返し`reviewTierOf`/`groupByReviewTier`がこれらを
+ * サイレントに欠落させるバグがあったため追加した）。
+ */
+export type OutreachLane = 'b2b-saas' | 'chihoshi' | 'npo' | 'mutual-link' | 'kyoiku-i' | 'media';
 
 /** 台帳エントリの状態。人間の判断（👤が読んで分類）で更新される。 */
 export type OutreachStatus =
@@ -108,6 +114,7 @@ export function summarizeByLane(entries: OutreachEntry[]): Record<OutreachLane, 
     npo: 0,
     'mutual-link': 0,
     'kyoiku-i': 0,
+    media: 0,
   };
   for (const e of entries) base[e.lane] += 1;
   return base;
@@ -124,6 +131,7 @@ export const LANE_DEFAULT_REVIEW_TIER: Record<OutreachLane, ReviewTier> = {
   chihoshi: 'full-review', // メディア（地方紙等）への対外発信
   npo: 'spot-check',
   'mutual-link': 'spot-check', // ウェブマスター間のテンプレ差し込み
+  media: 'full-review', // 全国紙・専門誌・EdTechメディア等（地方紙=chihoshiと同じ対外発信リスクのため同格）
 };
 
 /** エントリのレビュー区分を決定する（`entry.reviewTier`の個別指定 > レーンの既定値の優先順）。 */

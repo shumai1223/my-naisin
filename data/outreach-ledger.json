@@ -258,9 +258,10 @@
       "sourceTaskId": "X-14",
       "sentDate": "2026-08-06",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "19fc125a1f18a08e",
-      "note": "8/6一斉送信23通のうち1件。 2026-08-20: 11日経過・返信無しのため「応募状況」データ再配布可否を尋ねる追撃下書きを準備済み(draftId r-5247365395633408192)。"
+      "note": "8/6一斉送信23通のうち1件。 2026-08-20: 11日経過・返信無しのため「応募状況」データ再配布可否を尋ねる追撃下書きを準備済み(draftId r-5247365395633408192)。 【2026-08-29追記】この2026-08-20の下書き準備に続き、2026-08-23にsrc/lib/data-license-ledger.ts(S13-A A-1)側で実送信をGmail in:sent実測で確認済み(該当県のS13-A A-1エントリを参照)。followupCountを1へ・lastContactDateを2026-08-23へ補正し、本レポートが二重に「初回追撃が必要」と誤判定しないようにした。以後この12県への追加接触はdata-license-ledger.ts側の記録を必ず先に確認すること(重複下書きの実例が過去に発生済み)。",
+      "lastContactDate": "2026-08-23"
     },
     {
       "id": "kyoiku-shimane-0806",
@@ -269,9 +270,10 @@
       "sourceTaskId": "X-14",
       "sentDate": "2026-08-06",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "19fc125b06b95436",
-      "note": "8/6一斉送信23通のうち1件。 2026-08-20: 11日経過・返信無しのため「応募状況」データ再配布可否を尋ねる追撃下書きを準備済み(draftId r-3850377284819771014)。"
+      "note": "8/6一斉送信23通のうち1件。 2026-08-20: 11日経過・返信無しのため「応募状況」データ再配布可否を尋ねる追撃下書きを準備済み(draftId r-3850377284819771014)。 【2026-08-29追記】この2026-08-20の下書き準備に続き、2026-08-23にsrc/lib/data-license-ledger.ts(S13-A A-1)側で実送信をGmail in:sent実測で確認済み(該当県のS13-A A-1エントリを参照)。followupCountを1へ・lastContactDateを2026-08-23へ補正し、本レポートが二重に「初回追撃が必要」と誤判定しないようにした。以後この12県への追加接触はdata-license-ledger.ts側の記録を必ず先に確認すること(重複下書きの実例が過去に発生済み)。",
+      "lastContactDate": "2026-08-23"
     },
     {
       "id": "kyoiku-kochi-0806",
@@ -280,9 +282,10 @@
       "sourceTaskId": "X-14",
       "sentDate": "2026-08-06",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "19fc125be73955ad",
-      "note": "8/6一斉送信23通のうち1件。 2026-08-20: 11日経過・返信無しのため「応募状況」データ再配布可否を尋ねる追撃下書きを準備済み(draftId r-1180606127451523989)。"
+      "note": "8/6一斉送信23通のうち1件。 2026-08-20: 11日経過・返信無しのため「応募状況」データ再配布可否を尋ねる追撃下書きを準備済み(draftId r-1180606127451523989)。 【2026-08-29追記】この2026-08-20の下書き準備に続き、2026-08-23にsrc/lib/data-license-ledger.ts(S13-A A-1)側で実送信をGmail in:sent実測で確認済み(該当県のS13-A A-1エントリを参照)。followupCountを1へ・lastContactDateを2026-08-23へ補正し、本レポートが二重に「初回追撃が必要」と誤判定しないようにした。以後この12県への追加接触はdata-license-ledger.ts側の記録を必ず先に確認すること(重複下書きの実例が過去に発生済み)。",
+      "lastContactDate": "2026-08-23"
     },
     {
       "id": "kyoiku-miyazaki-0806",
@@ -291,9 +294,10 @@
       "sourceTaskId": "X-14",
       "sentDate": "2026-08-06",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "19fc125cc233bfe6",
-      "note": "8/6一斉送信23通のうち1件。 2026-08-21: 15日経過・返信無し(岩手のみ08-17に別件[リンク可否]の回答あり・再配布可否は未回答)のため「応募状況」データ再配布可否を尋ねる追撃下書きを作成(draftId r-5581084623295914861)。"
+      "note": "8/6一斉送信23通のうち1件。 2026-08-21: 15日経過・返信無し(岩手のみ08-17に別件[リンク可否]の回答あり・再配布可否は未回答)のため「応募状況」データ再配布可否を尋ねる追撃下書きを作成(draftId r-5581084623295914861)。 【2026-08-29追記】この2026-08-20の下書き準備に続き、2026-08-23にsrc/lib/data-license-ledger.ts(S13-A A-1)側で実送信をGmail in:sent実測で確認済み(該当県のS13-A A-1エントリを参照)。followupCountを1へ・lastContactDateを2026-08-23へ補正し、本レポートが二重に「初回追撃が必要」と誤判定しないようにした。以後この12県への追加接触はdata-license-ledger.ts側の記録を必ず先に確認すること(重複下書きの実例が過去に発生済み)。",
+      "lastContactDate": "2026-08-23"
     },
     {
       "id": "kyoiku-kagawa-0806",
@@ -302,9 +306,10 @@
       "sourceTaskId": "X-14",
       "sentDate": "2026-08-06",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "19fc125dbe7daece",
-      "note": "8/6一斉送信23通のうち1件。 2026-08-21: 15日経過・返信無し(岩手のみ08-17に別件[リンク可否]の回答あり・再配布可否は未回答)のため「応募状況」データ再配布可否を尋ねる追撃下書きを作成(draftId r-7501933920225757180)。"
+      "note": "8/6一斉送信23通のうち1件。 2026-08-21: 15日経過・返信無し(岩手のみ08-17に別件[リンク可否]の回答あり・再配布可否は未回答)のため「応募状況」データ再配布可否を尋ねる追撃下書きを作成(draftId r-7501933920225757180)。 【2026-08-29追記】この2026-08-20の下書き準備に続き、2026-08-23にsrc/lib/data-license-ledger.ts(S13-A A-1)側で実送信をGmail in:sent実測で確認済み(該当県のS13-A A-1エントリを参照)。followupCountを1へ・lastContactDateを2026-08-23へ補正し、本レポートが二重に「初回追撃が必要」と誤判定しないようにした。以後この12県への追加接触はdata-license-ledger.ts側の記録を必ず先に確認すること(重複下書きの実例が過去に発生済み)。",
+      "lastContactDate": "2026-08-23"
     },
     {
       "id": "kyoiku-shizuoka-0806",
@@ -313,9 +318,10 @@
       "sourceTaskId": "X-14",
       "sentDate": "2026-08-06",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "19fc125e69e36e48",
-      "note": "8/6一斉送信23通のうち1件。 2026-08-21: 15日経過・返信無し(岩手のみ08-17に別件[リンク可否]の回答あり・再配布可否は未回答)のため「応募状況」データ再配布可否を尋ねる追撃下書きを作成(draftId r7183340580392309269)。"
+      "note": "8/6一斉送信23通のうち1件。 2026-08-21: 15日経過・返信無し(岩手のみ08-17に別件[リンク可否]の回答あり・再配布可否は未回答)のため「応募状況」データ再配布可否を尋ねる追撃下書きを作成(draftId r7183340580392309269)。 【2026-08-29追記】この2026-08-20の下書き準備に続き、2026-08-23にsrc/lib/data-license-ledger.ts(S13-A A-1)側で実送信をGmail in:sent実測で確認済み(該当県のS13-A A-1エントリを参照)。followupCountを1へ・lastContactDateを2026-08-23へ補正し、本レポートが二重に「初回追撃が必要」と誤判定しないようにした。以後この12県への追加接触はdata-license-ledger.ts側の記録を必ず先に確認すること(重複下書きの実例が過去に発生済み)。",
+      "lastContactDate": "2026-08-23"
     },
     {
       "id": "kyoiku-ishikawa-0806",
@@ -336,9 +342,10 @@
       "sourceTaskId": "X-14",
       "sentDate": "2026-08-06",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "19fc125ff02d7ed0",
-      "note": "8/6一斉送信23通のうち1件。 2026-08-21: 15日経過・返信無し(岩手のみ08-17に別件[リンク可否]の回答あり・再配布可否は未回答)のため「応募状況」データ再配布可否を尋ねる追撃下書きを作成(draftId r-4235808945313496332)。"
+      "note": "8/6一斉送信23通のうち1件。 2026-08-21: 15日経過・返信無し(岩手のみ08-17に別件[リンク可否]の回答あり・再配布可否は未回答)のため「応募状況」データ再配布可否を尋ねる追撃下書きを作成(draftId r-4235808945313496332)。 【2026-08-29追記】この2026-08-20の下書き準備に続き、2026-08-23にsrc/lib/data-license-ledger.ts(S13-A A-1)側で実送信をGmail in:sent実測で確認済み(該当県のS13-A A-1エントリを参照)。followupCountを1へ・lastContactDateを2026-08-23へ補正し、本レポートが二重に「初回追撃が必要」と誤判定しないようにした。以後この12県への追加接触はdata-license-ledger.ts側の記録を必ず先に確認すること(重複下書きの実例が過去に発生済み)。",
+      "lastContactDate": "2026-08-23"
     },
     {
       "id": "kyoiku-shiga-0806",
@@ -347,9 +354,10 @@
       "sourceTaskId": "X-14",
       "sentDate": "2026-08-06",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "19fcc77acd4f4230",
-      "note": "8/6一斉送信23通のうち1件。 2026-08-21: 15日経過・返信無し(岩手のみ08-17に別件[リンク可否]の回答あり・再配布可否は未回答)のため「応募状況」データ再配布可否を尋ねる追撃下書きを作成(draftId r-6643750599743768217)。"
+      "note": "8/6一斉送信23通のうち1件。 2026-08-21: 15日経過・返信無し(岩手のみ08-17に別件[リンク可否]の回答あり・再配布可否は未回答)のため「応募状況」データ再配布可否を尋ねる追撃下書きを作成(draftId r-6643750599743768217)。 【2026-08-29追記】この2026-08-20の下書き準備に続き、2026-08-23にsrc/lib/data-license-ledger.ts(S13-A A-1)側で実送信をGmail in:sent実測で確認済み(該当県のS13-A A-1エントリを参照)。followupCountを1へ・lastContactDateを2026-08-23へ補正し、本レポートが二重に「初回追撃が必要」と誤判定しないようにした。以後この12県への追加接触はdata-license-ledger.ts側の記録を必ず先に確認すること(重複下書きの実例が過去に発生済み)。",
+      "lastContactDate": "2026-08-23"
     },
     {
       "id": "kyoiku-gifu-0806",
@@ -418,9 +426,10 @@
       "sourceTaskId": "X-14",
       "sentDate": "2026-08-06",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "19fcc7d04b88a25e",
-      "note": "8/6一斉送信23通のうち1件。 2026-08-21: 15日経過・返信無し(岩手のみ08-17に別件[リンク可否]の回答あり・再配布可否は未回答)のため「応募状況」データ再配布可否を尋ねる追撃下書きを作成(draftId r-4438517810515140502)。"
+      "note": "8/6一斉送信23通のうち1件。 2026-08-21: 15日経過・返信無し(岩手のみ08-17に別件[リンク可否]の回答あり・再配布可否は未回答)のため「応募状況」データ再配布可否を尋ねる追撃下書きを作成(draftId r-4438517810515140502)。 【2026-08-29追記】この2026-08-20の下書き準備に続き、2026-08-23にsrc/lib/data-license-ledger.ts(S13-A A-1)側で実送信をGmail in:sent実測で確認済み(該当県のS13-A A-1エントリを参照)。followupCountを1へ・lastContactDateを2026-08-23へ補正し、本レポートが二重に「初回追撃が必要」と誤判定しないようにした。以後この12県への追加接触はdata-license-ledger.ts側の記録を必ず先に確認すること(重複下書きの実例が過去に発生済み)。",
+      "lastContactDate": "2026-08-23"
     },
     {
       "id": "kyoiku-saga-0806",
@@ -429,9 +438,10 @@
       "sourceTaskId": "X-14",
       "sentDate": "2026-08-06",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "19fcc7d147cf31f0",
-      "note": "8/6一斉送信23通のうち1件。 2026-08-21: 15日経過・返信無し(岩手のみ08-17に別件[リンク可否]の回答あり・再配布可否は未回答)のため「応募状況」データ再配布可否を尋ねる追撃下書きを作成(draftId r7116447854118903703)。"
+      "note": "8/6一斉送信23通のうち1件。 2026-08-21: 15日経過・返信無し(岩手のみ08-17に別件[リンク可否]の回答あり・再配布可否は未回答)のため「応募状況」データ再配布可否を尋ねる追撃下書きを作成(draftId r7116447854118903703)。 【2026-08-29追記】この2026-08-20の下書き準備に続き、2026-08-23にsrc/lib/data-license-ledger.ts(S13-A A-1)側で実送信をGmail in:sent実測で確認済み(該当県のS13-A A-1エントリを参照)。followupCountを1へ・lastContactDateを2026-08-23へ補正し、本レポートが二重に「初回追撃が必要」と誤判定しないようにした。以後この12県への追加接触はdata-license-ledger.ts側の記録を必ず先に確認すること(重複下書きの実例が過去に発生済み)。",
+      "lastContactDate": "2026-08-23"
     },
     {
       "id": "kyoiku-kagoshima-0806",
@@ -440,9 +450,10 @@
       "sourceTaskId": "X-14",
       "sentDate": "2026-08-06",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "19fcc7d2297903d8",
-      "note": "8/6一斉送信23通のうち1件。 2026-08-21: 15日経過・返信無し(岩手のみ08-17に別件[リンク可否]の回答あり・再配布可否は未回答)のため「応募状況」データ再配布可否を尋ねる追撃下書きを作成(draftId r-3478902720051575230)。"
+      "note": "8/6一斉送信23通のうち1件。 2026-08-21: 15日経過・返信無し(岩手のみ08-17に別件[リンク可否]の回答あり・再配布可否は未回答)のため「応募状況」データ再配布可否を尋ねる追撃下書きを作成(draftId r-3478902720051575230)。 【2026-08-29追記】この2026-08-20の下書き準備に続き、2026-08-23にsrc/lib/data-license-ledger.ts(S13-A A-1)側で実送信をGmail in:sent実測で確認済み(該当県のS13-A A-1エントリを参照)。followupCountを1へ・lastContactDateを2026-08-23へ補正し、本レポートが二重に「初回追撃が必要」と誤判定しないようにした。以後この12県への追加接触はdata-license-ledger.ts側の記録を必ず先に確認すること(重複下書きの実例が過去に発生済み)。",
+      "lastContactDate": "2026-08-23"
     },
     {
       "id": "kyoiku-okinawa-0806",
@@ -463,9 +474,10 @@
       "sourceTaskId": "X-14",
       "sentDate": "2026-08-06",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "19fd6af55ef90de8",
-      "note": "同日夜遅れて送信された24通目（21:49）。 2026-08-21: 15日経過・返信無し(岩手のみ08-17に別件[リンク可否]の回答あり・再配布可否は未回答)のため「応募状況」データ再配布可否を尋ねる追撃下書きを作成(draftId r-3113567628490338873)。"
+      "note": "同日夜遅れて送信された24通目（21:49）。 2026-08-21: 15日経過・返信無し(岩手のみ08-17に別件[リンク可否]の回答あり・再配布可否は未回答)のため「応募状況」データ再配布可否を尋ねる追撃下書きを作成(draftId r-3113567628490338873)。 【2026-08-29追記】この2026-08-20の下書き準備に続き、2026-08-23にsrc/lib/data-license-ledger.ts(S13-A A-1)側で実送信をGmail in:sent実測で確認済み(該当県のS13-A A-1エントリを参照)。followupCountを1へ・lastContactDateを2026-08-23へ補正し、本レポートが二重に「初回追撃が必要」と誤判定しないようにした。以後この12県への追加接触はdata-license-ledger.ts側の記録を必ず先に確認すること(重複下書きの実例が過去に発生済み)。",
+      "lastContactDate": "2026-08-23"
     },
     {
       "id": "chihoshi-hokkaido-np-0806",
@@ -476,7 +488,7 @@
       "status": "awaiting",
       "followupCount": 1,
       "threadId": "19fcd6f535d73fa2",
-      "note": "「中学生が独学で開発した内申点計算サイトについて」の情報提供メール。 2026-08-14: 8日間無反応のため追撃下書きを新規作成(gmail_create_draft・元スレッドへの返信ではなく新規宛先指定で正しく宛先設定)。",
+      "note": "「中学生が独学で開発した内申点計算サイトについて」の情報提供メール。 2026-08-14: 8日間無反応のため追撃下書きを新規作成(gmail_create_draft・元スレッドへの返信ではなく新規宛先指定で正しく宛先設定)。 （2026-08-29判明: 同一スレッドの重複登録id media-hokkaido-npを統合・org別名「北海道新聞社（報道センター・情報提供窓口）」）",
       "lastContactDate": "2026-08-14"
     },
     {
@@ -488,7 +500,7 @@
       "status": "awaiting",
       "followupCount": 1,
       "threadId": "19fcd6f5d8240aab",
-      "note": "同上テンプレート。 2026-08-14: 8日間無反応のため追撃下書きを新規作成(gmail_create_draft・元スレッドへの返信ではなく新規宛先指定で正しく宛先設定)。",
+      "note": "同上テンプレート。 2026-08-14: 8日間無反応のため追撃下書きを新規作成(gmail_create_draft・元スレッドへの返信ではなく新規宛先指定で正しく宛先設定)。 （2026-08-29判明: 同一スレッドの重複登録id media-chunichiを統合・org別名「中日新聞社（Your Scoop／社会部 取材依頼窓口）」）",
       "lastContactDate": "2026-08-14"
     },
     {
@@ -500,7 +512,7 @@
       "status": "awaiting",
       "followupCount": 1,
       "threadId": "19fcd6f696bdb62a",
-      "note": "同上テンプレート。 2026-08-14: 8日間無反応のため追撃下書きを新規作成(gmail_create_draft・元スレッドへの返信ではなく新規宛先指定で正しく宛先設定)。",
+      "note": "同上テンプレート。 2026-08-14: 8日間無反応のため追撃下書きを新規作成(gmail_create_draft・元スレッドへの返信ではなく新規宛先指定で正しく宛先設定)。 （2026-08-29判明: 同一スレッドの重複登録id media-chugoku-npを統合・org別名「中国新聞社（社会担当・情報提供窓口）」）",
       "lastContactDate": "2026-08-14"
     },
     {
@@ -512,7 +524,7 @@
       "status": "awaiting",
       "followupCount": 1,
       "threadId": "19fcd6f74d1734a2",
-      "note": "同上テンプレート。 2026-08-14: 8日間無反応のため追撃下書きを新規作成(gmail_create_draft・元スレッドへの返信ではなく新規宛先指定で正しく宛先設定)。",
+      "note": "同上テンプレート。 2026-08-14: 8日間無反応のため追撃下書きを新規作成(gmail_create_draft・元スレッドへの返信ではなく新規宛先指定で正しく宛先設定)。 （2026-08-29判明: 同一スレッドの重複登録id media-kyoto-npを統合・org別名「京都新聞社（「読者に応える」取材リクエスト窓口）」）",
       "lastContactDate": "2026-08-14"
     },
     {
@@ -528,18 +540,6 @@
       "lastContactDate": "2026-08-14"
     },
     {
-      "id": "chihoshi-shijyukukai-0806",
-      "org": "私塾界（学習塾業界団体）",
-      "lane": "chihoshi",
-      "sourceTaskId": "X-6",
-      "sentDate": "2026-08-06",
-      "status": "awaiting",
-      "followupCount": 1,
-      "threadId": "19fcd6f8ec975d1f",
-      "note": "「学習塾業界向け」のご紹介メール。 2026-08-14: 8日間無反応のため追撃下書きを新規作成(gmail_create_draft・元スレッドへの返信ではなく新規宛先指定で正しく宛先設定)。",
-      "lastContactDate": "2026-08-14"
-    },
-    {
       "id": "chihoshi-ict-enews-0806",
       "org": "ICT教育ニュース",
       "lane": "chihoshi",
@@ -548,7 +548,7 @@
       "status": "awaiting",
       "followupCount": 1,
       "threadId": "19fcd6f9c1bad74f",
-      "note": "「AI/API連携も見据えて公開」のニュースリリース文面。 2026-08-14: 8日間無反応のため追撃下書きを新規作成(gmail_create_draft・元スレッドへの返信ではなく新規宛先指定で正しく宛先設定)。",
+      "note": "「AI/API連携も見据えて公開」のニュースリリース文面。 2026-08-14: 8日間無反応のため追撃下書きを新規作成(gmail_create_draft・元スレッドへの返信ではなく新規宛先指定で正しく宛先設定)。 （2026-08-29判明: 同一スレッドの重複登録id media-ict-enewsを統合・org別名「ICT教育ニュース（株式会社BREXA Technology）」）",
       "lastContactDate": "2026-08-14"
     },
     {
@@ -560,7 +560,7 @@
       "status": "awaiting",
       "followupCount": 1,
       "threadId": "19fcd6fa9d56faa2",
-      "note": "media-biz@iid.co.jp宛・EdTech関係者向けの文面。同日に保護者向け文面も別送（chihoshi-iid-hogosha-0806）。 2026-08-26: 20日経過・返信無しのため追撃下書きを作成(draftId r6120430977832204045)。",
+      "note": "media-biz@iid.co.jp宛・EdTech関係者向けの文面。同日に保護者向け文面も別送（chihoshi-iid-hogosha-0806）。 2026-08-26: 20日経過・返信無しのため追撃下書きを作成(draftId r6120430977832204045)。 （2026-08-29判明: 同一スレッドの重複登録id media-reseedを統合・このIID宛メールはReseEd（リシード）ブランドとしても言及される）",
       "lastContactDate": "2026-08-26"
     },
     {
@@ -572,7 +572,7 @@
       "status": "awaiting",
       "followupCount": 1,
       "threadId": "19fcd6fb26f2c3f3",
-      "note": "media-biz@iid.co.jp宛・保護者/受験生向けの文面。同一窓口に2本送付（chihoshi-iid-edtech-0806とは別の切り口）。 2026-08-14: 8日間無反応のため追撃下書きを新規作成(gmail_create_draft・元スレッドへの返信ではなく新規宛先指定で正しく宛先設定)。",
+      "note": "media-biz@iid.co.jp宛・保護者/受験生向けの文面。同一窓口に2本送付（chihoshi-iid-edtech-0806とは別の切り口）。 2026-08-14: 8日間無反応のため追撃下書きを新規作成(gmail_create_draft・元スレッドへの返信ではなく新規宛先指定で正しく宛先設定)。 （2026-08-29判明: 同一スレッドの重複登録id media-resemomを統合・このIID宛メールはリセマムブランドとしても言及される）",
       "lastContactDate": "2026-08-14"
     },
     {
@@ -865,7 +865,7 @@
       "status": "declined",
       "followupCount": 0,
       "threadId": "1a00dee65ead948b",
-      "note": "Cowork第2弾(30社)でフォーム送信済み(ops/cowork/COWORK-RESULT-02.md)。2026-08-17 04:15(UTC)着信で学園ソリューション事業部の森井氏より人間の実質回答: 問い合わせは公教育ソリューション事業部の担当領域に近いが『現在、自社のソリューションを展開するのに精一杯の状況で、余力がない』とのことで丁寧なお断り(中学生エンジニアとしての活動には好意的なコメント付き)。構造的な余力不足によるクローズであり提案内容自体への拒否ではない。追撃対象外。"
+      "note": "Cowork第2弾(30社)でフォーム送信済み(ops/cowork/COWORK-RESULT-02.md)。2026-08-17 04:15(UTC)着信で学園ソリューション事業部の森井氏より人間の実質回答: 問い合わせは公教育ソリューション事業部の担当領域に近いが『現在、自社のソリューションを展開するのに精一杯の状況で、余力がない』とのことで丁寧なお断り(中学生エンジニアとしての活動には好意的なコメント付き)。構造的な余力不足によるクローズであり提案内容自体への拒否ではない。追撃対象外。 （2026-08-29判明: 同一返信スレッドの重複登録id edtech-systemd-schoolenginesを統合・校務支援システム「School Engine」を展開する事業部門への言及あり）"
     },
     {
       "id": "edtech-correos",
@@ -1110,100 +1110,16 @@
       "note": "Cowork第3弾はフォーム文字数制限で未着手のまま終了したが、同日22:15にBusinessプラン新設のお知らせをGmail経由で別途送信済み(ops/cowork/COWORK-RESULT-03.md)。フォームからの重複送信は行わない。"
     },
     {
-      "id": "media-hokkaido-np",
-      "org": "北海道新聞社（報道センター・情報提供窓口）",
-      "lane": "chihoshi",
-      "sourceTaskId": "T-C2",
-      "sentDate": "2026-08-06",
-      "lastContactDate": "2026-08-14",
-      "status": "awaiting",
-      "followupCount": 1,
-      "threadId": "19fcd6f535d73fa2",
-      "note": "2026-08-15に発覚したqueue/ledger未反映のハウスキーピング漏れを遡及反映(8/6初回送信+8/14追撃送信の両方をGmail sentフォルダで確認済み)。queueにstatus=queuedのまま9件残存していた「media-*」バッチの1件。"
-    },
-    {
-      "id": "media-chunichi",
-      "org": "中日新聞社（Your Scoop／社会部 取材依頼窓口）",
-      "lane": "chihoshi",
-      "sourceTaskId": "T-C2",
-      "sentDate": "2026-08-06",
-      "lastContactDate": "2026-08-14",
-      "status": "awaiting",
-      "followupCount": 1,
-      "threadId": "19fcd6f5d8240aab",
-      "note": "2026-08-15に発覚したqueue/ledger未反映のハウスキーピング漏れを遡及反映(8/6初回送信+8/14追撃送信の両方をGmail sentフォルダで確認済み)。queueにstatus=queuedのまま9件残存していた「media-*」バッチの1件。"
-    },
-    {
-      "id": "media-chugoku-np",
-      "org": "中国新聞社（社会担当・情報提供窓口）",
-      "lane": "chihoshi",
-      "sourceTaskId": "T-C2",
-      "sentDate": "2026-08-06",
-      "lastContactDate": "2026-08-14",
-      "status": "awaiting",
-      "followupCount": 1,
-      "threadId": "19fcd6f696bdb62a",
-      "note": "2026-08-15に発覚したqueue/ledger未反映のハウスキーピング漏れを遡及反映(8/6初回送信+8/14追撃送信の両方をGmail sentフォルダで確認済み)。queueにstatus=queuedのまま9件残存していた「media-*」バッチの1件。"
-    },
-    {
-      "id": "media-kyoto-np",
-      "org": "京都新聞社（「読者に応える」取材リクエスト窓口）",
-      "lane": "chihoshi",
-      "sourceTaskId": "T-C2",
-      "sentDate": "2026-08-06",
-      "lastContactDate": "2026-08-14",
-      "status": "awaiting",
-      "followupCount": 1,
-      "threadId": "19fcd6f74d1734a2",
-      "note": "2026-08-15に発覚したqueue/ledger未反映のハウスキーピング漏れを遡及反映(8/6初回送信+8/14追撃送信の両方をGmail sentフォルダで確認済み)。queueにstatus=queuedのまま9件残存していた「media-*」バッチの1件。"
-    },
-    {
       "id": "media-shijyukukai",
       "org": "月刊私塾界／全国私塾情報センター（学習塾業界向け専門誌）",
       "lane": "chihoshi",
-      "sourceTaskId": "T-C2",
+      "sourceTaskId": "X-6/T-C2",
       "sentDate": "2026-08-06",
       "lastContactDate": "2026-08-19",
       "status": "awaiting",
       "followupCount": 2,
       "threadId": "19fcd6f8ec975d1f",
-      "note": "2026-08-15に発覚したqueue/ledger未反映のハウスキーピング漏れを遡及反映(8/6初回送信+8/14追撃送信の両方をGmail sentフォルダで確認済み)。queueにstatus=queuedのまま9件残存していた「media-*」バッチの1件。 2026-08-19にさらに別スレッド(threadId 1a01042a1875cb95・宛先は同じstageon経由)で3回目の接触があったことを2026-08-21のin:sent実測で発見(同一組織へ別idで重複登録しかけたがidの完全一致で検知しこちらへ統合)。件名は「47都道府県・内申点計算データのご案内」で従来と少し角度を変えた内容。返信有無は次回T-C1系セッションで確認すること。"
-    },
-    {
-      "id": "media-ict-enews",
-      "org": "ICT教育ニュース（株式会社BREXA Technology）",
-      "lane": "chihoshi",
-      "sourceTaskId": "T-C2",
-      "sentDate": "2026-08-06",
-      "lastContactDate": "2026-08-14",
-      "status": "awaiting",
-      "followupCount": 1,
-      "threadId": "19fcd6f9c1bad74f",
-      "note": "2026-08-15に発覚したqueue/ledger未反映のハウスキーピング漏れを遡及反映(8/6初回送信+8/14追撃送信の両方をGmail sentフォルダで確認済み)。queueにstatus=queuedのまま9件残存していた「media-*」バッチの1件。"
-    },
-    {
-      "id": "media-reseed",
-      "org": "ReseEd（リシード・株式会社イード）",
-      "lane": "chihoshi",
-      "sourceTaskId": "T-C2",
-      "sentDate": "2026-08-06",
-      "lastContactDate": "2026-08-14",
-      "status": "awaiting",
-      "followupCount": 1,
-      "threadId": "19fcd6fa9d56faa2",
-      "note": "2026-08-15に発覚したqueue/ledger未反映のハウスキーピング漏れを遡及反映(8/6初回送信+8/14追撃送信の両方をGmail sentフォルダで確認済み)。queueにstatus=queuedのまま9件残存していた「media-*」バッチの1件。"
-    },
-    {
-      "id": "media-resemom",
-      "org": "リセマム（株式会社イード）",
-      "lane": "chihoshi",
-      "sourceTaskId": "T-C2",
-      "sentDate": "2026-08-06",
-      "lastContactDate": "2026-08-14",
-      "status": "awaiting",
-      "followupCount": 1,
-      "threadId": "19fcd6fb26f2c3f3",
-      "note": "2026-08-15に発覚したqueue/ledger未反映のハウスキーピング漏れを遡及反映(8/6初回送信+8/14追撃送信の両方をGmail sentフォルダで確認済み)。queueにstatus=queuedのまま9件残存していた「media-*」バッチの1件。"
+      "note": "「学習塾業界向け」のご紹介メール。 2026-08-15に発覚したqueue/ledger未反映のハウスキーピング漏れを遡及反映(8/6初回送信+8/14追撃送信の両方をGmail sentフォルダで確認済み)。queueにstatus=queuedのまま9件残存していた「media-*」バッチの1件。 2026-08-19にさらに別スレッド(threadId 1a01042a1875cb95・宛先は同じstageon経由)で3回目の接触があったことを2026-08-21のin:sent実測で発見(同一組織へ別idで重複登録しかけたがidの完全一致で検知しこちらへ統合)。件名は「47都道府県・内申点計算データのご案内」で従来と少し角度を変えた内容。返信有無は次回T-C1系セッションで確認すること。"
     },
     {
       "id": "media-kobe-np",
@@ -1251,18 +1167,6 @@
       "followupCount": 0,
       "threadId": "1a002f36749b8db4",
       "note": "ハードバウンス(550 5.1.1 The email account that you tried to reach does not exist)。info@tfabworks.comは死んだアドレスと確定・再送不可のため打ち切り。"
-    },
-    {
-      "id": "edtech-systemd-schoolengine",
-      "org": "株式会社システムディ(校務支援システム「School Engine」)",
-      "lane": "b2b-saas",
-      "sourceTaskId": "T-C1",
-      "sentDate": "2026-08-16",
-      "lastContactDate": "2026-08-17",
-      "status": "declined",
-      "followupCount": 0,
-      "threadId": "1a00dee65ead948b",
-      "note": "Cowork経由でフォーム送信(正確な送信日は未確認のためCOWORK-PROMPT-30-02.md記載バッチの目安08-16を暫定採用)。2026-08-17 13:15(JST)に学園ソリューション事業部・森井様より返信=送信先が大学向け部署だったが、公立小中高向けの「公教育ソリューション事業部」に確認したところ現在自社ソリューション展開で手一杯のため余力なしとの回答。明確な拒否ではなく供給側キャパシティ理由の見送り。中学生運営への好意的な言及あり(将来の再打診余地は残る)。"
     },
     {
       "id": "lane5-president-family",

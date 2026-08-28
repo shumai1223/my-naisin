@@ -1,3 +1,5 @@
+import fs from 'node:fs';
+import path from 'node:path';
 import {
   daysBetween,
   computeFollowupCandidates,
@@ -8,6 +10,15 @@ import {
   type OutreachEntry,
   type OutreachLane,
 } from '../outreach-ledger';
+
+const ALL_OUTREACH_LANES: OutreachLane[] = [
+  'b2b-saas',
+  'chihoshi',
+  'npo',
+  'mutual-link',
+  'kyoiku-i',
+  'media',
+];
 
 describe('daysBetween', () => {
   it('計算する（同日は0）', () => {
@@ -100,12 +111,18 @@ describe('summarizeByLane', () => {
       npo: 0,
       'mutual-link': 0,
       'kyoiku-i': 0,
+      media: 0,
     });
+  });
+
+  it('mediaレーンも正しく集計する（2026-08-29: NaNバグの再発防止）', () => {
+    const entries: OutreachEntry[] = [makeEntry({ id: 'a', lane: 'media' })];
+    expect(summarizeByLane(entries).media).toBe(1);
   });
 });
 
 describe('reviewTierOf / LANE_DEFAULT_REVIEW_TIER（Λ-3）', () => {
-  const ALL_LANES: OutreachLane[] = ['b2b-saas', 'chihoshi', 'npo', 'mutual-link', 'kyoiku-i'];
+  const ALL_LANES = ALL_OUTREACH_LANES;
 
   it('全レーンにLANE_DEFAULT_REVIEW_TIERが定義されている（追加レーンの登録漏れを検知）', () => {
     for (const lane of ALL_LANES) {
@@ -149,5 +166,43 @@ describe('groupByReviewTier', () => {
 
   it('空配列を渡すと両区分とも空配列を返す', () => {
     expect(groupByReviewTier([])).toEqual({ 'full-review': [], 'spot-check': [] });
+  });
+});
+
+describe('data/outreach-ledger.json（実データ整合性・2026-08-29発見の2バグの再発防止）', () => {
+  const raw = JSON.parse(
+    fs.readFileSync(path.join(process.cwd(), 'data', 'outreach-ledger.json'), 'utf8')
+  ) as { entries: OutreachEntry[] } | OutreachEntry[];
+  const entries: OutreachEntry[] = Array.isArray(raw) ? raw : raw.entries;
+
+  it('idが全件ユニーク', () => {
+    const ids = entries.map((e) => e.id);
+    expect(new Set(ids).size).toBe(ids.length);
+  });
+
+  it('laneが全件OutreachLane型の値のみ(未知のlaneはsummarizeByLane/groupByReviewTierから' +
+    'サイレントに欠落するため・実際にlane:"media"がOutreachLaneに無く17件欠落していた事故の再発防止)', () => {
+    for (const e of entries) {
+      expect(ALL_OUTREACH_LANES).toContain(e.lane);
+    }
+  });
+
+  it('threadIdが重複しない(同一スレッドが2つのidで二重登録されるとレーン集計・追撃候補判定が' +
+    '二重カウントされる・実際に9スレッドが重複登録されていた事故の再発防止)', () => {
+    const threadIds = entries.map((e) => e.threadId).filter((t): t is string => Boolean(t));
+    const seen = new Map<string, number>();
+    for (const t of threadIds) seen.set(t, (seen.get(t) ?? 0) + 1);
+    const duplicates = [...seen.entries()].filter(([, count]) => count > 1);
+    expect(duplicates).toEqual([]);
+  });
+
+  it('summarizeByLane/groupByReviewTierが実データ全件を過不足なく分類する' +
+    '(欠落があれば上記2テストのどちらかが先に落ちるはずだが、集計関数側の回帰も直接検知する)', () => {
+    const grouped = groupByReviewTier(entries);
+    expect(grouped['full-review'].length + grouped['spot-check'].length).toBe(entries.length);
+    const laneCounts = summarizeByLane(entries);
+    const totalByLane = Object.values(laneCounts).reduce((a, b) => a + b, 0);
+    expect(totalByLane).toBe(entries.length);
+    expect(Object.values(laneCounts).every((n) => Number.isFinite(n))).toBe(true);
   });
 });
