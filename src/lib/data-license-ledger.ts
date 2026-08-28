@@ -177,7 +177,16 @@ export const DATA_LICENSE_LEDGER: Record<string, DataLicenseLedgerEntry> = {
       '志願状況・募集人数・合格者数を収録してよい',
     verifiedAt: '2026-08-17',
   },
-  toyama: { prefecture: 'toyama', sourceHost: '.lg.jp', ...UNKNOWN() },
+  toyama: {
+    prefecture: 'toyama',
+    sourceHost: '.lg.jp',
+    ...UNKNOWN(
+      '未確認。2026-08-28調査: 教育みらい室県立高校課のページ(3003/kensei/...)を生HTMLで確認したが' +
+        'メールアドレスは見当たらず電話番号(076-444-3448等)のみ掲載。県全体の「県政参加」フォーム' +
+        '(/1021/kensei/kenseisanka/kenseisanka/form.html)はあるが部署専用ではない一般窓口。' +
+        'miyagi/osakaと同型の接触ルート無しのため初回接触は保留し優先度を下げる'
+    ),
+  },
   ishikawa: {
     prefecture: 'ishikawa',
     sourceHost: '.lg.jp',
