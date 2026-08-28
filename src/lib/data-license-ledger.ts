@@ -43,7 +43,17 @@ export const DATA_LICENSE_LEDGER: Record<string, DataLicenseLedgerEntry> = {
         '経由。loopはフォーム送信不可のためCowork委任が必要（未着手・優先度は他県より低い）'
     ),
   },
-  kanagawa: { prefecture: 'kanagawa', sourceHost: '.lg.jp', ...UNKNOWN() },
+  kanagawa: {
+    prefecture: 'kanagawa',
+    sourceHost: '.lg.jp',
+    ...UNKNOWN(
+      '未確認。2026-08-29調査: 教育局指導部高校教育課の所管ページ(pref.kanagawa.jp/docs/dc4/...)を' +
+        'WebFetchで確認したところ、mailtoは無くJavaScript構造化フォーム' +
+        '(dshinsei.e-kanagawa.lg.jp/140007-u/offer/offerList_detail.action?tempString=SF4025)のみ。' +
+        'loopはフォーム送信不可のためCowork委任が必要(ops/cowork/COWORK-TASK-t-c9-form-prefectures.md' +
+        'に追加済み)'
+    ),
+  },
   osaka: {
     prefecture: 'osaka',
     sourceHost: '.lg.jp',
@@ -110,8 +120,28 @@ export const DATA_LICENSE_LEDGER: Record<string, DataLicenseLedgerEntry> = {
         '(2026-08-28再調査で重複送信ではないと確認)。新規下書きは不要・返信待ち'
     ),
   },
-  hiroshima: { prefecture: 'hiroshima', sourceHost: '.lg.jp', ...UNKNOWN() },
-  kumamoto: { prefecture: 'kumamoto', sourceHost: '.lg.jp', ...UNKNOWN() },
+  hiroshima: {
+    prefecture: 'hiroshima',
+    sourceHost: '.lg.jp',
+    ...UNKNOWN(
+      '未確認。2026-08-29調査: 高校教育指導課ページ(pref.hiroshima.lg.jp/site/kyouiku13/)をWebFetchで' +
+        '確認したところメールアドレス記載は無く、お問い合わせフォーム' +
+        '(pref.hiroshima.lg.jp/form/detail.php?sec_sec1=120&inq=12&lif_id=574273)のみ。' +
+        'loopはフォーム送信不可のためCowork委任が必要(ops/cowork/COWORK-TASK-t-c9-form-prefectures.md' +
+        'に追加済み)'
+    ),
+  },
+  kumamoto: {
+    prefecture: 'kumamoto',
+    sourceHost: '.lg.jp',
+    ...UNKNOWN(
+      '未確認。2026-08-29調査: 高校教育課ページ(pref.kumamoto.jp/site/kyouiku/list166-541.html)を' +
+        'WebFetchで確認したところメールアドレス記載は無く、汎用お問い合わせフォーム' +
+        '(pref.kumamoto.jp/form/detail.php?sec_sec1=123)のみ(WebSearch要約は「メールでも問い合わせ' +
+        '可」としたが実ページ確認で誤りと判明・既知の罠と同型)。loopはフォーム送信不可のため' +
+        'Cowork委任が必要(ops/cowork/COWORK-TASK-t-c9-form-prefectures.mdに追加済み)'
+    ),
+  },
   miyagi: {
     prefecture: 'miyagi',
     sourceHost: '.lg.jp',
@@ -137,7 +167,16 @@ export const DATA_LICENSE_LEDGER: Record<string, DataLicenseLedgerEntry> = {
       '出典URL（上記リンク）を必ず付与する条件で志願状況・募集人員・応募倍率を収録してよい',
     verifiedAt: '2026-08-17',
   },
-  okayama: { prefecture: 'okayama', sourceHost: '.lg.jp（実質公的・県立高校共同サイト）', ...UNKNOWN() },
+  okayama: {
+    prefecture: 'okayama',
+    sourceHost: '.lg.jp（実質公的・県立高校共同サイト）',
+    ...UNKNOWN(
+      '未確認。2026-08-29調査: 高校教育課ページ(pref.okayama.jp/soshiki/321/)をWebFetchで確認したところ' +
+        'メールアドレス記載は無く、お問い合わせフォーム(pref.okayama.jp/form/detail.php?sec_sec1=321)' +
+        'のみ。loopはフォーム送信不可のためCowork委任が必要' +
+        '(ops/cowork/COWORK-TASK-t-c9-form-prefectures.mdに追加済み)'
+    ),
+  },
   tochigi: {
     prefecture: 'tochigi',
     sourceHost: '.lg.jp',
@@ -150,7 +189,16 @@ export const DATA_LICENSE_LEDGER: Record<string, DataLicenseLedgerEntry> = {
         '(送信済み再質問の返信待ちのまま・新規下書きは不要)'
     ),
   },
-  gunma: { prefecture: 'gunma', sourceHost: '.lg.jp', ...UNKNOWN() },
+  gunma: {
+    prefecture: 'gunma',
+    sourceHost: '.lg.jp',
+    ...UNKNOWN(
+      '未確認。2026-08-29調査: 高校教育課ページ(pref.gunma.jp/soshiki/226/)をWebFetchで確認したところ' +
+        'メールアドレス記載は無く、お問い合わせフォーム(pref.gunma.jp/form/detail.php?sec_sec1=226)' +
+        'のみ。loopはフォーム送信不可のためCowork委任が必要' +
+        '(ops/cowork/COWORK-TASK-t-c9-form-prefectures.mdに追加済み)'
+    ),
+  },
   nagano: {
     prefecture: 'nagano',
     sourceHost: '.lg.jp',
