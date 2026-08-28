@@ -104,6 +104,23 @@ hensachi n=125 avg=60.52
 - 「8/01・8/07のバーストが実ブラウザ由来でない」= **断定に近い**（GA4に対応活動ゼロ・`stats_submit_ok` 0件・デプロイ済みコードは正常）。残る唯一の反証は「Consent Mode拒否かつadblock有効なユーザーが1人で82回再計算した」だが、その場合 GA4 の `calc_complete`（同一セッションから出るはず）も0でなければならず、8/7の該当時間帯は全イベントが0。
 - 「偏差値の母平均は50」= 定義。**このサイトの標本平均63.16が母集団を代表しないこと自体は断定可能。**
 
+> ✅ **是正済み（loopが実施・commit `71dc270`「投稿の出所検査を実装し、汚染行をtrusted=0で隔離する
+> (DW-1 本修正)」）**: `src/app/api/stats/submit/route.ts`に上記「最小の直し方」1を実装（ボットUA/空UA/
+> プリフェッチは保存せず204・内部オリジン無しはtrusted=0で保存し集計対象から除外・内部オリジンありの
+> ブラウザのみtrusted=1で集計対象）。**「最小の直し方」2（汚染データの隔離）も実質的に解決済み**:
+> migration 0019で`trusted`列を追加した際、**移行前の既存319件は全てtrusted=0で初期化**済み
+> （`stats-aggregation.ts:112`）、かつ`getStatsValues`系は`trusted = 1`の行のみ集計する設計
+> （`stats-db.ts:131,133,155`）。加えてバースト検知時は同じ窓の先行行も遡ってtrusted=0に落とす仕組み
+> （`stats-db.ts:107-112`）まである。個別行のDELETE/migrationという👤ゲート手順を取らずとも、
+> **集計クエリの`trusted=1`条件だけで汚染行は本番配信から完全に除外されている**（`2026-08-28`時点で
+> `git log`上に本コミット`71dc270`と本番デプロイ復旧コミット`8c50396`の両方を確認）。
+>
+> **本番で実地検証済み（2026-08-28）**: `curl -k -A "<iPhone UA>" "https://my-naishin.com/api/stats/
+> distribution?metric=hensachi"` → `{"insufficientData":true,"sampleCount":7,"aggregate":null,...}`。
+> かつて配信されていた`mean:63.16`は完全に消え、trusted行がまだ7件（k閾値30未満）のため
+> `aggregate`自体が非公開になっている。**DW-1は「今すでにユーザーに嘘をついている」状態から
+> 完全に脱している。**
+
 ---
 
 # 2. ★★★ DW-2: `parent_funnel_events` 全期間ゼロ — 原因を断定する
@@ -558,12 +575,12 @@ return path.replace(/^\//, '').slice(0, 40) || 'home';
 | 1 | `PREFECTURE_HIGH_SCHOOL_DATA.avgNaishin`（`src/lib/prefecture-high-school-data.ts:17`） | 47県 | `avgNaishin <= maxScore` / `>= オール3×0.85` / null なら理由必須 | **○（2026-08-08追加）** | `src/lib/__tests__/prefecture-high-school-data.test.ts:26,59,76` |
 | 2 | `competition-rate-history`（多年度倍率） | 49 | `applicants/quota ≈ rate`（誤差0.05）/ categories合計=grandTotal | **○** | `src/data/competition-rate-history/__tests__/index-invariants.test.ts:29,41,52` |
 | 3 | `src/data/schools`（公立学校マスタ・3,422校） | 47+index | コード重複0 / 47県存在 / source必須 / 総数固定 | **○** | `src/data/schools/__tests__/school-master-data.test.ts:11,19,23,31,37,42,52` |
-| 4 | **`src/data/competition-rates`（学校別倍率・本命資産）** | 47+index | **`finalRate ≈ finalApplicants / quota`** | **× 横断テスト無し** | `grep -rln "COMPETITION_RATE_FILES\|COMPETITION_RATE_BY_PREFECTURE" --include="*.test.ts" src` → **ヒット0**。あるのは県ごとに手書きされた `officialSubtotals` 突合47本のみ（`src/data/competition-rates/__tests__/*.test.ts`）＝**新県を追加してテストを書き忘れれば無検査で通る** |
-| 5 | **`src/data/schools-private`（私立学校マスタ）** | 47+index | 公立と同じ4条件 | **× テストが1本も無い** | `grep -rn "from '@/data/schools-private'"` --include="*.test.ts" → **ヒット0**。`private-school-detail.test.ts` / `private-school-tuition.test.ts` が参照台帳として名前を使うだけで、**マスタ自体の整合は誰も見ていない**。しかも `src/data/schools-private/index.ts:55,105` は公立と**同名の `SCHOOL_MASTER_BY_PREFECTURE` / `SCHOOL_MASTER_FILES` を export** している（取り違え事故の温床） |
+| 4 | **`src/data/competition-rates`（学校別倍率・本命資産）** | 47+index | **`finalRate ≈ finalApplicants / quota`** | **○（2026-08-23対応）** | `src/data/competition-rates/__tests__/index-invariants.test.ts`（47県横断で機械検証。県ごとの`officialSubtotals`突合47本に加え、新県追加時のテスト書き忘れも横断テストが機械的に拾う） |
+| 5 | **`src/data/schools-private`（私立学校マスタ）** | 47+index | 公立と同じ4条件 | **○（2026-08-23対応）** | `src/data/schools-private/__tests__/school-master-data.test.ts`。同名export衝突（`SCHOOL_MASTER_BY_PREFECTURE`/`SCHOOL_MASTER_FILES`）自体も2026-08-24に`PRIVATE_SCHOOL_MASTER_BY_PREFECTURE`等へリネームして解消済み（下記2026-08-24追記参照） |
 | 6 | `private-school-detail`（私立定員） | 46 | courses合計 = totalCapacity / 台帳と重複欠落なし | **○（46県中45県ぶん明示。全県名がテスト本文に出現）** | `src/lib/__tests__/private-school-detail.test.ts:152,194,214,…` |
 | 7 | `private-school-tuition`（私立学費） | 8 | fees非空・amount>0 / 内訳合計＝公表合計 | **○（8/8）** | `src/lib/__tests__/private-school-tuition.test.ts:93,136,186,…` |
 | 8 | `exam-score-statistics`（入試平均点） | 41 | 教科合計 ≈ totalAverage | **○（41/41が本文に出現）** | `src/lib/__tests__/exam-score-statistics.test.ts:57,90,129,…` |
-| 9 | **`stats_submissions`（D1・実行時データ）** | — | 母平均の妥当域 / 日次バースト / 極値集中 | **× 実行時ゲート無し** | 純関数 `src/lib/stats-audit.ts` とテストは存在するが、**本番データに対して自動では一度も走っていない**（DW-8） |
+| 9 | **`stats_submissions`（D1・実行時データ）** | — | 母平均の妥当域 / 日次バースト / 極値集中 | **○（2026-08-24対応）** | `.github/workflows/d1-integrity-daily.yml`が`check:stats`/`check:click-fraud`を毎日自動実行し異常検知時にissueを自動作成（DW-8解消） |
 | 10 | `clicks`（D1・実行時データ） | — | 人間比率・モバイル比率の妥当域 | **○** | 2026-08-26対応: `check:click-ratio`＋`d1-integrity-daily.yml`（`src/lib/click-ratio-audit.ts`） |
 
 テストの現況（自分で実行）:
@@ -713,7 +730,7 @@ $ python: 本番HTMLの <a>/<button> の class から Tailwind の高さを推�
 |---|---|---|
 | `.blog-content a` の指定が無く46記事の本文リンクが地の文と同色 | **✅ 修正済み・本番反映も確認** | `src/app/blog/blog.css:258`。本番CSSに実在: `https://my-naishin.com/_next/static/css/f52c3b2d571a27e1.css` 内に `.blog-content a{color:var(--blog-accent);text-decoration:underline;…}` |
 | 出典列が横スクロールの外にありモバイル74%に但し書きが届かない | **✅ 修正済み** | `src/components/HighSchoolBorderlineTable.tsx:56-61`。表の直上に独立行で「以下の数値は塾・受験情報サイトの推定です（教育委員会の公表値ではありません）」を常時表示 |
-| クリック可能要素の78%がタップ領域40px未満 | **❌ 未修正（DW-10）** | 上記実測 |
+| クリック可能要素の78%がタップ領域40px未満 | **✅ 2026-08-26対応済み（DW-10・タグ/チップ型19箇所に`min-h-[44px]`追加）** | 上記実測・§9の追記参照 |
 | 満点135点の県に `avgNaishin: 425` | **✅ 不変条件テスト追加済み・現在green** | `src/lib/__tests__/prefecture-high-school-data.test.ts:59` / jest実行結果52 passed |
 
 その他の確認（死んでいなかったもの・報告のみ）:
