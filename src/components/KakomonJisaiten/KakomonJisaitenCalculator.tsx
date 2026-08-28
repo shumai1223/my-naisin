@@ -83,6 +83,15 @@ export function KakomonJisaitenCalculator() {
             {route.label}
             <ChevronRightSquare className="h-4 w-4" />
           </Link>
+          <div className="mt-4">
+            <Link
+              href={`/${prefCode}/naishin`}
+              className="inline-flex items-center gap-1 text-xs font-bold text-emerald-700 underline"
+            >
+              {prefName}の内申点を計算する
+              <ExternalLink className="h-3 w-3" />
+            </Link>
+          </div>
         </div>
       )}
 
@@ -159,6 +168,13 @@ export function KakomonJisaitenCalculator() {
                 これは{prefName}が公表している総合得点の算出方式に基づく数値です。合否ラインは公表されておらず、
                 この数値だけで合否を判断することはできません。
               </p>
+              <Link
+                href={`/${prefCode}/total-score`}
+                className="mt-3 inline-flex items-center gap-1 text-xs font-bold text-emerald-700 underline"
+              >
+                {prefName}の総合得点方式の仕組みを詳しく見る
+                <ChevronRightSquare className="h-3 w-3" />
+              </Link>
             </div>
           )}
         </div>
