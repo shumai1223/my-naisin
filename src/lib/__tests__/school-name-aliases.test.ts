@@ -7,6 +7,7 @@ import { SCHOOLS_KYOTO } from '@/data/schools/kyoto';
 import { SCHOOLS_OSAKA } from '@/data/schools/osaka';
 import { SCHOOLS_KUMAMOTO } from '@/data/schools/kumamoto';
 import { SCHOOLS_NAGANO } from '@/data/schools/nagano';
+import { SCHOOLS_SAGA } from '@/data/schools/saga';
 
 describe('SCHOOL_NAME_ALIASES_BY_PREFECTURE', () => {
   test('miyagiの全18エイリアスが実データ(school-master)で一意に(matched)解決する(将来のマスター更新に対する回帰防止)', () => {
@@ -39,6 +40,7 @@ describe('SCHOOL_NAME_ALIASES_BY_PREFECTURE', () => {
     ['kyoto', SCHOOLS_KYOTO],
     ['osaka', SCHOOLS_OSAKA],
     ['kumamoto', SCHOOLS_KUMAMOTO],
+    ['saga', SCHOOLS_SAGA],
   ];
 
   test.each(prefectureFixtures)(
