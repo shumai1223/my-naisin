@@ -15,7 +15,16 @@
 | 🟡再質問送信済み・返信待ち | 15 | ishikawa, aichi, wakayama（本セッション対応分）／fukui, kagawa, shizuoka, miyazaki, kochi, tochigi, shimane, iwate, kagoshima, saga, tottori, shiga（2026-08-23に別セッションが一括送信済み・下記訂正参照） |
 | 🟢初回問い合わせ送信済み・返信待ち（2026-08-28本セッション） | 8 | kyoto, chiba, hyogo, nara（キャリアセンター経由）, nagano, oita／miyagi・osaka・tokushima・yamagataは接触ルート無しのため対象外 |
 | ⚪未接触（応募状況データについて一度も聞いていない） | 20 | 下記参照（nagano/oitaは初回送信済みへ移動・tokushimaは接触ルート無しへ移動） |
-| 🔵着手済みだがフォームのみでCowork委任待ち | tokyo, saitama +excluded10県 | 直メール無し。**2026-08-28: tokyo/saitamaの2件はCowork指示書を作成済み**（`ops/cowork/COWORK-TASK-t-c9-form-prefectures.md`・本文入力→確認画面到達まで・送信は👤）。発注実行（👤裁量）はまだ。excluded10県（hokkaido/kanagawa/gunma/okayama/fukushima/niigata/hiroshima/yamaguchi/ehime/kumamoto）は未着手のまま |
+| 🔵着手済みだがフォームのみでCowork委任待ち | tokyo, saitama | 直メール無し。**2026-08-28: tokyo/saitamaの2件はCowork指示書を作成済み**（`ops/cowork/COWORK-TASK-t-c9-form-prefectures.md`・本文入力→確認画面到達まで・送信は👤）。発注実行（👤裁量）はまだ |
+
+⚠️ **2026-08-28訂正: 「excluded10県」（hokkaido/kanagawa/gunma/okayama/fukushima/niigata/hiroshima/
+yamaguchi/ehime/kumamoto・`data/outreach-queue.json`の`kyoiku-*-form`エントリ）は、tokyo/saitamaと
+同種のCowork候補ではない。** 各エントリの`excludeReason`を確認したところ、これらは**T-C9（応募状況
+データ再配布許諾）とは別のT-C1レーン（教委公式サイトへのリンク掲載依頼）**であり、「三重・石川・岐阜・
+和歌山4県で全滅→`ops/LOOP_CONTRACT.md` §3-6の閉鎖条件を満たした」という理由で**意図的に除外済み**
+（2026-08-11〜12確定）。**Coworkへ渡して復活させてはいけない。** T-C9の「応募状況データ」の絞り込み
+質問としてこれら10県に改めてアプローチする場合は、新規に一次ソース（連絡先）を確認し直し、T-C9用の
+本文を新規作成する必要がある（既存の`kyoiku-*-form`エントリの本文はリンク掲載依頼用で流用不可）。
 
 ### ⚠️2026-08-28夜 重大訂正: 「未接触39県」に実は2026-08-23送信済みの12県が混入していた
 
@@ -65,6 +74,13 @@ fukuokaは令和6年度分データが商用第三者(育伸社)由来という�
 初回接触がまだの県は、まず通常の「一次資料活用のご報告」メールを送り、返信（リンク可否の
 回答が多い）を受けてから、以下の**絞り込み再質問**を送るのが型。既にリンク可否の回答を
 得ている県（ishikawa/aichi/wakayama等）は、この再質問から直接始めてよい。
+
+⚠️ **2026-08-28判明・👤裁定待ち**: この「初回接触」文面には「貴課公式サイトの関連ページから
+当サイトへの参照が可能かどうか」という一文があり、これは実質`ops/LOOP_CONTRACT.md` §3-6が
+閉鎖済みと定めた「都道府県教委へのリンク掲載依頼」と同種の依頼を含む。gifu/mie/akita等は
+2026-08-06（閉鎖決定より前）にこの文面で成功実績があるが、閉鎖後の新規県（本日のnagano/oita等）
+にこの文面をそのまま使ってよいかは未裁定。詳細と経緯は`memory/loop-question-note`を参照。
+**👤の裁定が出るまで、この文面を使った新規県への初回接触は保留する。**
 
 ```
 {県名}教育委員会{事務局}
