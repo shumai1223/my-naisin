@@ -13,8 +13,9 @@
 |---|---|---|
 | ✅ok（許諾済み） | 5 | gifu, ibaraki, mie, okinawa, akita |
 | 🟡再質問送信済み・返信待ち | 15 | ishikawa, aichi, wakayama（本セッション対応分）／fukui, kagawa, shizuoka, miyazaki, kochi, tochigi, shimane, iwate, kagoshima, saga, tottori, shiga（2026-08-23に別セッションが一括送信済み・下記訂正参照） |
-| 🟢初回問い合わせ送信済み・返信待ち（2026-08-28本セッション） | 6 | kyoto, chiba, hyogo, nara（キャリアセンター経由）／miyagi・osakaは接触ルート無しのため対象外 |
-| ⚪未接触（応募状況データについて一度も聞いていない） | 23 | 下記参照 |
+| 🟢初回問い合わせ送信済み・返信待ち（2026-08-28本セッション） | 7 | kyoto, chiba, hyogo, nara（キャリアセンター経由）, nagano／miyagi・osakaは接触ルート無しのため対象外 |
+| ⚪未接触（応募状況データについて一度も聞いていない） | 22 | 下記参照（naganoは初回送信済みへ移動） |
+| 🔵着手済みだがフォームのみでCowork委任待ち | tokyo, saitama +excluded10県 | 直メール無し。loop単独では未着手のまま |
 
 ### ⚠️2026-08-28夜 重大訂正: 「未接触39県」に実は2026-08-23送信済みの12県が混入していた
 
@@ -26,11 +27,16 @@ shimane/iwate/kagoshima/saga/tottori/shiga）を反映しておらず陳腐化�
 アラート設置済み・`memory/fable5-loop-protocol`に恒久的な対策を記録済み）。**今後この12県には
 新規下書きを作成しないこと**（返信待ちのまま・詳細はDATA_LICENSE_LEDGERの各エントリを参照）。
 
-### ⚪未接触23県（次に着手する優先候補）
+### ⚪未接触22県（次に着手する優先候補）
 
-tokyo, kanagawa, osaka, fukuoka, hiroshima, kumamoto, gunma, nagano, toyama, ehime, tokushima,
-nagasaki, oita, yamaguchi, niigata, yamanashi, aomori, yamagata, fukushima, hokkaido, saitama（form）,
+tokyo（form・Cowork待ち）, kanagawa, osaka（接触ルート無し）, fukuoka, hiroshima, kumamoto, gunma,
+toyama（接触ルート無し）, ehime, tokushima, nagasaki, oita, yamaguchi, niigata, yamanashi,
+aomori, yamagata（接触ルート無し）, fukushima, hokkaido, saitama（form・Cowork待ち）,
 miyagi（接触ルート無し）, aomori（専用連絡手段無し）
+
+**2026-08-28: naganoは`koko@pref.nagano.lg.jp`（令和8年度入試情報ページのmailtoで実在確認）へ
+初回問い合わせ送信下書き設置済みのため上記リストから除外・上表の「初回問い合わせ送信済み」区分へ移動。**
+次の優先候補は tokushima / oita / yamanashi（いずれも直メール未探索・genuinely untouched）。
 
 **新規に着手する前に必ず`gmail_search`で`to:pref.xxx.lg.jp`を検索し、既存送信履歴（特に
 2026-08-06初回・2026-08-23再質問の一括送信）が無いか確認すること**（今回の重複事故の再発防止）。

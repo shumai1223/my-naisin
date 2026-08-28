@@ -34,7 +34,15 @@ const UNKNOWN = (evidence = '未確認（A-1未着手・次に着手するセッ
  * 1県ずつの調査労働）。
  */
 export const DATA_LICENSE_LEDGER: Record<string, DataLicenseLedgerEntry> = {
-  tokyo: { prefecture: 'tokyo', sourceHost: '.lg.jp', ...UNKNOWN() },
+  tokyo: {
+    prefecture: 'tokyo',
+    sourceHost: '.lg.jp',
+    ...UNKNOWN(
+      '未確認。2026-08-28調査: 東京都教育委員会(kyoiku.metro.tokyo.lg.jp)は/inquiryページがLiferayの' +
+        '構造化問い合わせフォーム(部署選択式)のみでmailtoが本文中に一切無く、saitamaと同型のフォーム' +
+        '経由。loopはフォーム送信不可のためCowork委任が必要（未着手・優先度は他県より低い）'
+    ),
+  },
   kanagawa: { prefecture: 'kanagawa', sourceHost: '.lg.jp', ...UNKNOWN() },
   osaka: {
     prefecture: 'osaka',
@@ -143,7 +151,17 @@ export const DATA_LICENSE_LEDGER: Record<string, DataLicenseLedgerEntry> = {
     ),
   },
   gunma: { prefecture: 'gunma', sourceHost: '.lg.jp', ...UNKNOWN() },
-  nagano: { prefecture: 'nagano', sourceHost: '.lg.jp', ...UNKNOWN() },
+  nagano: {
+    prefecture: 'nagano',
+    sourceHost: '.lg.jp',
+    ...UNKNOWN(
+      '未確認・初回問い合わせ送信下書き設置済み(2026-08-28)。令和8年度公立高等学校入学者選抜情報' +
+        'ページ(r8konyushi.html・prefectures.tsのsourceUrlと同一ページ)内のmailtoリンクを直接確認し' +
+        '（HTML実体参照&#64;をデコード）koko@pref.nagano.lg.jpを実在確認。「貴課公表資料の引用利用に' +
+        '関するご報告および参照可否のご相談」として初回メール(draftId r8954071584066946884)を設置。' +
+        '応募状況データの再配布許諾は返信後の絞り込み再質問で確認する（gifu/mie/akita型）'
+    ),
+  },
   ibaraki: {
     prefecture: 'ibaraki',
     sourceHost: '.lg.jp',
