@@ -38,9 +38,13 @@ export const DATA_LICENSE_LEDGER: Record<string, DataLicenseLedgerEntry> = {
     prefecture: 'tokyo',
     sourceHost: '.lg.jp',
     ...UNKNOWN(
-      '未確認。2026-08-28調査: 東京都教育委員会(kyoiku.metro.tokyo.lg.jp)は/inquiryページがLiferayの' +
-        '構造化問い合わせフォーム(部署選択式)のみでmailtoが本文中に一切無く、saitamaと同型のフォーム' +
-        '経由。loopはフォーム送信不可のためCowork委任が必要（未着手・優先度は他県より低い）'
+      '未確認・返信待ち。⚠️2026-08-29訂正: 2026-08-28調査で「フォームのみ・Cowork委任が必要」と' +
+        '誤って記録していたが、data/outreach-ledger.json(kyoiku-tokyo-0806)を確認せずに/inquiryページ' +
+        'だけを見て判断したための誤り。実際には既に2026-08-06に教育庁都立学校教育部高等学校教育課' +
+        '入学選抜担当のメールアドレス(S9000011@section.metro.tokyo.jp)へ実送信済みで、2026-08-19に' +
+        '応募状況データの出典明記のうえでの掲載可否を尋ねる絞り込み再質問(gifu/mie/akita型)も' +
+        '同アドレスへ実送信済み(threadId 1a00d8d0add68cf2・Gmail実測で確認)。2026-08-29時点で返信は' +
+        'まだ無し(10日経過)。新規のフォーム送信・Cowork委任は不要(この既存スレッドの返信待ちのみ)'
     ),
   },
   kanagawa: {
