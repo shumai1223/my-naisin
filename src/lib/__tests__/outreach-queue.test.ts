@@ -285,7 +285,11 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // outreach-ledger.jsonへ移設されqueueから削除(207→206)。
     // 2026-08-24 23:15: 大学教育学部等lane7の15件(👤による下書き一括送信)がin:sent実測で確認でき
     // outreach-ledger.jsonへ移設されqueueから削除(206→191)。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(191);
+    // 2026-08-29: outreach-ledger.jsonとのorg完全一致監査で、2026-08-27のCowork第4-6弾で実際には
+    // 送信済み(ledgerにOL-08xx等として記録済み)なのにqueue側がqueuedのまま更新漏れだった27件を発見。
+    // 放置すると将来のセッションが既送信先へ二重に下書き/フォーム送信するリスクがあったため
+    // queueから削除(191→164)。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(164);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {
@@ -322,5 +326,18 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
       }
     }
     expect(brokenRefs).toEqual([]);
+  });
+
+  it('queued(下書き未作成)のorgはdata/outreach-ledger.jsonに送信済みとして記録されていない' +
+    '(2026-08-29: Cowork送信後にqueue側の削除漏れで27件が二重登録寸前だった事故の再発防止)', () => {
+    const ledgerRaw = JSON.parse(
+      fs.readFileSync(path.join(process.cwd(), 'data', 'outreach-ledger.json'), 'utf8')
+    ) as { entries: Array<{ org: string }> } | Array<{ org: string }>;
+    const ledgerEntries = Array.isArray(ledgerRaw) ? ledgerRaw : ledgerRaw.entries;
+    const ledgerOrgs = new Set(ledgerEntries.map((e) => e.org));
+
+    const queuedNoDraft = raw.entries.filter((e) => e.status === 'queued' && !e.draftId);
+    const alreadySent = queuedNoDraft.filter((e) => ledgerOrgs.has(e.org)).map((e) => e.id);
+    expect(alreadySent).toEqual([]);
   });
 });
