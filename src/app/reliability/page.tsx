@@ -231,7 +231,7 @@ export default function ReliabilityPage() {
               ))}
             </ul>
             <p className="mt-4 text-xs leading-relaxed text-slate-500">
-              上記2件はいずれも
+              上記{annualUpdateExamples.length}件はいずれも
               <Link href="/genten-archive" className="mx-1 font-semibold text-indigo-600 underline">
                 一次ソース確認履歴アーカイブ
               </Link>
