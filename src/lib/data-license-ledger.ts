@@ -96,12 +96,16 @@ export const DATA_LICENSE_LEDGER: Record<string, DataLicenseLedgerEntry> = {
     prefecture: 'fukuoka',
     sourceHost: '.lg.jp（令和6年度分のみ商用第三者ソース）',
     ...UNKNOWN(
-      '未確認。加えてsourceIndexバックフィル(2026-08-12)により判明: 令和6年度分191件' +
+      '未確認・返信待ち。加えてsourceIndexバックフィル(2026-08-12)により判明: 令和6年度分191件' +
         '(98校)は県教委原本が取得不能だったため育伸社(ikushin.co.jp)の代替PDFを唯一の' +
         'ソースとして採用しており商用第三者由来。令和7年度分170件は公式PDF(Wayback経由)。' +
         '令和8年度分191件は48校99件が英進館記事を学科別内訳の主典拠とし、残り42校+市組合立' +
         '8校92件は公式PDFが主典拠(英進館は裏取りのみ)。A-2実装時は最低限、令和6年度分191件を' +
-        'fiscalYearで除外すること(sourceIndex:8が該当)'
+        'fiscalYearで除外すること(sourceIndex:8が該当)。' +
+        '【2026-08-30追記・T-C9】このledgerには未記載だったが、実際にはkkokyo@pref.fukuoka.lg.jp宛て' +
+        '(高校教育課学事企画係・curlでmailto実在確認済み)に2026-08-06初回・2026-08-19に' +
+        '「応募状況」データの出典明記のうえでの掲載可否を尋ねる絞り込み再質問まで送信済み' +
+        '(threadId 1a00d8d1a1103d94・Gmail実測で確認)。新規下書きは不要・返信待ちのみ'
     ),
   },
   hyogo: {
@@ -546,8 +550,28 @@ export const DATA_LICENSE_LEDGER: Record<string, DataLicenseLedgerEntry> = {
         '表がこの8/23一括送信を反映しておらず未接触と誤認したことが原因'
     ),
   },
-  fukushima: { prefecture: 'fukushima', sourceHost: '.lg.jp', ...UNKNOWN() },
-  hokkaido: { prefecture: 'hokkaido', sourceHost: '.lg.jp', ...UNKNOWN() },
+  fukushima: {
+    prefecture: 'fukushima',
+    sourceHost: '.lg.jp',
+    ...UNKNOWN(
+      '未確認。2026-08-30調査: 入学者選抜情報ページ(pref.fukushima.lg.jp/site/edu/r8koukounyushi.html)を' +
+        'WebFetchで確認したところメールアドレス・お問い合わせフォームへのリンクとも見当たらず、' +
+        '教育委員会代表電話(024-521-1111)のみ掲載。yamagata/miyagi/yamanashi/aomoriと同型の' +
+        '接触ルート無しのため初回接触は保留し優先度を下げる'
+    ),
+  },
+  hokkaido: {
+    prefecture: 'hokkaido',
+    sourceHost: '.lg.jp',
+    ...UNKNOWN(
+      '未確認・Cowork投入待ち。2026-08-30調査: 入学者選抜情報ページ' +
+        '(dokyoi.pref.hokkaido.lg.jp/hk/gks/koukounyuusenn.html)の生HTMLを確認したところ' +
+        'メールアドレス記載は無く、教育庁学校教育局学力向上推進課宛ての汎用お問い合わせフォーム' +
+        '(dokyoi.pref.hokkaido.lg.jp/inquiry/?group=1517&page=32223・curlで200応答を実確認)のみ。' +
+        'loopはフォーム送信不可のためCowork委任が必要(ops/cowork/COWORK-TASK-t-c9-form-prefectures.md' +
+        'に本文Lとして追加済み)'
+    ),
+  },
 };
 
 /** `redistribution: 'ok'`の県コード一覧。A-2（配布API）はこれ以外を出さない。 */
