@@ -26,9 +26,35 @@ export const CLICK_FRAUD_THRESHOLDS = {
 
 // バースト検知の閾値。件数に依存しないため小規模な攻撃も捉えられる。
 export const CLICK_BURST_THRESHOLDS = {
-  windowSeconds: 120, // 同一広告への連続クリックをこの窓でひとまとまりと見なす
-  minBurstSize: 2, // この件数以上が窓内に入ったらバースト候補
+  // ⚠️2026-08-29の是正: 120秒では第3波(08-27〜)を1件も検知できなかった。
+  // 第1波(08-13〜15)は8〜30秒間隔、第2波も同様だったが、第3波は**2〜15分間隔**まで
+  // 速度を落としてきた。こちらが使っている窓に合わせて調整された可能性が高い。
+  // 窓を広げるほど人間の再クリックを巻き込むリスクは上がるが、「全て別IP」という
+  // 条件が同時に効くため誤検知は増えにくい（人間の再クリックはIPが同じ）。
+  windowSeconds: 1800, // 30分
+  minBurstSize: 3, // 窓を広げたぶん、最低件数を2→3に上げて偶然の同時刻を弾く
 };
+
+/**
+ * ★2026-08-29追加: 「ブラウザが送らない形のreferer」を検知する。
+ *
+ * 第3波のbotは referer を **`https://my-naishin.com`（末尾スラッシュ無し・パス無し）**
+ * にしていた。同一オリジンのナビゲーションでブラウザが送るのは必ず `https://my-naishin.com/`
+ * または `https://my-naishin.com/<path>` であり、**オリジンだけの形は手書きの証拠**である。
+ * （このサイトの Referrer-Policy は strict-origin-when-cross-origin ＝同一オリジンでは
+ *   フルURLを送るため、正規の遷移でオリジンだけになることはない）
+ *
+ * @param {string|null|undefined} referer
+ * @returns {boolean} true なら「ブラウザが送らない形」
+ */
+export function isImplausibleReferer(referer) {
+  if (!referer) return false; // 空はここでは判定しない（正規のケースもある）
+  // ⚠️末尾スラッシュを削って比較してはいけない。`https://my-naishin.com/`（スラッシュ付き）は
+  // **トップページからの正規の遷移でブラウザが送る形**である。実際、初版で正規化したところ
+  // UA29種・76件の人間クリックを誤検知した。**スラッシュが無い形だけが手書きの証拠。**
+  const v = String(referer).trim();
+  return v === 'https://my-naishin.com' || v === 'http://my-naishin.com';
+}
 
 /**
  * @param {{ d: string, ip_hash: string, user_agent: string }[]} rows
