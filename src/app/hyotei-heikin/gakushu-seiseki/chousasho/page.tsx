@@ -123,6 +123,54 @@ export default function ChousashoSimulatorPage() {
             <ChousashoSimulator />
           </div>
 
+          {/* このシミュレーターに映らない残りの記載欄 */}
+          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <h2 className="mb-2 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
+              大学に届く調査書1枚には、あと何が書かれているか
+            </h2>
+            <p className="mb-4 text-sm leading-relaxed text-slate-700">
+              このシミュレーターが再現するのは調査書（別紙様式1）9区分のうち「学習の記録」「学習成績の状況」
+              「学習成績概評」の3区分だけです。実際に高等学校長が作成して大学に提出する調査書には、以下の項目も
+              同じ1枚に記載されます。数値の計算には一切関係しませんが、大学側は調査書全体を見て評価するため、
+              「自分の調査書に何が書かれるか」を知っておいて損はありません。
+            </p>
+            <div className="grid gap-3 sm:grid-cols-2 text-sm leading-relaxed text-slate-700">
+              <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+                <div className="mb-1 font-bold text-slate-800">総合的な探究の時間の記録</div>
+                学習活動・観点・評価の3列。専門学科で「課題研究」等に、理数科で「理数探究」等に代替した場合は
+                斜線が引かれ空欄になる。
+              </div>
+              <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+                <div className="mb-1 font-bold text-slate-800">特別活動の記録</div>
+                ホームルーム活動・生徒会活動・学校行事の3項目について、各学校が設定した観点で十分満足できる
+                活動状況と判断された学年に○印。
+              </div>
+              <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+                <div className="mb-1 font-bold text-slate-800">指導上参考となる諸事項</div>
+                部活動・資格取得・表彰歴・留学経験など、学習指導を進める上で必要な情報として学校が精選して
+                記入する自由記述欄。記入する内容が無ければその旨が明示される。
+              </div>
+              <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+                <div className="mb-1 font-bold text-slate-800">出欠の記録</div>
+                授業日数・出席停止や忌引き等の日数・欠席日数・出席日数などを学年ごとに記載。指導要録の記載を
+                そのまま転記するもので、学校側の解釈や要約は入らない。
+              </div>
+            </div>
+            <p className="mt-4 text-xs text-slate-500 leading-relaxed">
+              出典：文部科学省「令和9年度大学入学者選抜実施要項」（令和8年5月27日付け8文科高第318号）
+              別紙様式1・調査書記入上の注意事項等について10〜12・14
+              <a
+                href="https://www.mext.go.jp/content/20260529-mxt_daigakuc02-000005144_1.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ml-1 text-emerald-700 underline"
+              >
+                原文PDF
+              </a>
+              。残る「ふりがな・氏名等の基本情報」「備考」の2区分は個人情報や個別事情の記載欄のため割愛しています。
+            </p>
+          </section>
+
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="mb-4 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
               あわせて確認したいツール
