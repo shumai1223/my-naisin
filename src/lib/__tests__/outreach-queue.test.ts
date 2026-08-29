@@ -293,7 +293,10 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // (moshi-blossoms-kyushu)は、実際にはoutreach-ledger.jsonへ既に2026-08-16送信・
     // 08-29追撃済みで移設済みのidと完全一致する重複だったと判明(gmail_searchで実送信履歴を
     // 発見・queueへのdraft作成前に検知できたため実害なし)。queueから削除し164のまま維持。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(164);
+    // 2026-08-30続き: N3-1で新規発見した秋田県高校入試研究協会(moshi-akita-koukounyushi)を
+    // queue+ledger両方で重複なし確認の上、フォーム項目(学習塾・企業・団体名欄)の直接確認まで
+    // 行いqueuedへ追加(164→165)。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(165);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {
