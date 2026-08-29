@@ -324,11 +324,14 @@ export const DATA_LICENSE_LEDGER: Record<string, DataLicenseLedgerEntry> = {
     prefecture: 'nagasaki',
     sourceHost: '.lg.jp',
     ...UNKNOWN(
-      '未確認。2026-08-29調査: 高校教育課ページ(pref.nagasaki.jp/organization/edu/edu-koko/)を' +
-        'WebFetchで確認したところメールアドレス記載は無く、「このページへの質問はこちらから」という' +
-        'リンクはhref="#"のJavaScript駆動(実URLがWebFetchでは解決不能)。電話(095-894-3352)・FAXのみ' +
-        '実質確定。ehime/yamaguchi/niigataより優先度を下げ、Cowork委任時にブラウザで実際のフォーム' +
-        'リンク先を特定してもらう必要がある(未着手)'
+      '未確認・Cowork投入待ち。2026-08-29追跡: 高校教育課ページ(pref.nagasaki.jp/organization/' +
+        'edu/edu-koko/)のリンクはhref="#"のJavaScript駆動(qreapform(\'長崎県/教育庁/高校教育課\'))' +
+        'でWebFetchでは解決不能だったが、curlで/js/qreapforms.jsを直接取得し' +
+        '(長崎県が使う「e-tumo」フォームサービスの部署名→tempSeq対応表と' +
+        'BASE=https://apply.e-tumo.jp/pref-nagasaki-u/offer/offerList_detail?tempSeq=の' +
+        '構築ロジックが平文で埋め込まれていた)、高校教育課のtempSeq=1548を特定。' +
+        '実URL https://apply.e-tumo.jp/pref-nagasaki-u/offer/offerList_detail?tempSeq=1548 ' +
+        'がHTTP200で応答することを確認済み。COWORK-TASK-t-c9-form-prefectures.mdへ追加済み'
     ),
   },
   oita: {
