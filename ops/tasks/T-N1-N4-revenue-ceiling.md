@@ -273,11 +273,25 @@ MCPサーバーは27ツールで稼働中。
         分離signal未確認のためcontactClass='unknown'でexcluded追加(`moshi-nagamoshi-nagano`)。
       **石川がledger側に別名(新聞社名)で既に存在していたことから、「模試/コンクール等のキーワードを
       含む組織名」だけでledgerを検索する手法にも限界があると判明した**（新聞社・出版社系の運営元は
-      社名に模試関連ワードを含まないことが多い）。**残る真の未着手は福井(excluded確定)・長野(excluded確定)・
-      滋賀・島根・徳島・秋田の4県相当**（石川は接触済みへ訂正・福井/長野は調査済みだが対象外）。
+      社名に模試関連ワードを含まないことが多い）。
+
+      **2026-08-30 N3-1完了(最後の4県を処理)**:
+      - **滋賀**: 大阪進研(既存`moshi-osaka-shinken`)が「滋賀のそっくり模試」として関西広域カバー範囲に
+        含むと確認・新規追加不要
+      - **島根**: 2回の異なる角度のWebSearchで県専用の模試運営会社を発見できず(新日本海新聞社は
+        鳥取限定と確認済み)。**運営会社不明のまま未解決**として正直に記録(推測で埋めない)
+      - **徳島**: 2回のWebSearchで県専用の模試運営会社を発見できず。**同じく運営会社不明のまま**
+      - **秋田**: 「一般社団法人秋田県高校入試研究協会」(秋田県全県模試)を新規発見・queue+ledger両方で
+        重複なし確認済み。サイト内に「学習塾・書店様専用お問い合わせフォーム」が明記されておりcontactClass='b2b'。
+        ただしWix製SPAでcurlでの直接検証ができずWebFetch要約のみに依拠しているため、
+        **status='candidate'に留め'queued'へ昇格させていない**(`moshi-akita-koukounyushi`)。
+        次回このcandidateを進める際は必ずフォームURLへの実到達性を別途確認してからqueuedへ昇格すること。
+      **N3-1のスコープはこれで完了とする。** 47県中、島根・徳島の2県のみ運営会社そのものが特定できず
+      (捏造せず正直に「不明」のまま)、他45県は何らかの形で調査済み(接触済み40県+新規追加5件超)。
 - [x] `data/outreach-queue.json` に `lane: 'b2b-saas'` で追加する
-      ✅正味3件: `moshi-kumazemi-kumamoto`(excluded・channel enum非対応)・
-      `moshi-fukuishimbun`(excluded・contactClass unknown)・`moshi-nagamoshi-nagano`(excluded・contactClass unknown)。
+      ✅正味4件: `moshi-kumazemi-kumamoto`(excluded・channel enum非対応)・
+      `moshi-fukuishimbun`(excluded・contactClass unknown)・`moshi-nagamoshi-nagano`(excluded・contactClass unknown)・
+      `moshi-akita-koukounyushi`(candidate・contactClass b2bだが到達性未検証)。
       重複と判明した2件(`moshi-katomoshi-kagawa`/`moshi-blossoms-kyushu`)はqueueから削除済み
 - [x] ⚠️ **既存の283社と重複していないか台帳で突合してから追加**（08-28の4県重複の教訓）
       ⚠️queue側のorg名grepだけでは不十分と判明(上記参照)。ledger側の突合を怠ったため2件が重複のまま

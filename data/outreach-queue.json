@@ -5079,6 +5079,20 @@
       "excludeReason": "contactClass判定不能(B2B/consumer分離signalを確認できず)のため送信対象外。C1原則により推測でb2bと判定しない",
       "addedAt": "2026-08-30",
       "sourceDoc": "ops/tasks/T-N1-N4-revenue-ceiling.md#N3-1"
+    },
+    {
+      "id": "moshi-akita-koukounyushi",
+      "org": "一般社団法人秋田県高校入試研究協会(秋田県全県模試)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://akita-zenkenmoshi.wixsite.com/zenkenmoshigroup/お問い合わせ",
+      "contactClass": "b2b",
+      "evidence": "WebFetchでサイト構成を確認したところ「学習塾・書店様専用お問い合わせフォーム」というセクションが個人向け(事業推進本部一般申込)とは別に明確に区分されて設置されている(タイトルに塾・書店専用と明記)。ただしWix製SPAでcurlでは内容を直接検証できず、フォームURL自体の到達性は未確認のまま",
+      "verifiedAt": "2026-08-30",
+      "status": "candidate",
+      "addedAt": "2026-08-30",
+      "sourceDoc": "ops/tasks/T-N1-N4-revenue-ceiling.md#N3-1",
+      "note": "WixのSPAのためcurlでの直接検証ができず、WebFetch要約のみに依拠している。下書き作成前に必ずフォームURLへの到達性と実際のフォーム項目を別途確認すること(WebFetch要約の過信を避けるため)"
     }
   ]
 }
