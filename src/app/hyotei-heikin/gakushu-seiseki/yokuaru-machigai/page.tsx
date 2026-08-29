@@ -186,6 +186,43 @@ export default function YokuaruMachigaiPage() {
             ))}
           </div>
 
+          {/* 原文の定義をそのまま確認する */}
+          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <h2 className="mb-3 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
+              定義を原文で確認する
+            </h2>
+            <p className="mb-3 text-sm leading-relaxed text-slate-700">
+              上の3つの誤りが起きやすい理由の1つは、文部科学省の通知が示す公式の計算例が
+              「（国語4+3）＋（地歴5+4+4+4）＋・・・」のように途中を省略した略式表記になっており、
+              定義そのものの一文を読み飛ばしてしまいやすいことです。定義の条文自体は次のとおりです。
+            </p>
+            <blockquote className="mb-3 border-l-4 border-emerald-400 bg-emerald-50 p-4 text-sm italic leading-relaxed text-slate-700">
+              「各教科の学習成績の状況は、指導要録に基づき、各教科ごとに各科目の評定の合計数を各教科の評定数で
+              除した数値（小数点以下第2位を四捨五入）を記入すること。」
+            </blockquote>
+            <blockquote className="border-l-4 border-emerald-400 bg-emerald-50 p-4 text-sm italic leading-relaxed text-slate-700">
+              「全体の学習成績の状況は、指導要録に基づき、すべての教科・科目の評定の合計数をすべての評定数で
+              除した数値（小数点以下第2位を四捨五入）を記入すること。」
+            </blockquote>
+            <p className="mt-3 text-xs text-slate-500 leading-relaxed">
+              出典：文部科学省「令和9年度大学入学者選抜実施要項」（令和8年5月27日付け8文科高第318号）
+              調査書記入上の注意事項等について8(2)・8(4)
+              <a
+                href="https://www.mext.go.jp/content/20260529-mxt_daigakuc02-000005144_1.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ml-1 text-emerald-700 underline"
+              >
+                原文PDF
+              </a>
+            </p>
+            <p className="mt-3 text-sm leading-relaxed text-slate-700">
+              2つの定義に共通するのは「合計数を評定数（科目数）で除する」という単純平均であり、単位数・重み・
+              教科という中間段階を一切経由しない点です。「教科ごとの学習成績の状況」と「全体の学習成績の状況」は
+              別々に、それぞれ指導要録の評定から直接計算する独立した値であることが、条文からも読み取れます。
+            </p>
+          </section>
+
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="mb-4 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
               あわせて確認したいツール

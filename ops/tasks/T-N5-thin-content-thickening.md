@@ -89,8 +89,12 @@
       前回セッションで検証済みの一次ソースをそのまま再利用(新規PDF再取得なし・記憶からの転記リスク回避のため
       同一セッション内の検証結果を参照)。gakushu-seiseki本体ページとは異なる文面・切り口で記述し重複を回避。
       tsc実exit0・jestフルスイート355suites6140tests green
-- [ ] `/hyotei-heikin/gakushu-seiseki/yokuaru-machigai`（誤り検証） — ④中心（既存の「よくある間違い」に
+- [x] `/hyotei-heikin/gakushu-seiseki/yokuaru-machigai`（誤り検証） — ④中心（既存の「よくある間違い」に
       一次ソース引用を足す形）
+      🟡**2026-08-30部分完了**: 「定義を原文で確認する」セクションを追加。8(2)/8(4)の条文をそのまま
+      blockquote引用し、通知の略式表記(・・・省略)が誤解の一因になりやすい理由を解説。
+      既存の引用番号(8(2)(4)/9(1))は現行版と照合し正確と確認済み(修正不要)。
+      tsc実exit0・jestフルスイート355suites6140tests green
 - [ ] `/hyotei-heikin/gakushu-seiseki/gaihyou` — ②④中心
 - [ ] `/hyotei-heikin/gakushu-seiseki/tousei-han-i` — ④中心
 - [ ] `/hyotei-heikin/gakushu-seiseki/kyoka-betsu` — ④中心
