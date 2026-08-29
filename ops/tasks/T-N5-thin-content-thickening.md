@@ -99,7 +99,12 @@
       🟡**2026-08-30部分完了**: 「あと0.1の境界は四捨五入のどちらに転ぶかで決まる」(丸め規則の解説+9(1)
       blockquote引用)と「Aの上の区分は無いのか」(②Ⓐ不在を正直に・年度更新への注意喚起として最も自然な
       置き場所)の2セクションを追加。tsc実exit0・jestフルスイート355suites6140tests green
-- [ ] `/hyotei-heikin/gakushu-seiseki/tousei-han-i` — ④中心
+- [x] `/hyotei-heikin/gakushu-seiseki/tousei-han-i` — ④中心
+      🟡**2026-08-30部分完了**: 「なぜ『卒業までの全評定』ではなく『残りの評価回数』を見積もるのか」
+      セクションを追加。総合型選抜(9/1以降)/学校推薦型選抜(11/1以降)の願書受付開始日と、卒業見込み者の
+      最終学年成績が「直近の成績を総合し高等学校が判定」される規定(7(4))をblockquote引用し、
+      このツールが「残り評価回数を自己入力」方式にしている理由と結びつけて説明。tsc実exit0・
+      jestフルスイート355suites6140tests green
 - [ ] `/hyotei-heikin/gakushu-seiseki/kyoka-betsu` — ④中心
 - [ ] `/kakomon-jisaiten` — ⑤（総合得点方式の県別差・prefectures.ts/total-score系の既存データを再利用、新規収集ゼロ）
 

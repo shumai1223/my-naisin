@@ -116,6 +116,40 @@ export default function TouseiHanIPage() {
             <TouseiHanICalculator />
           </div>
 
+          {/* なぜ「残りの評価回数」を自分で見積もる必要があるのか */}
+          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <h2 className="mb-3 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
+              なぜ「卒業までの全評定」ではなく「残りの評価回数」を見積もるのか
+            </h2>
+            <p className="mb-3 text-sm leading-relaxed text-slate-700">
+              総合型選抜は入学願書受付が9月1日以降、学校推薦型選抜は11月1日以降とされており、調査書は
+              それより前の時点で高等学校が作成します。そのため、卒業見込みの生徒については高3の全学年分の
+              評定が確定する前に調査書を提出することになります。この場合の扱いは実施要項に次のとおり定められています。
+            </p>
+            <blockquote className="border-l-4 border-emerald-400 bg-emerald-50 p-4 text-sm italic leading-relaxed text-slate-700">
+              「卒業見込みの者で、最終学年の成績が未決定である場合は、当該学年における直近の成績を総合し、
+              高等学校として判定した成績を、最終学年の成績として記入すること。」
+            </blockquote>
+            <p className="mt-3 text-xs text-slate-500 leading-relaxed">
+              出典：文部科学省「令和9年度大学入学者選抜実施要項」（令和8年5月27日付け8文科高第318号）
+              調査書記入上の注意事項等について7(4)
+              <a
+                href="https://www.mext.go.jp/content/20260529-mxt_daigakuc02-000005144_1.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ml-1 text-emerald-700 underline"
+              >
+                原文PDF
+              </a>
+            </p>
+            <p className="mt-3 text-sm leading-relaxed text-slate-700">
+              つまり「高3で最終的にどこまで評定が伸びるか」ではなく「調査書作成の時点までに確定している
+              直近の成績」が最終学年分として使われます。この時点・範囲は高等学校が判定するため全国一律の
+              日付が定められているわけではありません。このツールが「卒業までの全評価」ではなく「残りの
+              評価回数」を自分で見積もって入力する方式にしているのは、この不確実性をそのまま反映するためです。
+            </p>
+          </section>
+
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="mb-4 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
               あわせて確認したいツール
