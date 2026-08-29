@@ -1,0 +1,2389 @@
+{
+  "meta": {
+    "generatedAt": "2026-08-30",
+    "totalQuestions": 188,
+    "prefectureCount": 47,
+    "categories": [
+      "maxScore",
+      "targetGrades",
+      "practicalWeighting",
+      "scale"
+    ],
+    "note": "出典は既存の一次ソース(prefectures.tsのsourceUrl)。新規データ収集は無し。"
+  },
+  "questions": [
+    {
+      "id": "hokkaido-maxScore",
+      "prefectureCode": "hokkaido",
+      "prefectureName": "北海道",
+      "category": "maxScore",
+      "question": "北海道の公立高校入試における内申点（調査書点）の満点は何点ですか。",
+      "correctAnswer": "315点",
+      "expectedNumbers": [
+        315
+      ],
+      "sourceUrl": "https://www.dokyoi.pref.hokkaido.lg.jp/hk/kki/"
+    },
+    {
+      "id": "hokkaido-targetGrades",
+      "prefectureCode": "hokkaido",
+      "prefectureName": "北海道",
+      "category": "targetGrades",
+      "question": "北海道の内申点計算で対象となる学年と、学年ごとの倍率を答えてください。",
+      "correctAnswer": "中1×2倍・中2×2倍・中3×3倍",
+      "expectedNumbers": [
+        2,
+        2,
+        3
+      ],
+      "sourceUrl": "https://www.dokyoi.pref.hokkaido.lg.jp/hk/kki/"
+    },
+    {
+      "id": "hokkaido-practicalWeighting",
+      "prefectureCode": "hokkaido",
+      "prefectureName": "北海道",
+      "category": "practicalWeighting",
+      "question": "北海道の内申点計算で、5教科（国数英理社）と実技4教科（音美保技）の倍率はそれぞれ何倍ですか。",
+      "correctAnswer": "5教科×1倍・実技4教科×1倍",
+      "expectedNumbers": [
+        1,
+        1
+      ],
+      "sourceUrl": "https://www.dokyoi.pref.hokkaido.lg.jp/hk/kki/"
+    },
+    {
+      "id": "hokkaido-scale",
+      "prefectureCode": "hokkaido",
+      "prefectureName": "北海道",
+      "category": "scale",
+      "question": "北海道の内申点計算に使われる評定は5段階評価ですか、10段階評価ですか。",
+      "correctAnswer": "5段階評価",
+      "expectedNumbers": [
+        5
+      ],
+      "sourceUrl": "https://www.dokyoi.pref.hokkaido.lg.jp/hk/kki/"
+    },
+    {
+      "id": "aomori-maxScore",
+      "prefectureCode": "aomori",
+      "prefectureName": "青森県",
+      "category": "maxScore",
+      "question": "青森県の公立高校入試における内申点（調査書点）の満点は何点ですか。",
+      "correctAnswer": "135点",
+      "expectedNumbers": [
+        135
+      ],
+      "sourceUrl": "https://www.pref.aomori.lg.jp/soshiki/kyoiku/e-gakyo/senbatsu2026.html"
+    },
+    {
+      "id": "aomori-targetGrades",
+      "prefectureCode": "aomori",
+      "prefectureName": "青森県",
+      "category": "targetGrades",
+      "question": "青森県の内申点計算で対象となる学年と、学年ごとの倍率を答えてください。",
+      "correctAnswer": "中1×1倍・中2×1倍・中3×1倍",
+      "expectedNumbers": [
+        1,
+        1,
+        1
+      ],
+      "sourceUrl": "https://www.pref.aomori.lg.jp/soshiki/kyoiku/e-gakyo/senbatsu2026.html"
+    },
+    {
+      "id": "aomori-practicalWeighting",
+      "prefectureCode": "aomori",
+      "prefectureName": "青森県",
+      "category": "practicalWeighting",
+      "question": "青森県の内申点計算で、5教科（国数英理社）と実技4教科（音美保技）の倍率はそれぞれ何倍ですか。",
+      "correctAnswer": "5教科×1倍・実技4教科×1倍",
+      "expectedNumbers": [
+        1,
+        1
+      ],
+      "sourceUrl": "https://www.pref.aomori.lg.jp/soshiki/kyoiku/e-gakyo/senbatsu2026.html"
+    },
+    {
+      "id": "aomori-scale",
+      "prefectureCode": "aomori",
+      "prefectureName": "青森県",
+      "category": "scale",
+      "question": "青森県の内申点計算に使われる評定は5段階評価ですか、10段階評価ですか。",
+      "correctAnswer": "5段階評価",
+      "expectedNumbers": [
+        5
+      ],
+      "sourceUrl": "https://www.pref.aomori.lg.jp/soshiki/kyoiku/e-gakyo/senbatsu2026.html"
+    },
+    {
+      "id": "iwate-maxScore",
+      "prefectureCode": "iwate",
+      "prefectureName": "岩手県",
+      "category": "maxScore",
+      "question": "岩手県の公立高校入試における内申点（調査書点）の満点は何点ですか。",
+      "correctAnswer": "660点",
+      "expectedNumbers": [
+        660
+      ],
+      "sourceUrl": "https://www.pref.iwate.jp/kyouikubunka/kyouiku/gakkou/senbatsu/1091420.html"
+    },
+    {
+      "id": "iwate-targetGrades",
+      "prefectureCode": "iwate",
+      "prefectureName": "岩手県",
+      "category": "targetGrades",
+      "question": "岩手県の内申点計算で対象となる学年と、学年ごとの倍率を答えてください。",
+      "correctAnswer": "中1×1倍・中2×2倍・中3×3倍",
+      "expectedNumbers": [
+        1,
+        2,
+        3
+      ],
+      "sourceUrl": "https://www.pref.iwate.jp/kyouikubunka/kyouiku/gakkou/senbatsu/1091420.html"
+    },
+    {
+      "id": "iwate-practicalWeighting",
+      "prefectureCode": "iwate",
+      "prefectureName": "岩手県",
+      "category": "practicalWeighting",
+      "question": "岩手県の内申点計算で、5教科（国数英理社）と実技4教科（音美保技）の倍率はそれぞれ何倍ですか。",
+      "correctAnswer": "5教科×2倍・実技4教科×3倍",
+      "expectedNumbers": [
+        2,
+        3
+      ],
+      "sourceUrl": "https://www.pref.iwate.jp/kyouikubunka/kyouiku/gakkou/senbatsu/1091420.html"
+    },
+    {
+      "id": "iwate-scale",
+      "prefectureCode": "iwate",
+      "prefectureName": "岩手県",
+      "category": "scale",
+      "question": "岩手県の内申点計算に使われる評定は5段階評価ですか、10段階評価ですか。",
+      "correctAnswer": "5段階評価",
+      "expectedNumbers": [
+        5
+      ],
+      "sourceUrl": "https://www.pref.iwate.jp/kyouikubunka/kyouiku/gakkou/senbatsu/1091420.html"
+    },
+    {
+      "id": "miyagi-maxScore",
+      "prefectureCode": "miyagi",
+      "prefectureName": "宮城県",
+      "category": "maxScore",
+      "question": "宮城県の公立高校入試における内申点（調査書点）の満点は何点ですか。",
+      "correctAnswer": "195点",
+      "expectedNumbers": [
+        195
+      ],
+      "sourceUrl": "https://www.pref.miyagi.jp/site/sub-jigyou/list680.html"
+    },
+    {
+      "id": "miyagi-targetGrades",
+      "prefectureCode": "miyagi",
+      "prefectureName": "宮城県",
+      "category": "targetGrades",
+      "question": "宮城県の内申点計算で対象となる学年と、学年ごとの倍率を答えてください。",
+      "correctAnswer": "中1×1倍・中2×1倍・中3×1倍",
+      "expectedNumbers": [
+        1,
+        1,
+        1
+      ],
+      "sourceUrl": "https://www.pref.miyagi.jp/site/sub-jigyou/list680.html"
+    },
+    {
+      "id": "miyagi-practicalWeighting",
+      "prefectureCode": "miyagi",
+      "prefectureName": "宮城県",
+      "category": "practicalWeighting",
+      "question": "宮城県の内申点計算で、5教科（国数英理社）と実技4教科（音美保技）の倍率はそれぞれ何倍ですか。",
+      "correctAnswer": "5教科×1倍・実技4教科×2倍",
+      "expectedNumbers": [
+        1,
+        2
+      ],
+      "sourceUrl": "https://www.pref.miyagi.jp/site/sub-jigyou/list680.html"
+    },
+    {
+      "id": "miyagi-scale",
+      "prefectureCode": "miyagi",
+      "prefectureName": "宮城県",
+      "category": "scale",
+      "question": "宮城県の内申点計算に使われる評定は5段階評価ですか、10段階評価ですか。",
+      "correctAnswer": "5段階評価",
+      "expectedNumbers": [
+        5
+      ],
+      "sourceUrl": "https://www.pref.miyagi.jp/site/sub-jigyou/list680.html"
+    },
+    {
+      "id": "akita-maxScore",
+      "prefectureCode": "akita",
+      "prefectureName": "秋田県",
+      "category": "maxScore",
+      "question": "秋田県の公立高校入試における内申点（調査書点）の満点は何点ですか。",
+      "correctAnswer": "195点",
+      "expectedNumbers": [
+        195
+      ],
+      "sourceUrl": "https://www.pref.akita.lg.jp/pages/archive/91551"
+    },
+    {
+      "id": "akita-targetGrades",
+      "prefectureCode": "akita",
+      "prefectureName": "秋田県",
+      "category": "targetGrades",
+      "question": "秋田県の内申点計算で対象となる学年と、学年ごとの倍率を答えてください。",
+      "correctAnswer": "中1×1倍・中2×1倍・中3×1倍",
+      "expectedNumbers": [
+        1,
+        1,
+        1
+      ],
+      "sourceUrl": "https://www.pref.akita.lg.jp/pages/archive/91551"
+    },
+    {
+      "id": "akita-practicalWeighting",
+      "prefectureCode": "akita",
+      "prefectureName": "秋田県",
+      "category": "practicalWeighting",
+      "question": "秋田県の内申点計算で、5教科（国数英理社）と実技4教科（音美保技）の倍率はそれぞれ何倍ですか。",
+      "correctAnswer": "5教科×1倍・実技4教科×2倍",
+      "expectedNumbers": [
+        1,
+        2
+      ],
+      "sourceUrl": "https://www.pref.akita.lg.jp/pages/archive/91551"
+    },
+    {
+      "id": "akita-scale",
+      "prefectureCode": "akita",
+      "prefectureName": "秋田県",
+      "category": "scale",
+      "question": "秋田県の内申点計算に使われる評定は5段階評価ですか、10段階評価ですか。",
+      "correctAnswer": "5段階評価",
+      "expectedNumbers": [
+        5
+      ],
+      "sourceUrl": "https://www.pref.akita.lg.jp/pages/archive/91551"
+    },
+    {
+      "id": "yamagata-maxScore",
+      "prefectureCode": "yamagata",
+      "prefectureName": "山形県",
+      "category": "maxScore",
+      "question": "山形県の公立高校入試における内申点（調査書点）の満点は何点ですか。",
+      "correctAnswer": "45点",
+      "expectedNumbers": [
+        45
+      ],
+      "sourceUrl": "https://www.pref.yamagata.jp/documents/42443/r8kouritsukoutougakkounyuugakusyasennbatsujissiyoukou.pdf"
+    },
+    {
+      "id": "yamagata-targetGrades",
+      "prefectureCode": "yamagata",
+      "prefectureName": "山形県",
+      "category": "targetGrades",
+      "question": "山形県の内申点計算で対象となる学年と、学年ごとの倍率を答えてください。",
+      "correctAnswer": "中3×1倍",
+      "expectedNumbers": [
+        1
+      ],
+      "sourceUrl": "https://www.pref.yamagata.jp/documents/42443/r8kouritsukoutougakkounyuugakusyasennbatsujissiyoukou.pdf"
+    },
+    {
+      "id": "yamagata-practicalWeighting",
+      "prefectureCode": "yamagata",
+      "prefectureName": "山形県",
+      "category": "practicalWeighting",
+      "question": "山形県の内申点計算で、5教科（国数英理社）と実技4教科（音美保技）の倍率はそれぞれ何倍ですか。",
+      "correctAnswer": "5教科×1倍・実技4教科×1倍",
+      "expectedNumbers": [
+        1,
+        1
+      ],
+      "sourceUrl": "https://www.pref.yamagata.jp/documents/42443/r8kouritsukoutougakkounyuugakusyasennbatsujissiyoukou.pdf"
+    },
+    {
+      "id": "yamagata-scale",
+      "prefectureCode": "yamagata",
+      "prefectureName": "山形県",
+      "category": "scale",
+      "question": "山形県の内申点計算に使われる評定は5段階評価ですか、10段階評価ですか。",
+      "correctAnswer": "5段階評価",
+      "expectedNumbers": [
+        5
+      ],
+      "sourceUrl": "https://www.pref.yamagata.jp/documents/42443/r8kouritsukoutougakkounyuugakusyasennbatsujissiyoukou.pdf"
+    },
+    {
+      "id": "fukushima-maxScore",
+      "prefectureCode": "fukushima",
+      "prefectureName": "福島県",
+      "category": "maxScore",
+      "question": "福島県の公立高校入試における内申点（調査書点）の満点は何点ですか。",
+      "correctAnswer": "195点",
+      "expectedNumbers": [
+        195
+      ],
+      "sourceUrl": "https://www.pref.fukushima.lg.jp/uploaded/attachment/709972.pdf"
+    },
+    {
+      "id": "fukushima-targetGrades",
+      "prefectureCode": "fukushima",
+      "prefectureName": "福島県",
+      "category": "targetGrades",
+      "question": "福島県の内申点計算で対象となる学年と、学年ごとの倍率を答えてください。",
+      "correctAnswer": "中1×1倍・中2×1倍・中3×1倍",
+      "expectedNumbers": [
+        1,
+        1,
+        1
+      ],
+      "sourceUrl": "https://www.pref.fukushima.lg.jp/uploaded/attachment/709972.pdf"
+    },
+    {
+      "id": "fukushima-practicalWeighting",
+      "prefectureCode": "fukushima",
+      "prefectureName": "福島県",
+      "category": "practicalWeighting",
+      "question": "福島県の内申点計算で、5教科（国数英理社）と実技4教科（音美保技）の倍率はそれぞれ何倍ですか。",
+      "correctAnswer": "5教科×1倍・実技4教科×2倍",
+      "expectedNumbers": [
+        1,
+        2
+      ],
+      "sourceUrl": "https://www.pref.fukushima.lg.jp/uploaded/attachment/709972.pdf"
+    },
+    {
+      "id": "fukushima-scale",
+      "prefectureCode": "fukushima",
+      "prefectureName": "福島県",
+      "category": "scale",
+      "question": "福島県の内申点計算に使われる評定は5段階評価ですか、10段階評価ですか。",
+      "correctAnswer": "5段階評価",
+      "expectedNumbers": [
+        5
+      ],
+      "sourceUrl": "https://www.pref.fukushima.lg.jp/uploaded/attachment/709972.pdf"
+    },
+    {
+      "id": "ibaraki-maxScore",
+      "prefectureCode": "ibaraki",
+      "prefectureName": "茨城県",
+      "category": "maxScore",
+      "question": "茨城県の公立高校入試における内申点（調査書点）の満点は何点ですか。",
+      "correctAnswer": "135点",
+      "expectedNumbers": [
+        135
+      ],
+      "sourceUrl": "https://kyoiku.pref.ibaraki.jp/gakko/nyushi/highschool/youkou2026/"
+    },
+    {
+      "id": "ibaraki-targetGrades",
+      "prefectureCode": "ibaraki",
+      "prefectureName": "茨城県",
+      "category": "targetGrades",
+      "question": "茨城県の内申点計算で対象となる学年と、学年ごとの倍率を答えてください。",
+      "correctAnswer": "中1×1倍・中2×1倍・中3×1倍",
+      "expectedNumbers": [
+        1,
+        1,
+        1
+      ],
+      "sourceUrl": "https://kyoiku.pref.ibaraki.jp/gakko/nyushi/highschool/youkou2026/"
+    },
+    {
+      "id": "ibaraki-practicalWeighting",
+      "prefectureCode": "ibaraki",
+      "prefectureName": "茨城県",
+      "category": "practicalWeighting",
+      "question": "茨城県の内申点計算で、5教科（国数英理社）と実技4教科（音美保技）の倍率はそれぞれ何倍ですか。",
+      "correctAnswer": "5教科×1倍・実技4教科×1倍",
+      "expectedNumbers": [
+        1,
+        1
+      ],
+      "sourceUrl": "https://kyoiku.pref.ibaraki.jp/gakko/nyushi/highschool/youkou2026/"
+    },
+    {
+      "id": "ibaraki-scale",
+      "prefectureCode": "ibaraki",
+      "prefectureName": "茨城県",
+      "category": "scale",
+      "question": "茨城県の内申点計算に使われる評定は5段階評価ですか、10段階評価ですか。",
+      "correctAnswer": "5段階評価",
+      "expectedNumbers": [
+        5
+      ],
+      "sourceUrl": "https://kyoiku.pref.ibaraki.jp/gakko/nyushi/highschool/youkou2026/"
+    },
+    {
+      "id": "tochigi-maxScore",
+      "prefectureCode": "tochigi",
+      "prefectureName": "栃木県",
+      "category": "maxScore",
+      "question": "栃木県の公立高校入試における内申点（調査書点）の満点は何点ですか。",
+      "correctAnswer": "135点",
+      "expectedNumbers": [
+        135
+      ],
+      "sourceUrl": "https://www.pref.tochigi.lg.jp/m04/r08/documents/20250910185058.pdf"
+    },
+    {
+      "id": "tochigi-targetGrades",
+      "prefectureCode": "tochigi",
+      "prefectureName": "栃木県",
+      "category": "targetGrades",
+      "question": "栃木県の内申点計算で対象となる学年と、学年ごとの倍率を答えてください。",
+      "correctAnswer": "中1×1倍・中2×1倍・中3×1倍",
+      "expectedNumbers": [
+        1,
+        1,
+        1
+      ],
+      "sourceUrl": "https://www.pref.tochigi.lg.jp/m04/r08/documents/20250910185058.pdf"
+    },
+    {
+      "id": "tochigi-practicalWeighting",
+      "prefectureCode": "tochigi",
+      "prefectureName": "栃木県",
+      "category": "practicalWeighting",
+      "question": "栃木県の内申点計算で、5教科（国数英理社）と実技4教科（音美保技）の倍率はそれぞれ何倍ですか。",
+      "correctAnswer": "5教科×1倍・実技4教科×1倍",
+      "expectedNumbers": [
+        1,
+        1
+      ],
+      "sourceUrl": "https://www.pref.tochigi.lg.jp/m04/r08/documents/20250910185058.pdf"
+    },
+    {
+      "id": "tochigi-scale",
+      "prefectureCode": "tochigi",
+      "prefectureName": "栃木県",
+      "category": "scale",
+      "question": "栃木県の内申点計算に使われる評定は5段階評価ですか、10段階評価ですか。",
+      "correctAnswer": "5段階評価",
+      "expectedNumbers": [
+        5
+      ],
+      "sourceUrl": "https://www.pref.tochigi.lg.jp/m04/r08/documents/20250910185058.pdf"
+    },
+    {
+      "id": "gunma-maxScore",
+      "prefectureCode": "gunma",
+      "prefectureName": "群馬県",
+      "category": "maxScore",
+      "question": "群馬県の公立高校入試における内申点（調査書点）の満点は何点ですか。",
+      "correctAnswer": "135点",
+      "expectedNumbers": [
+        135
+      ],
+      "sourceUrl": "https://www.pref.gunma.jp/site/kyouiku/715449.html"
+    },
+    {
+      "id": "gunma-targetGrades",
+      "prefectureCode": "gunma",
+      "prefectureName": "群馬県",
+      "category": "targetGrades",
+      "question": "群馬県の内申点計算で対象となる学年と、学年ごとの倍率を答えてください。",
+      "correctAnswer": "中1×1倍・中2×1倍・中3×1倍",
+      "expectedNumbers": [
+        1,
+        1,
+        1
+      ],
+      "sourceUrl": "https://www.pref.gunma.jp/site/kyouiku/715449.html"
+    },
+    {
+      "id": "gunma-practicalWeighting",
+      "prefectureCode": "gunma",
+      "prefectureName": "群馬県",
+      "category": "practicalWeighting",
+      "question": "群馬県の内申点計算で、5教科（国数英理社）と実技4教科（音美保技）の倍率はそれぞれ何倍ですか。",
+      "correctAnswer": "5教科×1倍・実技4教科×1倍",
+      "expectedNumbers": [
+        1,
+        1
+      ],
+      "sourceUrl": "https://www.pref.gunma.jp/site/kyouiku/715449.html"
+    },
+    {
+      "id": "gunma-scale",
+      "prefectureCode": "gunma",
+      "prefectureName": "群馬県",
+      "category": "scale",
+      "question": "群馬県の内申点計算に使われる評定は5段階評価ですか、10段階評価ですか。",
+      "correctAnswer": "5段階評価",
+      "expectedNumbers": [
+        5
+      ],
+      "sourceUrl": "https://www.pref.gunma.jp/site/kyouiku/715449.html"
+    },
+    {
+      "id": "saitama-maxScore",
+      "prefectureCode": "saitama",
+      "prefectureName": "埼玉県",
+      "category": "maxScore",
+      "question": "埼玉県の公立高校入試における内申点（調査書点）の満点は何点ですか。",
+      "correctAnswer": "180点",
+      "expectedNumbers": [
+        180
+      ],
+      "sourceUrl": "https://www.pref.saitama.lg.jp/f2208/r8nyuushi-jissiyoukou.html"
+    },
+    {
+      "id": "saitama-targetGrades",
+      "prefectureCode": "saitama",
+      "prefectureName": "埼玉県",
+      "category": "targetGrades",
+      "question": "埼玉県の内申点計算で対象となる学年と、学年ごとの倍率を答えてください。",
+      "correctAnswer": "中1×1倍・中2×1倍・中3×2倍",
+      "expectedNumbers": [
+        1,
+        1,
+        2
+      ],
+      "sourceUrl": "https://www.pref.saitama.lg.jp/f2208/r8nyuushi-jissiyoukou.html"
+    },
+    {
+      "id": "saitama-practicalWeighting",
+      "prefectureCode": "saitama",
+      "prefectureName": "埼玉県",
+      "category": "practicalWeighting",
+      "question": "埼玉県の内申点計算で、5教科（国数英理社）と実技4教科（音美保技）の倍率はそれぞれ何倍ですか。",
+      "correctAnswer": "5教科×1倍・実技4教科×1倍",
+      "expectedNumbers": [
+        1,
+        1
+      ],
+      "sourceUrl": "https://www.pref.saitama.lg.jp/f2208/r8nyuushi-jissiyoukou.html"
+    },
+    {
+      "id": "saitama-scale",
+      "prefectureCode": "saitama",
+      "prefectureName": "埼玉県",
+      "category": "scale",
+      "question": "埼玉県の内申点計算に使われる評定は5段階評価ですか、10段階評価ですか。",
+      "correctAnswer": "5段階評価",
+      "expectedNumbers": [
+        5
+      ],
+      "sourceUrl": "https://www.pref.saitama.lg.jp/f2208/r8nyuushi-jissiyoukou.html"
+    },
+    {
+      "id": "chiba-maxScore",
+      "prefectureCode": "chiba",
+      "prefectureName": "千葉県",
+      "category": "maxScore",
+      "question": "千葉県の公立高校入試における内申点（調査書点）の満点は何点ですか。",
+      "correctAnswer": "135点",
+      "expectedNumbers": [
+        135
+      ],
+      "sourceUrl": "https://www.pref.chiba.lg.jp/kyouiku/shidou/nyuushi/koukou/r8/r8jissiyoko.html"
+    },
+    {
+      "id": "chiba-targetGrades",
+      "prefectureCode": "chiba",
+      "prefectureName": "千葉県",
+      "category": "targetGrades",
+      "question": "千葉県の内申点計算で対象となる学年と、学年ごとの倍率を答えてください。",
+      "correctAnswer": "中1×1倍・中2×1倍・中3×1倍",
+      "expectedNumbers": [
+        1,
+        1,
+        1
+      ],
+      "sourceUrl": "https://www.pref.chiba.lg.jp/kyouiku/shidou/nyuushi/koukou/r8/r8jissiyoko.html"
+    },
+    {
+      "id": "chiba-practicalWeighting",
+      "prefectureCode": "chiba",
+      "prefectureName": "千葉県",
+      "category": "practicalWeighting",
+      "question": "千葉県の内申点計算で、5教科（国数英理社）と実技4教科（音美保技）の倍率はそれぞれ何倍ですか。",
+      "correctAnswer": "5教科×1倍・実技4教科×1倍",
+      "expectedNumbers": [
+        1,
+        1
+      ],
+      "sourceUrl": "https://www.pref.chiba.lg.jp/kyouiku/shidou/nyuushi/koukou/r8/r8jissiyoko.html"
+    },
+    {
+      "id": "chiba-scale",
+      "prefectureCode": "chiba",
+      "prefectureName": "千葉県",
+      "category": "scale",
+      "question": "千葉県の内申点計算に使われる評定は5段階評価ですか、10段階評価ですか。",
+      "correctAnswer": "5段階評価",
+      "expectedNumbers": [
+        5
+      ],
+      "sourceUrl": "https://www.pref.chiba.lg.jp/kyouiku/shidou/nyuushi/koukou/r8/r8jissiyoko.html"
+    },
+    {
+      "id": "tokyo-maxScore",
+      "prefectureCode": "tokyo",
+      "prefectureName": "東京都",
+      "category": "maxScore",
+      "question": "東京都の公立高校入試における内申点（調査書点）の満点は何点ですか。",
+      "correctAnswer": "65点",
+      "expectedNumbers": [
+        65
+      ],
+      "sourceUrl": "https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/exam"
+    },
+    {
+      "id": "tokyo-targetGrades",
+      "prefectureCode": "tokyo",
+      "prefectureName": "東京都",
+      "category": "targetGrades",
+      "question": "東京都の内申点計算で対象となる学年と、学年ごとの倍率を答えてください。",
+      "correctAnswer": "中3×1倍",
+      "expectedNumbers": [
+        1
+      ],
+      "sourceUrl": "https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/exam"
+    },
+    {
+      "id": "tokyo-practicalWeighting",
+      "prefectureCode": "tokyo",
+      "prefectureName": "東京都",
+      "category": "practicalWeighting",
+      "question": "東京都の内申点計算で、5教科（国数英理社）と実技4教科（音美保技）の倍率はそれぞれ何倍ですか。",
+      "correctAnswer": "5教科×1倍・実技4教科×2倍",
+      "expectedNumbers": [
+        1,
+        2
+      ],
+      "sourceUrl": "https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/exam"
+    },
+    {
+      "id": "tokyo-scale",
+      "prefectureCode": "tokyo",
+      "prefectureName": "東京都",
+      "category": "scale",
+      "question": "東京都の内申点計算に使われる評定は5段階評価ですか、10段階評価ですか。",
+      "correctAnswer": "5段階評価",
+      "expectedNumbers": [
+        5
+      ],
+      "sourceUrl": "https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/exam"
+    },
+    {
+      "id": "kanagawa-maxScore",
+      "prefectureCode": "kanagawa",
+      "prefectureName": "神奈川県",
+      "category": "maxScore",
+      "question": "神奈川県の公立高校入試における内申点（調査書点）の満点は何点ですか。",
+      "correctAnswer": "135点",
+      "expectedNumbers": [
+        135
+      ],
+      "sourceUrl": "https://www.pref.kanagawa.jp/docs/dc4/nyusen/nyusen/nyusenseidogaiyou.html"
+    },
+    {
+      "id": "kanagawa-targetGrades",
+      "prefectureCode": "kanagawa",
+      "prefectureName": "神奈川県",
+      "category": "targetGrades",
+      "question": "神奈川県の内申点計算で対象となる学年と、学年ごとの倍率を答えてください。",
+      "correctAnswer": "中2×1倍・中3×2倍",
+      "expectedNumbers": [
+        1,
+        2
+      ],
+      "sourceUrl": "https://www.pref.kanagawa.jp/docs/dc4/nyusen/nyusen/nyusenseidogaiyou.html"
+    },
+    {
+      "id": "kanagawa-practicalWeighting",
+      "prefectureCode": "kanagawa",
+      "prefectureName": "神奈川県",
+      "category": "practicalWeighting",
+      "question": "神奈川県の内申点計算で、5教科（国数英理社）と実技4教科（音美保技）の倍率はそれぞれ何倍ですか。",
+      "correctAnswer": "5教科×1倍・実技4教科×1倍",
+      "expectedNumbers": [
+        1,
+        1
+      ],
+      "sourceUrl": "https://www.pref.kanagawa.jp/docs/dc4/nyusen/nyusen/nyusenseidogaiyou.html"
+    },
+    {
+      "id": "kanagawa-scale",
+      "prefectureCode": "kanagawa",
+      "prefectureName": "神奈川県",
+      "category": "scale",
+      "question": "神奈川県の内申点計算に使われる評定は5段階評価ですか、10段階評価ですか。",
+      "correctAnswer": "5段階評価",
+      "expectedNumbers": [
+        5
+      ],
+      "sourceUrl": "https://www.pref.kanagawa.jp/docs/dc4/nyusen/nyusen/nyusenseidogaiyou.html"
+    },
+    {
+      "id": "niigata-maxScore",
+      "prefectureCode": "niigata",
+      "prefectureName": "新潟県",
+      "category": "maxScore",
+      "question": "新潟県の公立高校入試における内申点（調査書点）の満点は何点ですか。",
+      "correctAnswer": "135点",
+      "expectedNumbers": [
+        135
+      ],
+      "sourceUrl": "https://www.pref.niigata.lg.jp/uploaded/attachment/472931.pdf"
+    },
+    {
+      "id": "niigata-targetGrades",
+      "prefectureCode": "niigata",
+      "prefectureName": "新潟県",
+      "category": "targetGrades",
+      "question": "新潟県の内申点計算で対象となる学年と、学年ごとの倍率を答えてください。",
+      "correctAnswer": "中1×1倍・中2×1倍・中3×1倍",
+      "expectedNumbers": [
+        1,
+        1,
+        1
+      ],
+      "sourceUrl": "https://www.pref.niigata.lg.jp/uploaded/attachment/472931.pdf"
+    },
+    {
+      "id": "niigata-practicalWeighting",
+      "prefectureCode": "niigata",
+      "prefectureName": "新潟県",
+      "category": "practicalWeighting",
+      "question": "新潟県の内申点計算で、5教科（国数英理社）と実技4教科（音美保技）の倍率はそれぞれ何倍ですか。",
+      "correctAnswer": "5教科×1倍・実技4教科×1倍",
+      "expectedNumbers": [
+        1,
+        1
+      ],
+      "sourceUrl": "https://www.pref.niigata.lg.jp/uploaded/attachment/472931.pdf"
+    },
+    {
+      "id": "niigata-scale",
+      "prefectureCode": "niigata",
+      "prefectureName": "新潟県",
+      "category": "scale",
+      "question": "新潟県の内申点計算に使われる評定は5段階評価ですか、10段階評価ですか。",
+      "correctAnswer": "5段階評価",
+      "expectedNumbers": [
+        5
+      ],
+      "sourceUrl": "https://www.pref.niigata.lg.jp/uploaded/attachment/472931.pdf"
+    },
+    {
+      "id": "toyama-maxScore",
+      "prefectureCode": "toyama",
+      "prefectureName": "富山県",
+      "category": "maxScore",
+      "question": "富山県の公立高校入試における内申点（調査書点）の満点は何点ですか。",
+      "correctAnswer": "135点",
+      "expectedNumbers": [
+        135
+      ],
+      "sourceUrl": "https://www.pref.toyama.jp/300201/kyouiku/kenritsukoukou/08senbatsu.html"
+    },
+    {
+      "id": "toyama-targetGrades",
+      "prefectureCode": "toyama",
+      "prefectureName": "富山県",
+      "category": "targetGrades",
+      "question": "富山県の内申点計算で対象となる学年と、学年ごとの倍率を答えてください。",
+      "correctAnswer": "中2×1倍・中3×2倍",
+      "expectedNumbers": [
+        1,
+        2
+      ],
+      "sourceUrl": "https://www.pref.toyama.jp/300201/kyouiku/kenritsukoukou/08senbatsu.html"
+    },
+    {
+      "id": "toyama-practicalWeighting",
+      "prefectureCode": "toyama",
+      "prefectureName": "富山県",
+      "category": "practicalWeighting",
+      "question": "富山県の内申点計算で、5教科（国数英理社）と実技4教科（音美保技）の倍率はそれぞれ何倍ですか。",
+      "correctAnswer": "5教科×1倍・実技4教科×1倍",
+      "expectedNumbers": [
+        1,
+        1
+      ],
+      "sourceUrl": "https://www.pref.toyama.jp/300201/kyouiku/kenritsukoukou/08senbatsu.html"
+    },
+    {
+      "id": "toyama-scale",
+      "prefectureCode": "toyama",
+      "prefectureName": "富山県",
+      "category": "scale",
+      "question": "富山県の内申点計算に使われる評定は5段階評価ですか、10段階評価ですか。",
+      "correctAnswer": "5段階評価",
+      "expectedNumbers": [
+        5
+      ],
+      "sourceUrl": "https://www.pref.toyama.jp/300201/kyouiku/kenritsukoukou/08senbatsu.html"
+    },
+    {
+      "id": "ishikawa-maxScore",
+      "prefectureCode": "ishikawa",
+      "prefectureName": "石川県",
+      "category": "maxScore",
+      "question": "石川県の公立高校入試における内申点（調査書点）の満点は何点ですか。",
+      "correctAnswer": "180点",
+      "expectedNumbers": [
+        180
+      ],
+      "sourceUrl": "https://www.pref.ishikawa.lg.jp/kyoiku/gakkou/senbatu/documents/r8bosyuyoko.pdf"
+    },
+    {
+      "id": "ishikawa-targetGrades",
+      "prefectureCode": "ishikawa",
+      "prefectureName": "石川県",
+      "category": "targetGrades",
+      "question": "石川県の内申点計算で対象となる学年と、学年ごとの倍率を答えてください。",
+      "correctAnswer": "中1×1倍・中2×1倍・中3×2倍",
+      "expectedNumbers": [
+        1,
+        1,
+        2
+      ],
+      "sourceUrl": "https://www.pref.ishikawa.lg.jp/kyoiku/gakkou/senbatu/documents/r8bosyuyoko.pdf"
+    },
+    {
+      "id": "ishikawa-practicalWeighting",
+      "prefectureCode": "ishikawa",
+      "prefectureName": "石川県",
+      "category": "practicalWeighting",
+      "question": "石川県の内申点計算で、5教科（国数英理社）と実技4教科（音美保技）の倍率はそれぞれ何倍ですか。",
+      "correctAnswer": "5教科×1倍・実技4教科×1倍",
+      "expectedNumbers": [
+        1,
+        1
+      ],
+      "sourceUrl": "https://www.pref.ishikawa.lg.jp/kyoiku/gakkou/senbatu/documents/r8bosyuyoko.pdf"
+    },
+    {
+      "id": "ishikawa-scale",
+      "prefectureCode": "ishikawa",
+      "prefectureName": "石川県",
+      "category": "scale",
+      "question": "石川県の内申点計算に使われる評定は5段階評価ですか、10段階評価ですか。",
+      "correctAnswer": "5段階評価",
+      "expectedNumbers": [
+        5
+      ],
+      "sourceUrl": "https://www.pref.ishikawa.lg.jp/kyoiku/gakkou/senbatu/documents/r8bosyuyoko.pdf"
+    },
+    {
+      "id": "fukui-maxScore",
+      "prefectureCode": "fukui",
+      "prefectureName": "福井県",
+      "category": "maxScore",
+      "question": "福井県の公立高校入試における内申点（調査書点）の満点は何点ですか。",
+      "correctAnswer": "45点",
+      "expectedNumbers": [
+        45
+      ],
+      "sourceUrl": "https://www.pref.fukui.lg.jp/doc/koukou/"
+    },
+    {
+      "id": "fukui-targetGrades",
+      "prefectureCode": "fukui",
+      "prefectureName": "福井県",
+      "category": "targetGrades",
+      "question": "福井県の内申点計算で対象となる学年と、学年ごとの倍率を答えてください。",
+      "correctAnswer": "中3×1倍",
+      "expectedNumbers": [
+        1
+      ],
+      "sourceUrl": "https://www.pref.fukui.lg.jp/doc/koukou/"
+    },
+    {
+      "id": "fukui-practicalWeighting",
+      "prefectureCode": "fukui",
+      "prefectureName": "福井県",
+      "category": "practicalWeighting",
+      "question": "福井県の内申点計算で、5教科（国数英理社）と実技4教科（音美保技）の倍率はそれぞれ何倍ですか。",
+      "correctAnswer": "5教科×1倍・実技4教科×1倍",
+      "expectedNumbers": [
+        1,
+        1
+      ],
+      "sourceUrl": "https://www.pref.fukui.lg.jp/doc/koukou/"
+    },
+    {
+      "id": "fukui-scale",
+      "prefectureCode": "fukui",
+      "prefectureName": "福井県",
+      "category": "scale",
+      "question": "福井県の内申点計算に使われる評定は5段階評価ですか、10段階評価ですか。",
+      "correctAnswer": "5段階評価",
+      "expectedNumbers": [
+        5
+      ],
+      "sourceUrl": "https://www.pref.fukui.lg.jp/doc/koukou/"
+    },
+    {
+      "id": "yamanashi-maxScore",
+      "prefectureCode": "yamanashi",
+      "prefectureName": "山梨県",
+      "category": "maxScore",
+      "question": "山梨県の公立高校入試における内申点（調査書点）の満点は何点ですか。",
+      "correctAnswer": "330点",
+      "expectedNumbers": [
+        330
+      ],
+      "sourceUrl": "https://www.pref.yamanashi.jp/kyouiku-kikaku/nyuusi/nyusitop.html"
+    },
+    {
+      "id": "yamanashi-targetGrades",
+      "prefectureCode": "yamanashi",
+      "prefectureName": "山梨県",
+      "category": "targetGrades",
+      "question": "山梨県の内申点計算で対象となる学年と、学年ごとの倍率を答えてください。",
+      "correctAnswer": "中1×1倍・中2×1倍・中3×1倍",
+      "expectedNumbers": [
+        1,
+        1,
+        1
+      ],
+      "sourceUrl": "https://www.pref.yamanashi.jp/kyouiku-kikaku/nyuusi/nyusitop.html"
+    },
+    {
+      "id": "yamanashi-practicalWeighting",
+      "prefectureCode": "yamanashi",
+      "prefectureName": "山梨県",
+      "category": "practicalWeighting",
+      "question": "山梨県の内申点計算で、5教科（国数英理社）と実技4教科（音美保技）の倍率はそれぞれ何倍ですか。",
+      "correctAnswer": "5教科×2倍・実技4教科×3倍",
+      "expectedNumbers": [
+        2,
+        3
+      ],
+      "sourceUrl": "https://www.pref.yamanashi.jp/kyouiku-kikaku/nyuusi/nyusitop.html"
+    },
+    {
+      "id": "yamanashi-scale",
+      "prefectureCode": "yamanashi",
+      "prefectureName": "山梨県",
+      "category": "scale",
+      "question": "山梨県の内申点計算に使われる評定は5段階評価ですか、10段階評価ですか。",
+      "correctAnswer": "5段階評価",
+      "expectedNumbers": [
+        5
+      ],
+      "sourceUrl": "https://www.pref.yamanashi.jp/kyouiku-kikaku/nyuusi/nyusitop.html"
+    },
+    {
+      "id": "nagano-maxScore",
+      "prefectureCode": "nagano",
+      "prefectureName": "長野県",
+      "category": "maxScore",
+      "question": "長野県の公立高校入試における内申点（調査書点）の満点は何点ですか。",
+      "correctAnswer": "45点",
+      "expectedNumbers": [
+        45
+      ],
+      "sourceUrl": "https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/r8konyushi.html"
+    },
+    {
+      "id": "nagano-targetGrades",
+      "prefectureCode": "nagano",
+      "prefectureName": "長野県",
+      "category": "targetGrades",
+      "question": "長野県の内申点計算で対象となる学年と、学年ごとの倍率を答えてください。",
+      "correctAnswer": "中3×1倍",
+      "expectedNumbers": [
+        1
+      ],
+      "sourceUrl": "https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/r8konyushi.html"
+    },
+    {
+      "id": "nagano-practicalWeighting",
+      "prefectureCode": "nagano",
+      "prefectureName": "長野県",
+      "category": "practicalWeighting",
+      "question": "長野県の内申点計算で、5教科（国数英理社）と実技4教科（音美保技）の倍率はそれぞれ何倍ですか。",
+      "correctAnswer": "5教科×1倍・実技4教科×1倍",
+      "expectedNumbers": [
+        1,
+        1
+      ],
+      "sourceUrl": "https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/r8konyushi.html"
+    },
+    {
+      "id": "nagano-scale",
+      "prefectureCode": "nagano",
+      "prefectureName": "長野県",
+      "category": "scale",
+      "question": "長野県の内申点計算に使われる評定は5段階評価ですか、10段階評価ですか。",
+      "correctAnswer": "5段階評価",
+      "expectedNumbers": [
+        5
+      ],
+      "sourceUrl": "https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/r8konyushi.html"
+    },
+    {
+      "id": "gifu-maxScore",
+      "prefectureCode": "gifu",
+      "prefectureName": "岐阜県",
+      "category": "maxScore",
+      "question": "岐阜県の公立高校入試における内申点（調査書点）の満点は何点ですか。",
+      "correctAnswer": "180点",
+      "expectedNumbers": [
+        180
+      ],
+      "sourceUrl": "https://www.pref.gifu.lg.jp/site/edu/61428.html"
+    },
+    {
+      "id": "gifu-targetGrades",
+      "prefectureCode": "gifu",
+      "prefectureName": "岐阜県",
+      "category": "targetGrades",
+      "question": "岐阜県の内申点計算で対象となる学年と、学年ごとの倍率を答えてください。",
+      "correctAnswer": "中1×1倍・中2×1倍・中3×2倍",
+      "expectedNumbers": [
+        1,
+        1,
+        2
+      ],
+      "sourceUrl": "https://www.pref.gifu.lg.jp/site/edu/61428.html"
+    },
+    {
+      "id": "gifu-practicalWeighting",
+      "prefectureCode": "gifu",
+      "prefectureName": "岐阜県",
+      "category": "practicalWeighting",
+      "question": "岐阜県の内申点計算で、5教科（国数英理社）と実技4教科（音美保技）の倍率はそれぞれ何倍ですか。",
+      "correctAnswer": "5教科×1倍・実技4教科×1倍",
+      "expectedNumbers": [
+        1,
+        1
+      ],
+      "sourceUrl": "https://www.pref.gifu.lg.jp/site/edu/61428.html"
+    },
+    {
+      "id": "gifu-scale",
+      "prefectureCode": "gifu",
+      "prefectureName": "岐阜県",
+      "category": "scale",
+      "question": "岐阜県の内申点計算に使われる評定は5段階評価ですか、10段階評価ですか。",
+      "correctAnswer": "5段階評価",
+      "expectedNumbers": [
+        5
+      ],
+      "sourceUrl": "https://www.pref.gifu.lg.jp/site/edu/61428.html"
+    },
+    {
+      "id": "shizuoka-maxScore",
+      "prefectureCode": "shizuoka",
+      "prefectureName": "静岡県",
+      "category": "maxScore",
+      "question": "静岡県の公立高校入試における内申点（調査書点）の満点は何点ですか。",
+      "correctAnswer": "45点",
+      "expectedNumbers": [
+        45
+      ],
+      "sourceUrl": "https://www.pref.shizuoka.jp/kodomokyoiku/school/kyoiku/1003764/1003891/index.html"
+    },
+    {
+      "id": "shizuoka-targetGrades",
+      "prefectureCode": "shizuoka",
+      "prefectureName": "静岡県",
+      "category": "targetGrades",
+      "question": "静岡県の内申点計算で対象となる学年と、学年ごとの倍率を答えてください。",
+      "correctAnswer": "中3×1倍",
+      "expectedNumbers": [
+        1
+      ],
+      "sourceUrl": "https://www.pref.shizuoka.jp/kodomokyoiku/school/kyoiku/1003764/1003891/index.html"
+    },
+    {
+      "id": "shizuoka-practicalWeighting",
+      "prefectureCode": "shizuoka",
+      "prefectureName": "静岡県",
+      "category": "practicalWeighting",
+      "question": "静岡県の内申点計算で、5教科（国数英理社）と実技4教科（音美保技）の倍率はそれぞれ何倍ですか。",
+      "correctAnswer": "5教科×1倍・実技4教科×1倍",
+      "expectedNumbers": [
+        1,
+        1
+      ],
+      "sourceUrl": "https://www.pref.shizuoka.jp/kodomokyoiku/school/kyoiku/1003764/1003891/index.html"
+    },
+    {
+      "id": "shizuoka-scale",
+      "prefectureCode": "shizuoka",
+      "prefectureName": "静岡県",
+      "category": "scale",
+      "question": "静岡県の内申点計算に使われる評定は5段階評価ですか、10段階評価ですか。",
+      "correctAnswer": "5段階評価",
+      "expectedNumbers": [
+        5
+      ],
+      "sourceUrl": "https://www.pref.shizuoka.jp/kodomokyoiku/school/kyoiku/1003764/1003891/index.html"
+    },
+    {
+      "id": "aichi-maxScore",
+      "prefectureCode": "aichi",
+      "prefectureName": "愛知県",
+      "category": "maxScore",
+      "question": "愛知県の公立高校入試における内申点（調査書点）の満点は何点ですか。",
+      "correctAnswer": "90点",
+      "expectedNumbers": [
+        90
+      ],
+      "sourceUrl": "https://www.pref.aichi.jp/soshiki/kotogakko/0000027366.html"
+    },
+    {
+      "id": "aichi-targetGrades",
+      "prefectureCode": "aichi",
+      "prefectureName": "愛知県",
+      "category": "targetGrades",
+      "question": "愛知県の内申点計算で対象となる学年と、学年ごとの倍率を答えてください。",
+      "correctAnswer": "中3×2倍",
+      "expectedNumbers": [
+        2
+      ],
+      "sourceUrl": "https://www.pref.aichi.jp/soshiki/kotogakko/0000027366.html"
+    },
+    {
+      "id": "aichi-practicalWeighting",
+      "prefectureCode": "aichi",
+      "prefectureName": "愛知県",
+      "category": "practicalWeighting",
+      "question": "愛知県の内申点計算で、5教科（国数英理社）と実技4教科（音美保技）の倍率はそれぞれ何倍ですか。",
+      "correctAnswer": "5教科×1倍・実技4教科×1倍",
+      "expectedNumbers": [
+        1,
+        1
+      ],
+      "sourceUrl": "https://www.pref.aichi.jp/soshiki/kotogakko/0000027366.html"
+    },
+    {
+      "id": "aichi-scale",
+      "prefectureCode": "aichi",
+      "prefectureName": "愛知県",
+      "category": "scale",
+      "question": "愛知県の内申点計算に使われる評定は5段階評価ですか、10段階評価ですか。",
+      "correctAnswer": "5段階評価",
+      "expectedNumbers": [
+        5
+      ],
+      "sourceUrl": "https://www.pref.aichi.jp/soshiki/kotogakko/0000027366.html"
+    },
+    {
+      "id": "mie-maxScore",
+      "prefectureCode": "mie",
+      "prefectureName": "三重県",
+      "category": "maxScore",
+      "question": "三重県の公立高校入試における内申点（調査書点）の満点は何点ですか。",
+      "correctAnswer": "45点",
+      "expectedNumbers": [
+        45
+      ],
+      "sourceUrl": "https://www.pref.mie.lg.jp/KOKOKYO/HP/m0204200379.htm"
+    },
+    {
+      "id": "mie-targetGrades",
+      "prefectureCode": "mie",
+      "prefectureName": "三重県",
+      "category": "targetGrades",
+      "question": "三重県の内申点計算で対象となる学年と、学年ごとの倍率を答えてください。",
+      "correctAnswer": "中3×1倍",
+      "expectedNumbers": [
+        1
+      ],
+      "sourceUrl": "https://www.pref.mie.lg.jp/KOKOKYO/HP/m0204200379.htm"
+    },
+    {
+      "id": "mie-practicalWeighting",
+      "prefectureCode": "mie",
+      "prefectureName": "三重県",
+      "category": "practicalWeighting",
+      "question": "三重県の内申点計算で、5教科（国数英理社）と実技4教科（音美保技）の倍率はそれぞれ何倍ですか。",
+      "correctAnswer": "5教科×1倍・実技4教科×1倍",
+      "expectedNumbers": [
+        1,
+        1
+      ],
+      "sourceUrl": "https://www.pref.mie.lg.jp/KOKOKYO/HP/m0204200379.htm"
+    },
+    {
+      "id": "mie-scale",
+      "prefectureCode": "mie",
+      "prefectureName": "三重県",
+      "category": "scale",
+      "question": "三重県の内申点計算に使われる評定は5段階評価ですか、10段階評価ですか。",
+      "correctAnswer": "5段階評価",
+      "expectedNumbers": [
+        5
+      ],
+      "sourceUrl": "https://www.pref.mie.lg.jp/KOKOKYO/HP/m0204200379.htm"
+    },
+    {
+      "id": "shiga-maxScore",
+      "prefectureCode": "shiga",
+      "prefectureName": "滋賀県",
+      "category": "maxScore",
+      "question": "滋賀県の公立高校入試における内申点（調査書点）の満点は何点ですか。",
+      "correctAnswer": "135点",
+      "expectedNumbers": [
+        135
+      ],
+      "sourceUrl": "https://www.pref.shiga.lg.jp/edu/nyuushi/high/senbatsu/105597.html"
+    },
+    {
+      "id": "shiga-targetGrades",
+      "prefectureCode": "shiga",
+      "prefectureName": "滋賀県",
+      "category": "targetGrades",
+      "question": "滋賀県の内申点計算で対象となる学年と、学年ごとの倍率を答えてください。",
+      "correctAnswer": "中1×1倍・中2×1倍・中3×1倍",
+      "expectedNumbers": [
+        1,
+        1,
+        1
+      ],
+      "sourceUrl": "https://www.pref.shiga.lg.jp/edu/nyuushi/high/senbatsu/105597.html"
+    },
+    {
+      "id": "shiga-practicalWeighting",
+      "prefectureCode": "shiga",
+      "prefectureName": "滋賀県",
+      "category": "practicalWeighting",
+      "question": "滋賀県の内申点計算で、5教科（国数英理社）と実技4教科（音美保技）の倍率はそれぞれ何倍ですか。",
+      "correctAnswer": "5教科×1倍・実技4教科×1倍",
+      "expectedNumbers": [
+        1,
+        1
+      ],
+      "sourceUrl": "https://www.pref.shiga.lg.jp/edu/nyuushi/high/senbatsu/105597.html"
+    },
+    {
+      "id": "shiga-scale",
+      "prefectureCode": "shiga",
+      "prefectureName": "滋賀県",
+      "category": "scale",
+      "question": "滋賀県の内申点計算に使われる評定は5段階評価ですか、10段階評価ですか。",
+      "correctAnswer": "5段階評価",
+      "expectedNumbers": [
+        5
+      ],
+      "sourceUrl": "https://www.pref.shiga.lg.jp/edu/nyuushi/high/senbatsu/105597.html"
+    },
+    {
+      "id": "kyoto-maxScore",
+      "prefectureCode": "kyoto",
+      "prefectureName": "京都府",
+      "category": "maxScore",
+      "question": "京都府の公立高校入試における内申点（調査書点）の満点は何点ですか。",
+      "correctAnswer": "195点",
+      "expectedNumbers": [
+        195
+      ],
+      "sourceUrl": "https://www.kyoto-be.ne.jp/koukyou/cms/?p=6024"
+    },
+    {
+      "id": "kyoto-targetGrades",
+      "prefectureCode": "kyoto",
+      "prefectureName": "京都府",
+      "category": "targetGrades",
+      "question": "京都府の内申点計算で対象となる学年と、学年ごとの倍率を答えてください。",
+      "correctAnswer": "中1×1倍・中2×1倍・中3×1倍",
+      "expectedNumbers": [
+        1,
+        1,
+        1
+      ],
+      "sourceUrl": "https://www.kyoto-be.ne.jp/koukyou/cms/?p=6024"
+    },
+    {
+      "id": "kyoto-practicalWeighting",
+      "prefectureCode": "kyoto",
+      "prefectureName": "京都府",
+      "category": "practicalWeighting",
+      "question": "京都府の内申点計算で、5教科（国数英理社）と実技4教科（音美保技）の倍率はそれぞれ何倍ですか。",
+      "correctAnswer": "5教科×1倍・実技4教科×2倍",
+      "expectedNumbers": [
+        1,
+        2
+      ],
+      "sourceUrl": "https://www.kyoto-be.ne.jp/koukyou/cms/?p=6024"
+    },
+    {
+      "id": "kyoto-scale",
+      "prefectureCode": "kyoto",
+      "prefectureName": "京都府",
+      "category": "scale",
+      "question": "京都府の内申点計算に使われる評定は5段階評価ですか、10段階評価ですか。",
+      "correctAnswer": "5段階評価",
+      "expectedNumbers": [
+        5
+      ],
+      "sourceUrl": "https://www.kyoto-be.ne.jp/koukyou/cms/?p=6024"
+    },
+    {
+      "id": "osaka-maxScore",
+      "prefectureCode": "osaka",
+      "prefectureName": "大阪府",
+      "category": "maxScore",
+      "question": "大阪府の公立高校入試における内申点（調査書点）の満点は何点ですか。",
+      "correctAnswer": "450点",
+      "expectedNumbers": [
+        450
+      ],
+      "sourceUrl": "https://www.pref.osaka.lg.jp/o180040/kotogakko/gakuji-g3/r08_kokosenbatsu.html"
+    },
+    {
+      "id": "osaka-targetGrades",
+      "prefectureCode": "osaka",
+      "prefectureName": "大阪府",
+      "category": "targetGrades",
+      "question": "大阪府の内申点計算で対象となる学年と、学年ごとの倍率を答えてください。",
+      "correctAnswer": "中1×2倍・中2×2倍・中3×6倍",
+      "expectedNumbers": [
+        2,
+        2,
+        6
+      ],
+      "sourceUrl": "https://www.pref.osaka.lg.jp/o180040/kotogakko/gakuji-g3/r08_kokosenbatsu.html"
+    },
+    {
+      "id": "osaka-practicalWeighting",
+      "prefectureCode": "osaka",
+      "prefectureName": "大阪府",
+      "category": "practicalWeighting",
+      "question": "大阪府の内申点計算で、5教科（国数英理社）と実技4教科（音美保技）の倍率はそれぞれ何倍ですか。",
+      "correctAnswer": "5教科×1倍・実技4教科×1倍",
+      "expectedNumbers": [
+        1,
+        1
+      ],
+      "sourceUrl": "https://www.pref.osaka.lg.jp/o180040/kotogakko/gakuji-g3/r08_kokosenbatsu.html"
+    },
+    {
+      "id": "osaka-scale",
+      "prefectureCode": "osaka",
+      "prefectureName": "大阪府",
+      "category": "scale",
+      "question": "大阪府の内申点計算に使われる評定は5段階評価ですか、10段階評価ですか。",
+      "correctAnswer": "5段階評価",
+      "expectedNumbers": [
+        5
+      ],
+      "sourceUrl": "https://www.pref.osaka.lg.jp/o180040/kotogakko/gakuji-g3/r08_kokosenbatsu.html"
+    },
+    {
+      "id": "hyogo-maxScore",
+      "prefectureCode": "hyogo",
+      "prefectureName": "兵庫県",
+      "category": "maxScore",
+      "question": "兵庫県の公立高校入試における内申点（調査書点）の満点は何点ですか。",
+      "correctAnswer": "250点",
+      "expectedNumbers": [
+        250
+      ],
+      "sourceUrl": "https://www.hyogo-c.ed.jp/~koko-bo/"
+    },
+    {
+      "id": "hyogo-targetGrades",
+      "prefectureCode": "hyogo",
+      "prefectureName": "兵庫県",
+      "category": "targetGrades",
+      "question": "兵庫県の内申点計算で対象となる学年と、学年ごとの倍率を答えてください。",
+      "correctAnswer": "中3×1倍",
+      "expectedNumbers": [
+        1
+      ],
+      "sourceUrl": "https://www.hyogo-c.ed.jp/~koko-bo/"
+    },
+    {
+      "id": "hyogo-practicalWeighting",
+      "prefectureCode": "hyogo",
+      "prefectureName": "兵庫県",
+      "category": "practicalWeighting",
+      "question": "兵庫県の内申点計算で、5教科（国数英理社）と実技4教科（音美保技）の倍率はそれぞれ何倍ですか。",
+      "correctAnswer": "5教科×4倍・実技4教科×7.5倍",
+      "expectedNumbers": [
+        4,
+        7.5
+      ],
+      "sourceUrl": "https://www.hyogo-c.ed.jp/~koko-bo/"
+    },
+    {
+      "id": "hyogo-scale",
+      "prefectureCode": "hyogo",
+      "prefectureName": "兵庫県",
+      "category": "scale",
+      "question": "兵庫県の内申点計算に使われる評定は5段階評価ですか、10段階評価ですか。",
+      "correctAnswer": "5段階評価",
+      "expectedNumbers": [
+        5
+      ],
+      "sourceUrl": "https://www.hyogo-c.ed.jp/~koko-bo/"
+    },
+    {
+      "id": "nara-maxScore",
+      "prefectureCode": "nara",
+      "prefectureName": "奈良県",
+      "category": "maxScore",
+      "question": "奈良県の公立高校入試における内申点（調査書点）の満点は何点ですか。",
+      "correctAnswer": "144点",
+      "expectedNumbers": [
+        144
+      ],
+      "sourceUrl": "https://www.pref.nara.lg.jp/n167/66542.html"
+    },
+    {
+      "id": "nara-targetGrades",
+      "prefectureCode": "nara",
+      "prefectureName": "奈良県",
+      "category": "targetGrades",
+      "question": "奈良県の内申点計算で対象となる学年と、学年ごとの倍率を答えてください。",
+      "correctAnswer": "中1×0.6倍・中2×0.6倍・中3×2倍",
+      "expectedNumbers": [
+        0.6,
+        0.6,
+        2
+      ],
+      "sourceUrl": "https://www.pref.nara.lg.jp/n167/66542.html"
+    },
+    {
+      "id": "nara-practicalWeighting",
+      "prefectureCode": "nara",
+      "prefectureName": "奈良県",
+      "category": "practicalWeighting",
+      "question": "奈良県の内申点計算で、5教科（国数英理社）と実技4教科（音美保技）の倍率はそれぞれ何倍ですか。",
+      "correctAnswer": "5教科×1倍・実技4教科×1倍",
+      "expectedNumbers": [
+        1,
+        1
+      ],
+      "sourceUrl": "https://www.pref.nara.lg.jp/n167/66542.html"
+    },
+    {
+      "id": "nara-scale",
+      "prefectureCode": "nara",
+      "prefectureName": "奈良県",
+      "category": "scale",
+      "question": "奈良県の内申点計算に使われる評定は5段階評価ですか、10段階評価ですか。",
+      "correctAnswer": "5段階評価",
+      "expectedNumbers": [
+        5
+      ],
+      "sourceUrl": "https://www.pref.nara.lg.jp/n167/66542.html"
+    },
+    {
+      "id": "wakayama-maxScore",
+      "prefectureCode": "wakayama",
+      "prefectureName": "和歌山県",
+      "category": "maxScore",
+      "question": "和歌山県の公立高校入試における内申点（調査書点）の満点は何点ですか。",
+      "correctAnswer": "180点",
+      "expectedNumbers": [
+        180
+      ],
+      "sourceUrl": "https://www.pref.wakayama.lg.jp/prefg/500200/d00220765.html"
+    },
+    {
+      "id": "wakayama-targetGrades",
+      "prefectureCode": "wakayama",
+      "prefectureName": "和歌山県",
+      "category": "targetGrades",
+      "question": "和歌山県の内申点計算で対象となる学年と、学年ごとの倍率を答えてください。",
+      "correctAnswer": "中1×1倍・中2×1倍・中3×2倍",
+      "expectedNumbers": [
+        1,
+        1,
+        2
+      ],
+      "sourceUrl": "https://www.pref.wakayama.lg.jp/prefg/500200/d00220765.html"
+    },
+    {
+      "id": "wakayama-practicalWeighting",
+      "prefectureCode": "wakayama",
+      "prefectureName": "和歌山県",
+      "category": "practicalWeighting",
+      "question": "和歌山県の内申点計算で、5教科（国数英理社）と実技4教科（音美保技）の倍率はそれぞれ何倍ですか。",
+      "correctAnswer": "5教科×1倍・実技4教科×1倍",
+      "expectedNumbers": [
+        1,
+        1
+      ],
+      "sourceUrl": "https://www.pref.wakayama.lg.jp/prefg/500200/d00220765.html"
+    },
+    {
+      "id": "wakayama-scale",
+      "prefectureCode": "wakayama",
+      "prefectureName": "和歌山県",
+      "category": "scale",
+      "question": "和歌山県の内申点計算に使われる評定は5段階評価ですか、10段階評価ですか。",
+      "correctAnswer": "5段階評価",
+      "expectedNumbers": [
+        5
+      ],
+      "sourceUrl": "https://www.pref.wakayama.lg.jp/prefg/500200/d00220765.html"
+    },
+    {
+      "id": "tottori-maxScore",
+      "prefectureCode": "tottori",
+      "prefectureName": "鳥取県",
+      "category": "maxScore",
+      "question": "鳥取県の公立高校入試における内申点（調査書点）の満点は何点ですか。",
+      "correctAnswer": "65点",
+      "expectedNumbers": [
+        65
+      ],
+      "sourceUrl": "https://www.pref.tottori.lg.jp/www/contents/1376986345355/index.html"
+    },
+    {
+      "id": "tottori-targetGrades",
+      "prefectureCode": "tottori",
+      "prefectureName": "鳥取県",
+      "category": "targetGrades",
+      "question": "鳥取県の内申点計算で対象となる学年と、学年ごとの倍率を答えてください。",
+      "correctAnswer": "中3×1倍",
+      "expectedNumbers": [
+        1
+      ],
+      "sourceUrl": "https://www.pref.tottori.lg.jp/www/contents/1376986345355/index.html"
+    },
+    {
+      "id": "tottori-practicalWeighting",
+      "prefectureCode": "tottori",
+      "prefectureName": "鳥取県",
+      "category": "practicalWeighting",
+      "question": "鳥取県の内申点計算で、5教科（国数英理社）と実技4教科（音美保技）の倍率はそれぞれ何倍ですか。",
+      "correctAnswer": "5教科×1倍・実技4教科×2倍",
+      "expectedNumbers": [
+        1,
+        2
+      ],
+      "sourceUrl": "https://www.pref.tottori.lg.jp/www/contents/1376986345355/index.html"
+    },
+    {
+      "id": "tottori-scale",
+      "prefectureCode": "tottori",
+      "prefectureName": "鳥取県",
+      "category": "scale",
+      "question": "鳥取県の内申点計算に使われる評定は5段階評価ですか、10段階評価ですか。",
+      "correctAnswer": "5段階評価",
+      "expectedNumbers": [
+        5
+      ],
+      "sourceUrl": "https://www.pref.tottori.lg.jp/www/contents/1376986345355/index.html"
+    },
+    {
+      "id": "shimane-maxScore",
+      "prefectureCode": "shimane",
+      "prefectureName": "島根県",
+      "category": "maxScore",
+      "question": "島根県の公立高校入試における内申点（調査書点）の満点は何点ですか。",
+      "correctAnswer": "180点",
+      "expectedNumbers": [
+        180
+      ],
+      "sourceUrl": "https://www.pref.shimane.lg.jp/education/kyoiku/senbatsu/senbatsu_info/"
+    },
+    {
+      "id": "shimane-targetGrades",
+      "prefectureCode": "shimane",
+      "prefectureName": "島根県",
+      "category": "targetGrades",
+      "question": "島根県の内申点計算で対象となる学年と、学年ごとの倍率を答えてください。",
+      "correctAnswer": "中1×1倍・中2×1倍・中3×2倍",
+      "expectedNumbers": [
+        1,
+        1,
+        2
+      ],
+      "sourceUrl": "https://www.pref.shimane.lg.jp/education/kyoiku/senbatsu/senbatsu_info/"
+    },
+    {
+      "id": "shimane-practicalWeighting",
+      "prefectureCode": "shimane",
+      "prefectureName": "島根県",
+      "category": "practicalWeighting",
+      "question": "島根県の内申点計算で、5教科（国数英理社）と実技4教科（音美保技）の倍率はそれぞれ何倍ですか。",
+      "correctAnswer": "5教科×1倍・実技4教科×1倍",
+      "expectedNumbers": [
+        1,
+        1
+      ],
+      "sourceUrl": "https://www.pref.shimane.lg.jp/education/kyoiku/senbatsu/senbatsu_info/"
+    },
+    {
+      "id": "shimane-scale",
+      "prefectureCode": "shimane",
+      "prefectureName": "島根県",
+      "category": "scale",
+      "question": "島根県の内申点計算に使われる評定は5段階評価ですか、10段階評価ですか。",
+      "correctAnswer": "5段階評価",
+      "expectedNumbers": [
+        5
+      ],
+      "sourceUrl": "https://www.pref.shimane.lg.jp/education/kyoiku/senbatsu/senbatsu_info/"
+    },
+    {
+      "id": "okayama-maxScore",
+      "prefectureCode": "okayama",
+      "prefectureName": "岡山県",
+      "category": "maxScore",
+      "question": "岡山県の公立高校入試における内申点（調査書点）の満点は何点ですか。",
+      "correctAnswer": "195点",
+      "expectedNumbers": [
+        195
+      ],
+      "sourceUrl": "https://www.pref.okayama.jp/site/16/913706.html"
+    },
+    {
+      "id": "okayama-targetGrades",
+      "prefectureCode": "okayama",
+      "prefectureName": "岡山県",
+      "category": "targetGrades",
+      "question": "岡山県の内申点計算で対象となる学年と、学年ごとの倍率を答えてください。",
+      "correctAnswer": "中1×1倍・中2×1倍・中3×1倍",
+      "expectedNumbers": [
+        1,
+        1,
+        1
+      ],
+      "sourceUrl": "https://www.pref.okayama.jp/site/16/913706.html"
+    },
+    {
+      "id": "okayama-practicalWeighting",
+      "prefectureCode": "okayama",
+      "prefectureName": "岡山県",
+      "category": "practicalWeighting",
+      "question": "岡山県の内申点計算で、5教科（国数英理社）と実技4教科（音美保技）の倍率はそれぞれ何倍ですか。",
+      "correctAnswer": "5教科×1倍・実技4教科×2倍",
+      "expectedNumbers": [
+        1,
+        2
+      ],
+      "sourceUrl": "https://www.pref.okayama.jp/site/16/913706.html"
+    },
+    {
+      "id": "okayama-scale",
+      "prefectureCode": "okayama",
+      "prefectureName": "岡山県",
+      "category": "scale",
+      "question": "岡山県の内申点計算に使われる評定は5段階評価ですか、10段階評価ですか。",
+      "correctAnswer": "5段階評価",
+      "expectedNumbers": [
+        5
+      ],
+      "sourceUrl": "https://www.pref.okayama.jp/site/16/913706.html"
+    },
+    {
+      "id": "hiroshima-maxScore",
+      "prefectureCode": "hiroshima",
+      "prefectureName": "広島県",
+      "category": "maxScore",
+      "question": "広島県の公立高校入試における内申点（調査書点）の満点は何点ですか。",
+      "correctAnswer": "225点",
+      "expectedNumbers": [
+        225
+      ],
+      "sourceUrl": "https://www.pref.hiroshima.lg.jp/site/kyouiku/07senior-2nd-r07-nyuushi-r07-kou-r07-youkou-r07kou-youkou.html"
+    },
+    {
+      "id": "hiroshima-targetGrades",
+      "prefectureCode": "hiroshima",
+      "prefectureName": "広島県",
+      "category": "targetGrades",
+      "question": "広島県の内申点計算で対象となる学年と、学年ごとの倍率を答えてください。",
+      "correctAnswer": "中1×1倍・中2×1倍・中3×3倍",
+      "expectedNumbers": [
+        1,
+        1,
+        3
+      ],
+      "sourceUrl": "https://www.pref.hiroshima.lg.jp/site/kyouiku/07senior-2nd-r07-nyuushi-r07-kou-r07-youkou-r07kou-youkou.html"
+    },
+    {
+      "id": "hiroshima-practicalWeighting",
+      "prefectureCode": "hiroshima",
+      "prefectureName": "広島県",
+      "category": "practicalWeighting",
+      "question": "広島県の内申点計算で、5教科（国数英理社）と実技4教科（音美保技）の倍率はそれぞれ何倍ですか。",
+      "correctAnswer": "5教科×1倍・実技4教科×1倍",
+      "expectedNumbers": [
+        1,
+        1
+      ],
+      "sourceUrl": "https://www.pref.hiroshima.lg.jp/site/kyouiku/07senior-2nd-r07-nyuushi-r07-kou-r07-youkou-r07kou-youkou.html"
+    },
+    {
+      "id": "hiroshima-scale",
+      "prefectureCode": "hiroshima",
+      "prefectureName": "広島県",
+      "category": "scale",
+      "question": "広島県の内申点計算に使われる評定は5段階評価ですか、10段階評価ですか。",
+      "correctAnswer": "5段階評価",
+      "expectedNumbers": [
+        5
+      ],
+      "sourceUrl": "https://www.pref.hiroshima.lg.jp/site/kyouiku/07senior-2nd-r07-nyuushi-r07-kou-r07-youkou-r07kou-youkou.html"
+    },
+    {
+      "id": "yamaguchi-maxScore",
+      "prefectureCode": "yamaguchi",
+      "prefectureName": "山口県",
+      "category": "maxScore",
+      "question": "山口県の公立高校入試における内申点（調査書点）の満点は何点ですか。",
+      "correctAnswer": "135点",
+      "expectedNumbers": [
+        135
+      ],
+      "sourceUrl": "https://www.pref.yamaguchi.lg.jp/site/kyouiku/310448.html"
+    },
+    {
+      "id": "yamaguchi-targetGrades",
+      "prefectureCode": "yamaguchi",
+      "prefectureName": "山口県",
+      "category": "targetGrades",
+      "question": "山口県の内申点計算で対象となる学年と、学年ごとの倍率を答えてください。",
+      "correctAnswer": "中1×1倍・中2×1倍・中3×1倍",
+      "expectedNumbers": [
+        1,
+        1,
+        1
+      ],
+      "sourceUrl": "https://www.pref.yamaguchi.lg.jp/site/kyouiku/310448.html"
+    },
+    {
+      "id": "yamaguchi-practicalWeighting",
+      "prefectureCode": "yamaguchi",
+      "prefectureName": "山口県",
+      "category": "practicalWeighting",
+      "question": "山口県の内申点計算で、5教科（国数英理社）と実技4教科（音美保技）の倍率はそれぞれ何倍ですか。",
+      "correctAnswer": "5教科×1倍・実技4教科×1倍",
+      "expectedNumbers": [
+        1,
+        1
+      ],
+      "sourceUrl": "https://www.pref.yamaguchi.lg.jp/site/kyouiku/310448.html"
+    },
+    {
+      "id": "yamaguchi-scale",
+      "prefectureCode": "yamaguchi",
+      "prefectureName": "山口県",
+      "category": "scale",
+      "question": "山口県の内申点計算に使われる評定は5段階評価ですか、10段階評価ですか。",
+      "correctAnswer": "5段階評価",
+      "expectedNumbers": [
+        5
+      ],
+      "sourceUrl": "https://www.pref.yamaguchi.lg.jp/site/kyouiku/310448.html"
+    },
+    {
+      "id": "tokushima-maxScore",
+      "prefectureCode": "tokushima",
+      "prefectureName": "徳島県",
+      "category": "maxScore",
+      "question": "徳島県の公立高校入試における内申点（調査書点）の満点は何点ですか。",
+      "correctAnswer": "195点",
+      "expectedNumbers": [
+        195
+      ],
+      "sourceUrl": "https://www.pref.tokushima.lg.jp/file/attachment/937096.pdf"
+    },
+    {
+      "id": "tokushima-targetGrades",
+      "prefectureCode": "tokushima",
+      "prefectureName": "徳島県",
+      "category": "targetGrades",
+      "question": "徳島県の内申点計算で対象となる学年と、学年ごとの倍率を答えてください。",
+      "correctAnswer": "中1×1倍・中2×1倍・中3×1倍",
+      "expectedNumbers": [
+        1,
+        1,
+        1
+      ],
+      "sourceUrl": "https://www.pref.tokushima.lg.jp/file/attachment/937096.pdf"
+    },
+    {
+      "id": "tokushima-practicalWeighting",
+      "prefectureCode": "tokushima",
+      "prefectureName": "徳島県",
+      "category": "practicalWeighting",
+      "question": "徳島県の内申点計算で、5教科（国数英理社）と実技4教科（音美保技）の倍率はそれぞれ何倍ですか。",
+      "correctAnswer": "5教科×1倍・実技4教科×2倍",
+      "expectedNumbers": [
+        1,
+        2
+      ],
+      "sourceUrl": "https://www.pref.tokushima.lg.jp/file/attachment/937096.pdf"
+    },
+    {
+      "id": "tokushima-scale",
+      "prefectureCode": "tokushima",
+      "prefectureName": "徳島県",
+      "category": "scale",
+      "question": "徳島県の内申点計算に使われる評定は5段階評価ですか、10段階評価ですか。",
+      "correctAnswer": "5段階評価",
+      "expectedNumbers": [
+        5
+      ],
+      "sourceUrl": "https://www.pref.tokushima.lg.jp/file/attachment/937096.pdf"
+    },
+    {
+      "id": "kagawa-maxScore",
+      "prefectureCode": "kagawa",
+      "prefectureName": "香川県",
+      "category": "maxScore",
+      "question": "香川県の公立高校入試における内申点（調査書点）の満点は何点ですか。",
+      "correctAnswer": "390点",
+      "expectedNumbers": [
+        390
+      ],
+      "sourceUrl": "https://www.pref.kagawa.lg.jp/kenkyoui/kokokyoiku/nyushi/chugaku-koko/examination02.html"
+    },
+    {
+      "id": "kagawa-targetGrades",
+      "prefectureCode": "kagawa",
+      "prefectureName": "香川県",
+      "category": "targetGrades",
+      "question": "香川県の内申点計算で対象となる学年と、学年ごとの倍率を答えてください。",
+      "correctAnswer": "中1×1倍・中2×1倍・中3×1倍",
+      "expectedNumbers": [
+        1,
+        1,
+        1
+      ],
+      "sourceUrl": "https://www.pref.kagawa.lg.jp/kenkyoui/kokokyoiku/nyushi/chugaku-koko/examination02.html"
+    },
+    {
+      "id": "kagawa-practicalWeighting",
+      "prefectureCode": "kagawa",
+      "prefectureName": "香川県",
+      "category": "practicalWeighting",
+      "question": "香川県の内申点計算で、5教科（国数英理社）と実技4教科（音美保技）の倍率はそれぞれ何倍ですか。",
+      "correctAnswer": "5教科×2倍・実技4教科×4倍",
+      "expectedNumbers": [
+        2,
+        4
+      ],
+      "sourceUrl": "https://www.pref.kagawa.lg.jp/kenkyoui/kokokyoiku/nyushi/chugaku-koko/examination02.html"
+    },
+    {
+      "id": "kagawa-scale",
+      "prefectureCode": "kagawa",
+      "prefectureName": "香川県",
+      "category": "scale",
+      "question": "香川県の内申点計算に使われる評定は5段階評価ですか、10段階評価ですか。",
+      "correctAnswer": "5段階評価",
+      "expectedNumbers": [
+        5
+      ],
+      "sourceUrl": "https://www.pref.kagawa.lg.jp/kenkyoui/kokokyoiku/nyushi/chugaku-koko/examination02.html"
+    },
+    {
+      "id": "ehime-maxScore",
+      "prefectureCode": "ehime",
+      "prefectureName": "愛媛県",
+      "category": "maxScore",
+      "question": "愛媛県の公立高校入試における内申点（調査書点）の満点は何点ですか。",
+      "correctAnswer": "135点",
+      "expectedNumbers": [
+        135
+      ],
+      "sourceUrl": "https://ehime-kyoiku.esnet.ed.jp/koukou/nyuusi/r08nyuusi"
+    },
+    {
+      "id": "ehime-targetGrades",
+      "prefectureCode": "ehime",
+      "prefectureName": "愛媛県",
+      "category": "targetGrades",
+      "question": "愛媛県の内申点計算で対象となる学年と、学年ごとの倍率を答えてください。",
+      "correctAnswer": "中1×1倍・中2×1倍・中3×1倍",
+      "expectedNumbers": [
+        1,
+        1,
+        1
+      ],
+      "sourceUrl": "https://ehime-kyoiku.esnet.ed.jp/koukou/nyuusi/r08nyuusi"
+    },
+    {
+      "id": "ehime-practicalWeighting",
+      "prefectureCode": "ehime",
+      "prefectureName": "愛媛県",
+      "category": "practicalWeighting",
+      "question": "愛媛県の内申点計算で、5教科（国数英理社）と実技4教科（音美保技）の倍率はそれぞれ何倍ですか。",
+      "correctAnswer": "5教科×1倍・実技4教科×1倍",
+      "expectedNumbers": [
+        1,
+        1
+      ],
+      "sourceUrl": "https://ehime-kyoiku.esnet.ed.jp/koukou/nyuusi/r08nyuusi"
+    },
+    {
+      "id": "ehime-scale",
+      "prefectureCode": "ehime",
+      "prefectureName": "愛媛県",
+      "category": "scale",
+      "question": "愛媛県の内申点計算に使われる評定は5段階評価ですか、10段階評価ですか。",
+      "correctAnswer": "5段階評価",
+      "expectedNumbers": [
+        5
+      ],
+      "sourceUrl": "https://ehime-kyoiku.esnet.ed.jp/koukou/nyuusi/r08nyuusi"
+    },
+    {
+      "id": "kochi-maxScore",
+      "prefectureCode": "kochi",
+      "prefectureName": "高知県",
+      "category": "maxScore",
+      "question": "高知県の公立高校入試における内申点（調査書点）の満点は何点ですか。",
+      "correctAnswer": "195点",
+      "expectedNumbers": [
+        195
+      ],
+      "sourceUrl": "https://www.pref.kochi.lg.jp/doc/r8_koukounyushi_main/"
+    },
+    {
+      "id": "kochi-targetGrades",
+      "prefectureCode": "kochi",
+      "prefectureName": "高知県",
+      "category": "targetGrades",
+      "question": "高知県の内申点計算で対象となる学年と、学年ごとの倍率を答えてください。",
+      "correctAnswer": "中1×1倍・中2×1倍・中3×1倍",
+      "expectedNumbers": [
+        1,
+        1,
+        1
+      ],
+      "sourceUrl": "https://www.pref.kochi.lg.jp/doc/r8_koukounyushi_main/"
+    },
+    {
+      "id": "kochi-practicalWeighting",
+      "prefectureCode": "kochi",
+      "prefectureName": "高知県",
+      "category": "practicalWeighting",
+      "question": "高知県の内申点計算で、5教科（国数英理社）と実技4教科（音美保技）の倍率はそれぞれ何倍ですか。",
+      "correctAnswer": "5教科×1倍・実技4教科×2倍",
+      "expectedNumbers": [
+        1,
+        2
+      ],
+      "sourceUrl": "https://www.pref.kochi.lg.jp/doc/r8_koukounyushi_main/"
+    },
+    {
+      "id": "kochi-scale",
+      "prefectureCode": "kochi",
+      "prefectureName": "高知県",
+      "category": "scale",
+      "question": "高知県の内申点計算に使われる評定は5段階評価ですか、10段階評価ですか。",
+      "correctAnswer": "10段階評価",
+      "expectedNumbers": [
+        10
+      ],
+      "sourceUrl": "https://www.pref.kochi.lg.jp/doc/r8_koukounyushi_main/"
+    },
+    {
+      "id": "fukuoka-maxScore",
+      "prefectureCode": "fukuoka",
+      "prefectureName": "福岡県",
+      "category": "maxScore",
+      "question": "福岡県の公立高校入試における内申点（調査書点）の満点は何点ですか。",
+      "correctAnswer": "45点",
+      "expectedNumbers": [
+        45
+      ],
+      "sourceUrl": "https://www.pref.fukuoka.lg.jp/site/kyouiku/08youkou.html"
+    },
+    {
+      "id": "fukuoka-targetGrades",
+      "prefectureCode": "fukuoka",
+      "prefectureName": "福岡県",
+      "category": "targetGrades",
+      "question": "福岡県の内申点計算で対象となる学年と、学年ごとの倍率を答えてください。",
+      "correctAnswer": "中3×1倍",
+      "expectedNumbers": [
+        1
+      ],
+      "sourceUrl": "https://www.pref.fukuoka.lg.jp/site/kyouiku/08youkou.html"
+    },
+    {
+      "id": "fukuoka-practicalWeighting",
+      "prefectureCode": "fukuoka",
+      "prefectureName": "福岡県",
+      "category": "practicalWeighting",
+      "question": "福岡県の内申点計算で、5教科（国数英理社）と実技4教科（音美保技）の倍率はそれぞれ何倍ですか。",
+      "correctAnswer": "5教科×1倍・実技4教科×1倍",
+      "expectedNumbers": [
+        1,
+        1
+      ],
+      "sourceUrl": "https://www.pref.fukuoka.lg.jp/site/kyouiku/08youkou.html"
+    },
+    {
+      "id": "fukuoka-scale",
+      "prefectureCode": "fukuoka",
+      "prefectureName": "福岡県",
+      "category": "scale",
+      "question": "福岡県の内申点計算に使われる評定は5段階評価ですか、10段階評価ですか。",
+      "correctAnswer": "5段階評価",
+      "expectedNumbers": [
+        5
+      ],
+      "sourceUrl": "https://www.pref.fukuoka.lg.jp/site/kyouiku/08youkou.html"
+    },
+    {
+      "id": "saga-maxScore",
+      "prefectureCode": "saga",
+      "prefectureName": "佐賀県",
+      "category": "maxScore",
+      "question": "佐賀県の公立高校入試における内申点（調査書点）の満点は何点ですか。",
+      "correctAnswer": "135点",
+      "expectedNumbers": [
+        135
+      ],
+      "sourceUrl": "https://www.pref.saga.lg.jp/kyouiku/kiji003115881/index.html"
+    },
+    {
+      "id": "saga-targetGrades",
+      "prefectureCode": "saga",
+      "prefectureName": "佐賀県",
+      "category": "targetGrades",
+      "question": "佐賀県の内申点計算で対象となる学年と、学年ごとの倍率を答えてください。",
+      "correctAnswer": "中1×1倍・中2×1倍・中3×1倍",
+      "expectedNumbers": [
+        1,
+        1,
+        1
+      ],
+      "sourceUrl": "https://www.pref.saga.lg.jp/kyouiku/kiji003115881/index.html"
+    },
+    {
+      "id": "saga-practicalWeighting",
+      "prefectureCode": "saga",
+      "prefectureName": "佐賀県",
+      "category": "practicalWeighting",
+      "question": "佐賀県の内申点計算で、5教科（国数英理社）と実技4教科（音美保技）の倍率はそれぞれ何倍ですか。",
+      "correctAnswer": "5教科×1倍・実技4教科×1倍",
+      "expectedNumbers": [
+        1,
+        1
+      ],
+      "sourceUrl": "https://www.pref.saga.lg.jp/kyouiku/kiji003115881/index.html"
+    },
+    {
+      "id": "saga-scale",
+      "prefectureCode": "saga",
+      "prefectureName": "佐賀県",
+      "category": "scale",
+      "question": "佐賀県の内申点計算に使われる評定は5段階評価ですか、10段階評価ですか。",
+      "correctAnswer": "5段階評価",
+      "expectedNumbers": [
+        5
+      ],
+      "sourceUrl": "https://www.pref.saga.lg.jp/kyouiku/kiji003115881/index.html"
+    },
+    {
+      "id": "nagasaki-maxScore",
+      "prefectureCode": "nagasaki",
+      "prefectureName": "長崎県",
+      "category": "maxScore",
+      "question": "長崎県の公立高校入試における内申点（調査書点）の満点は何点ですか。",
+      "correctAnswer": "135点",
+      "expectedNumbers": [
+        135
+      ],
+      "sourceUrl": "https://www.pref.nagasaki.jp/doc/page-746842.html"
+    },
+    {
+      "id": "nagasaki-targetGrades",
+      "prefectureCode": "nagasaki",
+      "prefectureName": "長崎県",
+      "category": "targetGrades",
+      "question": "長崎県の内申点計算で対象となる学年と、学年ごとの倍率を答えてください。",
+      "correctAnswer": "中1×1倍・中2×1倍・中3×1倍",
+      "expectedNumbers": [
+        1,
+        1,
+        1
+      ],
+      "sourceUrl": "https://www.pref.nagasaki.jp/doc/page-746842.html"
+    },
+    {
+      "id": "nagasaki-practicalWeighting",
+      "prefectureCode": "nagasaki",
+      "prefectureName": "長崎県",
+      "category": "practicalWeighting",
+      "question": "長崎県の内申点計算で、5教科（国数英理社）と実技4教科（音美保技）の倍率はそれぞれ何倍ですか。",
+      "correctAnswer": "5教科×1倍・実技4教科×1倍",
+      "expectedNumbers": [
+        1,
+        1
+      ],
+      "sourceUrl": "https://www.pref.nagasaki.jp/doc/page-746842.html"
+    },
+    {
+      "id": "nagasaki-scale",
+      "prefectureCode": "nagasaki",
+      "prefectureName": "長崎県",
+      "category": "scale",
+      "question": "長崎県の内申点計算に使われる評定は5段階評価ですか、10段階評価ですか。",
+      "correctAnswer": "5段階評価",
+      "expectedNumbers": [
+        5
+      ],
+      "sourceUrl": "https://www.pref.nagasaki.jp/doc/page-746842.html"
+    },
+    {
+      "id": "kumamoto-maxScore",
+      "prefectureCode": "kumamoto",
+      "prefectureName": "熊本県",
+      "category": "maxScore",
+      "question": "熊本県の公立高校入試における内申点（調査書点）の満点は何点ですか。",
+      "correctAnswer": "180点",
+      "expectedNumbers": [
+        180
+      ],
+      "sourceUrl": "https://www.pref.kumamoto.jp/site/kyouiku/244675.html"
+    },
+    {
+      "id": "kumamoto-targetGrades",
+      "prefectureCode": "kumamoto",
+      "prefectureName": "熊本県",
+      "category": "targetGrades",
+      "question": "熊本県の内申点計算で対象となる学年と、学年ごとの倍率を答えてください。",
+      "correctAnswer": "中1×1倍・中2×1倍・中3×2倍",
+      "expectedNumbers": [
+        1,
+        1,
+        2
+      ],
+      "sourceUrl": "https://www.pref.kumamoto.jp/site/kyouiku/244675.html"
+    },
+    {
+      "id": "kumamoto-practicalWeighting",
+      "prefectureCode": "kumamoto",
+      "prefectureName": "熊本県",
+      "category": "practicalWeighting",
+      "question": "熊本県の内申点計算で、5教科（国数英理社）と実技4教科（音美保技）の倍率はそれぞれ何倍ですか。",
+      "correctAnswer": "5教科×1倍・実技4教科×1倍",
+      "expectedNumbers": [
+        1,
+        1
+      ],
+      "sourceUrl": "https://www.pref.kumamoto.jp/site/kyouiku/244675.html"
+    },
+    {
+      "id": "kumamoto-scale",
+      "prefectureCode": "kumamoto",
+      "prefectureName": "熊本県",
+      "category": "scale",
+      "question": "熊本県の内申点計算に使われる評定は5段階評価ですか、10段階評価ですか。",
+      "correctAnswer": "5段階評価",
+      "expectedNumbers": [
+        5
+      ],
+      "sourceUrl": "https://www.pref.kumamoto.jp/site/kyouiku/244675.html"
+    },
+    {
+      "id": "oita-maxScore",
+      "prefectureCode": "oita",
+      "prefectureName": "大分県",
+      "category": "maxScore",
+      "question": "大分県の公立高校入試における内申点（調査書点）の満点は何点ですか。",
+      "correctAnswer": "520点",
+      "expectedNumbers": [
+        520
+      ],
+      "sourceUrl": "https://www.pref.oita.jp/site/kyoiku/r08koukounyushi.html"
+    },
+    {
+      "id": "oita-targetGrades",
+      "prefectureCode": "oita",
+      "prefectureName": "大分県",
+      "category": "targetGrades",
+      "question": "大分県の内申点計算で対象となる学年と、学年ごとの倍率を答えてください。",
+      "correctAnswer": "中1×1倍・中2×1倍・中3×2倍",
+      "expectedNumbers": [
+        1,
+        1,
+        2
+      ],
+      "sourceUrl": "https://www.pref.oita.jp/site/kyoiku/r08koukounyushi.html"
+    },
+    {
+      "id": "oita-practicalWeighting",
+      "prefectureCode": "oita",
+      "prefectureName": "大分県",
+      "category": "practicalWeighting",
+      "question": "大分県の内申点計算で、5教科（国数英理社）と実技4教科（音美保技）の倍率はそれぞれ何倍ですか。",
+      "correctAnswer": "5教科×2倍・実技4教科×4倍",
+      "expectedNumbers": [
+        2,
+        4
+      ],
+      "sourceUrl": "https://www.pref.oita.jp/site/kyoiku/r08koukounyushi.html"
+    },
+    {
+      "id": "oita-scale",
+      "prefectureCode": "oita",
+      "prefectureName": "大分県",
+      "category": "scale",
+      "question": "大分県の内申点計算に使われる評定は5段階評価ですか、10段階評価ですか。",
+      "correctAnswer": "5段階評価",
+      "expectedNumbers": [
+        5
+      ],
+      "sourceUrl": "https://www.pref.oita.jp/site/kyoiku/r08koukounyushi.html"
+    },
+    {
+      "id": "miyazaki-maxScore",
+      "prefectureCode": "miyazaki",
+      "prefectureName": "宮崎県",
+      "category": "maxScore",
+      "question": "宮崎県の公立高校入試における内申点（調査書点）の満点は何点ですか。",
+      "correctAnswer": "135点",
+      "expectedNumbers": [
+        135
+      ],
+      "sourceUrl": "https://www.pref.miyazaki.lg.jp/kokokyoiku/kyoikukosodate/kyoiku/20250618193442.html"
+    },
+    {
+      "id": "miyazaki-targetGrades",
+      "prefectureCode": "miyazaki",
+      "prefectureName": "宮崎県",
+      "category": "targetGrades",
+      "question": "宮崎県の内申点計算で対象となる学年と、学年ごとの倍率を答えてください。",
+      "correctAnswer": "中1×1倍・中2×1倍・中3×1倍",
+      "expectedNumbers": [
+        1,
+        1,
+        1
+      ],
+      "sourceUrl": "https://www.pref.miyazaki.lg.jp/kokokyoiku/kyoikukosodate/kyoiku/20250618193442.html"
+    },
+    {
+      "id": "miyazaki-practicalWeighting",
+      "prefectureCode": "miyazaki",
+      "prefectureName": "宮崎県",
+      "category": "practicalWeighting",
+      "question": "宮崎県の内申点計算で、5教科（国数英理社）と実技4教科（音美保技）の倍率はそれぞれ何倍ですか。",
+      "correctAnswer": "5教科×1倍・実技4教科×1倍",
+      "expectedNumbers": [
+        1,
+        1
+      ],
+      "sourceUrl": "https://www.pref.miyazaki.lg.jp/kokokyoiku/kyoikukosodate/kyoiku/20250618193442.html"
+    },
+    {
+      "id": "miyazaki-scale",
+      "prefectureCode": "miyazaki",
+      "prefectureName": "宮崎県",
+      "category": "scale",
+      "question": "宮崎県の内申点計算に使われる評定は5段階評価ですか、10段階評価ですか。",
+      "correctAnswer": "5段階評価",
+      "expectedNumbers": [
+        5
+      ],
+      "sourceUrl": "https://www.pref.miyazaki.lg.jp/kokokyoiku/kyoikukosodate/kyoiku/20250618193442.html"
+    },
+    {
+      "id": "kagoshima-maxScore",
+      "prefectureCode": "kagoshima",
+      "prefectureName": "鹿児島県",
+      "category": "maxScore",
+      "question": "鹿児島県の公立高校入試における内申点（調査書点）の満点は何点ですか。",
+      "correctAnswer": "450点",
+      "expectedNumbers": [
+        450
+      ],
+      "sourceUrl": "https://www.pref.kagoshima.jp/kyoiku-bunka/school/koukou/nyushi/"
+    },
+    {
+      "id": "kagoshima-targetGrades",
+      "prefectureCode": "kagoshima",
+      "prefectureName": "鹿児島県",
+      "category": "targetGrades",
+      "question": "鹿児島県の内申点計算で対象となる学年と、学年ごとの倍率を答えてください。",
+      "correctAnswer": "中3×1倍",
+      "expectedNumbers": [
+        1
+      ],
+      "sourceUrl": "https://www.pref.kagoshima.jp/kyoiku-bunka/school/koukou/nyushi/"
+    },
+    {
+      "id": "kagoshima-practicalWeighting",
+      "prefectureCode": "kagoshima",
+      "prefectureName": "鹿児島県",
+      "category": "practicalWeighting",
+      "question": "鹿児島県の内申点計算で、5教科（国数英理社）と実技4教科（音美保技）の倍率はそれぞれ何倍ですか。",
+      "correctAnswer": "5教科×2倍・実技4教科×20倍",
+      "expectedNumbers": [
+        2,
+        20
+      ],
+      "sourceUrl": "https://www.pref.kagoshima.jp/kyoiku-bunka/school/koukou/nyushi/"
+    },
+    {
+      "id": "kagoshima-scale",
+      "prefectureCode": "kagoshima",
+      "prefectureName": "鹿児島県",
+      "category": "scale",
+      "question": "鹿児島県の内申点計算に使われる評定は5段階評価ですか、10段階評価ですか。",
+      "correctAnswer": "5段階評価",
+      "expectedNumbers": [
+        5
+      ],
+      "sourceUrl": "https://www.pref.kagoshima.jp/kyoiku-bunka/school/koukou/nyushi/"
+    },
+    {
+      "id": "okinawa-maxScore",
+      "prefectureCode": "okinawa",
+      "prefectureName": "沖縄県",
+      "category": "maxScore",
+      "question": "沖縄県の公立高校入試における内申点（調査書点）の満点は何点ですか。",
+      "correctAnswer": "165点",
+      "expectedNumbers": [
+        165
+      ],
+      "sourceUrl": "https://www.pref.okinawa.lg.jp/kyoiku/gakko/1008883/1008887/1035054.html"
+    },
+    {
+      "id": "okinawa-targetGrades",
+      "prefectureCode": "okinawa",
+      "prefectureName": "沖縄県",
+      "category": "targetGrades",
+      "question": "沖縄県の内申点計算で対象となる学年と、学年ごとの倍率を答えてください。",
+      "correctAnswer": "中1×1倍・中2×1倍・中3×1倍",
+      "expectedNumbers": [
+        1,
+        1,
+        1
+      ],
+      "sourceUrl": "https://www.pref.okinawa.lg.jp/kyoiku/gakko/1008883/1008887/1035054.html"
+    },
+    {
+      "id": "okinawa-practicalWeighting",
+      "prefectureCode": "okinawa",
+      "prefectureName": "沖縄県",
+      "category": "practicalWeighting",
+      "question": "沖縄県の内申点計算で、5教科（国数英理社）と実技4教科（音美保技）の倍率はそれぞれ何倍ですか。",
+      "correctAnswer": "5教科×1倍・実技4教科×1.5倍",
+      "expectedNumbers": [
+        1,
+        1.5
+      ],
+      "sourceUrl": "https://www.pref.okinawa.lg.jp/kyoiku/gakko/1008883/1008887/1035054.html"
+    },
+    {
+      "id": "okinawa-scale",
+      "prefectureCode": "okinawa",
+      "prefectureName": "沖縄県",
+      "category": "scale",
+      "question": "沖縄県の内申点計算に使われる評定は5段階評価ですか、10段階評価ですか。",
+      "correctAnswer": "5段階評価",
+      "expectedNumbers": [
+        5
+      ],
+      "sourceUrl": "https://www.pref.okinawa.lg.jp/kyoiku/gakko/1008883/1008887/1035054.html"
+    }
+  ]
+}
