@@ -1942,9 +1942,10 @@
       "sourceTaskId": "T-C2",
       "sentDate": "2026-08-19",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "1a01a2886e73fc31",
-      "note": "08-19 22:17台の第2波送信(前回反映作業で見落とし)。2026-08-21にin:sent実測で確認し反映。"
+      "note": "08-19 22:17台の第2波送信(前回反映作業で見落とし)。2026-08-21にin:sent実測で確認し反映。 | 08-30 内申点白書2026を追加価値として追撃下書き設置(draftId r-5232834358205513392)",
+      "lastContactDate": "2026-08-30"
     },
     {
       "id": "lane9-jssace",
@@ -1965,9 +1966,10 @@
       "sourceTaskId": "T-C2",
       "sentDate": "2026-08-19",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "1a01a286b0d48408",
-      "note": "08-19 22:17台の第2波送信(前回反映作業で見落とし)。2026-08-21にin:sent実測で確認し反映。"
+      "note": "08-19 22:17台の第2波送信(前回反映作業で見落とし)。2026-08-21にin:sent実測で確認し反映。 | 08-30 内申点白書2026を追加価値として追撃下書き設置(draftId r3784480040836003593)",
+      "lastContactDate": "2026-08-30"
     },
     {
       "id": "lane9-jash",
@@ -1976,9 +1978,10 @@
       "sourceTaskId": "T-C2",
       "sentDate": "2026-08-19",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "1a01a285a3aec03b",
-      "note": "08-19 22:17台の第2波送信(前回反映作業で見落とし)。2026-08-21にin:sent実測で確認し反映。"
+      "note": "08-19 22:17台の第2波送信(前回反映作業で見落とし)。2026-08-21にin:sent実測で確認し反映。 | 08-30 内申点白書2026を追加価値として追撃下書き設置(draftId r6727632607128782647)",
+      "lastContactDate": "2026-08-30"
     },
     {
       "id": "npo-terakoya-houjousha",
@@ -1987,9 +1990,10 @@
       "sourceTaskId": "T-C2",
       "sentDate": "2026-08-19",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "1a01a2846002f903",
-      "note": "08-19 22:17台の第2波送信(前回反映作業で見落とし)。2026-08-21にin:sent実測で確認し反映。"
+      "note": "08-19 22:17台の第2波送信(前回反映作業で見落とし)。2026-08-21にin:sent実測で確認し反映。 | 08-30 内申点白書2026を追加価値として追撃下書き設置(draftId r-1859590546811199540)",
+      "lastContactDate": "2026-08-30"
     },
     {
       "id": "lane8-yamaguchi-kyoikukai",
@@ -1998,9 +2002,10 @@
       "sourceTaskId": "T-C2",
       "sentDate": "2026-08-19",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "1a01a2836105567c",
-      "note": "08-19 22:17台の第2波送信(前回反映作業で見落とし)。2026-08-21にin:sent実測で確認し反映。"
+      "note": "08-19 22:17台の第2波送信(前回反映作業で見落とし)。2026-08-21にin:sent実測で確認し反映。 | 08-30 内申点白書2026を追加価値として追撃下書き設置(draftId r7796847380078468755)",
+      "lastContactDate": "2026-08-30"
     },
     {
       "id": "lane8-nagasaki-kyoikukai",
@@ -2009,9 +2014,10 @@
       "sourceTaskId": "T-C2",
       "sentDate": "2026-08-19",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "1a01a28260216982",
-      "note": "08-19 22:17台の第2波送信(前回反映作業で見落とし)。2026-08-21にin:sent実測で確認し反映。"
+      "note": "08-19 22:17台の第2波送信(前回反映作業で見落とし)。2026-08-21にin:sent実測で確認し反映。 | 08-30 内申点白書2026を追加価値として追撃下書き設置(draftId r-6260814744880620098)",
+      "lastContactDate": "2026-08-30"
     },
     {
       "id": "edtech-frompage-ocans",
@@ -2020,9 +2026,10 @@
       "sourceTaskId": "T-C2",
       "sentDate": "2026-08-19",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "1a01a27f6b245386",
-      "note": "08-19 21:52台送信(前回反映作業で見落とし)。2026-08-21にin:sent実測で確認し反映。"
+      "note": "08-19 21:52台送信(前回反映作業で見落とし)。2026-08-21にin:sent実測で確認し反映。 | 08-30 内申点白書2026を追加価値として追撃下書き設置(draftId r-8501970599293389831)",
+      "lastContactDate": "2026-08-30"
     },
     {
       "id": "lane9-jsrecce",
@@ -2031,9 +2038,10 @@
       "sourceTaskId": "T-C2",
       "sentDate": "2026-08-19",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "1a01a28193586a0f",
-      "note": "08-19 22:17台の第2波送信(前々回・前回とも反映漏れ、全件突合の再チェックで発見)。2026-08-21にin:sent実測で確認し反映。"
+      "note": "08-19 22:17台の第2波送信(前々回・前回とも反映漏れ、全件突合の再チェックで発見)。2026-08-21にin:sent実測で確認し反映。 | 08-30 内申点白書2026を追加価値として追撃下書き設置(draftId r-5757086241805539030)",
+      "lastContactDate": "2026-08-30"
     },
     {
       "id": "lane9-nasem",
@@ -2042,9 +2050,10 @@
       "sourceTaskId": "T-C2",
       "sentDate": "2026-08-19",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "1a01a2807486215f",
-      "note": "08-19 22:17台の第2波送信(前々回・前回とも反映漏れ、全件突合の再チェックで発見)。2026-08-21にin:sent実測で確認し反映。"
+      "note": "08-19 22:17台の第2波送信(前々回・前回とも反映漏れ、全件突合の再チェックで発見)。2026-08-21にin:sent実測で確認し反映。 | 08-30 内申点白書2026を追加価値として追撃下書き設置(draftId r-6401436384812991205)",
+      "lastContactDate": "2026-08-30"
     },
     {
       "id": "lane9-zenkokukateika",
