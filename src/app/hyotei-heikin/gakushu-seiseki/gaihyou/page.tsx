@@ -134,6 +134,50 @@ export default function GaihyouDistancePage() {
             </div>
           </section>
 
+          {/* 境界の丸め方の注意 */}
+          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <h2 className="mb-3 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
+              「あと0.1」の境界は、四捨五入のどちらに転ぶかで決まる
+            </h2>
+            <p className="mb-3 text-sm leading-relaxed text-slate-700">
+              全体の学習成績の状況は「すべての評定の合計数をすべての評定数で除した数値（小数点以下第2位を
+              四捨五入）」と定義されています。つまり、生の平均値が4.25であれば四捨五入で4.3となりB、
+              4.24であれば4.2のままCです。境界付近にいる場合、次の評価で評定が1つ変わるかどうかよりも先に、
+              小数点第2位のわずかな差で区分が変わることがある点に注意してください。
+            </p>
+            <blockquote className="border-l-4 border-emerald-400 bg-emerald-50 p-4 text-sm italic leading-relaxed text-slate-700">
+              「『学習成績概評』の欄は、高等学校における同一学年生徒全員（中略）の3か年間における全体の学習成績の
+              状況を次の区分に従って、A、B、C、D、Eの5段階に分け、その生徒の属する成績段階を記入すること。」
+            </blockquote>
+            <p className="mt-3 text-xs text-slate-500 leading-relaxed">
+              出典：文部科学省「令和9年度大学入学者選抜実施要項」（令和8年5月27日付け8文科高第318号）
+              調査書記入上の注意事項等について9(1)
+              <a
+                href="https://www.mext.go.jp/content/20260529-mxt_daigakuc02-000005144_1.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ml-1 text-emerald-700 underline"
+              >
+                原文PDF
+              </a>
+            </p>
+          </section>
+
+          {/* Aの上に何があるか（正直な現状確認） */}
+          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <h2 className="mb-3 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
+              Aの上の区分は無いのか
+            </h2>
+            <p className="text-sm leading-relaxed text-slate-700">
+              学習成績概評はA〜Eの5段階が全てで、現行の実施要項にAより上の区分は定められていません。
+              過去の実施要項（令和4年度版・3文科高第284号）には「大学が希望する場合、学習成績概評Aに属する
+              生徒のうち人物・学力ともに特に優秀な者について、欄にⒶ（丸囲みのA）と標示できる」という規定が
+              ありましたが、現行の令和9年度実施要項（8文科高第318号）の本文・別紙様式1のいずれにもこの規定は
+              見当たりません。年度によって様式や規定が更新されるため、「Aの上にⒶがある」という古い情報を
+              見かけても、現行の要項では確認できない点に注意してください。
+            </p>
+          </section>
+
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="mb-4 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
               あわせて確認したいツール

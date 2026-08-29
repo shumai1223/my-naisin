@@ -95,7 +95,10 @@
       blockquote引用し、通知の略式表記(・・・省略)が誤解の一因になりやすい理由を解説。
       既存の引用番号(8(2)(4)/9(1))は現行版と照合し正確と確認済み(修正不要)。
       tsc実exit0・jestフルスイート355suites6140tests green
-- [ ] `/hyotei-heikin/gakushu-seiseki/gaihyou` — ②④中心
+- [x] `/hyotei-heikin/gakushu-seiseki/gaihyou` — ②④中心
+      🟡**2026-08-30部分完了**: 「あと0.1の境界は四捨五入のどちらに転ぶかで決まる」(丸め規則の解説+9(1)
+      blockquote引用)と「Aの上の区分は無いのか」(②Ⓐ不在を正直に・年度更新への注意喚起として最も自然な
+      置き場所)の2セクションを追加。tsc実exit0・jestフルスイート355suites6140tests green
 - [ ] `/hyotei-heikin/gakushu-seiseki/tousei-han-i` — ④中心
 - [ ] `/hyotei-heikin/gakushu-seiseki/kyoka-betsu` — ④中心
 - [ ] `/kakomon-jisaiten` — ⑤（総合得点方式の県別差・prefectures.ts/total-score系の既存データを再利用、新規収集ゼロ）
