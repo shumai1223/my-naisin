@@ -84,6 +84,11 @@ export function daysBetween(fromISO: string, toISO: string): number {
  * 台帳から「今、追撃すべき」候補を決定論で抽出する。
  * 条件: status==='awaiting' かつ 直近アクションからの経過日数が minDays 以上 かつ
  *       追撃回数が maxFollowups 未満。経過日数が長い順（最も待たせている相手が先頭）。
+ *
+ * ⚠️2026-08-30判明: この関数は channel（email/form）を区別しない。`threadId`が無い候補は
+ * Coworkによるフォーム送信（Gmailスレッド無し）のことが多く、Gmail追撃下書き（`gmail_create_draft`）
+ * の対象にはできない（宛先を推測することになり既知の罠に抵触する）。呼び出し側で
+ * `entry.threadId`の有無を確認し、無い候補はCoworkでのフォーム再送タスクとして別途扱うこと。
  */
 export function computeFollowupCandidates(
   entries: OutreachEntry[],
