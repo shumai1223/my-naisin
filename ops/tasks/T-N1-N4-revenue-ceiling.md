@@ -237,10 +237,29 @@ MCPサーバーは27ツールで稼働中。
       再発見扱いしてしまう。該当2件はqueueから削除済み(347→345)。
       **この事故により、これまでの「約20県→約12県まで縮小した」というギャップ試算の信頼性も
       疑わしい**（ledger側で既に接触済みの組織が、queue側の`moshi-`プレフィックスに現れない形で
-      他にも存在する可能性が高いため）。次回のN3-1継続は、新候補を見つけるたびに
-      **queue+ledger両方のorg名/ドメイン確認**を徹底したうえで再度ギャップを見直すこと。
+      他にも存在する可能性が高いため）。
       唯一の正味の新規追加は熊本県模試(熊本ゼミナール・ledger/queue両方で重複無し確認済み)のみで、
       これはelectronic channel非対応のためexcludedであり実質的な前進は無かった。
+
+      **2026-08-30さらに続き: `scripts/check-outreach-dedup.mjs`を新設し、queue+ledger両方を
+      機械的に横断検索して47県の正確な網羅状況を洗い直した。** 結果、既存の`moshi-`プレフィックス
+      (queue)だけでは見えていなかったledger側の10件超が発見され、想定より遥かに多くの県が
+      **既にcontact済み(queueかledgerのいずれかに存在)**と判明した：
+      新潟(t-moshi)・愛媛(kenmoshi)・岐阜(gakuyu/moshi-gakuyu-mie兼務)・静岡(moshi-shizuoka-moshi)・
+      兵庫(moshi-syogakusya-hyogo)・茨城(moshi-ibatou-ibaraki)・三重(moshi-gakuyu-mie)・
+      **奈良(moshi-fujii-nara＝藤井書房)**・岡山(おかもし＝中央教育研究所＝OL-0830と同一法人)・
+      **香川(かとうもし＝同じく中央教育研究所＝OL-0830と同一法人)**・**九州5県(福岡/大分/佐賀/
+      長崎/山口＝ブロッサム九州＝moshi-blossoms-kyushuと同一法人)**・**鹿児島+宮崎
+      (鹿児島県教育振興会＝moshi-kagoshima-kyoiku-shinkokai)**・**愛知(教育開発出版株式会社＝
+      moshi-kyoiku-kaihatsu-shuppanと同一法人・愛知全県模試を運営)**。
+      queue(`moshi-`+関連34件)とledger(模試系11件)を都道府県にマッピングし直した結果、
+      **接触済み(queueまたはledgerに何らかの形で存在)は北海道/青森/岩手/宮城/秋田(❌後述)/山形/
+      福島/茨城/栃木/群馬/埼玉/千葉/東京(Wもぎ広域)/神奈川/新潟/富山/山梨/岐阜/静岡/愛知/三重/
+      京都(五ツ木広域)/大阪/兵庫/奈良/和歌山/鳥取/岡山/広島/山口/徳島(❌後述)/香川/愛媛/高知/
+      福岡/佐賀/長崎/熊本(excluded)/大分/宮崎/鹿児島/沖縄の計40県相当**。
+      **真に未着手なのは石川・福井・長野・滋賀・島根・徳島・秋田の7県のみ**（急上表記のうち
+      徳島・秋田はブロッサム/宮城新教育等の広域カバー範囲に実は入っていない可能性が高く要再確認）。
+      次回のN3-1継続はこの7県から着手すること（それ以外の40県は再調査不要）。
 - [x] `data/outreach-queue.json` に `lane: 'b2b-saas'` で追加する
       ✅正味1件のみ: `moshi-kumazemi-kumamoto`(excluded・channel enum非対応)。
       重複と判明した2件(`moshi-katomoshi-kagawa`/`moshi-blossoms-kyushu`)はqueueから削除済み
