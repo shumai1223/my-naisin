@@ -126,12 +126,12 @@ L321 sapuri-banner-300 / L552 shoin-banner）。**にもかかわらず73日間�
       本タスク(M1-3)の範囲外として着手せず、`ops/tasks/T-M1-affiliate-ctr.md`に次の課題として
       明記するに留める（👤判断 or 次周回への引き継ぎ）
 
-### M1-3b【次点・未着手】トップページ4箇所へcta_view計装を追加する
+### M1-3b トップページ4箇所へcta_view計装を追加する
 
-- [ ] `src/app/page.tsx`の4箇所の`AffiliateAd`（L151/152/321/552）に
-      `trackView viewPlacement="home"`を追加する（オファー・配置・枚数は一切変えない、計測のみの追加）
+- [x] `src/app/page.tsx`の4箇所の`AffiliateAd`（L151/152/321/552）に
+      `trackView viewPlacement="home"`を追加した ✅2026-08-29（オファー・配置・枚数は無変更・計測のみ追加）
 - [ ] 追加後1〜2週間、GA4の`customEvent:placement='home'`の`cta_view`件数を定点観測し、
-      GSC実測（トップ7日114impression相当）と桁が近づくかを確認する
+      GSC実測（トップ7日114impression相当）と桁が近づくかを確認する（目安2026-09-05以降・T-R1週次に追加）
 - [ ] 桁が近づけば「表示はされているが押されていない」＝オファー/訴求の問題として次の施策へ、
       桁が近づかなければ「そもそも視認されずに離脱している」＝配置(スクロール到達点)の問題として
       別施策へ、それぞれ切り分けて判断する
