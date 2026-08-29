@@ -129,6 +129,14 @@ fukuoka2件）。いずれも1件ずつ`src/data/schools/*.ts`の実データと
       実データ突合で回収済み（`SCHOOL_NAME_ALIASES_BY_PREFECTURE`に追加。kyotoは競争率データ側の誤った
       「独立校」コメントも訂正しdepartment不整合をjestで検知・修正）。加えてsaga「嬉野」も回収（10件目）。
       残る19件は下記の**根本原因判明**により個別PDF裏取りではなく突合アルゴリズム側の設計課題と判明
+- [x] **残る19件も完全解消（2026-08-29 11:xx完了）**: `school-name-match.ts`の`candidateNormalizedNames`を
+      strong（②③相当の確定候補）/weak（①除去形・同名県立校と衝突しうる弱い候補）に分離し、
+      `matchSchoolNameToCode`をstrong優先→strongが0件の時のみweakへフォールバックする2段階判定に変更。
+      kyoto市立紫野等、①でしか一致しない実在の表記は壊さず維持（weak単独一致は引き続きmatched扱い）。
+      `scripts/check-school-name-gaps.mjs`の実行で漏れ**19件→0件（47県対象・完全解消）**を確認。
+      `school-name-match.test.ts`の既存「県立市立衝突はambiguous」テストは実データ(hiroshima2件が
+      まさにこの形)に基づき「県立側に一意確定」へ更新し、strong同士の衝突は引き続きambiguousのまま
+      であることの回帰テストも追加。tsc実exit0・フルjest350suites6094tests green。
 
 #### 🔍 残る19件の根本原因（2026-08-29判明・アルゴリズムの構造的な衝突であって「データが読めない」わけではない）
 

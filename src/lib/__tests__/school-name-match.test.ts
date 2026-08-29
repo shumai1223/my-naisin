@@ -122,12 +122,39 @@ describe('matchSchoolNameToCode', () => {
       expect(result.reason).toBe('matched');
     });
 
-    test('県立と市立で同名の学校が実在する場合は、どちらの表記で入力してもambiguousのまま(誤紐付け防止)', () => {
+    // 2026-08-29判明・修正(T-S1残り19件): 当初は「県立と市立で同名の学校が実在する場合はambiguousのまま」
+    // という仕様だったが、chiba/hyogo/gunma/saitama/hiroshima/kanagawa/ishikawa/nagano/gifu/wakayamaの
+    // 19件を実データ監査したところ、競争率データ側は市立校をこの①除去形(市名だけ落とした短縮形)では
+    // 一度も表記しないと判明した(常に②③相当のフルネーム/「市立」付きで区別)。①除去形はstrong候補では
+    // なくweak候補(strongで0件の時のみ試すフォールバック)に格下げしたため、県立校側はstrong一致で
+    // 一意に確定する(市立校側は①でしかヒットしないため候補にすら挙がらない)。
+    test('県立と市立で同名の学校が実在する場合、①除去形(weak)でしか衝突しない市立校側は無視し県立校側に一意確定する(2026-08-29修正)', () => {
       const collidingMaster: SchoolRecord[] = [
         rec('E1', '広島県立広島工業高等学校'),
         rec('E2', '広島市立広島工業高等学校'),
       ];
-      expect(matchSchoolNameToCode('広島工業', collidingMaster).reason).toBe('ambiguous');
+      const result = matchSchoolNameToCode('広島工業', collidingMaster);
+      expect(result.matchedCode).toBe('E1');
+      expect(result.reason).toBe('matched');
+    });
+
+    // 市立校側の正式な短縮表記("広島市立広島工業")を入力した場合は、当然市立校に一意確定する
+    // (strong候補同士で衝突しないことの確認)。
+    test('市立校側の正式な短縮表記を入力すれば市立校に一意確定する(strong同士は衝突しない)', () => {
+      const collidingMaster: SchoolRecord[] = [
+        rec('E1', '広島県立広島工業高等学校'),
+        rec('E2', '広島市立広島工業高等学校'),
+      ];
+      const result = matchSchoolNameToCode('広島市立広島工業', collidingMaster);
+      expect(result.matchedCode).toBe('E2');
+      expect(result.reason).toBe('matched');
+    });
+
+    // strong候補同士(県立校自身の正規化形どうし)が本当に衝突する場合は、引き続きambiguousのまま
+    // (誤った紐付けをしない設計そのものは維持されていることの回帰テスト)。
+    test('strong候補同士が衝突する場合は引き続きambiguousのまま(誤紐付け防止は維持)', () => {
+      const collidingMaster: SchoolRecord[] = [rec('C1', '東京都立大森高等学校'), rec('C2', '東京都立大森高校')];
+      expect(matchSchoolNameToCode('大森', collidingMaster).reason).toBe('ambiguous');
     });
 
     // 2026-08-02判明(2回目): niigata/aichiは市名も省いて「市立」だけ残す第3の流儀を使う。
