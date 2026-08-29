@@ -221,6 +221,96 @@ export default function GakushuSeisekiPage() {
               ※ 学習成績概評は、同一学年生徒全員の3か年間における全体の学習成績の状況をもとに、高等学校が付与するものです。
               このツールは参考値として同じ区分表を用いて表示しています。
             </p>
+            <p className="mt-3 text-xs text-slate-500 leading-relaxed">
+              ※ 学習成績概評はA〜Eの5段階のみです。「特に優秀な者に上位区分を追加できる」旨の規定を見かけることがありますが、
+              現行の実施要項（下記出典）の本文にも調査書の様式にもその記載は確認できません。
+              古い年度の実施要項に基づく情報が更新されないまま残っている可能性があるため、当ページでは現行の要項に記載のある内容のみを掲載しています。
+            </p>
+          </section>
+
+          {/* 調査書の全体像（学習成績の状況以外の記載欄） */}
+          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <h2 className="mb-2 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
+              調査書は「学習成績の状況」以外に何が書かれているか
+            </h2>
+            <p className="mb-4 text-sm leading-relaxed text-slate-700">
+              大学入学者選抜の調査書（別紙様式1）は1枚の中に9つの記載区分があり、「学習成績の状況」はそのうちの1つに過ぎません。
+              残り8区分は、このツールが計算する数値には一切影響しませんが、調査書全体としては志願者の能力・意欲・適性等を
+              多面的・総合的に評価するための材料として使われます。以下、様式の構成をそのまま解説します。
+            </p>
+            <div className="space-y-4 text-sm leading-relaxed text-slate-700">
+              <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+                <h3 className="font-bold text-slate-800 mb-1">5. 総合的な探究の時間の記録</h3>
+                <p>
+                  「学習活動」「観点」「評価」の3列で構成されます。⚠️令和4年度以前の実施要項では
+                  「総合的な<strong>学習</strong>の時間」という名称でしたが、現行の実施要項（8文科高第318号）では
+                  新しい学習指導要領に対応した「総合的な<strong>探究</strong>の時間」に変わっています。
+                  職業教育を主とする専門学科で「課題研究」等の履修によって代替した場合や、
+                  理数科で「理数探究基礎」「理数探究」の履修によって代替した場合は、この欄に斜線が引かれます。
+                </p>
+              </div>
+              <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+                <h3 className="font-bold text-slate-800 mb-1">6. 特別活動の記録</h3>
+                <p>
+                  「ホームルーム活動」「生徒会活動」「学校行事」の3項目について、各学校が設定した観点に照らして
+                  十分に満足できる活動状況にあると判断される場合に、学年ごと（第1〜第4学年）に○印が記入される表です。
+                  部活動の実績はここではなく、次の「指導上参考となる諸事項」で扱われます。
+                </p>
+              </div>
+              <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+                <h3 className="font-bold text-slate-800 mb-1">7. 指導上参考となる諸事項</h3>
+                <p>
+                  生徒の特徴・特技や学校外の活動等について、学習指導等を進めていく上で必要な情報として精選して記入される欄です。
+                  記入する内容が無い場合はその旨が明示され、複数の学年を通じた記入が適当である場合は各学年ごとの記入を要しません。
+                  留学に該当する場合は留学期間・留学先の国名・学校名も、この欄に記入されます。
+                </p>
+              </div>
+              <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+                <h3 className="font-bold text-slate-800 mb-1">9. 出欠の記録</h3>
+                <p>
+                  学年ごとに「授業日数」「出席停止・忌引き等の日数」「留学中の授業日数」「出席しなければならない日数」
+                  「欠席日数」「出席日数」「備考」を記載します。指導要録の当該欄の記載事項をそのまま転記するものとされており、
+                  高等学校が独自に加工・要約することはありません。
+                </p>
+              </div>
+            </div>
+            <p className="mt-4 text-xs text-slate-500 leading-relaxed">
+              ※ 8・9欄以外に「1. ふりがな・氏名等」「2. 各教科・科目等の学習の記録」「3. 各教科の学習成績の状況／全体の学習成績の状況」
+              「4. 学習成績概評」「8. 備考」の計9区分で様式1枚が構成されています。
+            </p>
+          </section>
+
+          {/* 「評定平均」から「学習成績の状況」への名称変更の経緯 */}
+          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <h2 className="mb-3 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
+              なぜ「評定平均」ではなく「学習成績の状況」と呼ぶのか
+            </h2>
+            <p className="mb-3 text-sm leading-relaxed text-slate-700">
+              世間では「評定平均」「評定平均値」という呼び方が広く定着していますが、これは大学入試の実務上の通称であり、
+              文部科学省が定める公式名称ではありません。令和3年度以降の大学入学者選抜実施要項および調査書の様式では、
+              一貫して「学習成績の状況」という表記が使われています。
+            </p>
+            <blockquote className="border-l-4 border-emerald-400 bg-emerald-50 p-4 text-sm italic leading-relaxed text-slate-700">
+              「『学習成績概評』の欄は、高等学校における同一学年生徒全員（中略）の3か年間における全体の学習成績の状況を
+              次の区分に従って、A、B、C、D、Eの5段階に分け、その生徒の属する成績段階を記入すること。」
+            </blockquote>
+            <p className="mt-3 text-xs text-slate-500">
+              出典：文部科学省「令和9年度大学入学者選抜実施要項」（令和8年5月27日付け8文科高第318号文部科学省高等教育局長通知）
+              調査書記入上の注意事項等について 9(1)
+              <a
+                href="https://www.mext.go.jp/content/20260529-mxt_daigakuc02-000005144_1.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ml-1 text-emerald-700 underline"
+              >
+                原文PDF
+              </a>
+            </p>
+            <p className="mt-3 text-sm leading-relaxed text-slate-700">
+              通知本文・調査書様式のいずれにも「評定平均」という語は一度も登場しません。「評定平均」は指導要録の評定を
+              単純に平均するという計算方法をそのまま言い表した通称で、指す内容自体は「学習成績の状況」と同じです。
+              進路指導の現場や受験情報サイトでは今も旧称が広く使われているため、両方の呼び方を知っておくと混乱しません。
+            </p>
           </section>
 
           {/* 相互リンク */}
