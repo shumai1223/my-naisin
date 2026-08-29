@@ -289,7 +289,9 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // 送信済み(ledgerにOL-08xx等として記録済み)なのにqueue側がqueuedのまま更新漏れだった27件を発見。
     // 放置すると将来のセッションが既送信先へ二重に下書き/フォーム送信するリスクがあったため
     // queueから削除(191→164)。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(164);
+    // 2026-08-30: T-N1-N4 N3-1(地域模試の買い手リスト拡張)で株式会社ブロッサム九州
+    // (福岡県一斉模試/九州一斉模試・福岡/大分/佐賀/長崎/山口をカバー)を新規追加(164→165)。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(165);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {

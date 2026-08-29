@@ -5052,6 +5052,34 @@
       "excludeReason": "contactClass判定不能(B2B/consumer分離signalなし)のため送信対象外。C1原則により推測でb2bと判定しない",
       "sourceDoc": "ops/tasks/T-N1-N4-revenue-ceiling.md#N3-1",
       "addedAt": "2026-08-30"
+    },
+    {
+      "id": "moshi-blossoms-kyushu",
+      "org": "株式会社ブロッサム九州(株式会社ブロッサムズ・福岡県一斉模試/九州一斉模試)",
+      "lane": "b2b-saas",
+      "channel": "email",
+      "contact": "kyushu@blossoms.co.jp",
+      "contactClass": "b2b",
+      "evidence": "公式サイト(blossoms.co.jp)の「ご注文・お問い合わせ」ページを直接curlで確認。塾・学校向けの模試教材の注文窓口(FAX注文書+メール注文)としてブロッサム九州(対応エリア:九州・山口)のkyushu@blossoms.co.jpが明記されており、個人受験者向けの別窓口は存在しない(サイト全体が学校・塾向けB2B commerce)。「福岡県一斉模試」「九州一斉模試」ページ(q-mosi.jp)で福岡/大分/佐賀/長崎/山口の一斉模試を実施していることを確認",
+      "verifiedAt": "2026-08-30",
+      "status": "queued",
+      "addedAt": "2026-08-30",
+      "sourceDoc": "ops/tasks/T-N1-N4-revenue-ceiling.md#N3-1",
+      "subject": "福岡県一斉模試のご案内掲載について（My Naishin）",
+      "body": "株式会社ブロッサム九州 ご担当者様\n\n突然のご連絡失礼いたします。中学生向け内申点・偏差値計算サイト「My Naishin」(https://my-naishin.com) を運営しております、現役中学生エンジニアのしゅうまいと申します。\n\n貴社が実施されている「福岡県一斉模試」(九州一斉模試)は、福岡・大分・佐賀・長崎・山口の中学生の進路選択を支える重要な機会だと拝見しました。\n\n当サイトは公立高校入試の内申点計算・総合得点計算を教育委員会の一次資料に基づいて無料提供しており、中学生・保護者が「今の内申点で合格ラインに届くか」を調べる際にご利用いただいています。\n\n計算結果を見た受験生の多くが「次に何を受ければよいか」で立ち止まる傾向があり、貴社のような地域に根ざした一斉模試のご案内を計算結果ページでご紹介することで、貴社にとっては受験者の新たな認知経路に、当サイトにとっては受験生の次の一歩を示せる形になるのではと考えご連絡いたしました。\n\nデータの売買という形ではなく、当サイトの計算結果ページから貴社模試への送客経路を作る形の連携を想定しております。ご興味があれば、詳細を15分ほどお話しできればと思います。\n\n引き続きよろしくお願いいたします。\n\nしゅうまい\nMy Naishin 運営\nnaishin.dev@gmail.com\nhttps://my-naishin.com\n"
+    },
+    {
+      "id": "moshi-kumazemi-kumamoto",
+      "org": "熊本ゼミナール(県模試事務局・熊本県模試)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contactClass": "unknown",
+      "evidence": "県模試専用ページ(kumazemi.jp/kenmoshi/)のフッター問い合わせ欄には電話番号(096-360-6711)のみ記載でメール・フォームの記載なし。本体サイト(kumazemi.jp)トップページにも問い合わせ・お問い合わせ関連リンクが見当たらず、channel enum(line/email/form)に対応する窓口を確認できなかった",
+      "verifiedAt": "2026-08-30",
+      "status": "excluded",
+      "excludeReason": "電話番号のみでchannel enum(line/email/form)非対応のため送信対象外",
+      "addedAt": "2026-08-30",
+      "sourceDoc": "ops/tasks/T-N1-N4-revenue-ceiling.md#N3-1"
     }
   ]
 }
