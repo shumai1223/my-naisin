@@ -30,11 +30,16 @@ describe('2026-r8 exam-system snapshot（T-N1-1 凍結スナップショット�
     }
   });
 
-  test('pdfHashは全件null(未収集を偽らない・N1-1の既知の未完了)', () => {
-    expect(snapshot.meta.pdfHashStatus).toBe('not_yet_collected');
-    for (const entry of snapshot.entries) {
-      expect(entry.pdfHash).toBeNull();
+  test('pdfHashはsourceUrlが直接PDFの6県のみ取得済み・64桁16進のSHA-256形式(未収集を偽らない)', () => {
+    expect(snapshot.meta.pdfHashStatus).toBe('partial_6_of_47');
+    const withHash = snapshot.entries.filter((e) => e.pdfHash !== null);
+    expect(withHash).toHaveLength(6);
+    for (const entry of withHash) {
+      expect(entry.pdfHash).toMatch(/^[0-9a-f]{64}$/);
+      expect(entry.sourceUrl.toLowerCase().endsWith('.pdf')).toBe(true);
     }
+    const withoutHash = snapshot.entries.filter((e) => e.pdfHash === null);
+    expect(withoutHash).toHaveLength(41);
   });
 
   test('凍結メタデータに生成日・凍結ポリシーが明記されている', () => {

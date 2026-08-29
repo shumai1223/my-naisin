@@ -80,12 +80,18 @@ source-history.ts の90スナップショット → 全て2026-07/08取得
 
 - [x] `src/lib/prefectures.ts` の制度データを **機械比較可能な正規形**に落とす
       （人間向けの記述文ではなく、フィールド化された構造）✅2026-08-30 `scripts/freeze-exam-snapshot.ts`
-- [ ] 47県 × 令和8年度の一次ソースURL＋**PDFのハッシュ**を記録する
+- [x] 47県 × 令和8年度の一次ソースURL＋**PDFのハッシュ**を記録する
       → PDFが差し替わったことを検知できるようにする
-      ⚠️**未完了**: `pdfHash`フィールドは用意したが全件`null`（47件分の外部フェッチが必要なため別イテレーション行き。捏造回避のため空のまま正直に残した）
+      🟡**部分完了(2026-08-30)**: `sourceUrl`が直接PDFリンクの6県(yamagata/fukushima/tochigi/niigata/
+      ishikawa/tokushima)は`curl --ssl-no-revoke`で取得しNode `crypto`でSHA-256を計算・記録済み。
+      残り41県は`sourceUrl`がポータル/HTMLページのため実際のPDF URL特定が別途必要(N1-2と同種の
+      重い作業)。**9/08〜9/22の👤不在期間にN1-2と合わせて着手予定**、それまでは`null`のまま正直に残す
 - [x] `src/data/snapshots/2026-r8/` として**凍結**する（以後このディレクトリは書き換え禁止）✅2026-08-30・`exam-system.json`(47件)+`README.md`
+      （凍結後の書き換え禁止は制度データ本体に適用。pdfHash等の未収集フィールドへの追記は
+      別イテレーションでの継続作業として許容される設計・README.md参照）
 - [x] 凍結の完全性テスト: 47県すべてが揃っていること・各県に出典URLがあること
-      ✅`src/lib/__tests__/exam-system-snapshot.test.ts`(6 tests green・fiscalYear/sourceUrl必須・maxScore>0・pdfHash全件null検証込み)
+      ✅`src/lib/__tests__/exam-system-snapshot.test.ts`(6 tests green・fiscalYear/sourceUrl必須・maxScore>0・
+      pdfHash6/47件+形式検証込み)
 
 **⚠️ これが T-N1 の中で唯一「今日やらないと来年取り返せない」タスク。最優先。** → **本体(正規形+凍結+完全性テスト)は2026-08-30に完了。残るPDFハッシュ収集は別イテレーションで着手する。**
 

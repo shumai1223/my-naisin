@@ -5,8 +5,9 @@
     "frozenBy": "scripts/freeze-exam-snapshot.ts (T-N1-1)",
     "sourceOfTruth": "src/lib/prefectures.ts (この日付時点のスナップショット)",
     "prefectureCount": 47,
-    "pdfHashStatus": "not_yet_collected",
-    "freezePolicy": "本ディレクトリは生成後に書き換え禁止。prefectures.tsが後日修正されても本ファイルは追随させない。来年度の差分エンジン(N1-3)の基準点として使う。"
+    "pdfHashStatus": "partial_6_of_47",
+    "freezePolicy": "本ディレクトリは生成後に書き換え禁止。prefectures.tsが後日修正されても本ファイルは追随させない。来年度の差分エンジン(N1-3)の基準点として使う。",
+    "pdfHashNote": "47件中6件(sourceUrlが直接PDFリンクの県)のみSHA-256を取得済み(2026-08-30)。残り41件はsourceUrlがポータル/HTMLページで実際のPDF URLを個別に特定する必要があり、N1-2(前年度収集)と合わせて9/08-22に着手予定。"
   },
   "entries": [
     {
@@ -179,7 +180,7 @@
       "sourceUrl2": "https://czemi.benesse.ne.jp/open/nyushi/exam/06/feature/1273769_3744.html",
       "sourceTitle": "山形県教育委員会 入学者選抜",
       "lastVerified": "2026-04-22",
-      "pdfHash": null
+      "pdfHash": "173feb65bfcc713ad282f38fdc848562d59871bb4f22b815a1643efe2ee75ea2"
     },
     {
       "code": "fukushima",
@@ -208,7 +209,7 @@
       "sourceUrl2": "https://czemi.benesse.ne.jp/open/nyushi/exam/07/feature/1273769_3744.html",
       "sourceTitle": "福島県 県立高等学校入学者選抜実施要綱",
       "lastVerified": "2026-07-16",
-      "pdfHash": null
+      "pdfHash": "5bc167399df43d4300e0a4961255498b56acc704174f379db588bb17be94097e"
     },
     {
       "code": "ibaraki",
@@ -266,7 +267,7 @@
       "sourceUrl2": "https://jyuke-labo.com/koukoujyukentaisaku/tochigi/",
       "sourceTitle": "栃木県教育委員会 入学者選抜実施細則",
       "lastVerified": "2026-07-16",
-      "pdfHash": null
+      "pdfHash": "b2e22f255f1eb6910e1727e5f434d7bcbf58adfd76f6af1bc503faf09f383ab5"
     },
     {
       "code": "gunma",
@@ -465,7 +466,7 @@
       "sourceUrl2": "https://czemi.benesse.ne.jp/open/nyushi/exam/15/naishin/",
       "sourceTitle": "新潟県 公立高等学校入学者選抜要項",
       "lastVerified": "2026-07-16",
-      "pdfHash": null
+      "pdfHash": "30bae57abd1f0278969052218f4f7a0b8cc989ad7c7363fcabd27baa48d1bf4b"
     },
     {
       "code": "toyama",
@@ -522,7 +523,7 @@
       "sourceUrl2": "https://www.deskstyle.info/eria/ishikawa/juken.html",
       "sourceTitle": "石川県教育委員会 公立高等学校入学者募集要綱",
       "lastVerified": "2026-08-05",
-      "pdfHash": null
+      "pdfHash": "c6dc08bac30fa8b1579b00d25dbe7a13abd7228f7091bb56b0d80347f6a73c33"
     },
     {
       "code": "fukui",
@@ -1171,7 +1172,7 @@
       "sourceUrl2": "https://czemi.benesse.ne.jp/open/nyushi/exam/36/naishin/",
       "sourceTitle": "徳島県教育委員会 公立高等学校生徒募集選抜要項",
       "lastVerified": "2026-07-16",
-      "pdfHash": null
+      "pdfHash": "a57b8051322bf60636490e986a0d3075c9dd172ef3024f7e7c7f48bccafb0bcb"
     },
     {
       "code": "kagawa",
