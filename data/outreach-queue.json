@@ -5038,6 +5038,20 @@
       "addedAt": "2026-08-23",
       "sourceDoc": "ops/tasks/T-C1-b2b-target-list.md#lane8",
       "excludeReason": "独立した組織サイトが存在せず県担当課の電話窓口案内のみ"
+    },
+    {
+      "id": "moshi-katomoshi-kagawa",
+      "org": "中央教育研究所株式会社（かとうもし事務局）",
+      "lane": "b2b-saas",
+      "channel": "email",
+      "contact": "kagawa@c-moshi.net",
+      "contactClass": "unknown",
+      "evidence": "サイト全体の唯一の問い合わせ窓口(お問い合せ先: kagawa@c-moshi.net)は「香川県統一模擬試験に関するお問い合せ先」という汎用の表記のみで、法人(塾)向けと個人受験者向けの窓口分離が確認できない。別途「塾様専用サイトへ」のリンク(moshi-data.net/kagawa)があるがログイン専用ポータル(既存契約塾のみ)で新規の事業提携相談窓口ではない",
+      "verifiedAt": "2026-08-30",
+      "status": "excluded",
+      "excludeReason": "contactClass判定不能(B2B/consumer分離signalなし)のため送信対象外。C1原則により推測でb2bと判定しない",
+      "sourceDoc": "ops/tasks/T-N1-N4-revenue-ceiling.md#N3-1",
+      "addedAt": "2026-08-30"
     }
   ]
 }
