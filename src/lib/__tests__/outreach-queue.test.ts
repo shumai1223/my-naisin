@@ -296,7 +296,15 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // 2026-08-30続き: N3-1で新規発見した秋田県高校入試研究協会(moshi-akita-koukounyushi)を
     // queue+ledger両方で重複なし確認の上、フォーム項目(学習塾・企業・団体名欄)の直接確認まで
     // 行いqueuedへ追加(164→165)。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(165);
+    // 2026-08-30さらに続き: 08-29の27件削除は「org完全一致」監査だったが、それとは別に
+    // 「queue側は括弧付き詳細説明・ledger側は括弧無し短縮名」という表記ゆれのため完全一致監査を
+    // すり抜けていた重複48件を、括弧を除いた短縮名で突合する監査により新たに発見・excludedへ変更
+    // (165→117)。発覚経緯: B2Bフォーム打診のCowork指示書を7バッチ84件生成した直後の品質確認で、
+    // org名の短縮名がoutreach-ledger.jsonと一致する候補が多数あることに気づいた。原因は
+    // 2026-08-27のCowork第4-6弾(👤が個別送信・ledgerにOL-0813〜OL-0887として記録)がqueue側の
+    // 該当エントリを削除しないまま完了していたこと。既存の重複検出テスト(下記)がorg完全一致のみで
+    // 短縮名一致を見ていなかったため9日間気づかれずにいた。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(117);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {
@@ -345,6 +353,29 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
 
     const queuedNoDraft = raw.entries.filter((e) => e.status === 'queued' && !e.draftId);
     const alreadySent = queuedNoDraft.filter((e) => ledgerOrgs.has(e.org)).map((e) => e.id);
+    expect(alreadySent).toEqual([]);
+  });
+
+  /** 括弧内の補足説明を除いた組織名の先頭部分。queue側は詳細説明付き・ledger側は短縮名で
+   *  記録される表記ゆれがあるため、完全一致では捕まえられない重複を検出するための正規化。 */
+  function orgShortName(org: string): string {
+    return org.split('(')[0].split('（')[0].trim();
+  }
+
+  it('queued(下書き未作成)のorg短縮名もdata/outreach-ledger.jsonに送信済みとして記録されていない' +
+    '(2026-08-30: 括弧付き詳細説明と括弧無し短縮名の表記ゆれで完全一致監査をすり抜けていた48件の再発防止。' +
+    '2026-08-27のCowork第4-6弾送信後、queue側が括弧付きのまま削除されずledger側は短縮名で記録されたため' +
+    '完全一致テストだけでは9日間検知できなかった)', () => {
+    const ledgerRaw = JSON.parse(
+      fs.readFileSync(path.join(process.cwd(), 'data', 'outreach-ledger.json'), 'utf8')
+    ) as { entries: Array<{ org: string }> } | Array<{ org: string }>;
+    const ledgerEntries = Array.isArray(ledgerRaw) ? ledgerRaw : ledgerRaw.entries;
+    const ledgerShortNames = new Set(ledgerEntries.map((e) => orgShortName(e.org)));
+
+    const queuedNoDraft = raw.entries.filter((e) => e.status === 'queued' && !e.draftId);
+    const alreadySent = queuedNoDraft
+      .filter((e) => ledgerShortNames.has(orgShortName(e.org)))
+      .map((e) => e.id);
     expect(alreadySent).toEqual([]);
   });
 });
