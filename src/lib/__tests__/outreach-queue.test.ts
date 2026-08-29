@@ -311,7 +311,10 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // 宛先企業名で送信することになるためexcludedへ変更(117→116)。
     // 2026-08-30最後: career-mynavi-koshien-teacher(株式会社マイナビ)のフォームURLが3回連続で
     // HTTP408(タイムアウト)となり生存確認できないままだったためexcludedへ変更(116→115)。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(115);
+    // 2026-08-30さらに: 「窓口不一致」で見送られていたjuku-yarukiswitch-advertisement(やる気スイッチ
+    // グループHD)を、正しい窓口(/inquiry/other/=その他のお問い合わせ)を再調査で発見しqueuedへ復帰
+    // (115→116)。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(116);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {
