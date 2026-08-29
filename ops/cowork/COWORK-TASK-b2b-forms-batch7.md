@@ -14,6 +14,17 @@
 - ❌9. 株式会社バレクセル（送信済み・OL-0887）
 - ❌11. 株式会社RECT（送信済み・edtech-teachersmarket＝ledger側でも同一idのまま記録）
 
+## ⚠️⚠️⚠️2026-08-30さらに訂正: 番号12「株式会社メディアシーク」は宛先企業名が誤りでした。対応しないでください ⚠️⚠️⚠️
+
+「マイクラス」(my-class.jp)の運営会社は**株式会社メディアシークではなくSolvvy株式会社**です
+（過去のWebSearch要約が誤って株式会社メディアシークと帰属していたことが`data/outreach-queue.json`の
+別エントリで既に判明・訂正済みでした）。本文12のまま送信すると、実際にはSolvvy株式会社が運営する
+フォームに「株式会社メディアシーク ご担当者様」と誤った宛名で送ることになります。
+**番号12は対応不要です**（`data/outreach-queue.json`のedtech-mediaseek-myclassをexcludedへ訂正済み）。
+正しい窓口（Solvvy株式会社・solvvy.co.jp/contact/corporate/）は別途batch8で対応予定です。
+
+**結果、このbatch7で対応いただくのは番号1・4・5・7・10の5件のみです。**
+
 ## 背景
 
 My Naishin（my-naishin.com）は中学生・保護者向けの公立高校入試の内申点・偏差値計算ツールサイトです。

@@ -304,7 +304,12 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // 2026-08-27のCowork第4-6弾(👤が個別送信・ledgerにOL-0813〜OL-0887として記録)がqueue側の
     // 該当エントリを削除しないまま完了していたこと。既存の重複検出テスト(下記)がorg完全一致のみで
     // 短縮名一致を見ていなかったため9日間気づかれずにいた。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(117);
+    // 2026-08-30もう1件: edtech-mediaseek-myclass(株式会社メディアシーク)は、実際には「マイクラス」
+    // (my-class.jp)の運営会社ではなく、過去のWebSearch要約による誤帰属だったと判明(正しい運営会社は
+    // 別エントリedtech-solvvy-myclassのSolvvy株式会社・queue内の別エントリ自身のevidenceで既に訂正済み
+    // だったが、誤った旧エントリがexcludedにされないままqueuedで残っていた)。このまま送ると実在しない
+    // 宛先企業名で送信することになるためexcludedへ変更(117→116)。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(116);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {
