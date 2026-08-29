@@ -148,8 +148,8 @@ export default function Page() {
           {/* PR ストリップ：コラム読了後のフック */}
           <div className="mt-6 rounded-2xl border border-blue-100 bg-blue-50/60 px-5 py-4 text-center">
             <div className="text-xs text-slate-700">
-              <AffiliateAd placement="home" id="zkai-text-middle" hideLabel />（PR）の通信教育で内申＋偏差値を伸ばす。まずは
-              <AffiliateAd placement="home" id="zkai-text-request" hideLabel />（PR）で詳細を確認。
+              <AffiliateAd placement="home" id="morijuku-text" hideLabel />（PR）で内申＋偏差値を伸ばす。あるいは
+              <AffiliateAd placement="home" id="zkai-text-request" hideLabel />（PR）の通信教育で詳細を確認。
             </div>
           </div>
         </div>

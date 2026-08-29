@@ -196,10 +196,10 @@ export default function GlossaryClient() {
             用語を理解したら、実践へ
           </div>
           <div className="text-xs text-slate-500 mb-4 leading-relaxed">
-            内申点アップに直結する学習なら<AffiliateAd placement="glossary" id="zkai-text-middle" hideLabel />（PR）。テキスト＋添削で得点力を底上げ。
+            内申点アップに直結する学習なら<AffiliateAd placement="glossary" id="campus-text" hideLabel />（PR）。無料体験でまずは相性を確認。
           </div>
           <div className="hidden md:block">
-            <AffiliateAd placement="glossary" id="zkai-banner" />
+            <AffiliateAd placement="glossary" id="campus-banner" />
           </div>
           <div className="md:hidden">
             <AffiliateAd placement="glossary" id="sapuri-banner-300" />

@@ -189,7 +189,7 @@ export default function GuideClient() {
                   制度を学んだ次は、点数アップへ
                 </div>
                 <div className="text-xs text-slate-500 mb-4">
-                  内申点を効率よく上げるには<AffiliateAd placement="guide" id="zkai-text-middle" hideLabel />（PR）が定番の一つ
+                  内申点を効率よく上げるには<AffiliateAd placement="guide" id="morijuku-text" hideLabel />（PR）が定番の一つ
                 </div>
                 <div className="hidden md:block">
                   <AffiliateAd placement="guide" id="sapuri-banner-468" />

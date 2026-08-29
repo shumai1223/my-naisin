@@ -71,13 +71,24 @@ L321 sapuri-banner-300 / L552 shoin-banner）。**にもかかわらず73日間�
 
 ### M1-1【最優先・リスク最小】Z会枠を高EVオファーへ置換
 
-- [ ] 上記8箇所の `zkai-banner` / `zkai-text-middle` を、`affiliate-economics.ts` の
-      **EV（cpaYen × convRate）が高いオファー**へ差し替える
-- [ ] ⚠️ **`zkai-text-request`（資料請求・800円・CVR12% ＝ EV¥96）は残す。**
+- [x] 上記8箇所の `zkai-banner` / `zkai-text-middle` を、`affiliate-economics.ts` の
+      **EV（cpaYen × convRate）が高いオファー**へ差し替える ✅2026-08-29
+- [x] ⚠️ **`zkai-text-request`（資料請求・800円・CVR12% ＝ EV¥96）は残す。**
       Z会でも資料請求型は期待値が20倍違う。**paid種別の `zkai-banner`/`zkai-text-middle` だけを置換する**
-- [ ] 置換先は**面の文脈に合うもの**を選ぶ（塾の無料体験＝`atama-text`/`sora-juku-text` 等）。
+      （`page.tsx`/`HomeClient.tsx`とも隣接する`zkai-text-request`は無変更のまま確認済み）
+- [x] 置換先は**面の文脈に合うもの**を選ぶ（塾の無料体験＝`atama-text`/`sora-juku-text` 等）。
       **全部同じにしない**（1面1オファーに偏らせると比較ができなくなる）
-- [ ] `rankLiveOffersByEV()` が既にあるならそれを使う。無ければ手で選び、選定理由をコメントに書く
+      → 実装: guide=`morijuku-text`／glossary=`campus-text`+`campus-banner`／
+      blog=`sora-juku-text`+`sora-juku-banner`／prefectures=`atama-text`+`atama-banner`／
+      page.tsx=`morijuku-text`／HomeClient=`atama-text`。4銘柄×各2箇所で分散。
+      いずれも`confirmedPer1000`がZ会paid枠（¥1,500/1000click）より2桁高い（free-lead帯）
+- [x] `rankLiveOffersByEV()` が既にあるならそれを使う。無ければ手で選び、選定理由をコメントに書く
+      → 既存関数のEV序列を確認のうえ手動選定（理由は本行とworklogに記録）。
+      ⚠️副次対応: 置換元の周辺プローズがZ会固有の特徴（「テキスト＋添削」「定番教材」「学習教材」
+      「通信教育という選択肢」等）を文字列で直接記述しており、塾系オファー（体験型・教材/通信教育
+      ではない）へ置換すると文言が事実と食い違うため、該当箇所の周辺文も同時に書き換えた
+      （[[fable5-loop-protocol]]の都道府県プローズ手書きドリフト教訓と同根）。`prefectures/page.tsx`は
+      「地域差のない」という既存claimと矛盾しないよう、店舗型ではなくオンラインの`atama-text`を選定。
 
 ### M1-2【本命】学校ページに広告を入れる — **ただし1枠だけ**
 
