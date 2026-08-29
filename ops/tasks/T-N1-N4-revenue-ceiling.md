@@ -259,9 +259,25 @@ MCPサーバーは27ツールで稼働中。
       福岡/佐賀/長崎/熊本(excluded)/大分/宮崎/鹿児島/沖縄の計40県相当**。
       **真に未着手なのは石川・福井・長野・滋賀・島根・徳島・秋田の7県のみ**（急上表記のうち
       徳島・秋田はブロッサム/宮城新教育等の広域カバー範囲に実は入っていない可能性が高く要再確認）。
-      次回のN3-1継続はこの7県から着手すること（それ以外の40県は再調査不要）。
+
+      **2026-08-30さらに続き**: 上記7県のうち3県を新設の`scripts/check-outreach-dedup.mjs`で
+      安全確認しながら調査。
+      - **石川**: 「石川県総合模試」の運営元は`moshi-hokkoku-ishikawa`(一般財団法人北國新聞文化センター)
+        として**既にledgerに存在済み**と判明(新聞社名で「模試」を含まない組織名のためキーワード検索を
+        すり抜けていた)。新規追加不要・**石川は実は接触済み**。
+      - **福井**: 福井新聞社(福井新聞模擬テスト)を新規発見・queue+ledger両方で重複なし確認済み。
+        公式サイトの問い合わせ窓口(`mogitest@fukuishimbun.co.jp`)をcurl生HTML確認したが、法人/個人の
+        分離signalが無くcontactClass='unknown'でexcluded追加(`moshi-fukuishimbun`)。
+      - **長野**: 「なが模試」の運営元は株式会社エデュケーショナルネットワーク(Z会グループ)と判明・
+        queue+ledger両方で重複なし確認済み。問い合わせフォームは個人情報同意ゲートのみでB2B/consumer
+        分離signal未確認のためcontactClass='unknown'でexcluded追加(`moshi-nagamoshi-nagano`)。
+      **石川がledger側に別名(新聞社名)で既に存在していたことから、「模試/コンクール等のキーワードを
+      含む組織名」だけでledgerを検索する手法にも限界があると判明した**（新聞社・出版社系の運営元は
+      社名に模試関連ワードを含まないことが多い）。**残る真の未着手は福井(excluded確定)・長野(excluded確定)・
+      滋賀・島根・徳島・秋田の4県相当**（石川は接触済みへ訂正・福井/長野は調査済みだが対象外）。
 - [x] `data/outreach-queue.json` に `lane: 'b2b-saas'` で追加する
-      ✅正味1件のみ: `moshi-kumazemi-kumamoto`(excluded・channel enum非対応)。
+      ✅正味3件: `moshi-kumazemi-kumamoto`(excluded・channel enum非対応)・
+      `moshi-fukuishimbun`(excluded・contactClass unknown)・`moshi-nagamoshi-nagano`(excluded・contactClass unknown)。
       重複と判明した2件(`moshi-katomoshi-kagawa`/`moshi-blossoms-kyushu`)はqueueから削除済み
 - [x] ⚠️ **既存の283社と重複していないか台帳で突合してから追加**（08-28の4県重複の教訓）
       ⚠️queue側のorg名grepだけでは不十分と判明(上記参照)。ledger側の突合を怠ったため2件が重複のまま

@@ -5051,6 +5051,34 @@
       "excludeReason": "電話番号のみでchannel enum(line/email/form)非対応のため送信対象外",
       "addedAt": "2026-08-30",
       "sourceDoc": "ops/tasks/T-N1-N4-revenue-ceiling.md#N3-1"
+    },
+    {
+      "id": "moshi-fukuishimbun",
+      "org": "福井新聞社(福井新聞模擬テスト)",
+      "lane": "b2b-saas",
+      "channel": "email",
+      "contact": "mogitest@fukuishimbun.co.jp",
+      "contactClass": "unknown",
+      "evidence": "公式サイト(w3.fukuishimbun.co.jp/mogitest/)を直接curlで確認。模擬テストに関する問い合わせ窓口(mogitest@fukuishimbun.co.jp)は登録済み塾経由の申込と非登録者向け専用フォームの2経路を案内する個人受験者向けの説明が中心で、法人(塾)向けと個人向けの明確な窓口分離signalが無くcontactClass判定不能",
+      "verifiedAt": "2026-08-30",
+      "status": "excluded",
+      "excludeReason": "contactClass判定不能(B2B/consumer分離signalなし)のため送信対象外。C1原則により推測でb2bと判定しない",
+      "addedAt": "2026-08-30",
+      "sourceDoc": "ops/tasks/T-N1-N4-revenue-ceiling.md#N3-1"
+    },
+    {
+      "id": "moshi-nagamoshi-nagano",
+      "org": "株式会社エデュケーショナルネットワーク(なが模試・長野県統一模試・Z会グループ)",
+      "lane": "b2b-saas",
+      "channel": "form",
+      "contact": "https://www.moshikai.jp/inquiry/index.php",
+      "contactClass": "unknown",
+      "evidence": "公式サイト(moshikai.jp)の問い合わせページは個人情報保護方針への同意ゲートのみで、法人(塾)向けと個人向けの窓口分離signalを直接確認できなかった(POST遷移後のフォーム項目は未確認)。運営会社は運営会社サイト(e-network.jp)でZ会グループの株式会社エデュケーショナルネットワークと確認",
+      "verifiedAt": "2026-08-30",
+      "status": "excluded",
+      "excludeReason": "contactClass判定不能(B2B/consumer分離signalを確認できず)のため送信対象外。C1原則により推測でb2bと判定しない",
+      "addedAt": "2026-08-30",
+      "sourceDoc": "ops/tasks/T-N1-N4-revenue-ceiling.md#N3-1"
     }
   ]
 }
