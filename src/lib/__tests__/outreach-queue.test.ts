@@ -309,7 +309,9 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // 別エントリedtech-solvvy-myclassのSolvvy株式会社・queue内の別エントリ自身のevidenceで既に訂正済み
     // だったが、誤った旧エントリがexcludedにされないままqueuedで残っていた)。このまま送ると実在しない
     // 宛先企業名で送信することになるためexcludedへ変更(117→116)。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(116);
+    // 2026-08-30最後: career-mynavi-koshien-teacher(株式会社マイナビ)のフォームURLが3回連続で
+    // HTTP408(タイムアウト)となり生存確認できないままだったためexcludedへ変更(116→115)。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(115);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {
