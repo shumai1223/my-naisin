@@ -280,6 +280,41 @@ export default function GakushuSeisekiPage() {
             </p>
           </section>
 
+          {/* 令和9年度からの面接原則必須化 */}
+          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <h2 className="mb-3 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
+              令和9年度から、総合型・学校推薦型選抜は面接が原則必須に
+            </h2>
+            <p className="mb-3 text-sm leading-relaxed text-slate-700">
+              学習成績の状況は調査書に記載される数値の1つですが、それだけで合否が決まるわけではありません。
+              現行の実施要項では、令和9年度大学入学者選抜から、総合型選抜・学校推薦型選抜の両方で面接が
+              原則として必須化されました。
+            </p>
+            <blockquote className="border-l-4 border-emerald-400 bg-emerald-50 p-4 text-sm italic leading-relaxed text-slate-700">
+              「入学志願者の能力・意欲・適性等を多面的・総合的に評価・判定する総合型選抜の趣旨に鑑み、志望する
+              学問分野に対する意欲や適性等に係る面接（ディベート、集団討論、プレゼンテーション、口頭試問等を
+              含む。オンラインによる実施を含む。）による評価を必ず行う。」
+            </blockquote>
+            <p className="mt-3 text-xs text-slate-500 leading-relaxed">
+              出典：文部科学省「令和9年度大学入学者選抜実施要項」（令和8年5月27日付け8文科高第318号）
+              第3 入試方法 1(2)②
+              <a
+                href="https://www.mext.go.jp/content/20260529-mxt_daigakuc02-000005144_1.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ml-1 text-emerald-700 underline"
+              >
+                原文PDF
+              </a>
+            </p>
+            <p className="mt-3 text-sm leading-relaxed text-slate-700">
+              学校推薦型選抜についても同様の面接必須化が定められています。ただし、令和8年度に既に実施されて
+              いた選抜区分のうち面接の導入が難しいものについては、遅くとも令和11年度までの経過措置が設けられて
+              います。学習成績の状況は「出願できるかどうか」の基準として使われることが多い一方、面接は出願後の
+              合否判定に直接関わるため、両方を分けて準備しておく必要があります。
+            </p>
+          </section>
+
           {/* 「評定平均」から「学習成績の状況」への名称変更の経緯 */}
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="mb-3 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
