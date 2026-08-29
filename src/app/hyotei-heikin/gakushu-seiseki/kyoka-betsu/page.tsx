@@ -126,6 +126,39 @@ export default function KyokaBetsuPage() {
             </div>
           </section>
 
+          {/* 教科の区分と「共」「専」表記 */}
+          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <h2 className="mb-3 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
+              「教科」はどう区分されているか
+            </h2>
+            <p className="mb-3 text-sm leading-relaxed text-slate-700">
+              このツールが選択肢に用意している国語・地理歴史・公民・数学・理科・保健体育・芸術・外国語・
+              家庭・情報の10教科は、文部科学省の調査書様式の計算例に実際に登場する区分をそのまま使っています。
+              専門学科（農業・工業・商業など）の科目は、これらとは別に教科ごとの学習成績の状況を算出します。
+            </p>
+            <blockquote className="border-l-4 border-emerald-400 bg-emerald-50 p-4 text-sm italic leading-relaxed text-slate-700">
+              「各教科の学習成績の状況の欄に記載する教科名について、各学科に共通する各教科・主として専門学科
+              において開設される各教科で同一の名称がある場合には、それぞれ「共」・「専」を教科名に併記すること。」
+            </blockquote>
+            <p className="mt-3 text-xs text-slate-500 leading-relaxed">
+              出典：文部科学省「令和9年度大学入学者選抜実施要項」（令和8年5月27日付け8文科高第318号）
+              調査書記入上の注意事項等について8(1)
+              <a
+                href="https://www.mext.go.jp/content/20260529-mxt_daigakuc02-000005144_1.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ml-1 text-emerald-700 underline"
+              >
+                原文PDF
+              </a>
+            </p>
+            <p className="mt-3 text-sm leading-relaxed text-slate-700">
+              つまり、農業科の「農業」のように各学科共通の教科名と専門学科の教科名が重なる場合は、調査書上
+              「農業（共）」「農業（専）」のように区別して2つの学習成績の状況が算出されます。専門学科に在籍していて
+              同名の教科が複数ある場合は、通っている学科でどちらの区分に当たるかを担任の先生に確認してください。
+            </p>
+          </section>
+
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="mb-4 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
               あわせて確認したいツール

@@ -105,7 +105,12 @@
       最終学年成績が「直近の成績を総合し高等学校が判定」される規定(7(4))をblockquote引用し、
       このツールが「残り評価回数を自己入力」方式にしている理由と結びつけて説明。tsc実exit0・
       jestフルスイート355suites6140tests green
-- [ ] `/hyotei-heikin/gakushu-seiseki/kyoka-betsu` — ④中心
+- [x] `/hyotei-heikin/gakushu-seiseki/kyoka-betsu` — ④中心
+      🟡**2026-08-30部分完了**: 「『教科』はどう区分されているか」セクションを追加。ツールが提供する
+      10教科(国語/地理歴史/公民/数学/理科/保健体育/芸術/外国語/家庭/情報)が実際の計算例表と一致することを
+      コンポーネント実装で確認した上で明記、専門学科で教科名が重なる場合の「共」「専」併記規定(8(1))を
+      blockquote引用。tsc実exit0・jestフルスイート355suites6140tests green。
+      これでgakushu-seisekiクラスタ6ページ全てにT-N5の厚み付けを実施完了、残るは/kakomon-jisaitenのみ
 - [ ] `/kakomon-jisaiten` — ⑤（総合得点方式の県別差・prefectures.ts/total-score系の既存データを再利用、新規収集ゼロ）
 
 ## 進め方
