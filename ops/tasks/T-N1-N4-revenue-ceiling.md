@@ -188,14 +188,20 @@ MCPサーバーは27ツールで稼働中。
 **→ 2026-08-30時点: 正解セット(資産)は完成。実測はAPIキー提供待ち(👤アクション)。**
 
 ## N2-3 AI向けドキュメントの整備
-- [ ] `llms.txt` が現状を反映しているか確認（実装済みのはず）
-- [ ] `/developers` にMCPの接続手順を「AIエージェント開発者向け」の言葉で書く
-- [ ] AI経由の流入を `placement` で分離できるようにする（現在は referer 頼み）
+- [x] `llms.txt` が現状を反映しているか確認（実装済みのはず）
+      ✅2026-08-30確認: MCP/embed/report/naishin-kakusa/naishin-map/stats等、現行の主要面を全て含み最新。追加編集不要と判断
+- [x] `/developers` にMCPの接続手順を「AIエージェント開発者向け」の言葉で書く
+      ✅2026-08-30確認: Claude Desktop/Cursor/Node.js/Python/curlの導入別クイックスタート・27ツール一覧・接続設定JSONまで既に整備済み(ZZ-6b等で完了済み)。追加編集不要と判断
+- [x] AI経由の流入を `placement` で分離できるようにする（現在は referer 頼み）
+      ✅2026-08-30 `src/lib/track.ts`に`classifyPlacementFromPath()`を新設(`getPrefectureByCode`で都道府県コードを判定し
+      `/tokyo/naishin`と`/osaka/naishin`を横断で`pref-naishin`に集約・都道府県以外は先頭セグメントをそのまま面名として使用)。
+      `SiteEngagementTracker.tsx`のai_referralイベントに`placement`パラメータを追加。単体テスト4件追加(`track.test.ts`)。
+      tsc実exit0・jestフルスイート355suites6144tests green
 
 ## DoD
-- [ ] MCPが公開レジストリで発見可能
-- [ ] ハルシネーション検証の結果が数字で記録されている
-- [ ] AI経由流入が計測で分離できる
+- [ ] MCPが公開レジストリで発見可能（👤アクション待ち・loop側整備は完了済み）
+- [ ] ハルシネーション検証の結果が数字で記録されている（AI APIキー提供待ち・正解セットは完成済み）
+- [x] AI経由流入が計測で分離できる ✅2026-08-30 placement次元を追加
 
 ---
 

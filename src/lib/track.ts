@@ -8,6 +8,8 @@
  * そのため本関数は window.gtag / dataLayer が存在すれば送信し、無ければ no-op。
  * → GA4（gtag.js）を1本入れた瞬間に、ここで仕込んだ全イベントが計測開始される設計。
  */
+import { getPrefectureByCode } from '@/lib/prefectures';
+
 export type TrackParams = Record<string, string | number | boolean | undefined>;
 
 export function track(event: string, params: TrackParams = {}): void {
@@ -208,6 +210,26 @@ export function classifyAiReferrer(referrer: string, locationSearch = ''): strin
     /* no-op */
   }
   return null;
+}
+
+/**
+ * AI送客の着地パスを、集計しやすい粗いバケットへ変換する（N2-3・2026-08-30）。
+ *
+ * 課題: ai_referral は従来 page（生のpathname）しか持たず、/tokyo/naishin と /osaka/naishin が
+ * 別々の行になる（都道府県×ツール×学校ページで数千通り＝集計不能）。GA4で「AIはどのツールへ
+ * 着地しているか」を見るには、都道府県を横断した面（ツール）単位のディメンションが要る。
+ *
+ * 都道府県コードの判定は prefectures.ts の getPrefectureByCode を単一ソースとして使う
+ * （ハードコードした県名リストを別に持つと[[fable5-loop-protocol]]既知の罠と同型のドリフトが起きるため）。
+ */
+export function classifyPlacementFromPath(pathname: string): string {
+  const segments = pathname.split('/').filter(Boolean);
+  if (segments.length === 0) return 'home';
+  const [first, second] = segments;
+  if (getPrefectureByCode(first)) {
+    return `pref-${second ?? 'top'}`;
+  }
+  return first;
 }
 
 /** スクロール深度（25/50/75/100）を一度ずつ送る計装をページに仕込む。返り値で解除。SSR安全。 */

@@ -2,7 +2,34 @@
  * AI送客（GEO）判定 classifyAiReferrer のユニットテスト（純粋関数）。
  * 誤検知（通常のGoogle/直リンクをAI扱いしない）と取りこぼし（referrer欠落時のutm拾い）の両方を担保する。
  */
-import { classifyAiReferrer } from '../track';
+import { classifyAiReferrer, classifyPlacementFromPath } from '../track';
+
+/**
+ * classifyPlacementFromPath: N2-3（AI経由流入をplacementで分離）。
+ * 都道府県配下のツールページを都道府県横断で「pref-<tool>」に集約できるかを担保する
+ * （/tokyo/naishin と /osaka/naishin が別行になると集計不能になる問題の回避）。
+ */
+describe('classifyPlacementFromPath', () => {
+  test('トップページは home', () => {
+    expect(classifyPlacementFromPath('/')).toBe('home');
+  });
+
+  test('都道府県配下は都道府県コードを剥がし pref-<second segment> にする', () => {
+    expect(classifyPlacementFromPath('/tokyo/naishin')).toBe('pref-naishin');
+    expect(classifyPlacementFromPath('/osaka/naishin')).toBe('pref-naishin');
+    expect(classifyPlacementFromPath('/hyogo/total-score')).toBe('pref-total-score');
+  });
+
+  test('都道府県トップページ（サブパス無し）は pref-top', () => {
+    expect(classifyPlacementFromPath('/tokyo')).toBe('pref-top');
+  });
+
+  test('都道府県以外の第一セグメントはそのまま面名として使う（サブパスも同一バケットに集約）', () => {
+    expect(classifyPlacementFromPath('/hensachi')).toBe('hensachi');
+    expect(classifyPlacementFromPath('/hensachi/shindan')).toBe('hensachi');
+    expect(classifyPlacementFromPath('/report/2026/kagoshima')).toBe('report');
+  });
+});
 
 describe('classifyAiReferrer', () => {
   test('referrer のホスト名でAI送客元を判定する', () => {

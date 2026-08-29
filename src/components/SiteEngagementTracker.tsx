@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 
-import { classifyAiReferrer, EVENTS, installScrollDepthTracking, track } from '@/lib/track';
+import { classifyAiReferrer, classifyPlacementFromPath, EVENTS, installScrollDepthTracking, track } from '@/lib/track';
 
 /**
  * サイト全体の行動計装（GA4）。layout に1つだけ置く。
@@ -18,7 +18,11 @@ export function SiteEngagementTracker() {
       const src = classifyAiReferrer(document.referrer || '', window.location.search || '');
       if (src && !sessionStorage.getItem('mn_ai_ref')) {
         sessionStorage.setItem('mn_ai_ref', src);
-        track(EVENTS.AI_REFERRAL, { source: src, page: window.location.pathname });
+        track(EVENTS.AI_REFERRAL, {
+          source: src,
+          page: window.location.pathname,
+          placement: classifyPlacementFromPath(window.location.pathname),
+        });
       }
     } catch {
       /* sessionStorage 不可環境でも本処理に影響させない */
