@@ -298,6 +298,15 @@ describe('2025-r7 exam-system snapshot（N1-2 収集中スナップショット�
     expect(w2025.reverseCalc?.examMaxScore).toBe(w2026.reverseCalc?.examMaxScore);
   });
 
+  test('tottori: 2026-r8と2025-r7で制度の核となる数値が一致する(実測で確認済みの「変更なし」)', () => {
+    const t2025 = snapshot.entries.find((e) => e.code === 'tottori')!;
+    const t2026 = snapshot2026.entries.find((e) => e.code === 'tottori')!;
+    expect(t2025.maxScore).toBe(t2026.maxScore);
+    expect(t2025.gradeMultipliers).toEqual(t2026.gradeMultipliers);
+    expect(t2025.coreMultiplier).toBe(t2026.coreMultiplier);
+    expect(t2025.practicalMultiplier).toBe(t2026.practicalMultiplier);
+  });
+
   test('47県のうち大市場8県(tokyo/kanagawa/aichi/osaka/saitama/chiba/hyogo/fukuoka)が揃っている', () => {
     const majorMarketCodes = [
       'tokyo', 'kanagawa', 'aichi', 'osaka', 'saitama', 'chiba', 'hyogo', 'fukuoka',
