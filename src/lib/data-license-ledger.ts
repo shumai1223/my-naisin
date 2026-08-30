@@ -88,7 +88,7 @@ export const DATA_LICENSE_LEDGER: Record<string, DataLicenseLedgerEntry> = {
         'mailto:/cfemail等ゼロ件・メールアドレスが一切存在しない。連絡手段は専用フォームのみ' +
         '(https://www.pref.saitama.lg.jp/soshiki/f2208/index.html の「お問い合わせフォーム」' +
         'ボタン・当課宛てにdeptコードで事前タグ付け済み)。loopはフォーム送信不可のためCowork委任が' +
-        '必要(T-C9-license-outreach.mdのフォーム経由バッチに追加予定)。WebSearch要約が提示した' +
+        '必要(ops/cowork/COWORK-TASK-t-c9-form-prefectures.mdに追加済み)。WebSearch要約が提示した' +
         'a6760-03@pref.saitama.lg.jpは生HTML内に存在せず架空と確認・不使用'
     ),
   },
@@ -289,7 +289,7 @@ export const DATA_LICENSE_LEDGER: Record<string, DataLicenseLedgerEntry> = {
       '未確認。2026-08-29調査: 高校教育課ページ(pref.ehime.jp/soshiki/140/)をWebFetchで確認したところ' +
         'メールアドレス記載は無く、お問い合わせフォーム(pref.ehime.jp/form/detail.php?sec_sec1=140)' +
         'のみ。loopはフォーム送信不可のためCowork委任が必要' +
-        '(ops/cowork/COWORK-TASK-t-c9-form-prefectures.mdに追加予定)'
+        '(ops/cowork/COWORK-TASK-t-c9-form-prefectures.mdに追加済み)'
     ),
   },
   tokushima: {
@@ -387,7 +387,7 @@ export const DATA_LICENSE_LEDGER: Record<string, DataLicenseLedgerEntry> = {
         '確認したところメールアドレス記載は無く（WebSearch要約が提示したa50300@pref.yamaguchi.lg.jpは' +
         '実ページに存在せず架空と判明・既知の罠と同型）、お問い合わせフォーム' +
         '(pref.yamaguchi.lg.jp/form/detail.php?sec_sec1=180)のみ。loopはフォーム送信不可のため' +
-        'Cowork委任が必要(ops/cowork/COWORK-TASK-t-c9-form-prefectures.mdに追加予定)'
+        'Cowork委任が必要(ops/cowork/COWORK-TASK-t-c9-form-prefectures.mdに追加済み)'
     ),
   },
   kagoshima: {
@@ -407,7 +407,7 @@ export const DATA_LICENSE_LEDGER: Record<string, DataLicenseLedgerEntry> = {
         'WebFetchで確認したところメールアドレス記載は無く、係ごとに' +
         'pref.niigata.lg.jp/form/detail.php?sec_sec1=248系のフォームが複数(指導第1係等)。' +
         '入学者選抜担当は「指導第1係」(025-280-5611)。loopはフォーム送信不可のためCowork委任が必要' +
-        '(ops/cowork/COWORK-TASK-t-c9-form-prefectures.mdに追加予定・実際のフォームで指導第1係を' +
+        '(ops/cowork/COWORK-TASK-t-c9-form-prefectures.mdに追加済み・実際のフォームで指導第1係を' +
         '選択できるか確認が必要)'
     ),
   },
