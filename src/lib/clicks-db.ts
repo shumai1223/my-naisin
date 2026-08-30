@@ -47,6 +47,12 @@ export interface ClickInput {
   userAgent?: string;
   /** 同一送信元バースト検出用の IPハッシュ（生IPは保存しない）。 */
   ipHash?: string;
+  /**
+   * 書き込み時点の信頼度分類（T-M2 M2-2）。'human' | 'suspect'。
+   * bot-UA/空UA/IPバーストは呼び出し側で既に弾かれ記録されないため、ここに来る時点で
+   * 'bot'にはならない。省略時はnullのまま（従来どおりダッシュボード側のSQL計算に委ねる）。
+   */
+  trustClass?: 'human' | 'suspect';
 }
 
 function s(v: string | undefined): string | null {
@@ -65,8 +71,8 @@ export async function persistClick(input: ClickInput): Promise<boolean> {
     if (!db) return false;
     await db
       .prepare(
-        `INSERT INTO clicks (affiliate_id, prefecture, placement, referer, user_agent, ip_hash, created_at)
-         VALUES (?, ?, ?, ?, ?, ?, datetime('now'))`
+        `INSERT INTO clicks (affiliate_id, prefecture, placement, referer, user_agent, ip_hash, trust_class, created_at)
+         VALUES (?, ?, ?, ?, ?, ?, ?, datetime('now'))`
       )
       .bind(
         s(input.affiliateId),
@@ -74,7 +80,8 @@ export async function persistClick(input: ClickInput): Promise<boolean> {
         s(input.placement),
         s(input.referer),
         s(input.userAgent),
-        s(input.ipHash)
+        s(input.ipHash),
+        input.trustClass ?? null
       )
       .run();
     return true;

@@ -102,6 +102,20 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
 
   const url = new URL(request.url);
   const refererRaw = request.headers.get('referer');
+
+  // ③④の判定材料を先に確定させる（T-M2 M2-2: persistClick前に計算し、書き込み時点の
+  // trust_classへそのまま反映する。以前は判定がpersistClickの後にあり、行には残らなかった）。
+  // ⚠️2026-08-24: referer だけを信頼しない。**Referer はクライアントが詐称できる。**
+  // 実測: 8/13〜8/15の3日で829クリック / 1クリック=1個の別IP(比率1.000) / distinct UA わずか8種の
+  // IPローテーション型botが、内部refererを偽装して①②③を全てすり抜け、ASP3社(A8 241/もしも200+/
+  // アクセストレード180)へ無効クリックとして計上されていた。**ASPのアカウント停止リスクに直結する。**
+  // ブラウザが自動で付ける Sec-Fetch-Site を併用し、**両方**満たすときだけ即302する。
+  // ⚠️2026-08-30追加(T-M2): TH-13第3波(2026-08-27〜)は`Referer: https://my-naishin.com`
+  // （末尾スラッシュ無し・パス無し＝実ブラウザが生成し得ない形）を偽装する。これもJSホップへ回す
+  // （末尾スラッシュ付き`https://my-naishin.com/`は正規のトップページ遷移なので誤検知しない）。
+  const isSuspect =
+    !isInternalReferer(refererRaw) || isImplausibleReferer(refererRaw) || !hasSameOriginNavigation(request.headers);
+
   // 先にログ（D1未バインドなら no-op）。記録に失敗しても送客（302）は必ず行う。
   try {
     await persistClick({
@@ -112,6 +126,7 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
       referer: clamp(refererRaw, 300),
       userAgent: clamp(ua, 300),
       ipHash,
+      trustClass: isSuspect ? 'suspect' : 'human',
     });
   } catch {
     /* no-op：計測はベストエフォート、送客を止めない */
@@ -122,15 +137,7 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
   // 実クリックの約9倍計上されていた実測への対策。JSを実行する実ブラウザ（LINE/メール経由の
   // 実ユーザー含む）だけがホップページ経由でASPへ進む。D1記録は上で済んでおり suspect として
   // 分類される（ダッシュボードの信頼分類は従来どおり）。
-  // ⚠️2026-08-24 追加: referer だけを信頼しない。**Referer はクライアントが詐称できる。**
-  // 実測: 8/13〜8/15の3日で829クリック / 1クリック=1個の別IP(比率1.000) / distinct UA わずか8種の
-  // IPローテーション型botが、内部refererを偽装して①②③を全てすり抜け、ASP3社(A8 241/もしも200+/
-  // アクセストレード180)へ無効クリックとして計上されていた。**ASPのアカウント停止リスクに直結する。**
-  // ブラウザが自動で付ける Sec-Fetch-Site を併用し、**両方**満たすときだけ即302する。
-  // ⚠️2026-08-30追加(T-M2): TH-13第3波(2026-08-27〜)は`Referer: https://my-naishin.com`
-  // （末尾スラッシュ無し・パス無し＝実ブラウザが生成し得ない形）を偽装する。これもJSホップへ回す
-  // （末尾スラッシュ付き`https://my-naishin.com/`は正規のトップページ遷移なので誤検知しない）。
-  if (!isInternalReferer(refererRaw) || isImplausibleReferer(refererRaw) || !hasSameOriginNavigation(request.headers)) {
+  if (isSuspect) {
     return new NextResponse(renderClickHopHtml(affiliate.href, id), {
       status: 200,
       headers: {

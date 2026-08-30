@@ -50,10 +50,12 @@ botは止まっていない。8/27に手口を変えて今も来ている。
       正規のトップページ遷移）を誤検知しないことをテストで固定済み（`bot-filter.test.ts`4件追加）。
       **この関数はloop-question-noteが「08-29に新設済み」と記載していたが実際にはリポジトリに
       存在しなかった（対話セッションの記載を鵜呑みにせず実ファイルで確認したため発覚）**
-- [ ] `hasSameOriginNavigation()`（Sec-Fetch-Site）は既にあるが、bot判定の結果をD1に記録できていない。
-      `clicks`に`trust_class`列を追加（非破壊migration・loop単独可・2026-07-28ゲート解禁済み）し、
-      削除ではなく分類で残せるようにする。**次回セッションで着手**（D1 migration適用は
-      `wrangler d1 execute --remote`・T-S13A A-5と同じ手順で自力可能）
+- [x] `hasSameOriginNavigation()`（Sec-Fetch-Site）を含む信頼度判定を`persistClick()`より**前**に
+      移動し、`clicks.trust_class`列（非破壊migration`0023_add_clicks_trust_class.sql`・
+      `wrangler d1 execute --remote`で自力適用済み・本番`sqlite_master`で列追加を確認済み）へ
+      書き込み時点で'human'/'suspect'を記録するよう`route.ts`/`clicks-db.ts`を改修（`a3e8f0c`の続き）。
+      ルーティング判定(JSホップ/即302)とtrust_classの算出は同じ`isSuspect`変数を共有するため、
+      記録される分類と実際のルーティング挙動が常に一致する設計
 
 ### M2-3 記録の順序を直す — 未着手
 
@@ -76,7 +78,7 @@ botは止まっていない。8/27に手口を変えて今も来ている。
 ## DoD
 
 - [ ] 通常ページにbot判定がかかっているか/いないかが文書に書かれている → ✅本ファイルのM2-1で記録済み
-- [ ] `clicks.trust_class`列が追加され、新規クリックが分類されている → 未着手
+- [x] `clicks.trust_class`列が追加され、新規クリックが分類されている → ✅完了(本番D1適用済み)
 - [x] `isImplausibleReferer`が判定経路に入っている（末尾スラッシュの誤検知テスト付き） → ✅完了
 - [ ] モバイル比率の警告が`check:click-fraud`に入っている → 未着手
 - [x] `tsc` exit 0 / jest green（357 suites・6164 tests） → ✅完了
