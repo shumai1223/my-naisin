@@ -622,6 +622,49 @@ print(naishin["total"])  # -> 52`;
             <CodeBlock>{gakushuSeisekiCurlExample}</CodeBlock>
           </div>
 
+          <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">⑦d 都道府県別 学校ごと入試競争率</h3>
+          <p className="mb-2 text-sm text-slate-600">
+            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">GET /api/schools/{'{pref}'}</code>
+            {' — '}都道府県コード（例: <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">tokyo</code>）を指定すると、
+            学校ごとの募集人員・応募者数・倍率のレコードを返します。
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">?fiscalYear=令和8年度（2026年度）</code>
+            で年度を絞り込めます。商用資料のみを出典とするレコードは配布ポリシー上、自動的に除外されます。
+          </p>
+          <p className="mt-1 text-xs text-slate-500">
+            実際に開く：{' '}
+            <a
+              href="/api/schools/tokyo"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 font-semibold text-indigo-600 underline"
+            >
+              /api/schools/tokyo <ExternalLink className="h-3 w-3" />
+            </a>
+          </p>
+
+          <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">⑦e 匿名統計（パーセンタイル・分布集計）</h3>
+          <p className="mb-2 text-sm text-slate-600">
+            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">GET /api/stats/percentile</code>
+            {' — '}
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">?metric=naishin|hensachi|total-score&value=</code>
+            で、利用者が任意でオプトインした匿名データの中での自分の値のパーセンタイルを返します。
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">GET /api/stats/distribution</code>
+            は同じ指標の件数・平均・最小・最大を返します。いずれも個人を特定できる情報は含まず、
+            サンプルサイズが30件未満のセルは<code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">insufficientData: true</code>
+            として値を出さずに正直に開示します（存在しないデータを捏造しない設計）。
+          </p>
+          <p className="mt-1 text-xs text-slate-500">
+            実際に開く：{' '}
+            <a
+              href="/api/stats/distribution?metric=naishin"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 font-semibold text-indigo-600 underline"
+            >
+              /api/stats/distribution?metric=naishin <ExternalLink className="h-3 w-3" />
+            </a>
+          </p>
+
           <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">⑧ ステータス確認（認証不要）</h3>
           <p className="mb-2 text-sm text-slate-600">
             <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">GET /api/status</code>
