@@ -121,9 +121,9 @@ chibaも同型（K値=1〜2の学校裁量制）でreverseCalcはnullのまま�
 環境側5MB取得上限で破損したため、curlのRangeヘッダーで6分割取得+境界重複バイト除去+結合で復元
 （新知見）。埼玉・千葉と同様、調査書序列と学力検査序列を組み合わせる方式でreverseCalcはサイト
 独自の代表値と区別して記録。
-**大市場8県は全て完了（収集済み23/47・unavailable1件=ishikawa）。北海道・東北ブロック7県・
-関東ブロック7県も完了。中部ブロック進行中(niigata/toyama/fukui/yamanashi/nagano✅・
-ishikawa取得不能。aichiは大市場8県枠で既完了)、次は岐阜県**。
+**大市場8県は全て完了（収集済み24/47・unavailable1件=ishikawa）。北海道・東北ブロック7県・
+関東ブロック7県も完了。中部ブロック進行中(niigata/toyama/fukui/yamanashi/nagano/gifu✅・
+ishikawa取得不能。aichiは大市場8県枠で既完了)、次は静岡県**。
 ishikawaは令和7年度PDFが現行サイト404・Wayback未アーカイブのため取得不能記録（推測で埋めない）。
 yamagataで新知見: xlsx/docx等のOffice形式一次資料もunzip+sharedStrings.xml等のXML抽出で
 内容確認できる（PDFが無くExcel様式しか無い県で有効）。
