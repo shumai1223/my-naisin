@@ -121,9 +121,10 @@ chibaも同型（K値=1〜2の学校裁量制）でreverseCalcはnullのまま�
 環境側5MB取得上限で破損したため、curlのRangeヘッダーで6分割取得+境界重複バイト除去+結合で復元
 （新知見）。埼玉・千葉と同様、調査書序列と学力検査序列を組み合わせる方式でreverseCalcはサイト
 独自の代表値と区別して記録。
-**大市場8県は全て完了（収集済み43/47・unavailable2件=ishikawa・nagasaki）。北海道・東北ブロック7県・
+**大市場8県は全て完了（収集済み44/47・unavailable2件=ishikawa・nagasaki）。北海道・東北ブロック7県・
 関東ブロック7県・中部ブロック9県・近畿ブロック7県・中国ブロック5県・四国ブロック4県も完了。
-九州・沖縄ブロック進行中(saga✅・nagasaki⏭取得不能・kumamoto✅・oita✅・miyazaki✅)、次は鹿児島県**。
+九州・沖縄ブロック進行中(saga✅・nagasaki⏭取得不能・kumamoto✅・oita✅・miyazaki✅・kagoshima✅)、
+次は沖縄県（九州・沖縄ブロック最後の1県・全ブロック完了まであと1県）**。
 ⚠️nagasakiで令和8年度分(prefectures.ts)のmaxScore=135の根拠に疑義あり。詳細はloop-question-note
 2026-08-31 07:14参照。急ぎではないがT-A1等の機会に再検証すること。
 shigaは個人調査報告書(様式4号)のR7版フォーム自体をInternet Archive一時オフラインのため取得
