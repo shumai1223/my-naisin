@@ -326,6 +326,15 @@ describe('2025-r7 exam-system snapshot（N1-2 収集中スナップショット�
     expect(o2025.practicalMultiplier).toBe(o2026.practicalMultiplier);
   });
 
+  test('hiroshima: 2026-r8と2025-r7で制度の核となる数値が一致する(実測で確認済みの「変更なし」)', () => {
+    const h2025 = snapshot.entries.find((e) => e.code === 'hiroshima')!;
+    const h2026 = snapshot2026.entries.find((e) => e.code === 'hiroshima')!;
+    expect(h2025.maxScore).toBe(h2026.maxScore);
+    expect(h2025.gradeMultipliers).toEqual(h2026.gradeMultipliers);
+    expect(h2025.coreMultiplier).toBe(h2026.coreMultiplier);
+    expect(h2025.practicalMultiplier).toBe(h2026.practicalMultiplier);
+  });
+
   test('47県のうち大市場8県(tokyo/kanagawa/aichi/osaka/saitama/chiba/hyogo/fukuoka)が揃っている', () => {
     const majorMarketCodes = [
       'tokyo', 'kanagawa', 'aichi', 'osaka', 'saitama', 'chiba', 'hyogo', 'fukuoka',
