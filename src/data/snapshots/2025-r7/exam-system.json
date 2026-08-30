@@ -5,7 +5,7 @@
     "startedAt": "2026-08-30",
     "collectionMethod": "N1-2(ops/tasks/T-N1-N4-revenue-ceiling.md)。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。大市場県(tokyo/kanagawa/aichi/osaka/saitama/chiba/hyogo/fukuoka)から着手。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。",
     "totalPrefectures": 47,
-    "collectedCount": 10,
+    "collectedCount": 11,
     "unavailable": []
   },
   "entries": [
@@ -272,6 +272,28 @@
       "lastVerified": "2026-08-30",
       "pdfHash": null,
       "diffFromCurrentYear": "変更なし(2026-08-30に選抜要項p.17「様式第2号 調査書」の「各教科の学習の記録」表を直接確認。9教科×1年・2年・3年の評定欄がそれぞれ独立に記入され、「計」欄で3学年分をそのまま合算する「総計」列があり、学年間の傾斜配点は様式上存在しない(等倍合計)。9教科×5段階×3学年=135点。令和8年度分(prefectures.ts)のgradeMultipliers{1:1,2:1,3:1}/maxScore=135と完全一致)"
+    },
+    {
+      "code": "iwate",
+      "name": "岩手県",
+      "region": "北海道・東北",
+      "fiscalYear": "2025",
+      "targetGrades": [1, 2, 3],
+      "gradeMultipliers": { "1": 1, "2": 2, "3": 3 },
+      "coreMultiplier": 2,
+      "practicalMultiplier": 3,
+      "maxScore": 660,
+      "simplifiedCalc": true,
+      "actualMaxScore": 500,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": null,
+      "sourceUrl": "https://www.pref.iwate.jp/_res/projects/default_project/_page_/001/074/266/00_all.pdf",
+      "sourceUrl2": "https://www.pref.iwate.jp/kyouikubunka/kyouiku/gakkou/senbatsu/1074266.html",
+      "sourceTitle": "岩手県教育委員会「令和7年度岩手県立高等学校入学者選抜実施概要」",
+      "lastVerified": "2026-08-30",
+      "pdfHash": null,
+      "diffFromCurrentYear": "変更なし(2026-08-30に令和7年度実施概要を直接確認。盛岡第一高等学校の一般入学者選抜で調査書(学習の記録)=「中学1年の9教科の評定×1+中学2年の9教科の評定×2+中学3年の9教科の評定×3」の合計270点を圧縮、と明記(9教科×5段階×(1+2+3)=270、実技4教科側の×1.5倍込みで理論値660点)。prefectures.tsの既存コメントの通り、この660→500点圧縮方式は「令和7年度以降」に開始された制度であり(令和6年度以前は440点満点)、令和7年度はまさにこの新方式が始まった初年度。したがって令和7年度と令和8年度は完全に同一制度(gradeMultipliers{1:1,2:2,3:3}/coreMultiplier=2/practicalMultiplier=3/maxScore=660/actualMaxScore=500)。各校の学力検査:調査書比率(7:3、5:5等)は660→500圧縮とは別レイヤーで学校ごとに1000点満点内で設定される)"
     }
   ]
 }
