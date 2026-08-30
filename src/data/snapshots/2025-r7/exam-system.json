@@ -5,7 +5,7 @@
     "startedAt": "2026-08-30",
     "collectionMethod": "N1-2(ops/tasks/T-N1-N4-revenue-ceiling.md)。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。大市場県(tokyo/kanagawa/aichi/osaka/saitama/chiba/hyogo/fukuoka)から着手。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。",
     "totalPrefectures": 47,
-    "collectedCount": 43,
+    "collectedCount": 44,
     "unavailable": [
       {
         "code": "ishikawa",
@@ -1161,6 +1161,39 @@
       "lastVerified": "2026-08-31",
       "pdfHash": null,
       "diffFromCurrentYear": "変更なし(caveatあり)(2026-08-31に実施要綱本体(現行ページに掲載されたまま現存・curl直叩き取得・4.7MB)p.14「2一般入学者選抜」(1)選抜の方法①「選抜は、学力検査、面接及び調査書等を資料とし、総合的に判定して行う」、およびp.34「11出願書類の作成要領」(2)調査書(様式2)の記入要領を直接確認した。両箇所とも学年別の傾斜配点や実技科目への倍率など、素点そのものの重み付けを示す記載は一切無く(必修教科は各学年とも一律5段階評定で記入する旨のみ)、令和8年度分(prefectures.ts)のgradeMultipliers{1:1,2:1,3:1}・maxScore=135・coreMultiplier=practicalMultiplier=1(=均等配分・実技科目への傾斜なし)と矛盾しない。加えてWebSearch経由の複数の第三者塾サイトも『9教科の内申合計が135点満点、3学年均等配分。ただし公式な換算方法(評定→135点への変換式)自体は県から非公表』と一致して説明しており、これは一次ソースに数値化された配点表が見当たらないこと(=非公表)とも整合する。学力検査は各教科100点×5教科=500点満点(傾斜配点は2教科以内・1.5倍まで)も一次ソースp.18で確認済み。制度変更を示す記載も見当たらないため変更なしと判断した(**caveatあり**・135という数値そのものは一次ソースの明示的な配点表ではなく『傾斜なし』という消去法+第三者裏取りに基づく)"
+    },
+    {
+      "code": "kagoshima",
+      "name": "鹿児島県",
+      "region": "九州・沖縄",
+      "fiscalYear": "2025",
+      "targetGrades": [3],
+      "gradeMultipliers": { "1": 0, "2": 0, "3": 1 },
+      "coreMultiplier": 2,
+      "practicalMultiplier": 20,
+      "maxScore": 450,
+      "simplifiedCalc": false,
+      "actualMaxScore": null,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": {
+        "totalMaxScore": 900,
+        "examMaxScore": 450,
+        "defaultRatio": { "naishin": 50, "exam": 50 },
+        "calcType": "standard",
+        "naishinMultiplier": null,
+        "kValue": null,
+        "sValueCoefficients": null,
+        "osakaTypeCount": null,
+        "hasTokyoSettings": false,
+        "hasKanagawaSettings": false
+      },
+      "sourceUrl": "https://www.pref.kagoshima.jp/ba05/kyoiku-bunka/school/koukou/nyushi/r6/documents/116170_20241017203113-1.pdf",
+      "sourceUrl2": "https://www.pref.kagoshima.jp/ba05/kyoiku-bunka/school/koukou/nyushi/r6/r7jissiyoukou.html",
+      "sourceTitle": "鹿児島県教育委員会「令和7年度鹿児島県公立高等学校入学者選抜実施要綱」I2一般入学者選抜7選抜(2)選抜の内容ア・イ(ｳ)d",
+      "lastVerified": "2026-08-31",
+      "pdfHash": null,
+      "diffFromCurrentYear": "変更なし(2026-08-31に実施要綱本体(現行ページに掲載されたまま現存・curl直叩き取得・3.1MB)p.9「7選抜」(2)選抜の内容アを直接確認。「調査書の『学習の記録』は、第3学年の記録を次のとおり点数に換算して選抜に用いる。(ｱ)学力検査を行う5教科：それぞれ10点満点 (ｲ)学力検査を行わない必修の4教科(音楽、美術、保健体育及び技術・家庭)：それぞれ100点満点」と明記——第3学年の5段階評定のみを対象(targetGrades=[3])とし、5教科は評定×2倍で10点満点(coreMultiplier=2)、実技4教科は評定×20倍で100点満点(practicalMultiplier=20)へ換算する制度で、5×10+4×100=450点満点。令和8年度分(prefectures.ts)のgradeMultipliers{1:0,2:0,3:1}・coreMultiplier=2・practicalMultiplier=20・maxScore=450と完全一致(変更なし)。学力検査は各教科90点×5教科=450点満点(reverseCalc.examMaxScore=450と一致)も同ページで確認済み"
     }
   ]
 }
