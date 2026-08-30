@@ -406,6 +406,14 @@ describe('2025-r7 exam-system snapshot（N1-2 収集中スナップショット�
     expect(o2025.practicalMultiplier).toBe(o2026.practicalMultiplier);
   });
 
+  test('miyazaki: 2026-r8と2025-r7で制度の核となる数値が一致する(実測で確認済みの「変更なし」)', () => {
+    const m2025 = snapshot.entries.find((e) => e.code === 'miyazaki')!;
+    const m2026 = snapshot2026.entries.find((e) => e.code === 'miyazaki')!;
+    expect(m2025.maxScore).toBe(m2026.maxScore);
+    expect(m2025.gradeMultipliers).toEqual(m2026.gradeMultipliers);
+    expect(m2025.reverseCalc?.examMaxScore).toBe(m2026.reverseCalc?.examMaxScore);
+  });
+
   test('47県のうち大市場8県(tokyo/kanagawa/aichi/osaka/saitama/chiba/hyogo/fukuoka)が揃っている', () => {
     const majorMarketCodes = [
       'tokyo', 'kanagawa', 'aichi', 'osaka', 'saitama', 'chiba', 'hyogo', 'fukuoka',

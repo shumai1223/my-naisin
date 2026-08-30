@@ -5,7 +5,7 @@
     "startedAt": "2026-08-30",
     "collectionMethod": "N1-2(ops/tasks/T-N1-N4-revenue-ceiling.md)。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。大市場県(tokyo/kanagawa/aichi/osaka/saitama/chiba/hyogo/fukuoka)から着手。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。",
     "totalPrefectures": 47,
-    "collectedCount": 42,
+    "collectedCount": 43,
     "unavailable": [
       {
         "code": "ishikawa",
@@ -1128,6 +1128,39 @@
       "lastVerified": "2026-08-31",
       "pdfHash": null,
       "diffFromCurrentYear": "変更なし(caveatあり)(2026-08-31に選抜要項本体(現行ページに掲載されたまま現存・curl直叩き取得・1.34MB)p.30「第10第一次入学者選抜」7選抜の方法を直接確認。「①調査書の教科学習成績及び学力検査を実施しない教科の換算点の合計点(以下『調査書の合計点』という)並びに学力検査成績の総合計点と調査書のその他の記載事項及び面接、適性検査を実施した場合はその結果を資料として総合的に判定する」「②調査書の合計点と学力検査成績の比率は学校ごとに定める」「③5教科を課す高等学校では、学力検査配点の比重を変える傾斜配点を採用することができる。その場合の倍率は2倍を限度とする」と明記——学校ごとに比率・傾斜配点を独自に定める学校裁量制であることが令和8年度分(prefectures.ts)でsimplifiedCalc=true/actualMaxScore=260として既に記録されている構造上の特徴と完全に一致し、令和7年度も同一の裁量制であることを確認した。調査書(様式9号)の実物フォームは別途xlsx配布(現行R7版取得済みだが旧バイナリ形式(.xls互換)でテキスト展開できず、学年別配点の生数値までは独立検証できていない・caveatとして明記)。制度変更を示す記載は見当たらないため、令和8年度分と同じくsimplifiedCalcの近似モデルとして扱う(変更なし)"
+    },
+    {
+      "code": "miyazaki",
+      "name": "宮崎県",
+      "region": "九州・沖縄",
+      "fiscalYear": "2025",
+      "targetGrades": [1, 2, 3],
+      "gradeMultipliers": { "1": 1, "2": 1, "3": 1 },
+      "coreMultiplier": 1,
+      "practicalMultiplier": 1,
+      "maxScore": 135,
+      "simplifiedCalc": false,
+      "actualMaxScore": null,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": {
+        "totalMaxScore": 635,
+        "examMaxScore": 500,
+        "defaultRatio": { "naishin": 21, "exam": 79 },
+        "calcType": "standard",
+        "naishinMultiplier": null,
+        "kValue": null,
+        "sValueCoefficients": null,
+        "osakaTypeCount": null,
+        "hasTokyoSettings": false,
+        "hasKanagawaSettings": false
+      },
+      "sourceUrl": "https://www.pref.miyazaki.lg.jp/documents/89488/89488_20241030131838-1.pdf",
+      "sourceUrl2": "https://www.pref.miyazaki.lg.jp/kokokyoiku/kyoikukosodate/kyoiku/20240612180352.html",
+      "sourceTitle": "宮崎県教育委員会「令和7年度宮崎県立高等学校入学者選抜実施要綱」2一般入学者選抜(1)選抜の方法・11出願書類の作成要領(2)調査書",
+      "lastVerified": "2026-08-31",
+      "pdfHash": null,
+      "diffFromCurrentYear": "変更なし(caveatあり)(2026-08-31に実施要綱本体(現行ページに掲載されたまま現存・curl直叩き取得・4.7MB)p.14「2一般入学者選抜」(1)選抜の方法①「選抜は、学力検査、面接及び調査書等を資料とし、総合的に判定して行う」、およびp.34「11出願書類の作成要領」(2)調査書(様式2)の記入要領を直接確認した。両箇所とも学年別の傾斜配点や実技科目への倍率など、素点そのものの重み付けを示す記載は一切無く(必修教科は各学年とも一律5段階評定で記入する旨のみ)、令和8年度分(prefectures.ts)のgradeMultipliers{1:1,2:1,3:1}・maxScore=135・coreMultiplier=practicalMultiplier=1(=均等配分・実技科目への傾斜なし)と矛盾しない。加えてWebSearch経由の複数の第三者塾サイトも『9教科の内申合計が135点満点、3学年均等配分。ただし公式な換算方法(評定→135点への変換式)自体は県から非公表』と一致して説明しており、これは一次ソースに数値化された配点表が見当たらないこと(=非公表)とも整合する。学力検査は各教科100点×5教科=500点満点(傾斜配点は2教科以内・1.5倍まで)も一次ソースp.18で確認済み。制度変更を示す記載も見当たらないため変更なしと判断した(**caveatあり**・135という数値そのものは一次ソースの明示的な配点表ではなく『傾斜なし』という消去法+第三者裏取りに基づく)"
     }
   ]
 }
