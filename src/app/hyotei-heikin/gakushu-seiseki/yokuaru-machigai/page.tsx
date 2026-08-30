@@ -223,6 +223,50 @@ export default function YokuaruMachigaiPage() {
             </p>
           </section>
 
+          {/* T-N5第3ラウンド: 留学・IBという「計算に含める/含めない」の境界ケース */}
+          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <h2 className="mb-3 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
+              留学・国際バカロレアは含める？含めない？
+            </h2>
+            <p className="mb-3 text-sm leading-relaxed text-slate-700">
+              「3つの誤り」以外にも、通知には計算対象の範囲そのものを左右する2つの規定があります。
+              単位数の重み付けや教科平均の平均と違い、こちらは「この単位・評定を計算に入れるかどうか」の
+              境界を定めたものです。
+            </p>
+            <h3 className="mb-2 text-sm font-bold text-slate-800">留学中に修得した単位は算入しない</h3>
+            <blockquote className="mb-3 border-l-4 border-emerald-400 bg-emerald-50 p-4 text-sm italic leading-relaxed text-slate-700">
+              「「各教科の学習成績の状況」及び「全体の学習成績の状況」の欄については、次のように記入すること。
+              なお、留学に係る修得単位については、算入する必要がない。」
+            </blockquote>
+            <p className="mb-4 text-sm leading-relaxed text-slate-700">
+              留学先の高等学校で修得した単位の評定は、学習成績の状況の計算そのものには含めなくてよいと
+              定められています（留学の記録自体は別欄に記載されます）。
+            </p>
+            <h3 className="mb-2 text-sm font-bold text-slate-800">国際バカロレア（IB）の科目は含める</h3>
+            <blockquote className="mb-3 border-l-4 border-emerald-400 bg-emerald-50 p-4 text-sm italic leading-relaxed text-slate-700">
+              「国際バカロレア・ディプロマ・プログラムの科目に係る調査書の扱いについては、国際バカロレア・
+              ディプロマ・プログラムの科目等の履修及び単位の修得をもって高等学校学習指導要領の科目の履修
+              及び単位の修得とみなしている場合又は代替している場合についても、それらに係る学校設定科目等
+              の評定を含めて学習成績の状況を算出すること（事務連絡参照）。」
+            </blockquote>
+            <p className="text-sm leading-relaxed text-slate-700">
+              留学単位とは逆に、IBディプロマ・プログラムの科目が高等学校の科目の履修・単位修得とみなされて
+              いる場合は、その学校設定科目等の評定を学習成績の状況の計算に含めることが明記されています。
+            </p>
+            <p className="mt-3 text-xs text-slate-500 leading-relaxed">
+              出典：文部科学省「令和9年度大学入学者選抜実施要項」（令和8年5月27日付け8文科高第318号）
+              調査書記入上の注意事項等について8柱書・8(3)
+              <a
+                href="https://www.mext.go.jp/content/20260529-mxt_daigakuc02-000005144_1.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ml-1 text-emerald-700 underline"
+              >
+                原文PDF
+              </a>
+            </p>
+          </section>
+
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="mb-4 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
               あわせて確認したいツール

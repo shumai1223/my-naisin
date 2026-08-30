@@ -208,6 +208,39 @@ export default function GaihyouDistancePage() {
             </p>
           </section>
 
+          {/* 自分の概評だけでなく同学年の分布も調査書に載る(T-N5第3ラウンド) */}
+          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <h2 className="mb-3 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
+              調査書には自分の概評だけでなく、同学年の人数分布も載る
+            </h2>
+            <p className="mb-3 text-sm leading-relaxed text-slate-700">
+              調査書の「学習成績概評」欄の下には、「成績段階別人数」という別の欄があります。ここには
+              自分の概評だけでなく、<strong>同一学年の生徒がA〜Eの各段階に何人ずつ属しているか</strong>も
+              記載されます。
+            </p>
+            <blockquote className="mb-3 border-l-4 border-emerald-400 bg-emerald-50 p-4 text-sm italic leading-relaxed text-slate-700">
+              「『成績段階別人数』の欄は、各段階に属する人数とその合計を、『Ａ○○人、Ｂ○○人、Ｃ○○人、
+              Ｄ○○人、Ｅ○○人、合計○○人』のように記入すること。」
+            </blockquote>
+            <p className="text-sm leading-relaxed text-slate-700">
+              つまり大学の入試担当者は、生徒本人の概評（例: B）と同時に、同学年でAが何人・Bが何人いるかも
+              調査書から把握できる設計になっています。自分の概評単体だけでなく、学年内でどの位置にいるかも
+              書類上に現れることを知っておくと、境界付近での見え方の理解に役立ちます。
+            </p>
+            <p className="mt-3 text-xs text-slate-500 leading-relaxed">
+              出典：文部科学省「令和9年度大学入学者選抜実施要項」（令和8年5月27日付け8文科高第318号）
+              調査書記入上の注意事項等について9(2)
+              <a
+                href="https://www.mext.go.jp/content/20260529-mxt_daigakuc02-000005144_1.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ml-1 text-emerald-700 underline"
+              >
+                原文PDF
+              </a>
+            </p>
+          </section>
+
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="mb-4 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
               あわせて確認したいツール
