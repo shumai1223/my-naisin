@@ -1,4 +1,4 @@
-import { isBotUserAgent, isPrefetchRequest } from '@/lib/bot-filter';
+import { isBotUserAgent, isPrefetchRequest, isImplausibleReferer } from '@/lib/bot-filter';
 
 describe('isBotUserAgent', () => {
   it('実ブラウザ(PC/モバイル)は bot 扱いしない', () => {
@@ -65,5 +65,26 @@ describe('isPrefetchRequest', () => {
   it('通常リクエストは先読み扱いしない', () => {
     expect(isPrefetchRequest(headersOf({}))).toBe(false);
     expect(isPrefetchRequest(headersOf({ 'sec-purpose': '' }))).toBe(false);
+  });
+});
+
+describe('isImplausibleReferer', () => {
+  it('末尾スラッシュ無し・パス無しのreferer(TH-13第3波の偽装署名)はimplausible', () => {
+    expect(isImplausibleReferer('https://my-naishin.com')).toBe(true);
+  });
+
+  it('⚠️末尾スラッシュ付き(正規のトップページ遷移)は絶対にimplausible扱いしない', () => {
+    expect(isImplausibleReferer('https://my-naishin.com/')).toBe(false);
+  });
+
+  it('パス付きの通常のrefererはimplausible扱いしない', () => {
+    expect(isImplausibleReferer('https://my-naishin.com/hensachi')).toBe(false);
+    expect(isImplausibleReferer('https://my-naishin.com/pref/tokyo/naishin')).toBe(false);
+  });
+
+  it('外部referer・referer無しはimplausible扱いしない(別の判定軸のため)', () => {
+    expect(isImplausibleReferer('https://example.com')).toBe(false);
+    expect(isImplausibleReferer(null)).toBe(false);
+    expect(isImplausibleReferer(undefined)).toBe(false);
   });
 });

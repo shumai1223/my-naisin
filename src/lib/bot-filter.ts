@@ -93,6 +93,22 @@ export function hasSameOriginNavigation(headers: { get(name: string): string | n
   return v === 'same-origin' || v === 'same-site';
 }
 
+/**
+ * referer が「オリジンのみ・末尾スラッシュ無し」という実ブラウザが送らない形か。
+ *
+ * TH-13第3波（`ops/THREATS.md`・2026-08-27〜継続中）の実測署名: 偽装referer型のbotは
+ * `https://my-naishin.com`（末尾スラッシュ無し・パス無し）を送るが、実ブラウザがトップページから
+ * 遷移する場合は必ず `https://my-naishin.com/`（末尾スラッシュ付き）になる。ブラウザの`Referer`
+ * ヘッダ生成は常にフルURL（パス込み）を送るため、パスが完全に欠落した形は生成され得ない。
+ *
+ * ⚠️ **末尾スラッシュ付き `https://my-naishin.com/` は正規のトップページ遷移であり、これに一致
+ * させてはならない**（T-M2着手前のnoteに「誤検知するとUA29種76件を巻き込む」と明記された既知の罠。
+ * `isRootOnlyReferer`はこの正規パターンの判定に使われる別関数であり、本関数と混同しないこと）。
+ */
+export function isImplausibleReferer(referer: string | null | undefined): boolean {
+  return referer === 'https://my-naishin.com';
+}
+
 export type ClickTrust = 'human' | 'suspect' | 'bot' | 'unknown';
 
 /**

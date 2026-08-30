@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 import { AFFILIATES, isLiveAffiliate, type AffiliateId } from '@/lib/affiliates';
 import { persistClick, countRecentClicksByIp } from '@/lib/clicks-db';
-import { isBotUserAgent, isInternalReferer, isPrefetchRequest, hasSameOriginNavigation } from '@/lib/bot-filter';
+import { isBotUserAgent, isInternalReferer, isPrefetchRequest, hasSameOriginNavigation, isImplausibleReferer } from '@/lib/bot-filter';
 import { renderClickHopHtml } from '@/lib/click-hop';
 
 /**
@@ -127,7 +127,10 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
   // IPローテーション型botが、内部refererを偽装して①②③を全てすり抜け、ASP3社(A8 241/もしも200+/
   // アクセストレード180)へ無効クリックとして計上されていた。**ASPのアカウント停止リスクに直結する。**
   // ブラウザが自動で付ける Sec-Fetch-Site を併用し、**両方**満たすときだけ即302する。
-  if (!isInternalReferer(refererRaw) || !hasSameOriginNavigation(request.headers)) {
+  // ⚠️2026-08-30追加(T-M2): TH-13第3波(2026-08-27〜)は`Referer: https://my-naishin.com`
+  // （末尾スラッシュ無し・パス無し＝実ブラウザが生成し得ない形）を偽装する。これもJSホップへ回す
+  // （末尾スラッシュ付き`https://my-naishin.com/`は正規のトップページ遷移なので誤検知しない）。
+  if (!isInternalReferer(refererRaw) || isImplausibleReferer(refererRaw) || !hasSameOriginNavigation(request.headers)) {
     return new NextResponse(renderClickHopHtml(affiliate.href, id), {
       status: 200,
       headers: {
