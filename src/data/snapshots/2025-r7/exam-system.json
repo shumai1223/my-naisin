@@ -1,0 +1,46 @@
+{
+  "meta": {
+    "fiscalYearLabel": "令和7年度(2025年度)",
+    "status": "collecting",
+    "startedAt": "2026-08-30",
+    "collectionMethod": "N1-2(ops/tasks/T-N1-N4-revenue-ceiling.md)。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。大市場県(tokyo/kanagawa/aichi/osaka/saitama/chiba/hyogo/fukuoka)から着手。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。",
+    "totalPrefectures": 47,
+    "collectedCount": 1,
+    "unavailable": []
+  },
+  "entries": [
+    {
+      "code": "tokyo",
+      "name": "東京都",
+      "region": "関東",
+      "fiscalYear": "2025",
+      "targetGrades": [3],
+      "gradeMultipliers": { "1": 0, "2": 0, "3": 1 },
+      "coreMultiplier": 1,
+      "practicalMultiplier": 2,
+      "maxScore": 65,
+      "simplifiedCalc": false,
+      "actualMaxScore": null,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": {
+        "totalMaxScore": 1020,
+        "examMaxScore": 1000,
+        "defaultRatio": { "naishin": 30, "exam": 70 },
+        "calcType": "tokyo",
+        "naishinMultiplier": null,
+        "kValue": null,
+        "sValueCoefficients": null,
+        "osakaTypeCount": null,
+        "hasTokyoSettings": true,
+        "hasKanagawaSettings": false
+      },
+      "sourceUrl": "https://www.kyoiku.metro.tokyo.lg.jp/documents/d/kyoiku/1_32",
+      "sourceUrl2": "https://www.spt.metro.tokyo.lg.jp/kyoiku/kyoiku/admission/high_school/exam/release20240919_01.html",
+      "sourceTitle": "東京都教育委員会「令和7年度東京都立高等学校入学者選抜実施要綱」",
+      "lastVerified": "2026-08-30",
+      "pdfHash": null,
+      "diffFromCurrentYear": "変更なし(2026-08-30に令和7年度実施要綱本体PDFを直接確認。第2-10-1(2): 学力検査:調査書点=7:3(芸術・体育系は6:4)、学力検査+調査書点=1000点満点、スピーキングテスト加点込みで1020点満点。第2-10-1(6): 学力検査を実施する教科は評定×1倍、実施しない教科は評定×2倍で調査書点算出。令和8年度分と同一の制度設計)"
+    }
+  ]
+}
