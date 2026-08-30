@@ -150,6 +150,43 @@ export default function TouseiHanIPage() {
             </p>
           </section>
 
+          {/* 残りの評価回数は何で決まるのか（T-N5第2ラウンド・外部一次ソースB） */}
+          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <h2 className="mb-3 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
+              「残りの評価」は何で決まるのか
+            </h2>
+            <p className="mb-3 text-sm leading-relaxed text-slate-700">
+              このツールは「残りの評価回数」を自分で見積もって入力する方式にしています。これは、
+              残りの評定が単純な試験の点数だけで決まるわけではないためです。国立教育政策研究所の
+              資料によると、各教科の評価は「知識・技能」「思考・判断・表現」「主体的に学習に取り組む態度」
+              の3観点をそれぞれA・B・Cで評価し、それらを総括したものが評定になります。
+            </p>
+            <blockquote className="border-l-4 border-emerald-400 bg-emerald-50 p-4 text-sm italic leading-relaxed text-slate-700">
+              「『主体的に学習に取り組む態度』の評価については、①知識及び技能を獲得したり、思考力、
+              判断力、表現力等を身に付けたりすることに向けた粘り強い取組を行おうとする側面と、
+              ②①の粘り強い取組を行う中で、自らの学習を調整しようとする側面、という二つの側面から
+              評価することが求められる。」
+            </blockquote>
+            <p className="mt-3 text-xs text-slate-500 leading-relaxed">
+              出典：国立教育政策研究所 教育課程研究センター「学習評価の在り方ハンドブック 高等学校編」
+              （令和元年6月）P9「『主体的に学習に取り組む態度』の評価のイメージ」
+              <a
+                href="https://www.nier.go.jp/kaihatsu/pdf/gakushuhyouka_R010613-02.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ml-1 text-emerald-700 underline"
+              >
+                原文PDF
+              </a>
+            </p>
+            <p className="mt-3 text-sm leading-relaxed text-slate-700">
+              つまり「残りの評価回数」で確定するのはテストの点数だけではなく、知識・技能や
+              思考・判断・表現の観点、および上記の2つの側面から見た取組の状況も含まれます。
+              このツールが到達可能な最大値・最小値という「幅」で示しているのは、この不確実性を
+              単一の予測値で断定しないためです。
+            </p>
+          </section>
+
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="mb-4 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
               あわせて確認したいツール

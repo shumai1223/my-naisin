@@ -348,6 +348,100 @@ export default function GakushuSeisekiPage() {
             </p>
           </section>
 
+          {/* なぜ学習成績の状況が重要なのか（T-N5第2ラウンド・外部一次ソースA） */}
+          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <h2 className="mb-3 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
+              なぜ学習成績の状況が重要なのか（推薦・総合型選抜の実施状況）
+            </h2>
+            <p className="mb-3 text-sm leading-relaxed text-slate-700">
+              一般選抜（学力試験中心）では学習成績の状況が直接問われる場面は限られますが、
+              学校推薦型選抜では出願条件・選考資料として重視されます。文部科学省の調査によると、
+              私立大学の入学者の<strong>約4割が学校推薦型選抜</strong>で入学しています。
+            </p>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-slate-200 text-left text-slate-500">
+                    <th className="py-2 pr-4 font-normal">区分</th>
+                    <th className="py-2 pr-4 text-right font-normal">学校推薦型選抜による入学者の割合</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="border-b border-slate-100">
+                    <td className="py-2 pr-4 text-slate-600">国立大学</td>
+                    <td className="py-2 pr-4 text-right font-semibold text-slate-700">12.7%</td>
+                  </tr>
+                  <tr className="border-b border-slate-100">
+                    <td className="py-2 pr-4 text-slate-600">公立大学</td>
+                    <td className="py-2 pr-4 text-right font-semibold text-slate-700">26.9%</td>
+                  </tr>
+                  <tr>
+                    <td className="py-2 pr-4 text-slate-600">私立大学</td>
+                    <td className="py-2 pr-4 text-right font-semibold text-slate-700">38.8%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p className="mt-3 text-xs text-slate-500 leading-relaxed">
+              出典：文部科学省「令和7年度国公私立大学入学者選抜実施状況」（令和7年5月1日現在集計）。
+              学校推薦型選抜による入学者数（国立12,706人・公立9,732人・私立198,977人）を、
+              入学者数総数（国立99,962人・公立36,236人・私立512,232人）で除して算出。
+              <a
+                href="https://www.mext.go.jp/content/20251126-mxt_daigakuc02-000045982_01.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ml-1 text-emerald-700 underline"
+              >
+                原文PDF
+              </a>
+            </p>
+            <p className="mt-3 text-sm leading-relaxed text-slate-700">
+              一般選抜だけを見て「学力試験の結果がすべて」と考えると、私立大学志望者の一部が
+              重視する評価軸を見落とすことになります。学校推薦型選抜（総合型選抜を含まない）だけで
+              入学者の4割近くを占める私立大学では、学習成績の状況を早い段階から把握しておく実益が
+              大きいといえます。
+            </p>
+          </section>
+
+          {/* 評定はどう付くのか（T-N5第2ラウンド・外部一次ソースB） */}
+          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <h2 className="mb-3 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
+              評定はどう付くのか（3観点から5段階への総括）
+            </h2>
+            <p className="mb-3 text-sm leading-relaxed text-slate-700">
+              このツールが計算する「学習成績の状況」は評定（5段階）を単純平均した値ですが、
+              その評定自体がどう付くのかは国立教育政策研究所の資料で説明されています。
+              各教科の学習評価は、まず3つの観点それぞれをA・B・Cの3段階で評価し、
+              それらを<strong>総括</strong>したものが5段階の評定になります。
+            </p>
+            <blockquote className="border-l-4 border-emerald-400 bg-emerald-50 p-4 text-sm italic leading-relaxed text-slate-700">
+              「各教科における観点別学習状況の評価の観点については、「知識・技能」「思考・判断・表現」
+              「主体的に学習に取り組む態度」の3観点に整理されています。」
+            </blockquote>
+            <p className="mt-3 text-xs text-slate-500 leading-relaxed">
+              出典：国立教育政策研究所 教育課程研究センター「学習評価の在り方ハンドブック 高等学校編」
+              （令和元年6月）P6「学習評価の基本構造」
+              <a
+                href="https://www.nier.go.jp/kaihatsu/pdf/gakushuhyouka_R010613-02.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ml-1 text-emerald-700 underline"
+              >
+                原文PDF
+              </a>
+            </p>
+            <p className="mt-3 text-sm leading-relaxed text-slate-700">
+              同資料の図解では、「知識・技能」「思考・判断・表現」「主体的に学習に取り組む態度」を
+              観点ごとにA・B・Cの3段階で評価し、その結果を総括したものが5段階の評定であると
+              整理されています。さらに、観点別評価や評定には示しきれない一人一人のよい点や可能性・
+              進歩の状況は「個人内評価」として別に見取ることとされており、評定の数字だけが
+              学習評価のすべてではない点も明記されています。「主体的に学習に取り組む態度」については、
+              授業への取組の回数や挙手の多さのような表面的な行動ではなく、
+              ①粘り強く学習に取り組もうとする側面と②自らの学習を調整しようとする側面の2つから
+              評価することが求められる、と説明されています。
+            </p>
+          </section>
+
           {/* 相互リンク */}
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="mb-4 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">

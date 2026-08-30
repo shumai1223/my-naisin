@@ -178,6 +178,36 @@ export default function GaihyouDistancePage() {
             </p>
           </section>
 
+          {/* 概評が実際に問われる場面（T-N5第2ラウンド・外部一次ソースA） */}
+          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <h2 className="mb-3 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
+              学習成績概評は、どの入試方式で実際に使われるのか
+            </h2>
+            <p className="mb-3 text-sm leading-relaxed text-slate-700">
+              学力試験中心の一般選抜では概評そのものが合否に直接影響する場面は限られますが、
+              学校推薦型選抜では出願条件・選考資料として重視されます。文部科学省の調査によると、
+              私立大学の入学者の<strong>約4割（38.8%）</strong>が学校推薦型選抜で入学しています
+              （国立12.7%・公立26.9%）。
+            </p>
+            <p className="mt-3 text-xs text-slate-500 leading-relaxed">
+              出典：文部科学省「令和7年度国公私立大学入学者選抜実施状況」（令和7年5月1日現在集計）。
+              学校推薦型選抜による入学者数（国立12,706人・公立9,732人・私立198,977人）を
+              入学者数総数（国立99,962人・公立36,236人・私立512,232人）で除して算出。
+              <a
+                href="https://www.mext.go.jp/content/20251126-mxt_daigakuc02-000045982_01.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ml-1 text-emerald-700 underline"
+              >
+                原文PDF
+              </a>
+            </p>
+            <p className="mt-3 text-sm leading-relaxed text-slate-700">
+              私立大学志望で学校推薦型選抜を検討している場合、概評の区分（A〜E）は出願できるかどうかの
+              基準に直結することが多く、境界付近にいるなら早めに把握しておく実益があります。
+            </p>
+          </section>
+
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="mb-4 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
               あわせて確認したいツール
