@@ -5,7 +5,7 @@
     "frozenBy": "scripts/freeze-exam-snapshot.ts (T-N1-1)",
     "sourceOfTruth": "src/lib/prefectures.ts (この日付時点のスナップショット)",
     "prefectureCount": 47,
-    "pdfHashStatus": "partial_6_of_47",
+    "pdfHashStatus": "partial_7_of_47",
     "freezePolicy": "本ディレクトリは生成後に書き換え禁止。prefectures.tsが後日修正されても本ファイルは追随させない。来年度の差分エンジン(N1-3)の基準点として使う。",
     "pdfHashNote": "47件中6件(sourceUrlが直接PDFリンクの県)のみSHA-256を取得済み(2026-08-30)。残り41件はsourceUrlがポータル/HTMLページで実際のPDF URLを個別に特定する必要があり、N1-2(前年度収集)と合わせて9/08-22に着手予定。"
   },
@@ -37,7 +37,9 @@
       "sourceUrl2": "https://www.do-con.com/nyushi/judge.html",
       "sourceTitle": "北海道教育委員会 入学者選抜",
       "lastVerified": "2026-04-22",
-      "pdfHash": null
+      "pdfHash": "33fcd9a207e598c5aa548b17a495dad2cbd11022464d54f9669c881cf2d995c3",
+      "pdfHashSourceUrl": "https://www.dokyoi.pref.hokkaido.lg.jp/fs/1/2/2/2/6/7/1/7/_/02_%E4%B8%80%E8%88%AC%E8%A6%81%E9%A0%85z.pdf",
+      "pdfHashVerifiedAt": "2026-08-31"
     },
     {
       "code": "aomori",

@@ -30,16 +30,19 @@ describe('2026-r8 exam-system snapshot（T-N1-1 凍結スナップショット�
     }
   });
 
-  test('pdfHashはsourceUrlが直接PDFの6県のみ取得済み・64桁16進のSHA-256形式(未収集を偽らない)', () => {
-    expect(snapshot.meta.pdfHashStatus).toBe('partial_6_of_47');
+  test('pdfHashは取得済みの県のみ・64桁16進のSHA-256形式で、ハッシュ元PDFのURLが特定できる(未収集を偽らない)', () => {
+    expect(snapshot.meta.pdfHashStatus).toBe('partial_7_of_47');
     const withHash = snapshot.entries.filter((e) => e.pdfHash !== null);
-    expect(withHash).toHaveLength(6);
+    expect(withHash).toHaveLength(7);
     for (const entry of withHash) {
       expect(entry.pdfHash).toMatch(/^[0-9a-f]{64}$/);
-      expect(entry.sourceUrl.toLowerCase().endsWith('.pdf')).toBe(true);
+      // sourceUrlが直接PDFの場合はそれ自体がハッシュ元。ポータルページの場合はpdfHashSourceUrlに
+      // 実際にハッシュを取得したPDFのURLを記録する(1差分1出典の原則・N1-0と同思想)。
+      const hashSourceUrl = entry.pdfHashSourceUrl ?? entry.sourceUrl;
+      expect(hashSourceUrl.toLowerCase().endsWith('.pdf')).toBe(true);
     }
     const withoutHash = snapshot.entries.filter((e) => e.pdfHash === null);
-    expect(withoutHash).toHaveLength(41);
+    expect(withoutHash).toHaveLength(40);
   });
 
   test('凍結メタデータに生成日・凍結ポリシーが明記されている', () => {
