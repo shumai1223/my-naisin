@@ -106,6 +106,32 @@ describe('robots()', () => {
     expect(allowList).toEqual(expect.arrayContaining(['/api/naishin', '/api/mcp', '/api/openapi']));
   });
 
+  test('堀B公開データAPI全ルートを許可（2026-08-30: gakushu-seiseki等5ルートの許可漏れ再発防止）', () => {
+    const wildcard = (Array.isArray(r.rules) ? r.rules : [r.rules]).find(
+      (rule) => rule.userAgent === '*'
+    );
+    const allow = wildcard?.allow ?? [];
+    const allowList = Array.isArray(allow) ? allow : [allow];
+    expect(allowList).toEqual(
+      expect.arrayContaining([
+        '/api/naishin',
+        '/api/mcp',
+        '/api/openapi',
+        '/api/card',
+        '/api/calendar',
+        '/api/status',
+        '/api/total-score',
+        '/api/hensachi',
+        '/api/education-cost',
+        '/api/gakushu-seiseki',
+        '/api/bairitsu',
+        '/api/schools',
+        '/api/stats',
+        '/api/juku-reviews',
+      ])
+    );
+  });
+
   test('/admin/を拒否（page-registryのSITEMAP_EXCLUDED_ROUTESと対）', () => {
     const wildcard = (Array.isArray(r.rules) ? r.rules : [r.rules]).find(
       (rule) => rule.userAgent === '*'

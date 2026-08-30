@@ -45,7 +45,27 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         // 公開データAPI（堀B：AIが呼べる一次データ層）は明示的に許可。その他の /api は非公開のまま。
-        allow: ['/', '/api/naishin', '/api/mcp', '/api/openapi', '/api/card', '/api/calendar', '/api/status', '/api/total-score', '/api/hensachi', '/api/education-cost'],
+        // ⚠️2026-08-30判明: gakushu-seiseki/bairitsu/schools/stats/juku-reviewsの5ルートが
+        // 「堀B全20ルート」に含まれる公開データAPIであるにもかかわらずここに未登録で、
+        // Googlebot等の通常クローラから見えない状態になっていた(AI引用botは別ルールで全許可のため
+        // 実害は限定的だったが、コメントが述べる意図と実装が乖離していた)。追加して是正。
+        allow: [
+          '/',
+          '/api/naishin',
+          '/api/mcp',
+          '/api/openapi',
+          '/api/card',
+          '/api/calendar',
+          '/api/status',
+          '/api/total-score',
+          '/api/hensachi',
+          '/api/education-cost',
+          '/api/gakushu-seiseki',
+          '/api/bairitsu',
+          '/api/schools',
+          '/api/stats',
+          '/api/juku-reviews',
+        ],
         // /go/* はアフィリ送客の 302 リダイレクタ（中身なし）＝クロール予算の無駄なので拒否。
         // /admin/* は認証必須の内部ページ（page-registry.ts の SITEMAP_EXCLUDED_ROUTES と対）。
         disallow: ['/api/', '/go/', '/admin/', '/*?*'],
