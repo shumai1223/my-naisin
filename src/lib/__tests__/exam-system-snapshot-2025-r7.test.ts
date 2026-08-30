@@ -78,4 +78,12 @@ describe('2025-r7 exam-system snapshot（N1-2 収集中スナップショット�
     expect(o2025.reverseCalc?.totalMaxScore).toBe(o2026.reverseCalc?.totalMaxScore);
     expect(o2025.reverseCalc?.osakaTypeCount).toBe(o2026.reverseCalc?.osakaTypeCount);
   });
+
+  test('saitama: 2026-r8と2025-r7で制度の核となる数値が一致する(実測で確認済みの「変更なし」)', () => {
+    const s2025 = snapshot.entries.find((e) => e.code === 'saitama')!;
+    const s2026 = snapshot2026.entries.find((e) => e.code === 'saitama')!;
+    expect(s2025.maxScore).toBe(s2026.maxScore);
+    expect(s2025.gradeMultipliers).toEqual(s2026.gradeMultipliers);
+    expect(s2025.reverseCalc?.examMaxScore).toBe(s2026.reverseCalc?.examMaxScore);
+  });
 });
