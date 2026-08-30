@@ -24,5 +24,12 @@ N1-2（`ops/tasks/T-N1-N4-revenue-ceiling.md`）で収集している前年度�
 
 ## 進捗
 
-- 2026-08-30: tokyo 1件（1/47）。令和7年度実施要綱本体PDF（`documents/d/kyoiku/1_32`）を直接確認し、
+- 2026-08-30: tokyo 1件目。令和7年度実施要綱本体PDF（`documents/d/kyoiku/1_32`）を直接確認し、
   令和8年度と同一の制度設計（7:3配点・実技2倍・1020点満点）であることを検証済み。
+- 2026-08-30: kanagawa 2件目。現行の教委ページは既に令和9年度分に更新済みだったため、
+  Wayback Machine CDX API（`http://archive.org/wayback/available?url=...`）で2024-07-26時点の
+  スナップショットを特定し、`curl`でPDFを取得してRead toolで直接確認（WebFetchはweb.archive.org
+  に非対応のためcurl経由が必須）。令和7年度実施要領§1-V-6(2)アの計算式（A=第2学年評定合計+
+  第3学年評定合計×2、135点満点、S1=a×f+b×g）が令和8年度分と完全一致（変更なし）と検証済み。
+  **今後、現存ページが最新年度に更新済みで前年度分が見当たらない県は、まずWayback CDX APIで
+  探す運用を標準とする**（tokyoは偶然現存ページに残っていたが、kanagawaは残っていなかった）。
