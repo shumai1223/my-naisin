@@ -121,7 +121,8 @@ chibaも同型（K値=1〜2の学校裁量制）でreverseCalcはnullのまま�
 環境側5MB取得上限で破損したため、curlのRangeヘッダーで6分割取得+境界重複バイト除去+結合で復元
 （新知見）。埼玉・千葉と同様、調査書序列と学力検査序列を組み合わせる方式でreverseCalcはサイト
 独自の代表値と区別して記録。
-**大市場8県は全て完了（14/47）。残り39県へ拡大中**（北海道・東北ブロックから順）。
+**大市場8県は全て完了（15/47）。北海道・東北ブロック7県(hokkaido/aomori/iwate/miyagi/akita/
+yamagata/fukushima)完了。次は関東ブロック(ibaraki等)へ**。
 yamagataで新知見: xlsx/docx等のOffice形式一次資料もunzip+sharedStrings.xml等のXML抽出で
 内容確認できる（PDFが無くExcel様式しか無い県で有効）。
 iwateは660→500点圧縮方式が令和7年度こそ新方式の開始年だったと判明（既存コメント通り）。
