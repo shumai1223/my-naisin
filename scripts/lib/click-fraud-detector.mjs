@@ -138,3 +138,43 @@ export function analyzeClickBursts(rows) {
   bursts.sort((a, b) => (a.startedAt < b.startedAt ? -1 : a.startedAt > b.startedAt ? 1 : 0));
   return { bursts, flaggedIds, byDate };
 }
+
+const MOBILE_UA_RE = /Mobile|iPhone|Android/i;
+
+export const MOBILE_RATIO_THRESHOLDS = {
+  // これ未満の日はサンプルが少なくブレが支配的なので判定を見送る（オオカミ少年化を避ける）。
+  minDailyClicksForMobileCheck: 10,
+  // サイト全体はモバイル約74-80%（GSC実測）。50%を下回る日はデスクトップに偏りすぎており疑う。
+  minExpectedMobileRatio: 0.5,
+};
+
+/**
+ * ★2026-08-30追加(T-M2 M2-4): 日別のモバイル比率を集計し、実トラフィックの水準（GSC実測で
+ * 約80%）から著しく下回った日を警告する。`src/lib/click-ratio-audit.ts`のhuman分類限定チェック
+ * （偽装ヘッダ型ボットのすり抜け検知・サンプル数が少なく閾値0.30）とは目的が異なり、こちらは
+ * 「デスクトップに偏った日は無条件に疑う」という日次の粗いスクリーニング（loop-question-note
+ * 2026-08-29「検知器の自己点検」の指示どおり）。全クリック（bot判定前の生データ）を対象にする点も
+ * click-ratio-audit.tsとの違い（あちらはclassifyClickでhumanと判定された後の内訳を見る）。
+ *
+ * @param {{ d: string, user_agent: string }[]} rows
+ * @returns {{ date: string, total: number, mobile: number, mobileRatio: number, flagged: boolean }[]}
+ *   日付昇順。flagged=trueの日がモバイル比率50%未満（最低件数に満たない日は判定を見送りflagged=false）。
+ */
+export function analyzeMobileRatioByDay(rows) {
+  const byDate = new Map();
+  for (const r of rows) {
+    if (!byDate.has(r.d)) byDate.set(r.d, { total: 0, mobile: 0 });
+    const bucket = byDate.get(r.d);
+    bucket.total++;
+    if (MOBILE_UA_RE.test(r.user_agent ?? '')) bucket.mobile++;
+  }
+
+  const { minDailyClicksForMobileCheck, minExpectedMobileRatio } = MOBILE_RATIO_THRESHOLDS;
+  return [...byDate.entries()]
+    .sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0))
+    .map(([date, b]) => {
+      const mobileRatio = b.total > 0 ? b.mobile / b.total : 0;
+      const flagged = b.total >= minDailyClicksForMobileCheck && mobileRatio < minExpectedMobileRatio;
+      return { date, total: b.total, mobile: b.mobile, mobileRatio, flagged };
+    });
+}

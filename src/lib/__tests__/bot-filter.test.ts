@@ -71,6 +71,7 @@ describe('isPrefetchRequest', () => {
 describe('isImplausibleReferer', () => {
   it('末尾スラッシュ無し・パス無しのreferer(TH-13第3波の偽装署名)はimplausible', () => {
     expect(isImplausibleReferer('https://my-naishin.com')).toBe(true);
+    expect(isImplausibleReferer('http://my-naishin.com')).toBe(true);
   });
 
   it('⚠️末尾スラッシュ付き(正規のトップページ遷移)は絶対にimplausible扱いしない', () => {

@@ -9,7 +9,12 @@
  * 読み取り専用(d1q.mjs経由)。異常日があれば exit 1・詳細を表示。無ければ exit 0。
  */
 import { spawnSync } from 'node:child_process';
-import { analyzeClickFraudByDay, analyzeClickBursts, isImplausibleReferer } from './lib/click-fraud-detector.mjs';
+import {
+  analyzeClickFraudByDay,
+  analyzeClickBursts,
+  isImplausibleReferer,
+  analyzeMobileRatioByDay,
+} from './lib/click-fraud-detector.mjs';
 
 const args = process.argv.slice(2);
 const daysIdx = args.indexOf('--days');
@@ -48,6 +53,11 @@ const flagged = analyzeClickFraudByDay(rows).filter((r) => r.flagged);
 const { bursts, flaggedIds, byDate } = analyzeClickBursts(rows);
 const implausible = rows.filter((r) => isImplausibleReferer(r.referer));
 
+// T-M2 M2-4: 直近7日のモバイル比率が異常に低い日を警告(実トラフィックは80%前後がモバイル)。
+const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
+const last7dRows = rows.filter((r) => r.d >= sevenDaysAgo);
+const mobileFlagged = analyzeMobileRatioByDay(last7dRows).filter((r) => r.flagged);
+
 if (implausible.length > 0) {
   const byDay = {};
   for (const r of implausible) byDay[r.d] = (byDay[r.d] ?? 0) + 1;
@@ -58,7 +68,7 @@ if (implausible.length > 0) {
   for (const [d, n] of Object.entries(byDay).sort()) console.log(`  ${d}: ${n}件`);
 }
 
-if (flagged.length === 0 && bursts.length === 0 && implausible.length === 0) {
+if (flagged.length === 0 && bursts.length === 0 && implausible.length === 0 && mobileFlagged.length === 0) {
   console.log(`OK: 過去${days}日間にクリック不正の疑いは無し(${rows.length}件を検査)`);
   process.exit(0);
 }
@@ -69,6 +79,13 @@ if (flagged.length > 0) {
     console.log(
       `  ${f.date}: 総クリック${f.total} / distinct IP${f.distinctIp}(比率${f.ipRatio.toFixed(3)}) / distinct UA${f.distinctUa}`
     );
+  }
+}
+
+if (mobileFlagged.length > 0) {
+  console.log(`⚠️ 直近7日でモバイル比率が50%を下回った日が${mobileFlagged.length}件(実トラフィックは通常74-80%がモバイル):`);
+  for (const m of mobileFlagged) {
+    console.log(`  ${m.date}: 総クリック${m.total} / モバイル${m.mobile}(比率${(m.mobileRatio * 100).toFixed(1)}%)`);
   }
 }
 

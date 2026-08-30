@@ -102,11 +102,17 @@ export function hasSameOriginNavigation(headers: { get(name: string): string | n
  * ヘッダ生成は常にフルURL（パス込み）を送るため、パスが完全に欠落した形は生成され得ない。
  *
  * ⚠️ **末尾スラッシュ付き `https://my-naishin.com/` は正規のトップページ遷移であり、これに一致
- * させてはならない**（T-M2着手前のnoteに「誤検知するとUA29種76件を巻き込む」と明記された既知の罠。
+ * させてはならない**（`scripts/lib/click-fraud-detector.mjs`の同名関数(2026-08-29新設)のnoteに
+ * 「初版で正規化したところUA29種76件の人間クリックを誤検知した」と明記された既知の罠。
  * `isRootOnlyReferer`はこの正規パターンの判定に使われる別関数であり、本関数と混同しないこと）。
+ * `scripts/lib/click-fraud-detector.mjs`の検知専用版と判定ロジックを一致させてある
+ * （`http://`スキームも念のため含める。本番はhttps固定だが監査対象データに古い記録が
+ * 混入する可能性を排除しない）。
  */
 export function isImplausibleReferer(referer: string | null | undefined): boolean {
-  return referer === 'https://my-naishin.com';
+  if (!referer) return false;
+  const v = referer.trim();
+  return v === 'https://my-naishin.com' || v === 'http://my-naishin.com';
 }
 
 export type ClickTrust = 'human' | 'suspect' | 'bot' | 'unknown';
