@@ -316,6 +316,16 @@ describe('2025-r7 exam-system snapshot（N1-2 収集中スナップショット�
     expect(s2025.reverseCalc?.examMaxScore).toBe(s2026.reverseCalc?.examMaxScore);
   });
 
+  test('okayama: 2026-r8と2025-r7で制度の核となる数値が一致する(実測で確認済みの「変更なし」)', () => {
+    const o2025 = snapshot.entries.find((e) => e.code === 'okayama')!;
+    const o2026 = snapshot2026.entries.find((e) => e.code === 'okayama')!;
+    expect(o2025.maxScore).toBe(o2026.maxScore);
+    expect(o2025.actualMaxScore).toBe(o2026.actualMaxScore);
+    expect(o2025.simplifiedCalc).toBe(o2026.simplifiedCalc);
+    expect(o2025.gradeMultipliers).toEqual(o2026.gradeMultipliers);
+    expect(o2025.practicalMultiplier).toBe(o2026.practicalMultiplier);
+  });
+
   test('47県のうち大市場8県(tokyo/kanagawa/aichi/osaka/saitama/chiba/hyogo/fukuoka)が揃っている', () => {
     const majorMarketCodes = [
       'tokyo', 'kanagawa', 'aichi', 'osaka', 'saitama', 'chiba', 'hyogo', 'fukuoka',
