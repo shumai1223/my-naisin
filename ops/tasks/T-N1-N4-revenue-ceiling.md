@@ -104,6 +104,10 @@ source-history.ts の90スナップショット → 全て2026-07/08取得
 
 ⚠️ **この作業は重い（47県×PDF読解）。ただし一度きり。** 来年以降はN1-1の凍結との差分を取るだけになる。
 
+**進捗（1/47・2026-08-30着手）**: tokyo完了✅（実施要綱本体PDFを直接確認・令和8年度と制度上の差分なしと検証済み）。
+`src/data/snapshots/2025-r7/README.md`に方針・`exam-system.json`の`meta.collectedCount`に進捗数を記録する運用。
+次は大市場県の続き（kanagawa/aichi/osaka/saitama/chiba/hyogo/fukuoka）を1県ずつ。
+
 ## N1-3 差分エンジン
 
 - [x] `src/lib/exam-system-diff.ts` — 2つのスナップショットを比較して変更点を返す純関数
