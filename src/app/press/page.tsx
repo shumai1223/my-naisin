@@ -98,7 +98,7 @@ export default function PressPage() {
               ))}
             </div>
             <p className="mt-4 text-xs leading-relaxed text-slate-500">
-              直近28日の検索クリック数は7,889クリック（表示回数199,364・平均掲載順位6.1位、Google Search Console実測・2026年6月15日〜7月13日）。
+              直近28日の検索クリック数は5,634クリック（表示回数233,266・平均掲載順位7.36位、Google Search Console実測・2026年7月30日〜8月27日）。
               最新の数値が必要な場合はお問い合わせください。
             </p>
           </section>
