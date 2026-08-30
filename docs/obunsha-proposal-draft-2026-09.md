@@ -159,9 +159,14 @@
 
 ## 付録: 送付前チェックリスト（👤向け）
 
-- [ ] §6の金額が`https://my-naishin.com/developers`の現行表示と一致しているか確認（価格改定が
+- [x] §6の金額が`https://my-naishin.com/developers`の現行表示と一致しているか確認（価格改定が
       あれば最新値に差し替え）
-- [ ] URLが全てステージングではなく本番で正しく開けるか確認
+      ✅2026-08-30 loopが`src/lib/api-tiers.ts`のPro(monthlyPriceJpy=9,800)・Business
+      (annualPriceJpy=240,000)を直接確認し、本文の¥9,800/¥240,000と完全一致を確認済み（価格改定なし）
+- [x] URLが全てステージングではなく本番で正しく開けるか確認
+      ✅2026-08-30 loopが§3の7URL全てを本番でcurl確認（全てHTTP 200）:
+      /hyotei-heikin/gakushu-seiseki・/chousasho・/yokuaru-machigai・/kakomon-jisaiten・
+      /embed/demo・/developers・/reliability
 - [ ] 全体を読み、「機能説明」ではなく「ソリューション訴求」の順序（ストーリー→デモ→安全性→
       ビジネスモデルの順）になっているか確認
 - [ ] 送付形式（メール本文に直接貼るか、PDF化するか）を決める。PDF化する場合は
