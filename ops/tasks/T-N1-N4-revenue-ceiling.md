@@ -104,14 +104,15 @@ source-history.ts の90スナップショット → 全て2026-07/08取得
 
 ⚠️ **この作業は重い（47県×PDF読解）。ただし一度きり。** 来年以降はN1-1の凍結との差分を取るだけになる。
 
-**進捗（3/47・2026-08-30着手）**: tokyo✅・kanagawa✅・aichi✅（いずれも実施要領/要綱本体PDFを直接確認・令和8年度と制度上の差分なしと検証済み）。
+**進捗（4/47・2026-08-30着手）**: tokyo✅・kanagawa✅・aichi✅・osaka✅（いずれも実施要領/要綱本体PDFを直接確認・令和8年度と制度上の差分なしと検証済み）。
 `src/data/snapshots/2025-r7/README.md`に方針・`exam-system.json`の`meta.collectedCount`に進捗数を記録する運用。
 **新知見**: 現行の教委ページは既に翌々年度分(令和9年度)に更新されていることがある(kanagawaで実際に発生)。
 また現行ページ自体が生きていてもWebFetch/curlがリダイレクトループで失敗することがある(aichiで実際に発生・
 curl error 47/WebFetch「Too many redirects」)。いずれの場合もWayback Machine CDX API
 (`archive.org/wayback/available?url=...&timestamp=...`)でスナップショットを特定し、`curl`でPDFを取得して
-からRead toolで確認する(WebFetchはweb.archive.org非対応のためcurl必須)。
-次は大市場県の続き（osaka/saitama/chiba/hyogo/fukuoka）を1県ずつ。
+からRead toolで確認する(WebFetchはweb.archive.org非対応のためcurl必須)。osakaは令和7年度専用ページが
+現存しcurl直叩きで問題なく取得できた(県によって直取得できる/できないが分かれる)。
+次は大市場県の続き（saitama/chiba/hyogo/fukuoka）を1県ずつ。
 
 ## N1-3 差分エンジン
 
