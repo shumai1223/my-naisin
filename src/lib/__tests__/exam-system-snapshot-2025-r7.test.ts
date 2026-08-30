@@ -215,6 +215,15 @@ describe('2025-r7 exam-system snapshot（N1-2 収集中スナップショット�
     expect(f2025.gradeMultipliers).toEqual(f2026.gradeMultipliers);
   });
 
+  test('yamanashi: 2026-r8と2025-r7で制度の核となる数値が一致する(実測で確認済みの「変更なし」)', () => {
+    const y2025 = snapshot.entries.find((e) => e.code === 'yamanashi')!;
+    const y2026 = snapshot2026.entries.find((e) => e.code === 'yamanashi')!;
+    expect(y2025.maxScore).toBe(y2026.maxScore);
+    expect(y2025.gradeMultipliers).toEqual(y2026.gradeMultipliers);
+    expect(y2025.coreMultiplier).toBe(y2026.coreMultiplier);
+    expect(y2025.practicalMultiplier).toBe(y2026.practicalMultiplier);
+  });
+
   test('47県のうち大市場8県(tokyo/kanagawa/aichi/osaka/saitama/chiba/hyogo/fukuoka)が揃っている', () => {
     const majorMarketCodes = [
       'tokyo', 'kanagawa', 'aichi', 'osaka', 'saitama', 'chiba', 'hyogo', 'fukuoka',
