@@ -5,7 +5,7 @@
     "startedAt": "2026-08-30",
     "collectionMethod": "N1-2(ops/tasks/T-N1-N4-revenue-ceiling.md)。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。大市場県(tokyo/kanagawa/aichi/osaka/saitama/chiba/hyogo/fukuoka)から着手。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。",
     "totalPrefectures": 47,
-    "collectedCount": 7,
+    "collectedCount": 8,
     "unavailable": []
   },
   "entries": [
@@ -195,6 +195,39 @@
       "lastVerified": "2026-08-30",
       "pdfHash": null,
       "diffFromCurrentYear": "変更なし(2026-08-30に選抜要綱p.6「3006(2)」で第3学年の評定のみを用いる方式(令和7年1月以降・全生徒5段階評定)を確認、p.73(PDF内77ページ目)「別表1 評定換算表」で国語・社会・数学・理科・外国語(5教科)は評定点25→換算点100(×4倍)、音楽・美術・保健体育・技術家庭(4教科)は評定点20→換算点150(×7.5倍)、合計250点満点を確認。令和8年度分(prefectures.ts)のgradeMultipliers{1:0,2:0,3:1}/coreMultiplier=4/practicalMultiplier=7.5/maxScore=250と完全一致)"
+    },
+    {
+      "code": "fukuoka",
+      "name": "福岡県",
+      "region": "九州・沖縄",
+      "fiscalYear": "2025",
+      "targetGrades": [3],
+      "gradeMultipliers": { "1": 0, "2": 0, "3": 1 },
+      "coreMultiplier": 1,
+      "practicalMultiplier": 1,
+      "maxScore": 45,
+      "simplifiedCalc": false,
+      "actualMaxScore": null,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": {
+        "totalMaxScore": 345,
+        "examMaxScore": 300,
+        "defaultRatio": { "naishin": 13, "exam": 87 },
+        "calcType": "standard",
+        "naishinMultiplier": null,
+        "kValue": null,
+        "sValueCoefficients": null,
+        "osakaTypeCount": null,
+        "hasTokyoSettings": false,
+        "hasKanagawaSettings": false
+      },
+      "sourceUrl": "http://web.archive.org/web/20250810002926/https://www.pref.fukuoka.lg.jp/uploaded/attachment/233443.pdf",
+      "sourceUrl2": "http://web.archive.org/web/20250810002926/https://www.pref.fukuoka.lg.jp/site/kyouiku/07youkou.html",
+      "sourceTitle": "福岡県教育委員会「令和7年度福岡県立高等学校入学者選抜要項」(現行ページは令和8/9年度分に更新済みのためWayback Machine 2025-08-10時点のスナップショットで確認。本体PDFが28.21MBかつ環境側に1リクエスト5MBの取得上限があったため、curlのRangeヘッダーで6分割取得し結合して復元した)",
+      "lastVerified": "2026-08-30",
+      "pdfHash": null,
+      "diffFromCurrentYear": "gradeMultipliers/maxScoreは変更なしと直接検証(2026-08-30に選抜要項p.10「(八)選抜の方法1」で調査書の第3学年の各教科評定の数値の合計=9教科×5段階=45点により序列を定めると確認。p.5「(三)学力検査1」で5教科×各60点=300点満点も確認。令和8年度分(prefectures.ts)のgradeMultipliers{1:0,2:0,3:1}/maxScore=45/examMaxScore=300と一致)。ただし本要項は調査書の序列と学力検査の総点による序列を組み合わせて選考する方式であり、「345点満点」「内申13%:学力87%」という単一の合成得点・比率は本文中に明記されていない(埼玉・千葉と同様、reverseCalcはサイト独自の代表値として令和8年度分から不変前提で引き継いだ)"
     }
   ]
 }

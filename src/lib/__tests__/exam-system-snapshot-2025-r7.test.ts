@@ -104,4 +104,22 @@ describe('2025-r7 exam-system snapshot（N1-2 収集中スナップショット�
     expect(h2025.coreMultiplier).toBe(h2026.coreMultiplier);
     expect(h2025.practicalMultiplier).toBe(h2026.practicalMultiplier);
   });
+
+  test('fukuoka: 2026-r8と2025-r7で制度の核となる数値が一致する(実測で確認済みの「変更なし」)', () => {
+    const f2025 = snapshot.entries.find((e) => e.code === 'fukuoka')!;
+    const f2026 = snapshot2026.entries.find((e) => e.code === 'fukuoka')!;
+    expect(f2025.maxScore).toBe(f2026.maxScore);
+    expect(f2025.gradeMultipliers).toEqual(f2026.gradeMultipliers);
+    expect(f2025.reverseCalc?.examMaxScore).toBe(f2026.reverseCalc?.examMaxScore);
+  });
+
+  test('47県のうち大市場8県(tokyo/kanagawa/aichi/osaka/saitama/chiba/hyogo/fukuoka)が揃っている', () => {
+    const majorMarketCodes = [
+      'tokyo', 'kanagawa', 'aichi', 'osaka', 'saitama', 'chiba', 'hyogo', 'fukuoka',
+    ];
+    const collectedCodes = new Set(snapshot.entries.map((e) => e.code));
+    for (const code of majorMarketCodes) {
+      expect(collectedCodes.has(code)).toBe(true);
+    }
+  });
 });
