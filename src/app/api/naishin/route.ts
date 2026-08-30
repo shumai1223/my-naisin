@@ -12,7 +12,7 @@ import { buildDatasetIndex } from '@/lib/naishin-dataset';
 export async function GET(request: Request) {
   const gate = await gateApiRequest(request);
   if (!gate.allowed) return gate.response;
-  logApiHit('naishin-index', request, { tier: gate.tier });
+  await logApiHit('naishin-index', request, { tier: gate.tier });
   return corsJson(buildDatasetIndex(), { headers: gate.headers, private: gate.cachePrivate });
 }
 

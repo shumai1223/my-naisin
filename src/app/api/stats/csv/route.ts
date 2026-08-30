@@ -15,7 +15,7 @@ import { getStatsValues } from '@/lib/stats-db';
 export async function GET(request: Request) {
   const gate = await gateApiRequest(request);
   if (!gate.allowed) return gate.response;
-  logApiHit('stats-csv', request, { tier: gate.tier });
+  await logApiHit('stats-csv', request, { tier: gate.tier });
 
   const generatedAtIso = new Date().toISOString();
   const rows = await Promise.all(

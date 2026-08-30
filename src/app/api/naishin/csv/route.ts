@@ -11,7 +11,7 @@ import { buildDatasetCsv } from '@/lib/naishin-dataset';
 export async function GET(request: Request) {
   const gate = await gateApiRequest(request);
   if (!gate.allowed) return gate.response;
-  logApiHit('naishin-csv', request, { tier: gate.tier });
+  await logApiHit('naishin-csv', request, { tier: gate.tier });
   return corsCsv(buildDatasetCsv(), {
     filename: 'my-naishin-prefectures-2026.csv',
     headers: gate.headers,

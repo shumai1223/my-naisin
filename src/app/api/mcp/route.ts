@@ -933,7 +933,7 @@ export async function POST(request: Request) {
   };
 
   // 利用ログ（堀の証拠）：methodと、tools/callならツール名を残す。
-  logApiHit('mcp', request, {
+  await logApiHit('mcp', request, {
     method: method ?? '(none)',
     ...(method === 'tools/call' && params?.name ? { tool: String(params.name) } : {}),
   });
@@ -1006,8 +1006,8 @@ export async function POST(request: Request) {
 }
 
 /** ディスカバリ：GETでサーバ情報とツール一覧を返す。 */
-export function GET(request: Request) {
-  logApiHit('mcp-discovery', request);
+export async function GET(request: Request) {
+  await logApiHit('mcp-discovery', request);
   return NextResponse.json(
     {
       name: 'my-naishin-data',

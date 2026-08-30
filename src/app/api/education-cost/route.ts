@@ -17,7 +17,7 @@ const JUKU_TYPES: JukuType[] = ['none', 'shudan', 'kobetsu', 'katei'];
 export async function GET(request: Request) {
   const gate = await gateApiRequest(request);
   if (!gate.allowed) return gate.response;
-  logApiHit('education-cost', request, { tier: gate.tier });
+  await logApiHit('education-cost', request, { tier: gate.tier });
 
   const url = new URL(request.url);
   const currentGradeRaw = url.searchParams.get('currentGrade') ?? '1';

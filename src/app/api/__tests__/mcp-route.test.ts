@@ -389,7 +389,7 @@ describe('/api/mcp JSON-RPC 契約', () => {
   });
 
   test('GET ディスカバリはツール/メソッド一覧を返す', async () => {
-    const res = GET();
+    const res = await GET();
     const json = await res.json();
     expect(json.tools).toHaveLength(27);
     expect(json.methods).toContain('resources/read');

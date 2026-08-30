@@ -17,7 +17,7 @@ import { DATASET_META, SITE_URL } from '@/lib/naishin-dataset';
 export async function GET(request: Request) {
   const gate = await gateApiRequest(request);
   if (!gate.allowed) return gate.response;
-  logApiHit('bairitsu-calc', request, { tier: gate.tier });
+  await logApiHit('bairitsu-calc', request, { tier: gate.tier });
   const h = { headers: gate.headers, private: gate.cachePrivate } as const;
 
   const url = new URL(request.url);

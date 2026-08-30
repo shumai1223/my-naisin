@@ -98,14 +98,14 @@ function parseKamokuList(input: unknown): ParsedKamoku | ParseError {
 export async function GET(request: Request) {
   const gate = await gateApiRequest(request);
   if (!gate.allowed) return gate.response;
-  logApiHit('gakushu-seiseki-meta', request, { tier: gate.tier });
+  await logApiHit('gakushu-seiseki-meta', request, { tier: gate.tier });
   return corsJson(buildMeta(), { headers: gate.headers, private: gate.cachePrivate });
 }
 
 export async function POST(request: Request) {
   const gate = await gateApiRequest(request);
   if (!gate.allowed) return gate.response;
-  logApiHit('gakushu-seiseki-compute', request, { tier: gate.tier });
+  await logApiHit('gakushu-seiseki-compute', request, { tier: gate.tier });
 
   let body: unknown;
   try {

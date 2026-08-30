@@ -18,7 +18,7 @@ export async function GET(request: Request, { params }: { params: Promise<{ code
   const gate = await gateApiRequest(request);
   if (!gate.allowed) return gate.response;
   const { code } = await params;
-  logApiHit('total-score-detail', request, { code, tier: gate.tier });
+  await logApiHit('total-score-detail', request, { code, tier: gate.tier });
   const h = { headers: gate.headers, private: gate.cachePrivate } as const;
 
   const system = getTotalScoreSystem(code);

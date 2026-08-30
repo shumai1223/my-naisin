@@ -15,7 +15,7 @@ import { DATASET_META, SITE_URL } from '@/lib/naishin-dataset';
 export async function GET(request: Request) {
   const gate = await gateApiRequest(request);
   if (!gate.allowed) return gate.response;
-  logApiHit('total-score-index', request, { tier: gate.tier });
+  await logApiHit('total-score-index', request, { tier: gate.tier });
 
   const systems = VERIFIED_TOTAL_SCORE_CODES.map((code) => {
     const s = TOTAL_SCORE_SYSTEMS[code];

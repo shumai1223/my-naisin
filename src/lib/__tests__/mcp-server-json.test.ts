@@ -55,7 +55,7 @@ describe('server.json（MCP公開レジストリ登録用マニフェスト）',
 
   it('version は実際のMCP GETディスカバリ応答のライセンス/データセット情報とも矛盾しない', async () => {
     const manifest = loadServerJson();
-    const res = GET(new Request('https://my-naishin.com/api/mcp'));
+    const res = await GET(new Request('https://my-naishin.com/api/mcp'));
     const body = await res.json();
     // GETディスカバリはversionを直接返さないが、endpointとlicenseの整合性を確認することで
     // server.jsonが指す先が実際に稼働しているサーバであることを間接的に検証する。

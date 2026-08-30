@@ -34,7 +34,7 @@ export async function GET(request: Request) {
   const gradeRaw = url.searchParams.get('grade');
   const grade = gradeRaw !== null && Number.isFinite(Number(gradeRaw)) ? Number(gradeRaw) : undefined;
 
-  logApiHit('naishin-compare', request, { codes: codes.length, tier: gate.tier });
+  await logApiHit('naishin-compare', request, { codes: codes.length, tier: gate.tier });
   return corsJson(comparePrefectures({ codes, grade }), { headers: gate.headers, private: gate.cachePrivate });
 }
 

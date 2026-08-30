@@ -183,7 +183,7 @@ GET /api/competition-rates/{code}     県別JSON
 
 ---
 
-## A-5: `api_hits_daily` 日次ロールアップ（C1-10）
+## A-5: `api_hits_daily` 日次ロールアップ（C1-10）✅2026-08-30完了
 
 **なぜ要るか**: 現状 `logApiHit()`（`src/app/api/mcp/route.ts:826`）の実体は `console.log` で永続化先が無く、
 `api_usage` の INSERT はキー有りのみ（`src/lib/api-keys.ts:160`）＝**匿名のAPI/MCP利用は原理的に1行も記録されない**。
@@ -198,6 +198,23 @@ GET /api/competition-rates/{code}     県別JSON
 ```
 **②③を飛ばして④をやると、集計は空にフォールバックする一方でINSERTが毎回失敗し、
 新規記録が黙って捨てられる**（2026-08-11 に実際に起きかけた）。
+
+**✅2026-08-30完了（loop自力実装。2026-07-28ゲート解禁によりmigration適用もloop単独可と判明）**:
+テーブル名は`api_hits_daily`ではなく`api_hits`（生ログ・日次集計はSQLの`GROUP BY substr(created_at,1,10)`
+で行う設計。click_hop_completions/student_funnel_eventsと同方針）。
+- `migrations/0022_create_api_hits.sql`をloop自力適用（`wrangler d1 execute my-naishin-leads --remote`
+  ・`SELECT name FROM sqlite_master WHERE name='api_hits'`で存在確認済み・CREATE TABLE IF NOT EXISTSの
+  みでバックアップ省略は0020/0021と同じ前例に従った）
+- `src/lib/api-hits-db.ts`新設（`persistApiHit`/`getApiHitsDailyRollup`/`getApiHitsTotalCount`・
+  click-hop-db.tsと同型のno-op安全設計・PIIはUA/refererのみ160文字切り詰め・IPは記録しない）
+- `logApiHit()`(`api-cors.ts`)を`async`化し内部で`persistApiHit`を`await`。堀B全20ルート
+  （bairitsu/education-cost×2/gakushu-seiseki×2/hensachi×2/juku-reviews/mcp×2/naishin×4/
+  schools/stats×3/total-score×2）の呼び出し側を`await logApiHit(...)`へ更新（mcpのGETディスカバリも
+  同期関数から`async`化）。fire-and-forgetでなく`await`する設計を選んだ理由: リポジトリ内でD1書き込みに
+  `ctx.waitUntil`を使っている前例が無く、awaitせず投げっぱなしにするとレスポンス返却後にWorkerが
+  切断され書き込みが握りつぶされるリスクがあるため（既存のclick-hop-db.ts等も全てawait方式）
+- テスト新規9件（`api-hits-db.test.ts`5件・`api-cors.test.ts`のlogApiHit系3件をasync化+1件追加）・
+  mcp関連のGET呼び出しテスト2件を`await GET(...)`へ追従修正。tsc実exit0・jestフルスイート357suites6159tests green
 
 ---
 
@@ -264,7 +281,7 @@ G7のPASS理由がこれなので、触った時点で判定が変わる。
 2. `GET /api/competition-rates/csv` と `/{code}` が本番稼働
 3. 無償版／有償版の境界がティア判定で施行されている
 4. `/developers` にデータ商品節＋サンプルCSV＋仕様書1枚。**不足3点が明記されている**
-5. `api_hits_daily` 日次ロールアップ稼働
+5. `api_hits_daily` 日次ロールアップ稼働 ✅2026-08-30完了（`api_hits`テーブル・詳細はA-5参照）
 6. **特定商取引法に基づく表記が公開され、`/developers` と Stripe Checkout の双方から到達可能**
 7. `tsc --noEmit` exit 0 ／ `jest` 全green
 

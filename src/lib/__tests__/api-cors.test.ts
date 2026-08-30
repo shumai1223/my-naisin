@@ -81,16 +81,16 @@ describe('CORS_HEADERS', () => {
 });
 
 describe('logApiHit', () => {
-  it('requestなしでも例外を投げない(ログ失敗はAPIに影響させない設計)', () => {
-    expect(() => logApiHit('/api/naishin')).not.toThrow();
+  it('requestなしでも例外を投げない(ログ失敗はAPIに影響させない設計)', async () => {
+    await expect(logApiHit('/api/naishin')).resolves.toBeUndefined();
   });
 
-  it('requestからuser-agent/refererを取り出してconsole.logに1行JSONで出力する', () => {
+  it('requestからuser-agent/refererを取り出してconsole.logに1行JSONで出力する', async () => {
     const spy = jest.spyOn(console, 'log').mockImplementation(() => {});
     const req = new Request('https://my-naishin.com/api/naishin', {
       headers: { 'user-agent': 'test-agent', referer: 'https://example.com/' },
     });
-    logApiHit('/api/naishin', req, { extra: 1 });
+    await logApiHit('/api/naishin', req, { extra: 1 });
     expect(spy).toHaveBeenCalledTimes(1);
     const logged = JSON.parse(spy.mock.calls[0][0] as string);
     expect(logged.api).toBe('/api/naishin');
@@ -100,12 +100,16 @@ describe('logApiHit', () => {
     spy.mockRestore();
   });
 
-  it('refererが無い場合はreferer自体をログに含めない', () => {
+  it('refererが無い場合はreferer自体をログに含めない', async () => {
     const spy = jest.spyOn(console, 'log').mockImplementation(() => {});
     const req = new Request('https://my-naishin.com/api/naishin', { headers: { 'user-agent': 'ua' } });
-    logApiHit('/api/naishin', req);
+    await logApiHit('/api/naishin', req);
     const logged = JSON.parse(spy.mock.calls[0][0] as string);
     expect('referer' in logged).toBe(false);
     spy.mockRestore();
+  });
+
+  it('D1バインディングが無いテスト環境でもpersistApiHitの失敗でAPIに影響しない(S13-A A-5)', async () => {
+    await expect(logApiHit('/api/naishin', undefined, { tier: 'free' })).resolves.toBeUndefined();
   });
 });

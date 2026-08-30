@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { persistApiHit } from '@/lib/api-hits-db';
 
 /**
  * 公開データAPI（堀B）共通のCORS/キャッシュヘッダ。
@@ -60,16 +61,19 @@ export function corsPreflight() {
 
 /**
  * 公開データAPIの利用ログ（堀B：「誰がどのエンドポイントを叩いたか＝堀の証拠」§9）。
- * Cloudflare のログに1行JSONで残す。PIIは取らず、UA・参照元・任意メタのみ。失敗してもAPIに影響させない。
+ * Cloudflareのログに1行JSONで残すのに加え、S13-A A-5により`api_hits`(D1)へも生ログを残す
+ * （匿名利用の日次ロールアップ＝「月◯◯回使われています」という営業材料の分子）。
+ * PIIは取らず、UA・参照元・任意メタのみ。失敗してもAPIに影響させない。
  */
-export function logApiHit(endpoint: string, request?: Request, extra?: Record<string, unknown>) {
+export async function logApiHit(endpoint: string, request?: Request, extra?: Record<string, unknown>) {
+  const ua = request?.headers.get('user-agent')?.slice(0, 160) ?? '';
+  const referer = request?.headers.get('referer')?.slice(0, 160) ?? '';
   try {
-    const ua = request?.headers.get('user-agent')?.slice(0, 160) ?? '';
-    const referer = request?.headers.get('referer')?.slice(0, 160) ?? '';
     console.log(
       JSON.stringify({ t: new Date().toISOString(), api: endpoint, ua, ...(referer ? { referer } : {}), ...extra })
     );
   } catch {
     /* ログ失敗はAPIに影響させない */
   }
+  await persistApiHit(endpoint, ua, referer);
 }

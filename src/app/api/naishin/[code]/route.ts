@@ -21,7 +21,7 @@ export async function GET(request: Request, { params }: { params: Promise<{ code
   const gate = await gateApiRequest(request);
   if (!gate.allowed) return gate.response;
   const { code } = await params;
-  logApiHit('naishin-detail', request, { code, tier: gate.tier });
+  await logApiHit('naishin-detail', request, { code, tier: gate.tier });
   const h = { headers: gate.headers, private: gate.cachePrivate } as const;
 
   const notFound = () =>

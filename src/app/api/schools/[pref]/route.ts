@@ -18,7 +18,7 @@ export async function GET(request: Request, { params }: { params: Promise<{ pref
   const gate = await gateApiRequest(request);
   if (!gate.allowed) return gate.response;
   const { pref } = await params;
-  logApiHit('schools-detail', request, { pref, tier: gate.tier });
+  await logApiHit('schools-detail', request, { pref, tier: gate.tier });
   const h = { headers: gate.headers, private: gate.cachePrivate } as const;
 
   const notFound = () =>

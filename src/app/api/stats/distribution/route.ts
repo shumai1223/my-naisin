@@ -21,7 +21,7 @@ import { getPrefectureByCode } from '@/lib/prefectures';
 export async function GET(request: Request) {
   const gate = await gateApiRequest(request);
   if (!gate.allowed) return gate.response;
-  logApiHit('stats-distribution', request, { tier: gate.tier });
+  await logApiHit('stats-distribution', request, { tier: gate.tier });
 
   const url = new URL(request.url);
   const metricRaw = url.searchParams.get('metric');
