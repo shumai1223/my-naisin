@@ -5,7 +5,7 @@
     "startedAt": "2026-08-30",
     "collectionMethod": "N1-2(ops/tasks/T-N1-N4-revenue-ceiling.md)。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。大市場県(tokyo/kanagawa/aichi/osaka/saitama/chiba/hyogo/fukuoka)から着手。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。",
     "totalPrefectures": 47,
-    "collectedCount": 9,
+    "collectedCount": 10,
     "unavailable": []
   },
   "entries": [
@@ -250,6 +250,28 @@
       "lastVerified": "2026-08-30",
       "pdfHash": null,
       "diffFromCurrentYear": "maxScoreは変更なしと直接検証(2026-08-30に一般入学者選抜実施要項p.23「14入学者の選抜(1)ウ(ア)留意事項1」の相関表(個人調査書の評定の合計×学力検査の成績)で調査書点の最高段階が「A: 315〜296」と明記されているのを確認、学力検査は各教科100点×5教科=500点満点も確認。令和8年度分(prefectures.ts)のmaxScore=315と一致。ただし各学年の重み付け(2:2:3)の内訳自体は本要項本体になく様式3(個人調査書)側に定義されているため未確認・推薦入学者選抜実施要項等の別PDFの確認が必要。315という上限値の一致自体が重み付け構造が変わっていないことの強い状況証拠と判断)"
+    },
+    {
+      "code": "aomori",
+      "name": "青森県",
+      "region": "北海道・東北",
+      "fiscalYear": "2025",
+      "targetGrades": [1, 2, 3],
+      "gradeMultipliers": { "1": 1, "2": 1, "3": 1 },
+      "coreMultiplier": 1,
+      "practicalMultiplier": 1,
+      "maxScore": 135,
+      "simplifiedCalc": false,
+      "actualMaxScore": null,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": null,
+      "sourceUrl": "https://www.pref.aomori.lg.jp/soshiki/kyoiku/e-gakyo/files/nyuugakusyasenbatsuyoukou2025.pdf",
+      "sourceUrl2": "https://www.pref.aomori.lg.jp/soshiki/kyoiku/e-gakyo/senbatsuyoukou2025.html",
+      "sourceTitle": "青森県教育委員会「令和7年度青森県立高等学校入学者選抜要項」様式第2号(調査書)",
+      "lastVerified": "2026-08-30",
+      "pdfHash": null,
+      "diffFromCurrentYear": "変更なし(2026-08-30に選抜要項p.17「様式第2号 調査書」の「各教科の学習の記録」表を直接確認。9教科×1年・2年・3年の評定欄がそれぞれ独立に記入され、「計」欄で3学年分をそのまま合算する「総計」列があり、学年間の傾斜配点は様式上存在しない(等倍合計)。9教科×5段階×3学年=135点。令和8年度分(prefectures.ts)のgradeMultipliers{1:1,2:1,3:1}/maxScore=135と完全一致)"
     }
   ]
 }

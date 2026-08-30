@@ -120,6 +120,13 @@ describe('2025-r7 exam-system snapshot（N1-2 収集中スナップショット�
     expect(h2025.gradeMultipliers).toEqual(h2026.gradeMultipliers);
   });
 
+  test('aomori: 2026-r8と2025-r7で制度の核となる数値が一致する(実測で確認済みの「変更なし」)', () => {
+    const a2025 = snapshot.entries.find((e) => e.code === 'aomori')!;
+    const a2026 = snapshot2026.entries.find((e) => e.code === 'aomori')!;
+    expect(a2025.maxScore).toBe(a2026.maxScore);
+    expect(a2025.gradeMultipliers).toEqual(a2026.gradeMultipliers);
+  });
+
   test('47県のうち大市場8県(tokyo/kanagawa/aichi/osaka/saitama/chiba/hyogo/fukuoka)が揃っている', () => {
     const majorMarketCodes = [
       'tokyo', 'kanagawa', 'aichi', 'osaka', 'saitama', 'chiba', 'hyogo', 'fukuoka',
