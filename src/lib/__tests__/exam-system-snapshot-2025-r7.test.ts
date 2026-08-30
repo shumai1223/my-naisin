@@ -86,4 +86,13 @@ describe('2025-r7 exam-system snapshot（N1-2 収集中スナップショット�
     expect(s2025.gradeMultipliers).toEqual(s2026.gradeMultipliers);
     expect(s2025.reverseCalc?.examMaxScore).toBe(s2026.reverseCalc?.examMaxScore);
   });
+
+  test('chiba: 2026-r8と2025-r7で制度の核となる数値が一致する(実測で確認済みの「変更なし」)', () => {
+    const c2025 = snapshot.entries.find((e) => e.code === 'chiba')!;
+    const c2026 = snapshot2026.entries.find((e) => e.code === 'chiba')!;
+    expect(c2025.maxScore).toBe(c2026.maxScore);
+    expect(c2025.gradeMultipliers).toEqual(c2026.gradeMultipliers);
+    expect(c2025.reverseCalc).toBeNull();
+    expect(c2026.reverseCalc).toBeNull();
+  });
 });
