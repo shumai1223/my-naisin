@@ -370,6 +370,15 @@ describe('2025-r7 exam-system snapshot（N1-2 収集中スナップショット�
     expect(e2025.reverseCalc?.examMaxScore).toBe(e2026.reverseCalc?.examMaxScore);
   });
 
+  test('kochi: 2026-r8と2025-r7で制度の核となる数値が一致する(実測で確認済みの「変更なし」)', () => {
+    const k2025 = snapshot.entries.find((e) => e.code === 'kochi')!;
+    const k2026 = snapshot2026.entries.find((e) => e.code === 'kochi')!;
+    expect(k2025.maxScore).toBe(k2026.maxScore);
+    expect(k2025.supports10PointScale).toBe(k2026.supports10PointScale);
+    expect(k2025.gradeMultipliers).toEqual(k2026.gradeMultipliers);
+    expect(k2025.practicalMultiplier).toBe(k2026.practicalMultiplier);
+  });
+
   test('47県のうち大市場8県(tokyo/kanagawa/aichi/osaka/saitama/chiba/hyogo/fukuoka)が揃っている', () => {
     const majorMarketCodes = [
       'tokyo', 'kanagawa', 'aichi', 'osaka', 'saitama', 'chiba', 'hyogo', 'fukuoka',
