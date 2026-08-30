@@ -1,6 +1,7 @@
 import snapshot from '@/data/snapshots/2025-r7/exam-system.json';
 import snapshot2026 from '@/data/snapshots/2026-r8/exam-system.json';
 import { PREFECTURES } from '../prefectures';
+import { diffExamSystemSnapshots } from '../exam-system-diff';
 
 describe('2025-r7 exam-system snapshot（N1-2 収集中スナップショットの整合性）', () => {
   test('収集済み件数がmeta.collectedCountと一致する(収集中でも数字の水増しを防ぐ)', () => {
@@ -268,6 +269,24 @@ describe('2025-r7 exam-system snapshot（N1-2 収集中スナップショット�
     expect(k2025.gradeMultipliers).toEqual(k2026.gradeMultipliers);
     expect(k2025.coreMultiplier).toBe(k2026.coreMultiplier);
     expect(k2025.practicalMultiplier).toBe(k2026.practicalMultiplier);
+  });
+
+  test('nara: 令和7→8年度で制度が実際に変わっている(N1-2/N1-3で初検出した「変更あり」ケース)', () => {
+    const n2025 = snapshot.entries.find((e) => e.code === 'nara')!;
+    const n2026 = snapshot2026.entries.find((e) => e.code === 'nara')!;
+    // 令和7年度: 第2学年(5段階満点)+第3学年(5段階×2)=15点×9教科=135点満点、第1学年は不使用
+    expect(n2025.maxScore).toBe(135);
+    expect(n2025.gradeMultipliers).toEqual({ 1: 0, 2: 1, 3: 2 });
+    // 令和8年度: 第1・第2学年は観点別「態度」評価(最大3点)+第3学年(5段階×2)=16点×9教科=144点満点
+    expect(n2026.maxScore).toBe(144);
+    expect(n2026.gradeMultipliers).toEqual({ 1: 0.6, 2: 0.6, 3: 2 });
+    // 実データでdiffExamSystemSnapshots()を実行し、maxScore/gradeMultipliersがchangedと判定されることを確認
+    const diffs = diffExamSystemSnapshots(snapshot, snapshot2026);
+    const naraDiffs = diffs.filter((d) => d.prefectureCode === 'nara');
+    const maxScoreDiff = naraDiffs.find((d) => d.field === 'maxScore')!;
+    const gradeMultipliersDiff = naraDiffs.find((d) => d.field === 'gradeMultipliers')!;
+    expect(maxScoreDiff.status).toBe('changed');
+    expect(gradeMultipliersDiff.status).toBe('changed');
   });
 
   test('47県のうち大市場8県(tokyo/kanagawa/aichi/osaka/saitama/chiba/hyogo/fukuoka)が揃っている', () => {
