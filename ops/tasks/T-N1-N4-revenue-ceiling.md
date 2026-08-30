@@ -104,7 +104,7 @@ source-history.ts の90スナップショット → 全て2026-07/08取得
 
 ⚠️ **この作業は重い（47県×PDF読解）。ただし一度きり。** 来年以降はN1-1の凍結との差分を取るだけになる。
 
-**進捗（6/47・2026-08-30着手）**: tokyo✅・kanagawa✅・aichi✅・osaka✅・saitama✅・chiba✅（いずれも実施要領/要綱本体PDFを直接確認・令和8年度と制度上の差分なしと検証済み）。
+**進捗（7/47・2026-08-30着手）**: tokyo✅・kanagawa✅・aichi✅・osaka✅・saitama✅・chiba✅・hyogo✅（いずれも実施要領/要綱本体PDFを直接確認・令和8年度と制度上の差分なしと検証済み）。
 `src/data/snapshots/2025-r7/README.md`に方針・`exam-system.json`の`meta.collectedCount`に進捗数を記録する運用。
 **新知見**: 現行の教委ページは既に翌々年度分(令和9年度)に更新されていることがある(kanagawaで実際に発生)。
 また現行ページ自体が生きていてもWebFetch/curlがリダイレクトループで失敗することがある(aichiで実際に発生・
@@ -116,8 +116,9 @@ curl error 47/WebFetch「Too many redirects」)。いずれの場合もWayback M
 `reverseCalc`(totalMaxScore/examMaxScore/defaultRatio等)がサイト独自の代表値で一次ソースに直接の記載が
 無いことがある。その場合はgradeMultipliers/maxScore(算式そのもの)を一次ソースで直接検証し、reverseCalc
 は「サイトモデルとして不変」と明記して区別する(diffFromCurrentYearに書く)。
-chibaも同型（K値=1〜2の学校裁量制）でreverseCalcはnullのまま引き継ぎ。
-次は大市場県の続き（hyogo/fukuoka）を1県ずつ。
+chibaも同型（K値=1〜2の学校裁量制）でreverseCalcはnullのまま引き継ぎ。hyogoは別表1(評定換算表)で
+5教科4倍+実技4教科7.5倍=250点満点方式を確認。
+次はfukuoka（大市場県の最後の1県）→完了後は残り40県へ拡大。
 
 ## N1-3 差分エンジン
 
