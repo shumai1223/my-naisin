@@ -1,11 +1,12 @@
 {
   "meta": {
     "fiscalYearLabel": "令和7年度(2025年度)",
-    "status": "collecting",
+    "status": "frozen",
     "startedAt": "2026-08-30",
+    "completedAt": "2026-08-31",
     "collectionMethod": "N1-2(ops/tasks/T-N1-N4-revenue-ceiling.md)。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。大市場県(tokyo/kanagawa/aichi/osaka/saitama/chiba/hyogo/fukuoka)から着手。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。",
     "totalPrefectures": 47,
-    "collectedCount": 44,
+    "collectedCount": 45,
     "unavailable": [
       {
         "code": "ishikawa",
@@ -1194,6 +1195,39 @@
       "lastVerified": "2026-08-31",
       "pdfHash": null,
       "diffFromCurrentYear": "変更なし(2026-08-31に実施要綱本体(現行ページに掲載されたまま現存・curl直叩き取得・3.1MB)p.9「7選抜」(2)選抜の内容アを直接確認。「調査書の『学習の記録』は、第3学年の記録を次のとおり点数に換算して選抜に用いる。(ｱ)学力検査を行う5教科：それぞれ10点満点 (ｲ)学力検査を行わない必修の4教科(音楽、美術、保健体育及び技術・家庭)：それぞれ100点満点」と明記——第3学年の5段階評定のみを対象(targetGrades=[3])とし、5教科は評定×2倍で10点満点(coreMultiplier=2)、実技4教科は評定×20倍で100点満点(practicalMultiplier=20)へ換算する制度で、5×10+4×100=450点満点。令和8年度分(prefectures.ts)のgradeMultipliers{1:0,2:0,3:1}・coreMultiplier=2・practicalMultiplier=20・maxScore=450と完全一致(変更なし)。学力検査は各教科90点×5教科=450点満点(reverseCalc.examMaxScore=450と一致)も同ページで確認済み"
+    },
+    {
+      "code": "okinawa",
+      "name": "沖縄県",
+      "region": "九州・沖縄",
+      "fiscalYear": "2025",
+      "targetGrades": [1, 2, 3],
+      "gradeMultipliers": { "1": 1, "2": 1, "3": 1 },
+      "coreMultiplier": 1,
+      "practicalMultiplier": 1.5,
+      "maxScore": 165,
+      "simplifiedCalc": false,
+      "actualMaxScore": null,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": {
+        "totalMaxScore": 465,
+        "examMaxScore": 300,
+        "defaultRatio": { "naishin": 35, "exam": 65 },
+        "calcType": "standard",
+        "naishinMultiplier": null,
+        "kValue": null,
+        "sValueCoefficients": null,
+        "osakaTypeCount": null,
+        "hasTokyoSettings": false,
+        "hasKanagawaSettings": false
+      },
+      "sourceUrl": "https://www.okinawa-th.open.ed.jp/481a9e2af87bf57ba5ff545d85f165fcc9060155.pdf",
+      "sourceUrl2": "https://www.pref.okinawa.lg.jp/kyoiku/gakko/1008883/1008887/1035054.html",
+      "sourceTitle": "沖縄県立沖縄工業高等学校「令和7年度入学者選抜募集要項」[II]一般選抜8選抜の方法(1)(2)(『令和7年度県立高等学校入学者選抜実施要項(沖縄県教育委員会)』に基づく個別校版)",
+      "lastVerified": "2026-08-31",
+      "pdfHash": null,
+      "diffFromCurrentYear": "変更なし(caveatあり)(2026-08-31に個別校版募集要項(令和7年度沖縄工業高等学校・日付が全て令和7年で一貫する真正のR7文書)p.4「8選抜の方法」(1)「調査書と学力検査等の比重は5対5とする」(2)「学力検査実施教科の配点は60点とし、傾斜配点は行わない」を直接確認——学力検査5教科×60点=300点満点はreverseCalc.examMaxScore=300と完全一致。ただし県教育委員会が発行する『令和7年度県立高等学校入学者選抜実施要項』本体は、当時のURL(1035054.html)がその後令和8年度版の内容で上書きされてしまい(Internet Archiveにも上書き後のスナップショットしか存在せず)、令和7年度時点の調査書生点数換算表(9教科×5段階×3学年・実技4教科1.5倍)そのものを一次ソースから独立に再取得することはできなかった。WebSearch経由の複数の第三者塾サイト(および自サイトmy-naishin.com/okinawa/naishin)が『5教科55点満点+実技4教科(1.5倍)55点満点で合計165点満点、3学年均等配分』と一致して説明しており、これは令和8年度分(prefectures.ts)のgradeMultipliers{1:1,2:1,3:1}・maxScore=165・practicalMultiplier=1.5と完全に一致する。制度変更を示す記載も見当たらないため変更なしと判断した(**caveatあり**・調査書の生配点表そのものは県教委の一次ソースURL上書きにより今回は再確認できなかった)"
     }
   ]
 }

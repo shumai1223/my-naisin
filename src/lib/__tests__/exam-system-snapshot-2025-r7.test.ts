@@ -423,6 +423,25 @@ describe('2025-r7 exam-system snapshot（N1-2 収集中スナップショット�
     expect(k2025.practicalMultiplier).toBe(k2026.practicalMultiplier);
   });
 
+  test('okinawa: 2026-r8と2025-r7で制度の核となる数値が一致する(実測で確認済みの「変更なし」)', () => {
+    const o2025 = snapshot.entries.find((e) => e.code === 'okinawa')!;
+    const o2026 = snapshot2026.entries.find((e) => e.code === 'okinawa')!;
+    expect(o2025.maxScore).toBe(o2026.maxScore);
+    expect(o2025.gradeMultipliers).toEqual(o2026.gradeMultipliers);
+    expect(o2025.practicalMultiplier).toBe(o2026.practicalMultiplier);
+    expect(o2025.reverseCalc?.examMaxScore).toBe(o2026.reverseCalc?.examMaxScore);
+  });
+
+  test('全47都道府県が収集済み(entries)または取得不能(unavailable)のいずれかで説明されている(N1-2完了の不変条件)', () => {
+    const entryCodes = new Set(snapshot.entries.map((e) => e.code));
+    const unavailableCodes = new Set(snapshot.meta.unavailable.map((u) => u.code));
+    const r8Codes = snapshot2026.entries.map((e) => e.code);
+    for (const code of r8Codes) {
+      expect(entryCodes.has(code) || unavailableCodes.has(code)).toBe(true);
+    }
+    expect(snapshot.entries.length + snapshot.meta.unavailable.length).toBe(r8Codes.length);
+  });
+
   test('47県のうち大市場8県(tokyo/kanagawa/aichi/osaka/saitama/chiba/hyogo/fukuoka)が揃っている', () => {
     const majorMarketCodes = [
       'tokyo', 'kanagawa', 'aichi', 'osaka', 'saitama', 'chiba', 'hyogo', 'fukuoka',
