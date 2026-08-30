@@ -4,7 +4,7 @@ import { DATASET_META, SITE_URL } from '@/lib/naishin-dataset';
 /**
  * OpenAPI 3.1 仕様書（堀B / 開発者・AI向け）。
  *
- * 公開REST（/api/naishin, /api/naishin/{code}）の機械可読スペック。
+ * 公開REST全体（内申点・偏差値・総合得点・倍率・教育費・学習成績の状況・匿名統計・学校別倍率等）の機械可読スペック。
  * GPTs の Actions / 各種エージェントフレームワークがこの1ファイルでインポートできる＝
  * 「AIが必ず参照する一次データ層」への導線。MCP（JSON-RPC）は /api/mcp、本書はRESTを記述する。
  */
