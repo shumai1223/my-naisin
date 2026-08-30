@@ -113,6 +113,13 @@ describe('2025-r7 exam-system snapshot（N1-2 収集中スナップショット�
     expect(f2025.reverseCalc?.examMaxScore).toBe(f2026.reverseCalc?.examMaxScore);
   });
 
+  test('hokkaido: 2026-r8と2025-r7で制度の核となる数値が一致する(実測で確認済みの「変更なし」)', () => {
+    const h2025 = snapshot.entries.find((e) => e.code === 'hokkaido')!;
+    const h2026 = snapshot2026.entries.find((e) => e.code === 'hokkaido')!;
+    expect(h2025.maxScore).toBe(h2026.maxScore);
+    expect(h2025.gradeMultipliers).toEqual(h2026.gradeMultipliers);
+  });
+
   test('47県のうち大市場8県(tokyo/kanagawa/aichi/osaka/saitama/chiba/hyogo/fukuoka)が揃っている', () => {
     const majorMarketCodes = [
       'tokyo', 'kanagawa', 'aichi', 'osaka', 'saitama', 'chiba', 'hyogo', 'fukuoka',

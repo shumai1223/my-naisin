@@ -5,7 +5,7 @@
     "startedAt": "2026-08-30",
     "collectionMethod": "N1-2(ops/tasks/T-N1-N4-revenue-ceiling.md)。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。大市場県(tokyo/kanagawa/aichi/osaka/saitama/chiba/hyogo/fukuoka)から着手。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。",
     "totalPrefectures": 47,
-    "collectedCount": 8,
+    "collectedCount": 9,
     "unavailable": []
   },
   "entries": [
@@ -228,6 +228,28 @@
       "lastVerified": "2026-08-30",
       "pdfHash": null,
       "diffFromCurrentYear": "gradeMultipliers/maxScoreは変更なしと直接検証(2026-08-30に選抜要項p.10「(八)選抜の方法1」で調査書の第3学年の各教科評定の数値の合計=9教科×5段階=45点により序列を定めると確認。p.5「(三)学力検査1」で5教科×各60点=300点満点も確認。令和8年度分(prefectures.ts)のgradeMultipliers{1:0,2:0,3:1}/maxScore=45/examMaxScore=300と一致)。ただし本要項は調査書の序列と学力検査の総点による序列を組み合わせて選考する方式であり、「345点満点」「内申13%:学力87%」という単一の合成得点・比率は本文中に明記されていない(埼玉・千葉と同様、reverseCalcはサイト独自の代表値として令和8年度分から不変前提で引き継いだ)"
+    },
+    {
+      "code": "hokkaido",
+      "name": "北海道",
+      "region": "北海道・東北",
+      "fiscalYear": "2025",
+      "targetGrades": [1, 2, 3],
+      "gradeMultipliers": { "1": 2, "2": 2, "3": 3 },
+      "coreMultiplier": 1,
+      "practicalMultiplier": 1,
+      "maxScore": 315,
+      "simplifiedCalc": false,
+      "actualMaxScore": null,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": null,
+      "sourceUrl": "http://web.archive.org/web/20241125015235id_/https://www.dokyoi.pref.hokkaido.lg.jp/fs/1/0/7/4/5/8/2/2/_/%E4%BB%A4%E5%92%8C7%E5%B9%B4%E5%BA%A6(2025%E5%B9%B4%E5%BA%A6)%E4%B8%80%E8%88%AC%E5%85%A5%E5%AD%A6%E8%80%85%E9%81%B8%E6%8A%9C%E5%AE%9F%E6%96%BD%E8%A6%81%E9%A0%85.pdf",
+      "sourceUrl2": "http://web.archive.org/web/20241007155309/https://www.dokyoi.pref.hokkaido.lg.jp/hk/gks/koukounyuusenn.html",
+      "sourceTitle": "北海道教育委員会「令和7年度(2025年度)道立高等学校一般入学者選抜実施要項」(現行ページは令和8年度分に更新済みのためWayback Machine 2024-11-25時点のスナップショットで確認)",
+      "lastVerified": "2026-08-30",
+      "pdfHash": null,
+      "diffFromCurrentYear": "maxScoreは変更なしと直接検証(2026-08-30に一般入学者選抜実施要項p.23「14入学者の選抜(1)ウ(ア)留意事項1」の相関表(個人調査書の評定の合計×学力検査の成績)で調査書点の最高段階が「A: 315〜296」と明記されているのを確認、学力検査は各教科100点×5教科=500点満点も確認。令和8年度分(prefectures.ts)のmaxScore=315と一致。ただし各学年の重み付け(2:2:3)の内訳自体は本要項本体になく様式3(個人調査書)側に定義されているため未確認・推薦入学者選抜実施要項等の別PDFの確認が必要。315という上限値の一致自体が重み付け構造が変わっていないことの強い状況証拠と判断)"
     }
   ]
 }
