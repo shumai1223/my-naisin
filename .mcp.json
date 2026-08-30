@@ -2,15 +2,31 @@
   "mcpServers": {
     "ga4": {
       "command": "node",
-      "args": ["--use-system-ca", "scripts/ga4-mcp.mjs"]
+      "args": [
+        "--use-system-ca",
+        "scripts/ga4-mcp.mjs"
+      ]
     },
     "gsc": {
       "command": "node",
-      "args": ["--use-system-ca", "scripts/gsc-mcp.mjs"]
+      "args": [
+        "--use-system-ca",
+        "scripts/gsc-mcp.mjs"
+      ]
     },
     "gmail": {
       "command": "node",
-      "args": ["--use-system-ca", "scripts/gmail-mcp.mjs"]
+      "args": [
+        "--use-system-ca",
+        "scripts/gmail-mcp.mjs"
+      ]
+    },
+    "trends": {
+      "command": "node",
+      "args": [
+        "--use-system-ca",
+        "scripts/trends-mcp.mjs"
+      ]
     }
   }
 }

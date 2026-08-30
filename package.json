@@ -54,7 +54,10 @@
     "gsc:mcp": "node --use-system-ca scripts/gsc-mcp.mjs",
     "gsc": "node --use-system-ca scripts/gsc.mjs",
     "gmail:auth": "node --use-system-ca scripts/gmail-auth.mjs",
-    "gmail:mcp": "node --use-system-ca scripts/gmail-mcp.mjs"
+    "gmail:mcp": "node --use-system-ca scripts/gmail-mcp.mjs",
+    "trends": "node --use-system-ca scripts/trends.mjs",
+    "trends:mcp": "node --use-system-ca scripts/trends-mcp.mjs",
+    "test:trends": "node --test scripts/__tests__/trends-client.test.mjs"
   },
   "dependencies": {
     "@googleapis/searchconsole": "^6.0.1",

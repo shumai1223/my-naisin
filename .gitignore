@@ -123,3 +123,6 @@ sales-screenshots/
 
 # 商談副操縦士のテスト結果(実行のたびに変わるスナップショット・履歴に残す価値がない)
 scripts/meeting-copilot/test-results.json
+
+# Google Trends MCP のローカル状態（NIDクッキー・レスポンスキャッシュ）。再生成可能なのでコミットしない。
+.trends/
