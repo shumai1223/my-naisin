@@ -5,7 +5,7 @@
     "startedAt": "2026-08-30",
     "collectionMethod": "N1-2(ops/tasks/T-N1-N4-revenue-ceiling.md)。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。大市場県(tokyo/kanagawa/aichi/osaka/saitama/chiba/hyogo/fukuoka)から着手。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。",
     "totalPrefectures": 47,
-    "collectedCount": 31,
+    "collectedCount": 32,
     "unavailable": [
       {
         "code": "ishikawa",
@@ -761,6 +761,39 @@
       "lastVerified": "2026-08-31",
       "pdfHash": null,
       "diffFromCurrentYear": "変更なし(2026-08-31に選抜方針本体(現行ページに掲載されたまま現存・curl直叩き取得)p.4-5「3(2)一般入学者選抜」ウ検査内容(ｱ)c「学力検査の合計得点と調査書の合計評定との比率は、8対2から2対8までの範囲とする」、エ選抜方法「調査書の合計評定は、第3学年の各教科のうち、学力検査を実施する教科の評定に対し、学力検査を実施しない教科の評定を2倍するものとする」を直接確認。第3学年のみ・学力検査実施教科(5段階評定×1)+学力検査非実施教科(5段階評定×2)で5教科×5段階+4教科×5段階×2=25+40=65点満点、令和8年度分(prefectures.ts)のgradeMultipliers{1:0,2:0,3:1}・practicalMultiplier=2・maxScore=65と完全一致(変更なし)。p.7で第3学年の評定が目標準拠5段階評価(絶対評価)であることも確認)"
+    },
+    {
+      "code": "shimane",
+      "name": "島根県",
+      "region": "中国",
+      "fiscalYear": "2025",
+      "targetGrades": [1, 2, 3],
+      "gradeMultipliers": { "1": 1, "2": 1, "3": 2 },
+      "coreMultiplier": 1,
+      "practicalMultiplier": 1,
+      "maxScore": 180,
+      "simplifiedCalc": false,
+      "actualMaxScore": null,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": {
+        "totalMaxScore": 1000,
+        "examMaxScore": 500,
+        "defaultRatio": { "naishin": 40, "exam": 60 },
+        "calcType": "standard",
+        "naishinMultiplier": null,
+        "kValue": null,
+        "sValueCoefficients": null,
+        "osakaTypeCount": null,
+        "hasTokyoSettings": false,
+        "hasKanagawaSettings": false
+      },
+      "sourceUrl": "https://www.pref.shimane.lg.jp/education/kyoiku/senbatsu/senbatsu_info/index.data/R7_koukounyuushikekkatobunnseki.pdf",
+      "sourceUrl2": "https://www.pref.shimane.lg.jp/education/kyoiku/senbatsu/senbatsu_info/index.data/R4jisshiyoukou2.pdf",
+      "sourceTitle": "島根県教育委員会「令和7年度島根県公立高等学校入学者選抜の結果と分析」3(3)選抜方法(令和7年6月公表)＋「令和4年度島根県公立高等学校入学者選抜実施要綱」VII10(2)ア(ｵ)1)の算出方法表",
+      "lastVerified": "2026-08-31",
+      "pdfHash": null,
+      "diffFromCurrentYear": "変更なし(2026-08-31に令和7年度公式結果報告書「令和7年度島根県公立高等学校入学者選抜の結果と分析」(令和7年6月・現行ページに掲載されたまま現存)3(3)選抜方法を直接確認。「個人調査報告書と学力検査の比率については、80:20、70:30、60:40、50:50及び40:60の中から各高校が学科ごとに選択決定する」「60:40の場合、個人調査報告書の『学習の記録』を51点、『特別活動の記録』を9点の計60点に、学力検査(250点満点)の成績を40点に換算し、合計100点満点となるよう点数化する」と明記。この51点という換算値は令和4年度実施要綱VII10(2)ア(ｵ)1)の算出方法表(学習の記録: 素点180→評点51(51/180換算)・特別活動の記録: 素点9→評点9・学力検査: 素点250→評点40)と完全に一致する数値であり、令和7年度も学習の記録の素点(生の満点)が令和4年度と同じ180点満点のまま運用されていたことを2つの独立した一次資料で確認できた。180点=9教科×5段階×(第1学年1倍+第2学年1倍+第3学年2倍)で、令和8年度分(prefectures.ts)のgradeMultipliers{1:1,2:1,3:2}・maxScore=180と完全一致(変更なし)。令和7年度専用の実施要綱本体(令和7年度の生データ算出表そのもの)はサイト側で404のため未取得だが、上記の独立した数値一致により実質的に検証済みと判断した)"
     }
   ]
 }
