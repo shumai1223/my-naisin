@@ -5,7 +5,7 @@
     "frozenBy": "scripts/freeze-exam-snapshot.ts (T-N1-1)",
     "sourceOfTruth": "src/lib/prefectures.ts (この日付時点のスナップショット)",
     "prefectureCount": 47,
-    "pdfHashStatus": "partial_7_of_47",
+    "pdfHashStatus": "partial_9_of_47",
     "freezePolicy": "本ディレクトリは生成後に書き換え禁止。prefectures.tsが後日修正されても本ファイルは追随させない。来年度の差分エンジン(N1-3)の基準点として使う。",
     "pdfHashNote": "47件中6件(sourceUrlが直接PDFリンクの県)のみSHA-256を取得済み(2026-08-30)。残り41件はsourceUrlがポータル/HTMLページで実際のPDF URLを個別に特定する必要があり、N1-2(前年度収集)と合わせて9/08-22に着手予定。"
   },
@@ -68,7 +68,9 @@
       "sourceUrl2": "https://jyuke-labo.com/koukoujyukentaisaku/aomori/",
       "sourceTitle": "青森県教育委員会 入学者選抜",
       "lastVerified": "2026-04-22",
-      "pdfHash": null
+      "pdfHash": "b8ec6a277ebc5d2b450aa6aec7382713dcc113057dc4eea29b1c920b8933bd46",
+      "pdfHashSourceUrl": "https://www.pref.aomori.lg.jp/soshiki/kyoiku/e-gakyo/files/nyuugakusyasenbatsuyoukou2026.pdf",
+      "pdfHashVerifiedAt": "2026-08-31"
     },
     {
       "code": "iwate",
@@ -97,7 +99,9 @@
       "sourceUrl2": "https://jyuke-labo.com/koukoujyukentaisaku/iwate/",
       "sourceTitle": "岩手県教育委員会 入学者選抜実施概要",
       "lastVerified": "2026-07-16",
-      "pdfHash": null
+      "pdfHash": "be77cf265b84f4aa437c6c8bffc0d206aa7858495fb5967e7b546160a5c6e482",
+      "pdfHashSourceUrl": "https://www.pref.iwate.jp/_res/projects/default_project/_page_/001/091/420/r8_all.pdf",
+      "pdfHashVerifiedAt": "2026-08-31"
     },
     {
       "code": "miyagi",
