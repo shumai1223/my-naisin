@@ -343,6 +343,16 @@ describe('2025-r7 exam-system snapshot（N1-2 収集中スナップショット�
     expect(y2025.reverseCalc?.examMaxScore).toBe(y2026.reverseCalc?.examMaxScore);
   });
 
+  test('kagawa: 2026-r8と2025-r7で制度の核となる数値が一致する(実測で確認済みの「変更なし」)', () => {
+    const k2025 = snapshot.entries.find((e) => e.code === 'kagawa')!;
+    const k2026 = snapshot2026.entries.find((e) => e.code === 'kagawa')!;
+    expect(k2025.maxScore).toBe(k2026.maxScore);
+    expect(k2025.actualMaxScore).toBe(k2026.actualMaxScore);
+    expect(k2025.simplifiedCalc).toBe(k2026.simplifiedCalc);
+    expect(k2025.coreMultiplier).toBe(k2026.coreMultiplier);
+    expect(k2025.practicalMultiplier).toBe(k2026.practicalMultiplier);
+  });
+
   test('47県のうち大市場8県(tokyo/kanagawa/aichi/osaka/saitama/chiba/hyogo/fukuoka)が揃っている', () => {
     const majorMarketCodes = [
       'tokyo', 'kanagawa', 'aichi', 'osaka', 'saitama', 'chiba', 'hyogo', 'fukuoka',
