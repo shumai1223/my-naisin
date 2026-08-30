@@ -5,7 +5,7 @@
     "startedAt": "2026-08-30",
     "collectionMethod": "N1-2(ops/tasks/T-N1-N4-revenue-ceiling.md)。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。大市場県(tokyo/kanagawa/aichi/osaka/saitama/chiba/hyogo/fukuoka)から着手。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。",
     "totalPrefectures": 47,
-    "collectedCount": 41,
+    "collectedCount": 42,
     "unavailable": [
       {
         "code": "ishikawa",
@@ -1095,6 +1095,39 @@
       "lastVerified": "2026-08-31",
       "pdfHash": null,
       "diffFromCurrentYear": "変更なし(2026-08-31に選抜要項本体(現行ページに掲載されたまま現存・curl直叩き取得・3.37MB)p.15-16「III後期(一般)選抜」9選抜(本検査)(1)カ選抜の手順(ｲ)を直接確認。「a 学力検査を行う5教科(国語、社会、数学、理科、英語)については、教科ごとに、第1学年及び第2学年の評定に、第3学年の評定を2倍したものを加えて合計し、さらに、その合計点を、学力検査の得点を用いて補正する」「b 学力検査を行わない4教科(音楽、美術、保健体育、技術・家庭)については、教科ごとに、第1学年及び第2学年の評定に、第3学年の評定を2倍したものを加えて合計する」「c aで補正した5教科の合計点に、bの4教科の合計点を加えて総計点を算出する」と明記——学力検査対象5教科と非対象4教科で『合計方法』自体(1学年+2学年+3学年×2)は完全に同一であり、5教科側だけ別表(得点↔評定合計点の補正テーブル)による補正を挟む点が異なるだけで、素点の満点自体はcoreMultiplier=practicalMultiplier=1で差が無い。9教科×(5+5+10)=180点で令和8年度分(prefectures.ts)のgradeMultipliers{1:1,2:1,3:2}・maxScore=180・coreMultiplier=1・practicalMultiplier=1と完全一致(変更なし)。学力検査は各教科50点×5教科=250点満点(理数科・英語科等は特定教科を2倍にする得点特別処理あり)も一次ソースp.15で確認済み"
+    },
+    {
+      "code": "oita",
+      "name": "大分県",
+      "region": "九州・沖縄",
+      "fiscalYear": "2025",
+      "targetGrades": [1, 2, 3],
+      "gradeMultipliers": { "1": 1, "2": 1, "3": 2 },
+      "coreMultiplier": 2,
+      "practicalMultiplier": 4,
+      "maxScore": 520,
+      "simplifiedCalc": true,
+      "actualMaxScore": 260,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": {
+        "totalMaxScore": 1000,
+        "examMaxScore": 500,
+        "defaultRatio": { "naishin": 40, "exam": 60 },
+        "calcType": "standard",
+        "naishinMultiplier": null,
+        "kValue": null,
+        "sValueCoefficients": null,
+        "osakaTypeCount": null,
+        "hasTokyoSettings": false,
+        "hasKanagawaSettings": false
+      },
+      "sourceUrl": "https://www.pref.oita.jp/uploaded/attachment/2224150.pdf",
+      "sourceUrl2": "https://www.pref.oita.jp/site/kyoiku/koukounyuushir07.html",
+      "sourceTitle": "大分県教育委員会「令和7年度大分県立高等学校入学者選抜実施要項」第10第一次入学者選抜 7選抜の方法①②③",
+      "lastVerified": "2026-08-31",
+      "pdfHash": null,
+      "diffFromCurrentYear": "変更なし(caveatあり)(2026-08-31に選抜要項本体(現行ページに掲載されたまま現存・curl直叩き取得・1.34MB)p.30「第10第一次入学者選抜」7選抜の方法を直接確認。「①調査書の教科学習成績及び学力検査を実施しない教科の換算点の合計点(以下『調査書の合計点』という)並びに学力検査成績の総合計点と調査書のその他の記載事項及び面接、適性検査を実施した場合はその結果を資料として総合的に判定する」「②調査書の合計点と学力検査成績の比率は学校ごとに定める」「③5教科を課す高等学校では、学力検査配点の比重を変える傾斜配点を採用することができる。その場合の倍率は2倍を限度とする」と明記——学校ごとに比率・傾斜配点を独自に定める学校裁量制であることが令和8年度分(prefectures.ts)でsimplifiedCalc=true/actualMaxScore=260として既に記録されている構造上の特徴と完全に一致し、令和7年度も同一の裁量制であることを確認した。調査書(様式9号)の実物フォームは別途xlsx配布(現行R7版取得済みだが旧バイナリ形式(.xls互換)でテキスト展開できず、学年別配点の生数値までは独立検証できていない・caveatとして明記)。制度変更を示す記載は見当たらないため、令和8年度分と同じくsimplifiedCalcの近似モデルとして扱う(変更なし)"
     }
   ]
 }

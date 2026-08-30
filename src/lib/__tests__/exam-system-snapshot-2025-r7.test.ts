@@ -396,6 +396,16 @@ describe('2025-r7 exam-system snapshot（N1-2 収集中スナップショット�
     expect(k2025.practicalMultiplier).toBe(k2026.practicalMultiplier);
   });
 
+  test('oita: 2026-r8と2025-r7で制度の核となる数値が一致する(実測で確認済みの「変更なし」)', () => {
+    const o2025 = snapshot.entries.find((e) => e.code === 'oita')!;
+    const o2026 = snapshot2026.entries.find((e) => e.code === 'oita')!;
+    expect(o2025.maxScore).toBe(o2026.maxScore);
+    expect(o2025.actualMaxScore).toBe(o2026.actualMaxScore);
+    expect(o2025.simplifiedCalc).toBe(o2026.simplifiedCalc);
+    expect(o2025.coreMultiplier).toBe(o2026.coreMultiplier);
+    expect(o2025.practicalMultiplier).toBe(o2026.practicalMultiplier);
+  });
+
   test('47県のうち大市場8県(tokyo/kanagawa/aichi/osaka/saitama/chiba/hyogo/fukuoka)が揃っている', () => {
     const majorMarketCodes = [
       'tokyo', 'kanagawa', 'aichi', 'osaka', 'saitama', 'chiba', 'hyogo', 'fukuoka',
