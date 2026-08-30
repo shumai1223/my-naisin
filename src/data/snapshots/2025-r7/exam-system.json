@@ -6,7 +6,12 @@
     "collectionMethod": "N1-2(ops/tasks/T-N1-N4-revenue-ceiling.md)。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。大市場県(tokyo/kanagawa/aichi/osaka/saitama/chiba/hyogo/fukuoka)から着手。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。",
     "totalPrefectures": 47,
     "collectedCount": 20,
-    "unavailable": []
+    "unavailable": [
+      {
+        "code": "ishikawa",
+        "reason": "令和7年度募集要綱PDF(documents/r7youkou.pdf)は現行サイトで404(削除済み)。Wayback Machineにも一切アーカイブが存在しない(CDX検索で0件・HTML側の令和7年度ページ自体は2024-11-10時点のスナップショットにr7youkou.pdfへのリンクが確認できるが、PDF本体はクロールされていない)。推測で埋めず取得不能として記録(2026-08-31)。"
+      }
+    ]
   },
   "entries": [
     {
