@@ -54,6 +54,17 @@ export interface ClickFraudCheck {
   flagged: boolean;
 }
 
+/**
+ * T-M2 M2-4: 直近7日でモバイル比率が異常に低かった日の一覧（`scripts/lib/click-fraud-detector.mjs`の
+ * `analyzeMobileRatioByDay`が返す配列から`flagged`の日だけを抜き出したもの）。
+ * 実トラフィックは74-80%がモバイル（GSC実測）。50%を下回る日はデスクトップに偏った
+ * bot流入を無条件に疑う（loop-question-note 2026-08-29「検知器の自己点検」）。
+ * 取得自体に失敗した場合は null（判定は保留＝既存のstatus判定を悪化させない）。
+ */
+export interface MobileRatioCheck {
+  flaggedDays: { date: string; total: number; mobile: number; mobileRatio: number }[];
+}
+
 export const HEALTH_EVENT_NAMES: (keyof EventHealthCounts)[] = [
   'cta_view',
   'lead_submit',
@@ -70,6 +81,8 @@ export interface HealthInput {
   truth: TruthCounts | null;
   /** TH-13クリック不正バースト検知（前日分）。省略/取得できなかった場合はnull扱い（判定に影響させない）。 */
   clickFraud?: ClickFraudCheck | null;
+  /** T-M2 M2-4: 直近7日のモバイル比率チェック。省略/取得できなかった場合はnull扱い（判定に影響させない）。 */
+  mobileRatio?: MobileRatioCheck | null;
 }
 
 /**
@@ -84,11 +97,12 @@ export interface HealthInput {
  * 「分からない」を「異常」に丸めない（それが初版の誤りだった）。
  */
 export function judgeHealth(input: HealthInput): HealthStatus {
-  const { ga4, truth, clickFraud } = input;
+  const { ga4, truth, clickFraud, mobileRatio } = input;
   if (truth === null) return 'caution';
   if (truth.statsSubmissions7d === 0) return 'alert';
   if (ga4.cta_view === 0) return 'caution';
   if (clickFraud?.flagged) return 'caution';
+  if (mobileRatio && mobileRatio.flaggedDays.length > 0) return 'caution';
   return 'ok';
 }
 
@@ -100,7 +114,7 @@ const STATUS_LABEL: Record<HealthStatus, string> = {
 
 /** 実測件数から生存監視セクションのMarkdownを組み立てる（外部APIに依存しない純関数）。 */
 export function buildHealthSection(input: HealthInput, dateLabel: string): string {
-  const { ga4, truth, clickFraud } = input;
+  const { ga4, truth, clickFraud, mobileRatio } = input;
   const status = judgeHealth(input);
 
   const truthLines = truth
@@ -123,6 +137,15 @@ export function buildHealthSection(input: HealthInput, dateLabel: string): strin
       ]
     : ['- （D1から取得できなかったため今回はチェック未実施）'];
 
+  const mobileRatioLines = mobileRatio
+    ? mobileRatio.flaggedDays.length > 0
+      ? mobileRatio.flaggedDays.map(
+          (d) =>
+            `- ⚠️ ${d.date}: 総クリック${d.total}件 / モバイル${d.mobile}件（${(d.mobileRatio * 100).toFixed(1)}%・実トラフィックの通常水準74-80%を下回る）`
+        )
+      : ['- 異常なし（直近7日すべて50%以上）']
+    : ['- （D1から取得できなかったため今回はチェック未実施）'];
+
   return [
     `## ⚡収益導線の生存監視（自動・${dateLabel}時点・Λ-1）`,
     '',
@@ -143,6 +166,10 @@ export function buildHealthSection(input: HealthInput, dateLabel: string): strin
     '',
     ...clickFraudLines,
     '',
+    '### モバイル比率チェック（直近7日・T-M2 M2-4）',
+    '',
+    ...mobileRatioLines,
+    '',
   ].join('\n');
 }
 
@@ -158,13 +185,16 @@ export function buildHealthSection(input: HealthInput, dateLabel: string): strin
  */
 export function buildDiscordMessage(input: HealthInput, dateLabel: string): string {
   const status = judgeHealth(input);
-  const { truth, clickFraud } = input;
+  const { truth, clickFraud, mobileRatio } = input;
   const truthLine = truth
     ? `stats_submissions(7日)=${truth.statsSubmissions7d}件 / leads(7日)=${truth.leads7d}件`
     : 'D1から確定値を取得できず（判定保留）';
   const lines = [`${STATUS_LABEL[status]}（${dateLabel}時点・My Naishin 収益導線監視）`, truthLine];
   if (clickFraud?.flagged) {
     lines.push(`⚠️ クリック不正の疑い(TH-13): ${clickFraud.date} 総クリック${clickFraud.total}件`);
+  }
+  if (mobileRatio && mobileRatio.flaggedDays.length > 0) {
+    lines.push(`⚠️ モバイル比率低下(M2-4): ${mobileRatio.flaggedDays.map((d) => d.date).join(', ')}`);
   }
   lines.push('詳細: docs/daily-brief.md');
   return lines.join('\n');

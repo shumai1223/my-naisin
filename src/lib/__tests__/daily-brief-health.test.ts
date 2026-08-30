@@ -7,6 +7,7 @@ import {
   type EventHealthCounts,
   type TruthCounts,
   type ClickFraudCheck,
+  type MobileRatioCheck,
 } from '../daily-brief-health';
 
 const GA4_OK: EventHealthCounts = { cta_view: 120, lead_submit: 3, line_friend_click: 8, affiliate_click: 45 };
@@ -30,6 +31,11 @@ const CLICK_FRAUD_FLAGGED: ClickFraudCheck = {
   distinctUa: 8,
   ipRatio: 0.99,
   flagged: true,
+};
+const MOBILE_RATIO_CLEAN: MobileRatioCheck = { flaggedDays: [] };
+/** T-M2 M2-4の例: デスクトップに偏った日(実測は74-80%がモバイル)。 */
+const MOBILE_RATIO_FLAGGED: MobileRatioCheck = {
+  flaggedDays: [{ date: '2026-08-27', total: 20, mobile: 6, mobileRatio: 0.3 }],
 };
 
 describe('judgeHealth', () => {
@@ -67,6 +73,18 @@ describe('judgeHealth', () => {
   it('clickFraudが省略/nullでも既存の判定に影響しない（後方互換）', () => {
     expect(judgeHealth({ ga4: GA4_OK, truth: TRUTH_OK })).toBe('ok');
     expect(judgeHealth({ ga4: GA4_OK, truth: TRUTH_OK, clickFraud: null })).toBe('ok');
+  });
+
+  it('M2-4: モバイル比率が異常な日があれば他が健全でも caution', () => {
+    expect(judgeHealth({ ga4: GA4_OK, truth: TRUTH_OK, mobileRatio: MOBILE_RATIO_FLAGGED })).toBe('caution');
+  });
+
+  it('M2-4: モバイル比率が正常なら status に影響しない', () => {
+    expect(judgeHealth({ ga4: GA4_OK, truth: TRUTH_OK, mobileRatio: MOBILE_RATIO_CLEAN })).toBe('ok');
+  });
+
+  it('mobileRatioが省略/nullでも既存の判定に影響しない（後方互換）', () => {
+    expect(judgeHealth({ ga4: GA4_OK, truth: TRUTH_OK, mobileRatio: null })).toBe('ok');
   });
 });
 
@@ -118,6 +136,24 @@ describe('buildHealthSection', () => {
     const section = buildHealthSection({ ga4: GA4_OK, truth: TRUTH_OK }, '2026-07-28');
     expect(section).toContain('チェック未実施');
   });
+
+  it('M2-4: モバイル比率が異常な日があれば日付・件数・比率を表示する', () => {
+    const section = buildHealthSection({ ga4: GA4_OK, truth: TRUTH_OK, mobileRatio: MOBILE_RATIO_FLAGGED }, '2026-08-28');
+    expect(section).toContain('2026-08-27');
+    expect(section).toContain('30.0%');
+    expect(section).toContain('モバイル比率チェック');
+  });
+
+  it('M2-4: モバイル比率が正常なら「異常なし」と表示する', () => {
+    const section = buildHealthSection({ ga4: GA4_OK, truth: TRUTH_OK, mobileRatio: MOBILE_RATIO_CLEAN }, '2026-08-28');
+    expect(section).toContain('異常なし（直近7日すべて50%以上）');
+  });
+
+  it('mobileRatioが省略された場合は未実施と明記する（後方互換）', () => {
+    const section = buildHealthSection({ ga4: GA4_OK, truth: TRUTH_OK }, '2026-07-28');
+    const mobileSection = section.split('モバイル比率チェック')[1];
+    expect(mobileSection).toContain('チェック未実施');
+  });
 });
 
 describe('buildDiscordMessage', () => {
@@ -154,6 +190,17 @@ describe('buildDiscordMessage', () => {
   it('クリック不正の兆候が無ければDiscordメッセージに警告行を含めない', () => {
     const msg = buildDiscordMessage({ ga4: GA4_OK, truth: TRUTH_OK, clickFraud: CLICK_FRAUD_CLEAN }, '2026-08-19');
     expect(msg).not.toContain('TH-13');
+  });
+
+  it('M2-4: モバイル比率が異常な日があればDiscordメッセージに警告行を含める', () => {
+    const msg = buildDiscordMessage({ ga4: GA4_OK, truth: TRUTH_OK, mobileRatio: MOBILE_RATIO_FLAGGED }, '2026-08-28');
+    expect(msg).toContain('モバイル比率低下(M2-4)');
+    expect(msg).toContain('2026-08-27');
+  });
+
+  it('モバイル比率が正常ならDiscordメッセージに警告行を含めない', () => {
+    const msg = buildDiscordMessage({ ga4: GA4_OK, truth: TRUTH_OK, mobileRatio: MOBILE_RATIO_CLEAN }, '2026-08-28');
+    expect(msg).not.toContain('M2-4');
   });
 });
 

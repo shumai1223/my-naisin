@@ -68,11 +68,20 @@ botは止まっていない。8/27に手口を変えて今も来ている。
       ルーティング条件（302 or JSホップ）は今回変更していない（isImplausibleReferer追加分の
       み拡張）。JSホップは実ブラウザなら数百msで通過するだけで実害が無い既存設計のまま
 
-### M2-4 検知器の自己点検を入れる — 未着手
+### M2-4 検知器の自己点検を入れる — ✅2026-08-30完了(loop)
 
-- [ ] `check:click-fraud`に「直近7日で、モバイル比率が50%を下回った日」を警告として追加する
-      （実トラフィックは80%がモバイル。デスクトップに偏った日は無条件に疑う）
-- [ ] 日次ブリーフィング（T-R1）にこの警告を載せる
+- [x] `check:click-fraud`に「直近7日で、モバイル比率が50%を下回った日」を警告として追加する
+      （実トラフィックは80%がモバイル。デスクトップに偏った日は無条件に疑う）→
+      `scripts/lib/click-fraud-detector.mjs`の`analyzeMobileRatioByDay()`（既に実装済みだったと
+      判明・`4ed7a74`に混入していたコミット由来）が`scripts/check-click-fraud-burst.mjs`から
+      呼ばれ直近7日を検査・警告出力する
+- [x] 日次ブリーフィング（T-R1）にこの警告を載せる →
+      `src/lib/daily-brief-health.ts`に`MobileRatioCheck`型を新設し`HealthInput`/
+      `buildHealthSection`/`buildDiscordMessage`/`judgeHealth`（flaggedDaysがあれば🟡）に統合、
+      `docs/daily-brief.md`のLAMBDA1_HEALTHブロックに「モバイル比率チェック（直近7日・T-M2 M2-4）」
+      節を新設。`src/scripts/daily-brief-health.ts`（毎朝7:30 JST自動実行）に
+      `fetchMobileRatioCheck()`を新設し直近7日分のclicksを取得して結線。テスト8件追加
+      （judgeHealth3件・buildHealthSection3件・buildDiscordMessage2件）
 
 ## やってはいけないこと
 
@@ -82,14 +91,16 @@ botは止まっていない。8/27に手口を変えて今も来ている。
 
 ## DoD
 
-- [ ] 通常ページにbot判定がかかっているか/いないかが文書に書かれている → ✅本ファイルのM2-1で記録済み
+- [x] 通常ページにbot判定がかかっているか/いないかが文書に書かれている → ✅本ファイルのM2-1で記録済み
 - [x] `clicks.trust_class`列が追加され、新規クリックが分類されている → ✅完了(本番D1適用済み)
 - [x] `isImplausibleReferer`が判定経路に入っている（末尾スラッシュの誤検知テスト付き） → ✅完了
-- [ ] モバイル比率の警告が`check:click-fraud`に入っている → 未着手
-- [x] `tsc` exit 0 / jest green（357 suites・6164 tests） → ✅完了
-- [x] 本番反映は👤ゲート → コード側は`a3e8f0c`・`dc27d5e`でpush済み(Workers Builds経由で自動デプロイ)。
+- [x] モバイル比率の警告が`check:click-fraud`に入っている → ✅2026-08-30完了(M2-4・日次ブリーフィング統合込み)
+- [x] `tsc` exit 0 / jest green（357 suites・6172 tests） → ✅完了
+- [x] 本番反映は👤ゲート → コード側は`a3e8f0c`・`dc27d5e`・M2-4分でpush済み(Workers Builds経由で自動デプロイ)。
       D1 migration(`0023`)も`wrangler d1 execute --remote`でloopが自力適用済み(2026-07-28ゲート解禁)。
-      残るM2-4完了後、本番での実挙動(誤検知が出ていないか)の確認は次回T-R1週次チェックで見る
+      本番での実挙動(誤検知が出ていないか)の確認は次回T-R1週次チェックで見る
+
+**T-M2は全項目完了。DoD5項目すべて達成。**
 
 ## 併せて記録されている既知の不具合（未解決・別イテレーションで調査要）
 
