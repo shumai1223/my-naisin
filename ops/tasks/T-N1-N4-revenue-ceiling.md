@@ -104,15 +104,19 @@ source-history.ts の90スナップショット → 全て2026-07/08取得
 
 ⚠️ **この作業は重い（47県×PDF読解）。ただし一度きり。** 来年以降はN1-1の凍結との差分を取るだけになる。
 
-**進捗（4/47・2026-08-30着手）**: tokyo✅・kanagawa✅・aichi✅・osaka✅（いずれも実施要領/要綱本体PDFを直接確認・令和8年度と制度上の差分なしと検証済み）。
+**進捗（5/47・2026-08-30着手）**: tokyo✅・kanagawa✅・aichi✅・osaka✅・saitama✅（いずれも実施要領/要綱本体PDFを直接確認・令和8年度と制度上の差分なしと検証済み）。
 `src/data/snapshots/2025-r7/README.md`に方針・`exam-system.json`の`meta.collectedCount`に進捗数を記録する運用。
 **新知見**: 現行の教委ページは既に翌々年度分(令和9年度)に更新されていることがある(kanagawaで実際に発生)。
 また現行ページ自体が生きていてもWebFetch/curlがリダイレクトループで失敗することがある(aichiで実際に発生・
 curl error 47/WebFetch「Too many redirects」)。いずれの場合もWayback Machine CDX API
 (`archive.org/wayback/available?url=...&timestamp=...`)でスナップショットを特定し、`curl`でPDFを取得して
-からRead toolで確認する(WebFetchはweb.archive.org非対応のためcurl必須)。osakaは令和7年度専用ページが
-現存しcurl直叩きで問題なく取得できた(県によって直取得できる/できないが分かれる)。
-次は大市場県の続き（saitama/chiba/hyogo/fukuoka）を1県ずつ。
+からRead toolで確認する(WebFetchはweb.archive.org非対応のためcurl必須)。osaka/saitamaは令和7年度専用
+ページが現存しcurl直叩きで問題なく取得できた(県によって直取得できる/できないが分かれる)。
+**saitamaで判明した新パターン**: 学年比率・学力検査換算とも学校ごとに範囲内で自由設定できる制度の県は、
+`reverseCalc`(totalMaxScore/examMaxScore/defaultRatio等)がサイト独自の代表値で一次ソースに直接の記載が
+無いことがある。その場合はgradeMultipliers/maxScore(算式そのもの)を一次ソースで直接検証し、reverseCalc
+は「サイトモデルとして不変」と明記して区別する(diffFromCurrentYearに書く)。
+次は大市場県の続き（chiba/hyogo/fukuoka）を1県ずつ。
 
 ## N1-3 差分エンジン
 
