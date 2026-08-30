@@ -5,7 +5,7 @@
     "startedAt": "2026-08-30",
     "collectionMethod": "N1-2(ops/tasks/T-N1-N4-revenue-ceiling.md)。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。大市場県(tokyo/kanagawa/aichi/osaka/saitama/chiba/hyogo/fukuoka)から着手。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。",
     "totalPrefectures": 47,
-    "collectedCount": 2,
+    "collectedCount": 3,
     "unavailable": []
   },
   "entries": [
@@ -63,6 +63,28 @@
       "lastVerified": "2026-08-30",
       "pdfHash": null,
       "diffFromCurrentYear": "変更なし(2026-08-30に令和7年度実施要領本体PDF§1-V-6(2)アを直接確認。A=(第2学年の9教科の評定の合計)+(第3学年の9教科の評定の合計)×2で135点満点、S1=a×f+b×g(f+g=10の2以上の整数)方式。令和8年度分(prefectures.ts)のgradeMultipliers/maxScoreと完全一致)"
+    },
+    {
+      "code": "aichi",
+      "name": "愛知県",
+      "region": "中部",
+      "fiscalYear": "2025",
+      "targetGrades": [3],
+      "gradeMultipliers": { "1": 0, "2": 0, "3": 2 },
+      "coreMultiplier": 1,
+      "practicalMultiplier": 1,
+      "maxScore": 90,
+      "simplifiedCalc": false,
+      "actualMaxScore": null,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": null,
+      "sourceUrl": "http://web.archive.org/web/20250627200252/https://www.pref.aichi.jp/uploaded/attachment/537143.pdf",
+      "sourceUrl2": "https://www.pref.aichi.jp/soshiki/kotogakko/r7nyugakusyasenbatsu.html",
+      "sourceTitle": "愛知県教育委員会「令和7(2025)年度愛知県公立高等学校入学者選抜実施要項（本文編）」(現行ページはWebFetch/curlともリダイレクトループで直接取得不可のためWayback Machine 2025-06-27時点のスナップショットで確認)",
+      "lastVerified": "2026-08-30",
+      "pdfHash": null,
+      "diffFromCurrentYear": "変更なし(2026-08-30に実施要項本文編p.26「第6 入学者の選抜及び合格者の決定」3(1)アを直接確認。評定得点は「学習の記録(第3学年)」の評定合計(最高45)を2倍した数値とし最高90点(傾斜配点を行う場合を除く)。令和8年度分(prefectures.ts)のgradeMultipliers{1:0,2:0,3:2}/maxScore=90と完全一致)"
     }
   ]
 }

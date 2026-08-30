@@ -60,4 +60,13 @@ describe('2025-r7 exam-system snapshot（N1-2 収集中スナップショット�
     expect(k2025.coreMultiplier).toBe(k2026.coreMultiplier);
     expect(k2025.practicalMultiplier).toBe(k2026.practicalMultiplier);
   });
+
+  test('aichi: 2026-r8と2025-r7で制度の核となる数値が一致する(実測で確認済みの「変更なし」)', () => {
+    const a2025 = snapshot.entries.find((e) => e.code === 'aichi')!;
+    const a2026 = snapshot2026.entries.find((e) => e.code === 'aichi')!;
+    expect(a2025.maxScore).toBe(a2026.maxScore);
+    expect(a2025.gradeMultipliers).toEqual(a2026.gradeMultipliers);
+    expect(a2025.coreMultiplier).toBe(a2026.coreMultiplier);
+    expect(a2025.practicalMultiplier).toBe(a2026.practicalMultiplier);
+  });
 });
