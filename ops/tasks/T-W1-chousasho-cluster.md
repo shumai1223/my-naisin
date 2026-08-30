@@ -37,8 +37,21 @@
 **つまり配管の問題ではない。順位もそこそこ取れている。それでも表示が出ない。**
 → **「露出の絶対量が足りない＝競合できていない」問題。** 直すのは中身と具体性であって、リンクではない。
 
-- [ ] 上記4点を loop 自身で確認してから着手する（`page-registry.ts` の実物・`Select-String` の再実行・GSC の再取得）
-- [ ] 確認して**違っていたら、この文書ではなく実測を採用して先に報告すること**
+- [x] 上記4点を loop 自身で確認してから着手する（`page-registry.ts` の実物・`Select-String` の再実行・GSC の再取得）→
+      **✅2026-08-30確認完了・4点すべて正確**。
+      ①`page-registry.ts`L86-89で`/chousasho`・`/chousasho/kakikata`・`/chousasho/hyoutei`・
+      `/chousasho/reibun`の4件が実在登録を確認。
+      ②7ページ+answer-botの内部リンクは、`href="/chousasho`という文字列パターンでの初回grepでは
+      2/7ページしかヒットしなかったが（オブジェクトリテラル`href: '/chousasho'`形式が単一引用符の
+      ため）、`chousasho`単体での広いgrepに切り替えたところ7ページ全てで実在を確認（answer-botの
+      L192/257/258/269も既存確認どおり）。**当初の狭いgrepパターンだけで「無い」と誤断しないこと**
+      （niigata誤報と同型の教訓）
+      ③`scripts/gsc.mjs query --dimensions page,query --days 28`を自分で引き直し、`/chousasho/kakikata`
+      が「調査書 書き方」でimp=1・clk=0・pos=5.0と完全一致確認（ただしn=1で極めて薄いサンプル）
+      ④同クエリで4ページ合計imp=80・clk=0（28日）も完全一致確認
+      （`/chousasho`imp9・`/chousasho/kakikata`imp63・`/chousasho/hyoutei`imp7・`/chousasho/reibun`imp1）
+- [x] 確認して**違っていたら、この文書ではなく実測を採用して先に報告すること** →
+      違いなし。4点とも対話セッションの記載どおりで訂正不要
 
 ---
 
