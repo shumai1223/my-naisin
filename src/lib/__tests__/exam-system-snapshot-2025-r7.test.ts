@@ -69,4 +69,13 @@ describe('2025-r7 exam-system snapshot（N1-2 収集中スナップショット�
     expect(a2025.coreMultiplier).toBe(a2026.coreMultiplier);
     expect(a2025.practicalMultiplier).toBe(a2026.practicalMultiplier);
   });
+
+  test('osaka: 2026-r8と2025-r7で制度の核となる数値が一致する(実測で確認済みの「変更なし」)', () => {
+    const o2025 = snapshot.entries.find((e) => e.code === 'osaka')!;
+    const o2026 = snapshot2026.entries.find((e) => e.code === 'osaka')!;
+    expect(o2025.maxScore).toBe(o2026.maxScore);
+    expect(o2025.gradeMultipliers).toEqual(o2026.gradeMultipliers);
+    expect(o2025.reverseCalc?.totalMaxScore).toBe(o2026.reverseCalc?.totalMaxScore);
+    expect(o2025.reverseCalc?.osakaTypeCount).toBe(o2026.reverseCalc?.osakaTypeCount);
+  });
 });

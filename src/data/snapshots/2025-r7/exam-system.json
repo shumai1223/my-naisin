@@ -5,7 +5,7 @@
     "startedAt": "2026-08-30",
     "collectionMethod": "N1-2(ops/tasks/T-N1-N4-revenue-ceiling.md)。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。大市場県(tokyo/kanagawa/aichi/osaka/saitama/chiba/hyogo/fukuoka)から着手。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。",
     "totalPrefectures": 47,
-    "collectedCount": 3,
+    "collectedCount": 4,
     "unavailable": []
   },
   "entries": [
@@ -85,6 +85,39 @@
       "lastVerified": "2026-08-30",
       "pdfHash": null,
       "diffFromCurrentYear": "変更なし(2026-08-30に実施要項本文編p.26「第6 入学者の選抜及び合格者の決定」3(1)アを直接確認。評定得点は「学習の記録(第3学年)」の評定合計(最高45)を2倍した数値とし最高90点(傾斜配点を行う場合を除く)。令和8年度分(prefectures.ts)のgradeMultipliers{1:0,2:0,3:2}/maxScore=90と完全一致)"
+    },
+    {
+      "code": "osaka",
+      "name": "大阪府",
+      "region": "近畿",
+      "fiscalYear": "2025",
+      "targetGrades": [1, 2, 3],
+      "gradeMultipliers": { "1": 2, "2": 2, "3": 6 },
+      "coreMultiplier": 1,
+      "practicalMultiplier": 1,
+      "maxScore": 450,
+      "simplifiedCalc": false,
+      "actualMaxScore": null,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": {
+        "totalMaxScore": 900,
+        "examMaxScore": 450,
+        "defaultRatio": { "naishin": 50, "exam": 50 },
+        "calcType": "osaka",
+        "naishinMultiplier": 1,
+        "kValue": null,
+        "sValueCoefficients": null,
+        "osakaTypeCount": 5,
+        "hasTokyoSettings": false,
+        "hasKanagawaSettings": false
+      },
+      "sourceUrl": "https://www.pref.osaka.lg.jp/documents/94625/21_r7_ippan.pdf",
+      "sourceUrl2": "https://www.pref.osaka.lg.jp/o180040/kotogakko/gakuji-g3/r07_jisshiyoko.html",
+      "sourceTitle": "大阪府教育委員会「令和7年度大阪府公立高等学校入学者選抜実施要項」第7 一般入学者選抜",
+      "lastVerified": "2026-08-30",
+      "pdfHash": null,
+      "diffFromCurrentYear": "変更なし(2026-08-30に実施要項本文PDF p.60「3 入学者の選抜」(3)イ・ウを直接確認。調査書中の各教科の評定を合計し第3学年を6倍・第1,2学年を2倍(450点満点)、学力検査450点満点との比率をI〜Vの5タイプ(1.4:0.6〜0.6:1.4)から各校が選択する方式。令和8年度分(prefectures.ts)のgradeMultipliers{1:2,2:2,3:6}/maxScore=450/osakaTypeCount=5と完全一致)"
     }
   ]
 }
