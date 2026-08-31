@@ -5,9 +5,9 @@
     "frozenBy": "scripts/freeze-exam-snapshot.ts (T-N1-1)",
     "sourceOfTruth": "src/lib/prefectures.ts (この日付時点のスナップショット)",
     "prefectureCount": 47,
-    "pdfHashStatus": "partial_26_of_47",
+    "pdfHashStatus": "partial_27_of_47",
     "freezePolicy": "本ディレクトリは生成後に書き換え禁止。prefectures.tsが後日修正されても本ファイルは追随させない。来年度の差分エンジン(N1-3)の基準点として使う。",
-    "pdfHashNote": "47件中26件(sourceUrlが直接PDFリンクの6県＋ポータル経由で個別特定した20県)のSHA-256を取得済み(2026-08-30/31)。東京都・神奈川県・山梨県・岐阜県・愛知県はsourceUrlの元PDFが上書き・拡張子なし配信・Incapsulaボット対策のいずれかのため、Wayback Machineのアーカイブまたはテスト側の既知例外パターンで対応。残り21県はsourceUrlがポータル/HTMLページで実際のPDF URLを個別に特定する必要があり、継続作業として順次進める。"
+    "pdfHashNote": "47件中27件(sourceUrlが直接PDFリンクの6県＋ポータル経由で個別特定した21県)のSHA-256を取得済み(2026-08-30/31)。東京都・神奈川県・山梨県・岐阜県・愛知県はsourceUrlの元PDFが上書き・拡張子なし配信・Incapsulaボット対策のいずれかのため、Wayback Machineのアーカイブまたはテスト側の既知例外パターンで対応。残り20県はsourceUrlがポータル/HTMLページで実際のPDF URLを個別に特定する必要があり、継続作業として順次進める。"
   },
   "entries": [
     {
@@ -814,7 +814,9 @@
       "sourceUrl2": "https://czemi.benesse.ne.jp/open/nyushi/article/26/feature/0026.html",
       "sourceTitle": "京都府教育委員会 公立高等学校入学者選抜",
       "lastVerified": "2026-07-16",
-      "pdfHash": null
+      "pdfHash": "23bab9c315b652107d37272fe5b0b65327d590881a9810300e695b3cf45af395",
+      "pdfHashSourceUrl": "https://www.kyoto-be.ne.jp/koukyou/cms/wp-content/uploads/2025/09/03-%E9%81%B8%E6%8A%9C%E8%A6%81%E9%A0%85%EF%BC%88%E6%9C%AC%E6%96%87%EF%BC%89.pdf",
+      "pdfHashVerifiedAt": "2026-08-31"
     },
     {
       "code": "osaka",
