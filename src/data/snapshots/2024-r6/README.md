@@ -6,15 +6,19 @@ T-Y11 Task C（`ops/tasks/T-Y11-winter-bairitsu-pipeline.md`）で収集する�
 
 ## 進捗状況（2026-09-01）
 
-- **entries 15件**（osaka・chiba・tochigi・ehime・kochi・kagoshima・aomori・iwate・tokushima・hiroshima・okayama・yamagata・nagano・shizuoka・ibaraki）
+- **entries 17件**（osaka・chiba・tochigi・ehime・kochi・kagoshima・aomori・iwate・tokushima・hiroshima・okayama・yamagata・nagano・shizuoka・ibaraki・shiga・kanagawa）
 - **unavailable 0件**（今のところ「取得不能」と確定した県は無い）
-- 残り32県は未着手
+- 残り30県は未着手
 - kagawaを試みたが、R7のsourceUrl(`documents/50757/so1.pdf`＝毎年発行の「変更点」文書)に対応するR6版の
   URLをWebSearchで特定できず保留（document ID自体が年度ごとに無関係な数字に振られる県で、
   近傍IDへの推測(`gian4.pdf`は発見できたが入学定員の文書で対象外)も的中しなかった）。
-- **Internet Archive(Wayback Machine)は2026-09-01時点で部分復旧**: ページ本体の直接取得(既知のタイムスタンプURL)は成功するが、
-  CDX検索APIはまだ503で不通のまま（下記「進捗」参照）。CDXが必要な県(miyagi等)は復旧待ち。
+- **Internet Archive(Wayback Machine)は2026-09-01中に完全復旧を確認**: kanagawa追加時にCDX検索APIへ
+  2023年限定クエリを投げたところ正常応答した（`documents/63604/`配下の一覧取得に成功）。
+  CDXが必要な県(miyagi・kagawa等)は次回セッションで再試行してよい。
 - ★**iwateは令和6→7年度で実際に制度が変わっている**（nara〈令和7→8年度〉に続く2件目の実測「変更あり」）
+- ★**kanagawaのPDFはpdftotextでCJKテキストを抽出できなかった**（embeddedフォントの構造上の問題と
+  思われ、空白のみ返る）。この種のPDFはRead toolのpages指定によるビジョン解析で本文を直接確認する
+  （tochigi等の他県で使ったURL置換型と併用可能・今後同様の県で使う型として記録）。
 
 ## 収集方針（2025-r7から継承・Y-0を継承）
 

@@ -234,6 +234,16 @@ describe('2024-r6 exam-system snapshot（T-Y11 Task C 収集中スナップシ�
     expect(s2024.gradeMultipliers).toEqual(s2026.gradeMultipliers);
   });
 
+  test('kanagawa: 2025-r7・2026-r8と2024-r6で制度の核となる数値が一致する(実測で確認済みの「変更なし」)', () => {
+    const k2024 = snapshot.entries.find((e) => e.code === 'kanagawa')!;
+    const k2025 = snapshot2025.entries.find((e) => e.code === 'kanagawa')!;
+    const k2026 = snapshot2026.entries.find((e) => e.code === 'kanagawa')!;
+    expect(k2024.maxScore).toBe(k2025.maxScore);
+    expect(k2024.maxScore).toBe(k2026.maxScore);
+    expect(k2024.gradeMultipliers).toEqual(k2025.gradeMultipliers);
+    expect(k2024.gradeMultipliers).toEqual(k2026.gradeMultipliers);
+  });
+
   test('全てのsourceUrl/sourceUrl2はhttpsの実URL形式である(手打ちの推測URLを混入させない不変条件)', () => {
     for (const entry of snapshot.entries) {
       expect(entry.sourceUrl).toMatch(/^https?:\/\//);
