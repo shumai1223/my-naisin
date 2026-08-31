@@ -191,6 +191,17 @@ describe('2024-r6 exam-system snapshot（T-Y11 Task C 収集中スナップシ�
     expect(y2024.targetGrades).toEqual([3]);
   });
 
+  test('nagano: 2025-r7・2026-r8と2024-r6で制度の核となる数値が一致する(実測で確認済みの「変更なし」)', () => {
+    const n2024 = snapshot.entries.find((e) => e.code === 'nagano')!;
+    const n2025 = snapshot2025.entries.find((e) => e.code === 'nagano')!;
+    const n2026 = snapshot2026.entries.find((e) => e.code === 'nagano')!;
+    expect(n2024.maxScore).toBe(n2025.maxScore);
+    expect(n2024.maxScore).toBe(n2026.maxScore);
+    expect(n2024.gradeMultipliers).toEqual(n2025.gradeMultipliers);
+    expect(n2024.gradeMultipliers).toEqual(n2026.gradeMultipliers);
+    expect(n2024.targetGrades).toEqual([3]);
+  });
+
   test('全てのsourceUrl/sourceUrl2はhttpsの実URL形式である(手打ちの推測URLを混入させない不変条件)', () => {
     for (const entry of snapshot.entries) {
       expect(entry.sourceUrl).toMatch(/^https?:\/\//);

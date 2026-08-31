@@ -6,9 +6,11 @@ T-Y11 Task C（`ops/tasks/T-Y11-winter-bairitsu-pipeline.md`）で収集する�
 
 ## 進捗状況（2026-09-01）
 
-- **entries 12件**（osaka・chiba・tochigi・ehime・kochi・kagoshima・aomori・iwate・tokushima・hiroshima・okayama・yamagata）
+- **entries 13件**（osaka・chiba・tochigi・ehime・kochi・kagoshima・aomori・iwate・tokushima・hiroshima・okayama・yamagata・nagano）
 - **unavailable 0件**（今のところ「取得不能」と確定した県は無い）
-- 残り35県は未着手
+- 残り34県は未着手
+- **Internet Archive(Wayback Machine)は2026-09-01時点で部分復旧**: ページ本体の直接取得(既知のタイムスタンプURL)は成功するが、
+  CDX検索APIはまだ503で不通のまま（下記「進捗」参照）。CDXが必要な県(miyagi等)は復旧待ち。
 - ★**iwateは令和6→7年度で実際に制度が変わっている**（nara〈令和7→8年度〉に続く2件目の実測「変更あり」）
 
 ## 収集方針（2025-r7から継承・Y-0を継承）
@@ -161,3 +163,31 @@ gradeMultipliers{1:0,2:0,3:1}・maxScore=45は令和7・8年度分と完全一�
 そこからページ内リンクを辿って正しいファイルを特定する方が確実。ファイルサイズの一致確認（curlの
 実ダウンロードサイズ vs ページ記載のKB表記）は、URLだけでは判別しづらい同名ファイルの取り違えを防ぐ
 簡易な裏取り手段として有効だった（kagoshima・hiroshimaで使ったラベルテキスト＋サイズ照合と同系統の手法）。
+
+## nagano（2026-09-01追加・変更なし）
+
+R7のsourceUrl(`documents/r7yoko2.pdf`)の`r7`→`r6`置換(`r6yoko2.pdf`)は404だった。WebSearchで
+R6の入学者選抜情報索引ページ(`r6/r6nyushi.html`)を発見しWebFetchでページ内リンクを確認したところ、
+R6は要綱が「yoko1」1本(425KB)に統合されており「yoko2」という分割ファイルは存在しなかった
+（R7は前期選抜と後期選抜以降で2分割・R6は1本化、という年度によるファイル分割数の違い）。
+`r6yoko1.pdf`をダウンロードし(434,209バイト=425KB表記と一致)全8ページを読み込み、p.6「第3 後期選抜」
+6(1)イ(ｱ)で「調査書に記載されている中学校第３学年の必修教科の評定合計値(最高45点)を縦軸、学力検査
+成就率合計値(最高500点)を横軸とする相関図を作成する」という、R7と一言一句完全一致する文言を確認
+（条項番号だけ7(1)→6(1)と相違・これは前後の項番がR6/R7で1本化/分割の違いにより1つずれているだけ）。
+gradeMultipliers{1:0,2:0,3:1}・maxScore=45は令和7・8年度分と完全一致。
+
+**教訓**: 同じ県でも年度によって「要綱が何本のPDFに分割されているか」が変わることがある
+（R7=2分割・R6=1分割）。URL置換だけに頼らず、置換が外れたら索引ページから辿り直すことで
+発見できた（tochigi/ehime/kochi等で確立した手法の踏襲）。
+
+## Wayback Machine 部分復旧の確認（2026-09-01）
+
+前回セッションで「Internet Archiveがサービス一時停止中」と記録した状態について、本セッションで
+再確認したところ、**既知のタイムスタンプ付きURL（`web.archive.org/web/<timestamp>id_/...`）への
+直接アクセスはHTTP 200で成功する**ようになっていた（miyagiのR7 sourceUrlで実証）。
+一方、**CDX検索API（`web.archive.org/cdx/search/cdx?url=...`）は依然としてHTTP 503
+「Temporarily Offline」のまま**で、新しい県のアーカイブURLを検索で発見することはまだできない。
+
+miyagiのR6版（R7自体がWayback経由でしか見つからなかった県）を今回試みたが、CDX検索が使えず、
+WebSearchでも該当のarchive.orgページを発見できなかったため保留とした。**CDX APIが完全復旧したら
+miyagi・tokyo・saitama・hyogo・shimane・yamaguchiを優先的に再試行すること。**
