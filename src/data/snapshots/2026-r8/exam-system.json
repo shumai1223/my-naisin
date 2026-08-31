@@ -5,9 +5,9 @@
     "frozenBy": "scripts/freeze-exam-snapshot.ts (T-N1-1)",
     "sourceOfTruth": "src/lib/prefectures.ts (この日付時点のスナップショット)",
     "prefectureCount": 47,
-    "pdfHashStatus": "partial_10_of_47",
+    "pdfHashStatus": "partial_11_of_47",
     "freezePolicy": "本ディレクトリは生成後に書き換え禁止。prefectures.tsが後日修正されても本ファイルは追随させない。来年度の差分エンジン(N1-3)の基準点として使う。",
-    "pdfHashNote": "47件中10件(sourceUrlが直接PDFリンクの6県＋ポータル経由で個別特定した4県)のSHA-256を取得済み(2026-08-30/31)。残り37県はsourceUrlがポータル/HTMLページで実際のPDF URLを個別に特定する必要があり、継続作業として順次進める。"
+    "pdfHashNote": "47件中11件(sourceUrlが直接PDFリンクの6県＋ポータル経由で個別特定した5県)のSHA-256を取得済み(2026-08-30/31)。残り36県はsourceUrlがポータル/HTMLページで実際のPDF URLを個別に特定する必要があり、継続作業として順次進める。"
   },
   "entries": [
     {
@@ -161,7 +161,9 @@
       "sourceUrl2": "https://czemi.benesse.ne.jp/open/nyushi/exam/05/naishin/",
       "sourceTitle": "秋田県 公立高等学校入学者選抜実施要項",
       "lastVerified": "2026-07-16",
-      "pdfHash": null
+      "pdfHash": "f3af943022a369e934b38ccc7542ebfadd20c43bbf3a835feda4ceca006145c8",
+      "pdfHashSourceUrl": "https://www.pref.akita.lg.jp/uploads/public/archive_0000091551_00/%E4%BB%A4%E5%92%8C%EF%BC%98%E5%B9%B4%E5%BA%A6%E7%A7%8B%E7%94%B0%E7%9C%8C%E5%85%AC%E7%AB%8B%E9%AB%98%E7%AD%89%E5%AD%A6%E6%A0%A1%E5%85%A5%E5%AD%A6%E8%80%85%E9%81%B8%E6%8A%9C%E5%AE%9F%E6%96%BD%E8%A6%81%E9%A0%85_%EF%BC%88PDF%E7%89%88%EF%BC%89.pdf",
+      "pdfHashVerifiedAt": "2026-08-31"
     },
     {
       "code": "yamagata",
