@@ -16,6 +16,7 @@ import { SchoolPageConvertCTA } from '@/components/SchoolPageConvertCTA';
 import { SchoolPageParentBridge } from '@/components/SchoolPageParentBridge';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { SchoolParentLeadForm } from '@/components/SchoolParentLeadForm';
+import { isSchoolLeadFormReleased } from '@/lib/school-lead-release';
 import { SchoolPageNaishinNote } from '@/components/SchoolPageNaishinNote';
 
 /**
@@ -176,12 +177,15 @@ export default async function SchoolPage({ params }: PageProps) {
               既存の県面オファー(lead-config.ts)をplacement="prefecture"で解決するだけの最小配線。 */}
           <ParentLeadCTA prefectureCode={prefecture.code} placement="prefecture" />
 
-          {/* T-N1-N4 C10-2: 保護者向けリードフォーム。倍率データ(上記)より下に配置（データが先・CTAは後の原則）。 */}
-          <SchoolParentLeadForm
-            prefectureCode={prefecture.code}
-            prefectureName={prefecture.name}
-            schoolName={school.schoolName}
-          />
+          {/* T-N1-N4 C10-2: 保護者向けリードフォーム。倍率データ(上記)より下に配置（データが先・CTAは後の原則）。
+              C10-1(M1-2)投入から2週間の単独効果測定を終えるまで非表示（日付ゲート・[[school-lead-release]]）。 */}
+          {isSchoolLeadFormReleased() && (
+            <SchoolParentLeadForm
+              prefectureCode={prefecture.code}
+              prefectureName={prefecture.name}
+              schoolName={school.schoolName}
+            />
+          )}
 
           {school.departmentRates.length > 1 && (
             <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
