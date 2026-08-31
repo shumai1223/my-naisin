@@ -55,11 +55,24 @@
 
 ## A-2 更新検知
 
-- [ ] 台帳の各URLを定期取得し、**内容が変わったら検知する**仕組みを作る
-      （`scripts/` に置く。既存の `check-competition-rate-links.mjs` を土台にしてよい）
-- [ ] 検知結果は**日次ブリーフィング（W-0）へ出す**
-- [ ] ⚠️ **相手サーバに負荷をかけない。** 1県あたり1日1回まで。間隔を空ける。User-Agentを名乗る
-- [ ] ⚠️ **robots.txt を尊重する。** 拒否されている県は台帳に「取得不可」と記録して手動に回す
+- [x] **2026-09-01**: 台帳の各URLを定期取得し、**内容が変わったら検知する**仕組みを実装(`scripts/check-competition-rate-updates.mjs`・
+      `npm run check:competition-updates`)。判定の純関数(`shouldFetch`/`buildFingerprint`/`evaluateFetch`)は
+      `src/lib/competition-rate-watch.ts`にテスト付きで実装。**本文はダウンロードせずHEADのETag/Last-Modified/
+      Content-Lengthのみで軽量フィンガープリントを作る**(数十MBのPDFを毎回GETしない設計)。
+      state台帳は`ops/state/competition-rate-watch.json`（47県分・git管理）。
+      実機で47県フルラン済み(初回観測・更新0件・到達不能1件[岡山=404で資料削除済みと判明]・
+      robots拒否1件[兵庫=`/hpe/uploads/`がrobots.txtで明示的にDisallow・実物のrobots.txtで確認済み])。
+- [x] 検知結果は**日次ブリーフィング（W-0）へ出す** → `src/scripts/daily-brief-health.ts`の`main()`に統合
+      (`ops/state/competition-rate-watch.json`が無い環境では黙ってセクションを省略・既存の`brief:daily`を壊さない)
+- [x] ⚠️ **相手サーバに負荷をかけない。** 1県あたり1日1回まで。間隔を空ける。User-Agentを名乗る →
+      `shouldFetch()`が24h未満は再チェックしない・リクエスト間隔800ms・UAに`MyNaishinBot/1.0`を明記
+- [x] ⚠️ **robots.txt を尊重する。** 拒否されている県は台帳に「取得不可」と記録して手動に回す →
+      `fetchRobotsRules()`/`isDisallowedByRobots()`で実装・兵庫で実際に機能したことを確認済み
+
+**⚠️A-2初回ランで発見(2026-09-01)**: `src/data/competition-rates/okayama.ts`のR8 sourceUrlが実機で404を
+返すと判明(`curl -I`でも再現・資料が削除された可能性)。データ自体の正確性は転記時に検証済みで問題無いが、
+出典リンクが死んでいる状態。`check:competition-links`と同種の経年劣化のため次にokayamaへ触れる回で
+新しいURL(WebSearch等)への差し替えを検討する（急ぎではない・A-2の主目的である検知が機能した実例として記録）。
 
 ## A-3 取り込みの型（県ごとの定義差を吸収する）
 
@@ -83,7 +96,7 @@
 - [x] 47県の公表台帳がある（不明な県は「不明」と書いてある） →
       `buildCompetitionRatePublicationBaseline()`（47県・URL/format機械抽出・公表日5県/速報確定47県
       判定済み・残りは`unresolved`に明記）
-- [ ] 更新検知が動き、日次ブリーフィングに出ている（A-2・未着手）
+- [x] 更新検知が動き、日次ブリーフィングに出ている（A-2・2026-09-01実装・47県フルラン実機確認済み）
 - [ ] 47県ぶんの検算テストがある（緑でなくてもよい。**差分が可視化されていればよい**）
 - [ ] `tsc` 実exit 0 / jest green
 

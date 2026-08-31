@@ -21,6 +21,7 @@
     "check:affiliate-links": "node scripts/check-affiliate-links.mjs",
     "check:blog-links": "node scripts/check-blog-source-links.mjs",
     "check:competition-links": "node scripts/check-competition-rate-links.mjs",
+    "check:competition-updates": "node scripts/check-competition-rate-updates.mjs",
     "check:click-fraud": "node scripts/check-click-fraud-burst.mjs",
     "check:click-ratio": "npx tsx scripts/check-click-ratio-anomaly.ts",
     "check:stats": "npx tsx scripts/stats-distribution-audit.ts",

@@ -29,8 +29,29 @@ import {
   type ClickFraudCheck,
   type MobileRatioCheck,
 } from '@/lib/daily-brief-health';
+import { buildWatchSection, injectWatchSection, type WatchState } from '@/lib/competition-rate-watch';
 import { postDiscordWebhook } from '@/lib/discord-notify';
 import { analyzeClickFraudByDay, analyzeMobileRatioByDay } from '../../scripts/lib/click-fraud-detector.mjs';
+
+/**
+ * T-Y11 A-2: `scripts/check-competition-rate-updates.mjs`が書き出す
+ * `ops/state/competition-rate-watch.json`を読み、無ければセクション自体を省略する
+ * （＝A-2の更新検知をまだ一度も実行していない環境でこのスクリプトを壊さない）。
+ */
+function loadCompetitionWatchState(): { state: WatchState; label: string } | null {
+  const statePath = path.resolve(process.cwd(), 'ops/state/competition-rate-watch.json');
+  if (!fs.existsSync(statePath)) return null;
+  try {
+    const state = JSON.parse(fs.readFileSync(statePath, 'utf8')) as WatchState;
+    const timestamps = Object.values(state.entries)
+      .map((e) => e.lastCheckedAt)
+      .filter((t): t is string => Boolean(t));
+    const label = timestamps.length > 0 ? timestamps.sort().at(-1)!.slice(0, 10) : '未実行';
+    return { state, label };
+  } catch {
+    return null;
+  }
+}
 
 /**
  * D1（本番・読み取り専用）から確定値を取る。
@@ -188,7 +209,13 @@ async function main() {
 
   const filePath = path.resolve(process.cwd(), 'docs/daily-brief.md');
   const existing = fs.existsSync(filePath) ? fs.readFileSync(filePath, 'utf8') : '# 朝ブリーフィング（自動更新）\n';
-  const updated = injectHealthSection(existing, section);
+  let updated = injectHealthSection(existing, section);
+
+  const watch = loadCompetitionWatchState();
+  if (watch) {
+    updated = injectWatchSection(updated, buildWatchSection(watch.state, watch.label));
+  }
+
   fs.writeFileSync(filePath, updated, 'utf8');
 
   console.log(section);

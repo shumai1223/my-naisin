@@ -1,0 +1,427 @@
+{
+  "entries": {
+    "aichi": {
+      "prefecture": "aichi",
+      "url": "https://www.pref.aichi.jp/uploaded/attachment/600212.pdf",
+      "lastCheckedAt": "2026-08-31T15:48:56.938Z",
+      "lastStatus": "ok",
+      "fingerprint": "\"157167-64b01f7e62acb\"|Tue, 17 Feb 2026 09:48:06 GMT|1405287",
+      "changedAt": null,
+      "note": null
+    },
+    "akita": {
+      "prefecture": "akita",
+      "url": "https://www.pref.akita.lg.jp/uploads/public/archive_0000093860_00/20260212_%EF%BC%91%E6%AC%A1%E5%8B%9F%E9%9B%86%E3%80%80%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B0%EF%BC%88%E5%BF%97%E9%A1%98%E5%85%88%E5%A4%89%E6%9B%B4%E5%BE%8C%EF%BC%89%EF%BC%88%E5%85%AC%E2%80%95%EF%BC%92%EF%BC%89.pdf",
+      "lastCheckedAt": "2026-08-31T15:48:56.938Z",
+      "lastStatus": "ok",
+      "fingerprint": "\"69c1fb05-2ac49\"|Tue, 24 Mar 2026 02:46:29 GMT|175177",
+      "changedAt": null,
+      "note": null
+    },
+    "aomori": {
+      "prefecture": "aomori",
+      "url": "https://www.pref.aomori.lg.jp/soshiki/kyoiku/e-gakyo/files/R8senbatsu_syutsugan-zennitisei.pdf",
+      "lastCheckedAt": "2026-08-31T15:48:56.938Z",
+      "lastStatus": "ok",
+      "fingerprint": "|Wed, 18 Feb 2026 05:54:43 GMT|148209",
+      "changedAt": null,
+      "note": null
+    },
+    "chiba": {
+      "prefecture": "chiba",
+      "url": "https://www.pref.chiba.lg.jp/kyouiku/shidou/nyuushi/koukou/r8/documents/r8kakuteiippan.pdf",
+      "lastCheckedAt": "2026-08-31T15:48:56.938Z",
+      "lastStatus": "ok",
+      "fingerprint": "\"1aa53-64aad7c9917ca\"|Fri, 13 Feb 2026 05:00:40 GMT|109139",
+      "changedAt": null,
+      "note": null
+    },
+    "ehime": {
+      "prefecture": "ehime",
+      "url": "https://ehime-kyoiku.esnet.ed.jp/file/2314",
+      "lastCheckedAt": "2026-08-31T15:48:56.938Z",
+      "lastStatus": "ok",
+      "fingerprint": "|Wed, 25 Feb 2026 09:33:31 GMT|",
+      "changedAt": null,
+      "note": null
+    },
+    "fukui": {
+      "prefecture": "fukui",
+      "url": "https://www.pref.fukui.lg.jp/doc/koukou/nyugaku/r08ippan_d/fil/R8henko3.pdf",
+      "lastCheckedAt": "2026-08-31T15:48:56.938Z",
+      "lastStatus": "ok",
+      "fingerprint": "\"36bab-65623a1cfbc5a\"|Thu, 09 Jul 2026 01:34:58 GMT|224171",
+      "changedAt": null,
+      "note": null
+    },
+    "fukuoka": {
+      "prefecture": "fukuoka",
+      "url": "https://www.pref.fukuoka.lg.jp/site/kyouiku/nyushi8.html",
+      "lastCheckedAt": "2026-08-31T15:48:56.938Z",
+      "lastStatus": "ok",
+      "fingerprint": "\"1164f-65a46fb1adca3\"|Sun, 30 Aug 2026 17:26:07 GMT|71247",
+      "changedAt": null,
+      "note": null
+    },
+    "fukushima": {
+      "prefecture": "fukushima",
+      "url": "https://www.pref.fukushima.lg.jp/uploaded/attachment/735188.pdf",
+      "lastCheckedAt": "2026-08-31T15:48:56.938Z",
+      "lastStatus": "ok",
+      "fingerprint": "\"998ef-64d5c6058a1bb\"|Thu, 19 Mar 2026 08:30:09 GMT|628975",
+      "changedAt": null,
+      "note": null
+    },
+    "gifu": {
+      "prefecture": "gifu",
+      "url": "https://www.pref.gifu.lg.jp/uploaded/attachment/485854.pdf",
+      "lastCheckedAt": "2026-08-31T15:48:56.938Z",
+      "lastStatus": "ok",
+      "fingerprint": "\"80ec5-64b008d8d4a7c\"|Tue, 17 Feb 2026 08:06:47 GMT|528069",
+      "changedAt": null,
+      "note": null
+    },
+    "gunma": {
+      "prefecture": "gunma",
+      "url": "https://www.pref.gunma.jp/uploaded/attachment/689968.pdf",
+      "lastCheckedAt": "2026-08-31T15:48:56.938Z",
+      "lastStatus": "ok",
+      "fingerprint": "|Thu, 12 Feb 2026 08:02:08 GMT|241464",
+      "changedAt": null,
+      "note": null
+    },
+    "hiroshima": {
+      "prefecture": "hiroshima",
+      "url": "https://www.pref.hiroshima.lg.jp/uploaded/attachment/655351.pdf",
+      "lastCheckedAt": "2026-08-31T15:48:56.938Z",
+      "lastStatus": "ok",
+      "fingerprint": "\"15d1e-64b14fec54ba7\"|Wed, 18 Feb 2026 08:30:06 GMT|89374",
+      "changedAt": null,
+      "note": null
+    },
+    "hokkaido": {
+      "prefecture": "hokkaido",
+      "url": "https://www.dokyoi.pref.hokkaido.lg.jp/fs/1/3/1/7/8/5/5/0/_/05_p9-p22.pdf",
+      "lastCheckedAt": "2026-08-31T15:48:56.938Z",
+      "lastStatus": "ok",
+      "fingerprint": "\"6a4f11cf-824ee\"|Thu, 09 Jul 2026 03:13:19 GMT|533742",
+      "changedAt": null,
+      "note": null
+    },
+    "hyogo": {
+      "prefecture": "hyogo",
+      "url": "https://www2.hyogo-c.ed.jp/hpe/uploads/sites/10/2026/03/【確定】修正_03-R8_３月選抜志願者数.pdf",
+      "lastCheckedAt": "2026-08-31T15:48:56.938Z",
+      "lastStatus": "robots-blocked",
+      "fingerprint": null,
+      "changedAt": null,
+      "note": "robots.txtで拒否されたため取得を見送った"
+    },
+    "ibaraki": {
+      "prefecture": "ibaraki",
+      "url": "https://kyoiku.pref.ibaraki.jp/wp-content/uploads/2026/02/shigansha20260218.pdf",
+      "lastCheckedAt": "2026-08-31T15:48:56.938Z",
+      "lastStatus": "ok",
+      "fingerprint": "\"19e34-64b14b9f7fe08\"|Wed, 18 Feb 2026 08:10:51 GMT|106036",
+      "changedAt": null,
+      "note": null
+    },
+    "ishikawa": {
+      "prefecture": "ishikawa",
+      "url": "https://www.pref.ishikawa.lg.jp/kisya/r7kyoui/documents/20260224.pdf",
+      "lastCheckedAt": "2026-08-31T15:48:56.938Z",
+      "lastStatus": "ok",
+      "fingerprint": "\"2dc03-64bb1541fca43\"|Thu, 26 Feb 2026 03:00:52 GMT|187395",
+      "changedAt": null,
+      "note": null
+    },
+    "iwate": {
+      "prefecture": "iwate",
+      "url": "https://www.pref.iwate.jp/_res/projects/default_project/_page_/001/094/015/r8_sigansya_tyouseigo.pdf",
+      "lastCheckedAt": "2026-08-31T15:48:56.938Z",
+      "lastStatus": "ok",
+      "fingerprint": "\"51112-64b3788ac992c\"|Fri, 20 Feb 2026 01:42:28 GMT|332050",
+      "changedAt": null,
+      "note": null
+    },
+    "kagawa": {
+      "prefecture": "kagawa",
+      "url": "https://www.pref.kagawa.lg.jp/documents/15096/syutugan8-3-2.pdf",
+      "lastCheckedAt": "2026-08-31T15:48:56.938Z",
+      "lastStatus": "ok",
+      "fingerprint": "\"4f877-64dfc0e6af84e\"|Fri, 27 Mar 2026 07:00:29 GMT|325751",
+      "changedAt": null,
+      "note": null
+    },
+    "kagoshima": {
+      "prefecture": "kagoshima",
+      "url": "https://www.pref.kagoshima.jp/ba05/kyoiku-bunka/school/koukou/nyushi/r7/documents/126595_20260304191737-1.pdf",
+      "lastCheckedAt": "2026-08-31T15:48:56.938Z",
+      "lastStatus": "ok",
+      "fingerprint": "\"4e91f-64c3b9f188f4b\"|Thu, 05 Mar 2026 00:00:16 GMT|321823",
+      "changedAt": null,
+      "note": null
+    },
+    "kanagawa": {
+      "prefecture": "kanagawa",
+      "url": "https://www.pref.kanagawa.jp/documents/131973/bessi3.pdf",
+      "lastCheckedAt": "2026-08-31T15:48:56.938Z",
+      "lastStatus": "ok",
+      "fingerprint": "|Mon, 09 Feb 2026 10:00:07 GMT|283700",
+      "changedAt": null,
+      "note": null
+    },
+    "kochi": {
+      "prefecture": "kochi",
+      "url": "https://www.pref.kochi.lg.jp/doc/2026010600090/file_contents/r8_A_henkougo0205.pdf",
+      "lastCheckedAt": "2026-08-31T15:48:56.938Z",
+      "lastStatus": "ok",
+      "fingerprint": "\"69c092bf-34e93\"|Mon, 23 Mar 2026 01:09:19 GMT|216723",
+      "changedAt": null,
+      "note": null
+    },
+    "kumamoto": {
+      "prefecture": "kumamoto",
+      "url": "https://www.pref.kumamoto.jp/uploaded/life/259416_786982_misc.pdf",
+      "lastCheckedAt": "2026-08-31T15:48:56.938Z",
+      "lastStatus": "ok",
+      "fingerprint": "\"49227-65a5922c39175\"|Mon, 31 Aug 2026 15:05:42 GMT|299559",
+      "changedAt": null,
+      "note": null
+    },
+    "kyoto": {
+      "prefecture": "kyoto",
+      "url": "https://www.kyoto-be.ne.jp/koukyou/cms/wp-content/uploads/2025/05/%E4%BB%A4%E5%92%8C%EF%BC%98%E5%B9%B4%E5%BA%A6%E4%B8%AD%E6%9C%9F%E9%81%B8%E6%8A%9C-%E5%BA%83%E5%A0%B1%E8%B3%87%E6%96%99%EF%BC%88%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B0%EF%BC%89.pdf",
+      "lastCheckedAt": "2026-08-31T15:48:56.938Z",
+      "lastStatus": "ok",
+      "fingerprint": "\"48071-64c2e26c16164\"|Wed, 04 Mar 2026 07:56:02 GMT|295025",
+      "changedAt": null,
+      "note": null
+    },
+    "mie": {
+      "prefecture": "mie",
+      "url": "https://www.pref.mie.lg.jp/common/content/001243656.pdf",
+      "lastCheckedAt": "2026-08-31T15:48:56.938Z",
+      "lastStatus": "ok",
+      "fingerprint": "\"80a4ab41b8acdc1:0\"|Thu, 05 Mar 2026 15:53:49 GMT|163825",
+      "changedAt": null,
+      "note": null
+    },
+    "miyagi": {
+      "prefecture": "miyagi",
+      "url": "https://www.pref.miyagi.jp/documents/63612/0213_r8kouritukoukou_nyuugakusyasenbatsu_gakuryokukensa.pdf",
+      "lastCheckedAt": "2026-08-31T15:48:56.938Z",
+      "lastStatus": "ok",
+      "fingerprint": "\"8d3f9-64ab10a73ae57\"|Fri, 13 Feb 2026 09:15:05 GMT|578553",
+      "changedAt": null,
+      "note": null
+    },
+    "miyazaki": {
+      "prefecture": "miyazaki",
+      "url": "https://www.pref.miyazaki.lg.jp/documents/99874/99874_20260224160129-1.pdf",
+      "lastCheckedAt": "2026-08-31T15:48:56.938Z",
+      "lastStatus": "ok",
+      "fingerprint": "\"435a9-64b8ce7ebec05\"|Tue, 24 Feb 2026 07:33:38 GMT|275881",
+      "changedAt": null,
+      "note": null
+    },
+    "nagano": {
+      "prefecture": "nagano",
+      "url": "https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/20260305web-teisei.pdf",
+      "lastCheckedAt": "2026-08-31T15:48:56.938Z",
+      "lastStatus": "ok",
+      "fingerprint": "|Thu, 05 Mar 2026 09:27:49 GMT|518035",
+      "changedAt": null,
+      "note": null
+    },
+    "nagasaki": {
+      "prefecture": "nagasaki",
+      "url": "https://www.pref.nagasaki.jp/uploads/2026/02/1770615354.pdf",
+      "lastCheckedAt": "2026-08-31T15:48:56.938Z",
+      "lastStatus": "ok",
+      "fingerprint": "\"c1ded-64a5d83358280\"|Mon, 09 Feb 2026 05:35:54 GMT|794093",
+      "changedAt": null,
+      "note": null
+    },
+    "nara": {
+      "prefecture": "nara",
+      "url": "https://www.pref.nara.lg.jp/documents/5981/r8_itijisennbatu_dainisyutugannkikann_syutugannsyasuu.pdf",
+      "lastCheckedAt": "2026-08-31T15:48:56.938Z",
+      "lastStatus": "ok",
+      "fingerprint": "\"46a4e-64ca42ebc306a\"|Tue, 10 Mar 2026 04:45:02 GMT|289358",
+      "changedAt": null,
+      "note": null
+    },
+    "niigata": {
+      "prefecture": "niigata",
+      "url": "https://kyouikucho.nein.ed.jp/koukoukyouiku/senbatu/koukou/ippan_henkogo.pdf",
+      "lastCheckedAt": "2026-08-31T15:48:56.938Z",
+      "lastStatus": "ok",
+      "fingerprint": "\"313c3-64bb4a8cb8c1d\"|Thu, 26 Feb 2026 06:59:18 GMT|201667",
+      "changedAt": null,
+      "note": null
+    },
+    "oita": {
+      "prefecture": "oita",
+      "url": "https://www.pref.oita.jp/uploaded/attachment/2261572.pdf",
+      "lastCheckedAt": "2026-08-31T15:48:56.938Z",
+      "lastStatus": "ok",
+      "fingerprint": "\"247b1-64bc973b6b6c6\"|Fri, 27 Feb 2026 07:47:42 GMT|149425",
+      "changedAt": null,
+      "note": null
+    },
+    "okayama": {
+      "prefecture": "okayama",
+      "url": "https://www.pref.okayama.jp/uploaded/life/1044733_10111198_misc.pdf",
+      "lastCheckedAt": "2026-08-31T15:48:56.938Z",
+      "lastStatus": "unreachable",
+      "fingerprint": null,
+      "changedAt": null,
+      "note": "HTTP 404（資料が削除された可能性）"
+    },
+    "okinawa": {
+      "prefecture": "okinawa",
+      "url": "https://www.pref.okinawa.jp/_res/projects/default_project/_page_/001/038/168/r07saisyu.pdf",
+      "lastCheckedAt": "2026-08-31T15:48:56.938Z",
+      "lastStatus": "ok",
+      "fingerprint": "\"40688-64b03faf3a565\"|Tue, 17 Feb 2026 12:12:07 GMT|263816",
+      "changedAt": null,
+      "note": null
+    },
+    "osaka": {
+      "prefecture": "osaka",
+      "url": "https://www.pref.osaka.lg.jp/documents/125698/r08_ippan_sigansya_0306.xlsx",
+      "lastCheckedAt": "2026-08-31T15:48:56.938Z",
+      "lastStatus": "ok",
+      "fingerprint": "\"a0e5-64c5c4ec948ae\"|Fri, 06 Mar 2026 15:00:02 GMT|41189",
+      "changedAt": null,
+      "note": null
+    },
+    "saga": {
+      "prefecture": "saga",
+      "url": "https://www.pref.saga.lg.jp/kyouiku/kiji003118261/3_118261_381978_up_jpwwphq6.pdf",
+      "lastCheckedAt": "2026-08-31T15:48:56.938Z",
+      "lastStatus": "ok",
+      "fingerprint": "\"46838fe439a6dc1:0\"|Wed, 25 Feb 2026 09:34:09 GMT|368976",
+      "changedAt": null,
+      "note": null
+    },
+    "saitama": {
+      "prefecture": "saitama",
+      "url": "https://www.pref.saitama.lg.jp/documents/268192/r8shigankakutei0219.pdf",
+      "lastCheckedAt": "2026-08-31T15:48:56.938Z",
+      "lastStatus": "ok",
+      "fingerprint": "\"7bfc2-64b37c82eb08e\"|Fri, 20 Feb 2026 02:00:14 GMT|507842",
+      "changedAt": null,
+      "note": null
+    },
+    "shiga": {
+      "prefecture": "shiga",
+      "url": "https://www.pref.shiga.lg.jp/file/attachment/5591236.pdf",
+      "lastCheckedAt": "2026-08-31T15:48:56.938Z",
+      "lastStatus": "ok",
+      "fingerprint": "\"37785-64aaeb96ab9cb\"|Fri, 13 Feb 2026 06:29:15 GMT|227205",
+      "changedAt": null,
+      "note": null
+    },
+    "shimane": {
+      "prefecture": "shimane",
+      "url": "https://www.pref.shimane.lg.jp/education/kyoiku/senbatsu/senbatsu_info/kanendosenbatsu.data/01_R8_henkougoitiran_teisei.pdf",
+      "lastCheckedAt": "2026-08-31T15:48:56.938Z",
+      "lastStatus": "ok",
+      "fingerprint": "\"3ff6b-652aea06479f7\"|Tue, 26 May 2026 01:43:48 GMT|261995",
+      "changedAt": null,
+      "note": null
+    },
+    "shizuoka": {
+      "prefecture": "shizuoka",
+      "url": "https://www.pref.shizuoka.jp/_res/projects/default_project/_page_/001/072/279/r8shigansyasuusiganhennkougo1.pdf",
+      "lastCheckedAt": "2026-08-31T15:48:56.938Z",
+      "lastStatus": "ok",
+      "fingerprint": "\"59bdc-64bb6dd8a7e11\"|Thu, 26 Feb 2026 09:37:13 GMT|367580",
+      "changedAt": null,
+      "note": null
+    },
+    "tochigi": {
+      "prefecture": "tochigi",
+      "url": "https://www.pref.tochigi.lg.jp/m04/r08/documents/r8zennitiseiippansenbatsusyutsuganhenkojokyo.pdf",
+      "lastCheckedAt": "2026-08-31T15:48:56.938Z",
+      "lastStatus": "ok",
+      "fingerprint": "\"44200\"|Wed, 25 Feb 2026 08:35:06 GMT|279040",
+      "changedAt": null,
+      "note": null
+    },
+    "tokushima": {
+      "prefecture": "tokushima",
+      "url": "https://nyuushi.tokushima-ec.ed.jp/file/975",
+      "lastCheckedAt": "2026-08-31T15:48:56.938Z",
+      "lastStatus": "ok",
+      "fingerprint": "|Thu, 26 Feb 2026 07:04:44 GMT|71753",
+      "changedAt": null,
+      "note": null
+    },
+    "tokyo": {
+      "prefecture": "tokyo",
+      "url": "https://www.kyoiku.metro.tokyo.lg.jp/documents/d/kyoiku/2026-02-13-182440-757",
+      "lastCheckedAt": "2026-08-31T15:48:56.938Z",
+      "lastStatus": "ok",
+      "fingerprint": "|Fri, 13 Feb 2026 09:28:03 GMT|72119",
+      "changedAt": null,
+      "note": null
+    },
+    "tottori": {
+      "prefecture": "tottori",
+      "url": "https://www.pref.tottori.lg.jp/secure/1418417/R08_ippan_saisyuu_shigansya.pdf",
+      "lastCheckedAt": "2026-08-31T15:48:56.938Z",
+      "lastStatus": "ok",
+      "fingerprint": "\"222d2b5b50a5dc1:0\"|Tue, 24 Feb 2026 05:42:25 GMT|459130",
+      "changedAt": null,
+      "note": null
+    },
+    "toyama": {
+      "prefecture": "toyama",
+      "url": "https://www.pref.toyama.jp/documents/47208/080224.pdf",
+      "lastCheckedAt": "2026-08-31T15:48:56.938Z",
+      "lastStatus": "ok",
+      "fingerprint": "\"3bbbd-64b8bcecf7349\"|Tue, 24 Feb 2026 06:15:02 GMT|244669",
+      "changedAt": null,
+      "note": null
+    },
+    "wakayama": {
+      "prefecture": "wakayama",
+      "url": "https://www.pref.wakayama.lg.jp/prefg/500200/d00219915_d/fil/08honsyutugan.pdf",
+      "lastCheckedAt": "2026-08-31T15:48:56.938Z",
+      "lastStatus": "ok",
+      "fingerprint": "\"326f6-652e6f4b050e2\"|Thu, 28 May 2026 20:56:01 GMT|206582",
+      "changedAt": null,
+      "note": null
+    },
+    "yamagata": {
+      "prefecture": "yamagata",
+      "url": "https://www.pref.yamagata.jp/documents/42443/r8koukiippannsigannjoukyouhp.pdf",
+      "lastCheckedAt": "2026-08-31T15:48:56.938Z",
+      "lastStatus": "ok",
+      "fingerprint": "\"2b3a5-64b8d10a7a053\"|Tue, 24 Feb 2026 07:45:02 GMT|177061",
+      "changedAt": null,
+      "note": null
+    },
+    "yamaguchi": {
+      "prefecture": "yamaguchi",
+      "url": "https://www.pref.yamaguchi.lg.jp/uploaded/life/338005_649954_misc.pdf",
+      "lastCheckedAt": "2026-08-31T15:48:56.938Z",
+      "lastStatus": "ok",
+      "fingerprint": "\"2cc0e-65a5956c5ab64\"|Mon, 31 Aug 2026 15:20:14 GMT|183310",
+      "changedAt": null,
+      "note": null
+    },
+    "yamanashi": {
+      "prefecture": "yamanashi",
+      "url": "https://www.pref.yamanashi.jp/documents/7061/r8saisyuusigansyasuu1.pdf",
+      "lastCheckedAt": "2026-08-31T15:48:56.938Z",
+      "lastStatus": "ok",
+      "fingerprint": "\"15b56a-65017d8d1b58f\"|Thu, 23 Apr 2026 03:00:12 GMT|1422698",
+      "changedAt": null,
+      "note": null
+    }
+  }
+}
