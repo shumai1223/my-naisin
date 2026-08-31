@@ -5,9 +5,9 @@
     "frozenBy": "scripts/freeze-exam-snapshot.ts (T-N1-1)",
     "sourceOfTruth": "src/lib/prefectures.ts (この日付時点のスナップショット)",
     "prefectureCount": 47,
-    "pdfHashStatus": "partial_30_of_47",
+    "pdfHashStatus": "partial_31_of_47",
     "freezePolicy": "本ディレクトリは生成後に書き換え禁止。prefectures.tsが後日修正されても本ファイルは追随させない。来年度の差分エンジン(N1-3)の基準点として使う。",
-    "pdfHashNote": "47件中30件(sourceUrlが直接PDFリンクの6県＋ポータル経由で個別特定した24県)のSHA-256を取得済み(2026-08-30/31)。東京都・神奈川県・山梨県・岐阜県・愛知県はsourceUrlの元PDFが上書き・拡張子なし配信・Incapsulaボット対策のいずれかのため、Wayback Machineのアーカイブまたはテスト側の既知例外パターンで対応。残り17県はsourceUrlがポータル/HTMLページで実際のPDF URLを個別に特定する必要があり、継続作業として順次進める。"
+    "pdfHashNote": "47件中31件(sourceUrlが直接PDFリンクの6県＋ポータル経由で個別特定した25県)のSHA-256を取得済み(2026-08-30/31)。東京都・神奈川県・山梨県・岐阜県・愛知県はsourceUrlの元PDFが上書き・拡張子なし配信・Incapsulaボット対策のいずれかのため、Wayback Machineのアーカイブまたはテスト側の既知例外パターンで対応。残り16県はsourceUrlがポータル/HTMLページで実際のPDF URLを個別に特定する必要があり、継続作業として順次進める。"
   },
   "entries": [
     {
@@ -964,7 +964,9 @@
       "sourceUrl2": "https://czemi.benesse.ne.jp/open/nyushi/exam/30/naishin/",
       "sourceTitle": "和歌山県教育委員会 県立高等学校入学者選抜実施要項",
       "lastVerified": "2026-07-16",
-      "pdfHash": null
+      "pdfHash": "afa66d0f24af089e939e493ddb63142ea5ef521d43f423b4cdf247ab72c74d45",
+      "pdfHashSourceUrl": "https://www.pref.wakayama.lg.jp/prefg/500200/d00220765_d/fil/youkou_zenpensyuusei.pdf",
+      "pdfHashVerifiedAt": "2026-08-31"
     },
     {
       "code": "tottori",
