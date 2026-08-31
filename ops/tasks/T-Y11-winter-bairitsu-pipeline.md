@@ -197,15 +197,17 @@ R6（令和6年度）: 45/47県 収録済み（未収録は oita・saga のみ�
 
 ---
 
-# C 制度メタデータの多年度化（令和6年度・令和5年度） — 🟡2026-09-01着手(2/47)
+# C 制度メタデータの多年度化（令和6年度・令和5年度） — 🟡2026-09-01着手(3/47)
 
 **A・Bが終わってから。優先度が低い理由: 提案書（9/6）に間に合わないため今期の収益への寄与が間接的。**
 
 - [~] N1-2 と同じ形で `src/data/snapshots/2024-r6/` `2023-r5/` を作る →
-      **2024-r6のみ着手・osaka/chiba 2件完了**（`src/data/snapshots/2024-r6/exam-system.json`・
-      両県ともgradeMultipliers/maxScoreが令和7・8年度分と完全一致=変更なしと確認）。
-      tokyo/saitamaは現行サイト404・Wayback Machine(CDX APIすらタイムアウト)が
+      **2024-r6のみ着手・osaka/chiba/tochigi 3件完了**（`src/data/snapshots/2024-r6/exam-system.json`・
+      3県ともgradeMultipliers/maxScoreが令和7・8年度分と完全一致=変更なしと確認）。
+      tokyo/saitama/hyogoは現行サイト404・Wayback Machine(CDX APIすらタイムアウト)が
       サービス不調で取得できず保留（詳細は`src/data/snapshots/2024-r6/README.md`）。
+      **新知見**: 年度番号だけがURLパスに入っている県はR7のURLの`r7`→`r6`置換で直接発見できる
+      ことがある（tochigiで実証・ただし関連URL全てが同じ規則とは限らないので個別に実在確認要）。
       **2023-r5は未着手**
 - [ ] **取得不能は正直に記録する**（N1-2で45/47・2県取得不能だった実績と同じ扱い） →
       現時点でmeta.unavailableは0件（保留中のtokyoはまだunavailable確定にしていない・

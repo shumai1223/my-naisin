@@ -6,9 +6,9 @@ T-Y11 Task C（`ops/tasks/T-Y11-winter-bairitsu-pipeline.md`）で収集する�
 
 ## 進捗状況（2026-09-01）
 
-- **entries 2件**（osaka・chiba）
+- **entries 3件**（osaka・chiba・tochigi）
 - **unavailable 0件**（今のところ「取得不能」と確定した県は無い）
-- 残り45県は未着手
+- 残り44県は未着手
 
 ## 収集方針（2025-r7から継承・Y-0を継承）
 
@@ -57,3 +57,13 @@ Wayback依存が必要な県は後回しにする**運用が現実的（2025-r7�
   （兵庫県教育委員会サイトはPDF直URLが`hpe/uploads/sites/10/<年>/<月>/`配下で年度ごとに変動する
   ため、検索結果のタイトルだけでは実URLを特定できなかった）。次回は同じくWebSearchで見つかった
   別候補ページ（`hpe/koko/nyuushi/senbatsu2024/`）から辿るか、Wayback復旧後にCDX検索するとよい。
+- 2026-09-01: tochigi 3件目。R7のURLパターン（`m04/r07/documents/r7_02_bekki.pdf`）の`r7`を`r6`に
+  機械的に置換した推測URL（`m04/r06/documents/r6_02_bekki.pdf`）が実在し直接取得成功（**新知見**:
+  年度ごとにURLパスの数字だけが変わる県はこの置換で当てられる可能性が高い・osaka/chibaのように
+  毎回WebSearchするより速い）。「別記 調査書作成の要領」4で「第1、第2学年の評定は生徒指導要録の
+  記載どおりに5段階法で記入」「第3学年の評定は…5段階法で記入」を確認（学年間の傾斜配点なし・
+  9教科×5段階×3学年=135点。令和7・8年度分と完全一致・変更なし）。
+  ⚠️**教訓**: sourceUrl2も同様に`r7`→`r6`で機械的に推測（`r06nyuugakushasennbatunikannsuruosirase.html`）
+  したところ404だった。**PDF本体URLの推測が成功しても、関連ページのURLは同じ規則に従うとは
+  限らない**ため、必ずWebSearch等で個別に実在確認すること（今回はWebSearchで正しいURLを再検索し
+  訂正済み）。
