@@ -59,6 +59,16 @@ describe('buildCompetitionRatePublicationBaseline', () => {
       expect(entry.supplementarySourceCount).toBeGreaterThanOrEqual(0);
     }
   });
+
+  it('only fills publishedAt for prefectures with a manual timing note, and drops the corresponding unresolved line there', () => {
+    const chiba = baseline.find((e) => e.prefecture === 'chiba');
+    expect(chiba?.publishedAt).toBe('令和8年（2026年）2月13日');
+    expect(chiba?.unresolved.some((u) => u.startsWith('公表日'))).toBe(false);
+
+    const withoutNote = baseline.find((e) => e.prefecture === 'aomori');
+    expect(withoutNote?.publishedAt).toBeNull();
+    expect(withoutNote?.unresolved.some((u) => u.startsWith('公表日'))).toBe(true);
+  });
 });
 
 describe('inferPublicationFormat', () => {

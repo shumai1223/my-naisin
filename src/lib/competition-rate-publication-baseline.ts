@@ -11,13 +11,15 @@
  * このモジュールは無改修で最新年度を追従する。
  *
  * ⚠️ 抽出できないもの（`CompetitionRateSource`型に無い情報）は`unresolved`に正直に書く。
- * 埋めない（Y-0憲法③）。公表日（発表日そのもの。fetchedAtはこちらが取得した日でしかない）・
- * 速報版/確定版の区別・PDF内の列構成は、現状docTitleの自然文からしか読み取れないため
- * 機械抽出していない。A-1の残りのチェックボックス（公表時期・速報/確定版の区別を県ごとに
- * 記録する）は、この台帳を読みながら1県ずつ目視で埋めていく別作業として残る。
+ * 埋めない（Y-0憲法③）。公表日（発表日そのもの。fetchedAtはこちらが取得した日でしかない）は
+ * `competition-rate-publication-notes.ts`の手作業台帳に既存ヘッダコメントの記述がある県のみ
+ * `publishedAt`へ入る（2026-09-01時点で5/47県）。速報版/確定版の区別・PDF内の列構成は、
+ * 現状docTitleの自然文からしか読み取れずまだ台帳化していないため`unresolved`に残る。
+ * A-1の残りのチェックボックスは、この台帳を読みながら1県ずつ目視で埋めていく別作業として残る。
  */
 import { COMPETITION_RATE_BY_PREFECTURE } from '@/data/competition-rates';
 import type { CompetitionRateSource } from '@/lib/competition-rate';
+import { PUBLICATION_TIMING_NOTES } from '@/lib/competition-rate-publication-notes';
 
 export type PublicationFormat = 'pdf' | 'xlsx' | 'csv' | 'html' | 'unknown';
 
@@ -31,6 +33,11 @@ export interface CompetitionRatePublicationBaselineEntry {
   supplementarySourceCount: number;
   /** `officialSources`のURLから推定した公表形式（重複除く）。 */
   formats: PublicationFormat[];
+  /**
+   * 公表日（発表日そのもの）。`competition-rate-publication-notes.ts`に手作業台帳がある県のみ
+   * 判明した精度のまま入る。無ければ`null`（推測しない）。
+   */
+  publishedAt: string | null;
   /** このモジュールでは埋められない項目（次に1県ずつ埋める作業のTODOリスト）。 */
   unresolved: string[];
 }
@@ -95,11 +102,14 @@ export function buildCompetitionRatePublicationBaseline(): CompetitionRatePublic
 
     const formats = Array.from(new Set(officialSources.map((s) => inferPublicationFormat(s.url))));
 
-    const unresolved: string[] = [
-      '公表日（発表日そのもの）は未抽出。fetchedAtは取得日であり公表日ではない',
-      '速報版/確定版の区別は未抽出',
-      '列構成（募集人員/入学許可予定者数/志願者数等の内訳）は未抽出',
-    ];
+    const timingNote = PUBLICATION_TIMING_NOTES[prefecture];
+    const publishedAt = timingNote?.publishedAt ?? null;
+
+    const unresolved: string[] = [];
+    if (!timingNote) {
+      unresolved.push('公表日（発表日そのもの）は未抽出。fetchedAtは取得日であり公表日ではない');
+    }
+    unresolved.push('速報版/確定版の区別は未抽出', '列構成（募集人員/入学許可予定者数/志願者数等の内訳）は未抽出');
     if (officialSources.length === 0) {
       unresolved.unshift('一次ソース（.lg.jp/.go.jp/.ed.jp）のURLが見つからない（第三者サイト経由のみ）');
     }
@@ -113,6 +123,7 @@ export function buildCompetitionRatePublicationBaseline(): CompetitionRatePublic
       officialSources,
       supplementarySourceCount,
       formats,
+      publishedAt,
       unresolved,
     });
   }
