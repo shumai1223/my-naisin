@@ -5,9 +5,9 @@
     "frozenBy": "scripts/freeze-exam-snapshot.ts (T-N1-1)",
     "sourceOfTruth": "src/lib/prefectures.ts (この日付時点のスナップショット)",
     "prefectureCount": 47,
-    "pdfHashStatus": "partial_22_of_47",
+    "pdfHashStatus": "partial_23_of_47",
     "freezePolicy": "本ディレクトリは生成後に書き換え禁止。prefectures.tsが後日修正されても本ファイルは追随させない。来年度の差分エンジン(N1-3)の基準点として使う。",
-    "pdfHashNote": "47件中22件(sourceUrlが直接PDFリンクの6県＋ポータル経由で個別特定した16県)のSHA-256を取得済み(2026-08-30/31)。東京都・神奈川県・山梨県・岐阜県はsourceUrlの元PDFが上書きまたは拡張子なし配信のため、Wayback Machineのアーカイブまたはテスト側の既知例外パターンで対応。残り25県はsourceUrlがポータル/HTMLページで実際のPDF URLを個別に特定する必要があり、継続作業として順次進める。"
+    "pdfHashNote": "47件中23件(sourceUrlが直接PDFリンクの6県＋ポータル経由で個別特定した17県)のSHA-256を取得済み(2026-08-30/31)。東京都・神奈川県・山梨県・岐阜県はsourceUrlの元PDFが上書きまたは拡張子なし配信のため、Wayback Machineのアーカイブまたはテスト側の既知例外パターンで対応。残り24県はsourceUrlがポータル/HTMLページで実際のPDF URLを個別に特定する必要があり、継続作業として順次進める。"
   },
   "entries": [
     {
@@ -694,7 +694,9 @@
       "sourceUrl2": "https://czemi.benesse.ne.jp/open/nyushi/article/22/feature/0022.html",
       "sourceTitle": "静岡県 公立高等学校入学者選抜関係資料",
       "lastVerified": "2026-07-16",
-      "pdfHash": null
+      "pdfHash": "0c9b767f0e04de60372604b70ccbf0929335c753ca74130e5c4561e20375dea6",
+      "pdfHashSourceUrl": "https://www.pref.shizuoka.jp/_res/projects/default_project/_page_/001/072/279/01.pdf",
+      "pdfHashVerifiedAt": "2026-08-31"
     },
     {
       "code": "aichi",
