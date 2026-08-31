@@ -197,14 +197,17 @@ R6（令和6年度）: 45/47県 収録済み（未収録は oita・saga のみ�
 
 ---
 
-# C 制度メタデータの多年度化（令和6年度・令和5年度） — 🟡2026-09-01着手(7/47)
+# C 制度メタデータの多年度化（令和6年度・令和5年度） — 🟡2026-09-01着手(8/47・★制度変更1件検出)
 
 **A・Bが終わってから。優先度が低い理由: 提案書（9/6）に間に合わないため今期の収益への寄与が間接的。**
 
 - [~] N1-2 と同じ形で `src/data/snapshots/2024-r6/` `2023-r5/` を作る →
-      **2024-r6のみ着手・osaka/chiba/tochigi/ehime/kochi/kagoshima/aomori 7件完了**
-      （`src/data/snapshots/2024-r6/exam-system.json`・7県ともgradeMultipliers/maxScoreが
-      令和7・8年度分と完全一致=変更なしと確認）。tokyo/saitama/hyogoは現行サイト404・
+      **2024-r6のみ着手・8件完了(osaka/chiba/tochigi/ehime/kochi/kagoshima/aomori/iwate)**
+      （`src/data/snapshots/2024-r6/exam-system.json`）。うち7県はgradeMultipliers/maxScoreが
+      令和7・8年度分と完全一致=変更なしと確認。**★iwateは実際に制度が変わっている県として
+      検出**（生の評定計算式は不変だが、圧縮先の点数が令和6年度440点→令和7・8年度500点で
+      変化。nara〈令和7→8年度〉に続く2件目の実測「変更あり」ケース。`diffExamSystemSnapshots()`が
+      正しく`changed`と判定することもテストで固定済み）。tokyo/saitama/hyogoは現行サイト404・
       Wayback Machine(CDX APIすらタイムアウト)がサービス不調で取得できず保留
       （詳細は`src/data/snapshots/2024-r6/README.md`）。
       **新知見**: 年度番号だけがURLパスに入っている県はR7のURLの`r7`→`r6`置換で直接発見できる

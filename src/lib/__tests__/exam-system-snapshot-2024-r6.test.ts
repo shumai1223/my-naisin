@@ -2,6 +2,7 @@ import snapshot from '@/data/snapshots/2024-r6/exam-system.json';
 import snapshot2025 from '@/data/snapshots/2025-r7/exam-system.json';
 import snapshot2026 from '@/data/snapshots/2026-r8/exam-system.json';
 import { PREFECTURES } from '../prefectures';
+import { diffExamSystemSnapshots } from '../exam-system-diff';
 
 describe('2024-r6 exam-system snapshot（T-Y11 Task C 収集中スナップショットの整合性）', () => {
   test('収集済み件数がmeta.collectedCountと一致する(収集中でも数字の水増しを防ぐ)', () => {
@@ -124,6 +125,26 @@ describe('2024-r6 exam-system snapshot（T-Y11 Task C 収集中スナップシ�
     expect(a2024.maxScore).toBe(a2025.maxScore);
     expect(a2024.maxScore).toBe(a2026.maxScore);
     expect(a2024.gradeMultipliers).toEqual(a2026.gradeMultipliers);
+  });
+
+  test('iwate: 令和6→7年度で圧縮先の点数(actualMaxScore)が実際に変わっている(N1-2/N1-3のnaraに続く2件目の実測「変更あり」ケース)', () => {
+    const i2024 = snapshot.entries.find((e) => e.code === 'iwate')!;
+    const i2025 = snapshot2025.entries.find((e) => e.code === 'iwate')!;
+    // 生の評定の重み付け・満点(660点)自体は令和6〜8年度で不変
+    expect(i2024.maxScore).toBe(660);
+    expect(i2024.maxScore).toBe(i2025.maxScore);
+    expect(i2024.gradeMultipliers).toEqual(i2025.gradeMultipliers);
+    expect(i2024.coreMultiplier).toBe(i2025.coreMultiplier);
+    expect(i2024.practicalMultiplier).toBe(i2025.practicalMultiplier);
+    // 圧縮先だけが令和6年度(440点)→令和7年度(500点)で変わっている
+    expect(i2024.actualMaxScore).toBe(440);
+    expect(i2025.actualMaxScore).toBe(500);
+    expect(i2024.actualMaxScore).not.toBe(i2025.actualMaxScore);
+    // 実データでdiffExamSystemSnapshots()を実行し、actualMaxScoreがchangedと判定されることを確認
+    const diffs = diffExamSystemSnapshots(snapshot, snapshot2025);
+    const iwateDiffs = diffs.filter((d) => d.prefectureCode === 'iwate');
+    const actualMaxScoreDiff = iwateDiffs.find((d) => d.field === 'actualMaxScore')!;
+    expect(actualMaxScoreDiff.status).toBe('changed');
   });
 
   test('全てのsourceUrl/sourceUrl2はhttpsの実URL形式である(手打ちの推測URLを混入させない不変条件)', () => {

@@ -6,9 +6,10 @@ T-Y11 Task C（`ops/tasks/T-Y11-winter-bairitsu-pipeline.md`）で収集する�
 
 ## 進捗状況（2026-09-01）
 
-- **entries 7件**（osaka・chiba・tochigi・ehime・kochi・kagoshima・aomori）
+- **entries 8件**（osaka・chiba・tochigi・ehime・kochi・kagoshima・aomori・iwate）
 - **unavailable 0件**（今のところ「取得不能」と確定した県は無い）
-- 残り40県は未着手
+- 残り39県は未着手
+- ★**iwateは令和6→7年度で実際に制度が変わっている**（nara〈令和7→8年度〉に続く2件目の実測「変更あり」）
 
 ## 収集方針（2025-r7から継承・Y-0を継承）
 
@@ -95,3 +96,13 @@ Wayback依存が必要な県は後回しにする**運用が現実的（2025-r7�
   途中経過として同一PDF内のp.14-16に「追検査取扱要項」があり「令和6年3月5日」の本検査日付が
   印字されているのを確認し、正しい年度のPDFであることを裏取りできた（西暦置換は成功しても
   年度そのものは必ず本文中の日付表記等で再確認する）。
+- 2026-09-01: **iwate 8件目・★実際に制度が変わっている県を発見**（2025-r7のprefectures.ts側
+  コメントが既に示唆していた「実際の選抜では500点満点に圧縮されます(令和7年度以降。令和6年度
+  以前は440点満点でした)」を、令和6年度の実施要項本体（WebSearchで発見・現行サイトに掲載された
+  まま現存）p.9-10「第2選抜」(3)(4)で直接検証・確認した。生の評定の重み付け（1年生×2/3倍・
+  2年生×4/6倍・3年生×6/9倍＝660点満点）自体はgradeMultipliers{1:1,2:2,3:3}・coreMultiplier=2・
+  practicalMultiplier=3として令和6〜8年度で完全に不変だが、**圧縮先の点数だけが令和6年度=440点、
+  令和7・8年度=500点で異なる**（`actualMaxScore`フィールドが440→500）。`diffExamSystemSnapshots()`を
+  実データで実行し、`actualMaxScore`が正しく`changed`と判定されることをテストで固定した
+  （N1-2/N1-3のnara〈令和7→8年度・maxScore/gradeMultipliers変更〉に続く、実測で確認できた
+  2件目の「変更あり」ケース）。
