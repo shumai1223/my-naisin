@@ -13,15 +13,23 @@
  * ⚠️ 抽出できないもの（`CompetitionRateSource`型に無い情報）は`unresolved`に正直に書く。
  * 埋めない（Y-0憲法③）。公表日（発表日そのもの。fetchedAtはこちらが取得した日でしかない）は
  * `competition-rate-publication-notes.ts`の手作業台帳に既存ヘッダコメントの記述がある県のみ
- * `publishedAt`へ入る（2026-09-01時点で5/47県）。速報版/確定版の区別・PDF内の列構成は、
- * 現状docTitleの自然文からしか読み取れずまだ台帳化していないため`unresolved`に残る。
- * A-1の残りのチェックボックスは、この台帳を読みながら1県ずつ目視で埋めていく別作業として残る。
+ * `publishedAt`へ入る（2026-09-01時点で5/47県）。速報版/確定版の区別は`docTitle`に「速報」
+ * 「最終」「確定」「変更後」等の語があるかで機械判定する（`classifyFinality()`）。
+ * ⚠️2026-09-01判明: `ops/tasks/T-Y11-winter-bairitsu-pipeline.md`が例示していた
+ * 「埼玉は令和8年度が速報版」という記述は誤りだった。実際のsaitama.tsのdocTitleはR5〜R8
+ * 全て「入学志願確定者数」で統一されており速報表記は無い（実データを見ずに書かれた説明だった
+ * ため、タスクファイル側を訂正した）。**この教訓のとおり、この種の判定は必ずdocTitle文字列を
+ * 直接見て機械判定し、プローズの記憶に頼らないこと。**
+ * PDF内の列構成は、現状docTitleの自然文からしか読み取れずまだ台帳化していないため
+ * `unresolved`に残る。A-1の残りのチェックボックスは、この台帳を読みながら1県ずつ目視で
+ * 埋めていく別作業として残る。
  */
 import { COMPETITION_RATE_BY_PREFECTURE } from '@/data/competition-rates';
 import type { CompetitionRateSource } from '@/lib/competition-rate';
 import { PUBLICATION_TIMING_NOTES } from '@/lib/competition-rate-publication-notes';
 
 export type PublicationFormat = 'pdf' | 'xlsx' | 'csv' | 'html' | 'unknown';
+export type FinalityLabel = 'preliminary' | 'final' | 'unknown';
 
 export interface CompetitionRatePublicationBaselineEntry {
   prefecture: string;
@@ -38,8 +46,26 @@ export interface CompetitionRatePublicationBaselineEntry {
    * 判明した精度のまま入る。無ければ`null`（推測しない）。
    */
   publishedAt: string | null;
+  /**
+   * 速報版/確定版の区別。`officialSources`の`docTitle`に「速報」「最終」「確定」「変更後」等の
+   * 語があるかで機械判定する（`classifyFinality()`）。複数ソースで判定が割れた場合は
+   * `'unknown'`にする（数字を合わせにいかない・A-4と同じ思想）。
+   */
+  finality: FinalityLabel;
   /** このモジュールでは埋められない項目（次に1県ずつ埋める作業のTODOリスト）。 */
   unresolved: string[];
+}
+
+const PRELIMINARY_KEYWORDS = ['速報'];
+const FINAL_KEYWORDS = ['最終', '確定', '変更後'];
+
+/** `docTitle`の語彙から速報/確定を機械判定する。どちらの語も無ければ`'unknown'`。 */
+export function classifyFinality(docTitle: string): FinalityLabel {
+  const hasPreliminary = PRELIMINARY_KEYWORDS.some((k) => docTitle.includes(k));
+  const hasFinal = FINAL_KEYWORDS.some((k) => docTitle.includes(k));
+  if (hasPreliminary && !hasFinal) return 'preliminary';
+  if (hasFinal && !hasPreliminary) return 'final';
+  return 'unknown';
 }
 
 const OFFICIAL_TLD_RE = /\.(lg|go|ed)\.jp$/i;
@@ -105,11 +131,17 @@ export function buildCompetitionRatePublicationBaseline(): CompetitionRatePublic
     const timingNote = PUBLICATION_TIMING_NOTES[prefecture];
     const publishedAt = timingNote?.publishedAt ?? null;
 
+    const finalityLabels = new Set(officialSources.map((s) => classifyFinality(s.docTitle)).filter((f) => f !== 'unknown'));
+    const finality: FinalityLabel = finalityLabels.size === 1 ? ([...finalityLabels][0] as FinalityLabel) : 'unknown';
+
     const unresolved: string[] = [];
     if (!timingNote) {
       unresolved.push('公表日（発表日そのもの）は未抽出。fetchedAtは取得日であり公表日ではない');
     }
-    unresolved.push('速報版/確定版の区別は未抽出', '列構成（募集人員/入学許可予定者数/志願者数等の内訳）は未抽出');
+    if (finality === 'unknown') {
+      unresolved.push('速報版/確定版の区別は未抽出（docTitleに速報/最終/確定/変更後のいずれの語も無い、または複数ソースで判定が割れた）');
+    }
+    unresolved.push('列構成（募集人員/入学許可予定者数/志願者数等の内訳）は未抽出');
     if (officialSources.length === 0) {
       unresolved.unshift('一次ソース（.lg.jp/.go.jp/.ed.jp）のURLが見つからない（第三者サイト経由のみ）');
     }
@@ -124,6 +156,7 @@ export function buildCompetitionRatePublicationBaseline(): CompetitionRatePublic
       supplementarySourceCount,
       formats,
       publishedAt,
+      finality,
       unresolved,
     });
   }

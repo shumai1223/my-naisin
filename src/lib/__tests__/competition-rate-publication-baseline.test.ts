@@ -1,5 +1,6 @@
 import {
   buildCompetitionRatePublicationBaseline,
+  classifyFinality,
   inferPublicationFormat,
   isOfficialUrl,
 } from '@/lib/competition-rate-publication-baseline';
@@ -68,6 +69,45 @@ describe('buildCompetitionRatePublicationBaseline', () => {
     const withoutNote = baseline.find((e) => e.prefecture === 'aomori');
     expect(withoutNote?.publishedAt).toBeNull();
     expect(withoutNote?.unresolved.some((u) => u.startsWith('公表日'))).toBe(true);
+  });
+
+  it('classifies finality from real docTitle text without inventing a "preliminary" nobody has evidence for', () => {
+    const hyogo = baseline.find((e) => e.prefecture === 'hyogo');
+    expect(hyogo?.finality).toBe('final');
+
+    // saitama.tsのdocTitleはR5〜R8全て「確定」表記で速報の記述は無い（タスクファイルが
+    // 誤って主張していた「令和8年度は速報版」という説を実データで反証した回帰テスト）。
+    const saitama = baseline.find((e) => e.prefecture === 'saitama');
+    expect(saitama?.finality).toBe('final');
+
+    const noKeyword = baseline.find((e) => e.prefecture === 'ishikawa');
+    expect(noKeyword?.finality).toBe('unknown');
+    expect(noKeyword?.unresolved.some((u) => u.startsWith('速報版/確定版'))).toBe(true);
+  });
+
+  it('never mechanically classifies a source as "preliminary" without a real 速報 keyword hit', () => {
+    // 2026-09-01時点の実データでは47県中0件が速報表記。0件のまま固定し、変化したら気づけるようにする。
+    expect(baseline.filter((e) => e.finality === 'preliminary')).toEqual([]);
+  });
+});
+
+describe('classifyFinality', () => {
+  it('detects preliminary (速報) when only that keyword is present', () => {
+    expect(classifyFinality('令和8年度公立高校一般入試志願状況（速報）')).toBe('preliminary');
+  });
+
+  it('detects final for 最終/確定/変更後', () => {
+    expect(classifyFinality('...志願者数（最終）について')).toBe('final');
+    expect(classifyFinality('...出願状況（特別出願後確定数）')).toBe('final');
+    expect(classifyFinality('...志願者数一覧（変更後）')).toBe('final');
+  });
+
+  it('returns unknown when neither keyword is present', () => {
+    expect(classifyFinality('令和8年度石川県公立高等学校一般入学(全日制)の出願状況（2月24日）')).toBe('unknown');
+  });
+
+  it('returns unknown when both keywords appear (does not guess which wins)', () => {
+    expect(classifyFinality('速報のち確定版に更新')).toBe('unknown');
   });
 });
 
