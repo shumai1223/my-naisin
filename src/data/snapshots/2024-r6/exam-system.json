@@ -6,7 +6,7 @@
     "completedAt": null,
     "collectionMethod": "T-Y11 Task C(ops/tasks/T-Y11-winter-bairitsu-pipeline.md)。N1-2(2025-r7)と同じ形式・同じ収集方針。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。",
     "totalPrefectures": 47,
-    "collectedCount": 6,
+    "collectedCount": 7,
     "unavailable": []
   },
   "entries": [
@@ -185,6 +185,28 @@
       "lastVerified": "2026-09-01",
       "pdfHash": null,
       "diffFromCurrentYear": "変更なし(2026-09-01に実施要綱本体(基底パス`r6`配下のR6年度版インデックスページから正しいPDF(実施要綱本体・1657KB)を特定・現行サイトに掲載されたまま現存)p.9「(2)選抜の内容」アを直接確認。「調査書の『学習の記録』は、第3学年の記録を次のとおり点数に換算して選抜に用いる。(ｱ)学力検査を行う5教科：それぞれ10点満点 (ｲ)学力検査を行わない必修の4教科(音楽、美術、保健体育及び技術・家庭)：それぞれ100点満点」とR7と一言一句完全一致。学力検査は各教科90点×5教科=450点満点(イ(ｳ)d)も確認。令和7・8年度分のgradeMultipliers{1:0,2:0,3:1}・coreMultiplier=2・practicalMultiplier=20・maxScore=450と完全一致・変更なし。同一ページ内に複数PDFが分割掲載されており、リンクテキストで実施要綱本体を正しく特定する必要があった(ファイルサイズだけでも判別可能:1657KBが本体・他は133-250KB))"
+    },
+    {
+      "code": "aomori",
+      "name": "青森県",
+      "region": "北海道・東北",
+      "fiscalYear": "2024",
+      "targetGrades": [1, 2, 3],
+      "gradeMultipliers": { "1": 1, "2": 1, "3": 1 },
+      "coreMultiplier": 1,
+      "practicalMultiplier": 1,
+      "maxScore": 135,
+      "simplifiedCalc": false,
+      "actualMaxScore": null,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": null,
+      "sourceUrl": "https://www.pref.aomori.lg.jp/soshiki/kyoiku/e-gakyo/files/nyuugakusyasenbatsuyoukou2024.pdf",
+      "sourceUrl2": "https://www.pref.aomori.lg.jp/soshiki/kyoiku/e-gakyo/senbatsuyoukou2024.html",
+      "sourceTitle": "青森県教育委員会「令和6年度青森県立高等学校入学者選抜要項」様式第2号(調査書)",
+      "lastVerified": "2026-09-01",
+      "pdfHash": null,
+      "diffFromCurrentYear": "変更なし(2026-09-01に選抜要項本体(R7のURLパターンの2025を2024に置換したURLで直接発見・現行サイトに掲載されたまま現存・27.9MB)p.19「様式第2号 調査書」の「各教科の学習の記録」表を直接確認。9教科×1年・2年・3年の評定欄がそれぞれ独立に記入され「計」欄で3学年分をそのまま合算する「総計」列があり、学年間の傾斜配点は様式上存在しない(等倍合計)。9教科×5段階×3学年=135点。令和7・8年度分のgradeMultipliers{1:1,2:1,3:1}/maxScore=135と完全一致・変更なし)"
     }
   ]
 }
