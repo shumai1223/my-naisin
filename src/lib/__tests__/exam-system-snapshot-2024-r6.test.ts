@@ -85,6 +85,27 @@ describe('2024-r6 exam-system snapshot（T-Y11 Task C 収集中スナップシ�
     expect(t2024.gradeMultipliers).toEqual(t2026.gradeMultipliers);
   });
 
+  test('ehime: 2025-r7・2026-r8と2024-r6で制度の核となる数値が一致する(実測で確認済みの「変更なし」)', () => {
+    const e2024 = snapshot.entries.find((e) => e.code === 'ehime')!;
+    const e2025 = snapshot2025.entries.find((e) => e.code === 'ehime')!;
+    const e2026 = snapshot2026.entries.find((e) => e.code === 'ehime')!;
+    expect(e2024.maxScore).toBe(e2025.maxScore);
+    expect(e2024.maxScore).toBe(e2026.maxScore);
+    expect(e2024.gradeMultipliers).toEqual(e2025.gradeMultipliers);
+    expect(e2024.reverseCalc?.examMaxScore).toBe(e2026.reverseCalc?.examMaxScore);
+  });
+
+  test('kochi: 2025-r7・2026-r8と2024-r6で制度の核となる数値が一致する(実測で確認済みの「変更なし」)', () => {
+    const k2024 = snapshot.entries.find((e) => e.code === 'kochi')!;
+    const k2025 = snapshot2025.entries.find((e) => e.code === 'kochi')!;
+    const k2026 = snapshot2026.entries.find((e) => e.code === 'kochi')!;
+    expect(k2024.maxScore).toBe(k2025.maxScore);
+    expect(k2024.maxScore).toBe(k2026.maxScore);
+    expect(k2024.supports10PointScale).toBe(k2026.supports10PointScale);
+    expect(k2024.gradeMultipliers).toEqual(k2025.gradeMultipliers);
+    expect(k2024.practicalMultiplier).toBe(k2026.practicalMultiplier);
+  });
+
   test('全てのsourceUrl/sourceUrl2はhttpsの実URL形式である(手打ちの推測URLを混入させない不変条件)', () => {
     for (const entry of snapshot.entries) {
       expect(entry.sourceUrl).toMatch(/^https?:\/\//);

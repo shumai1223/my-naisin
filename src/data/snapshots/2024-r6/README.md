@@ -6,9 +6,9 @@ T-Y11 Task C（`ops/tasks/T-Y11-winter-bairitsu-pipeline.md`）で収集する�
 
 ## 進捗状況（2026-09-01）
 
-- **entries 3件**（osaka・chiba・tochigi）
+- **entries 5件**（osaka・chiba・tochigi・ehime・kochi）
 - **unavailable 0件**（今のところ「取得不能」と確定した県は無い）
-- 残り44県は未着手
+- 残り42県は未着手
 
 ## 収集方針（2025-r7から継承・Y-0を継承）
 
@@ -67,3 +67,14 @@ Wayback依存が必要な県は後回しにする**運用が現実的（2025-r7�
   したところ404だった。**PDF本体URLの推測が成功しても、関連ページのURLは同じ規則に従うとは
   限らない**ため、必ずWebSearch等で個別に実在確認すること（今回はWebSearchで正しいURLを再検索し
   訂正済み）。
+- 2026-09-01: ehime 4件目・kochi 5件目。両県ともtochigiと同型のURL置換（`r07`→`r06`）で
+  PDF本体を直接発見（ehime: `koukou/nyuusi/r06nyuusi/...`、kochi: `doc/r6_koukounyushi_main/...`）。
+  ehimeは選抜要項p.5「6 入学者の選抜方法」(2)ア(イ)で「調査書点は135点満点」を確認
+  （実技傾斜・学年間重み付けなし・9教科×5段階×3学年の均等合計）。kochiは取扱要領p.4
+  「IV志願者の選抜」1A日程(2)イの配点表（国語20/社会20/数学20/理科20/音楽40/美術40/
+  保健体育40/技術家庭40/外国語20）を確認（実技4教科が主要5教科の2倍＝practicalMultiplier=2）。
+  いずれも令和7・8年度分と完全一致・変更なし。
+  ⚠️**教訓の再確認**: ehimeのsourceUrl2も`r7`→`r6`置換で推測したところ、ドメインが
+  `ehime-kyoiku.esnet.ed.jp`（R7で実際に使われていたドメイン）のままだと404だった。
+  sourceUrl本体と同じ`ehime-c.esnet.ed.jp`ドメインに揃えたところ解決した（301リダイレクトで
+  到達確認）。**推測URLは本体・関連ページ問わず毎回個別に実在確認する運用を徹底する。**
