@@ -5,9 +5,9 @@
     "frozenBy": "scripts/freeze-exam-snapshot.ts (T-N1-1)",
     "sourceOfTruth": "src/lib/prefectures.ts (この日付時点のスナップショット)",
     "prefectureCount": 47,
-    "pdfHashStatus": "partial_20_of_47",
+    "pdfHashStatus": "partial_21_of_47",
     "freezePolicy": "本ディレクトリは生成後に書き換え禁止。prefectures.tsが後日修正されても本ファイルは追随させない。来年度の差分エンジン(N1-3)の基準点として使う。",
-    "pdfHashNote": "47件中20件(sourceUrlが直接PDFリンクの6県＋ポータル経由で個別特定した14県)のSHA-256を取得済み(2026-08-30/31)。東京都・神奈川県・山梨県はsourceUrlの元PDFが上書きまたは拡張子なし配信のため、Wayback Machineのアーカイブまたはテスト側の既知例外パターンで対応。残り27県はsourceUrlがポータル/HTMLページで実際のPDF URLを個別に特定する必要があり、継続作業として順次進める。"
+    "pdfHashNote": "47件中21件(sourceUrlが直接PDFリンクの6県＋ポータル経由で個別特定した15県)のSHA-256を取得済み(2026-08-30/31)。東京都・神奈川県・山梨県はsourceUrlの元PDFが上書きまたは拡張子なし配信のため、Wayback Machineのアーカイブまたはテスト側の既知例外パターンで対応。残り26県はsourceUrlがポータル/HTMLページで実際のPDF URLを個別に特定する必要があり、継続作業として順次進める。"
   },
   "entries": [
     {
@@ -634,7 +634,9 @@
       "sourceUrl2": "https://czemi.benesse.ne.jp/open/nyushi/exam/20/naishin/",
       "sourceTitle": "長野県教育委員会 公立高等学校入学者選抜情報",
       "lastVerified": "2026-07-16",
-      "pdfHash": null
+      "pdfHash": "927d5a6d39fa39d2d1224491deb4c5e2424324b7e52d427629941692bd4e3a5c",
+      "pdfHashSourceUrl": "https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/r8_yoko2.pdf",
+      "pdfHashVerifiedAt": "2026-08-31"
     },
     {
       "code": "gifu",
