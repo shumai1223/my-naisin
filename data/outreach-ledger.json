@@ -2925,11 +2925,11 @@
       "lane": "b2b-saas",
       "sourceTaskId": "T-C2/Cowork第4-6弾",
       "sentDate": "2026-08-27",
-      "lastContactDate": "2026-08-27",
-      "status": "awaiting",
+      "lastContactDate": "2026-08-31",
+      "status": "declined",
       "followupCount": 0,
-      "threadId": null,
-      "note": "Cowork第4-6弾でフォーム入力→👤が個別に送信し完了URLを記録。送信確認URL: https://docs.google.com/forms/u/0/d/e/1FAIpQLSduQQzeSmL8elAgIoccCBU4HFgMa7akK426pe9pToaBT5l_KA/formResponse"
+      "threadId": "1a0557cbc995612d",
+      "note": "Cowork第4-6弾でフォーム入力→👤が個別に送信し完了URLを記録。送信確認URL: https://docs.google.com/forms/u/0/d/e/1FAIpQLSduQQzeSmL8elAgIoccCBU4HFgMa7akK426pe9pToaBT5l_KA/formResponse | 2026-08-31 SENSEIノート事務局から返信(先生同士の交流目的のため広告・バナー等の目的外要望は不可・分類code7-2)。明示的なお断り・追撃対象から除外。"
     },
     {
       "id": "OL-0870",
