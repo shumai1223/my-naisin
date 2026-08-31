@@ -6,9 +6,9 @@ T-Y11 Task C（`ops/tasks/T-Y11-winter-bairitsu-pipeline.md`）で収集する�
 
 ## 進捗状況（2026-09-01）
 
-- **entries 11件**（osaka・chiba・tochigi・ehime・kochi・kagoshima・aomori・iwate・tokushima・hiroshima・okayama）
+- **entries 12件**（osaka・chiba・tochigi・ehime・kochi・kagoshima・aomori・iwate・tokushima・hiroshima・okayama・yamagata）
 - **unavailable 0件**（今のところ「取得不能」と確定した県は無い）
-- 残り36県は未着手
+- 残り35県は未着手
 - ★**iwateは令和6→7年度で実際に制度が変わっている**（nara〈令和7→8年度〉に続く2件目の実測「変更あり」）
 
 ## 収集方針（2025-r7から継承・Y-0を継承）
@@ -144,3 +144,20 @@ Wayback依存が必要な県は後回しにする**運用が現実的（2025-r7�
   見た目だけで「大まかな概要だろう」と判断せず、必ず中身を確認してから見送るか使うか決めること**
   （gunmaは実際に中身を確認して「別途による」の記述を見つけたから正しく見送れた・okayamaも
   中身を確認して初めて使えると分かった。名前だけで判断していたら両方とも誤った判断をしていた）。
+
+## yamagata（2026-09-01追加・変更なし）
+
+R7の`sourceUrl`（`documents/38710/14youshiki2.xlsx`）はR6には存在しない別のdocument ID配下だったため、
+まずWebSearchでR6の入学者選抜情報インデックスページ（`700013/koko/2022r6nyuugakusyajouhou.html`）を発見し、
+WebFetchでページ内リンクを列挙して`documents/31253/14tyousasyo2.xlsx`（様式第2号「調査書」・23KB表記）を
+特定した。curlでダウンロードしたファイルサイズ（22,913バイト）がページ表記の「23KB」と一致することで
+正しいファイルであることを裏取り。R7と同じ手法（xlsx内`xl/sharedStrings.xml`をunzip抽出してテキスト走査）で
+中身を確認したところ、「第３学年の評定の合計」という項目名がR7と一言一句同じ形で存在し、9教科×5段階＝45点
+（第3学年のみを合計・第1・2学年は記載欄はあるが点数化に使わない）という方式がR6でも変わっていないことを確認。
+gradeMultipliers{1:0,2:0,3:1}・maxScore=45は令和7・8年度分と完全一致。
+
+**教訓**: R7のsourceUrlのdocument ID（この場合`38710`）をそのままR6のURLに機械的に流用しても失敗する
+（山形県は年度ごとにdocument IDが変わる運用）。その場合は該当年度のインデックスページを先に発見し、
+そこからページ内リンクを辿って正しいファイルを特定する方が確実。ファイルサイズの一致確認（curlの
+実ダウンロードサイズ vs ページ記載のKB表記）は、URLだけでは判別しづらい同名ファイルの取り違えを防ぐ
+簡易な裏取り手段として有効だった（kagoshima・hiroshimaで使ったラベルテキスト＋サイズ照合と同系統の手法）。

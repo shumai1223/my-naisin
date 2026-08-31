@@ -180,6 +180,17 @@ describe('2024-r6 exam-system snapshot（T-Y11 Task C 収集中スナップシ�
     expect(o2024.practicalMultiplier).toBe(o2026.practicalMultiplier);
   });
 
+  test('yamagata: 2025-r7・2026-r8と2024-r6で制度の核となる数値が一致する(実測で確認済みの「変更なし」)', () => {
+    const y2024 = snapshot.entries.find((e) => e.code === 'yamagata')!;
+    const y2025 = snapshot2025.entries.find((e) => e.code === 'yamagata')!;
+    const y2026 = snapshot2026.entries.find((e) => e.code === 'yamagata')!;
+    expect(y2024.maxScore).toBe(y2025.maxScore);
+    expect(y2024.maxScore).toBe(y2026.maxScore);
+    expect(y2024.gradeMultipliers).toEqual(y2025.gradeMultipliers);
+    expect(y2024.gradeMultipliers).toEqual(y2026.gradeMultipliers);
+    expect(y2024.targetGrades).toEqual([3]);
+  });
+
   test('全てのsourceUrl/sourceUrl2はhttpsの実URL形式である(手打ちの推測URLを混入させない不変条件)', () => {
     for (const entry of snapshot.entries) {
       expect(entry.sourceUrl).toMatch(/^https?:\/\//);

@@ -6,7 +6,7 @@
     "completedAt": null,
     "collectionMethod": "T-Y11 Task C(ops/tasks/T-Y11-winter-bairitsu-pipeline.md)。N1-2(2025-r7)と同じ形式・同じ収集方針。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。",
     "totalPrefectures": 47,
-    "collectedCount": 11,
+    "collectedCount": 12,
     "unavailable": []
   },
   "entries": [
@@ -328,6 +328,28 @@
       "lastVerified": "2026-09-01",
       "pdfHash": null,
       "diffFromCurrentYear": "変更なし(2026-09-01にWebSearchで発見した教育委員会会議議案書(議第3号・令和5年7月7日決定)p.1「[一般入学者選抜]1 選抜の方針」を直接確認。「学力については、調査書の『学習の記録』に記載された評定から求めた換算点と学力検査の結果から求めた合計得点とを基に、高等学校長が『調査書の評定段階』と『学力検査の評定段階』をそれぞれ定め、相関表を作成して判定する。調査書の換算点の算出においては、学力検査を実施しない教科及び第3学年の評定を重視して取り扱う」とR7と同趣旨(語順に軽微な差はあるが内容は同一)。岡山県は相関表(段階×段階マトリクス)方式のためsimplifiedCalc=true/actualMaxScore=200の近似モデルである点も含め令和7・8年度分と完全一致・変更なし。★教訓: gunmaの『実施大綱』は詳細を別文書『実施要項』に委ねる高レベル文書だったが、okayamaの『実施大要』は名称が似ていても実際には選抜方針の核心部分を含む本体相当の文書だった——文書名の見た目だけで判断せず必ず中身を確認する)"
+    },
+    {
+      "code": "yamagata",
+      "name": "山形県",
+      "region": "北海道・東北",
+      "fiscalYear": "2024",
+      "targetGrades": [3],
+      "gradeMultipliers": { "1": 0, "2": 0, "3": 1 },
+      "coreMultiplier": 1,
+      "practicalMultiplier": 1,
+      "maxScore": 45,
+      "simplifiedCalc": false,
+      "actualMaxScore": null,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": null,
+      "sourceUrl": "https://www.pref.yamagata.jp/documents/31253/14tyousasyo2.xlsx",
+      "sourceUrl2": "https://www.pref.yamagata.jp/700013/koko/2022r6nyuugakusyajouhou.html",
+      "sourceTitle": "山形県教育局高校教育課「令和6年度山形県公立高等学校入学者選抜 様式第2号 調査書」",
+      "lastVerified": "2026-09-01",
+      "pdfHash": null,
+      "diffFromCurrentYear": "変更なし(2026-09-01に様式第2号(調査書)Excelファイル(R7と同じファイル名パターンをWebFetchでR6版索引ページから発見・22.9KBはページ記載の「23KB」と一致)を直接確認(xlsx内のsharedStrings.xmlをunzip抽出)。R7と同一の「第３学年の評定の合計」という項目名が明記されており、第3学年のみを合計する方式を確認(9教科×5段階=45点)。令和7・8年度分のgradeMultipliers{1:0,2:0,3:1}/maxScore=45と完全一致・変更なし)"
     }
   ]
 }
