@@ -31,12 +31,15 @@ describe('2026-r8 exam-system snapshot（T-N1-1 凍結スナップショット�
   });
 
   test('pdfHashは取得済みの県のみ・64桁16進のSHA-256形式で、ハッシュ元PDFのURLが特定できる(未収集を偽らない)', () => {
-    expect(snapshot.meta.pdfHashStatus).toBe('partial_37_of_47');
+    expect(snapshot.meta.pdfHashStatus).toBe('partial_38_of_47');
     const withHash = snapshot.entries.filter((e) => e.pdfHash !== null);
-    expect(withHash).toHaveLength(37);
-    // 拡張子なしでPDFを配信する文書管理CMS(東京都metro.tokyo.lg.jp等)向けの既知例外。
+    expect(withHash).toHaveLength(38);
+    // 拡張子なしでPDFを配信する文書管理CMS(東京都metro.tokyo.lg.jp・愛媛県esnet.ed.jp等)向けの既知例外。
     // 個別に実ファイルをダウンロードしfile/content-typeでPDFと確認済みのURLのみ追加すること。
-    const NO_EXTENSION_PDF_CMS_PATTERNS = [/^https:\/\/www\.kyoiku\.metro\.tokyo\.lg\.jp\/documents\/d\/kyoiku\//];
+    const NO_EXTENSION_PDF_CMS_PATTERNS = [
+      /^https:\/\/www\.kyoiku\.metro\.tokyo\.lg\.jp\/documents\/d\/kyoiku\//,
+      /^https:\/\/ehime-kyoiku\.esnet\.ed\.jp\/file\//,
+    ];
     for (const entry of withHash) {
       expect(entry.pdfHash).toMatch(/^[0-9a-f]{64}$/);
       // sourceUrlが直接PDFの場合はそれ自体がハッシュ元。ポータルページの場合はpdfHashSourceUrlに
@@ -46,7 +49,7 @@ describe('2026-r8 exam-system snapshot（T-N1-1 凍結スナップショット�
       expect(hashSourceUrl.toLowerCase().endsWith('.pdf') || isKnownNoExtensionCms).toBe(true);
     }
     const withoutHash = snapshot.entries.filter((e) => e.pdfHash === null);
-    expect(withoutHash).toHaveLength(10);
+    expect(withoutHash).toHaveLength(9);
   });
 
   test('凍結メタデータに生成日・凍結ポリシーが明記されている', () => {
