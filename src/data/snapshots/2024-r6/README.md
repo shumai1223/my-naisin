@@ -6,9 +6,14 @@ T-Y11 Task C（`ops/tasks/T-Y11-winter-bairitsu-pipeline.md`）で収集する�
 
 ## 進捗状況（2026-09-01）
 
-- **entries 18件**（osaka・chiba・tochigi・ehime・kochi・kagoshima・aomori・iwate・tokushima・hiroshima・okayama・yamagata・nagano・shizuoka・ibaraki・shiga・kanagawa・aichi）
+- **entries 19件**（osaka・chiba・tochigi・ehime・kochi・kagoshima・aomori・iwate・tokushima・hiroshima・okayama・yamagata・nagano・shizuoka・ibaraki・shiga・kanagawa・aichi・fukuoka）
 - **unavailable 0件**（今のところ「取得不能」と確定した県は無い）
-- 残り29県は未着手
+- 残り28県は未着手
+- ★**fukuokaでWebSearch要約の作話パターンを再確認**（2026-09-01）: 実在しない
+  `press-release/youkouhoudou06.html`のファイルサイズ内訳をWebSearchが具体的に提示したが、実際には
+  現行サイト404・Wayback CDXにも存在しなかった。索引ページのWaybackスナップショットから正しいURL
+  (`contents/06youkou.html`)を発見して解決。以後もWebSearch要約が提示するURL・数値は必ず直接HTTP
+  ステータスやWayback CDXで裏取りしてから使う。
 - **tokyoを再挑戦したが取得不能と確定した**（2026-09-01）: Wayback CDX APIは復旧済みだが、令和6年度
   実施要綱本体PDF(`release20230928_01/1.pdf`)自体が一度もアーカイブされていなかった（同じ発表ページの
   HTML本体は複数回アーカイブ済み・添付PDFの一部（例: `10-2.pdf`）は取れているが本体`1.pdf`のみ欠落）。

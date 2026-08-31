@@ -6,7 +6,7 @@
     "completedAt": null,
     "collectionMethod": "T-Y11 Task C(ops/tasks/T-Y11-winter-bairitsu-pipeline.md)。N1-2(2025-r7)と同じ形式・同じ収集方針。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。",
     "totalPrefectures": 47,
-    "collectedCount": 18,
+    "collectedCount": 19,
     "unavailable": []
   },
   "entries": [
@@ -481,6 +481,39 @@
       "lastVerified": "2026-09-01",
       "pdfHash": null,
       "diffFromCurrentYear": "変更なし(2026-09-01にWebSearchでR6専用ページ(r6koukounyuushi.html)を発見しWayback経由でリンク先PDF一覧から「令和6年度実施要項（本文編）」を特定・取得。第6「入学者の選抜及び合格者の決定」3(1)ア「評定得点は、「調査書情報」の「学習の記録（第3学年）」の評定合計（最高45）を2倍した数値とし、その最高を90点とする。」を確認・令和7・8年度分のgradeMultipliers{1:0,2:0,3:2}/maxScore=90と一言一句完全一致(変更なし)。スポーツ科学科等特定学科の教科傾斜配点(1.5倍等)の規定もR7と同様に存在するが、baseline(普通科)の値は不変)"
+    },
+    {
+      "code": "fukuoka",
+      "name": "福岡県",
+      "region": "九州・沖縄",
+      "fiscalYear": "2024",
+      "targetGrades": [3],
+      "gradeMultipliers": { "1": 0, "2": 0, "3": 1 },
+      "coreMultiplier": 1,
+      "practicalMultiplier": 1,
+      "maxScore": 45,
+      "simplifiedCalc": false,
+      "actualMaxScore": null,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": {
+        "totalMaxScore": 345,
+        "examMaxScore": 300,
+        "defaultRatio": { "naishin": 13, "exam": 87 },
+        "calcType": "standard",
+        "naishinMultiplier": null,
+        "kValue": null,
+        "sValueCoefficients": null,
+        "osakaTypeCount": null,
+        "hasTokyoSettings": false,
+        "hasKanagawaSettings": false
+      },
+      "sourceUrl": "http://web.archive.org/web/20240305130045/https://www.pref.fukuoka.lg.jp/uploaded/attachment/204833.pdf",
+      "sourceUrl2": "http://web.archive.org/web/20231129051455/https://www.pref.fukuoka.lg.jp/contents/06youkou.html",
+      "sourceTitle": "福岡県教育委員会「令和6年度福岡県立高等学校入学者選抜要項」(現行ページ・press-release/youkouhoudou06.htmlともWayback CDXにも見つからず404のためWayback Machine 2024-03-05時点のスナップショットで確認。今回は本体PDFが23.4MBだが単一curlで直接取得成功・R7収集時に必要だった5MB分割Rangeリクエストは不要だった)",
+      "lastVerified": "2026-09-01",
+      "pdfHash": null,
+      "diffFromCurrentYear": "gradeMultipliers/maxScoreは変更なしと直接検証(2026-09-01に選抜要項(八)「選抜の方法」1で「調査書の「各教科の学習の記録」の第3学年における各教科の評定の数値の合計によって序列を定めるとともに、学力検査の総点によって序列を定める。」を確認。(三)「学力検査」1で5教科×各60点=300点満点も確認。令和7・8年度分のgradeMultipliers{1:0,2:0,3:1}/maxScore=45/examMaxScore=300と一致)。R7エントリと同様、345点満点・内申13%:学力87%という単一の合成得点・比率は本文中に明記されておらず、reverseCalcはR7・R8分から不変前提で引き継いだサイト独自の代表値である点も引き継ぐ"
     }
   ]
 }

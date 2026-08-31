@@ -197,12 +197,18 @@ R6（令和6年度）: 45/47県 収録済み（未収録は oita・saga のみ�
 
 ---
 
-# C 制度メタデータの多年度化（令和6年度・令和5年度） — 🟡2026-09-01着手(18/47・★制度変更1件検出)
+# C 制度メタデータの多年度化（令和6年度・令和5年度） — 🟡2026-09-01着手(19/47・★制度変更1件検出)
 
 **A・Bが終わってから。優先度が低い理由: 提案書（9/6）に間に合わないため今期の収益への寄与が間接的。**
 
 - [~] N1-2 と同じ形で `src/data/snapshots/2024-r6/` `2023-r5/` を作る →
-      **2024-r6のみ着手・18件完了(osaka/chiba/tochigi/ehime/kochi/kagoshima/aomori/iwate/tokushima/hiroshima/okayama/yamagata/nagano/shizuoka/ibaraki/shiga/kanagawa/aichi)**。
+      **2024-r6のみ着手・19件完了(osaka/chiba/tochigi/ehime/kochi/kagoshima/aomori/iwate/tokushima/hiroshima/okayama/yamagata/nagano/shizuoka/ibaraki/shiga/kanagawa/aichi/fukuoka)**。
+      **fukuoka収集で判明**: WebSearchの要約が、実際には現行サイト404・Wayback CDXにも存在しない
+      `press-release/youkouhoudou06.html`について具体的なファイルサイズまで提示する事故を再確認した
+      （[[fable5-loop-protocol]]既存の「WebSearch要約が実在しないメールアドレスを提示する」罠と同型・
+      対象がURLとその中身の詳細に拡張）。HTTPステータスで直接裏取りしてから進んだため実害なし。
+      正しいURLは索引ページ(`life/5/41/191`)のWaybackスナップショットから`contents/06youkou.html`を
+      発見して特定した。
       **2026-09-01 Wayback CDX API復旧を確認**（前回セッション時点では503不通だったが、2023年限定検索で
       正常応答するようになっていた）。kanagawaはR7と同じ基底フォルダ(`documents/63604/`)内に
       `r6jisshiyouryou.pdf`を発見し取得。pdftotextはこのPDFでCJKテキストを抽出できなかった
