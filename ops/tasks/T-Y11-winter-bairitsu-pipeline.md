@@ -197,12 +197,12 @@ R6（令和6年度）: 45/47県 収録済み（未収録は oita・saga のみ�
 
 ---
 
-# C 制度メタデータの多年度化（令和6年度・令和5年度） — 🟡2026-09-01着手(10/47・★制度変更1件検出)
+# C 制度メタデータの多年度化（令和6年度・令和5年度） — 🟡2026-09-01着手(11/47・★制度変更1件検出)
 
 **A・Bが終わってから。優先度が低い理由: 提案書（9/6）に間に合わないため今期の収益への寄与が間接的。**
 
 - [~] N1-2 と同じ形で `src/data/snapshots/2024-r6/` `2023-r5/` を作る →
-      **2024-r6のみ着手・10件完了(osaka/chiba/tochigi/ehime/kochi/kagoshima/aomori/iwate/tokushima/hiroshima)**
+      **2024-r6のみ着手・11件完了(osaka/chiba/tochigi/ehime/kochi/kagoshima/aomori/iwate/tokushima/hiroshima/okayama)**
       （`src/data/snapshots/2024-r6/exam-system.json`）。うち7県はgradeMultipliers/maxScoreが
       令和7・8年度分と完全一致=変更なしと確認。**★iwateは実際に制度が変わっている県として
       検出**（生の評定計算式は不変だが、圧縮先の点数が令和6年度440点→令和7・8年度500点で

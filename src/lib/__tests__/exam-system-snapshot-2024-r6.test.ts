@@ -169,6 +169,17 @@ describe('2024-r6 exam-system snapshot（T-Y11 Task C 収集中スナップシ�
     expect(h2024.practicalMultiplier).toBe(h2026.practicalMultiplier);
   });
 
+  test('okayama: 2025-r7・2026-r8と2024-r6で制度の核となる数値が一致する(実測で確認済みの「変更なし」)', () => {
+    const o2024 = snapshot.entries.find((e) => e.code === 'okayama')!;
+    const o2025 = snapshot2025.entries.find((e) => e.code === 'okayama')!;
+    const o2026 = snapshot2026.entries.find((e) => e.code === 'okayama')!;
+    expect(o2024.maxScore).toBe(o2025.maxScore);
+    expect(o2024.maxScore).toBe(o2026.maxScore);
+    expect(o2024.actualMaxScore).toBe(o2025.actualMaxScore);
+    expect(o2024.simplifiedCalc).toBe(o2026.simplifiedCalc);
+    expect(o2024.practicalMultiplier).toBe(o2026.practicalMultiplier);
+  });
+
   test('全てのsourceUrl/sourceUrl2はhttpsの実URL形式である(手打ちの推測URLを混入させない不変条件)', () => {
     for (const entry of snapshot.entries) {
       expect(entry.sourceUrl).toMatch(/^https?:\/\//);
