@@ -7,7 +7,7 @@
     "blocked": "ブロック数"
   },
   "_source": "LINE Official Account Manager > 分析 > 友だち",
-  "_lastManualUpdate": "2026-08-28",
+  "_lastManualUpdate": "2026-08-31",
   "entries": [
     {
       "date": "2026-07-13",
@@ -184,6 +184,13 @@
       "active": 88,
       "blocked": 3,
       "_note": "👤が管理画面のスクリーンショットで実測報告（ブロック除外88・込み91）"
+    },
+    {
+      "date": "2026-08-31",
+      "friends": 95,
+      "active": 92,
+      "blocked": 3,
+      "_note": "G1判定日。👤報告（active92・ブロック3・合計95）"
     }
   ]
 }
