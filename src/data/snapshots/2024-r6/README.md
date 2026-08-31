@@ -52,3 +52,8 @@ Wayback依存が必要な県は後回しにする**運用が現実的（2025-r7�
   （`documents/254997/52senbatsuyoryo_r7.pdf`）に対応するR6の文書ID
   （検索で見つけた`documents/238245/97_jisshiyoko_r6.pdf`）が404で、Wayback CDX API自体も
   タイムアウトしたため保留（Internet Archiveの不調がCDX検索にも及んでいる可能性）。
+- 2026-09-01: hyogoも試みたが、WebSearchが提示した令和6年度専用ページ
+  （`hpe/koko/contents/nyuushi/senbatsuyoukou_r6/`）自体が現行サイト・WebFetchとも404だった
+  （兵庫県教育委員会サイトはPDF直URLが`hpe/uploads/sites/10/<年>/<月>/`配下で年度ごとに変動する
+  ため、検索結果のタイトルだけでは実URLを特定できなかった）。次回は同じくWebSearchで見つかった
+  別候補ページ（`hpe/koko/nyuushi/senbatsu2024/`）から辿るか、Wayback復旧後にCDX検索するとよい。
