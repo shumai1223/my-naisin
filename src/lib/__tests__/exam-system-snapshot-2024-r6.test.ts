@@ -244,6 +244,16 @@ describe('2024-r6 exam-system snapshot（T-Y11 Task C 収集中スナップシ�
     expect(k2024.gradeMultipliers).toEqual(k2026.gradeMultipliers);
   });
 
+  test('aichi: 2025-r7・2026-r8と2024-r6で制度の核となる数値が一致する(実測で確認済みの「変更なし」)', () => {
+    const a2024 = snapshot.entries.find((e) => e.code === 'aichi')!;
+    const a2025 = snapshot2025.entries.find((e) => e.code === 'aichi')!;
+    const a2026 = snapshot2026.entries.find((e) => e.code === 'aichi')!;
+    expect(a2024.maxScore).toBe(a2025.maxScore);
+    expect(a2024.maxScore).toBe(a2026.maxScore);
+    expect(a2024.gradeMultipliers).toEqual(a2025.gradeMultipliers);
+    expect(a2024.gradeMultipliers).toEqual(a2026.gradeMultipliers);
+  });
+
   test('全てのsourceUrl/sourceUrl2はhttpsの実URL形式である(手打ちの推測URLを混入させない不変条件)', () => {
     for (const entry of snapshot.entries) {
       expect(entry.sourceUrl).toMatch(/^https?:\/\//);

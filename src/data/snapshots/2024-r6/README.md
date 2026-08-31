@@ -6,9 +6,15 @@ T-Y11 Task C（`ops/tasks/T-Y11-winter-bairitsu-pipeline.md`）で収集する�
 
 ## 進捗状況（2026-09-01）
 
-- **entries 17件**（osaka・chiba・tochigi・ehime・kochi・kagoshima・aomori・iwate・tokushima・hiroshima・okayama・yamagata・nagano・shizuoka・ibaraki・shiga・kanagawa）
+- **entries 18件**（osaka・chiba・tochigi・ehime・kochi・kagoshima・aomori・iwate・tokushima・hiroshima・okayama・yamagata・nagano・shizuoka・ibaraki・shiga・kanagawa・aichi）
 - **unavailable 0件**（今のところ「取得不能」と確定した県は無い）
-- 残り30県は未着手
+- 残り29県は未着手
+- **tokyoを再挑戦したが取得不能と確定した**（2026-09-01）: Wayback CDX APIは復旧済みだが、令和6年度
+  実施要綱本体PDF(`release20230928_01/1.pdf`)自体が一度もアーカイブされていなかった（同じ発表ページの
+  HTML本体は複数回アーカイブ済み・添付PDFの一部（例: `10-2.pdf`）は取れているが本体`1.pdf`のみ欠落）。
+  サービス障害ではなくWaybackのクローラが元々この個別PDFを収集していなかったことが原因と判明。
+  次回セッションが再試行しても同じ結果になる可能性が高い（別の情報源を探すなら現行サイトの
+  新着情報アーカイブや報道記事の引用等を検討）。
 - kagawaを試みたが、R7のsourceUrl(`documents/50757/so1.pdf`＝毎年発行の「変更点」文書)に対応するR6版の
   URLをWebSearchで特定できず保留（document ID自体が年度ごとに無関係な数字に振られる県で、
   近傍IDへの推測(`gian4.pdf`は発見できたが入学定員の文書で対象外)も的中しなかった）。

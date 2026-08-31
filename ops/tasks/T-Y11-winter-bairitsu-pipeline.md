@@ -197,17 +197,22 @@ R6（令和6年度）: 45/47県 収録済み（未収録は oita・saga のみ�
 
 ---
 
-# C 制度メタデータの多年度化（令和6年度・令和5年度） — 🟡2026-09-01着手(17/47・★制度変更1件検出)
+# C 制度メタデータの多年度化（令和6年度・令和5年度） — 🟡2026-09-01着手(18/47・★制度変更1件検出)
 
 **A・Bが終わってから。優先度が低い理由: 提案書（9/6）に間に合わないため今期の収益への寄与が間接的。**
 
 - [~] N1-2 と同じ形で `src/data/snapshots/2024-r6/` `2023-r5/` を作る →
-      **2024-r6のみ着手・17件完了(osaka/chiba/tochigi/ehime/kochi/kagoshima/aomori/iwate/tokushima/hiroshima/okayama/yamagata/nagano/shizuoka/ibaraki/shiga/kanagawa)**。
+      **2024-r6のみ着手・18件完了(osaka/chiba/tochigi/ehime/kochi/kagoshima/aomori/iwate/tokushima/hiroshima/okayama/yamagata/nagano/shizuoka/ibaraki/shiga/kanagawa/aichi)**。
       **2026-09-01 Wayback CDX API復旧を確認**（前回セッション時点では503不通だったが、2023年限定検索で
       正常応答するようになっていた）。kanagawaはR7と同じ基底フォルダ(`documents/63604/`)内に
       `r6jisshiyouryou.pdf`を発見し取得。pdftotextはこのPDFでCJKテキストを抽出できなかった
       （embeddedフォントの構造上の問題と思われる・空白のみ返る）ため、Read toolのpages指定による
       ビジョン解析で本文を直接確認する方式に切り替えた（今後もpdftotextが空振りする県はこの型を使う）。
+      **tokyoを再挑戦したが取得不能と確定**: Wayback CDXは復旧済みだがR6の実施要綱本体PDF(`1.pdf`)
+      自体が一度もアーカイブされておらず（HTML索引ページのみアーカイブ済み）、サービス障害ではなく
+      元から未収集。保留を継続。**aichi**はpref.aichi.jp自体がIncapsula bot対策でcurlがリダイレクト
+      ループする（R7収集時と同じ既知の制約）ため、WebSearchでR6専用ページを発見しWayback経由で
+      本文編PDF(3.73MB)を取得。第6-3(1)アで評定得点式(最高45×2=90点)を確認・R7/R8と完全一致。
       （`src/data/snapshots/2024-r6/exam-system.json`）。うち7県はgradeMultipliers/maxScoreが
       令和7・8年度分と完全一致=変更なしと確認。**★iwateは実際に制度が変わっている県として
       検出**（生の評定計算式は不変だが、圧縮先の点数が令和6年度440点→令和7・8年度500点で

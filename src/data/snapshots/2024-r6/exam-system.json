@@ -6,7 +6,7 @@
     "completedAt": null,
     "collectionMethod": "T-Y11 Task C(ops/tasks/T-Y11-winter-bairitsu-pipeline.md)。N1-2(2025-r7)と同じ形式・同じ収集方針。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。",
     "totalPrefectures": 47,
-    "collectedCount": 17,
+    "collectedCount": 18,
     "unavailable": []
   },
   "entries": [
@@ -459,6 +459,28 @@
       "lastVerified": "2026-09-01",
       "pdfHash": null,
       "diffFromCurrentYear": "変更なし(2026-09-01にWayback CDX APIが復旧していたため`documents/63604/`配下を2023年限定で再検索し、R7と同じ基底フォルダに置かれた`r6jisshiyouryou.pdf`を発見・直接取得成功。実施要領本体§1-V-6(2)ア①「A=(第2学年の9教科の評定の合計)+(第3学年の9教科の評定の合計)×2」およびS1一次選考式「S1=a×f+b×g(f+g=10)」を確認・令和7・8年度分のgradeMultipliers{1:0,2:1,3:2}/maxScore=135/S式の構造と完全一致(変更なし)。今回はsourceUrl2に相当する独立の第二文書は未特定のため単一ソースでの確認に留まる)"
+    },
+    {
+      "code": "aichi",
+      "name": "愛知県",
+      "region": "中部",
+      "fiscalYear": "2024",
+      "targetGrades": [3],
+      "gradeMultipliers": { "1": 0, "2": 0, "3": 2 },
+      "coreMultiplier": 1,
+      "practicalMultiplier": 1,
+      "maxScore": 90,
+      "simplifiedCalc": false,
+      "actualMaxScore": null,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": null,
+      "sourceUrl": "http://web.archive.org/web/20231127211401/https://www.pref.aichi.jp/uploaded/attachment/481657.pdf",
+      "sourceUrl2": "http://web.archive.org/web/20251116023239/https://www.pref.aichi.jp/soshiki/kotogakko/r6koukounyuushi.html",
+      "sourceTitle": "愛知県教育委員会「令和6年度愛知県公立高等学校入学者選抜実施要項（本文編）」(現行ページはpref.aichi.jpのIncapsulaリダイレクトループでcurl直接取得不可のためWayback Machine 2023-11-27時点のスナップショットで確認)",
+      "lastVerified": "2026-09-01",
+      "pdfHash": null,
+      "diffFromCurrentYear": "変更なし(2026-09-01にWebSearchでR6専用ページ(r6koukounyuushi.html)を発見しWayback経由でリンク先PDF一覧から「令和6年度実施要項（本文編）」を特定・取得。第6「入学者の選抜及び合格者の決定」3(1)ア「評定得点は、「調査書情報」の「学習の記録（第3学年）」の評定合計（最高45）を2倍した数値とし、その最高を90点とする。」を確認・令和7・8年度分のgradeMultipliers{1:0,2:0,3:2}/maxScore=90と一言一句完全一致(変更なし)。スポーツ科学科等特定学科の教科傾斜配点(1.5倍等)の規定もR7と同様に存在するが、baseline(普通科)の値は不変)"
     }
   ]
 }
