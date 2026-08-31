@@ -8,6 +8,7 @@ import { GET as indexGet } from '@/app/api/naishin/route';
 import { GET as codeGet } from '@/app/api/naishin/[code]/route';
 import { GET as compareGet } from '@/app/api/naishin/compare/route';
 import { GET as csvGet } from '@/app/api/naishin/csv/route';
+import { GET as nationalComparisonGet } from '@/app/api/naishin/national-comparison/route';
 import { GET as openapiGet } from '@/app/api/openapi/route';
 import { GET as statusGet } from '@/app/api/status/route';
 import { GET as totalScoreIndexGet } from '@/app/api/total-score/route';
@@ -261,6 +262,23 @@ describe('/api/naishin/csv', () => {
     const lines = (await res.text()).split('\r\n');
     expect(lines).toHaveLength(48);
     expect(lines[0]).toContain('code,name,region');
+  });
+});
+
+describe('/api/naishin/national-comparison（T-N4-1・研究者向け47県横断比較）', () => {
+  test('text/csv・BOM付き・ヘッダ＋47行・評価語を含まない', async () => {
+    const res = await nationalComparisonGet(req('https://my-naishin.com/api/naishin/national-comparison'));
+    expect(res.headers.get('content-type')).toContain('text/csv');
+    expect(res.headers.get('access-control-allow-origin')).toBe('*');
+    const bytes = new Uint8Array(await res.clone().arrayBuffer());
+    expect([bytes[0], bytes[1], bytes[2]]).toEqual([0xef, 0xbb, 0xbf]);
+    const text = await res.text();
+    const lines = text.trim().split('\n');
+    expect(lines).toHaveLength(48);
+    expect(lines[0]).toContain('code,name,region,maxScore');
+    for (const forbidden of ['公平', '優れ', '劣る', 'ランキング', '順位']) {
+      expect(text).not.toContain(forbidden);
+    }
   });
 });
 

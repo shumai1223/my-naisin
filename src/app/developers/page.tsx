@@ -492,6 +492,26 @@ print(naishin["total"])  # -> 52`;
             <span className="ml-2">列：code, name, region, target_grades, grade1〜3_multiplier, core/practical_multiplier, max_score, tool_url, source_url, last_verified ほか</span>
           </p>
 
+          <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">④b 47都道府県横断比較CSV（研究者向け）</h3>
+          <p className="mb-2 text-sm text-slate-600">
+            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">GET /api/naishin/national-comparison</code>
+            {' — '}「内申点の扱いが全国でどう違うか」を研究に使える形で整理した1県1行のCSVです。満点・対象学年・
+            学年別倍率・実技科目の傾斜比率(practicalToCoreRatio)・内申点と当日点の配点比率(データがある県のみ、
+            無い県は空欄で正直に欠測扱い)を収録しています。既存データの再集計のみで、
+            <strong>順位付け・優劣の評価列（「どの県が公平か」等）は一切含みません</strong>。
+          </p>
+          <p className="mt-1 text-xs text-slate-500">
+            ダウンロード：{' '}
+            <a
+              href="/api/naishin/national-comparison"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 font-semibold text-indigo-600 underline"
+            >
+              /api/naishin/national-comparison <ExternalLink className="h-3 w-3" />
+            </a>
+          </p>
+
           <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">⑤ 総合得点方式（内申点＋学力検査の統一エンジン）</h3>
           <p className="mb-2 text-sm text-slate-600">
             <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">GET /api/total-score</code>

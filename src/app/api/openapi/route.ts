@@ -300,6 +300,15 @@ export function GET() {
           responses: { '200': { description: '成功（text/csv）' } },
         },
       },
+      '/api/naishin/national-comparison': {
+        get: {
+          operationId: 'getNaishinNationalComparison',
+          summary: '47都道府県横断の内申点比較データ（研究者向けCSV配布）',
+          description:
+            '「内申点の扱いが全国でどう違うか」を研究に使える形で整理した1県1行のCSV（BOM付きUTF-8）。満点・対象学年・学年別倍率・実技科目の傾斜比率・内申点と当日点の配点比率（データがある県のみ）を収録。既存データ(naishin-dataset.ts)の再集計のみで、順位付け・優劣の評価列は一切含まない。',
+          responses: { '200': { description: '成功（text/csv）' } },
+        },
+      },
       '/api/schools/{pref}': {
         get: {
           operationId: 'getSchoolCompetitionRates',
