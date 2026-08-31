@@ -6,9 +6,11 @@ T-Y11 Task C（`ops/tasks/T-Y11-winter-bairitsu-pipeline.md`）で収集する�
 
 ## 進捗状況（2026-09-01）
 
-- **entries 19件**（osaka・chiba・tochigi・ehime・kochi・kagoshima・aomori・iwate・tokushima・hiroshima・okayama・yamagata・nagano・shizuoka・ibaraki・shiga・kanagawa・aichi・fukuoka）
+- **entries 20件**（osaka・chiba・tochigi・ehime・kochi・kagoshima・aomori・iwate・tokushima・hiroshima・okayama・yamagata・nagano・shizuoka・ibaraki・shiga・kanagawa・aichi・fukuoka・saitama）
 - **unavailable 0件**（今のところ「取得不能」と確定した県は無い）
-- 残り28県は未着手
+- 残り27県は未着手
+- **saitamaは再挑戦で成功**（2026-09-01）: 以前推測した`documents/238245/97_jisshiyoko_r6.pdf`は
+  誤りだった。正しいURLは`documents/238245/52senbatsuyoryo_r6.pdf`（R7と同じ命名規則）。
 - ★**fukuokaでWebSearch要約の作話パターンを再確認**（2026-09-01）: 実在しない
   `press-release/youkouhoudou06.html`のファイルサイズ内訳をWebSearchが具体的に提示したが、実際には
   現行サイト404・Wayback CDXにも存在しなかった。索引ページのWaybackスナップショットから正しいURL

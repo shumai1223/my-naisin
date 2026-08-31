@@ -197,12 +197,17 @@ R6（令和6年度）: 45/47県 収録済み（未収録は oita・saga のみ�
 
 ---
 
-# C 制度メタデータの多年度化（令和6年度・令和5年度） — 🟡2026-09-01着手(19/47・★制度変更1件検出)
+# C 制度メタデータの多年度化（令和6年度・令和5年度） — 🟡2026-09-01着手(20/47・★制度変更1件検出)
 
 **A・Bが終わってから。優先度が低い理由: 提案書（9/6）に間に合わないため今期の収益への寄与が間接的。**
 
 - [~] N1-2 と同じ形で `src/data/snapshots/2024-r6/` `2023-r5/` を作る →
-      **2024-r6のみ着手・19件完了(osaka/chiba/tochigi/ehime/kochi/kagoshima/aomori/iwate/tokushima/hiroshima/okayama/yamagata/nagano/shizuoka/ibaraki/shiga/kanagawa/aichi/fukuoka)**。
+      **2024-r6のみ着手・20件完了(osaka/chiba/tochigi/ehime/kochi/kagoshima/aomori/iwate/tokushima/hiroshima/okayama/yamagata/nagano/shizuoka/ibaraki/shiga/kanagawa/aichi/fukuoka/saitama)**。
+      **saitamaを再挑戦し成功**: 以前のセッション(Wayback CDX不調時)が推測した
+      `documents/238245/97_jisshiyoko_r6.pdf`は誤りだったと判明（実際は存在しないURL）。
+      CDX復旧後に`documents/238245/`配下をprefix検索し、R7と同じ命名規則の
+      `52senbatsuyoryo_r6.pdf`を発見・取得。以前の「404だった」という記録は
+      推測URLが誤っていたことが原因で、サービス障害ではなかった。
       **fukuoka収集で判明**: WebSearchの要約が、実際には現行サイト404・Wayback CDXにも存在しない
       `press-release/youkouhoudou06.html`について具体的なファイルサイズまで提示する事故を再確認した
       （[[fable5-loop-protocol]]既存の「WebSearch要約が実在しないメールアドレスを提示する」罠と同型・
