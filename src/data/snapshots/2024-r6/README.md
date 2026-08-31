@@ -6,9 +6,9 @@ T-Y11 Task C（`ops/tasks/T-Y11-winter-bairitsu-pipeline.md`）で収集する�
 
 ## 進捗状況（2026-09-01）
 
-- **entries 13件**（osaka・chiba・tochigi・ehime・kochi・kagoshima・aomori・iwate・tokushima・hiroshima・okayama・yamagata・nagano）
+- **entries 14件**（osaka・chiba・tochigi・ehime・kochi・kagoshima・aomori・iwate・tokushima・hiroshima・okayama・yamagata・nagano・shizuoka）
 - **unavailable 0件**（今のところ「取得不能」と確定した県は無い）
-- 残り34県は未着手
+- 残り33県は未着手
 - **Internet Archive(Wayback Machine)は2026-09-01時点で部分復旧**: ページ本体の直接取得(既知のタイムスタンプURL)は成功するが、
   CDX検索APIはまだ503で不通のまま（下記「進捗」参照）。CDXが必要な県(miyagi等)は復旧待ち。
 - ★**iwateは令和6→7年度で実際に制度が変わっている**（nara〈令和7→8年度〉に続く2件目の実測「変更あり」）
@@ -191,3 +191,21 @@ gradeMultipliers{1:0,2:0,3:1}・maxScore=45は令和7・8年度分と完全一�
 miyagiのR6版（R7自体がWayback経由でしか見つからなかった県）を今回試みたが、CDX検索が使えず、
 WebSearchでも該当のarchive.orgページを発見できなかったため保留とした。**CDX APIが完全復旧したら
 miyagi・tokyo・saitama・hyogo・shimane・yamaguchiを優先的に再試行すること。**
+
+## shizuoka（2026-09-01追加・変更なし）
+
+R7のsourceUrlは`_res/projects/default_project/_page_/001/063/460/r7_07.pdf`という、静岡県サイト特有の
+project ID方式のURL。project ID(`001/063/460`)自体が年度ごとの発表資料ページのシステム内部連番であり
+`r7`→`r6`のようなファイル名置換では当たらない（project IDそのものが別の数字になる）ことが分かって
+いたため、最初からWebSearchでR6の発表資料ページを検索。project ID `001/054/127`のR6専用ページ
+（`kodomokyoiku/school/kyoiku/1003764/1003891/1054127.html`）を発見し、WebFetchでページ内のPDF一覧を
+確認。「各種様式等（p.70-99）」に対応する`07.pdf`（2.86MB）をダウンロードし、p.73-74「(別記1)調査書の
+記入方法」2(3)アで「第3学年における第2学期末(12月末)までの学習状況について…5段階の目標に準拠した
+評価で記入する」という、R7と趣旨完全一致する文言を確認（第3学年のみ・様式第1号の評定欄も学年別でなく
+1行のみで様式上も裏付けが取れた）。gradeMultipliers{1:0,2:0,3:1}・maxScore=45は令和7・8年度分と完全一致。
+
+**教訓**: URLに「project ID」のような年度と無関係な内部連番が含まれる県（shizuoka型）は、
+ファイル名の年度トークン置換が原理的に効かない。この場合は最初からWebSearchで年度別の
+発表資料インデックスページを探す方が早い（無駄な404を打たずに済む）。tochigi/ehime/kochi型
+（URLパス自体に年度トークンが埋め込まれ置換で当たる県）とshizuoka型（project IDが年度と無関係に
+振られる県）の2種類がある、とここまでの14県で判明した。

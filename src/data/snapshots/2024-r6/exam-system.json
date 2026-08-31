@@ -6,7 +6,7 @@
     "completedAt": null,
     "collectionMethod": "T-Y11 Task C(ops/tasks/T-Y11-winter-bairitsu-pipeline.md)。N1-2(2025-r7)と同じ形式・同じ収集方針。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。",
     "totalPrefectures": 47,
-    "collectedCount": 13,
+    "collectedCount": 14,
     "unavailable": []
   },
   "entries": [
@@ -372,6 +372,28 @@
       "lastVerified": "2026-09-01",
       "pdfHash": null,
       "diffFromCurrentYear": "変更なし(2026-09-01に選抜要綱p.6「第3 後期選抜」6(1)イ(ｱ)を直接確認。「学科ごとに、受検者全員について、調査書に記載されている中学校第３学年の必修教科の評定合計値(最高45点)を縦軸、学力検査成就率合計値(最高500点)を横軸とする相関図を作成する」とR7と一言一句完全一致(条項番号のみ7(1)→6(1)に相違・R6の要綱は前期選抜の記載が1本のPDFに統合されているため通し番号がR7と異なるだけで内容は同一)。令和7・8年度分のgradeMultipliers{1:0,2:0,3:1}/maxScore=45と完全一致・変更なし。★新知見: R7のsourceUrlは`r7yoko2.pdf`(要綱が2分割)だったが、R6は`r6yoko1.pdf`という1本のPDFに統合されており、`r7yoko2`→`r6yoko2`の機械置換は404だった。年度によって文書の分割数が変わることがあるため、置換が外れたら索引ページ(`r6nyushi.html`)から辿り直す必要がある)"
+    },
+    {
+      "code": "shizuoka",
+      "name": "静岡県",
+      "region": "中部",
+      "fiscalYear": "2024",
+      "targetGrades": [3],
+      "gradeMultipliers": { "1": 0, "2": 0, "3": 1 },
+      "coreMultiplier": 1,
+      "practicalMultiplier": 1,
+      "maxScore": 45,
+      "simplifiedCalc": false,
+      "actualMaxScore": null,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": null,
+      "sourceUrl": "https://www.pref.shizuoka.jp/_res/projects/default_project/_page_/001/054/127/07.pdf",
+      "sourceUrl2": "https://www.pref.shizuoka.jp/kodomokyoiku/school/kyoiku/1003764/1003891/1054127.html",
+      "sourceTitle": "静岡県教育委員会「令和6年度静岡県公立高等学校入学者選抜実施要領」各種様式等 様式第1号(別記1)調査書の記入方法2(3)ア",
+      "lastVerified": "2026-09-01",
+      "pdfHash": null,
+      "diffFromCurrentYear": "変更なし(2026-09-01にWebSearchでR6専用の発表資料ページ(project ID 001/054/127・R7とは異なるproject IDのため`r7_`接頭辞のURL置換は使えなかった)を発見し、各種様式等PDF(`07.pdf`・2.86MB)を直接確認。p.73-74「(別記1)調査書の記入方法」2(3)アで「中学校卒業見込みの者については、第3学年における第2学期末(12月末)までの学習状況について…5段階の目標に準拠した評価で記入する」とR7と趣旨完全一致(第3学年のみ・学年別の記入欄が無く様式第1号の評定欄(④)も1行のみ)。9教科×5段階=45点。令和7・8年度分のgradeMultipliers{1:0,2:0,3:1}/maxScore=45と完全一致・変更なし。★新知見: shizuokaのURLは`_res/projects/default_project/_page_/<project ID>/<file>.pdf`という構造で、project ID自体が年度ごとに全く異なる数字に変わる(R7=063/460・R6=054/127)ため、`r7_`→`r6_`のようなファイル名置換は無意味。WebSearchで年度別の発表資料ページを直接発見する必要がある)"
     }
   ]
 }
