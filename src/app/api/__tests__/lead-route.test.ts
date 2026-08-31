@@ -57,4 +57,18 @@ describe('/api/lead 契約', () => {
     }
     expect(last!.status).toBe(429);
   });
+
+  test('C10-2: source=school-leadでjukuOptin:trueを送っても正当なリードとして受理される', async () => {
+    const res = await POST(
+      leadReq({ ...valid, source: 'school-lead', jukuOptin: true }, { ip: '2.2.2.1' })
+    );
+    expect(res.status).toBe(200);
+    const json = await res.json();
+    expect(json.success).toBe(true);
+  });
+
+  test('C10-2: jukuOptinを省略しても400にならない（既定でfalse扱い）', async () => {
+    const res = await POST(leadReq({ ...valid, source: 'school-lead' }, { ip: '2.2.2.2' }));
+    expect(res.status).toBe(200);
+  });
 });

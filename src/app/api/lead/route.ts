@@ -30,6 +30,7 @@ type LeadBody = {
   target?: unknown;
   gap?: unknown;
   note?: unknown;
+  jukuOptin?: unknown;
 };
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -151,6 +152,7 @@ export async function POST(request: NextRequest) {
       target: safeNum(parsed.target),
       gap: safeNum(parsed.gap),
       note: clampStr(parsed.note, LIMITS.note),
+      jukuOptin: parsed.jukuOptin === true,
     };
 
     // 4) 転送（未設定なら delivered:false → クライアントが mailto フォールバック）

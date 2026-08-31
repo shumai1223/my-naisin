@@ -15,6 +15,7 @@ import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { SchoolPageConvertCTA } from '@/components/SchoolPageConvertCTA';
 import { SchoolPageParentBridge } from '@/components/SchoolPageParentBridge';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
+import { SchoolParentLeadForm } from '@/components/SchoolParentLeadForm';
 import { SchoolPageNaishinNote } from '@/components/SchoolPageNaishinNote';
 
 /**
@@ -174,6 +175,13 @@ export default async function SchoolPage({ params }: PageProps) {
           {/* S3-2（PROPOSALS.md 2026-08-10）: 学校ページに換金導線が1つも配線されていなかった欠落を是正。
               既存の県面オファー(lead-config.ts)をplacement="prefecture"で解決するだけの最小配線。 */}
           <ParentLeadCTA prefectureCode={prefecture.code} placement="prefecture" />
+
+          {/* T-N1-N4 C10-2: 保護者向けリードフォーム。倍率データ(上記)より下に配置（データが先・CTAは後の原則）。 */}
+          <SchoolParentLeadForm
+            prefectureCode={prefecture.code}
+            prefectureName={prefecture.name}
+            schoolName={school.schoolName}
+          />
 
           {school.departmentRates.length > 1 && (
             <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">

@@ -25,6 +25,7 @@ export type LeadSource =
   | 'prefecture'
   | 'juku-shindan'
   | 'naishin-type-shindan'
+  | 'school-lead'
   | 'home';
 
 export interface LeadPayload {
@@ -43,6 +44,8 @@ export interface LeadPayload {
   gap?: number;
   /** 任意メモ（学年・志望校など）。 */
   note?: string;
+  /** 学習塾への第三者提供に同意したか（既定false・任意）。C10-2。 */
+  jukuOptin?: boolean;
 }
 
 export type LeadResult = { ok: boolean; delivered: boolean; error?: string };

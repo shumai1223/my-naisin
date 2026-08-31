@@ -52,6 +52,8 @@ export interface PersistLeadInput {
   target?: number;
   gap?: number;
   note?: string;
+  /** 学習塾への第三者提供に同意したか（既定false）。C10-2。 */
+  jukuOptin?: boolean;
 }
 
 /** undefined を D1 がバインドできる null に変換。 */
@@ -74,10 +76,11 @@ export async function persistLead(input: PersistLeadInput): Promise<boolean> {
     const { env } = await getCloudflareContext({ async: true });
     const db = (env as unknown as { LEADS_DB?: MinimalD1 }).LEADS_DB;
     if (!db) return false; // 未バインド＝休眠（現状）
+    const jukuOptin = input.jukuOptin === true ? 1 : 0;
     await db
       .prepare(
-        `INSERT INTO leads (email, source, prefecture_code, prefecture_name, score, target, gap, note, created_at)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, datetime('now'))
+        `INSERT INTO leads (email, source, prefecture_code, prefecture_name, score, target, gap, note, juku_optin, optin_at, created_at)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, CASE WHEN ? = 1 THEN datetime('now') ELSE NULL END, datetime('now'))
          ON CONFLICT(email) DO UPDATE SET
            source = excluded.source,
            prefecture_code = excluded.prefecture_code,
@@ -85,7 +88,9 @@ export async function persistLead(input: PersistLeadInput): Promise<boolean> {
            score = excluded.score,
            target = excluded.target,
            gap = excluded.gap,
-           note = excluded.note`
+           note = excluded.note,
+           juku_optin = CASE WHEN excluded.juku_optin = 1 THEN 1 ELSE leads.juku_optin END,
+           optin_at = CASE WHEN excluded.juku_optin = 1 THEN datetime('now') ELSE leads.optin_at END`
       )
       .bind(
         input.email,
@@ -95,7 +100,9 @@ export async function persistLead(input: PersistLeadInput): Promise<boolean> {
         n(input.score),
         n(input.target),
         n(input.gap),
-        s(input.note)
+        s(input.note),
+        jukuOptin,
+        jukuOptin
       )
       .run();
     return true;
