@@ -5,9 +5,9 @@
     "frozenBy": "scripts/freeze-exam-snapshot.ts (T-N1-1)",
     "sourceOfTruth": "src/lib/prefectures.ts (この日付時点のスナップショット)",
     "prefectureCount": 47,
-    "pdfHashStatus": "partial_25_of_47",
+    "pdfHashStatus": "partial_26_of_47",
     "freezePolicy": "本ディレクトリは生成後に書き換え禁止。prefectures.tsが後日修正されても本ファイルは追随させない。来年度の差分エンジン(N1-3)の基準点として使う。",
-    "pdfHashNote": "47件中25件(sourceUrlが直接PDFリンクの6県＋ポータル経由で個別特定した19県)のSHA-256を取得済み(2026-08-30/31)。東京都・神奈川県・山梨県・岐阜県・愛知県はsourceUrlの元PDFが上書き・拡張子なし配信・Incapsulaボット対策のいずれかのため、Wayback Machineのアーカイブまたはテスト側の既知例外パターンで対応。残り22県はsourceUrlがポータル/HTMLページで実際のPDF URLを個別に特定する必要があり、継続作業として順次進める。"
+    "pdfHashNote": "47件中26件(sourceUrlが直接PDFリンクの6県＋ポータル経由で個別特定した20県)のSHA-256を取得済み(2026-08-30/31)。東京都・神奈川県・山梨県・岐阜県・愛知県はsourceUrlの元PDFが上書き・拡張子なし配信・Incapsulaボット対策のいずれかのため、Wayback Machineのアーカイブまたはテスト側の既知例外パターンで対応。残り21県はsourceUrlがポータル/HTMLページで実際のPDF URLを個別に特定する必要があり、継続作業として順次進める。"
   },
   "entries": [
     {
@@ -783,7 +783,9 @@
       "sourceUrl2": "https://czemi.benesse.ne.jp/open/nyushi/exam/25/naishin/",
       "sourceTitle": "滋賀県教育委員会 県立高等学校入学者選抜",
       "lastVerified": "2026-07-16",
-      "pdfHash": null
+      "pdfHash": "b37b591373802702e320991c024533b53ee39b5bf3037606b4da2ac7633853df",
+      "pdfHashSourceUrl": "https://www.pref.shiga.lg.jp/file/attachment/5572120.pdf",
+      "pdfHashVerifiedAt": "2026-08-31"
     },
     {
       "code": "kyoto",
