@@ -31,9 +31,9 @@ describe('2026-r8 exam-system snapshot（T-N1-1 凍結スナップショット�
   });
 
   test('pdfHashは取得済みの県のみ・64桁16進のSHA-256形式で、ハッシュ元PDFのURLが特定できる(未収集を偽らない)', () => {
-    expect(snapshot.meta.pdfHashStatus).toBe('partial_46_of_47');
+    expect(snapshot.meta.pdfHashStatus).toBe('complete_47_of_47');
     const withHash = snapshot.entries.filter((e) => e.pdfHash !== null);
-    expect(withHash).toHaveLength(46);
+    expect(withHash).toHaveLength(47);
     // 拡張子なしでPDFを配信する文書管理CMS(東京都metro.tokyo.lg.jp・愛媛県esnet.ed.jp等)向けの既知例外。
     // 個別に実ファイルをダウンロードしfile/content-typeでPDFと確認済みのURLのみ追加すること。
     const NO_EXTENSION_PDF_CMS_PATTERNS = [
@@ -49,7 +49,7 @@ describe('2026-r8 exam-system snapshot（T-N1-1 凍結スナップショット�
       expect(hashSourceUrl.toLowerCase().endsWith('.pdf') || isKnownNoExtensionCms).toBe(true);
     }
     const withoutHash = snapshot.entries.filter((e) => e.pdfHash === null);
-    expect(withoutHash).toHaveLength(1);
+    expect(withoutHash).toHaveLength(0);
   });
 
   test('凍結メタデータに生成日・凍結ポリシーが明記されている', () => {
