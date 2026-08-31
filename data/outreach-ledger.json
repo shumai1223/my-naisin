@@ -3193,6 +3193,18 @@
       "followupCount": 0,
       "threadId": "1a042b02297ebcd1",
       "note": "Coworkによるフォーム送信バッチ(30-02〜30-10系・T-C2-C2-2手順書)実行分。2026-08-28朝の受信箱棚卸しで自動受付確認メールを実測し追加(人間の返信なし・自動返信のみ)。"
+    },
+    {
+      "id": "kyoiku-ishikawa-0828-oubo",
+      "org": "石川県教育委員会",
+      "lane": "kyoiku-i",
+      "sourceTaskId": "T-A1",
+      "sentDate": "2026-08-28",
+      "lastContactDate": "2026-08-31",
+      "status": "replied",
+      "followupCount": 0,
+      "threadId": "19fdb5c0bad9773e",
+      "note": "2026-08-31返信: 応募状況(募集人員/応募者数/応募倍率等)データの掲載可否を照会したところ許諾。既存の出典表記(資料名+最終確認日+PDFリンク)の形式のままでよいと確認された。前回(kyoiku-ishikawa-0806)のリンク掲載依頼とは別件・別スレッド。返信不要(現状の実装を変更する必要なし)。"
     }
   ]
 }
