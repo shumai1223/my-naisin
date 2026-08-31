@@ -6,9 +6,12 @@ T-Y11 Task C（`ops/tasks/T-Y11-winter-bairitsu-pipeline.md`）で収集する�
 
 ## 進捗状況（2026-09-01）
 
-- **entries 14件**（osaka・chiba・tochigi・ehime・kochi・kagoshima・aomori・iwate・tokushima・hiroshima・okayama・yamagata・nagano・shizuoka）
+- **entries 15件**（osaka・chiba・tochigi・ehime・kochi・kagoshima・aomori・iwate・tokushima・hiroshima・okayama・yamagata・nagano・shizuoka・ibaraki）
 - **unavailable 0件**（今のところ「取得不能」と確定した県は無い）
-- 残り33県は未着手
+- 残り32県は未着手
+- kagawaを試みたが、R7のsourceUrl(`documents/50757/so1.pdf`＝毎年発行の「変更点」文書)に対応するR6版の
+  URLをWebSearchで特定できず保留（document ID自体が年度ごとに無関係な数字に振られる県で、
+  近傍IDへの推測(`gian4.pdf`は発見できたが入学定員の文書で対象外)も的中しなかった）。
 - **Internet Archive(Wayback Machine)は2026-09-01時点で部分復旧**: ページ本体の直接取得(既知のタイムスタンプURL)は成功するが、
   CDX検索APIはまだ503で不通のまま（下記「進捗」参照）。CDXが必要な県(miyagi等)は復旧待ち。
 - ★**iwateは令和6→7年度で実際に制度が変わっている**（nara〈令和7→8年度〉に続く2件目の実測「変更あり」）
@@ -209,3 +212,24 @@ project ID方式のURL。project ID(`001/063/460`)自体が年度ごとの発表
 発表資料インデックスページを探す方が早い（無駄な404を打たずに済む）。tochigi/ehime/kochi型
 （URLパス自体に年度トークンが埋め込まれ置換で当たる県）とshizuoka型（project IDが年度と無関係に
 振られる県）の2種類がある、とここまでの14県で判明した。
+
+## ibaraki（2026-09-01追加・変更なし）
+
+R7のsourceUrl（`wp-content/uploads/2025/01/saisoku-honbun-kaisei-kaisei.pdf`）はWordPressのアップロード
+年月フォルダ方式で、ファイル名自体が改正のたびに変わる（`saisoku-ichibu-kaisei.pdf`等）ため単純な文字列
+置換では当たらなかった。WebSearchでR6専用の実施細則本体（`wp-content/uploads/2023/09/all-teisei.pdf`・
+令和5年9月発行・現行サイトに掲載されたまま現存）を直接発見。p.8「(8)合否判定方法」イ共通選抜(ｲ)で
+「共通選抜の対象となる受検者全員について、調査書の評定合計(3年間)の高い順に並べる」というR7と一言一句
+完全一致する文言を確認（学年間の傾斜配点なし=等倍合計）。gradeMultipliers{1:1,2:1,3:1}・maxScore=135は
+令和7・8年度分と完全一致。
+
+## kagawa（2026-09-01・保留）
+
+R7のsourceUrl（`documents/50757/so1.pdf`＝「実施細目を定めました(昨年度との主な変更点)」という毎年
+発行される変更点サマリ文書）に対応するR6版のURLをWebSearchで複数回試みたが特定できなかった。
+`documents/39598/s1.pdf`（令和6年度選抜日程のお知らせ）は発見できたが、これは日程のみで配点・調査書の
+評価方法に関する変更点情報を含まない別文書だった。近傍document ID（`43663/gian4.pdf`＝入学定員に関する
+教育委員会議案）も発見したが、対象の「変更点」文書ではなかった。document ID自体が年度・文書種別ごとに
+無関係な数字で振られる県（shizuoka型と同様）で、かつ「変更点」文書という特殊なジャンルのため、
+WebSearchのクエリを変えても直接ヒットしなかった。**次回は香川県教育委員会の高校教育課のプレスリリース
+一覧ページを起点に年月から辿るか、Wayback CDX復旧後にCDX検索で見つける方が確実かもしれない。**

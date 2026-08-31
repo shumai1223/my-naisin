@@ -6,7 +6,7 @@
     "completedAt": null,
     "collectionMethod": "T-Y11 Task C(ops/tasks/T-Y11-winter-bairitsu-pipeline.md)。N1-2(2025-r7)と同じ形式・同じ収集方針。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。",
     "totalPrefectures": 47,
-    "collectedCount": 14,
+    "collectedCount": 15,
     "unavailable": []
   },
   "entries": [
@@ -394,6 +394,28 @@
       "lastVerified": "2026-09-01",
       "pdfHash": null,
       "diffFromCurrentYear": "変更なし(2026-09-01にWebSearchでR6専用の発表資料ページ(project ID 001/054/127・R7とは異なるproject IDのため`r7_`接頭辞のURL置換は使えなかった)を発見し、各種様式等PDF(`07.pdf`・2.86MB)を直接確認。p.73-74「(別記1)調査書の記入方法」2(3)アで「中学校卒業見込みの者については、第3学年における第2学期末(12月末)までの学習状況について…5段階の目標に準拠した評価で記入する」とR7と趣旨完全一致(第3学年のみ・学年別の記入欄が無く様式第1号の評定欄(④)も1行のみ)。9教科×5段階=45点。令和7・8年度分のgradeMultipliers{1:0,2:0,3:1}/maxScore=45と完全一致・変更なし。★新知見: shizuokaのURLは`_res/projects/default_project/_page_/<project ID>/<file>.pdf`という構造で、project ID自体が年度ごとに全く異なる数字に変わる(R7=063/460・R6=054/127)ため、`r7_`→`r6_`のようなファイル名置換は無意味。WebSearchで年度別の発表資料ページを直接発見する必要がある)"
+    },
+    {
+      "code": "ibaraki",
+      "name": "茨城県",
+      "region": "関東",
+      "fiscalYear": "2024",
+      "targetGrades": [1, 2, 3],
+      "gradeMultipliers": { "1": 1, "2": 1, "3": 1 },
+      "coreMultiplier": 1,
+      "practicalMultiplier": 1,
+      "maxScore": 135,
+      "simplifiedCalc": false,
+      "actualMaxScore": null,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": null,
+      "sourceUrl": "https://kyoiku.pref.ibaraki.jp/wp-content/uploads/2023/09/all-teisei.pdf",
+      "sourceUrl2": "https://kyoiku.pref.ibaraki.jp/post-25540/",
+      "sourceTitle": "茨城県教育委員会「令和6年度茨城県立高等学校入学者選抜実施細則」(8)合否判定方法イ共通選抜(ｲ)",
+      "lastVerified": "2026-09-01",
+      "pdfHash": null,
+      "diffFromCurrentYear": "変更なし(2026-09-01にWebSearchで発見した令和6年度実施細則本体(現行サイトに掲載されたまま現存・4.58MB)p.8「(8)合否判定方法」イ共通選抜(ｲ)を直接確認。「共通選抜の対象となる受検者全員について、調査書の評定合計(3年間)の高い順に並べる」とR7と一言一句完全一致(学年間の傾斜配点の記述なし=等倍合計)。学力検査は5教科×100点=500点満点も同ページ(ｱ)で確認。令和7・8年度分のgradeMultipliers{1:1,2:1,3:1}/coreMultiplier=1/practicalMultiplier=1/maxScore=135と完全一致・変更なし)"
     }
   ]
 }
