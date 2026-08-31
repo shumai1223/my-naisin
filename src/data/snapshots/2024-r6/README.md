@@ -6,9 +6,9 @@ T-Y11 Task C（`ops/tasks/T-Y11-winter-bairitsu-pipeline.md`）で収集する�
 
 ## 進捗状況（2026-09-01）
 
-- **entries 1件**（osaka）
+- **entries 2件**（osaka・chiba）
 - **unavailable 0件**（今のところ「取得不能」と確定した県は無い）
-- 残り46県は未着手
+- 残り45県は未着手
 
 ## 収集方針（2025-r7から継承・Y-0を継承）
 
@@ -43,4 +43,12 @@ Wayback依存が必要な県は後回しにする**運用が現実的（2025-r7�
   （`kyoiku.metro.tokyo.lg.jp/admission/high_school/exam/release20230928_01.html`）が現行サイトで
   404、Wayback CDXでは複数スナップショットが確認できたが本文取得はInternet Archiveの一時停止で
   失敗（上記「既知の制約」参照）。次回はWayback復旧後に再試行するか、現行サイトに残っている他の
-  大市場県（kanagawa/aichi/saitama/chiba/hyogo/fukuoka）から先に着手するとよい。
+  大市場県（kanagawa/aichi/hyogo/fukuoka）から先に着手するとよい。
+- 2026-09-01: chiba 2件目。令和6年度実施要項本体（`documents/02r6ippan.pdf`・現行サイトに
+  掲載されたまま現存・WebSearchでURL特定後curl直叩きで取得成功）p.8「第9 選抜方法」4(1)アを
+  直接確認。「調査書の教科(9教科)の評定の全学年合計値に各高等学校が定めるK(原則1・学科ごとに
+  0.5以上2以下の範囲で別定)を乗じて調査書の得点とする」を確認（K=1の代表値で135点満点・
+  令和7・8年度分と完全一致・変更なし）。saitamaも試みたが、R7で使われた文書ID
+  （`documents/254997/52senbatsuyoryo_r7.pdf`）に対応するR6の文書ID
+  （検索で見つけた`documents/238245/97_jisshiyoko_r6.pdf`）が404で、Wayback CDX API自体も
+  タイムアウトしたため保留（Internet Archiveの不調がCDX検索にも及んでいる可能性）。

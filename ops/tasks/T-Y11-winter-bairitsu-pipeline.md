@@ -197,16 +197,16 @@ R6（令和6年度）: 45/47県 収録済み（未収録は oita・saga のみ�
 
 ---
 
-# C 制度メタデータの多年度化（令和6年度・令和5年度） — 🟡2026-09-01着手(1/47)
+# C 制度メタデータの多年度化（令和6年度・令和5年度） — 🟡2026-09-01着手(2/47)
 
 **A・Bが終わってから。優先度が低い理由: 提案書（9/6）に間に合わないため今期の収益への寄与が間接的。**
 
 - [~] N1-2 と同じ形で `src/data/snapshots/2024-r6/` `2023-r5/` を作る →
-      **2024-r6のみ着手・osaka 1件完了**（`src/data/snapshots/2024-r6/exam-system.json`・
-      `21_r6_ippan.pdf`を直接確認しgradeMultipliers{1:2,2:2,3:6}/maxScore=450/osakaTypeCount=5が
-      令和7・8年度分と完全一致=変更なしと確認）。tokyoは現行サイト404・Wayback Machineが
-      サービス一時停止中(`Temporarily Offline`)で取得できず保留（詳細は
-      `src/data/snapshots/2024-r6/README.md`）。**2023-r5は未着手**
+      **2024-r6のみ着手・osaka/chiba 2件完了**（`src/data/snapshots/2024-r6/exam-system.json`・
+      両県ともgradeMultipliers/maxScoreが令和7・8年度分と完全一致=変更なしと確認）。
+      tokyo/saitamaは現行サイト404・Wayback Machine(CDX APIすらタイムアウト)が
+      サービス不調で取得できず保留（詳細は`src/data/snapshots/2024-r6/README.md`）。
+      **2023-r5は未着手**
 - [ ] **取得不能は正直に記録する**（N1-2で45/47・2県取得不能だった実績と同じ扱い） →
       現時点でmeta.unavailableは0件（保留中のtokyoはまだunavailable確定にしていない・
       Wayback復旧後に再試行の余地があるため）

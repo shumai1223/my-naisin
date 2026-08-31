@@ -62,4 +62,16 @@ describe('2024-r6 exam-system snapshot（T-Y11 Task C 収集中スナップシ�
     expect(o2024.reverseCalc?.totalMaxScore).toBe(o2026.reverseCalc?.totalMaxScore);
     expect(o2024.reverseCalc?.osakaTypeCount).toBe(o2026.reverseCalc?.osakaTypeCount);
   });
+
+  test('chiba: 2025-r7・2026-r8と2024-r6で制度の核となる数値が一致する(実測で確認済みの「変更なし」)', () => {
+    const c2024 = snapshot.entries.find((e) => e.code === 'chiba')!;
+    const c2025 = snapshot2025.entries.find((e) => e.code === 'chiba')!;
+    const c2026 = snapshot2026.entries.find((e) => e.code === 'chiba')!;
+    expect(c2024.maxScore).toBe(c2025.maxScore);
+    expect(c2024.maxScore).toBe(c2026.maxScore);
+    expect(c2024.gradeMultipliers).toEqual(c2025.gradeMultipliers);
+    expect(c2024.gradeMultipliers).toEqual(c2026.gradeMultipliers);
+    expect(c2024.reverseCalc).toBeNull();
+    expect(c2026.reverseCalc).toBeNull();
+  });
 });
