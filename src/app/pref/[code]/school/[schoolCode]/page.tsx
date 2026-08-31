@@ -5,7 +5,7 @@ import { ChevronRight, Home, GraduationCap, MapPin, AlertTriangle } from 'lucide
 
 import { getPrefectureByCode } from '@/lib/prefectures';
 import { COMPETITION_RATE_HISTORY_BY_PREFECTURE } from '@/data/competition-rate-history';
-import { selectNearbySchools, getSchoolCategoryTrends, groupSchoolHistoryByDepartment } from '@/lib/school-page-data';
+import { selectNearbySchools, getSchoolCategoryTrends, groupSchoolHistoryByDepartment, computeSchoolHistoryYoy } from '@/lib/school-page-data';
 import { getPrefectureSchoolPageData, INDEXED_SCHOOL_PAGE_PREFECTURE_CODES } from '@/lib/school-page-lookup';
 import { shortenSchoolName } from '@/lib/school-name-short-form';
 import { buildSchoolFaqItems } from '@/lib/school-page-faq';
@@ -222,10 +222,19 @@ export default async function SchoolPage({ params }: PageProps) {
                 {school.schoolName}固有の一次データです（下記の「県全体の傾向」とは別物）。
               </p>
               <div className="space-y-4">
-                {schoolHistoryByDepartment.map((group) => (
+                {schoolHistoryByDepartment.map((group) => {
+                  const yoy = computeSchoolHistoryYoy(group);
+                  return (
                   <div key={group.department} className="overflow-x-auto">
                     {schoolHistoryByDepartment.length > 1 && (
                       <h3 className="mb-2 text-sm font-semibold text-slate-600">{group.department}</h3>
+                    )}
+                    {yoy && (
+                      <p className="mb-2 text-xs font-semibold text-slate-500">
+                        {yoy.direction === 'up' ? '▲' : yoy.direction === 'down' ? '▼' : '→'} 前年比
+                        {yoy.rateDelta > 0 ? `+${yoy.rateDelta}` : yoy.rateDelta}倍（{yoy.previousFiscalYear}の{yoy.previousRate}倍
+                        →{yoy.currentFiscalYear}の{yoy.currentRate}倍）
+                      </p>
                     )}
                     <table className="w-full text-sm">
                       <thead>
@@ -283,7 +292,8 @@ export default async function SchoolPage({ params }: PageProps) {
                       </ul>
                     )}
                   </div>
-                ))}
+                  );
+                })}
               </div>
             </section>
           )}

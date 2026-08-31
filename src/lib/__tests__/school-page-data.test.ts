@@ -2,6 +2,7 @@ import {
   buildSchoolPageDataForPrefecture,
   buildSchoolHistoryForPrefecture,
   groupSchoolHistoryByDepartment,
+  computeSchoolHistoryYoy,
   selectNearbySchools,
   getSchoolCategoryTrends,
   type SchoolPageData,
@@ -333,6 +334,79 @@ describe('groupSchoolHistoryByDepartment', () => {
 
   test('空配列は空配列を返す', () => {
     expect(groupSchoolHistoryByDepartment([])).toEqual([]);
+  });
+});
+
+describe('computeSchoolHistoryYoy（T-Y11 Task B-2）', () => {
+  test('2年度あれば最新2年度の差分を計算する（entries[0]=最新・entries[1]=前年度の前提）', () => {
+    const group = {
+      department: '普通科',
+      entries: [
+        { fiscalYear: '令和8年度（2026年度）', department: '普通科', quota: 200, applicants: 271, rate: 1.36, source: null },
+        { fiscalYear: '令和7年度（2025年度）', department: '普通科', quota: 200, applicants: 260, rate: 1.3, source: null },
+      ],
+    };
+    const yoy = computeSchoolHistoryYoy(group);
+    expect(yoy).toEqual({
+      currentFiscalYear: '令和8年度（2026年度）',
+      previousFiscalYear: '令和7年度（2025年度）',
+      currentRate: 1.36,
+      previousRate: 1.3,
+      rateDelta: 0.06,
+      direction: 'up',
+    });
+  });
+
+  test('3年度以上あっても直近ペアだけを比較する（3年前との差分は取らない）', () => {
+    const group = {
+      department: '普通科',
+      entries: [
+        { fiscalYear: '令和8年度（2026年度）', department: '普通科', quota: 100, applicants: 100, rate: 1.0, source: null },
+        { fiscalYear: '令和7年度（2025年度）', department: '普通科', quota: 100, applicants: 150, rate: 1.5, source: null },
+        { fiscalYear: '令和6年度（2024年度）', department: '普通科', quota: 100, applicants: 50, rate: 0.5, source: null },
+      ],
+    };
+    const yoy = computeSchoolHistoryYoy(group);
+    expect(yoy?.rateDelta).toBeCloseTo(-0.5);
+    expect(yoy?.direction).toBe('down');
+  });
+
+  test('倍率が下がった場合はdirection=downで符号付きの負の値になる', () => {
+    const group = {
+      department: '普通科',
+      entries: [
+        { fiscalYear: '令和8年度（2026年度）', department: '普通科', quota: 100, applicants: 90, rate: 0.9, source: null },
+        { fiscalYear: '令和7年度（2025年度）', department: '普通科', quota: 100, applicants: 110, rate: 1.1, source: null },
+      ],
+    };
+    const yoy = computeSchoolHistoryYoy(group);
+    expect(yoy?.rateDelta).toBeCloseTo(-0.2);
+    expect(yoy?.direction).toBe('down');
+  });
+
+  test('倍率が変わらなければdirection=unchanged', () => {
+    const group = {
+      department: '普通科',
+      entries: [
+        { fiscalYear: '令和8年度（2026年度）', department: '普通科', quota: 100, applicants: 100, rate: 1.0, source: null },
+        { fiscalYear: '令和7年度（2025年度）', department: '普通科', quota: 100, applicants: 100, rate: 1.0, source: null },
+      ],
+    };
+    const yoy = computeSchoolHistoryYoy(group);
+    expect(yoy?.rateDelta).toBe(0);
+    expect(yoy?.direction).toBe('unchanged');
+  });
+
+  test('年度が1つしか無い（比較不能）場合はnullを返す（推測で埋めない）', () => {
+    const group = {
+      department: '普通科',
+      entries: [{ fiscalYear: '令和8年度（2026年度）', department: '普通科', quota: 100, applicants: 100, rate: 1.0, source: null }],
+    };
+    expect(computeSchoolHistoryYoy(group)).toBeNull();
+  });
+
+  test('データが0件ならnullを返す', () => {
+    expect(computeSchoolHistoryYoy({ department: '普通科', entries: [] })).toBeNull();
   });
 });
 

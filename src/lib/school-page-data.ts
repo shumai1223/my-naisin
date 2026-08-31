@@ -19,6 +19,7 @@ import { resolveRecordSourceIndex, type CompetitionRateRecord, type CompetitionR
 import type { PrefectureRateHistoryFile } from '@/lib/competition-rate-history';
 import { matchSchoolNames, type SchoolCodeMatchResult } from '@/lib/school-name-match';
 import { resolveCategoryLabel } from '@/lib/school-department-category';
+import type { RateChangeDirection } from '@/lib/exam-competition-rate-yoy';
 
 export interface SchoolPageData {
   schoolCode: string;
@@ -209,6 +210,44 @@ export function groupSchoolHistoryByDepartment(history: SchoolHistoryEntry[]): S
     byDept.get(entry.department)!.push(entry);
   }
   return order.map((department) => ({ department, entries: byDept.get(department)! }));
+}
+
+export interface SchoolHistoryYoy {
+  currentFiscalYear: string;
+  previousFiscalYear: string;
+  currentRate: number;
+  previousRate: number;
+  /** currentRate - previousRate（符号付き。公表値どうしの単純差分で独自の丸めはしない）。 */
+  rateDelta: number;
+  direction: RateChangeDirection;
+}
+
+function directionOf(delta: number): RateChangeDirection {
+  if (delta > 0) return 'up';
+  if (delta < 0) return 'down';
+  return 'unchanged';
+}
+
+/**
+ * T-Y11 Task B-2: `exam-competition-rate-yoy.ts`（T-N1-4）と同じ考え方を、既に
+ * `SchoolHistoryByDepartment`として持っているこの学校固有のデータだけで計算する
+ * （県全体のPrefectureCompetitionRateFileを改めて読み込む必要が無いため、ページ描画時の
+ * 計算量が学校単位で閉じる）。`groupSchoolHistoryByDepartment`が年度降順を保証しているため
+ * `entries[0]`が最新・`entries[1]`が前年度。年度が1つしか無い（比較不能）場合はnullを返す
+ * （推測で埋めない・Y-0憲法）。
+ */
+export function computeSchoolHistoryYoy(group: SchoolHistoryByDepartment): SchoolHistoryYoy | null {
+  if (group.entries.length < 2) return null;
+  const [current, previous] = group.entries;
+  const rateDelta = Math.round((current.rate - previous.rate) * 100) / 100;
+  return {
+    currentFiscalYear: current.fiscalYear,
+    previousFiscalYear: previous.fiscalYear,
+    currentRate: current.rate,
+    previousRate: previous.rate,
+    rateDelta,
+    direction: directionOf(rateDelta),
+  };
 }
 
 export interface NearbySchool {
