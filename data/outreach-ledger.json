@@ -1,6 +1,6 @@
 {
   "_comment": "AA-1追撃システムの送信台帳。Gmail MCP(gmail_search q=\"in:sent\" / 受信箱の自動受付メール)で実測した内容を手動で反映する運用(scripts/weekly-kpi-report.tsの手動入力パターンと同じ)。統計処理はsrc/lib/outreach-ledger.tsの純関数が担当。1エントリ=1組織。フォーム送信のみでGmail送信履歴に残らないもの(コエテコ/スタディサプリ等)は次回以降のバックフィル対象・現時点では未収録(捏造回避のため確証のある送信のみ収録)。Λ-3(2026-07-29): reviewTierはエントリ個別のレビュー区分上書き(未指定ならb2b-saasレーンの既定値full-review)。今回は組織名から都道府県単位の小規模な模試団体と明確に判別できたもの(かとうもし/新潟県統一模試会/愛媛県模試/新教研/学悠出版)のみ保守的にspot-checkへ下げた。出版社・塾チェーン等の規模が名前だけでは断定できないものはfull-reviewのまま据え置いている(判断に迷う場合はより厳格な側=full-reviewを既定とする方針)。",
-  "asOf": "2026-08-27",
+  "asOf": "2026-08-31",
   "entries": [
     {
       "id": "benesse-kato",
@@ -2074,9 +2074,10 @@
       "sourceTaskId": "T-C1",
       "sentDate": "2026-08-24",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "1a02f2a2db0cd5d8",
-      "note": "2026-08-24 23:15頃送信済み(👤による下書き一括処理)。in:sent実測で突合しoutreach-queue.jsonから移設(loopが送信したものではない)。"
+      "note": "2026-08-24 23:15頃送信済み(👤による下書き一括処理)。in:sent実測で突合しoutreach-queue.jsonから移設(loopが送信したものではない)。 | 2026-08-31 AA-1追撃下書き作成済み(Gmail下書き・未送信・送信は👤)。CC BY 4.0データセット言及の追加価値型文面。",
+      "lastContactDate": "2026-08-31"
     },
     {
       "id": "lane7-utsunomiya-u-education",
@@ -2085,9 +2086,10 @@
       "sourceTaskId": "T-C1",
       "sentDate": "2026-08-24",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "1a02f2a3c6d518d1",
-      "note": "2026-08-24 23:15頃送信済み(👤による下書き一括処理)。in:sent実測で突合しoutreach-queue.jsonから移設(loopが送信したものではない)。"
+      "note": "2026-08-24 23:15頃送信済み(👤による下書き一括処理)。in:sent実測で突合しoutreach-queue.jsonから移設(loopが送信したものではない)。 | 2026-08-31 AA-1追撃下書き作成済み(Gmail下書き・未送信・送信は👤)。CC BY 4.0データセット言及の追加価値型文面。",
+      "lastContactDate": "2026-08-31"
     },
     {
       "id": "lane7-kanazawa-u-education",
@@ -2096,9 +2098,10 @@
       "sourceTaskId": "T-C1",
       "sentDate": "2026-08-24",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "1a02f2a4d5d6d263",
-      "note": "2026-08-24 23:15頃送信済み(👤による下書き一括処理)。in:sent実測で突合しoutreach-queue.jsonから移設(loopが送信したものではない)。"
+      "note": "2026-08-24 23:15頃送信済み(👤による下書き一括処理)。in:sent実測で突合しoutreach-queue.jsonから移設(loopが送信したものではない)。 | 2026-08-31 AA-1追撃下書き作成済み(Gmail下書き・未送信・送信は👤)。CC BY 4.0データセット言及の追加価値型文面。",
+      "lastContactDate": "2026-08-31"
     },
     {
       "id": "lane7-fukui-u-education",
@@ -2107,9 +2110,10 @@
       "sourceTaskId": "T-C1",
       "sentDate": "2026-08-24",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "1a02f2a5a44df2ec",
-      "note": "2026-08-24 23:15頃送信済み(👤による下書き一括処理)。in:sent実測で突合しoutreach-queue.jsonから移設(loopが送信したものではない)。"
+      "note": "2026-08-24 23:15頃送信済み(👤による下書き一括処理)。in:sent実測で突合しoutreach-queue.jsonから移設(loopが送信したものではない)。 | 2026-08-31 AA-1追撃下書き作成済み(Gmail下書き・未送信・送信は👤)。CC BY 4.0データセット言及の追加価値型文面。",
+      "lastContactDate": "2026-08-31"
     },
     {
       "id": "lane7-tottori-u-education",
@@ -2118,9 +2122,10 @@
       "sourceTaskId": "T-C1",
       "sentDate": "2026-08-24",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "1a02f2a69eaa4546",
-      "note": "2026-08-24 23:15頃送信済み(👤による下書き一括処理)。in:sent実測で突合しoutreach-queue.jsonから移設(loopが送信したものではない)。"
+      "note": "2026-08-24 23:15頃送信済み(👤による下書き一括処理)。in:sent実測で突合しoutreach-queue.jsonから移設(loopが送信したものではない)。 | 2026-08-31 AA-1追撃下書き作成済み(Gmail下書き・未送信・送信は👤)。CC BY 4.0データセット言及の追加価値型文面。",
+      "lastContactDate": "2026-08-31"
     },
     {
       "id": "lane7-ehime-u-education",
@@ -2129,9 +2134,10 @@
       "sourceTaskId": "T-C1",
       "sentDate": "2026-08-24",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "1a02f2ae5c38e018",
-      "note": "2026-08-24 23:15頃送信済み(👤による下書き一括処理)。in:sent実測で突合しoutreach-queue.jsonから移設(loopが送信したものではない)。"
+      "note": "2026-08-24 23:15頃送信済み(👤による下書き一括処理)。in:sent実測で突合しoutreach-queue.jsonから移設(loopが送信したものではない)。 | 2026-08-31 AA-1追撃下書き作成済み(Gmail下書き・未送信・送信は👤)。CC BY 4.0データセット言及の追加価値型文面。",
+      "lastContactDate": "2026-08-31"
     },
     {
       "id": "lane7-kumamoto-u-education",
@@ -2140,9 +2146,10 @@
       "sourceTaskId": "T-C1",
       "sentDate": "2026-08-24",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "1a02f2af3535dc14",
-      "note": "2026-08-24 23:15頃送信済み(👤による下書き一括処理)。in:sent実測で突合しoutreach-queue.jsonから移設(loopが送信したものではない)。"
+      "note": "2026-08-24 23:15頃送信済み(👤による下書き一括処理)。in:sent実測で突合しoutreach-queue.jsonから移設(loopが送信したものではない)。 | 2026-08-31 AA-1追撃下書き作成済み(Gmail下書き・未送信・送信は👤)。CC BY 4.0データセット言及の追加価値型文面。",
+      "lastContactDate": "2026-08-31"
     },
     {
       "id": "lane7-oita-u-education",
@@ -2151,9 +2158,10 @@
       "sourceTaskId": "T-C1",
       "sentDate": "2026-08-24",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "1a02f2b026b0c60e",
-      "note": "2026-08-24 23:15頃送信済み(👤による下書き一括処理)。in:sent実測で突合しoutreach-queue.jsonから移設(loopが送信したものではない)。"
+      "note": "2026-08-24 23:15頃送信済み(👤による下書き一括処理)。in:sent実測で突合しoutreach-queue.jsonから移設(loopが送信したものではない)。 | 2026-08-31 AA-1追撃下書き作成済み(Gmail下書き・未送信・送信は👤)。CC BY 4.0データセット言及の追加価値型文面。",
+      "lastContactDate": "2026-08-31"
     },
     {
       "id": "lane7-miyazaki-u-education",
@@ -2162,9 +2170,10 @@
       "sourceTaskId": "T-C1",
       "sentDate": "2026-08-24",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "1a02f2b10e899c3d",
-      "note": "2026-08-24 23:15頃送信済み(👤による下書き一括処理)。in:sent実測で突合しoutreach-queue.jsonから移設(loopが送信したものではない)。"
+      "note": "2026-08-24 23:15頃送信済み(👤による下書き一括処理)。in:sent実測で突合しoutreach-queue.jsonから移設(loopが送信したものではない)。 | 2026-08-31 AA-1追撃下書き作成済み(Gmail下書き・未送信・送信は👤)。CC BY 4.0データセット言及の追加価値型文面。",
+      "lastContactDate": "2026-08-31"
     },
     {
       "id": "lane7-tsukuba-tech-u",
@@ -2173,9 +2182,10 @@
       "sourceTaskId": "T-C1",
       "sentDate": "2026-08-24",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "1a02f2b1f4b1dbfc",
-      "note": "2026-08-24 23:15頃送信済み(👤による下書き一括処理)。in:sent実測で突合しoutreach-queue.jsonから移設(loopが送信したものではない)。"
+      "note": "2026-08-24 23:15頃送信済み(👤による下書き一括処理)。in:sent実測で突合しoutreach-queue.jsonから移設(loopが送信したものではない)。 | 2026-08-31 AA-1追撃下書き作成済み(Gmail下書き・未送信・送信は👤)。CC BY 4.0データセット言及の追加価値型文面。",
+      "lastContactDate": "2026-08-31"
     },
     {
       "id": "lane7-geidai-u",
@@ -2184,9 +2194,10 @@
       "sourceTaskId": "T-C1",
       "sentDate": "2026-08-24",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "1a02f2b9d73a354e",
-      "note": "2026-08-24 23:15頃送信済み(👤による下書き一括処理)。in:sent実測で突合しoutreach-queue.jsonから移設(loopが送信したものではない)。"
+      "note": "2026-08-24 23:15頃送信済み(👤による下書き一括処理)。in:sent実測で突合しoutreach-queue.jsonから移設(loopが送信したものではない)。 | 2026-08-31 AA-1追撃下書き作成済み(Gmail下書き・未送信・送信は👤)。CC BY 4.0データセット言及の追加価値型文面。",
+      "lastContactDate": "2026-08-31"
     },
     {
       "id": "lane7-nara-wu-u",
@@ -2195,9 +2206,10 @@
       "sourceTaskId": "T-C1",
       "sentDate": "2026-08-24",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "1a02f2bab32c76f9",
-      "note": "2026-08-24 23:15頃送信済み(👤による下書き一括処理)。in:sent実測で突合しoutreach-queue.jsonから移設(loopが送信したものではない)。"
+      "note": "2026-08-24 23:15頃送信済み(👤による下書き一括処理)。in:sent実測で突合しoutreach-queue.jsonから移設(loopが送信したものではない)。 | 2026-08-31 AA-1追撃下書き作成済み(Gmail下書き・未送信・送信は👤)。CC BY 4.0データセット言及の追加価値型文面。",
+      "lastContactDate": "2026-08-31"
     },
     {
       "id": "lane7-saga-u",
@@ -2206,9 +2218,10 @@
       "sourceTaskId": "T-C1",
       "sentDate": "2026-08-24",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "1a02f2bbba75c683",
-      "note": "2026-08-24 23:15頃送信済み(👤による下書き一括処理)。in:sent実測で突合しoutreach-queue.jsonから移設(loopが送信したものではない)。"
+      "note": "2026-08-24 23:15頃送信済み(👤による下書き一括処理)。in:sent実測で突合しoutreach-queue.jsonから移設(loopが送信したものではない)。 | 2026-08-31 AA-1追撃下書き作成済み(Gmail下書き・未送信・送信は👤)。CC BY 4.0データセット言及の追加価値型文面。",
+      "lastContactDate": "2026-08-31"
     },
     {
       "id": "lane7-hirosaki-u-education",
@@ -2217,9 +2230,10 @@
       "sourceTaskId": "T-C1",
       "sentDate": "2026-08-24",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "1a02f2bc9c74a0dc",
-      "note": "2026-08-24 23:15頃送信済み(👤による下書き一括処理)。in:sent実測で突合しoutreach-queue.jsonから移設(loopが送信したものではない)。"
+      "note": "2026-08-24 23:15頃送信済み(👤による下書き一括処理)。in:sent実測で突合しoutreach-queue.jsonから移設(loopが送信したものではない)。 | 2026-08-31 AA-1追撃下書き作成済み(Gmail下書き・未送信・送信は👤)。CC BY 4.0データセット言及の追加価値型文面。",
+      "lastContactDate": "2026-08-31"
     },
     {
       "id": "lane7-gifu-u-education",
@@ -2228,9 +2242,10 @@
       "sourceTaskId": "T-C1",
       "sentDate": "2026-08-24",
       "status": "awaiting",
-      "followupCount": 0,
+      "followupCount": 1,
       "threadId": "1a02f2bd53bd3301",
-      "note": "2026-08-24 23:15頃送信済み(👤による下書き一括処理)。in:sent実測で突合しoutreach-queue.jsonから移設(loopが送信したものではない)。"
+      "note": "2026-08-24 23:15頃送信済み(👤による下書き一括処理)。in:sent実測で突合しoutreach-queue.jsonから移設(loopが送信したものではない)。 | 2026-08-31 AA-1追撃下書き作成済み(Gmail下書き・未送信・送信は👤)。CC BY 4.0データセット言及の追加価値型文面。",
+      "lastContactDate": "2026-08-31"
     },
     {
       "id": "OL-0813",
