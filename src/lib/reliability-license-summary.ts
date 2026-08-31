@@ -15,6 +15,7 @@ const PUBLIC_LICENSE_SUMMARY: Record<string, { text: string; backlink: boolean }
   okinawa: { text: '応募状況データの転載、および県教育委員会ウェブサイトへのリンク設定の両方を許諾。', backlink: true },
   ibaraki: { text: '応募状況データの出典明記のうえでの掲載を許諾。', backlink: false },
   akita: { text: '応募状況データの出典明記のうえでの掲載を許諾。当課公式サイトへの参照掲載は不可。', backlink: false },
+  ishikawa: { text: '応募状況データの出典明記のうえでの掲載を許諾。当課ウェブサイトへのリンク掲載は不可。', backlink: false },
 };
 
 export interface LicensedPrefectureSummary {

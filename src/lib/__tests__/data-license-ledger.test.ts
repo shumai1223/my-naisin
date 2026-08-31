@@ -63,9 +63,15 @@ describe('DATA_LICENSE_LEDGER（T-S13A A-1・47県利用条件台帳）', () => 
     expect(DATA_LICENSE_LEDGER.akita.verifiedAt).toBe('2026-08-26');
   });
 
-  test('redistributableOkPrefectures()は現時点でakita/gifu/ibaraki/mie/okinawaの5県を返す（kill_criteria: 10県未満のため商品化はまだ未達）', () => {
+  test('ishikawa: 石川県教育委員会学校指導課の追撃回答(2026-08-31)により"ok"（応募状況データの掲載を明示的に許諾）', () => {
+    expect(DATA_LICENSE_LEDGER.ishikawa.redistribution).toBe('ok');
+    expect(DATA_LICENSE_LEDGER.ishikawa.evidence).toContain('該当PDFのリンクを掲載する形でご対応ください');
+    expect(DATA_LICENSE_LEDGER.ishikawa.verifiedAt).toBe('2026-08-31');
+  });
+
+  test('redistributableOkPrefectures()は現時点でakita/gifu/ibaraki/ishikawa/mie/okinawaの6県を返す（kill_criteria: 10県未満のため商品化はまだ未達）', () => {
     // ⚠️このテストはA-1進捗を記録するリグレッションガード。次のセッションが県を
     // 追加調査してokが増えたら、この配列を実態に合わせて更新すること（減ることは無いはず）。
-    expect(redistributableOkPrefectures().sort()).toEqual(['akita', 'gifu', 'ibaraki', 'mie', 'okinawa']);
+    expect(redistributableOkPrefectures().sort()).toEqual(['akita', 'gifu', 'ibaraki', 'ishikawa', 'mie', 'okinawa']);
   });
 });
