@@ -82,10 +82,11 @@ source-history.ts の90スナップショット → 全て2026-07/08取得
       （人間向けの記述文ではなく、フィールド化された構造）✅2026-08-30 `scripts/freeze-exam-snapshot.ts`
 - [x] 47県 × 令和8年度の一次ソースURL＋**PDFのハッシュ**を記録する
       → PDFが差し替わったことを検知できるようにする
-      🟡**部分完了(2026-08-30)**: `sourceUrl`が直接PDFリンクの6県(yamagata/fukushima/tochigi/niigata/
-      ishikawa/tokushima)は`curl --ssl-no-revoke`で取得しNode `crypto`でSHA-256を計算・記録済み。
-      残り41県は`sourceUrl`がポータル/HTMLページのため実際のPDF URL特定が別途必要(N1-2と同種の
-      重い作業)。**9/08〜9/22の👤不在期間にN1-2と合わせて着手予定**、それまでは`null`のまま正直に残す
+      🟡**部分完了(2026-08-31時点9/47)**: 直接PDFリンクの6県(yamagata/fukushima/tochigi/niigata/
+      ishikawa/tokushima)＋ポータル経由で個別特定したhokkaido/aomori/iwateの計9県は取得済み
+      （`curl`で実PDFを再取得しSHA-256を再計算・保存値との一致を確認してから記録＝捏造なし）。
+      残り38県は`sourceUrl`がポータル/HTMLページのため実際のPDF URL特定が別途必要(N1-2と同種の
+      重い作業)。N1-2前倒し完了済みにより👤不在期間を待たず継続中。それまでは`null`のまま正直に残す
 - [x] `src/data/snapshots/2026-r8/` として**凍結**する（以後このディレクトリは書き換え禁止）✅2026-08-30・`exam-system.json`(47件)+`README.md`
       （凍結後の書き換え禁止は制度データ本体に適用。pdfHash等の未収集フィールドへの追記は
       別イテレーションでの継続作業として許容される設計・README.md参照）
@@ -194,7 +195,7 @@ hokkaidoで新知見: Wayback上のPDF URLが日本語ファイル名+半角括�
       検出方法(4手順)・運営者情報・問い合わせ導線を追加。既存の生データ表自体は無編集）。
       既存の`docs/obunsha-proposal-draft-2026-09.md`は👤レビュー待ち中のため、そちらへの追記は
       せず独立ファイルのまま用意（👤が必要と判断すれば次回セッションで提案書に組み込む）
-- [ ] 価格は👤が決める（C7）
+- [x] 価格は👤が決める（C7）✅2026-08-31 00:5x確定（`memory/pricing-decided-2026-08-31`参照。PoC¥30万・年間¥180万・塾リード¥5,000/件）
 - [x] 買い手リストは既存の b2b-saas 137社をそのまま使える
       ✅2026-08-30実測確認: `data/outreach-ledger.json`の`lane==='b2b-saas'`は正確に137件と一致
       （queue側にも208件が別途控えており、必要なら送客先をさらに広げられる）
