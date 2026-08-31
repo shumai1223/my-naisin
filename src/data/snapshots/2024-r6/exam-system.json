@@ -1,0 +1,47 @@
+{
+  "meta": {
+    "fiscalYearLabel": "令和6年度(2024年度)",
+    "status": "collecting",
+    "startedAt": "2026-09-01",
+    "completedAt": null,
+    "collectionMethod": "T-Y11 Task C(ops/tasks/T-Y11-winter-bairitsu-pipeline.md)。N1-2(2025-r7)と同じ形式・同じ収集方針。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。",
+    "totalPrefectures": 47,
+    "collectedCount": 1,
+    "unavailable": []
+  },
+  "entries": [
+    {
+      "code": "osaka",
+      "name": "大阪府",
+      "region": "近畿",
+      "fiscalYear": "2024",
+      "targetGrades": [1, 2, 3],
+      "gradeMultipliers": { "1": 2, "2": 2, "3": 6 },
+      "coreMultiplier": 1,
+      "practicalMultiplier": 1,
+      "maxScore": 450,
+      "simplifiedCalc": false,
+      "actualMaxScore": null,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": {
+        "totalMaxScore": 900,
+        "examMaxScore": 450,
+        "defaultRatio": { "naishin": 50, "exam": 50 },
+        "calcType": "osaka",
+        "naishinMultiplier": 1,
+        "kValue": null,
+        "sValueCoefficients": null,
+        "osakaTypeCount": 5,
+        "hasTokyoSettings": false,
+        "hasKanagawaSettings": false
+      },
+      "sourceUrl": "https://www.pref.osaka.lg.jp/documents/33542/21_r6_ippan.pdf",
+      "sourceUrl2": "https://www.pref.osaka.lg.jp/o180040/kotogakko/gakuji-g3/r06_jisshiyoko.html",
+      "sourceTitle": "大阪府教育委員会「令和6年度大阪府公立高等学校入学者選抜実施要項」第7 一般入学者選抜",
+      "lastVerified": "2026-09-01",
+      "pdfHash": null,
+      "diffFromCurrentYear": "変更なし(2026-09-01に実施要項「第7 一般入学者選抜」PDF(21_r6_ippan.pdf)p.55「3 入学者の選抜」(3)イ・ウを直接確認。調査書中の各教科の評定を合計し第3学年を6倍・第1,2学年を2倍(450点満点)、学力検査450点満点との比率をI〜Vの5タイプ(1.4:0.6〜0.6:1.4)から各校が選択する方式。令和7年度分(2025-r7)・令和8年度分(prefectures.ts)のgradeMultipliers{1:2,2:2,3:6}/maxScore=450/osakaTypeCount=5と完全一致)"
+    }
+  ]
+}
