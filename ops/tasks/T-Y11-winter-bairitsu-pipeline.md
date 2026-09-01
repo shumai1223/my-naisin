@@ -197,12 +197,19 @@ R6（令和6年度）: 45/47県 収録済み（未収録は oita・saga のみ�
 
 ---
 
-# C 制度メタデータの多年度化（令和6年度・令和5年度） — 🟡2026-09-01着手(27/47・★制度変更1件検出)
+# C 制度メタデータの多年度化（令和6年度・令和5年度） — 🟡2026-09-01着手(28/47・★制度変更1件検出)
 
 **A・Bが終わってから。優先度が低い理由: 提案書（9/6）に間に合わないため今期の収益への寄与が間接的。**
 
 - [~] N1-2 と同じ形で `src/data/snapshots/2024-r6/` `2023-r5/` を作る →
-      **2024-r6のみ着手・27件完了(osaka/chiba/tochigi/ehime/kochi/kagoshima/aomori/iwate/tokushima/hiroshima/okayama/yamagata/nagano/shizuoka/ibaraki/shiga/kanagawa/aichi/fukuoka/saitama/hyogo/nara/gifu/mie/kyoto/wakayama/tottori)**。
+      **2024-r6のみ着手・28件完了(osaka/chiba/tochigi/ehime/kochi/kagoshima/aomori/iwate/tokushima/hiroshima/okayama/yamagata/nagano/shizuoka/ibaraki/shiga/kanagawa/aichi/fukuoka/saitama/hyogo/nara/gifu/mie/kyoto/wakayama/tottori/fukushima)**。
+      **fukushimaを追加(28/47)**: WebFetch要約が実在しないドメイン(fukushima.fcs.ed.jp)を提示する
+      事故が発生したが、curlで実HTTPステータスを裏取りしたところ404で誤りと判明、正しい
+      pref.fukushima.lg.jp配下のattachment ID(597118)で200を確認してから取得(86頁)。
+      「調査書の各教科の学習の記録の評定は9教科の第1〜3学年合計に音美保技4教科の合計をさらに
+      加えて195点満点」を確認、R7エントリと完全一致(変更なし)。**⚠️WebFetch要約の実在しない
+      ドメイン提示は[[fable5-loop-protocol]]既知の罠(実在しないメールアドレス提示)と同型で
+      対象がドメイン名にも拡張される事例として記録**。
       **tottoriを追加(27/47)**: R6のsourceUrlはアイテムID(1370457)がR7専用でWayback CDXにも
       R6期の記録なし。関連資料一覧ページ(item/1328817)をWebSearchで発見しそこから
       「houshintohonbun.pdf」(選抜方針及び実施要項本文・R7とは全く別のファイル名)を特定・取得

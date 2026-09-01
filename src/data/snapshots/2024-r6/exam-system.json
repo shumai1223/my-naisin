@@ -6,7 +6,7 @@
     "completedAt": null,
     "collectionMethod": "T-Y11 Task C(ops/tasks/T-Y11-winter-bairitsu-pipeline.md)。N1-2(2025-r7)と同じ形式・同じ収集方針。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。",
     "totalPrefectures": 47,
-    "collectedCount": 27,
+    "collectedCount": 28,
     "unavailable": []
   },
   "entries": [
@@ -952,6 +952,36 @@
       "lastVerified": "2026-09-01",
       "pdfHash": null,
       "diffFromCurrentYear": "変更なし(2026-09-01にWebSearchでR6関連資料一覧ページ(item/1328817)を発見・本体PDF(houshintohonbun.pdf・R7とは別のファイル名パターン)を直接取得(24頁・pdfのpage1が印刷頁4に対応しR7の引用ページ番号とそのまま一致)。p.5(PDF内2頁目)「(c)学力検査の合計得点と調査書の合計評定との比率は、8対2から2対8までの範囲内とする」エ選抜方法「調査書の合計評定は、第3学年の各教科のうち、学力検査を実施する教科の評定に対し、学力検査を実施しない教科の評定を2倍するものとする」を確認、R7エントリと一言一句完全一致(5教科×5段階+4教科×5段階×2倍=25+40=65点満点)。令和7・8年度分と完全一致(変更なし)。"
+    },
+    {
+      "code": "fukushima",
+      "name": "福島県",
+      "region": "北海道・東北",
+      "fiscalYear": "2024",
+      "targetGrades": [
+        1,
+        2,
+        3
+      ],
+      "gradeMultipliers": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
+      "coreMultiplier": 1,
+      "practicalMultiplier": 2,
+      "maxScore": 195,
+      "simplifiedCalc": false,
+      "actualMaxScore": null,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": null,
+      "sourceUrl": "https://www.pref.fukushima.lg.jp/uploaded/attachment/597118.pdf",
+      "sourceUrl2": "https://www.pref.fukushima.lg.jp/site/edu/r6koukounyushi.html",
+      "sourceTitle": "福島県教育委員会「令和6年度福島県立高等学校入学者選抜実施要綱」第2 前期選抜 一般選抜「調査書」",
+      "lastVerified": "2026-09-01",
+      "pdfHash": null,
+      "diffFromCurrentYear": "変更なし(2026-09-01にWebSearchでR6要綱ページ(r6koukounyushi.html)を発見。WebFetch要約が誤ったドメイン(fukushima.fcs.ed.jp)を提示したため実404を確認し、正しいpref.fukushima.lg.jp配下のattachment ID(597118・R7は653878)で200を確認してから取得(86頁)。pdftotextで「195」のヒット行からPDFページを特定しPyMuPDFでp.12(印刷頁10)をビジョン解析、「調査書の『各教科の学習の記録』の評定については、国語、社会、数学、理科、外国語(英語)、音楽、美術、保健体育、技術・家庭の第1学年から第3学年の評定の合計に音楽、美術、保健体育、技術・家庭の第1学年から第3学年の評定の合計をさらに加えて、195点満点とする」を確認、R7エントリと一言一句完全一致。令和7・8年度分と完全一致(変更なし)。⚠️WebFetch要約が実在しないドメインを提示する事故を実際に確認したため、必ずcurlで実HTTPステータス裏取りしてから使うこと([[fable5-loop-protocol]]既存の類似の罠と同型)。"
     }
   ]
 }
