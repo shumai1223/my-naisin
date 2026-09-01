@@ -6,7 +6,7 @@
     "completedAt": null,
     "collectionMethod": "T-Y11 Task C(ops/tasks/T-Y11-winter-bairitsu-pipeline.md)。N1-2(2025-r7)と同じ形式・同じ収集方針。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。",
     "totalPrefectures": 47,
-    "collectedCount": 37,
+    "collectedCount": 38,
     "unavailable": []
   },
   "entries": [
@@ -1291,6 +1291,36 @@
       "lastVerified": "2026-09-01",
       "pdfHash": null,
       "diffFromCurrentYear": "変更なし(caveatあり)(2026-09-01にWebSearchで令和6年度実施ページ(1029395)を発見・本体PDF(07yoko_h3.pdf)を直接取得(14頁・R7エントリが個別校版だったのに対しこちらは県教委本体の一次ソース)。(7)選抜の方法ウ「調査書(第4号様式)と学力検査等の成績との比重は、原則として5対5とする」、(8)学力検査イ「学力検査を実施する教科の検査時間は、いずれも50分とし、配点は各60点とする」を確認(5教科×60点=300点満点でreverseCalc.examMaxScoreと一致)。ただし県教委本体の実施要項(14頁)は選抜方法・学力検査の総則のみを定め、調査書の生点数換算表(9教科×5段階×3学年・実技4教科1.5倍)自体は掲載されておらず、R7同様この部分は個別校の募集要項や第三者塾サイトでの確認が必要だった(WebSearch経由で複数の第三者サイトおよび自サイトmy-naishin.com/okinawa/naishinが『1学年55点満点(5教科×5+実技4教科×5×1.5)×3学年=165点満点』と一致して説明)。これは令和8年度分(prefectures.ts)のgradeMultipliers{1:1,2:1,3:1}・maxScore=165・practicalMultiplier=1.5と完全に一致する。制度変更を示す記載も見当たらないため変更なしと判断した(**caveatあり**・R7エントリと同型)。"
+    },
+    {
+      "code": "hokkaido",
+      "name": "北海道",
+      "region": "北海道・東北",
+      "fiscalYear": "2024",
+      "targetGrades": [
+        1,
+        2,
+        3
+      ],
+      "gradeMultipliers": {
+        "1": 2,
+        "2": 2,
+        "3": 3
+      },
+      "coreMultiplier": 1,
+      "practicalMultiplier": 1,
+      "maxScore": 315,
+      "simplifiedCalc": false,
+      "actualMaxScore": null,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": null,
+      "sourceUrl": "http://web.archive.org/web/20241210104417/https://www.dokyoi.pref.hokkaido.lg.jp/fs/9/2/0/4/8/7/5/_/p8-29_R6_%E7%AC%AC2%E4%B8%80%E8%88%AC%E5%AE%9F%E6%96%BD%E8%A6%81%E9%A0%85z.pdf",
+      "sourceUrl2": "http://web.archive.org/web/20240523025729/https://www.dokyoi.pref.hokkaido.lg.jp/hk/gks/79624.html",
+      "sourceTitle": "北海道教育委員会「令和6年度(2024年度)道立高等学校一般入学者選抜実施要項」14入学者の選抜(1)ウ(ア)留意事項1(現行ページは令和8年度分に更新済みのためWayback Machine 2024-12-10時点のスナップショットで確認)",
+      "lastVerified": "2026-09-01",
+      "pdfHash": null,
+      "diffFromCurrentYear": "maxScoreは変更なしと直接検証(2026-09-01にR6要項ページ(79624)のWaybackスナップショットからPDFリンク一覧をgrepし、複数分割ファイルの中からR7と同じ位置づけの「第2一般実施要項」(p8-29)を特定・取得。p.23(PDF頁16)の相関表で調査書点の最高段階が「A: 315〜296」と明記されているのを確認、学力検査は各教科100点×5教科=500点満点(0.63を乗じ315点換算)も確認。令和8年度分(prefectures.ts)のmaxScore=315と一致。ただしR7エントリと同じく各学年の重み付け(2:2:3)の内訳自体は本要項本体になく様式3(個人調査書)側に定義されているため未確認(caveat継承)。315という上限値の一致自体が重み付け構造が変わっていないことの強い状況証拠と判断(変更なし)"
     }
   ]
 }

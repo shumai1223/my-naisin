@@ -197,12 +197,17 @@ R6（令和6年度）: 45/47県 収録済み（未収録は oita・saga のみ�
 
 ---
 
-# C 制度メタデータの多年度化（令和6年度・令和5年度） — 🟡2026-09-01着手(37/47・★制度変更1件検出)
+# C 制度メタデータの多年度化（令和6年度・令和5年度） — 🟡2026-09-01着手(38/47・★制度変更1件検出)
 
 **A・Bが終わってから。優先度が低い理由: 提案書（9/6）に間に合わないため今期の収益への寄与が間接的。**
 
 - [~] N1-2 と同じ形で `src/data/snapshots/2024-r6/` `2023-r5/` を作る →
-      **2024-r6のみ着手・37件完了(osaka/chiba/tochigi/ehime/kochi/kagoshima/aomori/iwate/tokushima/hiroshima/okayama/yamagata/nagano/shizuoka/ibaraki/shiga/kanagawa/aichi/fukuoka/saitama/hyogo/nara/gifu/mie/kyoto/wakayama/tottori/fukushima/akita/gunma/niigata/toyama/fukui/yamanashi/kumamoto/miyazaki/okinawa)**。
+      **2024-r6のみ着手・38件完了(osaka/chiba/tochigi/ehime/kochi/kagoshima/aomori/iwate/tokushima/hiroshima/okayama/yamagata/nagano/shizuoka/ibaraki/shiga/kanagawa/aichi/fukuoka/saitama/hyogo/nara/gifu/mie/kyoto/wakayama/tottori/fukushima/akita/gunma/niigata/toyama/fukui/yamanashi/kumamoto/miyazaki/okinawa/hokkaido)**。
+      **hokkaidoを追加(38/47)**: R6要項ページ(79624)のWaybackスナップショットからPDFリンク
+      一覧をgrepし、複数分割ファイルの中から「第2一般実施要項」(p8-29)を特定・取得(22頁)。
+      p.23の相関表で調査書点の最高段階「A: 315〜296」を確認、R7エントリと完全一致
+      (maxScore=315・変更なし)。R7と同じく学年別重み付け(2:2:3)の内訳は様式3側にあり
+      本要項本体では未確認のcaveatを継承。
       **⚠️2026-09-01 21:22 👤直接コミット(dc044ca)でT-Y11B(47県倍率取り込みパーサ・着手2026-09-08)
       が新主食として追加された。文書内に「Task Cは継続してよい」と明記されているため本タスクは
       継続中**。
