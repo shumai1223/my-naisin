@@ -197,12 +197,18 @@ R6（令和6年度）: 45/47県 収録済み（未収録は oita・saga のみ�
 
 ---
 
-# C 制度メタデータの多年度化（令和6年度・令和5年度） — 🟡2026-09-01着手(39/47・★制度変更1件検出)
+# C 制度メタデータの多年度化（令和6年度・令和5年度） — 🟡2026-09-01着手(40/47・★制度変更1件検出)
 
 **A・Bが終わってから。優先度が低い理由: 提案書（9/6）に間に合わないため今期の収益への寄与が間接的。**
 
 - [~] N1-2 と同じ形で `src/data/snapshots/2024-r6/` `2023-r5/` を作る →
-      **2024-r6のみ着手・39件完了(osaka/chiba/tochigi/ehime/kochi/kagoshima/aomori/iwate/tokushima/hiroshima/okayama/yamagata/nagano/shizuoka/ibaraki/shiga/kanagawa/aichi/fukuoka/saitama/hyogo/nara/gifu/mie/kyoto/wakayama/tottori/fukushima/akita/gunma/niigata/toyama/fukui/yamanashi/kumamoto/miyazaki/okinawa/hokkaido/miyagi)**。
+      **2024-r6のみ着手・40件完了(osaka/chiba/tochigi/ehime/kochi/kagoshima/aomori/iwate/tokushima/hiroshima/okayama/yamagata/nagano/shizuoka/ibaraki/shiga/kanagawa/aichi/fukuoka/saitama/hyogo/nara/gifu/mie/kyoto/wakayama/tottori/fukushima/akita/gunma/niigata/toyama/fukui/yamanashi/kumamoto/miyazaki/okinawa/hokkaido/miyagi/shimane)**。
+      **shimaneを追加(40/47)**: WebSearchでR6実施要綱本体(現行サイトに掲載されたまま現存・
+      94頁)を直接発見。R7エントリはR7年度分自体が404でR4実施要綱経由の間接照合だったのに
+      対し、今回はR6年度の実施要綱そのものを直接確認できた(R7より一次性が高い)。(2)選抜の
+      具体的方法ア(ｵ)1)の算出方法表で「学習の記録 素点180→評点51」「特別活動の記録
+      素点9→評点9」「学力検査 素点250→評点40」を確認、R7エントリと完全一致
+      (180点=9教科×5段階×(1+1+2)・変更なし)。
       **miyagiを追加(39/47)**: CDX依存で保留していたがWebSearchで「令和6年度入試制度説明資料」
       を発見・Wayback経由で取得(24頁)。p.2共通選抜で調査書195点満点(5教科等倍+実技4教科×2倍)
       を確認、R7エントリと完全一致(変更なし)。**保留リストのCDX依存県も一度WebSearchで
