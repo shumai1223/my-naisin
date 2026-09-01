@@ -197,12 +197,19 @@ R6（令和6年度）: 45/47県 収録済み（未収録は oita・saga のみ�
 
 ---
 
-# C 制度メタデータの多年度化（令和6年度・令和5年度） — 🟡2026-09-01着手(26/47・★制度変更1件検出)
+# C 制度メタデータの多年度化（令和6年度・令和5年度） — 🟡2026-09-01着手(27/47・★制度変更1件検出)
 
 **A・Bが終わってから。優先度が低い理由: 提案書（9/6）に間に合わないため今期の収益への寄与が間接的。**
 
 - [~] N1-2 と同じ形で `src/data/snapshots/2024-r6/` `2023-r5/` を作る →
-      **2024-r6のみ着手・26件完了(osaka/chiba/tochigi/ehime/kochi/kagoshima/aomori/iwate/tokushima/hiroshima/okayama/yamagata/nagano/shizuoka/ibaraki/shiga/kanagawa/aichi/fukuoka/saitama/hyogo/nara/gifu/mie/kyoto/wakayama)**。
+      **2024-r6のみ着手・27件完了(osaka/chiba/tochigi/ehime/kochi/kagoshima/aomori/iwate/tokushima/hiroshima/okayama/yamagata/nagano/shizuoka/ibaraki/shiga/kanagawa/aichi/fukuoka/saitama/hyogo/nara/gifu/mie/kyoto/wakayama/tottori)**。
+      **tottoriを追加(27/47)**: R6のsourceUrlはアイテムID(1370457)がR7専用でWayback CDXにも
+      R6期の記録なし。関連資料一覧ページ(item/1328817)をWebSearchで発見しそこから
+      「houshintohonbun.pdf」(選抜方針及び実施要項本文・R7とは全く別のファイル名)を特定・取得
+      (24頁)。PDF内1頁目が印刷頁4に対応しR7の引用ページ番号とそのままずれなく一致。
+      p.5「(c)学力検査の合計得点と調査書の合計評定との比率は8対2から2対8までの範囲内」
+      「調査書の合計評定は…学力検査を実施しない教科の評定を2倍する」を確認、R7エントリと
+      完全一致(5教科×5+4教科×5×2=65点満点・変更なし)。
       **wakayamaを追加(26/47)**: R6要項ページ(d00214177)をWebSearchで発見・本体PDF
       (R06_1_zennichi_teiji.pdf・R7と同じ命名規則で年度部分のみ相違)を直接取得(29頁)。
       pdftotextで「180」のヒット行からPDFページ番号を特定してPyMuPDFでビジョン解析、
