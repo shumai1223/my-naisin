@@ -197,12 +197,20 @@ R6（令和6年度）: 45/47県 収録済み（未収録は oita・saga のみ�
 
 ---
 
-# C 制度メタデータの多年度化（令和6年度・令和5年度） — 🟡2026-09-01着手(36/47・★制度変更1件検出)
+# C 制度メタデータの多年度化（令和6年度・令和5年度） — 🟡2026-09-01着手(37/47・★制度変更1件検出)
 
 **A・Bが終わってから。優先度が低い理由: 提案書（9/6）に間に合わないため今期の収益への寄与が間接的。**
 
 - [~] N1-2 と同じ形で `src/data/snapshots/2024-r6/` `2023-r5/` を作る →
-      **2024-r6のみ着手・36件完了(osaka/chiba/tochigi/ehime/kochi/kagoshima/aomori/iwate/tokushima/hiroshima/okayama/yamagata/nagano/shizuoka/ibaraki/shiga/kanagawa/aichi/fukuoka/saitama/hyogo/nara/gifu/mie/kyoto/wakayama/tottori/fukushima/akita/gunma/niigata/toyama/fukui/yamanashi/kumamoto/miyazaki)**。
+      **2024-r6のみ着手・37件完了(osaka/chiba/tochigi/ehime/kochi/kagoshima/aomori/iwate/tokushima/hiroshima/okayama/yamagata/nagano/shizuoka/ibaraki/shiga/kanagawa/aichi/fukuoka/saitama/hyogo/nara/gifu/mie/kyoto/wakayama/tottori/fukushima/akita/gunma/niigata/toyama/fukui/yamanashi/kumamoto/miyazaki/okinawa)**。
+      **⚠️2026-09-01 21:22 👤直接コミット(dc044ca)でT-Y11B(47県倍率取り込みパーサ・着手2026-09-08)
+      が新主食として追加された。文書内に「Task Cは継続してよい」と明記されているため本タスクは
+      継続中**。
+      **okinawaを追加(37/47・caveatあり)**: R7エントリは個別校(沖縄工業高)版だったが、今回は
+      県教委本体の令和6年度実施版(07yoko_h3.pdf・14頁)を発見・取得(R7より一次性の高いソース)。
+      (7)選抜の方法ウ「調査書と学力検査等の比重は原則5対5」(8)学力検査イ「配点は各60点」を確認
+      (5教科×60点=300点満点)。ただし県教委本体には調査書の生点数換算表(165点満点の内訳)が
+      掲載されておらず、そこはR7と同じく第三者サイト裏取りのcaveatを維持(変更なし)。
       **miyazakiを追加(36/47・caveatあり)**: R6のindex htmlが現行404だったためWaybackで
       取得しPDFリンク一覧をgrep、本体PDF(4.7MB)を発見・取得(90頁)。この県は章番号の構成が
       複雑(推薦/一般/連携型/帰国等が入り混じった連番)なため、目次を辿らず「10出願書類の

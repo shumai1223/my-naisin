@@ -6,7 +6,7 @@
     "completedAt": null,
     "collectionMethod": "T-Y11 Task C(ops/tasks/T-Y11-winter-bairitsu-pipeline.md)。N1-2(2025-r7)と同じ形式・同じ収集方針。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。",
     "totalPrefectures": 47,
-    "collectedCount": 36,
+    "collectedCount": 37,
     "unavailable": []
   },
   "entries": [
@@ -1247,6 +1247,50 @@
       "lastVerified": "2026-09-01",
       "pdfHash": null,
       "diffFromCurrentYear": "変更なし(caveatあり)(2026-09-01にR6index html自体が現行404のためWaybackで取得、そこからPDFリンク一覧をgrepし本体PDF(4.7MB・R7とは別ドキュメントID)を発見・Wayback経由で取得(90頁)。p.31(印刷頁31・PDF頁35)「(2)調査書(様式2)」イ「学習の記録I」ア第1・第2学年の観点別学習状況及び評定は生徒指導要録に記載されたものを記入する、イ第3学年は令和5年12月末日までの成績によって行う、ウ「学習の記録II」も同様の記載方式を確認——R7エントリと同じく、学年別の傾斜配点や実技科目への倍率など素点の重み付けを示す記載は一切無い(必修教科は各学年とも一律5段階評定)。令和8年度分(prefectures.ts)のgradeMultipliers{1:1,2:1,3:1}・maxScore=135・coreMultiplier=practicalMultiplier=1と矛盾しない。R7エントリと同型のcaveat(135という数値は一次ソースの明示的配点表ではなく『傾斜なし』の消去法に基づく)を維持。制度変更を示す記載も見当たらないため変更なしと判断。"
+    },
+    {
+      "code": "okinawa",
+      "name": "沖縄県",
+      "region": "九州・沖縄",
+      "fiscalYear": "2024",
+      "targetGrades": [
+        1,
+        2,
+        3
+      ],
+      "gradeMultipliers": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
+      "coreMultiplier": 1,
+      "practicalMultiplier": 1.5,
+      "maxScore": 165,
+      "simplifiedCalc": false,
+      "actualMaxScore": null,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": {
+        "totalMaxScore": 465,
+        "examMaxScore": 300,
+        "defaultRatio": {
+          "naishin": 35,
+          "exam": 65
+        },
+        "calcType": "standard",
+        "naishinMultiplier": null,
+        "kValue": null,
+        "sValueCoefficients": null,
+        "osakaTypeCount": null,
+        "hasTokyoSettings": false,
+        "hasKanagawaSettings": false
+      },
+      "sourceUrl": "https://www.pref.okinawa.lg.jp/_res/projects/default_project/_page_/001/029/395/07yoko_h3.pdf",
+      "sourceUrl2": "https://www.pref.okinawa.lg.jp/kyoiku/gakko/1008883/1008887/1029395.html",
+      "sourceTitle": "沖縄県教育委員会「沖縄県立高等学校全日制・定時制課程入学者選抜実施要項」(令和6年度実施)3一般選抜(7)選抜の方法・(8)学力検査",
+      "lastVerified": "2026-09-01",
+      "pdfHash": null,
+      "diffFromCurrentYear": "変更なし(caveatあり)(2026-09-01にWebSearchで令和6年度実施ページ(1029395)を発見・本体PDF(07yoko_h3.pdf)を直接取得(14頁・R7エントリが個別校版だったのに対しこちらは県教委本体の一次ソース)。(7)選抜の方法ウ「調査書(第4号様式)と学力検査等の成績との比重は、原則として5対5とする」、(8)学力検査イ「学力検査を実施する教科の検査時間は、いずれも50分とし、配点は各60点とする」を確認(5教科×60点=300点満点でreverseCalc.examMaxScoreと一致)。ただし県教委本体の実施要項(14頁)は選抜方法・学力検査の総則のみを定め、調査書の生点数換算表(9教科×5段階×3学年・実技4教科1.5倍)自体は掲載されておらず、R7同様この部分は個別校の募集要項や第三者塾サイトでの確認が必要だった(WebSearch経由で複数の第三者サイトおよび自サイトmy-naishin.com/okinawa/naishinが『1学年55点満点(5教科×5+実技4教科×5×1.5)×3学年=165点満点』と一致して説明)。これは令和8年度分(prefectures.ts)のgradeMultipliers{1:1,2:1,3:1}・maxScore=165・practicalMultiplier=1.5と完全に一致する。制度変更を示す記載も見当たらないため変更なしと判断した(**caveatあり**・R7エントリと同型)。"
     }
   ]
 }
