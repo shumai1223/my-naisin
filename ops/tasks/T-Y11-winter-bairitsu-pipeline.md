@@ -197,12 +197,18 @@ R6（令和6年度）: 45/47県 収録済み（未収録は oita・saga のみ�
 
 ---
 
-# C 制度メタデータの多年度化（令和6年度・令和5年度） — 🟡2026-09-01着手(34/47・★制度変更1件検出)
+# C 制度メタデータの多年度化（令和6年度・令和5年度） — 🟡2026-09-01着手(35/47・★制度変更1件検出)
 
 **A・Bが終わってから。優先度が低い理由: 提案書（9/6）に間に合わないため今期の収益への寄与が間接的。**
 
 - [~] N1-2 と同じ形で `src/data/snapshots/2024-r6/` `2023-r5/` を作る →
-      **2024-r6のみ着手・34件完了(osaka/chiba/tochigi/ehime/kochi/kagoshima/aomori/iwate/tokushima/hiroshima/okayama/yamagata/nagano/shizuoka/ibaraki/shiga/kanagawa/aichi/fukuoka/saitama/hyogo/nara/gifu/mie/kyoto/wakayama/tottori/fukushima/akita/gunma/niigata/toyama/fukui/yamanashi)**。
+      **2024-r6のみ着手・35件完了(osaka/chiba/tochigi/ehime/kochi/kagoshima/aomori/iwate/tokushima/hiroshima/okayama/yamagata/nagano/shizuoka/ibaraki/shiga/kanagawa/aichi/fukuoka/saitama/hyogo/nara/gifu/mie/kyoto/wakayama/tottori/fukushima/akita/gunma/niigata/toyama/fukui/yamanashi/kumamoto)**。
+      **⚠️sagaはR7自体が「一次ソース未取得・第三者サイトの一致のみで確定」というcaveat付き
+      エントリのためR6の比較検証も難航(kiji番号は毎年変わり後継ページも見つからず)・保留**。
+      **kumamotoを追加(35/47)**: R6要項ページ(182727)をWebSearchで発見・本体PDF(3.49MB)を
+      直接取得(68頁)。p.16(印刷頁16)b「学力検査を行わない4教科は…第1・2学年評定+第3学年
+      評定×2」c「補正した5教科合計+4教科合計=総計点」を確認、R7エントリと完全一致
+      (9教科×(5+5+10)=180点満点・変更なし)。
       **yamanashiを追加(34/47)**: 本体PDF(2.1MB・R7の53.6MBより大幅に軽量)を直接取得(93頁)。
       R6は前期/後期募集の章立てがR7と異なり選抜方法の章番号が「第9」(R7は「第11」)とズレて
       いた(章の統合/分割で毎年番号が変わる)。番号ではなく見出しラベルと内容一致で照合し、
