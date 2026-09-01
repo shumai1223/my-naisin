@@ -197,12 +197,18 @@ R6（令和6年度）: 45/47県 収録済み（未収録は oita・saga のみ�
 
 ---
 
-# C 制度メタデータの多年度化（令和6年度・令和5年度） — 🟡2026-09-01着手(28/47・★制度変更1件検出)
+# C 制度メタデータの多年度化（令和6年度・令和5年度） — 🟡2026-09-01着手(29/47・★制度変更1件検出)
 
 **A・Bが終わってから。優先度が低い理由: 提案書（9/6）に間に合わないため今期の収益への寄与が間接的。**
 
 - [~] N1-2 と同じ形で `src/data/snapshots/2024-r6/` `2023-r5/` を作る →
-      **2024-r6のみ着手・28件完了(osaka/chiba/tochigi/ehime/kochi/kagoshima/aomori/iwate/tokushima/hiroshima/okayama/yamagata/nagano/shizuoka/ibaraki/shiga/kanagawa/aichi/fukuoka/saitama/hyogo/nara/gifu/mie/kyoto/wakayama/tottori/fukushima)**。
+      **2024-r6のみ着手・29件完了(osaka/chiba/tochigi/ehime/kochi/kagoshima/aomori/iwate/tokushima/hiroshima/okayama/yamagata/nagano/shizuoka/ibaraki/shiga/kanagawa/aichi/fukuoka/saitama/hyogo/nara/gifu/mie/kyoto/wakayama/tottori/fukushima/akita)**。
+      **akitaを追加(29/47)**: R6のsourceUrlはアイテムID(archive_0000084342_00)がR7専用。
+      Wayback CDXをドメイン全体で直接検索(`filter=original:...`で入学者選抜実施要項の
+      URLエンコード文字列を指定)し、別アイテムID(archive_0000076137_00)のR6版PDFを発見・
+      取得(58頁)。「VI調査書及び学習成績一覧表作成要領」エ「調整評定値欄には…5教科の小計(1)に
+      4教科の小計(2)を2倍して加えて得られた値((1)+(2)×2)を記入する」を確認、R7エントリと
+      完全一致(3学年×65=195点満点・変更なし)。
       **fukushimaを追加(28/47)**: WebFetch要約が実在しないドメイン(fukushima.fcs.ed.jp)を提示する
       事故が発生したが、curlで実HTTPステータスを裏取りしたところ404で誤りと判明、正しい
       pref.fukushima.lg.jp配下のattachment ID(597118)で200を確認してから取得(86頁)。

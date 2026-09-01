@@ -6,7 +6,7 @@
     "completedAt": null,
     "collectionMethod": "T-Y11 Task C(ops/tasks/T-Y11-winter-bairitsu-pipeline.md)。N1-2(2025-r7)と同じ形式・同じ収集方針。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。",
     "totalPrefectures": 47,
-    "collectedCount": 28,
+    "collectedCount": 29,
     "unavailable": []
   },
   "entries": [
@@ -982,6 +982,36 @@
       "lastVerified": "2026-09-01",
       "pdfHash": null,
       "diffFromCurrentYear": "変更なし(2026-09-01にWebSearchでR6要綱ページ(r6koukounyushi.html)を発見。WebFetch要約が誤ったドメイン(fukushima.fcs.ed.jp)を提示したため実404を確認し、正しいpref.fukushima.lg.jp配下のattachment ID(597118・R7は653878)で200を確認してから取得(86頁)。pdftotextで「195」のヒット行からPDFページを特定しPyMuPDFでp.12(印刷頁10)をビジョン解析、「調査書の『各教科の学習の記録』の評定については、国語、社会、数学、理科、外国語(英語)、音楽、美術、保健体育、技術・家庭の第1学年から第3学年の評定の合計に音楽、美術、保健体育、技術・家庭の第1学年から第3学年の評定の合計をさらに加えて、195点満点とする」を確認、R7エントリと一言一句完全一致。令和7・8年度分と完全一致(変更なし)。⚠️WebFetch要約が実在しないドメインを提示する事故を実際に確認したため、必ずcurlで実HTTPステータス裏取りしてから使うこと([[fable5-loop-protocol]]既存の類似の罠と同型)。"
+    },
+    {
+      "code": "akita",
+      "name": "秋田県",
+      "region": "北海道・東北",
+      "fiscalYear": "2024",
+      "targetGrades": [
+        1,
+        2,
+        3
+      ],
+      "gradeMultipliers": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
+      "coreMultiplier": 1,
+      "practicalMultiplier": 2,
+      "maxScore": 195,
+      "simplifiedCalc": false,
+      "actualMaxScore": null,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": null,
+      "sourceUrl": "http://web.archive.org/web/20240504083940/https://www.pref.akita.lg.jp/uploads/public/archive_0000076137_00/%E4%BB%A4%E5%92%8C%EF%BC%96%E5%B9%B4%E5%BA%A6%E7%A7%8B%E7%94%B0%E7%9C%8C%E5%85%AC%E7%AB%8B%E9%AB%98%E7%AD%89%E5%AD%A6%E6%A0%A1%E5%85%A5%E5%AD%A6%E8%80%85%E9%81%B8%E6%8A%9C%E5%AE%9F%E6%96%BD%E8%A6%81%E9%A0%85_%EF%BC%88PDF%E7%89%88%EF%BC%89.pdf",
+      "sourceUrl2": "https://www.pref.akita.lg.jp/pages/genre/79419",
+      "sourceTitle": "秋田県教育委員会「令和6年度秋田県公立高等学校入学者選抜実施要項」VI 調査書及び学習成績一覧表作成要領",
+      "lastVerified": "2026-09-01",
+      "pdfHash": null,
+      "diffFromCurrentYear": "変更なし(2026-09-01にWayback CDXを直接検索してR6版PDF(archive_0000076137_00・R7は0000084342_00で別アイテムID)を発見・取得(58頁)。p.40(PDF内44頁目)「(6)各教科の学習の記録」エ「調整評定値欄には、各学年の評定について、5教科の小計(1)に4教科の小計(2)を2倍して加えて得られた値((1)+(2)×2)を記入する」オ「調整評定値の合計の欄には、各学年の調整評定値の合計を記入する」を確認、R7エントリと一言一句完全一致(3学年×(5教科×5段階+4教科×5段階×2)=3×65=195点)。令和7・8年度分と完全一致(変更なし)。"
     }
   ]
 }
