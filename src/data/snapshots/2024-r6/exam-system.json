@@ -6,7 +6,7 @@
     "completedAt": null,
     "collectionMethod": "T-Y11 Task C(ops/tasks/T-Y11-winter-bairitsu-pipeline.md)。N1-2(2025-r7)と同じ形式・同じ収集方針。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。",
     "totalPrefectures": 47,
-    "collectedCount": 23,
+    "collectedCount": 24,
     "unavailable": []
   },
   "entries": [
@@ -808,6 +808,34 @@
       "lastVerified": "2026-09-01",
       "pdfHash": null,
       "diffFromCurrentYear": "変更なし(2026-09-01に第三者サイト(塾サイト)経由でR6版の実際のattachment ID(369199・R7は404670)を特定し、Wayback Machine経由でPDF本文(67頁)を確認。pdftotextはCJKテキストを抽出できなかった(embeddedフォント問題、他県と同型)ためPyMuPDFでページをPNGレンダリングしビジョン解析。目次で「第4第一次選抜 6選抜方法」の位置(printed page7-8)を特定し該当箇所を確認。p.7-8「6選抜方法(1)調査書の評定の取扱い…『第1学年と第2学年(義務教育学校においては第7学年と第8学年)の各教科の評定の合計値』と『第3学年(義務教育学校においては第9学年)の各教科の評定の合計値を2倍した値』の和を用いる」を確認、R7エントリと一言一句完全一致(9教科×5×1+9教科×5×1+9教科×5×2=180点)。令和7・8年度分と完全一致(変更なし)。"
+    },
+    {
+      "code": "mie",
+      "name": "三重県",
+      "region": "近畿",
+      "fiscalYear": "2024",
+      "targetGrades": [
+        3
+      ],
+      "gradeMultipliers": {
+        "1": 0,
+        "2": 0,
+        "3": 1
+      },
+      "coreMultiplier": 1,
+      "practicalMultiplier": 1,
+      "maxScore": 45,
+      "simplifiedCalc": false,
+      "actualMaxScore": null,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": null,
+      "sourceUrl": "https://www.pref.mie.lg.jp/common/content/001086426.pdf",
+      "sourceUrl2": "https://www.pref.mie.lg.jp/KOKOKYO/HP/000215949_00011.htm",
+      "sourceTitle": "三重県教育委員会「令和6年度三重県立高等学校入学者選抜実施方針」後期選抜の選抜方法(1)(別表3の脚注に本文引用あり)",
+      "lastVerified": "2026-09-01",
+      "pdfHash": null,
+      "diffFromCurrentYear": "変更なし(2026-09-01にWebSearchでR6実施要項ページ(000215949_00011)を発見。本体要項PDFは同ページに直接掲載されていなかったが、別表3(001086426.pdf・1頁)の脚注に「令和６年度三重県立高等学校入学者選抜実施方針」後期選抜の選抜方法(1)の本文が『調査書の第３学年における「各教科の学習の記録」及び「特別活動の記録」等により、およそ募集定員に当たる数の者を選ぶ』と一言一句引用されていることを確認。R7エントリの引用文と完全一致(第3学年のみ・9教科×5段階=45点)。令和7・8年度分と完全一致(変更なし)。"
     }
   ]
 }

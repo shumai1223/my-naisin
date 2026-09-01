@@ -197,12 +197,19 @@ R6（令和6年度）: 45/47県 収録済み（未収録は oita・saga のみ�
 
 ---
 
-# C 制度メタデータの多年度化（令和6年度・令和5年度） — 🟡2026-09-01着手(23/47・★制度変更1件検出)
+# C 制度メタデータの多年度化（令和6年度・令和5年度） — 🟡2026-09-01着手(24/47・★制度変更1件検出)
 
 **A・Bが終わってから。優先度が低い理由: 提案書（9/6）に間に合わないため今期の収益への寄与が間接的。**
 
 - [~] N1-2 と同じ形で `src/data/snapshots/2024-r6/` `2023-r5/` を作る →
-      **2024-r6のみ着手・23件完了(osaka/chiba/tochigi/ehime/kochi/kagoshima/aomori/iwate/tokushima/hiroshima/okayama/yamagata/nagano/shizuoka/ibaraki/shiga/kanagawa/aichi/fukuoka/saitama/hyogo/nara/gifu)**。
+      **2024-r6のみ着手・24件完了(osaka/chiba/tochigi/ehime/kochi/kagoshima/aomori/iwate/tokushima/hiroshima/okayama/yamagata/nagano/shizuoka/ibaraki/shiga/kanagawa/aichi/fukuoka/saitama/hyogo/nara/gifu/mie)**。
+      **mieを追加(24/47)**: R6の実施要項ページに本体PDFは直接掲載されておらず、代わりに1頁の
+      別表3(募集定員110/120%設定校の一覧)の脚注に「令和６年度三重県立高等学校入学者選抜
+      実施方針」後期選抜の選抜方法(1)の本文が一言一句引用されていることを発見・活用。
+      「調査書の第３学年における『各教科の学習の記録』及び『特別活動の記録』等により、
+      およそ募集定員に当たる数の者を選ぶ」を確認、R7エントリの引用と完全一致(第3学年のみ・
+      9教科×5段階=45点満点・変更なし)。**教訓: 本体要項PDFが見つからない場合でも、関連する
+      別表・付属資料の脚注に本文が引用されていることがある**。
       **gifuを追加(23/47)**: R7とは別のattachment ID(369199・R7は404670)を第三者塾サイト経由で
       特定しWayback Machineで67頁のR6要項PDF全体を取得。目次から「第4第一次選抜 6選抜方法」の
       位置を特定しPyMuPDFでビジョン解析、6(1)調査書の評定の取扱いで「第1・2学年の評定合計値」
