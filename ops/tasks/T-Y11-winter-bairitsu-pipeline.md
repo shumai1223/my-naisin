@@ -197,12 +197,17 @@ R6（令和6年度）: 45/47県 収録済み（未収録は oita・saga のみ�
 
 ---
 
-# C 制度メタデータの多年度化（令和6年度・令和5年度） — 🟡2026-09-01着手(38/47・★制度変更1件検出)
+# C 制度メタデータの多年度化（令和6年度・令和5年度） — 🟡2026-09-01着手(39/47・★制度変更1件検出)
 
 **A・Bが終わってから。優先度が低い理由: 提案書（9/6）に間に合わないため今期の収益への寄与が間接的。**
 
 - [~] N1-2 と同じ形で `src/data/snapshots/2024-r6/` `2023-r5/` を作る →
-      **2024-r6のみ着手・38件完了(osaka/chiba/tochigi/ehime/kochi/kagoshima/aomori/iwate/tokushima/hiroshima/okayama/yamagata/nagano/shizuoka/ibaraki/shiga/kanagawa/aichi/fukuoka/saitama/hyogo/nara/gifu/mie/kyoto/wakayama/tottori/fukushima/akita/gunma/niigata/toyama/fukui/yamanashi/kumamoto/miyazaki/okinawa/hokkaido)**。
+      **2024-r6のみ着手・39件完了(osaka/chiba/tochigi/ehime/kochi/kagoshima/aomori/iwate/tokushima/hiroshima/okayama/yamagata/nagano/shizuoka/ibaraki/shiga/kanagawa/aichi/fukuoka/saitama/hyogo/nara/gifu/mie/kyoto/wakayama/tottori/fukushima/akita/gunma/niigata/toyama/fukui/yamanashi/kumamoto/miyazaki/okinawa/hokkaido/miyagi)**。
+      **miyagiを追加(39/47)**: CDX依存で保留していたがWebSearchで「令和6年度入試制度説明資料」
+      を発見・Wayback経由で取得(24頁)。p.2共通選抜で調査書195点満点(5教科等倍+実技4教科×2倍)
+      を確認、R7エントリと完全一致(変更なし)。**保留リストのCDX依存県も一度WebSearchで
+      直接資料名検索すると解決することがある(shimane/yamaguchi/kagawa/tokyoも同様に再試行の
+      余地あり)**。
       **hokkaidoを追加(38/47)**: R6要項ページ(79624)のWaybackスナップショットからPDFリンク
       一覧をgrepし、複数分割ファイルの中から「第2一般実施要項」(p8-29)を特定・取得(22頁)。
       p.23の相関表で調査書点の最高段階「A: 315〜296」を確認、R7エントリと完全一致
