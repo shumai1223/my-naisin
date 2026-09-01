@@ -197,12 +197,19 @@ R6（令和6年度）: 45/47県 収録済み（未収録は oita・saga のみ�
 
 ---
 
-# C 制度メタデータの多年度化（令和6年度・令和5年度） — 🟡2026-09-01着手(32/47・★制度変更1件検出)
+# C 制度メタデータの多年度化（令和6年度・令和5年度） — 🟡2026-09-01着手(33/47・★制度変更1件検出)
 
 **A・Bが終わってから。優先度が低い理由: 提案書（9/6）に間に合わないため今期の収益への寄与が間接的。**
 
 - [~] N1-2 と同じ形で `src/data/snapshots/2024-r6/` `2023-r5/` を作る →
-      **2024-r6のみ着手・32件完了(osaka/chiba/tochigi/ehime/kochi/kagoshima/aomori/iwate/tokushima/hiroshima/okayama/yamagata/nagano/shizuoka/ibaraki/shiga/kanagawa/aichi/fukuoka/saitama/hyogo/nara/gifu/mie/kyoto/wakayama/tottori/fukushima/akita/gunma/niigata/toyama)**。
+      **2024-r6のみ着手・33件完了(osaka/chiba/tochigi/ehime/kochi/kagoshima/aomori/iwate/tokushima/hiroshima/okayama/yamagata/nagano/shizuoka/ibaraki/shiga/kanagawa/aichi/fukuoka/saitama/hyogo/nara/gifu/mie/kyoto/wakayama/tottori/fukushima/akita/gunma/niigata/toyama/fukui)**。
+      **⚠️ishikawaはR7自体がmeta.unavailable(取得不能)のためR6の変更有無を比較検証できず、
+      当面スキップと判断**（R7側で「現行サイト404・Waybackにも一切アーカイブなし」と確定済み）。
+      **fukuiを追加(33/47)**: 現行サイトの一般選抜ページに本体要項PDFが掲載されていなかった
+      ため、Waybackで別ページ(r6youkou.html)のスナップショットからPDFリンク一覧を抽出し
+      R6yoko.pdfを発見・取得(29頁)。p.6「8選抜の方法」イ「調査書中の『学習の記録』の
+      『評定』の第3学年の各教科の評定と学力検査…の成績を総合的に審査する」を確認、R7エントリ
+      と完全一致(第3学年のみ・9教科×5段階=45点満点・変更なし)。
       **toyamaを追加(32/47)**: R6要項ページをWebSearchで発見・本体PDF(document ID 37292・
       R7は41799で別ID)を直接取得(54頁)。pdftotextで「150」のヒット行からPDFページを特定し
       p.4(印刷頁2)をビジョン解析、7選抜の方法(3)ア中2年評定45点+イ中3年評定×2で90点+
