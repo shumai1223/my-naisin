@@ -197,12 +197,21 @@ R6（令和6年度）: 45/47県 収録済み（未収録は oita・saga のみ�
 
 ---
 
-# C 制度メタデータの多年度化（令和6年度・令和5年度） — 🟡2026-09-01着手(20/47・★制度変更1件検出)
+# C 制度メタデータの多年度化（令和6年度・令和5年度） — 🟡2026-09-01着手(21/47・★制度変更1件検出)
 
 **A・Bが終わってから。優先度が低い理由: 提案書（9/6）に間に合わないため今期の収益への寄与が間接的。**
 
 - [~] N1-2 と同じ形で `src/data/snapshots/2024-r6/` `2023-r5/` を作る →
-      **2024-r6のみ着手・20件完了(osaka/chiba/tochigi/ehime/kochi/kagoshima/aomori/iwate/tokushima/hiroshima/okayama/yamagata/nagano/shizuoka/ibaraki/shiga/kanagawa/aichi/fukuoka/saitama)**。
+      **2024-r6のみ着手・21件完了(osaka/chiba/tochigi/ehime/kochi/kagoshima/aomori/iwate/tokushima/hiroshima/okayama/yamagata/nagano/shizuoka/ibaraki/shiga/kanagawa/aichi/fukuoka/saitama/hyogo)**。
+      **hyogoを追加(21/47)**: 現行サイトの`/hpe/uploads/`はrobots.txtでDisallow指定(A-2で既知)のため
+      直接fetchせず、Wayback CDX API復旧(2026-09-01確認)を使って`R6_senbatsuyoukoukai.pdf`
+      (2024-05-08アーカイブ)を発見・Wayback経由で取得。pdftotextは本PDFでもCJKテキストを抽出
+      できなかった（embeddedフォント構造の問題、他県と同型）ため、**PyMuPDF(fitz)でPDFページを
+      PNGにレンダリングしてRead toolでビジョン解析する新しい代替手段を確立**（poppler/pdftoppm
+      未導入によりRead toolのpages指定が使えない環境制約への対処。⚠️`python3`コマンドは
+      `Python`という謎の出力とexit code 49で失敗したが`python`コマンドは正常動作した=環境の罠として
+      記録）。第7217項(1)で判定資料(A)=第3学年のみ・5教科(国社数理外)×4倍+4教科(音美保技)×7.5倍
+      =総配点250点を確認・令和7・8年度分と完全一致（変更なし）。
       **saitamaを再挑戦し成功**: 以前のセッション(Wayback CDX不調時)が推測した
       `documents/238245/97_jisshiyoko_r6.pdf`は誤りだったと判明（実際は存在しないURL）。
       CDX復旧後に`documents/238245/`配下をprefix検索し、R7と同じ命名規則の
