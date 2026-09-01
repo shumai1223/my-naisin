@@ -197,12 +197,16 @@ R6（令和6年度）: 45/47県 収録済み（未収録は oita・saga のみ�
 
 ---
 
-# C 制度メタデータの多年度化（令和6年度・令和5年度） — 🟡2026-09-01着手(40/47・★制度変更1件検出)
+# C 制度メタデータの多年度化（令和6年度・令和5年度） — 🟡2026-09-01着手(41/47・★制度変更1件検出)
 
 **A・Bが終わってから。優先度が低い理由: 提案書（9/6）に間に合わないため今期の収益への寄与が間接的。**
 
 - [~] N1-2 と同じ形で `src/data/snapshots/2024-r6/` `2023-r5/` を作る →
-      **2024-r6のみ着手・40件完了(osaka/chiba/tochigi/ehime/kochi/kagoshima/aomori/iwate/tokushima/hiroshima/okayama/yamagata/nagano/shizuoka/ibaraki/shiga/kanagawa/aichi/fukuoka/saitama/hyogo/nara/gifu/mie/kyoto/wakayama/tottori/fukushima/akita/gunma/niigata/toyama/fukui/yamanashi/kumamoto/miyazaki/okinawa/hokkaido/miyagi/shimane)**。
+      **2024-r6のみ着手・41件完了(osaka/chiba/tochigi/ehime/kochi/kagoshima/aomori/iwate/tokushima/hiroshima/okayama/yamagata/nagano/shizuoka/ibaraki/shiga/kanagawa/aichi/fukuoka/saitama/hyogo/nara/gifu/mie/kyoto/wakayama/tottori/fukushima/akita/gunma/niigata/toyama/fukui/yamanashi/kumamoto/miyazaki/okinawa/hokkaido/miyagi/shimane/yamaguchi)**。
+      **yamaguchiを追加(41/47・caveatあり)**: WebSearchでR6実施大綱ページ(216464)を発見・
+      本体PDF(8頁)を直接取得。「調査書の『学習の記録』と学力検査の成績は同等に取り扱う」
+      を確認、R7エントリと完全一致。R7と同じく学年別配点表そのものは本文書に無くcaveatを
+      維持(変更なし)。
       **shimaneを追加(40/47)**: WebSearchでR6実施要綱本体(現行サイトに掲載されたまま現存・
       94頁)を直接発見。R7エントリはR7年度分自体が404でR4実施要綱経由の間接照合だったのに
       対し、今回はR6年度の実施要綱そのものを直接確認できた(R7より一次性が高い)。(2)選抜の

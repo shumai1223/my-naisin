@@ -6,7 +6,7 @@
     "completedAt": null,
     "collectionMethod": "T-Y11 Task C(ops/tasks/T-Y11-winter-bairitsu-pipeline.md)。N1-2(2025-r7)と同じ形式・同じ収集方針。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。",
     "totalPrefectures": 47,
-    "collectedCount": 40,
+    "collectedCount": 41,
     "unavailable": []
   },
   "entries": [
@@ -1395,6 +1395,50 @@
       "lastVerified": "2026-09-01",
       "pdfHash": null,
       "diffFromCurrentYear": "変更なし(2026-09-01にWebSearchでR6実施要綱本体(現行サイトに掲載されたまま現存)を直接発見・取得(94頁・R7エントリはR7年度分自体が404で入手できず代わりに結果報告書+R4実施要綱の間接照合だったのに対し、今回はR6年度の実施要綱そのものを直接確認できた)。p.29(ｵ)1)の算出方法表で「学習の記録 素点×51/180(小数点以下切り上げ) 素点180 評点51」「特別活動の記録 素点をそのまま 素点9 評点9」「学力検査 素点×0.16(小数点以下切り上げ) 素点250 評点40」を確認、R7エントリ(R4実施要綱経由で確認した表)と完全一致。個人調査報告書と学力検査の比率は80:20/70:30/60:40/50:50/40:60の5パターンから選択も一致。180点=9教科×5段階×(第1学年1倍+第2学年1倍+第3学年2倍)で、令和7・8年度分と完全一致(変更なし)。"
+    },
+    {
+      "code": "yamaguchi",
+      "name": "山口県",
+      "region": "中国",
+      "fiscalYear": "2024",
+      "targetGrades": [
+        1,
+        2,
+        3
+      ],
+      "gradeMultipliers": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
+      "coreMultiplier": 1,
+      "practicalMultiplier": 1,
+      "maxScore": 135,
+      "simplifiedCalc": false,
+      "actualMaxScore": null,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": {
+        "totalMaxScore": 385,
+        "examMaxScore": 250,
+        "defaultRatio": {
+          "naishin": 35,
+          "exam": 65
+        },
+        "calcType": "standard",
+        "naishinMultiplier": null,
+        "kValue": null,
+        "sValueCoefficients": null,
+        "osakaTypeCount": null,
+        "hasTokyoSettings": false,
+        "hasKanagawaSettings": false
+      },
+      "sourceUrl": "https://www.pref.yamaguchi.lg.jp/uploaded/life/216464_404870_misc.pdf",
+      "sourceUrl2": "https://www.pref.yamaguchi.lg.jp/soshiki/180/216464.html",
+      "sourceTitle": "山口県教育委員会「令和6年度山口県公立高等学校入学者選抜実施大綱」2(5)選抜イ(ｱ)",
+      "lastVerified": "2026-09-01",
+      "pdfHash": null,
+      "diffFromCurrentYear": "変更なし(2026-09-01にWebSearchでR6実施大綱ページ(216464)を発見・本体PDF(8頁)を直接取得。p.3「2(5)選抜」イ選抜の方法(ｱ)「高等学校長は、選抜に当たっては、調査書を重視する。その際、調査書の『学習の記録』と学力検査の成績は同等に取り扱うとともに、調査書の『学習の記録』以外の記載事項及び面接、小論文、実技検査の結果等も十分考慮する」を確認、R7エントリと一言一句完全一致。学力検査は各教科50点×5教科=250点満点も確認(reverseCalc.examMaxScoreと一致)。ただしR7エントリと同じく本文書には調査書「学習の記録」の学年別配点(9教科×5段階×3学年均等配点で135点満点)を直接示す数値記載は無く、この点はR7と同型のcaveat(第三者裏取り+prefectures.tsとの整合)を維持。令和7・8年度分と完全一致(変更なし)"
     }
   ]
 }
