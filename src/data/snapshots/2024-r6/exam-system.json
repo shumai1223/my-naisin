@@ -6,7 +6,7 @@
     "completedAt": null,
     "collectionMethod": "T-Y11 Task C(ops/tasks/T-Y11-winter-bairitsu-pipeline.md)。N1-2(2025-r7)と同じ形式・同じ収集方針。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。",
     "totalPrefectures": 47,
-    "collectedCount": 30,
+    "collectedCount": 31,
     "unavailable": []
   },
   "entries": [
@@ -1042,6 +1042,36 @@
       "lastVerified": "2026-09-01",
       "pdfHash": null,
       "diffFromCurrentYear": "変更なし(2026-09-01にWebSearchでR6要項ページ(217648)を発見・本体PDF(161766.pdf・R7とは別のattachment ID)を直接取得(51頁)。目次で「別記3調査書の作成について」の位置(printed page20)を特定しPyMuPDFでp.21(3記入上の留意点)をビジョン解析、イ「第1学年及び第2学年の観点別学習状況及び評定は、指導要録に記載されたものを転記する」エ「第3学年の評定は…全ての生徒について5段階による評定を記入するものとし、上位より『5』『4』『3』『2』『1』とする」を確認、R7エントリと一言一句完全一致(3学年とも等しく5段階評定・学年間傾斜なし・9教科×5段階×3学年=135点)。令和7・8年度分と完全一致(変更なし)。"
+    },
+    {
+      "code": "niigata",
+      "name": "新潟県",
+      "region": "中部",
+      "fiscalYear": "2024",
+      "targetGrades": [
+        1,
+        2,
+        3
+      ],
+      "gradeMultipliers": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
+      "coreMultiplier": 1,
+      "practicalMultiplier": 1,
+      "maxScore": 135,
+      "simplifiedCalc": false,
+      "actualMaxScore": null,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": null,
+      "sourceUrl": "http://web.archive.org/web/20240116133901/https://www.pref.niigata.lg.jp/uploaded/attachment/381674.pdf",
+      "sourceUrl2": "http://web.archive.org/web/20241027162010/https://www.pref.niigata.lg.jp/sec/kotogakko/r6kotogakkonyushi.html",
+      "sourceTitle": "新潟県教育委員会「令和6年度新潟県公立高等学校入学者選抜要項」様式1 調査書(現行ページ・PDFは削除済みのためWayback Machine 2024-01-16時点のスナップショットで確認)",
+      "lastVerified": "2026-09-01",
+      "pdfHash": null,
+      "diffFromCurrentYear": "変更なし(2026-09-01にR6要項ページのWaybackスナップショットからPDFリンク(attachment/381674.pdf)を抽出し、Wayback経由で本体PDF(66頁)を取得。様式1「調査書」(p.28)を確認、9教科(国語・社会・数学・理科・音楽・美術・保健体育・技術家庭・外国語)それぞれに「1年」「2年」「3年」の評定欄が並列で設けられており、学年間の傾斜配点(倍率)を示す記載は様式上に存在しない(等倍)。R7エントリと同一の様式構成で完全一致。9教科×5段階×3学年=135点。令和7・8年度分と完全一致(変更なし)。"
     }
   ]
 }

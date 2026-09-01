@@ -197,12 +197,17 @@ R6（令和6年度）: 45/47県 収録済み（未収録は oita・saga のみ�
 
 ---
 
-# C 制度メタデータの多年度化（令和6年度・令和5年度） — 🟡2026-09-01着手(30/47・★制度変更1件検出)
+# C 制度メタデータの多年度化（令和6年度・令和5年度） — 🟡2026-09-01着手(31/47・★制度変更1件検出)
 
 **A・Bが終わってから。優先度が低い理由: 提案書（9/6）に間に合わないため今期の収益への寄与が間接的。**
 
 - [~] N1-2 と同じ形で `src/data/snapshots/2024-r6/` `2023-r5/` を作る →
-      **2024-r6のみ着手・30件完了(osaka/chiba/tochigi/ehime/kochi/kagoshima/aomori/iwate/tokushima/hiroshima/okayama/yamagata/nagano/shizuoka/ibaraki/shiga/kanagawa/aichi/fukuoka/saitama/hyogo/nara/gifu/mie/kyoto/wakayama/tottori/fukushima/akita/gunma)**。
+      **2024-r6のみ着手・31件完了(osaka/chiba/tochigi/ehime/kochi/kagoshima/aomori/iwate/tokushima/hiroshima/okayama/yamagata/nagano/shizuoka/ibaraki/shiga/kanagawa/aichi/fukuoka/saitama/hyogo/nara/gifu/mie/kyoto/wakayama/tottori/fukushima/akita/gunma/niigata)**。
+      **niigataを追加(31/47)**: R6要項ページの現行URLは404(削除済み)だったためWaybackで
+      HTML自体をアーカイブから取得しPDFリンクをgrepで抽出、別のattachment ID(381674・
+      R7は422308)を発見。様式1「調査書」(p.28)で9教科×1〜3年の評定欄が並列(学年間の
+      傾斜配点記載なし=等倍)を確認、R7エントリと同一様式で完全一致(9教科×5段階×3学年=
+      135点満点・変更なし)。
       **gunmaを追加(30/47)**: R6要項ページ(217648)をWebSearchで発見・本体PDF(161766.pdf・
       R7とは別のattachment ID)を直接取得(51頁)。目次で「別記3調査書の作成について」の
       位置(printed page20)を特定しビジョン解析、3(3)イ「第1・2学年は指導要録記載を転記」
