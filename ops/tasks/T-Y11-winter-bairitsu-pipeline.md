@@ -197,12 +197,17 @@ R6（令和6年度）: 45/47県 収録済み（未収録は oita・saga のみ�
 
 ---
 
-# C 制度メタデータの多年度化（令和6年度・令和5年度） — 🟡2026-09-01着手(31/47・★制度変更1件検出)
+# C 制度メタデータの多年度化（令和6年度・令和5年度） — 🟡2026-09-01着手(32/47・★制度変更1件検出)
 
 **A・Bが終わってから。優先度が低い理由: 提案書（9/6）に間に合わないため今期の収益への寄与が間接的。**
 
 - [~] N1-2 と同じ形で `src/data/snapshots/2024-r6/` `2023-r5/` を作る →
-      **2024-r6のみ着手・31件完了(osaka/chiba/tochigi/ehime/kochi/kagoshima/aomori/iwate/tokushima/hiroshima/okayama/yamagata/nagano/shizuoka/ibaraki/shiga/kanagawa/aichi/fukuoka/saitama/hyogo/nara/gifu/mie/kyoto/wakayama/tottori/fukushima/akita/gunma/niigata)**。
+      **2024-r6のみ着手・32件完了(osaka/chiba/tochigi/ehime/kochi/kagoshima/aomori/iwate/tokushima/hiroshima/okayama/yamagata/nagano/shizuoka/ibaraki/shiga/kanagawa/aichi/fukuoka/saitama/hyogo/nara/gifu/mie/kyoto/wakayama/tottori/fukushima/akita/gunma/niigata/toyama)**。
+      **toyamaを追加(32/47)**: R6要項ページをWebSearchで発見・本体PDF(document ID 37292・
+      R7は41799で別ID)を直接取得(54頁)。pdftotextで「150」のヒット行からPDFページを特定し
+      p.4(印刷頁2)をビジョン解析、7選抜の方法(3)ア中2年評定45点+イ中3年評定×2で90点+
+      ウ特別活動等15点=150点満点を確認、R7エントリと完全一致(中2:45点+中3×2:90点=135点・
+      変更なし)。
       **niigataを追加(31/47)**: R6要項ページの現行URLは404(削除済み)だったためWaybackで
       HTML自体をアーカイブから取得しPDFリンクをgrepで抽出、別のattachment ID(381674・
       R7は422308)を発見。様式1「調査書」(p.28)で9教科×1〜3年の評定欄が並列(学年間の
