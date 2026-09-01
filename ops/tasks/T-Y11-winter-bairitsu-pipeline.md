@@ -197,12 +197,17 @@ R6（令和6年度）: 45/47県 収録済み（未収録は oita・saga のみ�
 
 ---
 
-# C 制度メタデータの多年度化（令和6年度・令和5年度） — 🟡2026-09-01着手(29/47・★制度変更1件検出)
+# C 制度メタデータの多年度化（令和6年度・令和5年度） — 🟡2026-09-01着手(30/47・★制度変更1件検出)
 
 **A・Bが終わってから。優先度が低い理由: 提案書（9/6）に間に合わないため今期の収益への寄与が間接的。**
 
 - [~] N1-2 と同じ形で `src/data/snapshots/2024-r6/` `2023-r5/` を作る →
-      **2024-r6のみ着手・29件完了(osaka/chiba/tochigi/ehime/kochi/kagoshima/aomori/iwate/tokushima/hiroshima/okayama/yamagata/nagano/shizuoka/ibaraki/shiga/kanagawa/aichi/fukuoka/saitama/hyogo/nara/gifu/mie/kyoto/wakayama/tottori/fukushima/akita)**。
+      **2024-r6のみ着手・30件完了(osaka/chiba/tochigi/ehime/kochi/kagoshima/aomori/iwate/tokushima/hiroshima/okayama/yamagata/nagano/shizuoka/ibaraki/shiga/kanagawa/aichi/fukuoka/saitama/hyogo/nara/gifu/mie/kyoto/wakayama/tottori/fukushima/akita/gunma)**。
+      **gunmaを追加(30/47)**: R6要項ページ(217648)をWebSearchで発見・本体PDF(161766.pdf・
+      R7とは別のattachment ID)を直接取得(51頁)。目次で「別記3調査書の作成について」の
+      位置(printed page20)を特定しビジョン解析、3(3)イ「第1・2学年は指導要録記載を転記」
+      エ「第3学年は…全ての生徒について5段階による評定」を確認、R7エントリと完全一致
+      (3学年とも等しく5段階・9教科×5段階×3学年=135点満点・変更なし)。
       **akitaを追加(29/47)**: R6のsourceUrlはアイテムID(archive_0000084342_00)がR7専用。
       Wayback CDXをドメイン全体で直接検索(`filter=original:...`で入学者選抜実施要項の
       URLエンコード文字列を指定)し、別アイテムID(archive_0000076137_00)のR6版PDFを発見・
