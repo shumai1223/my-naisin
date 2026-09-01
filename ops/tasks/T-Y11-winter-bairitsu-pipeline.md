@@ -197,12 +197,19 @@ R6（令和6年度）: 45/47県 収録済み（未収録は oita・saga のみ�
 
 ---
 
-# C 制度メタデータの多年度化（令和6年度・令和5年度） — 🟡2026-09-01着手(22/47・★制度変更1件検出)
+# C 制度メタデータの多年度化（令和6年度・令和5年度） — 🟡2026-09-01着手(23/47・★制度変更1件検出)
 
 **A・Bが終わってから。優先度が低い理由: 提案書（9/6）に間に合わないため今期の収益への寄与が間接的。**
 
 - [~] N1-2 と同じ形で `src/data/snapshots/2024-r6/` `2023-r5/` を作る →
-      **2024-r6のみ着手・22件完了(osaka/chiba/tochigi/ehime/kochi/kagoshima/aomori/iwate/tokushima/hiroshima/okayama/yamagata/nagano/shizuoka/ibaraki/shiga/kanagawa/aichi/fukuoka/saitama/hyogo/nara)**。
+      **2024-r6のみ着手・23件完了(osaka/chiba/tochigi/ehime/kochi/kagoshima/aomori/iwate/tokushima/hiroshima/okayama/yamagata/nagano/shizuoka/ibaraki/shiga/kanagawa/aichi/fukuoka/saitama/hyogo/nara/gifu)**。
+      **gifuを追加(23/47)**: R7とは別のattachment ID(369199・R7は404670)を第三者塾サイト経由で
+      特定しWayback Machineで67頁のR6要項PDF全体を取得。目次から「第4第一次選抜 6選抜方法」の
+      位置を特定しPyMuPDFでビジョン解析、6(1)調査書の評定の取扱いで「第1・2学年の評定合計値」
+      +「第3学年の評定合計値×2」の和(9教科×5×1+9×5×1+9×5×2=180点)を確認、R7エントリと完全
+      一致(変更なし)。**教訓: 大きい要項PDFでは目次(目次ページ)を先に確認して該当セクションの
+      printed page番号を把握してからPyMuPDFで該当pageのみレンダリングする方が、闇雲に数ページ
+      ずつレンダリングするより効率的**。
       **naraを追加(22/47)**: R7とは別のdocument ID(documents/6003・R7はdocuments/5976)配下に
       R6専用ページが存在することをWebSearchで発見・PDF本文(4頁)を直接確認。1(5)ア・イで
       第2学年:第3学年=1:2・9教科×15点=135点満点(第1学年不使用)を確認、R7エントリと完全一致

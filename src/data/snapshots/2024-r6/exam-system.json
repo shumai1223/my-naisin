@@ -6,7 +6,7 @@
     "completedAt": null,
     "collectionMethod": "T-Y11 Task C(ops/tasks/T-Y11-winter-bairitsu-pipeline.md)。N1-2(2025-r7)と同じ形式・同じ収集方針。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。",
     "totalPrefectures": 47,
-    "collectedCount": 22,
+    "collectedCount": 23,
     "unavailable": []
   },
   "entries": [
@@ -778,6 +778,36 @@
       "lastVerified": "2026-09-01",
       "pdfHash": null,
       "diffFromCurrentYear": "変更なし(2026-09-01にWebSearchでR7と別のdocument ID配下(documents/6003、R7はdocuments/5976)にあるR6専用ページを発見しPDF本文を直接確認。1(5)ア「学習成績は、国語、社会、数学、理科、音楽、美術、保健体育、技術・家庭及び英語の各教科とも、第２学年と第３学年の成績を１：２の割合で算出してください」、イ「各教科別に、次の(ア)及び(イ)を合計した学習成績を15点満点で記入してください。(ア)生徒指導要録に記載された第２学年の５段階評定値 (イ)第３学年の…観点別学習状況の評価を総括した５段階評定値を２倍した数値」を確認、R7エントリ(2025-r7)と一言一句完全一致(第1学年は不使用・9教科×15点=135点満点)。⚠️T-N1-N4で検出されたnaraの制度変更はR7→R8間で発生したものであり、R6→R7間は変更なしと今回確認できた。"
+    },
+    {
+      "code": "gifu",
+      "name": "岐阜県",
+      "region": "中部",
+      "fiscalYear": "2024",
+      "targetGrades": [
+        1,
+        2,
+        3
+      ],
+      "gradeMultipliers": {
+        "1": 1,
+        "2": 1,
+        "3": 2
+      },
+      "coreMultiplier": 1,
+      "practicalMultiplier": 1,
+      "maxScore": 180,
+      "simplifiedCalc": false,
+      "actualMaxScore": null,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": null,
+      "sourceUrl": "http://web.archive.org/web/20231205131252/https://www.pref.gifu.lg.jp/uploaded/attachment/369199.pdf",
+      "sourceUrl2": "https://www.pref.gifu.lg.jp/site/edu/61428.html",
+      "sourceTitle": "岐阜県教育委員会「令和6年度岐阜県立高等学校入学者選抜要項」第4第一次選抜 6(1)調査書の評定の取扱い(現行ページはPDF削除済みのためWayback Machine 2023-12-05時点のスナップショットで確認)",
+      "lastVerified": "2026-09-01",
+      "pdfHash": null,
+      "diffFromCurrentYear": "変更なし(2026-09-01に第三者サイト(塾サイト)経由でR6版の実際のattachment ID(369199・R7は404670)を特定し、Wayback Machine経由でPDF本文(67頁)を確認。pdftotextはCJKテキストを抽出できなかった(embeddedフォント問題、他県と同型)ためPyMuPDFでページをPNGレンダリングしビジョン解析。目次で「第4第一次選抜 6選抜方法」の位置(printed page7-8)を特定し該当箇所を確認。p.7-8「6選抜方法(1)調査書の評定の取扱い…『第1学年と第2学年(義務教育学校においては第7学年と第8学年)の各教科の評定の合計値』と『第3学年(義務教育学校においては第9学年)の各教科の評定の合計値を2倍した値』の和を用いる」を確認、R7エントリと一言一句完全一致(9教科×5×1+9教科×5×1+9教科×5×2=180点)。令和7・8年度分と完全一致(変更なし)。"
     }
   ]
 }
