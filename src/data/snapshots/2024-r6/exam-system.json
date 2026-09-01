@@ -6,7 +6,7 @@
     "completedAt": null,
     "collectionMethod": "T-Y11 Task C(ops/tasks/T-Y11-winter-bairitsu-pipeline.md)。N1-2(2025-r7)と同じ形式・同じ収集方針。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。",
     "totalPrefectures": 47,
-    "collectedCount": 35,
+    "collectedCount": 36,
     "unavailable": []
   },
   "entries": [
@@ -1203,6 +1203,50 @@
       "lastVerified": "2026-09-01",
       "pdfHash": null,
       "diffFromCurrentYear": "変更なし(2026-09-01にWebSearchでR6要項ページ(182727)を発見・本体PDF(3.49MB)を直接取得(68頁)。p.16(印刷頁16)b「学力検査を行わない4教科(音楽、美術、保健体育、技術・家庭)については、教科ごとに、第1学年及び第2学年の評定に、第3学年の評定を2倍したものを加えて合計する」c「aで補正した5教科の合計点に、bの4教科の合計点を加えて総計点を算出する」を確認、R7エントリと一言一句完全一致。9教科×(5+5+10)=180点で令和7・8年度分と完全一致(変更なし)。学力検査は各教科50点×5教科=250点満点も確認(reverseCalc.examMaxScoreと一致)。"
+    },
+    {
+      "code": "miyazaki",
+      "name": "宮崎県",
+      "region": "九州・沖縄",
+      "fiscalYear": "2024",
+      "targetGrades": [
+        1,
+        2,
+        3
+      ],
+      "gradeMultipliers": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
+      "coreMultiplier": 1,
+      "practicalMultiplier": 1,
+      "maxScore": 135,
+      "simplifiedCalc": false,
+      "actualMaxScore": null,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": {
+        "totalMaxScore": 635,
+        "examMaxScore": 500,
+        "defaultRatio": {
+          "naishin": 21,
+          "exam": 79
+        },
+        "calcType": "standard",
+        "naishinMultiplier": null,
+        "kValue": null,
+        "sValueCoefficients": null,
+        "osakaTypeCount": null,
+        "hasTokyoSettings": false,
+        "hasKanagawaSettings": false
+      },
+      "sourceUrl": "http://web.archive.org/web/20240711173047/http://www.pref.miyazaki.lg.jp/documents/78572/78572_20230926142818-1.pdf",
+      "sourceUrl2": "http://web.archive.org/web/20240718225810/http://www.pref.miyazaki.lg.jp/kokokyoiku/kyoikukosodate/kyoiku/20230616105139.html",
+      "sourceTitle": "宮崎県教育委員会「令和6年度宮崎県立高等学校入学者選抜実施要綱」10出願書類の作成要領(2)調査書(様式2)",
+      "lastVerified": "2026-09-01",
+      "pdfHash": null,
+      "diffFromCurrentYear": "変更なし(caveatあり)(2026-09-01にR6index html自体が現行404のためWaybackで取得、そこからPDFリンク一覧をgrepし本体PDF(4.7MB・R7とは別ドキュメントID)を発見・Wayback経由で取得(90頁)。p.31(印刷頁31・PDF頁35)「(2)調査書(様式2)」イ「学習の記録I」ア第1・第2学年の観点別学習状況及び評定は生徒指導要録に記載されたものを記入する、イ第3学年は令和5年12月末日までの成績によって行う、ウ「学習の記録II」も同様の記載方式を確認——R7エントリと同じく、学年別の傾斜配点や実技科目への倍率など素点の重み付けを示す記載は一切無い(必修教科は各学年とも一律5段階評定)。令和8年度分(prefectures.ts)のgradeMultipliers{1:1,2:1,3:1}・maxScore=135・coreMultiplier=practicalMultiplier=1と矛盾しない。R7エントリと同型のcaveat(135という数値は一次ソースの明示的配点表ではなく『傾斜なし』の消去法に基づく)を維持。制度変更を示す記載も見当たらないため変更なしと判断。"
     }
   ]
 }

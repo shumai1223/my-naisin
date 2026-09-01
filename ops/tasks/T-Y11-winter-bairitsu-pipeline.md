@@ -197,12 +197,17 @@ R6（令和6年度）: 45/47県 収録済み（未収録は oita・saga のみ�
 
 ---
 
-# C 制度メタデータの多年度化（令和6年度・令和5年度） — 🟡2026-09-01着手(35/47・★制度変更1件検出)
+# C 制度メタデータの多年度化（令和6年度・令和5年度） — 🟡2026-09-01着手(36/47・★制度変更1件検出)
 
 **A・Bが終わってから。優先度が低い理由: 提案書（9/6）に間に合わないため今期の収益への寄与が間接的。**
 
 - [~] N1-2 と同じ形で `src/data/snapshots/2024-r6/` `2023-r5/` を作る →
-      **2024-r6のみ着手・35件完了(osaka/chiba/tochigi/ehime/kochi/kagoshima/aomori/iwate/tokushima/hiroshima/okayama/yamagata/nagano/shizuoka/ibaraki/shiga/kanagawa/aichi/fukuoka/saitama/hyogo/nara/gifu/mie/kyoto/wakayama/tottori/fukushima/akita/gunma/niigata/toyama/fukui/yamanashi/kumamoto)**。
+      **2024-r6のみ着手・36件完了(osaka/chiba/tochigi/ehime/kochi/kagoshima/aomori/iwate/tokushima/hiroshima/okayama/yamagata/nagano/shizuoka/ibaraki/shiga/kanagawa/aichi/fukuoka/saitama/hyogo/nara/gifu/mie/kyoto/wakayama/tottori/fukushima/akita/gunma/niigata/toyama/fukui/yamanashi/kumamoto/miyazaki)**。
+      **miyazakiを追加(36/47・caveatあり)**: R6のindex htmlが現行404だったためWaybackで
+      取得しPDFリンク一覧をgrep、本体PDF(4.7MB)を発見・取得(90頁)。この県は章番号の構成が
+      複雑(推薦/一般/連携型/帰国等が入り混じった連番)なため、目次を辿らず「10出願書類の
+      作成要領(2)調査書」という見出し文字列そのものを目印にページを特定。R7エントリと同じく
+      学年別傾斜配点の記載は無し(=消去法+第三者裏取りのcaveatをR7から継承)。変更なし。
       **⚠️sagaはR7自体が「一次ソース未取得・第三者サイトの一致のみで確定」というcaveat付き
       エントリのためR6の比較検証も難航(kiji番号は毎年変わり後継ページも見つからず)・保留**。
       **kumamotoを追加(35/47)**: R6要項ページ(182727)をWebSearchで発見・本体PDF(3.49MB)を
