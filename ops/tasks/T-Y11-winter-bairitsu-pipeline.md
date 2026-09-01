@@ -197,12 +197,18 @@ R6（令和6年度）: 45/47県 収録済み（未収録は oita・saga のみ�
 
 ---
 
-# C 制度メタデータの多年度化（令和6年度・令和5年度） — 🟡2026-09-01着手(21/47・★制度変更1件検出)
+# C 制度メタデータの多年度化（令和6年度・令和5年度） — 🟡2026-09-01着手(22/47・★制度変更1件検出)
 
 **A・Bが終わってから。優先度が低い理由: 提案書（9/6）に間に合わないため今期の収益への寄与が間接的。**
 
 - [~] N1-2 と同じ形で `src/data/snapshots/2024-r6/` `2023-r5/` を作る →
-      **2024-r6のみ着手・21件完了(osaka/chiba/tochigi/ehime/kochi/kagoshima/aomori/iwate/tokushima/hiroshima/okayama/yamagata/nagano/shizuoka/ibaraki/shiga/kanagawa/aichi/fukuoka/saitama/hyogo)**。
+      **2024-r6のみ着手・22件完了(osaka/chiba/tochigi/ehime/kochi/kagoshima/aomori/iwate/tokushima/hiroshima/okayama/yamagata/nagano/shizuoka/ibaraki/shiga/kanagawa/aichi/fukuoka/saitama/hyogo/nara)**。
+      **naraを追加(22/47)**: R7とは別のdocument ID(documents/6003・R7はdocuments/5976)配下に
+      R6専用ページが存在することをWebSearchで発見・PDF本文(4頁)を直接確認。1(5)ア・イで
+      第2学年:第3学年=1:2・9教科×15点=135点満点(第1学年不使用)を確認、R7エントリと完全一致
+      (変更なし)。**T-N1-N4で検出したnaraの制度変更はR7→R8間で発生したものであり、R6→R7間は
+      無変更と判明**(4頁の小さいPDFはRead toolがpages指定なしでも直接処理できた=13頁以上でのみ
+      pages指定が必要という既知の制約どおり)。
       **hyogoを追加(21/47)**: 現行サイトの`/hpe/uploads/`はrobots.txtでDisallow指定(A-2で既知)のため
       直接fetchせず、Wayback CDX API復旧(2026-09-01確認)を使って`R6_senbatsuyoukoukai.pdf`
       (2024-05-08アーカイブ)を発見・Wayback経由で取得。pdftotextは本PDFでもCJKテキストを抽出
