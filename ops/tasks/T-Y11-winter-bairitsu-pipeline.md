@@ -197,12 +197,18 @@ R6（令和6年度）: 45/47県 収録済み（未収録は oita・saga のみ�
 
 ---
 
-# C 制度メタデータの多年度化（令和6年度・令和5年度） — 🟡2026-09-01着手(33/47・★制度変更1件検出)
+# C 制度メタデータの多年度化（令和6年度・令和5年度） — 🟡2026-09-01着手(34/47・★制度変更1件検出)
 
 **A・Bが終わってから。優先度が低い理由: 提案書（9/6）に間に合わないため今期の収益への寄与が間接的。**
 
 - [~] N1-2 と同じ形で `src/data/snapshots/2024-r6/` `2023-r5/` を作る →
-      **2024-r6のみ着手・33件完了(osaka/chiba/tochigi/ehime/kochi/kagoshima/aomori/iwate/tokushima/hiroshima/okayama/yamagata/nagano/shizuoka/ibaraki/shiga/kanagawa/aichi/fukuoka/saitama/hyogo/nara/gifu/mie/kyoto/wakayama/tottori/fukushima/akita/gunma/niigata/toyama/fukui)**。
+      **2024-r6のみ着手・34件完了(osaka/chiba/tochigi/ehime/kochi/kagoshima/aomori/iwate/tokushima/hiroshima/okayama/yamagata/nagano/shizuoka/ibaraki/shiga/kanagawa/aichi/fukuoka/saitama/hyogo/nara/gifu/mie/kyoto/wakayama/tottori/fukushima/akita/gunma/niigata/toyama/fukui/yamanashi)**。
+      **yamanashiを追加(34/47)**: 本体PDF(2.1MB・R7の53.6MBより大幅に軽量)を直接取得(93頁)。
+      R6は前期/後期募集の章立てがR7と異なり選抜方法の章番号が「第9」(R7は「第11」)とズレて
+      いた(章の統合/分割で毎年番号が変わる)。番号ではなく見出しラベルと内容一致で照合し、
+      (1)ア「学力検査実施教科の評定計×2」イ「学力検査不実施教科の評定計×3」ウ「両者の和」を
+      確認、R7エントリと完全一致(5×5×2×3+4×5×3×3=330点・変更なし)。**教訓: 章番号は年度で
+      前後することがあるため見出しラベル+内容一致で照合すること**をタスクファイルに記録。
       **⚠️ishikawaはR7自体がmeta.unavailable(取得不能)のためR6の変更有無を比較検証できず、
       当面スキップと判断**（R7側で「現行サイト404・Waybackにも一切アーカイブなし」と確定済み）。
       **fukuiを追加(33/47)**: 現行サイトの一般選抜ページに本体要項PDFが掲載されていなかった

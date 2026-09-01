@@ -6,7 +6,7 @@
     "completedAt": null,
     "collectionMethod": "T-Y11 Task C(ops/tasks/T-Y11-winter-bairitsu-pipeline.md)。N1-2(2025-r7)と同じ形式・同じ収集方針。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。",
     "totalPrefectures": 47,
-    "collectedCount": 33,
+    "collectedCount": 34,
     "unavailable": []
   },
   "entries": [
@@ -1129,6 +1129,36 @@
       "lastVerified": "2026-09-01",
       "pdfHash": null,
       "diffFromCurrentYear": "変更なし(2026-09-01に現行サイトの一般入学者選抜ページ(r6ittupan.html)には本体要項PDFが掲載されておらず、Wayback Machineで別ページ(r6youkou.html)のスナップショットからPDFリンク一覧を抽出、R6yoko.pdfを発見・Wayback経由で取得(29頁)。p.6(印刷頁6・PDF頁と一致)「8選抜の方法」イ「選抜に当たっては、調査書中の『学習の記録』の『評定』の第3学年の各教科の評定と学力検査(追検査を含む。)の成績を総合的に審査する」を確認、R7エントリと一言一句完全一致(第3学年のみ・9教科×5段階=45点満点)。令和7・8年度分と完全一致(変更なし)。"
+    },
+    {
+      "code": "yamanashi",
+      "name": "山梨県",
+      "region": "中部",
+      "fiscalYear": "2024",
+      "targetGrades": [
+        1,
+        2,
+        3
+      ],
+      "gradeMultipliers": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
+      "coreMultiplier": 2,
+      "practicalMultiplier": 3,
+      "maxScore": 330,
+      "simplifiedCalc": false,
+      "actualMaxScore": null,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": null,
+      "sourceUrl": "https://www.pref.yamanashi.jp/documents/7061/r6nyushiyoukou.pdf",
+      "sourceUrl2": "https://www.pref.yamanashi.jp/kyouiku-kikaku/nyuusi/nyuushijoukyou.html",
+      "sourceTitle": "山梨県教育委員会「令和6年度山梨県公立高等学校入学者選抜実施要項」III全日制の課程における後期募集 第9選抜方法2(1)ア〜ウ",
+      "lastVerified": "2026-09-01",
+      "pdfHash": null,
+      "diffFromCurrentYear": "変更なし(2026-09-01にWebSearchでR6実施要項ページを発見・本体PDF(2.1MB・R7の53.6MBより大幅に軽量)を直接取得(93頁)。目次でR6は前期/後期募集の章立てがR7と異なり選抜方法が「第9」(R7は「第11」)と番号がずれていることを確認した上でp.18(印刷頁13)をビジョン解析、(1)ア「各学年の学力検査実施教科の評定の計を求め、これに2を乗じて実施教科の調整評定小計とする」イ「各学年の学力検査不実施教科の評定の計を求め、これに3を乗じて不実施教科の調整評定小計とする」ウ「両者の和を全学年必修9教科の成績の評定合計とする」を確認、R7エントリと一言一句完全一致(5×5×2×3+4×5×3×3=330点)。**教訓: 章番号(第◯)は年度によって前後の章の追加・統合で変わることがあるため、番号だけでなく本文の実際の見出しラベル(選抜方法)と内容一致で照合すること**。令和7・8年度分と完全一致(変更なし)。"
     }
   ]
 }
