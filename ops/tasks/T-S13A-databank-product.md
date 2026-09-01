@@ -498,6 +498,19 @@ kagoshima/okinawa）に同型テンプレートで下書きを作成した（**�
 定期確認）③フォーム経由の県（北海道・神奈川・群馬等）はフォーム送信自体が👤ゲートのため、
 文面だけ用意して次のフェーズへ回す。
 
+## 2026-09-01〜09-02 進捗: ok県が2→7県まで進んだ（kill_criteria 10県まで残り3県）
+
+このファイル本体（419〜499行目）はmie/gifuの2県時点の記述のまま更新が止まっていた。
+実際の`redistributableOkPrefectures()`は既にakita/gifu/ibaraki/ishikawa/kagawa/mie/okinawaの
+**7県**を返す（`src/lib/data-license-ledger.ts`が正）。2026-09-01夜にkagawa（香川県教育委員会
+高校教育課からの追撃回答受領・「応募状況データの掲載は差し支えない」）を反映してok県が6→7に増えた。
+同時にnagano（長野県）から一般的な引用利用OK・被リンク不可の回答を受領したため、gifu/mie/ishikawa/
+kagawaと同型の「応募状況データ」を名指しした絞り込み再質問の下書きを設置した(送信は👤)。
+
+**kill_criteria(10県未満で中止)まで残り3県。** 返信待ちの県（Gmail送信済み・フォーム送信済み双方）
+から順次okが増える見込み。次にこのファイルへ戻るセッションは、まずGmail `in:inbox newer_than:Nd`で
+kyoiku-*宛先からの新着返信を確認し、`DATA_LICENSE_LEDGER`へ反映することから始めること。
+
 ## 時計（`ops/CLOCK.md`）
 
 | 期限 | 到達点 |
