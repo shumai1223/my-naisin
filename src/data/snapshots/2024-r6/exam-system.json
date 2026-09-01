@@ -6,7 +6,7 @@
     "completedAt": null,
     "collectionMethod": "T-Y11 Task C(ops/tasks/T-Y11-winter-bairitsu-pipeline.md)。N1-2(2025-r7)と同じ形式・同じ収集方針。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。",
     "totalPrefectures": 47,
-    "collectedCount": 25,
+    "collectedCount": 26,
     "unavailable": []
   },
   "entries": [
@@ -866,6 +866,50 @@
       "lastVerified": "2026-09-01",
       "pdfHash": null,
       "diffFromCurrentYear": "変更なし(2026-09-01にWebSearchでR6要項ページ(?p=4184)を発見・本体PDF(senbatuyoukou.pdf・R7とは別のファイル名パターン)を直接取得。目次で「7中期選抜」の位置を確認後PyMuPDFでビジョン解析、p.26イ選抜方法等(ｱ)a「報告書の第1学年、第2学年及び第3学年における必修教科の評定を合計する。その際、「音楽」、「美術」、「保健体育」及び「技術・家庭」の評定は、2倍する」b「学力検査の配点は、各教科40点とし、それぞれの得点の合計値を求める」を確認、R7エントリと一言一句完全一致(5教科×5×3学年=75点+4教科×5×3学年×2倍=120点、合計195点)。令和7・8年度分と完全一致(変更なし)。"
+    },
+    {
+      "code": "wakayama",
+      "name": "和歌山県",
+      "region": "近畿",
+      "fiscalYear": "2024",
+      "targetGrades": [
+        1,
+        2,
+        3
+      ],
+      "gradeMultipliers": {
+        "1": 1,
+        "2": 1,
+        "3": 2
+      },
+      "coreMultiplier": 1,
+      "practicalMultiplier": 1,
+      "maxScore": 180,
+      "simplifiedCalc": false,
+      "actualMaxScore": null,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": {
+        "totalMaxScore": 680,
+        "examMaxScore": 500,
+        "defaultRatio": {
+          "naishin": 26,
+          "exam": 74
+        },
+        "calcType": "standard",
+        "naishinMultiplier": null,
+        "kValue": null,
+        "sValueCoefficients": null,
+        "osakaTypeCount": null,
+        "hasTokyoSettings": false,
+        "hasKanagawaSettings": false
+      },
+      "sourceUrl": "https://www.pref.wakayama.lg.jp/prefg/500200/d00214177_d/fil/R06_1_zennichi_teiji.pdf",
+      "sourceUrl2": "https://www.pref.wakayama.lg.jp/prefg/500200/d00214177.html",
+      "sourceTitle": "和歌山県教育委員会「令和6年度和歌山県立高等学校入学者選抜(全日制課程・定時制課程)実施要項」第2一般選抜 10(2)ア(ｱ)",
+      "lastVerified": "2026-09-01",
+      "pdfHash": null,
+      "diffFromCurrentYear": "変更なし(2026-09-01にWebSearchでR6要項ページ(d00214177)を発見・本体PDF(R06_1_zennichi_teiji.pdf・R7と同じ命名規則で年度部分のみ相違)を直接取得(29頁)。pdftotextで180のヒットを検出しPDFページ番号を特定してからPyMuPDFでp.20をビジョン解析。「(2)判定資料の評価 ア調査書(ア)評定 次の方法で算出し、計180点満点とする…a第1・第2学年の評定: 第1・第2学年の9教科の5段階評定の合計を算出する(90点満点) b第3学年の評定: 第3学年の9教科の5段階評定の合計を2倍して算出する(90点満点)」を確認、R7エントリと一言一句完全一致。学力検査は各教科100点×5教科=500点満点も確認(reverseCalc.examMaxScore=500と一致)。令和7・8年度分と完全一致(変更なし)。"
     }
   ]
 }

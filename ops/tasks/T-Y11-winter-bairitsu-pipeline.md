@@ -197,12 +197,17 @@ R6（令和6年度）: 45/47県 収録済み（未収録は oita・saga のみ�
 
 ---
 
-# C 制度メタデータの多年度化（令和6年度・令和5年度） — 🟡2026-09-01着手(25/47・★制度変更1件検出)
+# C 制度メタデータの多年度化（令和6年度・令和5年度） — 🟡2026-09-01着手(26/47・★制度変更1件検出)
 
 **A・Bが終わってから。優先度が低い理由: 提案書（9/6）に間に合わないため今期の収益への寄与が間接的。**
 
 - [~] N1-2 と同じ形で `src/data/snapshots/2024-r6/` `2023-r5/` を作る →
-      **2024-r6のみ着手・25件完了(osaka/chiba/tochigi/ehime/kochi/kagoshima/aomori/iwate/tokushima/hiroshima/okayama/yamagata/nagano/shizuoka/ibaraki/shiga/kanagawa/aichi/fukuoka/saitama/hyogo/nara/gifu/mie/kyoto)**。
+      **2024-r6のみ着手・26件完了(osaka/chiba/tochigi/ehime/kochi/kagoshima/aomori/iwate/tokushima/hiroshima/okayama/yamagata/nagano/shizuoka/ibaraki/shiga/kanagawa/aichi/fukuoka/saitama/hyogo/nara/gifu/mie/kyoto/wakayama)**。
+      **wakayamaを追加(26/47)**: R6要項ページ(d00214177)をWebSearchで発見・本体PDF
+      (R06_1_zennichi_teiji.pdf・R7と同じ命名規則で年度部分のみ相違)を直接取得(29頁)。
+      pdftotextで「180」のヒット行からPDFページ番号を特定してPyMuPDFでビジョン解析、
+      「(2)判定資料の評価 ア調査書(ア)評定…計180点満点」「a第1・第2学年:9教科×5段階=90点」
+      「b第3学年:9教科×5段階×2倍=90点」を確認、R7エントリと完全一致(変更なし)。
       **kyotoを追加(25/47)**: R6要項ページ(?p=4184)をWebSearchで発見・本体PDF(senbatuyoukou.pdf・
       R7とは別ファイル名パターン)をライブサイトから直接取得(87頁)。目次で「7中期選抜」の位置を
       確認しPyMuPDFでp.26をビジョン解析、選抜方法等(ｱ)a「報告書の第1・2・3学年の必修教科評定を
