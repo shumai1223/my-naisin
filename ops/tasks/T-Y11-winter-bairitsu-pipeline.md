@@ -210,7 +210,13 @@ R6（令和6年度）: 45/47県 収録済み（未収録は oita・saga のみ�
 **A・Bが終わってから。優先度が低い理由: 提案書（9/6）に間に合わないため今期の収益への寄与が間接的。**
 
 - [~] N1-2 と同じ形で `src/data/snapshots/2024-r6/` `2023-r5/` を作る →
-      **2024-r6のみ着手・41件完了(osaka/chiba/tochigi/ehime/kochi/kagoshima/aomori/iwate/tokushima/hiroshima/okayama/yamagata/nagano/shizuoka/ibaraki/shiga/kanagawa/aichi/fukuoka/saitama/hyogo/nara/gifu/mie/kyoto/wakayama/tottori/fukushima/akita/gunma/niigata/toyama/fukui/yamanashi/kumamoto/miyazaki/okinawa/hokkaido/miyagi/shimane/yamaguchi)**。
+      **2024-r6のみ着手・43/47件完了**(41件済み + 2026-09-01にkagawa/oitaを追加)。
+      残り4県(ishikawa/nagasaki/saga/tokyo)。ishikawa/nagasakiはR7調査時点で一次ソース自体が
+      404かつWayback Machineにもアーカイブ無しと確認済み(取得困難な見込み大)。sagaもR7で
+      同様に404+Wayback一時オフラインだった。tokyoはR6の実施要綱PDF本体
+      (release20230928_01/1.pdf)がWayback Machineに一度もクロールされておらず(CDX検索0件)
+      未取得。次回は`documents/d/kyoiku/`配下の別URLパターンを試すか、archive.today等の
+      代替アーカイブを検討すること
       **yamaguchiを追加(41/47・caveatあり)**: WebSearchでR6実施大綱ページ(216464)を発見・
       本体PDF(8頁)を直接取得。「調査書の『学習の記録』と学力検査の成績は同等に取り扱う」
       を確認、R7エントリと完全一致。R7と同じく学年別配点表そのものは本文書に無くcaveatを
