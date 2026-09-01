@@ -15,4 +15,11 @@ describe('QUOTA_DEFINITIONS', () => {
       expect(entry?.evidence.length).toBeGreaterThan(0);
     }
   });
+
+  it('T-Y11B段階1(2026-09-01完了): A-3が47/47県で完了している', () => {
+    const definedPrefectures = Object.keys(QUOTA_DEFINITIONS).sort();
+    const allPrefectures = Object.keys(COMPETITION_RATE_BY_PREFECTURE).sort();
+    expect(definedPrefectures).toEqual(allPrefectures);
+    expect(definedPrefectures.length).toBe(47);
+  });
 });
