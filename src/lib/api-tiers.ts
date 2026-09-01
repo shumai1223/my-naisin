@@ -50,7 +50,16 @@ export const TIER_POLICIES: Record<ApiTier, TierPolicy> = {
     // 2026-07-16: 30→5。AI引用・お試しは数回/分で足りる。自サイトUI(same-origin)は
     // api-auth側で別枠(30)を持つため実ユーザーには影響しない。エッジ側バインディング
     // (wrangler.jsonc の API_RATE_LIMIT_ANON)と数字を揃えること。
-    ratePerMinute: 5,
+    //
+    // 2026-09-01(API1-2・👤承認): 5→20。5に絞る根拠が失われたため戻す。
+    //  ・守るべきデータはAPI1-1でキー必須にした（/api/schools/[pref] は Business 以上）。
+    //    レート制限の役割は「安いエンドポイントの乱用防止」に変わった。
+    //  ・/api/naishin は47都道府県を1レスポンスで返すため、回数制限はスクレイパーを止めていない
+    //    （5回/分でも全県10分）。止まっていたのは評価しに来た人とAIアシスタントだけだった。
+    //  ・AIアシスタントは「単発参照」しない（複数県の比較で容易に5回を超える）。
+    //    匿名freeを置く目的がGEO被引用である以上、引用しようとする側を弾くのは目的と矛盾する。
+    //  ・自サイトUI(same-origin)は別枠(30)のままなので実ユーザーへの影響は無い。
+    ratePerMinute: 20,
     monthlyQuota: 0, // 月次は数えない（IP単位の窓のみ）
     attributionRequired: true,
     commercialUse: true,
@@ -65,7 +74,14 @@ export const TIER_POLICIES: Record<ApiTier, TierPolicy> = {
     tier: 'free',
     label: 'Free（登録キー）',
     // 2026-07-16: 120→15。月次1万との整合(120/分は83分で月次到達=2桁の不整合だった)。
-    ratePerMinute: 15,
+    //
+    // 2026-09-01(API1-2の随伴修正): 15→30。匿名を20へ上げた結果 anonymous(20) > free(15) となり、
+    // 「キーを登録する理由が無くなる」不整合が api-monetization.test.ts の単調増加テストで顕在化した。
+    // 匿名だけ上げて放置するとFreeティアが死ぬため、Free側も上げて序列を保つ。
+    // 30/分なら月次1万に到達するまで約5.5時間で、月次クォータとの結合も残る
+    // （2026-07-16の「120/分＝83分で月次到達」ほどの2桁の不整合にはならない）。
+    // ⚠️これはAPI1-2に付随して必要になった修正であり、API1-3(👤が中止を裁定)とは別件。
+    ratePerMinute: 30,
     monthlyQuota: 10_000,
     attributionRequired: true,
     commercialUse: true,
@@ -144,6 +160,20 @@ export const TIER_CAPABILITY_MATRIX: TierCapability[] = [
   { label: '優先サポート / SLA', has: (p) => p.prioritySupport },
   { label: 'データ再配布ライセンス・更新通知フィード', has: (p) => p.dataLicense },
 ];
+
+/** ティアの序列（低→高）。requireMinTier の判定に使う。 */
+export const TIER_ORDER: readonly ApiTier[] = ['anonymous', 'free', 'pro', 'business', 'scale'];
+
+/** ティアの序列インデックス（0=anonymous）。未知値は0扱い。 */
+export function tierRank(tier: ApiTier): number {
+  const i = TIER_ORDER.indexOf(tier);
+  return i === -1 ? 0 : i;
+}
+
+/** tier が min 以上の序列かどうか。 */
+export function tierAtLeast(tier: ApiTier, min: ApiTier): boolean {
+  return tierRank(tier) >= tierRank(min);
+}
 
 /** DBに保存される tier 文字列（free/pro/business/scale）を安全に正規化する。 */
 export function normalizeTier(raw: string | null | undefined): Exclude<ApiTier, 'anonymous'> {

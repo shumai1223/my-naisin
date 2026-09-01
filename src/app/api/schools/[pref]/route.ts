@@ -15,7 +15,9 @@ import { getPrefectureByCode } from '@/lib/prefectures';
  *   特定年度のレコードのみに絞り込む（掛-1・多年度データ対応）。
  */
 export async function GET(request: Request, { params }: { params: Promise<{ pref: string }> }) {
-  const gate = await gateApiRequest(request);
+  // 2026-09-01(API1-1): 学校・学科単位の倍率は提案書上「無償公開APIではキー登録が必要（Business以上）」
+  // としているため、Business以上のキーを必須にする。未達は402＋申込先(/developers)を返す（無言の403にしない）。
+  const gate = await gateApiRequest(request, { requireMinTier: 'business' });
   if (!gate.allowed) return gate.response;
   const { pref } = await params;
   await logApiHit('schools-detail', request, { pref, tier: gate.tier });

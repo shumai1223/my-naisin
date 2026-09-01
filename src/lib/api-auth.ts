@@ -19,6 +19,7 @@ import {
   isWithinMonthlyQuota,
   RATE_WINDOW_MS,
   remainingInWindow,
+  tierAtLeast,
   type ApiTier,
 } from './api-tiers';
 
@@ -123,6 +124,32 @@ function tooMany(tier: ApiTier, message: string, retryAfter = 30): Response {
   });
 }
 
+/**
+ * ティア不足（requireMinTier 未達）を402で拒否する。「なぜ塞がっているか」と申込先を必ず書く
+ * （API1-1：無言の403にしない）。
+ */
+function tierRequired(currentTier: ApiTier, minTier: ApiTier): Response {
+  const minLabel = getTierPolicy(minTier).label;
+  return new Response(
+    JSON.stringify({
+      error: 'tier_required',
+      message: `このエンドポイントは${minLabel}以上のAPIキーが必要です。/developers でお申し込みください。`,
+      currentTier,
+      requiredTier: minTier,
+      docs: 'https://my-naishin.com/developers',
+    }),
+    {
+      status: 402,
+      headers: {
+        ...CORS_HEADERS,
+        'Content-Type': 'application/json; charset=utf-8',
+        'X-Api-Tier': currentTier,
+        'X-Api-Required-Tier': minTier,
+      },
+    }
+  );
+}
+
 export type GateResult =
   | { allowed: true; tier: ApiTier; headers: Record<string, string>; cachePrivate: boolean }
   | { allowed: false; response: Response };
@@ -138,6 +165,11 @@ export interface GateOptions {
   edgeBinding?: string | false;
   /** メモリ窓のバケット名前空間。既定 'ip'。別入口（MCP等）は別バケットにして食い合いを防ぐ。 */
   bucket?: string;
+  /**
+   * このルートを許可する最低ティア（既定なし＝全ティア許可）。
+   * 未達（匿名/free等）は402で拒否し、応答に理由と申込先(/developers)を必ず含める（無言の403にしない）。
+   */
+  requireMinTier?: ApiTier;
 }
 
 /**
@@ -153,6 +185,9 @@ export async function gateApiRequest(request: Request, options: GateOptions = {}
       const rec = await lookupApiKey(await hashApiKey(presented));
       if (rec && rec.status === 'active') {
         const tier = rec.tier;
+        if (options.requireMinTier && !tierAtLeast(tier, options.requireMinTier)) {
+          return { allowed: false, response: tierRequired(tier, options.requireMinTier) };
+        }
         const policy = getTierPolicy(tier);
         const usedWindow = limiter.hit(`key:${rec.id}`);
         if (usedWindow > policy.ratePerMinute) {
@@ -184,6 +219,10 @@ export async function gateApiRequest(request: Request, options: GateOptions = {}
 
   // --- 匿名経路（キー無し or 無効） ---
   const tier: ApiTier = 'anonymous';
+  // anonymousは無効キーでも到達するため、ここでも最低ティア判定を行う（キー未保持は常に不足）。
+  if (options.requireMinTier && !tierAtLeast(tier, options.requireMinTier)) {
+    return { allowed: false, response: tierRequired(tier, options.requireMinTier) };
+  }
   const ip = clientIp(request);
   const bucket = options.bucket ?? 'ip';
 

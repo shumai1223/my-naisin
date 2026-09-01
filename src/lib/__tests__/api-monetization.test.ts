@@ -8,12 +8,15 @@
 
 import {
   TIER_POLICIES,
+  TIER_ORDER,
   normalizeTier,
   getTierPolicy,
   isWithinMonthlyQuota,
   remainingInWindow,
   formatTierPrice,
   periodKey,
+  tierRank,
+  tierAtLeast,
 } from '../api-tiers';
 import { createRateLimiter, extractApiKey, gateApiRequest, SAME_ORIGIN_RATE_PER_MINUTE } from '../api-auth';
 import { computeFreemiumFunnel } from '../api-keys';
@@ -74,6 +77,19 @@ describe('api-tiers（ティア表の正準データ）', () => {
     expect(periodKey(new Date('2026-06-27T00:00:00Z'))).toBe('2026-06');
     expect(periodKey(new Date('2026-12-31T23:59:59Z'))).toBe('2026-12');
     expect(periodKey(new Date('2027-01-01T00:00:00Z'))).toBe('2027-01');
+  });
+
+  // 2026-09-01(API1-1): requireMinTier判定に使うティア序列ヘルパー。
+  test('tierRank は TIER_ORDER のインデックスと一致し単調増加', () => {
+    TIER_ORDER.forEach((t, i) => expect(tierRank(t)).toBe(i));
+  });
+
+  test('tierAtLeast: 同格・上位はtrue、下位はfalse', () => {
+    expect(tierAtLeast('business', 'business')).toBe(true);
+    expect(tierAtLeast('scale', 'business')).toBe(true);
+    expect(tierAtLeast('pro', 'business')).toBe(false);
+    expect(tierAtLeast('anonymous', 'business')).toBe(false);
+    expect(tierAtLeast('free', 'anonymous')).toBe(true);
   });
 });
 
@@ -175,6 +191,23 @@ describe('gateApiRequest（匿名経路：D1未接続でも壊れない）', () 
     expect(last!.allowed).toBe(false);
     if (last && !last.allowed) {
       expect(last.response.status).toBe(429);
+    }
+  });
+
+  // 2026-09-01(API1-1): requireMinTierを指定したルートは匿名を402で即拒否する（無言の403にしない）。
+  test('requireMinTier指定時、匿名は402＋理由＋申込先(/developers)で拒否される', async () => {
+    const res = await gateApiRequest(
+      new Request('https://my-naishin.com/api/schools/tokyo', { headers: { 'cf-connecting-ip': '203.0.113.200' } }),
+      { requireMinTier: 'business' }
+    );
+    expect(res.allowed).toBe(false);
+    if (!res.allowed) {
+      expect(res.response.status).toBe(402);
+      const json = await res.response.json();
+      expect(json.error).toBe('tier_required');
+      expect(json.currentTier).toBe('anonymous');
+      expect(json.requiredTier).toBe('business');
+      expect(json.docs).toBe('https://my-naishin.com/developers');
     }
   });
 
