@@ -66,7 +66,9 @@ describe('buildCompetitionRatePublicationBaseline', () => {
     expect(chiba?.publishedAt).toBe('令和8年（2026年）2月13日');
     expect(chiba?.unresolved.some((u) => u.startsWith('公表日'))).toBe(false);
 
-    const withoutNote = baseline.find((e) => e.prefecture === 'aomori');
+    // 2026-09-01のT-Y11B段階1でaomori等39県分の公表日を追記したため、未解決のまま残る
+    // 3県（ehime/fukuoka/hokkaido・一次資料に発表日の記述が無い）を代表例に差し替えた。
+    const withoutNote = baseline.find((e) => e.prefecture === 'fukuoka');
     expect(withoutNote?.publishedAt).toBeNull();
     expect(withoutNote?.unresolved.some((u) => u.startsWith('公表日'))).toBe(true);
   });
@@ -88,6 +90,14 @@ describe('buildCompetitionRatePublicationBaseline', () => {
   it('never mechanically classifies a source as "preliminary" without a real 速報 keyword hit', () => {
     // 2026-09-01時点の実データでは47県中0件が速報表記。0件のまま固定し、変化したら気づけるようにする。
     expect(baseline.filter((e) => e.finality === 'preliminary')).toEqual([]);
+  });
+
+  it('T-Y11B段階1(2026-09-01完了): 47県中44県で公表日が判明している', () => {
+    const resolved = baseline.filter((e) => e.publishedAt !== null).map((e) => e.prefecture).sort();
+    const unresolved = baseline.filter((e) => e.publishedAt === null).map((e) => e.prefecture).sort();
+    // 一次資料のヘッダコメントに発表日の記述が無く、推測せず未解決のまま残した3県（推測しない=Y-0憲法③）。
+    expect(unresolved).toEqual(['ehime', 'fukuoka', 'hokkaido']);
+    expect(resolved.length).toBe(44);
   });
 });
 
