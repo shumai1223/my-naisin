@@ -352,7 +352,23 @@ A-3 quota定義の構造化 3/47県  （44県未着手）
       x1<140のため、160への絞り込みは学校名の誤検知を起こさない安全な調整と確認済み）。
       `parse-table-pdf-gunma.test.ts`で検証済み（jest6テストgreen）。tsc実exit0・
       jestフル375suites6475tests green。**gunmaは実装完了**
-- [ ] 残り37県（usable 43県からibaraki・tochigi・akita・tokushima・ishikawa・gunmaを除く）に
+- [x] **nagasaki(R8)を実装・検証完了（2026-09-02）**。公表が早い順（2/6締切・全未着手県中最速）で
+      選定。tochigi型（y座標クラスタリング・単純carry-forward）で116/116件・完全一致（機械集計
+      グランドトータルquota7,288・applicants5,794も既存noteと一致）。唯一のくくり募集（長崎東
+      「普通・国際」）は既存データの「（くくり募集）」付与のみdepartmentOverrideで対応・他は
+      raw PDFの表記が既存データとそのまま一致した（parensも含め素直）。
+      - ⚠️**新しい罠を発見**: 学校別小計「計」行とグランドトータル行（県立計/市立計/総計）の
+        除外を`.includes('計')`（部分一致）で実装したところ、正当な学科名「会計ビジネス」
+        （「計」の字を含む・佐世保商業）が誤って除外され1件欠落した（115/116）。**「計」を
+        含む部分一致でなく、学校別小計はdepartmentの完全一致（'計'単体）、グランドトータルは
+        schoolNameの完全一致（'県立計'/'市立計'/'総計'の3値）で判定する必要がある**（他県
+        でも同型の罠が起こりうる: 「合計」を含む正当な学科名は考えにくいが「計」は「会計」
+        「統計」等の熟語に頻出するため要注意）。
+      - PDFはpdftotext -layoutでは列がひどく乱れたが（gunmaと同型の罠）、PyMuPDF座標抽出＋
+        y座標クラスタリング（罫線不使用）で正しく行を再構成できた。
+      `parse-table-pdf-nagasaki.test.ts`で検証済み（jest4テストgreen）。tsc実exit0・
+      jestフル378suites6496tests green。**nagasakiは実装完了**
+- [ ] 残り36県（usable 43県からibaraki・tochigi・akita・tokushima・ishikawa・gunma・nagasakiを除く）に
       同じ方式を横展開する。着手前に`pdftotext -table -enc UTF-8`の出力を目視し、
       ①学校名ラベルの位置（先頭行か中間か＝ibaraki型かどうか）②長い学校名の折り返しの
       有無（akita型が必要か）③№列の有無、を確認してから実装すること
