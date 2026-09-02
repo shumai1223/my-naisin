@@ -508,7 +508,28 @@ A-3 quota定義の構造化 3/47県  （44県未着手）
         全県共通」という前提を無条件に信じず、対象県の既存データを都度確認すること**。
       `parse-table-pdf-okinawa.test.ts`で検証済み（jest6テストgreen）。tsc実exit0・
       jestフル384suites6525tests green。**okinawaは実装完了**
-- [ ] 残り30県（usable 43県からibaraki・tochigi・akita・tokushima・ishikawa・gunma・nagasaki・ehime・toyama・aomori・fukui・kagawa・okinawaを除く。kanagawaは見送り扱い）に
+- [x] **nara(R8)を実装・検証完了（2026-09-02）・倍率が資料に印字されていない県で初のパーサ化**。
+      71/71件・完全一致（グランドトータルquota6,896・applicants6,276も既存noteの「合計」行と
+      一致）。既存データも自前算出のため、T-Y11Cで確立した`roundHalfUpScaled`（BigInt整数演算・
+      `toFixed`のバグを踏まない）をパーサ側でも再利用し突合した（初の実戦投入）。
+      - ⚠️**新しい罠1: 「基底ラベル1件→複数の（コース名）行」という一対多の合成が必要**
+        （添上「普通」→（人文探究）（人文探究以外）の2レコード、桜井も同型）。fukui/aomori型
+        のpendingキュー（1回消費でFIFOから取り除く）では2件目以降のコース行に基底ラベルを
+        再利用できない。**解法: 基底ラベルを「消費して取り除く」のではなく「currentSchoolと
+        同じ永続変数」として保持し、数値行の学科名が「（」で始まる場合だけ直前の基底ラベルと
+        連結する**（新しい基底ラベル行が来たら更新・「（」で始まらない自己完結型の行は連結
+        しない）。
+      - ⚠️**新しい罠2（kagawa教訓の再確認・より厳密化）: 「会計」を含む正当な学科名がある県で
+        「◯◯計」小計行をブロック全体の部分一致で除外すると事故る**。商業高校の「会計」学科が
+        丸ごと消えた（ブロックの学校名+全学科名の連結文字列に対し`.includes('計')`で判定して
+        いたため）。**「県立計」の「計」がgunma/ehime型で学校名列にはみ出し分裂すること
+        もある**ため、単純な学校名単体チェックでも不十分。**最終的な解法は「ブロック全体の
+        連結文字列が既知の小計/合計ラベル（'県立計'/'市立計'/'合計'/'総計'）に前方一致するか」
+        で判定する**（`.includes`ではなく`.startsWith`。「会計」で始まるブロックは対象外に
+        なる一方、分裂した「県」+「立計...」は正しく前方一致する）。
+      `parse-table-pdf-nara.test.ts`で検証済み（jest4テストgreen）。tsc実exit0・
+      jestフル385suites6529tests green。**naraは実装完了**
+- [ ] 残り29県（usable 43県からibaraki・tochigi・akita・tokushima・ishikawa・gunma・nagasaki・ehime・toyama・aomori・fukui・kagawa・okinawa・naraを除く。kanagawaは見送り扱い）に
       同じ方式を横展開する。着手前に`pdftotext -table -enc UTF-8`の出力を目視し、
       ①学校名ラベルの位置（先頭行か中間か＝ibaraki型かどうか）②長い学校名の折り返しの
       有無（akita型が必要か）③№列の有無、を確認してから実装すること
