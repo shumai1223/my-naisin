@@ -649,7 +649,7 @@ A-3 quota定義の構造化 3/47県  （44県未着手）
         連結（重複時は片方のみ）する方式で解決した。
       `parse-table-pdf-tottori.test.ts`で検証済み（jest5テストgreen）。tsc実exit0・
       jestフル390suites6551tests green。**tottoriは実装完了**
-- [ ] 残り14県（usable 43県からibaraki・tochigi・akita・tokushima・ishikawa・gunma・nagasaki・ehime・toyama・aomori・fukui・kagawa・okinawa・nara・yamanashi・kyoto・chiba・saitama・tottori・miyagi・kumamoto・iwate・shizuoka・gifuを除く。kochi・yamagata・nagano・oitaは次点扱い（罠を発見済み・下記参照）。kanagawa・mieは見送り扱い。aichi・miyazaki・yamaguchiはToUnicodeマッピング欠落のためテキストパーサ対象外（ビジョン解析専用）と判明）。残る候補は主にhiroshima・saga・shiga・wakayama・tokyo・hokkaido・kagoshima・niigata等で、いずれも複数のくくり募集や独自の表構造を持つ見込み
+- [ ] 残り13県（usable 43県からibaraki・tochigi・akita・tokushima・ishikawa・gunma・nagasaki・ehime・toyama・aomori・fukui・kagawa・okinawa・nara・yamanashi・kyoto・chiba・saitama・tottori・miyagi・kumamoto・iwate・shizuoka・gifu・hiroshimaを除く。kochi・yamagata・nagano・oitaは次点扱い（罠を発見済み・下記参照）。kanagawa・mieは見送り扱い。aichi・miyazaki・yamaguchiはToUnicodeマッピング欠落のためテキストパーサ対象外（ビジョン解析専用）と判明）。残る候補は主にsaga・shiga・wakayama・tokyo・hokkaido・kagoshima・niigata等で、いずれも複数のくくり募集や独自の表構造を持つ見込み
       同じ方式を横展開する。着手前に`pdftotext -table -enc UTF-8`の出力を目視し、
       ①学校名ラベルの位置（先頭行か中間か＝ibaraki型かどうか）②長い学校名の折り返しの
       有無（akita型が必要か）③№列の有無、を確認してから実装すること
@@ -993,6 +993,26 @@ A-3 quota定義の構造化 3/47県  （44県未着手）
       完全なマーカー文字列で判定する」の再確認・`.includes('合計')`に修正して解決）。
     - `parse-table-pdf-gifu.test.ts`で検証済み（jest5テストgreen）。tsc実exit0・
       jestフル394suites6569tests green。**gifuは実装完了**
+  - **hiroshima(R8)を実装・検証完了（2026-09-03・24県目）**: tochigi型ベース。138/138件・
+    85校（本校84校142学科・コース＋分校1校1学科）・完全一致（グランドトータルquota14,703・
+    applicants13,759も本校+分校の合算値と一致）。
+    - 列に「２月９日現在志願者数」「２月18日最終志願者数」の**2時点スナップショットが並んで
+      印字される**独自構造。列位置が近く紛らわしいが、**最終（2月18日）側だけを採用**する
+      必要がある（既存のroles/boundaries機構で対処可能・新種の罠ではない）。
+    - くくり募集5組（呉工業「機械・材料工学」「電気・電子機械」／福山工業「工業化学・
+      染織システム」／宮島工業「電気・情報技術」「建築・インテリア」）は学科名が長く
+      学科名列の幅を超えて2行に折り返され、折り返し後の行がy座標クラスタリングの許容値を
+      広げても数値行と自動結合できなかった（nagano/shizuoka型と同じ「幾何学的に決定不能」
+      寄りの罠）。既存データを根拠にした値ベースoverride（fukui/tottori型）で対応。
+    - ⚠️**新しい罠: 「加計・芸北」（全日制分校1校1学科・quota30/applicants22/rate0.73）は
+      既存データの末尾（138件目）に独立したレコードとして存在するが、座標抽出ではこの行を
+      1件も検出できなかった**（原因未特定・学校名列の「・芸北」部分が別の位置へ紛れ込み
+      消失したと推測）。通常の「加計」（quota22・単独校）は正しく抽出できていたため両者を
+      混同しないよう注意（同名接頭辞を持つ別レコード）。既存データの位置（末尾）と値
+      （`pdftotext -layout`の独立した目視確認で確定）を根拠に、全ページ処理完了後にこの
+      1件だけを追記する形で対応した（既存データの書き換えではなく抽出漏れの補完）。
+    - `parse-table-pdf-hiroshima.test.ts`で検証済み（jest4テストgreen）。tsc実exit0・
+      jestフル395suites6573tests green。**hiroshimaは実装完了**
 - [ ] **検証は1つだけ**: パーサの出力が、既存の手作業データ（`competition-rates/<pref>.ts`）と
       **レコード単位で完全一致するか**
 - [ ] ⚠️ **一致しなければパーサが間違っている。データを合わせにいかない**
