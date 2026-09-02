@@ -19,7 +19,12 @@ import { join } from 'node:path';
 
 const PREFECTURE_TESTS_DIR = join(__dirname, '..', '__tests__');
 // このファイル自身や、prefecture固有ではない横断テストは対象から除外する。
-const CROSS_CUTTING_FILES = new Set(['index-invariants.test.ts', 'scope-exclusion-invariant.test.ts', 'grand-total-reconciliation-invariant.test.ts']);
+const CROSS_CUTTING_FILES = new Set([
+  'index-invariants.test.ts',
+  'scope-exclusion-invariant.test.ts',
+  'grand-total-reconciliation-invariant.test.ts',
+  'finalrate-invariant.test.ts',
+]);
 
 function prefectureTestFiles(): string[] {
   return readdirSync(PREFECTURE_TESTS_DIR).filter((f) => f.endsWith('.test.ts') && !CROSS_CUTTING_FILES.has(f));
