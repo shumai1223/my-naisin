@@ -55,7 +55,11 @@ def extract(pdf_path, page_no):
                     hlines.append({"y": round(p1.y, 2), "x0": round(min(p1.x, p2.x), 2), "x1": round(max(p1.x, p2.x), 2)})
             elif item[0] == "re":
                 r = item[1]
-                if r.height < 1.0 and r.width > 20:
+                # ⚠️2026-09-02判明(ishikawa): 閾値`height < 1.0`は厳しすぎて実在する罫線を
+                # 取りこぼす（height=1.2の罫線が複数見つかった）。表内容のセル背景矩形は
+                # 幅と高さが同オーダー（例: height=11.76・63.6）なのに対し、罫線は幅に比べ
+                # 高さが極端に薄い（height/width が1%未満）。この比率で判定する方が安全。
+                if r.height < 3.0 and r.width > 20:
                     hlines.append({"y": round(r.y0, 2), "x0": round(r.x0, 2), "x1": round(r.x1, 2)})
     hlines.sort(key=lambda h: h["y"])
     return {"chars": chars, "hlines": hlines}

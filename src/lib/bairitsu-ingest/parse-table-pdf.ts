@@ -140,14 +140,18 @@ export function normalizeExtractedText(s: string): string {
 }
 
 /**
- * 学科名の表記ゆれ正規化。教委PDFは複数学科を「普通、サイエンス」のように読点で列挙するが、
- * 本プロジェクトの既存47都道府県データ（`src/data/competition-rates/`）は一貫して読点でなく
- * 中黒「・」で表記する既存の転記慣行がある（多年度データの表記統一のため。ibarakiの
- * ヘッダコメント参照）。これはPDF側の文字化け等の不具合ではなく、本プロジェクト独自の
- * 表記統一ルールなので、正規化ロジックとして明示的に持つ。
+ * 学科名の表記ゆれ正規化。
+ * ①教委PDFは複数学科を「普通、サイエンス」のように読点で列挙するが、本プロジェクトの既存
+ * 47都道府県データ（`src/data/competition-rates/`）は一貫して読点でなく中黒「・」で表記する
+ * 既存の転記慣行がある（多年度データの表記統一のため。ibarakiのヘッダコメント参照）。
+ * ②括弧付きコース名（例:「普通(キャリア)」）は、PDF側が半角括弧で印字することがあるが
+ * （ishikawaのR8で確認）、既存データは一貫して全角括弧「（キャリア）」で表記する。
+ * いずれもPDF側の不具合ではなく、本プロジェクト独自の表記統一ルールなので、正規化ロジック
+ * として明示的に持つ。⚠️半角→全角の変換のみ行う（tokushimaのように元から全角括弧の県では
+ * no-op・全角→半角には変換しないため`normalizeHalfwidthKatakana`のNFKCバグとは無関係）。
  */
 export function normalizeDepartmentText(s: string): string {
-  return normalizeExtractedText(s).replace(/、/g, '・');
+  return normalizeExtractedText(s).replace(/、/g, '・').replace(/\(/g, '（').replace(/\)/g, '）');
 }
 
 /**
@@ -215,9 +219,19 @@ export function parseTablePdfPageRows(geom: PdfPageGeometry, layout: TableColumn
  * （例:「全日制計」の「全」だけが学校名列に、「日制計」が学科名列に入る）ため、判定は
  * schoolName単体・department単体の完全一致ではなく、両者を連結した文字列への部分一致で行う。
  */
+export interface AssembleCompetitionRateOptions {
+  /**
+   * ⚠️2026-09-02 ishikawaで判明: 複数学科校の末尾に学校単位の「小計」行が付随する県がある
+   * （ibaraki/tokushimaには無かったパターン）。この述語がtrueを返す行（department列の
+   * 文字列で判定）はレコード化せずスキップする。
+   */
+  excludeRow?: (department: string) => boolean;
+}
+
 export function assembleCompetitionRateRows(
   pageRows: RawTableRow[][],
-  summaryMarker: string
+  summaryMarker: string,
+  options: AssembleCompetitionRateOptions = {}
 ): ParsedCompetitionRow[] {
   const allRows = pageRows.flat();
   const cutIdx = allRows.findIndex((r) => (r.schoolName + r.department).includes(summaryMarker));
@@ -230,15 +244,17 @@ export function assembleCompetitionRateRows(
     if (row.isBlockEnd) {
       const schoolName = blockRows.map((r) => r.schoolName).find((s) => s.length > 0) ?? '';
       for (const r of blockRows) {
+        const department = normalizeDepartmentText(r.department);
         const quota = Number(r.quotaText.replace(/,/g, ''));
         const finalApplicants = Number(r.applicantsText.replace(/,/g, ''));
         const finalRate = Number(r.rateText);
-        if (!r.department || !Number.isFinite(quota) || !Number.isFinite(finalApplicants) || !Number.isFinite(finalRate)) {
+        if (!r.department || options.excludeRow?.(department)) continue;
+        if (!Number.isFinite(quota) || !Number.isFinite(finalApplicants) || !Number.isFinite(finalRate)) {
           continue; // 数値化できない行（脚注・空行の混入等）は正直にスキップする
         }
         records.push({
           schoolName: normalizeExtractedText(schoolName),
-          department: normalizeDepartmentText(r.department),
+          department,
           quota,
           finalApplicants,
           finalRate,
