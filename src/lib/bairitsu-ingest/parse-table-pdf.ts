@@ -82,6 +82,14 @@ export interface TableColumnLayout {
    * 明示できる（省略時は従来どおり0=学校名/1=学科名/2=quota/3=applicants/4=rateの隣接5列）。
    */
   roles?: { schoolName: number; department: number; quota: number; finalApplicants: number; finalRate: number };
+  /**
+   * ⚠️2026-09-02 kochiで判明: 学科名が複数の副列に分裂して印字される県がある（例:
+   * ①学科カテゴリ「工業」②コース略称「(機土)」③具体名「機械」の3列。既存データは
+   * ②を無視して①+③を`カテゴリ(具体名)`の形に合成する）。`roles`は1フィールド=1列しか
+   * 表現できないため、`extraColumns`で任意の名前→列インデックスを追加指定できるようにし、
+   * `RawTableRow.extra`にその列の生テキストを入れる（呼び出し側が組み立てロジックを持つ）。
+   */
+  extraColumns?: Record<string, number>;
 }
 
 export interface RawTableRow {
@@ -94,6 +102,8 @@ export interface RawTableRow {
   rateText: string;
   /** この行の下端の罫線が「完全な区切り」＝ここでブロック（学校）が終わる。 */
   isBlockEnd: boolean;
+  /** `TableColumnLayout.extraColumns`で指定した追加列の生テキスト（列名→値）。 */
+  extra: Record<string, string>;
 }
 
 export interface ParsedCompetitionRow {
@@ -196,6 +206,13 @@ export function parseTablePdfPageRows(geom: PdfPageGeometry, layout: TableColumn
     for (const arr of cellChars) arr.sort((a, b) => a.x0 - b.x0);
     const joinCol = (arr: PdfChar[]) => arr.map((c) => c.c).join('').trim();
 
+    const extra: Record<string, string> = {};
+    if (layout.extraColumns) {
+      for (const [name, idx] of Object.entries(layout.extraColumns)) {
+        extra[name] = joinCol(cellChars[idx]);
+      }
+    }
+
     rows.push({
       yTop,
       yBottom,
@@ -205,6 +222,7 @@ export function parseTablePdfPageRows(geom: PdfPageGeometry, layout: TableColumn
       applicantsText: joinCol(cellChars[roles.finalApplicants]),
       rateText: joinCol(cellChars[roles.finalRate]),
       isBlockEnd: mergedLines[i + 1].x0 <= fullLineX0Max,
+      extra,
     });
   }
   return rows;
