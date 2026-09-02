@@ -419,7 +419,26 @@ A-3 quota定義の構造化 3/47県  （44県未着手）
         で除外した
       `parse-table-pdf-toyama.test.ts`で検証済み（jest6テストgreen）。tsc実exit0・
       jestフル380suites6507tests green。**toyamaは実装完了**
-- [ ] 残り34県（usable 43県からibaraki・tochigi・akita・tokushima・ishikawa・gunma・nagasaki・ehime・toyamaを除く。kanagawaは見送り扱い）に
+- [x] **aomori(R8)を実装・検証完了（2026-09-02）**。89/89件・完全一致（グランドトータル
+      quota6,980・applicants6,436も既存noteと一致）。toyama型（罫線ブロック内のどこにラベルが
+      あっても採用）を流用しつつ、**2つの新しい罠**を発見した。
+      - ⚠️**罠1: aomoriは罫線が「学科ごとの内部区切り」まで実在する（toyamaには無かった）**。
+        toyama型の単純な「hlines全部を境界にする」実装をそのまま使うと、内部区切り線まで
+        ブロック境界として誤検出し、1校が複数ブロックに分裂してラベルが見つからなくなる。
+        **ibaraki型の`fullLineX0Max`と同じ判定（学校名列を跨ぐ完全線か、学科名列以降にしか
+        伸びない部分線か）をtoyama型のブロック分割にも適用する必要がある**（`groupRowsIntoBlocks`
+        に`fullLineX0Max`引数を追加）。**トヨタ型を採用する県では毎回「本当に内部区切り線が
+        存在しないか」を罫線のx0分布で確認すること**（toyamaは無かったが偶然であり一般化できない）
+      - ⚠️**罠2: 学科名テキストと数値が別の行に分離することがある（新しいエリアの最初の学校で
+        発生しやすい）**。「商業」という学科名だけの行の直後に、数値付きだが学科名列が空欄の
+        行が続く（青森商業・五所川原で確認）。**解法**: ブロック内を先頭から走査し、数値を
+        持たない「学科名のみの行」をpendingキューに積み、数値を持つ行で学科名列が空欄だった
+        場合はpendingキューから1件消費する（出現順が保たれている前提）。**ここでも
+        `normalizeExtractedText`を通さずに`.trim()`だけで比較するとdepartmentOverridesの
+        キーが一致しない事故が起きる**（トラッキングスペース入りの生テキストのまま扱った）
+      `parse-table-pdf-aomori.test.ts`で検証済み（jest4テストgreen）。tsc実exit0・
+      jestフル381suites6511tests green。**aomoriは実装完了**
+- [ ] 残り33県（usable 43県からibaraki・tochigi・akita・tokushima・ishikawa・gunma・nagasaki・ehime・toyama・aomoriを除く。kanagawaは見送り扱い）に
       同じ方式を横展開する。着手前に`pdftotext -table -enc UTF-8`の出力を目視し、
       ①学校名ラベルの位置（先頭行か中間か＝ibaraki型かどうか）②長い学校名の折り返しの
       有無（akita型が必要か）③№列の有無、を確認してから実装すること
