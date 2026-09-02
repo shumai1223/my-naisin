@@ -178,3 +178,79 @@ export function analyzeMobileRatioByDay(rows) {
       return { date, total: b.total, mobile: b.mobile, mobileRatio, flagged };
     });
 }
+
+/**
+ * ★2026-09-02追加: 日次シグネチャ（analyzeClickFraudByDay）の取りこぼしを埋める判定。
+ *
+ * **なぜ足したか（実測）**: 2026-09-02にbot 451行を削除した際、既存の日次シグネチャ
+ * （件数10以上 かつ distinct IP比率0.85以上 かつ distinct UA 12以下）が次の日を全て見逃していた。
+ *
+ *   2026-08-04  40件・モバイル 0件(0.0%)  → ipRatio 0.900 だが distinctUA が13以上で不該当
+ *   2026-08-06  36件・モバイル 1件(2.8%)  → ipRatio 0.611 で不該当
+ *   2026-08-25  30件・モバイル 1件(3.3%)  → ipRatio 0.900 だが同上
+ *
+ * **IPの散り方に条件を置くと、プロキシの使い方が変わるだけですり抜ける。**
+ * 一方でモバイル比率は、実トラフィックの性質（GSC実測で74-80%がモバイル）に依存するため、
+ * 攻撃側が偽装するには「モバイルUAを使う」必要があり、その時点で別の署名が立つ。
+ *
+ * 閾値を主観で決めないよう、**二項分布の裾確率**を併記する。
+ * 実モバイル率 p=0.75 のとき「n件中k件以下しかモバイルでない」確率が
+ * 極端に小さければ、偶然ではないと機械的に言える。
+ *
+ * 実測例: 2026-08-04 は 40件中0件 → 8.3e-25。2026-08-19 は 10件中2件 → 4.2e-4（判定は「残す」）。
+ *
+ * @param {{ d: string, user_agent: string }[]} rows
+ * @param {{ minDailyClicks?: number, maxMobileRatio?: number, assumedMobileRatio?: number }} [opts]
+ * @returns {{ date: string, total: number, mobile: number, mobileRatio: number,
+ *             chanceProbability: number, flagged: boolean }[]}
+ *   chanceProbability = 実モバイル率 assumedMobileRatio のときに偶然そうなる確率（小さいほどbot濃厚）。
+ */
+export function analyzeMobileAnomalyByDay(rows, opts = {}) {
+  const minDailyClicks = opts.minDailyClicks ?? 10;
+  // 15%未満を異常とする。50%（analyzeMobileRatioByDayの警告閾値）より厳しくしているのは、
+  // こちらが「削除候補の抽出」に使われうるため、グレーな日を巻き込まないことを優先するから。
+  const maxMobileRatio = opts.maxMobileRatio ?? 0.15;
+  const p = opts.assumedMobileRatio ?? 0.75;
+
+  const byDate = new Map();
+  for (const r of rows) {
+    if (!byDate.has(r.d)) byDate.set(r.d, { total: 0, mobile: 0 });
+    const bucket = byDate.get(r.d);
+    bucket.total++;
+    if (MOBILE_UA_RE.test(r.user_agent ?? '')) bucket.mobile++;
+  }
+
+  return [...byDate.entries()]
+    .sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0))
+    .map(([date, b]) => {
+      const mobileRatio = b.total > 0 ? b.mobile / b.total : 0;
+      const flagged = b.total >= minDailyClicks && mobileRatio < maxMobileRatio;
+      return {
+        date,
+        total: b.total,
+        mobile: b.mobile,
+        mobileRatio,
+        chanceProbability: binomialAtMost(b.total, b.mobile, p),
+        flagged,
+      };
+    });
+}
+
+/**
+ * 二項分布の下側累積 P(X <= k), X ~ B(n, p)。
+ * n が大きいと階乗が溢れるため対数空間で計算する（純関数・テスト可能）。
+ * @param {number} n @param {number} k @param {number} p
+ * @returns {number} 0〜1
+ */
+export function binomialAtMost(n, k, p) {
+  if (n <= 0) return 1;
+  if (k >= n) return 1;
+  if (k < 0) return 0;
+  let logChoose = 0;
+  let sum = 0;
+  for (let i = 0; i <= k; i++) {
+    if (i > 0) logChoose += Math.log(n - i + 1) - Math.log(i);
+    sum += Math.exp(logChoose + i * Math.log(p) + (n - i) * Math.log(1 - p));
+  }
+  return Math.min(1, sum);
+}

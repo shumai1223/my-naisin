@@ -14,6 +14,7 @@ import {
   analyzeClickBursts,
   isImplausibleReferer,
   analyzeMobileRatioByDay,
+  analyzeMobileAnomalyByDay,
 } from './lib/click-fraud-detector.mjs';
 
 const args = process.argv.slice(2);
@@ -58,6 +59,11 @@ const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(
 const last7dRows = rows.filter((r) => r.d >= sevenDaysAgo);
 const mobileFlagged = analyzeMobileRatioByDay(last7dRows).filter((r) => r.flagged);
 
+// ★2026-09-02追加: 全期間でモバイル比率が極端に低い日(15%未満)を、二項確率つきで抽出する。
+// 既存の日次シグネチャ(analyzeClickFraudByDay)はdistinct IP比率に依存するため、
+// 2026-08-04(40件中モバイル0)・08-06(36件中1)・08-25(30件中1)を取りこぼしていた実績がある。
+const mobileAnomaly = analyzeMobileAnomalyByDay(rows).filter((r) => r.flagged);
+
 if (implausible.length > 0) {
   const byDay = {};
   for (const r of implausible) byDay[r.d] = (byDay[r.d] ?? 0) + 1;
@@ -68,7 +74,7 @@ if (implausible.length > 0) {
   for (const [d, n] of Object.entries(byDay).sort()) console.log(`  ${d}: ${n}件`);
 }
 
-if (flagged.length === 0 && bursts.length === 0 && implausible.length === 0 && mobileFlagged.length === 0) {
+if (flagged.length === 0 && bursts.length === 0 && implausible.length === 0 && mobileFlagged.length === 0 && mobileAnomaly.length === 0) {
   console.log(`OK: 過去${days}日間にクリック不正の疑いは無し(${rows.length}件を検査)`);
   process.exit(0);
 }
@@ -87,6 +93,19 @@ if (mobileFlagged.length > 0) {
   for (const m of mobileFlagged) {
     console.log(`  ${m.date}: 総クリック${m.total} / モバイル${m.mobile}(比率${(m.mobileRatio * 100).toFixed(1)}%)`);
   }
+}
+
+if (mobileAnomaly.length > 0) {
+  console.log(
+    `⚠️ モバイル比率が15%未満の日が${mobileAnomaly.length}件(全期間・偶然そうなる確率つき):`
+  );
+  for (const m of mobileAnomaly) {
+    console.log(
+      `  ${m.date}: 総クリック${m.total} / モバイル${m.mobile}(${(m.mobileRatio * 100).toFixed(1)}%)` +
+        ` / 偶然の確率 ${m.chanceProbability.toExponential(1)}`
+    );
+  }
+  console.log('  ※この日の非モバイル行は削除候補。実行はC7ゲート(👤承認＋事前バックアップ)。');
 }
 
 if (bursts.length > 0) {
