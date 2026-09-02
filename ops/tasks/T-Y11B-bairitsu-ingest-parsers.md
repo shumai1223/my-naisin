@@ -649,7 +649,7 @@ A-3 quota定義の構造化 3/47県  （44県未着手）
         連結（重複時は片方のみ）する方式で解決した。
       `parse-table-pdf-tottori.test.ts`で検証済み（jest5テストgreen）。tsc実exit0・
       jestフル390suites6551tests green。**tottoriは実装完了**
-- [ ] 残り18県（usable 43県からibaraki・tochigi・akita・tokushima・ishikawa・gunma・nagasaki・ehime・toyama・aomori・fukui・kagawa・okinawa・nara・yamanashi・kyoto・chiba・saitama・tottori・miyagi・kumamotoを除く。kochi・yamagata・naganoは次点扱い（罠を発見済み・下記参照）。kanagawa・mieは見送り扱い）に
+- [ ] 残り17県（usable 43県からibaraki・tochigi・akita・tokushima・ishikawa・gunma・nagasaki・ehime・toyama・aomori・fukui・kagawa・okinawa・nara・yamanashi・kyoto・chiba・saitama・tottori・miyagi・kumamoto・iwateを除く。kochi・yamagata・naganoは次点扱い（罠を発見済み・下記参照）。kanagawa・mieは見送り扱い）に
       同じ方式を横展開する。着手前に`pdftotext -table -enc UTF-8`の出力を目視し、
       ①学校名ラベルの位置（先頭行か中間か＝ibaraki型かどうか）②長い学校名の折り返しの
       有無（akita型が必要か）③№列の有無、を確認してから実装すること
@@ -897,6 +897,28 @@ A-3 quota定義の構造化 3/47県  （44県未着手）
     - 既存データは学科名の括弧を半角`()`で統一（okinawa/nara型と同型の例外・全角化しない）。
     - `parse-table-pdf-kumamoto.test.ts`で検証済み（jest4テストgreen）。tsc実exit0・
       jestフル391suites6555tests green。**kumamotoは実装完了**
+  - **iwate(R8)を実装・検証完了（2026-09-03・21県目）**: tochigi型（学校名セルの結合が無い・
+    単純carry-forward）をそのまま流用できた最も単純な部類の県。113/113件・59校・完全一致
+    （グランドトータルquota8,215・applicants6,574も公式「合計」行と一致）。倍率も印字済みで
+    自前算出が不要だった（`roundHalfUpScaled`すら要らない）。
+    - 列は[学校名/大学科(未使用)/学科(学系)(=department)/入学定員(未使用)/いわて留学合格者数
+      (未使用)/連携型志願者数・併設型入学決定者数(未使用)/募集定員(=quota)/志願者数
+      (=finalApplicants)/志願倍率(=finalRate)/...]という多列構成（ishikawa/tochigi型と同じ
+      roles指定）だが、**大学科列（例:「普通」「農業」）は既存データでは基本的に使われず、
+      学科(学系)列（例:「普通科」「動物科学科」）だけが単独でdepartmentとして採用される**。
+      他県で頻出する「広域区分+具体名の二段組」を毎回警戒したが、この県は99%が単一列採用
+      だった（警戒のコストは払ったが実害は無かった）。
+    - ⚠️**唯一の例外1件（大東）: 大学科列「商業」+学科(学系)列「情報ビジネス科」を括弧で連結
+      した「商業(情報ビジネス科)」が正解**。しかも同校の「普通科」レコードとquota/
+      finalApplicants/finalRateが偶然完全に同一（40/7/0.18）だったため、fukui/tottori型の
+      値ベース（quota+applicants）overrideではキーが衝突する。**学校名+学科名テキストを
+      キーにしたoverride**に切り替えて回避した。⚠️このoverrideは`assembleSimpleTableRows`が
+      返した**後**（`normalizeDepartmentText`の半角→全角変換適用後）のdepartment値に対して
+      適用する必要がある（適用前の生テキストに対して行うと、この県で唯一半角括弧を維持する
+      ケースにもかかわらず後から全角化されて上書きされてしまう）。
+    - 4頁目（連携型・garbled encoding）はスコープ外として除外（1〜3頁のみをfixtureに収録）。
+    - `parse-table-pdf-iwate.test.ts`で検証済み（jest4テストgreen）。tsc実exit0・
+      jestフル392suites6559tests green。**iwateは実装完了**
 - [ ] **検証は1つだけ**: パーサの出力が、既存の手作業データ（`competition-rates/<pref>.ts`）と
       **レコード単位で完全一致するか**
 - [ ] ⚠️ **一致しなければパーサが間違っている。データを合わせにいかない**
