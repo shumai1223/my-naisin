@@ -484,7 +484,31 @@ A-3 quota定義の構造化 3/47県  （44県未着手）
         「＊」だけの学科名を非空と誤判定してフォールバックが起動しない事故が起きた）。
       `parse-table-pdf-kagawa.test.ts`で検証済み（jest4テストgreen）。tsc実exit0・
       jestフル383suites6519tests green。**kagawaは実装完了**
-- [ ] 残り31県（usable 43県からibaraki・tochigi・akita・tokushima・ishikawa・gunma・nagasaki・ehime・toyama・aomori・fukui・kagawaを除く。kanagawaは見送り扱い）に
+- [x] **okinawa(R8)を実装・検証完了（2026-09-02）・最大規模（156件・58校・全4頁）**。「学科名を
+      含む複雑度シグナル数が最少(1件)」という粗い指標で選んだが、実際は最も罠が多い県の1つ
+      だった（教訓: `grep`件数の粗い指標だけで複雑度を判断しない）。156/156件・完全一致
+      （グランドトータルquota14,084・applicants13,522も既存noteの自己算出値と一致）。
+      - ⚠️**罠1（本体）: 全日制・定時制が同一表に混在**（他県のような独立した「全日制計」行が
+        無い）。**解法: 「課程」列（全日/定時）で機械的に絞り込む**（学校名の固定リストに
+        頼るより頑健）。ただし課程列も学校名と同じ「先頭行にだけ印字され継続行は空欄」の
+        carry-forward構造を持つため、**課程列自体もcarry-forwardしてから判定する必要がある**
+        （那覇工業の定時「電気」行・泊の「夜間部」行は課程列が空欄で、素朴な自行判定だと
+        すり抜けて誤収録された）。
+      - ⚠️**罠2: 2桁の学級数がdepartment列にはみ出す**（「10」の先頭桁が右隣の学級数列の
+        左境界をわずかに超えてdepartment列に混入）。department本文が数字だけで終わることは
+        無いため、**末尾の連続する数字を機械的に除去してよい**という一般則で解決（gunmaの
+        「(255)」混入と同型・列境界のわずかな越境は繰り返し起こりうる罠として要警戒）。
+      - ⚠️**罠3: overrideキーはnormalizeExtractedTextを通した後の文字列で作ること
+        （aomoriの教訓の再確認）**: 半角カタカナ（会計ｼｽﾃﾑ等）を含む生テキストのままキーを
+        組むと一致しない。normalizeExtractedTextしてからキーを比較する。
+      - ⚠️**罠4: 既存データが県独自に半角括弧を使っていることがある**。他県（tokushima等）は
+        全角括弧に統一されているが、**okinawaは既存データ自体が半角括弧`()`を使う県だった**。
+        `normalizeDepartmentText`は全県共通で半角→全角に変換する設計のため、パーサ出力側で
+        変換後に半角へ戻すpost-process（`（`→`(`・`）`→`)`）が必要だった。**「表記統一は
+        全県共通」という前提を無条件に信じず、対象県の既存データを都度確認すること**。
+      `parse-table-pdf-okinawa.test.ts`で検証済み（jest6テストgreen）。tsc実exit0・
+      jestフル384suites6525tests green。**okinawaは実装完了**
+- [ ] 残り30県（usable 43県からibaraki・tochigi・akita・tokushima・ishikawa・gunma・nagasaki・ehime・toyama・aomori・fukui・kagawa・okinawaを除く。kanagawaは見送り扱い）に
       同じ方式を横展開する。着手前に`pdftotext -table -enc UTF-8`の出力を目視し、
       ①学校名ラベルの位置（先頭行か中間か＝ibaraki型かどうか）②長い学校名の折り返しの
       有無（akita型が必要か）③№列の有無、を確認してから実装すること
