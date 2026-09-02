@@ -399,7 +399,27 @@ A-3 quota定義の構造化 3/47県  （44県未着手）
         誤った学校名がcarry-forwardされ続ける）
       `parse-table-pdf-ehime.test.ts`で検証済み（jest5テストgreen）。tsc実exit0・
       jestフル379suites6501tests green。**ehimeは実装完了**
-- [ ] 残り35県（usable 43県からibaraki・tochigi・akita・tokushima・ishikawa・gunma・nagasaki・ehimeを除く。kanagawaは見送り扱い）に
+- [x] **toyama(R8)を実装・検証完了（2026-09-02）・第6の組み立てパターンを確立**。75/75件・
+      完全一致（グランドトータルquota5,020・applicants4,482も既存noteと一致）。
+      - ⚠️**新パターン発見: 学校名ラベルの出現位置が同一表内で学校ごとに不規則**。ibaraki型
+        （結合セル中央固定）・tochigi型（先頭行固定）のどちらの前提も成り立たず、入善は
+        3行中2行目、桜井は3行中2行目（学科名と同居）、魚津/魚津工業/上市は先頭行（学科名と
+        同居）、滑川は5行中3行目、と学校ごとにバラバラだった。**解法: 罫線（外周のみ・内部
+        分割線は無い）でブロック境界を決定し、ブロック内のどこにラベルがあってもそのブロック
+        全体の学校名として採用する**（位置に依存しない汎用アルゴリズム。単純forward
+        carry-forwardでは先頭行にラベルが無い学校で直前の学校名を誤って引き継ぐバグになる）
+      - **副次的な発見（既存機構だけで自然解決した2件）**: ①内数コース（「普通科(体育コース)」
+        等）はPDF側が数値を丸ごと括弧`(40)(24)...`で囲んで印字しており、`Number("(16)")`が
+        NaNになるため**追加コードなしで自然に除外**された（既存のquota/applicants/rate
+        finite-number検証が代わりに機能した）。②探究科学科の人文社会科学科（数値非印字）も
+        同様に自然除外
+      - ⚠️3頁目「(大学科別)」は学校別データではなく学科ごとの県全体集計表のため、フィクスチャ
+        から除外（2頁分のみ収録）。ページ末尾の「合計」行も学校名+学科名が列境界をまたいで
+        分裂することがあるため、ehimeの教訓どおり部分一致`(schoolName+department).includes('合計')`
+        で除外した
+      `parse-table-pdf-toyama.test.ts`で検証済み（jest6テストgreen）。tsc実exit0・
+      jestフル380suites6507tests green。**toyamaは実装完了**
+- [ ] 残り34県（usable 43県からibaraki・tochigi・akita・tokushima・ishikawa・gunma・nagasaki・ehime・toyamaを除く。kanagawaは見送り扱い）に
       同じ方式を横展開する。着手前に`pdftotext -table -enc UTF-8`の出力を目視し、
       ①学校名ラベルの位置（先頭行か中間か＝ibaraki型かどうか）②長い学校名の折り返しの
       有無（akita型が必要か）③№列の有無、を確認してから実装すること
