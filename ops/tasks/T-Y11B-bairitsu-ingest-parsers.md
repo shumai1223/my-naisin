@@ -573,7 +573,21 @@ A-3 quota定義の構造化 3/47県  （44県未着手）
         （fukui/tokushima型の数値ベース裏取り）で対応する方が全体として安全**。
       `parse-table-pdf-kyoto.test.ts`で検証済み（jest4テストgreen）。tsc実exit0・
       jestフル387suites6537tests green。**kyotoは実装完了**
-- [ ] 残り27県（usable 43県からibaraki・tochigi・akita・tokushima・ishikawa・gunma・nagasaki・ehime・toyama・aomori・fukui・kagawa・okinawa・nara・yamanashi・kyotoを除く。kanagawa・mieは見送り扱い）に
+  - **chiba**: tochigi型（単純carry-forward・罫線ブロック方式は不要）。188件（県立176・
+      市立12、grand total quota28,880・applicants32,008で機械集計と一致）。
+      - ⚠️**新しい罠: 既存データのヘッダコメント自身が記載しているグランドトータルが
+        R7のもの（R8ではない）だった**。突合前に必ず①`.ts`ファイル実レコードの機械合計
+        ②PDFから独立抽出した合計、の2系統を作って一致させてから正解値として使うこと
+        （header commentを鵜呑みにしない・kyoto/naraの罫線ラベル分裂の教訓と同型の
+        「一次資料の自己申告を信じない」パターン）。
+      - 学校名列の行頭に番号（市立校は「市」+番号、一部「＊」付き）が付与されているため
+        `.replace(/^[＊市]?\d+[\s　]*/, '')`で除去（「市1 市立千葉」→「市立千葉」が正しく
+        残ることを確認済み＝「市」の除去は番号直前の1文字のみに限定される正規表現のため
+        本体の「市立」を誤って食わない）。
+      - 市立銚子の「普通科・理数科」くくり募集はPDF側で既に単一ラベルとして印字されており
+        特別な結合ロジック不要（脚注#13で確認）。全体を通して最も単純な部類の県だった。
+      `parse-table-pdf-chiba.test.ts`で検証済み（jest4テストgreen）。**chibaは実装完了**
+- [ ] 残り26県（usable 43県からibaraki・tochigi・akita・tokushima・ishikawa・gunma・nagasaki・ehime・toyama・aomori・fukui・kagawa・okinawa・nara・yamanashi・kyoto・chibaを除く。kanagawa・mieは見送り扱い）に
       同じ方式を横展開する。着手前に`pdftotext -table -enc UTF-8`の出力を目視し、
       ①学校名ラベルの位置（先頭行か中間か＝ibaraki型かどうか）②長い学校名の折り返しの
       有無（akita型が必要か）③№列の有無、を確認してから実装すること
