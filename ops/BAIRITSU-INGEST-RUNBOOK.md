@@ -23,8 +23,15 @@
     正しく展開できない（下記「結合セルの解法」参照）。`parseTablePdfPageRows()`（罫線で
     行を区切りブロック境界も判定）＋`assembleCompetitionRateRows()`で組み立てる。
     149/149件・完全一致で検証済み（2026-09-02）
-  - **判定の目安**: `pdftotext -table -enc UTF-8`の出力を目視し、学校名ラベルが各学校の
-    先頭行にあるか、途中の行にあるかで選ぶ
+  - **学校名が長いと2行に折り返される県（akita型）**: `№`（通し番号）列を持つ表で、
+    長い学校名の2行目断片（例:「情報学院」）がschoolName列に単独で出現し、tochigi型の
+    単純carry-forwardでは別の学校と誤認する。`assembleNumberedBlockRows()`
+    （№列の有無でブロック境界を判定し、ブロック内の全schoolName断片を連結する）で
+    組み立てる。78/78件・完全一致で検証済み（2026-09-02）。分校等の例外は
+    `renameOverrides`、小計行の除外は`excludeRow`/`stopAt`（department列の文字列で判定）
+  - **判定の目安**: `pdftotext -table -enc UTF-8`の出力を目視し、①学校名ラベルが各学校の
+    先頭行にあるか、途中の行にあるか（ibaraki型かどうか）②`№`列を持つ表で、長い学校名が
+    2行に折り返されていないか（akita型が必要か）で選ぶ
 
 ビジョン解析（Read toolによる目視転記）は、真にテキスト層が存在しないスキャン画像PDF
 （fukushima等・少数派）に限定してよい。

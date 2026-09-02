@@ -236,10 +236,12 @@ export function groupCharsIntoRows(chars: PdfChar[], yTolerance: number): { y: n
 export interface GeneralColumnLayout {
   /** N列ならN+1要素の境界x座標配列。 */
   boundaries: number[];
-  roles: { schoolName: number; department: number; quota: number; finalApplicants: number; finalRate: number };
+  /** `number`（№列）は任意。指定すると`assembleNumberedBlockRows`のブロック境界判定に使える。 */
+  roles: { number?: number; schoolName: number; department: number; quota: number; finalApplicants: number; finalRate: number };
 }
 
 interface SimpleRowFields {
+  numberText: string;
   schoolName: string;
   department: string;
   quotaText: string;
@@ -263,6 +265,7 @@ export function extractRowFields(rowChars: PdfChar[], layout: GeneralColumnLayou
   for (const arr of cellChars) arr.sort((a, b) => a.x0 - b.x0);
   const join = (idx: number) => cellChars[idx].map((c) => c.c).join('');
   return {
+    numberText: roles.number !== undefined ? join(roles.number).trim() : '',
     schoolName: join(roles.schoolName),
     department: join(roles.department),
     quotaText: join(roles.quota).trim(),
@@ -298,6 +301,82 @@ export function assembleSimpleTableRows(rowFields: SimpleRowFields[], options: A
     if (!Number.isFinite(finalApplicants) || !Number.isFinite(finalRate)) continue;
 
     records.push({ schoolName: currentSchool, department, quota, finalApplicants, finalRate });
+  }
+  return records;
+}
+
+/**
+ * 【3つ目のパターン: 学校名が複数行に折り返して分裂する県向け】
+ * akita型: `№`（通し番号）列を持つ表で、学校名が長いと2行に折り返され、2行目の断片が
+ * schoolName列に単独で出現する（例:「4　大館国際」の次の行に単独で「情報学院」＝
+ * 正しくは「大館国際情報学院」1校）。tochigi型の単純carry-forwardでは「情報学院」を
+ * 別の新しい学校と誤認してしまう（№列が空＝継続行という判断ができないため）。
+ *
+ * 解法: `№`列（`roles.number`）の有無でブロック境界を判定する（№が埋まっている行が
+ * ブロックの先頭）。ブロック内の全schoolName断片を連結したものを、そのブロックに属する
+ * 全レコードのschoolNameとして採用する（akitaのR8で78/78件・完全一致で検証済み。
+ * 2026-09-02）。
+ *
+ * ⚠️地区計・県北計・中央計・県南計・県合計等の小計行は独立した№を持たないため、直前の
+ * 学校ブロックに紛れ込む。この小計ラベルはdepartment列に出現する（schoolName列ではない）
+ * ため、`excludeRow`はブロック単位ではなく**行単位**で判定する。「県合計」（総計行）に
+ * 到達したら、それ以降は別表（定時制等）とみなし処理を打ち切ってよい（`stopMarker`）。
+ *
+ * ⚠️分校（本校と統合募集だが独立した番号を持たない）のように、1つのブロック内で特定の
+ * 行だけ別の学校として扱いたい例外は`renameOverrides`で対応する（akitaの太田分校/雄勝校）。
+ */
+export interface AssembleNumberedBlockOptions {
+  /** この述語がtrueを返す行（例: 小計行）はスキップする。department列の文字列で判定する。 */
+  excludeRow?: (department: string) => boolean;
+  /** この述語がtrueを返す行に到達したら、それ以降の全ブロックの処理を打ち切る（例: 総計行）。 */
+  stopAt?: (department: string) => boolean;
+  /**
+   * ブロック内の特定の行（そのschoolName列の生テキストで判定）を、ブロック全体の連結名
+   * ではなく個別の名前に差し替える（分校等）。連結名の計算からもこの行は除外される。
+   */
+  renameOverrides?: Record<string, string>;
+  minQuota?: number;
+}
+
+/** akita型（№列でブロック境界・学校名は複数行断片の連結）の組み立て。 */
+export function assembleNumberedBlockRows(rowFields: SimpleRowFields[], options: AssembleNumberedBlockOptions = {}): ParsedCompetitionRow[] {
+  const minQuota = options.minQuota ?? 0;
+  const overrides = options.renameOverrides ?? {};
+
+  const blocks: SimpleRowFields[][] = [];
+  let current: SimpleRowFields[] | null = null;
+  for (const r of rowFields) {
+    if (r.numberText) {
+      current = [];
+      blocks.push(current);
+    }
+    if (!current) continue; // 最初の番号付き行より前（見出し等）は対象外
+    current.push(r);
+  }
+
+  const records: ParsedCompetitionRow[] = [];
+  outer: for (const block of blocks) {
+    const nameFragments = block
+      .map((r) => normalizeExtractedText(r.schoolName))
+      .filter((s) => s.length > 0 && !(s in overrides));
+    const blockSchoolName = nameFragments.join('');
+
+    for (const r of block) {
+      const department = normalizeDepartmentText(r.department);
+      if (!department) continue;
+      if (options.stopAt?.(department)) break outer;
+      if (options.excludeRow?.(department)) continue;
+
+      const quota = Number(r.quotaText.replace(/,/g, ''));
+      const finalApplicants = Number(r.applicantsText.replace(/,/g, ''));
+      const finalRate = Number(r.rateText);
+      if (!Number.isFinite(quota) || quota <= minQuota) continue;
+      if (!Number.isFinite(finalApplicants) || !Number.isFinite(finalRate)) continue;
+
+      const rowOwnName = normalizeExtractedText(r.schoolName);
+      const schoolName = overrides[rowOwnName] ?? blockSchoolName;
+      records.push({ schoolName, department, quota, finalApplicants, finalRate });
+    }
   }
   return records;
 }
