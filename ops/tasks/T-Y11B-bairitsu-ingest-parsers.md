@@ -649,7 +649,7 @@ A-3 quota定義の構造化 3/47県  （44県未着手）
         連結（重複時は片方のみ）する方式で解決した。
       `parse-table-pdf-tottori.test.ts`で検証済み（jest5テストgreen）。tsc実exit0・
       jestフル390suites6551tests green。**tottoriは実装完了**
-- [ ] 残り13県（usable 43県からibaraki・tochigi・akita・tokushima・ishikawa・gunma・nagasaki・ehime・toyama・aomori・fukui・kagawa・okinawa・nara・yamanashi・kyoto・chiba・saitama・tottori・miyagi・kumamoto・iwate・shizuoka・gifu・hiroshimaを除く。kochi・yamagata・nagano・oitaは次点扱い（罠を発見済み・下記参照）。kanagawa・mieは見送り扱い。aichi・miyazaki・yamaguchiはToUnicodeマッピング欠落のためテキストパーサ対象外（ビジョン解析専用）と判明）。残る候補は主にsaga・shiga・wakayama・tokyo・hokkaido・kagoshima・niigata等で、いずれも複数のくくり募集や独自の表構造を持つ見込み
+- [ ] 残り12県（usable 43県からibaraki・tochigi・akita・tokushima・ishikawa・gunma・nagasaki・ehime・toyama・aomori・fukui・kagawa・okinawa・nara・yamanashi・kyoto・chiba・saitama・tottori・miyagi・kumamoto・iwate・shizuoka・gifu・hiroshima・sagaを除く。kochi・yamagata・nagano・oitaは次点扱い（罠を発見済み・下記参照）。kanagawa・mieは見送り扱い。aichi・miyazaki・yamaguchiはToUnicodeマッピング欠落のためテキストパーサ対象外（ビジョン解析専用）と判明）。残る候補は主にshiga・wakayama・tokyo・hokkaido・kagoshima・niigata等で、いずれも複数のくくり募集や独自の表構造を持つ見込み
       同じ方式を横展開する。着手前に`pdftotext -table -enc UTF-8`の出力を目視し、
       ①学校名ラベルの位置（先頭行か中間か＝ibaraki型かどうか）②長い学校名の折り返しの
       有無（akita型が必要か）③№列の有無、を確認してから実装すること
@@ -1013,6 +1013,20 @@ A-3 quota定義の構造化 3/47県  （44県未着手）
       1件だけを追記する形で対応した（既存データの書き換えではなく抽出漏れの補完）。
     - `parse-table-pdf-hiroshima.test.ts`で検証済み（jest4テストgreen）。tsc実exit0・
       jestフル395suites6573tests green。**hiroshimaは実装完了**
+  - **saga(R8)を実装・検証完了（2026-09-03・25県目）**: tochigi型ベース。71/71件・32校・
+    完全一致（グランドトータルquota4,212・applicants4,191も「合計」行と一致）。
+    - 独自構造=「学科別/学校別が全項目で2列併記される」（quota/applicants/rateいずれも
+      各ペアの左列＝学科別側だけを採用）。
+    - 罠1: 学校通し番号（1〜32）が2桁になると学校名列にわずかにかかり先頭に混入
+      （`sn.replace(/^[0-9]+/, '')`で除去）。
+    - 罠2: くくり募集10組のうち9組は凡例明記だが、嬉野「電気科、建築科」のみ凡例に無く
+      読点（、）連結表記（他県は中黒「・」表記が多い）。10組すべて値ベースoverride
+      （fukui/tottori型）で対応。
+    - 罠3: くくり募集10組のうち4組（白石・鳥栖商業・佐賀商業・唐津商業）は学科名が長く
+      座標抽出そのものが1件も検出できなかった（hiroshima型と同じ抽出漏れ）。既存データの
+      位置・値を根拠に該当校の直前/直後で検出したタイミングで1件だけ追記する形で対応。
+    - `parse-table-pdf-saga.test.ts`で検証済み（jest4テストgreen）。tsc実exit0・
+      jestフル396suites6577tests green。**sagaは実装完了**
 - [ ] **検証は1つだけ**: パーサの出力が、既存の手作業データ（`competition-rates/<pref>.ts`）と
       **レコード単位で完全一致するか**
 - [ ] ⚠️ **一致しなければパーサが間違っている。データを合わせにいかない**
