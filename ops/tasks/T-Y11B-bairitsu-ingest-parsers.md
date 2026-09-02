@@ -649,7 +649,7 @@ A-3 quota定義の構造化 3/47県  （44県未着手）
         連結（重複時は片方のみ）する方式で解決した。
       `parse-table-pdf-tottori.test.ts`で検証済み（jest5テストgreen）。tsc実exit0・
       jestフル390suites6551tests green。**tottoriは実装完了**
-- [ ] 残り17県（usable 43県からibaraki・tochigi・akita・tokushima・ishikawa・gunma・nagasaki・ehime・toyama・aomori・fukui・kagawa・okinawa・nara・yamanashi・kyoto・chiba・saitama・tottori・miyagi・kumamoto・iwateを除く。kochi・yamagata・naganoは次点扱い（罠を発見済み・下記参照）。kanagawa・mieは見送り扱い）に
+- [ ] 残り16県（usable 43県からibaraki・tochigi・akita・tokushima・ishikawa・gunma・nagasaki・ehime・toyama・aomori・fukui・kagawa・okinawa・nara・yamanashi・kyoto・chiba・saitama・tottori・miyagi・kumamoto・iwate・shizuokaを除く。kochi・yamagata・naganoは次点扱い（罠を発見済み・下記参照）。kanagawa・mieは見送り扱い。aichi・miyazaki・yamaguchiはToUnicodeマッピング欠落のためテキストパーサ対象外（ビジョン解析専用）と判明）。残る候補は主にhiroshima・gifu・oita・saga・shiga・wakayama・tokyo・hokkaido・kagoshima・niigata等で、いずれも複数のくくり募集や独自の表構造を持ち今回のiwate/shizuokaほど単純ではない見込み
       同じ方式を横展開する。着手前に`pdftotext -table -enc UTF-8`の出力を目視し、
       ①学校名ラベルの位置（先頭行か中間か＝ibaraki型かどうか）②長い学校名の折り返しの
       有無（akita型が必要か）③№列の有無、を確認してから実装すること
@@ -919,6 +919,35 @@ A-3 quota定義の構造化 3/47県  （44県未着手）
     - 4頁目（連携型・garbled encoding）はスコープ外として除外（1〜3頁のみをfixtureに収録）。
     - `parse-table-pdf-iwate.test.ts`で検証済み（jest4テストgreen）。tsc実exit0・
       jestフル392suites6559tests green。**iwateは実装完了**
+  - **shizuoka(R8)を実装・検証完了（2026-09-03・22県目・本セッション最大規模9頁90校）**:
+    tochigi型（単純carry-forward）ベース。162/162件・完全一致（グランドトータルquota16,954・
+    applicants16,895も「公立合計」行と一致）。この県で最も苦労したのは「選抜方法別内訳行
+    （Ⅰ/Ⅱ/Ⅲ）の判別」で、複数の罠が絡み合っていた。
+    - ⚠️**罠1: 内訳行の除外は「Ⅰ/Ⅱ/Ⅲの文字を含むか」ではなく「注記の割合が100%かどうか」で
+      判定する**。各学科の総定員行の下に「Ⅰ（13％程度）」等の内訳行が付随し通常は除外対象だが、
+      **注記が「100％」の場合はその行こそが学科の実質的な総数行**（例: 沼津西「芸術Ⅰ
+      （100％）」→department="芸術"として採用。他の選抜方法が存在せず100%がこの1本のため）。
+      注記の割合は全角数字（「５％程度」）や小数点（「22.5％程度」）を含むため、正規表現は
+      `[0-9.]+`とし全角数字は事前に半角化してから判定する必要があった。
+    - ⚠️**罠2: 注記を伴わないⅠ/Ⅱ/Ⅲは学科名の一部**（1校のみ・浜松湖北「産業マネジメント
+      Ⅰ」「産業マネジメントⅡ」）。括弧書きの割合注記が無いままⅠ/Ⅱ/Ⅲで終わる行は内訳ではなく
+      学科名そのものなので、そのまま採用する（除外しない）。
+    - ⚠️**罠3: 学科名が長い学校（8校）は学科名列の幅を超えて2〜4行に折り返され、折り返し後の
+      行が次のⅠ/Ⅱ/Ⅲ内訳行と同じy位置に重なって誤結合する**（例: 田方農業「生産科学・
+      園芸デザイン」の2行目「園芸デザイン」がⅠ内訳行の数値と結合し、無関係な小さいquotaを
+      持つ疑似レコードを生む）。この折り返しの再結合は「前後どちらに帰属するか」が幾何学的に
+      決定不能（nagano/須坂創成型と同型の罠）なため、既存データを根拠にした値ベースoverride
+      （`(学校名,quota,finalApplicants)`キー・fukui/tottori型）で対応した（8校8件）。
+    - ⚠️**罠4: 校名が長い学校（静岡市立清水桜が丘・9文字）も学校名列の幅を超えて2行に折り返され、
+      「静岡市立」「清水桜が丘」という別々の学校を意味しない2断片に分裂する**（罠3の学校名版）。
+      carry-forwardが「清水桜が丘」を新しい学校名として誤って上書きするため、この学校の
+      2レコード（普通科・商業）それぞれに値ベースoverrideで正しい学校名を適用した。
+    - 「県外（14％程度）」のような学区外募集の内数注記行（Ⅰ/Ⅱ/Ⅲとは別枠、3件）も同様に除外。
+      募集定員が「(132)」のように括弧書きされる学校（4件・沼津市立沼津等）は括弧を除去して
+      quotaとして採用。「普通」「理数」は既存データで「普通科」「理数科」に統一表記される
+      （他の学科名は生表記のまま・県固有の表記慣行）。
+    - `parse-table-pdf-shizuoka.test.ts`で検証済み（jest5テストgreen）。tsc実exit0・
+      jestフル393suites6564tests green。**shizuokaは実装完了**
 - [ ] **検証は1つだけ**: パーサの出力が、既存の手作業データ（`competition-rates/<pref>.ts`）と
       **レコード単位で完全一致するか**
 - [ ] ⚠️ **一致しなければパーサが間違っている。データを合わせにいかない**
