@@ -79,9 +79,19 @@ function columnIndexForX(x: number, boundaries: number[], numDataColumns: number
   return -1;
 }
 
-/** 半角カタカナ→全角・半角濁点/半濁点の合成を含む正規化（NFKCで一括対応できる）。 */
+/**
+ * 半角カタカナ→全角・半角濁点/半濁点の合成を含む正規化（NFKCで一括対応できる）に加え、
+ * 内部の空白（全角スペース含む）も除去する。
+ *
+ * 【なぜ内部空白まで除去するか】多くの県のPDFは学校名・学科名を「宇　都　宮」のように
+ * 1文字ずつ均等割り付け（トラッキング）で組版しており、実際の空白文字が文字間に挿入
+ * されている（tochigiのR8で実際に確認・2026-09-02）。日本語の学校名・学科名がこの
+ * ドメインで実際に空白を含むことは無いため、`.trim()`（前後のみ）ではなく全角/半角
+ * 空白を丸ごと除去してよい。ibarakiのように元々内部空白の無い県ではこの処理は無害
+ * （no-op）。
+ */
 export function normalizeExtractedText(s: string): string {
-  return s.normalize('NFKC').trim();
+  return s.normalize('NFKC').replace(/[\s　]+/g, '');
 }
 
 /**
@@ -188,6 +198,106 @@ export function assembleCompetitionRateRows(
       }
       blockRows = [];
     }
+  }
+  return records;
+}
+
+/**
+ * 【もう一方のパターン: 学校名セルの結合が無い県向け】
+ * ibaraki型（学校名ラベルが結合セルの中央行に出現）は少数派で、多くの県は学校名ラベルが
+ * その学校の**先頭**の学科行にだけ印字され、継続行は単に空欄になるだけ（セル結合の罫線も
+ * 学校名列を割らない）。この場合は罫線を見る必要が無く、**文字のy座標だけで行をクラスタ
+ * リングし、schoolNameが空でない行が来るたびに「新しい学校」として単純にcarry-forward**
+ * すれば正しく組み立てられる（tochigiのR8で107/107件・完全一致で検証済み。2026-09-02）。
+ *
+ * また、tochigiのように列数が多い県（募集定員・特色選抜内定者数・複数時点の出願人員/倍率
+ * 等）ではquota/applicants/rateが学校名・学科名に隣接する列とは限らないため、列の役割を
+ * インデックスで明示的に指定できるようにしている（`GeneralColumnLayout.roles`）。
+ */
+
+/** 罫線に頼らず、文字のy座標の近さだけで「同じ行」をクラスタリングする（汎用・堅牢）。 */
+export function groupCharsIntoRows(chars: PdfChar[], yTolerance: number): { y: number; chars: PdfChar[] }[] {
+  const sorted = [...chars].sort((a, b) => a.y0 - b.y0 || a.x0 - b.x0);
+  const rows: { y: number; chars: PdfChar[] }[] = [];
+  for (const c of sorted) {
+    const row = rows.find((r) => Math.abs(r.y - c.y0) < yTolerance);
+    if (row) {
+      row.chars.push(c);
+      row.y = (row.y * (row.chars.length - 1) + c.y0) / row.chars.length; // 移動平均でクラスタの重心を更新
+    } else {
+      rows.push({ y: c.y0, chars: [c] });
+    }
+  }
+  rows.sort((a, b) => a.y - b.y);
+  return rows;
+}
+
+/** 列の役割をインデックスで指定する汎用レイアウト（列数・並びが県ごとに異なることに対応）。 */
+export interface GeneralColumnLayout {
+  /** N列ならN+1要素の境界x座標配列。 */
+  boundaries: number[];
+  roles: { schoolName: number; department: number; quota: number; finalApplicants: number; finalRate: number };
+}
+
+interface SimpleRowFields {
+  schoolName: string;
+  department: string;
+  quotaText: string;
+  applicantsText: string;
+  rateText: string;
+}
+
+export function extractRowFields(rowChars: PdfChar[], layout: GeneralColumnLayout): SimpleRowFields {
+  const { boundaries, roles } = layout;
+  const numCols = boundaries.length - 1;
+  const cellChars: PdfChar[][] = Array.from({ length: numCols }, () => []);
+  for (const c of rowChars) {
+    const cx = (c.x0 + c.x1) / 2;
+    for (let i = 0; i < numCols; i++) {
+      if (cx >= boundaries[i] - 1 && cx < boundaries[i + 1] - 1) {
+        cellChars[i].push(c);
+        break;
+      }
+    }
+  }
+  for (const arr of cellChars) arr.sort((a, b) => a.x0 - b.x0);
+  const join = (idx: number) => cellChars[idx].map((c) => c.c).join('');
+  return {
+    schoolName: join(roles.schoolName),
+    department: join(roles.department),
+    quotaText: join(roles.quota).trim(),
+    applicantsText: join(roles.finalApplicants).trim(),
+    rateText: join(roles.finalRate).trim(),
+  };
+}
+
+export interface AssembleSimpleOptions {
+  /** この述語がtrueを返す行（例: 集計行「合計」）はスキップする。schoolNameは直前の
+   *  carry-forward値、departmentはその行自身の値で判定する。 */
+  excludeRow?: (schoolName: string, department: string) => boolean;
+  /** quotaがこの値以下の行は除外する（既定0＝quota>0の不変条件。一般選抜非実施等）。 */
+  minQuota?: number;
+}
+
+/** 学校名セルの結合が無い県向けの組み立て（先頭行にラベル・継続行は空欄・単純carry-forward）。 */
+export function assembleSimpleTableRows(rowFields: SimpleRowFields[], options: AssembleSimpleOptions = {}): ParsedCompetitionRow[] {
+  const minQuota = options.minQuota ?? 0;
+  const records: ParsedCompetitionRow[] = [];
+  let currentSchool = '';
+  for (const r of rowFields) {
+    const schoolName = normalizeExtractedText(r.schoolName);
+    if (schoolName) currentSchool = schoolName;
+    const department = normalizeDepartmentText(r.department);
+    if (!department) continue;
+    if (options.excludeRow?.(currentSchool, department)) continue;
+
+    const quota = Number(r.quotaText.replace(/,/g, ''));
+    const finalApplicants = Number(r.applicantsText.replace(/,/g, ''));
+    const finalRate = Number(r.rateText);
+    if (!Number.isFinite(quota) || quota <= minQuota) continue;
+    if (!Number.isFinite(finalApplicants) || !Number.isFinite(finalRate)) continue;
+
+    records.push({ schoolName: currentSchool, department, quota, finalApplicants, finalRate });
   }
   return records;
 }
