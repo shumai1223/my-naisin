@@ -464,7 +464,27 @@ A-3 quota定義の構造化 3/47県  （44県未着手）
         実際のジオメトリデータの文字を確認すること
       `parse-table-pdf-fukui.test.ts`で検証済み（jest4テストgreen）。tsc実exit0・
       jestフル382suites6515tests green。**fukuiは実装完了**
-- [ ] 残り32県（usable 43県からibaraki・tochigi・akita・tokushima・ishikawa・gunma・nagasaki・ehime・toyama・aomori・fukuiを除く。kanagawaは見送り扱い）に
+- [x] **kagawa(R8)を実装・検証完了（2026-09-02）**。68/68件・完全一致（グランドトータル
+      quota4,208・applicants4,296も既存noteと一致）。既存データのヘッダコメント自身が
+      「番号付き学校リストのため学校名の行折返し遅延の罠が無い」と明記しており、実際に
+      tochigi型の単純carry-forwardだけで解決できた（toyama/aomori型のブロック方式は不要）。
+      PDFは全2頁だが1頁目に「全日制」の本体表とグランドトータルが完結しておりフィクスチャは
+      1頁目のみ（2頁目は「全国からの生徒募集」という別枠のスコープ外表）。
+      - ⚠️**新しい罠1: 「大学科」列と「小学科・コース」列の二段構成で、単一学科校は大学科列
+        だけで完結する**。複数学科を持つ学校は大学科列に広域区分（例:「農業」）・小学科列に
+        個別コース名（例:「生産経済」）が入る二段構成だが、単一学科校（「普通」「総合」）は
+        小学科列が空欄で大学科列だけに学科名が印字される。**department抽出は小学科列を優先し、
+        空なら大学科列にフォールバックする**必要がある（フォールバックを忘れると単一学科校
+        18校ぶんが丸ごと消える・件数差分で気づきやすいので発見は容易）。
+      - ⚠️**新しい罠2: 脚注記号（＊☆□）が学科名列・数値列の文字として混入する**（高松北の
+        quotaTextが「☆93」になりNumber()がNaNで行ごと消えた・miyagi型の記号除去と同型だが
+        **数値列（quotaText等）にも記号が混入しうる点**が新しい）。**記号除去は
+        department/quota/applicants/rateの全フィールドに適用し、かつ「小学科→大学科
+        フォールバック判定」より先に適用すること**（記号除去前の生テキストで判定すると
+        「＊」だけの学科名を非空と誤判定してフォールバックが起動しない事故が起きた）。
+      `parse-table-pdf-kagawa.test.ts`で検証済み（jest4テストgreen）。tsc実exit0・
+      jestフル383suites6519tests green。**kagawaは実装完了**
+- [ ] 残り31県（usable 43県からibaraki・tochigi・akita・tokushima・ishikawa・gunma・nagasaki・ehime・toyama・aomori・fukui・kagawaを除く。kanagawaは見送り扱い）に
       同じ方式を横展開する。着手前に`pdftotext -table -enc UTF-8`の出力を目視し、
       ①学校名ラベルの位置（先頭行か中間か＝ibaraki型かどうか）②長い学校名の折り返しの
       有無（akita型が必要か）③№列の有無、を確認してから実装すること
