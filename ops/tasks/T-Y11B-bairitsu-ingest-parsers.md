@@ -368,7 +368,38 @@ A-3 quota定義の構造化 3/47県  （44県未着手）
         y座標クラスタリング（罫線不使用）で正しく行を再構成できた。
       `parse-table-pdf-nagasaki.test.ts`で検証済み（jest4テストgreen）。tsc実exit0・
       jestフル378suites6496tests green。**nagasakiは実装完了**
-- [ ] 残り36県（usable 43県からibaraki・tochigi・akita・tokushima・ishikawa・gunma・nagasakiを除く）に
+- [x] **kanagawa(R8)は調査のみ・見送り（2026-09-02）**。公表が早い順（2/9）で候補にしたが、
+      PDFが13〜14頁・20以上のセクション（普通科/クリエイティブスクール/専門学科10区分/単位制
+      多数/定時制/通信制/特別募集）に分かれ、うち「2 連携募集」は本資料に変更後数値が無く
+      （「連携募集は志願変更を行いません」）別資料（初回志願状況PDF）が別途必要と判明。
+      費用対効果が低いため見送り、より軽量な県を優先した（コード変更なし）
+- [x] **ehime(R8)を実装・検証完了（2026-09-02）**。kanagawa見送り後、既存ファイルの「全Nページ」
+      記述から最軽量の候補（ehime/wakayama=全1ページ）を選定。tochigi型（y座標クラスタリング・
+      単純carry-forward）だが**1ページ2段組**（左右2組の学校リストが横並び）という罠があった。
+      同一クラスタ化行に対しLEFT用/RIGHT用2つの`GeneralColumnLayout`を順に適用するだけで
+      ジオメトリの事前x分割は不要と判明（`extractRowFields`が自レイアウトの境界外文字を
+      自然に無視するため）。99/99件・完全一致（グランドトータルquota8,370・applicants7,468も
+      「合計」行と一致）。
+      - ⚠️**新しい罠1**: 「合計」の2文字がRIGHT_LAYOUTのschoolName/department列境界をまたいで
+        分裂し（schoolName="合"・department="計8,"）、`excludeRow`の完全一致判定
+        （`department === '合計'`）をすり抜けて誤ってレコード化された（quota=3707という
+        巨大な異常値で発覚）。**nagasaki型の完全一致判定は「集計行が列境界をまたいで分裂しない」
+        前提でしか機能しない**→gunma/ibarakiで確立していた`(schoolName+department).includes('合計')`
+        という部分一致判定に戻す方が安全（nagasakiの「会計ビジネス」のような、`合計`という
+        連続した2文字を含む正当な学科名は稀）。**完全一致か部分一致かは「集計ラベルが列境界を
+        またいで分裂する可能性があるか」で選ぶこと**（両者はトレードオフであり、単純に
+        「完全一致の方が安全」ではない）
+      - ⚠️**新しい罠2（分校の学校名合成・akita型renameOverridesの学校名版）**: 本校/分校が
+        独立した学校番号を持たない3校（松山南・松山北・内子）で、raw PDFは「親校名+本校」を
+        1語で連結（例:「松山南本校」）する一方、分校側は親校名を伴わない単独の地名のみ
+        （例:「砥部」）を印字する。既存データは「親校（分校名）」に統一表記するため、
+        raw schoolNameそのものを直接書き換える`EHIME_SCHOOL_NAME_OVERRIDES`（6件）で対応した。
+        分校名（砥部/中島/小田）はcarry-forwardの通常ロジックでは新しい独立校と誤認される
+        ため、オーバーライドを**carry-forward更新の前**に適用する必要がある（適用順序を誤ると
+        誤った学校名がcarry-forwardされ続ける）
+      `parse-table-pdf-ehime.test.ts`で検証済み（jest5テストgreen）。tsc実exit0・
+      jestフル379suites6501tests green。**ehimeは実装完了**
+- [ ] 残り35県（usable 43県からibaraki・tochigi・akita・tokushima・ishikawa・gunma・nagasaki・ehimeを除く。kanagawaは見送り扱い）に
       同じ方式を横展開する。着手前に`pdftotext -table -enc UTF-8`の出力を目視し、
       ①学校名ラベルの位置（先頭行か中間か＝ibaraki型かどうか）②長い学校名の折り返しの
       有無（akita型が必要か）③№列の有無、を確認してから実装すること
