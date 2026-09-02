@@ -72,13 +72,13 @@ export const DATA_LICENSE_LEDGER: Record<string, DataLicenseLedgerEntry> = {
   chiba: {
     prefecture: 'chiba',
     sourceHost: '.lg.jp',
-    ...UNKNOWN(
-      '未確認。2026-08-28調査: 出典を所管する学習指導課 学力向上推進室に部署直通メール・' +
-        'フォームは無く(電話0120-23-1008のみ)、教育委員会全体の「ご意見・ご提案」フォーム/宛先' +
-        'kyouiku@mz.pref.chiba.lg.jp(mailtoリンク+平文表記で2回のraw HTML確認により実在確認済み・' +
-        '難読化なし)のみ確認できた。学習指導課への取次ぎを依頼する初回メール下書きを設置' +
-        '(draftId r-3220498342067744872・送信は👤)'
-    ),
+    redistribution: 'ok',
+    evidence:
+      '2026-09-02 15:27 千葉県教育庁教育振興部学習指導課学力向上推進室より回答受領' +
+        '(gakushi01@pref.chiba.lg.jp・BCC一斉送信): 「お問合せにありました「応募状況」のデータに' +
+        'つきまして、引用先（出典）を示していただければ貴サイトに掲載しても構いません。」' +
+        'リンク可否への言及なし(ibarakiと同型・backlink言及なしはfalse扱い)',
+    verifiedAt: '2026-09-02',
   },
   saitama: {
     prefecture: 'saitama',
