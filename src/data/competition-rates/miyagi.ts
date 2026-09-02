@@ -17,6 +17,18 @@
  * （全日制課程：県立64校、市立4校＝計68校・129学科）と完全一致することも二重の検証として機能した。
  *
  * 機械集計（quota13,400・applicants12,516・倍率0.93）はPDF末尾の「全日制合計」行と完全一致した。
+ *
+ * ⚠️訂正（2026-09-02・T-Y11Bパーサ実装中に発見）: R8の7件（宮城農/農業科・園芸科・農業機械科、
+ * 仙台向山/普通科、仙台東/普通科、塩釜/普通科、宮城水産/食品科、石巻工/機械科）でfinalRateが
+ * 独立した2種類のPDFテキスト抽出手段（PyMuPDF文字座標抽出・pdftotext -table）双方の読み取り値と
+ * 一致していなかった。原因を特定したところ、7件は例外なく`applicants/quota`が小数点以下3桁目が
+ * ちょうど5になる境界値（例:204÷160=1.275・41÷40=1.025）であり、旧値はJavaScriptの
+ * `Math.round(x*100)/100`や`toFixed(2)`でこれらを計算した場合に発生する既知の浮動小数点表現
+ * バグ（1.275は2進数浮動小数点で正確に表現できず1.27499...として格納されるため切り捨てられる）
+ * の結果と完全に一致した。一方PDFに実際に印字されている値（政府側の集計ソフトは正しく
+ * 四捨五入している）は本ファイルの新しい値と一致する。**すなわち旧値はPDFの転記ミスではなく、
+ * 何らかの時点でfinalRateをJSで再計算し直した際に生じた計算バグであり、本訂正はデータをパーサに
+ * 合わせにいったのではなく、一次ソース（PDF）の実測値に基づく訂正である**。
  * 定時制課程は東京都・神奈川県・千葉県・埼玉県・福岡県・兵庫県・静岡県・広島県・熊本県と同じ
  * 理由でスコープ外。（参考）欄に前年度比較のみで今年度実施の無い旧コース（岩ヶ崎の文系教養・
  * 理系教養コース等）は今年度データが「----」のため対象外。
@@ -137,18 +149,18 @@ export const MIYAGI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '亘理', department: '普通科', quota: 80, finalApplicants: 29, finalRate: 0.36 },
     { schoolName: '亘理', department: '食品科学科', quota: 40, finalApplicants: 15, finalRate: 0.38 },
     { schoolName: '亘理', department: '家政科', quota: 40, finalApplicants: 10, finalRate: 0.25 },
-    { schoolName: '宮城農', department: '農業科・園芸科', quota: 120, finalApplicants: 153, finalRate: 1.27 },
-    { schoolName: '宮城農', department: '農業機械科', quota: 40, finalApplicants: 51, finalRate: 1.27 },
+    { schoolName: '宮城農', department: '農業科・園芸科', quota: 120, finalApplicants: 153, finalRate: 1.28 },
+    { schoolName: '宮城農', department: '農業機械科', quota: 40, finalApplicants: 51, finalRate: 1.28 },
     { schoolName: '宮城農', department: '食品化学科', quota: 40, finalApplicants: 43, finalRate: 1.08 },
     { schoolName: '宮城農', department: '生活科', quota: 40, finalApplicants: 55, finalRate: 1.38 },
     { schoolName: '仙台一', department: '普通科', quota: 320, finalApplicants: 452, finalRate: 1.41 },
     { schoolName: '仙台二華', department: '普通科', quota: 240, finalApplicants: 268, finalRate: 1.12 },
     { schoolName: '仙台三桜', department: '普通科', quota: 280, finalApplicants: 378, finalRate: 1.35 },
-    { schoolName: '仙台向山', department: '普通科', quota: 160, finalApplicants: 204, finalRate: 1.27 },
+    { schoolName: '仙台向山', department: '普通科', quota: 160, finalApplicants: 204, finalRate: 1.28 },
     { schoolName: '仙台向山', department: '理数科', quota: 40, finalApplicants: 64, finalRate: 1.6 },
     { schoolName: '仙台南', department: '普通科', quota: 280, finalApplicants: 385, finalRate: 1.38 },
     { schoolName: '仙台西', department: '普通科', quota: 240, finalApplicants: 225, finalRate: 0.94 },
-    { schoolName: '仙台東', department: '普通科', quota: 200, finalApplicants: 251, finalRate: 1.25 },
+    { schoolName: '仙台東', department: '普通科', quota: 200, finalApplicants: 251, finalRate: 1.26 },
     { schoolName: '仙台東', department: '英語科', quota: 40, finalApplicants: 32, finalRate: 0.8 },
     { schoolName: '宮城工', department: '機械科', quota: 80, finalApplicants: 93, finalRate: 1.16 },
     { schoolName: '宮城工', department: '電子機械科', quota: 40, finalApplicants: 34, finalRate: 0.85 },
@@ -175,7 +187,7 @@ export const MIYAGI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '宮城野', department: '美術科', quota: 40, finalApplicants: 59, finalRate: 1.48 },
     { schoolName: '仙台', department: '普通科', quota: 280, finalApplicants: 313, finalRate: 1.12 },
     { schoolName: '仙台商', department: '商業科', quota: 320, finalApplicants: 376, finalRate: 1.18 },
-    { schoolName: '塩釜', department: '普通科', quota: 200, finalApplicants: 255, finalRate: 1.27 },
+    { schoolName: '塩釜', department: '普通科', quota: 200, finalApplicants: 255, finalRate: 1.28 },
     { schoolName: '塩釜', department: 'ビジネス科', quota: 80, finalApplicants: 123, finalRate: 1.54 },
     { schoolName: '多賀城', department: '普通科', quota: 240, finalApplicants: 275, finalRate: 1.15 },
     { schoolName: '多賀城', department: '災害科学科', quota: 40, finalApplicants: 48, finalRate: 1.2 },
@@ -227,8 +239,8 @@ export const MIYAGI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '石巻北', department: '総合学科', quota: 160, finalApplicants: 73, finalRate: 0.46 },
     { schoolName: '宮城水産', department: '船舶運航科', quota: 40, finalApplicants: 34, finalRate: 0.85 },
     { schoolName: '宮城水産', department: '生物環境科', quota: 40, finalApplicants: 29, finalRate: 0.73 },
-    { schoolName: '宮城水産', department: '食品科', quota: 40, finalApplicants: 41, finalRate: 1.02 },
-    { schoolName: '石巻工', department: '機械科', quota: 40, finalApplicants: 41, finalRate: 1.02 },
+    { schoolName: '宮城水産', department: '食品科', quota: 40, finalApplicants: 41, finalRate: 1.03 },
+    { schoolName: '石巻工', department: '機械科', quota: 40, finalApplicants: 41, finalRate: 1.03 },
     { schoolName: '石巻工', department: '電気情報科', quota: 40, finalApplicants: 39, finalRate: 0.98 },
     { schoolName: '石巻工', department: '化学技術科', quota: 40, finalApplicants: 25, finalRate: 0.63 },
     { schoolName: '石巻工', department: '土木システム科', quota: 40, finalApplicants: 43, finalRate: 1.08 },
