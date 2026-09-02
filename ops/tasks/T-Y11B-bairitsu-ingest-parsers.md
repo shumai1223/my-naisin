@@ -649,7 +649,7 @@ A-3 quota定義の構造化 3/47県  （44県未着手）
         連結（重複時は片方のみ）する方式で解決した。
       `parse-table-pdf-tottori.test.ts`で検証済み（jest5テストgreen）。tsc実exit0・
       jestフル390suites6551tests green。**tottoriは実装完了**
-- [ ] 残り16県（usable 43県からibaraki・tochigi・akita・tokushima・ishikawa・gunma・nagasaki・ehime・toyama・aomori・fukui・kagawa・okinawa・nara・yamanashi・kyoto・chiba・saitama・tottori・miyagi・kumamoto・iwate・shizuokaを除く。kochi・yamagata・naganoは次点扱い（罠を発見済み・下記参照）。kanagawa・mieは見送り扱い。aichi・miyazaki・yamaguchiはToUnicodeマッピング欠落のためテキストパーサ対象外（ビジョン解析専用）と判明）。残る候補は主にhiroshima・gifu・oita・saga・shiga・wakayama・tokyo・hokkaido・kagoshima・niigata等で、いずれも複数のくくり募集や独自の表構造を持ち今回のiwate/shizuokaほど単純ではない見込み
+- [ ] 残り15県（usable 43県からibaraki・tochigi・akita・tokushima・ishikawa・gunma・nagasaki・ehime・toyama・aomori・fukui・kagawa・okinawa・nara・yamanashi・kyoto・chiba・saitama・tottori・miyagi・kumamoto・iwate・shizuokaを除く。kochi・yamagata・nagano・oitaは次点扱い（罠を発見済み・下記参照）。kanagawa・mieは見送り扱い。aichi・miyazaki・yamaguchiはToUnicodeマッピング欠落のためテキストパーサ対象外（ビジョン解析専用）と判明）。残る候補は主にhiroshima・gifu・saga・shiga・wakayama・tokyo・hokkaido・kagoshima・niigata等で、いずれも複数のくくり募集や独自の表構造を持ち今回のiwate/shizuokaほど単純ではない見込み
       同じ方式を横展開する。着手前に`pdftotext -table -enc UTF-8`の出力を目視し、
       ①学校名ラベルの位置（先頭行か中間か＝ibaraki型かどうか）②長い学校名の折り返しの
       有無（akita型が必要か）③№列の有無、を確認してから実装すること
@@ -796,6 +796,34 @@ A-3 quota定義の構造化 3/47県  （44県未着手）
       した**（`filterGeometryByXRange`で1ページを複数の列組に分割する新しい共通関数も
       本体モジュールに追加）。`parse-table-pdf-multi-column.test.ts`で検証済み（jest4テスト
       green）。tsc実exit0・jestフル372suites6458tests green。**tokushimaは実装完了**
+  - **oita**: ヘッダコメントに「全国募集内数注記によるレイアウト崩れ」と明記されていた通り、
+    座標抽出まで進めたところ実際にデータ破損（誤った列割り当て）が確認され次点扱いとした
+    （2026-09-03）。39校81レコードと規模は小さいが、罠の質がnagano/shizuokaより悪い
+    （名称の不一致ではなく**数値そのものが別の学校の値と入れ替わって抽出される**）。
+    - 列構成（判明済み・boundaries）: `[57.8, 135, 205.3, 264.8, 324.4, 383.9, 443.4, 502.9,
+      562.4]`、schoolName=0/department=1/入学定員=2(skip)/quota=3/当初志願者数=4(skip)/
+      取り下げ数=5(skip)/提出数=6(skip)/applicants=7。倍率は印字されないため
+      `roundHalfUpScaled`相当の自前算出が必要（大分東等のくくり募集2組は既知：大分舞鶴
+      「普通・理数」・大分東「園芸ビジネス・園芸デザイン」）。
+    - ⚠️**爽風館（普通「Ⅰ部」「Ⅱ部」「Ⅲ部」・商業「Ⅲ部」）は既存データに1件も存在しない
+      ＝定時制課程（夜間部）であり全日制スコープ外**。「部」表記が定時制のシグナルだと
+      今回判明した（他県の「定時制」明記とは違う語彙のため見落としやすい）。
+    - ⚠️**真の罠: 中津東・大分工業・日田等、複数の学校で座標抽出した数値が既存データと
+      一致しない（例: 中津東「機械」既存34/36 vs 抽出40/3、大分工業「機械」既存70/70 vs
+      抽出40/6）。これは学科名の表記ゆれではなく、別の行・別の学校の数値が誤って
+      混入している可能性が高い**（「うち全国募集は◯人程度」という注記がセル内の別の
+      サブ行として挿入され、y座標クラスタリング（許容3.0pt）が本来別の行に属する数値を
+      誤って同じ行にまとめてしまうことが疑われる）。また中津南耶馬溪校・安心院・国東
+      （4学科）・芸術緑丘・久住高原農業・日田林工の6校は今回の抽出で1件も検出できず
+      （原因未特定・恐らく同種のレイアウト崩れで行自体が欠落）。
+    - **打開案（次回このタスクに戻る回への申し送り）**: y座標クラスタリングの許容値を
+      見直す（狭める・広げる両方向を試す）か、罫線（hlines）ベースの厳密な行境界検出
+      （ibaraki/toyama型）に切り替えて「うち全国募集は」注記行を明示的に別セルとして
+      分離してから無視する設計に変更するのが筋が良さそうだが、今回は時間の制約で
+      未着手。既存データの「各校末尾の「計」行との照合（内訳合計＝学校計）で正しい
+      学科別数値を確定した」という手作業時の記述の通り、学校ブロックごとに「計」行の
+      合計とレコード群の機械集計を突合する検算ステップを組み込むと、誤混入を機械的に
+      検知できる可能性が高い。
   - **nagano**: 着手前ゲート8県サンプルで「素直な表」と判定されていたが（学科別全県状況の
     集計表だけを見た判定で、学校別表の構造までは検証していなかった）、実際に学校別状況
     （別紙１・4通学区7ページ）を座標抽出（`extract-pdf-geometry.py`）まで進めたところ、
