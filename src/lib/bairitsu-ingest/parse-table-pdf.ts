@@ -41,6 +41,20 @@ export interface PdfPageGeometry {
 }
 
 /**
+ * 1ページに複数の表が左右に並ぶ県（tokushima型: 全日制LEFT+全日制MIDDLE+定時制RIGHTの
+ * 3列組）向けに、指定したx範囲に含まれる文字・罫線だけを取り出す。各グループを独立した
+ * `PdfPageGeometry`として扱えるようにし、`parseTablePdfPageRows`をグループごとに個別の
+ * `TableColumnLayout`（列境界・fullLineX0Max とも当然グループごとに異なる絶対x座標）で
+ * 呼び出せるようにする（2026-09-02・tokushimaで実証）。
+ */
+export function filterGeometryByXRange(geom: PdfPageGeometry, xMin: number, xMax: number, margin = 5): PdfPageGeometry {
+  return {
+    chars: geom.chars.filter((c) => c.x0 >= xMin - margin && c.x1 <= xMax + margin),
+    hlines: geom.hlines.filter((h) => h.x0 >= xMin - margin && h.x1 <= xMax + margin),
+  };
+}
+
+/**
  * 列レイアウト定義。boundaries[0..4]の4区間が [学校名, 学科名, 募集定員, 志願者数, 倍率] の
  * 5列に対応する（boundaries.length は5以上・6要素目以降の列（内数等）は本モジュールでは
  * 読み捨てる。将来的に必要になれば拡張する）。
@@ -50,6 +64,16 @@ export interface TableColumnLayout {
   boundaries: number[];
   /** この値以下のx0を持つ罫線は「学校名列をまたぐ完全な行/ブロック区切り」とみなす。 */
   fullLineX0Max: number;
+  /**
+   * ⚠️2026-09-02 tokushimaで判明: PDFによっては表の最初の行の直前・最後の行の直後に
+   * 罫線が一切描かれていないことがある（見出し行との境界・表末尾の合計行との境界を
+   * 罫線でなく余白だけで表現している）。この場合`mergedLines`にその境界が存在せず、
+   * 表の最初/最後の行が丸ごと欠落する。`syntheticTopY`/`syntheticBottomY`を指定すると
+   * その位置に「完全な区切り」として振る舞う仮想の罫線を補う（実データの罫線が存在する
+   * 通常のケースでは省略してよい・省略時は従来どおりの挙動）。
+   */
+  syntheticTopY?: number;
+  syntheticBottomY?: number;
 }
 
 export interface RawTableRow {
@@ -80,8 +104,21 @@ function columnIndexForX(x: number, boundaries: number[], numDataColumns: number
 }
 
 /**
- * 半角カタカナ→全角・半角濁点/半濁点の合成を含む正規化（NFKCで一括対応できる）に加え、
- * 内部の空白（全角スペース含む）も除去する。
+ * 半角カタカナの連続だけをNFKCで正規化する（全角化・濁点/半濁点の合成を含む）。
+ *
+ * ⚠️2026-09-02判明: 当初は文字列全体に`.normalize('NFKC')`をかけていたが、これは
+ * **全角括弧「（）」まで意図せず半角「()」に変換してしまうバグ**だった
+ * （tokushimaの既存データ「芸術（音楽）」は全角括弧を意図的に使っており、半角化すると
+ * 既存データと不一致になる）。半角カタカナの範囲（U+FF61-FF9F）だけを抽出して
+ * NFKC正規化することで、括弧等の他の文字には一切手を触れずに半角カタカナ＋濁点/半濁点の
+ * 合成（例:「ｽﾎﾟｰﾂ」→「スポーツ」）だけを解決できる。
+ */
+function normalizeHalfwidthKatakana(s: string): string {
+  return s.replace(/[｡-ﾟ]+/g, (run) => run.normalize('NFKC'));
+}
+
+/**
+ * 半角カタカナの正規化に加え、内部の空白（全角スペース含む）も除去する。
  *
  * 【なぜ内部空白まで除去するか】多くの県のPDFは学校名・学科名を「宇　都　宮」のように
  * 1文字ずつ均等割り付け（トラッキング）で組版しており、実際の空白文字が文字間に挿入
@@ -91,7 +128,7 @@ function columnIndexForX(x: number, boundaries: number[], numDataColumns: number
  * （no-op）。
  */
 export function normalizeExtractedText(s: string): string {
-  return s.normalize('NFKC').replace(/[\s　]+/g, '');
+  return normalizeHalfwidthKatakana(s).replace(/[\s　]+/g, '');
 }
 
 /**
@@ -112,11 +149,12 @@ export function normalizeDepartmentText(s: string): string {
  */
 export function parseTablePdfPageRows(geom: PdfPageGeometry, layout: TableColumnLayout): RawTableRow[] {
   const { chars, hlines } = geom;
-  const { boundaries, fullLineX0Max } = layout;
+  const { boundaries, fullLineX0Max, syntheticTopY, syntheticBottomY } = layout;
   const numDataColumns = Math.min(5, boundaries.length - 1);
 
   const sortedLines = [...hlines].sort((a, b) => a.y - b.y);
   const mergedLines: { y: number; x0: number }[] = [];
+  if (syntheticTopY !== undefined) mergedLines.push({ y: syntheticTopY, x0: boundaries[0] });
   for (const h of sortedLines) {
     const last = mergedLines[mergedLines.length - 1];
     if (last && Math.abs(last.y - h.y) < 1.0) {
@@ -125,6 +163,7 @@ export function parseTablePdfPageRows(geom: PdfPageGeometry, layout: TableColumn
       mergedLines.push({ y: h.y, x0: h.x0 });
     }
   }
+  if (syntheticBottomY !== undefined) mergedLines.push({ y: syntheticBottomY, x0: boundaries[0] });
 
   const rows: RawTableRow[] = [];
   for (let i = 0; i < mergedLines.length - 1; i++) {
