@@ -74,6 +74,14 @@ export interface TableColumnLayout {
    */
   syntheticTopY?: number;
   syntheticBottomY?: number;
+  /**
+   * ⚠️2026-09-02 ishikawaで判明: 列が[募集定員/内定者数/一般入学枠(=quota)/出願者数(=applicants)/
+   * 出願倍率(=rate)/確定出願倍率]のように、quota/applicants/rateが学校名・学科名に隣接しない
+   * 県がある（tochigi型のGeneralColumnLayoutと同じ課題が、結合セル・delayed labelを持つ県にも
+   * 起こりうる）。`roles`を指定すると、`boundaries`のどのインデックスがどの意味の列かを
+   * 明示できる（省略時は従来どおり0=学校名/1=学科名/2=quota/3=applicants/4=rateの隣接5列）。
+   */
+  roles?: { schoolName: number; department: number; quota: number; finalApplicants: number; finalRate: number };
 }
 
 export interface RawTableRow {
@@ -150,7 +158,8 @@ export function normalizeDepartmentText(s: string): string {
 export function parseTablePdfPageRows(geom: PdfPageGeometry, layout: TableColumnLayout): RawTableRow[] {
   const { chars, hlines } = geom;
   const { boundaries, fullLineX0Max, syntheticTopY, syntheticBottomY } = layout;
-  const numDataColumns = Math.min(5, boundaries.length - 1);
+  const roles = layout.roles ?? { schoolName: 0, department: 1, quota: 2, finalApplicants: 3, finalRate: 4 };
+  const numDataColumns = boundaries.length - 1;
 
   const sortedLines = [...hlines].sort((a, b) => a.y - b.y);
   const mergedLines: { y: number; x0: number }[] = [];
@@ -186,11 +195,11 @@ export function parseTablePdfPageRows(geom: PdfPageGeometry, layout: TableColumn
     rows.push({
       yTop,
       yBottom,
-      schoolName: joinCol(cellChars[0]),
-      department: joinCol(cellChars[1]),
-      quotaText: joinCol(cellChars[2]),
-      applicantsText: joinCol(cellChars[3]),
-      rateText: joinCol(cellChars[4]),
+      schoolName: joinCol(cellChars[roles.schoolName]),
+      department: joinCol(cellChars[roles.department]),
+      quotaText: joinCol(cellChars[roles.quota]),
+      applicantsText: joinCol(cellChars[roles.finalApplicants]),
+      rateText: joinCol(cellChars[roles.finalRate]),
       isBlockEnd: mergedLines[i + 1].x0 <= fullLineX0Max,
     });
   }
