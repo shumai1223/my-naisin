@@ -529,7 +529,34 @@ A-3 quota定義の構造化 3/47県  （44県未着手）
         なる一方、分裂した「県」+「立計...」は正しく前方一致する）。
       `parse-table-pdf-nara.test.ts`で検証済み（jest4テストgreen）。tsc実exit0・
       jestフル385suites6529tests green。**naraは実装完了**
-- [ ] 残り29県（usable 43県からibaraki・tochigi・akita・tokushima・ishikawa・gunma・nagasaki・ehime・toyama・aomori・fukui・kagawa・okinawa・naraを除く。kanagawaは見送り扱い）に
+- [x] **mie(R8)は調査のみ・見送り（2026-09-02）**。「学校計」高信頼度パターン（nagasaki型）+
+      8件のくくり募集という構成で着手したが、**くくり募集の集計行の位置パターンが1県内に
+      2種類混在**していると判明: ①桑名工業型＝「label(数値無)→集計行(学科名列が空欄・数値
+      あり)→label(数値無)」（集計行が2ラベルの間に挟まる）②四日市農芸型＝「label(数値無)→
+      label+集計数値(学科名とquota等が同一行)→label(数値無)」（集計行が3ラベルの中央に
+      その学科名込みで存在する）。どちらのパターンかは事前にPDFを見るまで分からず、しかも
+      「その行が集計行かどうか」は前後の文脈（隣接行がlabelのみか）を見て初めて判定できる
+      ため、単純なpendingキュー方式（fukui/aomori/nara型のいずれも）では対応できず、
+      run単位のグルーピング+先読みという設計が必要と判明。費用対効果が低いと判断し、
+      より単純な県を優先することにした（コード変更なし・fixture/testは作成せず削除済み）
+- [x] **yamanashi(R8)を実装・検証完了（2026-09-02）**。48/48件・完全一致（グランドトータル
+      quota3,356・applicants3,037も既存noteの「全日制課程計」行と一致）。くくり募集4組は
+      いずれもmie型のような複数行合成が不要で、資料上すでに「○○（一括）」という1行完結
+      ラベルとして表現されていた（既存データの半角括弧post-processのみで対応）。
+      - ⚠️**新しい罠: 3桁のquota/applicantsで、括弧付き内数「(3)」等が同じ列区間に
+        混入する（okinawa/gunmaと同型の列越境だが、ここでは「隣接列への越境」ではなく
+        「同一列内で数字本体+括弧付き内数が連結される」という別の形）**。department側は
+        3桁quotaの先頭桁が越境（okinawa型）、quota側は自分の列内で末尾に「(3)」が続けて
+        印字される（本体側の罠）。**両方とも「本来欲しい数字の直後で列を切る」ことで
+        解決**（department側は右端を狭める・quota側も同様に右端を狭めて内数の括弧を
+        別の未使用列に追い出す）。
+      - ⚠️**「県立高校計」等の集計ラベルがschoolName/department列の境界をまたいで分裂する
+        （nara型の教訓の再確認）**。`department.trim() === '計'`のような完全一致だけでは
+        「高校計3...」のように分裂したケースを検知できず、既知ラベルへの前方一致
+        （`(schoolName+department).startsWith(marker)`）が必要だった。
+      `parse-table-pdf-yamanashi.test.ts`で検証済み（jest4テストgreen）。tsc実exit0・
+      jestフル386suites6533tests green。**yamanashiは実装完了**
+- [ ] 残り28県（usable 43県からibaraki・tochigi・akita・tokushima・ishikawa・gunma・nagasaki・ehime・toyama・aomori・fukui・kagawa・okinawa・nara・yamanashiを除く。kanagawa・mieは見送り扱い）に
       同じ方式を横展開する。着手前に`pdftotext -table -enc UTF-8`の出力を目視し、
       ①学校名ラベルの位置（先頭行か中間か＝ibaraki型かどうか）②長い学校名の折り返しの
       有無（akita型が必要か）③№列の有無、を確認してから実装すること
