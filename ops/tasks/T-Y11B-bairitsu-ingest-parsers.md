@@ -649,7 +649,7 @@ A-3 quota定義の構造化 3/47県  （44県未着手）
         連結（重複時は片方のみ）する方式で解決した。
       `parse-table-pdf-tottori.test.ts`で検証済み（jest5テストgreen）。tsc実exit0・
       jestフル390suites6551tests green。**tottoriは実装完了**
-- [ ] 残り15県（usable 43県からibaraki・tochigi・akita・tokushima・ishikawa・gunma・nagasaki・ehime・toyama・aomori・fukui・kagawa・okinawa・nara・yamanashi・kyoto・chiba・saitama・tottori・miyagi・kumamoto・iwate・shizuokaを除く。kochi・yamagata・nagano・oitaは次点扱い（罠を発見済み・下記参照）。kanagawa・mieは見送り扱い。aichi・miyazaki・yamaguchiはToUnicodeマッピング欠落のためテキストパーサ対象外（ビジョン解析専用）と判明）。残る候補は主にhiroshima・gifu・saga・shiga・wakayama・tokyo・hokkaido・kagoshima・niigata等で、いずれも複数のくくり募集や独自の表構造を持ち今回のiwate/shizuokaほど単純ではない見込み
+- [ ] 残り14県（usable 43県からibaraki・tochigi・akita・tokushima・ishikawa・gunma・nagasaki・ehime・toyama・aomori・fukui・kagawa・okinawa・nara・yamanashi・kyoto・chiba・saitama・tottori・miyagi・kumamoto・iwate・shizuoka・gifuを除く。kochi・yamagata・nagano・oitaは次点扱い（罠を発見済み・下記参照）。kanagawa・mieは見送り扱い。aichi・miyazaki・yamaguchiはToUnicodeマッピング欠落のためテキストパーサ対象外（ビジョン解析専用）と判明）。残る候補は主にhiroshima・saga・shiga・wakayama・tokyo・hokkaido・kagoshima・niigata等で、いずれも複数のくくり募集や独自の表構造を持つ見込み
       同じ方式を横展開する。着手前に`pdftotext -table -enc UTF-8`の出力を目視し、
       ①学校名ラベルの位置（先頭行か中間か＝ibaraki型かどうか）②長い学校名の折り返しの
       有無（akita型が必要か）③№列の有無、を確認してから実装すること
@@ -976,6 +976,23 @@ A-3 quota定義の構造化 3/47県  （44県未着手）
       （他の学科名は生表記のまま・県固有の表記慣行）。
     - `parse-table-pdf-shizuoka.test.ts`で検証済み（jest5テストgreen）。tsc実exit0・
       jestフル393suites6564tests green。**shizuokaは実装完了**
+  - **gifu(R8)を実装・検証完了（2026-09-03・23県目）**: tochigi型（単純carry-forward）を
+    そのまま流用できた。134/134件・63校・完全一致（グランドトータルquota12,925・
+    applicants12,009も「全日制計」と一致）。各学科(群)の本体行の下に付随する独自検査
+    Ⅰ/Ⅱ・連携型選抜の内訳行は、学校名・学科名列が空欄のまま数値だけが続くため
+    `!departmentRaw`の既存原則で自然にスキップされ、特別な対応は不要だった。
+    - ⚠️**唯一の罠: 全日制の後（5頁目）に「２　定時制」「３　通信制」という別セクションが
+      続き、華陽フロンティア（定時制11校の1つ）・飛騨高山（通信制2校の1つ）等が**全日制と
+      同じ学校名・同じ学科名（例:「普通」）で別の（小さい）quota/applicantsを持つ行として
+      再登場する**。学校名+学科名のキーでは全日制の正しいレコードと区別できないため、
+      「２　定時制」「３　通信制」という見出し行（学校名列に出現）を検知した時点で以降の
+      全行を丸ごと打ち切りとした（他県のnagasaki/miyagi型の「定時制はスコープ外」を
+      セクション単位で実施する新パターン）。
+    - ⚠️**既存の罠の再確認: 除外判定に単純な`.includes('計')`を使うと、正当な学科名「会計」
+      （岐阜商業に実在）まで誤って除外してしまう**（nagasaki型の教訓「完全一致または
+      完全なマーカー文字列で判定する」の再確認・`.includes('合計')`に修正して解決）。
+    - `parse-table-pdf-gifu.test.ts`で検証済み（jest5テストgreen）。tsc実exit0・
+      jestフル394suites6569tests green。**gifuは実装完了**
 - [ ] **検証は1つだけ**: パーサの出力が、既存の手作業データ（`competition-rates/<pref>.ts`）と
       **レコード単位で完全一致するか**
 - [ ] ⚠️ **一致しなければパーサが間違っている。データを合わせにいかない**
