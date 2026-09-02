@@ -1,0 +1,465 @@
+[
+  {
+    "pref": "aichi",
+    "url": "https://www.pref.aichi.jp/uploaded/attachment/600212.pdf",
+    "quality": "usable",
+    "cjkCharCount": 4643,
+    "numericRunCount": 543,
+    "note": "",
+    "bytes": 1405287,
+    "cjkRatio": 8.551
+  },
+  {
+    "pref": "akita",
+    "url": "https://www.pref.akita.lg.jp/uploads/public/archive_0000093860_00/20260212_%EF%BC%91%E6%AC%A1%E5%8B%9F%E9%9B%86%E3%80%80%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B0%EF%BC%88%E5%BF%97%E9%A1%98%E5%85%88%E5%A4%89%E6%9B%B4%E5%BE%8C%EF%BC%89%EF%BC%88%E5%85%AC%E2%80%95%EF%BC%92%EF%BC%89.pdf",
+    "quality": "usable",
+    "cjkCharCount": 1285,
+    "numericRunCount": 107,
+    "note": "",
+    "bytes": 175177,
+    "cjkRatio": 12.009
+  },
+  {
+    "pref": "aomori",
+    "url": "https://www.pref.aomori.lg.jp/soshiki/kyoiku/e-gakyo/files/R8senbatsu_syutsugan-zennitisei.pdf",
+    "quality": "usable",
+    "cjkCharCount": 559,
+    "numericRunCount": 71,
+    "note": "",
+    "bytes": 148209,
+    "cjkRatio": 7.873
+  },
+  {
+    "pref": "chiba",
+    "url": "https://www.pref.chiba.lg.jp/kyouiku/shidou/nyuushi/koukou/r8/documents/r8kakuteiippan.pdf",
+    "quality": "usable",
+    "cjkCharCount": 2526,
+    "numericRunCount": 374,
+    "note": "",
+    "bytes": 109139,
+    "cjkRatio": 6.754
+  },
+  {
+    "pref": "ehime",
+    "url": "https://ehime-kyoiku.esnet.ed.jp/file/2314",
+    "quality": "usable",
+    "cjkCharCount": 571,
+    "numericRunCount": 49,
+    "note": "",
+    "bytes": 145433,
+    "cjkRatio": 11.653
+  },
+  {
+    "pref": "fukui",
+    "url": "https://www.pref.fukui.lg.jp/doc/koukou/nyugaku/r08ippan_d/fil/R8henko3.pdf",
+    "quality": "usable",
+    "cjkCharCount": 967,
+    "numericRunCount": 71,
+    "note": "",
+    "bytes": 224171,
+    "cjkRatio": 13.62
+  },
+  {
+    "pref": "fukuoka",
+    "url": "https://www.pref.fukuoka.lg.jp/uploaded/life/806459_62802786_misc.pdf",
+    "quality": "usable",
+    "cjkCharCount": 1903,
+    "numericRunCount": 657,
+    "note": "docTitleから実PDFパスを復元(元urlはHTMLハブページ)",
+    "bytes": 103169,
+    "cjkRatio": 2.896
+  },
+  {
+    "pref": "fukushima",
+    "url": "https://www.pref.fukushima.lg.jp/uploaded/attachment/735188.pdf",
+    "quality": "inconclusive",
+    "cjkCharCount": 0,
+    "numericRunCount": 0,
+    "note": "",
+    "bytes": 628975
+  },
+  {
+    "pref": "gifu",
+    "url": "https://www.pref.gifu.lg.jp/uploaded/attachment/485854.pdf",
+    "quality": "usable",
+    "cjkCharCount": 1206,
+    "numericRunCount": 82,
+    "note": "",
+    "bytes": 528069,
+    "cjkRatio": 14.707
+  },
+  {
+    "pref": "gunma",
+    "url": "https://www.pref.gunma.jp/uploaded/attachment/689968.pdf",
+    "quality": "usable",
+    "cjkCharCount": 1545,
+    "numericRunCount": 192,
+    "note": "",
+    "bytes": 241464,
+    "cjkRatio": 8.047
+  },
+  {
+    "pref": "hiroshima",
+    "url": "https://www.pref.hiroshima.lg.jp/uploaded/attachment/655351.pdf",
+    "quality": "usable",
+    "cjkCharCount": 1920,
+    "numericRunCount": 171,
+    "note": "",
+    "bytes": 89374,
+    "cjkRatio": 11.228
+  },
+  {
+    "pref": "hokkaido",
+    "url": "https://www.dokyoi.pref.hokkaido.lg.jp/fs/1/3/1/7/8/5/5/0/_/05_p9-p22.pdf",
+    "quality": "usable",
+    "cjkCharCount": 5963,
+    "numericRunCount": 416,
+    "note": "",
+    "bytes": 533742,
+    "cjkRatio": 14.334
+  },
+  {
+    "pref": "hyogo",
+    "url": "https://www2.hyogo-c.ed.jp/hpe/uploads/sites/10/2026/03/【確定】修正_03-R8_３月選抜志願者数.pdf",
+    "quality": "skipped-robots",
+    "note": "robots.txt遵守のため再取得スキップ(www2.hyogo-c.ed.jp)。R5-R7は過去記録で全てneeds-vision-fallback",
+    "cjkCharCount": null,
+    "numericRunCount": null
+  },
+  {
+    "pref": "ibaraki",
+    "url": "https://kyoiku.pref.ibaraki.jp/wp-content/uploads/2026/02/shigansha20260218.pdf",
+    "quality": "usable",
+    "cjkCharCount": 1879,
+    "numericRunCount": 137,
+    "note": "",
+    "bytes": 106036,
+    "cjkRatio": 13.715
+  },
+  {
+    "pref": "ishikawa",
+    "url": "https://www.pref.ishikawa.lg.jp/kisya/r7kyoui/documents/20260224.pdf",
+    "quality": "usable",
+    "cjkCharCount": 1000,
+    "numericRunCount": 109,
+    "note": "",
+    "bytes": 187395,
+    "cjkRatio": 9.174
+  },
+  {
+    "pref": "iwate",
+    "url": "https://www.pref.iwate.jp/_res/projects/default_project/_page_/001/094/015/r8_sigansya_tyouseigo.pdf",
+    "quality": "usable",
+    "cjkCharCount": 1660,
+    "numericRunCount": 81,
+    "note": "",
+    "bytes": 332050,
+    "cjkRatio": 20.494
+  },
+  {
+    "pref": "kagawa",
+    "url": "https://www.pref.kagawa.lg.jp/documents/15096/syutugan8-3-2.pdf",
+    "quality": "usable",
+    "cjkCharCount": 1354,
+    "numericRunCount": 62,
+    "note": "",
+    "bytes": 325751,
+    "cjkRatio": 21.839
+  },
+  {
+    "pref": "kagoshima",
+    "url": "https://www.pref.kagoshima.jp/ba05/kyoiku-bunka/school/koukou/nyushi/r7/documents/126595_20260304191737-1.pdf",
+    "quality": "usable",
+    "cjkCharCount": 1418,
+    "numericRunCount": 182,
+    "note": "",
+    "bytes": 321823,
+    "cjkRatio": 7.791
+  },
+  {
+    "pref": "kanagawa",
+    "url": "https://www.pref.kanagawa.jp/documents/131973/bessi3.pdf",
+    "quality": "usable",
+    "cjkCharCount": 4785,
+    "numericRunCount": 556,
+    "note": "",
+    "bytes": 283700,
+    "cjkRatio": 8.606
+  },
+  {
+    "pref": "kochi",
+    "url": "https://www.pref.kochi.lg.jp/doc/2026010600090/file_contents/r8_A_henkougo0205.pdf",
+    "quality": "usable",
+    "cjkCharCount": 916,
+    "numericRunCount": 62,
+    "note": "",
+    "bytes": 216723,
+    "cjkRatio": 14.774
+  },
+  {
+    "pref": "kumamoto",
+    "url": "https://www.pref.kumamoto.jp/uploaded/life/259416_786982_misc.pdf",
+    "quality": "usable",
+    "cjkCharCount": 1392,
+    "numericRunCount": 128,
+    "note": "",
+    "bytes": 299559,
+    "cjkRatio": 10.875
+  },
+  {
+    "pref": "kyoto",
+    "url": "https://www.kyoto-be.ne.jp/koukyou/cms/wp-content/uploads/2025/05/%E4%BB%A4%E5%92%8C%EF%BC%98%E5%B9%B4%E5%BA%A6%E4%B8%AD%E6%9C%9F%E9%81%B8%E6%8A%9C-%E5%BA%83%E5%A0%B1%E8%B3%87%E6%96%99%EF%BC%88%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B0%EF%BC%89.pdf",
+    "quality": "usable",
+    "cjkCharCount": 1838,
+    "numericRunCount": 272,
+    "note": "",
+    "bytes": 295025,
+    "cjkRatio": 6.757
+  },
+  {
+    "pref": "mie",
+    "url": "https://www.pref.mie.lg.jp/common/content/001243656.pdf",
+    "quality": "usable",
+    "cjkCharCount": 1970,
+    "numericRunCount": 213,
+    "note": "",
+    "bytes": 163825,
+    "cjkRatio": 9.249
+  },
+  {
+    "pref": "miyagi",
+    "url": "https://www.pref.miyagi.jp/documents/63612/0213_r8kouritukoukou_nyuugakusyasenbatsu_gakuryokukensa.pdf",
+    "quality": "usable",
+    "cjkCharCount": 2938,
+    "numericRunCount": 213,
+    "note": "",
+    "bytes": 578553,
+    "cjkRatio": 13.793
+  },
+  {
+    "pref": "miyazaki",
+    "url": "https://www.pref.miyazaki.lg.jp/documents/99874/99874_20260224160129-1.pdf",
+    "quality": "usable",
+    "cjkCharCount": 1143,
+    "numericRunCount": 140,
+    "note": "",
+    "bytes": 275881,
+    "cjkRatio": 8.164
+  },
+  {
+    "pref": "nagano",
+    "url": "https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/20260305web-teisei.pdf",
+    "quality": "usable",
+    "cjkCharCount": 2822,
+    "numericRunCount": 91,
+    "note": "",
+    "bytes": 518035,
+    "cjkRatio": 31.011
+  },
+  {
+    "pref": "nagasaki",
+    "url": "https://www.pref.nagasaki.jp/uploads/2026/02/1770615354.pdf",
+    "quality": "usable",
+    "cjkCharCount": 3488,
+    "numericRunCount": 241,
+    "note": "",
+    "bytes": 794093,
+    "cjkRatio": 14.473
+  },
+  {
+    "pref": "nara",
+    "url": "https://www.pref.nara.lg.jp/documents/5981/r8_itijisennbatu_dainisyutugannkikann_syutugannsyasuu.pdf",
+    "quality": "usable",
+    "cjkCharCount": 727,
+    "numericRunCount": 52,
+    "note": "",
+    "bytes": 289358,
+    "cjkRatio": 13.981
+  },
+  {
+    "pref": "niigata",
+    "url": "https://kyouikucho.nein.ed.jp/koukoukyouiku/senbatu/koukou/ippan_henkogo.pdf",
+    "quality": "usable",
+    "cjkCharCount": 2599,
+    "numericRunCount": 212,
+    "note": "",
+    "bytes": 201667,
+    "cjkRatio": 12.259
+  },
+  {
+    "pref": "oita",
+    "url": "https://www.pref.oita.jp/uploaded/attachment/2261572.pdf",
+    "quality": "usable",
+    "cjkCharCount": 1221,
+    "numericRunCount": 137,
+    "note": "",
+    "bytes": 149425,
+    "cjkRatio": 8.912
+  },
+  {
+    "pref": "okayama",
+    "url": "https://www.pref.okayama.jp/uploaded/life/1044733_10111198_misc.pdf",
+    "quality": "fetch-error",
+    "note": "HTTP 404",
+    "cjkCharCount": null,
+    "numericRunCount": null
+  },
+  {
+    "pref": "okinawa",
+    "url": "https://www.pref.okinawa.jp/_res/projects/default_project/_page_/001/038/168/r07saisyu.pdf",
+    "quality": "usable",
+    "cjkCharCount": 1464,
+    "numericRunCount": 327,
+    "note": "",
+    "bytes": 263816,
+    "cjkRatio": 4.477
+  },
+  {
+    "pref": "osaka",
+    "url": "https://www.pref.osaka.lg.jp/documents/125698/r08_ippan_sigansya_0306.xlsx",
+    "quality": "non-pdf-xlsx",
+    "note": "xlsx形式のためpdftotext対象外",
+    "cjkCharCount": null,
+    "numericRunCount": null
+  },
+  {
+    "pref": "saga",
+    "url": "https://www.pref.saga.lg.jp/kyouiku/kiji003118261/3_118261_381978_up_jpwwphq6.pdf",
+    "quality": "usable",
+    "cjkCharCount": 1946,
+    "numericRunCount": 175,
+    "note": "",
+    "bytes": 368976,
+    "cjkRatio": 11.12
+  },
+  {
+    "pref": "saitama",
+    "url": "https://www.pref.saitama.lg.jp/documents/268192/r8shigankakutei0219.pdf",
+    "quality": "usable",
+    "cjkCharCount": 3096,
+    "numericRunCount": 532,
+    "note": "",
+    "bytes": 507842,
+    "cjkRatio": 5.82
+  },
+  {
+    "pref": "shiga",
+    "url": "https://www.pref.shiga.lg.jp/file/attachment/5591236.pdf",
+    "quality": "usable",
+    "cjkCharCount": 2391,
+    "numericRunCount": 120,
+    "note": "",
+    "bytes": 227205,
+    "cjkRatio": 19.925
+  },
+  {
+    "pref": "shimane",
+    "url": "https://www.pref.shimane.lg.jp/education/kyoiku/senbatsu/senbatsu_info/kanendosenbatsu.data/01_R8_henkougoitiran_teisei.pdf",
+    "quality": "usable",
+    "cjkCharCount": 1729,
+    "numericRunCount": 136,
+    "note": "",
+    "bytes": 261995,
+    "cjkRatio": 12.713
+  },
+  {
+    "pref": "shizuoka",
+    "url": "https://www.pref.shizuoka.jp/_res/projects/default_project/_page_/001/072/279/r8shigansyasuusiganhennkougo1.pdf",
+    "quality": "usable",
+    "cjkCharCount": 3467,
+    "numericRunCount": 178,
+    "note": "",
+    "bytes": 367580,
+    "cjkRatio": 19.478
+  },
+  {
+    "pref": "tochigi",
+    "url": "https://www.pref.tochigi.lg.jp/m04/r08/documents/r8zennitiseiippansenbatsusyutsuganhenkojokyo.pdf",
+    "quality": "usable",
+    "cjkCharCount": 1243,
+    "numericRunCount": 133,
+    "note": "",
+    "bytes": 279040,
+    "cjkRatio": 9.346
+  },
+  {
+    "pref": "tokushima",
+    "url": "https://nyuushi.tokushima-ec.ed.jp/file/975",
+    "quality": "usable",
+    "cjkCharCount": 599,
+    "numericRunCount": 32,
+    "note": "",
+    "bytes": 71753,
+    "cjkRatio": 18.719
+  },
+  {
+    "pref": "tokyo",
+    "url": "https://www.kyoiku.metro.tokyo.lg.jp/documents/d/kyoiku/2026-02-13-182440-757",
+    "quality": "usable",
+    "cjkCharCount": 533,
+    "numericRunCount": 199,
+    "note": "",
+    "bytes": 72119,
+    "cjkRatio": 2.678
+  },
+  {
+    "pref": "tottori",
+    "url": "https://www.pref.tottori.lg.jp/secure/1418417/R08_ippan_saisyuu_shigansya.pdf",
+    "quality": "usable",
+    "cjkCharCount": 3251,
+    "numericRunCount": 172,
+    "note": "",
+    "bytes": 459130,
+    "cjkRatio": 18.901
+  },
+  {
+    "pref": "toyama",
+    "url": "https://www.pref.toyama.jp/documents/47208/080224.pdf",
+    "quality": "usable",
+    "cjkCharCount": 1478,
+    "numericRunCount": 123,
+    "note": "",
+    "bytes": 244669,
+    "cjkRatio": 12.016
+  },
+  {
+    "pref": "wakayama",
+    "url": "https://www.pref.wakayama.lg.jp/prefg/500200/d00219915_d/fil/08honsyutugan.pdf",
+    "quality": "usable",
+    "cjkCharCount": 1549,
+    "numericRunCount": 140,
+    "note": "",
+    "bytes": 206582,
+    "cjkRatio": 11.064
+  },
+  {
+    "pref": "yamagata",
+    "url": "https://www.pref.yamagata.jp/documents/42443/r8koukiippannsigannjoukyouhp.pdf",
+    "quality": "usable",
+    "cjkCharCount": 1199,
+    "numericRunCount": 60,
+    "note": "",
+    "bytes": 177061,
+    "cjkRatio": 19.983
+  },
+  {
+    "pref": "yamaguchi",
+    "url": "https://www.pref.yamaguchi.lg.jp/uploaded/life/338005_649954_misc.pdf",
+    "quality": "usable",
+    "cjkCharCount": 1216,
+    "numericRunCount": 84,
+    "note": "",
+    "bytes": 183310,
+    "cjkRatio": 14.476
+  },
+  {
+    "pref": "yamanashi",
+    "url": "https://www.pref.yamanashi.jp/documents/7061/r8saisyuusigansyasuu1.pdf",
+    "quality": "usable",
+    "cjkCharCount": 2369,
+    "numericRunCount": 148,
+    "note": "",
+    "bytes": 1422698,
+    "cjkRatio": 16.007
+  }
+]
