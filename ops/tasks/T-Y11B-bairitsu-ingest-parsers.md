@@ -556,7 +556,24 @@ A-3 quota定義の構造化 3/47県  （44県未着手）
         （`(schoolName+department).startsWith(marker)`）が必要だった。
       `parse-table-pdf-yamanashi.test.ts`で検証済み（jest4テストgreen）。tsc実exit0・
       jestフル386suites6533tests green。**yamanashiは実装完了**
-- [ ] 残り28県（usable 43県からibaraki・tochigi・akita・tokushima・ishikawa・gunma・nagasaki・ehime・toyama・aomori・fukui・kagawa・okinawa・nara・yamanashiを除く。kanagawa・mieは見送り扱い）に
+- [x] **kyoto(R8)を実装・検証完了（2026-09-02）**。75/75件・完全一致（グランドトータル
+      quota6,048・applicants5,160も既存noteの「全日制計」行と一致）。多くの学校で学校名ラベルが
+      結合セルの不規則な位置に出現するためtoyama型の罫線ブロック方式が必要だった。
+      - ⚠️**新しい罠1: 分校・学舎名（「（南）」「（宮津学舎）」等）が学校名列の別の行に断片として
+        出現する**。akita型の学校名複数行断片連結を応用したが、**無条件の全断片連結は
+        department側のテキストが学校名列にはみ出した誤検知（「プロジェクト」等）も拾って
+        しまう**ため、「（」で始まる断片だけを追加連結の対象にする限定ルールが必要だった。
+      - ⚠️**新しい罠2: 脚注番号「注１」等が倍率の直後に連結印字される**（fukuiのくくり募集の
+        ラベル混入とは別種・数値列に文字が混入するパターン）。`Number("0.84注１")`はNaNになる
+        ため、`.replace(/注.*$/,'')`で除去してから数値化する。
+      - ⚠️**新しい罠3: 学校名/学科名の列境界は県内でも学校ごとに最適位置が食い違うことがある**
+        （南丹・大江は境界を狭める必要があったが、アグリサイエンス[単位制]は逆に境界を広く
+        取る必要があり、単一の固定境界では両立しない）。**1つの境界値で全県を解決しようと
+        せず、少数（この県では5件）の食い違うケースは既存データを根拠にした個別補正
+        （fukui/tokushima型の数値ベース裏取り）で対応する方が全体として安全**。
+      `parse-table-pdf-kyoto.test.ts`で検証済み（jest4テストgreen）。tsc実exit0・
+      jestフル387suites6537tests green。**kyotoは実装完了**
+- [ ] 残り27県（usable 43県からibaraki・tochigi・akita・tokushima・ishikawa・gunma・nagasaki・ehime・toyama・aomori・fukui・kagawa・okinawa・nara・yamanashi・kyotoを除く。kanagawa・mieは見送り扱い）に
       同じ方式を横展開する。着手前に`pdftotext -table -enc UTF-8`の出力を目視し、
       ①学校名ラベルの位置（先頭行か中間か＝ibaraki型かどうか）②長い学校名の折り返しの
       有無（akita型が必要か）③№列の有無、を確認してから実装すること
