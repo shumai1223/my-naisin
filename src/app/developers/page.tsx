@@ -642,16 +642,30 @@ print(naishin["total"])  # -> 52`;
             <CodeBlock>{gakushuSeisekiCurlExample}</CodeBlock>
           </div>
 
-          <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">⑦d 都道府県別 学校ごと入試競争率</h3>
+          <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">⑦d 都道府県別 学校ごと入試競争率（Business以上）</h3>
           <p className="mb-2 text-sm text-slate-600">
-            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">GET /api/schools/{'{pref}'}</code>
+            <strong>公立高校・学校＋学科単位の募集人員・応募者数・倍率＝21,739件（3,260校・47都道府県・令和4〜8年度の5年分）。</strong>
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">GET /api/schools/{'{pref}'}</code>
             {' — '}都道府県コード（例: <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">tokyo</code>）を指定すると、
-            学校ごとの募集人員・応募者数・倍率のレコードを返します。
+            その都道府県のレコードを返します。
             <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">?fiscalYear=令和8年度（2026年度）</code>
-            で年度を絞り込めます。商用資料のみを出典とするレコードは配布ポリシー上、自動的に除外されます。
+            で年度を絞り込めます。商用資料のみを出典とするレコードは配布ポリシー上、自動的に除外されます
+            （21,739件のうち配布可能は21,548件）。<strong>本エンドポイントはBusiness以上のAPIキーが必要です。</strong>
           </p>
+          <p className="mb-2 text-xs text-slate-500">
+            中身のサンプル（千葉県・令和8年度・実データ）：
+          </p>
+          <CodeBlock>{`{
+  "prefectureCode": "chiba",
+  "recordCount": 3,
+  "records": [
+    { "schoolName": "千葉", "department": "普通科", "quota": 240, "finalApplicants": 331, "finalRate": 1.38 },
+    { "schoolName": "千葉女子", "department": "普通科", "quota": 240, "finalApplicants": 234, "finalRate": 0.98 },
+    { "schoolName": "千葉女子", "department": "家政科", "quota": 40, "finalApplicants": 33, "finalRate": 0.83 }
+  ]
+}`}</CodeBlock>
           <p className="mt-1 text-xs text-slate-500">
-            実際に開く：{' '}
+            実際に開く（Businessキーが無い場合は402が返ります。挙動の確認のみ）：{' '}
             <a
               href="/api/schools/tokyo"
               target="_blank"
