@@ -1057,6 +1057,33 @@ A-3 quota定義の構造化 3/47県  （44県未着手）
       ため衝突しない）。
     - `parse-table-pdf-kagoshima.test.ts`で検証済み（jest5テストgreen）。tsc実exit0・
       jestフル397suites6582tests green。**kagoshimaは実装完了**
+  - **wakayama(R8)を実装・検証完了（2026-09-03・27県目）**: 全1頁・ibaraki型（結合セル・
+    罫線でブロック境界判定）。57/57件・32校・完全一致（グランドトータルquota5,761・
+    applicants4,891も「合計」行と一致）。
+    - 独自構造=quota(入学者枠数A)とfinalApplicants(スポーツ推薦本出願者数D＋一般選抜本出願者数E
+      の合算)が別々の列で、単一列をfinalApplicantsに割り当てる既存の`roles`機構では表現でき
+      ない（saga型の「2列のどちらかを採用」ではなく「2列を合算」という新種）。`extraColumns`で
+      Dを追加取得し`parseTablePdfPageRows`の出力を`.map()`してEに加算してから
+      `assembleCompetitionRateRows`へ渡す（kochi型の拡張として解決）。
+    - 罠1: 学校名ラベルは結合セルのほぼ中央行に出現する（ibaraki型）が、ブロック行数が2の
+      場合は中央位置が2行の"間"に落ちラベルだけの独立行が生成される（橋本の例）。既存の
+      `assembleCompetitionRateRows`はブロック内のどの行にラベルがあっても正しく拾うため
+      追加対応は不要だった。
+    - 罠2: 分校4校（美里・清水・中津・龍神）はschoolName列に「(◯◯分校)」（親校名を伴わない
+      半角括弧付き名）だけが独立ブロックとして印字される。「直前に登場した非分校の学校名」を
+      追跡し`親校名(◯◯分校)`へ書き換える後処理で対応（ehime型のSCHOOL_NAME_OVERRIDESとは
+      異なり固定辞書でなく動的追跡が必要だった）。
+    - 罠3: くくり募集3組（有田中央/南部/串本古座）は主課程行にのみ数値が乗り内数コース名は
+      別行（前または後ろ）に分裂する（nagano/tottori型と同型）。値ベースoverride
+      （`schoolName+quota+finalApplicants`キー）で対応。
+    - 罠4: 既存データの学科名は括弧を全て半角`()`で統一する県固有慣行（PDF印字は全角
+      「（）」・okinawa型の逆パターン）。パーサ出力側で全角→半角へ戻すpost-processと、
+      分校の脚注番号(*2等)除去を同時に行った。
+    - 罠5: `Number('')`は0(finite)を返すためquota欄が空欄の内部進学専用5学科・くくり募集の
+      内数コース継続行がquota=0の偽レコードとしてNaNチェックを素通りし65件と過剰計上された
+      （8件の偽レコード混入）。`quota>0`を呼び出し側の不変条件として追加要求し解決。
+    - `parse-table-pdf-wakayama.test.ts`で検証済み（jest5テストgreen）。tsc実exit0・
+      jestフル398suites6587tests green。**wakayamaは実装完了**
 - [ ] **検証は1つだけ**: パーサの出力が、既存の手作業データ（`competition-rates/<pref>.ts`）と
       **レコード単位で完全一致するか**
 - [ ] ⚠️ **一致しなければパーサが間違っている。データを合わせにいかない**
