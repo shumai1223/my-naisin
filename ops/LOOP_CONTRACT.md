@@ -8,7 +8,19 @@
 
 ## 0. 今季の主食（迷ったらここへ戻る）
 
-### 🆕 2026-09-04 03:0x時点の状態（T-SS1完了・T-Y11B完了・T-S13A A-1が9/10県まで進捗）
+### 🆕 2026-09-04 04:0x時点の状態（T-Y12新設・ibarakiパイロット完了・次は残46県）
+
+T-Y11Bの「この作業が終わったら（優先順）」§1（入試日程DB）に着手した。`ops/tasks/T-Y12-nyuushi-nittei-db.md`。
+着手前ゲート（ibaraki/chiba/osakaで一次ソース実在確認）通過・ibarakiパイロット（令和8年度・12イベント）
+実装完了（`src/lib/exam-schedule.ts`型定義＋`src/data/exam-schedules/ibaraki.ts`、二次情報源突合済み、
+tsc実exit0・jestフル408suites6636tests green・commit f55fbce）。
+**次に再開するセッションは、`ops/tasks/T-Y12-nyuushi-nittei-db.md`の段階1（残46県）から
+2県目に着手すること**（WebSearchで「<県名> 令和8年度 公立高等学校入学者選抜 実施要項 日程」→
+一次ソースをWebFetch→学力検査日・合格発表日は二次情報源と突合→`<pref>.ts`+`<pref>.test.ts`を
+1県ずつ追加、の刻み方。T-Y11Bと同型）。一次ソースが見つからない県は`unresolved`として
+タスクファイルに記録しスキップしてよい（Y-0捏造ゼロ優先）。
+
+### 2026-09-04 03:0x時点の状態（T-SS1完了・T-Y11B完了・T-S13A A-1が9/10県まで進捗）
 
 本日中に以下すべて完了・push済み:
 - **T-SS1**（データライセンスを「買えるもの」に）: SS1-1実測（D1本番を`scripts/d1q.mjs`で直接調査・
