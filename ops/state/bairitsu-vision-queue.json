@@ -1,0 +1,60 @@
+{
+  "generatedAt": "2026-09-03T17:47:03.102Z",
+  "entries": [
+    {
+      "prefecture": "hokkaido",
+      "fiscalYear": "令和8年度（2026年度）",
+      "docTitle": "北海道教育委員会 R8入学者選抜状況報告書「§3 学校別受検者数及び合格者数」（全14頁・空知〜根室の全14管内を収録）",
+      "sourceUrl": "https://www.dokyoi.pref.hokkaido.lg.jp/fs/1/3/1/7/8/5/5/0/_/05_p9-p22.pdf",
+      "expectedRecordCount": 323,
+      "pageCount": 14,
+      "pdfPath": "ops/state/bairitsu-vision-queue/hokkaido/hokkaido-latest.pdf",
+      "status": "ready_for_vision_review",
+      "queuedAt": "2026-09-03T17:46:40.751Z"
+    },
+    {
+      "prefecture": "tokyo",
+      "fiscalYear": "令和8年度（2026年度）",
+      "docTitle": "東京都教育委員会 令和8年度東京都立高等学校入学者選抜応募状況（最終応募状況）1[普通科（コース、単位制以外の学校）]・2[普通科（島しょの学校）]",
+      "sourceUrl": "https://www.kyoiku.metro.tokyo.lg.jp/documents/d/kyoiku/2026-02-13-182440-757",
+      "expectedRecordCount": 189,
+      "pageCount": 3,
+      "pdfPath": "ops/state/bairitsu-vision-queue/tokyo/tokyo-latest.pdf",
+      "status": "ready_for_vision_review",
+      "queuedAt": "2026-09-03T17:46:44.788Z"
+    },
+    {
+      "prefecture": "aichi",
+      "fiscalYear": "令和8年度（2026年度）",
+      "docTitle": "愛知県教育委員会高等学校教育課 令和8年度愛知県公立高等学校入学者選抜（全日制課程）における一般選抜等の志願変更後の志願者数（最終）について",
+      "sourceUrl": "https://www.pref.aichi.jp/uploaded/attachment/600212.pdf",
+      "expectedRecordCount": 241,
+      "pageCount": 13,
+      "pdfPath": "ops/state/bairitsu-vision-queue/aichi/aichi-latest.pdf",
+      "status": "ready_for_vision_review",
+      "queuedAt": "2026-09-03T17:46:54.746Z"
+    },
+    {
+      "prefecture": "miyazaki",
+      "fiscalYear": "令和8年度（2026年度）",
+      "docTitle": "宮崎県教育委員会 令和8年度宮崎県立高等学校入学者選抜（課程別）一般入学者選抜「最終」志願状況",
+      "sourceUrl": "https://www.pref.miyazaki.lg.jp/documents/99874/99874_20260224160129-1.pdf",
+      "expectedRecordCount": 104,
+      "pageCount": 3,
+      "pdfPath": "ops/state/bairitsu-vision-queue/miyazaki/miyazaki-latest.pdf",
+      "status": "ready_for_vision_review",
+      "queuedAt": "2026-09-03T17:46:58.769Z"
+    },
+    {
+      "prefecture": "yamaguchi",
+      "fiscalYear": "令和8年度（2026年度）",
+      "docTitle": "山口県教育委員会 令和8年度山口県公立高等学校入学志願者数について（訂正）",
+      "sourceUrl": "https://www.pref.yamaguchi.lg.jp/uploaded/life/338005_649954_misc.pdf",
+      "expectedRecordCount": 98,
+      "pageCount": 4,
+      "pdfPath": "ops/state/bairitsu-vision-queue/yamaguchi/yamaguchi-latest.pdf",
+      "status": "ready_for_vision_review",
+      "queuedAt": "2026-09-03T17:47:03.102Z"
+    }
+  ]
+}

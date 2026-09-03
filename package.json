@@ -22,6 +22,7 @@
     "check:blog-links": "node scripts/check-blog-source-links.mjs",
     "check:competition-links": "node scripts/check-competition-rate-links.mjs",
     "check:competition-updates": "node scripts/check-competition-rate-updates.mjs",
+    "bairitsu:queue-vision-review": "node scripts/bairitsu-ingest/queue-vision-review.mjs",
     "check:click-fraud": "node scripts/check-click-fraud-burst.mjs",
     "check:click-ratio": "npx tsx scripts/check-click-ratio-anomaly.ts",
     "check:stats": "npx tsx scripts/stats-distribution-audit.ts",

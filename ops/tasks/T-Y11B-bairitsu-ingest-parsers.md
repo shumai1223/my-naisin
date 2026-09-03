@@ -671,10 +671,12 @@ A-3 quota定義の構造化 3/47県  （44県未着手）
       fukushima・hyogo・okayama・osakaの4県は別理由でT-Y11B対象外（245行目付近参照）。
       kanagawa・mieは見送り。aichi・miyazaki・yamaguchi・tokyo・hokkaidoの5県は
       ToUnicodeマッピング欠落のためテキストパーサ対象外（ビジョン解析専用）と確定。
-      **2026-09-04: 段階2-d（列位置マップ）完了**（`ops/tasks/T-Y11B-column-position-map.md`・
-      段階2-b完了31県のR8列順を各パーサファイルのコメントから転記）。
-      **次はT-Y11B段階2-c（通らない県の半自動ハーネス・下記参照）へ進む、または
-      T-Y11B以外の主食タスクへ切り替えを検討すること。**
+      **2026-09-04: 段階2-c（半自動ハーネス）・段階2-d（列位置マップ）とも完了**。
+      2-cは`scripts/bairitsu-ingest/queue-vision-review.mjs`でToUnicode欠落5県のPDF取得→
+      pdftoppmレンダリング→キュー登録を実弾検証済み、2-dは`ops/tasks/T-Y11B-column-position-map.md`
+      で段階2-b完了31県のR8列順を記録済み。**T-Y11Bの主要サブフェーズ(2-a〜2-d)は全て完了**。
+      **次はT-Y11B以外の主食タスクへの切り替えを検討すること（本ファイル内にこれ以上の
+      自動着手可能な未完了項目は無い）。**
       同じ方式を横展開する。着手前に`pdftotext -table -enc UTF-8`の出力を目視し、
       ①学校名ラベルの位置（先頭行か中間か＝ibaraki型かどうか）②長い学校名の折り返しの
       有無（akita型が必要か）③№列の有無、を確認してから実装すること
@@ -1325,10 +1327,26 @@ A-3 quota定義の構造化 3/47県  （44県未着手）
 
 ### 2-c 通らない県の半自動ハーネス
 
-- [ ] ダウンロード → pdftoppm でレンダリング → 「要ビジョン解析」キューへ積む、までを自動化する
-- [ ] キューには県名・年度・ページ数・想定レコード数（グランドトータルから逆算）を持たせる
-- [ ] **ビジョン解析そのものは自動化しない。** 人（またはloop）が読む前提でよい。
+- [x] ダウンロード → pdftoppm でレンダリング → 「要ビジョン解析」キューへ積む、までを自動化する
+      → **2026-09-04実装完了**。`scripts/bairitsu-ingest/queue-vision-review.mjs`
+      （`npm run bairitsu:queue-vision-review -- --fetch`で実行）。対象はToUnicode欠落5県
+      （hokkaido/tokyo/aichi/miyazaki/yamaguchi）。`check-competition-rate-updates.mjs`と同じ
+      作法（UA名乗る・robots.txt尊重・800ms間隔・15秒タイムアウト）を踏襲。**実際に5県分の
+      本番PDFを取得しpdftoppmでレンダリングするところまで実弾で検証済み**
+      （hokkaido14頁・tokyo3頁・aichi13頁・miyazaki3頁・yamaguchi4頁、全て正常終了）。
+      ダウンロードしたPDF・レンダリング後PNGは著作物のため`ops/state/bairitsu-vision-queue/`
+      配下に置き`.gitignore`で非コミット（再取得可能）。キューのメタデータのみ
+      `ops/state/bairitsu-vision-queue.json`としてコミットする。
+- [x] キューには県名・年度・ページ数・想定レコード数（グランドトータルから逆算）を持たせる
+      → 実装済み。想定レコード数は各県`.ts`ファイルの`sources[]`から最新年度を機械抽出し、
+      その年度の（`fiscalYear`省略＝最新年度扱いという既存インターフェース仕様どおりの）
+      レコード数を正規表現でカウントする方式。tokyo=189件で実際の生ファイル集計と完全一致する
+      ことを検証済み（944件中、明示的な`fiscalYear:`を持つ755件＝過去年度、残り189件＝最新年度）。
+- [x] **ビジョン解析そのものは自動化しない。** 人（またはloop）が読む前提でよい。
       **1月に「何を読めばいいか」が即座に並んでいる状態を作るのが目的**
+      → 遵守。本ハーネスはダウンロード・レンダリング・キュー登録のみで、PNGの中身を読む工程は
+      実装していない（意図的）。次年度（R9等）の資料が公表された時点で`--fetch`を再実行すれば
+      新しいPDFに差し替わり、即座に画像が並ぶ状態になる。
 
 ### 2-d 列位置マップ
 

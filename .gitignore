@@ -126,3 +126,7 @@ scripts/meeting-copilot/test-results.json
 
 # Google Trends MCP のローカル状態（NIDクッキー・レスポンスキャッシュ）。再生成可能なのでコミットしない。
 .trends/
+
+# T-Y11B 段階2-c: ダウンロードした一次資料PDF・レンダリング後のPNG（著作物・容量とも非コミット。
+# 再取得可能・キューのメタデータのみops/state/bairitsu-vision-queue.jsonでコミットする）
+ops/state/bairitsu-vision-queue/
