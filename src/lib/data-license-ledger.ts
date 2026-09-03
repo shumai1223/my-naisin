@@ -188,14 +188,15 @@ export const DATA_LICENSE_LEDGER: Record<string, DataLicenseLedgerEntry> = {
   tochigi: {
     prefecture: 'tochigi',
     sourceHost: '.lg.jp',
-    ...UNKNOWN(
-      '⚠️2026-08-28夜に判明: 同日04:48作成のdraftId r2112922851031670398' +
-        '(kokokyoiku@pref.tochigi.lg.jp宛)は、実は2026-08-23 22:13:15に全く同じアドレスへ' +
-        '既に送信済みだった「応募状況」データの絞り込み再質問(2026-08-06初回の返信)と完全重複。' +
-        'T-C9-license-outreach.mdの「未接触39県」表がこの8/23一括送信を反映しておらず未接触と' +
-        '誤認したため二重に下書きしてしまった。**このdraftId r2112922851031670398は送信しないこと**' +
-        '(送信済み再質問の返信待ちのまま・新規下書きは不要)'
-    ),
+    redistribution: 'ok',
+    evidence:
+      '⚠️2026-08-28夜判明の下書き重複（draftId r2112922851031670398は送信不要と結論済み）は' +
+        '2026-08-23 22:13:15送信分の再質問が既にカバーしていた。その返信を2026-09-03 08:51 JST' +
+        '（Gmailヘッダは"Wed, 2 Sep 2026 23:51:46 +0000"）に受領（threadId 1a064895124b7a84・' +
+        'kokonyushi@pref.tochigi.lg.jp）: 「公表している出願状況等のデータについて、出典を明記した' +
+        '上で貴サイトに掲載していただいて差し支えありません。」リンク可否への言及なし' +
+        '（ibaraki/chibaと同型・backlink言及なしはfalse扱い）',
+    verifiedAt: '2026-09-03',
   },
   gunma: {
     prefecture: 'gunma',

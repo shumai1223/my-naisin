@@ -7,6 +7,11 @@
   既存の問い合わせスレッドがある県はそこへ「応募状況データのみ」を絞った再質問を送るのが最も
   返信率が高い**（gifu/mie/akitaで実証済み・いずれもリンク不可の初回回答から再質問でok化に成功）
 
+⚠️ **2026-09-04追記**: 下表は2026-08-28時点のスナップショットで更新が止まっている。
+その後chiba(2026-09-02)・tochigi(2026-09-03)がok化し、`redistributableOkPrefectures()`は
+現在9県（akita/chiba/gifu/ibaraki/ishikawa/kagawa/mie/okinawa/tochigi）。**正確な最新状態は
+必ず`src/lib/data-license-ledger.ts`を直接見ること**（下表は参考程度）。
+
 ## 全47都道府県の現在地（2026-08-28時点・`DATA_LICENSE_LEDGER`が正準ソース）
 
 | 区分 | 件数 | 県 |
