@@ -8,6 +8,31 @@
 
 ## 0. 今季の主食（迷ったらここへ戻る）
 
+### 🆕 2026-09-04 03:0x時点の状態（T-SS1完了・T-Y11B完了・T-S13A A-1が9/10県まで進捗）
+
+本日中に以下すべて完了・push済み:
+- **T-SS1**（データライセンスを「買えるもの」に）: SS1-1実測（D1本番を`scripts/d1q.mjs`で直接調査・
+  Business専用API`/api/schools/{pref}`への外部見込み客アクセスは実質ゼロと確認）・SS1-2
+  （Businessティアのセルフ決済配線・checkout route/stripe.ts/UpgradeButtonの3層を配線）・SS1-3
+  （`/developers`の件数を実測値に書き換え・回帰テスト新設）・SS1-4（OpenAPI仕様書のBusiness記載
+  漏れを発見修正・GSC実測）。loop担当分は完了。残るのはStripeダッシュボードでのBusiness商品登録
+  （👤専用・C7ゲート）のみ。
+- **T-Y11B 段階2-a〜2-d**: 全て完了。2-b（usable候補35県のパーサ実装）は既に完了済みだったところに
+  2-c（`scripts/bairitsu-ingest/queue-vision-review.mjs`・通らない5県の半自動ハーネスを実弾検証まで
+  完了）・2-d（`ops/tasks/T-Y11B-column-position-map.md`・31県の列位置マップ）を本日追加完了。
+- **T-S13A A-1（応募状況データ再配布許諾台帳）**: Gmail新着返信の確認からtochigi（栃木県）が
+  ok化し8→9県（kill_criteria=10県まで残り1県）。**次にこのファイルへ戻るセッションは、まず
+  Gmail `in:inbox newer_than:Nd -category:promotions`でkyoiku-*宛先からの新着返信を確認し、
+  `src/lib/data-license-ledger.ts`へ反映することを最優先で行うこと**（1県で商品化の閾値に届く）。
+
+**A群・B群とも、上記以外に自動着手可能な項目は無いことを確認済み**（DEADWIRE.mdの「今すぐ直すべき
+順」上位項目はいずれも既に別セッションで修正済みと確認・T-C2は残チェックボックス無し・S1-4は
+「自動で着手しない」と明記されているため見送り）。次のシグナルは
+09-05(M1-2・学校ページ広告1週間ゲート)/09-08(N1-2)/09-09(T-A1 kill_criteria)/09-21(W-8)の
+日付ゲート、またはGmail返信（特にT-S13A A-1の残り1県）・👤アクションのいずれか。
+この時点以降に再開するセッションは、まず`memory/loop-question-note.md`末尾を確認し、次に
+Gmail新着返信を確認してから、上記日付ゲートの到達有無をチェックすること。
+
 > ⚠️ **2026-08-11 の GAUNTLET（8審問官 × 6候補 = 48判定）により改訂した。原典は `ops/VERDICT.md`。**
 > 8審問すべてを通過した候補は **S13-A（データバンクのセルフサーブ商品化）1件のみ**。
 
