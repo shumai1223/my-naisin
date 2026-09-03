@@ -649,7 +649,23 @@ A-3 quota定義の構造化 3/47県  （44県未着手）
         連結（重複時は片方のみ）する方式で解決した。
       `parse-table-pdf-tottori.test.ts`で検証済み（jest5テストgreen）。tsc実exit0・
       jestフル390suites6551tests green。**tottoriは実装完了**
-- [ ] ⚠️2026-09-04更新: wakayama・kagoshima・niigata・fukuoka・shiga実装完了済み。**残る候補はtokyo・hokkaidoの2県のみ**。fukushima（真のスキャン画像PDF）・hyogo（robots.txt遵守で未検証）・okayama（URL切れ）・osaka（xlsx形式）の4県はT-Y11B対象外（構造的ブロッカー・245行目付近参照）。kochi・yamagata・nagano・oitaは次点扱い（罠を発見済み・下記参照）。kanagawa・mieは見送り扱い。aichi・miyazaki・yamaguchiはToUnicodeマッピング欠落のためテキストパーサ対象外（ビジョン解析専用）
+- [ ] ⚠️🚩2026-09-04判明（重要）: **tokyo・hokkaidoの2県も、hokkaido.ts/tokyo.tsのヘッダコメントに
+      明記の通り「埋め込みフォントのToUnicodeマッピングが欠落しておりpdftotext/rawdictでは
+      学校名・学科名が読めない（数値列のみ機械抽出可）」という、aichi・miyazaki・yamaguchiと
+      **同じ構造的ブロッカーを持つ（ビジョン解析専用・テキストパーサ対象外）**。
+      両県ともR8データ自体は既にビジョン解析で収集済み（hokkaido=coverage'partial'・
+      tokyo=全日制167校完了）だが、それは一次データ収集の話であり、T-Y11Bが目指す
+      「将来年度（R9以降）を人手のビジョン解析なしに機械抽出するパーサ」は原理的に
+      構築不能（学校名という主キー自体がテキストとして存在しないため）。
+      **⇒ wakayama・kagoshima・niigata・fukuoka・shiga実装完了（31県）をもって、
+      段階2-b（機械パース可能な「usable」候補）は事実上payloadが尽きた。**
+      残るのはkochi・yamagata・nagano・oitaの次点4県（罠を発見済み・下記参照。新しい
+      技法（shigaで確立した「罫線でブロック境界→ブロック内はy座標だけで細分」等）で
+      再挑戦の余地があるか、次回セッションは冒頭でまずここを検討すること）のみ。
+      fukushima・hyogo・okayama・osakaの4県は別理由でT-Y11B対象外（245行目付近参照）。
+      kanagawa・mieは見送り。aichi・miyazaki・yamaguchi・tokyo・hokkaidoの5県は
+      ToUnicodeマッピング欠落のためテキストパーサ対象外（ビジョン解析専用）と確定。
+      **次点4県が尽きたら、段階2-c（通らない県の半自動ハーネス・下記参照）へ進む。**
       同じ方式を横展開する。着手前に`pdftotext -table -enc UTF-8`の出力を目視し、
       ①学校名ラベルの位置（先頭行か中間か＝ibaraki型かどうか）②長い学校名の折り返しの
       有無（akita型が必要か）③№列の有無、を確認してから実装すること
