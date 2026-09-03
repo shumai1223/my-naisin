@@ -134,10 +134,32 @@ B2B             1件あたり 55分の商談＋メール往復＋稟議。**関�
 
 ## SS1-4 見つけてもらう導線（技術面のみ・対外送信はしない）
 
-- [ ] `/developers` が検索で見つかるか実測する（GSC: 直近7日は17表示0クリック・位6.4）
-- [ ] OpenAPI / MCP のディスカバリ情報が正しく出ているか確認する
-- [ ] サイト内から `/developers` への導線があるか（`page-registry` と内部リンクグラフで確認）
+- [x] `/developers` が検索で見つかるか実測する（GSC: 直近7日は17表示0クリック・位6.4）
+      → **2026-09-04実測（GSC MCP）**: 直近90日累計=73表示・3クリック・平均掲載順位5.38。
+      直近28日の日次内訳は毎日0〜7表示（1日のみ8/9に1クリック）・順位はおおむね2.5〜9で安定せず。
+      query次元は0行（GSCのプライバシー閾値で低ボリュームクエリが匿名化され出てこない）。
+      **結論: 極めて薄いが完全にゼロではない。露出はあるが検索需要自体が小さい語（「内申点 API」等）
+      のため、これ以上はコンテンツ・被リンクでの押し上げが必要な段階（loop権限内でのSEO改善は
+      T-Xの範疇であり、SS1では「壊れていないことの確認」に留める）**。
+- [x] OpenAPI / MCP のディスカバリ情報が正しく出ているか確認する
+      → **2026-09-04実測・1件の記載漏れを発見し修正**。`src/app/api/openapi/route.ts`の説明文3箇所
+      （info.description・POST /api/keys の説明・`/api/schools/{pref}`の説明）が軒並み
+      「Pro / Scale は /developers」という2026-08-13以前の文言のままで、**Businessティアの存在が
+      OpenAPI仕様書から欠落していた**（SS1-2で見つけたcheckout route/UpgradeButtonと同じ「Business
+      だけ後から追加されて一部の文言に反映されていなかった」パターン）。修正: 3箇所とも
+      「Pro / Business / Scale」に統一し、`/api/schools/{pref}`には実装済みの
+      `requireMinTier: 'business'`(402ゲート)がOpenAPI上に一切書かれていなかったため
+      説明文＋`responses.402`を新規追加(実装と仕様書の乖離を解消)。llms.txt（`public/llms.txt`）は
+      既に`/developers`・`/api/openapi`・`/api/mcp`・`/api/schools/{pref}`を正しく案内しており修正不要。
+- [x] サイト内から `/developers` への導線があるか（`page-registry` と内部リンクグラフで確認）
+      → **2026-09-04実測**。`src/lib/page-registry.ts`に`{ url: '/developers', priority: 0.6,
+      changeFrequency: 'monthly' }`で登録済み（sitemap反映OK）。内部リンクは
+      `src/components/Footer.tsx`（サイト全体のフッター＝実質全ページから到達可能）に加え、
+      `hyotei-heikin/gakushu-seiseki`・`naishin-kakusa`・`naishin-map`・`partner`・`reliability`・
+      `report/2026`（日英）・`terms`・`tokushoho`の計8ページからも個別に`href="/developers"`あり。
+      **導線自体は十分にある**という結論（新規リンク追加は不要と判断）。
 - [ ] ⚠️ **レジストリへの登録・対外的な告知は👤ゲート**（N2-1と同じ）。ここでは技術面のみ
+      → 遵守（対外送信・登録系は一切行っていない。GSC実測は読み取りのみ）。
 
 ---
 

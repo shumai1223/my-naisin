@@ -16,7 +16,7 @@ export function GET() {
       version: DATASET_META.version,
       description:
         '日本全国47都道府県の公立高校入試における内申点（調査書点）の計算方式データと厳密計算を提供する公開REST API。' +
-        'キー無し（匿名ティア）でそのまま利用でき、出典明記で無料。継続・大量利用には無料APIキー（POST /api/keys で自己発行）を付けるとレート上限と月次クォータが上がる（Pro / Scale は /developers）。' +
+        'キー無し（匿名ティア）でそのまま利用でき、出典明記で無料。継続・大量利用には無料APIキー（POST /api/keys で自己発行）を付けるとレート上限と月次クォータが上がる（Pro / Business / Scale は /developers）。' +
         'レスポンスには X-Api-Tier / X-RateLimit-* ヘッダが付く。MCP互換エンドポイントは /api/mcp。',
       contact: { name: 'My Naishin', url: SITE_URL },
       license: { name: DATASET_META.license.type, url: `${SITE_URL}/developers` },
@@ -314,7 +314,8 @@ export function GET() {
           operationId: 'getSchoolCompetitionRates',
           summary: '都道府県別・学校ごとの公立高校入試競争率（募集人員・応募者数・倍率）',
           description:
-            'Y-2/Y-6で構築した一次資料ベースの学校別レコードを返す。商用第三者資料のみを出典とするレコードは配布ポリシーにより自動的に除外される（licensableRecords）。?fiscalYear= で特定年度に絞り込み可能（掛-1・多年度データ対応）。',
+            'Y-2/Y-6で構築した一次資料ベースの学校別レコードを返す。商用第三者資料のみを出典とするレコードは配布ポリシーにより自動的に除外される（licensableRecords）。?fiscalYear= で特定年度に絞り込み可能（掛-1・多年度データ対応）。' +
+            '**Business以上のAPIキーが必須**（無料・Proキーおよび匿名アクセスは402を返す）。/developers から発行できる。',
           parameters: [
             {
               name: 'pref',
@@ -333,6 +334,7 @@ export function GET() {
           ],
           responses: {
             '200': { description: '成功' },
+            '402': { description: 'ティア不足（Business以上のキーが必要）。/developers への申込先を含む' },
             '404': { description: '都道府県コードが見つからない' },
           },
         },
@@ -358,7 +360,7 @@ export function GET() {
           operationId: 'issueApiKey',
           summary: '無料APIキーの自己発行（平文は一度だけ返る）',
           description:
-            'free ティアのAPIキーを発行する。レスポンスの apiKey は再表示できないため安全に保管すること。Pro / Scale プランは /developers から。',
+            'free ティアのAPIキーを発行する。レスポンスの apiKey は再表示できないため安全に保管すること。Pro / Business / Scale プランは /developers から。',
           requestBody: {
             required: false,
             content: {
