@@ -4,7 +4,7 @@ import { createCheckoutSession } from '@/lib/stripe';
 
 /**
  * 課金導線（堀B／Stripeループの入口）。
- * POST /api/billing/checkout { tier: 'pro' | 'scale', email?, tosAgreedAt } → Stripe Checkout の決済URLを返す。
+ * POST /api/billing/checkout { tier: 'pro' | 'business' | 'scale', email?, tosAgreedAt } → Stripe Checkout の決済URLを返す。
  * フロント（/developers の Upgrade ボタン）はこのURLへ遷移する。
  *
  * 未設定（STRIPE_SECRET_KEY 無し）/ price未設定は 503「準備中」＋お問い合わせ案内（サイレント失敗を避ける）。
@@ -43,9 +43,10 @@ export async function POST(request: Request) {
     /* 空ボディは下でバリデーション */
   }
 
-  const tier = body.tier === 'pro' || body.tier === 'scale' ? body.tier : null;
+  const tier =
+    body.tier === 'pro' || body.tier === 'business' || body.tier === 'scale' ? body.tier : null;
   if (!tier) {
-    return json({ error: 'tier は "pro" または "scale" を指定してください。' }, 400);
+    return json({ error: 'tier は "pro" ・ "business" または "scale" を指定してください。' }, 400);
   }
   const email = typeof body.email === 'string' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(body.email.trim())
     ? body.email.trim().slice(0, 254)

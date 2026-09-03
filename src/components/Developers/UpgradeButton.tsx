@@ -11,7 +11,13 @@ import { Rocket, Loader2, AlertCircle } from 'lucide-react';
  * クリックラップ（ops/PRICING_OPTIONS.md #5）: 利用規約への同意チェックを必須にし、
  * 同意時刻をAPIへ送ってStripeのセッション/サブスクリプションmetadataに記録する（押印の代替）。
  */
-export function UpgradeButton({ tier = 'pro', label = 'Proにアップグレード' }: { tier?: 'pro' | 'scale'; label?: string }) {
+export function UpgradeButton({
+  tier = 'pro',
+  label = 'Proにアップグレード',
+}: {
+  tier?: 'pro' | 'business' | 'scale';
+  label?: string;
+}) {
   const [loading, setLoading] = useState(false);
   const [info, setInfo] = useState<string | null>(null);
   const [agreed, setAgreed] = useState(false);

@@ -13,6 +13,7 @@
  *  - STRIPE_SECRET_KEY        … sk_live_...（checkout作成・API認証）
  *  - STRIPE_WEBHOOK_SECRET    … whsec_...（Webhook署名検証）
  *  - STRIPE_PRICE_PRO         … price_...（Proの定期課金 price ID）
+ *  - STRIPE_PRICE_BUSINESS    … price_...（任意・T-SS1: Businessをセルフ決済にする場合。年額サブスク price）
  *  - STRIPE_PRICE_SCALE       … price_...（任意・Scaleをセルフ決済にする場合）
  */
 
@@ -24,6 +25,7 @@ export interface StripeEnv {
   secretKey?: string;
   webhookSecret?: string;
   pricePro?: string;
+  priceBusiness?: string;
   priceScale?: string;
 }
 
@@ -33,6 +35,7 @@ export async function readStripeEnv(): Promise<StripeEnv> {
     secretKey: process.env.STRIPE_SECRET_KEY,
     webhookSecret: process.env.STRIPE_WEBHOOK_SECRET,
     pricePro: process.env.STRIPE_PRICE_PRO,
+    priceBusiness: process.env.STRIPE_PRICE_BUSINESS,
     priceScale: process.env.STRIPE_PRICE_SCALE,
   };
   if (!e.secretKey || !e.webhookSecret || !e.pricePro) {
@@ -43,6 +46,7 @@ export async function readStripeEnv(): Promise<StripeEnv> {
       e.secretKey = e.secretKey || c.STRIPE_SECRET_KEY;
       e.webhookSecret = e.webhookSecret || c.STRIPE_WEBHOOK_SECRET;
       e.pricePro = e.pricePro || c.STRIPE_PRICE_PRO;
+      e.priceBusiness = e.priceBusiness || c.STRIPE_PRICE_BUSINESS;
       e.priceScale = e.priceScale || c.STRIPE_PRICE_SCALE;
     } catch {
       /* Workers外（テスト/ビルド）では process.env のみ */
@@ -58,6 +62,7 @@ export async function stripeConfigured(): Promise<boolean> {
 /** ティア → price ID。未設定/対象外は null。 */
 export function priceIdForTier(tier: ApiTier, env: StripeEnv): string | null {
   if (tier === 'pro') return env.pricePro ?? null;
+  if (tier === 'business') return env.priceBusiness ?? null;
   if (tier === 'scale') return env.priceScale ?? null;
   return null;
 }
@@ -66,6 +71,7 @@ export function priceIdForTier(tier: ApiTier, env: StripeEnv): string | null {
 export function tierForPriceId(priceId: string | undefined, env: StripeEnv): Exclude<ApiTier, 'anonymous' | 'free'> | null {
   if (!priceId) return null;
   if (env.pricePro && priceId === env.pricePro) return 'pro';
+  if (env.priceBusiness && priceId === env.priceBusiness) return 'business';
   if (env.priceScale && priceId === env.priceScale) return 'scale';
   return null;
 }

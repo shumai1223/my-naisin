@@ -220,6 +220,7 @@ wrangler d1 execute my-naishin-leads --remote --file=migrations/0006_api_keys_st
 wrangler secret put STRIPE_SECRET_KEY          # sk_live_...
 wrangler secret put STRIPE_WEBHOOK_SECRET      # whsec_...（Webhook作成後に取得）
 wrangler secret put STRIPE_PRICE_PRO           # price_...（Pro定期課金のprice ID）
+# 任意: STRIPE_PRICE_BUSINESS（T-SS1: Businessをセルフ決済にする場合。年額サブスクprice）
 # 任意: STRIPE_PRICE_SCALE（Scaleもセルフ決済にする場合）
 ```
 Stripeダッシュボードで Webhook エンドポイントに `https://my-naishin.com/api/stripe/webhook` を登録（イベント: `checkout.session.completed` / `customer.subscription.deleted`）。RESEND_API_KEY 設定済なら購入者へキーが自動メール。

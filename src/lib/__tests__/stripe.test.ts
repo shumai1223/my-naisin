@@ -13,6 +13,7 @@ const ENV: StripeEnv = {
   secretKey: 'sk_test_dummy',
   webhookSecret: 'whsec_dummy',
   pricePro: 'price_pro_123',
+  priceBusiness: 'price_business_789',
   priceScale: 'price_scale_456',
 };
 
@@ -21,8 +22,9 @@ function computeSignature(secret: string, timestamp: string, payload: string): s
 }
 
 describe('priceIdForTier', () => {
-  it('proはpricePro、scaleはpriceScaleを返す', () => {
+  it('pro/business/scaleはそれぞれ対応するprice IDを返す', () => {
     expect(priceIdForTier('pro', ENV)).toBe('price_pro_123');
+    expect(priceIdForTier('business', ENV)).toBe('price_business_789');
     expect(priceIdForTier('scale', ENV)).toBe('price_scale_456');
   });
 
@@ -33,13 +35,14 @@ describe('priceIdForTier', () => {
 
   it('envに該当price未設定ならnull', () => {
     expect(priceIdForTier('pro', { ...ENV, pricePro: undefined })).toBeNull();
+    expect(priceIdForTier('business', { ...ENV, priceBusiness: undefined })).toBeNull();
     expect(priceIdForTier('scale', { ...ENV, priceScale: undefined })).toBeNull();
   });
 });
 
 describe('tierForPriceId', () => {
-  it('priceIdForTierとの往復が一致する(pro/scale)', () => {
-    for (const tier of ['pro', 'scale'] as const) {
+  it('priceIdForTierとの往復が一致する(pro/business/scale)', () => {
+    for (const tier of ['pro', 'business', 'scale'] as const) {
       const priceId = priceIdForTier(tier, ENV);
       expect(priceId).not.toBeNull();
       expect(tierForPriceId(priceId ?? undefined, ENV)).toBe(tier);

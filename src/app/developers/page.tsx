@@ -997,7 +997,9 @@ print(naishin["total"])  # -> 52`;
             </div>
           </div>
 
-          {/* Business：2026-08-13新設。商用利用（第三者提供）向け。Stripe商品未登録のため自動決済でなくお問い合わせ導線 */}
+          {/* Business：2026-08-13新設。2026-09（T-SS1 SS1-2）でセルフ決済化。
+              STRIPE_PRICE_BUSINESS未設定時はUpgradeButtonが自動で「準備中・お問い合わせ」表示に落ちるため、
+              商品未登録の状態でも壊れない（Proと同じ導線を踏襲・新規実装なし）。 */}
           <div className="mt-6 rounded-2xl border-2 border-emerald-200 bg-gradient-to-br from-emerald-50 to-teal-50 p-6">
             <h3 className="text-base font-bold text-slate-800">自社サービスに組み込むなら Business</h3>
             <p className="mt-2 text-sm leading-relaxed text-slate-700">
@@ -1007,10 +1009,13 @@ print(naishin["total"])  # -> 52`;
             </p>
             <p className="mt-3 text-lg font-bold text-emerald-700">{formatTierPrice('business')}</p>
             <p className="mt-1 text-xs text-slate-500">初年度価格。契約主体は親権者名義。詳細は<Link href="/tokushoho" className="mx-1 underline">特定商取引法に基づく表記</Link>参照。</p>
-            <div className="mt-4 flex flex-wrap gap-3">
+            <div className="mt-4">
+              <UpgradeButton tier="business" label="Businessにアップグレード（年額 ¥240,000〜）" />
+            </div>
+            <div className="mt-3 flex flex-wrap gap-3">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 px-5 py-2.5 text-sm font-bold text-white shadow-md shadow-emerald-200 transition-all hover:shadow-lg"
+                className="inline-flex items-center gap-2 rounded-xl border-2 border-emerald-300 bg-white px-5 py-2.5 text-sm font-bold text-emerald-700 transition-all hover:bg-emerald-50"
               >
                 Businessについて相談する
               </Link>

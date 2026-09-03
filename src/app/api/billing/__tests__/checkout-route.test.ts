@@ -60,4 +60,11 @@ describe('/api/billing/checkout 契約', () => {
     const json = await res.json();
     expect(json.message).toContain('個別見積り');
   });
+
+  test('business tierも検証を通過する（STRIPE_SECRET_KEY未設定のため503 not_enabledで確認・T-SS1 SS1-2）', async () => {
+    const res = await POST(checkoutReq({ tier: 'business', tosAgreedAt: validTos }));
+    expect(res.status).toBe(503);
+    const json = await res.json();
+    expect(json.error).toBe('not_enabled');
+  });
 });
