@@ -649,7 +649,7 @@ A-3 quota定義の構造化 3/47県  （44県未着手）
         連結（重複時は片方のみ）する方式で解決した。
       `parse-table-pdf-tottori.test.ts`で検証済み（jest5テストgreen）。tsc実exit0・
       jestフル390suites6551tests green。**tottoriは実装完了**
-- [ ] 残り12県（usable 43県からibaraki・tochigi・akita・tokushima・ishikawa・gunma・nagasaki・ehime・toyama・aomori・fukui・kagawa・okinawa・nara・yamanashi・kyoto・chiba・saitama・tottori・miyagi・kumamoto・iwate・shizuoka・gifu・hiroshima・sagaを除く。kochi・yamagata・nagano・oitaは次点扱い（罠を発見済み・下記参照）。kanagawa・mieは見送り扱い。aichi・miyazaki・yamaguchiはToUnicodeマッピング欠落のためテキストパーサ対象外（ビジョン解析専用）と判明）。残る候補は主にshiga・wakayama・tokyo・hokkaido・kagoshima・niigata等で、いずれも複数のくくり募集や独自の表構造を持つ見込み
+- [ ] ⚠️2026-09-03更新: wakayama・kagoshima・niigata・fukuoka実装完了済み。**残る候補はshiga（数値モデル解明済み・ブロック境界検出の実装待ち。上記の個別記録を参照）・tokyo・hokkaidoの3県のみ**。fukushima（真のスキャン画像PDF）・hyogo（robots.txt遵守で未検証）・okayama（URL切れ）・osaka（xlsx形式）の4県はT-Y11B対象外（構造的ブロッカー・245行目付近参照）。kochi・yamagata・nagano・oitaは次点扱い（罠を発見済み・下記参照）。kanagawa・mieは見送り扱い。aichi・miyazaki・yamaguchiはToUnicodeマッピング欠落のためテキストパーサ対象外（ビジョン解析専用）
       同じ方式を横展開する。着手前に`pdftotext -table -enc UTF-8`の出力を目視し、
       ①学校名ラベルの位置（先頭行か中間か＝ibaraki型かどうか）②長い学校名の折り返しの
       有無（akita型が必要か）③№列の有無、を確認してから実装すること
@@ -1177,6 +1177,39 @@ A-3 quota定義の構造化 3/47県  （44県未着手）
       レコード順一致ではなく多重集合（順不同）一致で検証した。
     - `parse-table-pdf-fukuoka.test.ts`で検証済み（jest5テストgreen）。tsc実exit0・
       jestフル401suites6602tests green。**fukuokaは実装完了**
+  - **shiga: 数値モデルの解明まで完了・ブロック境界検出の実装は次回に持ち越し（2026-09-03）**。
+    R8 PDF（`https://www.pref.shiga.lg.jp/file/attachment/5591236.pdf`・全3頁）を取得し
+    `extract-pdf-geometry.py`でgeometry抽出済み（コミットはせずscratchpadに保持・次回は
+    再ダウンロードして再現すること＝URLは上記）。fukuoka等より複雑な**5列インターリーブ
+    構造**（募集人数a/学校独自検査受検者数/学力検査受検者数/確定募集人数a'/入学許可予定者数b
+    の5つの数値列が、行の選抜種別＝学校独自型（自己推薦・中学校長推薦）or一般型によって
+    どの列に値が乗るかが変わる）で、当初get_text()のプレーンテキスト出力に学校名が
+    1件も現れず「ToUnicode欠落でテキストパーサ対象外か」と誤認しかけたが、
+    `extract-pdf-geometry.py`が使うget_text("rawdict")の文字単位抽出では学校名
+    （膳所・堅田・東大津等）が正しく取得できることを確認済み＝**テキストパーサ対象内**。
+    - **判明した数値抽出モデル（重要・次回はここから実装できる）**: 対象は「選抜名」列に
+      「一般型」と印字された行のみ（「学校独自型」行はスコープ外＝既存データの方針と一致）。
+      一般型行は「学科名」＋「(確定募集人数a')」＋2つの数値（学力検査受検者数・確定出願者数b）
+      という構成で、**quota=括弧内のa'値・finalApplicants=末尾（2つ目）の数値**（受検者数の
+      方ではない）。数値は右揃えのため桁数で開始x位置が変わる点に注意（堅田の実例で
+      quota=(144)・数値2つ=268,176からfinalApplicants=176を採用し既存データと一致確認済み）。
+    - **「両方の学科」の合算ルールを実測で確定**: 膳所（普通・理数の2学科＋両方の学科の3行が
+      存在）で、quota=304(普通)+36(理数)+0(両方の学科は括弧書き無しなので加算対象外)=340、
+      finalApplicants=363(普通)+2(理数・小さい値のため右揃えの結果1桁ずつに見えるが実際は
+      「1」「2」という単独の小さい数値)+109(両方の学科)=474。**既存データの膳所レコード
+      （quota340・applicants474・department='普通・理数(一般型・両方の学科含む)'）と完全一致**
+      することを検算済み＝「両方の学科を持つ学校は、一般型の全学科行＋両方の学科行を
+      quota・applicantsとも単純合算して1レコードに統合する」という既存データの方針が
+      数値面で裏付けられた。
+    - **残る実装課題（次回はここから）**: 学校名ラベルがブロックの先頭ではなく**中央付近の
+      行に出現する**（膳所は普通/理数の学校独自型2行分の後、一般型の直前に学校名が出現）
+      という、ibaraki型と同型の「結合セルのラベルが先頭行に無い」問題があり、単純な
+      上から下へのcarry-forwardでは学校の切れ目を誤判定する。`parseTablePdfPageRows`＋
+      `assembleCompetitionRateRows`（罫線ベースのブロック境界判定・ibaraki/nagano等で
+      実績あり）への配線が必要。列boundaries・rolesの具体的な数値は今回のセッションでは
+      未確定（学校名列x≈48-90・学科名列x≈90-145・選抜名列x≈150-190・quota括弧列x≈246-262・
+      末尾2数値列x≈278-292/316-330、という概算値は判明済みだが罫線との対応付けは未検証）。
+      44校61レコードへの到達を目標とする。
 - [ ] **検証は1つだけ**: パーサの出力が、既存の手作業データ（`competition-rates/<pref>.ts`）と
       **レコード単位で完全一致するか**
 - [ ] ⚠️ **一致しなければパーサが間違っている。データを合わせにいかない**
