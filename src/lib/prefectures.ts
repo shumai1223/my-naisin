@@ -53,7 +53,9 @@ export interface PrefectureConfig {
     totalMaxScore: number;
     // 当日点満点
     examMaxScore: number;
-    // デフォルト配点比率
+    /** 比率が学校・学科ごとに定まる県（神奈川等）はtrue。全国比較では県の値として出さない（Y-0: 推測で埋めない）。 */
+    ratioVariesBySchool?: boolean;
+    // デフォルト配点比率（逆算UIのピッカー初期値。ratioVariesBySchoolがtrueの県では県の代表値ではない）
     defaultRatio: {
       naishin: number;
       exam: number;
@@ -382,7 +384,10 @@ export const PREFECTURES: PrefectureConfig[] = [
     reverseCalc: {
       totalMaxScore: 1000,
       examMaxScore: 500,
-      defaultRatio: { naishin: 40, exam: 60 }, // 4:6（標準）
+      // ⚠️神奈川の比率は学校・学科ごとに定まる（4:6/3:7/5:5/6:4/7:3の5種）。
+      // 下の値は逆算UIの比率ピッカー初期値にすぎず、県を代表する値ではない。
+      ratioVariesBySchool: true,
+      defaultRatio: { naishin: 40, exam: 60 }, // ピッカー初期値のみ
       calcType: 'kanagawa',
       note: '内申(135点満点)と学力検査(500点満点)をそれぞれ100点満点に換算し、志望校ごとの比率(合計10)で合算するS1値方式。特色検査を実施する学校のS2値は本ツール未対応。'
     }

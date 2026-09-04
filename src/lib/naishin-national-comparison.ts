@@ -20,7 +20,8 @@ export interface PrefectureComparisonRow {
   /** practicalMultiplier / coreMultiplier（実技科目が5教科の何倍の重みを持つかの事実値）。 */
   practicalToCoreRatio: number;
   supports10PointScale: boolean;
-  /** 内申点:当日点の配点比率。reverseCalc.defaultRatioが無い県はnull(推測で埋めない)。 */
+  /** 内申点:当日点の配点比率。reverseCalc.defaultRatioが無い県、および比率が学校・学科ごとに
+   *  定まる県（ratioVariesBySchool）はnull(推測で埋めない)。 */
   naishinToExamRatio: { naishin: number; exam: number } | null;
   sourceUrl: string;
 }
@@ -37,9 +38,10 @@ function toComparisonRow(config: PrefectureConfig): PrefectureComparisonRow {
     practicalMultiplier: config.practicalMultiplier,
     practicalToCoreRatio: Math.round((config.practicalMultiplier / config.coreMultiplier) * 100) / 100,
     supports10PointScale: config.supports10PointScale ?? false,
-    naishinToExamRatio: config.reverseCalc
-      ? { naishin: config.reverseCalc.defaultRatio.naishin, exam: config.reverseCalc.defaultRatio.exam }
-      : null,
+    naishinToExamRatio:
+      config.reverseCalc && !config.reverseCalc.ratioVariesBySchool
+        ? { naishin: config.reverseCalc.defaultRatio.naishin, exam: config.reverseCalc.defaultRatio.exam }
+        : null,
     sourceUrl: config.sourceUrl ?? '',
   };
 }

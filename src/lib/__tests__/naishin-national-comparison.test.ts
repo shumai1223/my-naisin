@@ -19,10 +19,23 @@ describe('buildNationalComparison（T-N4-1 47県横断比較・不変条件）',
     }
   });
 
-  test('reverseCalcを持つ県のみnaishinToExamRatioが非null', () => {
+  // ⚠️2026-09-04訂正: 条件を緩めたのではなく、正しく書き直した。
+  // reverseCalcを持っていても、比率が学校・学科ごとに定まる県（神奈川）は県の代表値が
+  // 存在しないためnullでなければならない。defaultRatioは逆算UIのピッカー初期値にすぎない。
+  test('県の代表値としての比率を持つ県だけnaishinToExamRatioが非null（学校ごとに変わる県はnull）', () => {
     const withRatio = rows.filter((r) => r.naishinToExamRatio !== null);
-    const expectedCount = PREFECTURES.filter((p) => !!p.reverseCalc).length;
+    const expectedCount = PREFECTURES.filter(
+      (p) => !!p.reverseCalc && !p.reverseCalc.ratioVariesBySchool
+    ).length;
     expect(withRatio.length).toBe(expectedCount);
+  });
+
+  test('ratioVariesBySchoolの県は必ずnull（推測で埋めない・Y-0）', () => {
+    const varies = PREFECTURES.filter((p) => p.reverseCalc?.ratioVariesBySchool);
+    expect(varies.length).toBeGreaterThan(0);
+    for (const p of varies) {
+      expect(rows.find((r) => r.code === p.code)!.naishinToExamRatio).toBeNull();
+    }
   });
 
   test('全県に出典URLが付いている', () => {
