@@ -5,11 +5,13 @@ import aomoriR8Geometry from '../__fixtures__/aomori-r8-geometry.json';
 import iwateR8Geometry from '../__fixtures__/iwate-r8-geometry.json';
 import fukuiR8Geometry from '../__fixtures__/fukui-r8-geometry.json';
 import kagawaR8Geometry from '../__fixtures__/kagawa-r8-geometry.json';
+import ehimeR8Geometry from '../__fixtures__/ehime-r8-geometry.json';
 import { TOYAMA_COMPETITION_RATES } from '@/data/competition-rates/toyama';
 import { AOMORI_COMPETITION_RATES } from '@/data/competition-rates/aomori';
 import { IWATE_COMPETITION_RATES } from '@/data/competition-rates/iwate';
 import { FUKUI_COMPETITION_RATES } from '@/data/competition-rates/fukui';
 import { KAGAWA_COMPETITION_RATES } from '@/data/competition-rates/kagawa';
+import { EHIME_COMPETITION_RATES } from '@/data/competition-rates/ehime';
 
 /**
  * T-Y11E E-1: レジストリの不変条件テスト。
@@ -101,7 +103,23 @@ describe('bairitsu-ingest registry（T-Y11E E-1）', () => {
     );
   });
 
-  it('レジストリに登録済みの県コード一覧は現時点でtoyama/aomori/iwate/fukui/kagawaのみ（1県ずつ移設する方針・追加時はここも更新）', () => {
-    expect(Object.keys(PREFECTURE_PARSER_REGISTRY)).toEqual(['toyama', 'aomori', 'iwate', 'fukui', 'kagawa']);
+  it('ehimeのパーサが登録されており、既存の手作業データと完全一致する結果を返す', () => {
+    const parser = getPrefectureParser('ehime');
+    expect(parser).toBeDefined();
+    const parsed = parser!(ehimeR8Geometry as PdfPageGeometry[]);
+    const expectedR8Records = EHIME_COMPETITION_RATES.records.filter((r) => r.fiscalYear === undefined);
+    expect(parsed).toEqual(
+      expectedR8Records.map((e) => ({
+        schoolName: e.schoolName,
+        department: e.department,
+        quota: e.quota,
+        finalApplicants: e.finalApplicants,
+        finalRate: e.finalRate,
+      }))
+    );
+  });
+
+  it('レジストリに登録済みの県コード一覧は現時点でtoyama/aomori/iwate/fukui/kagawa/ehimeのみ（1県ずつ移設する方針・追加時はここも更新）', () => {
+    expect(Object.keys(PREFECTURE_PARSER_REGISTRY)).toEqual(['toyama', 'aomori', 'iwate', 'fukui', 'kagawa', 'ehime']);
   });
 });

@@ -1,6 +1,7 @@
-import { groupCharsIntoRows, extractRowFields, assembleSimpleTableRows, type PdfPageGeometry, type GeneralColumnLayout } from '../parse-table-pdf';
+import { type PdfPageGeometry } from '../parse-table-pdf';
 import { EHIME_COMPETITION_RATES } from '@/data/competition-rates/ehime';
 import ehimeR8Geometry from '../__fixtures__/ehime-r8-geometry.json';
+import { parseEhime } from '../parsers/ehime';
 
 /**
  * T-Y11B 段階2-b: ehime(愛媛県)のR8倍率パーサ検証テスト。tochigi型（学校名セルの結合が無い・
@@ -15,62 +16,14 @@ import ehimeR8Geometry from '../__fixtures__/ehime-r8-geometry.json';
  *
  * フィクスチャは令和8年度公表PDF（`ehime-r8.pdf`・全1頁2段組）を`extract-pdf-geometry.py`で
  * 抽出した文字座標データ。
+ *
+ * ⚠️2026-09-05(T-Y11E E-1): パース本体は`../parsers/ehime.ts`の`parseEhime()`へ純関数として
+ * 抽出済み（レジストリ`registry.ts`から県コード経由で呼べる）。このテストはレジストリ経由でも
+ * 同じ結果が出ることを確認する回帰テストとして継続する。
  */
-const EHIME_LEFT_LAYOUT: GeneralColumnLayout = {
-  boundaries: [55, 128, 196, 225, 259, 280, 298],
-  // 列: 学校名,学科名,定員(=quota),入学志願者数(=finalApplicants),特色(内数・未使用),倍率(=finalRate)
-  roles: { schoolName: 0, department: 1, quota: 2, finalApplicants: 3, finalRate: 5 },
-};
-const EHIME_RIGHT_LAYOUT: GeneralColumnLayout = {
-  boundaries: [298, 353, 421, 450, 480, 505, 530],
-  roles: { schoolName: 0, department: 1, quota: 2, finalApplicants: 3, finalRate: 5 },
-};
-
-const EHIME_DEPARTMENT_OVERRIDES: Record<string, string> = {
-  '今治西|国・普': '国・普（くくり募集）',
-  '宇和島東|理・普': '理・普（くくり募集）',
-};
-
-/**
- * 分校（本校/分校が独立した学校番号を持たない）は、raw PDFでは「親校名+本校」が1語で
- * 連結されて印字される（例:「松山南本校」）一方、分校側は親校名を伴わず単独の地名のみが
- * 印字される（例:「砥部」）。既存データは「親校（分校名）」の括弧表記に統一しているため、
- * akita型の`renameOverrides`と同型の対応として、raw schoolNameそのものを直接書き換える
- * （分校名は他行の学校名と衝突しない固有の地名のためキーの一意性は問題ない）。
- */
-const EHIME_SCHOOL_NAME_OVERRIDES: Record<string, string> = {
-  松山南本校: '松山南（本校）',
-  砥部: '松山南（砥部）',
-  松山北本校: '松山北（本校）',
-  中島: '松山北（中島）',
-  内子本校: '内子（本校）',
-  小田: '内子（小田）',
-};
-
-function parseHalf(rows: { chars: PdfPageGeometry['chars'] }[], layout: GeneralColumnLayout) {
-  const rowFields = rows.map((row) => extractRowFields(row.chars, layout));
-  let currentSchool = '';
-  const withOverrides = rowFields.map((r) => {
-    const rawSchoolName = r.schoolName.trim();
-    const overriddenSchoolName = EHIME_SCHOOL_NAME_OVERRIDES[rawSchoolName];
-    const schoolNameNorm = overriddenSchoolName ?? rawSchoolName;
-    if (schoolNameNorm) currentSchool = schoolNameNorm;
-    const deptKey = r.department.trim();
-    const overriddenDept = EHIME_DEPARTMENT_OVERRIDES[`${currentSchool}|${deptKey}`];
-    return { ...r, schoolName: overriddenSchoolName ?? r.schoolName, department: overriddenDept ?? r.department };
-  });
-  return assembleSimpleTableRows(withOverrides, {
-    excludeRow: (schoolName, department) => (schoolName + department).includes('合計'),
-  });
-}
-
 describe('bairitsu-ingest parse-table-pdf 汎用carry-forward組み立て (ehime R8 実データ検証・1ページ2段組)', () => {
   const geometries = ehimeR8Geometry as unknown as PdfPageGeometry[];
-  const clusteredRows = geometries.flatMap((geom) => groupCharsIntoRows(geom.chars, 3.0));
-
-  const leftParsed = parseHalf(clusteredRows, EHIME_LEFT_LAYOUT);
-  const rightParsed = parseHalf(clusteredRows, EHIME_RIGHT_LAYOUT);
-  const parsed = [...leftParsed, ...rightParsed];
+  const parsed = parseEhime(geometries);
 
   const expectedR8Records = EHIME_COMPETITION_RATES.records.filter((r) => r.fiscalYear === undefined);
 
