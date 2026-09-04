@@ -10,6 +10,7 @@ import { getExamRatioByCode, DEFAULT_EXAM_RATIO } from '@/lib/prefecture-exam-da
 import { RATIO_PRESETS } from '@/lib/presets';
 import { SCHOOL_PRESETS } from '@/lib/school-presets';
 import { calculateMaxScore } from '@/lib/utils';
+import { requiredExamForS1 } from '@/lib/kanagawa-s-value';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { TokyoExtendedCalculator } from '@/components/Calculator/TokyoExtendedCalculator';
@@ -174,7 +175,7 @@ export function ReverseCalculator({ onBack, onResult }: ReverseCalculatorProps) 
     // 都道府県別の計算ロジック
     const prefecture = getPrefectureByCode(prefectureCode);
     if (prefecture?.reverseCalc) {
-      const { totalMaxScore, examMaxScore, calcType, naishinMultiplier, kValue, sValueCoefficients, osakaTypes, tokyoSettings, kanagawaSettings } = prefecture.reverseCalc;
+      const { totalMaxScore, examMaxScore, calcType, naishinMultiplier, kValue, osakaTypes, tokyoSettings } = prefecture.reverseCalc;
       
       switch (calcType) {
         case 'osaka':
@@ -214,32 +215,21 @@ export function ReverseCalculator({ onBack, onResult }: ReverseCalculatorProps) 
           }
           break;
 
-        case 'kanagawa':
-          // 神奈川県: S値方式（中2・中3比率考慮）
-          if (kanagawaSettings) {
-            // 注意：現在の内申点は中3のみを想定
-            // 実際には中2の成績も必要だが、簡易計算として中3の成績から推定
-            const estimatedGrade2Score = naishinNum * 0.8; // 中2の成績を中3の80%と仮定
-            const sValueNaishin = (estimatedGrade2Score * kanagawaSettings.gradeMultipliers.grade2 + naishinNum * kanagawaSettings.gradeMultipliers.grade3);
-            const kanagawaNaishinContribution = sValueNaishin * (sValueCoefficients?.academic || 0.8);
-            const kanagawaExamNeeded = targetScoreNum - kanagawaNaishinContribution;
-            requiredExamScore = Math.round(kanagawaExamNeeded);
-            examPercent = Math.round((requiredExamScore / examMaxScore) * 100);
-            const rawPerSubjectScore = Math.round(requiredExamScore / 5);
-            perSubjectScore = rawPerSubjectScore > 100 ? -1 : rawPerSubjectScore; // 101点以上は-1に設定
-            isAchievable = requiredExamScore <= examMaxScore && requiredExamScore >= 0;
-          } else {
-            // 従来の計算（フォールバック）
-            const sValueCoeff = sValueCoefficients?.academic || 0.8;
-            const kanagawaNaishinContribution = naishinNum * sValueCoeff;
-            const kanagawaExamNeeded = targetScoreNum - kanagawaNaishinContribution;
-            requiredExamScore = Math.round(kanagawaExamNeeded);
-            examPercent = Math.round((requiredExamScore / examMaxScore) * 100);
-            const rawPerSubjectScore = Math.round(requiredExamScore / 5);
-            perSubjectScore = rawPerSubjectScore > 100 ? -1 : rawPerSubjectScore; // 101点以上は-1に設定
-            isAchievable = requiredExamScore <= examMaxScore && requiredExamScore >= 0;
-          }
+        case 'kanagawa': {
+          // 神奈川県: S1値方式。式の単一ソースは src/lib/kanagawa-s-value.ts
+          // （出典: 神奈川県教育委員会 入学者選抜情報。/kanagawa/s-value と同一の式）。
+          const kanagawaResult = requiredExamForS1({
+            targetS1: targetScoreNum,
+            naishinTotal: naishinNum,
+            naishinRatio,
+          });
+          requiredExamScore = kanagawaResult.requiredExamScore;
+          examPercent = Math.round((requiredExamScore / examMaxScore) * 100);
+          const rawPerSubjectScore = Math.round(requiredExamScore / 5);
+          perSubjectScore = rawPerSubjectScore > 100 ? -1 : rawPerSubjectScore; // 101点以上は-1に設定
+          isAchievable = kanagawaResult.isAchievable;
           break;
+        }
 
         case 'chiba':
           // 千葉県: K値方式
@@ -985,12 +975,10 @@ export function ReverseCalculator({ onBack, onResult }: ReverseCalculatorProps) 
                       </>
                     ) : prefecture.reverseCalc.calcType === 'kanagawa' ? (
                       <>
-                        神奈川県方式: 目標{targetTotalScore}点 − S値（中2×1 + 中3×2）×0.8 ＝ 必要当日点{result.requiredExamScore}点（500点満点中{result.examPercent}%）
-                        {prefecture.reverseCalc.kanagawaSettings && (
-                          <div className="text-[10px] text-slate-400 mt-1">
-                            ※ 中2成績を中3の80%と仮定して推定
-                          </div>
-                        )}
+                        神奈川県方式（S1値）: a=A÷135×100={Math.round((currentNaishin / naishinMax) * 100)} ／ 目標S1{targetTotalScore} − a×{Math.round(naishinRatio / 10)} ＝ 必要b×{Math.round((100 - naishinRatio) / 10)} → 必要当日点{result.requiredExamScore}点（500点満点中{result.examPercent}%）
+                        <div className="text-[10px] text-slate-400 mt-1">
+                          ※ 特色検査（S2値）は本ツール未対応。S1値のみで計算
+                        </div>
                       </>
                     ) : prefecture.reverseCalc.calcType === 'chiba' ? (
                       <>

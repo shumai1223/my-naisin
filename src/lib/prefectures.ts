@@ -374,7 +374,18 @@ export const PREFECTURES: PrefectureConfig[] = [
     sourceUrl2: 'https://czemi.benesse.ne.jp/open/nyushi/article/14/feature/0014.html',
     sourceTitle: '神奈川県教育委員会 入試情報',
     lastVerified: '2026-04-22',
-    fiscalYear: '2026'
+    fiscalYear: '2026',
+    // ⚠️2026-09-04修正: reverseCalcが未設定だったため、ReverseCalculator.tsxのcase 'kanagawa'は
+    // 実際には一度も実行されず、汎用フォールバック（100点換算をしないS値もどきの式）で計算されていた。
+    // totalMaxScoreはS1値の満点(1000)＝src/lib/kanagawa-s-value.tsのKANAGAWA_NAISHIN_MAX(135)/
+    // KANAGAWA_EXAM_MAX(500)をそれぞれ100点換算した合計と一致させる。
+    reverseCalc: {
+      totalMaxScore: 1000,
+      examMaxScore: 500,
+      defaultRatio: { naishin: 40, exam: 60 }, // 4:6（標準）
+      calcType: 'kanagawa',
+      note: '内申(135点満点)と学力検査(500点満点)をそれぞれ100点満点に換算し、志望校ごとの比率(合計10)で合算するS1値方式。特色検査を実施する学校のS2値は本ツール未対応。'
+    }
   },
   // 中部
   {
