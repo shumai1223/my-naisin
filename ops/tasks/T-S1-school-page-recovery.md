@@ -373,7 +373,12 @@ https://www.kyoiku.metro.tokyo.lg.jp/documents/d/kyoiku/03-3-v2
       詳細は`ops/S1-3-teiji-availability-ledger.md`
 - [ ] 「別資料がある」と書いてある県について、**その資料が実在するか実機で確認**する
       （東京の `03-3-v2` から。⚠️1県1日1回・間隔800ms以上・UA名乗る・robots.txt尊重）→
-      **未着手**。既存ヘッダコメント（収集当時の一次記録）を根拠に23県を「A分類（学校名/
+      **進行中（6/23県確認済み・2026-09-05時点）**。tokyo/miyagi/tokushimaに加え、本日
+      chiba/gifu/gunmaを実機確認（PDF取得→pdftotext失敗時はpdftoppmビジョン解析）。
+      3県とも学校別の定時制データが実在し、chiba/gunmaは自己検算用の合計行付き、gifuは
+      個票のみ（合計行なし）。gunmaのみR5版PDFでの確認でR8本体に同型セクションがあるかは
+      未確認という留保あり。詳細は`ops/S1-3-teiji-availability-ledger.md`（残り17県は未着手）。
+      既存ヘッダコメント（収集当時の一次記録）を根拠に23県を「A分類（学校名/
       ページ番号まで判明済み）」として優先候補にリストアップしたが、**実際の再取得による
       裏取りはtokushima1件のみ**（T-Y11B調査で偶然実データ取得）。次回セッションが着手前に
       必ず実機確認すること
