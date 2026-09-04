@@ -1,6 +1,7 @@
-import { groupCharsIntoRows, extractRowFields, normalizeExtractedText, normalizeDepartmentText, type PdfPageGeometry, type GeneralColumnLayout } from '../parse-table-pdf';
+import { type PdfPageGeometry } from '../parse-table-pdf';
 import { TOYAMA_COMPETITION_RATES } from '@/data/competition-rates/toyama';
 import toyamaR8Geometry from '../__fixtures__/toyama-r8-geometry.json';
+import { parseToyama } from '../parsers/toyama';
 
 /**
  * T-Y11B 段階2-b: toyama(富山県)のR8倍率パーサ検証テスト。
@@ -19,69 +20,14 @@ import toyamaR8Geometry from '../__fixtures__/toyama-r8-geometry.json';
  *
  * フィクスチャは令和8年度公表PDF（`toyama-r8.pdf`・全3頁のうち学校別データの2頁分[page index
  * 0-1]）。3頁目は「(大学科別)」という学科ごとの県全体集計表（学校別ではない）のためスコープ外。
+ *
+ * ⚠️2026-09-05(T-Y11E E-1): パース本体は`../parsers/toyama.ts`の`parseToyama()`へ純関数として
+ * 抽出済み（レジストリ`registry.ts`から県コード経由で呼べる）。このテストはレジストリ経由でも
+ * 同じ結果が出ることを確認する回帰テストとして継続する。
  */
-const TOYAMA_LAYOUT: GeneralColumnLayout = {
-  boundaries: [75, 310, 600, 690, 780, 870, 960, 1050],
-  // 列: 学校名,学科・コース,募集定員(A・未使用),推薦内定等数(B・未使用),
-  //     推薦内定等を除いた募集人数(A-B=quota),志願者数(=finalApplicants),倍率(=finalRate)
-  roles: { schoolName: 0, department: 1, quota: 4, finalApplicants: 5, finalRate: 6 },
-};
-
-const TOYAMA_DEPARTMENT_OVERRIDES: Record<string, string> = {
-  '魚津工業|電気情報科': '機械創造科・電気情報科・ＩＴ環境化学科（くくり募集）',
-  '中央農業|園芸デザイン科': '生物生産科・園芸デザイン科・バイオ技術科（くくり募集）',
-};
-
-interface ClusteredRow {
-  y: number;
-  chars: PdfPageGeometry['chars'];
-}
-
-/** 罫線のy座標だけでブロック（1校ぶんの行の集合）を決定する（内部罫線の有無に依存しない）。 */
-function groupRowsIntoBlocks(rows: ClusteredRow[], hlines: PdfPageGeometry['hlines']): ClusteredRow[][] {
-  const sorted = [...hlines].sort((a, b) => a.y - b.y);
-  const boundaries: number[] = [];
-  for (const h of sorted) {
-    if (boundaries.length && Math.abs(boundaries[boundaries.length - 1] - h.y) < 3.0) continue;
-    boundaries.push(h.y);
-  }
-  const blocks: ClusteredRow[][] = Array.from({ length: Math.max(boundaries.length - 1, 0) }, () => []);
-  for (const row of rows) {
-    for (let i = 0; i < boundaries.length - 1; i++) {
-      if (row.y >= boundaries[i] - 0.5 && row.y < boundaries[i + 1] - 0.5) {
-        blocks[i].push(row);
-        break;
-      }
-    }
-  }
-  return blocks.filter((b) => b.length > 0);
-}
-
 describe('bairitsu-ingest parse-table-pdf 汎用carry-forward組み立て (toyama R8 実データ検証・第6パターン: ブロック内ラベル位置不定)', () => {
   const geometries = toyamaR8Geometry as PdfPageGeometry[];
-
-  const blocks = geometries.flatMap((geom) => {
-    const rows = groupCharsIntoRows(geom.chars, 3.0);
-    return groupRowsIntoBlocks(rows, geom.hlines);
-  });
-
-  const parsed: { schoolName: string; department: string; quota: number; finalApplicants: number; finalRate: number }[] = [];
-  for (const block of blocks) {
-    const fields = block.map((row) => extractRowFields(row.chars, TOYAMA_LAYOUT));
-    const schoolName = fields.map((f) => normalizeExtractedText(f.schoolName)).find((s) => s.length > 0) ?? '';
-    if ((schoolName + fields.map((f) => f.department).join('')).includes('合計')) continue;
-
-    for (const f of fields) {
-      const rawDept = f.department.trim();
-      const department = TOYAMA_DEPARTMENT_OVERRIDES[`${schoolName}|${rawDept}`] ?? normalizeDepartmentText(f.department);
-      if (!rawDept) continue;
-      const quota = Number(f.quotaText.replace(/,/g, ''));
-      const finalApplicants = Number(f.applicantsText.replace(/,/g, ''));
-      const finalRate = Number(f.rateText);
-      if (!Number.isFinite(quota) || quota <= 0 || !Number.isFinite(finalApplicants) || !Number.isFinite(finalRate)) continue;
-      parsed.push({ schoolName, department, quota, finalApplicants, finalRate });
-    }
-  }
+  const parsed = parseToyama(geometries);
 
   const expectedR8Records = TOYAMA_COMPETITION_RATES.records.filter((r) => r.fiscalYear === undefined);
 
