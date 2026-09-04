@@ -37,4 +37,23 @@ describe('学校ページのCTA順序（G7）', () => {
     expect(leadCtaIndex).toBeGreaterThan(-1);
     expect(parentBridgeIndex).toBeLessThan(leadCtaIndex);
   });
+
+  /**
+   * T-M1-2（C10-1・2026-09-05投入）: 学校ページの広告は「倍率データより後・1枠のみ」
+   * （Y-0＝データが主役の原則。インデックス評価中のためテンプレページ化を避ける）。
+   */
+  it('AffiliateAdは倍率データより後に、1枠だけレンダーされる', () => {
+    const filePath = join(process.cwd(), 'src/app/pref/[code]/school/[schoolCode]/page.tsx');
+    const content = readFileSync(filePath, 'utf8');
+
+    const rateHeadingIndex = content.indexOf('今季の入試倍率');
+    const adIndex = content.indexOf('<AffiliateAd');
+
+    expect(rateHeadingIndex).toBeGreaterThan(-1);
+    expect(adIndex).toBeGreaterThan(-1);
+    expect(rateHeadingIndex).toBeLessThan(adIndex);
+
+    const adOccurrences = (content.match(/<AffiliateAd/g) || []).length;
+    expect(adOccurrences).toBe(1);
+  });
 });

@@ -18,6 +18,7 @@ import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { SchoolParentLeadForm } from '@/components/SchoolParentLeadForm';
 import { isSchoolLeadFormReleased } from '@/lib/school-lead-release';
 import { SchoolPageNaishinNote } from '@/components/SchoolPageNaishinNote';
+import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 
 /**
  * 個別学校ページ（Λ-2・分割公開の波ごとにインデックス解禁）。
@@ -339,6 +340,19 @@ export default async function SchoolPage({ params }: PageProps) {
               </div>
             </section>
           )}
+
+          {/* T-M1-2（C10-1・2026-09-05投入）: 学校ページ広告1枠。募集人員・応募者数・倍率・
+              多年度推移・県内区分別推移の全データ表示より下、近隣校リンクより上に配置
+              （Y-0＝データが主役の原則を守る。データより上には絶対に置かない）。
+              placement="school"でGSC/GA4から他面と分解して効きを測る。塾の無料体験1枠のみ
+              （インデックス評価中の学校ページを「収益化目的のテンプレページ」化しないため増枠しない）。 */}
+          <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <h2 className="mb-3 text-sm font-bold text-slate-800">{school.schoolName}の入試に向けて</h2>
+            <p className="mb-4 text-xs leading-relaxed text-slate-500">
+              倍率{school.overallRate}倍の入試を控えている方向けに、学習塾の無料体験を紹介しています。
+            </p>
+            <AffiliateAd placement="school" id="campus-banner" trackView viewPlacement="school" />
+          </section>
 
           <SchoolPageNaishinNote schoolName={school.schoolName} prefecture={prefecture} />
 
