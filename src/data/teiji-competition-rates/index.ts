@@ -7,11 +7,13 @@ import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
 import { TOKYO_TEIJI_COMPETITION_RATES } from './tokyo';
 import { MIYAGI_TEIJI_COMPETITION_RATES } from './miyagi';
 import { TOKUSHIMA_TEIJI_COMPETITION_RATES } from './tokushima';
+import { NAGANO_TEIJI_COMPETITION_RATES } from './nagano';
 
 export const TEIJI_COMPETITION_RATE_BY_PREFECTURE: Partial<Record<string, PrefectureCompetitionRateFile>> = {
   tokyo: TOKYO_TEIJI_COMPETITION_RATES,
   miyagi: MIYAGI_TEIJI_COMPETITION_RATES,
   tokushima: TOKUSHIMA_TEIJI_COMPETITION_RATES,
+  nagano: NAGANO_TEIJI_COMPETITION_RATES,
 };
 
 export const TEIJI_COMPETITION_RATE_FILES: PrefectureCompetitionRateFile[] = Object.values(
