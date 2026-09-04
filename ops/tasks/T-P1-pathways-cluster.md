@@ -133,16 +133,18 @@ GSC 2026-06-02〜08-31（90日）:
 **S1-3で47県の所在分類は済んでいる（A23 / B4 / C20・`ops/S1-3-teiji-availability-ledger.md`）。**
 
 - [ ] A分類23県から着手する。**倍率・定員・学科は公表値をそのまま**（T-Y11Bと同じ規律）
-      → **進行中（9/23県・tokyo/miyagi/tokushima/nagano/okinawa/niigata/shimane/okayama/
-      shizuoka完了・2026-09-05）**。`src/data/teiji-competition-rates/`を新設（既存
+      → **進行中（10/23県・tokyo/miyagi/tokushima/nagano/okinawa/niigata/shimane/okayama/
+      shizuoka/tottori完了・2026-09-05）**。`src/data/teiji-competition-rates/`を新設（既存
       `competition-rate.ts`の型`PrefectureCompetitionRateFile`をそのまま再利用・新しい型設計は
       不要と判明）。tokyo16レコード・miyagi20レコード(12校)・tokushima9レコード(6校)・
       nagano22レコード(定時制課程14校+多部制単位制3校)・niigata12レコード(10校)・
       shimane8レコード(3校)・okayama12レコード(7校)・shizuoka19レコード(定時制15校+単位制
-      定時制4校)はいずれも印字済み公式「計」行と完全一致。okinawaのみ全日制混在表で県全体の
-      定時制限定合計が資料に無いため自己集計値のみ（8レコード・6校）。**副産物**: okayamaの
-      既存R8ソースURLが404化していたため新URLを発見し全日制データ側も修正した。計9県49テスト
-      green。残り14県は次回以降。取り込み順はS1-3の実機確認順に合わせる予定
+      定時制4校)・tottori5レコード(4校)はいずれも印字済み公式「計」行と完全一致。okinawaのみ
+      全日制混在表で県全体の定時制限定合計が資料に無いため自己集計値のみ（8レコード・6校）。
+      **副産物**: okayamaの既存R8ソースURLが404化していたため新URLを発見し全日制データ側も
+      修正した。計10県54テストgreen。**yamaguchiは試行したが既存ソースURL(「訂正」版)に
+      定時制セクションが存在せず一旦ブロック**（詳細は`ops/S1-3-teiji-availability-ledger.md`）。
+      残り13県は次回以降。取り込み順はS1-3の実機確認順に合わせる予定
 - [ ] 通信制課程を置く公立高校も同じ形で拾う
 - [ ] ⚠️ **1データ点1出典。取れない県は「取れない」と書く**（Y-0）
 - [ ] ⚠️ **47県を埋めるために推測で水増ししない。** 20県で止まるならそれが正しい姿
