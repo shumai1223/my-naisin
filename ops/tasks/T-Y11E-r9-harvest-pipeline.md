@@ -46,16 +46,15 @@ scripts/bairitsu-ingest/  →  extract-pdf-geometry.py  ただ1本
       ＋`getPrefectureParser(code)`）。着手条件②（T-Y11B段階2-bが「これ以上は逓減」に達した・
       本文書冒頭の着手条件を参照）が満たされたため本タスクへ移行した
 - [ ] 各県のパーサをテストファイルから**純関数として抽出**し、レジストリに登録する
-      🔶進行中（1/31県・toyama完了・2026-09-05）。1県ずつのため次回以降続行
+      🔶進行中（2/31県・toyama/aomori完了・2026-09-05）。1県ずつのため次回以降続行
 - [x] ⚠️ **既存のテストを壊さない。** テストはレジストリ経由で同じ結果を出すこと
-      ✅toyama: `__tests__/parse-table-pdf-toyama.test.ts`をレジストリの`parseToyama()`呼び出しに
-      置き換え・結果は無回帰（レコード件数75件・グランドトータル5,020/4,482とも既存データと一致）。
-      `__tests__/registry.test.ts`を新設しレジストリ経由の出力が既存手作業データと完全一致することを
-      機械的に固定
+      ✅toyama/aomori: 両テストをレジストリの`parseToyama()`/`parseAomori()`呼び出しに
+      置き換え・結果は無回帰（toyama=75件/5,020/4,482・aomori=89件/6,980/6,436、いずれも
+      既存データと一致）。`__tests__/registry.test.ts`にaomoriの検証も追加
 - [x] ⚠️ 1県ずつやる。**まとめて動かして壊すより、1県ずつ緑を確認する**
-      ✅toyamaのみ移設してtsc実exit0・jestフルスイート469suites6953tests green(+2suites+3tests)を
-      確認してから止めた。次回セッションは`src/lib/bairitsu-ingest/parsers/toyama.ts`を雛形として
-      2県目（aomori等・第4-5パターンの単純な県から）に進むこと
+      ✅toyama→aomoriの順で1県ずつ移設しtsc実exit0・jestフルスイート469suites6954tests
+      green(+1test)を確認してから止めた。次回セッションは`src/lib/bairitsu-ingest/parsers/aomori.ts`
+      を雛形として3県目に進むこと（残り29県）
 
 ## E-2 取得層（丁寧に取る）
 

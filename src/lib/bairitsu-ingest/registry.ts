@@ -1,5 +1,6 @@
 import type { PdfPageGeometry, ParsedCompetitionRow } from './parse-table-pdf';
 import { parseToyama } from './parsers/toyama';
+import { parseAomori } from './parsers/aomori';
 
 /**
  * T-Y11E E-1: 県コード → パーサ関数 のレジストリ。
@@ -17,6 +18,7 @@ export type PrefectureParser = (geometries: PdfPageGeometry[]) => ParsedCompetit
 
 export const PREFECTURE_PARSER_REGISTRY: Partial<Record<string, PrefectureParser>> = {
   toyama: parseToyama,
+  aomori: parseAomori,
 };
 
 export function getPrefectureParser(prefectureCode: string): PrefectureParser | undefined {
