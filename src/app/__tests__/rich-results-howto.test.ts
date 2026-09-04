@@ -123,6 +123,7 @@ const HOWTO_EXEMPT_ROUTES: Record<string, string> = {
   '/shougakukin': '就学支援金シミュレーター（未着手・CANDIDATE_FOR_HOWTO_CONTENT）',
   '/juku-shindan': '塾診断クイズ（5問の手順を持つ・未着手・CANDIDATE_FOR_HOWTO_CONTENT）',
   '/[prefecture]/total-score': '総合得点計算機（47県中13県のみ実計算機・残りは解説のみの条件分岐が必要・未着手・CANDIDATE_FOR_HOWTO_CONTENT）',
+  '/[prefecture]/nyuushi-nittei': 'T-Y12入試日程一覧（手順書ではなく日程の時系列リスト・DatasetSchemaで対応済み）',
 };
 
 /** 次にHowToSchemaを書く価値が高い候補（実際に手順のある計算機/診断ツール）。 */

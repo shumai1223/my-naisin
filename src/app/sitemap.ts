@@ -9,6 +9,7 @@ import { SHINDAN_PURPOSE_CONTENTS } from '@/lib/shindan-purpose-content';
 import { NAISHIN_OMOMI_CODES } from '@/lib/naishin-omomi-content';
 import { REPORT_2026_DIGEST_CODES } from '@/lib/report-2026-digest-content';
 import { getPrefectureSchoolPageData, INDEXED_SCHOOL_PAGE_PREFECTURE_CODES } from '@/lib/school-page-lookup';
+import { EXAM_SCHEDULE_PREFECTURE_CODES } from '@/data/exam-schedules';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://my-naishin.com';
@@ -118,6 +119,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }));
   });
 
+  // 11. 都道府県別 入試日程（T-Y12・47県すべてがgenerateStaticParamsに従属）
+  const nyuushiNitteiPages = EXAM_SCHEDULE_PREFECTURE_CODES.map((code) => ({
+    url: `${baseUrl}/${code}/nyuushi-nittei`,
+    lastModified,
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }));
+
   return [
     ...staticPages,
     ...prefectureTopPages,
@@ -130,5 +139,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...naishinOmomiPages,
     ...report2026DigestPages,
     ...schoolPages,
+    ...nyuushiNitteiPages,
   ];
 }

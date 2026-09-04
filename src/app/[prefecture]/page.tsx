@@ -201,6 +201,16 @@ export default async function PrefecturePage({ params }: PrefecturePageProps) {
                     評定平均を計算する <ArrowRight className="ml-1 h-4 w-4" />
                   </div>
                 </Link>
+                <Link href={`/${code}/nyuushi-nittei`} className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:border-amber-300 hover:shadow-md">
+                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-amber-100 text-amber-600 transition-colors group-hover:bg-amber-600 group-hover:text-white">
+                    <Calendar className="h-6 w-6" />
+                  </div>
+                  <h3 className="text-xl font-bold text-slate-800">{pref.name}公立高校 入試日程</h3>
+                  <p className="mt-2 text-sm text-slate-500">出願期間・学力検査日・合格発表日を教育委員会公表資料のとおり掲載。</p>
+                  <div className="mt-4 flex items-center font-bold text-amber-600 group-hover:underline">
+                    入試日程を確認する <ArrowRight className="ml-1 h-4 w-4" />
+                  </div>
+                </Link>
               </section>
 
               {/* 保護者リード（県×面エンジンで自動解決：関東=森塾/関西=キャンパス/他=全国オンライン塾。旧Z会/サプリ¥1.5-28.8/clickは撤去） */}
