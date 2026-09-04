@@ -69,9 +69,12 @@
  * **2026-08-07追記(掛-1第6弾)**: 6頁目「専門学科・家庭/看護/外国語/美術/音楽/書道/体育に関する
  * 学科」計25レコードを追加。7つの学科区分それぞれの頁内小計（家庭320/304・看護80/95・
  * 外国語319/384・美術120/132・音楽120/66・書道40/40・体育160/186）全てと完全一致
- * （node.js機械計算）。外国語科は「越谷南」（R7）↔「越谷北」（R8）のように学校間で開設が
- * 移動している例があるが、これも年度ごとの実際の開設状況としてそのまま収録した。次頁
- * （7頁目）以降は専門学科の残り＋総合学科が続く見込み。
+ * （node.js機械計算）。次頁（7頁目）以降は専門学科の残り＋総合学科が続く見込み。
+ * ⚠️2026-09-05訂正(T-Y11D・👤裁定2026-09-03): 本追記時点では「外国語科は『越谷南』（R7）↔
+ * 『越谷北』（R8）のように学校間で開設が移動している」と記録していたが、これは誤りだった。
+ * 越谷北=理数科・越谷南=外国語科がR5/R7を通じて安定した学校特性で、外国語科が2校間を
+ * 年ごとに行き来することはない。R8データの「越谷北」表記はPDF原本の転記ミスと判明し、
+ * 「越谷南」に訂正済み（詳細は`ops/tasks/T-Y11D-saitama-4-corrections.md`）。
  *
  * **2026-08-07追記(掛-1第7弾・専門学科完結)**: 7頁目「専門学科・理数/福祉/人文/国際文化/
  * 映像芸術/舞台芸術/生物環境に関する学科」計14レコードを追加。全7学科区分の頁内小計
@@ -336,7 +339,9 @@ export const SAITAMA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
 
     // ===== 全日制 専門学科：工業に関する学科 =====
     { schoolName: '大宮科学技術', department: '機械工学科', quota: 80, finalApplicants: 62, finalRate: 0.78 },
-    { schoolName: '大宮科学技術', department: '電気工学科', quota: 39, finalApplicants: 23, finalRate: 0.58 },
+    // ⚠️2026-09-05訂正(T-Y11D・👤裁定2026-09-03): quota 39→40。格納済みfinalRate 0.58は
+    // 23÷40=0.575(四捨五入0.58)でのみ成立し23÷39=0.5897(四捨五入0.59)とは不一致。PDF原本も40。
+    { schoolName: '大宮科学技術', department: '電気工学科', quota: 40, finalApplicants: 23, finalRate: 0.58 },
     { schoolName: '大宮科学技術', department: 'ロボット工学科', quota: 39, finalApplicants: 23, finalRate: 0.59 },
     { schoolName: '大宮科学技術', department: '建築デザイン工学科', quota: 79, finalApplicants: 61, finalRate: 0.77 },
     { schoolName: '春日部工業', department: '機械科', quota: 79, finalApplicants: 78, finalRate: 0.99 },
@@ -376,7 +381,10 @@ export const SAITAMA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '新座総合技術', department: '電子機械科', quota: 39, finalApplicants: 36, finalRate: 0.92 },
     { schoolName: '新座総合技術', department: '情報技術科', quota: 40, finalApplicants: 34, finalRate: 0.85 },
     { schoolName: '三郷工業技術', department: '機械科', quota: 39, finalApplicants: 39, finalRate: 1.0 },
-    { schoolName: '三郷工業技術', department: '電気科', quota: 40, finalApplicants: 32, finalRate: 0.8 },
+    // ⚠️2026-09-05訂正(T-Y11D・👤裁定2026-09-03): quota 40→39・finalRate 0.8→0.82。
+    // R5=39/R6=39/R7=39でR8だけ40だったが、PDF原本の印字倍率0.82=32÷39が正しく、
+    // 格納値0.8=32÷40は定員・倍率の両方が連動して誤っていた（quotaのみ直すと再度不整合になる）。
+    { schoolName: '三郷工業技術', department: '電気科', quota: 39, finalApplicants: 32, finalRate: 0.82 },
     { schoolName: '三郷工業技術', department: '電子機械科', quota: 40, finalApplicants: 20, finalRate: 0.5 },
     { schoolName: '三郷工業技術', department: '情報技術科', quota: 40, finalApplicants: 21, finalRate: 0.53 },
     { schoolName: '三郷工業技術', department: '情報電子科', quota: 40, finalApplicants: 34, finalRate: 0.85 },
@@ -413,7 +421,10 @@ export const SAITAMA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '鴻巣女子', department: '保育科', quota: 40, finalApplicants: 39, finalRate: 0.98 },
     { schoolName: '鴻巣女子', department: '家政科学科', quota: 40, finalApplicants: 39, finalRate: 0.98 },
     { schoolName: '越谷総合技術', department: '服飾デザイン科', quota: 39, finalApplicants: 28, finalRate: 0.72 },
-    { schoolName: '越谷総合技術', department: '食物デザイン科', quota: 40, finalApplicants: 42, finalRate: 1.05 },
+    // ⚠️2026-09-05訂正(T-Y11D・👤裁定2026-09-03): 学科名「食物デザイン科」→「食物調理科」。
+    // R5/R6/R7いずれも「食物調理科」でR8だけ「食物デザイン科」だったが、直前行の同校
+    // 「服飾デザイン科」につられたコピペ汚染と判明。PDF原本も「食物調理科」。数値は変更なし。
+    { schoolName: '越谷総合技術', department: '食物調理科', quota: 40, finalApplicants: 42, finalRate: 1.05 },
     { schoolName: '秩父農工科学', department: 'ライフデザイン科', quota: 40, finalApplicants: 28, finalRate: 0.7 },
     { schoolName: '秩父農工科学', department: 'フードデザイン科', quota: 40, finalApplicants: 33, finalRate: 0.83 },
     { schoolName: '新座総合技術', department: '服飾デザイン科', quota: 40, finalApplicants: 41, finalRate: 1.03 },
@@ -424,7 +435,10 @@ export const SAITAMA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
 
     // ===== 全日制 専門学科：外国語に関する学科 =====
     { schoolName: '春日部女子', department: '外国語科', quota: 40, finalApplicants: 43, finalRate: 1.08 },
-    { schoolName: '越谷北', department: '外国語科', quota: 40, finalApplicants: 52, finalRate: 1.3 },
+    // ⚠️2026-09-05訂正(T-Y11D・👤裁定2026-09-03): 学校名「越谷北」→「越谷南」。
+    // 越谷北=理数科・越谷南=外国語科がR5/R7を通じて安定した学校特性で、外国語科が2校間を
+    // 年ごとに行き来することはない。R8のこのレコードだけが誤っており、PDF原本も「越谷南」。
+    { schoolName: '越谷南', department: '外国語科', quota: 40, finalApplicants: 52, finalRate: 1.3 },
     { schoolName: '坂戸', department: '外国語科', quota: 40, finalApplicants: 32, finalRate: 0.8 },
     { schoolName: '草加南', department: '外国語科', quota: 40, finalApplicants: 40, finalRate: 1.0 },
     { schoolName: '南稜', department: '外国語科', quota: 40, finalApplicants: 54, finalRate: 1.35 },

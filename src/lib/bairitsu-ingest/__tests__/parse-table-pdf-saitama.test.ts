@@ -63,73 +63,23 @@ describe('bairitsu-ingest parse-table-pdf 汎用carry-forward組み立て (saita
   const expectedR8Records = SAITAMA_COMPETITION_RATES.records.filter((r) => r.fiscalYear === undefined);
 
   /**
-   * ⚠️既存データに2件、quota(入学許可予定者数A)の転記ミスが見つかった。両方とも
-   * パーサの誤りではなく既存データ側の誤りだと、各レコード自身のfinalRateとの整合性、および
-   * grand total reconciliationの2系統で証明できる（finalrate-invariant.test.tsの
-   * KNOWN_UNEXPLAINED_EXCEPTIONSと同型の扱い。既存データは書き換えず・パーサの出力も歪めず、
-   * 既知の不一致として個別に除外して検証する）。
-   *
-   * ①大宮科学技術・電気工学科: 既存データ`quota:39`。PDF原本の該当セルには転編入者数の
-   *   （）内数表記が無く、入学許可予定者数(A)欄には明確に「40」と印字されている（隣接する
-   *   ロボット工学科の行は同じ募集人員でも「40(1)」→A=39という転編入調整があるため見た目が
-   *   近く、コピペ起因の転記ミスと推測される）。既存データ自身のfinalRate=0.58は
-   *   roundHalfUpScaled規約で23/40=0.575→0.58と一致する（23/39=0.5897→0.59であり不一致）。
-   *   機械集計のgrand total（quota合計）もこの1件をquota=40とした場合のみPDFの34,603と
-   *   完全一致する（quota=39のままだと34,602で1ズレる）。
-   * ②三郷工業技術・電気科: 既存データ`quota:40`。PDF原本は逆に「40(1)」の転編入調整が
-   *   あり、入学許可予定者数(A)は「39」・印字済み倍率(B÷A)は「0.82」（32÷39=0.8205→0.82）。
-   *   既存データのfinalRate=0.8は32÷40=0.8ちょうどであり、PDFに印字された0.82とは
-   *   食い違う（PDF自身の印字済み倍率と既存データが一致しない＝既存データ側の転記ミス）。
-   * ③越谷総合技術・食物デザイン科: 既存データの学科名`食物デザイン科`はPDF原本に存在しない
-   *   （PDF原本は「食物調理科」と印字。数値(quota40・applicants42・rate1.05)は完全一致）。
-   *   直前の行が同校「服飾デザイン科」であるため、隣接行の学科名からの転記時の
-   *   コピペ汚染と推測される。R7/R6/R5の同校同欄は全て「食物調理科」であり、R8だけが
-   *   例外的に「デザイン科」表記になっていることからも、R8のみの単発の転記ミスと判断できる。
-   * ④外国語科・越谷北/越谷南: 既存データはこのレコードの学校名を`越谷北`として収録し、
-   *   ファイル冒頭のコメントにも「外国語科は『越谷南』（R7）↔『越谷北』（R8）のように
-   *   学校間で開設が移動している」という趣旨の注記がある。しかし本テストが取得したPDF
-   *   （既存データと**全く同一のURL** `documents/268192/r8shigankakutei0219.pdf`）を
-   *   文字座標レベルで確認したところ、該当行は明確に「越谷南外国語科」（quota40・
-   *   applicants52・rate1.30＝既存データの数値と完全一致）と印字されている。数値は
-   *   完全一致するため学科の実体は同一レコードであり、南/北という対になる1文字だけが
-   *   食い違っている（人為的な転記時の左右取り違えの典型例と推測される）。他の3件のような
-   *   自己整合的な数値証拠（倍率の丸め・grand total）は無いため確度はやや低いが、
-   *   同一URLの原本を直接確認した結果として記録する。
+   * ⚠️2026-09-05訂正(T-Y11D・👤裁定2026-09-03): 従来ここには「既存データに4件の転記ミスが
+   * ある」ことを示す`KNOWN_DATA_ERRORS`除外リストがあった（大宮科学技術・電気工学科の
+   * quota/三郷工業技術・電気科のquota+finalRate/越谷総合技術の学科名/越谷北→越谷南の
+   * 学校名）。全4件とも一次ソースの証拠（PDF原本の印字内容・grand total照合・年次一貫性）に
+   * 基づき`saitama.ts`側を訂正したため、`expectedR8Records`(=既存データ)と`parsed`(=PDF
+   * 再パース結果)が完全一致するようになった。除外ロジックは不要になったため削除し、
+   * 「順序も含めて完全一致」の単一テストへ統合する。訂正の詳細根拠は
+   * `ops/tasks/T-Y11D-saitama-4-corrections.md`と`saitama.ts`該当レコードのコメントを参照。
    */
-  const KNOWN_DATA_ERRORS: Array<{ schoolName: string; department: string }> = [
-    { schoolName: '大宮科学技術', department: '電気工学科' },
-    { schoolName: '三郷工業技術', department: '電気科' },
-    { schoolName: '越谷総合技術', department: '食物デザイン科' },
-    { schoolName: '越谷北', department: '外国語科' },
-  ];
-  const knownErrorIndexes = KNOWN_DATA_ERRORS.map((e) => expectedR8Records.findIndex((r) => r.schoolName === e.schoolName && r.department === e.department));
 
   test('R8のレコード件数が既存データと一致する（241件）', () => {
     expect(parsed.length).toBe(expectedR8Records.length);
     expect(parsed.length).toBe(241);
   });
 
-  test('4件の既知の不一致が今も存在し、PDF原本（既存データと同一URL）の印字済み内容との突合結果を確認する', () => {
-    for (const idx of knownErrorIndexes) expect(idx).toBeGreaterThanOrEqual(0);
-    const [oomiyaIdx, misatoIdx, koshigayaIdx, kosigayaKitaIdx] = knownErrorIndexes;
-    expect(expectedR8Records[oomiyaIdx]?.quota).toBe(39);
-    expect(parsed[oomiyaIdx]?.quota).toBe(40);
-    expect(expectedR8Records[misatoIdx]?.quota).toBe(40);
-    expect(parsed[misatoIdx]?.quota).toBe(39);
-    expect(parsed[misatoIdx]?.finalRate).toBe(0.82);
-    expect(expectedR8Records[koshigayaIdx]?.department).toBe('食物デザイン科');
-    expect(parsed[koshigayaIdx]?.department).toBe('食物調理科');
-    expect(parsed[koshigayaIdx]?.quota).toBe(expectedR8Records[koshigayaIdx]?.quota);
-    expect(parsed[koshigayaIdx]?.finalApplicants).toBe(expectedR8Records[koshigayaIdx]?.finalApplicants);
-    expect(parsed[kosigayaKitaIdx]?.schoolName).toBe('越谷南');
-    expect(parsed[kosigayaKitaIdx]?.quota).toBe(expectedR8Records[kosigayaKitaIdx]?.quota);
-    expect(parsed[kosigayaKitaIdx]?.finalApplicants).toBe(expectedR8Records[kosigayaKitaIdx]?.finalApplicants);
-    expect(parsed[kosigayaKitaIdx]?.finalRate).toBe(expectedR8Records[kosigayaKitaIdx]?.finalRate);
-  });
-
-  test('レコード単位で既存データと完全一致する（順序も含む・既知の不一致4件を除く）', () => {
+  test('レコード単位で既存データと完全一致する（順序も含む）', () => {
     for (let i = 0; i < expectedR8Records.length; i++) {
-      if (knownErrorIndexes.includes(i)) continue;
       const p = parsed[i];
       const e = expectedR8Records[i];
       expect({ schoolName: p?.schoolName, department: p?.department, quota: p?.quota, finalApplicants: p?.finalApplicants, finalRate: p?.finalRate }).toEqual({
