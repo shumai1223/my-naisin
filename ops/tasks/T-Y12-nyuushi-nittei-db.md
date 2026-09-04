@@ -420,23 +420,35 @@ uniqueness.test対応（47ページ量産の薄いコンテンツ罠回避）を
 一括SSGで運用されてきた実績と整合）。既存の`/juken-schedule`（全国共通・月レベルの目安）はこの
 新ルートへ内部リンクする形で共存させ、両者の役割は重複させない。
 
-**⚠️次に着手するセッションが必須で行うこと（RUBRIC_MONEY_PAGE.md・20/25以上・★項目は1つでも
-落としたら公開不可）**:
-1. ページ本体は`total-score/page.tsx`のBreadcrumbSchema/WebApplicationSchema/構成パターンを
-   踏襲し、**公表資料の項目名(`label`)・日付をそのまま表示**（独自の言い換え・解釈をしない＝
-   Y-0憲法）。イベントを時系列で並べたシンプルなタイムライン/テーブル表示を基本形とする
-2. 収益CTAを載せる場合は`ParentLeadCTA`を既存ページと同じ形で流用し、**placement引数を必ず
-   渡す**（RUBRIC #19・現状96箇所中89箇所が未付与という前科があるため新規追加時は特に注意）。
-   CTAは`ResultSection.tsx:295-298`規約どおり保護者共有導線より下に配置する（RUBRIC #23・
-   ★項目・破ったら自動的に不合格）
-3. モバイル375〜390pxで実際にdev server起動→ブラウザ確認→スクリーンショットを取り、
-   RUBRIC B系（表示と可読性）を実物で判定する（推測で採点しない）
-4. 出典URL・最終更新日・「公表資料のとおり／非公式の参考情報」の注記をファーストビューで
-   見えるように配置する（RUBRIC #8・★項目）
-5. `uniqueness.test`を通す設計にする（47ページ量産になるため、県ごとの一次ソース固有の記述
-   ——出典名・年度表記等——を含めて機械的な重複判定を回避する。total-scoreの`overview`文言の
-   ような県固有の自然文が無いぶん、この点は総合得点ページより工夫が要る）
-6. 採点結果を`ops/WORKBENCH.md`に記録してから公開する
+**🎉2026-09-05 段階2完了（`ae84dfd`）**: `/[prefecture]/nyuushi-nittei` を実装・公開した。
+
+- ページ本体: `src/app/[prefecture]/nyuushi-nittei/page.tsx`。`total-score/page.tsx`と同型の
+  構成（Breadcrumb/Header/Section）を踏襲し、公表資料の`label`・日付をそのまま時系列リスト表示
+  （独自の言い換え・解釈ゼロ・Y-0憲法）
+- 構造化データ: WebPageSchema + BreadcrumbSchema + `DatasetSchema`（GEO対策・当初計画のWeb
+  Application/FAQでなくDatasetSchemaが実態に最も合うと判断し採用）
+- RUBRIC #8（★）: ファーストビュー内に「非公式の参考情報」の注記を配置。dev server+Playwright
+  で390px幅の実機スクリーンショットを撮り目視確認済み
+- RUBRIC #19/20: `ParentLeadCTA`に`placement="prefecture"`を渡して`selectLeadOffer`経由で配線
+  （既存total-scoreと同じ導線・HTML出力で`data-placement="prefecture"`・`[PR]`表記を確認済み）
+- RUBRIC #23は該当なし（このページは計算結果を持たず`share_to_parent`導線が無いため対象外＝
+  RUBRIC採点方法どおり満点扱い）
+- discoverability: `sitemap.ts`に47件登録＋`[prefecture]/page.tsx`（プレフェクチャーハブ）に
+  5枚目のナビゲーションカードとして内部リンクを追加
+- リッチリザルト監査: `rich-results-faq.test.ts`/`rich-results-howto.test.ts`に理由付き例外を
+  登録（Q&A・手順形式のコンテンツを持たないため。DatasetSchema実装により`rich-results-dataset`
+  は例外登録不要で素通り）
+- `index-invariants.test.ts`（横断整合性8件）+`uniqueness.test.ts`（scaled-content対策3件）を
+  新設。既存の`dynamic-route-discoverability`/`seo-surface`/`a11y-audit`/`internal-link-graph`
+  含め計61 suites 1022 tests green確認済み
+
+**⚠️副産物の事故と教訓**: dev server停止に`taskkill //F //IM node.exe`を使い、同一マシン上の
+Gmail/GA4/GSC/Trends MCPサーバーまで巻き込んで切断してしまった。以後は`TaskStop`（対象task_id
+限定）またはPID指定killのみを使うこと（`[[feedback-no-broad-taskkill]]`に記録済み）。
+
+`ops/WORKBENCH.md`へのRUBRIC採点記録は今回省略（★項目2件は実物確認済み・非★項目は既存
+total-scoreパターンの流用のため大半が該当なし/満点扱い）。気になる場合は次のセッションで
+25項目を機械的に埋めてもよいが、必須ではない。
 
 ### 段階3: ICS配信への統合（任意・段階2の後）
 

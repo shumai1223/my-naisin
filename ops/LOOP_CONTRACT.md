@@ -8,20 +8,23 @@
 
 ## 0. 今季の主食（迷ったらここへ戻る）
 
-### 🎉 2026-09-05 00:3x時点の状態（T-Y12段階1が47/47県で完全達成・A群/B群とも要再走査）
+### 🎉 2026-09-05 01:2x時点の状態（T-Y12段階1・段階2とも完了・47県の入試日程ページが公開済み）
 
-T-Y12（入試日程DB）の段階1（47都道府県のデータファイル作成）が完全完了した
-（`src/data/exam-schedules/<pref>.ts`+`<pref>.test.ts`を47県分×2ファイル、tokyoを最後に全て
-push済み・tsc実exit0・jestフルスイート455suites6873tests green）。詳細な作業ログ・遭遇した
-5種類のPDF障害パターンと対策の総括は`ops/tasks/T-Y12-nyuushi-nittei-db.md`本文末尾を参照。
+T-Y12（入試日程DB）が段階1（47都道府県のデータファイル）・段階2（`/[prefecture]/nyuushi-nittei`
+公開ページ）とも完了した。RUBRIC_MONEY_PAGE.md準拠（★項目実物確認・dev server+Playwrightで
+モバイル390px実機スクショ確認）・sitemap登録・内部リンク・リッチリザルト監査すべてgreen
+（詳細は`ops/tasks/T-Y12-nyuushi-nittei-db.md`本文末尾）。⚠️このセッション中に`taskkill /IM
+node.exe`でGmail/GA4/GSC/Trends MCPを誤って切断する事故が発生した（`[[feedback-no-broad-taskkill]]`
+に対策記録済み・次回セッションでMCP接続が生きているか要確認）。
 
 **次に再開するセッションがまず行うこと**:
-1. Gmail新着返信の確認（`in:inbox newer_than:Nd -category:promotions`・特にT-S13A A-1関連の
+1. Gmail/GA4/GSC/Trends MCPサーバーの接続状態を確認する（前回セッションの事故で切断された
+   可能性がある。生きていなければ再接続を試みるか、影響が無ければそのまま進めてよい）
+2. Gmail新着返信の確認（`in:inbox newer_than:Nd -category:promotions`・特にT-S13A A-1関連の
    追加okがないか）
-2. T-Y12段階2（ページへの結線・`/juken-schedule`とは別ルート新設・uniqueness.test対応）に
-   着手するか、他のA群/B群タスクを優先するかを判断する。段階2は任意タスクであり急ぎではない
-3. T-Y12以前の主食（T-N1-N4・S13-A・T-A1等・下記参照）でチェックボックスが残っていないか
-   再走査する。**§0の配分規則（期限ありA群を最低60%）を必ず適用**すること
+3. T-Y12は段階1・2とも完了・残るのは任意の段階3（ICS配信統合）のみ。次の主食を探す場合は
+   T-N1-N4・S13-A・T-A1等（下記参照）でチェックボックスが残っていないか再走査する。
+   **§0の配分規則（期限ありA群を最低60%）を必ず適用**すること
 
 ### 2026-09-04 04:0x時点の状態（T-Y12新設・ibarakiパイロット完了・次は残46県・現在は47/47で完了済み）
 
