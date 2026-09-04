@@ -1,0 +1,15 @@
+/**
+ * T-P1 P1-3 定時制・通信制倍率パイプライン: 都道府県別チャンクを集約するindex。
+ * `src/data/competition-rates/index.ts`と同じ設計（県ごとの静的importでedge runtime対応）。
+ * S1-3で実機確認済みのA分類県から順次追加する（`ops/S1-3-teiji-availability-ledger.md`参照）。
+ */
+import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
+import { TOKYO_TEIJI_COMPETITION_RATES } from './tokyo';
+
+export const TEIJI_COMPETITION_RATE_BY_PREFECTURE: Partial<Record<string, PrefectureCompetitionRateFile>> = {
+  tokyo: TOKYO_TEIJI_COMPETITION_RATES,
+};
+
+export const TEIJI_COMPETITION_RATE_FILES: PrefectureCompetitionRateFile[] = Object.values(
+  TEIJI_COMPETITION_RATE_BY_PREFECTURE
+).filter((f): f is PrefectureCompetitionRateFile => f !== undefined);
