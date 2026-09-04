@@ -121,6 +121,13 @@ GSC 2026-06-02〜08-31（90日）:
       として最も直接的な原因（見出し構成・sitemap登録自体は問題なし=`page-registry.ts`に
       正しく3ページとも登録済み）
 
+**✅2026-09-05・上記で見つけたリンク欠落を即修正**: `futoukou-naishinten-high-school.ts`
+（90日1,857表示・最大露出）と`futoukou-naishinten-reversal.ts`（同95表示）の両記事の
+まとめ節に`/futoukou`ハブへのリンクを1本ずつ追加（過度な誘導文にならないよう「FAQ形式で
+短く確認したい場合は」という控えめな文脈）。P1のガードレール（CTA追加禁止等）には抵触しない
+純粋な内部リンク修正。tsc実exit0・jestフルスイート457suites6891tests green。効果測定は
+`ops/baselines/pathways-cluster-baseline-2026-09-05.md`の判定ルールに準じ90日後に確認する。
+
 ## P1-3 公立の定時制・通信制を公表値だけでデータ化する（★本体・量はここ）
 
 **S1-3で47県の所在分類は済んでいる（A23 / B4 / C20・`ops/S1-3-teiji-availability-ledger.md`）。**
