@@ -525,6 +525,27 @@ Gmail `in:inbox newer_than:2d -category:promotions` で新着返信を確認し�
 10県に到達したら、A-2（配布API実装）着手の判断を👤に仰ぐこと（`⛔実装順序`によりA-1が緑になるまで
 A-2は1行も出さない、という制約が本ファイル冒頭にある）。
 
+## 🎯2026-09-04夜 kill_criteria(10県)到達＝A-1達成。A-2着手は👤判断待ち
+
+Gmail新着返信2件を確認: **nagano**（2026-09-02送信の絞り込み再質問への回答・2026-09-03 23:39着、
+「本県が公表している公立高等学校入学者選抜に係るデータにつきましては、出典を明記していただいた
+上でご利用いただくことについて、差し支えありません」）を`ok`へ更新（9→**10県**でkill_criteria到達）。
+同時に**wakayama**（2026-09-04 19:14着）は「応募状況」データの掲載可否を明示的に拒否
+（「本県の著作物であることから、出典等を明記した場合においても掲載はご遠慮いただいています」・
+被リンクのみ許諾）と判明したため`ng`へ確定（今後okに転じる見込みなしとして除外）。
+
+`redistributableOkPrefectures()`は akita/chiba/gifu/ibaraki/ishikawa/kagawa/mie/nagano/okinawa/tochigi
+の10県を返す。`reliability-license-summary.ts`のPUBLIC_LICENSE_SUMMARY辞書にもnaganoを追記
+（fail-closedのdrift検知テストで発覚・修正済み）。`data-license-ledger.test.ts`にnagano/wakayama個別
+テスト+10県版のリグレッションガードを追加。tsc実exit0・jestフルスイートgreen確認済み。
+
+**本ファイル冒頭の`⛔実装順序`によりA-1が緑になった今、A-2（配布API・CSV/JSON実装）着手の可否は
+👤の判断を仰ぐ。loop側では実装に着手せず、`memory/loop-question-note.md`に判断依頼を記録した。**
+次にこのタスクへ戻るセッションは、まず👤の回答（loop-question-note）を確認してからA-2着手可否を
+判断すること。回答が無ければ他の主食タスク（T-Y12等）を優先し、このタスクは監視のみ続ける
+（Gmail新着で残り37県中さらにokが増える可能性はあるが、kill_criteria自体は既に達成済みのため
+急ぐ理由はない）。
+
 ## 時計（`ops/CLOCK.md`）
 
 | 期限 | 到達点 |

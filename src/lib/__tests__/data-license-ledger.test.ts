@@ -87,7 +87,19 @@ describe('DATA_LICENSE_LEDGER（T-S13A A-1・47県利用条件台帳）', () => 
     expect(DATA_LICENSE_LEDGER.tochigi.verifiedAt).toBe('2026-09-03');
   });
 
-  test('redistributableOkPrefectures()は現時点でakita/chiba/gifu/ibaraki/ishikawa/kagawa/mie/okinawa/tochigiの9県を返す（kill_criteria: 10県未満のため商品化はまだ未達・あと1県）', () => {
+  test('nagano: 長野県教育委員会高校教育課の絞り込み再質問への回答(2026-09-03)により"ok"（応募状況データの掲載を明示的に許諾・被リンクは不可）', () => {
+    expect(DATA_LICENSE_LEDGER.nagano.redistribution).toBe('ok');
+    expect(DATA_LICENSE_LEDGER.nagano.evidence).toContain('出典を明記していただいた上でご利用いただくことについて、差し支えありません');
+    expect(DATA_LICENSE_LEDGER.nagano.verifiedAt).toBe('2026-09-04');
+  });
+
+  test('wakayama: 和歌山県教育庁県立学校教育課の回答(2026-09-04)により"ng"（データ内容の転載は拒否・被リンクのみ許諾）', () => {
+    expect(DATA_LICENSE_LEDGER.wakayama.redistribution).toBe('ng');
+    expect(DATA_LICENSE_LEDGER.wakayama.evidence).toContain('掲載はご遠慮いただいています');
+    expect(DATA_LICENSE_LEDGER.wakayama.verifiedAt).toBe('2026-09-04');
+  });
+
+  test('redistributableOkPrefectures()は現時点でakita/chiba/gifu/ibaraki/ishikawa/kagawa/mie/nagano/okinawa/tochigiの10県を返す（kill_criteria: 10県に到達＝A-1達成・A-2着手可）', () => {
     // ⚠️このテストはA-1進捗を記録するリグレッションガード。次のセッションが県を
     // 追加調査してokが増えたら、この配列を実態に合わせて更新すること（減ることは無いはず）。
     expect(redistributableOkPrefectures().sort()).toEqual([
@@ -98,6 +110,7 @@ describe('DATA_LICENSE_LEDGER（T-S13A A-1・47県利用条件台帳）', () => 
       'ishikawa',
       'kagawa',
       'mie',
+      'nagano',
       'okinawa',
       'tochigi',
     ]);
