@@ -1,6 +1,7 @@
-import { groupCharsIntoRows, extractRowFields, assembleSimpleTableRows, type PdfPageGeometry, type GeneralColumnLayout } from '../parse-table-pdf';
+import { type PdfPageGeometry } from '../parse-table-pdf';
 import { IWATE_COMPETITION_RATES } from '@/data/competition-rates/iwate';
 import iwateR8Geometry from '../__fixtures__/iwate-r8-geometry.json';
+import { parseIwate } from '../parsers/iwate';
 
 /**
  * T-Y11B 段階2-b: iwate(岩手県)のR8倍率パーサ検証テスト。tochigi型（学校名セルの結合が無い・
@@ -23,30 +24,14 @@ import iwateR8Geometry from '../__fixtures__/iwate-r8-geometry.json';
  * 唯一のケースであるにもかかわらず、`normalizeDepartmentText`の半角→全角変換が後から上書き
  * してしまう）。113件中この1件のみが例外で、他112件は学科(学系)列をそのまま採用するだけで
  * 完全一致した。
+ *
+ * ⚠️2026-09-05(T-Y11E E-1): パース本体は`../parsers/iwate.ts`の`parseIwate()`へ純関数として
+ * 抽出済み（レジストリ`registry.ts`から県コード経由で呼べる）。このテストはレジストリ経由でも
+ * 同じ結果が出ることを確認する回帰テストとして継続する。
  */
-const IWATE_LAYOUT: GeneralColumnLayout = {
-  boundaries: [15, 56, 88, 163, 247, 271, 293, 320],
-  // 列: 学校名,大学科(未使用),学科(学系)(=department),定員等の未使用列,募集定員(=quota),
-  //     志願者数(=finalApplicants),志願倍率(=finalRate)
-  roles: { schoolName: 0, department: 2, quota: 4, finalApplicants: 5, finalRate: 6 },
-};
-
-const DEPARTMENT_TEXT_OVERRIDE: Record<string, string> = {
-  '大東|情報ビジネス科': '商業(情報ビジネス科)',
-};
-
 describe('bairitsu-ingest parse-table-pdf 汎用carry-forward組み立て (iwate R8 実データ検証・倍率印字済み)', () => {
   const geometries = iwateR8Geometry as PdfPageGeometry[];
-  const allRowFields = geometries.flatMap((geom) =>
-    groupCharsIntoRows(geom.chars, 3.0).map((row) => extractRowFields(row.chars, IWATE_LAYOUT))
-  );
-
-  const parsed = assembleSimpleTableRows(allRowFields, {
-    excludeRow: (schoolName, department) => (schoolName + department).includes('合計'),
-  }).map((r) => {
-    const override = DEPARTMENT_TEXT_OVERRIDE[`${r.schoolName}|${r.department}`];
-    return override ? { ...r, department: override } : r;
-  });
+  const parsed = parseIwate(geometries);
 
   const expectedR8Records = IWATE_COMPETITION_RATES.records.filter((r) => r.fiscalYear === undefined);
 
