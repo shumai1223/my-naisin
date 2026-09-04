@@ -133,12 +133,14 @@ GSC 2026-06-02〜08-31（90日）:
 **S1-3で47県の所在分類は済んでいる（A23 / B4 / C20・`ops/S1-3-teiji-availability-ledger.md`）。**
 
 - [ ] A分類23県から着手する。**倍率・定員・学科は公表値をそのまま**（T-Y11Bと同じ規律）
-      → **進行中（2/23県・tokyo/miyagi完了・2026-09-05）**。`src/data/teiji-competition-rates/`を
-      新設（既存`competition-rate.ts`の型`PrefectureCompetitionRateFile`をそのまま再利用・
-      新しい型設計は不要と判明）。tokyoは16レコード(定時制単位制7+チャレンジスクール等8+
-      在京外国人1)、miyagiは20レコード(12校)を収録しいずれも公式「計」行と完全一致
-      （`__tests__/tokyo.test.ts`7テスト・`__tests__/miyagi.test.ts`5テストgreen）。
-      残り21県（tokushima含む）は次回以降。取り込み順はS1-3の実機確認順に合わせる予定
+      → **進行中（3/23県・tokyo/miyagi/tokushima完了・2026-09-05）**。
+      `src/data/teiji-competition-rates/`を新設（既存`competition-rate.ts`の型
+      `PrefectureCompetitionRateFile`をそのまま再利用・新しい型設計は不要と判明）。
+      tokyoは16レコード(定時制単位制7+チャレンジスクール等8+在京外国人1)、miyagiは20レコード
+      (12校)、tokushimaは9レコード(6校)を収録しいずれも公式「計」行と完全一致
+      （`__tests__/tokyo.test.ts`7テスト・`__tests__/miyagi.test.ts`5テスト・
+      `__tests__/tokushima.test.ts`5テストgreen）。残り20県は次回以降。取り込み順はS1-3の
+      実機確認順に合わせる予定
 - [ ] 通信制課程を置く公立高校も同じ形で拾う
 - [ ] ⚠️ **1データ点1出典。取れない県は「取れない」と書く**（Y-0）
 - [ ] ⚠️ **47県を埋めるために推測で水増ししない。** 20県で止まるならそれが正しい姿
