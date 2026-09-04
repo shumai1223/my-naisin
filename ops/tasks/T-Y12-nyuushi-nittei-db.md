@@ -406,10 +406,37 @@ uniqueness.test対応（47ページ量産の薄いコンテンツ罠回避）を
 
 ### 段階2: ページへの結線（46県揃うまで待たない・件数が増えるたびに順次追加してよい）
 
-- [ ] `/juken-schedule` または新規 `/[prefecture]/nyuushi-nittei` のどちらに載せるかを検討する
-      （既存`/juken-schedule`は月レベルの全国共通ページなので、県別の確定日程は別ルートが自然）
-- [ ] 表示は「公表資料のとおり」を徹底し、独自の解釈・言い換えをしない
-- [ ] uniqueness.testを通す設計にする（47ページ量産になるため薄いページ量産の罠に注意）
+**2026-09-05 registry実装完了**: `src/data/exam-schedules/index.ts`
+（`EXAM_SCHEDULE_BY_PREFECTURE`・47県静的import・competition-rates/index.tsと同型）+
+`__tests__/index-invariants.test.ts`（横断不変条件8件・47県/417イベントを固定）をcommit済み
+（`a7fd9bc`）。これでページ実装に必要なデータ取得APIは揃った。
+
+**ルート方針（決定済み）**: 新規 `/[prefecture]/nyuushi-nittei`（既存の`[prefecture]/total-score`・
+`naishin`・`naishin-omomi`・`reverse`と同じdynamic route配下に追加）。`generateStaticParams`で
+`EXAM_SCHEDULE_PREFECTURE_CODES`（47県）を返せば1回のビルドで全県分がSSGされる——total-scoreが
+既に39県を1ビルドで static generate している前例があるため、**「新規公開は1波5県・2〜3日おき」
+（LOOP_CONTRACT §4）は個別の新規ページ乱造を想定した制約であり、確立済みdynamic routeへの
+サブルート追加はこの制約の対象外と判断する**（total-score/naishin-omomi/reverseがいずれも
+一括SSGで運用されてきた実績と整合）。既存の`/juken-schedule`（全国共通・月レベルの目安）はこの
+新ルートへ内部リンクする形で共存させ、両者の役割は重複させない。
+
+**⚠️次に着手するセッションが必須で行うこと（RUBRIC_MONEY_PAGE.md・20/25以上・★項目は1つでも
+落としたら公開不可）**:
+1. ページ本体は`total-score/page.tsx`のBreadcrumbSchema/WebApplicationSchema/構成パターンを
+   踏襲し、**公表資料の項目名(`label`)・日付をそのまま表示**（独自の言い換え・解釈をしない＝
+   Y-0憲法）。イベントを時系列で並べたシンプルなタイムライン/テーブル表示を基本形とする
+2. 収益CTAを載せる場合は`ParentLeadCTA`を既存ページと同じ形で流用し、**placement引数を必ず
+   渡す**（RUBRIC #19・現状96箇所中89箇所が未付与という前科があるため新規追加時は特に注意）。
+   CTAは`ResultSection.tsx:295-298`規約どおり保護者共有導線より下に配置する（RUBRIC #23・
+   ★項目・破ったら自動的に不合格）
+3. モバイル375〜390pxで実際にdev server起動→ブラウザ確認→スクリーンショットを取り、
+   RUBRIC B系（表示と可読性）を実物で判定する（推測で採点しない）
+4. 出典URL・最終更新日・「公表資料のとおり／非公式の参考情報」の注記をファーストビューで
+   見えるように配置する（RUBRIC #8・★項目）
+5. `uniqueness.test`を通す設計にする（47ページ量産になるため、県ごとの一次ソース固有の記述
+   ——出典名・年度表記等——を含めて機械的な重複判定を回避する。total-scoreの`overview`文言の
+   ような県固有の自然文が無いぶん、この点は総合得点ページより工夫が要る）
+6. 採点結果を`ops/WORKBENCH.md`に記録してから公開する
 
 ### 段階3: ICS配信への統合（任意・段階2の後）
 
