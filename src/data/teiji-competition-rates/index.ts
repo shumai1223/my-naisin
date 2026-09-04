@@ -9,6 +9,8 @@ import { MIYAGI_TEIJI_COMPETITION_RATES } from './miyagi';
 import { TOKUSHIMA_TEIJI_COMPETITION_RATES } from './tokushima';
 import { NAGANO_TEIJI_COMPETITION_RATES } from './nagano';
 import { OKINAWA_TEIJI_COMPETITION_RATES } from './okinawa';
+import { NIIGATA_TEIJI_COMPETITION_RATES } from './niigata';
+import { SHIMANE_TEIJI_COMPETITION_RATES } from './shimane';
 
 export const TEIJI_COMPETITION_RATE_BY_PREFECTURE: Partial<Record<string, PrefectureCompetitionRateFile>> = {
   tokyo: TOKYO_TEIJI_COMPETITION_RATES,
@@ -16,6 +18,8 @@ export const TEIJI_COMPETITION_RATE_BY_PREFECTURE: Partial<Record<string, Prefec
   tokushima: TOKUSHIMA_TEIJI_COMPETITION_RATES,
   nagano: NAGANO_TEIJI_COMPETITION_RATES,
   okinawa: OKINAWA_TEIJI_COMPETITION_RATES,
+  niigata: NIIGATA_TEIJI_COMPETITION_RATES,
+  shimane: SHIMANE_TEIJI_COMPETITION_RATES,
 };
 
 export const TEIJI_COMPETITION_RATE_FILES: PrefectureCompetitionRateFile[] = Object.values(
