@@ -88,10 +88,13 @@ export const OKAYAMA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
   prefectureCode: 'okayama',
   sources: [
     {
-      url: 'https://www.pref.okayama.jp/uploaded/life/1044733_10111198_misc.pdf',
+      // ⚠️2026-09-05判明: 旧URL(1044733_10111198_misc.pdf)は404化していた。ハブページ
+      // （https://www.pref.okayama.jp/site/16/913706.html）から新URLを発見し更新した
+      // （T-P1 P1-3の定時制データ収集時に発見・`teiji-competition-rates/okayama.ts`参照）。
+      url: 'https://www.pref.okayama.jp/uploaded/life/1054600_10219046_misc.pdf',
       docTitle: '岡山県教育委員会 令和8年度岡山県公立高等学校一般入学者選抜志願者数について',
       fiscalYear: '令和8年度（2026年度）',
-      fetchedAt: '2026-07-25',
+      fetchedAt: '2026-09-05',
     },
     {
       url: 'https://www.pref.okayama.jp/uploaded/life/1050426_10172885_misc.pdf',
