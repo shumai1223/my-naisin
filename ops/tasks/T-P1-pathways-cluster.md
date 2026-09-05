@@ -132,30 +132,34 @@ GSC 2026-06-02〜08-31（90日）:
 
 **S1-3で47県の所在分類は済んでいる（A23 / B4 / C20・`ops/S1-3-teiji-availability-ledger.md`）。**
 
-- [ ] A分類23県から着手する。**倍率・定員・学科は公表値をそのまま**（T-Y11Bと同じ規律）
-      → **A分類23県中22県が完了・hokkaidoのみ石狩地区で継続中（2026-09-06）**。
+- [x] A分類23県から着手する。**倍率・定員・学科は公表値をそのまま**（T-Y11Bと同じ規律）
+      → **✅2026-09-06 A分類23県すべて完了**（21県完全収録+hokkaido全15地域区分実機確認済み
+      [うち13区分にデータ・檜山/根室は定時制なしと確定]+hyogo/yamaguchiはブロック中で対象外
+      整理済み＝23県すべて「収録済み」か「収録不可と確定」のいずれかに到達）。
       `src/data/teiji-competition-rates/`を新設（既存`competition-rate.ts`の型
-      `PrefectureCompetitionRateFile`をそのまま再利用）。**完了22県**: tokyo/miyagi/
+      `PrefectureCompetitionRateFile`をそのまま再利用）。**完了21県**: tokyo/miyagi/
       tokushima/nagano/okinawa/niigata/shimane/okayama/shizuoka/tottori/yamanashi/chiba/
-      gifu/gunma/hiroshima/kanagawa/kumamoto/kyoto/kagoshima/nagasaki（各県のレコード数・
-      quota定義・自己検算の詳細は`docs/worklog/`の該当日付エントリと各`<pref>.ts`のヘッダ
-      コメントを参照。全県で公式「計」行または学区/セクション小計と完全一致済み）。
-      **ブロック中2県**: hyogo（robots.txt Disallow）・yamaguchi（既存ソースに定時制
-      セクション無し）（詳細は`ops/S1-3-teiji-availability-ledger.md`）。
-      **hokkaidoのみ継続中**（全日制hokkaido.tsが数える15地域区分中、石狩[定時制13+
-      有朋単位制2]+後志[4]+胆振[3]+日高[1]+渡島[3]+上川[7]+留萌[1]+宗谷[1]+オホーツク[3]+
-      十勝[1]+釧路[2]=計41レコードを収録・coverage='partial'。**檜山は定時制セクション自体が
-      存在しないことを実機確認済み**（対象外として整理）。残り3区分（空知・根室・札幌市）は
-      次回以降。hokkaido.test.tsをDISTRICTS配列+it.eachの
-      データ駆動方式に再構成し区分追加のたびの重複コードを解消）。
-      **横断的な教訓**: ①gifu/hiroshimaで初めてcoverage='partial'/officialSubtotals空の
-      パターンを確立（公式合計が無い場合は自己集計値をヘッダ+テストに明記）②hiroshimaで
-      「1学級」等の定員非数値表記は推測せずpendingDepartmentsへ③gunmaで「タイトルに定時制の
-      言及が無くても中身にセクションが存在することがある」④yamanashiで倍率算定時の帰国生徒等
-      控除に注意⑤kanagawa/kyotoは複数セクション+多段階自己検算という最も充実したソース
-      （神奈川県は4セクション・京都府は3段階検算）⑥nagasakiは「Ⅰ期選抜」という特定選抜区分
-      のみの数値である点に要注意（本選抜全体ではない）。
-      計21県117テストgreen（うちhokkaidoは6テスト・partial）
+      gifu/gunma/hiroshima/kanagawa/kumamoto/kyoto/kagoshima/nagasaki+hokkaido（各県の
+      レコード数・quota定義・自己検算の詳細は`docs/worklog/`の該当日付エントリと各
+      `<pref>.ts`のヘッダコメントを参照。全県で公式「計」行・学区/セクション小計・または
+      自己集計値のいずれかで検算済み）。**ブロック中2県**: hyogo（robots.txt Disallow）・
+      yamaguchi（既存ソースに定時制セクション無し）（詳細は`ops/S1-3-teiji-availability-ledger.md`）。
+      **hokkaidoは15地域区分すべてを6セッションに分けて実機確認**（空知[2]+石狩[定時制13+
+      有朋単位制2]+札幌市[3・市立札幌大通のみ]+後志[4]+胆振[3]+日高[1]+渡島[3]+上川[7]+
+      留萌[1]+宗谷[1]+オホーツク[3]+十勝[1]+釧路[2]=計46レコード。檜山・根室の2区分は
+      定時制セクション自体が存在しないことを確認しcoverage='complete'として整理）。
+      hokkaido.test.tsはDISTRICTS配列+it.eachのデータ駆動方式（区分追加のたびに1エントリ
+      足すだけで済む設計・最終的に15地域区分を1本のテストファイルで管理）。
+      **横断的な教訓**: ①gifu/hiroshima/hokkaidoでcoverage='partial'または空のセクションを
+      持つ場合、officialSubtotalsが無ければ自己集計値をヘッダ+テストに明記するパターンを
+      確立②hiroshimaで「1学級」等の定員非数値表記は推測せずpendingDepartmentsへ③gunmaで
+      「タイトルに定時制の言及が無くても中身にセクションが存在することがある」④yamanashiで
+      倍率算定時の帰国生徒等控除に注意⑤kanagawa/kyotoは複数セクション+多段階自己検算という
+      最も充実したソース（神奈川県は4セクション・京都府は3段階検算）⑥nagasakiは「Ⅰ期選抜」
+      という特定選抜区分のみの数値である点に要注意（本選抜全体ではない）⑦檜山・根室のように
+      「セクション自体が存在しない」ことが判明した場合は、推測ゼロを維持しつつ
+      status='complete'として明示的に確定させる（hokkaido・okinawaで確立したパターン）。
+      計21県（ファイル）130テストgreen
 - [ ] 通信制課程を置く公立高校も同じ形で拾う → **gifuで初着手(2校2レコード)。他の県も定時制
       データ収集時に同一PDF内に通信制セクションがあれば併せて拾う運用に変更（2026-09-05）**
 - [ ] ⚠️ **1データ点1出典。取れない県は「取れない」と書く**（Y-0）

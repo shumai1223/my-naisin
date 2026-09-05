@@ -2,12 +2,13 @@ import { sumRecords } from '@/lib/competition-rate';
 import { HOKKAIDO_TEIJI_COMPETITION_RATES } from '../hokkaido';
 
 /**
- * T-P1 P1-3 DoD検証（北海道・coverage='partial'）: 北海道は15地域区分に定時制セクションが
- * 分散しており、ページ内に公式「計」行が無いため、地域区分ごとの機械集計値が自己検算どおり
- * であることを検証する。データ駆動（it.each）にして、区分追加のたびにDISTRICTS配列へ1行
- * 足すだけで済むようにしてある。
+ * T-P1 P1-3 DoD検証（北海道・15地域区分すべて実機確認済み）: 北海道は定時制セクションが
+ * 15地域区分に分散しており、ページ内に公式「計」行が無いため、地域区分ごとの機械集計値が
+ * 自己検算どおりであることを検証する。データ駆動（it.each）にして、区分追加のたびに
+ * DISTRICTS配列へ1行足すだけで済むようにしてある。檜山・根室の2区分は定時制セクション自体が
+ * 存在しないことを実機確認済みのため、DISTRICTSには含めない（レコードが無いため）。
  */
-describe('北海道 定時制・有朋単位制 倍率パイプライン（T-P1 P1-3・partial）', () => {
+describe('北海道 定時制・有朋単位制 倍率パイプライン（T-P1 P1-3・全15地域区分確認済み）', () => {
   const { records, coverage } = HOKKAIDO_TEIJI_COMPETITION_RATES;
 
   const DISTRICTS: Array<{
@@ -18,6 +19,14 @@ describe('北海道 定時制・有朋単位制 倍率パイプライン（T-P1 
     quota: number;
     applicants: number;
   }> = [
+    {
+      name: '空知・定時制',
+      match: (r) => ['岩見沢東', '滝川'].includes(r.schoolName),
+      recordCount: 2,
+      schoolCount: 2,
+      quota: 80,
+      applicants: 14,
+    },
     {
       name: '石狩・定時制',
       match: (r) =>
@@ -34,6 +43,14 @@ describe('北海道 定時制・有朋単位制 倍率パイプライン（T-P1 
       schoolCount: 1,
       quota: 160,
       applicants: 36,
+    },
+    {
+      name: '札幌市・定時制',
+      match: (r) => r.schoolName === '市立札幌大通',
+      recordCount: 3,
+      schoolCount: 1,
+      quota: 290,
+      applicants: 301,
     },
     {
       name: '後志・定時制',
@@ -117,9 +134,14 @@ describe('北海道 定時制・有朋単位制 倍率パイプライン（T-P1 
     },
   ];
 
-  it('coverage.statusはpartial（15地域区分中、DISTRICTSに列挙した区分のみ着手のため）', () => {
-    expect(coverage.status).toBe('partial');
-    expect(coverage.pendingDepartments.length).toBe(3);
+  it('coverage.statusはcomplete（15地域区分すべて実機確認済み・pendingDepartmentsは空）', () => {
+    expect(coverage.status).toBe('complete');
+    expect(coverage.pendingDepartments.length).toBe(0);
+  });
+
+  it('檜山・根室は定時制セクションなしと確認済みであることがincludedDepartmentsに明記されている', () => {
+    expect(coverage.includedDepartments.some((d) => d.includes('檜山') && d.includes('なし'))).toBe(true);
+    expect(coverage.includedDepartments.some((d) => d.includes('根室') && d.includes('なし'))).toBe(true);
   });
 
   it('全レコードがDISTRICTSのいずれか1つにのみ一致する（重複・漏れが無いことの検証）', () => {
