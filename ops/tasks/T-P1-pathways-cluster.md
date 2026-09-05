@@ -143,9 +143,10 @@ GSC 2026-06-02〜08-31（90日）:
       **ブロック中2県**: hyogo（robots.txt Disallow）・yamaguchi（既存ソースに定時制
       セクション無し）（詳細は`ops/S1-3-teiji-availability-ledger.md`）。
       **hokkaidoのみ継続中**（全日制hokkaido.tsが数える15地域区分中、石狩[定時制13+
-      有朋単位制2]+後志[4]+胆振[3]+日高[1]+渡島[3]+上川[7]+留萌[1]+宗谷[1]=計35レコードを収録・
-      coverage='partial'。**檜山は定時制セクション自体が存在しないことを実機確認済み**
-      （対象外として整理）。残り6区分は次回以降。hokkaido.test.tsをDISTRICTS配列+it.eachの
+      有朋単位制2]+後志[4]+胆振[3]+日高[1]+渡島[3]+上川[7]+留萌[1]+宗谷[1]+オホーツク[3]+
+      十勝[1]+釧路[2]=計41レコードを収録・coverage='partial'。**檜山は定時制セクション自体が
+      存在しないことを実機確認済み**（対象外として整理）。残り3区分（空知・根室・札幌市）は
+      次回以降。hokkaido.test.tsをDISTRICTS配列+it.eachの
       データ駆動方式に再構成し区分追加のたびの重複コードを解消）。
       **横断的な教訓**: ①gifu/hiroshimaで初めてcoverage='partial'/officialSubtotals空の
       パターンを確立（公式合計が無い場合は自己集計値をヘッダ+テストに明記）②hiroshimaで

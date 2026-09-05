@@ -91,11 +91,35 @@ describe('北海道 定時制・有朋単位制 倍率パイプライン（T-P1 
       quota: 40,
       applicants: 14,
     },
+    {
+      name: 'オホーツク・定時制',
+      match: (r) => ['北見北斗', '網走南ケ丘', '遠軽'].includes(r.schoolName),
+      recordCount: 3,
+      schoolCount: 3,
+      quota: 120,
+      applicants: 23,
+    },
+    {
+      name: '十勝・定時制',
+      match: (r) => r.schoolName === '帯広柏葉',
+      recordCount: 1,
+      schoolCount: 1,
+      quota: 40,
+      applicants: 26,
+    },
+    {
+      name: '釧路・定時制',
+      match: (r) => ['釧路湖陵', '釧路工業'].includes(r.schoolName),
+      recordCount: 2,
+      schoolCount: 2,
+      quota: 80,
+      applicants: 30,
+    },
   ];
 
   it('coverage.statusはpartial（15地域区分中、DISTRICTSに列挙した区分のみ着手のため）', () => {
     expect(coverage.status).toBe('partial');
-    expect(coverage.pendingDepartments.length).toBe(6);
+    expect(coverage.pendingDepartments.length).toBe(3);
   });
 
   it('全レコードがDISTRICTSのいずれか1つにのみ一致する（重複・漏れが無いことの検証）', () => {
