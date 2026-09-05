@@ -133,9 +133,9 @@ GSC 2026-06-02〜08-31（90日）:
 **S1-3で47県の所在分類は済んでいる（A23 / B4 / C20・`ops/S1-3-teiji-availability-ledger.md`）。**
 
 - [ ] A分類23県から着手する。**倍率・定員・学科は公表値をそのまま**（T-Y11Bと同じ規律）
-      → **進行中（18/23県完了+1県着手中・tokyo/miyagi/tokushima/nagano/okinawa/niigata/shimane/
-      okayama/shizuoka/tottori/yamanashi/chiba/gifu/gunma/hiroshima/kanagawa/kumamoto/kyoto完了・
-      hokkaidoは石狩地区のみで継続中・2026-09-05）**。
+      → **進行中（19/23県完了+1県着手中・tokyo/miyagi/tokushima/nagano/okinawa/niigata/shimane/
+      okayama/shizuoka/tottori/yamanashi/chiba/gifu/gunma/hiroshima/kanagawa/kumamoto/kyoto/
+      kagoshima完了・hokkaidoは石狩地区のみで継続中・2026-09-05）**。
       `src/data/teiji-competition-rates/`を新設（既存`competition-rate.ts`の型
       `PrefectureCompetitionRateFile`をそのまま再利用・新しい型設計は不要と判明）。
       tokyo16レコード・miyagi20レコード(12校)・tokushima9レコード(6校)・nagano22レコード
@@ -177,10 +177,13 @@ GSC 2026-06-02〜08-31（90日）:
       志願者数(D)・finalRate=印字済み倍率(D/C)。3段階の自己検算（昼間定時制計106/0/0.00・
       夜間定時制計349/85/0.24・定時制計455/85/0.19）すべてと完全一致（「参考:昨年度」の
       並列比較列もあり47県中最も充実したソースの一つ）。
-      計19県106テストgreen。**hyogo（robots.txt Disallow）・yamaguchi（既存ソースに定時制
+      **kagoshimaは2校3レコード**（47県中最も小規模。鹿児島学区[開陽・普通/オフィス情報]+
+      大島学区[奄美・商業]）。quota=学力検査定員・finalApplicants=最終出願者数・finalRate=
+      印字済み倍率(本年)をそのまま転記。学区小計2件+定時制合計（76/38/0.50）すべてと完全一致。
+      計20県112テストgreen。**hyogo（robots.txt Disallow）・yamaguchi（既存ソースに定時制
       セクション無し）の2県はブロック中**（詳細は`ops/S1-3-teiji-availability-ledger.md`）。
-      **hokkaidoは継続中**（残り14地域区分）。残り2県（kagoshima/
-      nagasaki・いずれもS1-3で存在確認済みだが実データ未収集）は次回以降
+      **hokkaidoは継続中**（残り14地域区分）。残り1県（nagasaki・S1-3で存在確認済みだが
+      実データ未収集）は次回以降
 - [ ] 通信制課程を置く公立高校も同じ形で拾う → **gifuで初着手(2校2レコード)。他の県も定時制
       データ収集時に同一PDF内に通信制セクションがあれば併せて拾う運用に変更（2026-09-05）**
 - [ ] ⚠️ **1データ点1出典。取れない県は「取れない」と書く**（Y-0）
