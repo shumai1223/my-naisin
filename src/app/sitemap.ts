@@ -10,6 +10,7 @@ import { NAISHIN_OMOMI_CODES } from '@/lib/naishin-omomi-content';
 import { REPORT_2026_DIGEST_CODES } from '@/lib/report-2026-digest-content';
 import { getPrefectureSchoolPageData, INDEXED_SCHOOL_PAGE_PREFECTURE_CODES } from '@/lib/school-page-lookup';
 import { EXAM_SCHEDULE_PREFECTURE_CODES } from '@/data/exam-schedules';
+import { ALTERNATIVE_TRACK_PREFECTURE_CODES } from '@/lib/teiji-tsushin-options';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://my-naishin.com';
@@ -127,6 +128,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
+  // 12. 都道府県別 定時制・通信制一覧（T-P1 P1-4・データがある県のみgenerateStaticParamsに従属）
+  const teijiTsushinPages = ALTERNATIVE_TRACK_PREFECTURE_CODES.map((code) => ({
+    url: `${baseUrl}/${code}/teiji-tsushin`,
+    lastModified,
+    changeFrequency: 'monthly' as const,
+    priority: 0.6,
+  }));
+
   return [
     ...staticPages,
     ...prefectureTopPages,
@@ -140,5 +149,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...report2026DigestPages,
     ...schoolPages,
     ...nyuushiNitteiPages,
+    ...teijiTsushinPages,
   ];
 }

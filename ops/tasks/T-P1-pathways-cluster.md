@@ -180,11 +180,20 @@ GSC 2026-06-02〜08-31（90日）:
       分類する純粋関数（推測なし・Y-0捏造ゼロ）。テスト6件green（データ無し県はnull・
       ALTERNATIVE_TRACK_PREFECTURE_CODESの整合性・tokyo/gifu/hokkaidoでの分類確認・
       元データとの1対1対応確認）（2026-09-06）**
-- [ ] 内申点の計算結果が低かったときに、**制度上どういう選択肢が公表されているか**へ渡す面を作る
+- [x] 内申点の計算結果が低かったときに、**制度上どういう選択肢が公表されているか**へ渡す面を作る
       （定時制／通信制／単位制／チャレンジスクール等・**すべて公表制度の説明として**）→
-      次回セッションでページ本体（`/[prefecture]/teiji-tsushin`想定・nyuushi-nitteiと同じ
-      SSG設計）を実装する。generateStaticParamsは`ALTERNATIVE_TRACK_PREFECTURE_CODES`を使い、
-      データが無い県（hyogo/yamaguchi含む25県）はページを生成しない（薄いページの量産を回避）
+      **✅2026-09-06 `/[prefecture]/teiji-tsushin`を実装完了**（nyuushi-nitteiと同じSSG設計。
+      generateStaticParamsは`ALTERNATIVE_TRACK_PREFECTURE_CODES`を使い、データが無い県
+      [hyogo/yamaguchi含む25県]はページ自体を生成しない＝薄いページの量産を回避）。
+      定時制/通信制それぞれの表（学校名/学科/募集人員/出願者数/倍率）をcoverage.status===
+      'partial'の場合は注記も表示。「あなたはここへ行くべき」は書かず、卒業すれば全日制と
+      同じ高卒資格が得られる公表制度としてのみ説明。リッチリザルト監査（rich-results-faq/
+      rich-results-howto）はDatasetSchemaで対応済みとして例外登録（nyuushi-nitteiと同型）。
+      発見可能性監査（dynamic-route-discoverability）はsitemap.tsへの登録＋
+      `/[prefecture]`ハブページと`/[prefecture]/naishin`（次の一手セクション）への条件付き
+      内部リンク（データがある県のみ）で対応。dev server実機確認済み: tokyo(200・定時制表示)・
+      hokkaido(200・46件全表示)・hyogo(404・データ無しで正しく生成されない)・hub/naishinページ
+      双方にリンク表示を確認。tsc実exit0・jestフルスイート480suites7042tests green
 - [ ] ⚠️ **「あなたはここへ行くべき」と書かない。** 書くのは「制度としてこういう枠がある」だけ
 - [ ] ⚠️ **不安を煽らない。** 相手は困っている中学生と保護者。**煽り・誘導・断定を書かない**
 - [ ] 出席日数・調査書の扱いは**文科省と各教委の公表資料のみ**を根拠にする

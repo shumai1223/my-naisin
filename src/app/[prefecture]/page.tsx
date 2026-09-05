@@ -14,11 +14,13 @@ import {
   ShieldCheck,
   Calendar,
   MapPin,
-  Sparkles
+  Sparkles,
+  GraduationCap
 } from 'lucide-react';
 
 import { getPrefectureByCode, PREFECTURES } from '@/lib/prefectures';
 import { getPrefectureGuide, PREFECTURES_WITH_GUIDE } from '@/lib/prefecture-guides';
+import { ALTERNATIVE_TRACK_PREFECTURE_CODES } from '@/lib/teiji-tsushin-options';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { BlogRelatedArticles } from '@/components/BlogRelatedArticles';
 import { PrefecturePillarLinks } from '@/components/PrefecturePillarLinks';
@@ -211,6 +213,18 @@ export default async function PrefecturePage({ params }: PrefecturePageProps) {
                     入試日程を確認する <ArrowRight className="ml-1 h-4 w-4" />
                   </div>
                 </Link>
+                {ALTERNATIVE_TRACK_PREFECTURE_CODES.includes(code) && (
+                  <Link href={`/${code}/teiji-tsushin`} className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:border-teal-300 hover:shadow-md">
+                    <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-teal-100 text-teal-600 transition-colors group-hover:bg-teal-600 group-hover:text-white">
+                      <GraduationCap className="h-6 w-6" />
+                    </div>
+                    <h3 className="text-xl font-bold text-slate-800">{pref.name}の定時制・通信制高校一覧</h3>
+                    <p className="mt-2 text-sm text-slate-500">全日制以外に公表されている選抜区分を、募集人員・出願者数・倍率とあわせて掲載。</p>
+                    <div className="mt-4 flex items-center font-bold text-teal-600 group-hover:underline">
+                      一覧を確認する <ArrowRight className="ml-1 h-4 w-4" />
+                    </div>
+                  </Link>
+                )}
               </section>
 
               {/* 保護者リード（県×面エンジンで自動解決：関東=森塾/関西=キャンパス/他=全国オンライン塾。旧Z会/サプリ¥1.5-28.8/clickは撤去） */}
