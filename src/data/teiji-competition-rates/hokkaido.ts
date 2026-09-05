@@ -7,7 +7,8 @@ import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
  * （既存の全日制`src/data/competition-rates/hokkaido.ts`と同一PDF`05_p9-p22.pdf`・全14頁の
  * うち①3頁目＝資料印字ページ「11」＝石狩地区、②5頁目＝資料印字ページ「13」＝後志地区、
  * ③6頁目＝資料印字ページ「14」＝胆振地区、④7頁目＝資料印字ページ「15」＝日高地区、
- * ⑤8頁目＝資料印字ページ「16」＝渡島地区、⑥10頁目＝資料印字ページ「18」＝上川地区・留萌地区）。
+ * ⑤8頁目＝資料印字ページ「16」＝渡島地区、⑥10頁目＝資料印字ページ「18」＝上川地区・留萌地区、
+ * ⑦11頁目＝資料印字ページ「19」＝宗谷地区）。
  * 石狩地区ページには全日制「専門教育を主とする学科及び総合学科」表の直後に「（石狩）定時制」
  * 表、さらにその下に「（石狩）有朋単位制」表（独立した通信制単位制校）が続けて掲載されている。
  * 後志・胆振・日高・渡島・上川・留萌地区ページには全日制表群の直後にそれぞれの「定時制」表が
@@ -19,9 +20,9 @@ import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
  * 定時制セクションが各管内ページに存在するかどうかは1管内ずつ実機確認が必要**（全日制の
  * hokkaido.tsも「掛-1第1〜13弾」の14回に分けて全管内を完走した前例と同型）。今回は石狩地区
  * （3頁目）・後志地区（5頁目）・胆振地区（6頁目）・日高地区（7頁目）・渡島地区（8頁目）・
- * 上川地区・留萌地区（10頁目）のみ着手し、残り8区分（全日制hokkaido.tsが数える15地域区分-
- * 石狩-後志-胆振-日高-渡島-上川-留萌、檜山は定時制なしと確認済みのため対象外）は次回以降に
- * 持ち越す。
+ * 上川地区・留萌地区（10頁目）・宗谷地区（11頁目）のみ着手し、残り6区分（全日制hokkaido.ts
+ * が数える15地域区分-石狩-後志-胆振-日高-渡島-上川-留萌-宗谷、檜山は定時制なしと確認済みの
+ * ため対象外）は次回以降に持ち越す。
  *
  * ⚠️quota/finalApplicants/finalRateの定義は既存の全日制hokkaido.tsと同じ規律を踏襲した:
  * quota=募集人員、finalApplicants=出願者数（第1次）、finalRate=finalApplicants/quotaを
@@ -33,10 +34,10 @@ import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
  * quota520・applicants184、石狩有朋単位制quota160・applicants36、後志定時制quota160・
  * applicants43、胆振定時制quota120・applicants41、日高定時制quota40・applicants15、
  * 渡島定時制quota120・applicants61、上川定時制quota280・applicants82、留萌定時制quota40・
- * applicants1）。
+ * applicants1、宗谷定時制quota40・applicants14）。
  *
  * ToUnicode欠落でpdftotext不可（数値は`pdftotext -layout`で抽出できるが行の対応が崩れるため
- * 不採用）・`pdftoppm 150〜180dpi`のビジョン解析で全34レコードを判読できた。
+ * 不採用）・`pdftoppm 150〜180dpi`のビジョン解析で全35レコードを判読できた。
  */
 
 export const HOKKAIDO_TEIJI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
@@ -45,7 +46,7 @@ export const HOKKAIDO_TEIJI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     {
       url: 'https://www.dokyoi.pref.hokkaido.lg.jp/fs/1/3/1/7/8/5/5/0/_/05_p9-p22.pdf',
       docTitle:
-        '北海道教育委員会 R8入学者選抜状況報告書「§3 学校別受検者数及び合格者数」（石狩地区・定時制／有朋単位制[資料印字ページ11]、後志地区・定時制[資料印字ページ13]、胆振地区・定時制[資料印字ページ14]、日高地区・定時制[資料印字ページ15]、渡島地区・定時制[資料印字ページ16]、上川地区・定時制／留萌地区・定時制[資料印字ページ18]）',
+        '北海道教育委員会 R8入学者選抜状況報告書「§3 学校別受検者数及び合格者数」（石狩地区・定時制／有朋単位制[資料印字ページ11]、後志地区・定時制[資料印字ページ13]、胆振地区・定時制[資料印字ページ14]、日高地区・定時制[資料印字ページ15]、渡島地区・定時制[資料印字ページ16]、上川地区・定時制／留萌地区・定時制[資料印字ページ18]、宗谷地区・定時制[資料印字ページ19]）',
       fiscalYear: '令和8年度（2026年度）',
       fetchedAt: '2026-09-06',
     },
@@ -61,18 +62,18 @@ export const HOKKAIDO_TEIJI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '渡島地区・定時制',
       '上川地区・定時制',
       '留萌地区・定時制',
+      '宗谷地区・定時制',
       '檜山地区・定時制なし（実機確認済み・データ無し）',
     ],
     pendingDepartments: [
       '空知地区・定時制（未確認・次回着手）',
-      '宗谷地区・定時制（未確認・次回着手）',
       'オホーツク地区・定時制（未確認・次回着手）',
       '十勝地区・定時制（未確認・次回着手）',
       '釧路地区・定時制（未確認・次回着手）',
       '根室地区・定時制（未確認・次回着手）',
       '札幌市・定時制（市立高校。未確認・次回着手）',
     ],
-    note: '全日制hokkaido.tsが数える15地域区分（空知/石狩/札幌市/後志/胆振/日高/渡島/檜山/上川/留萌/宗谷/オホーツク/十勝/釧路/根室）のうち、石狩・後志・胆振・日高・渡島・上川・留萌の7区分が着手完了。檜山は定時制セクション自体が存在しないことを実機確認済み（対象外として整理）。残り7区分は同一PDF内の別頁に定時制セクションが存在するか未確認のため、全日制hokkaido.tsと同じく区分ごとに実機確認しながら段階的に追加する。',
+    note: '全日制hokkaido.tsが数える15地域区分（空知/石狩/札幌市/後志/胆振/日高/渡島/檜山/上川/留萌/宗谷/オホーツク/十勝/釧路/根室）のうち、石狩・後志・胆振・日高・渡島・上川・留萌・宗谷の8区分が着手完了。檜山は定時制セクション自体が存在しないことを実機確認済み（対象外として整理）。残り6区分は同一PDF内の別頁に定時制セクションが存在するか未確認のため、全日制hokkaido.tsと同じく区分ごとに実機確認しながら段階的に追加する。',
   },
   records: [
     // ===== （石狩）定時制 =====
@@ -117,6 +118,8 @@ export const HOKKAIDO_TEIJI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '旭川商業', department: '商業', quota: 40, finalApplicants: 9, finalRate: 0.23 },
     // ===== （留萌）定時制 =====
     { schoolName: '天売', department: '普通', quota: 40, finalApplicants: 1, finalRate: 0.03 },
+    // ===== （宗谷）定時制 =====
+    { schoolName: '稚内', department: '普通', quota: 40, finalApplicants: 14, finalRate: 0.35 },
   ],
   officialSubtotals: [],
 };

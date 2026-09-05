@@ -83,11 +83,19 @@ describe('北海道 定時制・有朋単位制 倍率パイプライン（T-P1 
       quota: 40,
       applicants: 1,
     },
+    {
+      name: '宗谷・定時制',
+      match: (r) => r.schoolName === '稚内',
+      recordCount: 1,
+      schoolCount: 1,
+      quota: 40,
+      applicants: 14,
+    },
   ];
 
   it('coverage.statusはpartial（15地域区分中、DISTRICTSに列挙した区分のみ着手のため）', () => {
     expect(coverage.status).toBe('partial');
-    expect(coverage.pendingDepartments.length).toBe(7);
+    expect(coverage.pendingDepartments.length).toBe(6);
   });
 
   it('全レコードがDISTRICTSのいずれか1つにのみ一致する（重複・漏れが無いことの検証）', () => {
