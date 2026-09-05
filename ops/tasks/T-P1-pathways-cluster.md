@@ -133,9 +133,9 @@ GSC 2026-06-02〜08-31（90日）:
 **S1-3で47県の所在分類は済んでいる（A23 / B4 / C20・`ops/S1-3-teiji-availability-ledger.md`）。**
 
 - [ ] A分類23県から着手する。**倍率・定員・学科は公表値をそのまま**（T-Y11Bと同じ規律）
-      → **進行中（15/23県完了+1県着手中・tokyo/miyagi/tokushima/nagano/okinawa/niigata/shimane/
-      okayama/shizuoka/tottori/yamanashi/chiba/gifu/gunma/hiroshima完了・hokkaidoは石狩地区の
-      みで継続中・2026-09-05）**。
+      → **進行中（16/23県完了+1県着手中・tokyo/miyagi/tokushima/nagano/okinawa/niigata/shimane/
+      okayama/shizuoka/tottori/yamanashi/chiba/gifu/gunma/hiroshima/kanagawa完了・hokkaidoは
+      石狩地区のみで継続中・2026-09-05）**。
       `src/data/teiji-competition-rates/`を新設（既存`competition-rate.ts`の型
       `PrefectureCompetitionRateFile`をそのまま再利用・新しい型設計は不要と判明）。
       tokyo16レコード・miyagi20レコード(12校)・tokushima9レコード(6校)・nagano22レコード
@@ -160,10 +160,17 @@ GSC 2026-06-02〜08-31（90日）:
       hokkaido.tsが数える15地域区分中、石狩地区の定時制13レコード+有朋単位制2レコード=15
       レコードのみ収録・coverage='partial'。残り14区分は同一14頁PDFの別頁に定時制セクションが
       あるか未確認のため次回以降に持ち越し。全日制hokkaido.tsのcoverage.noteから後志/胆振の
-      定時制学校名は既に判明しておりショートカットできる）。
-      計16県87テストgreen。**hyogo（robots.txt Disallow）・yamaguchi（既存ソースに定時制
+      定時制学校名は既に判明しておりショートカットできる）。**kanagawaは4セクション20レコード**
+      （定時制・単位制普通科9校11レコード[横浜明朋/相模向陽館は午前部/午後部で別レコード]+
+      定時制・単位制総合学科2校4レコード[横浜市立横浜総合はⅠ/Ⅱ/Ⅲ部で別レコード]+定時制・
+      単位制専門学科(工業)1校3レコード[県立神奈川工業の機械/電気/建設]+通信制・単位制普通科
+      2校2レコード）。県立神奈川工業・県立厚木清南は複数セクションに重複登場するため
+      departmentに角括弧タグを付けて区別。4セクションとも印字済み合計（983/558・406/328・
+      84/16・1216/542）と完全一致（各セクションに小計+合計の2段階自己検算行があり47県中
+      最も充実したソース）。
+      計17県95テストgreen。**hyogo（robots.txt Disallow）・yamaguchi（既存ソースに定時制
       セクション無し）の2県はブロック中**（詳細は`ops/S1-3-teiji-availability-ledger.md`）。
-      **hokkaidoは継続中**（残り14地域区分）。残り5県（kanagawa/kumamoto/kyoto/kagoshima/
+      **hokkaidoは継続中**（残り14地域区分）。残り4県（kumamoto/kyoto/kagoshima/
       nagasaki・いずれもS1-3で存在確認済みだが実データ未収集）は次回以降
 - [ ] 通信制課程を置く公立高校も同じ形で拾う → **gifuで初着手(2校2レコード)。他の県も定時制
       データ収集時に同一PDF内に通信制セクションがあれば併せて拾う運用に変更（2026-09-05）**
