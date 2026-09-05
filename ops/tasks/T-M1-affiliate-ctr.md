@@ -147,6 +147,15 @@ L321 sapuri-banner-300 / L552 shoin-banner）。**にもかかわらず73日間�
       別施策へ、それぞれ切り分けて判断する
       → **2026-09-05時点では切り分け不能のまま**。上記の通り計装自体の疑いが浮上したため、
       次のステップは施策判断ではなく計装の実機検証（Cowork行き候補）
+      → **✅2026-09-06 根本原因を特定・修正済み**: `CtaViewTracker.tsx`のsentinel要素が
+      `width: 0, height: 0`（実面積ゼロ）のままIntersectionObserverの`threshold: 0.4`で監視していた。
+      IntersectionObserver仕様上、対象要素の面積が0だと交差比率(intersectionRatio)の分母が0になり
+      **`threshold>0`では理論上いつまでも発火しない**（対照実験として`SaveResultCTA.tsx`の同型
+      trackerは実面積を持つ`<section>`要素を監視しており同じ`threshold: 0.4`で正常動作している
+      ことを確認・比較でCtaViewTrackerのsentinelだけがゼロ面積だったと判明）。sentinelを`1px×1px`
+      の実面積へ変更し、`threshold`も`0`（1pxでも見えたら発火）に修正。これで**GA4未着地の疑いではなく
+      実装バグだったと判明**（Cowork行きの前にコードレビューだけで原因特定・修正まで完結）。
+      本番デプロイ後、次回のW-7定点観測で`cta_view`件数がGSC表示数の桁に近づくかを確認すること
 
 ---
 

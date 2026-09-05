@@ -49,11 +49,17 @@ export function CtaViewTracker({ placement, pref, program, variant }: CtaViewTra
           }
         }
       },
-      { threshold: 0.4 }
+      // threshold:0＝1pxでも見えたら発火。sentinelが実面積を持つため、
+      // isIntersectingの真偽だけで判定できる（比率のしきい値は不要）。
+      { threshold: 0 }
     );
     observer.observe(el);
     return () => observer.disconnect();
   }, [placement, pref, program, variant]);
 
-  return <span ref={ref} aria-hidden="true" style={{ display: 'block', width: 0, height: 0 }} />;
+  // ⚠️ 幅・高さを0にすると intersectionRatio の分母(targetArea)が0になり、
+  // threshold>0では仕様上いつまでもratioが0のまま発火しなくなる（2026-09-06発見・
+  // T-M1-3bで「cta_viewが1週間動かない」として報告された現象の実装側の原因）。
+  // 1px×1pxの実面積を持たせることで正しく交差判定される。
+  return <span ref={ref} aria-hidden="true" style={{ display: 'block', width: 1, height: 1, overflow: 'hidden' }} />;
 }
