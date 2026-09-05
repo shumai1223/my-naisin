@@ -10,6 +10,7 @@ import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { WebPageSchema } from '@/components/StructuredData/WebPageSchema';
 import { DatasetSchema } from '@/components/StructuredData/DatasetSchema';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
+import { ExamScheduleIcsLink } from '@/components/ExamScheduleIcsLink';
 
 interface PageProps {
   params: Promise<{ prefecture: string }>;
@@ -142,6 +143,11 @@ export default async function PrefectureNyuushiNitteiPage({ params }: PageProps)
               </p>
             </section>
           ))}
+
+          {/* ICSカレンダー追加（T-Y12段階3・堀A） */}
+          <div className="mb-8 flex justify-center">
+            <ExamScheduleIcsLink prefectureCode={pref.code} prefectureName={pref.name} />
+          </div>
 
           {/* 全国共通の目安（/juken-schedule）への内部リンク */}
           <div className="mb-8 rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-600">

@@ -25,6 +25,7 @@ const EXCLUDED_ROUTES = new Set<string>([
   '/api/contact',
   '/api/unsubscribe',
   '/api/calendar',
+  '/api/calendar/{prefecture}',
   '/api/newsletter/preview',
   '/api/push/subscribe',
   '/api/push/unsubscribe',

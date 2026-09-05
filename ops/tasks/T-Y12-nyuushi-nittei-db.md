@@ -452,8 +452,17 @@ total-scoreパターンの流用のため大半が該当なし/満点扱い）�
 
 ### 段階3: ICS配信への統合（任意・段階2の後）
 
-- [ ] `buildJukenIcs`は現在「準備リマインダー」のみ。県別の確定イベント（学力検査日等）を
-      別カレンダーとして追加できるか検討する（既存の月次リマインダーとは責務を分ける）
+- [x] `buildJukenIcs`は現在「準備リマインダー」のみ。県別の確定イベント（学力検査日等）を
+      別カレンダーとして追加できるか検討する（既存の月次リマインダーとは責務を分ける）→
+      **✅2026-09-06完了**: `buildExamScheduleIcs`（`src/lib/exam-schedule.ts`）を新設し、
+      `buildJukenIcs`とは別カレンダーとして県別の確定日程（出願期間・学力検査日・合格発表日等）を
+      配信するICSフィード `/api/calendar/{prefecture}` を追加。`/[prefecture]/nyuushi-nittei`
+      ページに`ExamScheduleIcsLink`（ダウンロードリンク）を設置。Y-0憲法（1データ点=1出典）
+      に従いDESCRIPTIONへdocTitle/fiscalYearを埋め込み、`isValidDateString`を満たさないイベントは
+      安全側で除外（検証不能な日付を配信しない）。escapeIcs/pad2は`juken-schedule.ts`からexportして
+      共用（重複実装を避けた）。OpenAPI完全性監査(`openapi/route.test.ts`)の除外リストに
+      `/api/calendar/{prefecture}`を追加（`/api/calendar`と同型・ICS等の非JSONバイナリ生成のため
+      対象外）。tsc実exit0・jestフル484suites7063tests green
 
 ## 守ること
 

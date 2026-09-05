@@ -37,8 +37,8 @@ function monthNumber(label: string): number {
   return parseInt(label, 10);
 }
 
-/** ICSの文字エスケープ（順序重要：バックスラッシュ→特殊文字）。 */
-function escapeIcs(s: string): string {
+/** ICSの文字エスケープ（順序重要：バックスラッシュ→特殊文字）。exam-schedule.tsのICS生成でも共用。 */
+export function escapeIcs(s: string): string {
   return s
     .replace(/\\/g, '\\\\')
     .replace(/;/g, '\\;')
@@ -46,7 +46,7 @@ function escapeIcs(s: string): string {
     .replace(/\r?\n/g, '\\n');
 }
 
-function pad2(n: number): string {
+export function pad2(n: number): string {
   return String(n).padStart(2, '0');
 }
 
