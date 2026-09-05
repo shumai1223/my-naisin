@@ -133,8 +133,8 @@ GSC 2026-06-02〜08-31（90日）:
 **S1-3で47県の所在分類は済んでいる（A23 / B4 / C20・`ops/S1-3-teiji-availability-ledger.md`）。**
 
 - [ ] A分類23県から着手する。**倍率・定員・学科は公表値をそのまま**（T-Y11Bと同じ規律）
-      → **進行中（12/23県・tokyo/miyagi/tokushima/nagano/okinawa/niigata/shimane/okayama/
-      shizuoka/tottori/yamanashi/chiba完了・2026-09-05）**。`src/data/teiji-competition-rates/`を
+      → **進行中（13/23県・tokyo/miyagi/tokushima/nagano/okinawa/niigata/shimane/okayama/
+      shizuoka/tottori/yamanashi/chiba/gifu完了・2026-09-05）**。`src/data/teiji-competition-rates/`を
       新設（既存`competition-rate.ts`の型`PrefectureCompetitionRateFile`をそのまま再利用・
       新しい型設計は不要と判明）。tokyo16レコード・miyagi20レコード(12校)・tokushima9レコード
       (6校)・nagano22レコード(定時制課程14校+多部制単位制3校)・niigata12レコード(10校)・
@@ -142,15 +142,19 @@ GSC 2026-06-02〜08-31（90日）:
       定時制4校)・tottori5レコード(4校)・yamanashi13レコード(7校)・chiba22レコード(16校・
       生浜/松戸南/佐倉南の3校は午前部/午後部/夜間部を別レコード化)はいずれも印字済み公式「計」
       行と完全一致。okinawaのみ全日制混在表で県全体の定時制限定合計が資料に無いため自己集計値
-      のみ（8レコード・6校）。**副産物**: okayamaの既存R8ソースURLが404化していたため新URLを
-      発見し全日制データ側も修正した。**教訓（yamanashi）**: 県によっては倍率算定時に帰国生徒等
-      特別措置の適用者を最終志願者数から控除する（「倍率（帰国生徒等を除く）」等の注記を要確認）
-      ため、finalApplicantsは印字済み生値でなく倍率算定分子を採用する必要がある場合がある。
-      計12県64テストgreen。**hyogo（robots.txt Disallow）・yamaguchi（既存ソースに定時制
+      のみ（8レコード・6校）。**gifuは定時制11校16レコード+通信制2校2レコード=18レコード**
+      （P1-3で初めて通信制を収録。ページ内に公式「計」行が無いため、officialSubtotalsは空のまま
+      残しヘッダコメントに自己検算値[定時制740/335・通信制320/132]を明記する形で対応）。
+      **副産物**: okayamaの既存R8ソースURLが404化していたため新URLを発見し全日制データ側も
+      修正した。**教訓（yamanashi）**: 県によっては倍率算定時に帰国生徒等特別措置の適用者を
+      最終志願者数から控除する（「倍率（帰国生徒等を除く）」等の注記を要確認）ため、
+      finalApplicantsは印字済み生値でなく倍率算定分子を採用する必要がある場合がある。
+      計13県70テストgreen。**hyogo（robots.txt Disallow）・yamaguchi（既存ソースに定時制
       セクション無し）の2県はブロック中**（詳細は`ops/S1-3-teiji-availability-ledger.md`）。
-      残り9県（gifu/gunma/hiroshima/hokkaido/kanagawa/kumamoto/kyoto/kagoshima/
+      残り8県（gunma/hiroshima/hokkaido/kanagawa/kumamoto/kyoto/kagoshima/
       nagasaki・いずれもS1-3で存在確認済みだが実データ未収集）は次回以降
-- [ ] 通信制課程を置く公立高校も同じ形で拾う
+- [ ] 通信制課程を置く公立高校も同じ形で拾う → **gifuで初着手(2校2レコード)。他の県も定時制
+      データ収集時に同一PDF内に通信制セクションがあれば併せて拾う運用に変更（2026-09-05）**
 - [ ] ⚠️ **1データ点1出典。取れない県は「取れない」と書く**（Y-0）
 - [ ] ⚠️ **47県を埋めるために推測で水増ししない。** 20県で止まるならそれが正しい姿
 - [ ] ⚠️ **スケールドコンテンツ検出のゲートが既にある**（`uniqueness.test`）。
