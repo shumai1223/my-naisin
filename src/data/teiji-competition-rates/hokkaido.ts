@@ -5,18 +5,18 @@ import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
  *
  * 一次ソース: 北海道教育委員会「R8入学者選抜状況報告書 §3 学校別受検者数及び合格者数」
  * （既存の全日制`src/data/competition-rates/hokkaido.ts`と同一PDF`05_p9-p22.pdf`・全14頁の
- * うち3頁目＝資料印字ページ「11」＝石狩地区）。石狩地区ページには全日制「専門教育を主とする
- * 学科及び総合学科」表の直後に「（石狩）定時制」表、さらにその下に「（石狩）有朋単位制」表
- * （独立した通信制単位制校）が続けて掲載されている。
+ * うち①3頁目＝資料印字ページ「11」＝石狩地区、②5頁目＝資料印字ページ「13」＝後志地区）。
+ * 石狩地区ページには全日制「専門教育を主とする学科及び総合学科」表の直後に「（石狩）定時制」
+ * 表、さらにその下に「（石狩）有朋単位制」表（独立した通信制単位制校）が続けて掲載されている。
+ * 後志地区ページには全日制2表の直後に「（後志）定時制」表が掲載されている。
  *
  * ⚠️coverage.status='partial'とした理由: **北海道は14管内すべてが同一PDF内に分散しており、
  * 定時制セクションが各管内ページに存在するかどうかは1管内ずつ実機確認が必要**（全日制の
  * hokkaido.tsも「掛-1第1〜13弾」の14回に分けて全管内を完走した前例と同型）。今回は石狩地区
- * （3頁目）のみ着手し、残り14区分（全日制hokkaido.tsが数える15地域区分-石狩地区）は
- * 次回以降に持ち越す。全日制hokkaido.tsのcoverage.noteに
- * 「後志地区・定時制（小樽潮陵・真狩・留寿都・小樽未来創造）」「胆振地区・定時制（室蘭栄・
- * 苫小牧東・苫小牧工業）」という学校名の手がかりが既に記録されており、次回以降の着手時に
- * 再発見の手間を省ける。
+ * （3頁目）・後志地区（5頁目）のみ着手し、残り13区分（全日制hokkaido.tsが数える15地域区分-
+ * 石狩地区-後志地区）は次回以降に持ち越す。全日制hokkaido.tsのcoverage.noteに
+ * 「胆振地区・定時制（室蘭栄・苫小牧東・苫小牧工業）」という学校名の手がかりが既に記録されて
+ * おり、次回以降の着手時に再発見の手間を省ける。
  *
  * ⚠️quota/finalApplicants/finalRateの定義は既存の全日制hokkaido.tsと同じ規律を踏襲した:
  * quota=募集人員、finalApplicants=出願者数（第1次）、finalRate=finalApplicants/quotaを
@@ -24,11 +24,12 @@ import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
  * 異なるため採用しない）。有朋単位制は「募集人員(推薦枠)/出願者数/受検者数/倍率/合格者数/
  * 推薦[受検者数/合格者数]/入学者数」という定時制と同型の列構成のため同じ規律で転記した。
  *
- * ページ内に「計」等の合計行は無いため、officialSubtotalsは空のまま（自己集計値: 定時制
- * quota520・applicants184、有朋単位制quota160・applicants36）。
+ * ページ内に「計」等の合計行は無いため、officialSubtotalsは空のまま（自己集計値: 石狩定時制
+ * quota520・applicants184、石狩有朋単位制quota160・applicants36、後志定時制quota160・
+ * applicants43）。
  *
  * ToUnicode欠落でpdftotext不可（数値は`pdftotext -layout`で抽出できるが行の対応が崩れるため
- * 不採用）・`pdftoppm 150dpi`のビジョン解析1回で全15レコードを判読できた。
+ * 不採用）・`pdftoppm 150〜180dpi`のビジョン解析で全19レコードを判読できた。
  */
 
 export const HOKKAIDO_TEIJI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
@@ -37,17 +38,16 @@ export const HOKKAIDO_TEIJI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     {
       url: 'https://www.dokyoi.pref.hokkaido.lg.jp/fs/1/3/1/7/8/5/5/0/_/05_p9-p22.pdf',
       docTitle:
-        '北海道教育委員会 R8入学者選抜状況報告書「§3 学校別受検者数及び合格者数」（石狩地区・定時制／有朋単位制、資料印字ページ11）',
+        '北海道教育委員会 R8入学者選抜状況報告書「§3 学校別受検者数及び合格者数」（石狩地区・定時制／有朋単位制[資料印字ページ11]、後志地区・定時制[資料印字ページ13]）',
       fiscalYear: '令和8年度（2026年度）',
-      fetchedAt: '2026-09-05',
+      fetchedAt: '2026-09-06',
     },
   ],
   coverage: {
     status: 'partial',
-    includedDepartments: ['石狩地区・定時制', '石狩地区・有朋単位制（通信制単位制）'],
+    includedDepartments: ['石狩地区・定時制', '石狩地区・有朋単位制（通信制単位制）', '後志地区・定時制'],
     pendingDepartments: [
       '空知地区・定時制（未確認・次回着手）',
-      '後志地区・定時制（小樽潮陵・真狩・留寿都・小樽未来創造。全日制hokkaido.tsのcoverage.noteに既出）',
       '胆振地区・定時制（室蘭栄・苫小牧東・苫小牧工業。全日制hokkaido.tsのcoverage.noteに既出）',
       '日高地区・定時制（未確認・次回着手）',
       '渡島地区・定時制（未確認・次回着手）',
@@ -61,7 +61,7 @@ export const HOKKAIDO_TEIJI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '根室地区・定時制（未確認・次回着手）',
       '札幌市・定時制（市立高校。未確認・次回着手）',
     ],
-    note: '全日制hokkaido.tsが数える15地域区分（空知/石狩/札幌市/後志/胆振/日高/渡島/檜山/上川/留萌/宗谷/オホーツク/十勝/釧路/根室）のうち、石狩地区（資料印字ページ11・pdftoppm 3頁目）のみ着手完了。残り14区分は同一PDF内の別頁に定時制セクションが存在するか未確認のため、全日制hokkaido.tsと同じく区分ごとに実機確認しながら段階的に追加する。',
+    note: '全日制hokkaido.tsが数える15地域区分（空知/石狩/札幌市/後志/胆振/日高/渡島/檜山/上川/留萌/宗谷/オホーツク/十勝/釧路/根室）のうち、石狩地区（資料印字ページ11・pdftoppm 3頁目）・後志地区（資料印字ページ13・pdftoppm 5頁目）が着手完了。残り13区分は同一PDF内の別頁に定時制セクションが存在するか未確認のため、全日制hokkaido.tsと同じく区分ごとに実機確認しながら段階的に追加する。',
   },
   records: [
     // ===== （石狩）定時制 =====
@@ -81,6 +81,11 @@ export const HOKKAIDO_TEIJI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     // ===== （石狩）有朋単位制（通信制単位制） =====
     { schoolName: '有朋', department: '普通（有朋単位制・通信制）', quota: 80, finalApplicants: 28, finalRate: 0.35 },
     { schoolName: '有朋', department: '事務情報（有朋単位制・通信制）', quota: 80, finalApplicants: 8, finalRate: 0.1 },
+    // ===== （後志）定時制 =====
+    { schoolName: '小樽潮陵', department: '普通', quota: 40, finalApplicants: 8, finalRate: 0.2 },
+    { schoolName: '真狩', department: '農芸科学', quota: 40, finalApplicants: 26, finalRate: 0.65 },
+    { schoolName: '留寿都', department: '農業福祉', quota: 40, finalApplicants: 7, finalRate: 0.18 },
+    { schoolName: '小樽未来創造', department: '電気・建築', quota: 40, finalApplicants: 2, finalRate: 0.05 },
   ],
   officialSubtotals: [],
 };

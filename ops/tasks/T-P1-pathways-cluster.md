@@ -142,9 +142,10 @@ GSC 2026-06-02〜08-31（90日）:
       コメントを参照。全県で公式「計」行または学区/セクション小計と完全一致済み）。
       **ブロック中2県**: hyogo（robots.txt Disallow）・yamaguchi（既存ソースに定時制
       セクション無し）（詳細は`ops/S1-3-teiji-availability-ledger.md`）。
-      **hokkaidoのみ継続中**（全日制hokkaido.tsが数える15地域区分中、石狩地区の15レコード
-      [定時制13+有朋単位制2]のみ収録・coverage='partial'。残り14区分は次回以降。全日制
-      hokkaido.tsのcoverage.noteから後志/胆振の定時制学校名は既出でショートカット可）。
+      **hokkaidoのみ継続中**（全日制hokkaido.tsが数える15地域区分中、石狩地区[定時制13+
+      有朋単位制2]+後志地区[定時制4・小樽潮陵/真狩/留寿都/小樽未来創造]=計19レコードを収録・
+      coverage='partial'。残り13区分は次回以降。全日制hokkaido.tsのcoverage.noteから胆振の
+      定時制学校名[室蘭栄/苫小牧東/苫小牧工業]は既出でショートカット可）。
       **横断的な教訓**: ①gifu/hiroshimaで初めてcoverage='partial'/officialSubtotals空の
       パターンを確立（公式合計が無い場合は自己集計値をヘッダ+テストに明記）②hiroshimaで
       「1学級」等の定員非数値表記は推測せずpendingDepartmentsへ③gunmaで「タイトルに定時制の
