@@ -133,8 +133,9 @@ GSC 2026-06-02〜08-31（90日）:
 **S1-3で47県の所在分類は済んでいる（A23 / B4 / C20・`ops/S1-3-teiji-availability-ledger.md`）。**
 
 - [ ] A分類23県から着手する。**倍率・定員・学科は公表値をそのまま**（T-Y11Bと同じ規律）
-      → **進行中（15/23県・tokyo/miyagi/tokushima/nagano/okinawa/niigata/shimane/okayama/
-      shizuoka/tottori/yamanashi/chiba/gifu/gunma/hiroshima完了・2026-09-05）**。
+      → **進行中（15/23県完了+1県着手中・tokyo/miyagi/tokushima/nagano/okinawa/niigata/shimane/
+      okayama/shizuoka/tottori/yamanashi/chiba/gifu/gunma/hiroshima完了・hokkaidoは石狩地区の
+      みで継続中・2026-09-05）**。
       `src/data/teiji-competition-rates/`を新設（既存`competition-rate.ts`の型
       `PrefectureCompetitionRateFile`をそのまま再利用・新しい型設計は不要と判明）。
       tokyo16レコード・miyagi20レコード(12校)・tokushima9レコード(6校)・nagano22レコード
@@ -155,10 +156,14 @@ GSC 2026-06-02〜08-31（90日）:
       のみ収録し、残り17行はpendingDepartmentsに正直に記録した）。**教訓（yamanashi）**:
       県によっては倍率算定時に帰国生徒等特別措置の適用者を最終志願者数から控除する（「倍率
       （帰国生徒等を除く）」等の注記を要確認）ため、finalApplicantsは印字済み生値でなく
-      倍率算定分子を採用する必要がある場合がある。
-      計15県81テストgreen。**hyogo（robots.txt Disallow）・yamaguchi（既存ソースに定時制
+      倍率算定分子を採用する必要がある場合がある。**hokkaidoは着手済みだが未完了**（全日制
+      hokkaido.tsが数える15地域区分中、石狩地区の定時制13レコード+有朋単位制2レコード=15
+      レコードのみ収録・coverage='partial'。残り14区分は同一14頁PDFの別頁に定時制セクションが
+      あるか未確認のため次回以降に持ち越し。全日制hokkaido.tsのcoverage.noteから後志/胆振の
+      定時制学校名は既に判明しておりショートカットできる）。
+      計16県87テストgreen。**hyogo（robots.txt Disallow）・yamaguchi（既存ソースに定時制
       セクション無し）の2県はブロック中**（詳細は`ops/S1-3-teiji-availability-ledger.md`）。
-      残り6県（hokkaido/kanagawa/kumamoto/kyoto/kagoshima/
+      **hokkaidoは継続中**（残り14地域区分）。残り5県（kanagawa/kumamoto/kyoto/kagoshima/
       nagasaki・いずれもS1-3で存在確認済みだが実データ未収集）は次回以降
 - [ ] 通信制課程を置く公立高校も同じ形で拾う → **gifuで初着手(2校2レコード)。他の県も定時制
       データ収集時に同一PDF内に通信制セクションがあれば併せて拾う運用に変更（2026-09-05）**
