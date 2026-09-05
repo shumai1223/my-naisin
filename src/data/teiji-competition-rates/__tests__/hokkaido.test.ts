@@ -2,76 +2,114 @@ import { sumRecords } from '@/lib/competition-rate';
 import { HOKKAIDO_TEIJI_COMPETITION_RATES } from '../hokkaido';
 
 /**
- * T-P1 P1-3 DoD検証（北海道・石狩地区の定時制13校＋有朋単位制2レコード＋後志地区の定時制4校＋
- * 胆振地区の定時制3校＋日高地区の定時制1校＋渡島地区の定時制3校＝coverage='partial'）: ページ内
- * に公式「計」行が無いため、個票の機械集計値が自己検算どおりであることを検証する。北海道は
- * 15地域区分あるうち5区分のみ着手済みで、coverage.status==='partial'であることも明示的に
- * 検証する（次回セッションが誤って「完了」と誤認しないため）。
+ * T-P1 P1-3 DoD検証（北海道・coverage='partial'）: 北海道は15地域区分に定時制セクションが
+ * 分散しており、ページ内に公式「計」行が無いため、地域区分ごとの機械集計値が自己検算どおり
+ * であることを検証する。データ駆動（it.each）にして、区分追加のたびにDISTRICTS配列へ1行
+ * 足すだけで済むようにしてある。
  */
-describe('北海道 定時制・有朋単位制 倍率パイプライン（T-P1 P1-3・partial・石狩+後志+胆振+日高+渡島地区のみ）', () => {
+describe('北海道 定時制・有朋単位制 倍率パイプライン（T-P1 P1-3・partial）', () => {
   const { records, coverage } = HOKKAIDO_TEIJI_COMPETITION_RATES;
 
-  const ISHIKARI_SCHOOLS = ['札幌東', '札幌西', '札幌南', '札幌北', '札幌月寒', '江別', '千歳', '恵庭南', '札幌工業', '札幌琴似工業'];
-  const SHIRIBESHI_SCHOOLS = ['小樽潮陵', '真狩', '留寿都', '小樽未来創造'];
-  const IBURI_SCHOOLS = ['室蘭栄', '苫小牧東', '苫小牧工業'];
-  const HIDAKA_SCHOOLS = ['日高'];
-  const OSHIMA_SCHOOLS = ['函館中部', '函館工業', '函館商業'];
+  const DISTRICTS: Array<{
+    name: string;
+    match: (r: (typeof records)[number]) => boolean;
+    recordCount: number;
+    schoolCount: number;
+    quota: number;
+    applicants: number;
+  }> = [
+    {
+      name: '石狩・定時制',
+      match: (r) =>
+        ['札幌東', '札幌西', '札幌南', '札幌北', '札幌月寒', '江別', '千歳', '恵庭南', '札幌工業', '札幌琴似工業'].includes(r.schoolName),
+      recordCount: 13,
+      schoolCount: 10,
+      quota: 520,
+      applicants: 184,
+    },
+    {
+      name: '石狩・有朋単位制',
+      match: (r) => r.department.includes('有朋'),
+      recordCount: 2,
+      schoolCount: 1,
+      quota: 160,
+      applicants: 36,
+    },
+    {
+      name: '後志・定時制',
+      match: (r) => ['小樽潮陵', '真狩', '留寿都', '小樽未来創造'].includes(r.schoolName),
+      recordCount: 4,
+      schoolCount: 4,
+      quota: 160,
+      applicants: 43,
+    },
+    {
+      name: '胆振・定時制',
+      match: (r) => ['室蘭栄', '苫小牧東', '苫小牧工業'].includes(r.schoolName),
+      recordCount: 3,
+      schoolCount: 3,
+      quota: 120,
+      applicants: 41,
+    },
+    {
+      name: '日高・定時制',
+      match: (r) => r.schoolName === '日高',
+      recordCount: 1,
+      schoolCount: 1,
+      quota: 40,
+      applicants: 15,
+    },
+    {
+      name: '渡島・定時制',
+      match: (r) => ['函館中部', '函館工業', '函館商業'].includes(r.schoolName),
+      recordCount: 3,
+      schoolCount: 3,
+      quota: 120,
+      applicants: 61,
+    },
+    {
+      name: '上川・定時制',
+      match: (r) => ['旭川東', '旭川北', '士別東', '幌加内', '旭川工業', '旭川商業'].includes(r.schoolName),
+      recordCount: 7,
+      schoolCount: 6,
+      quota: 280,
+      applicants: 82,
+    },
+    {
+      name: '留萌・定時制',
+      match: (r) => r.schoolName === '天売',
+      recordCount: 1,
+      schoolCount: 1,
+      quota: 40,
+      applicants: 1,
+    },
+  ];
 
-  const yuho = records.filter((r) => r.department.includes('有朋'));
-  const ishikariTeiji = records.filter((r) => ISHIKARI_SCHOOLS.includes(r.schoolName));
-  const shiribeshiTeiji = records.filter((r) => SHIRIBESHI_SCHOOLS.includes(r.schoolName));
-  const iburiTeiji = records.filter((r) => IBURI_SCHOOLS.includes(r.schoolName));
-  const hidakaTeiji = records.filter((r) => HIDAKA_SCHOOLS.includes(r.schoolName));
-  const oshimaTeiji = records.filter((r) => OSHIMA_SCHOOLS.includes(r.schoolName));
-
-  it('coverage.statusはpartial（15地域区分中、石狩+後志+胆振+日高+渡島の5区分のみ着手のため）', () => {
+  it('coverage.statusはpartial（15地域区分中、DISTRICTSに列挙した区分のみ着手のため）', () => {
     expect(coverage.status).toBe('partial');
-    expect(coverage.pendingDepartments.length).toBe(10);
+    expect(coverage.pendingDepartments.length).toBe(7);
   });
 
-  it('取り込み件数は石狩定時制13＋有朋単位制2＋後志定時制4＋胆振定時制3＋日高定時制1＋渡島定時制3=計26レコード', () => {
-    expect(records).toHaveLength(26);
-    expect(ishikariTeiji).toHaveLength(13);
-    expect(yuho).toHaveLength(2);
-    expect(shiribeshiTeiji).toHaveLength(4);
-    expect(iburiTeiji).toHaveLength(3);
-    expect(hidakaTeiji).toHaveLength(1);
-    expect(oshimaTeiji).toHaveLength(3);
+  it('全レコードがDISTRICTSのいずれか1つにのみ一致する（重複・漏れが無いことの検証）', () => {
+    for (const r of records) {
+      const matches = DISTRICTS.filter((d) => d.match(r));
+      expect(matches).toHaveLength(1);
+    }
+    const totalExpected = DISTRICTS.reduce((sum, d) => sum + d.recordCount, 0);
+    expect(records).toHaveLength(totalExpected);
   });
 
-  it('学校数は石狩10・後志4・胆振3・日高1・渡島3校（複数学科を持つ学校は学科ごとに別レコード）', () => {
-    expect(new Set(ishikariTeiji.map((r) => r.schoolName)).size).toBe(10);
-    expect(new Set(shiribeshiTeiji.map((r) => r.schoolName)).size).toBe(4);
-    expect(new Set(iburiTeiji.map((r) => r.schoolName)).size).toBe(3);
-    expect(new Set(hidakaTeiji.map((r) => r.schoolName)).size).toBe(1);
-    expect(new Set(oshimaTeiji.map((r) => r.schoolName)).size).toBe(3);
-  });
-
-  it('個票の機械集計値が自己検算値と一致する（公式「計」行が無いため）', () => {
-    const ishikariSum = sumRecords(ishikariTeiji);
-    expect(ishikariSum.quota).toBe(520);
-    expect(ishikariSum.finalApplicants).toBe(184);
-
-    const yuhoSum = sumRecords(yuho);
-    expect(yuhoSum.quota).toBe(160);
-    expect(yuhoSum.finalApplicants).toBe(36);
-
-    const shiribeshiSum = sumRecords(shiribeshiTeiji);
-    expect(shiribeshiSum.quota).toBe(160);
-    expect(shiribeshiSum.finalApplicants).toBe(43);
-
-    const iburiSum = sumRecords(iburiTeiji);
-    expect(iburiSum.quota).toBe(120);
-    expect(iburiSum.finalApplicants).toBe(41);
-
-    const hidakaSum = sumRecords(hidakaTeiji);
-    expect(hidakaSum.quota).toBe(40);
-    expect(hidakaSum.finalApplicants).toBe(15);
-
-    const oshimaSum = sumRecords(oshimaTeiji);
-    expect(oshimaSum.quota).toBe(120);
-    expect(oshimaSum.finalApplicants).toBe(61);
-  });
+  it.each(DISTRICTS.map((d) => [d.name, d] as const))(
+    '%s: レコード数・学校数・自己集計値が一致する（公式「計」行が無いため）',
+    (_name, d) => {
+      const group = records.filter(d.match);
+      expect(group).toHaveLength(d.recordCount);
+      expect(new Set(group.map((r) => r.schoolName)).size).toBe(d.schoolCount);
+      const sum = sumRecords(group);
+      expect(sum.quota).toBe(d.quota);
+      expect(sum.finalApplicants).toBe(d.applicants);
+    }
+  );
 
   it('quota/finalApplicants/finalRateはいずれも0以上（不変条件）', () => {
     for (const r of records) {
