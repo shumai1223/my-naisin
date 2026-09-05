@@ -8,6 +8,25 @@
 
 ## 0. 今季の主食（迷ったらここへ戻る）
 
+### 🆕 2026-09-06 05:4x時点の状態（A群・T-C1とも本日分は払底を確認・監視モードへ）
+
+T-K1・T-S1 S1-4完了に続けて、T-C1（outreach-queueのform channel未カバー3件を発見し
+`COWORK-TASK-b2b-forms-batch13.md`を新設・`89ff858`）まで消化した。その後
+T-N1-N4/T-SS1/T-S13A/T-N5/T-G1/T-C2/T-C4-C9/T-C7/T-C9/`ops/PROPOSALS.md`を横断的に
+再走査したが、残る全項目が👤ゲート待ち（env/Stripe/OAuth/APIキー/価格決定等）または
+既に完了済みだった。**A群・T-C1とも2026-09-06時点で本日分は払底を確認済み。**
+
+次のシグナル（日付ゲート）:
+- **9/08**: T-Y11B/T-Y11-winter-bairitsu-pipeline（A→B→C）着手解禁・T-N1-N4のN1-2着手解禁
+- **9/09**: T-A1 kill_criteria判定（28日後の加重順位）
+- **9/21**: T-R1 W-8短縮形パイロット判定
+
+**次に再開するセッションがまず行うこと**:
+1. Gmail/GA4/GSC/Trends MCP接続確認
+2. Gmail新着返信の確認（T-S13A A-1追加ok県など）
+3. 上記日付ゲートへの到達有無をチェック（今日から2日以内なら9/08待ちの可能性が高い）
+4. 到達していなければ、`memory/loop-question-note.md`末尾の確認のみ行い監視モード継続
+
 ### 🆕 2026-09-06 05:3x時点の状態（T-K1完了に続けてT-S1 S1-4実装完了・push済み）
 
 T-K1完了後、A群隙間タスクを探す過程で`ops/tasks/T-S1-school-page-recovery.md`のS1-4
