@@ -6,16 +6,17 @@ import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
  * 一次ソース: 北海道教育委員会「R8入学者選抜状況報告書 §3 学校別受検者数及び合格者数」
  * （既存の全日制`src/data/competition-rates/hokkaido.ts`と同一PDF`05_p9-p22.pdf`・全14頁の
  * うち①3頁目＝資料印字ページ「11」＝石狩地区、②5頁目＝資料印字ページ「13」＝後志地区、
- * ③6頁目＝資料印字ページ「14」＝胆振地区）。石狩地区ページには全日制「専門教育を主とする
- * 学科及び総合学科」表の直後に「（石狩）定時制」表、さらにその下に「（石狩）有朋単位制」表
- * （独立した通信制単位制校）が続けて掲載されている。後志・胆振地区ページには全日制表群の
- * 直後にそれぞれ「（後志）定時制」「（胆振）定時制」表が掲載されている。
+ * ③6頁目＝資料印字ページ「14」＝胆振地区、④7頁目＝資料印字ページ「15」＝日高地区）。
+ * 石狩地区ページには全日制「専門教育を主とする学科及び総合学科」表の直後に「（石狩）定時制」
+ * 表、さらにその下に「（石狩）有朋単位制」表（独立した通信制単位制校）が続けて掲載されている。
+ * 後志・胆振・日高地区ページには全日制表群の直後にそれぞれ「（後志）定時制」「（胆振）定時制」
+ * 「（日高）定時制」表が掲載されている。
  *
  * ⚠️coverage.status='partial'とした理由: **北海道は14管内すべてが同一PDF内に分散しており、
  * 定時制セクションが各管内ページに存在するかどうかは1管内ずつ実機確認が必要**（全日制の
  * hokkaido.tsも「掛-1第1〜13弾」の14回に分けて全管内を完走した前例と同型）。今回は石狩地区
- * （3頁目）・後志地区（5頁目）・胆振地区（6頁目）のみ着手し、残り12区分（全日制hokkaido.tsが
- * 数える15地域区分-石狩-後志-胆振）は次回以降に持ち越す。
+ * （3頁目）・後志地区（5頁目）・胆振地区（6頁目）・日高地区（7頁目）のみ着手し、残り11区分
+ * （全日制hokkaido.tsが数える15地域区分-石狩-後志-胆振-日高）は次回以降に持ち越す。
  *
  * ⚠️quota/finalApplicants/finalRateの定義は既存の全日制hokkaido.tsと同じ規律を踏襲した:
  * quota=募集人員、finalApplicants=出願者数（第1次）、finalRate=finalApplicants/quotaを
@@ -25,10 +26,10 @@ import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
  *
  * ページ内に「計」等の合計行は無いため、officialSubtotalsは空のまま（自己集計値: 石狩定時制
  * quota520・applicants184、石狩有朋単位制quota160・applicants36、後志定時制quota160・
- * applicants43、胆振定時制quota120・applicants41）。
+ * applicants43、胆振定時制quota120・applicants41、日高定時制quota40・applicants15）。
  *
  * ToUnicode欠落でpdftotext不可（数値は`pdftotext -layout`で抽出できるが行の対応が崩れるため
- * 不採用）・`pdftoppm 150〜180dpi`のビジョン解析で全22レコードを判読できた。
+ * 不採用）・`pdftoppm 150〜180dpi`のビジョン解析で全23レコードを判読できた。
  */
 
 export const HOKKAIDO_TEIJI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
@@ -37,17 +38,22 @@ export const HOKKAIDO_TEIJI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     {
       url: 'https://www.dokyoi.pref.hokkaido.lg.jp/fs/1/3/1/7/8/5/5/0/_/05_p9-p22.pdf',
       docTitle:
-        '北海道教育委員会 R8入学者選抜状況報告書「§3 学校別受検者数及び合格者数」（石狩地区・定時制／有朋単位制[資料印字ページ11]、後志地区・定時制[資料印字ページ13]、胆振地区・定時制[資料印字ページ14]）',
+        '北海道教育委員会 R8入学者選抜状況報告書「§3 学校別受検者数及び合格者数」（石狩地区・定時制／有朋単位制[資料印字ページ11]、後志地区・定時制[資料印字ページ13]、胆振地区・定時制[資料印字ページ14]、日高地区・定時制[資料印字ページ15]）',
       fiscalYear: '令和8年度（2026年度）',
       fetchedAt: '2026-09-06',
     },
   ],
   coverage: {
     status: 'partial',
-    includedDepartments: ['石狩地区・定時制', '石狩地区・有朋単位制（通信制単位制）', '後志地区・定時制', '胆振地区・定時制'],
+    includedDepartments: [
+      '石狩地区・定時制',
+      '石狩地区・有朋単位制（通信制単位制）',
+      '後志地区・定時制',
+      '胆振地区・定時制',
+      '日高地区・定時制',
+    ],
     pendingDepartments: [
       '空知地区・定時制（未確認・次回着手）',
-      '日高地区・定時制（未確認・次回着手）',
       '渡島地区・定時制（未確認・次回着手）',
       '檜山地区・定時制（未確認・次回着手）',
       '上川地区・定時制（未確認・次回着手）',
@@ -59,7 +65,7 @@ export const HOKKAIDO_TEIJI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '根室地区・定時制（未確認・次回着手）',
       '札幌市・定時制（市立高校。未確認・次回着手）',
     ],
-    note: '全日制hokkaido.tsが数える15地域区分（空知/石狩/札幌市/後志/胆振/日高/渡島/檜山/上川/留萌/宗谷/オホーツク/十勝/釧路/根室）のうち、石狩地区（資料印字ページ11・pdftoppm 3頁目）・後志地区（資料印字ページ13・pdftoppm 5頁目）・胆振地区（資料印字ページ14・pdftoppm 6頁目）が着手完了。残り12区分は同一PDF内の別頁に定時制セクションが存在するか未確認のため、全日制hokkaido.tsと同じく区分ごとに実機確認しながら段階的に追加する。',
+    note: '全日制hokkaido.tsが数える15地域区分（空知/石狩/札幌市/後志/胆振/日高/渡島/檜山/上川/留萌/宗谷/オホーツク/十勝/釧路/根室）のうち、石狩地区（資料印字ページ11・pdftoppm 3頁目）・後志地区（資料印字ページ13・pdftoppm 5頁目）・胆振地区（資料印字ページ14・pdftoppm 6頁目）・日高地区（資料印字ページ15・pdftoppm 7頁目）が着手完了。残り11区分は同一PDF内の別頁に定時制セクションが存在するか未確認のため、全日制hokkaido.tsと同じく区分ごとに実機確認しながら段階的に追加する。',
   },
   records: [
     // ===== （石狩）定時制 =====
@@ -88,6 +94,8 @@ export const HOKKAIDO_TEIJI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '室蘭栄', department: '普通', quota: 40, finalApplicants: 13, finalRate: 0.33 },
     { schoolName: '苫小牧東', department: '普通', quota: 40, finalApplicants: 11, finalRate: 0.28 },
     { schoolName: '苫小牧工業', department: '工業技術', quota: 40, finalApplicants: 17, finalRate: 0.43 },
+    // ===== （日高）定時制 =====
+    { schoolName: '日高', department: '普通', quota: 40, finalApplicants: 15, finalRate: 0.38 },
   ],
   officialSubtotals: [],
 };
