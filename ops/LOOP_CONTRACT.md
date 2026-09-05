@@ -8,6 +8,28 @@
 
 ## 0. 今季の主食（迷ったらここへ戻る）
 
+### 🆕 2026-09-06 03:4x時点の状態（前セッション引き継ぎ完遂＋T-P1裁定違反を発見・是正・push済み）
+
+セッション再開直後、前回セッションが検証未完了のまま残していた`CtaViewTracker.tsx`の修正
+（sentinel実面積ゼロによるIntersectionObserver未発火バグ・T-M1-3b）をtsc/jestで検証し
+commit/push（`64fbb23`）。続けて主食を探した結果、`ops/tasks/T-P1-pathways-cluster.md`の
+DoD未達項目（収益化CTA guard test）を調べる過程で、2026-09-05夜に別セッションが実装した
+`/[prefecture]/teiji-tsushin`ページがP1-0裁定に**二重に違反**していたことを発見: ①`ParentLeadCTA`
+（収益化CTA・第1期は禁止のはず）を実装済み ②`sitemap.ts`へ登録済み（「本番反映は👤が9/23以降
+に決める」に抵触）。ParentLeadCTA削除・再発防止テスト新設・robots noindex追加・sitemap除外で
+是正しcommit/push（`8d9075e`）。tsc実exit0・jestフル481suites7044tests green。
+`memory/loop-question-note.md`末尾に👤向け申し送り（noindex代替運用の是非）を追記済み・
+回答不要（急ぎではない）。
+
+**次に再開するセッションがまず行うこと**:
+1. `memory/loop-question-note.md`末尾を確認（新しい👤指示が無いか）
+2. Gmail/GA4/GSC/Trends MCP接続確認
+3. Gmail新着返信の確認（T-S13A A-1追加ok県・その他）
+4. 今日(9/06)〜9/08(T-Y11開始)までの隙間で着手できるのは**T-K1**（KAKEN研究者リスト・期限9/22・
+   隙間タスク・👤ゲート無し）のみと確認済み（T-P1/T-W1/T-Y11系はいずれも9/8以降 or 9/23以降の
+   ゲート付き。T-S1のS1-3残り県実機確認は「1県1日1回」制約付きで進めてよい）
+5. T-N1-N4/T-S13A A-2/その他は👤判断待ちのため触らない
+
 ### 🆕 2026-09-05 02:2x時点の状態（セッション再開・T-M1-2(C10-1)投入完了・push済み）
 
 前回セッション終了直後（01:27最終commit）から約1時間空けて再開。MCP接続（Gmail）は生きていることを
