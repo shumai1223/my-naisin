@@ -228,28 +228,33 @@ miyazaki, nara, oita, osaka, saga, shiga, tochigi, wakayama（20県）
 定時制ページの中身を精査する動機が無かった）。**したがって、この20県は「未公表」ではなく
 「未確認」として扱う。** 実機でPDFを再確認するまで②(未公表)には分類しない。
 
-## 実機確認の進捗（2026-09-05更新・4回目）
+## 実機確認の進捗（2026-09-06更新・5回目＝T-P1 P1-3による完了）
 
-**A(23県)のうち13県（tokyo・miyagi・tokushima・chiba・gifu・gunma・hiroshima・hokkaido・
-kanagawa・kumamoto・kyoto・kagoshima・nagasaki）を実機確認済み**。tokyo/miyagi/chiba/
-hokkaido/kanagawa/kumamoto/kyoto/kagoshima/nagasakiは学校別データ+自己検算用の合計行の
-両方が確認できた（kyotoは小計→計→定時制計の3段階＋昨年度比較列で最も充実）。gifuは学校別
-データはあるが合計行なし（個票SUMで代替可能）。gunmaはR5版でのみ確認済みでR8本体PDFに同型
-セクションがあるか未確認という留保付き。hiroshimaは学校別データはあるが**募集人員が「1学級」
-表記の学校が大半でquota数値化不可という留保**（S1-4着手時に要検討）。nagasakiは**「Ⅰ期選抜」
-という特定選抜区分のみの数値という留保**（S1-4実装時に列の意味を要確認）。**残り10県は未確認**:
-hyogo（robots.txt Disallowで着手不可・別ルート要検討）, nagano, niigata, okayama, okinawa,
-shimane, shizuoka, tottori, yamaguchi, yamanashi。⚠️1県1日1回の制約により本日はここまで
-（同一県の再アクセスは翌日以降）。
+**🎉A(23県)の実機確認が完了した。** T-P1（進路多様化クラスタ）のP1-3が本ページのA分類23県を
+そのまま収集対象として使い、2026-09-06に21県を`src/data/teiji-competition-rates/`へ実データ
+収録完了（残り2県hyogo/yamaguchiは下記の通りブロック中と確定）。**このS1-3タスク自体は
+実質完了**（S1-4以降のページ作成判断へ進める状態）。
 
-## 次にやること（S1-3の残りステップ・次回セッションへ）
+- **完了21県**（学校名・募集人員・出願者数・倍率まで実収録・jest 130テストgreen）:
+  tokyo・miyagi・tokushima・nagano・okinawa・niigata・shimane・okayama・shizuoka・tottori・
+  yamanashi・chiba・gifu・gunma・hiroshima・kanagawa・kumamoto・kyoto・kagoshima・nagasaki
+  ＋hokkaido（15地域区分中13区分にデータ・檜山/根室は定時制セクション自体が存在しないと確認済み）
+- **ブロック中2県**: hyogo（robots.txt Disallow・別ルート要検討）・yamaguchi（既存ソースに
+  定時制セクション自体が無いと確認済み）
+- 個別の留保（S1-4実装時に要確認）: gifu=合計行なし（個票SUMで代替可能）・hiroshima=
+  募集人員が「1学級」表記の学校が大半でquota数値化不可・nagasaki=「Ⅰ期選抜」という特定選抜
+  区分のみの数値・gunma=R5版でのみ確認（R8本体に同型セクションがあるか未確認）
+- 詳細は`ops/tasks/T-P1-pathways-cluster.md`のP1-3節・各`<pref>.ts`のヘッダコメント・
+  `docs/worklog/`の該当日付エントリを参照（本ledgerのA分類当てはめ自体は正しかったことが
+  実データ収集で裏付けられた）
 
-1. **A(23県)の残り21県から優先着手**: 既に学校名・ページ番号が判明しているため、実機再確認の
-   労力が最も小さく、収集効率が高い。ただし「実機で確認する」原則は省略しない
-   （1県1日1回・間隔800ms以上・UA名乗る・robots.txt尊重）
-2. **B(4県)は個別に学校別内訳の有無を確認**してからA/Cのどちらかに再分類する
-3. **C(20県)はPDFを再取得し、定時制ページの中身を初めて精査する**必要がある。これはA県より
-   工数が大きい（新規調査に近い）ため、A/Bが尽きてから着手する
-4. 分類が固まった県から`ops/tasks/T-S1-school-page-recovery.md`のS1-4（ページ作成基準）へ進む。
-   **tokyo/miyagiは列構成がibaraki/tochigi型パーサパターンで対応できる見込みが高く、
-   S1-4のパイロット実装候補として有力**
+## 次にやること（S1-3は完了・S1-4以降へ）
+
+1. **B(4県)は個別に学校別内訳の有無を確認**してからA/Cのどちらかに再分類する（未着手のまま）
+2. **C(20県)はPDFを再取得し、定時制ページの中身を初めて精査する**必要がある。これはA県より
+   工数が大きい（新規調査に近い）ため優先度は低い
+3. `ops/tasks/T-S1-school-page-recovery.md`のS1-4（`/pref/[code]/school/[schoolCode]`への
+   定時制データ付きページ作成基準）へ進める状態になった。ただし**T-P1側は`/[prefecture]/
+   teiji-tsushin`という別ページ（県単位の一覧）で同じデータを既に公開活用中**（現在は
+   robots noindex・9/23以降👤判断で公開予定）。S1-4は学校ページ単位の粒度で別途統合するか、
+   T-P1側の実装を参照する形にするか、着手前に整理すること
