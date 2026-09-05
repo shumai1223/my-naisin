@@ -198,6 +198,31 @@ GSC 2026-06-02〜08-31（90日）:
 - [ ] ⚠️ **不安を煽らない。** 相手は困っている中学生と保護者。**煽り・誘導・断定を書かない**
 - [ ] 出席日数・調査書の扱いは**文科省と各教委の公表資料のみ**を根拠にする
 
+### 🔴 2026-09-06発見・即修正: `/[prefecture]/teiji-tsushin`がP1-0の裁定に違反していた
+
+P1-4実装直後のコミット（`32d932f`・別セッション）で、本ページに**収益化CTA
+（`ParentLeadCTA`・`selectLeadOffer()`経由でaffiliateId付き）が実装されていた**。
+これは本文書冒頭の🔴「第1期でやらないこと」1点目「収益化のCTAを1つも置かない」に
+明確に違反していた（さらに`sitemap.ts`へ登録済み＝5点目「本番反映の判断をしない。
+公開は👤が9/23以降に決める」にも抵触。my-naishinはpush=Cloudflare Workers自動デプロイ
+のため、独立した「ステージング環境」は存在せず、pushした時点でコード自体は本番Workerに
+届く。したがって「公開」を制御できる唯一の技術的手段はrobots noindexとsitemap除外）。
+
+**修正内容（このセッションで実施・commit予定）**:
+1. `ParentLeadCTA`とその依存(`selectLeadOffer`)を`page.tsx`から削除
+2. 再発防止テスト新設: `src/app/[prefecture]/teiji-tsushin/__tests__/no-monetization-cta.test.ts`
+   （ParentLeadCTA/selectLeadOffer/affiliateId等のパターンをsourceから検出）
+3. `robots: { index: false, follow: false }`をgenerateMetadataに追加
+4. `sitemap.ts`から`teijiTsushinPages`registrationを削除（`/pref/[code]/school/[schoolCode]`と
+   同型の「意図的noindex・sitemap未登録」パターンを適用）
+5. `dynamic-route-discoverability.test.ts`のEXEMPT_ROUTESに理由付きで登録
+6. tsc実exit0・jestフル481suites7044tests green確認済み
+
+**👤への申し送り**: ページ自体（データ・実装）は完成状態のまま残してある。noindex+sitemap除外
+により検索エンジン非公開の状態にしたが、**コードは既にpush済み＝本番Workerには既にデプロイ
+されている**（URLを直接知っていればアクセス可能）。9/23以降に👤が公開判断をする際は、
+このnoindexを外し`sitemap.ts`へ戻すだけで公開できる状態にしてある。
+
 ## 🔴 P1-0 設計の前提を変更（2026-09-03・Fable 5.1の指摘と対話セッションの検算による）
 
 **このクラスタを「記事」として作ってはいけない。「ツール」として作ること。**
@@ -279,7 +304,10 @@ B分類4県（kagawa/saitama/toyama/yamagata・境界事例）は判定に影響
 ## DoD（第1期）
 
 - [ ] ベースラインが `ops/baselines/` にあり、**判定ルールが作業前の日付で記録されている**
-- [ ] 収益化CTAが1つも無いことを機械的に確認できる（テストで固定する）
+- [x] 収益化CTAが1つも無いことを機械的に確認できる（テストで固定する）→
+      **✅2026-09-06** `no-monetization-cta.test.ts`新設（対象: 第1期で新設した唯一のページ
+      `/[prefecture]/teiji-tsushin`）。同ページに実装されていた`ParentLeadCTA`違反を発見・削除
+      した際に合わせて追加（詳細は上記「🔴2026-09-06発見・即修正」節）
 - [ ] 学校ページのtitle/descriptionに差分が無いことを確認できる（aichi実験の保護）
 - [ ] 公表値以外の数値が1つも入っていない（Y-0）
 - [ ] `tsc` 実exit 0 / jest green

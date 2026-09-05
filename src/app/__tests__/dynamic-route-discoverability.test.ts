@@ -31,6 +31,7 @@ const DISCOVERABILITY_EXEMPT_ROUTES: Record<string, string> = {
   '/[prefecture]/reverse': 'permanentRedirectのみのリダイレクトページ（[[opennext-ssg-1102-gotcha]]でsitemap対象外と確認済み）',
   '/blog/tag/[tag]': '意図的にnoindex設定（robots: { index: false }）のタグ一覧ページ',
   '/pref/[code]/school/[schoolCode]': 'Λ-2建設中の個別学校ページ・1県パイロット。意図的にnoindex（品質ゲート②③未達）・近隣校リンク実装まではsitemap未登録・内部リンクなしが正しい状態',
+  '/[prefecture]/teiji-tsushin': 'T-P1第1期の裁定「本番反映（公開）の判断をしない。公開は👤が9/23以降に決める」により意図的にsitemap未登録・robots noindex（2026-09-06）。内部リンク（[prefecture]ハブ・naishinページ）は残す',
 };
 
 describe('動的ルートの発見可能性監査（sitemap登録+内部リンク・TIER L）', () => {

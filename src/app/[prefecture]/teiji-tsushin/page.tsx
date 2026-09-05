@@ -5,11 +5,9 @@ import { GraduationCap, ChevronRight, Home, AlertCircle, ExternalLink, Info } fr
 
 import { getPrefectureAlternativeTracks, ALTERNATIVE_TRACK_PREFECTURE_CODES } from '@/lib/teiji-tsushin-options';
 import { PREFECTURES } from '@/lib/prefectures';
-import { selectLeadOffer } from '@/lib/lead-config';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { WebPageSchema } from '@/components/StructuredData/WebPageSchema';
 import { DatasetSchema } from '@/components/StructuredData/DatasetSchema';
-import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 
 interface PageProps {
   params: Promise<{ prefecture: string }>;
@@ -36,6 +34,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title,
     description,
     alternates: { canonical: `${BASE}/${pref.code}/teiji-tsushin` },
+    // T-P1第1期の裁定「本番反映（公開）は👤が9/23以降に決める」により、ビルドはするが
+    // 検索エンジンには意図的に見せない（2026-09-06追加）。
+    robots: { index: false, follow: false },
   };
 }
 
@@ -46,7 +47,6 @@ export default async function PrefectureTeijiTsushinPage({ params }: PageProps) 
   if (!data || !pref) notFound();
 
   const url = `${BASE}/${pref.code}/teiji-tsushin`;
-  const offer = selectLeadOffer({ prefectureCode: pref.code, placement: 'prefecture' });
   const teijiSchools = data.schools.filter((s) => s.trackType === '定時制');
   const tsushinSchools = data.schools.filter((s) => s.trackType === '通信制');
   const latestSource = data.sources[data.sources.length - 1];
@@ -190,18 +190,6 @@ export default async function PrefectureTeijiTsushinPage({ params }: PageProps) 
             </Link>
             で解説しています。
           </div>
-
-          {/* 保護者向けリード */}
-          <ParentLeadCTA
-            className="mt-2"
-            placement="prefecture"
-            prefectureCode={pref.code}
-            heading={offer.heading}
-            body={offer.body}
-            affiliateId={offer.affiliateId}
-            ctaText={offer.ctaText}
-            note={offer.note}
-          />
 
           {/* 出典 */}
           <div className="mt-8 rounded-xl border border-amber-200 bg-amber-50 p-4">
