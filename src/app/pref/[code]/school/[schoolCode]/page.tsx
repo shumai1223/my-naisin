@@ -7,6 +7,7 @@ import { getPrefectureByCode } from '@/lib/prefectures';
 import { COMPETITION_RATE_HISTORY_BY_PREFECTURE } from '@/data/competition-rate-history';
 import { selectNearbySchools, getSchoolCategoryTrends, groupSchoolHistoryByDepartment, computeSchoolHistoryYoy } from '@/lib/school-page-data';
 import { getPrefectureSchoolPageData, INDEXED_SCHOOL_PAGE_PREFECTURE_CODES } from '@/lib/school-page-lookup';
+import { getSchoolTeijiRecords } from '@/lib/school-teiji-lookup';
 import { shortenSchoolName } from '@/lib/school-name-short-form';
 import { buildSchoolFaqItems } from '@/lib/school-page-faq';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
@@ -97,6 +98,7 @@ export default async function SchoolPage({ params }: PageProps) {
 
   const nearbySchools = selectNearbySchools(school, data.schools, 3);
   const categoryTrends = getSchoolCategoryTrends(code, school, COMPETITION_RATE_HISTORY_BY_PREFECTURE[code]);
+  const teijiRecords = getSchoolTeijiRecords(code, schoolCode);
   const schoolHistoryByDepartment = groupSchoolHistoryByDepartment(school.history);
   // S3-3パイロット（aichi限定・BAR.md V-6）: 検索ユーザーが実際に打つ短縮形をh1に併記する。
   const shortName = SHORT_FORM_PILOT_PREFECTURE_CODES.includes(code) ? shortenSchoolName(school.schoolName) : null;
@@ -338,6 +340,47 @@ export default async function SchoolPage({ params }: PageProps) {
                   </div>
                 ))}
               </div>
+            </section>
+          )}
+
+          {/* T-S1 S1-4（2026-09-06投入）: この学校が定時制・通信制課程を持つ場合のみ表示する
+              追加セクション。全日制の今季倍率・多年度推移パイプラインには一切触れず、
+              school-teiji-lookup.ts経由でT-P1のteiji-competition-ratesデータを引くだけの
+              完全に独立した追加（該当データが無い学校では何も表示されない）。 */}
+          {teijiRecords.length > 0 && (
+            <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <h2 className="mb-1 text-lg font-bold text-slate-800">定時制・通信制課程</h2>
+              <p className="mb-4 text-xs text-slate-500">
+                全日制とは別に、{prefecture.name}教育委員会が公表している定時制・通信制課程の募集人員・出願者数・倍率です。
+              </p>
+              <div className="overflow-x-auto">
+                <table className="w-full min-w-[420px] text-left text-sm">
+                  <thead>
+                    <tr className="border-b border-slate-200 text-xs text-slate-500">
+                      <th className="py-2 pr-3 font-medium">学科</th>
+                      <th className="py-2 pr-3 text-right font-medium">募集人員</th>
+                      <th className="py-2 pr-3 text-right font-medium">出願者数</th>
+                      <th className="py-2 text-right font-medium">倍率</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {teijiRecords.map((r, i) => (
+                      <tr key={`${r.department}-${i}`} className="border-b border-slate-100">
+                        <td className="py-2 pr-3 text-slate-700">{r.department}</td>
+                        <td className="py-2 pr-3 text-right text-slate-600">{r.quota}</td>
+                        <td className="py-2 pr-3 text-right text-slate-600">{r.finalApplicants}</td>
+                        <td className="py-2 text-right font-bold text-slate-800">{r.finalRate.toFixed(2)}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <Link
+                href={`/${prefecture.code}/teiji-tsushin`}
+                className="mt-4 inline-block text-xs font-bold text-teal-700 underline underline-offset-2"
+              >
+                {prefecture.name}の定時制・通信制高校一覧を見る
+              </Link>
             </section>
           )}
 
