@@ -230,7 +230,18 @@ GSC 2026-06-02〜08-31（90日）:
 ⚠️ 数を作るために「制度の説明文だけあって数値が無い県」を県数に数えない。
 **入力に対して数値が返せることが条件。**
 
----
+### ✅ 判定結果（2026-09-06・P1-3のA分類23県完了時点で確定）
+
+**10県以上 → ツールとして作る（出口確定）。**
+
+実測: `src/data/teiji-competition-rates/`に募集人員・出願者数・倍率のいずれも公表値として
+県別に返せる状態で収録済みなのは**21県（tokyo/miyagi/tokushima/nagano/okinawa/niigata/
+shimane/okayama/shizuoka/tottori/yamanashi/chiba/gifu/gunma/hiroshima/kanagawa/kumamoto/
+kyoto/kagoshima/nagasaki）+hokkaido（15地域区分中13区分にデータ）=22県**。判定基準の
+「10県以上」を大きく上回っており、**下方修正の余地なく明確にクリア**（hyogo/yamaguchiの
+2県を除外しても21県で単独クリア）。よってP1-4（入力して答えが返る面）へ進む。
+B分類4県（kagawa/saitama/toyama/yamagata・境界事例）は判定に影響しないため未着手のまま
+でよい（10県基準は既にA分類だけで大幅に超過済み）。
 
 ## P1-5 記事の質（ここで勝負が決まる）
 
