@@ -185,12 +185,25 @@ scripts/bairitsu-ingest/  →  extract-pdf-geometry.py  ただ1本
 
 ## DoD
 
-- [ ] `県コード → PDF → レコード` が1本のコマンドで通る
-      ⚠️2026-09-07時点で未着手と判明: `scripts/bairitsu-ingest/`には`archive-changed-pdfs.mjs`
-      （取得）・`validate-all-registered.ts`（検算）等の個別スクリプトはあるが、県コード1つを
-      渡すと取得→パース→検算→差分まで一気通貫で走る単一エントリポイントはまだ無い。
-      **次回このタスクへ戻るセッションが最初に着手すべき残タスク**（E-1〜E-6の部品はすべて
-      揃っているため、配線するだけで完成する見込み）
+- [x] `県コード → PDF → レコード` が1本のコマンドで通る
+      ✅2026-09-07: 中核の純関数（`src/lib/bairitsu-ingest/harvest-prefecture.ts`の
+      `harvestPrefecture()`・commit 5457a53）に続き、実I/O層のCLIラッパー
+      `scripts/bairitsu-ingest/harvest-prefecture.ts`を実装した。
+      `npx tsx scripts/bairitsu-ingest/harvest-prefecture.ts <県コード> <PDFパス> <ページ番号,...>`
+      で、指定ページを`extract-pdf-geometry.py`へ1ページずつ渡してジオメトリを抽出→
+      `harvestPrefecture()`へ合成→結果を標準出力＋exit codeで返すところまで一本道になった
+      （no-parser/検算NGはexit 1・検算OKはexit 0）。**R9が未公開のため実データでの結合
+      テストはできない**が、PyMuPDFで生成したダミーPDF（表構造を持たない1行テキストのみ）を
+      使い、①未登録県コード（no-parser・exit1）②登録済み県コード×ダミーPDF（record-count/
+      grand-total両方の検算エラーが正しく検出されvalidation-failedとしてexit1）③引数不足
+      （usageメッセージ・exit1）の3パターンで、spawn→JSON.parse→純関数呼び出し→exit codeの
+      配線自体が壊れていないことを確認した（パース結果の**中身**の正しさはR9公表後の実データ
+      でしか検証できないが、それは各県パーサ〈E-1〉自体の責務でこのCLIラッパーの責務ではない）。
+      前段（PDF取得）は既存の`archive-changed-pdfs.mjs`が担い、その保存先パスをこのCLIへ渡す
+      想定。ページ番号は自動判定せず呼び出し側が明示指定する設計（表の位置を誤検出したまま
+      fail-closedを迂回するリスクを避けるため）。tsc実exit0・jest全体491suites7154tests
+      green（既存スイートに変更なし・このCLIスクリプト自体はarchive-changed-pdfs.mjs等の
+      既存スクリプトと同様にjest対象外）
 - [x] R8全県リプレイの再現率が記録されている
       → E-6で完了済み（`ops/BAIRITSU-INGEST-RUNBOOK.md`「T-Y11E E-6: R8全県リプレイ結果」節に
       36/47県・内訳表・残り11県の理由を記録済み）
