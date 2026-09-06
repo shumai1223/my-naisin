@@ -285,6 +285,17 @@ export default function ChousashoPage() {
                   出典: 京都府教育委員会「入学者選抜に関する諸様式（報告書等）」
                 </a>
               </div>
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <div className="font-bold text-slate-800">茨城県（部活動を独立項目に）</div>
+                <p className="mt-1 leading-relaxed text-slate-600">
+                  各教科の学習の記録・総合的な学習の時間の記録・特別活動に関する事実及び所見・
+                  欠席日数・その他の事項に加えて、<strong>「部活動・特技等の記録」を特別活動とは
+                  別の独立項目</strong>としています。これまで確認した県の中では初めての区分方法です。
+                </p>
+                <a href="https://kyoiku.pref.ibaraki.jp/wp-content/uploads/2025/11/b945a5295b800e8d45f790a23bf6eda9.xlsx" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                  出典: 茨城県教育委員会「調査書、成績及び諸活動等の記録通知書」
+                </a>
+              </div>
             </div>
             <p className="mt-4 text-xs text-slate-500">
               ※ いずれも記載事項（様式）の整理であり、入試の合否判定に使う内申点（調査書点）の
