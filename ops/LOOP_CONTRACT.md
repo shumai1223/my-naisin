@@ -8,7 +8,34 @@
 
 ## 0. 今季の主食（迷ったらここへ戻る）
 
-### 🆕 2026-09-06 16:4x時点の状態（T-Y11E E-6実施中に未登録5県を発見・追加登録・36/47県に拡大）
+### 🆕 2026-09-06 17:1x時点の状態（T-Y11E E-4完了・検算パイプライン接続・36/36県fail-closed green）
+
+前の状態記録（E-6実施中に未登録5県発見・36/47県）から継続。着手時、前セッションが未commit/
+未worklog記録のまま残していた`validate-parsed-records.ts`＋テストを発見（内容確認したところ
+E-4の要件を満たす完成品だったため、まず検証してから引き継いだ）。E-4の3検算
+（グランドトータル照合/`finalrate-convention.ts`3方式判定/レコード件数）を`validateParsedRecords`
+に統合し、実行可能な入口`scripts/bairitsu-ingest/validate-all-registered.ts`（`npx tsx`実行・
+1県でもNGならexit 1のfail-closed）を新設して36県全登録県に対して実行した。
+
+**初回実行でyamanashiのみ検算NG（finalrate-convention）を検出**。転記ミスではなく
+`yamanashi.ts`ヘッダコメント既述の「帰国生徒等特別措置の適用者を最終志願者数の内数に含めつつ
+倍率算定からは除外する」公表資料自体の算定方式（`yamanashi.test.ts`が許容誤差0.07で個別に
+不変条件検証済み）が原因。3方式チェックを無条件に緩めず、県コードを明示指定した場合のみ効く
+`finalRateToleranceOverride`という例外経路を追加し、他35県のfail-closedを維持したまま解消
+（詳細はworklog 17:19・`ops/BAIRITSU-INGEST-RUNBOOK.md`「T-Y11E E-4: 検算パイプライン接続結果」
+節・commit `b245f50`）。再実行で**36/36県OK**。tsc実exit0・bairitsu-ingest配下38suites228tests
+green・フルスイート487suites7128tests green。push済み。E-4のDoDチェックボックス3件とも完了。
+
+**次に再開するセッションがまず行うこと**:
+1. Gmail/GA4/GSC/Trends MCP接続確認
+2. Gmail新着返信の確認
+3. `ops/tasks/T-Y11E-r9-harvest-pipeline.md`の**E-5（差分と失敗の切り分け・前年度からの
+   変化を人が読める形で出す）**に進むか、同じ横断grep方式で他の`ops/tasks/*.md`の
+   未完了・日付ゲート無し項目を探すこと。E-3（pdfHash backfill）はT-N1-N4 N1-2と重複する
+   ため9/08以降に統合して着手すること
+4. 日付ゲート（9/08 T-Y11B・N1-2/9/09 T-A1/9/21 W-8）は未到達
+
+### 2026-09-06 16:4x時点の状態（T-Y11E E-6実施中に未登録5県を発見・追加登録・36/47県に拡大）
 
 前の状態記録（E-2完了）から継続。E-3（pdfHash・T-N1-N4のN1-2と重複・9/08まで着手不可のため
 スキップ）を経てE-6（R8全県リプレイ検証）に着手したところ、**fixtureは存在するがレジストリ
