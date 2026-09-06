@@ -631,6 +631,20 @@ export default function ChousashoPage() {
                   出典: 栃木県教育委員会「令和8年度栃木県立高等学校入学者選抜」別記「調査書作成の要領」
                 </a>
               </div>
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <div className="font-bold text-slate-800">群馬県（国の標準区分がすべて揃う構成）</div>
+                <p className="mt-1 leading-relaxed text-slate-600">
+                  全日制課程等はWEB出願システムから出力したエクセルデータで調査書を作成する方式
+                  ですが、実施要項の別記に記載項目の説明があり、学籍の記録・各教科の学習の記録・
+                  総合的な学習の時間の記録・特別活動の記録・行動の記録・出欠の記録・参考となる
+                  諸事項等の記録という構成でした。<strong>これまでの一部の県で「行動の記録」や
+                  「出欠の記録」が全部または一部（学年限定）欠けていたのに対し、群馬県は国の
+                  指導要録標準区分に相当する項目がすべて揃っています</strong>。
+                </p>
+                <a href="https://www.pref.gunma.jp/uploaded/attachment/671251.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                  出典: 群馬県教育委員会「令和8年度群馬県公立高等学校入学者選抜実施要項」別記3
+                </a>
+              </div>
             </div>
             <p className="mt-4 text-xs text-slate-500">
               ※ いずれも記載事項（様式）の整理であり、入試の合否判定に使う内申点（調査書点）の
