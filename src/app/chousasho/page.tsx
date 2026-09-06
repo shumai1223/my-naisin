@@ -357,6 +357,19 @@ export default function ChousashoPage() {
                   出典: 和歌山県教育委員会「別記第7号様式　調査書」
                 </a>
               </div>
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <div className="font-bold text-slate-800">鳥取県（部分確認：旧形式ファイルのため詳細な配置は未確定）</div>
+                <p className="mt-1 leading-relaxed text-slate-600">
+                  様式は旧形式のExcelファイル（.xls）で配布されており、記載項目に関する文字列として
+                  「総合的な学習の時間の記録」「特別活動等の記録（学級活動・生徒会活動を含む）」
+                  「体育・文化・奉仕活動等」に加え、国の指導要録標準10区分の一部と一致する
+                  「思いやり・協力」「勤労・奉仕」等の文字列が確認できました。ただし正式な見出し名や
+                  厳密な配置までは復元できていません。
+                </p>
+                <a href="https://www.pref.tottori.lg.jp/secure/1405973/R08_01_chousasyo_R04_03_ikousotsugyou.xls" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                  出典: 鳥取県教育委員会「様式第１号　調査書」
+                </a>
+              </div>
             </div>
             <p className="mt-4 text-xs text-slate-500">
               ※ いずれも記載事項（様式）の整理であり、入試の合否判定に使う内申点（調査書点）の
