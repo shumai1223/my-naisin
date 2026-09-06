@@ -8,7 +8,22 @@
 
 ## 0. 今季の主食（迷ったらここへ戻る）
 
-### 🆕 2026-09-06 13:3x時点の状態（T-Y11E E-1・hiroshima(16県目)を移設完了・過半数超え）
+### 🆕 2026-09-06 13:4x時点の状態（T-Y11E E-1・wakayama(17県目)を移設完了）
+
+前の状態記録（hiroshima完了）から継続。T-Y11E E-1のwakayama（17/31県目・141行）を完了。
+`extraColumns`でD列を追加取得しfinalApplicants=D+Eを合成するkochi型拡張・分校4校の複合名合成・
+くくり募集3組override・quota>0不変条件（Number('')が0を返す罠）を純関数化（詳細はworklog
+13:43・commit `c87f07a`）。tsc実exit0・bairitsu-ingest配下37suites193tests green・
+フルスイート485suites7086tests green。push済み。
+
+**次に再開するセッションがまず行うこと**:
+1. Gmail/GA4/GSC/Trends MCP接続確認
+2. Gmail新着返信の確認
+3. 手が空いたらT-Y11E E-1の18県目（候補: okinawa144行/gifu151行）に進むか、
+   同じ横断grep方式で他の`ops/tasks/*.md`の未完了・日付ゲート無し項目を探すこと
+4. 日付ゲート（9/08 T-Y11B・N1-2/9/09 T-A1/9/21 W-8）は未到達
+
+### 2026-09-06 13:3x時点の状態（T-Y11E E-1・hiroshima(16県目)を移設完了・過半数超え）
 
 前の状態記録（kyoto完了）から継続。T-Y11E E-1のhiroshima（16/31県目・161行）を完了。2時点
 スナップショット（2/9中間・2/18最終）の選択・くくり募集5組の値ベースoverride・座標抽出で
