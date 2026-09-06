@@ -723,6 +723,20 @@ export default function ChousashoPage() {
                   出典: 静岡県教育委員会「令和8年度静岡県公立高等学校入学者選抜実施要領」様式第1号
                 </a>
               </div>
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <div className="font-bold text-slate-800">香川県（「新体力テストの結果」は「その他の活動の記録」欄に含む）</div>
+                <p className="mt-1 leading-relaxed text-slate-600">
+                  学籍の記録・各教科の学習の記録・総合的な学習の時間の記録・特別活動の記録・行動の
+                  記録・出欠の記録・その他の活動の記録・人物や適性等に関する所見という構成でした。
+                  <strong>「その他の活動の記録」欄には第3学年に実施した新体力テストの結果や部活動
+                  の大会実績、奉仕活動、善行、特技等が含まれます</strong>——静岡県では独立項目
+                  だった新体力テストの結果を、香川県では既存の欄の記載事項の一つとして扱っている
+                  点が対照的でした。
+                </p>
+                <a href="https://www.pref.kagawa.lg.jp/documents/15096/saimoku8.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                  出典: 香川県教育委員会「令和8年度香川県公立高等学校入学者選抜実施細目」
+                </a>
+              </div>
             </div>
             <p className="mt-4 text-xs text-slate-500">
               ※ いずれも記載事項（様式）の整理であり、入試の合否判定に使う内申点（調査書点）の
