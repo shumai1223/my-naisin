@@ -605,6 +605,19 @@ export default function ChousashoPage() {
                   出典: 山形県教育委員会「令和8年度山形県公立高等学校入学者選抜実施要項」
                 </a>
               </div>
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <div className="font-bold text-slate-800">福島県（「行動の記録」が無く「長所・特技等の記録」を併設）</div>
+                <p className="mt-1 leading-relaxed text-slate-600">
+                  様式1号の調査書は、各教科の学習の記録・総合的な学習の時間の記録・特別活動等の
+                  記録（学級活動・生徒会活動・学校行事・その他の活動）・出欠の記録という構成に
+                  加えて<strong>「長所・特技等の記録」という欄が独立して設けられている</strong>
+                  一方、<strong>「行動の記録」（国の指導要録標準10区分）に相当する独立項目は
+                  存在しません</strong>。
+                </p>
+                <a href="https://www.pref.fukushima.lg.jp/uploaded/attachment/709972.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                  出典: 福島県教育委員会「令和8年度福島県立高等学校入学者選抜実施要綱」様式1号
+                </a>
+              </div>
             </div>
             <p className="mt-4 text-xs text-slate-500">
               ※ いずれも記載事項（様式）の整理であり、入試の合否判定に使う内申点（調査書点）の
