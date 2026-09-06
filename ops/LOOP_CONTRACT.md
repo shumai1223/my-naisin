@@ -8,7 +8,27 @@
 
 ## 0. 今季の主食（迷ったらここへ戻る）
 
-### 🆕 2026-09-06 11:4x時点の状態（T-Y11E E-1に着手・chiba(7県目)を移設完了）
+### 🆕 2026-09-06 12:1x時点の状態（T-Y11E E-1・yamanashi(8県目)を移設完了）
+
+前回セッション終了直後に再開（worklog mtime差18分・重複稼働ではなく直前セッションの残滓と判断・
+直近commitとの時刻差も確認済み）。Gmail新着8件を確認したが対応要は無し（和歌山県教育委員会からの
+09-04着信は既に`src/lib/data-license-ledger.ts`のwakayamaエントリ(redistribution:'ng')へ反映済みと
+確認・新規リード通知はD1自動記録のみで対応不要）。`loop-question-note.md`末尾3件（T-S13A A-1/
+clicks削減報告/T-P1是正報告/Cowork batch13追加）はいずれも報告のみ・回答不要と確認済み。
+
+続けてT-Y11E E-1のyamanashi（8/31県目・77行）を完了。chiba型を踏襲しつつ、既存データが学科名の
+全角括弧を半角に統一している点のみpost-process（`.replace(/（/g, '(')...`）として追加（詳細は
+worklog 12:10・commit `1c1cd52`）。tsc実exit0・bairitsu-ingest配下37suites184tests green・
+フルスイート485suites7077tests green。push済み。
+
+**次に再開するセッションがまず行うこと**:
+1. Gmail/GA4/GSC/Trends MCP接続確認
+2. Gmail新着返信の確認
+3. 手が空いたらT-Y11E E-1の9県目（候補: miyagi81行/nagasaki83行）に進むか、
+   同じ横断grep方式で他の`ops/tasks/*.md`の未完了・日付ゲート無し項目を探すこと
+4. 日付ゲート（9/08 T-Y11B・N1-2/9/09 T-A1/9/21 W-8）は未到達
+
+### 2026-09-06 11:4x時点の状態（T-Y11E E-1に着手・chiba(7県目)を移設完了）
 
 T-P1完全クローズ後、ops/tasks横断grepで新規候補が尽きたため`T-Y11E-r9-harvest-pipeline.md`
 （不在期間の予備主食・👤の判断を一切要さない事前承認済みタスク）の着手条件③に照らして着手。
