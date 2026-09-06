@@ -8,7 +8,23 @@
 
 ## 0. 今季の主食（迷ったらここへ戻る）
 
-### 🆕 2026-09-06 14:4x時点の状態（T-Y11E E-1・shizuoka(24県目)を移設完了）
+### 🆕 2026-09-06 14:5x時点の状態（T-Y11E E-1・oita(25県目)を移設完了・残り6県）
+
+前の状態記録（shizuoka完了）から継続。T-Y11E E-1のoita（25/31県目・216行）を完了。注記が
+quota/applicants列にはみ出すガード・ラベル/数値がブロック境界をまたいで分裂するgreedy合体・
+中津南耶馬溪校の個別rename・定時制セクションの全角スペース均等割り付け検知・くくり募集2件の
+overrideを純関数化（詳細はworklog 14:54・commit `079a462`）。tsc実exit0・
+bairitsu-ingest配下37suites201tests green・フルスイート485suites7094tests green。push済み。
+**31県中25県完了・残り6県（kumamoto/shiga/kochi/yamagata/fukuoka/nagano）**。
+
+**次に再開するセッションがまず行うこと**:
+1. Gmail/GA4/GSC/Trends MCP接続確認
+2. Gmail新着返信の確認
+3. 手が空いたらT-Y11E E-1の26県目（候補: kumamoto225行が最短）に進むか、
+   同じ横断grep方式で他の`ops/tasks/*.md`の未完了・日付ゲート無し項目を探すこと
+4. 日付ゲート（9/08 T-Y11B・N1-2/9/09 T-A1/9/21 W-8）は未到達
+
+### 2026-09-06 14:4x時点の状態（T-Y11E E-1・shizuoka(24県目)を移設完了）
 
 前の状態記録（kagoshima完了）から継続。T-Y11E E-1のshizuoka（24/31県目・202行）を完了。選抜
 方法別内訳行（Ⅰ/Ⅱ/Ⅲ）の割合100%判定・注記無しⅠ/Ⅱの学科名一部扱い・学科名折り返し8校の
