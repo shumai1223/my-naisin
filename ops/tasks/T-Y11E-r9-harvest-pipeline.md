@@ -132,10 +132,20 @@ scripts/bairitsu-ingest/  →  extract-pdf-geometry.py  ただ1本
 
 ## E-5 差分と失敗の切り分け
 
-- [ ] 前年度からの変化を人が読める形で出す
-- [ ] `ops/BAIRITSU-INGEST-RUNBOOK.md`に書いてある方針をコードにする
+- [x] 前年度からの変化を人が読める形で出す
+      ✅`src/lib/bairitsu-ingest/diff-parsed-records.ts`の`diffParsedRecords`（学校名+学科名を
+      キーに新設/廃止/数値変化/変化なしを分類）＋`formatDiffReport`（日本語の人が読めるレポート・
+      空セクションは出力しない）
+- [x] `ops/BAIRITSU-INGEST-RUNBOOK.md`に書いてある方針をコードにする
       （転記ミスが特定できる場合は自己修正／原因不明は未解明差分として記録／
       同じ県で3回連続失敗なら質問ノートへ「構造変化の疑い」）
+      ✅「転記ミスの自己修正」「未解明差分として記録」は資料の内容を読んで判断する人間/loopの
+      個別判断が本質のため自動化の対象外（RUNBOOKの記述を維持）。**機械判定できる部分＝
+      「同じ県で3回連続失敗」の検出**を`src/lib/bairitsu-ingest/validation-failure-tracker.ts`の
+      `recordValidationOutcome`として実装（県別の連続失敗数を台帳で追跡・3回目に達した回だけ
+      `shouldEscalate: true`を返し4回目以降は再エスカレーションしない設計＝質問ノートを毎回
+      同じ内容で埋めない）。台帳の永続化は呼び出し側の責務（実際の呼び出しはR9公表後の運用時に
+      行う・現時点でR9データが存在しないため実データでの結線は次段階）
 
 ## E-6 ★R8全県リプレイ（これが最強の検証）
 
