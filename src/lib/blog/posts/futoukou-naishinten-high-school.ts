@@ -1,4 +1,5 @@
 import { BlogPost } from '@/lib/blog/types';
+import { ALTERNATIVE_TRACK_PREFECTURE_CODES } from '@/lib/teiji-tsushin-options';
 
 export const post: BlogPost = {
   slug: 'futoukou-naishinten-high-school',
@@ -28,6 +29,7 @@ export const post: BlogPost = {
     <li><a href="#impact">不登校だと高校受験はできない？内申点・欠席日数の影響</a></li>
     <li><a href="#relief-system">不利にならないために！不登校生をサポートする「救済措置」</a></li>
     <li><a href="#choices">内申点が不安でも大丈夫！不登校生におすすめの高校の選択肢</a></li>
+    <li><a href="#data">【公表データ】定時制・通信制の倍率を都道府県で確認する</a></li>
     <li><a href="#actions">今からできる！内申点や出席日数をカバーする具体的な対策</a></li>
     <li><a href="#summary">まとめ</a></li>
   </ul>
@@ -157,6 +159,22 @@ export const post: BlogPost = {
     <p>どうしても全日制に通いたい場合、私立高校の「オープン入試（フリー受験）」が狙い目です。調査書を点数化せず、当日のテストの点数だけで合否が決まるため、実力さえあれば逆転合格が可能です。また、事前に中学校の先生を通じて相談することで、不登校生徒に対する独自の配慮を行ってくれる私立高校もあります。</p>
   </div>
 </div>
+
+<hr>
+
+<h2 id="data">【公表データ】定時制・通信制の倍率を都道府県で確認する</h2>
+<p>「実際にどれくらいの生徒が通信制・定時制を選び、倍率はどうなっているのか」を、教育委員会が公表している数値で確認することもできます。当サイトでは、各都道府県教育委員会が発表した募集人員・出願者数・倍率を独自に収集しており、現在<strong>${ALTERNATIVE_TRACK_PREFECTURE_CODES.length}都道府県分</strong>を都道府県別に比較できるページを用意しています。</p>
+
+<div class="point-box">
+  <h4>公表データでわかること</h4>
+  <ul>
+    <li>都道府県ごとの定時制・通信制課程の学校数（公表資料ベース）</li>
+    <li>学校・学科ごとの募集人員・出願者数</li>
+    <li>公表されている倍率（本サイトによる推定・「どこが入りやすいか」の順位づけは行っていません）</li>
+  </ul>
+</div>
+
+<p class="source-note">出典はすべて各都道府県教育委員会が公表した入学者選抜結果です。独自の予想・ボーダーラインの推定は一切含みません。詳しくは<a href="/futoukou/teiji-tsushin-hikaku">都道府県別 定時制・通信制の倍率比較</a>のページでご確認いただけます。</p>
 
 <hr>
 

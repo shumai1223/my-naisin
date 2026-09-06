@@ -291,11 +291,17 @@ P1-4実装直後のコミット（`32d932f`・別セッション）で、本ペ�
 **10県以上 → ツールとして作る（出口確定）。**
 
 実測: `src/data/teiji-competition-rates/`に募集人員・出願者数・倍率のいずれも公表値として
-県別に返せる状態で収録済みなのは**21県（tokyo/miyagi/tokushima/nagano/okinawa/niigata/
+県別に返せる状態で収録済みなのは**20県（tokyo/miyagi/tokushima/nagano/okinawa/niigata/
 shimane/okayama/shizuoka/tottori/yamanashi/chiba/gifu/gunma/hiroshima/kanagawa/kumamoto/
-kyoto/kagoshima/nagasaki）+hokkaido（15地域区分中13区分にデータ）=22県**。判定基準の
+kyoto/kagoshima/nagasaki）+hokkaido（15地域区分中13区分にデータ）=21県**。判定基準の
 「10県以上」を大きく上回っており、**下方修正の余地なく明確にクリア**（hyogo/yamaguchiの
-2県を除外しても21県で単独クリア）。よってP1-4（入力して答えが返る面）へ進む。
+2県を除外しても20県で単独クリア）。よってP1-4（入力して答えが返る面）へ進む。
+
+**⚠️2026-09-06訂正**: 本節は原文で「21県+hokkaido=22県」としていたが、実ファイル数
+（`ls src/data/teiji-competition-rates/`で.ts本体20+hokkaido=21件・
+`ALTERNATIVE_TRACK_PREFECTURE_CODES.length`も21）と突合したところ1件のズレ（off-by-one）
+があったため訂正した（10県基準の判定結果自体には影響なし）。[[feedback-verify-data-via-files-not-lib-comments]]
+と同型の教訓＝件数はナラティブの手書きでなく実ファイル/実値を数える。
 B分類4県（kagawa/saitama/toyama/yamagata・境界事例）は判定に影響しないため未着手のまま
 でよい（10県基準は既にA分類だけで大幅に超過済み）。
 
@@ -307,33 +313,44 @@ B分類4県（kagawa/saitama/toyama/yamagata・境界事例）は判定に影響
       （候補: 47県の制度差を実データで並べられるのはうちだけ）→
       **✅2026-09-06決定**: この候補を採用した。理由は①P1-2で確認した競合（kizuki.or.jp・
       willschool.net等）はいずれも一般論の解説記事で都道府県別の公表数値を1件も出していない
-      ②P1-3で既に22県分の定時制・通信制の実データ（募集人員・出願者数・倍率）を収集済み＝
+      ②P1-3で既に21県分の定時制・通信制の実データ（募集人員・出願者数・倍率）を収集済み＝
       ゼロから作る必要がない③既存の`/[prefecture]/teiji-tsushin`（P1-4）が県別の詳細を
       既に持っており、足りなかったのは「全国を横断して見せる入口」だけだった。
 - [x] ⚠️ **量産しない。** 3本を本気で書くほうが30本より効く可能性が多い。**判断根拠を書き残す** →
-      **✅2026-09-06 1本目を実装完了**（3本のうち1本。残り2本は次のセッションへ持ち越し・
+      **✅2026-09-06 3本中2本を実装完了**（残り1本は次のセッションへ持ち越し・
       理由は下記「3本の計画」参照）:
-      - `src/lib/teiji-tsushin-options.ts`に`getAlternativeTrackNationalSummary()`を新設
-        （22県分を横断集計する純関数。件数はP1-3の公表値そのまま・平均倍率は本サイトの単純
-        集計であることをコメント・ページ両方に明記＝naishin-kakusaの`ratio`と同じ扱い）
-      - `/futoukou/teiji-tsushin-hikaku`を新設（都道府県別の集計表＋各県の`teiji-tsushin`
+      - **1本目**: `src/lib/teiji-tsushin-options.ts`に`getAlternativeTrackNationalSummary()`を
+        新設（21県分を横断集計する純関数。件数はP1-3の公表値そのまま・平均倍率は本サイトの単純
+        集計であることをコメント・ページ両方に明記＝naishin-kakusaの`ratio`と同じ扱い）。
+        `/futoukou/teiji-tsushin-hikaku`を新設（都道府県別の集計表＋各県の`teiji-tsushin`
         詳細ページへのリンク）。第1期の裁定に従いCTA無し・`robots: {index:false, follow:false}`・
-        `SITEMAP_EXCLUDED_ROUTES`に登録（`/[prefecture]/teiji-tsushin`と同型のステージング）
-      - 既存の指名ページ`/futoukou`と`/futoukou/tsugaku`（両方インデックス済み・ライブ）から
+        `SITEMAP_EXCLUDED_ROUTES`に登録（`/[prefecture]/teiji-tsushin`と同型のステージング）。
+        既存の指名ページ`/futoukou`と`/futoukou/tsugaku`（両方インデックス済み・ライブ）から
         新ページへ内部リンクを追加（title/description/FAQは一切変更していないためCTR実験・
-        3週間ガードには抵触しない。本文末尾の「関連ページ」セクションへの追加のみ）
-      - 再発防止テスト新設（`no-monetization-cta.test.ts`・teiji-tsushinと同型）＋
-        lib関数の単体テスト4件（全国合計の整合性・県別行の値・平均の丸め）
-      - dev server実機確認済み: `/futoukou/teiji-tsushin-hikaku`が200・noindexメタタグ確認・
+        3週間ガードには抵触しない。本文末尾の「関連ページ」セクションへの追加のみ）。
+        再発防止テスト新設（`no-monetization-cta.test.ts`・teiji-tsushinと同型）＋
+        lib関数の単体テスト4件（全国合計の整合性・県別行の値・平均の丸め）。
+        dev server実機確認済み: `/futoukou/teiji-tsushin-hikaku`が200・noindexメタタグ確認・
         `/futoukou`と`/futoukou/tsugaku`双方にリンク表示確認・`/tokyo/teiji-tsushin`への
         遷移確認。tsc実exit0・jestフル485suites7075tests green
-      - **3本の計画（判断根拠）**: ①今回実装した全国横断ハブ（差別化ポイントそのもの）
-        ②既存の低CTR記事`/blog/futoukou-naishinten-high-school`（順位17.5・CTR0.38%）への
-        「本サイトだけが持つ実データ」セクション追加（既存の高トラフィック資産を強化する方が
-        新規ページを増やすより費用対効果が高い可能性があるが、この記事は既にGSCで実験観測
-        対象のため編集前に影響範囲を慎重に見極める必要があり、今回は見送った）③調査書クラスタ
+      - **2本目（2026-09-06追加）**: `data/ctr-improvement-log.json`を先に確認し
+        `/blog/futoukou-naishinten-high-school`にtitle/meta/FAQ編集歴が無い（3週間ガード
+        非該当）ことを確認したうえで、既存の低CTR記事（順位17.5・CTR0.38%）の**本文のみ**に
+        新セクション「【公表データ】定時制・通信制の倍率を都道府県で確認する」を追加した
+        （title/description/keywords/sourcesは一切変更していない＝aichi実験等のCTR計測を
+        汚染しない）。県数は`${ALTERNATIVE_TRACK_PREFECTURE_CODES.length}`をテンプレート
+        リテラルで直接埋め込み、ハードコード値を書かなかった（今後データが増えても自動追随・
+        「都道府県名+数値を手書きした古いプローズ」の再発を構造的に防止）。dev server実機確認済み:
+        レンダリング結果が実際に「21都道府県分」と表示され`/futoukou/teiji-tsushin-hikaku`への
+        リンクも出力されることを確認。tsc実exit0・jestフル485suites7075tests green
+      - **副産物（データ精度の訂正）**: 2本目の実装中、本タスクファイル289行目付近の判定結果
+        セクションが「21県+hokkaido=22県」としていたが、実ファイル数
+        （`ALTERNATIVE_TRACK_PREFECTURE_CODES.length`=21）と1件ズレていたため訂正した
+        （詳細は当該セクション参照・[[feedback-verify-data-via-files-not-lib-comments]]と同型）
+      - **3本の計画（判断根拠）**: ①全国横断ハブ（差別化ポイントそのもの・完了）②既存の低CTR
+        記事への実データセクション追加（既存の高トラフィック資産を強化・完了）③調査書クラスタ
         (`T-W1`)との重複を避けた「不登校 内申点」専用の深掘り記事（既存`/futoukou`のAnswerBox
-        を土台に、今回作った実データハブへ接続する形が有力）。②③は次のセッションで着手すること。
+        を土台に、今回作った実データハブへ接続する形が有力）。③は次のセッションで着手すること。
 
 ---
 
