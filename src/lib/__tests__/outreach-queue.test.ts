@@ -397,4 +397,40 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
       .map((e) => e.id);
     expect(alreadySent).toEqual([]);
   });
+
+  /** 主要な法人格の語を除去した組織名。queue側は正式名称（例:「株式会社日本標準」）・ledger側は
+   *  Cowork記録時に法人格を省いた略記（例:「日本標準」）で記録される表記ゆれがあるため、
+   *  括弧除去だけでは捕まえられない重複を検出するための正規化。 */
+  function orgWithoutLegalForm(org: string): string {
+    const LEGAL_FORMS = [
+      '株式会社', '有限会社', '合同会社',
+      '一般社団法人', '公益社団法人', '一般財団法人', '公益財団法人',
+      '学校法人', '特定非営利活動法人', '独立行政法人', '国立大学法人',
+    ];
+    let result = orgShortName(org);
+    for (const form of LEGAL_FORMS) result = result.split(form).join('');
+    return result.trim();
+  }
+
+  it('queued(下書き未作成)のorgから法人格を除いた名称もdata/outreach-ledger.jsonに送信済みとして' +
+    '記録されていない(2026-09-07: 「株式会社やる気スイッチグループホールディングス」vs' +
+    '「やる気スイッチグループHD」、「株式会社日本標準」vs「日本標準」のように、括弧除去だけでは' +
+    '検知できない法人格の有無・略称違いの表記ゆれで2件が9日間検知されずに残っていた再発防止)', () => {
+    const ledgerRaw = JSON.parse(
+      fs.readFileSync(path.join(process.cwd(), 'data', 'outreach-ledger.json'), 'utf8')
+    ) as { entries: Array<{ org: string }> } | Array<{ org: string }>;
+    const ledgerEntries = Array.isArray(ledgerRaw) ? ledgerRaw : ledgerRaw.entries;
+    const ledgerNoLegalForm = new Set(
+      ledgerEntries.map((e) => orgWithoutLegalForm(e.org)).filter((s) => s.length >= 2)
+    );
+
+    const queuedNoDraft = raw.entries.filter((e) => e.status === 'queued' && !e.draftId);
+    const alreadySent = queuedNoDraft
+      .filter((e) => {
+        const name = orgWithoutLegalForm(e.org);
+        return name.length >= 2 && ledgerNoLegalForm.has(name);
+      })
+      .map((e) => e.id);
+    expect(alreadySent).toEqual([]);
+  });
 });
