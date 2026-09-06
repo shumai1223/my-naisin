@@ -8,7 +8,25 @@
 
 ## 0. 今季の主食（迷ったらここへ戻る）
 
-### 🆕 2026-09-06 12:3x時点の状態（T-Y11E E-1・nagasaki(10県目)を移設完了・10/31県通過）
+### 🆕 2026-09-06 12:4x時点の状態（T-Y11E E-1・saitama(11県目)着手も検証未完了・システムメモリ逼迫）
+
+nagasaki完了に続けてsaitama（11/31県目・106行）のパーサ抽出コードは書いた
+（`src/lib/bairitsu-ingest/parsers/saitama.ts`・registry登録・テスト移行済み）が、
+`tsc --noEmit`のバックグラウンド検証がシステム全体のメモリ不足で3回連続kill（heap上限を
+6144→4096→2048MBと下げても改善せず・詳細は`memory/fable5-loop-protocol`の新設節参照）。
+**この変更はcommitせず作業ツリーに残したまま**。worklog 12:41に記録済み。
+
+**次に再開するセッションがまず行うこと**:
+1. `git status`でsaitama関連の未commit変更が残っていることを確認（4ファイル: parsers/saitama.ts
+   新規・registry.ts/registry.test.ts/parse-table-pdf-saitama.test.ts変更）
+2. PowerShellの`Get-CimInstance Win32_OperatingSystem`で空きメモリを確認し、余裕があれば
+   `npx tsc --noEmit`→`npx jest src/lib/bairitsu-ingest`→フルスイートの順で検証を再試行
+3. 緑ならcommit/push・赤ならコードを修正。再びメモリ不足でkillされる場合は他のタスク
+   （日付ゲート無しの`ops/tasks/*.md`未完了項目）に一旦切り替えてよい
+4. Gmail/GA4/GSC/Trends MCP接続確認・Gmail新着返信の確認
+5. 日付ゲート（9/08 T-Y11B・N1-2/9/09 T-A1/9/21 W-8）は未到達
+
+### 2026-09-06 12:3x時点の状態（T-Y11E E-1・nagasaki(10県目)を移設完了・10/31県通過）
 
 前の状態記録（miyagi完了）から継続。T-Y11E E-1のnagasaki（10/31県目・83行）を完了。長崎東の
 括り募集departmentOverrideと「計」（学校別小計）・「県立計」「市立計」「総計」（グランドトータル）の
