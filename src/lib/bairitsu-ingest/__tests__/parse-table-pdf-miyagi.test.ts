@@ -1,6 +1,7 @@
-import { groupCharsIntoRows, extractRowFields, assembleSimpleTableRows, type PdfPageGeometry, type GeneralColumnLayout } from '../parse-table-pdf';
+import { type PdfPageGeometry } from '../parse-table-pdf';
 import { MIYAGI_COMPETITION_RATES } from '@/data/competition-rates/miyagi';
 import miyagiR8Geometry from '../__fixtures__/miyagi-r8-geometry.json';
+import { parseMiyagi } from '../parsers/miyagi';
 
 /**
  * T-Y11B 段階2-b: miyagi(R8)はtochigi型（y座標クラスタリング・単純carry-forward）の応用だが、
@@ -13,29 +14,13 @@ import miyagiR8Geometry from '../__fixtures__/miyagi-r8-geometry.json';
  *
  * ⚠️finalRateの7件はミス転記ではなく浮動小数点丸めバグによる既存データ側の誤りと判明したため
  * `miyagi.ts`本体を訂正済み（詳細はmiyagi.tsのヘッダコメント参照）。
+ *
+ * ⚠️2026-09-06(T-Y11E E-1): パース本体は`../parsers/miyagi.ts`の`parseMiyagi()`へ純関数として
+ * 抽出済み（レジストリ`registry.ts`から県コード経由で呼べる）。このテストはレジストリ経由でも
+ * 同じ結果が出ることを確認する回帰テストとして継続する。
  */
-const MIYAGI_LAYOUT: GeneralColumnLayout = {
-  boundaries: [46, 56, 115, 245, 290, 335, 385, 430, 478, 525, 550],
-  // 列: (空白),学校名,学科名,募集定員(=quota),R8出願志願者数(=finalApplicants),R8出願倍率(=finalRate),
-  //     R8出願希望調査志願者数,R8出願希望調査倍率,R7出願希望調査志願者数,R7出願希望調査倍率
-  roles: { schoolName: 1, department: 2, quota: 3, finalApplicants: 4, finalRate: 5 },
-};
-
-/** 市立高等学校等を示す脚注記号。学校名・学科名のどちらにも付着しうる。 */
-function stripFootnoteMarks(s: string): string {
-  return s.replace(/[※■☆]/g, '');
-}
-
 describe('bairitsu-ingest parse-table-pdf 汎用carry-forward組み立て (miyagi R8 実データ検証)', () => {
-  const allRowFields = (miyagiR8Geometry as PdfPageGeometry[]).flatMap((geom) =>
-    groupCharsIntoRows(geom.chars, 3.0).map((row) => {
-      const fields = extractRowFields(row.chars, MIYAGI_LAYOUT);
-      return { ...fields, schoolName: stripFootnoteMarks(fields.schoolName), department: stripFootnoteMarks(fields.department) };
-    })
-  );
-  const parsed = assembleSimpleTableRows(allRowFields, {
-    excludeRow: (schoolName, department) => (schoolName + department).includes('地区計') || (schoolName + department).includes('合計'),
-  });
+  const parsed = parseMiyagi(miyagiR8Geometry as PdfPageGeometry[]);
 
   const expectedR8Records = MIYAGI_COMPETITION_RATES.records.filter((r) => r.fiscalYear === undefined);
 

@@ -8,6 +8,7 @@ import kagawaR8Geometry from '../__fixtures__/kagawa-r8-geometry.json';
 import ehimeR8Geometry from '../__fixtures__/ehime-r8-geometry.json';
 import chibaR8Geometry from '../__fixtures__/chiba-r8-geometry.json';
 import yamanashiR8Geometry from '../__fixtures__/yamanashi-r8-geometry.json';
+import miyagiR8Geometry from '../__fixtures__/miyagi-r8-geometry.json';
 import { TOYAMA_COMPETITION_RATES } from '@/data/competition-rates/toyama';
 import { AOMORI_COMPETITION_RATES } from '@/data/competition-rates/aomori';
 import { IWATE_COMPETITION_RATES } from '@/data/competition-rates/iwate';
@@ -16,6 +17,7 @@ import { KAGAWA_COMPETITION_RATES } from '@/data/competition-rates/kagawa';
 import { EHIME_COMPETITION_RATES } from '@/data/competition-rates/ehime';
 import { CHIBA_COMPETITION_RATES } from '@/data/competition-rates/chiba';
 import { YAMANASHI_COMPETITION_RATES } from '@/data/competition-rates/yamanashi';
+import { MIYAGI_COMPETITION_RATES } from '@/data/competition-rates/miyagi';
 
 /**
  * T-Y11E E-1: レジストリの不変条件テスト。
@@ -155,7 +157,23 @@ describe('bairitsu-ingest registry（T-Y11E E-1）', () => {
     );
   });
 
-  it('レジストリに登録済みの県コード一覧は現時点でtoyama/aomori/iwate/fukui/kagawa/ehime/chiba/yamanashiのみ（1県ずつ移設する方針・追加時はここも更新）', () => {
-    expect(Object.keys(PREFECTURE_PARSER_REGISTRY)).toEqual(['toyama', 'aomori', 'iwate', 'fukui', 'kagawa', 'ehime', 'chiba', 'yamanashi']);
+  it('miyagiのパーサが登録されており、既存の手作業データと完全一致する結果を返す', () => {
+    const parser = getPrefectureParser('miyagi');
+    expect(parser).toBeDefined();
+    const parsed = parser!(miyagiR8Geometry as PdfPageGeometry[]);
+    const expectedR8Records = MIYAGI_COMPETITION_RATES.records.filter((r) => r.fiscalYear === undefined);
+    expect(parsed).toEqual(
+      expectedR8Records.map((e) => ({
+        schoolName: e.schoolName,
+        department: e.department,
+        quota: e.quota,
+        finalApplicants: e.finalApplicants,
+        finalRate: e.finalRate,
+      }))
+    );
+  });
+
+  it('レジストリに登録済みの県コード一覧は現時点でtoyama/aomori/iwate/fukui/kagawa/ehime/chiba/yamanashi/miyagiのみ（1県ずつ移設する方針・追加時はここも更新）', () => {
+    expect(Object.keys(PREFECTURE_PARSER_REGISTRY)).toEqual(['toyama', 'aomori', 'iwate', 'fukui', 'kagawa', 'ehime', 'chiba', 'yamanashi', 'miyagi']);
   });
 });
