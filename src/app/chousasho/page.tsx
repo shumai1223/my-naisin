@@ -446,6 +446,19 @@ export default function ChousashoPage() {
                   出典: 高知県教育委員会「様式第６号の１－１　調査書」
                 </a>
               </div>
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <div className="font-bold text-slate-800">佐賀県（A4判1枚両面・「受検上配慮すべき事項」）</div>
+                <p className="mt-1 leading-relaxed text-slate-600">
+                  A4判1枚の両面印刷という構成で、表面に出欠の記録・行動の記録（国の指導要録
+                  標準10区分）・特別活動の記録・受検上配慮すべき事項・学校内外での活動等の記録、
+                  裏面に各教科の学習の記録・総合的な学習の時間に関する記録を配置しています。
+                  <strong>「受検上配慮すべき事項」という項目が独立して存在する点</strong>は、
+                  これまで確認した県の中では初めてです。
+                </p>
+                <a href="https://www.pref.saga.lg.jp/kyouiku/kiji003115881/3_115881_367477_up_3yi7gn60.xlsx" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                  出典: 佐賀県教育委員会「様式３　調査書」
+                </a>
+              </div>
             </div>
             <p className="mt-4 text-xs text-slate-500">
               ※ いずれも記載事項（様式）の整理であり、入試の合否判定に使う内申点（調査書点）の
