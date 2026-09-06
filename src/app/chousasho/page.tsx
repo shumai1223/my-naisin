@@ -711,6 +711,18 @@ export default function ChousashoPage() {
                   出典: 山梨県教育委員会「令和8年度山梨県公立高等学校入学者選抜の基本事項」
                 </a>
               </div>
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <div className="font-bold text-slate-800">静岡県（「新体力テストの総合得点」という独自項目）</div>
+                <p className="mt-1 leading-relaxed text-slate-600">
+                  各教科の評定・観点別学習状況・総合的な学習の時間・特別活動の記録・行動の記録
+                  ・出欠等の状況・諸活動の記録という構成に加えて、
+                  <strong>「新体力テストの総合得点」という項目が独立して設けられています</strong>
+                  ——これまでに確認した44県のいずれにも見られなかった静岡県独自の項目です。
+                </p>
+                <a href="https://www.pref.shizuoka.jp/_res/projects/default_project/_page_/001/072/279/07.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                  出典: 静岡県教育委員会「令和8年度静岡県公立高等学校入学者選抜実施要領」様式第1号
+                </a>
+              </div>
             </div>
             <p className="mt-4 text-xs text-slate-500">
               ※ いずれも記載事項（様式）の整理であり、入試の合否判定に使う内申点（調査書点）の
