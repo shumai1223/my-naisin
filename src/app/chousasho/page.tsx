@@ -320,6 +320,18 @@ export default function ChousashoPage() {
                   出典: 岐阜県教育委員会「調査書（別記第1号様式）」
                 </a>
               </div>
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <div className="font-bold text-slate-800">三重県（「健康の状況」欄・行動の記録は第3学年のみ）</div>
+                <p className="mt-1 leading-relaxed text-slate-600">
+                  各教科の学習の記録・総合的な学習の時間の記録・特別活動の記録及び行動の記録
+                  （基本的な生活習慣等10項目・十分満足できる項目に○印）に加えて、
+                  「出欠・健康の記録」欄に欠席日数・欠席理由と並んで<strong>「健康の状況」</strong>
+                  という欄が独立して存在します。<strong>行動の記録は第3学年のみが対象</strong>です。
+                </p>
+                <a href="https://www.pref.mie.lg.jp/common/content/001220075.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                  出典: 三重県教育委員会「様式4　調査書」
+                </a>
+              </div>
             </div>
             <p className="mt-4 text-xs text-slate-500">
               ※ いずれも記載事項（様式）の整理であり、入試の合否判定に使う内申点（調査書点）の
