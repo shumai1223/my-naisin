@@ -1,6 +1,7 @@
-import { groupCharsIntoRows, extractRowFields, normalizeExtractedText, type PdfPageGeometry, type GeneralColumnLayout } from '../parse-table-pdf';
+import { type PdfPageGeometry } from '../parse-table-pdf';
 import { NIIGATA_COMPETITION_RATES } from '@/data/competition-rates/niigata';
 import niigataR8Geometry from '../__fixtures__/niigata-r8-geometry.json';
+import { parseNiigata } from '../parsers/niigata';
 
 /**
  * T-Y11B 段階2-b: niigata(新潟県)のR8倍率パーサ検証テスト。全日制4頁（8学科区分が1頁に複数
@@ -37,94 +38,14 @@ import niigataR8Geometry from '../__fixtures__/niigata-r8-geometry.json';
  *
  * ⚠️罠4: 分校・キャンパス名を括弧書きする学校が1件（佐渡(両津)）あり、PDFは全角「（）」で
  * 印字するが既存データは半角`()`で統一する（wakayama型と同型の県固有慣行）。
+ *
+ * ⚠️2026-09-06(T-Y11E E-1): パース本体は`../parsers/niigata.ts`の`parseNiigata()`へ純関数として
+ * 抽出済み（レジストリ`registry.ts`から県コード経由で呼べる）。このテストはレジストリ経由でも
+ * 同じ結果が出ることを確認する回帰テストとして継続する。
  */
-const NIIGATA_LAYOUT: GeneralColumnLayout = {
-  boundaries: [115, 200, 282, 320, 362, 406, 447],
-  // 0学校名,1学科名,2募集学級(未使用),3quota(A),4finalApplicants(B),5finalRate(B/A)
-  roles: { schoolName: 0, department: 1, quota: 3, finalApplicants: 4, finalRate: 5 },
-};
-
-const HIRAGANA_ONLY = /^[ぁ-んー]+$/;
-
-/**
- * 五泉総合高等学校は、PDFの学校名列に「五泉」（2文字）としか印字されない（総合学科の
- * 学校であるにもかかわらず「総合」が省略される・同じ総合学科区分の他9校は全て正式名称通り
- * 印字されており、この1校だけの例外）。既存データが正式校名「五泉総合」を採用しているため、
- * 固定のrenameで補う。
- */
-const SCHOOL_NAME_OVERRIDE: Record<string, string> = { 五泉: '五泉総合' };
-
-interface RowFields {
-  schoolName: string;
-  department: string;
-  quotaText: string;
-  applicantsText: string;
-  rateText: string;
-}
-
-/** ふりがな単独行(碧の実例)を無視し、データ行が自前のschoolNameを持たない場合は前後3行以内の
- *  最初の非ひらがなschoolNameフラグメントを借用する。ふりがな単独行自体は最後に取り除く。 */
-function resolveFuriganaOrphans(rows: RowFields[]): RowFields[] {
-  const patched = rows.map((r) => ({ ...r }));
-  for (let i = 0; i < patched.length; i++) {
-    const r = patched[i];
-    if (r.schoolName || !r.department) continue; // 自前の名前を持つ・またはデータ行でない
-    for (const j of [i - 1, i + 1, i - 2, i + 2, i - 3, i + 3]) {
-      const cand = patched[j]?.schoolName;
-      if (cand && !HIRAGANA_ONLY.test(cand)) {
-        r.schoolName = cand;
-        break;
-      }
-    }
-  }
-  return patched.filter((r) => !(HIRAGANA_ONLY.test(r.schoolName) && !r.department));
-}
-
-function parseAllPages(geometries: PdfPageGeometry[]) {
-  const allRowFields: RowFields[] = [];
-  for (const geom of geometries) {
-    const rows = groupCharsIntoRows(geom.chars, 1.5);
-    for (const row of rows) {
-      const fields = extractRowFields(row.chars, NIIGATA_LAYOUT);
-      const schoolName = normalizeExtractedText(fields.schoolName);
-      // 学科区分の小計「計」1文字はschoolName列に印字される（department列でなく）。
-      if (schoolName === '計') continue;
-      allRowFields.push({
-        schoolName,
-        department: normalizeExtractedText(fields.department),
-        quotaText: fields.quotaText,
-        applicantsText: fields.applicantsText,
-        rateText: fields.rateText,
-      });
-    }
-  }
-
-  const cutIdx = allRowFields.findIndex((r) => r.schoolName === '全日制');
-  const scoped = cutIdx === -1 ? allRowFields : allRowFields.slice(0, cutIdx);
-  const resolved = resolveFuriganaOrphans(scoped);
-
-  let currentSchool = '';
-  const records = [];
-  for (const r of resolved) {
-    if (r.schoolName) currentSchool = r.schoolName;
-    if (!r.department) continue;
-    const quota = Number(r.quotaText.replace(/,/g, ''));
-    const finalApplicants = Number(r.applicantsText.replace(/,/g, ''));
-    const finalRate = Number(r.rateText);
-    if (!Number.isFinite(quota) || quota <= 0) continue;
-    if (!Number.isFinite(finalApplicants) || !Number.isFinite(finalRate)) continue;
-    // ⚠️「佐渡(両津)」のように分校・キャンパス名を括弧書きする学校が1件あり、PDFは全角
-    // 「（）」で印字するが既存データは半角`()`で統一する（wakayama型と同型の県固有慣行）。
-    const parenFixed = currentSchool.replace(/（/g, '(').replace(/）/g, ')');
-    const schoolName = SCHOOL_NAME_OVERRIDE[parenFixed] ?? parenFixed;
-    records.push({ schoolName, department: r.department, quota, finalApplicants, finalRate });
-  }
-  return records;
-}
-
 describe('bairitsu-ingest parse-table-pdf 汎用carry-forward組み立て (niigata R8 実データ検証・ふりがな単独行とschoolName列の小計)', () => {
   const geometries = niigataR8Geometry as unknown as PdfPageGeometry[];
-  const parsed = parseAllPages(geometries);
+  const parsed = parseNiigata(geometries);
 
   const expectedR8Records = NIIGATA_COMPETITION_RATES.records.filter((r) => r.fiscalYear === undefined);
 
