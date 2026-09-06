@@ -9,6 +9,7 @@ import { parseChiba } from './parsers/chiba';
 import { parseYamanashi } from './parsers/yamanashi';
 import { parseMiyagi } from './parsers/miyagi';
 import { parseNagasaki } from './parsers/nagasaki';
+import { parseSaitama } from './parsers/saitama';
 
 /**
  * T-Y11E E-1: 県コード → パーサ関数 のレジストリ。
@@ -35,6 +36,7 @@ export const PREFECTURE_PARSER_REGISTRY: Partial<Record<string, PrefectureParser
   yamanashi: parseYamanashi,
   miyagi: parseMiyagi,
   nagasaki: parseNagasaki,
+  saitama: parseSaitama,
 };
 
 export function getPrefectureParser(prefectureCode: string): PrefectureParser | undefined {

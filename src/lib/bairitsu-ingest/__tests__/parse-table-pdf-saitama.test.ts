@@ -1,6 +1,7 @@
-import { groupCharsIntoRows, extractRowFields, assembleSimpleTableRows, type PdfPageGeometry, type GeneralColumnLayout } from '../parse-table-pdf';
+import { type PdfPageGeometry } from '../parse-table-pdf';
 import { SAITAMA_COMPETITION_RATES } from '@/data/competition-rates/saitama';
 import saitamaR8Geometry from '../__fixtures__/saitama-r8-geometry.json';
+import { parseSaitama } from '../parsers/saitama';
 
 /**
  * T-Y11B 段階2-b: saitama(埼玉県)のR8倍率パーサ検証テスト。tochigi型（単純carry-forward）。
@@ -25,40 +26,14 @@ import saitamaR8Geometry from '../__fixtures__/saitama-r8-geometry.json';
  * 8頁分[page index 0-7]）を`extract-pdf-geometry.py`で抽出した文字座標データ。9頁目
  * [page index 8]は「定時制」のためスコープ外（chiba/tokyo/kanagawa/saitamaのR7掛-1追記と
  * 同じ設計判断）。
+ *
+ * ⚠️2026-09-06(T-Y11E E-1): パース本体は`../parsers/saitama.ts`の`parseSaitama()`へ純関数として
+ * 抽出済み（レジストリ`registry.ts`から県コード経由で呼べる）。このテストはレジストリ経由でも
+ * 同じ結果が出ることを確認する回帰テストとして継続する。
  */
-const SAITAMA_LAYOUT: GeneralColumnLayout = {
-  boundaries: [0, 145, 245, 360, 395, 422, 460],
-  // 列: 学校名,学科・コース・系,性別+募集人員(内数の転編入者数込み・未使用),
-  //     入学許可予定者数(A=quota),確定志願者数(B=finalApplicants),倍率(B/A=finalRate)
-  roles: { schoolName: 0, department: 1, quota: 3, finalApplicants: 4, finalRate: 5 },
-};
-
 describe('bairitsu-ingest parse-table-pdf 汎用carry-forward組み立て (saitama R8 実データ検証)', () => {
   const geometries = saitamaR8Geometry as PdfPageGeometry[];
-
-  const allRowFields = geometries.flatMap((geom) =>
-    groupCharsIntoRows(geom.chars, 3.0)
-      // ⚠️小計/合計行の判定: 性別列の位置(x0≈245〜256)に「計」の文字が単独で出現する行を除外する。
-      .filter((row) => !row.chars.some((c) => c.c === '計' && c.x0 >= 244 && c.x0 <= 256))
-      .map((row) => extractRowFields(row.chars, SAITAMA_LAYOUT))
-  );
-
-  // ⚠️市立高校の学校名には脚注記号「〇」が接頭辞として付与される（「○印は、市立高等学校」）。
-  // 既存データはこの記号を含めない学校名で収録している。
-  const parsedRaw = assembleSimpleTableRows(
-    allRowFields.map((f) => ({ ...f, schoolName: f.schoolName.replace(/^[〇○]/, '') })),
-    {}
-  );
-
-  // ⚠️伊奈学園総合の「普通科」は普通・スポーツ科学・芸術の3コースの合算値（PDF脚注に明記）。
-  // 既存データは学科名に「（普通・スポーツ科学・芸術の合算）」という注記を追加している
-  // （PDF本文の生テキストには無い注記のため、既存データを根拠にした個別補正で対応する）。
-  const parsed = parsedRaw.map((r) => {
-    if (r.schoolName === '伊奈学園総合' && r.department === '普通科') {
-      return { ...r, department: '普通科（普通・スポーツ科学・芸術の合算）' };
-    }
-    return r;
-  });
+  const parsed = parseSaitama(geometries);
 
   const expectedR8Records = SAITAMA_COMPETITION_RATES.records.filter((r) => r.fiscalYear === undefined);
 
