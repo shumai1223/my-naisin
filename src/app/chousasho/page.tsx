@@ -332,6 +332,18 @@ export default function ChousashoPage() {
                   出典: 三重県教育委員会「様式4　調査書」
                 </a>
               </div>
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <div className="font-bold text-slate-800">奈良県（「行動の記録」が単独の項目）</div>
+                <p className="mt-1 leading-relaxed text-slate-600">
+                  各教科の学習成績の表に続き、「学習活動の記録／特別活動の記録／行動の記録／
+                  スポーツ・文化活動等の記録」という4段の欄が縦に並ぶ構成です。
+                  <strong>「行動の記録」が総合所見や特別活動に統合されず単独の項目として存在する点</strong>、
+                  部活動等に相当する項目が「スポーツ・文化活動等の記録」という名称である点が特徴的です。
+                </p>
+                <a href="https://www.pref.nara.lg.jp/documents/18782/b01_r8_tyosasyo.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                  出典: 奈良県教育委員会「様式1（令和8年度入学志願者調査書）」
+                </a>
+              </div>
             </div>
             <p className="mt-4 text-xs text-slate-500">
               ※ いずれも記載事項（様式）の整理であり、入試の合否判定に使う内申点（調査書点）の
