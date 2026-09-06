@@ -459,6 +459,20 @@ export default function ChousashoPage() {
                   出典: 佐賀県教育委員会「様式３　調査書」
                 </a>
               </div>
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <div className="font-bold text-slate-800">長崎県（各観点の「Aの数」を集計する欄）</div>
+                <p className="mt-1 leading-relaxed text-slate-600">
+                  各教科の記録・総合的な学習の時間の記録・特別活動の記録・行動の記録（国の指導
+                  要録標準10区分）・出欠の記録（欠席日数・欠席の主な理由・健康の状況）・参考と
+                  なる諸事項という構成です。特に、各教科の観点別学習状況について
+                  <strong>「知識・技能のAの数」「思考・判断・表現のAの数」「主体的に学習に
+                  取り組む態度のAの数」</strong>という、3観点それぞれのA評価の個数を集計する
+                  欄が設けられている点は、これまで確認した県の中では初めてです。
+                </p>
+                <a href="https://www.pref.nagasaki.jp/shared/uploads/2025/09/1757561092.xlsx" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                  出典: 長崎県教育委員会「（様式６－１）調査書」
+                </a>
+              </div>
             </div>
             <p className="mt-4 text-xs text-slate-500">
               ※ いずれも記載事項（様式）の整理であり、入試の合否判定に使う内申点（調査書点）の
