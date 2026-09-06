@@ -498,6 +498,19 @@ export default function ChousashoPage() {
                   出典: 大分県教育委員会「（様式９号）調査書」
                 </a>
               </div>
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <div className="font-bold text-slate-800">宮崎県（部分確認：遅刻・早退「年3回以上」の閾値）</div>
+                <p className="mt-1 leading-relaxed text-slate-600">
+                  様式は旧形式のExcelファイル（.xls）で配布されており、記載項目に関する文字列
+                  として「各教科の学習の記録」「行動の記録」「出欠の記録」「健康診断の記録」に
+                  加えて、出欠の記録の注記に<strong>「遅刻・早退がそれぞれ年間3回以上ある場合は
+                  その回数と理由を記入」</strong>という具体的な回数の閾値が確認できました。
+                  ただし正式な見出し名や厳密な配置までは復元できていません。
+                </p>
+                <a href="https://www.pref.miyazaki.lg.jp/documents/99874/99874_20250930113553-1.zip" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                  出典: 宮崎県教育委員会「様式２　調査書」
+                </a>
+              </div>
             </div>
             <p className="mt-4 text-xs text-slate-500">
               ※ いずれも記載事項（様式）の整理であり、入試の合否判定に使う内申点（調査書点）の
