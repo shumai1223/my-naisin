@@ -8,7 +8,28 @@
 
 ## 0. 今季の主食（迷ったらここへ戻る）
 
-### 🆕 2026-09-06 16:2x時点の状態（T-Y11E E-2完了・PDF本文アーカイブ層を追加）
+### 🆕 2026-09-06 16:4x時点の状態（T-Y11E E-6実施中に未登録5県を発見・追加登録・36/47県に拡大）
+
+前の状態記録（E-2完了）から継続。E-3（pdfHash・T-N1-N4のN1-2と重複・9/08まで着手不可のため
+スキップ）を経てE-6（R8全県リプレイ検証）に着手したところ、**fixtureは存在するがレジストリ
+未登録だった5県（tochigi/ibaraki/akita/ishikawa/tokushima）を発見**した。これらは
+`parse-table-pdf.test.ts`等の汎用ヘルパー関数の基準実装として書かれていたため、E-1の県別
+横展開リストから見落とされていた。5県とも追加抽出・登録し、E-1の実質カバレッジが
+**31→36/47県に拡大**。E-6のリプレイ検証結果（36/47パイプライン化・残り11県はxlsx等の
+別方式のため対象外）を`ops/BAIRITSU-INGEST-RUNBOOK.md`に記録した（詳細はworklog 16:44・
+commit `0c622fa`）。tsc実exit0・bairitsu-ingest配下37suites212tests green・
+フルスイート486suites7112tests green。push済み。
+
+**次に再開するセッションがまず行うこと**:
+1. Gmail/GA4/GSC/Trends MCP接続確認
+2. Gmail新着返信の確認
+3. `ops/tasks/T-Y11E-r9-harvest-pipeline.md`の**E-4（検算をパイプラインに繋ぐ・
+   グランドトータル照合/finalrate-convention 3方式判定/fail-closed）**に進むか、
+   同じ横断grep方式で他の`ops/tasks/*.md`の未完了・日付ゲート無し項目を探すこと。
+   E-3（pdfHash backfill）はT-N1-N4 N1-2と重複するため9/08以降に統合して着手すること
+4. 日付ゲート（9/08 T-Y11B・N1-2/9/09 T-A1/9/21 W-8）は未到達
+
+### 2026-09-06 16:2x時点の状態（T-Y11E E-2完了・PDF本文アーカイブ層を追加）
 
 前の状態記録（E-1完了・E-2着手）から継続。E-2の残り「実取得・PDF保存」を完了した。設計判断:
 変化検知自体は既にT-Y11 A-2（`scripts/check-competition-rate-updates.mjs`・2026-09-01実装済み・
