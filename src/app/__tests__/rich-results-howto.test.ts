@@ -125,6 +125,7 @@ const HOWTO_EXEMPT_ROUTES: Record<string, string> = {
   '/[prefecture]/total-score': '総合得点計算機（47県中13県のみ実計算機・残りは解説のみの条件分岐が必要・未着手・CANDIDATE_FOR_HOWTO_CONTENT）',
   '/[prefecture]/nyuushi-nittei': 'T-Y12入試日程一覧（手順書ではなく日程の時系列リスト・DatasetSchemaで対応済み）',
   '/[prefecture]/teiji-tsushin': 'T-P1 P1-4定時制・通信制一覧（手順書ではなく学校別データの表・DatasetSchemaで対応済み）',
+  '/futoukou/teiji-tsushin-hikaku': 'T-P1 P1-5定時制・通信制の都道府県別集計ハブ（手順書ではなく集計表・DatasetSchemaで対応済み・noindex）',
 };
 
 /** 次にHowToSchemaを書く価値が高い候補（実際に手順のある計算機/診断ツール）。 */

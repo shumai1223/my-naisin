@@ -70,3 +70,52 @@ export function getPrefectureAlternativeTracks(prefectureCode: string): Prefectu
 
 /** T-P1 P1-3でデータを収録済みの都道府県コード一覧（SSGのgenerateStaticParams用）。 */
 export const ALTERNATIVE_TRACK_PREFECTURE_CODES: string[] = Object.keys(TEIJI_COMPETITION_RATE_BY_PREFECTURE);
+
+export interface AlternativeTrackSummaryRow {
+  prefectureCode: string;
+  schoolCount: number;
+  teijiCount: number;
+  tsushinCount: number;
+  /** 定時制・通信制レコードの倍率を単純平均した値（本サイトの集計・公表値そのものではない）。 */
+  averageRate: number;
+}
+
+export interface AlternativeTrackNationalSummary {
+  prefectureCount: number;
+  totalSchoolCount: number;
+  totalTeijiCount: number;
+  totalTsushinCount: number;
+  rows: AlternativeTrackSummaryRow[];
+}
+
+/**
+ * T-P1 P1-5: 全国横断の集計（都道府県別ページの一覧性を上げるためのハブ用データ）。
+ * 個々の倍率・学校名・出典は`getPrefectureAlternativeTracks()`が返す公表値そのものだが、
+ * `averageRate`（単純平均）と件数集計は本サイトが計算した値であることを呼び出し側で
+ * 明示すること（naishin-kakusaの`ratio`と同じ扱い＝Y-0は「公表値からの単純集計」までは許容）。
+ */
+export function getAlternativeTrackNationalSummary(): AlternativeTrackNationalSummary {
+  const rows: AlternativeTrackSummaryRow[] = ALTERNATIVE_TRACK_PREFECTURE_CODES.map((code) => {
+    const data = getPrefectureAlternativeTracks(code);
+    if (!data) {
+      return { prefectureCode: code, schoolCount: 0, teijiCount: 0, tsushinCount: 0, averageRate: 0 };
+    }
+    const sumRate = data.schools.reduce((sum, s) => sum + s.finalRate, 0);
+    const averageRate = data.schools.length > 0 ? Math.round((sumRate / data.schools.length) * 100) / 100 : 0;
+    return {
+      prefectureCode: code,
+      schoolCount: data.schoolCount,
+      teijiCount: data.teijiCount,
+      tsushinCount: data.tsushinCount,
+      averageRate,
+    };
+  });
+
+  return {
+    prefectureCount: rows.length,
+    totalSchoolCount: rows.reduce((sum, r) => sum + r.schoolCount, 0),
+    totalTeijiCount: rows.reduce((sum, r) => sum + r.teijiCount, 0),
+    totalTsushinCount: rows.reduce((sum, r) => sum + r.tsushinCount, 0),
+    rows,
+  };
+}

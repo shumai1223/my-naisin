@@ -1,4 +1,8 @@
-import { getPrefectureAlternativeTracks, ALTERNATIVE_TRACK_PREFECTURE_CODES } from '../teiji-tsushin-options';
+import {
+  getPrefectureAlternativeTracks,
+  ALTERNATIVE_TRACK_PREFECTURE_CODES,
+  getAlternativeTrackNationalSummary,
+} from '../teiji-tsushin-options';
 import { TEIJI_COMPETITION_RATE_BY_PREFECTURE } from '@/data/teiji-competition-rates';
 
 describe('T-P1 P1-4 getPrefectureAlternativeTracks（定時制・通信制の選択肢データ層）', () => {
@@ -50,6 +54,43 @@ describe('T-P1 P1-4 getPrefectureAlternativeTracks（定時制・通信制の選
         expect(s.finalApplicants).toBe(file.records[i].finalApplicants);
         expect(s.finalRate).toBe(file.records[i].finalRate);
       });
+    }
+  });
+});
+
+describe('T-P1 P1-5 getAlternativeTrackNationalSummary（全国横断集計・ハブページ用）', () => {
+  it('prefectureCountはALTERNATIVE_TRACK_PREFECTURE_CODESの件数と一致する', () => {
+    const summary = getAlternativeTrackNationalSummary();
+    expect(summary.prefectureCount).toBe(ALTERNATIVE_TRACK_PREFECTURE_CODES.length);
+    expect(summary.rows).toHaveLength(ALTERNATIVE_TRACK_PREFECTURE_CODES.length);
+  });
+
+  it('全国合計は各都道府県の内訳の総和と一致する（二重計算の防止）', () => {
+    const summary = getAlternativeTrackNationalSummary();
+    const sumSchools = summary.rows.reduce((s, r) => s + r.schoolCount, 0);
+    const sumTeiji = summary.rows.reduce((s, r) => s + r.teijiCount, 0);
+    const sumTsushin = summary.rows.reduce((s, r) => s + r.tsushinCount, 0);
+    expect(summary.totalSchoolCount).toBe(sumSchools);
+    expect(summary.totalTeijiCount).toBe(sumTeiji);
+    expect(summary.totalTsushinCount).toBe(sumTsushin);
+  });
+
+  it('tokyoの行はgetPrefectureAlternativeTracksの値と一致する', () => {
+    const summary = getAlternativeTrackNationalSummary();
+    const tokyoRow = summary.rows.find((r) => r.prefectureCode === 'tokyo')!;
+    const tokyoDirect = getPrefectureAlternativeTracks('tokyo')!;
+    expect(tokyoRow.schoolCount).toBe(tokyoDirect.schoolCount);
+    expect(tokyoRow.teijiCount).toBe(tokyoDirect.teijiCount);
+    expect(tokyoRow.tsushinCount).toBe(tokyoDirect.tsushinCount);
+  });
+
+  it('averageRateは各県のfinalRate単純平均と一致する（小数第2位丸め）', () => {
+    const summary = getAlternativeTrackNationalSummary();
+    for (const code of ['tokyo', 'gifu', 'hokkaido']) {
+      const row = summary.rows.find((r) => r.prefectureCode === code)!;
+      const data = getPrefectureAlternativeTracks(code)!;
+      const expected = Math.round((data.schools.reduce((s, x) => s + x.finalRate, 0) / data.schools.length) * 100) / 100;
+      expect(row.averageRate).toBeCloseTo(expected, 2);
     }
   });
 });

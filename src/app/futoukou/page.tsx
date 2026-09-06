@@ -164,6 +164,15 @@ export default function FutoukouPage() {
                 <span className="mt-1 block text-sm leading-relaxed text-slate-600">自宅学習・フリースクールが出席扱いになる仕組みと、学校への相談から校長判断までの一般的な流れ。</span>
               </span>
             </Link>
+            <Link href="/futoukou/teiji-tsushin-hikaku" className="group flex items-start gap-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-rose-300 hover:shadow-md">
+              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-rose-500 to-pink-600 text-white shadow-md">
+                <Route className="h-5 w-5" />
+              </span>
+              <span>
+                <span className="flex items-center gap-1 font-bold text-slate-800 group-hover:text-rose-700">定時制・通信制の倍率を都道府県で比較<ChevronRight className="h-4 w-4 text-slate-400" /></span>
+                <span className="mt-1 block text-sm leading-relaxed text-slate-600">各都道府県教育委員会が公表している募集人員・出願者数・倍率を、都道府県別にそのまま集計しました。</span>
+              </span>
+            </Link>
           </section>
 
           {/* 不登校専用の保護者リード（もしも live・内申不問/在宅/無料） */}

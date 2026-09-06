@@ -154,6 +154,7 @@ export default function FutoukouTsugakuPage() {
               {[
                 { href: '/futoukou', title: '不登校と内申点（高校受験はできる？）' },
                 { href: '/futoukou/shussekiatsukai', title: '「出席扱い」とは？相談の流れ' },
+                { href: '/futoukou/teiji-tsushin-hikaku', title: '定時制・通信制の倍率を都道府県で比較' },
                 { href: '/chousasho', title: '調査書とは？出欠・評定の記載' },
                 { href: '/koukou-hiyou', title: '高校の費用（通信制も就学支援金の対象）' },
                 { href: '/shougakukin', title: '高校無償化・就学支援金ガイド' },

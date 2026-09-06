@@ -165,4 +165,8 @@ export const SITEMAP_EXCLUDED_ROUTES = [
   '/interim-bulletin-preview',
   // T-C7：埋め込みウィジェットのデモページ（提案書からリンクする営業用モック・noindex）。
   '/embed/demo',
+  // T-P1第1期：進路多様化クラスタの新規ページ（P1-5）。裁定「本番反映（公開）の判断をしない。
+  // 公開は👤が9/23以降に決める」により意図的にsitemap未登録・robots noindex（2026-09-06）。
+  // /[prefecture]/teiji-tsushinと同じ扱い。9/23以降に👤が公開判断する際はSTATIC_PAGESへ移す。
+  '/futoukou/teiji-tsushin-hikaku',
 ];

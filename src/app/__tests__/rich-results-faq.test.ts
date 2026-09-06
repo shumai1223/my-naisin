@@ -63,6 +63,7 @@ const FAQ_EXEMPT_ROUTES: Record<string, string> = {
   '/[prefecture]/reverse': 'permanentRedirectのみのリダイレクトページ（実コンテンツ無し）',
   '/[prefecture]/nyuushi-nittei': 'T-Y12入試日程一覧（公表資料の項目名・日付をそのまま転記する時系列リストでQ&A形式のコンテンツなし・DatasetSchemaで対応済み）',
   '/[prefecture]/teiji-tsushin': 'T-P1 P1-4定時制・通信制一覧（公表資料の学校名・学科・数値をそのまま転記する表形式でQ&A形式のコンテンツなし・DatasetSchemaで対応済み）',
+  '/futoukou/teiji-tsushin-hikaku': 'T-P1 P1-5定時制・通信制の都道府県別集計ハブ（公表データの集計表でQ&A形式のコンテンツなし・DatasetSchemaで対応済み・noindex）',
 };
 
 /** 将来Q&Aセクションを書く価値がありそうな面（次の面化/コンテンツ拡充の優先候補）。 */
