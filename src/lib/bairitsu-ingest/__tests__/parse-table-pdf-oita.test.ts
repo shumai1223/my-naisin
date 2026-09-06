@@ -1,7 +1,7 @@
-import { normalizeExtractedText, normalizeDepartmentText, type PdfPageGeometry } from '../parse-table-pdf';
-import { roundHalfUpScaled } from '../../finalrate-convention';
+import { type PdfPageGeometry } from '../parse-table-pdf';
 import { OITA_COMPETITION_RATES } from '@/data/competition-rates/oita';
 import oitaR8Geometry from '../__fixtures__/oita-r8-geometry.json';
+import { parseOita } from '../parsers/oita';
 
 /**
  * T-Y11B 段階2-b: oita(大分県)のR8倍率パーサ検証テスト。81/81件・39校・完全一致（順序も含む）。
@@ -48,125 +48,14 @@ import oitaR8Geometry from '../__fixtures__/oita-r8-geometry.json';
  * ⚠️罠6: 大分舞鶴「普通・理数（くくり募集）」・大分東「園芸ビジネス・園芸デザイン（くくり
  * 募集）」は資料上くくり募集の相方学科名が別セルに分散し単純結合では復元できないため、
  * 既存データを根拠にした値ベースoverrideで対応した（fukui/tottori型）。
+ *
+ * ⚠️2026-09-06(T-Y11E E-1): パース本体は`../parsers/oita.ts`の`parseOita()`へ純関数として
+ * 抽出済み（レジストリ`registry.ts`から県コード経由で呼べる）。このテストはレジストリ経由でも
+ * 同じ結果が出ることを確認する回帰テストとして継続する。
  */
-
-const boundaries = [57.8, 135, 205.3, 264.8, 324.4, 383.9, 443.4, 502.9, 562.4];
-// 0 学校名, 1 学科名, 2 入学定員(未使用), 3 quota, 4 当初志願者数(未使用),
-// 5 取り下げ数(未使用), 6 提出数(未使用), 7 finalApplicants
-const numCols = boundaries.length - 1;
-
-function columnIndexForX(x: number): number {
-  for (let i = 0; i < numCols; i++) {
-    if (x >= boundaries[i] - 1 && x < boundaries[i + 1] - 1) return i;
-  }
-  return -1;
-}
-
-function rowsForPage(pageChars: PdfPageGeometry['chars']): { y: number; chars: PdfPageGeometry['chars'] }[] {
-  const sorted = [...pageChars].sort((a, b) => a.y0 - b.y0 || a.x0 - b.x0);
-  const rows: { y: number; chars: PdfPageGeometry['chars'] }[] = [];
-  for (const c of sorted) {
-    const row = rows.find((r) => Math.abs(r.y - c.y0) < 1.2);
-    if (row) row.chars.push(c);
-    else rows.push({ y: c.y0, chars: [c] });
-  }
-  rows.sort((a, b) => a.y - b.y);
-  return rows;
-}
-
-function cellText(rowChars: PdfPageGeometry['chars'], colIdx: number): string {
-  const inCol = rowChars.filter((c) => columnIndexForX((c.x0 + c.x1) / 2) === colIdx);
-  inCol.sort((a, b) => a.x0 - b.x0);
-  return inCol.map((c) => c.c).join('').trim();
-}
-
-interface RawRow {
-  schoolNameRaw: string;
-  departmentRaw: string;
-  quotaText: string;
-  applicantsText: string;
-}
-
-const RENAME_ON_DEPARTMENT = new Map<string, string>([['中津南|環境・社会共生', '中津南耶馬溪校']]);
-const DEPARTMENT_OVERRIDE = new Map<string, string>([
-  ['大分舞鶴|普通', '普通・理数（くくり募集）'],
-  ['大分東|園芸ビジネス', '園芸ビジネス・園芸デザイン（くくり募集）'],
-]);
-
-interface ParsedRow {
-  schoolName: string;
-  department: string;
-  quota: number;
-  finalApplicants: number;
-  finalRate: number;
-}
-
-function parseAllPages(geometries: PdfPageGeometry[]): ParsedRow[] {
-  const allRows: RawRow[] = [];
-  for (const pg of geometries) {
-    for (const row of rowsForPage(pg.chars)) {
-      allRows.push({
-        schoolNameRaw: cellText(row.chars, 0),
-        departmentRaw: cellText(row.chars, 1),
-        quotaText: cellText(row.chars, 3),
-        applicantsText: cellText(row.chars, 7),
-      });
-    }
-  }
-
-  // 「[ 定 時 制 ]」（全角スペース均等割り付け）は他県の定時制と同じ理由でスコープ外。
-  const teijiseiIdx = allRows.findIndex((r) => normalizeExtractedText(r.schoolNameRaw + r.departmentRaw).includes('定時制'));
-  const scopedRows = teijiseiIdx === -1 ? allRows : allRows.slice(0, teijiseiIdx);
-
-  const HEADER_MARKERS = ['高等学校', '学　科', '入学定員', '募集人員', '志願変更', '（4枚', '全 日 制', '令和'];
-  const dataRows = scopedRows.filter((r) => {
-    const combined = r.schoolNameRaw + r.departmentRaw;
-    if (HEADER_MARKERS.some((m) => combined.includes(m))) return false;
-    if (combined + r.quotaText + r.applicantsText === '') return false;
-    // 「うち全国募集は」等の注記サブ行を除外（学科名/学校名列に乗るケース）
-    if (combined.includes('うち') || combined.includes('人以内') || combined.includes('人程度')) return false;
-    // 全日制合計の総括行を除外
-    if (combined.includes('合計')) return false;
-    return true;
-  });
-
-  const records: ParsedRow[] = [];
-  let currentSchool = '';
-  let pendingDept = '';
-  let pendingQuota = '';
-  let pendingApplicants = '';
-  for (const r of dataRows) {
-    const sn = normalizeExtractedText(r.schoolNameRaw);
-    if (sn) currentSchool = sn;
-    if (r.departmentRaw) pendingDept = r.departmentRaw;
-    // 罠1: 注記がquota/applicants列にはみ出すことがあるため、純粋な数字の時だけ採用する。
-    if (/^[0-9,]+$/.test(r.quotaText) && /^[0-9,]+$/.test(r.applicantsText)) {
-      pendingQuota = r.quotaText;
-      pendingApplicants = r.applicantsText;
-    }
-    if (pendingDept && pendingQuota && pendingApplicants) {
-      const deptNorm = normalizeDepartmentText(pendingDept);
-      const quotaTextResolved = pendingQuota;
-      const applicantsTextResolved = pendingApplicants;
-      pendingDept = '';
-      pendingQuota = '';
-      pendingApplicants = '';
-      if (!deptNorm || deptNorm === '計') continue;
-      const schoolName = RENAME_ON_DEPARTMENT.get(`${currentSchool}|${deptNorm}`) ?? currentSchool;
-      const department = DEPARTMENT_OVERRIDE.get(`${schoolName}|${deptNorm}`) ?? deptNorm;
-      const quota = Number(quotaTextResolved.replace(/,/g, ''));
-      const finalApplicants = Number(applicantsTextResolved.replace(/,/g, ''));
-      if (!Number.isFinite(quota) || quota <= 0 || !Number.isFinite(finalApplicants)) continue;
-      const finalRate = Number(roundHalfUpScaled(finalApplicants, quota, 2)) / 100;
-      records.push({ schoolName, department, quota, finalApplicants, finalRate });
-    }
-  }
-  return records;
-}
-
 describe('bairitsu-ingest parse-table-pdf 汎用carry-forward組み立て (oita R8 実データ検証・ラベル/数値分裂のブロック横断合体)', () => {
   const geometries = oitaR8Geometry as PdfPageGeometry[];
-  const parsed = parseAllPages(geometries);
+  const parsed = parseOita(geometries);
   const expectedR8Records = OITA_COMPETITION_RATES.records.filter((r) => r.fiscalYear === undefined);
 
   test('R8のレコード件数が既存データと一致する（81件・39校）', () => {

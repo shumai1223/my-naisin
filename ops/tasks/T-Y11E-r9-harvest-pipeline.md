@@ -46,9 +46,9 @@ scripts/bairitsu-ingest/  →  extract-pdf-geometry.py  ただ1本
       ＋`getPrefectureParser(code)`）。着手条件②（T-Y11B段階2-bが「これ以上は逓減」に達した・
       本文書冒頭の着手条件を参照）が満たされたため本タスクへ移行した
 - [ ] 各県のパーサをテストファイルから**純関数として抽出**し、レジストリに登録する
-      🔶進行中（24/31県・toyama/aomori/iwate/fukui/kagawa/ehime/chiba/yamanashi/miyagi/nagasaki/
+      🔶進行中（25/31県・toyama/aomori/iwate/fukui/kagawa/ehime/chiba/yamanashi/miyagi/nagasaki/
       saitama/gunma/shimane/nara/kyoto/hiroshima/wakayama/okinawa/gifu/niigata/saga/tottori/kagoshima/
-      shizuoka完了・2026-09-06）。1県ずつのため次回以降続行
+      shizuoka/oita完了・2026-09-06）。1県ずつのため次回以降続行
 - [x] ⚠️ **既存のテストを壊さない。** テストはレジストリ経由で同じ結果を出すこと
       ✅toyama/aomori/iwate/fukui/kagawa/ehime/chiba: 7テストいずれもレジストリの各`parseXxx()`呼び出しに
       置き換え・結果は無回帰（ehime=99件/8,370/7,468も既存データと一致・1ページ2段組の
@@ -61,7 +61,8 @@ scripts/bairitsu-ingest/  →  extract-pdf-geometry.py  ただ1本
       加えてjestフルスイートgreen(`--maxWorkers=2`で確認・素のnpx jestはバックグラウンドで
       メモリ不足killされる場合がある)。次回セッションは`src/lib/bairitsu-ingest/parsers/chiba.ts`
       （最も単純な部類・assembleSimpleTableRowsを直接呼ぶだけ）を雛形として8県目に進むこと
-      （残り7県。行数の少ない順に選ぶと着手しやすい: oita216行/kumamoto225行が次点）
+      （残り6県。行数の少ない順に選ぶと着手しやすい: kumamoto225行/shiga270行/kochi286行/
+      yamagata327行/fukuoka344行/nagano417行）
 
 ## E-2 取得層（丁寧に取る）
 
