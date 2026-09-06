@@ -105,6 +105,16 @@ export default function ChousashoSimulatorPage() {
             </p>
           </header>
 
+          {/* 高校受験(内申点)との混同を避ける導線 */}
+          <div className="mb-6 rounded-xl border border-blue-200 bg-blue-50 px-4 py-3 text-sm text-blue-900">
+            このページは<strong>大学受験向け</strong>の調査書（学習成績の状況）シミュレーターです。
+            高校受験（中学生）の調査書・内申点について知りたい場合は
+            <Link href="/chousasho" className="font-bold underline">
+              高校受験用の調査書ガイド
+            </Link>
+            をご覧ください。
+          </div>
+
           <div className="mb-6 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
             <div className="flex items-start gap-3">
               <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-emerald-50 text-emerald-600">
