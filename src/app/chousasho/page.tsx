@@ -273,6 +273,18 @@ export default function ChousashoPage() {
                   出典: 長野県教育委員会「調査書作成の手引」
                 </a>
               </div>
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <div className="font-bold text-slate-800">京都府（「報告書」という呼び方）</div>
+                <p className="mt-1 leading-relaxed text-slate-600">
+                  「調査書」ではなく「報告書」という名称を使います。特別活動の記録は独立項目に
+                  せず総合所見に統合。特筆すべき点として、様式の注記に「授業日数、出席日数の
+                  記載があっても入学者選抜には用いません」と明記されており、出欠情報は記録
+                  されるものの選考には使わないと公式に宣言しています。
+                </p>
+                <a href="https://www.kyoto-be.ne.jp/koukyou/cms/wp-content/uploads/2025/12/01-R8yousiki1-1.xlsx" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                  出典: 京都府教育委員会「入学者選抜に関する諸様式（報告書等）」
+                </a>
+              </div>
             </div>
             <p className="mt-4 text-xs text-slate-500">
               ※ いずれも記載事項（様式）の整理であり、入試の合否判定に使う内申点（調査書点）の
