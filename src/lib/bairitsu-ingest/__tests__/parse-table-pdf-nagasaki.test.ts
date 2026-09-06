@@ -1,6 +1,7 @@
-import { groupCharsIntoRows, extractRowFields, assembleSimpleTableRows, type PdfPageGeometry, type GeneralColumnLayout } from '../parse-table-pdf';
+import { type PdfPageGeometry } from '../parse-table-pdf';
 import { NAGASAKI_COMPETITION_RATES } from '@/data/competition-rates/nagasaki';
 import nagasakiR8Geometry from '../__fixtures__/nagasaki-r8-geometry.json';
+import { parseNagasaki } from '../parsers/nagasaki';
 
 /**
  * T-Y11B 段階2-b: nagasaki(長崎県)のR8倍率パーサ検証テスト。tochigi型（学校名セルの結合が無い・
@@ -11,40 +12,14 @@ import nagasakiR8Geometry from '../__fixtures__/nagasaki-r8-geometry.json';
  *
  * フィクスチャは令和8年度公表PDF（`nagasaki-r8.pdf`・全10頁のうち全日制の4頁分[page index 2-5]）を
  * `extract-pdf-geometry.py`で抽出した文字座標データ。定時制・離島留学制度の別表はスコープ外。
+ *
+ * ⚠️2026-09-06(T-Y11E E-1): パース本体は`../parsers/nagasaki.ts`の`parseNagasaki()`へ純関数として
+ * 抽出済み（レジストリ`registry.ts`から県コード経由で呼べる）。このテストはレジストリ経由でも
+ * 同じ結果が出ることを確認する回帰テストとして継続する。
  */
-const NAGASAKI_LAYOUT: GeneralColumnLayout = {
-  boundaries: [65, 127, 197, 231, 271, 303, 345, 370, 404, 434],
-  // 列: 学校名,学科名,全募集定員,特別等合格者数,一般定員(=quota),一般志願者数(=finalApplicants),
-  //     うち学区外(未使用),本年度志願倍率(=finalRate),前年度志願倍率(未使用)
-  roles: { schoolName: 0, department: 1, quota: 4, finalApplicants: 5, finalRate: 7 },
-};
-
-const NAGASAKI_DEPARTMENT_OVERRIDES: Record<string, string> = {
-  '長崎東|普通・国際': '普通・国際（くくり募集）',
-};
-
 describe('bairitsu-ingest parse-table-pdf 汎用carry-forward組み立て (nagasaki R8 実データ検証)', () => {
   const geometries = nagasakiR8Geometry as PdfPageGeometry[];
-  const allRowFields = geometries.flatMap((geom) =>
-    groupCharsIntoRows(geom.chars, 3.0).map((row) => extractRowFields(row.chars, NAGASAKI_LAYOUT))
-  );
-
-  let currentSchool = '';
-  const rowFieldsWithOverrides = allRowFields.map((r) => {
-    const schoolNameNorm = r.schoolName.trim();
-    if (schoolNameNorm) currentSchool = schoolNameNorm;
-    const deptKey = r.department.trim();
-    const overridden = NAGASAKI_DEPARTMENT_OVERRIDES[`${currentSchool}|${deptKey}`];
-    return { ...r, department: overridden ?? r.department };
-  });
-
-  const GRAND_TOTAL_SCHOOL_LABELS = new Set(['県立計', '市立計', '総計']);
-  const parsed = assembleSimpleTableRows(rowFieldsWithOverrides, {
-    // ⚠️「会計ビジネス」のように部分文字列として「計」を含む正当な学科名があるため、
-    // 学校別小計行はdepartmentの完全一致（'計'単体）で、グランドトータル行はschoolNameの
-    // 完全一致（県立計/市立計/総計）で判定する（部分一致.includes('計')は誤検知する）。
-    excludeRow: (schoolName, department) => department === '計' || GRAND_TOTAL_SCHOOL_LABELS.has(schoolName),
-  });
+  const parsed = parseNagasaki(geometries);
 
   const expectedR8Records = NAGASAKI_COMPETITION_RATES.records.filter((r) => r.fiscalYear === undefined);
 
