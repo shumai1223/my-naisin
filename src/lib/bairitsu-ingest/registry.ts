@@ -24,6 +24,7 @@ import { parseTottori } from './parsers/tottori';
 import { parseKagoshima } from './parsers/kagoshima';
 import { parseShizuoka } from './parsers/shizuoka';
 import { parseOita } from './parsers/oita';
+import { parseKumamoto } from './parsers/kumamoto';
 
 /**
  * T-Y11E E-1: 県コード → パーサ関数 のレジストリ。
@@ -65,6 +66,7 @@ export const PREFECTURE_PARSER_REGISTRY: Partial<Record<string, PrefectureParser
   kagoshima: parseKagoshima,
   shizuoka: parseShizuoka,
   oita: parseOita,
+  kumamoto: parseKumamoto,
 };
 
 export function getPrefectureParser(prefectureCode: string): PrefectureParser | undefined {
