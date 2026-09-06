@@ -645,6 +645,19 @@ export default function ChousashoPage() {
                   出典: 群馬県教育委員会「令和8年度群馬県公立高等学校入学者選抜実施要項」別記3
                 </a>
               </div>
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <div className="font-bold text-slate-800">新潟県（各教科の学習の記録のみで構成）</div>
+                <p className="mt-1 leading-relaxed text-slate-600">
+                  様式1の調査書は、志願者氏名・生年月日・卒業年月と<strong>各教科の学習の記録
+                  （1〜3年の評定）のみ</strong>で構成されており、記入要領（全9項目）もこの構成と
+                  完全に対応していました。<strong>総合的な学習の時間の記録・特別活動の記録・
+                  行動の記録・出欠の記録・特記事項に相当する項目が様式そのものに一切存在しません
+                  </strong>——これまでに確認した40県の中で最も項目数が少ない様式でした。
+                </p>
+                <a href="https://www.pref.niigata.lg.jp/uploaded/attachment/472931.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                  出典: 新潟県教育委員会「令和8年度新潟県公立高等学校入学者選抜要項」様式1
+                </a>
+              </div>
             </div>
             <p className="mt-4 text-xs text-slate-500">
               ※ いずれも記載事項（様式）の整理であり、入試の合否判定に使う内申点（調査書点）の
