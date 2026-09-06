@@ -296,6 +296,18 @@ export default function ChousashoPage() {
                   出典: 茨城県教育委員会「調査書、成績及び諸活動等の記録通知書」
                 </a>
               </div>
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <div className="font-bold text-slate-800">滋賀県（「個人調査報告書」＋独自項目）</div>
+                <p className="mt-1 leading-relaxed text-slate-600">
+                  「各教科の学習の記録／総合的な学習の時間の記録／総合所見および特別活動等
+                  （行動の記録は独立項目ではなく、特筆すべき点があれば総合所見内に任意で
+                  記入する扱い）／卒業後の進路状況」という構成。「卒業後の進路状況」は
+                  他県では確認できなかった滋賀県独自の項目です。
+                </p>
+                <a href="https://www.pref.shiga.lg.jp/file/attachment/5571771.xlsx" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                  出典: 滋賀県教育委員会「個人調査報告書（４号の１）」
+                </a>
+              </div>
             </div>
             <p className="mt-4 text-xs text-slate-500">
               ※ いずれも記載事項（様式）の整理であり、入試の合否判定に使う内申点（調査書点）の
