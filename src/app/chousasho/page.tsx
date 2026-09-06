@@ -589,6 +589,22 @@ export default function ChousashoPage() {
                   出典: 秋田県教育委員会「令和8年度秋田県公立高等学校入学者選抜実施要項」
                 </a>
               </div>
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <div className="font-bold text-slate-800">山形県（エクセルの「フォーマットファイル」に直接入力）</div>
+                <p className="mt-1 leading-relaxed text-slate-600">
+                  個人の調査書は紙の様式でなく<strong>「フォーマットファイル（エクセルファイル）」に
+                  直接入力する</strong>方式で、記入項目は「各教科の学習の記録」「総合的な学習の時間の
+                  記録」「特別活動等の記録（学級活動・生徒会活動・学校行事・部活動等）」「校外活動の
+                  記録（校外・地域のスポーツ活動・文化活動・社会奉仕活動等）」「特記事項（転入学
+                  編入学・健康管理上配慮した事項・学習指導上配慮した事項・資格検定試験等）」という
+                  構成でした。作成上の注意には<strong>「行動の記録」「出欠の記録」という国の指導
+                  要録標準区分に相当する見出しへの言及が見当たりません</strong>でしたが、記入方法の
+                  注意事項を列挙したものであり、該当欄自体が無いと断定はできません。
+                </p>
+                <a href="https://www.pref.yamagata.jp/documents/42443/r8kouritsukoutougakkounyuugakusyasennbatsujissiyoukou.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                  出典: 山形県教育委員会「令和8年度山形県公立高等学校入学者選抜実施要項」
+                </a>
+              </div>
             </div>
             <p className="mt-4 text-xs text-slate-500">
               ※ いずれも記載事項（様式）の整理であり、入試の合否判定に使う内申点（調査書点）の
