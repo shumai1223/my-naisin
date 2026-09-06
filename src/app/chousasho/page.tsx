@@ -511,6 +511,19 @@ export default function ChousashoPage() {
                   出典: 宮崎県教育委員会「様式２　調査書」
                 </a>
               </div>
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <div className="font-bold text-slate-800">鹿児島県（「特別活動の記録」に相当する項目が無い）</div>
+                <p className="mt-1 leading-relaxed text-slate-600">
+                  A4縦1ページに「学習の記録／行動の記録（国の指導要録標準10区分）／出欠の記録／
+                  総合所見及び指導上参考となる諸事項」の4区分が収まる構成です。
+                  <strong>「特別活動の記録」（学級活動・生徒会活動・学校行事）に相当する独立項目が
+                  一切存在しません</strong>。これまで確認した27県のほぼ全てにあった区分が鹿児島県
+                  では見当たらない、初めての事例でした。
+                </p>
+                <a href="https://www.pref.kagoshima.jp/ba05/kyoiku-bunka/school/koukou/nyushi/r7/documents/123883_20251027171132-1.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                  出典: 鹿児島県教育委員会「（様式４－１）調査書」
+                </a>
+              </div>
             </div>
             <p className="mt-4 text-xs text-slate-500">
               ※ いずれも記載事項（様式）の整理であり、入試の合否判定に使う内申点（調査書点）の
