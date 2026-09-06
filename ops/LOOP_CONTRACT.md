@@ -8,7 +8,25 @@
 
 ## 0. 今季の主食（迷ったらここへ戻る）
 
-### 🆕 2026-09-06 15:4x時点の状態（T-Y11E E-1・fukuoka(30県目)を移設完了・残り1県のみ）
+### 🎉 2026-09-06 16:0x時点の状態（T-Y11E E-1完了・31/31県すべて移設完了）
+
+前の状態記録（fukuoka完了）から継続。T-Y11E E-1の最後の1県nagano（417行）を完了し、
+**31都道府県すべてのR8倍率パーサを`src/lib/bairitsu-ingest/parsers/<pref>.ts`の純関数として
+抽出しレジストリ(`registry.ts`)へ登録する作業が完了した**（詳細はworklog 16:00・
+commit `d63da42`）。tsc実exit0・bairitsu-ingest配下37suites207tests green・
+フルスイート485suites7100tests green。push済み。`ops/tasks/T-Y11E-r9-harvest-pipeline.md`の
+E-1チェックボックスを完了済みに更新済み。
+
+**次に再開するセッションがまず行うこと**:
+1. Gmail/GA4/GSC/Trends MCP接続確認
+2. Gmail新着返信の確認
+3. E-1が完了したため、`ops/tasks/T-Y11E-r9-harvest-pipeline.md`の**E-2（取得層・47県の
+   公表ページを取得する薄いスクリプト）以降に進む**か、同じ横断grep方式で他の
+   `ops/tasks/*.md`の未完了・日付ゲート無し項目を探すこと。E-2は👤ゲート無しの技術実装
+   （900ms間隔・UA明示・1県1日1回・robots.txt尊重の制約あり）
+4. 日付ゲート（9/08 T-Y11B・N1-2/9/09 T-A1/9/21 W-8）は未到達
+
+### 2026-09-06 15:4x時点の状態（T-Y11E E-1・fukuoka(30県目)を移設完了・残り1県のみ）
 
 前の状態記録（yamagata完了）から継続。T-Y11E E-1のfukuoka（30/31県目・344行）を完了。県立4頁
 ＋市組合立1頁の2PDF合成構造・「計」行の自己検算による2種類判別（真の小計 vs くくり募集集計）・
