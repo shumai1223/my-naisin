@@ -8,7 +8,22 @@
 
 ## 0. 今季の主食（迷ったらここへ戻る）
 
-### 🆕 2026-09-06 12:5x時点の状態（T-Y11E E-1・saitama(11県目)完了・検証の環境問題も解決）
+### 🆕 2026-09-06 12:5x時点の状態（T-Y11E E-1・gunma(12県目)を移設完了）
+
+前の状態記録（saitama完了・環境問題解決）から継続。T-Y11E E-1のgunma（12/31県目・119行）を
+完了。学科名主部分/副部分の合成・くくり募集・department重複描画の3種の罠を
+`GUNMA_DEPARTMENT_OVERRIDES`で対応（詳細はworklog 12:59・commit `20eb3d4`）。
+tsc/jestともforeground+timeout300000msで実行し安定動作を確認。tsc実exit0・
+bairitsu-ingest配下37suites188tests green・フルスイート485suites7081tests green。push済み。
+
+**次に再開するセッションがまず行うこと**:
+1. Gmail/GA4/GSC/Trends MCP接続確認
+2. Gmail新着返信の確認
+3. 手が空いたらT-Y11E E-1の13県目（候補: shimane122行/nara134行）に進むか、
+   同じ横断grep方式で他の`ops/tasks/*.md`の未完了・日付ゲート無し項目を探すこと
+4. 日付ゲート（9/08 T-Y11B・N1-2/9/09 T-A1/9/21 W-8）は未到達
+
+### 2026-09-06 12:5x時点の状態（T-Y11E E-1・saitama(11県目)完了・検証の環境問題も解決）
 
 前の状態記録（saitama着手も検証未完了）から継続。**検証未完了の原因を特定・解決した**:
 `run_in_background: true`でtsc/jestを実行すると、システムの空きメモリが少ない状況
