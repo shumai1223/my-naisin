@@ -671,6 +671,19 @@ export default function ChousashoPage() {
                   出典: 富山県教育委員会「令和8年度富山県立高等学校入学者選抜実施要領」
                 </a>
               </div>
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <div className="font-bold text-slate-800">石川県（「学校内外における優れた諸活動等の記録」を併設）</div>
+                <p className="mt-1 leading-relaxed text-slate-600">
+                  出欠の記録・特別活動の記録・行動の記録・総合的な学習の時間の記録・学習の記録
+                  という国の指導要録標準区分がすべて揃うだけでなく、
+                  <strong>「学校内外における優れた諸活動等の記録」という独立欄（奉仕活動・研究・
+                  社会参加・表彰・部活動・特技・資格等を事実のみ記載）</strong>も設けられて
+                  います。
+                </p>
+                <a href="https://www.pref.ishikawa.lg.jp/kyoiku/gakkou/senbatu/documents/r8bosyuyoko.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                  出典: 石川県教育委員会「令和8年度石川県公立高等学校入学者募集要綱」
+                </a>
+              </div>
             </div>
             <p className="mt-4 text-xs text-slate-500">
               ※ いずれも記載事項（様式）の整理であり、入試の合否判定に使う内申点（調査書点）の

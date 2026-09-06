@@ -948,6 +948,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '5独立ソース(WebSearch要約×2/jyuku-online.com/bibroom.com/axis-kobetsu.jp/deskstyle.info)+社内total-score/explainers.tsとの突合',
       note: '**🚨ZZ-9bで実データの誤りを発見・修正した唯一のケース（他は全て変更なし）**。既存記載(全学年等倍・135点満点)を確認しようとWebSearch要約を見たところ「中1中2各45点+中3のみ×2倍で90点=180点満点」という既存とは異なる構造が返り、akitaの教訓に従いjyuku-online.com/bibroom.com/axis-kobetsu.jp/deskstyle.infoの4件を個別に直接WebFetchで裏取りしたところ**全て180点満点(中3×2倍)を独立に確認**し、既存の135点(均等)は誤りである可能性が極めて高いと判断した。決め手は社内の別ファイル`src/lib/total-score/explainers.ts`のishikawaエントリ(相関図方式の総合得点エンジン)が、prefectures.tsとは独立に「中1・中2各45点、中3＝×2＝90点、合計180点」という**一致する値を既に保持していた**こと(caveatに「令和7年度版・令和8年度版の公表後に配点を要再確認」と記載があり未反映のまま放置されていた形跡)。5件の外部ソース全てと社内の独立ファイルが一致して180点を支持し、135点を支持する情報源はprefectures.tsの既存値とそこから機械的に生成された`naishin-omomi-content.ts`の記述(独立検証ではなく単なる転記)のみだったため、**prefectures.ts(gradeMultipliers{1:1,2:1,3:2}・maxScore180に修正)・naishin-omomi-content.ts(ishikawaエントリ内の「均等」「135点」記述を複数箇所修正)・naishin-target-grades-by-prefecture.ts(1箇所)・naishin-47-prefectures-comparison.ts(1箇所)・total-score/explainers.tsのcaveat/source(令和8年度確認済みに更新)**の計5ファイルを修正した。tsc/jestフル242suites/3705tests全green。**この修正は他の「変更なし確認」と性質が異なる実データ訂正のため、loop-question-noteにも念のため記録し👤の目視確認を仰ぐ。**',
     },
+    {
+      date: '2026-09-07',
+      sourceUrl: 'https://www.pref.ishikawa.lg.jp/kyoiku/gakkou/senbatu/documents/r8bosyuyoko.pdf',
+      sourceTitle: '石川県教育委員会「令和8年度石川県公立高等学校入学者募集要綱」全日制の課程入学志願者取扱要項「6 調査書の記入について」(11〜12頁)',
+      note: 'T-W1 W1-2(調査書の様式・記載事項の47県横断調査)で新規確認(69頁PDF・pdftotext不可のためpdftoppmでPNG化しp11〜12を直接ビジョン確認)。項目一覧: 1全・定・通及び志願学科欄2出欠の記録欄(欠席日数は生徒指導要録から転記・卒業見込みの者の第3学年は12月末日現在)3特別活動の記録欄(状況欄は十分満足できる場合に○・係名や分担等・備考)4行動の記録欄(状況欄は項目ごとに十分満足できる場合に○・所見欄に総合的に見た長所及び特徴)5学校内外における優れた諸活動等の記録欄(奉仕活動・研究・社会参加・表彰・部活動・特技・資格等を事実のみ記載・上記1〜4及び6〜7以外の諸事項)6総合的な学習の時間の記録欄(学習活動・観点・評価)7学習の記録欄(Ⅰ観点別学習状況は十分満足できるもののみ○・Ⅱ評定は1〜2年は指導要録転記・3年は成績一覧表から転記・所見・備考)。国の指導要録標準区分(各教科の学習の記録・総合的な学習の時間・特別活動・行動の記録・出欠の記録)がすべて揃うだけでなく「学校内外における優れた諸活動等の記録」という追加項目も持つ構成だった。',
+    },
   ],
   oita: [
     {
