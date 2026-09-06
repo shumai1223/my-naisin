@@ -8,7 +8,30 @@
 
 ## 0. 今季の主食（迷ったらここへ戻る）
 
-### 🆕 2026-09-06 12:4x時点の状態（T-Y11E E-1・saitama(11県目)着手も検証未完了・システムメモリ逼迫）
+### 🆕 2026-09-06 12:5x時点の状態（T-Y11E E-1・saitama(11県目)完了・検証の環境問題も解決）
+
+前の状態記録（saitama着手も検証未完了）から継続。**検証未完了の原因を特定・解決した**:
+`run_in_background: true`でtsc/jestを実行すると、システムの空きメモリが少ない状況
+（このマシンは常時2.2〜2.5GB/8GB程度しか空きが無い）で**バックグラウンド実行特有のメモリ監視に
+よる予防的killが起きる**（OS自体のOOM killerではない）。heap上限を下げても効果が無く、
+**同じコマンドを`run_in_background`無し・`timeout: 300000`のフォアグラウンド実行に変えるだけで
+解決する**と判明（詳細は`memory/fable5-loop-protocol`の該当節に追記済み・今後のtsc/jest実行は
+このマシンでは基本的にフォアグラウンド長timeoutを優先すべき）。
+
+この方法でsaitama（11/31県目・106行）の検証を完了。tsc実exit0・bairitsu-ingest配下
+37suites187tests green・フルスイート485suites7080tests green。push済み（`4bd8c13`。
+saitama着手時の状態記録commitも合わせて反映済み）。
+
+**次に再開するセッションがまず行うこと**:
+1. Gmail/GA4/GSC/Trends MCP接続確認
+2. Gmail新着返信の確認
+3. 手が空いたらT-Y11E E-1の12県目（候補: gunma119行/shimane122行）に進むか、
+   同じ横断grep方式で他の`ops/tasks/*.md`の未完了・日付ゲート無し項目を探すこと
+4. **tsc/jestがバックグラウンド実行で`killed`になった場合は、heap上限を下げるのではなく
+   フォアグラウンド実行（`timeout`を300000ms程度に延長）に切り替えること**
+5. 日付ゲート（9/08 T-Y11B・N1-2/9/09 T-A1/9/21 W-8）は未到達
+
+### 2026-09-06 12:4x時点の状態（T-Y11E E-1・saitama(11県目)着手も検証未完了・システムメモリ逼迫）
 
 nagasaki完了に続けてsaitama（11/31県目・106行）のパーサ抽出コードは書いた
 （`src/lib/bairitsu-ingest/parsers/saitama.ts`・registry登録・テスト移行済み）が、
@@ -858,7 +881,7 @@ root_only 33件のうち **21件（64%）が「そのページに存在しない
 |---|---|
 | リポジトリの実パス | `c:\Users\E24054\my-naisin`（**h が無い**） |
 | shell | **PowerShell**。`&&` 不可・heredoc不可・`;` で連結。`2>&1` を native exe に使わない |
-| `tsc` / `jest` | **パイプ厳禁**（`tsc \| tail` は tail の終了コードを返す）。ファイルに落として**実exitを見る**。`NODE_OPTIONS=--max-old-space-size=6144` |
+| `tsc` / `jest` | **パイプ厳禁**（`tsc \| tail` は tail の終了コードを返す）。ファイルに落として**実exitを見る**。`NODE_OPTIONS=--max-old-space-size=6144`。⚠️2026-09-06判明: このマシンは常時空きメモリ2.2〜2.5GB/8GB程度と逼迫しており、`run_in_background: true`で実行すると背景プロセス監視により`killed`になることがある（heap上限を下げても直らない）。その場合は`run_in_background`を外し`timeout: 300000`程度のフォアグラウンド実行に切り替える |
 | python | `$env:PYTHONIOENCODING='utf-8'`（cp932 で落ちる） |
 | 本番D1（読み取り） | `node scripts/d1q.mjs "SELECT ..."` |
 | GSC取得 | `node --use-system-ca scripts/gsc-pull.mjs --siteUrl "sc-domain:my-naishin.com" --start ... --end ... --dimensions query --limit 5000 --out ops/raw/xxx.json` |
