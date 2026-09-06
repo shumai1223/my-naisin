@@ -386,5 +386,22 @@
 
 ⚠️ **「36/47」は「これが冬に自動で回せる県の数」の下限値**（既存の11県も別ロジックで
 自動化できる可能性はあるが未着手）。DoDの「県コード→PDF→レコードが1本のコマンドで通る」
-「R8全県リプレイの再現率が記録されている」はこの36県について達成。「検算が落ちたら止まる
-（fail-closed）」はE-4（未着手）で別途対応する。
+「R8全県リプレイの再現率が記録されている」はこの36県について達成。
+
+## T-Y11E E-4: 検算パイプライン接続結果（2026-09-06追記）
+
+E-6のリプレイと検算（グランドトータル照合／`finalrate-convention.ts`3方式判定／レコード件数）を
+1本の関門`src/lib/bairitsu-ingest/validate-parsed-records.ts`（`validateParsedRecords`）に繋ぎ、
+実行可能な入口`scripts/bairitsu-ingest/validate-all-registered.ts`（`npx tsx`実行・1県でも検算NGなら
+exit 1のfail-closed）で36県全てを通した。
+
+初回実行で**yamanashiのみ検算NG**（`finalrate-convention`）を検出した。原因は転記ミスではなく、
+`yamanashi.ts`ヘッダコメントに既述の通り「帰国生徒等特別措置の適用者は最終志願者数に内数として
+含むが倍率算定からは除外する」という公表資料自体の算定方式（`yamanashi.test.ts`が許容誤差0.07で
+個別に不変条件検証済み）。3方式チェックを無条件に緩めるのではなく、`validateParsedRecords`に
+`finalRateToleranceOverride`という**呼び出し側が県コードを明示指定した場合のみ効く**例外経路を
+追加し、`validate-all-registered.ts`側に`FINALRATE_TOLERANCE_OVERRIDE = { yamanashi: 0.07 }`として
+記録した。他35県のfail-closedな厳密判定には一切影響しない。
+
+再実行後: **36県登録済み / 検証実行36県 / OK36県 / NG0県**。tsc実exit0・
+`src/lib/bairitsu-ingest`配下38suites228tests green・フルスイート487suites7128tests green。

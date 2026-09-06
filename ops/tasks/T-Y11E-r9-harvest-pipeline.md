@@ -113,10 +113,22 @@ scripts/bairitsu-ingest/  →  extract-pdf-geometry.py  ただ1本
 
 **バラバラに存在する検算を1本の関門にする。**
 
-- [ ] グランドトータル照合（45県・gunma/hokkaidoは空）
-- [ ] `finalrate-convention.ts` の3方式判定（T-Y11Cで実装済み）
-- [ ] レコード件数の妥当性
-- [ ] ⚠️ **落ちたら止める（fail-closed）。** 通り抜けさせない
+- [x] グランドトータル照合（45県・gunma/hokkaidoは空）
+      ✅`src/lib/bairitsu-ingest/validate-parsed-records.ts`の`checkGrandTotal`（単独一致→
+      「合計」ラベル行の和でのフォールバック一致の2段構成・fukuoka/chiba型を吸収）
+- [x] `finalrate-convention.ts` の3方式判定（T-Y11Cで実装済み）
+      ✅`checkFinalRateConvention`が`classifyStoredRate`を全レコードに適用。yamanashi
+      （帰国生徒等特別措置の適用者を最終志願者数の内数に含めつつ倍率算定からは除外する公表方式・
+      ヘッダコメント/`yamanashi.test.ts`で許容誤差0.07として個別検証済み）のみ、
+      `finalRateToleranceOverride`で例外許容を明示的に渡す設計とし、無条件緩和はしない
+- [x] レコード件数の妥当性
+      ✅`checkRecordCount`（0件検知＋`expectedRecordCount`との突合）
+- [x] ⚠️ **落ちたら止める（fail-closed）。** 通り抜けさせない
+      ✅`validateParsedRecords`は1つでもissueがあれば`ok: false`（部分的に通す設計にしない）。
+      実行可能な入口は`scripts/bairitsu-ingest/validate-all-registered.ts`
+      （`npx tsx`で実行・1県でも検算NGならexit 1）。2026-09-06時点で36/36県が検算OK
+      （初回実行でyamanashiのみ検算NGを検出→上記の個別検証済み例外を追加して解消。
+      3方式チェック自体は他35県に対して無条件のまま=fail-closed維持）
 
 ## E-5 差分と失敗の切り分け
 
