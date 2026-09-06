@@ -344,6 +344,19 @@ export default function ChousashoPage() {
                   出典: 奈良県教育委員会「様式1（令和8年度入学志願者調査書）」
                 </a>
               </div>
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <div className="font-bold text-slate-800">和歌山県（「校内外の活動」を3欄に細分化）</div>
+                <p className="mt-1 leading-relaxed text-slate-600">
+                  各教科等の学習の記録・総合的な学習の時間の記録・欠席等の状況・健康の状況に
+                  関する特記事項・総合所見・特別活動に関する特記事項に加え、
+                  <strong>「校内外の活動等に関する特記事項」を「部活動等」「ボランティア活動等」
+                  「資格・特技等」の3つの独立した欄に細分化</strong>しています。これまで確認した
+                  県の中では初めての区分方法です。
+                </p>
+                <a href="https://www.pref.wakayama.lg.jp/prefg/500200/d00220765_d/fil/tyousasyo_7gou.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                  出典: 和歌山県教育委員会「別記第7号様式　調査書」
+                </a>
+              </div>
             </div>
             <p className="mt-4 text-xs text-slate-500">
               ※ いずれも記載事項（様式）の整理であり、入試の合否判定に使う内申点（調査書点）の
