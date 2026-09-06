@@ -202,6 +202,18 @@ export default function ChousashoPage() {
                   出典: 大阪府教育委員会「調査書情報、成績一覧表及び推薦書情報（手引き）」
                 </a>
               </div>
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <div className="font-bold text-slate-800">神奈川県</div>
+                <p className="mt-1 leading-relaxed text-slate-600">
+                  学籍の記録・各教科の学習の記録・総合的な学習の時間の記録に加えて、「総合所見及び
+                  諸活動の記録欄」の中に特別活動等の記録（学級活動・生徒会活動・学校行事等・部活動）と
+                  「行動の記録及び所見欄」を持つ構成。東京都・大阪府とは異なり、「行動の記録」を
+                  （所見と一体化した形で）独立した項目として保持しています。
+                </p>
+                <a href="https://www.pref.kanagawa.jp/documents/63604/14_chuui1.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                  出典: 神奈川県教育委員会「調査書作成上の注意」
+                </a>
+              </div>
             </div>
             <p className="mt-4 text-xs text-slate-500">
               ※ いずれも記載事項（様式）の整理であり、入試の合否判定に使う内申点（調査書点）の
