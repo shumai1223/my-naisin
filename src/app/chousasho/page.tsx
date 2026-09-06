@@ -420,6 +420,19 @@ export default function ChousashoPage() {
                   出典: 山口県教育委員会「令和8年度山口県公立高等学校入学者選抜〈実施大綱〉」
                 </a>
               </div>
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <div className="font-bold text-slate-800">徳島県（国の標準区分＋出欠の記録を全て保持）</div>
+                <p className="mt-1 leading-relaxed text-slate-600">
+                  「志願者・保護者の欄／出欠の記録／行動の記録／観点別学習状況／各教科の学習の
+                  記録／特別活動の記録／総合的な学習の時間の記録／特記事項の欄」という8項目が
+                  明記されており、国の指導要録標準4区分に加えて出欠の記録・特記事項の欄まで
+                  全て独立項目のまま保持する構成です。評定が記載できない場合は校長が副申書
+                  （様式第13号）を提出する規定もあります。
+                </p>
+                <a href="https://www.pref.tokushima.lg.jp/file/attachment/937096.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                  出典: 徳島県教育委員会「公立高等学校生徒募集選抜要項」別記１
+                </a>
+              </div>
             </div>
             <p className="mt-4 text-xs text-slate-500">
               ※ いずれも記載事項（様式）の整理であり、入試の合否判定に使う内申点（調査書点）の
