@@ -109,7 +109,8 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     }
   });
 
-  it('137件がqueued(教委13[email3+form10]+メディアemail9+メディアform5+個人塾line4+npo4+EdTech校務支援8+本文既存済み94の昇格)', () => {
+  // 2026-09-06: batch3/8/11/12のフォーム36件をCowork入力→👤送信し queued→sent へ移した(116→80)。
+  it('80件がqueued(教委13[email3+form10]+メディアemail9+メディアform5+個人塾line4+npo4+EdTech校務支援8+本文既存済み94の昇格)', () => {
     // 2026-08-13: 教委email26件は8/6に送信済みでledger側(kyoiku-*-0806)に記録済みの重複だったため
     // queueから削除(outreach-queue.tsの設計「送信済みはledgerへ移しqueueから除外する」に合わせた)。
     // 残る教委emailはlane9-*(政令市3件)のみ・教委formの10件は未送信のため変更なし。
@@ -314,7 +315,7 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // 2026-08-30さらに: 「窓口不一致」で見送られていたjuku-yarukiswitch-advertisement(やる気スイッチ
     // グループHD)を、正しい窓口(/inquiry/other/=その他のお問い合わせ)を再調査で発見しqueuedへ復帰
     // (115→116)。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(116);
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(80);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {
