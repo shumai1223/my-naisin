@@ -696,6 +696,21 @@ export default function ChousashoPage() {
                   出典: 福井県教育委員会「令和8年度福井県立高等学校入学者選抜実施要項」
                 </a>
               </div>
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <div className="font-bold text-slate-800">山梨県（学校ごとに評定の傾斜倍率が異なる・様式そのものは非公開）</div>
+                <p className="mt-1 leading-relaxed text-slate-600">
+                  調査書は中学校3年間の活動すべてが記録され、「所見」（学習活動及び生活状況に
+                  関する中学校長のA/B/C評価）は調査書とは別の独立した提出書類でした。
+                  <strong>調査書の「学習の記録」の評定について、学校ごとに評価対象学年や教科の
+                  傾斜倍率を独自に指定</strong>していることが前期募集選抜方法等一覧から確認でき
+                  ました。全日制課程の後期募集・定時制課程では、長期欠席者等を対象に調査書を
+                  用いない「特別選抜」も実施されています。行動の記録・出欠の記録・特別活動の
+                  記録等の個別項目一覧までは確認できませんでした。
+                </p>
+                <a href="https://www.pref.yamanashi.jp/documents/84777/r8koritsukihonziko.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                  出典: 山梨県教育委員会「令和8年度山梨県公立高等学校入学者選抜の基本事項」
+                </a>
+              </div>
             </div>
             <p className="mt-4 text-xs text-slate-500">
               ※ いずれも記載事項（様式）の整理であり、入試の合否判定に使う内申点（調査書点）の
