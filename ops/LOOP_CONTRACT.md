@@ -8,7 +8,23 @@
 
 ## 0. 今季の主食（迷ったらここへ戻る）
 
-### 🆕 2026-09-06 14:1x時点の状態（T-Y11E E-1・saga(21県目)を移設完了）
+### 🆕 2026-09-06 14:2x時点の状態（T-Y11E E-1・tottori(22県目)を移設完了）
+
+前の状態記録（saga完了）から継続。T-Y11E E-1のtottori（22/31県目・182行）を完了。既存データが
+`area`（東部/中部/西部）フィールドを持つ**唯一の県**のため、パーサの戻り値型を
+`TottoriParsedRow`（標準の`ParsedCompetitionRow`+area）として拡張し、構造的部分型として
+レジストリの`ParsedCompetitionRow[]`型に登録可能なことをtscで確認した（詳細はworklog 14:28・
+commit `c8ecfb5`）。tsc実exit0・bairitsu-ingest配下37suites198tests green・
+フルスイート485suites7091tests green。push済み。
+
+**次に再開するセッションがまず行うこと**:
+1. Gmail/GA4/GSC/Trends MCP接続確認
+2. Gmail新着返信の確認
+3. 手が空いたらT-Y11E E-1の23県目（候補: kagoshima200行/shizuoka202行）に進むか、
+   同じ横断grep方式で他の`ops/tasks/*.md`の未完了・日付ゲート無し項目を探すこと
+4. 日付ゲート（9/08 T-Y11B・N1-2/9/09 T-A1/9/21 W-8）は未到達
+
+### 2026-09-06 14:1x時点の状態（T-Y11E E-1・saga(21県目)を移設完了）
 
 前の状態記録（niigata完了）から継続。T-Y11E E-1のsaga（21/31県目・173行）を完了。学科別/学校別が
 全項目で2列併記される独自構造（学科別側のみ採用）・番号列混入除去・凡例に無い読点表記くくり
