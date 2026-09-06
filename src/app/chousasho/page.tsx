@@ -551,6 +551,18 @@ export default function ChousashoPage() {
                   出典: 青森県教育委員会「令和8年度青森県立高等学校入学者選抜要項」
                 </a>
               </div>
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <div className="font-bold text-slate-800">岩手県（「行動の記録」に代えて「その他参考となる記録」）</div>
+                <p className="mt-1 leading-relaxed text-slate-600">
+                  出欠の記録・各教科の学習の記録・総合的な学習の時間の記録・特別活動の記録に加えて、
+                  <strong>「行動の記録」（国の指導要録標準10区分）に相当する項目が存在せず、代わりに
+                  「その他参考となる記録」という漠然とした見出しに置き換わっています</strong>。
+                  「総合所見」という明示的な見出しも確認できませんでした。
+                </p>
+                <a href="https://www.pref.iwate.jp/_res/projects/default_project/_page_/001/069/713/r8_c-2_chousasyo.xlsx" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                  出典: 岩手県教育委員会「様式中－２　調査書」
+                </a>
+              </div>
             </div>
             <p className="mt-4 text-xs text-slate-500">
               ※ いずれも記載事項（様式）の整理であり、入試の合否判定に使う内申点（調査書点）の
