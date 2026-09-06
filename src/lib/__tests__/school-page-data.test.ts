@@ -181,6 +181,24 @@ describe('buildSchoolHistoryForPrefecture（T-A1・学校固有の多年度推�
     expect(history.size).toBe(0);
   });
 
+  test('学科名が年度によって変わっていても機械的に名寄せせず、年度ごとの表記のまま別エントリで持つ(T-Y11 A-3)', () => {
+    // 例: 令和7年度は「普通科」、令和8年度(今季)は学科再編で「普通科(単位制)」に改称、という
+    // 現実にありうるケースを想定。ここで生の表記が異なる2件を1件へ機械的に統合(合算)して
+    // しまうと、統合前の年度別の募集人員・応募者数・倍率がそれぞれ何を指すか分からなくなる
+    // (「年度ごとに素直に持つ」というA-3の方針への違反)。
+    const master = [rec('S1', '静岡県立静岡高等学校')];
+    const records = [
+      rate('静岡', '普通科(単位制)', 240, 300, 1.25), // 今季分(fiscalYear未指定)
+      { ...rate('静岡', '普通科', 240, 288, 1.2), fiscalYear: '令和7年度（2025年度）' },
+    ];
+    const history = buildSchoolHistoryForPrefecture(master, records, '令和8年度（2026年度）');
+    const entries = history.get('S1')!;
+    expect(entries).toHaveLength(2); // 合算されず2件のまま
+    expect(entries.map((e) => e.department)).toEqual(['普通科(単位制)', '普通科']); // 生の表記を保持
+    const grouped = groupSchoolHistoryByDepartment(entries);
+    expect(grouped).toHaveLength(2); // 別学科として扱われる(1件に統合されない)
+  });
+
   test('あいまい一致(同名複数校)もhistoryに含めない', () => {
     const master = [rec('X1', '東京都立大森高等学校'), rec('X2', '東京都立大森高校')];
     const records = [{ ...rate('大森', '普通科', 100, 100, 1.0), fiscalYear: '令和7年度（2025年度）' }];
