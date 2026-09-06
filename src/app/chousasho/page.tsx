@@ -225,6 +225,18 @@ export default function ChousashoPage() {
                   出典: 福岡県教育委員会「調査書（様式５）」
                 </a>
               </div>
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <div className="font-bold text-slate-800">愛媛県（国の標準形にほぼ忠実）</div>
+                <p className="mt-1 leading-relaxed text-slate-600">
+                  出欠の記録・各教科の学習の記録・総合的な学習の時間の記録・特別活動の記録
+                  （学級活動/生徒会活動/学校行事）・行動の記録（基本的な生活習慣など10項目）・
+                  総合所見という構成で、他県のような項目の削減・統合・自由記述化は見られず、
+                  国の基本4区分をほぼそのまま保持しています。
+                </p>
+                <a href="https://ehime-kyoiku.esnet.ed.jp/file/2088" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                  出典: 愛媛県教育委員会「県立高等学校入学志願者調査書」様式
+                </a>
+              </div>
             </div>
             <p className="mt-4 text-xs text-slate-500">
               ※ いずれも記載事項（様式）の整理であり、入試の合否判定に使う内申点（調査書点）の
