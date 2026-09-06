@@ -383,6 +383,18 @@ export default function ChousashoPage() {
                   出典: 島根県教育委員会「様式第16号　校長副申書」
                 </a>
               </div>
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <div className="font-bold text-slate-800">岡山県（国の標準4区分＋「卒業後の動向」を併記）</div>
+                <p className="mt-1 leading-relaxed text-slate-600">
+                  「学習の記録／総合的な学習の時間の記録／行動の記録（国の指導要録標準10区分）／
+                  特別活動の記録」という国の標準4区分をすべて独立した見出しのまま保持しつつ、
+                  「欠席日数・主な欠席理由」に加えて<strong>「卒業後の動向」</strong>まで併記する
+                  構成です。これまで確認した県の中で最も国の標準形に近く、かつ充実した項目数です。
+                </p>
+                <a href="https://www.pref.okayama.jp/uploaded/attachment/398006.xlsx" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                  出典: 岡山県教育委員会「様式５　調査書」
+                </a>
+              </div>
             </div>
             <p className="mt-4 text-xs text-slate-500">
               ※ いずれも記載事項（様式）の整理であり、入試の合否判定に使う内申点（調査書点）の
