@@ -8,7 +8,31 @@
 
 ## 0. 今季の主食（迷ったらここへ戻る）
 
-### 🆕 2026-09-06 17:1x時点の状態（T-Y11E E-4完了・検算パイプライン接続・36/36県fail-closed green）
+### 🆕 2026-09-06 17:3x時点の状態（T-Y11E E-5完了・差分レポート＋3回連続失敗エスカレーションをコード化）
+
+前の状態記録（E-4完了・36/36県fail-closed green）から継続。E-5「差分と失敗の切り分け」に着手し、
+2つの純関数モジュールを新設した:
+`src/lib/bairitsu-ingest/diff-parsed-records.ts`（`diffParsedRecords`=学校名+学科名キーで
+新設/廃止/数値変化/変化なしに分類・`formatDiffReport`=空セクション省略の日本語レポート）と
+`src/lib/bairitsu-ingest/validation-failure-tracker.ts`（`recordValidationOutcome`=県別の
+連続失敗数を台帳で追跡し、**3回目に達した回だけ**`shouldEscalate: true`を返す＝
+RUNBOOK「同じ県で3回連続して検算が落ちる場合は構造変化の疑いとして質問ノートへ」を機械判定化。
+4回目以降は再エスカレーションしない設計）。RUNBOOKが定める「転記ミスの自己修正」「原因不明は
+未解明差分記録」は資料を読む個別判断そのものが本質のため意図的に自動化対象外のまま残した。
+台帳の永続化・実データでの結線はR9公表後（1〜2月）の運用時（現時点でR9データが存在しないため）。
+tsc実exit0・bairitsu-ingest配下40suites242tests green・フルスイート489suites7142tests green。
+push済み（commit `f5ccd04`）。
+
+**次に再開するセッションがまず行うこと**:
+1. Gmail/GA4/GSC/Trends MCP接続確認
+2. Gmail新着返信の確認
+3. T-Y11Eの残りはE-3（pdfHash backfill）のみだが、これはT-N1-N4のN1-2と重複するため
+   **9/08以降**に統合して着手する運用（本文書既定）。9/08未到達の間はT-Y11Eから離れ、
+   同じ横断grep方式（`grep -rn "^\- \[ \]" ops/tasks/*.md`等）で他の`ops/tasks/*.md`の
+   未完了・日付ゲート無し項目を探すこと
+4. 日付ゲート（9/08 T-Y11B・N1-2/9/09 T-A1/9/21 W-8）は未到達
+
+### 2026-09-06 17:1x時点の状態（T-Y11E E-4完了・検算パイプライン接続・36/36県fail-closed green）
 
 前の状態記録（E-6実施中に未登録5県発見・36/47県）から継続。着手時、前セッションが未commit/
 未worklog記録のまま残していた`validate-parsed-records.ts`＋テストを発見（内容確認したところ
