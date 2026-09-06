@@ -1,0 +1,284 @@
+{
+  "aichi": {
+    "url": "https://www.pref.aichi.jp/uploaded/attachment/600212.pdf",
+    "docTitle": "愛知県教育委員会高等学校教育課 令和8年度愛知県公立高等学校入学者選抜（全日制課程）における一般選抜等の志願変更後の志願者数（最終）について",
+    "fiscalYear": "令和8年度（2026年度）",
+    "fetchedAt": "2026-07-25"
+  },
+  "akita": {
+    "url": "https://www.pref.akita.lg.jp/uploads/public/archive_0000093860_00/20260212_%EF%BC%91%E6%AC%A1%E5%8B%9F%E9%9B%86%E3%80%80%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B0%EF%BC%88%E5%BF%97%E9%A1%98%E5%85%88%E5%A4%89%E6%9B%B4%E5%BE%8C%EF%BC%89%EF%BC%88%E5%85%AC%E2%80%95%EF%BC%92%EF%BC%89.pdf",
+    "docTitle": "秋田県教育委員会 令和8年度秋田県公立高等学校入学者選抜１次募集 志願者数（志願先変更後）",
+    "fiscalYear": "令和8年度（2026年度）",
+    "fetchedAt": "2026-07-25"
+  },
+  "aomori": {
+    "url": "https://www.pref.aomori.lg.jp/soshiki/kyoiku/e-gakyo/files/R8senbatsu_syutsugan-zennitisei.pdf",
+    "docTitle": "青森県教育委員会 令和8年度青森県立高等学校入学者選抜出願状況等（全日制の課程）",
+    "fiscalYear": "令和8年度（2026年度）",
+    "fetchedAt": "2026-07-25"
+  },
+  "chiba": {
+    "url": "https://www.pref.chiba.lg.jp/kyouiku/shidou/nyuushi/koukou/r8/documents/r8kakuteiippan.pdf",
+    "docTitle": "千葉県教育委員会 令和8年度公立高等学校一般入学者選抜等志願者確定数一覧＜その1〜6＞",
+    "fiscalYear": "令和8年度（2026年度）",
+    "fetchedAt": "2026-07-24"
+  },
+  "ehime": {
+    "url": "https://ehime-kyoiku.esnet.ed.jp/file/2314",
+    "docTitle": "愛媛県教育委員会 令和8年度県立高等学校学科別入学志願者数（全日制）（志願変更後）",
+    "fiscalYear": "令和8年度（2026年度）",
+    "fetchedAt": "2026-07-25"
+  },
+  "fukui": {
+    "url": "https://www.pref.fukui.lg.jp/doc/koukou/nyugaku/r08ippan_d/fil/R8henko3.pdf",
+    "docTitle": "福井県教育委員会 令和8年度福井県立高等学校一般入学者選抜志願変更状況（2月16日変更最終日）",
+    "fiscalYear": "令和8年度（2026年度）",
+    "fetchedAt": "2026-07-25"
+  },
+  "fukuoka": {
+    "url": "https://www.pref.fukuoka.lg.jp/site/kyouiku/nyushi8.html",
+    "docTitle": "福岡県教育委員会 令和8年度公立高等学校一般入試志願状況（県立分PDF: uploaded/life/806459_62802786_misc.pdf）※旧URL(soshiki/kyouiku-somu/nyuusen.html)は2026-07-25時点で404のため付け替え",
+    "fiscalYear": "令和8年度（2026年度）",
+    "fetchedAt": "2026-07-25"
+  },
+  "fukushima": {
+    "url": "https://www.pref.fukushima.lg.jp/uploaded/attachment/735188.pdf",
+    "docTitle": "福島県教育委員会 令和８年度福島県立高等学校入学者選抜後期選抜志願状況（出願先変更後）",
+    "fiscalYear": "令和8年度（2026年度）",
+    "fetchedAt": "2026-07-26"
+  },
+  "gifu": {
+    "url": "https://www.pref.gifu.lg.jp/uploaded/attachment/485854.pdf",
+    "docTitle": "岐阜県教育委員会高校教育課 令和8年度岐阜県公立高等学校第一次・連携型選抜、通信制前期選抜 変更後出願者数（2月17日正午締切時）",
+    "fiscalYear": "令和8年度（2026年度）",
+    "fetchedAt": "2026-07-25"
+  },
+  "gunma": {
+    "url": "https://www.pref.gunma.jp/uploaded/attachment/689968.pdf",
+    "docTitle": "群馬県教育委員会 令和8年度群馬県公立高等学校入学者選抜 第２回志願先変更後の全日制課程選抜・フレックススクール選抜志願状況",
+    "fiscalYear": "令和8年度（2026年度）",
+    "fetchedAt": "2026-07-25"
+  },
+  "hiroshima": {
+    "url": "https://www.pref.hiroshima.lg.jp/uploaded/attachment/655351.pdf",
+    "docTitle": "広島県教育委員会 令和8年度広島県公立高等学校入学者選抜一次選抜、帰国生徒及び外国人生徒等の特別入学に関する選抜の志願状況（最終志願状況）",
+    "fiscalYear": "令和8年度（2026年度）",
+    "fetchedAt": "2026-07-25"
+  },
+  "hokkaido": {
+    "url": "https://www.dokyoi.pref.hokkaido.lg.jp/fs/1/3/1/7/8/5/5/0/_/05_p9-p22.pdf",
+    "docTitle": "北海道教育委員会 R8入学者選抜状況報告書「§3 学校別受検者数及び合格者数」（全14頁・空知〜根室の全14管内を収録）",
+    "fiscalYear": "令和8年度（2026年度）",
+    "fetchedAt": "2026-08-06"
+  },
+  "hyogo": {
+    "url": "https://www2.hyogo-c.ed.jp/hpe/uploads/sites/10/2026/03/【確定】修正_03-R8_３月選抜志願者数.pdf",
+    "docTitle": "兵庫県教育委員会 令和8年度兵庫県公立高等学校入学者選抜出願状況（特別出願後確定数）",
+    "fiscalYear": "令和8年度（2026年度）",
+    "fetchedAt": "2026-07-25"
+  },
+  "ibaraki": {
+    "url": "https://kyoiku.pref.ibaraki.jp/wp-content/uploads/2026/02/shigansha20260218.pdf",
+    "docTitle": "茨城県教育委員会 令和8年度茨城県立高等学校第1学年入学志願者数等（志願先変更後）",
+    "fiscalYear": "令和8年度（2026年度）",
+    "fetchedAt": "2026-07-25"
+  },
+  "ishikawa": {
+    "url": "https://www.pref.ishikawa.lg.jp/kisya/r7kyoui/documents/20260224.pdf",
+    "docTitle": "石川県教育委員会 令和8年度石川県公立高等学校一般入学(全日制)の出願状況（2月24日）",
+    "fiscalYear": "令和8年度（2026年度）",
+    "fetchedAt": "2026-07-25"
+  },
+  "iwate": {
+    "url": "https://www.pref.iwate.jp/_res/projects/default_project/_page_/001/094/015/r8_sigansya_tyouseigo.pdf",
+    "docTitle": "岩手県教育委員会 令和8年度岩手県立高等学校入学者選抜 志願者数一覧表（調整後）＜全日制＞",
+    "fiscalYear": "令和8年度（2026年度）",
+    "fetchedAt": "2026-07-25"
+  },
+  "kagawa": {
+    "url": "https://www.pref.kagawa.lg.jp/documents/15096/syutugan8-3-2.pdf",
+    "docTitle": "香川県教育委員会 令和8年度香川県公立高等学校一般選抜出願者数（全日制課程小学科・コース別）（一般選抜志願変更締切後）",
+    "fiscalYear": "令和8年度（2026年度）",
+    "fetchedAt": "2026-07-25"
+  },
+  "kagoshima": {
+    "url": "https://www.pref.kagoshima.jp/ba05/kyoiku-bunka/school/koukou/nyushi/r7/documents/126595_20260304191737-1.pdf",
+    "docTitle": "鹿児島県教育委員会 令和8年度鹿児島県公立高等学校入学学力検査最終出願者数（訂正版）",
+    "fiscalYear": "令和8年度（2026年度）",
+    "fetchedAt": "2026-07-25"
+  },
+  "kanagawa": {
+    "url": "https://www.pref.kanagawa.jp/documents/131973/bessi3.pdf",
+    "docTitle": "神奈川県教育委員会 令和8年度神奈川県公立高等学校入学者選抜一般募集共通選抜等志願変更締切時志願状況（別紙3）",
+    "fiscalYear": "令和8年度（2026年度）",
+    "fetchedAt": "2026-07-24"
+  },
+  "kochi": {
+    "url": "https://www.pref.kochi.lg.jp/doc/2026010600090/file_contents/r8_A_henkougo0205.pdf",
+    "docTitle": "高知県教育委員会 令和8年度Ａ日程等志願先変更後の状況（学校別）",
+    "fiscalYear": "令和8年度（2026年度）",
+    "fetchedAt": "2026-07-25"
+  },
+  "kumamoto": {
+    "url": "https://www.pref.kumamoto.jp/uploaded/life/259416_786982_misc.pdf",
+    "docTitle": "熊本県教育委員会 令和8年度（2026年度）熊本県公立高等学校入学者選抜後期（一般）選抜における出願変更状況（出願確定者数）",
+    "fiscalYear": "令和8年度（2026年度）",
+    "fetchedAt": "2026-07-25"
+  },
+  "kyoto": {
+    "url": "https://www.kyoto-be.ne.jp/koukyou/cms/wp-content/uploads/2025/05/%E4%BB%A4%E5%92%8C%EF%BC%98%E5%B9%B4%E5%BA%A6%E4%B8%AD%E6%9C%9F%E9%81%B8%E6%8A%9C-%E5%BA%83%E5%A0%B1%E8%B3%87%E6%96%99%EF%BC%88%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B0%EF%BC%89.pdf",
+    "docTitle": "京都府教育委員会 令和8年度京都府公立高等学校入学者選抜 中期選抜志願者数等一覧表",
+    "fiscalYear": "令和8年度（2026年度）",
+    "fetchedAt": "2026-07-25"
+  },
+  "mie": {
+    "url": "https://www.pref.mie.lg.jp/common/content/001243656.pdf",
+    "docTitle": "三重県教育委員会 令和8年度三重県立高等学校後期選抜志願状況（最終）",
+    "fiscalYear": "令和8年度（2026年度）",
+    "fetchedAt": "2026-07-25"
+  },
+  "miyagi": {
+    "url": "https://www.pref.miyagi.jp/documents/63612/0213_r8kouritukoukou_nyuugakusyasenbatsu_gakuryokukensa.pdf",
+    "docTitle": "宮城県教育庁高校教育課 令和8年度宮城県公立高等学校入学者選抜に係る第一次募集出願状況について（学校・学科別出願状況）",
+    "fiscalYear": "令和8年度（2026年度）",
+    "fetchedAt": "2026-07-25"
+  },
+  "miyazaki": {
+    "url": "https://www.pref.miyazaki.lg.jp/documents/99874/99874_20260224160129-1.pdf",
+    "docTitle": "宮崎県教育委員会 令和8年度宮崎県立高等学校入学者選抜（課程別）一般入学者選抜「最終」志願状況",
+    "fiscalYear": "令和8年度（2026年度）",
+    "fetchedAt": "2026-07-25"
+  },
+  "nagano": {
+    "url": "https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/20260305web-teisei.pdf",
+    "docTitle": "長野県教育委員会 令和8年度公立高等学校入学者後期選抜志願者数②（志望変更受付締切後の集計結果）",
+    "fiscalYear": "令和8年度（2026年度）",
+    "fetchedAt": "2026-07-25"
+  },
+  "nagasaki": {
+    "url": "https://www.pref.nagasaki.jp/uploads/2026/02/1770615354.pdf",
+    "docTitle": "長崎県教育委員会 令和8年度公立高等学校入学者選抜 一般選抜・定時制課程Ⅰ期選抜志願状況について",
+    "fiscalYear": "令和8年度（2026年度）",
+    "fetchedAt": "2026-07-25"
+  },
+  "nara": {
+    "url": "https://www.pref.nara.lg.jp/documents/5981/r8_itijisennbatu_dainisyutugannkikann_syutugannsyasuu.pdf",
+    "docTitle": "奈良県教育委員会 令和8年度奈良県公立高等学校入学者一次選抜等出願状況（第二出願期間）",
+    "fiscalYear": "令和8年度（2026年度）",
+    "fetchedAt": "2026-07-25"
+  },
+  "niigata": {
+    "url": "https://kyouikucho.nein.ed.jp/koukoukyouiku/senbatu/koukou/ippan_henkogo.pdf",
+    "docTitle": "新潟県教育委員会 令和8年度新潟県公立高等学校入学者選抜一般選抜志願変更後の志願状況一覧",
+    "fiscalYear": "令和8年度（2026年度）",
+    "fetchedAt": "2026-07-25"
+  },
+  "oita": {
+    "url": "https://www.pref.oita.jp/uploaded/attachment/2261572.pdf",
+    "docTitle": "大分県教育委員会 令和8年度大分県立高等学校第一次入学者選抜第一志願最終志願状況",
+    "fiscalYear": "令和8年度（2026年度）",
+    "fetchedAt": "2026-07-25"
+  },
+  "okayama": {
+    "url": "https://www.pref.okayama.jp/uploaded/life/1054600_10219046_misc.pdf",
+    "docTitle": "岡山県教育委員会 令和8年度岡山県公立高等学校一般入学者選抜志願者数について",
+    "fiscalYear": "令和8年度（2026年度）",
+    "fetchedAt": "2026-09-05"
+  },
+  "okinawa": {
+    "url": "https://www.pref.okinawa.jp/_res/projects/default_project/_page_/001/038/168/r07saisyu.pdf",
+    "docTitle": "沖縄県教育委員会 令和8年度（令和7年度実施）県立高等学校入学者選抜 一般選抜等最終志願状況",
+    "fiscalYear": "令和8年度（2026年度）",
+    "fetchedAt": "2026-07-25"
+  },
+  "osaka": {
+    "url": "https://www.pref.osaka.lg.jp/documents/125698/r08_ippan_sigansya_0306.xlsx",
+    "docTitle": "大阪府教育委員会 令和8年度大阪府公立高等学校 一般入学者選抜（全日制の課程）の志願者数（令和8年3月6日午後2時（締切数））表1〜6全体",
+    "fiscalYear": "令和8年度（2026年度）",
+    "fetchedAt": "2026-07-24"
+  },
+  "saga": {
+    "url": "https://www.pref.saga.lg.jp/kyouiku/kiji003118261/3_118261_381978_up_jpwwphq6.pdf",
+    "docTitle": "佐賀県教育委員会 令和8年度佐賀県立高等学校入学者選抜一般選抜志願状況（志願変更後・訂正版）",
+    "fiscalYear": "令和8年度（2026年度）",
+    "fetchedAt": "2026-07-25"
+  },
+  "saitama": {
+    "url": "https://www.pref.saitama.lg.jp/documents/268192/r8shigankakutei0219.pdf",
+    "docTitle": "埼玉県教育委員会 令和8年度埼玉県公立高等学校における入学志願確定者数（全日制・定時制）",
+    "fiscalYear": "令和8年度（2026年度）",
+    "fetchedAt": "2026-07-24"
+  },
+  "shiga": {
+    "url": "https://www.pref.shiga.lg.jp/file/attachment/5591236.pdf",
+    "docTitle": "滋賀県教育委員会 令和８年度滋賀県立高等学校入学者選抜の一次募集に係る公表資料（一次募集確定出願者数）",
+    "fiscalYear": "令和8年度（2026年度）",
+    "fetchedAt": "2026-07-26"
+  },
+  "shimane": {
+    "url": "https://www.pref.shimane.lg.jp/education/kyoiku/senbatsu/senbatsu_info/kanendosenbatsu.data/01_R8_henkougoitiran_teisei.pdf",
+    "docTitle": "島根県教育委員会 令和８年度島根県公立高等学校入学者選抜 一般選抜出願者数（志願変更後）",
+    "fiscalYear": "令和8年度（2026年度）",
+    "fetchedAt": "2026-07-26"
+  },
+  "shizuoka": {
+    "url": "https://www.pref.shizuoka.jp/_res/projects/default_project/_page_/001/072/279/r8shigansyasuusiganhennkougo1.pdf",
+    "docTitle": "静岡県教育委員会 令和8年度静岡県公立高等学校入学者選抜 志願者数一覧（変更後）",
+    "fiscalYear": "令和8年度（2026年度）",
+    "fetchedAt": "2026-07-25"
+  },
+  "tochigi": {
+    "url": "https://www.pref.tochigi.lg.jp/m04/r08/documents/r8zennitiseiippansenbatsusyutsuganhenkojokyo.pdf",
+    "docTitle": "栃木県教育委員会 令和8（2026）年度県立高等学校入学者選抜一般選抜出願変更状況（全日制課程）",
+    "fiscalYear": "令和8年度（2026年度）",
+    "fetchedAt": "2026-07-25"
+  },
+  "tokushima": {
+    "url": "https://nyuushi.tokushima-ec.ed.jp/file/975",
+    "docTitle": "徳島県教育委員会 令和8年度徳島県公立高等学校一般選抜出願状況（2月26日志願変更後）",
+    "fiscalYear": "令和8年度（2026年度）",
+    "fetchedAt": "2026-07-25"
+  },
+  "tokyo": {
+    "url": "https://www.kyoiku.metro.tokyo.lg.jp/documents/d/kyoiku/2026-02-13-182440-757",
+    "docTitle": "東京都教育委員会 令和8年度東京都立高等学校入学者選抜応募状況（最終応募状況）1[普通科（コース、単位制以外の学校）]・2[普通科（島しょの学校）]",
+    "fiscalYear": "令和8年度（2026年度）",
+    "fetchedAt": "2026-07-24"
+  },
+  "tottori": {
+    "url": "https://www.pref.tottori.lg.jp/secure/1418417/R08_ippan_saisyuu_shigansya.pdf",
+    "docTitle": "鳥取県教育委員会 令和８年度鳥取県立高等学校入学者選抜最終志願者数一覧（全日制課程）",
+    "fiscalYear": "令和8年度（2026年度）",
+    "fetchedAt": "2026-07-25"
+  },
+  "toyama": {
+    "url": "https://www.pref.toyama.jp/documents/47208/080224.pdf",
+    "docTitle": "富山県教育委員会 令和8年度富山県立高等学校入学者選抜 全日制の課程一般入学者選抜志願状況（令和8年2月24日正午現在）",
+    "fiscalYear": "令和8年度（2026年度）",
+    "fetchedAt": "2026-07-25"
+  },
+  "wakayama": {
+    "url": "https://www.pref.wakayama.lg.jp/prefg/500200/d00219915_d/fil/08honsyutugan.pdf",
+    "docTitle": "和歌山県教育委員会 令和８年度和歌山県立高等学校入学者選抜実施状況（一般選抜・スポーツ推薦本出願状況）学校別・学科別状況(全日制)",
+    "fiscalYear": "令和8年度（2026年度）",
+    "fetchedAt": "2026-07-26"
+  },
+  "yamagata": {
+    "url": "https://www.pref.yamagata.jp/documents/42443/r8koukiippannsigannjoukyouhp.pdf",
+    "docTitle": "山形県教育委員会 令和8年度山形県公立高等学校入学者選抜 後期（一般）選抜 志願状況",
+    "fiscalYear": "令和8年度（2026年度）",
+    "fetchedAt": "2026-07-25"
+  },
+  "yamaguchi": {
+    "url": "https://www.pref.yamaguchi.lg.jp/uploaded/life/338005_649954_misc.pdf",
+    "docTitle": "山口県教育委員会 令和8年度山口県公立高等学校入学志願者数について（訂正）",
+    "fiscalYear": "令和8年度（2026年度）",
+    "fetchedAt": "2026-07-25"
+  },
+  "yamanashi": {
+    "url": "https://www.pref.yamanashi.jp/documents/7061/r8saisyuusigansyasuu1.pdf",
+    "docTitle": "山梨県教育委員会 令和8年度山梨県公立高等学校入学者選抜 全日制後期募集及び定時制課程の最終志願状況について",
+    "fiscalYear": "令和8年度（2026年度）",
+    "fetchedAt": "2026-07-25"
+  }
+}
