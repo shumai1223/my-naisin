@@ -141,9 +141,9 @@ export default function ChousashoPage() {
               調査書の記載事項は都道府県によって変わることがある
             </h2>
             <p className="mb-4 text-sm leading-relaxed text-slate-700">
-              上記の4項目は全国共通の基本形（文部科学省 別紙様式1）ですが、教育委員会が個別に記載事項を
-              見直すことがあります。<strong>教育委員会が公式に発表している実例</strong>のみ、以下に記載します
-              （未発表の都道府県については記載しません）。
+              上記の4項目は全国共通の基本形（文部科学省 別紙様式1）ですが、実際の様式は教育委員会ごとに
+              項目名や構成が異なることがあります。<strong>教育委員会が公式に公表している資料で確認できた
+              実例</strong>のみ、以下に記載します（未確認の都道府県については記載しません）。
             </p>
             <div className="space-y-3 text-sm">
               <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
@@ -175,6 +175,19 @@ export default function ChousashoPage() {
                 </p>
                 <a href="https://www.pref.chiba.lg.jp/kyouiku/shidou/press/2024/koukou/r8kaizenten.html" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
                   出典: 千葉県教育委員会「千葉県公立高等学校入学者選抜の改善点について」
+                </a>
+              </div>
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <div className="font-bold text-slate-800">東京都（様式10・令和8年度入試）</div>
+                <p className="mt-1 leading-relaxed text-slate-600">
+                  「1 成績一覧表の番号・提出の有無」「2 学籍の記録」「3 各教科の学習の記録」
+                  「4 総合的な学習の時間の内容及び評価」「5 諸活動の記録（特別活動等・ESAT-J結果）」
+                  「6 海外帰国生徒対象等との併願」の6項目で構成。「行動の記録」「出欠の記録」
+                  「総合所見」という項目名は単独では使われておらず、特別活動等の記録は
+                  「諸活動の記録」に統合されています。
+                </p>
+                <a href="https://www.kyoiku.metro.tokyo.lg.jp/documents/d/kyoiku/20251201_tyousasho_sakusei" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                  出典: 東京都教育委員会「令和8年度東京都立高等学校入学者選抜の調査書の作成について」
                 </a>
               </div>
             </div>
