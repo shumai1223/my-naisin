@@ -618,6 +618,19 @@ export default function ChousashoPage() {
                   出典: 福島県教育委員会「令和8年度福島県立高等学校入学者選抜実施要綱」様式1号
                 </a>
               </div>
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <div className="font-bold text-slate-800">栃木県（「行動の記録」「出欠の記録」は第3学年分のみ記入）</div>
+                <p className="mt-1 leading-relaxed text-slate-600">
+                  「調査書作成の要領」によると、各教科の学習の記録・総合的な学習の時間の記録・
+                  特別活動の記録・行動の記録・文化活動やスポーツ活動等の記録・出欠の記録・健康
+                  状況という構成です。<strong>「行動の記録」と「出欠の記録」はいずれも記入要領に
+                  「第3学年について」と明記されており、第3学年分のみを記入する運用</strong>で、
+                  1〜3年分をすべて記入する構成とは異なります。
+                </p>
+                <a href="https://www.pref.tochigi.lg.jp/m04/r08/documents/20251001165237.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                  出典: 栃木県教育委員会「令和8年度栃木県立高等学校入学者選抜」別記「調査書作成の要領」
+                </a>
+              </div>
             </div>
             <p className="mt-4 text-xs text-slate-500">
               ※ いずれも記載事項（様式）の整理であり、入試の合否判定に使う内申点（調査書点）の
