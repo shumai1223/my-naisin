@@ -563,6 +563,19 @@ export default function ChousashoPage() {
                   出典: 岩手県教育委員会「様式中－２　調査書」
                 </a>
               </div>
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <div className="font-bold text-slate-800">宮城県（ウェブ出願システムへの直接入力方式）</div>
+                <p className="mt-1 leading-relaxed text-slate-600">
+                  出願書類一覧表に「調査書」の備考欄が「ウェブ出願システムに登録」と明記されて
+                  おり、大阪府・兵庫県・島根県と同様、個人の調査書はオンラインシステムへの直接
+                  入力方式で公開されている紙の様式は見当たりませんでした。「調査書の記載内容等に
+                  ついて特別な事情がある場合は、副申書を添付することができる」という制度もあり
+                  ます。
+                </p>
+                <a href="https://www.pref.miyagi.jp/documents/55299/r8_sennbatsuyoko_all.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                  出典: 宮城県教育委員会「令和8年度宮城県公立高等学校入学者選抜要項」
+                </a>
+              </div>
             </div>
             <p className="mt-4 text-xs text-slate-500">
               ※ いずれも記載事項（様式）の整理であり、入試の合否判定に使う内申点（調査書点）の
