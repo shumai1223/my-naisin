@@ -214,6 +214,17 @@ export default function ChousashoPage() {
                   出典: 神奈川県教育委員会「調査書作成上の注意」
                 </a>
               </div>
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <div className="font-bold text-slate-800">福岡県（様式5）</div>
+                <p className="mt-1 leading-relaxed text-slate-600">
+                  学籍の記録・各教科の学習の記録に加えて、特別活動の記録（生徒会活動等）、
+                  「自主・自律」「創意工夫」「勤労・奉仕」「公共心・公徳心」「基本的な生活習慣」
+                  といった行動面の評価区分、総合所見、そして「欠席日数」を明示的に持つ様式です。
+                </p>
+                <a href="https://www.pref.fukuoka.lg.jp/uploaded/attachment/268335.xls" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                  出典: 福岡県教育委員会「調査書（様式５）」
+                </a>
+              </div>
             </div>
             <p className="mt-4 text-xs text-slate-500">
               ※ いずれも記載事項（様式）の整理であり、入試の合否判定に使う内申点（調査書点）の
