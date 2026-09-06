@@ -308,6 +308,18 @@ export default function ChousashoPage() {
                   出典: 滋賀県教育委員会「個人調査報告書（４号の１）」
                 </a>
               </div>
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <div className="font-bold text-slate-800">岐阜県（「学校内外における諸活動の記録」）</div>
+                <p className="mt-1 leading-relaxed text-slate-600">
+                  A4縦1ページの構成で「学籍の記録／各教科の学習の記録／特別活動の記録（学級活動・
+                  生徒会活動・学校行事）／学校内外における諸活動の記録／特記事項」となっています。
+                  <strong>「学校内外における諸活動の記録」</strong>は他県では確認できなかった呼称で、
+                  校内の部活動だけでなく校外活動もまとめて記載する設計とみられます。
+                </p>
+                <a href="https://www.pref.gifu.lg.jp/uploaded/attachment/504000.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                  出典: 岐阜県教育委員会「調査書（別記第1号様式）」
+                </a>
+              </div>
             </div>
             <p className="mt-4 text-xs text-slate-500">
               ※ いずれも記載事項（様式）の整理であり、入試の合否判定に使う内申点（調査書点）の
