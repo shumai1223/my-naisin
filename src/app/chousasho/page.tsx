@@ -486,6 +486,18 @@ export default function ChousashoPage() {
                   出典: 熊本県教育委員会「様式6　調査書」
                 </a>
               </div>
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <div className="font-bold text-slate-800">大分県（A3判・健康の状況が独立項目）</div>
+                <p className="mt-1 leading-relaxed text-slate-600">
+                  <strong>「日本産業規格A3」判という指定</strong>があり、これまで確認した25県で
+                  A4判が主流だった中でA3判は初めてです。各教科等の学習の記録・特別活動の記録・
+                  行動の記録（国の指導要録標準10区分）に加えて「健康の状況」が「出欠の記録」から
+                  独立した項目である点は熊本県に次いで2例目の確認でした。
+                </p>
+                <a href="https://www.pref.oita.jp/uploaded/attachment/2254513.xlsx" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                  出典: 大分県教育委員会「（様式９号）調査書」
+                </a>
+              </div>
             </div>
             <p className="mt-4 text-xs text-slate-500">
               ※ いずれも記載事項（様式）の整理であり、入試の合否判定に使う内申点（調査書点）の
