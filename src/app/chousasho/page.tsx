@@ -433,6 +433,19 @@ export default function ChousashoPage() {
                   出典: 徳島県教育委員会「公立高等学校生徒募集選抜要項」別記１
                 </a>
               </div>
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <div className="font-bold text-slate-800">高知県（出欠の記録に「遅刻・早退を含む」と明記）</div>
+                <p className="mt-1 leading-relaxed text-slate-600">
+                  各教科の学習の記録・特別活動の記録・行動の記録（国の指導要録標準10区分）・
+                  総合的な学習の時間の記録・出欠の記録・総合所見という構成で、国の標準区分を
+                  全て独立項目のまま保持しています。特に出欠の記録の特記事項欄に
+                  <strong>「遅刻・早退を含む」</strong>と明記されている点は、これまで確認した
+                  県の中で最も粒度の細かい記載でした。
+                </p>
+                <a href="https://www.pref.kochi.lg.jp/doc/r8_youshiki/file_contents/r8_youshiki_6-1-1.xlsx" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                  出典: 高知県教育委員会「様式第６号の１－１　調査書」
+                </a>
+              </div>
             </div>
             <p className="mt-4 text-xs text-slate-500">
               ※ いずれも記載事項（様式）の整理であり、入試の合否判定に使う内申点（調査書点）の
