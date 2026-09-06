@@ -473,6 +473,19 @@ export default function ChousashoPage() {
                   出典: 長崎県教育委員会「（様式６－１）調査書」
                 </a>
               </div>
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <div className="font-bold text-slate-800">熊本県（「健康の記録」を出欠と別欄に独立）</div>
+                <p className="mt-1 leading-relaxed text-slate-600">
+                  総合的な学習の時間の記録・特別活動の記録・行動の記録・総合所見及び指導上参考と
+                  なる諸事項に加えて、<strong>「健康の記録」が「出欠の記録」から完全に独立した
+                  別の欄</strong>として存在します。これまで確認した県の多くは出欠と健康を1つの
+                  欄にまとめており、区分方法としては初めてです。「編入学、転入学、転学・退学等の
+                  記録」という項目も独立して存在します。
+                </p>
+                <a href="https://www.pref.kumamoto.jp/uploaded/life/244675_716277_misc.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                  出典: 熊本県教育委員会「様式6　調査書」
+                </a>
+              </div>
             </div>
             <p className="mt-4 text-xs text-slate-500">
               ※ いずれも記載事項（様式）の整理であり、入試の合否判定に使う内申点（調査書点）の
