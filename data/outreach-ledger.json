@@ -3209,7 +3209,7 @@
     {
       "id": "b2b-form-b3-01-0906",
       "org": "日本教育工学協会(JAET)",
-      "lane": "b2b-form",
+      "lane": "npo",
       "sourceTaskId": "T-C1",
       "sentDate": "2026-09-06",
       "lastContactDate": "2026-09-06",
@@ -3221,7 +3221,7 @@
     {
       "id": "b2b-form-b3-02-0906",
       "org": "日本産業技術教育学会",
-      "lane": "b2b-form",
+      "lane": "npo",
       "sourceTaskId": "T-C1",
       "sentDate": "2026-09-06",
       "lastContactDate": "2026-09-06",
@@ -3233,7 +3233,7 @@
     {
       "id": "b2b-form-b3-03-0906",
       "org": "全国高等学校定時制通信制教頭・副校長協会",
-      "lane": "b2b-form",
+      "lane": "npo",
       "sourceTaskId": "T-C1",
       "sentDate": "2026-09-06",
       "lastContactDate": "2026-09-06",
@@ -3245,7 +3245,7 @@
     {
       "id": "b2b-form-b3-04-0906",
       "org": "全国高等学校文化連盟",
-      "lane": "b2b-form",
+      "lane": "npo",
       "sourceTaskId": "T-C1",
       "sentDate": "2026-09-06",
       "lastContactDate": "2026-09-06",
@@ -3257,7 +3257,7 @@
     {
       "id": "b2b-form-b3-05-0906",
       "org": "日本教育行政学会(JEAS)",
-      "lane": "b2b-form",
+      "lane": "npo",
       "sourceTaskId": "T-C1",
       "sentDate": "2026-09-06",
       "lastContactDate": "2026-09-06",
@@ -3269,7 +3269,7 @@
     {
       "id": "b2b-form-b3-06-0906",
       "org": "全国農業高等学校長協会",
-      "lane": "b2b-form",
+      "lane": "npo",
       "sourceTaskId": "T-C1",
       "sentDate": "2026-09-06",
       "lastContactDate": "2026-09-06",
@@ -3281,7 +3281,7 @@
     {
       "id": "b2b-form-b3-07-0906",
       "org": "ここっと(定時制通信制教育振興会)",
-      "lane": "b2b-form",
+      "lane": "npo",
       "sourceTaskId": "T-C1",
       "sentDate": "2026-09-06",
       "lastContactDate": "2026-09-06",
@@ -3293,7 +3293,7 @@
     {
       "id": "b2b-form-b3-08-0906",
       "org": "日本STEM教育学会",
-      "lane": "b2b-form",
+      "lane": "npo",
       "sourceTaskId": "T-C1",
       "sentDate": "2026-09-06",
       "lastContactDate": "2026-09-06",
@@ -3305,7 +3305,7 @@
     {
       "id": "b2b-form-b3-09-0906",
       "org": "産業教育振興中央会",
-      "lane": "b2b-form",
+      "lane": "npo",
       "sourceTaskId": "T-C1",
       "sentDate": "2026-09-06",
       "lastContactDate": "2026-09-06",
@@ -3317,7 +3317,7 @@
     {
       "id": "b2b-form-b3-10-0906",
       "org": "日本特別活動学会",
-      "lane": "b2b-form",
+      "lane": "npo",
       "sourceTaskId": "T-C1",
       "sentDate": "2026-09-06",
       "lastContactDate": "2026-09-06",
@@ -3329,7 +3329,7 @@
     {
       "id": "b2b-form-b3-x1-0906",
       "org": "全国工業高等学校長協会",
-      "lane": "b2b-form",
+      "lane": "npo",
       "sourceTaskId": "T-C1",
       "sentDate": null,
       "lastContactDate": "2026-09-06",
@@ -3341,7 +3341,7 @@
     {
       "id": "b2b-form-b3-x2-0906",
       "org": "日本生活科・総合的学習教育学会",
-      "lane": "b2b-form",
+      "lane": "npo",
       "sourceTaskId": "T-C1",
       "sentDate": null,
       "lastContactDate": "2026-09-06",
@@ -3353,7 +3353,7 @@
     {
       "id": "b2b-form-b8-13-0906",
       "org": "スキャネット",
-      "lane": "b2b-form",
+      "lane": "b2b-saas",
       "sourceTaskId": "T-C1",
       "sentDate": "2026-09-06",
       "lastContactDate": "2026-09-06",
@@ -3365,7 +3365,7 @@
     {
       "id": "b2b-form-b8-14-0906",
       "org": "佑人社(YouMark Personal)",
-      "lane": "b2b-form",
+      "lane": "b2b-saas",
       "sourceTaskId": "T-C1",
       "sentDate": "2026-09-06",
       "lastContactDate": "2026-09-06",
@@ -3377,7 +3377,7 @@
     {
       "id": "b2b-form-b8-15-0906",
       "org": "Smarky",
-      "lane": "b2b-form",
+      "lane": "b2b-saas",
       "sourceTaskId": "T-C1",
       "sentDate": "2026-09-06",
       "lastContactDate": "2026-09-06",
@@ -3389,7 +3389,7 @@
     {
       "id": "b2b-form-b8-16-0906",
       "org": "ソフトウエア・サイエンス(SGS)",
-      "lane": "b2b-form",
+      "lane": "b2b-saas",
       "sourceTaskId": "T-C1",
       "sentDate": "2026-09-06",
       "lastContactDate": "2026-09-06",
@@ -3401,7 +3401,7 @@
     {
       "id": "b2b-form-b8-17-0906",
       "org": "プランナーズランド(School Gear)",
-      "lane": "b2b-form",
+      "lane": "b2b-saas",
       "sourceTaskId": "T-C1",
       "sentDate": "2026-09-06",
       "lastContactDate": "2026-09-06",
@@ -3413,7 +3413,7 @@
     {
       "id": "b2b-form-b8-18-0906",
       "org": "テラポート(Can'dyシリーズ)",
-      "lane": "b2b-form",
+      "lane": "b2b-saas",
       "sourceTaskId": "T-C1",
       "sentDate": "2026-09-06",
       "lastContactDate": "2026-09-06",
@@ -3425,7 +3425,7 @@
     {
       "id": "b2b-form-b8-19-0906",
       "org": "学びの森",
-      "lane": "b2b-form",
+      "lane": "b2b-saas",
       "sourceTaskId": "T-C1",
       "sentDate": "2026-09-06",
       "lastContactDate": "2026-09-06",
@@ -3437,7 +3437,7 @@
     {
       "id": "b2b-form-b8-20-0906",
       "org": "上越教育大学",
-      "lane": "b2b-form",
+      "lane": "npo",
       "sourceTaskId": "T-C1",
       "sentDate": "2026-09-06",
       "lastContactDate": "2026-09-06",
@@ -3449,7 +3449,7 @@
     {
       "id": "b2b-form-b8-21-0906",
       "org": "日本標準",
-      "lane": "b2b-form",
+      "lane": "b2b-saas",
       "sourceTaskId": "T-C1",
       "sentDate": "2026-09-06",
       "lastContactDate": "2026-09-06",
@@ -3461,7 +3461,7 @@
     {
       "id": "b2b-form-b8-22-0906",
       "org": "琉球大学",
-      "lane": "b2b-form",
+      "lane": "npo",
       "sourceTaskId": "T-C1",
       "sentDate": "2026-09-06",
       "lastContactDate": "2026-09-06",
@@ -3473,7 +3473,7 @@
     {
       "id": "b2b-form-b8-23-0906",
       "org": "ウチダエスコ(スコーレV3)",
-      "lane": "b2b-form",
+      "lane": "b2b-saas",
       "sourceTaskId": "T-C1",
       "sentDate": "2026-09-06",
       "lastContactDate": "2026-09-06",
@@ -3485,7 +3485,7 @@
     {
       "id": "b2b-form-b8-x1-0906",
       "org": "コンピュータムーブ",
-      "lane": "b2b-form",
+      "lane": "b2b-saas",
       "sourceTaskId": "T-C1",
       "sentDate": null,
       "lastContactDate": "2026-09-06",
@@ -3497,7 +3497,7 @@
     {
       "id": "b2b-form-b8-x2-0906",
       "org": "Solvvy株式会社",
-      "lane": "b2b-form",
+      "lane": "b2b-saas",
       "sourceTaskId": "T-C1",
       "sentDate": null,
       "lastContactDate": "2026-09-06",
@@ -3509,7 +3509,7 @@
     {
       "id": "b2b-form-b11-26-0906",
       "org": "日本教育工学会(JSET)",
-      "lane": "b2b-form",
+      "lane": "npo",
       "sourceTaskId": "T-C1",
       "sentDate": "2026-09-06",
       "lastContactDate": "2026-09-06",
@@ -3521,7 +3521,7 @@
     {
       "id": "b2b-form-b11-27-0906",
       "org": "全国学習塾協同組合(AJC)",
-      "lane": "b2b-form",
+      "lane": "npo",
       "sourceTaskId": "T-C1",
       "sentDate": "2026-09-06",
       "lastContactDate": "2026-09-06",
@@ -3533,7 +3533,7 @@
     {
       "id": "b2b-form-b11-28-0906",
       "org": "全国PTA連絡協議会",
-      "lane": "b2b-form",
+      "lane": "npo",
       "sourceTaskId": "T-C1",
       "sentDate": "2026-09-06",
       "lastContactDate": "2026-09-06",
@@ -3545,7 +3545,7 @@
     {
       "id": "b2b-form-b11-29-0906",
       "org": "全国学校図書館協議会(SLA)",
-      "lane": "b2b-form",
+      "lane": "npo",
       "sourceTaskId": "T-C1",
       "sentDate": "2026-09-06",
       "lastContactDate": "2026-09-06",
@@ -3557,7 +3557,7 @@
     {
       "id": "b2b-form-b11-30-0906",
       "org": "三菱総研DCS(miraicompass)",
-      "lane": "b2b-form",
+      "lane": "b2b-saas",
       "sourceTaskId": "T-C1",
       "sentDate": "2026-09-06",
       "lastContactDate": "2026-09-06",
@@ -3569,7 +3569,7 @@
     {
       "id": "b2b-form-b11-31-0906",
       "org": "みんなのコード",
-      "lane": "b2b-form",
+      "lane": "npo",
       "sourceTaskId": "T-C1",
       "sentDate": "2026-09-06",
       "lastContactDate": "2026-09-06",
@@ -3581,7 +3581,7 @@
     {
       "id": "b2b-form-b11-32-0906",
       "org": "ナレッジラーニング(wagaco)",
-      "lane": "b2b-form",
+      "lane": "b2b-saas",
       "sourceTaskId": "T-C1",
       "sentDate": "2026-09-06",
       "lastContactDate": "2026-09-06",
@@ -3593,7 +3593,7 @@
     {
       "id": "b2b-form-b11-33-0906",
       "org": "TSパートナーズ(Jukugo)",
-      "lane": "b2b-form",
+      "lane": "b2b-saas",
       "sourceTaskId": "T-C1",
       "sentDate": "2026-09-06",
       "lastContactDate": "2026-09-06",
@@ -3605,7 +3605,7 @@
     {
       "id": "b2b-form-b11-34-0906",
       "org": "EDIONクロスベンチャーズ(PiCRO)",
-      "lane": "b2b-form",
+      "lane": "b2b-saas",
       "sourceTaskId": "T-C1",
       "sentDate": "2026-09-06",
       "lastContactDate": "2026-09-06",
@@ -3617,7 +3617,7 @@
     {
       "id": "b2b-form-b11-x1-0906",
       "org": "日本商業教育学会",
-      "lane": "b2b-form",
+      "lane": "npo",
       "sourceTaskId": "T-C1",
       "sentDate": null,
       "lastContactDate": "2026-09-06",
@@ -3629,7 +3629,7 @@
     {
       "id": "b2b-form-b11-x35-0906",
       "org": "さんぽう",
-      "lane": "b2b-form",
+      "lane": "b2b-saas",
       "sourceTaskId": "T-C1",
       "sentDate": null,
       "lastContactDate": "2026-09-06",
@@ -3641,7 +3641,7 @@
     {
       "id": "b2b-form-b11-x36-0906",
       "org": "花まるグループ",
-      "lane": "b2b-form",
+      "lane": "b2b-saas",
       "sourceTaskId": "T-C1",
       "sentDate": null,
       "lastContactDate": "2026-09-06",
@@ -3653,7 +3653,7 @@
     {
       "id": "b2b-form-b11-x37-0906",
       "org": "朝日ネット(manaba)",
-      "lane": "b2b-form",
+      "lane": "b2b-saas",
       "sourceTaskId": "T-C1",
       "sentDate": null,
       "lastContactDate": "2026-09-06",
@@ -3665,7 +3665,7 @@
     {
       "id": "b2b-form-b12-39-0906",
       "org": "日本進路指導協会",
-      "lane": "b2b-form",
+      "lane": "npo",
       "sourceTaskId": "T-C1",
       "sentDate": "2026-09-06",
       "lastContactDate": "2026-09-06",
@@ -3677,7 +3677,7 @@
     {
       "id": "b2b-form-b12-40-0906",
       "org": "日本教育新聞社",
-      "lane": "b2b-form",
+      "lane": "media",
       "sourceTaskId": "T-C1",
       "sentDate": "2026-09-06",
       "lastContactDate": "2026-09-06",
@@ -3689,7 +3689,7 @@
     {
       "id": "b2b-form-b12-41-0906",
       "org": "学習塾全国連合協議会",
-      "lane": "b2b-form",
+      "lane": "npo",
       "sourceTaskId": "T-C1",
       "sentDate": "2026-09-06",
       "lastContactDate": "2026-09-06",
@@ -3701,7 +3701,7 @@
     {
       "id": "b2b-form-b12-42-0906",
       "org": "和歌山大学教育学部",
-      "lane": "b2b-form",
+      "lane": "npo",
       "sourceTaskId": "T-C1",
       "sentDate": "2026-09-06",
       "lastContactDate": "2026-09-06",
@@ -3713,7 +3713,7 @@
     {
       "id": "b2b-form-b12-43-0906",
       "org": "信州教育出版社",
-      "lane": "b2b-form",
+      "lane": "b2b-saas",
       "sourceTaskId": "T-C1",
       "sentDate": "2026-09-06",
       "lastContactDate": "2026-09-06",
@@ -3725,7 +3725,7 @@
     {
       "id": "b2b-form-b12-44-0906",
       "org": "神奈川県教育福祉振興会",
-      "lane": "b2b-form",
+      "lane": "npo",
       "sourceTaskId": "T-C1",
       "sentDate": "2026-09-06",
       "lastContactDate": "2026-09-06",
@@ -3737,7 +3737,7 @@
     {
       "id": "b2b-form-b12-45-0906",
       "org": "秋田県高校入試研究協会(秋田県全県模試)",
-      "lane": "b2b-form",
+      "lane": "npo",
       "sourceTaskId": "T-C1",
       "sentDate": "2026-09-06",
       "lastContactDate": "2026-09-06",
@@ -3749,7 +3749,7 @@
     {
       "id": "b2b-form-b12-46-0906",
       "org": "やる気スイッチグループHD",
-      "lane": "b2b-form",
+      "lane": "b2b-saas",
       "sourceTaskId": "T-C1",
       "sentDate": "2026-09-06",
       "lastContactDate": "2026-09-06",
@@ -3761,7 +3761,7 @@
     {
       "id": "line-b12-47-0906",
       "org": "京都総合学習塾",
-      "lane": "mutual-link-line",
+      "lane": "mutual-link",
       "sourceTaskId": "T-C1",
       "sentDate": null,
       "lastContactDate": "2026-09-06",
@@ -3773,7 +3773,7 @@
     {
       "id": "line-b12-48-0906",
       "org": "進学個別指導塾Willbe",
-      "lane": "mutual-link-line",
+      "lane": "mutual-link",
       "sourceTaskId": "T-C1",
       "sentDate": null,
       "lastContactDate": "2026-09-06",
@@ -3785,7 +3785,7 @@
     {
       "id": "line-b12-49-0906",
       "org": "個別指導プラスジム",
-      "lane": "mutual-link-line",
+      "lane": "mutual-link",
       "sourceTaskId": "T-C1",
       "sentDate": null,
       "lastContactDate": "2026-09-06",
@@ -3797,7 +3797,7 @@
     {
       "id": "line-b12-50-0906",
       "org": "学習塾ベンガル",
-      "lane": "mutual-link-line",
+      "lane": "mutual-link",
       "sourceTaskId": "T-C1",
       "sentDate": null,
       "lastContactDate": "2026-09-06",
