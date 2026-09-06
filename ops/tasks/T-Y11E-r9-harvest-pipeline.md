@@ -45,11 +45,14 @@ scripts/bairitsu-ingest/  →  extract-pdf-geometry.py  ただ1本
       ✅2026-09-05実装（`src/lib/bairitsu-ingest/registry.ts`・`PREFECTURE_PARSER_REGISTRY: Partial<Record<string, PrefectureParser>>`
       ＋`getPrefectureParser(code)`）。着手条件②（T-Y11B段階2-bが「これ以上は逓減」に達した・
       本文書冒頭の着手条件を参照）が満たされたため本タスクへ移行した
-- [ ] 各県のパーサをテストファイルから**純関数として抽出**し、レジストリに登録する
-      🔶進行中（30/31県・toyama/aomori/iwate/fukui/kagawa/ehime/chiba/yamanashi/miyagi/nagasaki/
-      saitama/gunma/shimane/nara/kyoto/hiroshima/wakayama/okinawa/gifu/niigata/saga/tottori/kagoshima/
-      shizuoka/oita/kumamoto/shiga/kochi/yamagata/fukuoka完了・2026-09-06）。**残り1県（nagano・
-      417行・最後）のみ**
+- [x] 各県のパーサをテストファイルから**純関数として抽出**し、レジストリに登録する
+      ✅2026-09-06完了。31/31県（toyama/aomori/iwate/fukui/kagawa/ehime/chiba/yamanashi/miyagi/
+      nagasaki/saitama/gunma/shimane/nara/kyoto/hiroshima/wakayama/okinawa/gifu/niigata/saga/
+      tottori/kagoshima/shizuoka/oita/kumamoto/shiga/kochi/yamagata/fukuoka/nagano）を
+      `src/lib/bairitsu-ingest/parsers/<pref>.ts`の純関数として抽出し`registry.ts`に登録完了。
+      各県の抽出時に既存テストをレジストリ経由の呼び出しへ書き換え・回帰なしを確認済み。
+      tottori/naganoはarea(地区)フィールドを持つ拡張型として構造的部分型で登録。
+      tsc実exit0・フルスイート485suites7100tests green（最終確認時点）
 - [x] ⚠️ **既存のテストを壊さない。** テストはレジストリ経由で同じ結果を出すこと
       ✅toyama/aomori/iwate/fukui/kagawa/ehime/chiba: 7テストいずれもレジストリの各`parseXxx()`呼び出しに
       置き換え・結果は無回帰（ehime=99件/8,370/7,468も既存データと一致・1ページ2段組の
@@ -57,12 +60,14 @@ scripts/bairitsu-ingest/  →  extract-pdf-geometry.py  ただ1本
       quota28,880/applicants32,008の機械集計も一致・最も単純な部類でオーバーライド不要）。
       `__tests__/registry.test.ts`にehime/chibaの検証も追加
 - [x] ⚠️ 1県ずつやる。**まとめて動かして壊すより、1県ずつ緑を確認する**
-      ✅toyama→aomori→iwate→fukui→kagawa→ehime→chibaの順で1県ずつ移設。
-      `src/lib/bairitsu-ingest`配下のtsc実exit0・jest37suites183tests greenを都度確認、
-      加えてjestフルスイートgreen(`--maxWorkers=2`で確認・素のnpx jestはバックグラウンドで
-      メモリ不足killされる場合がある)。次回セッションは`src/lib/bairitsu-ingest/parsers/chiba.ts`
-      （最も単純な部類・assembleSimpleTableRowsを直接呼ぶだけ）を雛形として8県目に進むこと
-      （残り1県: nagano417行のみ）
+      ✅toyama→aomori→iwate→fukui→kagawa→ehime→chiba→yamanashi→miyagi→nagasaki→saitama→
+      gunma→shimane→nara→kyoto→hiroshima→wakayama→okinawa→gifu→niigata→saga→tottori→
+      kagoshima→shizuoka→oita→kumamoto→shiga→kochi→yamagata→fukuoka→naganoの順で
+      31県すべてを1県ずつ移設完了（2026-09-06）。毎回`src/lib/bairitsu-ingest`配下のtsc実exit0・
+      jestスコープgreenを確認後、フルスイートgreen(`--maxWorkers=2`)も確認。
+      バックグラウンド実行(`run_in_background`)でシステムメモリ逼迫によりtsc/jestがkillされる
+      環境問題が判明し、フォアグラウンド+`timeout: 300000`実行に切り替えて解決した
+      （詳細は`memory/fable5-loop-protocol`参照）
 
 ## E-2 取得層（丁寧に取る）
 

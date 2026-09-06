@@ -29,6 +29,7 @@ import { parseShiga } from './parsers/shiga';
 import { parseKochi } from './parsers/kochi';
 import { parseYamagata } from './parsers/yamagata';
 import { parseFukuoka } from './parsers/fukuoka';
+import { parseNagano } from './parsers/nagano';
 
 /**
  * T-Y11E E-1: 県コード → パーサ関数 のレジストリ。
@@ -75,6 +76,7 @@ export const PREFECTURE_PARSER_REGISTRY: Partial<Record<string, PrefectureParser
   kochi: parseKochi,
   yamagata: parseYamagata,
   fukuoka: parseFukuoka,
+  nagano: parseNagano,
 };
 
 export function getPrefectureParser(prefectureCode: string): PrefectureParser | undefined {

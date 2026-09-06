@@ -31,6 +31,7 @@ import shigaR8Geometry from '../__fixtures__/shiga-r8-geometry.json';
 import kochiR8Geometry from '../__fixtures__/kochi-r8-geometry.json';
 import yamagataR8Geometry from '../__fixtures__/yamagata-r8-geometry.json';
 import fukuokaR8Geometry from '../__fixtures__/fukuoka-r8-geometry.json';
+import naganoR8Geometry from '../__fixtures__/nagano-r8-geometry.json';
 import { TOYAMA_COMPETITION_RATES } from '@/data/competition-rates/toyama';
 import { AOMORI_COMPETITION_RATES } from '@/data/competition-rates/aomori';
 import { IWATE_COMPETITION_RATES } from '@/data/competition-rates/iwate';
@@ -61,6 +62,8 @@ import { SHIGA_COMPETITION_RATES } from '@/data/competition-rates/shiga';
 import { KOCHI_COMPETITION_RATES } from '@/data/competition-rates/kochi';
 import { YAMAGATA_COMPETITION_RATES } from '@/data/competition-rates/yamagata';
 import { FUKUOKA_COMPETITION_RATES } from '@/data/competition-rates/fukuoka';
+import { NAGANO_COMPETITION_RATES } from '@/data/competition-rates/nagano';
+import type { NaganoParsedRow } from '../parsers/nagano';
 
 /**
  * T-Y11E E-1: レジストリの不変条件テスト。
@@ -552,7 +555,17 @@ describe('bairitsu-ingest registry（T-Y11E E-1）', () => {
     expect(parsedKeys).toEqual(expectedKeys);
   });
 
-  it('レジストリに登録済みの県コード一覧は現時点でtoyama/aomori/iwate/fukui/kagawa/ehime/chiba/yamanashi/miyagi/nagasaki/saitama/gunma/shimane/nara/kyoto/hiroshima/wakayama/okinawa/gifu/niigata/saga/tottori/kagoshima/shizuoka/oita/kumamoto/shiga/kochi/yamagata/fukuokaのみ（1県ずつ移設する方針・追加時はここも更新）', () => {
-    expect(Object.keys(PREFECTURE_PARSER_REGISTRY)).toEqual(['toyama', 'aomori', 'iwate', 'fukui', 'kagawa', 'ehime', 'chiba', 'yamanashi', 'miyagi', 'nagasaki', 'saitama', 'gunma', 'shimane', 'nara', 'kyoto', 'hiroshima', 'wakayama', 'okinawa', 'gifu', 'niigata', 'saga', 'tottori', 'kagoshima', 'shizuoka', 'oita', 'kumamoto', 'shiga', 'kochi', 'yamagata', 'fukuoka']);
+  it('naganoのパーサが登録されており、既存の手作業データと多重集合一致する結果を返す（areaフィールド含む・ブロックoverride校を末尾追加するため順不同比較）', () => {
+    const parser = getPrefectureParser('nagano');
+    expect(parser).toBeDefined();
+    const parsed = parser!(naganoR8Geometry as PdfPageGeometry[]) as unknown as NaganoParsedRow[];
+    const expectedR8Records = NAGANO_COMPETITION_RATES.records.filter((r) => r.fiscalYear === undefined);
+    const keyOf = (r: { schoolName: string; department: string; quota: number; finalApplicants: number; finalRate: number }) =>
+      `${r.schoolName}|${r.department}|${r.quota}|${r.finalApplicants}|${r.finalRate}`;
+    expect(parsed.map(keyOf).sort()).toEqual(expectedR8Records.map(keyOf).sort());
+  });
+
+  it('レジストリに登録済みの県コード一覧は現時点でtoyama/aomori/iwate/fukui/kagawa/ehime/chiba/yamanashi/miyagi/nagasaki/saitama/gunma/shimane/nara/kyoto/hiroshima/wakayama/okinawa/gifu/niigata/saga/tottori/kagoshima/shizuoka/oita/kumamoto/shiga/kochi/yamagata/fukuoka/naganoのみ(31県=全県移設完了・1県ずつ移設する方針・追加時はここも更新)', () => {
+    expect(Object.keys(PREFECTURE_PARSER_REGISTRY)).toEqual(['toyama', 'aomori', 'iwate', 'fukui', 'kagawa', 'ehime', 'chiba', 'yamanashi', 'miyagi', 'nagasaki', 'saitama', 'gunma', 'shimane', 'nara', 'kyoto', 'hiroshima', 'wakayama', 'okinawa', 'gifu', 'niigata', 'saga', 'tottori', 'kagoshima', 'shizuoka', 'oita', 'kumamoto', 'shiga', 'kochi', 'yamagata', 'fukuoka', 'nagano']);
   });
 });
