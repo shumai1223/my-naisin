@@ -8,7 +8,21 @@
 
 ## 0. 今季の主食（迷ったらここへ戻る）
 
-### 🆕 2026-09-06 13:0x時点の状態（T-Y11E E-1・shimane(13県目)を移設完了・ibaraki型の初移設）
+### 🆕 2026-09-06 13:1x時点の状態（T-Y11E E-1・nara(14県目)を移設完了・折り返し超え）
+
+前の状態記録（shimane完了）から継続。T-Y11E E-1のnara（14/31県目・134行）を完了。資料に倍率が
+印字されず`roundHalfUpScaled`で自前算出する型と、基底ラベル+接尾辞コース名の合成ロジック
+（添上「普通」→複数コース等）を純関数化（詳細はworklog 13:17・commit `c28baa9`）。tsc実exit0・
+bairitsu-ingest配下37suites190tests green・フルスイート485suites7083tests green。push済み。
+
+**次に再開するセッションがまず行うこと**:
+1. Gmail/GA4/GSC/Trends MCP接続確認
+2. Gmail新着返信の確認
+3. 手が空いたらT-Y11E E-1の15県目（候補: kyoto154行/hiroshima161行）に進むか、
+   同じ横断grep方式で他の`ops/tasks/*.md`の未完了・日付ゲート無し項目を探すこと
+4. 日付ゲート（9/08 T-Y11B・N1-2/9/09 T-A1/9/21 W-8）は未到達
+
+### 2026-09-06 13:0x時点の状態（T-Y11E E-1・shimane(13県目)を移設完了・ibaraki型の初移設）
 
 前の状態記録（gunma完了）から継続。T-Y11E E-1のshimane（13/31県目・122行）を完了。これまでの
 12県は全てtochigi型（単純carry-forward）だったが、shimaneは**ibaraki型
