@@ -8,7 +8,23 @@
 
 ## 0. 今季の主食（迷ったらここへ戻る）
 
-### 🆕 2026-09-06 14:5x時点の状態（T-Y11E E-1・oita(25県目)を移設完了・残り6県）
+### 🆕 2026-09-06 15:0x時点の状態（T-Y11E E-1・kumamoto(26県目)を移設完了・残り5県）
+
+前の状態記録（oita完了）から継続。T-Y11E E-1のkumamoto（26/31県目・225行）を完了。単一学科校の
+「学校名（学科名）」埋め込みパターンと、分校の「〃」（同上記号）が学校名列/学科名列で意味が
+異なる罠を`resolveSingleDeptSchool`で解決・くくり募集3組のoverrideを純関数化（詳細はworklog
+15:03・commit `8e5f29f`）。tsc実exit0・bairitsu-ingest配下37suites202tests green・
+フルスイート485suites7095tests green。push済み。**31県中26県完了・残り5県
+（shiga/kochi/yamagata/fukuoka/nagano）**。
+
+**次に再開するセッションがまず行うこと**:
+1. Gmail/GA4/GSC/Trends MCP接続確認
+2. Gmail新着返信の確認
+3. 手が空いたらT-Y11E E-1の27県目（候補: shiga270行が最短）に進むか、
+   同じ横断grep方式で他の`ops/tasks/*.md`の未完了・日付ゲート無し項目を探すこと
+4. 日付ゲート（9/08 T-Y11B・N1-2/9/09 T-A1/9/21 W-8）は未到達
+
+### 2026-09-06 14:5x時点の状態（T-Y11E E-1・oita(25県目)を移設完了・残り6県）
 
 前の状態記録（shizuoka完了）から継続。T-Y11E E-1のoita（25/31県目・216行）を完了。注記が
 quota/applicants列にはみ出すガード・ラベル/数値がブロック境界をまたいで分裂するgreedy合体・
