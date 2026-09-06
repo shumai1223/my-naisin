@@ -370,6 +370,19 @@ export default function ChousashoPage() {
                   出典: 鳥取県教育委員会「様式第１号　調査書」
                 </a>
               </div>
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <div className="font-bold text-slate-800">島根県（「個人調査報告書」・オンライン入力方式）</div>
+                <p className="mt-1 leading-relaxed text-slate-600">
+                  個人の調査書そのものの様式は公開されておらず、オンラインシステムへの直接入力で
+                  作成されるとみられます（大阪府・兵庫県と同系統）。例外時に使う「校長副申書」の
+                  文面から、島根県では個人の調査書を<strong>「個人調査報告書」</strong>と呼称し
+                  （滋賀県と同じ呼称）、「学習の記録」「総合的な学習の時間の記録」「特別活動の記録」
+                  の3種で構成されることが確認できました。
+                </p>
+                <a href="https://www.pref.shimane.lg.jp/education/kyoiku/senbatsu/senbatsu_info/index.data/yousiki_R8-16.docx" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                  出典: 島根県教育委員会「様式第16号　校長副申書」
+                </a>
+              </div>
             </div>
             <p className="mt-4 text-xs text-slate-500">
               ※ いずれも記載事項（様式）の整理であり、入試の合否判定に使う内申点（調査書点）の
