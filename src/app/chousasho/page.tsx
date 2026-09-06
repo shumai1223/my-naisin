@@ -134,6 +134,58 @@ export default function ChousashoPage() {
             </p>
           </section>
 
+          {/* 都道府県による記載事項の違い（一次ソース確認済みの実例のみ） */}
+          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
+              <NotebookPen className="h-5 w-5 text-blue-600" />
+              調査書の記載事項は都道府県によって変わることがある
+            </h2>
+            <p className="mb-4 text-sm leading-relaxed text-slate-700">
+              上記の4項目は全国共通の基本形（文部科学省 別紙様式1）ですが、教育委員会が個別に記載事項を
+              見直すことがあります。<strong>教育委員会が公式に発表している実例</strong>のみ、以下に記載します
+              （未発表の都道府県については記載しません）。
+            </p>
+            <div className="space-y-3 text-sm">
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <div className="font-bold text-slate-800">愛知県（令和9年度入試〜）</div>
+                <p className="mt-1 leading-relaxed text-slate-600">
+                  「性別」「行動の記録」「出欠の記録」の3項目を削除。学習の記録（評定）の欄・内申点の
+                  計算方法自体には変更なし。
+                </p>
+                <a href="https://www.pref.aichi.jp/soshiki/kotogakko/0000027366.html" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                  出典: 愛知県教育委員会「調査書情報の変更点」（令和8年4月発行）
+                </a>
+              </div>
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <div className="font-bold text-slate-800">埼玉県（令和9年度入試〜）</div>
+                <p className="mt-1 leading-relaxed text-slate-600">
+                  「特別活動等の記録」「出欠の記録」等を除き、学習の記録（9教科5段階の評定）を基本とする
+                  形に整理。あわせて全受検生対象の面接と「自己評価資料」（採点はせず面接資料として使用）
+                  を新設。学習の記録自体の項目・学年比率の仕組みには変更なし。
+                </p>
+                <a href="https://www.pref.saitama.lg.jp/documents/258788/news2024092601.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                  出典: 埼玉県教育委員会「令和9年度埼玉県公立高等学校入学者選抜実施基本方針」（令和6年9月26日）
+                </a>
+              </div>
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <div className="font-bold text-slate-800">千葉県（令和8年度入試〜・既に実施済み）</div>
+                <p className="mt-1 leading-relaxed text-slate-600">
+                  「総合的な学習の時間の記録」「出欠の記録」「行動の記録（第3学年）」「総合所見」の
+                  4項目を削除。学習の記録（評定）・調査書点の算出方法自体には変更なし。
+                </p>
+                <a href="https://www.pref.chiba.lg.jp/kyouiku/shidou/press/2024/koukou/r8kaizenten.html" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                  出典: 千葉県教育委員会「千葉県公立高等学校入学者選抜の改善点について」
+                </a>
+              </div>
+            </div>
+            <p className="mt-4 text-xs text-slate-500">
+              ※ いずれも記載事項（様式）の整理であり、入試の合否判定に使う内申点（調査書点）の
+              計算方法自体は変更されていません。他の都道府県の最新の制度変更は
+              <Link href="/nyushi-seido-henkou" className="font-bold underline">入試制度の変更点まとめ</Link>
+              で確認できます。
+            </p>
+          </section>
+
           {/* 調査書 vs 内申点 vs 通知表 */}
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
