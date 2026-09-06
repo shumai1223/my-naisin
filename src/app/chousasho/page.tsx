@@ -395,6 +395,19 @@ export default function ChousashoPage() {
                   出典: 岡山県教育委員会「様式５　調査書」
                 </a>
               </div>
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <div className="font-bold text-slate-800">広島県（部分確認：秋季入学選抜用の様式のみ）</div>
+                <p className="mt-1 leading-relaxed text-slate-600">
+                  実施要項ページで「調査書」の語を含む独立様式として見つかったのは秋季入学のため
+                  の選抜専用の様式（様式第15号）のみで、内容は「学習の記録」（各教科の評定表・
+                  合計225点満点）のみで構成されていました。通常の一般選抜（春季入学）用の調査書が
+                  同一様式かどうかは確認できていないため、この様式について確認できた事実のみを
+                  記載しています。
+                </p>
+                <a href="https://www.pref.hiroshima.lg.jp/uploaded/attachment/597722.xlsx" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                  出典: 広島県教育委員会「様式第15号　調査書（秋季入学のための選抜）」
+                </a>
+              </div>
             </div>
             <p className="mt-4 text-xs text-slate-500">
               ※ いずれも記載事項（様式）の整理であり、入試の合否判定に使う内申点（調査書点）の
