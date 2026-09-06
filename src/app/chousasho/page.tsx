@@ -658,6 +658,19 @@ export default function ChousashoPage() {
                   出典: 新潟県教育委員会「令和8年度新潟県公立高等学校入学者選抜要項」様式1
                 </a>
               </div>
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <div className="font-bold text-slate-800">富山県（「趣味・特技」「備考」など項目数が多い部類）</div>
+                <p className="mt-1 leading-relaxed text-slate-600">
+                  学籍・欠席・総合的な学習の時間・特別活動・部活動等・行動の記録・
+                  <strong>趣味・特技</strong>・学習の記録・<strong>備考</strong>・学校所在地・
+                  過年度卒業者についてという構成でした。国の指導要録標準区分がすべて揃うだけで
+                  なく、趣味・特技や備考といった追加項目もあり、これまでに確認した41県の中でも
+                  記載項目数が多い部類の調査書でした。
+                </p>
+                <a href="https://www.pref.toyama.jp/documents/47208/r08youryounew.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                  出典: 富山県教育委員会「令和8年度富山県立高等学校入学者選抜実施要領」
+                </a>
+              </div>
             </div>
             <p className="mt-4 text-xs text-slate-500">
               ※ いずれも記載事項（様式）の整理であり、入試の合否判定に使う内申点（調査書点）の
