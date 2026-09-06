@@ -186,10 +186,24 @@ scripts/bairitsu-ingest/  →  extract-pdf-geometry.py  ただ1本
 ## DoD
 
 - [ ] `県コード → PDF → レコード` が1本のコマンドで通る
-- [ ] R8全県リプレイの再現率が記録されている
-- [ ] 検算が落ちたら止まる（通り抜けない）
-- [ ] 取得したPDFが保存されている
+      ⚠️2026-09-07時点で未着手と判明: `scripts/bairitsu-ingest/`には`archive-changed-pdfs.mjs`
+      （取得）・`validate-all-registered.ts`（検算）等の個別スクリプトはあるが、県コード1つを
+      渡すと取得→パース→検算→差分まで一気通貫で走る単一エントリポイントはまだ無い。
+      **次回このタスクへ戻るセッションが最初に着手すべき残タスク**（E-1〜E-6の部品はすべて
+      揃っているため、配線するだけで完成する見込み）
+- [x] R8全県リプレイの再現率が記録されている
+      → E-6で完了済み（`ops/BAIRITSU-INGEST-RUNBOOK.md`「T-Y11E E-6: R8全県リプレイ結果」節に
+      36/47県・内訳表・残り11県の理由を記録済み）
+- [x] 検算が落ちたら止まる（通り抜けない）
+      → E-4で完了済み（`validateParsedRecords`は1つでもissueがあれば`ok: false`・部分的に
+      通す設計にしない）
+- [x] 取得したPDFが保存されている
+      → E-2で完了済み（`ops/raw/bairitsu-pdf-archive/<pref>/<sha256>.pdf`・台帳は
+      `ops/raw/bairitsu-pdf-archive-manifest.json`）
 - [ ] `tsc` 実exit 0 / jest green
+      （継続的な不変条件。2026-09-07時点でtsc実exit0・フルスイート490suites7150tests green
+      を確認済みだが、タスク完了を意味する一回限りのチェックではなく常時維持すべき状態のため
+      未チェックのまま残す）
 - [ ] ⚠️ **本番反映・デプロイはしない。** ステージングまで（👤は9/22まで不在）
 
 ## 守ること
