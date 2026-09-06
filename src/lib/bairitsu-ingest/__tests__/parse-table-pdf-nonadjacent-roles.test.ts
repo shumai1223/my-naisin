@@ -1,6 +1,7 @@
-import { parseTablePdfPageRows, assembleCompetitionRateRows, type PdfPageGeometry, type TableColumnLayout, type ParsedCompetitionRow } from '../parse-table-pdf';
+import { type PdfPageGeometry } from '../parse-table-pdf';
 import { ISHIKAWA_COMPETITION_RATES } from '@/data/competition-rates/ishikawa';
 import ishikawaR8Geometry from '../__fixtures__/ishikawa-r8-geometry.json';
+import { parseIshikawa } from '../parsers/ishikawa';
 
 /**
  * T-Y11B 段階2-b: 「quota/applicants/rateが隣接しない列構成」向け検証テスト（ishikawa型）。
@@ -18,31 +19,13 @@ import ishikawaR8Geometry from '../__fixtures__/ishikawa-r8-geometry.json';
  * 1つの「小計」行に統合される（ヘッダコメント参照）。この3校はパーサの出力からは正しく
  * 分離できないため、既存データ（`ishikawa.ts`に確定値として記録済み）を根拠に明示的な
  * 置き換えを行う（tokushimaの那賀/海部と同型の対応）。
+ *
+ * ⚠️2026-09-06(T-Y11E E-1/E-6): パース本体は`../parsers/ishikawa.ts`の`parseIshikawa()`へ純関数と
+ * して抽出済み（レジストリ`registry.ts`から県コード経由で呼べる）。このテストはレジストリ経由でも
+ * 同じ結果が出ることを確認する回帰テストとして継続する。
  */
-const LAYOUT: TableColumnLayout = {
-  boundaries: [45, 65, 130, 210, 245, 280, 315, 345, 380],
-  fullLineX0Max: 65,
-  syntheticTopY: 110,
-  roles: { schoolName: 1, department: 2, quota: 5, finalApplicants: 6, finalRate: 7 },
-};
-
-const COMBINED_APPLICATION_OVERRIDES: ParsedCompetitionRow[] = [
-  { schoolName: '小松', department: '普通・理数（併願あり・合算）', quota: 320, finalApplicants: 377, finalRate: 1.18 },
-  { schoolName: '金沢泉丘', department: '普通・理数（併願あり・合算）', quota: 400, finalApplicants: 490, finalRate: 1.23 },
-  { schoolName: '七尾', department: '普通・普通(文系フロンティア)・理数（併願あり・合算）', quota: 200, finalApplicants: 188, finalRate: 0.94 },
-];
-const COMBINED_APPLICATION_SCHOOLS = new Set(COMBINED_APPLICATION_OVERRIDES.map((r) => r.schoolName));
-
-function applyCombinedApplicationOverrides(records: ParsedCompetitionRow[]): ParsedCompetitionRow[] {
-  const withoutBroken = records.filter((r) => !COMBINED_APPLICATION_SCHOOLS.has(r.schoolName) && r.schoolName !== '普');
-  return [...withoutBroken, ...COMBINED_APPLICATION_OVERRIDES];
-}
-
 describe('bairitsu-ingest parse-table-pdf 非隣接roles (ishikawa R8 実データ検証)', () => {
-  const pageRows = (ishikawaR8Geometry as PdfPageGeometry[]).map((geom) => parseTablePdfPageRows(geom, LAYOUT));
-  const parsed = applyCombinedApplicationOverrides(
-    assembleCompetitionRateRows(pageRows, '全県合計', { excludeRow: (department) => department.includes('小計') })
-  );
+  const parsed = parseIshikawa(ishikawaR8Geometry as PdfPageGeometry[]);
 
   const expectedR8Records = ISHIKAWA_COMPETITION_RATES.records.filter((r) => r.fiscalYear === undefined);
 
@@ -68,9 +51,15 @@ describe('bairitsu-ingest parse-table-pdf 非隣接roles (ishikawa R8 実デー�
   });
 
   test('併願制度の3校（小松・金沢泉丘・七尾）は既存データの確定値に置き換えられる', () => {
-    expect(parsed.find((r) => r.schoolName === '小松')).toEqual(COMBINED_APPLICATION_OVERRIDES[0]);
-    expect(parsed.find((r) => r.schoolName === '金沢泉丘')).toEqual(COMBINED_APPLICATION_OVERRIDES[1]);
-    expect(parsed.find((r) => r.schoolName === '七尾')).toEqual(COMBINED_APPLICATION_OVERRIDES[2]);
+    expect(parsed.find((r) => r.schoolName === '小松')).toEqual({ schoolName: '小松', department: '普通・理数（併願あり・合算）', quota: 320, finalApplicants: 377, finalRate: 1.18 });
+    expect(parsed.find((r) => r.schoolName === '金沢泉丘')).toEqual({ schoolName: '金沢泉丘', department: '普通・理数（併願あり・合算）', quota: 400, finalApplicants: 490, finalRate: 1.23 });
+    expect(parsed.find((r) => r.schoolName === '七尾')).toEqual({
+      schoolName: '七尾',
+      department: '普通・普通(文系フロンティア)・理数（併願あり・合算）',
+      quota: 200,
+      finalApplicants: 188,
+      finalRate: 0.94,
+    });
   });
 
   test('半角括弧のコース名が既存データの全角括弧表記に正規化される（穴水の実例）', () => {

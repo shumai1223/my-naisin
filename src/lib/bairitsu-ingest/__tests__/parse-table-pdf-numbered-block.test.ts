@@ -1,29 +1,20 @@
-import { groupCharsIntoRows, extractRowFields, assembleNumberedBlockRows, type PdfPageGeometry, type GeneralColumnLayout } from '../parse-table-pdf';
+import { type PdfPageGeometry } from '../parse-table-pdf';
 import { AKITA_COMPETITION_RATES } from '@/data/competition-rates/akita';
 import akitaR8Geometry from '../__fixtures__/akita-r8-geometry.json';
+import { parseAkita } from '../parsers/akita';
 
 /**
  * T-Y11B 段階2-b: 「学校名が複数行に折り返す県」向け組み立て（akita型）の検証テスト。
  * ibaraki型（結合セル）・tochigi型（単純carry-forward）とも異なる第3のパターン。
  * フィクスチャは令和8年度公表PDF（全2ページ）を`extract-pdf-geometry.py`で抽出した
  * 文字座標データ（2026-09-02取得・実データそのもの）。
+ *
+ * ⚠️2026-09-06(T-Y11E E-1/E-6): パース本体は`../parsers/akita.ts`の`parseAkita()`へ純関数として
+ * 抽出済み（レジストリ`registry.ts`から県コード経由で呼べる）。このテストはレジストリ経由でも
+ * 同じ結果が出ることを確認する回帰テストとして継続する。
  */
-const AKITA_LAYOUT: GeneralColumnLayout = {
-  boundaries: [95, 126.1, 188.5, 347.7, 397.8, 448.0, 498.2, 548.4, 598.6, 648.7, 698.9, 749.1, 800.4, 851.8],
-  // 列: №,学校名,学科名,募集定員(=quota),特色選抜募集人員,一般選抜募集人員,特色選抜志願者数,
-  //     一般選抜志願者数,総志願者(=applicants),特色選抜倍率,総志願者倍率(=rate),昨年特色倍率,昨年総倍率
-  roles: { number: 0, schoolName: 1, department: 2, quota: 3, finalApplicants: 8, finalRate: 10 },
-};
-
 describe('bairitsu-ingest parse-table-pdf №列ブロック組み立て (akita R8 実データ検証)', () => {
-  const allRowFields = (akitaR8Geometry as PdfPageGeometry[]).flatMap((geom) =>
-    groupCharsIntoRows(geom.chars, 3.0).map((row) => extractRowFields(row.chars, AKITA_LAYOUT))
-  );
-  const parsed = assembleNumberedBlockRows(allRowFields, {
-    excludeRow: (department) => department.includes('計'),
-    stopAt: (department) => department.includes('県合計'),
-    renameOverrides: { 太田分校: '大曲農業(太田分校)', 雄勝校: '湯沢翔北(雄勝校)' },
-  });
+  const parsed = parseAkita(akitaR8Geometry as PdfPageGeometry[]);
 
   const expectedR8Records = AKITA_COMPETITION_RATES.records.filter((r) => r.fiscalYear === undefined);
 

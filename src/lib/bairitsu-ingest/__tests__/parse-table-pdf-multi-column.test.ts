@@ -1,13 +1,7 @@
-import {
-  parseTablePdfPageRows,
-  assembleCompetitionRateRows,
-  filterGeometryByXRange,
-  type PdfPageGeometry,
-  type TableColumnLayout,
-  type ParsedCompetitionRow,
-} from '../parse-table-pdf';
+import { type PdfPageGeometry } from '../parse-table-pdf';
 import { TOKUSHIMA_COMPETITION_RATES } from '@/data/competition-rates/tokushima';
 import tokushimaR8Geometry from '../__fixtures__/tokushima-r8-geometry.json';
+import { parseTokushima } from '../parsers/tokushima';
 
 /**
  * T-Y11B 段階2-b: 「1ページに複数の表が左右に並ぶ県」向け組み立て（tokushima型）の検証テスト。
@@ -27,47 +21,17 @@ import tokushimaR8Geometry from '../__fixtures__/tokushima-r8-geometry.json';
  * 直後どちらのデータ行に属するかが位置関係だけでは判定不能）。既存データ側は
  * `tokushima.ts`のヘッダコメントに記録されたWebSearchでの実在学科確認を根拠に確定して
  * いるため、パーサ出力にも同じ根拠で補正を適用する（後述の`applyKnownAmbiguityCorrection`）。
+ *
+ * ⚠️2026-09-06(T-Y11E E-1/E-6): パース本体は`../parsers/tokushima.ts`の`parseTokushima()`へ純関数
+ * として抽出済み（レジストリ`registry.ts`から県コード経由で呼べる）。このテストはレジストリ経由でも
+ * 同じ結果が出ることを確認する回帰テストとして継続する。
  */
-const LEFT_LAYOUT: TableColumnLayout = {
-  boundaries: [30, 102.72, 177.84, 211.92, 246, 280.92],
-  fullLineX0Max: 50,
-  syntheticTopY: 75,
-  syntheticBottomY: 560,
-};
-const MIDDLE_LAYOUT: TableColumnLayout = {
-  boundaries: [290, 355.92, 430.44, 464.52, 500.64, 536.4],
-  fullLineX0Max: 300,
-  syntheticTopY: 75,
-  syntheticBottomY: 560,
-};
-
-/**
- * 那賀/海部の学校名帰属は幾何学的に一意に決まらない（`那賀`ラベル単独行の直前データ行が
- * 実は海部の学科である）。既存データ（WebSearch裏取り済み）に合わせて2レコードを入れ替える。
- */
-function applyKnownAmbiguityCorrection(records: ParsedCompetitionRow[]): ParsedCompetitionRow[] {
-  return records.map((r) => {
-    if (r.schoolName === '那賀' && r.department === '普通' && r.quota === 30) {
-      return { ...r, schoolName: '海部' };
-    }
-    if (r.schoolName === '海部' && r.department === '普通' && r.quota === 47) {
-      return { ...r, schoolName: '那賀' };
-    }
-    return r;
-  });
-}
-
 function recordKey(r: { schoolName: string; department: string; quota: number; finalApplicants: number; finalRate: number }): string {
   return `${r.schoolName}|${r.department}|${r.quota}|${r.finalApplicants}|${r.finalRate}`;
 }
 
 describe('bairitsu-ingest parse-table-pdf 複数列組ページ (tokushima R8 実データ検証)', () => {
-  const geom = tokushimaR8Geometry as PdfPageGeometry;
-  const leftRows = parseTablePdfPageRows(filterGeometryByXRange(geom, 30, 290), LEFT_LAYOUT);
-  const middleRows = parseTablePdfPageRows(filterGeometryByXRange(geom, 290, 545), MIDDLE_LAYOUT);
-  const leftRecords = assembleCompetitionRateRows([leftRows], '合計');
-  const middleRecords = assembleCompetitionRateRows([middleRows], '合計');
-  const parsed = applyKnownAmbiguityCorrection([...leftRecords, ...middleRecords]);
+  const parsed = parseTokushima([tokushimaR8Geometry as PdfPageGeometry]);
 
   const expectedR8Records = TOKUSHIMA_COMPETITION_RATES.records.filter((r) => r.fiscalYear === undefined);
 

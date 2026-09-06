@@ -32,6 +32,11 @@ import kochiR8Geometry from '../__fixtures__/kochi-r8-geometry.json';
 import yamagataR8Geometry from '../__fixtures__/yamagata-r8-geometry.json';
 import fukuokaR8Geometry from '../__fixtures__/fukuoka-r8-geometry.json';
 import naganoR8Geometry from '../__fixtures__/nagano-r8-geometry.json';
+import tochigiR8Geometry from '../__fixtures__/tochigi-r8-geometry.json';
+import ibarakiR8Geometry from '../__fixtures__/ibaraki-r8-geometry.json';
+import akitaR8Geometry from '../__fixtures__/akita-r8-geometry.json';
+import ishikawaR8Geometry from '../__fixtures__/ishikawa-r8-geometry.json';
+import tokushimaR8Geometry from '../__fixtures__/tokushima-r8-geometry.json';
 import { TOYAMA_COMPETITION_RATES } from '@/data/competition-rates/toyama';
 import { AOMORI_COMPETITION_RATES } from '@/data/competition-rates/aomori';
 import { IWATE_COMPETITION_RATES } from '@/data/competition-rates/iwate';
@@ -64,6 +69,11 @@ import { YAMAGATA_COMPETITION_RATES } from '@/data/competition-rates/yamagata';
 import { FUKUOKA_COMPETITION_RATES } from '@/data/competition-rates/fukuoka';
 import { NAGANO_COMPETITION_RATES } from '@/data/competition-rates/nagano';
 import type { NaganoParsedRow } from '../parsers/nagano';
+import { TOCHIGI_COMPETITION_RATES } from '@/data/competition-rates/tochigi';
+import { IBARAKI_COMPETITION_RATES } from '@/data/competition-rates/ibaraki';
+import { AKITA_COMPETITION_RATES } from '@/data/competition-rates/akita';
+import { ISHIKAWA_COMPETITION_RATES } from '@/data/competition-rates/ishikawa';
+import { TOKUSHIMA_COMPETITION_RATES } from '@/data/competition-rates/tokushima';
 
 /**
  * T-Y11E E-1: レジストリの不変条件テスト。
@@ -565,7 +575,57 @@ describe('bairitsu-ingest registry（T-Y11E E-1）', () => {
     expect(parsed.map(keyOf).sort()).toEqual(expectedR8Records.map(keyOf).sort());
   });
 
-  it('レジストリに登録済みの県コード一覧は現時点でtoyama/aomori/iwate/fukui/kagawa/ehime/chiba/yamanashi/miyagi/nagasaki/saitama/gunma/shimane/nara/kyoto/hiroshima/wakayama/okinawa/gifu/niigata/saga/tottori/kagoshima/shizuoka/oita/kumamoto/shiga/kochi/yamagata/fukuoka/naganoのみ(31県=全県移設完了・1県ずつ移設する方針・追加時はここも更新)', () => {
-    expect(Object.keys(PREFECTURE_PARSER_REGISTRY)).toEqual(['toyama', 'aomori', 'iwate', 'fukui', 'kagawa', 'ehime', 'chiba', 'yamanashi', 'miyagi', 'nagasaki', 'saitama', 'gunma', 'shimane', 'nara', 'kyoto', 'hiroshima', 'wakayama', 'okinawa', 'gifu', 'niigata', 'saga', 'tottori', 'kagoshima', 'shizuoka', 'oita', 'kumamoto', 'shiga', 'kochi', 'yamagata', 'fukuoka', 'nagano']);
+  it('tochigiのパーサが登録されており、既存の手作業データと完全一致する結果を返す', () => {
+    const parser = getPrefectureParser('tochigi');
+    expect(parser).toBeDefined();
+    const parsed = parser!(tochigiR8Geometry as PdfPageGeometry[]);
+    const expectedR8Records = TOCHIGI_COMPETITION_RATES.records.filter((r) => r.fiscalYear === undefined);
+    expect(parsed).toEqual(
+      expectedR8Records.map((e) => ({ schoolName: e.schoolName, department: e.department, quota: e.quota, finalApplicants: e.finalApplicants, finalRate: e.finalRate }))
+    );
+  });
+
+  it('ibarakiのパーサが登録されており、既存の手作業データと完全一致する結果を返す', () => {
+    const parser = getPrefectureParser('ibaraki');
+    expect(parser).toBeDefined();
+    const parsed = parser!(ibarakiR8Geometry as PdfPageGeometry[]);
+    const expectedR8Records = IBARAKI_COMPETITION_RATES.records.filter((r) => r.fiscalYear === undefined);
+    expect(parsed).toEqual(
+      expectedR8Records.map((e) => ({ schoolName: e.schoolName, department: e.department, quota: e.quota, finalApplicants: e.finalApplicants, finalRate: e.finalRate }))
+    );
+  });
+
+  it('akitaのパーサが登録されており、既存の手作業データと完全一致する結果を返す', () => {
+    const parser = getPrefectureParser('akita');
+    expect(parser).toBeDefined();
+    const parsed = parser!(akitaR8Geometry as PdfPageGeometry[]);
+    const expectedR8Records = AKITA_COMPETITION_RATES.records.filter((r) => r.fiscalYear === undefined);
+    expect(parsed).toEqual(
+      expectedR8Records.map((e) => ({ schoolName: e.schoolName, department: e.department, quota: e.quota, finalApplicants: e.finalApplicants, finalRate: e.finalRate }))
+    );
+  });
+
+  it('ishikawaのパーサが登録されており、既存の手作業データと多重集合一致する結果を返す（順不同）', () => {
+    const parser = getPrefectureParser('ishikawa');
+    expect(parser).toBeDefined();
+    const parsed = parser!(ishikawaR8Geometry as PdfPageGeometry[]);
+    const expectedR8Records = ISHIKAWA_COMPETITION_RATES.records.filter((r) => r.fiscalYear === undefined);
+    const keyOf = (r: { schoolName: string; department: string; quota: number; finalApplicants: number; finalRate: number }) =>
+      `${r.schoolName}|${r.department}|${r.quota}|${r.finalApplicants}|${r.finalRate}`;
+    expect(new Set(parsed.map(keyOf))).toEqual(new Set(expectedR8Records.map(keyOf)));
+  });
+
+  it('tokushimaのパーサが登録されており、既存の手作業データと多重集合一致する結果を返す（順不同）', () => {
+    const parser = getPrefectureParser('tokushima');
+    expect(parser).toBeDefined();
+    const parsed = parser!([tokushimaR8Geometry] as PdfPageGeometry[]);
+    const expectedR8Records = TOKUSHIMA_COMPETITION_RATES.records.filter((r) => r.fiscalYear === undefined);
+    const keyOf = (r: { schoolName: string; department: string; quota: number; finalApplicants: number; finalRate: number }) =>
+      `${r.schoolName}|${r.department}|${r.quota}|${r.finalApplicants}|${r.finalRate}`;
+    expect(new Set(parsed.map(keyOf))).toEqual(new Set(expectedR8Records.map(keyOf)));
+  });
+
+  it('レジストリに登録済みの県コード一覧は現時点で36県（1県ずつ移設する方針・追加時はここも更新）', () => {
+    expect(Object.keys(PREFECTURE_PARSER_REGISTRY)).toEqual(['toyama', 'aomori', 'iwate', 'fukui', 'kagawa', 'ehime', 'chiba', 'yamanashi', 'miyagi', 'nagasaki', 'saitama', 'gunma', 'shimane', 'nara', 'kyoto', 'hiroshima', 'wakayama', 'okinawa', 'gifu', 'niigata', 'saga', 'tottori', 'kagoshima', 'shizuoka', 'oita', 'kumamoto', 'shiga', 'kochi', 'yamagata', 'fukuoka', 'nagano', 'tochigi', 'ibaraki', 'akita', 'ishikawa', 'tokushima']);
   });
 });

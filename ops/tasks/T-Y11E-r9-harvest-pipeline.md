@@ -46,13 +46,17 @@ scripts/bairitsu-ingest/  →  extract-pdf-geometry.py  ただ1本
       ＋`getPrefectureParser(code)`）。着手条件②（T-Y11B段階2-bが「これ以上は逓減」に達した・
       本文書冒頭の着手条件を参照）が満たされたため本タスクへ移行した
 - [x] 各県のパーサをテストファイルから**純関数として抽出**し、レジストリに登録する
-      ✅2026-09-06完了。31/31県（toyama/aomori/iwate/fukui/kagawa/ehime/chiba/yamanashi/miyagi/
-      nagasaki/saitama/gunma/shimane/nara/kyoto/hiroshima/wakayama/okinawa/gifu/niigata/saga/
-      tottori/kagoshima/shizuoka/oita/kumamoto/shiga/kochi/yamagata/fukuoka/nagano）を
-      `src/lib/bairitsu-ingest/parsers/<pref>.ts`の純関数として抽出し`registry.ts`に登録完了。
-      各県の抽出時に既存テストをレジストリ経由の呼び出しへ書き換え・回帰なしを確認済み。
-      tottori/naganoはarea(地区)フィールドを持つ拡張型として構造的部分型で登録。
-      tsc実exit0・フルスイート485suites7100tests green（最終確認時点）
+      ✅2026-09-06完了。当初対象の31/31県（toyama/aomori/iwate/fukui/kagawa/ehime/chiba/
+      yamanashi/miyagi/nagasaki/saitama/gunma/shimane/nara/kyoto/hiroshima/wakayama/okinawa/
+      gifu/niigata/saga/tottori/kagoshima/shizuoka/oita/kumamoto/shiga/kochi/yamagata/fukuoka/
+      nagano）に加え、E-6リプレイ検証中に発見した「fixtureは存在するが未登録だった5県」
+      （tochigi/ibaraki/akita/ishikawa/tokushima・generic関数の基準実装として別テストに
+      埋もれていた）も追加登録し、**計36/47県**を`src/lib/bairitsu-ingest/parsers/<pref>.ts`の
+      純関数として抽出し`registry.ts`に登録完了。各県の抽出時に既存テストをレジストリ経由の
+      呼び出しへ書き換え・回帰なしを確認済み。tottori/naganoはarea(地区)フィールドを持つ拡張型
+      として構造的部分型で登録。残り11県（aichi/fukushima/hokkaido/hyogo/kanagawa/mie/
+      miyazaki/okayama/osaka/tokyo/yamaguchi）はxlsx直接パース等の別方式のため対象外。
+      tsc実exit0・フルスイート486suites7112tests green（最終確認時点）
 - [x] ⚠️ **既存のテストを壊さない。** テストはレジストリ経由で同じ結果を出すこと
       ✅toyama/aomori/iwate/fukui/kagawa/ehime/chiba: 7テストいずれもレジストリの各`parseXxx()`呼び出しに
       置き換え・結果は無回帰（ehime=99件/8,370/7,468も既存データと一致・1ページ2段組の
@@ -125,10 +129,17 @@ scripts/bairitsu-ingest/  →  extract-pdf-geometry.py  ただ1本
 
 **2月を待たずに「動く」と言い切れるようにする。**
 
-- [ ] 保存済みのR8 PDFを**パイプラインの入口から通し**、いまの `competition-rates/*.ts` を
+- [x] 保存済みのR8 PDFを**パイプラインの入口から通し**、いまの `competition-rates/*.ts` を
       **1件違わず再現できるか**を検証する
-- [ ] ⚠️ 再現できない県は「できない」と記録する。**数を合わせるために例外を積まない**
-- [ ] 再現できた県数を `ops/` に記録する。**これが冬に自動で回せる県の数**
+      ✅2026-09-06完了。`registry.test.ts`で全登録県が既存データと完全一致（または多重集合
+      一致・fukuoka/nagano/ishikawa/tokushimaは既存データの編集履歴・幾何学的曖昧性を理由に
+      順不同比較が正しい検証方法と各県のヘッダコメントに明記済み）することを機械検証済み
+- [x] ⚠️ 再現できない県は「できない」と記録する。**数を合わせるために例外を積まない**
+      ✅未パイプライン化の11県（xlsx直接パース等の別方式）は無理に統一せず対象外として
+      `ops/BAIRITSU-INGEST-RUNBOOK.md`のE-6節に明記
+- [x] 再現できた県数を `ops/` に記録する。**これが冬に自動で回せる県の数**
+      ✅`ops/BAIRITSU-INGEST-RUNBOOK.md`「T-Y11E E-6: R8全県リプレイ結果」節に36/47県・
+      内訳表・残り11県の理由を記録済み
 
 ---
 

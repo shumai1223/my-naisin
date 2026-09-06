@@ -30,6 +30,11 @@ import { parseKochi } from './parsers/kochi';
 import { parseYamagata } from './parsers/yamagata';
 import { parseFukuoka } from './parsers/fukuoka';
 import { parseNagano } from './parsers/nagano';
+import { parseTochigi } from './parsers/tochigi';
+import { parseIbaraki } from './parsers/ibaraki';
+import { parseAkita } from './parsers/akita';
+import { parseIshikawa } from './parsers/ishikawa';
+import { parseTokushima } from './parsers/tokushima';
 
 /**
  * T-Y11E E-1: 県コード → パーサ関数 のレジストリ。
@@ -77,6 +82,11 @@ export const PREFECTURE_PARSER_REGISTRY: Partial<Record<string, PrefectureParser
   yamagata: parseYamagata,
   fukuoka: parseFukuoka,
   nagano: parseNagano,
+  tochigi: parseTochigi,
+  ibaraki: parseIbaraki,
+  akita: parseAkita,
+  ishikawa: parseIshikawa,
+  tokushima: parseTokushima,
 };
 
 export function getPrefectureParser(prefectureCode: string): PrefectureParser | undefined {

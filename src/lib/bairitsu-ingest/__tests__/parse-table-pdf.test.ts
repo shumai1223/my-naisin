@@ -1,6 +1,7 @@
-import { parseTablePdfPageRows, assembleCompetitionRateRows, type PdfPageGeometry, type TableColumnLayout } from '../parse-table-pdf';
+import { type PdfPageGeometry } from '../parse-table-pdf';
 import { IBARAKI_COMPETITION_RATES } from '@/data/competition-rates/ibaraki';
 import ibarakiR8Geometry from '../__fixtures__/ibaraki-r8-geometry.json';
+import { parseIbaraki } from '../parsers/ibaraki';
 
 /**
  * T-Y11B 段階2-b の検証テスト（唯一の正しい検証方法・タスクファイル参照）:
@@ -8,15 +9,13 @@ import ibarakiR8Geometry from '../__fixtures__/ibaraki-r8-geometry.json';
  * レコード単位で完全一致するか。フィクスチャは令和8年度公表PDF（全3ページ）を
  * `scripts/bairitsu-ingest/extract-pdf-geometry.py`で抽出した文字座標+罫線データ
  * （2026-09-02取得・実データそのもの）。
+ *
+ * ⚠️2026-09-06(T-Y11E E-1/E-6): パース本体は`../parsers/ibaraki.ts`の`parseIbaraki()`へ純関数と
+ * して抽出済み（レジストリ`registry.ts`から県コード経由で呼べる）。このテストはレジストリ経由でも
+ * 同じ結果が出ることを確認する回帰テストとして継続する。
  */
-const IBARAKI_LAYOUT: TableColumnLayout = {
-  boundaries: [60.1, 114.6, 182.2, 223.6, 265.0, 306.4],
-  fullLineX0Max: 65,
-};
-
 describe('bairitsu-ingest parse-table-pdf (ibaraki R8 実データ検証)', () => {
-  const pageRows = (ibarakiR8Geometry as PdfPageGeometry[]).map((geom) => parseTablePdfPageRows(geom, IBARAKI_LAYOUT));
-  const parsed = assembleCompetitionRateRows(pageRows, '全日制計');
+  const parsed = parseIbaraki(ibarakiR8Geometry as PdfPageGeometry[]);
 
   const expectedR8Records = IBARAKI_COMPETITION_RATES.records.filter((r) => r.fiscalYear === undefined);
 

@@ -366,3 +366,25 @@
 重い・Y-6実績でも1県あたり相応の時間を要している）。優先順位は
 [[fable5-loop-protocol]]のLOOP_CONTRACT §0（期限のある作業を優先）に従い、**公表が早い県から
 順に処理する**（`competition-rate-publication-baseline.ts`の公表カレンダーで確認できる）。
+
+---
+
+## T-Y11E E-6: R8全県リプレイ結果（2026-09-06時点）
+
+「2月を待たずに『動く』と言い切れるようにする」ための検証。保存済みのR8 PDF geometry
+フィクスチャ（`src/lib/bairitsu-ingest/__fixtures__/*.json`）を`registry.ts`経由でパイプラインの
+入口（`getPrefectureParser(県コード)`）から通し、`competition-rates/*.ts`のR8データと1件違わず
+再現できるかを検証した。
+
+**再現できた県数: 36/47県**（`registry.test.ts`で全県が既存データと完全一致 or 多重集合一致する
+ことを機械検証済み・tsc実exit0・jest green）。
+
+| 分類 | 件数 | 内訳 |
+|---|---|---|
+| ✅ パイプライン化済み（`registry.ts`に登録・県コード→PDF→レコードが1本のコマンドで通る） | 36県 | toyama/aomori/iwate/fukui/kagawa/ehime/chiba/yamanashi/miyagi/nagasaki/saitama/gunma/shimane/nara/kyoto/hiroshima/wakayama/okinawa/gifu/niigata/saga/tottori/kagoshima/shizuoka/oita/kumamoto/shiga/kochi/yamagata/fukuoka/nagano/tochigi/ibaraki/akita/ishikawa/tokushima |
+| ⏳ 未パイプライン化（PDF座標抽出とは別方式で収録済み・xlsx直接パース等） | 11県 | aichi/fukushima/hokkaido/hyogo/kanagawa/mie/miyazaki/okayama/osaka/tokyo/yamaguchi。これらはR8データ自体は既に`competition-rates/*.ts`に存在するが、`bairitsu-ingest`のPDF座標抽出パイプラインとは異なる収集方法（xlsx表・ビジョン解析等）で作られたため、今回のレジストリ方式への統一は対象外（各県の元データ収集手法に応じた別途の抽出作業が必要） |
+
+⚠️ **「36/47」は「これが冬に自動で回せる県の数」の下限値**（既存の11県も別ロジックで
+自動化できる可能性はあるが未着手）。DoDの「県コード→PDF→レコードが1本のコマンドで通る」
+「R8全県リプレイの再現率が記録されている」はこの36県について達成。「検算が落ちたら止まる
+（fail-closed）」はE-4（未着手）で別途対応する。

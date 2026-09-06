@@ -1,27 +1,20 @@
-import { groupCharsIntoRows, extractRowFields, assembleSimpleTableRows, type PdfPageGeometry, type GeneralColumnLayout } from '../parse-table-pdf';
+import { type PdfPageGeometry } from '../parse-table-pdf';
 import { TOCHIGI_COMPETITION_RATES } from '@/data/competition-rates/tochigi';
 import tochigiR8Geometry from '../__fixtures__/tochigi-r8-geometry.json';
+import { parseTochigi } from '../parsers/tochigi';
 
 /**
  * T-Y11B 段階2-b: 「学校名セルの結合が無い県」向け組み立て（tochigi型）の検証テスト。
  * ibaraki型（`parse-table-pdf.test.ts`）とは別の組み立てパターンであることを示す実例。
  * フィクスチャは令和8年度公表PDF（全3ページ）を`extract-pdf-geometry.py`で抽出した
  * 文字座標データ（罫線は使わない・2026-09-02取得・実データそのもの）。
+ *
+ * ⚠️2026-09-06(T-Y11E E-1/E-6): パース本体は`../parsers/tochigi.ts`の`parseTochigi()`へ純関数と
+ * して抽出済み（レジストリ`registry.ts`から県コード経由で呼べる）。このテストはレジストリ経由でも
+ * 同じ結果が出ることを確認する回帰テストとして継続する。
  */
-const TOCHIGI_LAYOUT: GeneralColumnLayout = {
-  boundaries: [50.4, 66.4, 111.4, 163.8, 185.9, 208.2, 236.7, 264.6, 287.0, 315.4, 343.4, 371.8, 399.8, 428.2, 456.2],
-  // 列: 番号,学校名,学科名,男女,募集定員,特色選抜内定者数,A海外内定者数,一般選抜定員(=quota),
-  //     出願人員(2/19),出願倍率(2/19),再出願人員,取下げ人員,変更後の出願人員(=applicants),出願倍率(2/25)(=rate)
-  roles: { schoolName: 1, department: 2, quota: 7, finalApplicants: 12, finalRate: 13 },
-};
-
 describe('bairitsu-ingest parse-table-pdf 汎用carry-forward組み立て (tochigi R8 実データ検証)', () => {
-  const allRowFields = (tochigiR8Geometry as PdfPageGeometry[]).flatMap((geom) =>
-    groupCharsIntoRows(geom.chars, 3.0).map((row) => extractRowFields(row.chars, TOCHIGI_LAYOUT))
-  );
-  const parsed = assembleSimpleTableRows(allRowFields, {
-    excludeRow: (schoolName, department) => (schoolName + department).includes('合計'),
-  });
+  const parsed = parseTochigi(tochigiR8Geometry as PdfPageGeometry[]);
 
   const expectedR8Records = TOCHIGI_COMPETITION_RATES.records.filter((r) => r.fiscalYear === undefined);
 
