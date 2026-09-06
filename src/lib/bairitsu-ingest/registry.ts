@@ -20,6 +20,7 @@ import { parseOkinawa } from './parsers/okinawa';
 import { parseGifu } from './parsers/gifu';
 import { parseNiigata } from './parsers/niigata';
 import { parseSaga } from './parsers/saga';
+import { parseTottori } from './parsers/tottori';
 
 /**
  * T-Y11E E-1: 県コード → パーサ関数 のレジストリ。
@@ -57,6 +58,7 @@ export const PREFECTURE_PARSER_REGISTRY: Partial<Record<string, PrefectureParser
   gifu: parseGifu,
   niigata: parseNiigata,
   saga: parseSaga,
+  tottori: parseTottori,
 };
 
 export function getPrefectureParser(prefectureCode: string): PrefectureParser | undefined {
