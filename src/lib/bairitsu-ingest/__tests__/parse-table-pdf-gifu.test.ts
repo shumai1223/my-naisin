@@ -1,6 +1,7 @@
-import { normalizeExtractedText, type PdfPageGeometry } from '../parse-table-pdf';
+import { type PdfPageGeometry } from '../parse-table-pdf';
 import { GIFU_COMPETITION_RATES } from '@/data/competition-rates/gifu';
 import gifuR8Geometry from '../__fixtures__/gifu-r8-geometry.json';
+import { parseGifu } from '../parsers/gifu';
 
 /**
  * T-Y11B 段階2-b: gifu(岐阜県)のR8倍率パーサ検証テスト。tochigi型（単純carry-forward）を
@@ -23,89 +24,14 @@ import gifuR8Geometry from '../__fixtures__/gifu-r8-geometry.json';
  * ⚠️既存の罠の再確認: 学校集計行等の除外判定に単純な`.includes('計')`を使うと、正当な学科名
  * 「会計」（岐阜商業に実在）まで誤って除外してしまう（`.includes('合計')`のように完全な
  * マーカー文字列で判定する必要がある・nagasaki型の教訓の再確認）。
+ *
+ * ⚠️2026-09-06(T-Y11E E-1): パース本体は`../parsers/gifu.ts`の`parseGifu()`へ純関数として
+ * 抽出済み（レジストリ`registry.ts`から県コード経由で呼べる）。このテストはレジストリ経由でも
+ * 同じ結果が出ることを確認する回帰テストとして継続する。
  */
-
-const boundaries = [105, 205, 415, 480, 545, 570];
-const numCols = boundaries.length - 1;
-// 0 学校名, 1 学科(群)名, 2 募集人員(=quota), 3 出願者数(=finalApplicants), 4 倍率(=finalRate)
-
-function normalizeDepartmentTextFullwidth(s: string): string {
-  return normalizeExtractedText(s).replace(/、/g, '・').replace(/\(/g, '（').replace(/\)/g, '）');
-}
-
-interface ParsedRow {
-  schoolName: string;
-  department: string;
-  quota: number;
-  finalApplicants: number;
-  finalRate: number;
-}
-
-function parseAllPages(geometries: PdfPageGeometry[]): ParsedRow[] {
-  const allRecords: ParsedRow[] = [];
-  let currentSchool = '';
-  let stopped = false;
-  for (const geom of geometries) {
-    if (stopped) break;
-    const { chars } = geom;
-    const sorted = [...chars].sort((a, b) => a.y0 - b.y0 || a.x0 - b.x0);
-    const rows: { y: number; chars: PdfPageGeometry['chars'] }[] = [];
-    for (const c of sorted) {
-      const row = rows.find((r) => Math.abs(r.y - c.y0) < 3.0);
-      if (row) {
-        row.chars.push(c);
-        row.y = (row.y * (row.chars.length - 1) + c.y0) / row.chars.length;
-      } else {
-        rows.push({ y: c.y0, chars: [c] });
-      }
-    }
-    rows.sort((a, b) => a.y - b.y);
-
-    for (const row of rows) {
-      const cell: PdfPageGeometry['chars'][] = Array.from({ length: numCols }, () => []);
-      for (const c of row.chars) {
-        const cx = (c.x0 + c.x1) / 2;
-        for (let i = 0; i < numCols; i++) {
-          if (cx >= boundaries[i] - 1 && cx < boundaries[i + 1] - 1) {
-            cell[i].push(c);
-            break;
-          }
-        }
-      }
-      for (const arr of cell) arr.sort((a, b) => a.x0 - b.x0);
-      const join = (arr: PdfPageGeometry['chars']) => arr.map((c) => c.c).join('').trim();
-      const schoolNameRaw = join(cell[0]);
-      const departmentRaw = join(cell[1]);
-      const quotaText = join(cell[2]);
-      const applicantsText = join(cell[3]);
-      const rateText = join(cell[4]);
-
-      const sn = normalizeExtractedText(schoolNameRaw);
-      if (/定時制|通信制/.test(sn)) {
-        stopped = true;
-        break;
-      }
-      if (sn) currentSchool = sn;
-      if (!departmentRaw) continue;
-      const deptNorm = normalizeExtractedText(departmentRaw);
-      if (deptNorm.includes('合計')) continue;
-      if (/^[ⅠⅡ連携－]/.test(deptNorm)) continue; // 独自検査Ⅰ/Ⅱ・連携型選抜の内訳行を除外
-
-      const department = normalizeDepartmentTextFullwidth(deptNorm);
-      const quota = Number(quotaText.replace(/,/g, ''));
-      const finalApplicants = Number(applicantsText.replace(/,/g, ''));
-      const finalRate = Number(rateText);
-      if (!Number.isFinite(quota) || quota <= 0) continue;
-      if (!Number.isFinite(finalApplicants) || !Number.isFinite(finalRate)) continue;
-      allRecords.push({ schoolName: currentSchool, department, quota, finalApplicants, finalRate });
-    }
-  }
-  return allRecords;
-}
-
 describe('bairitsu-ingest parse-table-pdf 汎用carry-forward組み立て (gifu R8 実データ検証・定時制/通信制セクションの打ち切り)', () => {
   const geometries = gifuR8Geometry as PdfPageGeometry[];
-  const parsed = parseAllPages(geometries);
+  const parsed = parseGifu(geometries);
   const expectedR8Records = GIFU_COMPETITION_RATES.records.filter((r) => r.fiscalYear === undefined);
 
   test('R8のレコード件数が既存データと一致する（134件・63校）', () => {
