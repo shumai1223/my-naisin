@@ -8,6 +8,28 @@
 
 ## 0. 今季の主食（迷ったらここへ戻る）
 
+### 🆕 2026-09-06 16:2x時点の状態（T-Y11E E-2完了・PDF本文アーカイブ層を追加）
+
+前の状態記録（E-1完了・E-2着手）から継続。E-2の残り「実取得・PDF保存」を完了した。設計判断:
+変化検知自体は既にT-Y11 A-2（`scripts/check-competition-rate-updates.mjs`・2026-09-01実装済み・
+HEADのみでヘッダ比較・本文はダウンロードしない設計）が本番稼働中だったため、これを重複実装
+せず、A-2の`changed`判定に相乗りする新規スクリプト`scripts/bairitsu-ingest/archive-changed-pdfs.mjs`
+を追加した（**追加のポーリングは一切行わない**設計＝相手サーバへの負荷は増えない）。純関数は
+`src/lib/bairitsu-pdf-archive.ts`に分離しjest7件で検証。ドライラン実施しchanged該当県0件
+（R9未公表のため現時点では正常）でネットワーク呼び出しが発生しないことを確認済み。保存先
+`ops/raw/bairitsu-pdf-archive/`は`.gitignore`登録（既存の`bairitsu-vision-queue/`と同型）・
+台帳のみコミット（詳細はworklog 16:22・commit `8a16d46`）。tsc実exit0・
+フルスイート486suites7107tests green。push済み。**T-Y11E E-1・E-2とも完了**。
+
+**次に再開するセッションがまず行うこと**:
+1. Gmail/GA4/GSC/Trends MCP接続確認
+2. Gmail新着返信の確認
+3. `ops/tasks/T-Y11E-r9-harvest-pipeline.md`の**E-3（変化検知・既にA-2で実装済み。この
+   タスクファイルとの重複を確認し、未完了なら差分のみ実装）・E-4（検算をパイプラインに繋ぐ）
+   ・E-5（差分と失敗の切り分け）・E-6（R8全県リプレイ）**のいずれかに進むか、
+   同じ横断grep方式で他の`ops/tasks/*.md`の未完了・日付ゲート無し項目を探すこと
+4. 日付ゲート（9/08 T-Y11B・N1-2/9/09 T-A1/9/21 W-8）は未到達
+
 ### 🎉 2026-09-06 16:0x時点の状態（T-Y11E E-1完了・31/31県すべて移設完了）
 
 前の状態記録（fukuoka完了）から継続。T-Y11E E-1の最後の1県nagano（417行）を完了し、
