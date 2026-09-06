@@ -1,6 +1,7 @@
-import { parseTablePdfPageRows, assembleCompetitionRateRows, normalizeExtractedText, type PdfPageGeometry, type TableColumnLayout } from '../parse-table-pdf';
+import { normalizeExtractedText, type PdfPageGeometry } from '../parse-table-pdf';
 import { SHIMANE_COMPETITION_RATES } from '@/data/competition-rates/shimane';
 import shimaneR8Geometry from '../__fixtures__/shimane-r8-geometry.json';
+import { parseShimane } from '../parsers/shimane';
 
 /**
  * T-Y11B 段階2-b: shimane(島根県)のR8倍率パーサ検証テスト。全日制1頁・ibaraki型（結合セル・
@@ -34,54 +35,14 @@ import shimaneR8Geometry from '../__fixtures__/shimane-r8-geometry.json';
  * （「皆松美江が市丘立女子」）になる。他県の「ラベルが複数行に分裂」パターン（akita/ehime型）
  * は行単位の連結で対応できたが、これは文字単位での混入のため同じ手法が使えず、
  * 観測された不可解な文字列そのものをキーにした直接のSCHOOL_NAME_OVERRIDEで対応した。
+ *
+ * ⚠️2026-09-06(T-Y11E E-1): パース本体は`../parsers/shimane.ts`の`parseShimane()`へ純関数として
+ * 抽出済み（レジストリ`registry.ts`から県コード経由で呼べる）。このテストはレジストリ経由でも
+ * 同じ結果が出ることを確認する回帰テストとして継続する。
  */
-const SHIMANE_LAYOUT: TableColumnLayout = {
-  // 0学校名,1学科名,2未使用,3quota(i),4未使用(k),5applicants(j),6未使用,7未使用,8rate(p)
-  boundaries: [100, 150, 185, 441.65, 460.7, 479.8, 500.6, 560, 613.6, 638.3],
-  fullLineX0Max: 120,
-  roles: { schoolName: 0, department: 1, quota: 3, finalApplicants: 5, finalRate: 8 },
-};
-
-const SCHOOL_NAME_OVERRIDE: Record<string, string> = { 皆松美江が市丘立女子: '皆美が丘女子' };
-
-/** くくり募集4組: 代表学科のブロックの学校名列には学科群名が印字される（幾何学的に区別不能）。 */
-const CONTINUATION_LABELS = new Set(['情報科学', '商業', '普通']);
-
-/** くくり募集4組の内数コース名合成。既存データを根拠にした値ベースoverride。 */
-const KUKURI_OVERRIDE = new Map<string, string>([
-  ['安来|72|46', '情報科学(情報システム・情報処理・マルチメディア)'],
-  ['松江商業|101|133', '商業(商業・国際ビジネス・情報処理)'],
-  ['浜田商業|44|29', '商業(商業・情報処理)'],
-  ['隠岐島前|51|17', '普通(普通・地域共創)'],
-]);
-
-interface ParsedRow {
-  schoolName: string;
-  department: string;
-  quota: number;
-  finalApplicants: number;
-  finalRate: number;
-}
-
 describe('bairitsu-ingest parse-table-pdf 罫線+結合セル組み立て (shimane R8 実データ検証・くくり募集ブロックの学校名誤認)', () => {
   const geometries = shimaneR8Geometry as unknown as PdfPageGeometry[];
-
-  const rawRows = geometries.map((geom) => parseTablePdfPageRows(geom, SHIMANE_LAYOUT));
-  const assembled = assembleCompetitionRateRows(rawRows, '合計', {
-    excludeRow: (department) => department.includes('計'),
-  }).filter((r) => r.quota > 0);
-  // ⚠️罠3(wakayama型の再確認): Number('')は0(finite)を返すため、くくり募集の内数コース行
-  // （数値が一切乗らない継続行）がquota=0の偽レコードとしてassembleCompetitionRateRowsの
-  // NaNチェックを素通りする。quota>0を呼び出し側の不変条件として追加要求する。
-
-  let lastRealSchool = '';
-  const parsed: ParsedRow[] = assembled.map((r) => {
-    const renamed = SCHOOL_NAME_OVERRIDE[r.schoolName] ?? r.schoolName;
-    const schoolName = CONTINUATION_LABELS.has(renamed) ? lastRealSchool : renamed;
-    if (!CONTINUATION_LABELS.has(renamed)) lastRealSchool = schoolName;
-    const override = KUKURI_OVERRIDE.get(`${schoolName}|${r.quota}|${r.finalApplicants}`);
-    return { schoolName, department: override ?? r.department, quota: r.quota, finalApplicants: r.finalApplicants, finalRate: r.finalRate };
-  });
+  const parsed = parseShimane(geometries);
 
   const expectedR8Records = SHIMANE_COMPETITION_RATES.records.filter((r) => r.fiscalYear === undefined);
 
