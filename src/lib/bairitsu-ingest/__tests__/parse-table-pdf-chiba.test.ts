@@ -1,6 +1,7 @@
-import { groupCharsIntoRows, extractRowFields, assembleSimpleTableRows, normalizeExtractedText, type PdfPageGeometry, type GeneralColumnLayout } from '../parse-table-pdf';
+import { type PdfPageGeometry } from '../parse-table-pdf';
 import { CHIBA_COMPETITION_RATES } from '@/data/competition-rates/chiba';
 import chibaR8Geometry from '../__fixtures__/chiba-r8-geometry.json';
+import { parseChiba } from '../parsers/chiba';
 
 /**
  * T-Y11B 段階2-b: chiba(千葉県)のR8倍率パーサ検証テスト。tochigi型（学校名セルの結合が無い・
@@ -14,30 +15,14 @@ import chibaR8Geometry from '../__fixtures__/chiba-r8-geometry.json';
  * フィクスチャは令和8年度公表PDF（`chiba-r8.pdf`・全6頁のうち県立全日制+市立全日制の5頁分
  * [page index 0-4]）を`extract-pdf-geometry.py`で抽出した文字座標データ。6頁目は「県立定時制」
  * のためスコープ外。
+ *
+ * ⚠️2026-09-06(T-Y11E E-1): パース本体は`../parsers/chiba.ts`の`parseChiba()`へ純関数として
+ * 抽出済み（レジストリ`registry.ts`から県コード経由で呼べる）。このテストはレジストリ経由でも
+ * 同じ結果が出ることを確認する回帰テストとして継続する。
  */
-const CHIBA_LAYOUT: GeneralColumnLayout = {
-  boundaries: [95, 212, 396, 444, 498, 536, 580],
-  // 列: 番号+学校名,学科名,募集定員(A・未使用),募集人員(B=quota),
-  //     志願者確定数(C=finalApplicants),倍率(C/B=finalRate)
-  roles: { schoolName: 0, department: 1, quota: 3, finalApplicants: 4, finalRate: 5 },
-};
-
 describe('bairitsu-ingest parse-table-pdf 汎用carry-forward組み立て (chiba R8 実データ検証)', () => {
   const geometries = chibaR8Geometry as PdfPageGeometry[];
-  const allRowFields = geometries.flatMap((geom) =>
-    groupCharsIntoRows(geom.chars, 3.0).map((row) => {
-      const fields = extractRowFields(row.chars, CHIBA_LAYOUT);
-      // 学校名列の行頭「番号」（市立校は「市」+番号）を除去する。
-      return { ...fields, schoolName: fields.schoolName.replace(/^[＊市]?\d+[\s　]*/, '') };
-    })
-  );
-
-  const parsed = assembleSimpleTableRows(allRowFields, {
-    excludeRow: (schoolName, department) => {
-      const combined = normalizeExtractedText(schoolName) + normalizeExtractedText(department);
-      return combined.includes('合計');
-    },
-  });
+  const parsed = parseChiba(geometries);
 
   const expectedR8Records = CHIBA_COMPETITION_RATES.records.filter((r) => r.fiscalYear === undefined);
 

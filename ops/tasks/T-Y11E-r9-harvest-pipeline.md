@@ -46,16 +46,20 @@ scripts/bairitsu-ingest/  →  extract-pdf-geometry.py  ただ1本
       ＋`getPrefectureParser(code)`）。着手条件②（T-Y11B段階2-bが「これ以上は逓減」に達した・
       本文書冒頭の着手条件を参照）が満たされたため本タスクへ移行した
 - [ ] 各県のパーサをテストファイルから**純関数として抽出**し、レジストリに登録する
-      🔶進行中（6/31県・toyama/aomori/iwate/fukui/kagawa/ehime完了・2026-09-05）。1県ずつのため次回以降続行
+      🔶進行中（7/31県・toyama/aomori/iwate/fukui/kagawa/ehime/chiba完了・2026-09-06）。1県ずつのため次回以降続行
 - [x] ⚠️ **既存のテストを壊さない。** テストはレジストリ経由で同じ結果を出すこと
-      ✅toyama/aomori/iwate/fukui/kagawa/ehime: 6テストいずれもレジストリの各`parseXxx()`呼び出しに
+      ✅toyama/aomori/iwate/fukui/kagawa/ehime/chiba: 7テストいずれもレジストリの各`parseXxx()`呼び出しに
       置き換え・結果は無回帰（ehime=99件/8,370/7,468も既存データと一致・1ページ2段組の
-      LEFT/RIGHTレイアウトも純関数化して問題なし）。`__tests__/registry.test.ts`にehimeの検証も追加
+      LEFT/RIGHTレイアウトも純関数化して問題なし。chiba=188件・県立121+市立12校・
+      quota28,880/applicants32,008の機械集計も一致・最も単純な部類でオーバーライド不要）。
+      `__tests__/registry.test.ts`にehime/chibaの検証も追加
 - [x] ⚠️ 1県ずつやる。**まとめて動かして壊すより、1県ずつ緑を確認する**
-      ✅toyama→aomori→iwate→fukui→kagawa→ehimeの順で1県ずつ移設。`src/lib/bairitsu-ingest`配下の
-      tsc実exit0・jest37suites182tests greenを都度確認、加えてjestフルスイート469suites6958tests
-      green(`--maxWorkers=2`で確認・素のnpx jestはバックグラウンドでメモリ不足killされる場合がある)。
-      次回セッションは`src/lib/bairitsu-ingest/parsers/ehime.ts`を雛形として7県目に進むこと（残り25県）
+      ✅toyama→aomori→iwate→fukui→kagawa→ehime→chibaの順で1県ずつ移設。
+      `src/lib/bairitsu-ingest`配下のtsc実exit0・jest37suites183tests greenを都度確認、
+      加えてjestフルスイートgreen(`--maxWorkers=2`で確認・素のnpx jestはバックグラウンドで
+      メモリ不足killされる場合がある)。次回セッションは`src/lib/bairitsu-ingest/parsers/chiba.ts`
+      （最も単純な部類・assembleSimpleTableRowsを直接呼ぶだけ）を雛形として8県目に進むこと
+      （残り24県。行数の少ない順に選ぶと着手しやすい: yamanashi77行/miyagi81行/nagasaki83行が次点）
 
 ## E-2 取得層（丁寧に取る）
 

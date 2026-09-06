@@ -5,6 +5,7 @@ import { parseIwate } from './parsers/iwate';
 import { parseFukui } from './parsers/fukui';
 import { parseKagawa } from './parsers/kagawa';
 import { parseEhime } from './parsers/ehime';
+import { parseChiba } from './parsers/chiba';
 
 /**
  * T-Y11E E-1: 県コード → パーサ関数 のレジストリ。
@@ -27,6 +28,7 @@ export const PREFECTURE_PARSER_REGISTRY: Partial<Record<string, PrefectureParser
   fukui: parseFukui,
   kagawa: parseKagawa,
   ehime: parseEhime,
+  chiba: parseChiba,
 };
 
 export function getPrefectureParser(prefectureCode: string): PrefectureParser | undefined {
