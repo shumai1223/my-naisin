@@ -8,7 +8,23 @@
 
 ## 0. 今季の主食（迷ったらここへ戻る）
 
-### 🆕 2026-09-06 10:2x時点の状態（T-P1 P1-5の2本目を実装完了・3本中2本）
+### 🆕 2026-09-06 11:0x時点の状態（T-Y11C-4のうち確定可能な2件[aichi/hokkaido]を解決）
+
+P1-5の3本目（差別化の確信度が低いまま急いで書くより、確定容易な既存タスクを優先すべきと判断）
+の前に、前から残っていたT-Y11C-4（finalRate 27件の未説明不一致のうち2件）を解決した。
+aichiは日を空けてWebFetch再試行で成功（09-05の失敗は一時的なWAF誤検知だった可能性）、
+hokkaidoはPDF不要でコード上の丸め忘れと判明。両方とも訂正しKNOWN_UNEXPLAINED_EXCEPTIONSを
+27件→25件に更新（詳細はworklog 11:08・`ops/tasks/T-Y11C-finalrate-invariant.md`参照）。
+tsc実exit0・対象テストgreen・フルスイートもgreen確認済み。
+
+**次に再開するセッションがまず行うこと**:
+1. Gmail/GA4/GSC/Trends MCP接続確認
+2. Gmail新着返信の確認
+3. 手が空いたらP1-5の3本目に着手するか、同じ横断grep方式で他の`ops/tasks/*.md`の
+   未完了・日付ゲート無し項目を探すこと
+4. 日付ゲート（9/08 T-Y11B・N1-2/9/09 T-A1/9/21 W-8）は未到達
+
+### 2026-09-06 10:2x時点の状態（T-P1 P1-5の2本目を実装完了・3本中2本）
 
 既存の低CTR記事`/blog/futoukou-naishinten-high-school`の本文に、1本目で作った全国横断データ
 （`getAlternativeTrackNationalSummary()`）へのポインタとなる新セクションを追加（title/meta/FAQは

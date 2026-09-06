@@ -39,8 +39,6 @@ interface KnownException {
  * スナップショットではないか」という未確認の仮説がタスクファイルにあるのみ）。
  */
 const KNOWN_UNEXPLAINED_EXCEPTIONS: KnownException[] = [
-  { pref: 'aichi', schoolName: '名古屋南', quota: 300, applicants: 744, storedRateText: '2.49' },
-  { pref: 'hokkaido', schoolName: '静内', quota: 200, applicants: 163, storedRateText: '0.815' },
   { pref: 'yamaguchi', schoolName: '防府', quota: 30, applicants: 38, storedRateText: '1.2' },
   { pref: 'yamaguchi', schoolName: '防府商工', quota: 55, applicants: 65, storedRateText: '1.1' },
   { pref: 'yamaguchi', schoolName: '山口', quota: 28, applicants: 33, storedRateText: '1.1' },
@@ -80,12 +78,17 @@ describe('competition-rates finalRate invariant (round2/round1/trunc2のいず�
     expect(files.length).toBe(47);
   });
 
-  it('既知の未説明例外は27件（重複キー無し）', () => {
-    expect(KNOWN_UNEXPLAINED_EXCEPTIONS.length).toBe(27);
-    expect(exceptionKeys.size).toBe(27);
+  it('既知の未説明例外は25件（重複キー無し）', () => {
+    // 2026-09-06: aichi/名古屋南（744/300）はPDF実機確認により誤記載（締切時倍率2.49を最終倍率と
+    // 取り違えていた）と判明し2.48へ訂正・round2で説明可能になったため27件→26件に減少。
+    // 続けてhokkaido/静内（163/200）も、この県のfinalRateが自前算出であるにもかかわらず
+    // 小数第3位まで(0.815)残っていた丸め忘れの表記ミスと判明し0.82へ訂正（round2で説明可能）・
+    // 26件→25件に減少した。
+    expect(KNOWN_UNEXPLAINED_EXCEPTIONS.length).toBe(25);
+    expect(exceptionKeys.size).toBe(25);
   });
 
-  it('47県21,739件全レコードが、round2/round1/trunc2のいずれか、または既知の27件の例外に該当する', () => {
+  it('47県21,739件全レコードが、round2/round1/trunc2のいずれか、または既知の25件の例外に該当する', () => {
     const usedExceptionKeys = new Set<string>();
     let totalRecords = 0;
     const unexpectedMismatches: string[] = [];

@@ -812,7 +812,11 @@ export const HOKKAIDO_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     // 掛-1第6弾: 日高地区・令和7年度（2025年度）分。
     { schoolName: '平取', department: '普通', quota: 40, finalApplicants: 22, finalRate: 0.55, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '富川', department: '普通', quota: 40, finalApplicants: 16, finalRate: 0.4, fiscalYear: '令和7年度（2025年度）' },
-    { schoolName: '静内', department: '普通', quota: 200, finalApplicants: 163, finalRate: 0.815, fiscalYear: '令和7年度（2025年度）' },
+    // T-Y11C-4（2026-09-06訂正）: finalRateが0.815（小数第3位まで）と、この節の他の全レコードと
+    // 異なる精度で記録されていた。この県のfinalRateはPDFの印字倍率ではなく自前算出
+    // （finalApplicants/quota）であり、163/200=0.815は四捨五入すれば0.82（他の全レコードと同じ
+    // 小数第2位までの丸め規則）。単純な丸め忘れの表記ミスと判断し0.82へ訂正した。
+    { schoolName: '静内', department: '普通', quota: 200, finalApplicants: 163, finalRate: 0.82, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: 'えりも', department: '普通', quota: 70, finalApplicants: 29, finalRate: 0.41, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '静内農業', department: '食品科学', quota: 40, finalApplicants: 24, finalRate: 0.6, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '静内農業', department: '生産科学', quota: 40, finalApplicants: 27, finalRate: 0.68, fiscalYear: '令和7年度（2025年度）' },

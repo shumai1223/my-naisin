@@ -595,7 +595,12 @@ export const AICHI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '松蔭', department: '普通', quota: 307, finalApplicants: 848, finalRate: 2.76, fiscalYear: '令和6年度（2024年度）' },
     { schoolName: '昭和', department: '普通', quota: 319, finalApplicants: 719, finalRate: 2.25, fiscalYear: '令和6年度（2024年度）' },
     { schoolName: '熱田', department: '普通', quota: 270, finalApplicants: 764, finalRate: 2.83, fiscalYear: '令和6年度（2024年度）' },
-    { schoolName: '名古屋南', department: '普通', quota: 300, finalApplicants: 744, finalRate: 2.49, fiscalYear: '令和6年度（2024年度）' },
+    // T-Y11C-4（2026-09-06訂正）: 744/300=2.48だが当初2.49と誤記録されていた（27件の不一致の1件）。
+    // 497269.pdf（別紙5頁目Aグループ）を再取得し実機確認したところ、この行だけ「締切時倍率」列
+    // (2.49)と「最終倍率」列(2.48)の値が異なっており、誤って締切時倍率を転記していたと判明
+    // （他の全行はこの2列が偶然同値のため誤りが表面化しなかった）。finalApplicants/quotaは
+    // 「志願者総数」「一般選抜等募集人員」列と一致しており正しい。倍率のみ最終倍率(2.48)へ訂正。
+    { schoolName: '名古屋南', department: '普通', quota: 300, finalApplicants: 744, finalRate: 2.48, fiscalYear: '令和6年度（2024年度）' },
     { schoolName: '名古屋工科', department: 'IT工学・機械・電気・エネルギーシステム・エネルギー化学(くくり)', quota: 218, finalApplicants: 371, finalRate: 1.7, fiscalYear: '令和6年度（2024年度）' },
     { schoolName: '瀬戸西', department: '普通', quota: 266, finalApplicants: 328, finalRate: 1.23, fiscalYear: '令和6年度（2024年度）' },
     { schoolName: '瀬戸北総合', department: '総合', quota: 202, finalApplicants: 244, finalRate: 1.21, fiscalYear: '令和6年度（2024年度）' },
