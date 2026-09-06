@@ -315,7 +315,12 @@ describe('data/outreach-queue.json（X\'-1・実データ整合性）', () => {
     // 2026-08-30さらに: 「窓口不一致」で見送られていたjuku-yarukiswitch-advertisement(やる気スイッチ
     // グループHD)を、正しい窓口(/inquiry/other/=その他のお問い合わせ)を再調査で発見しqueuedへ復帰
     // (115→116)。
-    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(80);
+    // 2026-09-07: juku-yarukiswitch-advertisementが2026-09-06にCowork batch12として
+    // 「やる気スイッチグループHD」の表記で既に送信済みだったと判明(ledger id b2b-form-b12-46-0906)。
+    // queue側は「株式会社やる気スイッチグループホールディングス」という正式名称表記のため、
+    // 既存の完全一致・括弧除去短縮名一致の重複検出テストいずれもこの「法人格+略称違い」の
+    // 表記ゆれを検知できなかった(新種の見落としパターン)。二重送信防止のためexcludedへ変更(80→79)。
+    expect(raw.entries.filter((e) => e.status === 'queued')).toHaveLength(79);
   });
 
   it('line channelは個人塾4件のみ・reviewTierはmutual-link既定spot-checkだがプラスジムのみ個別full-review', () => {
