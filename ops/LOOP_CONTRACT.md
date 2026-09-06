@@ -8,7 +8,22 @@
 
 ## 0. 今季の主食（迷ったらここへ戻る）
 
-### 🆕 2026-09-06 13:4x時点の状態（T-Y11E E-1・wakayama(17県目)を移設完了）
+### 🆕 2026-09-06 13:5x時点の状態（T-Y11E E-1・okinawa(18県目)を移設完了）
+
+前の状態記録（wakayama完了）から継続。T-Y11E E-1のokinawa（18/31県目・144行）を完了。
+全日制・定時制が同一表に混在する構造を「課程」列の値でcarry-forwardフィルタする独自パターン・
+学級数の末尾数字混入除去・括弧を半角のまま維持するpost-process（他県と逆パターン）を純関数化
+（詳細はworklog 13:51・commit `539c6ce`）。tsc実exit0・bairitsu-ingest配下37suites194tests
+green・フルスイート485suites7087tests green。push済み。
+
+**次に再開するセッションがまず行うこと**:
+1. Gmail/GA4/GSC/Trends MCP接続確認
+2. Gmail新着返信の確認
+3. 手が空いたらT-Y11E E-1の19県目（候補: gifu151行/niigata165行）に進むか、
+   同じ横断grep方式で他の`ops/tasks/*.md`の未完了・日付ゲート無し項目を探すこと
+4. 日付ゲート（9/08 T-Y11B・N1-2/9/09 T-A1/9/21 W-8）は未到達
+
+### 2026-09-06 13:4x時点の状態（T-Y11E E-1・wakayama(17県目)を移設完了）
 
 前の状態記録（hiroshima完了）から継続。T-Y11E E-1のwakayama（17/31県目・141行）を完了。
 `extraColumns`でD列を追加取得しfinalApplicants=D+Eを合成するkochi型拡張・分校4校の複合名合成・
