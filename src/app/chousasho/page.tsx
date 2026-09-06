@@ -524,6 +524,19 @@ export default function ChousashoPage() {
                   出典: 鹿児島県教育委員会「（様式４－１）調査書」
                 </a>
               </div>
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <div className="font-bold text-slate-800">沖縄県（「健康所見」が独立項目・3例目）</div>
+                <p className="mt-1 leading-relaxed text-slate-600">
+                  各教科の学習の記録・特別活動の記録・行動の記録（国の指導要録標準10区分）・
+                  総合所見・出欠の記録に加えて、<strong>「健康所見」（疾病及び健康に配慮を要する
+                  事項・「特に所見なし／所見あり」の選択式で疾病名記入欄あり）が独立した番号付き
+                  項目</strong>として存在します。健康関連の記録を出欠から独立させる構成は熊本県・
+                  大分県に次いで3例目の確認でした。
+                </p>
+                <a href="https://www.pref.okinawa.lg.jp/_res/projects/default_project/_page_/001/035/054/08chosasyo.xlsx" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                  出典: 沖縄県教育委員会「第４号様式　調査書」
+                </a>
+              </div>
             </div>
             <p className="mt-4 text-xs text-slate-500">
               ※ いずれも記載事項（様式）の整理であり、入試の合否判定に使う内申点（調査書点）の
