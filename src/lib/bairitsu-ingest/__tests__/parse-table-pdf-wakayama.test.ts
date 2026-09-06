@@ -1,6 +1,7 @@
-import { parseTablePdfPageRows, assembleCompetitionRateRows, normalizeExtractedText, type PdfPageGeometry, type TableColumnLayout } from '../parse-table-pdf';
+import { normalizeExtractedText, type PdfPageGeometry } from '../parse-table-pdf';
 import { WAKAYAMA_COMPETITION_RATES } from '@/data/competition-rates/wakayama';
 import wakayamaR8Geometry from '../__fixtures__/wakayama-r8-geometry.json';
+import { parseWakayama } from '../parsers/wakayama';
 
 /**
  * T-Y11B 段階2-b: wakayama(和歌山県)のR8倍率パーサ検証テスト。全1頁・ibaraki型（結合セル・
@@ -42,66 +43,14 @@ import wakayamaR8Geometry from '../__fixtures__/wakayama-r8-geometry.json';
  * quota=0の偽レコードとして`assembleCompetitionRateRows`のNaNチェックを素通りしてしまう
  * （65件と過剰計上・8件の偽レコードが混入）。空欄と真の0を区別できないこの関数の限界に
  * 対し、呼び出し側で`quota>0`を明示的な不変条件として追加要求することで解決した。
+ *
+ * ⚠️2026-09-06(T-Y11E E-1): パース本体は`../parsers/wakayama.ts`の`parseWakayama()`へ純関数と
+ * して抽出済み（レジストリ`registry.ts`から県コード経由で呼べる）。このテストはレジストリ経由でも
+ * 同じ結果が出ることを確認する回帰テストとして継続する。
  */
-const WAKAYAMA_LAYOUT: TableColumnLayout = {
-  // 0学校名,1学科名,2学級数,3定員,4内定者数,5全国枠1,6A(quota),7B,8C,9全国枠2,10rate1,11D,12E,13全国枠3,14rate2(finalRate)
-  boundaries: [83, 127, 204, 225, 255, 270, 296, 318, 341, 366, 386, 417, 441, 464, 487, 512],
-  fullLineX0Max: 100,
-  roles: { schoolName: 0, department: 1, quota: 6, finalApplicants: 12, finalRate: 14 },
-  extraColumns: { d: 11 },
-};
-
-/** PDFは全角括弧で印字するが、既存データは括弧をすべて半角で統一する県固有の表記慣行を持つ。
- *  脚注番号(*1〜*5)も学科名の末尾に連結印字されるため、既存データに合わせて除去する。 */
-function toHalfWidthParens(s: string): string {
-  return s
-    .replace(/（/g, '(')
-    .replace(/）/g, ')')
-    .replace(/\*\d+$/, '');
-}
-
-/** くくり募集3組: 主課程行にのみ数値が乗り、内数コース名は別の数値を持たない行に分裂する。 */
-const KUKURI_OVERRIDE = new Map<string, string>([
-  ['有田中央|105|60', '総合学科(総合・福祉)'],
-  ['南部|97|55', '食と農園科(園芸・加工流通・調理)'],
-  ['串本古座|111|48', '未来創造学科(宇宙探究・地域探究/文理探究)'],
-]);
-
-interface ParsedRow {
-  schoolName: string;
-  department: string;
-  quota: number;
-  finalApplicants: number;
-  finalRate: number;
-}
-
 describe('bairitsu-ingest parse-table-pdf 罫線+結合セル組み立て (wakayama R8 実データ検証・quota=A/finalApplicants=D+E)', () => {
   const geometries = wakayamaR8Geometry as unknown as PdfPageGeometry[];
-
-  const rawRows = geometries.map((geom) => {
-    const rows = parseTablePdfPageRows(geom, WAKAYAMA_LAYOUT);
-    return rows.map((r) => ({
-      ...r,
-      applicantsText: String(Number(r.applicantsText.replace(/,/g, '') || 0) + Number(r.extra.d.replace(/,/g, '') || 0)),
-    }));
-  });
-
-  const assembled = assembleCompetitionRateRows(rawRows, '合計', {
-    excludeRow: (department) => department === '計' || department.includes('合計'),
-  }).filter((r) => r.quota > 0);
-  // ⚠️Number('')は0(finite)を返すため、内部進学専用行やくくり募集の内数コース行(数値が
-  // 一切乗らない)がquota=0のまま素通りする。`assembleCompetitionRateRows`のNaNチェックは
-  // 空欄と真の0を区別できないため、quota>0を明示的な不変条件として追加で要求する。
-
-  let lastNonBranchSchool = '';
-  const parsed: ParsedRow[] = assembled.map((r) => {
-    const branchMatch = /^\((.+)\)$/.exec(r.schoolName);
-    const schoolName = branchMatch ? `${lastNonBranchSchool}(${branchMatch[1]})` : r.schoolName;
-    if (!branchMatch) lastNonBranchSchool = schoolName;
-    const department = toHalfWidthParens(r.department);
-    const override = KUKURI_OVERRIDE.get(`${schoolName}|${r.quota}|${r.finalApplicants}`);
-    return { schoolName, department: override ?? department, quota: r.quota, finalApplicants: r.finalApplicants, finalRate: r.finalRate };
-  });
+  const parsed = parseWakayama(geometries);
 
   const expectedR8Records = WAKAYAMA_COMPETITION_RATES.records.filter((r) => r.fiscalYear === undefined);
 

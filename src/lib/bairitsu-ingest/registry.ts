@@ -15,6 +15,7 @@ import { parseShimane } from './parsers/shimane';
 import { parseNara } from './parsers/nara';
 import { parseKyoto } from './parsers/kyoto';
 import { parseHiroshima } from './parsers/hiroshima';
+import { parseWakayama } from './parsers/wakayama';
 
 /**
  * T-Y11E E-1: 県コード → パーサ関数 のレジストリ。
@@ -47,6 +48,7 @@ export const PREFECTURE_PARSER_REGISTRY: Partial<Record<string, PrefectureParser
   nara: parseNara,
   kyoto: parseKyoto,
   hiroshima: parseHiroshima,
+  wakayama: parseWakayama,
 };
 
 export function getPrefectureParser(prefectureCode: string): PrefectureParser | undefined {
