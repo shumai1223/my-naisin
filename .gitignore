@@ -130,3 +130,7 @@ scripts/meeting-copilot/test-results.json
 # T-Y11B 段階2-c: ダウンロードした一次資料PDF・レンダリング後のPNG（著作物・容量とも非コミット。
 # 再取得可能・キューのメタデータのみops/state/bairitsu-vision-queue.jsonでコミットする）
 ops/state/bairitsu-vision-queue/
+
+# T-Y11E E-2: A-2がchangedと判定した県のPDF本文アーカイブ（著作物・容量とも非コミット。
+# 再取得可能・台帳のみops/raw/bairitsu-pdf-archive-manifest.jsonでコミットする）
+ops/raw/bairitsu-pdf-archive/

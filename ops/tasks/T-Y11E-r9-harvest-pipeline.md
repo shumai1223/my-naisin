@@ -81,10 +81,23 @@ scripts/bairitsu-ingest/  →  extract-pdf-geometry.py  ただ1本
       可能性が高い（ページ自体は固定でもファイル名にr8/r9等の年度が入るパターンが多数）。
       実取得時はURLをそのまま叩くのではなく、まずページ側（docTitleに記載のハブページ等）を
       確認してから該当年度のPDFリンクを探す設計にすること
-- [ ] 実際の定期取得（HTTP GET・PDF保存・変化検知）を実装する
-- [ ] ⚠️ **間隔900ms以上・UAを名乗る・robots.txtを尊重**（hyogoは既知の拒否県＝対象外）
-- [ ] ⚠️ **1県1日1回まで。** 教委のサーバに負荷をかけない
-- [ ] 取得したPDFを**保存する**（★教委は旧年度を消す。18パターン全404の実績あり）
+- [x] 変化検知 → 実取得 → PDF保存 の一連を実装する
+      ✅2026-09-06完了。変化検知自体はT-Y11 A-2（`scripts/check-competition-rate-updates.mjs`・
+      2026-09-01実装済み・HEADのみでヘッダフィンガープリント比較・追加のネットワーク負荷なし）が
+      既に担っている。E-2の残りだった「実際にPDF本文を保存する」部分を
+      `scripts/bairitsu-ingest/archive-changed-pdfs.mjs`として新設し、A-2の`changed`判定に
+      相乗りする形にした（**追加のポーリングは一切行わない**＝相手サーバへの負荷は増えない）。
+      純関数は`src/lib/bairitsu-pdf-archive.ts`に分離しjest7件で検証済み。ドライラン実施し
+      changed該当県0件（現時点でR9未公表のため正常）でネットワーク呼び出しが発生しないことを
+      確認済み。実際の保存が発火するのはR9公表後（1〜2月頃）にA-2が変化を検知した時点
+- [x] ⚠️ **間隔900ms以上・UAを名乗る・robots.txtを尊重**（hyogoは既知の拒否県＝対象外）
+      ✅archive-changed-pdfs.mjsもA-2と同じ作法（REQUEST_INTERVAL_MS=900・UA明記・
+      robots.txt再確認）を踏襲
+- [x] ⚠️ **1県1日1回まで。** 教委のサーバに負荷をかけない
+      ✅新規ポーリングを追加せずA-2の既存24時間サイクルに相乗りする設計のため自動的に満たす
+- [x] 取得したPDFを**保存する**（★教委は旧年度を消す。18パターン全404の実績あり）
+      ✅`ops/raw/bairitsu-pdf-archive/<pref>/<sha256>.pdf`に保存（.gitignore登録・
+      台帳`ops/raw/bairitsu-pdf-archive-manifest.json`のみコミット。詳細は上記1項目目）
 
 ## E-3 変化検知
 

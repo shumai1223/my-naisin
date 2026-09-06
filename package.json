@@ -23,6 +23,8 @@
     "check:competition-links": "node scripts/check-competition-rate-links.mjs",
     "check:competition-updates": "node scripts/check-competition-rate-updates.mjs",
     "bairitsu:queue-vision-review": "node scripts/bairitsu-ingest/queue-vision-review.mjs",
+    "bairitsu:build-source-manifest": "node scripts/bairitsu-ingest/build-source-url-manifest.mjs",
+    "bairitsu:archive-changed-pdfs": "node scripts/bairitsu-ingest/archive-changed-pdfs.mjs",
     "check:click-fraud": "node scripts/check-click-fraud-burst.mjs",
     "check:click-ratio": "npx tsx scripts/check-click-ratio-anomaly.ts",
     "check:stats": "npx tsx scripts/stats-distribution-audit.ts",
