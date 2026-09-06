@@ -13,6 +13,7 @@ import nagasakiR8Geometry from '../__fixtures__/nagasaki-r8-geometry.json';
 import saitamaR8Geometry from '../__fixtures__/saitama-r8-geometry.json';
 import gunmaR8Geometry from '../__fixtures__/gunma-r8-geometry.json';
 import shimaneR8Geometry from '../__fixtures__/shimane-r8-geometry.json';
+import naraR8Geometry from '../__fixtures__/nara-r8-geometry.json';
 import { TOYAMA_COMPETITION_RATES } from '@/data/competition-rates/toyama';
 import { AOMORI_COMPETITION_RATES } from '@/data/competition-rates/aomori';
 import { IWATE_COMPETITION_RATES } from '@/data/competition-rates/iwate';
@@ -26,6 +27,7 @@ import { NAGASAKI_COMPETITION_RATES } from '@/data/competition-rates/nagasaki';
 import { SAITAMA_COMPETITION_RATES } from '@/data/competition-rates/saitama';
 import { GUNMA_COMPETITION_RATES } from '@/data/competition-rates/gunma';
 import { SHIMANE_COMPETITION_RATES } from '@/data/competition-rates/shimane';
+import { NARA_COMPETITION_RATES } from '@/data/competition-rates/nara';
 
 /**
  * T-Y11E E-1: レジストリの不変条件テスト。
@@ -245,7 +247,23 @@ describe('bairitsu-ingest registry（T-Y11E E-1）', () => {
     );
   });
 
-  it('レジストリに登録済みの県コード一覧は現時点でtoyama/aomori/iwate/fukui/kagawa/ehime/chiba/yamanashi/miyagi/nagasaki/saitama/gunma/shimaneのみ（1県ずつ移設する方針・追加時はここも更新）', () => {
-    expect(Object.keys(PREFECTURE_PARSER_REGISTRY)).toEqual(['toyama', 'aomori', 'iwate', 'fukui', 'kagawa', 'ehime', 'chiba', 'yamanashi', 'miyagi', 'nagasaki', 'saitama', 'gunma', 'shimane']);
+  it('naraのパーサが登録されており、既存の手作業データと完全一致する結果を返す', () => {
+    const parser = getPrefectureParser('nara');
+    expect(parser).toBeDefined();
+    const parsed = parser!(naraR8Geometry as PdfPageGeometry[]);
+    const expectedR8Records = NARA_COMPETITION_RATES.records.filter((r) => r.fiscalYear === undefined);
+    expect(parsed).toEqual(
+      expectedR8Records.map((e) => ({
+        schoolName: e.schoolName,
+        department: e.department,
+        quota: e.quota,
+        finalApplicants: e.finalApplicants,
+        finalRate: e.finalRate,
+      }))
+    );
+  });
+
+  it('レジストリに登録済みの県コード一覧は現時点でtoyama/aomori/iwate/fukui/kagawa/ehime/chiba/yamanashi/miyagi/nagasaki/saitama/gunma/shimane/naraのみ（1県ずつ移設する方針・追加時はここも更新）', () => {
+    expect(Object.keys(PREFECTURE_PARSER_REGISTRY)).toEqual(['toyama', 'aomori', 'iwate', 'fukui', 'kagawa', 'ehime', 'chiba', 'yamanashi', 'miyagi', 'nagasaki', 'saitama', 'gunma', 'shimane', 'nara']);
   });
 });

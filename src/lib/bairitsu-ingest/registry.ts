@@ -12,6 +12,7 @@ import { parseNagasaki } from './parsers/nagasaki';
 import { parseSaitama } from './parsers/saitama';
 import { parseGunma } from './parsers/gunma';
 import { parseShimane } from './parsers/shimane';
+import { parseNara } from './parsers/nara';
 
 /**
  * T-Y11E E-1: 県コード → パーサ関数 のレジストリ。
@@ -41,6 +42,7 @@ export const PREFECTURE_PARSER_REGISTRY: Partial<Record<string, PrefectureParser
   saitama: parseSaitama,
   gunma: parseGunma,
   shimane: parseShimane,
+  nara: parseNara,
 };
 
 export function getPrefectureParser(prefectureCode: string): PrefectureParser | undefined {
