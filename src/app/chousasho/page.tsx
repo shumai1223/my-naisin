@@ -537,6 +537,20 @@ export default function ChousashoPage() {
                   出典: 沖縄県教育委員会「第４号様式　調査書」
                 </a>
               </div>
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <div className="font-bold text-slate-800">青森県（「行動の記録」が独立せず総合所見に統合）</div>
+                <p className="mt-1 leading-relaxed text-slate-600">
+                  各教科の学習の記録・特別活動等の記録（部活動・地域クラブ活動等を含む）・資格
+                  特技・総合的な学習の時間の記録・欠席の状況・健康等に関する特記すべき事項という
+                  構成です。<strong>国の指導要録標準10区分に相当する「行動の記録」という独立項目
+                  が存在せず、行動に関する評価は総合所見の自由記述欄に統合</strong>されています。
+                  また「特別の教科　道徳」の評価は合否判定に使わないため記入しないとの明記も
+                  ありました。
+                </p>
+                <a href="https://www.pref.aomori.lg.jp/soshiki/kyoiku/e-gakyo/files/nyuugakusyasenbatsuyoukou2026.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                  出典: 青森県教育委員会「令和8年度青森県立高等学校入学者選抜要項」
+                </a>
+              </div>
             </div>
             <p className="mt-4 text-xs text-slate-500">
               ※ いずれも記載事項（様式）の整理であり、入試の合否判定に使う内申点（調査書点）の
