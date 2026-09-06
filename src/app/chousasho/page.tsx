@@ -190,6 +190,18 @@ export default function ChousashoPage() {
                   出典: 東京都教育委員会「令和8年度東京都立高等学校入学者選抜の調査書の作成について」
                 </a>
               </div>
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <div className="font-bold text-slate-800">大阪府（オンライン出願・令和8年度入試）</div>
+                <p className="mt-1 leading-relaxed text-slate-600">
+                  紙の様式ではなく、中学校長が府教育委員会指定の「調査書作成ソフト」でデータを作成し
+                  オンライン出願システムに登録する方式。「活動/行動の記録」欄は他県のような固定区分では
+                  なく単一の自由記述欄で、「項目の立て方及び数については、特に定めていません」と
+                  明記されています（学校ごとに項目を自由に設定）。
+                </p>
+                <a href="https://www.pref.osaka.lg.jp/documents/118149/40_r08_tebiki_tyousasyotou.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                  出典: 大阪府教育委員会「調査書情報、成績一覧表及び推薦書情報（手引き）」
+                </a>
+              </div>
             </div>
             <p className="mt-4 text-xs text-slate-500">
               ※ いずれも記載事項（様式）の整理であり、入試の合否判定に使う内申点（調査書点）の
