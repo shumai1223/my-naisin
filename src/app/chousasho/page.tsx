@@ -408,6 +408,18 @@ export default function ChousashoPage() {
                   出典: 広島県教育委員会「様式第15号　調査書（秋季入学のための選抜）」
                 </a>
               </div>
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <div className="font-bold text-slate-800">山口県（「学習及び行動の記録集計表」を別文書化）</div>
+                <p className="mt-1 leading-relaxed text-slate-600">
+                  個人の調査書そのものの様式は公開されていませんが、実施大綱に「選抜の資料」として
+                  「調査書」とは別に<strong>「学習及び行動の記録集計表」</strong>という独立した書類が
+                  明記されています。これまで確認した県の中では初めての二文書構成です。また、
+                  「調査書の『学習の記録』と学力検査の成績は同等に取り扱う」との明記もありました。
+                </p>
+                <a href="https://www.pref.yamaguchi.lg.jp/uploaded/life/310448_591730_misc.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                  出典: 山口県教育委員会「令和8年度山口県公立高等学校入学者選抜〈実施大綱〉」
+                </a>
+              </div>
             </div>
             <p className="mt-4 text-xs text-slate-500">
               ※ いずれも記載事項（様式）の整理であり、入試の合否判定に使う内申点（調査書点）の
