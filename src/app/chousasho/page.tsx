@@ -576,6 +576,19 @@ export default function ChousashoPage() {
                   出典: 宮城県教育委員会「令和8年度宮城県公立高等学校入学者選抜要項」
                 </a>
               </div>
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <div className="font-bold text-slate-800">秋田県（換算式を反映した「調整評定値欄」）</div>
+                <p className="mt-1 leading-relaxed text-slate-600">
+                  個人の調査書はWEB出願システムで作成・提出され印刷様式は公開されていませんが、
+                  「調査書及び学習成績一覧表作成要領」に構成が明記されています。
+                  <strong>各教科の学習の記録に「調整評定値欄」があり、「5教科の小計に4教科の小計を
+                  2倍して加えた値とする」と選抜の換算式そのものを反映した集計欄が組み込まれて
+                  います</strong>。「行動の記録」に相当する独立項目は確認できませんでした。
+                </p>
+                <a href="https://www.pref.akita.lg.jp/uploads/public/archive_0000091551_00/%E4%BB%A4%E5%92%8C%EF%BC%98%E5%B9%B4%E5%BA%A6%E7%A7%8B%E7%94%B0%E7%9C%8C%E5%85%AC%E7%AB%8B%E9%AB%98%E7%AD%89%E5%AD%A6%E6%A0%A1%E5%85%A5%E5%AD%A6%E8%80%85%E9%81%B8%E6%8A%9C%E5%AE%9F%E6%96%BD%E8%A6%81%E9%A0%85_%EF%BC%88PDF%E7%89%88%EF%BC%89.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                  出典: 秋田県教育委員会「令和8年度秋田県公立高等学校入学者選抜実施要項」
+                </a>
+              </div>
             </div>
             <p className="mt-4 text-xs text-slate-500">
               ※ いずれも記載事項（様式）の整理であり、入試の合否判定に使う内申点（調査書点）の
