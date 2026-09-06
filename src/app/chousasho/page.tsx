@@ -684,6 +684,18 @@ export default function ChousashoPage() {
                   出典: 石川県教育委員会「令和8年度石川県公立高等学校入学者募集要綱」
                 </a>
               </div>
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <div className="font-bold text-slate-800">福井県（様式そのものは非公開・本文からの確認事項のみ）</div>
+                <p className="mt-1 leading-relaxed text-slate-600">
+                  調査書（様式第1号）そのものを掲載した様式集や記入要領は公式サイトに見当たら
+                  ず、実施要項の本文から「学習の記録」の「評定」・「観点別学習状況」・「身体上の
+                  特記事項」という項目の存在が確認できました。行動の記録・出欠の記録・特別活動
+                  の記録等の個別項目の有無までは実施要項本文からは確認できませんでした。
+                </p>
+                <a href="https://www.pref.fukui.lg.jp/doc/koukou/nyugaku/r08youkou_d/fil/R08youkou.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                  出典: 福井県教育委員会「令和8年度福井県立高等学校入学者選抜実施要項」
+                </a>
+              </div>
             </div>
             <p className="mt-4 text-xs text-slate-500">
               ※ いずれも記載事項（様式）の整理であり、入試の合否判定に使う内申点（調査書点）の
