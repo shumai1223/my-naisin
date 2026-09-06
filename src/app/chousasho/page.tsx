@@ -249,6 +249,18 @@ export default function ChousashoPage() {
                   出典: 北海道教育委員会「個人調査書（別記様式３）記入例」
                 </a>
               </div>
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <div className="font-bold text-slate-800">兵庫県（個人の調査書様式は非公開）</div>
+                <p className="mt-1 leading-relaxed text-slate-600">
+                  公表されている様式集には、個人の調査書そのものの様式は含まれていません。
+                  公開されているのは学校単位の評定人数分布表（様式1）と、評定判定が困難な
+                  例外ケース用の書類（様式2）のみで、個人の調査書はオンラインシステムへの
+                  直接入力で作成されるとみられます（大阪府と同系統の方式）。
+                </p>
+                <a href="https://www2.hyogo-c.ed.jp/hpe/koko/nyuushi/senbatsuyoukou_r8/" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                  出典: 兵庫県教育委員会「入学者選抜要綱・様式集」
+                </a>
+              </div>
             </div>
             <p className="mt-4 text-xs text-slate-500">
               ※ いずれも記載事項（様式）の整理であり、入試の合否判定に使う内申点（調査書点）の
