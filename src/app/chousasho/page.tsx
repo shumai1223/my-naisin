@@ -237,6 +237,18 @@ export default function ChousashoPage() {
                   出典: 愛媛県教育委員会「県立高等学校入学志願者調査書」様式
                 </a>
               </div>
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <div className="font-bold text-slate-800">北海道（個人調査書・別記様式3）</div>
+                <p className="mt-1 leading-relaxed text-slate-600">
+                  学籍の記録・各教科の学習の記録・総合的な学習の時間の記録・特別活動の記録に加え、
+                  「行動の記録」（基本的な生活習慣など10項目）は<strong>第3学年のみ</strong>を対象に
+                  記載。出欠の記録は学年別の欠席日数だけでなく「欠席の主な理由」まで記載する欄を
+                  持ち、確認した中で最も詳細な様式でした。
+                </p>
+                <a href="https://www.dokyoi.pref.hokkaido.lg.jp/fs/1/2/5/1/0/0/9/0/_/01-3_R8%E3%80%90%E8%A8%98%E5%85%A5%E4%BE%8B%E3%80%91%E5%88%A5%E8%A8%98%E6%A7%98%E5%BC%8F3%20%E5%80%8B%E4%BA%BA%E8%AA%BF%E6%9F%BB%E6%9B%B8.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                  出典: 北海道教育委員会「個人調査書（別記様式３）記入例」
+                </a>
+              </div>
             </div>
             <p className="mt-4 text-xs text-slate-500">
               ※ いずれも記載事項（様式）の整理であり、入試の合否判定に使う内申点（調査書点）の
