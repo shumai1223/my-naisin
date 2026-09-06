@@ -1,6 +1,7 @@
-import { groupCharsIntoRows, extractRowFields, assembleSimpleTableRows, type PdfPageGeometry, type GeneralColumnLayout } from '../parse-table-pdf';
+import { type PdfPageGeometry } from '../parse-table-pdf';
 import { YAMANASHI_COMPETITION_RATES } from '@/data/competition-rates/yamanashi';
 import yamanashiR8Geometry from '../__fixtures__/yamanashi-r8-geometry.json';
+import { parseYamanashi } from '../parsers/yamanashi';
 
 /**
  * T-Y11B 段階2-b: yamanashi(山梨県)のR8倍率パーサ検証テスト。tochigi型（学校名セルの結合が無い・
@@ -15,32 +16,14 @@ import yamanashiR8Geometry from '../__fixtures__/yamanashi-r8-geometry.json';
  * フィクスチャは令和8年度公表PDF（`yamanashi-r8.pdf`・全7頁のうち全日制後期募集の2頁分
  * [page index 1-2]）を`extract-pdf-geometry.py`で抽出した文字座標データ。2頁目は全日制課程計
  * 行より後（学科カテゴリ別の県全体集計表）を除外済み。
+ *
+ * ⚠️2026-09-06(T-Y11E E-1): パース本体は`../parsers/yamanashi.ts`の`parseYamanashi()`へ純関数として
+ * 抽出済み（レジストリ`registry.ts`から県コード経由で呼べる）。このテストはレジストリ経由でも
+ * 同じ結果が出ることを確認する回帰テストとして継続する。
  */
-const YAMANASHI_LAYOUT: GeneralColumnLayout = {
-  boundaries: [50, 100, 188, 210, 405, 428, 480, 515, 545],
-  // 列: 学校名,学科名,後期募集人員(=quota),志願変更等3列+2/19時点志願者数(未使用),
-  //     最終志願者数(帰国内数の括弧を除く先頭の数字だけを含む=finalApplicants),
-  //     帰国内数の残り+空白(未使用),倍率(帰国を除く=finalRate),前年同期倍率(未使用)
-  roles: { schoolName: 0, department: 1, quota: 2, finalApplicants: 4, finalRate: 6 },
-};
-
 describe('bairitsu-ingest parse-table-pdf 汎用carry-forward組み立て (yamanashi R8 実データ検証)', () => {
   const geometries = yamanashiR8Geometry as PdfPageGeometry[];
-  const allRowFields = geometries.flatMap((geom) =>
-    groupCharsIntoRows(geom.chars, 3.0).map((row) => extractRowFields(row.chars, YAMANASHI_LAYOUT))
-  );
-
-  const parsedFullwidthParens = assembleSimpleTableRows(allRowFields, {
-    // ⚠️「県立高校計」等の集計ラベルは学校名列/学科名列の境界をまたいで分裂することがある
-    // （nara型の教訓と同型）。既知の集計ラベルへの前方一致で判定する。
-    excludeRow: (schoolName, department) => {
-      if (department.trim() === '計') return true;
-      const combined = schoolName + department;
-      return ['県立高校計', '市立高校計', '全日制課程計'].some((marker) => combined.startsWith(marker));
-    },
-  });
-  // ⚠️既存データはokinawa/nara型と同じく学科名の括弧を半角で統一している。
-  const parsed = parsedFullwidthParens.map((r) => ({ ...r, department: r.department.replace(/（/g, '(').replace(/）/g, ')') }));
+  const parsed = parseYamanashi(geometries);
 
   const expectedR8Records = YAMANASHI_COMPETITION_RATES.records.filter((r) => r.fiscalYear === undefined);
 
