@@ -45,4 +45,16 @@ describe('FUKUI_EXAM_SCHEDULE', () => {
     expect(findScheduleEvent(FUKUI_EXAM_SCHEDULE, '令和99年度', '一般選抜学力検査')).toBeUndefined();
     expect(findScheduleEvent(FUKUI_EXAM_SCHEDULE, '令和8年度（2026年度）', '存在しない項目')).toBeUndefined();
   });
+
+  it('has 令和9年度 entries matching the published R9 calendar', () => {
+    const exam = findScheduleEvent(FUKUI_EXAM_SCHEDULE, '令和9年度（2027年度）', '一般選抜学力検査');
+    expect(exam?.startDate).toBe('2027-02-18');
+    expect(exam?.endDate).toBe('2027-02-19');
+
+    const result = findScheduleEvent(FUKUI_EXAM_SCHEDULE, '令和9年度（2027年度）', '一般入学者選抜合格者発表');
+    expect(result?.startDate).toBe('2027-03-03');
+
+    const application = findScheduleEvent(FUKUI_EXAM_SCHEDULE, '令和9年度（2027年度）', '一般選抜出願');
+    expect(application?.note).toContain('12:00');
+  });
 });
