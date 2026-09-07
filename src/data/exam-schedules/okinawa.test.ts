@@ -44,4 +44,13 @@ describe('OKINAWA_EXAM_SCHEDULE', () => {
     expect(findScheduleEvent(OKINAWA_EXAM_SCHEDULE, '令和99年度', '学力検査')).toBeUndefined();
     expect(findScheduleEvent(OKINAWA_EXAM_SCHEDULE, '令和8年度（2026年度）', '存在しない項目')).toBeUndefined();
   });
+
+  it('has 令和9年度 entries from the page labeled 【令和8年度実施】(execution-year naming quirk)', () => {
+    const exam = findScheduleEvent(OKINAWA_EXAM_SCHEDULE, '令和9年度（2027年度）', '学力検査');
+    expect(exam?.startDate).toBe('2027-03-03');
+    expect(exam?.endDate).toBe('2027-03-04');
+
+    const result = findScheduleEvent(OKINAWA_EXAM_SCHEDULE, '令和9年度（2027年度）', '合格発表');
+    expect(result?.startDate).toBe('2027-03-17');
+  });
 });
