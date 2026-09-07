@@ -330,7 +330,7 @@ p.2「学力検査」イ配点・p.3「2(5)選抜」イ(ｱ)を確認）で、�
 変更を検出した県は0件）。今後は他県のR9実施要項が新規公表され次第、随時追加していく
 （`src/data/snapshots/2027-r9/`は`"collecting"`のまま恒久的に開いておく）。24hの見積りに
 対し実測では1イテレーション数十分規模で完了。
-| 2 | **入試日程DBのR9更新**⚠️着手中(2026-09-08) | `exam-schedules` 47県すべて令和8を持つが、**令和9は23県のみ＝24県が未更新**（chiba/hokkaido/hyogo/ibaraki/kanagawa=既存5県＋saitama/osaka/nagano/yamaguchi/aomori/ehime/fukui/fukuoka/gifu/gunma/hiroshima/ishikawa/iwate/kagawa/kagoshima/kochi/kumamoto/kyoto=本イテレーション追加18県）。fukushimaは実施要綱10月上旬公表予定のため保留。kyotoはR9で選抜制度が変更されている（前期・中期・後期の3段階→前期・後期の2段階）。R9日程は4〜7月公表済みの県が多い | 10h |
+| 2 | **入試日程DBのR9更新**⚠️着手中(2026-09-08) | `exam-schedules` 47県すべて令和8を持つが、**令和9は24県のみ＝23県が未更新**（chiba/hokkaido/hyogo/ibaraki/kanagawa=既存5県＋saitama/osaka/nagano/yamaguchi/aomori/ehime/fukui/fukuoka/gifu/gunma/hiroshima/ishikawa/iwate/kagawa/kagoshima/kochi/kumamoto/kyoto/mie=本イテレーション追加19県）。fukushimaは実施要綱10月上旬公表予定のため保留。kyotoはR9で選抜制度が変更されている（前期・中期・後期の3段階→前期・後期の2段階）。R9日程は4〜7月公表済みの県が多い | 10h |
 
 **2026-09-07 saitama 1件目完了**: 一次資料「令和9年度埼玉県公立高等学校入学者選抜日程表」
 （`01nyusinittei_r09.pdf`・確定版・令和8年5月29日掲載・カレンダー形式1頁をRead toolで
@@ -494,6 +494,16 @@ pdftoppm+visionで転記）を確認したところ、**京都府の選抜制度
 検出・exam-system snapshot）でkyotoに着手する際はこの制度変更を必ず反映すること
 （まだkyotoは§5順序#1未着手＝saitama/osaka/kanagawa/nagano/yamaguchiの5県のみ完了
 済み）**。**23県目**。残り24県は次回以降。
+
+**2026-09-08 mie 19件目完了**: 「令和9年度三重県立高等学校入学者選抜実施日程」
+（`pref.mie.lg.jp/KOKOKYO/HP/m0204200392.htm`・令和8年1月29日掲載）をcurl取得の生
+HTMLのtableタグから直接転記（ビジョン解析不要）。このページは「実施日程の詳細は
+6月下旬に掲載予定」と明記しつつ検査実施日・合格者発表日のみ先行公表する形式で、
+出願書類受付・志願変更受付の期間はまだ記載が無いため推測で埋めず収録しない
+（Y-0継続・2026-09-03掲載の「前期選抜等実施日程」も学校別実施日一覧のみで出願期間
+なしと確認済み）。R8では前期・後期の合格発表が同一日（3/17）だったがR9は前期2/12・
+後期3/16と別日になっている（公表資料どおり転記・独自の統一はしない）。**24県目**。
+残り23県は次回以降。
 | 3 | **学力検査平均点R8** | 41県収録だが**R8は22県だけ**（令和7は37県ある）。19県はデータがあってR8未収録・6県は未着手。教委の結果概要は6〜8月公表 | 12h |
 | 4 | **定時制・通信制の残り26県** | `teiji-competition-rates` は**21県収録／26県未収録**（aichi akita aomori ehime fukui fukuoka fukushima hyogo ibaraki ishikawa iwate kagawa kochi mie miyazaki nara oita osaka saga saitama shiga tochigi toyama wakayama yamagata yamaguchi）。S1-3で所在分類済み | 20〜30h |
 | 5 | 旺文社PoC納品物v0 | R8一式CSV/JSON（配布可21,548件）＋R7→R8差分＋千葉型サンプル＋形式仕様1枚。noindex＋sitemap除外で作り置き | 8〜16h |
