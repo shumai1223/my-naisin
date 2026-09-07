@@ -45,4 +45,19 @@ describe('NIIGATA_EXAM_SCHEDULE', () => {
     expect(findScheduleEvent(NIIGATA_EXAM_SCHEDULE, '令和99年度', '一般選抜 学力検査等（本検査）')).toBeUndefined();
     expect(findScheduleEvent(NIIGATA_EXAM_SCHEDULE, '令和8年度（2026年度）', '存在しない項目')).toBeUndefined();
   });
+
+  it('令和9年度 reflects the abolition of 特色化選抜 (unified into 一般選抜, not fabricated)', () => {
+    const labels = NIIGATA_EXAM_SCHEDULE.years[1].events.map((e) => e.label);
+    expect(labels.some((l) => l.startsWith('一般選抜'))).toBe(true);
+    expect(labels.some((l) => l.startsWith('特色化選抜'))).toBe(false);
+
+    const exam = findScheduleEvent(NIIGATA_EXAM_SCHEDULE, '令和9年度（2027年度）', '一般選抜 本検査1日目');
+    expect(exam?.startDate).toBe('2027-02-25');
+
+    const result = findScheduleEvent(NIIGATA_EXAM_SCHEDULE, '令和9年度（2027年度）', '一般選抜 合格発表');
+    expect(result?.startDate).toBe('2027-03-08');
+
+    const secondRound = findScheduleEvent(NIIGATA_EXAM_SCHEDULE, '令和9年度（2027年度）', '欠員補充のための2次募集 合格発表');
+    expect(secondRound?.startDate).toBe('2027-03-16');
+  });
 });
