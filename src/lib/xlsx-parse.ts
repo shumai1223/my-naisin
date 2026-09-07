@@ -87,10 +87,14 @@ function parseSharedStrings(xml: string): string[] {
   const result: string[] = [];
   let m: RegExpExecArray | null;
   while ((m = siRegex.exec(xml))) {
+    // <rPh>...</rPh>はふりがな（ルビ）注釈で、内部に本文と紛らわしい<t>要素を持つ
+    // （例:「桜宮」の<rPh>に「サクラノミヤ」という<t>が入る）。先に除去してから
+    // 本文の<t>だけを拾わないと、表示テキストにふりがなが連結されてしまう。
+    const withoutRuby = m[1].replace(/<rPh[^>]*>[\s\S]*?<\/rPh>/g, '');
     let text = '';
     let tm: RegExpExecArray | null;
     tRegex.lastIndex = 0;
-    while ((tm = tRegex.exec(m[1]))) text += tm[1];
+    while ((tm = tRegex.exec(withoutRuby))) text += tm[1];
     result.push(decodeXmlEntities(text));
   }
   return result;

@@ -106,6 +106,30 @@ describe('parseXlsxFile（自前ZIP+xlsxリーダー）', () => {
     expect(wb.sheets.sheet1[2]).toEqual(['直接文字列']);
   });
 
+  it('<rPh>ふりがな注釈は本文に混ざらない（大阪府志願状況xlsxで実際に発生した不具合の再現）', () => {
+    const sharedStringsXml = `<?xml version="1.0" encoding="UTF-8"?>
+<sst xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" count="1" uniqueCount="1">
+<si><t>桜宮</t><rPh sb="0" eb="2"><t>サクラノミヤ</t></rPh><phoneticPr fontId="5"/></si>
+</sst>`;
+    const sheetXml = `<?xml version="1.0" encoding="UTF-8"?>
+<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">
+<sheetData>
+<row r="1"><c r="A1" t="s"><v>0</v></c></row>
+</sheetData>
+</worksheet>`;
+    tmpFile = path.join(os.tmpdir(), `xlsx-parse-test-ruby-${Date.now()}.xlsx`);
+    fs.writeFileSync(
+      tmpFile,
+      buildMinimalXlsx([
+        { name: 'xl/sharedStrings.xml', content: sharedStringsXml },
+        { name: 'xl/worksheets/sheet1.xml', content: sheetXml },
+      ])
+    );
+
+    const wb = parseXlsxFile(tmpFile);
+    expect(wb.sheets.sheet1[1]).toEqual(['桜宮']);
+  });
+
   it('sharedStrings.xmlが存在しない（数値のみの）xlsxも読める', () => {
     const sheetXml = `<?xml version="1.0" encoding="UTF-8"?>
 <worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">
