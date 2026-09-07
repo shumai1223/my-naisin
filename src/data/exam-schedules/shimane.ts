@@ -15,6 +15,13 @@
  *
  * 一般選抜の学力検査等(3/4-5)・合格発表(3/13)はWebSearchで得た独立した二次情報源と完全一致を
  * 確認済み（2026-09-04）。
+ *
+ * 令和9年度分（T-Y11F §5順序#2）: 「令和9年度島根県公立高等学校 入学者選抜関係日程」
+ * （https://www.pref.shimane.lg.jp/education/kyoiku/senbatsu/senbatsu_info/index.data/
+ * R9_nittei.pdf・1頁のカレンダー形式）を新規収録。R8では「実施要綱」内に組み込まれ
+ * 出願期間・志願変更受付期間まで記載されていたが、R9のこの単独「日程表」PDFには
+ * 願書受付期間・志願変更受付期間の記載が無く（該当する日の欄が全て空欄）、検査日・
+ * 通知日・発表日のみが確認できたため、推測で埋めず確実な項目のみ収録する（Y-0）。
  */
 import type { PrefectureExamScheduleFile } from '@/lib/exam-schedule';
 
@@ -39,6 +46,22 @@ export const SHIMANE_EXAM_SCHEDULE: PrefectureExamScheduleFile = {
         { label: '第2次募集 願書受付期間', startDate: '2026-03-16', endDate: '2026-03-17', note: '締切は15:00' },
         { label: '第2次募集 作文・面接検査等', startDate: '2026-03-19' },
         { label: '第2次募集 合格発表', startDate: '2026-03-24', note: '15:00' },
+      ],
+    },
+    {
+      fiscalYear: '令和9年度（2027年度）',
+      sourceUrl: 'https://www.pref.shimane.lg.jp/education/kyoiku/senbatsu/senbatsu_info/index.data/R9_nittei.pdf',
+      docTitle: '令和9年度島根県公立高等学校 入学者選抜関係日程',
+      fetchedAt: '2026-09-08',
+      events: [
+        { label: '特色選抜 学力検査日', startDate: '2027-01-20', note: '教育委員会作成の学力検査を実施する学校のみ' },
+        { label: '特色選抜 合格内定通知', startDate: '2027-01-28' },
+        { label: '一般選抜 学力検査', startDate: '2027-03-03', note: '国語・数学・社会・英語・理科' },
+        { label: '一般選抜 面接等', startDate: '2027-03-04' },
+        { label: '一般選抜 追検査', startDate: '2027-03-09' },
+        { label: '一般選抜等 合格発表', startDate: '2027-03-12', note: '第2次募集実施校公表も同日10:00' },
+        { label: '第2次募集 作文・面接検査等', startDate: '2027-03-18' },
+        { label: '第2次募集 合格発表', startDate: '2027-03-23', note: '15:00' },
       ],
     },
   ],
