@@ -12,6 +12,14 @@
  *
  * 一般入学者選抜の学力検査(3/4-5)・追加の選抜(3/10)・合格者発表(3/12)はWebSearchで得た独立した
  * 二次情報源（リセマム）と完全一致を確認済み（2026-09-04）。
+ *
+ * 令和9年度分（T-Y11F §5順序#2）: R8と同型の実施要綱本体はまだ確認できず、代わりに
+ * 「令和9年度鹿児島県公立高等学校入学者選抜日程」ページ（`pref.kagoshima.jp/ba05/
+ * kyoiku-bunka/school/koukou/nyushi/r4/r9nittei.html`・更新日2026年4月10日）をcurlで
+ * 取得した生HTMLから直接転記した（ビジョン解析不要）。このページには検査日・合格者発表日
+ * のみが記載され、出願期間・出願変更受付・願書提出等の手続き日程は含まれていないため、
+ * R8で収録していたそれらの項目はR9では推測で埋めず収録しない（Y-0）。「推薦入学者選抜等
+ * 合格者内定」もこのページには記載が無いため同様に見送った。
  */
 import type { PrefectureExamScheduleFile } from '@/lib/exam-schedule';
 
@@ -35,6 +43,20 @@ export const KAGOSHIMA_EXAM_SCHEDULE: PrefectureExamScheduleFile = {
         { label: '第二次入学者選抜 願書提出', startDate: '2026-03-17', endDate: '2026-03-18', note: '締切は正午必着' },
         { label: '第二次入学者選抜 面接等実施', startDate: '2026-03-19' },
         { label: '第二次入学者選抜 合格者発表', startDate: '2026-03-23', note: '午後2時以後' },
+      ],
+    },
+    {
+      fiscalYear: '令和9年度（2027年度）',
+      sourceUrl: 'https://www.pref.kagoshima.jp/ba05/kyoiku-bunka/school/koukou/nyushi/r4/r9nittei.html',
+      docTitle: '令和9年度鹿児島県公立高等学校入学者選抜日程',
+      fetchedAt: '2026-09-08',
+      events: [
+        { label: '推薦入学者選抜等 検査', startDate: '2027-02-02', note: '面接・作文等' },
+        { label: '一般入学者選抜 学力検査', startDate: '2027-03-03', endDate: '2027-03-04', note: '3/3は国語・理科・英語、3/4は社会・数学' },
+        { label: '一般入学者選抜 追加の選抜', startDate: '2027-03-09' },
+        { label: '一般入学者選抜 合格者発表', startDate: '2027-03-12', note: '第二次入学者選抜の実施校・実施学科・募集定員等も併せて発表' },
+        { label: '第二次入学者選抜 面接等実施', startDate: '2027-03-19' },
+        { label: '第二次入学者選抜 合格者発表', startDate: '2027-03-23' },
       ],
     },
   ],
