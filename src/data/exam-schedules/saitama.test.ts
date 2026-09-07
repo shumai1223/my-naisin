@@ -36,6 +36,17 @@ describe('SAITAMA_EXAM_SCHEDULE', () => {
     expect(result?.startDate).toBe('2026-03-06');
   });
 
+  it('finds the exam day, makeup exam, and result date by label for 令和9年度（2027年度）', () => {
+    const exam = findScheduleEvent(SAITAMA_EXAM_SCHEDULE, '令和9年度（2027年度）', '学力検査');
+    expect(exam?.startDate).toBe('2027-02-25');
+
+    const makeup = findScheduleEvent(SAITAMA_EXAM_SCHEDULE, '令和9年度（2027年度）', '追検査');
+    expect(makeup?.startDate).toBe('2027-03-02');
+
+    const result = findScheduleEvent(SAITAMA_EXAM_SCHEDULE, '令和9年度（2027年度）', '入学許可候補者発表');
+    expect(result?.startDate).toBe('2027-03-05');
+  });
+
   it('returns undefined for unknown fiscal year or label', () => {
     expect(findScheduleEvent(SAITAMA_EXAM_SCHEDULE, '令和99年度', '学力検査')).toBeUndefined();
     expect(findScheduleEvent(SAITAMA_EXAM_SCHEDULE, '令和8年度（2026年度）', '存在しない項目')).toBeUndefined();

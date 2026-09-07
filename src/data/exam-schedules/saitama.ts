@@ -14,7 +14,12 @@
  * 土日のため実質連続する営業日区間。startDate/endDateの期間表現で収録し、2/13が郵送限定である
  * 旨はnoteに残す。「志願先変更期間」も同様に2/18・2/19の連続2日。
  *
- * 令和9年度（2027年度）分はまだ公表されていない（2026-09-04時点）。
+ * 【2026-09-07追記・令和9年度分を追加】「令和9年度埼玉県公立高等学校入学者選抜日程表」
+ * （`documents/282982/01nyusinittei_r09.pdf`・確定版・令和8年5月29日掲載・Read toolで
+ * カレンダー形式の1頁を直接ビジョン確認）を新規収録。令和8年度分は「出願書類等の提出期間」
+ * として郵送・窓口を一体の期間で表現していたが、令和9年度分は「出願書類配達指定日（郵送の場合）」
+ * （単日）と「出願書類窓口提出期間（持参の場合）」（2日間）が別項目として掲載されており、
+ * 公表資料の項目名をそのまま転記した（独自の統合はしない）。
  */
 import type { PrefectureExamScheduleFile } from '@/lib/exam-schedule';
 
@@ -34,6 +39,24 @@ export const SAITAMA_EXAM_SCHEDULE: PrefectureExamScheduleFile = {
         { label: '実技検査（芸術系学科等）、面接（一部の学校）', startDate: '2026-02-27' },
         { label: '追検査', startDate: '2026-03-03', note: 'インフルエンザ罹患等やむを得ない事情により学力検査を受検できなかった志願者が対象' },
         { label: '入学許可候補者発表', startDate: '2026-03-06' },
+      ],
+    },
+    {
+      fiscalYear: '令和9年度（2027年度）',
+      sourceUrl: 'https://www.pref.saitama.lg.jp/documents/282982/01nyusinittei_r09.pdf',
+      docTitle: '令和9年度埼玉県公立高等学校入学者選抜日程表',
+      fetchedAt: '2026-09-07',
+      events: [
+        { label: '出願期間', startDate: '2027-01-26', endDate: '2027-02-03' },
+        { label: '出願書類配達指定日（郵送の場合）', startDate: '2027-02-12' },
+        { label: '出願書類窓口提出期間（持参の場合）', startDate: '2027-02-15', endDate: '2027-02-16', note: '16日（火）は12:00まで' },
+        { label: '志願先変更期間', startDate: '2027-02-17', endDate: '2027-02-18', note: '18日（木）は16:00まで' },
+        { label: '学力検査', startDate: '2027-02-25' },
+        { label: '面接', startDate: '2027-02-26' },
+        { label: '特色検査（一部の学校）', startDate: '2027-03-01', note: '2月26日に実施する場合もある' },
+        { label: '追検査', startDate: '2027-03-02' },
+        { label: '入学許可候補者発表', startDate: '2027-03-05', note: '9:00' },
+        { label: '欠員補充開始', startDate: '2027-03-16' },
       ],
     },
   ],
