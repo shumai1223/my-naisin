@@ -37,4 +37,12 @@ describe('HIROSHIMA_EXAM_SCHEDULE', () => {
     expect(findScheduleEvent(HIROSHIMA_EXAM_SCHEDULE, '令和99年度', '学力検査・自己表現等')).toBeUndefined();
     expect(findScheduleEvent(HIROSHIMA_EXAM_SCHEDULE, '令和8年度（2026年度）', '存在しない項目')).toBeUndefined();
   });
+
+  it('has 令和9年度 entries matching the published R9 schedule PDF', () => {
+    const exam = findScheduleEvent(HIROSHIMA_EXAM_SCHEDULE, '令和9年度（2027年度）', '学力検査・自己表現等');
+    expect(exam).toEqual({ label: '学力検査・自己表現等', startDate: '2027-02-24', endDate: '2027-02-26' });
+
+    const result = findScheduleEvent(HIROSHIMA_EXAM_SCHEDULE, '令和9年度（2027年度）', '合格者発表');
+    expect(result?.startDate).toBe('2027-03-08');
+  });
 });

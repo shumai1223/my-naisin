@@ -17,6 +17,15 @@
  * 「全日制の課程・定時制の課程・フレキシブル課程」の一次選抜（主要トラック）を収録。
  * 二次選抜（3月12日以降）・通信制課程・連携型中高一貫教育選抜は対象生徒数が少なく
  * スコープ外とする。
+ *
+ * 令和9年度分（T-Y11F §5順序#2）: 「公立高等学校日程（広島叡智学園高等学校を除く。）」
+ * （https://www.pref.hiroshima.lg.jp/uploaded/attachment/666905.pdf・1頁・66KBの
+ * 日程専用PDF。R8の184頁実施要項本文とは別に、R9は日程だけを抜粋した軽量版が単独で
+ * 公表されていた）をpdftoppm+visionで転記。同PDFは「一次選抜（併設型高等学校を除く。）」の
+ * 表に【参考】令和8年度選抜の列を併記しており、既存の令和8年度分の全項目と完全一致する
+ * ことを一次資料側からも再確認できた（クロスバリデーション）。併設型高等学校向けの
+ * 一次選抜・二次選抜・連携型中高一貫教育に関する選抜・通信制の課程・秋季入学のための選抜は
+ * R8と同じ方針で対象外（主要トラックのみ収録）。
  */
 import type { PrefectureExamScheduleFile } from '@/lib/exam-schedule';
 
@@ -36,6 +45,21 @@ export const HIROSHIMA_EXAM_SCHEDULE: PrefectureExamScheduleFile = {
         { label: '学力検査・自己表現等', startDate: '2026-02-25', endDate: '2026-02-27' },
         { label: '追検査', startDate: '2026-03-04' },
         { label: '合格者発表', startDate: '2026-03-09' },
+      ],
+    },
+    {
+      fiscalYear: '令和9年度（2027年度）',
+      sourceUrl: 'https://www.pref.hiroshima.lg.jp/uploaded/attachment/666905.pdf',
+      docTitle: '令和9年度広島県公立高等学校入学者選抜日程（一次選抜・全日制／定時制／フレキシブル課程）',
+      fetchedAt: '2026-09-08',
+      events: [
+        { label: '出願登録（志願者登録・中学校確認登録）', startDate: '2027-01-21', endDate: '2027-02-02', note: '2/2は16時まで' },
+        { label: '出願登録（高等学校確認登録）', startDate: '2027-02-03', endDate: '2027-02-08', note: '2/8は正午まで' },
+        { label: '志願変更', startDate: '2027-02-10', endDate: '2027-02-17', note: '2/17は正午まで' },
+        { label: '調査書等提出', startDate: '2027-02-10', endDate: '2027-02-18', note: '2/18は正午まで' },
+        { label: '学力検査・自己表現等', startDate: '2027-02-24', endDate: '2027-02-26' },
+        { label: '追検査', startDate: '2027-03-03' },
+        { label: '合格者発表', startDate: '2027-03-08' },
       ],
     },
   ],
