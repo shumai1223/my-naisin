@@ -43,6 +43,14 @@ describe('OSAKA_EXAM_SCHEDULE', () => {
     expect(registration?.endDate).toBe('2026-03-06');
   });
 
+  it('finds the exam day and announcement date by label for 令和9年度（2027年度）', () => {
+    const exam = findScheduleEvent(OSAKA_EXAM_SCHEDULE, '令和9年度（2027年度）', '学力検査等');
+    expect(exam?.startDate).toBe('2027-03-10');
+
+    const announce = findScheduleEvent(OSAKA_EXAM_SCHEDULE, '令和9年度（2027年度）', '合格発表');
+    expect(announce?.startDate).toBe('2027-03-18');
+  });
+
   it('returns undefined for unknown fiscal year or label', () => {
     expect(findScheduleEvent(OSAKA_EXAM_SCHEDULE, '令和99年度', '学力検査')).toBeUndefined();
     expect(findScheduleEvent(OSAKA_EXAM_SCHEDULE, '令和8年度（2026年度）', '存在しない項目')).toBeUndefined();

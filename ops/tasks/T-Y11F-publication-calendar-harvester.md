@@ -343,6 +343,14 @@ p.2「学力検査」イ配点・p.3「2(5)選抜」イ(ｱ)を確認）で、�
 着手前に質問ノートへ一言報告済み。既存の令和9年データ保有県（chiba/hokkaido/hyogo/
 ibaraki/kanagawa）に加え**6県目**。残り41県（osaka/nagano/yamaguchiを含む）は次回以降
 （1県ずつ検証しながら進める既存方針）。
+
+**2026-09-07 osaka 2件目完了**: 一次資料「令和9年度大阪府公立高等学校入学者選抜 日程表」
+（`03_r9_hs_nittei.pdf`・1頁・PDF内蔵テキスト層でRead toolから直接抽出可能）を新規収録。
+令和8年度分の一次ソースは詳細な手続き章（実施要項第7章・登録期間/受理期間の2段構造）
+だったが、今年入手できたのは1枚のサマリー日程表で、一般入学者選抜（全日制の課程）は
+単一の「出願期間」（3/3-3/5）として記載されている（2段構造の詳細章はR9では今回未発見の
+ため公表資料の項目名をそのまま転記）。学力検査等3/10・合格発表3/18。テスト追加済み。
+**7県目**。残り40県は次回以降。
 | 3 | **学力検査平均点R8** | 41県収録だが**R8は22県だけ**（令和7は37県ある）。19県はデータがあってR8未収録・6県は未着手。教委の結果概要は6〜8月公表 | 12h |
 | 4 | **定時制・通信制の残り26県** | `teiji-competition-rates` は**21県収録／26県未収録**（aichi akita aomori ehime fukui fukuoka fukushima hyogo ibaraki ishikawa iwate kagawa kochi mie miyazaki nara oita osaka saga saitama shiga tochigi toyama wakayama yamagata yamaguchi）。S1-3で所在分類済み | 20〜30h |
 | 5 | 旺文社PoC納品物v0 | R8一式CSV/JSON（配布可21,548件）＋R7→R8差分＋千葉型サンプル＋形式仕様1枚。noindex＋sitemap除外で作り置き | 8〜16h |
