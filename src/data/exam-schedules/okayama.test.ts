@@ -42,4 +42,15 @@ describe('OKAYAMA_EXAM_SCHEDULE', () => {
     expect(findScheduleEvent(OKAYAMA_EXAM_SCHEDULE, '令和99年度', '一般入学者選抜（全日制・定時制） 学力検査')).toBeUndefined();
     expect(findScheduleEvent(OKAYAMA_EXAM_SCHEDULE, '令和8年度（2026年度）', '存在しない項目')).toBeUndefined();
   });
+
+  it('has 令和9年度 entries matching the published R9 schedule notice (structure unchanged)', () => {
+    const exam = findScheduleEvent(OKAYAMA_EXAM_SCHEDULE, '令和9年度（2027年度）', '一般入学者選抜（全日制・定時制） 学力検査');
+    expect(exam?.startDate).toBe('2027-03-09');
+
+    const result = findScheduleEvent(OKAYAMA_EXAM_SCHEDULE, '令和9年度（2027年度）', '一般入学者選抜（全日制・定時制） 合格者の発表');
+    expect(result?.startDate).toBe('2027-03-17');
+
+    const special = findScheduleEvent(OKAYAMA_EXAM_SCHEDULE, '令和9年度（2027年度）', '特別入学者選抜 合格者の発表');
+    expect(special?.startDate).toBe('2027-03-17');
+  });
 });
