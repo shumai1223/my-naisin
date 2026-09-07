@@ -42,4 +42,15 @@ describe('AICHI_EXAM_SCHEDULE', () => {
     expect(findScheduleEvent(AICHI_EXAM_SCHEDULE, '令和99年度', '一般選抜 学力検査実施期日')).toBeUndefined();
     expect(findScheduleEvent(AICHI_EXAM_SCHEDULE, '令和8年度（2026年度）', '存在しない項目')).toBeUndefined();
   });
+
+  it('has 令和9年度 entries matching the published R9 schedule (案)', () => {
+    const exam = findScheduleEvent(AICHI_EXAM_SCHEDULE, '令和9年度（2027年度）', '一般選抜 学力検査実施期日');
+    expect(exam?.startDate).toBe('2027-02-24');
+
+    const result = findScheduleEvent(AICHI_EXAM_SCHEDULE, '令和9年度（2027年度）', '一般選抜 合格発表期日');
+    expect(result?.startDate).toBe('2027-03-08');
+
+    const recExam = findScheduleEvent(AICHI_EXAM_SCHEDULE, '令和9年度（2027年度）', '推薦選抜 合格発表期日');
+    expect(recExam?.startDate).toBe('2027-02-08');
+  });
 });

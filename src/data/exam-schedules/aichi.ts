@@ -17,6 +17,14 @@
  * 愛知県は選抜区分が「推薦選抜」「特色選抜」「一般選抜」等に分かれ日程も別々（他県のような
  * 単一の「一般入学者選抜」1本ではない）。本ファイルは主要な志願者数を占める「一般選抜」
  * （全日制課程(6)）を中心に、参考として「推薦選抜」（同(2)）も収録する。
+ *
+ * 令和9年度分（T-Y11F §5順序#2）: 「令和9年度愛知県公立高等学校入学者選抜実施日程（案）」
+ * （報告事項2・令和7年11月12日高等学校教育課・別紙）
+ * https://www.pref.aichi.jp/uploaded/attachment/592789.pdf
+ * このPDFもR8同型のフォントマッピング欠落があり、pdftoppm 150dpi+Read toolのビジョン
+ * 解析でp2-4を直接転記した。WebSearchで得た数値もあったが独立して原本ページを目視確認
+ * 済み。R8と同一の区分構成（推薦選抜・一般選抜）。タイトルに「（案）」とあり報告時点では
+ * 案だが、他県のR9資料も多くが「予定」表記のため区別せず収録する。
  */
 import type { PrefectureExamScheduleFile } from '@/lib/exam-schedule';
 
@@ -38,6 +46,23 @@ export const AICHI_EXAM_SCHEDULE: PrefectureExamScheduleFile = {
         { label: '一般選抜 面接実施期日（Aグループ）', startDate: '2026-02-26' },
         { label: '一般選抜 面接実施期日（Bグループ）', startDate: '2026-02-27' },
         { label: '一般選抜 合格発表期日', startDate: '2026-03-10' },
+      ],
+    },
+    {
+      fiscalYear: '令和9年度（2027年度）',
+      sourceUrl: 'https://www.pref.aichi.jp/uploaded/attachment/592789.pdf',
+      docTitle: '令和9年度愛知県公立高等学校入学者選抜実施日程（案）',
+      fetchedAt: '2026-09-08',
+      events: [
+        { label: '推薦選抜 出願期間', startDate: '2027-01-25', endDate: '2027-02-01' },
+        { label: '推薦選抜 面接実施期日', startDate: '2027-02-04', note: '音楽科は2/5も実施' },
+        { label: '推薦選抜 合格発表期日', startDate: '2027-02-08' },
+        { label: '一般選抜 出願期間', startDate: '2027-02-08', endDate: '2027-02-16' },
+        { label: '一般選抜 志願変更期日', startDate: '2027-02-17' },
+        { label: '一般選抜 学力検査実施期日', startDate: '2027-02-24' },
+        { label: '一般選抜 面接実施期日（Aグループ）', startDate: '2027-02-25' },
+        { label: '一般選抜 面接実施期日（Bグループ）', startDate: '2027-02-26' },
+        { label: '一般選抜 合格発表期日', startDate: '2027-03-08' },
       ],
     },
   ],
