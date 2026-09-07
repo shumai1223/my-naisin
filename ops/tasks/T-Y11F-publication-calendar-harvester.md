@@ -330,7 +330,7 @@ p.2「学力検査」イ配点・p.3「2(5)選抜」イ(ｱ)を確認）で、�
 変更を検出した県は0件）。今後は他県のR9実施要項が新規公表され次第、随時追加していく
 （`src/data/snapshots/2027-r9/`は`"collecting"`のまま恒久的に開いておく）。24hの見積りに
 対し実測では1イテレーション数十分規模で完了。
-| 2 | **入試日程DBのR9更新**⚠️着手中(2026-09-08) | `exam-schedules` 47県すべて令和8を持つが、**令和9は25県のみ＝22県が未更新**（chiba/hokkaido/hyogo/ibaraki/kanagawa=既存5県＋saitama/osaka/nagano/yamaguchi/aomori/ehime/fukui/fukuoka/gifu/gunma/hiroshima/ishikawa/iwate/kagawa/kagoshima/kochi/kumamoto/kyoto/mie/miyagi=本イテレーション追加20県）。fukushimaは実施要綱10月上旬公表予定のため保留。kyotoはR9で選抜制度が変更されている（前期・中期・後期の3段階→前期・後期の2段階）。R9日程は4〜7月公表済みの県が多い | 10h |
+| 2 | **入試日程DBのR9更新**⚠️着手中(2026-09-08) | `exam-schedules` 47県すべて令和8を持つが、**令和9は26県のみ＝21県が未更新**（chiba/hokkaido/hyogo/ibaraki/kanagawa=既存5県＋saitama/osaka/nagano/yamaguchi/aomori/ehime/fukui/fukuoka/gifu/gunma/hiroshima/ishikawa/iwate/kagawa/kagoshima/kochi/kumamoto/kyoto/mie/miyagi/miyazaki=本イテレーション追加21県）。fukushimaは実施要綱10月上旬公表予定のため保留。kyotoはR9で選抜制度が変更されている（前期・中期・後期の3段階→前期・後期の2段階）。R9日程は4〜7月公表済みの県が多い | 10h |
 
 **2026-09-07 saitama 1件目完了**: 一次資料「令和9年度埼玉県公立高等学校入学者選抜日程表」
 （`01nyusinittei_r09.pdf`・確定版・令和8年5月29日掲載・カレンダー形式1頁をRead toolで
@@ -513,6 +513,14 @@ HTMLのtableタグから直接転記（ビジョン解析不要）。このペ�
 （実施日・追試験日・合格発表日）のみ収録（Y-0継続）。既存のハブ監視インフラ
 （F-2/F-3）が実際に次イテレーションの調査時間を短縮する形で機能した最初の実例。
 **25県目**。残り22県は次回以降。
+
+**2026-09-08 miyazaki 21件目完了**: 「令和9年度県立高等学校生徒募集（令和9年春入学生）
+について」（`.../20260519170532.html`・更新日2026年8月6日）の本文「5.入学者選抜日程、
+その他」をcurl取得の生HTMLから直接転記（ビジョン解析不要）。同ページには出願期間等を
+含む「実施細目」が「令和8年10月上旬発表予定」と明記されておりまだ公表されていないため
+入学願書受付期間・志願変更受付期間は収録しない（Y-0継続）。通信制課程はR8と同じ方針で
+対象外。**26県目**。残り21県は次回以降。
+
 | 3 | **学力検査平均点R8** | 41県収録だが**R8は22県だけ**（令和7は37県ある）。19県はデータがあってR8未収録・6県は未着手。教委の結果概要は6〜8月公表 | 12h |
 | 4 | **定時制・通信制の残り26県** | `teiji-competition-rates` は**21県収録／26県未収録**（aichi akita aomori ehime fukui fukuoka fukushima hyogo ibaraki ishikawa iwate kagawa kochi mie miyazaki nara oita osaka saga saitama shiga tochigi toyama wakayama yamagata yamaguchi）。S1-3で所在分類済み | 20〜30h |
 | 5 | 旺文社PoC納品物v0 | R8一式CSV/JSON（配布可21,548件）＋R7→R8差分＋千葉型サンプル＋形式仕様1枚。noindex＋sitemap除外で作り置き | 8〜16h |
