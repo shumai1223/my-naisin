@@ -330,7 +330,7 @@ p.2「学力検査」イ配点・p.3「2(5)選抜」イ(ｱ)を確認）で、�
 変更を検出した県は0件）。今後は他県のR9実施要項が新規公表され次第、随時追加していく
 （`src/data/snapshots/2027-r9/`は`"collecting"`のまま恒久的に開いておく）。24hの見積りに
 対し実測では1イテレーション数十分規模で完了。
-| 2 | **入試日程DBのR9更新**⚠️着手中(2026-09-08) | `exam-schedules` 47県すべて令和8を持つが、**令和9は21県のみ＝26県が未更新**（chiba/hokkaido/hyogo/ibaraki/kanagawa=既存5県＋saitama/osaka/nagano/yamaguchi/aomori/ehime/fukui/fukuoka/gifu/gunma/hiroshima/ishikawa/iwate/kagawa/kagoshima/kochi=本イテレーション追加16県）。fukushimaは実施要綱10月上旬公表予定のため保留。R9日程は4〜7月公表済みの県が多い | 10h |
+| 2 | **入試日程DBのR9更新**⚠️着手中(2026-09-08) | `exam-schedules` 47県すべて令和8を持つが、**令和9は22県のみ＝25県が未更新**（chiba/hokkaido/hyogo/ibaraki/kanagawa=既存5県＋saitama/osaka/nagano/yamaguchi/aomori/ehime/fukui/fukuoka/gifu/gunma/hiroshima/ishikawa/iwate/kagawa/kagoshima/kochi/kumamoto=本イテレーション追加17県）。fukushimaは実施要綱10月上旬公表予定のため保留。R9日程は4〜7月公表済みの県が多い | 10h |
 
 **2026-09-07 saitama 1件目完了**: 一次資料「令和9年度埼玉県公立高等学校入学者選抜日程表」
 （`01nyusinittei_r09.pdf`・確定版・令和8年5月29日掲載・カレンダー形式1頁をRead toolで
@@ -471,6 +471,14 @@ HTMLから直接転記（ビジョン解析不要）。このページも検査�
 fable5-loop-protocolの新規項目を参照）。こうちフロンティア募集の出願期間が当初
 目視で1/6-1/7かと誤読しかけたが精密確認で1/5-1/8と判明する等、複数箇所を訂正できた。
 **21県目**。残り26県は次回以降。
+
+**2026-09-08 kumamoto 17件目完了**: R8と同名の「令和9年度（2027年度）熊本県立高等学校
+入学者選抜要項」（74頁）を新規収録。R8はp2-3に「主な日程」が集約されていたが、R9はp2
+前期（特色）・連携型選抜／p3国際バカロレア選抜／p4後期（一般）選抜・追検査という
+構成に変わっていたため、目次の前提を持たずp2から順にページを確認して該当箇所を特定
+した（既存の「一次ソースのページ番号は年度で変わりうる」教訓の実例が追加された）。
+p4はAdobe-Japan1マッピング欠落の警告が出たが表自体は正常にレンダリングされ問題なく
+転記できた。**22県目**。残り25県は次回以降。
 | 3 | **学力検査平均点R8** | 41県収録だが**R8は22県だけ**（令和7は37県ある）。19県はデータがあってR8未収録・6県は未着手。教委の結果概要は6〜8月公表 | 12h |
 | 4 | **定時制・通信制の残り26県** | `teiji-competition-rates` は**21県収録／26県未収録**（aichi akita aomori ehime fukui fukuoka fukushima hyogo ibaraki ishikawa iwate kagawa kochi mie miyazaki nara oita osaka saga saitama shiga tochigi toyama wakayama yamagata yamaguchi）。S1-3で所在分類済み | 20〜30h |
 | 5 | 旺文社PoC納品物v0 | R8一式CSV/JSON（配布可21,548件）＋R7→R8差分＋千葉型サンプル＋形式仕様1枚。noindex＋sitemap除外で作り置き | 8〜16h |
