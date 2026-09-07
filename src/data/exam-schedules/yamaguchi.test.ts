@@ -40,6 +40,14 @@ describe('YAMAGUCHI_EXAM_SCHEDULE', () => {
     expect(labels.some((l) => l.startsWith('第二次募集'))).toBe(true);
   });
 
+  it('finds the main (第一次募集) exam day and result date by label for 令和9年度（2027年度）', () => {
+    const exam = findScheduleEvent(YAMAGUCHI_EXAM_SCHEDULE, '令和9年度（2027年度）', '第一次募集 学力検査，面接等');
+    expect(exam?.startDate).toBe('2027-03-09');
+
+    const result = findScheduleEvent(YAMAGUCHI_EXAM_SCHEDULE, '令和9年度（2027年度）', '第一次募集 合格者発表及び通知');
+    expect(result?.startDate).toBe('2027-03-16');
+  });
+
   it('returns undefined for unknown fiscal year or label', () => {
     expect(findScheduleEvent(YAMAGUCHI_EXAM_SCHEDULE, '令和99年度', '第一次募集 学力検査，面接等')).toBeUndefined();
     expect(findScheduleEvent(YAMAGUCHI_EXAM_SCHEDULE, '令和8年度（2026年度）', '存在しない項目')).toBeUndefined();
