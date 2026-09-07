@@ -45,4 +45,16 @@ describe('NAGASAKI_EXAM_SCHEDULE', () => {
     expect(findScheduleEvent(NAGASAKI_EXAM_SCHEDULE, '令和99年度', '一般選抜 学力検査')).toBeUndefined();
     expect(findScheduleEvent(NAGASAKI_EXAM_SCHEDULE, '令和8年度（2026年度）', '存在しない項目')).toBeUndefined();
   });
+
+  it('has 令和9年度 entries matching the published R9 basic-policy schedule section', () => {
+    const exam = findScheduleEvent(NAGASAKI_EXAM_SCHEDULE, '令和9年度（2027年度）', '一般選抜 学力検査');
+    expect(exam?.startDate).toBe('2027-02-16');
+    expect(exam?.endDate).toBe('2027-02-17');
+
+    const result = findScheduleEvent(NAGASAKI_EXAM_SCHEDULE, '令和9年度（2027年度）', '一般選抜 合格者発表');
+    expect(result?.startDate).toBe('2027-03-04');
+
+    const challenge = findScheduleEvent(NAGASAKI_EXAM_SCHEDULE, '令和9年度（2027年度）', 'チャレンジ選抜 検査');
+    expect(challenge?.startDate).toBe('2027-03-11');
+  });
 });
