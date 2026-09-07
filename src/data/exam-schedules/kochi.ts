@@ -11,6 +11,13 @@
  * 4トラックを収録。
  *
  * B日程の検査実施日(3/18)はWebSearchで得た独立した二次情報源と完全一致を確認済み（2026-09-04）。
+ *
+ * 令和9年度分（T-Y11F §5順序#2）: 同名の「令和9年度 高知県公立高等学校入学者選抜の主な日程」
+ * （https://www.pref.kochi.lg.jp/doc/2026011400217/file_contents/r9_nittei0710.pdf・
+ * ToUnicode欠落）を一次資料とした。矢印の始点・終点がセル境界線ちょうどに接する形式のため、
+ * PIL(Python)でPDFレンダリング画像を500dpiにクロップ・2倍拡大して矢印の三角形先端が
+ * どの日付の境界線に接しているかをピクセル単位で確認した（1〜2行のズレが生じやすい形式・
+ * R8作成時の「月ごとに分けてクロップ」と同種の精密確認手法をさらに徹底した）。
  */
 import type { PrefectureExamScheduleFile } from '@/lib/exam-schedule';
 
@@ -37,6 +44,28 @@ export const KOCHI_EXAM_SCHEDULE: PrefectureExamScheduleFile = {
         { label: 'B日程 合格発表', startDate: '2026-03-23' },
         { label: 'C日程 実施期間', startDate: '2026-03-24', endDate: '2026-03-25', note: '出願期間は3/25まで' },
         { label: 'C日程 合格発表', startDate: '2026-03-26', note: '3/26までに発表' },
+      ],
+    },
+    {
+      fiscalYear: '令和9年度（2027年度）',
+      sourceUrl: 'https://www.pref.kochi.lg.jp/doc/2026011400217/file_contents/r9_nittei0710.pdf',
+      docTitle: '令和9年度 高知県公立高等学校入学者選抜の主な日程',
+      fetchedAt: '2026-09-08',
+      events: [
+        { label: 'こうちフロンティア募集 出願期間・調査書等提出期間', startDate: '2027-01-05', endDate: '2027-01-08', note: '1/8必着' },
+        { label: 'こうちフロンティア募集 検査実施期間', startDate: '2027-01-14', endDate: '2027-01-18', note: 'このうち学校が定める日に実施' },
+        { label: 'こうちフロンティア募集 合格発表', startDate: '2027-01-25' },
+        { label: 'A日程 出願期間', startDate: '2027-02-02', endDate: '2027-02-03' },
+        { label: 'A日程 志願先変更期間', startDate: '2027-02-08', endDate: '2027-02-10' },
+        { label: 'A日程 調査書等提出期間', startDate: '2027-02-11', endDate: '2027-02-14', note: '郵送または持参の場合は土日祝を除く' },
+        { label: 'A日程 検査実施日', startDate: '2027-03-03', endDate: '2027-03-04' },
+        { label: 'A日程 合格発表', startDate: '2027-03-12' },
+        { label: 'B日程 出願期間・調査書等提出期間', startDate: '2027-03-15', endDate: '2027-03-16', note: '調査書等は3/17まで' },
+        { label: 'B日程 志願先変更期間', startDate: '2027-03-17' },
+        { label: 'B日程 検査実施日', startDate: '2027-03-18' },
+        { label: 'B日程 合格発表', startDate: '2027-03-23' },
+        { label: 'C日程 実施期間', startDate: '2027-03-24', endDate: '2027-03-25', note: '出願期間は3/25まで' },
+        { label: 'C日程 合格発表', startDate: '2027-03-26', note: '3/26までに発表' },
       ],
     },
   ],

@@ -45,4 +45,16 @@ describe('KOCHI_EXAM_SCHEDULE', () => {
     expect(findScheduleEvent(KOCHI_EXAM_SCHEDULE, '令和99年度', 'B日程 検査実施日')).toBeUndefined();
     expect(findScheduleEvent(KOCHI_EXAM_SCHEDULE, '令和8年度（2026年度）', '存在しない項目')).toBeUndefined();
   });
+
+  it('has 令和9年度 entries matching the published R9 calendar (pixel-verified arrow endpoints)', () => {
+    const exam = findScheduleEvent(KOCHI_EXAM_SCHEDULE, '令和9年度（2027年度）', 'A日程 検査実施日');
+    expect(exam).toEqual({ label: 'A日程 検査実施日', startDate: '2027-03-03', endDate: '2027-03-04' });
+
+    const result = findScheduleEvent(KOCHI_EXAM_SCHEDULE, '令和9年度（2027年度）', 'B日程 合格発表');
+    expect(result?.startDate).toBe('2027-03-23');
+
+    const labels = KOCHI_EXAM_SCHEDULE.years[1].events.map((e) => e.label);
+    expect(labels.some((l) => l.startsWith('こうちフロンティア募集'))).toBe(true);
+    expect(labels.some((l) => l.startsWith('C日程'))).toBe(true);
+  });
 });
