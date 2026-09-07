@@ -44,4 +44,17 @@ describe('GUNMA_EXAM_SCHEDULE', () => {
     expect(findScheduleEvent(GUNMA_EXAM_SCHEDULE, '令和99年度', '学力検査等実施（本検査）')).toBeUndefined();
     expect(findScheduleEvent(GUNMA_EXAM_SCHEDULE, '令和8年度（2026年度）', '存在しない項目')).toBeUndefined();
   });
+
+  it('has 令和9年度 entries matching the published R9 schedule page', () => {
+    const exam = findScheduleEvent(GUNMA_EXAM_SCHEDULE, '令和9年度（2027年度）', '学力検査等実施（本検査）');
+    expect(exam).toEqual({
+      label: '学力検査等実施（本検査）',
+      startDate: '2027-02-16',
+      endDate: '2027-02-17',
+      note: '定時制課程選抜は2/16のみに実施',
+    });
+
+    const result = findScheduleEvent(GUNMA_EXAM_SCHEDULE, '令和9年度（2027年度）', '合格者発表');
+    expect(result?.startDate).toBe('2027-03-03');
+  });
 });
