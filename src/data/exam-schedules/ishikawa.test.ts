@@ -44,4 +44,13 @@ describe('ISHIKAWA_EXAM_SCHEDULE', () => {
     expect(findScheduleEvent(ISHIKAWA_EXAM_SCHEDULE, '令和99年度', '一般入学 学力検査等')).toBeUndefined();
     expect(findScheduleEvent(ISHIKAWA_EXAM_SCHEDULE, '令和8年度（2026年度）', '存在しない項目')).toBeUndefined();
   });
+
+  it('has 令和9年度 entries matching the published selection policy gazette', () => {
+    const exam = findScheduleEvent(ISHIKAWA_EXAM_SCHEDULE, '令和9年度（2027年度）', '一般入学 学力検査等');
+    expect(exam?.startDate).toBe('2027-03-09');
+    expect(exam?.endDate).toBe('2027-03-10');
+
+    const result = findScheduleEvent(ISHIKAWA_EXAM_SCHEDULE, '令和9年度（2027年度）', '合格者の発表');
+    expect(result?.startDate).toBe('2027-03-17');
+  });
 });
