@@ -44,4 +44,17 @@ describe('KUMAMOTO_EXAM_SCHEDULE', () => {
     expect(findScheduleEvent(KUMAMOTO_EXAM_SCHEDULE, '令和99年度', '後期（一般）選抜実施日')).toBeUndefined();
     expect(findScheduleEvent(KUMAMOTO_EXAM_SCHEDULE, '令和8年度（2026年度）', '存在しない項目')).toBeUndefined();
   });
+
+  it('has 令和9年度 entries matching the published R9 selection guideline (p2/p4)', () => {
+    const exam = findScheduleEvent(KUMAMOTO_EXAM_SCHEDULE, '令和9年度（2027年度）', '後期（一般）選抜実施日');
+    expect(exam).toEqual(
+      expect.objectContaining({ startDate: '2027-03-04', endDate: '2027-03-05' })
+    );
+
+    const result = findScheduleEvent(KUMAMOTO_EXAM_SCHEDULE, '令和9年度（2027年度）', '後期（一般）選抜 合格者発表');
+    expect(result?.startDate).toBe('2027-03-12');
+
+    const front = findScheduleEvent(KUMAMOTO_EXAM_SCHEDULE, '令和9年度（2027年度）', '前期（特色）選抜 合格者発表');
+    expect(front?.startDate).toBe('2027-03-12');
+  });
 });
