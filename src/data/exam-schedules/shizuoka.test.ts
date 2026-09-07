@@ -42,4 +42,17 @@ describe('SHIZUOKA_EXAM_SCHEDULE', () => {
     expect(findScheduleEvent(SHIZUOKA_EXAM_SCHEDULE, '令和99年度', '学力検査・面接など')).toBeUndefined();
     expect(findScheduleEvent(SHIZUOKA_EXAM_SCHEDULE, '令和8年度（2026年度）', '存在しない項目')).toBeUndefined();
   });
+
+  it('has 令和9年度 entries from the leaflet calendar (pixel-verified shading)', () => {
+    const exam = findScheduleEvent(SHIZUOKA_EXAM_SCHEDULE, '令和9年度（2027年度）', '学力検査・面接など');
+    expect(exam).toEqual(
+      expect.objectContaining({ startDate: '2027-03-03', endDate: '2027-03-04' })
+    );
+
+    const result = findScheduleEvent(SHIZUOKA_EXAM_SCHEDULE, '令和9年度（2027年度）', '合格者発表');
+    expect(result?.startDate).toBe('2027-03-12');
+
+    const secondaryResult = findScheduleEvent(SHIZUOKA_EXAM_SCHEDULE, '令和9年度（2027年度）', '再募集 合格者発表');
+    expect(secondaryResult?.startDate).toBe('2027-03-25');
+  });
 });
