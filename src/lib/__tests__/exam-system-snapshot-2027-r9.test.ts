@@ -46,6 +46,23 @@ describe('2027-r9 exam-system snapshot（T-Y11F §5順序#1 収集中スナッ�
     }
   });
 
+  test('osaka: 2026-r8と2027-r9で制度の核となる数値が一致する(実測で確認済みの「変更なし」)', () => {
+    const o2027 = snapshot.entries.find((e) => e.code === 'osaka')!;
+    const o2026 = snapshot2026.entries.find((e) => e.code === 'osaka')!;
+    expect(o2027.maxScore).toBe(o2026.maxScore);
+    expect(o2027.gradeMultipliers).toEqual(o2026.gradeMultipliers);
+    expect(o2027.coreMultiplier).toBe(o2026.coreMultiplier);
+    expect(o2027.practicalMultiplier).toBe(o2026.practicalMultiplier);
+    expect(o2027.reverseCalc).toEqual(o2026.reverseCalc);
+
+    const diffs = diffExamSystemSnapshots(snapshot2026, snapshot);
+    const osakaDiffs = diffs.filter((d) => d.prefectureCode === 'osaka');
+    expect(osakaDiffs.length).toBeGreaterThan(0);
+    for (const d of osakaDiffs) {
+      expect(d.status).toBe('unchanged');
+    }
+  });
+
   test('47県未満のためmeta.notYetPublishedNoteが「まだ公表されていない」旨を明記している(取得不能との2値化防止)', () => {
     expect(snapshot.meta.notYetPublishedNote).toContain('まだ公表されていない');
   });

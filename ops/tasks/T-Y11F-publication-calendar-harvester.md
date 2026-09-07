@@ -289,7 +289,17 @@ W-0 の鮮度を確認する（主食ドリフト4回の教訓）。
 全く同一の3択構造だったため、R8の値をそのまま引き継いで**`src/data/snapshots/2027-r9/
 exam-system.json`を新設・saitamaを「変更なし」でentries化**した。`diffExamSystemSnapshots()`を
 実データで実行し比較対象フィールドが全て`unchanged`と判定されることをテストで固定
-（`exam-system-snapshot-2027-r9.test.ts`・5テスト）。長野/大阪/神奈川/山口の4県は次回以降。
+（`exam-system-snapshot-2027-r9.test.ts`）。
+
+**2026-09-07 osaka 2件目完了**: 一次資料「大阪府公立高等学校入学者選抜の方法」
+（`documents/129117/r9_senbatsuhouhou_ippan_zennichi.pdf`・1頁・PDF内蔵テキスト層があり
+visionでなくRead toolで直接抽出できた）を確認。学力検査90点×5教科=450点満点・調査書9教科×
+各50点(3学年評定×6倍+2学年評定×2倍+1学年評定×2倍)=450点満点・学力検査:調査書比率をI〜Vの
+5タイプ(7:3〜3:7)から各校が選択し総合点900点満点、という記述が2025-r7エントリの確認内容
+（令和8年度分と完全一致）と完全に同一で**変更なし**。大阪府は全県共通の固定式のため埼玉の
+ような「学校裁量による代表値」の注記は不要で、一次資料の数値とgradeMultipliers/maxScore/
+osakaTypeCount/reverseCalcが直接一致（saitamaより検証確度が高い）。テストを6件に拡充。
+**2/5県完了**（saitama/osaka）。長野/神奈川/山口の3県は次回以降。
 | 2 | **入試日程DBのR9更新** | `exam-schedules` 47県すべて令和8を持つが、**令和9は7県のみ＝40県が未更新**。R9日程は4〜7月公表済みの県が多い | 10h |
 | 3 | **学力検査平均点R8** | 41県収録だが**R8は22県だけ**（令和7は37県ある）。19県はデータがあってR8未収録・6県は未着手。教委の結果概要は6〜8月公表 | 12h |
 | 4 | **定時制・通信制の残り26県** | `teiji-competition-rates` は**21県収録／26県未収録**（aichi akita aomori ehime fukui fukuoka fukushima hyogo ibaraki ishikawa iwate kagawa kochi mie miyazaki nara oita osaka saga saitama shiga tochigi toyama wakayama yamagata yamaguchi）。S1-3で所在分類済み | 20〜30h |
