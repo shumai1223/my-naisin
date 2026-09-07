@@ -72,22 +72,31 @@ Trendsピーク 2/1〜2/7週（日次 2/9=100・2/5=94・1/30=88）
       「R9は別URLで出るため現行watchでは検知不能・lastCheckedAt全件2026-08-31」→
       2026-09-07実行結果とfingerprintノイズの注記を追記済み
 
-## F-2 ハブ監視（★穴の本体）
+## F-2 ハブ監視（★穴の本体）✅2026-09-07
 
 **いまは「去年のPDFのURL」を見張っている。見張るべきは「年度をまたいで生き続ける一覧ページ」。**
 
-- [ ] `src/data/publication-hubs.ts` を新設。型は
-      `{ prefecture, hubUrl, hubKind, r8Evidence, r9Url|null, lastVerifiedAt }`
-- [ ] 種は既にある: `ops/raw/bairitsu-r8-source-urls.json`（47/47）＋`src/data/exam-schedules/`のHTML
-- [ ] ⚠️ **R9ハブが既に存在する県がある。** 埼玉 `f2208/nyushi/r9nyushijyoho.html`（8/31掲載）・
-      千葉 `koukou/r9/index.html`。**見つけたらそれを入れる**
-- [ ] 判明しない県は `null`。**推測でURLを作らない**（Y-0）
-- [ ] `scripts/bairitsu-ingest/watch-hubs.mjs`: ハブHTMLをGET → `href`抽出 →
+- [x] `src/data/publication-hubs.ts` を新設。型は
+      `{ prefecture, hubUrl, hubKind, r8Evidence, r9Url|null, lastVerifiedAt }` →
+      47県分を投入（r8Evidenceは`bairitsu-r8-source-urls.json`から機械転記・hubUrl/r9Urlは
+      判明した4県のみ実測値・残り43県はnull）
+- [x] 種は既にある: `ops/raw/bairitsu-r8-source-urls.json`（47/47）＋`src/data/exam-schedules/`のHTML
+- [x] ⚠️ **R9ハブが既に存在する県がある。** 埼玉 `f2208/nyushi/r9nyushijyoho.html`（8/31掲載）・
+      千葉 `koukou/r9/index.html`。**見つけたらそれを入れる** →
+      両方ともHEAD/GETで200確認済み。加えて鹿児島・宮城も実在確認しWebSearchで発見・投入
+- [x] 判明しない県は `null`。**推測でURLを作らない**（Y-0） →
+      43県はhubUrl/r9Url/lastVerifiedAtすべてnull・jestで恒久チェック
+- [x] `scripts/bairitsu-ingest/watch-hubs.mjs`: ハブHTMLをGET → `href`抽出 →
       `.pdf/.xlsx` かつ「募集/志願/出願/倍率/進路希望/合格」を含むリンク集合を
       前回スナップショット（`ops/state/hub-links/<pref>.json`）と差分 → 新規を `ops/state/hub-events.json` へ
-- [ ] 純関数は `src/lib/bairitsu-ingest/hub-diff.ts` に分離してjest
-- [ ] ⚠️ **本文PDFはここでは取らない。** 既存の `archive-changed-pdfs.mjs` へ渡す
-- [ ] 初回は千葉・埼玉・鹿児島・宮城の4県だけで実弾を通す
+      → 実装・実弾実行済み。⚠️**設計時の想定と異なり実測4/4県とも「.pdf/.xlsxへの直リンク」ではなく
+      「令和9年度」を含む年度ページ(.html)への1段リンクだった**ため、キーワードに「令和9年度」・
+      拡張子に`.html`を追加（季節限定の暫定対応・詳細はhub-diff.ts先頭コメント参照）
+- [x] 純関数は `src/lib/bairitsu-ingest/hub-diff.ts` に分離してjest → 18テストgreen
+- [x] ⚠️ **本文PDFはここでは取らない。** 既存の `archive-changed-pdfs.mjs` へ渡す →
+      watch-hubs.mjsはHTMLのGETのみ・本文PDF取得は一切行わない設計
+- [x] 初回は千葉・埼玉・鹿児島・宮城の4県だけで実弾を通す → 4県とも実行成功・4/4県でr9Url相当の
+      リンクを新規検知（初回ベースラインとしてops/state/hub-links/・hub-events.jsonに記録済み）
 
 ## F-3 受信ドリル（★実物のR9で試す・9/12に反証判定）
 

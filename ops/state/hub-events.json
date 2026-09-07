@@ -1,0 +1,46 @@
+{
+  "events": [
+    {
+      "prefecture": "chiba",
+      "href": "https://www.pref.chiba.lg.jp/kyouiku/shidou/nyuushi/koukou/r9/index.html",
+      "text": "令和9年度高等学校入学者選抜情報",
+      "detectedAt": "2026-09-07T07:26:45.837Z"
+    },
+    {
+      "prefecture": "saitama",
+      "href": "https://www.pref.saitama.lg.jp/f2207/nyugakusya-senbatsu/index.html",
+      "text": "高等学校入学者選抜に係る出願資格及び募集人員",
+      "detectedAt": "2026-09-07T07:26:45.837Z"
+    },
+    {
+      "prefecture": "saitama",
+      "href": "https://www.pref.saitama.lg.jp/f2208/nyushi/r9nyushijyoho.html",
+      "text": "令和9年度入試情報",
+      "detectedAt": "2026-09-07T07:26:45.837Z"
+    },
+    {
+      "prefecture": "miyagi",
+      "href": "https://www.pref.miyagi.jp/site/sub-jigyou/kyo-r9nyushi.html",
+      "text": "令和9年度入試（令和9年3月実施）",
+      "detectedAt": "2026-09-07T07:26:45.837Z"
+    },
+    {
+      "prefecture": "miyagi",
+      "href": "https://www.pref.miyagi.jp/site/sub-jigyou/zenkokubosyuu.html",
+      "text": "全国募集",
+      "detectedAt": "2026-09-07T07:26:45.837Z"
+    },
+    {
+      "prefecture": "kagoshima",
+      "href": "http://www.pref.kagoshima.jp/ba05/kyoiku-bunka/school/koukou/nyushi/r4/r9nittei.html",
+      "text": "令和9年度鹿児島県公立高等学校入学者選抜日程",
+      "detectedAt": "2026-09-07T07:26:45.837Z"
+    },
+    {
+      "prefecture": "kagoshima",
+      "href": "http://www.pref.kagoshima.jp/ba01/koukou02.html",
+      "text": "令和9年度高校入試情報",
+      "detectedAt": "2026-09-07T07:26:45.837Z"
+    }
+  ]
+}
