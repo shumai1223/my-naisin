@@ -43,6 +43,24 @@ describe('2025-r7 exam-system snapshot（N1-2 収集中スナップショット�
     }
   });
 
+  test('pdfHashは全45件取得済み・64桁16進のSHA-256形式(T-Y11F F-5 E-3-2・2026-09-07完了)', () => {
+    expect(snapshot.meta.pdfHashStatus).toBe('complete_45_of_45');
+    const withHash = snapshot.entries.filter((e) => e.pdfHash !== null && e.pdfHash !== undefined);
+    expect(withHash).toHaveLength(45);
+    for (const entry of withHash) {
+      expect(entry.pdfHash).toMatch(/^[0-9a-f]{64}$/);
+    }
+    const withoutHash = snapshot.entries.filter((e) => !e.pdfHash);
+    expect(withoutHash).toHaveLength(0);
+  });
+
+  test('現行URLが404でWayback経由取得したshiga/sagaはpdfHashNoteにアーカイブURLが明記されている', () => {
+    for (const code of ['shiga', 'saga']) {
+      const entry = snapshot.entries.find((e) => e.code === code)!;
+      expect(entry.pdfHashNote).toContain('web.archive.org');
+    }
+  });
+
   test('tokyo: 2026-r8と2025-r7で制度の核となる数値が一致する(実測で確認済みの「変更なし」)', () => {
     const t2025 = snapshot.entries.find((e) => e.code === 'tokyo')!;
     const t2026 = snapshot2026.entries.find((e) => e.code === 'tokyo')!;

@@ -163,13 +163,29 @@ Trendsピーク 2/1〜2/7週（日次 2/9=100・2/5=94・1/30=88）
       出たが実URLの直接特定に至らず**（miyagiは1件404で「WebSearch要約のURL捏造」既知の罠
       が再現）、`primaryUrl`フィールド自体を追加せず未確認のまま保留（Y-0）
 
-## F-5 確定パーサの残り＋E-3-2
+## F-5 確定パーサの残り＋E-3-2（一部完了2026-09-07）
 
-- [ ] osaka（xlsx）／kanagawa（20区分）／mie（2パターン）をレジストリ化 → 36/47 → 39/47
+- [x] ⚠️ osaka（xlsx）／kanagawa（20区分）／mie（2パターン）をレジストリ化 → 36/47 → 39/47 →
+      **着手前に`src/lib/bairitsu-ingest/registry.ts`とT-Y11E本文を確認したところ、この3県は
+      いずれも「xlsx直接パース等の別方式のため対象外」とT-Y11E E-1完了時(2026-09-06)に
+      既に明記済みだった**（`PREFECTURE_PARSER_REGISTRY`の型は`(geometries: PdfPageGeometry[])
+      => ParsedCompetitionRow[]`というPDFジオメトリ専用のシグネチャで、xlsxソースのosakaは
+      構造的に同じ型に収まらない）。36/47は既に確定した意図的な範囲であり「39/47」は
+      T-Y11Fの見積り時に現在のコード状態を確認せずに書かれた誤りだったと判明。無理に統一
+      せず、この項目はT-Y11Eの既存決定を追認して見送る（xlsx系統一パーサが必要になった
+      時点で別タスクとして起票する）
 - [ ] ビジョン5県（hokkaido/tokyo/aichi/miyazaki/yamaguchi・955件/37頁）は
       **R9の手順確認として1県だけ**。⚠️**全てR8収録済みなので新規データは0件。**
       37頁で14日は埋まらない。深追いしない
-- [ ] E-3-2（R7/R6 pdfHash後追い）: 数県試掘 → Wayback到達率を実測 → 続行/見送りを判定
+- [x] E-3-2（R7/R6 pdfHash後追い）: 数県試掘 → Wayback到達率を実測 → 続行/見送りを判定 →
+      **試掘(tokyo/chiba/osaka/fukui/kagoshima・R7+R6の計10件)が10/10到達**という強い結果
+      だったため、そのまま全件へ進めることに決定。**R7: 45/45件のpdfHash取得完了**
+      （直接URL43件・shiga/sagaの2件のみ現行URL404でWayback経由）。**R6: 44件中43件完了**
+      （直接URL42件・shigaはWayback経由・**hokkaidoのみarchive.org側が2回連続Internal
+      Server Errorのため今回は見送り**、別日再試行）。事前の懸念（大規模な一次資料収集
+      労働・Wayback個別調査が前提）は実際には過大で、URLが既にsnapshotに記録済みだった
+      ため単純な再取得+ハッシュ計算で済んだ。`src/lib/__tests__/exam-system-snapshot-
+      2025-r7.test.ts`・`-2024-r6.test.ts`に完了状態の恒久テストを追加
 
 ---
 

@@ -52,6 +52,23 @@ describe('2024-r6 exam-system snapshot（T-Y11 Task C 収集中スナップシ�
     }
   });
 
+  test('pdfHashは44件中43件取得済み(T-Y11F F-5 E-3-2・2026-09-07)・hokkaidoのみarchive.org不安定で見送り明記', () => {
+    expect(snapshot.meta.pdfHashStatus).toBe('partial_43_of_44');
+    const withHash = snapshot.entries.filter((e) => e.pdfHash !== null && e.pdfHash !== undefined);
+    expect(withHash).toHaveLength(43);
+    for (const entry of withHash) {
+      expect(entry.pdfHash).toMatch(/^[0-9a-f]{64}$/);
+    }
+    const hokkaido = snapshot.entries.find((e) => e.code === 'hokkaido')!;
+    expect(hokkaido.pdfHash).toBeNull();
+    expect(hokkaido.pdfHashNote).toContain('Internal Server Error');
+  });
+
+  test('現行URLが404でWayback経由取得したshigaはpdfHashNoteにアーカイブURLが明記されている', () => {
+    const shiga = snapshot.entries.find((e) => e.code === 'shiga')!;
+    expect(shiga.pdfHashNote).toContain('web.archive.org');
+  });
+
   test('osaka: 2025-r7・2026-r8と2024-r6で制度の核となる数値が一致する(実測で確認済みの「変更なし」)', () => {
     const o2024 = snapshot.entries.find((e) => e.code === 'osaka')!;
     const o2025 = snapshot2025.entries.find((e) => e.code === 'osaka')!;

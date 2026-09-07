@@ -7,7 +7,9 @@
     "collectionMethod": "T-Y11 Task C(ops/tasks/T-Y11-winter-bairitsu-pipeline.md)。N1-2(2025-r7)と同じ形式・同じ収集方針。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。",
     "totalPrefectures": 47,
     "collectedCount": 44,
-    "unavailable": []
+    "unavailable": [],
+    "pdfHashStatus": "partial_43_of_44",
+    "pdfHashNote": "E-3-2(T-Y11F F-5)。2026-09-07に44件中43件のSHA-256取得完了。直接URLで42件・shigaはWayback経由で1件成功。hokkaidoのみarchive.org側の応答不安定(2回連続Internal Server Error)のため今回は見送り、別日に再試行予定。"
   },
   "entries": [
     {
@@ -51,7 +53,7 @@
       "sourceUrl2": "https://www.pref.osaka.lg.jp/o180040/kotogakko/gakuji-g3/r06_jisshiyoko.html",
       "sourceTitle": "大阪府教育委員会「令和6年度大阪府公立高等学校入学者選抜実施要項」第7 一般入学者選抜",
       "lastVerified": "2026-09-01",
-      "pdfHash": null,
+      "pdfHash": "3c16b2eb563b77f987eb4153e95a7e4b88448bae78314f2c85072bac16f8a25c",
       "diffFromCurrentYear": "変更なし(2026-09-01に実施要項「第7 一般入学者選抜」PDF(21_r6_ippan.pdf)p.55「3 入学者の選抜」(3)イ・ウを直接確認。調査書中の各教科の評定を合計し第3学年を6倍・第1,2学年を2倍(450点満点)、学力検査450点満点との比率をI〜Vの5タイプ(1.4:0.6〜0.6:1.4)から各校が選択する方式。令和7年度分(2025-r7)・令和8年度分(prefectures.ts)のgradeMultipliers{1:2,2:2,3:6}/maxScore=450/osakaTypeCount=5と完全一致)"
     },
     {
@@ -81,7 +83,7 @@
       "sourceUrl2": "https://www.pref.chiba.lg.jp/kyouiku/shidou/press/2023/koukou/050914jissiyoukou.html",
       "sourceTitle": "千葉県教育委員会「令和6年度千葉県公立高等学校入学者選抜実施要項」I 一般入学者選抜",
       "lastVerified": "2026-09-01",
-      "pdfHash": null,
+      "pdfHash": "4334126f6977e01307cb77b143d6fa437c0da5d0b85dbf4d503c84021f66fd55",
       "diffFromCurrentYear": "変更なし(2026-09-01に実施要項p.8「第9 選抜方法」4(1)アを直接確認。調査書の教科(9教科)の評定の全学年合計値に各高等学校が定めるK(原則1・学科ごとに0.5以上2以下の範囲で別定)を乗じて調査書の得点とする方式。K=1の代表値で9教科×5段階×3学年=135点。令和7年度分(2025-r7)・令和8年度分(prefectures.ts)のgradeMultipliers{1:1,2:1,3:1}/maxScore=135と完全一致。K値自体は学校ごとに変動するためreverseCalcは令和7・8年度分と同様null)"
     },
     {
@@ -111,7 +113,7 @@
       "sourceUrl2": "https://www.pref.tochigi.lg.jp/m04/r06/r06nyuugakushasennbatunonittei.html",
       "sourceTitle": "栃木県教育委員会「令和6(2024)年度栃木県立高等学校入学者選抜実施細則」別記 調査書作成の要領",
       "lastVerified": "2026-09-01",
-      "pdfHash": null,
+      "pdfHash": "f8db34f526a1ba61f48f15d595ea029297196a411b1972e613f4cc6ba3694356",
       "diffFromCurrentYear": "変更なし(2026-09-01に「別記 調査書作成の要領」4を直接確認。「第1、第2学年の評定は、生徒指導要録の記載どおりに5段階法で記入する」「第3学年の評定は…年間を見通して5段階法で記入する」とあり、3学年とも等しく5段階評定を記入する方式(学年間の傾斜配点の記述なし)。9教科×5段階×3学年=135点。令和7年度分(2025-r7)・令和8年度分(prefectures.ts)のgradeMultipliers{1:1,2:1,3:1}/maxScore=135と完全一致。R7の文書URLパターン(m04/r07/documents/r7_02_bekki.pdf)からr7→r6に置換したURLで直接発見できた)"
     },
     {
@@ -155,7 +157,7 @@
       "sourceUrl2": "https://ehime-c.esnet.ed.jp/koukou/nyuusi/r06nyuusi",
       "sourceTitle": "愛媛県教育委員会「令和6年度愛媛県県立高等学校入学者選抜実施要項」6入学者の選抜方法(2)ア(イ)",
       "lastVerified": "2026-09-01",
-      "pdfHash": null,
+      "pdfHash": "70ad3ee933703c2f6c4b63bee9ce30359a9f7b6e978181bb8718b070e51d837d",
       "diffFromCurrentYear": "変更なし(2026-09-01に選抜要項本体(R7のURLパターンのr07をr06に置換したURLで直接発見・現行サイトに掲載されたまま現存)p.5「6 入学者の選抜方法」(2)ア(イ)を直接確認。「調査書点(調査書の各教科の学習の記録の第1学年から第3学年までにおいて履修した必修教科の評定の合計をいう)は、135点満点とする」と明記(実技4教科への傾斜配点や学年間の重み付けの記載は無く、9教科×5段階×3学年の均等合計)。学力検査は各教科50点×5教科=250点満点も同ページで確認。令和7・8年度分のgradeMultipliers{1:1,2:1,3:1}/maxScore=135/examMaxScore=250と完全一致)"
     },
     {
@@ -199,7 +201,7 @@
       "sourceUrl2": "https://www.pref.kochi.lg.jp/doc/r6_koukounyushi_main/",
       "sourceTitle": "高知県教育委員会「令和6年度高知県公立高等学校入学志願者取扱要領」IV志願者の選抜 1A日程(2)イ「調査書における『各教科の学習の記録』の配点」",
       "lastVerified": "2026-09-01",
-      "pdfHash": null,
+      "pdfHash": "300f563b2bdd8050725ba3a76e16eb89653ca9b0eddbc8ee1f247dc9a475a9fb",
       "diffFromCurrentYear": "変更なし(2026-09-01に取扱要領本体(R7のURLパターンのr7をr6に置換したURLで直接発見・現行サイトに掲載されたまま現存)p.4「IV志願者の選抜」1A日程(2)イを直接確認。「調査書における『各教科の学習の記録』の配点: 国語20 社会20 数学20 理科20 音楽40 美術40 保健体育40 技術・家庭40 外国語20」と明記(B日程全日制も同一配点)。5教科×20+実技4教科×40=260点でpracticalMultiplier=2を維持。令和7・8年度分のgradeMultipliers{1:1,2:1,3:1}/maxScore=195(モデル代表値)/practicalMultiplier=2と完全一致・変更なし)"
     },
     {
@@ -241,7 +243,7 @@
       "sourceUrl2": "https://www.pref.kagoshima.jp/ba05/kyoiku-bunka/school/koukou/nyushi/r6/r6jissiyoukou.html",
       "sourceTitle": "鹿児島県教育委員会「令和6年度鹿児島県公立高等学校入学者選抜実施要綱」I〔2〕一般入学者選抜(2)選抜の内容ア・イ(ｴ)d",
       "lastVerified": "2026-09-01",
-      "pdfHash": null,
+      "pdfHash": "7dc2eb462d721767724bf438baf4c2582e3c4eacb66295238ae1454e1bfe6069",
       "diffFromCurrentYear": "変更なし(2026-09-01に実施要綱本体(基底パス`r6`配下のR6年度版インデックスページから正しいPDF(実施要綱本体・1657KB)を特定・現行サイトに掲載されたまま現存)p.9「(2)選抜の内容」アを直接確認。「調査書の『学習の記録』は、第3学年の記録を次のとおり点数に換算して選抜に用いる。(ｱ)学力検査を行う5教科：それぞれ10点満点 (ｲ)学力検査を行わない必修の4教科(音楽、美術、保健体育及び技術・家庭)：それぞれ100点満点」とR7と一言一句完全一致。学力検査は各教科90点×5教科=450点満点(イ(ｳ)d)も確認。令和7・8年度分のgradeMultipliers{1:0,2:0,3:1}・coreMultiplier=2・practicalMultiplier=20・maxScore=450と完全一致・変更なし。同一ページ内に複数PDFが分割掲載されており、リンクテキストで実施要綱本体を正しく特定する必要があった(ファイルサイズだけでも判別可能:1657KBが本体・他は133-250KB))"
     },
     {
@@ -271,7 +273,7 @@
       "sourceUrl2": "https://www.pref.aomori.lg.jp/soshiki/kyoiku/e-gakyo/senbatsuyoukou2024.html",
       "sourceTitle": "青森県教育委員会「令和6年度青森県立高等学校入学者選抜要項」様式第2号(調査書)",
       "lastVerified": "2026-09-01",
-      "pdfHash": null,
+      "pdfHash": "fbd10054f482df7f4219418c595aca7577399f76d5b921fef0d93b8c65572611",
       "diffFromCurrentYear": "変更なし(2026-09-01に選抜要項本体(R7のURLパターンの2025を2024に置換したURLで直接発見・現行サイトに掲載されたまま現存・27.9MB)p.19「様式第2号 調査書」の「各教科の学習の記録」表を直接確認。9教科×1年・2年・3年の評定欄がそれぞれ独立に記入され「計」欄で3学年分をそのまま合算する「総計」列があり、学年間の傾斜配点は様式上存在しない(等倍合計)。9教科×5段階×3学年=135点。令和7・8年度分のgradeMultipliers{1:1,2:1,3:1}/maxScore=135と完全一致・変更なし)"
     },
     {
@@ -301,7 +303,7 @@
       "sourceUrl2": "https://www.pref.iwate.jp/kyouikubunka/kyouiku/gakkou/senbatsu/1074266.html",
       "sourceTitle": "岩手県教育委員会「令和6年度岩手県立高等学校入学者選抜実施要項」II一般入学者選抜 第2選抜(3)(4)",
       "lastVerified": "2026-09-01",
-      "pdfHash": null,
+      "pdfHash": "ee0b2627946e9118b4606d5755cdda79ff5203114e6dcb90e966c43420bcf071",
       "diffFromCurrentYear": "★変更あり(2026-09-01に令和6年度実施要項本体(WebSearchで発見・現行サイトに掲載されたまま現存)p.9-10「第2選抜」(3)各検査の配点等・(4)調査書の学習の記録の換算点を直接確認。生の評定は令和7・8年度分と同じ算式(1年生: 国社数理英×2倍・音美保技家×3倍=110点満点、2年生: ×4倍/×6倍=220点満点、3年生: ×6倍/×9倍=330点満点、合計660点満点=gradeMultipliers{1:1,2:2,3:3}・coreMultiplier=2・practicalMultiplier=3は完全一致)だが、**圧縮先の点数が令和6年度は660点→440点満点、令和7・8年度は660点→500点満点で異なる**(actualMaxScore=440≠500)。これはT-N1-2(2025-r7)のprefectures.tsコメント『実際の選抜では500点満点に圧縮されます(令和7年度以降。令和6年度以前は440点満点でした)』という既存の記述を一次資料で直接検証・確認した結果であり、令和6→7年度の間に圧縮先が440→500へ変更された制度改正の実例(N1-2のnara(令和7→8年度)に続く2件目の実測『変更あり』ケース)"
     },
     {
@@ -345,7 +347,7 @@
       "sourceUrl2": "https://nyuushi.tokushima-ec.ed.jp/file/741",
       "sourceTitle": "徳島県教育委員会「議案第12号 令和6年度徳島県公立高等学校生徒募集選抜要項」別記2 相関表の作成「調査書の評定値合計の算出方法(高等学校)」1〜3",
       "lastVerified": "2026-09-01",
-      "pdfHash": null,
+      "pdfHash": "521a0640c97974e955f1ef3630f10841b942e883c7c8a5fd7070e2fe964449f8",
       "diffFromCurrentYear": "変更なし(2026-09-01にWebSearchで発見した令和6年度分の教育委員会会議議案書(議案第12号・R7分と同型のPDF)p.34「別記2 相関表の作成」「調査書の評定値合計の算出方法(高等学校)」を直接確認。「1 音楽、美術、保健体育及び技術・家庭の4教科については、第1学年から第3学年までの評定値合計を2倍する」「2 国語、社会、数学、理科及び外国語については、第1学年から第3学年までの評定値合計とする」「3 上記1及び2を合計して195点満点とする」とR7と一言一句完全一致。令和7・8年度分のmaxScore=195/coreMultiplier=1/practicalMultiplier=2と完全一致・変更なし)"
     },
     {
@@ -389,7 +391,7 @@
       "sourceUrl2": "https://www.pref.hiroshima.lg.jp/site/kyouiku/06senior-2nd-r06-nyuushi-r06-kou-r06-youkou-r06kou-youkou.html",
       "sourceTitle": "広島県教育委員会・広島市教育委員会等「令和6年度広島県公立高等学校入学者選抜実施要項」様式第2号の作成方法等 5学習の記録欄(1)＋様式第2号",
       "lastVerified": "2026-09-01",
-      "pdfHash": null,
+      "pdfHash": "d9441eeee7d498286609f94f2b719fb287d57d770352a4f2ebe2ccfafda78fee",
       "diffFromCurrentYear": "変更なし(2026-09-01にR7のURLスラグ(r07→r06)を機械的に置換して発見した令和6年度実施要項本体・現行サイトに掲載されたまま現存・6.44MB)p.107「様式第2号の作成方法等」5学習の記録欄(1)を直接確認。「第1学年及び第2学年については、指導要録の学習の記録の必修教科の評定をそのまま用い、5段階評定で記入する。第3学年については、5段階評定による評点を3倍して記入する」とR7と実質同一の文言(記入する/作成するの言い回し差のみ)。様式第2号本体の記入欄も「1年(/5)・2年(/5)・3年(/15)・計(/25)」×9教科=「合計(/225)」と印字されており、maxScore=225と数値上も直接一致。令和7・8年度分のgradeMultipliers{1:1,2:1,3:3}・maxScore=225と完全一致・変更なし)"
     },
     {
@@ -433,7 +435,7 @@
       "sourceUrl2": "https://www.pref.okayama.jp/site/16/913706.html",
       "sourceTitle": "岡山県教育委員会「議第3号 令和6年度岡山県立高等学校入学者選抜実施大要について」[一般入学者選抜]1選抜の方針",
       "lastVerified": "2026-09-01",
-      "pdfHash": null,
+      "pdfHash": "6a54c056dd37e40dde478417ad165073e524ac32960028546882b7fd800298b4",
       "diffFromCurrentYear": "変更なし(2026-09-01にWebSearchで発見した教育委員会会議議案書(議第3号・令和5年7月7日決定)p.1「[一般入学者選抜]1 選抜の方針」を直接確認。「学力については、調査書の『学習の記録』に記載された評定から求めた換算点と学力検査の結果から求めた合計得点とを基に、高等学校長が『調査書の評定段階』と『学力検査の評定段階』をそれぞれ定め、相関表を作成して判定する。調査書の換算点の算出においては、学力検査を実施しない教科及び第3学年の評定を重視して取り扱う」とR7と同趣旨(語順に軽微な差はあるが内容は同一)。岡山県は相関表(段階×段階マトリクス)方式のためsimplifiedCalc=true/actualMaxScore=200の近似モデルである点も含め令和7・8年度分と完全一致・変更なし。★教訓: gunmaの『実施大綱』は詳細を別文書『実施要項』に委ねる高レベル文書だったが、okayamaの『実施大要』は名称が似ていても実際には選抜方針の核心部分を含む本体相当の文書だった——文書名の見た目だけで判断せず必ず中身を確認する)"
     },
     {
@@ -461,7 +463,7 @@
       "sourceUrl2": "https://www.pref.yamagata.jp/700013/koko/2022r6nyuugakusyajouhou.html",
       "sourceTitle": "山形県教育局高校教育課「令和6年度山形県公立高等学校入学者選抜 様式第2号 調査書」",
       "lastVerified": "2026-09-01",
-      "pdfHash": null,
+      "pdfHash": "48d4cb8574c1ca429add3049d7e3c6a90541790a1a3d6792291e33dbf7c97a8e",
       "diffFromCurrentYear": "変更なし(2026-09-01に様式第2号(調査書)Excelファイル(R7と同じファイル名パターンをWebFetchでR6版索引ページから発見・22.9KBはページ記載の「23KB」と一致)を直接確認(xlsx内のsharedStrings.xmlをunzip抽出)。R7と同一の「第３学年の評定の合計」という項目名が明記されており、第3学年のみを合計する方式を確認(9教科×5段階=45点)。令和7・8年度分のgradeMultipliers{1:0,2:0,3:1}/maxScore=45と完全一致・変更なし)"
     },
     {
@@ -489,7 +491,7 @@
       "sourceUrl2": "https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r6/r6nyushi.html",
       "sourceTitle": "長野県教育委員会「令和6年度長野県立高等学校入学者選抜要綱」第3後期選抜 6(1)イ(ｱ)",
       "lastVerified": "2026-09-01",
-      "pdfHash": null,
+      "pdfHash": "f21965b9491c2589a3834530f287240f4bdc9257d43bcaab999b4d29d80f3317",
       "diffFromCurrentYear": "変更なし(2026-09-01に選抜要綱p.6「第3 後期選抜」6(1)イ(ｱ)を直接確認。「学科ごとに、受検者全員について、調査書に記載されている中学校第３学年の必修教科の評定合計値(最高45点)を縦軸、学力検査成就率合計値(最高500点)を横軸とする相関図を作成する」とR7と一言一句完全一致(条項番号のみ7(1)→6(1)に相違・R6の要綱は前期選抜の記載が1本のPDFに統合されているため通し番号がR7と異なるだけで内容は同一)。令和7・8年度分のgradeMultipliers{1:0,2:0,3:1}/maxScore=45と完全一致・変更なし。★新知見: R7のsourceUrlは`r7yoko2.pdf`(要綱が2分割)だったが、R6は`r6yoko1.pdf`という1本のPDFに統合されており、`r7yoko2`→`r6yoko2`の機械置換は404だった。年度によって文書の分割数が変わることがあるため、置換が外れたら索引ページ(`r6nyushi.html`)から辿り直す必要がある)"
     },
     {
@@ -517,7 +519,7 @@
       "sourceUrl2": "https://www.pref.shizuoka.jp/kodomokyoiku/school/kyoiku/1003764/1003891/1054127.html",
       "sourceTitle": "静岡県教育委員会「令和6年度静岡県公立高等学校入学者選抜実施要領」各種様式等 様式第1号(別記1)調査書の記入方法2(3)ア",
       "lastVerified": "2026-09-01",
-      "pdfHash": null,
+      "pdfHash": "20b4eb89aecee6c44110d29e8989572d818cc3f10da9ce20f8b9d4a7e563afb0",
       "diffFromCurrentYear": "変更なし(2026-09-01にWebSearchでR6専用の発表資料ページ(project ID 001/054/127・R7とは異なるproject IDのため`r7_`接頭辞のURL置換は使えなかった)を発見し、各種様式等PDF(`07.pdf`・2.86MB)を直接確認。p.73-74「(別記1)調査書の記入方法」2(3)アで「中学校卒業見込みの者については、第3学年における第2学期末(12月末)までの学習状況について…5段階の目標に準拠した評価で記入する」とR7と趣旨完全一致(第3学年のみ・学年別の記入欄が無く様式第1号の評定欄(④)も1行のみ)。9教科×5段階=45点。令和7・8年度分のgradeMultipliers{1:0,2:0,3:1}/maxScore=45と完全一致・変更なし。★新知見: shizuokaのURLは`_res/projects/default_project/_page_/<project ID>/<file>.pdf`という構造で、project ID自体が年度ごとに全く異なる数字に変わる(R7=063/460・R6=054/127)ため、`r7_`→`r6_`のようなファイル名置換は無意味。WebSearchで年度別の発表資料ページを直接発見する必要がある)"
     },
     {
@@ -547,7 +549,7 @@
       "sourceUrl2": "https://kyoiku.pref.ibaraki.jp/post-25540/",
       "sourceTitle": "茨城県教育委員会「令和6年度茨城県立高等学校入学者選抜実施細則」(8)合否判定方法イ共通選抜(ｲ)",
       "lastVerified": "2026-09-01",
-      "pdfHash": null,
+      "pdfHash": "78056721f5a00c7ca5b03ca8a54105357c80e17a52bc42ce45f5d12b17d43131",
       "diffFromCurrentYear": "変更なし(2026-09-01にWebSearchで発見した令和6年度実施細則本体(現行サイトに掲載されたまま現存・4.58MB)p.8「(8)合否判定方法」イ共通選抜(ｲ)を直接確認。「共通選抜の対象となる受検者全員について、調査書の評定合計(3年間)の高い順に並べる」とR7と一言一句完全一致(学年間の傾斜配点の記述なし=等倍合計)。学力検査は5教科×100点=500点満点も同ページ(ｱ)で確認。令和7・8年度分のgradeMultipliers{1:1,2:1,3:1}/coreMultiplier=1/practicalMultiplier=1/maxScore=135と完全一致・変更なし)"
     },
     {
@@ -577,8 +579,9 @@
       "sourceUrl2": "https://www.pref.shiga.lg.jp/file/attachment/5530363.pdf",
       "sourceTitle": "滋賀県教育委員会「令和6年度滋賀県立高等学校入学者選抜要項について(概要および変更点)」＋「令和6年度滋賀県立高等学校入学者選抜要項」",
       "lastVerified": "2026-09-01",
-      "pdfHash": null,
-      "diffFromCurrentYear": "【caveatあり・変更なし(間接確認)】2026-09-01に令和6年度専用の過去情報アーカイブページ(現行トップは既にR7-9年度分に更新済みのため`senbatsu/325134.html`(平成31〜令和6年度分)をWebSearchで発見)から2文書を確認。『概要および変更点』文書は毎年発行される網羅的な変更点リストであり、令和6年度の変更点として明記されているのは(1)検査結果提供の請求可能期間(2)スポーツ推薦1校の募集定員(3)大津清陵高校馬場分校1校のみの比率変更、の3点のみで、一般選抜全体の個人調査報告書(調査書)の評価方法・配点比率に関する変更は一切記載されていない(R7と同型の確認方法)。選抜要項本体(3.28MB)9「選抜の方法」も確認したが、個人調査報告書の点数配点自体は学校別の「別表1」に委任される構造(R7と同型)で本文には現れない。maxScore=135(9教科×5段階×3学年・学年間傾斜なし)は令和7・8年度分からの構造不変前提の引き継ぎであり、様式現物での独立再検証ではない点はR7エントリと同じ限界として明記する)"
+      "pdfHash": "bc523c694b46a32ef297efadb0943de4ce990d4e4818f15a42b24bdaf07e77bb",
+      "diffFromCurrentYear": "【caveatあり・変更なし(間接確認)】2026-09-01に令和6年度専用の過去情報アーカイブページ(現行トップは既にR7-9年度分に更新済みのため`senbatsu/325134.html`(平成31〜令和6年度分)をWebSearchで発見)から2文書を確認。『概要および変更点』文書は毎年発行される網羅的な変更点リストであり、令和6年度の変更点として明記されているのは(1)検査結果提供の請求可能期間(2)スポーツ推薦1校の募集定員(3)大津清陵高校馬場分校1校のみの比率変更、の3点のみで、一般選抜全体の個人調査報告書(調査書)の評価方法・配点比率に関する変更は一切記載されていない(R7と同型の確認方法)。選抜要項本体(3.28MB)9「選抜の方法」も確認したが、個人調査報告書の点数配点自体は学校別の「別表1」に委任される構造(R7と同型)で本文には現れない。maxScore=135(9教科×5段階×3学年・学年間傾斜なし)は令和7・8年度分からの構造不変前提の引き継ぎであり、様式現物での独立再検証ではない点はR7エントリと同じ限界として明記する)",
+      "pdfHashNote": "現行URLは2026-09-07時点で404。archive.org Waybackスナップショット経由で本文取得しハッシュ算出（http://web.archive.org/web/20260902202006/https://www.pref.shiga.lg.jp/file/attachment/5530371.pdf）。sourceUrl自体は元の一次URLのまま変更しない。"
     },
     {
       "code": "kanagawa",
@@ -605,7 +608,7 @@
       "sourceUrl": "http://web.archive.org/web/20231105073052/https://www.pref.kanagawa.jp/documents/63604/r6jisshiyouryou.pdf",
       "sourceTitle": "神奈川県教育委員会「令和6年度神奈川県公立高等学校の入学者の募集及び選抜実施要領」(現行ページは令和9年度分に更新済みのためWayback Machine 2023-11-05時点のスナップショットで確認)",
       "lastVerified": "2026-09-01",
-      "pdfHash": null,
+      "pdfHash": "a427a1b099ae7afce1c90a678097562843260833b9f89e28eed2bd66d378ab1c",
       "diffFromCurrentYear": "変更なし(2026-09-01にWayback CDX APIが復旧していたため`documents/63604/`配下を2023年限定で再検索し、R7と同じ基底フォルダに置かれた`r6jisshiyouryou.pdf`を発見・直接取得成功。実施要領本体§1-V-6(2)ア①「A=(第2学年の9教科の評定の合計)+(第3学年の9教科の評定の合計)×2」およびS1一次選考式「S1=a×f+b×g(f+g=10)」を確認・令和7・8年度分のgradeMultipliers{1:0,2:1,3:2}/maxScore=135/S式の構造と完全一致(変更なし)。今回はsourceUrl2に相当する独立の第二文書は未特定のため単一ソースでの確認に留まる)"
     },
     {
@@ -633,7 +636,7 @@
       "sourceUrl2": "http://web.archive.org/web/20251116023239/https://www.pref.aichi.jp/soshiki/kotogakko/r6koukounyuushi.html",
       "sourceTitle": "愛知県教育委員会「令和6年度愛知県公立高等学校入学者選抜実施要項（本文編）」(現行ページはpref.aichi.jpのIncapsulaリダイレクトループでcurl直接取得不可のためWayback Machine 2023-11-27時点のスナップショットで確認)",
       "lastVerified": "2026-09-01",
-      "pdfHash": null,
+      "pdfHash": "3b5fc5c36139a90e1799ebfd8060550b5944e94d195586bbdf186b5acf95bb88",
       "diffFromCurrentYear": "変更なし(2026-09-01にWebSearchでR6専用ページ(r6koukounyuushi.html)を発見しWayback経由でリンク先PDF一覧から「令和6年度実施要項（本文編）」を特定・取得。第6「入学者の選抜及び合格者の決定」3(1)ア「評定得点は、「調査書情報」の「学習の記録（第3学年）」の評定合計（最高45）を2倍した数値とし、その最高を90点とする。」を確認・令和7・8年度分のgradeMultipliers{1:0,2:0,3:2}/maxScore=90と一言一句完全一致(変更なし)。スポーツ科学科等特定学科の教科傾斜配点(1.5倍等)の規定もR7と同様に存在するが、baseline(普通科)の値は不変)"
     },
     {
@@ -675,7 +678,7 @@
       "sourceUrl2": "http://web.archive.org/web/20231129051455/https://www.pref.fukuoka.lg.jp/contents/06youkou.html",
       "sourceTitle": "福岡県教育委員会「令和6年度福岡県立高等学校入学者選抜要項」(現行ページ・press-release/youkouhoudou06.htmlともWayback CDXにも見つからず404のためWayback Machine 2024-03-05時点のスナップショットで確認。今回は本体PDFが23.4MBだが単一curlで直接取得成功・R7収集時に必要だった5MB分割Rangeリクエストは不要だった)",
       "lastVerified": "2026-09-01",
-      "pdfHash": null,
+      "pdfHash": "bdcd2182193843929b90e78449c8652d03b6d3f1f5fc8ae4351dae6408b54fe8",
       "diffFromCurrentYear": "gradeMultipliers/maxScoreは変更なしと直接検証(2026-09-01に選抜要項(八)「選抜の方法」1で「調査書の「各教科の学習の記録」の第3学年における各教科の評定の数値の合計によって序列を定めるとともに、学力検査の総点によって序列を定める。」を確認。(三)「学力検査」1で5教科×各60点=300点満点も確認。令和7・8年度分のgradeMultipliers{1:0,2:0,3:1}/maxScore=45/examMaxScore=300と一致)。R7エントリと同様、345点満点・内申13%:学力87%という単一の合成得点・比率は本文中に明記されておらず、reverseCalcはR7・R8分から不変前提で引き継いだサイト独自の代表値である点も引き継ぐ"
     },
     {
@@ -719,7 +722,7 @@
       "sourceUrl2": "http://web.archive.org/web/20240424110146/https://www.pref.saitama.lg.jp/f2208/r6nyuushi-jissiyoukou.html",
       "sourceTitle": "埼玉県教育委員会「令和6年度埼玉県公立高等学校入学者選抜実施要項」2 一般募集入学者選抜要領(現行ページはR7-9年度分に更新済みかつdocument IDも変わるためWayback Machine 2024-04-24時点のスナップショットで確認。R7と同じ命名規則(52senbatsuyoryo_r6.pdf)の単独ファイルとして存在することを確認)",
       "lastVerified": "2026-09-01",
-      "pdfHash": null,
+      "pdfHash": "d08b51d0f7048ef38b49ad6924d514d2ffbd0891d4610892167263040acd31c4",
       "diffFromCurrentYear": "gradeMultipliers/maxScoreは変更なしと直接検証(2026-09-01に一般募集入学者選抜要領p.102「1(2)ア 学習の記録の得点」で「学習の評定の各学年別合計に各高等学校が定める各学年の比率をそれぞれ乗じて加えた数(点)とする。またその最高点は、各学年の比率の数値の合計に45を乗じて得た数(点)とする。」を確認・R7エントリと一言一句完全一致。比率1:1:2の代表値で180点、が令和7・8年度分と同一の算式・構造)。埼玉県は各学年比率・学力検査換算定数とも学校ごとに範囲内で自由設定できる制度のため、reverseCalc(900/500/40:60)はR7エントリと同様サイト独自の代表値であり本要領に900点満点という記載は無い(令和7・8年度分から不変のサイト側モデルとして引き継ぎ)"
     },
     {
@@ -747,7 +750,7 @@
       "sourceUrl2": null,
       "sourceTitle": "兵庫県教育委員会「令和6年度兵庫県公立高等学校入学者選抜要綱」第7217項(1) 判定資料(A)の算定式(別表1 評定換算表参照)",
       "lastVerified": "2026-09-01",
-      "pdfHash": null,
+      "pdfHash": "00069a8dbf95cd0c76fe79126511fe012c1b8f93adf9e552fd17c995d5c83a65",
       "diffFromCurrentYear": "変更なし(2026-09-01にWayback Machine経由でPDF本文p.61[PDF内65ページ目]第7217項(1)「判定資料(A)…調査書の各教科の学習の記録の第3学年の「国語」「社会」「数学」「理科」「外国語」の5教科の評定の和を4倍した値と、「音楽」「美術」「保健体育」「技術・家庭」の4教科の評定の和を7.5倍した値との総和(総配点250点)による(別表1の評定換算表参照)」を確認。第3学年のみ・5教科×4倍+4教科×7.5倍=250点満点は令和7・8年度分と完全一致。⚠️現行サイトの/hpe/uploads/配下はrobots.txtでDisallow指定されているため([[fable5-loop-protocol]]A-2で既知)、直接fetchせずWayback Machineの既存アーカイブ(2024-05-08取得)経由で確認した。pdftotextは本PDFでCJKテキストを抽出できなかった(embeddedフォント構造の問題、他県と同型)ため、PyMuPDF(fitz)でPDFページをPNGにレンダリングしビジョン解析する方式に切り替えた(poppler/pdftoppm未導入のためRead toolのpages指定は使えない環境制約を踏まえた代替手段。pythonコマンドはpython3でなくpythonを使うこと=環境の罠として記録)。"
     },
     {
@@ -776,7 +779,7 @@
       "sourceUrl2": "https://www.pref.nara.lg.jp/n167/66608.html",
       "sourceTitle": "奈良県教育委員会「調査書及び学習成績一覧表等作成要領」(令和6年度奈良県立高等学校入学者選抜実施要項) 1調査書(5)ア・イ",
       "lastVerified": "2026-09-01",
-      "pdfHash": null,
+      "pdfHash": "89b0275fc9b7ef4b0f5c5229a8a7cafc8d3b0f07d4296558ff5c350f3d7a0558",
       "diffFromCurrentYear": "変更なし(2026-09-01にWebSearchでR7と別のdocument ID配下(documents/6003、R7はdocuments/5976)にあるR6専用ページを発見しPDF本文を直接確認。1(5)ア「学習成績は、国語、社会、数学、理科、音楽、美術、保健体育、技術・家庭及び英語の各教科とも、第２学年と第３学年の成績を１：２の割合で算出してください」、イ「各教科別に、次の(ア)及び(イ)を合計した学習成績を15点満点で記入してください。(ア)生徒指導要録に記載された第２学年の５段階評定値 (イ)第３学年の…観点別学習状況の評価を総括した５段階評定値を２倍した数値」を確認、R7エントリ(2025-r7)と一言一句完全一致(第1学年は不使用・9教科×15点=135点満点)。⚠️T-N1-N4で検出されたnaraの制度変更はR7→R8間で発生したものであり、R6→R7間は変更なしと今回確認できた。"
     },
     {
@@ -806,7 +809,7 @@
       "sourceUrl2": "https://www.pref.gifu.lg.jp/site/edu/61428.html",
       "sourceTitle": "岐阜県教育委員会「令和6年度岐阜県立高等学校入学者選抜要項」第4第一次選抜 6(1)調査書の評定の取扱い(現行ページはPDF削除済みのためWayback Machine 2023-12-05時点のスナップショットで確認)",
       "lastVerified": "2026-09-01",
-      "pdfHash": null,
+      "pdfHash": "0237159d97f8058ab74eddb3f4b0008ceba8b1b1aef0d9cd06020b34ce63a840",
       "diffFromCurrentYear": "変更なし(2026-09-01に第三者サイト(塾サイト)経由でR6版の実際のattachment ID(369199・R7は404670)を特定し、Wayback Machine経由でPDF本文(67頁)を確認。pdftotextはCJKテキストを抽出できなかった(embeddedフォント問題、他県と同型)ためPyMuPDFでページをPNGレンダリングしビジョン解析。目次で「第4第一次選抜 6選抜方法」の位置(printed page7-8)を特定し該当箇所を確認。p.7-8「6選抜方法(1)調査書の評定の取扱い…『第1学年と第2学年(義務教育学校においては第7学年と第8学年)の各教科の評定の合計値』と『第3学年(義務教育学校においては第9学年)の各教科の評定の合計値を2倍した値』の和を用いる」を確認、R7エントリと一言一句完全一致(9教科×5×1+9教科×5×1+9教科×5×2=180点)。令和7・8年度分と完全一致(変更なし)。"
     },
     {
@@ -834,7 +837,7 @@
       "sourceUrl2": "https://www.pref.mie.lg.jp/KOKOKYO/HP/000215949_00011.htm",
       "sourceTitle": "三重県教育委員会「令和6年度三重県立高等学校入学者選抜実施方針」後期選抜の選抜方法(1)(別表3の脚注に本文引用あり)",
       "lastVerified": "2026-09-01",
-      "pdfHash": null,
+      "pdfHash": "8f0b9d46b3e8cf5d81d6b7b884332676df85a44bd30fa81d5ca289a61408184f",
       "diffFromCurrentYear": "変更なし(2026-09-01にWebSearchでR6実施要項ページ(000215949_00011)を発見。本体要項PDFは同ページに直接掲載されていなかったが、別表3(001086426.pdf・1頁)の脚注に「令和６年度三重県立高等学校入学者選抜実施方針」後期選抜の選抜方法(1)の本文が『調査書の第３学年における「各教科の学習の記録」及び「特別活動の記録」等により、およそ募集定員に当たる数の者を選ぶ』と一言一句引用されていることを確認。R7エントリの引用文と完全一致(第3学年のみ・9教科×5段階=45点)。令和7・8年度分と完全一致(変更なし)。"
     },
     {
@@ -864,7 +867,7 @@
       "sourceUrl2": "https://www.kyoto-be.ne.jp/koukyou/cms/?p=4184",
       "sourceTitle": "京都府教育委員会「令和6年度京都府公立高等学校入学者選抜要項」7 中期選抜(全日制・定時制共通)(5)イ選抜方法等(ｱ)a・b",
       "lastVerified": "2026-09-01",
-      "pdfHash": null,
+      "pdfHash": "3838d79d39d7ae86dc02343caed3772d5d913783542d33924b410c2708cd1841",
       "diffFromCurrentYear": "変更なし(2026-09-01にWebSearchでR6要項ページ(?p=4184)を発見・本体PDF(senbatuyoukou.pdf・R7とは別のファイル名パターン)を直接取得。目次で「7中期選抜」の位置を確認後PyMuPDFでビジョン解析、p.26イ選抜方法等(ｱ)a「報告書の第1学年、第2学年及び第3学年における必修教科の評定を合計する。その際、「音楽」、「美術」、「保健体育」及び「技術・家庭」の評定は、2倍する」b「学力検査の配点は、各教科40点とし、それぞれの得点の合計値を求める」を確認、R7エントリと一言一句完全一致(5教科×5×3学年=75点+4教科×5×3学年×2倍=120点、合計195点)。令和7・8年度分と完全一致(変更なし)。"
     },
     {
@@ -908,7 +911,7 @@
       "sourceUrl2": "https://www.pref.wakayama.lg.jp/prefg/500200/d00214177.html",
       "sourceTitle": "和歌山県教育委員会「令和6年度和歌山県立高等学校入学者選抜(全日制課程・定時制課程)実施要項」第2一般選抜 10(2)ア(ｱ)",
       "lastVerified": "2026-09-01",
-      "pdfHash": null,
+      "pdfHash": "0db5aea6aacea0cfad083b96981abe6096844a599b66106dcdf3e0f32a099288",
       "diffFromCurrentYear": "変更なし(2026-09-01にWebSearchでR6要項ページ(d00214177)を発見・本体PDF(R06_1_zennichi_teiji.pdf・R7と同じ命名規則で年度部分のみ相違)を直接取得(29頁)。pdftotextで180のヒットを検出しPDFページ番号を特定してからPyMuPDFでp.20をビジョン解析。「(2)判定資料の評価 ア調査書(ア)評定 次の方法で算出し、計180点満点とする…a第1・第2学年の評定: 第1・第2学年の9教科の5段階評定の合計を算出する(90点満点) b第3学年の評定: 第3学年の9教科の5段階評定の合計を2倍して算出する(90点満点)」を確認、R7エントリと一言一句完全一致。学力検査は各教科100点×5教科=500点満点も確認(reverseCalc.examMaxScore=500と一致)。令和7・8年度分と完全一致(変更なし)。"
     },
     {
@@ -950,7 +953,7 @@
       "sourceUrl2": "https://www.pref.tottori.lg.jp/item/1328817.htm",
       "sourceTitle": "鳥取県教育委員会「令和6年度鳥取県立高等学校入学者選抜方針」3(2)一般入学者選抜 ウ検査内容(ｱ)c・エ選抜方法",
       "lastVerified": "2026-09-01",
-      "pdfHash": null,
+      "pdfHash": "c2c6a7393ee2f90ea1a77f7ab43e2e6fafdbddd0fe01ecc6ab18570530b45d7f",
       "diffFromCurrentYear": "変更なし(2026-09-01にWebSearchでR6関連資料一覧ページ(item/1328817)を発見・本体PDF(houshintohonbun.pdf・R7とは別のファイル名パターン)を直接取得(24頁・pdfのpage1が印刷頁4に対応しR7の引用ページ番号とそのまま一致)。p.5(PDF内2頁目)「(c)学力検査の合計得点と調査書の合計評定との比率は、8対2から2対8までの範囲内とする」エ選抜方法「調査書の合計評定は、第3学年の各教科のうち、学力検査を実施する教科の評定に対し、学力検査を実施しない教科の評定を2倍するものとする」を確認、R7エントリと一言一句完全一致(5教科×5段階+4教科×5段階×2倍=25+40=65点満点)。令和7・8年度分と完全一致(変更なし)。"
     },
     {
@@ -980,7 +983,7 @@
       "sourceUrl2": "https://www.pref.fukushima.lg.jp/site/edu/r6koukounyushi.html",
       "sourceTitle": "福島県教育委員会「令和6年度福島県立高等学校入学者選抜実施要綱」第2 前期選抜 一般選抜「調査書」",
       "lastVerified": "2026-09-01",
-      "pdfHash": null,
+      "pdfHash": "b3ad40ed78039cff55ef82c6d5a1842a537ebb6c24df66c2b9254cc67b3a34d7",
       "diffFromCurrentYear": "変更なし(2026-09-01にWebSearchでR6要綱ページ(r6koukounyushi.html)を発見。WebFetch要約が誤ったドメイン(fukushima.fcs.ed.jp)を提示したため実404を確認し、正しいpref.fukushima.lg.jp配下のattachment ID(597118・R7は653878)で200を確認してから取得(86頁)。pdftotextで「195」のヒット行からPDFページを特定しPyMuPDFでp.12(印刷頁10)をビジョン解析、「調査書の『各教科の学習の記録』の評定については、国語、社会、数学、理科、外国語(英語)、音楽、美術、保健体育、技術・家庭の第1学年から第3学年の評定の合計に音楽、美術、保健体育、技術・家庭の第1学年から第3学年の評定の合計をさらに加えて、195点満点とする」を確認、R7エントリと一言一句完全一致。令和7・8年度分と完全一致(変更なし)。⚠️WebFetch要約が実在しないドメインを提示する事故を実際に確認したため、必ずcurlで実HTTPステータス裏取りしてから使うこと([[fable5-loop-protocol]]既存の類似の罠と同型)。"
     },
     {
@@ -1010,7 +1013,7 @@
       "sourceUrl2": "https://www.pref.akita.lg.jp/pages/genre/79419",
       "sourceTitle": "秋田県教育委員会「令和6年度秋田県公立高等学校入学者選抜実施要項」VI 調査書及び学習成績一覧表作成要領",
       "lastVerified": "2026-09-01",
-      "pdfHash": null,
+      "pdfHash": "2afba007693a2f2a713cf2f6f0da43edd8143077767711b35ff093f71b6b7258",
       "diffFromCurrentYear": "変更なし(2026-09-01にWayback CDXを直接検索してR6版PDF(archive_0000076137_00・R7は0000084342_00で別アイテムID)を発見・取得(58頁)。p.40(PDF内44頁目)「(6)各教科の学習の記録」エ「調整評定値欄には、各学年の評定について、5教科の小計(1)に4教科の小計(2)を2倍して加えて得られた値((1)+(2)×2)を記入する」オ「調整評定値の合計の欄には、各学年の調整評定値の合計を記入する」を確認、R7エントリと一言一句完全一致(3学年×(5教科×5段階+4教科×5段階×2)=3×65=195点)。令和7・8年度分と完全一致(変更なし)。"
     },
     {
@@ -1040,7 +1043,7 @@
       "sourceUrl2": "https://www.pref.gunma.jp/site/kyouiku/217648.html",
       "sourceTitle": "群馬県教育委員会「令和6年度群馬県公立高等学校入学者選抜実施要項」別記3「調査書」の作成について 3(3)イ・エ",
       "lastVerified": "2026-09-01",
-      "pdfHash": null,
+      "pdfHash": "ab7a437da2a9b6d4a18bd7b228170a8958b3cc153a7caac240fc1afff4e6301f",
       "diffFromCurrentYear": "変更なし(2026-09-01にWebSearchでR6要項ページ(217648)を発見・本体PDF(161766.pdf・R7とは別のattachment ID)を直接取得(51頁)。目次で「別記3調査書の作成について」の位置(printed page20)を特定しPyMuPDFでp.21(3記入上の留意点)をビジョン解析、イ「第1学年及び第2学年の観点別学習状況及び評定は、指導要録に記載されたものを転記する」エ「第3学年の評定は…全ての生徒について5段階による評定を記入するものとし、上位より『5』『4』『3』『2』『1』とする」を確認、R7エントリと一言一句完全一致(3学年とも等しく5段階評定・学年間傾斜なし・9教科×5段階×3学年=135点)。令和7・8年度分と完全一致(変更なし)。"
     },
     {
@@ -1070,7 +1073,7 @@
       "sourceUrl2": "http://web.archive.org/web/20241027162010/https://www.pref.niigata.lg.jp/sec/kotogakko/r6kotogakkonyushi.html",
       "sourceTitle": "新潟県教育委員会「令和6年度新潟県公立高等学校入学者選抜要項」様式1 調査書(現行ページ・PDFは削除済みのためWayback Machine 2024-01-16時点のスナップショットで確認)",
       "lastVerified": "2026-09-01",
-      "pdfHash": null,
+      "pdfHash": "2ca154162649df670d6ecae71e956428e4ff64933604824c9b28c02422556509",
       "diffFromCurrentYear": "変更なし(2026-09-01にR6要項ページのWaybackスナップショットからPDFリンク(attachment/381674.pdf)を抽出し、Wayback経由で本体PDF(66頁)を取得。様式1「調査書」(p.28)を確認、9教科(国語・社会・数学・理科・音楽・美術・保健体育・技術家庭・外国語)それぞれに「1年」「2年」「3年」の評定欄が並列で設けられており、学年間の傾斜配点(倍率)を示す記載は様式上に存在しない(等倍)。R7エントリと同一の様式構成で完全一致。9教科×5段階×3学年=135点。令和7・8年度分と完全一致(変更なし)。"
     },
     {
@@ -1099,7 +1102,7 @@
       "sourceUrl2": "https://www.pref.toyama.jp/3003/kurashi/kyouiku/kyouiku/nyuugaku/06senbatsu.html",
       "sourceTitle": "富山県教育委員会「令和6年度富山県立高等学校入学者選抜実施要領」7選抜の方法(3)",
       "lastVerified": "2026-09-01",
-      "pdfHash": null,
+      "pdfHash": "1019d3338599975597d046490622b91716845836626a7787181b74c47e4e35c4",
       "diffFromCurrentYear": "変更なし(2026-09-01にWebSearchでR6要項ページを発見・本体PDF(document ID 37292・R7は41799で別ID)を直接取得(54頁)。pdftotextで「150」のヒット行からPDFページを特定しPyMuPDFでp.4(印刷頁2)をビジョン解析、「7選抜の方法(3)…ア学習の記録における2年次の各教科の評定による評定点(45点満点) イ学習の記録における3年次の各教科の評定それぞれに2を乗じたものによる評定点(90点満点) ウ特別活動等、学習の記録以外の記載事項を換算したものによる評定点(15点満点)」を確認、R7エントリと一言一句完全一致(中2:45点+中3×2:90点=135点+特別活動等15点=150点満点)。令和7・8年度分と完全一致(変更なし)。"
     },
     {
@@ -1127,7 +1130,7 @@
       "sourceUrl2": "http://web.archive.org/web/20240202222026/https://www.pref.fukui.lg.jp/doc/koukou/nyugaku/r6youkou.html",
       "sourceTitle": "福井県教育委員会「令和6年度福井県立高等学校入学者選抜実施要項」第1一般入学者選抜 8(1)イ",
       "lastVerified": "2026-09-01",
-      "pdfHash": null,
+      "pdfHash": "5226efa9acc5cb2c45b299998361ed7f25375d2e8e1fd76c8910676e8aa5bd0b",
       "diffFromCurrentYear": "変更なし(2026-09-01に現行サイトの一般入学者選抜ページ(r6ittupan.html)には本体要項PDFが掲載されておらず、Wayback Machineで別ページ(r6youkou.html)のスナップショットからPDFリンク一覧を抽出、R6yoko.pdfを発見・Wayback経由で取得(29頁)。p.6(印刷頁6・PDF頁と一致)「8選抜の方法」イ「選抜に当たっては、調査書中の『学習の記録』の『評定』の第3学年の各教科の評定と学力検査(追検査を含む。)の成績を総合的に審査する」を確認、R7エントリと一言一句完全一致(第3学年のみ・9教科×5段階=45点満点)。令和7・8年度分と完全一致(変更なし)。"
     },
     {
@@ -1157,7 +1160,7 @@
       "sourceUrl2": "https://www.pref.yamanashi.jp/kyouiku-kikaku/nyuusi/nyuushijoukyou.html",
       "sourceTitle": "山梨県教育委員会「令和6年度山梨県公立高等学校入学者選抜実施要項」III全日制の課程における後期募集 第9選抜方法2(1)ア〜ウ",
       "lastVerified": "2026-09-01",
-      "pdfHash": null,
+      "pdfHash": "4066d3ab3ce7ff495ed396778d01e3390c28271e64bf9eb5f5f7f7d96e61d691",
       "diffFromCurrentYear": "変更なし(2026-09-01にWebSearchでR6実施要項ページを発見・本体PDF(2.1MB・R7の53.6MBより大幅に軽量)を直接取得(93頁)。目次でR6は前期/後期募集の章立てがR7と異なり選抜方法が「第9」(R7は「第11」)と番号がずれていることを確認した上でp.18(印刷頁13)をビジョン解析、(1)ア「各学年の学力検査実施教科の評定の計を求め、これに2を乗じて実施教科の調整評定小計とする」イ「各学年の学力検査不実施教科の評定の計を求め、これに3を乗じて不実施教科の調整評定小計とする」ウ「両者の和を全学年必修9教科の成績の評定合計とする」を確認、R7エントリと一言一句完全一致(5×5×2×3+4×5×3×3=330点)。**教訓: 章番号(第◯)は年度によって前後の章の追加・統合で変わることがあるため、番号だけでなく本文の実際の見出しラベル(選抜方法)と内容一致で照合すること**。令和7・8年度分と完全一致(変更なし)。"
     },
     {
@@ -1201,7 +1204,7 @@
       "sourceUrl2": "https://www.pref.kumamoto.jp/site/kyouiku/182727.html",
       "sourceTitle": "熊本県教育委員会「令和6年度(2024年度)熊本県立高等学校入学者選抜要項」III後期(一般)選抜 9選抜(本検査)(1)カ選抜の手順(ｲ)b・c",
       "lastVerified": "2026-09-01",
-      "pdfHash": null,
+      "pdfHash": "d9df451f7609475dd944c9824c54e1606f29e857ab704f6b1de7e984265a971b",
       "diffFromCurrentYear": "変更なし(2026-09-01にWebSearchでR6要項ページ(182727)を発見・本体PDF(3.49MB)を直接取得(68頁)。p.16(印刷頁16)b「学力検査を行わない4教科(音楽、美術、保健体育、技術・家庭)については、教科ごとに、第1学年及び第2学年の評定に、第3学年の評定を2倍したものを加えて合計する」c「aで補正した5教科の合計点に、bの4教科の合計点を加えて総計点を算出する」を確認、R7エントリと一言一句完全一致。9教科×(5+5+10)=180点で令和7・8年度分と完全一致(変更なし)。学力検査は各教科50点×5教科=250点満点も確認(reverseCalc.examMaxScoreと一致)。"
     },
     {
@@ -1245,7 +1248,7 @@
       "sourceUrl2": "http://web.archive.org/web/20240718225810/http://www.pref.miyazaki.lg.jp/kokokyoiku/kyoikukosodate/kyoiku/20230616105139.html",
       "sourceTitle": "宮崎県教育委員会「令和6年度宮崎県立高等学校入学者選抜実施要綱」10出願書類の作成要領(2)調査書(様式2)",
       "lastVerified": "2026-09-01",
-      "pdfHash": null,
+      "pdfHash": "7acf2c00b8d3237a9bb6320cf8ef99137cbad29d455cf1539a8f1bb3e4964309",
       "diffFromCurrentYear": "変更なし(caveatあり)(2026-09-01にR6index html自体が現行404のためWaybackで取得、そこからPDFリンク一覧をgrepし本体PDF(4.7MB・R7とは別ドキュメントID)を発見・Wayback経由で取得(90頁)。p.31(印刷頁31・PDF頁35)「(2)調査書(様式2)」イ「学習の記録I」ア第1・第2学年の観点別学習状況及び評定は生徒指導要録に記載されたものを記入する、イ第3学年は令和5年12月末日までの成績によって行う、ウ「学習の記録II」も同様の記載方式を確認——R7エントリと同じく、学年別の傾斜配点や実技科目への倍率など素点の重み付けを示す記載は一切無い(必修教科は各学年とも一律5段階評定)。令和8年度分(prefectures.ts)のgradeMultipliers{1:1,2:1,3:1}・maxScore=135・coreMultiplier=practicalMultiplier=1と矛盾しない。R7エントリと同型のcaveat(135という数値は一次ソースの明示的配点表ではなく『傾斜なし』の消去法に基づく)を維持。制度変更を示す記載も見当たらないため変更なしと判断。"
     },
     {
@@ -1289,7 +1292,7 @@
       "sourceUrl2": "https://www.pref.okinawa.lg.jp/kyoiku/gakko/1008883/1008887/1029395.html",
       "sourceTitle": "沖縄県教育委員会「沖縄県立高等学校全日制・定時制課程入学者選抜実施要項」(令和6年度実施)3一般選抜(7)選抜の方法・(8)学力検査",
       "lastVerified": "2026-09-01",
-      "pdfHash": null,
+      "pdfHash": "89bb74842217442d9cc284cd676560b2918ffaf3fc82c0852839190ee9f620d8",
       "diffFromCurrentYear": "変更なし(caveatあり)(2026-09-01にWebSearchで令和6年度実施ページ(1029395)を発見・本体PDF(07yoko_h3.pdf)を直接取得(14頁・R7エントリが個別校版だったのに対しこちらは県教委本体の一次ソース)。(7)選抜の方法ウ「調査書(第4号様式)と学力検査等の成績との比重は、原則として5対5とする」、(8)学力検査イ「学力検査を実施する教科の検査時間は、いずれも50分とし、配点は各60点とする」を確認(5教科×60点=300点満点でreverseCalc.examMaxScoreと一致)。ただし県教委本体の実施要項(14頁)は選抜方法・学力検査の総則のみを定め、調査書の生点数換算表(9教科×5段階×3学年・実技4教科1.5倍)自体は掲載されておらず、R7同様この部分は個別校の募集要項や第三者塾サイトでの確認が必要だった(WebSearch経由で複数の第三者サイトおよび自サイトmy-naishin.com/okinawa/naishinが『1学年55点満点(5教科×5+実技4教科×5×1.5)×3学年=165点満点』と一致して説明)。これは令和8年度分(prefectures.ts)のgradeMultipliers{1:1,2:1,3:1}・maxScore=165・practicalMultiplier=1.5と完全に一致する。制度変更を示す記載も見当たらないため変更なしと判断した(**caveatあり**・R7エントリと同型)。"
     },
     {
@@ -1320,7 +1323,8 @@
       "sourceTitle": "北海道教育委員会「令和6年度(2024年度)道立高等学校一般入学者選抜実施要項」14入学者の選抜(1)ウ(ア)留意事項1(現行ページは令和8年度分に更新済みのためWayback Machine 2024-12-10時点のスナップショットで確認)",
       "lastVerified": "2026-09-01",
       "pdfHash": null,
-      "diffFromCurrentYear": "maxScoreは変更なしと直接検証(2026-09-01にR6要項ページ(79624)のWaybackスナップショットからPDFリンク一覧をgrepし、複数分割ファイルの中からR7と同じ位置づけの「第2一般実施要項」(p8-29)を特定・取得。p.23(PDF頁16)の相関表で調査書点の最高段階が「A: 315〜296」と明記されているのを確認、学力検査は各教科100点×5教科=500点満点(0.63を乗じ315点換算)も確認。令和8年度分(prefectures.ts)のmaxScore=315と一致。ただしR7エントリと同じく各学年の重み付け(2:2:3)の内訳自体は本要項本体になく様式3(個人調査書)側に定義されているため未確認(caveat継承)。315という上限値の一致自体が重み付け構造が変わっていないことの強い状況証拠と判断(変更なし)"
+      "diffFromCurrentYear": "maxScoreは変更なしと直接検証(2026-09-01にR6要項ページ(79624)のWaybackスナップショットからPDFリンク一覧をgrepし、複数分割ファイルの中からR7と同じ位置づけの「第2一般実施要項」(p8-29)を特定・取得。p.23(PDF頁16)の相関表で調査書点の最高段階が「A: 315〜296」と明記されているのを確認、学力検査は各教科100点×5教科=500点満点(0.63を乗じ315点換算)も確認。令和8年度分(prefectures.ts)のmaxScore=315と一致。ただしR7エントリと同じく各学年の重み付け(2:2:3)の内訳自体は本要項本体になく様式3(個人調査書)側に定義されているため未確認(caveat継承)。315という上限値の一致自体が重み付け構造が変わっていないことの強い状況証拠と判断(変更なし)",
+      "pdfHashNote": "2026-09-07に取得試行。sourceUrl自体が既にWaybackスナップショットだが、そのWayback経由の取得が2回連続でInternal Server Error(archive.org側の応答不安定・既知の罠)となったため今回は見送り。別日に再試行すること。"
     },
     {
       "code": "miyagi",
@@ -1349,7 +1353,7 @@
       "sourceUrl2": "https://www.pref.miyagi.jp/site/sub-jigyou/kyo-r6nyushi.html",
       "sourceTitle": "宮城県教育委員会「令和6年度宮城県公立高等学校入試制度説明資料」共通選抜と特色選抜について",
       "lastVerified": "2026-09-01",
-      "pdfHash": null,
+      "pdfHash": "b1aaeb312bb00eeb8493a147aa7f94065529a1abb55f81a334e995a8823d0c05",
       "diffFromCurrentYear": "変更なし(2026-09-01にWebSearchで「令和6年度入試制度説明資料」を発見、現行サイトは404のためWayback経由で取得(24頁)。p.2「共通選抜」■学力検査点(500点満点)国語・数学・社会・英語・理科の学力検査点(各教科100点満点)の合計点、■調査書点(195点満点)国語・数学・社会・英語・理科については3年間の評定の合計、音楽・美術・保健体育・技術家庭については3年間の評定の合計×2倍、を確認、R7エントリと一言一句完全一致。学力検査:調査書の比率7:3〜3:7の5パターンも一致。令和7・8年度分と完全一致(変更なし)。"
     },
     {
@@ -1393,7 +1397,7 @@
       "sourceUrl2": "https://www.pref.shimane.lg.jp/education/kyoiku/senbatsu/senbatsu_info/",
       "sourceTitle": "島根県教育委員会「令和6年度島根県公立高等学校入学者選抜実施要綱」(2)選抜の具体的方法ア(ｵ)1)の算出方法表",
       "lastVerified": "2026-09-01",
-      "pdfHash": null,
+      "pdfHash": "5432b84506d1ee66269d03c29d3213a97736fd036745effde8ec797c0d8ca59c",
       "diffFromCurrentYear": "変更なし(2026-09-01にWebSearchでR6実施要綱本体(現行サイトに掲載されたまま現存)を直接発見・取得(94頁・R7エントリはR7年度分自体が404で入手できず代わりに結果報告書+R4実施要綱の間接照合だったのに対し、今回はR6年度の実施要綱そのものを直接確認できた)。p.29(ｵ)1)の算出方法表で「学習の記録 素点×51/180(小数点以下切り上げ) 素点180 評点51」「特別活動の記録 素点をそのまま 素点9 評点9」「学力検査 素点×0.16(小数点以下切り上げ) 素点250 評点40」を確認、R7エントリ(R4実施要綱経由で確認した表)と完全一致。個人調査報告書と学力検査の比率は80:20/70:30/60:40/50:50/40:60の5パターンから選択も一致。180点=9教科×5段階×(第1学年1倍+第2学年1倍+第3学年2倍)で、令和7・8年度分と完全一致(変更なし)。"
     },
     {
@@ -1437,7 +1441,7 @@
       "sourceUrl2": "https://www.pref.yamaguchi.lg.jp/soshiki/180/216464.html",
       "sourceTitle": "山口県教育委員会「令和6年度山口県公立高等学校入学者選抜実施大綱」2(5)選抜イ(ｱ)",
       "lastVerified": "2026-09-01",
-      "pdfHash": null,
+      "pdfHash": "1976ed8e94d5adbd2ae39fdffc50ba0631da35cfcb3e77e2ec17f44399ddac49",
       "diffFromCurrentYear": "変更なし(2026-09-01にWebSearchでR6実施大綱ページ(216464)を発見・本体PDF(8頁)を直接取得。p.3「2(5)選抜」イ選抜の方法(ｱ)「高等学校長は、選抜に当たっては、調査書を重視する。その際、調査書の『学習の記録』と学力検査の成績は同等に取り扱うとともに、調査書の『学習の記録』以外の記載事項及び面接、小論文、実技検査の結果等も十分考慮する」を確認、R7エントリと一言一句完全一致。学力検査は各教科50点×5教科=250点満点も確認(reverseCalc.examMaxScoreと一致)。ただしR7エントリと同じく本文書には調査書「学習の記録」の学年別配点(9教科×5段階×3学年均等配点で135点満点)を直接示す数値記載は無く、この点はR7と同型のcaveat(第三者裏取り+prefectures.tsとの整合)を維持。令和7・8年度分と完全一致(変更なし)"
     },
     {
@@ -1445,8 +1449,16 @@
       "name": "香川県",
       "region": "四国",
       "fiscalYear": "2024",
-      "targetGrades": [1, 2, 3],
-      "gradeMultipliers": { "1": 1, "2": 1, "3": 1 },
+      "targetGrades": [
+        1,
+        2,
+        3
+      ],
+      "gradeMultipliers": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
       "coreMultiplier": 2,
       "practicalMultiplier": 4,
       "maxScore": 390,
@@ -1457,7 +1469,10 @@
       "reverseCalc": {
         "totalMaxScore": 1000,
         "examMaxScore": 500,
-        "defaultRatio": { "naishin": 40, "exam": 60 },
+        "defaultRatio": {
+          "naishin": 40,
+          "exam": 60
+        },
         "calcType": "standard",
         "naishinMultiplier": null,
         "kValue": null,
@@ -1470,7 +1485,7 @@
       "sourceUrl2": "https://web.archive.org/web/20240116132724/https://www.pref.kagawa.lg.jp/documents/15088/saimoku6.pdf",
       "sourceTitle": "香川県教育委員会「令和6年度香川県公立高等学校入学者選抜要綱」Ⅳ一般選抜6選抜方法(1)＋「令和6年度香川県公立高等学校入学者選抜実施細目」(現行サイトは既に404・Wayback Machineで取得)",
       "lastVerified": "2026-09-01",
-      "pdfHash": null,
+      "pdfHash": "932530c1baed71a0c6db5df9b7ad0d7caaa99448f853e39cc2477981e20789ee",
       "diffFromCurrentYear": "【caveatあり・変更なし(間接確認)】2026-09-01に現行サイト(pref.kagawa.lg.jp)を確認したところ令和6年度分の選抜要綱・実施細目はいずれも404(現在は令和9年度分に更新済み)だったため、Wayback Machine CDX APIで2024年1月時点のアーカイブ(examination02.html)を発見し、そこからyoko6.pdf(要綱)とsaimoku6.pdf(実施細目)のリンクを取得した。yoko6.pdf(4頁)はRead toolで正常に読め、Ⅳ一般選抜6選抜方法(1)「調査書の学習の記録と学力検査の成績は、同等に扱う」を直接確認(R7/R8エントリと一言一句完全一致)。ただしsaimoku6.pdf(実施細目・95頁)はpdftotextで'Unknown character collection Adobe-Japan1'エラーが発生しテキスト抽出不能、Read toolでも表の罫線のみ描画され本文が白紙になる同型の不具合が発生し、maxScore=390/actualMaxScore=220/coreMultiplier=2/practicalMultiplier=4という換算式そのものを令和6年度分の一次ソースから独立に再検証することはできなかった(R7エントリのgi2.pdfと全く同じ症状)。令和7・8年度分からの構造不変前提の引き継ぎであり、次回このデータを重要な用途に使う場合は別ツール(OCR等)でsaimoku6.pdf相当文書を再確認することが望ましい"
     },
     {
@@ -1478,8 +1493,16 @@
       "name": "大分県",
       "region": "九州・沖縄",
       "fiscalYear": "2024",
-      "targetGrades": [1, 2, 3],
-      "gradeMultipliers": { "1": 1, "2": 1, "3": 2 },
+      "targetGrades": [
+        1,
+        2,
+        3
+      ],
+      "gradeMultipliers": {
+        "1": 1,
+        "2": 1,
+        "3": 2
+      },
       "coreMultiplier": 2,
       "practicalMultiplier": 4,
       "maxScore": 520,
@@ -1490,7 +1513,10 @@
       "reverseCalc": {
         "totalMaxScore": 1000,
         "examMaxScore": 500,
-        "defaultRatio": { "naishin": 40, "exam": 60 },
+        "defaultRatio": {
+          "naishin": 40,
+          "exam": 60
+        },
         "calcType": "standard",
         "naishinMultiplier": null,
         "kValue": null,
@@ -1503,7 +1529,7 @@
       "sourceUrl2": "https://web.archive.org/web/20240225175228/https://www.pref.oita.jp/site/kyoiku/koukounyuushir06.html",
       "sourceTitle": "大分県教育委員会「令和6年度大分県立高等学校入学者選抜実施要項」第7第一次入学者選抜 7選抜の方法①②③",
       "lastVerified": "2026-09-01",
-      "pdfHash": null,
+      "pdfHash": "3925efee8da14427355d7b991545bc0ee93a150a6702c6a3d2470e6377cb62a7",
       "diffFromCurrentYear": "変更なし(2026-09-01に現行サイトが404のためWayback Machineで令和6年度実施要項本体(88頁)を取得しRead toolで直接確認。p.15「第7第一次入学者選抜」7選抜の方法「①調査書の教科学習成績及び学力検査を実施しない教科の換算点の合計点(以下『調査書の合計点』という)並びに学力検査成績の総合計点と調査書のその他の記載事項及び面接、適性検査を実施した場合はその結果を資料として総合的に判定する」「②調査書の合計点と学力検査成績の比率は学校ごとに定める」「③5教科を課す高等学校では、学力検査配点の比重を変える傾斜配点を採用することができる。その場合の倍率は2倍を限度とする」と明記——R7エントリと一言一句完全一致(学校ごとに比率・傾斜配点を独自に定める学校裁量制)。⚠️セクション番号がR7/R8の「第10第一次入学者選抜」からR6では「第7第一次入学者選抜」に異なる(章立ての通し番号が年度で変動する。内容自体は同一)。調査書(様式9号)の学年別配点の生数値はR7と同様に別途xlsx配布で本文からは独立検証できず、R7と同型のcaveatを維持"
     },
     {
@@ -1511,8 +1537,14 @@
       "name": "東京都",
       "region": "関東",
       "fiscalYear": "2024",
-      "targetGrades": [3],
-      "gradeMultipliers": { "1": 0, "2": 0, "3": 1 },
+      "targetGrades": [
+        3
+      ],
+      "gradeMultipliers": {
+        "1": 0,
+        "2": 0,
+        "3": 1
+      },
       "coreMultiplier": 1,
       "practicalMultiplier": 2,
       "maxScore": 65,
@@ -1523,7 +1555,10 @@
       "reverseCalc": {
         "totalMaxScore": 1020,
         "examMaxScore": 1000,
-        "defaultRatio": { "naishin": 30, "exam": 70 },
+        "defaultRatio": {
+          "naishin": 30,
+          "exam": 70
+        },
         "calcType": "tokyo",
         "naishinMultiplier": null,
         "kValue": null,
@@ -1536,7 +1571,7 @@
       "sourceUrl2": "https://www.eikoh.co.jp/koukoujuken/column/c2030/",
       "sourceTitle": "東京都教育委員会「令和6年度東京都立高等学校入学者選抜学力検査結果に関する調査報告書」(令和6年6月)＋栄光ゼミナール解説記事(学力検査:調査書点=7:3・実技4教科2倍換算の継続的記述)",
       "lastVerified": "2026-09-01",
-      "pdfHash": null,
+      "pdfHash": "2e51d7d06dad67ad8c78b8738bc97efab989c611d3a6d7fa27fa9da5b9de1f09",
       "diffFromCurrentYear": "【caveatあり・変更なし(間接確認)】2026-09-01に令和6年度分の実施要綱本体PDF(release20230928_01/1.pdf)を探索したが、Wayback Machine CDX APIで検索してもクロール実績が0件(未アーカイブ)、現行サイトも404で直接取得できなかった。代わりに①令和6年度学力検査結果調査報告書(現行サイトで取得成功・令和6年6月発行の一次資料)で学力検査が5教科×100点満点(国語75.9点・数学61.7点・英語66.9点・社会55.5点・理科66.8点、令和6年2月21日実施)であることを確認、②WebSearchで『2024年度』を明示した第三者塾サイトの要約が『学力検査と内申点(調査書点)を7:3の比率で計算』と一致して説明していることを確認した。学力検査:調査書点=7:3(examMaxScore1000:内訳のnaishin300)・実技4教科2倍換算はR7/R8エントリ(2026-08-30に令和7年度実施要綱本体で直接確認済み)と完全一致し、東京都のこの制度は長期間変更されていない周知の制度設計であるため構造不変として引き継ぐ。次回このデータを重要な用途に使う場合は release20230928_01 相当のWayback未アーカイブ資料を再探索することが望ましい"
     }
   ]
