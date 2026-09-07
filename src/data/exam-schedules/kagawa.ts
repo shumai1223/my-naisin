@@ -16,6 +16,18 @@
  *
  * 一般選抜の学力検査(3/10)・適性検査(3/11)・追学力検査(3/14)・追適性検査(3/15)・合格発表(3/19)
  * はWebSearchで得た独立した二次情報源と完全一致を確認済み（2026-09-04）。
+ *
+ * 令和9年度分（T-Y11F §5順序#2）: R8と同型の92頁「実施細目」はまだ公表されていない。
+ * 代わりに「令和9年度香川県公立高等学校入学者選抜の日程について」
+ * （https://www.pref.kagawa.lg.jp/documents/15088/nyusinittei9.pdf・1頁46KB・
+ * ToUnicode欠落のためpdftoppm+visionで転記）という検査・合格発表の日付のみを示した
+ * 簡易版が先行公表されていたため、これを一次資料とした。この簡易版には入学願書登録・
+ * 受付期間や志願変更受付期間の記載が無いため、R8では収録していたそれらの項目は
+ * 推測で埋めず収録しない（Y-0）。また追検査の呼称・構成もR8「追検査（学力検査）」
+ * 「追検査（適性検査）」の2区分から、R9では「追学力検査、追面接」「追適性検査」という
+ * 異なる区分に変わっていたため、独自の統合はせず公表資料のラベルをそのまま転記した。
+ * 合格発表の呼称もR8「合格発表」に対しR9資料は「合格者発表」と表記されており、こちらも
+ * 独自の統一はせず公表資料の表記をそのまま採用した。
  */
 import type { PrefectureExamScheduleFile } from '@/lib/exam-schedule';
 
@@ -39,6 +51,21 @@ export const KAGAWA_EXAM_SCHEDULE: PrefectureExamScheduleFile = {
         { label: '一般選抜 追検査（学力検査）', startDate: '2026-03-14' },
         { label: '一般選抜 追検査（適性検査）', startDate: '2026-03-15' },
         { label: '一般選抜 合格発表', startDate: '2026-03-19', note: '9:30' },
+      ],
+    },
+    {
+      fiscalYear: '令和9年度（2027年度）',
+      sourceUrl: 'https://www.pref.kagawa.lg.jp/documents/15088/nyusinittei9.pdf',
+      docTitle: '令和9年度香川県公立高等学校入学者選抜の日程について',
+      fetchedAt: '2026-09-08',
+      events: [
+        { label: '自己推薦選抜 検査・面接', startDate: '2027-02-02' },
+        { label: '自己推薦選抜 合格者発表', startDate: '2027-02-09' },
+        { label: '一般選抜 学力検査', startDate: '2027-03-09' },
+        { label: '一般選抜 適性検査・面接', startDate: '2027-03-10' },
+        { label: '一般選抜 追学力検査・追面接', startDate: '2027-03-13' },
+        { label: '一般選抜 追適性検査', startDate: '2027-03-14' },
+        { label: '一般選抜 合格者発表', startDate: '2027-03-18' },
       ],
     },
   ],

@@ -43,4 +43,15 @@ describe('KAGAWA_EXAM_SCHEDULE', () => {
     expect(findScheduleEvent(KAGAWA_EXAM_SCHEDULE, '令和99年度', '一般選抜 学力検査')).toBeUndefined();
     expect(findScheduleEvent(KAGAWA_EXAM_SCHEDULE, '令和8年度（2026年度）', '存在しない項目')).toBeUndefined();
   });
+
+  it('has 令和9年度 entries matching the published R9 schedule summary (no fabricated application periods)', () => {
+    const exam = findScheduleEvent(KAGAWA_EXAM_SCHEDULE, '令和9年度（2027年度）', '一般選抜 学力検査');
+    expect(exam?.startDate).toBe('2027-03-09');
+
+    const result = findScheduleEvent(KAGAWA_EXAM_SCHEDULE, '令和9年度（2027年度）', '一般選抜 合格者発表');
+    expect(result?.startDate).toBe('2027-03-18');
+
+    const labels = KAGAWA_EXAM_SCHEDULE.years[1].events.map((e) => e.label);
+    expect(labels.every((l) => !l.includes('願書登録') && !l.includes('受付期間') && !l.includes('志願変更'))).toBe(true);
+  });
 });
