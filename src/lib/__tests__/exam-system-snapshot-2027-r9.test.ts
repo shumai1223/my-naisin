@@ -63,6 +63,23 @@ describe('2027-r9 exam-system snapshot（T-Y11F §5順序#1 収集中スナッ�
     }
   });
 
+  test('kanagawa: 2026-r8と2027-r9で制度の核となる数値が一致する(実測で確認済みの「変更なし」)', () => {
+    const k2027 = snapshot.entries.find((e) => e.code === 'kanagawa')!;
+    const k2026 = snapshot2026.entries.find((e) => e.code === 'kanagawa')!;
+    expect(k2027.maxScore).toBe(k2026.maxScore);
+    expect(k2027.gradeMultipliers).toEqual(k2026.gradeMultipliers);
+    expect(k2027.coreMultiplier).toBe(k2026.coreMultiplier);
+    expect(k2027.practicalMultiplier).toBe(k2026.practicalMultiplier);
+    expect(k2027.reverseCalc).toBeNull();
+
+    const diffs = diffExamSystemSnapshots(snapshot2026, snapshot);
+    const kanagawaDiffs = diffs.filter((d) => d.prefectureCode === 'kanagawa');
+    expect(kanagawaDiffs.length).toBeGreaterThan(0);
+    for (const d of kanagawaDiffs) {
+      expect(d.status).toBe('unchanged');
+    }
+  });
+
   test('47県未満のためmeta.notYetPublishedNoteが「まだ公表されていない」旨を明記している(取得不能との2値化防止)', () => {
     expect(snapshot.meta.notYetPublishedNote).toContain('まだ公表されていない');
   });

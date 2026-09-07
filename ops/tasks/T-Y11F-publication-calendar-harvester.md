@@ -299,7 +299,14 @@ visionでなくRead toolで直接抽出できた）を確認。学力検査90点
 （令和8年度分と完全一致）と完全に同一で**変更なし**。大阪府は全県共通の固定式のため埼玉の
 ような「学校裁量による代表値」の注記は不要で、一次資料の数値とgradeMultipliers/maxScore/
 osakaTypeCount/reverseCalcが直接一致（saitamaより検証確度が高い）。テストを6件に拡充。
-**2/5県完了**（saitama/osaka）。長野/神奈川/山口の3県は次回以降。
+**2026-09-07 kanagawa 3件目完了**: 現行ページ「選考基準の見方」（`documents/63368/00_mikata.pdf`・
+PDF内蔵テキスト層でRead toolから直接抽出可能）を確認。「学習の記録（評定）：第２学年の
+９教科の評定合計＋第３学年の９教科の評定合計の２倍（135点満点）を100点満点に換算」という
+記述が2025-r7エントリの確認内容（令和8年度分と完全一致）と完全に同一で**変更なし**。
+S1=(a×f)+(b×g)[+(d×i)]・S2=(b×g)+(c×h)[+(d×i)]という2段階選考の構造も不変。神奈川県は
+学校ごとに比率を自由設定できる制度のため、令和8年度分と同じくreverseCalcはnullのまま
+引き継いだ。テストを7件に拡充。**3/5県完了**（saitama/osaka/kanagawa）。長野/山口の2県は
+次回以降。
 | 2 | **入試日程DBのR9更新** | `exam-schedules` 47県すべて令和8を持つが、**令和9は7県のみ＝40県が未更新**。R9日程は4〜7月公表済みの県が多い | 10h |
 | 3 | **学力検査平均点R8** | 41県収録だが**R8は22県だけ**（令和7は37県ある）。19県はデータがあってR8未収録・6県は未着手。教委の結果概要は6〜8月公表 | 12h |
 | 4 | **定時制・通信制の残り26県** | `teiji-competition-rates` は**21県収録／26県未収録**（aichi akita aomori ehime fukui fukuoka fukushima hyogo ibaraki ishikawa iwate kagawa kochi mie miyazaki nara oita osaka saga saitama shiga tochigi toyama wakayama yamagata yamaguchi）。S1-3で所在分類済み | 20〜30h |
