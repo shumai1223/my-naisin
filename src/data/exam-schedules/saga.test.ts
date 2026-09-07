@@ -45,4 +45,13 @@ describe('SAGA_EXAM_SCHEDULE', () => {
     expect(findScheduleEvent(SAGA_EXAM_SCHEDULE, '令和99年度', '一般選抜 学力検査等')).toBeUndefined();
     expect(findScheduleEvent(SAGA_EXAM_SCHEDULE, '令和8年度（2026年度）', '存在しない項目')).toBeUndefined();
   });
+
+  it('has 令和9年度 entries matching the published R9 press release', () => {
+    const exam = findScheduleEvent(SAGA_EXAM_SCHEDULE, '令和9年度（2027年度）', '一般選抜 学力検査等');
+    expect(exam?.startDate).toBe('2027-03-02');
+    expect(exam?.endDate).toBe('2027-03-03');
+
+    const result = findScheduleEvent(SAGA_EXAM_SCHEDULE, '令和9年度（2027年度）', '一般選抜 合格者発表');
+    expect(result?.startDate).toBe('2027-03-10');
+  });
 });
