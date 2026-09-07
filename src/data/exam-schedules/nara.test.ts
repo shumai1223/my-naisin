@@ -44,4 +44,15 @@ describe('NARA_EXAM_SCHEDULE', () => {
     expect(findScheduleEvent(NARA_EXAM_SCHEDULE, '令和99年度', '一次選抜 学力検査等')).toBeUndefined();
     expect(findScheduleEvent(NARA_EXAM_SCHEDULE, '令和8年度（2026年度）', '存在しない項目')).toBeUndefined();
   });
+
+  it('has 令和9年度 entries matching the published R9 calendar (labels printed in-cell)', () => {
+    const exam = findScheduleEvent(NARA_EXAM_SCHEDULE, '令和9年度（2027年度）', '一次選抜 学力検査等');
+    expect(exam?.startDate).toBe('2027-02-24');
+
+    const result = findScheduleEvent(NARA_EXAM_SCHEDULE, '令和9年度（2027年度）', '一次選抜 合格発表');
+    expect(result?.startDate).toBe('2027-03-08');
+
+    const labels = NARA_EXAM_SCHEDULE.years[1].events.map((e) => e.label);
+    expect(labels.some((l) => l.startsWith('二次選抜'))).toBe(true);
+  });
 });
