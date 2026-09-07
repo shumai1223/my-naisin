@@ -45,4 +45,19 @@ describe('OITA_EXAM_SCHEDULE', () => {
     expect(findScheduleEvent(OITA_EXAM_SCHEDULE, '令和99年度', '第一次入学者選抜 検査日')).toBeUndefined();
     expect(findScheduleEvent(OITA_EXAM_SCHEDULE, '令和8年度（2026年度）', '存在しない項目')).toBeUndefined();
   });
+
+  it('令和9年度 reflects the restructuring from 第一次/第二次 rounds into 一般入学者選抜 with 3 choice tiers', () => {
+    const labels = OITA_EXAM_SCHEDULE.years[1].events.map((e) => e.label);
+    expect(labels.some((l) => l.startsWith('一般入学者選抜'))).toBe(true);
+    expect(labels.some((l) => l.startsWith('第一次入学者選抜'))).toBe(false);
+    expect(labels.some((l) => l.startsWith('第二次入学者選抜'))).toBe(false);
+
+    const exam = findScheduleEvent(OITA_EXAM_SCHEDULE, '令和9年度（2027年度）', '一般入学者選抜 検査日（第一志願）');
+    expect(exam).toEqual(
+      expect.objectContaining({ startDate: '2027-03-03', endDate: '2027-03-04' })
+    );
+
+    const result = findScheduleEvent(OITA_EXAM_SCHEDULE, '令和9年度（2027年度）', '合格者発表日');
+    expect(result?.startDate).toBe('2027-03-12');
+  });
 });
