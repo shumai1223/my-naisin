@@ -1,0 +1,11 @@
+{
+  "prefecture": "shiga",
+  "sourceUrl": "https://www.pref.shiga.lg.jp/documents/29355/5620947.pdf",
+  "fetchedAt": "2026-09-07T07:42:31.779Z",
+  "contentType": "pdf",
+  "byteLength": 166278,
+  "sha256": "472771f71d927e56d20088100fb6e7dac857bf1c3b1a4a24b62f685a988cc045",
+  "lastModified": "Fri, 31 Jul 2026 09:08:34 GMT",
+  "note": "県立高等学校第1学年の募集定員",
+  "parseStatus": "metadata-only"
+}

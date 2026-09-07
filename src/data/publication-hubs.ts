@@ -105,11 +105,11 @@ export const PUBLICATION_HUBS: PublicationHub[] = [
   },
   {
     prefecture: 'gunma',
-    hubUrl: null,
-    hubKind: 'unknown',
+    hubUrl: 'https://www.pref.gunma.jp/site/kyouiku/list66-367.html',
+    hubKind: 'index',
     r8Evidence: 'https://www.pref.gunma.jp/uploaded/attachment/689968.pdf',
-    r9Url: null,
-    lastVerifiedAt: null,
+    r9Url: 'https://www.pref.gunma.jp/site/kyouiku/760158.html',
+    lastVerifiedAt: '2026-09-07',
   },
   {
     prefecture: 'hiroshima',
@@ -314,11 +314,11 @@ export const PUBLICATION_HUBS: PublicationHub[] = [
   },
   {
     prefecture: 'shiga',
-    hubUrl: null,
-    hubKind: 'unknown',
+    hubUrl: 'https://www.pref.shiga.lg.jp/edu/menu/19972.html',
+    hubKind: 'index',
     r8Evidence: 'https://www.pref.shiga.lg.jp/file/attachment/5591236.pdf',
-    r9Url: null,
-    lastVerifiedAt: null,
+    r9Url: 'https://www.pref.shiga.lg.jp/edu/nyuushi/high/teiin/351365.html',
+    lastVerifiedAt: '2026-09-07',
   },
   {
     prefecture: 'shimane',

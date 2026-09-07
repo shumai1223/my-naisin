@@ -32,8 +32,8 @@ describe('PUBLICATION_HUBS', () => {
     }
   });
 
-  it('F-2初回スコープの4県（chiba/saitama/kagoshima/miyagi）はhubUrl/r9Urlとも判明済み', () => {
-    for (const pref of ['chiba', 'saitama', 'kagoshima', 'miyagi']) {
+  it('F-2/F-3で判明済みの6県（chiba/saitama/kagoshima/miyagi/gunma/shiga）はhubUrl/r9Urlとも判明済み', () => {
+    for (const pref of ['chiba', 'saitama', 'kagoshima', 'miyagi', 'gunma', 'shiga']) {
       const hub = PUBLICATION_HUBS.find((h) => h.prefecture === pref);
       expect(hub?.hubUrl).not.toBeNull();
       expect(hub?.r9Url).not.toBeNull();

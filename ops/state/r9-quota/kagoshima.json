@@ -1,0 +1,11 @@
+{
+  "prefecture": "kagoshima",
+  "sourceUrl": "https://www.pref.kagoshima.jp/ba05/shinrokiboutyousa/documents/129801_20260803165135-1.pdf",
+  "fetchedAt": "2026-09-07T07:42:31.779Z",
+  "contentType": "pdf",
+  "byteLength": 182765,
+  "sha256": "6681534ac9cf116f6cb95fffe404eff9f739d606ff1719199c38628f86eaff99",
+  "lastModified": "Thu, 06 Aug 2026 04:00:08 GMT",
+  "note": "中学校等卒業予定者の進路希望状況（学校別進学希望倍率あり・最終確定倍率ではない）",
+  "parseStatus": "metadata-only"
+}

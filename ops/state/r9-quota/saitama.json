@@ -1,0 +1,11 @@
+{
+  "prefecture": "saitama",
+  "sourceUrl": "https://www.pref.saitama.lg.jp/documents/283649/news2026061601.pdf",
+  "fetchedAt": "2026-09-07T07:42:31.779Z",
+  "contentType": "pdf",
+  "byteLength": 103821,
+  "sha256": "071a820c14b2d1ec8e178ead91051699e8b294677943b742b58b3fd57b0e7bfd",
+  "lastModified": "Tue, 16 Jun 2026 08:00:05 GMT",
+  "note": "第1学年及び専攻科第1学年並びに県立中学校第1学年生徒募集人員について",
+  "parseStatus": "metadata-only"
+}

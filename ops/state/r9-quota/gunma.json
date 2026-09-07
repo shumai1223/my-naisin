@@ -1,0 +1,68 @@
+{
+  "prefecture": "gunma",
+  "sourceUrl": "https://www.pref.gunma.jp/site/kyouiku/760158.html",
+  "fetchedAt": "2026-09-07T07:42:31.779Z",
+  "contentType": "html",
+  "byteLength": 93847,
+  "sha256": "9d90a2496f9c2df6126be8f09fb3da290c022e98999a462ce9cf52769f455457",
+  "lastModified": "Thu, 03 Sep 2026 02:28:10 GMT",
+  "note": "生徒募集定員一覧表（HTML直書き・PDF添付なし）",
+  "parseStatus": "parsed",
+  "r8ComparisonUrl": "https://www.pref.gunma.jp/site/kyouiku/708807.html",
+  "diff": {
+    "r9SchoolCount": 58,
+    "r8SchoolCount": 58,
+    "diffCount": 7,
+    "diffs": [
+      {
+        "school": "前橋西",
+        "course": "全",
+        "r8": 160,
+        "r9": 120,
+        "change": 40
+      },
+      {
+        "school": "桐生工業",
+        "course": "全",
+        "r8": 160,
+        "r9": 120,
+        "change": 40
+      },
+      {
+        "school": "渋川女子",
+        "course": "全",
+        "r8": 200,
+        "r9": 160,
+        "change": 40
+      },
+      {
+        "school": "藤岡中央",
+        "course": "全",
+        "r8": 160,
+        "r9": 120,
+        "change": 40
+      },
+      {
+        "school": "富岡",
+        "course": "全",
+        "r8": 200,
+        "r9": 160,
+        "change": 40
+      },
+      {
+        "school": "安中総合学園",
+        "course": "全",
+        "r8": 200,
+        "r9": 160,
+        "change": 40
+      },
+      {
+        "school": "吾妻中央",
+        "course": "全",
+        "r8": 192,
+        "r9": 152,
+        "change": 40
+      }
+    ]
+  }
+}

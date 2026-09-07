@@ -1,0 +1,11 @@
+{
+  "prefecture": "nagasaki",
+  "sourceUrl": "https://www.pref.nagasaki.jp/fs/2/9/5/0/3/_/__8_7_1____.pdf",
+  "fetchedAt": "2026-09-07T07:42:31.779Z",
+  "contentType": "pdf",
+  "byteLength": 219430,
+  "sha256": "c82fec44856901db06894889b9bd0f1c3031dfe3187ebb9b3caab10cc3b9cd03",
+  "lastModified": "Wed, 15 Jul 2026 09:37:56 GMT",
+  "note": "公立高等学校進学希望状況調査（第１回）の結果について",
+  "parseStatus": "metadata-only"
+}

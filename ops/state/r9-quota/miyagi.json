@@ -1,0 +1,11 @@
+{
+  "prefecture": "miyagi",
+  "sourceUrl": "https://www.pref.miyagi.jp/documents/62797/r9_teiin.pdf",
+  "fetchedAt": "2026-09-07T07:42:31.779Z",
+  "contentType": "pdf",
+  "byteLength": 206225,
+  "sha256": "6412db7ecb8e226b81eac0d98f2b07ad0c9313314fbe52447f3225136591b915",
+  "lastModified": "Thu, 21 May 2026 07:00:03 GMT",
+  "note": "県立高等学校入学者選抜募集定員・日程等",
+  "parseStatus": "metadata-only"
+}

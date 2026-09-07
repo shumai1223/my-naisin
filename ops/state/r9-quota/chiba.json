@@ -1,0 +1,11 @@
+{
+  "prefecture": "chiba",
+  "sourceUrl": "https://www.pref.chiba.lg.jp/kyouiku/shidou/nyuushi/koukou/r9/r9teiin.pdf",
+  "fetchedAt": "2026-09-07T07:42:31.779Z",
+  "contentType": "pdf",
+  "byteLength": 194365,
+  "sha256": "01539f559c64a493ed9d331df4fc633ecf3d186296552ac30718f073d7283cfa",
+  "lastModified": "Thu, 20 Aug 2026 00:33:02 GMT",
+  "note": "第1学年生徒募集定員について（学校×学科PDF）",
+  "parseStatus": "metadata-only"
+}
