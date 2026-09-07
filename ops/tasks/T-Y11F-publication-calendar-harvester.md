@@ -60,9 +60,14 @@ Trendsピーク 2/1〜2/7週（日次 2/9=100・2/5=94・1/30=88）
 
 - [x] `npm run check:competition-updates` を8/31以来はじめて実行し、結果をworklogに書く
       （47件HEAD・1県1日1回の枠内・900ms以上・UA明示・robots尊重／hyogoは取得しない）→
-      2026-09-07実行。47県チェック・changed6県(aichi/akita/fukuoka/kumamoto/miyazaki/yamaguchi・
-      うちaichiのみcontentLength激減で本物の疑いが強く他5件はfingerprintノイズの疑い)・
-      到達不能1県(shiga)・robots拒否1県(hyogo・既知)
+      2026-09-07実行。47県チェック・changed6県(aichi/akita/fukuoka/kumamoto/miyazaki/yamaguchi)・
+      到達不能1県(shiga)・robots拒否1県(hyogo・既知)。⚠️**訂正(同日18:0x)**: 当初aichiのみ
+      contentLength激減(1,405,287→212バイト)で本物の疑いが強いと記録したが、GETで再検証した
+      ところ実際は無変化(1,405,287バイトで基準一致)と判明。原因はpref.aichi.jpのImperva/
+      Incapsula bot対策がHEADメソッドのみを302でアンチボット中継ページへ誘導していたこと
+      （既知の制約T-Y11本文389行目と同根）。`check-competition-rate-updates.mjs`にcontent-type
+      ベースのGETフォールバックを追加し再発防止済み。**結論: 今回の47県フルランで実際に
+      変化した県は0件**（6件は全てfingerprintノイズ）
 - [x] **毎日回る状態にする。** `MyNaishin-DailyBrief`（毎朝07:30）と同じ形のWindowsタスク登録、
       または `src/scripts/daily-brief-health.ts` への組込み →
       `C:\Users\E24054\competition-updates-check.bat`＋タスク`MyNaishin-CompetitionUpdateCheck`
@@ -174,9 +179,13 @@ Trendsピーク 2/1〜2/7週（日次 2/9=100・2/5=94・1/30=88）
       T-Y11Fの見積り時に現在のコード状態を確認せずに書かれた誤りだったと判明。無理に統一
       せず、この項目はT-Y11Eの既存決定を追認して見送る（xlsx系統一パーサが必要になった
       時点で別タスクとして起票する）
-- [ ] ビジョン5県（hokkaido/tokyo/aichi/miyazaki/yamaguchi・955件/37頁）は
+- [x] ビジョン5県（hokkaido/tokyo/aichi/miyazaki/yamaguchi・955件/37頁）は
       **R9の手順確認として1県だけ**。⚠️**全てR8収録済みなので新規データは0件。**
-      37頁で14日は埋まらない。深追いしない
+      37頁で14日は埋まらない。深追いしない →
+      `scripts/bairitsu-ingest/queue-vision-review.mjs --fetch`を実行し5県とも
+      再取得・再レンダリング成功を確認(手順自体は健全)。新規データ0件（想定通り・
+      ページ解析への深追いはしていない）。**副産物**: aichiの取得中に「HEADのみ
+      Impervaで壊れる」問題を発見（上のF-1訂正を参照）
 - [x] E-3-2（R7/R6 pdfHash後追い）: 数県試掘 → Wayback到達率を実測 → 続行/見送りを判定 →
       **試掘(tokyo/chiba/osaka/fukui/kagoshima・R7+R6の計10件)が10/10到達**という強い結果
       だったため、そのまま全件へ進めることに決定。**R7: 45/45件のpdfHash取得完了**

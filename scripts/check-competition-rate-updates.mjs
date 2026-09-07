@@ -224,6 +224,18 @@ async function main() {
         res = await fetchWithTimeout(url, 'GET');
         res.body?.cancel?.();
       }
+      // ⚠️2026-09-07判明: Imperva等のWAF/CDNは、HEADメソッドだけをボット判定して302で
+      // アンチボット中継ページへ誘導し、そこで小さなHTML本文のまま応答を返すことがある
+      // （aichiで実例確認：HEADはstatus 200でも content-type=text/html・content-length=212等の
+      // 小さな値になり、実物のPDF(1.4MB)とは無関係な偽のfingerprint変化を生む）。
+      // .pdf/.xlsxを監視しているのにcontent-typeがそれらしくない場合はGETへフォールバックする。
+      const looksLikeDocumentUrl = /\.(pdf|xlsx?)($|\?)/i.test(url);
+      const contentType = res.headers.get('content-type') ?? '';
+      const contentTypeLooksWrong = looksLikeDocumentUrl && contentType && !/pdf|excel|spreadsheet|octet-stream/i.test(contentType);
+      if (res.ok && contentTypeLooksWrong) {
+        res = await fetchWithTimeout(url, 'GET');
+        res.body?.cancel?.();
+      }
       if (res.status === 404 || res.status === 410) {
         outcome = { fingerprint: null, note: `HTTP ${res.status}（資料が削除された可能性）` };
       } else {

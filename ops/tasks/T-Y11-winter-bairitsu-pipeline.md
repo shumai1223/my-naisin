@@ -97,6 +97,14 @@ R9の公表資料は多くの県でURLに年度が埋まる（22県）かCMS添�
 (shiga)・robots拒否1県(hyogo・既知)。ただし6件のうち中身を精査すると**フィンガープリントだけでは
 信頼できない**ことが分かった: aichiはcontentLengthが1,405,287→212バイトへ激減(URLが実際に壊れて
 いる強い兆候・要調査)、akitaはetagが強weak変化+content-length欠落（サーバ設定変化の疑い）、
+⚠️**訂正(同日18:0x)**: aichiは壊れていなかった。pref.aichi.jpのImperva/Incapsula bot対策が
+**HEADメソッドだけ**を302でアンチボット中継ページへ誘導し、そこで小さなHTML本文(122〜212バイト)
+のまま応答することが原因と判明（既知の制約「R7収集時と同じ既知の制約」T-Y11本文389行目参照・
+今回HEAD由来の偽fingerprintという新しい側面を追加確認）。GETで再取得すると200・content-length
+1,405,287・etag/last-modifiedとも8/31基準と完全一致=**実際は無変化**。`scripts/check-competition-
+rate-updates.mjs`にcontent-typeベースのGETフォールバックを追加済み(.pdf/.xlsxを監視しているのに
+HEADのcontent-typeがpdf/excel系でなければGETへ切替)。これで6件のうち5件がノイズ・1件(aichi)も
+実は無変化=**今回の47県フルランでは実際に変化した県は0件**だったと確定,
 miyazakiはetag末尾のみ微差でcontentLength/lastModifiedは完全一致（CDN artifactの疑い）、fukuoka/
 kumamoto/yamaguchiはlastModifiedが本日9/7に更新されているがcontentLengthは前回と同一（同一内容の
 再保存の可能性を排除できない）。**「changed」の表示を鵜呑みにせず、本文差分（F-2のハブ監視やF-3の

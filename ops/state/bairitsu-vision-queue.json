@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-03T17:47:03.102Z",
+  "generatedAt": "2026-09-07T09:02:41.103Z",
   "entries": [
     {
       "prefecture": "hokkaido",
@@ -10,7 +10,7 @@
       "pageCount": 14,
       "pdfPath": "ops/state/bairitsu-vision-queue/hokkaido/hokkaido-latest.pdf",
       "status": "ready_for_vision_review",
-      "queuedAt": "2026-09-03T17:46:40.751Z"
+      "queuedAt": "2026-09-07T09:01:57.668Z"
     },
     {
       "prefecture": "tokyo",
@@ -21,7 +21,7 @@
       "pageCount": 3,
       "pdfPath": "ops/state/bairitsu-vision-queue/tokyo/tokyo-latest.pdf",
       "status": "ready_for_vision_review",
-      "queuedAt": "2026-09-03T17:46:44.788Z"
+      "queuedAt": "2026-09-07T09:02:01.673Z"
     },
     {
       "prefecture": "aichi",
@@ -32,7 +32,7 @@
       "pageCount": 13,
       "pdfPath": "ops/state/bairitsu-vision-queue/aichi/aichi-latest.pdf",
       "status": "ready_for_vision_review",
-      "queuedAt": "2026-09-03T17:46:54.746Z"
+      "queuedAt": "2026-09-07T09:02:32.717Z"
     },
     {
       "prefecture": "miyazaki",
@@ -43,7 +43,7 @@
       "pageCount": 3,
       "pdfPath": "ops/state/bairitsu-vision-queue/miyazaki/miyazaki-latest.pdf",
       "status": "ready_for_vision_review",
-      "queuedAt": "2026-09-03T17:46:58.769Z"
+      "queuedAt": "2026-09-07T09:02:36.659Z"
     },
     {
       "prefecture": "yamaguchi",
@@ -54,7 +54,7 @@
       "pageCount": 4,
       "pdfPath": "ops/state/bairitsu-vision-queue/yamaguchi/yamaguchi-latest.pdf",
       "status": "ready_for_vision_review",
-      "queuedAt": "2026-09-03T17:47:03.102Z"
+      "queuedAt": "2026-09-07T09:02:41.103Z"
     }
   ]
 }
