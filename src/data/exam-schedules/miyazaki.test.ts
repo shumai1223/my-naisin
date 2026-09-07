@@ -44,4 +44,17 @@ describe('MIYAZAKI_EXAM_SCHEDULE', () => {
     expect(findScheduleEvent(MIYAZAKI_EXAM_SCHEDULE, '令和99年度', '一般入学者選抜 学力検査')).toBeUndefined();
     expect(findScheduleEvent(MIYAZAKI_EXAM_SCHEDULE, '令和8年度（2026年度）', '存在しない項目')).toBeUndefined();
   });
+
+  it('has 令和9年度 entries matching the published R9 schedule section (no fabricated application periods)', () => {
+    const exam = findScheduleEvent(MIYAZAKI_EXAM_SCHEDULE, '令和9年度（2027年度）', '一般入学者選抜 学力検査');
+    expect(exam).toEqual(
+      expect.objectContaining({ startDate: '2027-03-03', endDate: '2027-03-04' })
+    );
+
+    const result = findScheduleEvent(MIYAZAKI_EXAM_SCHEDULE, '令和9年度（2027年度）', '合格者発表');
+    expect(result?.startDate).toBe('2027-03-17');
+
+    const labels = MIYAZAKI_EXAM_SCHEDULE.years[1].events.map((e) => e.label);
+    expect(labels.every((l) => !l.includes('願書受付') && !l.includes('志願変更'))).toBe(true);
+  });
 });
