@@ -206,7 +206,14 @@ Trendsピーク 2/1〜2/7週（日次 2/9=100・2/5=94・1/30=88）
       労働量・1県あたり数十分〜1時間規模）。kanagawaはさらに学校名が数値コードでしか現れず
       コード→名称対応表が別途必要。**6県同時達成は1イテレーションの範囲を超える**ため、
       大阪府1県の部分的成功（95.8%）を記録した上で残りは今後の個別セッションへ持ち越す
-- [ ] `ops/state/harvest-ledger.json` に「検知時刻→取得sha256→検算→遅延h」の行がある
+- [x] `ops/state/harvest-ledger.json` に「検知時刻→取得sha256→検算→遅延h」の行がある →
+      `scripts/bairitsu-ingest/build-harvest-ledger.mjs`で新設。F-2/F-3で既に収集済みの
+      `hub-events.json`（検知時刻）と`r9-quota/<pref>.json`（sha256・検算状態）から導出
+      （新規ネットワークアクセス無し）。7行（chiba/gunma/kagoshima/miyagi/nagasaki/
+      saitama/shiga）・検知時刻はハブ監視経由(4県)と直接調査(3県・fetchedAtで代用し
+      正直に`detectionSource:'manual-investigation'`と区別)・遅延hはfetchedAtと
+      教委側Last-Modifiedの差（今回は初回バックフィルのため101〜2617hと大きいが、
+      F-1の毎日検知が稼働し続ければ将来の値は小さくなる想定）
 - [x] `tsc` 実exit 0 / jest green
 - [x] ⚠️ **本番反映・デプロイはしない** → 遵守（コード・状態ファイルのみ・ページ変更0件）
 

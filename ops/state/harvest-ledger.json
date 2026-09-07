@@ -1,0 +1,91 @@
+{
+  "generatedAt": "2026-09-07T08:54:39.157Z",
+  "generatedBy": "scripts/bairitsu-ingest/build-harvest-ledger.mjs (T-Y11F DoD)",
+  "note": "検知時刻→取得sha256→検算→遅延hの行。ops/state/hub-events.json・ops/state/r9-quota/<pref>.jsonから導出（新規ネットワークアクセスなし）。",
+  "rows": [
+    {
+      "prefecture": "chiba",
+      "detectedAt": "2026-09-07T07:26:45.837Z",
+      "detectionSource": "hub-watch",
+      "sourceUrl": "https://www.pref.chiba.lg.jp/kyouiku/shidou/nyuushi/koukou/r9/r9teiin.pdf",
+      "fetchedAt": "2026-09-07T07:42:31.779Z",
+      "sha256": "01539f559c64a493ed9d331df4fc633ecf3d186296552ac30718f073d7283cfa",
+      "validation": "metadata-only-unvalidated",
+      "diffSummary": null,
+      "lastModified": "Thu, 20 Aug 2026 00:33:02 GMT",
+      "latencyHours": 439.2
+    },
+    {
+      "prefecture": "gunma",
+      "detectedAt": "2026-09-07T07:42:31.779Z",
+      "detectionSource": "manual-investigation",
+      "sourceUrl": "https://www.pref.gunma.jp/site/kyouiku/760158.html",
+      "fetchedAt": "2026-09-07T07:42:31.779Z",
+      "sha256": "9d90a2496f9c2df6126be8f09fb3da290c022e98999a462ce9cf52769f455457",
+      "validation": "diffed-against-confirmed",
+      "diffSummary": "7件差分（r9=58校・r8=58校）",
+      "lastModified": "Thu, 03 Sep 2026 02:28:10 GMT",
+      "latencyHours": 101.2
+    },
+    {
+      "prefecture": "kagoshima",
+      "detectedAt": "2026-09-07T07:26:45.837Z",
+      "detectionSource": "hub-watch",
+      "sourceUrl": "https://www.pref.kagoshima.jp/ba05/shinrokiboutyousa/documents/129801_20260803165135-1.pdf",
+      "fetchedAt": "2026-09-07T07:42:31.779Z",
+      "sha256": "6681534ac9cf116f6cb95fffe404eff9f739d606ff1719199c38628f86eaff99",
+      "validation": "metadata-only-unvalidated",
+      "diffSummary": null,
+      "lastModified": "Thu, 06 Aug 2026 04:00:08 GMT",
+      "latencyHours": 771.7
+    },
+    {
+      "prefecture": "miyagi",
+      "detectedAt": "2026-09-07T07:26:45.837Z",
+      "detectionSource": "hub-watch",
+      "sourceUrl": "https://www.pref.miyagi.jp/documents/62797/r9_teiin.pdf",
+      "fetchedAt": "2026-09-07T07:42:31.779Z",
+      "sha256": "6412db7ecb8e226b81eac0d98f2b07ad0c9313314fbe52447f3225136591b915",
+      "validation": "metadata-only-unvalidated",
+      "diffSummary": null,
+      "lastModified": "Thu, 21 May 2026 07:00:03 GMT",
+      "latencyHours": 2616.7
+    },
+    {
+      "prefecture": "nagasaki",
+      "detectedAt": "2026-09-07T07:42:31.779Z",
+      "detectionSource": "manual-investigation",
+      "sourceUrl": "https://www.pref.nagasaki.jp/fs/2/9/5/0/3/_/__8_7_1____.pdf",
+      "fetchedAt": "2026-09-07T07:42:31.779Z",
+      "sha256": "c82fec44856901db06894889b9bd0f1c3031dfe3187ebb9b3caab10cc3b9cd03",
+      "validation": "metadata-only-unvalidated",
+      "diffSummary": null,
+      "lastModified": "Wed, 15 Jul 2026 09:37:56 GMT",
+      "latencyHours": 1294.1
+    },
+    {
+      "prefecture": "saitama",
+      "detectedAt": "2026-09-07T07:26:45.837Z",
+      "detectionSource": "hub-watch",
+      "sourceUrl": "https://www.pref.saitama.lg.jp/documents/283649/news2026061601.pdf",
+      "fetchedAt": "2026-09-07T07:42:31.779Z",
+      "sha256": "071a820c14b2d1ec8e178ead91051699e8b294677943b742b58b3fd57b0e7bfd",
+      "validation": "metadata-only-unvalidated",
+      "diffSummary": null,
+      "lastModified": "Tue, 16 Jun 2026 08:00:05 GMT",
+      "latencyHours": 1991.7
+    },
+    {
+      "prefecture": "shiga",
+      "detectedAt": "2026-09-07T07:42:31.779Z",
+      "detectionSource": "manual-investigation",
+      "sourceUrl": "https://www.pref.shiga.lg.jp/documents/29355/5620947.pdf",
+      "fetchedAt": "2026-09-07T07:42:31.779Z",
+      "sha256": "472771f71d927e56d20088100fb6e7dac857bf1c3b1a4a24b62f685a988cc045",
+      "validation": "metadata-only-unvalidated",
+      "diffSummary": null,
+      "lastModified": "Fri, 31 Jul 2026 09:08:34 GMT",
+      "latencyHours": 910.6
+    }
+  ]
+}
