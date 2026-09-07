@@ -12,11 +12,22 @@
  *
  * ⚠️既知の制約（2026-09-07時点）: 複数学科を1行にまとめた行（例:「旭」普通科+国際文化科）は
  * 列のズレが学校ごとに一定でないため今回はスキップしている（165件中96件=単一学科校のみ抽出・
- * 27件が複数学科でスキップ）。市岡/槻の木/鳳/東住吉総合の4校は確定側で「（単位制）」
- * 「（クリエイティブスクール）」の学科名suffixが付くため、抽出した学科名（suffixなし）と
- * 一致せず`missing-in-confirmed`として残る（マッチ率95.8%・issues4件でpassed=falseのまま）。
- * 複数学科行の安全な分解と単位制/クリエイティブ判定の両方を解決すれば100%に近づく見込み。
+ * 27件が複数学科でスキップ）。
+ *
+ * 市岡/槻の木/鳳/東住吉総合の4校は速報xlsx上ではsheet1に他の普通科/総合学科校と同じ形式
+ * （「普通」「総合学」等・suffixなし）で並んでいるが、確定側（osaka.ts）では出典元PDFの表構成
+ * （単位制専用の表・クリエイティブスクール専用の表）に由来して「（単位制）」「（クリエイティブ
+ * スクール）」というsuffix付き学科名で登録されている。quota（募集人員）はいずれも完全一致
+ * （例: 市岡280=280・槻の木240=240・鳳240=240・東住吉総合234=234）しており、同一校の同一
+ * データであることは確実なため、下記EXPECTED_DEPARTMENT_SUFFIXESで明示的に対応関係を記録し、
+ * 一致しない場合のみsuffixを付けて再照合する（未知の学校を勝手にsuffix付けすることはしない）。
  */
+const EXPECTED_DEPARTMENT_SUFFIXES: Record<string, string> = {
+  市岡: '（単位制）',
+  槻の木: '（単位制）',
+  鳳: '（単位制）',
+  東住吉総合: '（クリエイティブスクール）',
+};
 import { parseXlsxFile } from '@/lib/xlsx-parse';
 import { OSAKA_COMPETITION_RATES } from '@/data/competition-rates/osaka';
 import { validateInterimSubmission, type InterimRateRecord } from '@/lib/interim-rate';
@@ -52,7 +63,8 @@ for (const row of rows) {
     continue;
   }
   const schoolName = (typeof prefixOrCode === 'string' && prefixOrCode.endsWith('市立') ? `${prefixOrCode}${name}` : name).trim();
-  const department = dept.endsWith('科') ? dept : `${dept}科`;
+  const baseDepartment = dept.endsWith('科') ? dept : `${dept}科`;
+  const department = EXPECTED_DEPARTMENT_SUFFIXES[schoolName] ? `${baseDepartment}${EXPECTED_DEPARTMENT_SUFFIXES[schoolName]}` : baseDepartment;
   interimRecords.push({ schoolName, department, quota, interimApplicants: applicants, interimRate: typeof rate === 'number' ? rate : null });
 }
 

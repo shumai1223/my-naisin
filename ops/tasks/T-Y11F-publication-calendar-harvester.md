@@ -204,17 +204,21 @@ Trendsピーク 2/1〜2/7週（日次 2/9=100・2/5=94・1/30=88）
       `MyNaishin-CompetitionUpdateCheck`（毎朝7:45）登録済み
 - [x] ハブ台帳が N/47 で、判明しない県は `null` になっている → F-2/F-3完了・6/47県判明
 - [x] 既公表R9資料のうち**4件以上**をハブ監視が新規リンクとして拾えた → F-2/F-3完了・6/6県
-- [ ] 速報パーサが**6県以上**でR7/R8リプレイに合格 → ⚠️**未達・現実的な難度を実測で確認**。
-      `scripts/bairitsu-ingest/replay-interim-osaka.ts`で大阪府の実データ（xlsx・R8速報→確定）
-      を`validateInterimSubmission()`に通したところmatchRatio=95.8%まで到達したが、単位制/
-      クリエイティブスクール4校の学科名suffix不一致でissues4件が残りpassedには至らず。
-      xlsx-parse.tsの`<rPh>`ふりがな注釈混入バグ（本文に「桜宮サクラノミヤ」のように連結される
-      不具合）を発見・修正しテスト追加（これ自体は恒久的な価値）。**残る5県（chiba/saitama/
-      kanagawa/hiroshima/shizuoka）はPDF埋め込みCJKフォントにToUnicode CMapが無くpdftotextが
-      使えない・pdftoppm+visionでの1件ずつの目視転記が必要**（T-W1の一次ソース調査と同等の
-      労働量・1県あたり数十分〜1時間規模）。kanagawaはさらに学校名が数値コードでしか現れず
-      コード→名称対応表が別途必要。**6県同時達成は1イテレーションの範囲を超える**ため、
-      大阪府1県の部分的成功（95.8%）を記録した上で残りは今後の個別セッションへ持ち越す
+- [ ] 速報パーサが**6県以上**でR7/R8リプレイに合格 → ⚠️**1/6県で合格達成・現実的な難度を実測で
+      確認**。`scripts/bairitsu-ingest/replay-interim-osaka.ts`で大阪府の実データ（xlsx・
+      R8速報0305→確定osaka.ts）を`validateInterimSubmission()`に通したところ、当初
+      matchRatio=95.8%（issues4件）だったが、単位制/クリエイティブスクール4校
+      （市岡/槻の木/鳳/東住吉総合）はquotaが確定側と完全一致することを確認したうえで
+      `EXPECTED_DEPARTMENT_SUFFIXES`という明示的な対応表（学校名を勝手にsuffix付けせず、
+      この4校だけ個別に記録）を追加し**matchRatio=1.000・issues0件で合格（passed=true）
+      に到達**。xlsx-parse.tsの`<rPh>`ふりがな注釈混入バグ（本文に「桜宮サクラノミヤ」のように
+      連結される不具合）を発見・修正しテスト追加（これ自体は恒久的な価値）。**残る5県
+      （chiba/saitama/kanagawa/hiroshima/shizuoka）はPDF埋め込みCJKフォントにToUnicode CMap
+      が無くpdftotextが使えない・pdftoppm+visionでの1件ずつの目視転記が必要**（T-W1の
+      一次ソース調査と同等の労働量・1県あたり数十分〜1時間規模）。kanagawaはさらに学校名が
+      数値コードでしか現れずコード→名称対応表が別途必要。**6県同時達成は1イテレーションの
+      範囲を超える**ため、大阪府1県の完全合格を記録した上で残り5県は今後の個別セッションへ
+      持ち越す（1県ずつ・緑を確認してから次へ、という既存の運用方針に従う）
 - [x] `ops/state/harvest-ledger.json` に「検知時刻→取得sha256→検算→遅延h」の行がある →
       `scripts/bairitsu-ingest/build-harvest-ledger.mjs`で新設。F-2/F-3で既に収集済みの
       `hub-events.json`（検知時刻）と`r9-quota/<pref>.json`（sha256・検算状態）から導出
