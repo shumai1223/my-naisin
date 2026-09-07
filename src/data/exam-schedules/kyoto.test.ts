@@ -44,4 +44,17 @@ describe('KYOTO_EXAM_SCHEDULE', () => {
     expect(findScheduleEvent(KYOTO_EXAM_SCHEDULE, '令和99年度', '中期選抜 学力検査等')).toBeUndefined();
     expect(findScheduleEvent(KYOTO_EXAM_SCHEDULE, '令和8年度（2026年度）', '存在しない項目')).toBeUndefined();
   });
+
+  it('令和9年度 reflects the system change from 3 rounds to 2 (中期選抜 abolished, not fabricated)', () => {
+    const labels = KYOTO_EXAM_SCHEDULE.years[1].events.map((e) => e.label);
+    expect(labels.some((l) => l.startsWith('前期選抜'))).toBe(true);
+    expect(labels.some((l) => l.startsWith('後期選抜'))).toBe(true);
+    expect(labels.some((l) => l.startsWith('中期選抜'))).toBe(false);
+
+    const exam = findScheduleEvent(KYOTO_EXAM_SCHEDULE, '令和9年度（2027年度）', '後期選抜 学力検査等');
+    expect(exam?.startDate).toBe('2027-03-16');
+
+    const result = findScheduleEvent(KYOTO_EXAM_SCHEDULE, '令和9年度（2027年度）', '後期選抜 合格発表');
+    expect(result?.startDate).toBe('2027-03-18');
+  });
 });
