@@ -6,11 +6,43 @@
     "completedAt": null,
     "collectionMethod": "T-Y11F §5順序#1(ops/tasks/T-Y11F-publication-calendar-harvester.md)。2025-r7/2024-r6と同じ形式・同じ収集方針だが、令和9年度の実施要項・選抜要領は2026-09-07時点で全47県のうち一部の県のみ公表済み(2026-08-31に👤へ提案書を送付した際の実測で埼玉5/29・長野7/2・大阪・神奈川・山口が既に確認されている)。未公表の県はentriesに含めずmeta.unavailableにも入れない(『まだ存在しない』は『取得不能』とは別状態のため2値化しない)。今後も公表され次第、随時追加していく想定。",
     "totalPrefectures": 47,
-    "collectedCount": 4,
+    "collectedCount": 5,
     "unavailable": [],
-    "notYetPublishedNote": "2026-09-07時点でR9実施要項・選抜要領の公表が確認できているのは埼玉/長野/大阪/神奈川/山口の5県のみ(うち今回entries化できたのは埼玉・大阪・神奈川・長野)。残り42県は『まだ公表されていない』可能性が高くunavailableではない。"
+    "notYetPublishedNote": "2026-09-07時点でR9実施要項・選抜要領の公表が確認できているのは埼玉/長野/大阪/神奈川/山口の5県のみ、そして今回全5県ともentries化が完了した。残り42県は『まだ公表されていない』可能性が高くunavailableではない。"
   },
   "entries": [
+    {
+      "code": "yamaguchi",
+      "name": "山口県",
+      "region": "中国",
+      "fiscalYear": "2027",
+      "targetGrades": [1, 2, 3],
+      "gradeMultipliers": { "1": 1, "2": 1, "3": 1 },
+      "coreMultiplier": 1,
+      "practicalMultiplier": 1,
+      "maxScore": 135,
+      "simplifiedCalc": false,
+      "actualMaxScore": null,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": {
+        "totalMaxScore": 385,
+        "examMaxScore": 250,
+        "defaultRatio": { "naishin": 35, "exam": 65 },
+        "calcType": "standard",
+        "naishinMultiplier": null,
+        "kValue": null,
+        "sValueCoefficients": null,
+        "osakaTypeCount": null,
+        "hasTokyoSettings": false,
+        "hasKanagawaSettings": false
+      },
+      "sourceUrl": "https://www.pref.yamaguchi.lg.jp/uploaded/life/353652_683067_misc.pdf",
+      "sourceUrl2": "https://www.pref.yamaguchi.lg.jp/site/kyouiku/353652.html",
+      "sourceTitle": "山口県教育委員会「令和9年度山口県公立高等学校入学者選抜実施大綱」2(5)選抜イ(ｱ)",
+      "lastVerified": "2026-09-07",
+      "diffFromCurrentYear": "変更なしと直接検証(2026-09-07にvisionでp.2「学力検査」イ配点・p.3「2(5)選抜」イ(ｱ)を確認)。学力検査は各教科とも50点(国語・社会・数学・理科・英語の5教科=250点満点)を確認しexamMaxScore=250と直接一致。選抜方法は『高等学校長は、選抜に当たっては、調査書を重視する。その際、調査書の「学習の記録」と学力検査の成績は同等に取り扱うとともに、調査書の「学習の記録」以外の記載事項及び面接、小論文、実技検査の結果等も十分考慮する』という文言で、2025-r7エントリの確認内容(令和8年度分と完全一致)の核心部分と一字一句同一。⚠️ただし2025-r7エントリと同じ制約として、調査書「学習の記録」の学年別配点(9教科×5段階×3学年均等=135点満点)を直接示す数値記載はこの実施大綱本体には無く、この点は令和8年度分(prefectures.ts)のgradeMultipliers{1:1,2:1,3:1}・maxScore=135との整合性、および制度の骨格(学力検査250点満点・調査書重視の原則)に変更が無いことから、学年別配点表自体も不変と判断した(学年別配点表そのものの一次ソースは2025-r7時点から引き続き未発見)。"
+    },
     {
       "code": "nagano",
       "name": "長野県",

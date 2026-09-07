@@ -97,6 +97,30 @@ describe('2027-r9 exam-system snapshot（T-Y11F §5順序#1 収集中スナッ�
     }
   });
 
+  test('yamaguchi: 2026-r8と2027-r9で制度の核となる数値が一致する(実測で確認済みの「変更なし」)', () => {
+    const y2027 = snapshot.entries.find((e) => e.code === 'yamaguchi')!;
+    const y2026 = snapshot2026.entries.find((e) => e.code === 'yamaguchi')!;
+    expect(y2027.maxScore).toBe(y2026.maxScore);
+    expect(y2027.gradeMultipliers).toEqual(y2026.gradeMultipliers);
+    expect(y2027.coreMultiplier).toBe(y2026.coreMultiplier);
+    expect(y2027.practicalMultiplier).toBe(y2026.practicalMultiplier);
+    expect(y2027.reverseCalc).toEqual(y2026.reverseCalc);
+
+    const diffs = diffExamSystemSnapshots(snapshot2026, snapshot);
+    const yamaguchiDiffs = diffs.filter((d) => d.prefectureCode === 'yamaguchi');
+    expect(yamaguchiDiffs.length).toBeGreaterThan(0);
+    for (const d of yamaguchiDiffs) {
+      expect(d.status).toBe('unchanged');
+    }
+  });
+
+  test('2026-09-07時点で公表確認済みの5県(埼玉/大阪/神奈川/長野/山口)全てentries化済み', () => {
+    const codes = new Set(snapshot.entries.map((e) => e.code));
+    for (const code of ['saitama', 'osaka', 'kanagawa', 'nagano', 'yamaguchi']) {
+      expect(codes.has(code)).toBe(true);
+    }
+  });
+
   test('47県未満のためmeta.notYetPublishedNoteが「まだ公表されていない」旨を明記している(取得不能との2値化防止)', () => {
     expect(snapshot.meta.notYetPublishedNote).toContain('まだ公表されていない');
   });
