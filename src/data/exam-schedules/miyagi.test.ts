@@ -40,4 +40,19 @@ describe('MIYAGI_EXAM_SCHEDULE', () => {
     expect(findScheduleEvent(MIYAGI_EXAM_SCHEDULE, '令和99年度', '実施日')).toBeUndefined();
     expect(findScheduleEvent(MIYAGI_EXAM_SCHEDULE, '令和8年度（2026年度）', '存在しない項目')).toBeUndefined();
   });
+
+  it('has 令和9年度 entries matching the published R9 policy/schedule PDF (no fabricated application period)', () => {
+    const exam = findScheduleEvent(MIYAGI_EXAM_SCHEDULE, '令和9年度（2027年度）', '実施日');
+    expect(exam?.startDate).toBe('2027-03-03');
+
+    const makeup = findScheduleEvent(MIYAGI_EXAM_SCHEDULE, '令和9年度（2027年度）', '追試験日');
+    expect(makeup?.startDate).toBe('2027-03-09');
+
+    const result = findScheduleEvent(MIYAGI_EXAM_SCHEDULE, '令和9年度（2027年度）', '合格発表日');
+    expect(result?.startDate).toBe('2027-03-15');
+
+    const labels = MIYAGI_EXAM_SCHEDULE.years[1].events.map((e) => e.label);
+    expect(labels).not.toContain('出願期間');
+    expect(labels).not.toContain('志願変更期間');
+  });
 });
