@@ -11,6 +11,12 @@
  *
  * 一次募集の学力検査（3/4-5）・二次募集の検査日（3/24）はWebSearchで得た独立した二次情報源
  * と突合し完全一致を確認済み（2026-09-04）。
+ *
+ * 令和9年度分（T-Y11F §5順序#2）: R8と同じ形式の「令和9年度入学者選抜日程」ページ
+ * （https://www.pref.iwate.jp/kyouikubunka/kyouiku/gakkou/senbatsu/1086539.html・
+ * 更新日令和8年6月15日）をcurlで取得した生HTMLから直接転記（ビジョン解析不要）。R8と
+ * 同じくこのページにも出願期間・志願変更期間の記載は無く、本検査・追検査・合格者発表の
+ * 日付のみが公表されているため、R8と同じ方針で確実な項目のみ収録する（Y-0）。
  */
 import type { PrefectureExamScheduleFile } from '@/lib/exam-schedule';
 
@@ -28,6 +34,19 @@ export const IWATE_EXAM_SCHEDULE: PrefectureExamScheduleFile = {
         { label: '一次募集（一般入試・特色入試） 合格者発表', startDate: '2026-03-16' },
         { label: '二次募集 検査日', startDate: '2026-03-24' },
         { label: '二次募集 合格者発表', startDate: '2026-03-26' },
+      ],
+    },
+    {
+      fiscalYear: '令和9年度（2027年度）',
+      sourceUrl: 'https://www.pref.iwate.jp/kyouikubunka/kyouiku/gakkou/senbatsu/1086539.html',
+      docTitle: '令和9年度入学者選抜日程',
+      fetchedAt: '2026-09-08',
+      events: [
+        { label: '一次募集（一般入試・特色入試） 本検査', startDate: '2027-03-04', endDate: '2027-03-05' },
+        { label: '一次募集（一般入試・特色入試） 追検査', startDate: '2027-03-10', endDate: '2027-03-11' },
+        { label: '一次募集（一般入試・特色入試） 合格者発表', startDate: '2027-03-15' },
+        { label: '二次募集 検査日', startDate: '2027-03-23' },
+        { label: '二次募集 合格者発表', startDate: '2027-03-25' },
       ],
     },
   ],
