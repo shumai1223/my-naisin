@@ -124,6 +124,22 @@ describe('冬の倍率速報体制（Y-11フェーズ1）台帳の不変条件',
     expect(oita?.approxGapDays).toBe(8);
   });
 
+  it('T-Y11F F-4(2026-09-07)で実在確認済みの7県はprimaryUrl.interimがhttpから始まり、verifiedAtが記録されている', () => {
+    for (const pref of ['tokyo', 'chiba', 'saitama', 'kanagawa', 'osaka', 'hiroshima', 'shizuoka']) {
+      const entry = INTERIM_BULLETIN_REGISTRY.find((e) => e.prefectureCode === pref);
+      expect(entry?.primaryUrl?.interim).toMatch(/^https?:\/\//);
+      expect(entry?.primaryUrl?.verifiedAt).toBe('2026-09-07');
+    }
+  });
+
+  it('primaryUrlを持つエントリはconfirmedを持つ場合もinterimと同じhttp形式', () => {
+    for (const entry of INTERIM_BULLETIN_REGISTRY) {
+      if (entry.primaryUrl?.confirmed) {
+        expect(entry.primaryUrl.confirmed).toMatch(/^https?:\/\//);
+      }
+    }
+  });
+
   it('フェーズ1完走: 栃木を除く全46都道府県のprefectureCodeが揃っている', () => {
     const ALL_46 = [
       'hokkaido', 'aomori', 'iwate', 'miyagi', 'akita', 'yamagata', 'fukushima',

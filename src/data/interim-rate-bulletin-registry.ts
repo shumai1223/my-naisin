@@ -154,6 +154,16 @@ export interface InterimBulletinPrefectureEntry {
   note: string;
   /** この調査を行った日付。 */
   investigatedAt: string;
+  /**
+   * T-Y11F F-4（2026-09-07）: 実在確認済みの一次URL（R7/R8実績・HEAD/GETで200を確認したもののみ）。
+   * `interim`=変更前/速報段階の資料、`confirmed`=変更後/確定段階の資料（対応関係が確認できた場合のみ）。
+   * 未確認の県はこのフィールド自体を持たない（Y-0: 推測でURLを作らない）。
+   */
+  primaryUrl?: {
+    interim: string;
+    confirmed?: string;
+    verifiedAt: string;
+  };
 }
 
 export const INTERIM_BULLETIN_REGISTRY: InterimBulletinPrefectureEntry[] = [
@@ -249,6 +259,11 @@ export const INTERIM_BULLETIN_REGISTRY: InterimBulletinPrefectureEntry[] = [
       'd/kyoiku/-2-3。中学校長会と教育庁の共同実施という準公式の位置づけだが東京都教育委員会の公式報道' +
       'ページから直接リンクされている。',
     investigatedAt: '2026-08-23',
+    primaryUrl: {
+      interim: 'https://www.kyoiku.metro.tokyo.lg.jp/information/press/2026/02/2026020901',
+      confirmed: 'https://www.kyoiku.metro.tokyo.lg.jp/information/press/2026/02/2026021302',
+      verifiedAt: '2026-09-07',
+    },
   },
   {
     prefectureCode: 'shimane',
@@ -277,6 +292,11 @@ export const INTERIM_BULLETIN_REGISTRY: InterimBulletinPrefectureEntry[] = [
       '(志願変更前)」として2/5時点の学校別倍率(例: 県立船橋理数科2.23倍)を報じており、速報段階で' +
       '学校別倍率まで公表されることを確認。確定発表は例年2月下旬。',
     investigatedAt: '2026-08-22',
+    primaryUrl: {
+      interim: 'https://www.pref.chiba.lg.jp/kyouiku/shidou/nyuushi/koukou/r8/r8siganitiran.html',
+      confirmed: 'https://www.pref.chiba.lg.jp/kyouiku/shidou/nyuushi/koukou/r8/r8kakuteiitiran.html',
+      verifiedAt: '2026-09-07',
+    },
   },
   {
     prefectureCode: 'saitama',
@@ -290,6 +310,11 @@ export const INTERIM_BULLETIN_REGISTRY: InterimBulletinPrefectureEntry[] = [
       '(入学志願者確定数)」を別記事化しており、速報段階でも倍率が公表される。3段階以上(当初出願→' +
       '志願先変更1日目→確定)の可能性もあり要追加確認。',
     investigatedAt: '2026-08-22',
+    primaryUrl: {
+      interim: 'https://www.pref.saitama.lg.jp/f2208/news/page/news2026021002.html',
+      confirmed: 'https://www.pref.saitama.lg.jp/f2208/news/page/news2026022002.html',
+      verifiedAt: '2026-09-07',
+    },
   },
   {
     prefectureCode: 'kanagawa',
@@ -305,6 +330,11 @@ export const INTERIM_BULLETIN_REGISTRY: InterimBulletinPrefectureEntry[] = [
       'jr_high_course_hope/r07_result.html)を確認・出願(1/29)より約3ヶ月早い。神奈川全県模試(伸学工房)等' +
       'の三次情報サイトも独自集計しているが、この進路希望調査自体が県教委公式の一次資料。',
     investigatedAt: '2026-08-23',
+    primaryUrl: {
+      interim: 'https://www.pref.kanagawa.jp/docs/dc4/nyusen/jisshikekka/r8shigansyasu.html',
+      confirmed: 'https://www.pref.kanagawa.jp/docs/dc4/nyusen/jisshikekka/r8shihenjishigansyasu.html',
+      verifiedAt: '2026-09-07',
+    },
   },
   {
     prefectureCode: 'aichi',
@@ -330,6 +360,11 @@ export const INTERIM_BULLETIN_REGISTRY: InterimBulletinPrefectureEntry[] = [
       '掲載される構造を複数年度(r05〜r08)で確認。育伸社PDFも倍率算出方法つきで両時点のデータを掲載して' +
       'おり、速報段階でも学校別倍率まで判明する。',
     investigatedAt: '2026-08-22',
+    primaryUrl: {
+      interim: 'https://www.pref.osaka.lg.jp/documents/125698/r08_ippan_sigansya_0305.xlsx',
+      confirmed: 'https://www.pref.osaka.lg.jp/documents/125698/r08_ippan_sigansya_0306.xlsx',
+      verifiedAt: '2026-09-07',
+    },
   },
   {
     prefectureCode: 'hyogo',
@@ -354,6 +389,10 @@ export const INTERIM_BULLETIN_REGISTRY: InterimBulletinPrefectureEntry[] = [
       '公表。志願変更は2/12〜2/18正午で受付されるため、確定版はその後(例年2月下旬〜3月上旬)。gapは' +
       '推定値で要精緻化。',
     investigatedAt: '2026-08-22',
+    primaryUrl: {
+      interim: 'https://www.pref.hiroshima.lg.jp/uploaded/attachment/653711.pdf',
+      verifiedAt: '2026-09-07',
+    },
   },
   {
     prefectureCode: 'fukushima',
@@ -557,6 +596,11 @@ export const INTERIM_BULLETIN_REGISTRY: InterimBulletinPrefectureEntry[] = [
       '大きな変動なし。SBS(静岡放送)が変更後の全校掲載(磐田南理数1.88倍等)を報じており、速報段階も' +
       '「倍率速報」を名乗ることから学校別倍率まで判明すると判断。gap日数は今回未特定。',
     investigatedAt: '2026-08-22',
+    primaryUrl: {
+      interim: 'https://www.pref.shizuoka.jp/_res/projects/default_project/_page_/001/072/279/r8shigansyasuu.pdf',
+      confirmed: 'https://www.pref.shizuoka.jp/_res/projects/default_project/_page_/001/072/279/r8shigansyasuusiganhennkougo1.pdf',
+      verifiedAt: '2026-09-07',
+    },
   },
   {
     prefectureCode: 'mie',
