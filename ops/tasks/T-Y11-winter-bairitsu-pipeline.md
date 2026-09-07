@@ -89,6 +89,21 @@ T-N1-4で実装済み)も存在するが**ページには未接続**（B-1とし
 出典リンクが死んでいる状態。`check:competition-links`と同種の経年劣化のため次にokayamaへ触れる回で
 新しいURL(WebSearch等)への差し替えを検討する（急ぎではない・A-2の主目的である検知が機能した実例として記録）。
 
+**⚠️T-Y11F F-1で判明(2026-09-07)**: A-2実装後、実際には**2026-08-31の1回しか実行されていなかった**
+（`ops/state/competition-rate-watch.json`の47件全てlastCheckedAtが8/31固定・定期実行のスケジューラ未登録）。
+R9の公表資料は多くの県でURLに年度が埋まる（22県）かCMS添付IDが年度依存のため、**現行watchは別URLで
+出るR9を検知できず永久にokのまま**という設計上の穴があった。2026-09-07にF-1で1週間ぶりの手動フルラン
+(47県)を実行し実態を確認: 更新検知6県(aichi/akita/fukuoka/kumamoto/miyazaki/yamaguchi)・到達不能1県
+(shiga)・robots拒否1県(hyogo・既知)。ただし6件のうち中身を精査すると**フィンガープリントだけでは
+信頼できない**ことが分かった: aichiはcontentLengthが1,405,287→212バイトへ激減(URLが実際に壊れて
+いる強い兆候・要調査)、akitaはetagが強weak変化+content-length欠落（サーバ設定変化の疑い）、
+miyazakiはetag末尾のみ微差でcontentLength/lastModifiedは完全一致（CDN artifactの疑い）、fukuoka/
+kumamoto/yamaguchiはlastModifiedが本日9/7に更新されているがcontentLengthは前回と同一（同一内容の
+再保存の可能性を排除できない）。**「changed」の表示を鵜呑みにせず、本文差分（F-2のハブ監視やF-3の
+受信ドリル）で裏取りするまでは「公表があった」と断定しないこと**。同時に`C:\Users\E24054\
+competition-updates-check.bat`＋Windowsタスクスケジューラ`MyNaishin-CompetitionUpdateCheck`
+(毎朝7:45・`MyNaishin-DailyBrief`と同型)を新設し**毎日回る状態にした**（F-1のDoD達成）。
+
 ## A-3 取り込みの型（県ごとの定義差を吸収する）
 
 - [x] 県ごとに `quota` が何を指すか（募集人員／入学許可予定者数）を台帳に明記する →

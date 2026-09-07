@@ -58,13 +58,19 @@ Trendsピーク 2/1〜2/7週（日次 2/9=100・2/5=94・1/30=88）
 
 ## F-1 検知器を毎日回す（★初日・これだけで穴の半分が塞がる）
 
-- [ ] `npm run check:competition-updates` を8/31以来はじめて実行し、結果をworklogに書く
-      （47件HEAD・1県1日1回の枠内・900ms以上・UA明示・robots尊重／hyogoは取得しない）
-- [ ] **毎日回る状態にする。** `MyNaishin-DailyBrief`（毎朝07:30）と同じ形のWindowsタスク登録、
-      または `src/scripts/daily-brief-health.ts` への組込み
-- [ ] ⚠️ **登録できなければ「未登録」と正直に書く。** 回っているフリをしない
-- [ ] `ops/tasks/T-Y11-winter-bairitsu-pipeline.md` の A-2節に事実を追記:
-      「R9は別URLで出るため現行watchでは検知不能・lastCheckedAt全件2026-08-31」
+- [x] `npm run check:competition-updates` を8/31以来はじめて実行し、結果をworklogに書く
+      （47件HEAD・1県1日1回の枠内・900ms以上・UA明示・robots尊重／hyogoは取得しない）→
+      2026-09-07実行。47県チェック・changed6県(aichi/akita/fukuoka/kumamoto/miyazaki/yamaguchi・
+      うちaichiのみcontentLength激減で本物の疑いが強く他5件はfingerprintノイズの疑い)・
+      到達不能1県(shiga)・robots拒否1県(hyogo・既知)
+- [x] **毎日回る状態にする。** `MyNaishin-DailyBrief`（毎朝07:30）と同じ形のWindowsタスク登録、
+      または `src/scripts/daily-brief-health.ts` への組込み →
+      `C:\Users\E24054\competition-updates-check.bat`＋タスク`MyNaishin-CompetitionUpdateCheck`
+      （毎朝7:45）を新設・登録済み(`Get-ScheduledTask`でState=Ready確認済み)
+- [x] ⚠️ **登録できなければ「未登録」と正直に書く。** 回っているフリをしない → 登録成功
+- [x] `ops/tasks/T-Y11-winter-bairitsu-pipeline.md` の A-2節に事実を追記:
+      「R9は別URLで出るため現行watchでは検知不能・lastCheckedAt全件2026-08-31」→
+      2026-09-07実行結果とfingerprintノイズの注記を追記済み
 
 ## F-2 ハブ監視（★穴の本体）
 
