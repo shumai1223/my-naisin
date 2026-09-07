@@ -16,6 +16,12 @@
  *
  * 全項目はWebSearchで得た独立した二次情報源（地元学習塾サイト2件・教科別時間割まで一致）とも
  * 完全一致を確認済み（2026-09-04）。
+ *
+ * 令和9年度分（T-Y11F §5順序#2）: 同名の報道発表資料「令和9年度岐阜県立高等学校入学者選抜
+ * について」（令和8年3月19日付・https://www.pref.gifu.lg.jp/uploaded/attachment/490454.pdf）
+ * を新規収録。R8と同じくSymbol/ArialUnicodeフォント欠落エラーが出たが本文はビジョン解析で
+ * 直接確認できた。第一次選抜・第二次選抜のみ収録し、連携型選抜・通信制前期/後期選抜は
+ * R8と同じ方針で対象外（連携型は第一次選抜と同一日程・通信制は別課程のため）。
  */
 import type { PrefectureExamScheduleFile } from '@/lib/exam-schedule';
 
@@ -37,6 +43,23 @@ export const GIFU_EXAM_SCHEDULE: PrefectureExamScheduleFile = {
         { label: '第二次選抜 変更期日', startDate: '2026-03-17' },
         { label: '第二次選抜 検査期日', startDate: '2026-03-19' },
         { label: '第二次選抜 合格発表', startDate: '2026-03-24' },
+      ],
+    },
+    {
+      fiscalYear: '令和9年度（2027年度）',
+      sourceUrl: 'https://www.pref.gifu.lg.jp/uploaded/attachment/490454.pdf',
+      docTitle: '令和9年度岐阜県立高等学校入学者選抜について',
+      fetchedAt: '2026-09-08',
+      events: [
+        { label: '第一次選抜 出願期間', startDate: '2027-02-05', endDate: '2027-02-10', note: '締切は正午' },
+        { label: '第一次選抜 変更期間', startDate: '2027-02-12', endDate: '2027-02-16', note: '2/12は9時開始・締切は正午' },
+        { label: '第一次選抜 検査期日', startDate: '2027-03-03', note: '一部の高等学校では3/4にも実施' },
+        { label: '第一次選抜 追検査期日', startDate: '2027-03-09', note: '一部の高等学校では3/10にも実施' },
+        { label: '第一次選抜 合格発表・第二次選抜募集人員発表', startDate: '2027-03-12' },
+        { label: '第二次選抜 出願期間', startDate: '2027-03-13', endDate: '2027-03-15', note: '3/13は9時開始・3/15は16時締切' },
+        { label: '第二次選抜 変更期日', startDate: '2027-03-16', note: '9時〜正午' },
+        { label: '第二次選抜 検査期日', startDate: '2027-03-18' },
+        { label: '第二次選抜 合格発表', startDate: '2027-03-23' },
       ],
     },
   ],

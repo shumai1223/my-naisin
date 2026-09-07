@@ -43,4 +43,15 @@ describe('GIFU_EXAM_SCHEDULE', () => {
     expect(findScheduleEvent(GIFU_EXAM_SCHEDULE, '令和99年度', '第一次選抜 検査期日')).toBeUndefined();
     expect(findScheduleEvent(GIFU_EXAM_SCHEDULE, '令和8年度（2026年度）', '存在しない項目')).toBeUndefined();
   });
+
+  it('has 令和9年度 entries matching the published R9 press release', () => {
+    const exam = findScheduleEvent(GIFU_EXAM_SCHEDULE, '令和9年度（2027年度）', '第一次選抜 検査期日');
+    expect(exam?.startDate).toBe('2027-03-03');
+
+    const result = findScheduleEvent(GIFU_EXAM_SCHEDULE, '令和9年度（2027年度）', '第一次選抜 合格発表・第二次選抜募集人員発表');
+    expect(result?.startDate).toBe('2027-03-12');
+
+    const secondExam = findScheduleEvent(GIFU_EXAM_SCHEDULE, '令和9年度（2027年度）', '第二次選抜 検査期日');
+    expect(secondExam?.startDate).toBe('2027-03-18');
+  });
 });
