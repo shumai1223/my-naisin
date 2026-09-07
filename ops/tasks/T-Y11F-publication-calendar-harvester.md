@@ -330,7 +330,7 @@ p.2「学力検査」イ配点・p.3「2(5)選抜」イ(ｱ)を確認）で、�
 変更を検出した県は0件）。今後は他県のR9実施要項が新規公表され次第、随時追加していく
 （`src/data/snapshots/2027-r9/`は`"collecting"`のまま恒久的に開いておく）。24hの見積りに
 対し実測では1イテレーション数十分規模で完了。
-| 2 | **入試日程DBのR9更新**⚠️着手中(2026-09-08) | `exam-schedules` 47県すべて令和8を持つが、**令和9は19県のみ＝28県が未更新**（chiba/hokkaido/hyogo/ibaraki/kanagawa=既存5県＋saitama/osaka/nagano/yamaguchi/aomori/ehime/fukui/fukuoka/gifu/gunma/hiroshima/ishikawa/iwate/kagawa=本イテレーション追加14県）。fukushimaは実施要綱10月上旬公表予定のため保留。R9日程は4〜7月公表済みの県が多い | 10h |
+| 2 | **入試日程DBのR9更新**⚠️着手中(2026-09-08) | `exam-schedules` 47県すべて令和8を持つが、**令和9は20県のみ＝27県が未更新**（chiba/hokkaido/hyogo/ibaraki/kanagawa=既存5県＋saitama/osaka/nagano/yamaguchi/aomori/ehime/fukui/fukuoka/gifu/gunma/hiroshima/ishikawa/iwate/kagawa/kagoshima=本イテレーション追加15県）。fukushimaは実施要綱10月上旬公表予定のため保留。R9日程は4〜7月公表済みの県が多い | 10h |
 
 **2026-09-07 saitama 1件目完了**: 一次資料「令和9年度埼玉県公立高等学校入学者選抜日程表」
 （`01nyusinittei_r09.pdf`・確定版・令和8年5月29日掲載・カレンダー形式1頁をRead toolで
@@ -455,6 +455,13 @@ r09nittei.pdf`・1頁・ToUnicode欠落のためpdftoppm+visionで転記）を�
 学力検査/適性検査の2区分→R9: 追学力検査・追面接/追適性検査の2区分）・合格発表の表記
 （R8:「合格発表」→R9:「合格者発表」）もそれぞれ公表資料のラベルをそのまま転記（独自
 統一はしない）。**19県目**。残り28県は次回以降。
+
+**2026-09-08 kagoshima 15件目完了**: 「令和9年度鹿児島県公立高等学校入学者選抜日程」
+ページ（`pref.kagoshima.jp/.../r9nittei.html`・更新日2026年4月10日）をcurl取得の生
+HTMLから直接転記（ビジョン解析不要）。このページも検査日・合格者発表日のみを示す
+簡易版でR8実施要綱にあった出願期間・出願変更受付・願書提出等の手続き日程は含まれて
+いないため推測で埋めず収録しない（Y-0継続）。推薦入学者選抜等の合格者内定もこの
+ページに記載が無いため見送った。**20県目**。残り27県は次回以降。
 | 3 | **学力検査平均点R8** | 41県収録だが**R8は22県だけ**（令和7は37県ある）。19県はデータがあってR8未収録・6県は未着手。教委の結果概要は6〜8月公表 | 12h |
 | 4 | **定時制・通信制の残り26県** | `teiji-competition-rates` は**21県収録／26県未収録**（aichi akita aomori ehime fukui fukuoka fukushima hyogo ibaraki ishikawa iwate kagawa kochi mie miyazaki nara oita osaka saga saitama shiga tochigi toyama wakayama yamagata yamaguchi）。S1-3で所在分類済み | 20〜30h |
 | 5 | 旺文社PoC納品物v0 | R8一式CSV/JSON（配布可21,548件）＋R7→R8差分＋千葉型サンプル＋形式仕様1枚。noindex＋sitemap除外で作り置き | 8〜16h |
