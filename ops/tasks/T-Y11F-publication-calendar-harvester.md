@@ -330,7 +330,7 @@ p.2「学力検査」イ配点・p.3「2(5)選抜」イ(ｱ)を確認）で、�
 変更を検出した県は0件）。今後は他県のR9実施要項が新規公表され次第、随時追加していく
 （`src/data/snapshots/2027-r9/`は`"collecting"`のまま恒久的に開いておく）。24hの見積りに
 対し実測では1イテレーション数十分規模で完了。
-| 2 | **入試日程DBのR9更新**⚠️着手中(2026-09-08) | `exam-schedules` 47県すべて令和8を持つが、**令和9は22県のみ＝25県が未更新**（chiba/hokkaido/hyogo/ibaraki/kanagawa=既存5県＋saitama/osaka/nagano/yamaguchi/aomori/ehime/fukui/fukuoka/gifu/gunma/hiroshima/ishikawa/iwate/kagawa/kagoshima/kochi/kumamoto=本イテレーション追加17県）。fukushimaは実施要綱10月上旬公表予定のため保留。R9日程は4〜7月公表済みの県が多い | 10h |
+| 2 | **入試日程DBのR9更新**⚠️着手中(2026-09-08) | `exam-schedules` 47県すべて令和8を持つが、**令和9は23県のみ＝24県が未更新**（chiba/hokkaido/hyogo/ibaraki/kanagawa=既存5県＋saitama/osaka/nagano/yamaguchi/aomori/ehime/fukui/fukuoka/gifu/gunma/hiroshima/ishikawa/iwate/kagawa/kagoshima/kochi/kumamoto/kyoto=本イテレーション追加18県）。fukushimaは実施要綱10月上旬公表予定のため保留。kyotoはR9で選抜制度が変更されている（前期・中期・後期の3段階→前期・後期の2段階）。R9日程は4〜7月公表済みの県が多い | 10h |
 
 **2026-09-07 saitama 1件目完了**: 一次資料「令和9年度埼玉県公立高等学校入学者選抜日程表」
 （`01nyusinittei_r09.pdf`・確定版・令和8年5月29日掲載・カレンダー形式1頁をRead toolで
@@ -479,6 +479,21 @@ fable5-loop-protocolの新規項目を参照）。こうちフロンティア募
 した（既存の「一次ソースのページ番号は年度で変わりうる」教訓の実例が追加された）。
 p4はAdobe-Japan1マッピング欠落の警告が出たが表自体は正常にレンダリングされ問題なく
 転記できた。**22県目**。残り25県は次回以降。
+
+**2026-09-08 kyoto 18件目完了（⚠️制度変更を検出）**: R8と同名の広報資料「令和9年度
+京都府公立高等学校入学者選抜について（選抜の概要）」（`.../002（広報資料）公立高等
+学校入学者選抜について.pdf`・令和8年8月28日付・全角括弧入りファイル名のためcurlは
+python `urllib.parse.quote`でURLエンコードしてから取得・ToUnicode欠落のため
+pdftoppm+visionで転記）を確認したところ、**京都府の選抜制度そのものがR9で変更されて
+いた**：R8の「前期選抜・中期選抜・後期選抜」の3段階から「前期選抜（独自枠＋共通枠）・
+後期選抜」の2段階へ統合（旧・中期選抜が前期選抜の「共通枠」に統合）。R8のラベルを
+そのまま流用すると存在しない制度を捏造することになるため、R9はこの資料自身の呼称
+（「前期選抜・特別入学者選抜」「後期選抜」）でラベル化し、テストで「中期選抜が存在
+しないこと」を明示的に確認した。**参考: `src/data/snapshots/2024-r6/exam-system.json`・
+`2025-r7/exam-system.json`にも「中期選抜」の記述があり、§5順序#1（R9実施要項の差分
+検出・exam-system snapshot）でkyotoに着手する際はこの制度変更を必ず反映すること
+（まだkyotoは§5順序#1未着手＝saitama/osaka/kanagawa/nagano/yamaguchiの5県のみ完了
+済み）**。**23県目**。残り24県は次回以降。
 | 3 | **学力検査平均点R8** | 41県収録だが**R8は22県だけ**（令和7は37県ある）。19県はデータがあってR8未収録・6県は未着手。教委の結果概要は6〜8月公表 | 12h |
 | 4 | **定時制・通信制の残り26県** | `teiji-competition-rates` は**21県収録／26県未収録**（aichi akita aomori ehime fukui fukuoka fukushima hyogo ibaraki ishikawa iwate kagawa kochi mie miyazaki nara oita osaka saga saitama shiga tochigi toyama wakayama yamagata yamaguchi）。S1-3で所在分類済み | 20〜30h |
 | 5 | 旺文社PoC納品物v0 | R8一式CSV/JSON（配布可21,548件）＋R7→R8差分＋千葉型サンプル＋形式仕様1枚。noindex＋sitemap除外で作り置き | 8〜16h |
