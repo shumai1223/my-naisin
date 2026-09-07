@@ -330,7 +330,7 @@ p.2「学力検査」イ配点・p.3「2(5)選抜」イ(ｱ)を確認）で、�
 変更を検出した県は0件）。今後は他県のR9実施要項が新規公表され次第、随時追加していく
 （`src/data/snapshots/2027-r9/`は`"collecting"`のまま恒久的に開いておく）。24hの見積りに
 対し実測では1イテレーション数十分規模で完了。
-| 2 | **入試日程DBのR9更新**⚠️着手中(2026-09-08) | `exam-schedules` 47県すべて令和8を持つが、**令和9は32県のみ＝15県が未更新**（chiba/hokkaido/hyogo/ibaraki/kanagawa=既存5県＋saitama/osaka/nagano/yamaguchi/aomori/ehime/fukui/fukuoka/gifu/gunma/hiroshima/ishikawa/iwate/kagawa/kagoshima/kochi/kumamoto/kyoto/mie/miyagi/miyazaki/nagasaki/nara/niigata/oita/okayama/okinawa=本イテレーション追加27県）。fukushimaは実施要綱10月上旬公表予定のため保留。kyoto・niigata・oitaはR9で選抜制度が変更されている（kyoto: 前期・中期・後期の3段階→前期・後期の2段階／niigata: 特色化選抜を廃止し一般選抜に一本化／oita: 第一次・第二次の2ラウンド制→一般選抜内の第一〜第三志願3段階制）。R9日程は4〜7月公表済みの県が多い | 10h |
+| 2 | **入試日程DBのR9更新**⚠️着手中(2026-09-08) | `exam-schedules` 47県すべて令和8を持つが、**令和9は33県のみ＝14県が未更新**（chiba/hokkaido/hyogo/ibaraki/kanagawa=既存5県＋saitama/osaka/nagano/yamaguchi/aomori/ehime/fukui/fukuoka/gifu/gunma/hiroshima/ishikawa/iwate/kagawa/kagoshima/kochi/kumamoto/kyoto/mie/miyagi/miyazaki/nagasaki/nara/niigata/oita/okayama/okinawa/saga=本イテレーション追加28県）。fukushimaは実施要綱10月上旬公表予定のため保留。kyoto・niigata・oitaはR9で選抜制度が変更されている（kyoto: 前期・中期・後期の3段階→前期・後期の2段階／niigata: 特色化選抜を廃止し一般選抜に一本化／oita: 第一次・第二次の2ラウンド制→一般選抜内の第一〜第三志願3段階制）。R9日程は4〜7月公表済みの県が多い | 10h |
 
 **2026-09-07 saitama 1件目完了**: 一次資料「令和9年度埼玉県公立高等学校入学者選抜日程表」
 （`01nyusinittei_r09.pdf`・確定版・令和8年5月29日掲載・カレンダー形式1頁をRead toolで
@@ -575,6 +575,13 @@ misc.pdf`・令和8年1月9日付・2頁）を新規収録。R8と同じ2段階�
 両方で対象年度を確認してから収録した（詳細はfable5-loop-protocolの新規項目を参照・
 他県で同型の罠が無いか初見の県では疑うこと）。R8と同じ構造（連携型選抜・特色選抜・
 一般選抜）を維持し制度変更は無い。**32県目**。残り15県は次回以降。
+
+**2026-09-08 saga 28件目完了**: 「令和9年度佐賀県立高等学校入学者の選抜実施日程を
+お知らせします」（令和8年4月28日付・報道資料・1頁）を新規収録。R8の108頁実施要項
+とは別に、日程だけを先行公表する1頁の報道資料が存在していた（本文に「詳細は9月
+公表予定の実施要項で」と明記）。特別選抜（全日制のみ）・一般選抜（全日制及び定時制）・
+再募集の3トラックはR8と同じ構造で制度変更は無い。佐賀北高等学校通信制はR8と同じ
+方針で対象外。**33県目**。残り14県は次回以降。
 
 | 3 | **学力検査平均点R8** | 41県収録だが**R8は22県だけ**（令和7は37県ある）。19県はデータがあってR8未収録・6県は未着手。教委の結果概要は6〜8月公表 | 12h |
 | 4 | **定時制・通信制の残り26県** | `teiji-competition-rates` は**21県収録／26県未収録**（aichi akita aomori ehime fukui fukuoka fukushima hyogo ibaraki ishikawa iwate kagawa kochi mie miyazaki nara oita osaka saga saitama shiga tochigi toyama wakayama yamagata yamaguchi）。S1-3で所在分類済み | 20〜30h |
