@@ -15,6 +15,15 @@
  *
  * 一般型選抜（学力検査・2/25）はWebSearchで得た独立した二次情報源（リセマム）と完全一致を
  * 確認済み（2026-09-04）。
+ *
+ * 令和9年度分（T-Y11F §5順序#2）: 「令和9年度滋賀県立高等学校入学者選抜の日程」
+ * （https://www.pref.shiga.lg.jp/documents/16947/5618357_1.pdf・令和8年6月19日更新・
+ * 1頁・フォント欠落のためpdftoppm+visionで転記）を新規収録。R8の「主な日程」より詳細な
+ * 日別カレンダー形式で、日付ごとの枠内に項目名が直接印字されており矢印先端の推測は不要
+ * だった。**この資料には出願期間・出願変更期間が明記されており**（R8の資料には無かった
+ * 情報）、Y-0に沿って新たに判明した事実として追加収録した（R8を書き換えたり遡って補完
+ * したりはしない）。全国募集枠（信楽・伊香高等学校）・通信制課程（大津清陵高等学校）は
+ * R8と同じ方針で対象外。
  */
 import type { PrefectureExamScheduleFile } from '@/lib/exam-schedule';
 
@@ -34,6 +43,24 @@ export const SHIGA_EXAM_SCHEDULE: PrefectureExamScheduleFile = {
         { label: '一次募集 入学許可予定者の発表', startDate: '2026-03-09' },
         { label: '二次募集検査', startDate: '2026-03-16' },
         { label: '二次募集 入学許可予定者の発表', startDate: '2026-03-18' },
+      ],
+    },
+    {
+      fiscalYear: '令和9年度（2027年度）',
+      sourceUrl: 'https://www.pref.shiga.lg.jp/documents/16947/5618357_1.pdf',
+      docTitle: '令和9年度滋賀県立高等学校入学者選抜の日程',
+      fetchedAt: '2026-09-08',
+      events: [
+        { label: '一次募集 出願期間', startDate: '2027-01-28', endDate: '2027-02-09', note: '出願開始9:00・出願終了12:00' },
+        { label: '一次募集 出願変更期間', startDate: '2027-02-10', endDate: '2027-02-17', note: '出願変更開始9:00・出願変更終了12:00' },
+        { label: '一次募集 一般型選抜（学力検査）', startDate: '2027-03-03', note: '9:00〜' },
+        { label: '一次募集 学校独自型選抜（学校独自検査）', startDate: '2027-03-04', note: '9:00〜' },
+        { label: '一次募集 追検査（学力検査）', startDate: '2027-03-07', note: '10:00〜' },
+        { label: '一次募集 追検査（学校独自検査）', startDate: '2027-03-08', note: '9:00〜' },
+        { label: '一次募集 入学許可予定者の発表', startDate: '2027-03-11', note: '9:00' },
+        { label: '二次募集 出願期間', startDate: '2027-03-12', endDate: '2027-03-15', note: '出願開始9:00・出願終了12:00' },
+        { label: '二次募集検査', startDate: '2027-03-17', note: '14:00〜' },
+        { label: '二次募集 入学許可予定者の発表', startDate: '2027-03-19', note: '9:00' },
       ],
     },
   ],

@@ -43,4 +43,20 @@ describe('SHIGA_EXAM_SCHEDULE', () => {
     expect(findScheduleEvent(SHIGA_EXAM_SCHEDULE, '令和99年度', '一次募集 一般型選抜（学力検査）')).toBeUndefined();
     expect(findScheduleEvent(SHIGA_EXAM_SCHEDULE, '令和8年度（2026年度）', '存在しない項目')).toBeUndefined();
   });
+
+  it('has 令和9年度 entries including the newly-published application period (not present in R8)', () => {
+    const exam = findScheduleEvent(SHIGA_EXAM_SCHEDULE, '令和9年度（2027年度）', '一次募集 一般型選抜（学力検査）');
+    expect(exam?.startDate).toBe('2027-03-03');
+
+    const result = findScheduleEvent(SHIGA_EXAM_SCHEDULE, '令和9年度（2027年度）', '一次募集 入学許可予定者の発表');
+    expect(result?.startDate).toBe('2027-03-11');
+
+    const applicationPeriod = findScheduleEvent(SHIGA_EXAM_SCHEDULE, '令和9年度（2027年度）', '一次募集 出願期間');
+    expect(applicationPeriod).toEqual({
+      label: '一次募集 出願期間',
+      startDate: '2027-01-28',
+      endDate: '2027-02-09',
+      note: '出願開始9:00・出願終了12:00',
+    });
+  });
 });
