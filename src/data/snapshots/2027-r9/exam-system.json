@@ -6,11 +6,32 @@
     "completedAt": null,
     "collectionMethod": "T-Y11F §5順序#1(ops/tasks/T-Y11F-publication-calendar-harvester.md)。2025-r7/2024-r6と同じ形式・同じ収集方針だが、令和9年度の実施要項・選抜要領は2026-09-07時点で全47県のうち一部の県のみ公表済み(2026-08-31に👤へ提案書を送付した際の実測で埼玉5/29・長野7/2・大阪・神奈川・山口が既に確認されている)。未公表の県はentriesに含めずmeta.unavailableにも入れない(『まだ存在しない』は『取得不能』とは別状態のため2値化しない)。今後も公表され次第、随時追加していく想定。",
     "totalPrefectures": 47,
-    "collectedCount": 3,
+    "collectedCount": 4,
     "unavailable": [],
-    "notYetPublishedNote": "2026-09-07時点でR9実施要項・選抜要領の公表が確認できているのは埼玉/長野/大阪/神奈川/山口の5県のみ(うち今回entries化できたのは埼玉・大阪・神奈川)。残り42県は『まだ公表されていない』可能性が高くunavailableではない。"
+    "notYetPublishedNote": "2026-09-07時点でR9実施要項・選抜要領の公表が確認できているのは埼玉/長野/大阪/神奈川/山口の5県のみ(うち今回entries化できたのは埼玉・大阪・神奈川・長野)。残り42県は『まだ公表されていない』可能性が高くunavailableではない。"
   },
   "entries": [
+    {
+      "code": "nagano",
+      "name": "長野県",
+      "region": "中部",
+      "fiscalYear": "2027",
+      "targetGrades": [3],
+      "gradeMultipliers": { "1": 0, "2": 0, "3": 1 },
+      "coreMultiplier": 1,
+      "practicalMultiplier": 1,
+      "maxScore": 45,
+      "simplifiedCalc": false,
+      "actualMaxScore": null,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": null,
+      "sourceUrl": "https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r9/documents/r9_yoko.pdf",
+      "sourceUrl2": "https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r9/r9konyushi.html",
+      "sourceTitle": "長野県教育委員会「令和9年度長野県立高等学校入学者選抜要綱」7 入学者の選抜(1)イ(ｱ)",
+      "lastVerified": "2026-09-07",
+      "diffFromCurrentYear": "変更なしと直接検証(2026-09-07にvisionでp.6「7 入学者の選抜」(1)イ(ｱ)を確認。『受検者全員について、調査書に記載されている中学校第3学年の必修教科の評定合計値(最高45点)を縦軸、学力検査成就率合計値(最高500点)を横軸とする相関図を作成する』という文言が2025-r7エントリの確認内容(令和8年度分と完全一致)と一字一句完全に同一(第3学年のみ・9教科×5段階=45点)。相関図(区分線)方式・傾斜配点の規定(2)も不変。長野県は学校裁量の基準人員設定により単一の代表比率を主張しない制度のため、令和8年度分と同じくreverseCalcはnullのまま引き継いだ。"
+    },
     {
       "code": "kanagawa",
       "name": "神奈川県",

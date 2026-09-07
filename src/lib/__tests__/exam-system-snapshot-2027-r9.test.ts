@@ -80,6 +80,23 @@ describe('2027-r9 exam-system snapshot（T-Y11F §5順序#1 収集中スナッ�
     }
   });
 
+  test('nagano: 2026-r8と2027-r9で制度の核となる数値が一致する(実測で確認済みの「変更なし」)', () => {
+    const n2027 = snapshot.entries.find((e) => e.code === 'nagano')!;
+    const n2026 = snapshot2026.entries.find((e) => e.code === 'nagano')!;
+    expect(n2027.maxScore).toBe(n2026.maxScore);
+    expect(n2027.gradeMultipliers).toEqual(n2026.gradeMultipliers);
+    expect(n2027.coreMultiplier).toBe(n2026.coreMultiplier);
+    expect(n2027.practicalMultiplier).toBe(n2026.practicalMultiplier);
+    expect(n2027.reverseCalc).toBeNull();
+
+    const diffs = diffExamSystemSnapshots(snapshot2026, snapshot);
+    const naganoDiffs = diffs.filter((d) => d.prefectureCode === 'nagano');
+    expect(naganoDiffs.length).toBeGreaterThan(0);
+    for (const d of naganoDiffs) {
+      expect(d.status).toBe('unchanged');
+    }
+  });
+
   test('47県未満のためmeta.notYetPublishedNoteが「まだ公表されていない」旨を明記している(取得不能との2値化防止)', () => {
     expect(snapshot.meta.notYetPublishedNote).toContain('まだ公表されていない');
   });
