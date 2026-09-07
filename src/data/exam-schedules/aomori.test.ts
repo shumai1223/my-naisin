@@ -40,6 +40,14 @@ describe('AOMORI_EXAM_SCHEDULE', () => {
     expect(labels.some((l) => l === '追検査実施日')).toBe(true);
   });
 
+  it('finds the main (一般選抜) exam day and result date by label for 令和9年度（2027年度）', () => {
+    const exam = findScheduleEvent(AOMORI_EXAM_SCHEDULE, '令和9年度（2027年度）', '学力検査等 検査実施日');
+    expect(exam?.startDate).toBe('2027-03-04');
+
+    const result = findScheduleEvent(AOMORI_EXAM_SCHEDULE, '令和9年度（2027年度）', '合格者の発表');
+    expect(result?.startDate).toBe('2027-03-12');
+  });
+
   it('returns undefined for unknown fiscal year or label', () => {
     expect(findScheduleEvent(AOMORI_EXAM_SCHEDULE, '令和99年度', '学力検査等 検査実施日')).toBeUndefined();
     expect(findScheduleEvent(AOMORI_EXAM_SCHEDULE, '令和8年度（2026年度）', '存在しない項目')).toBeUndefined();
