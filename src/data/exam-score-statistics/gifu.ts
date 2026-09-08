@@ -10,6 +10,14 @@
  * とtotalAverageは一致しない（令和5年度: 69+50+54+60+60=293 vs 総点299・令和7年度:
  * 77+50+56+64+63=310 vs 総点約314）。バグではなく原資料が明記する構造的差異のため、
  * isPlausibleSubjectSumは意図的にfalseを返す想定内のケースとして記録する。
+ *
+ * ⚠️令和8年度分（T-Y11F §5順序#3）: 一次ソース「令和8年度公立高等学校入学者選抜の成績概要」
+ * （6頁・p.8「表6 教科別平均点」）
+ * https://www.pref.gifu.lg.jp/uploaded/attachment/508337.pdf
+ * pdftoppm+ビジョン解析で表を直接転記。**同じ表に併記された「令和7年度」列（国語77・数学50・
+ * 英語56・理科64・社会63）が既存の令和7年度エントリと完全一致し、新規転記と既存データ双方の
+ * クロス検証になった**（外部の独立二次情報源はR8分がまだ乏しく見つからず、この内部クロス検証を
+ * 根拠とした）。第一次選抜学力検査の受検者数12,366人・5教科総点平均「約298点」もp.7に明記。
  */
 import type { ExamScoreStatisticsFile } from '@/lib/exam-score-statistics';
 
@@ -82,6 +90,25 @@ export const EXAM_SCORE_STATISTICS_GIFU: ExamScoreStatisticsFile = {
       totalAverage: 314,
       totalMaxScore: 500,
       testTakerCount: 12799,
+    },
+    {
+      fiscalYearLabel: '令和8年度',
+      averageType: 'test-takers',
+      subjects: [
+        { subject: '国語', averageScore: 72, maxScore: 100 },
+        { subject: '数学', averageScore: 46, maxScore: 100 },
+        { subject: '英語', averageScore: 55, maxScore: 100 },
+        { subject: '理科', averageScore: 63, maxScore: 100 },
+        { subject: '社会', averageScore: 60, maxScore: 100 },
+      ],
+      totalAverage: 298,
+      totalMaxScore: 500,
+      testTakerCount: 12366,
+      source: {
+        url: 'https://www.pref.gifu.lg.jp/uploaded/attachment/508337.pdf',
+        docTitle: '令和8年度公立高等学校入学者選抜の成績概要（岐阜県教育委員会）',
+        fetchedAt: '2026-09-08',
+      },
     },
   ],
 };

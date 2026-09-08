@@ -540,8 +540,8 @@ describe('EXAM_SCORE_STATISTICS_IBARAKI(パイロット実データ・令和7年
 });
 
 describe('EXAM_SCORE_STATISTICS_GIFU(パイロット実データ・教科別平均点と総点平均で算出母集団が異なる)', () => {
-  it('4年度分(令和4〜7年度)が収録されている', () => {
-    expect(EXAM_SCORE_STATISTICS_GIFU.years).toHaveLength(4);
+  it('5年度分(令和4〜8年度)が収録されている', () => {
+    expect(EXAM_SCORE_STATISTICS_GIFU.years).toHaveLength(5);
   });
 
   it('各教科100点満点・5教科の内訳を持ちtest-takersで統一されている', () => {
@@ -563,6 +563,13 @@ describe('EXAM_SCORE_STATISTICS_GIFU(パイロット実データ・教科別平�
   it('令和6年度分は総点平均が原資料に見当たらずtotalAverage未設定', () => {
     const r6 = EXAM_SCORE_STATISTICS_GIFU.years.find((y) => y.fiscalYearLabel === '令和6年度');
     expect(r6?.totalAverage).toBeUndefined();
+  });
+
+  it('令和8年度分の原資料内「令和7年度」比較列が既存の令和7年度エントリと完全一致(クロス検証済み)', () => {
+    const r7 = EXAM_SCORE_STATISTICS_GIFU.years.find((y) => y.fiscalYearLabel === '令和7年度');
+    const r8 = EXAM_SCORE_STATISTICS_GIFU.years.find((y) => y.fiscalYearLabel === '令和8年度');
+    expect(r8?.testTakerCount).toBe(12366);
+    expect(r7?.subjects.map((s) => s.averageScore)).toEqual([77, 50, 56, 64, 63]);
   });
 });
 

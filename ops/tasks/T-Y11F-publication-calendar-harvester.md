@@ -687,7 +687,7 @@ PILでピクセル単位クロップして確認しnoteに明記。独立二次�
 ブログ）と完全一致確認済み。**44県目**。残り3県（fukushima・akita・tottori
 全て保留）は10月以降の公表待ち。
 
-| 3 | **学力検査平均点R8**⚠️着手中(2026-09-08) | 41県収録だが**R8は27県**（osaka/saitama/chiba/ibaraki/nagano追加済み。hyogoは§5守ることで取得禁止のため対象外。令和7は37県ある）。14県はデータがあってR8未収録・6県は未着手（yamagata/tochigi/fukui/kyoto/nagasaki/miyazaki） | 12h |
+| 3 | **学力検査平均点R8**⚠️着手中(2026-09-08) | 41県収録だが**R8は28県**（osaka/saitama/chiba/ibaraki/nagano/gifu追加済み。hyogoは§5守ることで取得禁止のため対象外。令和7は37県ある）。13県はデータがあってR8未収録・6県は未着手（yamagata/tochigi/fukui/kyoto/nagasaki/miyazaki） | 12h |
 
 **2026-09-08 osaka 1件目完了**: 一次ソースURLパターン（`.../r0X/RX_gakuryoku_jittai_tyousa.pdf`）から
 `r08/R8_gakuryoku_jittai_tyousa.pdf`を推測し取得成功。**重要な発見**: R5〜R7は「府立高等学校
@@ -736,6 +736,16 @@ pdftoppm 200dpi+ビジョン解析で転記（画像自体は鮮明）。前期�
 新規転記と既存データ双方のクロス検証になった**（外部の独立二次情報源は本件では見つからず、
 この内部クロス検証を根拠とした）。tsc実exit0・jestフルスイート495suites7241tests
 green(59秒)。残り14県は次回以降。
+
+**2026-09-08 gifu 6件目完了**: 一次ソース「令和8年度公立高等学校入学者選抜の成績概要」
+（6頁・p.8「表6 教科別平均点」）
+https://www.pref.gifu.lg.jp/uploaded/attachment/508337.pdf
+pdftoppm+ビジョン解析で表を直接転記。**同じ表に併記された「令和7年度」比較列（国語77・
+数学50・英語56・理科64・社会63）が既存の令和7年度エントリと完全一致し、新規転記と既存
+データ双方のクロス検証になった**（外部の独立二次情報源はR8分がまだ乏しく見つからず内部
+クロス検証を根拠とした）。第一次選抜学力検査受検者数12,366人・5教科総点平均「約298点」も
+p.7から収録。tsc実exit0・jestフルスイート495suites7242tests green(64秒)。残り13県は
+次回以降。
 | 4 | **定時制・通信制の残り26県** | `teiji-competition-rates` は**21県収録／26県未収録**（aichi akita aomori ehime fukui fukuoka fukushima hyogo ibaraki ishikawa iwate kagawa kochi mie miyazaki nara oita osaka saga saitama shiga tochigi toyama wakayama yamagata yamaguchi）。S1-3で所在分類済み | 20〜30h |
 | 5 | 旺文社PoC納品物v0 | R8一式CSV/JSON（配布可21,548件）＋R7→R8差分＋千葉型サンプル＋形式仕様1枚。noindex＋sitemap除外で作り置き | 8〜16h |
 | 6 | Comiru/Studyplus 連携仕様書＋/embedデモ | 質問ノート9/03で事前承認済み。対外送信なし | 8〜16h |
