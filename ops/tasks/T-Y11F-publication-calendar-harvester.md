@@ -687,7 +687,7 @@ PILでピクセル単位クロップして確認しnoteに明記。独立二次�
 ブログ）と完全一致確認済み。**44県目**。残り3県（fukushima・akita・tottori
 全て保留）は10月以降の公表待ち。
 
-| 3 | **学力検査平均点R8**⚠️着手中(2026-09-08〜09) | 41県収録だが**R8は33県**（osaka/saitama/chiba/ibaraki/nagano/gifu/mie/kumamoto/ishikawa/kochi/saga追加済み。hyogoは§5守ることで取得禁止のため対象外・fukuoka/nara/okinawaはR8データ未掲載のため保留。令和7は37県ある）。5県はデータがあってR8未収録（fukuoka/nara/okinawa保留含む）・6県は未着手（yamagata/tochigi/fukui/kyoto/nagasaki/miyazaki） | 12h |
+| 3 | **学力検査平均点R8**⚠️着手中(2026-09-08〜09) | 41県収録だが**R8は34県**（osaka/saitama/chiba/ibaraki/nagano/gifu/mie/kumamoto/ishikawa/kochi/saga/shimane追加済み。hyogoは§5守ることで取得禁止のため対象外・fukuoka/nara/okinawaはR8データ未掲載のため保留。令和7は37県ある）。4県はデータがあってR8未収録（fukuoka/nara/okinawa保留含む）・6県は未着手（yamagata/tochigi/fukui/kyoto/nagasaki/miyazaki） | 12h |
 
 **2026-09-08 osaka 1件目完了**: 一次ソースURLパターン（`.../r0X/RX_gakuryoku_jittai_tyousa.pdf`）から
 `r08/R8_gakuryoku_jittai_tyousa.pdf`を推測し取得成功。**重要な発見**: R5〜R7は「府立高等学校
@@ -795,6 +795,16 @@ https://www.eishinkan.net/entrance/high_admissions/8777/
 R8分を掲載していない。exam-score-statistics.test.tsのSAGAブロックを更新。tsc実exit0・
 jestフルスイート495suites7247tests green(59秒)。残り8県（fukuoka・nara・okinawa保留
 含む）は次回以降。
+
+**2026-09-09 shimane 12件目完了**: 一次ソース「令和8年度島根県公立高等学校入学者選抜の
+結果と分析」（フォント欠落PDF・9頁・p.7「表7 平均点・標準偏差・最高点・最低点」）
+https://www.pref.shimane.lg.jp/education/kyoiku/senbatsu/senbatsu_info/kanendosenbatsu.data/R8_kekkatobunseki.pdf
+pdftoppm 180dpi+ビジョン解析で表を直接転記。本文の「教科別の平均点は、国語が26.5点
+（昨年度より+1.1点）…」という記述が表の数値・既存の令和7年度エントリとの差分と両方に
+完全一致することを確認済み（内部クロス検証。初回のビジョン読み取りで「26.3」と誤読した
+箇所を再クロップで「26.5」と訂正=1文字の見間違いに注意）。exam-score-statistics.test.ts
+のSHIMANEブロックを更新。tsc実exit0・jestフルスイート495suites7248tests green(64秒)。
+残り7県（fukuoka・nara・okinawa保留含む）は次回以降。
 
 | 4 | **定時制・通信制の残り26県** | `teiji-competition-rates` は**21県収録／26県未収録**（aichi akita aomori ehime fukui fukuoka fukushima hyogo ibaraki ishikawa iwate kagawa kochi mie miyazaki nara oita osaka saga saitama shiga tochigi toyama wakayama yamagata yamaguchi）。S1-3で所在分類済み | 20〜30h |
 | 5 | 旺文社PoC納品物v0 | R8一式CSV/JSON（配布可21,548件）＋R7→R8差分＋千葉型サンプル＋形式仕様1枚。noindex＋sitemap除外で作り置き | 8〜16h |

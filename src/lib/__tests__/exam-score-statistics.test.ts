@@ -997,8 +997,8 @@ describe('EXAM_SCORE_STATISTICS_TOTTORI(パイロット実データ・1PDFで単
 });
 
 describe('EXAM_SCORE_STATISTICS_SHIMANE(パイロット実データ)', () => {
-  it('2年度分(令和6〜7年度)が収録されている', () => {
-    expect(EXAM_SCORE_STATISTICS_SHIMANE.years).toHaveLength(2);
+  it('3年度分(令和6〜8年度)が収録されている', () => {
+    expect(EXAM_SCORE_STATISTICS_SHIMANE.years).toHaveLength(3);
   });
 
   it('各教科50点満点(5教科合計250点満点体系)・test-takersで統一されている', () => {
@@ -1014,6 +1014,11 @@ describe('EXAM_SCORE_STATISTICS_SHIMANE(パイロット実データ)', () => {
     for (const year of EXAM_SCORE_STATISTICS_SHIMANE.years) {
       expect(isPlausibleSubjectSum(year)).toBe(true);
     }
+  });
+
+  it('令和8年度分は5教科合計124.6点(前年度125.0点からわずかに低下)', () => {
+    const r8 = EXAM_SCORE_STATISTICS_SHIMANE.years.find((y) => y.fiscalYearLabel === '令和8年度');
+    expect(r8?.totalAverage).toBe(124.6);
   });
 });
 
