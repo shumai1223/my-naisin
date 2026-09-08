@@ -238,9 +238,25 @@
 
 ## C: 定型文のみで所在情報なし（要個別のPDF再確認）
 
-aichi, fukui, fukushima, ishikawa, iwate, kochi,
-miyazaki, nara, oita, osaka, saga（11県・ibaraki/mie/wakayama/tochigi/shiga/aomori/ehime/fukuoka
-完了、akita・fukuiは構造的にデータ不在/対象外と判明のため「未確認」16県から4県減）
+aichi, fukui, ishikawa, iwate, kochi,
+miyazaki, nara, oita, osaka, saga（10県・ibaraki/mie/wakayama/tochigi/shiga/aomori/ehime/
+fukuoka/fukushima完了、akita・fukuiは構造的にデータ不在/対象外と判明のため「未確認」16県から
+5県減）
+
+### fukushima: ✅2026-09-09データ収集完了（C→A相当に格上げ・過去セッションの「低解像度で断念」
+判定を再度覆す）
+既存の全日制収集元と全く同一の画像スキャンPDF（テキスト層なし）の2頁目下段に「2 定時制」
+セクションが独立して存在した。6校8レコード（福島工業[定時]・ふくしま新世・郡山萌世[普通科
+昼間主コース/夜間主コース]・白河第二・会津第二・いわき翠の杜[普通科昼間主コース/夜間主コース]）
+の完全な学校別内訳。「定時制　合計」200/9（出願先変更後）と完全一致。
+`src/data/teiji-competition-rates/fukushima.ts`へ実装完了（jest5テストgreen）。
+**教訓**: 全日制fukushima.ts自体のヘッダコメントに「過去のセッションで画像スキャンPDF・
+低解像度と判定して保留していたが実際は300dpiで明瞭だった」という既知の罠が既に記録されていた
+（`feedback-verify-data-via-files-not-lib-comments`と同型の教訓）。定時制側でも同じPDFの
+1頁目「1 全日制」までは把握できても2頁目末尾の「2 定時制」小テーブルには過去セッションが
+到達できていなかった可能性が高い。**画像スキャンPDF＋テキスト層なしの県は、grep 0件が
+「記載なし」の証拠にならない（pdftotextが単に何も抽出できていないだけ）**——必ずpdftoppmで
+視覚確認してから「記載なし」と判定すること。
 
 ### fukuoka: ✅2026-09-09データ収集完了（C→A相当に格上げ・coverage='partial'・単位制課程を除く）
 全日制収集元のハブページ（`pref.fukuoka.lg.jp/site/kyouiku/nyushi8.html`）に定時制専用PDF
