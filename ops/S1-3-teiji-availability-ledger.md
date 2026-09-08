@@ -238,9 +238,38 @@
 
 ## C: 定型文のみで所在情報なし（要個別のPDF再確認）
 
-aichi, fukui, fukuoka, fukushima, ishikawa, iwate, kochi,
-miyazaki, nara, oita, osaka, saga（12県・ibaraki/mie/wakayama/tochigi/shiga/aomori/ehime完了、
-akitaは学校別データ不在確認済みで格上げ不可のため「未確認」16県から3県減）
+aichi, fukui, fukushima, ishikawa, iwate, kochi,
+miyazaki, nara, oita, osaka, saga（11県・ibaraki/mie/wakayama/tochigi/shiga/aomori/ehime/fukuoka
+完了、akita・fukuiは構造的にデータ不在/対象外と判明のため「未確認」16県から4県減）
+
+### fukuoka: ✅2026-09-09データ収集完了（C→A相当に格上げ・coverage='partial'・単位制課程を除く）
+全日制収集元のハブページ（`pref.fukuoka.lg.jp/site/kyouiku/nyushi8.html`）に定時制専用PDF
+「（定時制）高等学校入学定員・志願者数・志願率（公立）」が別途掲載されていた。16校16レコード
+（京都・小倉南・若松・八幡中央・福岡工業[工業技術科]・筑紫中央・糸島・明善・大川樟風・
+三池工業[機械・電気科]・福島・浮羽工業・朝倉・嘉穂東・※嘉穂総合[生活情報科・市立分校]・鞍手）
+の完全な学校別内訳が独立して存在した。「県立計」680/272/0.40・「市立計」40/28/0.70・
+「合計」720/300/0.42の3段階すべてが機械集計と完全一致。
+`src/data/teiji-competition-rates/fukuoka.ts`へ実装完了（jest6テストgreen）。
+**coverage='partial'とした理由**: このPDFの注記②に「単位制課程を除く」と明記されており、
+別PDF「定時制単位制課程２期入学試験入学志願状況」（同ハブページに存在確認済み・全2頁）は
+1期/2期に分かれた複雑なレイアウトで学校名対応が判読困難だったため、今回は未収録として
+pendingDepartmentsに正直に記録した（hiroshima型の「正直な部分収録」パターンを踏襲）。
+
+### fukui: ⚠️2026-09-09実機確認・構造的に他県と異なる制度のためデータ不在と判明（C分類のまま保留）
+全日制収集元PDF（`R8henko3.pdf`・全2頁）はもちろん、同一フォルダの`R8jinin.pdf`（募集人員・
+全2頁）にもgrep 0件で定時制の記載が一切無い。福井県教育委員会の定時制・通信制専用ハブページ
+（`https://www.pref.fukui.lg.jp/doc/koukou/teituu.html`）を確認したところ、道守・丸岡・大野・
+鯖江・武生・敦賀・若狭の7校が定時制を設置しているが、**福井県は全日制と同時期（2月出願・3月
+選抜）の定時制競争選抜を実施しておらず、「後期編入学者選抜（定時制の課程および通信制の課程）」
+という6月頃の編入学（転入学的な性格の随時募集）のみが公式に案内されている**。この編入学
+選抜の実施要項PDF(`R08_koukihennyu_youkou.pdf`)ページにも募集人員・志願者数・倍率のような
+数値データは無く（手続き案内のみ）、対象校（武生高等学校）の定時制ページも「合格者発表」PDF
+のみで志願者数統計は非公表。**Y-0憲法③（捏造ゼロ）により存在しないデータ構造を代替収録できない
+ため、fukui.tsは今回作成しない**。これはakita（学校別内訳が県集計に埋没）ともhiroshima
+（一部実数・一部倍率のみ）とも異なる第三のパターン＝**制度自体が「quota/finalApplicants/
+finalRateを競う3月選抜」という前提を持たない**（福井県の定時制は年間を通じた随時編入学制で
+運営されている可能性が高い）。C分類のまま「未確認」→「制度差異により対象外の可能性が高い・
+要再確認」に格上げして保留する。
 
 ### ehime: ✅2026-09-09データ収集完了（C→A相当に格上げ・file-ID方式で隣接IDを発見）
 全日制収集元PDFが`ehime-kyoiku.esnet.ed.jp/file/2314`というfile-ID方式のURLだったため、
