@@ -836,7 +836,7 @@ miyazaki）は元々ファイル自体が無い未着手県で、今回のタス
 スコープ外（新規ファイル作成は別タスクとして扱う）。§5順序#3は事実上払底した、次は
 §5順序#4へ。
 
-| 4 | **定時制・通信制の残り26県**⚠️着手中(2026-09-09) | `teiji-competition-rates` は**27県収録／20県未収録**（toyama/saitama/kagawa/yamagata/ibaraki/mie追加済み。残りaichi akita aomori ehime fukui fukuoka fukushima hyogo ishikawa iwate kochi miyazaki nara oita osaka saga shiga tochigi wakayama yamaguchi）。hyogoは§5守ることで取得禁止・yamaguchiは既存ソースに定時制セクション自体が無いと確認済みでともに対象外。残り18県はS1-3 C分類（定型文のみで所在不明）だが、**実機確認の的中率は現時点で6/6=100%（B分類4件+C分類2件〈ibaraki/mie〉が全て「別ページ/別PDFに独立して存在した」）** | 20〜30h |
+| 4 | **定時制・通信制の残り26県**⚠️着手中(2026-09-09) | `teiji-competition-rates` は**28県収録／19県未収録**（toyama/saitama/kagawa/yamagata/ibaraki/mie/wakayama追加済み。残りaichi akita aomori ehime fukui fukuoka fukushima hyogo ishikawa iwate kochi miyazaki nara oita osaka saga shiga tochigi yamaguchi）。hyogoは§5守ることで取得禁止・yamaguchiは既存ソースに定時制セクション自体が無いと確認済みでともに対象外。残り17県はS1-3 C分類（定型文のみで所在不明）だが、**実機確認の的中率は現時点で7/7=100%（B分類4件+C分類3件〈ibaraki/mie/wakayama〉が全て「別ページ/別PDFに独立して存在した」）** | 20〜30h |
 
 **2026-09-09 toyama 1件目完了（S1-3 B分類→実機確認でA相当に格上げ）**: S1-3台帳の懸念
 「学校別レコードはページ1-2のみ」は誤りだったと判明。既存の全日制収集元と同一PDF
@@ -889,6 +889,16 @@ PDF再取得から始める新規調査に近い作業のため次段階の優�
 自己検算）。北海道の有朋単位制と同型で、定時制・通信制を同一ファイルに収録する設計を
 踏襲。tsc実exit0・jestフルスイート501suites7283tests green(61秒)。**実機確認の的中率は
 6/6=100%**（B分類4件+C分類2件〈ibaraki/mie〉が全て「別ページ/別PDFに独立して存在」）。
+
+**2026-09-09 wakayama 7件目完了（県立＋市立の両方を一度に収録）**: 既存の全日制収集元と
+同一PDFの2頁目冒頭【定時制】に県立7校13レコード（伊都中央・きのくに青雲・和歌山工業・
+耐久・日高・南紀・新宮）、同頁末尾「（参考）市立高等学校」に和歌山市立和歌山1校2レコードが
+独立して存在。表末尾の合計が県立570/204/0.36・市立80/9/0.11の両方と完全一致（2段階の
+自己検算）。列は「入学者枠数(A)」「本出願者数(D+E)」「本出願倍率」（志願変更反映後の
+最終値）を採用。tsc実exit0・jestフルスイート502suites7289tests green(60秒)。**実機確認の
+的中率は7/7=100%**（B分類4件+C分類3件〈ibaraki/mie/wakayama〉が全て「別ページ/別PDFに
+独立して存在」）——C分類の「所在不明」というラベルは信頼度が低く、残り17県すべてで
+実機確認を続ける価値が高いと確定的に言える段階に来た。
 
 | 5 | 旺文社PoC納品物v0 | R8一式CSV/JSON（配布可21,548件）＋R7→R8差分＋千葉型サンプル＋形式仕様1枚。noindex＋sitemap除外で作り置き | 8〜16h |
 | 6 | Comiru/Studyplus 連携仕様書＋/embedデモ | 質問ノート9/03で事前承認済み。対外送信なし | 8〜16h |

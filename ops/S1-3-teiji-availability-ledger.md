@@ -25,7 +25,7 @@
 |---|---|---|
 | **A** | 20 | chiba, gifu, gunma, hiroshima, hokkaido, hyogo, kagoshima, kanagawa, kumamoto, kyoto, miyagi, nagano, nagasaki, niigata, okayama, okinawa, shimane, shizuoka, tokyo, tottori, tokushima, yamaguchi, yamanashi |
 | **B** | 5 | kagawa, saitama, toyama, yamagata, (要再確認: niigataとの境界事例あり) |
-| **C** | 22（ibaraki・mie完了で残18） | aichi, akita, aomori, ehime, fukui, fukuoka, fukushima, ishikawa, iwate, kochi, miyazaki, nara, oita, osaka, saga, shiga, tochigi, wakayama |
+| **C** | 22（ibaraki・mie・wakayama完了で残17） | aichi, akita, aomori, ehime, fukui, fukuoka, fukushima, ishikawa, iwate, kochi, miyazaki, nara, oita, osaka, saga, shiga, tochigi |
 
 （A=23件+B=4件+C=20件で合計47件になるよう後段の詳細表で再カウントすること。上表は暫定集計で
 ダブりがある可能性がある。詳細は下記の県別根拠を正とする）
@@ -239,7 +239,16 @@
 ## C: 定型文のみで所在情報なし（要個別のPDF再確認）
 
 aichi, akita, aomori, ehime, fukui, fukuoka, fukushima, ishikawa, iwate, kochi,
-miyazaki, nara, oita, osaka, saga, shiga, tochigi, wakayama（18県・ibaraki/mie完了により2県減）
+miyazaki, nara, oita, osaka, saga, shiga, tochigi（17県・ibaraki/mie/wakayama完了により3県減）
+
+### wakayama: ✅2026-09-09データ収集完了（C→A相当に格上げ・県立＋市立の両方を収録）
+既存の全日制収集元と同一PDFの2頁目冒頭【定時制】に県立7校13レコード（伊都中央[昼/夜]・
+きのくに青雲[昼/夜/情報会計科夜]・和歌山工業[機械電気科夜/建築科夜]・耐久[夜]・日高[夜]・
+南紀[昼/夜]・新宮[昼(新翔校舎)/夜(新宮校舎)]）、同頁末尾「（参考）市立高等学校」に
+和歌山市立和歌山1校2レコード（ビジネス実践科/ビジネス情報科）が独立して存在した。表末尾の
+合計が県立570/204/0.36・市立80/9/0.11の両方と完全一致。列は「入学者枠数(A)」「本出願者数
+(D+E)」「本出願倍率((D+E)/A)」（志願変更反映後の最終値）を採用。
+`src/data/teiji-competition-rates/wakayama.ts`へ実装完了（jest6テストgreen）。
 
 ### mie: ✅2026-09-09データ収集完了（C→A相当に格上げ・定時制＋通信制の両方を収録）
 既存の全日制収集元と同一PDF「令和8年度三重県立高等学校入学者選抜」の4頁目に
