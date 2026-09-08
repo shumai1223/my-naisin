@@ -238,10 +238,24 @@
 
 ## C: 定型文のみで所在情報なし（要個別のPDF再確認）
 
-aichi, fukui, iwate, kochi,
-miyazaki, nara, oita, osaka, saga（9県・ibaraki/mie/wakayama/tochigi/shiga/aomori/ehime/
-fukuoka/fukushima/ishikawa完了、akita・fukuiは構造的にデータ不在/対象外と判明のため「未確認」
-16県から6県減）
+aichi, fukui, kochi,
+miyazaki, nara, oita, osaka, saga（8県・ibaraki/mie/wakayama/tochigi/shiga/aomori/ehime/
+fukuoka/fukushima/ishikawa/iwate完了、akita・fukuiは構造的にデータ不在/対象外と判明のため
+「未確認」16県から7県減）
+
+### iwate: ✅2026-09-09データ収集完了（C→A相当に格上げ・全日制コメントの「全3ページ」が誤りと判明）
+全日制`iwate.ts`のヘッダコメントは収集元PDFを「全3ページ」としていたが、実際は全4ページで、
+未確認だった4頁目に独立した＜定時制＞セクションが存在した（fukushimaの「過去セッションが
+最終ページまで到達していなかった」パターンと同型・ページ数を過去のコメントの記述で信じず
+`pdfinfo`で実測することの重要性を再確認）。9校12レコード（杜陵[1・2部/3部]・杜陵奥州[昼間部/
+夜間部]・盛岡工業[工業科(定)]・一関第一[普通科(定)]・大船渡[普通科(定)]・釜石[普通科(定)]・
+宮古[普通科(定)]・久慈長内[昼間部/夜間部]・福岡[普通科(定)]）の完全な学校別内訳。
+「合計　9校　12学科(学系)」480/109/0.23と完全一致。
+`src/data/teiji-competition-rates/iwate.ts`へ実装完了（jest5テストgreen）。
+**教訓（横展開）**: fukushima・iwateと2件連続で「全日制側のヘッダコメントに記載されたページ数
+そのものが実際のPDFページ数より少なく、末尾の定時制セクションが見落とされていた」パターンが
+発見された。C分類の残りの県でも、全日制ヘッダコメントの「全Nページ」という記述を鵜呑みにせず、
+`pdfinfo`で実測ページ数と突合してから「定時制の記載なし」と判定すべき。
 
 ### ishikawa: ✅2026-09-09データ収集完了（C→A相当に格上げ・全日制と別日程の独立選抜）
 全日制収集元PDF（2月24日発表）とは別に、定時制専用の「令和8年度石川県公立高等学校一般入学
