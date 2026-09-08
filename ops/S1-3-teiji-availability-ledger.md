@@ -25,7 +25,7 @@
 |---|---|---|
 | **A** | 20 | chiba, gifu, gunma, hiroshima, hokkaido, hyogo, kagoshima, kanagawa, kumamoto, kyoto, miyagi, nagano, nagasaki, niigata, okayama, okinawa, shimane, shizuoka, tokyo, tottori, tokushima, yamaguchi, yamanashi |
 | **B** | 5 | kagawa, saitama, toyama, yamagata, (要再確認: niigataとの境界事例あり) |
-| **C** | 22（ibaraki完了で残19） | aichi, akita, aomori, ehime, fukui, fukuoka, fukushima, ishikawa, iwate, kochi, mie, miyazaki, nara, oita, osaka, saga, shiga, tochigi, wakayama |
+| **C** | 22（ibaraki・mie完了で残18） | aichi, akita, aomori, ehime, fukui, fukuoka, fukushima, ishikawa, iwate, kochi, miyazaki, nara, oita, osaka, saga, shiga, tochigi, wakayama |
 
 （A=23件+B=4件+C=20件で合計47件になるよう後段の詳細表で再カウントすること。上表は暫定集計で
 ダブりがある可能性がある。詳細は下記の県別根拠を正とする）
@@ -238,8 +238,16 @@
 
 ## C: 定型文のみで所在情報なし（要個別のPDF再確認）
 
-aichi, akita, aomori, ehime, fukui, fukuoka, fukushima, ishikawa, iwate, kochi, mie,
-miyazaki, nara, oita, osaka, saga, shiga, tochigi, wakayama（19県・ibaraki完了により1県減）
+aichi, akita, aomori, ehime, fukui, fukuoka, fukushima, ishikawa, iwate, kochi,
+miyazaki, nara, oita, osaka, saga, shiga, tochigi, wakayama（18県・ibaraki/mie完了により2県減）
+
+### mie: ✅2026-09-09データ収集完了（C→A相当に格上げ・定時制＋通信制の両方を収録）
+既存の全日制収集元と同一PDF「令和8年度三重県立高等学校入学者選抜」の4頁目に
+【定時制課程】（11校17レコード）と【通信制課程】（2校2レコード）が独立して存在した。
+定時制は北星[普通・情報ビジネス昼間部くくり募集/普通夜間部]・みえ夢学園[午前/午後/夜間の
+3部制]・伊勢まなび[午前/午後/夜間の3部制]等11校、通信制は北星・松阪の2校。表末尾の総計が
+定時制558/182/0.33・通信制392/53/0.14の両方と完全一致。
+`src/data/teiji-competition-rates/mie.ts`へ実装完了（jest5テストgreen）。
 
 ### ibaraki: ✅2026-09-09データ収集完了（C→A相当に格上げ）
 全日制収集元とは別の第三のPDF「令和8年度茨城県立高等学校第1学年入学志願者数等
