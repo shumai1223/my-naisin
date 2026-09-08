@@ -947,7 +947,20 @@ green(61秒)。**実機確認の的中率は8/8=100%**。**教訓**: これま�
 3県は前進手段が無い保留のまま。**§4は事実上完了、次は§5順序#5より先にF-0（在庫の実測）へ**
 （本ファイル前段の「★F-0 在庫の実測」節の指示どおり）。
 
-| 5 | 旺文社PoC納品物v0 | R8一式CSV/JSON（配布可21,548件）＋R7→R8差分＋千葉型サンプル＋形式仕様1枚。noindex＋sitemap除外で作り置き | 8〜16h |
+| 5 | 旺文社PoC納品物v0✅生成基盤完了(2026-09-09) | R8一式CSV/JSON（配布可21,548件）＋R7→R8差分＋千葉型サンプル＋形式仕様1枚。noindex＋sitemap除外で作り置き | 8〜16h |
+
+**2026-09-09完了**: `src/lib/obunsha-poc-export.ts`（純関数・jest7テストで21,548件を独立固定）＋
+`scripts/build-obunsha-poc-package.ts`を新設。既存の`licensableRecords`/`resolveRecordSourceIndex`
+と既存のT-N1-4年次差分エンジン（`exam-competition-rate-yoy.ts`の`computeAllSchoolRateYoy`）を
+そのまま再利用し重複実装を避けた。`ops/deliverables/obunsha-poc-v0/`に出力: r8-full.json/csv
+（21,548件）・r7-r8-diff.json（5,245件・47都道府県で両年度収録済み）・chiba-sample.json/csv
+（759件・多年度データの見本）・format-spec.md（列定義・利用条件1枚）。大容量ファイル
+（r8-full.*・r7-r8-diff.json、計17MB）は`src/data/competition-rates`からいつでも再生成可能な
+ため`.gitignore`に追加し非コミット、chiba-sample.*とformat-spec.mdのみ軽量な見本としてコミット
+済み。**対外送信・公開URL化は一切していない**（👤の判断待ち・生成コード・データのみの状態）。
+「noindex＋sitemap除外の限定URL」自体（ページ/APIとして👤が1手で見せられる形）はスコープ外の
+まま残っている——次にこのタスクへ戻るセッションは、`/developers/track-record`（B6・別タスク）
+の実装パターンを参考に、noindexページとしての公開可否を判断してから着手すること。
 | 6 | Comiru/Studyplus 連携仕様書＋/embedデモ | 質問ノート9/03で事前承認済み。対外送信なし | 8〜16h |
 | 7 | **★段階台帳** | 定員・推薦・合格者数・二次募集を**学校×学科でR8とR7に積む**。12県の実測51単位から47県で**約350単位**。公表値の転記のみでY-0内 | **90〜170h** |
 | 8 | **★出典ロケータ** | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |

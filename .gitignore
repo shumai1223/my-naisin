@@ -134,3 +134,10 @@ ops/state/bairitsu-vision-queue/
 # T-Y11E E-2: A-2がchangedと判定した県のPDF本文アーカイブ（著作物・容量とも非コミット。
 # 再取得可能・台帳のみops/raw/bairitsu-pdf-archive-manifest.jsonでコミットする）
 ops/raw/bairitsu-pdf-archive/
+
+# T-Y11F §5順序#5: 旺文社PoC納品物v0の大容量ファイル（`npx tsx scripts/build-obunsha-poc-package.ts`
+# でsrc/data/competition-rates/からいつでも再生成可能・容量が大きいため非コミット）。
+# chiba-sample.*とformat-spec.mdは軽量な見本・仕様書としてコミットする。
+ops/deliverables/obunsha-poc-v0/r8-full.json
+ops/deliverables/obunsha-poc-v0/r8-full.csv
+ops/deliverables/obunsha-poc-v0/r7-r8-diff.json
