@@ -9,6 +9,13 @@
  * 標準5教科（国語・社会・数学・理科・英語）のみを収録する。ソース自体が5教科の合計点を
  * 明記していないため、totalAverage/totalMaxScoreは独自に合算せず未設定のままとする
  * （Y-0憲法: 一次ソースをそのまま再掲・独自集計はしない）。
+ *
+ * ⚠️令和8年度分（T-Y11F §5順序#3）: 一次ソース「令和8年度埼玉県公立高等学校入学者選抜
+ * 実施状況について」（HTML本文に直接記載・PDF化不要）
+ * https://www.pref.saitama.lg.jp/documents/281615/news2026042101.pdf
+ * 「3 学力検査」セクションの「学力検査問題の受検者平均点」欄をそのまま転記（学校選択問題は
+ * R4分と同じ方針で対象外）。梅野弘之オフィシャルブログの独立した二次情報源と前年度比較値も
+ * 含め完全一致を確認済み（2026-09-08）。
  */
 import type { ExamScoreStatisticsFile } from '@/lib/exam-score-statistics';
 
@@ -77,6 +84,22 @@ export const EXAM_SCORE_STATISTICS_SAITAMA: ExamScoreStatisticsFile = {
         { subject: '英語', averageScore: 52.6, maxScore: 100 },
       ],
       testTakerCount: 40812,
+    },
+    {
+      fiscalYearLabel: '令和8年度',
+      averageType: 'test-takers',
+      subjects: [
+        { subject: '国語', averageScore: 60.9, maxScore: 100 },
+        { subject: '社会', averageScore: 66.8, maxScore: 100 },
+        { subject: '数学', averageScore: 50.4, maxScore: 100 },
+        { subject: '理科', averageScore: 63.2, maxScore: 100 },
+        { subject: '英語', averageScore: 52.1, maxScore: 100 },
+      ],
+      source: {
+        url: 'https://www.pref.saitama.lg.jp/documents/281615/news2026042101.pdf',
+        docTitle: '令和8年度埼玉県公立高等学校入学者選抜実施状況について（埼玉県教育委員会）',
+        fetchedAt: '2026-09-08',
+      },
     },
   ],
 };

@@ -103,8 +103,8 @@ describe('EXAM_SCORE_STATISTICS_KOCHI(パイロット実データ)', () => {
 });
 
 describe('EXAM_SCORE_STATISTICS_SAITAMA(パイロット実データ)', () => {
-  it('5年度分(平成30〜令和4年度)が収録されている', () => {
-    expect(EXAM_SCORE_STATISTICS_SAITAMA.years).toHaveLength(5);
+  it('6年度分(平成30〜令和4年度、令和8年度)が収録されている', () => {
+    expect(EXAM_SCORE_STATISTICS_SAITAMA.years).toHaveLength(6);
   });
 
   it('各教科は100点満点(高知県の50点満点と異なる)', () => {
@@ -118,6 +118,12 @@ describe('EXAM_SCORE_STATISTICS_SAITAMA(パイロット実データ)', () => {
       expect(year.totalAverage).toBeUndefined();
       expect(isPlausibleSubjectSum(year)).toBe(true);
     }
+  });
+
+  it('令和8年度分は独立記事(オフィシャルブログ)のsourceを持つ(クロス検証済みの印)', () => {
+    const r8 = EXAM_SCORE_STATISTICS_SAITAMA.years.find((y) => y.fiscalYearLabel === '令和8年度');
+    expect(r8?.averageType).toBe('test-takers');
+    expect(r8?.source?.url).toBeTruthy();
   });
 });
 
