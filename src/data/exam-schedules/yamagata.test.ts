@@ -43,4 +43,22 @@ describe('YAMAGATA_EXAM_SCHEDULE', () => {
     expect(findScheduleEvent(YAMAGATA_EXAM_SCHEDULE, '令和99年度', '合格発表')).toBeUndefined();
     expect(findScheduleEvent(YAMAGATA_EXAM_SCHEDULE, '令和8年度（2026年度）', '存在しない項目')).toBeUndefined();
   });
+
+  it('has 令和9年度 entries reflecting only the confirmed 基本方針-level dates (no invented 志願受付/結果通知 dates)', () => {
+    const examA = findScheduleEvent(YAMAGATA_EXAM_SCHEDULE, '令和9年度（2027年度）', '前期（特色）選抜 A日程検査');
+    expect(examA?.startDate).toBe('2027-01-19');
+
+    const examB = findScheduleEvent(YAMAGATA_EXAM_SCHEDULE, '令和9年度（2027年度）', '前期（特色）選抜 B日程検査');
+    expect(examB?.startDate).toBe('2027-02-02');
+
+    const honkensa = findScheduleEvent(YAMAGATA_EXAM_SCHEDULE, '令和9年度（2027年度）', '後期（一般）選抜 本検査（学力検査）');
+    expect(honkensa?.startDate).toBe('2027-03-07');
+
+    const result = findScheduleEvent(YAMAGATA_EXAM_SCHEDULE, '令和9年度（2027年度）', '合格者発表');
+    expect(result?.startDate).toBe('2027-03-17');
+
+    const labels = YAMAGATA_EXAM_SCHEDULE.years[1].events.map((e) => e.label);
+    expect(labels).toHaveLength(5);
+    expect(labels.some((l) => l.includes('志願受付'))).toBe(false);
+  });
 });
