@@ -239,9 +239,22 @@
 ## C: 定型文のみで所在情報なし（要個別のPDF再確認）
 
 aichi, fukui,
-nara, oita, osaka, saga（6県・ibaraki/mie/wakayama/tochigi/shiga/aomori/ehime/
-fukuoka/fukushima/ishikawa/iwate/kochi/miyazaki完了、akita・fukuiは構造的にデータ不在/対象外と
-判明のため「未確認」16県から9県減）
+oita, osaka, saga（5県・ibaraki/mie/wakayama/tochigi/shiga/aomori/ehime/
+fukuoka/fukushima/ishikawa/iwate/kochi/miyazaki/nara完了、akita・fukuiは構造的にデータ不在/
+対象外と判明のため「未確認」16県から10県減）
+
+### nara: ✅2026-09-09データ収集完了（C→A相当に格上げ・4件連続の見落としパターン）
+既存の全日制収集元と全く同一のPDF2頁目に「2　一次選抜・成人特別選抜［定時制課程］」セクションが
+独立して存在した（fukushima・iwate・miyazakiに続き4件連続で同型の見落としパターン）。4校5
+レコード（奈良商工[工業・商業（くくり）]・大和中央[普通Ⅰ部/普通Ⅱ部]・畝傍・西吉野農業）の
+完全な学校別内訳。全日制と同じ規律で「第一出願期間」出願者数のみ採用（「第二出願期間」は
+別プロセスのため除外）。「合計」246/111と完全一致（県立計230/106・市立計16/5も一致）。
+`src/data/teiji-competition-rates/nara.ts`へ実装完了（jest6テストgreen）。
+**教訓（4件連続で確定的パターンと判断）**: fukushima/iwate/miyazaki/naraの4県が全て「全日制と
+同一PDFの後段ページに定時制セクションが独立して存在するが、pdftotextの日本語ラベル欠落により
+grepで検知できない」という同型。**C分類として残っている県（oita/osaka/saga）は、着手時点で
+必ず全日制収集元PDFの全ページをpdftoppmで視覚確認することを最優先の手順とする**（grep判定は
+もはや参考程度・視覚確認が本体）。
 
 ### miyazaki: ✅2026-09-09データ収集完了（C→A相当に格上げ・fukushima/iwateと同型の見落とし
 パターン3件目）
