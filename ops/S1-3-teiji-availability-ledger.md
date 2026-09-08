@@ -25,7 +25,7 @@
 |---|---|---|
 | **A** | 20 | chiba, gifu, gunma, hiroshima, hokkaido, hyogo, kagoshima, kanagawa, kumamoto, kyoto, miyagi, nagano, nagasaki, niigata, okayama, okinawa, shimane, shizuoka, tokyo, tottori, tokushima, yamaguchi, yamanashi |
 | **B** | 5 | kagawa, saitama, toyama, yamagata, (要再確認: niigataとの境界事例あり) |
-| **C** | 22（ibaraki・mie・wakayama・tochigi・shiga・aomori・ehime・fukuoka・fukushima・ishikawa・iwate・kochi・miyazaki・nara・oita完了で残2） | aichi, akita, fukui, osaka, saga（akita/aichi/fukuiはデータ不在確定で保留） |
+| **C** | 22（ibaraki・mie・wakayama・tochigi・shiga・aomori・ehime・fukuoka・fukushima・ishikawa・iwate・kochi・miyazaki・nara・oita・osaka完了で残1） | aichi, akita, fukui, saga（akita/aichi/fukuiはデータ不在確定で保留） |
 
 （A=23件+B=4件+C=20件で合計47件になるよう後段の詳細表で再カウントすること。上表は暫定集計で
 ダブりがある可能性がある。詳細は下記の県別根拠を正とする）
@@ -269,6 +269,20 @@ grepで検知できない」という同型。**C分類として残っている�
 欠落によりgrepで検知できない」という同型。**C分類として残っている県（osaka/saga）は、着手時点で
 必ず全日制収集元PDFの全ページをpdftoppmで視覚確認することを最優先の手順とする**（grep判定は
 もはや参考程度・視覚確認が本体）。
+
+### osaka: ✅2026-09-09データ収集完了（C→A相当に格上げ・PDF後段ページでなく「同一xlsxブック内の
+別シート」という新パターン）
+既存の全日制収集元と全く同一のxlsxブック（`r08_ippan_sigansya_0306.xlsx`）の2シート目に
+「【定時制】」という独立シートが存在した（これまでのB/C分類で頻出した「同一PDF内の後段ページ」
+ではなく「同一xlsxブック内の別シート」という初めてのパターン。シート名自体に「定時制」と
+明記されているため、全日制収集元がPDFでなくxlsxの県は今後シート名を優先確認すべき）。
+unzip+sharedStrings.xmlの機械抽出（ビジョン解析不要）で全18校18レコードを判読。3区分
+（普通科7校・専門学科2校・総合学科9校）の学校別内訳が独立して存在し、3区分の公式小計
+（普通科計370/221/0.6・専門学科計110/34/0.31・総合学科計360/143/0.4）と完全一致（原資料に
+3区分を跨ぐ単一の総合計行は存在しない）。`src/data/teiji-competition-rates/osaka.ts`へ実装
+完了（jest8テストgreen）。**教訓**: 全日制収集元がxlsx形式の県（osaka以外にも存在しうる）は、
+PDFのページ数確認だけでなくワークブック内のシート名一覧（`unzip -l`→`xl/workbook.xml`の
+`<sheet name=...>`）を必ず確認すること。
 
 ### miyazaki: ✅2026-09-09データ収集完了（C→A相当に格上げ・fukushima/iwateと同型の見落とし
 パターン3件目）
