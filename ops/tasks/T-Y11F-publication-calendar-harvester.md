@@ -687,7 +687,7 @@ PILでピクセル単位クロップして確認しnoteに明記。独立二次�
 ブログ）と完全一致確認済み。**44県目**。残り3県（fukushima・akita・tottori
 全て保留）は10月以降の公表待ち。
 
-| 3 | **学力検査平均点R8**⚠️着手中(2026-09-08〜09) | 41県収録だが**R8は32県**（osaka/saitama/chiba/ibaraki/nagano/gifu/mie/kumamoto/ishikawa/kochi追加済み。hyogoは§5守ることで取得禁止のため対象外・fukuokaは二次情報源のR8点数データ未掲載のため保留。令和7は37県ある）。8県はデータがあってR8未収録（fukuoka保留含む）・6県は未着手（yamagata/tochigi/fukui/kyoto/nagasaki/miyazaki） | 12h |
+| 3 | **学力検査平均点R8**⚠️着手中(2026-09-08〜09) | 41県収録だが**R8は33県**（osaka/saitama/chiba/ibaraki/nagano/gifu/mie/kumamoto/ishikawa/kochi/saga追加済み。hyogoは§5守ることで取得禁止のため対象外・fukuoka/nara/okinawaはR8データ未掲載のため保留。令和7は37県ある）。5県はデータがあってR8未収録（fukuoka/nara/okinawa保留含む）・6県は未着手（yamagata/tochigi/fukui/kyoto/nagasaki/miyazaki） | 12h |
 
 **2026-09-08 osaka 1件目完了**: 一次ソースURLパターン（`.../r0X/RX_gakuryoku_jittai_tyousa.pdf`）から
 `r08/R8_gakuryoku_jittai_tyousa.pdf`を推測し取得成功。**重要な発見**: R5〜R7は「府立高等学校
@@ -783,6 +783,18 @@ pdftoppm+ビジョン解析で表を直接転記。**表内の令和6年度比�
 既存R6の101.6・R8の116.8と比べて落ち込んだ年）も併記されていたため合わせて収録。tsc実
 exit0・jestフルスイート495suites7246tests green(59秒)。残り9県（fukuoka保留含む）は
 次回以降。
+
+**2026-09-09 nara保留・okinawa保留・saga 11件目完了**: naraはR8で入試制度が
+「一般選抜」→「一次選抜」に名称変更されており対応するR8結果報告書がWebSearchで
+見つからず保留（制度移行に伴う遅延の可能性）。okinawaも一次集約元bengal.okinawaが
+R8未更新でWebSearchでも見つからず保留。代わりにsagaの学力検査平均点R8を追加。一次
+相当ソース「2026年度入試 佐賀県公立入試 結果総評」（英進館・R5/R6分と同じ発行元）
+https://www.eishinkan.net/entrance/high_admissions/8777/
+記事本文の受験者平均点表と、リンク先PDF（フォント欠落だが数字はpdftotextで抽出可能）の
+生数値「30.4 27.6 19.4 29.3 30.9」が完全一致することを確認済み。katacoto.comはまだ
+R8分を掲載していない。exam-score-statistics.test.tsのSAGAブロックを更新。tsc実exit0・
+jestフルスイート495suites7247tests green(59秒)。残り8県（fukuoka・nara・okinawa保留
+含む）は次回以降。
 
 | 4 | **定時制・通信制の残り26県** | `teiji-competition-rates` は**21県収録／26県未収録**（aichi akita aomori ehime fukui fukuoka fukushima hyogo ibaraki ishikawa iwate kagawa kochi mie miyazaki nara oita osaka saga saitama shiga tochigi toyama wakayama yamagata yamaguchi）。S1-3で所在分類済み | 20〜30h |
 | 5 | 旺文社PoC納品物v0 | R8一式CSV/JSON（配布可21,548件）＋R7→R8差分＋千葉型サンプル＋形式仕様1枚。noindex＋sitemap除外で作り置き | 8〜16h |

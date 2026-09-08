@@ -9,6 +9,13 @@
  * 逆算でき、katacoto.comの令和5年度分と5教科全て一致した(2年度分が二重に検証済み)。
  * 各教科50点満点・5教科合計250点満点。合計点は原資料に明記が無く自前で合算しないため
  * totalAverageは全年度未設定。
+ *
+ * ⚠️令和8年度分（T-Y11F §5順序#3）: 一次相当ソース「2026年度入試 佐賀県公立入試 結果総評」
+ * （英進館・R5/R6分と同じ発行元）
+ * https://www.eishinkan.net/entrance/high_admissions/8777/
+ * 記事本文の受験者平均点表と、リンク先PDF（フォント欠落だが数字は`pdftotext`で抽出可能）の
+ * 生数値「30.4 27.6 19.4 29.3 30.9」が完全一致することを確認済み（2026-09-09）。
+ * katacoto.comはまだR8分を掲載していない。
  */
 import type { ExamScoreStatisticsFile } from '@/lib/exam-score-statistics';
 
@@ -116,6 +123,22 @@ export const EXAM_SCORE_STATISTICS_SAGA: ExamScoreStatisticsFile = {
         url: 'https://www.eishinkan.net/entrance/wp-content/uploads/2024/07/30410d798bf9feb9b692fa1d6e88770d.pdf',
         docTitle: '2024年度入試結果総評―佐賀県―（英進館・受験者平均点表がkatacoto.comと完全一致しクロス検証済み）',
         fetchedAt: '2026-07-30',
+      },
+    },
+    {
+      fiscalYearLabel: '令和8年度',
+      averageType: 'test-takers',
+      subjects: [
+        { subject: '国語', averageScore: 30.4, maxScore: 50 },
+        { subject: '社会', averageScore: 27.6, maxScore: 50 },
+        { subject: '数学', averageScore: 19.4, maxScore: 50 },
+        { subject: '理科', averageScore: 29.3, maxScore: 50 },
+        { subject: '英語', averageScore: 30.9, maxScore: 50 },
+      ],
+      source: {
+        url: 'https://www.eishinkan.net/entrance/high_admissions/8777/',
+        docTitle: '2026年度入試 佐賀県公立入試 結果総評（英進館・リンク先PDFの生数値と完全一致しクロス検証済み）',
+        fetchedAt: '2026-09-09',
       },
     },
   ],

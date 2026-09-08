@@ -915,8 +915,8 @@ describe('EXAM_SCORE_STATISTICS_YAMANASHI(パイロット実データ・5本のP
 });
 
 describe('EXAM_SCORE_STATISTICS_SAGA(パイロット実データ・2年度が独立記事とクロス検証済み)', () => {
-  it('8年度分(平成28-31年度、令和2・4・5・6年度)が収録されている(令和3・7年度は未掲載)', () => {
-    expect(EXAM_SCORE_STATISTICS_SAGA.years).toHaveLength(8);
+  it('9年度分(平成28-31年度、令和2・4・5・6・8年度)が収録されている(令和3・7年度は未掲載)', () => {
+    expect(EXAM_SCORE_STATISTICS_SAGA.years).toHaveLength(9);
   });
 
   it('各教科50点満点(5教科合計250点満点体系)・test-takersで統一されている', () => {
@@ -939,6 +939,11 @@ describe('EXAM_SCORE_STATISTICS_SAGA(パイロット実データ・2年度が独
     const r6 = EXAM_SCORE_STATISTICS_SAGA.years.find((y) => y.fiscalYearLabel === '令和6年度');
     expect(r5?.source?.url).toContain('eishinkan.net');
     expect(r6?.source?.url).toContain('eishinkan.net');
+  });
+
+  it('令和8年度分は英進館の記事とリンク先PDFの生数値が完全一致(クロス検証済み)', () => {
+    const r8 = EXAM_SCORE_STATISTICS_SAGA.years.find((y) => y.fiscalYearLabel === '令和8年度');
+    expect(r8?.subjects.map((s) => s.averageScore)).toEqual([30.4, 27.6, 19.4, 29.3, 30.9]);
   });
 });
 
