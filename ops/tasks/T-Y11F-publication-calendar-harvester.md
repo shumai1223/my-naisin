@@ -687,7 +687,7 @@ PILでピクセル単位クロップして確認しnoteに明記。独立二次�
 ブログ）と完全一致確認済み。**44県目**。残り3県（fukushima・akita・tottori
 全て保留）は10月以降の公表待ち。
 
-| 3 | **学力検査平均点R8**⚠️着手中(2026-09-08〜09) | 41県収録だが**R8は29県**（osaka/saitama/chiba/ibaraki/nagano/gifu/mie追加済み。hyogoは§5守ることで取得禁止のため対象外。令和7は37県ある）。12県はデータがあってR8未収録・6県は未着手（yamagata/tochigi/fukui/kyoto/nagasaki/miyazaki） | 12h |
+| 3 | **学力検査平均点R8**⚠️着手中(2026-09-08〜09) | 41県収録だが**R8は30県**（osaka/saitama/chiba/ibaraki/nagano/gifu/mie/kumamoto追加済み。hyogoは§5守ることで取得禁止のため対象外。令和7は37県ある）。11県はデータがあってR8未収録・6県は未着手（yamagata/tochigi/fukui/kyoto/nagasaki/miyazaki） | 12h |
 
 **2026-09-08 osaka 1件目完了**: 一次ソースURLパターン（`.../r0X/RX_gakuryoku_jittai_tyousa.pdf`）から
 `r08/R8_gakuryoku_jittai_tyousa.pdf`を推測し取得成功。**重要な発見**: R5〜R7は「府立高等学校
@@ -755,6 +755,15 @@ https://www.pref.mie.lg.jp/KOKOKYO/HP/m0204200393.htm
 原資料に記載が無いため未設定のまま。外部の独立二次情報源はR8分がまだ見つからなかったが、
 表内の合計整合性チェックで妥当性を確認。tsc実exit0・jestフルスイート495suites7243tests
 green(61秒)。残り12県は次回以降。
+
+**2026-09-09 kumamoto 8件目完了**: 一次ソース「令和8年度（2026年度）熊本県立高等学校
+入学者選抜結果（概要版）」（フォント欠落PDF・2頁・R6分と同一形式）
+https://www.pref.kumamoto.jp/uploaded/life/272321_848624_misc.pdf
+pdftoppm+ビジョン解析で表を直接転記。R6と異なりこの概要版は数学・英語ともA/B問題別の内訳を
+掲載せず統合後の値のみを表示していたためそのまま収録。教科別平均点の単純合計
+(30.0+28.4+27.4+26.3+24.1=136.2)が表の「合計」列と完全一致することを確認済み（外部の
+独立二次情報源はR8分がまだ見つからず表内整合性を根拠とした）。tsc実exit0・jestフルスイート
+495suites7244tests green(60秒)。残り11県は次回以降。
 
 | 4 | **定時制・通信制の残り26県** | `teiji-competition-rates` は**21県収録／26県未収録**（aichi akita aomori ehime fukui fukuoka fukushima hyogo ibaraki ishikawa iwate kagawa kochi mie miyazaki nara oita osaka saga saitama shiga tochigi toyama wakayama yamagata yamaguchi）。S1-3で所在分類済み | 20〜30h |
 | 5 | 旺文社PoC納品物v0 | R8一式CSV/JSON（配布可21,548件）＋R7→R8差分＋千葉型サンプル＋形式仕様1枚。noindex＋sitemap除外で作り置き | 8〜16h |

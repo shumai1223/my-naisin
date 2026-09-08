@@ -790,8 +790,8 @@ describe('EXAM_SCORE_STATISTICS_OITA(パイロット実データ・前年度比�
 });
 
 describe('EXAM_SCORE_STATISTICS_KUMAMOTO(パイロット実データ・数学/英語のA/B問題選択制)', () => {
-  it('1年度分(令和6年度)が収録されている', () => {
-    expect(EXAM_SCORE_STATISTICS_KUMAMOTO.years).toHaveLength(1);
+  it('2年度分(令和6年度・令和8年度)が収録されている', () => {
+    expect(EXAM_SCORE_STATISTICS_KUMAMOTO.years).toHaveLength(2);
   });
 
   it('各教科50点満点(5教科合計250点満点体系)・test-takersで統一されている', () => {
@@ -807,6 +807,11 @@ describe('EXAM_SCORE_STATISTICS_KUMAMOTO(パイロット実データ・数学/�
     for (const year of EXAM_SCORE_STATISTICS_KUMAMOTO.years) {
       expect(isPlausibleSubjectSum(year)).toBe(true);
     }
+  });
+
+  it('令和8年度分は5教科合計136.2点(教科別平均点の単純合計と完全一致)', () => {
+    const r8 = EXAM_SCORE_STATISTICS_KUMAMOTO.years.find((y) => y.fiscalYearLabel === '令和8年度');
+    expect(r8?.totalAverage).toBe(136.2);
   });
 });
 
