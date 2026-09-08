@@ -330,7 +330,7 @@ p.2「学力検査」イ配点・p.3「2(5)選抜」イ(ｱ)を確認）で、�
 変更を検出した県は0件）。今後は他県のR9実施要項が新規公表され次第、随時追加していく
 （`src/data/snapshots/2027-r9/`は`"collecting"`のまま恒久的に開いておく）。24hの見積りに
 対し実測では1イテレーション数十分規模で完了。
-| 2 | **入試日程DBのR9更新**⚠️着手中(2026-09-08) | `exam-schedules` 47県すべて令和8を持つが、**令和9は43県のみ＝4県が未更新**（chiba/hokkaido/hyogo/ibaraki/kanagawa=既存5県＋saitama/osaka/nagano/yamaguchi/aomori/ehime/fukui/fukuoka/gifu/gunma/hiroshima/ishikawa/iwate/kagawa/kagoshima/kochi/kumamoto/kyoto/mie/miyagi/miyazaki/nagasaki/nara/niigata/oita/okayama/okinawa/saga/shiga/shimane/shizuoka/aichi/tochigi/yamagata/tokyo/toyama/yamanashi/wakayama=本イテレーション追加38県）。残り未着手2県（tottori/tokushima）。fukushimaは実施要綱10月上旬公表予定のため保留。akitaもR9実施要綱が9/8時点で未公表のため保留（R8は昨年9/12公表）。kyoto・niigata・oita・tochigiはR9で選抜制度が変更されている（kyoto: 前期・中期・後期の3段階→前期・後期の2段階／niigata: 特色化選抜を廃止し一般選抜に一本化／oita: 第一次・第二次の2ラウンド制→一般選抜内の第一〜第三志願3段階制／tochigi: 特色選抜・一般選抜の別トラックを全日制・定時制共通の単一日程に統合）。R9日程は4〜7月公表済みの県が多い | 10h |
+| 2 | **入試日程DBのR9更新**✅ほぼ完了(2026-09-08) | `exam-schedules` 47県すべて令和8を持つが、**令和9は44県のみ＝3県が未更新（すべて保留）**（chiba/hokkaido/hyogo/ibaraki/kanagawa=既存5県＋saitama/osaka/nagano/yamaguchi/aomori/ehime/fukui/fukuoka/gifu/gunma/hiroshima/ishikawa/iwate/kagawa/kagoshima/kochi/kumamoto/kyoto/mie/miyagi/miyazaki/nagasaki/nara/niigata/oita/okayama/okinawa/saga/shiga/shimane/shizuoka/aichi/tochigi/yamagata/tokyo/toyama/yamanashi/wakayama/tokushima=本イテレーション追加39県）。**残り3県（fukushima・akita・tottori）は原資料が令和9年度分をまだ公表しておらず全て保留＝10月頃の公表を待つ以外に前進手段なし**。§5順序#2は事実上払底、次は§5順序#3以降へ。kyoto・niigata・oita・tochigiはR9で選抜制度が変更されている（kyoto: 前期・中期・後期の3段階→前期・後期の2段階／niigata: 特色化選抜を廃止し一般選抜に一本化／oita: 第一次・第二次の2ラウンド制→一般選抜内の第一〜第三志願3段階制／tochigi: 特色選抜・一般選抜の別トラックを全日制・定時制共通の単一日程に統合）。R9日程は4〜7月公表済みの県が多い | 10h |
 
 **2026-09-07 saitama 1件目完了**: 一次資料「令和9年度埼玉県公立高等学校入学者選抜日程表」
 （`01nyusinittei_r09.pdf`・確定版・令和8年5月29日掲載・カレンダー形式1頁をRead toolで
@@ -672,6 +672,20 @@ R8はテキスト抽出できたがR9はフォント欠落によりpdftoppm+ビ�
 場合がある」旨の注記があることをコメントに記録。塾選ジャーナルの独立二次
 情報源と完全一致を確認済み。**43県目**。残り4県（fukushima・akita保留の
 2県＋tottori/tokushimaの未着手2県）は次回以降。
+
+**2026-09-08 tottori保留・tokushima 44件目完了**: tottoriはR9のPDF未検出
+（WebSearch/WebFecthで一次ページに令和9年度の言及なし）。R8のPDF作成日が
+`CreationDate: D:20251020...`（2025年10月20日）だったため、R9も例年10月頃
+の公表と推測され、9/8時点ではまだ未公表と判断。Y-0に従い推測を避けて保留
+（fukushima・akitaと同種パターン）。代わりにtokushimaのR9入試日程を追加。
+一次ソースはR8と同じくPNG画像形式のカレンダー
+https://nyuushi.tokushima-ec.ed.jp/file/1893
+（`/R9_nittei`ページからリンク）。Read toolでそのまま閲覧・転記。区分構成
+（育成型選抜・連携型選抜・一般選抜・第2次募集選抜）はR8と同一。「一般選抜
+志願変更」は2/22・24・25の3日間で間の2/23（天皇誕生日）は対象外だったため
+PILでピクセル単位クロップして確認しnoteに明記。独立二次情報源（学習塾
+ブログ）と完全一致確認済み。**44県目**。残り3県（fukushima・akita・tottori
+全て保留）は10月以降の公表待ち。
 
 | 3 | **学力検査平均点R8** | 41県収録だが**R8は22県だけ**（令和7は37県ある）。19県はデータがあってR8未収録・6県は未着手。教委の結果概要は6〜8月公表 | 12h |
 | 4 | **定時制・通信制の残り26県** | `teiji-competition-rates` は**21県収録／26県未収録**（aichi akita aomori ehime fukui fukuoka fukushima hyogo ibaraki ishikawa iwate kagawa kochi mie miyazaki nara oita osaka saga saitama shiga tochigi toyama wakayama yamagata yamaguchi）。S1-3で所在分類済み | 20〜30h |

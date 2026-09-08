@@ -44,4 +44,17 @@ describe('TOKUSHIMA_EXAM_SCHEDULE', () => {
     expect(findScheduleEvent(TOKUSHIMA_EXAM_SCHEDULE, '令和99年度', '一般選抜 学力検査')).toBeUndefined();
     expect(findScheduleEvent(TOKUSHIMA_EXAM_SCHEDULE, '令和8年度（2026年度）', '存在しない項目')).toBeUndefined();
   });
+
+  it('has 令和9年度 entries with the same track structure as 令和8年度', () => {
+    const exam = findScheduleEvent(TOKUSHIMA_EXAM_SCHEDULE, '令和9年度（2027年度）', '一般選抜 学力検査');
+    expect(exam?.startDate).toBe('2027-03-03');
+
+    const result = findScheduleEvent(TOKUSHIMA_EXAM_SCHEDULE, '令和9年度（2027年度）', '一般選抜 結果通知');
+    expect(result?.startDate).toBe('2027-03-13');
+
+    const labels = TOKUSHIMA_EXAM_SCHEDULE.years[1].events.map((e) => e.label);
+    expect(labels.some((l) => l.startsWith('育成型選抜'))).toBe(true);
+    expect(labels.some((l) => l.startsWith('一般選抜'))).toBe(true);
+    expect(labels.some((l) => l.startsWith('第2次募集選抜'))).toBe(true);
+  });
 });
