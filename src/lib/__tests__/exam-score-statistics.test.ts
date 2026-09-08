@@ -128,14 +128,19 @@ describe('EXAM_SCORE_STATISTICS_SAITAMA(パイロット実データ)', () => {
 });
 
 describe('EXAM_SCORE_STATISTICS_CHIBA(パイロット実データ)', () => {
-  it('4年度分(令和2年度前期・後期・令和3年度・令和4年度)が収録されている', () => {
-    expect(EXAM_SCORE_STATISTICS_CHIBA.years).toHaveLength(4);
+  it('5年度分(令和2年度前期・後期・令和3年度・令和4年度・令和8年度)が収録されている', () => {
+    expect(EXAM_SCORE_STATISTICS_CHIBA.years).toHaveLength(5);
   });
 
   it('全年度で教科別平均点の合計がtotalAverageと妥当な範囲で一致する（内部矛盾のあった追検査行は除外済み）', () => {
     for (const year of EXAM_SCORE_STATISTICS_CHIBA.years) {
       expect(isPlausibleSubjectSum(year)).toBe(true);
     }
+  });
+
+  it('令和8年度分は5教科合計281.9点(前年度令和7年度262.8点から+19.1点)', () => {
+    const r8 = EXAM_SCORE_STATISTICS_CHIBA.years.find((y) => y.fiscalYearLabel === '令和8年度（本検査）');
+    expect(r8?.totalAverage).toBe(281.9);
   });
 });
 
