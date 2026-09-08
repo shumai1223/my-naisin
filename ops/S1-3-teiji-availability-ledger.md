@@ -25,7 +25,7 @@
 |---|---|---|
 | **A** | 20 | chiba, gifu, gunma, hiroshima, hokkaido, hyogo, kagoshima, kanagawa, kumamoto, kyoto, miyagi, nagano, nagasaki, niigata, okayama, okinawa, shimane, shizuoka, tokyo, tottori, tokushima, yamaguchi, yamanashi |
 | **B** | 5 | kagawa, saitama, toyama, yamagata, (要再確認: niigataとの境界事例あり) |
-| **C** | 22（ibaraki・mie・wakayama・tochigi・shiga完了で残15） | aichi, akita, aomori, ehime, fukui, fukuoka, fukushima, ishikawa, iwate, kochi, miyazaki, nara, oita, osaka, saga |
+| **C** | 22（ibaraki・mie・wakayama・tochigi・shiga・aomori・ehime・fukuoka・fukushima・ishikawa・iwate・kochi・miyazaki・nara・oita完了で残2） | aichi, akita, fukui, osaka, saga（akita/aichi/fukuiはデータ不在確定で保留） |
 
 （A=23件+B=4件+C=20件で合計47件になるよう後段の詳細表で再カウントすること。上表は暫定集計で
 ダブりがある可能性がある。詳細は下記の県別根拠を正とする）
@@ -253,6 +253,20 @@ fukuoka/fukushima/ishikawa/iwate/kochi/miyazaki/nara完了、akita・fukuiは構
 **教訓（4件連続で確定的パターンと判断）**: fukushima/iwate/miyazaki/naraの4県が全て「全日制と
 同一PDFの後段ページに定時制セクションが独立して存在するが、pdftotextの日本語ラベル欠落により
 grepで検知できない」という同型。**C分類として残っている県（oita/osaka/saga）は、着手時点で
+必ず全日制収集元PDFの全ページをpdftoppmで視覚確認することを最優先の手順とする**（grep判定は
+もはや参考程度・視覚確認が本体）。
+
+### oita: ✅2026-09-09データ収集完了（C→A相当に格上げ・5件連続の見落としパターン）
+既存の全日制収集元と全く同一のPDF4頁目に「全日制課程合計」行に続く形で独立した「［定時制］」
+セクションが存在した（fukushima・iwate・miyazaki・naraに続き5件連続で同型の見落としパターン）。
+`pdftotext -layout`は数値列こそ抽出できたが学校名・学科名の日本語ラベルは欠落しておりgrepでは
+検知不可（pdftoppm 200dpiビジョン解析で判読）。4校9レコード（中津東[機械/商業]・大分工業
+[機械/電気]・爽風館[普通Ⅰ部/Ⅱ部/Ⅲ部・商業Ⅲ部]・日田[普通]）の完全な学校別内訳。
+「県立高校定時制課程合計」募集人員344/最終志願者数65と完全一致（中津東計80/5・大分工業計80/8・
+爽風館計146/26も一致）。`src/data/teiji-competition-rates/oita.ts`へ実装完了（jest7テストgreen）。
+**教訓（5件連続で確定的パターンと判断）**: fukushima/iwate/miyazaki/nara/oitaの5県が全て
+「全日制と同一PDFの後段ページに定時制セクションが独立して存在するが、pdftotextの日本語ラベル
+欠落によりgrepで検知できない」という同型。**C分類として残っている県（osaka/saga）は、着手時点で
 必ず全日制収集元PDFの全ページをpdftoppmで視覚確認することを最優先の手順とする**（grep判定は
 もはや参考程度・視覚確認が本体）。
 
