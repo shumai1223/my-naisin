@@ -239,9 +239,23 @@
 ## C: 定型文のみで所在情報なし（要個別のPDF再確認）
 
 aichi, fukui,
-miyazaki, nara, oita, osaka, saga（7県・ibaraki/mie/wakayama/tochigi/shiga/aomori/ehime/
-fukuoka/fukushima/ishikawa/iwate/kochi完了、akita・fukuiは構造的にデータ不在/対象外と判明の
-ため「未確認」16県から8県減）
+nara, oita, osaka, saga（6県・ibaraki/mie/wakayama/tochigi/shiga/aomori/ehime/
+fukuoka/fukushima/ishikawa/iwate/kochi/miyazaki完了、akita・fukuiは構造的にデータ不在/対象外と
+判明のため「未確認」16県から9県減）
+
+### miyazaki: ✅2026-09-09データ収集完了（C→A相当に格上げ・fukushima/iwateと同型の見落とし
+パターン3件目）
+既存の全日制収集元と全く同一のPDFの3頁目に、1頁目「1　全日制課程」の「全日制合計」行に続く
+形で独立した「2　定時制課程」セクションが存在した。pdftotextで日本語ラベルが全欠落するため
+過去のC分類判定grepが検知できなかった（fukushima・iwateに続き3件連続で同型の見落とし）。
+5校10レコード（延岡青朋[普通/商業]・富島[商業]・宮崎工業[機械/電気/建築]・都城泉ヶ丘[普通/
+商業]・宮崎東[普通(昼間の部)/普通(夜間の部)]）の完全な学校別内訳。「定時制合計」389/122/0.31
+と完全一致。`src/data/teiji-competition-rates/miyazaki.ts`へ実装完了（jest5テストgreen）。
+**教訓の再確認**: fukushima/iwate/miyazakiの3件が全て「全日制収集元と同一PDFの後段ページに
+定時制セクションが独立して存在するが、pdftotextの日本語ラベル欠落によりgrepで検知できない」
+という同型パターン。**C分類判定の再監査が必要**——今後は新規のC分類着手時、grep 0件でも
+まずpdftoppmで全ページを視覚確認する運用を標準手順とする（既にfukui/aichi以外の全C分類で
+この手順を実施済みだが、今後Nara/Oita/Osaka/Sagaでも同様に徹底する）。
 
 ### kochi: ✅2026-09-09データ収集完了（C→A相当に格上げ・coverage='partial'・「定時制」でなく
 「多部制単位制」という呼称のため定型文grepで見落とされていた）
