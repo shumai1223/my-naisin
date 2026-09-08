@@ -500,8 +500,8 @@ describe('EXAM_SCORE_STATISTICS_KANAGAWA(パイロット実データ・合格者
 });
 
 describe('EXAM_SCORE_STATISTICS_IBARAKI(パイロット実データ・令和7年度のみ全受検者/合格者の両区分)', () => {
-  it('4エントリ(令和4年度×test-takers、令和6年度×test-takers、令和7年度×test-takers/passers)が収録されている', () => {
-    expect(EXAM_SCORE_STATISTICS_IBARAKI.years).toHaveLength(4);
+  it('5エントリ(令和4年度×test-takers、令和6年度×test-takers、令和7年度×test-takers/passers、令和8年度×test-takers)が収録されている', () => {
+    expect(EXAM_SCORE_STATISTICS_IBARAKI.years).toHaveLength(5);
   });
 
   it('各教科100点満点(5教科合計500点満点体系)・5教科の内訳を持つ', () => {
@@ -522,6 +522,13 @@ describe('EXAM_SCORE_STATISTICS_IBARAKI(パイロット実データ・令和7年
     const r7 = EXAM_SCORE_STATISTICS_IBARAKI.years.filter((y) => y.fiscalYearLabel === '令和7年度');
     expect(r7).toHaveLength(2);
     expect(r7.map((y) => y.averageType).sort()).toEqual(['passers', 'test-takers']);
+  });
+
+  it('令和8年度分は5教科合計262.43点・受検者数14,840人(合格者区分の掲載は無くtest-takersのみ)', () => {
+    const r8 = EXAM_SCORE_STATISTICS_IBARAKI.years.find((y) => y.fiscalYearLabel === '令和8年度');
+    expect(r8?.averageType).toBe('test-takers');
+    expect(r8?.totalAverage).toBe(262.43);
+    expect(r8?.testTakerCount).toBe(14840);
   });
 });
 

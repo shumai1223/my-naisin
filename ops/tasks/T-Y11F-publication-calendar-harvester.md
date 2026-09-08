@@ -687,7 +687,7 @@ PILでピクセル単位クロップして確認しnoteに明記。独立二次�
 ブログ）と完全一致確認済み。**44県目**。残り3県（fukushima・akita・tottori
 全て保留）は10月以降の公表待ち。
 
-| 3 | **学力検査平均点R8**⚠️着手中(2026-09-08) | 41県収録だが**R8は25県**（osaka/saitama/chiba追加済み。令和7は37県ある）。16県はデータがあってR8未収録・6県は未着手（yamagata/tochigi/fukui/kyoto/nagasaki/miyazaki）。教委の結果概要は6〜8月公表 | 12h |
+| 3 | **学力検査平均点R8**⚠️着手中(2026-09-08) | 41県収録だが**R8は26県**（osaka/saitama/chiba/ibaraki追加済み。hyogoは§5守ることで取得禁止のため対象外。令和7は37県ある）。15県はデータがあってR8未収録・6県は未着手（yamagata/tochigi/fukui/kyoto/nagasaki/miyazaki） | 12h |
 
 **2026-09-08 osaka 1件目完了**: 一次ソースURLパターン（`.../r0X/RX_gakuryoku_jittai_tyousa.pdf`）から
 `r08/R8_gakuryoku_jittai_tyousa.pdf`を推測し取得成功。**重要な発見**: R5〜R7は「府立高等学校
@@ -717,6 +717,16 @@ pdftoppm+ビジョン解析で表を直接転記。本検査（全日制・2/17-
 対象外。市進(ko-jukennavi)・複数の学習塾ブログの独立二次情報源（英語60.1・社会60.0・5教科
 合計281.9＝前年比+19.1点）と完全一致を確認済み。tsc実exit0・jestフルスイート
 495suites7239tests green(59秒)。残り16県は次回以降。
+
+**2026-09-08 hyogoスキップ・ibaraki 4件目完了**: hyogoは§5末尾「守ること」に
+「取得は1県1日1回・900ms以上・UA明示・robots尊重（hyogoは取得しない）」と明記されている
+ため対象外とし、ibarakiへ切替。一次ソース「令和8年度茨城県立高等学校入学者選抜実施状況
+報告書」（フォント欠落PDF・34頁・p.11「2 学力検査の成績概況(一般入学) 教科別得点分布」表）
+https://kyoiku.pref.ibaraki.jp/wp-content/uploads/2026/05/0410ad7676a75e78278710e65813054d.pdf
+pdftotextの数値マッチで該当ページ(p.14=文書p.11)を特定しpdftoppm+ビジョン解析で転記。
+区分「受検者・全日制」のみ（合格者区分の掲載なし）でR4・R6年度分と同じ方針。リセマムの
+独立二次情報源（国語62.55・数学48.34・英語47.85・満点者数43/10/213人）と完全一致を確認済み。
+tsc実exit0・jestフルスイート495suites7240tests green(59秒)。残り15県は次回以降。
 | 4 | **定時制・通信制の残り26県** | `teiji-competition-rates` は**21県収録／26県未収録**（aichi akita aomori ehime fukui fukuoka fukushima hyogo ibaraki ishikawa iwate kagawa kochi mie miyazaki nara oita osaka saga saitama shiga tochigi toyama wakayama yamagata yamaguchi）。S1-3で所在分類済み | 20〜30h |
 | 5 | 旺文社PoC納品物v0 | R8一式CSV/JSON（配布可21,548件）＋R7→R8差分＋千葉型サンプル＋形式仕様1枚。noindex＋sitemap除外で作り置き | 8〜16h |
 | 6 | Comiru/Studyplus 連携仕様書＋/embedデモ | 質問ノート9/03で事前承認済み。対外送信なし | 8〜16h |
