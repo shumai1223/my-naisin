@@ -44,4 +44,20 @@ describe('TOKYO_EXAM_SCHEDULE', () => {
     expect(findScheduleEvent(TOKYO_EXAM_SCHEDULE, '令和99年度', '推薦に基づく選抜 実施日')).toBeUndefined();
     expect(findScheduleEvent(TOKYO_EXAM_SCHEDULE, '令和8年度（2026年度）', '存在しない項目')).toBeUndefined();
   });
+
+  it('has 令和9年度 entries with the same track structure as 令和8年度', () => {
+    const exam = findScheduleEvent(TOKYO_EXAM_SCHEDULE, '令和9年度（2027年度）', '学力検査に基づく選抜（第一次募集・分割前期募集） 実施日');
+    expect(exam?.startDate).toBe('2027-02-21');
+
+    const result = findScheduleEvent(TOKYO_EXAM_SCHEDULE, '令和9年度（2027年度）', '学力検査に基づく選抜（第一次募集・分割前期募集） 合格発表');
+    expect(result?.startDate).toBe('2027-03-01');
+
+    const suisen = findScheduleEvent(TOKYO_EXAM_SCHEDULE, '令和9年度（2027年度）', '推薦に基づく選抜 合格発表');
+    expect(suisen?.startDate).toBe('2027-02-02');
+
+    const labels = TOKYO_EXAM_SCHEDULE.years[1].events.map((e) => e.label);
+    expect(labels.some((l) => l.startsWith('推薦に基づく選抜'))).toBe(true);
+    expect(labels.some((l) => l.startsWith('学力検査に基づく選抜'))).toBe(true);
+    expect(labels.some((l) => l.startsWith('定時制第二次募集'))).toBe(true);
+  });
 });

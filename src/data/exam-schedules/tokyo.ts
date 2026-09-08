@@ -11,6 +11,13 @@
  *
  * 学力検査に基づく選抜（第一次募集）の実施日(2/21)・合格発表(3/2)はWebSearchで得た独立した
  * 二次情報源（リセマム）と完全一致を確認済み（2026-09-04）。
+ *
+ * ⚠️令和9年度分（T-Y11F §5順序#2）: 一次ソース「令和9年度東京都立高等学校入学者選抜の日程
+ * について」（報道発表資料・2026-05-28公表）
+ * https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/exam/nyuusenn_9_20260528
+ * R8と同じくHTMLで正常取得でき障害なし。区分構成もR8と同一（推薦に基づく選抜／学力検査に
+ * 基づく選抜〈第一次募集及び分割前期募集〉／分割後期募集及び全日制第二次募集／定時制
+ * 第二次募集）。独立した二次情報源（東大生解説サイト）と完全一致を確認済み（2026-09-08）。
  */
 import type { PrefectureExamScheduleFile } from '@/lib/exam-schedule';
 
@@ -35,6 +42,26 @@ export const TOKYO_EXAM_SCHEDULE: PrefectureExamScheduleFile = {
         { label: '定時制第二次募集 出願受付日', startDate: '2026-03-23' },
         { label: '定時制第二次募集 実施日', startDate: '2026-03-26' },
         { label: '定時制第二次募集 合格発表', startDate: '2026-03-27' },
+      ],
+    },
+    {
+      fiscalYear: '令和9年度（2027年度）',
+      sourceUrl: 'https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/exam/nyuusenn_9_20260528',
+      docTitle: '令和9年度東京都立高等学校入学者選抜の日程について',
+      fetchedAt: '2026-09-08',
+      events: [
+        { label: '推薦に基づく選抜 出願受付期間（書類提出）', startDate: '2027-01-08', endDate: '2027-01-18', note: '志願者情報入力は2026-12-18〜2027-01-18 17:00' },
+        { label: '推薦に基づく選抜 実施日', startDate: '2027-01-26', endDate: '2027-01-27' },
+        { label: '推薦に基づく選抜 合格発表', startDate: '2027-02-02' },
+        { label: '学力検査に基づく選抜（第一次募集・分割前期募集） 出願受付期間（書類提出）', startDate: '2027-01-29', endDate: '2027-02-04', note: '志願者情報入力は2026-12-18〜2027-02-04 17:00' },
+        { label: '学力検査に基づく選抜（第一次募集・分割前期募集） 実施日', startDate: '2027-02-21' },
+        { label: '学力検査に基づく選抜（第一次募集・分割前期募集） 合格発表', startDate: '2027-03-01' },
+        { label: '分割後期募集・全日制第二次募集 出願受付日', startDate: '2027-03-04' },
+        { label: '分割後期募集・全日制第二次募集 実施日', startDate: '2027-03-09' },
+        { label: '分割後期募集・全日制第二次募集 合格発表', startDate: '2027-03-12' },
+        { label: '定時制第二次募集 出願受付日', startDate: '2027-03-25' },
+        { label: '定時制第二次募集 実施日', startDate: '2027-03-26' },
+        { label: '定時制第二次募集 合格発表', startDate: '2027-03-29' },
       ],
     },
   ],
