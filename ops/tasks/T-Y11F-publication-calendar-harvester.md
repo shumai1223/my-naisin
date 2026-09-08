@@ -836,7 +836,7 @@ miyazaki）は元々ファイル自体が無い未着手県で、今回のタス
 スコープ外（新規ファイル作成は別タスクとして扱う）。§5順序#3は事実上払底した、次は
 §5順序#4へ。
 
-| 4 | **定時制・通信制の残り26県**⚠️着手中(2026-09-09) | `teiji-competition-rates` は**25県収録／22県未収録**（toyama/saitama/kagawa/yamagata追加済み＝S1-3 B分類4県が全完了。残りaichi akita aomori ehime fukui fukuoka fukushima hyogo ibaraki ishikawa iwate kochi mie miyazaki nara oita osaka saga shiga tochigi wakayama yamaguchi）。hyogoは§5守ることで取得禁止・yamaguchiは既存ソースに定時制セクション自体が無いと確認済みでともに対象外。**残りは全てS1-3 C分類（定型文のみで所在不明・PDF再取得が必要な新規調査に近い作業）** | 20〜30h |
+| 4 | **定時制・通信制の残り26県**⚠️着手中(2026-09-09) | `teiji-competition-rates` は**26県収録／21県未収録**（toyama/saitama/kagawa/yamagata/ibaraki追加済み。残りaichi akita aomori ehime fukui fukuoka fukushima hyogo ishikawa iwate kochi mie miyazaki nara oita osaka saga shiga tochigi wakayama yamaguchi）。hyogoは§5守ることで取得禁止・yamaguchiは既存ソースに定時制セクション自体が無いと確認済みでともに対象外。残り19県はS1-3 C分類（定型文のみで所在不明）だが、**ibarakiの実例が示すとおり「別ページ/別PDFに定時制セクションが独立して存在する」パターンが多く、C分類でも実機確認の価値が高い** | 20〜30h |
 
 **2026-09-09 toyama 1件目完了（S1-3 B分類→実機確認でA相当に格上げ）**: S1-3台帳の懸念
 「学校別レコードはページ1-2のみ」は誤りだったと判明。既存の全日制収集元と同一PDF
@@ -869,6 +869,18 @@ tsc実exit0・jestフルスイート499suites7273tests green(61秒)。**これ�
 （toyama/saitama/kagawa/yamagata）が全て完了**——4件とも「収集当時にページの中身を精査
 しなかっただけ」という同型の誤りだった。残り22県は全てC分類（定型文のみで所在不明）で、
 PDF再取得から始める新規調査に近い作業のため次段階の優先度は下がる。
+
+**2026-09-09 aichi保留・ibaraki 5件目完了（S1-3初のC分類完了例）**: aichiはpref.aichi.jp
+がImperva WAFでcurl/WebFetchとも403/リダイレクトループでブロックされ調査不能（既知の
+一時ブロックパターン）で保留。代わりにibarakiのC分類を調査したところ、全日制収集元とは
+別の第三のPDF「令和8年度茨城県立高等学校第1学年入学志願者数等（志願先変更後）」の
+3頁目下段【定時制】に全日制と同型の学校別内訳（12校21レコード）が存在すると判明。表末尾
+「定時制計」960/417/0.43と完全一致。`ops/S1-3-teiji-availability-ledger.md`にibaraki行を
+新設しC→A相当に格上げ。tsc実exit0・jestフルスイート500suites7278tests green(64秒)。
+**教訓**: C分類でも「同じ資料の別ページ/別PDFに定時制セクションが独立して存在する」
+パターンが高頻度で当たる（B分類4/4・C分類1/1で今のところ全中り）。次回以降もC分類の
+残り19県すべてで実機確認を試す価値が高い。
+
 | 5 | 旺文社PoC納品物v0 | R8一式CSV/JSON（配布可21,548件）＋R7→R8差分＋千葉型サンプル＋形式仕様1枚。noindex＋sitemap除外で作り置き | 8〜16h |
 | 6 | Comiru/Studyplus 連携仕様書＋/embedデモ | 質問ノート9/03で事前承認済み。対外送信なし | 8〜16h |
 | 7 | **★段階台帳** | 定員・推薦・合格者数・二次募集を**学校×学科でR8とR7に積む**。12県の実測51単位から47県で**約350単位**。公表値の転記のみでY-0内 | **90〜170h** |

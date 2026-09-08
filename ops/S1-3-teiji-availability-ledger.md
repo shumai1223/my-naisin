@@ -25,7 +25,7 @@
 |---|---|---|
 | **A** | 20 | chiba, gifu, gunma, hiroshima, hokkaido, hyogo, kagoshima, kanagawa, kumamoto, kyoto, miyagi, nagano, nagasaki, niigata, okayama, okinawa, shimane, shizuoka, tokyo, tottori, tokushima, yamaguchi, yamanashi |
 | **B** | 5 | kagawa, saitama, toyama, yamagata, (要再確認: niigataとの境界事例あり) |
-| **C** | 22 | aichi, akita, aomori, ehime, fukui, fukuoka, fukushima, ibaraki, ishikawa, iwate, kochi, mie, miyazaki, nara, oita, osaka, saga, shiga, tochigi, wakayama |
+| **C** | 22（ibaraki完了で残19） | aichi, akita, aomori, ehime, fukui, fukuoka, fukushima, ishikawa, iwate, kochi, mie, miyazaki, nara, oita, osaka, saga, shiga, tochigi, wakayama |
 
 （A=23件+B=4件+C=20件で合計47件になるよう後段の詳細表で再カウントすること。上表は暫定集計で
 ダブりがある可能性がある。詳細は下記の県別根拠を正とする）
@@ -238,8 +238,19 @@
 
 ## C: 定型文のみで所在情報なし（要個別のPDF再確認）
 
-aichi, akita, aomori, ehime, fukui, fukuoka, fukushima, ibaraki, ishikawa, iwate, kochi, mie,
-miyazaki, nara, oita, osaka, saga, shiga, tochigi, wakayama（20県）
+aichi, akita, aomori, ehime, fukui, fukuoka, fukushima, ishikawa, iwate, kochi, mie,
+miyazaki, nara, oita, osaka, saga, shiga, tochigi, wakayama（19県・ibaraki完了により1県減）
+
+### ibaraki: ✅2026-09-09データ収集完了（C→A相当に格上げ）
+全日制収集元とは別の第三のPDF「令和8年度茨城県立高等学校第1学年入学志願者数等
+（志願先変更後）」(`shigansha20260218.pdf`)の3頁目下段【定時制】に、全日制と同じ
+「募集定員(a)/志願者数(b)/倍率(b/a)」形式で12校21レコードの完全な学校別内訳が存在した
+（高萩[午前/午後]・日立工業・水戸農業・水戸南[昼間/夜間]・ＩＴ未来[A/B]・鹿島灘[午前/午後/
+夜間]・土浦第一・石岡第一・竜ヶ崎第一・茎崎[午前/午後/夜間]・結城第二[午前/午後/夜間]・
+古河第一）。表末尾「定時制計」960/417/0.43と完全一致。
+`src/data/teiji-competition-rates/ibaraki.ts`へ実装完了（jest6テストgreen）。
+**教訓: aichiと違いibarakiは通常のcurl取得でWAFブロックに遭わなかった。C分類でもまず
+「同じ資料の別ページに定時制が含まれていないか」を確認する価値が高い（今回もそうだった）**。
 
 いずれも「定時制課程は他県と同じ理由でスコープ外」という定型文のみで、ページ番号・学校名等の
 具体的な手がかりが無い。**「未公表（②）」と断定する根拠も無い**——単に収集当時のセッションが
