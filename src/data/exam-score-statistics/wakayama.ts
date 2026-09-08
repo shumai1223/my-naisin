@@ -9,6 +9,12 @@
  * 設問別分析のための抽出サンプルとみられ、どちらが平均点算出の母集団かを原資料が明記して
  * いないため、誤解を避けるべくtestTakerCountは記録しない。5教科合計もPDFに明記が無いため
  * totalAverageは意図的に未設定。
+ *
+ * ⚠️令和8年度分（T-Y11F §5順序#3）: 一次ソース「令和8年度県立高等学校入学者選抜学力検査
+ * 結果の概要」（フォント欠落PDF・11頁・各教科セクション冒頭「本年度の平均点は」の記述）
+ * https://www.pref.wakayama.lg.jp/prefg/500200/d00222157_d/fil/08kekkanogaiyou.pdf
+ * pdftoppm 150dpi+ビジョン解析で各教科（p.1国語・p.3社会・p.5数学・p.7理科・p.9英語）を
+ * 直接転記（R6・R7と同一の書式・同一発行元）。
  */
 import type { ExamScoreStatisticsFile } from '@/lib/exam-score-statistics';
 
@@ -46,6 +52,22 @@ export const EXAM_SCORE_STATISTICS_WAKAYAMA: ExamScoreStatisticsFile = {
         { subject: '理科', averageScore: 46.3, maxScore: 100 },
         { subject: '英語', averageScore: 52.3, maxScore: 100 },
       ],
+    },
+    {
+      fiscalYearLabel: '令和8年度',
+      averageType: 'test-takers',
+      subjects: [
+        { subject: '国語', averageScore: 53.9, maxScore: 100 },
+        { subject: '社会', averageScore: 50.7, maxScore: 100 },
+        { subject: '数学', averageScore: 45.6, maxScore: 100 },
+        { subject: '理科', averageScore: 49.5, maxScore: 100 },
+        { subject: '英語', averageScore: 57.4, maxScore: 100 },
+      ],
+      source: {
+        url: 'https://www.pref.wakayama.lg.jp/prefg/500200/d00222157_d/fil/08kekkanogaiyou.pdf',
+        docTitle: '令和8年度県立高等学校入学者選抜学力検査結果の概要（和歌山県教育委員会・一般選抜）',
+        fetchedAt: '2026-09-09',
+      },
     },
   ],
 };

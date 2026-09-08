@@ -615,8 +615,8 @@ describe('EXAM_SCORE_STATISTICS_MIE(パイロット実データ・後期選抜�
 });
 
 describe('EXAM_SCORE_STATISTICS_WAKAYAMA(パイロット実データ・一般選抜区分)', () => {
-  it('2年度分(令和6〜7年度)が収録されている', () => {
-    expect(EXAM_SCORE_STATISTICS_WAKAYAMA.years).toHaveLength(2);
+  it('3年度分(令和6〜8年度)が収録されている', () => {
+    expect(EXAM_SCORE_STATISTICS_WAKAYAMA.years).toHaveLength(3);
   });
 
   it('各教科100点満点・5教科の内訳を持ちtest-takersで統一されている', () => {
@@ -638,6 +638,14 @@ describe('EXAM_SCORE_STATISTICS_WAKAYAMA(パイロット実データ・一般選
     for (const year of EXAM_SCORE_STATISTICS_WAKAYAMA.years) {
       expect(year.testTakerCount).toBeUndefined();
     }
+  });
+
+  it('令和8年度分は英語が最高点(57.4)・数学が最低点(45.6)', () => {
+    const r8 = EXAM_SCORE_STATISTICS_WAKAYAMA.years.find((y) => y.fiscalYearLabel === '令和8年度');
+    const eigo = r8?.subjects.find((s) => s.subject === '英語');
+    const sugaku = r8?.subjects.find((s) => s.subject === '数学');
+    expect(eigo?.averageScore).toBe(57.4);
+    expect(sugaku?.averageScore).toBe(45.6);
   });
 });
 
