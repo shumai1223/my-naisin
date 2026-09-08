@@ -238,10 +238,26 @@
 
 ## C: 定型文のみで所在情報なし（要個別のPDF再確認）
 
-aichi, fukui, kochi,
-miyazaki, nara, oita, osaka, saga（8県・ibaraki/mie/wakayama/tochigi/shiga/aomori/ehime/
-fukuoka/fukushima/ishikawa/iwate完了、akita・fukuiは構造的にデータ不在/対象外と判明のため
-「未確認」16県から7県減）
+aichi, fukui,
+miyazaki, nara, oita, osaka, saga（7県・ibaraki/mie/wakayama/tochigi/shiga/aomori/ehime/
+fukuoka/fukushima/ishikawa/iwate/kochi完了、akita・fukuiは構造的にデータ不在/対象外と判明の
+ため「未確認」16県から8県減）
+
+### kochi: ✅2026-09-09データ収集完了（C→A相当に格上げ・coverage='partial'・「定時制」でなく
+「多部制単位制」という呼称のため定型文grepで見落とされていた）
+既存の全日制収集元と同一PDFの2頁目下段に「多部制単位制」という独自呼称のセクションが存在した。
+S1-3台帳の定型文grepは「定時制」という文字列を探していたため、高知県が採用する別名称
+「多部制単位制」を検知できずC分類に沈んでいた。WebSearchで裏取りしたところ、この区分に属する
+中芸・高知北の2校はいずれも全国統計上の定時制（高知北はWikipediaで「定時制昼間部・定時制夜間部・
+通信制」の単位制3課程を持つ学校と確認）。2校2レコード（中芸「普通(昼)」・高知北「普通(昼)」）
+を収録、「合計」120/61/0.51と完全一致。`src/data/teiji-competition-rates/kochi.ts`へ実装完了
+（jest5テストgreen）。
+**coverage='partial'とした理由**: 今回発見できたA日程PDFは「多部制単位制」＝定時制の**昼間部
+のみ**を対象とし、同じ2校が持つはずの夜間部・通信制課程は別選抜日程/別PDFの可能性が高いが
+今回のタスク時間内で特定できず、pendingDepartmentsに正直に記録した。
+**教訓（横展開必須）**: 残りのC分類県（miyazaki/nara/oita/osaka/saga等）でも、`grep "定時"`が
+0件でも「多部制単位制」「単位制」「昼間部/夜間部」等の同義語・別称で定時制相当の課程が
+存在する可能性がある。今後は「定時」だけでなく「単位制」「多部制」でも検索すること。
 
 ### iwate: ✅2026-09-09データ収集完了（C→A相当に格上げ・全日制コメントの「全3ページ」が誤りと判明）
 全日制`iwate.ts`のヘッダコメントは収集元PDFを「全3ページ」としていたが、実際は全4ページで、
