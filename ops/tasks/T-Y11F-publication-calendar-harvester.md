@@ -836,7 +836,15 @@ miyazaki）は元々ファイル自体が無い未着手県で、今回のタス
 スコープ外（新規ファイル作成は別タスクとして扱う）。§5順序#3は事実上払底した、次は
 §5順序#4へ。
 
-| 4 | **定時制・通信制の残り26県** | `teiji-competition-rates` は**21県収録／26県未収録**（aichi akita aomori ehime fukui fukuoka fukushima hyogo ibaraki ishikawa iwate kagawa kochi mie miyazaki nara oita osaka saga saitama shiga tochigi toyama wakayama yamagata yamaguchi）。S1-3で所在分類済み | 20〜30h |
+| 4 | **定時制・通信制の残り26県**⚠️着手中(2026-09-09) | `teiji-competition-rates` は**22県収録／25県未収録**（toyama追加済み。残りaichi akita aomori ehime fukui fukuoka fukushima hyogo ibaraki ishikawa iwate kagawa kochi mie miyazaki nara oita osaka saga saitama shiga tochigi wakayama yamagata yamaguchi）。hyogoは§5守ることで取得禁止・yamaguchiは既存ソースに定時制セクション自体が無いと確認済みでともに対象外。S1-3で所在分類済み（`ops/S1-3-teiji-availability-ledger.md`） | 20〜30h |
+
+**2026-09-09 toyama 1件目完了（S1-3 B分類→実機確認でA相当に格上げ）**: S1-3台帳の懸念
+「学校別レコードはページ1-2のみ」は誤りだったと判明。既存の全日制収集元と同一PDF
+(`080224.pdf`)の3頁目下段に定時制の学校別全数表が独立して存在し、5校12学科19レコードを
+収録。表末尾「合計」840/199/0.24と完全一致。`ops/S1-3-teiji-availability-ledger.md`のtoyama
+行を更新。tsc実exit0・jestフルスイート496suites7255tests green(61秒)。次はS1-3のB分類残り
+3県（kagawa/saitama/yamagata）から着手するのが優先度が高い（既に学校別内訳の存在が示唆
+されている）。
 | 5 | 旺文社PoC納品物v0 | R8一式CSV/JSON（配布可21,548件）＋R7→R8差分＋千葉型サンプル＋形式仕様1枚。noindex＋sitemap除外で作り置き | 8〜16h |
 | 6 | Comiru/Studyplus 連携仕様書＋/embedデモ | 質問ノート9/03で事前承認済み。対外送信なし | 8〜16h |
 | 7 | **★段階台帳** | 定員・推薦・合格者数・二次募集を**学校×学科でR8とR7に積む**。12県の実測51単位から47県で**約350単位**。公表値の転記のみでY-0内 | **90〜170h** |
