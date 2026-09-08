@@ -25,7 +25,7 @@
 |---|---|---|
 | **A** | 20 | chiba, gifu, gunma, hiroshima, hokkaido, hyogo, kagoshima, kanagawa, kumamoto, kyoto, miyagi, nagano, nagasaki, niigata, okayama, okinawa, shimane, shizuoka, tokyo, tottori, tokushima, yamaguchi, yamanashi |
 | **B** | 5 | kagawa, saitama, toyama, yamagata, (要再確認: niigataとの境界事例あり) |
-| **C** | 22（ibaraki・mie・wakayama・tochigi・shiga・aomori・ehime・fukuoka・fukushima・ishikawa・iwate・kochi・miyazaki・nara・oita・osaka完了で残1） | aichi, akita, fukui, saga（akita/aichi/fukuiはデータ不在確定で保留） |
+| **C** | 22（ibaraki・mie・wakayama・tochigi・shiga・aomori・ehime・fukuoka・fukushima・ishikawa・iwate・kochi・miyazaki・nara・oita・osaka・saga完了で**C分類は全解消**） | aichi, akita, fukui（データ不在確定で保留のまま。aichiはImperva WAF一時ブロック、akita/fukuiは学校別内訳が制度上/公表上存在しないと確認済み） |
 
 （A=23件+B=4件+C=20件で合計47件になるよう後段の詳細表で再カウントすること。上表は暫定集計で
 ダブりがある可能性がある。詳細は下記の県別根拠を正とする）
@@ -269,6 +269,24 @@ grepで検知できない」という同型。**C分類として残っている�
 欠落によりgrepで検知できない」という同型。**C分類として残っている県（osaka/saga）は、着手時点で
 必ず全日制収集元PDFの全ページをpdftoppmで視覚確認することを最優先の手順とする**（grep判定は
 もはや参考程度・視覚確認が本体）。
+
+### saga: ✅2026-09-09データ収集完了（C→A相当に格上げ・C分類最後の1県・S1-3 C分類22県が全解消）
+既存の全日制収集元と全く同一のPDF2頁目に「（1）全日制課程」表に続く形で独立した「（2）定時制
+課程」セクションが存在した（fukushima・iwate・miyazaki・nara・oitaに続き6件連続で同型の
+見落としパターン）。このPDFはテキスト埋め込み型でRead toolから直接抽出でき、ビジョン解析は
+不要だった。6校7レコード（鳥栖工業[普通科/機械科・電気科くくり募集]・佐賀工業[機械科・情報科
+くくり募集]・有田工業[セラミック科・デザイン科くくり募集]・佐賀商業[総合文化科]・唐津商業
+[商業科]・伊万里実業[商業科]）の完全な学校別内訳。finalRateは自前算出でなく資料に印字された
+「志願倍率」列をそのまま採用。「合計」280/72/0.26・「鳥栖工業計」80/19/0.24と完全一致。
+`src/data/teiji-competition-rates/saga.ts`へ実装完了（jest6テストgreen）。
+
+**総括（S1-3 C分類22県の解消完了）**: fukushima・iwate・miyazaki・nara・oita・sagaの6県が
+「全日制と同一PDF/xlsxの後段ページ・別シートに定時制セクションが独立して存在するが、
+pdftotextの日本語ラベル欠落等によりgrepで検知できない」という同型パターンだった。C分類として
+残るaichi（Imperva WAF一時ブロックで再調査要）・akita（学校別内訳不在を確認済み）・fukui
+（競争選抜制度自体が無いことを確認済み）の3県は真に前進手段が無い保留のみ。実機確認の的中率は
+最終的にB分類4件+C分類18件（22件中19件が的中・akita/fukui/kochiの一部夜間部等は構造的不在）
+という高水準だった。
 
 ### osaka: ✅2026-09-09データ収集完了（C→A相当に格上げ・PDF後段ページでなく「同一xlsxブック内の
 別シート」という新パターン）

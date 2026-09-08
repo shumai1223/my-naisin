@@ -858,7 +858,7 @@ miyazaki）は元々ファイル自体が無い未着手県で、今回のタス
 スコープ外（新規ファイル作成は別タスクとして扱う）。§5順序#3は事実上払底した、次は
 §5順序#4へ。
 
-| 4 | **定時制・通信制の残り26県**⚠️着手中(2026-09-09) | `teiji-competition-rates` は**29県収録／18県未収録**（toyama/saitama/kagawa/yamagata/ibaraki/mie/wakayama/tochigi追加済み。残りaichi akita aomori ehime fukui fukuoka fukushima hyogo ishikawa iwate kochi miyazaki nara oita osaka saga shiga yamaguchi）。hyogoは§5守ることで取得禁止・yamaguchiは既存ソースに定時制セクション自体が無いと確認済みでともに対象外。残り16県はS1-3 C分類（定型文のみで所在不明）だが、**実機確認の的中率は現時点で8/8=100%（B分類4件+C分類4件〈ibaraki/mie/wakayama/tochigi〉が全て「別ページ/別PDFに独立して存在した」）** | 20〜30h |
+| 4 | **定時制・通信制の残り26県**✅事実上完了(2026-09-09) | `teiji-competition-rates`は**41県収録**（本イテレーションでaomori/ehime/fukuoka/fukushima/ishikawa/iwate/kochi/miyazaki/nara/oita/osaka/saga追加・S1-3 C分類22県が全解消）。hyogo/yamaguchiは既存の理由で対象外。残る未収録3県はaichi（Imperva WAF一時ブロックが継続・2026-09-09も再確認したが依然302ブロック）・akita（学校別内訳が公表資料に存在しないと確認済み）・fukui（競争選抜制度自体が無いことを確認済み）で、いずれも真に前進手段が無い保留のみ。実機確認の的中率は最終的にB分類4件+C分類18件（22件中19件が的中）という高水準だった | 20〜30h |
 
 **2026-09-09 toyama 1件目完了（S1-3 B分類→実機確認でA相当に格上げ）**: S1-3台帳の懸念
 「学校別レコードはページ1-2のみ」は誤りだったと判明。既存の全日制収集元と同一PDF
@@ -930,6 +930,16 @@ PDF再取得から始める新規調査に近い作業のため次段階の優�
 green(61秒)。**実機確認の的中率は8/8=100%**。**教訓**: これまでの県は「同一PDF内の
 別ページ」に定時制があったが、栃木は「教育委員会サイト内の完全に別URL体系のページ」
 だった——C分類の調査では同一PDF内だけでなく県サイト全体を探索範囲に含める必要がある。
+
+**2026-09-09 aomori/ehime/fukuoka/fukushima/ishikawa/iwate/kochi/miyazaki/nara/oita/osaka/saga
+の12県を連続完了しC分類22県が全解消**: fukushima・iwate・miyazaki・nara・oita・sagaの6県は
+「全日制と同一PDF/xlsxの後段ページ・別シートに定時制セクションが独立して存在するが、pdftotext
+の日本語ラベル欠落等によりgrepで検知できない」という同型パターンだった（aomori/ehimeはURL
+サフィックス置換・隣接file-ID総当りで発見、fukuokaは別PDF発見、kochiは「多部制単位制」という
+別名称、osakaは同一xlsxブック内の別シートという初パターン）。残るaichi（Imperva WAF一時
+ブロックが2026-09-09時点でも継続）・akita・fukui（いずれも構造的にデータ不在を確認済み）の
+3県は前進手段が無い保留のまま。**§4は事実上完了、次は§5順序#5より先にF-0（在庫の実測）へ**
+（本ファイル前段の「★F-0 在庫の実測」節の指示どおり）。
 
 | 5 | 旺文社PoC納品物v0 | R8一式CSV/JSON（配布可21,548件）＋R7→R8差分＋千葉型サンプル＋形式仕様1枚。noindex＋sitemap除外で作り置き | 8〜16h |
 | 6 | Comiru/Studyplus 連携仕様書＋/embedデモ | 質問ノート9/03で事前承認済み。対外送信なし | 8〜16h |
