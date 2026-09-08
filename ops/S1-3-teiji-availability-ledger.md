@@ -238,10 +238,24 @@
 
 ## C: 定型文のみで所在情報なし（要個別のPDF再確認）
 
-aichi, fukui, ishikawa, iwate, kochi,
-miyazaki, nara, oita, osaka, saga（10県・ibaraki/mie/wakayama/tochigi/shiga/aomori/ehime/
-fukuoka/fukushima完了、akita・fukuiは構造的にデータ不在/対象外と判明のため「未確認」16県から
-5県減）
+aichi, fukui, iwate, kochi,
+miyazaki, nara, oita, osaka, saga（9県・ibaraki/mie/wakayama/tochigi/shiga/aomori/ehime/
+fukuoka/fukushima/ishikawa完了、akita・fukuiは構造的にデータ不在/対象外と判明のため「未確認」
+16県から6県減）
+
+### ishikawa: ✅2026-09-09データ収集完了（C→A相当に格上げ・全日制と別日程の独立選抜）
+全日制収集元PDF（2月24日発表）とは別に、定時制専用の「令和8年度石川県公立高等学校一般入学
+（定時制）の出願状況（3月23日）」が独立して公表されていた（3月25日学力検査等・3月27日合格
+発表という全日制より1か月遅い専用選抜日程）。6校10レコード（加賀聖城・小松北[夜間部/午前部/
+午後部]・金沢中央[夜間部/午前部/午後部]・羽松・七尾城北・輪島）の完全な学校別内訳。夜間制/
+昼間制の2区分・学校別小計・区分別集計・総計の4段階（小松北120/57/0.48・金沢中央200/134/0.67・
+夜間制200/46/0.23・昼間制280/190/0.68・総計480/236/0.49）すべてが機械集計と完全一致。
+`src/data/teiji-competition-rates/ishikawa.ts`へ実装完了（jest8テストgreen）。
+**教訓**: WebSearchが最初に見つけたbestjuku.com記事の学校別データ表は公式PDFの原本と
+数値は一致していたが構造（区分の分け方）が省略されており、`checkAgainstSubtotal`が使う
+学校別小計・区分別小計の裏取りには一次資料（公式PDF）を必ず直接確認する必要があった
+（`gmail-mcp-invalid-grant`系ではないが`feedback-verify-source-url-matches-pdf-read`と同型の
+「二次情報源を鵜呑みにしない」教訓）。
 
 ### fukushima: ✅2026-09-09データ収集完了（C→A相当に格上げ・過去セッションの「低解像度で断念」
 判定を再度覆す）
