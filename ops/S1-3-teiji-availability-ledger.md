@@ -25,7 +25,7 @@
 |---|---|---|
 | **A** | 20 | chiba, gifu, gunma, hiroshima, hokkaido, hyogo, kagoshima, kanagawa, kumamoto, kyoto, miyagi, nagano, nagasaki, niigata, okayama, okinawa, shimane, shizuoka, tokyo, tottori, tokushima, yamaguchi, yamanashi |
 | **B** | 5 | kagawa, saitama, toyama, yamagata, (要再確認: niigataとの境界事例あり) |
-| **C** | 22（ibaraki・mie・wakayama完了で残17） | aichi, akita, aomori, ehime, fukui, fukuoka, fukushima, ishikawa, iwate, kochi, miyazaki, nara, oita, osaka, saga, shiga, tochigi |
+| **C** | 22（ibaraki・mie・wakayama・tochigi完了で残16） | aichi, akita, aomori, ehime, fukui, fukuoka, fukushima, ishikawa, iwate, kochi, miyazaki, nara, oita, osaka, saga, shiga |
 
 （A=23件+B=4件+C=20件で合計47件になるよう後段の詳細表で再カウントすること。上表は暫定集計で
 ダブりがある可能性がある。詳細は下記の県別根拠を正とする）
@@ -239,7 +239,17 @@
 ## C: 定型文のみで所在情報なし（要個別のPDF再確認）
 
 aichi, akita, aomori, ehime, fukui, fukuoka, fukushima, ishikawa, iwate, kochi,
-miyazaki, nara, oita, osaka, saga, shiga, tochigi（17県・ibaraki/mie/wakayama完了により3県減）
+miyazaki, nara, oita, osaka, saga, shiga（16県・ibaraki/mie/wakayama/tochigi完了により4県減）
+
+### tochigi: ✅2026-09-09データ収集完了（C→A相当に格上げ・定時制専用ページを発見）
+全日制収集元とは全く別のURL体系（「〜r08teijiseikateiippannsennbatushutugnangoukakujoukyou.html」）
+で定時制課程専用の一般選抜出願・合格状況ページが独立して存在した。8校12レコード（宇都宮工業
+[午後部/夜間部]・宇都宮商業[普通/商業]・鹿沼商工・学悠館[Ⅰ部/Ⅱ部/Ⅲ部]・足利工業・真岡・
+大田原東・矢板東）。表末尾「合計」452/193/0.43（出願ベース）と完全一致。
+`src/data/teiji-competition-rates/tochigi.ts`へ実装完了（jest5テストgreen）。
+**教訓**: 栃木のように全日制と定時制で発表ページのURL体系自体が完全に分かれている県もある
+（他県は同一PDF内に定時制セクションがあるパターンが多かった）。C分類の調査では「同じPDF内」
+だけでなく「同じ教育委員会サイト内の別ページ」も探索範囲に含めるべき。
 
 ### wakayama: ✅2026-09-09データ収集完了（C→A相当に格上げ・県立＋市立の両方を収録）
 既存の全日制収集元と同一PDFの2頁目冒頭【定時制】に県立7校13レコード（伊都中央[昼/夜]・
