@@ -238,9 +238,20 @@
 
 ## C: 定型文のみで所在情報なし（要個別のPDF再確認）
 
-aichi, ehime, fukui, fukuoka, fukushima, ishikawa, iwate, kochi,
-miyazaki, nara, oita, osaka, saga（13県・ibaraki/mie/wakayama/tochigi/shiga/aomori完了、
-akitaは学校別データ不在確認済みで格上げ不可のため「未確認」16県から2県減）
+aichi, fukui, fukuoka, fukushima, ishikawa, iwate, kochi,
+miyazaki, nara, oita, osaka, saga（12県・ibaraki/mie/wakayama/tochigi/shiga/aomori/ehime完了、
+akitaは学校別データ不在確認済みで格上げ不可のため「未確認」16県から3県減）
+
+### ehime: ✅2026-09-09データ収集完了（C→A相当に格上げ・file-ID方式で隣接IDを発見）
+全日制収集元PDFが`ehime-kyoiku.esnet.ed.jp/file/2314`というfile-ID方式のURLだったため、
+隣接するfile-IDを機械的に試したところfile/2315が「令和8年度県立高等学校学科別入学志願者数
+（定時制）（志願変更後）」であると判明（Content-Dispositionヘッダのfilenameで確認）。10校
+11レコード（川之江・新居浜西・西条・今治西・松山南[普通/商業]・松山工業・大洲[肱川分校]・
+八幡浜・宇和島東・北条清新）の完全な学校別内訳が独立したPDFとして存在した。表末尾「合計」
+480/166/0.35と完全一致。`src/data/teiji-competition-rates/ehime.ts`へ実装完了（jest5テストgreen）。
+**教訓**: aomoriの「URL末尾の課程名サフィックス置換」に続き、file-ID方式（連番管理）の県では
+「隣接するIDを試す」という別の機械的発見パターンが有効だった。両パターンともWebFetchで
+hasContent-Dispositionのfilenameを見れば定時制版かどうか事前に判別できる。
 
 ### aomori: ✅2026-09-09データ収集完了（C→A相当に格上げ・URL規則性で発見）
 全日制収集元PDFのURL末尾`-zennitisei`（全日制）を`-teijisei`（定時制）に置換するだけで
