@@ -687,7 +687,7 @@ PILでピクセル単位クロップして確認しnoteに明記。独立二次�
 ブログ）と完全一致確認済み。**44県目**。残り3県（fukushima・akita・tottori
 全て保留）は10月以降の公表待ち。
 
-| 3 | **学力検査平均点R8**⚠️着手中(2026-09-08〜09) | 41県収録だが**R8は30県**（osaka/saitama/chiba/ibaraki/nagano/gifu/mie/kumamoto追加済み。hyogoは§5守ることで取得禁止のため対象外。令和7は37県ある）。11県はデータがあってR8未収録・6県は未着手（yamagata/tochigi/fukui/kyoto/nagasaki/miyazaki） | 12h |
+| 3 | **学力検査平均点R8**⚠️着手中(2026-09-08〜09) | 41県収録だが**R8は31県**（osaka/saitama/chiba/ibaraki/nagano/gifu/mie/kumamoto/ishikawa追加済み。hyogoは§5守ることで取得禁止のため対象外・fukuokaは二次情報源のR8点数データ未掲載のため保留。令和7は37県ある）。9県はデータがあってR8未収録（fukuoka保留含む）・6県は未着手（yamagata/tochigi/fukui/kyoto/nagasaki/miyazaki） | 12h |
 
 **2026-09-08 osaka 1件目完了**: 一次ソースURLパターン（`.../r0X/RX_gakuryoku_jittai_tyousa.pdf`）から
 `r08/R8_gakuryoku_jittai_tyousa.pdf`を推測し取得成功。**重要な発見**: R5〜R7は「府立高等学校
@@ -764,6 +764,15 @@ pdftoppm+ビジョン解析で表を直接転記。R6と異なりこの概要版
 (30.0+28.4+27.4+26.3+24.1=136.2)が表の「合計」列と完全一致することを確認済み（外部の
 独立二次情報源はR8分がまだ見つからず表内整合性を根拠とした）。tsc実exit0・jestフルスイート
 495suites7244tests green(60秒)。残り11県は次回以降。
+
+**2026-09-09 fukuoka見送り・ishikawa 9件目完了**: fukuokaはR8の一次資料が得点率(%)のみ
+公表（国語71.9%・数学51.1%・社会53.8%・理科51.8%・英語50.9%）で、この県のデータ収録方針
+（点数ベースの二次情報源が必須）に沿う二次情報源katacoto.com/uicc1070.main.jpもR8分を
+まだ掲載しておらず、Y-0に従い自前で%→点数換算をせず見送り。代わりにishikawaのR8を追加。
+一次集約元の学習塾サイト(jyuku-goodjob.com)はまだR8未掲載だったため、独立2媒体
+（WebSearch要約・学習塾ブログonejuku55.com）から国語53.8・社会38.2・数学48.3・理科45.7・
+英語53.4（5教科合計239＝前年度247から低下）を取得、両媒体で完全一致確認済み。tsc実exit0・
+jestフルスイート495suites7245tests green(60秒)。残り10県（fukuoka保留含む）は次回以降。
 
 | 4 | **定時制・通信制の残り26県** | `teiji-competition-rates` は**21県収録／26県未収録**（aichi akita aomori ehime fukui fukuoka fukushima hyogo ibaraki ishikawa iwate kagawa kochi mie miyazaki nara oita osaka saga saitama shiga tochigi toyama wakayama yamagata yamaguchi）。S1-3で所在分類済み | 20〜30h |
 | 5 | 旺文社PoC納品物v0 | R8一式CSV/JSON（配布可21,548件）＋R7→R8差分＋千葉型サンプル＋形式仕様1枚。noindex＋sitemap除外で作り置き | 8〜16h |

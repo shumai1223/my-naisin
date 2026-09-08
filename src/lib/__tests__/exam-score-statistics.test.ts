@@ -859,8 +859,8 @@ describe('EXAM_SCORE_STATISTICS_OKINAWA(パイロット実データ・1年度分
 });
 
 describe('EXAM_SCORE_STATISTICS_ISHIKAWA(パイロット実データ・1年度分は内部矛盾検知で除外)', () => {
-  it('9年度分(平成28-31年度、令和3-7年度)が収録されている(令和2年度は内部矛盾により除外)', () => {
-    expect(EXAM_SCORE_STATISTICS_ISHIKAWA.years).toHaveLength(9);
+  it('10年度分(平成28-31年度、令和3-8年度)が収録されている(令和2年度は内部矛盾により除外)', () => {
+    expect(EXAM_SCORE_STATISTICS_ISHIKAWA.years).toHaveLength(10);
     expect(EXAM_SCORE_STATISTICS_ISHIKAWA.years.map((y) => y.fiscalYearLabel)).not.toContain('令和2年度');
   });
 
@@ -877,6 +877,11 @@ describe('EXAM_SCORE_STATISTICS_ISHIKAWA(パイロット実データ・1年度�
     for (const year of EXAM_SCORE_STATISTICS_ISHIKAWA.years) {
       expect(isPlausibleSubjectSum(year)).toBe(true);
     }
+  });
+
+  it('令和8年度分は5教科合計239点(前年度247点から低下・独立2媒体で完全一致)', () => {
+    const r8 = EXAM_SCORE_STATISTICS_ISHIKAWA.years.find((y) => y.fiscalYearLabel === '令和8年度');
+    expect(r8?.totalAverage).toBe(239);
   });
 });
 

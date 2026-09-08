@@ -8,6 +8,11 @@
  * 乖離しており、他の9年度分(全て差0.4点以内)と比べて明らかに大きい不一致を検知した。
  * 沖縄県の令和4年度分と同様のパターンで転記ミスの可能性が高いため、捏造ゼロ優先で
  * 令和2年度分は収録を見送り、確度の高い9年度分のみ収録する。
+ *
+ * ⚠️令和8年度分（T-Y11F §5順序#3）: 一次集約元の学習塾サイトはまだR8未掲載だったため、
+ * 独立した2媒体（家庭教師のあすなろ系WebSearch要約・学習塾ブログonejuku55.com）から
+ * 数値を取得した。国語53.8・社会38.2・数学48.3・理科45.7・英語53.4（単純合計239.4、
+ * 記事側の総計239とは0.4点差で許容範囲内）。両媒体で完全一致を確認済み（2026-09-09）。
  */
 import type { ExamScoreStatisticsFile } from '@/lib/exam-score-statistics';
 
@@ -135,6 +140,24 @@ export const EXAM_SCORE_STATISTICS_ISHIKAWA: ExamScoreStatisticsFile = {
       ],
       totalAverage: 247,
       totalMaxScore: 500,
+    },
+    {
+      fiscalYearLabel: '令和8年度',
+      averageType: 'passers',
+      subjects: [
+        { subject: '国語', averageScore: 53.8, maxScore: 100 },
+        { subject: '数学', averageScore: 48.3, maxScore: 100 },
+        { subject: '英語', averageScore: 53.4, maxScore: 100 },
+        { subject: '理科', averageScore: 45.7, maxScore: 100 },
+        { subject: '社会', averageScore: 38.2, maxScore: 100 },
+      ],
+      totalAverage: 239,
+      totalMaxScore: 500,
+      source: {
+        url: 'https://onejuku55.com/2026/05/09/%E3%80%90%E7%9F%B3%E5%B7%9D%E7%9C%8C%E5%85%AC%E7%AB%8B%E9%AB%98%E6%A0%A1%E5%85%A5%E8%A9%A6%E3%80%80%E5%B9%B3%E5%9D%87%E7%82%B92026%E3%80%91%EF%BC%88%E6%9B%B4%E6%96%B0%E4%B8%AD%EF%BC%89/',
+        docTitle: '【2026】石川県公立高校入試 合格者平均点＆得点分布',
+        fetchedAt: '2026-09-09',
+      },
     },
   ],
 };
