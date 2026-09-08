@@ -687,7 +687,19 @@ PILでピクセル単位クロップして確認しnoteに明記。独立二次�
 ブログ）と完全一致確認済み。**44県目**。残り3県（fukushima・akita・tottori
 全て保留）は10月以降の公表待ち。
 
-| 3 | **学力検査平均点R8** | 41県収録だが**R8は22県だけ**（令和7は37県ある）。19県はデータがあってR8未収録・6県は未着手。教委の結果概要は6〜8月公表 | 12h |
+| 3 | **学力検査平均点R8**⚠️着手中(2026-09-08) | 41県収録だが**R8は23県**（osaka追加済み。令和7は37県ある）。18県はデータがあってR8未収録・6県は未着手（yamagata/tochigi/fukui/kyoto/nagasaki/miyazaki）。教委の結果概要は6〜8月公表 | 12h |
+
+**2026-09-08 osaka 1件目完了**: 一次ソースURLパターン（`.../r0X/RX_gakuryoku_jittai_tyousa.pdf`）から
+`r08/R8_gakuryoku_jittai_tyousa.pdf`を推測し取得成功。**重要な発見**: R5〜R7は「府立高等学校
+合格者の学力実態調査」（合格者を母集団とする層化無作為抽出・標本数700）だったが、**R8は表題・
+調査方法とも異なる別調査「一般入学者選抜学力検査受験者の学力実態調査」（デジタル採点システムの
+得点データの全数調査・母集団は全受験者）に変更されていた**。Y-0に従い異なる調査を同一系列と
+混同せず、R8のみ`averageType: 'test-takers'`（R5〜R7は`'passers'`のまま）とし、コメントで
+調査方法の違いを明記。フォント欠落PDFのためpdftoppm+ビジョン解析で転記、ピクセル単位クロップで
+再確認。よどきかく(note)のブログ記事の要約（「数学Cと社会の平均点が50点を下回っている」）と
+矛盾しないことを確認済み（英語Aも50点未満だが記事はそこに触れていないだけで矛盾ではない）。
+`exam-score-statistics.test.ts`のOSAKAブロックを更新（averageType混在のテストに変更）。
+tsc実exit0・jestフルスイート495suites7237tests green(61秒)。残り18県は次回以降。
 | 4 | **定時制・通信制の残り26県** | `teiji-competition-rates` は**21県収録／26県未収録**（aichi akita aomori ehime fukui fukuoka fukushima hyogo ibaraki ishikawa iwate kagawa kochi mie miyazaki nara oita osaka saga saitama shiga tochigi toyama wakayama yamagata yamaguchi）。S1-3で所在分類済み | 20〜30h |
 | 5 | 旺文社PoC納品物v0 | R8一式CSV/JSON（配布可21,548件）＋R7→R8差分＋千葉型サンプル＋形式仕様1枚。noindex＋sitemap除外で作り置き | 8〜16h |
 | 6 | Comiru/Studyplus 連携仕様書＋/embedデモ | 質問ノート9/03で事前承認済み。対外送信なし | 8〜16h |

@@ -957,14 +957,13 @@ describe('EXAM_SCORE_STATISTICS_SHIMANE(パイロット実データ)', () => {
   });
 });
 
-describe('EXAM_SCORE_STATISTICS_OSAKA(パイロット実データ・合格者の無作為抽出標本調査n=700・国語/数学/英語はA/B/C大問別)', () => {
-  it('3年度分(令和5〜7年度)が収録されている', () => {
-    expect(EXAM_SCORE_STATISTICS_OSAKA.years).toHaveLength(3);
+describe('EXAM_SCORE_STATISTICS_OSAKA(パイロット実データ・R5-7は合格者の無作為抽出標本調査n=700、R8は全受験者の全数調査・国語/数学/英語はA/B/C大問別)', () => {
+  it('4年度分(令和5〜8年度)が収録されている', () => {
+    expect(EXAM_SCORE_STATISTICS_OSAKA.years).toHaveLength(4);
   });
 
-  it('全年度でaverageType=passers・11項目(国語A/B/C・数学A/B/C・英語A/B/C・理科・社会)・100点満点', () => {
+  it('全年度で11項目(国語A/B/C・数学A/B/C・英語A/B/C・理科・社会)・100点満点', () => {
     for (const year of EXAM_SCORE_STATISTICS_OSAKA.years) {
-      expect(year.averageType).toBe('passers');
       expect(year.subjects).toHaveLength(11);
       for (const s of year.subjects) expect(s.maxScore).toBe(100);
     }
@@ -975,6 +974,14 @@ describe('EXAM_SCORE_STATISTICS_OSAKA(パイロット実データ・合格者の
       expect(year.totalAverage).toBeUndefined();
       expect(isPlausibleSubjectSum(year)).toBe(true);
     }
+  });
+
+  it('令和8年度のみ調査方法が変更され、averageType=test-takers(全受験者の全数調査)。令和5〜7年度はpassers(合格者の標本調査)のまま', () => {
+    const r8 = EXAM_SCORE_STATISTICS_OSAKA.years.find((y) => y.fiscalYearLabel === '令和8年度');
+    expect(r8?.averageType).toBe('test-takers');
+    const older = EXAM_SCORE_STATISTICS_OSAKA.years.filter((y) => y.fiscalYearLabel !== '令和8年度');
+    expect(older).toHaveLength(3);
+    for (const year of older) expect(year.averageType).toBe('passers');
   });
 });
 
