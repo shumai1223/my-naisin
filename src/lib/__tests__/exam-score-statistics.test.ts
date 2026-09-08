@@ -699,8 +699,8 @@ describe('EXAM_SCORE_STATISTICS_OKAYAMA(パイロット実データ・1PDFの参
 });
 
 describe('EXAM_SCORE_STATISTICS_YAMAGUCHI(パイロット実データ・R7 PDFにR6比較列が併記されクロス検証済み)', () => {
-  it('4年度分(令和4〜7年度)が収録されている', () => {
-    expect(EXAM_SCORE_STATISTICS_YAMAGUCHI.years).toHaveLength(4);
+  it('5年度分(令和4〜8年度)が収録されている', () => {
+    expect(EXAM_SCORE_STATISTICS_YAMAGUCHI.years).toHaveLength(5);
   });
 
   it('各教科50点満点(5教科合計250点満点体系)・test-takersで統一されている', () => {
@@ -718,11 +718,20 @@ describe('EXAM_SCORE_STATISTICS_YAMAGUCHI(パイロット実データ・R7 PDF�
     }
   });
 
-  it('令和6・7年度分のみ受検者数が明記されている', () => {
+  it('令和6・7・8年度分は受検者数が明記されている', () => {
     const r6 = EXAM_SCORE_STATISTICS_YAMAGUCHI.years.find((y) => y.fiscalYearLabel === '令和6年度');
     const r7 = EXAM_SCORE_STATISTICS_YAMAGUCHI.years.find((y) => y.fiscalYearLabel === '令和7年度');
+    const r8 = EXAM_SCORE_STATISTICS_YAMAGUCHI.years.find((y) => y.fiscalYearLabel === '令和8年度');
     expect(r6?.testTakerCount).toBe(5790);
     expect(r7?.testTakerCount).toBe(5618);
+    expect(r8?.testTakerCount).toBe(4675);
+  });
+
+  it('令和8年度分の原資料内「令和7年度」比較列が既存の令和7年度エントリと完全一致(クロス検証済み)', () => {
+    const r7 = EXAM_SCORE_STATISTICS_YAMAGUCHI.years.find((y) => y.fiscalYearLabel === '令和7年度');
+    const r8 = EXAM_SCORE_STATISTICS_YAMAGUCHI.years.find((y) => y.fiscalYearLabel === '令和8年度');
+    expect(r7?.subjects.map((s) => s.averageScore)).toEqual([29.3, 26.6, 24.7, 27.9, 23.9]);
+    expect(r8?.totalAverage).toBe(135.0);
   });
 });
 

@@ -4,6 +4,15 @@
  * 令和7年度版PDF(資料1)は前年度(令和6年度)の数値を括弧内に併記しており、令和6年度の
  * 報道発表ページ本体の数値(31.5/24.5/23.1/26.8/26.6・合計132.4)と完全一致することを
  * 確認済み(クロスチェック2重)。各教科50点満点・5教科合計250点満点。
+ *
+ * ⚠️令和8年度分（T-Y11F §5順序#3）: 一次ソース「令和8年度山口県公立高等学校入学者選抜の
+ * ための学力検査得点状況」（資料1・数値部分はpdftotextでそのまま抽出可能）
+ * https://www.pref.yamaguchi.lg.jp/uploaded/life/344733_664701_misc.pdf
+ * この資料も前年度(令和7年度)の数値を括弧内に併記しており、括弧内の値(29.3/26.6/24.7/
+ * 27.9/23.9・合計132.4・受検者数5,618)が既存の令和7年度エントリと完全一致することを
+ * 確認済み（クロスチェック2重）。リセマムの独立した二次情報源（「5教科の得点合計の平均点は
+ * 前年度より2.6点上昇し135.0点」「理科が前年度より平均点が低下したがそのほかの科目では
+ * 平均点が上昇」）とも整合することを確認済み（2026-09-09）。
  */
 import type { ExamScoreStatisticsFile } from '@/lib/exam-score-statistics';
 
@@ -83,6 +92,25 @@ export const EXAM_SCORE_STATISTICS_YAMAGUCHI: ExamScoreStatisticsFile = {
       totalAverage: 132.4,
       totalMaxScore: 250,
       testTakerCount: 5618,
+    },
+    {
+      fiscalYearLabel: '令和8年度',
+      averageType: 'test-takers',
+      subjects: [
+        { subject: '国語', averageScore: 30.7, maxScore: 50 },
+        { subject: '社会', averageScore: 28.2, maxScore: 50 },
+        { subject: '数学', averageScore: 25.7, maxScore: 50 },
+        { subject: '理科', averageScore: 22.2, maxScore: 50 },
+        { subject: '英語', averageScore: 28.2, maxScore: 50 },
+      ],
+      totalAverage: 135.0,
+      totalMaxScore: 250,
+      testTakerCount: 4675,
+      source: {
+        url: 'https://www.pref.yamaguchi.lg.jp/uploaded/life/344733_664701_misc.pdf',
+        docTitle: '令和8年度山口県公立高等学校入学者選抜のための学力検査得点状況（山口県教育委員会・前年度分の比較列を含む）',
+        fetchedAt: '2026-09-09',
+      },
     },
   ],
 };
