@@ -330,7 +330,7 @@ p.2「学力検査」イ配点・p.3「2(5)選抜」イ(ｱ)を確認）で、�
 変更を検出した県は0件）。今後は他県のR9実施要項が新規公表され次第、随時追加していく
 （`src/data/snapshots/2027-r9/`は`"collecting"`のまま恒久的に開いておく）。24hの見積りに
 対し実測では1イテレーション数十分規模で完了。
-| 2 | **入試日程DBのR9更新**⚠️着手中(2026-09-08) | `exam-schedules` 47県すべて令和8を持つが、**令和9は41県のみ＝6県が未更新**（chiba/hokkaido/hyogo/ibaraki/kanagawa=既存5県＋saitama/osaka/nagano/yamaguchi/aomori/ehime/fukui/fukuoka/gifu/gunma/hiroshima/ishikawa/iwate/kagawa/kagoshima/kochi/kumamoto/kyoto/mie/miyagi/miyazaki/nagasaki/nara/niigata/oita/okayama/okinawa/saga/shiga/shimane/shizuoka/aichi/tochigi/yamagata/tokyo/toyama=本イテレーション追加36県）。残り未着手4県（yamanashi/wakayama/tottori/tokushima）。fukushimaは実施要綱10月上旬公表予定のため保留。akitaもR9実施要綱が9/8時点で未公表のため保留（R8は昨年9/12公表）。kyoto・niigata・oita・tochigiはR9で選抜制度が変更されている（kyoto: 前期・中期・後期の3段階→前期・後期の2段階／niigata: 特色化選抜を廃止し一般選抜に一本化／oita: 第一次・第二次の2ラウンド制→一般選抜内の第一〜第三志願3段階制／tochigi: 特色選抜・一般選抜の別トラックを全日制・定時制共通の単一日程に統合）。R9日程は4〜7月公表済みの県が多い | 10h |
+| 2 | **入試日程DBのR9更新**⚠️着手中(2026-09-08) | `exam-schedules` 47県すべて令和8を持つが、**令和9は42県のみ＝5県が未更新**（chiba/hokkaido/hyogo/ibaraki/kanagawa=既存5県＋saitama/osaka/nagano/yamaguchi/aomori/ehime/fukui/fukuoka/gifu/gunma/hiroshima/ishikawa/iwate/kagawa/kagoshima/kochi/kumamoto/kyoto/mie/miyagi/miyazaki/nagasaki/nara/niigata/oita/okayama/okinawa/saga/shiga/shimane/shizuoka/aichi/tochigi/yamagata/tokyo/toyama/yamanashi=本イテレーション追加37県）。残り未着手3県（wakayama/tottori/tokushima）。fukushimaは実施要綱10月上旬公表予定のため保留。akitaもR9実施要綱が9/8時点で未公表のため保留（R8は昨年9/12公表）。kyoto・niigata・oita・tochigiはR9で選抜制度が変更されている（kyoto: 前期・中期・後期の3段階→前期・後期の2段階／niigata: 特色化選抜を廃止し一般選抜に一本化／oita: 第一次・第二次の2ラウンド制→一般選抜内の第一〜第三志願3段階制／tochigi: 特色選抜・一般選抜の別トラックを全日制・定時制共通の単一日程に統合）。R9日程は4〜7月公表済みの県が多い | 10h |
 
 **2026-09-07 saitama 1件目完了**: 一次資料「令和9年度埼玉県公立高等学校入学者選抜日程表」
 （`01nyusinittei_r09.pdf`・確定版・令和8年5月29日掲載・カレンダー形式1頁をRead toolで
@@ -651,6 +651,17 @@ sourceUrlホストがR8と異なるため`toyama.test.ts`の正規表現に
 `kengaku.tym.ed.jp`を追加。塾選ジャーナルの独立二次情報源と完全一致を
 確認済み。**41県目**。残り6県（fukushima・akita保留の2県＋
 yamanashi/wakayama/tottori/tokushimaの未着手4県）は次回以降。
+
+**2026-09-08 yamanashi 42件目完了**: 一次ソース「令和9年度山梨県公立高等学校
+入学者選抜の基本事項」（R8の「実施要項」相当・8頁）
+https://www.pref.yamanashi.jp/documents/84777/r9kihonziko.pdf
+R8同型のフォント欠落でpdftoppm+ビジョン解析で第1〜3章（前期募集・後期募集・
+再募集）を転記。R8にあった「後期募集 志願変更期間」相当の項目はこの基本事項
+には記載がなく、Y-0に従い推測で追加しなかった。出願期間は一括受付日＋2営業日
+（各日で受付時間が異なる）という構成のためstartDate/endDateにnoteで受付時間
+を明記。リセマムの独立二次情報源と完全一致確認済み。**42県目**。残り5県
+（fukushima・akita保留の2県＋wakayama/tottori/tokushimaの未着手3県）は
+次回以降。
 
 | 3 | **学力検査平均点R8** | 41県収録だが**R8は22県だけ**（令和7は37県ある）。19県はデータがあってR8未収録・6県は未着手。教委の結果概要は6〜8月公表 | 12h |
 | 4 | **定時制・通信制の残り26県** | `teiji-competition-rates` は**21県収録／26県未収録**（aichi akita aomori ehime fukui fukuoka fukushima hyogo ibaraki ishikawa iwate kagawa kochi mie miyazaki nara oita osaka saga saitama shiga tochigi toyama wakayama yamagata yamaguchi）。S1-3で所在分類済み | 20〜30h |

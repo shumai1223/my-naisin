@@ -44,4 +44,21 @@ describe('YAMANASHI_EXAM_SCHEDULE', () => {
     expect(findScheduleEvent(YAMANASHI_EXAM_SCHEDULE, '令和99年度', '入学許可予定者発表')).toBeUndefined();
     expect(findScheduleEvent(YAMANASHI_EXAM_SCHEDULE, '令和8年度（2026年度）', '存在しない項目')).toBeUndefined();
   });
+
+  it('has 令和9年度 entries with the same track structure as 令和8年度', () => {
+    const exam = findScheduleEvent(YAMANASHI_EXAM_SCHEDULE, '令和9年度（2027年度）', '後期募集 学力検査（全日制）');
+    expect(exam?.startDate).toBe('2027-03-03');
+    expect(exam?.endDate).toBe('2027-03-04');
+
+    const result = findScheduleEvent(YAMANASHI_EXAM_SCHEDULE, '令和9年度（2027年度）', '入学許可予定者発表');
+    expect(result?.startDate).toBe('2027-03-11');
+
+    const zenki = findScheduleEvent(YAMANASHI_EXAM_SCHEDULE, '令和9年度（2027年度）', '前期募集 検査');
+    expect(zenki?.startDate).toBe('2027-01-28');
+    expect(zenki?.endDate).toBe('2027-01-29');
+
+    const labels = YAMANASHI_EXAM_SCHEDULE.years[1].events.map((e) => e.label);
+    expect(labels.some((l) => l.startsWith('前期募集'))).toBe(true);
+    expect(labels.some((l) => l.startsWith('後期募集'))).toBe(true);
+  });
 });
