@@ -687,7 +687,7 @@ PILでピクセル単位クロップして確認しnoteに明記。独立二次�
 ブログ）と完全一致確認済み。**44県目**。残り3県（fukushima・akita・tottori
 全て保留）は10月以降の公表待ち。
 
-| 3 | **学力検査平均点R8**⚠️着手中(2026-09-08) | 41県収録だが**R8は28県**（osaka/saitama/chiba/ibaraki/nagano/gifu追加済み。hyogoは§5守ることで取得禁止のため対象外。令和7は37県ある）。13県はデータがあってR8未収録・6県は未着手（yamagata/tochigi/fukui/kyoto/nagasaki/miyazaki） | 12h |
+| 3 | **学力検査平均点R8**⚠️着手中(2026-09-08〜09) | 41県収録だが**R8は29県**（osaka/saitama/chiba/ibaraki/nagano/gifu/mie追加済み。hyogoは§5守ることで取得禁止のため対象外。令和7は37県ある）。12県はデータがあってR8未収録・6県は未着手（yamagata/tochigi/fukui/kyoto/nagasaki/miyazaki） | 12h |
 
 **2026-09-08 osaka 1件目完了**: 一次ソースURLパターン（`.../r0X/RX_gakuryoku_jittai_tyousa.pdf`）から
 `r08/R8_gakuryoku_jittai_tyousa.pdf`を推測し取得成功。**重要な発見**: R5〜R7は「府立高等学校
@@ -746,6 +746,16 @@ pdftoppm+ビジョン解析で表を直接転記。**同じ表に併記された
 クロス検証を根拠とした）。第一次選抜学力検査受検者数12,366人・5教科総点平均「約298点」も
 p.7から収録。tsc実exit0・jestフルスイート495suites7242tests green(64秒)。残り13県は
 次回以降。
+
+**2026-09-09 mie 7件目完了**: 一次ソース「令和8年度三重県立高等学校入学者選抜学力検査問題等」
+（ページ本文に表あり・PDFでない）
+https://www.pref.mie.lg.jp/KOKOKYO/HP/m0204200393.htm
+「後期選抜学力検査（全日制課程）合格者の学力検査得点の平均」表をそのまま転記。合計欄
+（151.1）が教科別平均点の単純合計と完全一致することを確認済み。受検者数はR5〜R7と同じく
+原資料に記載が無いため未設定のまま。外部の独立二次情報源はR8分がまだ見つからなかったが、
+表内の合計整合性チェックで妥当性を確認。tsc実exit0・jestフルスイート495suites7243tests
+green(61秒)。残り12県は次回以降。
+
 | 4 | **定時制・通信制の残り26県** | `teiji-competition-rates` は**21県収録／26県未収録**（aichi akita aomori ehime fukui fukuoka fukushima hyogo ibaraki ishikawa iwate kagawa kochi mie miyazaki nara oita osaka saga saitama shiga tochigi toyama wakayama yamagata yamaguchi）。S1-3で所在分類済み | 20〜30h |
 | 5 | 旺文社PoC納品物v0 | R8一式CSV/JSON（配布可21,548件）＋R7→R8差分＋千葉型サンプル＋形式仕様1枚。noindex＋sitemap除外で作り置き | 8〜16h |
 | 6 | Comiru/Studyplus 連携仕様書＋/embedデモ | 質問ノート9/03で事前承認済み。対外送信なし | 8〜16h |

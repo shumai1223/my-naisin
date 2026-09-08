@@ -574,8 +574,8 @@ describe('EXAM_SCORE_STATISTICS_GIFU(パイロット実データ・教科別平�
 });
 
 describe('EXAM_SCORE_STATISTICS_MIE(パイロット実データ・後期選抜合格者平均をページ本文から直接取得)', () => {
-  it('3年度分(令和5〜7年度)が収録されている', () => {
-    expect(EXAM_SCORE_STATISTICS_MIE.years).toHaveLength(3);
+  it('4年度分(令和5〜8年度)が収録されている', () => {
+    expect(EXAM_SCORE_STATISTICS_MIE.years).toHaveLength(4);
   });
 
   it('各教科50点満点(5教科合計250点満点体系)・全年度passersで統一されている', () => {
@@ -598,6 +598,12 @@ describe('EXAM_SCORE_STATISTICS_MIE(パイロット実データ・後期選抜�
     const r6 = EXAM_SCORE_STATISTICS_MIE.years.find((y) => y.fiscalYearLabel === '令和6年度');
     expect(r5?.source?.url).toBeTruthy();
     expect(r6?.source?.url).toBeTruthy();
+  });
+
+  it('令和8年度分は5教科合計151.1点(教科別平均点の単純合計と完全一致)', () => {
+    const r8 = EXAM_SCORE_STATISTICS_MIE.years.find((y) => y.fiscalYearLabel === '令和8年度');
+    expect(r8?.totalAverage).toBe(151.1);
+    expect(r8?.testTakerCount).toBeUndefined();
   });
 });
 

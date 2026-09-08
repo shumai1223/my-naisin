@@ -7,6 +7,13 @@
  * 傾斜配点だが、県教委公表の平均点表はその区別を明記していないため原資料のまま収録する）。
  * 満点・受検者数は原資料に記載が無いためtotalMaxScore=250は一般則からの補記、
  * testTakerCountは未設定。
+ *
+ * ⚠️令和8年度分（T-Y11F §5順序#3）: 一次ソース「令和8年度三重県立高等学校入学者選抜学力検査
+ * 問題等」（ページ本文に表あり・PDFでない）
+ * https://www.pref.mie.lg.jp/KOKOKYO/HP/m0204200393.htm
+ * 「後期選抜学力検査（全日制課程）合格者の学力検査得点の平均」表をそのまま転記。合計欄
+ * （151.1）が教科別平均点の単純合計と完全一致することを確認済み（2026-09-08）。受検者数は
+ * R5〜R7と同じく原資料に記載が無いため未設定のまま。
  */
 import type { ExamScoreStatisticsFile } from '@/lib/exam-score-statistics';
 
@@ -66,6 +73,24 @@ export const EXAM_SCORE_STATISTICS_MIE: ExamScoreStatisticsFile = {
       ],
       totalAverage: 154.4,
       totalMaxScore: 250,
+    },
+    {
+      fiscalYearLabel: '令和8年度',
+      averageType: 'passers',
+      subjects: [
+        { subject: '国語', averageScore: 30.1, maxScore: 50 },
+        { subject: '数学', averageScore: 30.9, maxScore: 50 },
+        { subject: '社会', averageScore: 31.8, maxScore: 50 },
+        { subject: '英語', averageScore: 29.1, maxScore: 50 },
+        { subject: '理科', averageScore: 29.2, maxScore: 50 },
+      ],
+      totalAverage: 151.1,
+      totalMaxScore: 250,
+      source: {
+        url: 'https://www.pref.mie.lg.jp/KOKOKYO/HP/m0204200393.htm',
+        docTitle: '令和8年度三重県立高等学校入学者選抜学力検査問題等（三重県教育委員会）',
+        fetchedAt: '2026-09-08',
+      },
     },
   ],
 };
