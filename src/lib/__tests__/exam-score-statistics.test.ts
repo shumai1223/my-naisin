@@ -77,8 +77,8 @@ describe('isPlausibleSubjectSum', () => {
 });
 
 describe('EXAM_SCORE_STATISTICS_KOCHI(パイロット実データ)', () => {
-  it('5年度分(令和2〜6年度)が収録されている', () => {
-    expect(EXAM_SCORE_STATISTICS_KOCHI.years).toHaveLength(5);
+  it('7年度分(令和2〜8年度)が収録されている', () => {
+    expect(EXAM_SCORE_STATISTICS_KOCHI.years).toHaveLength(7);
   });
 
   it('全年度でaverageTypeがtest-takers(全受検者平均)に統一されている', () => {
@@ -99,6 +99,13 @@ describe('EXAM_SCORE_STATISTICS_KOCHI(パイロット実データ)', () => {
         ['国語', '社会', '数学', '理科', '英語'].sort()
       );
     }
+  });
+
+  it('令和8年度分の令和6年度比較列(前年表)が既存の令和6年度エントリと完全一致(クロス検証済み)', () => {
+    const r6 = EXAM_SCORE_STATISTICS_KOCHI.years.find((y) => y.fiscalYearLabel === '令和6年度');
+    const r8 = EXAM_SCORE_STATISTICS_KOCHI.years.find((y) => y.fiscalYearLabel === '令和8年度');
+    expect(r6?.subjects.map((s) => s.averageScore)).toEqual([21.7, 19.0, 18.3, 19.9, 22.9]);
+    expect(r8?.totalAverage).toBe(116.8);
   });
 });
 

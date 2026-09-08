@@ -687,7 +687,7 @@ PILでピクセル単位クロップして確認しnoteに明記。独立二次�
 ブログ）と完全一致確認済み。**44県目**。残り3県（fukushima・akita・tottori
 全て保留）は10月以降の公表待ち。
 
-| 3 | **学力検査平均点R8**⚠️着手中(2026-09-08〜09) | 41県収録だが**R8は31県**（osaka/saitama/chiba/ibaraki/nagano/gifu/mie/kumamoto/ishikawa追加済み。hyogoは§5守ることで取得禁止のため対象外・fukuokaは二次情報源のR8点数データ未掲載のため保留。令和7は37県ある）。9県はデータがあってR8未収録（fukuoka保留含む）・6県は未着手（yamagata/tochigi/fukui/kyoto/nagasaki/miyazaki） | 12h |
+| 3 | **学力検査平均点R8**⚠️着手中(2026-09-08〜09) | 41県収録だが**R8は32県**（osaka/saitama/chiba/ibaraki/nagano/gifu/mie/kumamoto/ishikawa/kochi追加済み。hyogoは§5守ることで取得禁止のため対象外・fukuokaは二次情報源のR8点数データ未掲載のため保留。令和7は37県ある）。8県はデータがあってR8未収録（fukuoka保留含む）・6県は未着手（yamagata/tochigi/fukui/kyoto/nagasaki/miyazaki） | 12h |
 
 **2026-09-08 osaka 1件目完了**: 一次ソースURLパターン（`.../r0X/RX_gakuryoku_jittai_tyousa.pdf`）から
 `r08/R8_gakuryoku_jittai_tyousa.pdf`を推測し取得成功。**重要な発見**: R5〜R7は「府立高等学校
@@ -773,6 +773,16 @@ pdftoppm+ビジョン解析で表を直接転記。R6と異なりこの概要版
 （WebSearch要約・学習塾ブログonejuku55.com）から国語53.8・社会38.2・数学48.3・理科45.7・
 英語53.4（5教科合計239＝前年度247から低下）を取得、両媒体で完全一致確認済み。tsc実exit0・
 jestフルスイート495suites7245tests green(60秒)。残り10県（fukuoka保留含む）は次回以降。
+
+**2026-09-09 kochi 10件目完了（R7・R8の2年度分）**: 一次ソース「令和8年度高知県公立高等学校
+入学者選抜における学力検査の結果分析」（24頁・p.1「平均点の推移」表）
+https://www.pref.kochi.lg.jp/doc/r8_kekkabunseki/file_contents/r8_bunseki_honsatsu.pdf
+pdftoppm+ビジョン解析で表を直接転記。**表内の令和6年度比較列（国語21.7・社会19.0・数学
+18.3・理科19.9・英語22.9）が既存の令和6年度エントリと完全一致し、新規転記と既存データ
+双方のクロス検証になった**。同じ表に既存ファイル未収録だった令和7年度分（総合97.0＝
+既存R6の101.6・R8の116.8と比べて落ち込んだ年）も併記されていたため合わせて収録。tsc実
+exit0・jestフルスイート495suites7246tests green(59秒)。残り9県（fukuoka保留含む）は
+次回以降。
 
 | 4 | **定時制・通信制の残り26県** | `teiji-competition-rates` は**21県収録／26県未収録**（aichi akita aomori ehime fukui fukuoka fukushima hyogo ibaraki ishikawa iwate kagawa kochi mie miyazaki nara oita osaka saga saitama shiga tochigi toyama wakayama yamagata yamaguchi）。S1-3で所在分類済み | 20〜30h |
 | 5 | 旺文社PoC納品物v0 | R8一式CSV/JSON（配布可21,548件）＋R7→R8差分＋千葉型サンプル＋形式仕様1枚。noindex＋sitemap除外で作り置き | 8〜16h |
