@@ -238,8 +238,21 @@
 
 ## C: 定型文のみで所在情報なし（要個別のPDF再確認）
 
-aichi, akita, aomori, ehime, fukui, fukuoka, fukushima, ishikawa, iwate, kochi,
-miyazaki, nara, oita, osaka, saga（15県・ibaraki/mie/wakayama/tochigi/shiga完了により5県減）
+aichi, ehime, fukui, fukuoka, fukushima, ishikawa, iwate, kochi,
+miyazaki, nara, oita, osaka, saga（13県・ibaraki/mie/wakayama/tochigi/shiga/aomori完了、
+akitaは学校別データ不在確認済みで格上げ不可のため「未確認」16県から2県減）
+
+### aomori: ✅2026-09-09データ収集完了（C→A相当に格上げ・URL規則性で発見）
+全日制収集元PDFのURL末尾`-zennitisei`（全日制）を`-teijisei`（定時制）に置換するだけで
+兄弟PDF「令和8年度青森県立高等学校入学者選抜出願状況等（定時制の課程）」が200で取得できた
+（`R8senbatsu_syutsugan-teijisei.pdf`）。6校11レコード（北斗[午前部/午後部/夜間部]・
+五所川原・尾上総合[総合Ⅰ・Ⅱがくくり募集/総合Ⅲ]・三沢・田名部・八戸中央[午前部/午後部/
+夜間部]）の完全な学校別内訳が存在した。表末尾「定時制の課程合計」480/236/0.49と完全一致。
+`src/data/teiji-competition-rates/aomori.ts`へ実装完了（jest5テストgreen）。
+**教訓**: 全日制収集元のURLに`-zennitisei`(全日制)/`-tousei`(当該制)等の課程名サフィックスが
+含まれる県では、`-teijisei`等への機械的な置換だけで定時制専用PDFが見つかることがある
+（栃木の「完全に別URL体系」より単純なパターン）。C分類の調査でURLに課程名らしき単語が
+含まれていたら最初に試す価値が高い。
 
 ### shiga: ✅2026-09-09データ収集完了（C→A相当に格上げ・一般型選抜のみスコープ収録）
 既存の全日制収集元と同一PDF（滋賀県教育委員会「令和8年度滋賀県立高等学校入学者選抜の一次募集に
@@ -280,6 +293,20 @@ miyazaki, nara, oita, osaka, saga（15県・ibaraki/mie/wakayama/tochigi/shiga�
 3部制]・伊勢まなび[午前/午後/夜間の3部制]等11校、通信制は北星・松阪の2校。表末尾の総計が
 定時制558/182/0.33・通信制392/53/0.14の両方と完全一致。
 `src/data/teiji-competition-rates/mie.ts`へ実装完了（jest5テストgreen）。
+
+### akita: ⚠️2026-09-09実機確認・aichi不通のため代替調査したが学校別データ不在と判明（C分類のまま保留）
+既存の全日制収集元PDF（`20260212_...公－２.pdf`・全2頁）には定時制の記載が一切無い（grep 0件）。
+同一アーカイブページ（`archive/93860`）内の他PDF「志願状況（志願先変更後）公－１」（全1頁）にも
+定時制の記載なし。「令和8年度秋田県公立高等学校入学者選抜状況　まとめ（公－３）」PDF（全1頁）を
+pdftoppm 200dpiで視覚確認したところ、**定時制の全県集計値のみ**（募集定員395・特色選抜募集人員
+60/受検者数2/合格者数2・一般選抜募集人員393/受検者数210/合格者数209・2次募集184/9/7・合格者
+総数218）は存在するが、学校名別の内訳は表内のどこにも無い（全日制側は「県北/中央/県南」の
+地区別集計はあるが、それも学校別ではない）。bestjuku.com等の二次情報源も同じ県全体集計
+（募集定員395・総志願者224・倍率0.57）のみでschoolNameレベルの情報を持たない。
+**Y-0憲法③（捏造ゼロ）によりschoolName単位のrecordsを作れないため、teiji-competition-rates/
+akita.tsは今回作成しない**（hiroshima型のcoverage='partial'は「一部の学校は実数、残りは倍率のみ」
+だが、akitaは「全学校が県全体集計に埋没し校名の手がかりが皆無」という異なる欠落パターンのため
+同型の流用も不可）。C分類のまま「未確認」→「学校別データ確認済み・不在」に格上げして保留する。
 
 ### ibaraki: ✅2026-09-09データ収集完了（C→A相当に格上げ）
 全日制収集元とは別の第三のPDF「令和8年度茨城県立高等学校第1学年入学志願者数等
