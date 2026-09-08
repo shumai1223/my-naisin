@@ -10,6 +10,13 @@
  *
  * 一般の学力検査(3/5・3/6)・合格者の発表(3/13)はWebSearchで得た独立した二次情報源（地元学習塾
  * サイト）と完全一致を確認済み（2026-09-04）。
+ *
+ * ⚠️令和9年度分（T-Y11F §5順序#2）: 一次ソース「令和9年度富山県立高等学校入学者選抜日程」
+ * https://www.kengaku.tym.ed.jp/wp-content/uploads/2026/07/r9nittei.pdf
+ * このPDFもR8と同型のフォント欠落があったが、pdftoppm 200dpi+Read toolのビジョン解析で
+ * 表全体を直接転記できた。R8と同じ範囲（全日制の推薦・一般・第2次）のみを収録し、全国募集・
+ * 定時制の課程・通信制の課程は対象外方針を踏襲。塾選ジャーナルの独立した二次情報源と完全
+ * 一致を確認済み（2026-09-08）。
  */
 import type { PrefectureExamScheduleFile } from '@/lib/exam-schedule';
 
@@ -32,6 +39,24 @@ export const TOYAMA_EXAM_SCHEDULE: PrefectureExamScheduleFile = {
         { label: '一般 合格者の発表', startDate: '2026-03-13', note: '午後0時30分' },
         { label: '第2次 志願期間', startDate: '2026-03-16', endDate: '2026-03-17', note: '開始は午前9時・締切は午後4時' },
         { label: '第2次 合格者の発表', startDate: '2026-03-19', note: '午後0時30分' },
+      ],
+    },
+    {
+      fiscalYear: '令和9年度（2027年度）',
+      sourceUrl: 'https://www.kengaku.tym.ed.jp/wp-content/uploads/2026/07/r9nittei.pdf',
+      docTitle: '令和9年度富山県立高等学校入学者選抜日程',
+      fetchedAt: '2026-09-08',
+      events: [
+        { label: '推薦 志願期間', startDate: '2027-02-01', endDate: '2027-02-03', note: '開始は午前9時・締切は正午' },
+        { label: '推薦 面接等実施期日', startDate: '2027-02-09' },
+        { label: '推薦 合格内定の通知', startDate: '2027-02-15', note: '午前10時' },
+        { label: '推薦 合格者の発表', startDate: '2027-03-18', note: '午後0時30分' },
+        { label: '一般 志願期間', startDate: '2027-02-24', endDate: '2027-02-26', note: '開始は午前9時・締切は正午' },
+        { label: '一般 学力検査実施期日', startDate: '2027-03-09', endDate: '2027-03-10' },
+        { label: '一般 追検査実施期日', startDate: '2027-03-15' },
+        { label: '一般 合格者の発表', startDate: '2027-03-18', note: '午後0時30分' },
+        { label: '第2次 志願期間', startDate: '2027-03-19', endDate: '2027-03-23', note: '開始は午前9時・締切は午後4時' },
+        { label: '第2次 合格者の発表', startDate: '2027-03-26', note: '午後0時30分' },
       ],
     },
   ],

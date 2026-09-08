@@ -7,7 +7,7 @@ describe('TOYAMA_EXAM_SCHEDULE', () => {
     expect(TOYAMA_EXAM_SCHEDULE.years.length).toBeGreaterThan(0);
     for (const year of TOYAMA_EXAM_SCHEDULE.years) {
       expect(year.events.length).toBeGreaterThan(0);
-      expect(year.sourceUrl).toMatch(/^https:\/\/www\.pref\.toyama\.jp\//);
+      expect(year.sourceUrl).toMatch(/^https:\/\/www\.(pref\.toyama\.jp|kengaku\.tym\.ed\.jp)\//);
     }
   });
 
@@ -44,5 +44,19 @@ describe('TOYAMA_EXAM_SCHEDULE', () => {
   it('returns undefined for unknown fiscal year or label', () => {
     expect(findScheduleEvent(TOYAMA_EXAM_SCHEDULE, '令和99年度', '一般 学力検査実施期日')).toBeUndefined();
     expect(findScheduleEvent(TOYAMA_EXAM_SCHEDULE, '令和8年度（2026年度）', '存在しない項目')).toBeUndefined();
+  });
+
+  it('has 令和9年度 entries with the same track structure as 令和8年度', () => {
+    const exam = findScheduleEvent(TOYAMA_EXAM_SCHEDULE, '令和9年度（2027年度）', '一般 学力検査実施期日');
+    expect(exam?.startDate).toBe('2027-03-09');
+    expect(exam?.endDate).toBe('2027-03-10');
+
+    const result = findScheduleEvent(TOYAMA_EXAM_SCHEDULE, '令和9年度（2027年度）', '一般 合格者の発表');
+    expect(result?.startDate).toBe('2027-03-18');
+
+    const labels = TOYAMA_EXAM_SCHEDULE.years[1].events.map((e) => e.label);
+    expect(labels.some((l) => l.startsWith('推薦'))).toBe(true);
+    expect(labels.some((l) => l.startsWith('一般'))).toBe(true);
+    expect(labels.some((l) => l.startsWith('第2次'))).toBe(true);
   });
 });
