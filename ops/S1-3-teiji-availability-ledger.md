@@ -25,7 +25,7 @@
 |---|---|---|
 | **A** | 20 | chiba, gifu, gunma, hiroshima, hokkaido, hyogo, kagoshima, kanagawa, kumamoto, kyoto, miyagi, nagano, nagasaki, niigata, okayama, okinawa, shimane, shizuoka, tokyo, tottori, tokushima, yamaguchi, yamanashi |
 | **B** | 5 | kagawa, saitama, toyama, yamagata, (要再確認: niigataとの境界事例あり) |
-| **C** | 22（ibaraki・mie・wakayama・tochigi完了で残16） | aichi, akita, aomori, ehime, fukui, fukuoka, fukushima, ishikawa, iwate, kochi, miyazaki, nara, oita, osaka, saga, shiga |
+| **C** | 22（ibaraki・mie・wakayama・tochigi・shiga完了で残15） | aichi, akita, aomori, ehime, fukui, fukuoka, fukushima, ishikawa, iwate, kochi, miyazaki, nara, oita, osaka, saga |
 
 （A=23件+B=4件+C=20件で合計47件になるよう後段の詳細表で再カウントすること。上表は暫定集計で
 ダブりがある可能性がある。詳細は下記の県別根拠を正とする）
@@ -239,7 +239,20 @@
 ## C: 定型文のみで所在情報なし（要個別のPDF再確認）
 
 aichi, akita, aomori, ehime, fukui, fukuoka, fukushima, ishikawa, iwate, kochi,
-miyazaki, nara, oita, osaka, saga, shiga（16県・ibaraki/mie/wakayama/tochigi完了により4県減）
+miyazaki, nara, oita, osaka, saga（15県・ibaraki/mie/wakayama/tochigi/shiga完了により5県減）
+
+### shiga: ✅2026-09-09データ収集完了（C→A相当に格上げ・一般型選抜のみスコープ収録）
+既存の全日制収集元と同一PDF（滋賀県教育委員会「令和8年度滋賀県立高等学校入学者選抜の一次募集に
+係る公表資料」）の3頁目末尾【定時制】に、全日制と同じ構造的複雑さ（学校独自型選抜と一般型選抜が
+同一学科枠を共有）を持つ7校8レコードの学校別内訳が存在した（大津清陵[昼間部/夜間部]・
+瀬田工業定時制・彦根工業定時制・長浜北星定時制・能登川[昼間部が学校独自型・一般型の2レコード/
+夜間部]）。全日制shiga.tsと同じ方針で学校独自型選抜（能登川昼間部の中学校長推薦・quota12/
+確定出願者数4）はスコープ外とし、一般型選抜のみ7レコードを収録。公式「計②」280/163から
+自己集計268/159を差し引いた残差12/4が除外分と完全一致することを確認した。
+`src/data/teiji-competition-rates/shiga.ts`へ実装完了（jest5テストgreen）。
+**教訓**: 旧URL(`file/attachment/5591236.pdf`)が404化しており県公式ページから新URL体系
+(`documents/16947/`)を再取得する必要があった。教委サイトのURL構造変更は恒久リンクではない点に
+留意し、既存の全日制データのURLが動いている県では再取得を試すこと。
 
 ### tochigi: ✅2026-09-09データ収集完了（C→A相当に格上げ・定時制専用ページを発見）
 全日制収集元とは全く別のURL体系（「〜r08teijiseikateiippannsennbatushutugnangoukakujoukyou.html」）
