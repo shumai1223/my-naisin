@@ -836,7 +836,7 @@ miyazaki）は元々ファイル自体が無い未着手県で、今回のタス
 スコープ外（新規ファイル作成は別タスクとして扱う）。§5順序#3は事実上払底した、次は
 §5順序#4へ。
 
-| 4 | **定時制・通信制の残り26県**⚠️着手中(2026-09-09) | `teiji-competition-rates` は**24県収録／23県未収録**（toyama/saitama/kagawa追加済み。残りaichi akita aomori ehime fukui fukuoka fukushima hyogo ibaraki ishikawa iwate kochi mie miyazaki nara oita osaka saga shiga tochigi wakayama yamagata yamaguchi）。hyogoは§5守ることで取得禁止・yamaguchiは既存ソースに定時制セクション自体が無いと確認済みでともに対象外。S1-3のB分類は残りyamagataのみ・C分類20県は未確認。S1-3で所在分類済み（`ops/S1-3-teiji-availability-ledger.md`） | 20〜30h |
+| 4 | **定時制・通信制の残り26県**⚠️着手中(2026-09-09) | `teiji-competition-rates` は**25県収録／22県未収録**（toyama/saitama/kagawa/yamagata追加済み＝S1-3 B分類4県が全完了。残りaichi akita aomori ehime fukui fukuoka fukushima hyogo ibaraki ishikawa iwate kochi mie miyazaki nara oita osaka saga shiga tochigi wakayama yamaguchi）。hyogoは§5守ることで取得禁止・yamaguchiは既存ソースに定時制セクション自体が無いと確認済みでともに対象外。**残りは全てS1-3 C分類（定型文のみで所在不明・PDF再取得が必要な新規調査に近い作業）** | 20〜30h |
 
 **2026-09-09 toyama 1件目完了（S1-3 B分類→実機確認でA相当に格上げ）**: S1-3台帳の懸念
 「学校別レコードはページ1-2のみ」は誤りだったと判明。既存の全日制収集元と同一PDF
@@ -860,6 +860,15 @@ yamagata）も同様に「実は学校別内訳あり」の可能性が高く優
 quota32、他はquota=入学定員40。表末尾「定時制合計」480(入学定員)/472(留保後)/76/0.16と
 完全一致。tsc実exit0・jestフルスイート498suites7268tests green(60秒)。S1-3のB分類は
 残りyamagataのみ。
+
+**2026-09-09 yamagata 4件目完了（S1-3 B分類4県すべて完了）**: S1-3台帳の懸念「定時制の語が
+定型文でしか出現せず未確認」は誤りだったと判明。既存の全日制収集元と同一PDFの5頁目に
+全日制と同型の学校別内訳表（5校7レコード：霞城学園Ⅰ〜Ⅲ部・新庄志誠館・米沢鶴城・庄内総合・
+酒田西）が独立して存在。表末尾「定時制公立合計」280(入学定員)/39/241/109/0.45と完全一致。
+tsc実exit0・jestフルスイート499suites7273tests green(61秒)。**これでS1-3のB分類4県
+（toyama/saitama/kagawa/yamagata）が全て完了**——4件とも「収集当時にページの中身を精査
+しなかっただけ」という同型の誤りだった。残り22県は全てC分類（定型文のみで所在不明）で、
+PDF再取得から始める新規調査に近い作業のため次段階の優先度は下がる。
 | 5 | 旺文社PoC納品物v0 | R8一式CSV/JSON（配布可21,548件）＋R7→R8差分＋千葉型サンプル＋形式仕様1枚。noindex＋sitemap除外で作り置き | 8〜16h |
 | 6 | Comiru/Studyplus 連携仕様書＋/embedデモ | 質問ノート9/03で事前承認済み。対外送信なし | 8〜16h |
 | 7 | **★段階台帳** | 定員・推薦・合格者数・二次募集を**学校×学科でR8とR7に積む**。12県の実測51単位から47県で**約350単位**。公表値の転記のみでY-0内 | **90〜170h** |
