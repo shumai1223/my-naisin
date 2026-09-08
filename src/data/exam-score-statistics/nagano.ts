@@ -11,6 +11,13 @@
  * 120点満点）・検査Ⅱ（数学・理科合計80点満点）という教科横断の複合試験形式で、他県・後期選抜
  * と同じ「教科別100点満点」の枠組みで比較できないため、本ファイルは後期選抜（従来型5教科）の
  * みを収録する。
+ *
+ * ⚠️令和8年度分（T-Y11F §5順序#3）: 一次ソース「令和8年度 長野県公立高等学校入学者選抜学力
+ * 検査の結果について」（フォント欠落PDF・2頁・後期選抜セクション「2 教科別結果」表）
+ * https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/1143_h8.pdf
+ * pdftoppm 200dpi+Read toolのビジョン解析で表を直接転記（画像自体は鮮明で判読に支障なし）。
+ * 表内の「前年度数値」欄（国語59.54・社会70.04・数学58.45・理科54.36・英語59.23）が既存の
+ * 令和7年度エントリと完全一致しており、新規転記と既存データ双方のクロス検証になった。
  */
 import type { ExamScoreStatisticsFile } from '@/lib/exam-score-statistics';
 
@@ -60,6 +67,23 @@ export const EXAM_SCORE_STATISTICS_NAGANO: ExamScoreStatisticsFile = {
         url: 'https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r7/documents/r7kekkasokuho.pdf',
         docTitle: '令和7年度長野県公立高等学校入学者選抜学力検査の結果について（速報）（学びの改革支援課）',
         fetchedAt: '2026-07-30',
+      },
+    },
+    {
+      fiscalYearLabel: '令和8年度',
+      averageType: 'test-takers',
+      subjects: [
+        { subject: '国語', averageScore: 65.87, maxScore: 100 },
+        { subject: '社会', averageScore: 55.45, maxScore: 100 },
+        { subject: '数学', averageScore: 52.72, maxScore: 100 },
+        { subject: '理科', averageScore: 59.05, maxScore: 100 },
+        { subject: '英語', averageScore: 54.92, maxScore: 100 },
+      ],
+      testTakerCount: 7918,
+      source: {
+        url: 'https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/1143_h8.pdf',
+        docTitle: '令和8年度 長野県公立高等学校入学者選抜学力検査の結果について（学びの改革支援課）',
+        fetchedAt: '2026-09-08',
       },
     },
   ],

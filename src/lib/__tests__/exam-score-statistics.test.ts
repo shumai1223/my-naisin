@@ -370,8 +370,8 @@ describe('EXAM_SCORE_STATISTICS_AKITA(パイロット実データ・8%抽出調�
 });
 
 describe('EXAM_SCORE_STATISTICS_NAGANO(パイロット実データ・2つの公式PDFで令和6年度が重複検証済み)', () => {
-  it('3年度分(令和5〜7年度)が収録されている', () => {
-    expect(EXAM_SCORE_STATISTICS_NAGANO.years).toHaveLength(3);
+  it('4年度分(令和5〜8年度)が収録されている', () => {
+    expect(EXAM_SCORE_STATISTICS_NAGANO.years).toHaveLength(4);
   });
 
   it('各教科100点満点・5教科の内訳を持ちtest-takersで統一されている(前期選抜は構造が異なるため収録対象外)', () => {
@@ -387,6 +387,13 @@ describe('EXAM_SCORE_STATISTICS_NAGANO(パイロット実データ・2つの公�
       expect(year.totalAverage).toBeUndefined();
       expect(isPlausibleSubjectSum(year)).toBe(true);
     }
+  });
+
+  it('令和8年度分は原資料の前年度比較欄が既存の令和7年度エントリと完全一致(クロス検証済み)', () => {
+    const r7 = EXAM_SCORE_STATISTICS_NAGANO.years.find((y) => y.fiscalYearLabel === '令和7年度');
+    const r8 = EXAM_SCORE_STATISTICS_NAGANO.years.find((y) => y.fiscalYearLabel === '令和8年度');
+    expect(r8?.testTakerCount).toBe(7918);
+    expect(r7?.subjects.map((s) => s.averageScore)).toEqual([59.54, 70.04, 58.45, 54.36, 59.23]);
   });
 });
 
