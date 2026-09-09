@@ -2,7 +2,8 @@ import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
 
 /**
  * 神奈川県 段階台帳（T-Y11F §5順序#7・6県目・「普通科」〈96レコード〉＋「専門学科」
- * 〈33レコード〉＋「単位制」〈35レコード〉＋「定時制・通信制」〈20レコード〉＝計184レコード）。
+ * 〈33レコード〉＋「単位制」〈35レコード〉＋「定時制・通信制」〈20レコード〉＝計184レコードで
+ * 完結）。
  *
  * 一次ソース: 神奈川県教育委員会「令和8年度神奈川県公立高等学校入学者選抜一般募集共通選抜等
  * 合格状況（各学校別の合格の状況等）」別紙4（xlsx版・5シート構成: 普通科・クリエイティブ／
@@ -113,7 +114,18 @@ import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
  * （sheet4では初めて不出現）。
  *
  * ⚠️スコープ: 定時制の課程の非単位制3区分（普通科・専門学科工業・専門学科商業）は既存
- * パイプライン未整備のため見送り。特別募集等（sheet5）は別セッションで横展開する。
+ * パイプライン未整備のため見送り。
+ *
+ * 🔚**sheet5「特別募集等」はスコープ外と確定・神奈川県の段階台帳これで完結（184レコード）**:
+ * sheet5は「４ 特別募集及び中途退学者募集合格状況」（海外帰国生徒特別募集／在県外国人等特別
+ * 募集〈全日制・定時制〉／インクルーシブ教育実践推進校特別募集／中途退学者募集）と「５ 別科
+ * 合格状況」を持つが、いずれも既存`competition-rates/kanagawa.ts`の冒頭コメントに**「特別募集
+ * （海外帰国/在県外国人）は全日制の外側の別集計のため対象外として明示的に除外」**と既に明記
+ * されており、対応する既存パイプラインが存在しない（quota/finalApplicants両方とも未収録）。
+ * sheet4の非単位制3区分と同型の理由でapplicantsConfirmedの再利用元が無く、Y-0に従いsheet5
+ * 全体を対象外として確定した。これで神奈川県の段階台帳は「既存パイプラインが対応する全区分」
+ * を収録し尽くし184レコードで完結、coverage.statusをcomplete（対応源のある範囲では完全収録の
+ * 意味）に更新する。
  */
 
 export const KANAGAWA_STAGE_LEDGER: PrefectureStageLedgerFile = {
@@ -127,7 +139,7 @@ export const KANAGAWA_STAGE_LEDGER: PrefectureStageLedgerFile = {
     },
   ],
   coverage: {
-    status: 'partial',
+    status: 'complete',
     includedDepartments: [
       '普通科（共通選抜・県立87校＋市立5校＝92レコード）',
       '普通科（クリエイティブスクール・県立4校＝4レコード）',
@@ -136,10 +148,11 @@ export const KANAGAWA_STAGE_LEDGER: PrefectureStageLedgerFile = {
       '定時制・通信制の単位制4区分（単位制普通科11・単位制総合学科4・単位制専門学科工業3・通信制単位制普通科2＝20レコード）',
     ],
     pendingDepartments: [
-      '定時制の課程・非単位制3区分（普通科8校・専門学科工業2校・専門学科商業1校＝既存パイプライン未整備のため見送り）',
-      '特別募集等（sheet5）',
+      '定時制の課程・非単位制3区分（普通科8校・専門学科工業2校・専門学科商業1校＝既存パイプライン未整備のため見送り・恒久的にスコープ外）',
+      '特別募集等（sheet5・海外帰国/在県外国人/インクルーシブ/中途退学/別科＝既存competition-rates/kanagawa.ts自身が「対象外」と明記済みで対応パイプライン無し・恒久的にスコープ外）',
+      '連携募集合格状況（連携型入学者選抜・光陵/愛川＝他県既存stage-ledgerファイルと同じ規律で恒久的にスコープ外）',
     ],
-    note: '「普通科」区分（共通選抜92校＋クリエイティブスクール4校＝96レコード）＋「専門学科」区分（10区分33レコード）＋「単位制」区分（13区分35レコード）＋「定時制・通信制」区分（単位制4区分20レコード）を完全収録し累計184レコード。quotaは既存パイプライン（普通科/専門学科/単位制はcompetition-rates/kanagawa.ts、定時制・通信制はteiji-competition-rates/kanagawa.ts）と全184件で完全一致。applicantsConfirmedも既存パイプラインをそのまま再利用。testTakersConfirmed/finalPassersのみ本資料から新規転記。定時制・通信制の非単位制3区分は対応する既存パイプラインが存在しないためY-0に従い見送り。普通科は資料本文の4段階、専門学科は7/10区分、単位制は3/13区分、定時制通信制は4/4区分の公式小計と、いずれもquota/testTakersConfirmed/finalPassersの3系列すべてで完全一致。finalPassers>quotaが普通科7件・専門学科3件・単位制3件の計13件、finalPassers>applicantsConfirmedが定時制通信制1件（既知パターン）。「連携募集合格状況」（連携型入学者選抜・光陵/愛川）はスコープ外。特別募集等（sheet5）は未着手。',
+    note: '「普通科」区分（共通選抜92校＋クリエイティブスクール4校＝96レコード）＋「専門学科」区分（10区分33レコード）＋「単位制」区分（13区分35レコード）＋「定時制・通信制」区分（単位制4区分20レコード）を完全収録し184レコードで完結。quotaは既存パイプライン（普通科/専門学科/単位制はcompetition-rates/kanagawa.ts、定時制・通信制はteiji-competition-rates/kanagawa.ts）と全184件で完全一致。applicantsConfirmedも既存パイプラインをそのまま再利用。testTakersConfirmed/finalPassersのみ本資料から新規転記。定時制・通信制の非単位制3区分・特別募集等（sheet5）・連携募集合格状況は対応する既存パイプラインが存在しないためY-0に従い恒久的にスコープ外（既存competition-rates/kanagawa.ts自身が特別募集を「対象外」と明記済み）。普通科は資料本文の4段階、専門学科は7/10区分、単位制は3/13区分、定時制通信制は4/4区分の公式小計と、いずれもquota/testTakersConfirmed/finalPassersの3系列すべてで完全一致。finalPassers>quotaが普通科7件・専門学科3件・単位制3件の計13件、finalPassers>applicantsConfirmedが定時制通信制1件（既知パターン）。',
   },
   officialSubtotals: [
     { label: '県立計（普通科・共通選抜）', quota: 26045, applicantsConfirmed: 30122, testTakersConfirmed: 29656, finalPassers: 25173 },
