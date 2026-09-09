@@ -1,30 +1,32 @@
 import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
 
 /**
- * 千葉県 段階台帳（T-Y11F §5順序#7・パイロット1県目・全9頁中1頁目のみ）。
+ * 千葉県 段階台帳（T-Y11F §5順序#7・パイロット1県目・全9頁中1〜2頁目）。
  *
  * 一次ソース: 千葉県教育委員会「令和8年度 公立高等学校 一般入学者選抜等 入学許可候補者数
- * 一覧＜その１＞」（特別入学者選抜及び地域連携アクティブスクールの入学者選抜を含む・全9頁）
- * のうち1頁目「1．県立全日制」（学校番号1〜25・35レコード）。
+ * 一覧＜その１〉＜その２＞」（特別入学者選抜及び地域連携アクティブスクールの入学者選抜を含む・
+ * 全9頁）のうち1頁目「1．県立全日制」（学校番号1〜25・35レコード）と2頁目（学校番号26〜53・
+ * 35レコード）。
  * https://www.pref.chiba.lg.jp/kyouiku/shidou/press/2025/documents/r8kyokaippan.pdf
  *
  * ⚠️pdftotextは数値は抽出できたが学校名・学科名のラベルが欠落（他県で頻出のフォント欠落と
- * 同型）のため、pdftoppm 150〜300dpiのビジョン解析で全35レコードを転記した（PIL crop
+ * 同型）のため、pdftoppm 200〜300dpiのビジョン解析で全70レコードを転記した（PIL crop
  * による部分拡大で複数回クロス確認済み）。
  *
  * 既存の`src/data/competition-rates/chiba.ts`（倍率パイプライン）とquota・
  * applicantsConfirmed（同ファイルのfinalApplicantsに相当）が独立した情報源から取得したにも
  * かかわらず完全一致することを確認済み（例: 千葉普通科quota240/applicants331・
- * 千葉女子普通科quota240/applicants234・検見川普通科quota320/applicants514）——これは
+ * 千葉女子普通科quota240/applicants234・検見川普通科quota320/applicants514・
+ * 船橋普通科quota320/applicants618・薬園台普通科quota280/applicants480）——これは
  * 段階台帳が既存データと矛盾しない独立した裏取りになっている。
  *
  * ⚠️新規フィールドfinalPassers（入学許可候補者数）は既存のどのデータセットにも無い情報。
- * 千葉工業工業化学科のようにtestTakersConfirmed(38)<finalPassers(40)となる逆転レコードが
- * 存在するが、これは資料の印字値をそのまま転記した結果であり（欠員補充等で quota まで
- * 合格者を充足する運用と推測されるが、推測は本文コメントに留め独自の補正はしない＝Y-0）、
- * 数値自体は原資料どおり正確に転記している。
+ * 千葉工業工業化学科・市川工業建築科のようにtestTakersConfirmed<finalPassersとなる逆転
+ * レコードが複数存在するが、これは資料の印字値をそのまま転記した結果であり（欠員補充等で
+ * quotaまで合格者を充足する運用と推測されるが、推測は本文コメントに留め独自の補正はしない
+ * ＝Y-0）、数値自体は原資料どおり正確に転記している。
  *
- * coverage='partial'。残り8頁（学校番号26以降の県立全日制・県立定時制・市立高校等）は
+ * coverage='partial'。残り7頁（学校番号54以降の県立全日制・県立定時制・市立高校等）は
  * 未収録（Y-0憲法③正直にスキップ）。
  */
 
@@ -33,16 +35,16 @@ export const CHIBA_STAGE_LEDGER: PrefectureStageLedgerFile = {
   sources: [
     {
       url: 'https://www.pref.chiba.lg.jp/kyouiku/shidou/press/2025/documents/r8kyokaippan.pdf',
-      docTitle: '千葉県教育委員会 令和8年度公立高等学校一般入学者選抜等入学許可候補者数一覧＜その1＞（1頁目）',
+      docTitle: '千葉県教育委員会 令和8年度公立高等学校一般入学者選抜等入学許可候補者数一覧＜その1＞＜その2＞（1〜2頁目）',
       fiscalYear: '令和8年度（2026年度）',
       fetchedAt: '2026-09-09',
     },
   ],
   coverage: {
     status: 'partial',
-    includedDepartments: ['県立全日制（1頁目・学校番号1〜25・35レコード）'],
-    pendingDepartments: ['県立全日制の残り（2〜9頁目・学校番号26以降）', '県立定時制', '市立高校等'],
-    note: '全9頁のうち1頁目のみパイロット収集。quota/applicantsConfirmedは既存competition-rates/chiba.tsと独立に完全一致確認済み。',
+    includedDepartments: ['県立全日制（1〜2頁目・学校番号1〜53・70レコード）'],
+    pendingDepartments: ['県立全日制の残り（3〜9頁目・学校番号54以降）', '県立定時制', '市立高校等'],
+    note: '全9頁のうち1〜2頁目のみパイロット収集。quota/applicantsConfirmedは既存competition-rates/chiba.tsと独立に完全一致確認済み。',
   },
   records: [
     { schoolName: '千葉', department: '普通科', quota: 240, applicantsConfirmed: 331, testTakersConfirmed: 321, finalPassers: 240 },
@@ -80,5 +82,41 @@ export const CHIBA_STAGE_LEDGER: PrefectureStageLedgerFile = {
     { schoolName: '八千代西', department: '普通科', quota: 80, applicantsConfirmed: 61, testTakersConfirmed: 60, finalPassers: 60 },
     { schoolName: '津田沼', department: '普通科', quota: 320, applicantsConfirmed: 393, testTakersConfirmed: 388, finalPassers: 320 },
     { schoolName: '実籾', department: '普通科', quota: 320, applicantsConfirmed: 364, testTakersConfirmed: 361, finalPassers: 320 },
+    // --- 2頁目（学校番号26〜53） ---
+    { schoolName: '船橋', department: '普通科', quota: 320, applicantsConfirmed: 618, testTakersConfirmed: 597, finalPassers: 320 },
+    { schoolName: '船橋', department: '理数科', quota: 40, applicantsConfirmed: 88, testTakersConfirmed: 82, finalPassers: 40 },
+    { schoolName: '薬園台', department: '普通科', quota: 280, applicantsConfirmed: 480, testTakersConfirmed: 475, finalPassers: 280 },
+    { schoolName: '薬園台', department: '園芸科', quota: 40, applicantsConfirmed: 47, testTakersConfirmed: 47, finalPassers: 40 },
+    { schoolName: '船橋東', department: '普通科', quota: 320, applicantsConfirmed: 451, testTakersConfirmed: 448, finalPassers: 320 },
+    { schoolName: '船橋啓明', department: '普通科', quota: 320, applicantsConfirmed: 333, testTakersConfirmed: 328, finalPassers: 320 },
+    { schoolName: '船橋芝山', department: '普通科', quota: 320, applicantsConfirmed: 446, testTakersConfirmed: 445, finalPassers: 320 },
+    { schoolName: '船橋二和', department: '普通科', quota: 280, applicantsConfirmed: 296, testTakersConfirmed: 296, finalPassers: 280 },
+    { schoolName: '船橋古和釜', department: '普通科', quota: 200, applicantsConfirmed: 193, testTakersConfirmed: 191, finalPassers: 188 },
+    { schoolName: '船橋法典', department: '普通科', quota: 200, applicantsConfirmed: 201, testTakersConfirmed: 201, finalPassers: 200 },
+    { schoolName: '船橋豊富', department: '普通科', quota: 80, applicantsConfirmed: 81, testTakersConfirmed: 78, finalPassers: 78 },
+    { schoolName: '船橋北', department: '普通科', quota: 160, applicantsConfirmed: 94, testTakersConfirmed: 94, finalPassers: 94 },
+    { schoolName: '市川工業', department: '機械科', quota: 80, applicantsConfirmed: 79, testTakersConfirmed: 78, finalPassers: 78 },
+    { schoolName: '市川工業', department: '電気科', quota: 80, applicantsConfirmed: 82, testTakersConfirmed: 82, finalPassers: 80 },
+    { schoolName: '市川工業', department: '建築科', quota: 40, applicantsConfirmed: 30, testTakersConfirmed: 30, finalPassers: 33 },
+    { schoolName: '市川工業', department: 'インテリア科', quota: 40, applicantsConfirmed: 47, testTakersConfirmed: 47, finalPassers: 40 },
+    { schoolName: '国府台', department: '普通科', quota: 320, applicantsConfirmed: 373, testTakersConfirmed: 370, finalPassers: 320 },
+    { schoolName: '国分', department: '普通科', quota: 320, applicantsConfirmed: 420, testTakersConfirmed: 415, finalPassers: 320 },
+    { schoolName: '行徳', department: '普通科', quota: 120, applicantsConfirmed: 103, testTakersConfirmed: 101, finalPassers: 100 },
+    { schoolName: '市川東', department: '普通科', quota: 320, applicantsConfirmed: 328, testTakersConfirmed: 326, finalPassers: 320 },
+    { schoolName: '市川昴', department: '普通科', quota: 320, applicantsConfirmed: 320, testTakersConfirmed: 319, finalPassers: 319 },
+    { schoolName: '市川南', department: '普通科', quota: 280, applicantsConfirmed: 281, testTakersConfirmed: 281, finalPassers: 280 },
+    { schoolName: '浦安', department: '普通科', quota: 200, applicantsConfirmed: 170, testTakersConfirmed: 166, finalPassers: 165 },
+    { schoolName: '浦安南', department: '普通科', quota: 120, applicantsConfirmed: 62, testTakersConfirmed: 62, finalPassers: 61 },
+    { schoolName: '鎌ヶ谷', department: '普通科', quota: 320, applicantsConfirmed: 435, testTakersConfirmed: 435, finalPassers: 320 },
+    { schoolName: '鎌ヶ谷西', department: '普通科', quota: 160, applicantsConfirmed: 172, testTakersConfirmed: 172, finalPassers: 160 },
+    { schoolName: '松戸', department: '普通科', quota: 200, applicantsConfirmed: 223, testTakersConfirmed: 221, finalPassers: 200 },
+    { schoolName: '松戸', department: '芸術科', quota: 40, applicantsConfirmed: 44, testTakersConfirmed: 44, finalPassers: 40 },
+    { schoolName: '小金', department: '総合学科', quota: 320, applicantsConfirmed: 598, testTakersConfirmed: 595, finalPassers: 320 },
+    { schoolName: '松戸国際', department: '普通科', quota: 200, applicantsConfirmed: 219, testTakersConfirmed: 218, finalPassers: 200 },
+    { schoolName: '松戸国際', department: '国際教養科', quota: 120, applicantsConfirmed: 113, testTakersConfirmed: 112, finalPassers: 119 },
+    { schoolName: '松戸六実', department: '普通科', quota: 320, applicantsConfirmed: 444, testTakersConfirmed: 442, finalPassers: 320 },
+    { schoolName: '松戸向陽', department: '普通科', quota: 160, applicantsConfirmed: 182, testTakersConfirmed: 181, finalPassers: 160 },
+    { schoolName: '松戸向陽', department: '福祉教養科', quota: 40, applicantsConfirmed: 40, testTakersConfirmed: 40, finalPassers: 40 },
+    { schoolName: '松戸馬橋', department: '普通科', quota: 320, applicantsConfirmed: 361, testTakersConfirmed: 360, finalPassers: 320 },
   ],
 };

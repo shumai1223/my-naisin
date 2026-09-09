@@ -982,7 +982,15 @@ Enterprise年額¥100万〜・実提示3点／Comiru向けアドオン型¥300/�
 無い新規情報**で、既存`competition-rates/chiba.ts`のquota/finalApplicantsと独立した情報源
 にもかかわらず完全一致することをjestで機械的に突合済み（相互裏取り成功）。coverage='partial'
 （全9頁中1頁目のみ・残り8頁は次回以降）。tsc実exit0・jestフルスイート518suites7387tests
-green。次はchiba残り8頁の収集、または他県への横展開のいずれかを次回セッションで判断する。
+green。
+
+**2026-09-09続き（2頁目追加）**: chiba 2頁目（学校番号26〜53・35レコード）を追加収集し
+累計70レコードに到達。船橋普通科quota320/applicants618、薬園台普通科quota280/applicants480
+等、既存competition-rates/chiba.tsとの独立突合も引き続き完全一致（jest突合の閾値を
+matched≥60に引き上げて再検証・全て通過）。市川工業建築科でもtestTakersConfirmed(30)<
+finalPassers(33)という1頁目と同型の逆転レコードを確認（欠員補充の推測は本文コメントに
+留めるのみ）。tsc実exit0・jestフルスイート518suites7387tests green。次はchiba残り7頁
+（学校番号54以降）の収集、または他県への横展開のいずれかを次回セッションで判断する。
 | 8 | **★出典ロケータ** | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
 | 9 | 残り物 | T-Y11B 未9項目 / T-SS1 未5項目 / T-Y11C-4 の yamanashi 20件・yamaguchi 5件 | 10〜20h |
 
