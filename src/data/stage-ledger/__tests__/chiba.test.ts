@@ -3,16 +3,17 @@ import { CHIBA_STAGE_LEDGER } from '../chiba';
 import { COMPETITION_RATE_BY_PREFECTURE } from '@/data/competition-rates';
 
 /**
- * T-Y11F §5順序#7 DoD検証（千葉県・段階台帳パイロット・175レコード）:
+ * T-Y11F §5順序#7 DoD検証（千葉県・段階台帳・「1．県立全日制」区分176レコード完全収録）:
  * ①レコードの不変条件（quota>0等）②既存の倍率パイプライン（competition-rates/chiba.ts）の
  * quota/finalApplicantsと、段階台帳のquota/applicantsConfirmedが独立した情報源にも
- * かかわらず一致することを機械的に突合する（相互裏取り）。
+ * かかわらず一致することを機械的に突合する（相互裏取り）③公表資料の「県立全日制 合計」行との
+ * 完全突合（DoDの本体・176レコード全数を対象にした唯一の確定的検証）。
  */
-describe('千葉県 段階台帳 パイロット（T-Y11F §5順序#7）', () => {
-  const { records } = CHIBA_STAGE_LEDGER;
+describe('千葉県 段階台帳（T-Y11F §5順序#7・県立全日制区分は完全収録）', () => {
+  const { records, officialSubtotals } = CHIBA_STAGE_LEDGER;
 
-  it('取り込み件数は175レコード（1〜5頁目）', () => {
-    expect(records).toHaveLength(175);
+  it('取り込み件数は176レコード（1〜6頁目・県立全日制の全校）', () => {
+    expect(records).toHaveLength(176);
   });
 
   it('quota/applicantsConfirmed/testTakersConfirmed/finalPassersはいずれも0より大きい（不変条件）', () => {
@@ -30,10 +31,17 @@ describe('千葉県 段階台帳 パイロット（T-Y11F §5順序#7）', () =>
     }
   });
 
-  it('sumStageLedgerが175校分の合計を返す', () => {
+  it('176レコード全数の機械集計が公表資料の「県立全日制 合計」と完全一致する', () => {
+    if (!officialSubtotals) throw new Error('officialSubtotals が定義されていません');
+    const subtotal = officialSubtotals.find((s) => s.label === '県立全日制 合計');
+    if (!subtotal) throw new Error('officialSubtotals に "県立全日制 合計" が見つかりません');
+
     const sums = sumStageLedger(records);
-    expect(sums.schoolCount).toBe(175);
-    expect(sums.quota).toBeGreaterThan(0);
+    expect(sums.schoolCount).toBe(176);
+    expect(sums.quota).toBe(subtotal.quota);
+    expect(sums.applicantsConfirmed).toBe(subtotal.applicantsConfirmed);
+    expect(sums.testTakersConfirmed).toBe(subtotal.testTakersConfirmed);
+    expect(sums.finalPassers).toBe(subtotal.finalPassers);
   });
 
   it('既存の倍率パイプライン（competition-rates/chiba.ts）とquota/applicantsConfirmedが独立に一致する', () => {

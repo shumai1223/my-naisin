@@ -40,6 +40,14 @@ export interface StageLedgerSource {
   fetchedAt: string;
 }
 
+export interface StageLedgerOfficialSubtotal {
+  label: string;
+  quota: number;
+  applicantsConfirmed: number;
+  testTakersConfirmed: number;
+  finalPassers: number;
+}
+
 export interface PrefectureStageLedgerFile {
   prefectureCode: string;
   sources: StageLedgerSource[];
@@ -50,6 +58,8 @@ export interface PrefectureStageLedgerFile {
     note: string;
   };
   records: StageLedgerRecord[];
+  /** 公表資料の「合計」行（自己集計との突合対象・任意）。 */
+  officialSubtotals?: StageLedgerOfficialSubtotal[];
 }
 
 /** records群の合計（都道府県非依存の純粋集計）。 */

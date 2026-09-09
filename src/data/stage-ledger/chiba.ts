@@ -1,17 +1,15 @@
 import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
 
 /**
- * 千葉県 段階台帳（T-Y11F §5順序#7・パイロット1県目・全9頁中1〜2頁目）。
+ * 千葉県 段階台帳（T-Y11F §5順序#7・パイロット1県目・「1．県立全日制」区分は完全収録）。
  *
  * 一次ソース: 千葉県教育委員会「令和8年度 公立高等学校 一般入学者選抜等 入学許可候補者数
- * 一覧＜その１〉〜＜その５＞」（特別入学者選抜及び地域連携アクティブスクールの入学者選抜を
- * 含む・全9頁）のうち1頁目「1．県立全日制」（学校番号1〜25・35レコード）・2頁目（学校番号
- * 26〜53・35レコード）・3頁目（学校番号54〜77・35レコード）・4頁目（学校番号78〜98・
- * 35レコード。学校番号81は欠番）・5頁目（学校番号99〜120・35レコード）。
+ * 一覧＜その１〉〜＜その６＞」（特別入学者選抜及び地域連携アクティブスクールの入学者選抜を
+ * 含む・全9頁）のうち1〜6頁目「1．県立全日制」（学校番号1〜121・176レコード）。
  * https://www.pref.chiba.lg.jp/kyouiku/shidou/press/2025/documents/r8kyokaippan.pdf
  *
  * ⚠️pdftotextは数値は抽出できたが学校名・学科名のラベルが欠落（他県で頻出のフォント欠落と
- * 同型）のため、pdftoppm 200〜300dpiのビジョン解析で全175レコードを転記した（PIL crop
+ * 同型）のため、pdftoppm 200〜300dpiのビジョン解析で全176レコードを転記した（PIL crop
  * による部分拡大で複数回クロス確認済み）。3頁目は東葛飾のように募集定員(320)と募集人員(240)
  * が異なる校があり、既存`competition-rates/chiba.ts`と同じ規律で募集人員をquotaに採用した。
  * 東金国際教養科（4頁目）・茂原樟陽環境化学科・木更津東普通科（5頁目）のように、志願者数・
@@ -31,7 +29,10 @@ import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
  * quotaまで合格者を充足する運用と推測されるが、推測は本文コメントに留め独自の補正はしない
  * ＝Y-0）、数値自体は原資料どおり正確に転記している。
  *
- * coverage='partial'。残り4頁（学校番号121以降の県立全日制・県立定時制・市立高校等）は
+ * 6頁目末尾の「県立全日制 合計」行（quota26,960・applicantsConfirmed29,594・
+ * testTakersConfirmed29,359・finalPassers25,085）と、1〜6頁の全176レコードの機械集計が
+ * 完全一致した（初回転記で一致・再修正なし）——**「1．県立全日制」区分についてcoverage=
+ * 'complete'に格上げ**。残る7〜9頁目（市立高校・県立定時制等の別区分）は次のセクションのため
  * 未収録（Y-0憲法③正直にスキップ）。
  */
 
@@ -40,16 +41,16 @@ export const CHIBA_STAGE_LEDGER: PrefectureStageLedgerFile = {
   sources: [
     {
       url: 'https://www.pref.chiba.lg.jp/kyouiku/shidou/press/2025/documents/r8kyokaippan.pdf',
-      docTitle: '千葉県教育委員会 令和8年度公立高等学校一般入学者選抜等入学許可候補者数一覧＜その1＞〜＜その5＞（1〜5頁目）',
+      docTitle: '千葉県教育委員会 令和8年度公立高等学校一般入学者選抜等入学許可候補者数一覧＜その1＞〜＜その6＞（1〜6頁目）',
       fiscalYear: '令和8年度（2026年度）',
       fetchedAt: '2026-09-09',
     },
   ],
   coverage: {
-    status: 'partial',
-    includedDepartments: ['県立全日制（1〜5頁目・学校番号1〜120・175レコード）'],
-    pendingDepartments: ['県立全日制の残り（6〜9頁目・学校番号121以降）', '県立定時制', '市立高校等'],
-    note: '全9頁のうち1〜5頁目のみパイロット収集。quota/applicantsConfirmedは既存competition-rates/chiba.tsと独立に完全一致確認済み。',
+    status: 'complete',
+    includedDepartments: ['県立全日制（1〜6頁目・学校番号1〜121・176レコード）'],
+    pendingDepartments: ['県立定時制（7〜9頁目相当）', '市立高校等'],
+    note: '「1．県立全日制」区分は完全収録。「県立全日制 合計」（quota26,960・applicantsConfirmed29,594・testTakersConfirmed29,359・finalPassers25,085）と機械集計が完全一致。県立定時制・市立高校は別区分のため未収録。',
   },
   records: [
     { schoolName: '千葉', department: '普通科', quota: 240, applicantsConfirmed: 331, testTakersConfirmed: 321, finalPassers: 240 },
@@ -231,5 +232,10 @@ export const CHIBA_STAGE_LEDGER: PrefectureStageLedgerFile = {
     { schoolName: '京葉', department: '普通科', quota: 120, applicantsConfirmed: 121, testTakersConfirmed: 121, finalPassers: 120 },
     { schoolName: '市原緑', department: '普通科', quota: 120, applicantsConfirmed: 97, testTakersConfirmed: 97, finalPassers: 97 },
     { schoolName: '姉崎', department: '普通科', quota: 120, applicantsConfirmed: 115, testTakersConfirmed: 115, finalPassers: 115 },
+    // --- 6頁目（学校番号121・「1．県立全日制」区分の最終校） ---
+    { schoolName: '市原八幡', department: '普通科', quota: 200, applicantsConfirmed: 199, testTakersConfirmed: 199, finalPassers: 195 },
+  ],
+  officialSubtotals: [
+    { label: '県立全日制 合計', quota: 26_960, applicantsConfirmed: 29_594, testTakersConfirmed: 29_359, finalPassers: 25_085 },
   ],
 };
