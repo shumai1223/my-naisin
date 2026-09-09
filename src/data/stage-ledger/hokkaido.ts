@@ -2,7 +2,7 @@ import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
 
 /**
  * 北海道 段階台帳（T-Y11F §5順序#7・28県目・全日制coverage='partial'・空知29＋石狩57＋
- * 市立札幌9＋後志18＋胆振27＋日高7＋渡島・普通教育のみ10＝157レコードで着手）。
+ * 市立札幌9＋後志18＋胆振27＋日高7＋渡島29（普通10＋専門/総合19）＋檜山4＝180レコードで着手）。
  *
  * 一次ソース: 北海道教育委員会「R8入学者選抜状況報告書 §3 学校別受検者数及び合格者数」
  * （令和8年度＝2026年度入学者選抜・全14頁・管内ごとに1頁）。
@@ -69,6 +69,13 @@ import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
  * 学科10レコードのみ着手（専門教育を主とする学科及び総合学科20レコードは次回以降に追加）。
  * 渡島・普通10レコードも例外0件だった。函館中部・函館西・市立函館の3校は倍率1.0超で
  * quota=finalPassers（定員ちょうどの合格）となる典型パターン。
+ *
+ * ⚠️渡島・専門教育を主とする学科及び総合学科追加分（19レコード・当初見積り20から
+ * 実測で1減。既存パイプラインの記録も19件で一致）で新たな例外3件（いずれも+1の追加合格者型）:
+ * 函館中部「理数」（合格40>受検39）・函館工業「環境土木」（合格40>受検39）・函館商業
+ * 「会計ビジネス」（合格39>受検38）。これで渡島地区は普通10＋専門/総合19＝29レコードで
+ * 完結。檜山地区（4レコード・江差/上ノ国/奥尻の普通3校＋檜山北総合）は例外0件のクリーンな
+ * 区分だった。
  */
 export const HOKKAIDO_STAGE_LEDGER: PrefectureStageLedgerFile = {
   prefectureCode: 'hokkaido',
@@ -109,6 +116,12 @@ export const HOKKAIDO_STAGE_LEDGER: PrefectureStageLedgerFile = {
       fiscalYear: '令和8年度（2026年度）',
       fetchedAt: '2026-09-10',
     },
+    {
+      url: 'https://www.dokyoi.pref.hokkaido.lg.jp/fs/1/3/1/7/8/5/5/0/_/05_p9-p22.pdf',
+      docTitle: '北海道教育委員会 R8入学者選抜状況報告書「§3 学校別受検者数及び合格者数」（p.16・渡島地区〈専門教育を主とする学科及び総合学科〉＋檜山地区）',
+      fiscalYear: '令和8年度（2026年度）',
+      fetchedAt: '2026-09-10',
+    },
   ],
   coverage: {
     status: 'partial',
@@ -119,11 +132,10 @@ export const HOKKAIDO_STAGE_LEDGER: PrefectureStageLedgerFile = {
       '全日制・後志地区（普通教育を主とする学科6レコード＋専門教育を主とする学科及び総合学科12レコード＝18レコード）',
       '全日制・胆振地区（普通教育を主とする学科11レコード＋専門教育を主とする学科及び総合学科16レコード＝27レコード）',
       '全日制・日高地区（普通教育を主とする学科4レコード＋専門教育を主とする学科及び総合学科3レコード＝7レコード）',
-      '全日制・渡島地区・普通教育を主とする学科のみ（10レコード）',
+      '全日制・渡島地区（普通教育を主とする学科10レコード＋専門教育を主とする学科及び総合学科19レコード＝29レコードで完結）',
+      '全日制・檜山地区（普通教育を主とする学科3レコード＋総合学科1レコード＝4レコードで完結）',
     ],
     pendingDepartments: [
-      '全日制・渡島地区・専門教育を主とする学科及び総合学科（函館中部理数・大野農業3学科・函館工業5学科・函館商業4学科・福島商業・八雲総合ビジネス・函館水産4学科・森総合の20レコード規模）',
-      '全日制・檜山地区',
       '全日制・上川地区',
       '全日制・留萌地区',
       '全日制・宗谷地区',
@@ -135,7 +147,7 @@ export const HOKKAIDO_STAGE_LEDGER: PrefectureStageLedgerFile = {
       '鵡川「連携型」・えりも「連携型」（募集人員のみでapplicantsConfirmed相当の出願者数列を持たない別スキーマのため恒久的にスコープ外）',
       '定時制課程（他県と同じ理由で恒久的にスコープ外）',
     ],
-    note: '全14管内のうち空知（29）＋石狩・道立のみ（57）＋市立札幌（9）＋後志（18）＋胆振（27）＋日高（7）＋渡島・普通教育のみ（10）＝157レコードに着手。quota・applicantsConfirmedは既存パイプライン`competition-rates/hokkaido.ts`の該当レコードをそのまま再利用し、testTakersConfirmed（第1次受検者数＋第2次受検者数）・finalPassers（入学者数＝第1次合格者数＋第2次合格者数）を「§3学校別受検者数及び合格者数」p.9-15から新規転記した。推薦枠は一般枠と完全に独立したクオータ（秋田のような推薦落選者の一般転入は無い）のためスコープ外。既知の例外19件（第2次募集による新規応募者分でtestTakersConfirmedがapplicantsConfirmedを上回る12件、追加合格者と推測されるfinalPassers>testTakersConfirmed7件、いずれも空知〜胆振分）はいずれも小差（最大+6）。市立札幌9件・日高7件・渡島普通10件は例外0件のクリーンな区分だった。連携型（鵡川・えりも）は募集人員のみの別スキーマのため恒久的にスコープ外。渡島の専門教育を主とする学科及び総合学科（20レコード規模）は次回以降に追加する。本資料はさらに9管内分＋渡島残部を残しており、既存パイプラインと同じく段階的に追加する。',
+    note: '全14管内のうち空知（29）＋石狩・道立のみ（57）＋市立札幌（9）＋後志（18）＋胆振（27）＋日高（7）＋渡島（29・完結）＋檜山（4・完結）＝180レコードに着手。quota・applicantsConfirmedは既存パイプライン`competition-rates/hokkaido.ts`の該当レコードをそのまま再利用し、testTakersConfirmed（第1次受検者数＋第2次受検者数）・finalPassers（入学者数＝第1次合格者数＋第2次合格者数）を「§3学校別受検者数及び合格者数」p.9-16から新規転記した。推薦枠は一般枠と完全に独立したクオータ（秋田のような推薦落選者の一般転入は無い）のためスコープ外。既知の例外22件（第2次募集による新規応募者分でtestTakersConfirmedがapplicantsConfirmedを上回る12件、追加合格者と推測されるfinalPassers>testTakersConfirmed10件）はいずれも小差（最大+6）。市立札幌9件・日高7件・渡島普通10件・檜山4件は例外0件のクリーンな区分だった。連携型（鵡川・えりも）は募集人員のみの別スキーマのため恒久的にスコープ外。本資料はさらに7管内分（上川/留萌/宗谷/オホーツク/十勝/釧路/根室）を残しており、既存パイプラインと同じく段階的に追加する。',
   },
   records: [
     { schoolName: '岩見沢東', department: '普通', quota: 160, applicantsConfirmed: 134, testTakersConfirmed: 130, finalPassers: 128 },
@@ -295,5 +307,28 @@ export const HOKKAIDO_STAGE_LEDGER: PrefectureStageLedgerFile = {
     { schoolName: '長万部', department: '普通', quota: 40, applicantsConfirmed: 24, testTakersConfirmed: 24, finalPassers: 24 },
     { schoolName: '市立函館', department: '普通', quota: 200, applicantsConfirmed: 283, testTakersConfirmed: 231, finalPassers: 200 },
     { schoolName: '知内', department: '普通', quota: 80, applicantsConfirmed: 71, testTakersConfirmed: 71, finalPassers: 71 },
+    { schoolName: '函館中部', department: '理数', quota: 40, applicantsConfirmed: 39, testTakersConfirmed: 39, finalPassers: 40 },
+    { schoolName: '大野農業', department: '農業科学', quota: 40, applicantsConfirmed: 15, testTakersConfirmed: 15, finalPassers: 15 },
+    { schoolName: '大野農業', department: '園芸福祉', quota: 40, applicantsConfirmed: 18, testTakersConfirmed: 16, finalPassers: 16 },
+    { schoolName: '大野農業', department: '食品科学', quota: 40, applicantsConfirmed: 41, testTakersConfirmed: 26, finalPassers: 26 },
+    { schoolName: '函館工業', department: '電子機械', quota: 40, applicantsConfirmed: 50, testTakersConfirmed: 40, finalPassers: 40 },
+    { schoolName: '函館工業', department: '電気情報工学', quota: 40, applicantsConfirmed: 47, testTakersConfirmed: 39, finalPassers: 39 },
+    { schoolName: '函館工業', department: '建築', quota: 40, applicantsConfirmed: 51, testTakersConfirmed: 44, finalPassers: 40 },
+    { schoolName: '函館工業', department: '環境土木', quota: 40, applicantsConfirmed: 44, testTakersConfirmed: 39, finalPassers: 40 },
+    { schoolName: '函館工業', department: '工業化学', quota: 40, applicantsConfirmed: 43, testTakersConfirmed: 40, finalPassers: 40 },
+    { schoolName: '函館商業', department: '流通ビジネス', quota: 40, applicantsConfirmed: 51, testTakersConfirmed: 42, finalPassers: 40 },
+    { schoolName: '函館商業', department: '国際経済', quota: 40, applicantsConfirmed: 49, testTakersConfirmed: 41, finalPassers: 40 },
+    { schoolName: '函館商業', department: '会計ビジネス', quota: 40, applicantsConfirmed: 46, testTakersConfirmed: 38, finalPassers: 39 },
+    { schoolName: '函館商業', department: '情報処理', quota: 40, applicantsConfirmed: 56, testTakersConfirmed: 43, finalPassers: 40 },
+    { schoolName: '福島商業', department: '商業', quota: 40, applicantsConfirmed: 15, testTakersConfirmed: 15, finalPassers: 15 },
+    { schoolName: '八雲', department: '総合ビジネス', quota: 40, applicantsConfirmed: 5, testTakersConfirmed: 5, finalPassers: 5 },
+    { schoolName: '函館水産', department: '海洋技術', quota: 40, applicantsConfirmed: 33, testTakersConfirmed: 26, finalPassers: 26 },
+    { schoolName: '函館水産', department: '食品創造', quota: 40, applicantsConfirmed: 36, testTakersConfirmed: 20, finalPassers: 19 },
+    { schoolName: '函館水産', department: '機関工学', quota: 40, applicantsConfirmed: 38, testTakersConfirmed: 30, finalPassers: 30 },
+    { schoolName: '森', department: '総合', quota: 40, applicantsConfirmed: 31, testTakersConfirmed: 30, finalPassers: 30 },
+    { schoolName: '江差', department: '普通', quota: 80, applicantsConfirmed: 35, testTakersConfirmed: 34, finalPassers: 34 },
+    { schoolName: '上ノ国', department: '普通', quota: 40, applicantsConfirmed: 26, testTakersConfirmed: 25, finalPassers: 25 },
+    { schoolName: '奥尻', department: '普通', quota: 40, applicantsConfirmed: 11, testTakersConfirmed: 10, finalPassers: 10 },
+    { schoolName: '檜山北', department: '総合', quota: 80, applicantsConfirmed: 55, testTakersConfirmed: 55, finalPassers: 54 },
   ],
 };
