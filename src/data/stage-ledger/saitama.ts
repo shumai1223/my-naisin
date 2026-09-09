@@ -1,7 +1,8 @@
 import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
 
 /**
- * 埼玉県 段階台帳（T-Y11F §5順序#7・2県目パイロット・「全日制 普通科」区分は完全収録）。
+ * 埼玉県 段階台帳（T-Y11F §5順序#7・2県目パイロット・「全日制 普通科」＋「農業に関する学科」
+ * 区分は完全収録）。
  *
  * 一次ソース: 埼玉県教育委員会「令和8年度埼玉県公立高等学校入学者選抜における入学許可候補者数・
  * 欠員補充人員（令和8年3月6日現在）」（全10頁）1〜2頁目「全日制 普通科」（102レコード）。
@@ -30,7 +31,21 @@ import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
  * 2頁目末尾の「普通科 計」行（quota25,517・testTakersConfirmed27,593・finalPassers24,556）と
  * 102レコード全数の機械集計が完全一致した——**「全日制 普通科」区分についてcoverage=
  * 'complete'に格上げ**（applicantsConfirmedはこの資料に印字が無いため参考値27,668のまま。
- * 詳細は`officialSubtotals`のコメント参照）。残る3〜10頁目（専門学科・総合学科）は未収録。
+ * 詳細は`officialSubtotals`のコメント参照）。
+ *
+ * 3頁目「全日制 専門学科　農業に関する学科」（熊谷農業・児玉・杉戸農業・秩父農工科学・鳩ケ谷
+ * 〈園芸デザイン科〉・羽生実業の6校18レコード）も追加し、頁末尾の「農業科 計」
+ * （quota797・testTakersConfirmed633・finalPassers633）と18レコード全数の機械集計が
+ * 完全一致した。残る4〜10頁目（工業・商業等の専門学科・総合学科）は未収録。
+ *
+ * ⚠️既存`competition-rates/saitama.ts`とのapplicantsConfirmed突合テストで羽生実業・
+ * 農業経済科だけ不一致（本ファイル23 vs 既存24）を検出した。本資料のB列（実受検者数23）を
+ * そのままapplicantsConfirmedに転記してしまった単純な列取り違えで、正しくは既存パイプライン
+ * 側の値24を再利用すべきだった（testTakersConfirmed=23・finalPassers=23は本資料どおりで
+ * 正しい）。24に修正済み。この1件を除く17レコードはapplicantsConfirmedとtestTakersConfirmed
+ * が同値（欠席者が実質0）だったため、コピペ元を取り違えても値が偶然一致し続け、
+ * 突合テストを1件通すまで気づけなかった——「値が一致するから検算不要」ではなく
+ * 「別ソースを本当に参照したか」を毎回機械的に確認する必要があるという教訓。
  *
  * ⚠️低解像度(150dpi)での初回ビジョン読み取りで「桶川」を「滑川」、「桶川西」を「滑川西」、
  * 「越生翔桜」を「越生梅林」、「越ケ谷」を「越ヶ谷」（半角カタカナ「ケ」と「ヶ」の誤認）と
@@ -57,16 +72,16 @@ export const SAITAMA_STAGE_LEDGER: PrefectureStageLedgerFile = {
   sources: [
     {
       url: 'https://www.pref.saitama.lg.jp/documents/268192/r8nyugakukyokakouhosya0306_4.pdf',
-      docTitle: '埼玉県教育委員会 令和8年度埼玉県公立高等学校入学者選抜における入学許可候補者数・欠員補充人員（令和8年3月6日現在）1〜2頁目（全日制 普通科）',
+      docTitle: '埼玉県教育委員会 令和8年度埼玉県公立高等学校入学者選抜における入学許可候補者数・欠員補充人員（令和8年3月6日現在）1〜3頁目（全日制 普通科＋農業に関する学科）',
       fiscalYear: '令和8年度（2026年度）',
       fetchedAt: '2026-09-09',
     },
   ],
   coverage: {
     status: 'complete',
-    includedDepartments: ['全日制普通科（1〜2頁目・102レコード）'],
-    pendingDepartments: ['専門学科（3頁目以降）', '総合学科'],
-    note: '「全日制 普通科」区分を完全収録。「普通科 計」（quota25,517/testTakersConfirmed27,593/finalPassers24,556）と102レコード全数の機械集計が完全一致。quota/applicantsConfirmedは既存competition-rates/saitama.ts（同一quotaを別資料で確認済み）を再利用し、testTakersConfirmed/finalPassersのみ本資料から新規転記。',
+    includedDepartments: ['全日制普通科（1〜2頁目・102レコード）', '農業に関する学科（3頁目・18レコード）'],
+    pendingDepartments: ['工業・商業等の専門学科（4頁目以降）', '総合学科'],
+    note: '「全日制 普通科」「農業に関する学科」の2区分を完全収録。「普通科 計」（quota25,517/testTakersConfirmed27,593/finalPassers24,556）・「農業科 計」（quota797/testTakersConfirmed633/finalPassers633）といずれも機械集計が完全一致。quota/applicantsConfirmedは既存competition-rates/saitama.ts（同一quotaを別資料で確認済み）を再利用し、testTakersConfirmed/finalPassersのみ本資料から新規転記。',
   },
   records: [
     { schoolName: '上尾', department: '普通科', quota: 238, applicantsConfirmed: 316, testTakersConfirmed: 315, finalPassers: 244 },
@@ -172,11 +187,34 @@ export const SAITAMA_STAGE_LEDGER: PrefectureStageLedgerFile = {
     { schoolName: '市立大宮北', department: '普通科', quota: 280, applicantsConfirmed: 342, testTakersConfirmed: 342, finalPassers: 281 },
     { schoolName: '川口市立', department: '普通科', quota: 240, applicantsConfirmed: 382, testTakersConfirmed: 380, finalPassers: 243 },
     { schoolName: '川口市立', department: 'スポーツ科学コース', quota: 80, applicantsConfirmed: 133, testTakersConfirmed: 133, finalPassers: 82 },
+    // --- 3頁目「全日制 専門学科」農業に関する学科（18レコード） ---
+    { schoolName: '熊谷農業', department: '食品科学科', quota: 40, applicantsConfirmed: 47, testTakersConfirmed: 47, finalPassers: 40 },
+    { schoolName: '熊谷農業', department: '生物生産工学科', quota: 79, applicantsConfirmed: 71, testTakersConfirmed: 71, finalPassers: 73 },
+    { schoolName: '熊谷農業', department: '生活技術科', quota: 40, applicantsConfirmed: 38, testTakersConfirmed: 38, finalPassers: 38 },
+    { schoolName: '熊谷農業', department: '生物生産技術科', quota: 80, applicantsConfirmed: 74, testTakersConfirmed: 74, finalPassers: 78 },
+    { schoolName: '児玉', department: '生物資源科', quota: 40, applicantsConfirmed: 27, testTakersConfirmed: 27, finalPassers: 27 },
+    { schoolName: '児玉', department: '環境デザイン科', quota: 40, applicantsConfirmed: 12, testTakersConfirmed: 12, finalPassers: 12 },
+    { schoolName: '杉戸農業', department: '生物生産工学科', quota: 40, applicantsConfirmed: 20, testTakersConfirmed: 20, finalPassers: 24 },
+    { schoolName: '杉戸農業', department: '園芸科', quota: 40, applicantsConfirmed: 41, testTakersConfirmed: 41, finalPassers: 40 },
+    { schoolName: '杉戸農業', department: '造園科', quota: 39, applicantsConfirmed: 36, testTakersConfirmed: 36, finalPassers: 36 },
+    { schoolName: '杉戸農業', department: '食品流通科', quota: 40, applicantsConfirmed: 39, testTakersConfirmed: 39, finalPassers: 39 },
+    { schoolName: '杉戸農業', department: '生活技術科', quota: 40, applicantsConfirmed: 44, testTakersConfirmed: 44, finalPassers: 40 },
+    { schoolName: '杉戸農業', department: '生物生産技術科', quota: 40, applicantsConfirmed: 39, testTakersConfirmed: 39, finalPassers: 39 },
+    { schoolName: '秩父農工科学', department: '農業科', quota: 40, applicantsConfirmed: 38, testTakersConfirmed: 38, finalPassers: 38 },
+    { schoolName: '秩父農工科学', department: '食品化学科', quota: 39, applicantsConfirmed: 11, testTakersConfirmed: 11, finalPassers: 11 },
+    { schoolName: '秩父農工科学', department: '森林科学科', quota: 40, applicantsConfirmed: 13, testTakersConfirmed: 13, finalPassers: 13 },
+    { schoolName: '鳩ケ谷', department: '園芸デザイン科', quota: 40, applicantsConfirmed: 36, testTakersConfirmed: 36, finalPassers: 38 },
+    { schoolName: '羽生実業', department: '園芸科', quota: 40, applicantsConfirmed: 24, testTakersConfirmed: 24, finalPassers: 24 },
+    { schoolName: '羽生実業', department: '農業経済科', quota: 40, applicantsConfirmed: 24, testTakersConfirmed: 23, finalPassers: 23 },
   ],
   officialSubtotals: [
     // ⚠️applicantsConfirmedはこの資料（3月6日版）には印字されていない（既存パイプライン由来の
     // 自己集計値27,668を参考値として置く。quota/testTakersConfirmed/finalPassersの3つだけが
     // この資料の印字済み「普通科 計」行と直接照合可能）。
     { label: '普通科 計', quota: 25_517, applicantsConfirmed: 27_668, testTakersConfirmed: 27_593, finalPassers: 24_556 },
+    // applicantsConfirmedはこの資料に印字が無いため、既存competition-rates/saitama.ts
+    // からの再利用値（各校finalApplicants）を機械集計した参考値（634）。羽生実業・農業経済科の
+    // 実受検者数(23)と偶然ほぼ一致するが別概念（普通科の27,668と同じ扱い）。
+    { label: '農業科 計', quota: 797, applicantsConfirmed: 634, testTakersConfirmed: 633, finalPassers: 633 },
   ],
 };
