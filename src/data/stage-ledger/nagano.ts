@@ -1,12 +1,17 @@
 import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
 
 /**
- * 長野県 段階台帳（T-Y11F §5順序#7・5県目・第1〜3通学区（北信・東信・南信地区）・全日制102レコード）。
+ * 長野県 段階台帳（T-Y11F §5順序#7・5県目・全4通学区・全日制129レコードで完結）。
  *
  * 一次ソース: 長野県教育委員会「令和8年度公立高等学校入学者後期選抜の入学予定者数をお知らせ
  * します」別紙1（2）学校別状況（3月19日公表・全7頁）の第1通学区（北信地区・別紙1の3頁目・
  * 26校37レコード）＋第2通学区（東信地区・別紙1の4頁目・18校25レコード）＋第3通学区
- * （南信地区・別紙1の5頁目・26校40レコード）。
+ * （南信地区・別紙1の5頁目・26校40レコード）＋第4通学区（中信地区・別紙1の6頁目・17校27
+ * レコード）。本文書（p.1）の概況欄に全日制課程の県全体値（受検者7,770名/入学予定者7,475名）
+ * が明記されており、4通学区の機械集計合算（testTakersConfirmed 2,299+1,758+1,975+1,738=7,770・
+ * finalPassers 2,236+1,699+1,937+1,603=7,475）と完全一致した（最上位の文書全体グランドトータル
+ * 検証）。定時制課程（p.7・634/97/95）と多部制・単位制（249/66/66）も概況欄の数値と一致することを
+ * 確認したが、既存パイプラインと同じ理由でスコープ外（全日制課程のみ収録）。
  * https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/20260319web1.pdf
  *
  * ⚠️既存の`competition-rates/nagano.ts`（倍率パイプライン）は**別の一次資料**（「入学者後期選抜
@@ -22,30 +27,35 @@ import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
  * 環境造園）」・長野商業「商業・会計（くくり募集）」・更級農業「地域園芸・植物活用・食農科学
  * （くくり募集）」・佐久平総合技術「農業（食料マネジメント・生物サービス・食農クリエイト）」）。
  *
- * ⚠️既知の例外（第1通学区）: 篠ノ井犀峡校・普通はapplicantsConfirmed（既存パイプライン再利用値）・
+ * ⚠️既知の例外（0件・第1通学区1件＋第4通学区4件＝計5件）: 篠ノ井犀峡校「普通」（quota33）・
+ * 木曽青峰「農業（森林環境）」（quota18）・木曽青峰「理数」（quota23）・大町岳陽「学究」
+ * （quota31）・白馬「普通」（quota29）はapplicantsConfirmed（既存パイプライン再利用値）・
  * testTakersConfirmed・finalPassersのすべてが0（受検者0名・入学予定者0名という実際の公表値）。
- * quota（募集人員33）自体は0より大きいためレコードとして収録するが、
- * 「0より大きい」不変条件はこの1件のみ例外として明示的に許容する。
+ * quota自体は0より大きいためレコードとして収録するが、「0より大きい」不変条件はこの5件のみ
+ * 例外として明示的に許容する。
  *
  * ⚠️既知の例外（新種・finalPassersがapplicantsConfirmed・testTakersConfirmedの両方を上回る・
- * 第1〜3通学区で計14件）: 第1通学区=須坂創成「工業（創造工学）」（test14→final15）・長野工業
+ * 全4通学区で計15件）: 第1通学区=須坂創成「工業（創造工学）」（test14→final15）・長野工業
  * 「機械工学」（test15→final16）。第2通学区=上田千曲「工業（電気）」（test13→final16）・
  * 佐久平総合技術「創造実践」（test22→final26）・野沢北「普通」（test158→final160）。第3通学区=
  * 岡谷工業「電気工学」（test5→final7）・岡谷工業「電子機械」（test6→final7）・伊那北「普通」
  * （test158→final161）・赤穂「普通」（test112→final114）・飯田「普通」（test192→final204・
  * 差12で最大）・飯田OIDE長姫「電子機械工学」（test15→final16）・飯田OIDE長姫「社会基盤工学」
  * （test13→final15）・飯田OIDE長姫「商業」（test29→final31）・下伊那農業「生物活用」
- * （test15→final16）。これまでのchiba/ibarakiで確認した「finalPassers>applicantsConfirmed」
- * パターンと同型だが、本件はtestTakersConfirmedとの比較でも同じレコードが該当する点が新規。
- * 一般選抜の受検者数に含まれない特別選抜（推薦等）合格者が入学予定者数に合算されるための
- * 差と推定される（他資料の既知パターンと同じ推定理由）。
+ * （test15→final16）。第4通学区=南安曇農業「生物工学」（test8→final9）。これまでのchiba/ibaraki
+ * で確認した「finalPassers>applicantsConfirmed」パターンと同型だが、本件はtestTakersConfirmed
+ * との比較でも同じレコードが該当する点が新規。一般選抜の受検者数に含まれない特別選抜（推薦等）
+ * 合格者が入学予定者数に合算されるための差と推定される（他資料の既知パターンと同じ推定理由）。
  *
  * 別紙1（3頁目）末尾の「第1通学区 合計」（quota2,623・testTakersConfirmed2,299・
  * finalPassers2,236）と37レコード全数の機械集計が3系列とも完全一致、（4頁目）末尾の
  * 「第2通学区 合計」（quota1,875・testTakersConfirmed1,758・finalPassers1,699）と25レコード
  * 全数の機械集計、（5頁目）末尾の「第3通学区 合計」（quota2,246・testTakersConfirmed1,975・
- * finalPassers1,937）と40レコード全数の機械集計もそれぞれ3系列とも完全一致した（いずれも
- * applicantsConfirmedはこの資料に印字が無いため対象外・既存パイプライン再利用値の参考集計のみ）。
+ * finalPassers1,937）と40レコード全数の機械集計、（6頁目）末尾の「第4通学区 合計」
+ * （quota2,063・testTakersConfirmed1,738・finalPassers1,603）と27レコード全数の機械集計も
+ * それぞれ3系列とも完全一致した（いずれもapplicantsConfirmedはこの資料に印字が無いため対象外・
+ * 既存パイプライン再利用値の参考集計のみ）。4通学区合算（quota8,807）も既存パイプラインが
+ * 自資料で確認済みの全県計quota8,807と完全一致。
  */
 
 export const NAGANO_STAGE_LEDGER: PrefectureStageLedgerFile = {
@@ -53,16 +63,16 @@ export const NAGANO_STAGE_LEDGER: PrefectureStageLedgerFile = {
   sources: [
     {
       url: 'https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/20260319web1.pdf',
-      docTitle: '長野県教育委員会 令和8年度公立高等学校入学者後期選抜の入学予定者数をお知らせします 別紙1（2）学校別状況 第1〜3通学区（北信・東信・南信地区）',
+      docTitle: '長野県教育委員会 令和8年度公立高等学校入学者後期選抜の入学予定者数をお知らせします 別紙1（2）学校別状況 全4通学区（北信・東信・南信・中信地区）',
       fiscalYear: '令和8年度（2026年度）',
       fetchedAt: '2026-09-09',
     },
   ],
   coverage: {
-    status: 'partial',
-    includedDepartments: ['全日制県立（第1通学区・北信地区・26校37レコード＋第2通学区・東信地区・18校25レコード＋第3通学区・南信地区・26校40レコード）'],
-    pendingDepartments: ['第4通学区（中信地区）の残り学校'],
-    note: '第1〜3通学区（北信・東信・南信地区・102レコード）まで完了。quotaは既存competition-rates/nagano.tsと全102件で完全一致（募集人員は試験日まで不変であることを確認）。applicantsConfirmedも既存パイプラインをそのまま再利用（本資料には志願者数列が存在しないため）。testTakersConfirmed/finalPassersのみ本資料から新規転記。篠ノ井犀峡校・普通のみapplicants/test/final全て0という既知の例外。finalPassersがapplicantsConfirmed・testTakersConfirmedの両方を上回る新種の既知例外が第1〜3通学区で計14件。別紙1末尾の「第1通学区 合計」（quota2,623/testTakers2,299/final2,236）・「第2通学区 合計」（quota1,875/testTakers1,758/final1,699）・「第3通学区 合計」（quota2,246/testTakers1,975/final1,937）と各レコード全数の機械集計が3系列とも完全一致。',
+    status: 'complete',
+    includedDepartments: ['全日制県立（第1通学区・北信地区・26校37レコード＋第2通学区・東信地区・18校25レコード＋第3通学区・南信地区・26校40レコード＋第4通学区・中信地区・17校27レコード＝129レコードで完結）'],
+    pendingDepartments: [],
+    note: '全4通学区（北信・東信・南信・中信地区・129レコード）完結。quotaは既存competition-rates/nagano.tsと全129件で完全一致（募集人員は試験日まで不変であることを確認）。applicantsConfirmedも既存パイプラインをそのまま再利用（本資料には志願者数列が存在しないため）。testTakersConfirmed/finalPassersのみ本資料から新規転記。篠ノ井犀峡校・普通/木曽青峰「農業（森林環境）」/木曽青峰「理数」/大町岳陽「学究」/白馬「普通」の5件はapplicants/test/final全て0という既知の例外。finalPassersがapplicantsConfirmed・testTakersConfirmedの両方を上回る新種の既知例外が全4通学区で計15件。別紙1末尾の「第1通学区 合計」（quota2,623/testTakers2,299/final2,236）・「第2通学区 合計」（quota1,875/testTakers1,758/final1,699）・「第3通学区 合計」（quota2,246/testTakers1,975/final1,937）・「第4通学区 合計」（quota2,063/testTakers1,738/final1,603）と各レコード全数の機械集計が3系列とも完全一致。さらに本文書p.1の概況欄が示す全日制課程の県全体値（受検者7,770名/入学予定者7,475名）とも4通学区合算が完全一致（文書全体グランドトータル検証）。',
   },
   records: [
     { schoolName: '飯山', department: '普通', quota: 56, applicantsConfirmed: 42, testTakersConfirmed: 42, finalPassers: 42 },
@@ -169,6 +179,34 @@ export const NAGANO_STAGE_LEDGER: PrefectureStageLedgerFile = {
     { schoolName: '下伊那農業', department: '生物活用', quota: 16, applicantsConfirmed: 15, testTakersConfirmed: 15, finalPassers: 16 },
     { schoolName: '阿智', department: '普通', quota: 48, applicantsConfirmed: 36, testTakersConfirmed: 36, finalPassers: 36 },
     { schoolName: '阿南', department: '普通', quota: 54, applicantsConfirmed: 10, testTakersConfirmed: 10, finalPassers: 10 },
+    // ── 第4通学区（中信地区・別紙1の6頁目・17校27レコード） ──
+    { schoolName: '蘇南', department: '総合', quota: 53, applicantsConfirmed: 4, testTakersConfirmed: 4, finalPassers: 4 },
+    { schoolName: '木曽青峰', department: '普通', quota: 40, applicantsConfirmed: 34, testTakersConfirmed: 34, finalPassers: 34 },
+    { schoolName: '木曽青峰', department: '農業（森林環境）', quota: 18, applicantsConfirmed: 0, testTakersConfirmed: 0, finalPassers: 0 },
+    { schoolName: '木曽青峰', department: '工業（インテリア）', quota: 16, applicantsConfirmed: 8, testTakersConfirmed: 8, finalPassers: 8 },
+    { schoolName: '木曽青峰', department: '理数', quota: 23, applicantsConfirmed: 0, testTakersConfirmed: 0, finalPassers: 0 },
+    { schoolName: '塩尻志学館', department: '総合', quota: 80, applicantsConfirmed: 79, testTakersConfirmed: 78, finalPassers: 78 },
+    { schoolName: '田川', department: '普通', quota: 93, applicantsConfirmed: 45, testTakersConfirmed: 44, finalPassers: 44 },
+    { schoolName: '梓川', department: '普通', quota: 57, applicantsConfirmed: 14, testTakersConfirmed: 13, finalPassers: 13 },
+    { schoolName: '松本工業', department: '機械', quota: 32, applicantsConfirmed: 31, testTakersConfirmed: 31, finalPassers: 29 },
+    { schoolName: '松本工業', department: '電気', quota: 16, applicantsConfirmed: 10, testTakersConfirmed: 10, finalPassers: 10 },
+    { schoolName: '松本工業', department: '電子工業', quota: 33, applicantsConfirmed: 13, testTakersConfirmed: 13, finalPassers: 13 },
+    { schoolName: '松本県ケ丘', department: '普通', quota: 240, applicantsConfirmed: 260, testTakersConfirmed: 259, finalPassers: 246 },
+    { schoolName: '松本県ケ丘', department: '自然探究・国際探究（くくり募集）', quota: 16, applicantsConfirmed: 36, testTakersConfirmed: 36, finalPassers: 18 },
+    { schoolName: '松本美須々ケ丘', department: '普通', quota: 280, applicantsConfirmed: 240, testTakersConfirmed: 240, finalPassers: 240 },
+    { schoolName: '松本深志', department: '普通', quota: 280, applicantsConfirmed: 309, testTakersConfirmed: 308, finalPassers: 280 },
+    { schoolName: '松本蟻ケ崎', department: '普通', quota: 280, applicantsConfirmed: 355, testTakersConfirmed: 354, finalPassers: 281 },
+    { schoolName: '明科', department: '普通', quota: 40, applicantsConfirmed: 7, testTakersConfirmed: 7, finalPassers: 7 },
+    { schoolName: '豊科', department: '普通', quota: 200, applicantsConfirmed: 172, testTakersConfirmed: 172, finalPassers: 172 },
+    { schoolName: '南安曇農業', department: 'グリーンサイエンス', quota: 16, applicantsConfirmed: 17, testTakersConfirmed: 17, finalPassers: 16 },
+    { schoolName: '南安曇農業', department: '環境クリエイト', quota: 16, applicantsConfirmed: 8, testTakersConfirmed: 8, finalPassers: 8 },
+    { schoolName: '南安曇農業', department: '生物工学', quota: 16, applicantsConfirmed: 8, testTakersConfirmed: 8, finalPassers: 9 },
+    { schoolName: '穂高商業', department: '商業', quota: 32, applicantsConfirmed: 20, testTakersConfirmed: 20, finalPassers: 20 },
+    { schoolName: '池田工業', department: '工業（機械・電気学・建築学）', quota: 44, applicantsConfirmed: 2, testTakersConfirmed: 2, finalPassers: 2 },
+    { schoolName: '大町岳陽', department: '普通', quota: 72, applicantsConfirmed: 62, testTakersConfirmed: 61, finalPassers: 61 },
+    { schoolName: '大町岳陽', department: '学究', quota: 31, applicantsConfirmed: 0, testTakersConfirmed: 0, finalPassers: 0 },
+    { schoolName: '白馬', department: '普通', quota: 29, applicantsConfirmed: 0, testTakersConfirmed: 0, finalPassers: 0 },
+    { schoolName: '白馬', department: '国際観光', quota: 10, applicantsConfirmed: 12, testTakersConfirmed: 11, finalPassers: 10 },
   ],
   officialSubtotals: [
     // applicantsConfirmedはこの資料に印字が無いため、既存パイプライン再利用値の機械集計を
@@ -177,5 +215,6 @@ export const NAGANO_STAGE_LEDGER: PrefectureStageLedgerFile = {
     { label: '第1通学区 合計', quota: 2_623, applicantsConfirmed: 2_303, testTakersConfirmed: 2_299, finalPassers: 2_236 },
     { label: '第2通学区 合計', quota: 1_875, applicantsConfirmed: 1_761, testTakersConfirmed: 1_758, finalPassers: 1_699 },
     { label: '第3通学区 合計', quota: 2_246, applicantsConfirmed: 1_985, testTakersConfirmed: 1_975, finalPassers: 1_937 },
+    { label: '第4通学区 合計', quota: 2_063, applicantsConfirmed: 1_746, testTakersConfirmed: 1_738, finalPassers: 1_603 },
   ],
 };
