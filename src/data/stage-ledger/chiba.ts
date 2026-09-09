@@ -1,12 +1,13 @@
 import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
 
 /**
- * 千葉県 段階台帳（T-Y11F §5順序#7・パイロット1県目・「全日制課程」区分は完全収録）。
+ * 千葉県 段階台帳（T-Y11F §5順序#7・パイロット1県目・**全9頁を完全収録**）。
  *
  * 一次ソース: 千葉県教育委員会「令和8年度 公立高等学校 一般入学者選抜等 入学許可候補者数
- * 一覧＜その１〉〜＜その７＞」（特別入学者選抜及び地域連携アクティブスクールの入学者選抜を
+ * 一覧＜その１〉〜＜その８＞」（特別入学者選抜及び地域連携アクティブスクールの入学者選抜を
  * 含む・全9頁）のうち1〜6頁目「1．県立全日制」（学校番号1〜121・176レコード）＋7頁目
- * 「2．市立全日制」（学校番号市1〜市7・12レコード）。
+ * 「2．市立全日制」（学校番号市1〜市7・12レコード）＋8頁目「3．県立定時制」（学校番号定1〜
+ * 定16・22レコード）。9頁目は脚注のみで学校別データを含まないため実質的に全学校を収録済み。
  * https://www.pref.chiba.lg.jp/kyouiku/shidou/press/2025/documents/r8kyokaippan.pdf
  *
  * ⚠️pdftotextは数値は抽出できたが学校名・学科名のラベルが欠落（他県で頻出のフォント欠落と
@@ -32,11 +33,12 @@ import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
  *
  * 6頁目末尾の「県立全日制 合計」（quota26,960/applicants29,594/testTakers29,359/
  * finalPassers25,085）、7頁目末尾の「市立全日制 合計」（quota1,920/applicants2,414/
- * testTakers2,402/finalPassers1,920）、同頁の「公立全日制 合計」（quota28,880/
- * applicants32,008/testTakers31,761/finalPassers27,005）の3段階すべてで、188レコード
- * 全数の機械集計が完全一致した（初回転記で一致・再修正なし）——**「全日制課程」区分全体に
- * ついてcoverage='complete'に格上げ**。残る8〜9頁目（県立定時制等の別区分）は次のセクション
- * のため未収録（Y-0憲法③正直にスキップ）。
+ * testTakers2,402/finalPassers1,920）、8頁目末尾の「県立定時制 合計」＝「公立定時制 合計」
+ * （quota1,237/applicants821/testTakers809/finalPassers744、千葉県には市立定時制が無いため
+ * 両者は同値）、そして資料全体の「総合計」（quota30,117/applicants32,829/testTakers32,570/
+ * finalPassers27,749）まで**4段階すべて**で、210レコード全数の機械集計が完全一致した
+ * （初回転記で一致・再修正なし）——**資料全体（全日制＋定時制・県立＋市立）についてcoverage=
+ * 'complete'に格上げ**。9頁目は脚注のみで学校別データを含まないことを確認済み。
  */
 
 export const CHIBA_STAGE_LEDGER: PrefectureStageLedgerFile = {
@@ -44,16 +46,20 @@ export const CHIBA_STAGE_LEDGER: PrefectureStageLedgerFile = {
   sources: [
     {
       url: 'https://www.pref.chiba.lg.jp/kyouiku/shidou/press/2025/documents/r8kyokaippan.pdf',
-      docTitle: '千葉県教育委員会 令和8年度公立高等学校一般入学者選抜等入学許可候補者数一覧＜その1＞〜＜その7＞（1〜7頁目）',
+      docTitle: '千葉県教育委員会 令和8年度公立高等学校一般入学者選抜等入学許可候補者数一覧＜その1＞〜＜その8＞（全9頁中1〜8頁目・9頁目は脚注のみ）',
       fiscalYear: '令和8年度（2026年度）',
       fetchedAt: '2026-09-09',
     },
   ],
   coverage: {
     status: 'complete',
-    includedDepartments: ['県立全日制（1〜6頁目・学校番号1〜121・176レコード）', '市立全日制（7頁目・学校番号市1〜市7・12レコード）'],
-    pendingDepartments: ['県立定時制（8〜9頁目相当）'],
-    note: '「全日制課程」区分（県立＋市立）は完全収録。「県立全日制 合計」「市立全日制 合計」「公立全日制 合計」の3段階すべてで機械集計が完全一致。県立定時制は別区分のため未収録。',
+    includedDepartments: [
+      '県立全日制（1〜6頁目・学校番号1〜121・176レコード）',
+      '市立全日制（7頁目・学校番号市1〜市7・12レコード）',
+      '県立定時制（8頁目・学校番号定1〜定16・22レコード）',
+    ],
+    pendingDepartments: [],
+    note: '資料全体（一般入学者選抜等・全日制＋定時制・県立＋市立）を完全収録。「県立全日制 合計」「市立全日制 合計」「県立定時制 合計」「総合計」の4段階すべてで210レコード全数の機械集計が完全一致。',
   },
   records: [
     { schoolName: '千葉', department: '普通科', quota: 240, applicantsConfirmed: 331, testTakersConfirmed: 321, finalPassers: 240 },
@@ -250,10 +256,35 @@ export const CHIBA_STAGE_LEDGER: PrefectureStageLedgerFile = {
     { schoolName: '市立柏', department: '普通科', quota: 280, applicantsConfirmed: 343, testTakersConfirmed: 342, finalPassers: 280 },
     { schoolName: '市立柏', department: 'スポーツ科学科', quota: 40, applicantsConfirmed: 42, testTakersConfirmed: 42, finalPassers: 40 },
     { schoolName: '市立銚子', department: '普通科・理数科', quota: 240, applicantsConfirmed: 247, testTakersConfirmed: 247, finalPassers: 240 },
+    // --- 8頁目「3．県立定時制」（学校番号定1〜定16） ---
+    { schoolName: '千葉商業', department: '商業科（定時制）', quota: 40, applicantsConfirmed: 25, testTakersConfirmed: 24, finalPassers: 24 },
+    { schoolName: '千葉工業', department: '工業科（定時制）', quota: 40, applicantsConfirmed: 10, testTakersConfirmed: 10, finalPassers: 10 },
+    { schoolName: '生浜', department: '普通科（定時制・午前部）', quota: 66, applicantsConfirmed: 67, testTakersConfirmed: 65, finalPassers: 65 },
+    { schoolName: '生浜', department: '普通科（定時制・午後部）', quota: 66, applicantsConfirmed: 51, testTakersConfirmed: 51, finalPassers: 50 },
+    { schoolName: '生浜', department: '普通科（定時制・夜間部）', quota: 66, applicantsConfirmed: 13, testTakersConfirmed: 13, finalPassers: 13 },
+    { schoolName: '船橋', department: '総合学科（定時制）', quota: 80, applicantsConfirmed: 47, testTakersConfirmed: 46, finalPassers: 46 },
+    { schoolName: '市川工業', department: '工業科（定時制）', quota: 40, applicantsConfirmed: 14, testTakersConfirmed: 14, finalPassers: 14 },
+    { schoolName: '松戸南', department: '普通科（定時制・午前部）', quota: 104, applicantsConfirmed: 126, testTakersConfirmed: 125, finalPassers: 104 },
+    { schoolName: '松戸南', department: '普通科（定時制・午後部）', quota: 104, applicantsConfirmed: 135, testTakersConfirmed: 134, finalPassers: 104 },
+    { schoolName: '松戸南', department: '普通科（定時制・夜間部）', quota: 66, applicantsConfirmed: 70, testTakersConfirmed: 69, finalPassers: 66 },
+    { schoolName: '東葛飾', department: '普通科（定時制）', quota: 80, applicantsConfirmed: 27, testTakersConfirmed: 25, finalPassers: 24 },
+    { schoolName: '佐倉南', department: '普通科（定時制・午前部）', quota: 66, applicantsConfirmed: 71, testTakersConfirmed: 69, finalPassers: 66 },
+    { schoolName: '佐倉南', department: '普通科（定時制・午後部）', quota: 66, applicantsConfirmed: 72, testTakersConfirmed: 72, finalPassers: 66 },
+    { schoolName: '佐倉南', department: '普通科（定時制・夜間部）', quota: 33, applicantsConfirmed: 23, testTakersConfirmed: 23, finalPassers: 23 },
+    { schoolName: '佐原', department: '普通科（定時制）', quota: 40, applicantsConfirmed: 8, testTakersConfirmed: 8, finalPassers: 8 },
+    { schoolName: '銚子商業', department: '商業科（定時制）', quota: 40, applicantsConfirmed: 1, testTakersConfirmed: 1, finalPassers: 1 },
+    { schoolName: '匝瑳', department: '普通科（定時制）', quota: 40, applicantsConfirmed: 7, testTakersConfirmed: 7, finalPassers: 7 },
+    { schoolName: '東金', department: '普通科（定時制）', quota: 40, applicantsConfirmed: 4, testTakersConfirmed: 4, finalPassers: 4 },
+    { schoolName: '長生', department: '普通科（定時制）', quota: 40, applicantsConfirmed: 12, testTakersConfirmed: 11, finalPassers: 11 },
+    { schoolName: '長狭', department: '普通科（定時制）', quota: 40, applicantsConfirmed: 5, testTakersConfirmed: 5, finalPassers: 5 },
+    { schoolName: '館山総合', department: '普通科（定時制）', quota: 40, applicantsConfirmed: 11, testTakersConfirmed: 11, finalPassers: 11 },
+    { schoolName: '木更津東', department: '普通科（定時制）', quota: 40, applicantsConfirmed: 22, testTakersConfirmed: 22, finalPassers: 22 },
   ],
   officialSubtotals: [
     { label: '県立全日制 合計', quota: 26_960, applicantsConfirmed: 29_594, testTakersConfirmed: 29_359, finalPassers: 25_085 },
     { label: '市立全日制 合計', quota: 1_920, applicantsConfirmed: 2_414, testTakersConfirmed: 2_402, finalPassers: 1_920 },
     { label: '公立全日制 合計', quota: 28_880, applicantsConfirmed: 32_008, testTakersConfirmed: 31_761, finalPassers: 27_005 },
+    { label: '県立定時制 合計', quota: 1_237, applicantsConfirmed: 821, testTakersConfirmed: 809, finalPassers: 744 },
+    { label: '総合計', quota: 30_117, applicantsConfirmed: 32_829, testTakersConfirmed: 32_570, finalPassers: 27_749 },
   ],
 };
