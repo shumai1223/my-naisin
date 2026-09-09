@@ -3,17 +3,17 @@ import { CHIBA_STAGE_LEDGER } from '../chiba';
 import { COMPETITION_RATE_BY_PREFECTURE } from '@/data/competition-rates';
 
 /**
- * T-Y11F §5順序#7 DoD検証（千葉県・段階台帳・「1．県立全日制」区分176レコード完全収録）:
+ * T-Y11F §5順序#7 DoD検証（千葉県・段階台帳・「全日制課程」区分188レコード完全収録）:
  * ①レコードの不変条件（quota>0等）②既存の倍率パイプライン（competition-rates/chiba.ts）の
  * quota/finalApplicantsと、段階台帳のquota/applicantsConfirmedが独立した情報源にも
- * かかわらず一致することを機械的に突合する（相互裏取り）③公表資料の「県立全日制 合計」行との
- * 完全突合（DoDの本体・176レコード全数を対象にした唯一の確定的検証）。
+ * かかわらず一致することを機械的に突合する（相互裏取り）③公表資料の「県立全日制 合計」
+ * 「市立全日制 合計」「公立全日制 合計」の3段階すべてとの完全突合（DoDの本体）。
  */
-describe('千葉県 段階台帳（T-Y11F §5順序#7・県立全日制区分は完全収録）', () => {
+describe('千葉県 段階台帳（T-Y11F §5順序#7・全日制課程は完全収録）', () => {
   const { records, officialSubtotals } = CHIBA_STAGE_LEDGER;
 
-  it('取り込み件数は176レコード（1〜6頁目・県立全日制の全校）', () => {
-    expect(records).toHaveLength(176);
+  it('取り込み件数は188レコード（県立176+市立12）', () => {
+    expect(records).toHaveLength(188);
   });
 
   it('quota/applicantsConfirmed/testTakersConfirmed/finalPassersはいずれも0より大きい（不変条件）', () => {
@@ -31,13 +31,39 @@ describe('千葉県 段階台帳（T-Y11F §5順序#7・県立全日制区分は
     }
   });
 
-  it('176レコード全数の機械集計が公表資料の「県立全日制 合計」と完全一致する', () => {
+  function findSubtotal(label: string) {
     if (!officialSubtotals) throw new Error('officialSubtotals が定義されていません');
-    const subtotal = officialSubtotals.find((s) => s.label === '県立全日制 合計');
-    if (!subtotal) throw new Error('officialSubtotals に "県立全日制 合計" が見つかりません');
+    const subtotal = officialSubtotals.find((s) => s.label === label);
+    if (!subtotal) throw new Error(`officialSubtotals に "${label}" が見つかりません`);
+    return subtotal;
+  }
 
+  it('学校名が「市立」を含まない176レコード（県立）が「県立全日制 合計」と完全一致する', () => {
+    const subtotal = findSubtotal('県立全日制 合計');
+    const prefectural = records.filter((r) => !r.schoolName.startsWith('市立'));
+    expect(prefectural).toHaveLength(176);
+    const sums = sumStageLedger(prefectural);
+    expect(sums.quota).toBe(subtotal.quota);
+    expect(sums.applicantsConfirmed).toBe(subtotal.applicantsConfirmed);
+    expect(sums.testTakersConfirmed).toBe(subtotal.testTakersConfirmed);
+    expect(sums.finalPassers).toBe(subtotal.finalPassers);
+  });
+
+  it('学校名が「市立」で始まる12レコードが「市立全日制 合計」と完全一致する', () => {
+    const subtotal = findSubtotal('市立全日制 合計');
+    const municipal = records.filter((r) => r.schoolName.startsWith('市立'));
+    expect(municipal).toHaveLength(12);
+    const sums = sumStageLedger(municipal);
+    expect(sums.quota).toBe(subtotal.quota);
+    expect(sums.applicantsConfirmed).toBe(subtotal.applicantsConfirmed);
+    expect(sums.testTakersConfirmed).toBe(subtotal.testTakersConfirmed);
+    expect(sums.finalPassers).toBe(subtotal.finalPassers);
+  });
+
+  it('188レコード全数の機械集計が「公立全日制 合計」と完全一致する', () => {
+    const subtotal = findSubtotal('公立全日制 合計');
     const sums = sumStageLedger(records);
-    expect(sums.schoolCount).toBe(176);
+    expect(sums.schoolCount).toBe(188);
     expect(sums.quota).toBe(subtotal.quota);
     expect(sums.applicantsConfirmed).toBe(subtotal.applicantsConfirmed);
     expect(sums.testTakersConfirmed).toBe(subtotal.testTakersConfirmed);
@@ -61,6 +87,6 @@ describe('千葉県 段階台帳（T-Y11F §5順序#7・県立全日制区分は
       expect(counterpart.finalApplicants).toBe(stageRecord.applicantsConfirmed);
     }
     // 少なくとも大半のレコードが既存データと突合できること（両ファイルの学校名表記が完全一致する前提の確認）
-    expect(matched).toBeGreaterThanOrEqual(150);
+    expect(matched).toBeGreaterThanOrEqual(160);
   });
 });
