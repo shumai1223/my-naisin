@@ -4,6 +4,8 @@ import {
   resolveRecordSourceIndex,
   countUnresolvedSources,
   licensableRecords,
+  resolveSourceLocator,
+  countRecordsWithSourceLocator,
   type CompetitionRateRecord,
   type CompetitionRateSource,
   type OfficialSubtotal,
@@ -124,6 +126,62 @@ describe('countUnresolvedSources（実データ・A-0-3のスコープ計測）'
     }
     // 新たに複数source県が増えたらここで検知できる（A-0-1の対象県リストを黙って広げない）
     expect(unexpectedlyAmbiguous).toEqual([]);
+  });
+});
+
+describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順序#8・出典ロケータ）', () => {
+  function source(fiscalYear: string, pdfSha256?: string): CompetitionRateSource {
+    return { url: `https://example.com/${fiscalYear}`, docTitle: 'テスト用', fiscalYear, fetchedAt: '2026-09-10', pdfSha256 };
+  }
+
+  it('page・rowIndexが両方あり、sourceIndexも解決でき、pdfSha256も設定済みなら3つ組を返す', () => {
+    const sources = [source('令和8年度（2026年度）', 'abc123')];
+    const record: CompetitionRateRecord = {
+      schoolName: 'A', department: '普通科', quota: 1, finalApplicants: 1, finalRate: 1, page: 2, rowIndex: 5,
+    };
+    expect(resolveSourceLocator(record, sources)).toEqual({ pdfSha256: 'abc123', page: 2, rowIndex: 5 });
+  });
+
+  it('pageまたはrowIndexが未設定ならnull（未バックフィルのレコード）', () => {
+    const sources = [source('令和8年度（2026年度）', 'abc123')];
+    const withoutPage: CompetitionRateRecord = { schoolName: 'A', department: '普通科', quota: 1, finalApplicants: 1, finalRate: 1, rowIndex: 5 };
+    const withoutRowIndex: CompetitionRateRecord = { schoolName: 'A', department: '普通科', quota: 1, finalApplicants: 1, finalRate: 1, page: 2 };
+    expect(resolveSourceLocator(withoutPage, sources)).toBeNull();
+    expect(resolveSourceLocator(withoutRowIndex, sources)).toBeNull();
+  });
+
+  it('page・rowIndexはあってもsourceIndexが一意に解決できなければnull', () => {
+    const sources = [source('令和8年度（2026年度）', 'abc123'), source('令和8年度（2026年度）', 'def456')];
+    const record: CompetitionRateRecord = { schoolName: 'A', department: '普通科', quota: 1, finalApplicants: 1, finalRate: 1, page: 2, rowIndex: 5 };
+    expect(resolveSourceLocator(record, sources)).toBeNull();
+  });
+
+  it('解決したsourceにpdfSha256が未計測ならnull（ハッシュ計測がまだのファイル）', () => {
+    const sources = [source('令和8年度（2026年度）')]; // pdfSha256省略
+    const record: CompetitionRateRecord = { schoolName: 'A', department: '普通科', quota: 1, finalApplicants: 1, finalRate: 1, page: 2, rowIndex: 5 };
+    expect(resolveSourceLocator(record, sources)).toBeNull();
+  });
+
+  it('countRecordsWithSourceLocatorは解決できたレコードだけを数える', () => {
+    const sources = [source('令和8年度（2026年度）', 'abc123')];
+    const withLocator: CompetitionRateRecord = { schoolName: 'A', department: '普通科', quota: 1, finalApplicants: 1, finalRate: 1, page: 1, rowIndex: 0 };
+    const withoutLocator: CompetitionRateRecord = { schoolName: 'B', department: '普通科', quota: 1, finalApplicants: 1, finalRate: 1 };
+    const file = {
+      prefectureCode: 'test', sources, coverage: { status: 'complete' as const, includedDepartments: [], pendingDepartments: [], note: '' },
+      records: [withLocator, withoutLocator], officialSubtotals: [],
+    };
+    expect(countRecordsWithSourceLocator(file)).toBe(1);
+  });
+
+  it('参考: 現時点では全都道府県ともpdfSha256未計測のためcountRecordsWithSourceLocatorは全県0件（#8着手前のベースライン）', () => {
+    const nonZero: Array<{ code: string; count: number }> = [];
+    for (const [code, file] of Object.entries(COMPETITION_RATE_BY_PREFECTURE)) {
+      if (!file) continue;
+      const count = countRecordsWithSourceLocator(file);
+      if (count > 0) nonZero.push({ code, count });
+    }
+    // #8にバックフィルを始めたらこの数値は増えていく。0でなくなったら意図した進捗か確認すること。
+    expect(nonZero).toEqual([]);
   });
 });
 

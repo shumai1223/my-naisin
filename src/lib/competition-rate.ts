@@ -50,6 +50,22 @@ export interface CompetitionRateRecord {
    * 立てない（唯一の情報源ではないため）。
    */
   commercialSourceOnly?: boolean;
+  /**
+   * T-Y11F §5順序#8（出典ロケータ）用。このレコードの値が由来するPDFの1始まりページ番号
+   * （`sources[resolveRecordSourceIndex(...)]`が指すPDF内での位置）。省略時は未計測。
+   * 既存の21,739レコードは既存データ書き換え0の方針により、逐次バックフィルで埋める
+   * （R8・登録パーサ36県は`__fixtures__/*-r8-geometry.json`のキャッシュを再実行すれば
+   * 機械的に得られる。詳細は`resolveSourceLocator`のコメント参照）。
+   */
+  page?: number;
+  /**
+   * T-Y11F §5順序#8用。同一ページ内でこのレコードが何番目の行として出現したか（0始まり・
+   * ページ内の読み取り順）。`page`とセットで指定する。値の再判読ではなく「どこにあったか」
+   * だけを指すため、この2フィールドを追加しても既存のquota/finalApplicants/finalRateの
+   * 値は一切変更しない（Y-0憲法③の「機械可読不能は正直にスキップ」と同じ精神で、
+   * 未計測レコードはundefinedのまま残る）。
+   */
+  rowIndex?: number;
 }
 
 export interface OfficialSubtotal {
@@ -67,6 +83,14 @@ export interface CompetitionRateSource {
   /** 例: '令和8年度(2026年度)'。 */
   fiscalYear: string;
   fetchedAt: string;
+  /**
+   * T-Y11F §5順序#8（出典ロケータ）用。このsourceが指すPDF本文のSHA-256（16進数）。
+   * ファイル単位で1つ（`sources[]`の要素ごとに1個）持てば足り、レコードごとに重複保持
+   * する必要はない（`CompetitionRateRecord.page`/`rowIndex`と`sourceIndex`を組み合わせれば
+   * `{pdfSha256, page, rowIndex}`の3つ組を再構成できるため）。省略時は未計測（従来どおり
+   * 動作・既存データの書き換え0）。
+   */
+  pdfSha256?: string;
 }
 
 export interface PrefectureCompetitionRateFile {
@@ -159,6 +183,36 @@ export function resolveRecordSourceIndex(
 /** 1県分のrecords全体について、出典が一意に解決できないレコード数を数える（A-0-3の進捗計測用）。 */
 export function countUnresolvedSources(file: PrefectureCompetitionRateFile): number {
   return file.records.filter((r) => resolveRecordSourceIndex(r, file.sources) === null).length;
+}
+
+/**
+ * T-Y11F §5順序#8（出典ロケータ）: レコード1件の`{pdfSha256, page, rowIndex}`を、
+ * 既存の`sourceIndex`解決ロジック（`resolveRecordSourceIndex`）に乗せて再構成する純関数。
+ * `page`/`rowIndex`はレコード自身に持たせ、`pdfSha256`は解決した`sources[]`要素から取る
+ * （ファイル単位でしか値が変わらない情報をレコードごとに重複保持しない設計）。
+ * 3つのうち1つでも欠けていれば`null`を返す（＝まだバックフィルされていないレコード）。
+ */
+export interface SourceLocator {
+  pdfSha256: string;
+  page: number;
+  rowIndex: number;
+}
+
+export function resolveSourceLocator(
+  record: CompetitionRateRecord,
+  sources: CompetitionRateSource[]
+): SourceLocator | null {
+  if (record.page === undefined || record.rowIndex === undefined) return null;
+  const sourceIndex = resolveRecordSourceIndex(record, sources);
+  if (sourceIndex === null) return null;
+  const pdfSha256 = sources[sourceIndex].pdfSha256;
+  if (pdfSha256 === undefined) return null;
+  return { pdfSha256, page: record.page, rowIndex: record.rowIndex };
+}
+
+/** 1県分のrecords全体について、`resolveSourceLocator`が解決できる（＝出典ロケータ付与済みの）件数を数える（#8の進捗計測用）。 */
+export function countRecordsWithSourceLocator(file: PrefectureCompetitionRateFile): number {
+  return file.records.filter((r) => resolveSourceLocator(r, file.sources) !== null).length;
 }
 
 /**
