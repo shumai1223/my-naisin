@@ -1,11 +1,12 @@
 import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
 
 /**
- * 長野県 段階台帳（T-Y11F §5順序#7・5県目・第1〜2通学区（北信・東信地区）・全日制62レコード）。
+ * 長野県 段階台帳（T-Y11F §5順序#7・5県目・第1〜3通学区（北信・東信・南信地区）・全日制102レコード）。
  *
  * 一次ソース: 長野県教育委員会「令和8年度公立高等学校入学者後期選抜の入学予定者数をお知らせ
  * します」別紙1（2）学校別状況（3月19日公表・全7頁）の第1通学区（北信地区・別紙1の3頁目・
- * 26校37レコード）＋第2通学区（東信地区・別紙1の4頁目・18校25レコード）。
+ * 26校37レコード）＋第2通学区（東信地区・別紙1の4頁目・18校25レコード）＋第3通学区
+ * （南信地区・別紙1の5頁目・26校40レコード）。
  * https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/20260319web1.pdf
  *
  * ⚠️既存の`competition-rates/nagano.ts`（倍率パイプライン）は**別の一次資料**（「入学者後期選抜
@@ -26,19 +27,25 @@ import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
  * quota（募集人員33）自体は0より大きいためレコードとして収録するが、
  * 「0より大きい」不変条件はこの1件のみ例外として明示的に許容する。
  *
- * ⚠️既知の例外（新種・第1〜2通学区で計5件）: 須坂創成「工業（創造工学）」（test14→final15）・
- * 長野工業「機械工学」（test15→final16）・上田千曲「工業（電気）」（test13→final16）・
- * 佐久平総合技術「創造実践」（test22→final26）・野沢北「普通」（test158→final160）の5件は、
- * finalPassersがapplicantsConfirmed・testTakersConfirmedの両方を上回る（これまでのchiba/ibaraki
- * で確認した「finalPassers>applicantsConfirmed」パターンと同型だが、本件はtestTakersConfirmed
- * との比較でも同じ件が該当する点が新規）。一般選抜の受検者数に含まれない特別選抜（推薦等）
- * 合格者が入学予定者数に合算されるための差と推定される（他資料の既知パターンと同じ推定理由）。
+ * ⚠️既知の例外（新種・finalPassersがapplicantsConfirmed・testTakersConfirmedの両方を上回る・
+ * 第1〜3通学区で計14件）: 第1通学区=須坂創成「工業（創造工学）」（test14→final15）・長野工業
+ * 「機械工学」（test15→final16）。第2通学区=上田千曲「工業（電気）」（test13→final16）・
+ * 佐久平総合技術「創造実践」（test22→final26）・野沢北「普通」（test158→final160）。第3通学区=
+ * 岡谷工業「電気工学」（test5→final7）・岡谷工業「電子機械」（test6→final7）・伊那北「普通」
+ * （test158→final161）・赤穂「普通」（test112→final114）・飯田「普通」（test192→final204・
+ * 差12で最大）・飯田OIDE長姫「電子機械工学」（test15→final16）・飯田OIDE長姫「社会基盤工学」
+ * （test13→final15）・飯田OIDE長姫「商業」（test29→final31）・下伊那農業「生物活用」
+ * （test15→final16）。これまでのchiba/ibarakiで確認した「finalPassers>applicantsConfirmed」
+ * パターンと同型だが、本件はtestTakersConfirmedとの比較でも同じレコードが該当する点が新規。
+ * 一般選抜の受検者数に含まれない特別選抜（推薦等）合格者が入学予定者数に合算されるための
+ * 差と推定される（他資料の既知パターンと同じ推定理由）。
  *
  * 別紙1（3頁目）末尾の「第1通学区 合計」（quota2,623・testTakersConfirmed2,299・
  * finalPassers2,236）と37レコード全数の機械集計が3系列とも完全一致、（4頁目）末尾の
  * 「第2通学区 合計」（quota1,875・testTakersConfirmed1,758・finalPassers1,699）と25レコード
- * 全数の機械集計も3系列とも完全一致した（いずれもapplicantsConfirmedはこの資料に印字が
- * 無いため対象外・既存パイプライン再利用値の参考集計のみ）。
+ * 全数の機械集計、（5頁目）末尾の「第3通学区 合計」（quota2,246・testTakersConfirmed1,975・
+ * finalPassers1,937）と40レコード全数の機械集計もそれぞれ3系列とも完全一致した（いずれも
+ * applicantsConfirmedはこの資料に印字が無いため対象外・既存パイプライン再利用値の参考集計のみ）。
  */
 
 export const NAGANO_STAGE_LEDGER: PrefectureStageLedgerFile = {
@@ -46,16 +53,16 @@ export const NAGANO_STAGE_LEDGER: PrefectureStageLedgerFile = {
   sources: [
     {
       url: 'https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/20260319web1.pdf',
-      docTitle: '長野県教育委員会 令和8年度公立高等学校入学者後期選抜の入学予定者数をお知らせします 別紙1（2）学校別状況 第1〜2通学区（北信・東信地区）',
+      docTitle: '長野県教育委員会 令和8年度公立高等学校入学者後期選抜の入学予定者数をお知らせします 別紙1（2）学校別状況 第1〜3通学区（北信・東信・南信地区）',
       fiscalYear: '令和8年度（2026年度）',
       fetchedAt: '2026-09-09',
     },
   ],
   coverage: {
     status: 'partial',
-    includedDepartments: ['全日制県立（第1通学区・北信地区・26校37レコード＋第2通学区・東信地区・18校25レコード）'],
-    pendingDepartments: ['第3〜4通学区（南信・中信地区）の残り学校'],
-    note: '第1〜2通学区（北信・東信地区・62レコード）まで完了。quotaは既存competition-rates/nagano.tsと全62件で完全一致（募集人員は試験日まで不変であることを確認）。applicantsConfirmedも既存パイプラインをそのまま再利用（本資料には志願者数列が存在しないため）。testTakersConfirmed/finalPassersのみ本資料から新規転記。篠ノ井犀峡校・普通のみapplicants/test/final全て0という既知の例外。上田千曲「工業（電気）」・佐久平総合技術「創造実践」・野沢北「普通」の3件はfinalPassersがapplicantsConfirmed・testTakersConfirmedの両方を上回る新種の既知例外。別紙1末尾の「第1通学区 合計」（quota2,623/testTakers2,299/final2,236）・「第2通学区 合計」（quota1,875/testTakers1,758/final1,699）と各レコード全数の機械集計が3系列とも完全一致。',
+    includedDepartments: ['全日制県立（第1通学区・北信地区・26校37レコード＋第2通学区・東信地区・18校25レコード＋第3通学区・南信地区・26校40レコード）'],
+    pendingDepartments: ['第4通学区（中信地区）の残り学校'],
+    note: '第1〜3通学区（北信・東信・南信地区・102レコード）まで完了。quotaは既存competition-rates/nagano.tsと全102件で完全一致（募集人員は試験日まで不変であることを確認）。applicantsConfirmedも既存パイプラインをそのまま再利用（本資料には志願者数列が存在しないため）。testTakersConfirmed/finalPassersのみ本資料から新規転記。篠ノ井犀峡校・普通のみapplicants/test/final全て0という既知の例外。finalPassersがapplicantsConfirmed・testTakersConfirmedの両方を上回る新種の既知例外が第1〜3通学区で計14件。別紙1末尾の「第1通学区 合計」（quota2,623/testTakers2,299/final2,236）・「第2通学区 合計」（quota1,875/testTakers1,758/final1,699）・「第3通学区 合計」（quota2,246/testTakers1,975/final1,937）と各レコード全数の機械集計が3系列とも完全一致。',
   },
   records: [
     { schoolName: '飯山', department: '普通', quota: 56, applicantsConfirmed: 42, testTakersConfirmed: 42, finalPassers: 42 },
@@ -121,6 +128,47 @@ export const NAGANO_STAGE_LEDGER: PrefectureStageLedgerFile = {
     { schoolName: '野沢北', department: '理数', quota: 4, applicantsConfirmed: 8, testTakersConfirmed: 8, finalPassers: 4 },
     { schoolName: '野沢南', department: '普通', quota: 160, applicantsConfirmed: 155, testTakersConfirmed: 155, finalPassers: 155 },
     { schoolName: '小海', department: '普通', quota: 55, applicantsConfirmed: 16, testTakersConfirmed: 16, finalPassers: 16 },
+    // ── 第3通学区（南信地区・別紙1の5頁目・26校40レコード） ──
+    { schoolName: '富士見', department: '普通', quota: 23, applicantsConfirmed: 14, testTakersConfirmed: 14, finalPassers: 14 },
+    { schoolName: '富士見', department: '農業（園芸）', quota: 16, applicantsConfirmed: 11, testTakersConfirmed: 11, finalPassers: 11 },
+    { schoolName: '茅野', department: '普通', quota: 65, applicantsConfirmed: 15, testTakersConfirmed: 15, finalPassers: 15 },
+    { schoolName: '諏訪実業', department: '商業（商業・会計情報）', quota: 47, applicantsConfirmed: 16, testTakersConfirmed: 16, finalPassers: 16 },
+    { schoolName: '諏訪実業', department: '家庭（服飾）', quota: 17, applicantsConfirmed: 5, testTakersConfirmed: 5, finalPassers: 5 },
+    { schoolName: '諏訪清陵', department: '普通', quota: 161, applicantsConfirmed: 154, testTakersConfirmed: 151, finalPassers: 151 },
+    { schoolName: '諏訪二葉', department: '普通', quota: 200, applicantsConfirmed: 202, testTakersConfirmed: 202, finalPassers: 200 },
+    { schoolName: '下諏訪向陽', department: '普通', quota: 100, applicantsConfirmed: 55, testTakersConfirmed: 52, finalPassers: 52 },
+    { schoolName: '岡谷東', department: '普通', quota: 48, applicantsConfirmed: 57, testTakersConfirmed: 57, finalPassers: 48 },
+    { schoolName: '岡谷南', department: '普通', quota: 160, applicantsConfirmed: 153, testTakersConfirmed: 153, finalPassers: 153 },
+    { schoolName: '岡谷工業', department: '機械工学', quota: 24, applicantsConfirmed: 2, testTakersConfirmed: 2, finalPassers: 2 },
+    { schoolName: '岡谷工業', department: '電気工学', quota: 21, applicantsConfirmed: 5, testTakersConfirmed: 5, finalPassers: 7 },
+    { schoolName: '岡谷工業', department: '電子機械', quota: 18, applicantsConfirmed: 6, testTakersConfirmed: 6, finalPassers: 7 },
+    { schoolName: '岡谷工業', department: '情報技術', quota: 16, applicantsConfirmed: 19, testTakersConfirmed: 19, finalPassers: 16 },
+    { schoolName: '辰野', department: '普通', quota: 32, applicantsConfirmed: 31, testTakersConfirmed: 31, finalPassers: 31 },
+    { schoolName: '辰野', department: '商業', quota: 16, applicantsConfirmed: 7, testTakersConfirmed: 7, finalPassers: 7 },
+    { schoolName: '上伊那農業', department: '農業（つくるマネジメント・流通マネジメント・くらしマネジメント）', quota: 48, applicantsConfirmed: 51, testTakersConfirmed: 50, finalPassers: 49 },
+    { schoolName: '高遠', department: '普通', quota: 32, applicantsConfirmed: 14, testTakersConfirmed: 14, finalPassers: 14 },
+    { schoolName: '伊那北', department: '普通', quota: 160, applicantsConfirmed: 159, testTakersConfirmed: 158, finalPassers: 161 },
+    { schoolName: '伊那北', department: '理数', quota: 4, applicantsConfirmed: 19, testTakersConfirmed: 19, finalPassers: 5 },
+    { schoolName: '伊那弥生ヶ丘', department: '普通', quota: 160, applicantsConfirmed: 162, testTakersConfirmed: 162, finalPassers: 160 },
+    { schoolName: '赤穂', department: '普通', quota: 120, applicantsConfirmed: 112, testTakersConfirmed: 112, finalPassers: 114 },
+    { schoolName: '赤穂', department: '商業', quota: 32, applicantsConfirmed: 34, testTakersConfirmed: 34, finalPassers: 32 },
+    { schoolName: '駒ケ根工業', department: '工業（機械・電気・情報技術）', quota: 48, applicantsConfirmed: 43, testTakersConfirmed: 43, finalPassers: 43 },
+    { schoolName: '松川', department: '普通', quota: 40, applicantsConfirmed: 44, testTakersConfirmed: 43, finalPassers: 40 },
+    { schoolName: '飯田', department: '普通', quota: 200, applicantsConfirmed: 193, testTakersConfirmed: 192, finalPassers: 204 },
+    { schoolName: '飯田', department: '理数', quota: 12, applicantsConfirmed: 30, testTakersConfirmed: 30, finalPassers: 12 },
+    { schoolName: '飯田風越', department: '普通', quota: 160, applicantsConfirmed: 164, testTakersConfirmed: 164, finalPassers: 160 },
+    { schoolName: '飯田風越', department: '国際教養', quota: 4, applicantsConfirmed: 4, testTakersConfirmed: 4, finalPassers: 4 },
+    { schoolName: '飯田OIDE長姫', department: '機械工学', quota: 16, applicantsConfirmed: 19, testTakersConfirmed: 19, finalPassers: 16 },
+    { schoolName: '飯田OIDE長姫', department: '電子機械工学', quota: 16, applicantsConfirmed: 15, testTakersConfirmed: 15, finalPassers: 16 },
+    { schoolName: '飯田OIDE長姫', department: '電気電子工学', quota: 16, applicantsConfirmed: 16, testTakersConfirmed: 16, finalPassers: 16 },
+    { schoolName: '飯田OIDE長姫', department: '社会基盤工学', quota: 16, applicantsConfirmed: 13, testTakersConfirmed: 13, finalPassers: 15 },
+    { schoolName: '飯田OIDE長姫', department: '建築学', quota: 16, applicantsConfirmed: 18, testTakersConfirmed: 18, finalPassers: 16 },
+    { schoolName: '飯田OIDE長姫', department: '商業', quota: 32, applicantsConfirmed: 29, testTakersConfirmed: 29, finalPassers: 31 },
+    { schoolName: '下伊那農業', department: '栽培科学', quota: 16, applicantsConfirmed: 18, testTakersConfirmed: 18, finalPassers: 17 },
+    { schoolName: '下伊那農業', department: '地域資源', quota: 16, applicantsConfirmed: 15, testTakersConfirmed: 15, finalPassers: 15 },
+    { schoolName: '下伊那農業', department: '生物活用', quota: 16, applicantsConfirmed: 15, testTakersConfirmed: 15, finalPassers: 16 },
+    { schoolName: '阿智', department: '普通', quota: 48, applicantsConfirmed: 36, testTakersConfirmed: 36, finalPassers: 36 },
+    { schoolName: '阿南', department: '普通', quota: 54, applicantsConfirmed: 10, testTakersConfirmed: 10, finalPassers: 10 },
   ],
   officialSubtotals: [
     // applicantsConfirmedはこの資料に印字が無いため、既存パイプライン再利用値の機械集計を
@@ -128,5 +176,6 @@ export const NAGANO_STAGE_LEDGER: PrefectureStageLedgerFile = {
     // 印字済み合計行と直接照合可能）。
     { label: '第1通学区 合計', quota: 2_623, applicantsConfirmed: 2_303, testTakersConfirmed: 2_299, finalPassers: 2_236 },
     { label: '第2通学区 合計', quota: 1_875, applicantsConfirmed: 1_761, testTakersConfirmed: 1_758, finalPassers: 1_699 },
+    { label: '第3通学区 合計', quota: 2_246, applicantsConfirmed: 1_985, testTakersConfirmed: 1_975, finalPassers: 1_937 },
   ],
 };
