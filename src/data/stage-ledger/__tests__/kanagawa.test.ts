@@ -3,18 +3,18 @@ import { KANAGAWA_STAGE_LEDGER } from '../kanagawa';
 import { COMPETITION_RATE_BY_PREFECTURE } from '@/data/competition-rates';
 
 /**
- * T-Y11F §5順序#7 DoD検証（神奈川県・段階台帳6県目・「普通科」区分96レコードで先行着手）:
- * ①レコードの不変条件（quota>0等）②既存の倍率パイプライン（competition-rates/kanagawa.ts）の
- * quota・applicantsConfirmedと段階台帳が全件完全一致すること（本資料には志願者数列が
- * 存在しないため両方とも既存パイプラインを再利用する設計）③finalPassersがquotaを超える
- * 既知の5件を明示的に許容する④4段階の公式小計（県立計・市立計・合計・クリエイティブ合計）との
- * 完全一致。
+ * T-Y11F §5順序#7 DoD検証（神奈川県・段階台帳6県目・「普通科」96レコード＋「専門学科」
+ * 33レコード＝計129レコード）: ①レコードの不変条件（quota>0等）②既存の倍率パイプライン
+ * （competition-rates/kanagawa.ts）のquota・applicantsConfirmedと段階台帳が全件完全一致する
+ * こと（本資料には志願者数列が存在しないため両方とも既存パイプラインを再利用する設計）
+ * ③finalPassersがquotaを超える既知の10件を明示的に許容する④公式小計（普通科4段階＋
+ * 専門学科7区分）との完全一致。
  */
-describe('神奈川県 段階台帳（T-Y11F §5順序#7・6県目・「普通科」区分96レコードで先行着手）', () => {
+describe('神奈川県 段階台帳（T-Y11F §5順序#7・6県目・「普通科」＋「専門学科」計129レコード）', () => {
   const { records, officialSubtotals } = KANAGAWA_STAGE_LEDGER;
 
-  it('取り込み件数は普通科（共通選抜92校＋クリエイティブスクール4校）96レコード', () => {
-    expect(records).toHaveLength(96);
+  it('取り込み件数は普通科96レコード＋専門学科33レコード＝計129レコード', () => {
+    expect(records).toHaveLength(129);
   });
 
   it('quota/applicantsConfirmed/testTakersConfirmed/finalPassersはいずれも0より大きい（不変条件）', () => {
@@ -41,7 +41,7 @@ describe('神奈川県 段階台帳（T-Y11F §5順序#7・6県目・「普通�
       expect(counterpart.quota).toBe(stageRecord.quota);
       expect(counterpart.finalApplicants).toBe(stageRecord.applicantsConfirmed);
     }
-    expect(matched).toBe(96);
+    expect(matched).toBe(129);
   });
 
   it('testTakersConfirmedは「計（A）＋（B）」列（本検査受検者＋追検査受検者の合計）のためquotaの1.5倍を超えることはない（極端な誤読の防止・粗いガード）', () => {
@@ -50,7 +50,7 @@ describe('神奈川県 段階台帳（T-Y11F §5順序#7・6県目・「普通�
     }
   });
 
-  it('finalPassersがquotaを超えるのは既知の7件のみ（合格ボーダー同点者の全員合格と推測）', () => {
+  it('finalPassersがquotaを超えるのは既知の10件のみ（合格ボーダー同点者の全員合格と推測）', () => {
     const KNOWN_OVERFLOW = new Map<string, number>([
       ['横浜立野|普通科', 279],
       ['湘南|普通科', 360],
@@ -59,6 +59,9 @@ describe('神奈川県 段階台帳（T-Y11F §5順序#7・6県目・「普通�
       ['綾瀬|普通科', 319],
       ['伊志田|普通科', 311],
       ['上溝|普通科', 242],
+      ['相原|農業科', 115],
+      ['相原|商業科', 119],
+      ['神奈川工業|工業科', 319],
     ]);
     for (const r of records) {
       const key = `${r.schoolName}|${r.department}`;
@@ -76,7 +79,7 @@ describe('神奈川県 段階台帳（T-Y11F §5順序#7・6県目・「普通�
     }
   });
 
-  it('96レコード全数の機械集計が資料本文の4段階の公式小計（県立計・市立計・合計・クリエイティブ合計）とquota/testTakersConfirmed/finalPassersの3系列とも完全一致する', () => {
+  it('普通科96レコードの機械集計が資料本文の4段階の公式小計（県立計・市立計・合計・クリエイティブ合計）とquota/testTakersConfirmed/finalPassersの3系列とも完全一致する', () => {
     if (!officialSubtotals) throw new Error('officialSubtotals が定義されていません');
     const kenritsu = officialSubtotals.find((s) => s.label === '県立計（普通科・共通選抜）');
     const shiritsu = officialSubtotals.find((s) => s.label === '市立計（普通科・共通選抜）');
@@ -107,9 +110,40 @@ describe('神奈川県 段階台帳（T-Y11F §5順序#7・6県目・「普通�
     expect(creativeSums.finalPassers).toBe(creative.finalPassers);
     expect(creativeSums.applicantsConfirmed).toBe(creative.applicantsConfirmed);
 
-    const totalSums = sumStageLedger(records);
-    expect(totalSums.quota).toBe(goukei.quota + creative.quota);
-    expect(totalSums.testTakersConfirmed).toBe(goukei.testTakersConfirmed + creative.testTakersConfirmed);
-    expect(totalSums.finalPassers).toBe(goukei.finalPassers + creative.finalPassers);
+    const futsuukaTotal = sumStageLedger([...kyoutsuu, ...creativeRecords]);
+    expect(futsuukaTotal.quota).toBe(goukei.quota + creative.quota);
+    expect(futsuukaTotal.testTakersConfirmed).toBe(goukei.testTakersConfirmed + creative.testTakersConfirmed);
+    expect(futsuukaTotal.finalPassers).toBe(goukei.finalPassers + creative.finalPassers);
+  });
+
+  it('専門学科33レコードは10区分（農業3・工業10・商業7・水産1・家庭1・福祉4・理数1・体育2・美術2・国際2）で、7区分の公式小計とquota/testTakersConfirmed/finalPassersの3系列とも完全一致する（水産・家庭・理数は学校数1のため区分合計行が印字されず対象外）', () => {
+    if (!officialSubtotals) throw new Error('officialSubtotals が定義されていません');
+    const SENMON_DEPARTMENTS: Record<string, number> = {
+      農業科: 3,
+      工業科: 10,
+      商業科: 7,
+      水産科: 1,
+      家庭科: 1,
+      福祉科: 4,
+      理数科: 1,
+      体育科: 2,
+      美術科: 2,
+      国際科: 2,
+    };
+    let senmonTotal = 0;
+    for (const [dept, count] of Object.entries(SENMON_DEPARTMENTS)) {
+      const deptRecords = records.filter((r) => r.department === dept);
+      expect(deptRecords).toHaveLength(count);
+      senmonTotal += deptRecords.length;
+
+      const subtotalLabel = `合計（専門学科・${dept.replace('科', '')}）`;
+      const subtotal = officialSubtotals.find((s) => s.label === subtotalLabel);
+      if (!subtotal) continue; // 水産・家庭・理数は区分合計行が資料に印字されていないため対象外
+      const sums = sumStageLedger(deptRecords);
+      expect(sums.quota).toBe(subtotal.quota);
+      expect(sums.testTakersConfirmed).toBe(subtotal.testTakersConfirmed);
+      expect(sums.finalPassers).toBe(subtotal.finalPassers);
+    }
+    expect(senmonTotal).toBe(33);
   });
 });

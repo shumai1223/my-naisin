@@ -1,8 +1,8 @@
 import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
 
 /**
- * 神奈川県 段階台帳（T-Y11F §5順序#7・6県目・「普通科」区分〈共通選抜92校＋クリエイティブ
- * スクール4校＝96レコード〉で先行着手）。
+ * 神奈川県 段階台帳（T-Y11F §5順序#7・6県目・「普通科」〈96レコード〉＋「専門学科」
+ * 〈33レコード〉＝計129レコード）。
  *
  * 一次ソース: 神奈川県教育委員会「令和8年度神奈川県公立高等学校入学者選抜一般募集共通選抜等
  * 合格状況（各学校別の合格の状況等）」別紙4（xlsx版・5シート構成: 普通科・クリエイティブ／
@@ -39,8 +39,27 @@ import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
  * finalPassers>applicantsConfirmedとなるレコードは0件（他県と異なりこのパターンは今回
  * 出現しなかった）。
  *
- * ⚠️スコープ: 本ファイルは「普通科」区分のみ（sheet1）。専門学科・単位制・定時制/通信制・
- * 特別募集等（sheet2〜5）は別セッションで横展開する。
+ * 🔁**sheet2「専門学科」を追加（33レコード・累計129レコード）**: sheet2は農業/工業/商業/水産/
+ * 家庭/福祉/理数/体育/美術/国際の10区分に分かれ、各区分見出し行の直後に列見出しが繰り返される
+ * （sheet1と同一の列位置＝学校名C列・学科名D列・募集定員E列・計F列・合格者数K列）。
+ * **既存パイプラインとの粒度差の発見**: 本資料は学校×学科（例:平塚農商「都市農業科」
+ * 「都市環境科」「食品科学科」「農業総合科」の4学科）まで分解して掲載するが、`competition-
+ * rates/kanagawa.ts`は学校×区分（例:平塚農商「農業科」1件のみ・quota152=4学科の合計）という
+ * 粗い粒度で収録している。段階台帳は既存パイプラインとの突合を設計の柱とするため、本資料側も
+ * 学校が複数学科を持つ場合は資料内に印字済みの「計」行（学校単位の小計・quota/testTakers/
+ * finalPassersとも印字済み）を1レコードとして採用し、単一学科の学校（例:海洋科学「水産科」）は
+ * その1行をそのまま採用した（33レコード=農業3・工業10・商業7・水産1・家庭1・福祉4・理数1・
+ * 体育2・美術2・国際2）。quotaは33件全数が既存パイプラインと完全一致。
+ * 10区分中7区分（農業/工業/商業/福祉/体育/美術/国際）は資料本文に区分ごとの「合計」行があり、
+ * 該当区分のレコード集計がquota/testTakersConfirmed/finalPassersの3系列とも完全一致
+ * （水産・家庭・理数は学校数が1のため区分合計行が印字されず、該当レコード自体が区分合計と
+ * 同値）。⚠️新種の異常値: finalPassers>quotaが3件（相原・農業科114→115、相原・商業科
+ * 118→119、神奈川工業・工業科312→319）。神奈川工業の+7は4学科の「計」行への集約のため、
+ * 単一の同点者事象でなく複数学科それぞれの小さな超過（各学科の合格ボーダー同点者）が積算
+ * された結果と推測される。finalPassers>applicantsConfirmedは0件（sheet1と同様に今回は
+ * 不出現）。
+ *
+ * ⚠️スコープ: 単位制・定時制/通信制・特別募集等（sheet3〜5）は別セッションで横展開する。
  */
 
 export const KANAGAWA_STAGE_LEDGER: PrefectureStageLedgerFile = {
@@ -48,7 +67,7 @@ export const KANAGAWA_STAGE_LEDGER: PrefectureStageLedgerFile = {
   sources: [
     {
       url: 'https://www.pref.kanagawa.jp/documents/132524/bessi4.xlsx',
-      docTitle: '神奈川県教育委員会 令和8年度神奈川県公立高等学校入学者選抜一般募集共通選抜等合格状況（各学校別の合格の状況等）別紙4 sheet1「普通科・クリエイティブ」',
+      docTitle: '神奈川県教育委員会 令和8年度神奈川県公立高等学校入学者選抜一般募集共通選抜等合格状況（各学校別の合格の状況等）別紙4 sheet1「普通科・クリエイティブ」＋sheet2「専門学科」',
       fiscalYear: '令和8年度（2026年度）',
       fetchedAt: '2026-09-09',
     },
@@ -58,20 +77,27 @@ export const KANAGAWA_STAGE_LEDGER: PrefectureStageLedgerFile = {
     includedDepartments: [
       '普通科（共通選抜・県立87校＋市立5校＝92レコード）',
       '普通科（クリエイティブスクール・県立4校＝4レコード）',
+      '専門学科（農業3・工業10・商業7・水産1・家庭1・福祉4・理数1・体育2・美術2・国際2＝33レコード）',
     ],
     pendingDepartments: [
-      '専門学科（sheet2）',
       '単位制（sheet3）',
       '定時制・通信制（sheet4）',
       '特別募集等（sheet5）',
     ],
-    note: '「普通科」区分（共通選抜92校＋クリエイティブスクール4校＝96レコード）を完全収録。quotaは既存competition-rates/kanagawa.tsと全96件で完全一致（募集人員は試験日まで不変であることを確認）。applicantsConfirmedも既存パイプラインをそのまま再利用（本資料には志願者数列が存在しないため）。testTakersConfirmed/finalPassersのみ本資料から新規転記。資料本文の「県立計」「市立計」「合計」「（クリエイティブ）合計」の4段階の公式小計と96レコード全数の機械集計がquota/testTakersConfirmed/finalPassersの3系列すべてで完全一致。finalPassers>quotaが7件（既知パターン）。専門学科・単位制・定時制/通信制・特別募集等（sheet2〜5）は未着手。',
+    note: '「普通科」区分（共通選抜92校＋クリエイティブスクール4校＝96レコード）＋「専門学科」区分（10区分33レコード・学校単位の粒度で既存パイプラインと突合）を完全収録し累計129レコード。quotaは既存competition-rates/kanagawa.tsと全129件で完全一致（募集人員は試験日まで不変であることを確認）。applicantsConfirmedも既存パイプラインをそのまま再利用（本資料には志願者数列が存在しないため）。testTakersConfirmed/finalPassersのみ本資料から新規転記。普通科は資料本文の4段階の公式小計、専門学科は7/10区分の公式小計（水産・家庭・理数の3区分は学校数1のため区分合計行が印字されず該当レコード自体が区分合計と同値）と、いずれもquota/testTakersConfirmed/finalPassersの3系列すべてで完全一致。finalPassers>quotaが普通科7件・専門学科3件の計10件（既知パターン）。単位制・定時制/通信制・特別募集等（sheet3〜5）は未着手。',
   },
   officialSubtotals: [
     { label: '県立計（普通科・共通選抜）', quota: 26045, applicantsConfirmed: 30122, testTakersConfirmed: 29656, finalPassers: 25173 },
     { label: '市立計（普通科・共通選抜）', quota: 1230, applicantsConfirmed: 1603, testTakersConfirmed: 1572, finalPassers: 1230 },
     { label: '合計（普通科・共通選抜）', quota: 27275, applicantsConfirmed: 31725, testTakersConfirmed: 31228, finalPassers: 26403 },
     { label: '合計（普通科クリエイティブスクール）', quota: 672, applicantsConfirmed: 525, testTakersConfirmed: 520, finalPassers: 520 },
+    { label: '合計（専門学科・農業）', quota: 460, applicantsConfirmed: 488, testTakersConfirmed: 486, finalPassers: 446 },
+    { label: '合計（専門学科・工業）', quota: 2181, applicantsConfirmed: 1874, testTakersConfirmed: 1855, finalPassers: 1810 },
+    { label: '合計（専門学科・商業）', quota: 1026, applicantsConfirmed: 1078, testTakersConfirmed: 1073, finalPassers: 969 },
+    { label: '合計（専門学科・福祉）', quota: 193, applicantsConfirmed: 128, testTakersConfirmed: 127, finalPassers: 126 },
+    { label: '合計（専門学科・体育）', quota: 77, applicantsConfirmed: 95, testTakersConfirmed: 95, finalPassers: 77 },
+    { label: '合計（専門学科・美術）', quota: 76, applicantsConfirmed: 82, testTakersConfirmed: 81, finalPassers: 72 },
+    { label: '合計（専門学科・国際）', quota: 74, applicantsConfirmed: 102, testTakersConfirmed: 101, finalPassers: 74 },
   ],
   records: [
     { schoolName: '鶴見', department: '普通科', quota: 318, applicantsConfirmed: 381, testTakersConfirmed: 373, finalPassers: 318 },
@@ -170,5 +196,38 @@ export const KANAGAWA_STAGE_LEDGER: PrefectureStageLedgerFile = {
     { schoolName: '横須賀南', department: '普通科（クリエイティブスクール）', quota: 118, applicantsConfirmed: 115, testTakersConfirmed: 115, finalPassers: 115 },
     { schoolName: '小田原北', department: '普通科（クリエイティブスクール）', quota: 78, applicantsConfirmed: 73, testTakersConfirmed: 73, finalPassers: 73 },
     { schoolName: '大和東', department: '普通科（クリエイティブスクール）', quota: 238, applicantsConfirmed: 224, testTakersConfirmed: 221, finalPassers: 221 },
+    { schoolName: '平塚農商', department: '農業科', quota: 152, applicantsConfirmed: 168, testTakersConfirmed: 168, finalPassers: 152 },
+    { schoolName: '相原', department: '農業科', quota: 114, applicantsConfirmed: 138, testTakersConfirmed: 138, finalPassers: 115 },
+    { schoolName: '中央農業', department: '農業科', quota: 194, applicantsConfirmed: 182, testTakersConfirmed: 180, finalPassers: 179 },
+    { schoolName: '神奈川工業', department: '工業科', quota: 312, applicantsConfirmed: 354, testTakersConfirmed: 348, finalPassers: 319 },
+    { schoolName: '商工', department: '工業科', quota: 118, applicantsConfirmed: 102, testTakersConfirmed: 102, finalPassers: 102 },
+    { schoolName: '磯子工業', department: '工業科', quota: 224, applicantsConfirmed: 212, testTakersConfirmed: 210, finalPassers: 207 },
+    { schoolName: '川崎工科', department: '工業科', quota: 238, applicantsConfirmed: 248, testTakersConfirmed: 246, finalPassers: 238 },
+    { schoolName: '向の岡工業', department: '工業科', quota: 234, applicantsConfirmed: 181, testTakersConfirmed: 181, finalPassers: 181 },
+    { schoolName: '横須賀工業', department: '工業科', quota: 232, applicantsConfirmed: 179, testTakersConfirmed: 179, finalPassers: 179 },
+    { schoolName: '平塚工科', department: '工業科', quota: 238, applicantsConfirmed: 127, testTakersConfirmed: 127, finalPassers: 127 },
+    { schoolName: '藤沢工科', department: '工業科', quota: 238, applicantsConfirmed: 161, testTakersConfirmed: 159, finalPassers: 158 },
+    { schoolName: '小田原北', department: '工業科', quota: 152, applicantsConfirmed: 117, testTakersConfirmed: 117, finalPassers: 116 },
+    { schoolName: '川崎市立川崎総合科学', department: '工業科', quota: 195, applicantsConfirmed: 193, testTakersConfirmed: 186, finalPassers: 183 },
+    { schoolName: '商工', department: '商業科', quota: 118, applicantsConfirmed: 106, testTakersConfirmed: 105, finalPassers: 105 },
+    { schoolName: '平塚農商', department: '商業科', quota: 158, applicantsConfirmed: 164, testTakersConfirmed: 164, finalPassers: 158 },
+    { schoolName: '小田原東', department: '商業科', quota: 118, applicantsConfirmed: 75, testTakersConfirmed: 74, finalPassers: 73 },
+    { schoolName: '相原', department: '商業科', quota: 118, applicantsConfirmed: 136, testTakersConfirmed: 136, finalPassers: 119 },
+    { schoolName: '厚木王子', department: '商業科', quota: 158, applicantsConfirmed: 184, testTakersConfirmed: 184, finalPassers: 158 },
+    { schoolName: '横浜市立横浜商業', department: '商業科', quota: 238, applicantsConfirmed: 274, testTakersConfirmed: 272, finalPassers: 238 },
+    { schoolName: '川崎市立幸', department: '商業科', quota: 118, applicantsConfirmed: 139, testTakersConfirmed: 138, finalPassers: 118 },
+    { schoolName: '海洋科学', department: '水産科', quota: 152, applicantsConfirmed: 141, testTakersConfirmed: 140, finalPassers: 135 },
+    { schoolName: '川崎市立川崎', department: '家庭科', quota: 39, applicantsConfirmed: 31, testTakersConfirmed: 31, finalPassers: 30 },
+    { schoolName: '二俣川', department: '福祉科', quota: 38, applicantsConfirmed: 28, testTakersConfirmed: 28, finalPassers: 28 },
+    { schoolName: '横須賀南', department: '福祉科', quota: 78, applicantsConfirmed: 48, testTakersConfirmed: 47, finalPassers: 46 },
+    { schoolName: '津久井', department: '福祉科', quota: 38, applicantsConfirmed: 15, testTakersConfirmed: 15, finalPassers: 15 },
+    { schoolName: '川崎市立川崎', department: '福祉科', quota: 39, applicantsConfirmed: 37, testTakersConfirmed: 37, finalPassers: 37 },
+    { schoolName: '川崎市立川崎総合科学', department: '理数科', quota: 39, applicantsConfirmed: 53, testTakersConfirmed: 51, finalPassers: 39 },
+    { schoolName: '厚木北', department: '体育科', quota: 38, applicantsConfirmed: 46, testTakersConfirmed: 46, finalPassers: 38 },
+    { schoolName: '川崎市立橘', department: '体育科', quota: 39, applicantsConfirmed: 49, testTakersConfirmed: 49, finalPassers: 39 },
+    { schoolName: '白山', department: '美術科', quota: 38, applicantsConfirmed: 35, testTakersConfirmed: 34, finalPassers: 34 },
+    { schoolName: '上矢部', department: '美術科', quota: 38, applicantsConfirmed: 47, testTakersConfirmed: 47, finalPassers: 38 },
+    { schoolName: '横浜市立横浜商業', department: '国際科', quota: 35, applicantsConfirmed: 52, testTakersConfirmed: 52, finalPassers: 35 },
+    { schoolName: '川崎市立橘', department: '国際科', quota: 39, applicantsConfirmed: 50, testTakersConfirmed: 49, finalPassers: 39 },
   ],
 };
