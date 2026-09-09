@@ -4,22 +4,22 @@ import { COMPETITION_RATE_BY_PREFECTURE } from '@/data/competition-rates';
 
 /**
  * T-Y11F §5順序#7 DoD検証（千葉県・段階台帳・R8は資料全体210レコード完全収録・R7は
- * 掛-1・1〜5頁目175レコード）:
+ * 掛-1・1〜6頁目176レコードで「県立全日制」区分が完結）:
  * ①レコードの不変条件（quota>0等）②既存の倍率パイプライン（competition-rates/chiba.ts）の
  * quota/finalApplicantsと、段階台帳のquota/applicantsConfirmedが独立した情報源にも
  * かかわらず一致することを機械的に突合する（相互裏取り・R7/R8とも）③R8公表資料の
  * 「県立全日制 合計」「市立全日制 合計」「県立定時制 合計」「総合計」の4段階すべてとの
- * 完全突合（DoDの本体）。
+ * 完全突合（DoDの本体）④R7公表資料の「県立全日制 合計（R7）」との完全突合。
  */
 describe('千葉県 段階台帳（T-Y11F §5順序#7・R8は資料全体完全収録・R7は掛-1）', () => {
   const { records, officialSubtotals } = CHIBA_STAGE_LEDGER;
   const r8Records = records.filter((r) => r.fiscalYear === undefined);
   const r7Records = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
 
-  it('取り込み件数はR8=210レコード・R7=175レコード（計385レコード）', () => {
+  it('取り込み件数はR8=210レコード・R7=176レコード（計386レコード）', () => {
     expect(r8Records).toHaveLength(210);
-    expect(r7Records).toHaveLength(175);
-    expect(records).toHaveLength(385);
+    expect(r7Records).toHaveLength(176);
+    expect(records).toHaveLength(386);
   });
 
   it('quota/applicantsConfirmed/testTakersConfirmed/finalPassersはいずれも0より大きい（不変条件）', () => {
@@ -104,6 +104,17 @@ describe('千葉県 段階台帳（T-Y11F §5順序#7・R8は資料全体完全�
     expect(sums.finalPassers).toBe(subtotal.finalPassers);
   });
 
+  it('R7: 県立全日制176レコード全数の機械集計が「県立全日制 合計（R7）」と4系列とも完全一致する', () => {
+    const subtotal = findSubtotal('県立全日制 合計（R7）');
+    expect(r7Records).toHaveLength(176);
+    const sums = sumStageLedger(r7Records);
+    expect(sums.schoolCount).toBe(176);
+    expect(sums.quota).toBe(subtotal.quota);
+    expect(sums.applicantsConfirmed).toBe(subtotal.applicantsConfirmed);
+    expect(sums.testTakersConfirmed).toBe(subtotal.testTakersConfirmed);
+    expect(sums.finalPassers).toBe(subtotal.finalPassers);
+  });
+
   it('既存の倍率パイプライン（competition-rates/chiba.ts）とquota/applicantsConfirmedがR8・R7とも独立に一致する（全日制のみ・定時制は対象外）', () => {
     const chibaCompetitionFile = COMPETITION_RATE_BY_PREFECTURE.chiba;
     if (!chibaCompetitionFile) throw new Error('competition-rates/chiba.ts が見つかりません');
@@ -125,6 +136,6 @@ describe('千葉県 段階台帳（T-Y11F §5順序#7・R8は資料全体完全�
     }
 
     crossCheck(r8Records, (r) => r.fiscalYear === undefined, 160);
-    crossCheck(r7Records, (r) => r.fiscalYear === '令和7年度（2025年度）', 175);
+    crossCheck(r7Records, (r) => r.fiscalYear === '令和7年度（2025年度）', 176);
   });
 });
