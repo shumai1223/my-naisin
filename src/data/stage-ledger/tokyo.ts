@@ -1,7 +1,8 @@
 import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
 
 /**
- * 東京都 段階台帳（T-Y11F §5順序#7・7県目・「普通科（コース・単位制以外）」区分107レコード）。
+ * 東京都 段階台帳（T-Y11F §5順序#7・7県目・「普通科（コース・単位制以外）」107レコード＋
+ * 「普通科（コース制）」4レコード＋「普通科（単位制）」12レコード＝計123レコード）。
  *
  * 一次ソース: 東京都教育委員会「令和8年度東京都立高等学校入学者選抜合格発表」（一般募集・
  * 学力検査による選抜）のうち「普通科（コース、単位制以外の学校）」（区部57校＋多摩部44校）＋
@@ -41,9 +42,20 @@ import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
  * ⚠️注記: 立川の受検人員には同校の創造理数科（別学科）を第1志望とする者を含まない、と
  * 資料脚注に明記されている（本ファイルは対象を普通科のみとしているため直接の影響は無い）。
  *
- * ⚠️スコープ: 本ファイルは「普通科（コース・単位制以外）」区分＋「普通科（島しょの学校）」
- * のみ。「普通科（コース・単位制）」「専門学科・定時制課程（単位制）」「通信制（前期選抜）」
- * （いずれも同日公表の別PDF）は別セッションで横展開する。
+ * 🔁**「普通科（コース制）」4レコード＋「普通科（単位制）」12レコードを追加（累計123
+ * レコード）**: 同日公表の別PDF（`2026-03-02-181058-071`）1頁に2表（3［普通科（コース制の
+ * 学校）］・4［普通科（単位制の学校）］）が収録されている。列位置・quota/testTakers/
+ * finalPassersの対応は「普通科（コース・単位制以外）」と同一（学校名列・募集人員列・受検
+ * 人員列・合格人員列、コース制のみ学科名列が学校名と募集人員の間に追加）。既存パイプラインの
+ * 学科ラベルは「普通科（コース制・外国語）」「普通科（コース制・造形美術）」「普通科（単位制）」
+ * というsuffix付きで、全日制の「普通科」とは別レコードとして扱われている。quotaは16件全数が
+ * 既存パイプラインと完全一致。両区分とも資料本文に「コース制計」「単位制計」の公式小計があり
+ * quota/testTakersConfirmed/finalPassersの3系列とも完全一致。同一の「小幅超過」パターン
+ * （深川外国語56→57・新宿単位制284→288等）が両区分でも再現され、東京都全体で一貫した構造的
+ * 現象であることが裏付けられた。finalPassers>applicantsConfirmedは0件。
+ *
+ * ⚠️スコープ: 「専門学科・定時制課程（単位制）」「通信制（前期選抜）」（いずれも同日公表の
+ * 別PDF）は別セッションで横展開する。
  */
 
 export const TOKYO_STAGE_LEDGER: PrefectureStageLedgerFile = {
@@ -55,22 +67,33 @@ export const TOKYO_STAGE_LEDGER: PrefectureStageLedgerFile = {
       fiscalYear: '令和8年度（2026年度）',
       fetchedAt: '2026-09-09',
     },
+    {
+      url: 'https://www.kyoiku.metro.tokyo.lg.jp/documents/d/kyoiku/2026-03-02-181058-071',
+      docTitle: '東京都教育委員会 令和8年度東京都立高等学校入学者選抜合格発表 3［普通科（コース制の学校）］＋4［普通科（単位制の学校）］',
+      fiscalYear: '令和8年度（2026年度）',
+      fetchedAt: '2026-09-09',
+    },
   ],
   coverage: {
     status: 'partial',
-    includedDepartments: ['普通科（コース・単位制以外・区部57校＋多摩部44校＋島しょ6校＝107レコード）'],
+    includedDepartments: [
+      '普通科（コース・単位制以外・区部57校＋多摩部44校＋島しょ6校＝107レコード）',
+      '普通科（コース制・4レコード）',
+      '普通科（単位制・12レコード）',
+    ],
     pendingDepartments: [
-      '普通科（コース・単位制）',
       '専門学科・定時制課程（単位制）',
       '通信制（前期選抜）',
     ],
-    note: '「普通科（コース・単位制以外）」区分（区部57校＋多摩部44校＋島しょ6校＝107レコード）を完全収録。quotaは既存competition-rates/tokyo.tsと全107件で完全一致（募集人員は試験日まで不変であることを確認）。applicantsConfirmedも既存パイプラインをそのまま再利用（本資料には志願者数列が存在しないため）。testTakersConfirmed/finalPassersのみ本資料から新規転記。資料本文の「区部計」「多摩部計」「コース、単位制以外計」「島しょ計」の4段階の公式小計と107レコード全数の機械集計がquota/testTakersConfirmed/finalPassersの3系列すべてで完全一致。finalPassers>quotaが107件中77件と極めて高頻度（推薦選抜の未消化枠繰り上げが原因と推測・他県の「合格ボーダー同点者」型とは異質のため個別列挙による例外管理はせず）。普通科（コース・単位制）・専門学科・定時制課程（単位制）・通信制（前期選抜）は未着手。',
+    note: '「普通科（コース・単位制以外）」区分（107レコード）＋「普通科（コース制）」（4レコード）＋「普通科（単位制）」（12レコード）を完全収録し累計123レコード。quotaは既存competition-rates/tokyo.tsと全123件で完全一致（募集人員は試験日まで不変であることを確認）。applicantsConfirmedも既存パイプラインをそのまま再利用（本資料には志願者数列が存在しないため）。testTakersConfirmed/finalPassersのみ本資料から新規転記。資料本文の「区部計」「多摩部計」「コース、単位制以外計」「島しょ計」「コース制計」「単位制計」の6段階の公式小計と123レコード全数の機械集計がquota/testTakersConfirmed/finalPassersの3系列すべてで完全一致。finalPassers>quotaが極めて高頻度（推薦選抜の未消化枠繰り上げが原因と推測・他県の「合格ボーダー同点者」型とは異質のため個別列挙による例外管理はせず）。専門学科・定時制課程（単位制）・通信制（前期選抜）は未着手。',
   },
   officialSubtotals: [
     { label: '区部計', quota: 12088, applicantsConfirmed: 16926, testTakersConfirmed: 15539, finalPassers: 11638 },
     { label: '多摩部計', quota: 9344, applicantsConfirmed: 11630, testTakersConfirmed: 10961, finalPassers: 8791 },
     { label: 'コース、単位制以外計', quota: 21432, applicantsConfirmed: 28556, testTakersConfirmed: 26500, finalPassers: 20429 },
     { label: '島しょ計', quota: 310, applicantsConfirmed: 100, testTakersConfirmed: 100, finalPassers: 100 },
+    { label: 'コース制計', quota: 224, applicantsConfirmed: 279, testTakersConfirmed: 254, finalPassers: 208 },
+    { label: '単位制計', quota: 2276, applicantsConfirmed: 2948, testTakersConfirmed: 2709, finalPassers: 2146 },
   ],
   records: [
     { schoolName: '日比谷', department: '普通科', quota: 253, applicantsConfirmed: 520, testTakersConfirmed: 420, finalPassers: 270 },
@@ -180,5 +203,21 @@ export const TOKYO_STAGE_LEDGER: PrefectureStageLedgerFile = {
     { schoolName: '三宅', department: '普通科', quota: 40, applicantsConfirmed: 2, testTakersConfirmed: 2, finalPassers: 2 },
     { schoolName: '八丈', department: '普通科', quota: 80, applicantsConfirmed: 29, testTakersConfirmed: 29, finalPassers: 29 },
     { schoolName: '小笠原', department: '普通科', quota: 30, applicantsConfirmed: 16, testTakersConfirmed: 16, finalPassers: 16 },
+    { schoolName: '深川', department: '普通科（コース制・外国語）', quota: 56, applicantsConfirmed: 79, testTakersConfirmed: 71, finalPassers: 57 },
+    { schoolName: '片倉', department: '普通科（コース制・造形美術）', quota: 56, applicantsConfirmed: 37, testTakersConfirmed: 36, finalPassers: 36 },
+    { schoolName: '松が谷', department: '普通科（コース制・外国語）', quota: 56, applicantsConfirmed: 82, testTakersConfirmed: 77, finalPassers: 57 },
+    { schoolName: '小平', department: '普通科（コース制・外国語）', quota: 56, applicantsConfirmed: 81, testTakersConfirmed: 70, finalPassers: 58 },
+    { schoolName: '新宿', department: '普通科（単位制）', quota: 284, applicantsConfirmed: 629, testTakersConfirmed: 558, finalPassers: 288 },
+    { schoolName: '忍岡', department: '普通科（単位制）', quota: 124, applicantsConfirmed: 134, testTakersConfirmed: 127, finalPassers: 125 },
+    { schoolName: '墨田川', department: '普通科（単位制）', quota: 252, applicantsConfirmed: 296, testTakersConfirmed: 274, finalPassers: 256 },
+    { schoolName: '美原', department: '普通科（単位制）', quota: 156, applicantsConfirmed: 115, testTakersConfirmed: 106, finalPassers: 106 },
+    { schoolName: '深沢', department: '普通科（単位制）', quota: 130, applicantsConfirmed: 82, testTakersConfirmed: 72, finalPassers: 72 },
+    { schoolName: '芦花', department: '普通科（単位制）', quota: 220, applicantsConfirmed: 322, testTakersConfirmed: 286, finalPassers: 222 },
+    { schoolName: '飛鳥', department: '普通科（単位制）', quota: 170, applicantsConfirmed: 196, testTakersConfirmed: 180, finalPassers: 173 },
+    { schoolName: '板橋有徳', department: '普通科（単位制）', quota: 156, applicantsConfirmed: 155, testTakersConfirmed: 147, finalPassers: 147 },
+    { schoolName: '大泉桜', department: '普通科（単位制）', quota: 156, applicantsConfirmed: 150, testTakersConfirmed: 140, finalPassers: 140 },
+    { schoolName: '翔陽', department: '普通科（単位制）', quota: 188, applicantsConfirmed: 181, testTakersConfirmed: 171, finalPassers: 171 },
+    { schoolName: '国分寺', department: '普通科（単位制）', quota: 252, applicantsConfirmed: 409, testTakersConfirmed: 372, finalPassers: 256 },
+    { schoolName: '上水', department: '普通科（単位制）', quota: 188, applicantsConfirmed: 279, testTakersConfirmed: 276, finalPassers: 190 },
   ],
 };
