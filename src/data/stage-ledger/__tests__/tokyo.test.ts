@@ -5,19 +5,20 @@ import { COMPETITION_RATE_BY_PREFECTURE } from '@/data/competition-rates';
 /**
  * T-Y11F §5順序#7 DoD検証（東京都・段階台帳7県目・「普通科」系123レコード＋「商業」7レコード＋
  * 「ビジネスコミュニケーション科」2レコード＋「工業に関する学科」16レコード＋「科学技術科」
- * 2レコード＋「農業」5レコード＋「水産」1レコード＋「家庭（単位制以外）」3レコード＝計159
- * レコード）: ①レコードの不変条件（quota>0等）②既存の倍率パイプライン（competition-rates/
- * tokyo.ts）のquota・applicantsConfirmedと段階台帳が全件完全一致すること（本資料には志願者数
- * 列が存在しないため両方とも既存パイプラインを再利用する設計）③finalPassers>quotaが普通科系
- * では極めて高頻度（推薦選抜の未消化枠繰り上げが原因と推測）のため他県のような個別例外列挙は
- * せず、代わりにfinalPassers<=applicantsConfirmedの逆側の不変条件のみ検証する④公式小計（15
- * 段階）との完全一致。
+ * 2レコード＋「農業」5レコード＋「水産」1レコード＋「家庭（単位制以外）」3レコード＋
+ * 「家庭（単位制）」1レコード＋「福祉」2レコード＋「理数」2レコード＋「芸術」1レコード＋
+ * 「体育」2レコード＝計167レコード）: ①レコードの不変条件（quota>0等）②既存の倍率パイプ
+ * ライン（competition-rates/tokyo.ts）のquota・applicantsConfirmedと段階台帳が全件完全一致
+ * すること（本資料には志願者数列が存在しないため両方とも既存パイプラインを再利用する設計）
+ * ③finalPassers>quotaが普通科系では極めて高頻度（推薦選抜の未消化枠繰り上げが原因と推測）の
+ * ため他県のような個別例外列挙はせず、代わりにfinalPassers<=applicantsConfirmedの逆側の
+ * 不変条件のみ検証する④公式小計（20段階）との完全一致。
  */
-describe('東京都 段階台帳（T-Y11F §5順序#7・7県目・159レコード）', () => {
+describe('東京都 段階台帳（T-Y11F §5順序#7・7県目・167レコード）', () => {
   const { records, officialSubtotals } = TOKYO_STAGE_LEDGER;
 
-  it('取り込み件数は普通科系123レコード＋商業7レコード＋ビジネスコミュニケーション科2レコード＋工業16レコード＋科学技術科2レコード＋農業5レコード＋水産1レコード＋家庭3レコード＝計159レコード', () => {
-    expect(records).toHaveLength(159);
+  it('取り込み件数は普通科系123レコード＋商業7レコード＋ビジネスコミュニケーション科2レコード＋工業16レコード＋科学技術科2レコード＋農業5レコード＋水産1レコード＋家庭単位制以外3レコード＋家庭単位制1レコード＋福祉2レコード＋理数2レコード＋芸術1レコード＋体育2レコード＝計167レコード', () => {
+    expect(records).toHaveLength(167);
   });
 
   it('quota/applicantsConfirmed/testTakersConfirmed/finalPassersはいずれも0より大きい（不変条件）', () => {
@@ -44,7 +45,7 @@ describe('東京都 段階台帳（T-Y11F §5順序#7・7県目・159レコー�
       expect(counterpart.quota).toBe(stageRecord.quota);
       expect(counterpart.finalApplicants).toBe(stageRecord.applicantsConfirmed);
     }
-    expect(matched).toBe(159);
+    expect(matched).toBe(167);
   });
 
   it('finalPassersはapplicantsConfirmedを超えない（東京都でもこのパターンの逆転は0件）', () => {
@@ -254,5 +255,70 @@ describe('東京都 段階台帳（T-Y11F §5順序#7・7県目・159レコー�
 
     const overflowCount = [...nougyouRecords, ...suisanRecords, ...kateiRecords].filter((r) => r.finalPassers > r.quota).length;
     expect(overflowCount).toBe(6);
+  });
+
+  it('「家庭（単位制）」1レコード＋「福祉」2レコード＋「理数」2レコード＋「芸術」1レコード＋「体育」2レコードの機械集計が資料本文の公式小計（単位制計〈家庭〉・家庭合計・福祉計・理数計・芸術計・体育計）とquota/testTakersConfirmed/finalPassers/applicantsConfirmedの4系列とも完全一致する（本区分はfinalPassers>quotaが4/8件）', () => {
+    if (!officialSubtotals) throw new Error('officialSubtotals が定義されていません');
+    const kateiTani = officialSubtotals.find((s) => s.label === '単位制計（家庭）');
+    const kateiGoukei = officialSubtotals.find((s) => s.label === '家庭合計');
+    const fukushi = officialSubtotals.find((s) => s.label === '福祉計');
+    const risuu = officialSubtotals.find((s) => s.label === '理数計');
+    const geijutsu = officialSubtotals.find((s) => s.label === '芸術計');
+    const taiiku = officialSubtotals.find((s) => s.label === '体育計');
+    const kateiIjai = officialSubtotals.find((s) => s.label === '家庭計');
+    if (!kateiTani || !kateiGoukei || !fukushi || !risuu || !geijutsu || !taiiku || !kateiIjai) {
+      throw new Error('officialSubtotals の一部が見つかりません');
+    }
+
+    // 家庭計（単位制以外）＋単位制計（家庭）＝家庭合計（資料内部の整合性）
+    expect(kateiIjai.quota + kateiTani.quota).toBe(kateiGoukei.quota);
+    expect(kateiIjai.testTakersConfirmed + kateiTani.testTakersConfirmed).toBe(kateiGoukei.testTakersConfirmed);
+    expect(kateiIjai.finalPassers + kateiTani.finalPassers).toBe(kateiGoukei.finalPassers);
+
+    const kateiTaniRecords = records.filter((r) => r.department === '家庭科（単位制）');
+    const fukushiRecords = records.filter((r) => r.department === '福祉科');
+    const risuuRecords = records.filter((r) => r.department === '理数科');
+    const geijutsuRecords = records.filter((r) => r.department === '芸術科');
+    const taiikuRecords = records.filter((r) => r.department === '体育科');
+    expect(kateiTaniRecords).toHaveLength(1);
+    expect(fukushiRecords).toHaveLength(2);
+    expect(risuuRecords).toHaveLength(2);
+    expect(geijutsuRecords).toHaveLength(1);
+    expect(taiikuRecords).toHaveLength(2);
+
+    const kateiTaniSums = sumStageLedger(kateiTaniRecords);
+    expect(kateiTaniSums.quota).toBe(kateiTani.quota);
+    expect(kateiTaniSums.testTakersConfirmed).toBe(kateiTani.testTakersConfirmed);
+    expect(kateiTaniSums.finalPassers).toBe(kateiTani.finalPassers);
+    expect(kateiTaniSums.applicantsConfirmed).toBe(kateiTani.applicantsConfirmed);
+
+    const fukushiSums = sumStageLedger(fukushiRecords);
+    expect(fukushiSums.quota).toBe(fukushi.quota);
+    expect(fukushiSums.testTakersConfirmed).toBe(fukushi.testTakersConfirmed);
+    expect(fukushiSums.finalPassers).toBe(fukushi.finalPassers);
+    expect(fukushiSums.applicantsConfirmed).toBe(fukushi.applicantsConfirmed);
+
+    const risuuSums = sumStageLedger(risuuRecords);
+    expect(risuuSums.quota).toBe(risuu.quota);
+    expect(risuuSums.testTakersConfirmed).toBe(risuu.testTakersConfirmed);
+    expect(risuuSums.finalPassers).toBe(risuu.finalPassers);
+    expect(risuuSums.applicantsConfirmed).toBe(risuu.applicantsConfirmed);
+
+    const geijutsuSums = sumStageLedger(geijutsuRecords);
+    expect(geijutsuSums.quota).toBe(geijutsu.quota);
+    expect(geijutsuSums.testTakersConfirmed).toBe(geijutsu.testTakersConfirmed);
+    expect(geijutsuSums.finalPassers).toBe(geijutsu.finalPassers);
+    expect(geijutsuSums.applicantsConfirmed).toBe(geijutsu.applicantsConfirmed);
+
+    const taiikuSums = sumStageLedger(taiikuRecords);
+    expect(taiikuSums.quota).toBe(taiiku.quota);
+    expect(taiikuSums.testTakersConfirmed).toBe(taiiku.testTakersConfirmed);
+    expect(taiikuSums.finalPassers).toBe(taiiku.finalPassers);
+    expect(taiikuSums.applicantsConfirmed).toBe(taiiku.applicantsConfirmed);
+
+    const overflowCount = [...kateiTaniRecords, ...fukushiRecords, ...risuuRecords, ...geijutsuRecords, ...taiikuRecords].filter(
+      (r) => r.finalPassers > r.quota
+    ).length;
+    expect(overflowCount).toBe(4);
   });
 });
