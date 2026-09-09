@@ -1,11 +1,11 @@
 import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
 
 /**
- * 栃木県 段階台帳（T-Y11F §5順序#7・3県目・1〜2頁目・全日制県立75レコード）。
+ * 栃木県 段階台帳（T-Y11F §5順序#7・3県目・全3頁を完全収録・全日制県立107レコード）。
  *
  * 一次ソース: 栃木県教育委員会「令和8（2026）年度県立高等学校入学者選抜一般選抜出願・合格
  * 状況（全日制課程）」（全3頁）の1頁目（宇都宮〜小山西・22校39レコード）＋2頁目（小山北桜〜
- * 真岡北陵・19校36レコード）。
+ * 真岡北陵・19校36レコード）＋3頁目（真岡工業〜さくら清修・17校32レコード）。
  * https://www.pref.tochigi.lg.jp/m04/r08/documents/r8zennitiseiippannsenbatsusyutugangoukakujokyo.pdf
  *
  * ⚠️既存の`competition-rates/tochigi.ts`（倍率パイプライン）は**別の一次資料**（「出願変更状況」・
@@ -36,6 +36,19 @@ import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
  * ドリフトを確認、いずれも1〜2名以内かつ方向は一貫して本資料が少ない側——1頁目の仮説
  * （試験当日までの志願取消）を再現性をもって裏付けた。栃木農業がR8で2学科（農業科学・
  * 食品科学）に統合済みであることも既存パイプラインの記述どおり確認できた。
+ *
+ * 🔁3頁目追加（真岡工業〜さくら清修・17校32レコード）＝**これで全3頁107レコードが完結・
+ * 既存パイプライン冒頭コメントの「57校107レコード」と完全一致**。quotaは既存パイプラインと
+ * 32件すべて完全一致（3頁とも計107件）。applicantsConfirmedのドリフトはこの頁では1件のみ
+ * （那須清峰機械システム23(pipeline25)）で累計14件/107件（13%）。**3頁目末尾に本資料
+ * 自体の「合計」行**（募集定員10,405/特色選抜内定者数2,854/A海外内定者数25/一般選抜定員
+ * 7,259/最終出願人員7,585/受検人員7,566/合格計6,586）が印字されており、107レコード全数の
+ * 機械集計がquota7,259・applicantsConfirmed7,585・testTakersConfirmed7,566・
+ * finalPassers6,586の4系列すべてと一発で完全一致した——個別レコードの既存パイプライン
+ * 突合とは独立した、資料自体からの最上位検算にも一度も外れることなく到達でき、栃木県
+ * 「全日制県立」107レコードに収録漏れ・重複が一件も無いことを証明できた。既存パイプライン
+ * 自体の合計（一般選抜定員7,259・出願人員7,602）とはapplicantsConfirmedの合計だけが
+ * 7,585 vs 7,602で17名差となり、14件のドリフト（1〜2名ずつ）の累積と整合する。
  */
 
 export const TOCHIGI_STAGE_LEDGER: PrefectureStageLedgerFile = {
@@ -43,19 +56,20 @@ export const TOCHIGI_STAGE_LEDGER: PrefectureStageLedgerFile = {
   sources: [
     {
       url: 'https://www.pref.tochigi.lg.jp/m04/r08/documents/r8zennitiseiippannsenbatsusyutugangoukakujokyo.pdf',
-      docTitle: '栃木県教育委員会 令和8（2026）年度県立高等学校入学者選抜一般選抜出願・合格状況（全日制課程）1〜2頁目（宇都宮〜真岡北陵）',
+      docTitle: '栃木県教育委員会 令和8（2026）年度県立高等学校入学者選抜一般選抜出願・合格状況（全日制課程）全3頁（宇都宮〜さくら清修）',
       fiscalYear: '令和8年度（2026年度）',
       fetchedAt: '2026-09-09',
     },
   ],
   coverage: {
-    status: 'partial',
+    status: 'complete',
     includedDepartments: [
       '全日制県立（1頁目・宇都宮〜小山西・22校39レコード）',
       '全日制県立（2頁目・小山北桜〜真岡北陵・19校36レコード）',
+      '全日制県立（3頁目・真岡工業〜さくら清修・17校32レコード）',
     ],
-    pendingDepartments: ['3頁目の残り学校'],
-    note: '1〜2頁目（41校75レコード）。quotaは既存competition-rates/tochigi.tsと全75件で完全一致（同一の一般選抜定員が試験日まで不変であることを確認）。applicantsConfirmedは本資料（3月試験後）が既存パイプライン（2月25日時点）以下になることがある（75件中13件で1〜2名の志願取消による減少を確認・全件が本資料≤パイプラインの方向）。宇都宮東（一般選抜非実施）は既存パイプラインと同じ理由で対象外。',
+    pendingDepartments: [],
+    note: '全3頁（学校番号1〜58のうち宇都宮東を除く57校・107レコード）を完全収録し既存パイプラインの「57校107レコード」と件数が完全一致。quotaは既存competition-rates/tochigi.tsと全107件で完全一致（一般選抜定員は試験日まで不変であることを確認）。applicantsConfirmedは本資料（3月試験後）が既存パイプライン（2月25日時点）以下になることがある（107件中14件で1〜2名の志願取消による減少を確認・全件が本資料≤パイプラインの方向）。3頁目末尾の「合計」行（quota7,259/applicants7,585/testTakers7,566/final6,586）と107レコード全数の機械集計が4系列とも完全一致。宇都宮東（一般選抜非実施）は既存パイプラインと同じ理由で対象外。',
   },
   records: [
     { schoolName: '宇都宮', department: '普通', quota: 255, applicantsConfirmed: 308, testTakersConfirmed: 308, finalPassers: 255 },
@@ -134,5 +148,42 @@ export const TOCHIGI_STAGE_LEDGER: PrefectureStageLedgerFile = {
     { schoolName: '真岡北陵', department: '食品科学', quota: 26, applicantsConfirmed: 12, testTakersConfirmed: 12, finalPassers: 12 },
     { schoolName: '真岡北陵', department: '総合ビジネス', quota: 13, applicantsConfirmed: 5, testTakersConfirmed: 5, finalPassers: 5 },
     { schoolName: '真岡北陵', department: '介護福祉', quota: 13, applicantsConfirmed: 5, testTakersConfirmed: 5, finalPassers: 5 },
+    // --- 3頁目（学校番号42〜58） ---
+    { schoolName: '真岡工業', department: '機械システム', quota: 26, applicantsConfirmed: 26, testTakersConfirmed: 26, finalPassers: 26 },
+    { schoolName: '真岡工業', department: '建設', quota: 26, applicantsConfirmed: 22, testTakersConfirmed: 22, finalPassers: 21 },
+    { schoolName: '真岡工業', department: '電子', quota: 29, applicantsConfirmed: 16, testTakersConfirmed: 16, finalPassers: 16 },
+    { schoolName: '益子芳星', department: '普通', quota: 78, applicantsConfirmed: 47, testTakersConfirmed: 47, finalPassers: 47 },
+    { schoolName: '茂木', department: '総合学科', quota: 104, applicantsConfirmed: 104, testTakersConfirmed: 104, finalPassers: 104 },
+    { schoolName: '烏山', department: '普通', quota: 104, applicantsConfirmed: 84, testTakersConfirmed: 84, finalPassers: 84 },
+    { schoolName: '馬頭', department: '普通', quota: 36, applicantsConfirmed: 15, testTakersConfirmed: 14, finalPassers: 14 },
+    { schoolName: '馬頭', department: '水産', quota: 17, applicantsConfirmed: 14, testTakersConfirmed: 14, finalPassers: 14 },
+    { schoolName: '大田原', department: '普通', quota: 150, applicantsConfirmed: 147, testTakersConfirmed: 147, finalPassers: 147 },
+    { schoolName: '大田原女子', department: '普通', quota: 150, applicantsConfirmed: 146, testTakersConfirmed: 146, finalPassers: 146 },
+    { schoolName: '黒羽', department: '普通', quota: 58, applicantsConfirmed: 54, testTakersConfirmed: 54, finalPassers: 54 },
+    { schoolName: '那須拓陽', department: '普通', quota: 52, applicantsConfirmed: 49, testTakersConfirmed: 49, finalPassers: 49 },
+    { schoolName: '那須拓陽', department: '農業経営', quota: 26, applicantsConfirmed: 23, testTakersConfirmed: 23, finalPassers: 25 },
+    { schoolName: '那須拓陽', department: '生物工学', quota: 26, applicantsConfirmed: 27, testTakersConfirmed: 27, finalPassers: 26 },
+    { schoolName: '那須拓陽', department: '食品化学', quota: 26, applicantsConfirmed: 29, testTakersConfirmed: 28, finalPassers: 26 },
+    { schoolName: '那須拓陽', department: '食物文化', quota: 26, applicantsConfirmed: 23, testTakersConfirmed: 23, finalPassers: 23 },
+    { schoolName: '那須清峰', department: '機械システム', quota: 26, applicantsConfirmed: 23, testTakersConfirmed: 23, finalPassers: 23 },
+    { schoolName: '那須清峰', department: '電気情報', quota: 26, applicantsConfirmed: 25, testTakersConfirmed: 25, finalPassers: 25 },
+    { schoolName: '那須清峰', department: '建設工学', quota: 26, applicantsConfirmed: 24, testTakersConfirmed: 24, finalPassers: 24 },
+    { schoolName: '那須清峰', department: '商業', quota: 28, applicantsConfirmed: 17, testTakersConfirmed: 17, finalPassers: 17 },
+    { schoolName: '那須', department: '普通', quota: 31, applicantsConfirmed: 19, testTakersConfirmed: 19, finalPassers: 19 },
+    { schoolName: '那須', department: 'リゾート観光', quota: 27, applicantsConfirmed: 13, testTakersConfirmed: 13, finalPassers: 13 },
+    { schoolName: '黒磯', department: '普通', quota: 104, applicantsConfirmed: 104, testTakersConfirmed: 104, finalPassers: 104 },
+    { schoolName: '黒磯南', department: '総合学科', quota: 104, applicantsConfirmed: 110, testTakersConfirmed: 110, finalPassers: 104 },
+    { schoolName: '矢板', department: '農業経営', quota: 26, applicantsConfirmed: 22, testTakersConfirmed: 22, finalPassers: 22 },
+    { schoolName: '矢板', department: '工業システム', quota: 28, applicantsConfirmed: 13, testTakersConfirmed: 13, finalPassers: 13 },
+    { schoolName: '矢板', department: '栄養食物', quota: 26, applicantsConfirmed: 22, testTakersConfirmed: 22, finalPassers: 22 },
+    { schoolName: '矢板', department: '介護福祉', quota: 22, applicantsConfirmed: 8, testTakersConfirmed: 8, finalPassers: 8 },
+    { schoolName: '矢板東', department: '普通', quota: 69, applicantsConfirmed: 66, testTakersConfirmed: 66, finalPassers: 66 },
+    { schoolName: '高根沢', department: '普通', quota: 56, applicantsConfirmed: 22, testTakersConfirmed: 20, finalPassers: 20 },
+    { schoolName: '高根沢', department: '商業', quota: 64, applicantsConfirmed: 25, testTakersConfirmed: 25, finalPassers: 25 },
+    { schoolName: 'さくら清修', department: '総合学科', quota: 130, applicantsConfirmed: 159, testTakersConfirmed: 159, finalPassers: 130 },
+  ],
+  officialSubtotals: [
+    // 3頁目末尾の資料全体「合計」行。
+    { label: '合計', quota: 7_259, applicantsConfirmed: 7_585, testTakersConfirmed: 7_566, finalPassers: 6_586 },
   ],
 };
