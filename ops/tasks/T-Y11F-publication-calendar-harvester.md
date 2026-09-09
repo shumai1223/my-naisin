@@ -1765,6 +1765,23 @@ finalPassers240＝quota全数）では上振れ幅が非常に大きい。quota�
 「公表値をそのまま転記し独自の推定・修正を加えない」原則に従った判断）。段階台帳累計1955
 レコード（11県目）。tsc実exit0・jestフルスイート528suites7513tests green。次は12県目への
 横展開（段階台帳の対象県はまだ35県残る）。
+
+**2026-09-09〜09-10（12〜26県目・詳細はdocs/worklog/2026-09-09.md・2026-09-10.md参照）**:
+shiga/tottori/kumamoto/ishikawa/tokushima/wakayama/yamagata/fukui/kochi/nara/yamanashi/
+shimane/miyagi/kyotoの14県を追加完結し**累計26県**（src/data/stage-ledger/index.tsが
+正本）。tokushimaで既存倍率パイプラインの実データバグ（那賀・海部の学校名取り違え）を発見・
+修正。yamagataは既存パイプラインと集計定義が別物と判明し非依存の独立収録に設計変更。
+**見送り確定（資料の構造的欠如・再挑戦しても無駄）**: iwate（quota定義の複数控除層が資料間
+不整合）・fukushima（学校別受検者数資料が無い）・gunma・toyama・gifu・okayama・hiroshima・
+yamaguchi・kagawa・ehime・fukuoka・saga・nagasaki・miyazaki・**aomori**（2026-09-10確認・
+合格者数資料はquota/applicants/finalPassersのみでtestTakersConfirmed相当の資料が無い）は
+いずれも「合格者数(または受検者数)の学校別一覧が資料として存在しない」型で見送り。
+**恒久対象外**: hyogo（robots拒否・取得しない）。**一時ブロック**: aichi（Imperva WAF・
+2026-09-09時点でも継続）。**2026-09-10確認・前進手段なし**: oita（「全体状況」PDFは得点
+分布ヒストグラムのみで学校別データ非搭載）・okinawa（令和8年度実施分の志願状況・合格状況
+ページ自体がアーカイブ化されておらず令和7年度が最新）。
+**真に未着手（次回候補）はhokkaido・akita・oitaの別資料・okinawaの別資料のみ**。この4県も
+尽きたら§5順序#7は事実上payment済みと判断し§5順序#8（出典ロケータ）へ移行してよい。
 | 8 | **★出典ロケータ** | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
 | 9 | 残り物✅T-Y11C-4完了(2026-09-09) | T-Y11B 未9項目 / T-SS1 未5項目 / ~~T-Y11C-4 の yamanashi 20件・yamaguchi 5件~~（finalRate例外27件を全て原因確定/修正完了・詳細は`ops/tasks/T-Y11C-finalrate-invariant.md`） | 10〜20h |
 
