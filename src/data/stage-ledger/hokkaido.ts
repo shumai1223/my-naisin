@@ -1,8 +1,8 @@
 import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
 
 /**
- * 北海道 段階台帳（T-Y11F §5順序#7・28県目・全日制coverage='partial'・空知地区29レコード＋
- * 石狩地区57レコード＋市立札幌9レコード＝95レコードで着手）。
+ * 北海道 段階台帳（T-Y11F §5順序#7・28県目・全日制coverage='partial'・空知29＋石狩57＋
+ * 市立札幌9＋後志18＝113レコードで着手）。
  *
  * 一次ソース: 北海道教育委員会「R8入学者選抜状況報告書 §3 学校別受検者数及び合格者数」
  * （令和8年度＝2026年度入学者選抜・全14頁・管内ごとに1頁）。
@@ -53,6 +53,10 @@ import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
  * パターン）。市立札幌は「札幌市立高等学校通学区域規則（札幌市外）適用者」という道立とは別の
  * 通学区域欄を持つが、quota・applicantsConfirmed・testTakersConfirmed・finalPassersの
  * 4フィールド定義自体は道立高校と共通のため、既存の設計をそのまま適用できた。
+ *
+ * ⚠️後志地区追加分（18レコード）で新たな例外2件: 小樽未来創造「情報会計マネジメント」
+ * （合格36>受検35・追加合格者型）・小樽水産「水産食品」（受検34>出願33・第2次募集1名分の
+ * 新規応募者型）。いずれも既出パターンの再現で+1の小差。
  */
 export const HOKKAIDO_STAGE_LEDGER: PrefectureStageLedgerFile = {
   prefectureCode: 'hokkaido',
@@ -75,6 +79,12 @@ export const HOKKAIDO_STAGE_LEDGER: PrefectureStageLedgerFile = {
       fiscalYear: '令和8年度（2026年度）',
       fetchedAt: '2026-09-10',
     },
+    {
+      url: 'https://www.dokyoi.pref.hokkaido.lg.jp/fs/1/3/1/7/8/5/5/0/_/05_p9-p22.pdf',
+      docTitle: '北海道教育委員会 R8入学者選抜状況報告書「§3 学校別受検者数及び合格者数」（p.13・後志地区）',
+      fiscalYear: '令和8年度（2026年度）',
+      fetchedAt: '2026-09-10',
+    },
   ],
   coverage: {
     status: 'partial',
@@ -82,9 +92,9 @@ export const HOKKAIDO_STAGE_LEDGER: PrefectureStageLedgerFile = {
       '全日制・空知地区（普通教育を主とする学科12レコード＋専門教育を主とする学科及び総合学科17レコード＝29レコード）',
       '全日制・石狩地区・道立高校のみ（普通教育を主とする学科31レコード＋専門教育を主とする学科及び総合学科26レコード＝57レコード）',
       '全日制・市立札幌（普通教育を主とする学科7レコード＋専門教育を主とする学科2レコード＝9レコード）',
+      '全日制・後志地区（普通教育を主とする学科6レコード＋専門教育を主とする学科及び総合学科12レコード＝18レコード）',
     ],
     pendingDepartments: [
-      '全日制・後志地区',
       '全日制・胆振地区',
       '全日制・日高地区',
       '全日制・渡島地区',
@@ -99,7 +109,7 @@ export const HOKKAIDO_STAGE_LEDGER: PrefectureStageLedgerFile = {
       '滝川西「情報マネジメント」（既存パイプラインが検算不能のため見送った1行・本ファイルも同じ理由でスコープ外）',
       '定時制課程（他県と同じ理由で恒久的にスコープ外）',
     ],
-    note: '全14管内のうち空知地区（29レコード）＋石狩地区・道立高校のみ（57レコード）＋市立札幌（9レコード）＝95レコードに着手。quota・applicantsConfirmedは既存パイプライン`competition-rates/hokkaido.ts`の該当レコードをそのまま再利用し、testTakersConfirmed（第1次受検者数＋第2次受検者数）・finalPassers（入学者数＝第1次合格者数＋第2次合格者数）を「§3学校別受検者数及び合格者数」p.9-12から新規転記した。推薦枠は一般枠と完全に独立したクオータ（秋田のような推薦落選者の一般転入は無い）のためスコープ外。既知の例外10件（第2次募集による新規応募者分でtestTakersConfirmedがapplicantsConfirmedを上回る7件、追加合格者と推測されるfinalPassers>testTakersConfirmed3件、いずれも空知・石狩分）はいずれも小差（最大+6）。市立札幌9件は例外0件のクリーンな区分だった。本資料はさらに12管内分（全260レコード規模）を残しており、既存パイプラインと同じく1管内ずつ段階的に追加する。',
+    note: '全14管内のうち空知（29）＋石狩・道立のみ（57）＋市立札幌（9）＋後志（18）＝113レコードに着手。quota・applicantsConfirmedは既存パイプライン`competition-rates/hokkaido.ts`の該当レコードをそのまま再利用し、testTakersConfirmed（第1次受検者数＋第2次受検者数）・finalPassers（入学者数＝第1次合格者数＋第2次合格者数）を「§3学校別受検者数及び合格者数」p.9-13から新規転記した。推薦枠は一般枠と完全に独立したクオータ（秋田のような推薦落選者の一般転入は無い）のためスコープ外。既知の例外12件（第2次募集による新規応募者分でtestTakersConfirmedがapplicantsConfirmedを上回る8件、追加合格者と推測されるfinalPassers>testTakersConfirmed4件）はいずれも小差（最大+6）。市立札幌9件は例外0件のクリーンな区分だった。本資料はさらに11管内分（全240レコード規模）を残しており、既存パイプラインと同じく1管内ずつ段階的に追加する。',
   },
   records: [
     { schoolName: '岩見沢東', department: '普通', quota: 160, applicantsConfirmed: 134, testTakersConfirmed: 130, finalPassers: 128 },
@@ -197,5 +207,23 @@ export const HOKKAIDO_STAGE_LEDGER: PrefectureStageLedgerFile = {
     { schoolName: '市立札幌新川', department: '普通', quota: 320, applicantsConfirmed: 403, testTakersConfirmed: 388, finalPassers: 320 },
     { schoolName: '市立札幌旭丘', department: '数理データサイエンス', quota: 80, applicantsConfirmed: 90, testTakersConfirmed: 87, finalPassers: 80 },
     { schoolName: '市立札幌啓北商業', department: '未来商学', quota: 240, applicantsConfirmed: 191, testTakersConfirmed: 180, finalPassers: 173 },
+    { schoolName: '小樽潮陵', department: '普通', quota: 200, applicantsConfirmed: 205, testTakersConfirmed: 200, finalPassers: 199 },
+    { schoolName: '小樽桜陽', department: '普通', quota: 200, applicantsConfirmed: 176, testTakersConfirmed: 173, finalPassers: 172 },
+    { schoolName: '岩内', department: '普通', quota: 80, applicantsConfirmed: 61, testTakersConfirmed: 61, finalPassers: 61 },
+    { schoolName: '寿都', department: '普通', quota: 40, applicantsConfirmed: 17, testTakersConfirmed: 17, finalPassers: 17 },
+    { schoolName: '蘭越', department: '普通', quota: 40, applicantsConfirmed: 23, testTakersConfirmed: 23, finalPassers: 23 },
+    { schoolName: '倶知安', department: '普通', quota: 160, applicantsConfirmed: 108, testTakersConfirmed: 104, finalPassers: 104 },
+    { schoolName: '倶知安農業', department: '生産科学', quota: 40, applicantsConfirmed: 17, testTakersConfirmed: 16, finalPassers: 16 },
+    { schoolName: '小樽未来創造', department: '機械電気システム', quota: 40, applicantsConfirmed: 28, testTakersConfirmed: 28, finalPassers: 27 },
+    { schoolName: '小樽未来創造', department: '建設システム', quota: 40, applicantsConfirmed: 25, testTakersConfirmed: 25, finalPassers: 25 },
+    { schoolName: '小樽未来創造', department: '流通マネジメント', quota: 40, applicantsConfirmed: 42, testTakersConfirmed: 41, finalPassers: 40 },
+    { schoolName: '小樽未来創造', department: '情報会計マネジメント', quota: 40, applicantsConfirmed: 36, testTakersConfirmed: 35, finalPassers: 36 },
+    { schoolName: '岩内', department: '地域産業ビジネス', quota: 40, applicantsConfirmed: 12, testTakersConfirmed: 12, finalPassers: 12 },
+    { schoolName: '小樽水産', department: '海洋漁業', quota: 40, applicantsConfirmed: 40, testTakersConfirmed: 39, finalPassers: 39 },
+    { schoolName: '小樽水産', department: '水産食品', quota: 40, applicantsConfirmed: 33, testTakersConfirmed: 34, finalPassers: 33 },
+    { schoolName: '小樽水産', department: '栽培漁業', quota: 40, applicantsConfirmed: 39, testTakersConfirmed: 39, finalPassers: 39 },
+    { schoolName: '小樽水産', department: '情報通信', quota: 40, applicantsConfirmed: 27, testTakersConfirmed: 26, finalPassers: 26 },
+    { schoolName: '余市紅志', department: '総合', quota: 40, applicantsConfirmed: 29, testTakersConfirmed: 28, finalPassers: 27 },
+    { schoolName: 'ニセコ国際', department: '総合', quota: 70, applicantsConfirmed: 59, testTakersConfirmed: 58, finalPassers: 56 },
   ],
 };
