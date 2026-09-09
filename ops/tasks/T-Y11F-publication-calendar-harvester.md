@@ -1052,6 +1052,23 @@ testTakers32,570/finalPassers27,749）の両方で、210レコード全数の機
 初めての完全パイロット**になった。tsc実exit0・jestフルスイート518suites7390tests green。
 次は千葉のR7分（既存chiba.tsに掛-1データがあるため同様に収集可能）、または他県への横展開
 のいずれかを次回セッションで判断する。
+
+**2026-09-09続き（2県目saitamaへ横展開・10レコードのパイロット開始）**: 別県への横展開を
+埼玉県で試みた。既存`competition-rates/saitama.ts`は2月公表の「志願確定者数」資料（quota=
+入学許可予定者数A・applicants=志願確定者数B）を出典とするが、3月6日公表の「入学許可候補者数・
+欠員補充人員」資料は列構成が[募集人員/転編入者数/入学許可予定者数(A)/実受検者数(B)/入学許可
+候補者数(C)/倍率(B÷C)]で「志願確定者数」に相当する列が無いと判明。**段階台帳で初めて、
+1つの学校×学科レコードに複数の一次資料を組み合わせる設計**を採用: quota・applicantsConfirmed
+は既存`competition-rates/saitama.ts`をそのまま再利用（Aの値が両資料で完全一致することを
+確認済み）、testTakersConfirmed・finalPassersのみ新資料から新規転記。冒頭10校
+（上尾・上尾鷹の台・上尾橘・上尾南・朝霞・朝霞西・伊奈学園総合・入間向陽・岩槻・浦和）を
+`src/data/stage-ledger/saitama.ts`へ収集。jestで既存パイプラインとのquota/applicantsConfirmed
+完全一致を機械的に突合済み（10/10件マッチ）。**新知見**: 上尾（普通科）はfinalPassers(244)が
+quota(238)を6名上回るレコードを発見——学力検査の合格ボーダー同点者を全員合格とする運用に
+よるものと推測され、chibaでは常に成立していた「finalPassers≤quota」がsaitamaでは県ごとの
+選抜運用差により普遍的な制約ではないと判明（不変条件テストをsaitamaには適用しない設計に
+した）。tsc実exit0・jestフルスイート519suites7394tests green。次は千葉R7分の収集、saitama
+残り約230校の継続、または3県目への横展開のいずれかを次回セッションで判断する。
 | 8 | **★出典ロケータ** | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
 | 9 | 残り物✅T-Y11C-4完了(2026-09-09) | T-Y11B 未9項目 / T-SS1 未5項目 / ~~T-Y11C-4 の yamanashi 20件・yamaguchi 5件~~（finalRate例外27件を全て原因確定/修正完了・詳細は`ops/tasks/T-Y11C-finalrate-invariant.md`） | 10〜20h |
 
