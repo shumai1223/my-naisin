@@ -39,7 +39,8 @@ describe('bairitsu-ingest parse-table-pdf 汎用carry-forward組み立て (tochi
 
   test('文字の均等割り付け(トラッキング)による内部空白が学校名から除去される（宇都宮中央の実例）', () => {
     const record = parsed.find((r) => r.schoolName === '宇都宮中央' && r.department === '総合家庭');
-    expect(record).toEqual({ schoolName: '宇都宮中央', department: '総合家庭', quota: 31, finalApplicants: 34, finalRate: 1.1 });
+    // T-Y11F §5順序#8: page/rowIndexは出典ロケータ用に追加されたフィールド
+    expect(record).toEqual({ schoolName: '宇都宮中央', department: '総合家庭', quota: 31, finalApplicants: 34, finalRate: 1.1, page: 1, rowIndex: 6 });
   });
 
   test('集計行「合計」が学校として混入しない（grand total 7,259/7,602を含まない）', () => {

@@ -24,10 +24,16 @@ const TOCHIGI_LAYOUT: GeneralColumnLayout = {
   roles: { schoolName: 1, department: 2, quota: 7, finalApplicants: 12, finalRate: 13 },
 };
 
-/** 栃木県R8倍率PDFの学校別データ全3頁分（`tochigi-r8-geometry.json`）を解析する。 */
+/**
+ * 栃木県R8倍率PDFの学校別データ全3頁分（`tochigi-r8-geometry.json`）を解析する。
+ *
+ * ⚠️T-Y11F §5順序#8（出典ロケータ）: 概要ページ等は無く物理ページ1から詳細表が始まる
+ * （2026-09-10に`pdftotext -f 1`で宇都宮のquota255/applicants(変更後)308が物理ページ1に
+ * 実在することを確認済み）。出典ロケータ用のpageは配列添字+1（オフセット無し）。
+ */
 export function parseTochigi(geometries: PdfPageGeometry[]): ParsedCompetitionRow[] {
-  const allRowFields = geometries.flatMap((geom) =>
-    groupCharsIntoRows(geom.chars, 3.0).map((row) => extractRowFields(row.chars, TOCHIGI_LAYOUT))
+  const allRowFields = geometries.flatMap((geom, pageIdx) =>
+    groupCharsIntoRows(geom.chars, 3.0).map((row) => ({ ...extractRowFields(row.chars, TOCHIGI_LAYOUT), page: pageIdx + 1 }))
   );
   return assembleSimpleTableRows(allRowFields, {
     excludeRow: (schoolName, department) => (schoolName + department).includes('合計'),
