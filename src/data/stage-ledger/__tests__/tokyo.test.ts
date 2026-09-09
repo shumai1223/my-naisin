@@ -4,21 +4,22 @@ import { COMPETITION_RATE_BY_PREFECTURE } from '@/data/competition-rates';
 import { TEIJI_COMPETITION_RATE_BY_PREFECTURE } from '@/data/teiji-competition-rates';
 
 /**
- * T-Y11F §5順序#7 DoD検証（東京都・段階台帳7県目・189レコード=「普通科」系123＋商業7＋
+ * T-Y11F §5順序#7 DoD検証（東京都・段階台帳7県目・197レコード=「普通科」系123＋商業7＋
  * ビジネスコミュ2＋工業16＋科学技術2＋農業5＋水産1＋家庭単位制以外3＋家庭単位制1＋福祉2＋
- * 理数2＋芸術1＋体育2＋併合科3＋産業科2＋総合学科10＋定時制課程単位制7）: ①レコードの不変
- * 条件（quota>0等）②既存の倍率パイプライン（普通科〜総合学科はcompetition-rates/tokyo.ts、
- * 定時制課程はteiji-competition-rates/tokyo.ts）のquota・applicantsConfirmedと段階台帳が
- * 全件完全一致すること（本資料には志願者数列が存在しないため両方とも既存パイプラインを再利用
- * する設計）③finalPassers>quotaが普通科系では極めて高頻度（推薦選抜の未消化枠繰り上げが
- * 原因と推測）のため他県のような個別例外列挙はせず、代わりにfinalPassers<=applicants
- * Confirmedの逆側の不変条件のみ検証する④公式小計（24段階）との完全一致。
+ * 理数2＋芸術1＋体育2＋併合科3＋産業科2＋総合学科10＋定時制課程単位制7＋チャレンジ
+ * スクール等8）: ①レコードの不変条件（quota>0等）②既存の倍率パイプライン（普通科〜
+ * 総合学科はcompetition-rates/tokyo.ts、定時制課程・チャレンジスクールはteiji-
+ * competition-rates/tokyo.ts）のquota・applicantsConfirmedと段階台帳が全件完全一致する
+ * こと（本資料には志願者数列が存在しないため両方とも既存パイプラインを再利用する設計）
+ * ③finalPassers>quotaが普通科系では極めて高頻度（推薦選抜の未消化枠繰り上げが原因と推測）の
+ * ため他県のような個別例外列挙はせず、代わりにfinalPassers<=applicantsConfirmedの逆側の
+ * 不変条件のみ検証する④公式小計（25段階）との完全一致。
  */
-describe('東京都 段階台帳（T-Y11F §5順序#7・7県目・189レコード）', () => {
+describe('東京都 段階台帳（T-Y11F §5順序#7・7県目・197レコード）', () => {
   const { records, officialSubtotals } = TOKYO_STAGE_LEDGER;
 
-  it('取り込み件数は189レコード（普通科系123＋商業7＋ビジネスコミュ2＋工業16＋科学技術2＋農業5＋水産1＋家庭単位制以外3＋家庭単位制1＋福祉2＋理数2＋芸術1＋体育2＋併合科3＋産業科2＋総合学科10＋定時制課程単位制7）', () => {
-    expect(records).toHaveLength(189);
+  it('取り込み件数は197レコード（普通科系123＋商業7＋ビジネスコミュ2＋工業16＋科学技術2＋農業5＋水産1＋家庭単位制以外3＋家庭単位制1＋福祉2＋理数2＋芸術1＋体育2＋併合科3＋産業科2＋総合学科10＋定時制課程単位制7＋チャレンジスクール等8）', () => {
+    expect(records).toHaveLength(197);
   });
 
   it('quota/applicantsConfirmed/testTakersConfirmed/finalPassersはいずれも0より大きい（不変条件）', () => {
@@ -48,7 +49,7 @@ describe('東京都 段階台帳（T-Y11F §5順序#7・7県目・189レコー�
     expect(matched).toBe(182);
   });
 
-  it('定時制課程（単位制）7レコードのquota・applicantsConfirmedは既存の倍率パイプライン（teiji-competition-rates/tokyo.ts）と全件完全一致する', () => {
+  it('定時制課程（単位制）7レコード＋チャレンジスクール等8レコード＝計15レコードのquota・applicantsConfirmedは既存の倍率パイプライン（teiji-competition-rates/tokyo.ts）と全件完全一致する（既存パイプライン全16レコード中15レコードを反映・残り1件の在京外国人生徒等対象は恒久的にスコープ外）', () => {
     const teijiFile = TEIJI_COMPETITION_RATE_BY_PREFECTURE.tokyo;
     if (!teijiFile) throw new Error('teiji-competition-rates/tokyo.ts が見つかりません');
     const teijiRecords = records.filter(
@@ -57,10 +58,11 @@ describe('東京都 段階台帳（T-Y11F §5順序#7・7県目・189レコー�
         (r.schoolName === '新宿山吹' && (r.department === '普通科1〜4部' || r.department === '情報科2・4部')) ||
         (r.schoolName === '浅草' && r.department === '普通科') ||
         (r.schoolName === '荻窪' && r.department === '普通科') ||
-        (r.schoolName === '八王子拓真' && r.department === '普通科') ||
-        (r.schoolName === '砂川' && r.department === '普通科1〜3部')
+        (r.schoolName === '八王子拓真' && (r.department === '普通科' || r.department === '普通科1・2部（チャレンジ枠）')) ||
+        (r.schoolName === '砂川' && r.department === '普通科1〜3部') ||
+        r.department === '総合学科1〜3部'
     );
-    expect(teijiRecords).toHaveLength(7);
+    expect(teijiRecords).toHaveLength(15);
 
     let matched = 0;
     for (const stageRecord of teijiRecords) {
@@ -72,7 +74,8 @@ describe('東京都 段階台帳（T-Y11F §5順序#7・7県目・189レコー�
       expect(counterpart.quota).toBe(stageRecord.quota);
       expect(counterpart.finalApplicants).toBe(stageRecord.applicantsConfirmed);
     }
-    expect(matched).toBe(7);
+    expect(matched).toBe(15);
+    expect(teijiFile.records).toHaveLength(16); // 既存パイプライン全16件中15件を反映（残り1件は在京外国人）
   });
 
   it('finalPassersはapplicantsConfirmedを超えない（東京都でもこのパターンの逆転は0件）', () => {
@@ -420,5 +423,28 @@ describe('東京都 段階台帳（T-Y11F §5順序#7・7県目・189レコー�
     const overflowRecord = teijiRecords.find((r) => r.finalPassers > r.quota);
     expect(overflowRecord?.schoolName).toBe('新宿山吹');
     expect(overflowRecord?.department).toBe('情報科2・4部');
+  });
+
+  it('「チャレンジスクール及びチャレンジ枠」8レコードの機械集計が資料本文の公式小計（チャレンジスクール及びチャレンジ枠計）とquota/testTakersConfirmed/finalPassers/applicantsConfirmedの4系列とも完全一致する（本区分はfinalPassers>quotaが八王子拓真チャレンジ枠の1件のみ）', () => {
+    if (!officialSubtotals) throw new Error('officialSubtotals が定義されていません');
+    const challengeSubtotal = officialSubtotals.find((s) => s.label === 'チャレンジスクール及びチャレンジ枠計');
+    if (!challengeSubtotal) throw new Error('officialSubtotals に「チャレンジスクール及びチャレンジ枠計」が見つかりません');
+
+    const challengeRecords = records.filter(
+      (r) => r.department === '総合学科1〜3部' || r.department === '普通科1・2部（チャレンジ枠）'
+    );
+    expect(challengeRecords).toHaveLength(8);
+
+    const challengeSums = sumStageLedger(challengeRecords);
+    expect(challengeSums.quota).toBe(challengeSubtotal.quota);
+    expect(challengeSums.testTakersConfirmed).toBe(challengeSubtotal.testTakersConfirmed);
+    expect(challengeSums.finalPassers).toBe(challengeSubtotal.finalPassers);
+    expect(challengeSums.applicantsConfirmed).toBe(challengeSubtotal.applicantsConfirmed);
+
+    const overflowCount = challengeRecords.filter((r) => r.finalPassers > r.quota).length;
+    expect(overflowCount).toBe(1);
+    const overflowRecord = challengeRecords.find((r) => r.finalPassers > r.quota);
+    expect(overflowRecord?.schoolName).toBe('八王子拓真');
+    expect(overflowRecord?.department).toBe('普通科1・2部（チャレンジ枠）');
   });
 });
