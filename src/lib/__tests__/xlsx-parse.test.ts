@@ -144,6 +144,39 @@ describe('parseXlsxFile（自前ZIP+xlsxリーダー）', () => {
     expect(wb.sheets.sheet1[1]).toEqual([42]);
   });
 
+  it('自己終端セル(<c .../>)の直後にあるセルの値・列位置を正しく読む（神奈川県公表xlsxで実際に発生した不具合の再現）', () => {
+    const sharedStringsXml = `<?xml version="1.0" encoding="UTF-8"?>
+<sst xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" count="1" uniqueCount="1">
+<si><t>県立鶴見</t></si>
+</sst>`;
+    // B11・C11が値を持たない自己終端セル、D11がsharedStrings参照のセル、という実物の
+    // 神奈川県公表xlsx(令和8年度公立高校合格状況・別紙4)の行構造をそのまま再現する。
+    const sheetXml = `<?xml version="1.0" encoding="UTF-8"?>
+<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">
+<sheetData>
+<row r="11"><c r="B11" s="416"/><c r="C11" s="293"/><c r="D11" s="2" t="s"><v>0</v></c><c r="E11" s="294"><v>318</v></c></row>
+</sheetData>
+</worksheet>`;
+    tmpFile = path.join(os.tmpdir(), `xlsx-parse-test-selfclosing-${Date.now()}.xlsx`);
+    fs.writeFileSync(
+      tmpFile,
+      buildMinimalXlsx([
+        { name: 'xl/sharedStrings.xml', content: sharedStringsXml },
+        { name: 'xl/worksheets/sheet1.xml', content: sheetXml },
+      ])
+    );
+
+    const wb = parseXlsxFile(tmpFile);
+    const row = wb.sheets.sheet1[11];
+    // B(index1)・C(index2)は自己終端セルのため値なし、D(index3)がsharedStrings参照の
+    // 「県立鶴見」、E(index4)が318であるべき（修正前はB(index1)に333が誤って入り、
+    // D自体は取りこぼされていた）。
+    expect(row[1]).toBeNull();
+    expect(row[2]).toBeNull();
+    expect(row[3]).toBe('県立鶴見');
+    expect(row[4]).toBe(318);
+  });
+
   it('存在しないファイルパスはエラーを投げる（fsの標準エラーがそのまま伝播）', () => {
     expect(() => parseXlsxFile(path.join(os.tmpdir(), 'does-not-exist-12345.xlsx'))).toThrow();
   });

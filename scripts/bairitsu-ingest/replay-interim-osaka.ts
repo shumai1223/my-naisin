@@ -51,7 +51,16 @@ let skippedOther = 0;
 
 for (const row of rows) {
   if (!row || row.length < 11) continue;
-  const [prefixOrCode, name, dept, quota, , applicants, dept2, , , , rate] = row;
+  // 列位置: 0=府立/市立 1=学校名 2=学科名 3=(学科名の結合セルの続き・空) 4=募集人員(A)
+  // 5=①第1志望者数(単一学科校は空欄) 6=他学科への第2志望参照名(複数学科行のみ) 7-8=(未使用列)
+  // 9=学校全体志願者数(B) 10=競争率(B/A)
+  // ⚠️2026-09-09: src/lib/xlsx-parse.tsの自己終端セル(<c .../>)バグ修正に伴い列位置がずれたため再較正した
+  // （旧: quota/applicantsの前に1列分のずれがあった。詳細は[[fable5-loop-protocol]]既知の罠を参照）。
+  // ⚠️単一学科校は①(第1志望者数)欄が空欄で学校全体志願者数(B)のみ印字される（複数学科の場合のみ
+  // ①が個別記載される。1学科しかなければ①=Bが自明のため資料側が重複を避けている）。よって
+  // ①が数値でない場合はB(index9)を代わりに使う。
+  const [prefixOrCode, name, dept, , quota, firstChoiceApplicants, dept2, , , schoolWideApplicants, rate] = row;
+  const applicants = typeof firstChoiceApplicants === 'number' ? firstChoiceApplicants : schoolWideApplicants;
   if (typeof name !== 'string' || typeof dept !== 'string') continue;
   if (prefixOrCode !== '府立' && !(typeof prefixOrCode === 'string' && prefixOrCode.endsWith('市立'))) continue;
   if (dept2 !== null && dept2 !== undefined) {

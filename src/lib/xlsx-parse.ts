@@ -137,7 +137,12 @@ export function parseXlsxFile(filePath: string): ParsedXlsxWorkbook {
 /** parseSheetXmlの実装本体（セルのt属性・v値を正しく解釈する版）。 */
 function parseSheetRows(xml: string, sharedStrings: string[]): XlsxCell[][] {
   const rowRegex = /<row[^>]*r="(\d+)"[^>]*>([\s\S]*?)<\/row>/g;
-  const cellRegex = /<c r="([A-Z]+)\d+"([^>]*)>([\s\S]*?)<\/c>/g;
+  // 属性キャプチャは非貪欲(`[^>]*?`)にし、自己終端セル(`<c .../>`・値を持たない空セルで多用される)と
+  // 開始/終了タグ対のセルを1つの代替(alternation)で区別する。以前は貪欲マッチの`([^>]*)`と
+  // 常に`</c>`を要求する形だったため、自己終端セルが後続セルの内容ごと1つのマッチに飲み込まれ、
+  // 値が誤った列(自己終端セルの列)に付け替わり、飲み込まれた本来のセルは型情報(t="s"等)ごと
+  // 失われていた（2026-09-09・神奈川県公表xlsxの実データで発見）。
+  const cellRegex = /<c r="([A-Z]+)\d+"([^>]*?)(?:\/>|>([\s\S]*?)<\/c>)/g;
   const typeRegex = /\st="([^"]+)"/;
   const valueRegex = /<v>([\s\S]*?)<\/v>/;
   const inlineStrRegex = /<is>([\s\S]*?)<\/is>/;
@@ -153,7 +158,7 @@ function parseSheetRows(xml: string, sharedStrings: string[]): XlsxCell[][] {
     while ((cm = cellRegex.exec(rowXml))) {
       const colIdx = columnLetterToIndex(cm[1]);
       const attrs = cm[2];
-      const inner = cm[3];
+      const inner = cm[3] ?? '';
       const typeMatch = typeRegex.exec(attrs);
       const type = typeMatch ? typeMatch[1] : 'n';
 
