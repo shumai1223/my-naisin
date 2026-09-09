@@ -1831,7 +1831,28 @@ grep -c等で機械確認→テスト作成」の順を徹底すれば複数イ�
 2県のみ・いずれも2026-09-10に別資料を確認済みで前進手段なしと判断済み）。次回は§5順序#8
 （出典ロケータ・約115h）への移行を検討するか、oita/okinawaの追加資料調査に時間を割くかを
 判断すること。
-| 8 | **★出典ロケータ** | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
+| 8 | **★出典ロケータ**⚠️着手(2026-09-10・型基盤完了) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
+
+**2026-09-10着手**: §5順序#7（段階台帳）がhokkaido全14管内完結によりoita/okinawaの2県のみ
+未着手（前進手段なしと判断済み）となったため#8に着手。設計資料
+（`ops/baselines/stage-ledger-unit-count-2026-09.md`・`ops/prompts/fable-staple-design-
+2026-09-07-ANSWER.md`）を確認しスペックを再確認。**重要な発見**: R8登録パーサ36県分の
+元PDFジオメトリJSON（`src/lib/bairitsu-ingest/__fixtures__/*-r8-geometry.json`）が全て
+現存しており、この36県分は再取得・再ビジョン読みが一切不要でキャッシュの再実行だけで
+`page`/`rowIndex`を機械的に得られると確認した（旧見積りの前提より大幅に軽い）。
+型レベルの基盤を`src/lib/competition-rate.ts`に実装済み: `CompetitionRateSource.pdfSha256`
+（ファイル単位・1個）、`CompetitionRateRecord.page`/`rowIndex`（レコード単位）を追加
+（全てoptional・**既存データ書き換え0**を厳守）。`resolveSourceLocator()`（3要素を合成して
+`{pdfSha256,page,rowIndex}`を再構成する純関数）・`countRecordsWithSourceLocator()`（進捗
+計測用集計）を新設し6件のテストを追加（現時点で全県0件のベースラインも固定）。
+**次回やること**: ①36登録パーサのうち1県（tottori等・自己完結した既存パーサを持つ小規模県が
+望ましい）を選び、`__fixtures__`のジオメトリJSONを再実行してpage/rowIndexを機械的に算出
+→②算出値を`src/data/competition-rates/<県>.ts`の静的レコード配列へ手動でバックフィル
+（schoolName+department+quota+finalApplicantsの組で対応関係を特定）→③PDFを再取得し
+sha256を計算して`sources[].pdfSha256`に設定→④1県分の実測時間を記録し、115hという見積りを
+検算し直す（既存見積りの外挿元は直接計測ではなく類似作業からの比例外挿だったため、実測で
+上書きすることが望ましい）。R7以前（年度別ジオメトリのリプレイ）・ビジョン11県
+（7,191件・独立再読）はまだ手つかず。tsc実exit0・jestフルスイート545suites7643tests green。
 | 9 | 残り物✅T-Y11C-4完了(2026-09-09) | T-Y11B 未9項目 / T-SS1 未5項目 / ~~T-Y11C-4 の yamanashi 20件・yamaguchi 5件~~（finalRate例外27件を全て原因確定/修正完了・詳細は`ops/tasks/T-Y11C-finalrate-invariant.md`） | 10〜20h |
 
 | 10 | **★年度遡りの到達可能性を確定させる** | 令和5年度**6県欠**（hokkaido nara niigata oita saga tochigi）／令和4年度**45県欠**（保有は tokyo・yamaguchi のみ）＝**51県年**。⚠️令和6年度は47県揃っており欠けていない | **20〜35h** |
