@@ -2,7 +2,7 @@ import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
 
 /**
  * 神奈川県 段階台帳（T-Y11F §5順序#7・6県目・「普通科」〈96レコード〉＋「専門学科」
- * 〈33レコード〉＋「単位制」〈35レコード〉＝計164レコード）。
+ * 〈33レコード〉＋「単位制」〈35レコード〉＋「定時制・通信制」〈20レコード〉＝計184レコード）。
  *
  * 一次ソース: 神奈川県教育委員会「令和8年度神奈川県公立高等学校入学者選抜一般募集共通選抜等
  * 合格状況（各学校別の合格の状況等）」別紙4（xlsx版・5シート構成: 普通科・クリエイティブ／
@@ -82,7 +82,38 @@ import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
  * ⚠️スコープ外: 「２ 連携募集合格状況」（光陵・愛川、quota85）は連携型入学者選抜のため対象外
  * （ibaraki.ts等の既存stage-ledgerファイルの「連携型入学者選抜はスコープ外」という規律を踏襲）。
  *
- * ⚠️スコープ: 定時制/通信制・特別募集等（sheet4〜5）は別セッションで横展開する。
+ * 🔁**sheet4「定時制・通信制」の一部を追加（20レコード・累計184レコード）**: sheet4は
+ * 「（定時制の課程）」内に普通科／専門学科〈工業・商業〉／単位制普通科／単位制総合学科／
+ * 単位制専門学科〈工業〉の5区分、「（通信制の課程）」内に単位制普通科1区分を持つ。
+ * ⚠️**このシートは列位置がsheet1〜3と異なる**（「定員」〈募集定員そのもの〉列が「募集人員」
+ * 〈共通選抜募集人員＝A〉列の前に追加されているため1列右にずれる）: 学校名C列・学科名D列・
+ * 定員E列・募集人員F列（quota=A）・計G列（testTakersConfirmed=(A)+(B)）・合格者数L列
+ * （finalPassers=C）。
+ * **既存パイプラインの発見**: sheet4の6区分中、単位制4区分（単位制普通科/単位制総合学科/
+ * 単位制専門学科〈工業〉/通信制単位制普通科）には既存`teiji-competition-rates/kanagawa.ts`
+ * （T-P1・S1-3で先行構築済み・別のPDF一次資料`bessi3.pdf`から独立に転記）という対応する
+ * パイプラインが存在し、quota・applicantsConfirmedを再利用できた。一方、**非単位制の3区分
+ * （普通科8校・専門学科工業2校・専門学科商業1校＝定時制の課程の約半分）には対応する既存
+ * パイプラインが存在しない**（既存teiji-competition-rates/kanagawa.tsの守備範囲は単位制のみで、
+ * 非単位制の定時制はどのパイプラインにも未収録）。段階台帳はapplicantsConfirmedを外部パイプ
+ * ラインからの再利用に依存する設計のため、対応源のないこの3区分はY-0（捏造回避）に従い
+ * 今回は見送り、coverage.pendingDepartmentsに正直に記録した。
+ * **粒度**: 既存teiji-competition-rates/kanagawa.tsは横浜明朋・相模向陽館の午前部/午後部、
+ * 横浜市立横浜総合のⅠ部/Ⅱ部/Ⅲ部をそれぞれ別レコードとして扱っており（sheet2/3で採用した
+ * 「学校単位計への集約」とは逆に）、本ファイルも資料内の個別コース行をそのまま採用した
+ * （集約しない）。departmentラベルは既存パイプラインの角括弧タグ形式
+ * （例:「普通科・午前部 [単位制普通科・定時制]」）をそのまま踏襲。
+ * quotaは20件全数が既存パイプラインと完全一致。4区分すべてに資料本文の「合計」行（単位制
+ * 専門学科〈工業〉のみ学校数1のため学校単位「計」行がそのまま区分合計）があり、
+ * quota/testTakersConfirmed/finalPassersの3系列とも完全一致（既存パイプラインのofficial
+ * Subtotals（単位制普通科983/558・単位制総合学科406/328・単位制専門学科工業84/16・通信制
+ * 単位制普通科1216/542）とも二重に一致）。⚠️新種の異常値: finalPassers>applicantsConfirmedが
+ * 1件（横浜市立横浜総合・総合学科Ⅲ部38→40）、資料の脚注「総合学科Ⅱ部及び総合学科Ⅲ部の
+ * 合格者数には第２希望による合格者が含まれています」で説明可能。finalPassers>quotaは0件
+ * （sheet4では初めて不出現）。
+ *
+ * ⚠️スコープ: 定時制の課程の非単位制3区分（普通科・専門学科工業・専門学科商業）は既存
+ * パイプライン未整備のため見送り。特別募集等（sheet5）は別セッションで横展開する。
  */
 
 export const KANAGAWA_STAGE_LEDGER: PrefectureStageLedgerFile = {
@@ -90,7 +121,7 @@ export const KANAGAWA_STAGE_LEDGER: PrefectureStageLedgerFile = {
   sources: [
     {
       url: 'https://www.pref.kanagawa.jp/documents/132524/bessi4.xlsx',
-      docTitle: '神奈川県教育委員会 令和8年度神奈川県公立高等学校入学者選抜一般募集共通選抜等合格状況（各学校別の合格の状況等）別紙4 sheet1「普通科・クリエイティブ」＋sheet2「専門学科」＋sheet3「単位制」',
+      docTitle: '神奈川県教育委員会 令和8年度神奈川県公立高等学校入学者選抜一般募集共通選抜等合格状況（各学校別の合格の状況等）別紙4 sheet1「普通科・クリエイティブ」＋sheet2「専門学科」＋sheet3「単位制」＋sheet4「定時制・通信制」（単位制4区分のみ）',
       fiscalYear: '令和8年度（2026年度）',
       fetchedAt: '2026-09-09',
     },
@@ -102,12 +133,13 @@ export const KANAGAWA_STAGE_LEDGER: PrefectureStageLedgerFile = {
       '普通科（クリエイティブスクール・県立4校＝4レコード）',
       '専門学科（農業3・工業10・商業7・水産1・家庭1・福祉4・理数1・体育2・美術2・国際2＝33レコード）',
       '単位制（普通科16・普通科音楽コース1・総合学科7・総合学科クリエイティブ1・専門学科農業2・家庭1・理数1・体育1・音楽1・美術1・国際関係1・総合産業1・舞台芸術1＝35レコード）',
+      '定時制・通信制の単位制4区分（単位制普通科11・単位制総合学科4・単位制専門学科工業3・通信制単位制普通科2＝20レコード）',
     ],
     pendingDepartments: [
-      '定時制・通信制（sheet4）',
+      '定時制の課程・非単位制3区分（普通科8校・専門学科工業2校・専門学科商業1校＝既存パイプライン未整備のため見送り）',
       '特別募集等（sheet5）',
     ],
-    note: '「普通科」区分（共通選抜92校＋クリエイティブスクール4校＝96レコード）＋「専門学科」区分（10区分33レコード）＋「単位制」区分（13区分35レコード）を完全収録し累計164レコード。quotaは既存competition-rates/kanagawa.tsと全164件で完全一致（募集人員は試験日まで不変であることを確認）。applicantsConfirmedも既存パイプラインをそのまま再利用（本資料には志願者数列が存在しないため）。testTakersConfirmed/finalPassersのみ本資料から新規転記。普通科は資料本文の4段階の公式小計、専門学科は7/10区分、単位制は3/13区分の公式小計（学校数1の区分は区分合計行が印字されず該当レコード自体が区分合計と同値）と、いずれもquota/testTakersConfirmed/finalPassersの3系列すべてで完全一致。finalPassers>quotaが普通科7件・専門学科3件・単位制3件の計13件（既知パターン）。「連携募集合格状況」（連携型入学者選抜・光陵/愛川）はスコープ外。定時制/通信制・特別募集等（sheet4〜5）は未着手。',
+    note: '「普通科」区分（共通選抜92校＋クリエイティブスクール4校＝96レコード）＋「専門学科」区分（10区分33レコード）＋「単位制」区分（13区分35レコード）＋「定時制・通信制」区分（単位制4区分20レコード）を完全収録し累計184レコード。quotaは既存パイプライン（普通科/専門学科/単位制はcompetition-rates/kanagawa.ts、定時制・通信制はteiji-competition-rates/kanagawa.ts）と全184件で完全一致。applicantsConfirmedも既存パイプラインをそのまま再利用。testTakersConfirmed/finalPassersのみ本資料から新規転記。定時制・通信制の非単位制3区分は対応する既存パイプラインが存在しないためY-0に従い見送り。普通科は資料本文の4段階、専門学科は7/10区分、単位制は3/13区分、定時制通信制は4/4区分の公式小計と、いずれもquota/testTakersConfirmed/finalPassersの3系列すべてで完全一致。finalPassers>quotaが普通科7件・専門学科3件・単位制3件の計13件、finalPassers>applicantsConfirmedが定時制通信制1件（既知パターン）。「連携募集合格状況」（連携型入学者選抜・光陵/愛川）はスコープ外。特別募集等（sheet5）は未着手。',
   },
   officialSubtotals: [
     { label: '県立計（普通科・共通選抜）', quota: 26045, applicantsConfirmed: 30122, testTakersConfirmed: 29656, finalPassers: 25173 },
@@ -124,6 +156,10 @@ export const KANAGAWA_STAGE_LEDGER: PrefectureStageLedgerFile = {
     { label: '合計（単位制・普通科）', quota: 4097, applicantsConfirmed: 4204, testTakersConfirmed: 4136, finalPassers: 3715 },
     { label: '合計（単位制・総合学科）', quota: 1859, applicantsConfirmed: 2011, testTakersConfirmed: 1993, finalPassers: 1815 },
     { label: '合計（単位制・専門学科農業）', quota: 152, applicantsConfirmed: 105, testTakersConfirmed: 103, finalPassers: 104 },
+    { label: '合計（定時制・単位制普通科）', quota: 983, applicantsConfirmed: 558, testTakersConfirmed: 552, finalPassers: 548 },
+    { label: '合計（定時制・単位制総合学科）', quota: 406, applicantsConfirmed: 328, testTakersConfirmed: 320, finalPassers: 317 },
+    { label: '合計（定時制・単位制専門学科工業）', quota: 84, applicantsConfirmed: 16, testTakersConfirmed: 15, finalPassers: 15 },
+    { label: '合計（通信制・単位制普通科）', quota: 1216, applicantsConfirmed: 542, testTakersConfirmed: 531, finalPassers: 529 },
   ],
   records: [
     { schoolName: '鶴見', department: '普通科', quota: 318, applicantsConfirmed: 381, testTakersConfirmed: 373, finalPassers: 318 },
@@ -290,5 +326,25 @@ export const KANAGAWA_STAGE_LEDGER: PrefectureStageLedgerFile = {
     { schoolName: '横浜国際', department: '国際科（単位制）', quota: 159, applicantsConfirmed: 190, testTakersConfirmed: 183, finalPassers: 160 },
     { schoolName: '神奈川総合産業', department: '総合産業科（単位制）', quota: 238, applicantsConfirmed: 218, testTakersConfirmed: 217, finalPassers: 213 },
     { schoolName: '神奈川総合', department: '舞台芸術科（単位制）', quota: 30, applicantsConfirmed: 37, testTakersConfirmed: 37, finalPassers: 30 },
+    { schoolName: '県立神奈川工業', department: '普通科 [単位制普通科・定時制]', quota: 56, applicantsConfirmed: 14, testTakersConfirmed: 14, finalPassers: 14 },
+    { schoolName: '県立横浜明朋', department: '普通科・午前部 [単位制普通科・定時制]', quota: 125, applicantsConfirmed: 124, testTakersConfirmed: 122, finalPassers: 122 },
+    { schoolName: '県立横浜明朋', department: '普通科・午後部 [単位制普通科・定時制]', quota: 125, applicantsConfirmed: 54, testTakersConfirmed: 54, finalPassers: 53 },
+    { schoolName: '県立川崎', department: '普通科 [単位制普通科・定時制]', quota: 70, applicantsConfirmed: 55, testTakersConfirmed: 54, finalPassers: 53 },
+    { schoolName: '県立湘南', department: '普通科 [単位制普通科・定時制]', quota: 56, applicantsConfirmed: 28, testTakersConfirmed: 28, finalPassers: 28 },
+    { schoolName: '県立高浜', department: '普通科 [単位制普通科・定時制]', quota: 56, applicantsConfirmed: 34, testTakersConfirmed: 34, finalPassers: 34 },
+    { schoolName: '県立小田原', department: '普通科 [単位制普通科・定時制]', quota: 56, applicantsConfirmed: 22, testTakersConfirmed: 22, finalPassers: 22 },
+    { schoolName: '県立厚木清南', department: '普通科 [単位制普通科・定時制]', quota: 105, applicantsConfirmed: 53, testTakersConfirmed: 53, finalPassers: 52 },
+    { schoolName: '県立相模向陽館', department: '普通科・午前部 [単位制普通科・定時制]', quota: 125, applicantsConfirmed: 88, testTakersConfirmed: 88, finalPassers: 87 },
+    { schoolName: '県立相模向陽館', department: '普通科・午後部 [単位制普通科・定時制]', quota: 125, applicantsConfirmed: 57, testTakersConfirmed: 55, finalPassers: 55 },
+    { schoolName: '県立神奈川総合産業', department: '普通科 [単位制普通科・定時制]', quota: 84, applicantsConfirmed: 29, testTakersConfirmed: 28, finalPassers: 28 },
+    { schoolName: '横浜市立横浜総合', department: '総合学科Ⅰ部 [単位制総合学科・定時制]', quota: 144, applicantsConfirmed: 153, testTakersConfirmed: 151, finalPassers: 144 },
+    { schoolName: '横浜市立横浜総合', department: '総合学科Ⅱ部 [単位制総合学科・定時制]', quota: 98, applicantsConfirmed: 97, testTakersConfirmed: 93, finalPassers: 93 },
+    { schoolName: '横浜市立横浜総合', department: '総合学科Ⅲ部 [単位制総合学科・定時制]', quota: 108, applicantsConfirmed: 38, testTakersConfirmed: 36, finalPassers: 40 },
+    { schoolName: '横須賀市立横須賀総合', department: '総合学科 [単位制総合学科・定時制]', quota: 56, applicantsConfirmed: 40, testTakersConfirmed: 40, finalPassers: 40 },
+    { schoolName: '県立神奈川工業', department: '機械科 [単位制専門学科(工業)・定時制]', quota: 28, applicantsConfirmed: 2, testTakersConfirmed: 2, finalPassers: 2 },
+    { schoolName: '県立神奈川工業', department: '電気科 [単位制専門学科(工業)・定時制]', quota: 28, applicantsConfirmed: 8, testTakersConfirmed: 8, finalPassers: 8 },
+    { schoolName: '県立神奈川工業', department: '建設科 [単位制専門学科(工業)・定時制]', quota: 28, applicantsConfirmed: 6, testTakersConfirmed: 5, finalPassers: 5 },
+    { schoolName: '県立横浜修悠館', department: '普通科 [単位制普通科・通信制]', quota: 1000, applicantsConfirmed: 407, testTakersConfirmed: 399, finalPassers: 397 },
+    { schoolName: '県立厚木清南', department: '普通科 [単位制普通科・通信制]', quota: 216, applicantsConfirmed: 135, testTakersConfirmed: 132, finalPassers: 132 },
   ],
 };

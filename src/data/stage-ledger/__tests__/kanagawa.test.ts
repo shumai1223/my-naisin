@@ -1,20 +1,23 @@
 import { sumStageLedger } from '@/lib/stage-ledger';
 import { KANAGAWA_STAGE_LEDGER } from '../kanagawa';
 import { COMPETITION_RATE_BY_PREFECTURE } from '@/data/competition-rates';
+import { TEIJI_COMPETITION_RATE_BY_PREFECTURE } from '@/data/teiji-competition-rates';
 
 /**
  * T-Y11F §5順序#7 DoD検証（神奈川県・段階台帳6県目・「普通科」96レコード＋「専門学科」
- * 33レコード＋「単位制」35レコード＝計164レコード）: ①レコードの不変条件（quota>0等）
- * ②既存の倍率パイプライン（competition-rates/kanagawa.ts）のquota・applicantsConfirmedと
- * 段階台帳が全件完全一致すること（本資料には志願者数列が存在しないため両方とも既存パイプラインを
- * 再利用する設計）③finalPassersがquotaを超える既知の13件を明示的に許容する④公式小計
- * （普通科4段階＋専門学科7区分＋単位制3区分）との完全一致。
+ * 33レコード＋「単位制」35レコード＋「定時制・通信制」20レコード＝計184レコード）:
+ * ①レコードの不変条件（quota>0等）②既存の倍率パイプライン（普通科/専門学科/単位制は
+ * competition-rates/kanagawa.ts、定時制・通信制はteiji-competition-rates/kanagawa.ts）の
+ * quota・applicantsConfirmedと段階台帳が全件完全一致すること（本資料には志願者数列が存在
+ * しないため両方とも既存パイプラインを再利用する設計）③finalPassersがquotaを超える既知の
+ * 13件・applicantsConfirmedを超える既知の1件を明示的に許容する④公式小計（普通科4段階＋
+ * 専門学科7区分＋単位制3区分＋定時制通信制4区分）との完全一致。
  */
-describe('神奈川県 段階台帳（T-Y11F §5順序#7・6県目・「普通科」＋「専門学科」＋「単位制」計164レコード）', () => {
+describe('神奈川県 段階台帳（T-Y11F §5順序#7・6県目・「普通科」＋「専門学科」＋「単位制」＋「定時制・通信制」計184レコード）', () => {
   const { records, officialSubtotals } = KANAGAWA_STAGE_LEDGER;
 
-  it('取り込み件数は普通科96レコード＋専門学科33レコード＋単位制35レコード＝計164レコード', () => {
-    expect(records).toHaveLength(164);
+  it('取り込み件数は普通科96レコード＋専門学科33レコード＋単位制35レコード＋定時制通信制20レコード＝計184レコード', () => {
+    expect(records).toHaveLength(184);
   });
 
   it('quota/applicantsConfirmed/testTakersConfirmed/finalPassersはいずれも0より大きい（不変条件）', () => {
@@ -26,7 +29,7 @@ describe('神奈川県 段階台帳（T-Y11F §5順序#7・6県目・「普通�
     }
   });
 
-  it('quota・applicantsConfirmedは既存の倍率パイプライン（competition-rates/kanagawa.ts）と全件完全一致する（本資料に志願者数列が無いため両方とも再利用）', () => {
+  it('quota・applicantsConfirmedは既存の倍率パイプライン（competition-rates/kanagawa.ts）と164件完全一致する（本資料に志願者数列が無いため両方とも再利用）', () => {
     const kanagawaCompetitionFile = COMPETITION_RATE_BY_PREFECTURE.kanagawa;
     if (!kanagawaCompetitionFile) throw new Error('competition-rates/kanagawa.ts が見つかりません');
     const r8Records = kanagawaCompetitionFile.records.filter((r) => r.fiscalYear === undefined);
@@ -42,6 +45,26 @@ describe('神奈川県 段階台帳（T-Y11F §5順序#7・6県目・「普通�
       expect(counterpart.finalApplicants).toBe(stageRecord.applicantsConfirmed);
     }
     expect(matched).toBe(164);
+  });
+
+  it('定時制・通信制20レコードのquota・applicantsConfirmedは既存の倍率パイプライン（teiji-competition-rates/kanagawa.ts）と全件完全一致する', () => {
+    const teijiFile = TEIJI_COMPETITION_RATE_BY_PREFECTURE.kanagawa;
+    if (!teijiFile) throw new Error('teiji-competition-rates/kanagawa.ts が見つかりません');
+    const r8Records = teijiFile.records.filter((r) => r.fiscalYear === undefined);
+    const teijiRecords = records.filter((r) => r.department.includes('['));
+
+    let matched = 0;
+    for (const stageRecord of teijiRecords) {
+      const counterpart = r8Records.find(
+        (r) => r.schoolName === stageRecord.schoolName && r.department === stageRecord.department
+      );
+      if (!counterpart) continue;
+      matched++;
+      expect(counterpart.quota).toBe(stageRecord.quota);
+      expect(counterpart.finalApplicants).toBe(stageRecord.applicantsConfirmed);
+    }
+    expect(teijiRecords).toHaveLength(20);
+    expect(matched).toBe(20);
   });
 
   it('testTakersConfirmedは「計（A）＋（B）」列（本検査受検者＋追検査受検者の合計）のためquotaの1.5倍を超えることはない（極端な誤読の防止・粗いガード）', () => {
@@ -76,8 +99,14 @@ describe('神奈川県 段階台帳（T-Y11F §5順序#7・6県目・「普通�
     }
   });
 
-  it('finalPassersはapplicantsConfirmedを超えない（今回このパターンの逆転は0件）', () => {
+  it('finalPassersがapplicantsConfirmedを超えるのは既知の1件のみ（横浜市立横浜総合・総合学科Ⅲ部＝第2希望による合格者を含むと資料脚注に明記）', () => {
+    const KNOWN_APPLICANTS_OVERFLOW = new Map<string, number>([['横浜市立横浜総合|総合学科Ⅲ部 [単位制総合学科・定時制]', 40]]);
     for (const r of records) {
+      const key = `${r.schoolName}|${r.department}`;
+      if (KNOWN_APPLICANTS_OVERFLOW.has(key)) {
+        expect(r.finalPassers).toBe(KNOWN_APPLICANTS_OVERFLOW.get(key));
+        continue;
+      }
       expect(r.finalPassers).toBeLessThanOrEqual(r.applicantsConfirmed);
     }
   });
@@ -206,5 +235,36 @@ describe('神奈川県 段階台帳（T-Y11F §5順序#7・6県目・「普通�
     expect(nougyouSums.testTakersConfirmed).toBe(nougyouSubtotal.testTakersConfirmed);
     expect(nougyouSums.finalPassers).toBe(nougyouSubtotal.finalPassers);
     expect(nougyouSums.applicantsConfirmed).toBe(nougyouSubtotal.applicantsConfirmed);
+  });
+
+  it('定時制・通信制20レコードは4区分（単位制普通科11・単位制総合学科4・単位制専門学科工業3・通信制単位制普通科2）で、4区分すべての公式小計とquota/testTakersConfirmed/finalPassers/applicantsConfirmedの4系列とも完全一致する', () => {
+    if (!officialSubtotals) throw new Error('officialSubtotals が定義されていません');
+    const TEIJI_TSUSHIN_SECTIONS: Record<string, number> = {
+      '[単位制普通科・定時制]': 11,
+      '[単位制総合学科・定時制]': 4,
+      '[単位制専門学科(工業)・定時制]': 3,
+      '[単位制普通科・通信制]': 2,
+    };
+    const LABELS: Record<string, string> = {
+      '[単位制普通科・定時制]': '合計（定時制・単位制普通科）',
+      '[単位制総合学科・定時制]': '合計（定時制・単位制総合学科）',
+      '[単位制専門学科(工業)・定時制]': '合計（定時制・単位制専門学科工業）',
+      '[単位制普通科・通信制]': '合計（通信制・単位制普通科）',
+    };
+    let teijiTotal = 0;
+    for (const [tag, count] of Object.entries(TEIJI_TSUSHIN_SECTIONS)) {
+      const sectionRecords = records.filter((r) => r.department.endsWith(tag));
+      expect(sectionRecords).toHaveLength(count);
+      teijiTotal += sectionRecords.length;
+
+      const subtotal = officialSubtotals.find((s) => s.label === LABELS[tag]);
+      if (!subtotal) throw new Error(`officialSubtotals に「${LABELS[tag]}」が見つかりません`);
+      const sums = sumStageLedger(sectionRecords);
+      expect(sums.quota).toBe(subtotal.quota);
+      expect(sums.testTakersConfirmed).toBe(subtotal.testTakersConfirmed);
+      expect(sums.finalPassers).toBe(subtotal.finalPassers);
+      expect(sums.applicantsConfirmed).toBe(subtotal.applicantsConfirmed);
+    }
+    expect(teijiTotal).toBe(20);
   });
 });
