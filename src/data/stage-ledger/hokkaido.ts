@@ -2,7 +2,7 @@ import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
 
 /**
  * 北海道 段階台帳（T-Y11F §5順序#7・28県目・全日制coverage='partial'・空知地区29レコード＋
- * 石狩地区57レコード＝86レコードで着手・全14管内中の2管内目）。
+ * 石狩地区57レコード＋市立札幌9レコード＝95レコードで着手）。
  *
  * 一次ソース: 北海道教育委員会「R8入学者選抜状況報告書 §3 学校別受検者数及び合格者数」
  * （令和8年度＝2026年度入学者選抜・全14頁・管内ごとに1頁）。
@@ -48,6 +48,11 @@ import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
  * 引き、追加合格者の数を加えたもの」という調整ロジックが、受検者数を上回る規模で作用する
  * ケースがあると確認できた。野幌「普通」・当別「普通」・札幌琴似工業「電気」・当別「家政」の
  * 4件は空知と同型の第2次募集による新規応募者分（+1〜+4の小差）。
+ *
+ * ⚠️市立札幌追加分（9レコード）は例外0件のクリーンな区分だった（大阪府・静岡県・新潟県に続く
+ * パターン）。市立札幌は「札幌市立高等学校通学区域規則（札幌市外）適用者」という道立とは別の
+ * 通学区域欄を持つが、quota・applicantsConfirmed・testTakersConfirmed・finalPassersの
+ * 4フィールド定義自体は道立高校と共通のため、既存の設計をそのまま適用できた。
  */
 export const HOKKAIDO_STAGE_LEDGER: PrefectureStageLedgerFile = {
   prefectureCode: 'hokkaido',
@@ -64,15 +69,21 @@ export const HOKKAIDO_STAGE_LEDGER: PrefectureStageLedgerFile = {
       fiscalYear: '令和8年度（2026年度）',
       fetchedAt: '2026-09-10',
     },
+    {
+      url: 'https://www.dokyoi.pref.hokkaido.lg.jp/fs/1/3/1/7/8/5/5/0/_/05_p9-p22.pdf',
+      docTitle: '北海道教育委員会 R8入学者選抜状況報告書「§3 学校別受検者数及び合格者数」（p.12・市立札幌）',
+      fiscalYear: '令和8年度（2026年度）',
+      fetchedAt: '2026-09-10',
+    },
   ],
   coverage: {
     status: 'partial',
     includedDepartments: [
       '全日制・空知地区（普通教育を主とする学科12レコード＋専門教育を主とする学科及び総合学科17レコード＝29レコード）',
       '全日制・石狩地区・道立高校のみ（普通教育を主とする学科31レコード＋専門教育を主とする学科及び総合学科26レコード＝57レコード）',
+      '全日制・市立札幌（普通教育を主とする学科7レコード＋専門教育を主とする学科2レコード＝9レコード）',
     ],
     pendingDepartments: [
-      '全日制・石狩地区の市立札幌（道立高校とは別管理者のため報告書上も独立区分・8校9レコード規模）',
       '全日制・後志地区',
       '全日制・胆振地区',
       '全日制・日高地区',
@@ -88,7 +99,7 @@ export const HOKKAIDO_STAGE_LEDGER: PrefectureStageLedgerFile = {
       '滝川西「情報マネジメント」（既存パイプラインが検算不能のため見送った1行・本ファイルも同じ理由でスコープ外）',
       '定時制課程（他県と同じ理由で恒久的にスコープ外）',
     ],
-    note: '全14管内のうち空知地区（29レコード）＋石狩地区・道立高校のみ（57レコード）＝86レコードに着手。quota・applicantsConfirmedは既存パイプライン`competition-rates/hokkaido.ts`の該当レコードをそのまま再利用し、testTakersConfirmed（第1次受検者数＋第2次受検者数）・finalPassers（入学者数＝第1次合格者数＋第2次合格者数）を「§3学校別受検者数及び合格者数」p.9-11から新規転記した。推薦枠は一般枠と完全に独立したクオータ（秋田のような推薦落選者の一般転入は無い）のためスコープ外。既知の例外10件（第2次募集による新規応募者分でtestTakersConfirmedがapplicantsConfirmedを上回る7件、追加合格者と推測されるfinalPassers>testTakersConfirmed3件）はいずれも小差（最大+6）。市立札幌（8校）は道立高校とは別管理者で報告書上も独立区分のため次回以降に別途追加する。本資料はさらに12管内分（全260レコード規模）を残しており、既存パイプラインと同じく1管内ずつ段階的に追加する。',
+    note: '全14管内のうち空知地区（29レコード）＋石狩地区・道立高校のみ（57レコード）＋市立札幌（9レコード）＝95レコードに着手。quota・applicantsConfirmedは既存パイプライン`competition-rates/hokkaido.ts`の該当レコードをそのまま再利用し、testTakersConfirmed（第1次受検者数＋第2次受検者数）・finalPassers（入学者数＝第1次合格者数＋第2次合格者数）を「§3学校別受検者数及び合格者数」p.9-12から新規転記した。推薦枠は一般枠と完全に独立したクオータ（秋田のような推薦落選者の一般転入は無い）のためスコープ外。既知の例外10件（第2次募集による新規応募者分でtestTakersConfirmedがapplicantsConfirmedを上回る7件、追加合格者と推測されるfinalPassers>testTakersConfirmed3件、いずれも空知・石狩分）はいずれも小差（最大+6）。市立札幌9件は例外0件のクリーンな区分だった。本資料はさらに12管内分（全260レコード規模）を残しており、既存パイプラインと同じく1管内ずつ段階的に追加する。',
   },
   records: [
     { schoolName: '岩見沢東', department: '普通', quota: 160, applicantsConfirmed: 134, testTakersConfirmed: 130, finalPassers: 128 },
@@ -177,5 +188,14 @@ export const HOKKAIDO_STAGE_LEDGER: PrefectureStageLedgerFile = {
     { schoolName: '石狩翔陽', department: '総合', quota: 320, applicantsConfirmed: 348, testTakersConfirmed: 337, finalPassers: 320 },
     { schoolName: '札幌厚別', department: '総合', quota: 280, applicantsConfirmed: 293, testTakersConfirmed: 280, finalPassers: 270 },
     { schoolName: '千歳北陽', department: '総合', quota: 160, applicantsConfirmed: 121, testTakersConfirmed: 119, finalPassers: 115 },
+    { schoolName: '市立札幌旭丘', department: '普通', quota: 240, applicantsConfirmed: 351, testTakersConfirmed: 344, finalPassers: 240 },
+    { schoolName: '市立札幌藻岩', department: '普通', quota: 240, applicantsConfirmed: 301, testTakersConfirmed: 284, finalPassers: 240 },
+    { schoolName: '市立札幌平岸', department: '普通', quota: 280, applicantsConfirmed: 388, testTakersConfirmed: 361, finalPassers: 280 },
+    { schoolName: '市立札幌平岸', department: 'デザインアート', quota: 40, applicantsConfirmed: 50, testTakersConfirmed: 50, finalPassers: 40 },
+    { schoolName: '市立札幌清田', department: '普通', quota: 200, applicantsConfirmed: 251, testTakersConfirmed: 237, finalPassers: 200 },
+    { schoolName: '市立札幌清田', department: 'グローバル', quota: 40, applicantsConfirmed: 27, testTakersConfirmed: 23, finalPassers: 23 },
+    { schoolName: '市立札幌新川', department: '普通', quota: 320, applicantsConfirmed: 403, testTakersConfirmed: 388, finalPassers: 320 },
+    { schoolName: '市立札幌旭丘', department: '数理データサイエンス', quota: 80, applicantsConfirmed: 90, testTakersConfirmed: 87, finalPassers: 80 },
+    { schoolName: '市立札幌啓北商業', department: '未来商学', quota: 240, applicantsConfirmed: 191, testTakersConfirmed: 180, finalPassers: 173 },
   ],
 };
