@@ -183,7 +183,35 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
     // このテストは進捗のスナップショットを固定するリグレッションガード。#8のバックフィルを
     // 別の県で進めた回はこの配列に新しい要素が増えるはずなので、増えたら意図した進捗か確認
     // してから期待値を更新すること（既存県の件数が勝手に減っていたら書き換え事故を疑う）。
-    expect(nonZero).toEqual([{ code: 'tottori', count: 43 }]);
+    expect(nonZero.sort((a, b) => a.code.localeCompare(b.code))).toEqual([
+      { code: 'gunma', count: 106 },
+      { code: 'tottori', count: 43 },
+    ]);
+  });
+
+  describe('gunma R8（#8・2県目・共有関数assembleSimpleTableRows経由での実データ検証）', () => {
+    const file = COMPETITION_RATE_BY_PREFECTURE['gunma']!;
+    const r8 = file.records.filter((r) => !r.fiscalYear);
+
+    it('R8の106件全件がresolveSourceLocatorで解決できる', () => {
+      for (const r of r8) {
+        const locator = resolveSourceLocator(r, file.sources);
+        expect(locator).not.toBeNull();
+        expect(locator!.pdfSha256).toBe('242bfa16ee0687ff90ab0c5dd7bb91e42030d2e24aacfd88fbd08a5b149b42d3');
+        // 学校別詳細表は物理ページ1〜2（3頁目は詳細表対象外）
+        expect(locator!.page).toBeGreaterThanOrEqual(1);
+        expect(locator!.page).toBeLessThanOrEqual(2);
+        expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
+      }
+    });
+
+    it('R7以前（fiscalYear明示済み）はまだpage/rowIndex未バックフィルのため全件null', () => {
+      const pre8 = file.records.filter((r) => r.fiscalYear !== undefined);
+      expect(pre8.length).toBeGreaterThan(0);
+      for (const r of pre8) {
+        expect(resolveSourceLocator(r, file.sources)).toBeNull();
+      }
+    });
   });
 
   describe('tottori R8（#8パイロット・実データ検証）', () => {

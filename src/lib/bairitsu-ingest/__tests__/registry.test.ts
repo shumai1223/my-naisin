@@ -262,6 +262,9 @@ describe('bairitsu-ingest registry（T-Y11E E-1）', () => {
   });
 
   it('gunmaのパーサが登録されており、既存の手作業データと完全一致する結果を返す', () => {
+    // ⚠️2026-09-10（T-Y11F §5順序#8）: `parseGunma`の出力にpage/rowIndex（出典ロケータ用）が
+    // 追加され、既存データ側にもバックフィル済みのため、期待値マッピングにもこの2フィールドを
+    // 含める（既存のquota/finalApplicants/finalRateの値自体は無変更）。
     const parser = getPrefectureParser('gunma');
     expect(parser).toBeDefined();
     const parsed = parser!(gunmaR8Geometry as PdfPageGeometry[]);
@@ -273,6 +276,8 @@ describe('bairitsu-ingest registry（T-Y11E E-1）', () => {
         quota: e.quota,
         finalApplicants: e.finalApplicants,
         finalRate: e.finalRate,
+        page: e.page,
+        rowIndex: e.rowIndex,
       }))
     );
   });

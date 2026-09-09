@@ -112,6 +112,10 @@ export interface ParsedCompetitionRow {
   quota: number;
   finalApplicants: number;
   finalRate: number;
+  /** T-Y11F §5順序#8用・任意。入力の`SimpleRowFields.page`が設定されている場合のみ付与される。 */
+  page?: number;
+  /** #8用・任意。同一ページ内でこの行が何番目に出力されたか（0始まり）。`page`とセット。 */
+  rowIndex?: number;
 }
 
 function columnIndexForX(x: number, boundaries: number[], numDataColumns: number): number {
@@ -322,13 +326,21 @@ export interface GeneralColumnLayout {
   roles: { number?: number; schoolName: number; department: number; quota: number; finalApplicants: number; finalRate: number };
 }
 
-interface SimpleRowFields {
+export interface SimpleRowFields {
   numberText: string;
   schoolName: string;
   department: string;
   quotaText: string;
   applicantsText: string;
   rateText: string;
+  /**
+   * T-Y11F §5順序#8（出典ロケータ）用・任意。呼び出し側がこの行の物理ページ番号を
+   * 把握していれば付与する（`extractRowFields`自体はページをまたがないため生成しない・
+   * 呼び出し側で`{ ...extractRowFields(...), page }`のように付与する）。
+   * 省略時（従来どおり）は出力の`ParsedCompetitionRow`にpage/rowIndexを一切含めない
+   * （既存の10パーサへの影響ゼロ・完全後方互換）。
+   */
+  page?: number;
 }
 
 export function extractRowFields(rowChars: PdfChar[], layout: GeneralColumnLayout): SimpleRowFields {
@@ -364,11 +376,19 @@ export interface AssembleSimpleOptions {
   minQuota?: number;
 }
 
-/** 学校名セルの結合が無い県向けの組み立て（先頭行にラベル・継続行は空欄・単純carry-forward）。 */
+/**
+ * 学校名セルの結合が無い県向けの組み立て（先頭行にラベル・継続行は空欄・単純carry-forward）。
+ *
+ * ⚠️T-Y11F §5順序#8（出典ロケータ）: 入力`rowFields[].page`が設定されていれば、出力の
+ * 各`ParsedCompetitionRow`に`page`（そのまま）と`rowIndex`（同一page値を持つ行の中で
+ * 何番目に出力されたか・0始まり）を付与する。`page`が一切設定されていない（従来の10県の
+ * 呼び出し）場合は付与ロジック自体が発火せず出力は完全に従来どおり（後方互換）。
+ */
 export function assembleSimpleTableRows(rowFields: SimpleRowFields[], options: AssembleSimpleOptions = {}): ParsedCompetitionRow[] {
   const minQuota = options.minQuota ?? 0;
   const records: ParsedCompetitionRow[] = [];
   let currentSchool = '';
+  const rowIndexByPage = new Map<number, number>();
   for (const r of rowFields) {
     const schoolName = normalizeExtractedText(r.schoolName);
     if (schoolName) currentSchool = schoolName;
@@ -382,7 +402,13 @@ export function assembleSimpleTableRows(rowFields: SimpleRowFields[], options: A
     if (!Number.isFinite(quota) || quota <= minQuota) continue;
     if (!Number.isFinite(finalApplicants) || !Number.isFinite(finalRate)) continue;
 
-    records.push({ schoolName: currentSchool, department, quota, finalApplicants, finalRate });
+    if (r.page !== undefined) {
+      const rowIndex = rowIndexByPage.get(r.page) ?? 0;
+      rowIndexByPage.set(r.page, rowIndex + 1);
+      records.push({ schoolName: currentSchool, department, quota, finalApplicants, finalRate, page: r.page, rowIndex });
+    } else {
+      records.push({ schoolName: currentSchool, department, quota, finalApplicants, finalRate });
+    }
   }
   return records;
 }

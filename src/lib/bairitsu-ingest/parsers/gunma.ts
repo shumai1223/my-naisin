@@ -57,10 +57,19 @@ const GUNMA_DEPARTMENT_OVERRIDES: Record<string, string> = {
   '西邑楽|美術': '芸術（美術）',
 };
 
-/** 群馬県R8倍率PDFの学校別データ2頁分（`gunma-r8-geometry.json`）を解析する。 */
+/**
+ * 群馬県R8倍率PDFの学校別データ2頁分（`gunma-r8-geometry.json`）を解析する。
+ *
+ * ⚠️T-Y11F §5順序#8（出典ロケータ）: `geometries`は物理ページ1〜2頁分（PDF全3頁のうち
+ * 詳細表の先頭が物理ページ1から始まる。2026-09-10に`pdftotext -f 1`で前橋の
+ * quota280/applicants314が物理ページ1に実在することを確認済み。3頁目は詳細表対象外
+ * 〈定時制等〉のため出典ロケータの対象外）。出典ロケータ用のpageは配列添字+1（オフセット
+ * 無し）で記録する。tottoriのような概要ページ分のオフセットが必要な県もあるため、
+ * 他県へ横展開する際は毎回この検証を省略しないこと。
+ */
 export function parseGunma(geometries: PdfPageGeometry[]): ParsedCompetitionRow[] {
-  const allRowFields = geometries.flatMap((geom) =>
-    groupCharsIntoRows(geom.chars, 3.0).map((row) => extractRowFields(row.chars, GUNMA_LAYOUT))
+  const allRowFields = geometries.flatMap((geom, pageIdx) =>
+    groupCharsIntoRows(geom.chars, 3.0).map((row) => ({ ...extractRowFields(row.chars, GUNMA_LAYOUT), page: pageIdx + 1 }))
   );
 
   let currentSchoolForOverride = '';
