@@ -3,21 +3,22 @@ import { TOKYO_STAGE_LEDGER } from '../tokyo';
 import { COMPETITION_RATE_BY_PREFECTURE } from '@/data/competition-rates';
 
 /**
- * T-Y11F §5順序#7 DoD検証（東京都・段階台帳7県目・「普通科」系123レコード＋「商業に関する
- * 学科」7レコード＋「ビジネスコミュニケーション科」2レコード＝計132レコード）:
- * ①レコードの不変条件（quota>0等）②既存の倍率パイプライン（competition-rates/tokyo.ts）の
- * quota・applicantsConfirmedと段階台帳が全件完全一致すること（本資料には志願者数列が存在
- * しないため両方とも既存パイプラインを再利用する設計）③finalPassers>quotaが普通科系では
- * 極めて高頻度（推薦選抜の未消化枠繰り上げが原因と推測）のため他県のような個別例外列挙はせず、
- * 代わりにfinalPassers<=applicantsConfirmedの逆側の不変条件のみ検証する④公式小計（区部計・
- * 多摩部計・コース単位制以外計・島しょ計・コース制計・単位制計・商業計・ビジネスコミュニ
- * ケーション科計）との完全一致。
+ * T-Y11F §5順序#7 DoD検証（東京都・段階台帳7県目・「普通科」系123レコード＋「商業」7レコード＋
+ * 「ビジネスコミュニケーション科」2レコード＋「工業に関する学科」16レコード＋「科学技術科」
+ * 2レコード＝計150レコード）: ①レコードの不変条件（quota>0等）②既存の倍率パイプライン
+ * （competition-rates/tokyo.ts）のquota・applicantsConfirmedと段階台帳が全件完全一致すること
+ * （本資料には志願者数列が存在しないため両方とも既存パイプラインを再利用する設計）
+ * ③finalPassers>quotaが普通科系では極めて高頻度（推薦選抜の未消化枠繰り上げが原因と推測）の
+ * ため他県のような個別例外列挙はせず、代わりにfinalPassers<=applicantsConfirmedの逆側の
+ * 不変条件のみ検証する④公式小計（区部計・多摩部計・コース単位制以外計・島しょ計・コース制計・
+ * 単位制計・商業計・ビジネスコミュニケーション科計・工業計・単位制計〈工業〉・工業合計・
+ * 科学技術科計）との完全一致。
  */
-describe('東京都 段階台帳（T-Y11F §5順序#7・7県目・132レコード）', () => {
+describe('東京都 段階台帳（T-Y11F §5順序#7・7県目・150レコード）', () => {
   const { records, officialSubtotals } = TOKYO_STAGE_LEDGER;
 
-  it('取り込み件数は普通科系123レコード＋商業7レコード＋ビジネスコミュニケーション科2レコード＝計132レコード', () => {
-    expect(records).toHaveLength(132);
+  it('取り込み件数は普通科系123レコード＋商業7レコード＋ビジネスコミュニケーション科2レコード＋工業16レコード＋科学技術科2レコード＝計150レコード', () => {
+    expect(records).toHaveLength(150);
   });
 
   it('quota/applicantsConfirmed/testTakersConfirmed/finalPassersはいずれも0より大きい（不変条件）', () => {
@@ -44,12 +45,24 @@ describe('東京都 段階台帳（T-Y11F §5順序#7・7県目・132レコー�
       expect(counterpart.quota).toBe(stageRecord.quota);
       expect(counterpart.finalApplicants).toBe(stageRecord.applicantsConfirmed);
     }
-    expect(matched).toBe(132);
+    expect(matched).toBe(150);
   });
 
   it('finalPassersはapplicantsConfirmedを超えない（東京都でもこのパターンの逆転は0件）', () => {
     for (const r of records) {
       expect(r.finalPassers).toBeLessThanOrEqual(r.applicantsConfirmed);
+    }
+  });
+
+  it('finalPassersがtestTakersConfirmedを超えるのは既知の1件のみ（江東・科学技術＝創造理数科第1志望者の2志望合流と推測・資料脚注に根拠あり）', () => {
+    const KNOWN_TESTTAKERS_OVERFLOW = new Map<string, number>([['科学技術|科学技術科', 66]]);
+    for (const r of records) {
+      const key = `${r.schoolName}|${r.department}`;
+      if (KNOWN_TESTTAKERS_OVERFLOW.has(key)) {
+        expect(r.finalPassers).toBe(KNOWN_TESTTAKERS_OVERFLOW.get(key));
+        continue;
+      }
+      expect(r.finalPassers).toBeLessThanOrEqual(r.testTakersConfirmed);
     }
   });
 
@@ -160,5 +173,47 @@ describe('東京都 段階台帳（T-Y11F §5順序#7・7県目・132レコー�
 
     const overflowCount = [...shougyouRecords, ...bijicomiRecords].filter((r) => r.finalPassers > r.quota).length;
     expect(overflowCount).toBe(3);
+  });
+
+  it('「工業に関する学科」16レコード（単位制以外15＋単位制1）＋「科学技術科」2レコードの機械集計が資料本文の4段階の公式小計（工業計・単位制計〈工業〉・工業合計・科学技術科計）とquota/testTakersConfirmed/finalPassers/applicantsConfirmedの4系列とも完全一致する（工業16件中finalPassers>quotaは工芸1件のみ＝工業系は総じて低倍率）', () => {
+    if (!officialSubtotals) throw new Error('officialSubtotals が定義されていません');
+    const kougyou = officialSubtotals.find((s) => s.label === '工業計');
+    const kougyouTani = officialSubtotals.find((s) => s.label === '単位制計（工業）');
+    const kougyouGoukei = officialSubtotals.find((s) => s.label === '工業合計');
+    const kagakuGijutsu = officialSubtotals.find((s) => s.label === '科学技術科計');
+    if (!kougyou || !kougyouTani || !kougyouGoukei || !kagakuGijutsu) throw new Error('officialSubtotals の一部が見つかりません');
+
+    // 工業計＋単位制計（工業）＝工業合計（資料内部の整合性）
+    expect(kougyou.quota + kougyouTani.quota).toBe(kougyouGoukei.quota);
+    expect(kougyou.testTakersConfirmed + kougyouTani.testTakersConfirmed).toBe(kougyouGoukei.testTakersConfirmed);
+    expect(kougyou.finalPassers + kougyouTani.finalPassers).toBe(kougyouGoukei.finalPassers);
+
+    const kougyouRecords = records.filter((r) => r.department === '工業科');
+    const kougyouTaniRecords = records.filter((r) => r.department === '工業科（単位制）');
+    const kagakuGijutsuRecords = records.filter((r) => r.department === '科学技術科');
+    expect(kougyouRecords).toHaveLength(15);
+    expect(kougyouTaniRecords).toHaveLength(1);
+    expect(kagakuGijutsuRecords).toHaveLength(2);
+
+    const kougyouSums = sumStageLedger(kougyouRecords);
+    expect(kougyouSums.quota).toBe(kougyou.quota);
+    expect(kougyouSums.testTakersConfirmed).toBe(kougyou.testTakersConfirmed);
+    expect(kougyouSums.finalPassers).toBe(kougyou.finalPassers);
+    expect(kougyouSums.applicantsConfirmed).toBe(kougyou.applicantsConfirmed);
+
+    const kougyouTaniSums = sumStageLedger(kougyouTaniRecords);
+    expect(kougyouTaniSums.quota).toBe(kougyouTani.quota);
+    expect(kougyouTaniSums.testTakersConfirmed).toBe(kougyouTani.testTakersConfirmed);
+    expect(kougyouTaniSums.finalPassers).toBe(kougyouTani.finalPassers);
+    expect(kougyouTaniSums.applicantsConfirmed).toBe(kougyouTani.applicantsConfirmed);
+
+    const kagakuGijutsuSums = sumStageLedger(kagakuGijutsuRecords);
+    expect(kagakuGijutsuSums.quota).toBe(kagakuGijutsu.quota);
+    expect(kagakuGijutsuSums.testTakersConfirmed).toBe(kagakuGijutsu.testTakersConfirmed);
+    expect(kagakuGijutsuSums.finalPassers).toBe(kagakuGijutsu.finalPassers);
+    expect(kagakuGijutsuSums.applicantsConfirmed).toBe(kagakuGijutsu.applicantsConfirmed);
+
+    const overflowCount = [...kougyouRecords, ...kougyouTaniRecords].filter((r) => r.finalPassers > r.quota).length;
+    expect(overflowCount).toBe(1); // 工芸のみ（+6）
   });
 });

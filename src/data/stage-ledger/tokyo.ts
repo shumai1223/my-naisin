@@ -1,9 +1,9 @@
 import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
 
 /**
- * 東京都 段階台帳（T-Y11F §5順序#7・7県目・「普通科（コース・単位制以外）」107レコード＋
- * 「普通科（コース制）」4レコード＋「普通科（単位制）」12レコード＋「商業に関する学科」7
- * レコード＋「ビジネスコミュニケーション科」2レコード＝計132レコード）。
+ * 東京都 段階台帳（T-Y11F §5順序#7・7県目・「普通科」系123レコード＋「商業」7レコード＋
+ * 「ビジネスコミュニケーション科」2レコード＋「工業に関する学科」16レコード＋「科学技術科」
+ * 2レコード＝計150レコード）。
  *
  * 一次ソース: 東京都教育委員会「令和8年度東京都立高等学校入学者選抜合格発表」（一般募集・
  * 学力検査による選抜）のうち「普通科（コース、単位制以外の学校）」（区部57校＋多摩部44校）＋
@@ -67,9 +67,25 @@ import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
  * ⚠️本PDFは全8頁と大きく2頁目以降（工業に関する学科・単位制以外/単位制の広範な区分）は
  * 未着手のため、本ファイルは全体としてcoverage.status='partial'のまま。
  *
- * ⚠️スコープ: 「専門学科・定時制課程（単位制）」の残り7頁（工業/家庭/福祉/農業等の各学科・
- * 単位制区分・定時制課程）＋「通信制（前期選抜）」（同日公表の別PDF）は別セッションで
- * 横展開する。
+ * 🔁**「工業に関する学科（単位制以外）」15レコード＋「工業に関する学科（単位制）」1レコード＋
+ * 「科学技術科」2レコードを追加（累計150レコード）**: 同PDFの2〜3頁目（7［工業に関する学科
+ * （単位制以外の学校）］・8［工業に関する学科（単位制の学校）］・9［科学技術科］）に着手。
+ * 工業（単位制以外）は工芸/蔵前工科/墨田工科/総合工科/中野工科/杉並工科/荒川工科/北豊島工科/
+ * 練馬工科/足立工科/葛西工科/府中工科/町田工科/多摩工科/田無工科の15校（複数学科を持つ学校は
+ * sheet2/3方式と同じく資料内の学校単位「計」行を採用）。工業（単位制）は六郷工科1校。科学
+ * 技術科は科学技術（江東）/多摩科学技術（小金井）の2校。既存パイプラインの学科ラベルは
+ * 「工業科」「工業科（単位制）」「科学技術科」でquotaは18件全数が既存パイプラインと完全一致。
+ * 資料本文の「工業計」（単位制以外）「単位制計」「工業合計」「科学技術科計」の4段階の公式
+ * 小計と3系列とも完全一致。⚠️**新種の異常値パターン発見**: 江東・科学技術（quota107→
+ * testTakers51→finalPassers66）は**finalPassers>testTakersConfirmedという初めてのパターン**
+ * （受検者数より合格者数が多い）を示す。資料脚注に「科学技術高校の受検人員には、同校の
+ * 創造理数科を第1志望とする者を含まない」と明記されており、創造理数科第1志望者の一部が
+ * 第2志望で科学技術科へ合流したためと推測（立川の同型注記と同じ構造・Y-0につき断定しない）。
+ * finalPassers>quotaは工芸（125→131）・多摩科学技術（147→153）の2件のみで、工業科単位制以外
+ * 15校中14校はquota未達（工業系は総じて低倍率で普通科系の高頻度超過パターンとは対照的）。
+ *
+ * ⚠️スコープ: 「専門学科・定時制課程（単位制）」の残り5頁（4〜8頁目・家庭/福祉/農業等の
+ * 各学科・定時制課程）＋「通信制（前期選抜）」（同日公表の別PDF）は別セッションで横展開する。
  */
 
 export const TOKYO_STAGE_LEDGER: PrefectureStageLedgerFile = {
@@ -89,7 +105,7 @@ export const TOKYO_STAGE_LEDGER: PrefectureStageLedgerFile = {
     },
     {
       url: 'https://www.kyoiku.metro.tokyo.lg.jp/documents/d/kyoiku/2026-03-02-181100-462',
-      docTitle: '東京都教育委員会 令和8年度東京都立高等学校入学者選抜合格発表 5［商業に関する学科］＋6［ビジネスコミュニケーション科］（全8頁のうち1頁目のみ着手）',
+      docTitle: '東京都教育委員会 令和8年度東京都立高等学校入学者選抜合格発表 5［商業に関する学科］＋6［ビジネスコミュニケーション科］＋7［工業に関する学科（単位制以外の学校）］＋8［工業に関する学科（単位制の学校）］＋9［科学技術科］（全8頁のうち1〜3頁目に着手）',
       fiscalYear: '令和8年度（2026年度）',
       fetchedAt: '2026-09-09',
     },
@@ -102,12 +118,15 @@ export const TOKYO_STAGE_LEDGER: PrefectureStageLedgerFile = {
       '普通科（単位制・12レコード）',
       '商業に関する学科（7レコード）',
       'ビジネスコミュニケーション科（2レコード）',
+      '工業に関する学科・単位制以外（15レコード）',
+      '工業に関する学科・単位制（1レコード）',
+      '科学技術科（2レコード）',
     ],
     pendingDepartments: [
-      '専門学科・定時制課程（単位制）の残り7頁（工業/家庭/福祉/農業等・単位制区分・定時制課程）',
+      '専門学科・定時制課程（単位制）の残り5頁（4〜8頁目・家庭/福祉/農業等・定時制課程）',
       '通信制（前期選抜）',
     ],
-    note: '「普通科（コース・単位制以外）」区分（107レコード）＋「普通科（コース制）」（4レコード）＋「普通科（単位制）」（12レコード）＋「商業に関する学科」（7レコード）＋「ビジネスコミュニケーション科」（2レコード）を完全収録し累計132レコード。quotaは既存competition-rates/tokyo.tsと全132件で完全一致（募集人員は試験日まで不変であることを確認）。applicantsConfirmedも既存パイプラインをそのまま再利用（本資料には志願者数列が存在しないため）。testTakersConfirmed/finalPassersのみ本資料から新規転記。資料本文の「区部計」「多摩部計」「コース、単位制以外計」「島しょ計」「コース制計」「単位制計」「商業計」「ビジネスコミュニケーション科計」の8段階の公式小計と132レコード全数の機械集計がquota/testTakersConfirmed/finalPassersの3系列すべてで完全一致。普通科系はfinalPassers>quotaが極めて高頻度（推薦選抜の未消化枠繰り上げが原因と推測）だが商業系は3/9件のみで少数派。専門学科・定時制課程（単位制）の残り7頁・通信制（前期選抜）は未着手。',
+    note: '「普通科（コース・単位制以外）」区分（107レコード）＋「普通科（コース制）」（4レコード）＋「普通科（単位制）」（12レコード）＋「商業に関する学科」（7レコード）＋「ビジネスコミュニケーション科」（2レコード）＋「工業に関する学科・単位制以外」（15レコード）＋「工業に関する学科・単位制」（1レコード）＋「科学技術科」（2レコード）を完全収録し累計150レコード。quotaは既存competition-rates/tokyo.tsと全150件で完全一致（募集人員は試験日まで不変であることを確認）。applicantsConfirmedも既存パイプラインをそのまま再利用（本資料には志願者数列が存在しないため）。testTakersConfirmed/finalPassersのみ本資料から新規転記。資料本文の「区部計」「多摩部計」「コース、単位制以外計」「島しょ計」「コース制計」「単位制計」「商業計」「ビジネスコミュニケーション科計」「工業計」「単位制計（工業）」「工業合計」「科学技術科計」の12段階の公式小計と150レコード全数の機械集計がquota/testTakersConfirmed/finalPassersの3系列すべてで完全一致。普通科系はfinalPassers>quotaが極めて高頻度（推薦選抜の未消化枠繰り上げが原因と推測）だが工業系は低倍率のため2/16件のみ・商業系は3/9件と、いずれも少数派。江東・科学技術はfinalPassers>testTakersConfirmedという初の逆転パターンを示す（創造理数科第1志望者の2志望合流と推測・資料脚注に根拠あり）。専門学科・定時制課程（単位制）の残り5頁・通信制（前期選抜）は未着手。',
   },
   officialSubtotals: [
     { label: '区部計', quota: 12088, applicantsConfirmed: 16926, testTakersConfirmed: 15539, finalPassers: 11638 },
@@ -118,6 +137,10 @@ export const TOKYO_STAGE_LEDGER: PrefectureStageLedgerFile = {
     { label: '単位制計', quota: 2276, applicantsConfirmed: 2948, testTakersConfirmed: 2709, finalPassers: 2146 },
     { label: '商業計', quota: 798, applicantsConfirmed: 717, testTakersConfirmed: 684, finalPassers: 642 },
     { label: 'ビジネスコミュニケーション科計', quota: 231, applicantsConfirmed: 227, testTakersConfirmed: 211, finalPassers: 208 },
+    { label: '工業計', quota: 1594, applicantsConfirmed: 1147, testTakersConfirmed: 1094, finalPassers: 1018 },
+    { label: '単位制計（工業）', quota: 96, applicantsConfirmed: 72, testTakersConfirmed: 64, finalPassers: 64 },
+    { label: '工業合計', quota: 1690, applicantsConfirmed: 1219, testTakersConfirmed: 1158, finalPassers: 1082 },
+    { label: '科学技術科計', quota: 254, applicantsConfirmed: 287, testTakersConfirmed: 204, finalPassers: 219 },
   ],
   records: [
     { schoolName: '日比谷', department: '普通科', quota: 253, applicantsConfirmed: 520, testTakersConfirmed: 420, finalPassers: 270 },
@@ -252,5 +275,23 @@ export const TOKYO_STAGE_LEDGER: PrefectureStageLedgerFile = {
     { schoolName: '第五商業', department: '商業科', quota: 126, applicantsConfirmed: 166, testTakersConfirmed: 164, finalPassers: 128 },
     { schoolName: '大田桜台', department: 'ビジネスコミュニケーション科', quota: 105, applicantsConfirmed: 87, testTakersConfirmed: 80, finalPassers: 80 },
     { schoolName: '千早', department: 'ビジネスコミュニケーション科', quota: 126, applicantsConfirmed: 140, testTakersConfirmed: 131, finalPassers: 128 },
+    { schoolName: '工芸', department: '工業科', quota: 125, applicantsConfirmed: 212, testTakersConfirmed: 200, finalPassers: 131 },
+    { schoolName: '蔵前工科', department: '工業科', quota: 107, applicantsConfirmed: 71, testTakersConfirmed: 66, finalPassers: 66 },
+    { schoolName: '墨田工科', department: '工業科', quota: 114, applicantsConfirmed: 65, testTakersConfirmed: 61, finalPassers: 61 },
+    { schoolName: '総合工科', department: '工業科', quota: 88, applicantsConfirmed: 43, testTakersConfirmed: 41, finalPassers: 41 },
+    { schoolName: '中野工科', department: '工業科', quota: 84, applicantsConfirmed: 73, testTakersConfirmed: 69, finalPassers: 69 },
+    { schoolName: '杉並工科', department: '工業科', quota: 111, applicantsConfirmed: 36, testTakersConfirmed: 30, finalPassers: 30 },
+    { schoolName: '荒川工科', department: '工業科', quota: 112, applicantsConfirmed: 30, testTakersConfirmed: 27, finalPassers: 27 },
+    { schoolName: '北豊島工科', department: '工業科', quota: 97, applicantsConfirmed: 39, testTakersConfirmed: 37, finalPassers: 37 },
+    { schoolName: '練馬工科', department: '工業科', quota: 105, applicantsConfirmed: 95, testTakersConfirmed: 93, finalPassers: 93 },
+    { schoolName: '足立工科', department: '工業科', quota: 95, applicantsConfirmed: 55, testTakersConfirmed: 55, finalPassers: 55 },
+    { schoolName: '葛西工科', department: '工業科', quota: 122, applicantsConfirmed: 88, testTakersConfirmed: 86, finalPassers: 86 },
+    { schoolName: '府中工科', department: '工業科', quota: 106, applicantsConfirmed: 101, testTakersConfirmed: 98, finalPassers: 94 },
+    { schoolName: '町田工科', department: '工業科', quota: 108, applicantsConfirmed: 53, testTakersConfirmed: 49, finalPassers: 49 },
+    { schoolName: '多摩工科', department: '工業科', quota: 109, applicantsConfirmed: 101, testTakersConfirmed: 99, finalPassers: 96 },
+    { schoolName: '田無工科', department: '工業科', quota: 111, applicantsConfirmed: 85, testTakersConfirmed: 83, finalPassers: 83 },
+    { schoolName: '六郷工科', department: '工業科（単位制）', quota: 96, applicantsConfirmed: 72, testTakersConfirmed: 64, finalPassers: 64 },
+    { schoolName: '科学技術', department: '科学技術科', quota: 107, applicantsConfirmed: 78, testTakersConfirmed: 51, finalPassers: 66 },
+    { schoolName: '多摩科学技術', department: '科学技術科', quota: 147, applicantsConfirmed: 209, testTakersConfirmed: 153, finalPassers: 153 },
   ],
 };
