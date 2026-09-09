@@ -3,20 +3,21 @@ import { TOKYO_STAGE_LEDGER } from '../tokyo';
 import { COMPETITION_RATE_BY_PREFECTURE } from '@/data/competition-rates';
 
 /**
- * T-Y11F §5順序#7 DoD検証（東京都・段階台帳7県目・「普通科（コース・単位制以外）」107レコード＋
- * 「普通科（コース制）」4レコード＋「普通科（単位制）」12レコード＝計123レコード）:
+ * T-Y11F §5順序#7 DoD検証（東京都・段階台帳7県目・「普通科」系123レコード＋「商業に関する
+ * 学科」7レコード＋「ビジネスコミュニケーション科」2レコード＝計132レコード）:
  * ①レコードの不変条件（quota>0等）②既存の倍率パイプライン（competition-rates/tokyo.ts）の
  * quota・applicantsConfirmedと段階台帳が全件完全一致すること（本資料には志願者数列が存在
- * しないため両方とも既存パイプラインを再利用する設計）③finalPassers>quotaが東京都では
+ * しないため両方とも既存パイプラインを再利用する設計）③finalPassers>quotaが普通科系では
  * 極めて高頻度（推薦選抜の未消化枠繰り上げが原因と推測）のため他県のような個別例外列挙はせず、
  * 代わりにfinalPassers<=applicantsConfirmedの逆側の不変条件のみ検証する④公式小計（区部計・
- * 多摩部計・コース単位制以外計・島しょ計・コース制計・単位制計）との完全一致。
+ * 多摩部計・コース単位制以外計・島しょ計・コース制計・単位制計・商業計・ビジネスコミュニ
+ * ケーション科計）との完全一致。
  */
-describe('東京都 段階台帳（T-Y11F §5順序#7・7県目・「普通科」系123レコード）', () => {
+describe('東京都 段階台帳（T-Y11F §5順序#7・7県目・132レコード）', () => {
   const { records, officialSubtotals } = TOKYO_STAGE_LEDGER;
 
-  it('取り込み件数は区部57校＋多摩部44校＋島しょ6校＋コース制4校＋単位制12校＝計123レコード', () => {
-    expect(records).toHaveLength(123);
+  it('取り込み件数は普通科系123レコード＋商業7レコード＋ビジネスコミュニケーション科2レコード＝計132レコード', () => {
+    expect(records).toHaveLength(132);
   });
 
   it('quota/applicantsConfirmed/testTakersConfirmed/finalPassersはいずれも0より大きい（不変条件）', () => {
@@ -43,7 +44,7 @@ describe('東京都 段階台帳（T-Y11F §5順序#7・7県目・「普通科�
       expect(counterpart.quota).toBe(stageRecord.quota);
       expect(counterpart.finalApplicants).toBe(stageRecord.applicantsConfirmed);
     }
-    expect(matched).toBe(123);
+    expect(matched).toBe(132);
   });
 
   it('finalPassersはapplicantsConfirmedを超えない（東京都でもこのパターンの逆転は0件）', () => {
@@ -132,5 +133,32 @@ describe('東京都 段階台帳（T-Y11F §5順序#7・7県目・「普通科�
     expect(tan_iSums.testTakersConfirmed).toBe(tan_i.testTakersConfirmed);
     expect(tan_iSums.finalPassers).toBe(tan_i.finalPassers);
     expect(tan_iSums.applicantsConfirmed).toBe(tan_i.applicantsConfirmed);
+  });
+
+  it('「商業に関する学科」7レコード＋「ビジネスコミュニケーション科」2レコードの機械集計が資料本文の公式小計（商業計・ビジネスコミュニケーション科計）とquota/testTakersConfirmed/finalPassers/applicantsConfirmedの4系列とも完全一致する（本区分はfinalPassers>quotaが少数派＝3/9件のみ）', () => {
+    if (!officialSubtotals) throw new Error('officialSubtotals が定義されていません');
+    const shougyou = officialSubtotals.find((s) => s.label === '商業計');
+    const bijicomi = officialSubtotals.find((s) => s.label === 'ビジネスコミュニケーション科計');
+    if (!shougyou || !bijicomi) throw new Error('officialSubtotals の一部が見つかりません');
+
+    const shougyouRecords = records.filter((r) => r.department === '商業科');
+    const bijicomiRecords = records.filter((r) => r.department === 'ビジネスコミュニケーション科');
+    expect(shougyouRecords).toHaveLength(7);
+    expect(bijicomiRecords).toHaveLength(2);
+
+    const shougyouSums = sumStageLedger(shougyouRecords);
+    expect(shougyouSums.quota).toBe(shougyou.quota);
+    expect(shougyouSums.testTakersConfirmed).toBe(shougyou.testTakersConfirmed);
+    expect(shougyouSums.finalPassers).toBe(shougyou.finalPassers);
+    expect(shougyouSums.applicantsConfirmed).toBe(shougyou.applicantsConfirmed);
+
+    const bijicomiSums = sumStageLedger(bijicomiRecords);
+    expect(bijicomiSums.quota).toBe(bijicomi.quota);
+    expect(bijicomiSums.testTakersConfirmed).toBe(bijicomi.testTakersConfirmed);
+    expect(bijicomiSums.finalPassers).toBe(bijicomi.finalPassers);
+    expect(bijicomiSums.applicantsConfirmed).toBe(bijicomi.applicantsConfirmed);
+
+    const overflowCount = [...shougyouRecords, ...bijicomiRecords].filter((r) => r.finalPassers > r.quota).length;
+    expect(overflowCount).toBe(3);
   });
 });

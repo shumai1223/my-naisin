@@ -2,7 +2,8 @@ import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
 
 /**
  * 東京都 段階台帳（T-Y11F §5順序#7・7県目・「普通科（コース・単位制以外）」107レコード＋
- * 「普通科（コース制）」4レコード＋「普通科（単位制）」12レコード＝計123レコード）。
+ * 「普通科（コース制）」4レコード＋「普通科（単位制）」12レコード＋「商業に関する学科」7
+ * レコード＋「ビジネスコミュニケーション科」2レコード＝計132レコード）。
  *
  * 一次ソース: 東京都教育委員会「令和8年度東京都立高等学校入学者選抜合格発表」（一般募集・
  * 学力検査による選抜）のうち「普通科（コース、単位制以外の学校）」（区部57校＋多摩部44校）＋
@@ -54,8 +55,21 @@ import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
  * （深川外国語56→57・新宿単位制284→288等）が両区分でも再現され、東京都全体で一貫した構造的
  * 現象であることが裏付けられた。finalPassers>applicantsConfirmedは0件。
  *
- * ⚠️スコープ: 「専門学科・定時制課程（単位制）」「通信制（前期選抜）」（いずれも同日公表の
- * 別PDF）は別セッションで横展開する。
+ * 🔁**「商業に関する学科」7レコード＋「ビジネスコミュニケーション科」2レコードを追加
+ * （累計132レコード）**: 同日公表の「専門学科・定時制課程（単位制）」PDF（`2026-03-02-
+ * 181100-462`・全8頁）の1頁目に着手。5［商業に関する学科］（芝商業/江東商業/第三商業/
+ * 第一商業/第四商業/葛飾商業/第五商業の7校・いずれも「ビジネス」科名）＋6［ビジネス
+ * コミュニケーション科］（大田桜台/千早の2校）。既存パイプラインの学科ラベルは「商業科」
+ * 「ビジネスコミュニケーション科」でquotaは9件全数が完全一致。両区分とも資料本文の「商業計」
+ * 「ビジネスコミュニケーション科計」の公式小計と3系列とも完全一致。finalPassers>quotaは
+ * 第三商業（105→106）・第五商業（126→128）・千早（126→128）の3件のみで、他はquota以下
+ * （普通科系と異なり本区分では超過が少数派）。finalPassers>applicantsConfirmedは0件。
+ * ⚠️本PDFは全8頁と大きく2頁目以降（工業に関する学科・単位制以外/単位制の広範な区分）は
+ * 未着手のため、本ファイルは全体としてcoverage.status='partial'のまま。
+ *
+ * ⚠️スコープ: 「専門学科・定時制課程（単位制）」の残り7頁（工業/家庭/福祉/農業等の各学科・
+ * 単位制区分・定時制課程）＋「通信制（前期選抜）」（同日公表の別PDF）は別セッションで
+ * 横展開する。
  */
 
 export const TOKYO_STAGE_LEDGER: PrefectureStageLedgerFile = {
@@ -73,6 +87,12 @@ export const TOKYO_STAGE_LEDGER: PrefectureStageLedgerFile = {
       fiscalYear: '令和8年度（2026年度）',
       fetchedAt: '2026-09-09',
     },
+    {
+      url: 'https://www.kyoiku.metro.tokyo.lg.jp/documents/d/kyoiku/2026-03-02-181100-462',
+      docTitle: '東京都教育委員会 令和8年度東京都立高等学校入学者選抜合格発表 5［商業に関する学科］＋6［ビジネスコミュニケーション科］（全8頁のうち1頁目のみ着手）',
+      fiscalYear: '令和8年度（2026年度）',
+      fetchedAt: '2026-09-09',
+    },
   ],
   coverage: {
     status: 'partial',
@@ -80,12 +100,14 @@ export const TOKYO_STAGE_LEDGER: PrefectureStageLedgerFile = {
       '普通科（コース・単位制以外・区部57校＋多摩部44校＋島しょ6校＝107レコード）',
       '普通科（コース制・4レコード）',
       '普通科（単位制・12レコード）',
+      '商業に関する学科（7レコード）',
+      'ビジネスコミュニケーション科（2レコード）',
     ],
     pendingDepartments: [
-      '専門学科・定時制課程（単位制）',
+      '専門学科・定時制課程（単位制）の残り7頁（工業/家庭/福祉/農業等・単位制区分・定時制課程）',
       '通信制（前期選抜）',
     ],
-    note: '「普通科（コース・単位制以外）」区分（107レコード）＋「普通科（コース制）」（4レコード）＋「普通科（単位制）」（12レコード）を完全収録し累計123レコード。quotaは既存competition-rates/tokyo.tsと全123件で完全一致（募集人員は試験日まで不変であることを確認）。applicantsConfirmedも既存パイプラインをそのまま再利用（本資料には志願者数列が存在しないため）。testTakersConfirmed/finalPassersのみ本資料から新規転記。資料本文の「区部計」「多摩部計」「コース、単位制以外計」「島しょ計」「コース制計」「単位制計」の6段階の公式小計と123レコード全数の機械集計がquota/testTakersConfirmed/finalPassersの3系列すべてで完全一致。finalPassers>quotaが極めて高頻度（推薦選抜の未消化枠繰り上げが原因と推測・他県の「合格ボーダー同点者」型とは異質のため個別列挙による例外管理はせず）。専門学科・定時制課程（単位制）・通信制（前期選抜）は未着手。',
+    note: '「普通科（コース・単位制以外）」区分（107レコード）＋「普通科（コース制）」（4レコード）＋「普通科（単位制）」（12レコード）＋「商業に関する学科」（7レコード）＋「ビジネスコミュニケーション科」（2レコード）を完全収録し累計132レコード。quotaは既存competition-rates/tokyo.tsと全132件で完全一致（募集人員は試験日まで不変であることを確認）。applicantsConfirmedも既存パイプラインをそのまま再利用（本資料には志願者数列が存在しないため）。testTakersConfirmed/finalPassersのみ本資料から新規転記。資料本文の「区部計」「多摩部計」「コース、単位制以外計」「島しょ計」「コース制計」「単位制計」「商業計」「ビジネスコミュニケーション科計」の8段階の公式小計と132レコード全数の機械集計がquota/testTakersConfirmed/finalPassersの3系列すべてで完全一致。普通科系はfinalPassers>quotaが極めて高頻度（推薦選抜の未消化枠繰り上げが原因と推測）だが商業系は3/9件のみで少数派。専門学科・定時制課程（単位制）の残り7頁・通信制（前期選抜）は未着手。',
   },
   officialSubtotals: [
     { label: '区部計', quota: 12088, applicantsConfirmed: 16926, testTakersConfirmed: 15539, finalPassers: 11638 },
@@ -94,6 +116,8 @@ export const TOKYO_STAGE_LEDGER: PrefectureStageLedgerFile = {
     { label: '島しょ計', quota: 310, applicantsConfirmed: 100, testTakersConfirmed: 100, finalPassers: 100 },
     { label: 'コース制計', quota: 224, applicantsConfirmed: 279, testTakersConfirmed: 254, finalPassers: 208 },
     { label: '単位制計', quota: 2276, applicantsConfirmed: 2948, testTakersConfirmed: 2709, finalPassers: 2146 },
+    { label: '商業計', quota: 798, applicantsConfirmed: 717, testTakersConfirmed: 684, finalPassers: 642 },
+    { label: 'ビジネスコミュニケーション科計', quota: 231, applicantsConfirmed: 227, testTakersConfirmed: 211, finalPassers: 208 },
   ],
   records: [
     { schoolName: '日比谷', department: '普通科', quota: 253, applicantsConfirmed: 520, testTakersConfirmed: 420, finalPassers: 270 },
@@ -219,5 +243,14 @@ export const TOKYO_STAGE_LEDGER: PrefectureStageLedgerFile = {
     { schoolName: '翔陽', department: '普通科（単位制）', quota: 188, applicantsConfirmed: 181, testTakersConfirmed: 171, finalPassers: 171 },
     { schoolName: '国分寺', department: '普通科（単位制）', quota: 252, applicantsConfirmed: 409, testTakersConfirmed: 372, finalPassers: 256 },
     { schoolName: '上水', department: '普通科（単位制）', quota: 188, applicantsConfirmed: 279, testTakersConfirmed: 276, finalPassers: 190 },
+    { schoolName: '芝商業', department: '商業科', quota: 100, applicantsConfirmed: 84, testTakersConfirmed: 80, finalPassers: 80 },
+    { schoolName: '江東商業', department: '商業科', quota: 105, applicantsConfirmed: 93, testTakersConfirmed: 87, finalPassers: 87 },
+    { schoolName: '第三商業', department: '商業科', quota: 105, applicantsConfirmed: 115, testTakersConfirmed: 112, finalPassers: 106 },
+    { schoolName: '第一商業', department: '商業科', quota: 131, applicantsConfirmed: 68, testTakersConfirmed: 54, finalPassers: 54 },
+    { schoolName: '第四商業', department: '商業科', quota: 105, applicantsConfirmed: 85, testTakersConfirmed: 82, finalPassers: 82 },
+    { schoolName: '葛飾商業', department: '商業科', quota: 126, applicantsConfirmed: 106, testTakersConfirmed: 105, finalPassers: 105 },
+    { schoolName: '第五商業', department: '商業科', quota: 126, applicantsConfirmed: 166, testTakersConfirmed: 164, finalPassers: 128 },
+    { schoolName: '大田桜台', department: 'ビジネスコミュニケーション科', quota: 105, applicantsConfirmed: 87, testTakersConfirmed: 80, finalPassers: 80 },
+    { schoolName: '千早', department: 'ビジネスコミュニケーション科', quota: 126, applicantsConfirmed: 140, testTakersConfirmed: 131, finalPassers: 128 },
   ],
 };
