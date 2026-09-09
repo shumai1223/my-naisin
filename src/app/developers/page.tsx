@@ -644,7 +644,7 @@ print(naishin["total"])  # -> 52`;
 
           <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">⑦d 都道府県別 学校ごと入試競争率（Business以上）</h3>
           <p className="mb-2 text-sm text-slate-600">
-            <strong>公立高校・学校＋学科単位の募集人員・応募者数・倍率＝21,739件（3,260校・47都道府県・令和4〜8年度の5年分）。</strong>
+            <strong>公立高校・学校＋学科単位の募集人員・応募者数・倍率＝21,739件（3,261校・47都道府県・令和4〜8年度の5年分）。</strong>
             <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">GET /api/schools/{'{pref}'}</code>
             {' — '}都道府県コード（例: <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">tokyo</code>）を指定すると、
             その都道府県のレコードを返します。

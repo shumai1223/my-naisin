@@ -13,6 +13,16 @@
  * quota=i（一般選抜募集定員）、finalApplicants=志願者数合計（志願変更後）、finalRate=p（対募集定員
  * 競争率・入学者選抜8年度）を採用。機械集計と「合計」行の完全一致で正確性を担保した。
  *
+ * ⚠️学校名誤帰属バグの訂正（2026-09-10・T-Y11F §5順序#7の段階台帳作業で発見・ibaraki/tokushima
+ * と同型の6件目）: 「情報科学」（quota72/finalApplicants46等）は元資料PDFのくくり募集ブロック
+ * 幾何構造上、直前の「安来」の継続行と区別不能なためschoolName='安来'の1学科として誤って
+ * 収録されていた。しかし「島根県立情報科学高等学校」は安来市に実在する独立校（Wikipedia項目
+ * あり・学級数3・入学定員120）であり、令和8年度「学力検査受検状況」(3/4)・「一般選抜等合格者数
+ * 及び第２次募集募集人員一覧」(3/13)の2資料でも安来とは別の独立行として掲載されていることを
+ * 確認し、R5〜R8の全4年度分でschoolNameを'安来'から'情報科学'へ訂正した（数値自体は元から
+ * 正しく、学校への帰属のみが誤っていた）。パーサ側（bairitsu-ingest/parsers/shimane.ts）の
+ * CONTINUATION_LABELSも合わせて訂正済み。
+ *
  * くくり募集（同一の入学者枠数を複数学科・コースが共有し、資料上は代表学科のみに数値が印字される）:
  * 安来「情報科学（情報システム・情報処理・マルチメディア）」、松江商業「商業（商業・国際ビジネス・
  * 情報処理）」、浜田商業「商業（商業・情報処理）」、隠岐島前「普通（普通・地域共創）」はいずれも
@@ -115,7 +125,7 @@ export const SHIMANE_COMPETITION_RATES: PrefectureCompetitionRateFile = {
   records: [
     { schoolName: '安来', department: '普通', quota: 81, finalApplicants: 48, finalRate: 0.59 },
     {
-      schoolName: '安来',
+      schoolName: '情報科学',
       department: '情報科学(情報システム・情報処理・マルチメディア)',
       quota: 72,
       finalApplicants: 46,
@@ -196,7 +206,7 @@ export const SHIMANE_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '隠岐水産', department: '海洋生産', quota: 28, finalApplicants: 9, finalRate: 0.32 },
     { schoolName: '皆美が丘女子', department: '普通', quota: 53, finalApplicants: 46, finalRate: 0.87 },
     { schoolName: '安来', department: '普通', quota: 98, finalApplicants: 69, finalRate: 0.7, fiscalYear: '令和7年度（2025年度）' },
-    { schoolName: '安来', department: '情報科学(情報システム・情報処理・マルチメディア)', quota: 82, finalApplicants: 47, finalRate: 0.57, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '情報科学', department: '情報科学(情報システム・情報処理・マルチメディア)', quota: 82, finalApplicants: 47, finalRate: 0.57, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '松江北', department: '普通', quota: 233, finalApplicants: 225, finalRate: 0.97, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '松江北', department: '理数', quota: 36, finalApplicants: 34, finalRate: 0.94, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '松江南', department: '普通', quota: 167, finalApplicants: 206, finalRate: 1.23, fiscalYear: '令和7年度（2025年度）' },
@@ -261,7 +271,7 @@ export const SHIMANE_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '皆美が丘女子', department: '普通', quota: 63, finalApplicants: 60, finalRate: 0.95, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '皆美が丘女子', department: '国際コミュニケーション', quota: 21, finalApplicants: 11, finalRate: 0.52, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '安来', department: '普通', quota: 138, finalApplicants: 83, finalRate: 0.6, fiscalYear: '令和6年度（2024年度）' },
-    { schoolName: '安来', department: '情報科学(情報システム・情報処理・マルチメディア)', quota: 111, finalApplicants: 70, finalRate: 0.63, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '情報科学', department: '情報科学(情報システム・情報処理・マルチメディア)', quota: 111, finalApplicants: 70, finalRate: 0.63, fiscalYear: '令和6年度（2024年度）' },
     { schoolName: '松江北', department: '普通', quota: 236, finalApplicants: 215, finalRate: 0.91, fiscalYear: '令和6年度（2024年度）' },
     { schoolName: '松江北', department: '理数', quota: 40, finalApplicants: 40, finalRate: 1.0, fiscalYear: '令和6年度（2024年度）' },
     { schoolName: '松江南', department: '普通', quota: 200, finalApplicants: 231, finalRate: 1.16, fiscalYear: '令和6年度（2024年度）' },
@@ -326,7 +336,7 @@ export const SHIMANE_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '皆美が丘女子', department: '普通', quota: 76, finalApplicants: 54, finalRate: 0.71, fiscalYear: '令和6年度（2024年度）' },
     { schoolName: '皆美が丘女子', department: '国際コミュニケーション', quota: 27, finalApplicants: 11, finalRate: 0.41, fiscalYear: '令和6年度（2024年度）' },
     { schoolName: '安来', department: '普通', quota: 138, finalApplicants: 120, finalRate: 0.87, fiscalYear: '令和5年度（2023年度）' },
-    { schoolName: '安来', department: '情報科学(情報システム・情報処理・マルチメディア)', quota: 103, finalApplicants: 84, finalRate: 0.82, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '情報科学', department: '情報科学(情報システム・情報処理・マルチメディア)', quota: 103, finalApplicants: 84, finalRate: 0.82, fiscalYear: '令和5年度（2023年度）' },
     { schoolName: '松江北', department: '普通', quota: 236, finalApplicants: 244, finalRate: 1.03, fiscalYear: '令和5年度（2023年度）' },
     { schoolName: '松江北', department: '理数', quota: 40, finalApplicants: 53, finalRate: 1.33, fiscalYear: '令和5年度（2023年度）' },
     { schoolName: '松江南', department: '普通', quota: 200, finalApplicants: 251, finalRate: 1.26, fiscalYear: '令和5年度（2023年度）' },

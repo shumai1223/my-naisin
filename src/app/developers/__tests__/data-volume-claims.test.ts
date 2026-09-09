@@ -33,7 +33,7 @@ describe('/developers 掲載件数の実データ整合性', () => {
     expect(prefectureCount).toBe(47);
     expect(totalRecords).toBe(21_739);
     expect(totalLicensable).toBe(21_548);
-    expect(uniqueSchoolCount).toBe(3_260);
+    expect(uniqueSchoolCount).toBe(3_261);
 
     const pageSrc = fs.readFileSync(path.join(__dirname, '../page.tsx'), 'utf8');
     expect(pageSrc).toContain(`${totalRecords.toLocaleString('en-US')}件`);
