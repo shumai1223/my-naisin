@@ -3,7 +3,7 @@ import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
 /**
  * 北海道 段階台帳（T-Y11F §5順序#7・28県目・全日制coverage='partial'・空知29＋石狩57＋
  * 市立札幌9＋後志18＋胆振27＋日高7＋渡島29（普通10＋専門/総合19）＋檜山4＋上川37＋留萌7＋
- * 宗谷8＝232レコードで着手）。
+ * 宗谷8＋オホーツク31＝263レコードで着手）。
  *
  * 一次ソース: 北海道教育委員会「R8入学者選抜状況報告書 §3 学校別受検者数及び合格者数」
  * （令和8年度＝2026年度入学者選抜・全14頁・管内ごとに1頁）。
@@ -88,6 +88,12 @@ import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
  * ⚠️留萌地区（7レコード・普通3＋専門4で完結）＋宗谷地区（8レコード・普通6＋専門2で完結）
  * 追加分で新たな例外3件、すべて第2次募集の新規応募者型（+1）: 浜頓別「普通」・礼文「普通」・
  * 稚内商業「商業」。2管内合計15レコードで新規のスキーマ逸脱（連携型等）は無かった。
+ *
+ * ⚠️オホーツク地区追加分（31レコード・普通16＋専門/総合15で完結）で新たな例外6件、すべて
+ * 第2次募集の新規応募者型（北見北斗「普通」は+6で本ファイル最大の差・美幌「普通」・網走桂陽
+ * 「普通」「商業」・北見工業「電気」・置戸「福祉」はいずれも+1〜+2）。湧別「普通」には道立
+ * 高校枠とは別に「連携型」選抜（募集人員80・受検24・合格24）が併記されているが、既出の
+ * 鵡川・えりも・上川と同じ理由で恒久的にスコープ外とした（4例目）。
  */
 export const HOKKAIDO_STAGE_LEDGER: PrefectureStageLedgerFile = {
   prefectureCode: 'hokkaido',
@@ -146,6 +152,12 @@ export const HOKKAIDO_STAGE_LEDGER: PrefectureStageLedgerFile = {
       fiscalYear: '令和8年度（2026年度）',
       fetchedAt: '2026-09-10',
     },
+    {
+      url: 'https://www.dokyoi.pref.hokkaido.lg.jp/fs/1/3/1/7/8/5/5/0/_/05_p9-p22.pdf',
+      docTitle: '北海道教育委員会 R8入学者選抜状況報告書「§3 学校別受検者数及び合格者数」（p.19・オホーツク地区）',
+      fiscalYear: '令和8年度（2026年度）',
+      fetchedAt: '2026-09-10',
+    },
   ],
   coverage: {
     status: 'partial',
@@ -161,17 +173,17 @@ export const HOKKAIDO_STAGE_LEDGER: PrefectureStageLedgerFile = {
       '全日制・上川地区（普通教育を主とする学科14レコード＋専門教育を主とする学科及び総合学科23レコード＝37レコードで完結）',
       '全日制・留萌地区（普通教育を主とする学科3レコード＋専門教育を主とする学科4レコード＝7レコードで完結）',
       '全日制・宗谷地区（普通教育を主とする学科6レコード＋専門教育を主とする学科2レコード＝8レコードで完結）',
+      '全日制・オホーツク地区（普通教育を主とする学科16レコード＋専門教育を主とする学科及び総合学科15レコード＝31レコードで完結）',
     ],
     pendingDepartments: [
-      '全日制・オホーツク地区',
       '全日制・十勝地区',
       '全日制・釧路地区',
       '全日制・根室地区',
       '滝川西「情報マネジメント」（既存パイプラインが検算不能のため見送った1行・本ファイルも同じ理由でスコープ外）',
-      '鵡川「連携型」・えりも「連携型」・上川「連携型」（募集人員のみでapplicantsConfirmed相当の出願者数列を持たない別スキーマのため恒久的にスコープ外）',
+      '鵡川「連携型」・えりも「連携型」・上川「連携型」・湧別「連携型」（募集人員のみでapplicantsConfirmed相当の出願者数列を持たない別スキーマのため恒久的にスコープ外）',
       '定時制課程（他県と同じ理由で恒久的にスコープ外）',
     ],
-    note: '全14管内のうち空知（29）＋石狩・道立のみ（57）＋市立札幌（9）＋後志（18）＋胆振（27）＋日高（7）＋渡島（29・完結）＋檜山（4・完結）＋上川（37・完結）＋留萌（7・完結）＋宗谷（8・完結）＝232レコードに着手。quota・applicantsConfirmedは既存パイプライン`competition-rates/hokkaido.ts`の該当レコードをそのまま再利用し、testTakersConfirmed（第1次受検者数＋第2次受検者数）・finalPassers（入学者数＝第1次合格者数＋第2次合格者数）を「§3学校別受検者数及び合格者数」p.9-18から新規転記した。推薦枠は一般枠と完全に独立したクオータ（秋田のような推薦落選者の一般転入は無い）のためスコープ外。既知の例外36件（第2次募集による新規応募者分でtestTakersConfirmedがapplicantsConfirmedを上回る26件、追加合格者と推測されるfinalPassers>testTakersConfirmed10件）はいずれも小差（最大+6）。市立札幌9件・日高7件・渡島普通10件・檜山4件は例外0件のクリーンな区分だった。連携型（鵡川・えりも・上川）は募集人員のみの別スキーマのため恒久的にスコープ外。本資料はさらに4管内分（オホーツク/十勝/釧路/根室）を残しており、既存パイプラインと同じく段階的に追加する。',
+    note: '全14管内のうち空知（29）＋石狩・道立のみ（57）＋市立札幌（9）＋後志（18）＋胆振（27）＋日高（7）＋渡島（29・完結）＋檜山（4・完結）＋上川（37・完結）＋留萌（7・完結）＋宗谷（8・完結）＋オホーツク（31・完結）＝263レコードに着手。quota・applicantsConfirmedは既存パイプライン`competition-rates/hokkaido.ts`の該当レコードをそのまま再利用し、testTakersConfirmed（第1次受検者数＋第2次受検者数）・finalPassers（入学者数＝第1次合格者数＋第2次合格者数）を「§3学校別受検者数及び合格者数」p.9-19から新規転記した。推薦枠は一般枠と完全に独立したクオータ（秋田のような推薦落選者の一般転入は無い）のためスコープ外。既知の例外42件（第2次募集による新規応募者分でtestTakersConfirmedがapplicantsConfirmedを上回る32件、追加合格者と推測されるfinalPassers>testTakersConfirmed10件）はいずれも小差（最大+6）。市立札幌9件・日高7件・渡島普通10件・檜山4件は例外0件のクリーンな区分だった。連携型（鵡川・えりも・上川・湧別）は募集人員のみの別スキーマのため恒久的にスコープ外。本資料はさらに3管内分（十勝/釧路/根室）を残しており、既存パイプラインと同じく段階的に追加する。',
   },
   records: [
     { schoolName: '岩見沢東', department: '普通', quota: 160, applicantsConfirmed: 134, testTakersConfirmed: 130, finalPassers: 128 },
@@ -406,5 +418,36 @@ export const HOKKAIDO_STAGE_LEDGER: PrefectureStageLedgerFile = {
     { schoolName: '礼文', department: '普通', quota: 40, applicantsConfirmed: 14, testTakersConfirmed: 15, finalPassers: 14 },
     { schoolName: '稚内商業', department: '商業', quota: 40, applicantsConfirmed: 37, testTakersConfirmed: 38, finalPassers: 36 },
     { schoolName: '稚内', department: '衛生看護', quota: 40, applicantsConfirmed: 15, testTakersConfirmed: 15, finalPassers: 15 },
+    { schoolName: '北見北斗', department: '普通', quota: 200, applicantsConfirmed: 192, testTakersConfirmed: 198, finalPassers: 193 },
+    { schoolName: '北見柏陽', department: '普通', quota: 200, applicantsConfirmed: 248, testTakersConfirmed: 245, finalPassers: 200 },
+    { schoolName: '北見緑陵', department: '普通', quota: 120, applicantsConfirmed: 147, testTakersConfirmed: 130, finalPassers: 120 },
+    { schoolName: '常呂', department: '普通', quota: 40, applicantsConfirmed: 12, testTakersConfirmed: 11, finalPassers: 11 },
+    { schoolName: '美幌', department: '普通', quota: 80, applicantsConfirmed: 32, testTakersConfirmed: 33, finalPassers: 33 },
+    { schoolName: '津別', department: '普通', quota: 40, applicantsConfirmed: 24, testTakersConfirmed: 23, finalPassers: 23 },
+    { schoolName: '訓子府', department: '普通', quota: 40, applicantsConfirmed: 48, testTakersConfirmed: 30, finalPassers: 29 },
+    { schoolName: '佐呂間', department: '普通', quota: 40, applicantsConfirmed: 18, testTakersConfirmed: 18, finalPassers: 18 },
+    { schoolName: '網走南ケ丘', department: '普通', quota: 160, applicantsConfirmed: 175, testTakersConfirmed: 167, finalPassers: 160 },
+    { schoolName: '網走桂陽', department: '普通', quota: 80, applicantsConfirmed: 61, testTakersConfirmed: 63, finalPassers: 63 },
+    { schoolName: '清里', department: '普通', quota: 40, applicantsConfirmed: 28, testTakersConfirmed: 28, finalPassers: 28 },
+    { schoolName: '遠軽', department: '普通', quota: 200, applicantsConfirmed: 163, testTakersConfirmed: 159, finalPassers: 159 },
+    { schoolName: '湧別', department: '普通', quota: 80, applicantsConfirmed: 51, testTakersConfirmed: 51, finalPassers: 50 },
+    { schoolName: '紋別', department: '普通', quota: 120, applicantsConfirmed: 73, testTakersConfirmed: 71, finalPassers: 70 },
+    { schoolName: '興部', department: '普通', quota: 40, applicantsConfirmed: 40, testTakersConfirmed: 40, finalPassers: 40 },
+    { schoolName: '雄武', department: '普通', quota: 40, applicantsConfirmed: 19, testTakersConfirmed: 19, finalPassers: 19 },
+    { schoolName: '北見北斗', department: '理数', quota: 40, applicantsConfirmed: 34, testTakersConfirmed: 32, finalPassers: 32 },
+    { schoolName: '美幌', department: '未来農業', quota: 40, applicantsConfirmed: 3, testTakersConfirmed: 3, finalPassers: 3 },
+    { schoolName: '北見工業', department: '電子機械', quota: 40, applicantsConfirmed: 37, testTakersConfirmed: 32, finalPassers: 32 },
+    { schoolName: '北見工業', department: '電気', quota: 40, applicantsConfirmed: 20, testTakersConfirmed: 21, finalPassers: 21 },
+    { schoolName: '北見工業', department: '建設', quota: 40, applicantsConfirmed: 27, testTakersConfirmed: 20, finalPassers: 20 },
+    { schoolName: '紋別', department: '電子機械', quota: 40, applicantsConfirmed: 14, testTakersConfirmed: 14, finalPassers: 14 },
+    { schoolName: '北見商業', department: '商業', quota: 40, applicantsConfirmed: 30, testTakersConfirmed: 27, finalPassers: 26 },
+    { schoolName: '北見商業', department: '流通経済', quota: 40, applicantsConfirmed: 34, testTakersConfirmed: 29, finalPassers: 28 },
+    { schoolName: '北見商業', department: '情報処理', quota: 40, applicantsConfirmed: 25, testTakersConfirmed: 20, finalPassers: 20 },
+    { schoolName: '網走桂陽', department: '商業', quota: 40, applicantsConfirmed: 25, testTakersConfirmed: 26, finalPassers: 26 },
+    { schoolName: '網走桂陽', department: '事務情報', quota: 40, applicantsConfirmed: 4, testTakersConfirmed: 4, finalPassers: 4 },
+    { schoolName: '紋別', department: '総合ビジネス', quota: 40, applicantsConfirmed: 17, testTakersConfirmed: 17, finalPassers: 17 },
+    { schoolName: '置戸', department: '福祉', quota: 40, applicantsConfirmed: 25, testTakersConfirmed: 27, finalPassers: 27 },
+    { schoolName: '斜里', department: '総合', quota: 40, applicantsConfirmed: 9, testTakersConfirmed: 8, finalPassers: 8 },
+    { schoolName: '大空', department: '総合', quota: 36, applicantsConfirmed: 45, testTakersConfirmed: 45, finalPassers: 36 },
   ],
 };
