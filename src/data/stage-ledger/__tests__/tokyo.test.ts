@@ -5,20 +5,19 @@ import { COMPETITION_RATE_BY_PREFECTURE } from '@/data/competition-rates';
 /**
  * T-Y11F §5順序#7 DoD検証（東京都・段階台帳7県目・「普通科」系123レコード＋「商業」7レコード＋
  * 「ビジネスコミュニケーション科」2レコード＋「工業に関する学科」16レコード＋「科学技術科」
- * 2レコード＝計150レコード）: ①レコードの不変条件（quota>0等）②既存の倍率パイプライン
- * （competition-rates/tokyo.ts）のquota・applicantsConfirmedと段階台帳が全件完全一致すること
- * （本資料には志願者数列が存在しないため両方とも既存パイプラインを再利用する設計）
- * ③finalPassers>quotaが普通科系では極めて高頻度（推薦選抜の未消化枠繰り上げが原因と推測）の
- * ため他県のような個別例外列挙はせず、代わりにfinalPassers<=applicantsConfirmedの逆側の
- * 不変条件のみ検証する④公式小計（区部計・多摩部計・コース単位制以外計・島しょ計・コース制計・
- * 単位制計・商業計・ビジネスコミュニケーション科計・工業計・単位制計〈工業〉・工業合計・
- * 科学技術科計）との完全一致。
+ * 2レコード＋「農業」5レコード＋「水産」1レコード＋「家庭（単位制以外）」3レコード＝計159
+ * レコード）: ①レコードの不変条件（quota>0等）②既存の倍率パイプライン（competition-rates/
+ * tokyo.ts）のquota・applicantsConfirmedと段階台帳が全件完全一致すること（本資料には志願者数
+ * 列が存在しないため両方とも既存パイプラインを再利用する設計）③finalPassers>quotaが普通科系
+ * では極めて高頻度（推薦選抜の未消化枠繰り上げが原因と推測）のため他県のような個別例外列挙は
+ * せず、代わりにfinalPassers<=applicantsConfirmedの逆側の不変条件のみ検証する④公式小計（15
+ * 段階）との完全一致。
  */
-describe('東京都 段階台帳（T-Y11F §5順序#7・7県目・150レコード）', () => {
+describe('東京都 段階台帳（T-Y11F §5順序#7・7県目・159レコード）', () => {
   const { records, officialSubtotals } = TOKYO_STAGE_LEDGER;
 
-  it('取り込み件数は普通科系123レコード＋商業7レコード＋ビジネスコミュニケーション科2レコード＋工業16レコード＋科学技術科2レコード＝計150レコード', () => {
-    expect(records).toHaveLength(150);
+  it('取り込み件数は普通科系123レコード＋商業7レコード＋ビジネスコミュニケーション科2レコード＋工業16レコード＋科学技術科2レコード＋農業5レコード＋水産1レコード＋家庭3レコード＝計159レコード', () => {
+    expect(records).toHaveLength(159);
   });
 
   it('quota/applicantsConfirmed/testTakersConfirmed/finalPassersはいずれも0より大きい（不変条件）', () => {
@@ -45,7 +44,7 @@ describe('東京都 段階台帳（T-Y11F §5順序#7・7県目・150レコー�
       expect(counterpart.quota).toBe(stageRecord.quota);
       expect(counterpart.finalApplicants).toBe(stageRecord.applicantsConfirmed);
     }
-    expect(matched).toBe(150);
+    expect(matched).toBe(159);
   });
 
   it('finalPassersはapplicantsConfirmedを超えない（東京都でもこのパターンの逆転は0件）', () => {
@@ -215,5 +214,45 @@ describe('東京都 段階台帳（T-Y11F §5順序#7・7県目・150レコー�
 
     const overflowCount = [...kougyouRecords, ...kougyouTaniRecords].filter((r) => r.finalPassers > r.quota).length;
     expect(overflowCount).toBe(1); // 工芸のみ（+6）
+  });
+
+  it('「農業に関する学科」5レコード＋「水産に関する学科」1レコード＋「家庭に関する学科（単位制以外）」3レコードの機械集計が資料本文の公式小計（農業計・水産計・家庭計）とquota/testTakersConfirmed/finalPassers/applicantsConfirmedの4系列とも完全一致する（本区分はfinalPassers>quotaが6/9件と普通科系に近い高頻度）', () => {
+    if (!officialSubtotals) throw new Error('officialSubtotals が定義されていません');
+    const nougyou = officialSubtotals.find((s) => s.label === '農業計');
+    const suisan = officialSubtotals.find((s) => s.label === '水産計');
+    const katei = officialSubtotals.find((s) => s.label === '家庭計');
+    if (!nougyou || !suisan || !katei) throw new Error('officialSubtotals の一部が見つかりません');
+
+    const nougyouRecords = records.filter((r) => r.department === '農業科');
+    const suisanRecords = records.filter((r) => r.department === '水産科');
+    const kateiRecords = records.filter((r) => r.department === '家庭科');
+    expect(nougyouRecords).toHaveLength(5);
+    expect(suisanRecords).toHaveLength(1);
+    expect(kateiRecords).toHaveLength(3);
+
+    // 府中の「農業」という学校名の学校が農業科・家庭科の両方に登場する（同一校が複数専門学科を併設）
+    expect(nougyouRecords.filter((r) => r.schoolName === '農業')).toHaveLength(1);
+    expect(kateiRecords.filter((r) => r.schoolName === '農業')).toHaveLength(1);
+
+    const nougyouSums = sumStageLedger(nougyouRecords);
+    expect(nougyouSums.quota).toBe(nougyou.quota);
+    expect(nougyouSums.testTakersConfirmed).toBe(nougyou.testTakersConfirmed);
+    expect(nougyouSums.finalPassers).toBe(nougyou.finalPassers);
+    expect(nougyouSums.applicantsConfirmed).toBe(nougyou.applicantsConfirmed);
+
+    const suisanSums = sumStageLedger(suisanRecords);
+    expect(suisanSums.quota).toBe(suisan.quota);
+    expect(suisanSums.testTakersConfirmed).toBe(suisan.testTakersConfirmed);
+    expect(suisanSums.finalPassers).toBe(suisan.finalPassers);
+    expect(suisanSums.applicantsConfirmed).toBe(suisan.applicantsConfirmed);
+
+    const kateiSums = sumStageLedger(kateiRecords);
+    expect(kateiSums.quota).toBe(katei.quota);
+    expect(kateiSums.testTakersConfirmed).toBe(katei.testTakersConfirmed);
+    expect(kateiSums.finalPassers).toBe(katei.finalPassers);
+    expect(kateiSums.applicantsConfirmed).toBe(katei.applicantsConfirmed);
+
+    const overflowCount = [...nougyouRecords, ...suisanRecords, ...kateiRecords].filter((r) => r.finalPassers > r.quota).length;
+    expect(overflowCount).toBe(6);
   });
 });
