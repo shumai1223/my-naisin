@@ -2,7 +2,7 @@ import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
 
 /**
  * 北海道 段階台帳（T-Y11F §5順序#7・28県目・全日制coverage='partial'・空知29＋石狩57＋
- * 市立札幌9＋後志18＋胆振27＋日高7＋渡島29（普通10＋専門/総合19）＋檜山4＝180レコードで着手）。
+ * 市立札幌9＋後志18＋胆振27＋日高7＋渡島29（普通10＋専門/総合19）＋檜山4＋上川37＝217レコードで着手）。
  *
  * 一次ソース: 北海道教育委員会「R8入学者選抜状況報告書 §3 学校別受検者数及び合格者数」
  * （令和8年度＝2026年度入学者選抜・全14頁・管内ごとに1頁）。
@@ -76,6 +76,13 @@ import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
  * 「会計ビジネス」（合格39>受検38）。これで渡島地区は普通10＋専門/総合19＝29レコードで
  * 完結。檜山地区（4レコード・江差/上ノ国/奥尻の普通3校＋檜山北総合）は例外0件のクリーンな
  * 区分だった。
+ *
+ * ⚠️上川地区追加分（37レコード・普通14＋専門/総合23で完結）で新たな例外11件、すべて第2次
+ * 募集の新規応募者型（+1）: 美瑛「普通」・上川「普通」・富良野「普通」・上富良野「普通」・
+ * 旭川農業「農業科学」「食品科学」・旭川工業「電気」・富良野「電気情報システム」・旭川商業
+ * 「流通ビジネス」「会計」・下川商業「商業」。上川高校の普通科には道立高校枠とは別に
+ * 「連携型」選抜（募集人員40・受検3・合格3）が併記されているが、既出の鵡川・えりもと
+ * 同じ理由で恒久的にスコープ外とした。
  */
 export const HOKKAIDO_STAGE_LEDGER: PrefectureStageLedgerFile = {
   prefectureCode: 'hokkaido',
@@ -122,6 +129,12 @@ export const HOKKAIDO_STAGE_LEDGER: PrefectureStageLedgerFile = {
       fiscalYear: '令和8年度（2026年度）',
       fetchedAt: '2026-09-10',
     },
+    {
+      url: 'https://www.dokyoi.pref.hokkaido.lg.jp/fs/1/3/1/7/8/5/5/0/_/05_p9-p22.pdf',
+      docTitle: '北海道教育委員会 R8入学者選抜状況報告書「§3 学校別受検者数及び合格者数」（p.17・上川地区）',
+      fiscalYear: '令和8年度（2026年度）',
+      fetchedAt: '2026-09-10',
+    },
   ],
   coverage: {
     status: 'partial',
@@ -134,9 +147,9 @@ export const HOKKAIDO_STAGE_LEDGER: PrefectureStageLedgerFile = {
       '全日制・日高地区（普通教育を主とする学科4レコード＋専門教育を主とする学科及び総合学科3レコード＝7レコード）',
       '全日制・渡島地区（普通教育を主とする学科10レコード＋専門教育を主とする学科及び総合学科19レコード＝29レコードで完結）',
       '全日制・檜山地区（普通教育を主とする学科3レコード＋総合学科1レコード＝4レコードで完結）',
+      '全日制・上川地区（普通教育を主とする学科14レコード＋専門教育を主とする学科及び総合学科23レコード＝37レコードで完結）',
     ],
     pendingDepartments: [
-      '全日制・上川地区',
       '全日制・留萌地区',
       '全日制・宗谷地区',
       '全日制・オホーツク地区',
@@ -144,10 +157,10 @@ export const HOKKAIDO_STAGE_LEDGER: PrefectureStageLedgerFile = {
       '全日制・釧路地区',
       '全日制・根室地区',
       '滝川西「情報マネジメント」（既存パイプラインが検算不能のため見送った1行・本ファイルも同じ理由でスコープ外）',
-      '鵡川「連携型」・えりも「連携型」（募集人員のみでapplicantsConfirmed相当の出願者数列を持たない別スキーマのため恒久的にスコープ外）',
+      '鵡川「連携型」・えりも「連携型」・上川「連携型」（募集人員のみでapplicantsConfirmed相当の出願者数列を持たない別スキーマのため恒久的にスコープ外）',
       '定時制課程（他県と同じ理由で恒久的にスコープ外）',
     ],
-    note: '全14管内のうち空知（29）＋石狩・道立のみ（57）＋市立札幌（9）＋後志（18）＋胆振（27）＋日高（7）＋渡島（29・完結）＋檜山（4・完結）＝180レコードに着手。quota・applicantsConfirmedは既存パイプライン`competition-rates/hokkaido.ts`の該当レコードをそのまま再利用し、testTakersConfirmed（第1次受検者数＋第2次受検者数）・finalPassers（入学者数＝第1次合格者数＋第2次合格者数）を「§3学校別受検者数及び合格者数」p.9-16から新規転記した。推薦枠は一般枠と完全に独立したクオータ（秋田のような推薦落選者の一般転入は無い）のためスコープ外。既知の例外22件（第2次募集による新規応募者分でtestTakersConfirmedがapplicantsConfirmedを上回る12件、追加合格者と推測されるfinalPassers>testTakersConfirmed10件）はいずれも小差（最大+6）。市立札幌9件・日高7件・渡島普通10件・檜山4件は例外0件のクリーンな区分だった。連携型（鵡川・えりも）は募集人員のみの別スキーマのため恒久的にスコープ外。本資料はさらに7管内分（上川/留萌/宗谷/オホーツク/十勝/釧路/根室）を残しており、既存パイプラインと同じく段階的に追加する。',
+    note: '全14管内のうち空知（29）＋石狩・道立のみ（57）＋市立札幌（9）＋後志（18）＋胆振（27）＋日高（7）＋渡島（29・完結）＋檜山（4・完結）＋上川（37・完結）＝217レコードに着手。quota・applicantsConfirmedは既存パイプライン`competition-rates/hokkaido.ts`の該当レコードをそのまま再利用し、testTakersConfirmed（第1次受検者数＋第2次受検者数）・finalPassers（入学者数＝第1次合格者数＋第2次合格者数）を「§3学校別受検者数及び合格者数」p.9-17から新規転記した。推薦枠は一般枠と完全に独立したクオータ（秋田のような推薦落選者の一般転入は無い）のためスコープ外。既知の例外33件（第2次募集による新規応募者分でtestTakersConfirmedがapplicantsConfirmedを上回る23件、追加合格者と推測されるfinalPassers>testTakersConfirmed10件）はいずれも小差（最大+6）。市立札幌9件・日高7件・渡島普通10件・檜山4件は例外0件のクリーンな区分だった。連携型（鵡川・えりも・上川）は募集人員のみの別スキーマのため恒久的にスコープ外。本資料はさらに6管内分（留萌/宗谷/オホーツク/十勝/釧路/根室）を残しており、既存パイプラインと同じく段階的に追加する。',
   },
   records: [
     { schoolName: '岩見沢東', department: '普通', quota: 160, applicantsConfirmed: 134, testTakersConfirmed: 130, finalPassers: 128 },
@@ -330,5 +343,42 @@ export const HOKKAIDO_STAGE_LEDGER: PrefectureStageLedgerFile = {
     { schoolName: '上ノ国', department: '普通', quota: 40, applicantsConfirmed: 26, testTakersConfirmed: 25, finalPassers: 25 },
     { schoolName: '奥尻', department: '普通', quota: 40, applicantsConfirmed: 11, testTakersConfirmed: 10, finalPassers: 10 },
     { schoolName: '檜山北', department: '総合', quota: 80, applicantsConfirmed: 55, testTakersConfirmed: 55, finalPassers: 54 },
+    { schoolName: '旭川東', department: '普通', quota: 240, applicantsConfirmed: 286, testTakersConfirmed: 283, finalPassers: 240 },
+    { schoolName: '旭川西', department: '普通', quota: 160, applicantsConfirmed: 217, testTakersConfirmed: 206, finalPassers: 160 },
+    { schoolName: '旭川北', department: '普通', quota: 200, applicantsConfirmed: 230, testTakersConfirmed: 220, finalPassers: 200 },
+    { schoolName: '旭川永嶺', department: '普通', quota: 200, applicantsConfirmed: 224, testTakersConfirmed: 212, finalPassers: 200 },
+    { schoolName: '鷹栖', department: '普通', quota: 40, applicantsConfirmed: 28, testTakersConfirmed: 18, finalPassers: 17 },
+    { schoolName: '東川', department: '普通', quota: 80, applicantsConfirmed: 72, testTakersConfirmed: 72, finalPassers: 70 },
+    { schoolName: '美瑛', department: '普通', quota: 40, applicantsConfirmed: 14, testTakersConfirmed: 15, finalPassers: 14 },
+    { schoolName: '上川', department: '普通', quota: 40, applicantsConfirmed: 14, testTakersConfirmed: 15, finalPassers: 15 },
+    { schoolName: '富良野', department: '普通', quota: 120, applicantsConfirmed: 94, testTakersConfirmed: 95, finalPassers: 95 },
+    { schoolName: '上富良野', department: '普通', quota: 40, applicantsConfirmed: 22, testTakersConfirmed: 23, finalPassers: 23 },
+    { schoolName: '南富良野', department: '普通', quota: 40, applicantsConfirmed: 22, testTakersConfirmed: 22, finalPassers: 21 },
+    { schoolName: '士別翔雲', department: '普通', quota: 120, applicantsConfirmed: 73, testTakersConfirmed: 71, finalPassers: 71 },
+    { schoolName: '名寄', department: '普通', quota: 160, applicantsConfirmed: 124, testTakersConfirmed: 122, finalPassers: 120 },
+    { schoolName: '美深', department: '普通', quota: 40, applicantsConfirmed: 26, testTakersConfirmed: 26, finalPassers: 26 },
+    { schoolName: '旭川西', department: '理数', quota: 40, applicantsConfirmed: 57, testTakersConfirmed: 43, finalPassers: 40 },
+    { schoolName: 'おといねっぷ美術工芸', department: '工芸', quota: 40, applicantsConfirmed: 37, testTakersConfirmed: 37, finalPassers: 37 },
+    { schoolName: '旭川農業', department: '農業科学', quota: 40, applicantsConfirmed: 38, testTakersConfirmed: 39, finalPassers: 38 },
+    { schoolName: '旭川農業', department: '食品科学', quota: 40, applicantsConfirmed: 36, testTakersConfirmed: 37, finalPassers: 37 },
+    { schoolName: '旭川農業', department: '森林科学', quota: 40, applicantsConfirmed: 30, testTakersConfirmed: 30, finalPassers: 30 },
+    { schoolName: '旭川農業', department: '生活科学', quota: 40, applicantsConfirmed: 36, testTakersConfirmed: 36, finalPassers: 36 },
+    { schoolName: '富良野', department: '園芸観光デザイン', quota: 40, applicantsConfirmed: 33, testTakersConfirmed: 33, finalPassers: 33 },
+    { schoolName: '旭川工業', department: '電子機械', quota: 40, applicantsConfirmed: 44, testTakersConfirmed: 42, finalPassers: 40 },
+    { schoolName: '旭川工業', department: '電気', quota: 40, applicantsConfirmed: 32, testTakersConfirmed: 33, finalPassers: 33 },
+    { schoolName: '旭川工業', department: '情報技術', quota: 40, applicantsConfirmed: 45, testTakersConfirmed: 37, finalPassers: 37 },
+    { schoolName: '旭川工業', department: '建築', quota: 40, applicantsConfirmed: 34, testTakersConfirmed: 34, finalPassers: 34 },
+    { schoolName: '旭川工業', department: '土木', quota: 40, applicantsConfirmed: 35, testTakersConfirmed: 35, finalPassers: 35 },
+    { schoolName: '旭川工業', department: '工業化学', quota: 40, applicantsConfirmed: 16, testTakersConfirmed: 15, finalPassers: 15 },
+    { schoolName: '名寄', department: '情報技術', quota: 40, applicantsConfirmed: 13, testTakersConfirmed: 12, finalPassers: 12 },
+    { schoolName: '富良野', department: '電気情報システム', quota: 40, applicantsConfirmed: 17, testTakersConfirmed: 18, finalPassers: 18 },
+    { schoolName: '旭川商業', department: '流通ビジネス', quota: 80, applicantsConfirmed: 73, testTakersConfirmed: 74, finalPassers: 73 },
+    { schoolName: '旭川商業', department: '国際ビジネス', quota: 40, applicantsConfirmed: 29, testTakersConfirmed: 29, finalPassers: 29 },
+    { schoolName: '旭川商業', department: '会計', quota: 40, applicantsConfirmed: 24, testTakersConfirmed: 25, finalPassers: 24 },
+    { schoolName: '旭川商業', department: '情報処理', quota: 40, applicantsConfirmed: 37, testTakersConfirmed: 37, finalPassers: 36 },
+    { schoolName: '士別翔雲', department: '総合ビジネス', quota: 40, applicantsConfirmed: 14, testTakersConfirmed: 14, finalPassers: 14 },
+    { schoolName: '下川商業', department: '商業', quota: 40, applicantsConfirmed: 11, testTakersConfirmed: 12, finalPassers: 12 },
+    { schoolName: '旭川南', department: '総合', quota: 200, applicantsConfirmed: 196, testTakersConfirmed: 191, finalPassers: 189 },
+    { schoolName: '剣淵', department: '総合', quota: 40, applicantsConfirmed: 11, testTakersConfirmed: 10, finalPassers: 10 },
   ],
 };
