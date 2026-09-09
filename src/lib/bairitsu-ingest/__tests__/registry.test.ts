@@ -422,6 +422,9 @@ describe('bairitsu-ingest registry（T-Y11E E-1）', () => {
   });
 
   it('tottoriのパーサが登録されており、既存の手作業データと完全一致する結果を返す（areaフィールド含む）', () => {
+    // ⚠️2026-09-10（T-Y11F §5順序#8）: `TottoriParsedRow`にpage/rowIndex（出典ロケータ用）を
+    // 追加し、既存データ側にもバックフィル済みのため、期待値マッピングにもこの2フィールドを
+    // 含める（既存のquota/finalApplicants/finalRateの値自体は無変更）。
     const parser = getPrefectureParser('tottori');
     expect(parser).toBeDefined();
     const parsed = parser!(tottoriR8Geometry as PdfPageGeometry[]) as unknown as TottoriParsedRow[];
@@ -434,6 +437,8 @@ describe('bairitsu-ingest registry（T-Y11E E-1）', () => {
         quota: e.quota,
         finalApplicants: e.finalApplicants,
         finalRate: e.finalRate,
+        page: e.page,
+        rowIndex: e.rowIndex,
       }))
     );
   });

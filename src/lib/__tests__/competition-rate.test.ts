@@ -173,15 +173,42 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
     expect(countRecordsWithSourceLocator(file)).toBe(1);
   });
 
-  it('参考: 現時点では全都道府県ともpdfSha256未計測のためcountRecordsWithSourceLocatorは全県0件（#8着手前のベースライン）', () => {
+  it('参考: 出典ロケータのバックフィル進捗（2026-09-10時点はtottori R8の43件のみ・#8着手のパイロット）', () => {
     const nonZero: Array<{ code: string; count: number }> = [];
     for (const [code, file] of Object.entries(COMPETITION_RATE_BY_PREFECTURE)) {
       if (!file) continue;
       const count = countRecordsWithSourceLocator(file);
       if (count > 0) nonZero.push({ code, count });
     }
-    // #8にバックフィルを始めたらこの数値は増えていく。0でなくなったら意図した進捗か確認すること。
-    expect(nonZero).toEqual([]);
+    // このテストは進捗のスナップショットを固定するリグレッションガード。#8のバックフィルを
+    // 別の県で進めた回はこの配列に新しい要素が増えるはずなので、増えたら意図した進捗か確認
+    // してから期待値を更新すること（既存県の件数が勝手に減っていたら書き換え事故を疑う）。
+    expect(nonZero).toEqual([{ code: 'tottori', count: 43 }]);
+  });
+
+  describe('tottori R8（#8パイロット・実データ検証）', () => {
+    const file = COMPETITION_RATE_BY_PREFECTURE['tottori']!;
+    const r8 = file.records.filter((r) => !r.fiscalYear);
+
+    it('R8の43件全件がresolveSourceLocatorで解決できる', () => {
+      for (const r of r8) {
+        const locator = resolveSourceLocator(r, file.sources);
+        expect(locator).not.toBeNull();
+        expect(locator!.pdfSha256).toBe('5745310ec7e1a91c026d76d4ac4595a145b4a4ceb38016e439982469817466a0');
+        // 学校別詳細表は物理ページ5〜7（1〜4頁は地区別概要・8頁は定時制で対象外）
+        expect(locator!.page).toBeGreaterThanOrEqual(5);
+        expect(locator!.page).toBeLessThanOrEqual(7);
+        expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
+      }
+    });
+
+    it('R7以前（fiscalYear明示済み）はまだpage/rowIndex未バックフィルのため全件null', () => {
+      const pre8 = file.records.filter((r) => r.fiscalYear !== undefined);
+      expect(pre8.length).toBeGreaterThan(0);
+      for (const r of pre8) {
+        expect(resolveSourceLocator(r, file.sources)).toBeNull();
+      }
+    });
   });
 });
 

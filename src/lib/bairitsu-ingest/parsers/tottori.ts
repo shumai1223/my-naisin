@@ -25,6 +25,13 @@ export interface TottoriParsedRow {
   quota: number;
   finalApplicants: number;
   finalRate: number;
+  /**
+   * T-Y11F §5順序#8（出典ロケータ）用。この行が由来するPDFの1始まりページ番号
+   * （`geometries`配列の添字+1）。
+   */
+  page: number;
+  /** #8用。同一ページ内でこの行が何番目に出力されたか（0始まり）。 */
+  rowIndex: number;
 }
 
 const TOTTORI_LAYOUT: GeneralColumnLayout = {
@@ -75,6 +82,13 @@ function groupRowsIntoBlocks(rows: ClusteredRow[], hlines: PdfPageGeometry['hlin
 export function parseTottori(geometries: PdfPageGeometry[]): TottoriParsedRow[] {
   const parsed: TottoriParsedRow[] = [];
   geometries.forEach((geom, pageIdx) => {
+    // ⚠️`geometries`はPDF全8頁のうち学校別詳細表の3頁（東部/中部/西部）だけを抜き出した
+    // サブセット（`tottori-r8-geometry.json`はconcat元PDF全体でなくこの3頁分のみを保持）。
+    // 詳細表は物理ページ5〜7（1〜4頁は地区別概要・8頁は定時制で対象外）のため、
+    // 出典ロケータ用のpageは物理ページ番号（pageIdx+5）を記録する（pdftotext -f 5で
+    // 実際に鳥取東の数値290/280/294が現れることを2026-09-10に確認済み）。
+    const page = pageIdx + 5;
+    let rowIndex = 0;
     const area = AREA_BY_PAGE[pageIdx];
     const rows = groupCharsIntoRows(geom.chars, 3.0);
     const blocks = groupRowsIntoBlocks(rows, geom.hlines, 90);
@@ -92,7 +106,7 @@ export function parseTottori(geometries: PdfPageGeometry[]): TottoriParsedRow[] 
         const finalApplicants = Number(totalRow.applicantsText.replace(/,/g, ''));
         const finalRate = Number(totalRow.rateText.replace(/,/g, ''));
         if (!Number.isFinite(quota) || !Number.isFinite(finalApplicants) || !Number.isFinite(finalRate)) continue;
-        parsed.push({ schoolName, area, department: KUKURI_DEPARTMENT_OVERRIDE[schoolName], quota, finalApplicants, finalRate });
+        parsed.push({ schoolName, area, department: KUKURI_DEPARTMENT_OVERRIDE[schoolName], quota, finalApplicants, finalRate, page, rowIndex: rowIndex++ });
         continue;
       }
 
@@ -116,7 +130,7 @@ export function parseTottori(geometries: PdfPageGeometry[]): TottoriParsedRow[] 
         const finalRate = Number(f.rateText.replace(/,/g, ''));
         if (!Number.isFinite(quota) || quota <= 0) continue;
         if (!Number.isFinite(finalApplicants) || !Number.isFinite(finalRate)) continue;
-        parsed.push({ schoolName, area, department: normalizeDepartmentText(rawDept), quota, finalApplicants, finalRate });
+        parsed.push({ schoolName, area, department: normalizeDepartmentText(rawDept), quota, finalApplicants, finalRate, page, rowIndex: rowIndex++ });
       }
     }
   });

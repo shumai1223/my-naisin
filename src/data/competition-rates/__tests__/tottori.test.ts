@@ -57,8 +57,12 @@ describe('鳥取県 倍率パイプラインα（Y-6・全日制22校43レコー
   });
 
   it('くくり募集（複数学科が募集人員を共有）が正しく収録されている', () => {
-    const cases: Array<{ schoolName: string; area: string; department: string; quota: number; finalApplicants: number; finalRate: number }> = [
-      { schoolName: '鳥取東', area: '東部', department: '普通・理数（くくり募集）', quota: 280, finalApplicants: 294, finalRate: 1.05 },
+    // ⚠️2026-09-10（T-Y11F §5順序#8）: page/rowIndexは出典ロケータのバックフィルで追加した
+    // フィールド（`bairitsu-ingest/parsers/tottori.ts`の`parseTottori()`で機械算出・квота/
+    // finalApplicants/finalRateの値自体は無変更）。このテストは値の完全一致を検証する趣旨のため
+    // 追加フィールドも期待値に含める。
+    const cases: Array<{ schoolName: string; area: string; department: string; quota: number; finalApplicants: number; finalRate: number; page: number; rowIndex: number }> = [
+      { schoolName: '鳥取東', area: '東部', department: '普通・理数（くくり募集）', quota: 280, finalApplicants: 294, finalRate: 1.05, page: 5, rowIndex: 0 },
       {
         schoolName: '鳥取工業',
         area: '東部',
@@ -66,8 +70,10 @@ describe('鳥取県 倍率パイプラインα（Y-6・全日制22校43レコー
         quota: 104,
         finalApplicants: 47,
         finalRate: 0.45,
+        page: 5,
+        rowIndex: 3,
       },
-      { schoolName: '智頭農林', area: '東部', department: '生産科学・森林科学（くくり募集）', quota: 57, finalApplicants: 9, finalRate: 0.16 },
+      { schoolName: '智頭農林', area: '東部', department: '生産科学・森林科学（くくり募集）', quota: 57, finalApplicants: 9, finalRate: 0.16, page: 5, rowIndex: 12 },
     ];
     for (const c of cases) {
       const rec = r8.find((r) => r.schoolName === c.schoolName && r.department === c.department);
@@ -83,6 +89,8 @@ describe('鳥取県 倍率パイプラインα（Y-6・全日制22校43レコー
       quota: 38,
       finalApplicants: 0,
       finalRate: 0,
+      page: 7,
+      rowIndex: 17,
     });
   });
 
