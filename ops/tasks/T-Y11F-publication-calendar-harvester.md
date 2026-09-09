@@ -1849,7 +1849,25 @@ green。commit e7c92b6。次はassembleSimpleTableRows利用の残り8県（sait
 yamanashi/chiba/ehime/kagawa/iwate）、または他の共有関数（assembleCompetitionRateRows等
 5パーサ）への横展開を検討する。
 
-| 8 | **★出典ロケータ**⚠️着手(2026-09-10・型基盤完了・3県目tochigi完了) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
+### #8 出典ロケータ 4県目=iwate（2026-09-10）
+
+iwateはtochigi型を踏襲した単純パーサだが、末尾に学科名override（大東「情報ビジネス科」→
+「商業(情報ビジネス科)」）を`.map()`で後段適用する構造を持つ初のケース。**assembleSimpleTableRows
+が返すpage/rowIndexが、この後段mapのスプレッド`{...r}`を通じて正しく保持されるか**という
+横展開時の懸念点を検証でき、問題なく保持されることを確認した（override付きパーサへの
+横展開でも追加対応は不要と判明）。ページオフセットは`pdftotext -f 1`で盛岡第一の
+quota280/applicants341が物理ページ1に実在することを確認し、概要ページ無し（pageIdx+1）。
+113件は3ページに46/47/20で分散。
+
+既存テスト4件が破損（`data/competition-rates/__tests__/iwate.test.ts`は今回初めて
+「データ側の個別テスト」が影響を受けたケース＝分割代入`{page,rowIndex,...actual}`で
+除外する対処を新設）。累計369件（tottori43+gunma106+tochigi107+iwate113）。
+tsc実exit0・jestフルスイート545suites7651tests green。commit 685f227。
+
+次はassembleSimpleTableRows利用の残り7県（saitama/nagasaki/miyagi/yamanashi/chiba/ehime/
+kagawa）、または他の共有関数（assembleCompetitionRateRows等5パーサ）への横展開を検討する。
+
+| 8 | **★出典ロケータ**⚠️着手(2026-09-10・型基盤完了・4県目iwate完了・累計369件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
 
 **2026-09-10着手**: §5順序#7（段階台帳）がhokkaido全14管内完結によりoita/okinawaの2県のみ
 未着手（前進手段なしと判断済み）となったため#8に着手。設計資料
