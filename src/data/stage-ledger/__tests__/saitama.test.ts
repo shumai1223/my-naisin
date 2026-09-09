@@ -10,8 +10,8 @@ import { SAITAMA_STAGE_LEDGER } from '../saitama';
 describe('埼玉県 段階台帳 パイロット（T-Y11F §5順序#7・2県目）', () => {
   const { records } = SAITAMA_STAGE_LEDGER;
 
-  it('取り込み件数は10レコード', () => {
-    expect(records).toHaveLength(10);
+  it('取り込み件数は60レコード（1頁目全体）', () => {
+    expect(records).toHaveLength(60);
   });
 
   it('quota/applicantsConfirmed/testTakersConfirmed/finalPassersはいずれも0より大きい（不変条件）', () => {
@@ -44,6 +44,6 @@ describe('埼玉県 段階台帳 パイロット（T-Y11F §5順序#7・2県目�
       expect(counterpart.quota).toBe(stageRecord.quota);
       expect(counterpart.finalApplicants).toBe(stageRecord.applicantsConfirmed);
     }
-    expect(matched).toBe(10);
+    expect(matched).toBe(60);
   });
 });
