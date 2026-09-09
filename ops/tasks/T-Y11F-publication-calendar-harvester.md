@@ -1875,6 +1875,28 @@ pdfSha256`に設定。**重要な発見（設計の罠）**: ジオメトリJSON
 このため115hの見積り単価は「7,191件×分/件」のようなレコード数比例ではなく、**36県×
 （段取り+検証）の県数比例**で再見積りする方が実態に近い可能性が高い（次にもう1〜2県試して
 から傾向を確定させることを推奨）。tsc実exit0・jestフルスイート545suites7645tests green。
+### #8 出典ロケータ 2県目=gunma（2026-09-10）
+
+tottori（場当たり対応・1県専用コード）に続く2県目として **gunma R8全106件**を完遂。
+今回はtottoriと違い、**共有関数`assembleSimpleTableRows`自体（`parse-table-pdf.ts`・
+11パーサが利用）にpage/rowIndex対応を追加**した。入力`SimpleRowFields.page`が
+設定されていれば出力にpage/rowIndexを付与し、未設定なら従来どおり（完全後方互換）。
+既存36パーサ全スイートが引き続きgreenであることを確認済み。この結果、
+gunma.ts側の変更は`geometries.flatMap`に`.map((row)=>({...extractRowFields(...),
+page:pageIdx+1}))`を足すだけで済んだ。**残り10県（assembleSimpleTableRows利用）は
+今後この土台に乗るだけなので、tottori型の1件目より横展開コストが下がる見込み。**
+
+ページオフセットは県ごとに違う（tottoriは概要ページ分+5、gunmaは概要ページが無く+1）。
+**前例をそのまま踏襲せず、毎回`pdftotext -f <N> -l <N>`で実際のPDFを見て検証すること。**
+gunmaでは一度「tottoriと同じだろう」で`pageIdx+2`と決め打ちしそうになったが、
+確認したところ物理ページ1から詳細表が始まっており誤りだった（自己訂正・commit前に発見）。
+
+tottori(43件)・gunma(106件)の2データ点はいずれも**レコード数に関わらず同程度の
+イテレーション負荷**だった＝115hの見積り単価は「7,191件×分/件」より
+「36県×段取りコスト」に近い、という前回の仮説を補強。あと1〜2県で確定させたい。
+
+tsc実exit0・jestフルスイート545suites7647tests green。commit a82e971。
+
 | 9 | 残り物✅T-Y11C-4完了(2026-09-09) | T-Y11B 未9項目 / T-SS1 未5項目 / ~~T-Y11C-4 の yamanashi 20件・yamaguchi 5件~~（finalRate例外27件を全て原因確定/修正完了・詳細は`ops/tasks/T-Y11C-finalrate-invariant.md`） | 10〜20h |
 
 | 10 | **★年度遡りの到達可能性を確定させる** | 令和5年度**6県欠**（hokkaido nara niigata oita saga tochigi）／令和4年度**45県欠**（保有は tokyo・yamaguchi のみ）＝**51県年**。⚠️令和6年度は47県揃っており欠けていない | **20〜35h** |
