@@ -5,19 +5,19 @@
 
 ---
 
-最終更新              2026-09-10 08:1x
-いまやっていること     T-Y11F §5順序#8（出典ロケータ）進行中。tottori(43件)に続きgunma(106件)
-                      でも完遂。共有関数assembleSimpleTableRows自体を拡張したため残り10県の
-                      横展開コストが下がった見込み
-今日やったこと         gunma: 共有関数にpage/rowIndex対応を追加(後方互換・36パーサ全green)→
-                      gunma.tsに1行追加で対応→106件に{pdfSha256,page,rowIndex}を実バックフィル。
-                      ページオフセットをtottoriから決め打ちせず再検証し誤り(+2)を自己訂正(+1)。
-                      全545suites7647tests green・commit a82e971 push済
-在庫の残り            36登録パーサ県のうち2県完了・残り34県+R7以前の年度別リプレイ+ビジョン
-                      11県7,191件が未着手。次はassembleSimpleTableRows利用の残り10県から
-                      1県ずつ、または他の共有関数(assembleCompetitionRateRows等5パーサ)へ横展開
-払底の見込み           tottori・gunmaの2データ点とも「レコード数比例でなく県数比例(段取り
-                      コストが支配的)」を支持。115hの見積り単価はあと1〜2県で確定させたい
+最終更新              2026-09-10 08:3x
+いまやっていること     T-Y11F §5順序#8（出典ロケータ）進行中。tottori(43)→gunma(106)→
+                      tochigi(107)の3県で累計256件完了。共有関数拡張により3県目の差分は
+                      2県目よりさらに小さくなった
+今日やったこと         tochigi: overrideを持たない最単純ケースで3データ点目を取得→共有関数
+                      1行追加のみで対応完了→107件に{pdfSha256,page,rowIndex}を実バックフィル。
+                      全545suites7649tests green・commit e7c92b6 push済
+在庫の残り            36登録パーサ県のうち3県完了・残り33県+R7以前の年度別リプレイ+ビジョン
+                      11県7,191件が未着手。次はassembleSimpleTableRows利用の残り8県
+                      (saitama/nagasaki/miyagi/yamanashi/chiba/ehime/kagawa/iwate)へ横展開
+払底の見込み           3データ点(tottori・gunma・tochigi)がいずれも同程度の負荷だったことで
+                      「レコード数比例でなく県数比例(段取りコストが支配的)」がほぼ確定。
+                      115hの見積り単価は36県×段取りコストで再計算するのが実態に近い
 詰まっていること        aichi（Imperva WAF一時ブロックが継続中）。oita/okinawaは資料自体が
                       未整備で前進手段なし
 👤の判断が要るもの      #5成果物・#6仕様書とも対外提示可否・価格は👤判断待ち（送信0件）

@@ -1831,7 +1831,25 @@ grep -c等で機械確認→テスト作成」の順を徹底すれば複数イ�
 2県のみ・いずれも2026-09-10に別資料を確認済みで前進手段なしと判断済み）。次回は§5順序#8
 （出典ロケータ・約115h）への移行を検討するか、oita/okinawaの追加資料調査に時間を割くかを
 判断すること。
-| 8 | **★出典ロケータ**⚠️着手(2026-09-10・型基盤完了) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
+### #8 出典ロケータ 3県目=tochigi（2026-09-10）
+
+assembleSimpleTableRows利用県の中でも県固有overrideを一切持たない最単純ケース（汎用テストの
+基準実装そのもの）で3データ点目を取得。**parsers/tochigi.tsの差分はgunmaよりさらに小さく**、
+`geometries.flatMap((geom,pageIdx)=>...map((row)=>({...extractRowFields(...),page:pageIdx+1})))`
+の1行変更のみで済んだ（overrideロジックが無いため）。ページオフセットはtochigiも概要ページ無し
+（`pdftotext -f 1`で宇都宮のquota255/applicants308が物理ページ1に実在することを確認）で
+`pageIdx+1`。107件は3ページに39/36/32で分散（1つの表が複数ページにまたがる構造）。
+
+**3データ点(tottori43件・gunma106件・tochigi107件)がいずれも同程度のイテレーション負荷**だった
+ことで、「レコード数比例でなく県数比例（段取りコストが支配的）」という仮説がほぼ確定した。
+115hの見積り単価は「36県×（段取り+検証）」の県数比例で再計算するのが実態に近い。
+
+累計256件（tottori43+gunma106+tochigi107）。tsc実exit0・jestフルスイート545suites7649tests
+green。commit e7c92b6。次はassembleSimpleTableRows利用の残り8県（saitama/nagasaki/miyagi/
+yamanashi/chiba/ehime/kagawa/iwate）、または他の共有関数（assembleCompetitionRateRows等
+5パーサ）への横展開を検討する。
+
+| 8 | **★出典ロケータ**⚠️着手(2026-09-10・型基盤完了・3県目tochigi完了) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
 
 **2026-09-10着手**: §5順序#7（段階台帳）がhokkaido全14管内完結によりoita/okinawaの2県のみ
 未着手（前進手段なしと判断済み）となったため#8に着手。設計資料
