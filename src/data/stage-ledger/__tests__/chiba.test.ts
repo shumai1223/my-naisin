@@ -4,22 +4,22 @@ import { COMPETITION_RATE_BY_PREFECTURE } from '@/data/competition-rates';
 
 /**
  * T-Y11F §5順序#7 DoD検証（千葉県・段階台帳・R8は資料全体210レコード完全収録・R7は
- * 掛-1パイロット35レコード）:
+ * 掛-1・1〜2頁目70レコード）:
  * ①レコードの不変条件（quota>0等）②既存の倍率パイプライン（competition-rates/chiba.ts）の
  * quota/finalApplicantsと、段階台帳のquota/applicantsConfirmedが独立した情報源にも
  * かかわらず一致することを機械的に突合する（相互裏取り・R7/R8とも）③R8公表資料の
  * 「県立全日制 合計」「市立全日制 合計」「県立定時制 合計」「総合計」の4段階すべてとの
  * 完全突合（DoDの本体）。
  */
-describe('千葉県 段階台帳（T-Y11F §5順序#7・R8は資料全体完全収録・R7は掛-1パイロット）', () => {
+describe('千葉県 段階台帳（T-Y11F §5順序#7・R8は資料全体完全収録・R7は掛-1）', () => {
   const { records, officialSubtotals } = CHIBA_STAGE_LEDGER;
   const r8Records = records.filter((r) => r.fiscalYear === undefined);
   const r7Records = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
 
-  it('取り込み件数はR8=210レコード・R7=35レコード（計245レコード）', () => {
+  it('取り込み件数はR8=210レコード・R7=70レコード（計280レコード）', () => {
     expect(r8Records).toHaveLength(210);
-    expect(r7Records).toHaveLength(35);
-    expect(records).toHaveLength(245);
+    expect(r7Records).toHaveLength(70);
+    expect(records).toHaveLength(280);
   });
 
   it('quota/applicantsConfirmed/testTakersConfirmed/finalPassersはいずれも0より大きい（不変条件）', () => {
@@ -120,6 +120,6 @@ describe('千葉県 段階台帳（T-Y11F §5順序#7・R8は資料全体完全�
     }
 
     crossCheck(r8Records, (r) => r.fiscalYear === undefined, 160);
-    crossCheck(r7Records, (r) => r.fiscalYear === '令和7年度（2025年度）', 35);
+    crossCheck(r7Records, (r) => r.fiscalYear === '令和7年度（2025年度）', 70);
   });
 });
