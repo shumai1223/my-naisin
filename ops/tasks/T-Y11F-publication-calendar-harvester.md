@@ -1780,8 +1780,19 @@ yamaguchi・kagawa・ehime・fukuoka・saga・nagasaki・miyazaki・**aomori**�
 2026-09-09時点でも継続）。**2026-09-10確認・前進手段なし**: oita（「全体状況」PDFは得点
 分布ヒストグラムのみで学校別データ非搭載）・okinawa（令和8年度実施分の志願状況・合格状況
 ページ自体がアーカイブ化されておらず令和7年度が最新）。
-**真に未着手（次回候補）はhokkaido・akita・oitaの別資料・okinawaの別資料のみ**。この4県も
+**真に未着手（次回候補）はhokkaido・akitaの別資料・oitaの別資料・okinawaの別資料のみ**。この4県も
 尽きたら§5順序#7は事実上payment済みと判断し§5順序#8（出典ロケータ）へ移行してよい。
+
+**2026-09-10続き（27県目=秋田県に新規着手・78レコードで完結）**: 「1次募集 志願者数（最終志願）」
+（2/27）＋「1次募集 合格者数」（3/13）の2資料（pdftoppmビジョン確認）。quota・
+applicantsConfirmedは既存パイプラインcompetition-rates/akita.ts（同一資料典拠）を再利用し、
+testTakersConfirmed・finalPassersは合格者数資料の特色選抜・一般選抜2トラック別の受検者数列・
+合格者数列を合算して新規転記。**新パターンの発見**: 秋田県は特色選抜落選者がそのまま一般選抜を
+受検する制度のため、testTakersConfirmed（2トラック合算）がapplicantsConfirmed（純計）を上回る
+学科が78件中14件ある（転記ミスでなく制度構造）。finalPassers>testTakersConfirmedも4件
+（いずれも+1〜+3の小差）。4系列すべての機械集計（6,268/5,237/5,247/4,944）が志願者数資料・
+合格者数資料双方の「県合計」行と独立に完全一致。tsc実exit0・jestフルスイート544suites7630tests
+green。**残る真の未着手はhokkaido・oita・okinawaの3県のみ**。
 | 8 | **★出典ロケータ** | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
 | 9 | 残り物✅T-Y11C-4完了(2026-09-09) | T-Y11B 未9項目 / T-SS1 未5項目 / ~~T-Y11C-4 の yamanashi 20件・yamaguchi 5件~~（finalRate例外27件を全て原因確定/修正完了・詳細は`ops/tasks/T-Y11C-finalrate-invariant.md`） | 10〜20h |
 
