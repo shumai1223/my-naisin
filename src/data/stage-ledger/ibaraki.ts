@@ -1,11 +1,11 @@
 import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
 
 /**
- * 茨城県 段階台帳（T-Y11F §5順序#7・4県目・1〜2頁目・全日制県立129レコード）。
+ * 茨城県 段階台帳（T-Y11F §5順序#7・4県目・全日制県立区分が完結・149レコード）。
  *
  * 一次ソース: 茨城県教育委員会「令和8年度茨城県立高等学校第1学年合格状況（一般入学）」
  * （3月10日公表・全4頁）の1頁目（高萩清松〜玉造工業・34校63レコード）＋2頁目（麻生〜
- * 石下紫峰・38校66レコード）。
+ * 石下紫峰・38校66レコード）＋3頁目全日制部分（水海道第一〜伊奈・12校20レコード）。
  * https://kyoiku.pref.ibaraki.jp/wp-content/uploads/2026/03/gokaku.pdf
  *
  * ⚠️既存の`competition-rates/ibaraki.ts`（倍率パイプライン）は**別の一次資料**（「入学志願者数等
@@ -33,6 +33,21 @@ import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
  * 電気電子=applicants72→final73）で累計6件。2頁とも一貫して「合格ボーダー同点者」型
  * （quota超過）と「特別入学者選抜等の別枠合算」型（applicants超過）の2系統に収まっており、
  * 新種の第3パターンは出現していない。
+ *
+ * 🔁3頁目追加（水海道第一〜伊奈・12校20レコード）＝**これで「全日制県立」区分が完結・
+ * 既存パイプライン冒頭コメントの「85校149レコード」と件数完全一致**。quotaは既存
+ * パイプラインと20件すべて完全一致（3頁とも計149件）。この頁は異常値0件（quota超過も
+ * finalPassers>applicantsConfirmedも無し）。**3頁目に本資料自体の「全日制計」行**
+ * （募集定員16,647/受検者数14,990/合格者数14,020）が印字されており、149レコード全数の
+ * 機械集計がquota16,647・testTakersConfirmed14,990・finalPassers14,020の3系列すべてと
+ * 一発で完全一致した（applicantsConfirmedはこの資料に印字が無いため対象外だが、参考値の
+ * 合計15,211は既存パイプライン冒頭コメントの「applicants15,211」と一致することを確認
+ * 済み）——個別レコードの既存パイプライン突合とは独立した、資料自体からの最上位検算にも
+ * 一度も外れることなく到達でき、茨城県「全日制県立」149レコードに収録漏れ・重複が一件も
+ * 無いことを証明できた。3頁目末尾には「附属中からの入学予定者」（503名・外数）を加えた
+ * 「全日制総計」（17,150/15,493/14,523）と、別スコープの【定時制】（960/406/398）・
+ * 【連携型入学者選抜】（小瀬1件）も掲載されているが、既存パイプラインと同じ理由でいずれも
+ * 本ファイルのスコープ外。
  */
 
 export const IBARAKI_STAGE_LEDGER: PrefectureStageLedgerFile = {
@@ -40,19 +55,20 @@ export const IBARAKI_STAGE_LEDGER: PrefectureStageLedgerFile = {
   sources: [
     {
       url: 'https://kyoiku.pref.ibaraki.jp/wp-content/uploads/2026/03/gokaku.pdf',
-      docTitle: '茨城県教育委員会 令和8年度茨城県立高等学校第1学年合格状況（一般入学）1〜2頁目（高萩清松〜石下紫峰）',
+      docTitle: '茨城県教育委員会 令和8年度茨城県立高等学校第1学年合格状況（一般入学）1〜3頁目全日制部分（高萩清松〜伊奈）',
       fiscalYear: '令和8年度（2026年度）',
       fetchedAt: '2026-09-09',
     },
   ],
   coverage: {
-    status: 'partial',
+    status: 'complete',
     includedDepartments: [
       '全日制県立（1頁目・高萩清松〜玉造工業・34校63レコード）',
       '全日制県立（2頁目・麻生〜石下紫峰・38校66レコード）',
+      '全日制県立（3頁目・水海道第一〜伊奈・12校20レコード）',
     ],
-    pendingDepartments: ['3〜4頁目の残り学校'],
-    note: '1〜2頁目（72校129レコード）。quotaは既存competition-rates/ibaraki.tsと全129件で完全一致（募集定員は試験日まで不変であることを確認）。applicantsConfirmedも既存パイプラインをそのまま再利用（本資料には志願者数列が存在しないため）。testTakersConfirmed/finalPassersのみ本資料から新規転記。quota超過3件・finalPassers>applicantsConfirmed6件を確認（いずれもchiba/saitamaで確認済みの既知パターンと同型）。',
+    pendingDepartments: [],
+    note: '「全日制県立」区分（85校149レコード）を完全収録し既存パイプラインの「85校149レコード」と件数完全一致。quotaは既存competition-rates/ibaraki.tsと全149件で完全一致（募集定員は試験日まで不変であることを確認）。applicantsConfirmedも既存パイプラインをそのまま再利用（本資料には志願者数列が存在しないため）。testTakersConfirmed/finalPassersのみ本資料から新規転記。quota超過3件・finalPassers>applicantsConfirmed6件を確認（いずれもchiba/saitamaで確認済みの既知パターンと同型）。3頁目末尾の「全日制計」（quota16,647/testTakers14,990/final14,020）と149レコード全数の機械集計が3系列とも完全一致。附属中入学予定者を加えた「全日制総計」・別スコープの【定時制】【連携型入学者選抜】は対象外。',
   },
   records: [
     { schoolName: '高萩清松', department: '総合', quota: 120, applicantsConfirmed: 101, testTakersConfirmed: 101, finalPassers: 101 },
@@ -185,5 +201,32 @@ export const IBARAKI_STAGE_LEDGER: PrefectureStageLedgerFile = {
     { schoolName: '結城第一', department: '普通', quota: 120, applicantsConfirmed: 63, testTakersConfirmed: 62, finalPassers: 59 },
     { schoolName: '鬼怒商業', department: '商業に関する学科', quota: 160, applicantsConfirmed: 163, testTakersConfirmed: 163, finalPassers: 160 },
     { schoolName: '石下紫峰', department: '普通', quota: 160, applicantsConfirmed: 138, testTakersConfirmed: 137, finalPassers: 135 },
+    // --- 3頁目「全日制」部分（水海道第一〜伊奈） ---
+    { schoolName: '水海道第一', department: '普通', quota: 204, applicantsConfirmed: 275, testTakersConfirmed: 272, finalPassers: 204 },
+    { schoolName: '水海道第二', department: '普通', quota: 120, applicantsConfirmed: 118, testTakersConfirmed: 117, finalPassers: 117 },
+    { schoolName: '水海道第二', department: '商業', quota: 80, applicantsConfirmed: 79, testTakersConfirmed: 79, finalPassers: 79 },
+    { schoolName: '水海道第二', department: '家政', quota: 40, applicantsConfirmed: 49, testTakersConfirmed: 49, finalPassers: 40 },
+    { schoolName: '八千代', department: '総合', quota: 200, applicantsConfirmed: 200, testTakersConfirmed: 197, finalPassers: 197 },
+    { schoolName: '古河第一', department: '普通', quota: 80, applicantsConfirmed: 53, testTakersConfirmed: 53, finalPassers: 53 },
+    { schoolName: '古河第一', department: '商業に関する学科', quota: 200, applicantsConfirmed: 193, testTakersConfirmed: 192, finalPassers: 192 },
+    { schoolName: '古河第二', department: '普通', quota: 200, applicantsConfirmed: 160, testTakersConfirmed: 159, finalPassers: 159 },
+    { schoolName: '古河第二', department: '福祉', quota: 40, applicantsConfirmed: 16, testTakersConfirmed: 15, finalPassers: 15 },
+    { schoolName: '古河第三', department: '普通', quota: 240, applicantsConfirmed: 239, testTakersConfirmed: 234, finalPassers: 234 },
+    { schoolName: '総和工業', department: '機械', quota: 40, applicantsConfirmed: 27, testTakersConfirmed: 27, finalPassers: 27 },
+    { schoolName: '総和工業', department: '電子機械', quota: 40, applicantsConfirmed: 23, testTakersConfirmed: 22, finalPassers: 22 },
+    { schoolName: '総和工業', department: '電気', quota: 40, applicantsConfirmed: 18, testTakersConfirmed: 18, finalPassers: 18 },
+    { schoolName: '三和', department: '普通', quota: 80, applicantsConfirmed: 48, testTakersConfirmed: 47, finalPassers: 47 },
+    { schoolName: '三和', department: '普通〔ヒューマンサービス〕', quota: 40, applicantsConfirmed: 17, testTakersConfirmed: 17, finalPassers: 16 },
+    { schoolName: '境', department: '普通', quota: 240, applicantsConfirmed: 223, testTakersConfirmed: 222, finalPassers: 222 },
+    { schoolName: '坂東清風', department: '農と食', quota: 40, applicantsConfirmed: 15, testTakersConfirmed: 15, finalPassers: 15 },
+    { schoolName: '坂東清風', department: '総合', quota: 160, applicantsConfirmed: 80, testTakersConfirmed: 77, finalPassers: 77 },
+    { schoolName: '守谷', department: '普通', quota: 240, applicantsConfirmed: 218, testTakersConfirmed: 217, finalPassers: 217 },
+    { schoolName: '伊奈', department: '普通', quota: 240, applicantsConfirmed: 239, testTakersConfirmed: 238, finalPassers: 238 },
+  ],
+  officialSubtotals: [
+    // 3頁目末尾の「全日制計」行。applicantsConfirmedはこの資料に印字が無いため、既存
+    // パイプライン再利用値の機械集計を参考値として置く（既存パイプライン冒頭コメントの
+    // 「applicants15,211」と一致することを確認済み）。
+    { label: '全日制計', quota: 16_647, applicantsConfirmed: 15_211, testTakersConfirmed: 14_990, finalPassers: 14_020 },
   ],
 };
