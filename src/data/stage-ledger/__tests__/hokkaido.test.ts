@@ -3,16 +3,17 @@ import { HOKKAIDO_STAGE_LEDGER } from '../hokkaido';
 import { HOKKAIDO_COMPETITION_RATES } from '@/data/competition-rates/hokkaido';
 
 /**
- * T-Y11F §5順序#7 DoD検証（北海道・段階台帳28県目・全日制coverage='partial'・
- * 空知29＋石狩57＋市立札幌9＋後志18＋胆振27＋日高7＋渡島29＋檜山4＋上川37＋留萌7＋
- * 宗谷8＋オホーツク31＋十勝28＝291レコードで着手）:
+ * T-Y11F §5順序#7 DoD検証（北海道・段階台帳28県目・全日制coverage='partial'・全14管内
+ * 完結＝空知29＋石狩57＋市立札幌9＋後志18＋胆振27＋日高7＋渡島29＋檜山4＋上川37＋留萌7＋
+ * 宗谷8＋オホーツク31＋十勝28＋釧路21＋根室11＝323レコード）:
  * ①レコードの不変条件（quota等はすべて0より大きい） ②既存の倍率パイプライン
  * （competition-rates/hokkaido.ts）のR8レコードとquota・applicantsConfirmedが全件完全一致
  * すること ③第2次募集による新規応募者分でtestTakersConfirmedがapplicantsConfirmedを僅かに
- * 上回る既知34件・追加合格と推測されるfinalPassers>testTakersConfirmedの既知12件を除き、
- * 両不変条件が成立すること（市立札幌9件・日高7件・渡島普通10件・檜山4件は例外0件）。
+ * 上回る既知43件・追加合格と推測されるfinalPassers>testTakersConfirmedの既知13件（うち
+ * 釧路工業「電気」は両方に該当）を除き、両不変条件が成立すること（市立札幌9件・日高7件・
+ * 渡島普通10件・檜山4件・根室11件は例外0件）。
  */
-describe('北海道 段階台帳（T-Y11F §5順序#7・28県目・全日制coverage=partial・空知29+石狩57+市立札幌9+後志18+胆振27+日高7+渡島29+檜山4+上川37+留萌7+宗谷8+オホーツク31+十勝28=291レコード）', () => {
+describe('北海道 段階台帳（T-Y11F §5順序#7・28県目・全日制coverage=partial・全14管内完結=323レコード）', () => {
   const { records, coverage } = HOKKAIDO_STAGE_LEDGER;
 
   // 第2次募集で新規応募した受検者が第1次出願者数に含まれないため+1〜+4の小差で超過(制度構造)
@@ -51,6 +52,15 @@ describe('北海道 段階台帳（T-Y11F §5順序#7・28県目・全日制cove
     '置戸|福祉',
     '更別農業|農業',
     '池田|総合',
+    '釧路東|普通',
+    '厚岸翔洋|普通',
+    '霧多布|普通',
+    '釧路工業|電気',
+    '釧路工業|建築',
+    '釧路工業|土木',
+    '釧路工業|工業化学',
+    '釧路商業|会計マネジメント',
+    '釧路商業|情報マネジメント',
   ]);
 
   // 資料脚注の「追加合格者」調整により、第2次募集の有無に関わらずfinalPassersが
@@ -68,13 +78,14 @@ describe('北海道 段階台帳（T-Y11F §5順序#7・28県目・全日制cove
     '函館商業|会計ビジネス',
     '帯広工業|電気',
     '帯広工業|建築',
+    '釧路工業|電気',
   ]);
 
-  it('取り込み件数は空知29+石狩57+市立札幌9+後志18+胆振27+日高7+渡島29+檜山4+上川37+留萌7+宗谷8+オホーツク31+十勝28=291レコード', () => {
-    expect(records).toHaveLength(291);
+  it('取り込み件数は全14管内合計323レコード', () => {
+    expect(records).toHaveLength(323);
   });
 
-  it('coverage.statusはpartial（北海道は全14管内構成のため）', () => {
+  it('coverage.statusはpartial（連携型7校・滝川西1行が恒久的にスコープ外のため。管内としては全14管内完結）', () => {
     expect(coverage.status).toBe('partial');
   });
 
@@ -87,7 +98,7 @@ describe('北海道 段階台帳（T-Y11F §5順序#7・28県目・全日制cove
     }
   });
 
-  it('testTakersConfirmedは既知34件（第2次募集の新規応募者分）を除きapplicantsConfirmed以下', () => {
+  it('testTakersConfirmedは既知43件（第2次募集の新規応募者分）を除きapplicantsConfirmed以下', () => {
     let exceedCount = 0;
     for (const r of records) {
       const key = `${r.schoolName}|${r.department}`;
@@ -99,7 +110,7 @@ describe('北海道 段階台帳（T-Y11F §5順序#7・28県目・全日制cove
     expect(exceedCount).toBe(KNOWN_EXCEEDS_APPLICANTS.size);
   });
 
-  it('finalPassersは既知12件（追加合格と推測）を除きtestTakersConfirmed以下', () => {
+  it('finalPassersは既知13件（追加合格と推測）を除きtestTakersConfirmed以下', () => {
     let exceedCount = 0;
     for (const r of records) {
       const key = `${r.schoolName}|${r.department}`;
@@ -125,15 +136,15 @@ describe('北海道 段階台帳（T-Y11F §5順序#7・28県目・全日制cove
       expect(counterpart.quota).toBe(stageRecord.quota);
       expect(counterpart.finalApplicants).toBe(stageRecord.applicantsConfirmed);
     }
-    expect(matched).toBe(291);
+    expect(matched).toBe(323);
   });
 
-  it('291レコード全数の機械集計値を記録する（北海道は公表側に管内単独の合計行が無いため機械集計のみ・回帰検知用）', () => {
+  it('323レコード全数の機械集計値を記録する（北海道は公表側に管内単独の合計行が無いため機械集計のみ・回帰検知用。値は実データから機械算出し直接埋め込み）', () => {
     const sums = sumStageLedger(records);
-    expect(sums.schoolCount).toBe(291);
-    expect(sums.quota).toBe(1_880 + 9_360 + 1_680 + 1_230 + 2_160 + 550 + 1_040 + 760 + 240 + 2_640 + 840 + 2_116 + 2_280);
-    expect(sums.applicantsConfirmed).toBe(1_449 + 9_898 + 2_052 + 977 + 1_957 + 402 + 1_091 + 708 + 127 + 2_344 + 478 + 1_680 + 2_160);
-    expect(sums.testTakersConfirmed).toBe(1_420 + 9_467 + 1_954 + 959 + 1_824 + 389 + 934 + 588 + 124 + 2_273 + 474 + 1_611 + 1_980);
-    expect(sums.finalPassers).toBe(1_395 + 8_461 + 1_596 + 952 + 1_770 + 382 + 869 + 580 + 123 + 2_134 + 468 + 1_530 + 1_845);
+    expect(sums.schoolCount).toBe(323);
+    expect(sums.quota).toBe(28_996);
+    expect(sums.applicantsConfirmed).toBe(27_033);
+    expect(sums.testTakersConfirmed).toBe(25_663);
+    expect(sums.finalPassers).toBe(23_709);
   });
 });

@@ -3,7 +3,7 @@ import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
 /**
  * 北海道 段階台帳（T-Y11F §5順序#7・28県目・全日制coverage='partial'・空知29＋石狩57＋
  * 市立札幌9＋後志18＋胆振27＋日高7＋渡島29（普通10＋専門/総合19）＋檜山4＋上川37＋留萌7＋
- * 宗谷8＋オホーツク31＋十勝28＝291レコードで着手）。
+ * 宗谷8＋オホーツク31＋十勝28＋釧路21＋根室11＝323レコードで全14管内完結）。
  *
  * 一次ソース: 北海道教育委員会「R8入学者選抜状況報告書 §3 学校別受検者数及び合格者数」
  * （令和8年度＝2026年度入学者選抜・全14頁・管内ごとに1頁）。
@@ -101,6 +101,17 @@ import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
  * 高校枠とは別に「連携型」選抜（鹿追: 募集人員80・受検20・合格20／広尾: 募集人員40・
  * 受検27・合格27）が併記されているが、既出の同型4件と同じ理由で恒久的にスコープ外とした
  * （5・6例目）。
+ *
+ * ⚠️釧路地区追加分（21レコード・普通9＋専門/総合12で完結）で新たな例外9件、すべて第2次募集の
+ * 新規応募者型（+1〜+2）: 釧路東「普通」・厚岸翔洋「普通」・霧多布「普通」・釧路工業「電気」
+ * 「建築」「土木」「工業化学」・釧路商業「会計マネジメント」「情報マネジメント」。釧路工業
+ * 「電気」のみ合格21>受検19のfinalPassers超過も同時に成立（追加合格者型・+2）。
+ *
+ * ⚠️根室地区追加分（11レコード・普通5＋専門6で完結）は例外0件のクリーンな区分だった
+ * （市立札幌・日高・渡島普通・檜山に続く5区分目）。羅臼「普通」には道立高校枠とは別に
+ * 「連携型」選抜（募集人員40・受検12・合格12）が併記されているが、既出の同型6件と同じ
+ * 理由で恒久的にスコープ外とした（7例目）。**これで北海道は全14管内323レコード（連携型
+ * 7件・滝川西「情報マネジメント」1行を除く）が完結した。**
  */
 export const HOKKAIDO_STAGE_LEDGER: PrefectureStageLedgerFile = {
   prefectureCode: 'hokkaido',
@@ -171,6 +182,18 @@ export const HOKKAIDO_STAGE_LEDGER: PrefectureStageLedgerFile = {
       fiscalYear: '令和8年度（2026年度）',
       fetchedAt: '2026-09-10',
     },
+    {
+      url: 'https://www.dokyoi.pref.hokkaido.lg.jp/fs/1/3/1/7/8/5/5/0/_/05_p9-p22.pdf',
+      docTitle: '北海道教育委員会 R8入学者選抜状況報告書「§3 学校別受検者数及び合格者数」（p.21・釧路地区）',
+      fiscalYear: '令和8年度（2026年度）',
+      fetchedAt: '2026-09-10',
+    },
+    {
+      url: 'https://www.dokyoi.pref.hokkaido.lg.jp/fs/1/3/1/7/8/5/5/0/_/05_p9-p22.pdf',
+      docTitle: '北海道教育委員会 R8入学者選抜状況報告書「§3 学校別受検者数及び合格者数」（p.22・根室地区）',
+      fiscalYear: '令和8年度（2026年度）',
+      fetchedAt: '2026-09-10',
+    },
   ],
   coverage: {
     status: 'partial',
@@ -188,15 +211,15 @@ export const HOKKAIDO_STAGE_LEDGER: PrefectureStageLedgerFile = {
       '全日制・宗谷地区（普通教育を主とする学科6レコード＋専門教育を主とする学科2レコード＝8レコードで完結）',
       '全日制・オホーツク地区（普通教育を主とする学科16レコード＋専門教育を主とする学科及び総合学科15レコード＝31レコードで完結）',
       '全日制・十勝地区（普通教育を主とする学科12レコード＋専門教育を主とする学科及び総合学科16レコード＝28レコードで完結）',
+      '全日制・釧路地区（普通教育を主とする学科9レコード＋専門教育を主とする学科及び総合学科12レコード＝21レコードで完結）',
+      '全日制・根室地区（普通教育を主とする学科5レコード＋専門教育を主とする学科6レコード＝11レコードで完結）',
     ],
     pendingDepartments: [
-      '全日制・釧路地区',
-      '全日制・根室地区',
       '滝川西「情報マネジメント」（既存パイプラインが検算不能のため見送った1行・本ファイルも同じ理由でスコープ外）',
-      '鵡川「連携型」・えりも「連携型」・上川「連携型」・湧別「連携型」・鹿追「連携型」・広尾「連携型」（募集人員のみでapplicantsConfirmed相当の出願者数列を持たない別スキーマのため恒久的にスコープ外）',
+      '鵡川「連携型」・えりも「連携型」・上川「連携型」・湧別「連携型」・鹿追「連携型」・広尾「連携型」・羅臼「連携型」（募集人員のみでapplicantsConfirmed相当の出願者数列を持たない別スキーマのため恒久的にスコープ外）',
       '定時制課程（他県と同じ理由で恒久的にスコープ外）',
     ],
-    note: '全14管内のうち空知（29）＋石狩・道立のみ（57）＋市立札幌（9）＋後志（18）＋胆振（27）＋日高（7）＋渡島（29・完結）＋檜山（4・完結）＋上川（37・完結）＋留萌（7・完結）＋宗谷（8・完結）＋オホーツク（31・完結）＋十勝（28・完結）＝291レコードに着手。quota・applicantsConfirmedは既存パイプライン`competition-rates/hokkaido.ts`の該当レコードをそのまま再利用し、testTakersConfirmed（第1次受検者数＋第2次受検者数）・finalPassers（入学者数＝第1次合格者数＋第2次合格者数）を「§3学校別受検者数及び合格者数」p.9-20から新規転記した。推薦枠は一般枠と完全に独立したクオータ（秋田のような推薦落選者の一般転入は無い）のためスコープ外。既知の例外46件（第2次募集による新規応募者分でtestTakersConfirmedがapplicantsConfirmedを上回る34件、追加合格者と推測されるfinalPassers>testTakersConfirmed12件）はいずれも小差（最大+6）。市立札幌9件・日高7件・渡島普通10件・檜山4件は例外0件のクリーンな区分だった。連携型（鵡川・えりも・上川・湧別・鹿追・広尾）は募集人員のみの別スキーマのため恒久的にスコープ外。本資料はさらに2管内分（釧路/根室）を残しており、既存パイプラインと同じく段階的に追加する。',
+    note: '全14管内すべて（空知29＋石狩・道立のみ57＋市立札幌9＋後志18＋胆振27＋日高7＋渡島29＋檜山4＋上川37＋留萌7＋宗谷8＋オホーツク31＋十勝28＋釧路21＋根室11）＝323レコードで完結。quota・applicantsConfirmedは既存パイプライン`competition-rates/hokkaido.ts`の該当レコードをそのまま再利用し、testTakersConfirmed（第1次受検者数＋第2次受検者数）・finalPassers（入学者数＝第1次合格者数＋第2次合格者数）を「§3学校別受検者数及び合格者数」p.9-22から新規転記した。推薦枠は一般枠と完全に独立したクオータ（秋田のような推薦落選者の一般転入は無い）のためスコープ外。既知の例外55件（第2次募集による新規応募者分でtestTakersConfirmedがapplicantsConfirmedを上回る42件、追加合格者と推測されるfinalPassers>testTakersConfirmed13件）はいずれも小差（最大+6）。市立札幌9件・日高7件・渡島普通10件・檜山4件・根室11件は例外0件のクリーンな区分だった。連携型（鵡川・えりも・上川・湧別・鹿追・広尾・羅臼の7校）は募集人員のみの別スキーマのため恒久的にスコープ外。滝川西「情報マネジメント」1行も既存パイプラインと同じ理由でスコープ外。coverage.statusは連携型除外を理由に既存パイプラインと同じく`partial`のまま維持する（記録件数としては全14管内完結）。',
   },
   records: [
     { schoolName: '岩見沢東', department: '普通', quota: 160, applicantsConfirmed: 134, testTakersConfirmed: 130, finalPassers: 128 },
@@ -490,5 +513,37 @@ export const HOKKAIDO_STAGE_LEDGER: PrefectureStageLedgerFile = {
     { schoolName: '帯広南商業', department: '商業', quota: 200, applicantsConfirmed: 246, testTakersConfirmed: 218, finalPassers: 200 },
     { schoolName: '清水', department: '総合', quota: 120, applicantsConfirmed: 63, testTakersConfirmed: 62, finalPassers: 58 },
     { schoolName: '池田', department: '総合', quota: 40, applicantsConfirmed: 35, testTakersConfirmed: 36, finalPassers: 33 },
+    { schoolName: '釧路湖陵', department: '文理探究', quota: 160, applicantsConfirmed: 187, testTakersConfirmed: 179, finalPassers: 160 },
+    { schoolName: '釧路江南', department: '普通', quota: 200, applicantsConfirmed: 206, testTakersConfirmed: 202, finalPassers: 200 },
+    { schoolName: '釧路東', department: '普通', quota: 80, applicantsConfirmed: 61, testTakersConfirmed: 62, finalPassers: 59 },
+    { schoolName: '阿寒', department: '普通', quota: 40, applicantsConfirmed: 28, testTakersConfirmed: 23, finalPassers: 22 },
+    { schoolName: '白糠', department: '普通', quota: 40, applicantsConfirmed: 32, testTakersConfirmed: 32, finalPassers: 30 },
+    { schoolName: '弟子屈', department: '普通', quota: 40, applicantsConfirmed: 20, testTakersConfirmed: 20, finalPassers: 20 },
+    { schoolName: '厚岸翔洋', department: '普通', quota: 40, applicantsConfirmed: 9, testTakersConfirmed: 10, finalPassers: 10 },
+    { schoolName: '釧路北陽', department: '普通', quota: 200, applicantsConfirmed: 204, testTakersConfirmed: 197, finalPassers: 195 },
+    { schoolName: '霧多布', department: '普通', quota: 60, applicantsConfirmed: 15, testTakersConfirmed: 16, finalPassers: 16 },
+    { schoolName: '釧路湖陵', department: '理数探究', quota: 40, applicantsConfirmed: 46, testTakersConfirmed: 44, finalPassers: 40 },
+    { schoolName: '釧路工業', department: '電子機械', quota: 40, applicantsConfirmed: 47, testTakersConfirmed: 43, finalPassers: 40 },
+    { schoolName: '釧路工業', department: '電気', quota: 40, applicantsConfirmed: 18, testTakersConfirmed: 19, finalPassers: 21 },
+    { schoolName: '釧路工業', department: '建築', quota: 40, applicantsConfirmed: 35, testTakersConfirmed: 36, finalPassers: 36 },
+    { schoolName: '釧路工業', department: '土木', quota: 40, applicantsConfirmed: 24, testTakersConfirmed: 25, finalPassers: 25 },
+    { schoolName: '釧路工業', department: '工業化学', quota: 40, applicantsConfirmed: 12, testTakersConfirmed: 14, finalPassers: 14 },
+    { schoolName: '釧路商業', department: '流通マネジメント', quota: 40, applicantsConfirmed: 40, testTakersConfirmed: 40, finalPassers: 40 },
+    { schoolName: '釧路商業', department: '会計マネジメント', quota: 40, applicantsConfirmed: 39, testTakersConfirmed: 40, finalPassers: 40 },
+    { schoolName: '釧路商業', department: '情報マネジメント', quota: 40, applicantsConfirmed: 39, testTakersConfirmed: 40, finalPassers: 40 },
+    { schoolName: '厚岸翔洋', department: '海洋資源', quota: 40, applicantsConfirmed: 15, testTakersConfirmed: 15, finalPassers: 15 },
+    { schoolName: '釧路明輝', department: '総合', quota: 160, applicantsConfirmed: 198, testTakersConfirmed: 188, finalPassers: 160 },
+    { schoolName: '標茶', department: '総合', quota: 80, applicantsConfirmed: 43, testTakersConfirmed: 42, finalPassers: 42 },
+    { schoolName: '根室', department: '普通', quota: 120, applicantsConfirmed: 84, testTakersConfirmed: 83, finalPassers: 83 },
+    { schoolName: '別海', department: '普通', quota: 120, applicantsConfirmed: 61, testTakersConfirmed: 59, finalPassers: 59 },
+    { schoolName: '中標津', department: '普通', quota: 160, applicantsConfirmed: 121, testTakersConfirmed: 113, finalPassers: 113 },
+    { schoolName: '標津', department: '普通', quota: 40, applicantsConfirmed: 32, testTakersConfirmed: 32, finalPassers: 32 },
+    { schoolName: '羅臼', department: '普通', quota: 40, applicantsConfirmed: 12, testTakersConfirmed: 12, finalPassers: 12 },
+    { schoolName: '別海', department: '酪農経営', quota: 40, applicantsConfirmed: 11, testTakersConfirmed: 11, finalPassers: 11 },
+    { schoolName: '中標津農業', department: '生産技術', quota: 40, applicantsConfirmed: 13, testTakersConfirmed: 12, finalPassers: 12 },
+    { schoolName: '中標津農業', department: '食品ビジネス', quota: 40, applicantsConfirmed: 10, testTakersConfirmed: 10, finalPassers: 10 },
+    { schoolName: '根室', department: '商業', quota: 40, applicantsConfirmed: 20, testTakersConfirmed: 20, finalPassers: 20 },
+    { schoolName: '根室', department: '事務情報', quota: 40, applicantsConfirmed: 5, testTakersConfirmed: 5, finalPassers: 5 },
+    { schoolName: '中標津', department: '総合ビジネス', quota: 40, applicantsConfirmed: 23, testTakersConfirmed: 22, finalPassers: 22 },
   ],
 };
