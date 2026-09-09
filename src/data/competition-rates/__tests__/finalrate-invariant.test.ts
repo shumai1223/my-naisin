@@ -30,7 +30,18 @@ import { extractRateRecordsFromSource, parseDecimalToHundredths, classifyStoredR
  * 人数・学校名（例: R6は「都留興譲館普通3名・甲府東1名・甲府昭和1名・富士河口湖1名」）と
  * 各階層の公式合計行との完全一致を記録しており、推測ではなく過去セッションのPDF確認に基づく
  * 記述と判断した。**この機構は「例外である理由の説明」であり、round2/round1/trunc2いずれにも
- * 一致しないという事実自体は変わらないため、例外リストからは削除しない**（件数25件は不変）。
+ * 一致しないという事実自体は変わらないため、例外リストからは削除しない**（件数は変わらず、
+ * yamaguchi側の解消により25件→20件へ純減）。
+ *
+ * ⚠️2026-09-09: yamaguchiの5件は**転記ミスと判明し訂正済み**（例外リストから削除）。
+ * R5一次PDF（`197468_365286_misc.pdf`）・R4一次PDF（`148551_267732_misc.pdf`）を
+ * ビジョン解析で読み直したところ、山口県の公表表は[入学定員(A) / 特色選抜等合格内定者数(B) /
+ * 第一次募集の定員(C=A-B) / 第一志願者数(D) / 名目志願者数(E=B+D) / 名目志願倍率(E/A) /
+ * 志願倍率(D/C)]という構成で、`finalRate`は「志願倍率(D/C)」列を採用する規約（yamaguchi.ts
+ * 冒頭コメント）だが、5件（防府衛生看護R5・防府商工機械R5・山口理数R5・豊浦普通R4・
+ * 萩商工総合ビジネスR4）は誤って隣の「名目志願倍率(E/A)」列の値が転記されていたと判明した
+ * （quota=C・applicants=Dは正しく、倍率だけが別列だった）。5件ともD/Cベースの正しい値へ
+ * `competition-rates/yamaguchi.ts`を修正した（詳細は同ファイル冒頭コメントの訂正記録）。
  */
 
 const DATA_DIR = join(__dirname, '..');
@@ -53,16 +64,11 @@ const YAMANASHI_RETURNEE_REASON =
   '帰国生徒等特別措置の適用者が最終志願者数(applicants)の内数として含まれるが、倍率算定からは除外される（yamanashi.ts冒頭コメント・一次PDF注記で確認済み）。(applicants−帰国生徒等内数)/quotaがstoredRateと一致する。';
 
 /**
- * 2026-09-02時点で3方式のいずれにも一致しないと確認済みの25件（27件から2件解決済み）。
+ * 2026-09-02時点で3方式のいずれにも一致しないと確認済みだった27件のうち20件が残存。
  * yamanashiの20件は2026-09-09にreasonを付記して原因確定（詳細は上部コメント）。
- * yamaguchiの5件は依然PDF未確認のためreasonなし（Y-0: 推測で埋めない）。
+ * yamaguchiの5件は2026-09-09に転記ミスと判明し訂正済みのため本リストから削除した。
  */
 const KNOWN_UNEXPLAINED_EXCEPTIONS: KnownException[] = [
-  { pref: 'yamaguchi', schoolName: '防府', quota: 30, applicants: 38, storedRateText: '1.2' },
-  { pref: 'yamaguchi', schoolName: '防府商工', quota: 55, applicants: 65, storedRateText: '1.1' },
-  { pref: 'yamaguchi', schoolName: '山口', quota: 28, applicants: 33, storedRateText: '1.1' },
-  { pref: 'yamaguchi', schoolName: '豊浦', quota: 122, applicants: 142, storedRateText: '1.1' },
-  { pref: 'yamaguchi', schoolName: '萩商工', quota: 24, applicants: 13, storedRateText: '0.6' },
   { pref: 'yamanashi', schoolName: '巨摩', quota: 108, applicants: 118, storedRateText: '1.08', reason: YAMANASHI_RETURNEE_REASON },
   { pref: 'yamanashi', schoolName: '笛吹', quota: 21, applicants: 11, storedRateText: '0.48', reason: YAMANASHI_RETURNEE_REASON },
   { pref: 'yamanashi', schoolName: '塩山', quota: 56, applicants: 24, storedRateText: '0.41', reason: YAMANASHI_RETURNEE_REASON },
@@ -97,19 +103,20 @@ describe('competition-rates finalRate invariant (round2/round1/trunc2のいず�
     expect(files.length).toBe(47);
   });
 
-  it('既知の未説明例外は25件（重複キー無し）', () => {
+  it('既知の未説明例外は20件（重複キー無し）', () => {
     // 2026-09-06: aichi/名古屋南（744/300）はPDF実機確認により誤記載（締切時倍率2.49を最終倍率と
     // 取り違えていた）と判明し2.48へ訂正・round2で説明可能になったため27件→26件に減少。
     // 続けてhokkaido/静内（163/200）も、この県のfinalRateが自前算出であるにもかかわらず
     // 小数第3位まで(0.815)残っていた丸め忘れの表記ミスと判明し0.82へ訂正（round2で説明可能）・
     // 26件→25件に減少した。
     // 2026-09-09: yamanashiの20件は原因確定（帰国生徒等特別措置）したがround2/round1/trunc2
-    // いずれにも一致しない事実は変わらないため件数は25件のまま（reasonフィールドを付記のみ）。
-    expect(KNOWN_UNEXPLAINED_EXCEPTIONS.length).toBe(25);
-    expect(exceptionKeys.size).toBe(25);
+    // いずれにも一致しない事実は変わらないため件数は不変。yamaguchiの5件は転記ミス（E/A列と
+    // D/C列の取り違え）と判明し訂正・例外リストから削除したため25件→20件に減少した。
+    expect(KNOWN_UNEXPLAINED_EXCEPTIONS.length).toBe(20);
+    expect(exceptionKeys.size).toBe(20);
   });
 
-  it('47県21,739件全レコードが、round2/round1/trunc2のいずれか、または既知の25件の例外に該当する', () => {
+  it('47県21,739件全レコードが、round2/round1/trunc2のいずれか、または既知の20件の例外に該当する', () => {
     const usedExceptionKeys = new Set<string>();
     let totalRecords = 0;
     const unexpectedMismatches: string[] = [];
@@ -144,11 +151,11 @@ describe('competition-rates finalRate invariant (round2/round1/trunc2のいず�
     expect(totalRecords).toBe(21739);
 
     if (unexpectedMismatches.length > 0) {
-      throw new Error(`round2/round1/trunc2いずれにも一致せず、既知の25件の例外にも無い新しい不一致 ${unexpectedMismatches.length}件:\n${unexpectedMismatches.join('\n')}`);
+      throw new Error(`round2/round1/trunc2いずれにも一致せず、既知の20件の例外にも無い新しい不一致 ${unexpectedMismatches.length}件:\n${unexpectedMismatches.join('\n')}`);
     }
 
     // 例外リストに死んだエントリ（実データの修正で既に解消済みのもの）が残っていないか。
-    // 残っている場合はKNOWN_UNEXPLAINED_EXCEPTIONSから削除し、この25件アサーションも更新すること。
+    // 残っている場合はKNOWN_UNEXPLAINED_EXCEPTIONSから削除し、この20件アサーションも更新すること。
     expect(usedExceptionKeys.size).toBe(KNOWN_UNEXPLAINED_EXCEPTIONS.length);
   });
 });

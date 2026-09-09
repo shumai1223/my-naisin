@@ -29,11 +29,20 @@
  * 大分県等の「くくり募集」と同型）。一方、徳山高校の「文理探究」は文コース・理数コースそれぞれに
  * 独立した数値が印字されており、くくり募集ではなく2レコードとして収録した。
  *
- * ⚠️山口県は倍率を小数第1位までしか公表しない（他県の多くは第2位まで）。第一志願者数÷第一次募集
- * 定員の生の計算値と印字済み倍率との差が最大で約0.08生じる箇所が複数ある（小さいquotaの学科ほど
- * 顕著、例:R5防府商工「機械」55/65/1.1で差0.08）が、これは丸め桁数の違いによるものであり転記
- * ミスではない（quota・applicantsのみで積み上げた機械集計はグランドトータルとquota・applicants
- * ともに完全一致することを確認済み）。
+ * ⚠️山口県は倍率を小数第1位までしか公表しない（他県の多くは第2位まで）。
+ *
+ * 🔁訂正（2026-09-09・T-Y11C-4）: 直前の版はここで「R5防府商工『機械』55/65/1.1で差0.08」を
+ * 「丸め桁数の違いであり転記ミスではない」と説明していたが、これは誤りだった。R5一次PDF
+ * （`197468_365286_misc.pdf`資料2）を実際にビジョン解析で読み直したところ、この表は
+ * [入学定員(A) / 特色選抜等合格内定者数(B) / 第一次募集の定員(C=A-B) / 第一志願者数(D) /
+ * 名目志願者数(E=B+D) / 名目志願倍率(E/A) / 志願倍率(D/C)]の構成で、`finalRate`として採用
+ * すべきは「志願倍率(D/C)」列だが、5レコード（防府衛生看護R5・防府商工機械R5・山口理数R5・
+ * 豊浦普通R4・萩商工総合ビジネスR4）は誤って隣の「名目志願倍率(E/A)」列の値が転記されていた
+ * （quota=C・applicants=Dは正しく転記されていたため、量そのものは正しく倍率だけが別列だった）。
+ * 5件とも印字済みD/C値に基づく小数第1位四捨五入値へ訂正した（例: 防府商工機械R5は
+ * 65/55=1.18…→1.2、旧格納値1.1は45/40=1.125→1.1〈E/A〉と一致していた）。他の全レコードは
+ * quota・applicantsの機械集計がグランドトータルと完全一致しているため個別再確認はしていない
+ * （Y-0: 確認していないものを確認済みとは書かない）。
  *
  * 機械集計（quota4,893・applicants4,677、43校98レコード）が「全日制」計行（募集人員4,893・
  * 志願者数4,677・志願倍率0.96）と完全一致した。定時制課程は他県と同じ理由でスコープ外。
@@ -490,13 +499,13 @@ export const YAMAGUCHI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '南陽工業', department: '電気', quota: 26, finalApplicants: 39, finalRate: 1.5, fiscalYear: '令和5年度（2023年度）' },
     { schoolName: '南陽工業', department: '応用化学', quota: 26, finalApplicants: 31, finalRate: 1.2, fiscalYear: '令和5年度（2023年度）' },
     { schoolName: '防府', department: '普通', quota: 240, finalApplicants: 273, finalRate: 1.1, fiscalYear: '令和5年度（2023年度）' },
-    { schoolName: '防府', department: '衛生看護', quota: 30, finalApplicants: 38, finalRate: 1.2, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '防府', department: '衛生看護', quota: 30, finalApplicants: 38, finalRate: 1.3, fiscalYear: '令和5年度（2023年度）' },
     { schoolName: '防府西', department: '総合学科', quota: 101, finalApplicants: 115, finalRate: 1.1, fiscalYear: '令和5年度（2023年度）' },
     { schoolName: '防府商工', department: '商業', quota: 72, finalApplicants: 79, finalRate: 1.1, fiscalYear: '令和5年度（2023年度）' },
     { schoolName: '防府商工', department: '情報処理', quota: 24, finalApplicants: 41, finalRate: 1.7, fiscalYear: '令和5年度（2023年度）' },
-    { schoolName: '防府商工', department: '機械', quota: 55, finalApplicants: 65, finalRate: 1.1, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '防府商工', department: '機械', quota: 55, finalApplicants: 65, finalRate: 1.2, fiscalYear: '令和5年度（2023年度）' },
     { schoolName: '山口', department: '普通', quota: 260, finalApplicants: 323, finalRate: 1.2, fiscalYear: '令和5年度（2023年度）' },
-    { schoolName: '山口', department: '理数', quota: 28, finalApplicants: 33, finalRate: 1.1, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '山口', department: '理数', quota: 28, finalApplicants: 33, finalRate: 1.2, fiscalYear: '令和5年度（2023年度）' },
     { schoolName: '山口中央', department: '普通', quota: 180, finalApplicants: 198, finalRate: 1.1, fiscalYear: '令和5年度（2023年度）' },
     { schoolName: '西京', department: '普通', quota: 96, finalApplicants: 157, finalRate: 1.6, fiscalYear: '令和5年度（2023年度）' },
     { schoolName: '西京', department: '体育コース', quota: 10, finalApplicants: 20, finalRate: 2, fiscalYear: '令和5年度（2023年度）' },
@@ -637,7 +646,7 @@ export const YAMAGUCHI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '美祢青嶺', department: '電気', quota: 25, finalApplicants: 8, finalRate: 0.3, fiscalYear: '令和4年度（2022年度）' },
     { schoolName: '田部', department: '普通', quota: 27, finalApplicants: 13, finalRate: 0.5, fiscalYear: '令和4年度（2022年度）' },
     { schoolName: '田部', department: '総合生活', quota: 22, finalApplicants: 15, finalRate: 0.7, fiscalYear: '令和4年度（2022年度）' },
-    { schoolName: '豊浦', department: '普通', quota: 122, finalApplicants: 142, finalRate: 1.1, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '豊浦', department: '普通', quota: 122, finalApplicants: 142, finalRate: 1.2, fiscalYear: '令和4年度（2022年度）' },
     { schoolName: '長府', department: '総合学科', quota: 83, finalApplicants: 108, finalRate: 1.3, fiscalYear: '令和4年度（2022年度）' },
     { schoolName: '下関西', department: '普通', quota: 140, finalApplicants: 154, finalRate: 1.1, fiscalYear: '令和4年度（2022年度）' },
     { schoolName: '下関西', department: '文理探究(人文社会科学・自然科学くくり募集)', quota: 56, finalApplicants: 47, finalRate: 0.8, fiscalYear: '令和4年度（2022年度）' },
@@ -655,7 +664,7 @@ export const YAMAGUCHI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '萩', department: '普通', quota: 85, finalApplicants: 81, finalRate: 1, fiscalYear: '令和4年度（2022年度）' },
     { schoolName: '萩', department: '文理探究(人文社会科学・自然科学くくり募集)', quota: 25, finalApplicants: 26, finalRate: 1, fiscalYear: '令和4年度（2022年度）' },
     { schoolName: '奈古分校', department: '総合学科', quota: 27, finalApplicants: 20, finalRate: 0.7, fiscalYear: '令和4年度（2022年度）' },
-    { schoolName: '萩商工', department: '総合ビジネス', quota: 24, finalApplicants: 13, finalRate: 0.6, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '萩商工', department: '総合ビジネス', quota: 24, finalApplicants: 13, finalRate: 0.5, fiscalYear: '令和4年度（2022年度）' },
     { schoolName: '萩商工', department: '情報デザイン', quota: 21, finalApplicants: 26, finalRate: 1.2, fiscalYear: '令和4年度（2022年度）' },
     { schoolName: '萩商工', department: '機械・土木', quota: 25, finalApplicants: 18, finalRate: 0.7, fiscalYear: '令和4年度（2022年度）' },
     { schoolName: '萩商工', department: '電気・建築', quota: 16, finalApplicants: 21, finalRate: 1.3, fiscalYear: '令和4年度（2022年度）' },
