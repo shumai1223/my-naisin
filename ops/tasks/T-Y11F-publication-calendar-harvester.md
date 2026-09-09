@@ -1217,8 +1217,20 @@ applicantsConfirmed=志願者確定数・testTakersConfirmed=受検者確定数�
 既存`competition-rates/chiba.ts`のR7エントリと35/35件で完全一致を確認済み（この資料には
 区分ごとの頁末尾小計が無いためofficialSubtotalsとの突合は無し・既存パイプラインとの突合が
 唯一の裏取り手段）。tsc実exit0・jestフルスイート519suites7416tests green。
-次は千葉R7分の残り（3〜9頁目）の継続、または③段階台帳の3県目横展開（chiba/saitamaに続く
-新規県）のいずれかを次回セッションで判断する。
+
+**2026-09-09続き（千葉R7分3頁目35レコード追加＝掛-1累計105レコード）**: 東葛飾〜富里の
+27校35レコードを追加（R8ページ3・学校番号54〜77と同一構成・学校再編0件）。既存
+`competition-rates/chiba.ts`のR7エントリと35/35件で完全一致。**新種の逆転パターンを
+発見**: 流山（園芸科・applicantsConfirmed108・testTakersConfirmed108に対しfinalPassers
+115）と成田西陵（土木造園科・31/31に対し36）で、従来の「finalPassers>testTakersConfirmed」
+型の逆転とは異なり**finalPassers>applicantsConfirmedそのもの**という一段強い逆転を確認
+（特別入学者選抜等の別枠合算と推測・Y-0につき断定しない）。さらに東葛飾（普通科・
+quota240・finalPassers243）でquota超過も新規発見——原本の「訂正1箇所」マークの対象校
+でもあった。finalPassers>quota不変条件の既知例外テストを「千葉普通科(241)」1件のMapから
+「千葉普通科(241)・東葛飾普通科(243)」2件のMapへ拡張（超過量が+1と+3で異なるため単純な
+`quota+1`前提から具体的な期待値を持つMap形式に設計変更）。tsc実exit0・jestフルスイート
+519suites7416tests green。次は千葉R7分の残り（4〜9頁目）の継続、または③段階台帳の3県目
+横展開（chiba/saitamaに続く新規県）のいずれかを次回セッションで判断する。
 | 8 | **★出典ロケータ** | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
 | 9 | 残り物✅T-Y11C-4完了(2026-09-09) | T-Y11B 未9項目 / T-SS1 未5項目 / ~~T-Y11C-4 の yamanashi 20件・yamaguchi 5件~~（finalRate例外27件を全て原因確定/修正完了・詳細は`ops/tasks/T-Y11C-finalrate-invariant.md`） | 10〜20h |
 

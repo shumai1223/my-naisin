@@ -4,7 +4,7 @@ import { COMPETITION_RATE_BY_PREFECTURE } from '@/data/competition-rates';
 
 /**
  * T-Y11F §5順序#7 DoD検証（千葉県・段階台帳・R8は資料全体210レコード完全収録・R7は
- * 掛-1・1〜2頁目70レコード）:
+ * 掛-1・1〜3頁目105レコード）:
  * ①レコードの不変条件（quota>0等）②既存の倍率パイプライン（competition-rates/chiba.ts）の
  * quota/finalApplicantsと、段階台帳のquota/applicantsConfirmedが独立した情報源にも
  * かかわらず一致することを機械的に突合する（相互裏取り・R7/R8とも）③R8公表資料の
@@ -16,10 +16,10 @@ describe('千葉県 段階台帳（T-Y11F §5順序#7・R8は資料全体完全�
   const r8Records = records.filter((r) => r.fiscalYear === undefined);
   const r7Records = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
 
-  it('取り込み件数はR8=210レコード・R7=70レコード（計280レコード）', () => {
+  it('取り込み件数はR8=210レコード・R7=105レコード（計315レコード）', () => {
     expect(r8Records).toHaveLength(210);
-    expect(r7Records).toHaveLength(70);
-    expect(records).toHaveLength(280);
+    expect(r7Records).toHaveLength(105);
+    expect(records).toHaveLength(315);
   });
 
   it('quota/applicantsConfirmed/testTakersConfirmed/finalPassersはいずれも0より大きい（不変条件）', () => {
@@ -31,16 +31,21 @@ describe('千葉県 段階台帳（T-Y11F §5順序#7・R8は資料全体完全�
     }
   });
 
-  it('finalPassersがquotaを超えるのは既知の1件（千葉R7・合格ボーダー同点者の全員合格と推測）のみ', () => {
+  it('finalPassersがquotaを超えるのは既知のレコードのみ（千葉R7・合格ボーダー同点者/特別入学者選抜等の別枠合算と推測）', () => {
     // R8では全210レコードでfinalPassers<=quotaが厳密に成立していたが、R7データを追加した
-    // ところ「千葉 普通科」（quota240・finalPassers241）で1名だけ超過することが判明した
-    // （saitamaの上尾と同型の現象）。全県共通の不変条件ではないと確定したため、既知の1件を
-    // 明示的な例外として許容しつつ、それ以外に新たな超過が紛れ込んだら検知できるようにする。
-    const KNOWN_OVERFLOW = new Set(['千葉|普通科|令和7年度（2025年度）']);
+    // ところ2件の超過が判明した:「千葉 普通科」（quota240・finalPassers241・saitamaの上尾と
+    // 同型の合格ボーダー同点者運用と推測）、「東葛飾 普通科」（quota240・finalPassers243・
+    // 3頁目で発見・原本の「訂正1箇所」マークの対象校でもある）。全県共通の不変条件ではないと
+    // 確定したため、既知のレコードを明示的な例外として許容しつつ、それ以外に新たな超過が
+    // 紛れ込んだら検知できるようにする。
+    const KNOWN_OVERFLOW = new Map<string, number>([
+      ['千葉|普通科|令和7年度（2025年度）', 241],
+      ['東葛飾|普通科|令和7年度（2025年度）', 243],
+    ]);
     for (const r of records) {
       const key = `${r.schoolName}|${r.department}|${r.fiscalYear ?? ''}`;
       if (KNOWN_OVERFLOW.has(key)) {
-        expect(r.finalPassers).toBe(r.quota + 1);
+        expect(r.finalPassers).toBe(KNOWN_OVERFLOW.get(key));
         continue;
       }
       expect(r.finalPassers).toBeLessThanOrEqual(r.quota);
@@ -120,6 +125,6 @@ describe('千葉県 段階台帳（T-Y11F §5順序#7・R8は資料全体完全�
     }
 
     crossCheck(r8Records, (r) => r.fiscalYear === undefined, 160);
-    crossCheck(r7Records, (r) => r.fiscalYear === '令和7年度（2025年度）', 70);
+    crossCheck(r7Records, (r) => r.fiscalYear === '令和7年度（2025年度）', 105);
   });
 });
