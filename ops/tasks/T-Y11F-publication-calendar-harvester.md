@@ -1005,8 +1005,16 @@ green。パイロット3頁で105レコード・全9頁換算で概算300レコ�
 testTakersConfirmed34<finalPassers40）のように、志願者・受検者数を上回る合格者数の
 逆転レコードが3頁目に続き4頁目でも確認された。jest突合閾値をmatched≥120に引き上げて
 再検証・全て通過（佐倉普通科quota280/applicants424・大網4学科等も引き続き完全一致）。
-tsc実exit0・jestフルスイート518suites7387tests green。次はchiba残り5頁（学校番号99以降）
-の収集、または他県への横展開のいずれかを次回セッションで判断する。
+tsc実exit0・jestフルスイート518suites7387tests green。
+
+**2026-09-09続き（5頁目追加）**: chiba 5頁目（学校番号99〜120・35レコード）を追加収集し
+累計175レコードに到達。茂原樟陽環境化学科（applicantsConfirmed6・testTakersConfirmed6<
+finalPassers7）・木更津東普通科（testTakersConfirmed111<finalPassers113）と、4頁目に続き
+5頁目でも複数の逆転レコードを確認。jest突合閾値をmatched≥150に引き上げて再検証・全て通過。
+tsc実exit0・jestフルスイート518suites7387tests green。**5頁で175レコード＝1県あたり
+概算300〜315レコード規模と推定が固まってきた（47県では規模・様式とも大きく異なるため
+単純な47倍にはならない）。** 次はchiba残り4頁（学校番号121以降）の収集、または他県への
+横展開のいずれかを次回セッションで判断する。
 | 8 | **★出典ロケータ** | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
 | 9 | 残り物 | T-Y11B 未9項目 / T-SS1 未5項目 / T-Y11C-4 の yamanashi 20件・yamaguchi 5件 | 10〜20h |
 

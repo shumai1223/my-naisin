@@ -4,19 +4,19 @@ import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
  * 千葉県 段階台帳（T-Y11F §5順序#7・パイロット1県目・全9頁中1〜2頁目）。
  *
  * 一次ソース: 千葉県教育委員会「令和8年度 公立高等学校 一般入学者選抜等 入学許可候補者数
- * 一覧＜その１〉〜＜その４＞」（特別入学者選抜及び地域連携アクティブスクールの入学者選抜を
+ * 一覧＜その１〉〜＜その５＞」（特別入学者選抜及び地域連携アクティブスクールの入学者選抜を
  * 含む・全9頁）のうち1頁目「1．県立全日制」（学校番号1〜25・35レコード）・2頁目（学校番号
  * 26〜53・35レコード）・3頁目（学校番号54〜77・35レコード）・4頁目（学校番号78〜98・
- * 35レコード。学校番号81は欠番）。
+ * 35レコード。学校番号81は欠番）・5頁目（学校番号99〜120・35レコード）。
  * https://www.pref.chiba.lg.jp/kyouiku/shidou/press/2025/documents/r8kyokaippan.pdf
  *
  * ⚠️pdftotextは数値は抽出できたが学校名・学科名のラベルが欠落（他県で頻出のフォント欠落と
- * 同型）のため、pdftoppm 200〜300dpiのビジョン解析で全140レコードを転記した（PIL crop
+ * 同型）のため、pdftoppm 200〜300dpiのビジョン解析で全175レコードを転記した（PIL crop
  * による部分拡大で複数回クロス確認済み）。3頁目は東葛飾のように募集定員(320)と募集人員(240)
  * が異なる校があり、既存`competition-rates/chiba.ts`と同じ規律で募集人員をquotaに採用した。
- * 4頁目の東金国際教養科（applicantsConfirmed34・testTakersConfirmed34<finalPassers40）
- * のように、志願者数・受検者数を上回る合格者数レコードが複数県で確認されている
- * （欠員補充等の推測は本文コメントに留め、独自の補正はしない＝Y-0）。
+ * 東金国際教養科（4頁目）・茂原樟陽環境化学科・木更津東普通科（5頁目）のように、志願者数・
+ * 受検者数を上回る合格者数レコードが複数校で確認されている（欠員補充等の推測は本文コメントに
+ * 留め、独自の補正はしない＝Y-0）。
  *
  * 既存の`src/data/competition-rates/chiba.ts`（倍率パイプライン）とquota・
  * applicantsConfirmed（同ファイルのfinalApplicantsに相当）が独立した情報源から取得したにも
@@ -31,7 +31,7 @@ import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
  * quotaまで合格者を充足する運用と推測されるが、推測は本文コメントに留め独自の補正はしない
  * ＝Y-0）、数値自体は原資料どおり正確に転記している。
  *
- * coverage='partial'。残り5頁（学校番号99以降の県立全日制・県立定時制・市立高校等）は
+ * coverage='partial'。残り4頁（学校番号121以降の県立全日制・県立定時制・市立高校等）は
  * 未収録（Y-0憲法③正直にスキップ）。
  */
 
@@ -40,16 +40,16 @@ export const CHIBA_STAGE_LEDGER: PrefectureStageLedgerFile = {
   sources: [
     {
       url: 'https://www.pref.chiba.lg.jp/kyouiku/shidou/press/2025/documents/r8kyokaippan.pdf',
-      docTitle: '千葉県教育委員会 令和8年度公立高等学校一般入学者選抜等入学許可候補者数一覧＜その1＞〜＜その4＞（1〜4頁目）',
+      docTitle: '千葉県教育委員会 令和8年度公立高等学校一般入学者選抜等入学許可候補者数一覧＜その1＞〜＜その5＞（1〜5頁目）',
       fiscalYear: '令和8年度（2026年度）',
       fetchedAt: '2026-09-09',
     },
   ],
   coverage: {
     status: 'partial',
-    includedDepartments: ['県立全日制（1〜4頁目・学校番号1〜98・140レコード）'],
-    pendingDepartments: ['県立全日制の残り（5〜9頁目・学校番号99以降）', '県立定時制', '市立高校等'],
-    note: '全9頁のうち1〜4頁目のみパイロット収集。quota/applicantsConfirmedは既存competition-rates/chiba.tsと独立に完全一致確認済み。',
+    includedDepartments: ['県立全日制（1〜5頁目・学校番号1〜120・175レコード）'],
+    pendingDepartments: ['県立全日制の残り（6〜9頁目・学校番号121以降）', '県立定時制', '市立高校等'],
+    note: '全9頁のうち1〜5頁目のみパイロット収集。quota/applicantsConfirmedは既存competition-rates/chiba.tsと独立に完全一致確認済み。',
   },
   records: [
     { schoolName: '千葉', department: '普通科', quota: 240, applicantsConfirmed: 331, testTakersConfirmed: 321, finalPassers: 240 },
@@ -195,5 +195,41 @@ export const CHIBA_STAGE_LEDGER: PrefectureStageLedgerFile = {
     { schoolName: '大網', department: '農業科', quota: 40, applicantsConfirmed: 39, testTakersConfirmed: 39, finalPassers: 39 },
     { schoolName: '大網', department: '食品科学科', quota: 40, applicantsConfirmed: 38, testTakersConfirmed: 38, finalPassers: 37 },
     { schoolName: '大網', department: '生物工学科', quota: 40, applicantsConfirmed: 27, testTakersConfirmed: 27, finalPassers: 27 },
+    // --- 5頁目（学校番号99〜120） ---
+    { schoolName: '九十九里', department: '普通科', quota: 80, applicantsConfirmed: 19, testTakersConfirmed: 19, finalPassers: 19 },
+    { schoolName: '長生', department: '普通科・理数科', quota: 280, applicantsConfirmed: 357, testTakersConfirmed: 356, finalPassers: 280 },
+    { schoolName: '茂原', department: '普通科', quota: 160, applicantsConfirmed: 161, testTakersConfirmed: 160, finalPassers: 160 },
+    { schoolName: '茂原樟陽', department: '農業科', quota: 40, applicantsConfirmed: 39, testTakersConfirmed: 38, finalPassers: 38 },
+    { schoolName: '茂原樟陽', department: '食品科学科', quota: 40, applicantsConfirmed: 42, testTakersConfirmed: 41, finalPassers: 40 },
+    { schoolName: '茂原樟陽', department: '土木造園科', quota: 40, applicantsConfirmed: 20, testTakersConfirmed: 20, finalPassers: 20 },
+    { schoolName: '茂原樟陽', department: '電子機械科', quota: 40, applicantsConfirmed: 28, testTakersConfirmed: 28, finalPassers: 28 },
+    { schoolName: '茂原樟陽', department: '電気科', quota: 40, applicantsConfirmed: 23, testTakersConfirmed: 23, finalPassers: 23 },
+    { schoolName: '茂原樟陽', department: '環境化学科', quota: 40, applicantsConfirmed: 6, testTakersConfirmed: 6, finalPassers: 7 },
+    { schoolName: '一宮商業', department: '商業科・情報処理科', quota: 120, applicantsConfirmed: 107, testTakersConfirmed: 107, finalPassers: 107 },
+    { schoolName: '大多喜', department: '普通科', quota: 160, applicantsConfirmed: 147, testTakersConfirmed: 147, finalPassers: 147 },
+    { schoolName: '大原', department: '総合学科', quota: 160, applicantsConfirmed: 94, testTakersConfirmed: 94, finalPassers: 93 },
+    { schoolName: '長狭', department: '普通科', quota: 160, applicantsConfirmed: 95, testTakersConfirmed: 95, finalPassers: 95 },
+    { schoolName: '安房拓心', department: '総合学科', quota: 120, applicantsConfirmed: 96, testTakersConfirmed: 95, finalPassers: 95 },
+    { schoolName: '安房', department: '普通科', quota: 240, applicantsConfirmed: 216, testTakersConfirmed: 214, finalPassers: 214 },
+    { schoolName: '館山総合', department: '工業科', quota: 40, applicantsConfirmed: 10, testTakersConfirmed: 10, finalPassers: 10 },
+    { schoolName: '館山総合', department: '商業科', quota: 40, applicantsConfirmed: 15, testTakersConfirmed: 15, finalPassers: 15 },
+    { schoolName: '館山総合', department: '海洋科', quota: 40, applicantsConfirmed: 21, testTakersConfirmed: 21, finalPassers: 21 },
+    { schoolName: '館山総合', department: '家政科', quota: 40, applicantsConfirmed: 7, testTakersConfirmed: 7, finalPassers: 6 },
+    { schoolName: '天羽', department: '普通科', quota: 120, applicantsConfirmed: 56, testTakersConfirmed: 55, finalPassers: 54 },
+    { schoolName: '君津商業', department: '商業科・情報処理科', quota: 160, applicantsConfirmed: 138, testTakersConfirmed: 138, finalPassers: 138 },
+    { schoolName: '木更津', department: '普通科', quota: 280, applicantsConfirmed: 385, testTakersConfirmed: 375, finalPassers: 280 },
+    { schoolName: '木更津', department: '理数科', quota: 40, applicantsConfirmed: 55, testTakersConfirmed: 51, finalPassers: 40 },
+    { schoolName: '木更津東', department: '普通科', quota: 120, applicantsConfirmed: 111, testTakersConfirmed: 111, finalPassers: 113 },
+    { schoolName: '木更津東', department: '家政科', quota: 40, applicantsConfirmed: 42, testTakersConfirmed: 42, finalPassers: 40 },
+    { schoolName: '君津', department: '普通科', quota: 240, applicantsConfirmed: 250, testTakersConfirmed: 246, finalPassers: 240 },
+    { schoolName: '君津', department: '園芸科', quota: 40, applicantsConfirmed: 37, testTakersConfirmed: 37, finalPassers: 37 },
+    { schoolName: '君津青葉', department: '総合学科', quota: 120, applicantsConfirmed: 72, testTakersConfirmed: 72, finalPassers: 72 },
+    { schoolName: '袖ヶ浦', department: '普通科', quota: 240, applicantsConfirmed: 293, testTakersConfirmed: 292, finalPassers: 240 },
+    { schoolName: '袖ヶ浦', department: '情報コミュニケーション科', quota: 40, applicantsConfirmed: 56, testTakersConfirmed: 56, finalPassers: 40 },
+    { schoolName: '市原', department: '普通科', quota: 80, applicantsConfirmed: 42, testTakersConfirmed: 42, finalPassers: 42 },
+    { schoolName: '市原', department: '園芸科', quota: 40, applicantsConfirmed: 11, testTakersConfirmed: 11, finalPassers: 11 },
+    { schoolName: '京葉', department: '普通科', quota: 120, applicantsConfirmed: 121, testTakersConfirmed: 121, finalPassers: 120 },
+    { schoolName: '市原緑', department: '普通科', quota: 120, applicantsConfirmed: 97, testTakersConfirmed: 97, finalPassers: 97 },
+    { schoolName: '姉崎', department: '普通科', quota: 120, applicantsConfirmed: 115, testTakersConfirmed: 115, finalPassers: 115 },
   ],
 };
