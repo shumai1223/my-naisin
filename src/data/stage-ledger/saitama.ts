@@ -91,6 +91,16 @@ import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
  * （募集人員2,220・A2,206・B1,995・C1,889）のうちA/B/Cの3系列は26レコードの機械集計と
  * 完全一致（quota合計2,206=A合計・testTakersConfirmed合計1,995=B合計・finalPassers合計
  * 1,889=C合計）。applicantsConfirmed合計は参考値1,998（この資料には印字なし）。
+ *
+ * 6頁目は「家庭に関する学科」（8レコード・4校）・「看護に関する学科」（1レコード）・
+ * 「外国語に関する学科」（6レコード）・「美術に関する学科」（3レコード）・「音楽に関する学科」
+ * （3レコード）・「書道に関する学科」（1レコード）・「体育に関する学科」（2レコード）の
+ * 7区分・計24レコードをまとめて収録。1区分1校のみの区分（看護・書道）を含む珍しいページ。
+ * quota/applicantsConfirmedは既存パイプラインを再利用（24件全てで一致・南稜のみ既存表記に
+ * 合わせ「南稜」を採用）、testTakersConfirmed=B・finalPassers=Cを転記。7区分すべての
+ * 頁末尾公表計（家庭科計 quota319/B305/C287・看護科計80/88/80・外国語科計240/269/240・
+ * 美術科計120/163/120・音楽科計120/89/87・書道科計40/28/28・体育科計160/180/160）と
+ * 24レコード全数の機械集計が一発で完全一致。
  */
 
 export const SAITAMA_STAGE_LEDGER: PrefectureStageLedgerFile = {
@@ -98,7 +108,7 @@ export const SAITAMA_STAGE_LEDGER: PrefectureStageLedgerFile = {
   sources: [
     {
       url: 'https://www.pref.saitama.lg.jp/documents/268192/r8nyugakukyokakouhosya0306_4.pdf',
-      docTitle: '埼玉県教育委員会 令和8年度埼玉県公立高等学校入学者選抜における入学許可候補者数・欠員補充人員（令和8年3月6日現在）1〜5頁目（全日制 普通科＋農業に関する学科＋工業に関する学科＋商業に関する学科）',
+      docTitle: '埼玉県教育委員会 令和8年度埼玉県公立高等学校入学者選抜における入学許可候補者数・欠員補充人員（令和8年3月6日現在）1〜6頁目（全日制 普通科＋農業＋工業＋商業＋家庭＋看護＋外国語＋美術＋音楽＋書道＋体育に関する学科）',
       fiscalYear: '令和8年度（2026年度）',
       fetchedAt: '2026-09-09',
     },
@@ -110,9 +120,16 @@ export const SAITAMA_STAGE_LEDGER: PrefectureStageLedgerFile = {
       '農業に関する学科（3頁目・18レコード）',
       '工業に関する学科（4頁目・45レコード）',
       '商業に関する学科（5頁目・26レコード）',
+      '家庭に関する学科（6頁目・8レコード）',
+      '看護に関する学科（6頁目・1レコード）',
+      '外国語に関する学科（6頁目・6レコード）',
+      '美術に関する学科（6頁目・3レコード）',
+      '音楽に関する学科（6頁目・3レコード）',
+      '書道に関する学科（6頁目・1レコード）',
+      '体育に関する学科（6頁目・2レコード）',
     ],
-    pendingDepartments: ['家庭等の専門学科（6頁目以降）', '総合学科'],
-    note: '「全日制 普通科」「農業に関する学科」「工業に関する学科」「商業に関する学科」の4区分を完全収録。「普通科 計」（quota25,517/testTakersConfirmed27,593/finalPassers24,556）・「農業科 計」（quota797/testTakersConfirmed633/finalPassers633）・「工業科 計」（quota2,343/testTakersConfirmed1,967/finalPassers1,959）・「商業科 計」（quota2,206/testTakersConfirmed1,995/finalPassers1,889）といずれも機械集計が完全一致。quota/applicantsConfirmedは既存competition-rates/saitama.ts（同一quotaを別資料で確認済み）を再利用し、testTakersConfirmed/finalPassersのみ本資料から新規転記。',
+    pendingDepartments: ['総合学科（7頁目以降）'],
+    note: '「全日制 普通科」「農業に関する学科」「工業に関する学科」「商業に関する学科」＋6頁目の7小区分（家庭・看護・外国語・美術・音楽・書道・体育に関する学科）を完全収録。各区分の頁末尾公表計（普通科計quota25,517/B27,593/C24,556・農業科計797/633/633・工業科計2,343/1,967/1,959・商業科計2,206/1,995/1,889・家庭科計319/305/287・看護科計80/88/80・外国語科計240/269/240・美術科計120/163/120・音楽科計120/89/87・書道科計40/28/28・体育科計160/180/160）といずれも機械集計が完全一致。quota/applicantsConfirmedは既存competition-rates/saitama.ts（同一quotaを別資料で確認済み）を再利用し、testTakersConfirmed/finalPassersのみ本資料から新規転記。',
   },
   records: [
     { schoolName: '上尾', department: '普通科', quota: 238, applicantsConfirmed: 316, testTakersConfirmed: 315, finalPassers: 244 },
@@ -310,6 +327,37 @@ export const SAITAMA_STAGE_LEDGER: PrefectureStageLedgerFile = {
     { schoolName: '八潮フロンティア', department: 'ビジネス探究科', quota: 119, applicantsConfirmed: 132, testTakersConfirmed: 132, finalPassers: 119 },
     { schoolName: '市立川越', department: '国際経済科', quota: 70, applicantsConfirmed: 109, testTakersConfirmed: 109, finalPassers: 70 },
     { schoolName: '市立川越', department: '情報処理科', quota: 70, applicantsConfirmed: 84, testTakersConfirmed: 83, finalPassers: 70 },
+    // --- 6頁目「全日制 専門学科」家庭に関する学科（4校8レコード） ---
+    { schoolName: '鴻巣女子', department: '保育科', quota: 40, applicantsConfirmed: 39, testTakersConfirmed: 39, finalPassers: 39 },
+    { schoolName: '鴻巣女子', department: '家政科学科', quota: 40, applicantsConfirmed: 39, testTakersConfirmed: 39, finalPassers: 39 },
+    { schoolName: '越谷総合技術', department: '服飾デザイン科', quota: 39, applicantsConfirmed: 28, testTakersConfirmed: 28, finalPassers: 28 },
+    { schoolName: '越谷総合技術', department: '食物調理科', quota: 40, applicantsConfirmed: 42, testTakersConfirmed: 42, finalPassers: 40 },
+    { schoolName: '秩父農工科学', department: 'ライフデザイン科', quota: 40, applicantsConfirmed: 28, testTakersConfirmed: 28, finalPassers: 28 },
+    { schoolName: '秩父農工科学', department: 'フードデザイン科', quota: 40, applicantsConfirmed: 33, testTakersConfirmed: 33, finalPassers: 33 },
+    { schoolName: '新座総合技術', department: '服飾デザイン科', quota: 40, applicantsConfirmed: 41, testTakersConfirmed: 41, finalPassers: 40 },
+    { schoolName: '新座総合技術', department: '食物調理科', quota: 40, applicantsConfirmed: 56, testTakersConfirmed: 55, finalPassers: 40 },
+    // --- 6頁目「全日制 専門学科」看護に関する学科（1校1レコード） ---
+    { schoolName: '常盤', department: '看護科', quota: 80, applicantsConfirmed: 88, testTakersConfirmed: 88, finalPassers: 80 },
+    // --- 6頁目「全日制 専門学科」外国語に関する学科（6校6レコード） ---
+    { schoolName: '春日部女子', department: '外国語科', quota: 40, applicantsConfirmed: 43, testTakersConfirmed: 43, finalPassers: 40 },
+    { schoolName: '越谷南', department: '外国語科', quota: 40, applicantsConfirmed: 52, testTakersConfirmed: 52, finalPassers: 40 },
+    { schoolName: '坂戸', department: '外国語科', quota: 40, applicantsConfirmed: 32, testTakersConfirmed: 32, finalPassers: 40 },
+    { schoolName: '草加南', department: '外国語科', quota: 40, applicantsConfirmed: 40, testTakersConfirmed: 39, finalPassers: 40 },
+    { schoolName: '南稜', department: '外国語科', quota: 40, applicantsConfirmed: 54, testTakersConfirmed: 54, finalPassers: 40 },
+    { schoolName: '蕨', department: '外国語科', quota: 40, applicantsConfirmed: 49, testTakersConfirmed: 49, finalPassers: 40 },
+    // --- 6頁目「全日制 専門学科」美術に関する学科（3校3レコード） ---
+    { schoolName: '大宮光陵', department: '美術科', quota: 40, applicantsConfirmed: 49, testTakersConfirmed: 49, finalPassers: 40 },
+    { schoolName: '越生翔桜', department: '美術表現科', quota: 40, applicantsConfirmed: 49, testTakersConfirmed: 49, finalPassers: 40 },
+    { schoolName: '芸術総合', department: '美術科', quota: 40, applicantsConfirmed: 65, testTakersConfirmed: 65, finalPassers: 40 },
+    // --- 6頁目「全日制 専門学科」音楽に関する学科（3校3レコード） ---
+    { schoolName: '大宮光陵', department: '音楽科', quota: 40, applicantsConfirmed: 45, testTakersConfirmed: 45, finalPassers: 40 },
+    { schoolName: '芸術総合', department: '音楽科', quota: 40, applicantsConfirmed: 17, testTakersConfirmed: 17, finalPassers: 20 },
+    { schoolName: '松伏', department: '音楽科', quota: 40, applicantsConfirmed: 27, testTakersConfirmed: 27, finalPassers: 27 },
+    // --- 6頁目「全日制 専門学科」書道に関する学科（1校1レコード） ---
+    { schoolName: '大宮光陵', department: '書道科', quota: 40, applicantsConfirmed: 28, testTakersConfirmed: 28, finalPassers: 28 },
+    // --- 6頁目「全日制 専門学科」体育に関する学科（2校2レコード） ---
+    { schoolName: '大宮東', department: '体育科', quota: 80, applicantsConfirmed: 97, testTakersConfirmed: 97, finalPassers: 80 },
+    { schoolName: 'ふじみ野', department: 'スポーツサイエンス科', quota: 80, applicantsConfirmed: 83, testTakersConfirmed: 83, finalPassers: 80 },
   ],
   officialSubtotals: [
     // ⚠️applicantsConfirmedはこの資料（3月6日版）には印字されていない（既存パイプライン由来の
@@ -327,5 +375,15 @@ export const SAITAMA_STAGE_LEDGER: PrefectureStageLedgerFile = {
     // 「商業科 計」（A/B/C列）と直接一致。applicantsConfirmedは既存パイプライン再利用の
     // 参考値（1,998・この資料には印字なし）。
     { label: '商業科 計', quota: 2_206, applicantsConfirmed: 1_998, testTakersConfirmed: 1_995, finalPassers: 1_889 },
+    // 以下6頁目の7区分。quotaはいずれもA（=既存パイプラインquota）ベースで本資料印字の
+    // 「計」行（募集人員列）と一致（越谷総合技術服飾デザイン科の転編入者数(1)分を除けば
+    // 募集人員とAは全24レコードで同値のため、家庭科計のみ募集人員320・A319で1名差）。
+    { label: '家庭科 計', quota: 319, applicantsConfirmed: 319, testTakersConfirmed: 305, finalPassers: 287 },
+    { label: '看護科 計', quota: 80, applicantsConfirmed: 88, testTakersConfirmed: 88, finalPassers: 80 },
+    { label: '外国語科 計', quota: 240, applicantsConfirmed: 270, testTakersConfirmed: 269, finalPassers: 240 },
+    { label: '美術科 計', quota: 120, applicantsConfirmed: 163, testTakersConfirmed: 163, finalPassers: 120 },
+    { label: '音楽科 計', quota: 120, applicantsConfirmed: 89, testTakersConfirmed: 89, finalPassers: 87 },
+    { label: '書道科 計', quota: 40, applicantsConfirmed: 28, testTakersConfirmed: 28, finalPassers: 28 },
+    { label: '体育科 計', quota: 160, applicantsConfirmed: 180, testTakersConfirmed: 180, finalPassers: 160 },
   ],
 };
