@@ -3,22 +3,20 @@ import { TOKYO_STAGE_LEDGER } from '../tokyo';
 import { COMPETITION_RATE_BY_PREFECTURE } from '@/data/competition-rates';
 
 /**
- * T-Y11F §5順序#7 DoD検証（東京都・段階台帳7県目・「普通科」系123レコード＋「商業」7レコード＋
- * 「ビジネスコミュニケーション科」2レコード＋「工業に関する学科」16レコード＋「科学技術科」
- * 2レコード＋「農業」5レコード＋「水産」1レコード＋「家庭（単位制以外）」3レコード＋
- * 「家庭（単位制）」1レコード＋「福祉」2レコード＋「理数」2レコード＋「芸術」1レコード＋
- * 「体育」2レコード＝計167レコード）: ①レコードの不変条件（quota>0等）②既存の倍率パイプ
- * ライン（competition-rates/tokyo.ts）のquota・applicantsConfirmedと段階台帳が全件完全一致
- * すること（本資料には志願者数列が存在しないため両方とも既存パイプラインを再利用する設計）
- * ③finalPassers>quotaが普通科系では極めて高頻度（推薦選抜の未消化枠繰り上げが原因と推測）の
- * ため他県のような個別例外列挙はせず、代わりにfinalPassers<=applicantsConfirmedの逆側の
- * 不変条件のみ検証する④公式小計（20段階）との完全一致。
+ * T-Y11F §5順序#7 DoD検証（東京都・段階台帳7県目・182レコード=「普通科」系123＋商業7＋
+ * ビジネスコミュ2＋工業16＋科学技術2＋農業5＋水産1＋家庭単位制以外3＋家庭単位制1＋福祉2＋
+ * 理数2＋芸術1＋体育2＋併合科3＋産業科2＋総合学科10）: ①レコードの不変条件（quota>0等）
+ * ②既存の倍率パイプライン（competition-rates/tokyo.ts）のquota・applicantsConfirmedと
+ * 段階台帳が全件完全一致すること（本資料には志願者数列が存在しないため両方とも既存パイプ
+ * ラインを再利用する設計）③finalPassers>quotaが普通科系では極めて高頻度（推薦選抜の未消化
+ * 枠繰り上げが原因と推測）のため他県のような個別例外列挙はせず、代わりにfinalPassers<=
+ * applicantsConfirmedの逆側の不変条件のみ検証する④公式小計（23段階）との完全一致。
  */
-describe('東京都 段階台帳（T-Y11F §5順序#7・7県目・167レコード）', () => {
+describe('東京都 段階台帳（T-Y11F §5順序#7・7県目・182レコード）', () => {
   const { records, officialSubtotals } = TOKYO_STAGE_LEDGER;
 
-  it('取り込み件数は普通科系123レコード＋商業7レコード＋ビジネスコミュニケーション科2レコード＋工業16レコード＋科学技術科2レコード＋農業5レコード＋水産1レコード＋家庭単位制以外3レコード＋家庭単位制1レコード＋福祉2レコード＋理数2レコード＋芸術1レコード＋体育2レコード＝計167レコード', () => {
-    expect(records).toHaveLength(167);
+  it('取り込み件数は182レコード（普通科系123＋商業7＋ビジネスコミュ2＋工業16＋科学技術2＋農業5＋水産1＋家庭単位制以外3＋家庭単位制1＋福祉2＋理数2＋芸術1＋体育2＋併合科3＋産業科2＋総合学科10）', () => {
+    expect(records).toHaveLength(182);
   });
 
   it('quota/applicantsConfirmed/testTakersConfirmed/finalPassersはいずれも0より大きい（不変条件）', () => {
@@ -45,7 +43,7 @@ describe('東京都 段階台帳（T-Y11F §5順序#7・7県目・167レコー�
       expect(counterpart.quota).toBe(stageRecord.quota);
       expect(counterpart.finalApplicants).toBe(stageRecord.applicantsConfirmed);
     }
-    expect(matched).toBe(167);
+    expect(matched).toBe(182);
   });
 
   it('finalPassersはapplicantsConfirmedを超えない（東京都でもこのパターンの逆転は0件）', () => {
@@ -320,5 +318,46 @@ describe('東京都 段階台帳（T-Y11F §5順序#7・7県目・167レコー�
       (r) => r.finalPassers > r.quota
     ).length;
     expect(overflowCount).toBe(4);
+  });
+
+  it('「併合科」3レコード＋「産業科」2レコード＋「総合学科」10レコードの機械集計が資料本文の公式小計（併合科計・産業科計・総合学科計）とquota/testTakersConfirmed/finalPassers/applicantsConfirmedの4系列とも完全一致する（本区分はfinalPassers>quotaが8/15件）', () => {
+    if (!officialSubtotals) throw new Error('officialSubtotals が定義されていません');
+    const heigou = officialSubtotals.find((s) => s.label === '併合科計');
+    const sangyou = officialSubtotals.find((s) => s.label === '産業科計');
+    const sougou = officialSubtotals.find((s) => s.label === '総合学科計');
+    if (!heigou || !sangyou || !sougou) throw new Error('officialSubtotals の一部が見つかりません');
+
+    const heigouRecords = records.filter((r) => r.department.startsWith('併合科'));
+    const sangyouRecords = records.filter((r) => r.department === '産業科');
+    const sougouRecords = records.filter((r) => r.department === '総合学科');
+    expect(heigouRecords).toHaveLength(3);
+    expect(sangyouRecords).toHaveLength(2);
+    expect(sougouRecords).toHaveLength(10);
+
+    const heigouSums = sumStageLedger(heigouRecords);
+    expect(heigouSums.quota).toBe(heigou.quota);
+    expect(heigouSums.testTakersConfirmed).toBe(heigou.testTakersConfirmed);
+    expect(heigouSums.finalPassers).toBe(heigou.finalPassers);
+    expect(heigouSums.applicantsConfirmed).toBe(heigou.applicantsConfirmed);
+
+    const sangyouSums = sumStageLedger(sangyouRecords);
+    expect(sangyouSums.quota).toBe(sangyou.quota);
+    expect(sangyouSums.testTakersConfirmed).toBe(sangyou.testTakersConfirmed);
+    expect(sangyouSums.finalPassers).toBe(sangyou.finalPassers);
+    expect(sangyouSums.applicantsConfirmed).toBe(sangyou.applicantsConfirmed);
+
+    const sougouSums = sumStageLedger(sougouRecords);
+    expect(sougouSums.quota).toBe(sougou.quota);
+    expect(sougouSums.testTakersConfirmed).toBe(sougou.testTakersConfirmed);
+    expect(sougouSums.finalPassers).toBe(sougou.finalPassers);
+    expect(sougouSums.applicantsConfirmed).toBe(sougou.applicantsConfirmed);
+
+    const overflowCount = [...heigouRecords, ...sangyouRecords, ...sougouRecords].filter((r) => r.finalPassers > r.quota).length;
+    expect(overflowCount).toBe(8);
+  });
+
+  it('「国際関係に関する学科」（目黒・国際）はquota不一致のため段階台帳に含まれない', () => {
+    const kokusai = records.filter((r) => r.schoolName === '国際' && r.department === '国際科');
+    expect(kokusai).toHaveLength(0);
   });
 });

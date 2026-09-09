@@ -5,7 +5,8 @@ import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
  * 「ビジネスコミュニケーション科」2レコード＋「工業に関する学科」16レコード＋「科学技術科」
  * 2レコード＋「農業」5レコード＋「水産」1レコード＋「家庭（単位制以外）」3レコード＋
  * 「家庭（単位制）」1レコード＋「福祉」2レコード＋「理数」2レコード＋「芸術」1レコード＋
- * 「体育」2レコード＝計167レコード）。
+ * 「体育」2レコード＋「併合科」3レコード＋「産業科」2レコード＋「総合学科」10レコード＝計
+ * 182レコード）。
  *
  * 一次ソース: 東京都教育委員会「令和8年度東京都立高等学校入学者選抜合格発表」（一般募集・
  * 学力検査による選抜）のうち「普通科（コース、単位制以外の学校）」（区部57校＋多摩部44校）＋
@@ -111,8 +112,24 @@ import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
  * finalPassers>quotaは8件中4件（忍岡+1・科学技術理数+2・立川理数+2・駒場体育+2）。
  * finalPassers>applicantsConfirmedは0件。
  *
- * ⚠️スコープ: 「専門学科・定時制課程（単位制）」の残り3頁（6〜8頁目・定時制課程等）＋
- * 「通信制（前期選抜）」（同日公表の別PDF）は別セッションで横展開する。
+ * 🔁**「併合科」3レコード＋「産業科」2レコード＋「総合学科」10レコードを追加（累計182
+ * レコード）**: 同PDFの6頁目（18［国際関係に関する学科］・19［併合科］・20［産業科］・
+ * 21［総合学科］）に着手。⚠️**18［国際関係に関する学科］（目黒・国際、quota98「一般生徒
+ * 対象」）は既存パイプラインの国際科（quota138）と数値が一致せず見送った**——本資料の
+ * quota98は「一般生徒対象」という限定された対象区分の数値で、既存パイプラインのquota138は
+ * 別の集計範囲（一般生徒＋特別枠等の合算と推測）を指しており、単純比較できないためY-0に従い
+ * スコープ外とした。併合科（島しょの農林/家政系複合学科）は大島/三宅/八丈の3校、産業科は
+ * 橘（墨田）/八王子桑志（八王子・4分野を学校単位「計」行で集約）の2校、総合学科は晴海総合/
+ * つばさ総合/世田谷総合/杉並総合/王子総合/葛飾総合/青梅総合/町田総合/東久留米総合/若葉総合の
+ * 10校。既存パイプラインの学科ラベル「併合科（農林・家政）」等・「産業科」・「総合学科」で
+ * quotaは15件全数が完全一致。3区分とも資料本文の「併合科計」「産業科計」「総合学科計」の
+ * 公式小計と3系列とも完全一致。finalPassers>quotaは15件中8件（八王子桑志+4・晴海総合+3・
+ * つばさ総合+2・世田谷総合+1・杉並総合+2・王子総合+3・葛飾総合+2・東久留米総合+2）で、
+ * 併合科3校は0件（島しょ校でいずれもquota未達）。finalPassers>applicantsConfirmedは0件。
+ *
+ * ⚠️スコープ: 「専門学科・定時制課程（単位制）」の残り2頁（7〜8頁目・定時制課程等）＋
+ * 「通信制（前期選抜）」（同日公表の別PDF）＋「国際関係に関する学科」（既存パイプラインとの
+ * quota不一致のため既存データの精査待ち）は別セッションで横展開する。
  */
 
 export const TOKYO_STAGE_LEDGER: PrefectureStageLedgerFile = {
@@ -132,7 +149,7 @@ export const TOKYO_STAGE_LEDGER: PrefectureStageLedgerFile = {
     },
     {
       url: 'https://www.kyoiku.metro.tokyo.lg.jp/documents/d/kyoiku/2026-03-02-181100-462',
-      docTitle: '東京都教育委員会 令和8年度東京都立高等学校入学者選抜合格発表 5［商業に関する学科］＋6［ビジネスコミュニケーション科］＋7［工業に関する学科（単位制以外の学校）］＋8［工業に関する学科（単位制の学校）］＋9［科学技術科］＋10［農業に関する学科］＋11［水産に関する学科］＋12［家庭に関する学科（単位制以外の学校）］＋13［家庭に関する学科（単位制の学校）］＋14［福祉に関する学科］＋15［理数に関する学科］＋16［芸術に関する学科］＋17［体育に関する学科］（全8頁のうち1〜5頁目に着手）',
+      docTitle: '東京都教育委員会 令和8年度東京都立高等学校入学者選抜合格発表 5［商業に関する学科］＋6［ビジネスコミュニケーション科］＋7［工業に関する学科（単位制以外の学校）］＋8［工業に関する学科（単位制の学校）］＋9［科学技術科］＋10［農業に関する学科］＋11［水産に関する学科］＋12［家庭に関する学科（単位制以外の学校）］＋13［家庭に関する学科（単位制の学校）］＋14［福祉に関する学科］＋15［理数に関する学科］＋16［芸術に関する学科］＋17［体育に関する学科］＋19［併合科］＋20［産業科］＋21［総合学科］（全8頁のうち1〜6頁目に着手・18［国際関係に関する学科］は既存パイプラインとのquota不一致のため見送り）',
       fiscalYear: '令和8年度（2026年度）',
       fetchedAt: '2026-09-09',
     },
@@ -156,12 +173,16 @@ export const TOKYO_STAGE_LEDGER: PrefectureStageLedgerFile = {
       '理数に関する学科（2レコード）',
       '芸術に関する学科（1レコード）',
       '体育に関する学科（2レコード）',
+      '併合科（3レコード）',
+      '産業科（2レコード）',
+      '総合学科（10レコード）',
     ],
     pendingDepartments: [
-      '専門学科・定時制課程（単位制）の残り3頁（6〜8頁目・定時制課程等）',
+      '専門学科・定時制課程（単位制）の残り2頁（7〜8頁目・定時制課程等）',
       '通信制（前期選抜）',
+      '国際関係に関する学科（既存パイプラインとのquota不一致のため精査待ち）',
     ],
-    note: '「普通科（コース・単位制以外）」区分（107レコード）＋「普通科（コース制）」（4レコード）＋「普通科（単位制）」（12レコード）＋「商業に関する学科」（7レコード）＋「ビジネスコミュニケーション科」（2レコード）＋「工業に関する学科・単位制以外」（15レコード）＋「工業に関する学科・単位制」（1レコード）＋「科学技術科」（2レコード）＋「農業に関する学科」（5レコード）＋「水産に関する学科」（1レコード）＋「家庭に関する学科・単位制以外」（3レコード）＋「家庭に関する学科・単位制」（1レコード）＋「福祉に関する学科」（2レコード）＋「理数に関する学科」（2レコード）＋「芸術に関する学科」（1レコード）＋「体育に関する学科」（2レコード）を完全収録し累計167レコード。quotaは既存competition-rates/tokyo.tsと全167件で完全一致（募集人員は試験日まで不変であることを確認）。applicantsConfirmedも既存パイプラインをそのまま再利用（本資料には志願者数列が存在しないため）。testTakersConfirmed/finalPassersのみ本資料から新規転記。資料本文の20段階の公式小計と167レコード全数の機械集計がquota/testTakersConfirmed/finalPassersの3系列すべてで完全一致（「家庭合計」は単位制以外区分＋単位制区分の合算値としても二重に確認）。普通科系はfinalPassers>quotaが極めて高頻度（推薦選抜の未消化枠繰り上げが原因と推測）だが工業系は低倍率のため2/16件・商業系は3/9件と少数派、一方で農業/水産/家庭系は6/9件・福祉理数芸術体育系は4/8件と普通科系に近い高頻度。江東・科学技術はfinalPassers>testTakersConfirmedという逆転パターンを示す（創造理数科第1志望者の2志望合流と推測・資料脚注に根拠あり）。府中の「農業」という学校名の学校は農業科と家庭科の両方に登場する（同一校が複数専門学科を併設）。専門学科・定時制課程（単位制）の残り3頁・通信制（前期選抜）は未着手。',
+    note: '「普通科（コース・単位制以外）」区分（107レコード）＋「普通科（コース制）」（4レコード）＋「普通科（単位制）」（12レコード）＋「商業に関する学科」（7レコード）＋「ビジネスコミュニケーション科」（2レコード）＋「工業に関する学科・単位制以外」（15レコード）＋「工業に関する学科・単位制」（1レコード）＋「科学技術科」（2レコード）＋「農業に関する学科」（5レコード）＋「水産に関する学科」（1レコード）＋「家庭に関する学科・単位制以外」（3レコード）＋「家庭に関する学科・単位制」（1レコード）＋「福祉に関する学科」（2レコード）＋「理数に関する学科」（2レコード）＋「芸術に関する学科」（1レコード）＋「体育に関する学科」（2レコード）＋「併合科」（3レコード）＋「産業科」（2レコード）＋「総合学科」（10レコード）を完全収録し累計182レコード。quotaは既存competition-rates/tokyo.tsと全182件で完全一致（募集人員は試験日まで不変であることを確認）。applicantsConfirmedも既存パイプラインをそのまま再利用（本資料には志願者数列が存在しないため）。testTakersConfirmed/finalPassersのみ本資料から新規転記。資料本文の23段階の公式小計と182レコード全数の機械集計がquota/testTakersConfirmed/finalPassersの3系列すべてで完全一致（「家庭合計」は単位制以外区分＋単位制区分の合算値としても二重に確認）。普通科系はfinalPassers>quotaが極めて高頻度（推薦選抜の未消化枠繰り上げが原因と推測）だが工業系は低倍率のため2/16件・商業系は3/9件と少数派、農業/水産/家庭系は6/9件・福祉理数芸術体育系は4/8件・併合産業総合系は8/15件と普通科系に近い高頻度。江東・科学技術はfinalPassers>testTakersConfirmedという逆転パターンを示す（創造理数科第1志望者の2志望合流と推測・資料脚注に根拠あり）。府中の「農業」という学校名の学校は農業科と家庭科の両方に登場する（同一校が複数専門学科を併設）。国際関係に関する学科（目黒・国際、資料quota98）は既存パイプラインのquota138と一致せず見送り。専門学科・定時制課程（単位制）の残り2頁・通信制（前期選抜）は未着手。',
   },
   officialSubtotals: [
     { label: '区部計', quota: 12088, applicantsConfirmed: 16926, testTakersConfirmed: 15539, finalPassers: 11638 },
@@ -185,6 +206,9 @@ export const TOKYO_STAGE_LEDGER: PrefectureStageLedgerFile = {
     { label: '理数計', quota: 71, applicantsConfirmed: 210, testTakersConfirmed: 188, finalPassers: 75 },
     { label: '芸術計', quota: 112, applicantsConfirmed: 182, testTakersConfirmed: 171, finalPassers: 111 },
     { label: '体育計', quota: 56, applicantsConfirmed: 62, testTakersConfirmed: 59, finalPassers: 57 },
+    { label: '併合科計', quota: 105, applicantsConfirmed: 16, testTakersConfirmed: 16, finalPassers: 16 },
+    { label: '産業科計', quota: 274, applicantsConfirmed: 227, testTakersConfirmed: 218, finalPassers: 206 },
+    { label: '総合学科計', quota: 1626, applicantsConfirmed: 1984, testTakersConfirmed: 1896, finalPassers: 1604 },
   ],
   records: [
     { schoolName: '日比谷', department: '普通科', quota: 253, applicantsConfirmed: 520, testTakersConfirmed: 420, finalPassers: 270 },
@@ -354,5 +378,20 @@ export const TOKYO_STAGE_LEDGER: PrefectureStageLedgerFile = {
     { schoolName: '総合芸術', department: '芸術科', quota: 112, applicantsConfirmed: 182, testTakersConfirmed: 171, finalPassers: 111 },
     { schoolName: '駒場', department: '体育科', quota: 28, applicantsConfirmed: 34, testTakersConfirmed: 32, finalPassers: 30 },
     { schoolName: '野津田', department: '体育科', quota: 28, applicantsConfirmed: 28, testTakersConfirmed: 27, finalPassers: 27 },
+    { schoolName: '大島', department: '併合科（農林・家政）', quota: 35, applicantsConfirmed: 10, testTakersConfirmed: 10, finalPassers: 10 },
+    { schoolName: '三宅', department: '併合科（農業・家政）', quota: 35, applicantsConfirmed: 3, testTakersConfirmed: 3, finalPassers: 3 },
+    { schoolName: '八丈', department: '併合科（園芸・家政）', quota: 35, applicantsConfirmed: 3, testTakersConfirmed: 3, finalPassers: 3 },
+    { schoolName: '橘', department: '産業科', quota: 148, applicantsConfirmed: 78, testTakersConfirmed: 76, finalPassers: 76 },
+    { schoolName: '八王子桑志', department: '産業科', quota: 126, applicantsConfirmed: 149, testTakersConfirmed: 142, finalPassers: 130 },
+    { schoolName: '晴海総合', department: '総合学科', quota: 192, applicantsConfirmed: 399, testTakersConfirmed: 373, finalPassers: 195 },
+    { schoolName: 'つばさ総合', department: '総合学科', quota: 164, applicantsConfirmed: 183, testTakersConfirmed: 170, finalPassers: 166 },
+    { schoolName: '世田谷総合', department: '総合学科', quota: 164, applicantsConfirmed: 188, testTakersConfirmed: 174, finalPassers: 165 },
+    { schoolName: '杉並総合', department: '総合学科', quota: 150, applicantsConfirmed: 213, testTakersConfirmed: 201, finalPassers: 152 },
+    { schoolName: '王子総合', department: '総合学科', quota: 164, applicantsConfirmed: 175, testTakersConfirmed: 170, finalPassers: 167 },
+    { schoolName: '葛飾総合', department: '総合学科', quota: 136, applicantsConfirmed: 141, testTakersConfirmed: 138, finalPassers: 138 },
+    { schoolName: '青梅総合', department: '総合学科', quota: 164, applicantsConfirmed: 165, testTakersConfirmed: 160, finalPassers: 160 },
+    { schoolName: '町田総合', department: '総合学科', quota: 164, applicantsConfirmed: 165, testTakersConfirmed: 164, finalPassers: 164 },
+    { schoolName: '東久留米総合', department: '総合学科', quota: 164, applicantsConfirmed: 217, testTakersConfirmed: 215, finalPassers: 166 },
+    { schoolName: '若葉総合', department: '総合学科', quota: 164, applicantsConfirmed: 138, testTakersConfirmed: 131, finalPassers: 131 },
   ],
 };
