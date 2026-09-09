@@ -1,10 +1,11 @@
 import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
 
 /**
- * 茨城県 段階台帳（T-Y11F §5順序#7・4県目・1頁目のみ・全日制県立63レコード）。
+ * 茨城県 段階台帳（T-Y11F §5順序#7・4県目・1〜2頁目・全日制県立129レコード）。
  *
  * 一次ソース: 茨城県教育委員会「令和8年度茨城県立高等学校第1学年合格状況（一般入学）」
- * （3月10日公表・全4頁）の1頁目（高萩清松〜玉造工業・34校63レコード）。
+ * （3月10日公表・全4頁）の1頁目（高萩清松〜玉造工業・34校63レコード）＋2頁目（麻生〜
+ * 石下紫峰・38校66レコード）。
  * https://kyoiku.pref.ibaraki.jp/wp-content/uploads/2026/03/gokaku.pdf
  *
  * ⚠️既存の`competition-rates/ibaraki.ts`（倍率パイプライン）は**別の一次資料**（「入学志願者数等
@@ -18,12 +19,20 @@ import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
  * 特色選抜等の内数列は主要3列（募集定員・受検者数・合格者数）に既に含まれているため、本ファイルの
  * スコープでは参照のみで転記対象にしない。
  *
- * ⚠️新種の異常値を2種確認: ①**quota超過**が2件（水戸第一・普通=quota161→final164、
- * 水戸農業・生活科学=quota40→final41）——chiba/saitamaで確認済みの「合格ボーダー同点者の
- * 全員合格」と同型と推測。②**finalPassers>applicantsConfirmed**が3件（日立商業・情報処理=
- * applicants38→final40、水戸農業・農業経済=applicants27→final32、水戸工業・電気=
- * applicants78→final80）——chiba R7で確認済みの「特別入学者選抜等の別枠合算」と同型
- * パターンがibarakiでも再現された。
+ * ⚠️新種の異常値を2種確認（1頁目）: ①**quota超過**が2件（水戸第一・普通=quota161→
+ * final164、水戸農業・生活科学=quota40→final41）——chiba/saitamaで確認済みの「合格
+ * ボーダー同点者の全員合格」と同型と推測。②**finalPassers>applicantsConfirmed**が3件
+ * （日立商業・情報処理=applicants38→final40、水戸農業・農業経済=applicants27→final32、
+ * 水戸工業・電気=applicants78→final80）——chiba R7で確認済みの「特別入学者選抜等の別枠
+ * 合算」と同型パターンがibarakiでも再現された。
+ *
+ * 🔁2頁目追加（麻生〜石下紫峰・38校66レコード）: quotaは既存パイプラインと66件すべて完全
+ * 一致（1頁目と合わせ計129件）。異常値がさらに2種4件追加発見された: ①quota超過1件
+ * （藤代・普通=quota240→final242）で累計3件。②finalPassers>applicantsConfirmedが3件
+ * （波崎・機械=applicants35→final37、波崎・電気=applicants28→final34、下館工業・
+ * 電気電子=applicants72→final73）で累計6件。2頁とも一貫して「合格ボーダー同点者」型
+ * （quota超過）と「特別入学者選抜等の別枠合算」型（applicants超過）の2系統に収まっており、
+ * 新種の第3パターンは出現していない。
  */
 
 export const IBARAKI_STAGE_LEDGER: PrefectureStageLedgerFile = {
@@ -31,16 +40,19 @@ export const IBARAKI_STAGE_LEDGER: PrefectureStageLedgerFile = {
   sources: [
     {
       url: 'https://kyoiku.pref.ibaraki.jp/wp-content/uploads/2026/03/gokaku.pdf',
-      docTitle: '茨城県教育委員会 令和8年度茨城県立高等学校第1学年合格状況（一般入学）1頁目（高萩清松〜玉造工業）',
+      docTitle: '茨城県教育委員会 令和8年度茨城県立高等学校第1学年合格状況（一般入学）1〜2頁目（高萩清松〜石下紫峰）',
       fiscalYear: '令和8年度（2026年度）',
       fetchedAt: '2026-09-09',
     },
   ],
   coverage: {
     status: 'partial',
-    includedDepartments: ['全日制県立（1頁目のみ・高萩清松〜玉造工業・34校63レコード）'],
-    pendingDepartments: ['2〜4頁目の残り学校'],
-    note: '1頁目（34校63レコード）のみのパイロット。quotaは既存competition-rates/ibaraki.tsと全63件で完全一致（募集定員は試験日まで不変であることを確認）。applicantsConfirmedも既存パイプラインをそのまま再利用（本資料には志願者数列が存在しないため）。testTakersConfirmed/finalPassersのみ本資料から新規転記。quota超過2件・finalPassers>applicantsConfirmed3件を確認（いずれもchiba/saitamaで確認済みの既知パターンと同型）。',
+    includedDepartments: [
+      '全日制県立（1頁目・高萩清松〜玉造工業・34校63レコード）',
+      '全日制県立（2頁目・麻生〜石下紫峰・38校66レコード）',
+    ],
+    pendingDepartments: ['3〜4頁目の残り学校'],
+    note: '1〜2頁目（72校129レコード）。quotaは既存competition-rates/ibaraki.tsと全129件で完全一致（募集定員は試験日まで不変であることを確認）。applicantsConfirmedも既存パイプラインをそのまま再利用（本資料には志願者数列が存在しないため）。testTakersConfirmed/finalPassersのみ本資料から新規転記。quota超過3件・finalPassers>applicantsConfirmed6件を確認（いずれもchiba/saitamaで確認済みの既知パターンと同型）。',
   },
   records: [
     { schoolName: '高萩清松', department: '総合', quota: 120, applicantsConfirmed: 101, testTakersConfirmed: 101, finalPassers: 101 },
@@ -106,5 +118,72 @@ export const IBARAKI_STAGE_LEDGER: PrefectureStageLedgerFile = {
     { schoolName: '鉾田第二', department: '農業', quota: 40, applicantsConfirmed: 24, testTakersConfirmed: 24, finalPassers: 24 },
     { schoolName: '鉾田第二', department: '食品技術', quota: 40, applicantsConfirmed: 28, testTakersConfirmed: 28, finalPassers: 28 },
     { schoolName: '玉造工業', department: '工業に関する学科', quota: 120, applicantsConfirmed: 63, testTakersConfirmed: 63, finalPassers: 63 },
+    // --- 2頁目（麻生〜石下紫峰） ---
+    { schoolName: '麻生', department: '普通', quota: 200, applicantsConfirmed: 204, testTakersConfirmed: 202, finalPassers: 200 },
+    { schoolName: '潮来', department: '普通', quota: 80, applicantsConfirmed: 58, testTakersConfirmed: 58, finalPassers: 58 },
+    { schoolName: '潮来', department: '地域ビジネス', quota: 40, applicantsConfirmed: 31, testTakersConfirmed: 31, finalPassers: 31 },
+    { schoolName: '潮来', department: '人間科学', quota: 40, applicantsConfirmed: 40, testTakersConfirmed: 40, finalPassers: 40 },
+    { schoolName: '鹿島', department: '普通', quota: 202, applicantsConfirmed: 225, testTakersConfirmed: 223, finalPassers: 202 },
+    { schoolName: '神栖', department: '普通', quota: 160, applicantsConfirmed: 112, testTakersConfirmed: 112, finalPassers: 112 },
+    { schoolName: '波崎', department: '普通', quota: 80, applicantsConfirmed: 78, testTakersConfirmed: 78, finalPassers: 78 },
+    { schoolName: '波崎', department: '機械', quota: 40, applicantsConfirmed: 35, testTakersConfirmed: 35, finalPassers: 37 },
+    { schoolName: '波崎', department: '電気', quota: 40, applicantsConfirmed: 28, testTakersConfirmed: 28, finalPassers: 34 },
+    { schoolName: '波崎', department: '工業化学・情報', quota: 40, applicantsConfirmed: 49, testTakersConfirmed: 48, finalPassers: 40 },
+    { schoolName: '波崎柳川', department: '普通', quota: 120, applicantsConfirmed: 60, testTakersConfirmed: 59, finalPassers: 59 },
+    { schoolName: '土浦第一', department: '普通', quota: 161, applicantsConfirmed: 181, testTakersConfirmed: 176, finalPassers: 161 },
+    { schoolName: '土浦第二', department: '普通', quota: 320, applicantsConfirmed: 373, testTakersConfirmed: 366, finalPassers: 320 },
+    { schoolName: '土浦第三', department: '普通', quota: 120, applicantsConfirmed: 144, testTakersConfirmed: 141, finalPassers: 120 },
+    { schoolName: '土浦第三', department: '商業に関する学科', quota: 120, applicantsConfirmed: 166, testTakersConfirmed: 166, finalPassers: 120 },
+    { schoolName: '土浦工業', department: '機械', quota: 80, applicantsConfirmed: 70, testTakersConfirmed: 69, finalPassers: 69 },
+    { schoolName: '土浦工業', department: '電気', quota: 40, applicantsConfirmed: 38, testTakersConfirmed: 38, finalPassers: 38 },
+    { schoolName: '土浦工業', department: '情報技術', quota: 40, applicantsConfirmed: 38, testTakersConfirmed: 37, finalPassers: 37 },
+    { schoolName: '土浦工業', department: '建築', quota: 40, applicantsConfirmed: 37, testTakersConfirmed: 37, finalPassers: 37 },
+    { schoolName: '土浦工業', department: '土木', quota: 40, applicantsConfirmed: 18, testTakersConfirmed: 18, finalPassers: 18 },
+    { schoolName: '土浦湖北', department: '普通', quota: 240, applicantsConfirmed: 247, testTakersConfirmed: 246, finalPassers: 240 },
+    { schoolName: '石岡第一', department: '普通', quota: 240, applicantsConfirmed: 222, testTakersConfirmed: 218, finalPassers: 218 },
+    { schoolName: '石岡第一', department: '園芸', quota: 40, applicantsConfirmed: 41, testTakersConfirmed: 39, finalPassers: 39 },
+    { schoolName: '石岡第一', department: '造園', quota: 40, applicantsConfirmed: 40, testTakersConfirmed: 39, finalPassers: 39 },
+    { schoolName: '石岡第二', department: '普通', quota: 160, applicantsConfirmed: 130, testTakersConfirmed: 127, finalPassers: 127 },
+    { schoolName: '石岡第二', department: '生活デザイン', quota: 40, applicantsConfirmed: 31, testTakersConfirmed: 31, finalPassers: 31 },
+    { schoolName: '石岡商業', department: '商業', quota: 80, applicantsConfirmed: 66, testTakersConfirmed: 66, finalPassers: 66 },
+    { schoolName: '石岡商業', department: '情報処理', quota: 40, applicantsConfirmed: 41, testTakersConfirmed: 40, finalPassers: 40 },
+    { schoolName: '中央', department: '普通', quota: 160, applicantsConfirmed: 105, testTakersConfirmed: 103, finalPassers: 103 },
+    { schoolName: '中央', department: '普通〔スポーツ科学〕', quota: 40, applicantsConfirmed: 28, testTakersConfirmed: 28, finalPassers: 28 },
+    { schoolName: '竜ヶ崎第一', department: '普通', quota: 200, applicantsConfirmed: 206, testTakersConfirmed: 199, finalPassers: 199 },
+    { schoolName: '竜ヶ崎第二', department: '普通', quota: 80, applicantsConfirmed: 93, testTakersConfirmed: 92, finalPassers: 80 },
+    { schoolName: '竜ヶ崎第二', department: '商業', quota: 40, applicantsConfirmed: 45, testTakersConfirmed: 45, finalPassers: 40 },
+    { schoolName: '竜ヶ崎第二', department: '人間文化', quota: 40, applicantsConfirmed: 50, testTakersConfirmed: 49, finalPassers: 40 },
+    { schoolName: '竜ヶ崎南', department: '普通', quota: 80, applicantsConfirmed: 47, testTakersConfirmed: 46, finalPassers: 46 },
+    { schoolName: '江戸崎総合', department: '総合', quota: 160, applicantsConfirmed: 111, testTakersConfirmed: 109, finalPassers: 109 },
+    { schoolName: '取手第一', department: '総合', quota: 240, applicantsConfirmed: 269, testTakersConfirmed: 269, finalPassers: 240 },
+    { schoolName: '取手第二', department: '普通', quota: 120, applicantsConfirmed: 155, testTakersConfirmed: 155, finalPassers: 120 },
+    { schoolName: '取手第二', department: '家政', quota: 40, applicantsConfirmed: 51, testTakersConfirmed: 51, finalPassers: 40 },
+    { schoolName: '取手松陽', department: '普通', quota: 160, applicantsConfirmed: 169, testTakersConfirmed: 169, finalPassers: 160 },
+    { schoolName: '取手松陽', department: '美術', quota: 30, applicantsConfirmed: 34, testTakersConfirmed: 33, finalPassers: 30 },
+    { schoolName: '取手松陽', department: '音楽', quota: 30, applicantsConfirmed: 14, testTakersConfirmed: 13, finalPassers: 13 },
+    { schoolName: '藤代', department: '普通', quota: 240, applicantsConfirmed: 249, testTakersConfirmed: 246, finalPassers: 242 },
+    { schoolName: '藤代紫水', department: '普通', quota: 240, applicantsConfirmed: 139, testTakersConfirmed: 139, finalPassers: 139 },
+    { schoolName: '牛久', department: '普通', quota: 240, applicantsConfirmed: 250, testTakersConfirmed: 248, finalPassers: 240 },
+    { schoolName: '牛久栄進', department: '普通', quota: 360, applicantsConfirmed: 388, testTakersConfirmed: 379, finalPassers: 360 },
+    { schoolName: '筑波', department: '普通〔進学アドバンスト〕', quota: 40, applicantsConfirmed: 8, testTakersConfirmed: 7, finalPassers: 7 },
+    { schoolName: '筑波', department: '普通〔地域キャリアビジネス〕', quota: 80, applicantsConfirmed: 36, testTakersConfirmed: 35, finalPassers: 35 },
+    { schoolName: '竹園', department: '普通・国際', quota: 320, applicantsConfirmed: 400, testTakersConfirmed: 397, finalPassers: 320 },
+    { schoolName: 'つくばサイエンス', department: '普通', quota: 120, applicantsConfirmed: 59, testTakersConfirmed: 57, finalPassers: 57 },
+    { schoolName: 'つくばサイエンス', department: '科学技術', quota: 120, applicantsConfirmed: 89, testTakersConfirmed: 86, finalPassers: 86 },
+    { schoolName: '岩瀬', department: '普通', quota: 120, applicantsConfirmed: 30, testTakersConfirmed: 30, finalPassers: 30 },
+    { schoolName: '岩瀬', department: '衛生看護', quota: 40, applicantsConfirmed: 34, testTakersConfirmed: 34, finalPassers: 34 },
+    { schoolName: '真壁', department: '普通', quota: 40, applicantsConfirmed: 14, testTakersConfirmed: 14, finalPassers: 14 },
+    { schoolName: '真壁', department: '農業・環境緑地', quota: 40, applicantsConfirmed: 21, testTakersConfirmed: 21, finalPassers: 21 },
+    { schoolName: '真壁', department: '食品化学', quota: 40, applicantsConfirmed: 14, testTakersConfirmed: 14, finalPassers: 14 },
+    { schoolName: '下館第一', department: '普通', quota: 202, applicantsConfirmed: 188, testTakersConfirmed: 184, finalPassers: 184 },
+    { schoolName: '下館第二', department: '普通', quota: 240, applicantsConfirmed: 258, testTakersConfirmed: 258, finalPassers: 240 },
+    { schoolName: '下館工業', department: '機械', quota: 80, applicantsConfirmed: 81, testTakersConfirmed: 81, finalPassers: 80 },
+    { schoolName: '下館工業', department: '電気・電子', quota: 80, applicantsConfirmed: 72, testTakersConfirmed: 72, finalPassers: 73 },
+    { schoolName: '下館工業', department: '建設工学', quota: 40, applicantsConfirmed: 30, testTakersConfirmed: 30, finalPassers: 30 },
+    { schoolName: '下妻第一', department: '普通', quota: 203, applicantsConfirmed: 244, testTakersConfirmed: 241, finalPassers: 203 },
+    { schoolName: '下妻第二', department: '普通', quota: 280, applicantsConfirmed: 299, testTakersConfirmed: 297, finalPassers: 280 },
+    { schoolName: '結城第一', department: '普通', quota: 120, applicantsConfirmed: 63, testTakersConfirmed: 62, finalPassers: 59 },
+    { schoolName: '鬼怒商業', department: '商業に関する学科', quota: 160, applicantsConfirmed: 163, testTakersConfirmed: 163, finalPassers: 160 },
+    { schoolName: '石下紫峰', department: '普通', quota: 160, applicantsConfirmed: 138, testTakersConfirmed: 137, finalPassers: 135 },
   ],
 };

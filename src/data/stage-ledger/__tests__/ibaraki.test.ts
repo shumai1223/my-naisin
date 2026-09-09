@@ -2,18 +2,18 @@ import { IBARAKI_STAGE_LEDGER } from '../ibaraki';
 import { COMPETITION_RATE_BY_PREFECTURE } from '@/data/competition-rates';
 
 /**
- * T-Y11F §5順序#7 DoD検証（茨城県・段階台帳4県目パイロット・1頁目63レコード）:
+ * T-Y11F §5順序#7 DoD検証（茨城県・段階台帳4県目パイロット・1〜2頁目129レコード）:
  * ①レコードの不変条件（quota>0等）②既存の倍率パイプライン（competition-rates/ibaraki.ts）の
  * quota・applicantsConfirmedと段階台帳が全件完全一致すること（本資料には志願者数列が
  * 存在しないため両方とも既存パイプラインを再利用する設計）③testTakersConfirmedは
- * applicantsConfirmedを超えないこと（既知の2件を除く）④finalPassersがquotaを超える
- * 既知の2件（水戸第一・水戸農業生活科学）を明示的に許容する。
+ * applicantsConfirmedを超えないこと（既知の例外を除く）④finalPassersがquotaを超える
+ * 既知の3件を明示的に許容する。
  */
-describe('茨城県 段階台帳（T-Y11F §5順序#7・4県目・1頁目のみ）', () => {
+describe('茨城県 段階台帳（T-Y11F §5順序#7・4県目・1〜2頁目）', () => {
   const { records } = IBARAKI_STAGE_LEDGER;
 
-  it('取り込み件数は1頁目63レコード', () => {
-    expect(records).toHaveLength(63);
+  it('取り込み件数は1〜2頁目129レコード', () => {
+    expect(records).toHaveLength(129);
   });
 
   it('quota/applicantsConfirmed/testTakersConfirmed/finalPassersはいずれも0より大きい（不変条件）', () => {
@@ -46,13 +46,14 @@ describe('茨城県 段階台帳（T-Y11F §5順序#7・4県目・1頁目のみ�
       expect(counterpart.quota).toBe(stageRecord.quota);
       expect(counterpart.finalApplicants).toBe(stageRecord.applicantsConfirmed);
     }
-    expect(matched).toBe(63);
+    expect(matched).toBe(129);
   });
 
-  it('finalPassersがquotaを超えるのは既知の2件のみ（合格ボーダー同点者の全員合格と推測）', () => {
+  it('finalPassersがquotaを超えるのは既知の3件のみ（合格ボーダー同点者の全員合格と推測）', () => {
     const KNOWN_OVERFLOW = new Map<string, number>([
       ['水戸第一|普通', 164],
       ['水戸農業|生活科学', 41],
+      ['藤代|普通', 242],
     ]);
     for (const r of records) {
       const key = `${r.schoolName}|${r.department}`;
@@ -64,8 +65,15 @@ describe('茨城県 段階台帳（T-Y11F §5順序#7・4県目・1頁目のみ�
     }
   });
 
-  it('finalPassers>applicantsConfirmedとなるのは既知の3件のみ（特別入学者選抜等の別枠合算と推測・chiba R7で確認済みの同型パターン）', () => {
-    const KNOWN_DRIFT = new Set(['日立商業|情報処理', '水戸農業|農業経済', '水戸工業|電気']);
+  it('finalPassers>applicantsConfirmedとなるのは既知の6件のみ（特別入学者選抜等の別枠合算と推測・chiba R7で確認済みの同型パターン）', () => {
+    const KNOWN_DRIFT = new Set([
+      '日立商業|情報処理',
+      '水戸農業|農業経済',
+      '水戸工業|電気',
+      '波崎|機械',
+      '波崎|電気',
+      '下館工業|電気・電子',
+    ]);
     for (const r of records) {
       const key = `${r.schoolName}|${r.department}`;
       if (KNOWN_DRIFT.has(key)) {
