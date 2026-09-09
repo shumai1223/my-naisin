@@ -2,7 +2,7 @@ import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
 
 /**
  * 北海道 段階台帳（T-Y11F §5順序#7・28県目・全日制coverage='partial'・空知29＋石狩57＋
- * 市立札幌9＋後志18＝113レコードで着手）。
+ * 市立札幌9＋後志18＋胆振27＝140レコードで着手）。
  *
  * 一次ソース: 北海道教育委員会「R8入学者選抜状況報告書 §3 学校別受検者数及び合格者数」
  * （令和8年度＝2026年度入学者選抜・全14頁・管内ごとに1頁）。
@@ -57,6 +57,13 @@ import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
  * ⚠️後志地区追加分（18レコード）で新たな例外2件: 小樽未来創造「情報会計マネジメント」
  * （合格36>受検35・追加合格者型）・小樽水産「水産食品」（受検34>出願33・第2次募集1名分の
  * 新規応募者型）。いずれも既出パターンの再現で+1の小差。
+ *
+ * ⚠️胆振地区追加分（27レコード）で新たな例外5件: 追分「普通」・厚真「普通」・室蘭工業「建設」
+ * は第2次募集の新規応募者型（+1）。室蘭栄「理数」（合格72>受検68・+4）・苫小牧工業
+ * 「情報技術」（合格35>受検34・+1）は追加合格者型。鵡川「普通」には道立高校枠とは別に
+ * 「連携型」選抜（募集人員80・受検12・合格12）が併記されているが、連携型は募集人員のみで
+ * applicantsConfirmed相当の出願者数列を持たない別スキーマのため、既存パイプラインと同じく
+ * スコープ外とした。
  */
 export const HOKKAIDO_STAGE_LEDGER: PrefectureStageLedgerFile = {
   prefectureCode: 'hokkaido',
@@ -85,6 +92,12 @@ export const HOKKAIDO_STAGE_LEDGER: PrefectureStageLedgerFile = {
       fiscalYear: '令和8年度（2026年度）',
       fetchedAt: '2026-09-10',
     },
+    {
+      url: 'https://www.dokyoi.pref.hokkaido.lg.jp/fs/1/3/1/7/8/5/5/0/_/05_p9-p22.pdf',
+      docTitle: '北海道教育委員会 R8入学者選抜状況報告書「§3 学校別受検者数及び合格者数」（p.13-14・胆振地区）',
+      fiscalYear: '令和8年度（2026年度）',
+      fetchedAt: '2026-09-10',
+    },
   ],
   coverage: {
     status: 'partial',
@@ -93,9 +106,9 @@ export const HOKKAIDO_STAGE_LEDGER: PrefectureStageLedgerFile = {
       '全日制・石狩地区・道立高校のみ（普通教育を主とする学科31レコード＋専門教育を主とする学科及び総合学科26レコード＝57レコード）',
       '全日制・市立札幌（普通教育を主とする学科7レコード＋専門教育を主とする学科2レコード＝9レコード）',
       '全日制・後志地区（普通教育を主とする学科6レコード＋専門教育を主とする学科及び総合学科12レコード＝18レコード）',
+      '全日制・胆振地区（普通教育を主とする学科11レコード＋専門教育を主とする学科及び総合学科16レコード＝27レコード）',
     ],
     pendingDepartments: [
-      '全日制・胆振地区',
       '全日制・日高地区',
       '全日制・渡島地区',
       '全日制・檜山地区',
@@ -107,9 +120,10 @@ export const HOKKAIDO_STAGE_LEDGER: PrefectureStageLedgerFile = {
       '全日制・釧路地区',
       '全日制・根室地区',
       '滝川西「情報マネジメント」（既存パイプラインが検算不能のため見送った1行・本ファイルも同じ理由でスコープ外）',
+      '鵡川「連携型」（募集人員のみでapplicantsConfirmed相当の出願者数列を持たない別スキーマのため恒久的にスコープ外）',
       '定時制課程（他県と同じ理由で恒久的にスコープ外）',
     ],
-    note: '全14管内のうち空知（29）＋石狩・道立のみ（57）＋市立札幌（9）＋後志（18）＝113レコードに着手。quota・applicantsConfirmedは既存パイプライン`competition-rates/hokkaido.ts`の該当レコードをそのまま再利用し、testTakersConfirmed（第1次受検者数＋第2次受検者数）・finalPassers（入学者数＝第1次合格者数＋第2次合格者数）を「§3学校別受検者数及び合格者数」p.9-13から新規転記した。推薦枠は一般枠と完全に独立したクオータ（秋田のような推薦落選者の一般転入は無い）のためスコープ外。既知の例外12件（第2次募集による新規応募者分でtestTakersConfirmedがapplicantsConfirmedを上回る8件、追加合格者と推測されるfinalPassers>testTakersConfirmed4件）はいずれも小差（最大+6）。市立札幌9件は例外0件のクリーンな区分だった。本資料はさらに11管内分（全240レコード規模）を残しており、既存パイプラインと同じく1管内ずつ段階的に追加する。',
+    note: '全14管内のうち空知（29）＋石狩・道立のみ（57）＋市立札幌（9）＋後志（18）＋胆振（27）＝140レコードに着手。quota・applicantsConfirmedは既存パイプライン`competition-rates/hokkaido.ts`の該当レコードをそのまま再利用し、testTakersConfirmed（第1次受検者数＋第2次受検者数）・finalPassers（入学者数＝第1次合格者数＋第2次合格者数）を「§3学校別受検者数及び合格者数」p.9-14から新規転記した。推薦枠は一般枠と完全に独立したクオータ（秋田のような推薦落選者の一般転入は無い）のためスコープ外。既知の例外19件（第2次募集による新規応募者分でtestTakersConfirmedがapplicantsConfirmedを上回る12件、追加合格者と推測されるfinalPassers>testTakersConfirmed7件）はいずれも小差（最大+6）。市立札幌9件は例外0件のクリーンな区分だった。連携型（鵡川）は募集人員のみの別スキーマのため恒久的にスコープ外。本資料はさらに10管内分（全210レコード規模）を残しており、既存パイプラインと同じく1管内ずつ段階的に追加する。',
   },
   records: [
     { schoolName: '岩見沢東', department: '普通', quota: 160, applicantsConfirmed: 134, testTakersConfirmed: 130, finalPassers: 128 },
@@ -225,5 +239,32 @@ export const HOKKAIDO_STAGE_LEDGER: PrefectureStageLedgerFile = {
     { schoolName: '小樽水産', department: '情報通信', quota: 40, applicantsConfirmed: 27, testTakersConfirmed: 26, finalPassers: 26 },
     { schoolName: '余市紅志', department: '総合', quota: 40, applicantsConfirmed: 29, testTakersConfirmed: 28, finalPassers: 27 },
     { schoolName: 'ニセコ国際', department: '総合', quota: 70, applicantsConfirmed: 59, testTakersConfirmed: 58, finalPassers: 56 },
+    { schoolName: '室蘭栄', department: '普通', quota: 120, applicantsConfirmed: 134, testTakersConfirmed: 131, finalPassers: 120 },
+    { schoolName: '室蘭清水丘', department: '普通', quota: 160, applicantsConfirmed: 132, testTakersConfirmed: 128, finalPassers: 127 },
+    { schoolName: '登別青嶺', department: '普通', quota: 120, applicantsConfirmed: 62, testTakersConfirmed: 59, finalPassers: 58 },
+    { schoolName: '伊達開来', department: '普通', quota: 160, applicantsConfirmed: 119, testTakersConfirmed: 118, finalPassers: 118 },
+    { schoolName: '苫小牧東', department: '普通', quota: 240, applicantsConfirmed: 312, testTakersConfirmed: 266, finalPassers: 240 },
+    { schoolName: '苫小牧西', department: '普通', quota: 160, applicantsConfirmed: 182, testTakersConfirmed: 170, finalPassers: 160 },
+    { schoolName: '苫小牧南', department: '普通', quota: 160, applicantsConfirmed: 184, testTakersConfirmed: 161, finalPassers: 157 },
+    { schoolName: '白老東', department: '普通', quota: 80, applicantsConfirmed: 31, testTakersConfirmed: 27, finalPassers: 26 },
+    { schoolName: '追分', department: '普通', quota: 40, applicantsConfirmed: 33, testTakersConfirmed: 34, finalPassers: 33 },
+    { schoolName: '厚真', department: '普通', quota: 40, applicantsConfirmed: 16, testTakersConfirmed: 17, finalPassers: 17 },
+    { schoolName: '鵡川', department: '普通', quota: 80, applicantsConfirmed: 49, testTakersConfirmed: 49, finalPassers: 49 },
+    { schoolName: '室蘭栄', department: '理数', quota: 80, applicantsConfirmed: 69, testTakersConfirmed: 68, finalPassers: 72 },
+    { schoolName: '壮瞥', department: '地域農業', quota: 40, applicantsConfirmed: 23, testTakersConfirmed: 23, finalPassers: 22 },
+    { schoolName: '室蘭工業', department: '電子機械', quota: 40, applicantsConfirmed: 27, testTakersConfirmed: 26, finalPassers: 26 },
+    { schoolName: '室蘭工業', department: '電気', quota: 40, applicantsConfirmed: 26, testTakersConfirmed: 25, finalPassers: 25 },
+    { schoolName: '室蘭工業', department: '建設', quota: 40, applicantsConfirmed: 31, testTakersConfirmed: 32, finalPassers: 31 },
+    { schoolName: '苫小牧工業', department: '電子機械', quota: 40, applicantsConfirmed: 38, testTakersConfirmed: 38, finalPassers: 38 },
+    { schoolName: '苫小牧工業', department: '電気', quota: 40, applicantsConfirmed: 40, testTakersConfirmed: 37, finalPassers: 37 },
+    { schoolName: '苫小牧工業', department: '情報技術', quota: 40, applicantsConfirmed: 41, testTakersConfirmed: 34, finalPassers: 35 },
+    { schoolName: '苫小牧工業', department: '建築', quota: 40, applicantsConfirmed: 39, testTakersConfirmed: 33, finalPassers: 33 },
+    { schoolName: '苫小牧工業', department: '土木', quota: 40, applicantsConfirmed: 45, testTakersConfirmed: 41, finalPassers: 40 },
+    { schoolName: '苫小牧工業', department: '環境化学', quota: 40, applicantsConfirmed: 44, testTakersConfirmed: 40, finalPassers: 40 },
+    { schoolName: '虻田', department: '事務情報', quota: 40, applicantsConfirmed: 13, testTakersConfirmed: 13, finalPassers: 13 },
+    { schoolName: '苫小牧総合経済', department: '流通経済', quota: 40, applicantsConfirmed: 39, testTakersConfirmed: 33, finalPassers: 33 },
+    { schoolName: '苫小牧総合経済', department: '国際経済', quota: 40, applicantsConfirmed: 41, testTakersConfirmed: 37, finalPassers: 37 },
+    { schoolName: '苫小牧総合経済', department: '情報処理', quota: 40, applicantsConfirmed: 32, testTakersConfirmed: 29, finalPassers: 29 },
+    { schoolName: '室蘭東翔', department: '総合', quota: 160, applicantsConfirmed: 155, testTakersConfirmed: 155, finalPassers: 154 },
   ],
 };
