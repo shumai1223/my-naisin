@@ -4,17 +4,17 @@ import { COMPETITION_RATE_BY_PREFECTURE } from '@/data/competition-rates';
 
 /**
  * T-Y11F §5順序#7 DoD検証（神奈川県・段階台帳6県目・「普通科」96レコード＋「専門学科」
- * 33レコード＝計129レコード）: ①レコードの不変条件（quota>0等）②既存の倍率パイプライン
- * （competition-rates/kanagawa.ts）のquota・applicantsConfirmedと段階台帳が全件完全一致する
- * こと（本資料には志願者数列が存在しないため両方とも既存パイプラインを再利用する設計）
- * ③finalPassersがquotaを超える既知の10件を明示的に許容する④公式小計（普通科4段階＋
- * 専門学科7区分）との完全一致。
+ * 33レコード＋「単位制」35レコード＝計164レコード）: ①レコードの不変条件（quota>0等）
+ * ②既存の倍率パイプライン（competition-rates/kanagawa.ts）のquota・applicantsConfirmedと
+ * 段階台帳が全件完全一致すること（本資料には志願者数列が存在しないため両方とも既存パイプラインを
+ * 再利用する設計）③finalPassersがquotaを超える既知の13件を明示的に許容する④公式小計
+ * （普通科4段階＋専門学科7区分＋単位制3区分）との完全一致。
  */
-describe('神奈川県 段階台帳（T-Y11F §5順序#7・6県目・「普通科」＋「専門学科」計129レコード）', () => {
+describe('神奈川県 段階台帳（T-Y11F §5順序#7・6県目・「普通科」＋「専門学科」＋「単位制」計164レコード）', () => {
   const { records, officialSubtotals } = KANAGAWA_STAGE_LEDGER;
 
-  it('取り込み件数は普通科96レコード＋専門学科33レコード＝計129レコード', () => {
-    expect(records).toHaveLength(129);
+  it('取り込み件数は普通科96レコード＋専門学科33レコード＋単位制35レコード＝計164レコード', () => {
+    expect(records).toHaveLength(164);
   });
 
   it('quota/applicantsConfirmed/testTakersConfirmed/finalPassersはいずれも0より大きい（不変条件）', () => {
@@ -41,7 +41,7 @@ describe('神奈川県 段階台帳（T-Y11F §5順序#7・6県目・「普通�
       expect(counterpart.quota).toBe(stageRecord.quota);
       expect(counterpart.finalApplicants).toBe(stageRecord.applicantsConfirmed);
     }
-    expect(matched).toBe(129);
+    expect(matched).toBe(164);
   });
 
   it('testTakersConfirmedは「計（A）＋（B）」列（本検査受検者＋追検査受検者の合計）のためquotaの1.5倍を超えることはない（極端な誤読の防止・粗いガード）', () => {
@@ -50,7 +50,7 @@ describe('神奈川県 段階台帳（T-Y11F §5順序#7・6県目・「普通�
     }
   });
 
-  it('finalPassersがquotaを超えるのは既知の10件のみ（合格ボーダー同点者の全員合格と推測）', () => {
+  it('finalPassersがquotaを超えるのは既知の13件のみ（合格ボーダー同点者の全員合格と推測）', () => {
     const KNOWN_OVERFLOW = new Map<string, number>([
       ['横浜立野|普通科', 279],
       ['湘南|普通科', 360],
@@ -62,6 +62,9 @@ describe('神奈川県 段階台帳（T-Y11F §5順序#7・6県目・「普通�
       ['相原|農業科', 115],
       ['相原|商業科', 119],
       ['神奈川工業|工業科', 319],
+      ['藤沢総合|総合学科（単位制）', 269],
+      ['相模原弥栄|体育科（単位制）', 80],
+      ['横浜国際|国際科（単位制）', 160],
     ]);
     for (const r of records) {
       const key = `${r.schoolName}|${r.department}`;
@@ -145,5 +148,63 @@ describe('神奈川県 段階台帳（T-Y11F §5順序#7・6県目・「普通�
       expect(sums.finalPassers).toBe(subtotal.finalPassers);
     }
     expect(senmonTotal).toBe(33);
+  });
+
+  it('単位制35レコードは13区分で、3区分（普通科・総合学科・専門学科農業）の公式小計とquota/testTakersConfirmed/finalPassersの3系列とも完全一致する（他10区分は学校数1のため区分合計行が印字されず対象外）', () => {
+    if (!officialSubtotals) throw new Error('officialSubtotals が定義されていません');
+    const TANICHI_DEPARTMENTS: Record<string, number> = {
+      '普通科（単位制）': 15,
+      '普通科（単位制・一般コース）': 1,
+      '普通科（単位制・音楽コース）': 1,
+      '総合学科（単位制）': 7,
+      '総合学科（単位制・クリエイティブスクール）': 1,
+      '農業科（単位制）': 2,
+      '家庭科（単位制）': 1,
+      '理数科（単位制）': 1,
+      '体育科（単位制）': 1,
+      '音楽科（単位制）': 1,
+      '美術科（単位制）': 1,
+      '国際科（単位制）': 1,
+      '総合産業科（単位制）': 1,
+      '舞台芸術科（単位制）': 1,
+    };
+    let tanichiTotal = 0;
+    for (const [dept, count] of Object.entries(TANICHI_DEPARTMENTS)) {
+      const deptRecords = records.filter((r) => r.department === dept);
+      expect(deptRecords).toHaveLength(count);
+      tanichiTotal += deptRecords.length;
+    }
+    expect(tanichiTotal).toBe(35);
+
+    // 「普通科（単位制）」と「普通科（単位制・一般コース）」を合わせて資料の
+    // 「単位制 普通科」区分16校（横浜市立戸塚の一般コースを含む）に対応する
+    const futsuukaTanichi = [
+      ...records.filter((r) => r.department === '普通科（単位制）'),
+      ...records.filter((r) => r.department === '普通科（単位制・一般コース）'),
+    ];
+    expect(futsuukaTanichi).toHaveLength(16);
+    const futsuukaSubtotal = officialSubtotals.find((s) => s.label === '合計（単位制・普通科）');
+    if (!futsuukaSubtotal) throw new Error('officialSubtotals に「合計（単位制・普通科）」が見つかりません');
+    const futsuukaSums = sumStageLedger(futsuukaTanichi);
+    expect(futsuukaSums.quota).toBe(futsuukaSubtotal.quota);
+    expect(futsuukaSums.testTakersConfirmed).toBe(futsuukaSubtotal.testTakersConfirmed);
+    expect(futsuukaSums.finalPassers).toBe(futsuukaSubtotal.finalPassers);
+    expect(futsuukaSums.applicantsConfirmed).toBe(futsuukaSubtotal.applicantsConfirmed);
+
+    const sougouSubtotal = officialSubtotals.find((s) => s.label === '合計（単位制・総合学科）');
+    if (!sougouSubtotal) throw new Error('officialSubtotals に「合計（単位制・総合学科）」が見つかりません');
+    const sougouSums = sumStageLedger(records.filter((r) => r.department === '総合学科（単位制）'));
+    expect(sougouSums.quota).toBe(sougouSubtotal.quota);
+    expect(sougouSums.testTakersConfirmed).toBe(sougouSubtotal.testTakersConfirmed);
+    expect(sougouSums.finalPassers).toBe(sougouSubtotal.finalPassers);
+    expect(sougouSums.applicantsConfirmed).toBe(sougouSubtotal.applicantsConfirmed);
+
+    const nougyouSubtotal = officialSubtotals.find((s) => s.label === '合計（単位制・専門学科農業）');
+    if (!nougyouSubtotal) throw new Error('officialSubtotals に「合計（単位制・専門学科農業）」が見つかりません');
+    const nougyouSums = sumStageLedger(records.filter((r) => r.department === '農業科（単位制）'));
+    expect(nougyouSums.quota).toBe(nougyouSubtotal.quota);
+    expect(nougyouSums.testTakersConfirmed).toBe(nougyouSubtotal.testTakersConfirmed);
+    expect(nougyouSums.finalPassers).toBe(nougyouSubtotal.finalPassers);
+    expect(nougyouSums.applicantsConfirmed).toBe(nougyouSubtotal.applicantsConfirmed);
   });
 });
