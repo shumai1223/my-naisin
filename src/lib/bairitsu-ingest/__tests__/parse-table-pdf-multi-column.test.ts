@@ -17,10 +17,12 @@ import { parseTokushima } from '../parsers/tokushima';
  * （詳細は`ops/tasks/T-Y11B-bairitsu-ingest-parsers.md`参照）。検証は
  * **学校×学科×数値の集合として一致するか**で行う。
  *
- * ⚠️**那賀/海部の1件は幾何学的に一意に決定できない既知の曖昧ケース**（ラベル単独行の直前/
- * 直後どちらのデータ行に属するかが位置関係だけでは判定不能）。既存データ側は
- * `tokushima.ts`のヘッダコメントに記録されたWebSearchでの実在学科確認を根拠に確定して
- * いるため、パーサ出力にも同じ根拠で補正を適用する（後述の`applyKnownAmbiguityCorrection`）。
+ * ⚠️2026-09-10訂正: かつてここに「那賀/海部の1件は幾何学的に一意に決定できない曖昧ケースで
+ * WebSearch裏取りにより補正する」という記述があったが、段階台帳17県目調査（独立3資料＋R5〜R7の
+ * 3年度分の一貫した大小関係との突き合わせ）により、**そのWebSearch裏取りの結論自体が誤りで、
+ * パーサの生の幾何学的パース結果（那賀=quota30・海部=quota47）の方が正しかった**と判明した。
+ * `parsers/tokushima.ts`の`applyKnownAmbiguityCorrection`補正は削除し、`competition-rates/
+ * tokushima.ts`側を訂正済み（詳細は同ファイルのヘッダコメント参照）。
  *
  * ⚠️2026-09-06(T-Y11E E-1/E-6): パース本体は`../parsers/tokushima.ts`の`parseTokushima()`へ純関数
  * として抽出済み（レジストリ`registry.ts`から県コード経由で呼べる）。このテストはレジストリ経由でも

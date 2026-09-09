@@ -43,13 +43,20 @@ describe('徳島県 倍率パイプラインα（Y-6・全日制32校69レコー
     expect(distinctSchools.size).toBe(32);
   });
 
-  it('徳島科学技術は6学科・阿南光は4学科（機械ロボットシステム/電気情報システム/都市環境システム/産業創造）・海部は3学科（普通/情報ビジネス/数理科学）が正しく収録されている（掛-1着手時に判明した2件の学校名誤帰属を訂正済み）', () => {
+  it('徳島科学技術は6学科・阿南光は4学科（機械ロボットシステム/電気情報システム/都市環境システム/産業創造）・海部は3学科（普通/情報ビジネス/数理科学）が正しく収録されている（掛-1着手時に判明した2件＋段階台帳17県目調査時に判明した1件、計3件の学校名誤帰属を訂正済み）', () => {
     expect(r8.filter((r) => r.schoolName === '徳島科学技術')).toHaveLength(6);
     expect(r8.filter((r) => r.schoolName === '阿南光')).toHaveLength(4);
     expect(r8.find((r) => r.schoolName === '阿南光' && r.department === '普通')).toBeUndefined();
     expect(r8.filter((r) => r.schoolName === '海部')).toHaveLength(3);
     expect(r8.find((r) => r.schoolName === '海部' && r.department === '普通')).toEqual({
       schoolName: '海部',
+      department: '普通',
+      quota: 47,
+      finalApplicants: 43,
+      finalRate: 0.91,
+    });
+    expect(r8.find((r) => r.schoolName === '那賀' && r.department === '普通')).toEqual({
+      schoolName: '那賀',
       department: '普通',
       quota: 30,
       finalApplicants: 25,

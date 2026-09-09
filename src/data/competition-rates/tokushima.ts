@@ -23,6 +23,14 @@
  * 学科数の突合からも裏付けられる）と判明し訂正した。学校名の帰属のみを修正し、quota/applicants等の
  * 数値・機械集計の合計は無変更（茨城の那珂湊/海洋・鉾田第一/鉾田第二と同型のバグパターンが3件目）。
  *
+ * ⚠️罠3（訂正済み・T-Y11F段階台帳16県目=石川着手後、17県目調査時に発見）: 「那賀・普通
+ * （quota47/applicants43）」「海部・普通（quota30/applicants25）」も罠1・罠2と同型の学校名
+ * 誤帰属だった。段階台帳用の受検状況（3/10）・合格状況（3/13）・募集人員（独立第三資料）の3資料
+ * すべてで「那賀=30前後（小規模）・海部=47（中規模）」と一致し、かつR7〜R5の3年度分もすべて
+ * 「那賀=23〜33（小）・海部=48〜50（大）」という一貫した傾向を示していたため、R8のみ数値が
+ * 逆転していたのは転記時の学校名取り違えと判断し訂正した。学校名の帰属のみを修正し、quota・
+ * applicants等の数値・機械集計の合計は無変更（同型バグの4件目）。
+ *
  * 機械集計（quota4,165・applicants4,160・倍率1.00、32校69レコード）が「合計」行と完全一致した
  * （複雑な列帰属判定にもかかわらず初回転記で一致）。定時制課程・学区外出願状況（別紙参考表）は
  * 他県と同じ理由でスコープ外。
@@ -128,8 +136,8 @@ export const TOKUSHIMA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '富岡西', department: '理数', quota: 30, finalApplicants: 18, finalRate: 0.6 },
     { schoolName: '阿南光', department: '産業創造', quota: 64, finalApplicants: 77, finalRate: 1.2 },
     { schoolName: '那賀', department: '森林クリエイト', quota: 13, finalApplicants: 10, finalRate: 0.77 },
-    { schoolName: '那賀', department: '普通', quota: 47, finalApplicants: 43, finalRate: 0.91 },
-    { schoolName: '海部', department: '普通', quota: 30, finalApplicants: 25, finalRate: 0.83 },
+    { schoolName: '那賀', department: '普通', quota: 30, finalApplicants: 25, finalRate: 0.83 },
+    { schoolName: '海部', department: '普通', quota: 47, finalApplicants: 43, finalRate: 0.91 },
     { schoolName: '海部', department: '情報ビジネス', quota: 18, finalApplicants: 19, finalRate: 1.06 },
     { schoolName: '海部', department: '数理科学', quota: 28, finalApplicants: 22, finalRate: 0.79 },
     { schoolName: '鳴門', department: '普通', quota: 236, finalApplicants: 239, finalRate: 1.01 },
