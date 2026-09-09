@@ -1,11 +1,12 @@
 import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
 
 /**
- * 埼玉県 段階台帳（T-Y11F §5順序#7・2県目パイロット・「全日制 普通科」＋「農業に関する学科」
- * 区分は完全収録）。
+ * 埼玉県 段階台帳（T-Y11F §5順序#7・2県目パイロット・「全日制 普通科」＋「農業に関する学科」＋
+ * 「工業に関する学科」の3区分は完全収録）。
  *
  * 一次ソース: 埼玉県教育委員会「令和8年度埼玉県公立高等学校入学者選抜における入学許可候補者数・
- * 欠員補充人員（令和8年3月6日現在）」（全10頁）1〜2頁目「全日制 普通科」（102レコード）。
+ * 欠員補充人員（令和8年3月6日現在）」（全10頁）1〜4頁目「全日制 普通科」（102レコード）＋
+ * 「農業に関する学科」（18レコード）＋「工業に関する学科」（45レコード）。
  * https://www.pref.saitama.lg.jp/documents/268192/r8nyugakukyokakouhosya0306_4.pdf
  *
  * ⚠️既存の`competition-rates/saitama.ts`（倍率パイプライン）は**別の一次資料**（「令和8年度
@@ -65,6 +66,19 @@ import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
  * ⚠️越生翔桜（quota118・applicants51）はtestTakersConfirmed(51)<finalPassers(59)という、
  * chibaで頻出した逆転パターンがsaitamaでも確認された（欠員補充等の推測は留め、印字値の
  * まま転記）。
+ *
+ * 4頁目「全日制 専門学科　工業に関する学科」（大宮科学技術・春日部工業・川口工業・川越工業・
+ * 久喜工業・熊谷工業・越谷総合技術・児玉・狭山工業・進修館・秩父農工科学・新座総合技術・
+ * 三郷工業技術の13校45レコード）も追加し、頁末尾の「工業科 計」（quota2,343・
+ * testTakersConfirmed1,967・finalPassers1,959）と45レコード全数の機械集計が完全一致した
+ * （quota/testTakersConfirmed/finalPassersの3系列とも1つのズレもなく一致——45レコードという
+ * 規模でも二段検証を素通りしたのは、直前の羽生実業の教訓を踏まえて今回はapplicantsConfirmedを
+ * 転記する前に必ず既存`competition-rates/saitama.ts`側の値を機械的に引いてから埋めたため）。
+ * 大宮科学技術の「情報サイエンス科」・越谷総合技術/秩父農工科学/進修館/新座総合技術の
+ * 商業・家庭・総合学科系の学科は、既存パイプラインには存在するがこの資料の4頁目には
+ * 現れない——**別の学科区分（商業に関する学科・家庭に関する学科・総合学科等）の頁に
+ * 掲載されているはずで、本ファイルの対象外**（誤って欠落したわけではないことを既存
+ * パイプラインとの突合で確認済み）。
  */
 
 export const SAITAMA_STAGE_LEDGER: PrefectureStageLedgerFile = {
@@ -72,16 +86,20 @@ export const SAITAMA_STAGE_LEDGER: PrefectureStageLedgerFile = {
   sources: [
     {
       url: 'https://www.pref.saitama.lg.jp/documents/268192/r8nyugakukyokakouhosya0306_4.pdf',
-      docTitle: '埼玉県教育委員会 令和8年度埼玉県公立高等学校入学者選抜における入学許可候補者数・欠員補充人員（令和8年3月6日現在）1〜3頁目（全日制 普通科＋農業に関する学科）',
+      docTitle: '埼玉県教育委員会 令和8年度埼玉県公立高等学校入学者選抜における入学許可候補者数・欠員補充人員（令和8年3月6日現在）1〜4頁目（全日制 普通科＋農業に関する学科＋工業に関する学科）',
       fiscalYear: '令和8年度（2026年度）',
       fetchedAt: '2026-09-09',
     },
   ],
   coverage: {
     status: 'complete',
-    includedDepartments: ['全日制普通科（1〜2頁目・102レコード）', '農業に関する学科（3頁目・18レコード）'],
-    pendingDepartments: ['工業・商業等の専門学科（4頁目以降）', '総合学科'],
-    note: '「全日制 普通科」「農業に関する学科」の2区分を完全収録。「普通科 計」（quota25,517/testTakersConfirmed27,593/finalPassers24,556）・「農業科 計」（quota797/testTakersConfirmed633/finalPassers633）といずれも機械集計が完全一致。quota/applicantsConfirmedは既存competition-rates/saitama.ts（同一quotaを別資料で確認済み）を再利用し、testTakersConfirmed/finalPassersのみ本資料から新規転記。',
+    includedDepartments: [
+      '全日制普通科（1〜2頁目・102レコード）',
+      '農業に関する学科（3頁目・18レコード）',
+      '工業に関する学科（4頁目・45レコード）',
+    ],
+    pendingDepartments: ['商業・家庭等の専門学科（5頁目以降）', '総合学科'],
+    note: '「全日制 普通科」「農業に関する学科」「工業に関する学科」の3区分を完全収録。「普通科 計」（quota25,517/testTakersConfirmed27,593/finalPassers24,556）・「農業科 計」（quota797/testTakersConfirmed633/finalPassers633）・「工業科 計」（quota2,343/testTakersConfirmed1,967/finalPassers1,959）といずれも機械集計が完全一致。quota/applicantsConfirmedは既存competition-rates/saitama.ts（同一quotaを別資料で確認済み）を再利用し、testTakersConfirmed/finalPassersのみ本資料から新規転記。',
   },
   records: [
     { schoolName: '上尾', department: '普通科', quota: 238, applicantsConfirmed: 316, testTakersConfirmed: 315, finalPassers: 244 },
@@ -206,6 +224,52 @@ export const SAITAMA_STAGE_LEDGER: PrefectureStageLedgerFile = {
     { schoolName: '鳩ケ谷', department: '園芸デザイン科', quota: 40, applicantsConfirmed: 36, testTakersConfirmed: 36, finalPassers: 38 },
     { schoolName: '羽生実業', department: '園芸科', quota: 40, applicantsConfirmed: 24, testTakersConfirmed: 24, finalPassers: 24 },
     { schoolName: '羽生実業', department: '農業経済科', quota: 40, applicantsConfirmed: 24, testTakersConfirmed: 23, finalPassers: 23 },
+    // --- 4頁目「全日制 専門学科」工業に関する学科（13校45レコード） ---
+    { schoolName: '大宮科学技術', department: '機械工学科', quota: 80, applicantsConfirmed: 62, testTakersConfirmed: 61, finalPassers: 65 },
+    { schoolName: '大宮科学技術', department: '電気工学科', quota: 40, applicantsConfirmed: 23, testTakersConfirmed: 22, finalPassers: 23 },
+    { schoolName: '大宮科学技術', department: 'ロボット工学科', quota: 39, applicantsConfirmed: 23, testTakersConfirmed: 23, finalPassers: 28 },
+    { schoolName: '大宮科学技術', department: '建築デザイン工学科', quota: 79, applicantsConfirmed: 61, testTakersConfirmed: 61, finalPassers: 63 },
+    { schoolName: '春日部工業', department: '機械科', quota: 79, applicantsConfirmed: 78, testTakersConfirmed: 78, finalPassers: 78 },
+    { schoolName: '春日部工業', department: '電気科', quota: 79, applicantsConfirmed: 77, testTakersConfirmed: 77, finalPassers: 77 },
+    { schoolName: '春日部工業', department: '建築科', quota: 80, applicantsConfirmed: 69, testTakersConfirmed: 69, finalPassers: 69 },
+    { schoolName: '川口工業', department: '機械科', quota: 80, applicantsConfirmed: 82, testTakersConfirmed: 82, finalPassers: 80 },
+    { schoolName: '川口工業', department: '電気科', quota: 79, applicantsConfirmed: 84, testTakersConfirmed: 84, finalPassers: 79 },
+    { schoolName: '川口工業', department: '情報通信科', quota: 79, applicantsConfirmed: 81, testTakersConfirmed: 81, finalPassers: 79 },
+    { schoolName: '川越工業', department: 'デザイン科', quota: 40, applicantsConfirmed: 43, testTakersConfirmed: 43, finalPassers: 40 },
+    { schoolName: '川越工業', department: '機械科', quota: 79, applicantsConfirmed: 78, testTakersConfirmed: 77, finalPassers: 79 },
+    { schoolName: '川越工業', department: '電気科', quota: 40, applicantsConfirmed: 42, testTakersConfirmed: 41, finalPassers: 40 },
+    { schoolName: '川越工業', department: '建築科', quota: 40, applicantsConfirmed: 44, testTakersConfirmed: 44, finalPassers: 40 },
+    { schoolName: '川越工業', department: '化学科', quota: 79, applicantsConfirmed: 72, testTakersConfirmed: 72, finalPassers: 75 },
+    { schoolName: '久喜工業', department: '機械科', quota: 80, applicantsConfirmed: 82, testTakersConfirmed: 82, finalPassers: 80 },
+    { schoolName: '久喜工業', department: '電気科', quota: 39, applicantsConfirmed: 30, testTakersConfirmed: 30, finalPassers: 32 },
+    { schoolName: '久喜工業', department: '工業化学科', quota: 40, applicantsConfirmed: 27, testTakersConfirmed: 27, finalPassers: 27 },
+    { schoolName: '久喜工業', department: '環境科学科', quota: 40, applicantsConfirmed: 9, testTakersConfirmed: 9, finalPassers: 9 },
+    { schoolName: '久喜工業', department: '情報技術科', quota: 40, applicantsConfirmed: 42, testTakersConfirmed: 42, finalPassers: 40 },
+    { schoolName: '熊谷工業', department: '機械科', quota: 79, applicantsConfirmed: 70, testTakersConfirmed: 70, finalPassers: 71 },
+    { schoolName: '熊谷工業', department: '電気科', quota: 40, applicantsConfirmed: 39, testTakersConfirmed: 39, finalPassers: 40 },
+    { schoolName: '熊谷工業', department: '建築科', quota: 40, applicantsConfirmed: 41, testTakersConfirmed: 41, finalPassers: 40 },
+    { schoolName: '熊谷工業', department: '土木科', quota: 40, applicantsConfirmed: 31, testTakersConfirmed: 31, finalPassers: 33 },
+    { schoolName: '熊谷工業', department: '情報技術科', quota: 40, applicantsConfirmed: 46, testTakersConfirmed: 46, finalPassers: 40 },
+    { schoolName: '越谷総合技術', department: '電子機械科', quota: 39, applicantsConfirmed: 29, testTakersConfirmed: 29, finalPassers: 29 },
+    { schoolName: '越谷総合技術', department: '情報技術科', quota: 40, applicantsConfirmed: 38, testTakersConfirmed: 37, finalPassers: 37 },
+    { schoolName: '児玉', department: '機械科', quota: 40, applicantsConfirmed: 27, testTakersConfirmed: 27, finalPassers: 27 },
+    { schoolName: '児玉', department: '電子機械科', quota: 40, applicantsConfirmed: 17, testTakersConfirmed: 17, finalPassers: 17 },
+    { schoolName: '狭山工業', department: '機械科', quota: 80, applicantsConfirmed: 61, testTakersConfirmed: 61, finalPassers: 61 },
+    { schoolName: '狭山工業', department: '電気科', quota: 39, applicantsConfirmed: 27, testTakersConfirmed: 27, finalPassers: 27 },
+    { schoolName: '狭山工業', department: '電子機械科', quota: 80, applicantsConfirmed: 46, testTakersConfirmed: 45, finalPassers: 45 },
+    { schoolName: '進修館', department: '電気システム科', quota: 39, applicantsConfirmed: 11, testTakersConfirmed: 11, finalPassers: 11 },
+    { schoolName: '進修館', department: '情報メディア科', quota: 40, applicantsConfirmed: 29, testTakersConfirmed: 29, finalPassers: 29 },
+    { schoolName: '進修館', department: 'ものづくり科', quota: 40, applicantsConfirmed: 29, testTakersConfirmed: 29, finalPassers: 29 },
+    { schoolName: '秩父農工科学', department: '電気システム科', quota: 39, applicantsConfirmed: 27, testTakersConfirmed: 27, finalPassers: 27 },
+    { schoolName: '秩父農工科学', department: '機械システム科', quota: 40, applicantsConfirmed: 32, testTakersConfirmed: 32, finalPassers: 32 },
+    { schoolName: '新座総合技術', department: 'デザイン科', quota: 40, applicantsConfirmed: 48, testTakersConfirmed: 48, finalPassers: 40 },
+    { schoolName: '新座総合技術', department: '電子機械科', quota: 39, applicantsConfirmed: 36, testTakersConfirmed: 36, finalPassers: 39 },
+    { schoolName: '新座総合技術', department: '情報技術科', quota: 40, applicantsConfirmed: 34, testTakersConfirmed: 34, finalPassers: 36 },
+    { schoolName: '三郷工業技術', department: '機械科', quota: 39, applicantsConfirmed: 39, testTakersConfirmed: 39, finalPassers: 39 },
+    { schoolName: '三郷工業技術', department: '電気科', quota: 39, applicantsConfirmed: 32, testTakersConfirmed: 32, finalPassers: 32 },
+    { schoolName: '三郷工業技術', department: '電子機械科', quota: 40, applicantsConfirmed: 20, testTakersConfirmed: 20, finalPassers: 20 },
+    { schoolName: '三郷工業技術', department: '情報技術科', quota: 40, applicantsConfirmed: 21, testTakersConfirmed: 21, finalPassers: 21 },
+    { schoolName: '三郷工業技術', department: '情報電子科', quota: 40, applicantsConfirmed: 34, testTakersConfirmed: 34, finalPassers: 34 },
   ],
   officialSubtotals: [
     // ⚠️applicantsConfirmedはこの資料（3月6日版）には印字されていない（既存パイプライン由来の
@@ -216,5 +280,8 @@ export const SAITAMA_STAGE_LEDGER: PrefectureStageLedgerFile = {
     // からの再利用値（各校finalApplicants）を機械集計した参考値（634）。羽生実業・農業経済科の
     // 実受検者数(23)と偶然ほぼ一致するが別概念（普通科の27,668と同じ扱い）。
     { label: '農業科 計', quota: 797, applicantsConfirmed: 634, testTakersConfirmed: 633, finalPassers: 633 },
+    // applicantsConfirmedはこの資料に印字が無いため、既存competition-rates/saitama.tsからの
+    // 再利用値を機械集計した参考値（1,973）。
+    { label: '工業科 計', quota: 2_343, applicantsConfirmed: 1_973, testTakersConfirmed: 1_967, finalPassers: 1_959 },
   ],
 };
