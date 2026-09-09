@@ -4,7 +4,7 @@ import { COMPETITION_RATE_BY_PREFECTURE } from '@/data/competition-rates';
 
 /**
  * T-Y11F §5順序#7 DoD検証（千葉県・段階台帳・R8は資料全体210レコード完全収録・R7は
- * 掛-1・1〜4頁目140レコード）:
+ * 掛-1・1〜5頁目175レコード）:
  * ①レコードの不変条件（quota>0等）②既存の倍率パイプライン（competition-rates/chiba.ts）の
  * quota/finalApplicantsと、段階台帳のquota/applicantsConfirmedが独立した情報源にも
  * かかわらず一致することを機械的に突合する（相互裏取り・R7/R8とも）③R8公表資料の
@@ -16,10 +16,10 @@ describe('千葉県 段階台帳（T-Y11F §5順序#7・R8は資料全体完全�
   const r8Records = records.filter((r) => r.fiscalYear === undefined);
   const r7Records = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
 
-  it('取り込み件数はR8=210レコード・R7=140レコード（計350レコード）', () => {
+  it('取り込み件数はR8=210レコード・R7=175レコード（計385レコード）', () => {
     expect(r8Records).toHaveLength(210);
-    expect(r7Records).toHaveLength(140);
-    expect(records).toHaveLength(350);
+    expect(r7Records).toHaveLength(175);
+    expect(records).toHaveLength(385);
   });
 
   it('quota/applicantsConfirmed/testTakersConfirmed/finalPassersはいずれも0より大きい（不変条件）', () => {
@@ -125,6 +125,6 @@ describe('千葉県 段階台帳（T-Y11F §5順序#7・R8は資料全体完全�
     }
 
     crossCheck(r8Records, (r) => r.fiscalYear === undefined, 160);
-    crossCheck(r7Records, (r) => r.fiscalYear === '令和7年度（2025年度）', 140);
+    crossCheck(r7Records, (r) => r.fiscalYear === '令和7年度（2025年度）', 175);
   });
 });

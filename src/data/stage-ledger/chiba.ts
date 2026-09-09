@@ -85,6 +85,11 @@ import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
  * 23→26）とさらに多数発見され、3頁目の2件と合わせ計5件に達した——単発の例外ではなく
  * **一定の頻度で起こる構造的な現象**（特別入学者選抜等の別枠合算と推測）と認識を改める。
  * 累計140レコード（R7）。
+ *
+ * 🔁掛-1続き（5頁目・学校番号99〜120・35レコード追加）: R8ページ5と同じ学校構成（九十九里
+ * 〜姉崎の22校35レコード・学校再編0件）。既存`competition-rates/chiba.ts`のR7エントリと
+ * 35/35件で完全一致を確認済み。この頁は逆転パターン（finalPassers>applicantsConfirmed）
+ * 0件・quota超過0件で、5頁のうち初めて異常値の無い頁だった。累計175レコード（R7）。
  */
 
 export const CHIBA_STAGE_LEDGER: PrefectureStageLedgerFile = {
@@ -109,10 +114,10 @@ export const CHIBA_STAGE_LEDGER: PrefectureStageLedgerFile = {
       '県立全日制R8（1〜6頁目・学校番号1〜121・176レコード）',
       '市立全日制R8（7頁目・学校番号市1〜市7・12レコード）',
       '県立定時制R8（8頁目・学校番号定1〜定16・22レコード）',
-      '県立全日制R7（1〜4頁目・学校番号1〜98・140レコード・掛-1）',
+      '県立全日制R7（1〜5頁目・学校番号1〜120・175レコード・掛-1）',
     ],
-    pendingDepartments: ['R7の残り（5〜9頁目）'],
-    note: 'R8は資料全体（一般入学者選抜等・全日制＋定時制・県立＋市立）を完全収録し4段階の公表計と完全一致。R7は1〜4頁目（掛-1・多年度対応の実例・累計140レコード）。',
+    pendingDepartments: ['R7の残り（6〜9頁目）'],
+    note: 'R8は資料全体（一般入学者選抜等・全日制＋定時制・県立＋市立）を完全収録し4段階の公表計と完全一致。R7は1〜5頁目（掛-1・多年度対応の実例・累計175レコード）。',
   },
   records: [
     { schoolName: '千葉', department: '普通科', quota: 240, applicantsConfirmed: 331, testTakersConfirmed: 321, finalPassers: 240 },
@@ -476,6 +481,42 @@ export const CHIBA_STAGE_LEDGER: PrefectureStageLedgerFile = {
     { schoolName: '大網', department: '農業科', quota: 40, applicantsConfirmed: 34, testTakersConfirmed: 34, finalPassers: 33, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '大網', department: '食品科学科', quota: 40, applicantsConfirmed: 38, testTakersConfirmed: 38, finalPassers: 38, fiscalYear: '令和7年度（2025年度）' },
     { schoolName: '大網', department: '生物工学科', quota: 40, applicantsConfirmed: 26, testTakersConfirmed: 26, finalPassers: 26, fiscalYear: '令和7年度（2025年度）' },
+    // --- 5頁目（学校番号99〜120） ---
+    { schoolName: '九十九里', department: '普通科', quota: 120, applicantsConfirmed: 26, testTakersConfirmed: 26, finalPassers: 26, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '長生', department: '普通科・理数科', quota: 280, applicantsConfirmed: 345, testTakersConfirmed: 342, finalPassers: 280, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '茂原', department: '普通科', quota: 160, applicantsConfirmed: 187, testTakersConfirmed: 187, finalPassers: 160, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '茂原樟陽', department: '農業科', quota: 40, applicantsConfirmed: 37, testTakersConfirmed: 37, finalPassers: 37, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '茂原樟陽', department: '食品科学科', quota: 40, applicantsConfirmed: 36, testTakersConfirmed: 36, finalPassers: 36, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '茂原樟陽', department: '土木造園科', quota: 40, applicantsConfirmed: 35, testTakersConfirmed: 35, finalPassers: 35, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '茂原樟陽', department: '電子機械科', quota: 40, applicantsConfirmed: 32, testTakersConfirmed: 32, finalPassers: 32, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '茂原樟陽', department: '電気科', quota: 40, applicantsConfirmed: 18, testTakersConfirmed: 18, finalPassers: 18, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '茂原樟陽', department: '環境化学科', quota: 40, applicantsConfirmed: 19, testTakersConfirmed: 19, finalPassers: 19, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '一宮商業', department: '商業科・情報処理科', quota: 120, applicantsConfirmed: 122, testTakersConfirmed: 122, finalPassers: 120, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '大多喜', department: '普通科', quota: 160, applicantsConfirmed: 133, testTakersConfirmed: 133, finalPassers: 133, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '大原', department: '総合学科', quota: 160, applicantsConfirmed: 103, testTakersConfirmed: 102, finalPassers: 102, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '長狭', department: '普通科', quota: 160, applicantsConfirmed: 113, testTakersConfirmed: 113, finalPassers: 113, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '安房拓心', department: '総合学科', quota: 120, applicantsConfirmed: 101, testTakersConfirmed: 101, finalPassers: 101, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '安房', department: '普通科', quota: 240, applicantsConfirmed: 253, testTakersConfirmed: 251, finalPassers: 240, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '館山総合', department: '工業科', quota: 40, applicantsConfirmed: 14, testTakersConfirmed: 14, finalPassers: 14, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '館山総合', department: '商業科', quota: 40, applicantsConfirmed: 13, testTakersConfirmed: 13, finalPassers: 13, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '館山総合', department: '海洋科', quota: 40, applicantsConfirmed: 12, testTakersConfirmed: 12, finalPassers: 12, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '館山総合', department: '家政科', quota: 40, applicantsConfirmed: 14, testTakersConfirmed: 14, finalPassers: 14, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '天羽', department: '普通科', quota: 120, applicantsConfirmed: 48, testTakersConfirmed: 47, finalPassers: 47, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '君津商業', department: '商業科・情報処理科', quota: 160, applicantsConfirmed: 151, testTakersConfirmed: 151, finalPassers: 151, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '木更津', department: '普通科', quota: 280, applicantsConfirmed: 356, testTakersConfirmed: 355, finalPassers: 280, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '木更津', department: '理数科', quota: 40, applicantsConfirmed: 62, testTakersConfirmed: 56, finalPassers: 40, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '木更津東', department: '普通科', quota: 120, applicantsConfirmed: 139, testTakersConfirmed: 137, finalPassers: 120, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '木更津東', department: '家政科', quota: 40, applicantsConfirmed: 46, testTakersConfirmed: 46, finalPassers: 40, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '君津', department: '普通科', quota: 240, applicantsConfirmed: 245, testTakersConfirmed: 239, finalPassers: 239, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '君津', department: '園芸科', quota: 40, applicantsConfirmed: 42, testTakersConfirmed: 42, finalPassers: 40, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '君津青葉', department: '総合学科', quota: 120, applicantsConfirmed: 77, testTakersConfirmed: 76, finalPassers: 76, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '袖ヶ浦', department: '普通科', quota: 240, applicantsConfirmed: 262, testTakersConfirmed: 259, finalPassers: 240, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '袖ヶ浦', department: '情報コミュニケーション科', quota: 40, applicantsConfirmed: 33, testTakersConfirmed: 32, finalPassers: 40, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '市原', department: '普通科', quota: 80, applicantsConfirmed: 48, testTakersConfirmed: 47, finalPassers: 46, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '市原', department: '園芸科', quota: 40, applicantsConfirmed: 19, testTakersConfirmed: 19, finalPassers: 18, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '京葉', department: '普通科', quota: 120, applicantsConfirmed: 131, testTakersConfirmed: 131, finalPassers: 120, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '市原緑', department: '普通科', quota: 120, applicantsConfirmed: 107, testTakersConfirmed: 107, finalPassers: 107, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '姉崎', department: '普通科', quota: 120, applicantsConfirmed: 165, testTakersConfirmed: 165, finalPassers: 120, fiscalYear: '令和7年度（2025年度）' },
   ],
   officialSubtotals: [
     { label: '県立全日制 合計', quota: 26_960, applicantsConfirmed: 29_594, testTakersConfirmed: 29_359, finalPassers: 25_085 },
