@@ -14,6 +14,7 @@ import { TOKYO_STAGE_LEDGER } from './tokyo';
 import { OSAKA_STAGE_LEDGER } from './osaka';
 import { SHIZUOKA_STAGE_LEDGER } from './shizuoka';
 import { NIIGATA_STAGE_LEDGER } from './niigata';
+import { MIE_STAGE_LEDGER } from './mie';
 
 export const STAGE_LEDGER_BY_PREFECTURE: Partial<Record<string, PrefectureStageLedgerFile>> = {
   chiba: CHIBA_STAGE_LEDGER,
@@ -26,6 +27,7 @@ export const STAGE_LEDGER_BY_PREFECTURE: Partial<Record<string, PrefectureStageL
   osaka: OSAKA_STAGE_LEDGER,
   shizuoka: SHIZUOKA_STAGE_LEDGER,
   niigata: NIIGATA_STAGE_LEDGER,
+  mie: MIE_STAGE_LEDGER,
 };
 
 export const STAGE_LEDGER_FILES: PrefectureStageLedgerFile[] = Object.values(
