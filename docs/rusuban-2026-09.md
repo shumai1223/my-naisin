@@ -5,20 +5,22 @@
 
 ---
 
-最終更新              2026-09-10 00:2x
-いまやっていること     T-Y11F §5順序#7（段階台帳）16県目=ishikawa 70件で完結・次は17県目選定
-今日やったこと         段階台帳4県新規完結(kagoshima引き継ぎ+shiga+tottori+kumamoto+ishikawa)。
-                      kumamotoは資料が学校単位集計のみと判明し段階台帳で初めての粒度変更
-                      (department固定ラベル)。tottori/ishikawaは異なる資料の時点差
-                      (追検査・志願変更)による数値のズレを発見し、強制一致でなく資料内3系列の
-                      自己整合性で正確性を担保する設計に切替。gifu/hiroshima/fukuoka/okayama/
-                      ehime/nagasaki/toyamaの7県はpost-exam学校別資料が無く見送り。
-                      段階台帳16県完結=累計2,337件(千葉420+saitama241+栃木107+茨城149+
+最終更新              2026-09-10 01:2x
+いまやっていること     T-Y11F §5順序#7（段階台帳）19県目=yamagata 90件で完結・次は20県目選定
+今日やったこと         段階台帳7県新規完結(ishikawa+tokushima+wakayama+yamagata、9/9分の
+                      kagoshima/shiga/tottori/kumamotoと合わせ日をまたいで7県)。tokushimaの
+                      調査で既存倍率パイプラインの実データバグ(那賀・海部の学校名取り違え)を
+                      発見・修正(パーサのapplyKnownAmbiguityCorrectionが誤補正の真因だった)。
+                      yamagataは既存パイプラインと集計定義が別物と判明し意図的に非依存の
+                      独立収録に設計変更。wakayamaでは400dpi再クロップにより2件の転記ミスを
+                      グランドトータル突合で発見・修正。
+                      段階台帳19県完結=累計2,553件(千葉420+saitama241+栃木107+茨城149+
                       長野129+神奈川184+東京197+大阪165+静岡162+新潟93+三重108+鹿児島156
-                      +滋賀61+鳥取43+熊本52+石川70)
-在庫の残り            対象県はまだ31県残っているが、post-exam学校別資料が無い県が一定数
-                      存在すると判明(直近7県中7県が見送り)。候補選定の律速が上がっている
-払底の見込み           在庫不足ではなく「資料が無い」県の比率上昇が新たなリスク。要観察
-詰まっていること        aichi（Imperva WAF一時ブロックが継続中）。gifu/hiroshima/fukuoka/
-                      okayama/ehime/nagasaki/toyamaはpost-exam学校別資料が未発見
+                      +滋賀61+鳥取43+熊本52+石川70+徳島69+和歌山57+山形90)
+在庫の残り            対象県は28県残る。post-exam学校別資料が無い県も一定数あるが
+                      (gifu/hiroshima/fukuoka/okayama/ehime/nagasaki/toyama/kagawa/hyogo/
+                      nara/yamanashi見送り)、既存パイプラインと定義が違う場合は独立収録で
+                      対応できる設計も確立した
+払底の見込み           在庫不足の兆候なし。候補選定コストは上昇傾向だが対応手法は確立済み
+詰まっていること        aichi（Imperva WAF一時ブロックが継続中）。nara(403エラー)は要再挑戦
 👤の判断が要るもの      #5成果物・#6仕様書とも対外提示可否・価格は👤判断待ち（送信0件）
