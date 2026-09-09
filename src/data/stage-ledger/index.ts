@@ -22,6 +22,7 @@ import { KUMAMOTO_STAGE_LEDGER } from './kumamoto';
 import { ISHIKAWA_STAGE_LEDGER } from './ishikawa';
 import { TOKUSHIMA_STAGE_LEDGER } from './tokushima';
 import { WAKAYAMA_STAGE_LEDGER } from './wakayama';
+import { YAMAGATA_STAGE_LEDGER } from './yamagata';
 
 export const STAGE_LEDGER_BY_PREFECTURE: Partial<Record<string, PrefectureStageLedgerFile>> = {
   chiba: CHIBA_STAGE_LEDGER,
@@ -42,6 +43,7 @@ export const STAGE_LEDGER_BY_PREFECTURE: Partial<Record<string, PrefectureStageL
   ishikawa: ISHIKAWA_STAGE_LEDGER,
   tokushima: TOKUSHIMA_STAGE_LEDGER,
   wakayama: WAKAYAMA_STAGE_LEDGER,
+  yamagata: YAMAGATA_STAGE_LEDGER,
 };
 
 export const STAGE_LEDGER_FILES: PrefectureStageLedgerFile[] = Object.values(
