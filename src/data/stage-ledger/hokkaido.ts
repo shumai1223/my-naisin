@@ -3,7 +3,7 @@ import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
 /**
  * 北海道 段階台帳（T-Y11F §5順序#7・28県目・全日制coverage='partial'・空知29＋石狩57＋
  * 市立札幌9＋後志18＋胆振27＋日高7＋渡島29（普通10＋専門/総合19）＋檜山4＋上川37＋留萌7＋
- * 宗谷8＋オホーツク31＝263レコードで着手）。
+ * 宗谷8＋オホーツク31＋十勝28＝291レコードで着手）。
  *
  * 一次ソース: 北海道教育委員会「R8入学者選抜状況報告書 §3 学校別受検者数及び合格者数」
  * （令和8年度＝2026年度入学者選抜・全14頁・管内ごとに1頁）。
@@ -94,6 +94,13 @@ import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
  * 「普通」「商業」・北見工業「電気」・置戸「福祉」はいずれも+1〜+2）。湧別「普通」には道立
  * 高校枠とは別に「連携型」選抜（募集人員80・受検24・合格24）が併記されているが、既出の
  * 鵡川・えりも・上川と同じ理由で恒久的にスコープ外とした（4例目）。
+ *
+ * ⚠️十勝地区追加分（28レコード・普通12＋専門/総合16で完結）で新たな例外4件: 更別農業「農業」・
+ * 池田「総合」は第2次募集の新規応募者型（+1）。帯広工業「電気」（合格40>受検36・+4）・
+ * 帯広工業「建築」（合格37>受検34・+3）は追加合格者型。鹿追「普通」・広尾「普通」には道立
+ * 高校枠とは別に「連携型」選抜（鹿追: 募集人員80・受検20・合格20／広尾: 募集人員40・
+ * 受検27・合格27）が併記されているが、既出の同型4件と同じ理由で恒久的にスコープ外とした
+ * （5・6例目）。
  */
 export const HOKKAIDO_STAGE_LEDGER: PrefectureStageLedgerFile = {
   prefectureCode: 'hokkaido',
@@ -158,6 +165,12 @@ export const HOKKAIDO_STAGE_LEDGER: PrefectureStageLedgerFile = {
       fiscalYear: '令和8年度（2026年度）',
       fetchedAt: '2026-09-10',
     },
+    {
+      url: 'https://www.dokyoi.pref.hokkaido.lg.jp/fs/1/3/1/7/8/5/5/0/_/05_p9-p22.pdf',
+      docTitle: '北海道教育委員会 R8入学者選抜状況報告書「§3 学校別受検者数及び合格者数」（p.20・十勝地区）',
+      fiscalYear: '令和8年度（2026年度）',
+      fetchedAt: '2026-09-10',
+    },
   ],
   coverage: {
     status: 'partial',
@@ -174,16 +187,16 @@ export const HOKKAIDO_STAGE_LEDGER: PrefectureStageLedgerFile = {
       '全日制・留萌地区（普通教育を主とする学科3レコード＋専門教育を主とする学科4レコード＝7レコードで完結）',
       '全日制・宗谷地区（普通教育を主とする学科6レコード＋専門教育を主とする学科2レコード＝8レコードで完結）',
       '全日制・オホーツク地区（普通教育を主とする学科16レコード＋専門教育を主とする学科及び総合学科15レコード＝31レコードで完結）',
+      '全日制・十勝地区（普通教育を主とする学科12レコード＋専門教育を主とする学科及び総合学科16レコード＝28レコードで完結）',
     ],
     pendingDepartments: [
-      '全日制・十勝地区',
       '全日制・釧路地区',
       '全日制・根室地区',
       '滝川西「情報マネジメント」（既存パイプラインが検算不能のため見送った1行・本ファイルも同じ理由でスコープ外）',
-      '鵡川「連携型」・えりも「連携型」・上川「連携型」・湧別「連携型」（募集人員のみでapplicantsConfirmed相当の出願者数列を持たない別スキーマのため恒久的にスコープ外）',
+      '鵡川「連携型」・えりも「連携型」・上川「連携型」・湧別「連携型」・鹿追「連携型」・広尾「連携型」（募集人員のみでapplicantsConfirmed相当の出願者数列を持たない別スキーマのため恒久的にスコープ外）',
       '定時制課程（他県と同じ理由で恒久的にスコープ外）',
     ],
-    note: '全14管内のうち空知（29）＋石狩・道立のみ（57）＋市立札幌（9）＋後志（18）＋胆振（27）＋日高（7）＋渡島（29・完結）＋檜山（4・完結）＋上川（37・完結）＋留萌（7・完結）＋宗谷（8・完結）＋オホーツク（31・完結）＝263レコードに着手。quota・applicantsConfirmedは既存パイプライン`competition-rates/hokkaido.ts`の該当レコードをそのまま再利用し、testTakersConfirmed（第1次受検者数＋第2次受検者数）・finalPassers（入学者数＝第1次合格者数＋第2次合格者数）を「§3学校別受検者数及び合格者数」p.9-19から新規転記した。推薦枠は一般枠と完全に独立したクオータ（秋田のような推薦落選者の一般転入は無い）のためスコープ外。既知の例外42件（第2次募集による新規応募者分でtestTakersConfirmedがapplicantsConfirmedを上回る32件、追加合格者と推測されるfinalPassers>testTakersConfirmed10件）はいずれも小差（最大+6）。市立札幌9件・日高7件・渡島普通10件・檜山4件は例外0件のクリーンな区分だった。連携型（鵡川・えりも・上川・湧別）は募集人員のみの別スキーマのため恒久的にスコープ外。本資料はさらに3管内分（十勝/釧路/根室）を残しており、既存パイプラインと同じく段階的に追加する。',
+    note: '全14管内のうち空知（29）＋石狩・道立のみ（57）＋市立札幌（9）＋後志（18）＋胆振（27）＋日高（7）＋渡島（29・完結）＋檜山（4・完結）＋上川（37・完結）＋留萌（7・完結）＋宗谷（8・完結）＋オホーツク（31・完結）＋十勝（28・完結）＝291レコードに着手。quota・applicantsConfirmedは既存パイプライン`competition-rates/hokkaido.ts`の該当レコードをそのまま再利用し、testTakersConfirmed（第1次受検者数＋第2次受検者数）・finalPassers（入学者数＝第1次合格者数＋第2次合格者数）を「§3学校別受検者数及び合格者数」p.9-20から新規転記した。推薦枠は一般枠と完全に独立したクオータ（秋田のような推薦落選者の一般転入は無い）のためスコープ外。既知の例外46件（第2次募集による新規応募者分でtestTakersConfirmedがapplicantsConfirmedを上回る34件、追加合格者と推測されるfinalPassers>testTakersConfirmed12件）はいずれも小差（最大+6）。市立札幌9件・日高7件・渡島普通10件・檜山4件は例外0件のクリーンな区分だった。連携型（鵡川・えりも・上川・湧別・鹿追・広尾）は募集人員のみの別スキーマのため恒久的にスコープ外。本資料はさらに2管内分（釧路/根室）を残しており、既存パイプラインと同じく段階的に追加する。',
   },
   records: [
     { schoolName: '岩見沢東', department: '普通', quota: 160, applicantsConfirmed: 134, testTakersConfirmed: 130, finalPassers: 128 },
@@ -449,5 +462,33 @@ export const HOKKAIDO_STAGE_LEDGER: PrefectureStageLedgerFile = {
     { schoolName: '置戸', department: '福祉', quota: 40, applicantsConfirmed: 25, testTakersConfirmed: 27, finalPassers: 27 },
     { schoolName: '斜里', department: '総合', quota: 40, applicantsConfirmed: 9, testTakersConfirmed: 8, finalPassers: 8 },
     { schoolName: '大空', department: '総合', quota: 36, applicantsConfirmed: 45, testTakersConfirmed: 45, finalPassers: 36 },
+    { schoolName: '帯広柏葉', department: '普通', quota: 240, applicantsConfirmed: 280, testTakersConfirmed: 273, finalPassers: 240 },
+    { schoolName: '帯広三条', department: '普通', quota: 240, applicantsConfirmed: 263, testTakersConfirmed: 250, finalPassers: 240 },
+    { schoolName: '帯広緑陽', department: '普通', quota: 160, applicantsConfirmed: 195, testTakersConfirmed: 175, finalPassers: 160 },
+    { schoolName: '音更', department: '普通', quota: 120, applicantsConfirmed: 60, testTakersConfirmed: 56, finalPassers: 50 },
+    { schoolName: '上士幌', department: '普通', quota: 80, applicantsConfirmed: 60, testTakersConfirmed: 59, finalPassers: 57 },
+    { schoolName: '芽室', department: '普通', quota: 160, applicantsConfirmed: 218, testTakersConfirmed: 163, finalPassers: 147 },
+    { schoolName: '幕別清陵', department: '普通', quota: 120, applicantsConfirmed: 112, testTakersConfirmed: 101, finalPassers: 85 },
+    { schoolName: '鹿追', department: '普通', quota: 80, applicantsConfirmed: 50, testTakersConfirmed: 46, finalPassers: 45 },
+    { schoolName: '大樹', department: '地域探究', quota: 40, applicantsConfirmed: 19, testTakersConfirmed: 17, finalPassers: 17 },
+    { schoolName: '広尾', department: '普通', quota: 40, applicantsConfirmed: 27, testTakersConfirmed: 27, finalPassers: 27 },
+    { schoolName: '本別', department: '普通', quota: 40, applicantsConfirmed: 32, testTakersConfirmed: 31, finalPassers: 31 },
+    { schoolName: '足寄', department: '普通', quota: 80, applicantsConfirmed: 46, testTakersConfirmed: 45, finalPassers: 45 },
+    { schoolName: '帯広農業', department: '農業科学', quota: 40, applicantsConfirmed: 35, testTakersConfirmed: 33, finalPassers: 31 },
+    { schoolName: '帯広農業', department: '酪農科学', quota: 40, applicantsConfirmed: 40, testTakersConfirmed: 40, finalPassers: 37 },
+    { schoolName: '帯広農業', department: '食品科学', quota: 40, applicantsConfirmed: 41, testTakersConfirmed: 38, finalPassers: 38 },
+    { schoolName: '帯広農業', department: '農業土木工学', quota: 40, applicantsConfirmed: 42, testTakersConfirmed: 41, finalPassers: 39 },
+    { schoolName: '帯広農業', department: '森林科学', quota: 40, applicantsConfirmed: 40, testTakersConfirmed: 38, finalPassers: 38 },
+    { schoolName: '更別農業', department: '農業', quota: 40, applicantsConfirmed: 26, testTakersConfirmed: 27, finalPassers: 27 },
+    { schoolName: '更別農業', department: '生活科学', quota: 40, applicantsConfirmed: 6, testTakersConfirmed: 6, finalPassers: 6 },
+    { schoolName: '士幌', department: 'アグリビジネス', quota: 40, applicantsConfirmed: 13, testTakersConfirmed: 13, finalPassers: 13 },
+    { schoolName: '士幌', department: 'フードシステム', quota: 40, applicantsConfirmed: 26, testTakersConfirmed: 25, finalPassers: 24 },
+    { schoolName: '帯広工業', department: '電子機械', quota: 40, applicantsConfirmed: 49, testTakersConfirmed: 45, finalPassers: 40 },
+    { schoolName: '帯広工業', department: '電気', quota: 40, applicantsConfirmed: 40, testTakersConfirmed: 36, finalPassers: 40 },
+    { schoolName: '帯広工業', department: '建築', quota: 40, applicantsConfirmed: 45, testTakersConfirmed: 34, finalPassers: 37 },
+    { schoolName: '帯広工業', department: '環境土木', quota: 40, applicantsConfirmed: 51, testTakersConfirmed: 45, finalPassers: 40 },
+    { schoolName: '帯広南商業', department: '商業', quota: 200, applicantsConfirmed: 246, testTakersConfirmed: 218, finalPassers: 200 },
+    { schoolName: '清水', department: '総合', quota: 120, applicantsConfirmed: 63, testTakersConfirmed: 62, finalPassers: 58 },
+    { schoolName: '池田', department: '総合', quota: 40, applicantsConfirmed: 35, testTakersConfirmed: 36, finalPassers: 33 },
   ],
 };
