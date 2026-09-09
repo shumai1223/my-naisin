@@ -1,22 +1,24 @@
 import { sumStageLedger } from '@/lib/stage-ledger';
 import { TOKYO_STAGE_LEDGER } from '../tokyo';
 import { COMPETITION_RATE_BY_PREFECTURE } from '@/data/competition-rates';
+import { TEIJI_COMPETITION_RATE_BY_PREFECTURE } from '@/data/teiji-competition-rates';
 
 /**
- * T-Y11F §5順序#7 DoD検証（東京都・段階台帳7県目・182レコード=「普通科」系123＋商業7＋
+ * T-Y11F §5順序#7 DoD検証（東京都・段階台帳7県目・189レコード=「普通科」系123＋商業7＋
  * ビジネスコミュ2＋工業16＋科学技術2＋農業5＋水産1＋家庭単位制以外3＋家庭単位制1＋福祉2＋
- * 理数2＋芸術1＋体育2＋併合科3＋産業科2＋総合学科10）: ①レコードの不変条件（quota>0等）
- * ②既存の倍率パイプライン（competition-rates/tokyo.ts）のquota・applicantsConfirmedと
- * 段階台帳が全件完全一致すること（本資料には志願者数列が存在しないため両方とも既存パイプ
- * ラインを再利用する設計）③finalPassers>quotaが普通科系では極めて高頻度（推薦選抜の未消化
- * 枠繰り上げが原因と推測）のため他県のような個別例外列挙はせず、代わりにfinalPassers<=
- * applicantsConfirmedの逆側の不変条件のみ検証する④公式小計（23段階）との完全一致。
+ * 理数2＋芸術1＋体育2＋併合科3＋産業科2＋総合学科10＋定時制課程単位制7）: ①レコードの不変
+ * 条件（quota>0等）②既存の倍率パイプライン（普通科〜総合学科はcompetition-rates/tokyo.ts、
+ * 定時制課程はteiji-competition-rates/tokyo.ts）のquota・applicantsConfirmedと段階台帳が
+ * 全件完全一致すること（本資料には志願者数列が存在しないため両方とも既存パイプラインを再利用
+ * する設計）③finalPassers>quotaが普通科系では極めて高頻度（推薦選抜の未消化枠繰り上げが
+ * 原因と推測）のため他県のような個別例外列挙はせず、代わりにfinalPassers<=applicants
+ * Confirmedの逆側の不変条件のみ検証する④公式小計（24段階）との完全一致。
  */
-describe('東京都 段階台帳（T-Y11F §5順序#7・7県目・182レコード）', () => {
+describe('東京都 段階台帳（T-Y11F §5順序#7・7県目・189レコード）', () => {
   const { records, officialSubtotals } = TOKYO_STAGE_LEDGER;
 
-  it('取り込み件数は182レコード（普通科系123＋商業7＋ビジネスコミュ2＋工業16＋科学技術2＋農業5＋水産1＋家庭単位制以外3＋家庭単位制1＋福祉2＋理数2＋芸術1＋体育2＋併合科3＋産業科2＋総合学科10）', () => {
-    expect(records).toHaveLength(182);
+  it('取り込み件数は189レコード（普通科系123＋商業7＋ビジネスコミュ2＋工業16＋科学技術2＋農業5＋水産1＋家庭単位制以外3＋家庭単位制1＋福祉2＋理数2＋芸術1＋体育2＋併合科3＋産業科2＋総合学科10＋定時制課程単位制7）', () => {
+    expect(records).toHaveLength(189);
   });
 
   it('quota/applicantsConfirmed/testTakersConfirmed/finalPassersはいずれも0より大きい（不変条件）', () => {
@@ -28,7 +30,7 @@ describe('東京都 段階台帳（T-Y11F §5順序#7・7県目・182レコー�
     }
   });
 
-  it('quota・applicantsConfirmedは既存の倍率パイプライン（competition-rates/tokyo.ts）と全件完全一致する（本資料に志願者数列が無いため両方とも再利用）', () => {
+  it('quota・applicantsConfirmedは既存の倍率パイプライン（competition-rates/tokyo.ts）と182件完全一致する（本資料に志願者数列が無いため両方とも再利用）', () => {
     const tokyoCompetitionFile = COMPETITION_RATE_BY_PREFECTURE.tokyo;
     if (!tokyoCompetitionFile) throw new Error('competition-rates/tokyo.ts が見つかりません');
     const r8Records = tokyoCompetitionFile.records.filter((r) => r.fiscalYear === undefined);
@@ -44,6 +46,33 @@ describe('東京都 段階台帳（T-Y11F §5順序#7・7県目・182レコー�
       expect(counterpart.finalApplicants).toBe(stageRecord.applicantsConfirmed);
     }
     expect(matched).toBe(182);
+  });
+
+  it('定時制課程（単位制）7レコードのquota・applicantsConfirmedは既存の倍率パイプライン（teiji-competition-rates/tokyo.ts）と全件完全一致する', () => {
+    const teijiFile = TEIJI_COMPETITION_RATE_BY_PREFECTURE.tokyo;
+    if (!teijiFile) throw new Error('teiji-competition-rates/tokyo.ts が見つかりません');
+    const teijiRecords = records.filter(
+      (r) =>
+        (r.schoolName === '一橋' && r.department === '普通科') ||
+        (r.schoolName === '新宿山吹' && (r.department === '普通科1〜4部' || r.department === '情報科2・4部')) ||
+        (r.schoolName === '浅草' && r.department === '普通科') ||
+        (r.schoolName === '荻窪' && r.department === '普通科') ||
+        (r.schoolName === '八王子拓真' && r.department === '普通科') ||
+        (r.schoolName === '砂川' && r.department === '普通科1〜3部')
+    );
+    expect(teijiRecords).toHaveLength(7);
+
+    let matched = 0;
+    for (const stageRecord of teijiRecords) {
+      const counterpart = teijiFile.records.find(
+        (r) => r.schoolName === stageRecord.schoolName && r.department === stageRecord.department
+      );
+      if (!counterpart) continue;
+      matched++;
+      expect(counterpart.quota).toBe(stageRecord.quota);
+      expect(counterpart.finalApplicants).toBe(stageRecord.applicantsConfirmed);
+    }
+    expect(matched).toBe(7);
   });
 
   it('finalPassersはapplicantsConfirmedを超えない（東京都でもこのパターンの逆転は0件）', () => {
@@ -87,8 +116,11 @@ describe('東京都 段階台帳（T-Y11F §5順序#7・7県目・182レコー�
     expect(kubu.testTakersConfirmed + tama.testTakersConfirmed).toBe(goukei.testTakersConfirmed);
     expect(kubu.finalPassers + tama.finalPassers).toBe(goukei.finalPassers);
 
-    // 区部57校・多摩部44校の境界は資料の掲載順（区部計行の直前まで）で区切る
-    const futsuuIjai = records.filter((r) => r.department === '普通科');
+    // 区部57校・多摩部44校の境界は資料の掲載順（区部計行の直前まで）で区切る。
+    // department==='普通科'は定時制課程（単位制）の一橋/浅草/荻窪/八王子拓真とも同名のため、
+    // records配列の先頭107件（sheet1の掲載順）を直接スライスして区別する。
+    const futsuuIjai = records.slice(0, 107);
+    expect(futsuuIjai.every((r) => r.department === '普通科')).toBe(true);
     expect(futsuuIjai).toHaveLength(107);
     const kubuRecords = futsuuIjai.slice(0, 57);
     const tamaRecords = futsuuIjai.slice(57, 101);
@@ -359,5 +391,34 @@ describe('東京都 段階台帳（T-Y11F §5順序#7・7県目・182レコー�
   it('「国際関係に関する学科」（目黒・国際）はquota不一致のため段階台帳に含まれない', () => {
     const kokusai = records.filter((r) => r.schoolName === '国際' && r.department === '国際科');
     expect(kokusai).toHaveLength(0);
+  });
+
+  it('「定時制課程（単位制）」7レコードの機械集計が資料本文の公式小計（定時制課程単位制計）とquota/testTakersConfirmed/finalPassers/applicantsConfirmedの4系列とも完全一致する（本区分はfinalPassers>quotaが新宿山吹・情報科2・4部の1件のみ）', () => {
+    if (!officialSubtotals) throw new Error('officialSubtotals が定義されていません');
+    const teijiSubtotal = officialSubtotals.find((s) => s.label === '定時制課程単位制計');
+    if (!teijiSubtotal) throw new Error('officialSubtotals に「定時制課程単位制計」が見つかりません');
+
+    const teijiRecords = records.filter(
+      (r) =>
+        (r.schoolName === '一橋' && r.department === '普通科') ||
+        (r.schoolName === '新宿山吹' && (r.department === '普通科1〜4部' || r.department === '情報科2・4部')) ||
+        (r.schoolName === '浅草' && r.department === '普通科') ||
+        (r.schoolName === '荻窪' && r.department === '普通科') ||
+        (r.schoolName === '八王子拓真' && r.department === '普通科') ||
+        (r.schoolName === '砂川' && r.department === '普通科1〜3部')
+    );
+    expect(teijiRecords).toHaveLength(7);
+
+    const teijiSums = sumStageLedger(teijiRecords);
+    expect(teijiSums.quota).toBe(teijiSubtotal.quota);
+    expect(teijiSums.testTakersConfirmed).toBe(teijiSubtotal.testTakersConfirmed);
+    expect(teijiSums.finalPassers).toBe(teijiSubtotal.finalPassers);
+    expect(teijiSums.applicantsConfirmed).toBe(teijiSubtotal.applicantsConfirmed);
+
+    const overflowCount = teijiRecords.filter((r) => r.finalPassers > r.quota).length;
+    expect(overflowCount).toBe(1);
+    const overflowRecord = teijiRecords.find((r) => r.finalPassers > r.quota);
+    expect(overflowRecord?.schoolName).toBe('新宿山吹');
+    expect(overflowRecord?.department).toBe('情報科2・4部');
   });
 });
