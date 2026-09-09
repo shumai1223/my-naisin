@@ -6,12 +6,14 @@ import { SAITAMA_STAGE_LEDGER } from '../saitama';
  * T-Y11F §5順序#7 DoD検証（埼玉県・段階台帳2県目パイロット・「全日制 普通科」102レコード＋
  * 3〜7頁目「全日制 専門学科」全18区分（農業18・工業45・商業26・家庭8・看護1・外国語6・
  * 美術3・音楽3・書道1・体育2・理数7・情報1・福祉1・人文1・国際関係3・映像芸術1・
- * 舞台芸術1・生物系環境系2＝計130）の計232レコードを完全収録）: ①レコードの不変条件
- * ②quota/applicantsConfirmedは既存の倍率パイプライン（competition-rates/saitama.ts）と
- * 同一値であること ③公表資料の各区分「計」との完全突合（quota/testTakersConfirmed/
- * finalPassersの3つ）④3〜7頁目18区分の合計が7頁目末尾の総合計「専門学科 計」と一致すること。
+ * 舞台芸術1・生物系環境系2＝計130）＋8頁目「全日制 総合学科」9校の計241レコードを完全
+ * 収録）: ①レコードの不変条件 ②quota/applicantsConfirmedは既存の倍率パイプライン
+ * （competition-rates/saitama.ts）と同一値であること ③公表資料の各区分「計」との完全突合
+ * （quota/testTakersConfirmed/finalPassersの3つ）④3〜7頁目18区分の合計が7頁目末尾の
+ * 総合計「専門学科 計」と一致すること ⑤普通科計＋専門学科計＋総合学科計の3段階集計が
+ * 8頁目末尾の最上位総合計「全日制 普通・専門・総合学科 計」と一致すること。
  */
-describe('埼玉県 段階台帳（T-Y11F §5順序#7・2県目・1〜7頁目は完全収録）', () => {
+describe('埼玉県 段階台帳（T-Y11F §5順序#7・2県目・1〜8頁目「全日制」は完全収録）', () => {
   const { records, officialSubtotals } = SAITAMA_STAGE_LEDGER;
   // 3頁目以降の各区分は配列順で追記されているため、配列順で分割する（department名だけでは
   // 「情報コース」等の普通科内特別コースと区別できない）。
@@ -34,9 +36,10 @@ describe('埼玉県 段階台帳（T-Y11F §5順序#7・2県目・1〜7頁目は
   const videoArtRecords = records.slice(228, 229);
   const stageArtRecords = records.slice(229, 230);
   const bioEnvRecords = records.slice(230, 232);
-  const specializedRecords = records.slice(102);
+  const comprehensiveRecords = records.slice(232, 241);
+  const specializedRecords = records.slice(102, 232);
 
-  it('取り込み件数は普通科102＋専門学科18区分130（農業18/工業45/商業26/家庭8/看護1/外国語6/美術3/音楽3/書道1/体育2/理数7/情報1/福祉1/人文1/国際関係3/映像芸術1/舞台芸術1/生物環境2）＝計232レコード', () => {
+  it('取り込み件数は普通科102＋専門学科18区分130（農業18/工業45/商業26/家庭8/看護1/外国語6/美術3/音楽3/書道1/体育2/理数7/情報1/福祉1/人文1/国際関係3/映像芸術1/舞台芸術1/生物環境2）＋総合学科9＝計241レコード', () => {
     expect(normalRecords).toHaveLength(102);
     expect(agricultureRecords).toHaveLength(18);
     expect(industrialRecords).toHaveLength(45);
@@ -56,7 +59,8 @@ describe('埼玉県 段階台帳（T-Y11F §5順序#7・2県目・1〜7頁目は
     expect(videoArtRecords).toHaveLength(1);
     expect(stageArtRecords).toHaveLength(1);
     expect(bioEnvRecords).toHaveLength(2);
-    expect(records).toHaveLength(232);
+    expect(comprehensiveRecords).toHaveLength(9);
+    expect(records).toHaveLength(241);
   });
 
   it('quota/applicantsConfirmed/testTakersConfirmed/finalPassersはいずれも0より大きい（不変条件）', () => {
@@ -168,6 +172,24 @@ describe('埼玉県 段階台帳（T-Y11F §5順序#7・2県目・1〜7頁目は
     expect(sums.finalPassers).toBe(6_362);
   });
 
+  it('総合学科9レコード全数の機械集計が「総合学科 計」と完全一致する', () => {
+    const subtotal = findSubtotal('総合学科 計');
+    const sums = sumStageLedger(comprehensiveRecords);
+    expect(sums.schoolCount).toBe(9);
+    expect(sums.quota).toBe(subtotal.quota);
+    expect(sums.applicantsConfirmed).toBe(subtotal.applicantsConfirmed);
+    expect(sums.testTakersConfirmed).toBe(subtotal.testTakersConfirmed);
+    expect(sums.finalPassers).toBe(subtotal.finalPassers);
+  });
+
+  it('普通科＋専門学科＋総合学科の241レコード全数の機械集計が8頁目末尾の最上位総合計「全日制 普通・専門・総合学科 計」（quota34,603/testTakersConfirmed35,872/finalPassers32,399）と完全一致する', () => {
+    const sums = sumStageLedger(records);
+    expect(sums.schoolCount).toBe(241);
+    expect(sums.quota).toBe(34_603);
+    expect(sums.testTakersConfirmed).toBe(35_872);
+    expect(sums.finalPassers).toBe(32_399);
+  });
+
   it('quota/applicantsConfirmedは既存の倍率パイプライン（competition-rates/saitama.ts）と完全一致する（意図的な再利用）', () => {
     const saitamaCompetitionFile = COMPETITION_RATE_BY_PREFECTURE.saitama;
     if (!saitamaCompetitionFile) throw new Error('competition-rates/saitama.ts が見つかりません');
@@ -183,6 +205,6 @@ describe('埼玉県 段階台帳（T-Y11F §5順序#7・2県目・1〜7頁目は
       expect(counterpart.quota).toBe(stageRecord.quota);
       expect(counterpart.finalApplicants).toBe(stageRecord.applicantsConfirmed);
     }
-    expect(matched).toBe(232);
+    expect(matched).toBe(241);
   });
 });

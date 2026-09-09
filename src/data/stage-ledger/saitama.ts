@@ -113,6 +113,17 @@ import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
  * officialSubtotals合計が quota合計7,382＝A合計・testTakersConfirmed合計6,757＝B合計・
  * finalPassers合計6,362＝C合計と**3系列とも一発で完全一致**した——専門学科セクション全体を
  * 貫く最上位の検算に成功し、3〜7頁目の収録漏れ・重複が無いことを機械的に証明できた。
+ *
+ * 8頁目「全日制 総合学科」9校9レコード（小鹿野・川越総合・久喜北陽・幸手桜・進修館・
+ * 誠和福祉・滑川総合・吉川美南・寄居城北）を追加し**これで「全日制」区分（普通科＋専門学科
+ * ＋総合学科）が全て完結**。8頁目末尾には本資料全体の最上位総合計「全日制 普通・専門・
+ * 総合学科 計」（募集人員34,843/転編入者数240/A34,603/B35,872/C32,399）が印字されており、
+ * これまで収録した3段階の区分計（普通科計quota25,517/B27,593/C24,556・専門学科計7,382/
+ * 6,757/6,362・総合学科計1,704/1,522/1,481）を合計すると quota34,603・B35,872・C32,399と
+ * なり、**この最上位総合計とも3系列すべてが一発で完全一致**した。個別区分→専門学科全体→
+ * 全日制全体という三段階の検算がすべて外れなく成立し、埼玉県「全日制」の段階台帳241
+ * レコードに収録漏れ・重複が一件も無いことを機械的に証明できた（残る9〜10頁目は定時制・
+ * 通信制の可能性が高く、全日制区分としては本ファイルで完結）。
  */
 
 export const SAITAMA_STAGE_LEDGER: PrefectureStageLedgerFile = {
@@ -120,7 +131,7 @@ export const SAITAMA_STAGE_LEDGER: PrefectureStageLedgerFile = {
   sources: [
     {
       url: 'https://www.pref.saitama.lg.jp/documents/268192/r8nyugakukyokakouhosya0306_4.pdf',
-      docTitle: '埼玉県教育委員会 令和8年度埼玉県公立高等学校入学者選抜における入学許可候補者数・欠員補充人員（令和8年3月6日現在）1〜7頁目（全日制 普通科＋専門学科全区分）',
+      docTitle: '埼玉県教育委員会 令和8年度埼玉県公立高等学校入学者選抜における入学許可候補者数・欠員補充人員（令和8年3月6日現在）1〜8頁目（全日制 普通科＋専門学科全区分＋総合学科）',
       fiscalYear: '令和8年度（2026年度）',
       fetchedAt: '2026-09-09',
     },
@@ -147,9 +158,10 @@ export const SAITAMA_STAGE_LEDGER: PrefectureStageLedgerFile = {
       '映像芸術に関する学科（7頁目・1レコード）',
       '舞台芸術に関する学科（7頁目・1レコード）',
       '生物・環境に関する系（7頁目・2レコード）',
+      '総合学科（8頁目・9レコード）',
     ],
-    pendingDepartments: ['総合学科（8頁目・9校・全日制総合計の一部として存在確認済み）'],
-    note: '「全日制 普通科」（1〜2頁目）＋3〜7頁目「全日制 専門学科」の全18区分を完全収録。7頁目末尾の総合計「専門学科 計」（quota7,382=A/testTakersConfirmed6,757=B/finalPassers6,362=C）と、3〜7頁目18区分のofficialSubtotals合計が3系列とも一発で完全一致（詳細は本ファイル冒頭コメント参照）。8頁目に「全日制 総合学科」9校（未収録）があり、頁末尾には「全日制 普通・専門・総合学科 計」（quota34,843/A34,603/B35,872/C32,399）という全日制全体の最上位総合計が存在することを確認済み（次回セッションで総合学科9校を追加し、この最上位総合計との三段目の検算を行う）。quota/applicantsConfirmedは既存competition-rates/saitama.ts（同一quotaを別資料で確認済み）を再利用し、testTakersConfirmed/finalPassersのみ本資料から新規転記。',
+    pendingDepartments: [],
+    note: '「全日制 普通科」（1〜2頁目）＋3〜7頁目「全日制 専門学科」全18区分＋8頁目「全日制 総合学科」9校を完全収録し、「全日制」区分（普通科＋専門学科＋総合学科）が完結。8頁目末尾の最上位総合計「全日制 普通・専門・総合学科 計」（quota34,603=A/testTakersConfirmed35,872=B/finalPassers32,399=C）と、普通科計＋専門学科計＋総合学科計の3段階集計が3系列とも一発で完全一致（詳細は本ファイル冒頭コメント参照）。残る9〜10頁目は定時制・通信制の可能性が高く、全日制区分としては本ファイルで完結。quota/applicantsConfirmedは既存competition-rates/saitama.ts（同一quotaを別資料で確認済み）を再利用し、testTakersConfirmed/finalPassersのみ本資料から新規転記。',
   },
   records: [
     { schoolName: '上尾', department: '普通科', quota: 238, applicantsConfirmed: 316, testTakersConfirmed: 315, finalPassers: 244 },
@@ -403,6 +415,16 @@ export const SAITAMA_STAGE_LEDGER: PrefectureStageLedgerFile = {
     // --- 7頁目「全日制 専門学科」生物・環境に関する系（1校2レコード） ---
     { schoolName: 'いずみ', department: '生物系', quota: 119, applicantsConfirmed: 133, testTakersConfirmed: 132, finalPassers: 119 },
     { schoolName: 'いずみ', department: '環境系', quota: 119, applicantsConfirmed: 120, testTakersConfirmed: 120, finalPassers: 120 },
+    // --- 8頁目「全日制 総合学科」（9校9レコード） ---
+    { schoolName: '小鹿野', department: '総合学科', quota: 79, applicantsConfirmed: 27, testTakersConfirmed: 27, finalPassers: 27 },
+    { schoolName: '川越総合', department: '総合学科', quota: 238, applicantsConfirmed: 280, testTakersConfirmed: 279, finalPassers: 238 },
+    { schoolName: '久喜北陽', department: '総合学科', quota: 318, applicantsConfirmed: 283, testTakersConfirmed: 282, finalPassers: 282 },
+    { schoolName: '幸手桜', department: '総合学科', quota: 198, applicantsConfirmed: 181, testTakersConfirmed: 181, finalPassers: 181 },
+    { schoolName: '進修館', department: '総合学科', quota: 198, applicantsConfirmed: 152, testTakersConfirmed: 152, finalPassers: 152 },
+    { schoolName: '誠和福祉', department: '総合学科', quota: 79, applicantsConfirmed: 25, testTakersConfirmed: 25, finalPassers: 25 },
+    { schoolName: '滑川総合', department: '総合学科', quota: 278, applicantsConfirmed: 266, testTakersConfirmed: 266, finalPassers: 266 },
+    { schoolName: '吉川美南', department: '総合学科', quota: 118, applicantsConfirmed: 115, testTakersConfirmed: 114, finalPassers: 114 },
+    { schoolName: '寄居城北', department: '総合学科', quota: 198, applicantsConfirmed: 196, testTakersConfirmed: 196, finalPassers: 196 },
   ],
   officialSubtotals: [
     // ⚠️applicantsConfirmedはこの資料（3月6日版）には印字されていない（既存パイプライン由来の
@@ -444,5 +466,11 @@ export const SAITAMA_STAGE_LEDGER: PrefectureStageLedgerFile = {
     // quota7,382・testTakersConfirmed6,757・finalPassers6,362となり、7頁目末尾に印字された
     // 全専門学科の総合計「専門学科 計」（A7,382/B6,757/C6,362）と3系列とも完全一致する
     // （このofficialSubtotals自体には合計行を追加せず、上記コメントとテストで検証する）。
+    { label: '総合学科 計', quota: 1_704, applicantsConfirmed: 1_525, testTakersConfirmed: 1_522, finalPassers: 1_481 },
+    // 普通科計（quota25,517）＋専門学科計（quota7,382）＋総合学科計（quota1,704）＝34,603。
+    // testTakersConfirmed（27,593+6,757+1,522=35,872）・finalPassers（24,556+6,362+
+    // 1,481=32,399）も同様に、8頁目末尾の最上位総合計「全日制 普通・専門・総合学科 計」
+    // （A34,603/B35,872/C32,399）と3系列とも完全一致する（このofficialSubtotals自体には
+    // 合計行を追加せず、上記コメントとテストで検証する）。
   ],
 };
