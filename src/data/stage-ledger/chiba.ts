@@ -101,6 +101,15 @@ import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
  * ため4系列とも真の一次資料突合になる）。R8で確立した「区分の総合計との
  * 完全突合」検証をR7（掛-1）でも初めて再現でき、1〜6頁目（県立全日制）の収録漏れ・重複が
  * 無いことを機械的に証明できた。
+ *
+ * 🔁掛-1続き（7頁目「2．市立全日制」・学校番号市1〜市7・12レコード追加＝累計188レコード）:
+ * 市立千葉〜市立銚子の7校12レコードを追加。既存`competition-rates/chiba.ts`のR7エントリと
+ * 12/12件で完全一致。7頁目末尾には「市立全日制 合計」（R7版・quota1,920/applicants2,417/
+ * testTakers2,400/final1,920）と、県立＋市立を合わせた「公立全日制 合計」（R7版・
+ * quota29,720/applicants33,854/testTakers33,583/final27,964）の2段階が印字されており、
+ * 188レコード全数の機械集計が両方とも4系列すべてで完全一致した——県立全日制176件との
+ * 二重の検算（区分単独＋県立市立合算）が揃って外れなく成立し、R7（掛-1）でも「全日制」
+ * 区分全体（県立＋市立）の収録漏れ・重複が無いことを証明できた。残るは定時制（8〜9頁目）。
  */
 
 export const CHIBA_STAGE_LEDGER: PrefectureStageLedgerFile = {
@@ -126,9 +135,10 @@ export const CHIBA_STAGE_LEDGER: PrefectureStageLedgerFile = {
       '市立全日制R8（7頁目・学校番号市1〜市7・12レコード）',
       '県立定時制R8（8頁目・学校番号定1〜定16・22レコード）',
       '県立全日制R7（1〜6頁目・学校番号1〜121・176レコード・掛-1・区分完結）',
+      '市立全日制R7（7頁目・学校番号市1〜市7・12レコード・掛-1・「全日制」区分完結）',
     ],
-    pendingDepartments: ['R7の残り（市立全日制・定時制＝7〜9頁目）'],
-    note: 'R8は資料全体（一般入学者選抜等・全日制＋定時制・県立＋市立）を完全収録し4段階の公表計と完全一致。R7は1〜6頁目で「県立全日制」区分が完結（掛-1・累計176レコード）し、「県立全日制 合計（R7）」との4系列完全一致も確認済み。',
+    pendingDepartments: ['R7の残り（定時制＝8〜9頁目）'],
+    note: 'R8は資料全体（一般入学者選抜等・全日制＋定時制・県立＋市立）を完全収録し4段階の公表計と完全一致。R7は1〜7頁目で「全日制」区分（県立＋市立）が完結（掛-1・累計188レコード）し、「県立全日制 合計（R7）」「市立全日制 合計（R7）」「公立全日制 合計（R7）」の3段階全てで4系列完全一致も確認済み。',
   },
   records: [
     { schoolName: '千葉', department: '普通科', quota: 240, applicantsConfirmed: 331, testTakersConfirmed: 321, finalPassers: 240 },
@@ -530,6 +540,19 @@ export const CHIBA_STAGE_LEDGER: PrefectureStageLedgerFile = {
     { schoolName: '姉崎', department: '普通科', quota: 120, applicantsConfirmed: 165, testTakersConfirmed: 165, finalPassers: 120, fiscalYear: '令和7年度（2025年度）' },
     // --- 6頁目（学校番号121・「1．県立全日制」区分の最終校） ---
     { schoolName: '市原八幡', department: '普通科', quota: 200, applicantsConfirmed: 222, testTakersConfirmed: 222, finalPassers: 200, fiscalYear: '令和7年度（2025年度）' },
+    // --- 7頁目「2．市立全日制」（学校番号市1〜市7） ---
+    { schoolName: '市立千葉', department: '普通科', quota: 280, applicantsConfirmed: 420, testTakersConfirmed: 417, finalPassers: 280, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '市立千葉', department: '理数科', quota: 40, applicantsConfirmed: 74, testTakersConfirmed: 72, finalPassers: 40, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '市立習志野', department: '普通科', quota: 240, applicantsConfirmed: 253, testTakersConfirmed: 252, finalPassers: 240, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '市立習志野', department: '商業科', quota: 80, applicantsConfirmed: 89, testTakersConfirmed: 88, finalPassers: 80, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '市立船橋', department: '普通科', quota: 240, applicantsConfirmed: 346, testTakersConfirmed: 343, finalPassers: 240, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '市立船橋', department: '商業科', quota: 80, applicantsConfirmed: 112, testTakersConfirmed: 112, finalPassers: 80, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '市立船橋', department: '体育科', quota: 80, applicantsConfirmed: 82, testTakersConfirmed: 82, finalPassers: 80, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '市立松戸', department: '普通科', quota: 280, applicantsConfirmed: 422, testTakersConfirmed: 419, finalPassers: 280, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '市立松戸', department: '国際人文科', quota: 40, applicantsConfirmed: 43, testTakersConfirmed: 42, finalPassers: 40, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '市立柏', department: '普通科', quota: 280, applicantsConfirmed: 285, testTakersConfirmed: 284, finalPassers: 280, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '市立柏', department: 'スポーツ科学科', quota: 40, applicantsConfirmed: 40, testTakersConfirmed: 40, finalPassers: 40, fiscalYear: '令和7年度（2025年度）' },
+    { schoolName: '市立銚子', department: '普通科・理数科', quota: 240, applicantsConfirmed: 251, testTakersConfirmed: 249, finalPassers: 240, fiscalYear: '令和7年度（2025年度）' },
   ],
   officialSubtotals: [
     { label: '県立全日制 合計', quota: 26_960, applicantsConfirmed: 29_594, testTakersConfirmed: 29_359, finalPassers: 25_085 },
@@ -540,5 +563,8 @@ export const CHIBA_STAGE_LEDGER: PrefectureStageLedgerFile = {
     // R7（掛-1）6頁目末尾の「県立全日制 合計」（募集人員27,800/志願者確定数31,437/
     // 受検者確定数31,183/合計26,044）。R8と区別するため専用ラベルを付す。
     { label: '県立全日制 合計（R7）', quota: 27_800, applicantsConfirmed: 31_437, testTakersConfirmed: 31_183, finalPassers: 26_044 },
+    // R7（掛-1）7頁目末尾の「市立全日制 合計」「公立全日制 合計」。
+    { label: '市立全日制 合計（R7）', quota: 1_920, applicantsConfirmed: 2_417, testTakersConfirmed: 2_400, finalPassers: 1_920 },
+    { label: '公立全日制 合計（R7）', quota: 29_720, applicantsConfirmed: 33_854, testTakersConfirmed: 33_583, finalPassers: 27_964 },
   ],
 };

@@ -4,22 +4,27 @@ import { COMPETITION_RATE_BY_PREFECTURE } from '@/data/competition-rates';
 
 /**
  * T-Y11F §5順序#7 DoD検証（千葉県・段階台帳・R8は資料全体210レコード完全収録・R7は
- * 掛-1・1〜6頁目176レコードで「県立全日制」区分が完結）:
+ * 掛-1・1〜7頁目188レコードで「全日制」区分（県立＋市立）が完結）:
  * ①レコードの不変条件（quota>0等）②既存の倍率パイプライン（competition-rates/chiba.ts）の
  * quota/finalApplicantsと、段階台帳のquota/applicantsConfirmedが独立した情報源にも
  * かかわらず一致することを機械的に突合する（相互裏取り・R7/R8とも）③R8公表資料の
  * 「県立全日制 合計」「市立全日制 合計」「県立定時制 合計」「総合計」の4段階すべてとの
- * 完全突合（DoDの本体）④R7公表資料の「県立全日制 合計（R7）」との完全突合。
+ * 完全突合（DoDの本体）④R7公表資料の「県立全日制 合計（R7）」「市立全日制 合計（R7）」
+ * 「公立全日制 合計（R7）」との完全突合。
  */
 describe('千葉県 段階台帳（T-Y11F §5順序#7・R8は資料全体完全収録・R7は掛-1）', () => {
   const { records, officialSubtotals } = CHIBA_STAGE_LEDGER;
   const r8Records = records.filter((r) => r.fiscalYear === undefined);
   const r7Records = records.filter((r) => r.fiscalYear === '令和7年度（2025年度）');
+  const r7PrefecturalRecords = r7Records.filter((r) => !r.schoolName.startsWith('市立'));
+  const r7MunicipalRecords = r7Records.filter((r) => r.schoolName.startsWith('市立'));
 
-  it('取り込み件数はR8=210レコード・R7=176レコード（計386レコード）', () => {
+  it('取り込み件数はR8=210レコード・R7=188レコード（計398レコード）', () => {
     expect(r8Records).toHaveLength(210);
-    expect(r7Records).toHaveLength(176);
-    expect(records).toHaveLength(386);
+    expect(r7Records).toHaveLength(188);
+    expect(r7PrefecturalRecords).toHaveLength(176);
+    expect(r7MunicipalRecords).toHaveLength(12);
+    expect(records).toHaveLength(398);
   });
 
   it('quota/applicantsConfirmed/testTakersConfirmed/finalPassersはいずれも0より大きい（不変条件）', () => {
@@ -104,11 +109,14 @@ describe('千葉県 段階台帳（T-Y11F §5順序#7・R8は資料全体完全�
     expect(sums.finalPassers).toBe(subtotal.finalPassers);
   });
 
-  it('R7: 県立全日制176レコード全数の機械集計が「県立全日制 合計（R7）」と4系列とも完全一致する', () => {
-    const subtotal = findSubtotal('県立全日制 合計（R7）');
-    expect(r7Records).toHaveLength(176);
-    const sums = sumStageLedger(r7Records);
-    expect(sums.schoolCount).toBe(176);
+  it.each([
+    ['県立全日制 合計（R7）', () => r7PrefecturalRecords, 176],
+    ['市立全日制 合計（R7）', () => r7MunicipalRecords, 12],
+    ['公立全日制 合計（R7）', () => r7Records, 188],
+  ] as const)('R7: %sの機械集計が4系列とも完全一致する', (label, getRecords, count) => {
+    const subtotal = findSubtotal(label);
+    const sums = sumStageLedger(getRecords());
+    expect(sums.schoolCount).toBe(count);
     expect(sums.quota).toBe(subtotal.quota);
     expect(sums.applicantsConfirmed).toBe(subtotal.applicantsConfirmed);
     expect(sums.testTakersConfirmed).toBe(subtotal.testTakersConfirmed);
@@ -136,6 +144,6 @@ describe('千葉県 段階台帳（T-Y11F §5順序#7・R8は資料全体完全�
     }
 
     crossCheck(r8Records, (r) => r.fiscalYear === undefined, 160);
-    crossCheck(r7Records, (r) => r.fiscalYear === '令和7年度（2025年度）', 176);
+    crossCheck(r7Records, (r) => r.fiscalYear === '令和7年度（2025年度）', 188);
   });
 });
