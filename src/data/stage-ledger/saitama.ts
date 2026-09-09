@@ -101,6 +101,18 @@ import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
  * 頁末尾公表計（家庭科計 quota319/B305/C287・看護科計80/88/80・外国語科計240/269/240・
  * 美術科計120/163/120・音楽科計120/89/87・書道科計40/28/28・体育科計160/180/160）と
  * 24レコード全数の機械集計が一発で完全一致。
+ *
+ * 7頁目は「理数に関する学科」（7レコード）・「情報に関する学科」（1レコード）・
+ * 「福祉に関する学科」（1レコード）・「人文に関する学科」（1レコード）・「国際関係に関する
+ * 学科」（3レコード）・「映像芸術に関する学科」（1レコード）・「舞台芸術に関する学科」
+ * （1レコード）・「生物・環境に関する系」（2レコード）の8区分・計17レコードを収録し、
+ * **これで3〜7頁目「全日制 専門学科」区分が完結**。7頁目末尾には全専門学科の総合計
+ * 「専門学科 計」（募集人員7,420/転編入者数38/A7,382/B6,757/C6,362）が印字されており、
+ * これまでに収録した3〜7頁目の全18区分（農業・工業・商業・家庭・看護・外国語・美術・音楽・
+ * 書道・体育・理数・情報・福祉・人文・国際関係・映像芸術・舞台芸術・生物環境系）の
+ * officialSubtotals合計が quota合計7,382＝A合計・testTakersConfirmed合計6,757＝B合計・
+ * finalPassers合計6,362＝C合計と**3系列とも一発で完全一致**した——専門学科セクション全体を
+ * 貫く最上位の検算に成功し、3〜7頁目の収録漏れ・重複が無いことを機械的に証明できた。
  */
 
 export const SAITAMA_STAGE_LEDGER: PrefectureStageLedgerFile = {
@@ -108,7 +120,7 @@ export const SAITAMA_STAGE_LEDGER: PrefectureStageLedgerFile = {
   sources: [
     {
       url: 'https://www.pref.saitama.lg.jp/documents/268192/r8nyugakukyokakouhosya0306_4.pdf',
-      docTitle: '埼玉県教育委員会 令和8年度埼玉県公立高等学校入学者選抜における入学許可候補者数・欠員補充人員（令和8年3月6日現在）1〜6頁目（全日制 普通科＋農業＋工業＋商業＋家庭＋看護＋外国語＋美術＋音楽＋書道＋体育に関する学科）',
+      docTitle: '埼玉県教育委員会 令和8年度埼玉県公立高等学校入学者選抜における入学許可候補者数・欠員補充人員（令和8年3月6日現在）1〜7頁目（全日制 普通科＋専門学科全区分）',
       fiscalYear: '令和8年度（2026年度）',
       fetchedAt: '2026-09-09',
     },
@@ -127,9 +139,17 @@ export const SAITAMA_STAGE_LEDGER: PrefectureStageLedgerFile = {
       '音楽に関する学科（6頁目・3レコード）',
       '書道に関する学科（6頁目・1レコード）',
       '体育に関する学科（6頁目・2レコード）',
+      '理数に関する学科（7頁目・7レコード）',
+      '情報に関する学科（7頁目・1レコード）',
+      '福祉に関する学科（7頁目・1レコード）',
+      '人文に関する学科（7頁目・1レコード）',
+      '国際関係に関する学科（7頁目・3レコード）',
+      '映像芸術に関する学科（7頁目・1レコード）',
+      '舞台芸術に関する学科（7頁目・1レコード）',
+      '生物・環境に関する系（7頁目・2レコード）',
     ],
-    pendingDepartments: ['総合学科（7頁目以降）'],
-    note: '「全日制 普通科」「農業に関する学科」「工業に関する学科」「商業に関する学科」＋6頁目の7小区分（家庭・看護・外国語・美術・音楽・書道・体育に関する学科）を完全収録。各区分の頁末尾公表計（普通科計quota25,517/B27,593/C24,556・農業科計797/633/633・工業科計2,343/1,967/1,959・商業科計2,206/1,995/1,889・家庭科計319/305/287・看護科計80/88/80・外国語科計240/269/240・美術科計120/163/120・音楽科計120/89/87・書道科計40/28/28・体育科計160/180/160）といずれも機械集計が完全一致。quota/applicantsConfirmedは既存competition-rates/saitama.ts（同一quotaを別資料で確認済み）を再利用し、testTakersConfirmed/finalPassersのみ本資料から新規転記。',
+    pendingDepartments: ['総合学科（8頁目・9校・全日制総合計の一部として存在確認済み）'],
+    note: '「全日制 普通科」（1〜2頁目）＋3〜7頁目「全日制 専門学科」の全18区分を完全収録。7頁目末尾の総合計「専門学科 計」（quota7,382=A/testTakersConfirmed6,757=B/finalPassers6,362=C）と、3〜7頁目18区分のofficialSubtotals合計が3系列とも一発で完全一致（詳細は本ファイル冒頭コメント参照）。8頁目に「全日制 総合学科」9校（未収録）があり、頁末尾には「全日制 普通・専門・総合学科 計」（quota34,843/A34,603/B35,872/C32,399）という全日制全体の最上位総合計が存在することを確認済み（次回セッションで総合学科9校を追加し、この最上位総合計との三段目の検算を行う）。quota/applicantsConfirmedは既存competition-rates/saitama.ts（同一quotaを別資料で確認済み）を再利用し、testTakersConfirmed/finalPassersのみ本資料から新規転記。',
   },
   records: [
     { schoolName: '上尾', department: '普通科', quota: 238, applicantsConfirmed: 316, testTakersConfirmed: 315, finalPassers: 244 },
@@ -358,6 +378,31 @@ export const SAITAMA_STAGE_LEDGER: PrefectureStageLedgerFile = {
     // --- 6頁目「全日制 専門学科」体育に関する学科（2校2レコード） ---
     { schoolName: '大宮東', department: '体育科', quota: 80, applicantsConfirmed: 97, testTakersConfirmed: 97, finalPassers: 80 },
     { schoolName: 'ふじみ野', department: 'スポーツサイエンス科', quota: 80, applicantsConfirmed: 83, testTakersConfirmed: 83, finalPassers: 80 },
+    // --- 7頁目「全日制 専門学科」理数に関する学科（7校7レコード） ---
+    { schoolName: '大宮', department: '理数科', quota: 40, applicantsConfirmed: 81, testTakersConfirmed: 73, finalPassers: 40 },
+    { schoolName: '熊谷西', department: '理数科', quota: 40, applicantsConfirmed: 35, testTakersConfirmed: 35, finalPassers: 40 },
+    { schoolName: '越谷北', department: '理数科', quota: 40, applicantsConfirmed: 61, testTakersConfirmed: 61, finalPassers: 40 },
+    { schoolName: '所沢北', department: '理数科', quota: 40, applicantsConfirmed: 73, testTakersConfirmed: 73, finalPassers: 40 },
+    { schoolName: '松山', department: '理数科', quota: 40, applicantsConfirmed: 41, testTakersConfirmed: 40, finalPassers: 40 },
+    { schoolName: '市立大宮北', department: '理数科', quota: 40, applicantsConfirmed: 49, testTakersConfirmed: 49, finalPassers: 40 },
+    { schoolName: '川口市立', department: '理数科', quota: 40, applicantsConfirmed: 60, testTakersConfirmed: 59, finalPassers: 41 },
+    // --- 7頁目「全日制 専門学科」情報に関する学科（1校1レコード） ---
+    { schoolName: '大宮科学技術', department: '情報サイエンス科', quota: 80, applicantsConfirmed: 96, testTakersConfirmed: 95, finalPassers: 80 },
+    // --- 7頁目「全日制 専門学科」福祉に関する学科（1校1レコード） ---
+    { schoolName: '誠和福祉', department: '福祉科', quota: 80, applicantsConfirmed: 27, testTakersConfirmed: 27, finalPassers: 27 },
+    // --- 7頁目「全日制 専門学科」人文に関する学科（1校1レコード） ---
+    { schoolName: '春日部東', department: '人文科', quota: 40, applicantsConfirmed: 39, testTakersConfirmed: 38, finalPassers: 40 },
+    // --- 7頁目「全日制 専門学科」国際関係に関する学科（3校3レコード） ---
+    { schoolName: '岩槻', department: '国際教養科', quota: 40, applicantsConfirmed: 47, testTakersConfirmed: 47, finalPassers: 40 },
+    { schoolName: '秩父', department: '国際教養科', quota: 40, applicantsConfirmed: 13, testTakersConfirmed: 13, finalPassers: 13 },
+    { schoolName: '和光国際', department: '国際科', quota: 79, applicantsConfirmed: 92, testTakersConfirmed: 91, finalPassers: 79 },
+    // --- 7頁目「全日制 専門学科」映像芸術に関する学科（1校1レコード） ---
+    { schoolName: '芸術総合', department: '映像芸術科', quota: 40, applicantsConfirmed: 43, testTakersConfirmed: 43, finalPassers: 40 },
+    // --- 7頁目「全日制 専門学科」舞台芸術に関する学科（1校1レコード） ---
+    { schoolName: '芸術総合', department: '舞台芸術科', quota: 40, applicantsConfirmed: 44, testTakersConfirmed: 44, finalPassers: 40 },
+    // --- 7頁目「全日制 専門学科」生物・環境に関する系（1校2レコード） ---
+    { schoolName: 'いずみ', department: '生物系', quota: 119, applicantsConfirmed: 133, testTakersConfirmed: 132, finalPassers: 119 },
+    { schoolName: 'いずみ', department: '環境系', quota: 119, applicantsConfirmed: 120, testTakersConfirmed: 120, finalPassers: 120 },
   ],
   officialSubtotals: [
     // ⚠️applicantsConfirmedはこの資料（3月6日版）には印字されていない（既存パイプライン由来の
@@ -385,5 +430,19 @@ export const SAITAMA_STAGE_LEDGER: PrefectureStageLedgerFile = {
     { label: '音楽科 計', quota: 120, applicantsConfirmed: 89, testTakersConfirmed: 89, finalPassers: 87 },
     { label: '書道科 計', quota: 40, applicantsConfirmed: 28, testTakersConfirmed: 28, finalPassers: 28 },
     { label: '体育科 計', quota: 160, applicantsConfirmed: 180, testTakersConfirmed: 180, finalPassers: 160 },
+    // 以下7頁目の8区分。
+    { label: '理数科 計', quota: 280, applicantsConfirmed: 400, testTakersConfirmed: 390, finalPassers: 281 },
+    { label: '情報科 計', quota: 80, applicantsConfirmed: 96, testTakersConfirmed: 95, finalPassers: 80 },
+    { label: '福祉科 計', quota: 80, applicantsConfirmed: 27, testTakersConfirmed: 27, finalPassers: 27 },
+    { label: '人文科 計', quota: 40, applicantsConfirmed: 39, testTakersConfirmed: 38, finalPassers: 40 },
+    { label: '国際関係科 計', quota: 159, applicantsConfirmed: 152, testTakersConfirmed: 151, finalPassers: 132 },
+    { label: '映像芸術科 計', quota: 40, applicantsConfirmed: 43, testTakersConfirmed: 43, finalPassers: 40 },
+    { label: '舞台芸術科 計', quota: 40, applicantsConfirmed: 44, testTakersConfirmed: 44, finalPassers: 40 },
+    { label: '生物系・環境系 計', quota: 238, applicantsConfirmed: 253, testTakersConfirmed: 252, finalPassers: 239 },
+    // 3〜7頁目の全18区分（農業・工業・商業・家庭・看護・外国語・美術・音楽・書道・体育・
+    // 理数・情報・福祉・人文・国際関係・映像芸術・舞台芸術・生物系環境系）を合計すると
+    // quota7,382・testTakersConfirmed6,757・finalPassers6,362となり、7頁目末尾に印字された
+    // 全専門学科の総合計「専門学科 計」（A7,382/B6,757/C6,362）と3系列とも完全一致する
+    // （このofficialSubtotals自体には合計行を追加せず、上記コメントとテストで検証する）。
   ],
 };
