@@ -4,26 +4,29 @@ import { SAITAMA_STAGE_LEDGER } from '../saitama';
 
 /**
  * T-Y11F §5順序#7 DoD検証（埼玉県・段階台帳2県目パイロット・「全日制 普通科」102レコード＋
- * 「農業に関する学科」18レコード＋「工業に関する学科」45レコードの3区分・計165レコードを
- * 完全収録）: ①レコードの不変条件 ②quota/applicantsConfirmedは既存の倍率パイプライン
- * （competition-rates/saitama.ts）と同一値であること ③公表資料の「普通科 計」「農業科 計」
- * 「工業科 計」との完全突合（quota/testTakersConfirmed/finalPassersの3つ・
- * applicantsConfirmedはこの資料に印字が無いため対象外）。
+ * 「農業に関する学科」18レコード＋「工業に関する学科」45レコード＋「商業に関する学科」
+ * 26レコードの4区分・計191レコードを完全収録）: ①レコードの不変条件 ②quota/
+ * applicantsConfirmedは既存の倍率パイプライン（competition-rates/saitama.ts）と同一値で
+ * あること ③公表資料の「普通科 計」「農業科 計」「工業科 計」「商業科 計」との完全突合
+ * （quota/testTakersConfirmed/finalPassersの3つ・applicantsConfirmedはこの資料に印字が
+ * 無いため対象外）。
  */
-describe('埼玉県 段階台帳（T-Y11F §5順序#7・2県目・全日制普通科＋農業に関する学科＋工業に関する学科は完全収録）', () => {
+describe('埼玉県 段階台帳（T-Y11F §5順序#7・2県目・全日制普通科＋農業＋工業＋商業に関する学科は完全収録）', () => {
   const { records, officialSubtotals } = SAITAMA_STAGE_LEDGER;
-  // 農業に関する学科18レコード・工業に関する学科45レコードは、1〜2頁目（普通科102レコード）の
-  // 後にそれぞれ3頁目分・4頁目分として追記されているため、配列順で分割する（department名だけ
-  // では「情報コース」等の普通科内特別コースと区別できない）。
+  // 農業に関する学科18レコード・工業に関する学科45レコード・商業に関する学科26レコードは、
+  // 1〜2頁目（普通科102レコード）の後にそれぞれ3頁目分・4頁目分・5頁目分として追記されているため、
+  // 配列順で分割する（department名だけでは「情報コース」等の普通科内特別コースと区別できない）。
   const normalRecords = records.slice(0, 102);
   const agricultureRecords = records.slice(102, 120);
-  const industrialRecords = records.slice(120);
+  const industrialRecords = records.slice(120, 165);
+  const commerceRecords = records.slice(165);
 
-  it('取り込み件数は普通科102＋農業に関する学科18＋工業に関する学科45（計165レコード）', () => {
+  it('取り込み件数は普通科102＋農業に関する学科18＋工業に関する学科45＋商業に関する学科26（計191レコード）', () => {
     expect(normalRecords).toHaveLength(102);
     expect(agricultureRecords).toHaveLength(18);
     expect(industrialRecords).toHaveLength(45);
-    expect(records).toHaveLength(165);
+    expect(commerceRecords).toHaveLength(26);
+    expect(records).toHaveLength(191);
   });
 
   it('quota/applicantsConfirmed/testTakersConfirmed/finalPassersはいずれも0より大きい（不変条件）', () => {
@@ -80,6 +83,18 @@ describe('埼玉県 段階台帳（T-Y11F §5順序#7・2県目・全日制普�
     expect(sums.finalPassers).toBe(subtotal.finalPassers);
   });
 
+  it('商業に関する学科26レコード全数の機械集計が「商業科 計」のquota/testTakersConfirmed/finalPassersと完全一致する', () => {
+    const subtotal = findSubtotal('商業科 計');
+    const sums = sumStageLedger(commerceRecords);
+    expect(sums.schoolCount).toBe(26);
+    expect(sums.quota).toBe(subtotal.quota);
+    expect(sums.testTakersConfirmed).toBe(subtotal.testTakersConfirmed);
+    expect(sums.finalPassers).toBe(subtotal.finalPassers);
+    // applicantsConfirmedはこの資料に印字が無い参考値のため、officialSubtotals側の値と
+    // 一致することのみ確認する。
+    expect(sums.applicantsConfirmed).toBe(subtotal.applicantsConfirmed);
+  });
+
   it('quota/applicantsConfirmedは既存の倍率パイプライン（competition-rates/saitama.ts）と完全一致する（意図的な再利用）', () => {
     const saitamaCompetitionFile = COMPETITION_RATE_BY_PREFECTURE.saitama;
     if (!saitamaCompetitionFile) throw new Error('competition-rates/saitama.ts が見つかりません');
@@ -95,6 +110,6 @@ describe('埼玉県 段階台帳（T-Y11F §5順序#7・2県目・全日制普�
       expect(counterpart.quota).toBe(stageRecord.quota);
       expect(counterpart.finalApplicants).toBe(stageRecord.applicantsConfirmed);
     }
-    expect(matched).toBe(165);
+    expect(matched).toBe(191);
   });
 });

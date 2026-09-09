@@ -79,6 +79,18 @@ import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
  * 現れない——**別の学科区分（商業に関する学科・家庭に関する学科・総合学科等）の頁に
  * 掲載されているはずで、本ファイルの対象外**（誤って欠落したわけではないことを既存
  * パイプラインとの突合で確認済み）。
+ *
+ * 5頁目「全日制 専門学科　商業に関する学科」（26レコード・18校）も追加。この頁は
+ * pdftotextでラベルが完全欠落するため300dpiビジョン解析を使用。列構成は
+ * [募集人員/転編入者数/入学許可予定者数(A)/実受検者数(B)/入学許可候補者数(C)/倍率(B÷C)/
+ * 欠員補充人員]で、**quotaは募集人員でなくA（入学許可予定者数＝募集人員−転編入者数）を
+ * 採用**（既存`competition-rates/saitama.ts`のquotaと全26件で完全一致することを確認済み。
+ * 例: 岩槻商業商業科は募集人員40だが転編入者数(1)を引いたA=39が既存quotaと一致）。
+ * testTakersConfirmed=B・finalPassers=Cをそのまま転記し、applicantsConfirmedは既存
+ * パイプラインのfinalApplicants値を再利用（3〜4頁目と同じ設計）。頁末尾「商業科 計」
+ * （募集人員2,220・A2,206・B1,995・C1,889）のうちA/B/Cの3系列は26レコードの機械集計と
+ * 完全一致（quota合計2,206=A合計・testTakersConfirmed合計1,995=B合計・finalPassers合計
+ * 1,889=C合計）。applicantsConfirmed合計は参考値1,998（この資料には印字なし）。
  */
 
 export const SAITAMA_STAGE_LEDGER: PrefectureStageLedgerFile = {
@@ -86,7 +98,7 @@ export const SAITAMA_STAGE_LEDGER: PrefectureStageLedgerFile = {
   sources: [
     {
       url: 'https://www.pref.saitama.lg.jp/documents/268192/r8nyugakukyokakouhosya0306_4.pdf',
-      docTitle: '埼玉県教育委員会 令和8年度埼玉県公立高等学校入学者選抜における入学許可候補者数・欠員補充人員（令和8年3月6日現在）1〜4頁目（全日制 普通科＋農業に関する学科＋工業に関する学科）',
+      docTitle: '埼玉県教育委員会 令和8年度埼玉県公立高等学校入学者選抜における入学許可候補者数・欠員補充人員（令和8年3月6日現在）1〜5頁目（全日制 普通科＋農業に関する学科＋工業に関する学科＋商業に関する学科）',
       fiscalYear: '令和8年度（2026年度）',
       fetchedAt: '2026-09-09',
     },
@@ -97,9 +109,10 @@ export const SAITAMA_STAGE_LEDGER: PrefectureStageLedgerFile = {
       '全日制普通科（1〜2頁目・102レコード）',
       '農業に関する学科（3頁目・18レコード）',
       '工業に関する学科（4頁目・45レコード）',
+      '商業に関する学科（5頁目・26レコード）',
     ],
-    pendingDepartments: ['商業・家庭等の専門学科（5頁目以降）', '総合学科'],
-    note: '「全日制 普通科」「農業に関する学科」「工業に関する学科」の3区分を完全収録。「普通科 計」（quota25,517/testTakersConfirmed27,593/finalPassers24,556）・「農業科 計」（quota797/testTakersConfirmed633/finalPassers633）・「工業科 計」（quota2,343/testTakersConfirmed1,967/finalPassers1,959）といずれも機械集計が完全一致。quota/applicantsConfirmedは既存competition-rates/saitama.ts（同一quotaを別資料で確認済み）を再利用し、testTakersConfirmed/finalPassersのみ本資料から新規転記。',
+    pendingDepartments: ['家庭等の専門学科（6頁目以降）', '総合学科'],
+    note: '「全日制 普通科」「農業に関する学科」「工業に関する学科」「商業に関する学科」の4区分を完全収録。「普通科 計」（quota25,517/testTakersConfirmed27,593/finalPassers24,556）・「農業科 計」（quota797/testTakersConfirmed633/finalPassers633）・「工業科 計」（quota2,343/testTakersConfirmed1,967/finalPassers1,959）・「商業科 計」（quota2,206/testTakersConfirmed1,995/finalPassers1,889）といずれも機械集計が完全一致。quota/applicantsConfirmedは既存competition-rates/saitama.ts（同一quotaを別資料で確認済み）を再利用し、testTakersConfirmed/finalPassersのみ本資料から新規転記。',
   },
   records: [
     { schoolName: '上尾', department: '普通科', quota: 238, applicantsConfirmed: 316, testTakersConfirmed: 315, finalPassers: 244 },
@@ -270,6 +283,33 @@ export const SAITAMA_STAGE_LEDGER: PrefectureStageLedgerFile = {
     { schoolName: '三郷工業技術', department: '電子機械科', quota: 40, applicantsConfirmed: 20, testTakersConfirmed: 20, finalPassers: 20 },
     { schoolName: '三郷工業技術', department: '情報技術科', quota: 40, applicantsConfirmed: 21, testTakersConfirmed: 21, finalPassers: 21 },
     { schoolName: '三郷工業技術', department: '情報電子科', quota: 40, applicantsConfirmed: 34, testTakersConfirmed: 34, finalPassers: 34 },
+    // --- 5頁目「全日制 専門学科」商業に関する学科（18校26レコード） ---
+    { schoolName: '上尾', department: '商業科', quota: 120, applicantsConfirmed: 154, testTakersConfirmed: 154, finalPassers: 121 },
+    { schoolName: '岩槻商業', department: '商業科', quota: 39, applicantsConfirmed: 23, testTakersConfirmed: 23, finalPassers: 23 },
+    { schoolName: '岩槻商業', department: '情報処理科', quota: 80, applicantsConfirmed: 74, testTakersConfirmed: 74, finalPassers: 74 },
+    { schoolName: '浦和商業', department: '商業科', quota: 198, applicantsConfirmed: 194, testTakersConfirmed: 194, finalPassers: 198 },
+    { schoolName: '浦和商業', department: '情報処理科', quota: 80, applicantsConfirmed: 86, testTakersConfirmed: 86, finalPassers: 80 },
+    { schoolName: '大宮商業', department: '商業科', quota: 198, applicantsConfirmed: 148, testTakersConfirmed: 148, finalPassers: 148 },
+    { schoolName: '熊谷商業', department: '総合ビジネス科', quota: 199, applicantsConfirmed: 161, testTakersConfirmed: 160, finalPassers: 160 },
+    { schoolName: '鴻巣', department: '商業科', quota: 80, applicantsConfirmed: 78, testTakersConfirmed: 78, finalPassers: 78 },
+    { schoolName: '越谷総合技術', department: '流通経済科', quota: 40, applicantsConfirmed: 29, testTakersConfirmed: 29, finalPassers: 29 },
+    { schoolName: '越谷総合技術', department: '情報処理科', quota: 40, applicantsConfirmed: 17, testTakersConfirmed: 17, finalPassers: 17 },
+    { schoolName: '狭山経済', department: '流通経済科', quota: 79, applicantsConfirmed: 73, testTakersConfirmed: 73, finalPassers: 73 },
+    { schoolName: '狭山経済', department: '会計科', quota: 40, applicantsConfirmed: 30, testTakersConfirmed: 30, finalPassers: 30 },
+    { schoolName: '狭山経済', department: '情報処理科', quota: 80, applicantsConfirmed: 75, testTakersConfirmed: 75, finalPassers: 75 },
+    { schoolName: '所沢商業', department: '情報処理科', quota: 79, applicantsConfirmed: 57, testTakersConfirmed: 57, finalPassers: 57 },
+    { schoolName: '所沢商業', department: '国際流通科', quota: 79, applicantsConfirmed: 44, testTakersConfirmed: 43, finalPassers: 43 },
+    { schoolName: '所沢商業', department: 'ビジネス会計科', quota: 40, applicantsConfirmed: 12, testTakersConfirmed: 12, finalPassers: 12 },
+    { schoolName: '新座総合技術', department: '総合ビジネス科', quota: 39, applicantsConfirmed: 39, testTakersConfirmed: 39, finalPassers: 39 },
+    { schoolName: '鳩ケ谷', department: '情報処理科', quota: 80, applicantsConfirmed: 78, testTakersConfirmed: 78, finalPassers: 80 },
+    { schoolName: '羽生実業', department: '商業科', quota: 39, applicantsConfirmed: 5, testTakersConfirmed: 5, finalPassers: 5 },
+    { schoolName: '羽生実業', department: '情報処理科', quota: 40, applicantsConfirmed: 10, testTakersConfirmed: 10, finalPassers: 10 },
+    { schoolName: '深谷商業', department: '商業科', quota: 158, applicantsConfirmed: 160, testTakersConfirmed: 160, finalPassers: 158 },
+    { schoolName: '深谷商業', department: '会計科', quota: 40, applicantsConfirmed: 43, testTakersConfirmed: 43, finalPassers: 40 },
+    { schoolName: '深谷商業', department: '情報処理科', quota: 80, applicantsConfirmed: 83, testTakersConfirmed: 83, finalPassers: 80 },
+    { schoolName: '八潮フロンティア', department: 'ビジネス探究科', quota: 119, applicantsConfirmed: 132, testTakersConfirmed: 132, finalPassers: 119 },
+    { schoolName: '市立川越', department: '国際経済科', quota: 70, applicantsConfirmed: 109, testTakersConfirmed: 109, finalPassers: 70 },
+    { schoolName: '市立川越', department: '情報処理科', quota: 70, applicantsConfirmed: 84, testTakersConfirmed: 83, finalPassers: 70 },
   ],
   officialSubtotals: [
     // ⚠️applicantsConfirmedはこの資料（3月6日版）には印字されていない（既存パイプライン由来の
@@ -283,5 +323,9 @@ export const SAITAMA_STAGE_LEDGER: PrefectureStageLedgerFile = {
     // applicantsConfirmedはこの資料に印字が無いため、既存competition-rates/saitama.tsからの
     // 再利用値を機械集計した参考値（1,973）。
     { label: '工業科 計', quota: 2_343, applicantsConfirmed: 1_973, testTakersConfirmed: 1_967, finalPassers: 1_959 },
+    // quota(2,206)・testTakersConfirmed(1,995)・finalPassers(1,889)は本資料印字の
+    // 「商業科 計」（A/B/C列）と直接一致。applicantsConfirmedは既存パイプライン再利用の
+    // 参考値（1,998・この資料には印字なし）。
+    { label: '商業科 計', quota: 2_206, applicantsConfirmed: 1_998, testTakersConfirmed: 1_995, finalPassers: 1_889 },
   ],
 };
