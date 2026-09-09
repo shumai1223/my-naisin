@@ -4,14 +4,15 @@ import { HOKKAIDO_COMPETITION_RATES } from '@/data/competition-rates/hokkaido';
 
 /**
  * T-Y11F §5順序#7 DoD検証（北海道・段階台帳28県目・全日制coverage='partial'・
- * 空知29＋石狩57＋市立札幌9＋後志18＋胆振27＋日高7＋渡島29＋檜山4＋上川37＝217レコードで着手）:
+ * 空知29＋石狩57＋市立札幌9＋後志18＋胆振27＋日高7＋渡島29＋檜山4＋上川37＋留萌7＋
+ * 宗谷8＝232レコードで着手）:
  * ①レコードの不変条件（quota等はすべて0より大きい） ②既存の倍率パイプライン
  * （competition-rates/hokkaido.ts）のR8レコードとquota・applicantsConfirmedが全件完全一致
  * すること ③第2次募集による新規応募者分でtestTakersConfirmedがapplicantsConfirmedを僅かに
- * 上回る既知23件・追加合格と推測されるfinalPassers>testTakersConfirmedの既知10件を除き、
+ * 上回る既知26件・追加合格と推測されるfinalPassers>testTakersConfirmedの既知10件を除き、
  * 両不変条件が成立すること（市立札幌9件・日高7件・渡島普通10件・檜山4件は例外0件）。
  */
-describe('北海道 段階台帳（T-Y11F §5順序#7・28県目・全日制coverage=partial・空知29+石狩57+市立札幌9+後志18+胆振27+日高7+渡島29+檜山4+上川37=217レコード）', () => {
+describe('北海道 段階台帳（T-Y11F §5順序#7・28県目・全日制coverage=partial・空知29+石狩57+市立札幌9+後志18+胆振27+日高7+渡島29+檜山4+上川37+留萌7+宗谷8=232レコード）', () => {
   const { records, coverage } = HOKKAIDO_STAGE_LEDGER;
 
   // 第2次募集で新規応募した受検者が第1次出願者数に含まれないため+1〜+4の小差で超過(制度構造)
@@ -39,6 +40,9 @@ describe('北海道 段階台帳（T-Y11F §5順序#7・28県目・全日制cove
     '旭川商業|流通ビジネス',
     '旭川商業|会計',
     '下川商業|商業',
+    '浜頓別|普通',
+    '礼文|普通',
+    '稚内商業|商業',
   ]);
 
   // 資料脚注の「追加合格者」調整により、第2次募集の有無に関わらずfinalPassersが
@@ -56,8 +60,8 @@ describe('北海道 段階台帳（T-Y11F §5順序#7・28県目・全日制cove
     '函館商業|会計ビジネス',
   ]);
 
-  it('取り込み件数は空知29+石狩57+市立札幌9+後志18+胆振27+日高7+渡島29+檜山4+上川37=217レコード', () => {
-    expect(records).toHaveLength(217);
+  it('取り込み件数は空知29+石狩57+市立札幌9+後志18+胆振27+日高7+渡島29+檜山4+上川37+留萌7+宗谷8=232レコード', () => {
+    expect(records).toHaveLength(232);
   });
 
   it('coverage.statusはpartial（北海道は全14管内構成のため）', () => {
@@ -73,7 +77,7 @@ describe('北海道 段階台帳（T-Y11F §5順序#7・28県目・全日制cove
     }
   });
 
-  it('testTakersConfirmedは既知23件（第2次募集の新規応募者分）を除きapplicantsConfirmed以下', () => {
+  it('testTakersConfirmedは既知26件（第2次募集の新規応募者分）を除きapplicantsConfirmed以下', () => {
     let exceedCount = 0;
     for (const r of records) {
       const key = `${r.schoolName}|${r.department}`;
@@ -111,15 +115,15 @@ describe('北海道 段階台帳（T-Y11F §5順序#7・28県目・全日制cove
       expect(counterpart.quota).toBe(stageRecord.quota);
       expect(counterpart.finalApplicants).toBe(stageRecord.applicantsConfirmed);
     }
-    expect(matched).toBe(217);
+    expect(matched).toBe(232);
   });
 
-  it('217レコード全数の機械集計値を記録する（北海道は公表側に管内単独の合計行が無いため機械集計のみ・回帰検知用）', () => {
+  it('232レコード全数の機械集計値を記録する（北海道は公表側に管内単独の合計行が無いため機械集計のみ・回帰検知用）', () => {
     const sums = sumStageLedger(records);
-    expect(sums.schoolCount).toBe(217);
-    expect(sums.quota).toBe(1_880 + 9_360 + 1_680 + 1_230 + 2_160 + 550 + 1_040 + 760 + 240 + 2_640);
-    expect(sums.applicantsConfirmed).toBe(1_449 + 9_898 + 2_052 + 977 + 1_957 + 402 + 1_091 + 708 + 127 + 2_344);
-    expect(sums.testTakersConfirmed).toBe(1_420 + 9_467 + 1_954 + 959 + 1_824 + 389 + 934 + 588 + 124 + 2_273);
-    expect(sums.finalPassers).toBe(1_395 + 8_461 + 1_596 + 952 + 1_770 + 382 + 869 + 580 + 123 + 2_134);
+    expect(sums.schoolCount).toBe(232);
+    expect(sums.quota).toBe(1_880 + 9_360 + 1_680 + 1_230 + 2_160 + 550 + 1_040 + 760 + 240 + 2_640 + 840);
+    expect(sums.applicantsConfirmed).toBe(1_449 + 9_898 + 2_052 + 977 + 1_957 + 402 + 1_091 + 708 + 127 + 2_344 + 478);
+    expect(sums.testTakersConfirmed).toBe(1_420 + 9_467 + 1_954 + 959 + 1_824 + 389 + 934 + 588 + 124 + 2_273 + 474);
+    expect(sums.finalPassers).toBe(1_395 + 8_461 + 1_596 + 952 + 1_770 + 382 + 869 + 580 + 123 + 2_134 + 468);
   });
 });
