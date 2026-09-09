@@ -3,7 +3,7 @@ import { CHIBA_STAGE_LEDGER } from '../chiba';
 import { COMPETITION_RATE_BY_PREFECTURE } from '@/data/competition-rates';
 
 /**
- * T-Y11F §5順序#7 DoD検証（千葉県・段階台帳パイロット・35レコード）:
+ * T-Y11F §5順序#7 DoD検証（千葉県・段階台帳パイロット・105レコード）:
  * ①レコードの不変条件（quota>0等）②既存の倍率パイプライン（competition-rates/chiba.ts）の
  * quota/finalApplicantsと、段階台帳のquota/applicantsConfirmedが独立した情報源にも
  * かかわらず一致することを機械的に突合する（相互裏取り）。
@@ -11,8 +11,8 @@ import { COMPETITION_RATE_BY_PREFECTURE } from '@/data/competition-rates';
 describe('千葉県 段階台帳 パイロット（T-Y11F §5順序#7）', () => {
   const { records } = CHIBA_STAGE_LEDGER;
 
-  it('取り込み件数は70レコード（1〜2頁目）', () => {
-    expect(records).toHaveLength(70);
+  it('取り込み件数は105レコード（1〜3頁目）', () => {
+    expect(records).toHaveLength(105);
   });
 
   it('quota/applicantsConfirmed/testTakersConfirmed/finalPassersはいずれも0より大きい（不変条件）', () => {
@@ -30,9 +30,9 @@ describe('千葉県 段階台帳 パイロット（T-Y11F §5順序#7）', () =>
     }
   });
 
-  it('sumStageLedgerが70校分の合計を返す', () => {
+  it('sumStageLedgerが105校分の合計を返す', () => {
     const sums = sumStageLedger(records);
-    expect(sums.schoolCount).toBe(70);
+    expect(sums.schoolCount).toBe(105);
     expect(sums.quota).toBeGreaterThan(0);
   });
 
@@ -53,6 +53,6 @@ describe('千葉県 段階台帳 パイロット（T-Y11F §5順序#7）', () =>
       expect(counterpart.finalApplicants).toBe(stageRecord.applicantsConfirmed);
     }
     // 少なくとも大半のレコードが既存データと突合できること（両ファイルの学校名表記が完全一致する前提の確認）
-    expect(matched).toBeGreaterThanOrEqual(60);
+    expect(matched).toBeGreaterThanOrEqual(90);
   });
 });
