@@ -44,7 +44,9 @@ describe('岩手県 倍率パイプラインα（Y-6・全日制59校113レコ�
   });
 
   it('連携型入学者選抜による調整済み募集定員（一関第一・普通理数科=定員200から連携型67を除いた133）が正しく収録されている', () => {
-    expect(r8.find((r) => r.schoolName === '一関第一')).toEqual({
+    // T-Y11F §5順序#8: page/rowIndexは出典ロケータ用に追加されたフィールド。quota等の既存値は変えていない
+    const { page, rowIndex, ...actual } = r8.find((r) => r.schoolName === '一関第一') ?? {};
+    expect(actual).toEqual({
       schoolName: '一関第一',
       department: '普通・理数科',
       quota: 133,

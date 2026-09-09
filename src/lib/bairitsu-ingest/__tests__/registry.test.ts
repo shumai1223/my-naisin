@@ -122,6 +122,7 @@ describe('bairitsu-ingest registry（T-Y11E E-1）', () => {
     expect(parser).toBeDefined();
     const parsed = parser!(iwateR8Geometry as PdfPageGeometry[]);
     const expectedR8Records = IWATE_COMPETITION_RATES.records.filter((r) => r.fiscalYear === undefined);
+    // T-Y11F §5順序#8: page/rowIndexは出典ロケータ用に追加されたフィールド。quota等の既存値は変えていない
     expect(parsed).toEqual(
       expectedR8Records.map((e) => ({
         schoolName: e.schoolName,
@@ -129,6 +130,8 @@ describe('bairitsu-ingest registry（T-Y11E E-1）', () => {
         quota: e.quota,
         finalApplicants: e.finalApplicants,
         finalRate: e.finalRate,
+        page: e.page,
+        rowIndex: e.rowIndex,
       }))
     );
   });

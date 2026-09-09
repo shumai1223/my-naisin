@@ -185,6 +185,7 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
     // してから期待値を更新すること（既存県の件数が勝手に減っていたら書き換え事故を疑う）。
     expect(nonZero.sort((a, b) => a.code.localeCompare(b.code))).toEqual([
       { code: 'gunma', count: 106 },
+      { code: 'iwate', count: 113 },
       { code: 'tochigi', count: 107 },
       { code: 'tottori', count: 43 },
     ]);
@@ -202,6 +203,31 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
         // 学校別詳細表は物理ページ1〜2（3頁目は詳細表対象外）
         expect(locator!.page).toBeGreaterThanOrEqual(1);
         expect(locator!.page).toBeLessThanOrEqual(2);
+        expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
+      }
+    });
+
+    it('R7以前（fiscalYear明示済み）はまだpage/rowIndex未バックフィルのため全件null', () => {
+      const pre8 = file.records.filter((r) => r.fiscalYear !== undefined);
+      expect(pre8.length).toBeGreaterThan(0);
+      for (const r of pre8) {
+        expect(resolveSourceLocator(r, file.sources)).toBeNull();
+      }
+    });
+  });
+
+  describe('iwate R8（#8・4県目・末尾の学科名overrideを含む実データ検証）', () => {
+    const file = COMPETITION_RATE_BY_PREFECTURE['iwate']!;
+    const r8 = file.records.filter((r) => !r.fiscalYear);
+
+    it('R8の113件全件がresolveSourceLocatorで解決できる', () => {
+      for (const r of r8) {
+        const locator = resolveSourceLocator(r, file.sources);
+        expect(locator).not.toBeNull();
+        expect(locator!.pdfSha256).toBe('be09f4b46aab9fe5dce6400680218cc6004d942fcde401a1df748c46ddcaab87');
+        // 詳細表は物理ページ1〜3（概要ページ無し・オフセット無し）
+        expect(locator!.page).toBeGreaterThanOrEqual(1);
+        expect(locator!.page).toBeLessThanOrEqual(3);
         expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
       }
     });

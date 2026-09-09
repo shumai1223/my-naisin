@@ -56,7 +56,8 @@ describe('bairitsu-ingest parse-table-pdf 汎用carry-forward組み立て (iwate
 
   test('大学科列（未使用の広域区分）は学科名に混入しない（例外の大東を除く）', () => {
     const morioka1 = parsed.find((r) => r.schoolName === '盛岡第一');
-    expect(morioka1).toEqual({ schoolName: '盛岡第一', department: '普通・理数科', quota: 280, finalApplicants: 341, finalRate: 1.22 });
+    // T-Y11F §5順序#8: page/rowIndexは出典ロケータ用に追加されたフィールド
+    expect(morioka1).toEqual({ schoolName: '盛岡第一', department: '普通・理数科', quota: 280, finalApplicants: 341, finalRate: 1.22, page: 1, rowIndex: 0 });
   });
 
   test('機械集計のグランドトータルが公式資料の「合計」行（quota8,215・applicants6,574）と一致する', () => {
