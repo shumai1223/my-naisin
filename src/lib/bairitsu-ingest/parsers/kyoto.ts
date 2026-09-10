@@ -49,15 +49,25 @@ function groupRowsIntoBlocks(rows: ClusteredRow[], hlines: PdfPageGeometry['hlin
   return blocks.filter((b) => b.length > 0);
 }
 
-/** 京都府R8倍率PDFの学校別データ全日制2頁分（`kyoto-r8-geometry.json`）を解析する。 */
+/**
+ * 京都府R8倍率PDFの学校別データ全日制2頁分（`kyoto-r8-geometry.json`）を解析する。
+ *
+ * ⚠️T-Y11F §5順序#8（出典ロケータ）: geometry配列2頁は生PDF全4頁中の物理ページ2〜3
+ * （1頁目=全体サマリー・4頁目=定時制の別表のためスコープ外。2026-09-11に生PDF全文
+ * grepで先頭の山城「普通[単位制]」quota224/applicants268/finalRate1.20が物理ページ2に、
+ * 末尾の丹後緑風(久美浜学舎)「みらいクリエイト」quota18/applicants2/finalRate0.11が
+ * 物理ページ3に実在することを確認）。オフセットは配列添字+2。
+ */
 export function parseKyoto(geometries: PdfPageGeometry[]): ParsedCompetitionRow[] {
-  const blocks = geometries.flatMap((geom) => {
+  const blocksWithPage = geometries.flatMap((geom, pageIdx) => {
+    const page = pageIdx + 2;
     const rows = groupCharsIntoRows(geom.chars, 3.0);
-    return groupRowsIntoBlocks(rows, geom.hlines, 150);
+    return groupRowsIntoBlocks(rows, geom.hlines, 150).map((block) => ({ page, block }));
   });
 
   const parsedFullwidthBrackets: ParsedCompetitionRow[] = [];
-  for (const block of blocks) {
+  const rowIndexByPage = new Map<number, number>();
+  for (const { page, block } of blocksWithPage) {
     const fields = block.map((row) => extractRowFields(row.chars, KYOTO_LAYOUT));
     // ⚠️分校・学舎名（「（南）」「（宮津学舎）」等）は学校名列の別の行に断片として出現し、
     // 本体の学校名と連結する必要がある（akita型の学校名複数行断片連結と同型）。ただし
@@ -87,7 +97,9 @@ export function parseKyoto(geometries: PdfPageGeometry[]): ParsedCompetitionRow[
       const resolvedRawDept = rawDept || pendingDepartments.shift() || '';
       if (!resolvedRawDept || resolvedRawDept === '計') continue;
       const department = normalizeDepartmentText(resolvedRawDept);
-      parsedFullwidthBrackets.push({ schoolName, department, quota, finalApplicants, finalRate });
+      const rowIndex = rowIndexByPage.get(page) ?? 0;
+      rowIndexByPage.set(page, rowIndex + 1);
+      parsedFullwidthBrackets.push({ schoolName, department, quota, finalApplicants, finalRate, page, rowIndex });
     }
   }
   // ⚠️既存データは学科名の副次コース表記を半角角括弧`[]`で統一している。学校名の分校・学舎名の

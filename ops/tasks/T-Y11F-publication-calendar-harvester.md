@@ -2407,7 +2407,35 @@ tsc実exit0・jestフルスイート545suites7701tests green(1発green)。
 次は残り10県(kyoto/nagano/nara/niigata/oita/saga/shiga/shizuoka/toyama/yamagata)へ
 進める。
 
-| 8 | **★出典ロケータ**⚠️着手(2026-09-11・型基盤完了・26県目kumamoto完了・累計2789件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
+### #8 出典ロケータ 27県目=kyoto（2026-09-11・ブロック単位個別実装・4頁中の学校別詳細表は物理ページ2〜3のみ）
+
+sourceIndex分布を確認したところ全75件が単一PDF(sources[0])由来で分岐なしと判明。kyotoは
+geometry配列2頁だが生PDF自体は全4頁あり、初めて「geometry頁数≠PDF全頁数」のケースだった
+(1頁目=全体サマリー・4頁目=定時制の別表でスコープ外・詳細表は物理ページ2〜3のみ)。
+生PDF全文grepで先頭の山城「普通[単位制]」quota224/applicants268/finalRate1.20が物理
+ページ2に、末尾の丹後緑風(久美浜学舎)「みらいクリエイト」quota18/applicants2/
+finalRate0.11が物理ページ3に実在することを確認し、オフセットは配列添字+2と特定した。
+
+parsers/kyoto.tsは罫線ブロック(groupRowsIntoBlocks)をページ横断でflatMapする構造の
+ため、`geometries.flatMap(geom)` を `geometries.flatMap((geom,pageIdx))` に変更し
+`{page, block}`のペアでブロックを保持、最終push箇所にrowIndexByPageマップを追加。後段の
+2段階map(全角→半角括弧統一・少数校の個別補正)は既存のスプレッド構造のままpage/rowIndex
+を保持することを確認(iwate/saitama/nagasakiに続くoverride経由page保持パターン)。
+
+既存テスト2箇所(kyoto.test.tsの北桑田・綾部(東)くくり募集のtoEqual完全一致)を着手前に
+能動的にgrepで発見し分割代入で対処。既存テスト2件(registry.test.ts/competition-rate.test.ts)
+を更新、kyoto用describeブロックを新設。PDFを再取得しsha256(0a8aa3bd...)を計測。
+
+累計2864件(共有関数3種18県1898+個別実装9県966)。
+tsc実exit0・jestフルスイート545suites7704tests green(1発green)。
+
+★教訓: geometry配列の頁数をPDF全頁数と決め打ちせず、必ず生PDFのpdfinfo Pagesと突合する
+こと(kyotoは2頁のgeometryに対しPDF全体は4頁で、概要頁と定時制頁がgeometry取得時点で
+既に除外されていた)。
+
+次は残り9県(nagano/nara/niigata/oita/saga/shiga/shizuoka/toyama/yamagata)へ進める。
+
+| 8 | **★出典ロケータ**⚠️着手(2026-09-11・型基盤完了・27県目kyoto完了・累計2864件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
 
 **2026-09-10着手**: §5順序#7（段階台帳）がhokkaido全14管内完結によりoita/okinawaの2県のみ
 未着手（前進手段なしと判断済み）となったため#8に着手。設計資料

@@ -42,7 +42,8 @@ describe('京都府 倍率パイプラインα（Y-6・全日制75レコード�
   });
 
   it('applicants=0の学科（北桑田・普通/京都フォレスト/京都八幡(南)・人間科学）も正しく収録されている', () => {
-    expect(r8.find((r) => r.schoolName === '北桑田')).toEqual({
+    const kitakuwada = r8.find((r) => r.schoolName === '北桑田')!;
+    expect({ schoolName: kitakuwada.schoolName, department: kitakuwada.department, quota: kitakuwada.quota, finalApplicants: kitakuwada.finalApplicants, finalRate: kitakuwada.finalRate }).toEqual({
       schoolName: '北桑田',
       department: '普通',
       quota: 42,
@@ -52,7 +53,8 @@ describe('京都府 倍率パイプラインα（Y-6・全日制75レコード�
   });
 
   it('くくり募集（綾部(東)・農業/園芸=注2により両学科併せて募集）が単一レコードとして正しく収録されている', () => {
-    expect(r8.find((r) => r.schoolName === '綾部(東)' && r.department === '農業・園芸(くくり)')).toEqual({
+    const ayabe = r8.find((r) => r.schoolName === '綾部(東)' && r.department === '農業・園芸(くくり)')!;
+    expect({ schoolName: ayabe.schoolName, department: ayabe.department, quota: ayabe.quota, finalApplicants: ayabe.finalApplicants, finalRate: ayabe.finalRate }).toEqual({
       schoolName: '綾部(東)',
       department: '農業・園芸(くくり)',
       quota: 9,

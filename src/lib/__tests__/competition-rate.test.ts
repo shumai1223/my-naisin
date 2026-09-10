@@ -200,6 +200,7 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
       { code: 'kagoshima', count: 156 },
       { code: 'kochi', count: 75 },
       { code: 'kumamoto', count: 162 },
+      { code: 'kyoto', count: 75 },
       { code: 'miyagi', count: 129 },
       { code: 'nagasaki', count: 116 },
       { code: 'okinawa', count: 156 },
@@ -907,6 +908,42 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
         // 生PDF全5頁と概要ページ無しでgeometry配列5頁が完全一致するためオフセット+1
         expect(locator!.page).toBeGreaterThanOrEqual(1);
         expect(locator!.page).toBeLessThanOrEqual(5);
+        expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
+      }
+    });
+
+    it('同一page内でrowIndexの重複が無い', () => {
+      const seen = new Set<string>();
+      for (const r of r8) {
+        const key = `${r.page}|${r.rowIndex}`;
+        expect(seen.has(key)).toBe(false);
+        seen.add(key);
+      }
+    });
+
+    it('R7以前（fiscalYear明示済み）はまだpage/rowIndex未バックフィルのため全件null', () => {
+      const pre8 = file.records.filter((r) => r.fiscalYear !== undefined);
+      expect(pre8.length).toBeGreaterThan(0);
+      for (const r of pre8) {
+        expect(resolveSourceLocator(r, file.sources)).toBeNull();
+      }
+    });
+  });
+
+  describe('kyoto R8（#8・27県目・ブロック単位個別実装・概要ページ/定時制ページを除いた物理ページ2〜3）', () => {
+    const file = COMPETITION_RATE_BY_PREFECTURE['kyoto']!;
+    const r8 = file.records.filter((r) => !r.fiscalYear);
+
+    it('R8の75件全件がresolveSourceLocatorで解決できる', () => {
+      expect(r8.length).toBe(75);
+      for (const r of r8) {
+        expect(r.page).toBeDefined();
+        const locator = resolveSourceLocator(r, file.sources);
+        expect(locator).not.toBeNull();
+        expect(locator!.pdfSha256).toBe('0a8aa3bd2adddc8e59d49b0723b75489122a20c4d4939c9d1d93fffb2d25714f');
+        // 生PDF全4頁中、学校別詳細表は物理ページ2〜3のみ(1頁目=概要・4頁目=定時制別表)
+        expect(locator!.page).toBeGreaterThanOrEqual(2);
+        expect(locator!.page).toBeLessThanOrEqual(3);
         expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
       }
     });
