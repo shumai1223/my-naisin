@@ -44,21 +44,25 @@ describe('香川県 倍率パイプラインα（Y-6・全日制30校68レコー
   });
 
   it('凡例(※印)で明記済みのくくり募集3組が正しく収録されている', () => {
-    expect(r8.find((r) => r.schoolName === '三本松')).toEqual({
+    // T-Y11F §5順序#8でpage/rowIndex（出典ロケータ用）が追加されたため、それ以外のフィールドで比較する
+    const { page: _p1, rowIndex: _r1, ...sanbonmatsu } = r8.find((r) => r.schoolName === '三本松')!;
+    expect(sanbonmatsu).toEqual({
       schoolName: '三本松',
       department: '普通・理数（くくり募集）',
       quota: 87,
       finalApplicants: 80,
       finalRate: 0.92,
     });
-    expect(r8.find((r) => r.schoolName === '農業経営')).toEqual({
+    const { page: _p2, rowIndex: _r2, ...nogyo } = r8.find((r) => r.schoolName === '農業経営')!;
+    expect(nogyo).toEqual({
       schoolName: '農業経営',
       department: '農業生産・環境園芸・動物科学・食農科学（くくり募集）',
       quota: 77,
       finalApplicants: 41,
       finalRate: 0.53,
     });
-    expect(r8.find((r) => r.schoolName === '観音寺第一')).toEqual({
+    const { page: _p3, rowIndex: _r3, ...kannonji } = r8.find((r) => r.schoolName === '観音寺第一')!;
+    expect(kannonji).toEqual({
       schoolName: '観音寺第一',
       department: '普通・理数（くくり募集）',
       quota: 150,

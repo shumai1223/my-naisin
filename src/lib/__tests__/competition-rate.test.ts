@@ -188,6 +188,7 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
       { code: 'ehime', count: 99 },
       { code: 'gunma', count: 106 },
       { code: 'iwate', count: 113 },
+      { code: 'kagawa', count: 68 },
       { code: 'miyagi', count: 129 },
       { code: 'nagasaki', count: 116 },
       { code: 'saitama', count: 241 },
@@ -438,6 +439,30 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
         const key = `${locator!.page}|${locator!.rowIndex}`;
         expect(seen.has(key)).toBe(false);
         seen.add(key);
+      }
+    });
+
+    it('R7以前（fiscalYear明示済み）はまだpage/rowIndex未バックフィルのため全件null', () => {
+      const pre8 = file.records.filter((r) => r.fiscalYear !== undefined);
+      expect(pre8.length).toBeGreaterThan(0);
+      for (const r of pre8) {
+        expect(resolveSourceLocator(r, file.sources)).toBeNull();
+      }
+    });
+  });
+
+  describe('kagawa R8（#8・11県目・assembleSimpleTableRows利用県が全件完了）', () => {
+    const file = COMPETITION_RATE_BY_PREFECTURE['kagawa']!;
+    const r8 = file.records.filter((r) => !r.fiscalYear);
+
+    it('R8の68件全件がresolveSourceLocatorで解決できる', () => {
+      for (const r of r8) {
+        const locator = resolveSourceLocator(r, file.sources);
+        expect(locator).not.toBeNull();
+        expect(locator!.pdfSha256).toBe('cfb4eb76f72ead3da00749b03af47ebf10eab21d9c1d3ecf690154a714bc9e10');
+        // 学校別詳細表は物理ページ1に完結（オフセット無し）
+        expect(locator!.page).toBe(1);
+        expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
       }
     });
 

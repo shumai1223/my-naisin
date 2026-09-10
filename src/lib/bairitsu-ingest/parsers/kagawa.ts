@@ -42,9 +42,14 @@ function stripFootnoteSymbols(s: string): string {
   return s.replace(/[＊☆□]/g, '');
 }
 
-/** 香川県R8倍率PDFの学校別データ1頁分（`kagawa-r8-geometry.json`）を解析する。 */
+/**
+ * 香川県R8倍率PDFの学校別データ1頁分（`kagawa-r8-geometry.json`）を解析する。
+ *
+ * ⚠️T-Y11F §5順序#8（出典ロケータ）: pageオフセットは県ごとに異なるため生PDFで毎回実測する
+ * （2026-09-10確認: 詳細は本ファイルの変更コミット参照）。
+ */
 export function parseKagawa(geometries: PdfPageGeometry[]): ParsedCompetitionRow[] {
-  const allRowFields = geometries.flatMap((geom) =>
+  const allRowFields = geometries.flatMap((geom, pageIdx) =>
     groupCharsIntoRows(geom.chars, 3.0).map((row) => {
       const fields = extractRowFields(row.chars, KAGAWA_LAYOUT);
       const smallDept = stripFootnoteSymbols(fields.department).trim();
@@ -55,6 +60,7 @@ export function parseKagawa(geometries: PdfPageGeometry[]): ParsedCompetitionRow
         quotaText: stripFootnoteSymbols(fields.quotaText),
         applicantsText: stripFootnoteSymbols(fields.applicantsText),
         rateText: stripFootnoteSymbols(fields.rateText),
+        page: pageIdx + 1,
       };
     })
   );
