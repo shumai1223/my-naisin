@@ -2496,7 +2496,34 @@ tsc実exit0・jestフルスイート545suites7710tests green(1発green)。
 
 次は残り7県(niigata/oita/saga/shiga/shizuoka/toyama/yamagata)へ進める。
 
-| 8 | **★出典ロケータ**⚠️着手(2026-09-11・型基盤完了・29県目nara完了・累計3020件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
+### #8 出典ロケータ 30県目=niigata（2026-09-11・全日制/定時制の境界がページ境界と無関係に発生する個別実装）
+
+sourceIndex分布を確認したところ全93件が単一PDF(志願変更後の志願状況一覧)由来で分岐なしと
+判明。niigataはgeometry配列4頁がPDF全6頁中の物理ページ3〜6に対応(1〜2頁目は志願変更受付
+の説明・概要のためスコープ外)。生PDF全文grepで先頭の新潟「普通」quota240/applicants303/
+finalRate1.26が物理ページ3に実在することを確認し、オフセットは配列添字+3と特定した。
+
+既存パーサは「全日制」という文字列をキーにフラット化した行配列全体から`findIndex`で1回
+だけカットする設計(定時制セクションへの打ち切りがページ境界と無関係に発生する)ため、
+pageは単にその行が物理的に含まれていたページをそのまま保持すればよく、カット判定自体には
+一切影響しないと確認した。parsers/niigata.tsはfor-of(geometries)をforEach(geom,pageIdx)
+に変更しRowFields.pageを追加、resolveFuriganaOrphans内のスプレッド(`{...r}`)がpageを
+自動継承することを確認、最終push箇所にrowIndexByPageマップを追加。backfillの結果、93件
+全件がpage3〜6の4頁すべてに分布しており(定時制カットが物理ページ6の途中で発生する)、
+zenjitsu/teijiの境界がページ単位でないことを裏付けた。
+
+既存テスト3ファイル(niigata.test.tsの新発田南普通/工業・新潟理数・新潟中央音楽の4件、
+parse-table-pdf-niigata.test.tsの碧のふりがな単独行解決テスト)のtoEqual完全一致
+アサーションを着手前に能動的にgrepで発見し分割代入/共通bare()ヘルパーで対処。既存
+テスト2件(registry.test.ts/competition-rate.test.ts)を更新、niigata用describeブロック
+を新設。PDFを再取得しsha256(a8fd6f1d...)を計測。
+
+累計3113件(共有関数3種18県1898+個別実装12県1215)。
+tsc実exit0・jestフルスイート545suites7713tests green(1発green)。
+
+次は残り6県(oita/saga/shiga/shizuoka/toyama/yamagata)へ進める。
+
+| 8 | **★出典ロケータ**⚠️着手(2026-09-11・型基盤完了・30県目niigata完了・累計3113件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
 
 **2026-09-10着手**: §5順序#7（段階台帳）がhokkaido全14管内完結によりoita/okinawaの2県のみ
 未着手（前進手段なしと判断済み）となったため#8に着手。設計資料

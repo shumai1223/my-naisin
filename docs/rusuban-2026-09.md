@@ -5,16 +5,15 @@
 
 ---
 
-最終更新              2026-09-11 (nara追加)
+最終更新              2026-09-11 (niigata追加)
 いまやっていること     T-Y11F §5順序#8（出典ロケータ）進行中。共有関数3種18県(1898)+
-                      個別実装11県(前回累計1051+nara71=1122)=累計3020件
-今日やったこと         nara: kyoto型ブロック構造+基底ラベル使い回しパターン。バックフィル
-                      スクリプトが複数行フォーマットの1件を初回見落とし→shimane/wakayama
-                      流の対応で解決。全71件locator解決・全545suites7710tests green
-                      (1発)・commit・push済み
-在庫の残り            36登録パーサ県のうち29県完了・残り7県(niigata/oita/saga/shiga/
-                      shizuoka/toyama/yamagata)は個別実装のみ。+R7以前の年度別リプレイ
-                      +ビジョン11県7,191件が未着手
+                      個別実装12県(前回累計1122+niigata93=1215)=累計3113件
+今日やったこと         niigata: 全日制/定時制の境界がページ境界と無関係に発生することを
+                      確認しページ単位でのpage付与のみで対応。全93件locator解決・
+                      全545suites7713tests green(1発)・commit・push済み
+在庫の残り            36登録パーサ県のうち30県完了・残り6県(oita/saga/shiga/shizuoka/
+                      toyama/yamagata)は個別実装のみ。+R7以前の年度別リプレイ+ビジョン
+                      11県7,191件が未着手
 払底の見込み           22データ点いずれも同程度の負荷。sourceIndex事前確認の運用が定着し
                       fukuoka級の複雑さへの対応コストは制御下にある
 詰まっていること        aichi（Imperva WAF一時ブロックが継続中）。oita/okinawa(競争率

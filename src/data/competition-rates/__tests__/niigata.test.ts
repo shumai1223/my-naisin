@@ -43,15 +43,23 @@ describe('新潟県 倍率パイプラインα（Y-6・全日制73校93レコー
     expect(distinctSchools.size).toBe(73);
   });
 
+  const bare = (r: { schoolName: string; department: string; quota: number; finalApplicants: number; finalRate: number }) => ({
+    schoolName: r.schoolName,
+    department: r.department,
+    quota: r.quota,
+    finalApplicants: r.finalApplicants,
+    finalRate: r.finalRate,
+  });
+
   it('同一校が学科系統をまたいで複数レコードを持つケース（新発田南=普通/工業）が正しく収録されている', () => {
-    expect(records.find((r) => r.schoolName === '新発田南' && r.department === '普通')).toEqual({
+    expect(bare(records.find((r) => r.schoolName === '新発田南' && r.department === '普通')!)).toEqual({
       schoolName: '新発田南',
       department: '普通',
       quota: 160,
       finalApplicants: 180,
       finalRate: 1.12,
     });
-    expect(records.find((r) => r.schoolName === '新発田南' && r.department === '工業')).toEqual({
+    expect(bare(records.find((r) => r.schoolName === '新発田南' && r.department === '工業')!)).toEqual({
       schoolName: '新発田南',
       department: '工業',
       quota: 160,
@@ -61,14 +69,14 @@ describe('新潟県 倍率パイプラインα（Y-6・全日制73校93レコー
   });
 
   it('最高倍率(新潟・理数1.95)と最低倍率(新潟中央・音楽0.04)が正しく収録されている', () => {
-    expect(records.find((r) => r.schoolName === '新潟' && r.department === '理数')).toEqual({
+    expect(bare(records.find((r) => r.schoolName === '新潟' && r.department === '理数')!)).toEqual({
       schoolName: '新潟',
       department: '理数',
       quota: 80,
       finalApplicants: 156,
       finalRate: 1.95,
     });
-    expect(records.find((r) => r.schoolName === '新潟中央' && r.department === '音楽')).toEqual({
+    expect(bare(records.find((r) => r.schoolName === '新潟中央' && r.department === '音楽')!)).toEqual({
       schoolName: '新潟中央',
       department: '音楽',
       quota: 21,

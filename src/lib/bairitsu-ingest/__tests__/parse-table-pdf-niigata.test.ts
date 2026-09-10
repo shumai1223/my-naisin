@@ -70,7 +70,8 @@ describe('bairitsu-ingest parse-table-pdf 汎用carry-forward組み立て (niiga
 
   test('ふりがな単独行「あおい」は収録されず、碧が正しい学校名で収録される', () => {
     expect(parsed.some((r) => r.schoolName === 'あおい')).toBe(false);
-    expect(parsed.find((r) => r.schoolName === '碧')).toEqual({ schoolName: '碧', department: '普通', quota: 160, finalApplicants: 153, finalRate: 0.95 });
+    const aoi = parsed.find((r) => r.schoolName === '碧')!;
+    expect({ schoolName: aoi.schoolName, department: aoi.department, quota: aoi.quota, finalApplicants: aoi.finalApplicants, finalRate: aoi.finalRate }).toEqual({ schoolName: '碧', department: '普通', quota: 160, finalApplicants: 153, finalRate: 0.95 });
   });
 
   test('定時制セクションは収録されない', () => {

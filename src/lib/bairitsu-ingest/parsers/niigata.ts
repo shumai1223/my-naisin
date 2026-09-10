@@ -39,6 +39,7 @@ interface RowFields {
   quotaText: string;
   applicantsText: string;
   rateText: string;
+  page: number;
 }
 
 /** ふりがな単独行(碧の実例)を無視し、データ行が自前のschoolNameを持たない場合は前後3行以内の
@@ -59,10 +60,19 @@ function resolveFuriganaOrphans(rows: RowFields[]): RowFields[] {
   return patched.filter((r) => !(HIRAGANA_ONLY.test(r.schoolName) && !r.department));
 }
 
-/** 新潟県R8倍率PDFの学校別データ全4頁分（`niigata-r8-geometry.json`）を解析する。 */
+/**
+ * 新潟県R8倍率PDFの学校別データ全4頁分（`niigata-r8-geometry.json`）を解析する。
+ *
+ * ⚠️T-Y11F §5順序#8（出典ロケータ）: geometry配列4頁は生PDF全6頁中の物理ページ3〜6
+ * （1〜2頁目は概要・志願変更受付の説明のためスコープ外。2026-09-11に生PDF全文grepで
+ * 先頭の新潟「普通」quota240/applicants303/finalRate1.26が物理ページ3に実在することを
+ * 確認）。オフセットは配列添字+3。「全日制」検知による定時制打ち切りはページ境界と無関係に
+ * 発生するため、pageは各行が実際に含まれていた物理ページをそのまま保持する。
+ */
 export function parseNiigata(geometries: PdfPageGeometry[]): ParsedCompetitionRow[] {
   const allRowFields: RowFields[] = [];
-  for (const geom of geometries) {
+  geometries.forEach((geom, pageIdx) => {
+    const page = pageIdx + 3;
     const rows = groupCharsIntoRows(geom.chars, 1.5);
     for (const row of rows) {
       const fields = extractRowFields(row.chars, NIIGATA_LAYOUT);
@@ -75,9 +85,10 @@ export function parseNiigata(geometries: PdfPageGeometry[]): ParsedCompetitionRo
         quotaText: fields.quotaText,
         applicantsText: fields.applicantsText,
         rateText: fields.rateText,
+        page,
       });
     }
-  }
+  });
 
   const cutIdx = allRowFields.findIndex((r) => r.schoolName === '全日制');
   const scoped = cutIdx === -1 ? allRowFields : allRowFields.slice(0, cutIdx);
@@ -85,6 +96,7 @@ export function parseNiigata(geometries: PdfPageGeometry[]): ParsedCompetitionRo
 
   let currentSchool = '';
   const records: ParsedCompetitionRow[] = [];
+  const rowIndexByPage = new Map<number, number>();
   for (const r of resolved) {
     if (r.schoolName) currentSchool = r.schoolName;
     if (!r.department) continue;
@@ -97,7 +109,9 @@ export function parseNiigata(geometries: PdfPageGeometry[]): ParsedCompetitionRo
     // 「（）」で印字するが既存データは半角`()`で統一する（wakayama型と同型の県固有慣行）。
     const parenFixed = currentSchool.replace(/（/g, '(').replace(/）/g, ')');
     const schoolName = SCHOOL_NAME_OVERRIDE[parenFixed] ?? parenFixed;
-    records.push({ schoolName, department: r.department, quota, finalApplicants, finalRate });
+    const rowIndex = rowIndexByPage.get(r.page) ?? 0;
+    rowIndexByPage.set(r.page, rowIndex + 1);
+    records.push({ schoolName, department: r.department, quota, finalApplicants, finalRate, page: r.page, rowIndex });
   }
   return records;
 }

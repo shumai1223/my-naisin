@@ -205,6 +205,7 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
       { code: 'nagano', count: 85 },
       { code: 'nagasaki', count: 116 },
       { code: 'nara', count: 71 },
+      { code: 'niigata', count: 93 },
       { code: 'okinawa', count: 156 },
       { code: 'saitama', count: 241 },
       { code: 'shimane', count: 64 },
@@ -1024,6 +1025,42 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
         // 生PDF全2頁と概要ページ無しでgeometry配列2頁が完全一致するためオフセット+1
         expect(locator!.page).toBeGreaterThanOrEqual(1);
         expect(locator!.page).toBeLessThanOrEqual(2);
+        expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
+      }
+    });
+
+    it('同一page内でrowIndexの重複が無い', () => {
+      const seen = new Set<string>();
+      for (const r of r8) {
+        const key = `${r.page}|${r.rowIndex}`;
+        expect(seen.has(key)).toBe(false);
+        seen.add(key);
+      }
+    });
+
+    it('R7以前（fiscalYear明示済み）はまだpage/rowIndex未バックフィルのため全件null', () => {
+      const pre8 = file.records.filter((r) => r.fiscalYear !== undefined);
+      expect(pre8.length).toBeGreaterThan(0);
+      for (const r of pre8) {
+        expect(resolveSourceLocator(r, file.sources)).toBeNull();
+      }
+    });
+  });
+
+  describe('niigata R8（#8・30県目・全日制/定時制の境界がページ境界と無関係に発生する個別実装）', () => {
+    const file = COMPETITION_RATE_BY_PREFECTURE['niigata']!;
+    const r8 = file.records.filter((r) => !r.fiscalYear);
+
+    it('R8の93件全件がresolveSourceLocatorで解決できる', () => {
+      expect(r8.length).toBe(93);
+      for (const r of r8) {
+        expect(r.page).toBeDefined();
+        const locator = resolveSourceLocator(r, file.sources);
+        expect(locator).not.toBeNull();
+        expect(locator!.pdfSha256).toBe('a8fd6f1d0b38b424501d12cd82adb56f9b358275f55894ae3d59d06ef2155021');
+        // 学校別詳細表は物理ページ3〜6(1〜2頁目は概要・志願変更受付の説明のためオフセット+3)
+        expect(locator!.page).toBeGreaterThanOrEqual(3);
+        expect(locator!.page).toBeLessThanOrEqual(6);
         expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
       }
     });
