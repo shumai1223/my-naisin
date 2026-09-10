@@ -2060,7 +2060,38 @@ jestフルスイート545suites7667tests green。commit 50970de。
 次はassembleCompetitionRateRows利用の残り4県（ishikawa/shimane/tokushima/wakayama、
 いずれも同じ土台に乗るだけなので横展開コストは低い見込み）へ進む。
 
-| 8 | **★出典ロケータ**⚠️着手(2026-09-10・型基盤完了・12県目ibaraki完了(assembleCompetitionRateRows初横展開)・累計1407件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
+### #8 出典ロケータ 13県目=ishikawa（2026-09-10・★併願合算3校は意図的にlocatorなし）
+
+ishikawaは併願制度3校（小松・金沢泉丘・七尾）を`COMBINED_APPLICATION_OVERRIDES`で複数の
+物理行（普通+理数の2〜3行）を1レコードに合算する既存ロジックを持ち、これらは単一の行位置に
+帰属できないため**意図的にpage/rowIndexを付与しない**という設計判断をした（Y-0の捏造回避
+原則に従い、1行1出典が成立しないレコードへ無理に値を割り当てない）。R8全70件中67件が
+resolveSourceLocatorで解決でき、残り3件（併願合算校）は`null`のまま——これは既存の36登録
+パーサ全体でも初めて発生した部分解決パターン。
+
+**★自己訂正（設計ミス1回）**: 最初pdftoppmビジョン確認を省略しオフセット+1と決め打ちして
+67件バックフィルしたが、後追いで確認したところ物理ページ1は概要（総括表）で詳細表は
+物理ページ2〜3（オフセット+2）と判明。`git checkout`でdata fileを一旦クリーンに戻してから
+正しいオフセットで再バックフィルした（コミット前に発見・実害なし）。**教訓の再確認**:
+2県連続でオフセット+1だった場合でも次の県で決め打ちしない（nagasaki/miyagi/yamanashiで
+既に得ていた教訓だが今回一瞬忘れて踏んだ）。
+
+**★新しい罠を発見**: 一時nodeスクリプトの正規表現バックフィルが`git checkout`直後のCRLF
+行末（`\r`）でマッチ0件になる事故が発生（`tsx`実行結果はLFだったが`git checkout`で復元した
+ファイルはCRLFに変換されたため）。正規表現末尾に`\r?`を追加して対処。**以後、data fileを
+`git checkout`で復元し直してから再バックフィルする場合は、正規表現に`\r?`を含めることを
+標準手順とする。**
+
+既存テスト（`registry.test.ts`は既にSet多重集合比較のためpage/rowIndex追加でも無改修で通過・
+`nonadjacent-roles.test.ts`/`ishikawa.test.ts`の3つの合算校向けtoEqualは`page:undefined`
+のため無改修で通過）を確認、`competition-rate.test.ts`に新規describeを追加。
+
+累計1474件（assembleSimpleTableRows11県1258+ibaraki149+ishikawa67）。
+tsc実exit0・jestフルスイート545suites7670tests green。commit a9df796。
+
+次はassembleCompetitionRateRows利用の残り3県（shimane/tokushima/wakayama）へ進む。
+
+| 8 | **★出典ロケータ**⚠️着手(2026-09-10・型基盤完了・13県目ishikawa完了(併願合算3校は意図的にlocatorなし)・累計1474件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
 
 **2026-09-10着手**: §5順序#7（段階台帳）がhokkaido全14管内完結によりoita/okinawaの2県のみ
 未着手（前進手段なしと判断済み）となったため#8に着手。設計資料
