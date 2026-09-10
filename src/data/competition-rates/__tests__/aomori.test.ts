@@ -44,7 +44,9 @@ describe('青森県 倍率パイプラインα（Y-6・全日制43校89レコー
   });
 
   it('くくり募集(青森商業・商業/情報処理等)が単一レコードとして正しく収録されている', () => {
-    expect(r8.find((r) => r.schoolName === '青森商業')).toEqual({
+    // T-Y11F §5順序#8でpage/rowIndex（出典ロケータ用）が追加されたため、それ以外のフィールドで比較する
+    const { page: _page, rowIndex: _rowIndex, ...actual } = r8.find((r) => r.schoolName === '青森商業')!;
+    expect(actual).toEqual({
       schoolName: '青森商業',
       department: '商業・情報処理(くくり)',
       quota: 200,

@@ -185,6 +185,7 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
     // してから期待値を更新すること（既存県の件数が勝手に減っていたら書き換え事故を疑う）。
     expect(nonZero.sort((a, b) => a.code.localeCompare(b.code))).toEqual([
       { code: 'akita', count: 78 },
+      { code: 'aomori', count: 89 },
       { code: 'chiba', count: 188 },
       { code: 'ehime', count: 99 },
       { code: 'gunma', count: 106 },
@@ -653,6 +654,31 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
         const locator = resolveSourceLocator(r, file.sources);
         expect(locator).not.toBeNull();
         expect(locator!.pdfSha256).toBe('8bcfb596fd7dc1f0f760982c48c0e281118c11abf044524f396386f539f1aef0');
+        // 学校別詳細表は物理ページ1〜2（オフセット無し）
+        expect(locator!.page).toBeGreaterThanOrEqual(1);
+        expect(locator!.page).toBeLessThanOrEqual(2);
+        expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
+      }
+    });
+
+    it('R7以前（fiscalYear明示済み）はまだpage/rowIndex未バックフィルのため全件null', () => {
+      const pre8 = file.records.filter((r) => r.fiscalYear !== undefined);
+      expect(pre8.length).toBeGreaterThan(0);
+      for (const r of pre8) {
+        expect(resolveSourceLocator(r, file.sources)).toBeNull();
+      }
+    });
+  });
+
+  describe('aomori R8（#8・19県目・共有関数を使わない個別実装(tottori型)への初の横展開）', () => {
+    const file = COMPETITION_RATE_BY_PREFECTURE['aomori']!;
+    const r8 = file.records.filter((r) => !r.fiscalYear);
+
+    it('R8の89件全件がresolveSourceLocatorで解決できる', () => {
+      for (const r of r8) {
+        const locator = resolveSourceLocator(r, file.sources);
+        expect(locator).not.toBeNull();
+        expect(locator!.pdfSha256).toBe('8c5f5f66326a91f8678f3fde2db0aefc52a98aee394797ee33d8918d130c77fb');
         // 学校別詳細表は物理ページ1〜2（オフセット無し）
         expect(locator!.page).toBeGreaterThanOrEqual(1);
         expect(locator!.page).toBeLessThanOrEqual(2);
