@@ -5,19 +5,18 @@
 
 ---
 
-最終更新              2026-09-10 13:3x
+最終更新              2026-09-10 13:5x
 いまやっていること     T-Y11F §5順序#8（出典ロケータ）進行中。共有関数3種18県(1898)+
-                      個別実装3県(aomori89+fukui72+fukuoka66=227)=累計2125件
-今日やったこと         fukuoka: レコード単位でsourceIndexが異なる初のケース。sourceIndex:0
-                      (パーサが実際に読む一次PDF)の71件中66件のみ安全にバックフィル、
-                      残り125件は別出典のため意図的にlocatorなし。全545suites7687
-                      tests green・commit 4d3a041 push済
-在庫の残り            36登録パーサ県のうち21県完了・残り15県(gifu/hiroshima/kagoshima/
-                      kochi/kumamoto/kyoto/nagano/nara/niigata/oita/saga/shiga/
-                      shizuoka/toyama/yamagata)は個別実装のみ。+R7以前の年度別リプレイ+
-                      ビジョン11県7,191件が未着手
-払底の見込み           21データ点いずれも同程度の負荷。ただしsourceIndexを持つ県(gifu等)は
-                      fukuokaと同様の追加確認が必要になる可能性あり
+                      個別実装4県(aomori89+fukui72+fukuoka66+gifu134=361)=累計2259件
+今日やったこと         gifu: fukuokaの教訓を活かし着手前にsourceIndex分布を確認→
+                      全134件がsourceIndex:0で分岐なしと確認してから安全に着手。
+                      全545suites7689tests green・commit 938f713 push済
+在庫の残り            36登録パーサ県のうち22県完了・残り14県(hiroshima/kagoshima/kochi/
+                      kumamoto/kyoto/nagano/nara/niigata/oita/saga/shiga/shizuoka/
+                      toyama/yamagata)は個別実装のみ。+R7以前の年度別リプレイ+ビジョン
+                      11県7,191件が未着手
+払底の見込み           22データ点いずれも同程度の負荷。sourceIndex事前確認の運用が定着し
+                      fukuoka級の複雑さへの対応コストは制御下にある
 詰まっていること        aichi（Imperva WAF一時ブロックが継続中）。oita/okinawa(競争率
                       データ自体は完了)は他タスクで資料自体が未整備で前進手段なし
 👤の判断が要るもの      #5成果物・#6仕様書とも対外提示可否・価格は👤判断待ち（送信0件）

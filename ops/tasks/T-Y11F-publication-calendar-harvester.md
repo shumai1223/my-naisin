@@ -2275,7 +2275,32 @@ tsc実exit0・jestフルスイート545suites7687tests green。commit 4d3a041。
 対象にバックフィルすること（全件に機械的にpage/rowIndexを割り当てると別出典のレコードに
 誤った出典を主張してしまう）。次に着手する県（gifu等）でも同様の確認を必須とする。
 
-| 8 | **★出典ロケータ**⚠️着手(2026-09-10・型基盤完了・21県目fukuoka完了(sourceIndex分岐の初ケース)・累計2125件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
+### #8 出典ロケータ 22県目=gifu（2026-09-10・sourceIndex統一県）
+
+fukuokaの教訓を活かし着手前にsourceIndex分布を確認したところ、gifuは全134件が
+`sourceIndex:0`で一次PDFに統一されており分岐なしと判明（fukuokaのような複雑さは無し）。
+gifuはtochigi型（単純carry-forward）の個別実装で唯一の罠は「定時制/通信制」セクション
+見出しを検知した時点で処理打ち切りする設計。`geometries.forEach`をインデックス付きループに
+変更し`page:pageIdx+1`を付与、最終pushに`rowIndexByPage`マップを追加するだけの最小差分で
+完了。
+
+`sources[0]`（学校別詳細PDF・485854.pdf）と`sources[1]`（総括表PDF・485856.pdf）の2つの
+R8資料が併存する構造で、パーサが実際に読むのは`sources[0]`のみと確認してからそちらに
+pdfSha256を設定（`fetchedAt`文字列が両ソース共通のため誤って2番目に書き込まないよう
+`findIndex`の挙動を実際に確認済み）。5物理ページ・5geometryページで一致しオフセット
+単純に+1（調整不要）、data file順序も一切の並べ替えなくparser出力と一致（134/134が
+一発で順序ベースmatch成功）。
+
+既存テスト1箇所（`parse-table-pdf-gifu.test.ts`の岐阜商業「会計」`.toEqual`）を着手前に
+能動的にgrepで発見し対処、jestフルスイート1発でgreen。
+
+累計2259件（共有関数3種18県1898+個別実装4県(aomori89+fukui72+fukuoka66+gifu134)=361）。
+tsc実exit0・jestフルスイート545suites7689tests green。commit 938f713。
+
+次はhiroshima/kagoshima等の残り14県へ進める（いずれも着手前にsourceIndex分布を確認する
+運用を継続）。
+
+| 8 | **★出典ロケータ**⚠️着手(2026-09-10・型基盤完了・22県目gifu完了(sourceIndex統一で分岐なし)・累計2259件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
 
 **2026-09-10着手**: §5順序#7（段階台帳）がhokkaido全14管内完結によりoita/okinawaの2県のみ
 未着手（前進手段なしと判断済み）となったため#8に着手。設計資料
