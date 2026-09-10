@@ -2137,7 +2137,51 @@ tokushima69）。tsc実exit0・jestフルスイート545suites7674tests green。
 
 次は最後の1県wakayamaへ進む。
 
-| 8 | **★出典ロケータ**⚠️着手(2026-09-10・型基盤完了・15県目tokushima完了・累計1607件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
+### #8 出典ロケータ 16県目=wakayama（2026-09-10・★assembleCompetitionRateRows利用の全5県が完了）
+
+wakayamaはshimaneと同型の明示的オブジェクト再構築型の後段map（分校名合成＋くくり募集
+override＋全角→半角括弧変換）を持つ構造でpage/rowIndexを明示的に追加。quota/finalApplicants
+が別列（D+E合算）という県固有の罠は既存の`extraColumns`機構をそのまま維持しページ追跡だけを
+新規に配線。物理2頁中1頁目に全57件の詳細表が完結（2頁目は定時制等の別表）、オフセット単純に
++1（調整不要・pdftoppmビジョン確認）。データファイル側に1件の複数行フォーマット（串本古座）
+が存在、shimaneで確立した単一行/複数行両対応バックフィルスクリプトを再利用し順序ベースmatch
+で一発success（tokushimaのような並び替えは発生せず）。
+
+既存テスト3箇所（`registry.test.ts`=厳密順序比較のため要更新・`data/competition-rates/
+__tests__/wakayama.test.ts`2箇所=熊野/紀央館の`.toEqual`）を着手前に能動的にgrepで発見し対処。
+
+**#8はassembleCompetitionRateRows利用の5県（ibaraki149+ishikawa67+shimane64+tokushima69+
+wakayama57=406件）全完了**。tsc実exit0・jestフルスイート545suites7676tests green。
+commit 4e3e630。
+
+### #8 出典ロケータ 17県目=okinawa（2026-09-10・★候補調査で見落としていたassembleSimpleTableRows利用県を追加発見）
+
+wakayama完了後にassembleCompetitionRateRows全5県完了を確認する過程で、全36県のうち
+assembleSimpleTableRows利用県を`grep -l`で機械的に洗い出し直したところ、okinawaが該当する
+にもかかわらず初回の候補リスト（saitama/nagasaki/miyagi/yamanashi/chiba/ehime/kagawa）に
+入っていなかったと判明（記憶頼みのリストアップの見落とし）。
+
+okinawaは全日制・定時制が同一表に混在し課程列でcarry-forwardしながら絞り込む構造で、絞り込み
+フィルタ（zenjitsuRows）より前段のclusteredRowsにpage付与し、絞り込み後・フィールド抽出後も
+スプレッドでpageを引き継ぐよう配線。4物理ページ・4geometryページで一致しオフセット単純に+1
+（調整不要・pdftoppmビジョン確認で辺土名の先頭一致を確認）。
+
+既存テスト2箇所（`registry.test.ts`・`data/competition-rates/__tests__/okinawa.test.ts`の
+名護フロンティアの`.toEqual`）を着手前に能動的にgrepで発見し対処。
+
+**★教訓**: 共有関数利用県の洗い出しは「作業中に思い出した候補」でなく毎回`grep -l`で機械的に
+全パーサを再スキャンすること（1回目のリストアップはtottori/gunma着手時の記憶に頼った不完全な
+ものだった）。
+
+累計1820件（assembleSimpleTableRows12県（1258+okinawa156=1414）+assembleCompetitionRateRows
+5県406）。tsc実exit0・jestフルスイート545suites7678tests green(1発green)。commit 661d4d2。
+
+次はR7以前の年度別ジオメトリリプレイ・ビジョン11県7,191件、または残る24県
+（akita/aomori/fukui/fukuoka/gifu/hiroshima/kagoshima/kochi/kumamoto/kyoto/nagano/nara/
+niigata/oita/saga/shiga/shizuoka/toyama/yamagata等）の共有関数利用状況を`grep -l`で
+再調査してから着手する。
+
+| 8 | **★出典ロケータ**⚠️着手(2026-09-10・型基盤完了・17県目okinawa完了(見落とし県発見)・累計1820件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
 
 **2026-09-10着手**: §5順序#7（段階台帳）がhokkaido全14管内完結によりoita/okinawaの2県のみ
 未着手（前進手段なしと判断済み）となったため#8に着手。設計資料
