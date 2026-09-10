@@ -90,8 +90,16 @@ describe('bairitsu-ingest parse-table-pdf 汎用carry-forward組み立て (shiga
     });
   });
 
+  const bare = (r: { schoolName: string; department: string; quota: number; finalApplicants: number; finalRate: number }) => ({
+    schoolName: r.schoolName,
+    department: r.department,
+    quota: r.quota,
+    finalApplicants: r.finalApplicants,
+    finalRate: r.finalRate,
+  });
+
   test('学科名+科名の結合による前半重複（家庭→家庭科学）が正しく解消される', () => {
-    expect(parsed.find((r) => r.schoolName === '大津' && r.department === '家庭科学')).toEqual({
+    expect(bare(parsed.find((r) => r.schoolName === '大津' && r.department === '家庭科学')!)).toEqual({
       schoolName: '大津',
       department: '家庭科学',
       quota: 48,
@@ -101,7 +109,7 @@ describe('bairitsu-ingest parse-table-pdf 汎用carry-forward組み立て (shiga
   });
 
   test('括弧を持たない「一般型」ラベル未整列行でも括弧の有無だけで学校独自型と区別できる（瀬田工業の実例）', () => {
-    const seta = parsed.filter((r) => r.schoolName === '瀬田工業');
+    const seta = parsed.filter((r) => r.schoolName === '瀬田工業').map(bare);
     expect(seta).toEqual([
       { schoolName: '瀬田工業', department: '機械', quota: 60, finalApplicants: 133, finalRate: 2.22 },
       { schoolName: '瀬田工業', department: '電気', quota: 60, finalApplicants: 119, finalRate: 1.98 },
@@ -112,6 +120,6 @@ describe('bairitsu-ingest parse-table-pdf 汎用carry-forward組み立て (shiga
   test('【定時制】以降が打ち切られ能登川が全日制の1件のみになる', () => {
     const notogawa = parsed.filter((r) => r.schoolName === '能登川');
     expect(notogawa).toHaveLength(1);
-    expect(notogawa[0]).toEqual({ schoolName: '能登川', department: '普通', quota: 84, finalApplicants: 116, finalRate: 1.38 });
+    expect(bare(notogawa[0])).toEqual({ schoolName: '能登川', department: '普通', quota: 84, finalApplicants: 116, finalRate: 1.38 });
   });
 });

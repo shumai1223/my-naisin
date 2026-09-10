@@ -210,6 +210,7 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
       { code: 'okinawa', count: 156 },
       { code: 'saga', count: 67 },
       { code: 'saitama', count: 241 },
+      { code: 'shiga', count: 56 },
       { code: 'shimane', count: 64 },
       { code: 'tochigi', count: 107 },
       { code: 'tokushima', count: 69 },
@@ -1140,6 +1141,48 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
       }
       const unresolved = r8.filter((r) => r.page === undefined);
       expect(unresolved.length).toBe(4);
+      for (const r of unresolved) {
+        expect(resolveSourceLocator(r, file.sources)).toBeNull();
+      }
+    });
+
+    it('同一page内でrowIndexの重複が無い', () => {
+      const seen = new Set<string>();
+      for (const r of r8.filter((r) => r.page !== undefined)) {
+        const key = `${r.page}|${r.rowIndex}`;
+        expect(seen.has(key)).toBe(false);
+        seen.add(key);
+      }
+    });
+
+    it('R7以前（fiscalYear明示済み）はまだpage/rowIndex未バックフィルのため全件null', () => {
+      const pre8 = file.records.filter((r) => r.fiscalYear !== undefined);
+      expect(pre8.length).toBeGreaterThan(0);
+      for (const r of pre8) {
+        expect(resolveSourceLocator(r, file.sources)).toBeNull();
+      }
+    });
+  });
+
+  describe('shiga R8（#8・33県目・「両方の学科」合算レコード5件は意図的にlocatorなし）', () => {
+    const file = COMPETITION_RATE_BY_PREFECTURE['shiga']!;
+    const r8 = file.records.filter((r) => !r.fiscalYear);
+
+    it('R8の61件中56件がresolveSourceLocatorで解決でき、合算レコード5件は解決できない', () => {
+      expect(r8.length).toBe(61);
+      const resolved = r8.filter((r) => r.page !== undefined);
+      expect(resolved.length).toBe(56);
+      for (const r of resolved) {
+        const locator = resolveSourceLocator(r, file.sources);
+        expect(locator).not.toBeNull();
+        expect(locator!.pdfSha256).toBe('37ff452d4c35b9ca7ec73e75ea65f29338a93d9618c5bbe8e93c3d147986eef9');
+        // 生PDF全3頁と概要ページ無しでgeometry配列3頁が完全一致するためオフセット+1
+        expect(locator!.page).toBeGreaterThanOrEqual(1);
+        expect(locator!.page).toBeLessThanOrEqual(3);
+        expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
+      }
+      const unresolved = r8.filter((r) => r.page === undefined);
+      expect(unresolved.length).toBe(5);
       for (const r of unresolved) {
         expect(resolveSourceLocator(r, file.sources)).toBeNull();
       }

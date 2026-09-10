@@ -19,6 +19,7 @@ const fullLineX0Max = 60;
 
 interface FineRow {
   y: number;
+  page: number;
   schoolName: string;
   department: string;
   senbatsu: string;
@@ -39,7 +40,7 @@ function cellTextFromChars(chars: PdfPageGeometry['chars'], colIdx: number): str
   return inCol.map((c) => c.c).join('').trim();
 }
 
-function fineRowsInRange(chars: PdfPageGeometry['chars'], yTop: number, yBottom: number): FineRow[] {
+function fineRowsInRange(chars: PdfPageGeometry['chars'], yTop: number, yBottom: number, page: number): FineRow[] {
   const inRange = [...chars].filter((c) => c.y0 >= yTop - 0.5 && c.y0 < yBottom - 0.5).sort((a, b) => a.y0 - b.y0 || a.x0 - b.x0);
   const rows: { y: number; chars: PdfPageGeometry['chars'] }[] = [];
   for (const c of inRange) {
@@ -50,6 +51,7 @@ function fineRowsInRange(chars: PdfPageGeometry['chars'], yTop: number, yBottom:
   rows.sort((a, b) => a.y - b.y);
   return rows.map((r) => ({
     y: r.y,
+    page,
     schoolName: cellTextFromChars(r.chars, 0),
     department: cellTextFromChars(r.chars, 1),
     senbatsu: cellTextFromChars(r.chars, 2),
@@ -91,18 +93,27 @@ function normalizeDept(s: string): string {
   return normalizeDepartmentText(dedupDoubledText(normalizeExtractedText(s)));
 }
 
-/** 滋賀県R8倍率PDFの学校別データ全頁分（`shiga-r8-geometry.json`）を解析する。 */
+/**
+ * 滋賀県R8倍率PDFの学校別データ全頁分（`shiga-r8-geometry.json`）を解析する。
+ *
+ * ⚠️T-Y11F §5順序#8（出典ロケータ）: geometry配列3頁は生PDF全3頁と完全一致（概要ページ
+ * 無し）のためオフセットは配列添字+1（2026-09-11にpdftotext -f 1で堅田「普通」quota144/
+ * applicants176が物理ページ1に実在することを確認）。「両方の学科」を合算する集計レコード
+ * （膳所等）は複数行を合成しているため単一の行位置に帰属できず、page/rowIndexを意図的に
+ * 付与しない（ishikawa/kyoto/nagano/sagaと同型のY-0対応）。
+ */
 export function parseShiga(geometries: PdfPageGeometry[]): ParsedCompetitionRow[] {
   type RowWithBlockEnd = FineRow & { isBlockEnd: boolean; effectiveDepartment: string };
   const allRows: RowWithBlockEnd[] = [];
-  for (const geom of geometries) {
+  geometries.forEach((geom, pageIdx) => {
+    const page = pageIdx + 1;
     const ranges = blockRangesForPage(geom);
     for (const { yTop, yBottom } of ranges) {
-      const fine = fineRowsInRange(geom.chars, yTop, yBottom);
+      const fine = fineRowsInRange(geom.chars, yTop, yBottom, page);
       for (const r of fine) allRows.push({ ...r, isBlockEnd: false, effectiveDepartment: '' });
       if (allRows.length) allRows[allRows.length - 1].isBlockEnd = true;
     }
-  }
+  });
 
   // 【定時制】は他県の定時制と同じ理由でスコープ外（能登川が定時制に再登場し重複する事故を実測で発見）。
   const cutIdx = allRows.findIndex((r) => (r.schoolName + r.department).includes('定時制'));
@@ -120,6 +131,7 @@ export function parseShiga(geometries: PdfPageGeometry[]): ParsedCompetitionRow[
   if (currentBlock.length) blocks.push(currentBlock);
 
   const records: ParsedCompetitionRow[] = [];
+  const rowIndexByPage = new Map<number, number>();
   for (const block of blocks) {
     const schoolNameRaw = block.map((r) => r.schoolName).find((s) => s.length > 0) ?? '';
     const schoolName = normalizeExtractedText(schoolNameRaw);
@@ -140,11 +152,12 @@ export function parseShiga(geometries: PdfPageGeometry[]): ParsedCompetitionRow[
       const quotaMatch = r.quotaText.match(/\(([0-9,]+)\)/);
       const quota = quotaMatch ? Number(quotaMatch[1].replace(/,/g, '')) : 0;
       const finalApplicants = Number(r.num2Text.replace(/,/g, ''));
-      return { department: normalizeDept(r.effectiveDepartment), quota, finalApplicants };
+      return { department: normalizeDept(r.effectiveDepartment), quota, finalApplicants, page: r.page };
     });
 
     const hasBothDepartments = parsed.some((p) => p.department.includes('両方の学科'));
     if (hasBothDepartments) {
+      // 複数行を合算する集計レコードのため単一の行位置に帰属できず、page/rowIndexは付与しない。
       const quota = parsed.reduce((acc, p) => acc + (Number.isFinite(p.quota) ? p.quota : 0), 0);
       const finalApplicants = parsed.reduce((acc, p) => acc + (Number.isFinite(p.finalApplicants) ? p.finalApplicants : 0), 0);
       const deptNames = [...new Set(parsed.filter((p) => !p.department.includes('両方の学科')).map((p) => p.department))];
@@ -153,7 +166,9 @@ export function parseShiga(geometries: PdfPageGeometry[]): ParsedCompetitionRow[
     } else {
       for (const p of parsed) {
         if (!Number.isFinite(p.quota) || !Number.isFinite(p.finalApplicants) || p.quota <= 0) continue;
-        records.push({ schoolName, department: p.department, quota: p.quota, finalApplicants: p.finalApplicants, finalRate: Number(roundHalfUpScaled(p.finalApplicants, p.quota, 2)) / 100 });
+        const rowIndex = rowIndexByPage.get(p.page) ?? 0;
+        rowIndexByPage.set(p.page, rowIndex + 1);
+        records.push({ schoolName, department: p.department, quota: p.quota, finalApplicants: p.finalApplicants, finalRate: Number(roundHalfUpScaled(p.finalApplicants, p.quota, 2)) / 100, page: p.page, rowIndex });
       }
     }
   }

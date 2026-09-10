@@ -2579,7 +2579,36 @@ tsc実exit0・jestフルスイート545suites7719tests green(1発green)。
 
 次は残り4県(shiga/shizuoka/toyama/yamagata)へ進める。
 
-| 8 | **★出典ロケータ**⚠️着手(2026-09-11・型基盤完了・32県目saga完了(位置ベース補完4件は意図的にlocatorなし)・累計3261件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
+### #8 出典ロケータ 33県目=shiga（2026-09-11・「両方の学科」合算レコード5件は意図的にlocatorなし・★source URL 404の初ケース）
+
+sourceIndex分布を確認したところ全61件が単一PDF(sources[0])由来で分岐なしと判明。★新しい
+罠: 元のsources[0].url(pref.shiga.lg.jp/file/attachment/5591236.pdf)が2026-09-11時点で
+404(サイト再編でリンク切れ)と判明した初のケース。Wayback Machine availability APIで直近
+スナップショット(2026-09-02キャプチャ)を発見し取得、pdftotext -f 1で堅田「普通」
+quota144/applicants176が物理ページ1に実在することを確認して内容の一致を検証した上で
+sha256を計測(生PDF全3頁と概要ページ無しでgeometry配列3頁が完全一致・オフセット+1)。
+
+parsers/shiga.tsは膳所等の「両方の学科」を持つ学校で複数行のquota/finalApplicantsを
+合算する集計レコード(5件)を生成する構造で、これらは複数の原行を合成しているため単一の
+行位置に帰属できずpage/rowIndexを意図的に付与しない(ishikawa/kyoto/nagano/sagaに続く
+5例目のY-0対応)。for-of(geometries)をforEach(geom,pageIdx)に変更しFineRow.pageを追加、
+個別レコード(非集計)のみrowIndexByPageマップで採番。
+
+既存テスト3箇所(parse-table-pdf-shiga.test.tsの大津家庭科学・瀬田工業3件・能登川)の
+toEqual完全一致アサーションを着手前に能動的にgrepで発見し共通bare()ヘルパーで対処
+(膳所の合算レコードはpage:undefinedのためtoEqualで無改修で通過)。既存テスト2件
+(registry.test.ts/competition-rate.test.ts)を更新、shiga用describeブロックを新設。
+
+累計3317件(共有関数3種18県1898+個別実装15県1419)。※shiga分は61件中56件のみlocator付与。
+tsc実exit0・jestフルスイート545suites7722tests green(1発green)。
+
+★教訓: 元資料のURLは公開後も無期限に存在するとは限らない(2026-07-25/26頃に収集した資料が
+2026-09-11時点で404になっていた=約1.5ヶ月で消失)。以後の県も着手前にurlへの到達性を確認
+し、404の場合はWayback Machine availability APIで代替取得することを標準手順とする。
+
+次は残り3県(shizuoka/toyama/yamagata)へ進める。
+
+| 8 | **★出典ロケータ**⚠️着手(2026-09-11・型基盤完了・33県目shiga完了(source URL 404の初ケース・「両方の学科」合算5件は意図的にlocatorなし)・累計3317件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
 
 **2026-09-10着手**: §5順序#7（段階台帳）がhokkaido全14管内完結によりoita/okinawaの2県のみ
 未着手（前進手段なしと判断済み）となったため#8に着手。設計資料
