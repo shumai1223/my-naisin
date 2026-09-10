@@ -1915,7 +1915,31 @@ tsc実exit0・jestフルスイート545suites7655tests green。commit 995cfcf。
 次はassembleSimpleTableRows利用の残り5県（nagasaki/miyagi/yamanashi/ehime/kagawa）、
 または他の共有関数（assembleCompetitionRateRows等5パーサ）への横展開を検討する。
 
-| 8 | **★出典ロケータ**⚠️着手(2026-09-10・型基盤完了・6県目saitama完了・累計798件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
+### #8 出典ロケータ 7県目=nagasaki（2026-09-10・★初の非+1オフセット発見）
+
+**新発見**: tottori（単一県専用+5オフセット）を除くassembleSimpleTableRows利用県は
+gunma/tochigi/iwate/chiba/saitamaの5県連続で「概要ページ無し・+1オフセット」だったが、
+nagasakiは**全10頁中、学校別詳細表は物理ページ3〜6の4頁のみ**（1〜2頁は概要・7〜10頁は
+定時制等の別表）という初のケースで、**+3オフセット**が必要と判明した。生PDF全文抽出で
+form feed数を数え、先頭の長崎東（quota151/applicants158）が物理ページ3に、末尾の
+市立長崎商業「情報」（applicants27/rate0.8）が物理ページ6に実在することを確認して特定した。
+**「2県連続で同じだったから次も同じ」という決め打ちは危険**——毎回`pdftotext`で実測する
+既存の注意書きが今回も効いた形。
+
+parsers/nagasaki.tsは既存の後段override map（`NAGASAKI_DEPARTMENT_OVERRIDES`・長崎東
+「普通・国際」→「普通・国際(くくり募集)」）を持つ構造で、iwate/saitamaに続き3例目の
+override経由page保持確認。バックフィルはsaitamaで確立した`tsx`＋一時nodeスクリプトの
+機械突合方式を踏襲し116件全件一致。既存データ側個別テスト（nagasaki.test.ts）の2箇所の
+`.toEqual`完全一致アサーションがpage/rowIndex追加で破損したため分割代入で除外する対処
+（iwate.test.tsと同型）。
+
+累計914件（tottori43+gunma106+tochigi107+iwate113+chiba188+saitama241+nagasaki116）。
+tsc実exit0・jestフルスイート545suites7657tests green。commit 16b6b37。
+
+次はassembleSimpleTableRows利用の残り4県（miyagi/yamanashi/ehime/kagawa）、
+または他の共有関数（assembleCompetitionRateRows等5パーサ）への横展開を検討する。
+
+| 8 | **★出典ロケータ**⚠️着手(2026-09-10・型基盤完了・7県目nagasaki完了・累計914件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
 
 **2026-09-10着手**: §5順序#7（段階台帳）がhokkaido全14管内完結によりoita/okinawaの2県のみ
 未着手（前進手段なしと判断済み）となったため#8に着手。設計資料

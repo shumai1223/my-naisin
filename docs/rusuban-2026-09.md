@@ -5,16 +5,17 @@
 
 ---
 
-最終更新              2026-09-10 09:3x
+最終更新              2026-09-10 09:4x
 いまやっていること     T-Y11F §5順序#8（出典ロケータ）進行中。tottori(43)→gunma(106)→
-                      tochigi(107)→iwate(113)→chiba(188)→saitama(241)の6県で累計798件完了
-今日やったこと         saitama: 市立高校名接頭辞除去+伊奈学園総合overrideの2段後段処理でも
-                      page/rowIndex保持を確認・241件バックフィル。tsx機械突合方式を新採用。
-                      全545suites7655tests green・commit 995cfcf push済
-在庫の残り            36登録パーサ県のうち6県完了・残り30県+R7以前の年度別リプレイ+ビジョン
-                      11県7,191件が未着手。次はassembleSimpleTableRows利用の残り5県
-                      (nagasaki/miyagi/yamanashi/ehime/kagawa)へ横展開
-払底の見込み           6データ点いずれも同程度の負荷=「レコード数比例でなく県数比例
+                      tochigi(107)→iwate(113)→chiba(188)→saitama(241)→nagasaki(116)の
+                      7県で累計914件完了
+今日やったこと         nagasaki: 初めて「+1でない」ページオフセット(+3)を発見(全10頁中
+                      詳細表は物理3〜6頁のみ)。生PDF実測で特定・116件バックフィル。
+                      全545suites7657tests green・commit 16b6b37 push済
+在庫の残り            36登録パーサ県のうち7県完了・残り29県+R7以前の年度別リプレイ+ビジョン
+                      11県7,191件が未着手。次はassembleSimpleTableRows利用の残り4県
+                      (miyagi/yamanashi/ehime/kagawa)へ横展開
+払底の見込み           7データ点いずれも同程度の負荷=「レコード数比例でなく県数比例
                       (段取りコストが支配的)」がほぼ確定。115hの見積り単価は36県×
                       段取りコストで再計算するのが実態に近い
 詰まっていること        aichi（Imperva WAF一時ブロックが継続中）。oita/okinawaは資料自体が
