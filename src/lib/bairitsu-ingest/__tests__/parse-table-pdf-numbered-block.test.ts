@@ -43,8 +43,15 @@ describe('bairitsu-ingest parse-table-pdf №列ブロック組み立て (akita 
   });
 
   test('分校は独立した番号を持たず直前の学校ブロックに紛れ込むが、renameOverridesで区別される', () => {
+    // T-Y11F §5順序#8でpage/rowIndex（出典ロケータ用）が追加されたため、それ以外のフィールドで比較する
     const record = parsed.find((r) => r.schoolName === '大曲農業(太田分校)');
-    expect(record).toEqual({ schoolName: '大曲農業(太田分校)', department: '普通科', quota: 35, finalApplicants: 6, finalRate: 0.17 });
+    expect({ schoolName: record?.schoolName, department: record?.department, quota: record?.quota, finalApplicants: record?.finalApplicants, finalRate: record?.finalRate }).toEqual({
+      schoolName: '大曲農業(太田分校)',
+      department: '普通科',
+      quota: 35,
+      finalApplicants: 6,
+      finalRate: 0.17,
+    });
     // 分校の断片名は親学校名の連結には混入しない
     expect(parsed.some((r) => r.schoolName === '大曲農業太田分校')).toBe(false);
   });

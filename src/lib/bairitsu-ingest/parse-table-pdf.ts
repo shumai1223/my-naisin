@@ -485,6 +485,7 @@ export function assembleNumberedBlockRows(rowFields: SimpleRowFields[], options:
   }
 
   const records: ParsedCompetitionRow[] = [];
+  const rowIndexByPage = new Map<number, number>();
   outer: for (const block of blocks) {
     const nameFragments = block
       .map((r) => normalizeExtractedText(r.schoolName))
@@ -505,7 +506,13 @@ export function assembleNumberedBlockRows(rowFields: SimpleRowFields[], options:
 
       const rowOwnName = normalizeExtractedText(r.schoolName);
       const schoolName = overrides[rowOwnName] ?? blockSchoolName;
-      records.push({ schoolName, department, quota, finalApplicants, finalRate });
+      if (r.page !== undefined) {
+        const rowIndex = rowIndexByPage.get(r.page) ?? 0;
+        rowIndexByPage.set(r.page, rowIndex + 1);
+        records.push({ schoolName, department, quota, finalApplicants, finalRate, page: r.page, rowIndex });
+      } else {
+        records.push({ schoolName, department, quota, finalApplicants, finalRate });
+      }
     }
   }
   return records;

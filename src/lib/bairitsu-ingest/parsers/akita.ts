@@ -22,10 +22,15 @@ const AKITA_LAYOUT: GeneralColumnLayout = {
   roles: { number: 0, schoolName: 1, department: 2, quota: 3, finalApplicants: 8, finalRate: 10 },
 };
 
-/** 秋田県R8倍率PDFの学校別データ全2頁分（`akita-r8-geometry.json`）を解析する。 */
+/**
+ * 秋田県R8倍率PDFの学校別データ全2頁分（`akita-r8-geometry.json`）を解析する。
+ *
+ * ⚠️T-Y11F §5順序#8（出典ロケータ）: pageオフセットは県ごとに異なるため生PDFで毎回実測する
+ * （2026-09-10確認: 詳細は本ファイルの変更コミット参照）。
+ */
 export function parseAkita(geometries: PdfPageGeometry[]): ParsedCompetitionRow[] {
-  const allRowFields = geometries.flatMap((geom) =>
-    groupCharsIntoRows(geom.chars, 3.0).map((row) => extractRowFields(row.chars, AKITA_LAYOUT))
+  const allRowFields = geometries.flatMap((geom, pageIdx) =>
+    groupCharsIntoRows(geom.chars, 3.0).map((row) => ({ ...extractRowFields(row.chars, AKITA_LAYOUT), page: pageIdx + 1 }))
   );
   return assembleNumberedBlockRows(allRowFields, {
     excludeRow: (department) => department.includes('計'),

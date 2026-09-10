@@ -42,14 +42,17 @@ describe('秋田県 倍率パイプラインα（Y-6・全日制78レコード�
   });
 
   it('分校（大曲農業・太田分校/湯沢翔北・雄勝校）が親学校と区別できる名称で収録されている', () => {
-    expect(r8.find((r) => r.schoolName === '大曲農業(太田分校)')).toEqual({
+    // T-Y11F §5順序#8でpage/rowIndex（出典ロケータ用）が追加されたため、それ以外のフィールドで比較する
+    const { page: _p1, rowIndex: _r1, ...ota } = r8.find((r) => r.schoolName === '大曲農業(太田分校)')!;
+    expect(ota).toEqual({
       schoolName: '大曲農業(太田分校)',
       department: '普通科',
       quota: 35,
       finalApplicants: 6,
       finalRate: 0.17,
     });
-    expect(r8.find((r) => r.schoolName === '湯沢翔北(雄勝校)')).toEqual({
+    const { page: _p2, rowIndex: _r2, ...ogachi } = r8.find((r) => r.schoolName === '湯沢翔北(雄勝校)')!;
+    expect(ogachi).toEqual({
       schoolName: '湯沢翔北(雄勝校)',
       department: '普通科',
       quota: 40,
