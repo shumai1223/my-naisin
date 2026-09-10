@@ -61,10 +61,14 @@ const DEPARTMENT_OVERRIDE = new Map<string, string>([
   ['屋久島|39|26', '情報ビジネス'],
 ]);
 
-function parseHalf(rows: { chars: PdfPageGeometry['chars'] }[], layout: GeneralColumnLayout): ParsedCompetitionRow[] {
-  const rowFields = rows.map((row) => extractRowFields(row.chars, layout));
+function parseHalf(
+  rows: { chars: PdfPageGeometry['chars']; page: number }[],
+  layout: GeneralColumnLayout
+): ParsedCompetitionRow[] {
+  const rowFields = rows.map((row) => ({ ...extractRowFields(row.chars, layout), page: row.page }));
   const records: ParsedCompetitionRow[] = [];
   let currentSchool = '';
+  let rowIndex = 0;
 
   for (let i = 0; i < rowFields.length; i++) {
     const r = rowFields[i];
@@ -118,16 +122,31 @@ function parseHalf(rows: { chars: PdfPageGeometry['chars'] }[], layout: GeneralC
 
     const override = DEPARTMENT_OVERRIDE.get(`${currentSchool}|${quota}|${finalApplicants}`);
     const department = override ?? departmentRaw;
-    records.push({ schoolName: currentSchool, department, quota, finalApplicants, finalRate });
+    records.push({ schoolName: currentSchool, department, quota, finalApplicants, finalRate, page: r.page, rowIndex: rowIndex++ });
   }
 
   return records;
 }
 
-/** 鹿児島県R8倍率PDFの学校別データ全4頁分（`kagoshima-r8-geometry.json`）を解析する。 */
+/**
+ * 鹿児島県R8倍率PDFの学校別データ全4頁分（`kagoshima-r8-geometry.json`）を解析する。
+ *
+ * ⚠️T-Y11F §5順序#8（出典ロケータ）: geometry配列4頁は生PDF全7頁中の物理ページ3〜6
+ * （1頁目=全体サマリー・2頁目=学区別クロス集計・3〜6頁目が全日制学校別詳細表・7頁目は
+ * 定時制でスコープ外。2026-09-10にpdftoppmビジョン確認: 先頭の鶴丸「普通」quota288/
+ * applicants423が物理ページ3に実在）。オフセットは配列添字+3。
+ * LEFT/RIGHTは同一の物理ページを共有するため、ページごとに独立して呼び出し
+ * （currentSchoolの状態を学区＝ページ単位でリセットする既存挙動を維持）、RIGHT側の
+ * rowIndexには同一ページのLEFT側件数分のオフセットを加えてpage+rowIndexの一意性を保つ
+ * （ehime/tokushimaと同型の対応）。
+ */
 export function parseKagoshima(geometries: PdfPageGeometry[]): ParsedCompetitionRow[] {
-  return geometries.flatMap((geom) => {
-    const clusteredRows = groupCharsIntoRows(geom.chars, 2.5);
-    return [...parseHalf(clusteredRows, KAGOSHIMA_LEFT_LAYOUT), ...parseHalf(clusteredRows, KAGOSHIMA_RIGHT_LAYOUT)];
+  return geometries.flatMap((geom, pageIdx) => {
+    const page = pageIdx + 3;
+    const clusteredRows = groupCharsIntoRows(geom.chars, 2.5).map((row) => ({ ...row, page }));
+    const leftParsed = parseHalf(clusteredRows, KAGOSHIMA_LEFT_LAYOUT);
+    const rightParsedRaw = parseHalf(clusteredRows, KAGOSHIMA_RIGHT_LAYOUT);
+    const rightParsed = rightParsedRaw.map((r) => ({ ...r, rowIndex: (r.rowIndex ?? 0) + leftParsed.length }));
+    return [...leftParsed, ...rightParsed];
   });
 }

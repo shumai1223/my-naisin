@@ -2324,7 +2324,34 @@ hiroshima137)=498）。tsc実exit0・jestフルスイート545suites7692tests gr
 
 次はkagoshima等の残り13県へ進める（いずれも着手前にsourceIndex分布を確認する運用を継続）。
 
-| 8 | **★出典ロケータ**⚠️着手(2026-09-10・型基盤完了・23県目hiroshima完了(座標抽出不能レコードは意図的にlocatorなし)・累計2396件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
+### #8 出典ロケータ 24県目=kagoshima（2026-09-10・ehime/tokushimaに続く3例目のLEFT/RIGHT2段組rowIndex衝突回避）
+
+sourceIndex分布を確認したところ全156件が単一PDF由来で分岐なしと判明。kagoshimaは全7頁中
+1頁目が全体サマリー・2頁目が学区別クロス集計で、学校別詳細表はgeometry配列4頁に対応する
+物理ページ3〜6（pdftoppmビジョン確認: 先頭の鶴丸「普通」quota288/applicants423が物理
+ページ3に実在）、オフセットは配列添字+3。
+
+LEFT/RIGHTが同一物理ページを共有する2段組構造（ehime/tokushimaと同型）のため、RIGHT側の
+rowIndexにLEFT側の同ページ件数分のオフセットを加算し、156件全件でduplicate(page,rowIndex)
+0件を機械確認してから採用した。parsers/kagoshima.tsのparseHalf()にpage/rowIndex伝播を
+追加、parseKagoshima()本体はgeometries.flatMapに(geom,pageIdx)でpage:pageIdx+3を渡すのみ。
+
+既存テスト4箇所（`data/competition-rates/__tests__/kagoshima.test.ts`の野田女子・与論・
+種子島・沖永良部の4件、`parse-table-pdf-kagoshima.test.ts`の与論、`registry.test.ts`の
+kagoshima完全一致確認）のtoEqual完全一致アサーションを分割代入/フィールド追加で対処。
+PDFを再取得しsha256(aad68f5b...)を計測しnode script経由で挿入。
+
+累計2552件（共有関数3種18県1898+個別実装5県498+kagoshima156=2552）。
+tsc実exit0・jestフルスイート545suites7695tests green。
+
+前セッションがtsc/jest未検証のまま作業を中断していた（scratch-kagoshima-backfill.ts等の
+一時スクリプトと未commit差分が残っていた）ため、今回は既存差分を検証してからcommitした。
+バックフィル用の一時スクリプト2本は作業完了後に削除済み。
+
+次はkagoshima完了により残り12県（akita以外の個別実装県、oita/okinawa以外の未着手県の
+組み合わせを次回イテレーションで再確認）へ進める。
+
+| 8 | **★出典ロケータ**⚠️着手(2026-09-10・型基盤完了・24県目kagoshima完了(LEFT/RIGHT2段組rowIndex衝突回避3例目)・累計2552件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
 
 **2026-09-10着手**: §5順序#7（段階台帳）がhokkaido全14管内完結によりoita/okinawaの2県のみ
 未着手（前進手段なしと判断済み）となったため#8に着手。設計資料

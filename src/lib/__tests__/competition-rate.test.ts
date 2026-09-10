@@ -197,6 +197,7 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
       { code: 'ishikawa', count: 67 },
       { code: 'iwate', count: 113 },
       { code: 'kagawa', count: 68 },
+      { code: 'kagoshima', count: 156 },
       { code: 'miyagi', count: 129 },
       { code: 'nagasaki', count: 116 },
       { code: 'okinawa', count: 156 },
@@ -806,6 +807,43 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
       const kakeGeihoku = r8.find((r) => r.schoolName === '加計・芸北');
       expect(kakeGeihoku).toBeDefined();
       expect(resolveSourceLocator(kakeGeihoku!, file.sources)).toBeNull();
+    });
+
+    it('R7以前（fiscalYear明示済み）はまだpage/rowIndex未バックフィルのため全件null', () => {
+      const pre8 = file.records.filter((r) => r.fiscalYear !== undefined);
+      expect(pre8.length).toBeGreaterThan(0);
+      for (const r of pre8) {
+        expect(resolveSourceLocator(r, file.sources)).toBeNull();
+      }
+    });
+  });
+
+  describe('kagoshima R8（#8・24県目・LEFT/RIGHT2段組でのrowIndex衝突回避を確認）', () => {
+    const file = COMPETITION_RATE_BY_PREFECTURE['kagoshima']!;
+    const r8 = file.records.filter((r) => !r.fiscalYear);
+
+    it('R8の156件全件がresolveSourceLocatorで解決できる', () => {
+      expect(r8.length).toBe(156);
+      const resolved = r8.filter((r) => r.page !== undefined);
+      expect(resolved.length).toBe(156);
+      for (const r of resolved) {
+        const locator = resolveSourceLocator(r, file.sources);
+        expect(locator).not.toBeNull();
+        expect(locator!.pdfSha256).toBe('aad68f5b4411843bc0f704096c2c9e5caf35ebc14b53cbd417e3eabe935b3d9a');
+        // 学校別詳細表は物理ページ3〜6（1頁目=全体サマリー・2頁目=学区別クロス集計のためオフセット+3）
+        expect(locator!.page).toBeGreaterThanOrEqual(3);
+        expect(locator!.page).toBeLessThanOrEqual(6);
+        expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
+      }
+    });
+
+    it('同一page内でLEFT/RIGHT間のrowIndex重複が無い', () => {
+      const seen = new Set<string>();
+      for (const r of r8) {
+        const key = `${r.page}|${r.rowIndex}`;
+        expect(seen.has(key)).toBe(false);
+        seen.add(key);
+      }
     });
 
     it('R7以前（fiscalYear明示済み）はまだpage/rowIndex未バックフィルのため全件null', () => {

@@ -5,17 +5,17 @@
 
 ---
 
-最終更新              2026-09-10 14:1x
+最終更新              2026-09-11 (前セッション未commit分を検証してcommit)
 いまやっていること     T-Y11F §5順序#8（出典ロケータ）進行中。共有関数3種18県(1898)+
-                      個別実装5県(aomori89+fukui72+fukuoka66+gifu134+hiroshima137=498)
-                      =累計2396件
-今日やったこと         hiroshima: 座標抽出不能な手動補完レコード(加計・芸北)は初めて
-                      意図的にlocatorなし(138件中137件のみ解決)というパターンを確立。
-                      全545suites7692tests green・commit予定 push予定
-在庫の残り            36登録パーサ県のうち23県完了・残り13県(kagoshima/kochi/
-                      kumamoto/kyoto/nagano/nara/niigata/oita/saga/shiga/shizuoka/
-                      toyama/yamagata)は個別実装のみ。+R7以前の年度別リプレイ+ビジョン
-                      11県7,191件が未着手
+                      個別実装6県(aomori89+fukui72+fukuoka66+gifu134+hiroshima137+
+                      kagoshima156=654)=累計2552件
+今日やったこと         kagoshima: ehime/tokushimaに続く3例目のLEFT/RIGHT2段組
+                      rowIndex衝突回避。全156件locator解決・全545suites7695tests
+                      green・commit・push済み
+在庫の残り            36登録パーサ県のうち24県完了・残り12県(kochi/kumamoto/kyoto/
+                      nagano/nara/niigata/oita/saga/shiga/shizuoka/toyama/yamagata)
+                      は個別実装のみ。+R7以前の年度別リプレイ+ビジョン11県7,191件が
+                      未着手
 払底の見込み           22データ点いずれも同程度の負荷。sourceIndex事前確認の運用が定着し
                       fukuoka級の複雑さへの対応コストは制御下にある
 詰まっていること        aichi（Imperva WAF一時ブロックが継続中）。oita/okinawa(競争率

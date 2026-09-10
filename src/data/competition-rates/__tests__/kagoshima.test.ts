@@ -44,14 +44,16 @@ describe('鹿児島県 倍率パイプラインα（Y-6・全日制68校156レ�
   });
 
   it('applicants=0の学科（野田女子・衛生看護/与論・普通）も正しく収録されている', () => {
-    expect(records.find((r) => r.schoolName === '野田女子' && r.department === '衛生看護')).toEqual({
+    const nodajo = records.find((r) => r.schoolName === '野田女子' && r.department === '衛生看護')!;
+    expect({ schoolName: nodajo.schoolName, department: nodajo.department, quota: nodajo.quota, finalApplicants: nodajo.finalApplicants, finalRate: nodajo.finalRate }).toEqual({
       schoolName: '野田女子',
       department: '衛生看護',
       quota: 40,
       finalApplicants: 0,
       finalRate: 0,
     });
-    expect(records.find((r) => r.schoolName === '与論')).toEqual({
+    const yoron = records.find((r) => r.schoolName === '与論')!;
+    expect({ schoolName: yoron.schoolName, department: yoron.department, quota: yoron.quota, finalApplicants: yoron.finalApplicants, finalRate: yoron.finalRate }).toEqual({
       schoolName: '与論',
       department: '普通',
       quota: 45,
@@ -61,14 +63,16 @@ describe('鹿児島県 倍率パイプラインα（Y-6・全日制68校156レ�
   });
 
   it('離島の学区（熊毛・大島）の学校が正しく収録されている', () => {
-    expect(records.find((r) => r.schoolName === '種子島' && r.department === '普通')).toEqual({
+    const taneshima = records.find((r) => r.schoolName === '種子島' && r.department === '普通')!;
+    expect({ schoolName: taneshima.schoolName, department: taneshima.department, quota: taneshima.quota, finalApplicants: taneshima.finalApplicants, finalRate: taneshima.finalRate }).toEqual({
       schoolName: '種子島',
       department: '普通',
       quota: 80,
       finalApplicants: 53,
       finalRate: 0.66,
     });
-    expect(records.find((r) => r.schoolName === '沖永良部' && r.department === '商業')).toEqual({
+    const okinoerabu = records.find((r) => r.schoolName === '沖永良部' && r.department === '商業')!;
+    expect({ schoolName: okinoerabu.schoolName, department: okinoerabu.department, quota: okinoerabu.quota, finalApplicants: okinoerabu.finalApplicants, finalRate: okinoerabu.finalRate }).toEqual({
       schoolName: '沖永良部',
       department: '商業',
       quota: 39,

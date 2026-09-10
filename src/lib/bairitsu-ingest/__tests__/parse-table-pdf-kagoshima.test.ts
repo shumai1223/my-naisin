@@ -71,7 +71,8 @@ describe('bairitsu-ingest parse-table-pdf 汎用carry-forward組み立て (kagos
   });
 
   test('与論(最終出願者数0・直後行が存在しない実例)が正しく0として収録される', () => {
-    expect(parsed.find((r) => r.schoolName === '与論')).toEqual({ schoolName: '与論', department: '普通', quota: 45, finalApplicants: 0, finalRate: 0 });
+    const { schoolName, department, quota, finalApplicants, finalRate } = parsed.find((r) => r.schoolName === '与論')!;
+    expect({ schoolName, department, quota, finalApplicants, finalRate }).toEqual({ schoolName: '与論', department: '普通', quota: 45, finalApplicants: 0, finalRate: 0 });
   });
 
   test('学区合計・全日制合計は収録されない', () => {
