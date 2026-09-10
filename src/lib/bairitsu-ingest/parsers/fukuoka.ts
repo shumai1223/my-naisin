@@ -23,6 +23,7 @@ interface RawRow {
   quotaText: string;
   cText: string;
   rateText: string;
+  page: number;
 }
 
 function cellText(rowChars: PdfPageGeometry['chars'], colIdx: number, bounds: number[]): string {
@@ -122,15 +123,33 @@ const BLOCK_OVERRIDE = new Map<string, Omit<ParsedCompetitionRow, 'schoolName'>[
   ],
 ]);
 
-function emit(records: ParsedCompetitionRow[], schoolName: string, departmentRaw: string, quota: number, finalApplicants: number, finalRate: number): void {
+function emit(
+  records: ParsedCompetitionRow[],
+  rowIndexByPage: Map<number, number>,
+  schoolName: string,
+  departmentRaw: string,
+  quota: number,
+  finalApplicants: number,
+  finalRate: number,
+  page: number
+): void {
   const deptNorm = normalizeDepartmentText(stripFootnoteMarks(departmentRaw)).replace(/。/g, '').replace(/^合/, '');
   const textKey = `${schoolName}|${deptNorm}`;
   const quotaKey = `${schoolName}|${quota}|${finalApplicants}`;
   const department = DEPT_TEXT_OVERRIDE.get(textKey) ?? OVERRIDE.get(quotaKey) ?? deptNorm;
-  records.push({ schoolName, department, quota, finalApplicants, finalRate });
+  const rowIndex = rowIndexByPage.get(page) ?? 0;
+  rowIndexByPage.set(page, rowIndex + 1);
+  records.push({ schoolName, department, quota, finalApplicants, finalRate, page, rowIndex });
 }
 
-/** 福岡県R8倍率PDFの学校別データ（県立4頁+市組合立1頁の計5頁分・`fukuoka-r8-geometry.json`）を解析する。 */
+/**
+ * 福岡県R8倍率PDFの学校別データ（県立4頁+市組合立1頁の計5頁分・`fukuoka-r8-geometry.json`）を解析する。
+ *
+ * ⚠️T-Y11F §5順序#8（出典ロケータ）: pageオフセットは県ごとに異なるため生PDFで毎回実測する
+ * （2026-09-10確認: 詳細は本ファイルの変更コミット参照）。BLOCK_OVERRIDE（玄界・新宮）は
+ * ブロック単位で丸ごと差し替える合成レコードのため単一の行位置に帰属できず、page/rowIndexは
+ * 付与しない（ishikawaのCOMBINED_APPLICATION_OVERRIDESと同型の設計判断）。
+ */
 export function parseFukuoka(geometries: PdfPageGeometry[]): ParsedCompetitionRow[] {
   const allRows: RawRow[] = [];
   geometries.forEach((geom, pageIdx) => {
@@ -146,7 +165,7 @@ export function parseFukuoka(geometries: PdfPageGeometry[]): ParsedCompetitionRo
       if (schoolNameRaw + departmentRaw + quotaText + cText + rateText === '') continue;
       // ページ末尾総括行「県　立　合　計　（９０校）」等の除外。
       if (/計（[0-9０-９]+校）/.test(normalizeExtractedText(schoolNameRaw + departmentRaw))) continue;
-      allRows.push({ schoolNameRaw, departmentRaw, quotaText, cText, rateText });
+      allRows.push({ schoolNameRaw, departmentRaw, quotaText, cText, rateText, page: pageIdx + 1 });
     }
   });
 
@@ -164,6 +183,7 @@ export function parseFukuoka(geometries: PdfPageGeometry[]): ParsedCompetitionRo
   }
 
   const records: ParsedCompetitionRow[] = [];
+  const rowIndexByPage = new Map<number, number>();
   for (const block of blocks) {
     const override = BLOCK_OVERRIDE.get(block.schoolName);
     if (override) {
@@ -182,7 +202,7 @@ export function parseFukuoka(geometries: PdfPageGeometry[]): ParsedCompetitionRo
 
     if (fullRows.length === 1 && floatingRows.length === 0) {
       const r = fullRows[0];
-      emit(records, block.schoolName, r.departmentRaw, parseNum(r.quotaText), parseNum(r.cText), parseNum(r.rateText));
+      emit(records, rowIndexByPage, block.schoolName, r.departmentRaw, parseNum(r.quotaText), parseNum(r.cText), parseNum(r.rateText), r.page);
       continue;
     }
 
@@ -195,21 +215,25 @@ export function parseFukuoka(geometries: PdfPageGeometry[]): ParsedCompetitionRo
       const realRows = fullRows.slice(1).filter((r) => !isDupOfParent(parseNum(r.cText), parseNum(r.rateText)));
       const realFloating = floatingRows.filter((r) => !isDupOfParent(parseNum(r.cText), parseNum(r.rateText)));
       if (realRows.length === 0 && realFloating.length === 0) {
-        emit(records, block.schoolName, first.departmentRaw, parseNum(first.quotaText), parentApplicants, parentRate);
+        emit(records, rowIndexByPage, block.schoolName, first.departmentRaw, parseNum(first.quotaText), parentApplicants, parentRate, first.page);
       } else {
         for (const r of realRows) {
-          emit(records, block.schoolName, r.departmentRaw, parseNum(r.quotaText), parseNum(r.cText), parseNum(r.rateText));
+          emit(records, rowIndexByPage, block.schoolName, r.departmentRaw, parseNum(r.quotaText), parseNum(r.cText), parseNum(r.rateText), r.page);
         }
         for (const r of realFloating) {
           const finalApplicants = parseNum(r.cText);
           const finalRate = parseNum(r.rateText);
           const info = FLOATING_OVERRIDE.get(`${block.schoolName}|${finalApplicants}|${finalRate}`);
-          if (info) records.push({ schoolName: block.schoolName, department: info.department, quota: info.quota, finalApplicants, finalRate });
+          if (info) {
+            const rowIndex = rowIndexByPage.get(r.page) ?? 0;
+            rowIndexByPage.set(r.page, rowIndex + 1);
+            records.push({ schoolName: block.schoolName, department: info.department, quota: info.quota, finalApplicants, finalRate, page: r.page, rowIndex });
+          }
         }
       }
     } else {
       for (const r of fullRows) {
-        emit(records, block.schoolName, r.departmentRaw, parseNum(r.quotaText), parseNum(r.cText), parseNum(r.rateText));
+        emit(records, rowIndexByPage, block.schoolName, r.departmentRaw, parseNum(r.quotaText), parseNum(r.cText), parseNum(r.rateText), r.page);
       }
     }
   }

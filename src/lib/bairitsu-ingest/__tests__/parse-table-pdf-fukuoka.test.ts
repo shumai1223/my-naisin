@@ -116,9 +116,11 @@ describe('bairitsu-ingest parse-table-pdf 汎用carry-forward組み立て (fukuo
   });
 
   test('親「計」行の重複印字を実データと誤認しない（水産「食品流通科」の実例・くくり募集として1レコードに集約される）', () => {
+    // T-Y11F §5順序#8でpage/rowIndex（出典ロケータ用）が追加されたため、それ以外のフィールドで比較する
     const suisan = parsed.filter((r) => r.schoolName === '水産');
     expect(suisan).toHaveLength(1);
-    expect(suisan[0]).toEqual({
+    const { page: _p1, rowIndex: _r1, ...suisanRest } = suisan[0];
+    expect(suisanRest).toEqual({
       schoolName: '水産',
       department: '海洋科学科・食品流通科学科・アクアライフ科学科（くくり募集）',
       quota: 160,
@@ -128,7 +130,8 @@ describe('bairitsu-ingest parse-table-pdf 汎用carry-forward組み立て (fukuo
   });
 
   test('quota列が空欄の浮動行から実データを検出する（折尾「総合ビジネス科」の実例）', () => {
-    expect(parsed.find((r) => r.schoolName === '折尾' && r.department === '総合ビジネス科')).toEqual({
+    const record = parsed.find((r) => r.schoolName === '折尾' && r.department === '総合ビジネス科');
+    expect({ schoolName: record?.schoolName, department: record?.department, quota: record?.quota, finalApplicants: record?.finalApplicants, finalRate: record?.finalRate }).toEqual({
       schoolName: '折尾',
       department: '総合ビジネス科',
       quota: 80,

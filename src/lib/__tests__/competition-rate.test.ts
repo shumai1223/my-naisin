@@ -189,6 +189,7 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
       { code: 'chiba', count: 188 },
       { code: 'ehime', count: 99 },
       { code: 'fukui', count: 72 },
+      { code: 'fukuoka', count: 66 },
       { code: 'gunma', count: 106 },
       { code: 'ibaraki', count: 149 },
       { code: 'ishikawa', count: 67 },
@@ -709,6 +710,41 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
         expect(locator!.page).toBeGreaterThanOrEqual(1);
         expect(locator!.page).toBeLessThanOrEqual(2);
         expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
+      }
+    });
+
+    it('R7以前（fiscalYear明示済み）はまだpage/rowIndex未バックフィルのため全件null', () => {
+      const pre8 = file.records.filter((r) => r.fiscalYear !== undefined);
+      expect(pre8.length).toBeGreaterThan(0);
+      for (const r of pre8) {
+        expect(resolveSourceLocator(r, file.sources)).toBeNull();
+      }
+    });
+  });
+
+  describe('fukuoka R8（#8・21県目・レコードごとに出典が異なる(sourceIndex)初のケース・sourceIndex:0の66件のみ解決）', () => {
+    const file = COMPETITION_RATE_BY_PREFECTURE['fukuoka']!;
+    const r8 = file.records.filter((r) => !r.fiscalYear);
+
+    it('sourceIndex:0の66件がresolveSourceLocatorで解決できる', () => {
+      const primarySourced = r8.filter((r) => r.sourceIndex === 0 && r.page !== undefined);
+      expect(primarySourced.length).toBe(66);
+      for (const r of primarySourced) {
+        const locator = resolveSourceLocator(r, file.sources);
+        expect(locator).not.toBeNull();
+        expect(locator!.pdfSha256).toBe('c320a4cefe82b62498b2c6852a9d9f3d2a19fef6a573f86a3fe50b2d0daccfef');
+        // 県立分PDFの学校別詳細表は物理ページ1〜4（市組合立分は別ページ5・別出典のためスコープ外）
+        expect(locator!.page).toBeGreaterThanOrEqual(1);
+        expect(locator!.page).toBeLessThanOrEqual(4);
+        expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
+      }
+    });
+
+    it('sourceIndex!=0の125件(市組合立分・英進館裏取り分・玄界/新宮のブロックoverride・八幡の既知データ誤記1件)はpage/rowIndex未設定のためnull', () => {
+      const otherSourced = r8.filter((r) => r.page === undefined);
+      expect(otherSourced.length).toBe(125);
+      for (const r of otherSourced) {
+        expect(resolveSourceLocator(r, file.sources)).toBeNull();
       }
     });
 
