@@ -2008,7 +2008,33 @@ commit 352e8ae。
 次はassembleSimpleTableRows利用の残り1県（kagawa）、
 または他の共有関数（assembleCompetitionRateRows等5パーサ）への横展開を検討する。
 
-| 8 | **★出典ロケータ**⚠️着手(2026-09-10・型基盤完了・10県目ehime完了・累計1190件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
+### #8 出典ロケータ 11県目=kagawa（2026-09-10・★assembleSimpleTableRows利用の全11県が完了）
+
+kagawaはpdftoppmビジョン確認で全2頁中、学校別詳細表は物理ページ1に68行全件が収まって
+おり（小豆島中央「特進コース」quota30/applicants31から末尾の高松第一「音楽」
+quota11/applicants2まで一致を確認）、オフセットは単純に+1（調整不要）。parsers/kagawa.ts
+は小学科/大学科フォールバック＋くくり募集override（三本松/観音寺第一/農業経営）という
+2段の後段処理を持つ構造だが問題なくpage/rowIndexを保持。
+
+**★sha256手入力ミス対策を標準化**: 前回ehimeで発生したsha256手入力の文字欠落事故の教訓を
+活かし、`node crypto.createHash`の出力を直接ファイルへ書き出しnodeスクリプト経由で
+srcファイルへ挿入する方式に切替えた（手打ちでの文字欠落リスクを完全に排除・**以後の全県で
+標準手順化**）。
+
+miyagi/yamanashi/ehimeの教訓を活かし`data/competition-rates/__tests__/kagawa.test.ts`の
+3箇所（三本松/農業経営/観音寺第一のくくり募集確認テスト）の`.toEqual`完全一致アサーションを
+着手前に能動的にgrepで発見し分割代入で対処、jestフルスイート1発でgreen。
+
+**#8はassembleSimpleTableRows利用の11プレフェクチャ全完了**（tottori43+gunma106+
+tochigi107+iwate113+chiba188+saitama241+nagasaki116+miyagi129+yamanashi48+ehime99+
+kagawa68=**累計1258件**）。tsc実exit0・jestフルスイート545suites7665tests green。
+commit e4eac5f。
+
+**次のフェーズ**: 他の共有関数`assembleCompetitionRateRows`利用の5パーサ
+（ibaraki/ishikawa/shimane/tokushima/wakayama）への横展開、または未着手の
+R7以前の年度別ジオメトリリプレイ・ビジョン11県7,191件への着手を検討する。
+
+| 8 | **★出典ロケータ**⚠️着手(2026-09-10・型基盤完了・assembleSimpleTableRows全11県完了・累計1258件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
 
 **2026-09-10着手**: §5順序#7（段階台帳）がhokkaido全14管内完結によりoita/okinawaの2県のみ
 未着手（前進手段なしと判断済み）となったため#8に着手。設計資料
