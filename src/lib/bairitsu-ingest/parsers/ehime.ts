@@ -45,8 +45,8 @@ const EHIME_SCHOOL_NAME_OVERRIDES: Record<string, string> = {
   小田: '内子（小田）',
 };
 
-function parseHalf(rows: { chars: PdfPageGeometry['chars'] }[], layout: GeneralColumnLayout): ParsedCompetitionRow[] {
-  const rowFields = rows.map((row) => extractRowFields(row.chars, layout));
+function parseHalf(rows: { chars: PdfPageGeometry['chars']; page: number }[], layout: GeneralColumnLayout): ParsedCompetitionRow[] {
+  const rowFields = rows.map((row) => ({ ...extractRowFields(row.chars, layout), page: row.page }));
   let currentSchool = '';
   const withOverrides = rowFields.map((r) => {
     const rawSchoolName = r.schoolName.trim();
@@ -62,10 +62,30 @@ function parseHalf(rows: { chars: PdfPageGeometry['chars'] }[], layout: GeneralC
   });
 }
 
-/** 愛媛県R8倍率PDFの学校別データ（1頁2段組・`ehime-r8-geometry.json`）を解析する。 */
+/**
+ * 愛媛県R8倍率PDFの学校別データ（1頁2段組・`ehime-r8-geometry.json`）を解析する。
+ *
+ * ⚠️T-Y11F §5順序#8（出典ロケータ）: pageオフセットは県ごとに異なるため生PDFで毎回実測する
+ * （2026-09-10確認: 詳細は本ファイルの変更コミット参照）。
+ */
 export function parseEhime(geometries: PdfPageGeometry[]): ParsedCompetitionRow[] {
-  const clusteredRows = geometries.flatMap((geom) => groupCharsIntoRows(geom.chars, 3.0));
+  const clusteredRows = geometries.flatMap((geom, pageIdx) =>
+    groupCharsIntoRows(geom.chars, 3.0).map((row) => ({ ...row, page: pageIdx + 1 }))
+  );
   const leftParsed = parseHalf(clusteredRows, EHIME_LEFT_LAYOUT);
-  const rightParsed = parseHalf(clusteredRows, EHIME_RIGHT_LAYOUT);
+  const rightParsedRaw = parseHalf(clusteredRows, EHIME_RIGHT_LAYOUT);
+  // ⚠️LEFT/RIGHTは同一の物理ページを共有するため、assembleSimpleTableRows内のrowIndexは
+  // LEFT呼び出し・RIGHT呼び出しそれぞれ独立に0始まりで採番される（同じpage+rowIndexが
+  // LEFT/RIGHT間で重複しうる）。出典ロケータとしての一意性を保つため、RIGHT側のrowIndexには
+  // 同一ページのLEFT側件数分のオフセットを加える（「左列を上から読み、続けて右列を上から読む」
+  // という一貫した順序として解釈する）。
+  const leftCountByPage = new Map<number, number>();
+  for (const r of leftParsed) {
+    if (r.page === undefined) continue;
+    leftCountByPage.set(r.page, (leftCountByPage.get(r.page) ?? 0) + 1);
+  }
+  const rightParsed = rightParsedRaw.map((r) =>
+    r.page === undefined || r.rowIndex === undefined ? r : { ...r, rowIndex: r.rowIndex + (leftCountByPage.get(r.page) ?? 0) }
+  );
   return [...leftParsed, ...rightParsed];
 }

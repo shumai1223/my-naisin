@@ -44,14 +44,17 @@ describe('愛媛県 倍率パイプラインα（Y-6・全日制43校99レコー
   });
 
   it('注記で明記済みのくくり募集（今治西・宇和島東）が正しく収録されている', () => {
-    expect(records.find((r) => r.schoolName === '今治西')).toEqual({
+    // T-Y11F §5順序#8でpage/rowIndex（出典ロケータ用）が追加されたため、それ以外のフィールドで比較する
+    const { page: _p1, rowIndex: _r1, ...imabari } = records.find((r) => r.schoolName === '今治西')!;
+    expect(imabari).toEqual({
       schoolName: '今治西',
       department: '国・普（くくり募集）',
       quota: 280,
       finalApplicants: 265,
       finalRate: 0.95,
     });
-    expect(records.find((r) => r.schoolName === '宇和島東' && r.department.includes('くくり募集'))).toEqual({
+    const { page: _p2, rowIndex: _r2, ...uwajima } = records.find((r) => r.schoolName === '宇和島東' && r.department.includes('くくり募集'))!;
+    expect(uwajima).toEqual({
       schoolName: '宇和島東',
       department: '理・普（くくり募集）',
       quota: 160,

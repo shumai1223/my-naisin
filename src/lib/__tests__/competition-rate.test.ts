@@ -185,6 +185,7 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
     // してから期待値を更新すること（既存県の件数が勝手に減っていたら書き換え事故を疑う）。
     expect(nonZero.sort((a, b) => a.code.localeCompare(b.code))).toEqual([
       { code: 'chiba', count: 188 },
+      { code: 'ehime', count: 99 },
       { code: 'gunma', count: 106 },
       { code: 'iwate', count: 113 },
       { code: 'miyagi', count: 129 },
@@ -409,6 +410,34 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
         expect(locator!.page).toBeGreaterThanOrEqual(5);
         expect(locator!.page).toBeLessThanOrEqual(7);
         expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
+      }
+    });
+
+    it('R7以前（fiscalYear明示済み）はまだpage/rowIndex未バックフィルのため全件null', () => {
+      const pre8 = file.records.filter((r) => r.fiscalYear !== undefined);
+      expect(pre8.length).toBeGreaterThan(0);
+      for (const r of pre8) {
+        expect(resolveSourceLocator(r, file.sources)).toBeNull();
+      }
+    });
+  });
+
+  describe('ehime R8（#8・10県目・1頁2段組(LEFT/RIGHT)で初めてrowIndex衝突回避オフセットが必要だった県）', () => {
+    const file = COMPETITION_RATE_BY_PREFECTURE['ehime']!;
+    const r8 = file.records.filter((r) => !r.fiscalYear);
+
+    it('R8の99件全件がresolveSourceLocatorで解決でき、page+rowIndexの組が重複しない', () => {
+      const seen = new Set<string>();
+      for (const r of r8) {
+        const locator = resolveSourceLocator(r, file.sources);
+        expect(locator).not.toBeNull();
+        expect(locator!.pdfSha256).toBe('6f7604dfb266d5d846d334c0def4454ccd1e0ef7bb9c5d6723cd6775f75915f9');
+        // 1頁2段組(LEFT/RIGHT)で全件が物理ページ1に集約される
+        expect(locator!.page).toBe(1);
+        expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
+        const key = `${locator!.page}|${locator!.rowIndex}`;
+        expect(seen.has(key)).toBe(false);
+        seen.add(key);
       }
     });
 
