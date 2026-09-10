@@ -46,9 +46,16 @@ const KUKURI_OVERRIDE = new Map<string, string>([
   ['隠岐島前|51|17', '普通(普通・地域共創)'],
 ]);
 
-/** 島根県R8倍率PDFの学校別データ全日制1頁分（`shimane-r8-geometry.json`）を解析する。 */
+/**
+ * 島根県R8倍率PDFの学校別データ全日制1頁分（`shimane-r8-geometry.json`）を解析する。
+ *
+ * ⚠️T-Y11F §5順序#8（出典ロケータ）: pageオフセットは県ごとに異なるため生PDFで毎回実測する
+ * （2026-09-10確認: 詳細は本ファイルの変更コミット参照）。
+ */
 export function parseShimane(geometries: PdfPageGeometry[]): ParsedCompetitionRow[] {
-  const rawRows = geometries.map((geom) => parseTablePdfPageRows(geom, SHIMANE_LAYOUT));
+  const rawRows = geometries.map((geom, pageIdx) =>
+    parseTablePdfPageRows(geom, SHIMANE_LAYOUT).map((r) => ({ ...r, page: pageIdx + 1 }))
+  );
   const assembled = assembleCompetitionRateRows(rawRows, '合計', {
     excludeRow: (department) => department.includes('計'),
   }).filter((r) => r.quota > 0);
@@ -62,6 +69,14 @@ export function parseShimane(geometries: PdfPageGeometry[]): ParsedCompetitionRo
     const schoolName = CONTINUATION_LABELS.has(renamed) ? lastRealSchool : renamed;
     if (!CONTINUATION_LABELS.has(renamed)) lastRealSchool = schoolName;
     const override = KUKURI_OVERRIDE.get(`${schoolName}|${r.quota}|${r.finalApplicants}`);
-    return { schoolName, department: override ?? r.department, quota: r.quota, finalApplicants: r.finalApplicants, finalRate: r.finalRate };
+    return {
+      schoolName,
+      department: override ?? r.department,
+      quota: r.quota,
+      finalApplicants: r.finalApplicants,
+      finalRate: r.finalRate,
+      page: r.page,
+      rowIndex: r.rowIndex,
+    };
   });
 }

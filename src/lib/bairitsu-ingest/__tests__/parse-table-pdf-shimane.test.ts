@@ -69,8 +69,16 @@ describe('bairitsu-ingest parse-table-pdf 罫線+結合セル組み立て (shima
   });
 
   test('市立の皆美が丘女子高等学校が「松江市立」でなく正しい学校名で収録される', () => {
+    // T-Y11F §5順序#8でpage/rowIndex（出典ロケータ用）が追加されたため、それ以外のフィールドで比較する
     expect(parsed.some((r) => r.schoolName === '松江市立')).toBe(false);
-    expect(parsed.find((r) => r.schoolName === '皆美が丘女子')).toEqual({ schoolName: '皆美が丘女子', department: '普通', quota: 53, finalApplicants: 46, finalRate: 0.87 });
+    const record = parsed.find((r) => r.schoolName === '皆美が丘女子');
+    expect({ schoolName: record?.schoolName, department: record?.department, quota: record?.quota, finalApplicants: record?.finalApplicants, finalRate: record?.finalRate }).toEqual({
+      schoolName: '皆美が丘女子',
+      department: '普通',
+      quota: 53,
+      finalApplicants: 46,
+      finalRate: 0.87,
+    });
   });
 
   test('定時制セクションの重複校は収録されない(合計行での打ち切り)', () => {

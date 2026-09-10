@@ -52,7 +52,9 @@ describe('島根県 倍率パイプラインα（Y-6・全日制36校64レコー
   });
 
   it('市立高校(皆美が丘女子)が県立高校と区別して収録されている', () => {
-    expect(r8.find((r) => r.schoolName === '皆美が丘女子')).toEqual({
+    // T-Y11F §5順序#8でpage/rowIndex（出典ロケータ用）が追加されたため、それ以外のフィールドで比較する
+    const { page: _page, rowIndex: _rowIndex, ...actual } = r8.find((r) => r.schoolName === '皆美が丘女子')!;
+    expect(actual).toEqual({
       schoolName: '皆美が丘女子',
       department: '普通',
       quota: 53,

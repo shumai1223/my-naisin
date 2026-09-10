@@ -194,6 +194,7 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
       { code: 'miyagi', count: 129 },
       { code: 'nagasaki', count: 116 },
       { code: 'saitama', count: 241 },
+      { code: 'shimane', count: 64 },
       { code: 'tochigi', count: 107 },
       { code: 'tottori', count: 43 },
       { code: 'yamanashi', count: 48 },
@@ -526,6 +527,30 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
       expect(combined.length).toBe(3);
       for (const r of combined) {
         expect(resolveSourceLocator(r, file.sources)).toBeNull();
+      }
+    });
+
+    it('R7以前（fiscalYear明示済み）はまだpage/rowIndex未バックフィルのため全件null', () => {
+      const pre8 = file.records.filter((r) => r.fiscalYear !== undefined);
+      expect(pre8.length).toBeGreaterThan(0);
+      for (const r of pre8) {
+        expect(resolveSourceLocator(r, file.sources)).toBeNull();
+      }
+    });
+  });
+
+  describe('shimane R8（#8・14県目・くくり募集override経由でのpage保持を確認）', () => {
+    const file = COMPETITION_RATE_BY_PREFECTURE['shimane']!;
+    const r8 = file.records.filter((r) => !r.fiscalYear);
+
+    it('R8の64件全件がresolveSourceLocatorで解決できる', () => {
+      for (const r of r8) {
+        const locator = resolveSourceLocator(r, file.sources);
+        expect(locator).not.toBeNull();
+        expect(locator!.pdfSha256).toBe('83562e6497151b0375505952a2b0d19a8ca95115ce1da3bcb49d380670a9c688');
+        // 学校別詳細表は物理ページ1に完結（オフセット無し）
+        expect(locator!.page).toBe(1);
+        expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
       }
     });
 
