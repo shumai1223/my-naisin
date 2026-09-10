@@ -27,11 +27,23 @@ const KUKURI_OVERRIDE = new Map<string, string>([
   ['宮島工業|建築|80|52', '建築・インテリア'],
 ]);
 
-/** 広島県R8倍率PDFの学校別データ全頁分（`hiroshima-r8-geometry.json`）を解析する。 */
+/**
+ * 広島県R8倍率PDFの学校別データ全頁分（`hiroshima-r8-geometry.json`）を解析する。
+ *
+ * ⚠️T-Y11F §5順序#8（出典ロケータ）: 全5頁中1頁目は総括表（概要）で、学校別詳細表は
+ * 物理ページ2〜5の4頁（2026-09-10にpdftoppmでビジョン確認: 先頭の広島国泰寺「普通」
+ * (quota240/applicants376)が物理ページ2に実在）。出典ロケータ用のpageは配列添字+2。
+ * 全日制分校（加計・芸北）は座標抽出で1件も検出できず既存データの位置に手動補完する
+ * レコードのため、単一の行位置に帰属できずpage/rowIndexは付与しない（意図的にundefined
+ * のまま）。
+ */
 export function parseHiroshima(geometries: PdfPageGeometry[]): ParsedCompetitionRow[] {
   const allRecords: ParsedCompetitionRow[] = [];
+  const rowIndexByPage = new Map<number, number>();
   let currentSchool = '';
-  for (const geom of geometries) {
+  for (let pageIdx = 0; pageIdx < geometries.length; pageIdx++) {
+    const geom = geometries[pageIdx];
+    const page = pageIdx + 2;
     const { chars } = geom;
     const sorted = [...chars].sort((a, b) => a.y0 - b.y0 || a.x0 - b.x0);
     const rows: { y: number; chars: PdfPageGeometry['chars'] }[] = [];
@@ -85,7 +97,9 @@ export function parseHiroshima(geometries: PdfPageGeometry[]): ParsedCompetition
 
       const department = normalizeDepartmentTextFullwidth(deptNorm);
       const override = KUKURI_OVERRIDE.get(`${currentSchool}|${department}|${quota}|${finalApplicants}`);
-      allRecords.push({ schoolName: currentSchool, department: override ?? department, quota, finalApplicants, finalRate });
+      const rowIndex = rowIndexByPage.get(page) ?? 0;
+      rowIndexByPage.set(page, rowIndex + 1);
+      allRecords.push({ schoolName: currentSchool, department: override ?? department, quota, finalApplicants, finalRate, page, rowIndex });
     }
   }
   // 全日制分校（加計・芸北）は座標抽出で1件も検出できなかったため、既存データの位置（末尾）に補完する

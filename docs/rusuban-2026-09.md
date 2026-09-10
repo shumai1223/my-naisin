@@ -5,13 +5,14 @@
 
 ---
 
-最終更新              2026-09-10 13:5x
+最終更新              2026-09-10 14:1x
 いまやっていること     T-Y11F §5順序#8（出典ロケータ）進行中。共有関数3種18県(1898)+
-                      個別実装4県(aomori89+fukui72+fukuoka66+gifu134=361)=累計2259件
-今日やったこと         gifu: fukuokaの教訓を活かし着手前にsourceIndex分布を確認→
-                      全134件がsourceIndex:0で分岐なしと確認してから安全に着手。
-                      全545suites7689tests green・commit 938f713 push済
-在庫の残り            36登録パーサ県のうち22県完了・残り14県(hiroshima/kagoshima/kochi/
+                      個別実装5県(aomori89+fukui72+fukuoka66+gifu134+hiroshima137=498)
+                      =累計2396件
+今日やったこと         hiroshima: 座標抽出不能な手動補完レコード(加計・芸北)は初めて
+                      意図的にlocatorなし(138件中137件のみ解決)というパターンを確立。
+                      全545suites7692tests green・commit予定 push予定
+在庫の残り            36登録パーサ県のうち23県完了・残り13県(kagoshima/kochi/
                       kumamoto/kyoto/nagano/nara/niigata/oita/saga/shiga/shizuoka/
                       toyama/yamagata)は個別実装のみ。+R7以前の年度別リプレイ+ビジョン
                       11県7,191件が未着手

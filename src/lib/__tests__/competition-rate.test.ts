@@ -192,6 +192,7 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
       { code: 'fukuoka', count: 66 },
       { code: 'gifu', count: 134 },
       { code: 'gunma', count: 106 },
+      { code: 'hiroshima', count: 137 },
       { code: 'ibaraki', count: 149 },
       { code: 'ishikawa', count: 67 },
       { code: 'iwate', count: 113 },
@@ -772,6 +773,39 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
         expect(locator!.page).toBeLessThanOrEqual(5);
         expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
       }
+    });
+
+    it('R7以前（fiscalYear明示済み）はまだpage/rowIndex未バックフィルのため全件null', () => {
+      const pre8 = file.records.filter((r) => r.fiscalYear !== undefined);
+      expect(pre8.length).toBeGreaterThan(0);
+      for (const r of pre8) {
+        expect(resolveSourceLocator(r, file.sources)).toBeNull();
+      }
+    });
+  });
+
+  describe('hiroshima R8（#8・23県目・座標抽出で検出不能な手動補完レコード(加計・芸北)は意図的にlocatorなし）', () => {
+    const file = COMPETITION_RATE_BY_PREFECTURE['hiroshima']!;
+    const r8 = file.records.filter((r) => !r.fiscalYear);
+
+    it('R8の138件中137件がresolveSourceLocatorで解決できる', () => {
+      const resolved = r8.filter((r) => r.page !== undefined);
+      expect(resolved.length).toBe(137);
+      for (const r of resolved) {
+        const locator = resolveSourceLocator(r, file.sources);
+        expect(locator).not.toBeNull();
+        expect(locator!.pdfSha256).toBe('a69738c53cd69aba217033d24a9c6a0d40594241b50889a4983ef27a2bbd682d');
+        // 学校別詳細表は物理ページ2〜5（1頁目は総括表のためオフセット+2）
+        expect(locator!.page).toBeGreaterThanOrEqual(2);
+        expect(locator!.page).toBeLessThanOrEqual(5);
+        expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
+      }
+    });
+
+    it('座標抽出で検出できず手動補完した加計・芸北は意図的にpage/rowIndex未設定=null', () => {
+      const kakeGeihoku = r8.find((r) => r.schoolName === '加計・芸北');
+      expect(kakeGeihoku).toBeDefined();
+      expect(resolveSourceLocator(kakeGeihoku!, file.sources)).toBeNull();
     });
 
     it('R7以前（fiscalYear明示済み）はまだpage/rowIndex未バックフィルのため全件null', () => {

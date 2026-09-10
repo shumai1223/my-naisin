@@ -2300,7 +2300,31 @@ tsc実exit0・jestフルスイート545suites7689tests green。commit 938f713。
 次はhiroshima/kagoshima等の残り14県へ進める（いずれも着手前にsourceIndex分布を確認する
 運用を継続）。
 
-| 8 | **★出典ロケータ**⚠️着手(2026-09-10・型基盤完了・22県目gifu完了(sourceIndex統一で分岐なし)・累計2259件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
+### #8 出典ロケータ 23県目=hiroshima（2026-09-10・座標抽出不能な手動補完レコードは意図的にlocatorなし）
+
+sourceIndex分布を確認したところ全138件が単一PDF由来でfukuokaのような分岐なしと判明。
+hiroshimaは全5頁中1頁目が総括表（概要）で学校別詳細表は物理ページ2〜5の4頁
+（pdftoppmビジョン確認: 先頭の広島国泰寺「普通」quota240/applicants376が物理ページ2に
+実在）、オフセットは配列添字+2。
+
+★新しいケース: 全日制分校（加計・芸北）は座標抽出で1件も検出できず、パーサが既存データの
+末尾に手動補完する設計になっていた既存レコード。単一の行位置に帰属できないため
+page/rowIndexは意図的にundefinedのまま付与しない（Y-0の1行1出典原則に従い、根拠のない
+位置情報を捏造しない）。これによりhiroshimaは138件中137件がlocator解決可能・1件のみnull
+という初のパターンになった。
+
+parsers/hiroshima.tsの変更はfor-ofループをインデックス付きループに変更し`page:pageIdx+2`
+を付与、最終pushに`rowIndexByPage`マップを追加するだけの最小差分。既存テスト2箇所
+（`parse-table-pdf-hiroshima.test.ts`の広島国泰寺「普通」・`registry.test.ts`のhiroshima
+完全一致確認）を着手前に能動的にgrepで発見し分割代入/フィールド追加で対処。PDFを再取得し
+sha256(a69738c5...)を計測しnode script経由で挿入。
+
+累計2396件（共有関数3種18県1898+個別実装5県(aomori89+fukui72+fukuoka66+gifu134+
+hiroshima137)=498）。tsc実exit0・jestフルスイート545suites7692tests green。
+
+次はkagoshima等の残り13県へ進める（いずれも着手前にsourceIndex分布を確認する運用を継続）。
+
+| 8 | **★出典ロケータ**⚠️着手(2026-09-10・型基盤完了・23県目hiroshima完了(座標抽出不能レコードは意図的にlocatorなし)・累計2396件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
 
 **2026-09-10着手**: §5順序#7（段階台帳）がhokkaido全14管内完結によりoita/okinawaの2県のみ
 未着手（前進手段なしと判断済み）となったため#8に着手。設計資料

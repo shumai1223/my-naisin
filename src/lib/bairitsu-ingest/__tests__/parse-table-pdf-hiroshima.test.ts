@@ -57,7 +57,9 @@ describe('bairitsu-ingest parse-table-pdf 汎用carry-forward組み立て (hiros
   });
 
   test('２月９日現在の中間スナップショットではなく最終志願状況が採用される（広島国泰寺「普通」の実例）', () => {
-    expect(parsed.find((r) => r.schoolName === '広島国泰寺' && r.department === '普通')).toEqual({
+    // T-Y11F §5順序#8でpage/rowIndex（出典ロケータ用）が追加されたため、それ以外のフィールドで比較する
+    const record = parsed.find((r) => r.schoolName === '広島国泰寺' && r.department === '普通');
+    expect({ schoolName: record?.schoolName, department: record?.department, quota: record?.quota, finalApplicants: record?.finalApplicants, finalRate: record?.finalRate }).toEqual({
       schoolName: '広島国泰寺',
       department: '普通',
       quota: 240,
