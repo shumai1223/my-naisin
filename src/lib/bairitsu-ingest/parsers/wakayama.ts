@@ -43,13 +43,19 @@ const KUKURI_OVERRIDE = new Map<string, string>([
   ['串本古座|111|48', '未来創造学科(宇宙探究・地域探究/文理探究)'],
 ]);
 
-/** 和歌山県R8倍率PDFの学校別データ全1頁分（`wakayama-r8-geometry.json`）を解析する。 */
+/**
+ * 和歌山県R8倍率PDFの学校別データ全1頁分（`wakayama-r8-geometry.json`）を解析する。
+ *
+ * ⚠️T-Y11F §5順序#8（出典ロケータ）: pageオフセットは県ごとに異なるため生PDFで毎回実測する
+ * （2026-09-10確認: 詳細は本ファイルの変更コミット参照）。
+ */
 export function parseWakayama(geometries: PdfPageGeometry[]): ParsedCompetitionRow[] {
-  const rawRows = geometries.map((geom) => {
+  const rawRows = geometries.map((geom, pageIdx) => {
     const rows = parseTablePdfPageRows(geom, WAKAYAMA_LAYOUT);
     return rows.map((r) => ({
       ...r,
       applicantsText: String(Number(r.applicantsText.replace(/,/g, '') || 0) + Number(r.extra.d.replace(/,/g, '') || 0)),
+      page: pageIdx + 1,
     }));
   });
 
@@ -67,6 +73,14 @@ export function parseWakayama(geometries: PdfPageGeometry[]): ParsedCompetitionR
     if (!branchMatch) lastNonBranchSchool = schoolName;
     const department = toHalfWidthParens(r.department);
     const override = KUKURI_OVERRIDE.get(`${schoolName}|${r.quota}|${r.finalApplicants}`);
-    return { schoolName, department: override ?? department, quota: r.quota, finalApplicants: r.finalApplicants, finalRate: r.finalRate };
+    return {
+      schoolName,
+      department: override ?? department,
+      quota: r.quota,
+      finalApplicants: r.finalApplicants,
+      finalRate: r.finalRate,
+      page: r.page,
+      rowIndex: r.rowIndex,
+    };
   });
 }

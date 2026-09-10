@@ -51,14 +51,17 @@ describe('和歌山県 倍率パイプラインα（Y-6・全日制32校57レコ
   });
 
   it('スポーツ推薦本出願者数を含むD+E合算が必要な学科（熊野総合学科・紀央館普通科）が正しく収録されている', () => {
-    expect(r8.find((r) => r.schoolName === '熊野' && r.department === '総合学科')).toEqual({
+    // T-Y11F §5順序#8でpage/rowIndex（出典ロケータ用）が追加されたため、それ以外のフィールドで比較する
+    const { page: _p1, rowIndex: _r1, ...kumano } = r8.find((r) => r.schoolName === '熊野' && r.department === '総合学科')!;
+    expect(kumano).toEqual({
       schoolName: '熊野',
       department: '総合学科',
       quota: 160,
       finalApplicants: 170,
       finalRate: 1.06,
     });
-    expect(r8.find((r) => r.schoolName === '紀央館' && r.department === '普通科')).toEqual({
+    const { page: _p2, rowIndex: _r2, ...kioukan } = r8.find((r) => r.schoolName === '紀央館' && r.department === '普通科')!;
+    expect(kioukan).toEqual({
       schoolName: '紀央館',
       department: '普通科',
       quota: 118,

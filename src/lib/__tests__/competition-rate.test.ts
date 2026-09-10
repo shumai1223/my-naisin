@@ -198,6 +198,7 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
       { code: 'tochigi', count: 107 },
       { code: 'tokushima', count: 69 },
       { code: 'tottori', count: 43 },
+      { code: 'wakayama', count: 57 },
       { code: 'yamanashi', count: 48 },
     ]);
   });
@@ -580,6 +581,30 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
         const key = `${locator!.page}|${locator!.rowIndex}`;
         expect(seen.has(key)).toBe(false);
         seen.add(key);
+      }
+    });
+
+    it('R7以前（fiscalYear明示済み）はまだpage/rowIndex未バックフィルのため全件null', () => {
+      const pre8 = file.records.filter((r) => r.fiscalYear !== undefined);
+      expect(pre8.length).toBeGreaterThan(0);
+      for (const r of pre8) {
+        expect(resolveSourceLocator(r, file.sources)).toBeNull();
+      }
+    });
+  });
+
+  describe('wakayama R8（#8・16県目・assembleCompetitionRateRows利用の全5県が完了）', () => {
+    const file = COMPETITION_RATE_BY_PREFECTURE['wakayama']!;
+    const r8 = file.records.filter((r) => !r.fiscalYear);
+
+    it('R8の57件全件がresolveSourceLocatorで解決できる', () => {
+      for (const r of r8) {
+        const locator = resolveSourceLocator(r, file.sources);
+        expect(locator).not.toBeNull();
+        expect(locator!.pdfSha256).toBe('ecf8970f1867e6de03e789a17b7446c723f48df5ba375088999e29dc97ba904a');
+        // 学校別詳細表は物理ページ1に完結（オフセット無し）
+        expect(locator!.page).toBe(1);
+        expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
       }
     });
 
