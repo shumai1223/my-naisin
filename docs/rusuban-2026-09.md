@@ -5,19 +5,18 @@
 
 ---
 
-最終更新              2026-09-10 12:5x
+最終更新              2026-09-10 13:1x
 いまやっていること     T-Y11F §5順序#8（出典ロケータ）進行中。共有関数3種18県(1898)+
-                      個別実装aomori(89)=累計1987件・個別実装フェーズへ移行済み
-今日やったこと         aomori: 共有関数を使わない個別実装(tottori型)への初横展開。
-                      page伝播パターンを確立(flatMap→スプレッド→rowIndexByPage手動)。
-                      全545suites7682tests green・commit d4774aa push済
-在庫の残り            36登録パーサ県のうち19県完了・残り17県(fukui/fukuoka/gifu/
-                      hiroshima/kagoshima/kochi/kumamoto/kyoto/nagano/nara/niigata/
-                      oita/saga/shiga/shizuoka/toyama/yamagata)は個別実装のみ。
-                      +R7以前の年度別リプレイ+ビジョン11県7,191件が未着手
-払底の見込み           19データ点いずれも同程度の負荷。個別実装フェーズもaomoriの実測で
-                      「1県あたりの追加コストは限定的」と確認できたため、大きな負荷増は
-                      無い見込み
+                      個別実装2県(aomori89+fukui72=161)=累計2059件
+今日やったこと         fukui: aomori型基準実装の流用でpage配線がほぼコピペで完了、
+                      横展開コストが低いことを確認。全545suites7684tests green・
+                      commit 20ffa87 push済
+在庫の残り            36登録パーサ県のうち20県完了・残り16県(fukuoka/gifu/hiroshima/
+                      kagoshima/kochi/kumamoto/kyoto/nagano/nara/niigata/oita/saga/
+                      shiga/shizuoka/toyama/yamagata)は個別実装のみ。+R7以前の年度別
+                      リプレイ+ビジョン11県7,191件が未着手
+払底の見込み           20データ点いずれも同程度の負荷。個別実装フェーズも同型の基準実装を
+                      流用できる県が多そうで、1県あたりのコストは低い見込み
 詰まっていること        aichi（Imperva WAF一時ブロックが継続中）。oita/okinawa(競争率
                       データ自体は完了)は他タスクで資料自体が未整備で前進手段なし
 👤の判断が要るもの      #5成果物・#6仕様書とも対外提示可否・価格は👤判断待ち（送信0件）
