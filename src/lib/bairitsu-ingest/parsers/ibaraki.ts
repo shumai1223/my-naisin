@@ -13,8 +13,15 @@ const IBARAKI_LAYOUT: TableColumnLayout = {
   fullLineX0Max: 65,
 };
 
-/** 茨城県R8倍率PDFの学校別データ全3頁分（`ibaraki-r8-geometry.json`）を解析する。 */
+/**
+ * 茨城県R8倍率PDFの学校別データ全3頁分（`ibaraki-r8-geometry.json`）を解析する。
+ *
+ * ⚠️T-Y11F §5順序#8（出典ロケータ）: pageオフセットは県ごとに異なるため生PDFで毎回実測する
+ * （2026-09-10確認: 詳細は本ファイルの変更コミット参照）。
+ */
 export function parseIbaraki(geometries: PdfPageGeometry[]): ParsedCompetitionRow[] {
-  const pageRows = geometries.map((geom) => parseTablePdfPageRows(geom, IBARAKI_LAYOUT));
+  const pageRows = geometries.map((geom, pageIdx) =>
+    parseTablePdfPageRows(geom, IBARAKI_LAYOUT).map((r) => ({ ...r, page: pageIdx + 1 }))
+  );
   return assembleCompetitionRateRows(pageRows, '全日制計');
 }

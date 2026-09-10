@@ -187,6 +187,7 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
       { code: 'chiba', count: 188 },
       { code: 'ehime', count: 99 },
       { code: 'gunma', count: 106 },
+      { code: 'ibaraki', count: 149 },
       { code: 'iwate', count: 113 },
       { code: 'kagawa', count: 68 },
       { code: 'miyagi', count: 129 },
@@ -462,6 +463,31 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
         expect(locator!.pdfSha256).toBe('cfb4eb76f72ead3da00749b03af47ebf10eab21d9c1d3ecf690154a714bc9e10');
         // 学校別詳細表は物理ページ1に完結（オフセット無し）
         expect(locator!.page).toBe(1);
+        expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
+      }
+    });
+
+    it('R7以前（fiscalYear明示済み）はまだpage/rowIndex未バックフィルのため全件null', () => {
+      const pre8 = file.records.filter((r) => r.fiscalYear !== undefined);
+      expect(pre8.length).toBeGreaterThan(0);
+      for (const r of pre8) {
+        expect(resolveSourceLocator(r, file.sources)).toBeNull();
+      }
+    });
+  });
+
+  describe('ibaraki R8（#8・12県目・共有関数assembleCompetitionRateRows経由での初の実データ検証）', () => {
+    const file = COMPETITION_RATE_BY_PREFECTURE['ibaraki']!;
+    const r8 = file.records.filter((r) => !r.fiscalYear);
+
+    it('R8の149件全件がresolveSourceLocatorで解決できる', () => {
+      for (const r of r8) {
+        const locator = resolveSourceLocator(r, file.sources);
+        expect(locator).not.toBeNull();
+        expect(locator!.pdfSha256).toBe('697895e40b4b249007095fb7d03eaf7ff3cc3f177ce584de8d9cac3a19e60568');
+        // 学校別詳細表は物理ページ1〜3（オフセット無し・4〜5頁は定時制等の別表）
+        expect(locator!.page).toBeGreaterThanOrEqual(1);
+        expect(locator!.page).toBeLessThanOrEqual(3);
         expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
       }
     });

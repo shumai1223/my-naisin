@@ -104,6 +104,13 @@ export interface RawTableRow {
   isBlockEnd: boolean;
   /** `TableColumnLayout.extraColumns`で指定した追加列の生テキスト（列名→値）。 */
   extra: Record<string, string>;
+  /**
+   * T-Y11F §5順序#8（出典ロケータ）用・任意。呼び出し側がこの行の物理ページ番号を
+   * 把握していれば付与する（`parseTablePdfPageRows`自体はページをまたがないため生成
+   * しない・呼び出し側で`parseTablePdfPageRows(geom, layout).map(r => ({ ...r, page }))`
+   * のように付与する）。
+   */
+  page?: number;
 }
 
 export interface ParsedCompetitionRow {
@@ -260,6 +267,7 @@ export function assembleCompetitionRateRows(
   const scoped = cutIdx === -1 ? allRows : allRows.slice(0, cutIdx);
 
   const records: ParsedCompetitionRow[] = [];
+  const rowIndexByPage = new Map<number, number>();
   let blockRows: RawTableRow[] = [];
   for (const row of scoped) {
     blockRows.push(row);
@@ -274,13 +282,27 @@ export function assembleCompetitionRateRows(
         if (!Number.isFinite(quota) || !Number.isFinite(finalApplicants) || !Number.isFinite(finalRate)) {
           continue; // 数値化できない行（脚注・空行の混入等）は正直にスキップする
         }
-        records.push({
-          schoolName: normalizeExtractedText(schoolName),
-          department,
-          quota,
-          finalApplicants,
-          finalRate,
-        });
+        if (r.page !== undefined) {
+          const rowIndex = rowIndexByPage.get(r.page) ?? 0;
+          rowIndexByPage.set(r.page, rowIndex + 1);
+          records.push({
+            schoolName: normalizeExtractedText(schoolName),
+            department,
+            quota,
+            finalApplicants,
+            finalRate,
+            page: r.page,
+            rowIndex,
+          });
+        } else {
+          records.push({
+            schoolName: normalizeExtractedText(schoolName),
+            department,
+            quota,
+            finalApplicants,
+            finalRate,
+          });
+        }
       }
       blockRows = [];
     }

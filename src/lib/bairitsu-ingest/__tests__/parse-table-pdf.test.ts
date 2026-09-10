@@ -47,8 +47,15 @@ describe('bairitsu-ingest parse-table-pdf (ibaraki R8 実データ検証)', () =
   });
 
   test('結合セル（学校名が中央行に配置される複数学科校）が正しく展開される（水戸桜ノ牧常北校の実例）', () => {
+    // T-Y11F §5順序#8でpage/rowIndex（出典ロケータ用）が追加されたため、それ以外のフィールドで比較する
     const record = parsed.find((r) => r.schoolName === '水戸桜ノ牧常北校');
-    expect(record).toEqual({ schoolName: '水戸桜ノ牧常北校', department: '普通', quota: 40, finalApplicants: 13, finalRate: 0.33 });
+    expect({ schoolName: record?.schoolName, department: record?.department, quota: record?.quota, finalApplicants: record?.finalApplicants, finalRate: record?.finalRate }).toEqual({
+      schoolName: '水戸桜ノ牧常北校',
+      department: '普通',
+      quota: 40,
+      finalApplicants: 13,
+      finalRate: 0.33,
+    });
   });
 
   test('半角カタカナが全角へ正規化される（中央「普通〔スポーツ科学〕」の実例）', () => {
