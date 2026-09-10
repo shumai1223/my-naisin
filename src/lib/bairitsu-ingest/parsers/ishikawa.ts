@@ -29,8 +29,20 @@ function applyCombinedApplicationOverrides(records: ParsedCompetitionRow[]): Par
   return [...withoutBroken, ...COMBINED_APPLICATION_OVERRIDES];
 }
 
-/** 石川県R8倍率PDFの学校別データ2頁分（`ishikawa-r8-geometry.json`）を解析する。 */
+/**
+ * 石川県R8倍率PDFの学校別データ2頁分（`ishikawa-r8-geometry.json`）を解析する。
+ *
+ * ⚠️T-Y11F §5順序#8（出典ロケータ）: 全3頁中1頁目は総括表（概要）で、学校別詳細表は
+ * 物理ページ2〜3の2頁（2026-09-10にpdftoppmでビジョン確認: 先頭の大聖寺実業が
+ * 物理ページ2の「1/2」ラベル付きページに実在）。出典ロケータ用のpageは配列添字+2。
+ * COMBINED_APPLICATION_OVERRIDESの3校（小松・金沢泉丘・七尾）は複数の物理行を合算した
+ * 既存データによる置き換えのため、単一の行位置に帰属できずpage/rowIndexは付与しない
+ * （意図的にundefinedのまま・Y-0の捏造回避原則に従い1行1出典が成立しないレコードへ
+ * 無理に値を割り当てない）。
+ */
 export function parseIshikawa(geometries: PdfPageGeometry[]): ParsedCompetitionRow[] {
-  const pageRows = geometries.map((geom) => parseTablePdfPageRows(geom, LAYOUT));
+  const pageRows = geometries.map((geom, pageIdx) =>
+    parseTablePdfPageRows(geom, LAYOUT).map((r) => ({ ...r, page: pageIdx + 2 }))
+  );
   return applyCombinedApplicationOverrides(assembleCompetitionRateRows(pageRows, '全県合計', { excludeRow: (department) => department.includes('小計') }));
 }

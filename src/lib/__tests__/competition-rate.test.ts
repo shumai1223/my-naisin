@@ -188,6 +188,7 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
       { code: 'ehime', count: 99 },
       { code: 'gunma', count: 106 },
       { code: 'ibaraki', count: 149 },
+      { code: 'ishikawa', count: 67 },
       { code: 'iwate', count: 113 },
       { code: 'kagawa', count: 68 },
       { code: 'miyagi', count: 129 },
@@ -489,6 +490,42 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
         expect(locator!.page).toBeGreaterThanOrEqual(1);
         expect(locator!.page).toBeLessThanOrEqual(3);
         expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
+      }
+    });
+
+    it('R7以前（fiscalYear明示済み）はまだpage/rowIndex未バックフィルのため全件null', () => {
+      const pre8 = file.records.filter((r) => r.fiscalYear !== undefined);
+      expect(pre8.length).toBeGreaterThan(0);
+      for (const r of pre8) {
+        expect(resolveSourceLocator(r, file.sources)).toBeNull();
+      }
+    });
+  });
+
+  describe('ishikawa R8（#8・13県目・併願制度3校(合算レコード)は意図的にpage/rowIndex無しの初のケース）', () => {
+    const file = COMPETITION_RATE_BY_PREFECTURE['ishikawa']!;
+    const r8 = file.records.filter((r) => !r.fiscalYear);
+    const COMBINED_SCHOOLS = new Set(['小松', '金沢泉丘', '七尾']);
+
+    it('R8の70件中67件(併願合算3校を除く)がresolveSourceLocatorで解決できる', () => {
+      const resolved = r8.filter((r) => !COMBINED_SCHOOLS.has(r.schoolName));
+      expect(resolved.length).toBe(67);
+      for (const r of resolved) {
+        const locator = resolveSourceLocator(r, file.sources);
+        expect(locator).not.toBeNull();
+        expect(locator!.pdfSha256).toBe('89be2abdee93fb8442f8ffd8f15b6eace8ac8359126c79057a5ff6de1d0496f4');
+        // 学校別詳細表は物理ページ2〜3（1頁目は総括表のためオフセット+2）
+        expect(locator!.page).toBeGreaterThanOrEqual(2);
+        expect(locator!.page).toBeLessThanOrEqual(3);
+        expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
+      }
+    });
+
+    it('併願制度3校(小松・金沢泉丘・七尾)は複数物理行の合算のため意図的にpage/rowIndex未設定=null', () => {
+      const combined = r8.filter((r) => COMBINED_SCHOOLS.has(r.schoolName));
+      expect(combined.length).toBe(3);
+      for (const r of combined) {
+        expect(resolveSourceLocator(r, file.sources)).toBeNull();
       }
     });
 
