@@ -44,7 +44,8 @@ describe('福井県 倍率パイプラインα（Y-6・全日制24校72レコー
   });
 
   it('鯖江のくくり募集2組(画像確認で解決)が正しく収録されている', () => {
-    const sports = r8.find((r) => r.schoolName === '鯖江' && r.department.includes('スポーツ・健康福祉'));
+    // T-Y11F §5順序#8でpage/rowIndex（出典ロケータ用）が追加されたため、それ以外のフィールドで比較する
+    const { page: _p1, rowIndex: _r1, ...sports } = r8.find((r) => r.schoolName === '鯖江' && r.department.includes('スポーツ・健康福祉'))!;
     expect(sports).toEqual({
       schoolName: '鯖江',
       department: '普通（スポーツ・健康福祉くくり募集）',
@@ -52,7 +53,7 @@ describe('福井県 倍率パイプラインα（Y-6・全日制24校72レコー
       finalApplicants: 14,
       finalRate: 1.0,
     });
-    const itArt = r8.find((r) => r.schoolName === '鯖江' && r.department.includes('IT・アートデザイン'));
+    const { page: _p2, rowIndex: _r2, ...itArt } = r8.find((r) => r.schoolName === '鯖江' && r.department.includes('IT・アートデザイン'))!;
     expect(itArt).toEqual({
       schoolName: '鯖江',
       department: '普通（IT・アートデザインくくり募集）',

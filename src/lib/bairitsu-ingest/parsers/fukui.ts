@@ -56,6 +56,7 @@ const SABAE_VALUE_OVERRIDES: Record<string, string> = {
 interface ClusteredRow {
   y: number;
   chars: PdfPageGeometry['chars'];
+  page: number;
 }
 
 function groupRowsIntoBlocks(rows: ClusteredRow[], hlines: PdfPageGeometry['hlines'], fullLineX0Max: number): ClusteredRow[][] {
@@ -78,16 +79,22 @@ function groupRowsIntoBlocks(rows: ClusteredRow[], hlines: PdfPageGeometry['hlin
   return blocks.filter((b) => b.length > 0);
 }
 
-/** 福井県R8倍率PDFの学校別データ（`fukui-r8-geometry.json`）を解析する。 */
+/**
+ * 福井県R8倍率PDFの学校別データ（`fukui-r8-geometry.json`）を解析する。
+ *
+ * ⚠️T-Y11F §5順序#8（出典ロケータ）: pageオフセットは県ごとに異なるため生PDFで毎回実測する
+ * （2026-09-10確認: 詳細は本ファイルの変更コミット参照）。
+ */
 export function parseFukui(geometries: PdfPageGeometry[]): ParsedCompetitionRow[] {
-  const blocks = geometries.flatMap((geom) => {
-    const rows = groupCharsIntoRows(geom.chars, 3.0);
+  const blocks = geometries.flatMap((geom, pageIdx) => {
+    const rows = groupCharsIntoRows(geom.chars, 3.0).map((row) => ({ ...row, page: pageIdx + 1 }));
     return groupRowsIntoBlocks(rows, geom.hlines, 75);
   });
 
   const parsed: ParsedCompetitionRow[] = [];
+  const rowIndexByPage = new Map<number, number>();
   for (const block of blocks) {
-    const fields = block.map((row) => extractRowFields(row.chars, FUKUI_LAYOUT));
+    const fields = block.map((row) => ({ ...extractRowFields(row.chars, FUKUI_LAYOUT), page: row.page }));
     const schoolName = fields.map((f) => normalizeExtractedText(f.schoolName)).find((s) => s.length > 0) ?? '';
     if ((schoolName + fields.map((f) => f.department).join('')).includes('合計')) continue;
 
@@ -106,7 +113,9 @@ export function parseFukui(geometries: PdfPageGeometry[]): ParsedCompetitionRow[
       if (!resolvedRawDept) continue;
       const sabaeValueOverride = schoolName === '鯖江' ? SABAE_VALUE_OVERRIDES[`${quota}|${finalApplicants}`] : undefined;
       const department = sabaeValueOverride ?? FUKUI_DEPARTMENT_OVERRIDES[`${schoolName}|${resolvedRawDept}`] ?? normalizeDepartmentText(resolvedRawDept);
-      parsed.push({ schoolName, department, quota, finalApplicants, finalRate });
+      const rowIndex = rowIndexByPage.get(f.page) ?? 0;
+      rowIndexByPage.set(f.page, rowIndex + 1);
+      parsed.push({ schoolName, department, quota, finalApplicants, finalRate, page: f.page, rowIndex });
     }
   }
   return parsed;

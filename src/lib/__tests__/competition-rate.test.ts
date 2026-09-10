@@ -188,6 +188,7 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
       { code: 'aomori', count: 89 },
       { code: 'chiba', count: 188 },
       { code: 'ehime', count: 99 },
+      { code: 'fukui', count: 72 },
       { code: 'gunma', count: 106 },
       { code: 'ibaraki', count: 149 },
       { code: 'ishikawa', count: 67 },
@@ -679,6 +680,31 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
         const locator = resolveSourceLocator(r, file.sources);
         expect(locator).not.toBeNull();
         expect(locator!.pdfSha256).toBe('8c5f5f66326a91f8678f3fde2db0aefc52a98aee394797ee33d8918d130c77fb');
+        // 学校別詳細表は物理ページ1〜2（オフセット無し）
+        expect(locator!.page).toBeGreaterThanOrEqual(1);
+        expect(locator!.page).toBeLessThanOrEqual(2);
+        expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
+      }
+    });
+
+    it('R7以前（fiscalYear明示済み）はまだpage/rowIndex未バックフィルのため全件null', () => {
+      const pre8 = file.records.filter((r) => r.fiscalYear !== undefined);
+      expect(pre8.length).toBeGreaterThan(0);
+      for (const r of pre8) {
+        expect(resolveSourceLocator(r, file.sources)).toBeNull();
+      }
+    });
+  });
+
+  describe('fukui R8（#8・20県目・鯖江くくり募集override経由でのpage保持を確認）', () => {
+    const file = COMPETITION_RATE_BY_PREFECTURE['fukui']!;
+    const r8 = file.records.filter((r) => !r.fiscalYear);
+
+    it('R8の72件全件がresolveSourceLocatorで解決できる', () => {
+      for (const r of r8) {
+        const locator = resolveSourceLocator(r, file.sources);
+        expect(locator).not.toBeNull();
+        expect(locator!.pdfSha256).toBe('4294e962790af770bb2a6a82962d7a1733f9972c7406456ec48df1d9090a0f79');
         // 学校別詳細表は物理ページ1〜2（オフセット無し）
         expect(locator!.page).toBeGreaterThanOrEqual(1);
         expect(locator!.page).toBeLessThanOrEqual(2);
