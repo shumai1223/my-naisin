@@ -196,6 +196,7 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
       { code: 'saitama', count: 241 },
       { code: 'shimane', count: 64 },
       { code: 'tochigi', count: 107 },
+      { code: 'tokushima', count: 69 },
       { code: 'tottori', count: 43 },
       { code: 'yamanashi', count: 48 },
     ]);
@@ -551,6 +552,34 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
         // 学校別詳細表は物理ページ1に完結（オフセット無し）
         expect(locator!.page).toBe(1);
         expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
+      }
+    });
+
+    it('R7以前（fiscalYear明示済み）はまだpage/rowIndex未バックフィルのため全件null', () => {
+      const pre8 = file.records.filter((r) => r.fiscalYear !== undefined);
+      expect(pre8.length).toBeGreaterThan(0);
+      for (const r of pre8) {
+        expect(resolveSourceLocator(r, file.sources)).toBeNull();
+      }
+    });
+  });
+
+  describe('tokushima R8（#8・15県目・1頁2段組(LEFT/MIDDLE)でehimeと同型のrowIndex衝突回避が必要だった県）', () => {
+    const file = COMPETITION_RATE_BY_PREFECTURE['tokushima']!;
+    const r8 = file.records.filter((r) => !r.fiscalYear);
+
+    it('R8の69件全件がresolveSourceLocatorで解決でき、page+rowIndexの組が重複しない', () => {
+      const seen = new Set<string>();
+      for (const r of r8) {
+        const locator = resolveSourceLocator(r, file.sources);
+        expect(locator).not.toBeNull();
+        expect(locator!.pdfSha256).toBe('2a88e9e2a295776d28369e185076659c605a01a5977887d14f49744378fce33b');
+        // 1頁2段組(LEFT/MIDDLE)で全件が物理ページ1に集約される
+        expect(locator!.page).toBe(1);
+        expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
+        const key = `${locator!.page}|${locator!.rowIndex}`;
+        expect(seen.has(key)).toBe(false);
+        seen.add(key);
       }
     });
 

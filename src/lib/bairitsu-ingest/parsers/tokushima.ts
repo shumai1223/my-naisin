@@ -38,12 +38,28 @@ const MIDDLE_LAYOUT: TableColumnLayout = {
   syntheticBottomY: 560,
 };
 
-/** 徳島県R8倍率PDFの学校別データ全1頁分（`tokushima-r8-geometry.json`）を解析する。 */
+/**
+ * 徳島県R8倍率PDFの学校別データ全1頁分（`tokushima-r8-geometry.json`）を解析する。
+ *
+ * ⚠️T-Y11F §5順序#8（出典ロケータ）: ehimeと同型の1頁2段組（LEFT/MIDDLE）のため、
+ * LEFT呼び出し・MIDDLE呼び出しで`assembleCompetitionRateRows`のrowIndexが独立に0始まり
+ * となり同一page+rowIndexが重複しうる。MIDDLE側のrowIndexに同一ページのLEFT側件数分の
+ * オフセットを加えて一意性を保つ（「左段を上から読み、続けて中段を上から読む」という
+ * 一貫した順序として解釈）。物理ページは1のみ・オフセット無し。
+ */
 export function parseTokushima(geometries: PdfPageGeometry[]) {
   const geom = geometries[0];
-  const leftRows = parseTablePdfPageRows(filterGeometryByXRange(geom, 30, 290), LEFT_LAYOUT);
-  const middleRows = parseTablePdfPageRows(filterGeometryByXRange(geom, 290, 545), MIDDLE_LAYOUT);
+  const leftRows = parseTablePdfPageRows(filterGeometryByXRange(geom, 30, 290), LEFT_LAYOUT).map((r) => ({ ...r, page: 1 }));
+  const middleRows = parseTablePdfPageRows(filterGeometryByXRange(geom, 290, 545), MIDDLE_LAYOUT).map((r) => ({ ...r, page: 1 }));
   const leftRecords = assembleCompetitionRateRows([leftRows], '合計');
-  const middleRecords = assembleCompetitionRateRows([middleRows], '合計');
+  const middleRecordsRaw = assembleCompetitionRateRows([middleRows], '合計');
+  const leftCountByPage = new Map<number, number>();
+  for (const r of leftRecords) {
+    if (r.page === undefined) continue;
+    leftCountByPage.set(r.page, (leftCountByPage.get(r.page) ?? 0) + 1);
+  }
+  const middleRecords = middleRecordsRaw.map((r) =>
+    r.page === undefined || r.rowIndex === undefined ? r : { ...r, rowIndex: r.rowIndex + (leftCountByPage.get(r.page) ?? 0) }
+  );
   return [...leftRecords, ...middleRecords];
 }

@@ -57,10 +57,13 @@ describe('bairitsu-ingest parse-table-pdf 複数列組ページ (tokushima R8 �
   });
 
   test('罫線が無い表の先頭行・末尾行が欠落しない（城東・富岡西の実例）', () => {
-    expect(parsed.find((r) => r.schoolName === '城東' && r.department === '普通')).toEqual({
+    // T-Y11F §5順序#8でpage/rowIndex（出典ロケータ用）が追加されたため、それ以外のフィールドで比較する
+    const joto = parsed.find((r) => r.schoolName === '城東' && r.department === '普通');
+    expect({ schoolName: joto?.schoolName, department: joto?.department, quota: joto?.quota, finalApplicants: joto?.finalApplicants, finalRate: joto?.finalRate }).toEqual({
       schoolName: '城東', department: '普通', quota: 251, finalApplicants: 243, finalRate: 0.97,
     });
-    expect(parsed.find((r) => r.schoolName === '富岡西' && r.department === '理数')).toEqual({
+    const tominishi = parsed.find((r) => r.schoolName === '富岡西' && r.department === '理数');
+    expect({ schoolName: tominishi?.schoolName, department: tominishi?.department, quota: tominishi?.quota, finalApplicants: tominishi?.finalApplicants, finalRate: tominishi?.finalRate }).toEqual({
       schoolName: '富岡西', department: '理数', quota: 30, finalApplicants: 18, finalRate: 0.6,
     });
   });

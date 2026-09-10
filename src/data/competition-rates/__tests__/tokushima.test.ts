@@ -48,14 +48,17 @@ describe('徳島県 倍率パイプラインα（Y-6・全日制32校69レコー
     expect(r8.filter((r) => r.schoolName === '阿南光')).toHaveLength(4);
     expect(r8.find((r) => r.schoolName === '阿南光' && r.department === '普通')).toBeUndefined();
     expect(r8.filter((r) => r.schoolName === '海部')).toHaveLength(3);
-    expect(r8.find((r) => r.schoolName === '海部' && r.department === '普通')).toEqual({
+    // T-Y11F §5順序#8でpage/rowIndex（出典ロケータ用）が追加されたため、それ以外のフィールドで比較する
+    const { page: _p1, rowIndex: _r1, ...kaifu } = r8.find((r) => r.schoolName === '海部' && r.department === '普通')!;
+    expect(kaifu).toEqual({
       schoolName: '海部',
       department: '普通',
       quota: 47,
       finalApplicants: 43,
       finalRate: 0.91,
     });
-    expect(r8.find((r) => r.schoolName === '那賀' && r.department === '普通')).toEqual({
+    const { page: _p2, rowIndex: _r2, ...naka } = r8.find((r) => r.schoolName === '那賀' && r.department === '普通')!;
+    expect(naka).toEqual({
       schoolName: '那賀',
       department: '普通',
       quota: 30,
