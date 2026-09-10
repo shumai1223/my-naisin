@@ -187,6 +187,7 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
       { code: 'chiba', count: 188 },
       { code: 'gunma', count: 106 },
       { code: 'iwate', count: 113 },
+      { code: 'nagasaki', count: 116 },
       { code: 'saitama', count: 241 },
       { code: 'tochigi', count: 107 },
       { code: 'tottori', count: 43 },
@@ -255,6 +256,31 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
         // 学校別詳細表は物理ページ1〜8（概要ページ無し・オフセット無し）
         expect(locator!.page).toBeGreaterThanOrEqual(1);
         expect(locator!.page).toBeLessThanOrEqual(8);
+        expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
+      }
+    });
+
+    it('R7以前（fiscalYear明示済み）はまだpage/rowIndex未バックフィルのため全件null', () => {
+      const pre8 = file.records.filter((r) => r.fiscalYear !== undefined);
+      expect(pre8.length).toBeGreaterThan(0);
+      for (const r of pre8) {
+        expect(resolveSourceLocator(r, file.sources)).toBeNull();
+      }
+    });
+  });
+
+  describe('nagasaki R8（#8・7県目・概要ページ分オフセット(+3)が必要だった初のassembleSimpleTableRows県）', () => {
+    const file = COMPETITION_RATE_BY_PREFECTURE['nagasaki']!;
+    const r8 = file.records.filter((r) => !r.fiscalYear);
+
+    it('R8の116件全件がresolveSourceLocatorで解決できる', () => {
+      for (const r of r8) {
+        const locator = resolveSourceLocator(r, file.sources);
+        expect(locator).not.toBeNull();
+        expect(locator!.pdfSha256).toBe('4fb198d97abb9d1e1653e63d54eeae170ec497c7c893b3c52bedff658109d249');
+        // 学校別詳細表は物理ページ3〜6（1〜2頁は概要・7〜10頁は定時制等の別表のためオフセット+3）
+        expect(locator!.page).toBeGreaterThanOrEqual(3);
+        expect(locator!.page).toBeLessThanOrEqual(6);
         expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
       }
     });

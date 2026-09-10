@@ -30,10 +30,18 @@ const NAGASAKI_DEPARTMENT_OVERRIDES: Record<string, string> = {
 
 const GRAND_TOTAL_SCHOOL_LABELS = new Set(['県立計', '市立計', '総計']);
 
-/** 長崎県R8倍率PDFの学校別データ4頁分（`nagasaki-r8-geometry.json`）を解析する。 */
+/**
+ * 長崎県R8倍率PDFの学校別データ4頁分（`nagasaki-r8-geometry.json`）を解析する。
+ *
+ * ⚠️T-Y11F §5順序#8（出典ロケータ）: このPDFは全10頁中、学校別詳細表は物理ページ3〜6の
+ * 4頁のみ（1〜2頁は概要・7〜10頁は定時制等の別表）。2026-09-10に生PDF全文抽出で先頭校
+ * 長崎東(quota151/applicants158)が物理ページ3に、末尾の市立長崎商業「情報」
+ * (applicants27/rate0.8)が物理ページ6に実在することを確認済み。出典ロケータ用のpageは
+ * 配列添字+3（tottori型と同様、概要ページ分のオフセットが必要）。
+ */
 export function parseNagasaki(geometries: PdfPageGeometry[]): ParsedCompetitionRow[] {
-  const allRowFields = geometries.flatMap((geom) =>
-    groupCharsIntoRows(geom.chars, 3.0).map((row) => extractRowFields(row.chars, NAGASAKI_LAYOUT))
+  const allRowFields = geometries.flatMap((geom, pageIdx) =>
+    groupCharsIntoRows(geom.chars, 3.0).map((row) => ({ ...extractRowFields(row.chars, NAGASAKI_LAYOUT), page: pageIdx + 3 }))
   );
 
   let currentSchool = '';

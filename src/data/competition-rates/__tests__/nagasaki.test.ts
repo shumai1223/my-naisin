@@ -44,7 +44,9 @@ describe('長崎県 倍率パイプラインα（Y-6・全日制55校116レコ�
   });
 
   it('注記(※5)で明記済みのくくり募集(長崎東)が正しく収録されている', () => {
-    expect(records.find((r) => r.schoolName === '長崎東')).toEqual({
+    // T-Y11F §5順序#8でpage/rowIndex（出典ロケータ用）が追加されたため、それ以外のフィールドで比較する
+    const { page: _page, rowIndex: _rowIndex, ...actual } = records.find((r) => r.schoolName === '長崎東')!;
+    expect(actual).toEqual({
       schoolName: '長崎東',
       department: '普通・国際（くくり募集）',
       quota: 151,
@@ -54,7 +56,8 @@ describe('長崎県 倍率パイプラインα（Y-6・全日制55校116レコ�
   });
 
   it('applicants=0の学科(宇久・対馬国際文化交流)も正しく収録されている(quota>0のため)', () => {
-    expect(records.find((r) => r.schoolName === '宇久')).toEqual({
+    const { page: _page, rowIndex: _rowIndex, ...actual } = records.find((r) => r.schoolName === '宇久')!;
+    expect(actual).toEqual({
       schoolName: '宇久',
       department: '普通',
       quota: 39,
