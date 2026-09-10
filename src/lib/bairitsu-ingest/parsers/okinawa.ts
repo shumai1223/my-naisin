@@ -68,9 +68,16 @@ function stripTrailingClassCountDigits(s: string): string {
   return s.replace(/[0-9]+$/, '');
 }
 
-/** 沖縄県R8倍率PDFの学校別データ全4頁分（`okinawa-r8-geometry.json`）を解析する。 */
+/**
+ * 沖縄県R8倍率PDFの学校別データ全4頁分（`okinawa-r8-geometry.json`）を解析する。
+ *
+ * ⚠️T-Y11F §5順序#8（出典ロケータ）: pageオフセットは県ごとに異なるため生PDFで毎回実測する
+ * （2026-09-10確認: 詳細は本ファイルの変更コミット参照）。
+ */
 export function parseOkinawa(geometries: PdfPageGeometry[]): ParsedCompetitionRow[] {
-  const clusteredRows = geometries.flatMap((geom) => groupCharsIntoRows(geom.chars, 3.0));
+  const clusteredRows = geometries.flatMap((geom, pageIdx) =>
+    groupCharsIntoRows(geom.chars, 3.0).map((row) => ({ ...row, page: pageIdx + 1 }))
+  );
 
   // ⚠️課程列（全日/定時）は学校名と同じく「学科群の先頭行にだけ印字され、継続行は空欄」の
   // carry-forward構造を持つ（那覇工業の定時「機械」行にはあるが続く「電気」行には無い）。
@@ -85,7 +92,7 @@ export function parseOkinawa(geometries: PdfPageGeometry[]): ParsedCompetitionRo
 
   const allRowFields = zenjitsuRows.map((row) => {
     const fields = extractRowFields(row.chars, OKINAWA_LAYOUT);
-    return { ...fields, department: stripTrailingClassCountDigits(fields.department) };
+    return { ...fields, department: stripTrailingClassCountDigits(fields.department), page: row.page };
   });
 
   let currentSchool = '';

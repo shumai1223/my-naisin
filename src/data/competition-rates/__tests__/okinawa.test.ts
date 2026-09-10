@@ -54,7 +54,9 @@ describe('沖縄県 倍率パイプラインα（Y-6・全日制58校156レコ�
   });
 
   it('併設型進学予定者を差し引いた募集人員（名護・フロンティア=定員80-併設型37=43）が正しく収録されている', () => {
-    expect(records.find((r) => r.schoolName === '名護' && r.department === 'フロンティア')).toEqual({
+    // T-Y11F §5順序#8でpage/rowIndex（出典ロケータ用）が追加されたため、それ以外のフィールドで比較する
+    const { page: _page, rowIndex: _rowIndex, ...actual } = records.find((r) => r.schoolName === '名護' && r.department === 'フロンティア')!;
+    expect(actual).toEqual({
       schoolName: '名護',
       department: 'フロンティア',
       quota: 43,

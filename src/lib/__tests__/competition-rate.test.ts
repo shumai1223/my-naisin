@@ -193,6 +193,7 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
       { code: 'kagawa', count: 68 },
       { code: 'miyagi', count: 129 },
       { code: 'nagasaki', count: 116 },
+      { code: 'okinawa', count: 156 },
       { code: 'saitama', count: 241 },
       { code: 'shimane', count: 64 },
       { code: 'tochigi', count: 107 },
@@ -604,6 +605,31 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
         expect(locator!.pdfSha256).toBe('ecf8970f1867e6de03e789a17b7446c723f48df5ba375088999e29dc97ba904a');
         // 学校別詳細表は物理ページ1に完結（オフセット無し）
         expect(locator!.page).toBe(1);
+        expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
+      }
+    });
+
+    it('R7以前（fiscalYear明示済み）はまだpage/rowIndex未バックフィルのため全件null', () => {
+      const pre8 = file.records.filter((r) => r.fiscalYear !== undefined);
+      expect(pre8.length).toBeGreaterThan(0);
+      for (const r of pre8) {
+        expect(resolveSourceLocator(r, file.sources)).toBeNull();
+      }
+    });
+  });
+
+  describe('okinawa R8（#8・17県目・assembleSimpleTableRows利用県で当初の候補調査から見落としていた1県）', () => {
+    const file = COMPETITION_RATE_BY_PREFECTURE['okinawa']!;
+    const r8 = file.records.filter((r) => !r.fiscalYear);
+
+    it('R8の156件全件がresolveSourceLocatorで解決できる', () => {
+      for (const r of r8) {
+        const locator = resolveSourceLocator(r, file.sources);
+        expect(locator).not.toBeNull();
+        expect(locator!.pdfSha256).toBe('c0b86b67230623207d3f828f94c427fa3a2a411870b1942a1ba9892f093151ee');
+        // 学校別詳細表は物理ページ1〜4（オフセット無し）
+        expect(locator!.page).toBeGreaterThanOrEqual(1);
+        expect(locator!.page).toBeLessThanOrEqual(4);
         expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
       }
     });
