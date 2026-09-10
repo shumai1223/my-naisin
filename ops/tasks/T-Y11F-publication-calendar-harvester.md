@@ -1867,7 +1867,27 @@ tsc実exit0・jestフルスイート545suites7651tests green。commit 685f227。
 次はassembleSimpleTableRows利用の残り7県（saitama/nagasaki/miyagi/yamanashi/chiba/ehime/
 kagawa）、または他の共有関数（assembleCompetitionRateRows等5パーサ）への横展開を検討する。
 
-| 8 | **★出典ロケータ**⚠️着手(2026-09-10・型基盤完了・4県目iwate完了・累計369件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
+### #8 出典ロケータ 5県目=chiba（2026-09-10）
+
+chibaはtochigi型（overrideなし）に準じる単純パーサだが、**188件は#8着手県中これまでの
+最大件数**。`parsers/chiba.ts`の変更は`geometries.flatMap`に`(row,pageIdx)=>page:pageIdx+1`
+を追加するだけで、rowIndexは共有関数`assembleSimpleTableRows`側が自動付与（gunmaで確立した
+土台がそのまま機能）。ページオフセットは`pdftotext -f 1`で千葉のquota240/applicants331が
+物理ページ1に実在することを確認し、概要ページ無し（オフセット無し）。188件は5ページに分散。
+PDFを再取得しsha256(b504b38339...)を計測、既存の作業ディレクトリの値と完全一致を確認した。
+
+このタスクは前セッションがtsc/jest未実行のままファイルを編集した状態でセッション終了しており、
+今回のイテレーションでは新規転記でなく**引き継いだ未commit差分の検証**（tsc/jest/sha256再計算）
+のみを行いcommit/pushした。既存テスト2件（registry.test.ts/competition-rate.test.ts）を更新、
+chiba用describeブロックを新設。
+
+累計557件（tottori43+gunma106+tochigi107+iwate113+chiba188）。
+tsc実exit0・jestフルスイート545suites7653tests green。commit 05e2649。
+
+次はassembleSimpleTableRows利用の残り6県（saitama/nagasaki/miyagi/yamanashi/ehime/kagawa）、
+または他の共有関数（assembleCompetitionRateRows等5パーサ）への横展開を検討する。
+
+| 8 | **★出典ロケータ**⚠️着手(2026-09-10・型基盤完了・5県目chiba完了・累計557件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
 
 **2026-09-10着手**: §5順序#7（段階台帳）がhokkaido全14管内完結によりoita/okinawaの2県のみ
 未着手（前進手段なしと判断済み）となったため#8に着手。設計資料
