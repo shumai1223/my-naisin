@@ -206,6 +206,7 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
       { code: 'nagasaki', count: 116 },
       { code: 'nara', count: 71 },
       { code: 'niigata', count: 93 },
+      { code: 'oita', count: 81 },
       { code: 'okinawa', count: 156 },
       { code: 'saitama', count: 241 },
       { code: 'shimane', count: 64 },
@@ -1061,6 +1062,42 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
         // 学校別詳細表は物理ページ3〜6(1〜2頁目は概要・志願変更受付の説明のためオフセット+3)
         expect(locator!.page).toBeGreaterThanOrEqual(3);
         expect(locator!.page).toBeLessThanOrEqual(6);
+        expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
+      }
+    });
+
+    it('同一page内でrowIndexの重複が無い', () => {
+      const seen = new Set<string>();
+      for (const r of r8) {
+        const key = `${r.page}|${r.rowIndex}`;
+        expect(seen.has(key)).toBe(false);
+        seen.add(key);
+      }
+    });
+
+    it('R7以前（fiscalYear明示済み）はまだpage/rowIndex未バックフィルのため全件null', () => {
+      const pre8 = file.records.filter((r) => r.fiscalYear !== undefined);
+      expect(pre8.length).toBeGreaterThan(0);
+      for (const r of pre8) {
+        expect(resolveSourceLocator(r, file.sources)).toBeNull();
+      }
+    });
+  });
+
+  describe('oita R8（#8・31県目・pendingキュー型個別実装・概要ページ無しでオフセット+1）', () => {
+    const file = COMPETITION_RATE_BY_PREFECTURE['oita']!;
+    const r8 = file.records.filter((r) => !r.fiscalYear);
+
+    it('R8の81件全件がresolveSourceLocatorで解決できる', () => {
+      expect(r8.length).toBe(81);
+      for (const r of r8) {
+        expect(r.page).toBeDefined();
+        const locator = resolveSourceLocator(r, file.sources);
+        expect(locator).not.toBeNull();
+        expect(locator!.pdfSha256).toBe('7b4946f78bee200555fd953e38a59dcb649bd7303aac66bc30f77cafb0ae50c6');
+        // 生PDF全4頁と概要ページ無しでgeometry配列4頁が完全一致するためオフセット+1
+        expect(locator!.page).toBeGreaterThanOrEqual(1);
+        expect(locator!.page).toBeLessThanOrEqual(4);
         expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
       }
     });

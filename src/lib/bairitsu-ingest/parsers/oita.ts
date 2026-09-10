@@ -47,6 +47,7 @@ interface RawRow {
   departmentRaw: string;
   quotaText: string;
   applicantsText: string;
+  page: number;
 }
 
 const RENAME_ON_DEPARTMENT = new Map<string, string>([['中津南|環境・社会共生', '中津南耶馬溪校']]);
@@ -55,19 +56,27 @@ const DEPARTMENT_OVERRIDE = new Map<string, string>([
   ['大分東|園芸ビジネス', '園芸ビジネス・園芸デザイン（くくり募集）'],
 ]);
 
-/** 大分県R8倍率PDFの学校別データ全頁分（`oita-r8-geometry.json`）を解析する。 */
+/**
+ * 大分県R8倍率PDFの学校別データ全頁分（`oita-r8-geometry.json`）を解析する。
+ *
+ * ⚠️T-Y11F §5順序#8（出典ロケータ）: geometry配列4頁は生PDF全4頁と完全一致（概要ページ無し）
+ * のためオフセットは配列添字+1（2026-09-11にpdftotext -f 1で中津南「普通」quota175/
+ * applicants192が物理ページ1に実在することを確認）。
+ */
 export function parseOita(geometries: PdfPageGeometry[]): ParsedCompetitionRow[] {
   const allRows: RawRow[] = [];
-  for (const pg of geometries) {
+  geometries.forEach((pg, pageIdx) => {
+    const page = pageIdx + 1;
     for (const row of rowsForPage(pg.chars)) {
       allRows.push({
         schoolNameRaw: cellText(row.chars, 0),
         departmentRaw: cellText(row.chars, 1),
         quotaText: cellText(row.chars, 3),
         applicantsText: cellText(row.chars, 7),
+        page,
       });
     }
-  }
+  });
 
   // 「[ 定 時 制 ]」（全角スペース均等割り付け）は他県の定時制と同じ理由でスコープ外。
   const teijiseiIdx = allRows.findIndex((r) => normalizeExtractedText(r.schoolNameRaw + r.departmentRaw).includes('定時制'));
@@ -86,10 +95,12 @@ export function parseOita(geometries: PdfPageGeometry[]): ParsedCompetitionRow[]
   });
 
   const records: ParsedCompetitionRow[] = [];
+  const rowIndexByPage = new Map<number, number>();
   let currentSchool = '';
   let pendingDept = '';
   let pendingQuota = '';
   let pendingApplicants = '';
+  let pendingPage = 0;
   for (const r of dataRows) {
     const sn = normalizeExtractedText(r.schoolNameRaw);
     if (sn) currentSchool = sn;
@@ -98,11 +109,13 @@ export function parseOita(geometries: PdfPageGeometry[]): ParsedCompetitionRow[]
     if (/^[0-9,]+$/.test(r.quotaText) && /^[0-9,]+$/.test(r.applicantsText)) {
       pendingQuota = r.quotaText;
       pendingApplicants = r.applicantsText;
+      pendingPage = r.page;
     }
     if (pendingDept && pendingQuota && pendingApplicants) {
       const deptNorm = normalizeDepartmentText(pendingDept);
       const quotaTextResolved = pendingQuota;
       const applicantsTextResolved = pendingApplicants;
+      const page = pendingPage;
       pendingDept = '';
       pendingQuota = '';
       pendingApplicants = '';
@@ -113,7 +126,9 @@ export function parseOita(geometries: PdfPageGeometry[]): ParsedCompetitionRow[]
       const finalApplicants = Number(applicantsTextResolved.replace(/,/g, ''));
       if (!Number.isFinite(quota) || quota <= 0 || !Number.isFinite(finalApplicants)) continue;
       const finalRate = Number(roundHalfUpScaled(finalApplicants, quota, 2)) / 100;
-      records.push({ schoolName, department, quota, finalApplicants, finalRate });
+      const rowIndex = rowIndexByPage.get(page) ?? 0;
+      rowIndexByPage.set(page, rowIndex + 1);
+      records.push({ schoolName, department, quota, finalApplicants, finalRate, page, rowIndex });
     }
   }
   return records;

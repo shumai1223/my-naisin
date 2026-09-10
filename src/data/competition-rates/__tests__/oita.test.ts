@@ -43,8 +43,16 @@ describe('大分県 倍率パイプラインα（Y-6・全日制39校81レコー
     expect(distinctSchools.size).toBe(39);
   });
 
+  const bare = (r: { schoolName: string; department: string; quota: number; finalApplicants: number; finalRate: number }) => ({
+    schoolName: r.schoolName,
+    department: r.department,
+    quota: r.quota,
+    finalApplicants: r.finalApplicants,
+    finalRate: r.finalRate,
+  });
+
   it('くくり募集の大分舞鶴（普通・理数）が正しく収録されている', () => {
-    expect(records.find((r) => r.schoolName === '大分舞鶴')).toEqual({
+    expect(bare(records.find((r) => r.schoolName === '大分舞鶴')!)).toEqual({
       schoolName: '大分舞鶴',
       department: '普通・理数（くくり募集）',
       quota: 264,
@@ -54,7 +62,7 @@ describe('大分県 倍率パイプラインα（Y-6・全日制39校81レコー
   });
 
   it('くくり募集の大分東（園芸ビジネス・園芸デザイン）が正しく収録されている', () => {
-    expect(records.find((r) => r.department === '園芸ビジネス・園芸デザイン（くくり募集）')).toEqual({
+    expect(bare(records.find((r) => r.department === '園芸ビジネス・園芸デザイン（くくり募集）')!)).toEqual({
       schoolName: '大分東',
       department: '園芸ビジネス・園芸デザイン（くくり募集）',
       quota: 60,
@@ -64,7 +72,7 @@ describe('大分県 倍率パイプラインα（Y-6・全日制39校81レコー
   });
 
   it('applicants=0の学科(芸術緑丘・音楽)も正しく収録されている(quota>0のため)', () => {
-    expect(records.find((r) => r.schoolName === '芸術緑丘')).toEqual({
+    expect(bare(records.find((r) => r.schoolName === '芸術緑丘')!)).toEqual({
       schoolName: '芸術緑丘',
       department: '音楽',
       quota: 14,

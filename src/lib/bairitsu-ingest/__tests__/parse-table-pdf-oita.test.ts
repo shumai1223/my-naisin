@@ -78,7 +78,8 @@ describe('bairitsu-ingest parse-table-pdf 汎用carry-forward組み立て (oita 
   });
 
   test('注記が数値列にはみ出す行でも直前の正しい数値を上書きしない（国東「普通」の実例）', () => {
-    expect(parsed.find((r) => r.schoolName === '国東' && r.department === '普通')).toEqual({
+    const kunisaki = parsed.find((r) => r.schoolName === '国東' && r.department === '普通')!;
+    expect({ schoolName: kunisaki.schoolName, department: kunisaki.department, quota: kunisaki.quota, finalApplicants: kunisaki.finalApplicants, finalRate: kunisaki.finalRate }).toEqual({
       schoolName: '国東',
       department: '普通',
       quota: 79,
@@ -88,7 +89,8 @@ describe('bairitsu-ingest parse-table-pdf 汎用carry-forward組み立て (oita 
   });
 
   test('学科名ラベルと数値がブロック境界をまたいで分裂しても正しく合体する（安心院の実例）', () => {
-    expect(parsed.find((r) => r.schoolName === '安心院')).toEqual({
+    const ajimu = parsed.find((r) => r.schoolName === '安心院')!;
+    expect({ schoolName: ajimu.schoolName, department: ajimu.department, quota: ajimu.quota, finalApplicants: ajimu.finalApplicants, finalRate: ajimu.finalRate }).toEqual({
       schoolName: '安心院',
       department: '普通',
       quota: 44,

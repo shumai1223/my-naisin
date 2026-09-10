@@ -2523,7 +2523,34 @@ tsc実exit0・jestフルスイート545suites7713tests green(1発green)。
 
 次は残り6県(oita/saga/shiga/shizuoka/toyama/yamagata)へ進める。
 
-| 8 | **★出典ロケータ**⚠️着手(2026-09-11・型基盤完了・30県目niigata完了・累計3113件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
+### #8 出典ロケータ 31県目=oita（2026-09-11・pendingキュー型個別実装・概要ページ無しでオフセット+1）
+
+sourceIndex分布を確認したところ全81件が単一PDF(sources[0])由来で分岐なしと判明。oitaは
+物理4頁・geometry配列4頁が完全一致(pdftotext -f 1で中津南「普通」quota175/applicants192
+が物理ページ1に実在を確認)、オフセット配列添字+1(調整不要)。
+
+parsers/oita.tsはaomori/fukui型と同型のpendingキュー方式(学科名ラベルと数値がブロック
+境界をまたいで分裂する罠に対応するgreedy合体アルゴリズム)の個別実装。geometries.forEach
+(pg,pageIdx)に変更しRawRow.pageを追加、pendingQuota/pendingApplicantsが確定した瞬間の
+行のpageをpendingPageとして保持(ラベルと数値が別ページにまたがる可能性を考慮し、実際に
+数値が確定した行の物理ページを採用)、レコード確定時にrowIndexByPageマップで採番。
+
+既存テスト2ファイル(oita.test.tsの大分舞鶴・大分東・芸術緑丘の3件、parse-table-pdf-oita.
+test.tsの国東・安心院の2件)のtoEqual完全一致アサーションを着手前に能動的にgrepで発見し
+共通bare()ヘルパー/分割代入で対処。既存テスト2件(registry.test.ts/competition-rate.test.ts)
+を更新、oita用describeブロックを新設。PDFを再取得しsha256(7b4946f7...)を計測。
+
+累計3194件(共有関数3種18県1898+個別実装13県1296)。
+tsc実exit0・jestフルスイート545suites7716tests green(1発green)。
+
+★所感: §5順序#7(段階台帳)でoitaは「学校別testTakersConfirmed資料が見つからない」ため
+見送りとした県だが、#8(出典ロケータ)は既存のcompetition-rates(quota/finalApplicants)
+データへのlocator付与であり別タスクのため無関係に完遂できた。#7と#8のスコープ(対象
+データセット)を混同しないこと。
+
+次は残り5県(saga/shiga/shizuoka/toyama/yamagata)へ進める。
+
+| 8 | **★出典ロケータ**⚠️着手(2026-09-11・型基盤完了・31県目oita完了・累計3194件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
 
 **2026-09-10着手**: §5順序#7（段階台帳）がhokkaido全14管内完結によりoita/okinawaの2県のみ
 未着手（前進手段なしと判断済み）となったため#8に着手。設計資料
