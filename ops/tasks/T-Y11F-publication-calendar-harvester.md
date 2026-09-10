@@ -2466,7 +2466,37 @@ tsc実exit0・jestフルスイート545suites7707tests green(1発green)。
 
 次は残り8県(nara/niigata/oita/saga/shiga/shizuoka/toyama/yamagata)へ進める。
 
-| 8 | **★出典ロケータ**⚠️着手(2026-09-11・型基盤完了・28県目nagano完了(BLOCK_OVERRIDE校44件は意図的にlocatorなし)・累計2949件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
+### #8 出典ロケータ 29県目=nara（2026-09-11・ブロック単位個別実装・基底ラベル使い回し行も含め全件locator付与）
+
+sourceIndex分布を確認したところ全71件が単一PDF(sources[0])由来で分岐なしと判明。naraは
+物理2頁・geometry配列2頁が完全一致(pdftotext -f 1で奈良商工「機械工学」quota74/
+applicants64が物理ページ1に実在を確認)、オフセット配列添字+1(調整不要)。
+
+parsers/nara.tsはkyotoと同型の罫線ブロック(groupRowsIntoBlocks)構造のため
+`geometries.flatMap(geom)` を `geometries.flatMap((geom,pageIdx))` に変更し
+`{page, block}`のペアでブロックを保持、最終push箇所にrowIndexByPageマップを追加。
+添上・桜井の「基底ラベル1件を複数の（コース名）行で使い回す」パターン(aomori型の
+1回消費pendingキューと異なりnaraは複数回使い回す)も、基底ラベルを持つ行自体は数値なし
+のためpush対象にならず問題なくpage/rowIndexを引き継ぐ。既存の1段階map(全角→半角括弧
+統一)はスプレッドのままpage/rowIndexを保持。
+
+★新しい罠: バックフィルスクリプトが1件だけ商業「会計・情報ビジネス...(くくり募集)」の
+複数行フォーマット(schoolName/department/quota/finalApplicants/finalRateが各々別行に
+展開される書式)を検知できず初回は70/71件で失敗。shimane/wakayamaで確立した単一行/
+複数行両対応の手法を再適用し、複数行ブロックの閉じ`},`直前にpage/rowIndexを挿入する
+処理を追加して解決。
+
+既存テスト1箇所(nara.test.tsの一条・奈良・郡山3件のtoEqual・`records.find()`がR8を
+最初にヒットする構造)を着手前に能動的にgrepで発見し共通のbare()ヘルパーで対処。既存
+テスト2件(registry.test.ts/competition-rate.test.ts)を更新、nara用describeブロックを
+新設。PDFを再取得しsha256(8a56a562...)を計測。
+
+累計3020件(共有関数3種18県1898+個別実装11県1122)。
+tsc実exit0・jestフルスイート545suites7710tests green(1発green)。
+
+次は残り7県(niigata/oita/saga/shiga/shizuoka/toyama/yamagata)へ進める。
+
+| 8 | **★出典ロケータ**⚠️着手(2026-09-11・型基盤完了・29県目nara完了・累計3020件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
 
 **2026-09-10着手**: §5順序#7（段階台帳）がhokkaido全14管内完結によりoita/okinawaの2県のみ
 未着手（前進手段なしと判断済み）となったため#8に着手。設計資料

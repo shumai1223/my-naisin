@@ -204,6 +204,7 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
       { code: 'miyagi', count: 129 },
       { code: 'nagano', count: 85 },
       { code: 'nagasaki', count: 116 },
+      { code: 'nara', count: 71 },
       { code: 'okinawa', count: 156 },
       { code: 'saitama', count: 241 },
       { code: 'shimane', count: 64 },
@@ -994,6 +995,42 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
     it('同一page内でrowIndexの重複が無い', () => {
       const seen = new Set<string>();
       for (const r of r8.filter((r) => r.page !== undefined)) {
+        const key = `${r.page}|${r.rowIndex}`;
+        expect(seen.has(key)).toBe(false);
+        seen.add(key);
+      }
+    });
+
+    it('R7以前（fiscalYear明示済み）はまだpage/rowIndex未バックフィルのため全件null', () => {
+      const pre8 = file.records.filter((r) => r.fiscalYear !== undefined);
+      expect(pre8.length).toBeGreaterThan(0);
+      for (const r of pre8) {
+        expect(resolveSourceLocator(r, file.sources)).toBeNull();
+      }
+    });
+  });
+
+  describe('nara R8（#8・29県目・ブロック単位個別実装・基底ラベル使い回し行も含め全件locator付与）', () => {
+    const file = COMPETITION_RATE_BY_PREFECTURE['nara']!;
+    const r8 = file.records.filter((r) => !r.fiscalYear);
+
+    it('R8の71件全件がresolveSourceLocatorで解決できる', () => {
+      expect(r8.length).toBe(71);
+      for (const r of r8) {
+        expect(r.page).toBeDefined();
+        const locator = resolveSourceLocator(r, file.sources);
+        expect(locator).not.toBeNull();
+        expect(locator!.pdfSha256).toBe('8a56a562abce73287d89e9d47aa2fda18ac5d94b39df57d99095ccd535de4bbf');
+        // 生PDF全2頁と概要ページ無しでgeometry配列2頁が完全一致するためオフセット+1
+        expect(locator!.page).toBeGreaterThanOrEqual(1);
+        expect(locator!.page).toBeLessThanOrEqual(2);
+        expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
+      }
+    });
+
+    it('同一page内でrowIndexの重複が無い', () => {
+      const seen = new Set<string>();
+      for (const r of r8) {
         const key = `${r.page}|${r.rowIndex}`;
         expect(seen.has(key)).toBe(false);
         seen.add(key);

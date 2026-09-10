@@ -44,21 +44,28 @@ describe('奈良県 倍率パイプラインα（Y-6・全日制29校71レコー
   });
 
   it('外部報道と一致する最高倍率（一条・普通1.51倍）・県内最多定員校の倍率（奈良・普通1.20倍/郡山・普通1.27倍）が正しく収録されている', () => {
-    expect(records.find((r) => r.schoolName === '一条')).toEqual({
+    const bare = (r: { schoolName: string; department: string; quota: number; finalApplicants: number; finalRate: number }) => ({
+      schoolName: r.schoolName,
+      department: r.department,
+      quota: r.quota,
+      finalApplicants: r.finalApplicants,
+      finalRate: r.finalRate,
+    });
+    expect(bare(records.find((r) => r.schoolName === '一条')!)).toEqual({
       schoolName: '一条',
       department: '普通',
       quota: 200,
       finalApplicants: 302,
       finalRate: 1.51,
     });
-    expect(records.find((r) => r.schoolName === '奈良' && r.department === '普通')).toEqual({
+    expect(bare(records.find((r) => r.schoolName === '奈良' && r.department === '普通')!)).toEqual({
       schoolName: '奈良',
       department: '普通',
       quota: 360,
       finalApplicants: 432,
       finalRate: 1.2,
     });
-    expect(records.find((r) => r.schoolName === '郡山')).toEqual({
+    expect(bare(records.find((r) => r.schoolName === '郡山')!)).toEqual({
       schoolName: '郡山',
       department: '普通',
       quota: 360,

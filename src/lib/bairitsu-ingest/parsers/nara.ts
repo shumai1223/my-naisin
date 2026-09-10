@@ -56,15 +56,23 @@ function groupRowsIntoBlocks(rows: ClusteredRow[], hlines: PdfPageGeometry['hlin
   return blocks.filter((b) => b.length > 0);
 }
 
-/** 奈良県R8倍率PDFの学校別データ2頁分（`nara-r8-geometry.json`）を解析する。 */
+/**
+ * 奈良県R8倍率PDFの学校別データ2頁分（`nara-r8-geometry.json`）を解析する。
+ *
+ * ⚠️T-Y11F §5順序#8（出典ロケータ）: geometry配列2頁は生PDF全2頁と完全一致（概要ページ無し）
+ * のためオフセットは配列添字+1（2026-09-11にpdftotext -f 1で奈良商工「機械工学」
+ * quota74/applicants64が物理ページ1に実在することを確認）。
+ */
 export function parseNara(geometries: PdfPageGeometry[]): ParsedCompetitionRow[] {
-  const blocks = geometries.flatMap((geom) => {
+  const blocksWithPage = geometries.flatMap((geom, pageIdx) => {
+    const page = pageIdx + 1;
     const rows = groupCharsIntoRows(geom.chars, 3.0);
-    return groupRowsIntoBlocks(rows, geom.hlines, 155);
+    return groupRowsIntoBlocks(rows, geom.hlines, 155).map((block) => ({ page, block }));
   });
 
   const parsedFullwidthParens: ParsedCompetitionRow[] = [];
-  for (const block of blocks) {
+  const rowIndexByPage = new Map<number, number>();
+  for (const { page, block } of blocksWithPage) {
     const fields = block.map((row) => extractRowFields(row.chars, NARA_LAYOUT));
     const schoolName = fields.map((f) => normalizeExtractedText(f.schoolName)).find((s) => s.length > 0) ?? '';
     // ⚠️「会計」のように「計」を含む正当な学科名があるため部分一致では除外できない。かつ
@@ -94,7 +102,9 @@ export function parseNara(geometries: PdfPageGeometry[]): ParsedCompetitionRow[]
       const overridden = NARA_DEPARTMENT_OVERRIDES[`${schoolName}|${resolvedRawDept}`];
       const department = overridden ?? normalizeDepartmentText(resolvedRawDept);
       const finalRate = Number(roundHalfUpScaled(finalApplicants, quota, 2)) / 100;
-      parsedFullwidthParens.push({ schoolName, department, quota, finalApplicants, finalRate });
+      const rowIndex = rowIndexByPage.get(page) ?? 0;
+      rowIndexByPage.set(page, rowIndex + 1);
+      parsedFullwidthParens.push({ schoolName, department, quota, finalApplicants, finalRate, page, rowIndex });
     }
   }
   // ⚠️既存データはokinawa型と同じく学科名の括弧を半角で統一している。
