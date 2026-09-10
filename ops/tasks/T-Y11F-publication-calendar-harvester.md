@@ -1887,7 +1887,35 @@ tsc実exit0・jestフルスイート545suites7653tests green。commit 05e2649。
 次はassembleSimpleTableRows利用の残り6県（saitama/nagasaki/miyagi/yamanashi/ehime/kagawa）、
 または他の共有関数（assembleCompetitionRateRows等5パーサ）への横展開を検討する。
 
-| 8 | **★出典ロケータ**⚠️着手(2026-09-10・型基盤完了・5県目chiba完了・累計557件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
+### #8 出典ロケータ 6県目=saitama（2026-09-10）
+
+saitamaはgunma/tochigi/iwateと同型のassembleSimpleTableRows利用県だがこれまでで最も列数が
+多く（小計/合計行を性別列位置x0≈244-256の「計」文字で判定除外する独自フィルタ）、かつ
+**市立高校の学校名接頭辞除去＋伊奈学園総合の学科名override**という2段階の後段処理を持つ
+最も複雑なケースだった。`parsers/saitama.ts`の変更は`geometries.flatMap`に`(geom,pageIdx)`
+で`page:pageIdx+1`を追加するのみで、既存の2段階の後段map/フィルタが引き続きスプレッドで
+page/rowIndexを保持することを確認（iwateのoverride保持確認に続き2例目・後段処理の複雑さに
+関わらず土台が機能することが再確認できた）。
+
+このPDFはCJK ToUnicode CMap欠落でpdftotextの学校名抽出が文字化けする種類だったため、
+全文テキスト抽出＋awkでform feed数を数えるという新しい確認手法を使い、上尾
+（quota238/applicants316）が物理ページ1に、末尾の寄居城北（quota198/applicants196）が
+物理ページ8に実在することを確認（概要ページ無し・オフセット無し。geometry8頁＝物理9頁中の
+詳細表部分と一致し、末尾の1頁は集計外と判明）。
+
+バックフィルは初めて`tsx`＋一時nodeスクリプトによる機械突合方式を採用: `parseSaitama()`の
+出力241件とデータファイル中の該当241行を順序一致で読み合わせ、schoolName/department/
+quota/finalApplicantsが完全一致することをスクリプト内で`assert`してから書き込む（伊奈学園
+総合のみoverride後の学科名で許容）。手作業でのコピペより安全かつ高速で、以後の横展開でも
+この方式を標準にする価値がある。一時ファイルは作業後に削除済み。
+
+累計798件（tottori43+gunma106+tochigi107+iwate113+chiba188+saitama241）。
+tsc実exit0・jestフルスイート545suites7655tests green。commit 995cfcf。
+
+次はassembleSimpleTableRows利用の残り5県（nagasaki/miyagi/yamanashi/ehime/kagawa）、
+または他の共有関数（assembleCompetitionRateRows等5パーサ）への横展開を検討する。
+
+| 8 | **★出典ロケータ**⚠️着手(2026-09-10・型基盤完了・6県目saitama完了・累計798件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
 
 **2026-09-10着手**: §5順序#7（段階台帳）がhokkaido全14管内完結によりoita/okinawaの2県のみ
 未着手（前進手段なしと判断済み）となったため#8に着手。設計資料
