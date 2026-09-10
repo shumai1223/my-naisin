@@ -1963,7 +1963,26 @@ miyagi129）。tsc実exit0・jestフルスイート545suites7659tests green。co
 次はassembleSimpleTableRows利用の残り3県（yamanashi/ehime/kagawa）、
 または他の共有関数（assembleCompetitionRateRows等5パーサ）への横展開を検討する。
 
-| 8 | **★出典ロケータ**⚠️着手(2026-09-10・型基盤完了・8県目miyagi完了・累計1043件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
+### #8 出典ロケータ 9県目=yamanashi（2026-09-10・#8着手県中最少件数）
+
+yamanashiはmiyagi同様pdftotextの数値抽出が信頼できない種類のPDF（数値が1行に密集して結合
+される）だったため、最初からpdftoppmビジョン確認を採用。全7頁中1頁目が概要で学校別詳細表は
+物理ページ2〜3の2頁（+2オフセット）と特定した（先頭の北杜「普通」quota49/applicants45が
+物理ページ2に、末尾の甲府商業「情報処理」quota48/applicants48が物理ページ3に実在）。
+
+**miyagiの教訓を活かし、着手前に能動的に`grep`で個別テストファイルの`.toEqual`完全一致
+アサーションを先回りで探した**結果、`data/competition-rates/__tests__/yamanashi.test.ts`の
+韮崎工業（工業一括学科）のテストを事前に発見・分割代入で対処でき、今回はjestフルスイート
+1発でgreenに到達した（miyagiでは事後に発見してred→修正の2回転だった）。
+
+累計1091件（tottori43+gunma106+tochigi107+iwate113+chiba188+saitama241+nagasaki116+
+miyagi129+yamanashi48）。tsc実exit0・jestフルスイート545suites7661tests green。
+commit 64aef2a。
+
+次はassembleSimpleTableRows利用の残り2県（ehime/kagawa）、
+または他の共有関数（assembleCompetitionRateRows等5パーサ）への横展開を検討する。
+
+| 8 | **★出典ロケータ**⚠️着手(2026-09-10・型基盤完了・9県目yamanashi完了・累計1091件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
 
 **2026-09-10着手**: §5順序#7（段階台帳）がhokkaido全14管内完結によりoita/okinawaの2県のみ
 未着手（前進手段なしと判断済み）となったため#8に着手。設計資料

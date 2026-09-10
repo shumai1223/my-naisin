@@ -5,18 +5,17 @@
 
 ---
 
-最終更新              2026-09-10 10:0x
+最終更新              2026-09-10 10:1x
 いまやっていること     T-Y11F §5順序#8（出典ロケータ）進行中。tottori(43)→gunma(106)→
                       tochigi(107)→iwate(113)→chiba(188)→saitama(241)→nagasaki(116)→
-                      miyagi(129)の8県で累計1043件完了
-今日やったこと         miyagi: pdftotextが数値まで崩れる種類のPDFのためpdftoppmビジョン
-                      確認に切替え+2オフセットを特定・129件バックフィル。jestフルスイート
-                      漏れ1件を発見・修正(既存の個別テストにもtoEqual完全一致が潜む教訓)。
-                      全545suites7659tests green・commit ba41c9a push済
-在庫の残り            36登録パーサ県のうち8県完了・残り28県+R7以前の年度別リプレイ+ビジョン
-                      11県7,191件が未着手。次はassembleSimpleTableRows利用の残り3県
-                      (yamanashi/ehime/kagawa)へ横展開
-払底の見込み           8データ点いずれも同程度の負荷=「レコード数比例でなく県数比例
+                      miyagi(129)→yamanashi(48)の9県で累計1091件完了
+今日やったこと         yamanashi: miyagiの教訓を先回り適用し個別テストのtoEqual罠を事前
+                      grepで発見・1発green達成。48件バックフィル。全545suites7661tests
+                      green・commit 64aef2a push済
+在庫の残り            36登録パーサ県のうち9県完了・残り27県+R7以前の年度別リプレイ+ビジョン
+                      11県7,191件が未着手。次はassembleSimpleTableRows利用の残り2県
+                      (ehime/kagawa)へ横展開
+払底の見込み           9データ点いずれも同程度の負荷=「レコード数比例でなく県数比例
                       (段取りコストが支配的)」がほぼ確定。115hの見積り単価は36県×
                       段取りコストで再計算するのが実態に近い
 詰まっていること        aichi（Imperva WAF一時ブロックが継続中）。oita/okinawaは資料自体が
