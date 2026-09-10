@@ -2632,7 +2632,29 @@ tsc実exit0・jestフルスイート545suites7725tests green(1発green)。
 
 次は残り2県(toyama/yamagata)へ進める。
 
-| 8 | **★出典ロケータ**⚠️着手(2026-09-11・型基盤完了・34県目shizuoka完了・累計3479件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
+### #8 出典ロケータ 35県目=toyama（2026-09-11・kyoto/nara型ブロック単位個別実装・合成レコード無しで全件locator解決）
+
+sourceIndex分布を確認したところ全75件が単一PDF(sources[0])由来で分岐なしと判明。toyamaは
+物理3頁のうち学校別詳細表は物理ページ1〜2のみ(geometry配列2頁と一致・3頁目はスコープ外)。
+pdftotext -f 1で入善「普通科」finalRate0.58が物理ページ1にのみ実在することを確認し、
+オフセットは配列添字+1(調整不要)。
+
+parsers/toyama.tsはkyoto/naraと同型の罫線ブロック(groupRowsIntoBlocks)構造で
+BLOCK_OVERRIDEやINJECT等の合成レコードを持たないため、geometries.flatMap(geom)を
+flatMap((geom,pageIdx))に変更し{page,block}のペアでブロックを保持、最終push箇所に
+rowIndexByPageマップを追加するだけで75件全件にpage/rowIndexを付与できた。
+
+既存テスト2箇所(toyama.test.tsの魚津工業くくり募集・滑川海洋科)のtoEqual完全一致
+アサーションを着手前に能動的にgrepで発見し共通bare()ヘルパーで対処。既存テスト2件
+(registry.test.ts/competition-rate.test.ts)を更新、toyama用describeブロックを新設。
+PDFを再取得しsha256(c2e680ec...)を計測。
+
+累計3554件(共有関数3種18県1898+個別実装17県1656)。
+tsc実exit0・jestフルスイート545suites7728tests green(1発green)。
+
+次は最後の1県(yamagata)へ進める。これで#8のR8登録パーサ36県のうち35県が完了する。
+
+| 8 | **★出典ロケータ**⚠️着手(2026-09-11・型基盤完了・35県目toyama完了・累計3554件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
 
 **2026-09-10着手**: §5順序#7（段階台帳）がhokkaido全14管内完結によりoita/okinawaの2県のみ
 未着手（前進手段なしと判断済み）となったため#8に着手。設計資料

@@ -50,9 +50,17 @@ describe('富山県 倍率パイプラインα（Y-6・全日制34校75レコー
     expect(r8.some((r) => r.schoolName === '呉羽' && r.department.includes('音楽コース'))).toBe(false);
   });
 
+  const bare = (r: { schoolName: string; department: string; quota: number; finalApplicants: number; finalRate: number }) => ({
+    schoolName: r.schoolName,
+    department: r.department,
+    quota: r.quota,
+    finalApplicants: r.finalApplicants,
+    finalRate: r.finalRate,
+  });
+
   it('くくり募集（複数学科が募集人員を共有）が正しく収録されている', () => {
-    const uozuKogyo = r8.find((r) => r.schoolName === '魚津工業');
-    expect(uozuKogyo).toEqual({
+    const uozuKogyo = r8.find((r) => r.schoolName === '魚津工業')!;
+    expect(bare(uozuKogyo)).toEqual({
       schoolName: '魚津工業',
       department: '機械創造科・電気情報科・ＩＴ環境化学科（くくり募集）',
       quota: 85,
@@ -62,7 +70,7 @@ describe('富山県 倍率パイプラインα（Y-6・全日制34校75レコー
   });
 
   it('掛-1で発見した「海洋科」の学校名誤帰属バグが訂正され、滑川に正しく収録されている（上市には海洋科が無い）', () => {
-    expect(r8.find((r) => r.schoolName === '滑川' && r.department === '海洋科')).toEqual({
+    expect(bare(r8.find((r) => r.schoolName === '滑川' && r.department === '海洋科')!)).toEqual({
       schoolName: '滑川',
       department: '海洋科',
       quota: 31,

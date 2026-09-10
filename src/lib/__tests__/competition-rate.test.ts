@@ -216,6 +216,7 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
       { code: 'tochigi', count: 107 },
       { code: 'tokushima', count: 69 },
       { code: 'tottori', count: 43 },
+      { code: 'toyama', count: 75 },
       { code: 'wakayama', count: 57 },
       { code: 'yamanashi', count: 48 },
     ]);
@@ -1221,6 +1222,42 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
         // 生PDF全12頁中、学校別詳細表は物理ページ1〜9のみ(10〜12頁目は定時制等でスコープ外)
         expect(locator!.page).toBeGreaterThanOrEqual(1);
         expect(locator!.page).toBeLessThanOrEqual(9);
+        expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
+      }
+    });
+
+    it('同一page内でrowIndexの重複が無い', () => {
+      const seen = new Set<string>();
+      for (const r of r8) {
+        const key = `${r.page}|${r.rowIndex}`;
+        expect(seen.has(key)).toBe(false);
+        seen.add(key);
+      }
+    });
+
+    it('R7以前（fiscalYear明示済み）はまだpage/rowIndex未バックフィルのため全件null', () => {
+      const pre8 = file.records.filter((r) => r.fiscalYear !== undefined);
+      expect(pre8.length).toBeGreaterThan(0);
+      for (const r of pre8) {
+        expect(resolveSourceLocator(r, file.sources)).toBeNull();
+      }
+    });
+  });
+
+  describe('toyama R8（#8・35県目・kyoto/nara型ブロック単位個別実装・合成レコード無しで全件locator解決）', () => {
+    const file = COMPETITION_RATE_BY_PREFECTURE['toyama']!;
+    const r8 = file.records.filter((r) => !r.fiscalYear);
+
+    it('R8の75件全件がresolveSourceLocatorで解決できる', () => {
+      expect(r8.length).toBe(75);
+      for (const r of r8) {
+        expect(r.page).toBeDefined();
+        const locator = resolveSourceLocator(r, file.sources);
+        expect(locator).not.toBeNull();
+        expect(locator!.pdfSha256).toBe('c2e680eca94b8b40f9ac61c083ed83d930e872ef2a67c9fd0f0413395ceb3b4f');
+        // 生PDF全3頁のうち学校別詳細表は物理ページ1〜2のみ(3頁目はスコープ外)
+        expect(locator!.page).toBeGreaterThanOrEqual(1);
+        expect(locator!.page).toBeLessThanOrEqual(2);
         expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
       }
     });

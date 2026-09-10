@@ -52,15 +52,23 @@ function groupRowsIntoBlocks(rows: ClusteredRow[], hlines: PdfPageGeometry['hlin
   return blocks.filter((b) => b.length > 0);
 }
 
-/** 富山県R8倍率PDFの学校別データ2頁分（`toyama-r8-geometry.json`）を解析する。 */
+/**
+ * 富山県R8倍率PDFの学校別データ2頁分（`toyama-r8-geometry.json`）を解析する。
+ *
+ * ⚠️T-Y11F §5順序#8（出典ロケータ）: geometry配列2頁は生PDF全3頁中の物理ページ1〜2
+ * （3頁目はスコープ外。2026-09-11にpdftotext -f 1で入善「普通科」finalRate0.58が
+ * 物理ページ1のみに実在することを確認）。オフセットは配列添字+1。
+ */
 export function parseToyama(geometries: PdfPageGeometry[]): ParsedCompetitionRow[] {
-  const blocks = geometries.flatMap((geom) => {
+  const blocksWithPage = geometries.flatMap((geom, pageIdx) => {
+    const page = pageIdx + 1;
     const rows = groupCharsIntoRows(geom.chars, 3.0);
-    return groupRowsIntoBlocks(rows, geom.hlines);
+    return groupRowsIntoBlocks(rows, geom.hlines).map((block) => ({ page, block }));
   });
 
   const parsed: ParsedCompetitionRow[] = [];
-  for (const block of blocks) {
+  const rowIndexByPage = new Map<number, number>();
+  for (const { page, block } of blocksWithPage) {
     const fields = block.map((row) => extractRowFields(row.chars, TOYAMA_LAYOUT));
     const schoolName = fields.map((f) => normalizeExtractedText(f.schoolName)).find((s) => s.length > 0) ?? '';
     if ((schoolName + fields.map((f) => f.department).join('')).includes('合計')) continue;
@@ -73,7 +81,9 @@ export function parseToyama(geometries: PdfPageGeometry[]): ParsedCompetitionRow
       const finalApplicants = Number(f.applicantsText.replace(/,/g, ''));
       const finalRate = Number(f.rateText);
       if (!Number.isFinite(quota) || quota <= 0 || !Number.isFinite(finalApplicants) || !Number.isFinite(finalRate)) continue;
-      parsed.push({ schoolName, department, quota, finalApplicants, finalRate });
+      const rowIndex = rowIndexByPage.get(page) ?? 0;
+      rowIndexByPage.set(page, rowIndex + 1);
+      parsed.push({ schoolName, department, quota, finalApplicants, finalRate, page, rowIndex });
     }
   }
   return parsed;
