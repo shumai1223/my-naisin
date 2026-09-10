@@ -85,7 +85,8 @@ describe('bairitsu-ingest parse-table-pdf 汎用carry-forward組み立て (nagan
   });
 
   test('数値列の桁が学科名列にはみ出さない（長野「普通」募集人員240の実例）', () => {
-    expect(parsed.find((r) => r.schoolName === '長野' && r.department === '普通')).toEqual({
+    const nagano = parsed.find((r) => r.schoolName === '長野' && r.department === '普通')!;
+    expect({ schoolName: nagano.schoolName, area: nagano.area, department: nagano.department, quota: nagano.quota, finalApplicants: nagano.finalApplicants, finalRate: nagano.finalRate }).toEqual({
       schoolName: '長野',
       area: '北信',
       department: '普通',

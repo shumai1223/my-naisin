@@ -19,6 +19,10 @@ export interface NaganoParsedRow {
   quota: number;
   finalApplicants: number;
   finalRate: number;
+  /** T-Y11F §5順序#8用・任意。BLOCK_OVERRIDE由来の行は複数の原行を合成しているため付与しない。 */
+  page?: number;
+  /** #8用・任意。同一ページ内でこの行が何番目に出力されたか（0始まり）。`page`とセット。 */
+  rowIndex?: number;
 }
 
 // 0 schoolName, 1 department(category+specific結合、ギャップで分割)
@@ -76,13 +80,14 @@ function numericTokensFromChars(chars: PdfPageGeometry['chars']): { quotaText: s
 
 interface FineRow {
   y: number;
+  page: number;
   schoolNameRaw: string;
   deptGroups: string[];
   quotaText: string;
   applicantsText: string;
 }
 
-function fineRowsInRange(chars: PdfPageGeometry['chars'], yTop: number, yBottom: number): FineRow[] {
+function fineRowsInRange(chars: PdfPageGeometry['chars'], yTop: number, yBottom: number, page: number): FineRow[] {
   const inRange = [...chars].filter((c) => c.y0 >= yTop - 0.5 && c.y0 < yBottom - 0.5).sort((a, b) => a.y0 - b.y0 || a.x0 - b.x0);
   const rows: { y: number; chars: PdfPageGeometry['chars'] }[] = [];
   for (const c of inRange) {
@@ -95,6 +100,7 @@ function fineRowsInRange(chars: PdfPageGeometry['chars'], yTop: number, yBottom:
     const { quotaText, applicantsText } = numericTokensFromChars(r.chars);
     return {
       y: r.y,
+      page,
       schoolNameRaw: cellChars(r.chars, 0).map((c) => c.c).join(''),
       deptGroups: splitDepartmentChars(cellChars(r.chars, 1)),
       quotaText,
@@ -320,14 +326,25 @@ const BLOCK_OVERRIDE = new Map<string, OverrideRecord[]>([
   ],
 ]);
 
-/** 長野県R8倍率PDFの学校別データ4通学区分（`nagano-r8-geometry.json`）を解析する。 */
+/**
+ * 長野県R8倍率PDFの学校別データ4通学区分（`nagano-r8-geometry.json`）を解析する。
+ *
+ * ⚠️T-Y11F §5順序#8（出典ロケータ）: geometry配列4頁(北信/東信/南信/中信)は生PDF全8頁中の
+ * 物理ページ3〜6（1〜2頁目は総括表・概要のためスコープ外。2026-09-11に生PDF全文grepで
+ * 下高井農林「地域創造農学」quota41/applicants14/finalRate0.34（北信）が物理ページ3に、
+ * 富士見「普通」quota23/applicants14/finalRate0.61（南信）が物理ページ5に実在することを
+ * 確認）。オフセットはAREA_PAGESのpageIdx+3。BLOCK_OVERRIDE由来の行（飯山・須坂創成等16校）
+ * は複数の原行を合成した既存データ差し替えのため単一の行位置に帰属できず、page/rowIndexは
+ * 意図的に付与しない（ishikawa/kyotoと同型のY-0対応）。
+ */
 export function parseNagano(geometries: PdfPageGeometry[]): NaganoParsedRow[] {
   const allRows: (FineRow & { schoolName: string; groups: string[]; carriedCategory: string; area: string })[] = [];
   for (const { pageIdx, area } of AREA_PAGES) {
     const geom = geometries[pageIdx];
+    const page = pageIdx + 3;
     const ranges = blockRangesForPage(geom);
     for (const { yTop, yBottom } of ranges) {
-      const fine = fineRowsInRange(geom.chars, yTop, yBottom);
+      const fine = fineRowsInRange(geom.chars, yTop, yBottom, page);
       const withNames = forwardCarryWithBackfill(fine);
       const withCategory = carryCategoryAcrossRows(withNames);
       for (const r of withCategory) allRows.push({ ...r, area });
@@ -335,6 +352,7 @@ export function parseNagano(geometries: PdfPageGeometry[]): NaganoParsedRow[] {
   }
 
   const records: NaganoParsedRow[] = [];
+  const rowIndexByPage = new Map<number, number>();
   for (const r of allRows) {
     const combined = normalizeExtractedText(r.schoolNameRaw + r.deptGroups.join(''));
     if (HEADER_MARKERS.some((m) => combined.includes(m))) continue;
@@ -347,7 +365,9 @@ export function parseNagano(geometries: PdfPageGeometry[]): NaganoParsedRow[] {
     const finalApplicants = Number(r.applicantsText.replace(/,/g, ''));
     if (!Number.isFinite(quota) || quota <= 0 || !Number.isFinite(finalApplicants)) continue;
     const finalRate = Number(roundHalfUpScaled(finalApplicants, quota, 2)) / 100;
-    records.push({ schoolName: r.schoolName, area: r.area, department, quota, finalApplicants, finalRate });
+    const rowIndex = rowIndexByPage.get(r.page) ?? 0;
+    rowIndexByPage.set(r.page, rowIndex + 1);
+    records.push({ schoolName: r.schoolName, area: r.area, department, quota, finalApplicants, finalRate, page: r.page, rowIndex });
   }
 
   for (const [schoolName, recs] of BLOCK_OVERRIDE) {

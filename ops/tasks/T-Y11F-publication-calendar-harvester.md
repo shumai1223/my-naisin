@@ -2435,7 +2435,38 @@ tsc実exit0・jestフルスイート545suites7704tests green(1発green)。
 
 次は残り9県(nagano/nara/niigata/oita/saga/shiga/shizuoka/toyama/yamagata)へ進める。
 
-| 8 | **★出典ロケータ**⚠️着手(2026-09-11・型基盤完了・27県目kyoto完了・累計2864件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
+### #8 出典ロケータ 28県目=nagano（2026-09-11・BLOCK_OVERRIDE校16校44件は意図的にlocatorなし）
+
+sourceIndex分布を確認したところ全129件が単一PDF(志望変更受付締切後の集計結果)由来で分岐
+なしと判明。naganoはgeometry配列4頁(北信/東信/南信/中信)がPDF全8頁中の物理ページ3〜6に
+対応(1〜2頁目は総括表)。生PDF全文grepで下高井農林「地域創造農学」quota41/applicants14/
+finalRate0.34(北信)が物理ページ3に、富士見「普通」quota23/applicants14/finalRate0.61
+(南信)が物理ページ5に実在することを確認し、オフセットはAREA_PAGESのpageIdx+3と特定。
+
+naganoは既存のBLOCK_OVERRIDE機構(くくり募集・学校名末尾重複が複数行にまたがる16校44件を
+既存データで丸ごと差し替える設計)を持ち、これらの行は単一の原行に帰属できないため
+page/rowIndexを意図的に付与しない設計とした(ishikawa/kyotoに続くY-0対応の3例目)。
+NaganoParsedRowインターフェースにpage?/rowIndex?を追加。parseNagano本体はAREA_PAGESの
+pageIdxからpage=pageIdx+3を計算しFineRow.pageへ伝播、最終push箇所(BLOCK_OVERRIDE対象
+校はスキップする側のループ)にのみrowIndexByPageマップを追加。BLOCK_OVERRIDE側の追加
+ループは元のままpage/rowIndexを持たない。
+
+バックフィル時は「parsed配列のうちpage!==undefinedの行だけ」を対象にした安全な絞り込み
+方式を新規に確立(nagano固有のBLOCK_OVERRIDE設計に対応するため従来のkochi/kumamoto型
+スクリプトを拡張)。129件中85件がbackfill対象、44件(BLOCK_OVERRIDE由来)は意図的にスキップ。
+既存テスト1箇所(parse-table-pdf-nagano.test.tsの長野「普通」toEqual・非override校)を
+着手前に能動的にgrepで発見し分割代入で対処(飯山のくくり募集toEqualはBLOCK_OVERRIDE校の
+ためpage:undefinedがtoEqualで無視され無改修で通過)。registry.test.tsのnagano比較は
+keyOfがpage/rowIndexを含まないため無改修で通過。competition-rate.test.tsにnagano用
+describeブロックを新設(129件中85件がlocator解決・44件はnull、の非対称パターンを検証)。
+PDFを再取得しsha256(2e9b97e0...)を計測。
+
+累計2949件(共有関数3種18県1898+個別実装10県1051)。※nagano分は129件中85件のみlocator付与。
+tsc実exit0・jestフルスイート545suites7707tests green(1発green)。
+
+次は残り8県(nara/niigata/oita/saga/shiga/shizuoka/toyama/yamagata)へ進める。
+
+| 8 | **★出典ロケータ**⚠️着手(2026-09-11・型基盤完了・28県目nagano完了(BLOCK_OVERRIDE校44件は意図的にlocatorなし)・累計2949件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
 
 **2026-09-10着手**: §5順序#7（段階台帳）がhokkaido全14管内完結によりoita/okinawaの2県のみ
 未着手（前進手段なしと判断済み）となったため#8に着手。設計資料

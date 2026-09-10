@@ -202,6 +202,7 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
       { code: 'kumamoto', count: 162 },
       { code: 'kyoto', count: 75 },
       { code: 'miyagi', count: 129 },
+      { code: 'nagano', count: 85 },
       { code: 'nagasaki', count: 116 },
       { code: 'okinawa', count: 156 },
       { code: 'saitama', count: 241 },
@@ -951,6 +952,48 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
     it('同一page内でrowIndexの重複が無い', () => {
       const seen = new Set<string>();
       for (const r of r8) {
+        const key = `${r.page}|${r.rowIndex}`;
+        expect(seen.has(key)).toBe(false);
+        seen.add(key);
+      }
+    });
+
+    it('R7以前（fiscalYear明示済み）はまだpage/rowIndex未バックフィルのため全件null', () => {
+      const pre8 = file.records.filter((r) => r.fiscalYear !== undefined);
+      expect(pre8.length).toBeGreaterThan(0);
+      for (const r of pre8) {
+        expect(resolveSourceLocator(r, file.sources)).toBeNull();
+      }
+    });
+  });
+
+  describe('nagano R8（#8・28県目・BLOCK_OVERRIDE校16校44件は意図的にlocatorなし）', () => {
+    const file = COMPETITION_RATE_BY_PREFECTURE['nagano']!;
+    const r8 = file.records.filter((r) => !r.fiscalYear);
+
+    it('R8の129件中85件がresolveSourceLocatorで解決でき、BLOCK_OVERRIDE由来の44件は解決できない', () => {
+      expect(r8.length).toBe(129);
+      const resolved = r8.filter((r) => r.page !== undefined);
+      expect(resolved.length).toBe(85);
+      for (const r of resolved) {
+        const locator = resolveSourceLocator(r, file.sources);
+        expect(locator).not.toBeNull();
+        expect(locator!.pdfSha256).toBe('2e9b97e0222a396382a0d16b170727f4b1e9e0aae6f2bc29853f06f6795438c6');
+        // 学校別詳細表(北信/東信/南信/中信)は物理ページ3〜6(1〜2頁目は総括表のためオフセット+3)
+        expect(locator!.page).toBeGreaterThanOrEqual(3);
+        expect(locator!.page).toBeLessThanOrEqual(6);
+        expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
+      }
+      const unresolved = r8.filter((r) => r.page === undefined);
+      expect(unresolved.length).toBe(44);
+      for (const r of unresolved) {
+        expect(resolveSourceLocator(r, file.sources)).toBeNull();
+      }
+    });
+
+    it('同一page内でrowIndexの重複が無い', () => {
+      const seen = new Set<string>();
+      for (const r of r8.filter((r) => r.page !== undefined)) {
         const key = `${r.page}|${r.rowIndex}`;
         expect(seen.has(key)).toBe(false);
         seen.add(key);
