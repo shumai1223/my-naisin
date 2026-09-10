@@ -24,10 +24,17 @@ const YAMANASHI_LAYOUT: GeneralColumnLayout = {
   roles: { schoolName: 0, department: 1, quota: 2, finalApplicants: 4, finalRate: 6 },
 };
 
-/** 山梨県R8倍率PDFの学校別データ2頁分（`yamanashi-r8-geometry.json`）を解析する。 */
+/**
+ * 山梨県R8倍率PDFの学校別データ2頁分（`yamanashi-r8-geometry.json`）を解析する。
+ *
+ * ⚠️T-Y11F §5順序#8（出典ロケータ）: 全7頁中1頁目は概要（総括）で、学校別詳細表は
+ * 物理ページ2〜3の2頁（2026-09-10にpdftoppmでビジョン確認: 先頭の北杜「普通」
+ * (quota49/applicants45)が物理ページ2に、末尾の甲府商業「情報処理」
+ * (quota48/applicants48)が物理ページ3に実在）。出典ロケータ用のpageは配列添字+2。
+ */
 export function parseYamanashi(geometries: PdfPageGeometry[]): ParsedCompetitionRow[] {
-  const allRowFields = geometries.flatMap((geom) =>
-    groupCharsIntoRows(geom.chars, 3.0).map((row) => extractRowFields(row.chars, YAMANASHI_LAYOUT))
+  const allRowFields = geometries.flatMap((geom, pageIdx) =>
+    groupCharsIntoRows(geom.chars, 3.0).map((row) => ({ ...extractRowFields(row.chars, YAMANASHI_LAYOUT), page: pageIdx + 2 }))
   );
 
   const parsed = assembleSimpleTableRows(allRowFields, {

@@ -192,6 +192,7 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
       { code: 'saitama', count: 241 },
       { code: 'tochigi', count: 107 },
       { code: 'tottori', count: 43 },
+      { code: 'yamanashi', count: 48 },
     ]);
   });
 
@@ -282,6 +283,31 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
         // 学校別詳細表は物理ページ2〜5（1頁目は総括表のためオフセット+2）
         expect(locator!.page).toBeGreaterThanOrEqual(2);
         expect(locator!.page).toBeLessThanOrEqual(5);
+        expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
+      }
+    });
+
+    it('R7以前（fiscalYear明示済み）はまだpage/rowIndex未バックフィルのため全件null', () => {
+      const pre8 = file.records.filter((r) => r.fiscalYear !== undefined);
+      expect(pre8.length).toBeGreaterThan(0);
+      for (const r of pre8) {
+        expect(resolveSourceLocator(r, file.sources)).toBeNull();
+      }
+    });
+  });
+
+  describe('yamanashi R8（#8・9県目・+2オフセットかつ最少件数(48件)での実データ検証）', () => {
+    const file = COMPETITION_RATE_BY_PREFECTURE['yamanashi']!;
+    const r8 = file.records.filter((r) => !r.fiscalYear);
+
+    it('R8の48件全件がresolveSourceLocatorで解決できる', () => {
+      for (const r of r8) {
+        const locator = resolveSourceLocator(r, file.sources);
+        expect(locator).not.toBeNull();
+        expect(locator!.pdfSha256).toBe('f2b9e5a7dc3e6d80f2acba342d262f0b9d51aa592aae19c93d0028cf3fc413b3');
+        // 学校別詳細表は物理ページ2〜3（1頁目は概要のためオフセット+2）
+        expect(locator!.page).toBeGreaterThanOrEqual(2);
+        expect(locator!.page).toBeLessThanOrEqual(3);
         expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
       }
     });

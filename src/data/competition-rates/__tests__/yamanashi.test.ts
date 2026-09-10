@@ -121,7 +121,9 @@ describe('山梨県 倍率パイプラインα（Y-6・全日制26校48学科の
   });
 
   it('教委が公式に一括募集と定める学科群（韮崎工業・工業一括）が単一レコードとして収録されている', () => {
-    expect(records.find((r) => r.schoolName === '韮崎工業')).toEqual({
+    // T-Y11F §5順序#8でpage/rowIndex（出典ロケータ用）が追加されたため、それ以外のフィールドで比較する
+    const { page: _page, rowIndex: _rowIndex, ...actual } = records.find((r) => r.schoolName === '韮崎工業')!;
+    expect(actual).toEqual({
       schoolName: '韮崎工業',
       department: '工業(一括)',
       quota: 103,
