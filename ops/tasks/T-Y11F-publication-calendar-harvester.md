@@ -1982,7 +1982,33 @@ commit 64aef2a。
 次はassembleSimpleTableRows利用の残り2県（ehime/kagawa）、
 または他の共有関数（assembleCompetitionRateRows等5パーサ）への横展開を検討する。
 
-| 8 | **★出典ロケータ**⚠️着手(2026-09-10・型基盤完了・9県目yamanashi完了・累計1091件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
+### #8 出典ロケータ 10県目=ehime（2026-09-10・★1頁2段組で初のrowIndex衝突回避）
+
+ehimeは1頁に左右2組の学校リストが横に並ぶ特殊レイアウトで、LEFT用/RIGHT用2つの
+`GeneralColumnLayout`を同じ物理行に適用する構造。素朴にpage/rowIndexを付けると**LEFT側と
+RIGHT側で独立に`assembleSimpleTableRows`のrowIndexカウンタが0始まりし、同一page+rowIndexが
+重複する**問題を着手前の設計段階で発見した。対策としてRIGHT側のrowIndexに同一ページの
+LEFT側件数分のオフセットを加える（「左列を上から読み、続けて右列を上から読む」という
+一貫した順序として解釈）方式を実装し、全99件でduplicate(page,rowIndex)キーが0件であることを
+機械確認してから採用した。PDF自体は1物理ページ・geometryも1頁のためオフセットは+1（調整不要）。
+
+**★transcriptionミス発見**: sha256をEdit toolへ手入力する際に末尾1文字を落として64文字中63文字
+しか書けていなかった事故が発生。node `crypto.createHash`で独立に再計算し`.length`で64文字を
+確認して即座に訂正した。**教訓**: sha256sumのターミナル表示を目視コピーする際は必ず文字数を
+機械確認すること（今後全県で徹底）。
+
+miyagi/yamanashiの教訓を活かし`data/competition-rates/__tests__/ehime.test.ts`の2箇所の
+`.toEqual`完全一致アサーション（今治西・宇和島東のくくり募集確認テスト）を着手前に能動的に
+grepで発見し分割代入で対処、jestフルスイート1発でgreen。
+
+累計1190件（tottori43+gunma106+tochigi107+iwate113+chiba188+saitama241+nagasaki116+
+miyagi129+yamanashi48+ehime99）。tsc実exit0・jestフルスイート545suites7663tests green。
+commit 352e8ae。
+
+次はassembleSimpleTableRows利用の残り1県（kagawa）、
+または他の共有関数（assembleCompetitionRateRows等5パーサ）への横展開を検討する。
+
+| 8 | **★出典ロケータ**⚠️着手(2026-09-10・型基盤完了・10県目ehime完了・累計1190件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
 
 **2026-09-10着手**: §5順序#7（段階台帳）がhokkaido全14管内完結によりoita/okinawaの2県のみ
 未着手（前進手段なしと判断済み）となったため#8に着手。設計資料
