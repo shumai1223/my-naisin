@@ -2205,7 +2205,28 @@ nara/niigata/oita/saga/shiga/shizuoka/toyama/yamagata）は共有関数を一切
 ボーナスはここで尽きる）。次はこれらを1県ずつ、または未着手のR7以前年度別リプレイ・ビジョン
 11県7,191件への着手を検討する。
 
-| 8 | **★出典ロケータ**⚠️着手(2026-09-10・型基盤完了・18県目akita完了(共有関数横展開が尽きた)・累計1898件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
+### #8 出典ロケータ 19県目=aomori（2026-09-10・★共有関数を使わない個別実装(tottori型)への初横展開）
+
+akitaで共有関数の横展開が尽きたため方針転換。aomoriは学科名テキストと数値が別行に分離する
+pendingキュー方式の独自実装で、page伝播の配線ポイントが3箇所（①`groupCharsIntoRows`直後の
+`ClusteredRow`②`extractRowFields`直後のfields③最終pushのparsed）に分散していた。
+`ClusteredRow`インターフェースに`page: number`を必須フィールドとして追加、fields構築時に
+`{...extractRowFields(...),page:row.page}`でスプレッド、最終pushループ内に`rowIndexByPage`
+マップを手動実装（`assemble*Rows`系共有関数と同型のロジックをこの県専用に複製）。
+
+2物理ページ・2geometryページで一致しオフセット単純に+1（調整不要・pdftoppmビジョン確認）。
+既存テスト1箇所（`data/competition-rates/__tests__/aomori.test.ts`の青森商業くくり募集
+`.toEqual`）を着手前に能動的にgrepで発見し分割代入で対処、jestフルスイート1発でgreen。
+
+累計1987件（共有関数3種18県1898+aomori89）。tsc実exit0・jestフルスイート545suites
+7682tests green。commit d4774aa。
+
+**★所感**: 個別実装県は共有関数利用県と比べ「page配線ポイントを自分で特定する」手間が
+追加されるが、パターン自体（flatMapでpageIdx付与→スプレッドで伝播→最終pushでrowIndexByPage
+手動実装）は共通化できており、1県あたりの追加コストは限定的だった。次はfukui/fukuoka/gifu等の
+残り17県へ同じパターンで進める。
+
+| 8 | **★出典ロケータ**⚠️着手(2026-09-10・型基盤完了・19県目aomori完了(個別実装への初横展開)・累計1987件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
 
 **2026-09-10着手**: §5順序#7（段階台帳）がhokkaido全14管内完結によりoita/okinawaの2県のみ
 未着手（前進手段なしと判断済み）となったため#8に着手。設計資料
