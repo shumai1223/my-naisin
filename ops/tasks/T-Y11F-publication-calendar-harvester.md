@@ -2091,7 +2091,29 @@ tsc実exit0・jestフルスイート545suites7670tests green。commit a9df796。
 
 次はassembleCompetitionRateRows利用の残り3県（shimane/tokushima/wakayama）へ進む。
 
-| 8 | **★出典ロケータ**⚠️着手(2026-09-10・型基盤完了・13県目ishikawa完了(併願合算3校は意図的にlocatorなし)・累計1474件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
+### #8 出典ロケータ 14県目=shimane（2026-09-10）
+
+shimaneは代表学科ブロックのくくり募集override（情報科学/松江商業/隠岐島前）＋学校名継続
+ラベル書き戻し（商業/普通）という2段の後段mapを持つ構造だが、**後段mapが`{...r}`のスプレッド
+でなく明示的なオブジェクト再構築**（schoolName/department/quota/finalApplicants/finalRateの
+みを列挙）だったため、page/rowIndexも明示的に追加する必要があった（iwate/nagasaki/saitama等
+のスプレッド継承パターンとは異なる初のケース・見落とさず対応できた）。
+
+データファイル側に3件の複数行フォーマット（情報科学/松江商業/隠岐島前・長い学科名文字列で
+改行）が存在したため、バックフィルスクリプトを**単一行/複数行の両対応**に拡張した
+（複数行ブロックの開始行`schoolName`一致→終端の閉じ`},`直前にpage/rowIndexを挿入）。
+1物理ページ・1geometryページで一致しオフセットは単純に+1（調整不要）。
+
+既存テスト2件（`parse-table-pdf-shimane.test.ts`・`data/competition-rates/__tests__/
+shimane.test.ts`）の皆美が丘女子に関する`.toEqual`完全一致アサーション2箇所を着手前に
+能動的にgrepで発見し分割代入で対処。
+
+累計1538件（assembleSimpleTableRows11県1258+ibaraki149+ishikawa67+shimane64）。
+tsc実exit0・jestフルスイート545suites7672tests green(1発green)。commit 8aa7ac2。
+
+次はassembleCompetitionRateRows利用の残り2県（tokushima/wakayama）へ進む。
+
+| 8 | **★出典ロケータ**⚠️着手(2026-09-10・型基盤完了・14県目shimane完了・累計1538件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
 
 **2026-09-10着手**: §5順序#7（段階台帳）がhokkaido全14管内完結によりoita/okinawaの2県のみ
 未着手（前進手段なしと判断済み）となったため#8に着手。設計資料

@@ -5,17 +5,16 @@
 
 ---
 
-最終更新              2026-09-10 11:2x
+最終更新              2026-09-10 11:4x
 いまやっていること     T-Y11F §5順序#8（出典ロケータ）進行中。assembleSimpleTableRows
-                      11県(1258)+ibaraki(149)+ishikawa(67/70)=累計1474件
-今日やったこと         ishikawa: 併願合算3校(小松/金沢泉丘/七尾)は意図的にlocatorなしと
-                      設計。オフセット決め打ちの自己ミス1回を発見・訂正(コミット前)。
-                      CRLF起因のバックフィルスクリプト罠も発見・対処。全545suites
-                      7670tests green・commit a9df796 push済
-在庫の残り            36登録パーサ県のうち13県完了・残り23県(assembleCompetitionRateRows
-                      利用の残り3県=shimane/tokushima/wakayamaが次候補)+R7以前の年度別
-                      リプレイ+ビジョン11県7,191件が未着手
-払底の見込み           13データ点いずれも同程度の負荷=「レコード数比例でなく県数比例
+                      11県(1258)+ibaraki(149)+ishikawa(67)+shimane(64)=累計1538件
+今日やったこと         shimane: 明示的オブジェクト再構築型の後段mapへpage/rowIndex明示
+                      追加+複数行フォーマット対応バックフィル拡張。全545suites7672
+                      tests green・commit 8aa7ac2 push済
+在庫の残り            36登録パーサ県のうち14県完了・残り22県(assembleCompetitionRateRows
+                      利用の残り2県=tokushima/wakayamaが次候補)+R7以前の年度別リプレイ+
+                      ビジョン11県7,191件が未着手
+払底の見込み           14データ点いずれも同程度の負荷=「レコード数比例でなく県数比例
                       (段取りコストが支配的)」がほぼ確定。115hの見積り単価は36県×
                       段取りコストで再計算するのが実態に近い
 詰まっていること        aichi（Imperva WAF一時ブロックが継続中）。oita/okinawaは資料自体が
