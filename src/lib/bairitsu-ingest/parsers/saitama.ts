@@ -26,13 +26,19 @@ const SAITAMA_LAYOUT: GeneralColumnLayout = {
   roles: { schoolName: 0, department: 1, quota: 3, finalApplicants: 4, finalRate: 5 },
 };
 
-/** 埼玉県R8倍率PDFの学校別データ8頁分（`saitama-r8-geometry.json`）を解析する。 */
+/**
+ * 埼玉県R8倍率PDFの学校別データ8頁分（`saitama-r8-geometry.json`）を解析する。
+ *
+ * ⚠️T-Y11F §5順序#8（出典ロケータ）: 概要ページ等は無く物理ページ1から詳細表が始まる
+ * （2026-09-10に生PDFで上尾のquota238/applicants316が物理ページ1に実在することを確認済み）。
+ * 出典ロケータ用のpageは配列添字+1（オフセット無し）。
+ */
 export function parseSaitama(geometries: PdfPageGeometry[]): ParsedCompetitionRow[] {
-  const allRowFields = geometries.flatMap((geom) =>
+  const allRowFields = geometries.flatMap((geom, pageIdx) =>
     groupCharsIntoRows(geom.chars, 3.0)
       // ⚠️小計/合計行の判定: 性別列の位置(x0≈245〜256)に「計」の文字が単独で出現する行を除外する。
       .filter((row) => !row.chars.some((c) => c.c === '計' && c.x0 >= 244 && c.x0 <= 256))
-      .map((row) => extractRowFields(row.chars, SAITAMA_LAYOUT))
+      .map((row) => ({ ...extractRowFields(row.chars, SAITAMA_LAYOUT), page: pageIdx + 1 }))
   );
 
   // ⚠️市立高校の学校名には脚注記号「〇」が接頭辞として付与される（「○印は、市立高等学校」）。

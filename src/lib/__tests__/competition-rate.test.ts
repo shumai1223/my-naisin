@@ -187,6 +187,7 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
       { code: 'chiba', count: 188 },
       { code: 'gunma', count: 106 },
       { code: 'iwate', count: 113 },
+      { code: 'saitama', count: 241 },
       { code: 'tochigi', count: 107 },
       { code: 'tottori', count: 43 },
     ]);
@@ -229,6 +230,31 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
         // 詳細表は物理ページ1〜5（概要ページ無し・オフセット無し）
         expect(locator!.page).toBeGreaterThanOrEqual(1);
         expect(locator!.page).toBeLessThanOrEqual(5);
+        expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
+      }
+    });
+
+    it('R7以前（fiscalYear明示済み）はまだpage/rowIndex未バックフィルのため全件null', () => {
+      const pre8 = file.records.filter((r) => r.fiscalYear !== undefined);
+      expect(pre8.length).toBeGreaterThan(0);
+      for (const r of pre8) {
+        expect(resolveSourceLocator(r, file.sources)).toBeNull();
+      }
+    });
+  });
+
+  describe('saitama R8（#8・6県目・伊奈学園総合の学科名override経由での実データ検証）', () => {
+    const file = COMPETITION_RATE_BY_PREFECTURE['saitama']!;
+    const r8 = file.records.filter((r) => !r.fiscalYear);
+
+    it('R8の241件全件がresolveSourceLocatorで解決できる', () => {
+      for (const r of r8) {
+        const locator = resolveSourceLocator(r, file.sources);
+        expect(locator).not.toBeNull();
+        expect(locator!.pdfSha256).toBe('66bd7c1b4eb29a4e2c2e9981d1b5d7f7f5d3c1d42b7ca6cfbaf3c53835c08b1e');
+        // 学校別詳細表は物理ページ1〜8（概要ページ無し・オフセット無し）
+        expect(locator!.page).toBeGreaterThanOrEqual(1);
+        expect(locator!.page).toBeLessThanOrEqual(8);
         expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
       }
     });
