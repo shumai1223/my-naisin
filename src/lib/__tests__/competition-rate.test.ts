@@ -219,6 +219,7 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
       { code: 'toyama', count: 75 },
       { code: 'wakayama', count: 57 },
       { code: 'yamagata', count: 90 },
+      { code: 'yamaguchi', count: 98 },
       { code: 'yamanashi', count: 48 },
     ]);
   });
@@ -1293,6 +1294,42 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
         expect(locator).not.toBeNull();
         expect(locator!.pdfSha256).toBe('f24256730874eae7df6aea054a6f12f9e20292dcb17186669efeff7eff40b58d');
         // 生PDF全5頁中、学校別詳細表は物理ページ2〜4のみ(1頁目=表紙・5頁目=定時制)
+        expect(locator!.page).toBeGreaterThanOrEqual(2);
+        expect(locator!.page).toBeLessThanOrEqual(4);
+        expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
+      }
+    });
+
+    it('同一page内でrowIndexの重複が無い', () => {
+      const seen = new Set<string>();
+      for (const r of r8) {
+        const key = `${r.page}|${r.rowIndex}`;
+        expect(seen.has(key)).toBe(false);
+        seen.add(key);
+      }
+    });
+
+    it('R7以前（fiscalYear明示済み）はまだpage/rowIndex未バックフィルのため全件null', () => {
+      const pre8 = file.records.filter((r) => r.fiscalYear !== undefined);
+      expect(pre8.length).toBeGreaterThan(0);
+      for (const r of pre8) {
+        expect(resolveSourceLocator(r, file.sources)).toBeNull();
+      }
+    });
+  });
+
+  describe('yamaguchi R8（#8・ビジョン11県の初着手・パーサ非経由でPDF目視確認による位置的割当）', () => {
+    const file = COMPETITION_RATE_BY_PREFECTURE['yamaguchi']!;
+    const r8 = file.records.filter((r) => !r.fiscalYear);
+
+    it('R8の98件全件がresolveSourceLocatorで解決できる', () => {
+      expect(r8.length).toBe(98);
+      for (const r of r8) {
+        expect(r.page).toBeDefined();
+        const locator = resolveSourceLocator(r, file.sources);
+        expect(locator).not.toBeNull();
+        expect(locator!.pdfSha256).toBe('ab94bcf1314ad51f83c379944bacff4b67f245a41ca8c92a25908067efebe81d');
+        // 生PDF全4頁中、1頁目は訂正通知の表紙で学校別詳細表は物理ページ2〜4のみ
         expect(locator!.page).toBeGreaterThanOrEqual(2);
         expect(locator!.page).toBeLessThanOrEqual(4);
         expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);

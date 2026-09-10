@@ -47,8 +47,16 @@ describe('山口県 倍率パイプラインα（Y-6・全日制43校98レコー
     expect(distinctSchools.size).toBe(43);
   });
 
+  const bare = (r: { schoolName: string; department: string; quota: number; finalApplicants: number; finalRate: number }) => ({
+    schoolName: r.schoolName,
+    department: r.department,
+    quota: r.quota,
+    finalApplicants: r.finalApplicants,
+    finalRate: r.finalRate,
+  });
+
   it('くくり募集の文理探究(岩国・山口・宇部・下関西・萩)が単一レコードとして正しく収録されている', () => {
-    expect(records.find((r) => r.schoolName === '岩国' && r.department.includes('くくり募集'))).toEqual({
+    expect(bare(records.find((r) => r.schoolName === '岩国' && r.department.includes('くくり募集'))!)).toEqual({
       schoolName: '岩国',
       department: '文理探究(人文探究・理数探究くくり募集)',
       quota: 49,
@@ -58,14 +66,14 @@ describe('山口県 倍率パイプラインα（Y-6・全日制43校98レコー
   });
 
   it('徳山の文理探究は文・理数の独立2レコードとして収録されている（くくり募集ではない）', () => {
-    expect(records.find((r) => r.schoolName === '徳山' && r.department === '文理探究・文')).toEqual({
+    expect(bare(records.find((r) => r.schoolName === '徳山' && r.department === '文理探究・文')!)).toEqual({
       schoolName: '徳山',
       department: '文理探究・文',
       quota: 18,
       finalApplicants: 17,
       finalRate: 0.9,
     });
-    expect(records.find((r) => r.schoolName === '徳山' && r.department === '文理探究・理数')).toEqual({
+    expect(bare(records.find((r) => r.schoolName === '徳山' && r.department === '文理探究・理数')!)).toEqual({
       schoolName: '徳山',
       department: '文理探究・理数',
       quota: 28,
