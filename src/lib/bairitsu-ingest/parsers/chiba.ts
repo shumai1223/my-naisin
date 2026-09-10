@@ -24,13 +24,19 @@ const CHIBA_LAYOUT: GeneralColumnLayout = {
   roles: { schoolName: 0, department: 1, quota: 3, finalApplicants: 4, finalRate: 5 },
 };
 
-/** 千葉県R8倍率PDFの学校別データ5頁分（`chiba-r8-geometry.json`）を解析する。 */
+/**
+ * 千葉県R8倍率PDFの学校別データ5頁分（`chiba-r8-geometry.json`）を解析する。
+ *
+ * ⚠️T-Y11F §5順序#8（出典ロケータ）: 概要ページ等は無く物理ページ1から詳細表が始まる
+ * （2026-09-10に`pdftotext -f 1`で千葉のquota240/applicants331が物理ページ1に実在する
+ * ことを確認済み）。出典ロケータ用のpageは配列添字+1（オフセット無し）。
+ */
 export function parseChiba(geometries: PdfPageGeometry[]): ParsedCompetitionRow[] {
-  const allRowFields = geometries.flatMap((geom) =>
+  const allRowFields = geometries.flatMap((geom, pageIdx) =>
     groupCharsIntoRows(geom.chars, 3.0).map((row) => {
       const fields = extractRowFields(row.chars, CHIBA_LAYOUT);
       // 学校名列の行頭「番号」（市立校は「市」+番号）を除去する。
-      return { ...fields, schoolName: fields.schoolName.replace(/^[＊市]?\d+[\s　]*/, '') };
+      return { ...fields, schoolName: fields.schoolName.replace(/^[＊市]?\d+[\s　]*/, ''), page: pageIdx + 1 };
     })
   );
 

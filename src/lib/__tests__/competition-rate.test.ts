@@ -184,6 +184,7 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
     // 別の県で進めた回はこの配列に新しい要素が増えるはずなので、増えたら意図した進捗か確認
     // してから期待値を更新すること（既存県の件数が勝手に減っていたら書き換え事故を疑う）。
     expect(nonZero.sort((a, b) => a.code.localeCompare(b.code))).toEqual([
+      { code: 'chiba', count: 188 },
       { code: 'gunma', count: 106 },
       { code: 'iwate', count: 113 },
       { code: 'tochigi', count: 107 },
@@ -203,6 +204,31 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
         // 学校別詳細表は物理ページ1〜2（3頁目は詳細表対象外）
         expect(locator!.page).toBeGreaterThanOrEqual(1);
         expect(locator!.page).toBeLessThanOrEqual(2);
+        expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
+      }
+    });
+
+    it('R7以前（fiscalYear明示済み）はまだpage/rowIndex未バックフィルのため全件null', () => {
+      const pre8 = file.records.filter((r) => r.fiscalYear !== undefined);
+      expect(pre8.length).toBeGreaterThan(0);
+      for (const r of pre8) {
+        expect(resolveSourceLocator(r, file.sources)).toBeNull();
+      }
+    });
+  });
+
+  describe('chiba R8（#8・5県目・最大件数(188件)での実データ検証）', () => {
+    const file = COMPETITION_RATE_BY_PREFECTURE['chiba']!;
+    const r8 = file.records.filter((r) => !r.fiscalYear);
+
+    it('R8の188件全件がresolveSourceLocatorで解決できる', () => {
+      for (const r of r8) {
+        const locator = resolveSourceLocator(r, file.sources);
+        expect(locator).not.toBeNull();
+        expect(locator!.pdfSha256).toBe('b504b38339b78802683aee22f3e6fd62f8ebc73c768f6ea95a4fd389315435ee');
+        // 詳細表は物理ページ1〜5（概要ページ無し・オフセット無し）
+        expect(locator!.page).toBeGreaterThanOrEqual(1);
+        expect(locator!.page).toBeLessThanOrEqual(5);
         expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
       }
     });
