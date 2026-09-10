@@ -1939,7 +1939,31 @@ tsc実exit0・jestフルスイート545suites7657tests green。commit 16b6b37。
 次はassembleSimpleTableRows利用の残り4県（miyagi/yamanashi/ehime/kagawa）、
 または他の共有関数（assembleCompetitionRateRows等5パーサ）への横展開を検討する。
 
-| 8 | **★出典ロケータ**⚠️着手(2026-09-10・型基盤完了・7県目nagasaki完了・累計914件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
+### #8 出典ロケータ 8県目=miyagi（2026-09-10）
+
+nagasakiに続き**これも非+1オフセット**（全8頁中1頁目が総括表で、学校別詳細表は物理ページ
+2〜5の4頁・+2オフセット）。miyagiは`pdftotext`の数値抽出も列構造が崩れて信頼できない種類の
+PDFだったため（学校名だけでなく数値も文字化けに近い状態）、**今回初めてpdftoppmで低解像度
+8頁全部をレンダリングし目視で該当頁を特定する手法に切替えた**（saitama/nagasakiのform feed数を
+数える手法が通用しない場合の代替手段）。白石「普通科」(quota240/applicants231)が物理ページ2に、
+気仙沼向洋「機械技術科」(quota40/applicants40)が物理ページ5に実在することを画像で確認して特定。
+
+parsers/miyagi.tsは脚注記号除去（※■☆）の後段処理を持つ構造でpage/rowIndexは問題なく保持。
+バックフィルはtsx＋一時nodeスクリプトの機械突合方式を踏襲、129件全件一致。
+
+**★教訓**: 既存の個別データテストファイル（`parse-table-pdf-*.test.ts`）にも`.toEqual`完全一致
+アサーションが潜んでいることがあり、今回`parse-table-pdf-miyagi.test.ts`の南三陸の脚注記号除去
+確認テストが1回目のjestフルスイートでredになった（registry.test.ts/competition-rate.test.tsの
+更新だけでは気づけなかった）。**狭いフィルタ実行だけでなく、県を1つ完了するたびにjest
+フルスイートを必ず回すこと**を改めて徹底する。
+
+累計1043件（tottori43+gunma106+tochigi107+iwate113+chiba188+saitama241+nagasaki116+
+miyagi129）。tsc実exit0・jestフルスイート545suites7659tests green。commit ba41c9a。
+
+次はassembleSimpleTableRows利用の残り3県（yamanashi/ehime/kagawa）、
+または他の共有関数（assembleCompetitionRateRows等5パーサ）への横展開を検討する。
+
+| 8 | **★出典ロケータ**⚠️着手(2026-09-10・型基盤完了・8県目miyagi完了・累計1043件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
 
 **2026-09-10着手**: §5順序#7（段階台帳）がhokkaido全14管内完結によりoita/okinawaの2県のみ
 未着手（前進手段なしと判断済み）となったため#8に着手。設計資料
