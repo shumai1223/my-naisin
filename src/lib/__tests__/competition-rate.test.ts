@@ -198,6 +198,7 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
       { code: 'iwate', count: 113 },
       { code: 'kagawa', count: 68 },
       { code: 'kagoshima', count: 156 },
+      { code: 'kochi', count: 75 },
       { code: 'miyagi', count: 129 },
       { code: 'nagasaki', count: 116 },
       { code: 'okinawa', count: 156 },
@@ -838,6 +839,42 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
     });
 
     it('同一page内でLEFT/RIGHT間のrowIndex重複が無い', () => {
+      const seen = new Set<string>();
+      for (const r of r8) {
+        const key = `${r.page}|${r.rowIndex}`;
+        expect(seen.has(key)).toBe(false);
+        seen.add(key);
+      }
+    });
+
+    it('R7以前（fiscalYear明示済み）はまだpage/rowIndex未バックフィルのため全件null', () => {
+      const pre8 = file.records.filter((r) => r.fiscalYear !== undefined);
+      expect(pre8.length).toBeGreaterThan(0);
+      for (const r of pre8) {
+        expect(resolveSourceLocator(r, file.sources)).toBeNull();
+      }
+    });
+  });
+
+  describe('kochi R8（#8・25県目・個別実装県・概要ページ無しでオフセット+1）', () => {
+    const file = COMPETITION_RATE_BY_PREFECTURE['kochi']!;
+    const r8 = file.records.filter((r) => !r.fiscalYear);
+
+    it('R8の75件全件がresolveSourceLocatorで解決できる', () => {
+      expect(r8.length).toBe(75);
+      for (const r of r8) {
+        expect(r.page).toBeDefined();
+        const locator = resolveSourceLocator(r, file.sources);
+        expect(locator).not.toBeNull();
+        expect(locator!.pdfSha256).toBe('69c015a0e9e7e53eb9750fcaa4a25237c75f3fe447aa61b5cadad25ab8eaae8b');
+        // 生PDF全2頁と概要ページ無しでgeometry配列2頁が完全一致するためオフセット+1
+        expect(locator!.page).toBeGreaterThanOrEqual(1);
+        expect(locator!.page).toBeLessThanOrEqual(2);
+        expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
+      }
+    });
+
+    it('同一page内でrowIndexの重複が無い', () => {
       const seen = new Set<string>();
       for (const r of r8) {
         const key = `${r.page}|${r.rowIndex}`;

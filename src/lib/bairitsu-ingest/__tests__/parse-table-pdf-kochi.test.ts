@@ -74,13 +74,21 @@ describe('bairitsu-ingest parse-table-pdf 汎用carry-forward組み立て (kochi
     }
   });
 
+  const bare = (r: { schoolName: string; department: string; quota: number; finalApplicants: number; finalRate: number }) => ({
+    schoolName: r.schoolName,
+    department: r.department,
+    quota: r.quota,
+    finalApplicants: r.finalApplicants,
+    finalRate: r.finalRate,
+  });
+
   test('罫線欠落で隣接する2校（高知追手前・吾北）が誤って合体しない', () => {
-    expect(parsed.find((r) => r.schoolName === '高知追手前')).toEqual({ schoolName: '高知追手前', department: '普通', quota: 240, finalApplicants: 206, finalRate: 0.86 });
-    expect(parsed.find((r) => r.schoolName === '吾北')).toEqual({ schoolName: '吾北', department: '普通', quota: 40, finalApplicants: 6, finalRate: 0.15 });
+    expect(bare(parsed.find((r) => r.schoolName === '高知追手前')!)).toEqual({ schoolName: '高知追手前', department: '普通', quota: 240, finalApplicants: 206, finalRate: 0.86 });
+    expect(bare(parsed.find((r) => r.schoolName === '吾北')!)).toEqual({ schoolName: '吾北', department: '普通', quota: 40, finalApplicants: 6, finalRate: 0.15 });
   });
 
   test('学科の1行目に学校名が無く2行目に初めて現れる安芸の4学科が正しく合体する', () => {
-    const aki = parsed.filter((r) => r.schoolName === '安芸');
+    const aki = parsed.filter((r) => r.schoolName === '安芸').map(bare);
     expect(aki).toEqual([
       { schoolName: '安芸', department: '普通', quota: 95, finalApplicants: 34, finalRate: 0.36 },
       { schoolName: '安芸', department: '工業(機械)', quota: 20, finalApplicants: 4, finalRate: 0.2 },
@@ -90,7 +98,7 @@ describe('bairitsu-ingest parse-table-pdf 汎用carry-forward組み立て (kochi
   });
 
   test('右揃え数値の桁混入が起きない（岡豊「普通」入学定員200・募集定員200・第1志望者数212）', () => {
-    expect(parsed.find((r) => r.schoolName === '岡豊' && r.department === '普通')).toEqual({
+    expect(bare(parsed.find((r) => r.schoolName === '岡豊' && r.department === '普通')!)).toEqual({
       schoolName: '岡豊',
       department: '普通',
       quota: 200,

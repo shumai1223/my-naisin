@@ -56,6 +56,7 @@ function numericTokensFromChars(chars: PdfPageGeometry['chars']): { quotaText: s
 
 interface FineRow {
   y: number;
+  page: number;
   schoolNameRaw: string;
   categoryRaw: string;
   courseCodeRaw: string;
@@ -64,7 +65,7 @@ interface FineRow {
   applicantsText: string;
 }
 
-function fineRowsInRange(chars: PdfPageGeometry['chars'], yTop: number, yBottom: number): FineRow[] {
+function fineRowsInRange(chars: PdfPageGeometry['chars'], yTop: number, yBottom: number, page: number): FineRow[] {
   const inRange = [...chars].filter((c) => c.y0 >= yTop - 0.5 && c.y0 < yBottom - 0.5).sort((a, b) => a.y0 - b.y0 || a.x0 - b.x0);
   const rows: { y: number; chars: PdfPageGeometry['chars'] }[] = [];
   for (const c of inRange) {
@@ -77,6 +78,7 @@ function fineRowsInRange(chars: PdfPageGeometry['chars'], yTop: number, yBottom:
     const { quotaText, applicantsText } = numericTokensFromChars(r.chars);
     return {
       y: r.y,
+      page,
       schoolNameRaw: cellTextFromChars(r.chars, 0),
       categoryRaw: cellTextFromChars(r.chars, 1),
       courseCodeRaw: cellTextFromChars(r.chars, 2),
@@ -137,13 +139,20 @@ const DEPARTMENT_OVERRIDE = new Map<string, string>([
 
 const HEADER_MARKERS = ['学校名', '学　校', '学科（科）名', '入学定員', '募集定員', '志願率', '第１志望者数', '第２志望者数', '（注', '志願者なし', 'No.', '令和'];
 
-/** 高知県R8倍率PDFの学校別データ全頁分（`kochi-r8-geometry.json`）を解析する。 */
+/**
+ * 高知県R8倍率PDFの学校別データ全頁分（`kochi-r8-geometry.json`）を解析する。
+ *
+ * ⚠️T-Y11F §5順序#8（出典ロケータ）: geometry配列2頁は生PDF全2頁と完全一致（概要ページ無し）
+ * のためオフセットは配列添字+1（2026-09-11にpdftotext -f 1で室戸「総合」quota44/
+ * applicants5/finalRate0.11が物理ページ1に実在することを確認）。
+ */
 export function parseKochi(geometries: PdfPageGeometry[]): ParsedCompetitionRow[] {
   const allRows: (FineRow & { schoolName: string })[] = [];
-  for (const geom of geometries) {
+  geometries.forEach((geom, pageIdx) => {
+    const page = pageIdx + 1;
     const ranges = blockRangesForPage(geom);
     for (const { yTop, yBottom } of ranges) {
-      const fine = fineRowsInRange(geom.chars, yTop, yBottom);
+      const fine = fineRowsInRange(geom.chars, yTop, yBottom, page);
       // 罫線欠落による誤合体対策: ブロック内でschoolNameを前方伝播し、先頭に名前の無い行は
       // ブロック内で最初に見つかった名前まで遡って適用する（安芸の実例）。
       let firstNameIdx = -1;
@@ -162,13 +171,14 @@ export function parseKochi(geometries: PdfPageGeometry[]): ParsedCompetitionRow[
       }
       for (const r of withNames) allRows.push(r);
     }
-  }
+  });
 
   // 「多部制単位制」以降（連携型中高一貫教育校の特別選抜を含む）はスコープ外。
   const cutIdx = allRows.findIndex((r) => normalizeExtractedText(r.schoolNameRaw + r.categoryRaw + r.courseCodeRaw + r.specificRaw).includes('多部制'));
   const scopedRows = cutIdx === -1 ? allRows : allRows.slice(0, cutIdx);
 
   const records: ParsedCompetitionRow[] = [];
+  const rowIndexByPage = new Map<number, number>();
   for (const r of scopedRows) {
     const combined = r.schoolNameRaw + r.categoryRaw + r.courseCodeRaw + r.specificRaw;
     if (HEADER_MARKERS.some((m) => combined.includes(m))) continue;
@@ -180,7 +190,9 @@ export function parseKochi(geometries: PdfPageGeometry[]): ParsedCompetitionRow[
     const finalApplicants = Number(r.applicantsText.replace(/,/g, ''));
     if (!Number.isFinite(quota) || quota <= 0 || !Number.isFinite(finalApplicants)) continue;
     const finalRate = Number(roundHalfUpScaled(finalApplicants, quota, 2)) / 100;
-    records.push({ schoolName: r.schoolName, department, quota, finalApplicants, finalRate });
+    const rowIndex = rowIndexByPage.get(r.page) ?? 0;
+    rowIndexByPage.set(r.page, rowIndex + 1);
+    records.push({ schoolName: r.schoolName, department, quota, finalApplicants, finalRate, page: r.page, rowIndex });
   }
   return records;
 }

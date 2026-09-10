@@ -2351,7 +2351,37 @@ tsc実exit0・jestフルスイート545suites7695tests green。
 次はkagoshima完了により残り12県（akita以外の個別実装県、oita/okinawa以外の未着手県の
 組み合わせを次回イテレーションで再確認）へ進める。
 
-| 8 | **★出典ロケータ**⚠️着手(2026-09-10・型基盤完了・24県目kagoshima完了(LEFT/RIGHT2段組rowIndex衝突回避3例目)・累計2552件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
+### #8 出典ロケータ 25県目=kochi（2026-09-11・個別実装県・概要ページ無しでオフセット+1）
+
+sourceIndex分布を確認したところ全75件が単一PDF(sources[0])由来で分岐なしと判明。kochiは
+物理2頁・geometry配列2頁が完全一致(1頁目から詳細表開始・概要ページ無し)で、pdftotext -f 1
+で室戸「総合」quota44/applicants5/finalRate0.11が物理ページ1に実在することを確認、
+オフセットは配列添字+1(調整不要)。
+
+parsers/kochi.tsはfor-of(geom)ループをforEach(geom,pageIdx)に変更しFineRow.pageを新規
+追加、最終push箇所にrowIndexByPageマップを追加(共有関数と同型のロジックをこの県専用に
+複製・aomori/fukui/fukuoka/gifu/hiroshimaと同型の個別実装パターン)。
+
+★自己訂正1回: 初回のバックフィルスクリプトで正規表現のキャプチャグループが誤って閉じ
+括弧`}`を含んでいたため`{...finalRate: 0.11 }, page: 1, rowIndex: 0 },`という二重braceの
+壊れた出力を生成しtscでTS1005/TS1003エラー多発。git checkoutでdata fileを一旦クリーンに
+戻し、正規表現を修正(キャプチャグループを` \},$`の直前で終端)して再実行し解決(実害なし・
+tsc/jest実行前に自分で発見)。
+
+既存テスト2ファイル(data/competition-rates/__tests__/kochi.test.ts=applicants0の2件、
+parse-table-pdf-kochi.test.ts=高知追手前/吾北/安芸4学科/岡豊の4箇所)のtoEqual完全一致
+アサーションを着手前に能動的にgrepで発見し、共通のbare()ヘルパー関数を追加して対処。
+既存テスト2件(registry.test.ts/competition-rate.test.ts)を更新、kochi用describeブロック
+を新設。PDFを再取得しsha256(69c015a0...)を計測。
+
+累計2627件(共有関数3種18県1898+個別実装6県654+kochi75=2627)。
+tsc実exit0・jestフルスイート545suites7698tests green。
+
+次は残り11県(kumamoto/kyoto/nagano/nara/niigata/oita/saga/shiga/shizuoka/toyama/
+yamagata)へ進める(いずれも着手前にsourceIndex分布・PDF頁数とgeometry頁数の一致確認を
+継続)。
+
+| 8 | **★出典ロケータ**⚠️着手(2026-09-11・型基盤完了・25県目kochi完了・累計2627件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
 
 **2026-09-10着手**: §5順序#7（段階台帳）がhokkaido全14管内完結によりoita/okinawaの2県のみ
 未着手（前進手段なしと判断済み）となったため#8に着手。設計資料

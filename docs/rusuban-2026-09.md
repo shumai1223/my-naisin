@@ -5,17 +5,17 @@
 
 ---
 
-最終更新              2026-09-11 (前セッション未commit分を検証してcommit)
+最終更新              2026-09-11 (kochi追加)
 いまやっていること     T-Y11F §5順序#8（出典ロケータ）進行中。共有関数3種18県(1898)+
-                      個別実装6県(aomori89+fukui72+fukuoka66+gifu134+hiroshima137+
-                      kagoshima156=654)=累計2552件
-今日やったこと         kagoshima: ehime/tokushimaに続く3例目のLEFT/RIGHT2段組
-                      rowIndex衝突回避。全156件locator解決・全545suites7695tests
-                      green・commit・push済み
-在庫の残り            36登録パーサ県のうち24県完了・残り12県(kochi/kumamoto/kyoto/
-                      nagano/nara/niigata/oita/saga/shiga/shizuoka/toyama/yamagata)
-                      は個別実装のみ。+R7以前の年度別リプレイ+ビジョン11県7,191件が
-                      未着手
+                      個別実装7県(aomori89+fukui72+fukuoka66+gifu134+hiroshima137+
+                      kagoshima156+kochi75=729)=累計2627件
+今日やったこと         kochi: 個別実装パターンを再適用(概要ページ無しオフセット+1)。
+                      初回バックフィルスクリプトの正規表現バグ(二重brace)を自己発見・
+                      訂正。全75件locator解決・全545suites7698tests green・
+                      commit・push済み
+在庫の残り            36登録パーサ県のうち25県完了・残り11県(kumamoto/kyoto/nagano/
+                      nara/niigata/oita/saga/shiga/shizuoka/toyama/yamagata)は個別
+                      実装のみ。+R7以前の年度別リプレイ+ビジョン11県7,191件が未着手
 払底の見込み           22データ点いずれも同程度の負荷。sourceIndex事前確認の運用が定着し
                       fukuoka級の複雑さへの対応コストは制御下にある
 詰まっていること        aichi（Imperva WAF一時ブロックが継続中）。oita/okinawa(競争率

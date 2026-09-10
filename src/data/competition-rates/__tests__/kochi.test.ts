@@ -56,14 +56,16 @@ describe('高知県 倍率パイプラインα（Y-6・Ａ日程75レコード�
   });
 
   it('applicants=0の学科（安芸・工業(土木)/四万十・普通(自環コース)）も正しく収録されている', () => {
-    expect(r8.find((r) => r.schoolName === '安芸' && r.department === '工業(土木)')).toEqual({
+    const aki = r8.find((r) => r.schoolName === '安芸' && r.department === '工業(土木)')!;
+    expect({ schoolName: aki.schoolName, department: aki.department, quota: aki.quota, finalApplicants: aki.finalApplicants, finalRate: aki.finalRate }).toEqual({
       schoolName: '安芸',
       department: '工業(土木)',
       quota: 20,
       finalApplicants: 0,
       finalRate: 0,
     });
-    expect(r8.find((r) => r.schoolName === '四万十' && r.department === '普通(自環コース)')).toEqual({
+    const shimanto = r8.find((r) => r.schoolName === '四万十' && r.department === '普通(自環コース)')!;
+    expect({ schoolName: shimanto.schoolName, department: shimanto.department, quota: shimanto.quota, finalApplicants: shimanto.finalApplicants, finalRate: shimanto.finalRate }).toEqual({
       schoolName: '四万十',
       department: '普通(自環コース)',
       quota: 25,
