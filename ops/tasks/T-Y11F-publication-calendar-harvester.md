@@ -2113,7 +2113,31 @@ tsc実exit0・jestフルスイート545suites7672tests green(1発green)。commit
 
 次はassembleCompetitionRateRows利用の残り2県（tokushima/wakayama）へ進む。
 
-| 8 | **★出典ロケータ**⚠️着手(2026-09-10・型基盤完了・14県目shimane完了・累計1538件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
+### #8 出典ロケータ 15県目=tokushima（2026-09-10・★ehimeに続くLEFT/MIDDLE2段組2例目）
+
+tokushimaはLEFT_LAYOUT/MIDDLE_LAYOUTの2カラムをそれぞれ独立に`assembleCompetitionRateRows`
+へ渡す構造で、ehimeと同型のrowIndexオフセット方式（MIDDLE側にLEFT側の同ページ件数分を加算）
+を適用し69件全件でduplicate(page,rowIndex)0件を機械確認。1物理ページ・fixtureが配列でなく
+単一`PdfPageGeometry`オブジェクトという県固有の特殊構造。
+
+**★新しい罠を発見**: バックフィル時に単純な出現順マッチングを試みたところ21件目で不一致が
+発生——data fileの記録順は「LEFT区画を全部読んでからMIDDLE区画を全部読む」というparser出力順
+ではなく、PDFの物理的な地理的順序（城東→阿南光→那賀→海部→鳴門…）に沿った別の順序で
+転記されていたと判明。ishikawaと同型の対策（schoolName+department+quota+finalApplicants
+をキーにした内容ベースmatch）に切替えて解決（69件中重複キー0件を事前確認してから採用）。
+**教訓**: 2段組パーサ全般はバックフィル前に出現順一致を仮定せず、まず内容ベースmatchが
+必要かどうか（またはduplicateキー検査）を確認すること。
+
+既存テスト4箇所（`parse-table-pdf-multi-column.test.ts`2箇所・`data/competition-rates/
+__tests__/tokushima.test.ts`2箇所=海部/那賀の`.toEqual`）を着手前に能動的にgrepで発見し
+分割代入で対処、jestフルスイート1発でgreen。
+
+累計1607件（assembleSimpleTableRows11県1258+ibaraki149+ishikawa67+shimane64+
+tokushima69）。tsc実exit0・jestフルスイート545suites7674tests green。commit b74e463。
+
+次は最後の1県wakayamaへ進む。
+
+| 8 | **★出典ロケータ**⚠️着手(2026-09-10・型基盤完了・15県目tokushima完了・累計1607件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
 
 **2026-09-10着手**: §5順序#7（段階台帳）がhokkaido全14管内完結によりoita/okinawaの2県のみ
 未着手（前進手段なしと判断済み）となったため#8に着手。設計資料
