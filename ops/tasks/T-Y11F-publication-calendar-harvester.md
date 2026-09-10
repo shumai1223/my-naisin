@@ -2181,7 +2181,31 @@ okinawaは全日制・定時制が同一表に混在し課程列でcarry-forward
 niigata/oita/saga/shiga/shizuoka/toyama/yamagata等）の共有関数利用状況を`grep -l`で
 再調査してから着手する。
 
-| 8 | **★出典ロケータ**⚠️着手(2026-09-10・型基盤完了・17県目okinawa完了(見落とし県発見)・累計1820件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
+### #8 出典ロケータ 18県目=akita（2026-09-10・★共有関数assembleNumberedBlockRowsへ横展開）
+
+前回イテレーションでassembleSimpleTableRows/assembleCompetitionRateRowsの2つの共有関数以外を
+残り19県について`grep -l`で機械調査したところ、**akitaのみが`assembleNumberedBlockRows`
+（学校名が複数行に折り返す県向け・現時点で利用者1県のみ）という3つ目の共有関数を使っている**
+と判明。`SimpleRowFields`型を共用しており`page`フィールドは既存の型定義に含まれていたため、
+関数内部に`rowIndexByPage`マップを新設し他の共有関数と同型のロジックを実装するだけで済んだ。
+呼び出し側`parsers/akita.ts`は`geometries.flatMap`に`(geom,pageIdx)`で`page:pageIdx+1`を
+追加するのみ。2物理ページ・2geometryページで一致しオフセット単純に+1（調整不要・pdftoppm
+ビジョン確認で鹿角の先頭一致を確認）。
+
+既存テスト3箇所（`parse-table-pdf-numbered-block.test.ts`・`data/competition-rates/
+__tests__/akita.test.ts`2箇所=大曲農業/湯沢翔北の分校名`.toEqual`）を着手前に能動的に
+grepで発見し分割代入で対処、jestフルスイート1発でgreen。
+
+累計1898件（assembleSimpleTableRows12県1414+assembleCompetitionRateRows5県406+akita78）。
+tsc実exit0・jestフルスイート545suites7680tests green。commit 9794142。
+
+**残り18県**（aomori/fukui/fukuoka/gifu/hiroshima/kagoshima/kochi/kumamoto/kyoto/nagano/
+nara/niigata/oita/saga/shiga/shizuoka/toyama/yamagata）は共有関数を一切使わない**tottori型
+の個別実装のみ**が確認されており、各県ごとの直接パーサ改修が必要（横展開の「土台に乗るだけ」
+ボーナスはここで尽きる）。次はこれらを1県ずつ、または未着手のR7以前年度別リプレイ・ビジョン
+11県7,191件への着手を検討する。
+
+| 8 | **★出典ロケータ**⚠️着手(2026-09-10・型基盤完了・18県目akita完了(共有関数横展開が尽きた)・累計1898件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
 
 **2026-09-10着手**: §5順序#7（段階台帳）がhokkaido全14管内完結によりoita/okinawaの2県のみ
 未着手（前進手段なしと判断済み）となったため#8に着手。設計資料
