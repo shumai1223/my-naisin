@@ -49,8 +49,15 @@ describe('bairitsu-ingest parse-table-pdf 汎用carry-forward組み立て (miyag
   });
 
   test('脚注記号「☆」が学科名から除去される（南三陸の実例）', () => {
+    // T-Y11F §5順序#8でpage/rowIndex（出典ロケータ用）が追加されたため、それ以外のフィールドで比較する
     const record = parsed.find((r) => r.schoolName === '南三陸' && r.department === '情報ビジネス科');
-    expect(record).toEqual({ schoolName: '南三陸', department: '情報ビジネス科', quota: 40, finalApplicants: 11, finalRate: 0.28 });
+    expect({ schoolName: record?.schoolName, department: record?.department, quota: record?.quota, finalApplicants: record?.finalApplicants, finalRate: record?.finalRate }).toEqual({
+      schoolName: '南三陸',
+      department: '情報ビジネス科',
+      quota: 40,
+      finalApplicants: 11,
+      finalRate: 0.28,
+    });
   });
 
   test('地区別小計行「○○地区計」「○○地区合計」が学校として混入しない', () => {

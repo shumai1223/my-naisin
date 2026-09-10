@@ -29,12 +29,19 @@ function stripFootnoteMarks(s: string): string {
   return s.replace(/[※■☆]/g, '');
 }
 
-/** 宮城県R8倍率PDFの学校別データ4頁分（`miyagi-r8-geometry.json`）を解析する。 */
+/**
+ * 宮城県R8倍率PDFの学校別データ4頁分（`miyagi-r8-geometry.json`）を解析する。
+ *
+ * ⚠️T-Y11F §5順序#8（出典ロケータ）: 全8頁中1頁目は総括表（概要）で、学校別詳細表は
+ * 物理ページ2〜5の4頁（2026-09-10にpdftoppmでビジョン確認: 先頭の白石「普通科」
+ * (quota240/applicants231)が物理ページ2に、末尾の気仙沼向洋「機械技術科」
+ * (quota40/applicants40)が物理ページ5に実在）。出典ロケータ用のpageは配列添字+2。
+ */
 export function parseMiyagi(geometries: PdfPageGeometry[]): ParsedCompetitionRow[] {
-  const allRowFields = geometries.flatMap((geom) =>
+  const allRowFields = geometries.flatMap((geom, pageIdx) =>
     groupCharsIntoRows(geom.chars, 3.0).map((row) => {
       const fields = extractRowFields(row.chars, MIYAGI_LAYOUT);
-      return { ...fields, schoolName: stripFootnoteMarks(fields.schoolName), department: stripFootnoteMarks(fields.department) };
+      return { ...fields, schoolName: stripFootnoteMarks(fields.schoolName), department: stripFootnoteMarks(fields.department), page: pageIdx + 2 };
     })
   );
 
