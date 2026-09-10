@@ -43,8 +43,16 @@ describe('山形県 倍率パイプラインα（Y-6・全日制42校90レコー
     expect(distinctSchools.size).toBe(42);
   });
 
+  const bare = (r: { schoolName: string; department: string; quota: number; finalApplicants: number; finalRate: number }) => ({
+    schoolName: r.schoolName,
+    department: r.department,
+    quota: r.quota,
+    finalApplicants: r.finalApplicants,
+    finalRate: r.finalRate,
+  });
+
   it('理数探究科・国際探究科をあわせた「探究科」が単一レコードとして正しく収録されている（山形東）', () => {
-    expect(r8.find((r) => r.schoolName === '山形東' && r.department.includes('探究'))).toEqual({
+    expect(bare(r8.find((r) => r.schoolName === '山形東' && r.department.includes('探究'))!)).toEqual({
       schoolName: '山形東',
       department: '探究(理数探究,国際探究)',
       quota: 76,
@@ -54,7 +62,7 @@ describe('山形県 倍率パイプラインα（Y-6・全日制42校90レコー
   });
 
   it('applicants=0の学科（村山産業・流通ビジネス/小国・普通）も正しく収録されている', () => {
-    expect(r8.find((r) => r.schoolName === '小国')).toEqual({
+    expect(bare(r8.find((r) => r.schoolName === '小国')!)).toEqual({
       schoolName: '小国',
       department: '普通',
       quota: 25,

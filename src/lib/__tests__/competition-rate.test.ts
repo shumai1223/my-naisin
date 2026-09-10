@@ -218,6 +218,7 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
       { code: 'tottori', count: 43 },
       { code: 'toyama', count: 75 },
       { code: 'wakayama', count: 57 },
+      { code: 'yamagata', count: 90 },
       { code: 'yamanashi', count: 48 },
     ]);
   });
@@ -1258,6 +1259,42 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
         // 生PDF全3頁のうち学校別詳細表は物理ページ1〜2のみ(3頁目はスコープ外)
         expect(locator!.page).toBeGreaterThanOrEqual(1);
         expect(locator!.page).toBeLessThanOrEqual(2);
+        expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
+      }
+    });
+
+    it('同一page内でrowIndexの重複が無い', () => {
+      const seen = new Set<string>();
+      for (const r of r8) {
+        const key = `${r.page}|${r.rowIndex}`;
+        expect(seen.has(key)).toBe(false);
+        seen.add(key);
+      }
+    });
+
+    it('R7以前（fiscalYear明示済み）はまだpage/rowIndex未バックフィルのため全件null', () => {
+      const pre8 = file.records.filter((r) => r.fiscalYear !== undefined);
+      expect(pre8.length).toBeGreaterThan(0);
+      for (const r of pre8) {
+        expect(resolveSourceLocator(r, file.sources)).toBeNull();
+      }
+    });
+  });
+
+  describe('yamagata R8（#8・36県目・登録パーサ全県完了・表紙/定時制頁を除いた物理ページ2〜4）', () => {
+    const file = COMPETITION_RATE_BY_PREFECTURE['yamagata']!;
+    const r8 = file.records.filter((r) => !r.fiscalYear);
+
+    it('R8の90件全件がresolveSourceLocatorで解決できる', () => {
+      expect(r8.length).toBe(90);
+      for (const r of r8) {
+        expect(r.page).toBeDefined();
+        const locator = resolveSourceLocator(r, file.sources);
+        expect(locator).not.toBeNull();
+        expect(locator!.pdfSha256).toBe('f24256730874eae7df6aea054a6f12f9e20292dcb17186669efeff7eff40b58d');
+        // 生PDF全5頁中、学校別詳細表は物理ページ2〜4のみ(1頁目=表紙・5頁目=定時制)
+        expect(locator!.page).toBeGreaterThanOrEqual(2);
+        expect(locator!.page).toBeLessThanOrEqual(4);
         expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
       }
     });

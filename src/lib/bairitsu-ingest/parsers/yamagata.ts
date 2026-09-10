@@ -56,6 +56,7 @@ function numericTokensFromChars(chars: PdfPageGeometry['chars']): { quotaText: s
 
 interface FineRow {
   y: number;
+  page: number;
   schoolNameRaw: string;
   categoryRaw: string;
   specificRaw: string;
@@ -63,7 +64,7 @@ interface FineRow {
   applicantsText: string;
 }
 
-function fineRowsInRange(chars: PdfPageGeometry['chars'], yTop: number, yBottom: number): FineRow[] {
+function fineRowsInRange(chars: PdfPageGeometry['chars'], yTop: number, yBottom: number, page: number): FineRow[] {
   const inRange = [...chars].filter((c) => c.y0 >= yTop - 0.5 && c.y0 < yBottom - 0.5).sort((a, b) => a.y0 - b.y0 || a.x0 - b.x0);
   const rows: { y: number; chars: PdfPageGeometry['chars'] }[] = [];
   for (const c of inRange) {
@@ -76,6 +77,7 @@ function fineRowsInRange(chars: PdfPageGeometry['chars'], yTop: number, yBottom:
     const { quotaText, applicantsText } = numericTokensFromChars(r.chars);
     return {
       y: r.y,
+      page,
       schoolNameRaw: cellTextFromChars(r.chars, 1),
       categoryRaw: cellTextFromChars(r.chars, 2),
       specificRaw: cellTextFromChars(r.chars, 3),
@@ -205,21 +207,30 @@ const SCHOOL_RENAME_ON_VALUE = new Map<string, string>([['新庄神室産業金�
 
 const HEADER_MARKERS = ['学校名', '学科名', '入学定員', '募集人員', '志願者数', '志願倍率', '前期', '連携型', '併設型', '内定者数', '入学予定者数', '合計', '注)', '注１', '注２'];
 
-/** 山形県R8倍率PDFの学校別データ全頁分（`yamagata-r8-geometry.json`）を解析する。ページ0は
- *  表紙、ページ4は【定時制の課程】専用のため呼び出し側でスコープ外とすること。 */
+/**
+ * 山形県R8倍率PDFの学校別データ全頁分（`yamagata-r8-geometry.json`）を解析する。ページ0は
+ * 表紙、ページ4は【定時制の課程】専用のため呼び出し側でスコープ外とすること。
+ *
+ * ⚠️T-Y11F §5順序#8（出典ロケータ）: geometry配列3頁は生PDF全5頁中の物理ページ2〜4
+ * （1頁目=表紙・5頁目=定時制のためスコープ外。2026-09-11にpdftotext -f 2で山形東
+ * 「普通」quota152/applicants69/finalRate0.45が物理ページ2に実在することを確認）。
+ * オフセットは配列添字+2。
+ */
 export function parseYamagata(geometries: PdfPageGeometry[]): ParsedCompetitionRow[] {
   const allRows: (FineRow & { schoolName: string; category: string; isLabelOnly: boolean })[] = [];
-  for (const geom of geometries) {
+  geometries.forEach((geom, pageIdx) => {
+    const page = pageIdx + 2;
     const ranges = blockRangesForPage(geom);
     for (const { yTop, yBottom } of ranges) {
-      const fine = fineRowsInRange(geom.chars, yTop, yBottom);
+      const fine = fineRowsInRange(geom.chars, yTop, yBottom, page);
       const withNames = forwardCarryWithBackfill(fine);
       const withCategory = carryCategoryLabelOnly(withNames);
       for (const r of withCategory) allRows.push(r);
     }
-  }
+  });
 
   const records: ParsedCompetitionRow[] = [];
+  const rowIndexByPage = new Map<number, number>();
   for (const r of allRows) {
     const combined = normalizeExtractedText(r.schoolNameRaw + r.categoryRaw + r.specificRaw);
     if (HEADER_MARKERS.some((m) => combined.includes(m))) continue;
@@ -235,7 +246,9 @@ export function parseYamagata(geometries: PdfPageGeometry[]): ParsedCompetitionR
     if (!Number.isFinite(quota) || quota <= 0 || !Number.isFinite(finalApplicants)) continue;
     const schoolName = SCHOOL_RENAME_ON_VALUE.get(`${r.schoolName}|${quota}|${finalApplicants}`) ?? r.schoolName;
     const finalRate = Number(roundHalfUpScaled(finalApplicants, quota, 2)) / 100;
-    records.push({ schoolName, department, quota, finalApplicants, finalRate });
+    const rowIndex = rowIndexByPage.get(r.page) ?? 0;
+    rowIndexByPage.set(r.page, rowIndex + 1);
+    records.push({ schoolName, department, quota, finalApplicants, finalRate, page: r.page, rowIndex });
   }
   return records;
 }

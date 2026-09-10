@@ -74,13 +74,21 @@ describe('bairitsu-ingest parse-table-pdf 汎用carry-forward組み立て (yamag
     }
   });
 
+  const bare = (r: { schoolName: string; department: string; quota: number; finalApplicants: number; finalRate: number }) => ({
+    schoolName: r.schoolName,
+    department: r.department,
+    quota: r.quota,
+    finalApplicants: r.finalApplicants,
+    finalRate: r.finalRate,
+  });
+
   test('持ち越し専用ラベル行（山辺「家庭」）が食物・福祉の2学科に正しく適用される', () => {
-    expect(parsed.find((r) => r.schoolName === '山辺' && r.department === '家庭食物')).toEqual({ schoolName: '山辺', department: '家庭食物', quota: 20, finalApplicants: 17, finalRate: 0.85 });
-    expect(parsed.find((r) => r.schoolName === '山辺' && r.department === '家庭福祉')).toEqual({ schoolName: '山辺', department: '家庭福祉', quota: 21, finalApplicants: 3, finalRate: 0.14 });
+    expect(bare(parsed.find((r) => r.schoolName === '山辺' && r.department === '家庭食物')!)).toEqual({ schoolName: '山辺', department: '家庭食物', quota: 20, finalApplicants: 17, finalRate: 0.85 });
+    expect(bare(parsed.find((r) => r.schoolName === '山辺' && r.department === '家庭福祉')!)).toEqual({ schoolName: '山辺', department: '家庭福祉', quota: 21, finalApplicants: 3, finalRate: 0.14 });
   });
 
   test('行内完結の重複（山形工業「情報技術」）は他の学科行へ伝播しない', () => {
-    const yamagataKogyo = parsed.filter((r) => r.schoolName === '山形工業');
+    const yamagataKogyo = parsed.filter((r) => r.schoolName === '山形工業').map(bare);
     expect(yamagataKogyo).toEqual([
       { schoolName: '山形工業', department: '機械技術', quota: 20, finalApplicants: 30, finalRate: 1.5 },
       { schoolName: '山形工業', department: '電気電子', quota: 20, finalApplicants: 24, finalRate: 1.2 },
