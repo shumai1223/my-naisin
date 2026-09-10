@@ -2034,7 +2034,33 @@ commit e4eac5f。
 （ibaraki/ishikawa/shimane/tokushima/wakayama）への横展開、または未着手の
 R7以前の年度別ジオメトリリプレイ・ビジョン11県7,191件への着手を検討する。
 
-| 8 | **★出典ロケータ**⚠️着手(2026-09-10・型基盤完了・assembleSimpleTableRows全11県完了・累計1258件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
+### #8 出典ロケータ 12県目=ibaraki（2026-09-10・★assembleCompetitionRateRowsへ初横展開）
+
+`assembleSimpleTableRows`とは別系統の共有関数`assembleCompetitionRateRows`（罫線+結合セル型・
+ibaraki/ishikawa/shimane/tokushima/wakayamaの5パーサが利用）へ初めて出典ロケータ対応を
+横展開した。`RawTableRow`インターフェースに`page?: number`（任意・既存データ書き換え0を
+厳守）を追加し、`assembleCompetitionRateRows`内部に`rowIndexByPage`マップを新設して
+`assembleSimpleTableRows`と同型のロジック（入力`r.page`が設定されていれば出力にpage/rowIndex
+を付与）を実装。呼び出し側`parsers/ibaraki.ts`は`geometries.map((geom,pageIdx)=>
+parseTablePdfPageRows(geom,LAYOUT).map(r=>({...r,page:pageIdx+1})))`を追加するのみで済む
+設計にできた（`assembleSimpleTableRows`横展開時と同型の後方互換パターンを踏襲）。
+
+ページオフセットはpdftoppmビジョン確認（全5頁中、学校別詳細表は物理ページ1〜3・高萩清松
+「総合」quota120/applicants101が物理ページ1に、末尾の伊奈「普通」quota240/applicants239が
+物理ページ3の「全日制計」直前に実在）で+1（調整不要）、4〜5頁は定時制・連携型入学者選抜の
+別表でスコープ外と確認。sha256は前回kagawaで標準化したnode crypto+スクリプト挿入方式を継続。
+
+既存の共有関数テスト（`parse-table-pdf.test.ts`のibarakiレコード単位検証・水戸桜ノ牧常北校の
+結合セル確認テスト）の`.toEqual`完全一致アサーション1箇所を着手前に能動的にgrepで発見し
+分割代入で対処、jestフルスイート1発でgreen。
+
+累計1407件（assembleSimpleTableRows11県=1258+ibaraki149）。tsc実exit0・
+jestフルスイート545suites7667tests green。commit 50970de。
+
+次はassembleCompetitionRateRows利用の残り4県（ishikawa/shimane/tokushima/wakayama、
+いずれも同じ土台に乗るだけなので横展開コストは低い見込み）へ進む。
+
+| 8 | **★出典ロケータ**⚠️着手(2026-09-10・型基盤完了・12県目ibaraki完了(assembleCompetitionRateRows初横展開)・累計1407件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
 
 **2026-09-10着手**: §5順序#7（段階台帳）がhokkaido全14管内完結によりoita/okinawaの2県のみ
 未着手（前進手段なしと判断済み）となったため#8に着手。設計資料
