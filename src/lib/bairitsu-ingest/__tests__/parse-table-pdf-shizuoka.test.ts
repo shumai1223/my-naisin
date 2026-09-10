@@ -69,8 +69,8 @@ describe('bairitsu-ingest parse-table-pdf 汎用carry-forward組み立て (shizu
   });
 
   test('割合100%の内訳行は実質的な総数行として採用される（沼津西「芸術」の実例）', () => {
-    const record = parsed.find((r) => r.schoolName === '沼津西' && r.department === '芸術');
-    expect(record).toEqual({ schoolName: '沼津西', department: '芸術', quota: 40, finalApplicants: 28, finalRate: 0.7 });
+    const record = parsed.find((r) => r.schoolName === '沼津西' && r.department === '芸術')!;
+    expect({ schoolName: record.schoolName, department: record.department, quota: record.quota, finalApplicants: record.finalApplicants, finalRate: record.finalRate }).toEqual({ schoolName: '沼津西', department: '芸術', quota: 40, finalApplicants: 28, finalRate: 0.7 });
   });
 
   test('注記を伴わないⅠ/Ⅱは学科名の一部として採用される（浜松湖北「産業マネジメントⅠ・Ⅱ」の実例）', () => {

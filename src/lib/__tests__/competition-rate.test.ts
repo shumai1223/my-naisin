@@ -212,6 +212,7 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
       { code: 'saitama', count: 241 },
       { code: 'shiga', count: 56 },
       { code: 'shimane', count: 64 },
+      { code: 'shizuoka', count: 162 },
       { code: 'tochigi', count: 107 },
       { code: 'tokushima', count: 69 },
       { code: 'tottori', count: 43 },
@@ -1191,6 +1192,42 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
     it('同一page内でrowIndexの重複が無い', () => {
       const seen = new Set<string>();
       for (const r of r8.filter((r) => r.page !== undefined)) {
+        const key = `${r.page}|${r.rowIndex}`;
+        expect(seen.has(key)).toBe(false);
+        seen.add(key);
+      }
+    });
+
+    it('R7以前（fiscalYear明示済み）はまだpage/rowIndex未バックフィルのため全件null', () => {
+      const pre8 = file.records.filter((r) => r.fiscalYear !== undefined);
+      expect(pre8.length).toBeGreaterThan(0);
+      for (const r of pre8) {
+        expect(resolveSourceLocator(r, file.sources)).toBeNull();
+      }
+    });
+  });
+
+  describe('shizuoka R8（#8・34県目・tochigi型個別実装・全9頁分がすべてlocator解決可能）', () => {
+    const file = COMPETITION_RATE_BY_PREFECTURE['shizuoka']!;
+    const r8 = file.records.filter((r) => !r.fiscalYear);
+
+    it('R8の162件全件がresolveSourceLocatorで解決できる', () => {
+      expect(r8.length).toBe(162);
+      for (const r of r8) {
+        expect(r.page).toBeDefined();
+        const locator = resolveSourceLocator(r, file.sources);
+        expect(locator).not.toBeNull();
+        expect(locator!.pdfSha256).toBe('738a35b451cfd97123e1ccc83f5dd0dc822efd4f04e1b719476406b5eb55fc9f');
+        // 生PDF全12頁中、学校別詳細表は物理ページ1〜9のみ(10〜12頁目は定時制等でスコープ外)
+        expect(locator!.page).toBeGreaterThanOrEqual(1);
+        expect(locator!.page).toBeLessThanOrEqual(9);
+        expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
+      }
+    });
+
+    it('同一page内でrowIndexの重複が無い', () => {
+      const seen = new Set<string>();
+      for (const r of r8) {
         const key = `${r.page}|${r.rowIndex}`;
         expect(seen.has(key)).toBe(false);
         seen.add(key);

@@ -55,11 +55,21 @@ function resolveDepartment(deptNormRaw: string): { keep: boolean; department: st
   return { keep: false, department: '' };
 }
 
-/** 静岡県R8倍率PDFの学校別データ全頁分（`shizuoka-r8-geometry.json`）を解析する。 */
+/**
+ * 静岡県R8倍率PDFの学校別データ全頁分（`shizuoka-r8-geometry.json`）を解析する。
+ *
+ * ⚠️T-Y11F §5順序#8（出典ロケータ）: geometry配列9頁は生PDF全12頁中の物理ページ1〜9
+ * （10〜12頁目は定時制等のためスコープ外。2026-09-11にpdftotext -f 1で下田「普通科」
+ * quota120/applicants120/finalRate1.00が物理ページ1に、pdftotext -f 9で浜松市立
+ * 「普通科」quota360/applicants417/finalRate1.16が物理ページ9に実在することを確認）。
+ * オフセットは配列添字+1。
+ */
 export function parseShizuoka(geometries: PdfPageGeometry[]): ParsedCompetitionRow[] {
   const allRecords: ParsedCompetitionRow[] = [];
+  const rowIndexByPage = new Map<number, number>();
   let currentSchool = '';
-  for (const geom of geometries) {
+  geometries.forEach((geom, pageIdx) => {
+    const page = pageIdx + 1;
     const { chars } = geom;
     const sorted = [...chars].sort((a, b) => a.y0 - b.y0 || a.x0 - b.x0);
     const rows: { y: number; chars: PdfPageGeometry['chars'] }[] = [];
@@ -116,8 +126,10 @@ export function parseShizuoka(geometries: PdfPageGeometry[]): ParsedCompetitionR
 
       const postfixKey = `${currentSchool}|${department}|${quota}|${finalApplicants}`;
       const finalSchoolName = SCHOOL_NAME_POSTFIX.get(postfixKey) ?? currentSchool;
-      allRecords.push({ schoolName: finalSchoolName, department, quota, finalApplicants, finalRate });
+      const rowIndex = rowIndexByPage.get(page) ?? 0;
+      rowIndexByPage.set(page, rowIndex + 1);
+      allRecords.push({ schoolName: finalSchoolName, department, quota, finalApplicants, finalRate, page, rowIndex });
     }
-  }
+  });
   return allRecords;
 }

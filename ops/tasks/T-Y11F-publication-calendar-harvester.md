@@ -2608,7 +2608,31 @@ tsc実exit0・jestフルスイート545suites7722tests green(1発green)。
 
 次は残り3県(shizuoka/toyama/yamagata)へ進める。
 
-| 8 | **★出典ロケータ**⚠️着手(2026-09-11・型基盤完了・33県目shiga完了(source URL 404の初ケース・「両方の学科」合算5件は意図的にlocatorなし)・累計3317件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
+### #8 出典ロケータ 34県目=shizuoka（2026-09-11・tochigi型個別実装・全9頁分がすべてlocator解決可能）
+
+sourceIndex分布を確認したところ全162件が単一PDF(sources[0])由来で分岐なしと判明。
+shizuokaはgeometry配列9頁がPDF全12頁中の物理ページ1〜9に対応(10〜12頁目は定時制等の
+別表でスコープ外)。pdftotext -f 1で下田「普通科」quota120/applicants120/finalRate1.00
+が物理ページ1に、-f 9で浜松市立「普通科」quota360/applicants417/finalRate1.16が物理
+ページ9に実在することを確認し、オフセットは配列添字+1(調整不要)。
+
+shizuokaはtochigi型(単純carry-forward・BLOCK_OVERRIDEやINJECT等の合成レコードを持たない
+最単純構造)のため、geometries.forEach(geom,pageIdx)への変更と最終push箇所への
+rowIndexByPageマップ追加のみで162件全件にpage/rowIndexを付与できた(nagano/saga/shigaで
+続いた「一部レコードは意図的にlocatorなし」パターンとは異なり全件解決可能な久しぶりの
+シンプルケース)。
+
+既存テスト1箇所(parse-table-pdf-shizuoka.test.tsの沼津西「芸術」toEqual)を着手前に
+能動的にgrepで発見し分割代入で対処。既存テスト2件(registry.test.ts/competition-rate.
+test.ts)を更新、shizuoka用describeブロックを新設。PDFを再取得しsha256(738a35b4...)を
+計測(このURLはまだ生きていることを確認済み・shigaのような404は発生せず)。
+
+累計3479件(共有関数3種18県1898+個別実装16県1581)。
+tsc実exit0・jestフルスイート545suites7725tests green(1発green)。
+
+次は残り2県(toyama/yamagata)へ進める。
+
+| 8 | **★出典ロケータ**⚠️着手(2026-09-11・型基盤完了・34県目shizuoka完了・累計3479件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
 
 **2026-09-10着手**: §5順序#7（段階台帳）がhokkaido全14管内完結によりoita/okinawaの2県のみ
 未着手（前進手段なしと判断済み）となったため#8に着手。設計資料
