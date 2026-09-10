@@ -2381,7 +2381,33 @@ tsc実exit0・jestフルスイート545suites7698tests green。
 yamagata)へ進める(いずれも着手前にsourceIndex分布・PDF頁数とgeometry頁数の一致確認を
 継続)。
 
-| 8 | **★出典ロケータ**⚠️着手(2026-09-11・型基盤完了・25県目kochi完了・累計2627件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
+### #8 出典ロケータ 26県目=kumamoto（2026-09-11・罫線ブロック型個別実装・ブロックは毎ページ末尾で強制flush）
+
+sourceIndex分布を確認したところ全162件が単一PDF(sources[0]・出願変更状況)由来で分岐なし
+と判明。kumamotoは物理5頁・geometry配列5頁が完全一致(pdftotext -f 1で済々黌「普通」
+quota400/finalApplicants565/finalRate1.41が物理ページ1に実在を確認)、オフセット配列
+添字+1(調整不要)。
+
+parsers/kumamoto.tsは罫線ブロック単位で学校名/学科名を解決する構造で、ブロック
+(blockRows)がページ内で完結し次ページへ跨がない設計(毎ページ末尾で強制flush)であることを
+コード読解で確認できたため、各行のpageは単純にそのページのpageIdxと一致する。for-of
+(geometries)をforEach(geom,pageIdx)に変更しRawRow.pageを追加、flush()内のpush箇所に
+rowIndexByPageマップを追加(aomori/fukui/fukuoka/gifu/hiroshima/kochiと同型の個別実装
+パターン)。
+
+既存テスト2ファイル(parse-table-pdf-kumamoto.test.ts・kumamoto.test.ts)は事前grepで
+toEqual完全一致アサーションを確認したがいずれも単一フィールド抽出(department等)のみで
+page/rowIndex追加の影響を受けない構造だったため無改修で通過。既存テスト2件
+(registry.test.ts/competition-rate.test.ts)を更新、kumamoto用describeブロックを新設。
+PDFを再取得しsha256(7e92851a...)を計測。
+
+累計2789件(共有関数3種18県1898+個別実装8県891)。
+tsc実exit0・jestフルスイート545suites7701tests green(1発green)。
+
+次は残り10県(kyoto/nagano/nara/niigata/oita/saga/shiga/shizuoka/toyama/yamagata)へ
+進める。
+
+| 8 | **★出典ロケータ**⚠️着手(2026-09-11・型基盤完了・26県目kumamoto完了・累計2789件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
 
 **2026-09-10着手**: §5順序#7（段階台帳）がhokkaido全14管内完結によりoita/okinawaの2県のみ
 未着手（前進手段なしと判断済み）となったため#8に着手。設計資料

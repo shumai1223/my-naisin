@@ -199,6 +199,7 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
       { code: 'kagawa', count: 68 },
       { code: 'kagoshima', count: 156 },
       { code: 'kochi', count: 75 },
+      { code: 'kumamoto', count: 162 },
       { code: 'miyagi', count: 129 },
       { code: 'nagasaki', count: 116 },
       { code: 'okinawa', count: 156 },
@@ -870,6 +871,42 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
         // 生PDF全2頁と概要ページ無しでgeometry配列2頁が完全一致するためオフセット+1
         expect(locator!.page).toBeGreaterThanOrEqual(1);
         expect(locator!.page).toBeLessThanOrEqual(2);
+        expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
+      }
+    });
+
+    it('同一page内でrowIndexの重複が無い', () => {
+      const seen = new Set<string>();
+      for (const r of r8) {
+        const key = `${r.page}|${r.rowIndex}`;
+        expect(seen.has(key)).toBe(false);
+        seen.add(key);
+      }
+    });
+
+    it('R7以前（fiscalYear明示済み）はまだpage/rowIndex未バックフィルのため全件null', () => {
+      const pre8 = file.records.filter((r) => r.fiscalYear !== undefined);
+      expect(pre8.length).toBeGreaterThan(0);
+      for (const r of pre8) {
+        expect(resolveSourceLocator(r, file.sources)).toBeNull();
+      }
+    });
+  });
+
+  describe('kumamoto R8（#8・26県目・罫線ブロック型個別実装・ブロックは毎ページ末尾で強制flush）', () => {
+    const file = COMPETITION_RATE_BY_PREFECTURE['kumamoto']!;
+    const r8 = file.records.filter((r) => !r.fiscalYear);
+
+    it('R8の162件全件がresolveSourceLocatorで解決できる', () => {
+      expect(r8.length).toBe(162);
+      for (const r of r8) {
+        expect(r.page).toBeDefined();
+        const locator = resolveSourceLocator(r, file.sources);
+        expect(locator).not.toBeNull();
+        expect(locator!.pdfSha256).toBe('7e92851a76f85de3a845828fc47290ebc46c3885d4cb347b5fc585af16a80b11');
+        // 生PDF全5頁と概要ページ無しでgeometry配列5頁が完全一致するためオフセット+1
+        expect(locator!.page).toBeGreaterThanOrEqual(1);
+        expect(locator!.page).toBeLessThanOrEqual(5);
         expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
       }
     });

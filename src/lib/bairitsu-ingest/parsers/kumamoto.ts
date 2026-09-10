@@ -33,9 +33,10 @@ interface RawRow {
   applicantsText: string;
   rateText: string;
   isBlockEnd: boolean;
+  page: number;
 }
 
-function extractRows(geom: PdfPageGeometry): RawRow[] {
+function extractRows(geom: PdfPageGeometry, page: number): RawRow[] {
   const { chars, hlines } = geom;
   const fullLineX0Max = 100;
   const sorted = [...hlines].sort((a, b) => a.y - b.y);
@@ -74,6 +75,7 @@ function extractRows(geom: PdfPageGeometry): RawRow[] {
       applicantsText: join(cell[ROLES.finalApplicants]),
       rateText: join(cell[ROLES.finalRate]),
       isBlockEnd: merged[i + 1].x0 <= fullLineX0Max,
+      page,
     });
   }
   const cutIdx = rows.findIndex((r) => !r.departmentRaw && normalizeExtractedText(r.schoolNameRaw) === '計');
@@ -95,12 +97,20 @@ function resolveSingleDeptSchool(schoolNameRaw: string, departmentRaw: string, p
   return { schoolName: namePrefix + raw, department: departmentRaw };
 }
 
-/** 熊本県R8倍率PDFの学校別データ全5頁分（`kumamoto-r8-geometry.json`）を解析する。 */
+/**
+ * 熊本県R8倍率PDFの学校別データ全5頁分（`kumamoto-r8-geometry.json`）を解析する。
+ *
+ * ⚠️T-Y11F §5順序#8（出典ロケータ）: pageは各行が属する物理ページ番号（配列添字+offset）。
+ * ブロック(blockRows)は毎ページ末尾で強制flushされ次ページへ跨がないため、行のpageは常に
+ * そのブロックのflush元と一致する。rowIndexByPageで同一ページ内の出力順を0始まりで採番。
+ */
 export function parseKumamoto(geometries: PdfPageGeometry[]): ParsedCompetitionRow[] {
   const allRecords: ParsedCompetitionRow[] = [];
+  const rowIndexByPage = new Map<number, number>();
   let prevBlockSchoolName = '';
-  for (const geom of geometries) {
-    const scoped = extractRows(geom);
+  geometries.forEach((geom, pageIdx) => {
+    const page = pageIdx + 1;
+    const scoped = extractRows(geom, page);
     let blockRows: RawRow[] = [];
     const flush = () => {
       if (blockRows.length === 0) return;
@@ -134,7 +144,9 @@ export function parseKumamoto(geometries: PdfPageGeometry[]): ParsedCompetitionR
         if (!Number.isFinite(finalApplicants) || !Number.isFinite(finalRate)) continue;
 
         const overridden = KUKURI_OVERRIDE.get(`${blockSchoolName}|${quota}|${finalApplicants}`);
-        allRecords.push({ schoolName: blockSchoolName, department: overridden ?? dept, quota, finalApplicants, finalRate });
+        const rowIndex = rowIndexByPage.get(r.page) ?? 0;
+        rowIndexByPage.set(r.page, rowIndex + 1);
+        allRecords.push({ schoolName: blockSchoolName, department: overridden ?? dept, quota, finalApplicants, finalRate, page: r.page, rowIndex });
       }
       blockRows = [];
     };
@@ -143,6 +155,6 @@ export function parseKumamoto(geometries: PdfPageGeometry[]): ParsedCompetitionR
       if (row.isBlockEnd) flush();
     }
     flush();
-  }
+  });
   return allRecords;
 }
