@@ -5,15 +5,16 @@
 
 ---
 
-最終更新              2026-09-11 (oita追加)
+最終更新              2026-09-11 (saga追加)
 いまやっていること     T-Y11F §5順序#8（出典ロケータ）進行中。共有関数3種18県(1898)+
-                      個別実装13県(前回累計1215+oita81=1296)=累計3194件
-今日やったこと         oita: pendingキュー型個別実装(aomori/fukui型)。全81件locator解決・
-                      全545suites7716tests green(1発)・commit・push済み。§5順序#7
-                      (段階台帳)でoitaを見送った経緯とは無関係な別タスクと確認
-在庫の残り            36登録パーサ県のうち31県完了・残り5県(saga/shiga/shizuoka/
-                      toyama/yamagata)は個別実装のみ。+R7以前の年度別リプレイ+ビジョン
-                      11県7,191件が未着手
+                      個別実装14県(前回累計1296+saga67=1363)=累計3261件
+今日やったこと         saga: 位置ベース補完4件(INJECT_BEFORE_FIRST_DEPARTMENT3件+白石
+                      1件)は意図的にlocatorなし(ishikawa/kyoto/naganoに続く4例目)。
+                      71件中67件locator解決・全545suites7719tests green(1発)・
+                      commit・push済み
+在庫の残り            36登録パーサ県のうち32県完了・残り4県(shiga/shizuoka/toyama/
+                      yamagata)は個別実装のみ。+R7以前の年度別リプレイ+ビジョン11県
+                      7,191件が未着手
 払底の見込み           22データ点いずれも同程度の負荷。sourceIndex事前確認の運用が定着し
                       fukuoka級の複雑さへの対応コストは制御下にある
 詰まっていること        aichi（Imperva WAF一時ブロックが継続中）。oita/okinawa(競争率

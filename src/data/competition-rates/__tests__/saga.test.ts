@@ -46,8 +46,8 @@ describe('佐賀県 倍率パイプラインα（Y-6・全日制32校71レコー
   it('凡例記載の9組＋凡例漏れの1組(嬉野)を含むくくり募集10組が正しく収録されている', () => {
     const kukuriRecords = r8.filter((r) => r.department.includes('くくり募集'));
     expect(kukuriRecords).toHaveLength(10);
-    const ureshino = r8.find((r) => r.schoolName === '嬉野' && r.department.includes('くくり募集'));
-    expect(ureshino).toEqual({
+    const ureshino = r8.find((r) => r.schoolName === '嬉野' && r.department.includes('くくり募集'))!;
+    expect({ schoolName: ureshino.schoolName, department: ureshino.department, quota: ureshino.quota, finalApplicants: ureshino.finalApplicants, finalRate: ureshino.finalRate }).toEqual({
       schoolName: '嬉野',
       department: '電気科・建築科（くくり募集）',
       quota: 25,

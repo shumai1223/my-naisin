@@ -59,7 +59,8 @@ describe('bairitsu-ingest parse-table-pdf 汎用carry-forward組み立て (saga 
   });
 
   test('凡例に無い読点表記のくくり募集も検出される（嬉野「電気科・建築科」の実例）', () => {
-    expect(parsed.find((r) => r.schoolName === '嬉野' && r.department.includes('建築科'))).toEqual({
+    const ureshino = parsed.find((r) => r.schoolName === '嬉野' && r.department.includes('建築科'))!;
+    expect({ schoolName: ureshino.schoolName, department: ureshino.department, quota: ureshino.quota, finalApplicants: ureshino.finalApplicants, finalRate: ureshino.finalRate }).toEqual({
       schoolName: '嬉野',
       department: '電気科・建築科（くくり募集）',
       quota: 25,

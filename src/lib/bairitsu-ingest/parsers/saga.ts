@@ -35,11 +35,22 @@ const INJECT_BEFORE_FIRST_DEPARTMENT = new Map<string, ParsedCompetitionRow>([
   ['唐津商業', { schoolName: '唐津商業', department: '商業科・会計科（くくり募集）', quota: 140, finalApplicants: 158, finalRate: 1.13 }],
 ]);
 
-/** 佐賀県R8倍率PDFの学校別データ全頁分（`saga-r8-geometry.json`）を解析する。 */
+/**
+ * 佐賀県R8倍率PDFの学校別データ全頁分（`saga-r8-geometry.json`）を解析する。
+ *
+ * ⚠️T-Y11F §5順序#8（出典ロケータ）: geometry配列2頁は生PDF全3頁中の物理ページ1〜2
+ * （3頁目は定時制のためスコープ外。2026-09-11にpdftotext -f 1で鳥栖「普通科」quota117/
+ * applicants125/finalRate1.07が物理ページ1に実在することを確認）。オフセットは配列
+ * 添字+1。INJECT_BEFORE_FIRST_DEPARTMENT・白石の商業科くくり募集の計4組は「座標抽出
+ * そのものが検出できなかった位置ベース補完」のため、単一の行位置に帰属できず
+ * page/rowIndexを意図的に付与しない（ishikawa/kyoto/naganoと同型のY-0対応）。
+ */
 export function parseSaga(geometries: PdfPageGeometry[]): ParsedCompetitionRow[] {
   const allRecords: ParsedCompetitionRow[] = [];
+  const rowIndexByPage = new Map<number, number>();
   let currentSchool = '';
-  for (const geom of geometries) {
+  geometries.forEach((geom, pageIdx) => {
+    const page = pageIdx + 1;
     const { chars } = geom;
     const sorted = [...chars].sort((a, b) => a.y0 - b.y0 || a.x0 - b.x0);
     const rows: { y: number; chars: PdfPageGeometry['chars'] }[] = [];
@@ -93,12 +104,15 @@ export function parseSaga(geometries: PdfPageGeometry[]): ParsedCompetitionRow[]
       const override = KUKURI_OVERRIDE.get(`${currentSchool}|${deptNorm}|${quota}|${finalApplicants}`);
       let department = override ?? normalizeDepartmentTextFullwidth(deptNorm);
       if (currentSchool === '唐津青翔' && department === 'ｅスポーツ学科') department = 'eスポーツ学科';
-      allRecords.push({ schoolName: currentSchool, department, quota, finalApplicants, finalRate });
+      const rowIndex = rowIndexByPage.get(page) ?? 0;
+      rowIndexByPage.set(page, rowIndex + 1);
+      allRecords.push({ schoolName: currentSchool, department, quota, finalApplicants, finalRate, page, rowIndex });
 
       if (currentSchool === '白石' && department === '普通科' && quota === 102) {
+        // 座標抽出そのものが検出できなかった位置ベース補完のためpage/rowIndexは付与しない。
         allRecords.push({ schoolName: '白石', department: '商業科・情報ビジネス科（くくり募集）', quota: 66, finalApplicants: 55, finalRate: 0.83 });
       }
     }
-  }
+  });
   return allRecords;
 }

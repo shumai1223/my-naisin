@@ -2550,7 +2550,36 @@ tsc実exit0・jestフルスイート545suites7716tests green(1発green)。
 
 次は残り5県(saga/shiga/shizuoka/toyama/yamagata)へ進める。
 
-| 8 | **★出典ロケータ**⚠️着手(2026-09-11・型基盤完了・31県目oita完了・累計3194件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
+### #8 出典ロケータ 32県目=saga（2026-09-11・位置ベース補完4件は意図的にlocatorなし）
+
+sourceIndex分布を確認したところ全71件が単一PDF(sources[0])由来で分岐なしと判明。sagaは
+生PDF全3頁中の物理ページ1〜2がgeometry配列2頁に対応(3頁目は定時制のためスコープ外)。
+pdftotext -f 1で鳥栖「普通科」quota117/applicants125/finalRate1.07が物理ページ1に実在
+することを確認し、オフセットは配列添字+1(調整不要)。
+
+sagaはパーサ自身のdocコメントに明記された「座標抽出そのものが検出できなかった4組の位置
+ベース補完」(INJECT_BEFORE_FIRST_DEPARTMENT 3件+白石の商業科くくり募集1件)を持つ構造
+で、これらは単一の行位置に帰属できないためpage/rowIndexを意図的に付与しない設計とした
+(ishikawa/kyoto/naganoに続く4例目のY-0対応)。parsers/saga.tsはfor-of(geometries)を
+forEach(geom,pageIdx)に変更、通常の行ベースpush(KUKURI_OVERRIDEを含む)にのみpage/
+rowIndexByPageで採番し、4件の位置ベース補完pushはそのまま素通しした。
+
+バックフィル時は前回naraで確立した「parsed配列のうちpage!==undefinedの行だけ」を対象に
+した絞り込み方式を再適用し67件がbackfill対象・4件は意図的にスキップ。複数行フォーマット
+2件(唐津西・鹿島のくくり募集)もnara/wakayama流の対応で処理。
+
+既存テスト2箇所(saga.test.tsの嬉野くくり募集・parse-table-pdf-saga.test.tsの嬉野同一
+テスト)のtoEqual完全一致アサーションを着手前に能動的にgrepで発見し分割代入で対処。
+既存テスト2件(registry.test.ts/competition-rate.test.ts)を更新、saga用describeブロック
+を新設。PDFを再取得しsha256(4f853725...)を計測。
+
+累計3261件(共有関数3種18県1898+個別実装14県1296+67=1363)。※saga分は71件中67件のみ
+locator付与。
+tsc実exit0・jestフルスイート545suites7719tests green(1発green)。
+
+次は残り4県(shiga/shizuoka/toyama/yamagata)へ進める。
+
+| 8 | **★出典ロケータ**⚠️着手(2026-09-11・型基盤完了・32県目saga完了(位置ベース補完4件は意図的にlocatorなし)・累計3261件) | 21,739件の各レコードに `{pdfSha256, page, rowIndex}` を付ける。R7以前は年度別ジオメトリでリプレイ、ビジョン11県7,191件は独立再読 | **約115h** |
 
 **2026-09-10着手**: §5順序#7（段階台帳）がhokkaido全14管内完結によりoita/okinawaの2県のみ
 未着手（前進手段なしと判断済み）となったため#8に着手。設計資料

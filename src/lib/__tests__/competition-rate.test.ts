@@ -208,6 +208,7 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
       { code: 'niigata', count: 93 },
       { code: 'oita', count: 81 },
       { code: 'okinawa', count: 156 },
+      { code: 'saga', count: 67 },
       { code: 'saitama', count: 241 },
       { code: 'shimane', count: 64 },
       { code: 'tochigi', count: 107 },
@@ -1105,6 +1106,48 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
     it('同一page内でrowIndexの重複が無い', () => {
       const seen = new Set<string>();
       for (const r of r8) {
+        const key = `${r.page}|${r.rowIndex}`;
+        expect(seen.has(key)).toBe(false);
+        seen.add(key);
+      }
+    });
+
+    it('R7以前（fiscalYear明示済み）はまだpage/rowIndex未バックフィルのため全件null', () => {
+      const pre8 = file.records.filter((r) => r.fiscalYear !== undefined);
+      expect(pre8.length).toBeGreaterThan(0);
+      for (const r of pre8) {
+        expect(resolveSourceLocator(r, file.sources)).toBeNull();
+      }
+    });
+  });
+
+  describe('saga R8（#8・32県目・位置ベース補完4件(INJECT_BEFORE_FIRST_DEPARTMENT3件+白石1件)は意図的にlocatorなし）', () => {
+    const file = COMPETITION_RATE_BY_PREFECTURE['saga']!;
+    const r8 = file.records.filter((r) => !r.fiscalYear);
+
+    it('R8の71件中67件がresolveSourceLocatorで解決でき、位置ベース補完4件は解決できない', () => {
+      expect(r8.length).toBe(71);
+      const resolved = r8.filter((r) => r.page !== undefined);
+      expect(resolved.length).toBe(67);
+      for (const r of resolved) {
+        const locator = resolveSourceLocator(r, file.sources);
+        expect(locator).not.toBeNull();
+        expect(locator!.pdfSha256).toBe('4f8537257f150458c79e90edf49e46eca3c54fa290437b4180455d9e9a06b6f2');
+        // 学校別詳細表は物理ページ1〜2(3頁目は定時制のためオフセット+1)
+        expect(locator!.page).toBeGreaterThanOrEqual(1);
+        expect(locator!.page).toBeLessThanOrEqual(2);
+        expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
+      }
+      const unresolved = r8.filter((r) => r.page === undefined);
+      expect(unresolved.length).toBe(4);
+      for (const r of unresolved) {
+        expect(resolveSourceLocator(r, file.sources)).toBeNull();
+      }
+    });
+
+    it('同一page内でrowIndexの重複が無い', () => {
+      const seen = new Set<string>();
+      for (const r of r8.filter((r) => r.page !== undefined)) {
         const key = `${r.page}|${r.rowIndex}`;
         expect(seen.has(key)).toBe(false);
         seen.add(key);
