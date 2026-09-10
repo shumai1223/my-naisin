@@ -418,6 +418,7 @@ describe('bairitsu-ingest registry（T-Y11E E-1）', () => {
   });
 
   it('gifuのパーサが登録されており、既存の手作業データと完全一致する結果を返す', () => {
+    // T-Y11F §5順序#8: page/rowIndexは出典ロケータ用に追加されたフィールド。quota等の既存値は変えていない
     const parser = getPrefectureParser('gifu');
     expect(parser).toBeDefined();
     const parsed = parser!(gifuR8Geometry as PdfPageGeometry[]);
@@ -429,6 +430,8 @@ describe('bairitsu-ingest registry（T-Y11E E-1）', () => {
         quota: e.quota,
         finalApplicants: e.finalApplicants,
         finalRate: e.finalRate,
+        page: e.page,
+        rowIndex: e.rowIndex,
       }))
     );
   });

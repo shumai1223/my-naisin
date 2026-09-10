@@ -59,7 +59,9 @@ describe('bairitsu-ingest parse-table-pdf 汎用carry-forward組み立て (gifu 
   });
 
   test('「会計」のような「計」を含む正当な学科名は誤って除外されない（岐阜商業の実例）', () => {
-    expect(parsed.find((r) => r.schoolName === '岐阜商業' && r.department === '会計')).toEqual({
+    // T-Y11F §5順序#8でpage/rowIndex（出典ロケータ用）が追加されたため、それ以外のフィールドで比較する
+    const record = parsed.find((r) => r.schoolName === '岐阜商業' && r.department === '会計');
+    expect({ schoolName: record?.schoolName, department: record?.department, quota: record?.quota, finalApplicants: record?.finalApplicants, finalRate: record?.finalRate }).toEqual({
       schoolName: '岐阜商業',
       department: '会計',
       quota: 80,

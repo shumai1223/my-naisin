@@ -18,12 +18,20 @@ function normalizeDepartmentTextFullwidth(s: string): string {
   return normalizeExtractedText(s).replace(/、/g, '・').replace(/\(/g, '（').replace(/\)/g, '）');
 }
 
-/** 岐阜県R8倍率PDFの学校別データ全頁分（`gifu-r8-geometry.json`）を解析する。 */
+/**
+ * 岐阜県R8倍率PDFの学校別データ全頁分（`gifu-r8-geometry.json`）を解析する。
+ *
+ * ⚠️T-Y11F §5順序#8（出典ロケータ）: pageオフセットは県ごとに異なるため生PDFで毎回実測する
+ * （2026-09-10確認: 詳細は本ファイルの変更コミット参照）。
+ */
 export function parseGifu(geometries: PdfPageGeometry[]): ParsedCompetitionRow[] {
   const allRecords: ParsedCompetitionRow[] = [];
+  const rowIndexByPage = new Map<number, number>();
   let currentSchool = '';
   let stopped = false;
-  for (const geom of geometries) {
+  for (let pageIdx = 0; pageIdx < geometries.length; pageIdx++) {
+    const geom = geometries[pageIdx];
+    const page = pageIdx + 1;
     if (stopped) break;
     const { chars } = geom;
     const sorted = [...chars].sort((a, b) => a.y0 - b.y0 || a.x0 - b.x0);
@@ -75,7 +83,9 @@ export function parseGifu(geometries: PdfPageGeometry[]): ParsedCompetitionRow[]
       const finalRate = Number(rateText);
       if (!Number.isFinite(quota) || quota <= 0) continue;
       if (!Number.isFinite(finalApplicants) || !Number.isFinite(finalRate)) continue;
-      allRecords.push({ schoolName: currentSchool, department, quota, finalApplicants, finalRate });
+      const rowIndex = rowIndexByPage.get(page) ?? 0;
+      rowIndexByPage.set(page, rowIndex + 1);
+      allRecords.push({ schoolName: currentSchool, department, quota, finalApplicants, finalRate, page, rowIndex });
     }
   }
   return allRecords;

@@ -190,6 +190,7 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
       { code: 'ehime', count: 99 },
       { code: 'fukui', count: 72 },
       { code: 'fukuoka', count: 66 },
+      { code: 'gifu', count: 134 },
       { code: 'gunma', count: 106 },
       { code: 'ibaraki', count: 149 },
       { code: 'ishikawa', count: 67 },
@@ -745,6 +746,31 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
       expect(otherSourced.length).toBe(125);
       for (const r of otherSourced) {
         expect(resolveSourceLocator(r, file.sources)).toBeNull();
+      }
+    });
+
+    it('R7以前（fiscalYear明示済み）はまだpage/rowIndex未バックフィルのため全件null', () => {
+      const pre8 = file.records.filter((r) => r.fiscalYear !== undefined);
+      expect(pre8.length).toBeGreaterThan(0);
+      for (const r of pre8) {
+        expect(resolveSourceLocator(r, file.sources)).toBeNull();
+      }
+    });
+  });
+
+  describe('gifu R8（#8・22県目・sourceIndex統一県(全134件がsourceIndex:0)での実データ検証）', () => {
+    const file = COMPETITION_RATE_BY_PREFECTURE['gifu']!;
+    const r8 = file.records.filter((r) => !r.fiscalYear);
+
+    it('R8の134件全件がresolveSourceLocatorで解決できる', () => {
+      for (const r of r8) {
+        const locator = resolveSourceLocator(r, file.sources);
+        expect(locator).not.toBeNull();
+        expect(locator!.pdfSha256).toBe('83e99c3f7c7983875529b0c803d10b7fac5c83636af601294b34f3bfaf2bdfba');
+        // 学校別詳細表は物理ページ1〜5（オフセット無し）
+        expect(locator!.page).toBeGreaterThanOrEqual(1);
+        expect(locator!.page).toBeLessThanOrEqual(5);
+        expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
       }
     });
 
