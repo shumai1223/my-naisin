@@ -122,6 +122,22 @@ describe('福井県 倍率パイプラインα（Y-6・全日制24校72レコー
     expect(r5Keys).toEqual(r6Keys);
   });
 
+  it('掛-1(学校別×多年度): 令和4年度(R4)分レコードが73件・24校収録され、公式「合計」3,732/3,843と完全一致する。学校名+学科名はR4/R5で完全一致する(学校再編なし)', () => {
+    const r4 = records.filter((r) => r.fiscalYear === '令和4年度（2022年度）');
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    expect(r4.length).toBe(73);
+    const distinctSchools = new Set(r4.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(24);
+    const sumQuota = r4.reduce((a, r) => a + r.quota, 0);
+    const sumApplicants = r4.reduce((a, r) => a + r.finalApplicants, 0);
+    expect(sumQuota).toBe(3732);
+    expect(sumApplicants).toBe(3843);
+
+    const r4Keys = new Set(r4.map((r) => `${r.schoolName}|${r.department}`));
+    const r5Keys = new Set(r5.map((r) => `${r.schoolName}|${r.department}`));
+    expect(r4Keys).toEqual(r5Keys);
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of FUKUI_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.pref\.fukui\.lg\.jp\//);

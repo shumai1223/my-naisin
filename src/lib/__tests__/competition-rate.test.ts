@@ -189,7 +189,7 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
       { code: 'aomori', count: 89 },
       { code: 'chiba', count: 188 },
       { code: 'ehime', count: 99 },
-      { code: 'fukui', count: 72 },
+      { code: 'fukui', count: 145 },
       { code: 'fukuoka', count: 66 },
       { code: 'fukushima', count: 99 },
       { code: 'gifu', count: 134 },
@@ -739,11 +739,26 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
       }
     });
 
-    it('R7以前（fiscalYear明示済み）はまだpage/rowIndex未バックフィルのため全件null', () => {
-      const pre8 = file.records.filter((r) => r.fiscalYear !== undefined);
-      expect(pre8.length).toBeGreaterThan(0);
-      for (const r of pre8) {
+    it('令和5〜7年度（fiscalYear明示済み）はまだpage/rowIndex未バックフィルのため全件null', () => {
+      const pre8NotR4 = file.records.filter(
+        (r) => r.fiscalYear !== undefined && r.fiscalYear !== '令和4年度（2022年度）'
+      );
+      expect(pre8NotR4.length).toBeGreaterThan(0);
+      for (const r of pre8NotR4) {
         expect(resolveSourceLocator(r, file.sources)).toBeNull();
+      }
+    });
+
+    it('令和4年度（T-Y11F §5順序#11で新規転記・page/rowIndex同時付与済み）の73件全件がresolveSourceLocatorで解決できる', () => {
+      const r4 = file.records.filter((r) => r.fiscalYear === '令和4年度（2022年度）');
+      expect(r4.length).toBe(73);
+      for (const r of r4) {
+        const locator = resolveSourceLocator(r, file.sources);
+        expect(locator).not.toBeNull();
+        expect(locator!.pdfSha256).toBe('5cc7e7c2621a3d2997db3ba9bf44b0e7d32a695c78330bc0dbacf6a95bf0e9dc');
+        expect(locator!.page).toBeGreaterThanOrEqual(1);
+        expect(locator!.page).toBeLessThanOrEqual(2);
+        expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
       }
     });
   });
