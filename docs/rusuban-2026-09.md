@@ -5,15 +5,17 @@
 
 ---
 
-最終更新              2026-09-11 (§5順序#10・軽量手順で6県確定・進行中)
-いまやっていること     T-Y11F §5順序#10（年度遡りの到達可能性）: 51県年中18県年
-                      確定(R5欠6県12県年+R4欠6県=akita/aomori/chiba/ehime/fukui/
-                      fukushima)。保留3県(fukuoka/gifu/gunma)。§5順序#8は完遂済み
-今日やったこと         軽量手順(WebSearch1発→有望なら1〜2回Wayback確認)に切替え
-                      チェック速度が大幅向上。1県平均1〜3回の呼び出しで確定できる
-                      ケースが大半。archive.orgは断続的に不安定(2回連続timeout×2回)
-次にやること           残り29県(gunma以降)へ軽量手順で着手継続。1県年最大3手・
-                      Y-0厳守(埋めない)。Wayback不調時は保留にして次回へ
+最終更新              2026-09-11 (§5順序#10・archive.org全体障害を検知)
+いまやっていること     T-Y11F §5順序#10（年度遡りの到達可能性）: 51県年中27県年の
+                      状況を記録(到達○19・対象外1=hyogo・保留7・未着手23)。
+                      §5順序#8は完遂済み
+今日やったこと         hiroshima/ibaraki/kagawaのR4到達を確定。hyogoは恒久ルールで
+                      対象外に。ishikawa/iwate確認中にarchive.org自体が
+                      「Temporarily Offline」の公式障害(503)と判明・Wayback依存の
+                      確認を一時停止
+次にやること           archive.orgの復旧を確認しつつ、Wayback非依存(WebSearch+
+                      現行サイトのみ)で進められる県から残り23県(kagoshima以降)に
+                      優先着手
 払底の見込み           22データ点いずれも同程度の負荷。sourceIndex事前確認の運用が定着し
                       fukuoka級の複雑さへの対応コストは制御下にある
 詰まっていること        aichi（Imperva WAF一時ブロックが継続中）。oita/okinawa(競争率
