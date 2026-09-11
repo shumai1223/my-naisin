@@ -164,6 +164,40 @@ describe('岡山県 倍率パイプラインα（Y-6・全日制49校+2校＝109
     expect(r6Keys).toEqual(r7Keys);
   });
 
+  it('掛-1(学校別×多年度・T-Y11F §5順序#11払底時の逃げ場): 令和4年度(R4)分レコードが110件・52校収録され、県立全日制/市立全日制それぞれ公式グランドトータル(7,360/7,975・104/91)と完全一致する。schoolName一覧はR5と完全一致（差分0件）', () => {
+    const r4 = records.filter((r) => r.fiscalYear === '令和4年度（2022年度）');
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    expect(r4.length).toBe(110);
+    const distinctSchools4 = new Set(r4.map((r) => r.schoolName));
+    expect(distinctSchools4.size).toBe(52);
+
+    const r4Pref = r4.filter((r) => !OKAYAMA_MUNICIPAL_SCHOOLS.includes(r.schoolName));
+    const r4City = r4.filter((r) => OKAYAMA_MUNICIPAL_SCHOOLS.includes(r.schoolName));
+    expect(r4Pref.reduce((a, r) => a + r.quota, 0)).toBe(7360);
+    expect(r4Pref.reduce((a, r) => a + r.finalApplicants, 0)).toBe(7975);
+    expect(r4City.reduce((a, r) => a + r.quota, 0)).toBe(104);
+    expect(r4City.reduce((a, r) => a + r.finalApplicants, 0)).toBe(91);
+
+    const r5Schools = new Set(r5.map((r) => r.schoolName));
+    expect(distinctSchools4).toEqual(r5Schools);
+  });
+
+  it('掛-1(R4→R5の学科構成差): くくり募集4校（東岡山工業・倉敷商業・玉島商業・津山商業）はR4→R5でquotaが大きく減少したが、いずれもA-B列/C/(A-B)倍率の内部整合は保たれている', () => {
+    const r4 = records.filter((r) => r.fiscalYear === '令和4年度（2022年度）');
+    const cases: Array<[string, string, number]> = [
+      ['東岡山工業', '機械・電子機械・電気（くくり募集）', 100],
+      ['倉敷商業', '商業・国際経済・情報処理（くくり募集）', 160],
+      ['玉島商業', 'ビジネス情報', 80],
+      ['津山商業', '地域ビジネス・情報ビジネス（くくり募集）', 80],
+    ];
+    for (const [schoolName, department, quota] of cases) {
+      const r = r4.find((x) => x.schoolName === schoolName && x.department === department);
+      expect(r).toBeDefined();
+      expect(r?.quota).toBe(quota);
+      expect(Math.abs((r?.finalRate ?? 0) - (r?.finalApplicants ?? 0) / quota)).toBeLessThan(0.01);
+    }
+  });
+
   it('sourcesが公式PDF URLを正しく記録している（R6分は原本削除のため教育委員会公式ミラーサイトを、R5分は原本削除のためWayback Machine経由の公式ドメインURLを許容）', () => {
     for (const s of OKAYAMA_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(
