@@ -202,6 +202,7 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
       { code: 'kochi', count: 75 },
       { code: 'kumamoto', count: 162 },
       { code: 'kyoto', count: 75 },
+      { code: 'mie', count: 108 },
       { code: 'miyagi', count: 129 },
       { code: 'nagano', count: 85 },
       { code: 'nagasaki', count: 116 },
@@ -1297,6 +1298,41 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
         // 生PDF全5頁中、学校別詳細表は物理ページ2〜4のみ(1頁目=表紙・5頁目=定時制)
         expect(locator!.page).toBeGreaterThanOrEqual(2);
         expect(locator!.page).toBeLessThanOrEqual(4);
+        expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
+      }
+    });
+
+    it('同一page内でrowIndexの重複が無い', () => {
+      const seen = new Set<string>();
+      for (const r of r8) {
+        const key = `${r.page}|${r.rowIndex}`;
+        expect(seen.has(key)).toBe(false);
+        seen.add(key);
+      }
+    });
+
+    it('R7以前（fiscalYear明示済み）はまだpage/rowIndex未バックフィルのため全件null', () => {
+      const pre8 = file.records.filter((r) => r.fiscalYear !== undefined);
+      expect(pre8.length).toBeGreaterThan(0);
+      for (const r of pre8) {
+        expect(resolveSourceLocator(r, file.sources)).toBeNull();
+      }
+    });
+  });
+
+  describe('mie R8（#8・ビジョン11県3県目・くくり募集7件を含む52校108レコード）', () => {
+    const file = COMPETITION_RATE_BY_PREFECTURE['mie']!;
+    const r8 = file.records.filter((r) => !r.fiscalYear);
+
+    it('R8の108件全件がresolveSourceLocatorで解決できる', () => {
+      expect(r8.length).toBe(108);
+      for (const r of r8) {
+        expect(r.page).toBeDefined();
+        const locator = resolveSourceLocator(r, file.sources);
+        expect(locator).not.toBeNull();
+        expect(locator!.pdfSha256).toBe('3e7c6589bdc8f71109f58c668163831f1ffe9f0a2e40ab982018077663bd60d6');
+        expect(locator!.page).toBeGreaterThanOrEqual(1);
+        expect(locator!.page).toBeLessThanOrEqual(3);
         expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
       }
     });

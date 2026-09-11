@@ -2745,6 +2745,26 @@ tsc実exit0・jestフルスイート545suites7737tests green(1発green)。
 hokkaidoは323レコードと大規模なため後回し、次は小規模県(mie108件/miyazaki104件/
 okayama109件)から着手する。
 
+### #8 出典ロケータ ビジョン11県 3県目=mie（2026-09-11・くくり募集7件を含む52校108レコード）
+
+miePDFは5頁(全日制課程は1〜3頁・4〜5頁は定時制でスコープ外)。pdftoppm 150dpiで画像化し
+3頁全てをRead toolで目視確認、学校名を上から順に読み取りデータファイルの記録順と突き合わ
+せて頁境界を特定(1頁目=桑名〜神戸理数=37件、2頁目=飯野〜名張青峰文理探究コース=34件、
+3頁目=松阪〜熊野青藍紀南校舎総合学科=37件、合計37+34+37=108件で完全一致を機械検算)。
+昴学園(総合学科)は前期選抜で全定員充足のため後期選抜募集人数が空欄=既存データでも0件と
+確認、収録漏れではなく正しい除外だった。
+
+既存テスト1箇所(mie.test.tsの桑名工業・伊賀白鳳くくり募集2件)のtoEqual完全一致アサーション
+を着手前に能動的にgrepで発見し共通bare()ヘルパーで対処。competition-rate.test.tsにmie用
+describeブロックを新設。PDFを再取得しsha256(3e7c6589...)を計測。
+
+累計3949件(共有関数3種18県1898+個別実装18県1746+ビジョン3県(yamaguchi98+fukushima99+
+mie108)=305)。
+tsc実exit0・jestフルスイート545suites7740tests green(1発green)。
+
+次は残り8県(aichi/hokkaido/hyogo/kanagawa/miyazaki/okayama/osaka/tokyo)へ進める。
+次点は小規模県のmiyazaki104件・okayama109件。
+
 **2026-09-10着手**: §5順序#7（段階台帳）がhokkaido全14管内完結によりoita/okinawaの2県のみ
 未着手（前進手段なしと判断済み）となったため#8に着手。設計資料
 （`ops/baselines/stage-ledger-unit-count-2026-09.md`・`ops/prompts/fable-staple-design-

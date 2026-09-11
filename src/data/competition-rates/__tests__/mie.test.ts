@@ -118,17 +118,25 @@ describe('三重県 倍率パイプラインα（Y-6・全日制52校108レコ�
     expect(distinctSchools.size).toBe(52);
   });
 
+  const bare = (r: { schoolName: string; department: string; quota: number; finalApplicants: number; finalRate: number }) => ({
+    schoolName: r.schoolName,
+    department: r.department,
+    quota: r.quota,
+    finalApplicants: r.finalApplicants,
+    finalRate: r.finalRate,
+  });
+
   it('くくり募集（複数学科・コースが後期選抜募集人数を共有）が正しく収録されている', () => {
-    const kuwanaKogyo1 = r8.find((r) => r.schoolName === '桑名工業' && r.department.includes('機械'));
-    expect(kuwanaKogyo1).toEqual({
+    const kuwanaKogyo1 = r8.find((r) => r.schoolName === '桑名工業' && r.department.includes('機械'))!;
+    expect(bare(kuwanaKogyo1)).toEqual({
       schoolName: '桑名工業',
       department: '機械・材料技術（くくり募集）',
       quota: 36,
       finalApplicants: 37,
       finalRate: 1.03,
     });
-    const igahoo1 = r8.find((r) => r.schoolName === '伊賀白鳳' && r.department.includes('機械'));
-    expect(igahoo1).toEqual({
+    const igahoo1 = r8.find((r) => r.schoolName === '伊賀白鳳' && r.department.includes('機械'))!;
+    expect(bare(igahoo1)).toEqual({
       schoolName: '伊賀白鳳',
       department: '機械・電子機械・建築デザイン（くくり募集）',
       quota: 48,
