@@ -5,17 +5,16 @@
 
 ---
 
-最終更新              2026-09-11 (§5順序#10着手・4/51県年確定)
-いまやっていること     T-Y11F §5順序#10（年度遡りの到達可能性）: 51県年中4県年を確定
-                      (hokkaido R5=○/R4=×・tochigi R5=×/R4=×)。§5順序#8(出典ロケータ)
-                      はR8全47都道府県完遂済み(累計5436件)
-今日やったこと         §10台帳(ops/baselines/backfill-reachability-2026-09.md)を新設。
-                      hokkaidoはWayback CDXで令和5年度PDFを発見・確定。tochigiは
-                      HTML案内ページはWaybackにあるがPDF本体未収録で到達×。途中
-                      archive.orgが429→timeoutで不安定化しWayback使用を中断・
-                      nara/niigata/oita/sagaの8県年は保留にして次回再試行
-次にやること           保留8県年のWayback再試行→残り39県(R4欠のみ)へ着手。
-                      1県年最大3手で打ち切りY-0厳守(取れないものは埋めない)
+最終更新              2026-09-11 (§5順序#10・R5欠6県12県年を確定)
+いまやっていること     T-Y11F §5順序#10（年度遡りの到達可能性）: R5欠6県(hokkaido/
+                      nara/niigata/oita/saga/tochigi)の12県年を全て確定(到達○7・
+                      ×5)。残り39県(R4欠のみ)は1県(chiba)途中。§5順序#8は完遂済み
+今日やったこと         nara/niigata/oitaはWaybackで旧URLの案内ページを発見し志願状況
+                      PDFへのリンクを確認して到達○。sagaはkiji ID連番方式でID特定
+                      できず到達×。archive.orgの一時的な不安定化は時間を置いて解消。
+                      chibaで深追いCDX調査が非効率と判明し軽量手順に見直し
+次にやること           軽量手順(WebSearch1発→有望なら1〜2回Wayback確認)で残り
+                      38県(R4欠のみ)へ着手。1県年最大3手・Y-0厳守(埋めない)
 払底の見込み           22データ点いずれも同程度の負荷。sourceIndex事前確認の運用が定着し
                       fukuoka級の複雑さへの対応コストは制御下にある
 詰まっていること        aichi（Imperva WAF一時ブロックが継続中）。oita/okinawa(競争率
