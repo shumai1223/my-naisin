@@ -109,6 +109,21 @@ describe('大阪府 倍率パイプラインα（Y-2・全6表の突合テスト
     }
   });
 
+  it('掛-1(学校別×多年度): 令和4年度(R4)分レコードが177件収録され、5表合計が公式値34,652/38,777と完全一致する', () => {
+    const r4 = records.filter((r) => r.fiscalYear === '令和4年度（2022年度）');
+    expect(r4.length).toBe(177);
+    const sumQuota = r4.reduce((a, r) => a + r.quota, 0);
+    const sumApplicants = r4.reduce((a, r) => a + r.finalApplicants, 0);
+    expect(sumQuota).toBe(34652);
+    expect(sumApplicants).toBe(38777);
+    const seen = new Set<string>();
+    for (const r of r4) {
+      const key = `${r.schoolName}|${r.department}`;
+      expect(seen.has(key)).toBe(false);
+      seen.add(key);
+    }
+  });
+
   it('前回のPDF読み取りで見落とした「桜塚」・修正した「豊島」「北千里」が正しい値で入っている', () => {
     const bare = (r: { schoolName: string; department: string; quota: number; finalApplicants: number; finalRate: number }) => ({
       schoolName: r.schoolName,
