@@ -296,9 +296,10 @@ W-0 の鮮度を確認する（主食ドリフト4回の教訓）。
    R5完了（81件）・4件目=akita R4完了（82件）・5件目=kochi R4完了（76件）・6件目=ehime
    R4完了（106件）・7件目=nagano R4完了（131件）・8件目=miyagi R4完了（132件）・9件目
    =fukushima R4完了（94件）・10件目=hiroshima R4完了（135件）・11件目=okayama R4完了
-   （110件）。詳細は下の「#11-1」〜「#11-11」参照。残り25県年（到達○のうちfukui/
-   niigata/oita/akita/kochi/ehime/nagano/miyagi/fukushima/hiroshima/okayama以外・
-   ibaraki R4/yamanashi R4/shimane R4/chiba R4は要再検討で保留=下記参照）が対象。**
+   （110件）・12件目=kumamoto R4完了（165件）。詳細は下の「#11-1」〜「#11-12」参照。
+   残り24県年（到達○のうちfukui/niigata/oita/akita/kochi/ehime/nagano/miyagi/
+   fukushima/hiroshima/okayama/kumamoto以外・ibaraki R4/yamanashi R4/shimane R4/
+   chiba R4は要再検討で保留=下記参照）が対象。**
 2. **定時制で `coverage='partial'` にした県の pendingDepartments を潰す。**
    現時点で fukuoka（単位制2期）・kochi（夜間部・通信制）・hiroshima。1県1〜2h
 3. **T-Y11C-4 の yamanashi 20件・yamaguchi 5件**（#9 に入っているが、単独でも取れる）
@@ -3627,6 +3628,51 @@ green を確認しcommit・push済（8f1e858）。
 次は残り25県年（到達○のうちfukui/niigata/oita/akita/kochi/ehime/nagano/miyagi/
 fukushima/hiroshima/okayama以外・ibaraki R4/yamanashi R4/shimane R4/chiba R4は
 保留）のいずれかを次イテレーションで選ぶ。
+
+### #11-12 kumamoto R4完了（2026-09-11・§11項目1の12件目）
+
+§5順序#10で到達可能性を確認済みだったkumamoto令和4年度分を実収集した。
+
+台帳が示したハブページ（site/kyouiku/122329.html）はライブで開くと「令和４年度
+（２０２２年度）熊本県公立高等学校入学者選抜における前期（特色）選抜等出願者数に
+ついて」で、必要な後期（一般）選抜の報告書ではなく別の報告書だった（§10の
+「到達○」＝URLが200を返すことの確認にすぎず、文書そのものの正誤は未確認だった、
+という罠。miyagi R4・okayama R4と同型）。WebSearchで正しい文書名「後期（一般）
+選抜における出願変更の状況について」（令和4年2月10日確定）を確認し、Wayback CDX
+検索で pref.kumamoto.jp/site/kyouiku/ 配下の2022年2月アーカイブ一覧から該当ページ
+（site/kyouiku/125429.html）を発見、そのスナップショット経由でPDF本体
+（uploaded/life/125429_237609_misc.pdf、全5頁）を取得した。
+
+R4のPDFはR5〜R7と同じくCJKラベル抽出不能な埋め込みフォント（pdftotextで数値のみ
+抽出でき学校名・学科名は読めない）だったため、全5頁をpdftoppm 250dpiビジョン
+解析で県立・市立の全日制52校165レコードを転記した。5頁目末尾の全日制「計」行と
+node.js機械集計が完全一致した（quota8,569・applicants7,692。初回転記で一致・
+再修正なし）。くくり募集3組（矢部「食農科学(農業科学コース)・(食・生活コース)」・
+大津「普通・理数」・上天草「普通・(グローカル文理コース)」）はR5〜R8と同一
+パターンで存在し、備考5の記載と完全一致することを確認した。
+
+schoolName一覧（52校）はR5と完全一致（差分0件）だが、5校で実在の学科再編・改称を
+確認した（いずれも印字値の内部整合が取れており転記誤りではない）: ①千原台は
+R4時点で4コース制（普通(国際経済コース)/普通(健康スポーツコース)/情報(OA会計
+コース)/情報(経営情報コース)・計quota100）だったが、R5以降は「情報ビジネス探究」
+「健康スポーツ探究」の2コース制（計quota60）に統合・改称。②岱志はR4時点で3コース制
+（普通/普通(体育コース)/普通(美術工芸コース)・無コース枠あり）だったが、R5以降は
+4コース制（アドバンスト/キャリア/スポーツ/美術工芸・無コース枠なし）に再編。
+③松橋はR4時点で2コース制（普通(文理総合コース)/普通(体育コース)）だったが、R5以降は
+「普通(地域創造コース)」1コースに統合。④高森はR4時点で「普通」単独（マンガ学科は
+存在せず）だったが、R5以降は「普通(グローカル探究コース)」「マンガ学科」の2学科制に
+再編。⑤大津の「普通(体育コース)」はR5〜R8では「普通(スポーツコース)」に改称。
+
+固定値回帰ガードテスト3本＋developersページ本文＋PoC納品物を連動更新（総件数
+22,856→23,021件・配布可能22,665→22,830件・学校数3,276のまま変化なし）。
+sourcesのURL正規表現テストにWayback経由URLを許容するパターンを追加（既存の
+`^https:\/\/www\.pref\.kumamoto\.jp\/`のみでは新しいWayback URLに不一致になる
+ため、okayama R4と同様の対応）。tsc --noEmit exit 0・jest 545 suites 7781 tests
+all green を確認しcommit・push済（871a8c4）。
+
+次は残り24県年（到達○のうちfukui/niigata/oita/akita/kochi/ehime/nagano/miyagi/
+fukushima/hiroshima/okayama/kumamoto以外・ibaraki R4/yamanashi R4/shimane R4/
+chiba R4は保留）のいずれかを次イテレーションで選ぶ。
 
 ## 守ること
 
