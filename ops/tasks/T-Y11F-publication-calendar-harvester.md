@@ -2720,6 +2720,31 @@ tsc実exit0・jestフルスイート545suites7734tests green(1発green)。
 tokyo)へ進める。hokkaidoは既存データが14管内・323レコードと大規模なため後回しにし、
 まず小規模県(fukushima99件/mie108件/miyazaki104件/okayama109件)から着手するのが効率的。
 
+### #8 出典ロケータ ビジョン11県 2県目=fukushima（2026-09-11・後期選抜のみ全日制50校99レコード）
+
+fukushimaは「後期選抜のみ」(前期選抜・連携型選抜は他県の特色選抜と同じ理由でスコープ外)
+というスコープで全日制50校99レコード。生PDFは2頁で、pdftoppm 200dpiで画像化しRead tool
+で目視確認したところ、1頁目に62校区分(福島明成〜会津農林の4学科、学校No.4〜47)、2頁目に
+残り37レコード(南会津〜小高産業技術、学校No.48〜71)+全日制合計行+定時制セクション(スコープ
+外)が掲載されていた。62+37=99でR8の総数と完全一致することを機械検算してから採用。
+
+小高産業技術の産業革新科3コース(環境化学/電子制御/ビジネスパイオニア)が複数行フォーマット
+(schoolName/department等が別々の行に展開される書式)だったため、nara/saga型のバックフィル
+手法(複数行ブロックの閉じ`}`直前にpage/rowIndexを挿入)を再適用した。
+
+fukushimaにはparse-table-pdf-fukushima.test.ts・registry.test.tsが存在しない(パーサ非
+登録のため)。競争率データ側のtoEqual完全一致アサーションも無かったため既存テストの改修は
+不要だった。competition-rate.test.tsにfukushima用describeブロックを新設。PDFを再取得し
+sha256(d42c2ffc...)を計測。
+
+累計3841件(共有関数3種18県1898+個別実装18県1746+ビジョン2県(yamaguchi98+fukushima99)
+=197)。
+tsc実exit0・jestフルスイート545suites7737tests green(1発green)。
+
+次は残り9県(aichi/hokkaido/hyogo/kanagawa/mie/miyazaki/okayama/osaka/tokyo)へ進める。
+hokkaidoは323レコードと大規模なため後回し、次は小規模県(mie108件/miyazaki104件/
+okayama109件)から着手する。
+
 **2026-09-10着手**: §5順序#7（段階台帳）がhokkaido全14管内完結によりoita/okinawaの2県のみ
 未着手（前進手段なしと判断済み）となったため#8に着手。設計資料
 （`ops/baselines/stage-ledger-unit-count-2026-09.md`・`ops/prompts/fable-staple-design-

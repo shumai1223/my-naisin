@@ -190,6 +190,7 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
       { code: 'ehime', count: 99 },
       { code: 'fukui', count: 72 },
       { code: 'fukuoka', count: 66 },
+      { code: 'fukushima', count: 99 },
       { code: 'gifu', count: 134 },
       { code: 'gunma', count: 106 },
       { code: 'hiroshima', count: 137 },
@@ -1296,6 +1297,41 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
         // 生PDF全5頁中、学校別詳細表は物理ページ2〜4のみ(1頁目=表紙・5頁目=定時制)
         expect(locator!.page).toBeGreaterThanOrEqual(2);
         expect(locator!.page).toBeLessThanOrEqual(4);
+        expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
+      }
+    });
+
+    it('同一page内でrowIndexの重複が無い', () => {
+      const seen = new Set<string>();
+      for (const r of r8) {
+        const key = `${r.page}|${r.rowIndex}`;
+        expect(seen.has(key)).toBe(false);
+        seen.add(key);
+      }
+    });
+
+    it('R7以前（fiscalYear明示済み）はまだpage/rowIndex未バックフィルのため全件null', () => {
+      const pre8 = file.records.filter((r) => r.fiscalYear !== undefined);
+      expect(pre8.length).toBeGreaterThan(0);
+      for (const r of pre8) {
+        expect(resolveSourceLocator(r, file.sources)).toBeNull();
+      }
+    });
+  });
+
+  describe('fukushima R8（#8・ビジョン11県2県目・後期選抜のみ全日制50校99レコード）', () => {
+    const file = COMPETITION_RATE_BY_PREFECTURE['fukushima']!;
+    const r8 = file.records.filter((r) => !r.fiscalYear);
+
+    it('R8の99件全件がresolveSourceLocatorで解決できる', () => {
+      expect(r8.length).toBe(99);
+      for (const r of r8) {
+        expect(r.page).toBeDefined();
+        const locator = resolveSourceLocator(r, file.sources);
+        expect(locator).not.toBeNull();
+        expect(locator!.pdfSha256).toBe('d42c2ffc7d0881ebc46889e847a11d38369c9b926fc840ff779e7df7e775da0d');
+        expect(locator!.page).toBeGreaterThanOrEqual(1);
+        expect(locator!.page).toBeLessThanOrEqual(2);
         expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
       }
     });
