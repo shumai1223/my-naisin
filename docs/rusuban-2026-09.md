@@ -5,14 +5,15 @@
 
 ---
 
-最終更新              2026-09-11 (mie追加)
+最終更新              2026-09-11 (miyazaki追加)
 いまやっていること     T-Y11F §5順序#8（出典ロケータ）: 登録パーサ36県完了+ビジョン
-                      3県完了。累計3949件(1898+1746+ビジョン3県305)
-今日やったこと         mie(ビジョン県3県目): くくり募集7件を含む52校108レコード。全108件
-                      locator解決・全545suites7740tests green(1発)・commit・push済み
-次にやること           残り8県(aichi/hokkaido/hyogo/kanagawa/miyazaki/okayama/
-                      osaka/tokyo)。hokkaidoは323レコードと大規模なため後回し、次は
-                      小規模県(miyazaki104/okayama109)から着手
+                      4県完了。累計4053件(1898+1746+ビジョン4県409)
+今日やったこと         miyazaki(ビジョン県4県目): 全日制34校104レコード。附属中内進生
+                      理数科の調整済み募集人員も既存データと整合確認。全104件locator
+                      解決・全545suites7743tests green(1発)・commit・push済み
+次にやること           残り7県(aichi/hokkaido/hyogo/kanagawa/okayama/osaka/tokyo)。
+                      hokkaidoは323レコードと大規模なため後回し、次は小規模県
+                      (okayama109)から着手
 払底の見込み           22データ点いずれも同程度の負荷。sourceIndex事前確認の運用が定着し
                       fukuoka級の複雑さへの対応コストは制御下にある
 詰まっていること        aichi（Imperva WAF一時ブロックが継続中）。oita/okinawa(競争率

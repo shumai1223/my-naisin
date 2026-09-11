@@ -204,6 +204,7 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
       { code: 'kyoto', count: 75 },
       { code: 'mie', count: 108 },
       { code: 'miyagi', count: 129 },
+      { code: 'miyazaki', count: 104 },
       { code: 'nagano', count: 85 },
       { code: 'nagasaki', count: 116 },
       { code: 'nara', count: 71 },
@@ -1331,6 +1332,41 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
         const locator = resolveSourceLocator(r, file.sources);
         expect(locator).not.toBeNull();
         expect(locator!.pdfSha256).toBe('3e7c6589bdc8f71109f58c668163831f1ffe9f0a2e40ab982018077663bd60d6');
+        expect(locator!.page).toBeGreaterThanOrEqual(1);
+        expect(locator!.page).toBeLessThanOrEqual(3);
+        expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
+      }
+    });
+
+    it('同一page内でrowIndexの重複が無い', () => {
+      const seen = new Set<string>();
+      for (const r of r8) {
+        const key = `${r.page}|${r.rowIndex}`;
+        expect(seen.has(key)).toBe(false);
+        seen.add(key);
+      }
+    });
+
+    it('R7以前（fiscalYear明示済み）はまだpage/rowIndex未バックフィルのため全件null', () => {
+      const pre8 = file.records.filter((r) => r.fiscalYear !== undefined);
+      expect(pre8.length).toBeGreaterThan(0);
+      for (const r of pre8) {
+        expect(resolveSourceLocator(r, file.sources)).toBeNull();
+      }
+    });
+  });
+
+  describe('miyazaki R8（#8・ビジョン11県4県目・全日制34校104レコード）', () => {
+    const file = COMPETITION_RATE_BY_PREFECTURE['miyazaki']!;
+    const r8 = file.records.filter((r) => !r.fiscalYear);
+
+    it('R8の104件全件がresolveSourceLocatorで解決できる', () => {
+      expect(r8.length).toBe(104);
+      for (const r of r8) {
+        expect(r.page).toBeDefined();
+        const locator = resolveSourceLocator(r, file.sources);
+        expect(locator).not.toBeNull();
+        expect(locator!.pdfSha256).toBe('32d6ee4959ec763a5487b159b6208c2e92f5038b57d417208addb8484db0aeca');
         expect(locator!.page).toBeGreaterThanOrEqual(1);
         expect(locator!.page).toBeLessThanOrEqual(3);
         expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);

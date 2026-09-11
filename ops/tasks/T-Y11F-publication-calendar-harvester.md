@@ -2765,6 +2765,27 @@ tsc実exit0・jestフルスイート545suites7740tests green(1発green)。
 次は残り8県(aichi/hokkaido/hyogo/kanagawa/miyazaki/okayama/osaka/tokyo)へ進める。
 次点は小規模県のmiyazaki104件・okayama109件。
 
+### #8 出典ロケータ ビジョン11県 4県目=miyazaki（2026-09-11・全日制34校104レコード）
+
+miyazakiPDFは3頁で全て全日制課程(定時制は別セクションだが本PDF末尾に小さく併記・スコープ
+外)。pdftoppm 150dpiで画像化し3頁全てをRead toolで目視確認、学校名を上から順に読み取り
+データファイルの記録順と突き合わせて頁境界を特定(1頁目=高千穂〜佐土原産業デザイン=40件、
+2頁目=宮崎大宮〜都城農業農業土木=45件、3頁目=都城工業〜福島普通=19件、合計40+45+19=104件
+で完全一致を機械検算)。宮崎西・都城泉ヶ丘の理数科は附属中学校進学予定者数を控除した調整済み
+募集人員が既存データに反映されており、脚注の説明と整合することを確認した。
+
+既存テスト2箇所(miyazaki.test.tsのapplicants=0の2件・附属中内進生理数科2件)のtoEqual
+完全一致アサーションを着手前に能動的にgrepで発見し共通bare()ヘルパーで対処。
+competition-rate.test.tsにmiyazaki用describeブロックを新設。PDFを再取得しsha256
+(32d6ee49...)を計測。
+
+累計4053件(共有関数3種18県1898+個別実装18県1746+ビジョン4県(yamaguchi98+fukushima99+
+mie108+miyazaki104)=409)。
+tsc実exit0・jestフルスイート545suites7743tests green(1発green)。
+
+次は残り7県(aichi/hokkaido/hyogo/kanagawa/okayama/osaka/tokyo)へ進める。
+次点は小規模県のokayama109件。
+
 **2026-09-10着手**: §5順序#7（段階台帳）がhokkaido全14管内完結によりoita/okinawaの2県のみ
 未着手（前進手段なしと判断済み）となったため#8に着手。設計資料
 （`ops/baselines/stage-ledger-unit-count-2026-09.md`・`ops/prompts/fable-staple-design-

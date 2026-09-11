@@ -43,15 +43,23 @@ describe('宮崎県 倍率パイプラインα（Y-6・全日制34校104レコ�
     expect(distinctSchools.size).toBe(34);
   });
 
+  const bare = (r: { schoolName: string; department: string; quota: number; finalApplicants: number; finalRate: number }) => ({
+    schoolName: r.schoolName,
+    department: r.department,
+    quota: r.quota,
+    finalApplicants: r.finalApplicants,
+    finalRate: r.finalRate,
+  });
+
   it('applicants=0の学科（延岡星雲・フロンティア/高鍋農業・畜産科学/小林秀峰・福祉）も正しく収録されている', () => {
-    expect(r8.find((r) => r.schoolName === '延岡星雲' && r.department === 'フロンティア')).toEqual({
+    expect(bare(r8.find((r) => r.schoolName === '延岡星雲' && r.department === 'フロンティア')!)).toEqual({
       schoolName: '延岡星雲',
       department: 'フロンティア',
       quota: 19,
       finalApplicants: 0,
       finalRate: 0,
     });
-    expect(r8.find((r) => r.schoolName === '高鍋農業' && r.department === '畜産科学')).toEqual({
+    expect(bare(r8.find((r) => r.schoolName === '高鍋農業' && r.department === '畜産科学')!)).toEqual({
       schoolName: '高鍋農業',
       department: '畜産科学',
       quota: 25,
@@ -61,14 +69,14 @@ describe('宮崎県 倍率パイプラインα（Y-6・全日制34校104レコ�
   });
 
   it('附属中内進生を含む理数科（宮崎西・都城泉ヶ丘）が調整済み募集人員で正しく収録されている', () => {
-    expect(r8.find((r) => r.schoolName === '宮崎西' && r.department === '理数')).toEqual({
+    expect(bare(r8.find((r) => r.schoolName === '宮崎西' && r.department === '理数')!)).toEqual({
       schoolName: '宮崎西',
       department: '理数',
       quota: 30,
       finalApplicants: 48,
       finalRate: 1.6,
     });
-    expect(r8.find((r) => r.schoolName === '都城泉ヶ丘' && r.department === '理数')).toEqual({
+    expect(bare(r8.find((r) => r.schoolName === '都城泉ヶ丘' && r.department === '理数')!)).toEqual({
       schoolName: '都城泉ヶ丘',
       department: '理数',
       quota: 26,
