@@ -120,6 +120,41 @@ describe('長崎県 倍率パイプラインα（Y-6・全日制55校116レコ�
     expect(onlyInR6).toEqual([]);
   });
 
+  it('掛-1(学校別×多年度・5年度目): 令和4年度(R4)分レコードが114件収録され、「総計」(quota5,577・applicants4,277・倍率0.77=県立計8,680/4,128+市立計240/149)と完全一致する。長崎北陽台/佐世保南/島原/大村/猶興館の探究系学科はR4時点では「理数」または「数理探究」(R5で「文理探究」へ改称)、市立長崎商業はR4時点では「情報国際ビジネス」の単一学科(R5で3学科に再編)で、それ以外の109キーはR4/R5で完全一致する', () => {
+    const r4 = records.filter((r) => r.fiscalYear === '令和4年度（2022年度）');
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    expect(r4.length).toBe(114);
+    expect(r4.reduce((a, r) => a + r.quota, 0)).toBe(5577);
+    expect(r4.reduce((a, r) => a + r.finalApplicants, 0)).toBe(4277);
+
+    const r4Municipal = r4.filter((r) => r.schoolName === '市立長崎商業');
+    expect(r4Municipal.reduce((a, r) => a + r.quota, 0)).toBe(120);
+    expect(r4Municipal.reduce((a, r) => a + r.finalApplicants, 0)).toBe(149);
+
+    const r4Schools = new Set(r4.map((r) => r.schoolName));
+    expect(r4Schools.size).toBe(55);
+
+    const r4Keys = new Set(r4.map((r) => `${r.schoolName}|${r.department}`));
+    const r5Keys2 = new Set(r5.map((r) => `${r.schoolName}|${r.department}`));
+    const onlyInR4 = [...r4Keys].filter((k) => !r5Keys2.has(k)).sort();
+    expect(onlyInR4).toEqual(
+      ['大村|数理探究', '島原|理数', '市立長崎商業|情報国際ビジネス', '猶興館|理数', '長崎北陽台|理数'].sort()
+    );
+    const onlyInR5FromR4 = [...r5Keys2].filter((k) => !r4Keys.has(k)).sort();
+    expect(onlyInR5FromR4).toEqual(
+      [
+        '大村|文理探究',
+        '市立長崎商業|スポーツビジネスコース',
+        '市立長崎商業|情報',
+        '市立長崎商業|総合ビジネス',
+        '佐世保南|文理探究',
+        '島原|文理探究',
+        '猶興館|文理探究',
+        '長崎北陽台|文理探究',
+      ].sort()
+    );
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of NAGASAKI_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.pref\.nagasaki\.jp\//);
