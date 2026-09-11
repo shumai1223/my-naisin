@@ -143,6 +143,21 @@ describe('高知県 倍率パイプラインα（Y-6・Ａ日程75レコード�
     expect(onlyInR8).toEqual(['清水|普通(未来)']);
   });
 
+  it('掛-1(学校別×多年度): 令和4年度(R4)分レコードが76件・33校収録され（T-Y11F §5順序#11）、公式「合計」行(quota4,875・applicants3,555)とnode.js機械集計が完全一致する。R4のみ「安芸」（普通のみ）と「安芸桜ケ丘」（工業(機械)/工業(土木)/商業(ビジネス)）が別の学校として存在し、R5以降は安芸桜ケ丘の3学科が安芸に統合される（実際の学校統廃合）', () => {
+    const r4 = records.filter((r) => r.fiscalYear === '令和4年度（2022年度）');
+    expect(r4.length).toBe(76);
+    const distinctSchools = new Set(r4.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(33);
+    const sumQuota = r4.reduce((a, r) => a + r.quota, 0);
+    const sumApplicants = r4.reduce((a, r) => a + r.finalApplicants, 0);
+    expect(sumQuota).toBe(4875);
+    expect(sumApplicants).toBe(3555);
+
+    expect(r4.filter((r) => r.schoolName === '安芸')).toHaveLength(1);
+    expect(r4.filter((r) => r.schoolName === '安芸桜ケ丘')).toHaveLength(3);
+    expect(r4.some((r) => r.schoolName === '高知国際' && r.department === '探究(グローバル)')).toBe(true);
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of KOCHI_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.pref\.kochi\.lg\.jp\//);
