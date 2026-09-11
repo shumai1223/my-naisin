@@ -294,10 +294,10 @@ W-0 の鮮度を確認する（主食ドリフト4回の教訓）。
    ⚠️ Y-0 は不変。取れない県年は「取れない」と台帳に書いて次へ行く（水増ししない）
    **✅2026-09-11 1件目=fukui R4完了（73件）・2件目=niigata R5完了（97件）・3件目=oita
    R5完了（81件）・4件目=akita R4完了（82件）・5件目=kochi R4完了（76件）・6件目=ehime
-   R4完了（106件）・7件目=nagano R4完了（131件）・8件目=miyagi R4完了（132件）。詳細は
-   下の「#11-1」〜「#11-8」参照。残り28県年（到達○のうちfukui/niigata/oita/akita/
-   kochi/ehime/nagano/miyagi以外・ibaraki R4/yamanashi R4/shimane R4/chiba R4は
-   要再検討で保留=下記参照）が対象。**
+   R4完了（106件）・7件目=nagano R4完了（131件）・8件目=miyagi R4完了（132件）・9件目
+   =fukushima R4完了（94件）。詳細は下の「#11-1」〜「#11-9」参照。残り27県年（到達○の
+   うちfukui/niigata/oita/akita/kochi/ehime/nagano/miyagi/fukushima以外・ibaraki
+   R4/yamanashi R4/shimane R4/chiba R4は要再検討で保留=下記参照）が対象。**
 2. **定時制で `coverage='partial'` にした県の pendingDepartments を潰す。**
    現時点で fukuoka（単位制2期）・kochi（夜間部・通信制）・hiroshima。1県1〜2h
 3. **T-Y11C-4 の yamanashi 20件・yamaguchi 5件**（#9 に入っているが、単独でも取れる）
@@ -3524,6 +3524,38 @@ tsc --noEmit exit 0・jest 545 suites 7775 tests all green を確認しcommit・
 次は残り28県年（到達○のうちfukui/niigata/oita/akita/kochi/ehime/nagano/miyagi
 以外・ibaraki R4/yamanashi R4/shimane R4/chiba R4は保留）のいずれかを次イテレー
 ションで選ぶ。
+
+### #11-9 fukushima R4完了（2026-09-11・§11項目1の9件目）
+
+§5順序#10で到達可能性を確認済みだったfukushima令和4年度分を実収集した。ライブ
+サイトから「令和4年度福島県立高等学校入学者選抜後期選抜志願状況（出願先変更後）」
+（令和4年3月17日公表・全日制3頁、うち1〜2頁が学校別表・3頁が定時制表＋全日制/定時制
+比較表）https://www.pref.fukushima.lg.jp/uploaded/attachment/500729.pdf を取得
+（ライブ200確認済み）。R5〜R8と同様画像スキャンPDF（テキスト層なし）でpdftoppm
+300dpiビジョン解析で全94レコードを転記した。
+
+3頁目の比較表（実施学校数48校・実施学科コース数94学科コース・後期選抜募集定員1,825
+人・志願者数(一次)234人・志願者数(出願先変更後)228人）と突合し、実施学校数・学科
+コース数・quota合計の3項目は完全一致したが、出願先変更後の志願者数はnode.js機械集計
+229に対し公表値228で1名の差異が生じた。学校別表を2回独立に読み直して全94行を再確認
+したが転記ミスは見つからず（小名浜海星「海洋工学」の願書提出後0→出願先変更後1という
+増加も含め印字は明瞭）、比較表側の集計が学校別表の最終版に対し1名分未反映という資料
+自体の軽微な不整合と判断し、Y-0「1データ点1出典」原則により個票（学校別表）の印字値
+をそのまま採用した。
+
+fukushima既存の構造的知見（後期選抜募集定員は前期選抜の合格状況に応じた残り枠であり
+対象学科が年ごとに総入れ替わる）どおり、R4にのみ登場する学校8校（梁川・保原・二本松
+工業・安達東・郡山・塙工業・耶麻農業・田島）を確認した。この構造上、他県のような
+学校名+学科名の完全一致検証は意味を持たないため実施しない（既存の設計方針を踏襲）。
+
+固定値回帰ガードテスト3本＋developersページ本文＋PoC納品物を連動更新（総件数
+22,517→22,611件・配布可能22,326→22,420件・学校数3,268→3,276）。
+tsc --noEmit exit 0・jest 545 suites 7776 tests all green を確認しcommit・push済
+（33d64ec）。
+
+次は残り27県年（到達○のうちfukui/niigata/oita/akita/kochi/ehime/nagano/miyagi/
+fukushima以外・ibaraki R4/yamanashi R4/shimane R4/chiba R4は保留）のいずれかを
+次イテレーションで選ぶ。
 
 ## 守ること
 
