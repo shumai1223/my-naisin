@@ -297,10 +297,11 @@ W-0 の鮮度を確認する（主食ドリフト4回の教訓）。
    R4完了（106件）・7件目=nagano R4完了（131件）・8件目=miyagi R4完了（132件）・9件目
    =fukushima R4完了（94件）・10件目=hiroshima R4完了（135件）・11件目=okayama R4完了
    （110件）・12件目=kumamoto R4完了（165件）。2026-09-12 13件目=kyoto R4完了
-   （76件）・14件目=mie R4完了（108件）。詳細は下の「#11-1」〜「#11-14」参照。
-   残り22県年（到達○のうちfukui/niigata/oita/akita/kochi/ehime/nagano/miyagi/
-   fukushima/hiroshima/okayama/kumamoto/kyoto/mie以外・ibaraki R4/yamanashi R4/
-   shimane R4/chiba R4は要再検討で保留=下記参照）が対象。**
+   （76件）・14件目=mie R4完了（108件）・15件目=miyazaki R4完了（104件）。詳細は
+   下の「#11-1」〜「#11-15」参照。残り21県年（到達○のうちfukui/niigata/oita/
+   akita/kochi/ehime/nagano/miyagi/fukushima/hiroshima/okayama/kumamoto/kyoto/
+   mie/miyazaki以外・ibaraki R4/yamanashi R4/shimane R4/chiba R4は要再検討で
+   保留=下記参照）が対象。**
 2. **定時制で `coverage='partial'` にした県の pendingDepartments を潰す。**
    現時点で fukuoka（単位制2期）・kochi（夜間部・通信制）・hiroshima。1県1〜2h
 3. **T-Y11C-4 の yamanashi 20件・yamaguchi 5件**（#9 に入っているが、単独でも取れる）
@@ -3744,6 +3745,40 @@ tsc --noEmit exit 0・jest 545 suites 7784 tests all green を確認しcommit・
 次は残り22県年（到達○のうちfukui/niigata/oita/akita/kochi/ehime/nagano/miyagi/
 fukushima/hiroshima/okayama/kumamoto/kyoto/mie以外・ibaraki R4/yamanashi R4/
 shimane R4/chiba R4は保留）のいずれかを次イテレーションで選ぶ。
+
+### #11-15 miyazaki R4完了（2026-09-12・§11項目1の15件目）
+
+§5順序#10で到達可能性を確認済みだったmiyazaki令和4年度分を実収集した。
+
+台帳のハブページ（kokokyoiku/kyoikukosodate/kyoiku/20210615161157.html・「県立
+高等学校生徒募集（令和4年春入学生）に係る情報提供について」）はWebFetchで一発で
+開けて、その場に「一般入学者選抜志願状況（志願変更後）」PDF（令和4年2月28日公表・
+全3頁）への直リンクが掲載されていた。miyagi/okayama/kumamotoで繰り返し踏んだ
+「到達可能=正しい文書ではない」の罠を今回は踏まず、Wayback不要で一発到達できた。
+
+R5〜R8と同様pdftotextでは学校名・学科名が一切読めず、pdftoppm 300dpiビジョン解析で
+全日制104レコード（34校）を転記した。ページ3末尾「全日制合計」行（quota4,301・
+applicants3,521・倍率0.82）とnode.js機械集計が完全一致した（初回転記で一致）。
+学校・学科構成はR5と完全一致（学校再編なし・飯野「普通」もR4時点はまだ「みらい
+探究」への改称前）。
+
+⚠️教訓: 転記時、門川・本庄の「総合」学科をpdftoppm画像から目視で「総合学科」と
+記録していたが、これはR5〜R8で一貫して「総合」（科を含まない）と収録されている
+命名規則と食い違っていた。この誤りは全日制合計の数値一致だけでは検出できず
+（quota/applicantsの値自体は正しく転記できていたため）、R5とのschoolName+
+department完全一致テストを書いて初めて検出できた（テスト失敗のスタックトレースで
+即座に該当2件を特定・修正）。数値の合計一致は「正しい学科に正しい数値が入って
+いるか」までは保証しないため、隣接年度とのキー突合テストを省略しないことの
+重要性を再確認した。
+
+固定値回帰ガードテスト3本＋developersページ本文＋PoC納品物を連動更新（総件数
+23,205→23,309件・配布可能23,014→23,118件・学校数3,277のまま変化なし）。
+tsc --noEmit exit 0・jest 545 suites 7785 tests all green を確認しcommit・push済
+（289ad0f）。
+
+次は残り21県年（到達○のうちfukui/niigata/oita/akita/kochi/ehime/nagano/miyagi/
+fukushima/hiroshima/okayama/kumamoto/kyoto/mie/miyazaki以外・ibaraki R4/
+yamanashi R4/shimane R4/chiba R4は保留）のいずれかを次イテレーションで選ぶ。
 
 ## 守ること
 
