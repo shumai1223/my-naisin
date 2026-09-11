@@ -299,10 +299,11 @@ W-0 の鮮度を確認する（主食ドリフト4回の教訓）。
    （110件）・12件目=kumamoto R4完了（165件）。2026-09-12 13件目=kyoto R4完了
    （76件）・14件目=mie R4完了（108件）・15件目=miyazaki R4完了（104件）・16件目
    =wakayama R4完了（62件）・17件目=yamagata R4完了（93件）・18件目=shiga R4完了
-   （61件）。詳細は下の「#11-1」〜「#11-18」参照。残り18県年（到達○のうちfukui/
-   niigata/oita/akita/kochi/ehime/nagano/miyagi/fukushima/hiroshima/okayama/
-   kumamoto/kyoto/mie/miyazaki/wakayama/yamagata/shiga以外・ibaraki R4/
-   yamanashi R4/shimane R4/chiba R4は要再検討で保留=下記参照）が対象。**
+   （61件）・19件目=aomori R4完了（91件）。詳細は下の「#11-1」〜「#11-19」参照。
+   残り17県年（到達○のうちfukui/niigata/oita/akita/kochi/ehime/nagano/miyagi/
+   fukushima/hiroshima/okayama/kumamoto/kyoto/mie/miyazaki/wakayama/yamagata/
+   shiga/aomori以外・ibaraki R4/yamanashi R4/shimane R4/chiba R4は要再検討で
+   保留=下記参照）が対象。**
 2. **定時制で `coverage='partial'` にした県の pendingDepartments を潰す。**
    現時点で fukuoka（単位制2期）・kochi（夜間部・通信制）・hiroshima。1県1〜2h
 3. **T-Y11C-4 の yamanashi 20件・yamaguchi 5件**（#9 に入っているが、単独でも取れる）
@@ -3895,6 +3896,41 @@ tsc --noEmit exit 0・jest 545 suites 7790 tests all green を確認しcommit・
 次は残り18県年（到達○のうちfukui/niigata/oita/akita/kochi/ehime/nagano/miyagi/
 fukushima/hiroshima/okayama/kumamoto/kyoto/mie/miyazaki/wakayama/yamagata/
 shiga以外・ibaraki R4/yamanashi R4/shimane R4/chiba R4は保留）のいずれかを
+次イテレーションで選ぶ。
+
+### #11-19 aomori R4完了（2026-09-12・§11項目1の19件目）
+
+§5順序#10で到達可能性を確認済みだったaomori令和4年度分を実収集した。
+
+台帳のURL（R4senbatsu_syutsugan-chuunan.pdf）自体はライブでは404だったが、これは
+R5/R6と同型の「地域別6分割PDF」公開形式（東青/西北五/中弘南黒/上十三/下北むつ/
+三八）であることが既にR5/R6の掛-1で判明していたため、統合公開ページのWayback
+確認は省略し、直接Wayback CDX検索（url=pref.aomori.lg.jp/soshiki/kyoiku/e-gakyo/
+files/&matchType=prefix&from=20220201&to=20220301）でe-gakyo/files/配下の
+R4senbatsu_syutsugan-{tousei,seihoku,chuunan,kamikita,shimokita,sanpachi}.pdf
+6ファイルを一括発見した（いずれも2022年2月22日クロール分）。
+
+全6PDFをpdftoppm 300dpiビジョン解析で転記した（全6ファイルとも1頁構成）。
+6地域それぞれの「合計」行（東青1,800/1,785・中弘南黒1,510/1,673・上十三1,235/
+1,074・三八1,495/1,607・西北五715/573・下北むつ535/487）と「全日制の課程合計」行
+（quota7,290・applicants7,199・倍率0.99）の計7段階すべてがnode.js機械集計と
+完全一致した（初回転記で一致・再修正なし）。
+
+schoolName+departmentのキー集合はR5と完全一致（差分0件）。くくり募集3組
+（青森商業「商業・情報処理」・五所川原「普通・理数」・三沢商業「商業・情報処理」）、
+柏木農業の4学科目「生活科学」（R6で廃止）、三本木の内部進学控除後quota=165
+（R5=160・R6=167・R7/R8=165の既知の年次変動レンジ内）はすべてR5と同型だった。
+sourceIndexは既存のR5用6エントリ（8〜13）に続けて14〜19を新規追加し、記録ごとに
+対応する地域PDFのsourceIndexを割り当てた（R5と同じ設計パターンを踏襲）。
+
+固定値回帰ガードテスト3本＋developersページ本文＋PoC納品物を連動更新（総件数
+23,525→23,616件・配布可能23,334→23,425件・学校数3,277のまま変化なし）。
+tsc --noEmit exit 0・jest 545 suites 7791 tests all green を確認しcommit・push済
+（1513893）。
+
+次は残り17県年（到達○のうちfukui/niigata/oita/akita/kochi/ehime/nagano/miyagi/
+fukushima/hiroshima/okayama/kumamoto/kyoto/mie/miyazaki/wakayama/yamagata/
+shiga/aomori以外・ibaraki R4/yamanashi R4/shimane R4/chiba R4は保留）のいずれかを
 次イテレーションで選ぶ。
 
 ## 守ること
