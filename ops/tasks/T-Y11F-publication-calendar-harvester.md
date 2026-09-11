@@ -292,6 +292,8 @@ W-0 の鮮度を確認する（主食ドリフト4回の教訓）。
    #10 は台帳を作るだけで終わっている（20〜35h）。**その先の「51県年ぶんの実収集」が丸ごと空いている。**
    1県年 ≈ 定時制1県の実測（21分）〜PDF再取得を伴う場合2h。**51県年で 18〜100h。**
    ⚠️ Y-0 は不変。取れない県年は「取れない」と台帳に書いて次へ行く（水増ししない）
+   **✅2026-09-11 1件目=fukui R4完了（73件・24校）。詳細は下の「#11-1 fukui R4完了」参照。
+   残り35県年（到達○のうちfukui以外）が対象。**
 2. **定時制で `coverage='partial'` にした県の pendingDepartments を潰す。**
    現時点で fukuoka（単位制2期）・kochi（夜間部・通信制）・hiroshima。1県1〜2h
 3. **T-Y11C-4 の yamanashi 20件・yamaguchi 5件**（#9 に入っているが、単独でも取れる）
@@ -3210,6 +3212,43 @@ kanagawa令和4年度はWebSearchのスニペットのみを根拠に到達○�
 
 ⚠️ **9/15の払底判定は生かす。** そこまでに主食（F-1〜F-5）が尽きていたら
 「枯れないという主張はこの窓では偽だった」と質問ノートに明記してからこの順序へ移る。
+
+### #11-1 fukui R4完了（2026-09-11・§11項目1の1件目）
+
+§5順序#10で到達可能性を確認済みだったfukui令和4年度分を実収集した。現行サイトの
+目次ページ`shutugan.html`から「志願変更（最終日）」リンクを辿り、
+`https://www.pref.fukui.lg.jp/doc/koukou/nyugaku/shutugan_d/fil/R4henkou3.pdf`
+（志願変更状況・2月10日変更最終日・全2ページ）を特定。フォルダ名`shutugan_d`は
+R5/R6の`ittupan_d`、R7/R8の`ippan_d`とも異なる独自表記で、年度ごとにURLパターンが
+変わることを改めて確認した。
+
+R5と同じくpdftotext -layoutでは埋め込みフォントの都合でCJKラベルが抽出できず、
+pdftoppm 300dpiでビジョン解析（Read toolで画像を直接読む）して73レコード（24校）を
+転記した。ページ2末尾の公式「合計」行（募集人員3,732・応募者数3,843・倍率1.03）と
+node.jsでの機械集計が完全一致（初回転記で一致・再修正なし）。学校名・学科名はR5と
+完全一致（学校再編なし）。§5順序#8で確立したpage/rowIndex（page1=41件・page2=32件）
+も同時に付与し、resolveSourceLocatorで全件解決可能にした。
+
+データセット全体の総レコード数が21,739→21,812件（配布可能21,548→21,621件）に変動
+したため、以下の固定値回帰ガードを連動更新した:
+- `src/app/developers/__tests__/data-volume-claims.test.ts`（/developersページ本文と
+  実データの突合テスト）+ `src/app/developers/page.tsx`本文（ライブの一般公開コピー）
+- `src/data/competition-rates/__tests__/finalrate-invariant.test.ts`
+- `src/lib/__tests__/obunsha-poc-export.test.ts`
+- `ops/deliverables/obunsha-poc-v0/`（`npx tsx scripts/build-obunsha-poc-package.ts`で
+  再生成・format-spec.md/chiba-sample.jsonがgit管理下で更新・r8-full.json等は
+  .gitignore対象のため再生成のみでcommit不要）
+
+tsc --noEmit exit 0・jest 545 suites 7768 tests all green を確認しcommit・push済
+（2abd4dd）。**教訓: 県別データファイルに新規レコードを追加すると、データセット全体の
+件数に依存する固定値テストが複数箇所（テスト3本＋公開ページ本文＋PoC納品物）に連鎖する。
+次回以降も同じ範囲を機械的にgrepで確認すること（`21,XXX件`/`21_XXX`のパターン）。**
+
+次は残り35県年（到達○のうちfukui以外: nara/niigata/oita/akita/aomori/chiba/ehime/
+fukushima/hiroshima/ibaraki/kagawa/kagoshima/kanagawa[未検証]/kochi/kumamoto/kyoto/
+mie/miyagi/aichi/miyazaki/nagano/nagasaki/okayama/okinawa/osaka/saitama/shiga/
+shimane/wakayama/yamagata/yamanashi、うちnara/niigata/oitaはR5も対象）のいずれかを
+次イテレーションで選ぶ。
 
 ## 守ること
 
