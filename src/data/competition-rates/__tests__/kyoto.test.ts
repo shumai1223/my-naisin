@@ -111,6 +111,29 @@ describe('京都府 倍率パイプラインα（Y-6・全日制75レコード�
     expect(kaiken).toMatchObject({ department: 'ルミノベーション', quota: 120, finalApplicants: 171 });
   });
 
+  it('掛-1(学校別×多年度・T-Y11F §5順序#11払底時の逃げ場): 令和4年度(R4)分レコードが76件・54校収録され、全日制計(quota6,424・applicants6,414・倍率1.00)と完全一致する。京都すばるはR4時点も「起業創造・企画・情報科学」の3学科独立構成。綾部（東）の農業・園芸くくり募集もR5〜R8と同型。schoolNameのキー集合はR5との差分が「塔南」のみ(R5は「開建」に引き継がれる前)', () => {
+    const r4 = records.filter((r) => r.fiscalYear === '令和4年度（2022年度）');
+    expect(r4.length).toBe(76);
+    expect(r4.reduce((a, r) => a + r.quota, 0)).toBe(6424);
+    expect(r4.reduce((a, r) => a + r.finalApplicants, 0)).toBe(6414);
+
+    const distinctSchools4 = new Set(r4.map((r) => r.schoolName));
+    expect(distinctSchools4.size).toBe(54);
+
+    expect(r4.filter((r) => r.schoolName === '京都すばる')).toHaveLength(3);
+
+    const kukuri = r4.find((r) => r.schoolName === '綾部(東)' && r.department === '農業・園芸(くくり)');
+    expect(kukuri).toMatchObject({ quota: 9, finalApplicants: 7 });
+
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    const r4Schools = new Set(r4.map((r) => r.schoolName));
+    const r5Schools = new Set(r5.map((r) => r.schoolName));
+    const onlyR4 = [...r4Schools].filter((s) => !r5Schools.has(s));
+    const onlyR5 = [...r5Schools].filter((s) => !r4Schools.has(s));
+    expect(onlyR4).toEqual(['塔南']);
+    expect(onlyR5).toEqual(['開建']);
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of KYOTO_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.kyoto-be\.ne\.jp\//);

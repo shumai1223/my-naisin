@@ -31,9 +31,9 @@ describe('/developers 掲載件数の実データ整合性', () => {
 
     // 現状の正典値（本テストが落ちたら、原因がデータ更新かページ記載の誤りかを切り分けてから直す）。
     expect(prefectureCount).toBe(47);
-    expect(totalRecords).toBe(23_021);
-    expect(totalLicensable).toBe(22_830);
-    expect(uniqueSchoolCount).toBe(3_276);
+    expect(totalRecords).toBe(23_097);
+    expect(totalLicensable).toBe(22_906);
+    expect(uniqueSchoolCount).toBe(3_277);
 
     const pageSrc = fs.readFileSync(path.join(__dirname, '../page.tsx'), 'utf8');
     expect(pageSrc).toContain(`${totalRecords.toLocaleString('en-US')}件`);
