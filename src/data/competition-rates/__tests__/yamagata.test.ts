@@ -139,6 +139,36 @@ describe('山形県 倍率パイプラインα（Y-6・全日制42校90レコー
     });
   });
 
+  it('掛-1(学校別×多年度・T-Y11F §5順序#11払底時の逃げ場): 令和4年度(R4)分レコードが93件・45校収録され、公式「全日制公立合計」6,067/5,072と完全一致する（内訳: 全日制県立合計5,848/4,802＋全日制市立合計219/270）。schoolNameのキー集合はR5と完全一致（差分0件）', () => {
+    const r4 = records.filter((r) => r.fiscalYear === '令和4年度（2022年度）');
+    expect(r4.length).toBe(93);
+    const distinctSchools4 = new Set(r4.map((r) => r.schoolName));
+    expect(distinctSchools4.size).toBe(45);
+    expect(r4.reduce((a, r) => a + r.quota, 0)).toBe(6067);
+    expect(r4.reduce((a, r) => a + r.finalApplicants, 0)).toBe(5072);
+
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    const r5Schools = new Set(r5.map((r) => r.schoolName));
+    expect(distinctSchools4).toEqual(r5Schools);
+  });
+
+  it('掛-1(R4固有の学科名/構成差): 寒河江工業はR4時点で「機械」「電子機械」「情報技術」という学科名だったが、R5以降は「メカニカルエンジニア」「ロボットエンジニア」「ITエンジニア」に改称されている。加茂水産はR4時点で「海洋技術」「海洋資源」の2学科だったが、R5以降は「水産」の単一学科に統合されている', () => {
+    const r4 = records.filter((r) => r.fiscalYear === '令和4年度（2022年度）');
+    const sagae4 = r4.filter((r) => r.schoolName === '寒河江工業');
+    expect(sagae4.map((r) => r.department).sort()).toEqual(['機械', '電子機械', '情報技術'].sort());
+
+    const kamo4 = r4.filter((r) => r.schoolName === '加茂水産');
+    expect(kamo4.map((r) => r.department).sort()).toEqual(['海洋技術', '海洋資源'].sort());
+
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    const sagae5 = r5.filter((r) => r.schoolName === '寒河江工業');
+    expect(sagae5.map((r) => r.department).sort()).toEqual(
+      ['メカニカルエンジニア', 'ロボットエンジニア', 'ITエンジニア'].sort()
+    );
+    const kamo5 = r5.filter((r) => r.schoolName === '加茂水産');
+    expect(kamo5.map((r) => r.department)).toEqual(['水産']);
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of YAMAGATA_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.pref\.yamagata\.jp\//);
