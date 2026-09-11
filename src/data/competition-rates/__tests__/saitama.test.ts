@@ -180,6 +180,32 @@ describe('埼玉県 倍率パイプラインα（Y-2・全日制の突合テス�
     expect(kokusai[0]).toMatchObject({ schoolName: '岩槻', quota: 40, finalApplicants: 46 });
   });
 
+  it('掛-1(学校別×多年度・5年度目): 令和4年度(R4)分に254レコードが収録され(全日制が完結)、印字済み「全日制 普通・専門・総合学科 計」(A=36,721/B=40,265)と機械集計が完全一致し、学校名+学科の重複が無い', () => {
+    const r4 = records.filter((r) => r.fiscalYear === '令和4年度（2022年度）');
+    expect(r4.length).toBe(254);
+    const sumQuota = r4.reduce((a, r) => a + r.quota, 0);
+    const sumApplicants = r4.reduce((a, r) => a + r.finalApplicants, 0);
+    expect(sumQuota).toBe(36721);
+    expect(sumApplicants).toBe(40265);
+    const seen = new Set<string>();
+    for (const r of r4) {
+      const key = `${r.schoolName}|${r.department}`;
+      expect(seen.has(key)).toBe(false);
+      seen.add(key);
+    }
+  });
+
+  it('掛-1(R4固有の実データ差分): R4時点でも「浦和工業」「鳩山」「皆野」がR5と同一構成で実在する(R6以降に統廃合される前の継続的な実在記録)', () => {
+    const r4 = records.filter((r) => r.fiscalYear === '令和4年度（2022年度）');
+    expect(r4.filter((r) => r.schoolName === '浦和工業').length).toBe(4);
+    expect(r4.some((r) => r.schoolName === '鳩山' && r.department === '普通科')).toBe(true);
+    expect(r4.some((r) => r.schoolName === '鳩山' && r.department === '情報管理科')).toBe(true);
+    expect(r4.some((r) => r.schoolName === '皆野' && r.department === '商業系')).toBe(true);
+    const kokusai = r4.filter((r) => r.department === '国際文化科');
+    expect(kokusai.length).toBe(1);
+    expect(kokusai[0]).toMatchObject({ schoolName: '岩槻', quota: 40, finalApplicants: 31 });
+  });
+
   it('全レコードのquota>0・finalApplicants>=0・finalRateが概算で整合する', () => {
     for (const r of records) {
       expect(r.quota).toBeGreaterThan(0);
