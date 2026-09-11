@@ -297,10 +297,10 @@ W-0 の鮮度を確認する（主食ドリフト4回の教訓）。
    R4完了（106件）・7件目=nagano R4完了（131件）・8件目=miyagi R4完了（132件）・9件目
    =fukushima R4完了（94件）・10件目=hiroshima R4完了（135件）・11件目=okayama R4完了
    （110件）・12件目=kumamoto R4完了（165件）。2026-09-12 13件目=kyoto R4完了
-   （76件）。詳細は下の「#11-1」〜「#11-13」参照。残り23県年（到達○のうちfukui/
-   niigata/oita/akita/kochi/ehime/nagano/miyagi/fukushima/hiroshima/okayama/
-   kumamoto/kyoto以外・ibaraki R4/yamanashi R4/shimane R4/chiba R4は要再検討で
-   保留=下記参照）が対象。**
+   （76件）・14件目=mie R4完了（108件）。詳細は下の「#11-1」〜「#11-14」参照。
+   残り22県年（到達○のうちfukui/niigata/oita/akita/kochi/ehime/nagano/miyagi/
+   fukushima/hiroshima/okayama/kumamoto/kyoto/mie以外・ibaraki R4/yamanashi R4/
+   shimane R4/chiba R4は要再検討で保留=下記参照）が対象。**
 2. **定時制で `coverage='partial'` にした県の pendingDepartments を潰す。**
    現時点で fukuoka（単位制2期）・kochi（夜間部・通信制）・hiroshima。1県1〜2h
 3. **T-Y11C-4 の yamanashi 20件・yamaguchi 5件**（#9 に入っているが、単独でも取れる）
@@ -3706,6 +3706,43 @@ exit 0・jest 545 suites 7782 tests all green を確認しcommit・push済（c6b
 
 次は残り23県年（到達○のうちfukui/niigata/oita/akita/kochi/ehime/nagano/miyagi/
 fukushima/hiroshima/okayama/kumamoto/kyoto以外・ibaraki R4/yamanashi R4/
+shimane R4/chiba R4は保留）のいずれかを次イテレーションで選ぶ。
+
+### #11-14 mie R4完了（2026-09-12・§11項目1の14件目）
+
+§5順序#10で到達可能性を確認済みだったmie令和4年度分を実収集した。
+
+台帳のハブページ（TOPICS/m0045100301.htm）はWebFetchで開くと「令和４年度三重県立
+高等学校後期選抜受検状況を取りまとめました」で、これは3/9実施の検査当日の出席者数・
+受検倍率をまとめた「受検状況」であり、必要な「志願状況」とは別種の資料だった
+（§10の「到達○」＝URLが200を返すことの確認にすぎず文書の正誤は未確認だった、
+という罠。miyagi/okayama/kumamotoと同型）。WebSearchで正しい一覧ページ
+（KOKOKYO/HP/m0204200029_00055.htm・「令和４年度三重県立高等学校入学者選抜志願
+状況等」）を発見し、そこに掲載された「後期選抜志願状況（最終）」PDF（令和4年3月4日
+公表・全5頁、4〜5頁目は定時制・通信制のためスコープ外）への直リンクを取得した。
+
+R5〜R8と同じくpdftotextでは学校名・学科名が一切読めず、pdftoppm 300dpiビジョン
+解析で全日制108レコードを転記した。PDF3頁目末尾の「総計」行（quota7,149・
+applicants7,693・倍率1.08）とnode.js機械集計が完全一致した（初回転記で一致・
+再修正なし）。schoolName一覧（52校）はR5と完全一致（差分0件）。
+
+くくり募集4組（桑名工業「機械・材料技術」「電気・電子」・四日市西「比較文化・歴史・
+数理情報」・四日市農芸「農業科学・食品科学・環境造園」）はR5〜R8と同型。伊賀白鳳は
+7学科全てが単一の後期選抜募集人数（quota103）を共有する1レコードだった（R5〜R6と
+同型・R8の4レコード制への再編前）。久居農林はR5と同じく5学科（生物生産・生物資源・
+環境情報・環境土木・生活デザイン）が個別quotaの独立募集だった（R6以降のくくり化前）。
+稲生の「体育」学科・川越の「普通・国際文理」表記（探究・国際探究への改称前）・南伊勢
+の度会校舎・南勢校舎合算もいずれもR5と同型の構造で、R4→R5にかけての変化は
+確認されなかった（本県年は他県のような年度またぎの学科再編が無く、転記の検算のみで
+完結した数少ない例）。
+
+固定値回帰ガードテスト3本＋developersページ本文＋PoC納品物を連動更新（総件数
+23,097→23,205件・配布可能22,906→23,014件・学校数3,277のまま変化なし）。
+tsc --noEmit exit 0・jest 545 suites 7784 tests all green を確認しcommit・push済
+（e99ec59）。
+
+次は残り22県年（到達○のうちfukui/niigata/oita/akita/kochi/ehime/nagano/miyagi/
+fukushima/hiroshima/okayama/kumamoto/kyoto/mie以外・ibaraki R4/yamanashi R4/
 shimane R4/chiba R4は保留）のいずれかを次イテレーションで選ぶ。
 
 ## 守ること
