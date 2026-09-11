@@ -157,6 +157,32 @@ describe('長野県 倍率パイプラインα（Y-6・全日制77校129レコ�
     expect(r5.find((r) => r.schoolName === '小諸義塾')).toBeUndefined();
   });
 
+  it('掛-1(学校別×多年度): 令和4年度(R4)分レコードが131件収録され（T-Y11F §5順序#11）、全県計と4通学区すべての合計行と完全一致する。学校構成・学科構成はR5と完全一致（更級農業4学科くくり募集・下伊那農業4学科独立定員・岡谷工業5学科独立定員とも同型）', () => {
+    const r4 = records.filter((r) => r.fiscalYear === '令和4年度（2022年度）');
+    expect(r4.length).toBe(131);
+    expect(r4.reduce((a, r) => a + r.quota, 0)).toBe(10203);
+    expect(r4.reduce((a, r) => a + r.finalApplicants, 0)).toBe(9944);
+
+    const areaTotals4: Record<string, { count: number; quota: number; applicants: number }> = {
+      北信: { count: 37, quota: 2999, applicants: 2940 },
+      東信: { count: 25, quota: 2156, applicants: 2100 },
+      南信: { count: 42, quota: 2772, applicants: 2658 },
+      中信: { count: 27, quota: 2276, applicants: 2246 },
+    };
+    for (const [area, expected] of Object.entries(areaTotals4)) {
+      const rs = r4.filter((r) => r.area === area);
+      expect(rs.length).toBe(expected.count);
+      expect(rs.reduce((a, r) => a + r.quota, 0)).toBe(expected.quota);
+      expect(rs.reduce((a, r) => a + r.finalApplicants, 0)).toBe(expected.applicants);
+    }
+
+    const okoya4 = r4.filter((r) => r.schoolName === '岡谷工業');
+    expect(okoya4.length).toBe(5);
+    const shimosuka4 = r4.filter((r) => r.schoolName === '下伊那農業');
+    expect(shimosuka4.length).toBe(4);
+    expect(r4.find((r) => r.schoolName === '小諸商業')).toBeTruthy();
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of NAGANO_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.pref\.nagano\.lg\.jp\//);
