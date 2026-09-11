@@ -136,4 +136,28 @@ describe('青森県 倍率パイプラインα（Y-6・全日制43校89レコー
       sourceIndex: 8, // 東青地域PDF(sources[8])からの機械的バックフィル済み
     });
   });
+
+  it('掛-1(学校別×多年度・T-Y11F §5順序#11払底時の逃げ場・5年度目): 令和4年度(R4)分レコードが91件・43校収録され、地域別6分割PDF(東青/中弘南黒/上十三/下北むつ/三八/西北五)それぞれの合計行と「全日制の課程合計」7,290/7,199の計7段階すべてと完全一致する。schoolName+departmentのキー集合はR5と完全一致（差分0件）', () => {
+    const r4 = records.filter((r) => r.fiscalYear === '令和4年度（2022年度）');
+    expect(r4.length).toBe(91);
+    const distinctSchools4 = new Set(r4.map((r) => r.schoolName));
+    expect(distinctSchools4.size).toBe(43);
+    expect(r4.reduce((a, r) => a + r.quota, 0)).toBe(7290);
+    expect(r4.reduce((a, r) => a + r.finalApplicants, 0)).toBe(7199);
+
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    const r4Keys = new Set(r4.map((r) => `${r.schoolName}|${r.department}`));
+    const r5Keys = new Set(r5.map((r) => `${r.schoolName}|${r.department}`));
+    expect(r4Keys).toEqual(r5Keys);
+
+    expect(r4.find((r) => r.schoolName === '青森商業')).toEqual({
+      schoolName: '青森商業',
+      department: '商業・情報処理(くくり)',
+      quota: 200,
+      finalApplicants: 160,
+      finalRate: 0.8,
+      fiscalYear: '令和4年度（2022年度）',
+      sourceIndex: 14,
+    });
+  });
 });
