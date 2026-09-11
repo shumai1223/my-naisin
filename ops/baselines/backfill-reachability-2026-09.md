@@ -36,7 +36,7 @@ hokkaido R4・saga R5/R4・tochigi R5/R4）。archive.orgは一時的に不安�
 
 ## R4欠のみ(39県)
 
-chiba 令和4年度  到達=○  手段=Wayback  http://web.archive.org/web/20220307095804/http://www.pref.chiba.lg.jp/kyouiku/shidou/press/2021/koukounyuushi/r040221sigannsyakakutei.html （★訂正: 前回はファイル名を「kakuteiippan」と誤推測していたが正しくは「sigannsyakakutei」。WebSearchで年度フォルダのindexページ(r4/)を発見しWaybackで内容を確認したところ「入学志願者確定数について」のページを発見）
+chiba 令和4年度  到達=○  手段=Wayback  http://web.archive.org/web/20220307095804/http://www.pref.chiba.lg.jp/kyouiku/shidou/press/2021/koukounyuushi/r040221sigannsyakakutei.html （★訂正: 前回はファイル名を「kakuteiippan」と誤推測していたが正しくは「sigannsyakakutei」。WebSearchで年度フォルダのindexページ(r4/)を発見しWaybackで内容を確認したところ「入学志願者確定数について」のページを発見）⚠️2026-09-11追記: 詳細ページから目的のファイル`documents/040221b.xlsx`（高等学校別志願者確定数一覧）のURLは特定できたが、Wayback経由のxlsx取得が2回連続失敗（直接timestamp・CDXで発見した別timestampともHTML「not archived」page/404を返却、CDXレコード自体もlength負値で破損）。xlsx形式はPDFよりWayback再生が不安定という教訓あり・実収集は保留（詳細はT-Y11Fタスクファイル#11-7）
 
 ⚠️ **本イテレーションでの教訓**: 1県あたり深くCDXを掘り下げる手法は時間対効果が悪い
 (chiba1県に7回以上のcurl呼び出しを費やしたが確定に至らず)。**次回以降は「WebSearch

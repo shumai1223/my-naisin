@@ -294,9 +294,10 @@ W-0 の鮮度を確認する（主食ドリフト4回の教訓）。
    ⚠️ Y-0 は不変。取れない県年は「取れない」と台帳に書いて次へ行く（水増ししない）
    **✅2026-09-11 1件目=fukui R4完了（73件）・2件目=niigata R5完了（97件）・3件目=oita
    R5完了（81件）・4件目=akita R4完了（82件）・5件目=kochi R4完了（76件）・6件目=ehime
-   R4完了（106件・宇和三瓶分校収録）。詳細は下の「#11-1」〜「#11-6」参照。残り30県年
-   （到達○のうちfukui/niigata/oita/akita/kochi/ehime以外・ibaraki R4/yamanashi R4/
-   shimane R4は要再検討で保留=下記参照）が対象。**
+   R4完了（106件）・7件目=nagano R4完了（131件）。詳細は下の「#11-1」〜「#11-7」参照。
+   残り29県年（到達○のうちfukui/niigata/oita/akita/kochi/ehime/nagano以外・ibaraki
+   R4/yamanashi R4/shimane R4は要再検討で保留・chiba R4はxlsx取得の技術的難航で保留
+   =下記参照）が対象。**
 2. **定時制で `coverage='partial'` にした県の pendingDepartments を潰す。**
    現時点で fukuoka（単位制2期）・kochi（夜間部・通信制）・hiroshima。1県1〜2h
 3. **T-Y11C-4 の yamanashi 20件・yamaguchi 5件**（#9 に入っているが、単独でも取れる）
@@ -3443,6 +3444,41 @@ node.js機械集計が初回転記で完全一致（再修正なし）。
 
 次は残り30県年（到達○のうちfukui/niigata/oita/akita/kochi/ehime以外・ibaraki R4/
 yamanashi R4/shimane R4は保留）のいずれかを次イテレーションで選ぶ。
+
+### #11-7 nagano R4完了（2026-09-11・§11項目1の7件目）＋chiba xlsx保留の教訓
+
+§5順序#10で到達可能性を確認済みだったnagano令和4年度分を実収集した。
+
+⚠️当初chiba R4に着手したが、Wayback経由でのxlsx取得が2回連続で失敗した:
+①案内ページから発見した詳細ページ経由で`documents/040221b.xlsx`（「高等学校別志願者
+確定数一覧」＝目的のファイル）のURLを特定したが、当該timestampでのWayback直接アクセス
+はHTMLの「not archived」プレースホルダーページを返却。②Wayback CDX APIで別timestamp
+（2025-09-26クロール分・statuscode 200）を発見しそのタイムスタンプで再取得を試みたが
+やはりHTML（404）が返り、CDXレコード自体もlength列が負値という破損した記録だったと
+判明。③archive.org availability APIで裏取りしようとしたところ429（レート制限）。
+2回以上の連続失敗という既存ルールに従いchiba R4は保留とし、xlsx形式はPDFよりWayback
+再生が不安定（non-HTML mimetypeのarchive playbackで失敗しやすい）という教訓を記録した。
+次回はxlsx以外の代替入手経路（現行サイトの別フォルダ・CDXでの別snapshot探索・
+`040221a.pdf`の詳細資料に学校別数値が含まれていないか等）を検討する。
+
+nagano R4は現行サイト（ライブ200・入試情報一覧ページから直接リンク）から
+「令和4年度長野県公立高等学校入学者後期選抜志願者数②（志望変更受付締切後の集計
+結果）」（令和4年3月3日発表・全8ページ）を取得。pdftotextはR5〜R8と同様に文字が
+読めずpdftoppmビジョン解析で全131レコードを転記した。全県計（quota10,203・
+applicants9,944・倍率0.97）＋4通学区（北信2,999/2,940・東信2,156/2,100・
+南信2,772/2,658・中信2,276/2,246）の合計行、5段階すべてがnode.js機械集計と
+初回転記で完全一致（再修正なし）。学校構成・学科構成はR5と完全一致（更級農業4学科
+くくり募集・下伊那農業4学科独立定員・岡谷工業5学科独立定員とも同型パターン）で、
+学校再編は確認されなかった。
+
+固定値回帰ガードテスト3本＋developersページ本文＋PoC納品物を連動更新（総件数
+22,254→22,385件・配布可能22,063→22,194件・学校数3,265のまま変化なし）。
+tsc --noEmit exit 0・jest 545 suites 7774 tests all green を確認しcommit・push済
+（4ac4e0d）。
+
+次は残り29県年（到達○のうちfukui/niigata/oita/akita/kochi/ehime/nagano以外・
+ibaraki R4/yamanashi R4/shimane R4/chiba R4は保留）のいずれかを次イテレーションで
+選ぶ。
 
 ## 守ること
 
