@@ -4,16 +4,16 @@ import { buildFullExportRecords, buildYearOverYearDiff, toCsv } from '../obunsha
 
 /**
  * T-Y11F §5順序#5 DoD検証: 旺文社PoC納品物v0の件数固定（過去に提案書で件数の手打ち誤りが
- * 見つかった前科があるため、既存の`/developers`ページと同じ23,118件をここでも独立に固定する）。
+ * 見つかった前科があるため、既存の`/developers`ページと同じ23,180件をここでも独立に固定する）。
  */
 describe('旺文社PoC納品物v0（T-Y11F §5順序#5）', () => {
-  it('buildFullExportRecordsは配布可能レコード数（23,118件）と一致する', () => {
+  it('buildFullExportRecordsは配布可能レコード数（23,180件）と一致する', () => {
     const records = buildFullExportRecords();
     const expectedTotal = Object.values(COMPETITION_RATE_BY_PREFECTURE)
       .filter((f): f is NonNullable<typeof f> => f !== undefined)
       .reduce((sum, f) => sum + licensableRecords(f).length, 0);
-    expect(expectedTotal).toBe(23_118);
-    expect(records).toHaveLength(23_118);
+    expect(expectedTotal).toBe(23_180);
+    expect(records).toHaveLength(23_180);
   });
 
   it('各レコードはprefectureCode/schoolName/department/fiscalYear/quota/finalApplicants/finalRateを持つ', () => {
@@ -32,7 +32,7 @@ describe('旺文社PoC納品物v0（T-Y11F §5順序#5）', () => {
     const records = buildFullExportRecords();
     const csv = toCsv(records);
     const lines = csv.trim().split('\n');
-    expect(lines).toHaveLength(23_118 + 1);
+    expect(lines).toHaveLength(23_180 + 1);
     expect(lines[0]).toBe(
       'prefectureCode,prefectureName,schoolName,area,department,fiscalYear,quota,finalApplicants,finalRate,sourceUrl,docTitle,fetchedAt'
     );

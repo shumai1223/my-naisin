@@ -141,6 +141,33 @@ describe('和歌山県 倍率パイプラインα（Y-6・全日制32校57レコ
     expect(r5.find((r) => r.schoolName === '串本古座')).toMatchObject({ department: '普通科' });
   });
 
+  it('掛-1(学校別×多年度・T-Y11F §5順序#11払底時の逃げ場): 令和4年度(R4)分レコードが62件・33校（新宮・新翔が別々の学校のためR8の32校より1校多い）収録され、公式「合計」行(quota6,042・applicants5,392・倍率0.89)と完全一致する。schoolNameのキー集合はR5と完全一致（差分0件）', () => {
+    const r4 = records.filter((r) => r.fiscalYear === '令和4年度（2022年度）');
+    expect(r4.length).toBe(62);
+    expect(r4.reduce((a, r) => a + r.quota, 0)).toBe(6042);
+    expect(r4.reduce((a, r) => a + r.finalApplicants, 0)).toBe(5392);
+
+    const distinctSchools4 = new Set(r4.map((r) => r.schoolName));
+    expect(distinctSchools4.size).toBe(33);
+
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    const r5Schools = new Set(r5.map((r) => r.schoolName));
+    expect(distinctSchools4).toEqual(r5Schools);
+  });
+
+  it('掛-1(R4固有の学科再編): 箕島はR4時点で4学科独立募集(普通科(普通)/普通科(スポーツ)/情報経営科/機械科)だったが、R5以降は普通科系/専門学科系の2区分に統合されている', () => {
+    const r4 = records.filter((r) => r.fiscalYear === '令和4年度（2022年度）');
+    const minoshima4 = r4.filter((r) => r.schoolName === '箕島');
+    expect(minoshima4).toHaveLength(4);
+    expect(minoshima4.map((r) => r.department).sort()).toEqual(
+      ['普通科(普通)', '普通科(スポーツ)', '情報経営科', '機械科'].sort()
+    );
+
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    const minoshima5 = r5.filter((r) => r.schoolName === '箕島');
+    expect(minoshima5).toHaveLength(2);
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of WAKAYAMA_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.pref\.wakayama\.lg\.jp\//);
