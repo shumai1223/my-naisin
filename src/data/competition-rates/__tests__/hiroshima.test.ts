@@ -149,6 +149,23 @@ describe('広島県 倍率パイプラインα（Y-6・全日制85校138レコ�
     expect(misuzugaokaR5?.department).toBe('普通');
   });
 
+  it('掛-1(学校別×多年度): 令和4年度(R4)分レコードが135件（全日制本校134＋分校1）収録され（T-Y11F §5順序#11）、公式小計(本校quota10,658・applicants10,923＋分校quota25・applicants8)と完全一致する。R4当時は「選抜（Ⅱ）」という呼称でR5以降の「一次選抜」に相当する', () => {
+    const r4 = records.filter((r) => r.fiscalYear === '令和4年度（2022年度）');
+    expect(r4.length).toBe(135);
+    expect(r4.reduce((a, r) => a + r.quota, 0)).toBe(10683);
+    expect(r4.reduce((a, r) => a + r.finalApplicants, 0)).toBe(10931);
+
+    const kakei4 = r4.find((r) => r.schoolName === '加計・芸北');
+    expect(kakei4).toEqual({
+      schoolName: '加計・芸北',
+      department: '普通',
+      quota: 25,
+      finalApplicants: 8,
+      finalRate: 0.32,
+      fiscalYear: '令和4年度（2022年度）',
+    });
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of HIROSHIMA_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.pref\.hiroshima\.lg\.jp\//);
