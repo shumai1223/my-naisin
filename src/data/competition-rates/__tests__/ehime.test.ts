@@ -119,6 +119,18 @@ describe('愛媛県 倍率パイプラインα（Y-6・全日制43校99レコー
     expect(r5.some((r) => r.schoolName === '北宇和（三間）')).toBe(true);
   });
 
+  it('掛-1(学校別×多年度): 令和4年度(R4)分レコードが106件収録され（T-Y11F §5順序#11）、「合計」(quota9,025・applicants7,980)と完全一致する。北宇和(三間)はR4では普通・農業機械の2学科が独立集計されておりR5以降の「農・普（くくり募集）」1レコード化前の状態。宇和(三瓶)はR4にのみ存在しR5以降は資料から消えている', () => {
+    const r4 = records.filter((r) => r.fiscalYear === '令和4年度（2022年度）');
+    expect(r4.length).toBe(106);
+    const sumQuota = r4.reduce((a, r) => a + r.quota, 0);
+    const sumApplicants = r4.reduce((a, r) => a + r.finalApplicants, 0);
+    expect(sumQuota).toBe(9025);
+    expect(sumApplicants).toBe(7980);
+
+    expect(r4.filter((r) => r.schoolName === '北宇和（三間）')).toHaveLength(2);
+    expect(r4.some((r) => r.schoolName === '宇和（三瓶）')).toBe(true);
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of EHIME_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/ehime-(kyoiku|c)\.esnet\.ed\.jp\//);
