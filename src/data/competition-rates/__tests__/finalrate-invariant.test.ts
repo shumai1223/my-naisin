@@ -148,7 +148,7 @@ describe('competition-rates finalRate invariant (round2/round1/trunc2のいず�
     }
 
     // 抽出ロジック自体が壊れて対象が減っていないか（正規表現がheredoc等の変更で静かに拾えなくなる事故対策）。
-    expect(totalRecords).toBe(23464);
+    expect(totalRecords).toBe(23525);
 
     if (unexpectedMismatches.length > 0) {
       throw new Error(`round2/round1/trunc2いずれにも一致せず、既知の20件の例外にも無い新しい不一致 ${unexpectedMismatches.length}件:\n${unexpectedMismatches.join('\n')}`);

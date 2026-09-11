@@ -122,4 +122,25 @@ describe('滋賀県 倍率パイプラインα（Y-6・全日制44校61レコー
     expect(zezeR6.finalApplicants).toBe(350);
     expect(zezeR5.finalApplicants).not.toBe(zezeR6.finalApplicants);
   });
+
+  it('掛-1(学校別×多年度・T-Y11F §5順序#11払底時の逃げ場): 令和4年度(R4)分レコードが61件・44校収録され、旧制度の全日制「計①」行(quota6,308・applicants6,867・倍率1.09)と完全一致する。schoolName+departmentのキー集合はR5と完全一致（差分0件）', () => {
+    const r4 = records.filter((r) => r.fiscalYear === '令和4年度（2022年度）');
+    expect(r4.length).toBe(61);
+    expect(r4.reduce((a, r) => a + r.quota, 0)).toBe(6308);
+    expect(r4.reduce((a, r) => a + r.finalApplicants, 0)).toBe(6867);
+
+    const distinctSchools4 = new Set(r4.map((r) => r.schoolName));
+    expect(distinctSchools4.size).toBe(44);
+
+    for (const school of ['膳所', '草津東', '栗東', '米原', '高島']) {
+      const rec = r4.find((r) => r.schoolName === school);
+      expect(rec).toBeDefined();
+      expect(rec!.department).toContain('両方の学科・くくり');
+    }
+
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    const r4Keys = new Set(r4.map((r) => `${r.schoolName}|${r.department}`));
+    const r5Keys = new Set(r5.map((r) => `${r.schoolName}|${r.department}`));
+    expect(r4Keys).toEqual(r5Keys);
+  });
 });
