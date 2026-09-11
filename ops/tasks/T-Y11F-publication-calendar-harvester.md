@@ -295,10 +295,10 @@ W-0 の鮮度を確認する（主食ドリフト4回の教訓）。
    **✅2026-09-11 1件目=fukui R4完了（73件）・2件目=niigata R5完了（97件）・3件目=oita
    R5完了（81件）・4件目=akita R4完了（82件）・5件目=kochi R4完了（76件）・6件目=ehime
    R4完了（106件）・7件目=nagano R4完了（131件）・8件目=miyagi R4完了（132件）・9件目
-   =fukushima R4完了（94件）・10件目=hiroshima R4完了（135件）。詳細は下の「#11-1」〜
-   「#11-10」参照。残り26県年（到達○のうちfukui/niigata/oita/akita/kochi/ehime/
-   nagano/miyagi/fukushima/hiroshima以外・ibaraki R4/yamanashi R4/shimane R4/
-   chiba R4は要再検討で保留=下記参照）が対象。**
+   =fukushima R4完了（94件）・10件目=hiroshima R4完了（135件）・11件目=okayama R4完了
+   （110件）。詳細は下の「#11-1」〜「#11-11」参照。残り25県年（到達○のうちfukui/
+   niigata/oita/akita/kochi/ehime/nagano/miyagi/fukushima/hiroshima/okayama以外・
+   ibaraki R4/yamanashi R4/shimane R4/chiba R4は要再検討で保留=下記参照）が対象。**
 2. **定時制で `coverage='partial'` にした県の pendingDepartments を潰す。**
    現時点で fukuoka（単位制2期）・kochi（夜間部・通信制）・hiroshima。1県1〜2h
 3. **T-Y11C-4 の yamanashi 20件・yamaguchi 5件**（#9 に入っているが、単独でも取れる）
@@ -3586,9 +3586,47 @@ applicants8）とnode.js機械集計が完全一致した（初回転記で一�
 tsc --noEmit exit 0・jest 545 suites 7777 tests all green を確認しcommit・push済
 （ce7bfb1）。
 
-次は残り26県年（到達○のうちfukui/niigata/oita/akita/kochi/ehime/nagano/miyagi/
-fukushima/hiroshima以外・ibaraki R4/yamanashi R4/shimane R4/chiba R4は保留）の
-いずれかを次イテレーションで選ぶ。
+### #11-11 okayama R4完了（2026-09-11・§11項目1の11件目）
+
+§5順序#10で到達可能性を確認済みだったokayama令和4年度分を実収集した。
+
+台帳が示した現行サイトのハブページ（site/255/760420.html）はライブで開くと
+「令和４年度岡山県公立高等学校特別入学者選抜等志願者数について」で、必要な
+一般入学者選抜の報告書ではなく別の報告書だった（§10の「到達○」＝URLが200を
+返すことの確認にすぎず、文書そのものの正誤は未確認だった、という罠。miyagi
+R4と同型）。WebSearchで正しい文書名「令和４年度岡山県公立高等学校一般入学者
+選抜［第Ⅰ期］志願者数について」のページ（site/255/766104.html）を発見したが、
+こちらも既に404化していたため、Wayback Machine（2022-02-28クロール分）経由で
+PDF本体（uploaded/life/766104_7084209_misc.pdf、全7頁）を取得した。
+
+R4のPDFはR5と同じくテキスト埋め込み型ではない特殊フォント（pdftotextで数値
+のみ抽出でき学校名・学科名は読めない）だったため、全7ページをpdftoppm 200dpi
+ビジョン解析で県立全日制50校107レコード＋市立全日制2校3レコード＝計110レコード
+を転記した。1ページ目の総括表・6ページ目の学校別詳細表末尾の合計行の両方と
+node.js機械集計が完全一致した（県立quota7,360・applicants7,975、市立quota104・
+applicants91。初回転記で一致・再修正なし）。schoolName一覧（52校）はR5と完全
+一致（差分0件）。
+
+くくり募集4校（東岡山工業「機械・電子機械・電気」・倉敷商業「商業・国際経済・
+情報処理」・玉島商業「ビジネス情報」・津山商業「地域ビジネス・情報ビジネス」）
+はR4→R5でquotaが大きく減少していた（100→44、160→80、80→32、80→32）。いずれも
+印字値のA-B列とC/(A-B)倍率が内部整合しており転記誤りではなく、商業系学科の
+募集定員が年度をまたいで縮小された実際の変動と考えられるが、一次資料に減員
+理由の明示的な記述は無いため原因は断定しない（掛-1として docstring に記録）。
+
+固定値回帰ガードテスト3本＋developersページ本文＋PoC納品物を連動更新（総件数
+22,746→22,856件・配布可能22,555→22,665件・学校数3,276のまま変化なし）。
+⚠️教訓: sourcesのWayback URLに`if_`サフィックス（画像化なしの生コンテンツ取得用
+パス）を付けたままcommitしたところ、sourcesのURL正規表現テスト
+（`^https:\/\/web\.archive\.org\/web\/\d+\/https:\/\/www\.pref\.okayama\.jp\/`）に
+不一致でjestが1件失敗した。`if_`はダウンロード用の一時的な修飾子であり、
+sources配列に記録する正典URLには使わない（既存のR5エントリに倣い数字タイムスタンプ
+のみのURLに修正）。修正後は tsc --noEmit exit 0・jest 545 suites 7779 tests all
+green を確認しcommit・push済（8f1e858）。
+
+次は残り25県年（到達○のうちfukui/niigata/oita/akita/kochi/ehime/nagano/miyagi/
+fukushima/hiroshima/okayama以外・ibaraki R4/yamanashi R4/shimane R4/chiba R4は
+保留）のいずれかを次イテレーションで選ぶ。
 
 ## 守ること
 
