@@ -36,11 +36,28 @@ hokkaido R4・saga R5/R4・tochigi R5/R4）。archive.orgは一時的に不安�
 
 ## R4欠のみ(39県)
 
-chiba 令和4年度  到達=△要継続調査  手段=保留  R8ソースの年度フォルダ直下(r4/documents/r4kakuteiippan.pdf)は404。press/2022/koukou/配下のCDX一覧で「実施要項」「募集定員」「三次募集」等の関連ページ多数を発見したが、目的の「確定志願状況」に該当する具体的な1〜2月付ページは時間内に特定できず。次回はCDXの日付範囲を1〜2月に絞って再試行するか、WebSearchで直接ページ名を探す
+chiba 令和4年度  到達=○  手段=Wayback  http://web.archive.org/web/20220307095804/http://www.pref.chiba.lg.jp/kyouiku/shidou/press/2021/koukounyuushi/r040221sigannsyakakutei.html （★訂正: 前回はファイル名を「kakuteiippan」と誤推測していたが正しくは「sigannsyakakutei」。WebSearchで年度フォルダのindexページ(r4/)を発見しWaybackで内容を確認したところ「入学志願者確定数について」のページを発見）
 
 ⚠️ **本イテレーションでの教訓**: 1県あたり深くCDXを掘り下げる手法は時間対効果が悪い
 (chiba1県に7回以上のcurl呼び出しを費やしたが確定に至らず)。**次回以降は「WebSearch
 1発→有望なURLが出ればWayback CDXで1〜2回確認→出なければ即座に×または△として次へ」
 という軽量な手順に統一し、1県あたりの深追いを避けること。**
 
-（chiba以降・残り38県は次回イテレーション以降で着手）
+akita 令和4年度  到達=○  手段=現行サイト  https://www.pref.akita.lg.jp/uploads/public/archive_0000062318_00/R04一般選抜（志願変更前）公－２.pdf （WebSearch1発で直接ヒット・学校別表(花輪普通140/23等)がスニペットに表示・ライブ確認済み）
+
+aomori 令和4年度  到達=○  手段=Wayback  http://web.archive.org/web/20220222084843/https://www.pref.aomori.lg.jp/soshiki/kyoiku/e-gakyo/files/R4senbatsu_syutsugan-chuunan.pdf （現行R8ソースと同型のe-gakyo/files/配下・地区別7ファイル(中南/上北/三八/西北/下北/定時制/東青)を2022-02にCDXで一括発見）
+
+ehime 令和4年度  到達=○  手段=Wayback  http://web.archive.org/web/20221007200506/https://ehime-c.esnet.ed.jp/koukou/nyuusi/r04nyuusi/nyuusi.html （WebSearchで発見したページは現行では404だがWaybackに5時点のスナップショットあり。現行R8ソースのドメイン`ehime-kyoiku.esnet.ed.jp`と異なる旧サブドメイン`ehime-c.esnet.ed.jp`だが同一教委サイト内の構成変更と判断）
+
+fukui 令和4年度  到達=○  手段=現行サイト  https://www.pref.fukui.lg.jp/doc/koukou/nyugaku/shutugan.html （ライブ200・最終更新2022-02-25のまま上書きされずに現存。出願状況/志願変更/合格結果の区分でPDFへのリンクあり）
+
+fukuoka 令和4年度  到達=△要Wayback再確認  手段=保留  WebSearchで「令和４年度公立高等学校一般入試志願状況（志願変更受付後）」というタイトルのページ(pref.fukuoka.lg.jp/contents/nyushi4.html)がヒットしたが現行ライブは404。WaybackのCDX確認を試みたが2回連続タイムアウトしたため、本日はこれ以上Waybackを使わない運用に従い中断。WebSearchのスニペット自体がページタイトルを正確に引用しており実在した可能性は高いため、次回Wayback回復後に再確認する
+
+⚠️ **2026-09-11 12:56頃、fukuokaでarchive.orgのCDX APIが再度2回連続タイムアウトしたため、本イテレーションはこれ以降Waybackの使用を中断した。**
+
+fukushima 令和4年度  到達=○  手段=現行サイト  https://www.pref.fukushima.lg.jp/site/edu/r4koukounyushi.html （ライブ200。「後期選抜志願状況（出願先変更後）」PDF=uploaded/attachment/500729.pdfへのリンクを確認・現行R8ソースと同じ命名規則）
+
+gifu 令和4年度  到達=△要Wayback再確認  手段=保留  WebSearchで見つかった「入学者選抜トップ」ページ(3464.html)に過去年度リンク無し。Wayback CDXは2回連続タイムアウトのため本イテレーションはこれ以上試行せず。次回再試行
+gunma 令和4年度  到達=△要継続調査  手段=保留  「令和4年度入学者選抜結果について」(5036.html・ライブ確認済みだが全体統計のみで学校別PDFへのリンク無し)と「実施要項」(pref.gunma.jp/03/x28g_00270.html)は存在確認できたが、目的の学校別志願状況PDF自体は特定できず。次回はWaybackで5036.html周辺の関連ページを深堀りするか、attachment番号を令和5/6年度の値から逆算して絞り込む
+
+（gunma以降・残り31県は次回イテレーション以降で着手）
