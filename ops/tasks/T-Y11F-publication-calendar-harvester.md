@@ -297,11 +297,11 @@ W-0 の鮮度を確認する（主食ドリフト4回の教訓）。
    R4完了（106件）・7件目=nagano R4完了（131件）・8件目=miyagi R4完了（132件）・9件目
    =fukushima R4完了（94件）・10件目=hiroshima R4完了（135件）・11件目=okayama R4完了
    （110件）・12件目=kumamoto R4完了（165件）。2026-09-12 13件目=kyoto R4完了
-   （76件）・14件目=mie R4完了（108件）・15件目=miyazaki R4完了（104件）。詳細は
-   下の「#11-1」〜「#11-15」参照。残り21県年（到達○のうちfukui/niigata/oita/
-   akita/kochi/ehime/nagano/miyagi/fukushima/hiroshima/okayama/kumamoto/kyoto/
-   mie/miyazaki以外・ibaraki R4/yamanashi R4/shimane R4/chiba R4は要再検討で
-   保留=下記参照）が対象。**
+   （76件）・14件目=mie R4完了（108件）・15件目=miyazaki R4完了（104件）・16件目
+   =wakayama R4完了（62件）。詳細は下の「#11-1」〜「#11-16」参照。残り20県年
+   （到達○のうちfukui/niigata/oita/akita/kochi/ehime/nagano/miyagi/fukushima/
+   hiroshima/okayama/kumamoto/kyoto/mie/miyazaki/wakayama以外・ibaraki R4/
+   yamanashi R4/shimane R4/chiba R4は要再検討で保留=下記参照）が対象。**
 2. **定時制で `coverage='partial'` にした県の pendingDepartments を潰す。**
    現時点で fukuoka（単位制2期）・kochi（夜間部・通信制）・hiroshima。1県1〜2h
 3. **T-Y11C-4 の yamanashi 20件・yamaguchi 5件**（#9 に入っているが、単独でも取れる）
@@ -3779,6 +3779,50 @@ tsc --noEmit exit 0・jest 545 suites 7785 tests all green を確認しcommit・
 次は残り21県年（到達○のうちfukui/niigata/oita/akita/kochi/ehime/nagano/miyagi/
 fukushima/hiroshima/okayama/kumamoto/kyoto/mie/miyazaki以外・ibaraki R4/
 yamanashi R4/shimane R4/chiba R4は保留）のいずれかを次イテレーションで選ぶ。
+
+### #11-16 wakayama R4完了（2026-09-12・§11項目1の16件目）
+
+§5順序#10で到達可能性を確認済みだったwakayama令和4年度分を実収集した。
+
+台帳のハブページ（prefg/500200/d00207226.html・「令和4年度県立高校入学者選抜」）は
+WebFetchで一発で開けて、その場に「本出願状況（一般選抜・スポーツ推薦）」PDF
+（令和4年3月3日現在・全2頁、うち全日制県立分は1頁）への直リンクが掲載されていた。
+Wayback不要で一発到達できた。
+
+R5〜R7と同型のpdftoppm 300dpiビジョン解析で全日制62レコード（33校・分校4件を
+含む）を転記した。印字済み「合計」行（入学者枠数A=6,042・D=113・E=5,279・
+D+E=5,392・倍率0.89）とnode.js機械集計が完全一致した（修正後・後述）。
+
+⚠️教訓1（列の取り違え）: 初回集計でapplicants合計が目標より7件多く出た。この県の
+PDFは一般選抜とスポーツ推薦が同一の入学者枠数を共有する二重トラック構造で、
+「一般出願倍率(B+C)/A」（速報値・出願変更前）と「本出願倍率(D+E)/A」（確定値・
+出願変更後）の2種類の倍率列が隣接して並んで印字されている。田辺「普通科」の
+値を転記する際、確定列（D+E=204・rate1.02）ではなく速報列（B+C=211・rate1.06）を
+誤って採用していた。機械集計との差分7件（211-204）から該当1件をすぐに特定でき、
+修正して完全一致を確認した。E列（本出願者数）だけを独立に再読して合計したところ
+一発で一致したため、疑わしい列を個別に再検算する手法が今回も有効だった。
+
+⚠️教訓2（学校数の数え違いに気づいた）: schoolNameのキー集合はR5と完全一致
+（差分0件）だったため32校と見込んでR4のテストを書いたが失敗し、33校（新宮・新翔が
+別々の学校のため）が正しいと判明した。R8のみ新宮・新翔統合で32校になる。既存の
+R7ドキュメント文言（行57付近）にも「32校」という表現が残っており、実際はR7も
+新宮・新翔が別々（33校）のはずで潜在的な数え間違いの可能性があるが、今回は
+自分が追加したR4の記述のみを訂正し、既存箇所には手を入れなかった（スコープ外）。
+
+箕島のみ学科構成がR5と異なる: R4は「普通科(普通)」「普通科(スポーツ)」
+「情報経営科」「機械科」の4学科独立募集（各quota40・ブレースによる結合なしを
+画像で確認済み）だったが、R5以降は「普通科系」「専門学科系」の2区分に統合されて
+いる（実在の学科再編・誤読ではない）。
+
+固定値回帰ガードテスト3本＋developersページ本文＋PoC納品物を連動更新（総件数
+23,309→23,371件・配布可能23,118→23,180件・学校数3,277のまま変化なし）。
+tsc --noEmit exit 0・jest 545 suites 7787 tests all green を確認しcommit・push済
+（739bf12）。
+
+次は残り20県年（到達○のうちfukui/niigata/oita/akita/kochi/ehime/nagano/miyagi/
+fukushima/hiroshima/okayama/kumamoto/kyoto/mie/miyazaki/wakayama以外・
+ibaraki R4/yamanashi R4/shimane R4/chiba R4は保留）のいずれかを次イテレーションで
+選ぶ。
 
 ## 守ること
 
