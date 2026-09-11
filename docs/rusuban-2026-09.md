@@ -5,18 +5,18 @@
 
 ---
 
-最終更新              2026-09-11 (§11項目1: #10到達済み県年の実収集を継続中・12件完了)
+最終更新              2026-09-12 (§11項目1: #10到達済み県年の実収集を継続中・13件完了)
 いまやっていること     T-Y11F §11払底時の逃げ場・項目1「#10で到達可能と判定された
                       県年の実収集」。fukui/niigata/oita/akita/kochi/ehime/nagano/
-                      miyagi/fukushima/hiroshima/okayama/kumamotoの12県完了
-                      (commit 2abd4dd〜871a8c4)。
-今日やったこと         12県連続で転記(いずれもpdftoppmビジョン解析・公式合計行と完全
+                      miyagi/fukushima/hiroshima/okayama/kumamoto/kyotoの13県完了
+                      (commit 2abd4dd〜c6b361c)。
+今日やったこと         13県連続で転記(いずれもpdftoppmビジョン解析・公式合計行と完全
                       一致)。ibaraki/yamanashi/shimane/chibaのR4は保留のまま。
-                      総件数変動12回(21,739→23,021)に伴い固定値テスト3本+developers
+                      総件数変動13回(21,739→23,097)に伴い固定値テスト3本+developers
                       ページ本文+PoC納品物を都度連動更新。tsc0・jest545suites全green
-次にやること           残り24県年から次の1件を選び同じ手順で継続(ibaraki/yamanashi/
+次にやること           残り23県年から次の1件を選び同じ手順で継続(ibaraki/yamanashi/
                       shimane/chibaのR4は要再検討候補として保留のまま)
-払底の見込み           #11項目1だけで24県年(15〜70h相当)残っており当面は枯れない
+払底の見込み           #11項目1だけで23県年(15〜70h相当)残っており当面は枯れない
 詰まっていること        aichi（Imperva WAF一時ブロックが継続中）。oita R6/okinawa
                       (競争率データ自体は完了)は他タスクで資料自体が未整備で前進手段なし
 👤の判断が要るもの      #5成果物・#6仕様書とも対外提示可否・価格は👤判断待ち（送信0件）

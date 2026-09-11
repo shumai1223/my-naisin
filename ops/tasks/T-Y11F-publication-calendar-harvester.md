@@ -296,10 +296,11 @@ W-0 の鮮度を確認する（主食ドリフト4回の教訓）。
    R5完了（81件）・4件目=akita R4完了（82件）・5件目=kochi R4完了（76件）・6件目=ehime
    R4完了（106件）・7件目=nagano R4完了（131件）・8件目=miyagi R4完了（132件）・9件目
    =fukushima R4完了（94件）・10件目=hiroshima R4完了（135件）・11件目=okayama R4完了
-   （110件）・12件目=kumamoto R4完了（165件）。詳細は下の「#11-1」〜「#11-12」参照。
-   残り24県年（到達○のうちfukui/niigata/oita/akita/kochi/ehime/nagano/miyagi/
-   fukushima/hiroshima/okayama/kumamoto以外・ibaraki R4/yamanashi R4/shimane R4/
-   chiba R4は要再検討で保留=下記参照）が対象。**
+   （110件）・12件目=kumamoto R4完了（165件）。2026-09-12 13件目=kyoto R4完了
+   （76件）。詳細は下の「#11-1」〜「#11-13」参照。残り23県年（到達○のうちfukui/
+   niigata/oita/akita/kochi/ehime/nagano/miyagi/fukushima/hiroshima/okayama/
+   kumamoto/kyoto以外・ibaraki R4/yamanashi R4/shimane R4/chiba R4は要再検討で
+   保留=下記参照）が対象。**
 2. **定時制で `coverage='partial'` にした県の pendingDepartments を潰す。**
    現時点で fukuoka（単位制2期）・kochi（夜間部・通信制）・hiroshima。1県1〜2h
 3. **T-Y11C-4 の yamanashi 20件・yamaguchi 5件**（#9 に入っているが、単独でも取れる）
@@ -3673,6 +3674,39 @@ all green を確認しcommit・push済（871a8c4）。
 次は残り24県年（到達○のうちfukui/niigata/oita/akita/kochi/ehime/nagano/miyagi/
 fukushima/hiroshima/okayama/kumamoto以外・ibaraki R4/yamanashi R4/shimane R4/
 chiba R4は保留）のいずれかを次イテレーションで選ぶ。
+
+### #11-13 kyoto R4完了（2026-09-12・§11項目1の13件目）
+
+§5順序#10で到達可能性を確認済みだったkyoto令和4年度分を実収集した。
+
+台帳のハブページ（koukyou/cms/?p=1262・「令和４年度選抜状況」）はWebFetchで一発で
+開けて、その場に「令和４年度中期選抜志願者数」PDFへの直リンク（uploads/2022/12/
+01-【広報資料】-令和４年度中期選抜志願者数.pdf）が掲載されていた。miyagi/okayama/
+kumamotoで繰り返し踏んだ「到達可能=正しい文書ではない」の罠を今回は踏まず、
+Waybackを介さず現行ドメインから直接PDF本体（全5頁）を取得できた。
+
+R5〜R7と同じくpdftotextはフォントのToUnicode情報欠落で学校名欄が読めず
+（Adobe-Japan1 CMapエラー）、pdftoppm 300dpiビジョン解析で全76レコードを転記した。
+1頁目のサマリ表・4頁目末尾の全日制計行（中期選抜募集人員6,424・志願者数6,414・
+倍率1.00）とnode.js機械集計が完全一致した（初回転記で一致・再修正なし）。京都
+すばるはR5〜R6と同じく「起業創造・企画・情報科学」の3学科独立構成（R7で「商業
+学科群」に統合される前）。綾部（東）の農業・園芸くくり募集もR5〜R8と同型（両学科
+併せて定員9人）。
+
+schoolName一覧（54校）はR5との差分が「塔南」（R4のみ）「開建」（R5のみ）の1組の
+みだった。これはR5の掛-1に既に記録済みの通り、塔南高校がR5選抜で募集停止し開建
+高校に区分上のスロットを引き継いだ実在の事象であり、R4は塔南が実在する最後の
+年度にあたる（誤読ではない）。この結果、データセット全体のuniqueSchoolCount
+（県コード::学校名の組）が塔南分だけ+1された（R5〜R8では開建のみを収録していた
+ため、R4を追加したことで初めて塔南も収録された）。
+
+固定値回帰ガードテスト3本＋developersページ本文＋PoC納品物を連動更新（総件数
+23,021→23,097件・配布可能22,830→22,906件・学校数3,276→3,277）。tsc --noEmit
+exit 0・jest 545 suites 7782 tests all green を確認しcommit・push済（c6b361c）。
+
+次は残り23県年（到達○のうちfukui/niigata/oita/akita/kochi/ehime/nagano/miyagi/
+fukushima/hiroshima/okayama/kumamoto/kyoto以外・ibaraki R4/yamanashi R4/
+shimane R4/chiba R4は保留）のいずれかを次イテレーションで選ぶ。
 
 ## 守ること
 
