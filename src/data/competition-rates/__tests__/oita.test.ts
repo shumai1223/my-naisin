@@ -96,6 +96,18 @@ describe('大分県 倍率パイプラインα（Y-6・全日制39校81レコー
     expect([...r7Schools].every((s) => r8Schools.has(s))).toBe(true);
   });
 
+  it('掛-1(学校別×多年度・3年度目): 令和5年度(R5)分レコードが81件収録され、「県立高校全日制課程合計」(quota5,825・applicants6,134)と完全一致する（T-Y11F §5順序#11）。別府翔青はグローバルコミュニケーションが普通科に統合されくくり募集扱いだった', () => {
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    expect(r5.length).toBe(81);
+    expect(r5.reduce((a, r) => a + r.quota, 0)).toBe(5825);
+    expect(r5.reduce((a, r) => a + r.finalApplicants, 0)).toBe(6134);
+
+    expect(
+      r5.some((r) => r.schoolName === '別府翔青' && r.department === '普通・グローバルコミュニケーション（くくり募集）')
+    ).toBe(true);
+    expect(r5.some((r) => r.schoolName === '大分舞鶴' && r.department === '普通・理数（くくり募集）')).toBe(true);
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of OITA_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.pref\.oita\.jp\//);
