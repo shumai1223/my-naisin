@@ -76,4 +76,18 @@ kagawa 令和4年度  到達=○  手段=Wayback  http://web.archive.org/web/202
 
 ⚠️ **2026-09-11 13:20頃、archive.org自体が「Temporarily Offline」(503・公式にサービス全体が一時停止中)と判明した。** これは自分のアクセス過多によるレート制限ではなく先方の障害のため、本イテレーションはこれ以降Waybackを使わず現行サイト+WebSearchのみで継続し、ishikawa/iwateの再試行は次回以降に持ち越す。
 
-（kagawa以降・残り25県は次回イテレーション以降で着手）
+kagoshima 令和4年度  到達=○  手段=Wayback  http://web.archive.org/web/2022/https://www.pref.kagoshima.jp/ba05/kyoiku-bunka/school/koukou/nyushi/r3/r4syutugansyasu.html （★archive.orgは復旧済み。kagoshimaのURLフォルダ名(r3/r4/r5等)は年度と対応しない社内コードで、実際の年度はファイル名側(r4syutugansyasu=R4出願者数)に現れる点に注意。CDXで2022年前半に発見）
+
+kanagawa 令和4年度  到達=○(WebSearchスニペットのみ・Wayback未検証)  手段=WebSearch  https://www.pref.kanagawa.jp/docs/dc4/prs/koko/r6969952.html （現行ライブは404。ただしWebSearchのスニペット自体が「令和4年度神奈川県公立高等学校入学者選抜一般募集共通選抜等の志願者数(志願変更締切時)について」という正確なページタイトルと「学校別の詳細情報を含む添付ファイルがある」旨を引用しており、Googleが実際にクロールした強い証拠となる。archive.orgが断続的に「Temporarily Offline」となり独立検証はできなかったため、次回復旧後にWaybackで裏取りする）
+
+kochi 令和4年度  到達=○  手段=現行サイト  https://www.pref.kochi.lg.jp/soshiki/311701/r4_siganjokyo.html （WebSearch1発で直接ヒット・ライブ301(リダイレクトのみ・実在)確認済み。A日程志願先変更前後の学校別一覧表PDFへの言及あり）
+
+kumamoto 令和4年度  到達=○  手段=現行サイト  https://www.pref.kumamoto.jp/site/kyouiku/122329.html （WebSearch1発で直接ヒット・ライブ200確認済み。「前期（特色）選抜等出願者数について」)
+
+kyoto 令和4年度  到達=○  手段=現行サイト  https://www.kyoto-be.ne.jp/koukyou/cms/?p=1262 （「令和４年度選抜状況」ページ・ライブ200確認済み。現行R8ソースと同じkyoto-be.ne.jp(京都府教育委員会・京都市教委city.kyoto.lg.jpとは別)ドメインで発見）
+
+mie 令和4年度  到達=○  手段=現行サイト  https://www.pref.mie.lg.jp/TOPICS/m0045100301.htm （「令和４年度三重県立高等学校後期選抜受検状況を取りまとめました」・ライブ200確認済み）
+
+miyagi 令和4年度  到達=○  手段=現行サイト  https://www.pref.miyagi.jp/documents/16068/r4dai1jigoukakujyokyou.pdf （WebSearch1発で直接ヒット・ライブ200確認済み。「第一次募集合格状況」だが同ディレクトリ内に出願状況資料も存在する可能性が高い）
+
+（miyagi以降・残り18県は次回イテレーション以降で着手）
