@@ -64,7 +64,7 @@ hiroshima 令和4年度  到達=○  手段=現行サイト  https://www.pref.hi
 
 hyogo 令和4年度  到達=対象外  手段=(取得禁止)  §5「守ること」の恒久ルール「hyogoは取得しない」に従い、本タスクでもhyogoへのアクセス自体を行わない。台帳上は永続的にスキップ対象として記録する
 
-ibaraki 令和4年度  到達=○  手段=現行サイト  https://kyoiku.pref.ibaraki.jp/wp-content/uploads/2023/02/0610houkoku.pdf （WebSearch1発で直接ヒット・ライブ200確認済み・「実施状況報告書」形式で現行R8ソースと同型）
+ibaraki 令和4年度  到達=○  手段=現行サイト  https://kyoiku.pref.ibaraki.jp/wp-content/uploads/2023/02/0610houkoku.pdf （WebSearch1発で直接ヒット・ライブ200確認済み・「実施状況報告書」形式で現行R8ソースと同型）⚠️2026-09-11追記: 実際に開くと全45ページの別種文書（第2次募集・合格者数・入学者数まで含む）でR5〜R8のシンプルな志願者数速報とは非互換と判明・実収集は保留（詳細はT-Y11Fタスクファイル#11-4）
 
 ishikawa 令和4年度  到達=△要Wayback再確認  手段=保留  WebSearchでは具体的な学校別ページを発見できず。R8ソースが日付ベースファイル名(documents/20260224.pdf)のため直接パターン推測は不可能。WaybackのCDXで2022年前半のdocuments/フォルダを検索しようとしたが2回連続タイムアウトしたため中断。次回再試行
 
@@ -122,7 +122,7 @@ wakayama 令和4年度  到達=○  手段=現行サイト  https://www.pref.wak
 
 yamagata 令和4年度  到達=○  手段=現行サイト  https://www.pref.yamagata.jp/700013/koko/r4kokonyushi.html （WebSearch1発で直接ヒット・ライブ200確認済み。「一般入学者選抜志願状況（令和4年2月25日更新）」PDFへの言及あり）
 
-yamanashi 令和4年度  到達=○  手段=現行サイト  https://www.pref.yamanashi.jp/documents/7061/r4zenki_sigansya.pdf （「過去の入試状況」アーカイブページ(kyouiku-kikaku/nyuusi/nyuushijoukyou.html)から発見・ライブ200確認済み。「令和4年度山梨県公立高等学校入学者選抜前期募集志願者数」）
+yamanashi 令和4年度  到達=○  手段=現行サイト  https://www.pref.yamanashi.jp/documents/7061/r4zenki_sigansya.pdf （「過去の入試状況」アーカイブページ(kyouiku-kikaku/nyuusi/nyuushijoukyou.html)から発見・ライブ200確認済み。「令和4年度山梨県公立高等学校入学者選抜前期募集志願者数」）⚠️2026-09-11追記: タイトルが「前期募集」＝山梨県が後期募集1本化する前の選抜方式でR5〜R8（全て後期募集）と測定対象が非互換と判明・実収集は保留（後期募集版のR4資料が別途あるかは次回再調査の余地あり・詳細はT-Y11Fタスクファイル#11-4）
 
 **これで51県年すべてに着手し終えた（未着手0）。** 内訳: 到達○36・到達×5(hokkaido R4・
 saga R5/R4・tochigi R5/R4)・対象外1(hyogo・§5守ることの恒久ルールにより取得禁止)・
