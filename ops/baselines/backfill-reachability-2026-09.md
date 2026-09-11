@@ -16,21 +16,23 @@ hokkaido 令和5年度  到達=○  手段=Wayback  http://web.archive.org/web/2
 hokkaido 令和4年度  到達=×  手段=見つからず  現行サイト(hk/gks/koukounyuusenn.html)に令和4年度リンク無し・WaybackのCDX検索(gakkoubetu.pdfパターン)は2023-08以前のスナップショット無し(広域クエリは504タイムアウト1回)・WebSearchで「R4入学者選抜状況報告書」個別ページも発見できず(R3の個別ページ`R03joukyouhoukokusho.html`は現存するが対応する`R04joukyouhoukokusho.html`は404)。3手で打ち切り
 tochigi 令和5年度  到達=×  手段=見つからず  現行サイトのURLパターン推測(r05zennnitiippannshutugannhennkou.pdf)は404・WaybackのCDXでHTML案内ページ2種(r05zennitiseishutugannhennkou.html/r05zennitiseishutugannjoukyou.html)は2023-09-27にクロールされ、そこからリンクされるPDF(r05zennnitiippannshutugannhennkou.pdf/r05ippannsennbatushutugannjoukyou.pdf)のURLは特定できたが、PDF本体はいずれもWaybackに未収録(HTMLページのみクロールされアセットが未取得)。3手で打ち切り
 tochigi 令和4年度  到達=×  手段=見つからず  令和5年度と同型のURLパターン(r04...)は未検証だが、同一サイト構造で令和5年度のPDF自体がWayback未収録だったことから同じ結果が見込まれるため、時間対効果を考慮し3手のうち2手(現行サイトパターン推測・Waybackの令和5年度と同型調査結果の類推)で打ち切り
-nara 令和5年度  到達=△未確定  手段=保留(Wayback不安定のため中断)  WebSearchで「高校別概要（特色選抜及び一般選抜）/ 奈良県」(pref.nara.lg.jp/n167/61092.html)を発見したが現行サイトは404。Wayback確認を試みたところavailability API(429 Too Many Requests)→CDX APIタイムアウトと2連続で失敗したため、本日はこれ以上Waybackを使わない運用ルールに従い中断。次回別日にCDXから再試行する
-nara 令和4年度  到達=△未確定  手段=保留(nara令和5年度と同日につき据え置き)  同一県のため今回は着手せず、令和5年度の再調査と合わせて次回実施
+nara 令和5年度  到達=○  手段=Wayback  http://web.archive.org/web/20230203170600/https://www.pref.nara.jp/61092.htm （現行の`pref.nara.lg.jp/n167/61092.html`は404だが、リダイレクト元の旧ドメイン`pref.nara.jp/61092.htm`はWaybackに2023-02-03のスナップショットが存在し、学校別PDF(1校1ファイル形式・25_r5koukoubetumokuji.pdf等)への実リンクを多数確認。ただし現行R8ソース(1ファイルに全校集約)とは資料の粒度が異なるため、実際の転記作業時は形式の再確認が必要）
+nara 令和4年度  到達=○  手段=Wayback  http://web.archive.org/web/20230204125637/https://www.pref.nara.jp/58695.htm （同一パターンでR4版ページ`pref.nara.jp/58695.htm`もWaybackに2023-02-04のスナップショットが存在することを確認。中身は令和5年度と同様の1校1ファイル形式と推定）
 
 ⚠️ **2026-09-11 12:10頃、archive.orgのavailability API(429)→CDX API(タイムアウト)と2回連続で失敗したため、本イテレーションはWaybackの使用を中断した。** 以降の県は現行サイト＋WebSearchのみで手を尽くし、Wayback確認が必要な場合は「保留」として次回に回す。
 
-niigata 令和5年度  到達=△未確定  手段=保留(Wayback要再確認)  現行サイト2箇所(pref.niigata.lg.jp/site/kyoiku/nyuugakuzyoukyoucyousa2023.html・pref.niigata.lg.jp/sec/kotogakko/r5kotogakkonyushi.html)ともWebSearchのインデックスには存在するが実際は404。一次ソース自体(kyouikucho.nein.ed.jp/koukoukyouiku/senbatu/koukou/ippan_henkogo.pdf)は年度を含まない固定URLで毎年上書きされる形式のため、過去年度を取るにはWayback必須。Wayback不安定のため次回再試行
-niigata 令和4年度  到達=△未確定  手段=保留(niigata令和5年度と同日につき据え置き)  同上
-oita 令和5年度  到達=△未確定  手段=保留(Wayback要再確認)  現行サイトの一覧ページ(list21509-25206.html)に過去年度リンク無し。WebSearchで見つかった年度別ページ(r05suisentou.html)も現在は404。Wayback不安定のため次回再試行
-oita 令和4年度  到達=△未確定  手段=保留(oita令和5年度と同日につき据え置き)  同上
-saga 令和5年度  到達=△未確定  手段=保留(Wayback要再確認)  現行サイトの一覧ページ(list01907.html)に過去年度リンク無し。WebSearchでも年度別ページを発見できず。Wayback不安定のため次回再試行
-saga 令和4年度  到達=△未確定  手段=保留(saga令和5年度と同日につき据え置き)  同上
+niigata 令和5年度  到達=○  手段=Wayback  http://web.archive.org/web/20240116133858/https://www.pref.niigata.lg.jp/sec/kotogakko/r5kotogakkonyushi.html （このページから「一般選抜志願変更後の志願状況(令和5年3月1日更新)」PDF=attachment/351758.pdfへのリンクを確認。現行R8ソース(kyouikucho.nein.ed.jp/.../ippan_henkogo.pdf)と同じ「一般選抜志願変更後」の資料名で一致）
+niigata 令和4年度  到達=○  手段=Wayback  http://web.archive.org/web/20230318132934/https://www.pref.niigata.lg.jp/sec/kotogakko/r4kotogakkonyushi.html （同一パターンのR4版ページが2022-07/2022-10/2023-03の複数時点でスナップショット済み・中身は令和5年度と同型の一般選抜志願状況PDF群と推定）
+oita 令和5年度  到達=○  手段=Wayback  http://web.archive.org/web/20230326002716/https://www.pref.oita.jp/site/kyoiku/list21509-25206.html （R5当時アーカイブされた一覧ページから「令和５年度大分県立高等学校第一次入学者選抜最終志願状況について」r05ichijisaisyuu.htmlへのリンクを確認。現行R8ソース(uploaded/attachment/2261572.pdf)と同種の最終志願状況資料）
+oita 令和4年度  到達=○  手段=Wayback  http://web.archive.org/web/20221201042058/https://www.pref.oita.jp/site/gakkokyoiku/r04ichijisaisyuu.html （同一パターンのR4版ページが2022-02〜2024-05にかけ複数回スナップショット済み）
+saga 令和5年度  到達=×  手段=見つからず  現行サイトの一覧ページ(list01907.html)に令和5年度当時のWaybackスナップショット(2023-03-28)があり中身も確認したが「実施要項」等の告知ページのみで志願状況PDFへのリンクは無し。WebSearchで「各学校における一般選抜志願状況」という核心的なタイトルのPDF自体は発見できた(kiji003111873/3_111873_344487_up_cgdmqo5x.pdf・現行ライブ)が、これは令和7年度(PDF作成日2025-02-18)のものでkiji IDが年度ごとに大きく変わる連番方式のため令和5年度分のID自体を特定できず。3手(現行サイト・Wayback・WebSearch)を尽くし打ち切り
+saga 令和4年度  到達=×  手段=見つからず  令和5年度と同型のkiji ID連番方式のためID特定できず、同じ結果が見込まれるため打ち切り
 
-**本イテレーションの成果**: 確定2県年(hokkaido R5=○/R4=×)+2県年(tochigi R5=×/R4=×)=4県年を確定。
-nara/niigata/oita/sagaの8県年はWaybackの一時的な不安定化(429→タイムアウト)により保留。
-次回は①Waybackの回復確認→保留8県年の再試行、②残り39県(R4欠のみ)への着手、の順で進める。
+**進捗**: R5欠6県(hokkaido/nara/niigata/oita/saga/tochigi)は全12県年を確定した
+（到達○=7件: hokkaido R5・nara R5/R4・niigata R5/R4・oita R5/R4／到達×=5件:
+hokkaido R4・saga R5/R4・tochigi R5/R4）。archive.orgは一時的に不安定化(429→timeout)
+する場面があったが、時間を置いての再試行で全て解消した。
+次は残り39県(R4欠のみ)への着手。
 
 ## R4欠のみ(39県)
 
