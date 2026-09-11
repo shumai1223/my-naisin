@@ -138,6 +138,18 @@ describe('秋田県 倍率パイプラインα（Y-6・全日制78レコード�
     });
   });
 
+  it('掛-1(学校別×多年度・5年度目): 令和4年度(R4)分レコードが82件収録され、県北計/中央計/県南計/県合計の4段階の公式小計すべてと完全一致する（T-Y11F §5順序#11）。R4もR5と同じく「花輪」「十和田」「小坂」の3校が独立して存在する', () => {
+    const r4 = records.filter((r) => r.fiscalYear === '令和4年度（2022年度）');
+    expect(r4.length).toBe(82);
+    expect(r4.reduce((a, r) => a + r.quota, 0)).toBe(6823);
+    expect(r4.reduce((a, r) => a + r.finalApplicants, 0)).toBe(4959);
+
+    expect(r4.some((r) => r.schoolName === '花輪' && r.department === '普通科')).toBe(true);
+    expect(r4.some((r) => r.schoolName === '十和田' && r.department === '普通科')).toBe(true);
+    expect(r4.filter((r) => r.schoolName === '小坂')).toHaveLength(2);
+    expect(r4.some((r) => r.schoolName === '鹿角')).toBe(false);
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of AKITA_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.pref\.akita\.lg\.jp\//);

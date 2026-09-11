@@ -59,6 +59,25 @@
  * 倍率0.88）の4段階すべてがnode.js機械集計と完全一致（初回転記で一致・再修正なし）。男鹿海洋・
  * 男鹿工業はR5でも3学科構成（男鹿海洋=普通科・海洋科・食品科学科／男鹿工業=機械科・電気電子科・
  * 設備システム科）で収録されている。
+ *
+ * 【掛-1（学校別×多年度）追加】T-Y11F §5順序#11（払底時の逃げ場・項目1）4件目として令和4年度分を
+ * 追加。⚠️罠: WebSearchで最初にヒットしたURLは「R04一般選抜（志願変更前）公－２.pdf」で
+ * （志願変更"前"＝早い段階の数字）他年度が全て採用している「志願変更後」（最終値）と測定時点が
+ * 異なり、かつライブ確認したところ404だった。再度WebSearchで正しい「R04一般選抜（志願変更後）
+ * 公－２.pdf」（別URL・ライブ200確認済み）を発見し、他年度と同じ測定時点のデータに揃えた。
+ * 秋田県のR4版は他年度と完全に同一の様式（[募集定員/前期選抜後の募集人数/志願者数/志願倍率/
+ * 昨年度最終志願倍率]）で、pdftotextはCJKラベルが抽出できずpdftoppm 300dpiビジョン解析で
+ * 全2ページ82レコードを転記した。quota=募集定員（「前期選抜後の募集人数」ではない）・
+ * finalApplicants=志願者数・finalRate=自前算出（applicants÷quota。printed「志願倍率」列は
+ * 「前期選抜後の募集人数」を分母にしており本ファイルの分母＝募集定員と異なるため不採用、他年度と
+ * 同じ扱い）。県北計（quota1,587・applicants1,081）・中央計（quota3,049・applicants2,408）・
+ * 県南計（quota2,187・applicants1,470）・県合計（quota6,823・applicants4,959）の4段階すべてが
+ * node.js機械集計と完全一致（初回転記で一致・再修正なし）。
+ * ⚠️年度差: R4のみ「花輪」「十和田」「小坂」の3校が独立して存在し（R5の既存コメント記載どおり、
+ * 令和6年4月の3校統合で「鹿角」（普通科・産業工学科）へ再編）、これはR5追加時に既に確認済みの
+ * パターンがR4でも同様に確認できたことの追加証跡。学科名の表記は「科」を毎セグメントに付与する
+ * R5/R6スタイル（「普通科・理数科」等）で統一した（R7/R8は「普通・理数科」に簡略化されており、
+ * 既存ファイルの規約どおり印字の違いは表記統一で吸収）。
  */
 import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
 
@@ -90,6 +109,15 @@ export const AKITA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       docTitle: '秋田県教育委員会 令和5年度秋田県公立高等学校入学者選抜１次募集 志願者数（志願先変更後）',
       fiscalYear: '令和5年度（2023年度）',
       fetchedAt: '2026-08-22',
+    },
+    {
+      url: 'https://www.pref.akita.lg.jp/uploads/public/archive_0000062318_00/R04%E4%B8%80%E8%88%AC%E9%81%B8%E6%8A%9C%EF%BC%88%E5%BF%97%E9%A1%98%E5%A4%89%E6%9B%B4%E5%BE%8C%EF%BC%89%E5%85%AC%EF%BC%8D%EF%BC%92.pdf',
+      docTitle: '秋田県教育委員会 令和4年度秋田県公立高等学校入学者選抜 一般選抜 志願者数（志願先変更後）',
+      fiscalYear: '令和4年度（2022年度）',
+      fetchedAt: '2026-09-11',
+      // T-Y11F §5順序#11: ライブ200確認済み(WebSearchで発見・当初「志願変更前」版URLしか
+      // 見つからず404だったが「志願変更後」版が別URLで存在すると判明)
+      pdfSha256: '5ffe030b8f99b507412e89fcac672ec3add0ba8b02de18327962038bde66ac8f',
     },
   ],
   coverage: {
@@ -420,5 +448,87 @@ export const AKITA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '湯沢翔北', department: '工業技術科', quota: 70, finalApplicants: 59, finalRate: 0.84, fiscalYear: '令和5年度（2023年度）' },
     { schoolName: '湯沢翔北(雄勝校)', department: '普通科', quota: 40, finalApplicants: 16, finalRate: 0.4, fiscalYear: '令和5年度（2023年度）' },
     { schoolName: '羽後', department: '普通科', quota: 70, finalApplicants: 41, finalRate: 0.59, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '花輪', department: '普通科', quota: 140, finalApplicants: 103, finalRate: 0.74, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '十和田', department: '普通科', quota: 70, finalApplicants: 27, finalRate: 0.39, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '小坂', department: '普通科', quota: 35, finalApplicants: 6, finalRate: 0.17, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '小坂', department: '産業工学科', quota: 35, finalApplicants: 11, finalRate: 0.31, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '大館鳳鳴', department: '普通科・理数科', quota: 210, finalApplicants: 180, finalRate: 0.86, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '大館桂桜', department: '普通科・生活科学科', quota: 105, finalApplicants: 106, finalRate: 1.01, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '大館桂桜', department: '機械科', quota: 35, finalApplicants: 26, finalRate: 0.74, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '大館桂桜', department: '電気科', quota: 35, finalApplicants: 17, finalRate: 0.49, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '大館桂桜', department: '土木・建築科', quota: 35, finalApplicants: 19, finalRate: 0.54, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '大館国際情報学院', department: '普通科', quota: 38, finalApplicants: 16, finalRate: 0.42, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '大館国際情報学院', department: '国際情報科', quota: 44, finalApplicants: 19, finalRate: 0.43, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '秋田北鷹', department: '普通科', quota: 140, finalApplicants: 94, finalRate: 0.67, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '秋田北鷹', department: '生物資源科', quota: 35, finalApplicants: 32, finalRate: 0.91, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '秋田北鷹', department: '緑地環境科', quota: 35, finalApplicants: 19, finalRate: 0.54, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '能代', department: '普通科・理数科', quota: 210, finalApplicants: 158, finalRate: 0.75, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '能代松陽', department: '普通科・国際コミュニケーション科', quota: 140, finalApplicants: 116, finalRate: 0.83, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '能代松陽', department: '情報ビジネス科', quota: 70, finalApplicants: 38, finalRate: 0.54, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '能代科学技術', department: '機械科・電気科・建設科', quota: 105, finalApplicants: 41, finalRate: 0.39, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '能代科学技術', department: '生物資源科・生活福祉科', quota: 70, finalApplicants: 53, finalRate: 0.76, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '五城目', department: '普通科', quota: 105, finalApplicants: 24, finalRate: 0.23, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '男鹿海洋', department: '普通科', quota: 35, finalApplicants: 10, finalRate: 0.29, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '男鹿海洋', department: '海洋科', quota: 35, finalApplicants: 12, finalRate: 0.34, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '男鹿海洋', department: '食品科学科', quota: 35, finalApplicants: 6, finalRate: 0.17, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '男鹿工業', department: '機械科', quota: 35, finalApplicants: 25, finalRate: 0.71, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '男鹿工業', department: '電気電子科', quota: 35, finalApplicants: 32, finalRate: 0.91, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '男鹿工業', department: '設備システム科', quota: 35, finalApplicants: 21, finalRate: 0.6, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '秋田西', department: '普通科', quota: 175, finalApplicants: 141, finalRate: 0.81, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '金足農業', department: '生物資源科', quota: 35, finalApplicants: 22, finalRate: 0.63, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '金足農業', department: '環境土木科', quota: 35, finalApplicants: 17, finalRate: 0.49, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '金足農業', department: '食品流通科', quota: 35, finalApplicants: 21, finalRate: 0.6, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '金足農業', department: '造園緑地科', quota: 35, finalApplicants: 17, finalRate: 0.49, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '金足農業', department: '生活科学科', quota: 35, finalApplicants: 28, finalRate: 0.8, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '秋田', department: '普通科・理数科', quota: 275, finalApplicants: 291, finalRate: 1.06, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '秋田北', department: '普通科', quota: 228, finalApplicants: 280, finalRate: 1.23, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '秋田南', department: '普通科', quota: 150, finalApplicants: 152, finalRate: 1.01, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '秋田中央', department: '普通科', quota: 210, finalApplicants: 216, finalRate: 1.03, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '新屋', department: '普通科', quota: 175, finalApplicants: 159, finalRate: 0.91, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '秋田工業', department: '機械科', quota: 70, finalApplicants: 56, finalRate: 0.8, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '秋田工業', department: '電気エネルギー科', quota: 35, finalApplicants: 32, finalRate: 0.91, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '秋田工業', department: '土木科', quota: 35, finalApplicants: 32, finalRate: 0.91, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '秋田工業', department: '建築科', quota: 35, finalApplicants: 32, finalRate: 0.91, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '秋田工業', department: '工業化学科', quota: 35, finalApplicants: 29, finalRate: 0.83, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '秋田商業', department: '商業科', quota: 240, finalApplicants: 184, finalRate: 0.77, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '御所野学院', department: '普通科', quota: 56, finalApplicants: 38, finalRate: 0.68, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '本荘', department: '普通科', quota: 210, finalApplicants: 167, finalRate: 0.8, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '由利', department: '普通科・理数科・国際科', quota: 175, finalApplicants: 134, finalRate: 0.77, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '由利工業', department: '機械科', quota: 35, finalApplicants: 26, finalRate: 0.74, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '由利工業', department: '電気科', quota: 35, finalApplicants: 11, finalRate: 0.31, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '由利工業', department: '環境システム科', quota: 35, finalApplicants: 17, finalRate: 0.49, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '由利工業', department: '建築科', quota: 35, finalApplicants: 24, finalRate: 0.69, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '矢島', department: '普通科', quota: 60, finalApplicants: 18, finalRate: 0.3, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '西目', department: '総合学科', quota: 140, finalApplicants: 88, finalRate: 0.63, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '仁賀保', department: '普通科', quota: 80, finalApplicants: 24, finalRate: 0.3, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '仁賀保', department: '情報メディア科', quota: 35, finalApplicants: 22, finalRate: 0.63, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '西仙北', department: '普通科', quota: 60, finalApplicants: 14, finalRate: 0.23, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '大曲農業', department: '農業科学科', quota: 70, finalApplicants: 42, finalRate: 0.6, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '大曲農業', department: '食品科学科', quota: 35, finalApplicants: 29, finalRate: 0.83, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '大曲農業', department: '園芸科学科', quota: 35, finalApplicants: 34, finalRate: 0.97, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '大曲農業', department: '生活科学科', quota: 35, finalApplicants: 32, finalRate: 0.91, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '大曲農業(太田分校)', department: '普通科', quota: 35, finalApplicants: 3, finalRate: 0.09, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '大曲', department: '普通科', quota: 160, finalApplicants: 143, finalRate: 0.89, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '大曲', department: '商業科', quota: 35, finalApplicants: 28, finalRate: 0.8, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '大曲工業', department: '機械科', quota: 35, finalApplicants: 20, finalRate: 0.57, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '大曲工業', department: '電気科', quota: 70, finalApplicants: 56, finalRate: 0.8, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '大曲工業', department: '土木・建築科', quota: 35, finalApplicants: 23, finalRate: 0.66, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '角館', department: '普通科', quota: 210, finalApplicants: 161, finalRate: 0.77, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '六郷', department: '普通科・福祉科', quota: 105, finalApplicants: 43, finalRate: 0.41, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '横手', department: '普通科・理数科', quota: 235, finalApplicants: 207, finalRate: 0.88, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '横手城南', department: '普通科', quota: 160, finalApplicants: 139, finalRate: 0.87, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '横手清陵学院', department: '普通科', quota: 44, finalApplicants: 28, finalRate: 0.64, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '横手清陵学院', department: '総合技術科', quota: 63, finalApplicants: 22, finalRate: 0.35, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '平成', department: '普通科', quota: 70, finalApplicants: 53, finalRate: 0.76, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '平成', department: '総合ビジネス科', quota: 35, finalApplicants: 26, finalRate: 0.74, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '雄物川', department: '普通科', quota: 80, finalApplicants: 27, finalRate: 0.34, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '増田', department: '総合学科', quota: 80, finalApplicants: 65, finalRate: 0.81, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '増田', department: '農業科学科', quota: 35, finalApplicants: 22, finalRate: 0.63, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '湯沢', department: '普通科・理数科', quota: 175, finalApplicants: 106, finalRate: 0.61, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '湯沢翔北', department: '普通科', quota: 40, finalApplicants: 25, finalRate: 0.63, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '湯沢翔北', department: '総合ビジネス科', quota: 70, finalApplicants: 51, finalRate: 0.73, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '湯沢翔北', department: '工業技術科', quota: 70, finalApplicants: 43, finalRate: 0.61, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '湯沢翔北(雄勝校)', department: '普通科', quota: 40, finalApplicants: 9, finalRate: 0.23, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '羽後', department: '普通科', quota: 70, finalApplicants: 19, finalRate: 0.27, fiscalYear: '令和4年度（2022年度）' },
   ],
 };
