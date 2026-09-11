@@ -299,10 +299,11 @@ W-0 の鮮度を確認する（主食ドリフト4回の教訓）。
    （110件）・12件目=kumamoto R4完了（165件）。2026-09-12 13件目=kyoto R4完了
    （76件）・14件目=mie R4完了（108件）・15件目=miyazaki R4完了（104件）・16件目
    =wakayama R4完了（62件）・17件目=yamagata R4完了（93件）・18件目=shiga R4完了
-   （61件）・19件目=aomori R4完了（91件）。詳細は下の「#11-1」〜「#11-19」参照。
-   残り17県年（到達○のうちfukui/niigata/oita/akita/kochi/ehime/nagano/miyagi/
+   （61件）・19件目=aomori R4完了（91件）・20件目=kagawa R4完了（68件）。詳細は下の
+   「#11-1」〜「#11-20」参照。
+   残り16県年（到達○のうちfukui/niigata/oita/akita/kochi/ehime/nagano/miyagi/
    fukushima/hiroshima/okayama/kumamoto/kyoto/mie/miyazaki/wakayama/yamagata/
-   shiga/aomori以外・ibaraki R4/yamanashi R4/shimane R4/chiba R4は要再検討で
+   shiga/aomori/kagawa以外・ibaraki R4/yamanashi R4/shimane R4/chiba R4は要再検討で
    保留=下記参照）が対象。**
 2. **定時制で `coverage='partial'` にした県の pendingDepartments を潰す。**
    現時点で fukuoka（単位制2期）・kochi（夜間部・通信制）・hiroshima。1県1〜2h
@@ -3932,6 +3933,31 @@ tsc --noEmit exit 0・jest 545 suites 7791 tests all green を確認しcommit・
 fukushima/hiroshima/okayama/kumamoto/kyoto/mie/miyazaki/wakayama/yamagata/
 shiga/aomori以外・ibaraki R4/yamanashi R4/shimane R4/chiba R4は保留）のいずれかを
 次イテレーションで選ぶ。
+
+### #11-20 kagawa R4完了（2026-09-12・§11項目1の20件目）
+
+台帳のWayback URL（20220311202329・syutugan4-5.pdf）から「一般選抜出願者数（全日制
+課程小学科・コース別、令和4年2月24日志願変更締切後）」を取得。ライブでは既に404
+だったが、pdftotext -layoutは数字のみ抽出可能（CJKラベルなし）で、pdftoppm
+300dpiレンダリングもR5/R7と同じくCJKグリフ含めて正常表示され、R6で遭遇した
+poppler CMap欠落による空白ページの罠は再発しなかった。
+
+ビジョン読取で68レコード（30校）全件を転記し、ページ末尾「全日制合計」行
+（quota4,907・applicants5,538・倍率1.13）とnode.js機械集計が初回転記で完全一致。
+R5との学校名+学科名キー集合も完全一致（差分0件・学校再編なし・くくり募集3組=
+三本松「普通・理数」/農業経営「農業生産・環境園芸・動物科学・食農科学」4学科
+まとめ/観音寺第一「普通・理数」も同一構成）。ページ2以降は「全国からの生徒募集」
+枠と定時制課程の表のみでR5〜R8と同じ理由でスコープ外。
+
+固定値回帰ガードテスト3本＋developersページ本文＋PoC納品物を連動更新（総件数
+23,616→23,684件・配布可能23,425→23,493件・学校数3,277のまま変化なし）。
+tsc --noEmit exit 0・kagawa.test.ts 11 tests green・3本のロックステップテスト
+green を確認しcommit・push済（b9c0bf4/1d64448）。
+
+次は残り16県年（到達○のうちfukui/niigata/oita/akita/kochi/ehime/nagano/miyagi/
+fukushima/hiroshima/okayama/kumamoto/kyoto/mie/miyazaki/wakayama/yamagata/
+shiga/aomori/kagawa以外・ibaraki R4/yamanashi R4/shimane R4/chiba R4は保留）の
+いずれかを次イテレーションで選ぶ。
 
 ## 守ること
 
