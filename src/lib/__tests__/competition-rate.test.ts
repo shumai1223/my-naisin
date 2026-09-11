@@ -223,6 +223,7 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
       { code: 'shizuoka', count: 162 },
       { code: 'tochigi', count: 107 },
       { code: 'tokushima', count: 69 },
+      { code: 'tokyo', count: 189 },
       { code: 'tottori', count: 43 },
       { code: 'toyama', count: 75 },
       { code: 'wakayama', count: 57 },
@@ -1641,6 +1642,52 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
         expect(seen.has(r.rowIndex!)).toBe(false);
         seen.add(r.rowIndex!);
       });
+    });
+
+    it('R7以前（fiscalYear明示済み）はまだpage/rowIndex未バックフィルのため全件null', () => {
+      const pre8 = file.records.filter((r) => r.fiscalYear !== undefined);
+      expect(pre8.length).toBeGreaterThan(0);
+      for (const r of pre8) {
+        expect(resolveSourceLocator(r, file.sources)).toBeNull();
+      }
+    });
+  });
+
+  describe('tokyo R8（#8・ビジョン11県10県目・sourceIndex0/1/2の3本のPDFに分割）', () => {
+    const file = COMPETITION_RATE_BY_PREFECTURE['tokyo']!;
+    const r8 = file.records.filter((r) => !r.fiscalYear);
+
+    it('R8の189件全件がresolveSourceLocatorで解決できる', () => {
+      expect(r8.length).toBe(189);
+      const expectedSha256: Record<number, string> = {
+        0: 'f1a0b3522599121eca2196db2e143ea8382f7706f836b363e62fc151ab1eab65',
+        1: 'a277e4d651b655dc3eb611d1c706727fa4802061c0e266d54170bd0fcd2c962a',
+        2: '74585d24bf5d5b7eeccf90d865fd273af9259fb1abc38d17371696ff9d5e5dbc',
+      };
+      for (const r of r8 as any[]) {
+        expect(r.page).toBeDefined();
+        const locator = resolveSourceLocator(r, file.sources);
+        expect(locator).not.toBeNull();
+        expect(locator!.pdfSha256).toBe(expectedSha256[r.sourceIndex]);
+        expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
+      }
+    });
+
+    it('sourceIndex別の件数が107/22/60で合計189件と一致する', () => {
+      const bySource = new Map<number, number>();
+      for (const r of r8 as any[]) bySource.set(r.sourceIndex, (bySource.get(r.sourceIndex) ?? 0) + 1);
+      expect(bySource.get(0)).toBe(107);
+      expect(bySource.get(1)).toBe(22);
+      expect(bySource.get(2)).toBe(60);
+    });
+
+    it('同一(sourceIndex,page,rowIndex)の重複が無い', () => {
+      const seen = new Set<string>();
+      for (const r of r8 as any[]) {
+        const key = `${r.sourceIndex}|${r.page}|${r.rowIndex}`;
+        expect(seen.has(key)).toBe(false);
+        seen.add(key);
+      }
     });
 
     it('R7以前（fiscalYear明示済み）はまだpage/rowIndex未バックフィルのため全件null', () => {
