@@ -116,4 +116,16 @@ tokushima 令和4年度  到達=△要継続調査  手段=保留  一次サイ�
 
 tottori 令和4年度  到達=△要継続調査  手段=保留  現行の「高校入学者選抜、転・編入学試験情報」ページに「令和4年度以前の入学者選抜」というアーカイブセクションはあるが「学力検査結果(得点状況)」のみで志願者数(出願段階のデータ)は掲載されていない。secure/NNNNNNN/形式のURLで数値ID推測は不可能なため、次回は「令和５年度県立高等学校入学者選抜関係資料等」(295710.htm)ページの構造を参考に令和4年度版の同型ページを探すか、WebSearchで別の切り口を試す
 
-（tottori以降・残り4県は次回イテレーション以降で着手）
+toyama 令和4年度  到達=△要継続調査  手段=保留  WebSearchで見つかった候補URL(pref.toyama.lg.jp/1104/05kyuuyotounozyoukyou.html)はSSL証明書ミスマッチかつ「給与等の状況」という無関係な内容と判明(誤った検索結果)。R6以降の「0Xsenbatsu.html」パターンも404、R3の「kj00022361.html」IDパターンも404。現行の索引ページは令和6年度までしか遡れず、WaybackのCDXも同ディレクトリで空。次回は別の検索キーワードやURLパターンを試す
+
+wakayama 令和4年度  到達=○  手段=現行サイト  https://www.pref.wakayama.lg.jp/prefg/500200/d00207226.html （WebSearch1発で直接ヒット・ライブ200確認済み。「令和4年度県立高校入学者選抜」）
+
+yamagata 令和4年度  到達=○  手段=現行サイト  https://www.pref.yamagata.jp/700013/koko/r4kokonyushi.html （WebSearch1発で直接ヒット・ライブ200確認済み。「一般入学者選抜志願状況（令和4年2月25日更新）」PDFへの言及あり）
+
+yamanashi 令和4年度  到達=○  手段=現行サイト  https://www.pref.yamanashi.jp/documents/7061/r4zenki_sigansya.pdf （「過去の入試状況」アーカイブページ(kyouiku-kikaku/nyuusi/nyuushijoukyou.html)から発見・ライブ200確認済み。「令和4年度山梨県公立高等学校入学者選抜前期募集志願者数」）
+
+**これで51県年すべてに着手し終えた（未着手0）。** 内訳: 到達○36・到達×5(hokkaido R4・
+saga R5/R4・tochigi R5/R4)・対象外1(hyogo・§5守ることの恒久ルールにより取得禁止)・
+保留9(fukuoka/gifu/gunma/ishikawa/iwate/shizuoka/tokushima/tottori/toyama・いずれも
+Wayback/現行サイトの制約で時間内に確定できず、次回以降の再挑戦候補)。
+kanagawa R4はWebSearchのスニペットのみでの判定のため次回Waybackでの裏取りを推奨。
