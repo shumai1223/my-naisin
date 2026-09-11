@@ -5,16 +5,16 @@
 
 ---
 
-最終更新              2026-09-11 (§5順序#10・40/51県年確定)
-いまやっていること     T-Y11F §5順序#10（年度遡りの到達可能性）: 51県年中40県年の
-                      状況を記録(到達○32・対象外1=hyogo・保留7・未着手11)。
+最終更新              2026-09-11 (§5順序#10・47/51県年確定)
+いまやっていること     T-Y11F §5順序#10（年度遡りの到達可能性）: 51県年中47県年の
+                      状況を記録(到達○36・対象外1=hyogo・保留10・未着手4)。
                       §5順序#8は完遂済み
-今日やったこと         aichi(Imperva遮断県だがWaybackで到達確認)・miyazaki/nagano/
-                      nagasaki/okayama/okinawaのR4到達を確定。archive.org復旧を
-                      都度確認しながら軽量手順で継続
-次にやること           残り11県(osaka以降)へ軽量手順で着手継続。余裕があれば
-                      保留分(fukuoka/gifu/gunma/ishikawa/iwate/kanagawa)の
-                      archive.org裏取りも実施
+今日やったこと         osaka/saitama/shiga/shimaneのR4到達を確定。tokushimaは
+                      一次サイトがAngular SPAでWayback到達が構造的に不可能という
+                      新しい障害パターンを発見。shizuoka/tottoriも保留に
+次にやること           残り4県(toyama/wakayama/yamagata/yamanashi)へ着手。完了後は
+                      保留10県年(fukuoka/gifu/gunma/ishikawa/iwate/kanagawa/
+                      shizuoka/tokushima/tottori)の再挑戦を検討
 払底の見込み           22データ点いずれも同程度の負荷。sourceIndex事前確認の運用が定着し
                       fukuoka級の複雑さへの対応コストは制御下にある
 詰まっていること        aichi（Imperva WAF一時ブロックが継続中）。oita/okinawa(競争率
