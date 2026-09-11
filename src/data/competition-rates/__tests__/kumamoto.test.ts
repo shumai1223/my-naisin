@@ -173,9 +173,59 @@ describe('熊本県 倍率パイプラインα（Y-6・全日制52校162レコ�
     expect([...r5Schools].every((s) => r6Schools.has(s))).toBe(true);
   });
 
-  it('sourcesが公式PDF URLを正しく記録している', () => {
+  it('掛-1(学校別×多年度・T-Y11F §5順序#11払底時の逃げ場): 令和4年度(R4)分レコードが165件・52校収録され、全日制「計」行(quota8,569・applicants7,692)と完全一致する。くくり募集3組(矢部・大津・上天草)もR5〜R8と同一パターンで存在する。schoolName一覧はR5と完全一致（差分0件）', () => {
+    const r4 = records.filter((r) => r.fiscalYear === '令和4年度（2022年度）');
+    expect(r4.length).toBe(165);
+    const distinctSchools = new Set(r4.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(52);
+    expect(r4.reduce((a, r) => a + r.quota, 0)).toBe(8569);
+    expect(r4.reduce((a, r) => a + r.finalApplicants, 0)).toBe(7692);
+
+    const kukuriNames = ['食農科学(農業科学コース)・(食・生活コース)', '普通・理数', '普通・(グローカル文理コース)'];
+    for (const dept of kukuriNames) {
+      expect(r4.filter((r) => r.department === dept).length).toBe(1);
+    }
+
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    const r4Schools = new Set(r4.map((r) => r.schoolName));
+    const r5Schools = new Set(r5.map((r) => r.schoolName));
+    expect(r4Schools).toEqual(r5Schools);
+  });
+
+  it('掛-1(R4→R5の学科再編): 千原台・岱志・松橋・高森・大津は実在の学科改編でR4→R5の学科名/件数が変化しているが、それぞれ印字値の内部整合(quota合計・rate)は保たれている', () => {
+    const r4 = records.filter((r) => r.fiscalYear === '令和4年度（2022年度）');
+
+    const chiharadai = r4.filter((r) => r.schoolName === '千原台');
+    expect(chiharadai.map((r) => r.department)).toEqual(
+      expect.arrayContaining(['普通(国際経済コース)', '普通(健康スポーツコース)', '情報(OA会計コース)', '情報(経営情報コース)']),
+    );
+    expect(chiharadai.reduce((a, r) => a + r.quota, 0)).toBe(100);
+
+    const taishi = r4.filter((r) => r.schoolName === '岱志');
+    expect(taishi.map((r) => r.department)).toEqual(
+      expect.arrayContaining(['普通', '普通(体育コース)', '普通(美術工芸コース)']),
+    );
+    expect(taishi.length).toBe(3);
+
+    const matsubase = r4.filter((r) => r.schoolName === '松橋');
+    expect(matsubase.map((r) => r.department)).toEqual(
+      expect.arrayContaining(['普通(文理総合コース)', '普通(体育コース)']),
+    );
+
+    const takamori = r4.filter((r) => r.schoolName === '高森');
+    expect(takamori.length).toBe(1);
+    expect(takamori[0].department).toBe('普通');
+
+    const otsu = r4.filter((r) => r.schoolName === '大津');
+    expect(otsu.some((r) => r.department === '普通(体育コース)')).toBe(true);
+    expect(otsu.some((r) => r.department === '普通(スポーツコース)')).toBe(false);
+  });
+
+  it('sourcesが公式PDF URLを正しく記録している（R4分は原本削除のためWayback Machine経由の公式ドメインURLを許容）', () => {
     for (const s of KUMAMOTO_COMPETITION_RATES.sources) {
-      expect(s.url).toMatch(/^https:\/\/www\.pref\.kumamoto\.jp\//);
+      expect(s.url).toMatch(
+        /^https:\/\/www\.pref\.kumamoto\.jp\/|^https:\/\/web\.archive\.org\/web\/\d+\/https:\/\/www\.pref\.kumamoto\.jp\//
+      );
     }
   });
 });
