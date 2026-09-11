@@ -210,6 +210,7 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
       { code: 'nara', count: 71 },
       { code: 'niigata', count: 93 },
       { code: 'oita', count: 81 },
+      { code: 'okayama', count: 109 },
       { code: 'okinawa', count: 156 },
       { code: 'saga', count: 67 },
       { code: 'saitama', count: 241 },
@@ -1334,6 +1335,42 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
         expect(locator!.pdfSha256).toBe('3e7c6589bdc8f71109f58c668163831f1ffe9f0a2e40ab982018077663bd60d6');
         expect(locator!.page).toBeGreaterThanOrEqual(1);
         expect(locator!.page).toBeLessThanOrEqual(3);
+        expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
+      }
+    });
+
+    it('同一page内でrowIndexの重複が無い', () => {
+      const seen = new Set<string>();
+      for (const r of r8) {
+        const key = `${r.page}|${r.rowIndex}`;
+        expect(seen.has(key)).toBe(false);
+        seen.add(key);
+      }
+    });
+
+    it('R7以前（fiscalYear明示済み）はまだpage/rowIndex未バックフィルのため全件null', () => {
+      const pre8 = file.records.filter((r) => r.fiscalYear !== undefined);
+      expect(pre8.length).toBeGreaterThan(0);
+      for (const r of pre8) {
+        expect(resolveSourceLocator(r, file.sources)).toBeNull();
+      }
+    });
+  });
+
+  describe('okayama R8（#8・ビジョン11県5県目・くくり募集8件を含む51校109レコード）', () => {
+    const file = COMPETITION_RATE_BY_PREFECTURE['okayama']!;
+    const r8 = file.records.filter((r) => !r.fiscalYear);
+
+    it('R8の109件全件がresolveSourceLocatorで解決できる', () => {
+      expect(r8.length).toBe(109);
+      for (const r of r8) {
+        expect(r.page).toBeDefined();
+        const locator = resolveSourceLocator(r, file.sources);
+        expect(locator).not.toBeNull();
+        expect(locator!.pdfSha256).toBe('9fb7c813d9744233f44e1f0ffa0ce371305cb77fc46ac370aad400e1ea0fd43e');
+        // 学校別詳細表は物理ページ3〜6のみ(1〜2頁は総括表・7頁は全国募集でスコープ外)
+        expect(locator!.page).toBeGreaterThanOrEqual(3);
+        expect(locator!.page).toBeLessThanOrEqual(6);
         expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
       }
     });

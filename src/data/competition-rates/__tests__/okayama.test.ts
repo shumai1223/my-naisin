@@ -66,17 +66,24 @@ describe('岡山県 倍率パイプラインα（Y-6・全日制49校+2校＝109
       { schoolName: '津山', department: '普通・理数（くくり募集）', quota: 148, finalApplicants: 131, finalRate: 0.89 },
       { schoolName: '津山商業', department: '地域ビジネス・情報ビジネス（くくり募集）', quota: 37, finalApplicants: 29, finalRate: 0.78 },
     ];
+    const bare = (r: { schoolName: string; department: string; quota: number; finalApplicants: number; finalRate: number }) => ({
+      schoolName: r.schoolName,
+      department: r.department,
+      quota: r.quota,
+      finalApplicants: r.finalApplicants,
+      finalRate: r.finalRate,
+    });
     for (const c of cases) {
-      const rec = r8.find((r) => r.schoolName === c.schoolName && r.department === c.department);
-      expect(rec).toEqual(c);
+      const rec = r8.find((r) => r.schoolName === c.schoolName && r.department === c.department)!;
+      expect(bare(rec)).toEqual(c);
     }
   });
 
   it('学校名なしで出現しやすい罠のあった津山東・玉野光南の学科が正しく収録されている', () => {
     expect(r8.filter((r) => r.schoolName === '津山東')).toHaveLength(3);
     expect(r8.filter((r) => r.schoolName === '玉野光南')).toHaveLength(2);
-    const tsuyamaHigashiFutsu = r8.find((r) => r.schoolName === '津山東' && r.department === '普通');
-    expect(tsuyamaHigashiFutsu).toEqual({ schoolName: '津山東', department: '普通', quota: 120, finalApplicants: 118, finalRate: 0.98 });
+    const tsuyamaHigashiFutsu = r8.find((r) => r.schoolName === '津山東' && r.department === '普通')!;
+    expect({ schoolName: tsuyamaHigashiFutsu.schoolName, department: tsuyamaHigashiFutsu.department, quota: tsuyamaHigashiFutsu.quota, finalApplicants: tsuyamaHigashiFutsu.finalApplicants, finalRate: tsuyamaHigashiFutsu.finalRate }).toEqual({ schoolName: '津山東', department: '普通', quota: 120, finalApplicants: 118, finalRate: 0.98 });
   });
 
   it('複数学科校が正しく収録されている', () => {

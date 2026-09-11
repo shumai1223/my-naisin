@@ -2786,6 +2786,29 @@ tsc実exit0・jestフルスイート545suites7743tests green(1発green)。
 次は残り7県(aichi/hokkaido/hyogo/kanagawa/okayama/osaka/tokyo)へ進める。
 次点は小規模県のokayama109件。
 
+### #8 出典ロケータ ビジョン11県 5県目=okayama（2026-09-11・くくり募集8件を含む51校109レコード）
+
+okayamaはPDF全7頁のうち1〜2頁が総括表・比率ランキング表、3〜6頁が学校別詳細表、7頁は全国
+募集(スコープ外)。この県はテキスト埋め込み型PDFでpdftotextが数値抽出には機能するが学校名/
+学科名の日本語部分は文字化けするため、結局pdftoppm 150dpiで4頁(3〜6)を画像化しRead tool
+で目視確認、学校名を上から順に読み取りデータファイルの記録順と突き合わせて頁境界を特定
+(3頁目=岡山朝日〜岡山南服飾デザイン=36件、4頁目=倉敷青陵〜津山商業=34件、5頁目=玉野〜矢掛
+地域ビジネス=35件、6頁目=勝間田〜玉野商工機械=4件、合計36+34+35+4=109件で完全一致を機械
+検算)。岡山御津(キャリアデザイン等6系列)は前期選抜相当の内定者数のみで一般入学募集人員が
+全て0のため0レコードという既存データの扱いを確認できた。
+
+既存テスト2箇所(okayama.test.tsのくくり募集8校比較配列・津山東普通)のtoEqual完全一致
+アサーションを着手前に能動的にgrepで発見し共通bare()ヘルパー/分割代入で対処。
+competition-rate.test.tsにokayama用describeブロックを新設。PDFを再取得しsha256
+(9fb7c813...)を計測。
+
+累計4162件(共有関数3種18県1898+個別実装18県1746+ビジョン5県(yamaguchi98+fukushima99+
+mie108+miyazaki104+okayama109)=518)。
+tsc実exit0・jestフルスイート545suites7746tests green(1発green)。
+
+次は残り6県(aichi/hokkaido/hyogo/kanagawa/osaka/tokyo)へ進める。hokkaidoは323レコード
+と大規模なため最後に回す方針を継続。
+
 **2026-09-10着手**: §5順序#7（段階台帳）がhokkaido全14管内完結によりoita/okinawaの2県のみ
 未着手（前進手段なしと判断済み）となったため#8に着手。設計資料
 （`ops/baselines/stage-ledger-unit-count-2026-09.md`・`ops/prompts/fable-staple-design-
