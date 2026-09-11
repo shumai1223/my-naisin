@@ -2809,6 +2809,32 @@ tsc実exit0・jestフルスイート545suites7746tests green(1発green)。
 次は残り6県(aichi/hokkaido/hyogo/kanagawa/osaka/tokyo)へ進める。hokkaidoは323レコード
 と大規模なため最後に回す方針を継続。
 
+### #8 出典ロケータ ビジョン11県 6県目=hyogo（2026-09-11・全日制127校190レコード）
+
+hyogoの一次ソースURLはファイル名に日本語＋全角記号(【確定】)を含み、curlでは
+encodeURIComponentでパス部分をURLエンコードしてから取得する必要があった(node -eで
+encoded URLを組み立て)。PDFは全10頁(2〜5頁が全日制詳細表・1頁は表紙・6〜10頁は定時制
+でスコープ外)。pdftoppm 150dpiで4頁を画像化しRead toolで目視確認、学校名を上から順に
+読み取りデータファイルの記録順と突き合わせて頁境界を特定(2頁目=東灘〜宝塚東=53件、
+3頁目=宝塚北〜北条=54件、4頁目=加古川北〜山崎森と食=53件、5頁目=飾磨工業〜浜坂=30件、
+合計53+54+53+30=190件で完全一致を機械検算)。浜坂(普通科・quota41/applicants0)のような
+応募者0の学校も既存データで正しく収録されていることを確認。
+
+hyogo.test.tsには重複チェック以外の記録単位toEqualアサーションが無かったため既存テスト
+の改修は不要だった。competition-rate.test.tsにhyogo用describeブロックを新設。PDFを
+再取得しsha256(bac484ee...)を計測。
+
+累計4352件(共有関数3種18県1898+個別実装18県1746+ビジョン6県(yamaguchi98+fukushima99+
+mie108+miyazaki104+okayama109+hyogo190)=708)。
+tsc実exit0・jestフルスイート545suites7749tests green(1発green)。
+
+★教訓: 一次ソースURLに全角記号・日本語ファイル名が含まれる場合はcurlへの直接貼り付け
+では失敗することがあり、encodeURIComponentでパス部分だけをエンコードしてから取得する
+手順を標準化した。
+
+次は残り5県(aichi/hokkaido/kanagawa/osaka/tokyo)へ進める。hokkaidoは323レコードと
+大規模なため引き続き最後に回す。
+
 **2026-09-10着手**: §5順序#7（段階台帳）がhokkaido全14管内完結によりoita/okinawaの2県のみ
 未着手（前進手段なしと判断済み）となったため#8に着手。設計資料
 （`ops/baselines/stage-ledger-unit-count-2026-09.md`・`ops/prompts/fable-staple-design-

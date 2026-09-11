@@ -194,6 +194,7 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
       { code: 'gifu', count: 134 },
       { code: 'gunma', count: 106 },
       { code: 'hiroshima', count: 137 },
+      { code: 'hyogo', count: 190 },
       { code: 'ibaraki', count: 149 },
       { code: 'ishikawa', count: 67 },
       { code: 'iwate', count: 113 },
@@ -1441,6 +1442,42 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
         expect(locator!.pdfSha256).toBe('d42c2ffc7d0881ebc46889e847a11d38369c9b926fc840ff779e7df7e775da0d');
         expect(locator!.page).toBeGreaterThanOrEqual(1);
         expect(locator!.page).toBeLessThanOrEqual(2);
+        expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
+      }
+    });
+
+    it('同一page内でrowIndexの重複が無い', () => {
+      const seen = new Set<string>();
+      for (const r of r8) {
+        const key = `${r.page}|${r.rowIndex}`;
+        expect(seen.has(key)).toBe(false);
+        seen.add(key);
+      }
+    });
+
+    it('R7以前（fiscalYear明示済み）はまだpage/rowIndex未バックフィルのため全件null', () => {
+      const pre8 = file.records.filter((r) => r.fiscalYear !== undefined);
+      expect(pre8.length).toBeGreaterThan(0);
+      for (const r of pre8) {
+        expect(resolveSourceLocator(r, file.sources)).toBeNull();
+      }
+    });
+  });
+
+  describe('hyogo R8（#8・ビジョン11県6県目・全日制127校190レコード）', () => {
+    const file = COMPETITION_RATE_BY_PREFECTURE['hyogo']!;
+    const r8 = file.records.filter((r) => !r.fiscalYear);
+
+    it('R8の190件全件がresolveSourceLocatorで解決できる', () => {
+      expect(r8.length).toBe(190);
+      for (const r of r8) {
+        expect(r.page).toBeDefined();
+        const locator = resolveSourceLocator(r, file.sources);
+        expect(locator).not.toBeNull();
+        expect(locator!.pdfSha256).toBe('bac484eec8ea51b46e3e0dbf9b148965ca4a87b673925d52e26fe6eb5e74a8f5');
+        // 学校別詳細表は物理ページ2〜5のみ(6〜10頁は定時制でスコープ外)
+        expect(locator!.page).toBeGreaterThanOrEqual(2);
+        expect(locator!.page).toBeLessThanOrEqual(5);
         expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
       }
     });
