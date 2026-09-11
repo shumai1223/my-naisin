@@ -110,14 +110,22 @@ describe('大阪府 倍率パイプラインα（Y-2・全6表の突合テスト
   });
 
   it('前回のPDF読み取りで見落とした「桜塚」・修正した「豊島」「北千里」が正しい値で入っている', () => {
-    const sakuratsuka = records.find((r) => r.schoolName === '桜塚');
-    expect(sakuratsuka).toEqual({ schoolName: '桜塚', department: '普通科', quota: 360, finalApplicants: 419, finalRate: 1.16 });
+    const bare = (r: { schoolName: string; department: string; quota: number; finalApplicants: number; finalRate: number }) => ({
+      schoolName: r.schoolName,
+      department: r.department,
+      quota: r.quota,
+      finalApplicants: r.finalApplicants,
+      finalRate: r.finalRate,
+    });
 
-    const toyoshima = records.find((r) => r.schoolName === '豊島');
-    expect(toyoshima).toEqual({ schoolName: '豊島', department: '普通科', quota: 280, finalApplicants: 276, finalRate: 0.99 });
+    const sakuratsuka = records.find((r) => r.schoolName === '桜塚')!;
+    expect(bare(sakuratsuka)).toEqual({ schoolName: '桜塚', department: '普通科', quota: 360, finalApplicants: 419, finalRate: 1.16 });
 
-    const kitasenri = records.find((r) => r.schoolName === '北千里');
-    expect(kitasenri).toEqual({ schoolName: '北千里', department: '普通科', quota: 320, finalApplicants: 415, finalRate: 1.3 });
+    const toyoshima = records.find((r) => r.schoolName === '豊島')!;
+    expect(bare(toyoshima)).toEqual({ schoolName: '豊島', department: '普通科', quota: 280, finalApplicants: 276, finalRate: 0.99 });
+
+    const kitasenri = records.find((r) => r.schoolName === '北千里')!;
+    expect(bare(kitasenri)).toEqual({ schoolName: '北千里', department: '普通科', quota: 320, finalApplicants: 415, finalRate: 1.3 });
   });
 
   it('全レコードのquota>0・finalApplicants>=0・finalRateが概算で整合する（0除算を除く）', () => {

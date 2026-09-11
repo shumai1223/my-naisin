@@ -215,6 +215,7 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
       { code: 'oita', count: 81 },
       { code: 'okayama', count: 109 },
       { code: 'okinawa', count: 156 },
+      { code: 'osaka', count: 165 },
       { code: 'saga', count: 67 },
       { code: 'saitama', count: 241 },
       { code: 'shiga', count: 56 },
@@ -1606,6 +1607,40 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
         expect(seen.has(key)).toBe(false);
         seen.add(key);
       }
+    });
+
+    it('R7以前（fiscalYear明示済み）はまだpage/rowIndex未バックフィルのため全件null', () => {
+      const pre8 = file.records.filter((r) => r.fiscalYear !== undefined);
+      expect(pre8.length).toBeGreaterThan(0);
+      for (const r of pre8) {
+        expect(resolveSourceLocator(r, file.sources)).toBeNull();
+      }
+    });
+  });
+
+  describe('osaka R8（#8・ビジョン11県9県目・一次資料がxlsx単一シートのためpage固定1・rowIndexは登場順）', () => {
+    const file = COMPETITION_RATE_BY_PREFECTURE['osaka']!;
+    const r8 = file.records.filter((r) => !r.fiscalYear);
+
+    it('R8の165件全件がresolveSourceLocatorで解決できる', () => {
+      expect(r8.length).toBe(165);
+      for (const r of r8) {
+        expect(r.page).toBe(1);
+        const locator = resolveSourceLocator(r, file.sources);
+        expect(locator).not.toBeNull();
+        expect(locator!.pdfSha256).toBe('6ac3998fef4771054761cd116902a210111a973d54e949715ad292876ee0bd1e');
+        expect(locator!.page).toBe(1);
+        expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
+      }
+    });
+
+    it('rowIndexが0始まりの連番でrecords配列の登場順と完全一致する（重複無し）', () => {
+      const seen = new Set<number>();
+      r8.forEach((r, i) => {
+        expect(r.rowIndex).toBe(i);
+        expect(seen.has(r.rowIndex!)).toBe(false);
+        seen.add(r.rowIndex!);
+      });
     });
 
     it('R7以前（fiscalYear明示済み）はまだpage/rowIndex未バックフィルのため全件null', () => {
