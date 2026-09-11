@@ -108,7 +108,7 @@ saitama 令和4年度  到達=○  手段=現行サイト  https://www.pref.sait
 
 shiga 令和4年度  到達=○  手段=現行サイト  https://www.pref.shiga.lg.jp/documents/16948/5303567_1.pdf （現行の入試案内ページには令和4年度リンクが無いが、「過去の滋賀県立高等学校入学者選抜情報(平成31〜令和6年度)」というアーカイブページ(edu/ma09/16948.html)が別途あり、そこに「一般選抜＿出願者数（2月25日）」PDFへのリンクを発見・ライブ200確認済み）
 
-shimane 令和4年度  到達=○  手段=現行サイト  https://www.pref.shimane.lg.jp/education/kyoiku/senbatsu/senbatsu_info/index.data/r402_shiganhenkougo_itiran.pdf （WebSearch1発で直接ヒット・ライブ200確認済み。「一般選抜出願者数（志願変更後）」学校別一覧）
+shimane 令和4年度  到達=○  手段=現行サイト  https://www.pref.shimane.lg.jp/education/kyoiku/senbatsu/senbatsu_info/index.data/r402_shiganhenkougo_itiran.pdf （WebSearch1発で直接ヒット・ライブ200確認済み。「一般選抜出願者数（志願変更後）」学校別一覧）⚠️2026-09-11追記: PDF自体は開けるが身元引受人枠・地域外枠・特色選抜による複数控除を経て一般選抜募集定員を導出する超高密度な1ページ表（画像7016×9921px・列ラベルがa〜rのアルファベット式）で、列特定のリスクが高いため実収集は保留（詳細はT-Y11Fタスクファイル#11-5）
 
 shizuoka 令和4年度  到達=△要継続調査  手段=保留  現行の「入学者選抜関係発表資料等」索引ページは令和5年度(令和4年度中学3年生向け)までしか遡れず令和4年度入学者選抜(令和3年度中学3年生向け)へのリンクは無い。WaybackのCDXでも同URLの2022年前半スナップショットが見つからず。次回はURL数値ID(_res/projects/.../001/0XX/XXX/)の逆算や別の索引ページ経路を試す
 
