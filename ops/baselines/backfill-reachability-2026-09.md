@@ -102,4 +102,18 @@ okayama 令和4年度  到達=○  手段=現行サイト  https://www.pref.okay
 
 okinawa 令和4年度  到達=○  手段=Wayback  http://web.archive.org/web/20220523210334/https://www.pref.okinawa.jp/edu/kenritsu/nyushi/ko/nyushi.html （WebSearchで「（令和4年度実施）県立高等学校入試関連情報」というタイトルの正確なページを発見・現行は404だがWaybackに2022-05/2022-10/2023-01/2023-12の複数スナップショットあり）
 
-（okinawa以降・残り11県は次回イテレーション以降で着手）
+osaka 令和4年度  到達=○  手段=現行サイト  https://www.pref.osaka.lg.jp/documents/35613/r04_kekka_1.xlsx （「データで見る府立高校」ページ(o180040/kotogakko/chigai/index.html)から発見・ライブ200確認済み。令和元年度〜令和8年度まで8年度分のリンクが同一ページに集約されている。現行R8ソースの「志願者数」とは別カテゴリの「入学者選抜結果」資料だが同種のquota/applicants/競争率データを含む）
+
+saitama 令和4年度  到達=○  手段=現行サイト  https://www.pref.saitama.lg.jp/f2208/r4nyuushi-jouhou.html （WebSearch1発で直接ヒット・ライブ200確認済み。「令和4年度埼玉県公立高等学校入学者選抜に関する情報」）
+
+shiga 令和4年度  到達=○  手段=現行サイト  https://www.pref.shiga.lg.jp/documents/16948/5303567_1.pdf （現行の入試案内ページには令和4年度リンクが無いが、「過去の滋賀県立高等学校入学者選抜情報(平成31〜令和6年度)」というアーカイブページ(edu/ma09/16948.html)が別途あり、そこに「一般選抜＿出願者数（2月25日）」PDFへのリンクを発見・ライブ200確認済み）
+
+shimane 令和4年度  到達=○  手段=現行サイト  https://www.pref.shimane.lg.jp/education/kyoiku/senbatsu/senbatsu_info/index.data/r402_shiganhenkougo_itiran.pdf （WebSearch1発で直接ヒット・ライブ200確認済み。「一般選抜出願者数（志願変更後）」学校別一覧）
+
+shizuoka 令和4年度  到達=△要継続調査  手段=保留  現行の「入学者選抜関係発表資料等」索引ページは令和5年度(令和4年度中学3年生向け)までしか遡れず令和4年度入学者選抜(令和3年度中学3年生向け)へのリンクは無い。WaybackのCDXでも同URLの2022年前半スナップショットが見つからず。次回はURL数値ID(_res/projects/.../001/0XX/XXX/)の逆算や別の索引ページ経路を試す
+
+tokushima 令和4年度  到達=△要継続調査  手段=保留  一次サイト(nyuushi.tokushima-ec.ed.jp)がAngular製SPAのためWaybackはJS/CSSアセットのみ収録しページ内容(/R4_kouhyou等のルート)自体はクロールされておらず無力と判明。現行サイトのトップページにも過去年度アーカイブ一覧は見当たらず。次回はGoogleキャッシュや別の一次資料経路(教委トップページ等)を探す
+
+tottori 令和4年度  到達=△要継続調査  手段=保留  現行の「高校入学者選抜、転・編入学試験情報」ページに「令和4年度以前の入学者選抜」というアーカイブセクションはあるが「学力検査結果(得点状況)」のみで志願者数(出願段階のデータ)は掲載されていない。secure/NNNNNNN/形式のURLで数値ID推測は不可能なため、次回は「令和５年度県立高等学校入学者選抜関係資料等」(295710.htm)ページの構造を参考に令和4年度版の同型ページを探すか、WebSearchで別の切り口を試す
+
+（tottori以降・残り4県は次回イテレーション以降で着手）
