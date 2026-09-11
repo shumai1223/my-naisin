@@ -184,6 +184,7 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
     // 別の県で進めた回はこの配列に新しい要素が増えるはずなので、増えたら意図した進捗か確認
     // してから期待値を更新すること（既存県の件数が勝手に減っていたら書き換え事故を疑う）。
     expect(nonZero.sort((a, b) => a.code.localeCompare(b.code))).toEqual([
+      { code: 'aichi', count: 241 },
       { code: 'akita', count: 78 },
       { code: 'aomori', count: 89 },
       { code: 'chiba', count: 188 },
@@ -1444,6 +1445,49 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
         expect(locator!.page).toBeLessThanOrEqual(2);
         expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
       }
+    });
+
+    it('同一page内でrowIndexの重複が無い', () => {
+      const seen = new Set<string>();
+      for (const r of r8) {
+        const key = `${r.page}|${r.rowIndex}`;
+        expect(seen.has(key)).toBe(false);
+        seen.add(key);
+      }
+    });
+
+    it('R7以前（fiscalYear明示済み）はまだpage/rowIndex未バックフィルのため全件null', () => {
+      const pre8 = file.records.filter((r) => r.fiscalYear !== undefined);
+      expect(pre8.length).toBeGreaterThan(0);
+      for (const r of pre8) {
+        expect(resolveSourceLocator(r, file.sources)).toBeNull();
+      }
+    });
+  });
+
+  describe('aichi R8（#8・ビジョン11県7県目・全日制156校241レコード・西尾の配列末尾追記アノマリーに対応）', () => {
+    const file = COMPETITION_RATE_BY_PREFECTURE['aichi']!;
+    const r8 = file.records.filter((r) => !r.fiscalYear);
+
+    it('R8の241件全件がresolveSourceLocatorで解決できる', () => {
+      expect(r8.length).toBe(241);
+      for (const r of r8) {
+        expect(r.page).toBeDefined();
+        const locator = resolveSourceLocator(r, file.sources);
+        expect(locator).not.toBeNull();
+        expect(locator!.pdfSha256).toBe('663ed5b463c367d29d5f1a5c7e2227d790a283be4642dfc5b2d6a1e661848781');
+        // 学校別詳細表は物理ページ7〜13のみ(1〜6頁は概要でスコープ外)
+        expect(locator!.page).toBeGreaterThanOrEqual(7);
+        expect(locator!.page).toBeLessThanOrEqual(13);
+        expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
+      }
+    });
+
+    it('西尾は配列末尾に位置するがpage12・安城南と鶴城丘の間の実際の出典位置を保持する', () => {
+      const nishio = r8.find((r) => r.schoolName === '西尾')!;
+      const locator = resolveSourceLocator(nishio, file.sources)!;
+      expect(locator.page).toBe(12);
+      expect(locator.rowIndex).toBe(11);
     });
 
     it('同一page内でrowIndexの重複が無い', () => {

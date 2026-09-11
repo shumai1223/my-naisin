@@ -43,8 +43,16 @@ describe('愛知県 倍率パイプラインα（Y-6・全日制155校1校舎241
     expect(distinctSchools.size).toBe(156);
   });
 
+  const bare = (r: { schoolName: string; department: string; quota: number; finalApplicants: number; finalRate: number }) => ({
+    schoolName: r.schoolName,
+    department: r.department,
+    quota: r.quota,
+    finalApplicants: r.finalApplicants,
+    finalRate: r.finalRate,
+  });
+
   it('くくり募集（愛知総合工科・7学科が単一quotaで束ねられる最大規模のくくり）が単一レコードとして正しく収録されている', () => {
-    expect(r8.find((r) => r.schoolName === '愛知総合工科')).toEqual({
+    expect(bare(r8.find((r) => r.schoolName === '愛知総合工科')!)).toEqual({
       schoolName: '愛知総合工科',
       department: '理工・機械加工・機械制御・電気・電子情報・建設・デザイン工学(くくり)',
       quota: 249,
@@ -54,7 +62,7 @@ describe('愛知県 倍率パイプラインα（Y-6・全日制155校1校舎241
   });
 
   it('別紙本表から丸ごと1行抜け落ちていた西尾（普通）が増減差分表との突合で発見・収録されている', () => {
-    expect(r8.find((r) => r.schoolName === '西尾')).toEqual({
+    expect(bare(r8.find((r) => r.schoolName === '西尾')!)).toEqual({
       schoolName: '西尾',
       department: '普通',
       quota: 259,

@@ -2835,6 +2835,48 @@ tsc実exit0・jestフルスイート545suites7749tests green(1発green)。
 次は残り5県(aichi/hokkaido/kanagawa/osaka/tokyo)へ進める。hokkaidoは323レコードと
 大規模なため引き続き最後に回す。
 
+### #8 出典ロケータ ビジョン11県 7県目=aichi（2026-09-11・★最難関: Imperva遮断+配列末尾追記アノマリー）
+
+aichiは2つの新しい罠が重なった最難関の県だった。①元URL(pref.aichi.jp)はImperva
+(Incapsula)のbot対策で直接取得不能(F-1で既知の事象と一致)。curl/WebFetch双方とも
+`_Incapsula_Resource`へのリダイレクトのみが返る。Wayback Machine availability APIで
+2026-03-07キャプチャを発見し取得して解決(shigaと同型の対応)。②全13頁中7〜13頁が
+学校別詳細表(1〜6頁は概要でスコープ外)で、pdftoppm 150dpiで7頁を画像化しRead toolで
+目視確認、学校名を上から順に読み取りデータファイルの記録順と突き合わせて頁境界を特定
+していたところ、**page12の「西尾」だけがデータファイル上の位置(記録順)と実際のPDF上の
+視覚的な位置が一致しない**という初めてのケースを発見した。
+
+coverage.noteに「初回転記240レコードは西尾の1行抜け落ちで不一致だったが、増減差分表
+での学校名横断確認により発見・追記して一致」と既に記録されていた通り、過去セッションが
+本表転記時に西尾を見落とし、後日R8配列の末尾（R7セクション直前）に追記して解消した経緯
+がある。したがって西尾はデータ配列上は最後尾にあるが、PDF上の真の物理的位置は
+page12・安城南と鶴城丘の間(rowIndex11)である。バックフィルスクリプトは通常の連続
+position-based方式に加え、西尾だけを内容一致(schoolName+department)で個別に検出し
+page:12,rowIndex:11を明示的に割り当てる特殊ケース処理を追加した(Y-0の「配列の並び順
+でなく実際の出典位置を優先する」原則に従う)。
+
+各頁の記録数は7頁目=34件・8頁目=39件・9頁目=44件・10頁目=34件・11頁目=41件・12頁目=
+40件(西尾含む)・13頁目=9件で合計34+39+44+34+41+40+9=241件と完全一致することを機械
+検算。duplicate(page,rowIndex)0件も別途確認。
+
+既存テスト2箇所(aichi.test.tsの愛知総合工科くくり募集・西尾の発見経緯)のtoEqual完全
+一致アサーションを着手前に能動的にgrepで発見し共通bare()ヘルパーで対処。
+competition-rate.test.tsにaichi用describeブロックを新設(西尾の実際の出典位置を
+検証するテストを含む)。PDFを再取得しsha256(663ed5b4...)を計測。
+
+累計4593件(共有関数3種18県1898+個別実装18県1746+ビジョン7県(yamaguchi98+fukushima99+
+mie108+miyazaki104+okayama109+hyogo190+aichi241)=949)。
+tsc実exit0・jestフルスイート545suites7753tests green(1発green)。
+
+★教訓: ビジョン県の位置マッピングは「データファイル順=PDF出現順」を前提とするが、
+過去セッションが後日追記したレコードはこの前提を破ることがある。作業前にcoverage.note
+やコメントで「見落とし」「追記」等の記述が無いか必ず確認し、疑わしいレコードは内容一致
+で個別に検証すること。
+
+次は残り4県(hokkaido/kanagawa/osaka/tokyo)へ進める。hokkaidoは323レコードと大規模な
+ため引き続き最後に回す。kanagawa/osaka/tokyoも大都市圏で数百レコード規模のため、aichi
+で確立した「内容ベース特殊ケース検出」の手法を必要に応じて再利用する。
+
 **2026-09-10着手**: §5順序#7（段階台帳）がhokkaido全14管内完結によりoita/okinawaの2県のみ
 未着手（前進手段なしと判断済み）となったため#8に着手。設計資料
 （`ops/baselines/stage-ledger-unit-count-2026-09.md`・`ops/prompts/fable-staple-design-
