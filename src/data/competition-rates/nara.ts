@@ -51,6 +51,24 @@
  * 機械集計（quota4,440・applicants4,702、17校19レコード）が表アの「合計」行（募集人員4,440・
  * 出願者数4,702）と初回転記で完全一致した（再修正なし）。R7と学校名・学科構成は完全一致
  * （統廃合・新設なし）。倍率は資料に印字が無いため自前算出（applicants÷quota、小数第2位四捨五入）。
+ *
+ * 【掛-1（学校別×多年度）追加・5年度目・T-Y11F §11払底時の逃げ場】令和4年度分を追加。
+ * ⚠️台帳に記載されていた`61092.htm`/`58695.htm`系列ページ（学校ごとの学力検査・調査書の
+ * 配点比率を示す「選抜方法基準」文書へのリンク集）は資料カテゴリが根本的に異なり出願者数
+ * データを含まないと判明したため使用しなかった。代わりに`pref.nara.jp/40751.htm`
+ * （「公立高校入試出願・実施状況等」・Wayback 2022-10-04クロール）から「令和4年度奈良県
+ * 公立高等学校入学者一般選抜等出願状況（最終）」（令和4年3月4日発表・全1頁）を発見した。
+ * R6/R7とは異なりこの年度の資料には表ア／表イの区分が無く、専門学科校（御所実業・磯城野・
+ * 王寺工業等）も含め全ての学校が1つの表に混在している（特色選抜による吸収度合いは年度に
+ * よって変動するため、専門学科校の残り枠が0になるかどうかは年度依存であり、R4時点では
+ * まだ若干の残り枠が生じていたことを示す）。後年度（R6/R7）との比較可能性を保つため、
+ * R6/R7で確立した「表ア相当」の同一17校19学科（普通科系・数理情報・普通(表現探究)等）
+ * のみを抽出し、専門学科の残り枠（御所実業・王寺工業等の1〜8名規模のレコード）は今回も
+ * 除外した。本資料は競争倍率が印字済みのため自前算出は不要で、転記した全19行の
+ * quota/applicants組から計算した倍率が印字済み倍率と完全一致することを1行ずつ検算した
+ * （誤差ゼロ・全行一致）。機械集計はquota4,432・applicants4,864（自己算出・本資料には
+ * この17校19学科だけの公式小計行が存在しないため）。R6/R7と学校名・学科構成は完全一致
+ * （統廃合・新設なし）。原本ページは現行サイトから削除済みのためWayback Machine経由で取得。
  */
 import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
 
@@ -76,6 +94,12 @@ export const NARA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       docTitle: '奈良県教育委員会 令和6年度奈良県公立高等学校入学者一般選抜等合格者数',
       fiscalYear: '令和6年度（2024年度）',
       fetchedAt: '2026-08-24',
+    },
+    {
+      url: 'https://www.pref.nara.jp/secure/253381/2022ippan0304%20_.pdf',
+      docTitle: '奈良県教育委員会 令和4年度奈良県公立高等学校入学者一般選抜等出願状況（最終・令和4年3月4日）（Wayback Machine経由・原本ページは現行サイトから削除済み）',
+      fiscalYear: '令和4年度（2022年度）',
+      fetchedAt: '2026-09-12',
     },
   ],
   coverage: {
@@ -208,5 +232,24 @@ export const NARA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '高取国際', department: '普通', quota: 120, finalApplicants: 125, finalRate: 1.04, fiscalYear: '令和6年度（2024年度）' },
     { schoolName: '大和広陵', department: '普通', quota: 160, finalApplicants: 92, finalRate: 0.57, fiscalYear: '令和6年度（2024年度）' },
     { schoolName: '一条', department: '普通', quota: 200, finalApplicants: 291, finalRate: 1.46, fiscalYear: '令和6年度（2024年度）' },
+    { schoolName: '奈良', department: '普通', quota: 378, finalApplicants: 442, finalRate: 1.17, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '高円芸術', department: '普通', quota: 120, finalApplicants: 141, finalRate: 1.18, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '高田', department: '普通', quota: 378, finalApplicants: 433, finalRate: 1.15, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '郡山', department: '普通', quota: 378, finalApplicants: 504, finalRate: 1.33, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '添上', department: '普通(人文探究コース以外)', quota: 160, finalApplicants: 129, finalRate: 0.81, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '橿原', department: '普通', quota: 320, finalApplicants: 349, finalRate: 1.09, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '畝傍', department: '普通', quota: 378, finalApplicants: 402, finalRate: 1.06, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '桜井', department: '普通(一般コース)', quota: 240, finalApplicants: 236, finalRate: 0.98, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '五條', department: '普通', quota: 200, finalApplicants: 184, finalRate: 0.92, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '生駒', department: '普通', quota: 320, finalApplicants: 384, finalRate: 1.2, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '奈良北', department: '普通', quota: 280, finalApplicants: 304, finalRate: 1.09, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '奈良北', department: '数理情報', quota: 80, finalApplicants: 85, finalRate: 1.06, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '香芝', department: '普通(表現探究コース)', quota: 40, finalApplicants: 40, finalRate: 1.0, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '香芝', department: '普通(表現探究コース以外)', quota: 280, finalApplicants: 321, finalRate: 1.15, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '西和清陵', department: '普通', quota: 200, finalApplicants: 193, finalRate: 0.97, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '法隆寺国際', department: '普通', quota: 200, finalApplicants: 222, finalRate: 1.11, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '高取国際', department: '普通', quota: 120, finalApplicants: 112, finalRate: 0.93, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '大和広陵', department: '普通', quota: 160, finalApplicants: 66, finalRate: 0.41, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '一条', department: '普通', quota: 200, finalApplicants: 317, finalRate: 1.59, fiscalYear: '令和4年度（2022年度）' },
   ],
 };

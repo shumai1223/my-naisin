@@ -94,9 +94,27 @@ describe('奈良県 倍率パイプラインα（Y-6・全日制29校71レコー
     expect(distinctSchools.size).toBe(17);
   });
 
-  it('sourcesが公式PDF URLを正しく記録している', () => {
+  it('掛-1(学校別×多年度・5年度目): 令和4年度(R4)分レコードが19件収録され、自己算出合計(quota4,432・applicants4,864)と一致する。この年度の資料には表ア/表イの区分が無いため、R6/R7で確立した同一17校19学科のみを抽出した(専門学科の残り枠は除外)。全19行で印字済み競争倍率とapplicants/quotaの計算値が一致し、R6と学校名+学科名の組み合わせが完全一致する(統廃合なし)', () => {
+    const r4 = records.filter((r) => r.fiscalYear === '令和4年度（2022年度）');
+    const r6 = records.filter((r) => r.fiscalYear === '令和6年度（2024年度）');
+    expect(r4.length).toBe(19);
+    expect(r4.reduce((a, r) => a + r.quota, 0)).toBe(4432);
+    expect(r4.reduce((a, r) => a + r.finalApplicants, 0)).toBe(4864);
+
+    const distinctSchools = new Set(r4.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(17);
+
+    const r4Keys = new Set(r4.map((r) => `${r.schoolName}|${r.department}`));
+    const r6Keys = new Set(r6.map((r) => `${r.schoolName}|${r.department}`));
+    expect(r4Keys.size).toBe(r6Keys.size);
+    for (const key of r4Keys) {
+      expect(r6Keys.has(key)).toBe(true);
+    }
+  });
+
+  it('sourcesが公式PDF URLを正しく記録している（令和4年度分は移行前の旧ドメインpref.nara.jpを正しく参照）', () => {
     for (const s of NARA_COMPETITION_RATES.sources) {
-      expect(s.url).toMatch(/^https:\/\/www\.pref\.nara\.lg\.jp\//);
+      expect(s.url).toMatch(/^https:\/\/www\.pref\.nara\.(lg\.)?jp\//);
     }
   });
 });
