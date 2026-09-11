@@ -298,11 +298,11 @@ W-0 の鮮度を確認する（主食ドリフト4回の教訓）。
    =fukushima R4完了（94件）・10件目=hiroshima R4完了（135件）・11件目=okayama R4完了
    （110件）・12件目=kumamoto R4完了（165件）。2026-09-12 13件目=kyoto R4完了
    （76件）・14件目=mie R4完了（108件）・15件目=miyazaki R4完了（104件）・16件目
-   =wakayama R4完了（62件）・17件目=yamagata R4完了（93件）。詳細は下の「#11-1」〜
-   「#11-17」参照。残り19県年（到達○のうちfukui/niigata/oita/akita/kochi/ehime/
-   nagano/miyagi/fukushima/hiroshima/okayama/kumamoto/kyoto/mie/miyazaki/
-   wakayama/yamagata以外・ibaraki R4/yamanashi R4/shimane R4/chiba R4は
-   要再検討で保留=下記参照）が対象。**
+   =wakayama R4完了（62件）・17件目=yamagata R4完了（93件）・18件目=shiga R4完了
+   （61件）。詳細は下の「#11-1」〜「#11-18」参照。残り18県年（到達○のうちfukui/
+   niigata/oita/akita/kochi/ehime/nagano/miyagi/fukushima/hiroshima/okayama/
+   kumamoto/kyoto/mie/miyazaki/wakayama/yamagata/shiga以外・ibaraki R4/
+   yamanashi R4/shimane R4/chiba R4は要再検討で保留=下記参照）が対象。**
 2. **定時制で `coverage='partial'` にした県の pendingDepartments を潰す。**
    現時点で fukuoka（単位制2期）・kochi（夜間部・通信制）・hiroshima。1県1〜2h
 3. **T-Y11C-4 の yamanashi 20件・yamaguchi 5件**（#9 に入っているが、単独でも取れる）
@@ -3864,6 +3864,38 @@ all green を確認しcommit・push済（681cafe）。
 fukushima/hiroshima/okayama/kumamoto/kyoto/mie/miyazaki/wakayama/yamagata以外・
 ibaraki R4/yamanashi R4/shimane R4/chiba R4は保留）のいずれかを次イテレーションで
 選ぶ。
+
+### #11-18 shiga R4完了（2026-09-12・§11項目1の18件目）
+
+§5順序#10で到達可能性を確認済みだったshiga令和4年度分を実収集した。
+
+台帳のURLは同じアーカイブページ（edu/ma09/16948.html「過去の滋賀県立高等学校入学者
+選抜情報」）内にある「一般選抜＿出願者数（2月25日）」（志願変更前の速報値）だった。
+これは§10の「到達○」が単にURLが200を返すことの確認にすぎず、その先の文書が正しい
+版とは限らないという他県共通の罠に近いが、shigaの場合は「別文書へのリンク」ではなく
+「同一アーカイブページに速報版・確定版の複数PDFが並んでいて、公表日で正しい方を
+選び直す必要がある」という少し異なるパターンだった。同ページ内でR5〜R7と同じ
+「一般選抜＿確定出願数（3月7日）」＝「一般選抜学力検査に関する確定出願状況に
+ついて」版を選び、そちらを取得した。
+
+制度構成はR5/R6と同一の旧制度（推薦選抜・特色選抜・スポーツ文化芸術推薦選抜＋
+一般選抜）で、pdftoppm 300dpiビジョン解析でNo.1/No.2の2頁を転記した。全日制
+「計①」行（quota6,308・applicants6,867・倍率1.09）とnode.js機械集計（44校61件）が
+完全一致した（初回転記で一致・再修正なし）。「両方の学科」統合校5校（膳所・草津東・
+栗東・米原・高島）・守山北の普通単独学科（みらい共創統合はR7から）・伊香の普通単独
+学科（森の探究新設はR7から）はいずれもR5と同型。schoolName+departmentのキー集合が
+R5と完全一致（差分0件）で、R4→R5にかけての学科再編は確認されなかった（この県年も
+mieと同様、転記の検算のみで完結した）。
+
+固定値回帰ガードテスト3本＋developersページ本文＋PoC納品物を連動更新（総件数
+23,464→23,525件・配布可能23,273→23,334件・学校数3,277のまま変化なし）。
+tsc --noEmit exit 0・jest 545 suites 7790 tests all green を確認しcommit・push済
+（5e8c5f3）。
+
+次は残り18県年（到達○のうちfukui/niigata/oita/akita/kochi/ehime/nagano/miyagi/
+fukushima/hiroshima/okayama/kumamoto/kyoto/mie/miyazaki/wakayama/yamagata/
+shiga以外・ibaraki R4/yamanashi R4/shimane R4/chiba R4は保留）のいずれかを
+次イテレーションで選ぶ。
 
 ## 守ること
 
