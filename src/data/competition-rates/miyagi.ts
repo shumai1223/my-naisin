@@ -76,6 +76,34 @@
  * （quota計200）だったが、R6では「普通科」「食品科学科」（化学→科学に表記変更）「家政科」の
  * 3学科構成（quota計160）に再編されている。R5→R6の間に亘理高校で学科再編（普通科2コース統合・
  * 商業科廃止）が実施された可能性が高い（誤読ではなくR5原本に印字された学科名をそのまま転記）。
+ *
+ * ⚠️掛-1（学校別×多年度・5年度目）R4追加: T-Y11F §5順序#11（払底時の逃げ場・項目1）8件目として
+ * 令和4年度版を追加。⚠️罠: WebSearchで最初にヒットした`documents/16068/r4dai1jigoukakujyokyou.pdf`
+ * は「第一次募集合格状況」（合格者数ベース）でR5〜R8の「出願状況」（志願者数ベース）とは別種の
+ * 文書と判明。同一フォルダ内で類推したURL（`16068/4.pdf`）も別文書（R5発表の総括表にR4実績が
+ * 参考列として載っているだけの1頁もの）で、いずれも本データベースが必要とする学校別の出願者数
+ * 明細を含まなかった。現行サイトの案内ページ（`kyo-r4nyushi1jijissijyoukyou.html`）はR8時点で
+ * 削除済み（404）だったため、Wayback Machine（2022-03-08クロール分）経由で正しい文書「令和4年度
+ * 宮城県公立高等学校入学者選抜に係る第一次募集等の実施状況について」（令和4年3月4日発表・全8頁、
+ * `documents/37891/r4dai1ji-jissijyoukyou.pdf`）を特定した。タイトルは「実施状況」でR5〜R8の
+ * 「出願状況」と異なるが、ページ2以降の学校・学科別表はR5〜R8と完全に同一の列構成（募集定員・
+ * 出願者数・出願倍率）を持つ実質同一文書と確認できた。R6/R7/R8と同型のCJKラベル抽出不能な埋め込み
+ * フォントのためpdftoppm 200dpiビジョン解析で132レコード（69校）を転記した。ページ1の総括表
+ * （募集定員13,880・出願者数14,005・出願倍率1.01）およびページ5末尾の「全日制合計」行、13地区
+ * すべての地区計・地区合計行（刈田柴田/伊具/南部合計/亘理名取/仙台南/中部南合計/仙台北/塩釜/黒川/
+ * 中部北合計/大崎/遠田/登米/栗原/北部合計/石巻/本吉/東部合計）を含む多段階の突合がすべて
+ * node.js機械集計と完全一致した（初回転記で一致・再修正なし）。
+ * ⚠️実在の学校再編を2件確認。①「志津川」（普通科・情報ビジネス科・連携型選抜実施校）はR4時点の
+ * 校名で、R5以降は「南三陸」に改称されている（R4資料の連携型選抜実施校欄「志津川高校」・R5資料の
+ * 同欄「南三陸高校」を突合して確認。統合ではなく単純な改称）。②R4では「柴田農林」（本校・食農科学科・
+ * 動物科学科/森林環境科・園芸工学科の2学科・quota計160）と「大河原商」（流通マネジメント科・
+ * 情報システム科・OA会計科の3学科・quota計160）が別々の学校として存在したが、R5以降はいずれも
+ * 資料から消え、代わりに「大河原産業」（農業科学科・企画デザイン科・総合ビジネス科の3学科・
+ * quota計240）という新しい学科構成の学校が登場している。学科名（農業科学科⇔食農科学科、
+ * 総合ビジネス科⇔流通マネジメント科等）の対応関係から、柴田農林（本校）と大河原商が統合再編されて
+ * 大河原産業になったと推測されるが、一次資料に明示的な統合の記述は無いため断定はしない（事実の
+ * 記録のみ）。なお「柴田農林川崎」（分校）はこの再編と無関係に独立して存続しR5と同型。
+ * それ以外の学校構成・学科構成はR5と完全一致（仙台工の4学科構成・宮城水産の海洋総合科1学科構成）。
  */
 import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
 
@@ -111,6 +139,15 @@ export const MIYAGI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
         '宮城県教育庁高校教育課 令和5年度宮城県公立高等学校入学者選抜に係る第一次募集出願状況について（学校・学科別出願状況）',
       fiscalYear: '令和5年度（2023年度）',
       fetchedAt: '2026-08-22',
+    },
+    {
+      url: 'https://www.pref.miyagi.jp/documents/37891/r4dai1ji-jissijyoukyou.pdf',
+      docTitle:
+        '宮城県教育庁高校教育課 令和4年度宮城県公立高等学校入学者選抜に係る第一次募集等の実施状況について（学校・学科別）',
+      fiscalYear: '令和4年度（2022年度）',
+      fetchedAt: '2026-09-11',
+      // T-Y11F §5順序#11: 現行サイトは404・Wayback(2022-03-08クロール分)経由で取得
+      pdfSha256: 'dd1a3dde248f6c1132ff0ca82c3a5b4115c0eae2c8995befb68e72d59e518f8c',
     },
   ],
   coverage: {
@@ -645,5 +682,137 @@ export const MIYAGI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '気仙沼向洋', department: '情報海洋科', quota: 40, finalApplicants: 19, finalRate: 0.48, fiscalYear: '令和5年度（2023年度）' },
     { schoolName: '気仙沼向洋', department: '産業経済科', quota: 40, finalApplicants: 34, finalRate: 0.85, fiscalYear: '令和5年度（2023年度）' },
     { schoolName: '気仙沼向洋', department: '機械技術科', quota: 40, finalApplicants: 46, finalRate: 1.15, fiscalYear: '令和5年度（2023年度）' },
+    { schoolName: '白石', department: '普通科', quota: 240, finalApplicants: 263, finalRate: 1.1, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '白石', department: '看護科', quota: 40, finalApplicants: 58, finalRate: 1.45, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '蔵王', department: '普通科', quota: 80, finalApplicants: 25, finalRate: 0.31, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '白石工', department: '機械科', quota: 80, finalApplicants: 72, finalRate: 0.9, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '白石工', department: '電気科', quota: 40, finalApplicants: 31, finalRate: 0.78, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '白石工', department: '工業化学科', quota: 40, finalApplicants: 33, finalRate: 0.83, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '白石工', department: '建築科', quota: 40, finalApplicants: 37, finalRate: 0.93, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '白石工', department: '設備工業科', quota: 40, finalApplicants: 35, finalRate: 0.88, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '村田', department: '総合学科', quota: 120, finalApplicants: 43, finalRate: 0.36, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '柴田農林', department: '食農科学科・動物科学科', quota: 80, finalApplicants: 83, finalRate: 1.04, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '柴田農林', department: '森林環境科・園芸工学科', quota: 80, finalApplicants: 37, finalRate: 0.46, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '柴田農林川崎', department: '普通科', quota: 40, finalApplicants: 21, finalRate: 0.53, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '大河原商', department: '流通マネジメント科', quota: 40, finalApplicants: 38, finalRate: 0.95, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '大河原商', department: '情報システム科', quota: 80, finalApplicants: 45, finalRate: 0.56, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '大河原商', department: 'OA会計科', quota: 40, finalApplicants: 24, finalRate: 0.6, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '柴田', department: '普通科', quota: 120, finalApplicants: 103, finalRate: 0.86, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '柴田', department: '体育科', quota: 40, finalApplicants: 42, finalRate: 1.05, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '角田', department: '普通科', quota: 160, finalApplicants: 117, finalRate: 0.73, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '伊具', department: '総合学科', quota: 120, finalApplicants: 49, finalRate: 0.41, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '名取', department: '普通科', quota: 240, finalApplicants: 283, finalRate: 1.18, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '名取', department: '家政科', quota: 40, finalApplicants: 55, finalRate: 1.38, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '名取北', department: '普通科', quota: 240, finalApplicants: 270, finalRate: 1.13, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '亘理', department: '普通科・普通コース', quota: 40, finalApplicants: 35, finalRate: 0.88, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '亘理', department: '普通科・園芸コース', quota: 40, finalApplicants: 25, finalRate: 0.63, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '亘理', department: '食品化学科', quota: 40, finalApplicants: 36, finalRate: 0.9, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '亘理', department: '商業科', quota: 40, finalApplicants: 13, finalRate: 0.33, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '亘理', department: '家政科', quota: 40, finalApplicants: 22, finalRate: 0.55, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '宮城農', department: '農業科・園芸科', quota: 120, finalApplicants: 146, finalRate: 1.22, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '宮城農', department: '農業機械科', quota: 40, finalApplicants: 50, finalRate: 1.25, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '宮城農', department: '食品化学科', quota: 40, finalApplicants: 42, finalRate: 1.05, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '宮城農', department: '生活科', quota: 40, finalApplicants: 55, finalRate: 1.38, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '仙台一', department: '普通科', quota: 320, finalApplicants: 463, finalRate: 1.45, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '仙台二華', department: '普通科', quota: 240, finalApplicants: 260, finalRate: 1.08, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '仙台三桜', department: '普通科', quota: 280, finalApplicants: 355, finalRate: 1.27, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '仙台向山', department: '普通科', quota: 160, finalApplicants: 225, finalRate: 1.41, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '仙台向山', department: '理数科', quota: 40, finalApplicants: 69, finalRate: 1.73, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '仙台南', department: '普通科', quota: 280, finalApplicants: 419, finalRate: 1.5, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '仙台西', department: '普通科', quota: 240, finalApplicants: 292, finalRate: 1.22, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '仙台東', department: '普通科', quota: 200, finalApplicants: 242, finalRate: 1.21, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '仙台東', department: '英語科', quota: 40, finalApplicants: 34, finalRate: 0.85, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '宮城工', department: '機械科', quota: 80, finalApplicants: 53, finalRate: 0.66, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '宮城工', department: '電子機械科', quota: 40, finalApplicants: 32, finalRate: 0.8, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '宮城工', department: '電気科', quota: 80, finalApplicants: 75, finalRate: 0.94, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '宮城工', department: '情報技術科', quota: 40, finalApplicants: 66, finalRate: 1.65, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '宮城工', department: '化学工業科', quota: 40, finalApplicants: 34, finalRate: 0.85, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '宮城工', department: 'インテリア科', quota: 40, finalApplicants: 52, finalRate: 1.3, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '仙台工', department: '建築科', quota: 30, finalApplicants: 46, finalRate: 1.53, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '仙台工', department: '機械科', quota: 70, finalApplicants: 63, finalRate: 0.9, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '仙台工', department: '電気科', quota: 70, finalApplicants: 82, finalRate: 1.17, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '仙台工', department: '土木科', quota: 30, finalApplicants: 38, finalRate: 1.27, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '仙台二', department: '普通科', quota: 320, finalApplicants: 365, finalRate: 1.14, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '仙台三', department: '普通科', quota: 240, finalApplicants: 339, finalRate: 1.41, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '仙台三', department: '理数科', quota: 80, finalApplicants: 119, finalRate: 1.49, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '宮城一', department: '普通科', quota: 200, finalApplicants: 245, finalRate: 1.23, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '宮城一', department: '国際探究科・理数探究科', quota: 80, finalApplicants: 143, finalRate: 1.79, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '宮城広瀬', department: '普通科', quota: 240, finalApplicants: 223, finalRate: 0.93, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '泉', department: '普通科', quota: 200, finalApplicants: 335, finalRate: 1.68, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '泉', department: '英語科', quota: 40, finalApplicants: 53, finalRate: 1.33, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '泉松陵', department: '普通科', quota: 240, finalApplicants: 235, finalRate: 0.98, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '泉館山', department: '普通科', quota: 240, finalApplicants: 344, finalRate: 1.43, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '宮城野', department: '普通科', quota: 200, finalApplicants: 334, finalRate: 1.67, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '宮城野', department: '美術科', quota: 40, finalApplicants: 47, finalRate: 1.18, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '仙台', department: '普通科', quota: 280, finalApplicants: 385, finalRate: 1.38, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '仙台商', department: '商業科', quota: 320, finalApplicants: 387, finalRate: 1.21, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '塩釜', department: '普通科', quota: 240, finalApplicants: 296, finalRate: 1.23, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '塩釜', department: 'ビジネス科', quota: 80, finalApplicants: 107, finalRate: 1.34, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '多賀城', department: '普通科', quota: 240, finalApplicants: 269, finalRate: 1.12, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '多賀城', department: '災害科学科', quota: 40, finalApplicants: 39, finalRate: 0.98, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '松島', department: '普通科', quota: 120, finalApplicants: 127, finalRate: 1.06, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '松島', department: '観光科', quota: 80, finalApplicants: 38, finalRate: 0.48, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '利府', department: '普通科', quota: 200, finalApplicants: 221, finalRate: 1.11, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '利府', department: 'スポーツ科学科', quota: 80, finalApplicants: 69, finalRate: 0.86, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '黒川', department: '普通科', quota: 80, finalApplicants: 72, finalRate: 0.9, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '黒川', department: '機械科', quota: 40, finalApplicants: 42, finalRate: 1.05, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '黒川', department: '電子工学科', quota: 40, finalApplicants: 20, finalRate: 0.5, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '黒川', department: '環境技術科', quota: 40, finalApplicants: 31, finalRate: 0.78, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '富谷', department: '普通科', quota: 280, finalApplicants: 248, finalRate: 0.89, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '古川', department: '普通科', quota: 240, finalApplicants: 261, finalRate: 1.09, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '古川黎明', department: '普通科', quota: 240, finalApplicants: 240, finalRate: 1, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '岩出山', department: '普通科', quota: 80, finalApplicants: 28, finalRate: 0.35, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '中新田', department: '普通科', quota: 120, finalApplicants: 96, finalRate: 0.8, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '松山', department: '普通科', quota: 40, finalApplicants: 20, finalRate: 0.5, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '松山', department: '家政科', quota: 40, finalApplicants: 21, finalRate: 0.53, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '加美農', department: '農業科', quota: 40, finalApplicants: 22, finalRate: 0.55, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '加美農', department: '農業機械科', quota: 40, finalApplicants: 21, finalRate: 0.53, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '加美農', department: '生活技術科', quota: 40, finalApplicants: 10, finalRate: 0.25, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '古川工', department: '土木情報科', quota: 40, finalApplicants: 43, finalRate: 1.08, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '古川工', department: '建築科', quota: 40, finalApplicants: 51, finalRate: 1.28, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '古川工', department: '電気電子科', quota: 40, finalApplicants: 46, finalRate: 1.15, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '古川工', department: '機械科', quota: 80, finalApplicants: 76, finalRate: 0.95, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '古川工', department: '化学技術科', quota: 40, finalApplicants: 51, finalRate: 1.28, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '鹿島台商', department: '商業科', quota: 120, finalApplicants: 24, finalRate: 0.2, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '涌谷', department: '普通科', quota: 160, finalApplicants: 61, finalRate: 0.38, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '小牛田農林', department: '農業技術科・農業科学コース', quota: 40, finalApplicants: 40, finalRate: 1, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '小牛田農林', department: '農業技術科・農業土木コース', quota: 40, finalApplicants: 36, finalRate: 0.9, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '小牛田農林', department: '総合学科', quota: 120, finalApplicants: 125, finalRate: 1.04, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '南郷', department: '普通科', quota: 40, finalApplicants: 5, finalRate: 0.13, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '南郷', department: '産業技術科', quota: 40, finalApplicants: 6, finalRate: 0.15, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '佐沼', department: '普通科', quota: 240, finalApplicants: 252, finalRate: 1.05, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '登米', department: '普通科', quota: 80, finalApplicants: 52, finalRate: 0.65, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '登米総合産業', department: '農業科', quota: 40, finalApplicants: 23, finalRate: 0.58, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '登米総合産業', department: '機械科', quota: 40, finalApplicants: 41, finalRate: 1.03, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '登米総合産業', department: '電気科', quota: 40, finalApplicants: 11, finalRate: 0.28, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '登米総合産業', department: '情報技術科', quota: 40, finalApplicants: 47, finalRate: 1.18, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '登米総合産業', department: '商業科', quota: 40, finalApplicants: 25, finalRate: 0.63, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '登米総合産業', department: '福祉科', quota: 40, finalApplicants: 26, finalRate: 0.65, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '築館', department: '普通科', quota: 160, finalApplicants: 152, finalRate: 0.95, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '岩ヶ崎', department: '普通科・文系教養コース', quota: 40, finalApplicants: 12, finalRate: 0.3, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '岩ヶ崎', department: '普通科・理系教養コース', quota: 40, finalApplicants: 19, finalRate: 0.48, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '迫桜', department: '総合学科', quota: 200, finalApplicants: 158, finalRate: 0.79, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '一迫商', department: '流通経済科', quota: 40, finalApplicants: 17, finalRate: 0.43, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '一迫商', department: '情報処理科', quota: 40, finalApplicants: 24, finalRate: 0.6, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '石巻', department: '普通科', quota: 240, finalApplicants: 206, finalRate: 0.86, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '石巻好文館', department: '普通科', quota: 200, finalApplicants: 216, finalRate: 1.08, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '石巻西', department: '普通科', quota: 160, finalApplicants: 170, finalRate: 1.06, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '石巻北', department: '総合学科', quota: 160, finalApplicants: 135, finalRate: 0.84, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '宮城水産', department: '海洋総合科', quota: 160, finalApplicants: 65, finalRate: 0.41, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '石巻工', department: '機械科', quota: 40, finalApplicants: 44, finalRate: 1.1, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '石巻工', department: '電気情報科', quota: 40, finalApplicants: 33, finalRate: 0.83, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '石巻工', department: '化学技術科', quota: 40, finalApplicants: 24, finalRate: 0.6, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '石巻工', department: '土木システム科', quota: 40, finalApplicants: 39, finalRate: 0.98, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '石巻工', department: '建築科', quota: 40, finalApplicants: 49, finalRate: 1.23, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '石巻商', department: '総合ビジネス科', quota: 160, finalApplicants: 131, finalRate: 0.82, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '桜坂', department: '普通科・学励探求コース', quota: 80, finalApplicants: 70, finalRate: 0.88, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '桜坂', department: '普通科・キャリア探求コース', quota: 80, finalApplicants: 66, finalRate: 0.83, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '気仙沼', department: '普通科', quota: 240, finalApplicants: 216, finalRate: 0.9, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '志津川', department: '普通科', quota: 80, finalApplicants: 39, finalRate: 0.49, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '志津川', department: '情報ビジネス科', quota: 40, finalApplicants: 10, finalRate: 0.25, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '本吉響', department: '総合学科', quota: 120, finalApplicants: 41, finalRate: 0.34, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '気仙沼向洋', department: '情報海洋科', quota: 40, finalApplicants: 23, finalRate: 0.58, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '気仙沼向洋', department: '産業経済科', quota: 40, finalApplicants: 29, finalRate: 0.73, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '気仙沼向洋', department: '機械技術科', quota: 40, finalApplicants: 36, finalRate: 0.9, fiscalYear: '令和4年度（2022年度）' },
   ],
 };

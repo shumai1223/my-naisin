@@ -149,6 +149,24 @@ describe('宮城県 倍率パイプラインα（Y-6・全日制68校129レコ�
     expect(watariApplicants).toBe(106);
   });
 
+  it('掛-1(学校別×多年度・5年度目): 令和4年度(R4)分レコードが132件・69校収録され（T-Y11F §5順序#11）、総括表(quota13,880・applicants14,005・倍率1.01)と完全一致する。「志津川」（R5以降「南三陸」に改称）以外は学校構成・学科構成がR5と完全一致する', () => {
+    const r4 = records.filter((r) => r.fiscalYear === '令和4年度（2022年度）');
+    expect(r4.length).toBe(132);
+    const distinctSchools4 = new Set(r4.map((r) => r.schoolName));
+    expect(distinctSchools4.size).toBe(69);
+    const sumQuota4 = r4.reduce((a, r) => a + r.quota, 0);
+    const sumApplicants4 = r4.reduce((a, r) => a + r.finalApplicants, 0);
+    expect(sumQuota4).toBe(13880);
+    expect(sumApplicants4).toBe(14005);
+
+    expect(r4.some((r) => r.schoolName === '志津川')).toBe(true);
+    expect(r4.some((r) => r.schoolName === '南三陸')).toBe(false);
+
+    const sendaikou4 = r4.filter((r) => r.schoolName === '仙台工');
+    expect(sendaikou4).toHaveLength(4);
+    expect(r4.filter((r) => r.schoolName === '宮城水産')).toHaveLength(1);
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of MIYAGI_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.pref\.miyagi\.jp\//);
