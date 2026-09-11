@@ -90,4 +90,16 @@ mie 令和4年度  到達=○  手段=現行サイト  https://www.pref.mie.lg.j
 
 miyagi 令和4年度  到達=○  手段=現行サイト  https://www.pref.miyagi.jp/documents/16068/r4dai1jigoukakujyokyou.pdf （WebSearch1発で直接ヒット・ライブ200確認済み。「第一次募集合格状況」だが同ディレクトリ内に出願状況資料も存在する可能性が高い）
 
-（miyagi以降・残り18県は次回イテレーション以降で着手）
+aichi 令和4年度  到達=○  手段=Wayback  http://web.archive.org/web/20220310110023/https://www.pref.aichi.jp/soshiki/kotogakko/shiganjokyo.html （aichiは現行サイトがImperva/Incapsulaでbot遮断されているため直接アクセス不可という既知の事象があるが、Waybackでは2022年2〜3月に6時点のスナップショットを発見。ページ内に「令和4年度」の明記と「全日制一般選抜・推薦選抜等志願変更後の志願者数」PDF(attachment/408509.pdf)へのリンクを確認・現行R8ソースと同種の資料)
+
+miyazaki 令和4年度  到達=○  手段=現行サイト  https://www.pref.miyazaki.lg.jp/kokokyoiku/kyoikukosodate/kyoiku/20210615161157.html （「令和4年度県立高等学校生徒募集に係る情報提供について」・ライブ200確認済み）
+
+nagano 令和4年度  到達=○  手段=現行サイト  https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r4/r4nyushi1.html （WebSearch1発で直接ヒット・ライブ200確認済み。後期選抜志願者数(志望変更受付締切後)PDFへの言及あり）
+
+nagasaki 令和4年度  到達=○  手段=Wayback  http://web.archive.org/web/20220318013100/https://www.pref.nagasaki.jp/bunrui/kanko-kyoiku-bunka/shochuko/koko-nyushi/shigan-jokyo/ （現行の一覧ページはライブ200だが動的で内容抽出できず。Waybackの2022-03-18スナップショットで「令和4年度後期選抜・定時制課程1期選抜志願状況」「令和4年度前期選抜・離島留学特別選抜志願状況」の2ページへのリンクを確認）
+
+okayama 令和4年度  到達=○  手段=現行サイト  https://www.pref.okayama.jp/site/255/760420.html （WebSearch1発で直接ヒット・ライブ200確認済み。「特別入学者選抜等志願者数について」）
+
+okinawa 令和4年度  到達=○  手段=Wayback  http://web.archive.org/web/20220523210334/https://www.pref.okinawa.jp/edu/kenritsu/nyushi/ko/nyushi.html （WebSearchで「（令和4年度実施）県立高等学校入試関連情報」というタイトルの正確なページを発見・現行は404だがWaybackに2022-05/2022-10/2023-01/2023-12の複数スナップショットあり）
+
+（okinawa以降・残り11県は次回イテレーション以降で着手）
