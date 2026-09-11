@@ -299,12 +299,16 @@ W-0 の鮮度を確認する（主食ドリフト4回の教訓）。
    （110件）・12件目=kumamoto R4完了（165件）。2026-09-12 13件目=kyoto R4完了
    （76件）・14件目=mie R4完了（108件）・15件目=miyazaki R4完了（104件）・16件目
    =wakayama R4完了（62件）・17件目=yamagata R4完了（93件）・18件目=shiga R4完了
-   （61件）・19件目=aomori R4完了（91件）・20件目=kagawa R4完了（68件）。詳細は下の
-   「#11-1」〜「#11-20」参照。
-   残り16県年（到達○のうちfukui/niigata/oita/akita/kochi/ehime/nagano/miyagi/
-   fukushima/hiroshima/okayama/kumamoto/kyoto/mie/miyazaki/wakayama/yamagata/
-   shiga/aomori/kagawa以外・ibaraki R4/yamanashi R4/shimane R4/chiba R4は要再検討で
-   保留=下記参照）が対象。**
+   （61件）・19件目=aomori R4完了（91件）・20件目=kagawa R4完了（68件）・21件目=
+   kagoshima R4完了（153件）。詳細は下の「#11-1」〜「#11-21」参照。
+   ⚠️2026-09-12訂正: 従来「残り16県年」等と記載していたカウントは台帳（
+   ops/baselines/backfill-reachability-2026-09.md）の到達○件数と突合していなかった
+   ため不正確だった。台帳を機械的に数え直したところ令和4年度で到達○は32県年あり、
+   うち21件完了・4件保留（ibaraki/yamanashi/shimane/chiba）・1件は別タスクで
+   blocked（aichi・Imperva WAF）。**残りは実質6県年（kanagawa/nagasaki/nara/
+   okinawa/osaka/saitama）**が対象。うちnaraはR5自体も未収録（他県と前提が異なる
+   ため優先度は最後でよい）、saitama/osaka等は241〜240件規模の大型・複数頁PDFで
+   1件あたりの作業量が今までの単純1頁県より重い点に注意。**
 2. **定時制で `coverage='partial'` にした県の pendingDepartments を潰す。**
    現時点で fukuoka（単位制2期）・kochi（夜間部・通信制）・hiroshima。1県1〜2h
 3. **T-Y11C-4 の yamanashi 20件・yamaguchi 5件**（#9 に入っているが、単独でも取れる）
@@ -3958,6 +3962,38 @@ green を確認しcommit・push済（b9c0bf4/1d64448）。
 fukushima/hiroshima/okayama/kumamoto/kyoto/mie/miyazaki/wakayama/yamagata/
 shiga/aomori/kagawa以外・ibaraki R4/yamanashi R4/shimane R4/chiba R4は保留）の
 いずれかを次イテレーションで選ぶ。
+
+### #11-21 kagoshima R4完了（2026-09-12・§11項目1の21件目）
+
+台帳のWayback URL（20220326175524・r4syutugansyasu.html）から実際のPDFリンクを
+抽出（`documents/96730_20220215155845-1.pdf`）し取得。kagoshimaはURLフォルダ名
+（r3/r4/r5等）が年度と対応しない社内コードのため、ページ内容から実際のPDFリンクを
+発見する一手間が必要だった（台帳の既知の注意点通り）。
+
+R5と同型でpdftotextは日本語ToUnicodeマッピング欠落のため学校名・学科名が読めず、
+pdftoppm 300dpiビジョン解析で全7頁（1頁目=全体サマリー・2頁目=学区別クロス集計
+（全日制+定時制合算のため使用せず）・3〜6頁目=7学区の学校別詳細「全日制」表・
+7頁目=定時制でスコープ外）を転記。153レコード（68校）を転記し、7学区すべての
+「学区合計」行（鹿児島3822/4004・南薩1105/777・北薩1603/1085・姶良伊佐1719/1357・
+大隅1554/1078・熊毛398/223・大島986/631）および「全日制 合計」行（学力検査定員
+11,187・最終出願者数9,155・倍率0.82）とnode.js機械集計が初回転記で完全一致した
+（再修正なし・7段階すべて一致）。学校名+学科名のキー集合はR5と完全一致（差分0件・
+統廃合なし）。喜界（商業）はR4時点でも最終出願者数0だった。
+
+固定値回帰ガードテスト3本＋developersページ本文＋PoC納品物を連動更新（総件数
+23,684→23,837件・配布可能23,493→23,646件・学校数3,277のまま変化なし）。
+tsc --noEmit exit 0・kagoshima.test.ts 12 tests green・3本のロックステップテスト
+green を確認しcommit・push済（62b1081/124b0c0）。
+
+⚠️台帳の「残りN県年」カウントを機械的に数え直したところ、これまでの「残り16」等の
+記載は台帳（ops/baselines/backfill-reachability-2026-09.md）の到達○件数と突合
+していなかったため不正確と判明した。令和4年度で到達○は32県年あり、うち21件完了・
+4件保留（ibaraki/yamanashi/shimane/chiba）・1件は別タスクで blocked（aichi・
+Imperva WAF）。**残りは実質6県年（kanagawa/nagasaki/nara/okinawa/osaka/
+saitama）**が対象。うちnaraはR5自体も未収録（他県と前提が異なるため優先度は
+最後でよい）、saitama（241レコード・9頁）・osaka（xlsx形式）は規模が大きいため
+1件で複数イテレーションに分割する前提で着手すること。次はこの6県年のいずれかを
+次イテレーションで選ぶ。
 
 ## 守ること
 
