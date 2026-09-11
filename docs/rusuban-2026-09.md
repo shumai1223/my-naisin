@@ -5,17 +5,16 @@
 
 ---
 
-最終更新              2026-09-11 (§5順序#10・archive.org全体障害を検知)
-いまやっていること     T-Y11F §5順序#10（年度遡りの到達可能性）: 51県年中27県年の
-                      状況を記録(到達○19・対象外1=hyogo・保留7・未着手23)。
+最終更新              2026-09-11 (§5順序#10・34/51県年確定)
+いまやっていること     T-Y11F §5順序#10（年度遡りの到達可能性）: 51県年中34県年の
+                      状況を記録(到達○26・対象外1=hyogo・保留7・未着手17)。
                       §5順序#8は完遂済み
-今日やったこと         hiroshima/ibaraki/kagawaのR4到達を確定。hyogoは恒久ルールで
-                      対象外に。ishikawa/iwate確認中にarchive.org自体が
-                      「Temporarily Offline」の公式障害(503)と判明・Wayback依存の
-                      確認を一時停止
-次にやること           archive.orgの復旧を確認しつつ、Wayback非依存(WebSearch+
-                      現行サイトのみ)で進められる県から残り23県(kagoshima以降)に
-                      優先着手
+今日やったこと         kagoshima/kanagawa/kochi/kumamoto/kyoto/mie/miyagiのR4到達を
+                      確定。WebSearch1発+軽い現行サイト確認の軽量手順が定着し
+                      1県あたり1〜2回の呼び出しで処理できるケースが大半に
+次にやること           残り17県(miyazaki以降)へ軽量手順で着手継続。余裕があれば
+                      保留分(fukuoka/gifu/gunma/ishikawa/iwate/kanagawa)の
+                      archive.org裏取りも実施
 払底の見込み           22データ点いずれも同程度の負荷。sourceIndex事前確認の運用が定着し
                       fukuoka級の複雑さへの対応コストは制御下にある
 詰まっていること        aichi（Imperva WAF一時ブロックが継続中）。oita/okinawa(競争率
