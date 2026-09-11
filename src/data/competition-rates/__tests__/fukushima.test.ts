@@ -57,6 +57,13 @@ describe('福島県 倍率パイプラインα（Y-6・全日制50校99レコー
     expect(r6.reduce((a, r) => a + r.finalApplicants, 0)).toBe(230);
   });
 
+  it('掛-1(学校別×多年度): 令和4年度(R4)分レコードが94件収録され（T-Y11F §5順序#11）、学校別表のquota合計(1,825)と完全一致する。3頁目の全日制/定時制比較表は志願者数(出願先変更後)を228と記載するが、node.js機械集計は229で1名の差異があり、学校別表を2回独立に再確認したうえで学校別表の印字値をそのまま採用した（資料側の軽微な不整合と判断・詳細はファイル先頭のdocstring参照）', () => {
+    const r4 = records.filter((r) => r.fiscalYear === '令和4年度（2022年度）');
+    expect(r4.length).toBe(94);
+    expect(r4.reduce((a, r) => a + r.quota, 0)).toBe(1825);
+    expect(r4.reduce((a, r) => a + r.finalApplicants, 0)).toBe(229);
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of FUKUSHIMA_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.pref\.fukushima\.lg\.jp\//);
