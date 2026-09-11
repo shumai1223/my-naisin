@@ -60,4 +60,20 @@ fukushima 令和4年度  到達=○  手段=現行サイト  https://www.pref.fu
 gifu 令和4年度  到達=△要Wayback再確認  手段=保留  WebSearchで見つかった「入学者選抜トップ」ページ(3464.html)に過去年度リンク無し。Wayback CDXは2回連続タイムアウトのため本イテレーションはこれ以上試行せず。次回再試行
 gunma 令和4年度  到達=△要継続調査  手段=保留  「令和4年度入学者選抜結果について」(5036.html・ライブ確認済みだが全体統計のみで学校別PDFへのリンク無し)と「実施要項」(pref.gunma.jp/03/x28g_00270.html)は存在確認できたが、目的の学校別志願状況PDF自体は特定できず。次回はWaybackで5036.html周辺の関連ページを深堀りするか、attachment番号を令和5/6年度の値から逆算して絞り込む
 
-（gunma以降・残り31県は次回イテレーション以降で着手）
+hiroshima 令和4年度  到達=○  手段=現行サイト  https://www.pref.hiroshima.lg.jp/site/kyouiku/06senior-2nd-r4-nyuushi-r4-kou-r4-kou-mokuji-r4-kou-mokuji.html （ライブ200・選抜(I)/(II)それぞれの志願状況・受検状況PDFへのリンクを確認）
+
+hyogo 令和4年度  到達=対象外  手段=(取得禁止)  §5「守ること」の恒久ルール「hyogoは取得しない」に従い、本タスクでもhyogoへのアクセス自体を行わない。台帳上は永続的にスキップ対象として記録する
+
+ibaraki 令和4年度  到達=○  手段=現行サイト  https://kyoiku.pref.ibaraki.jp/wp-content/uploads/2023/02/0610houkoku.pdf （WebSearch1発で直接ヒット・ライブ200確認済み・「実施状況報告書」形式で現行R8ソースと同型）
+
+ishikawa 令和4年度  到達=△要Wayback再確認  手段=保留  WebSearchでは具体的な学校別ページを発見できず。R8ソースが日付ベースファイル名(documents/20260224.pdf)のため直接パターン推測は不可能。WaybackのCDXで2022年前半のdocuments/フォルダを検索しようとしたが2回連続タイムアウトしたため中断。次回再試行
+
+⚠️ **2026-09-11 13:12頃、ishikawaでarchive.orgが再度2回連続タイムアウトしたため、以降Waybackの使用を中断し現行サイト+WebSearchのみで継続する。**
+
+iwate 令和4年度  到達=△要Wayback再確認  手段=保留  R4当時のデータは旧サイト(www2.iwate-ed.jp/sed/・令和6年度に閉鎖しpref.iwate.jpへ移行)にあった可能性が高いが、現行の同サイトには令和5年度データのみが残り令和4年度以前は削除済み。Wayback不安定のため次回再確認
+
+kagawa 令和4年度  到達=○  手段=Wayback  http://web.archive.org/web/20220311202329/https://www.pref.kagawa.lg.jp/documents/15088/syutugan4-5.pdf （現行の一覧ページは上書き済みだがWaybackに2022年1〜3月の16時点のスナップショットがあり、「公立高等学校一般選抜出願状況（令和4年2月24日志願変更締切後）」PDFへのリンクを確認）
+
+⚠️ **2026-09-11 13:20頃、archive.org自体が「Temporarily Offline」(503・公式にサービス全体が一時停止中)と判明した。** これは自分のアクセス過多によるレート制限ではなく先方の障害のため、本イテレーションはこれ以降Waybackを使わず現行サイト+WebSearchのみで継続し、ishikawa/iwateの再試行は次回以降に持ち越す。
+
+（kagawa以降・残り25県は次回イテレーション以降で着手）
