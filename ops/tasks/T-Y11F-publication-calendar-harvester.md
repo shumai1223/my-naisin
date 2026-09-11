@@ -295,9 +295,10 @@ W-0 の鮮度を確認する（主食ドリフト4回の教訓）。
    **✅2026-09-11 1件目=fukui R4完了（73件）・2件目=niigata R5完了（97件）・3件目=oita
    R5完了（81件）・4件目=akita R4完了（82件）・5件目=kochi R4完了（76件）・6件目=ehime
    R4完了（106件）・7件目=nagano R4完了（131件）・8件目=miyagi R4完了（132件）・9件目
-   =fukushima R4完了（94件）。詳細は下の「#11-1」〜「#11-9」参照。残り27県年（到達○の
-   うちfukui/niigata/oita/akita/kochi/ehime/nagano/miyagi/fukushima以外・ibaraki
-   R4/yamanashi R4/shimane R4/chiba R4は要再検討で保留=下記参照）が対象。**
+   =fukushima R4完了（94件）・10件目=hiroshima R4完了（135件）。詳細は下の「#11-1」〜
+   「#11-10」参照。残り26県年（到達○のうちfukui/niigata/oita/akita/kochi/ehime/
+   nagano/miyagi/fukushima/hiroshima以外・ibaraki R4/yamanashi R4/shimane R4/
+   chiba R4は要再検討で保留=下記参照）が対象。**
 2. **定時制で `coverage='partial'` にした県の pendingDepartments を潰す。**
    現時点で fukuoka（単位制2期）・kochi（夜間部・通信制）・hiroshima。1県1〜2h
 3. **T-Y11C-4 の yamanashi 20件・yamaguchi 5件**（#9 に入っているが、単独でも取れる）
@@ -3556,6 +3557,38 @@ tsc --noEmit exit 0・jest 545 suites 7776 tests all green を確認しcommit・
 次は残り27県年（到達○のうちfukui/niigata/oita/akita/kochi/ehime/nagano/miyagi/
 fukushima以外・ibaraki R4/yamanashi R4/shimane R4/chiba R4は保留）のいずれかを
 次イテレーションで選ぶ。
+
+### #11-10 hiroshima R4完了（2026-09-11・§11項目1の10件目）
+
+§5順序#10で到達可能性を確認済みだったhiroshima令和4年度分を実収集した。
+
+R4当時のページ構成はR5〜R8と異なり「選抜（Ⅰ）」（連携型中高一貫・併設型等）と
+「選抜（Ⅱ）」（一般入試相当）が別々のPDFに分かれており、R5以降の「一次選抜」という
+呼称はまだ導入されていなかった。実際にPDFを開いて内容を突合したところ、R4の
+「選抜（Ⅱ）」がR5以降の「一次選抜」に実質的に相当することを確認した（同一の選抜
+定員・志願者数の構造、同じ学校群を対象とする）。現行の案内ページ
+（`06senior-2nd-r4-nyuushi-...`）からライブで「令和４年度広島県公立高等学校
+選抜（Ⅱ）等の志願状況」（令和4年2月24日確定・全5頁）
+https://www.pref.hiroshima.lg.jp/uploaded/attachment/471930.pdf を取得した
+（ライブ200確認済み）。
+
+pdftotext -layoutは数値のみ抽出でき学校名・学科名は読めなかったため、R6/R7と同様
+pdftoppm 200dpiビジョン解析で全135レコード（全日制本校134＋分校1）を転記した。
+1ページ目の公式小計（本校quota10,658・applicants(2/24最終)10,923＋分校quota25・
+applicants8）とnode.js機械集計が完全一致した（初回転記で一致・再修正なし）。
+呉工業「機械・材料工学」「電気・電子機械」、宮島工業「電気・情報技術」
+「建築・インテリア」、福山工業「工業化学・染織システム」のくくり募集（複数学科・
+コースが選抜（Ⅱ）定員を共有）はR6〜R8と同一の統合パターンで、既存の命名規則
+（連結学科名の単一レコード）をそのまま踏襲した。
+
+固定値回帰ガードテスト3本＋developersページ本文＋PoC納品物を連動更新（総件数
+22,611→22,746件・配布可能22,420→22,555件・学校数3,276のまま変化なし）。
+tsc --noEmit exit 0・jest 545 suites 7777 tests all green を確認しcommit・push済
+（ce7bfb1）。
+
+次は残り26県年（到達○のうちfukui/niigata/oita/akita/kochi/ehime/nagano/miyagi/
+fukushima/hiroshima以外・ibaraki R4/yamanashi R4/shimane R4/chiba R4は保留）の
+いずれかを次イテレーションで選ぶ。
 
 ## 守ること
 
