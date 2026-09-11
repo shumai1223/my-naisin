@@ -223,6 +223,43 @@ describe('三重県 倍率パイプラインα（Y-6・全日制52校108レコ�
     expect(minamiIse5[0].finalApplicants).toBe(8);
   });
 
+  it('掛-1(学校別×多年度・T-Y11F §5順序#11払底時の逃げ場): 令和4年度(R4)分レコードが108件・52校収録され、全日制総計(quota7,149・applicants7,693・倍率1.08)と完全一致する。schoolNameのキー集合はR5と完全一致（差分0件）', () => {
+    const r4 = records.filter((r) => r.fiscalYear === '令和4年度（2022年度）');
+    expect(r4.length).toBe(108);
+    expect(r4.reduce((a, r) => a + r.quota, 0)).toBe(7149);
+    expect(r4.reduce((a, r) => a + r.finalApplicants, 0)).toBe(7693);
+
+    const distinctSchools4 = new Set(r4.map((r) => r.schoolName));
+    expect(distinctSchools4.size).toBe(52);
+
+    const igahoR4 = r4.filter((r) => r.schoolName === '伊賀白鳳');
+    expect(igahoR4).toHaveLength(1);
+    expect(igahoR4[0].quota).toBe(103);
+
+    const r5 = records.filter((r) => r.fiscalYear === '令和5年度（2023年度）');
+    const r4Schools = new Set(r4.map((r) => r.schoolName));
+    const r5Schools = new Set(r5.map((r) => r.schoolName));
+    expect(r4Schools).toEqual(r5Schools);
+  });
+
+  it('掛-1(R4固有の構造差): 久居農林・南伊勢・稲生・川越はR4時点でR5と同型の構造だった（くくり化・統合はR6以降）', () => {
+    const r4 = records.filter((r) => r.fiscalYear === '令和4年度（2022年度）');
+
+    const kuiNorin4 = r4.filter((r) => r.schoolName === '久居農林');
+    expect(kuiNorin4).toHaveLength(5);
+    expect(kuiNorin4.map((r) => r.department).sort()).toEqual(
+      ['環境情報', '環境土木', '生物資源', '生物生産', '生活デザイン'].sort()
+    );
+
+    const minamiIse4 = r4.filter((r) => r.schoolName.startsWith('南伊勢'));
+    expect(minamiIse4).toHaveLength(1);
+    expect(minamiIse4[0].schoolName).toBe('南伊勢（度会校舎・南勢校舎）');
+
+    expect(r4.filter((r) => r.schoolName === '稲生' && r.department === '体育')).toHaveLength(1);
+    expect(r4.filter((r) => r.schoolName === '川越' && r.department === '普通')).toHaveLength(1);
+    expect(r4.filter((r) => r.schoolName === '川越' && r.department === '国際文理')).toHaveLength(1);
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of MIE_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.pref\.mie\.lg\.jp\//);
