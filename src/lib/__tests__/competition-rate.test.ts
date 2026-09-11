@@ -195,6 +195,7 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
       { code: 'gifu', count: 134 },
       { code: 'gunma', count: 106 },
       { code: 'hiroshima', count: 137 },
+      { code: 'hokkaido', count: 323 },
       { code: 'hyogo', count: 190 },
       { code: 'ibaraki', count: 149 },
       { code: 'ishikawa', count: 67 },
@@ -1688,6 +1689,58 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
         expect(seen.has(key)).toBe(false);
         seen.add(key);
       }
+    });
+
+    it('R7以前（fiscalYear明示済み）はまだpage/rowIndex未バックフィルのため全件null', () => {
+      const pre8 = file.records.filter((r) => r.fiscalYear !== undefined);
+      expect(pre8.length).toBeGreaterThan(0);
+      for (const r of pre8) {
+        expect(resolveSourceLocator(r, file.sources)).toBeNull();
+      }
+    });
+  });
+
+  describe('hokkaido R8（#8・ビジョン11県11県目・最終県・全323件・単一PDF全14頁=14管内）', () => {
+    const file = COMPETITION_RATE_BY_PREFECTURE['hokkaido']!;
+    const r8 = file.records.filter((r) => !r.fiscalYear);
+
+    it('R8の323件全件がresolveSourceLocatorで解決できる', () => {
+      expect(r8.length).toBe(323);
+      for (const r of r8 as any[]) {
+        expect(r.page).toBeGreaterThanOrEqual(1);
+        expect(r.page).toBeLessThanOrEqual(14);
+        const locator = resolveSourceLocator(r, file.sources);
+        expect(locator).not.toBeNull();
+        expect(locator!.pdfSha256).toBe('61b040f3c4e08a89187f8f3c914d6d791981a647f5bd1a2a16b435291c32285c');
+        expect(locator!.rowIndex).toBeGreaterThanOrEqual(0);
+      }
+    });
+
+    it('頁別の件数が空知29〜根室11まで14管内分の合計と一致し、同一(page,rowIndex)の重複が無い', () => {
+      const byPage = new Map<number, number>();
+      const seen = new Set<string>();
+      for (const r of r8 as any[]) {
+        byPage.set(r.page, (byPage.get(r.page) ?? 0) + 1);
+        const key = `${r.page}|${r.rowIndex}`;
+        expect(seen.has(key)).toBe(false);
+        seen.add(key);
+      }
+      expect([...byPage.entries()].sort((a, b) => a[0] - b[0])).toEqual([
+        [1, 29],
+        [2, 31],
+        [3, 26],
+        [4, 9],
+        [5, 29],
+        [6, 20],
+        [7, 13],
+        [8, 23],
+        [9, 37],
+        [10, 15],
+        [11, 31],
+        [12, 28],
+        [13, 21],
+        [14, 11],
+      ]);
     });
 
     it('R7以前（fiscalYear明示済み）はまだpage/rowIndex未バックフィルのため全件null', () => {
