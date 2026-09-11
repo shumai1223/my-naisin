@@ -5,19 +5,19 @@
 
 ---
 
-最終更新              2026-09-12 (§11項目1: #10到達済み県年の実収集を継続中・16件完了)
+最終更新              2026-09-12 (§11項目1: #10到達済み県年の実収集を継続中・17件完了)
 いまやっていること     T-Y11F §11払底時の逃げ場・項目1「#10で到達可能と判定された
                       県年の実収集」。fukui/niigata/oita/akita/kochi/ehime/nagano/
                       miyagi/fukushima/hiroshima/okayama/kumamoto/kyoto/mie/
-                      miyazaki/wakayamaの16県完了(commit 2abd4dd〜739bf12)。
-今日やったこと         16県連続で転記(いずれもpdftoppmビジョン解析・公式合計行と完全
-                      一致)。miyazaki/wakayamaで各1件の転記ミス(学科名表記ゆれ・
-                      速報値/確定値の列取り違え)を機械集計との差分検出で発見・修正。
-                      ibaraki/yamanashi/shimane/chibaのR4は保留のまま。総件数変動
-                      16回(21,739→23,371)に伴い固定値テスト3本等を都度連動更新
-次にやること           残り20県年から次の1件を選び同じ手順で継続(ibaraki/yamanashi/
+                      miyazaki/wakayama/yamagataの17県完了(commit 2abd4dd〜681cafe)。
+今日やったこと         17県連続で転記(いずれもpdftoppmビジョン解析・公式合計行と完全
+                      一致)。miyazaki/wakayama/yamagataで各1件の転記・思い込みミス
+                      (学科名表記ゆれ・列取り違え・学校数の暗算誤り)を機械集計や
+                      隣接年度比較テストで発見・修正。ibaraki/yamanashi/shimane/
+                      chibaのR4は保留のまま。総件数変動17回(21,739→23,464)
+次にやること           残り19県年から次の1件を選び同じ手順で継続(ibaraki/yamanashi/
                       shimane/chibaのR4は要再検討候補として保留のまま)
-払底の見込み           #11項目1だけで20県年(15〜70h相当)残っており当面は枯れない
+払底の見込み           #11項目1だけで19県年(15〜70h相当)残っており当面は枯れない
 詰まっていること        aichi（Imperva WAF一時ブロックが継続中）。oita R6/okinawa
                       (競争率データ自体は完了)は他タスクで資料自体が未整備で前進手段なし
 👤の判断が要るもの      #5成果物・#6仕様書とも対外提示可否・価格は👤判断待ち（送信0件）

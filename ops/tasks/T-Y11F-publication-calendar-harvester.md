@@ -298,10 +298,11 @@ W-0 の鮮度を確認する（主食ドリフト4回の教訓）。
    =fukushima R4完了（94件）・10件目=hiroshima R4完了（135件）・11件目=okayama R4完了
    （110件）・12件目=kumamoto R4完了（165件）。2026-09-12 13件目=kyoto R4完了
    （76件）・14件目=mie R4完了（108件）・15件目=miyazaki R4完了（104件）・16件目
-   =wakayama R4完了（62件）。詳細は下の「#11-1」〜「#11-16」参照。残り20県年
-   （到達○のうちfukui/niigata/oita/akita/kochi/ehime/nagano/miyagi/fukushima/
-   hiroshima/okayama/kumamoto/kyoto/mie/miyazaki/wakayama以外・ibaraki R4/
-   yamanashi R4/shimane R4/chiba R4は要再検討で保留=下記参照）が対象。**
+   =wakayama R4完了（62件）・17件目=yamagata R4完了（93件）。詳細は下の「#11-1」〜
+   「#11-17」参照。残り19県年（到達○のうちfukui/niigata/oita/akita/kochi/ehime/
+   nagano/miyagi/fukushima/hiroshima/okayama/kumamoto/kyoto/mie/miyazaki/
+   wakayama/yamagata以外・ibaraki R4/yamanashi R4/shimane R4/chiba R4は
+   要再検討で保留=下記参照）が対象。**
 2. **定時制で `coverage='partial'` にした県の pendingDepartments を潰す。**
    現時点で fukuoka（単位制2期）・kochi（夜間部・通信制）・hiroshima。1県1〜2h
 3. **T-Y11C-4 の yamanashi 20件・yamaguchi 5件**（#9 に入っているが、単独でも取れる）
@@ -3821,6 +3822,46 @@ tsc --noEmit exit 0・jest 545 suites 7787 tests all green を確認しcommit・
 
 次は残り20県年（到達○のうちfukui/niigata/oita/akita/kochi/ehime/nagano/miyagi/
 fukushima/hiroshima/okayama/kumamoto/kyoto/mie/miyazaki/wakayama以外・
+ibaraki R4/yamanashi R4/shimane R4/chiba R4は保留）のいずれかを次イテレーションで
+選ぶ。
+
+### #11-17 yamagata R4完了（2026-09-12・§11項目1の17件目）
+
+§5順序#10で到達可能性を確認済みだったyamagata令和4年度分を実収集した。
+
+台帳のハブページ（700013/koko/r4kokonyushi.html・「令和4年度入学者選抜情報」）は
+WebFetchで一発で開けて、その場に「一般入学者選抜志願状況」PDF（令和4年2月25日
+発表・全5頁、うち全日制は2〜4頁）への直リンクが掲載されていた。Wayback不要で
+一発到達できた。
+
+R5〜R7と同型のpdftoppm 300dpiビジョン解析で全日制93レコード（45校・分校3件を
+含む＋市立1校）を転記した。ページ4末尾「全日制公立合計」行（募集人員6,067・
+志願者数5,072・倍率0.84＝全日制県立合計5,848/4,802/0.82＋全日制市立合計
+219/270/1.23）とnode.js機械集計が完全一致した（初回転記で一致・再修正なし）。
+
+schoolNameのキー集合はR5と完全一致（差分0件）。新庄北/新庄南/新庄神室産業の
+分校体制、鶴岡南の普通・理数合算、米沢工業・米沢商業が別々の学校、置賜農業の
+3学科構成（生物生産/園芸福祉/食料環境）はいずれもR5と同型だった。department名は
+2校のみ異なる: ①寒河江工業はR4時点で「機械」「電子機械」「情報技術」という
+学科名だったが、R5以降は「メカニカルエンジニア」「ロボットエンジニア」
+「ITエンジニア」というカタカナ名称に変更されている（画像を再確認し誤読でないことを
+確認・実際の学科名称変更）。②加茂水産はR4時点で「海洋技術」「海洋資源」の2学科
+（quota33ずつ）だったが、R5以降は「水産」の単一学科に統合されている。
+
+⚠️教訓（学校数の思い込みミス・wakayamaと同型）: schoolNameがR5と完全一致することは
+確認済みだったにもかかわらず、テストを書く際に「45校」を「41校」と思い込みで
+記載してしまい、R5との完全一致比較テストで即座に失敗を検出した。実際に
+distinctSchools.sizeを数え直して45校が正しいと確認し修正した。数値の暗算・記憶に
+頼らず、必ずコードで再計算して確認する習慣がここでも有効だった。
+
+固定値回帰ガードテスト3本＋developersページ本文＋PoC納品物を連動更新（総件数
+23,371→23,464件・配布可能23,180→23,273件・学校数3,277のまま変化なし）。
+jest実行が1回システムメモリ不足でkillされたが、再実行で完走した（他県でも
+繰り返し発生している既知の事象）。tsc --noEmit exit 0・jest 545 suites 7789 tests
+all green を確認しcommit・push済（681cafe）。
+
+次は残り19県年（到達○のうちfukui/niigata/oita/akita/kochi/ehime/nagano/miyagi/
+fukushima/hiroshima/okayama/kumamoto/kyoto/mie/miyazaki/wakayama/yamagata以外・
 ibaraki R4/yamanashi R4/shimane R4/chiba R4は保留）のいずれかを次イテレーションで
 選ぶ。
 
