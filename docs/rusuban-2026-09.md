@@ -5,17 +5,16 @@
 
 ---
 
-最終更新              2026-09-11 (aichi追加・★最難関県を突破)
+最終更新              2026-09-11 (kanagawa追加)
 いまやっていること     T-Y11F §5順序#8（出典ロケータ）: 登録パーサ36県完了+ビジョン
-                      7県完了。累計4593件(1898+1746+ビジョン7県949)
-今日やったこと         aichi(ビジョン県7県目・最難関): ①Imperva遮断→Wayback Machine
-                      で解決 ②西尾のみデータ配列末尾追記アノマリー(過去セッションが
-                      見落とし発見後に追記)→内容一致で個別にpage12/rowIndex11を特定。
-                      全241件locator解決・全545suites7753tests green(1発)・
-                      commit・push済み
-次にやること           残り4県(hokkaido/kanagawa/osaka/tokyo)。hokkaidoは323レコード
-                      と大規模なため最後に回す。kanagawa/osaka/tokyoも大都市圏で
-                      数百レコード規模、aichiの手法(内容ベース特殊ケース検出)を再利用
+                      8県完了。累計4759件(1898+1746+ビジョン8県1115)
+今日やったこと         kanagawa(ビジョン県8県目): aichiの教訓に従いcoverage.note等を
+                      事前grepしたがアノマリー無し確認。全10ページとも印字順=データ
+                      配列順で一致(特殊ケース対応不要)。全166件locator解決・
+                      全545suites7756tests green(1発)・commit(fac0753)・push済み
+次にやること           残り3県(osaka/tokyo/hokkaido)。osakaは4資料全てxlsx形式という
+                      新パターン(pdfSha256は文書全体のハッシュとして流用予定)。
+                      hokkaidoは323レコードと最大規模のため最後に回す
 払底の見込み           22データ点いずれも同程度の負荷。sourceIndex事前確認の運用が定着し
                       fukuoka級の複雑さへの対応コストは制御下にある
 詰まっていること        aichi（Imperva WAF一時ブロックが継続中）。oita/okinawa(競争率

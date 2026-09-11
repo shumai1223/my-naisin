@@ -2877,6 +2877,37 @@ tsc実exit0・jestフルスイート545suites7753tests green(1発green)。
 ため引き続き最後に回す。kanagawa/osaka/tokyoも大都市圏で数百レコード規模のため、aichi
 で確立した「内容ベース特殊ケース検出」の手法を必要に応じて再利用する。
 
+### #8 出典ロケータ ビジョン11県 8県目=kanagawa（2026-09-11・全10ページとも印字順=配列順で一致）
+
+着手前にaichiの教訓に従い、kanagawa.tsのcoverage.note及び全コメントを「抜け」「末尾」
+「追記」「見落とし」等のキーワードでgrep確認したが、aichi型の配列順序アノマリーを示す
+記述は無かった（"頁末尾"の言及はいずれもPDF側の頁末小計の意味で無関係）。
+
+一次ソースURL(`https://www.pref.kanagawa.jp/documents/131973/bessi3.pdf`)はcurlの
+素の接続は失敗（HTTP_CODE:000）したが、`-k`（TLS検証スキップ）を付けると200で取得
+できた。既知の会社ネットワークのTLS傍受事象と判断し通常運用に戻して問題なし。
+
+R8全166件は全13頁中1〜10頁目（1「一般募集共通選抜」全日制+2「連携募集」）に収録。
+pdftoppm 150dpiで1〜10頁を画像化しRead toolで全頁目視確認したところ、**全ページで
+データファイルの記録順とPDFの印字順が完全に一致**しており、aichi型の特殊ケース対応は
+不要だった。複数コース設置校（神奈川総合・横浜国際等）は既存の「計行採用方式」（学校の
+「計」行の値をそのまま1レコードとして採用）を踏襲しているため、rowIndexもその「計」行が
+印字されている位置をそのまま採用した（quota/finalApplicants等の既存値は無変更）。
+
+各頁の記録数は1頁目=38・2頁目=41・3頁目=17・4頁目=8・5頁目=12・6頁目=7・7頁目=6・
+8頁目=24・9頁目=7・10頁目=6で合計38+41+17+8+12+7+6+24+7+6=166件と完全一致することを
+機械検算。duplicate(page,rowIndex)0件も別途確認。既存テストファイル
+(`kanagawa.test.ts`)にはR8レコードの完全一致toEqualアサーションが無かったため
+bare()ヘルパー追加は不要だった。PDFを取得しsha256(afb7003c...)を計測。
+
+累計4759件(共有関数3種18県1898+個別実装18県1746+ビジョン8県(yamaguchi98+fukushima99+
+mie108+miyazaki104+okayama109+hyogo190+aichi241+kanagawa166)=1115)。
+tsc実exit0・jestフルスイート545suites7756tests green(1発green)。commit(fac0753)・push済み。
+
+次は残り3県(osaka/tokyo/hokkaido)。osakaは4資料全てがxlsx形式(pdfSha256のフィールド
+名は文書全体のSHA-256として引き続き使う想定)である点に注意。hokkaidoは323レコードと
+最大規模のため引き続き最後に回す。
+
 **2026-09-10着手**: §5順序#7（段階台帳）がhokkaido全14管内完結によりoita/okinawaの2県のみ
 未着手（前進手段なしと判断済み）となったため#8に着手。設計資料
 （`ops/baselines/stage-ledger-unit-count-2026-09.md`・`ops/prompts/fable-staple-design-
