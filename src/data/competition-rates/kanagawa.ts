@@ -152,9 +152,27 @@
  * ことに対応する実在の記録（WebSearchで裏取り済み・転記ミスではない）。転記の正しさは、
  * 印字済み「県立計」26,639/32,696・「市立計」1,268/1,686・「合計」27,907/34,382の3段階
  * すべてが機械集計（位置対応後の値の総和）と完全一致することで検証済み（node.js機械計算・
- * 誤差ゼロ）。**sheet2「専門学科」・sheet3「単位制」は学科名は直接印字されているが学校名が
+ * 誤差ゼロ）。
+ *
+ * **2026-09-12追記(掛-1横展開R4第2弾)**: sheet2「専門学科」(農業/工業/商業/水産/家庭/看護/
+ * 福祉/理数/体育/美術/国際の11学科・27校=34レコード)を追加。sheet1と同様に学校名は
+ * 数値コードのみで印字されないが、印字済みの学科名(D列)は既存R5データの各校の学科名と
+ * WebSearchで裏取りしながら照合したところ、10カテゴリ全てでR5の学校並び順と完全に一致した
+ * （sheet1の地区順と同じく、当セッションの1回目の推測=「都市農業科等は中央農業高校」は
+ * 誤りとWebSearchの再検証で判明・撤回し「平塚農商」に訂正した経緯あり。中央農業高校の
+ * 現行の学科構成(園芸科学科・畜産科学科・農業総合科)を公式サイトで確認して裏取り済み）。
+ * 複数コース設置校は学校の「計」行の値をそのまま1校1レコードとして採用（既存の
+ * 「計行採用方式」を踏襲）。個々の学科名(D列)がR5と異なる場合(例: 家庭科→生活科学科・
+ * 理数科→科学科・体育科→スポーツ科学科/スポーツ科等)が多数あったが、`department`
+ * フィールドは既存の慣例通りカテゴリの汎用ラベル(工業科/商業科等)に統一し、個別の学科名
+ * 表記ゆれはそのまま記録データからは見えない形にした（既存tsの一貫した設計方針を維持）。
+ * 横浜市立横浜商業はR4時点で商業科(199)とスポーツマネジメント科(39)の2学科制だったが
+ * R5以降は商業科(238)に統合されている（実在の学科再編・国際科(35)はR4/R5とも別枠で
+ * 変化なし）。全11カテゴリの印字済み小計（農業468・工業2,276・商業1,026・水産156・
+ * 家庭39・看護78・福祉234・理数39・体育78・美術78・国際74）が機械集計と完全一致
+ * （node.js機械計算・誤差ゼロ）。**sheet3「単位制」は学科名は直接印字されているが学校名が
  * 無く、学科名の組み合わせパターンからの学校特定作業が必要なため次回以降のセッションに
- * 持ち越す**（詳細はops/tasks/T-Y11F-publication-calendar-harvester.md #11-28/29参照）。
+ * 持ち越す**（詳細はops/tasks/T-Y11F-publication-calendar-harvester.md #11-28/30参照）。
  */
 import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
 
@@ -1121,5 +1139,41 @@ export const KANAGAWA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '横須賀南', area: '横須賀市', department: '普通科（クリエイティブスクール）', quota: 118, finalApplicants: 116, finalRate: 0.98, fiscalYear: '令和4年度（2022年度）' },
     { schoolName: '大井', area: '大井町', department: '普通科（クリエイティブスクール）', quota: 158, finalApplicants: 85, finalRate: 0.54, fiscalYear: '令和4年度（2022年度）' },
     { schoolName: '大和東', area: '大和市', department: '普通科（クリエイティブスクール）', quota: 238, finalApplicants: 228, finalRate: 0.96, fiscalYear: '令和4年度（2022年度）' },
+
+    // 掛-1横展開R4第2弾: R4分・sheet2「専門学科」(位置対応+department名パターンのWebSearch照合で学校名を復元。学校の「計」行の値をそのまま1校1レコードとして採用)。
+    { schoolName: '平塚農商', area: '平塚', department: '農業科', quota: 156, finalApplicants: 159, finalRate: 1.02, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '相原', area: '相模原', department: '農業科', quota: 117, finalApplicants: 135, finalRate: 1.15, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '中央農業', area: '海老名', department: '農業科', quota: 195, finalApplicants: 214, finalRate: 1.1, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '神奈川工業', area: '横浜市', department: '工業科', quota: 313, finalApplicants: 378, finalRate: 1.21, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '商工', area: '藤沢市', department: '工業科', quota: 118, finalApplicants: 124, finalRate: 1.05, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '磯子工業', area: '横浜市', department: '工業科', quota: 234, finalApplicants: 190, finalRate: 0.81, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '川崎工科', area: '川崎市', department: '工業科', quota: 238, finalApplicants: 180, finalRate: 0.76, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '向の岡工業', area: '川崎市', department: '工業科', quota: 234, finalApplicants: 171, finalRate: 0.73, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '横須賀工業', area: '横須賀市', department: '工業科', quota: 234, finalApplicants: 200, finalRate: 0.85, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '平塚工科', area: '平塚市', department: '工業科', quota: 238, finalApplicants: 154, finalRate: 0.65, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '藤沢工科', area: '藤沢市', department: '工業科', quota: 238, finalApplicants: 169, finalRate: 0.71, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '小田原城北工業', area: '小田原市', department: '工業科', quota: 234, finalApplicants: 172, finalRate: 0.74, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '川崎市立川崎総合科学', area: '川崎市立', department: '工業科', quota: 195, finalApplicants: 195, finalRate: 1, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '商工', area: '藤沢市', department: '商業科', quota: 118, finalApplicants: 106, finalRate: 0.9, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '平塚農商', area: '平塚', department: '商業科', quota: 158, finalApplicants: 158, finalRate: 1, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '小田原東', area: '県西', department: '商業科', quota: 118, finalApplicants: 88, finalRate: 0.75, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '相原', area: '相模原', department: '商業科', quota: 118, finalApplicants: 144, finalRate: 1.22, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '厚木商業', area: '県央', department: '商業科', quota: 158, finalApplicants: 177, finalRate: 1.12, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '横浜市立横浜商業', area: '横浜市立', department: '商業科', quota: 238, finalApplicants: 262, finalRate: 1.1, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '川崎市立幸', area: '川崎市立', department: '商業科', quota: 118, finalApplicants: 133, finalRate: 1.13, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '海洋科学', area: '横須賀市', department: '水産科', quota: 156, finalApplicants: 112, finalRate: 0.72, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '川崎市立川崎', area: '川崎市立', department: '家庭科', quota: 39, finalApplicants: 31, finalRate: 0.79, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '二俣川看護福祉', area: '横浜中', department: '看護科', quota: 78, finalApplicants: 78, finalRate: 1, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '二俣川看護福祉', area: '横浜中', department: '福祉科', quota: 78, finalApplicants: 79, finalRate: 1.01, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '横須賀南', area: '横須賀市', department: '福祉科', quota: 78, finalApplicants: 40, finalRate: 0.51, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '津久井', area: '相模原', department: '福祉科', quota: 39, finalApplicants: 24, finalRate: 0.62, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '川崎市立川崎', area: '川崎市立', department: '福祉科', quota: 39, finalApplicants: 39, finalRate: 1, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '川崎市立川崎総合科学', area: '川崎市立', department: '理数科', quota: 39, finalApplicants: 42, finalRate: 1.08, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '厚木北', area: '県央', department: '体育科', quota: 39, finalApplicants: 44, finalRate: 1.13, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '川崎市立橘', area: '川崎市立', department: '体育科', quota: 39, finalApplicants: 45, finalRate: 1.15, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '白山', area: '横浜北', department: '美術科', quota: 39, finalApplicants: 51, finalRate: 1.31, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '上矢部', area: '横浜中', department: '美術科', quota: 39, finalApplicants: 43, finalRate: 1.1, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '横浜市立横浜商業', area: '横浜市立', department: '国際科', quota: 35, finalApplicants: 58, finalRate: 1.66, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '川崎市立橘', area: '川崎市立', department: '国際科', quota: 39, finalApplicants: 44, finalRate: 1.13, fiscalYear: '令和4年度（2022年度）' },
   ],
 };
