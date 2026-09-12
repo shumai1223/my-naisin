@@ -100,7 +100,7 @@ nagasaki 令和4年度  到達=○  手段=Wayback  http://web.archive.org/web/2
 
 okayama 令和4年度  到達=○  手段=現行サイト  https://www.pref.okayama.jp/site/255/760420.html （WebSearch1発で直接ヒット・ライブ200確認済み。「特別入学者選抜等志願者数について」）
 
-okinawa 令和4年度  到達=△（要再調査）  手段=Wayback  http://web.archive.org/web/20220523210334/https://www.pref.okinawa.jp/edu/kenritsu/nyushi/ko/nyushi.html （WebSearchで「（令和4年度実施）県立高等学校入試関連情報」というタイトルの正確なページを発見・現行は404だがWaybackに2022-05/2022-10/2023-01/2023-12の複数スナップショットあり）⚠️2026-09-12訂正: okinawaの命名罠（DB年度＝実施年度＋1。既存R6/R7/R8追加時に既知）に従うと「令和4年度実施」はDB令和5年度に相当し、DB令和4年度には「令和3年度実施」ページが必要。**このURLはDB R4ではなくDB R5候補として再調査すべき**。さらに中身を確認したところ入試手続き案内ハブページ（願書様式等）で、目的の「最終志願状況」学校別PDFへのリンクは未発見。WebSearchでも「令和3年度実施」「令和4年度実施」の最終志願状況PDFそのものは特定できず、実収集は保留（詳細はT-Y11Fタスクファイル#11-25）
+okinawa 令和4年度  到達=○・実収集完了（2026-09-12）  手段=Wayback  http://web.archive.org/web/20220223074731/https://www.pref.okinawa.jp/edu/kenritsu/nyushi/ko/documents/r04ippan-f2.pdf （旧訂正: nyushi.htmlは年度ラベル罠で1年ズレ＝DB R5相当のハブページだったため不採用。正しい資料は同ディレクトリ`edu/kenritsu/nyushi/ko/documents/`配下をWayback CDXで広域検索して発見した`r04ippan-f2.pdf`＝「令和4年度県立高等学校入学者選抜 一般最終志願者数」。PDFタイトルにDB年度が直接印字されており命名罠なし（R6以降のCMS移行で命名規則が変わった）。164レコード・58校・quota12,025・applicants11,436（自己算出）で収録完了。commit f585c0e/c43d925）
 
 osaka 令和4年度  到達=○  手段=現行サイト  https://www.pref.osaka.lg.jp/documents/35613/r04_kekka_1.xlsx （「データで見る府立高校」ページ(o180040/kotogakko/chigai/index.html)から発見・ライブ200確認済み。令和元年度〜令和8年度まで8年度分のリンクが同一ページに集約されている。現行R8ソースの「志願者数」とは別カテゴリの「入学者選抜結果」資料だが同種のquota/applicants/競争率データを含む）
 
