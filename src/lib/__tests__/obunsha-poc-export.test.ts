@@ -12,8 +12,8 @@ describe('旺文社PoC納品物v0（T-Y11F §5順序#5）', () => {
     const expectedTotal = Object.values(COMPETITION_RATE_BY_PREFECTURE)
       .filter((f): f is NonNullable<typeof f> => f !== undefined)
       .reduce((sum, f) => sum + licensableRecords(f).length, 0);
-    expect(expectedTotal).toBe(24_374);
-    expect(records).toHaveLength(24_374);
+    expect(expectedTotal).toBe(24_474);
+    expect(records).toHaveLength(24_474);
   });
 
   it('各レコードはprefectureCode/schoolName/department/fiscalYear/quota/finalApplicants/finalRateを持つ', () => {
@@ -32,7 +32,7 @@ describe('旺文社PoC納品物v0（T-Y11F §5順序#5）', () => {
     const records = buildFullExportRecords();
     const csv = toCsv(records);
     const lines = csv.trim().split('\n');
-    expect(lines).toHaveLength(24_374 + 1);
+    expect(lines).toHaveLength(24_474 + 1);
     expect(lines[0]).toBe(
       'prefectureCode,prefectureName,schoolName,area,department,fiscalYear,quota,finalApplicants,finalRate,sourceUrl,docTitle,fetchedAt'
     );
