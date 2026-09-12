@@ -92,6 +92,20 @@ describe('沖縄県 倍率パイプラインα（Y-6・全日制58校156レコ�
     expect(r7.filter((r) => r.schoolName === '球陽')).toHaveLength(1);
   });
 
+  it('掛-1(学校別×多年度・4年度目): 令和4年度(R4)分レコードが164件・58校収録され、自己算出合計(quota12,025・applicants11,436)と完全一致する。台帳のURLは年度ラベル罠で1年ズレていたため別途WebSearch/Wayback CDXで正しいPDF(令和4年度県立高等学校入学者選抜 一般最終志願者数)を発見した。定時制は既知の6箇所に加え那覇商業の定時制「商業」も新たに確認され計7箇所を除外した', () => {
+    const r4 = records.filter((r) => r.fiscalYear === '令和4年度（2022年度）');
+    expect(r4.length).toBe(164);
+    const distinctSchools = new Set(r4.map((r) => r.schoolName));
+    expect(distinctSchools.size).toBe(58);
+    const sumQuota = r4.reduce((a, r) => a + r.quota, 0);
+    const sumApplicants = r4.reduce((a, r) => a + r.finalApplicants, 0);
+    expect(sumQuota).toBe(12025);
+    expect(sumApplicants).toBe(11436);
+
+    // 那覇商業の定時制は既知の6箇所には含まれていなかった新発見の除外対象
+    expect(r4.some((r) => r.schoolName === '那覇商業' && r.department === '商業' && r.quota === 7)).toBe(false);
+  });
+
   it('sourcesが公式PDF URLを正しく記録している', () => {
     for (const s of OKINAWA_COMPETITION_RATES.sources) {
       expect(s.url).toMatch(/^https:\/\/www\.pref\.okinawa\.(jp|lg\.jp)\//);
