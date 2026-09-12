@@ -318,6 +318,52 @@ describe('神奈川県 倍率パイプラインα（Y-2・全日制の突合テ�
     });
   });
 
+  it('掛-1(学校別×多年度・R4第1弾): 令和4年度(R4)分に普通科(県立89+市立6=95校)+クリエイティブ5校=100レコードが収録され、区市町村+学校名+学科の重複が無い。印字済み小計と完全一致する。相模原地区のみ他年度の8校でなく9校(城山高校=令和5年度に相模原総合と再編統合し「相模原城山」に改編される直前の最後の年度のため)', () => {
+    const r4 = records.filter((r) => r.fiscalYear === '令和4年度（2022年度）');
+    expect(r4.length).toBe(100);
+
+    const futsuka = r4.filter((r) => r.department === '普通科');
+    expect(futsuka.length).toBe(95);
+    expect(futsuka.reduce((a, r) => a + r.quota, 0)).toBe(27907);
+    expect(futsuka.reduce((a, r) => a + r.finalApplicants, 0)).toBe(34382);
+
+    const kenritsu = futsuka.filter((r) => r.area !== '横浜市立' && r.area !== '川崎市立');
+    expect(kenritsu.length).toBe(89);
+    expect(kenritsu.reduce((a, r) => a + r.quota, 0)).toBe(26639);
+    expect(kenritsu.reduce((a, r) => a + r.finalApplicants, 0)).toBe(32696);
+
+    const shiroyama = kenritsu.find((r) => r.schoolName === '城山');
+    expect(shiroyama).toBeDefined();
+    expect(shiroyama?.area).toBe('相模原');
+
+    const shiritsu = futsuka.filter((r) => r.area === '横浜市立' || r.area === '川崎市立');
+    expect(shiritsu.length).toBe(6);
+    expect(shiritsu.reduce((a, r) => a + r.quota, 0)).toBe(1268);
+    expect(shiritsu.reduce((a, r) => a + r.finalApplicants, 0)).toBe(1686);
+
+    const creative = r4.filter((r) => r.department === '普通科（クリエイティブスクール）');
+    expect(creative.length).toBe(5);
+    expect(creative.reduce((a, r) => a + r.quota, 0)).toBe(910);
+    expect(creative.reduce((a, r) => a + r.finalApplicants, 0)).toBe(650);
+
+    const seen = new Set<string>();
+    for (const r of r4) {
+      const key = `${r.area}|${r.schoolName}|${r.department}`;
+      expect(seen.has(key)).toBe(false);
+      seen.add(key);
+    }
+
+    // R4↔R5の学校名突合(城山を除く): 城山を除いた89校が全てR5の同一地区の学校名集合の部分集合であることを確認。
+    const r5Futsuka = records.filter(
+      (r) => r.fiscalYear === '令和5年度（2023年度）' && r.department === '普通科' && r.area !== '横浜市立' && r.area !== '川崎市立',
+    );
+    const r5Keys = new Set(r5Futsuka.map((r) => `${r.area}|${r.schoolName}`));
+    for (const r of kenritsu) {
+      if (r.schoolName === '城山') continue;
+      expect(r5Keys.has(`${r.area}|${r.schoolName}`)).toBe(true);
+    }
+  });
+
   it('全レコードのquota>0・finalApplicants>=0・finalRateが概算で整合する', () => {
     for (const r of records) {
       expect(r.quota).toBeGreaterThan(0);
