@@ -633,6 +633,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
         'いる可能性）。旧学習指導要領（平成20年告示）と現行（平成29年告示）の観点別学習状況の' +
         '呼称の違いに対応する2種類のシートを持つ点も確認できた。',
     },
+    {
+      date: '2026-09-14',
+      sourceUrl: 'https://axis-kobetsu.jp/outline/juni/exam-info/report-card/okinawa',
+      sourceTitle: '個別指導Axis「沖縄県の内申点アップ中学校別対策」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で最古(daysSinceVerified=6・6日グループの最初の1件)として選定・再検証。sourceUrl2(czemi.benesse.ne.jp)はWebFetchがHTTP403のため第三者サイトで代替。既存記載(targetGrades[1,2,3]・coreMultiplier1・practicalMultiplier1.5・maxScore165=各学年55点×3年)をWebSearch要約とaxis-kobetsu.jpの2独立ソースでクロスチェックし変更なしと確認(両ソースとも「各学年(5教科×5段階+実技4教科×5段階×1.5)=55点×3学年=165点満点」で完全一致)。',
+    },
   ],
   iwate: [
     {

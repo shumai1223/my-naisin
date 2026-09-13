@@ -5,14 +5,14 @@
 
 ---
 
-最終更新              2026-09-14 (項目4=X-14継続中・7日グループ全payback)
+最終更新              2026-09-14 (項目4=X-14継続中・6日グループ着手)
 いまやっていること     T-Y11F §11項目4(X-14・∞常駐)。freshness-queue.tsのgetStaleTop()
-                      で最古県を機械選定→再検証(累計23県)。7日グループ(9/6付T-W1
-                      調査組)を完全に払底し、次は6日グループ(9/7付)へ移行。
-今日やったこと         上記23県を再検証・現行方式は全て変更なし。naraで令和10年度
+                      で最古県を機械選定→再検証(累計24県)。7日グループ払底済み・
+                      6日グループ(9/7付T-W1調査組)に着手(okinawa完了)。
+今日やったこと         上記24県を再検証・現行方式は全て変更なし。naraで令和10年度
                       以降の内申点満点拡大計画を新発見(未反映・記録済み)。
-次にやること           getStaleTop()を再実行し6日グループ(okinawa/iwate/miyazaki/
-                      miyagi/kumamoto/gunma/kagawa/kochi/saga等)を続ける。
+次にやること           getStaleTop()を再実行し6日グループ(iwate/miyazaki/miyagi/
+                      kumamoto/gunma/kagawa/kochi/saga/yamagata等)を続ける。
 払底の見込み           §11項目1は完了。項目4はgetStaleTop()があるため当面払底しない。
                       フルjest545suites7802tests green。
 詰まっていること        aichi公式サイトのみImperva WAF一時ブロック継続中(第三者ソースで代替可)。
