@@ -67,6 +67,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '塾オンラインドットコム「埼玉県公立高校入試：内申点の計算の仕方を5ステップで解説」＋WebSearch要約の2独立ソース',
       note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で最古(daysSinceVerified=39)として選定・再検証。既存記載(targetGrades[1,2,3]・gradeMultipliers{1:1,2:1,3:2}・maxScore180)を、WebSearch要約とjyuku-online.comの2独立ソースでクロスチェックし変更なしと確認(両ソースとも「1:1:2=中1評定合計+中2評定合計+中3評定合計×2=180点満点」の計算式・具体例(オール3で108点等)で一致)。',
     },
+    {
+      date: '2026-09-14',
+      sourceUrl: 'https://www.wasedazemi.com/column/saitama-jh-jyuken-infomation/',
+      sourceTitle: 'W早稲田ゼミ「埼玉県公立高校入試情報」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で最古(daysSinceVerified=0・前回09-13検証)として選定・再検証(T-Y11F §11項目4「X-14は恒久的に尽きない」定義に従い継続)。前回未使用の第三者ソース(wasedazemi.com)+WebSearch要約で確認・既存記載(デフォルト1:1:2=180点満点・1:1:1/1:1:3も高校により採用)に変更なし。',
+    },
   ],
   kagoshima: [
     {
