@@ -310,6 +310,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
         'そのまま保持する2例目だが、「行動の記録」は第3学年のみが対象（愛媛は3学年通じての記載）という' +
         '違いがあり、また「出欠の記録」は欠席理由まで記載する欄を持つ点がこれまでで最も詳細**',
     },
+    {
+      date: '2026-09-14',
+      sourceUrl: 'https://www.do-con.com/nyushi/judge.html',
+      sourceTitle: '道コン「入試の仕組み」＋WebSearch要約の2独立ソース(sourceUrl2への直接WebFetchを含む)',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で同率最古(daysSinceVerified=7・前回09-06はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。既存記載(gradeMultipliers{1:2,2:2,3:3}・maxScore315)を、既存sourceUrl2(do-con.com)への直接WebFetchとWebSearch要約(複数教育系サイト集約)の2独立ソースでクロスチェックし変更なしと確認(両ソースとも「中1×2倍90点+中2×2倍90点+中3×3倍135点=315点満点」で完全一致)。',
+    },
   ],
   kanagawa: [
     {
