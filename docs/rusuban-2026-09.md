@@ -5,15 +5,14 @@
 
 ---
 
-最終更新              2026-09-14 (項目4=X-14継続中・yamagataで回帰バグ修正)
+最終更新              2026-09-14 (項目4=X-14継続中・6日グループ進行中)
 いまやっていること     T-Y11F §11項目4(X-14・∞常駐)。freshness-queue.tsのgetStaleTop()
-                      で最古県を機械選定→再検証(累計33県)。
-今日やったこと         上記33県を再検証。**yamagataで回帰バグ発見・修正**:
-                      調査書:学力比率のnoteが08-05の再検証で誤って「3:7〜5:5」に
-                      狭められていた(正しくは3:7/4:6/5:5/6:4/7:3の5パターン)。
-                      naraで令和10年度以降の満点拡大計画も新発見(未反映・記録済み)。
-次にやること           getStaleTop()を再実行し6日グループ(yamanashi/kagoshima/
-                      akita/niigata/aomori/shizuoka/ishikawa/oita等)を続ける。
+                      で最古県を機械選定→再検証(累計34県)。
+今日やったこと         上記34県を再検証。**yamagataで回帰バグ発見・修正済み**
+                      (調査書:学力比率の狭められた誤値を修正)。naraで令和10年度
+                      以降の満点拡大計画も新発見(未反映・記録済み)。
+次にやること           getStaleTop()を再実行し6日グループ(kagoshima/akita/
+                      niigata/aomori/shizuoka/ishikawa/oita/nagasaki等)を続ける。
 払底の見込み           §11項目1は完了。項目4はgetStaleTop()があるため当面払底しない。
                       フルjest545suites7802tests green。
 詰まっていること        aichi公式サイトのみImperva WAF一時ブロック継続中(第三者ソースで代替可)。
