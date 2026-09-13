@@ -772,6 +772,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
         '記録等の有無）はウェブ出願システムの入力画面自体を確認できないため判別不能で、正直に' +
         '書かなかった。',
     },
+    {
+      date: '2026-09-14',
+      sourceUrl: 'https://jyuku-online.com/blog/jj-yougo/',
+      sourceTitle: '塾オンラインドットコム「宮城県の内申点(調査書点)の計算方法」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で6日グループ(daysSinceVerified=6・前回09-07はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。sourceUrl2(czemi.benesse.ne.jp)はWebFetchがHTTP403のため、また候補のyst-juku.comは証明書エラー(ホスト名不一致)のためいずれも代替。jyuku-online.comとWebSearch要約の2独立ソースでクロスチェックし、既存記載(共通選抜・全学年等倍・practicalMultiplier2・maxScore195=各学年65点×3年)に変更が無いことを確認した(両ソースとも「主要5教科×1倍75点+実技4教科×2倍120点=195点満点」で完全一致・特色選抜の換算率0.25〜4.0倍という既存noteとも整合)。',
+    },
   ],
   kyoto: [
     {
