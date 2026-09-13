@@ -635,6 +635,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '千葉県教育委員会「令和8年度（令和7年度実施）以降の千葉県公立高等学校入学者選抜の改善点について」＋WebSearch要約(jyuku-online.com等)の2独立ソース',
       note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()でsaitamaと同率最古(daysSinceVerified=39)として選定・再検証。既存記載(targetGrades[1,2,3]・gradeMultipliers全学年1・maxScore135・note「K値(0.5〜2)で換算する高校もあり」)を、WebSearch要約とjyuku-online.comの2独立ソースでクロスチェックし変更なしと確認(両ソースとも「9教科×5段階×3年=135点満点にK値(原則1・各校0.5〜2の範囲で設定可)を乗じる」で一致)。改善点ページの記載を再確認したが、削除4項目(総合的な学習の時間の記録・出欠の記録・行動の記録(第3学年)・総合所見)は前回(2026-07-24)確認済みの内容と同一で新しい変更は無く、「学習の記録(評定)」欄・135点満点・K値の計算方式自体にも変更が無いことを改めて確認した。',
     },
+    {
+      date: '2026-09-14',
+      sourceUrl: 'https://esoh-group.com/entrance-exam-about-naisin/',
+      sourceTitle: 'エソー個伸塾「千葉県公立高校入試の内申点」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で最古(daysSinceVerified=0・前回09-13検証)として選定・再検証(T-Y11F §11項目4「X-14は恒久的に尽きない」定義に従い継続)。前回未使用の第三者ソース(esoh-group.com)+WebSearch要約で確認・既存記載(9教科×5段階×3年=135点満点・K値0.5〜2で換算)に変更なし。',
+    },
   ],
   okinawa: [
     {
