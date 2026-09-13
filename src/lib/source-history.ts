@@ -142,6 +142,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
         '独立項目を確認できていなかった）。⚠️セル単位の抽出のため、実際の様式上のレイアウト・見出しの' +
         '正式名称までは完全に復元できていない（抽出順は大まかな配置の目安）',
     },
+    {
+      date: '2026-09-14',
+      sourceUrl: 'https://jyuku-online.com/blog/jj-fukuoka/',
+      sourceTitle: '塾オンラインドットコム「福岡県の内申点の計算方法」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で同率最古(daysSinceVerified=7・前回09-06はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。既存記載(targetGrades[3]のみ・9教科×5段階=45点満点・note「一部高校で傾斜配点あり」)をWebSearch要約とjyuku-online.comの2独立ソースでクロスチェックし変更なしと確認(両ソースとも「中3のみ対象・45点満点・一部高校で特定教科1.5倍等の傾斜配点」で完全一致)。',
+    },
   ],
   tottori: [
     {
