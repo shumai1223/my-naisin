@@ -41,6 +41,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '学習塾京進「愛知県公立高校入試の仕組みとは？複合選抜の特徴と2027年度からの変更点」',
       note: '掛-4調査で発見: 令和5(2023)年度入試から学力検査を2回→1回(マークシート方式)に統合し「特色選抜」を新設。内申点の計算方式自体(評定×2倍・90点満点)には変更なし',
     },
+    {
+      date: '2026-09-14',
+      sourceUrl: 'https://manach.kyoshin.co.jp/577453/',
+      sourceTitle: '学習塾京進「愛知県公立高校入試の仕組みとは？」＋WebSearch要約(井ノ塾/塾オンライン等)の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で最古(daysSinceVerified=34)として選定・再検証。⚠️prefectures.tsのsourceUrl(pref.aichi.jp)はImperva WAFの一時ブロックが継続中([[cowork-division-of-labor]]既知の罠)のため、既存のsourceUrl2/前回確認済みの第三者サイトのみでクロスチェック。既存記載(targetGrades[3]・gradeMultipliers{3:2}・maxScore90)に変更なしと確認(両ソースとも「中3の9教科評定合計×2=90点満点(評定得点)」で一致・学校が選ぶⅠ〜Ⅴの校内順位算出方式(評定得点×1.5倍等)は本レコードが表す基礎点とは別の後段処理と再確認)。WebFetch先(manach.kyoshin.co.jp)は「2027年度から調査書の出欠の記録・行動の記録・性別を削除するが内申点(90点満点)の計算方式自体は維持」とも言及しており、既存記載と矛盾なし。',
+    },
   ],
   saitama: [
     {
