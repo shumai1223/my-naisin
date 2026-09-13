@@ -1122,6 +1122,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
         '独立項目は確認できず、青森・岩手・長野・鹿児島に続き5例目の「標準区分の一部欠落」パターン' +
         'だった。',
     },
+    {
+      date: '2026-09-14',
+      sourceUrl: 'https://jyuku-online.com/blog/jj-akita/',
+      sourceTitle: '塾オンラインドットコム「秋田県の内申点の計算方法」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で6日グループ(daysSinceVerified=6・前回09-07はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。08-05に記録済みの「144点満点・態度評価3段階」というWebSearchハルシネーションパターンが今回は出現しないことを確認。前回未使用の第三者サイト(jyuku-online.com)とWebSearch要約の2独立ソースで、既存記載(全学年等倍・practicalMultiplier2・maxScore195=各学年65点×3年)に変更が無いことを確認した(両ソースとも「5教科25点+実技4教科×2倍40点=65点×3年=195点満点」で完全一致)。',
+    },
   ],
   niigata: [
     {
