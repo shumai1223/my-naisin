@@ -976,6 +976,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
         '**「卒業後の進路状況」という項目はこれまでの13県で確認できなかった滋賀県独自の項目**。' +
         'この様式の範囲では「出欠の記録」「欠席日数」に相当する項目名は確認できなかった',
     },
+    {
+      date: '2026-09-14',
+      sourceUrl: 'https://jyuku-online.com/blog/jj-shiga/',
+      sourceTitle: '塾オンラインドットコム「滋賀県の内申点計算方法を解説」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で同率最古(daysSinceVerified=7・前回09-06はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。sourceUrl2(czemi.benesse.ne.jp)はWebFetchがHTTP403のため、前回(08-05)未使用の第三者サイト(jyuku-online.com)で代替。既存記載(全学年等倍・9教科×5段階×3年=135点満点)をWebSearch要約とjyuku-online.comの2独立ソースでクロスチェックし変更なしと確認(両ソースとも「中1+中2+中3の9教科評定合計=135点満点」「主要5教科と実技4教科は同等の重み」で完全一致)。',
+    },
   ],
   akita: [
     {
