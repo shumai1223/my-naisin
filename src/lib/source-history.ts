@@ -443,6 +443,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
         '「総合所見」という独立項目名への言及は確認できなかった（別の様式ファイル内に存在する可能性は' +
         '排除できないため「無い」とは断定しない）',
     },
+    {
+      date: '2026-09-14',
+      sourceUrl: 'https://bestjuku.com/article/9633/',
+      sourceTitle: '塾選（ジュクセン）「大阪府の内申点計算方法！志望校に合格するための理解すべき入試制度」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で同率最古(daysSinceVerified=7・前回09-06はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。前回(08-05)未使用の第三者サイト(bestjuku.com)とWebSearch要約の2独立ソースでクロスチェックし、既存記載(gradeMultipliers1:2/2:2/3:6・maxScore450=中1・中2各90点+中3×6倍270点)に変更が無いことを確認した(両ソースとも完全一致)。',
+    },
   ],
   ehime: [
     {
