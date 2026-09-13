@@ -339,6 +339,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
         '「出欠の記録」という項目名への言及は確認できなかった（別の様式ファイルに存在する可能性は' +
         '排除できないため「無い」とは断定しない）',
     },
+    {
+      date: '2026-09-14',
+      sourceUrl: 'https://koukou-juku-guide.com/naishin-kanagawa/',
+      sourceTitle: '「高校受験 神奈川県の内申点はいつの成績？135点満点の計算方法を元教室長が解説」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で同率最古(daysSinceVerified=7・前回09-06はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。前回(08-05)未使用の第三者サイト(koukou-juku-guide.com)とWebSearch要約の2独立ソースでクロスチェックし、既存記載(targetGrades[2,3]・gradeMultipliers{2:1,3:2}・maxScore135・S値方式)に変更が無いことを確認した(両ソースとも「中2×1倍45点+中3×2倍90点=135点満点」で完全一致)。',
+    },
   ],
   tokyo: [
     {
