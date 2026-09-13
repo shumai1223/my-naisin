@@ -204,21 +204,32 @@ Trendsピーク 2/1〜2/7週（日次 2/9=100・2/5=94・1/30=88）
       `MyNaishin-CompetitionUpdateCheck`（毎朝7:45）登録済み
 - [x] ハブ台帳が N/47 で、判明しない県は `null` になっている → F-2/F-3完了・6/47県判明
 - [x] 既公表R9資料のうち**4件以上**をハブ監視が新規リンクとして拾えた → F-2/F-3完了・6/6県
-- [ ] 速報パーサが**6県以上**でR7/R8リプレイに合格 → ⚠️**1/6県で合格達成・現実的な難度を実測で
-      確認**。`scripts/bairitsu-ingest/replay-interim-osaka.ts`で大阪府の実データ（xlsx・
-      R8速報0305→確定osaka.ts）を`validateInterimSubmission()`に通したところ、当初
-      matchRatio=95.8%（issues4件）だったが、単位制/クリエイティブスクール4校
-      （市岡/槻の木/鳳/東住吉総合）はquotaが確定側と完全一致することを確認したうえで
-      `EXPECTED_DEPARTMENT_SUFFIXES`という明示的な対応表（学校名を勝手にsuffix付けせず、
-      この4校だけ個別に記録）を追加し**matchRatio=1.000・issues0件で合格（passed=true）
-      に到達**。xlsx-parse.tsの`<rPh>`ふりがな注釈混入バグ（本文に「桜宮サクラノミヤ」のように
-      連結される不具合）を発見・修正しテスト追加（これ自体は恒久的な価値）。**残る5県
-      （chiba/saitama/kanagawa/hiroshima/shizuoka）はPDF埋め込みCJKフォントにToUnicode CMap
-      が無くpdftotextが使えない・pdftoppm+visionでの1件ずつの目視転記が必要**（T-W1の
-      一次ソース調査と同等の労働量・1県あたり数十分〜1時間規模）。kanagawaはさらに学校名が
-      数値コードでしか現れずコード→名称対応表が別途必要。**6県同時達成は1イテレーションの
-      範囲を超える**ため、大阪府1県の完全合格を記録した上で残り5県は今後の個別セッションへ
-      持ち越す（1県ずつ・緑を確認してから次へ、という既存の運用方針に従う）
+- [ ] 速報パーサが**6県以上**でR7/R8リプレイに合格 → ⚠️**2/6県で合格達成**。`scripts/
+      bairitsu-ingest/replay-interim-osaka.ts`で大阪府の実データ（xlsx・R8速報0305→確定
+      osaka.ts）を`validateInterimSubmission()`に通したところ、当初matchRatio=95.8%
+      （issues4件）だったが、単位制/クリエイティブスクール4校（市岡/槻の木/鳳/東住吉総合）
+      はquotaが確定側と完全一致することを確認したうえで`EXPECTED_DEPARTMENT_SUFFIXES`
+      という明示的な対応表（学校名を勝手にsuffix付けせず、この4校だけ個別に記録）を追加し
+      **matchRatio=1.000・issues0件で合格（passed=true）に到達**。xlsx-parse.tsの`<rPh>`
+      ふりがな注釈混入バグ（本文に「桜宮サクラノミヤ」のように連結される不具合）を発見・
+      修正しテスト追加（これ自体は恒久的な価値）。
+      **✅2026-09-14: chibaも合格達成**。`src/data/interim-rate-bulletin-registry.ts`の
+      chibaエントリが指すinterim URL(`r8siganitiran.html`・志願変更前)から実際の速報PDF
+      （`r8siganippan-teisei.pdf`・6頁・「一般入学者選抜等」区分）を特定・取得。他県と同じく
+      CJKフォントのToUnicode CMap欠落でpdftotextが使えないためpdftoppm(200dpi)+visionで
+      全5頁（県立全日制121校区分・4頁＋市立全日制7校区分・1頁）を目視転記し
+      `scripts/bairitsu-ingest/replay-interim-chiba.ts`を新設。列は「募集定員」でなく
+      「募集人員」がconfirmed側のquotaに対応することを実測確認（千葉普通科240で一致・
+      幕張総合923÷640=1.44の倍率一致でも裏取り）。転記結果は資料末尾の公式小計
+      （県立全日制26,960・市立全日制1,920・公立全日制合計28,880のいずれもquotaが速報・
+      確定で完全一致）と一致し転記の正確性を裏付けた。**matchRatio=1.000・188/188件で
+      合格（passed=true）**。唯一のedge case（船橋普通科の速報660人→確定618人・42人減）は
+      データ誤りでなく実際の志願変更(2/5→2/13)による減少と判断しchangeMargin=45で許容。
+      定時制（6頁目）は東京都・神奈川県と同じ理由でスコープ外のため対象外。
+      **残る4県（saitama/kanagawa/hiroshima/shizuoka）は同型の作業（vision転記＋replay
+      スクリプト新設）が必要**（kanagawaはさらに学校名が数値コードでしか現れずコード→
+      名称対応表が別途必要）。1県ずつ・緑を確認してから次へ、という既存の運用方針に従い
+      次回以降の個別セッションへ持ち越す
 - [x] `ops/state/harvest-ledger.json` に「検知時刻→取得sha256→検算→遅延h」の行がある →
       `scripts/bairitsu-ingest/build-harvest-ledger.mjs`で新設。F-2/F-3で既に収集済みの
       `hub-events.json`（検知時刻）と`r9-quota/<pref>.json`（sha256・検算状態）から導出
