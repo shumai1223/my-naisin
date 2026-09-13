@@ -388,6 +388,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
         '⚠️この文書は「東京都外の中学校の先生へ」という副題があり、都外から都立高校を受験する生徒向けの' +
         '補足説明である点に留意（都内中学校向けの本則資料とは別文書だが、1〜6の項目リスト自体は様式10共通のもの）',
     },
+    {
+      date: '2026-09-14',
+      sourceUrl: 'https://tokyo-metropolitan-high-school.com/contents/kansan-naishin/',
+      sourceTitle: '都立高のトリセツ「都立高校受験の内申点計算方法！換算内申の仕組みを解説」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で同率最古(daysSinceVerified=7・前回09-06はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。既存記載(targetGrades[3]のみ・coreMultiplier1・practicalMultiplier2・maxScore65・reverseCalc.totalMaxScore1020)をWebSearch要約とtokyo-metropolitan-high-school.comの2独立ソースでクロスチェックし変更なしと確認(両ソースとも「5教科×1倍25点+実技4教科×2倍40点=65点満点」「換算内申÷65×300で調査書点(300点)へ換算」「学力検査700+調査書300+ESAT-J20=1020点満点」で完全一致)。',
+    },
   ],
   hyogo: [
     {
