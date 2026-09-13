@@ -1220,6 +1220,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
         '記録（欠席日数・欠席の主な理由・遅刻・早退等）／6総合所見」という構成。「健康の状況」が' +
         '「出欠の記録」から独立した項目である点は熊本県に次いで2例目の確認。',
     },
+    {
+      date: '2026-09-14',
+      sourceUrl: 'https://www.edu-netz.com/admission-information2026/oita-info-r8',
+      sourceTitle: '対話式進学塾1対1ネッツ「大分県の高校入試情報2026」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で6日グループ(daysSinceVerified=6・前回09-07はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。前回未使用の第三者ソース(edu-netz.com)+WebSearch要約で確認・既存記載(中1中2各65点(核5×1+実技4×2)+中3130点(核5×2+実技4×4)=260点満点)に変更なし。',
+    },
   ],
   nagasaki: [
     {
