@@ -322,7 +322,15 @@ W-0 の鮮度を確認する（主食ドリフト4回の教訓）。
    いたため、これを使ってsaitama/chiba（daysSinceVerified=39で同率最古）を再検証し
    `source-history.ts`のMANUAL_HISTORYへ追記済み（詳細はworklog 2026-09-13 23:53参照）。
    **次回はgetStaleTop()を再実行し、その時点での最古県から続ける**（ehime/ibaraki/
-   okayama/gifu/kyoto/hiroshima/mie等が2026-09-06付＝7日程度でsaitama/chibaに次ぐ）。
+   okayama/gifu/kyoto完了済み・hiroshima/mie/yamaguchi/shiga/kanagawa/osaka/nagano/
+   tottori等が2026-09-06付＝7日程度で続く）。
+   ⚠️2026-09-14追記(kyoto再検証中の副産物): 京都府は令和9(2027)年度入試から前期・
+   中期・後期の3区分を前期・後期の2区分に再編し、前期に「独自枠」（各校が独自の
+   検査項目・配点で選抜）と「共通枠」（学力検査5教科×40点=200点満点＋調査書195点
+   満点）を新設する制度改革が確定している（`kec.gr.jp`で直接確認・詳細は
+   source-history.tsのkyoto 2026-09-14エントリ参照）。既存の`/nyushi-seido-henkou`
+   ページのkyoto項目は「前期・中期を一本化予定」という粗い記述のままなので、
+   独自枠/共通枠の詳細を反映する余地がある（次にX-14または当該ページを扱う回で検討）。
 2. ✅2026-09-12確認・完了済（訂正）: **定時制で `coverage='partial'` にした県の pendingDepartments
    を潰す。** fukuoka/kochi/hiroshima の3県とも実ファイルを確認したところ既に
    `status: 'complete'` で、pendingDepartmentsの定時制/多部制単位制/B日程等は
