@@ -201,7 +201,7 @@ export const PREFECTURES: PrefectureConfig[] = [
     practicalMultiplier: 1,
     maxScore: 45,
     description: '中3の成績のみ（45点満点）',
-    note: 'この45点満点の調査書点と学力検査点(500点満点)の比率は、3:7〜5:5程度の範囲で高校ごとに設定されます。',
+    note: 'この45点満点の調査書点と学力検査点(500点満点)の比率は、3:7・4:6・5:5・6:4・7:3の5パターンから高校ごとに設定されます。',
     sourceUrl: 'https://www.pref.yamagata.jp/documents/42443/r8kouritsukoutougakkounyuugakusyasennbatsujissiyoukou.pdf',
     sourceUrl2: 'https://czemi.benesse.ne.jp/open/nyushi/exam/06/feature/1273769_3744.html',
     sourceTitle: '山形県教育委員会 入学者選抜',
