@@ -672,6 +672,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
         '一部欠落」パターンだが、代替見出しが総合所見寄りの青森型ではなく漠然とした受け皿型である' +
         '点が異なる）。「総合所見」という明示的な見出しも確認できなかった。',
     },
+    {
+      date: '2026-09-14',
+      sourceUrl: 'https://jyuku-online.com/blog/jj-iwate/',
+      sourceTitle: '塾オンラインドットコム「岩手県の内申点計算方法」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で6日グループ(daysSinceVerified=6・前回09-07はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。08-17に一次資料PDFで確定済みの数値(gradeMultipliers{1,2,3}・coreMultiplier2・practicalMultiplier3・maxScore660・actualMaxScore500=令和7年度以降)を、WebSearch要約とjyuku-online.comの2独立ソースでクロスチェックし変更なしと確認(両ソースとも「中1(110点)+中2(220点)+中3(330点)=660点満点を500点に圧縮」で完全一致・以前混乱していた440点への言及は無かった)。',
+    },
   ],
   gifu: [
     {
