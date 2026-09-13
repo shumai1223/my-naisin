@@ -204,7 +204,7 @@ Trendsピーク 2/1〜2/7週（日次 2/9=100・2/5=94・1/30=88）
       `MyNaishin-CompetitionUpdateCheck`（毎朝7:45）登録済み
 - [x] ハブ台帳が N/47 で、判明しない県は `null` になっている → F-2/F-3完了・6/47県判明
 - [x] 既公表R9資料のうち**4件以上**をハブ監視が新規リンクとして拾えた → F-2/F-3完了・6/6県
-- [ ] 速報パーサが**6県以上**でR7/R8リプレイに合格 → ⚠️**3/6県で合格達成**。`scripts/
+- [ ] 速報パーサが**6県以上**でR7/R8リプレイに合格 → ⚠️**4/6県で合格達成**。`scripts/
       bairitsu-ingest/replay-interim-osaka.ts`で大阪府の実データ（xlsx・R8速報0305→確定
       osaka.ts）を`validateInterimSubmission()`に通したところ、当初matchRatio=95.8%
       （issues4件）だったが、単位制/クリエイティブスクール4校（市岡/槻の木/鳳/東住吉総合）
@@ -240,10 +240,21 @@ Trendsピーク 2/1〜2/7週（日次 2/9=100・2/5=94・1/30=88）
       通りに扱い問題なし。**matchRatio=1.000・241/241件で合格（passed=true）**。唯一2件の
       edge case（大宮普通科558→507・浦和普通科481→434）は転記誤りでなく最上位校での実際の
       志願変更(降り)によるものと判断しchangeMargin=55で許容。
-      **残る3県（kanagawa/hiroshima/shizuoka）は同型の作業（vision転記＋replayスクリプト
-      新設）が必要**（kanagawaはさらに学校名が数値コードでしか現れずコード→名称対応表が
-      別途必要）。1県ずつ・緑を確認してから次へ、という既存の運用方針に従い次回以降の
-      個別セッションへ持ち越す
+      **✅2026-09-14: hiroshimaも合格達成**。registry.tsのhiroshimaエントリはinterim URLのみ
+      登録（confirmed未特定）だったため、interim PDF(653711.pdf・全12頁のうち学校別内訳は
+      3〜6頁、7〜12頁はR7参考データのため対象外)をpdftoppm(180dpi)+visionで目視転記し
+      `scripts/bairitsu-ingest/replay-interim-hiroshima.ts`を新設。列は「一次選抜定員」
+      （「うち調整」欄は定員内の別枠再掲のため無視）がconfirmed側のquotaに対応。既存の
+      5組の合算学科（呉工業「機械・材料工学」「電気・電子機械」／福山工業「工業化学・
+      染織システム」／宮島工業「電気・情報技術」「建築・インテリア」）は資料側も既にブレース
+      記号で1行の合算値として提示されており追加作業は不要だった。全日制分校（加計・芸北）を
+      含め**初回transcriptionでmatchRatio=1.000・138/138件で一発合格（passed=true）**。
+      changeMargin=90（広島市立基町「普通」の519→433=最上位人気校での志願変更86人減を
+      見込んで事前設定）で対応。
+      **残る2県（kanagawa/shizuoka）は同型の作業（vision転記＋replayスクリプト新設）が
+      必要**（kanagawaはさらに学校名が数値コードでしか現れずコード→名称対応表が別途必要）。
+      1県ずつ・緑を確認してから次へ、という既存の運用方針に従い次回以降の個別セッションへ
+      持ち越す
 - [x] `ops/state/harvest-ledger.json` に「検知時刻→取得sha256→検算→遅延h」の行がある →
       `scripts/bairitsu-ingest/build-harvest-ledger.mjs`で新設。F-2/F-3で既に収集済みの
       `hub-events.json`（検知時刻）と`r9-quota/<pref>.json`（sha256・検算状態）から導出
