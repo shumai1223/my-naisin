@@ -1360,6 +1360,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
         'と同種の充実度）。評定の記載がされていない者が高校を志願する場合は中学校長が副申書' +
         '（様式第13号）を提出する規定もあり（島根県の校長副申書と同種の仕組み）。',
     },
+    {
+      date: '2026-09-14',
+      sourceUrl: 'https://jyuke-labo.com/koukoujyukentaisaku/tokushima/',
+      sourceTitle: '受験ラボ「徳島県公立高校入試の内申点計算方法」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で6日グループ(daysSinceVerified=6・前回09-07はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。前回未使用の第三者ソース(jyuke-labo.com)+WebSearch要約で確認・既存記載(全学年等倍・実技4教科×2倍・各学年65点×3=195点満点)に変更なし。',
+    },
   ],
   tochigi: [
     {
