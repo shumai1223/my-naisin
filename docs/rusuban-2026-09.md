@@ -5,19 +5,17 @@
 
 ---
 
-最終更新              2026-09-14 06:38
-いまやっていること     T-Y11F F-4(速報パーサReplay検証・反証条件09-22)。chiba・saitama
-                      合格で3/6県。
+最終更新              2026-09-14 06:52
+いまやっていること     T-Y11F F-4(速報パーサReplay検証・反証条件09-22)。chiba/saitama/
+                      hiroshima合格で4/6県(osaka含む)。
 今日やったこと         X-14 47県当日再検証済み(kyoto/nara制度改革発見)。W-0(15日停止)
                       復旧・T-A1 kill_criteria判定(順位9.76→8.87位改善・撤退不要)・
-                      chiba/saitamaの速報パーサReplay検証を新規実装(vision転記
-                      188件+241件・両方matchRatio1.000で合格・osakaと合わせ3/6県)。
-次にやること           F-4残り3県(kanagawa/hiroshima/shizuoka)を同型手順
-                      (interim-rate-bulletin-registry.ts→vision転記→replay
-                      スクリプト)で1県ずつ続ける。kanagawaは学校名が数値コードのみ
-                      のため対応表が別途必要。
-払底の見込み           §11項目1・T-A1とも解消。F-4は残り3県・09-22までに6県未満なら
-                      速報レーン縮小の判定になる(現在3/6・折り返し)。
+                      chiba/saitama/hiroshimaの速報パーサReplay検証を新規実装
+                      (vision転記188+241+138件・全てmatchRatio1.000で合格)。
+次にやること           F-4残り2県(kanagawa/shizuoka)を同型手順で続ける。kanagawaは
+                      学校名が数値コードのみのため対応表が別途必要=shizuokaを先に。
+払底の見込み           §11項目1・T-A1とも解消。F-4は残り2県・6県中4県で既に
+                      「6県未満なら縮小」の反証条件は回避見込み濃厚。
                       フルjest545suites7802tests green。
 詰まっていること        aichiのみImperva WAF継続中(代替可)。D1直接クエリはenv未整備で不可。
 👤の判断が要るもの      #5成果物・#6仕様書の対外提示可否・価格待ち（送信0件）
