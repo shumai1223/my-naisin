@@ -397,6 +397,45 @@ describe('神奈川県 倍率パイプラインα（Y-2・全日制の突合テ�
     expect(yokohamaShogyo?.quota).toBe(238);
   });
 
+  it('掛-1(学校別×多年度・R4第3弾・kanagawa R4完結・5年度目達成): 令和4年度(R4)分に単位制37レコードを追加した合計171件が収録され、区市町村+学校名+学科の重複が無い。単位制の各区分小計と完全一致する。相模原城山(単位制普通科)はR4時点でまだ開校していない(令和5年4月開校)ため普通科(単位制)はR5の16校でなく15校しかない', () => {
+    const r4 = records.filter((r) => r.fiscalYear === '令和4年度（2022年度）');
+    expect(r4.length).toBe(171);
+
+    const seen = new Set<string>();
+    for (const r of r4) {
+      const key = `${r.area}|${r.schoolName}|${r.department}`;
+      expect(seen.has(key)).toBe(false);
+      seen.add(key);
+    }
+
+    const futsukaTanni = r4.filter((r) => r.department === '普通科（単位制）' || r.department === '普通科（単位制・一般コース）');
+    expect(futsukaTanni.length).toBe(16);
+    expect(futsukaTanni.reduce((a, r) => a + r.quota, 0)).toBe(4053);
+    expect(futsukaTanni.reduce((a, r) => a + r.finalApplicants, 0)).toBe(4752);
+
+    expect(r4.find((r) => r.schoolName === '相模原城山')).toBeUndefined();
+
+    const sougouTanni = r4.filter((r) => r.department === '総合学科（単位制）');
+    expect(sougouTanni.length).toBe(8);
+    expect(sougouTanni.reduce((a, r) => a + r.quota, 0)).toBe(2055);
+    expect(sougouTanni.reduce((a, r) => a + r.finalApplicants, 0)).toBe(2224);
+
+    const renkei = r4.filter((r) => r.department === '普通科（連携募集）');
+    expect(renkei.length).toBe(2);
+    expect(renkei.reduce((a, r) => a + r.quota, 0)).toBe(85);
+    expect(renkei.reduce((a, r) => a + r.finalApplicants, 0)).toBe(85);
+
+    expect(r4.find((r) => r.schoolName === '横浜旭陵')).toEqual({
+      schoolName: '横浜旭陵',
+      area: '横浜市',
+      department: '普通科（単位制）',
+      quota: 231,
+      finalApplicants: 217,
+      finalRate: 0.94,
+      fiscalYear: '令和4年度（2022年度）',
+    });
+  });
+
   it('全レコードのquota>0・finalApplicants>=0・finalRateが概算で整合する', () => {
     for (const r of records) {
       expect(r.quota).toBeGreaterThan(0);

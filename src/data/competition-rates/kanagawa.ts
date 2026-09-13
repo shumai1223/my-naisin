@@ -170,9 +170,23 @@
  * R5以降は商業科(238)に統合されている（実在の学科再編・国際科(35)はR4/R5とも別枠で
  * 変化なし）。全11カテゴリの印字済み小計（農業468・工業2,276・商業1,026・水産156・
  * 家庭39・看護78・福祉234・理数39・体育78・美術78・国際74）が機械集計と完全一致
- * （node.js機械計算・誤差ゼロ）。**sheet3「単位制」は学科名は直接印字されているが学校名が
- * 無く、学科名の組み合わせパターンからの学校特定作業が必要なため次回以降のセッションに
- * 持ち越す**（詳細はops/tasks/T-Y11F-publication-calendar-harvester.md #11-28/30参照）。
+ * （node.js機械計算・誤差ゼロ）。
+ *
+ * **2026-09-13追記(掛-1横展開R4第3弾・kanagawa R4完結)**: sheet3「単位制」(普通科15校+
+ * 戸塚一般コース+戸塚音楽コース+総合学科8校+専門学科8学科+連携募集2校=計37レコード)を
+ * 追加。**普通科(単位制)がR5の16校でなく15校しかない**理由は、令和5年度4月に相模原総合
+ * (単位制総合学科)と城山(全日制普通科・sheet1に既収録)が再編統合し「相模原城山」(単位制
+ * 普通科)として開校する直前の最後の年度であり、相模原城山という単位制普通科の枠自体が
+ * R4時点では存在しないため（sheet1の城山高校と同根の発見）。横浜桜陽(310)・横浜清陵
+ * (265)・麻生総合(230)・座間総合(228)の4校はR5比±40の定員差があるが、地区・並び順は
+ * 完全一致しており実在の定員変動と判断した（他の28校は完全一致または近似一致）。専門学科
+ * の家庭科(生活科学科)・体育科(スポーツ科学科)は学科名がR5と異なるが既存の慣例通り
+ * カテゴリの汎用ラベルに統一。国際関係(単位制)は横浜国際の国際科(138)+国際科国際
+ * バカロレアコース(20)を印字済み小計158/201で1レコードに集約(既存の計行採用方式を踏襲)。
+ * 全ての印字済み小計・合計（普通科単位制4,053/4,752・総合学科単位制2,055/2,224・
+ * 農業(単位制)156・連携募集85/85等）が機械集計と完全一致（node.js機械計算・誤差ゼロ）。
+ * **これでbessi3.xlsx(R4)全体（sheet1〜3）が完結し、kanagawaのR4学校粒度データが確定した
+ * （kanagawaはこれでR4-R8の5年度が揃った）。**
  */
 import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
 
@@ -1175,5 +1189,44 @@ export const KANAGAWA_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '上矢部', area: '横浜中', department: '美術科', quota: 39, finalApplicants: 43, finalRate: 1.1, fiscalYear: '令和4年度（2022年度）' },
     { schoolName: '横浜市立横浜商業', area: '横浜市立', department: '国際科', quota: 35, finalApplicants: 58, finalRate: 1.66, fiscalYear: '令和4年度（2022年度）' },
     { schoolName: '川崎市立橘', area: '川崎市立', department: '国際科', quota: 39, finalApplicants: 44, finalRate: 1.13, fiscalYear: '令和4年度（2022年度）' },
+
+    // 掛-1横展開R4第3弾・kanagawa R4完結: R4分・sheet3「単位制」(位置対応で学校名を復元。相模原城山は令和5年度4月開校のためR4には存在しない)。
+    { schoolName: '神奈川総合', area: '横浜市', department: '普通科（単位制）', quota: 208, finalApplicants: 263, finalRate: 1.26, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '横浜旭陵', area: '横浜市', department: '普通科（単位制）', quota: 231, finalApplicants: 217, finalRate: 0.94, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '横浜緑園', area: '横浜市', department: '普通科（単位制）', quota: 278, finalApplicants: 333, finalRate: 1.2, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '横浜桜陽', area: '横浜市', department: '普通科（単位制）', quota: 310, finalApplicants: 336, finalRate: 1.08, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '横浜清陵', area: '横浜市', department: '普通科（単位制）', quota: 265, finalApplicants: 389, finalRate: 1.47, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '横浜栄', area: '横浜市', department: '普通科（単位制）', quota: 318, finalApplicants: 403, finalRate: 1.27, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '川崎', area: '川崎市', department: '普通科（単位制）', quota: 223, finalApplicants: 282, finalRate: 1.26, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '大師', area: '川崎市', department: '普通科（単位制）', quota: 228, finalApplicants: 204, finalRate: 0.89, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '三浦初声', area: '三浦市', department: '普通科（単位制）', quota: 198, finalApplicants: 155, finalRate: 0.78, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '藤沢清流', area: '藤沢市', department: '普通科（単位制）', quota: 278, finalApplicants: 341, finalRate: 1.23, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '平塚湘風', area: '平塚市', department: '普通科（単位制）', quota: 238, finalApplicants: 192, finalRate: 0.81, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '小田原', area: '小田原市', department: '普通科（単位制）', quota: 318, finalApplicants: 412, finalRate: 1.3, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '厚木清南', area: '県央', department: '普通科（単位制）', quota: 230, finalApplicants: 250, finalRate: 1.09, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '相模原弥栄', area: '相模原', department: '普通科（単位制）', quota: 183, finalApplicants: 222, finalRate: 1.21, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '横浜市立東', area: '横浜市立', department: '普通科（単位制）', quota: 268, finalApplicants: 394, finalRate: 1.47, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '横浜市立戸塚', area: '横浜市立', department: '普通科（単位制・一般コース）', quota: 279, finalApplicants: 359, finalRate: 1.29, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '横浜市立戸塚', area: '横浜市立', department: '普通科（単位制・音楽コース）', quota: 39, finalApplicants: 50, finalRate: 1.28, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '鶴見総合', area: '横浜市', department: '総合学科（単位制）', quota: 258, finalApplicants: 280, finalRate: 1.09, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '金沢総合', area: '横浜市', department: '総合学科（単位制）', quota: 278, finalApplicants: 316, finalRate: 1.14, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '麻生総合', area: '川崎市', department: '総合学科（単位制）', quota: 230, finalApplicants: 107, finalRate: 0.47, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '藤沢総合', area: '藤沢市', department: '総合学科（単位制）', quota: 271, finalApplicants: 311, finalRate: 1.15, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '秦野総合', area: '秦野市', department: '総合学科（単位制）', quota: 238, finalApplicants: 198, finalRate: 0.83, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '座間総合', area: '座間市', department: '総合学科（単位制）', quota: 228, finalApplicants: 255, finalRate: 1.12, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '横浜市立みなと総合', area: '横浜市立', department: '総合学科（単位制）', quota: 232, finalApplicants: 321, finalRate: 1.38, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '横須賀市立横須賀総合', area: '横須賀市立', department: '総合学科（単位制）', quota: 320, finalApplicants: 436, finalRate: 1.36, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '三浦初声', area: '三浦市', department: '農業科（単位制）', quota: 39, finalApplicants: 35, finalRate: 0.9, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '吉田島', area: '開成町', department: '農業科（単位制）', quota: 117, finalApplicants: 107, finalRate: 0.91, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '吉田島', area: '開成町', department: '家庭科（単位制）', quota: 39, finalApplicants: 38, finalRate: 0.97, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '横浜サイエンスフロンティア', area: '横浜市立', department: '理数科（単位制）', quota: 158, finalApplicants: 247, finalRate: 1.56, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '相模原弥栄', area: '相模原', department: '体育科（単位制）', quota: 78, finalApplicants: 84, finalRate: 1.08, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '相模原弥栄', area: '相模原', department: '音楽科（単位制）', quota: 39, finalApplicants: 34, finalRate: 0.87, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '相模原弥栄', area: '相模原', department: '美術科（単位制）', quota: 39, finalApplicants: 53, finalRate: 1.36, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '横浜国際', area: '横浜市', department: '国際科（単位制）', quota: 158, finalApplicants: 201, finalRate: 1.27, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '神奈川総合産業', area: '横浜市立', department: '総合産業科（単位制）', quota: 238, finalApplicants: 282, finalRate: 1.18, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '神奈川総合', area: '横浜市', department: '舞台芸術科（単位制）', quota: 30, finalApplicants: 50, finalRate: 1.67, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '光陵', area: '横浜中', department: '普通科（連携募集）', quota: 40, finalApplicants: 40, finalRate: 1, fiscalYear: '令和4年度（2022年度）' },
+    { schoolName: '愛川', area: '県央', department: '普通科（連携募集）', quota: 45, finalApplicants: 45, finalRate: 1, fiscalYear: '令和4年度（2022年度）' },
   ],
 };
