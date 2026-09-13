@@ -828,6 +828,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
         'する点は、これまでの24県で確認できなかった熊本県独自の区分**（他県は出欠と健康を1つの' +
         '欄にまとめる例が多い）。「編入学、転入学、転学・退学等の記録」という項目も独立して存在する。',
     },
+    {
+      date: '2026-09-14',
+      sourceUrl: 'https://jyuke-labo.com/koukoujyukentaisaku/kumamoto/',
+      sourceTitle: '受験ラボ「熊本県高校入試情報」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で6日グループ(daysSinceVerified=6・前回09-07はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。sourceUrl2(czemi.benesse.ne.jp)はHTTP403のため代替。axis-kobetsu.jpとjyuke-labo.comはいずれも08-05で使用済みだったため今回はaxis-kobetsu.jp(今回は詳細記述なし)を試した後jyuke-labo.comへ切替、WebSearch要約は熊本県教育委員会の実施要項の計算方法(「5教科は第1第2学年の評定に第3学年の評定×2を加えて合計・4教科も同様」)を直接引用しており実質的に一次資料由来の新規情報として扱った。既存記載(gradeMultipliers{1,2,3の中3のみ2倍}・maxScore180=中1中2各45点+中3×2倍90点)に変更なしと確認。',
+    },
   ],
   gunma: [
     {
