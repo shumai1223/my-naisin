@@ -924,6 +924,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
         '検査の成績は同等に取り扱う」との明記があり、学習の記録が学力検査と同等の重みを持つ運用' +
         'であることも確認できた。個人調査書の様式そのものの記載項目までは確認できていない。',
     },
+    {
+      date: '2026-09-14',
+      sourceUrl: 'https://www.katekyo-shimonoseki.com/examination-information/middle-school-students/',
+      sourceTitle: 'KATEKYO学院下関「中学生（高校入試）受験情報」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で同率最古(daysSinceVerified=7・前回09-06はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。今回は08-05で既に使用済みのjyuku-online.comと重複しない新しい第三者ソース(katekyo-shimonoseki.com)を選定。既存記載(全学年等倍・9教科×5段階×3年=135点満点)を、WebSearch要約(内申135+学力250=385点満点で一致)とkatekyo-shimonoseki.com(「9教科各5段階評定の内申点(1〜3年3学期まで)」＝全学年対象で一致)の2独立ソースでクロスチェックし変更なしと確認。⚠️既存08-05エントリのjyuku-online.com記事が指摘する通り、山口県教育委員会の実施大綱は135点満点という一律の換算式を公式に明記していない（本サイトのmaxScore135は複数の教育系サイトが採用する慣用的な参考値であり、公式の一次資料に明記された数値ではない点を再確認・既存の理解と変わらず）。',
+    },
   ],
   yamanashi: [
     {
