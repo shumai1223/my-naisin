@@ -1266,6 +1266,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
         'それぞれのA評価の個数を集計する欄が設けられている点は、これまでの23県で確認できなかった' +
         '長崎県独自の仕組み**（学校裁量の傾斜配点判断に使われている可能性がある）。',
     },
+    {
+      date: '2026-09-14',
+      sourceUrl: 'https://alpha-katekyo.jp/tips/tips286/',
+      sourceTitle: '家庭教師のアルファ「都道府県別・内申点計算方法」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で6日グループ(daysSinceVerified=6・前回09-07はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。sourceUrl2(czemi.benesse.ne.jp)はHTTP403のため前回未使用の第三者ソース(alpha-katekyo.jp)で確認(全学年等倍・実技倍率なし・各学年45点=135点満点)・既存記載に変更なし。axis-kobetsu.jp再訪も試みたが今回は具体的な倍率記述を提示せず不採用、WebSearch要約は今回具体的数値に踏み込まなかったため補助情報に留めた。',
+    },
   ],
   nagano: [
     {
