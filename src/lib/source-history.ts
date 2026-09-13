@@ -432,6 +432,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
         '「引けない県は書かない」原則によりこの点は/chousashoには詳細を書かず「公開様式が無い」事実' +
         'のみ記載する',
     },
+    {
+      date: '2026-09-14',
+      sourceUrl: 'https://jyuku-online.com/blog/jj-hyogo/',
+      sourceTitle: '塾オンラインドットコム「兵庫県の内申点計算」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で同率最古(daysSinceVerified=7・前回09-06はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。sourceUrl2(czemi.benesse.ne.jp)はWebFetchがHTTP403のため第三者サイトで代替。既存記載(targetGrades[3]のみ・coreMultiplier4・practicalMultiplier7.5・maxScore250)をWebSearch要約とjyuku-online.comの2独立ソースでクロスチェックし変更なしと確認(両ソースとも「主要5教科評定合計×4=100点+実技4教科評定合計×7.5=150点=250点満点」「学力検査250点+調査書250点=総合500点満点」で完全一致)。',
+    },
   ],
   osaka: [
     {
