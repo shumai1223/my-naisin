@@ -469,6 +469,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
         'いずれかを統合・削減・自由記述化していたのに対し、愛媛県は基本4区分と行動の記録10項目の両方を' +
         'ほぼそのまま保持しており、初めて「国の標準形にほぼ忠実」な事例として確認できた**',
     },
+    {
+      date: '2026-09-14',
+      sourceUrl: 'https://jyuku-online.com/blog/jj-ehime/',
+      sourceTitle: '塾オンラインドットコム「愛媛県公立高校入試】内申点の計算方法と効果的な内申点対策」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で同率最古(daysSinceVerified=7・前回09-06はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。既存記載(全学年等倍・9教科×5段階×3年=135点満点)をWebSearch要約とjyuku-online.comの2独立ソースでクロスチェックし変更なしと確認(両ソースとも各学年45点満点×3年=135点満点・具体例(中1オール3=27点+中2オール2=18点+中3オール4=36点=81点)で一致)。sourceUrl2(czemi.benesse.ne.jp)はWebFetchがHTTP403を返したため今回はcrosscheck対象から除外。',
+    },
   ],
   ibaraki: [
     {
