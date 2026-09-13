@@ -1193,6 +1193,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
         'の3種が明記されていることが確認できた。個人調査報告書そのものの様式・「行動の記録」' +
         '「出欠の記録」相当項目の有無はこの副申書の範囲では確認できない。',
     },
+    {
+      date: '2026-09-14',
+      sourceUrl: 'https://jyuke-labo.com/koukoujyukentaisaku/shimane/',
+      sourceTitle: '受験ラボ「島根県高校受験対策・高校入試情報」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で同率最古(daysSinceVerified=7・前回09-06はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。前回(08-05)未使用の第三者サイト(jyuke-labo.com)とWebSearch要約の2独立ソースでクロスチェックし、既存記載(gradeMultipliers{1:1,2:1,3:2}・maxScore180・note「51点満点+特別活動9点=60点満点」)に変更が無いことを確認した(両ソースとも「180点×51/180=51点」+「特別活動9点」=60点満点、内申:学力比率は7:3/6:4/5:5/4:6の4択で完全一致)。',
+    },
   ],
   tokushima: [
     {
