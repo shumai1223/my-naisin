@@ -889,6 +889,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
         '**「出欠・健康の記録」に欠席日数・欠席理由と並んで「健康の状況」という欄が独立して' +
         '存在する点**は、これまでの14県で確認できなかった三重県独自の特徴。',
     },
+    {
+      date: '2026-09-14',
+      sourceUrl: 'https://axis-kobetsu.jp/outline/juni/exam-info/report-card/mie',
+      sourceTitle: '個別指導Axis「三重県公立高校入試の内申点計算方法」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で同率最古(daysSinceVerified=7・前回09-06はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。sourceUrl2(czemi.benesse.ne.jp)はWebFetchがHTTP403のため第三者サイトで代替。既存記載(targetGrades[3]のみ・9教科×5段階=45点満点)をWebSearch要約とaxis-kobetsu.jpの2独立ソースでクロスチェックし変更なしと確認(両ソースとも「中3のみ対象・9教科×5段階=45点満点」で完全一致)。',
+    },
   ],
   yamaguchi: [
     {
