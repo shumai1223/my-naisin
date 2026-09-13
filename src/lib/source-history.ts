@@ -177,6 +177,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
         '留め、正確な項目名・配置の断定は避ける**（例えば「行動の記録」という見出し自体が独立項目' +
         'として存在するのか「特別活動等の記録」に統合されているのかは、この抽出だけでは判別不能）。',
     },
+    {
+      date: '2026-09-14',
+      sourceUrl: 'https://jyuku-online.com/blog/jj-tottori/',
+      sourceTitle: '塾オンラインドットコム「鳥取県の内申点計算方法」＋axis-kobetsu.jpの2直接WebFetch',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で同率最古(daysSinceVerified=7・前回09-06はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。**⚠️WebSearch要約が「各学年65点満点×3年間=195点満点、その後130/195/260点へ換算」という既存記載と矛盾する説明を提示したため（学校指定倍率の換算後満点(130/195/260)を「3学年分の合計」と誤って解釈したとみられる誤読・[[fable5-loop-protocol]]既知の罠と同型）、直接WebFetchで裏取りした**。jyuku-online.com（既存08-05でも使用・「対象学年は中学3年のみ、中1・中2は含まれない」と明記）とaxis-kobetsu.jp（新規・「対象学年：中学3年生のみ」と明記）の2件の直接WebFetchで、既存記載(targetGrades[3]のみ・実技4教科×2倍・基本65点満点・学校指定倍率2〜4倍で130/195/260点)に変更が無いことを確認した。axis-kobetsu.jpは「特色選抜」では45点満点(倉吉東55点)の別方式が使われるという新しい情報も提示したが、これは既存記載が対象とする「一般選抜」とは別トラックのため、prefectures.tsの該当レコードへの変更は不要と判断した。',
+    },
   ],
   fukui: [
     {
