@@ -1315,6 +1315,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
         '構成**（他県は部活動・ボランティア・資格を1つの欄にまとめるか、そもそも項目化しない）。' +
         '「行動の記録」（国の指導要録標準10区分）に相当する項目名はこの様式では確認できなかった。',
     },
+    {
+      date: '2026-09-14',
+      sourceUrl: 'https://axis-kobetsu.jp/outline/juni/exam-info/general-info/wakayama/',
+      sourceTitle: '個別指導Axis「和歌山県の公立高校入試概要」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で同率最古(daysSinceVerified=7・前回09-06はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。既知のwebSearchハルシネーションパターン(「態度評価3段階27点満点・144点満点」=nara固有の制度改定の誤帰属)が今回は出現しないことを確認しつつ、既存記載(gradeMultipliers{1:1,2:1,3:2}・maxScore180)をWebSearch要約とaxis-kobetsu.jpの2独立ソースでクロスチェックし変更なしと確認(両ソースとも「中1中2各45点+中3×2倍90点=180点満点」で完全一致)。',
+    },
   ],
   nara: [
     {
