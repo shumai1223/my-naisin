@@ -287,6 +287,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
         'との明記、欠席日数が同一学年で7日以上ある場合は理由を備考欄に記入する規定、日本語支援を' +
         '要する生徒への配慮事項を(12)健康等の欄に記載する運用も確認できた。',
     },
+    {
+      date: '2026-09-14',
+      sourceUrl: 'https://alpha-katekyo.jp/tips/tips286/',
+      sourceTitle: '家庭教師のアルファ「都道府県別・内申点計算方法」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で6日グループ(daysSinceVerified=6・前回09-07はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。sourceUrl2(czemi.benesse.ne.jp)はHTTP403のため前回未使用の第三者ソース(alpha-katekyo.jp)+WebSearch要約で確認・既存記載(全学年等倍・9教科×5段階×3年=135点満点)に変更なし。',
+    },
   ],
   hokkaido: [
     {
