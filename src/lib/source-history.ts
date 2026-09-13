@@ -1154,6 +1154,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
         '現行の調査書作成の手引そのものが既にこの4区分構成であり、確認できた中で最も簡素化された' +
         '基本形（B/C/Dの3区分＋総合所見）だった',
     },
+    {
+      date: '2026-09-14',
+      sourceUrl: 'https://jyuku-online.com/blog/jj-nagano/',
+      sourceTitle: '塾オンラインドットコム「長野県の内申点の計算方法」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で同率最古(daysSinceVerified=7・前回09-06はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。既存記載(targetGrades[3]のみ・9教科×5段階=45点満点)をWebSearch要約とjyuku-online.comの2独立ソースでクロスチェックし変更なしと確認(両ソースとも「後期選抜で使うのは中3の必修9教科評定合計のみ・45点満点・実技教科も同等の重み」で完全一致)。',
+    },
   ],
   shimane: [
     {
