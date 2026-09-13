@@ -204,7 +204,7 @@ Trendsピーク 2/1〜2/7週（日次 2/9=100・2/5=94・1/30=88）
       `MyNaishin-CompetitionUpdateCheck`（毎朝7:45）登録済み
 - [x] ハブ台帳が N/47 で、判明しない県は `null` になっている → F-2/F-3完了・6/47県判明
 - [x] 既公表R9資料のうち**4件以上**をハブ監視が新規リンクとして拾えた → F-2/F-3完了・6/6県
-- [ ] 速報パーサが**6県以上**でR7/R8リプレイに合格 → ⚠️**4/6県で合格達成**。`scripts/
+- [ ] 速報パーサが**6県以上**でR7/R8リプレイに合格 → ⚠️**5/6県で合格達成**。`scripts/
       bairitsu-ingest/replay-interim-osaka.ts`で大阪府の実データ（xlsx・R8速報0305→確定
       osaka.ts）を`validateInterimSubmission()`に通したところ、当初matchRatio=95.8%
       （issues4件）だったが、単位制/クリエイティブスクール4校（市岡/槻の木/鳳/東住吉総合）
@@ -251,10 +251,19 @@ Trendsピーク 2/1〜2/7週（日次 2/9=100・2/5=94・1/30=88）
       含め**初回transcriptionでmatchRatio=1.000・138/138件で一発合格（passed=true）**。
       changeMargin=90（広島市立基町「普通」の519→433=最上位人気校での志願変更86人減を
       見込んで事前設定）で対応。
-      **残る2県（kanagawa/shizuoka）は同型の作業（vision転記＋replayスクリプト新設）が
-      必要**（kanagawaはさらに学校名が数値コードでしか現れずコード→名称対応表が別途必要）。
-      1県ずつ・緑を確認してから次へ、という既存の運用方針に従い次回以降の個別セッションへ
-      持ち越す
+      **✅2026-09-14: shizuokaも合格達成**。registry.tsのinterim URL(r8shigansyasuu.pdf・
+      全12頁のうち学校別内訳は1〜9頁・10頁以降は特別選抜一覧で対象外)をpdftoppm(180dpi)+
+      visionで9頁全てを目視転記しscripts/bairitsu-ingest/replay-interim-shizuoka.tsを新設。
+      静岡県の資料は他県と異なり各学科の合計行の直後に学校裁量枠のローマ数字(Ⅰ/Ⅱ/Ⅲ)段階別
+      内数行が続く構成で、これらは無視し合計行のみを採用。沼津市立沼津・清水南・浜松西は
+      募集定員欄が括弧書き(併設中等部の内部進学予定者数控除後の実質定員)でその値をquotaに
+      採用。「普通」「理数」は確定データで「科」を付加した表記になる点に注意して転記
+      （複合名称科目はそのまま）。転記件数162件がshizuoka.tsの現行レコード総数と完全一致し
+      **初回transcriptionでmatchRatio=1.000・162/162件で一発合格（passed=true・
+      changeMargin=40のまま・大きな志願変更の外れ値なし）**。
+      **残る1県（kanagawa）のみ**。学校名が数値コードでしか現れずコード→名称対応表が別途
+      必要という既知の障壁があり、次回以降の個別セッションへ持ち越す。現時点で5/6県合格
+      済みのため「6県未満なら速報レーン縮小」という09-22反証条件は回避見込みが濃厚
 - [x] `ops/state/harvest-ledger.json` に「検知時刻→取得sha256→検算→遅延h」の行がある →
       `scripts/bairitsu-ingest/build-harvest-ledger.mjs`で新設。F-2/F-3で既に収集済みの
       `hub-events.json`（検知時刻）と`r9-quota/<pref>.json`（sha256・検算状態）から導出
