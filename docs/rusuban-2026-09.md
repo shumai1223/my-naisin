@@ -5,16 +5,19 @@
 
 ---
 
-最終更新              2026-09-14 (項目4=X-14継続中・6日グループ進行中)
+最終更新              2026-09-14 04:36 (項目4=X-14継続中・6日グループ進行中)
 いまやっていること     T-Y11F §11項目4(X-14・∞常駐)。freshness-queue.tsのgetStaleTop()
-                      で最古県を機械選定→再検証(累計37県)。
-今日やったこと         上記37県を再検証。**yamagataで回帰バグ発見・修正済み**
+                      で最古県を機械選定→再検証(累計38県)。
+今日やったこと         上記38県を再検証。**yamagataで回帰バグ発見・修正済み**
                       (調査書:学力比率の狭められた誤値を修正)。naraで令和10年度
                       以降の満点拡大計画も新発見(未反映・記録済み)。
-次にやること           getStaleTop()を再実行し6日グループ(aomori/shizuoka/
-                      ishikawa/oita/nagasaki/tokushima/tochigi/toyama/fukui等)
-                      を続ける。
-払底の見込み           §11項目1は完了。項目4はgetStaleTop()があるため当面払底しない。
-                      フルjest545suites7802tests green。
+次にやること           6日グループ残り9県(shizuoka/ishikawa/oita/nagasaki/
+                      tokushima/tochigi/toyama/fukui/fukushima)をgetStaleTop()
+                      で順に続ける。全て済むと本日分のX-14在庫は0(全47県が
+                      当日再検証済み=daysSinceVerified≈0になり次のstale化は
+                      翌日以降)。
+払底の見込み           §11項目1は完了。9県消化後、X-14は本日分は事実上払底
+                      (staleさが無くなるため)。その時点でW-0/F-0等の定期確認
+                      に切替を検討。フルjest545suites7802tests green。
 詰まっていること        aichi公式サイトのみImperva WAF一時ブロック継続中(第三者ソースで代替可)。
 👤の判断が要るもの      #5成果物・#6仕様書とも対外提示可否・価格は👤判断待ち（送信0件）
