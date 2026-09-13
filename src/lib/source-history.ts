@@ -55,6 +55,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '塾オンラインドットコム「埼玉県内申点」＋WebSearch要約の2独立ソース',
       note: 'ZZ-9b再検証優先度キューにより選定・再検証(前回2026-07-23は調査書記載事項の変更確認のみ)。既存記載(学年比1:1:2デフォルト・180点満点・note欄「高校により1:1:3、1:2:3などもあり」)を、WebSearch要約とjyuku-online.comの2独立ソースでクロスチェックし変更なしと確認(両ソースとも「1:1:1=135点/1:1:2=180点/1:1:3=225点の3パターンが志望校ごとに設定される」で一致・埼玉県は東京都のようなカスタム総合得点方式でなく学校単位で比率が変わる方式である点も既存理解と整合)。',
     },
+    {
+      date: '2026-09-13',
+      sourceUrl: 'https://jyuku-online.com/blog/jj-saitamanaisin/',
+      sourceTitle: '塾オンラインドットコム「埼玉県公立高校入試：内申点の計算の仕方を5ステップで解説」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で最古(daysSinceVerified=39)として選定・再検証。既存記載(targetGrades[1,2,3]・gradeMultipliers{1:1,2:1,3:2}・maxScore180)を、WebSearch要約とjyuku-online.comの2独立ソースでクロスチェックし変更なしと確認(両ソースとも「1:1:2=中1評定合計+中2評定合計+中3評定合計×2=180点満点」の計算式・具体例(オール3で108点等)で一致)。',
+    },
   ],
   kagoshima: [
     {
@@ -526,6 +532,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceUrl: 'https://kobetsu-wiser.com/chibatsudanuma014/',
       sourceTitle: '個別指導塾ワイザー「千葉県公立高校入試の内申点の仕組み」＋WebSearch要約の2独立ソース',
       note: 'ZZ-9b再検証優先度キューにより選定・再検証(前回2026-07-24は選抜制度変更確認のみ)。既存記載(全学年等倍・9教科×5段階×3年=135点満点・note欄「K値(0.5〜2)で換算する高校もあり」)をWebSearch要約とkobetsu-wiser.comの2独立ソースでクロスチェックし変更なしと確認(両ソースとも135点満点+K値0.5〜2.0の傾斜配点方式で完全一致)。',
+    },
+    {
+      date: '2026-09-13',
+      sourceUrl: 'https://www.pref.chiba.lg.jp/kyouiku/shidou/press/2024/koukou/r8kaizenten.html',
+      sourceTitle: '千葉県教育委員会「令和8年度（令和7年度実施）以降の千葉県公立高等学校入学者選抜の改善点について」＋WebSearch要約(jyuku-online.com等)の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()でsaitamaと同率最古(daysSinceVerified=39)として選定・再検証。既存記載(targetGrades[1,2,3]・gradeMultipliers全学年1・maxScore135・note「K値(0.5〜2)で換算する高校もあり」)を、WebSearch要約とjyuku-online.comの2独立ソースでクロスチェックし変更なしと確認(両ソースとも「9教科×5段階×3年=135点満点にK値(原則1・各校0.5〜2の範囲で設定可)を乗じる」で一致)。改善点ページの記載を再確認したが、削除4項目(総合的な学習の時間の記録・出欠の記録・行動の記録(第3学年)・総合所見)は前回(2026-07-24)確認済みの内容と同一で新しい変更は無く、「学習の記録(評定)」欄・135点満点・K値の計算方式自体にも変更が無いことを改めて確認した。',
     },
   ],
   okinawa: [

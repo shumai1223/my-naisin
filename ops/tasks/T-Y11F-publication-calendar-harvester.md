@@ -317,6 +317,12 @@ W-0 の鮮度を確認する（主食ドリフト4回の教訓）。
    パーサーの新規実装が必要。**§11項目1はkanagawaを除き実質完了**。
    ⚠️2026-09-13追記: kanagawaもsheet1〜3の3セッションに分割して完了した（「#11-28」〜
    「#11-31」参照）。**§11項目1は全27県年で完全に完了した。**
+   ⚠️2026-09-13追記2: 項目4（X-14）に着手した。`src/lib/freshness-queue.ts`の
+   `getStaleTop()`が既に「最終確認日が古い順」を機械的に算出できる基盤として存在して
+   いたため、これを使ってsaitama/chiba（daysSinceVerified=39で同率最古）を再検証し
+   `source-history.ts`のMANUAL_HISTORYへ追記済み（詳細はworklog 2026-09-13 23:53参照）。
+   **次回はgetStaleTop()を再実行し、その時点での最古県から続ける**（ehime/ibaraki/
+   okayama/gifu/kyoto/hiroshima/mie等が2026-09-06付＝7日程度でsaitama/chibaに次ぐ）。
 2. ✅2026-09-12確認・完了済（訂正）: **定時制で `coverage='partial'` にした県の pendingDepartments
    を潰す。** fukuoka/kochi/hiroshima の3県とも実ファイルを確認したところ既に
    `status: 'complete'` で、pendingDepartmentsの定時制/多部制単位制/B日程等は
