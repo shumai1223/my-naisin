@@ -100,6 +100,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
         '（これまでの27県のほぼ全てで確認できた区分が鹿児島県では見当たらない）。既卒者用の' +
         '様式4-2（9頁目）も同一構成で確認。',
     },
+    {
+      date: '2026-09-14',
+      sourceUrl: 'https://www.study-room.net/2019/05/27/post-5259/',
+      sourceTitle: '鹿児島県高校入試が気になったら初めに読むべき記事＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で6日グループ(daysSinceVerified=6・前回09-07はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。sourceUrl2(czemi.benesse.ne.jp)はHTTP403のため前回(08-05)未使用の第三者サイト(study-room.net)で代替。既存記載(targetGrades[3]のみ・coreMultiplier2・practicalMultiplier20・maxScore450)をWebSearch要約とstudy-room.netの2独立ソースでクロスチェックし変更なしと確認(両ソースとも「5教科×2倍50点+実技4教科×20倍400点=450点満点」で完全一致)。',
+    },
   ],
   fukuoka: [
     {
