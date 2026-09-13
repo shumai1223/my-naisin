@@ -957,6 +957,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
         '関する記録／学習に関する特記事項」を配置する構成。**「受検上配慮すべき事項」という' +
         '項目が独立して存在する点は、これまでの22県で確認できなかった佐賀県独自の項目**。',
     },
+    {
+      date: '2026-09-14',
+      sourceUrl: 'https://bestjuku.com/high_exam/saga/',
+      sourceTitle: '塾選（ジュクセン）「佐賀県の高校受験完全ガイド」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で6日グループ(daysSinceVerified=6・前回09-07はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。前回(08-05)未使用の第三者サイト(bestjuku.com)とWebSearch要約の2独立ソースでクロスチェックし、既存記載(全学年等倍・9教科×5段階×3年=135点満点)に変更が無いことを確認した(両ソースとも「全学年均等・オール3で81点」等の算術で完全一致)。',
+    },
   ],
   mie: [
     {
