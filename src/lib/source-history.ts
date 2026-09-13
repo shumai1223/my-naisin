@@ -502,6 +502,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
         '確認できず、「総合所見」も独立項目ではなく3の「特別活動に関する事実及び所見」に統合されている。' +
         '「欠席日数」（5）は独立項目として明示的に存在',
     },
+    {
+      date: '2026-09-14',
+      sourceUrl: 'https://jyuke-labo.com/koukoujyukentaisaku/ibaraki/',
+      sourceTitle: '受験ラボ「茨城県高校受験対策・高校入試情報」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で同率最古(daysSinceVerified=7・前回09-06はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。既存記載(全学年等倍・9教科×5段階×3年=135点満点・共通選抜A群/B群の2段階選考)をWebSearch要約とjyuke-labo.comの2独立ソースでクロスチェックし変更なしと確認(両ソースとも「中1+中2+中3の9教科評定合計=135点満点」「学力検査500点満点」「A群(学力上位80%以内かつ内申順位も募集人員以内で原則合格)/B群(学力重視・内申重視の2方式)」で一致)。',
+    },
   ],
   okayama: [
     {

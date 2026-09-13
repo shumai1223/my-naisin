@@ -5,13 +5,13 @@
 
 ---
 
-最終更新              2026-09-14 (項目4=X-14継続中・ehimeも再検証完了)
+最終更新              2026-09-14 (項目4=X-14継続中・ibarakiも再検証完了)
 いまやっていること     T-Y11F §11項目4(X-14・∞常駐)。freshness-queue.tsのgetStaleTop()
-                      で最古県を機械選定→再検証(saitama/chiba/aichi/ehime完了)。
-今日やったこと         aichi(34日)・ehime(7日)を再検証。政府サイトブロックや403は
-                      第三者2独立ソースで代替し変更なしを確認。
-次にやること           getStaleTop()を再実行し次の同率最古県(ibaraki/okayama/gifu/
-                      kyoto/hiroshima/mie/yamaguchi/shiga/kanagawa等)を続ける。
+                      で最古県を機械選定→再検証(saitama/chiba/aichi/ehime/ibaraki完了)。
+今日やったこと         aichi(34日)・ehime/ibaraki(7日)を再検証。政府サイトブロックや
+                      403は第三者2独立ソースで代替し全て変更なしを確認。
+次にやること           getStaleTop()を再実行し次の同率最古県(okayama/gifu/kyoto/
+                      hiroshima/mie/yamaguchi/shiga/kanagawa/osaka等)を続ける。
 払底の見込み           §11項目1は完了。項目4はgetStaleTop()があるため当面払底しない。
                       フルjest545suites7802tests green。
 詰まっていること        aichi公式サイトのみImperva WAF一時ブロック継続中(第三者ソースで代替可)。
