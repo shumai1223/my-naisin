@@ -215,6 +215,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '福井県教育委員会「令和8年度福井県立高等学校入学者選抜実施要項」5調査書・8選抜の方法(4頁・6頁)',
       note: 'T-W1 W1-2(調査書の様式・記載事項の47県横断調査)で新規確認(32頁PDF・pdftotext不可のためpdftoppmでPNG化し全頁を確認)。他県と異なり、福井県教育委員会サイトには調査書(様式第1号)そのものを掲載した独立の様式PDF/記入要領文書が見当たらなかった(実施要項の様式集リンク一覧〈R08nittei/R08teiin/R08youkou/R08tsushin/R08renkei/R08kensa/R08webgaiyo/R08kengoe/R08webpamphlet/R08webkojinjouhou/R08annai〉を全件確認したが該当なし。R08webgaiyo.pdfはWEB出願システムの手続きフロー図のみで調査書は「関係書類提出」として言及されるのみ)。実施要項本文からは「5調査書(1)調査書の作成:中学校長は福井県立高等学校入学志願者調査書(様式第1号)により、生徒指導要録・健康診断票その他必要な資料に基づいて厳正かつ公正に作成」「8選抜の方法(1)イ:選抜に当たっては調査書中の『学習の記録』の『評定』の第3学年の各教科の評定と学力検査の成績を総合的に審査する。調査書中の『観点別学習状況』および他の記録についても慎重に審査するが、『身体上の特記事項』については修学不可能と認められるものを除くほかは等差をつける資料としない」という記述のみが確認できた。**学習の記録(評定・観点別学習状況)と身体上の特記事項の存在は確認できたが、行動の記録・出欠の記録・特別活動の記録等の個別項目の有無は実施要項本文からは確認できず、断定を避けた**。',
     },
+    {
+      date: '2026-09-14',
+      sourceUrl: 'https://axis-kobetsu.jp/outline/juni/exam-info/general-info/fukui',
+      sourceTitle: '個別指導Axis「福井県の公立高校入試概要」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で6日グループ(daysSinceVerified=6・前回09-07はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。前回未使用の第三者ソース(axis-kobetsu.jp)+WebSearch要約で確認・既存記載(中3のみ・9教科×5段階=45点満点)に変更なし。',
+    },
   ],
   yamagata: [
     {
