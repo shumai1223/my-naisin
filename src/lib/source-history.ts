@@ -798,6 +798,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
         '精読しないと判別できないため、断定を避け「秋季入学のための選抜」様式として確認できた' +
         '事実のみを記録する**。',
     },
+    {
+      date: '2026-09-14',
+      sourceUrl: 'https://jyuku-online.com/blog/jj-hiroshima/',
+      sourceTitle: '塾オンラインドットコム「広島県の内申点計算方法」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で同率最古(daysSinceVerified=7・前回09-06はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。sourceUrl2(czemi.benesse.ne.jp)はWebFetchがHTTP403のため第三者サイトで代替。既存記載(中1中2各45点+中3×3倍135点=225点満点・実技傾斜なし)をWebSearch要約とjyuku-online.comの2独立ソースでクロスチェックし変更なしと確認(両ソースとも「中1+中2+中3×3=225点満点」「主要5教科と実技4教科の倍率差なし」で完全一致)。',
+    },
   ],
   kagawa: [
     {

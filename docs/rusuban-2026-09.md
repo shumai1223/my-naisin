@@ -5,15 +5,14 @@
 
 ---
 
-最終更新              2026-09-14 (項目4=X-14継続中・kyotoも再検証完了)
+最終更新              2026-09-14 (項目4=X-14継続中・hiroshimaも再検証完了)
 いまやっていること     T-Y11F §11項目4(X-14・∞常駐)。freshness-queue.tsのgetStaleTop()
                       で最古県を機械選定→再検証(saitama/chiba/aichi/ehime/ibaraki/
-                      okayama/gifu/kyoto完了・計8県)。
-今日やったこと         上記8県を再検証・現行方式は全て変更なし。kyotoで令和9年度の
-                      入試制度改革(前期/後期2区分・独自枠/共通枠新設)を新たに確認
-                      (/nyushi-seido-henkouへの反映は次回検討・今回は見送り)。
-次にやること           getStaleTop()を再実行し次の同率最古県(hiroshima/mie/
-                      yamaguchi/shiga/kanagawa/osaka/nagano/tottori等)を続ける。
+                      okayama/gifu/kyoto/hiroshima完了・計9県)。
+今日やったこと         上記9県を再検証・現行方式は全て変更なし。kyotoの令和9年度
+                      制度改革は/nyushi-seido-henkouへ反映済み(commit 2377e26)。
+次にやること           getStaleTop()を再実行し次の同率最古県(mie/yamaguchi/shiga/
+                      kanagawa/osaka/nagano/tottori/shimane/tokyo等)を続ける。
 払底の見込み           §11項目1は完了。項目4はgetStaleTop()があるため当面払底しない。
                       フルjest545suites7802tests green。
 詰まっていること        aichi公式サイトのみImperva WAF一時ブロック継続中(第三者ソースで代替可)。
