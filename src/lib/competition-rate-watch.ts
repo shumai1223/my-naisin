@@ -110,8 +110,32 @@ export function evaluateFetch(prefecture: string, url: string, prev: WatchEntry 
     lastStatus: changed ? 'changed' : 'ok',
     fingerprint: outcome.fingerprint,
     changedAt: changed ? nowIso : prev?.changedAt ?? null,
-    note: changed ? '前回チェック時からヘッダのフィンガープリントが変化した（内容更新の可能性）' : null,
+    note: changed ? buildChangedNote(prev!.fingerprint, outcome.fingerprint) : null,
   };
+}
+
+/** フィンガープリント文字列（`etag|lastModified|contentLength`）末尾のContent-Lengthだけを取り出す。 */
+function parseContentLength(fingerprint: string | null | undefined): string | null {
+  if (!fingerprint) return null;
+  const parts = fingerprint.split('|');
+  return parts[2] || null;
+}
+
+/**
+ * 2026-09-14判明: fukuoka/kumamoto/okayama/yamaguchi等の一部県サイトは、Content-Lengthが
+ * 完全に同一のままETag/Last-Modifiedだけが約24時間ごとに機械的に進む（CMSの日次再保存と
+ * 推測される）。これを一律「内容更新の可能性」と表示すると"changed"の意味が薄まり、
+ * 実際の内容変化を見落とすリスクが増す。Content-Lengthの同異でnoteを書き分け、
+ * 一目で「本文差分の裏取りが優先度高いか」を判断できるようにする（lastStatusは
+ * 引き続き'changed'のまま＝既存の集計・表示ロジックは変えない）。
+ */
+function buildChangedNote(prevFingerprint: string | null, curFingerprint: string | null | undefined): string {
+  const prevLen = parseContentLength(prevFingerprint);
+  const curLen = parseContentLength(curFingerprint);
+  const sameSize = prevLen !== null && curLen !== null && prevLen === curLen;
+  return sameSize
+    ? '前回チェック時からETag/Last-Modifiedのみ変化・Content-Lengthは同一（同一内容の再保存の可能性が高い。本文差分での裏取り優先度は低）'
+    : '前回チェック時からヘッダのフィンガープリントが変化した（Content-Lengthも変化・内容更新の可能性が高い。本文差分での裏取り優先度は高）';
 }
 
 export interface WatchSummary {

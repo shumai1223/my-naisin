@@ -89,6 +89,44 @@ describe('evaluateFetch', () => {
     expect(result.changedAt).toBe(now);
   });
 
+  it('notes low priority when "changed" but Content-Length is identical (likely a same-content resave)', () => {
+    const prev: WatchEntry = {
+      prefecture: 'fukuoka',
+      url: 'https://example.lg.jp/a.pdf',
+      lastCheckedAt: '2026-09-13T22:45:00Z',
+      lastStatus: 'ok',
+      fingerprint: '"114bb-65b609c57379c"|Sun, 13 Sep 2026 17:25:58 GMT|70843',
+      changedAt: null,
+      note: null,
+    };
+    const result = evaluateFetch(
+      'fukuoka',
+      prev.url,
+      prev,
+      { fingerprint: '"114bb-65b74b8d2fff0"|Mon, 14 Sep 2026 17:25:35 GMT|70843' },
+      now
+    );
+    expect(result.lastStatus).toBe('changed');
+    expect(result.note).toContain('Content-Lengthは同一');
+    expect(result.note).toContain('優先度は低');
+  });
+
+  it('notes high priority when "changed" and Content-Length also differs (likely a real content update)', () => {
+    const prev: WatchEntry = {
+      prefecture: 'x',
+      url: 'https://example.lg.jp/a.pdf',
+      lastCheckedAt: '2026-09-01T00:00:00Z',
+      lastStatus: 'ok',
+      fingerprint: 'etag1||100',
+      changedAt: null,
+      note: null,
+    };
+    const result = evaluateFetch('x', prev.url, prev, { fingerprint: 'etag2||105' }, now);
+    expect(result.lastStatus).toBe('changed');
+    expect(result.note).toContain('Content-Lengthも変化');
+    expect(result.note).toContain('優先度は高');
+  });
+
   it('stays "ok" and keeps the previous changedAt when the fingerprint is unchanged', () => {
     const prev: WatchEntry = {
       prefecture: 'x',

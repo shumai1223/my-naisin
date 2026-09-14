@@ -112,6 +112,21 @@ kumamoto/yamaguchiはlastModifiedが本日9/7に更新されているがcontentL
 competition-updates-check.bat`＋Windowsタスクスケジューラ`MyNaishin-CompetitionUpdateCheck`
 (毎朝7:45・`MyNaishin-DailyBrief`と同型)を新設し**毎日回る状態にした**（F-1のDoD達成）。
 
+**⚠️2026-09-15確定: fukuoka/kumamoto/okayama/yamaguchiの「changed」は日次CMS再保存の恒常パターンと
+確定・note文を書き分ける形で実装対応した。** タスクスケジューラが2026-09-14 22:45 UTC(JST 07:45)に
+実行した結果、この4県が揃って「changed」と判定されていた。過去のfingerprint（git履歴）と突合した
+ところ、**4県ともContent-Lengthは前日と完全に同一のまま、ETag/Last-Modifiedだけが約24時間分
+正確に前進していた**（例: fukuoka `70843`バイトのまま、kumamoto `299559`バイトのまま、okayama
+`523542`バイトのまま、yamaguchi `183310`バイトのまま。Last-Modifiedの時刻もほぼ同時刻のまま日付
+だけ進む）。これは9/7に「排除できない」としていた仮説を4県×2回目の観測で裏付けるもので、これら
+特定ホストのCMSが本文を変えずに毎日ファイルを再保存する挙動を持つ強い証拠と判断した。
+**対応**: `evaluateFetch()`（`src/lib/competition-rate-watch.ts`）に`buildChangedNote()`を追加し、
+Content-Lengthが前回と同一なら「再保存の可能性が高い・裏取り優先度は低」、Content-Lengthも変化して
+いれば「内容更新の可能性が高い・裏取り優先度は高」とnoteを書き分けるようにした（`lastStatus`自体は
+引き続き'changed'のまま=既存の集計・日次ブリーフィング表示ロジックは変更なし。単に次回以降の
+トリアージが一目でできるようにするnote文の改善のみ）。テスト2件追加（`competition-rate-watch.test.ts`）。
+tsc実exit0・jestフルスイート545suites7807tests green。
+
 ## A-3 取り込みの型（県ごとの定義差を吸収する）
 
 - [x] 県ごとに `quota` が何を指すか（募集人員／入学許可予定者数）を台帳に明記する →
