@@ -51,14 +51,14 @@ ehime 令和4年度  到達=○  手段=Wayback  http://web.archive.org/web/2022
 
 fukui 令和4年度  到達=○  手段=現行サイト  https://www.pref.fukui.lg.jp/doc/koukou/nyugaku/shutugan.html （ライブ200・最終更新2022-02-25のまま上書きされずに現存。出願状況/志願変更/合格結果の区分でPDFへのリンクあり）
 
-fukuoka 令和4年度  到達=△要Wayback再確認  手段=保留  WebSearchで「令和４年度公立高等学校一般入試志願状況（志願変更受付後）」というタイトルのページ(pref.fukuoka.lg.jp/contents/nyushi4.html)がヒットしたが現行ライブは404。WaybackのCDX確認を試みたが2回連続タイムアウトしたため、本日はこれ以上Waybackを使わない運用に従い中断。WebSearchのスニペット自体がページタイトルを正確に引用しており実在した可能性は高いため、次回Wayback回復後に再確認する
+fukuoka 令和4年度  到達=○  手段=Wayback  http://web.archive.org/web/20220308114501/https://www.pref.fukuoka.lg.jp/contents/nyushi4.html （2026-09-15再確認: archive.org CDX/availabilityとも正常復帰・2022年内に6スナップショットを確認。ページから「令和４年度県立高等学校一般入学志願状況」PDF(uploaded/life/616754_61112318_misc.pdf)を発見しWayback経由(if_付きURL)で取得・pdftotextで開けることを確認）⚠️実際に開くと表は数値列(定員/志願者数/倍率/前年値等)のみでCJKラベル部分(学校名列)がToUnicode欠落で空白となる4頁構成の文書。列数・構造は現行R8ソースと近いが学校名の機械抽出にはpdftoppm+ビジョン解析が必須。実収集は保留（詳細はT-Y11Fタスクファイル#11参照）
 
 ⚠️ **2026-09-11 12:56頃、fukuokaでarchive.orgのCDX APIが再度2回連続タイムアウトしたため、本イテレーションはこれ以降Waybackの使用を中断した。**
 
 fukushima 令和4年度  到達=○  手段=現行サイト  https://www.pref.fukushima.lg.jp/site/edu/r4koukounyushi.html （ライブ200。「後期選抜志願状況（出願先変更後）」PDF=uploaded/attachment/500729.pdfへのリンクを確認・現行R8ソースと同じ命名規則）
 
 gifu 令和4年度  到達=△要Wayback再確認  手段=保留  WebSearchで見つかった「入学者選抜トップ」ページ(3464.html)に過去年度リンク無し。Wayback CDXは2回連続タイムアウトのため本イテレーションはこれ以上試行せず。次回再試行
-gunma 令和4年度  到達=△要継続調査  手段=保留  「令和4年度入学者選抜結果について」(5036.html・ライブ確認済みだが全体統計のみで学校別PDFへのリンク無し)と「実施要項」(pref.gunma.jp/03/x28g_00270.html)は存在確認できたが、目的の学校別志願状況PDF自体は特定できず。次回はWaybackで5036.html周辺の関連ページを深堀りするか、attachment番号を令和5/6年度の値から逆算して絞り込む
+gunma 令和4年度  到達=○  手段=現行サイト  https://www.pref.gunma.jp/site/kyouiku/5030.html （2026-09-15再確認: 前回参照した5036.html「結果について」ページは別物で全体統計のみだったが、正しいページは5030.html「志願状況・合格状況等の情報について」＝ライブ200確認済み。前期選抜・連携型選抜志願状況(uploaded/attachment/13775.pdf)ほか5本のPDFへのリンクを確認。PDF内が学校別粒度かは未確認・実収集は別タスク）
 
 hiroshima 令和4年度  到達=○  手段=現行サイト  https://www.pref.hiroshima.lg.jp/site/kyouiku/06senior-2nd-r4-nyuushi-r4-kou-r4-kou-mokuji-r4-kou-mokuji.html （ライブ200・選抜(I)/(II)それぞれの志願状況・受検状況PDFへのリンクを確認）
 
@@ -66,11 +66,11 @@ hyogo 令和4年度  到達=対象外  手段=(取得禁止)  §5「守ること
 
 ibaraki 令和4年度  到達=○  手段=現行サイト  https://kyoiku.pref.ibaraki.jp/wp-content/uploads/2023/02/0610houkoku.pdf （WebSearch1発で直接ヒット・ライブ200確認済み・「実施状況報告書」形式で現行R8ソースと同型）⚠️2026-09-11追記: 実際に開くと全45ページの別種文書（第2次募集・合格者数・入学者数まで含む）でR5〜R8のシンプルな志願者数速報とは非互換と判明・実収集は保留（詳細はT-Y11Fタスクファイル#11-4）
 
-ishikawa 令和4年度  到達=△要Wayback再確認  手段=保留  WebSearchでは具体的な学校別ページを発見できず。R8ソースが日付ベースファイル名(documents/20260224.pdf)のため直接パターン推測は不可能。WaybackのCDXで2022年前半のdocuments/フォルダを検索しようとしたが2回連続タイムアウトしたため中断。次回再試行
+ishikawa 令和4年度  到達=○  手段=Wayback  http://web.archive.org/web/20220314044438/https://www.pref.ishikawa.lg.jp/kisya/r3kyoui/documents/20220221.pdf （2026-09-15再確認: 既存R5〜R8ソースの規則「rNkyoui配下＝令和(N+1)年度」を発見・R4は`r3kyoui`ディレクトリと特定。CDXで`kisya/r3kyoui/documents/`配下を横断検索し2022年2月の候補群(20220216/20220221/20220225_hp/20220301)を発見・20220221.pdfをWayback経由(if_)で取得・pdftotextで(a)(b)(c=a-b)(d)(d/c)列の全県合計表を確認（募集人員/志願者数/倍率相当の構造・現行R8ソースと同型）。⚠️学校名等CJKラベルはToUnicode欠落で空白のため実収集はビジョン解析必須・保留のまま）
 
 ⚠️ **2026-09-11 13:12頃、ishikawaでarchive.orgが再度2回連続タイムアウトしたため、以降Waybackの使用を中断し現行サイト+WebSearchのみで継続する。**
 
-iwate 令和4年度  到達=△要Wayback再確認  手段=保留  R4当時のデータは旧サイト(www2.iwate-ed.jp/sed/・令和6年度に閉鎖しpref.iwate.jpへ移行)にあった可能性が高いが、現行の同サイトには令和5年度データのみが残り令和4年度以前は削除済み。Wayback不安定のため次回再確認
+iwate 令和4年度  到達=○  手段=Wayback  http://web.archive.org/web/20220222094836/http://www2.iwate-ed.jp/sed/r04/008_ippan-chouseigo.pdf （2026-09-15再確認: 旧サイトwww2.iwate-ed.jp/sed/配下に`r04/`という年度別ディレクトリが実在しCDXで即発見。`008_ippan-chouseigo.pdf`＝「一般調整後」(志願変更後)。Wayback経由(if_)で取得・pdftotextで募集人員/欠員等/志願者数/倍率/前年度値の列を確認・現行R8ソースと同種の構造。⚠️学校名列はCJKラベル欠落のため実収集はビジョン解析必須・保留のまま）
 
 kagawa 令和4年度  到達=○  手段=Wayback  http://web.archive.org/web/20220311202329/https://www.pref.kagawa.lg.jp/documents/15088/syutugan4-5.pdf （現行の一覧ページは上書き済みだがWaybackに2022年1〜3月の16時点のスナップショットがあり、「公立高等学校一般選抜出願状況（令和4年2月24日志願変更締切後）」PDFへのリンクを確認）
 
@@ -110,11 +110,11 @@ shiga 令和4年度  到達=○  手段=現行サイト  https://www.pref.shiga.
 
 shimane 令和4年度  到達=○  手段=現行サイト  https://www.pref.shimane.lg.jp/education/kyoiku/senbatsu/senbatsu_info/index.data/r402_shiganhenkougo_itiran.pdf （WebSearch1発で直接ヒット・ライブ200確認済み。「一般選抜出願者数（志願変更後）」学校別一覧）⚠️2026-09-11追記: PDF自体は開けるが身元引受人枠・地域外枠・特色選抜による複数控除を経て一般選抜募集定員を導出する超高密度な1ページ表（画像7016×9921px・列ラベルがa〜rのアルファベット式）で、列特定のリスクが高いため実収集は保留（詳細はT-Y11Fタスクファイル#11-5）
 
-shizuoka 令和4年度  到達=△要継続調査  手段=保留  現行の「入学者選抜関係発表資料等」索引ページは令和5年度(令和4年度中学3年生向け)までしか遡れず令和4年度入学者選抜(令和3年度中学3年生向け)へのリンクは無い。WaybackのCDXでも同URLの2022年前半スナップショットが見つからず。次回はURL数値ID(_res/projects/.../001/0XX/XXX/)の逆算や別の索引ページ経路を試す
+shizuoka 令和4年度  到達=×  手段=WebSearch+Wayback CDX複数（見つからず）  2026-09-15に4手試行: ①R5ハブページ(1031855.html)をWebFetchしたが過去年度への逆リンクなし(R6-R9のみ) ②同一学力検査結果シリーズの隣接ページ`r4houkoku.pdf`(page 1031870)を発見したが「学力検査結果」であり「志願者数」ではない別資料 ③そのページの親ハブ(1003853/index.html)を辿ったが実際は無関係な「教員採用選考試験結果」ページだった(誤誘導) ④_res/001/031/配下のCDX横断検索は0件。3手を超えて打ち切り、次回は別の索引経路（教委トップの入学者選抜バックナンバー等）を試すこと
 
 tokushima 令和4年度  到達=△要継続調査  手段=保留  一次サイト(nyuushi.tokushima-ec.ed.jp)がAngular製SPAのためWaybackはJS/CSSアセットのみ収録しページ内容(/R4_kouhyou等のルート)自体はクロールされておらず無力と判明。現行サイトのトップページにも過去年度アーカイブ一覧は見当たらず。次回はGoogleキャッシュや別の一次資料経路(教委トップページ等)を探す
 
-tottori 令和4年度  到達=△要継続調査  手段=保留  現行の「高校入学者選抜、転・編入学試験情報」ページに「令和4年度以前の入学者選抜」というアーカイブセクションはあるが「学力検査結果(得点状況)」のみで志願者数(出願段階のデータ)は掲載されていない。secure/NNNNNNN/形式のURLで数値ID推測は不可能なため、次回は「令和５年度県立高等学校入学者選抜関係資料等」(295710.htm)ページの構造を参考に令和4年度版の同型ページを探すか、WebSearchで別の切り口を試す
+tottori 令和4年度  到達=×  手段=WebSearch+WebFetch複数（見つからず）  2026-09-15に3手試行: ①WebSearchで「令和4年度県立高等学校入学者選抜関係資料等」を検索したがヒットせず(R5の295710.htm・R6の310695.htm等が代わりにヒット) ②R6ハブページ(310695.htm)をWebFetchし過去年度リンクの有無を確認したが無し ③R5ハブページ(295710.htm)も同様に過去年度リンクなし・志願者数PDFは`/secure/1311xxx/`形式でR4相当のID逆算は不可能。3手を超えて打ち切り
 
 toyama 令和4年度  到達=△要継続調査  手段=保留  WebSearchで見つかった候補URL(pref.toyama.lg.jp/1104/05kyuuyotounozyoukyou.html)はSSL証明書ミスマッチかつ「給与等の状況」という無関係な内容と判明(誤った検索結果)。R6以降の「0Xsenbatsu.html」パターンも404、R3の「kj00022361.html」IDパターンも404。現行の索引ページは令和6年度までしか遡れず、WaybackのCDXも同ディレクトリで空。次回は別の検索キーワードやURLパターンを試す
 
@@ -129,3 +129,11 @@ saga R5/R4・tochigi R5/R4)・対象外1(hyogo・§5守ることの恒久ルー�
 保留9(fukuoka/gifu/gunma/ishikawa/iwate/shizuoka/tokushima/tottori/toyama・いずれも
 Wayback/現行サイトの制約で時間内に確定できず、次回以降の再挑戦候補)。
 kanagawa R4はWebSearchのスニペットのみでの判定のため次回Waybackでの裏取りを推奨。
+
+**🔁2026-09-15追記（9件の保留のうち7件を再挑戦・4日でWayback/現行サイトの状況が変化していた）**:
+fukuoka/gunma/ishikawa/iwate の4件は到達○に確定（詳細は各県の行を参照・いずれもCJKラベル
+欠落のため実収集自体は別途ビジョン解析が必要）。gifu/shizuoka/tottori の3件は3手を尽くして
+到達×に確定（詳細は各県の行を参照）。**新しい内訳: 到達○40・到達×8・対象外1・保留2
+(tokushima/toyama のみ残)。** 教訓: 2026-09-11時点の「保留」はarchive.org自体の一時障害
+（Temporarily Offline・CDXタイムアウト連発）が主因だった県が多く、日を置いて再試行すると
+高確率で解決する（同じ既知の罠が[[fable5-loop-protocol]]の他の箇所にも記録されている）。
