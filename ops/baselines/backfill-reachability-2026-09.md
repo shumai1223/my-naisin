@@ -112,11 +112,11 @@ shimane 令和4年度  到達=○  手段=現行サイト  https://www.pref.shim
 
 shizuoka 令和4年度  到達=×  手段=WebSearch+Wayback CDX複数（見つからず）  2026-09-15に4手試行: ①R5ハブページ(1031855.html)をWebFetchしたが過去年度への逆リンクなし(R6-R9のみ) ②同一学力検査結果シリーズの隣接ページ`r4houkoku.pdf`(page 1031870)を発見したが「学力検査結果」であり「志願者数」ではない別資料 ③そのページの親ハブ(1003853/index.html)を辿ったが実際は無関係な「教員採用選考試験結果」ページだった(誤誘導) ④_res/001/031/配下のCDX横断検索は0件。3手を超えて打ち切り、次回は別の索引経路（教委トップの入学者選抜バックナンバー等）を試すこと
 
-tokushima 令和4年度  到達=△要継続調査  手段=保留  一次サイト(nyuushi.tokushima-ec.ed.jp)がAngular製SPAのためWaybackはJS/CSSアセットのみ収録しページ内容(/R4_kouhyou等のルート)自体はクロールされておらず無力と判明。現行サイトのトップページにも過去年度アーカイブ一覧は見当たらず。次回はGoogleキャッシュや別の一次資料経路(教委トップページ等)を探す
+tokushima 令和4年度  到達=×  手段=WebSearch+直接URL試行+Wayback複数（見つからず）  2026-09-15に4手試行: ①現行SPA(nyuushi.tokushima-ec.ed.jp)のURLパターンをR6/R8の実例から類推し`R4_nyuugakusyasennbatu`等3種を直接curlで試したが全て404（SPAのルーティング規則自体が年度ごとに変わっており推測不可能と確定） ②WebSearch複数回でも令和4年度の志願者数PDFへの直接リンクは出ず ③`opendata.pref.tokushima.lg.jp`のオープンデータポータルにR4高等学校データは存在したが学校基本統計のみで志願者数は含まれず ④別ドメイン`school.e-tokushima.or.jp`（過去のPDF格納庫）も発見したがR5選抜要項のみでR4の志願者数結果には未到達。3手を大きく超えて打ち切り。構造的にAngular SPA(Wayback到達不可)+URL推測不可能という他県にない二重の壁があり、次回再挑戦する場合は徳島新聞等の地元メディアアーカイブや教委への直接照会が必要
 
 tottori 令和4年度  到達=×  手段=WebSearch+WebFetch複数（見つからず）  2026-09-15に3手試行: ①WebSearchで「令和4年度県立高等学校入学者選抜関係資料等」を検索したがヒットせず(R5の295710.htm・R6の310695.htm等が代わりにヒット) ②R6ハブページ(310695.htm)をWebFetchし過去年度リンクの有無を確認したが無し ③R5ハブページ(295710.htm)も同様に過去年度リンクなし・志願者数PDFは`/secure/1311xxx/`形式でR4相当のID逆算は不可能。3手を超えて打ち切り
 
-toyama 令和4年度  到達=△要継続調査  手段=保留  WebSearchで見つかった候補URL(pref.toyama.lg.jp/1104/05kyuuyotounozyoukyou.html)はSSL証明書ミスマッチかつ「給与等の状況」という無関係な内容と判明(誤った検索結果)。R6以降の「0Xsenbatsu.html」パターンも404、R3の「kj00022361.html」IDパターンも404。現行の索引ページは令和6年度までしか遡れず、WaybackのCDXも同ディレクトリで空。次回は別の検索キーワードやURLパターンを試す
+toyama 令和4年度  到達=○  手段=現行サイト  https://www.kengaku.tym.ed.jp/wp-content/uploads/2022/03/r040225.pdf （2026-09-15再確認: 前回誤って参照していたpref.toyama.lg.jp配下ではなく、県教委の別ドメイン`kengaku.tym.ed.jp`（WordPress・県立学校課サイト）を直接WebSearchで発見。「令和４年度富山県立高等学校入学者選抜 全日制の課程 一般入学者選抜志願状況（令和4年2月25日正午現在）」・ライブ200確認済み・curlでPDF取得しpdftotextで数値表を確認（募集人員/欠員/志願者数/倍率相当の列構造）。学校名列はCJKラベル欠落のため実収集はビジョン解析必須・保留のまま）
 
 wakayama 令和4年度  到達=○  手段=現行サイト  https://www.pref.wakayama.lg.jp/prefg/500200/d00207226.html （WebSearch1発で直接ヒット・ライブ200確認済み。「令和4年度県立高校入学者選抜」）
 
@@ -130,10 +130,13 @@ saga R5/R4・tochigi R5/R4)・対象外1(hyogo・§5守ることの恒久ルー�
 Wayback/現行サイトの制約で時間内に確定できず、次回以降の再挑戦候補)。
 kanagawa R4はWebSearchのスニペットのみでの判定のため次回Waybackでの裏取りを推奨。
 
-**🔁2026-09-15追記（9件の保留のうち7件を再挑戦・4日でWayback/現行サイトの状況が変化していた）**:
-fukuoka/gunma/ishikawa/iwate の4件は到達○に確定（詳細は各県の行を参照・いずれもCJKラベル
-欠落のため実収集自体は別途ビジョン解析が必要）。gifu/shizuoka/tottori の3件は3手を尽くして
-到達×に確定（詳細は各県の行を参照）。**新しい内訳: 到達○40・到達×8・対象外1・保留2
-(tokushima/toyama のみ残)。** 教訓: 2026-09-11時点の「保留」はarchive.org自体の一時障害
-（Temporarily Offline・CDXタイムアウト連発）が主因だった県が多く、日を置いて再試行すると
-高確率で解決する（同じ既知の罠が[[fable5-loop-protocol]]の他の箇所にも記録されている）。
+**🔁2026-09-15追記（9件の保留を全件再挑戦・4日でWayback/現行サイトの状況が変化していた）**:
+fukuoka/gunma/ishikawa/iwate/toyama の5件は到達○に確定（詳細は各県の行を参照・いずれも
+CJKラベル欠落のため実収集自体は別途ビジョン解析が必要）。gifu/shizuoka/tottori/tokushima
+の4件は3〜4手を尽くして到達×に確定（詳細は各県の行を参照。tokushimaはAngular SPA構造＋
+URL推測不可能という二重の壁で最も強固な×）。**9件の保留は全て解消し、51県年は「保留」ゼロで
+確定した。最終内訳: 到達○41・到達×9・対象外1（合計51）。** 教訓: 2026-09-11時点の「保留」の
+多くはarchive.org自体の一時障害（Temporarily Offline・CDXタイムアウト連発）が主因で、日を
+置いて再試行すると高確率で解決した（同じ既知の罠が[[fable5-loop-protocol]]の他の箇所にも
+記録されている）。一方tokushimaのように構造的な壁（SPAルーティング）が真因の県は再試行でも
+解決しないため、両者を区別して次回の優先度を判断すること。
