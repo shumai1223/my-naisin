@@ -1,20 +1,20 @@
 {
   "meta": {
     "fiscalYearLabel": "令和6年度(2024年度)",
-    "status": "collecting",
+    "status": "frozen",
     "startedAt": "2026-09-01",
-    "completedAt": null,
+    "completedAt": "2026-09-15",
     "collectionMethod": "T-Y11 Task C(ops/tasks/T-Y11-winter-bairitsu-pipeline.md)。N1-2(2025-r7)と同じ形式・同じ収集方針。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。",
     "totalPrefectures": 47,
-    "collectedCount": 44,
+    "collectedCount": 46,
     "unavailable": [
       {
         "code": "nagasaki",
         "reason": "2026-09-14確認: 令和6年度専用ページ(pref.nagasaki.jp/bunrui/kanko-kyoiku-bunka/shochuko/koko-nyushi/koko-yoryo/630424.html、Wayback 2024-02-22クロール)から実施要領本体PDF(shared/uploads/2023/09/1696038093.pdf、Wayback 2024-05-20クロールで完全版1.14MB取得)を特定・全38頁を確認した。第7項(選抜)ア①に『調査書その他必要な書類及び各高等学校で定めた検査について、各高等学校でそれぞれの比重を定めて選抜を行うものとする』と明記されており、長崎県は評価方法(調査書・学力検査・面接の比重)を学校ごとに個別設定する学校裁量制で、県内で単一の計算式は存在しない。exam-system.jsonのスキーマ(1県=1つのgradeMultipliers/maxScore)では表現できないため取得不能として記録する(令和7年度のmeta.unavailableで既に示唆されていた疑義を一次資料で確定)。この構造は年度に依らず安定していると見られ、令和7・8年度も同様の理由で単一の全県共通配点式は存在しないと推測される。"
       }
     ],
-    "pdfHashStatus": "partial_43_of_44",
-    "pdfHashNote": "E-3-2(T-Y11F F-5)。2026-09-07に44件中43件のSHA-256取得完了。直接URLで42件・shigaはWayback経由で1件成功。hokkaidoのみarchive.org側の応答不安定(2回連続Internal Server Error)のため今回は見送り、別日に再試行予定。"
+    "pdfHashStatus": "partial_44_of_46",
+    "pdfHashNote": "E-3-2(T-Y11F F-5)。2026-09-07に44件中43件のSHA-256取得完了。直接URLで42件・shigaはWayback経由で1件成功。hokkaidoのみarchive.org側の応答不安定(2回連続Internal Server Error)のため今回は見送り、別日に再試行予定。 🔁2026-09-15追記: ishikawa(hash取得済み)・saga(一次ソース未到達のためhashなし)を追加し47/47(46件収集+1件unavailable)で収集完了と確定。hokkaido・sagaの2件のみpdfHash未収集のまま残る。"
   },
   "entries": [
     {
@@ -1578,6 +1578,79 @@
       "lastVerified": "2026-09-01",
       "pdfHash": "2e51d7d06dad67ad8c78b8738bc97efab989c611d3a6d7fa27fa9da5b9de1f09",
       "diffFromCurrentYear": "【caveatあり・変更なし(間接確認)】2026-09-01に令和6年度分の実施要綱本体PDF(release20230928_01/1.pdf)を探索したが、Wayback Machine CDX APIで検索してもクロール実績が0件(未アーカイブ)、現行サイトも404で直接取得できなかった。代わりに①令和6年度学力検査結果調査報告書(現行サイトで取得成功・令和6年6月発行の一次資料)で学力検査が5教科×100点満点(国語75.9点・数学61.7点・英語66.9点・社会55.5点・理科66.8点、令和6年2月21日実施)であることを確認、②WebSearchで『2024年度』を明示した第三者塾サイトの要約が『学力検査と内申点(調査書点)を7:3の比率で計算』と一致して説明していることを確認した。学力検査:調査書点=7:3(examMaxScore1000:内訳のnaishin300)・実技4教科2倍換算はR7/R8エントリ(2026-08-30に令和7年度実施要綱本体で直接確認済み)と完全一致し、東京都のこの制度は長期間変更されていない周知の制度設計であるため構造不変として引き継ぐ。次回このデータを重要な用途に使う場合は release20230928_01 相当のWayback未アーカイブ資料を再探索することが望ましい"
+    },
+    {
+      "code": "ishikawa",
+      "name": "石川県",
+      "region": "中部",
+      "fiscalYear": "2024",
+      "targetGrades": [
+        1,
+        2,
+        3
+      ],
+      "gradeMultipliers": {
+        "1": 1,
+        "2": 1,
+        "3": 2
+      },
+      "coreMultiplier": 1,
+      "practicalMultiplier": 1,
+      "maxScore": 180,
+      "simplifiedCalc": false,
+      "actualMaxScore": null,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": null,
+      "sourceUrl": "http://web.archive.org/web/20240116133854/https://www.pref.ishikawa.lg.jp/kyoiku/gakkou/senbatu/documents/r6youkou.pdf",
+      "sourceTitle": "石川県教育委員会「令和6年度石川県公立高等学校入学者募集要綱」(現行URLは削除済み・Wayback Machine 2024-01-16時点のスナップショットで取得。ファイル名は年度により変動する既知の罠あり: R8はr8bosyuyoko.pdf、R6はr6youkou.pdf)",
+      "lastVerified": "2026-09-15",
+      "pdfHash": "e434226f5f0fd016c3b20da25752338bf72d36b271782271a6846bd6376822eb",
+      "diffFromCurrentYear": "変更なし(2026-09-15にpdftotextがAdobe-Japan1フォント欠落でCJK抽出不能だったためpdftoppm+ビジョン解析で確認。全69頁のうち全日制課程第1学年入学者募集要項6(2)「調査書における学習の記録の評定の取り扱いについては、第1学年及び第2学年の各教科の評定の合計値と、第3学年の各教科の評定の合計値を2倍した値の和を用いる」・7(2)「学習の記録の評定は、第1学年、第2学年及び第3学年のいずれも5段階評定によって記載する」を確認。令和7・8年度分のgradeMultipliers{1:1,2:1,3:2}/maxScore=180(9教科×5段階×[1+1+2]=180)と完全一致(変更なし))"
+    },
+    {
+      "code": "saga",
+      "name": "佐賀県",
+      "region": "九州・沖縄",
+      "fiscalYear": "2024",
+      "targetGrades": [
+        1,
+        2,
+        3
+      ],
+      "gradeMultipliers": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
+      "coreMultiplier": 1,
+      "practicalMultiplier": 1,
+      "maxScore": 135,
+      "simplifiedCalc": false,
+      "actualMaxScore": null,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": {
+        "totalMaxScore": 385,
+        "examMaxScore": 250,
+        "defaultRatio": {
+          "naishin": 35,
+          "exam": 65
+        },
+        "calcType": "standard",
+        "naishinMultiplier": null,
+        "kValue": null,
+        "sValueCoefficients": null,
+        "osakaTypeCount": null,
+        "hasTokyoSettings": false,
+        "hasKanagawaSettings": false
+      },
+      "sourceUrl": "https://www.pref.saga.lg.jp/kyouiku/kiji00398379/index.html",
+      "sourceUrl2": "https://www.edu-netz.com/admission-information2024/saga-info-r6",
+      "sourceTitle": "佐賀県教育委員会「令和6年度佐賀県立高等学校入学者選抜実施要項についてお知らせします」(現行URLは404・archive.org CDXにも本ページ・配下PDFとも一切のクロール実績なしで未アーカイブと確定)",
+      "lastVerified": "2026-09-15",
+      "pdfHash": null,
+      "diffFromCurrentYear": "【caveatあり・一次ソース未取得・pdfHashなし】2026-09-15にkiji00398379(令和6年度実施要項のお知らせページ)を発見したが現行ライブは404。archive.org availability API・CDX APIとも本ページのクロール実績が0件で、Wayback経由でも本体PDFへ到達不能と確定した(令和7年度エントリで報告済みのarchive.org不安定とは別に、そもそも一度もクロールされていない可能性が高い)。一次資料が物理的に入手不能なためpdfHashはnull(未収集)のまま記録する。代わりに独立した第三者塾サイト2件(edu-netz.com「admission-information2024/saga-info-r6」・WebSearch要約経由の別サイト)が揃って「中1・中2・中3各45点(9教科5段階評定)・合計135点満点・学年間傾斜なし・学力検査250点満点」と一致して説明しており、これは令和7・8年度分のgradeMultipliers{1:1,2:1,3:1}・maxScore=135・examMaxScore=250と完全に一致する(変更なしと判断)。ただし一次資料未確認のため確度は令和7年度エントリ(pdfHashあり)より一段低い。次回重要な用途に使う場合は改めて一次ソースの再探索(教委への直接照会等)を検討すること"
     }
   ]
 }

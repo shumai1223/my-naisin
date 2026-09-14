@@ -52,16 +52,45 @@ describe('2024-r6 exam-system snapshot（T-Y11 Task C 収集中スナップシ�
     }
   });
 
-  test('pdfHashは44件中43件取得済み(T-Y11F F-5 E-3-2・2026-09-07)・hokkaidoのみarchive.org不安定で見送り明記', () => {
-    expect(snapshot.meta.pdfHashStatus).toBe('partial_43_of_44');
+  test('pdfHashは46件中44件取得済み(2026-09-15にishikawa追加・hokkaido/sagaのみ未収集)', () => {
+    expect(snapshot.meta.pdfHashStatus).toBe('partial_44_of_46');
     const withHash = snapshot.entries.filter((e) => e.pdfHash !== null && e.pdfHash !== undefined);
-    expect(withHash).toHaveLength(43);
+    expect(withHash).toHaveLength(44);
     for (const entry of withHash) {
       expect(entry.pdfHash).toMatch(/^[0-9a-f]{64}$/);
     }
     const hokkaido = snapshot.entries.find((e) => e.code === 'hokkaido')!;
     expect(hokkaido.pdfHash).toBeNull();
     expect(hokkaido.pdfHashNote).toContain('Internal Server Error');
+    const saga = snapshot.entries.find((e) => e.code === 'saga')!;
+    expect(saga.pdfHash).toBeNull();
+  });
+
+  test('2026-09-15追加分: 47県年が収集完了(46件収集+1件unavailable)しstatusがfrozenになった', () => {
+    expect(snapshot.meta.status).toBe('frozen');
+    expect(snapshot.meta.collectedCount).toBe(46);
+    expect(snapshot.entries.length + snapshot.meta.unavailable.length).toBe(47);
+  });
+
+  test('ishikawa: 2026-r8と2024-r6で制度の核となる数値が一致する(pdftoppmビジョン解析で実測確認済みの「変更なし」)', () => {
+    const i2024 = snapshot.entries.find((e) => e.code === 'ishikawa')!;
+    const i2026 = snapshot2026.entries.find((e) => e.code === 'ishikawa')!;
+    expect(i2024.maxScore).toBe(180);
+    expect(i2024.maxScore).toBe(i2026.maxScore);
+    expect(i2024.gradeMultipliers).toEqual(i2026.gradeMultipliers);
+    expect(i2024.pdfHash).toMatch(/^[0-9a-f]{64}$/);
+  });
+
+  test('saga: 2025-r7・2026-r8と2024-r6で制度の核となる数値が一致する(一次ソース未到達のため第三者裏取りのみ・caveat付き)', () => {
+    const s2024 = snapshot.entries.find((e) => e.code === 'saga')!;
+    const s2025 = snapshot2025.entries.find((e) => e.code === 'saga')!;
+    const s2026 = snapshot2026.entries.find((e) => e.code === 'saga')!;
+    expect(s2024.maxScore).toBe(135);
+    expect(s2024.maxScore).toBe(s2025.maxScore);
+    expect(s2024.maxScore).toBe(s2026.maxScore);
+    expect(s2024.gradeMultipliers).toEqual(s2025.gradeMultipliers);
+    expect(s2024.pdfHash).toBeNull();
+    expect(s2024.diffFromCurrentYear).toContain('caveat');
   });
 
   test('現行URLが404でWayback経由取得したshigaはpdfHashNoteにアーカイブURLが明記されている', () => {
