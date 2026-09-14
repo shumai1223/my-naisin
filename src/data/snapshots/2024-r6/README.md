@@ -6,9 +6,9 @@ T-Y11 Task C（`ops/tasks/T-Y11-winter-bairitsu-pipeline.md`）で収集する�
 
 ## 進捗状況（2026-09-01）
 
-- **entries 20件**（osaka・chiba・tochigi・ehime・kochi・kagoshima・aomori・iwate・tokushima・hiroshima・okayama・yamagata・nagano・shizuoka・ibaraki・shiga・kanagawa・aichi・fukuoka・saitama）
-- **unavailable 0件**（今のところ「取得不能」と確定した県は無い）
-- 残り27県は未着手
+- **entries 44件**（進捗の時系列記録は下記参照。最新は2026-09-01にkagawa以外の残りを収集）
+- **unavailable 1件**（nagasaki・2026-09-14確定＝学校裁量制のため単一の計算式が存在しない構造的な理由）
+- 残り2県（ishikawa・saga）は取得困難な見込みが高く保留中（詳細はops/tasks/T-Y11-winter-bairitsu-pipeline.md）
 - **saitamaは再挑戦で成功**（2026-09-01）: 以前推測した`documents/238245/97_jisshiyoko_r6.pdf`は
   誤りだった。正しいURLは`documents/238245/52senbatsuyoryo_r6.pdf`（R7と同じ命名規則）。
 - ★**fukuokaでWebSearch要約の作話パターンを再確認**（2026-09-01）: 実在しない
@@ -239,6 +239,20 @@ R7のsourceUrl（`wp-content/uploads/2025/01/saisoku-honbun-kaisei-kaisei.pdf`�
 「共通選抜の対象となる受検者全員について、調査書の評定合計(3年間)の高い順に並べる」というR7と一言一句
 完全一致する文言を確認（学年間の傾斜配点なし=等倍合計）。gradeMultipliers{1:1,2:1,3:1}・maxScore=135は
 令和7・8年度分と完全一致。
+
+## nagasaki（2026-09-14・取得不能で確定）
+
+Internet Archive復旧確認後に令和6年度専用ページ(`koko-yoryo/630424.html`・Wayback 2024-02-22クロール)から
+実施要領本体PDF(`shared/uploads/2023/09/1696038093.pdf`・Wayback 2024-05-20クロールで完全版取得、
+2024-04-16クロール分は`warning: 299 wayback content truncated by "length"`でWayback側のアーカイブ自体が
+末尾切れだった)を発見・全38頁を確認した。第7項(選抜)ア①に「調査書その他必要な書類及び各高等学校で
+定めた検査について、各高等学校でそれぞれの比重を定めて選抜を行うものとする」と明記されており、
+長崎県は評価方法を**学校ごとに個別設定する学校裁量制**で、県内で単一の計算式は存在しない。
+`exam-system.json`のスキーマ(1県=1つのgradeMultipliers/maxScore)では原理的に表現できないため
+meta.unavailableへ記録した。令和7年度側のmeta.unavailableで既に示唆されていた疑義（WebSearch要約が
+主張する「135/315点満点」と一次資料の学校裁量制記述が食い違う）を一次資料で確定させた形。
+この構造は年度に依らないと見られるため、令和7・8年度についても同様の理由で単一の全県共通配点式は
+存在しないと推測される（追加調査は不要）。
 
 ## kagawa（2026-09-01・保留）
 

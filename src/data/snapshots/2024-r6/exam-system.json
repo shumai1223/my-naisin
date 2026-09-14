@@ -7,7 +7,12 @@
     "collectionMethod": "T-Y11 Task C(ops/tasks/T-Y11-winter-bairitsu-pipeline.md)。N1-2(2025-r7)と同じ形式・同じ収集方針。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。",
     "totalPrefectures": 47,
     "collectedCount": 44,
-    "unavailable": [],
+    "unavailable": [
+      {
+        "code": "nagasaki",
+        "reason": "2026-09-14確認: 令和6年度専用ページ(pref.nagasaki.jp/bunrui/kanko-kyoiku-bunka/shochuko/koko-nyushi/koko-yoryo/630424.html、Wayback 2024-02-22クロール)から実施要領本体PDF(shared/uploads/2023/09/1696038093.pdf、Wayback 2024-05-20クロールで完全版1.14MB取得)を特定・全38頁を確認した。第7項(選抜)ア①に『調査書その他必要な書類及び各高等学校で定めた検査について、各高等学校でそれぞれの比重を定めて選抜を行うものとする』と明記されており、長崎県は評価方法(調査書・学力検査・面接の比重)を学校ごとに個別設定する学校裁量制で、県内で単一の計算式は存在しない。exam-system.jsonのスキーマ(1県=1つのgradeMultipliers/maxScore)では表現できないため取得不能として記録する(令和7年度のmeta.unavailableで既に示唆されていた疑義を一次資料で確定)。この構造は年度に依らず安定していると見られ、令和7・8年度も同様の理由で単一の全県共通配点式は存在しないと推測される。"
+      }
+    ],
     "pdfHashStatus": "partial_43_of_44",
     "pdfHashNote": "E-3-2(T-Y11F F-5)。2026-09-07に44件中43件のSHA-256取得完了。直接URLで42件・shigaはWayback経由で1件成功。hokkaidoのみarchive.org側の応答不安定(2回連続Internal Server Error)のため今回は見送り、別日に再試行予定。"
   },
