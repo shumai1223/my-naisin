@@ -36,11 +36,16 @@
 | fukushima | structured | 福島県教育委員会が「令和9年度 各高等学校の選抜方法一覧」という名称そのものの資料を公開（塾選ジャーナル記事で確認・`pref.fukushima.lg.jp/site/edu/r7koukounyushi.html`等の公式年度別ページも存在）。前期/後期/連携型/外国人特別枠まで区分された県内全校の一覧と判明 |
 | gunma | structured | 群馬県教育委員会が「令和8年度群馬県公立高等学校入学者選抜における各高等学校の「選抜方法等」について」を公式公開（PDF3.84MB・`pref.gunma.jp/site/kyouiku/714649.html`）。R6/R7/R8の3年度分のページが存在し多年度追跡可能。タイトルに「各高等学校の」と明記 |
 | niigata | structured(見込み) | 新潟県教育委員会の入学者選抜情報ページ(`pref.niigata.lg.jp/sec/kotogakko/nyugakushasenbatsu.html`)経由で、傾斜配点実施9学科・調査書:学力検査比率7:3〜3:7が学校学科ごとに設定と判明する程度の具体性。★次回、一次PDF(`uploaded/attachment/407217.pdf`等)で学校別一覧の形式を確認する |
+| toyama | structured(見込み) | 富山県教育委員会公式サイト(`kengaku.tym.ed.jp/archives/category/exam-release`)にR6/R7/R8のPDF発表資料あり。傾斜配点実施校（富山北部・呉羽の2校）が具体的に判明。★次回一次PDFの一覧形式を確認する |
+| ishikawa | structured(見込み) | 「令和８年度石川県公立高等学校入学者募集要綱」PDF(`pref.ishikawa.lg.jp/kyoiku/gakkou/senbatu/documents/r8bosyuyoko.pdf`)を確認。2教科まで傾斜配点可能な高校・学科があると判明。★次回、要綱内の学校別一覧部分をpdftoppmで確認する |
+| fukui | structured(見込み) | 公式ポータル`pref.fukui.lg.jp/doc/koukou/nyugaku/koukounyushi.html`から、学力検査の選択問題(A/B)や面接実施校が学校ごとに公表されると判明（「福井県教育委員会のWebサイトでご確認ください」という誘導文言の存在が一覧ページの存在を示唆）。★次回、具体的な一覧ページ・PDFのURLを特定する |
+| yamanashi | structured | 直接発見した公式PDF「令和５年度山梨県公立高等学校入学者選抜における前期募集選抜方法等一覧」(`pref.yamanashi.jp/documents/7061/r5zenki_ichiran.pdf`)が、学科・特色適性検査の比率[%]・個別/集団面接時間・調査書の列を持つ表形式そのもの。タイトルに「一覧」と明記された最も強い部類の構造化資料 |
+| nagano | structured | 公式ページ「令和８年度長野県公立高等学校入学者選抜における学校別実施内容」(`pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/r8naiyo.html`)が、学校・学科別の面接種類・傾斜配点教科と倍率を掲載。R7/R8の年度別ページが確認済みで多年度追跡可能。タイトルに「学校別実施内容」と明記 |
 
 ## 次回の続き
 
-残り27県（未着手）。次回セッションは残りの都道府県（
-富山・石川・福井・山梨・長野・岐阜・静岡・愛知・三重・滋賀・京都・奈良・和歌山・鳥取・島根・
+残り24県（未着手・23/47完了）。次回セッションは残りの都道府県（
+岐阜・静岡・愛知・三重・滋賀・京都・奈良・和歌山・鳥取・島根・
 岡山・広島・山口・徳島・香川・愛媛・高知・佐賀・長崎・熊本・大分・宮崎・鹿児島・沖縄）を
 バッチで進める。hyogo/fukuokaは一次PDF本文の目視確認（pdftoppm）がまだ残っている。
 
