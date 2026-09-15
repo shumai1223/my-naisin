@@ -699,6 +699,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '個別指導Axis「沖縄県の内申点アップ中学校別対策」＋WebSearch要約の2独立ソース',
       note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で最古(daysSinceVerified=6・6日グループの最初の1件)として選定・再検証。sourceUrl2(czemi.benesse.ne.jp)はWebFetchがHTTP403のため第三者サイトで代替。既存記載(targetGrades[1,2,3]・coreMultiplier1・practicalMultiplier1.5・maxScore165=各学年55点×3年)をWebSearch要約とaxis-kobetsu.jpの2独立ソースでクロスチェックし変更なしと確認(両ソースとも「各学年(5教科×5段階+実技4教科×5段階×1.5)=55点×3学年=165点満点」で完全一致)。',
     },
+    {
+      date: '2026-09-15',
+      sourceUrl: 'https://bengal.okinawa/naisin_keisan_form/',
+      sourceTitle: '学習塾ベンガル「かんたん！内申点の自動計算フォーム」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で最古(daysSinceVerified=1)として選定・再検証。前回未使用の第三者ソース(bengal.okinawa本体・過去は09-10にnote.comのbengal記事要約のみ使用)+WebSearch要約で確認・既存記載(全学年対象・実技4教科1.5倍・各学年55点×3年=165点満点)に変更なし。',
+    },
   ],
   iwate: [
     {
