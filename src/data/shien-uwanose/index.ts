@@ -5,7 +5,9 @@
  */
 import type { PrefectureShienUwanose } from '@/lib/education-cost/shien-uwanose';
 import { TOKYO_SHIEN_UWANOSE } from './tokyo';
+import { OSAKA_SHIEN_UWANOSE } from './osaka';
 
 export const SHIEN_UWANOSE_BY_PREFECTURE: Partial<Record<string, PrefectureShienUwanose>> = {
   tokyo: TOKYO_SHIEN_UWANOSE,
+  osaka: OSAKA_SHIEN_UWANOSE,
 };

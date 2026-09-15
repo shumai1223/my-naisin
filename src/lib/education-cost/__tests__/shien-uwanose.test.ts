@@ -39,8 +39,18 @@ describe('T-Y13 都道府県独自上乗せ制度', () => {
     ).toBeNull();
   });
 
-  it('prefecturesByStatusはconfirmed-yesでtokyoを含む', () => {
-    expect(prefecturesByStatus(SHIEN_UWANOSE_BY_PREFECTURE, 'confirmed-yes')).toContain('tokyo');
+  it('prefecturesByStatusはconfirmed-yesでtokyo/osakaを含む', () => {
+    const yesPrefs = prefecturesByStatus(SHIEN_UWANOSE_BY_PREFECTURE, 'confirmed-yes');
+    expect(yesPrefs).toContain('tokyo');
+    expect(yesPrefs).toContain('osaka');
+  });
+
+  it('osakaは合算後の標準授業料上限(63万円)を返す', () => {
+    const record = getShienUwanose(SHIEN_UWANOSE_BY_PREFECTURE, 'osaka');
+    expect(record?.status).toBe('confirmed-yes');
+    expect(
+      findUwanoseAmountForTierLabel(SHIEN_UWANOSE_BY_PREFECTURE, 'osaka', '世帯年収 約910万円未満（目安）')
+    ).toBe(630000);
   });
 
   it('登録済みレコードは全てfiscalYear・source.url・source.lastCheckedを持つ（Y-0: 1データ点1出典）', () => {
