@@ -87,6 +87,18 @@ describe('T-Y13 都道府県独自上乗せ制度', () => {
     ).toBe(63600);
   });
 
+  it('hyogoは3所得区分(590/730/910万未満・兵庫県内校)を持つ', () => {
+    const record = getShienUwanose(SHIEN_UWANOSE_BY_PREFECTURE, 'hyogo');
+    expect(record?.tiers).toHaveLength(3);
+    expect(
+      findUwanoseAmountForTierLabel(
+        SHIEN_UWANOSE_BY_PREFECTURE,
+        'hyogo',
+        '前年収入目安 730万円未満程度（兵庫県内の私立高校）'
+      )
+    ).toBe(120000);
+  });
+
   it('登録済みレコードは全てfiscalYear・source.url・source.lastCheckedを持つ（Y-0: 1データ点1出典）', () => {
     for (const record of Object.values(SHIEN_UWANOSE_BY_PREFECTURE)) {
       expect(record?.fiscalYear.length).toBeGreaterThan(0);

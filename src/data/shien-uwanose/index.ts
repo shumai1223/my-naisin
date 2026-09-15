@@ -9,6 +9,7 @@ import { OSAKA_SHIEN_UWANOSE } from './osaka';
 import { MIE_SHIEN_UWANOSE } from './mie';
 import { YAMANASHI_SHIEN_UWANOSE } from './yamanashi';
 import { NAGASAKI_SHIEN_UWANOSE } from './nagasaki';
+import { HYOGO_SHIEN_UWANOSE } from './hyogo';
 
 export const SHIEN_UWANOSE_BY_PREFECTURE: Partial<Record<string, PrefectureShienUwanose>> = {
   tokyo: TOKYO_SHIEN_UWANOSE,
@@ -16,4 +17,5 @@ export const SHIEN_UWANOSE_BY_PREFECTURE: Partial<Record<string, PrefectureShien
   mie: MIE_SHIEN_UWANOSE,
   yamanashi: YAMANASHI_SHIEN_UWANOSE,
   nagasaki: NAGASAKI_SHIEN_UWANOSE,
+  hyogo: HYOGO_SHIEN_UWANOSE,
 };
