@@ -48,9 +48,14 @@
 | nara | structured(見込み) | 北部学区・南部学区(十津川村等の一部地域のみ小学区制)の2学区制と判明。「通学区域の設定を各高校を所管する教育委員会の判断に委ねる」という規制緩和方針も判明。★次回、奈良県教育委員会一次資料(`pref.nara.lg.jp`)で現行制度の直接確認が必要（今回の情報源の質はやや低い） |
 | wakayama | structured | 公式ページ群(`pref.wakayama.lg.jp/prefg/500200/`配下に年度別入学者選抜ページ多数)経由で「全県一学区」（学区の定めなし）と確認 |
 | shimane | structured | 公式ページ「通学区域 - 高校教育」(`pref.shimane.lg.jp/education/kyoiku/koukou/saihen/tuugaku.html`)で「島根県教育委員会では島根県立高校の通学区域は定めておりません」と直接明記。例外として松江市内普通科3校のみ小学区制という具体的な例外も判明。「県立高等学校通学区域検討委員会」答申PDFという制度検討の歴史資料も発見 |
+| okayama | structured | 公式ページ「県立高校の学区について｜おかやま県立高校情報ナビ」(`okayama-kenritsukoukou.jp/news/4268/`)を直接発見。6学区・学区外合格者数上限5〜20%・全県学区の15校を具体的に列挙・2024年春に6校が全県学区へ追加という制度変遷まで判明 |
+| hiroshima | structured | 公式ページ「県立高等学校の通学区域全県一円化について」(`pref.hiroshima.lg.jp/site/kyouiku/06senior-plan-tsuugakukuiki-index.html`)を直接発見。全日制は全県一円・定通は全県1区、学区外就学は教育委員会許可制という条件も判明 |
+| yamaguchi | structured | 2016年度(平成28年度)入試から全県1学区制と判明。★珍しい逆パターン: 周防大島高校普通科・地域創生科は**県外から**募集し、県外からの入学者を定員30%以内に制限（他県が「学区外流入を制限」するのと逆に「県外流入自体を歓迎しつつ上限を設ける」構造）。学区外条件のバリエーションとして貴重 |
+| tokushima | structured | 公式PDF群を複数直接発見（`pref.tokushima.lg.jp/file/attachment/929243.pdf`＝現行3学区の区割り表・`973309.pdf`＝令和7年の見直し報告書素案）。現行3学区・育成型選抜の学区外上限2〜3%・「全県学区化＋上限撤廃」への見直し方針という進行中の制度改革まで判明。T-Y14/T-Y15通じて最も充実した一次資料群 |
+| kagawa | structured | 公式ページ「香川県立高等学校の学区制」(`pref.kagawa.lg.jp/kenkyoui/koko/examination02_1.html`)を直接発見。普通科・理数科(小豆島中央高除く)のみ第1/第2学区制、令和5年度から自己推薦選抜に限り他学区枠5%を新設、他学科・定通は県内全域という学区外条件も判明 |
 
 ## 次回の続き
 
-残り14県（未着手・33/47完了・残りはokayama・hiroshima・yamaguchi・tokushima・kagawa・
-ehime・kochi・fukuoka・nagasaki・kumamoto・oita・miyazaki・kagoshima・okinawa）。
+残り9県（未着手・38/47完了・残りはehime・kochi・fukuoka・nagasaki・kumamoto・oita・
+miyazaki・kagoshima・okinawa）。
 akita/niigata/fukui/yamanashiは今回もuncertainのまま（県立高校学区の一次資料が未発見）。
