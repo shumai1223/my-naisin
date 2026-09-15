@@ -1089,6 +1089,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '塾選（ジュクセン）「佐賀県の高校受験完全ガイド」＋WebSearch要約の2独立ソース',
       note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で6日グループ(daysSinceVerified=6・前回09-07はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。前回(08-05)未使用の第三者サイト(bestjuku.com)とWebSearch要約の2独立ソースでクロスチェックし、既存記載(全学年等倍・9教科×5段階×3年=135点満点)に変更が無いことを確認した(両ソースとも「全学年均等・オール3で81点」等の算術で完全一致)。',
     },
+    {
+      date: '2026-09-15',
+      sourceUrl: 'https://jyuku-online.com/blog/jj-saga/',
+      sourceTitle: '塾オンラインドットコム「【佐賀県】高校入試の内申点計算方法！自動で計算の仕方＆内申点を上げる方法」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で最古(daysSinceVerified=1)として選定・再検証。前回未使用の第三者ソース(jyuku-online.com)+WebSearch要約で確認・既存記載(全学年等倍・9教科×5段階×3年=135点満点)に変更なし(両ソースとも完全一致)。',
+    },
   ],
   mie: [
     {
