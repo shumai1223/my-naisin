@@ -145,6 +145,12 @@ describe('T-Y13 都道府県独自上乗せ制度', () => {
     ).toBe(70000);
   });
 
+  it('naraは所得制限なし(全日制)で就学支援金等合算上限年額63万円を返す', () => {
+    expect(
+      findUwanoseAmountForTierLabel(SHIEN_UWANOSE_BY_PREFECTURE, 'nara', '所得制限なし（令和8年度から撤廃・全日制・定時制）')
+    ).toBe(630000);
+  });
+
   it('登録済みレコードは全てfiscalYear・source.url・source.lastCheckedを持つ（Y-0: 1データ点1出典）', () => {
     for (const record of Object.values(SHIEN_UWANOSE_BY_PREFECTURE)) {
       expect(record?.fiscalYear.length).toBeGreaterThan(0);
