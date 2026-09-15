@@ -99,6 +99,12 @@ describe('T-Y13 都道府県独自上乗せ制度', () => {
     ).toBe(120000);
   });
 
+  it('kyotoは生活保護世帯で国+府合算年額98万円を返す', () => {
+    expect(
+      findUwanoseAmountForTierLabel(SHIEN_UWANOSE_BY_PREFECTURE, 'kyoto', '生活保護世帯')
+    ).toBe(980000);
+  });
+
   it('登録済みレコードは全てfiscalYear・source.url・source.lastCheckedを持つ（Y-0: 1データ点1出典）', () => {
     for (const record of Object.values(SHIEN_UWANOSE_BY_PREFECTURE)) {
       expect(record?.fiscalYear.length).toBeGreaterThan(0);
