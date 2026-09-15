@@ -167,6 +167,12 @@ describe('T-Y13 都道府県独自上乗せ制度', () => {
     ).toBe(70000);
   });
 
+  it('ibarakiは年収約350万円未満世帯(全日制)で入学金減免9.6万円を返す', () => {
+    expect(
+      findUwanoseAmountForTierLabel(SHIEN_UWANOSE_BY_PREFECTURE, 'ibaraki', '年収約350万円未満世帯（全日制・入学金減免）')
+    ).toBe(96000);
+  });
+
   it('登録済みレコードは全てfiscalYear・source.url・source.lastCheckedを持つ（Y-0: 1データ点1出典）', () => {
     for (const record of Object.values(SHIEN_UWANOSE_BY_PREFECTURE)) {
       expect(record?.fiscalYear.length).toBeGreaterThan(0);
